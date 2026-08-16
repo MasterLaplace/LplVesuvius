@@ -9,9 +9,19 @@ rejouer). Rien n'a été téléchargé pour les obtenir.
 ## 1. Le fait qui décide de tout : un volume ne tient pas sur cette machine
 
 ```
-PHerc0332/segments/   ->  219,1 Mio  (14 objets)
-PHerc0332/volumes/    ->  2,1 Tio    (1 081 602 objets)
+PHerc0332/segments/          ->  219,1 Mio  (14 objets)
+PHerc0332/representations/   ->   19,6 Gio  (308 416 objets)   <- predictions nnUNet
+PHerc0332/volumes/           ->    2,1 Tio  (1 081 602 objets)
 ```
+
+Trois échelles, séparées par deux ordres de grandeur chacune, et c'est cette
+hiérarchie qui dicte le plan de travail :
+
+| étage | poids (un rouleau) | dans le budget 100 Go ? |
+|---|---|---|
+| **surfaces** (`segments/`, tifxyz) | ~220 Mio | oui, largement — 450 rouleaux tiendraient |
+| **prédictions** (`representations/`) | ~19,6 Gio | oui, mais un seul rouleau à la fois |
+| **volume brut** (`volumes/`, OME-Zarr) | ~2,1 Tio | **non**, jamais |
 
 **Un seul volume d'un seul rouleau pèse 2,1 Tio.** Le budget disque est de 100 Go.
 La question « quel rouleau télécharger » n'a donc pas de réponse : *aucun*.
