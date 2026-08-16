@@ -18,3 +18,7 @@
 __pycache__/
 *.pyc
 .venv/
+
+# Environnement de l'experience : reconstructible par `uv sync`.
+/experiments/.venv/
+/experiments/uv.lock
