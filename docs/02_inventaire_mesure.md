@@ -21,7 +21,45 @@ hiérarchie qui dicte le plan de travail :
 |---|---|---|
 | **surfaces** (`segments/`, tifxyz) | ~220 Mio | oui, largement — 450 rouleaux tiendraient |
 | **prédictions** (`representations/`) | ~19,6 Gio | oui, mais un seul rouleau à la fois |
-| **volume brut** (`volumes/`, OME-Zarr) | ~2,1 Tio | **non**, jamais |
+| **volume brut** (`volumes/`, OME-Zarr) | ~2,1 Tio | **pas en entier à pleine résolution** |
+
+### ⚠ Correction : « 2,1 Tio » ne veut PAS dire « pas de 3D »
+
+Formuler l'étage volume comme un mur était une erreur de cadrage, et elle aurait
+fait renoncer à toute la 3D pour une mauvaise raison. Un OME-Zarr est
+**multi-échelle** : ce dépôt en publie **six niveaux**, et `.zattrs` donne leurs
+facteurs exacts (puissances de deux, lus et non supposés). Mesuré sur PHerc0332,
+voxel de base 2,399 µm :
+
+| niveau | voxel | poids | tient dans 100 Go ? |
+|---|---|---|---|
+| 0 | 2,4 µm | ~1,8 Tio | non |
+| 1 | 4,8 µm | ~260 Gio | non |
+| **2** | **9,6 µm** | **33,0 Gio** | **oui** |
+| **3** | **19,2 µm** | **4,9 Gio** | **oui, confortablement** |
+| 4 | 38,4 µm | 810 Mio | oui |
+| 5 | 76,8 µm | 178 Mio | oui |
+
+**Le niveau 2 est le point d'équilibre** : le rouleau **entier**, en 3D, comme un
+seul modèle autonome, pour 33 Gio — un tiers du budget.
+
+Et il est exploitable, pas seulement stockable. Aux échelles physiques du problème
+(feuille ≈ 40 µm d'épaisseur, spire voisine à 300 µm et plus) :
+
+| niveau | feuille | écart entre spires | usage |
+|---|---|---|---|
+| 2 (9,6 µm) | ~4 voxels | ~31 voxels | **géométrie et séparation des spires : oui** |
+| 3 (19,2 µm) | ~2 voxels | ~16 voxels | structure grossière, limite basse |
+| 4 (38,4 µm) | ~1 voxel | ~8 voxels | **trop grossier** : deux feuilles ne se séparent plus |
+
+Donc : tout ce qui relève de **la forme** — séparer les spires, suivre une feuille,
+juger un enroulement, mailler — est faisable sur un modèle 3D complet tenant dans le
+budget. Seule la **détection d'encre** exige la pleine résolution, parce qu'elle lit
+un contraste de quelques microns ; et c'est précisément l'étage déjà résolu par
+d'autres.
+
+> Le mur n'était pas la 3D, c'était la pleine résolution **sur tout le rouleau à la
+> fois**. La pyramide sépare les deux, et le travail géométrique tombe du bon côté.
 
 **Un seul volume d'un seul rouleau pèse 2,1 Tio.** Le budget disque est de 100 Go.
 La question « quel rouleau télécharger » n'a donc pas de réponse : *aucun*.
