@@ -136,17 +136,69 @@ un problème de la *wishlist*, **amélioration quantitative sur données réelle
 correction de bugs d'outils réellement utilisés, documentation qui permet à
 d'autres de s'en servir. **C'est la description exacte de la piste A.**
 
-**Recommandation : A, en visant le Progress Prize.** Trois raisons, dans cet ordre :
+### ⚠ Correction : la piste A est déjà occupée six fois
 
-1. C'est la seule piste qui **produit de la valeur même si elle n'automatise rien** :
-   un vérificateur qui refuse correctement sert à tous les autres participants.
-2. Elle est **soumissionnable à court terme** — mensuelle, pas dans dix mois.
-3. Elle donne la mesure sans laquelle B et C sont du bricolage : on ne peut pas
-   améliorer un maillage tant qu'on ne sait pas dire lequel de deux est le meilleur.
+Recommander A était une erreur, corrigée en lisant les dépôts du manifeste plutôt
+que leurs seuls intitulés. Un septième vérificateur serait le doublon que ce projet
+punit ailleurs. L'état réel :
 
-**First Letters** est la cible sérieuse à moyen terme (50 k$, 4 cm² seulement) et
-devient réaliste **si** A puis B tiennent — mais s'y attaquer d'abord serait
-recommencer ce que des équipes mieux dotées font déjà.
+| dépôt | ce qu'il fait déjà | ce qu'il revendique |
+|---|---|---|
+| `spiralcheck` | évaluation géométrique *held-out* de fits pleine longueur | écrit **pour** l'item « meilleures suites d'évaluation » des problèmes ouverts 2026 |
+| `winding-sync` | contraintes de winding générées depuis le CT, **sans humain** | 910 germes, 1583 contraintes sur PHerc0358 |
+| `herculaneum-scroll-tools` | annotateur **et** vérificateur de winding, QA de cohérence CT | validé **125/125** sur les annotations PHercParis4 publiées |
+| `windcheck` | recensement d'auto-intersection des traces | **284** traces traitées, 274 avec référence propre |
+| `tifxyz-doctor` | préflight de contrat et diagnostic géométrique | recensement de **450** racines |
+| `winding-ruler` | mesure de l'apport réel des annotations de winding | voir ci-dessous |
+
+### Le trou réel, et il est dit par les outils eux-mêmes
+
+Les six s'arrêtent au même endroit, et chacun l'écrit dans son propre README :
+
+- **`windcheck`** : « Whether removing it improves ink, texturing, merging or
+  tracing **has not been measured**. »
+- **`winding-sync`** : « Relative structure validated ; **absolute winding counts
+  not yet calibrated**. »
+- **`winding-ruler`**, le plus instructif : les annotations humaines de winding sont
+  **statistiquement redondantes** là où les patches vérifiés sont denses (+3 à 5 pp
+  seulement là où ils s'éclaircissent), et surtout **trois générateurs de contraintes
+  successivement meilleurs dégradent tous le fit**. Les auteurs ont pré-enregistré
+  une explication — la résolution de matérialisation du signal — et l'ont **falsifiée
+  eux-mêmes** par la mesure (93,0 % grossier contre 88,3 % fin).
+
+**Personne n'a fermé la boucle entre un signal de vérification et une amélioration
+mesurée en aval.** Le champ sait détecter ; il ne sait pas encore montrer que
+corriger sert. Et `winding-ruler` va plus loin : *mieux contraindre empire le
+résultat*, ce qui est un paradoxe ouvert et non un détail de réglage.
+
+C'est le seul endroit où il reste de la place, et c'est précisément ce que les
+Progress Prizes récompensent : **« amélioration quantitative sur données réelles »**.
+
+### Recommandation révisée
+
+**A′ — fermer la boucle sur UN défaut, de bout en bout.** Prendre un défaut déjà
+détectable par un outil existant (auto-intersection via `windcheck`, ou incohérence
+de winding via `spiralcheck`), le corriger, et **mesurer l'effet en aval** sur le
+rendu — la question que les six posent et qu'aucun ne referme.
+
+Trois propriétés en font la bonne cible :
+
+1. **Elle ne duplique rien** : elle *consomme* les six outils au lieu d'en ajouter un.
+2. **Elle produit un résultat même négative.** Si corriger n'améliore rien, c'est un
+   résultat publiable et utile — c'est exactement ce que `winding-ruler` a fait en
+   falsifiant sa propre hypothèse, et ce travail est reconnu.
+3. **Elle est soumissionnable mensuellement**, pas dans dix mois.
+
+⚠ **Rien de tout ça n'est acquis tant qu'on n'a pas mesuré.** La première tâche
+n'est pas d'écrire du code mais de descendre une fenêtre de données réelle et de
+reproduire un défaut connu. Tant que ce n'est pas fait, la formulation ci-dessus
+reste une hypothèse — et ce dépôt a déjà consigné assez d'hypothèses raisonnées et
+fausses pour ne pas en ajouter une septième sans instrument.
+
+**First Letters** (50 k$, 4 cm² seulement) reste la cible sérieuse à moyen terme,
+et devient réaliste si A′ apprend quelque chose de vrai sur ce qui améliore un
+rendu. S'y attaquer d'abord serait refaire ce que des équipes mieux dotées font
+déjà, avec moins de moyens.
 
 ## 6. Ce qui n'est pas tranché, et doit l'être avant d'écrire du code
 
