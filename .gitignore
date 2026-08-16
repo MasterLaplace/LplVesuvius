@@ -22,3 +22,7 @@ __pycache__/
 # Environnement de l'experience : reconstructible par `uv sync`.
 /experiments/.venv/
 /experiments/uv.lock
+
+# Sous-produits du controle de miroir : regeneres a chaque passe.
+/docs/sitemap.xml
+/docs/sitemap_paths.txt

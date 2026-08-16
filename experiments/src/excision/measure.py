@@ -22,6 +22,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import numpy as np
@@ -132,7 +133,9 @@ def matched_controls(
     return chosen
 
 
-def sample_volume(array, x: np.ndarray, y: np.ndarray, z: np.ndarray) -> np.ndarray:
+def sample_volume(
+    array, x: np.ndarray, y: np.ndarray, z: np.ndarray, workers: int = 16
+) -> np.ndarray:
     """Echantillonne au plus proche voisin, sans interpolation, GROUPE PAR CHUNK.
 
     Pas d'interpolation, pour deux raisons qui vont dans le meme sens : elle
@@ -171,15 +174,30 @@ def sample_volume(array, x: np.ndarray, y: np.ndarray, z: np.ndarray) -> np.ndar
         )
         blocks.setdefault(key, []).append(int(index))
 
-    for (block_z, block_y, block_x), indices in blocks.items():
-        z_lo, y_lo, x_lo = block_z * chunk_depth, block_y * chunk_height, block_x * chunk_width
+    def fetch(item):
+        """Rapatrie un chunk et rend les valeurs de ses points."""
+        (block_z, block_y, block_x), indices = item
+        z_lo = block_z * chunk_depth
+        y_lo = block_y * chunk_height
+        x_lo = block_x * chunk_width
         block = array[
             z_lo : min(z_lo + chunk_depth, depth),
             y_lo : min(y_lo + chunk_height, height),
             x_lo : min(x_lo + chunk_width, width),
         ]
-        for index in indices:
-            values[index] = int(block[zi[index] - z_lo, yi[index] - y_lo, xi[index] - x_lo])
+        return [
+            (index, int(block[zi[index] - z_lo, yi[index] - y_lo, xi[index] - x_lo]))
+            for index in indices
+        ]
+
+    # Le travail est borne par la LATENCE, pas par le calcul : chaque chunk est une
+    # requete S3 d'environ une demi-seconde, et le processeur attend. La concurrence
+    # est donc le seul levier qui compte ici -- des fils suffisent, puisque l'attente
+    # se fait hors du verrou global de l'interpreteur.
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        for resolved in pool.map(fetch, blocks.items()):
+            for index, value in resolved:
+                values[index] = value
 
     return values
 
