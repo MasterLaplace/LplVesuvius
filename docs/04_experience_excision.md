@@ -86,7 +86,34 @@ Une comparaison sur un ensemble vide serait verte et ne dirait rien — c'est le
 | **Interpolation** : un voxel voisin peut lisser la différence. | Échantillonnage au **plus proche voisin**, entier, sans interpolation — et c'est de toute façon la seule forme reproductible bit à bit entre machines. |
 | **Le volume est à 7,91 µm** alors qu'une feuille fait 40 µm | Une feuille fait donc ~5 voxels : suffisant. À ne pas tenter au niveau 4 (38 µm), où une feuille tient dans un voxel. |
 
-## 5. Ce que l'expérience ne prouvera pas
+## 5. Note de perf : le langage n'était pas la variable
+
+Question posée en cours de route — « Python ne nique pas les perfs, ce serait pas
+mieux en C ? ». Mesuré plutôt que tranché à l'opinion :
+
+| grandeur | mesure |
+|---|---|
+| un voxel échantillonné individuellement | **512 ms** |
+| une itération de boucle Python | **65 ns** |
+
+Un facteur **huit millions**. Chaque accès `array[z, y, x]` déclenchait le
+rapatriement d'un chunk de 128³ (~2 Mio) depuis S3 pour lire **un octet**.
+Réécrire en C++ aurait fait passer les 65 ns à ~1 ns et laissé les 512 ms intacts :
+**gain nul**, pour du code plus long et plus fragile.
+
+Le correctif est algorithmique — grouper les points par chunk, ne télécharger
+chaque chunk qu'une fois — et les cellules examinées sont adjacentes par
+construction, donc elles partagent leurs chunks. Mesuré sur 200 points répartis
+sur 19 chunks : **×8**, valeurs **identiques** (contrôle obligatoire : une
+optimisation qui déplace le résultat n'en est pas une).
+
+⚠ La question reste juste sur le fond, et l'écosystème lui a déjà donné la bonne
+réponse : le noyau qui compte — l'intersection de triangles sur 3,5 M de triangles
+— **est** en C++ chez `windcheck` (`engines/selfcross.cpp`, `clang++ -O3 -pthread`),
+avec Python autour pour l'orchestration. C'est le découpage à reprendre le jour où
+on écrit du calcul lourd ; ce n'était pas le cas ici.
+
+## 6. Ce que l'expérience ne prouvera pas
 
 Elle ne dira **pas** que le texte est mieux lu. Elle dira si la matière retirée
 diffère de la matière gardée. C'est un maillon, pas la chaîne — mais c'est le
