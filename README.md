@@ -120,6 +120,43 @@ ce que `SourceV1` existe pour porter.
 
 ---
 
+## Par ou commencer
+
+| document | ce qu'il contient |
+|---|---|
+| **[`docs/00_etat_de_lart.md`](docs/00_etat_de_lart.md)** | **le point d'entree** : la chaine, les acteurs, ce qui est prouve, les prix |
+| [`docs/01_goulot_deroulage.md`](docs/01_goulot_deroulage.md) | le goulot, les pistes, et pourquoi la premiere a ete abandonnee |
+| [`docs/02_inventaire_mesure.md`](docs/02_inventaire_mesure.md) | ce qui existe et ce qu'on peut se permettre, chiffres mesures |
+| [`docs/03_reproduction_windcheck.md`](docs/03_reproduction_windcheck.md) | l'etat de l'art **reproduit**, pas seulement lu |
+| [`docs/04_experience_excision.md`](docs/04_experience_excision.md) | l'experience en cours, avec son hypothese nulle |
+
+## Rejouer
+
+Tout ce qui est affirme dans `docs/` se regenere. Dans l'ordre :
+
+```bash
+./tools/mirror_site.sh              # miroir + controle de couverture (sort non nul si incomplet)
+./tools/clone_repos.sh              # les 33 depots
+./tools/s3_size.py PHerc0332/ --depth 1   # tailles S3, sans rien telecharger
+
+cd repos/windcheck                  # l'etat de l'art, reproduit
+uv sync && uv pip install awscli
+clang++ -O3 -std=c++17 -pthread -o engines/selfcross engines/selfcross.cpp
+uv run pytest -q
+uv run python -m windcheck.fetch --sample PHerc0172
+uv run python -m windcheck.fetch --sample PHerc0172 --skip-download --verify
+
+cd ../../experiments                # notre mesure
+uv sync
+./run_measure.sh                    # echantillonne le CT aux cellules excisees
+uv run python -m excision.analyse ../docs/excision_samples.tsv
+```
+
+⚠ Le client `aws` est requis par le recuperateur de `windcheck` et n'est pas dans
+ses dependances declarees. Il est installe dans SON environnement plutot que
+contourne par un telechargeur maison : un ecart de resultat deviendrait sinon
+indistinguable d'un ecart de recuperation.
+
 ## Etat de la recuperation (2026-08-16)
 
 | element | etat |

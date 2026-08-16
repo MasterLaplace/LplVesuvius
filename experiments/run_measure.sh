@@ -13,6 +13,13 @@ WINDCHECK="$ROOT/repos/windcheck"
 VOLUME="s3://vesuvius-challenge-open-data/PHerc0172/volumes/20241024131839-7.910um-53keV-masked.zarr"
 OUT="${1:-$ROOT/docs/excision_samples.tsv}"
 
+# Quatre temoins par cellule excisee, et non seize. Decision de COUT, verifiee
+# avant d'etre prise : sur les segments deja mesures, la taille d'effet vaut
+# -0.0723 avec tous les temoins et -0.0713 +/- 0.0022 a ce ratio, soit une
+# incertitude trente fois plus petite que l'effet. Seize temoins quadruplaient le
+# temps de mesure sans rien acheter.
+CONTROLS=4
+
 printf "segment\tpopulation\trow\tcol\tintensity\n" > "$OUT"
 
 covered=0 skipped=0
@@ -29,6 +36,7 @@ for transformed in "$WINDCHECK"/out/all/*/*_transformed.tifxyz; do
     # compte separement plutot que de le confondre avec une erreur.
     if (cd "$ROOT/experiments" && uv run python -m excision.measure \
             "$original" "$transformed" --volume "$VOLUME" --segment "$name" \
+            --controls-per-excised "$CONTROLS" \
             >> "$OUT" 2>/dev/null); then
         covered=$((covered + 1))
     else
