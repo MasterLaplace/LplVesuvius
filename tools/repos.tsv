@@ -1,0 +1,44 @@
+# Manifeste des depots Vesuvius Challenge.
+# tier   nom                       url
+# tier 0 = coeur officiel, tier 1 = deroulage/segmentation (notre cible), tier 2 = encre, tier 3 = outillage
+0	villa	https://github.com/ScrollPrize/villa
+0	vesuvius-py	https://github.com/ScrollPrize/vesuvius
+0	dinovol	https://github.com/ScrollPrize/dinovol
+# ARCHIVE en amont : le developpement continue dans villa/ThaumatoAnakalyptor.
+# Garde parce que le depot d'origine porte le rapport technique + la roadmap (documentation/*.pdf).
+1	ThaumatoAnakalyptor	https://github.com/schillij95/ThaumatoAnakalyptor
+1	scrollfiesta	https://github.com/Hob3rMallow/scrollfiesta_public
+1	volume-cartographer-educelab	https://github.com/educelab/volume-cartographer
+1	volume-cartographer-schilling	https://github.com/hendrikschilling/volume-cartographer
+1	khartes	https://github.com/KhartesViewer/khartes
+1	slim-flatboi	https://github.com/giorgioangel/slim-flatboi
+1	vesuvius-automesh	https://github.com/spencerdavis-tx/vesuvius-automesh
+1	Volumetric_Vesuvius_Labelling	https://github.com/JamesDarby345/Volumetric_Vesuvius_Labelling
+1	Volumetric_Instance_to_Mesh	https://github.com/JamesDarby345/Volumetric_Instance_to_Mesh
+1	vesuvius-segment2voxel	https://github.com/giorgioangel/vesuvius-segment2voxel
+1	vesuvius_autoseg_preprocess	https://github.com/giorgioangel/vesuvius_autoseg_preprocess
+1	scrollreading	https://github.com/WillStevens/scrollreading
+1	winding-ruler	https://github.com/pscamillo/winding-ruler
+1	winding-sync	https://github.com/abundantjoe/winding-sync
+1	tifxyz-doctor	https://github.com/aviad12g/tifxyz-doctor
+1	spiralcheck	https://github.com/Nicodol/spiralcheck
+1	windcheck	https://github.com/joe-carr-data/windcheck
+1	herculaneum-scroll-tools	https://github.com/axiosdevs/herculaneum-scroll-tools
+1	Hraun	https://github.com/SuperOptimizer/Hraun
+2	3d-ink-detection	https://github.com/ryanchesler/3d-ink-detection
+2	LSM	https://github.com/ryanchesler/LSM
+2	Vesuvius-Grandprize-Winner	https://github.com/younader/Vesuvius-Grandprize-Winner
+2	Vesuvius-First-Letters	https://github.com/younader/Vesuvius-First-Letters
+2	ink-id	https://github.com/educelab/ink-id
+2	Inkalyzer	https://github.com/younader/Inkalyzer
+3	VesuviusDataDownload	https://github.com/JamesDarby345/VesuviusDataDownload
+3	vesuvius-browser	https://github.com/jrudolph/vesuvius-browser
+3	vesuvius-gui	https://github.com/jrudolph/vesuvius-gui
+3	vesuvius-catalog	https://github.com/Schurkai/vesuvius-catalog
+3	Crackle-Viewer	https://github.com/schillij95/Crackle-Viewer
+# MORT (verifie 2026-08-16, http 404) : le depot n'est plus public. L'API GitHub
+# ne liste plus que scroll-fourth-second / Vesuvius-Grandprize-Winner /
+# VesuviusPretraining chez lukeboi. Le site scrollprize.org le reference encore,
+# comme scroll-first-letters -- les deux liens de la page community_projects sont
+# donc perimes, ce n'est pas une panne de notre cote.
+#3	scroll-viewer	https://github.com/lukeboi/scroll-viewer

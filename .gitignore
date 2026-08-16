@@ -1,0 +1,20 @@
+# Les depots clones sont recuperables depuis tools/repos.tsv : les suivre ici
+# ferait de ce depot un miroir de trente autres.
+/repos/
+
+# Les donnees se comptent en dizaines a centaines de gigaoctets (77 Go pour la
+# seule region grand-prize en Zarr, 390 Go en pile TIFF). Elles se retelechargent
+# par fenetre, pour une question precise.
+/data/
+
+# Le miroir du site est reproductible par wget ; ce qui merite d'etre suivi, ce
+# sont les notes qu'on en tire, pas les 100+ Mo d'assets.
+/site/
+
+# Logs de recuperation : utiles pendant un run, sans valeur apres.
+/docs/*.log
+/docs/*.pid
+
+__pycache__/
+*.pyc
+.venv/
