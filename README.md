@@ -1,5 +1,11 @@
 # LplVesuvius
 
+> ⭐ **L'objectif est le DÉROULEMENT, pas la lecture.** Traduire n'est pas le métier de
+> ce dépôt. Repérer quelques lettres sert à vérifier que le rouleau assemblé et déroulé
+> fait du sens : l'encre est la **règle graduée**, pas l'ouvrage. *(cadrage de
+> l'auteur, 2026-08-17 — voir `HANDOFF.md` §1bis)*
+
+
 Espace de travail pour le **Vesuvius Challenge** (<https://scrollprize.org>), vu depuis
 le projet Laplace : les papyrus d'Herculanum carbonisés en 79 sont un corpus qui
 n'existe pas encore sous forme numérique, et le débloquer agrandit directement ce

@@ -1,0 +1,55 @@
+{
+  "slices": [
+    {
+      "slice": 2464,
+      "background_rate": 0.10681586978636826,
+      "valid_cells": 385,
+      "anomalous": [
+        {
+          "radius_mm": 7.5936,
+          "column": 2000,
+          "rate": 0.3934169278996865
+        }
+      ]
+    },
+    {
+      "slice": 2560,
+      "background_rate": 0.11003402116167033,
+      "valid_cells": 386,
+      "anomalous": [
+        {
+          "radius_mm": 7.119,
+          "column": 1500,
+          "rate": 0.6052631578947368
+        },
+        {
+          "radius_mm": 20.407799999999998,
+          "column": 1500,
+          "rate": 0.5106382978723404
+        }
+      ]
+    },
+    {
+      "slice": 2664,
+      "background_rate": 0.09970089730807577,
+      "valid_cells": 385,
+      "anomalous": [
+        {
+          "radius_mm": 18.509400000000003,
+          "column": 1000,
+          "rate": 0.5294117647058824
+        }
+      ]
+    }
+  ],
+  "observed": {
+    "pairs": 5,
+    "colocated": 1,
+    "fraction": 0.2
+  },
+  "null": {
+    "trials": 2000,
+    "mean": 0.0531,
+    "p95": 0.2
+  }
+}

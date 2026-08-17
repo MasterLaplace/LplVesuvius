@@ -1,0 +1,104 @@
+{
+  "slices": [
+    {
+      "slice": 1336,
+      "background_rate": 0.10526315789473684,
+      "valid_cells": 395,
+      "anomalous": [
+        {
+          "radius_mm": 19.458599999999997,
+          "column": 1500,
+          "rate": 0.3859060402684564
+        },
+        {
+          "radius_mm": 21.357,
+          "column": 1500,
+          "rate": 0.4146341463414634
+        }
+      ]
+    },
+    {
+      "slice": 1436,
+      "background_rate": 0.10857763300760044,
+      "valid_cells": 395,
+      "anomalous": [
+        {
+          "radius_mm": 21.357,
+          "column": 1500,
+          "rate": 0.5789473684210527
+        }
+      ]
+    },
+    {
+      "slice": 1536,
+      "background_rate": 0.10843373493975904,
+      "valid_cells": 395,
+      "anomalous": [
+        {
+          "radius_mm": 8.0682,
+          "column": 1500,
+          "rate": 0.3481781376518219
+        },
+        {
+          "radius_mm": 9.0174,
+          "column": 3500,
+          "rate": 0.3902439024390244
+        },
+        {
+          "radius_mm": 11.3904,
+          "column": 2500,
+          "rate": 0.41369047619047616
+        },
+        {
+          "radius_mm": 14.238,
+          "column": 4500,
+          "rate": 0.36075949367088606
+        },
+        {
+          "radius_mm": 20.8824,
+          "column": 1500,
+          "rate": 0.36879432624113473
+        },
+        {
+          "radius_mm": 21.8316,
+          "column": 1500,
+          "rate": 0.34615384615384615
+        }
+      ]
+    },
+    {
+      "slice": 1636,
+      "background_rate": 0.10425101214574899,
+      "valid_cells": 395,
+      "anomalous": [
+        {
+          "radius_mm": 11.865,
+          "column": 4500,
+          "rate": 0.4412811387900356
+        }
+      ]
+    },
+    {
+      "slice": 1736,
+      "background_rate": 0.10253807106598985,
+      "valid_cells": 393,
+      "anomalous": [
+        {
+          "radius_mm": 13.288800000000002,
+          "column": 3500,
+          "rate": 0.41797432239657634
+        }
+      ]
+    }
+  ],
+  "observed": {
+    "pairs": 39,
+    "colocated": 6,
+    "fraction": 0.15384615384615385
+  },
+  "null": {
+    "trials": 2000,
+    "mean": 0.05311538461538461,
+    "p95": 0.1282051282051282
+  }
+}

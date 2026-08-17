@@ -1,0 +1,114 @@
+{
+  "slices": [
+    {
+      "slice": 4712,
+      "background_rate": 0.09849246231155778,
+      "valid_cells": 383,
+      "anomalous": [
+        {
+          "radius_mm": 4.746,
+          "column": 4500,
+          "rate": 0.3640552995391705
+        }
+      ]
+    },
+    {
+      "slice": 4816,
+      "background_rate": 0.10651762665330616,
+      "valid_cells": 382,
+      "anomalous": [
+        {
+          "radius_mm": 4.746,
+          "column": 3000,
+          "rate": 0.42196531791907516
+        },
+        {
+          "radius_mm": 11.865,
+          "column": 3500,
+          "rate": 0.34911242603550297
+        },
+        {
+          "radius_mm": 13.763399999999999,
+          "column": 1000,
+          "rate": 0.3851744186046512
+        }
+      ]
+    },
+    {
+      "slice": 4912,
+      "background_rate": 0.1045828437132785,
+      "valid_cells": 379,
+      "anomalous": [
+        {
+          "radius_mm": 5.2206,
+          "column": 4500,
+          "rate": 0.3793103448275862
+        },
+        {
+          "radius_mm": 9.492,
+          "column": 1000,
+          "rate": 0.3329129886506936
+        },
+        {
+          "radius_mm": 13.763399999999999,
+          "column": 1000,
+          "rate": 0.3359746434231379
+        },
+        {
+          "radius_mm": 16.1364,
+          "column": 1000,
+          "rate": 0.36363636363636365
+        }
+      ]
+    },
+    {
+      "slice": 5016,
+      "background_rate": 0.10486073390065787,
+      "valid_cells": 376,
+      "anomalous": [
+        {
+          "radius_mm": 4.746,
+          "column": 4500,
+          "rate": 0.4528301886792453
+        },
+        {
+          "radius_mm": 5.2206,
+          "column": 4500,
+          "rate": 0.4144144144144144
+        },
+        {
+          "radius_mm": 9.9666,
+          "column": 1000,
+          "rate": 0.4242021276595745
+        },
+        {
+          "radius_mm": 13.288800000000002,
+          "column": 4500,
+          "rate": 0.42671009771986973
+        }
+      ]
+    },
+    {
+      "slice": 5112,
+      "background_rate": 0.10342930844808618,
+      "valid_cells": 378,
+      "anomalous": [
+        {
+          "radius_mm": 4.746,
+          "column": 1000,
+          "rate": 0.4329446064139942
+        }
+      ]
+    }
+  ],
+  "observed": {
+    "pairs": 63,
+    "colocated": 7,
+    "fraction": 0.1111111111111111
+  },
+  "null": {
+    "trials": 2000,
+    "mean": 0.06337301587301587,
+    "p95": 0.12698412698412698
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "slices": [
+    {
+      "slice": 5840,
+      "background_rate": 0.10621468926553672,
+      "valid_cells": 379,
+      "anomalous": [
+        {
+          "radius_mm": 6.644400000000001,
+          "column": 4500,
+          "rate": 0.3771626297577855
+        },
+        {
+          "radius_mm": 8.5428,
+          "column": 4500,
+          "rate": 0.5035971223021583
+        },
+        {
+          "radius_mm": 10.9158,
+          "column": 1000,
+          "rate": 0.46618705035971225
+        }
+      ]
+    },
+    {
+      "slice": 5940,
+      "background_rate": 0.09990108803165183,
+      "valid_cells": 377,
+      "anomalous": [
+        {
+          "radius_mm": 10.4412,
+          "column": 1000,
+          "rate": 0.6209386281588448
+        }
+      ]
+    }
+  ]
+}

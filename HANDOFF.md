@@ -35,6 +35,32 @@ raisons distinctes de croire un run mort alors qu'il tourne.
 leur propre ligne de commande**. Trois boucles d'attente ont ainsi tourné 15 heures.
 **Toujours tuer et attendre par PID.**
 
+## 1bis. ⭐⭐ L'OBJECTIF, et il n'est pas le texte
+
+> **Le but est le DÉROULEMENT, pas la lecture.** Traduire n'est pas notre métier.
+> Repérer quelques lettres ici et là sert à **s'assurer que le rouleau assemblé et
+> déroulé fait du sens** — c'est un instrument de validation, pas le produit.
+> *(cadrage de l'auteur, 2026-08-17)*
+
+**Ce que ça change dans le classement**, et il avait dérivé :
+
+| famille | rôle |
+|---|---|
+| fusions, onde radiale, dépliage polaire, proximité géométrique, direction des fibres | **le travail** |
+| détection d'encre, juge calibré, second rouleau | **l'instrument de mesure** |
+
+⚠ Conséquence concrète : la tâche **D** (`06` §3.8, *une trace à forte proximité
+anormale donne-t-elle une encre moins lisible ?*) n'est pas « du texte » — c'est
+**l'étalonnage du déroulement par l'encre**. Elle reste la plus haute, et pour cette
+raison-là précisément.
+
+⚠ Et **C5** (direction des fibres, problème ouvert nº 5) monte : c'est un discriminant
+*physique* de séparation des feuilles, donc du déroulement pur.
+
+⚠ À l'inverse, pousser l'AUC plus haut, chercher un meilleur détecteur d'encre ou
+faire transcrire davantage par un modèle ne sert **pas** l'objectif. L'encre est la
+règle graduée, pas l'ouvrage.
+
 ## 2. Ce que le projet est
 
 `~/LplVesuvius` — Vesuvius Challenge vu depuis Laplace. Le déroulage produit du grec

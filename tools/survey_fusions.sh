@@ -14,7 +14,7 @@
 # contre 6,6 %).
 set -u
 VOL=${VOL:-s3://vesuvius-challenge-open-data/PHerc0172/volumes/20241024131839-7.910um-53keV-masked.zarr}
-OUT=${1:-/home/masterlaplace/LplVesuvius/docs/survey}
+OUT=$(cd "$(dirname "${1:-docs/survey}")" 2>/dev/null && pwd)/$(basename "${1:-docs/survey}")  # ⚠ ABSOLU : le script fait un cd, un chemin relatif ecrirait ailleurs que le mkdir
 BANDS=${2:-10}
 PER=${3:-5}
 STEP=${4:-100}        # 100 voxels = 0,8 mm, l'ecart ou le signal existe
