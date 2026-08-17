@@ -201,5 +201,36 @@
       "length_m": 12.91602247825302
     }
   ],
-  "refined": []
+  "refined": [
+    {
+      "slice": 2817,
+      "rays": 36,
+      "turns_median": 170,
+      "turns_min": 128,
+      "turns_max": 211,
+      "outer_radius_mm": 23.219805,
+      "spacing_um_median": 141.69796428571428,
+      "length_m": 12.401018696983883,
+      "bracket": [
+        2521,
+        3114
+      ],
+      "neighbour_jump": 11
+    },
+    {
+      "slice": 4003,
+      "rays": 36,
+      "turns_median": 164,
+      "turns_min": 120,
+      "turns_max": 206,
+      "outer_radius_mm": 23.275175,
+      "spacing_um_median": 142.4752977977978,
+      "length_m": 11.991863481726757,
+      "bracket": [
+        3707,
+        4300
+      ],
+      "neighbour_jump": 10
+    }
+  ]
 }

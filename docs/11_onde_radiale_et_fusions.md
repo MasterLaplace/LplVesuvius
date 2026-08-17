@@ -270,6 +270,51 @@ qui restait à tester — et le test n'en était pas un.
 
 **Relancé** avec des coupes espacées de **0,8 mm** autour de z = 6967.
 
+### ✅ Avec le bon espacement, les sites TIENNENT
+
+| espacement des coupes | coïncidences observées | attendues au hasard | verdict |
+|---|---:|---:|---|
+| 22,3 mm | **0 %** (0/21) | 2,1 % | indistinguable |
+| **0,8 mm** | **7,0 %** (9/128) | 1,1 % | **p = 0,0001** |
+
+*(p exacte sur 20 000 tirages de l'hypothèse nulle.)*
+
+Deux points suffisent à faire une **relation dose-effet** : l'effet apparaît quand
+l'espacement descend à l'échelle de la structure. C'est bien plus convaincant qu'un
+seuil franchi une fois, et ça confirme que le premier verdict était un défaut de
+protocole et non un résultat.
+
+### 🎯🎯 Et les sites persistants forment une structure CONTINUE
+
+| z | rayon | colonne | taux |
+|---:|---:|---:|---:|
+| 6867 → 6967 | 17,1 · 17,3 · 17,6 mm | ~14 000–15 000 | 16-20 % |
+| 6967 → 7067 | 18,0 mm | ~15 000–16 000 | 19-23 % |
+| 7067 → 7167 | 18,7 · 19,0 · 19,5 mm | ~16 000 | 16-23 % |
+
+Le rayon **croît de façon monotone** avec *z* — 17,1 → 19,5 mm — et l'angle dérive de
+~14 000 à ~16 000 colonnes. Sur 2,4 mm de hauteur : **+2,4 mm de rayon et +38°**.
+
+Ce n'est donc pas un point fixe : c'est un défaut qui **migre**, ce qui est le
+comportement attendu d'une anomalie portée par une feuille — une feuille est une
+surface en spirale, pas un cylindre.
+
+⚠⚠ **L'explication concurrente, à écarter avant d'aller plus loin : l'axe du rouleau
+est-il incliné par rapport à l'axe z du scan ?** Un centre fixe pour toutes les coupes
+produirait exactement cette dérive radiale, et pour *tous* les motifs, pas seulement
+celui-ci.
+
+Un élément va contre : entre z = 6671 et z = 7263, le rayon **médian** du rouleau
+*décroît* (22,9 → 22,1 mm) pendant que nos sites *croissent* (17,1 → 19,5). Les deux
+vont en sens opposé, ce qui n'est pas ce qu'une simple mise à l'échelle donnerait.
+Mais une inclinaison décale le centre **latéralement**, donc son effet radial dépend de
+l'angle — il peut être positif vers 286° et négatif ailleurs.
+
+**Le contrôle qui tranche, et il n'est pas fait** : re-dériver le centre **coupe par
+coupe** et refaire la mesure. Si la migration disparaît, c'était l'inclinaison ; si
+elle persiste, c'est un défaut réel suivi en 3D. `radial.py centre` sait déjà dériver
+un centre ; il faut le faire par coupe au lieu d'une fois pour toutes.
+
 ---
 
 ## Reproduire

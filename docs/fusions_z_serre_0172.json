@@ -107,6 +107,33 @@
           "rate": 0.193596425912137
         }
       ]
+    },
+    {
+      "slice": 7167,
+      "background_rate": 0.06540954625810254,
+      "valid_cells": 1379,
+      "anomalous": [
+        {
+          "radius_mm": 18.984,
+          "column": 16000,
+          "rate": 0.1586021505376344
+        },
+        {
+          "radius_mm": 19.9332,
+          "column": 16000,
+          "rate": 0.17992424242424243
+        }
+      ]
     }
-  ]
+  ],
+  "observed": {
+    "pairs": 128,
+    "colocated": 9,
+    "fraction": 0.0703125
+  },
+  "null": {
+    "trials": 2000,
+    "mean": 0.01098046875,
+    "p95": 0.03125
+  }
 }
