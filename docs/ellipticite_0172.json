@@ -1,0 +1,74 @@
+[
+  {
+    "radius_median_mm": 25.09052,
+    "axis_long_mm": 26.577600000000004,
+    "axis_short_mm": 21.1197,
+    "axis_ratio": 1.258426966292135,
+    "perimeter_mm": 156.49177861523586,
+    "angles_used": 36,
+    "slice": 1336
+  },
+  {
+    "radius_median_mm": 24.172960000000003,
+    "axis_long_mm": 27.2104,
+    "axis_short_mm": 18.857440000000004,
+    "axis_ratio": 1.4429530201342278,
+    "perimeter_mm": 153.10502174745505,
+    "angles_used": 36,
+    "slice": 2521
+  },
+  {
+    "radius_median_mm": 23.4927,
+    "axis_long_mm": 26.340300000000003,
+    "axis_short_mm": 16.737560000000002,
+    "axis_ratio": 1.5737240075614367,
+    "perimeter_mm": 148.73457934559602,
+    "angles_used": 36,
+    "slice": 4300
+  },
+  {
+    "radius_median_mm": 23.16048,
+    "axis_long_mm": 25.69168,
+    "axis_short_mm": 17.37036,
+    "axis_ratio": 1.4790528233151183,
+    "perimeter_mm": 144.89601610091754,
+    "angles_used": 36,
+    "slice": 6078
+  },
+  {
+    "radius_median_mm": 21.8316,
+    "axis_long_mm": 26.11882,
+    "axis_short_mm": 18.88908,
+    "axis_ratio": 1.382747068676717,
+    "perimeter_mm": 144.33797035264197,
+    "angles_used": 36,
+    "slice": 7856
+  },
+  {
+    "radius_median_mm": 21.29372,
+    "axis_long_mm": 26.071360000000002,
+    "axis_short_mm": 19.55352,
+    "axis_ratio": 1.3333333333333335,
+    "perimeter_mm": 143.97763513842585,
+    "angles_used": 36,
+    "slice": 9634
+  },
+  {
+    "radius_median_mm": 23.0181,
+    "axis_long_mm": 27.03638,
+    "axis_short_mm": 20.26542,
+    "axis_ratio": 1.334113973458236,
+    "perimeter_mm": 154.43463272387288,
+    "angles_used": 36,
+    "slice": 11413
+  },
+  {
+    "radius_median_mm": 24.33116,
+    "axis_long_mm": 27.65336,
+    "axis_short_mm": 19.727539999999998,
+    "axis_ratio": 1.401764234161989,
+    "perimeter_mm": 157.74691490716708,
+    "angles_used": 36,
+    "slice": 12598
+  }
+]

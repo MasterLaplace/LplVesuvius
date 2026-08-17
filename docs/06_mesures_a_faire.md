@@ -117,7 +117,22 @@ sur du texte inconnu n'est pas une donnée.
 
 ## 2. À faire — priorité haute
 
-### 2.1 ⭐ Monotonie radiale du winding (l'idée la plus prometteuse)
+### 2.1 ❌ ÉCARTÉE — remplacée par le dépliage polaire
+
+`winding.py` mesurait la monotonie du numéro de spire le long d'un rayon. Il a été
+écrit, **n'a jamais tourné jusqu'au bout** (trop lent : le découpage par tranche l'a
+rendu impraticable), et il est aujourd'hui **superflu**.
+
+Ce qu'il cherchait — une feuille qui revient sur une spire déjà dépassée — est mesuré
+en mieux par `fusions.py` sur l'image dépliée : local, sans appariement, avec un témoin
+sur données fabriquées, et validé en 3D à **p = 0,0001** (voir `11`).
+
+⚠ **Le fichier est supprimé plutôt que gardé « au cas où ».** Un fichier versionné qui
+ne s'exécute pas est pire qu'absent : il se lit comme une capacité disponible. La
+raison de sa suppression est ici, ce qui est ce que « une idée écartée est un actif »
+demande — on conserve la *raison*, pas le code mort.
+
+### 2.1bis — le texte d'origine de l'idée
 
 **Ce que ça teste** : le long d'un rayon partant de l'ombilic, les feuilles sont
 traversées dans un ordre, et cet ordre doit être **strictement croissant**. Un saut
@@ -167,7 +182,64 @@ intacte.
 1.11 utilise un barycentre par tranche, sur **une seule trace** qui ne couvre pas
 tout le rouleau — donc centre biaisé. À refaire avec `umbilicus.txt` sur Scroll 1.
 
-### 2.4 La théorie du dommage : le profil est-il en U ?
+### 2.4 ✅ FAITE — la théorie du dommage : **à moitié confirmée, et ce n'est pas un U**
+
+Mesuré sur 3 coupes (`shape.py degradation`, niveau 2), indicateur = **contraste
+feuille/interstice** normalisé par la hauteur du pic, donc sans dimension.
+
+| rayon | z = 2521 | z = 6967 | z = 11413 |
+|---|---:|---:|---:|
+| 0,0–2,8 mm (**cœur**) | **0,493** | **0,463** | 0,556 |
+| 5,7–8,5 mm | 0,585 | 0,581 | 0,580 |
+| 8,5–11,3 mm | 0,584 | **0,592** | 0,549 |
+| 17,0–19,9 mm | 0,559 | 0,573 | 0,540 |
+| 19,9–22,7 mm (**bord**) | **0,544** | **0,558** | **0,535** |
+
+**Ce que l'hypothèse gagne** : le **cœur est réellement le plus dégradé** sur 2 coupes
+sur 3 — déficit de **20 %** contre la meilleure couronne. C'est la partie « la fumée
+est passée par le trou central ».
+
+**Ce qu'elle perd** : l'extérieur n'est **pas** le plus abîmé. Il décline, mais de
+**5 à 8 %** seulement, contre 20 % au cœur. Le profil n'est donc **pas un U** : c'est
+*cœur mauvais → plateau → léger déclin*. Le minimum tombe à la bande 0 sur 2 coupes
+sur 3, c'est-à-dire à un **bord** — or un U exige un minimum intérieur.
+
+⚠ **Limite** : la bande extérieure a 30 % d'échantillons en moins (le rouleau s'y
+termine), donc une part du déclin est un effet de bord et non une dégradation.
+
+⚠ **Conséquence pratique, et elle est bonne** : si l'extérieur n'est pas ruiné, ce
+qu'on a perdu du **début** des textes est bien moindre que craint. Et « où semer en
+priorité » n'a pas de réponse tranchée par cette mesure — le plateau est large.
+
+### 2.4bis ✅ Et pourquoi le rayon varie le long de z : le rouleau est ÉCRASÉ
+
+`shape.py ellipticite`, 8 coupes, niveau 2 :
+
+| grandeur | étendue | cv |
+|---|---|---:|
+| rapport des axes | **1,26 à 1,57** | — |
+| périmètre du contour | 144,0 à 157,7 mm | 0,035 |
+| rayon médian | 21,3 à 25,1 mm | 0,051 |
+
+Le rouleau est **nettement elliptique partout**, et le plus écrasé au milieu (1,57 en
+z = 4300) — exactement là où le rayon médian est le plus petit. C'est donc bien
+l'écrasement qui explique une part du U mesuré le long de z.
+
+⚠ **Mais la question n'est pas tranchée** : le périmètre est plus stable que le rayon
+(rapport 0,69) sans l'être *beaucoup* plus. Un écrasement pur garderait le contour
+constant ; ici il perd 9 %. **Les deux jouent, aucune n'est écartée.**
+
+⚠⚠ **Deux défauts de ma propre mesure, trouvés avant de conclure** :
+1. la portée plafonnait à 22,7 mm et l'axe long ressortait à **22,7 mm sur les huit
+   coupes** — la mesure saturait contre sa propre limite. Symptôme à reconnaître : une
+   valeur *identique* partout. Le code refuse désormais plutôt que de rendre un chiffre
+   saturé ;
+2. mon « périmètre » valait `Σ r·dθ`, c'est-à-dire **2π × rayon moyen** — il ne portait
+   aucune information indépendante du rayon, donc comparer sa dispersion à celle du
+   rayon revenait à **comparer une grandeur à elle-même**. Corrigé par la vraie
+   longueur d'arc, avec le terme `dr/dθ`.
+
+### 2.4ter — le texte d'origine de l'hypothèse
 
 **L'hypothèse de l'auteur** : la fumée est passée par le **trou central**, donc les
 toutes premières couches du cœur sont abîmées ; mais le rouleau est plus dense au

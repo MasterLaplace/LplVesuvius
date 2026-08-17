@@ -1,0 +1,185 @@
+[
+  {
+    "slice": 2521,
+    "bands": [
+      {
+        "band": 0,
+        "radius_mm_low": 0.0,
+        "radius_mm_high": 2.835735,
+        "contrast": 0.4926327193932828,
+        "samples": 606
+      },
+      {
+        "band": 1,
+        "radius_mm_low": 2.835735,
+        "radius_mm_high": 5.67147,
+        "contrast": 0.5693664795509222,
+        "samples": 668
+      },
+      {
+        "band": 2,
+        "radius_mm_low": 5.67147,
+        "radius_mm_high": 8.507205,
+        "contrast": 0.5846606223964714,
+        "samples": 680
+      },
+      {
+        "band": 3,
+        "radius_mm_low": 8.507205,
+        "radius_mm_high": 11.34294,
+        "contrast": 0.5838014981273408,
+        "samples": 718
+      },
+      {
+        "band": 4,
+        "radius_mm_low": 11.34294,
+        "radius_mm_high": 14.178675000000002,
+        "contrast": 0.5826198341535764,
+        "samples": 720
+      },
+      {
+        "band": 5,
+        "radius_mm_low": 14.178675000000002,
+        "radius_mm_high": 17.01441,
+        "contrast": 0.5714285714285714,
+        "samples": 711
+      },
+      {
+        "band": 6,
+        "radius_mm_low": 17.01441,
+        "radius_mm_high": 19.850145,
+        "contrast": 0.559322033898305,
+        "samples": 645
+      },
+      {
+        "band": 7,
+        "radius_mm_low": 19.850145,
+        "radius_mm_high": 22.68588,
+        "contrast": 0.5440112994350282,
+        "samples": 522
+      }
+    ]
+  },
+  {
+    "slice": 6967,
+    "bands": [
+      {
+        "band": 0,
+        "radius_mm_low": 0.0,
+        "radius_mm_high": 2.835735,
+        "contrast": 0.46259328358208956,
+        "samples": 594
+      },
+      {
+        "band": 1,
+        "radius_mm_low": 2.835735,
+        "radius_mm_high": 5.67147,
+        "contrast": 0.5569620253164557,
+        "samples": 687
+      },
+      {
+        "band": 2,
+        "radius_mm_low": 5.67147,
+        "radius_mm_high": 8.507205,
+        "contrast": 0.5805302541299099,
+        "samples": 716
+      },
+      {
+        "band": 3,
+        "radius_mm_low": 8.507205,
+        "radius_mm_high": 11.34294,
+        "contrast": 0.5922330097087378,
+        "samples": 737
+      },
+      {
+        "band": 4,
+        "radius_mm_low": 11.34294,
+        "radius_mm_high": 14.178675000000002,
+        "contrast": 0.5665024630541872,
+        "samples": 711
+      },
+      {
+        "band": 5,
+        "radius_mm_low": 14.178675000000002,
+        "radius_mm_high": 17.01441,
+        "contrast": 0.5761589403973509,
+        "samples": 719
+      },
+      {
+        "band": 6,
+        "radius_mm_low": 17.01441,
+        "radius_mm_high": 19.850145,
+        "contrast": 0.5732217573221757,
+        "samples": 571
+      },
+      {
+        "band": 7,
+        "radius_mm_low": 19.850145,
+        "radius_mm_high": 22.68588,
+        "contrast": 0.5584415584415584,
+        "samples": 439
+      }
+    ]
+  },
+  {
+    "slice": 11413,
+    "bands": [
+      {
+        "band": 0,
+        "radius_mm_low": 0.0,
+        "radius_mm_high": 2.835735,
+        "contrast": 0.5555555555555556,
+        "samples": 611
+      },
+      {
+        "band": 1,
+        "radius_mm_low": 2.835735,
+        "radius_mm_high": 5.67147,
+        "contrast": 0.5159235668789809,
+        "samples": 643
+      },
+      {
+        "band": 2,
+        "radius_mm_low": 5.67147,
+        "radius_mm_high": 8.507205,
+        "contrast": 0.580110497237569,
+        "samples": 695
+      },
+      {
+        "band": 3,
+        "radius_mm_low": 8.507205,
+        "radius_mm_high": 11.34294,
+        "contrast": 0.5490196078431373,
+        "samples": 725
+      },
+      {
+        "band": 4,
+        "radius_mm_low": 11.34294,
+        "radius_mm_high": 14.178675000000002,
+        "contrast": 0.5609756097560976,
+        "samples": 707
+      },
+      {
+        "band": 5,
+        "radius_mm_low": 14.178675000000002,
+        "radius_mm_high": 17.01441,
+        "contrast": 0.5684210526315789,
+        "samples": 703
+      },
+      {
+        "band": 6,
+        "radius_mm_low": 17.01441,
+        "radius_mm_high": 19.850145,
+        "contrast": 0.5403726708074534,
+        "samples": 715
+      },
+      {
+        "band": 7,
+        "radius_mm_low": 19.850145,
+        "radius_mm_high": 22.68588,
+        "contrast": 0.5348837209302325,
+        "samples": 543
+      }
+    ]
+  }
+]
