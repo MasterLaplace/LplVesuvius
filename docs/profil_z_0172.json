@@ -139,6 +139,66 @@
       "outer_radius_mm": 21.5152,
       "spacing_um_median": 139.5281713836478,
       "length_m": 10.341575121858812
+    },
+    {
+      "slice": 9634,
+      "rays": 36,
+      "turns_median": 150,
+      "turns_min": 131,
+      "turns_max": 193,
+      "outer_radius_mm": 21.305585,
+      "spacing_um_median": 143.03087898518186,
+      "length_m": 10.040020397464934
+    },
+    {
+      "slice": 10227,
+      "rays": 36,
+      "turns_median": 157,
+      "turns_min": 132,
+      "turns_max": 200,
+      "outer_radius_mm": 21.661535,
+      "spacing_um_median": 141.59314136125656,
+      "length_m": 10.684119917772074
+    },
+    {
+      "slice": 10820,
+      "rays": 36,
+      "turns_median": 161,
+      "turns_min": 139,
+      "turns_max": 206,
+      "outer_radius_mm": 22.828260000000004,
+      "spacing_um_median": 140.7945879594899,
+      "length_m": 11.546452119548276
+    },
+    {
+      "slice": 11413,
+      "rays": 36,
+      "turns_median": 161,
+      "turns_min": 141,
+      "turns_max": 209,
+      "outer_radius_mm": 23.053695,
+      "spacing_um_median": 142.01682451923077,
+      "length_m": 11.66047633486606
+    },
+    {
+      "slice": 12005,
+      "rays": 36,
+      "turns_median": 163,
+      "turns_min": 135,
+      "turns_max": 211,
+      "outer_radius_mm": 23.635080000000002,
+      "spacing_um_median": 145.5501628649207,
+      "length_m": 12.10304237228615
+    },
+    {
+      "slice": 12598,
+      "rays": 36,
+      "turns_median": 169,
+      "turns_min": 129,
+      "turns_max": 213,
+      "outer_radius_mm": 24.327205000000003,
+      "spacing_um_median": 143.2003032090609,
+      "length_m": 12.91602247825302
     }
   ],
   "refined": []

@@ -65,20 +65,60 @@ sous-comptent leurs fusions, donc penchent du même côté. C'est le **maximum**
 qui approche le mieux ce que le rouleau portait — une tranche abîmée perd des spires,
 elle n'en invente pas.
 
-Premiers résultats (mesure en cours) :
+### ✅ Les 20 tranches, et un profil en U
 
 | z | feuilles | rayon | longueur |
 |---:|---:|---:|---:|
-| 1 336 | 176 | 25,1 mm | 13,87 m |
-| 1 929 | 167 | 23,9 mm | 12,54 m |
+| 1 336 | **176** | **25,1 mm** | **13,87 m** |
 | 2 521 | 173 | 24,2 mm | 13,15 m |
-| 3 114 | 162 | 23,2 mm | 11,82 m |
-| 3 707 | 170 | 23,8 mm | 12,71 m |
 | 4 300 | 160 | 23,5 mm | 11,82 m |
-| 6 967 | 158 | 22,7 mm | 11,27 m |
+| 6 671 | 157 | 22,9 mm | 11,28 m |
+| **9 634** | **150** | **21,3 mm** | **10,04 m** |
+| 10 820 | 161 | 22,8 mm | 11,55 m |
+| 12 598 | 169 | 24,3 mm | 12,92 m |
 
-La variation est **réelle et non du bruit** : le rouleau est nettement plus épais à
-une extrémité (25,1 mm) qu'au milieu (22,7 mm).
+*(7 des 20 tranches ; le profil complet est dans `profil_z_0172.json`.)*
+
+**Le rouleau est le plus épais à ses deux extrémités et le plus mince au milieu** —
+25,1 mm et 24,3 mm aux bouts contre 21,3 mm au centre. Le profil est **en U**, régulier,
+et le compte de feuilles suit exactement.
+
+### 🎯 L'invariant qui sort du balayage : l'espacement ne bouge pas
+
+| grandeur | étendue | cv |
+|---|---|---:|
+| feuilles par rayon | 150 à 176 | 4,2 % |
+| rayon extérieur | 21,3 à 25,1 mm | 4,6 % |
+| **rayon / feuilles** | **138 à 148 µm** | **1,8 %** |
+
+Corrélation feuilles ↔ rayon : **rho = +0,927**.
+
+L'espacement entre feuilles est donc **constant sur toute la hauteur du rouleau**
+(142,8 µm), et le compte ne fait que suivre le rayon. C'est une validation forte de la
+mesure : deux grandeurs qui varient de 4-5 % chacune donnent un rapport stable à 1,8 %.
+
+### ⚠⚠ Et ça change le chiffre principal : ~14 m, pas 11,2
+
+**Un rouleau est UNE feuille enroulée N fois** : toute coupe transversale traverse les
+**mêmes N spires**. Une variation de N le long de *z* est donc une variation de
+**mesure**, pas de l'objet. Et comme une soudure ne peut que *réduire* le compte, la
+meilleure estimation de N est le **maximum** sur *z*, pas la moyenne.
+
+| estimateur | N | longueur |
+|---|---:|---:|
+| une seule coupe (z = 6967, mesure d'origine) | 158 | 11,27 m |
+| moyenne sur 20 tranches | 161 | 11,71 m |
+| **maximum sur 20 tranches** | **176** | **13,87 m** |
+
+C'est exactement ce que le balayage de l'auteur devait apporter — et il a apporté
+l'inverse de ce qu'on en attendait : la moyenne n'était pas le but, c'est le
+**maximum** qui informe, parce que le biais est à sens unique.
+
+⚠ **Ce que le U ne dit pas encore** : pourquoi le rayon varie si le nombre de spires
+est fixe. Deux lectures, non départagées ici — le rouleau est **écrasé** au milieu
+(section elliptique, donc un rayon médian sur 36 rayons lit plus petit), ou il y a
+**perte de matière** en surface au milieu. Les distinguer demande de mesurer
+l'ellipticité par coupe, ce qui est un ajout court à `radial.py`.
 
 ## 4. Le dépliage polaire : la représentation qui débloque tout
 
