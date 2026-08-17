@@ -65,14 +65,21 @@ complète.
 |---|---|---|
 | trace `tifxyz` | ✅ 55 traces Scroll 1, 53 Scroll 5 | — |
 | aplatissement | ✅ déjà fait en amont (`_flatboi`) | — |
-| **rendu** en couches | ❌ | `vc_render_tifxyz` (C++) ou `self_render_tifxyz.py` ; exige de streamer le volume |
-| **détection d'encre** | ❌ | poids sur HF (`scrollprize/ink-detection-models`), `download.sh`, 3 scripts d'inférence |
-| jugement | ❌ | un papyrologue |
+| **rendu** en couches | ✅ **déjà publié** — `dl.ash2txt.org`, accès libre | rien : 31 couches (15-45), 17 Go, téléchargées |
+| **détection d'encre** | ✅ modèle GP chargé, 38 M param. | rien : **104 ms/fenêtre** mesuré sur CPU |
+| **inférence sur une région** | 🔄 | 4 cm² en 29 min (pas 21) ; segment entier en 18 h |
+| jugement | ❌ | un papyrologue — et le contrôle en aveugle des modèles de langue |
 
-⚠ **Contrainte matérielle mesurée** : **aucun GPU** (22 cœurs, 31 Gio). Précédent
-rassurant : `vesuvius-automesh` a produit 279 cm² vérifiés *« zero GPU »*. Et la
-cible **First Letters** ne demande que **4 cm²**. Donc viser petit, et chiffrer le
-coût CPU avant de s'engager.
+⚠ **Contrainte matérielle mesurée** : **aucun GPU utilisable**. Core Ultra 7 165H,
+22 cœurs, 31 Gio. Le **NPU n'est pas exposé à WSL2** (`/dev/accel` absent) ; la
+passerelle GPU-PV (`/dev/dxg`) est là mais le runtime de calcul Intel n'est pas
+installé. **OpenVINO ne convertit pas ce modèle** (einsum des rotary embeddings,
+échec en direct comme via ONNX), donc ni GPU ni NPU ne lui sont accessibles par
+cette voie.
+
+Réglage CPU mesuré : **16 fils, lot 4 → 104 ms/fenêtre** (contre 121 au départ,
+−14 %). ⚠ 22 fils s'effondre à 734 ms — sur-souscription. Précédent rassurant :
+`vesuvius-automesh` a produit 279 cm² vérifiés *« zero GPU »*.
 
 ### ⚠ Le contrôle sans lequel la passe ne vaut rien
 
