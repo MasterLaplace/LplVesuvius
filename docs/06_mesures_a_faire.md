@@ -356,12 +356,49 @@ l'ancienne méthode — tout concentré près du centre — a disparu.
 | mais 40 voxels > **2 espacements** (~18) | …au prix de sauts de spire invisibles |
 | prédiction de pente : 21 → **69** longues pistes | améliore ×3, ne suffit pas |
 
-**La marche suivante est nommée, et ce n'est pas un réglage de plus** : l'appariement
-est **glouton au plus proche**, ce qui est le mode d'échec classique dans un champ
-dense — deux pistes se disputent le même mur et l'une repart de zéro. Le remède connu
-est une **affectation globale par colonne** (Hongrois / transport optimal) qui
-minimise le coût total au lieu de servir les pistes dans l'ordre d'arrivée. C'est ça
-qu'il faut écrire, pas une tolérance plus large.
+#### ⚠⚠ Trois hypothèses posées, TROIS réfutées par la mesure
+
+Le 2026-08-17, après avoir nommé le glouton comme cause :
+
+| hypothèse | verdict | mesure |
+|---|---|---|
+| l'appariement glouton fragmente → affectation globale (Hongrois) | ❌ **PIRE** | 17 pistes longues contre **69** pour le glouton |
+| les pistes en sursis volent des murs aux saines | ❌ réfutée | sursis 0 → 10 pistes longues, sursis 20 → **17** |
+| le détecteur perd les murs | ❌ réfutée | **92 %** des murs retrouvés à moins de **2 voxels**, 99,2 % à 12, médiane **0** |
+
+⚠ Le Hongrois est pire **pour une raison de fond, pas de réglage** : il minimise le
+coût *total*, donc il peut sacrifier un appariement quasi certain (distance 0,5) pour
+améliorer la somme ailleurs. En suivi, un appariement à coût nul est presque sûrement
+le bon et ne doit jamais être échangé. *L'optimalité globale n'est pas le bon
+objectif ici* — ce qui est l'inverse de ce que la littérature suggère pour un champ
+dense.
+
+#### ✅ La vraie cause, mesurée : ce sont les ÉTIQUETTES qui churnent, pas les feuilles
+
+| grandeur, par colonne | valeur |
+|---|---|
+| murs trouvés | 126 |
+| murs **appariés à une piste** | **125** |
+| pistes vivantes | 186 |
+| pistes neuves | **1** |
+
+**125 murs sur 126 sont appariés à chaque colonne.** La couverture est donc
+quasi parfaite : aucune feuille ne disparaît. Ce qui meurt, c'est l'**identité** —
+une piste qui perd son mur une fois continue d'extrapoler, s'éloigne, ne le retrouve
+jamais, et une piste neuve reprend le mur.
+
+⚠⚠ **Conséquence : les 12 249 « fusions » du premier passage étaient des changements
+d'étiquette, pas des soudures.** Le chiffre ne mesurait rien de physique.
+
+**Ce que ça change pour la suite.** Le signal de fusion ne doit pas être *la mort
+d'une piste* — trop sensible à l'identité — mais **la disparition d'un mur**, c'est-à-
+dire une baisse du COMPTE local qui **persiste** sur de nombreuses colonnes. Et cette
+quantité-là, la mesure ci-dessus montre qu'elle est propre : 126 ± 3 murs par colonne,
+soit 2,4 % de dispersion. Une soudure retirerait un mur *durablement*, ce qui sort de
+cette dispersion.
+
+C'est aussi la mesure qui ne demande **aucun suivi**, donc aucune des trois
+hypothèses ci-dessus. À écrire ensuite.
 
 ### ❌ Ce qui ne marche pas : la localisation des fusions par déficit de compte
 

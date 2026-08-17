@@ -69,44 +69,61 @@ def track(polar: np.ndarray, prominence: float, min_gap: int, smooth: int,
     mouvement lui-meme, ce qui permet de la garder **sous la moitie d'un espacement**
     — et un saut de spire devient impossible par construction plutot qu'improbable.
     """
+    from scipy.optimize import linear_sum_assignment
+
     tracks: list[dict] = []
     live: list[int] = []
     for column_index in range(polar.shape[1]):
         found = ridges(polar[:, column_index], prominence, min_gap, smooth)
-        taken = set()
+        taken: set[int] = set()
         still: list[int] = []
-        for tid in live:
-            t = tracks[tid]
-            if found.size:
-                # Position predite : le rayon connu plus la derive recente, comptee
-                # aussi pour les colonnes ou la piste etait muette.
-                predicted = t["radius"] + t["slope"] * (1 + t["missed"])
-                distances = np.abs(found - predicted)
-                picked = None
-                for k in np.argsort(distances):
-                    if distances[k] > tolerance:
-                        break          # les suivants sont plus loin encore
-                    if k not in taken:
-                        picked = int(k)
-                        break
-                if picked is not None:
-                    taken.add(picked)
-                    new_radius = float(found[picked])
-                    step = max(1, 1 + t["missed"])
-                    observed = (new_radius - t["radius"]) / step
-                    # Pente lissee : une seule colonne bruitee ne doit pas lancer la
-                    # piste dans une direction qu'elle ne suivra pas.
-                    t["slope"] = 0.7 * t["slope"] + 0.3 * observed
-                    t["radius"] = new_radius
-                    t["end"] = column_index
-                    t["points"] += 1
-                    t["missed"] = 0
-                    still.append(tid)
+
+        if live and found.size:
+            # ⚠⚠ APPARIEMENT GLOBAL, et non glouton au plus proche. Le glouton sert
+            # les pistes dans l'ordre d'arrivee : deux pistes qui convoitent le meme
+            # mur, la premiere le prend et la seconde repart de zero, meme quand un
+            # echange aurait satisfait les deux. C'est le mode d'echec classique en
+            # champ dense, et c'est ce qui fragmentait chaque feuille en ~80 morceaux.
+            # Ici on minimise le cout TOTAL de la colonne, donc l'echange se fait tout
+            # seul et aucune piste n'est sacrifiee a l'ordre d'iteration.
+            predicted = np.array([tracks[t]["radius"] + tracks[t]["slope"] * (1 + tracks[t]["missed"])
+                                  for t in live])
+            cost = np.abs(predicted[:, None] - found[None, :])
+            # Au-dela de la tolerance, l'appariement est INTERDIT et non simplement
+            # cher : un cout fini laisserait l'optimum global sauter une spire pour
+            # gagner ailleurs, ce qui est exactement l'erreur qu'on veut rendre
+            # impossible.
+            forbidden = cost > tolerance
+            cost = np.where(forbidden, 1e6, cost)
+            rows, cols = linear_sum_assignment(cost)
+            for r, c in zip(rows, cols):
+                if forbidden[r, c]:
                     continue
+                tid = live[r]
+                t = tracks[tid]
+                taken.add(int(c))
+                new_radius = float(found[c])
+                step = max(1, 1 + t["missed"])
+                observed = (new_radius - t["radius"]) / step
+                t["slope"] = 0.7 * t["slope"] + 0.3 * observed
+                t["radius"] = new_radius
+                t["end"] = column_index
+                t["points"] += 1
+                t["missed"] = 0
+                still.append(tid)
+            matched = {live[r] for r, c in zip(rows, cols) if not forbidden[r, c]}
+        else:
+            matched = set()
+
+        for tid in live:
+            if tid in matched:
+                continue
+            t = tracks[tid]
             t["missed"] += 1
             if t["missed"] <= gap_tolerance:
                 still.append(tid)
         live = still
+
         for k, r in enumerate(found):
             if k in taken:
                 continue
