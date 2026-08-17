@@ -319,7 +319,7 @@ Sur PHerc0172, une coupe, 36 rayons :
 | feuilles traversées | **158 en médiane** (120 à 194) |
 | espacement entre feuilles | **136 à 158 µm** |
 | rayon extérieur | 22,7 mm |
-| **longueur estimée du papyrus** | **11,2 m** |
+| **longueur estimée du papyrus** | **11,2 m** ⚠ borne INFÉRIEURE (voir ci-dessous) |
 
 ⚠ **Borne supérieure** : deux feuilles fondues comptent pour une, donc le vrai
 nombre de spires est **supérieur**. Et une seule coupe ne dit rien de la variation

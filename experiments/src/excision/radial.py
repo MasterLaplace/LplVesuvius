@@ -164,8 +164,14 @@ def unwrap_polar(plane: np.ndarray, cx: float, cy: float, reach: float,
 def spiral_length_mm(turns: int, outer_radius_mm: float) -> float:
     """Longueur d'une spirale d'Archimede : la somme des circonferences.
 
-    ⚠ C'est une borne SUPERIEURE du nombre de spires et donc de la longueur : deux
-    feuilles fondues ensemble sont comptees pour une, jamais pour deux.
+    ⚠⚠ **C'est une borne INFERIEURE, et le sens avait ete note a l'envers.** Deux
+    feuilles fondues sont comptees pour UNE, donc les spires vraies sont >= au compte ;
+    et la longueur CROIT avec les spires (140 spires -> 9,98 m, 200 -> 14,26 m). Donc
+    la longueur vraie est >= celle estimee.
+
+    ⚠ Mais le sens n'est garanti que par cet argument-la : un pic parasite pris pour
+    un mur pousse en sens inverse. Tant que le taux de faux pics n'est pas mesure, le
+    chiffre est un ORDRE DE GRANDEUR, pas une borne certifiee.
     """
     return sum(2.0 * np.pi * (outer_radius_mm * (i + 0.5) / turns) for i in range(turns))
 
@@ -240,9 +246,11 @@ def cmd_count(args) -> int:
     print(f"LONGUEUR estimee du papyrus : {length_m:.1f} m "
           f"(spirale de {turns} spires sur {outer_mm:.1f} mm de rayon)")
     print()
-    print("⚠ borne SUPERIEURE : chaque feuille fondue a sa voisine est comptee une")
-    print("   fois, donc le vrai nombre de spires est >= ce compte. Et une tranche")
-    print("   unique ne dit rien de la variation le long du rouleau.")
+    print("⚠ borne INFERIEURE : chaque feuille fondue a sa voisine est comptee une")
+    print("   fois, donc le vrai nombre de spires est >= ce compte, et la longueur")
+    print("   croit avec les spires. ⚠ Un pic parasite pousse en sens inverse, donc")
+    print("   le sens n'est sur que si les faux pics sont rares -- non mesure.")
+    print("   Et une tranche unique ne dit rien de la variation le long du rouleau.")
 
     if args.json:
         Path(args.json).write_text(json.dumps({
@@ -252,6 +260,124 @@ def cmd_count(args) -> int:
             "spacing_um_median": float(np.nanmedian(spacings)),
             "length_m": length_m,
         }, indent=2) + "\n")
+    return 0
+
+
+def slice_report(array, centre: dict, z: int, args) -> dict:
+    """Un compte de feuilles sur une tranche."""
+    plane = array[z]
+    counts, radii, spacings = [], [], []
+    for degrees in range(0, 360, args.step_deg):
+        profile = ray_profile(plane, centre["cx"], centre["cy"], degrees, args.reach)
+        if profile.size < 500:
+            continue
+        peaks, spacing, smoothed = count_sheets(profile, args.prominence, args.min_gap)
+        body = np.flatnonzero(smoothed > args.body_threshold)
+        outer = int(body.max()) if body.size else 0
+        counts.append(int((peaks <= outer).sum()) if outer else len(peaks))
+        radii.append(outer)
+        spacings.append(spacing)
+    if not counts:
+        return {}
+    counts = np.asarray(counts)
+    outer_mm = float(np.median(radii) * VOXEL_UM / 1000.0)
+    turns = int(np.median(counts))
+    return {"slice": int(z), "rays": int(counts.size), "turns_median": turns,
+            "turns_min": int(counts.min()), "turns_max": int(counts.max()),
+            "outer_radius_mm": outer_mm,
+            "spacing_um_median": float(np.nanmedian(spacings)),
+            "length_m": spiral_length_mm(turns, outer_mm) / 1000.0}
+
+
+def cmd_profile(args) -> int:
+    """Le compte de feuilles le long de z -- et DEUX questions qu'il ne faut pas melanger.
+
+    ⚠⚠ **Les deux buts demandent deux echantillonnages opposes, et les confondre
+    casse le premier.**
+
+    1. **Estimer la longueur** veut une moyenne NON BIAISEE, donc un pas UNIFORME.
+       Raffiner autour des anomalies sur-echantillonnerait justement les tranches
+       atypiques et tirerait la moyenne vers elles.
+    2. **Localiser un degat** veut au contraire du raffinement la ou le compte saute :
+       une rupture brutale entre deux tranches voisines designe un endroit precis du
+       rouleau, et c'est la qu'il faut regarder de plus pres.
+
+    D'ou deux passes, dont la seconde n'alimente JAMAIS la statistique de la premiere.
+    Le raffinement est une dichotomie, mais sur l'ECART entre voisins, pas sur une
+    racine : on coupe en deux l'intervalle ou le compte bouge le plus, tant qu'il
+    reste du budget.
+    """
+    centre = load_centre(args.name)
+    array = open_volume(args.volume, args.level)
+    depth = array.shape[0]
+    lo = args.z_min if args.z_min >= 0 else int(centre["z_min"])
+    hi = args.z_max if args.z_max >= 0 else int(centre["z_max"])
+    lo, hi = max(lo, 0), min(hi, depth - 1)
+
+    uniform = [int(round(v)) for v in np.linspace(lo, hi, args.slices)]
+    print(f"volume {array.shape} | passe UNIFORME : {len(uniform)} tranches de {lo} a {hi}")
+    reports = []
+    for z in uniform:
+        report = slice_report(array, centre, z, args)
+        if not report:
+            continue
+        reports.append(report)
+        print(f"  z={z:6d}  feuilles {report['turns_median']:4d} "
+              f"({report['turns_min']}-{report['turns_max']})  "
+              f"rayon {report['outer_radius_mm']:5.1f} mm  "
+              f"longueur {report['length_m']:5.2f} m", flush=True)
+        Path(args.out).write_text(json.dumps(
+            {"uniform": reports, "refined": []}, indent=2) + "\n")
+
+    if not reports:
+        print("erreur : aucune tranche exploitable", file=sys.stderr)
+        return 3
+
+    turns = np.array([r["turns_median"] for r in reports])
+    lengths = np.array([r["length_m"] for r in reports])
+    radii = np.array([r["outer_radius_mm"] for r in reports])
+    print()
+    print(f"feuilles  : moyenne {turns.mean():.0f}  ecart-type {turns.std():.0f}  "
+          f"({turns.min()}-{turns.max()})")
+    print(f"rayon     : moyenne {radii.mean():.1f} mm  ({radii.min():.1f}-{radii.max():.1f})")
+    print(f"LONGUEUR  : moyenne {lengths.mean():.2f} m  ecart-type {lengths.std():.2f}  "
+          f"({lengths.min():.2f}-{lengths.max():.2f})")
+    print()
+    print("⚠ La MOYENNE ne corrige pas le biais, seulement le bruit : chaque tranche")
+    print("  sous-compte ses feuilles fondues, donc toutes penchent du meme cote.")
+    print(f"⚠ Le MAXIMUM ({lengths.max():.2f} m) est le plus proche de ce que le rouleau")
+    print("  portait : une tranche abimee perd des spires, elle n'en invente pas.")
+
+    # Passe 2 : raffinement dichotomique sur l'ECART entre voisins. Tenue a part.
+    refined = []
+    if args.refine:
+        print()
+        print(f"passe de RAFFINEMENT : {args.refine} tranches, la ou le compte saute")
+        print("⚠ ces tranches n'entrent PAS dans les moyennes ci-dessus")
+        known = {r["slice"]: r["turns_median"] for r in reports}
+        for _ in range(args.refine):
+            points = sorted(known)
+            gaps = [(abs(known[b] - known[a]), a, b) for a, b in zip(points, points[1:])
+                    if b - a > 2 * args.step_deg]
+            if not gaps:
+                break
+            jump, a, b = max(gaps)
+            z = (a + b) // 2
+            report = slice_report(array, centre, z, args)
+            if not report:
+                break
+            known[z] = report["turns_median"]
+            report["bracket"] = [a, b]
+            report["neighbour_jump"] = int(jump)
+            refined.append(report)
+            print(f"  z={z:6d}  feuilles {report['turns_median']:4d}  "
+                  f"(entre {a} et {b}, ecart voisin {jump})", flush=True)
+            Path(args.out).write_text(json.dumps(
+                {"uniform": reports, "refined": refined}, indent=2) + "\n")
+
+    Path(args.out).write_text(json.dumps(
+        {"uniform": reports, "refined": refined}, indent=2) + "\n")
+    print(f"\necrit : {args.out}")
     return 0
 
 
@@ -303,6 +429,23 @@ def main() -> int:
     n.add_argument("--body-threshold", type=float, default=12.0)
     n.add_argument("--json")
     n.set_defaults(func=cmd_count)
+
+    f = sub.add_parser("profil", help="compte de feuilles le long de z (2 passes)")
+    f.add_argument("name")
+    f.add_argument("volume")
+    f.add_argument("out", help="sortie JSON")
+    f.add_argument("--level", default="0")
+    f.add_argument("--slices", type=int, default=16, help="tranches de la passe UNIFORME")
+    f.add_argument("--refine", type=int, default=0,
+                   help="tranches de raffinement, tenues HORS des moyennes")
+    f.add_argument("--z-min", type=int, default=-1)
+    f.add_argument("--z-max", type=int, default=-1)
+    f.add_argument("--reach", type=float, default=4500.0)
+    f.add_argument("--step-deg", type=int, default=10)
+    f.add_argument("--prominence", type=float, default=8.0)
+    f.add_argument("--min-gap", type=int, default=10)
+    f.add_argument("--body-threshold", type=float, default=12.0)
+    f.set_defaults(func=cmd_profile)
 
     u = sub.add_parser("deplier", help="coupe -> coordonnees polaires (spires = lignes)")
     u.add_argument("name")
