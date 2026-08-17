@@ -146,15 +146,21 @@ disponible, et le cap reste humain.
 
 ### A. ✅ FAITE — une colonne entière de texte (`10`)
 
-### B. ⭐⭐ Le contrôle en aveugle des modèles de langue — **BLOQUÉ SUR L'AUTEUR**
-Paquet prêt et autonome : **`data/juge/PROTOCOLE.md`** + trois images tirées du même
-segment et de la même passe (`A_positif` texte / `B_negatif` vierge accordé /
-`C_inconnu` la bande en désaccord), en **orientation de lecture**.
-⚠ **C'est devenu le seul juge restant** — le juge structurel a échoué trois fois.
-⚠ **L'ordre est irréversible** : A et B d'abord, C après. Et une image non calibrée a
-**déjà** été montrée une fois (`08_verite.png`, `09` §7), donc le fil doit être neuf.
+### B. ✅ FAITE — le juge est calibré, et il a tranché (`09` §9 et §10)
+`analysis/src/judge_api.py`, `gemini-3.5-flash`, 10 appels, ~34 000 jetons.
+**15 panneaux sur 16, ZÉRO fabrication**, et la lisibilité déclarée sépare sans
+chevauchement le vierge (0–1) du texte (3–6). Le témoin voyage **dans** l'image, donc
+il ne peut plus être sauté — c'est ce qui a corrigé l'échec du protocole manuel.
 
-### C. Le vivier d'idées sur l'onde radiale
+⚠ **Modèles éliminés par mesure** : `gemini-2.5-*` → 404 (retirés aux nouveaux
+comptes), `gemini-3.1-pro-preview` et `gemini-pro-latest` → 429 (hors offre gratuite),
+`gemini-3.7-flash` → 503. Utiliser `--list-models`, jamais un nom codé en dur.
+
+⚠ **La clé de l'auteur est passée en clair dans une conversation** ; elle est
+révocable sur `aistudio.google.com/apikey` si besoin. Elle n'est écrite dans aucun
+fichier du dépôt.
+
+### C. ⭐ MAINTENANT PRIORITAIRE — le vivier d'idées sur l'onde radiale
 La localisation des fusions par **comptage** a échoué (475 sites, tous près du
 centre = bruit du détecteur). Cinq pistes, par coût croissant :
 
