@@ -41,6 +41,8 @@ Papiers primaires repérés, à lire :
 | 1.11 | Espacement selon le rayon | **158 µm au cœur → 203 µm dehors** (+28 %, monotone sur 5 tranches) | ici |
 | 1.12 | Vérification des données Scroll 1 **par le comportement** | triangles et contacts diagonale 0 **exacts** vs publication | `07` |
 | 1.13 | Métrique de proximité à longueur contrôlée (3 traces, ~7,8 tours) | ordonne correctement : **0,09 % → 0,15 % → 0,37 %** selon les croisements | `07` |
+| 1.15 | ⭐ **iGPU Arc utilisable depuis WSL2** | **×4,5** (104 → 23 ms/fenêtre), sortie identique au CPU à **4,9e-6** (bruit fp32) | ici |
+| 1.16 | Pas de balayage 21 vs 32 | **pas gratuit** : corr. 0,941, mais **17,9 %** de désaccord au seuil médian, 3,0 % sur l'encre franche | ici |
 | 1.14 | ⭐ La métrique **survit à la réparation** | recensement 11 673 → **0** ; métrique 0,37 → **0,38 %** ; témoin sain **0,09 %** | `07` |
 
 ## 1bis. ⭐ LE CAP, fixé le 2026-08-17
@@ -67,19 +69,29 @@ complète.
 | aplatissement | ✅ déjà fait en amont (`_flatboi`) | — |
 | **rendu** en couches | ✅ **déjà publié** — `dl.ash2txt.org`, accès libre | rien : 31 couches (15-45), 17 Go, téléchargées |
 | **détection d'encre** | ✅ modèle GP chargé, 38 M param. | rien : **104 ms/fenêtre** mesuré sur CPU |
-| **inférence sur une région** | 🔄 | 4 cm² en 29 min (pas 21) ; segment entier en 18 h |
+| **inférence sur une région** | ✅ outil écrit, GPU câblé | 4 cm² en **5,6 min** ; segment entier en **3,4 h** |
 | jugement | ❌ | un papyrologue — et le contrôle en aveugle des modèles de langue |
 
-⚠ **Contrainte matérielle mesurée** : **aucun GPU utilisable**. Core Ultra 7 165H,
-22 cœurs, 31 Gio. Le **NPU n'est pas exposé à WSL2** (`/dev/accel` absent) ; la
-passerelle GPU-PV (`/dev/dxg`) est là mais le runtime de calcul Intel n'est pas
-installé. **OpenVINO ne convertit pas ce modèle** (einsum des rotary embeddings,
-échec en direct comme via ONNX), donc ni GPU ni NPU ne lui sont accessibles par
-cette voie.
+### Matériel : l'iGPU Arc EST utilisable, le NPU non
 
-Réglage CPU mesuré : **16 fils, lot 4 → 104 ms/fenêtre** (contre 121 au départ,
-−14 %). ⚠ 22 fils s'effondre à 734 ms — sur-souscription. Précédent rassurant :
-`vesuvius-automesh` a produit 279 cm² vérifiés *« zero GPU »*.
+Core Ultra 7 165H, 22 cœurs, 31 Gio.
+
+| voie | état |
+|---|---|
+| **iGPU Arc via `torch 2.9.1+xpu`** | ✅ **×4,5**, sortie identique (4,9e-6) |
+| NPU | ❌ **non exposé à WSL2** (`/dev/accel` absent) |
+| OpenVINO | ❌ ne convertit pas ce modèle (einsum des rotary embeddings) |
+| CPU seul | 104 ms/fenêtre (16 fils, lot 4) |
+
+⚠ **Ce qui a débloqué le GPU** : `intel-opencl-icd libze-intel-gpu1 libze1`. Le nom
+`intel-level-zero-gpu` n'existe pas sous Ubuntu 26.04, et apt **annule toute la
+transaction** sur un nom inconnu — d'où un premier essai où rien n'était installé.
+Le GPU fonctionne **sans `/dev/dri`**, par `/dev/dxg`.
+
+⚠ 22 fils CPU s'effondre à 734 ms/fenêtre — sur-souscription.
+
+**Coût de l'inférence, au pas 21 (celui de la référence)** : 4 cm² en **5,6 min**,
+segment entier en **3,4 h**.
 
 ### ⚠ Le contrôle sans lequel la passe ne vaut rien
 
