@@ -257,3 +257,46 @@ qu'un Progress Prize récompense.
    un témoin apparié et un cas négatif.
 5. **Mesurer d'abord, expliquer ensuite.** Trois fois cette semaine, la lecture du
    code a produit une hypothèse fausse qu'un instrument a corrigée.
+
+---
+
+## 7. L'onde radiale : ce qui marche, ce qui ne marche pas
+
+2026-08-17. Idée de l'auteur : *« c'est envoyer une onde traversant toutes les
+couches depuis le centre »* — chaque mur franchi est une feuille. Mesurable
+**directement dans le volume**, donc sans dépendre d'aucun traçage : ça donne la
+vérité contre laquelle juger les traçages.
+
+### ✅ Ce qui marche
+
+Centre **dérivé de la trace** (celui qui rend l'angle monotone le long du
+déroulement, monotonie mesurée à **1,000**) — l'ombilic publié par
+ThaumatoAnakalyptor est dans un repère qui ne correspond pas à ces traces, et
+dériver se vérifie là où lire un fichier se suppose.
+
+Sur PHerc0172, une coupe, 36 rayons :
+
+| grandeur | valeur |
+|---|---|
+| feuilles traversées | **158 en médiane** (120 à 194) |
+| espacement entre feuilles | **136 à 158 µm** |
+| rayon extérieur | 22,7 mm |
+| **longueur estimée du papyrus** | **11,2 m** |
+
+⚠ **Borne supérieure** : deux feuilles fondues comptent pour une, donc le vrai
+nombre de spires est **supérieur**. Et une seule coupe ne dit rien de la variation
+le long du rouleau.
+
+### ❌ Ce qui ne marche pas : la localisation des fusions par déficit de compte
+
+Idée suivante de l'auteur : là où l'onde traverse le mauvais nombre de feuilles, il
+y a une anomalie, donc on sait **où aller regarder**. Le principe est juste.
+
+**L'implémentation ne tient pas** : 475 sites sur 180 rayons, soit 2,6 par rayon,
+et **tous concentrés entre 0,5 et 2 mm de rayon** — près du centre, là où les spires
+sont les plus serrées et où la détection de crêtes décroche. Ce n'est pas une carte
+de fusions, c'est une carte des endroits où le compteur est peu fiable.
+
+**Diagnostic** : compter des crêtes indépendamment à chaque angle jette
+l'information qui compte — une feuille est une **courbe continue** en (angle,
+rayon). Il faut la suivre, pas la recompter.
