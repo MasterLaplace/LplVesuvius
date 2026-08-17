@@ -32,6 +32,16 @@ import numpy as np
 VOXEL_UM = 7.91
 """Taille du voxel en micrometres, pour les volumes 7,910 um de la campagne 2024."""
 
+# ⚠⚠ « LONGUEUR » DESIGNE TROIS CHOSES DIFFERENTES ICI, et les confondre a deja
+# produit un malentendu. Mesures sur PHerc0172 :
+#
+#   longueur AXIALE   164 mm    le rouleau pose debout -- son etendue en z
+#   DIAMETRE           48 mm    2 x le rayon exterieur, dans une coupe
+#   papyrus DEROULE  ~11-14 m   la spirale mise a plat
+#
+# Ce fichier dit « length_m » pour la TROISIEME. L'axiale se lit dans la forme du
+# volume, pas ici.
+
 SHEET_UM = 40.0
 """Epaisseur typique d'une feuille de papyrus. Sert a fixer le lissage : on lisse a
 l'echelle d'une feuille pour ne pas compter le grain du materiau comme des murs."""

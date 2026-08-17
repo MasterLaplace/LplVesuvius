@@ -1,0 +1,25 @@
+{
+  "uniform": [
+    {
+      "slice": 1336,
+      "rays": 36,
+      "turns_median": 176,
+      "turns_min": 130,
+      "turns_max": 200,
+      "outer_radius_mm": 25.09052,
+      "spacing_um_median": 144.981675035868,
+      "length_m": 13.87305802198761
+    },
+    {
+      "slice": 1929,
+      "rays": 36,
+      "turns_median": 167,
+      "turns_min": 132,
+      "turns_max": 211,
+      "outer_radius_mm": 23.89611,
+      "spacing_um_median": 141.73652777777778,
+      "length_m": 12.536997885437389
+    }
+  ],
+  "refined": []
+}
