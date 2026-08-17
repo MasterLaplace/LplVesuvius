@@ -344,7 +344,7 @@ def persistent_sites(ratios: np.ndarray, radii: np.ndarray, columns: np.ndarray,
 
 def doubling_density(ratios, radii, columns, doubling: float,
                      radial_cell: float, angular_cell: int,
-                     min_radius: float = 300.0) -> tuple:
+                     min_radius: float = 300.0, voxel_um: float = VOXEL_UM) -> tuple:
     """Densite de marquage par cellule (rayon x angle) -- sans chainage ni persistance.
 
     ⚠⚠ **Pourquoi ceci remplace le chainage.** Chainer des marques exigeait deux
@@ -380,14 +380,14 @@ def doubling_density(ratios, radii, columns, doubling: float,
     enough = total >= 20          # une cellule vide ne rapporte pas un taux
     rate = np.full(total.shape, np.nan)
     rate[enough] = hits[enough] / total[enough]
-    return rate, total, (c_bin.max() + 1), radial_cell, angular_cell
+    return rate, total, (c_bin.max() + 1), radial_cell, angular_cell, voxel_um
 
 
 def cmd_density(args) -> int:
     polar = np.load(args.polar)
     ratios, radii, columns = gap_map(polar, args.prominence, args.min_gap,
                                      args.smooth, args.band)
-    rate, total, width, rcell, acell = doubling_density(
+    rate, total, width, rcell, acell, voxel = doubling_density(
         ratios, radii, columns, args.doubling, args.radial_cell, args.angular_cell,
         args.min_radius)
     print(f"⚠ coeur exclu sous r = {args.min_radius:.0f} voxels "
@@ -411,20 +411,20 @@ def cmd_density(args) -> int:
           f"({anomalous.sum() / max(valid.sum(), 1) * 100:.2f} %)")
     if anomalous.any():
         idx = np.flatnonzero(anomalous)
-        rr = (idx // width) * rcell * VOXEL_UM / 1000.0
+        rr = (idx // width) * rcell * voxel / 1000.0
         cc = (idx % width) * acell
         inner = int((rr < np.median(rr)).sum())
         print(f"  rayon : {rr.min():.1f} a {rr.max():.1f} mm (median {np.median(rr):.1f})")
         print(f"  repartition : {inner} en deca du rayon median, {len(rr) - inner} au-dela")
         top = idx[np.argsort(-rate[idx])][:8]
         for k in top:
-            print(f"    r={(k // width) * rcell * VOXEL_UM / 1000:5.1f} mm  "
+            print(f"    r={(k // width) * rcell * voxel / 1000:5.1f} mm  "
                   f"colonne ~{(k % width) * acell:6d}  "
                   f"taux {rate[k] * 100:5.1f} %  ({int(total[k])} ecarts)")
         if args.json:
             Path(args.json).write_text(json.dumps({
                 "background_rate": background, "threshold": threshold,
-                "cells": [{"radius_mm": float((int(k) // width) * rcell * VOXEL_UM / 1000),
+                "cells": [{"radius_mm": float((int(k) // width) * rcell * voxel / 1000),
                            "column": int((int(k) % width) * acell),
                            "rate": float(rate[k]), "gaps": int(total[k])} for k in idx],
             }, indent=2) + "\n")

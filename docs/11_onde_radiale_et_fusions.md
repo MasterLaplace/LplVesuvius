@@ -384,3 +384,39 @@ uv run python src/excision/fusion_scan.py PHerc0172 "$VOL" ../docs/fusions_z_017
 ```
 
 avec `VOL=s3://vesuvius-challenge-open-data/PHerc0172/volumes/20241024131839-7.910um-53keV-masked.zarr`.
+
+
+---
+
+## 9. Le niveau 2 de la pyramide : un CRIBLE, pas un substitut
+
+`pyramid.py` a établi que le niveau 2 conserve **89 %** des murs pour **33 Gio au lieu
+de 2100** — un facteur **64**. `fusion_scan` sait maintenant y travailler : toutes les
+longueurs (portée, rayon minimal, hauteur de cellule, bande, écart minimal, **indice de
+tranche et coordonnées du centre**) suivent la réduction, et le voxel de conversion en
+millimètres est devenu un paramètre.
+
+⚠ **Deux conversions manquaient et elles échouent différemment** : l'indice de tranche
+rend une erreur franche (index hors bornes), le **centre** rendrait une erreur
+**silencieuse** — la mesure tournerait autour d'un point quatre fois trop loin sans
+rien signaler. C'est celle-là qu'il faut craindre.
+
+**Résultat au niveau 2**, mêmes coupes qu'au niveau 0 :
+
+| | niveau 0 | niveau 2 |
+|---|---:|---:|
+| taux de fond | 6,4–6,6 % | **10,0–10,5 %** |
+| cellules anormales par coupe | 0–4 | 0–3 |
+| rayons des sites | **17–19 mm** | **5,2–22,8 mm** |
+| coïncidences inter-coupes | 7,0 % (hasard 1,1 %) | **30,6 %** (hasard 4,3 %) |
+| verdict | tiennent | **tiennent** |
+
+⚠⚠ **Les deux niveaux ne trouvent PAS les mêmes sites.** Le fond monte de moitié à
+résolution grossière — deux feuilles voisines s'y confondent plus souvent, donc l'écart
+« double » plus facilement — et les sites retenus se dispersent sur tout le rayon au
+lieu de se grouper vers 17 mm.
+
+**Donc le niveau 2 est un crible, pas un substitut** : il vaut pour balayer le rouleau
+entier à 1/64 du coût et sortir une liste de régions à regarder, et chaque candidat doit
+être **confirmé au niveau 0**. Le prendre pour une mesure équivalente ferait publier des
+sites que la pleine résolution ne voit pas.

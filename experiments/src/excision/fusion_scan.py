@@ -27,13 +27,20 @@ stable a 6,4-7,0 % sur toute la hauteur, donc une cellule a 20 % est a une vingt
 d'ecarts-types du fond. Ce n'est pas du bruit d'echantillonnage ; c'est leur
 persistance qui restait a tester.
 
-⚠⚠ **CE FICHIER NE SAIT PAS ENCORE TRAVAILLER AU-DELA DU NIVEAU 0.** `fusions.py`
-convertit ses rayons en millimetres avec `VOXEL_UM = 7,91` en dur : a un niveau de
-pyramide reduit, toute distance rapportee serait fausse d'un facteur 2 par niveau.
-C'est exactement le defaut corrige dans `radial.py compter` le meme jour. Tant que la
-mise a l'echelle n'est pas faite ici, `--level` autre que 0 rend des chiffres
-ininterpretables -- et le gain enorme que `pyramid.py` vient d'etablir (89 % des murs
-au niveau 2, pour 33 Gio au lieu de 2100) reste inaccessible a cette mesure.
+⚠⚠ **TOUT CE QUI EST EN VOXELS DOIT SUIVRE LE NIVEAU DE PYRAMIDE.** Portee, rayon
+minimal, hauteur de cellule, bande de normalisation, ecart minimal entre murs : chacun
+est une longueur, donc chacun se divise par la reduction du niveau. Et le voxel avec
+lequel `fusions.py` convertit en millimetres devient un PARAMETRE au lieu d'une
+constante -- sans quoi toute distance rapportee serait fausse d'un facteur 2 par
+niveau, ce qui est exactement le defaut corrige dans `radial.py compter` le meme jour.
+
+Ce qui NE se convertit pas : l'echantillonnage angulaire, qui est fixe par la
+circonference exterieure exprimee **en voxels du niveau** -- donc il se reduit tout
+seul et les colonnes ne sont pas comparables d'un niveau a l'autre. Les rayons, eux,
+le sont, parce qu'ils sont rapportes en millimetres.
+
+`pyramid.py` a etabli que le niveau 2 conserve **89 %** des murs pour **33 Gio au lieu
+de 2100** : c'est ce qui rend le balayage du rouleau ENTIER envisageable.
 
 Compose `radial.deplier` et `fusions.densite`, qui ont chacun leur propre temoin.
 """
@@ -62,15 +69,15 @@ def anomalous_cells(polar: np.ndarray, args) -> tuple:
     """Cellules anormales d'une coupe depliee, et le taux de fond qui les qualifie."""
     ratios, radii, columns = gap_map(polar, args.prominence, args.min_gap,
                                      args.smooth, args.band)
-    rate, total, width, rcell, acell = doubling_density(
+    rate, total, width, rcell, acell, voxel = doubling_density(
         ratios, radii, columns, args.doubling, args.radial_cell,
-        args.angular_cell, args.min_radius)
+        args.angular_cell, args.min_radius, args.voxel_um)
     valid = np.isfinite(rate)
     background = float(np.nanmedian(rate))
     high = float(np.nanpercentile(rate[valid], 90))
     threshold = background + args.excess * (high - background)
     index = np.flatnonzero(valid & (rate > threshold))
-    cells = [{"radius_mm": float((int(k) // width) * rcell * VOXEL_UM / 1000.0),
+    cells = [{"radius_mm": float((int(k) // width) * rcell * voxel / 1000.0),
               "column": int((int(k) % width) * acell),
               "rate": float(rate[k])} for k in index]
     return cells, background, int(valid.sum())
@@ -152,16 +159,29 @@ def main() -> int:
     parser.add_argument("--seed", type=int, default=0)
     args = parser.parse_args()
 
-    if args.level != "0":
-        print("erreur : seul le niveau 0 est correct aujourd'hui (voir l'en-tete du "
-              "fichier : les rayons sont convertis avec un voxel code en dur)",
-              file=sys.stderr)
-        return 2
     centre = load_centre(args.name)
     array = open_volume(args.volume, args.level)
+    scale = 20820.0 / array.shape[0]
+    if scale != 1.0:
+        args.voxel_um = VOXEL_UM * scale
+        for name in ("reach", "min_radius", "radial_cell", "band"):
+            setattr(args, name, getattr(args, name) / scale)
+        args.min_gap = max(2, int(round(args.min_gap / scale)))
+        args.smooth = max(3, int(round(args.smooth / scale)))
+        print(f"⚠ niveau {args.level} : reduction x{scale:.0f}, "
+              f"voxel {args.voxel_um:.1f} um — longueurs converties")
+        # ⚠ L'INDICE DE TRANCHE ET LE CENTRE sont aussi des longueurs. Les oublier
+        # rend une erreur franche (index hors bornes) pour z, mais une erreur
+        # SILENCIEUSE pour le centre : la mesure tournerait autour d'un point
+        # quatre fois trop loin, sans rien signaler.
+        centre = dict(centre)
+        centre["cx"] /= scale
+        centre["cy"] /= scale
+    else:
+        args.voxel_um = VOXEL_UM
     lo = args.z_min if args.z_min >= 0 else int(centre["z_min"])
     hi = args.z_max if args.z_max >= 0 else int(centre["z_max"])
-    zs = [int(round(v)) for v in np.linspace(lo, hi, args.slices)]
+    zs = [int(round(v / scale)) for v in np.linspace(lo, hi, args.slices)]
     print(f"volume {array.shape} | {len(zs)} coupes de {lo} a {hi}")
 
     per_slice, records = [], []
@@ -169,13 +189,13 @@ def main() -> int:
         polar = unwrap_polar(array[z], centre["cx"], centre["cy"], args.reach)
         cells, background, valid = anomalous_cells(polar, args)
         per_slice.append(cells)
-        records.append({"slice": z, "background_rate": background,
+        records.append({"slice": int(z * scale), "background_rate": background,
                         "valid_cells": valid, "anomalous": cells})
         radii = [c["radius_mm"] for c in cells]
-        print(f"  z={z:6d}  fond {background * 100:4.1f} %  "
+        print(f"  z={int(z * scale):6d}  fond {background * 100:4.1f} %  "
               f"anormales {len(cells):3d}  "
               f"rayons {min(radii):.1f}-{max(radii):.1f} mm" if cells
-              else f"  z={z:6d}  fond {background * 100:4.1f} %  anormales 0", flush=True)
+              else f"  z={int(z * scale):6d}  fond {background * 100:4.1f} %  anormales 0", flush=True)
         Path(args.out).write_text(json.dumps({"slices": records}, indent=2) + "\n")
 
     observed = colocation(per_slice, args.match_radial_mm, args.match_angular)
