@@ -120,6 +120,11 @@ ce que `SourceV1` existe pour porter.
 
 ---
 
+## Reprise de session
+
+**[`HANDOFF.md`](HANDOFF.md)** — etat complet, processus en cours, pieges, et la suite
+priorisee. A lire en premier si vous reprenez ce chantier.
+
 ## Par ou commencer
 
 | document | ce qu'il contient |
