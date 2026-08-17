@@ -5,10 +5,26 @@ Document de passation. **À lire en entier avant de reprendre**, puis suivre
 
 ---
 
-## 1. CE QUI TOURNE — rien (au 2026-08-17, 17 h 40)
+## 1. ⚠ CE QUI TOURNE (au 2026-08-17, 20 h)
 
-La passe sur le segment entier est **terminée** : 99 918 fenêtres, 38,5 min, 23 ms
-par fenêtre. Résultats dans `docs/10_segment_complet.md`.
+| quoi | sortie | attendu |
+|---|---|---|
+| `radial.py profil` — 20 tranches + 6 raffinées | `docs/profil_z_0172.json` | ~3 h (6/20 faites) |
+| `fusion_scan.py` — 5 coupes | `docs/fusions_z_0172.json` | ~50 min |
+
+```bash
+# juger par ARTEFACT, pas par notification
+python3 -c "import json;d=json.load(open('docs/profil_z_0172.json'));print(len(d['uniform']),'/20')"
+cat docs/fusions_z.log
+```
+
+⚠⚠ **Piège payé trois fois aujourd'hui** : les notifications « tâche terminée »
+concernent le **wrapper**, pas le travail `nohup`. Et un log vide ne veut pas dire
+« rien ne se passe » — Python bufferise sa sortie quand elle est redirigée. **Juger
+sur un fichier de résultat, jamais sur une notification ni sur un log vide.**
+
+La passe sur le segment entier est **terminée** : 99 918 fenêtres, 38,5 min.
+Résultats dans `docs/10_segment_complet.md`.
 
 ⚠ **Le PID de la table précédente (`537466`) était le WRAPPER bash**, pas le
 processus Python (`537472`). Et son log restait vide non parce que rien ne se
@@ -46,6 +62,7 @@ se juge aussi sur le fait qu'elle soit **soumissionnable**.
 | `08` | ⭐ **la passe complète** : AUC 0,919 hors entraînement, lettres grecques |
 | `09` | protocole de jugement par modèle, et **trois** juges mécaniques en échec |
 | **`10`** | ⭐ **le segment entier** : AUC 0,925 sur 44,7 Mpx, 9,2 cm de grec lisible |
+| **`11`** | ⭐ **onde radiale, dépliage polaire, 4 candidats de fusion** — et 3 échecs conservés |
 
 ## 4. L'outillage monté, et comment le relancer
 
@@ -160,7 +177,19 @@ comptes), `gemini-3.1-pro-preview` et `gemini-pro-latest` → 429 (hors offre gr
 révocable sur `aistudio.google.com/apikey` si besoin. Elle n'est écrite dans aucun
 fichier du dépôt.
 
-### C. ⭐ MAINTENANT PRIORITAIRE — le vivier d'idées sur l'onde radiale
+### C. 🔄 EN COURS — l'onde radiale (voir `11`, bien plus détaillé)
+
+**Acquis** : le code perdu est récupéré et vérifié ; le dépliage polaire marche ;
+**4 candidats de fusion** groupés vers 17 mm sur un secteur de 50°, avec la coupe du
+cœur validée par mesure (les sites internes suivaient la coupe = artefacts).
+
+**En cours** : tiennent-ils le long de *z* ? Un dégât physique occupe une hauteur.
+
+**Reste du vivier** : (4) revoir les 4 sites à 2,4 µm ESRF — c'est maintenant une
+liste de quatre endroits au lieu d'un rouleau ; (5) le sens des fibres comme
+séparateur, problème ouvert nº5, coût élevé et valeur la plus haute.
+
+<details><summary>vivier d'origine, conservé</summary>
 La localisation des fusions par **comptage** a échoué (475 sites, tous près du
 centre = bruit du détecteur). Cinq pistes, par coût croissant :
 
@@ -175,6 +204,8 @@ centre = bruit du détecteur). Cinq pistes, par coût croissant :
    défaut de résolution ;
 5. **Le sens des fibres comme séparateur** — problème ouvert nº5, discriminant
    *physique*. Coût élevé, valeur la plus haute.
+
+</details>
 
 ### D. Boucler `07` sur `08`
 *Une trace à forte proximité anormale donne-t-elle une encre moins lisible ?*
@@ -198,7 +229,14 @@ Tous les chiffres de `07` et `08` viennent de Scroll 1.
 5. **Vérifier l'alignement avant toute comparaison d'images** : étiquettes et couches
    diffèrent en taille (remplissage à des multiples de 512). Un décalage produit un
    chiffre parfaitement faux.
-6. **Un chiffre emprunté n'est pas une mesure** : le « 300 µm entre spires » venait
+6. ⚠⚠ **Un chiffre publié dont le calcul n'est pas dans l'arbre n'est pas un
+   résultat, c'est une anecdote.** Payé le 2026-08-17 : l'onde radiale (158 feuilles,
+   11,2 m) avait été lancée en `python -c` et a dû être récupérée du transcript de
+   session. Aucune mesure qui entre dans un document ne reste en ligne de commande.
+7. **Une idée testée et écartée est un actif, pas un déchet** — à condition que la
+   *raison* soit écrite. Quatre formulations des fusions, trois échecs, et c'est le
+   troisième échec qui a désigné la méthode qui marche.
+8. **Un chiffre emprunté n'est pas une mesure** : le « 300 µm entre spires » venait
    du README d'un autre rouleau et a produit une conclusion fausse.
 7. **`aws s3 cp --include` énumère TOUT le préfixe** : 11 M de clés et 20 To lus pour
    extraire 400 Mo. Préférer les couches déjà publiées.
