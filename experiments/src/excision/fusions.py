@@ -244,19 +244,279 @@ def cmd_run(args) -> int:
     return 0
 
 
+# ---------------------------------------------------------------------------
+# La methode vers laquelle les trois refutations convergent : ne rien suivre.
+# ---------------------------------------------------------------------------
+
+def gap_map(polar: np.ndarray, prominence: float, min_gap: int, smooth: int,
+            band: int = 400) -> tuple:
+    """Ecart entre murs voisins, colonne par colonne, NORMALISE localement.
+
+    ⚠ Pourquoi cette mesure remplace le suivi. Trois hypotheses sur la fragmentation
+    du tracker ont ete posees et **les trois refutees** (affectation globale : pire ;
+    pistes en sursis : innocentes ; detecteur : 92 % des murs retrouves a moins de
+    2 voxels). La cause reelle mesuree : 125 murs sur 126 sont apparies a chaque
+    colonne, donc la couverture est quasi parfaite et c'est l'IDENTITE des pistes qui
+    churne. Les « fusions » comptees comme des morts de piste etaient des changements
+    d'etiquette.
+
+    La signature physique, elle, ne demande aucune identite : **deux feuilles soudees
+    laissent un ecart double**. Un ecart est local, il se mesure dans une colonne
+    unique, et il ne depend d'aucun appariement entre colonnes.
+
+    ⚠ **Normalise par l'espacement LOCAL et jamais par un seuil absolu.** L'espacement
+    entre feuilles varie d'un facteur trois selon l'endroit (mesure : 158 um pres du
+    coeur, 203 um vers l'exterieur), donc un seuil en micrometres attraperait le coeur
+    et raterait le bord. La bande de normalisation est un voisinage en RAYON, pas la
+    colonne entiere, pour la meme raison.
+    """
+    heights, widths = polar.shape
+    ratios, radii, columns = [], [], []
+    for column in range(widths):
+        found = ridges(polar[:, column], prominence, min_gap, smooth)
+        if found.size < 4:
+            continue
+        gaps = np.diff(found).astype(np.float64)
+        middles = (found[:-1] + found[1:]) / 2.0
+        for gap, middle in zip(gaps, middles):
+            near = np.abs(middles - middle) <= band
+            local = np.median(gaps[near])
+            if local <= 0:
+                continue
+            ratios.append(gap / local)
+            radii.append(middle)
+            columns.append(column)
+    return (np.asarray(ratios), np.asarray(radii), np.asarray(columns))
+
+
+def persistent_sites(ratios: np.ndarray, radii: np.ndarray, columns: np.ndarray,
+                     doubling: float, persistence: int, radial_window: float,
+                     angular_window: int = 300) -> list[dict]:
+    """Regrouper les ecarts doubles en SITES : contigus en rayon ET en angle.
+
+    ⚠⚠ **Une premiere version ne groupait que par le rayon**, et rendait des « sites »
+    couvrant les colonnes 0 a 18 849, c'est-a-dire la circonference entiere. Ce n'etait
+    pas un endroit, c'etait un *rayon ou l'ecart double souvent* — deux choses
+    differentes, et seule la seconde se va verifier au microscope.
+
+    Une soudure occupe une **longueur d'arc**, donc un site doit etre borne dans les
+    deux directions. Le regroupement est un chainage : une marque rejoint un site si
+    elle est proche en rayon **et** a moins de `angular_window` colonnes de la derniere
+    marque du site. Une trouee angulaire plus large ouvre un site distinct — deux
+    soudures au meme rayon a deux endroits du rouleau sont deux evenements.
+
+    ⚠ La persistance separe une soudure d'un rate de detecteur : un ecart double sur
+    une colonne est du bruit, sur trois cents colonnes c'est un evenement. C'est
+    exactement ce qui manquait a la tentative par comptage.
+    """
+    flagged = ratios >= doubling
+    if not flagged.any():
+        return []
+    r_flag = radii[flagged]
+    c_flag = columns[flagged]
+    order = np.lexsort((c_flag, r_flag))
+    r_flag, c_flag = r_flag[order], c_flag[order]
+
+    sites: list[dict] = []
+    current_r: list[float] = []
+    current_c: list[int] = []
+
+    def close(marks_r: list[float], marks_c: list[int]) -> None:
+        if len(marks_c) >= persistence:
+            sites.append({
+                "radius": float(np.median(marks_r)),
+                "column_first": int(min(marks_c)),
+                "column_last": int(max(marks_c)),
+                "arc_columns": int(max(marks_c) - min(marks_c) + 1),
+                "marks": len(marks_c),
+            })
+
+    for radius, column in zip(r_flag, c_flag):
+        if current_r and (abs(radius - current_r[-1]) > radial_window
+                          or column - current_c[-1] > angular_window):
+            close(current_r, current_c)
+            current_r, current_c = [], []
+        current_r.append(float(radius))
+        current_c.append(int(column))
+    close(current_r, current_c)
+    return sites
+
+
+def doubling_density(ratios, radii, columns, doubling: float,
+                     radial_cell: float, angular_cell: int,
+                     min_radius: float = 300.0) -> tuple:
+    """Densite de marquage par cellule (rayon x angle) -- sans chainage ni persistance.
+
+    ⚠⚠ **Pourquoi ceci remplace le chainage.** Chainer des marques exigeait deux
+    parametres qui se battaient : la persistance demandait 200 marques par groupe et
+    la fenetre angulaire en plafonnait les groupes a 164, donc zero site. Les regler
+    l'un contre l'autre jusqu'a voir apparaitre des sites serait choisir un nombre
+    pour que le reglage du jour passe.
+
+    La cause mesuree est que le marquage est **intermittent** : ecart median de 6
+    colonnes entre deux marques voisines, mais q90 a 891. Un flag binaire trop bruite
+    ne se chaine pas. Une DENSITE, elle, absorbe l'intermittence par construction --
+    ce qu'on demande n'est plus « ces marques se touchent-elles » mais « cette region
+    double-t-elle ses ecarts bien plus souvent qu'ailleurs ».
+
+    ⚠ Et le seuil reste RELATIF : une cellule est anormale par rapport a la densite de
+    fond du meme relevé, jamais par rapport a un nombre choisi d'avance.
+    """
+    # ⚠⚠ LE COEUR EST EXCLU, et ce n'est pas un reglage. Au rayon r, deux colonnes
+    # voisines de l'image depliee echantillonnent des points distants de
+    # 2*pi*r/colonnes voxels : a r = 100 cela fait 0,03 voxel, donc une trentaine de
+    # colonnes lisent LE MEME PIXEL. Les ecarts y sont degeneres par construction du
+    # depliage, pas bruites -- et sans cette coupe la mesure redecouvre exactement le
+    # mode d'echec de la tentative par comptage (475 sites, tous pres du centre).
+    # Le seuil est celui ou une colonne avance d'au moins un dixieme de voxel.
+    usable = radii >= min_radius
+    ratios, radii, columns = ratios[usable], radii[usable], columns[usable]
+    flagged = ratios >= doubling
+    r_bin = (radii / radial_cell).astype(np.int64)
+    c_bin = (columns / angular_cell).astype(np.int64)
+    key = r_bin * (c_bin.max() + 1) + c_bin
+    total = np.bincount(key)
+    hits = np.bincount(key, weights=flagged.astype(np.float64))
+    enough = total >= 20          # une cellule vide ne rapporte pas un taux
+    rate = np.full(total.shape, np.nan)
+    rate[enough] = hits[enough] / total[enough]
+    return rate, total, (c_bin.max() + 1), radial_cell, angular_cell
+
+
+def cmd_density(args) -> int:
+    polar = np.load(args.polar)
+    ratios, radii, columns = gap_map(polar, args.prominence, args.min_gap,
+                                     args.smooth, args.band)
+    rate, total, width, rcell, acell = doubling_density(
+        ratios, radii, columns, args.doubling, args.radial_cell, args.angular_cell,
+        args.min_radius)
+    print(f"⚠ coeur exclu sous r = {args.min_radius:.0f} voxels "
+          f"({args.min_radius * VOXEL_UM / 1000:.1f} mm) : depliage degenere")
+    valid = np.isfinite(rate)
+    background = float(np.nanmedian(rate))
+    spread = float(np.nanpercentile(rate[valid], 90) - background)
+    print(f"polaire {polar.shape}  |  {ratios.size} ecarts, "
+          f"{int(valid.sum())} cellules de {rcell:.0f} vx x {acell} colonnes")
+    print(f"taux de doublement : fond {background * 100:.1f} %  "
+          f"q90 {np.nanpercentile(rate[valid], 90) * 100:.1f} %  "
+          f"q99 {np.nanpercentile(rate[valid], 99) * 100:.1f} %  "
+          f"max {np.nanmax(rate) * 100:.1f} %")
+    # ⚠ Le seuil est exprime en ECARTS AU FOND, mesures sur ce releve, et non en
+    # pourcentage absolu : le fond depend du detecteur et du rouleau.
+    threshold = background + args.excess * spread
+    anomalous = valid & (rate > threshold)
+    print(f"seuil : fond + {args.excess:.1f} x (q90 - fond) = {threshold * 100:.1f} %")
+    print()
+    print(f"cellules ANORMALES : {int(anomalous.sum())} sur {int(valid.sum())} "
+          f"({anomalous.sum() / max(valid.sum(), 1) * 100:.2f} %)")
+    if anomalous.any():
+        idx = np.flatnonzero(anomalous)
+        rr = (idx // width) * rcell * VOXEL_UM / 1000.0
+        cc = (idx % width) * acell
+        inner = int((rr < np.median(rr)).sum())
+        print(f"  rayon : {rr.min():.1f} a {rr.max():.1f} mm (median {np.median(rr):.1f})")
+        print(f"  repartition : {inner} en deca du rayon median, {len(rr) - inner} au-dela")
+        top = idx[np.argsort(-rate[idx])][:8]
+        for k in top:
+            print(f"    r={(k // width) * rcell * VOXEL_UM / 1000:5.1f} mm  "
+                  f"colonne ~{(k % width) * acell:6d}  "
+                  f"taux {rate[k] * 100:5.1f} %  ({int(total[k])} ecarts)")
+        if args.json:
+            Path(args.json).write_text(json.dumps({
+                "background_rate": background, "threshold": threshold,
+                "cells": [{"radius_mm": float((int(k) // width) * rcell * VOXEL_UM / 1000),
+                           "column": int((int(k) % width) * acell),
+                           "rate": float(rate[k]), "gaps": int(total[k])} for k in idx],
+            }, indent=2) + "\n")
+            print(f"\necrit : {args.json}")
+    return 0
+
+
+def cmd_gaps(args) -> int:
+    polar = np.load(args.polar)
+    ratios, radii, columns = gap_map(polar, args.prominence, args.min_gap,
+                                     args.smooth, args.band)
+    print(f"polaire {polar.shape}  |  {ratios.size} ecarts mesures")
+    print(f"ecart / espacement local : median {np.median(ratios):.2f}  "
+          f"q90 {np.percentile(ratios, 90):.2f}  q99 {np.percentile(ratios, 99):.2f}")
+    print(f"fraction >= {args.doubling:.1f} (ecart double) : "
+          f"{(ratios >= args.doubling).mean() * 100:.2f} %")
+    sites = persistent_sites(ratios, radii, columns, args.doubling,
+                             args.persistence, args.radial_window, args.angular_window)
+    print()
+    print(f"sites PERSISTANTS (>= {args.persistence} colonnes) : {len(sites)}")
+    if sites:
+        r = np.array([s["radius"] for s in sites]) * VOXEL_UM / 1000.0
+        print(f"  rayon : {r.min():.1f} a {r.max():.1f} mm (median {np.median(r):.1f})")
+        inner = int((r < np.median(r)).sum())
+        print(f"  repartition : {inner} en deca du rayon median, {len(r) - inner} au-dela")
+        for s in sorted(sites, key=lambda x: -x["marks"])[:8]:
+            arc_mm = s['arc_columns'] / 18850.0 * 2 * np.pi * s['radius'] * VOXEL_UM / 1000
+            print(f"    r={s['radius'] * VOXEL_UM / 1000:5.1f} mm  "
+                  f"colonnes {s['column_first']}-{s['column_last']}  "
+                  f"arc {arc_mm:5.1f} mm  ({s['marks']} marques)")
+    if args.json:
+        Path(args.json).write_text(json.dumps({"sites": sites}, indent=2) + "\n")
+        print(f"\necrit : {args.json}")
+    return 0
+
+
+def cmd_gap_control(args) -> int:
+    """Le temoin : sur des lignes fabriquees, un ecart double doit apparaitre la ou
+    l'on a soude, et nulle part ailleurs."""
+    checks = passed = 0
+    for label, merge, expected in (("intact", None, 0), ("une fusion", 900, 1)):
+        image = synthetic(args.sheets, 600, 1800, merge)
+        ratios, radii, columns = gap_map(image, args.prominence, args.min_gap,
+                                         args.smooth, args.band)
+        sites = persistent_sites(ratios, radii, columns, args.doubling,
+                                 args.persistence, args.radial_window, args.angular_window)
+        checks += 1
+        passed += (len(sites) == expected)
+        print(f"  {label:12} sites {len(sites)} (attendu {expected})   "
+              f"ecart median {np.median(ratios):.2f}")
+    print()
+    print(f"{'ALL PASS' if passed == checks else 'ECHEC'} "
+          f"({checks - passed} failures, {checks} checks)")
+    return 0 if passed == checks else 1
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Fusions de feuilles par SUIVI des spires depliees.",
         epilog="Lancer 'controle' avant 'chercher' : un tracker non teste voit des fusions partout.",
     )
     sub = parser.add_subparsers(dest="command", required=True)
-    for name, func in (("controle", cmd_control), ("chercher", cmd_run)):
+    for name, func in (("controle", cmd_control), ("chercher", cmd_run),
+                       ("ecarts", cmd_gaps), ("ecarts-controle", cmd_gap_control),
+                       ("densite", cmd_density)):
         p = sub.add_parser(name)
-        if name == "chercher":
+        if name in ("chercher", "ecarts", "densite"):
             p.add_argument("polar", type=Path)
             p.add_argument("--json")
         else:
             p.add_argument("--sheets", type=int, default=12)
+        p.add_argument("--band", type=float, default=400.0,
+                       help="voisinage RADIAL de normalisation, en voxels")
+        p.add_argument("--doubling", type=float, default=1.7,
+                       help="rapport ecart/espacement local a partir duquel on marque. "
+                            "1,7 et non 2,0 : une soudure ecrase les deux feuilles l'une "
+                            "contre l'autre, donc l'ecart resultant est un peu sous le double")
+        p.add_argument("--persistence", type=int, default=200,
+                       help="colonnes marquees minimum pour qu'un site compte")
+        p.add_argument("--radial-window", type=float, default=30.0,
+                       help="tolerance radiale pour regrouper des marques en un site")
+        p.add_argument("--min-radius", type=float, default=300.0,
+                       help="rayon sous lequel le depliage est degenere et la mesure "
+                            "sans objet (defaut: 300 vx = 2,4 mm)")
+        p.add_argument("--radial-cell", type=float, default=60.0,
+                       help="hauteur d'une cellule de densite, en voxels (~3 feuilles)")
+        p.add_argument("--angular-cell", type=int, default=500,
+                       help="largeur d'une cellule de densite, en colonnes")
+        p.add_argument("--excess", type=float, default=3.0,
+                       help="combien de (q90 - fond) au-dessus du fond pour etre anormal")
+        p.add_argument("--angular-window", type=int, default=300,
+                       help="trouee angulaire au-dela de laquelle un site en devient deux")
         p.add_argument("--prominence", type=float, default=8.0)
         p.add_argument("--min-gap", type=int, default=10)
         p.add_argument("--smooth", type=int, default=5)

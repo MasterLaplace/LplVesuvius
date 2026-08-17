@@ -400,6 +400,51 @@ cette dispersion.
 C'est aussi la mesure qui ne demande **aucun suivi**, donc aucune des trois
 hypothèses ci-dessus. À écrire ensuite.
 
+#### 🔄 Le doublement d'écart : la 4ᵉ formulation, la moins mauvaise
+
+Une soudure ne fait pas disparaître un mur dans le bruit du comptage global : elle
+**double l'écart local** entre deux murs voisins. C'est une quantité *locale*, mesurée
+dans une colonne unique, qui ne demande **aucun appariement entre colonnes** — donc
+aucune des trois hypothèses réfutées ci-dessus.
+
+⚠ Normalisée par l'espacement **local** et jamais par un seuil en micromètres :
+l'espacement varie d'un facteur trois selon le rayon (158 µm près du cœur, 203 µm vers
+l'extérieur), donc un seuil absolu attraperait le cœur et raterait le bord.
+
+**Contrôle** (`fusions.py ecarts-controle`) : lignes fabriquées intactes → **0 site**,
+avec une soudure → exactement **1**.
+
+**Deux versions ont échoué avant celle qui tient**, et les deux échecs sont instructifs :
+
+1. **Chaînage de marques** — deux paramètres se battaient : la persistance exigeait
+   200 marques par groupe, la fenêtre angulaire en plafonnait les groupes à **164**,
+   donc zéro site. Les régler l'un contre l'autre jusqu'à voir des sites apparaître
+   aurait été choisir un nombre pour que le réglage du jour passe. Cause mesurée : le
+   marquage est **intermittent** (écart médian de 6 colonnes entre marques, q90 à
+   **891**), et un drapeau binaire aussi bruité ne se chaîne pas.
+2. **Densité sans exclusion du cœur** — a redécouvert *exactement* le mode d'échec
+   historique : rayon médian **0,5 mm**, tous les premiers sites au centre.
+
+⚠⚠ **Et la cause du second n'est pas du bruit, c'est une dégénérescence.** Au rayon
+*r*, deux colonnes voisines de l'image dépliée échantillonnent des points distants de
+`2πr/18850` voxels : à *r* = 100, cela fait **0,03 voxel**, donc une trentaine de
+colonnes lisent **le même pixel**. Le cœur est inexploitable *par construction du
+dépliage*. Exclu sous 2,4 mm, et la raison est écrite dans le code.
+
+**État après exclusion** : **8 cellules anormales sur 1582** (0,51 %), taux de fond
+6,6 %, réparties de 2,4 à 18,0 mm, **4 en deçà du rayon médian et 4 au-delà** — le
+déséquilibre historique a disparu.
+
+⚠ **Doute assumé, à lever avant d'en tirer quoi que ce soit** : 4 des 8 cellules sont
+pile à la frontière de coupe (2,4–2,8 mm), ce qui ressemble à un effet de bord de
+l'exclusion plutôt qu'à un site. Les 4 à 17–18 mm sont les crédibles. Le contrôle qui
+tranche est simple et n'est **pas fait** : faire varier `--min-radius` et regarder si
+les sites du bord suivent la coupe. S'ils suivent, ce sont des artefacts.
+
+**Fichiers** : `experiments/src/excision/radial.py` (dépliage) et `fusions.py`
+(`controle`, `chercher`, `ecarts`, `ecarts-controle`, `densite`). Tout est en fichiers
+versionnés, pas en `python -c` — cf. §5.6.
+
 ### ❌ Ce qui ne marche pas : la localisation des fusions par déficit de compte
 
 Idée suivante de l'auteur : là où l'onde traverse le mauvais nombre de feuilles, il

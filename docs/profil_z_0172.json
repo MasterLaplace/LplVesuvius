@@ -29,6 +29,16 @@
       "outer_radius_mm": 24.19669,
       "spacing_um_median": 141.34629910790875,
       "length_m": 13.150792833317803
+    },
+    {
+      "slice": 3114,
+      "rays": 36,
+      "turns_median": 162,
+      "turns_min": 123,
+      "turns_max": 212,
+      "outer_radius_mm": 23.223760000000002,
+      "spacing_um_median": 141.34361327014219,
+      "length_m": 11.819454196366665
     }
   ],
   "refined": []
