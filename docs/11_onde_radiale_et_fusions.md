@@ -420,3 +420,43 @@ lieu de se grouper vers 17 mm.
 entier à 1/64 du coût et sortir une liste de régions à regarder, et chaque candidat doit
 être **confirmé au niveau 0**. Le prendre pour une mesure équivalente ferait publier des
 sites que la pleine résolution ne voit pas.
+
+
+---
+
+## 10. La hauteur des défauts, et ce que les comptes permettent de dire
+
+Bande large : **9 coupes de 6567 à 7367**, espacement 0,8 mm. Verdict global
+**3,5 %** de coïncidences contre 1,1 % au hasard (p95 = 2,0 %) — les sites tiennent.
+
+⚠ Mais 3,5 % sur 9 coupes contre **7,0 %** sur 5 : l'effet **s'affaiblit quand la bande
+s'élargit**. Décomposé par distance :
+
+| distance en z | paires | coïncid. | taux |
+|---:|---:|---:|---:|
+| **0,8 mm** | 108 | **10** | **9,3 %** |
+| 1,6 mm | 92 | 0 | 0,0 % |
+| 2,4 mm | 80 | 0 | 0,0 % |
+| 3,2 à 6,3 mm | 171 | 6 | 3,5 % |
+
+**Tout le signal est dans les coupes adjacentes.** Au-delà, il y a **10 coïncidences en
+tout** sur l'ensemble : les taux par tranche de distance sont trop bruités pour porter
+une conclusion, et la remontée apparente vers 4–4,7 mm (2/46 et 2/31) est parfaitement
+compatible avec le hasard.
+
+### ⚠ Et ça réconcilie avec la migration, au lieu de la contredire
+
+On pourrait lire « rien ne coïncide au-delà de 0,8 mm » comme *les défauts ne font
+qu'un millimètre de haut*. C'est une lecture possible, mais il y en a une meilleure,
+qui découle de ce que §8 a déjà mesuré : **le défaut MIGRE** — 2,4 mm de rayon sur
+2,4 mm de hauteur.
+
+Un objet qui dérive de **1 mm de rayon par millimètre de hauteur** sort de la fenêtre
+d'appariement (1 mm radial) au bout d'une seule coupe. Il ne PEUT donc pas coïncider à
+longue distance, par construction de la mesure. Ce qu'on observe — une **chaîne de
+liens adjacents** — est exactement la signature attendue.
+
+**Les deux lectures ne sont pas départagées ici**, et les départager demande de suivre
+un site de proche en proche en autorisant sa dérive, plutôt que d'exiger qu'il reste
+au même rayon. C'est un appariement *prédictif* entre coupes, cousin de celui déjà
+écrit pour les colonnes dans `fusions.py track`.
