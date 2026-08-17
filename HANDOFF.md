@@ -67,10 +67,6 @@ règle graduée, pas l'ouvrage.
 ancien **avec une provenance**, donc `harvest::Tei` et `corpus::Locus` savent déjà
 l'ingérer : le raccordement en aval est un lecteur de plus, pas une architecture.
 
-⚠ Objectif non public, à ne pas écrire dans les documents versionnés : **gagner un
-prix pour financer du matériel de recherche**. Il change la priorisation — une piste
-se juge aussi sur le fait qu'elle soit **soumissionnable**.
-
 **Budget disque** : 100 Go autorisés, **38 Go utilisés**, pas une limite fixe mais juste pour éviter de télécharger n'importe quoi et de demander si c'est vraiment nécessaire avant au point de devoir dépasser le budget.
 
 ## 3. L'ordre de lecture des documents

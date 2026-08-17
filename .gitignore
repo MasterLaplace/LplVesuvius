@@ -37,3 +37,7 @@ __pycache__/
 # Les figures des documents sont suivies : elles portent des resultats mesures.
 !/docs/images/
 .env
+
+# ⚠ Note privee de session : contexte que l'auteur ne veut pas voir partir avec le
+# depot. Le fichier existe, son contenu ne se versionne pas.
+/PRIVE.md

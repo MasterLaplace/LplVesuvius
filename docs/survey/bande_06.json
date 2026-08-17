@@ -1,0 +1,99 @@
+{
+  "slices": [
+    {
+      "slice": 8092,
+      "background_rate": 0.1030628973168835,
+      "valid_cells": 370,
+      "anomalous": [
+        {
+          "radius_mm": 5.6952,
+          "column": 4500,
+          "rate": 0.4703196347031963
+        },
+        {
+          "radius_mm": 6.1698,
+          "column": 4500,
+          "rate": 0.5051194539249146
+        },
+        {
+          "radius_mm": 10.4412,
+          "column": 4500,
+          "rate": 0.720164609053498
+        },
+        {
+          "radius_mm": 21.357,
+          "column": 3500,
+          "rate": 0.8076923076923077
+        }
+      ]
+    },
+    {
+      "slice": 8192,
+      "background_rate": 0.10748244912467786,
+      "valid_cells": 370,
+      "anomalous": [
+        {
+          "radius_mm": 21.357,
+          "column": 3500,
+          "rate": 0.85
+        }
+      ]
+    },
+    {
+      "slice": 8292,
+      "background_rate": 0.0998980632008155,
+      "valid_cells": 369,
+      "anomalous": [
+        {
+          "radius_mm": 6.644400000000001,
+          "column": 0,
+          "rate": 0.4745222929936306
+        },
+        {
+          "radius_mm": 12.3396,
+          "column": 1000,
+          "rate": 0.601010101010101
+        }
+      ]
+    },
+    {
+      "slice": 8392,
+      "background_rate": 0.10043196544276457,
+      "valid_cells": 367,
+      "anomalous": [
+        {
+          "radius_mm": 20.8824,
+          "column": 3500,
+          "rate": 0.7377049180327869
+        }
+      ]
+    },
+    {
+      "slice": 8492,
+      "background_rate": 0.1008805180954339,
+      "valid_cells": 370,
+      "anomalous": [
+        {
+          "radius_mm": 6.1698,
+          "column": 4500,
+          "rate": 0.5132075471698113
+        },
+        {
+          "radius_mm": 20.8824,
+          "column": 3500,
+          "rate": 0.5476190476190477
+        }
+      ]
+    }
+  ],
+  "observed": {
+    "pairs": 37,
+    "colocated": 8,
+    "fraction": 0.21621621621621623
+  },
+  "null": {
+    "trials": 2000,
+    "mean": 0.047675675675675676,
+    "p95": 0.10810810810810811
+  }
+}
