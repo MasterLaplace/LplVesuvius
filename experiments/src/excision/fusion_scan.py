@@ -15,6 +15,18 @@ a ce que donnerait un placement aleatoire des memes nombres de cellules dans les
 grilles -- sinon « elles sont proches » est une impression, pas une mesure. C'est le
 meme reflexe que partout ici : un controle qui ne peut pas echouer ne prouve rien.
 
+⚠⚠ **L'ESPACEMENT DES COUPES EST LE PARAMETRE CRITIQUE, et un premier essai s'est
+trompe dessus.** Cinq coupes reparties sur toute la hauteur du rouleau sont espacees
+de **22 mm** : pour apparaitre dans deux d'entre elles, une soudure devrait faire plus
+de 22 mm de HAUT. Le test rendait « indistinguable du hasard » alors qu'il ne pouvait
+rien detecter d'autre qu'un defaut geant. Il faut des coupes **serrees** (`--z-min` /
+`--z-max`), a l'echelle de la structure cherchee et non a celle de l'objet.
+
+⚠ Et la meme mesure a montre que les anomalies sont REELLES : le taux de fond est
+stable a 6,4-7,0 % sur toute la hauteur, donc une cellule a 20 % est a une vingtaine
+d'ecarts-types du fond. Ce n'est pas du bruit d'echantillonnage ; c'est leur
+persistance qui restait a tester.
+
 Compose `radial.deplier` et `fusions.densite`, qui ont chacun leur propre temoin.
 """
 

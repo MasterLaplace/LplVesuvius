@@ -206,6 +206,30 @@ impression et non une mesure.
 dans la même coupe sont déjà ce que la §7 montre, et les compter ferait passer ce
 résultat pour sa propre confirmation.
 
+### ⚠⚠ Premier essai : verdict « bruit de coupe », et le verdict était FAUX
+
+Cinq coupes réparties sur toute la hauteur, 0 coïncidence sur 21 paires contre 2,1 %
+au hasard → *indistinguable du hasard*.
+
+**Le test ne pouvait rien détecter.** Ces cinq coupes sont espacées de **22,3 mm** :
+pour apparaître dans deux d'entre elles, une soudure devrait faire plus de 22 mm de
+**haut**. J'avais échantillonné à l'échelle de l'objet et non à celle de la structure
+cherchée.
+
+Et la même mesure dit l'inverse de son propre verdict :
+
+| grandeur | valeur |
+|---|---|
+| taux de fond, sur les 5 coupes | **6,4 · 6,5 · 6,6 · 6,9 · 7,0 %** |
+| bruit d'échantillonnage sur 1400 écarts | 0,66 % |
+| une cellule à 20 % est donc à | **~20 écarts-types du fond** |
+
+Le fond est remarquablement stable sur toute la hauteur du rouleau, donc **les
+anomalies sont réelles** et non du bruit d'échantillonnage. C'est leur *persistance*
+qui restait à tester — et le test n'en était pas un.
+
+**Relancé** avec des coupes espacées de **0,8 mm** autour de z = 6967.
+
 ---
 
 ## Reproduire

@@ -1,0 +1,88 @@
+{
+  "slices": [
+    {
+      "slice": 1336,
+      "background_rate": 0.06948465547191662,
+      "valid_cells": 1477,
+      "anomalous": [
+        {
+          "radius_mm": 14.238,
+          "column": 18500,
+          "rate": 0.2116788321167883
+        }
+      ]
+    },
+    {
+      "slice": 4152,
+      "background_rate": 0.06473988439306358,
+      "valid_cells": 1399,
+      "anomalous": [
+        {
+          "radius_mm": 22.7808,
+          "column": 18000,
+          "rate": 0.23737373737373738
+        },
+        {
+          "radius_mm": 23.2554,
+          "column": 18500,
+          "rate": 0.17523364485981308
+        }
+      ]
+    },
+    {
+      "slice": 6967,
+      "background_rate": 0.06556172373369865,
+      "valid_cells": 1392,
+      "anomalous": [
+        {
+          "radius_mm": 17.0856,
+          "column": 16000,
+          "rate": 0.17095205003474634
+        },
+        {
+          "radius_mm": 17.0856,
+          "column": 16500,
+          "rate": 0.1925925925925926
+        },
+        {
+          "radius_mm": 17.560200000000002,
+          "column": 15500,
+          "rate": 0.18789144050104384
+        },
+        {
+          "radius_mm": 18.0348,
+          "column": 14000,
+          "rate": 0.20302375809935205
+        }
+      ]
+    },
+    {
+      "slice": 9782,
+      "background_rate": 0.06352807714123652,
+      "valid_cells": 1373,
+      "anomalous": []
+    },
+    {
+      "slice": 12598,
+      "background_rate": 0.06951350106327422,
+      "valid_cells": 1458,
+      "anomalous": [
+        {
+          "radius_mm": 21.8316,
+          "column": 13500,
+          "rate": 0.23529411764705882
+        }
+      ]
+    }
+  ],
+  "observed": {
+    "pairs": 21,
+    "colocated": 0,
+    "fraction": 0.0
+  },
+  "null": {
+    "trials": 2000,
+    "mean": 0.020547619047619047,
+    "p95": 0.09523809523809523
+  }
+}
