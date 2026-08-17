@@ -29,6 +29,9 @@ from pathlib import Path
 
 import numpy as np
 
+FULL_DEPTH = 20820
+"""Profondeur du volume au niveau 0, pour deduire le facteur de reduction d'un niveau."""
+
 VOXEL_UM = 7.91
 """Taille du voxel en micrometres, pour les volumes 7,910 um de la campagne 2024."""
 
@@ -219,6 +222,19 @@ def load_centre(name: str) -> dict:
 def cmd_count(args) -> int:
     centre = load_centre(args.name)
     array = open_volume(args.volume, args.level)
+    # ⚠ Le voxel DOIT suivre le niveau de pyramide. Une premiere version gardait
+    # 7,91 um quel que soit le niveau, donc toute conversion en millimetres au-dela
+    # du niveau 0 etait fausse d'un facteur 2 par niveau -- et le test « le niveau 2
+    # separe-t-il les spires » ne mesurait alors plus rien d'interpretable.
+    global VOXEL_UM
+    base = VOXEL_UM
+    scale = FULL_DEPTH / array.shape[0]
+    VOXEL_UM = base * scale
+    if scale != 1.0:
+        print(f"⚠ niveau {args.level} : reduction x{scale:.0f}, voxel {VOXEL_UM:.1f} um")
+        # La portee et l'ecart minimal sont en VOXELS, donc ils doivent suivre aussi.
+        args.reach = args.reach / scale
+        args.min_gap = max(2, int(round(args.min_gap / scale)))
     z = args.slice if args.slice >= 0 else int((centre["z_min"] + centre["z_max"]) / 2)
     plane = array[z]
     print(f"volume {array.shape} | tranche z={z} | centre ({centre['cx']:.0f}, {centre['cy']:.0f})")
@@ -262,6 +278,7 @@ def cmd_count(args) -> int:
     print("   le sens n'est sur que si les faux pics sont rares -- non mesure.")
     print("   Et une tranche unique ne dit rien de la variation le long du rouleau.")
 
+    VOXEL_UM = base
     if args.json:
         Path(args.json).write_text(json.dumps({
             "name": args.name, "slice": z, "rays": int(counts.size),

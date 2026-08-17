@@ -1,0 +1,57 @@
+[
+  {
+    "level": "0",
+    "voxel_um": 7.91,
+    "reduction": 1.0,
+    "walls_median": 163,
+    "walls_min": 126,
+    "walls_max": 177,
+    "spacing_um": 133.6041124260355,
+    "fraction_of_full": 1.0,
+    "volume_gib": 2100.0
+  },
+  {
+    "level": "1",
+    "voxel_um": 15.82,
+    "reduction": 2.0,
+    "walls_median": 141,
+    "walls_min": 114,
+    "walls_max": 157,
+    "spacing_um": 152.8450069485805,
+    "fraction_of_full": 0.8650306748466258,
+    "volume_gib": 262.5
+  },
+  {
+    "level": "2",
+    "voxel_um": 31.64,
+    "reduction": 4.0,
+    "walls_median": 145,
+    "walls_min": 114,
+    "walls_max": 176,
+    "spacing_um": 145.04263575350825,
+    "fraction_of_full": 0.8895705521472392,
+    "volume_gib": 32.8125
+  },
+  {
+    "level": "3",
+    "voxel_um": 63.26784479446792,
+    "reduction": 7.99846331156358,
+    "walls_median": 77,
+    "walls_min": 65,
+    "walls_max": 97,
+    "spacing_um": 267.146116175198,
+    "fraction_of_full": 0.4723926380368098,
+    "volume_gib": 4.103926967178552
+  },
+  {
+    "level": "4",
+    "voxel_um": 126.48709677419355,
+    "reduction": 15.990783410138249,
+    "walls_median": 40,
+    "walls_min": 31,
+    "walls_max": 47,
+    "spacing_um": 528.097472210454,
+    "fraction_of_full": 0.24539877300613497,
+    "volume_gib": 0.5135823284150899
+  }
+]
