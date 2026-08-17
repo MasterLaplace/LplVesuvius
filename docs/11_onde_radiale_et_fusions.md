@@ -310,10 +310,39 @@ vont en sens opposé, ce qui n'est pas ce qu'une simple mise à l'échelle donne
 Mais une inclinaison décale le centre **latéralement**, donc son effet radial dépend de
 l'angle — il peut être positif vers 286° et négatif ailleurs.
 
-**Le contrôle qui tranche, et il n'est pas fait** : re-dériver le centre **coupe par
-coupe** et refaire la mesure. Si la migration disparaît, c'était l'inclinaison ; si
-elle persiste, c'est un défaut réel suivi en 3D. `radial.py centre` sait déjà dériver
-un centre ; il faut le faire par coupe au lieu d'une fois pour toutes.
+### ✅ Le contrôle a été fait : l'inclinaison est écartée, et dans le bon sens
+
+`radial.py axe` suit le **barycentre de la matière** coupe par coupe. Il ne prétend pas
+donner l'axe d'enroulement — il donne **de combien le centre se déplace**, ce qui est
+la seule chose que le test demande, et il se mesure à résolution grossière (niveau 3,
+voxel 63 µm) pour un centième du coût.
+
+| grandeur | valeur |
+|---|---:|
+| hauteur balayée | 3,16 mm |
+| déplacement du barycentre | **0,65 mm** |
+| migration des sites à expliquer | **2,40 mm** |
+
+Trop faible d'un facteur **3,7**. Mais un facteur ne suffit pas — il faut la
+**direction** :
+
+| | |
+|---|---|
+| direction du déplacement | 150° |
+| position angulaire des sites | 286° |
+| **composante radiale dans la direction des sites** | **−0,47 mm** |
+
+⚠⚠ **Le sens est OPPOSÉ.** L'inclinaison rapprocherait les sites du centre pendant
+qu'ils s'en éloignent. Elle ne peut donc pas expliquer la migration — **elle la masque
+partiellement**, ce qui veut dire que la vraie migration est ≥ 2,40 mm.
+
+**L'explication concurrente est écartée.** Ce qui est suivi est un défaut réel, en
+trois dimensions.
+
+⚠ Limite honnête : le barycentre n'est pas l'axe d'enroulement, et la fraction de
+matière varie légèrement sur la plage (42,14 → 41,26 %), donc une part des 0,65 mm
+vient d'un changement de forme et non d'une inclinaison. Cela joue **en faveur** de la
+conclusion — la vraie inclinaison est ≤ 0,65 mm.
 
 ---
 

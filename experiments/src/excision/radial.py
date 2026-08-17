@@ -391,6 +391,71 @@ def cmd_profile(args) -> int:
     return 0
 
 
+def cmd_axis(args) -> int:
+    """L'axe du rouleau se deplace-t-il avec z ? Le controle de l'INCLINAISON.
+
+    ⚠⚠ Pourquoi cette mesure existe. Les sites de fusion suivis le long de z montrent
+    une migration radiale (+2,4 mm sur 2,4 mm de hauteur). Deux lectures : un defaut
+    reel porte par une feuille, ou simplement **un axe incline** par rapport a l'axe du
+    scan — car le centre est derive UNE fois et reutilise pour toutes les coupes, donc
+    un axe penche ferait deriver *tous* les motifs de la meme facon.
+
+    Le test ne demande pas un centre parfait, seulement **de combien il bouge**. Le
+    barycentre de la matiere suffit pour ca : sur quelques millimetres de hauteur la
+    forme de la section ne change pas assez pour le deplacer tout seul.
+
+    ⚠ Mesure a resolution GROSSIERE volontairement : il s'agit de detecter un
+    deplacement millimetrique, et un niveau de pyramide a 63 um le voit largement,
+    pour un centieme du cout.
+    """
+    import fsspec
+    import zarr
+
+    group = zarr.open(fsspec.get_mapper(args.volume, anon=True), mode="r")
+    array = group[args.level]
+    scale = 20820.0 / array.shape[0]
+    voxel = VOXEL_UM * scale
+    print(f"niveau {args.level} : {array.shape}, voxel {voxel:.0f} um")
+
+    zs = [int(round(v / scale)) for v in np.linspace(args.z_min, args.z_max, args.slices)]
+    rows = []
+    for z_level, z_full in zip(zs, np.linspace(args.z_min, args.z_max, args.slices)):
+        plane = np.asarray(array[z_level]).astype(np.float32)
+        mask = plane > args.threshold
+        if mask.sum() < 100:
+            continue
+        ys, xs = np.nonzero(mask)
+        rows.append((float(z_full), float(xs.mean() * scale), float(ys.mean() * scale),
+                     float(mask.sum())))
+        print(f"  z={z_full:8.0f}  barycentre ({rows[-1][1]:7.1f}, {rows[-1][2]:7.1f})  "
+              f"matiere {mask.mean() * 100:5.2f} %", flush=True)
+
+    if len(rows) < 2:
+        print("erreur : pas assez de coupes exploitables", file=sys.stderr)
+        return 3
+    data = np.asarray([(r[0], r[1], r[2]) for r in rows])
+    span_z = (data[-1, 0] - data[0, 0]) * VOXEL_UM / 1000.0
+    shift = float(np.hypot(data[-1, 1] - data[0, 1], data[-1, 2] - data[0, 2])) * VOXEL_UM / 1000.0
+    print()
+    print(f"hauteur balayee   : {span_z:.2f} mm")
+    print(f"deplacement du barycentre : {shift:.2f} mm")
+    print(f"inclinaison       : {shift / max(span_z, 1e-9) * 100:.1f} % "
+          f"({np.degrees(np.arctan2(shift, span_z)):.1f} degres)")
+    print()
+    # ⚠ Le verdict se prononce contre la migration OBSERVEE, pas dans l'absolu :
+    # ce qui compte est si l'inclinaison suffit a l'expliquer entierement.
+    print(f"migration des sites a expliquer : {args.migration:.2f} mm sur {span_z:.2f} mm")
+    if shift >= args.migration * 0.5:
+        print("VERDICT : l'inclinaison peut expliquer une part importante de la migration")
+    else:
+        print("VERDICT : l'inclinaison est TROP FAIBLE pour expliquer la migration")
+    if args.json:
+        Path(args.json).write_text(json.dumps(
+            {"voxel_um": voxel, "rows": [list(r) for r in rows],
+             "span_mm": span_z, "shift_mm": shift}, indent=2) + "\n")
+    return 0
+
+
 def cmd_unwrap(args) -> int:
     centre = load_centre(args.name)
     array = open_volume(args.volume, args.level)
@@ -456,6 +521,18 @@ def main() -> int:
     f.add_argument("--min-gap", type=int, default=10)
     f.add_argument("--body-threshold", type=float, default=12.0)
     f.set_defaults(func=cmd_profile)
+
+    x = sub.add_parser("axe", help="l'axe bouge-t-il avec z ? (controle d'inclinaison)")
+    x.add_argument("volume")
+    x.add_argument("--level", default="3")
+    x.add_argument("--z-min", type=float, required=True)
+    x.add_argument("--z-max", type=float, required=True)
+    x.add_argument("--slices", type=int, default=9)
+    x.add_argument("--threshold", type=float, default=12.0)
+    x.add_argument("--migration", type=float, default=2.4,
+                   help="migration radiale a expliquer, en mm")
+    x.add_argument("--json")
+    x.set_defaults(func=cmd_axis)
 
     u = sub.add_parser("deplier", help="coupe -> coordonnees polaires (spires = lignes)")
     u.add_argument("name")
