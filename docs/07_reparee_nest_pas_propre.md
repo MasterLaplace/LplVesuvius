@@ -1,7 +1,13 @@
-# « Réparée » n'est pas « propre » : une métrique qui le distingue
+# La réparation ne déplace pas le défaut : une mesure qui le montre
 
-2026-08-17. Résultat obtenu sur PHercParis4 (Scroll 1), avec le témoin qui manquait
-à Scroll 5. Rejouable : `experiments/src/excision/proximity.py`.
+2026-08-17. Résultat sur PHercParis4 (Scroll 1), 46 traces mesurées.
+Rejouable : `experiments/src/excision/{proximity,correlate}.py`.
+
+> **En une phrase** : la réparation d'auto-intersection ramène les contacts à zéro
+> et **ne change pas** la proximité anormale entre régions non adjacentes. La mesure
+> corrèle fortement avec les croisements (rho 0,77, y compris à longueur contrôlée)
+> mais **ne sépare pas** proprement les traces saines des réparées — c'est un
+> indicateur continu, pas un classifieur.
 
 ---
 
@@ -53,8 +59,7 @@ Le test : mesurer la trace **réparée**, celle dont le recensement dit désorma
 | témoin jamais atteint | 0 contact, *clean* | 160 µm | **0,09 %** |
 
 La réparation retire **3 689 quads** (0,12 % de l'aire), fait tomber les contacts de
-11 673 à **zéro**, et la métrique **ne bouge pas** (0,37 → 0,38 %). Une trace
-réellement saine est **quatre fois plus basse**.
+11 673 à **zéro**, et la métrique **ne bouge pas** (0,37 → 0,38 %).
 
 > **Passer le recensement d'auto-intersection ne change rien à cette mesure.** La
 > réparation ramène les contacts à zéro et laisse la proximité intacte.
@@ -143,8 +148,9 @@ la queue.
 - **On ne sait pas si ces approches nuisent au texte.** C'est la même frontière que
   `04` : on mesure une anomalie géométrique, pas une perte de lisibilité. Le lien
   reste à établir.
-- Le témoin n'est pas à zéro (0,09 %) : soit un plancher de la mesure, soit de
-  vraies approches légitimes. Non tranché.
+- **Aucun plancher** : les 7 traces à zéro croisement s'étalent de 0,020 % à
+  0,372 %, un facteur 18. Ce que la mesure attrape sur une trace sans croisement
+  reste inexpliqué — vraies approches légitimes, ou bruit de la mesure.
 
 ## 6. Ce que ça vaut pour le concours
 
@@ -156,3 +162,7 @@ humaine** ») et nº7 (« **métriques d'évaluation** ») sont exactement ceci.
 Et le résultat a la forme utile : il ne dit pas « notre outil est meilleur », il dit
 **« la vérification que tout le monde utilise laisse passer quelque chose, voici la
 mesure et voici le contrôle »**.
+
+⚠ En l'état ce n'est pas encore soumissionnable : il manque le seuil non arbitraire
+(`06` 3.7) et un second rouleau. Ce qui est acquis, c'est la mesure et son contrôle
+négatif — pas encore un outil que quelqu'un d'autre voudrait lancer.
