@@ -43,6 +43,57 @@ Papiers primaires repérés, à lire :
 | 1.13 | Métrique de proximité à longueur contrôlée (3 traces, ~7,8 tours) | ordonne correctement : **0,09 % → 0,15 % → 0,37 %** selon les croisements | `07` |
 | 1.14 | ⭐ La métrique **survit à la réparation** | recensement 11 673 → **0** ; métrique 0,37 → **0,38 %** ; témoin sain **0,09 %** | `07` |
 
+## 1bis. ⭐ LE CAP, fixé le 2026-08-17
+
+Décision de l'auteur, et elle relève la barre au bon endroit :
+
+> **On ne publie rien sans une passe complète du pipeline — rouleau déroulé, texte
+> extrait, soumis à un expert qui dise si ça fait sens — et ce sur plusieurs
+> rouleaux.**
+
+C'est exactement l'exigence du concours lui-même (Grand Prize : papyrologues
+indépendants, **70 % de caractères lisibles par colonne**). Une métrique géométrique
+qui corrèle ne prouve **rien** sur du texte.
+
+**Conséquence sur le travail** : tout ce qui précède (`04`, `05`, `07`) devient de
+l'outillage de diagnostic, utile mais pas un livrable. Le livrable est une passe
+complète.
+
+### La passe complète, et où on en est
+
+| étage | état chez nous | ce qui manque |
+|---|---|---|
+| trace `tifxyz` | ✅ 55 traces Scroll 1, 53 Scroll 5 | — |
+| aplatissement | ✅ déjà fait en amont (`_flatboi`) | — |
+| **rendu** en couches | ❌ | `vc_render_tifxyz` (C++) ou `self_render_tifxyz.py` ; exige de streamer le volume |
+| **détection d'encre** | ❌ | poids sur HF (`scrollprize/ink-detection-models`), `download.sh`, 3 scripts d'inférence |
+| jugement | ❌ | un papyrologue |
+
+⚠ **Contrainte matérielle mesurée** : **aucun GPU** (22 cœurs, 31 Gio). Précédent
+rassurant : `vesuvius-automesh` a produit 279 cm² vérifiés *« zero GPU »*. Et la
+cible **First Letters** ne demande que **4 cm²**. Donc viser petit, et chiffrer le
+coût CPU avant de s'engager.
+
+### ⚠ Le contrôle sans lequel la passe ne vaut rien
+
+Faire tourner le pipeline sur du texte **inconnu** ne prouve rien : on ne saura pas
+si le résultat est juste. **La première passe doit viser une région dont le texte
+est DÉJÀ LU** — les régions du Grand Prize 2023 sont publiées, et le jeu
+`ink-labels` fournit des masques d'encre alignés. Si notre chaîne ne retrouve pas ce
+qui est connu, son avis sur l'inconnu ne vaut rien.
+
+### ⚠ Sur l'usage d'un modèle de langue comme juge intermédiaire
+
+Idée de l'auteur, en attendant un expert disponible. Elle a un mode de panne
+précis : devant une image de grec ancien dégradé, un modèle **produira du grec
+plausible** — le motif « sortie fausse indistinguable d'une sortie juste » qu'on
+traque depuis le début.
+
+**Utilisable seulement avec son contrôle** : lui soumettre en aveugle des rendus
+dont le texte est déjà publié et lu, mélangés à des rendus de bruit, et mesurer
+s'il retrouve les premiers et refuse les seconds. Sans cette calibration, son avis
+sur du texte inconnu n'est pas une donnée.
+
 ## 2. À faire — priorité haute
 
 ### 2.1 ⭐ Monotonie radiale du winding (l'idée la plus prometteuse)
