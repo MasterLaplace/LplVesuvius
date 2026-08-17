@@ -1,0 +1,18 @@
+[project]
+name = "lplvesuvius-inference"
+version = "0.1.0"
+description = "Inference d'encre sur CPU, a partir des couches rendues publiees"
+requires-python = ">=3.12"
+dependencies = [
+    "torch>=2.4",
+    "transformers>=4.46,<5",
+    "numpy>=2.0",
+    "tifffile>=2025.1.1",
+    "imagecodecs",
+    "pillow>=10.0",
+    "einops",
+    "timesformer-pytorch>=0.4.1",
+    "openvino>=2026.3.0",
+    "onnxscript>=0.7.1",
+    "onnx>=1.22.0",
+]

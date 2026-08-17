@@ -166,6 +166,25 @@ def main() -> int:
         "ratio_median": float(np.median(ratio)),
         "fraction_below_half": float((ratio < 0.5).mean()),
         "fraction_below_third": float((ratio < 1 / 3).mean()),
+        # SANS SEUIL. Le rapport vaut 1 quand une cellule est a l'espacement typique
+        # de son voisinage, donc « anormalement proche » se lit directement comme un
+        # deficit sous 1. La moyenne de ce deficit utilise TOUTE la queue basse et
+        # pondere chaque cellule par son ecart -- il n'y a aucune coupure a choisir,
+        # donc aucune prise pour ajuster le resultat apres l'avoir vu.
+        "shortfall": float(np.maximum(0.0, 1.0 - ratio).mean()),
+        # Meme grandeur, restreinte au dixieme le plus proche : dit si le deficit
+        # vient d'un affaissement general ou d'une minorite de sites tres proches.
+        # Deux traces peuvent partager un shortfall et differer ici.
+        "shortfall_worst_decile": float(
+            np.maximum(0.0, 1.0 - np.sort(ratio)[: max(1, ratio.size // 10)]).mean()
+        ),
+        # Balayage du seuil. Un seuil unique se defend mal ; ce qui se defend, c'est
+        # un PLATEAU -- si la correlation tient sur toute une plage, le choix n'est
+        # pas critique, et s'il pique sur une valeur, c'est du sur-ajustement.
+        **{
+            f"below_{int(round(t * 100)):03d}": float((ratio < t).mean())
+            for t in (0.15, 0.20, 0.25, 0.30, 1 / 3, 0.40, 0.50, 0.60, 0.70)
+        },
     }
 
     if args.as_json:

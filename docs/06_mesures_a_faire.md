@@ -175,7 +175,7 @@ perdu du **début** des textes.
 | 3.4 | Direction des fibres (recto/verso) comme contrainte d'orientation | problème ouvert nº5 ; les prédictions nnUNet existent déjà |
 | 3.5 | Le niveau 2 de la pyramide suffit-il à séparer les spires ? | déciderait si on peut travailler à 33 Gio au lieu de 2,1 Tio |
 | 3.6 | Effet de la campagne de scan (DLS 7,91 µm vs ESRF 2,4 µm) | le site montre que ça change la séparabilité ; le chiffrer |
-| 3.7 | **Supprimer le seuil du tiers** de la métrique | `07` §5 : le tiers est arbitraire (première valeur essayée). Le remplacer par une grandeur sans seuil — aire sous la queue basse, ou quantile du rapport — retire le seul réglage libre, donc la seule prise pour ajuster le résultat après coup |
+| 3.7 | ✅ **FAITE** — seuil : suppression impossible, mais PLATEAU établi | **Le supprimer dégrade la métrique** : le déficit moyen sans seuil tombe à rho +0,340 (contre +0,769), parce qu'il est dilué par la masse des cellules normales — **le signal est dans la queue extrême**. Mais le balayage montre un **plateau de 0,15 à 0,40** (rho 0,759 à 0,779), puis un effondrement au-delà de 0,5. Le seuil n'est donc pas réglé : n'importe quelle valeur de la plage donne la même réponse |
 | 3.8 | La proximité prédit-elle une perte de **lisibilité** ? | la frontière que ni `04` ni `07` ne franchissent : on mesure une anomalie géométrique, pas une perte de texte. Demande un rendu et un jugement — le maillon le plus cher, et le seul qui convertirait la métrique en argument sur le résultat final |
 | 3.9 | Le plancher du témoin (0,09 %) est-il réel ? | `07` §5 : soit un plancher de la mesure, soit de vraies approches légitimes. Trancher en mesurant plusieurs traces à 0 croisement — il y en a **3** dans Scroll 1 |
 
