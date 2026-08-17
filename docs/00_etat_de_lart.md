@@ -173,10 +173,17 @@ Détail et méthode dans `02_inventaire_mesure.md` ; outil : `tools/s3_size.py`.
   jusqu'à 2,79 %. ⚠ Le segment donné en exemple par le README (0,001 %) est **le
   moins touché des 52** — une intuition bâtie dessus est fausse.
 
-**En cours** : l'expérience de `04` — les cellules excisées échantillonnaient-elles
-autre chose que du papyrus ? Résultat préliminaire sur 5 segments : effet
-**systématique mais négligeable** (plus sombres de 2 à 3 niveaux de gris, delta de
-Cliff −0,072, répliqué sur 4/4 segments pris séparément).
+**Premier chiffre sur une question que six outils posent et qu'aucun ne referme**
+(détail et méthode dans `04`) : les cellules que `windcheck` retire sont
+**indiscernables**, dans le CT, du papyrus qu'il garde. Sur 52 segments,
+75 810 cellules excisées contre 303 235 témoins appariés : moyenne 72,1 des deux
+côtés, médiane 65 des deux côtés, **p = 0,859**, delta de Cliff **−0,000**.
+H₀ n'est pas rejetée.
+
+Le défaut géométrique est réel, mais il n'a **pas** de contrepartie matérielle à
+l'endroit excisé. Si l'auto-intersection nuit en aval, c'est par la **topologie**,
+pas par le contenu ponctuel — ce qui écarte une explication et en désigne une autre.
+⚠ Portée : un rouleau, une campagne de scan, un outil de réparation.
 
 ## 8. Prix ouverts
 

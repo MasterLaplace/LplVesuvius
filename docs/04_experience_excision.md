@@ -113,7 +113,72 @@ réponse : le noyau qui compte — l'intersection de triangles sur 3,5 M de tria
 avec Python autour pour l'orchestration. C'est le découpage à reprendre le jour où
 on écrit du calcul lourd ; ce n'était pas le cas ici.
 
-## 6. Ce que l'expérience ne prouvera pas
+## 6. RÉSULTAT
+
+Mesuré sur **52 segments** de PHerc0172 (le 53ᵉ était déjà propre, donc sans
+cellule excisée), **75 810 cellules excisées** contre **303 235 témoins appariés**.
+
+| | n | moyenne | médiane | Q1 | Q3 | écart-type |
+|---|---|---|---|---|---|---|
+| excisées | 75 810 | 72,1 | 65 | 40 | 105 | 42,0 |
+| témoins appariés | 303 235 | 72,1 | 65 | 40 | 105 | 42,0 |
+
+```
+Mann-Whitney U     : 11 489 329 924
+valeur p           : 0,859
+delta de Cliff     : -0,000  (negligeable)
+ecart des medianes : +0,0 niveau de gris
+```
+
+### **H₀ n'est pas rejetée.**
+
+> Les cellules que `windcheck` retire sont **indiscernables**, dans le CT, du
+> papyrus qu'il garde. Le défaut géométrique n'a **pas** de contrepartie
+> matérielle à l'endroit excisé.
+
+Par segment : 30 deltas négatifs, 22 positifs, médiane **−0,011**, et les deltas
+les plus positifs portent sur des échantillons minuscules (n = 2, 16, 19). Le zéro
+global n'est donc pas une compensation qui masquerait un signal — c'est une absence
+d'effet.
+
+### ⚠ Pourquoi le résultat préliminaire disait le contraire
+
+Une mesure intermédiaire sur 5 segments donnait un effet **systématique** (delta
+−0,072, répliqué sur 4/4 segments). Il a fallu l'expliquer plutôt que le laisser
+tomber :
+
+| population | segments | n excisées | delta |
+|---|---|---|---|
+| famille `20250926*` (celle du préliminaire) | 8 | 11 449 | **−0,0242** |
+| tous les autres | 44 | 64 361 | **+0,0047** |
+| **tout** | **52** | **75 810** | **−0,0004** |
+
+Le préliminaire portait sur les **4 pires segments d'une seule famille**, qui pèse
+15 % du corpus. C'est un cas d'école de biais d'échantillonnage par ordre
+alphabétique : les segments traités en premier étaient contigus, donc corrélés.
+
+⚠ **Et une erreur de lecture à moi, corrigée** : j'avais relevé `n = 1761` pour
+`w084` alors que c'était `w080` — `w084` n'était pas dans le préliminaire. Les
+comptes de cellules excisées concordent exactement entre les deux passes (w078 :
+1418 des deux côtés ; w082 : 3529), donc il n'y avait aucun défaut, seulement une
+mauvaise lecture de ma propre sortie.
+
+### Ce que ce résultat dit, et ce qu'il ne dit pas
+
+**Il dit** : la matière retirée est du papyrus ordinaire. L'excision ne supprime
+pas des points qui échantillonnaient l'interstice ou la spire voisine.
+
+**Il ne dit pas** que la réparation est inutile. L'auto-intersection est un défaut
+géométrique **réel et mesuré** — la surface se traverse bel et bien. Ce que le
+résultat retire, c'est *une* explication de son effet en aval : ce n'est pas parce
+que les cellules fautives liraient de la mauvaise matière. Si l'auto-intersection
+nuit, c'est par la **topologie** — un aplatissement qui se replie sur lui-même, un
+rendu qui superpose deux morceaux de feuille — pas par le contenu ponctuel.
+
+⚠ **Portée** : un seul rouleau (PHerc0172), une seule campagne de scan, un seul
+outil de réparation. Rien ne dit que ça vaut pour les autres.
+
+## 7. Ce que l'expérience ne prouvera pas
 
 Elle ne dira **pas** que le texte est mieux lu. Elle dira si la matière retirée
 diffère de la matière gardée. C'est un maillon, pas la chaîne — mais c'est le
