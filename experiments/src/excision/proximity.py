@@ -1,0 +1,182 @@
+#!/usr/bin/env python3
+"""Mesure la proximite anormale entre regions NON ADJACENTES d'une trace aplatie.
+
+Une trace `tifxyz` est deja la parametrisation 2D : chaque cellule de grille porte
+sa position 3D. Deux cellules eloignees dans l'image mais voisines dans l'espace
+decrivent donc deux parties du rouleau qui se frolent -- ce qui est le symptome
+geometrique du saut de spire.
+
+LA REGLE QUI FAIT LA METRIQUE : une proximite ne veut rien dire dans l'absolu.
+Mesure sur une trace reelle, l'ecart typique entre parties non adjacentes vaut
+177 um en mediane mais s'etale de 61 um (p1) a 303 um (p90), parce que le tassement
+varie le long d'un rouleau. 100 um est donc banal la ou les couches sont a 120 um,
+et alarmant la ou elles sont a 400 um. On normalise par l'espacement LOCAL, jamais
+par une constante -- une constante avait deja produit une conclusion fausse.
+
+Ne demande ni volume, ni modele, ni etiquette : la trace seule suffit.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+import numpy as np
+import tifffile
+
+MISSING = -1.0
+
+
+class ProximityError(RuntimeError):
+    """Leve quand la trace ne permet pas la mesure."""
+
+
+def load_trace(mesh_dir: Path):
+    """Charge une trace et rend (positions 3D, lignes, colonnes) des cellules valides."""
+    planes = []
+    for axis in ("x", "y", "z"):
+        path = mesh_dir / f"{axis}.tif"
+        if not path.is_file():
+            raise ProximityError(f"plan absent : {path}")
+        planes.append(tifffile.imread(path))
+    x, y, z = planes
+    valid = (x != MISSING) & (y != MISSING) & (z != MISSING)
+    if not valid.any():
+        raise ProximityError(f"aucune cellule valide dans {mesh_dir}")
+    rows, cols = np.nonzero(valid)
+    return np.column_stack([x[valid], y[valid], z[valid]]), rows, cols
+
+
+def nearest_non_adjacent(
+    points: np.ndarray,
+    cols: np.ndarray,
+    sample: np.ndarray,
+    apart: int,
+    search_radius: float,
+):
+    """Distance de chaque cellule echantillonnee a la partie NON ADJACENTE la plus proche.
+
+    « Non adjacente » se juge dans la PARAMETRISATION, pas dans l'espace : deux
+    cellules voisines dans l'image sont censees etre voisines en 3D, et les compter
+    noierait le signal sous la continuite ordinaire de la surface.
+
+    Rend NaN quand rien de non adjacent n'est dans le rayon de recherche -- une
+    absence de mesure, a ne pas confondre avec une grande distance.
+    """
+    from scipy.spatial import cKDTree
+
+    tree = cKDTree(points)
+    neighbourhoods = tree.query_ball_point(points[sample], r=search_radius)
+    distances = np.full(sample.size, np.nan)
+    for index, (cell, neighbours) in enumerate(zip(sample, neighbourhoods)):
+        candidates = np.asarray(neighbours, dtype=np.int64)
+        if candidates.size == 0:
+            continue
+        far = candidates[np.abs(cols[candidates] - cols[cell]) >= apart]
+        if far.size == 0:
+            continue
+        distances[index] = np.sqrt(((points[far] - points[cell]) ** 2).sum(axis=1)).min()
+    return distances
+
+
+def local_baseline(cols: np.ndarray, sample: np.ndarray, distances: np.ndarray, window: int):
+    """Espacement typique AUTOUR de chaque cellule, en colonnes de la parametrisation.
+
+    La mediane, et non la moyenne : la grandeur qu'on cherche est justement une
+    queue basse, et une moyenne se laisse tirer par ce qu'on veut detecter.
+    """
+    order = np.argsort(cols[sample])
+    sorted_cols = cols[sample][order]
+    sorted_distance = distances[order]
+    baseline = np.full(sample.size, np.nan)
+    for position in range(sorted_cols.size):
+        lo = np.searchsorted(sorted_cols, sorted_cols[position] - window, side="left")
+        hi = np.searchsorted(sorted_cols, sorted_cols[position] + window, side="right")
+        window_values = sorted_distance[lo:hi]
+        window_values = window_values[~np.isnan(window_values)]
+        if window_values.size >= 8:
+            baseline[position] = np.median(window_values)
+    restored = np.full(sample.size, np.nan)
+    restored[order] = baseline
+    return restored
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Proximite anormale entre regions non adjacentes d'une trace.",
+        epilog="Ne demande ni volume ni modele. Voir docs/05_le_predicat_est_trop_etroit.md.",
+    )
+    parser.add_argument("mesh", type=Path, help="repertoire .tifxyz")
+    parser.add_argument("--sample", type=int, default=20000, help="cellules tirees (defaut: 20000)")
+    parser.add_argument(
+        "--apart", type=int, default=200,
+        help="ecart minimal en colonnes pour dire « non adjacent » (defaut: 200)",
+    )
+    parser.add_argument(
+        "--search-radius", type=float, default=80.0,
+        help="rayon de recherche 3D, en voxels (defaut: 80)",
+    )
+    parser.add_argument(
+        "--window", type=int, default=150,
+        help="demi-largeur en colonnes de la fenetre de reference locale (defaut: 150)",
+    )
+    parser.add_argument("--voxel-um", type=float, default=7.91, help="taille du voxel en um")
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--label", default="", help="etiquette portee par la sortie")
+    parser.add_argument("--json", action="store_true", dest="as_json")
+    args = parser.parse_args()
+
+    try:
+        points, _, cols = load_trace(args.mesh)
+    except ProximityError as error:
+        print(f"erreur : {error}", file=sys.stderr)
+        return 2
+
+    generator = np.random.default_rng(args.seed)
+    take = min(args.sample, points.shape[0])
+    sample = generator.choice(points.shape[0], take, replace=False)
+
+    distances = nearest_non_adjacent(points, cols, sample, args.apart, args.search_radius)
+    measured = ~np.isnan(distances)
+    if measured.sum() < 100:
+        print(
+            f"erreur : seulement {int(measured.sum())} cellules mesurees, "
+            "trop peu pour une distribution",
+            file=sys.stderr,
+        )
+        return 3
+
+    baseline = local_baseline(cols, sample, distances, args.window)
+    usable = measured & ~np.isnan(baseline) & (baseline > 0)
+    ratio = distances[usable] / baseline[usable]
+
+    report = {
+        "label": args.label or args.mesh.parent.parent.name,
+        "cells": int(points.shape[0]),
+        "sampled": int(take),
+        "measured": int(measured.sum()),
+        "usable": int(usable.sum()),
+        "spacing_um_median": float(np.median(distances[measured]) * args.voxel_um),
+        "spacing_um_p5": float(np.percentile(distances[measured], 5) * args.voxel_um),
+        # La grandeur qui compte : la queue basse du rapport au voisinage local.
+        "ratio_p1": float(np.percentile(ratio, 1)),
+        "ratio_p5": float(np.percentile(ratio, 5)),
+        "ratio_median": float(np.median(ratio)),
+        "fraction_below_half": float((ratio < 0.5).mean()),
+        "fraction_below_third": float((ratio < 1 / 3).mean()),
+    }
+
+    if args.as_json:
+        json.dump(report, sys.stdout)
+        sys.stdout.write("\n")
+        return 0
+
+    for key, value in report.items():
+        print(f"{key:24} {value}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
