@@ -146,3 +146,25 @@ regardé. C'est exactement la barre fixée en `06` §1bis, et elle n'est pas fra
 ⚠ **Ne pas confondre** : *le modèle retrouve les traits encrés* (mesuré, AUC 0,92)
 et *le texte est lisible* (non mesuré, demande un expert). Les deux se ressemblent
 assez pour qu'on prenne le premier pour le second.
+
+---
+
+## 7. ⚠ Corrigé et étendu par `10` — 2026-08-17
+
+Le segment **entier** a été passé depuis (`10_segment_complet.md`). Deux
+rectifications à ce document :
+
+1. **L'AUC tient et monte légèrement** : **0,925** sur 44,7 M de pixels (contre 0,919
+   sur 7,8 M ici), avec un contrôle mélangé à 0,500 exactement. Le chiffre est donc
+   confirmé à l'échelle du segment.
+2. ⚠ **La §5 de ce document manquait sa ligne de base.** Restreindre l'évaluation aux
+   zones annotées relève la précision — mais la densité d'encre y passe de 3,3 % à
+   24,4 %, donc **le hasard lui-même y est plus précis**. Comparé à cette ligne de
+   base, le gain **décroît** de 10,8× à 2,8× quand on restreint. La hausse de
+   précision est donc largement un effet de taux de base et non la preuve que les
+   faux positifs sont des trous d'annotation.
+
+Ce qui remplace cet argument est plus fort et vient de la longueur : sur 23 bandes,
+la densité prédite suit la densité étiquetée à **rho = +0,796** (p = 5,7 × 10⁻⁶), et
+les bandes que l'humain laisse vides sont, pour la plupart, **vides aussi pour le
+modèle** (0,35 à 1,66 %). Un détecteur qui fabriquerait de l'encre les remplirait.

@@ -217,3 +217,57 @@ forme**, et seulement avec son témoin négatif.
 C'est pour cette raison que le format imposé au §3 réclame des caractères et des
 confiances, jamais un commentaire libre : un commentaire libre est exactement
 l'endroit où cette embellie se produit.
+
+---
+
+## 8. ⚠⚠ Le §6 s'était trompé de cause — corrigé le 2026-08-17
+
+Le §6 concluait : *« aucune mesure de cohérence ne peut fonctionner sur 20 × 24 mm,
+il faut assez de lignes — donc le segment entier »*.
+
+**Le segment entier a été passé, et il n'a pas plus de lignes.** Mesuré sur ses
+91,7 × 30,7 mm : **5 lignes de texte dans la vérité terrain, 4 dans la prédiction**,
+d'interligne 3,6 à 7,1 mm. Ce segment est une bande étroite coupée *en travers* du
+texte : l'allonger allonge les lignes, il n'en ajoute pas.
+
+Le juge structurel a donc échoué une **troisième** fois, avec une troisième cause
+(détail et deux défauts de ma propre mesure dans `10` §4) :
+
+| tentative | cause de l'échec |
+|---|---|
+| Kraken | mauvaise modalité — aucun modèle entraîné sur papyri |
+| score structurel, région | *croyait* manquer de surface |
+| score structurel, segment | **manque de LIGNES**, et les glyphes fusionnent |
+
+Ce qu'un juge mécanique demanderait réellement : (a) plusieurs dizaines de lignes,
+donc un segment couvrant **plusieurs colonnes** de texte ; (b) des glyphes
+**séparables**, alors qu'au seuil de décision du modèle les lettres voisines
+fusionnent en composantes connexes géantes — 41 composantes dans une région qui en
+montre des centaines.
+
+**Le protocole des §1 à 5 reste donc le seul juge disponible**, et le cap reste le
+jugement humain.
+
+### Les images du protocole sont refaites, et le témoin négatif est meilleur
+
+`data/juge/` porte désormais trois images tirées du **même segment**, du **même
+passage** du modèle, ne différant que par leur contenu — donc tout écart de réponse
+porte sur le papyrus et non sur la chaîne :
+
+| image | ce que c'est | réponse attendue |
+|---|---|---|
+| `A_positif.png` | région de texte, lettres franches | il doit relever des lettres |
+| `B_negatif.png` | bande **vierge**, accordée par l'humain **et** le modèle | `AUCUNE LETTRE VISIBLE` |
+| `C_inconnu.png` | bande où le modèle produit du signal et l'humain n'a rien annoté | — |
+
+⚠ **`B_negatif.png` est un bien meilleur témoin que le précédent** : il vient du même
+segment et de la même passe, alors que l'ancien venait d'ailleurs. Un modèle qui
+transcrit A et B avec la même assurance n'a rien lu — et c'est le seul test qui
+puisse l'établir.
+
+⚠ **L'ordre reste irréversible** : A et B d'abord, C seulement après. Montrer C avant
+d'avoir calibré rend le calibrage impossible sans biais.
+
+⚠ **Les images sont en orientation de lecture** (rotation 270°). Les versions
+antérieures présentaient les lettres couchées, ce qui pénalise un juge pour une
+raison qui n'a rien à voir avec la détection d'encre.

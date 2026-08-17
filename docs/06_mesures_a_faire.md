@@ -205,12 +205,18 @@ perdu du **début** des textes.
 Le cap de `1bis` n'est pas franchi : on a des **lettres**, pas un **texte jugé par
 un expert**. Ce qui manque, du plus décisif au moins :
 
-### A. Une colonne entière de texte, pas une fenêtre
+### A. ✅ FAITE — une colonne entière de texte (`10_segment_complet.md`)
 
-Tout ce qui précède porte sur 20 × 24 mm. Un papyrologue ne juge pas sur deux
-lettres : il lui faut des **lignes suivies**. Le segment `20230909121925` fait
-11591 × 3882 px, soit **3,4 h** à traiter en entier sur le GPU — donc faisable en
-une nuit. C'est le prochain livrable, et le seul qui permette de demander un avis.
+Segment `20230909121925` entier : 99 918 fenêtres, **38,5 min** sur l'iGPU Arc (et
+non 3,4 h — l'estimation d'ici était pessimiste d'un facteur 5). Résultat :
+**AUC 0,925** sur 44,7 M de pixels, contrôle mélangé à 0,500, et **4 à 5 lignes** de
+grec lisible sur 91,7 × 30,7 mm.
+
+⚠ **Et elle a réfuté la raison pour laquelle elle était prioritaire.** On l'attendait
+pour débloquer le juge structurel, qui *croyait* manquer de surface (`09` §6). Le
+segment entier n'a **pas plus de lignes** — c'est une bande coupée en travers du
+texte, l'allonger allonge les lignes sans en ajouter. Le juge mécanique a donc échoué
+une troisième fois, avec une troisième cause. Voir `09` §8.
 
 ### B. Le contrôle en aveugle des modèles de langue
 
@@ -225,7 +231,17 @@ ne pourra plus le calibrer sans biais.
 Tous les chiffres de `07` et `08` viennent de Scroll 1. Scroll 5 se comporte déjà
 différemment sur le confond longueur/qualité. Rien ne dit que l'AUC voyage.
 
-### D. Boucler la métrique de `07` sur le résultat de `08`
+### D. ⭐ Boucler la métrique de `07` sur le résultat de `08`
+
+⚠ **Bloquée sur un fait matériel, constaté le 2026-08-17** : le maillage `tifxyz` de
+`20230909121925` n'est pas dans `repos/windcheck/data/scroll1_tifxyz`, et les 46
+traces de `docs/proximity_scroll1.jsonl` ne l'incluent pas. La première étape est
+donc un téléchargement, pas un calcul. Une fois là, `10` §3bis donne une question
+précise à lui poser : *les bandes 8704–9728, où le modèle produit du signal informe
+que personne n'a annoté, portent-elles une proximité anormale ?* Si oui, ce « signal »
+est une feuille voisine vue à travers, et la métrique devient un prédicteur.
+
+#### La question de fond
 
 La question qui relie les deux moitiés du travail : **une trace à forte proximité
 anormale donne-t-elle une encre moins lisible ?** C'est la mesure 3.8, et elle est

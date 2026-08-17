@@ -5,20 +5,15 @@ Document de passation. **À lire en entier avant de reprendre**, puis suivre
 
 ---
 
-## 1. ⚠ CE QUI TOURNE ENCORE
+## 1. CE QUI TOURNE — rien (au 2026-08-17, 17 h 40)
 
-| PID | quoi | attendu | sortie |
-|---|---|---|---|
-| `537466` | inférence d'encre sur le **segment entier** `20230909121925` | ~40 min (lancé à 31 min au moment d'écrire) | `data/out/ink_segment_complet.npy` |
+La passe sur le segment entier est **terminée** : 99 918 fenêtres, 38,5 min, 23 ms
+par fenêtre. Résultats dans `docs/10_segment_complet.md`.
 
-```bash
-# verifier
-kill -0 537466 2>/dev/null && echo actif || echo fini
-grep -vE "SyntaxWarning|if amt" docs/segment_complet.log | tail -6
-```
-
-**Pourquoi il tourne** : c'est la priorité A — aucune mesure de cohérence (ni HTR ni
-structurelle) ne fonctionne sur 20 × 24 mm, il faut assez de lignes. Voir §6.
+⚠ **Le PID de la table précédente (`537466`) était le WRAPPER bash**, pas le
+processus Python (`537472`). Et son log restait vide non parce que rien ne se
+passait, mais parce que **Python bufferise sa sortie quand elle est redirigée**. Deux
+raisons distinctes de croire un run mort alors qu'il tourne.
 
 ⚠ **Piège payé quatre fois dans ce projet** : `pkill -f` / `pgrep -f` **matchent
 leur propre ligne de commande**. Trois boucles d'attente ont ainsi tourné 15 heures.
@@ -34,7 +29,7 @@ l'ingérer : le raccordement en aval est un lecteur de plus, pas une architectur
 prix pour financer du matériel de recherche**. Il change la priorisation — une piste
 se juge aussi sur le fait qu'elle soit **soumissionnable**.
 
-**Budget disque** : 100 Go autorisés, **38 Go utilisés**.
+**Budget disque** : 100 Go autorisés, **38 Go utilisés**, pas une limite fixe mais juste pour éviter de télécharger n'importe quoi et de demander si c'est vraiment nécessaire avant au point de devoir dépasser le budget.
 
 ## 3. L'ordre de lecture des documents
 
@@ -49,7 +44,8 @@ se juge aussi sur le fait qu'elle soit **soumissionnable**.
 | **`06`** | **le carnet de mesures** — faites, en attente, écartées, et la suite priorisée |
 | `07` | la réparation ne déplace pas le défaut (46 traces) |
 | `08` | ⭐ **la passe complète** : AUC 0,919 hors entraînement, lettres grecques |
-| `09` | protocole de jugement par modèle, et deux juges mécaniques en échec |
+| `09` | protocole de jugement par modèle, et **trois** juges mécaniques en échec |
+| **`10`** | ⭐ **le segment entier** : AUC 0,925 sur 44,7 Mpx, 9,2 cm de grec lisible |
 
 ## 4. L'outillage monté, et comment le relancer
 
@@ -93,10 +89,15 @@ Coût : 4 cm² en **5,6 min**, un segment de 45 Mpx en **~40 min**.
 
 ## 5. Les résultats acquis
 
-1. **La chaîne complète marche** : trace → couches publiées → modèle → lettres
-   grecques visibles, **AUC 0,919** sur un segment jamais vu, 52 s/cm² (`08`).
-   ⚠ L'étiquetage de vérité terrain est **partiel** (50 % des lignes vides), donc la
-   précision mesurée est un **plancher**, pas une performance.
+1. **La chaîne complète marche, sur un segment ENTIER** : **AUC 0,925** sur
+   44,7 M de pixels, contrôle mélangé à **0,500** exactement, 4 à 5 lignes de grec
+   lisible sur 91,7 × 30,7 mm (`10`). 38,5 min sur l'iGPU Arc.
+   ⚠ La précision (0,355 à 0,681 selon le domaine) reste un **plancher**, et `10`
+   §2bis corrige `08` : la hausse obtenue en restreignant aux zones annotées est
+   **largement un effet de taux de base**, pas une preuve de trous d'annotation.
+1bis. **Le modèle ne fabrique pas d'encre sur du vierge** — mesuré : la densité
+   prédite suit la densité étiquetée à **rho = +0,796** sur 23 bandes, et les bandes
+   vierges restent à 0,35–1,66 % contre 12,9 % dans le texte.
 2. **Le rendu n'a jamais été manquant** : les couches sont **déjà publiées** sur
    `dl.ash2txt.org`, en accès libre. Ni renderer à construire, ni volume à streamer.
 3. **`windcheck` reproduit à l'identique** sur deux corpus entiers : 53/53 (Scroll 5)
@@ -116,16 +117,25 @@ Coût : 4 cm² en **5,6 min**, un segment de 45 Mpx en **~40 min**.
 > extrait, soumis à un expert qui dise si ça fait sens — et ce sur plusieurs
 > rouleaux.** (décision de l'auteur)
 
-On a des **lettres**, pas un **texte jugé**. Et deux tentatives de juge mécanique
-ont échoué avec leurs raisons (`09` §6) :
+On a des **lettres**, pas un **texte jugé**. Et **trois** tentatives de juge
+mécanique ont échoué, chacune avec sa raison (`09` §6 et §8) :
 
 - **Kraken** : aucun de ses 65 modèles n'est entraîné sur des papyri ; le seul modèle
   grec est pour du **texte imprimé**. Sortie : 6 caractères de bruit.
 - **Score structurel** : ne discrimine pas, parce que la région ne contient que 4-5
   lignes et que la **grille de ré-agrandissement ×16** pollue les courts décalages.
 
-**Les deux échouent pour la même raison de fond : la région est trop petite.** D'où
-la priorité A.
+- **Score structurel, sur le segment ENTIER** : échoue encore, et le diagnostic
+  précédent était **faux**. Le segment entier n'a pas plus de lignes — il n'en porte
+  que **4 à 5**, parce que c'est une bande coupée *en travers* du texte : l'allonger
+  allonge les lignes sans en ajouter. S'ajoute un second obstacle indépendant : au
+  seuil de décision du modèle, les lettres voisines **fusionnent** en composantes
+  connexes géantes (41 composantes dans une région qui en montre des centaines).
+
+**Ce qu'un juge mécanique demanderait réellement** : plusieurs dizaines de lignes —
+donc un segment couvrant *plusieurs colonnes* — **et** des glyphes séparables. Aucun
+segment de ce type ne les fournit. Le protocole de `09` §1–5 est donc le seul juge
+disponible, et le cap reste humain.
 
 ⚠ Et un modèle de langue **embellit** : soumis à une image, Gemini a affirmé une
 « régularité d'interligne exacte » là où la mesure donne 590 et 1251 px (facteur
@@ -134,14 +144,15 @@ la priorité A.
 
 ## 7. La suite, dans l'ordre
 
-### A. Une colonne entière de texte 🔄 EN COURS (PID 537466)
-Seul livrable qui permette de demander un avis à un expert.
+### A. ✅ FAITE — une colonne entière de texte (`10`)
 
-### B. Le contrôle en aveugle des modèles de langue
-Images prêtes : `data/juge/A_positif.png` (texte réel) et `B_negatif.png` (papyrus
-**sans encre**, même pipeline). Prompt dans `09` §3.
-⚠ **À faire AVANT** de montrer quoi que ce soit d'inconnu — après, on ne peut plus
-calibrer sans biais.
+### B. ⭐⭐ Le contrôle en aveugle des modèles de langue — **BLOQUÉ SUR L'AUTEUR**
+Paquet prêt et autonome : **`data/juge/PROTOCOLE.md`** + trois images tirées du même
+segment et de la même passe (`A_positif` texte / `B_negatif` vierge accordé /
+`C_inconnu` la bande en désaccord), en **orientation de lecture**.
+⚠ **C'est devenu le seul juge restant** — le juge structurel a échoué trois fois.
+⚠ **L'ordre est irréversible** : A et B d'abord, C après. Et une image non calibrée a
+**déjà** été montrée une fois (`08_verite.png`, `09` §7), donc le fil doit être neuf.
 
 ### C. Le vivier d'idées sur l'onde radiale
 La localisation des fusions par **comptage** a échoué (475 sites, tous près du
