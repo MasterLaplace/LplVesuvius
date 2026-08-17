@@ -11,6 +11,7 @@ dependencies = [
     "imagecodecs",
     "timesformer-pytorch",
     "pillow>=12.3.0",
+    "scipy>=1.18.0",
 ]
 
 [tool.uv.sources]
