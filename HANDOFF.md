@@ -159,63 +159,46 @@ disponible, et le cap reste humain.
 2,1) et une autocorrélation à 0,159. Ne jamais lui accepter une affirmation
 **quantitative** sur l'image — ces grandeurs se mesurent.
 
-## 7. La suite, dans l'ordre
+## 7. La suite, dans l'ordre — état au 2026-08-17 (fin de batch)
 
-### A. ✅ FAITE — une colonne entière de texte (`10`)
+### ✅ FAITES aujourd'hui
 
-### B. ✅ FAITE — le juge est calibré, et il a tranché (`09` §9 et §10)
-`analysis/src/judge_api.py`, `gemini-3.5-flash`, 10 appels, ~34 000 jetons.
-**15 panneaux sur 16, ZÉRO fabrication**, et la lisibilité déclarée sépare sans
-chevauchement le vierge (0–1) du texte (3–6). Le témoin voyage **dans** l'image, donc
-il ne peut plus être sauté — c'est ce qui a corrigé l'échec du protocole manuel.
+| # | quoi | résultat |
+|---|---|---|
+| A | colonne entière de texte | **AUC 0,925** sur 44,7 Mpx, 9,2 cm de grec (`10`) |
+| B | juge de langue calibré | **15/16, zéro fabrication** ; a tranché la bande douteuse (`09`) |
+| C2 | dépliage polaire + fusions | 4 candidats, **persistants à p = 0,0001** (`11`) |
+| C3 | cohérence du compte le long de z | profil en **U**, aucune rupture ; papyrus **~14 m** (`11`) |
+| `06` §2.1 | monotonie radiale du winding | ❌ **écartée**, `winding.py` supprimé |
+| `06` §2.4 | théorie du dommage de l'auteur | **à moitié** : cœur −20 %, extérieur −5 à 8 %. **Pas un U** |
+| `06` §2.4bis | pourquoi le rayon varie en z | rouleau **elliptique 1,26–1,57**, écrasement ET perte |
+| `06` §3.5 | le niveau 2 de la pyramide suffit-il ? | ✅ **OUI — 89 % des murs pour 33 Gio au lieu de 2100** |
+| — | tous les témoins | `./tools/temoins.sh` → **16 contrôles verts** |
 
-⚠ **Modèles éliminés par mesure** : `gemini-2.5-*` → 404 (retirés aux nouveaux
-comptes), `gemini-3.1-pro-preview` et `gemini-pro-latest` → 429 (hors offre gratuite),
-`gemini-3.7-flash` → 503. Utiliser `--list-models`, jamais un nom codé en dur.
+### 🔄 EN COURS
 
-⚠ **La clé de l'auteur est passée en clair dans une conversation** ; elle est
-révocable sur `aistudio.google.com/apikey` si besoin. Elle n'est écrite dans aucun
-fichier du dépôt.
+`fusion_scan` sur une bande large (9 coupes, 6567→7367) → `docs/fusions_bande_large_0172.json`
 
-### C. 🔄 EN COURS — l'onde radiale (voir `11`, bien plus détaillé)
+### ⏳ CE QUI RESTE, avec ce qui le bloque
 
-**Acquis** : le code perdu est récupéré et vérifié ; le dépliage polaire marche ;
-**4 candidats de fusion** groupés vers 17 mm sur un secteur de 50°, avec la coupe du
-cœur validée par mesure (les sites internes suivaient la coupe = artefacts).
+| # | quoi | ce qui bloque |
+|---|---|---|
+| **D** ⭐⭐ | `06` §3.8 — la proximité prédit-elle la **lisibilité** ? | le maillage `tifxyz` de `20230909121925` **n'est pas dans le jeu** ; il faut le télécharger. C'est le seul item qui convertirait une métrique géométrique en argument sur le **résultat final** |
+| **E** ⭐ | second rouleau — l'AUC 0,925 voyage-t-elle ? | rien ; ~2,2 Go de couches + 40 min de GPU. Tous les chiffres de `07`/`08`/`10` viennent de Scroll 1 |
+| C5 / `06` §3.4 ⭐ | direction des fibres comme séparateur | problème ouvert nº 5 du concours, discriminant **physique**. Les prédictions nnUNet existent. Coût élevé, valeur la plus haute |
+| C4 / `06` §3.6 | revoir les sites persistants à **2,4 µm** (ESRF) | distinguerait une vraie soudure d'un défaut de résolution. On a désormais **4 endroits précis** au lieu d'un rouleau |
+| `06` §2.3 | refaire 1.11 avec le **vrai** ombilic | `umbilicus.txt` sur Scroll 1 |
+| `06` §3.2 | normaliser la proximité **par le rayon** | 1.11 montre un gradient de 28 % non corrigé |
+| — ⚠ | **`fusion_scan` au niveau 2** | `fusions.py` code son voxel en dur ; le fichier **refuse** désormais tout niveau ≠ 0 plutôt que de rendre un chiffre faux. Le débloquer donne le facteur **64** établi par `pyramid.py` |
 
-**En cours** : tiennent-ils le long de *z* ? Un dégât physique occupe une hauteur.
+### 🎯 Ce que je ferais en premier
 
-**Reste du vivier** : (4) revoir les 4 sites à 2,4 µm ESRF — c'est maintenant une
-liste de quatre endroits au lieu d'un rouleau ; (5) le sens des fibres comme
-séparateur, problème ouvert nº5, coût élevé et valeur la plus haute.
+**Le blocage `fusion_scan` au niveau 2** — c'est une mise à l'échelle de quelques
+lignes, et `pyramid.py` vient d'établir qu'elle vaut un facteur **64** sur la donnée.
+Elle rend le balayage du rouleau **entier** faisable, alors qu'il est aujourd'hui limité
+à des bandes.
 
-<details><summary>vivier d'origine, conservé</summary>
-La localisation des fusions par **comptage** a échoué (475 sites, tous près du
-centre = bruit du détecteur). Cinq pistes, par coût croissant :
-
-1. **Suivre les feuilles comme des courbes** en (angle, rayon) plutôt que recompter
-   des crêtes — une fusion est deux arcs qui se rejoignent ;
-2. ⭐ **Déplier en coordonnées polaires** : les spires deviennent des lignes quasi
-   horizontales, et tout le problème passe en traitement d'image ordinaire. Rend (1)
-   presque trivial ;
-3. **Cohérence du compte le long de z** — une rupture brutale localise un dégât en
-   3D. Test à une dimension, très bon marché ;
-4. **Revoir les sites suspects à 2,4 µm** (ESRF) : distingue une vraie fusion d'un
-   défaut de résolution ;
-5. **Le sens des fibres comme séparateur** — problème ouvert nº5, discriminant
-   *physique*. Coût élevé, valeur la plus haute.
-
-</details>
-
-### D. Boucler `07` sur `08`
-*Une trace à forte proximité anormale donne-t-elle une encre moins lisible ?*
-On a la métrique sur 46 traces et l'AUC de l'autre côté. ⚠ Demande de télécharger
-les couches de plusieurs traces (~2 à 15 Go chacune). Si la corrélation existe, la
-métrique devient un **prédicteur de lisibilité** — exactement ce qu'un Progress
-Prize récompense.
-
-### E. Un second rouleau
-Tous les chiffres de `07` et `08` viennent de Scroll 1.
+Puis **D**, parce que c'est le seul qui parle du texte plutôt que de la géométrie.
 
 ## 8. ⚠ Les pièges de ce dépôt, payés au moins une fois
 
