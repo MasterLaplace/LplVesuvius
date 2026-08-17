@@ -131,6 +131,7 @@ ce que `SourceV1` existe pour porter.
 | [`docs/04_experience_excision.md`](docs/04_experience_excision.md) | l'experience et son resultat : H0 non rejetee, 75 810 cellules |
 | [`docs/05_le_predicat_est_trop_etroit.md`](docs/05_le_predicat_est_trop_etroit.md) | **le resultat qui ouvre la suite** : la reparation laisse le defaut en place |
 | [`docs/06_mesures_a_faire.md`](docs/06_mesures_a_faire.md) | **le carnet de mesures** : faites, en attente, ecartees, avec les regles apprises |
+| [`docs/08_premiere_passe_complete.md`](docs/08_premiere_passe_complete.md) | ⭐ **la passe complete** : des couches aux lettres grecques, AUC 0,92 hors entrainement |
 | [`docs/07_reparee_nest_pas_propre.md`](docs/07_reparee_nest_pas_propre.md) | ⭐ **le resultat** : une trace reparee passe le recensement sans etre saine |
 
 ## Rejouer

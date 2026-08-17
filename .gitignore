@@ -26,3 +26,10 @@ __pycache__/
 # Sous-produits du controle de miroir : regeneres a chaque passe.
 /docs/sitemap.xml
 /docs/sitemap_paths.txt
+
+# Cartes d encre et images produites : regenerables par inference_xpu/src/infer_ink.py
+/data/out/
+/inference/.venv/
+/inference/uv.lock
+/inference_xpu/.venv/
+/inference_xpu/uv.lock

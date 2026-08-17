@@ -10,6 +10,7 @@ dependencies = [
     "tifffile",
     "imagecodecs",
     "timesformer-pytorch",
+    "pillow>=12.3.0",
 ]
 
 [tool.uv.sources]
