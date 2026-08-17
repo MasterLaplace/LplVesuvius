@@ -10,6 +10,7 @@ dependencies = [
     "s3fs>=2024.6.0",
     "fsspec>=2024.6.0",
     "scipy>=1.14",
+    "imagecodecs>=2026.8.16",
 ]
 
 [build-system]
