@@ -33,3 +33,6 @@ __pycache__/
 /inference/uv.lock
 /inference_xpu/.venv/
 /inference_xpu/uv.lock
+
+# Les figures des documents sont suivies : elles portent des resultats mesures.
+!/docs/images/

@@ -91,6 +91,48 @@ robuste ; la précision, elle, est un plancher.
 annotée est surtout faite de **colonnes**, pas de lignes. Une évaluation propre
 demanderait le masque d'annotation, que ce jeu ne fournit pas.
 
+## 5bis. Les images
+
+Toutes portent la **même région** de `20230909121925` (2560 × 3072 px, soit
+20 × 24 mm à 7,91 µm/px), réduites à 35 % pour le dépôt. Le gris uni est la zone
+que le balayage n'atteint pas : ni fond, ni absence d'encre — **pas regardé**.
+
+### La donnée brute, et pourquoi le problème existe
+
+![Tranche de papyrus, couche 30](images/08_papyrus.png)
+
+Une tranche du volume, à mi-épaisseur de la feuille. On distingue nettement les
+**deux couches de fibres perpendiculaires** du papyrus — c'est ainsi qu'il est
+fabriqué. Et on ne voit **aucune encre** : l'encre au carbone a une densité presque
+identique à celle du support carbonisé. C'est exactement pour ça qu'il faut un
+modèle.
+
+### Ce que le modèle produit
+
+![Prédiction d'encre](images/08_prediction.png)
+
+Des lettres grecques, lisibles à l'œil. Le flou vient de la sortie du modèle, qui
+est **au 1/16** de l'entrée (4×4 par fenêtre de 64×64) puis ré-agrandie.
+
+### La vérité terrain publiée
+
+![Étiquetage humain](images/08_verite.png)
+
+⚠ **Nettement plus clairsemée que la prédiction**, et c'est le fait qui a déclenché
+la §5 : l'annotation est partielle, donc la précision mesurée est un plancher.
+
+### La superposition
+
+![Accord et désaccord](images/08_superposition.png)
+
+Vert = encre détectée et étiquetée · rouge = détectée non étiquetée · bleu =
+étiquetée non détectée.
+
+Ce qu'il faut y lire : **le vert dessine les lettres**, et les erreurs sont
+massivement sur les **bords des traits** — un effet du ré-agrandissement ×16, pas
+une confusion sur la présence d'une lettre. Le rouge isolé, lui, est ambigu : faux
+positif, ou encre réelle non annotée.
+
 ## 6. Ce que ça établit, et ce que ça n'établit pas
 
 **Établi** : la chaîne complète fonctionne — trace → couches publiées → modèle →
