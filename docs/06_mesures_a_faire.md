@@ -39,6 +39,9 @@ Papiers primaires repérés, à lire :
 | 1.9 | Survie de l'anomalie à la réparation | à 79 µm : **8/9 croisements survivent**, valeurs inchangées | `05` |
 | 1.10 | Bande sévère ≡ couverture > 1 tour | **10 traces**, dont 9 `auto_grown` — le « 9× » était tautologique | `05` |
 | 1.11 | Espacement selon le rayon | **158 µm au cœur → 203 µm dehors** (+28 %, monotone sur 5 tranches) | ici |
+| 1.12 | Vérification des données Scroll 1 **par le comportement** | triangles et contacts diagonale 0 **exacts** vs publication | `07` |
+| 1.13 | Métrique de proximité à longueur contrôlée (3 traces, ~7,8 tours) | ordonne correctement : **0,09 % → 0,15 % → 0,37 %** selon les croisements | `07` |
+| 1.14 | ⭐ La métrique **survit à la réparation** | recensement 11 673 → **0** ; métrique 0,37 → **0,38 %** ; témoin sain **0,09 %** | `07` |
 
 ## 2. À faire — priorité haute
 
@@ -67,18 +70,25 @@ refuse des reconstructions correctes — le piège exact de `CaveKind::Layered`.
 ⚠ **Manque** : pas d'`umbilicus.txt` pour Scroll 5. À dériver, ou travailler sur
 Scroll 1 / Scroll 3.
 
-### 2.2 Le témoin qui sépare longueur et qualité
+### 2.2 ✅ FAITE — le témoin qui sépare longueur et qualité
 
-1.10 a montré que « les traces automatiques sont plus atteintes » est confondu par
-la longueur. Scroll 1 fournit ce que Scroll 5 n'a pas :
+Résultat en `07`. La métrique **ordonne correctement** à longueur contrôlée
+(0,09 % / 0,15 % / 0,37 % pour 0 / 52 / 408 croisements), et surtout elle **survit à
+la réparation** — ce qui écarte l'objection « elle ne fait que re-détecter les
+croisements ».
 
-- **`20231022170901`** : 7,66 tours, **0 croisement** — long ET propre ;
-- **paire appariée `w038-045`** : deux traces de la même région, 7,92 et 7,82 tours,
-  avec **408 contre 52** croisements.
+⚠ **Leçon d'outillage payée ici** : le récupérateur de `windcheck` a tourné
+**3 h 15** dont l'essentiel à énumérer un préfixe de **11 millions de clés et 20 To**
+pour en extraire 400 Mo — il avait lu **15,26 Go** de réponses XML. Et trois de mes
+propres boucles d'attente, dont la ligne de commande contenait `windcheck.fetch`,
+se voyaient mutuellement via `pgrep -f` et tournaient depuis **15 heures**. C'est la
+quatrième occurrence de ce piège dans ce projet : **tuer et attendre par PID, jamais
+par motif.**
 
-**Ce que ça tranche** : si la métrique de proximité sépare ces deux-là, elle mesure
-la qualité ; si elle les confond, elle mesure la longueur. *(Téléchargement en
-cours.)*
+⚠ Conséquence assumée : le manifeste SHA-256 de Scroll 1 n'existe pas (écrit en fin
+de course, interrompue). La vérification s'est faite **par le comportement**
+(1.12) — plus forte, puisqu'elle prouve que la donnée est juste et pas seulement
+intacte.
 
 ### 2.3 Vérifier 1.11 avec le vrai ombilic
 
@@ -108,12 +118,15 @@ perdu du **début** des textes.
 
 | # | mesure | ce que ça trancherait |
 |---|---|---|
-| 3.1 | Métrique de proximité sur les 36 traces longues de Scroll 1 | passage de l'anecdote à la distribution |
+| 3.1 | 🔄 **EN COURS** — métrique de proximité sur **toutes** les traces de Scroll 1 | passage de trois anecdotes à une distribution ; corrélation avec les croisements publiés sur 55 traces au lieu de 3 |
 | 3.2 | Normaliser la proximité **par le rayon** en plus du voisinage | 1.11 montre un gradient de 28 % non corrigé aujourd'hui |
 | 3.3 | Recensement `windcheck` sur Scroll 1, confronté à leur publication | 4ᵉ vérification indépendante, sur un autre rouleau |
 | 3.4 | Direction des fibres (recto/verso) comme contrainte d'orientation | problème ouvert nº5 ; les prédictions nnUNet existent déjà |
 | 3.5 | Le niveau 2 de la pyramide suffit-il à séparer les spires ? | déciderait si on peut travailler à 33 Gio au lieu de 2,1 Tio |
 | 3.6 | Effet de la campagne de scan (DLS 7,91 µm vs ESRF 2,4 µm) | le site montre que ça change la séparabilité ; le chiffrer |
+| 3.7 | **Supprimer le seuil du tiers** de la métrique | `07` §5 : le tiers est arbitraire (première valeur essayée). Le remplacer par une grandeur sans seuil — aire sous la queue basse, ou quantile du rapport — retire le seul réglage libre, donc la seule prise pour ajuster le résultat après coup |
+| 3.8 | La proximité prédit-elle une perte de **lisibilité** ? | la frontière que ni `04` ni `07` ne franchissent : on mesure une anomalie géométrique, pas une perte de texte. Demande un rendu et un jugement — le maillon le plus cher, et le seul qui convertirait la métrique en argument sur le résultat final |
+| 3.9 | Le plancher du témoin (0,09 %) est-il réel ? | `07` §5 : soit un plancher de la mesure, soit de vraies approches légitimes. Trancher en mesurant plusieurs traces à 0 croisement — il y en a **3** dans Scroll 1 |
 
 ## 4. Écartées, avec la raison
 
