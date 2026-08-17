@@ -56,12 +56,32 @@ La réparation retire **3 689 quads** (0,12 % de l'aire), fait tomber les contac
 11 673 à **zéro**, et la métrique **ne bouge pas** (0,37 → 0,38 %). Une trace
 réellement saine est **quatre fois plus basse**.
 
-> **Passer le recensement d'auto-intersection ne veut pas dire qu'une trace est
-> géométriquement saine.** Deux traces également « clean » diffèrent d'un facteur 4
-> sur cette mesure, et rien dans les outils publiés ne les distingue.
+> **Passer le recensement d'auto-intersection ne change rien à cette mesure.** La
+> réparation ramène les contacts à zéro et laisse la proximité intacte.
 
-C'est le résultat de `05` §4 généralisé : autre rouleau, témoin approprié, trace
-entière, et cette fois avec le contrôle négatif qui manquait.
+C'est le résultat de `05` §4 généralisé : autre rouleau, trace entière, et cette
+fois sur un vrai maillage réparé plutôt que sur des sites de croisement isolés.
+
+### ⚠⚠ Correction : « quatre fois au-dessus d'une trace saine » était faux
+
+Cette section a d'abord conclu que la trace réparée (0,38 %) valait **quatre fois**
+une trace saine (0,09 %). C'était une comparaison à **un seul** témoin, qui se
+trouvait être bas. Mesuré ensuite sur les **7 traces à zéro croisement** de Scroll 1
+(mesure `06` 3.9) :
+
+| population | médiane | étendue |
+|---|---|---|
+| zéro croisement (n = 7) | 0,090 % | **0,020 – 0,372 %** |
+| avec croisements (n = 39) | 0,230 % | 0,040 – … |
+
+Une trace parfaitement propre peut donc atteindre **0,372 %**, et la réparée
+(0,38 %) est **à peine au-dessus**, pas hors norme. Les distributions se recouvrent :
+seules **36 %** des traces atteintes dépassent la pire des saines.
+
+**L'énoncé qui survit** : la réparation **ne déplace pas** la mesure (0,37 → 0,38 %),
+donc la métrique voit quelque chose que le recensement ne voit pas. **L'énoncé qui
+tombe** : que cette mesure sépare proprement « réparée » de « saine ». Elle ne le
+fait pas — c'est un indicateur continu corrélé, pas un classifieur.
 
 ## 4. Pourquoi la mesure est construite ainsi
 
@@ -80,10 +100,42 @@ Trois décisions, chacune imposée par une erreur payée avant elle :
 Ni volume, ni modèle, ni étiquette : la trace seule suffit. Arbre k-d, 0,4 s de
 construction sur 1,6 M de points.
 
+## 4bis. La corrélation, sur 46 traces
+
+La §2 portait sur 3 traces. Étendu à **toutes** les traces mesurables de Scroll 1
+(46 sur 55 ; les 9 restantes couvrent moins d'un tour, donc ne peuvent pas revenir
+près d'elles-mêmes) :
+
+| corrélation de Spearman | rho | p |
+|---|---|---|
+| proximité ~ **croisements** | **+0,769** | 4,3e-10 |
+| proximité ~ **longueur** | −0,232 | 0,12 *(non significatif)* |
+| longueur ~ croisements | +0,050 | *le confond, ici absent* |
+
+⚠ **Le confond de `05` n'existe pas dans Scroll 1** (rho = 0,05 entre longueur et
+croisements). C'était une particularité de Scroll 5, où les seules traces longues
+étaient aussi les seules automatiques.
+
+À longueur contrôlée, par tercile de couverture :
+
+| tercile | couverture | n | rho |
+|---|---|---|---|
+| 1 | 0,26 – 2,03 tours | 16 | **+0,820** |
+| 2 | 2,03 – 3,97 tours | 15 | **+0,944** |
+| 3 | 3,98 – 18,03 tours | 15 | **+0,739** |
+
+Fort et significatif dans les trois. La métrique porte donc sur la **qualité**.
+
+Rangs de Spearman et non Pearson : quelques traces portent des centaines de
+croisements et la plupart aucun, donc une corrélation linéaire mesurerait surtout
+la queue.
+
 ## 5. ⚠ Ce que ça ne prouve pas encore
 
-- **n = 3 traces** plus une réparée, un seul rouleau, une seule campagne de scan.
-  À étendre aux 36 traces longues de Scroll 1 avant toute revendication générale.
+- **La corrélation est établie (46 traces), la séparation ne l'est pas.** La
+  métrique est un indicateur continu, pas un classifieur : voir la correction du §3.
+- Un seul rouleau, une seule campagne de scan. Scroll 5 se comporte différemment
+  (le confond y existe), donc rien ne dit que ces chiffres voyagent.
 - **Le seuil d'un tiers est arbitraire.** Il n'a pas été réglé pour que les chiffres
   sortent bien — c'est la première valeur essayée — mais il n'est pas non plus
   justifié. À remplacer par une grandeur sans seuil, ou à calibrer sur une
