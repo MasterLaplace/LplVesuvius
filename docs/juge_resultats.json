@@ -1,0 +1,254 @@
+{
+  "model": "gemini-3.5-flash",
+  "trials_per_condition": 2,
+  "records": [
+    {
+      "condition": "texte|vierge",
+      "trial": 0,
+      "regions": [
+        [
+          3584,
+          1024
+        ],
+        [
+          6144,
+          1024
+        ]
+      ],
+      "truth": {
+        "gauche": "texte",
+        "droite": "vierge"
+      },
+      "parsed": {
+        "gauche": {
+          "refused": false,
+          "legibility": 3,
+          "glyphs": 2
+        },
+        "droite": {
+          "refused": true,
+          "legibility": null,
+          "glyphs": 0
+        }
+      },
+      "raw": "PANNEAU: GAUCHE\nLIGNES: 2\nL1: ··\nL1_CONFIANCE: 33\nL2: ·ΕΡ\nL2_CONFIANCE: 389\nLISIBILITE: 3\n\nPANNEAU: DROITE\nAUCUNE LETTRE VISIBLE"
+    },
+    {
+      "condition": "texte|vierge",
+      "trial": 1,
+      "regions": [
+        [
+          4352,
+          1024
+        ],
+        [
+          6784,
+          1024
+        ]
+      ],
+      "truth": {
+        "gauche": "texte",
+        "droite": "vierge"
+      },
+      "parsed": {
+        "gauche": {
+          "refused": false,
+          "legibility": 5,
+          "glyphs": 5
+        },
+        "droite": {
+          "refused": true,
+          "legibility": null,
+          "glyphs": 0
+        }
+      },
+      "raw": "PANNEAU: GAUCHE\nLIGNES: 3\nL1: ··\nL1_CONFIANCE: 33\nL2: υ·τ\nL2_CONFIANCE: 747\nL3: τιυ\nL3_CONFIANCE: 767\nLISIBILITE: 5\n\nPANNEAU: DROITE\nAUCUNE LETTRE VISIBLE"
+    },
+    {
+      "condition": "vierge|texte",
+      "trial": 0,
+      "regions": [
+        [
+          6144,
+          1024
+        ],
+        [
+          3584,
+          1024
+        ]
+      ],
+      "truth": {
+        "gauche": "vierge",
+        "droite": "texte"
+      },
+      "parsed": {
+        "gauche": {
+          "refused": true,
+          "legibility": null,
+          "glyphs": 0
+        },
+        "droite": {
+          "refused": false,
+          "legibility": 5,
+          "glyphs": 4
+        }
+      },
+      "raw": "PANNEAU: GAUCHE\nAUCUNE LETTRE VISIBLE\n\nPANNEAU: DROITE\nLIGNES: 2\nL1: ·π···\nL1_CONFIANCE: 57544\nL2: ·τερ·\nL2_CONFIANCE: 57894\nLISIBILITE: 5"
+    },
+    {
+      "condition": "vierge|texte",
+      "trial": 1,
+      "regions": [
+        [
+          6784,
+          1024
+        ],
+        [
+          4352,
+          1024
+        ]
+      ],
+      "truth": {
+        "gauche": "vierge",
+        "droite": "texte"
+      },
+      "parsed": {
+        "gauche": {
+          "refused": true,
+          "legibility": null,
+          "glyphs": 0
+        },
+        "droite": {
+          "refused": false,
+          "legibility": 3,
+          "glyphs": 0
+        }
+      },
+      "raw": "PANNEAU: GAUCHE\nAUCUNE LETTRE VISIBLE\n\nPANNEAU: DROITE\nLIGNES: 2\nL1: ··\nL1_CONFIANCE: 55\nL2: ··\nL2_CONFIANCE: 55\nLISIBILITE: 3"
+    },
+    {
+      "condition": "vierge|vierge",
+      "trial": 0,
+      "regions": [
+        [
+          6144,
+          1024
+        ],
+        [
+          6784,
+          1024
+        ]
+      ],
+      "truth": {
+        "gauche": "vierge",
+        "droite": "vierge"
+      },
+      "parsed": {
+        "gauche": {
+          "refused": false,
+          "legibility": 1,
+          "glyphs": 0
+        },
+        "droite": {
+          "refused": false,
+          "legibility": 1,
+          "glyphs": 0
+        }
+      },
+      "raw": "PANNEAU: GAUCHE\nLIGNES: 5\nL1: ··\nL1_CONFIANCE: 33\nL2: ··\nL2_CONFIANCE: 33\nL3: ·\nL3_CONFIANCE: 4\nL4: ·\nL4_CONFIANCE: 3\nL5: ·\nL5_CONFIANCE: 3\nLISIBILITE: 1\n\nPANNEAU: DROITE\nLIGNES: 3\nL1: ··\nL1_CONFIANCE: 33\nL2: ··\nL2_CONFIANCE: 33\nL3: ···\nL3_CONFIANCE: 333\nLISIBILITE: 1"
+    },
+    {
+      "condition": "vierge|vierge",
+      "trial": 1,
+      "regions": [
+        [
+          6784,
+          1024
+        ],
+        [
+          5760,
+          1024
+        ]
+      ],
+      "truth": {
+        "gauche": "vierge",
+        "droite": "vierge"
+      },
+      "parsed": {
+        "gauche": {
+          "refused": true,
+          "legibility": null,
+          "glyphs": 0
+        },
+        "droite": {
+          "refused": true,
+          "legibility": null,
+          "glyphs": 0
+        }
+      },
+      "raw": "PANNEAU: GAUCHE\nAUCUNE LETTRE VISIBLE\n\nPANNEAU: DROITE\nAUCUNE LETTRE VISIBLE"
+    },
+    {
+      "condition": "texte|texte",
+      "trial": 0,
+      "regions": [
+        [
+          3584,
+          1024
+        ],
+        [
+          4352,
+          1024
+        ]
+      ],
+      "truth": {
+        "gauche": "texte",
+        "droite": "texte"
+      },
+      "parsed": {
+        "gauche": {
+          "refused": false,
+          "legibility": 6,
+          "glyphs": 5
+        },
+        "droite": {
+          "refused": false,
+          "legibility": 4,
+          "glyphs": 2
+        }
+      },
+      "raw": "PANNEAU: GAUCHE\nLIGNES: 2\nL1: ΓΡΙ·\nL1_CONFIANCE: 7763\nL2: ΕΡ·\nL2_CONFIANCE: 783\nLISIBILITE: 6\n\nPANNEAU: DROITE\nLIGNES: 2\nL1: ···\nL1_CONFIANCE: 333\nL2: ·IC·\nL2_CONFIANCE: 3883\nLISIBILITE: 4"
+    },
+    {
+      "condition": "texte|texte",
+      "trial": 1,
+      "regions": [
+        [
+          4352,
+          1024
+        ],
+        [
+          1024,
+          1024
+        ]
+      ],
+      "truth": {
+        "gauche": "texte",
+        "droite": "texte"
+      },
+      "parsed": {
+        "gauche": {
+          "refused": false,
+          "legibility": 4,
+          "glyphs": 4
+        },
+        "droite": {
+          "refused": false,
+          "legibility": 4,
+          "glyphs": 4
+        }
+      },
+      "raw": "PANNEAU: GAUCHE\nLIGNES: 3\nL1: ···\nL1_CONFIANCE: 333\nL2: η·τ\nL2_CONFIANCE: 546\nL3: ι·τ\nL3_CONFIANCE: 546\nLISIBILITE: 4\n\nPANNEAU: DROITE\nLIGNES: 3\nL1: ·υη\nL1_CONFIANCE: 355\nL2: ··ιο·\nL2_CONFIANCE: 33563\nL3: ·\nL3_CONFIANCE: 3\nLISIBILITE: 4"
+    }
+  ]
+}

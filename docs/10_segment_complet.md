@@ -98,8 +98,14 @@ autre chose** :
 
 On y voit des traits épais et **informes**, pas des lettres — à comparer à la §1, où
 elles sont franches. Le fait mesuré est donc : *le modèle y produit du signal
-intermédiaire, d'aspect non scriptural*. Trancher demande une mesure de plus, pas une
-lecture de plus (§5).
+intermédiaire, d'aspect non scriptural*.
+
+⭐ **Tranché depuis** (`09` §10) : un juge calibré — mesuré comme séparant sans
+chevauchement le vierge (lisibilité 0–1) du texte (3–6) sur 16 panneaux, avec zéro
+fabrication — note cette bande **1 et 2**. C'est le régime du vierge. **Ce n'est pas
+du texte**, et ma lecture « trou d'annotation » est réfutée. Reste à savoir de quoi
+il s'agit : faux positifs, matière encrée non scripturale, ou feuille voisine vue à
+travers (§5).
 
 ## 4. ⚠⚠ Le juge structurel échoue une troisième fois — et `09` s'était trompé de cause
 

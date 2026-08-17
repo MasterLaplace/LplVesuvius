@@ -271,3 +271,93 @@ d'avoir calibré rend le calibrage impossible sans biais.
 ⚠ **Les images sont en orientation de lecture** (rotation 270°). Les versions
 antérieures présentaient les lettres couchées, ce qui pénalise un juge pour une
 raison qui n'a rien à voir avec la détection d'encre.
+
+---
+
+## 9. ⭐ Le calibrage a été fait, automatiquement — 2026-08-17
+
+`analysis/src/judge_api.py`, modèle **`gemini-3.5-flash`**, 8 appels, température 0.
+
+⚠ **Trois modèles ont été éliminés avant, par mesure et non par supposition** :
+`gemini-2.5-flash`/`-pro` répondent `404` (« no longer available to new users »),
+`gemini-3.1-pro-preview` et `gemini-pro-latest` répondent `429` (hors offre gratuite),
+`gemini-3.7-flash` répond `503`. Le nom du modèle n'est pas codé en dur pour
+exactement cette raison — un nom périmé produit une erreur qui ressemble à une panne
+de l'expérience.
+
+### Le résultat : il refuse quand il n'y a rien
+
+| condition | panneaux | corrects | **fabriqués** | manqués |
+|---|---:|---:|---:|---:|
+| `texte \| vierge` | 4 | 4 | 0 | 0 |
+| `vierge \| texte` | 4 | 3 | 0 | 1 |
+| ⭐ `vierge \| vierge` | 4 | **4** | **0** | 0 |
+| `texte \| texte` | 4 | 4 | 0 | 0 |
+
+**15 sur 16, zéro fabrication.** Sur les 8 panneaux vierges : 6 refus au mot près,
+2 abstentions par `·`.
+
+L'unique manque n'en est pas vraiment un : sur une région de texte il a rapporté
+`LIGNES: 2` — donc il a bien vu deux lignes — sans identifier les caractères.
+
+### La confiance déclarée sépare, et c'est le critère qui compte
+
+| panneaux | `LISIBILITE` | médiane |
+|---|---|---:|
+| **vierges** | 0 · 0 · 0 · 0 · 0 · 0 · 1 · 1 | **0** |
+| **texte** | 3 · 3 · 4 · 4 · 4 · 5 · 5 · 6 | **4** |
+
+**Aucun chevauchement** : max(vierge) = 1, min(texte) = 3. Sur 16 panneaux, sa note
+de lisibilité discrimine parfaitement. C'est ce qui autorise à lui montrer de
+l'inconnu.
+
+### ⚠⚠ Et mon dépouilleur accusait à tort
+
+Première version : un panneau vierge était compté correct **seulement** s'il portait
+la phrase de refus au mot près. Or sur un essai le modèle a répondu uniquement des
+`·` — c'est-à-dire le marqueur « je n'identifie pas » que le prompt lui-même
+fournit, donc l'exact **contraire** d'une fabrication.
+
+Le verdict imprimé était **« le modèle fabrique »**, sur un modèle qui s'était
+correctement abstenu. Corrigé : fabriquer, c'est produire des caractères
+**identifiables** là où il n'y en a pas ; un point n'en est pas un.
+
+⚠ **Le contrôle des bandes a lui aussi servi** : ma liste de témoins « vierges »
+contenait `7168–8192`, qui mesure en fait **3,75 %** d'encre prédite. Un témoin où le
+modèle trouve du signal aurait compté comme une fabrication chacune de ses lectures
+correctes. Vérifié avant l'appel, donc corrigé pour zéro jeton.
+
+⚠ **Limite assumée** : la seule zone franchement vierge du segment fait ~2000 lignes,
+donc les trois fenêtres de témoin **se recouvrent**. Ce ne sont pas trois observations
+indépendantes, et un balayage complet n'en trouve pas d'autres.
+
+## 10. ⭐ Le juge calibré tranche la bande douteuse : ce n'est PAS du texte
+
+La question laissée ouverte par `10` §3bis — les bandes 8704–9728, où notre détecteur
+produit 7,6 à 9,8 % d'encre et où personne n'a annoté. Soumise **avec son témoin dans
+la même image**, dans les deux sens (2 appels) :
+
+| | `LISIBILITE` | glyphes identifiés |
+|---|---:|---:|
+| bande douteuse, à gauche | **1** | 0 |
+| bande douteuse, à droite | **2** | 1 |
+| témoin vierge (les deux fois) | refus | 0 |
+
+**1 et 2, c'est le régime du papyrus vierge** (0–1), pas celui du texte (3–6).
+
+Quatre observations indépendantes convergent donc :
+
+| source | ce qu'elle dit |
+|---|---|
+| notre détecteur | 7,6–9,8 % d'encre — autant que le texte dense |
+| l'étiquetage humain | 0,00 % |
+| le rendu | traits épais et **informes**, pas des lettres |
+| le juge calibré | lisibilité **1–2**, régime du vierge |
+
+⚠ **Ma lecture initiale — « trou d'annotation » — est donc réfutée.** Cette bande
+porte du signal **sans écriture**. Reste à savoir *quoi* : faux positifs du détecteur,
+matière encrée qui n'est pas de l'écriture, ou une feuille voisine vue à travers un
+saut de spire. C'est la tâche D, et `10` §5 dit ce qui la bloque (le maillage `tifxyz`
+de ce segment n'est pas dans notre jeu).
+
+**Coût total du calibrage et du verdict : 10 appels, ~34 000 jetons.**

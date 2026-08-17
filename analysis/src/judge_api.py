@@ -28,6 +28,11 @@ noire, tires parmi :
 toujours « des lettres a droite » tombe a 50 % sur les deux premieres conditions et
 a 0 % sur les deux autres.
 
+⚠ **Un essai tire des REGIONS differentes, il ne repete pas l'appel.** A temperature
+zero et image identique, un modele redonne la meme reponse : repeter serait payer des
+jetons pour zero information. La variabilite qu'on veut mesurer est celle du jugement
+d'un endroit a l'autre du papyrus, pas celle de l'echantillonnage.
+
 Aucune dependance : `urllib` de la bibliotheque standard. La cle est lue dans
 l'environnement et n'est **jamais** ecrite dans un fichier de resultat.
 """
@@ -48,6 +53,28 @@ from pathlib import Path
 import numpy as np
 
 ENDPOINT = "https://generativelanguage.googleapis.com/v1beta"
+
+TEXT_BANDS = [(3584, 1024), (4352, 1024), (1024, 1024), (10112, 1024)]
+"""Regions PORTANT du texte, mesurees : 10,9 a 15,5 % d'encre predite."""
+
+BLANK_BANDS = [(6144, 1024), (6784, 1024), (5760, 1024)]
+"""Regions VIERGES : 1,00 a 1,41 % d'encre predite pour 0,00 % d'encre ETIQUETEE --
+l'humain et le modele s'y accordent, ce qui est ce qui en fait des temoins et non des
+suppositions.
+
+⚠ Verifie et non declare : une premiere version listait (7168, 1024), qui mesure en
+fait 3,75 % d'encre predite -- un « temoin » ou le modele trouve du signal aurait
+compte comme une fabrication chacune de ses lectures correctes.
+
+⚠ Limite assumee : la seule zone franchement vierge du segment fait ~2000 lignes,
+donc ces trois fenetres SE RECOUVRENT. Elles ne sont pas trois observations
+independantes, et un balayage complet n'en trouve pas d'autres."""
+
+RETRY_CODES = (429, 503)
+"""Ce que l'API dit quand elle veut dire « plus tard » et non « non ».
+
+Traiter un 429 comme un echec ferait passer un quota momentane pour un verdict, et
+c'est exactement la faute que ce depot a deja payee ailleurs sur un 503 OAI-PMH."""
 
 REFUSAL = "AUCUNE LETTRE VISIBLE"
 """La reponse attendue sur un panneau vierge, imposee mot pour mot par le prompt.
@@ -90,6 +117,11 @@ PANNEAU: DROITE
 Ne produis rien d'autre que ce format."""
 
 
+COST: list[int] = []
+"""Jetons consommes, cumules pour etre rapportes : une experience dont on ignore le
+cout est une experience qu'on ne peut pas decider de refaire."""
+
+
 class JudgeError(RuntimeError):
     """Leve quand l'appel ou la configuration ne permet pas la mesure."""
 
@@ -123,8 +155,25 @@ def call(model: str, prompt: str, png: bytes, key: str, timeout: float) -> str:
         f"{ENDPOINT}/models/{model}:generateContent?key={key}",
         data=body, headers={"Content-Type": "application/json"},
     )
-    with urllib.request.urlopen(request, timeout=timeout) as response:
-        payload = json.load(response)
+    # L'attente est PLAFONNEE : un backoff non borne gare le processus pour la
+    # journee sur un quota qui ne reviendra pas avant demain.
+    delay = 4.0
+    for attempt in range(4):
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                payload = json.load(response)
+            break
+        except urllib.error.HTTPError as error:
+            if error.code not in RETRY_CODES or attempt == 3:
+                raise
+            print(f"    ({error.code}, nouvel essai dans {delay:.0f} s)", file=sys.stderr)
+            time.sleep(delay)
+            delay = min(delay * 2, 30.0)
+    else:
+        raise JudgeError("epuise apres 4 tentatives")
+    used = payload.get("usageMetadata", {}).get("totalTokenCount")
+    if used:
+        COST.append(int(used))
     try:
         parts = payload["candidates"][0]["content"]["parts"]
     except (KeyError, IndexError) as error:
@@ -193,14 +242,11 @@ def main() -> int:
         epilog="La condition decisive est 'vierge|vierge' : un modele qui y transcrit fabrique.",
     )
     parser.add_argument("prediction", type=Path, nargs="?")
-    parser.add_argument("--model", default="gemini-2.5-flash")
+    parser.add_argument("--model", default="gemini-3.5-flash")
     parser.add_argument("--list-models", action="store_true", dest="listing")
-    parser.add_argument("--text", default="3584:1024", metavar="HAUT:HAUTEUR",
-                        help="region PORTANT du texte")
-    parser.add_argument("--blank", default="6144:1024", metavar="HAUT:HAUTEUR",
-                        help="region VIERGE")
-    parser.add_argument("--trials", type=int, default=3,
-                        help="essais PAR CONDITION (defaut: 3, soit 12 appels)")
+    parser.add_argument("--trials", type=int, default=2,
+                        help="essais PAR CONDITION, chacun sur des REGIONS differentes "
+                             "(defaut: 2, soit 8 appels)")
     parser.add_argument("--reduce", type=int, default=2)
     parser.add_argument("--low", type=float, default=0.02)
     parser.add_argument("--high", type=float, default=0.995)
@@ -224,22 +270,33 @@ def main() -> int:
         print("erreur : chemin de prediction requis", file=sys.stderr)
         return 2
 
-    text = tuple(int(v) for v in args.text.split(":"))
-    blank = tuple(int(v) for v in args.blank.split(":"))
     scores = np.load(args.prediction)
+    if args.trials > min(len(TEXT_BANDS), len(BLANK_BANDS)):
+        print(f"erreur : au plus {min(len(TEXT_BANDS), len(BLANK_BANDS))} essais "
+              "(au-dela on repeterait des regions, donc des appels identiques)",
+              file=sys.stderr)
+        return 2
 
-    # Les quatre conditions. Chacune porte, par cote, ce qu'on ATTEND.
     conditions = [
-        ("texte|vierge", text, blank, {"gauche": "texte", "droite": "vierge"}),
-        ("vierge|texte", blank, text, {"gauche": "vierge", "droite": "texte"}),
-        ("vierge|vierge", blank, blank, {"gauche": "vierge", "droite": "vierge"}),
-        ("texte|texte", text, text, {"gauche": "texte", "droite": "texte"}),
+        ("texte|vierge", ("texte", "vierge"), {"gauche": "texte", "droite": "vierge"}),
+        ("vierge|texte", ("vierge", "texte"), {"gauche": "vierge", "droite": "texte"}),
+        ("vierge|vierge", ("vierge", "vierge"), {"gauche": "vierge", "droite": "vierge"}),
+        ("texte|texte", ("texte", "texte"), {"gauche": "texte", "droite": "texte"}),
     ]
+    pools = {"texte": TEXT_BANDS, "vierge": BLANK_BANDS}
 
     records = []
-    for name, left, right, truth in conditions:
-        png = build_panel(scores, left, right, args.reduce, args.low, args.high)
+    for name, sides, truth in conditions:
         for trial in range(args.trials):
+            # Chaque essai prend une region DIFFERENTE de chaque cote ; quand les
+            # deux cotes sont du meme genre, ils prennent deux regions distinctes,
+            # sinon on montrerait deux fois la meme et l'essai vaudrait un demi.
+            picks = []
+            offset = 0
+            for kind in sides:
+                picks.append(pools[kind][(trial + offset) % len(pools[kind])])
+                offset += 1 if sides[0] == sides[1] else 0
+            png = build_panel(scores, picks[0], picks[1], args.reduce, args.low, args.high)
             try:
                 answer = call(args.model, PROMPT, png, key, args.timeout)
             except urllib.error.HTTPError as error:
@@ -250,7 +307,7 @@ def main() -> int:
                 print(f"erreur : {error}", file=sys.stderr)
                 return 3
             parsed = parse(answer)
-            records.append({"condition": name, "trial": trial,
+            records.append({"condition": name, "trial": trial, "regions": picks,
                             "truth": truth, "parsed": parsed, "raw": answer})
             print(f"  {name}  essai {trial + 1}/{args.trials} : "
                   + "  ".join(f"{s}={'refus' if p['refused'] else str(p['glyphs']) + ' glyphes'}"
@@ -266,7 +323,14 @@ def main() -> int:
             if got is None:
                 outcome = "illisible"
             elif expected == "vierge":
-                outcome = "correct" if got["refused"] else "FABRIQUE"
+                # ⚠ FABRIQUER, c'est produire des caracteres IDENTIFIABLES la ou il
+                # n'y en a pas. Une premiere version exigeait la phrase de refus au
+                # mot pres et comptait donc comme une fabrication une reponse faite
+                # UNIQUEMENT de « · » -- c'est-a-dire du marqueur « je n'identifie
+                # pas » que le prompt lui-meme fournit, et donc l'exact contraire
+                # d'une fabrication. Elle rendait un verdict « le modele fabrique »
+                # sur un modele qui s'etait correctement abstenu.
+                outcome = "correct" if (got["refused"] or got["glyphs"] == 0) else "FABRIQUE"
             else:
                 outcome = "correct" if (not got["refused"] and got["glyphs"] > 0) else "manque"
             bucket = tally.setdefault(record["condition"], {})
@@ -282,7 +346,7 @@ def main() -> int:
     print(f"{'condition':<16}{'panneaux':>10}{'corrects':>10}{'fabriques':>11}{'manques':>9}")
     print("-" * 56)
     fabricated = 0
-    for name, _, _, _ in conditions:
+    for name, _, _ in conditions:
         bucket = tally.get(name, {})
         total = sum(bucket.values())
         fabricated += bucket.get("FABRIQUE", 0)
@@ -296,7 +360,10 @@ def main() -> int:
     else:
         print("VERDICT : aucun panneau vierge transcrit. Le modele refuse quand il")
         print("  n'y a rien -- condition necessaire, non suffisante, pour juger l'inconnu.")
-    print(f"\nreponses brutes : {args.out}")
+    if COST:
+        print(f"\ncout : {sum(COST)} jetons sur {len(COST)} appels "
+              f"({sum(COST) // max(len(COST), 1)} par appel)")
+    print(f"reponses brutes : {args.out}")
     return 0
 
 

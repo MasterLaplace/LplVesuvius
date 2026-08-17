@@ -36,3 +36,4 @@ __pycache__/
 
 # Les figures des documents sont suivies : elles portent des resultats mesures.
 !/docs/images/
+.env

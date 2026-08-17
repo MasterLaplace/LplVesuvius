@@ -1,0 +1,34 @@
+[
+  {
+    "condition": "inconnu|vierge",
+    "parsed": {
+      "gauche": {
+        "refused": false,
+        "legibility": 1,
+        "glyphs": 0
+      },
+      "droite": {
+        "refused": true,
+        "legibility": null,
+        "glyphs": 0
+      }
+    },
+    "raw": "PANNEAU: GAUCHE\nLIGNES: 2\nL1: ··\nL1_CONFIANCE: 33\nL2: ··\nL2_CONFIANCE: 22\nLISIBILITE: 1\n\nPANNEAU: DROITE\nAUCUNE LETTRE VISIBLE"
+  },
+  {
+    "condition": "vierge|inconnu",
+    "parsed": {
+      "gauche": {
+        "refused": true,
+        "legibility": null,
+        "glyphs": 0
+      },
+      "droite": {
+        "refused": false,
+        "legibility": 2,
+        "glyphs": 1
+      }
+    },
+    "raw": "PANNEAU: GAUCHE\nAUCUNE LETTRE VISIBLE\n\nPANNEAU: DROITE\nLIGNES: 3\nL1:··\nL1_CONFIANCE:22\nL2:ε·\nL2_CONFIANCE:53\nL3:··\nL3_CONFIANCE:33\nLISIBILITE:2"
+  }
+]
