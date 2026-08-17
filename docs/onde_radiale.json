@@ -1,0 +1,11 @@
+{
+  "name": "PHerc0172",
+  "slice": 6967,
+  "rays": 36,
+  "outer_radius_mm": 22.66215,
+  "turns_median": 158,
+  "turns_min": 120,
+  "turns_max": 194,
+  "spacing_um_median": 142.0267676345394,
+  "length_m": 11.24884854481889
+}

@@ -273,10 +273,32 @@ qu'un Progress Prize récompense.
    un témoin apparié et un cas négatif.
 5. **Mesurer d'abord, expliquer ensuite.** Trois fois cette semaine, la lecture du
    code a produit une hypothèse fausse qu'un instrument a corrigée.
+6. ⚠ **Un chiffre publié dont le calcul n'est pas dans l'arbre n'est pas un
+   résultat, c'est une anecdote.** Aucune mesure qui entre dans un document ne reste
+   en `python -c`. Payé le 2026-08-17 : l'onde radiale (158 feuilles, 11,2 m) a dû
+   être récupérée du transcript de session.
+7. ⚠ **Une idée testée et écartée est un actif, pas un déchet** — à condition que la
+   *raison* soit écrite. C'est ce que la §4 « Écartées » sert à conserver : sans
+   elle, on repaie la même impasse.
 
 ---
 
 ## 7. L'onde radiale : ce qui marche, ce qui ne marche pas
+
+⚠⚠ **Le code de cette section a failli etre perdu.** Il avait ete ecrit en
+`python -c` inline : les resultats sont partis dans ce document et **le calcul
+n'etait dans aucun fichier**. Recupere du transcript de session le 2026-08-17 et
+installe dans **`experiments/src/excision/radial.py`** (sous-commandes `centre`,
+`compter`, `deplier`).
+
+**Controle de la recuperation** : le fichier reproduit exactement les chiffres
+publies ici — 158 feuilles, rayon 22,7 mm, 11,2 m — et le centre re-derive de zero
+tombe **au voxel pres** sur la valeur recuperee (ecart 0,0). Le centre vit desormais
+dans `data/axes/PHerc0172.json`, **pas dans `/tmp`**, ou la version inline l'ecrivait.
+
+**Regle qui en decoule** (§5.6) : *un chiffre publie dont le calcul n'est pas dans
+l'arbre n'est pas un resultat, c'est une anecdote.* Aucune mesure qui entre dans un
+document ne reste en ligne de commande.
 
 2026-08-17. Idée de l'auteur : *« c'est envoyer une onde traversant toutes les
 couches depuis le centre »* — chaque mur franchi est une feuille. Mesurable
