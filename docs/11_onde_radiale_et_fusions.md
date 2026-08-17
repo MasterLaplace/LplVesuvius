@@ -79,6 +79,15 @@ elle n'en invente pas.
 
 *(7 des 20 tranches ; le profil complet est dans `profil_z_0172.json`.)*
 
+**La passe de raffinement (6 tranches) ne trouve AUCUNE rupture.** Le plus grand écart
+entre voisins valait 11 feuilles, et couper en deux les six plus grands écarts a rendu
+des valeurs **intermédiaires** (170, 164, 173, 165, 166, 153) — pas de saut caché.
+
+⚠ C'est un résultat en soi, et négatif : **il n'y a pas de dégât localisé détectable
+par le compte le long de z**, à l'échelle de 0,6 mm entre tranches. Ce que la
+dichotomie devait attraper n'existe pas ici. Elle valide en revanche la régularité du
+U : le profil est lisse.
+
 **Le rouleau est le plus épais à ses deux extrémités et le plus mince au milieu** —
 25,1 mm et 24,3 mm aux bouts contre 21,3 mm au centre. Le profil est **en U**, régulier,
 et le compte de feuilles suit exactement.

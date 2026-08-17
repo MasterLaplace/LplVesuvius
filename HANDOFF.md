@@ -252,3 +252,25 @@ Tous les chiffres de `07` et `08` viennent de Scroll 1.
    hypothèse fausse à chaque fois qu'elle a précédé l'instrument.
 5. **Consigner les échecs avec leur diagnostic**, pas seulement les succès : ils
    disent ce qu'il faudrait pour réussir.
+
+---
+
+## 10. ⚠ Hygiène des processus de fond — leçon payée le 2026-08-17
+
+Un `until … do sleep; done` lancé en fond a tourné **3 h 19** sur une condition qui ne
+pouvait plus arriver : le marqueur qu'il attendait avait été supprimé, et le script qui
+devait l'écrire tué. Inoffensif mais invisible, et il serait resté indéfiniment.
+
+**Règles qui en découlent** :
+
+1. Une boucle d'attente doit avoir une **borne** (`for i in $(seq 1 N)`), pas seulement
+   une condition — une condition seule ne survit pas à la disparition de ce qu'elle
+   attend.
+2. Auditer périodiquement :
+   ```bash
+   ps -eo pid,etime,cmd | grep -E "radial|fusion|infer_ink|uv run" | grep -v grep
+   ls -la /tmp/*.pid          # les .pid périmés sont le symptôme visible
+   ```
+3. Nettoyer les `.pid` d'une session terminée : ils font croire à un processus vivant.
+4. ⚠ Rappel : les notifications « tâche terminée » concernent le **wrapper**, pas le
+   travail `nohup`. Juger sur un fichier de résultat.
