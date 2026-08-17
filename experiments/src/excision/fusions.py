@@ -54,11 +54,20 @@ def track(polar: np.ndarray, prominence: float, min_gap: int, smooth: int,
     silence, parce qu'un detecteur rate legitimement un mur de temps en temps et
     qu'une piste coupee a chaque rate ne serait plus une piste.
 
-    ⚠ La tolerance est en RAYON et exprimee en voxels : c'est de combien une feuille
-    a le droit de deriver d'un angle au suivant. Trop large, deux spires voisines se
-    volent leurs points et le suivi fabrique des fusions ; trop etroite, toute
-    ondulation coupe la piste. Elle est reglee sur l'espacement mesure entre feuilles
-    (~142 um, soit 18 voxels), donc une fraction de cet espacement.
+    ⚠⚠ **La piste est cherchee la ou elle VA, pas la ou elle etait.** Une premiere
+    version appariait au dernier rayon connu ; mesuree, elle fragmentait chaque
+    feuille en ~80 morceaux (longueur mediane 111 colonnes sur 18 850) et rendait
+    12 249 « fusions » sur une coupe qui compte 158 feuilles. Elargir la tolerance
+    reparait le symptome — 139 pistes traversantes a tolerance 40 — mais 40 voxels
+    valent plus de DEUX espacements entre feuilles (~18 voxels), donc une piste
+    pouvait voler sa voisine : on echangeait une fragmentation visible contre des
+    sauts de spire invisibles.
+
+    Le correctif est de suivre la PENTE : une feuille derive doucement, donc on
+    extrapole son rayon depuis son deplacement recent et on apparie autour de la
+    position PREDITE. La tolerance borne alors l'ecart au mouvement lisse et non le
+    mouvement lui-meme, ce qui permet de la garder **sous la moitie d'un espacement**
+    — et un saut de spire devient impossible par construction plutot qu'improbable.
     """
     tracks: list[dict] = []
     live: list[int] = []
@@ -69,7 +78,10 @@ def track(polar: np.ndarray, prominence: float, min_gap: int, smooth: int,
         for tid in live:
             t = tracks[tid]
             if found.size:
-                distances = np.abs(found - t["radius"])
+                # Position predite : le rayon connu plus la derive recente, comptee
+                # aussi pour les colonnes ou la piste etait muette.
+                predicted = t["radius"] + t["slope"] * (1 + t["missed"])
+                distances = np.abs(found - predicted)
                 picked = None
                 for k in np.argsort(distances):
                     if distances[k] > tolerance:
@@ -79,7 +91,13 @@ def track(polar: np.ndarray, prominence: float, min_gap: int, smooth: int,
                         break
                 if picked is not None:
                     taken.add(picked)
-                    t["radius"] = float(found[picked])
+                    new_radius = float(found[picked])
+                    step = max(1, 1 + t["missed"])
+                    observed = (new_radius - t["radius"]) / step
+                    # Pente lissee : une seule colonne bruitee ne doit pas lancer la
+                    # piste dans une direction qu'elle ne suivra pas.
+                    t["slope"] = 0.7 * t["slope"] + 0.3 * observed
+                    t["radius"] = new_radius
                     t["end"] = column_index
                     t["points"] += 1
                     t["missed"] = 0
@@ -93,7 +111,8 @@ def track(polar: np.ndarray, prominence: float, min_gap: int, smooth: int,
             if k in taken:
                 continue
             tracks.append({"start": column_index, "end": column_index, "radius": float(r),
-                           "start_radius": float(r), "points": 1, "missed": 0})
+                           "start_radius": float(r), "points": 1, "missed": 0,
+                           "slope": 0.0})
             live.append(len(tracks) - 1)
     return tracks
 
@@ -224,8 +243,10 @@ def main() -> int:
         p.add_argument("--prominence", type=float, default=8.0)
         p.add_argument("--min-gap", type=int, default=10)
         p.add_argument("--smooth", type=int, default=5)
-        p.add_argument("--tolerance", type=float, default=6.0,
-                       help="derive radiale toleree d'un angle au suivant, en voxels")
+        p.add_argument("--tolerance", type=float, default=8.0,
+                       help="ecart TOLERE A LA POSITION PREDITE, en voxels. ⚠ Doit rester "
+                            "sous la moitie de l'espacement entre feuilles (~18 voxels), "
+                            "sinon une piste peut voler sa voisine")
         p.add_argument("--gap-tolerance", type=int, default=8,
                        help="colonnes de silence tolerees avant de tuer une piste")
         p.add_argument("--min-points", type=int, default=50,

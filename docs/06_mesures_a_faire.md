@@ -325,6 +325,44 @@ Sur PHerc0172, une coupe, 36 rayons :
 nombre de spires est **supérieur**. Et une seule coupe ne dit rien de la variation
 le long du rouleau.
 
+### 🔄 C2 — le dépliage polaire : la REPRÉSENTATION marche, le suivi PAS ENCORE
+
+2026-08-17. `radial.py deplier` + `fusions.py`. **Classé : en cours, diagnostic établi.**
+
+**Ce qui est acquis** : la coupe se déplie en (rayon × angle), 3000 × 18 850, et les
+spires y deviennent des lignes suivables. Le zoom montre les feuilles une à une, les
+zones déchirées, et des endroits où deux lignes convergent.
+
+⚠ **Correction d'une attente** : à grande échelle les spires ne sont **pas**
+horizontales, ce sont de larges dômes — PHerc0172 n'est pas concentrique autour d'un
+centre unique à cette coupe, il est écrasé. Le dépliage n'exige donc pas la
+concentricité, seulement que les feuilles varient **doucement** avec l'angle (dérive
+mesurée : 0,125 voxel par colonne, très en deçà de toute tolérance utile).
+
+**Ce qui ne marche pas encore** : le suivi **fragmente**. Premier passage complet —
+13 074 pistes retenues et **12 249 « fusions »** sur une coupe qui compte 158
+feuilles, longueur médiane 111 colonnes sur 18 850, soit ~80 morceaux par feuille.
+
+✅ **Un point est quand même gagné sur la tentative précédente** : la répartition des
+événements est **6488 en deçà du rayon médian, 6496 au-delà**. Le mode d'échec de
+l'ancienne méthode — tout concentré près du centre — a disparu.
+
+**Diagnostic, mesuré et non supposé** :
+
+| observation | ce qu'elle élimine |
+|---|---|
+| 142 murs par colonne, cv **0,11** | ce n'est pas le détecteur qui flotte |
+| tolérance 40 → 139 pistes traversantes | l'appariement PEUT suivre les feuilles |
+| mais 40 voxels > **2 espacements** (~18) | …au prix de sauts de spire invisibles |
+| prédiction de pente : 21 → **69** longues pistes | améliore ×3, ne suffit pas |
+
+**La marche suivante est nommée, et ce n'est pas un réglage de plus** : l'appariement
+est **glouton au plus proche**, ce qui est le mode d'échec classique dans un champ
+dense — deux pistes se disputent le même mur et l'une repart de zéro. Le remède connu
+est une **affectation globale par colonne** (Hongrois / transport optimal) qui
+minimise le coût total au lieu de servir les pistes dans l'ordre d'arrivée. C'est ça
+qu'il faut écrire, pas une tolérance plus large.
+
 ### ❌ Ce qui ne marche pas : la localisation des fusions par déficit de compte
 
 Idée suivante de l'auteur : là où l'onde traverse le mauvais nombre de feuilles, il
