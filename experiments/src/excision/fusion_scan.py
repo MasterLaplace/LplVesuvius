@@ -27,6 +27,14 @@ stable a 6,4-7,0 % sur toute la hauteur, donc une cellule a 20 % est a une vingt
 d'ecarts-types du fond. Ce n'est pas du bruit d'echantillonnage ; c'est leur
 persistance qui restait a tester.
 
+⚠⚠ **CE FICHIER NE SAIT PAS ENCORE TRAVAILLER AU-DELA DU NIVEAU 0.** `fusions.py`
+convertit ses rayons en millimetres avec `VOXEL_UM = 7,91` en dur : a un niveau de
+pyramide reduit, toute distance rapportee serait fausse d'un facteur 2 par niveau.
+C'est exactement le defaut corrige dans `radial.py compter` le meme jour. Tant que la
+mise a l'echelle n'est pas faite ici, `--level` autre que 0 rend des chiffres
+ininterpretables -- et le gain enorme que `pyramid.py` vient d'etablir (89 % des murs
+au niveau 2, pour 33 Gio au lieu de 2100) reste inaccessible a cette mesure.
+
 Compose `radial.deplier` et `fusions.densite`, qui ont chacun leur propre temoin.
 """
 
@@ -144,6 +152,11 @@ def main() -> int:
     parser.add_argument("--seed", type=int, default=0)
     args = parser.parse_args()
 
+    if args.level != "0":
+        print("erreur : seul le niveau 0 est correct aujourd'hui (voir l'en-tete du "
+              "fichier : les rayons sont convertis avec un voxel code en dur)",
+              file=sys.stderr)
+        return 2
     centre = load_centre(args.name)
     array = open_volume(args.volume, args.level)
     lo = args.z_min if args.z_min >= 0 else int(centre["z_min"])
