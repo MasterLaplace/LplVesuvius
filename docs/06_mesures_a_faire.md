@@ -42,6 +42,8 @@ Papiers primaires repérés, à lire :
 | 1.12 | Vérification des données Scroll 1 **par le comportement** | triangles et contacts diagonale 0 **exacts** vs publication | `07` |
 | 1.13 | Métrique de proximité à longueur contrôlée (3 traces, ~7,8 tours) | ordonne correctement : **0,09 % → 0,15 % → 0,37 %** selon les croisements | `07` |
 | 1.15 | ⭐ **iGPU Arc utilisable depuis WSL2** | **×4,5** (104 → 23 ms/fenêtre), sortie identique au CPU à **4,9e-6** (bruit fp32) | ici |
+| 1.17 | ⭐ **Passe complète du pipeline** (couches → modèle → encre) | **AUC 0,919** hors entraînement, lettres grecques visibles, 52 s/cm² | `08` |
+| 1.18 | Étiquetage de vérité terrain | ⚠ **PARTIEL** : 50 % des lignes sans étiquette → la précision est un plancher | `08` |
 | 1.16 | Pas de balayage 21 vs 32 | **pas gratuit** : corr. 0,941, mais **17,9 %** de désaccord au seuil médian, 3,0 % sur l'encre franche | ici |
 | 1.14 | ⭐ La métrique **survit à la réparation** | recensement 11 673 → **0** ; métrique 0,37 → **0,38 %** ; témoin sain **0,09 %** | `07` |
 
@@ -188,15 +190,49 @@ perdu du **début** des textes.
 
 | # | mesure | ce que ça trancherait |
 |---|---|---|
-| 3.1 | 🔄 **EN COURS** — métrique de proximité sur **toutes** les traces de Scroll 1 | passage de trois anecdotes à une distribution ; corrélation avec les croisements publiés sur 55 traces au lieu de 3 |
+| 3.1 | ✅ **FAITE** — métrique sur 46 traces de Scroll 1 | rho **+0,769** avec les croisements, **+0,820 / +0,944 / +0,739** par tercile de longueur ; le confond de `05` **n'existe pas** dans Scroll 1 (rho longueur~croisements = 0,05) |
 | 3.2 | Normaliser la proximité **par le rayon** en plus du voisinage | 1.11 montre un gradient de 28 % non corrigé aujourd'hui |
-| 3.3 | Recensement `windcheck` sur Scroll 1, confronté à leur publication | 4ᵉ vérification indépendante, sur un autre rouleau |
+| 3.3 | ✅ **FAITE** — recensement Scroll 1 vs publication | **55/55 triangles et 55/55 contacts** concordants. Deux corpus entiers vérifiés |
 | 3.4 | Direction des fibres (recto/verso) comme contrainte d'orientation | problème ouvert nº5 ; les prédictions nnUNet existent déjà |
 | 3.5 | Le niveau 2 de la pyramide suffit-il à séparer les spires ? | déciderait si on peut travailler à 33 Gio au lieu de 2,1 Tio |
 | 3.6 | Effet de la campagne de scan (DLS 7,91 µm vs ESRF 2,4 µm) | le site montre que ça change la séparabilité ; le chiffrer |
 | 3.7 | ✅ **FAITE** — seuil : suppression impossible, mais PLATEAU établi | **Le supprimer dégrade la métrique** : le déficit moyen sans seuil tombe à rho +0,340 (contre +0,769), parce qu'il est dilué par la masse des cellules normales — **le signal est dans la queue extrême**. Mais le balayage montre un **plateau de 0,15 à 0,40** (rho 0,759 à 0,779), puis un effondrement au-delà de 0,5. Le seuil n'est donc pas réglé : n'importe quelle valeur de la plage donne la même réponse |
 | 3.8 | La proximité prédit-elle une perte de **lisibilité** ? | la frontière que ni `04` ni `07` ne franchissent : on mesure une anomalie géométrique, pas une perte de texte. Demande un rendu et un jugement — le maillon le plus cher, et le seul qui convertirait la métrique en argument sur le résultat final |
-| 3.9 | Le plancher du témoin (0,09 %) est-il réel ? | `07` §5 : soit un plancher de la mesure, soit de vraies approches légitimes. Trancher en mesurant plusieurs traces à 0 croisement — il y en a **3** dans Scroll 1 |
+| 3.9 | ✅ **FAITE** — pas de plancher | Les **7** traces à 0 croisement s'étalent de **0,020 % à 0,372 %**, facteur 18. Donc la métrique **ne classe pas** : elle corrèle. A obligé à corriger `07` |
+
+## 3bis. ⭐ LA SUITE, dans l'ordre
+
+Le cap de `1bis` n'est pas franchi : on a des **lettres**, pas un **texte jugé par
+un expert**. Ce qui manque, du plus décisif au moins :
+
+### A. Une colonne entière de texte, pas une fenêtre
+
+Tout ce qui précède porte sur 20 × 24 mm. Un papyrologue ne juge pas sur deux
+lettres : il lui faut des **lignes suivies**. Le segment `20230909121925` fait
+11591 × 3882 px, soit **3,4 h** à traiter en entier sur le GPU — donc faisable en
+une nuit. C'est le prochain livrable, et le seul qui permette de demander un avis.
+
+### B. Le contrôle en aveugle des modèles de langue
+
+Prévu en `1bis`, pas encore fait. Soumettre des rendus **dont le texte est publié**,
+mélangés à des rendus de bruit, et mesurer si le modèle retrouve les premiers et
+refuse les seconds. Sans cette calibration, son avis sur du texte inconnu n'est pas
+une donnée. ⚠ À faire **avant** de lui montrer quoi que ce soit d'inconnu, sinon on
+ne pourra plus le calibrer sans biais.
+
+### C. Un second rouleau
+
+Tous les chiffres de `07` et `08` viennent de Scroll 1. Scroll 5 se comporte déjà
+différemment sur le confond longueur/qualité. Rien ne dit que l'AUC voyage.
+
+### D. Boucler la métrique de `07` sur le résultat de `08`
+
+La question qui relie les deux moitiés du travail : **une trace à forte proximité
+anormale donne-t-elle une encre moins lisible ?** C'est la mesure 3.8, et elle est
+maintenant *faisable* — on a la métrique d'un côté, l'AUC de l'autre, et 46 traces
+mesurées. Si la corrélation existe, la métrique cesse d'être un diagnostic
+géométrique pour devenir un **prédicteur de lisibilité**, ce qui est exactement ce
+qu'un Progress Prize récompense.
 
 ## 4. Écartées, avec la raison
 
