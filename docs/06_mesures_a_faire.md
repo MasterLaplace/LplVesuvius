@@ -435,11 +435,47 @@ dépliage*. Exclu sous 2,4 mm, et la raison est écrite dans le code.
 6,6 %, réparties de 2,4 à 18,0 mm, **4 en deçà du rayon médian et 4 au-delà** — le
 déséquilibre historique a disparu.
 
-⚠ **Doute assumé, à lever avant d'en tirer quoi que ce soit** : 4 des 8 cellules sont
-pile à la frontière de coupe (2,4–2,8 mm), ce qui ressemble à un effet de bord de
-l'exclusion plutôt qu'à un site. Les 4 à 17–18 mm sont les crédibles. Le contrôle qui
-tranche est simple et n'est **pas fait** : faire varier `--min-radius` et regarder si
-les sites du bord suivent la coupe. S'ils suivent, ce sont des artefacts.
+#### ✅ Le contrôle a été fait, et il a confirmé le doute
+
+Le doute écrit ici même — *4 des 8 cellules sont pile à la frontière de coupe, ça
+ressemble à un effet de bord* — a été tranché en faisant varier `--min-radius` :
+
+| coupe | cellules | rayon du site le plus interne |
+|---:|---:|---:|
+| 1,6 mm | 11 | 1,4 mm |
+| 2,4 mm | 8 | 2,4 mm |
+| 3,6 mm | 5 | 3,3 mm |
+| **4,7 mm** | **4** | **17,1 mm** |
+| **6,3 mm** | **4** | **17,1 mm** |
+
+**Le site le plus interne suit la coupe exactement** (1,4 pour une coupe à 1,6 ; 2,4
+pour 2,4 ; 3,3 pour 3,6) — donc ce sont bien des **artefacts de bord**, et non des
+soudures. Au-delà de 4,7 mm ils disparaissent et il reste **4 cellules stables**, que
+déplacer encore la coupe ne bouge plus.
+
+#### 🎯 Le résultat : 4 candidats stables, tous vers 17 mm
+
+Coupe validée à 4,7 mm — **4 cellules anormales sur 1392** (0,29 %), fond 6,6 % :
+
+| rayon | colonne | taux de doublement | écarts |
+|---:|---:|---:|---:|
+| 18,0 mm | ~14 000 | **20,3 %** | 1389 |
+| 17,1 mm | ~16 500 | 19,3 % | 1350 |
+| 17,6 mm | ~15 500 | 18,8 % | 1437 |
+| 17,1 mm | ~16 000 | 17,1 % | 1439 |
+
+⚠ Les quatre sont **groupés** : rayons 17,1 à 18,0 mm, colonnes 14 000 à 16 500 sur
+18 850, soit un secteur angulaire d'environ **50°**. Ce n'est pas une dispersion de
+bruit, c'est **une région**. Elle est à 17 mm sur un rayon extérieur de 22,7 mm, donc
+dans le tiers externe — cohérent avec la théorie de l'auteur selon laquelle les
+couches externes ont le plus souffert.
+
+⚠ **Ce qui n'est PAS établi** : que ces quatre cellules soient des soudures. Elles sont
+des endroits où l'écart entre feuilles double trois fois plus souvent qu'ailleurs, ce
+qui est *compatible* avec une soudure, une déchirure ou un vide. Trancher demande de
+les regarder — c'est ce que la piste C4 du vivier proposait (revoir les sites suspects
+à 2,4 µm à l'ESRF), et c'est maintenant une liste de **quatre** endroits précis au lieu
+d'un rouleau entier.
 
 **Fichiers** : `experiments/src/excision/radial.py` (dépliage) et `fusions.py`
 (`controle`, `chercher`, `ecarts`, `ecarts-controle`, `densite`). Tout est en fichiers
