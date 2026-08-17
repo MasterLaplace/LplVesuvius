@@ -159,46 +159,60 @@ disponible, et le cap reste humain.
 2,1) et une autocorrélation à 0,159. Ne jamais lui accepter une affirmation
 **quantitative** sur l'image — ces grandeurs se mesurent.
 
-## 7. La suite, dans l'ordre — état au 2026-08-17 (fin de batch)
+## 7. État au 2026-08-17, fin de batch
 
-### ✅ FAITES aujourd'hui
+### ✅ FERMÉES aujourd'hui
 
 | # | quoi | résultat |
 |---|---|---|
 | A | colonne entière de texte | **AUC 0,925** sur 44,7 Mpx, 9,2 cm de grec (`10`) |
 | B | juge de langue calibré | **15/16, zéro fabrication** ; a tranché la bande douteuse (`09`) |
-| C2 | dépliage polaire + fusions | 4 candidats, **persistants à p = 0,0001** (`11`) |
-| C3 | cohérence du compte le long de z | profil en **U**, aucune rupture ; papyrus **~14 m** (`11`) |
+| C2 | dépliage polaire + fusions | 4 candidats, persistants à **p = 0,0001** (`11`) |
+| C3 | compte le long de z | profil en **U**, aucune rupture ; papyrus **~14 m** (`11`) |
 | `06` §2.1 | monotonie radiale du winding | ❌ **écartée**, `winding.py` supprimé |
-| `06` §2.4 | théorie du dommage de l'auteur | **à moitié** : cœur −20 %, extérieur −5 à 8 %. **Pas un U** |
-| `06` §2.4bis | pourquoi le rayon varie en z | rouleau **elliptique 1,26–1,57**, écrasement ET perte |
-| `06` §3.5 | le niveau 2 de la pyramide suffit-il ? | ✅ **OUI — 89 % des murs pour 33 Gio au lieu de 2100** |
+| `06` §2.4 | théorie du dommage | **à moitié** : cœur −20 %, extérieur −5 à 8 %. **Pas un U** |
+| `06` §2.4bis | pourquoi le rayon varie en z | **elliptique 1,26–1,57**, écrasement ET perte |
+| `06` §3.2 | normaliser la proximité par le rayon | ⭐ **confirmée réelle** : la fenêtre couvre **96,9 % d'un tour** |
+| `06` §3.5 | le niveau 2 suffit-il ? | ✅ **OUI — 89 % des murs pour 33 Gio au lieu de 2100** |
 | — | tous les témoins | `./tools/temoins.sh` → **16 contrôles verts** |
+| — | niveau 2 pour `fusion_scan` | ✅ débloqué — mais **crible**, pas substitut |
 
-### 🔄 EN COURS
+### 🔄 EN COURS au moment d'écrire
 
-`fusion_scan` sur une bande large (9 coupes, 6567→7367) → `docs/fusions_bande_large_0172.json`
-
-### ⏳ CE QUI RESTE, avec ce qui le bloque
-
-| # | quoi | ce qui bloque |
+| quoi | sortie | attendu |
 |---|---|---|
-| **D** ⭐⭐ | `06` §3.8 — la proximité prédit-elle la **lisibilité** ? | le maillage `tifxyz` de `20230909121925` **n'est pas dans le jeu** ; il faut le télécharger. C'est le seul item qui convertirait une métrique géométrique en argument sur le **résultat final** |
-| **E** ⭐ | second rouleau — l'AUC 0,925 voyage-t-elle ? | rien ; ~2,2 Go de couches + 40 min de GPU. Tous les chiffres de `07`/`08`/`10` viennent de Scroll 1 |
-| C5 / `06` §3.4 ⭐ | direction des fibres comme séparateur | problème ouvert nº 5 du concours, discriminant **physique**. Les prédictions nnUNet existent. Coût élevé, valeur la plus haute |
-| C4 / `06` §3.6 | revoir les sites persistants à **2,4 µm** (ESRF) | distinguerait une vraie soudure d'un défaut de résolution. On a désormais **4 endroits précis** au lieu d'un rouleau |
-| `06` §2.3 | refaire 1.11 avec le **vrai** ombilic | `umbilicus.txt` sur Scroll 1 |
-| `06` §3.2 | normaliser la proximité **par le rayon** | 1.11 montre un gradient de 28 % non corrigé |
-| — ⚠ | **`fusion_scan` au niveau 2** | `fusions.py` code son voxel en dur ; le fichier **refuse** désormais tout niveau ≠ 0 plutôt que de rendre un chiffre faux. Le débloquer donne le facteur **64** établi par `pyramid.py` |
+| couches Scroll 4 (26 × 496 Mo) | `data/layers/scroll4_20231111135340/` | 13,5 Go, marqueur `.complet` |
+| balayage par bandes du rouleau | `docs/survey/bande_NN.json` | 10 bandes, marqueur `.complet` |
 
-### 🎯 Ce que je ferais en premier
+```bash
+du -sh data/layers/scroll4_20231111135340; ls docs/survey/*.json | wc -l
+```
 
-**Le blocage `fusion_scan` au niveau 2** — c'est une mise à l'échelle de quelques
-lignes, et `pyramid.py` vient d'établir qu'elle vaut un facteur **64** sur la donnée.
-Elle rend le balayage du rouleau **entier** faisable, alors qu'il est aujourd'hui limité
-à des bandes.
+### ⏳ CE QUI RESTE, avec son blocage exact
 
-Puis **D**, parce que c'est le seul qui parle du texte plutôt que de la géométrie.
+| # | quoi | blocage |
+|---|---|---|
+| **E** (suite) | inférence Scroll 4 + **juge calibré** | attend le téléchargement. ⚠ **Scroll 4 n'a PAS de vérité terrain**, donc pas d'AUC : c'est le juge de `09` qui répond, et c'est pour ça qu'il fallait le calibrer d'abord |
+| **D** ⭐⭐ | `06` §3.8 — proximité → lisibilité | ⚠ **le `tifxyz` de `20230909121925` n'est téléchargeable nulle part** : le corpus windcheck est un jeu **curaté**, pas un miroir. Il faudrait convertir `.obj` + `.ppm` → `tifxyz`. **Décision à prendre**, pas une tâche mécanique |
+| `06` §3.2 | appliquer le correctif | la fenêtre de `proximity.py` doit descendre bien sous 309 colonnes (un tour), **ou** normaliser par le rayon. Puis re-mesurer les 46 traces et vérifier si rho monte au-dessus de 0,769 |
+| C5 / §3.4 ⭐ | direction des fibres | problème ouvert nº 5, discriminant **physique**, prédictions nnUNet disponibles. Coût élevé, valeur la plus haute |
+| C4 / §3.6 | les 4 sites à **2,4 µm** (ESRF) | distinguerait une soudure d'un défaut de résolution |
+| §2.3 | vrai ombilic | `umbilicus.txt` sur Scroll 1 |
+| — | appariement **prédictif** entre coupes | départagerait « défauts de 1 mm » de « défauts qui migrent » (`11` §10) |
+
+### ⚠ Ce qu'il ne faut PAS refaire
+
+- **`Fixed32{N}`**… (sans objet ici) — mais l'équivalent local : **un seuil calé sur le
+  niveau 0 ne se transporte pas** à un niveau de pyramide réduit. Payé une fois
+  (« 53 feuilles au niveau 1 »).
+- **Une valeur identique sur toutes les mesures** est le symptôme d'une saturation
+  contre sa propre borne. Payé une fois (axe long à 22,7 mm partout).
+- **Comparer une grandeur à elle-même.** Payé une fois (le « périmètre » valait
+  2π × rayon moyen).
+- **Un espacement d'échantillonnage à l'échelle de l'objet** au lieu de celle de la
+  structure cherchée. Payé une fois (coupes à 22 mm pour un défaut millimétrique).
+- **Une boucle d'attente sans borne** : elle survit à la disparition de ce qu'elle
+  attend. Payé une fois (3 h 19).
 
 ## 8. ⚠ Les pièges de ce dépôt, payés au moins une fois
 
