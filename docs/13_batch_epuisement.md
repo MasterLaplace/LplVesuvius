@@ -72,3 +72,49 @@ Ferme `12` §5 (« trois segments, deux rouleaux, ce n'est pas un corpus »).
 | F2 | `06` §7 C2 « le suivi PAS ENCORE » | ✅ **clos** : le suivi n'a pas été réparé, il a été **remplacé** |
 | F3 | `06` §B « contrôle en aveugle » | ✅ **fait le 2026-08-17** (`09` §9), + la limite du voisin (`09` §12) |
 | F4 | `06` §C « un second rouleau » | ✅ **répondu deux fois** : encre (cause en amont) et géométrie (métrique inapplicable) |
+
+
+---
+
+## Voie G — le passage à l'échelle ⭐⭐
+
+Contrainte posée par l'auteur : la solution doit tenir sur les **53 rouleaux publiés** et
+sur les **~800 de la villa**. Chiffrée, pas affirmée
+(`analysis/src/cout_passage_echelle.py`) :
+
+| rouleaux | donnée lue | 1 fil | 16 fils | **part du volume** |
+|---:|---:|---:|---:|---:|
+| 13 (le prix) | 1,3 Go | 6 min | < 1 min | **0,0042 %** |
+| 53 (publiés) | 5,2 Go | 30 min | 2 min | 0,0042 % |
+| **800 (la villa)** | **78 Go** | 7,2 h | **0,5 h** | **0,0042 %** |
+
+> On lit **quatre millièmes de pour-cent** d'un rouleau pour le juger. C'est ce que
+> permet un chunk OME-Zarr : il contient toute la colonne de profondeur d'une fenêtre,
+> et les chunks se lisent indépendamment par HTTP. **On ne télécharge jamais un rouleau.**
+
+⚠ Les campagnes sont **parallélisables sans coordination** — chaque chunk est une requête
+indépendante. Le « 16 fils » n'est pas une promesse d'implémentation, c'est ce que la
+structure permet.
+
+⚠⚠ **Ce qui NE passe PAS à l'échelle, et il faut le dire** : la détection d'encre (42 min
+par segment sur cet iGPU) et le **traçage** lui-même, qui reste semi-manuel. Nos
+instruments **jugent vite ce que la production fait lentement** — c'est utile, et ce
+n'est pas la même chose que dérouler 800 rouleaux.
+
+| # | quoi | état |
+|---|---|---|
+| G1 | chiffrer le coût par rouleau | ✅ 97 Mo, 30 s pour un rouleau non tracé |
+| G2 | extrapoler à 53 et 800 | ✅ 5,2 Go / 78 Go, part du volume **constante** |
+| G3 | paralléliser réellement les campagnes | ⏳ la structure le permet, rien ne le fait |
+
+## Voie H — la qualité de scan (nommée par le concours)
+
+Le tableau des goulots de `2026_open_problems` dit, pour les régions comprimées :
+*« What would help : **scan-quality metrics** »*.
+
+| # | quoi | état |
+|---|---|---|
+| H1 | métrique de séparabilité (d′ feuille / interstice) | ✅ `analysis/src/separabilite_scan.py` |
+| H2 | ⚠ sa **limite d'échelle**, mesurée | ✅ un d′ **baisse** quand on résout plus de structure : valide à résolution égale seulement |
+| H3 | témoin apparié : même rouleau, deux protocoles | ✅ PHerc0139 en 9,362 **et** 2,399 µm |
+| H4 | carte des 13 rouleaux du prix | 🔄 relancée avec les paramètres dérivés du pas |
