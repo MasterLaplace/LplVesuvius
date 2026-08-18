@@ -39,7 +39,8 @@ from pathlib import Path
 import numpy as np
 
 
-def layer_files(folder: Path, first: int = 0, last: int = 10**9) -> list[Path]:
+def layer_files(folder: Path, first: int = 0, last: int = 10**9,
+                step: int = 1) -> list[Path]:
     """Couches triees par indice numerique, pas par ordre alphabetique.
 
     ⚠ Un tri alphabetique met `10.tif` avant `9.tif` : le profil de profondeur
@@ -51,13 +52,20 @@ def layer_files(folder: Path, first: int = 0, last: int = 10**9) -> list[Path]:
     # commune est la condition pour que le chiffre veuille dire la meme chose.
     files = [p for p in folder.iterdir()
              if p.suffix == ".tif" and first <= int(p.stem) <= last]
-    return sorted(files, key=lambda p: int(p.stem))
+    files = sorted(files, key=lambda p: int(p.stem))
+    # ⚠ Sous-echantillonner les couches divise le TELECHARGEMENT autant que la lecture :
+    # une pile complete fait 32 Go, et valider l'instrument sur une population en
+    # demande une dizaine. Le profil n'a besoin que de la FORME de la courbe, pas de
+    # chaque couche -- mais c'est une affirmation, donc elle se verifie (voir le temoin
+    # « profondeur : sous-echantillonnage » dans tools/temoins.sh).
+    return files[::step] if step > 1 else files
 
 
-def profile(folder: Path, top: int, left: int, size: int) -> dict:
+def profile(folder: Path, top: int, left: int, size: int,
+            first: int = 0, last: int = 10**9, layer_step: int = 1) -> dict:
     import tifffile
 
-    files = layer_files(folder)
+    files = layer_files(folder, first, last, layer_step)
     if not files:
         raise RuntimeError(f"aucune couche dans {folder}")
     means, contrasts, indices = [], [], []
@@ -79,7 +87,7 @@ def profile(folder: Path, top: int, left: int, size: int) -> dict:
 
 
 def grid_profiles(folder: Path, size: int, step: int, floor: float,
-                  first: int = 0, last: int = 10**9) -> dict:
+                  first: int = 0, last: int = 10**9, layer_step: int = 1) -> dict:
     """Le pic de contraste tombe-t-il au MEME endroit partout sur le segment ?
 
     ⚠⚠ **C'est une mesure de qualite de TRACE, et elle ne demande ni verite terrain, ni
@@ -103,7 +111,7 @@ def grid_profiles(folder: Path, size: int, step: int, floor: float,
     """
     import tifffile
 
-    files = layer_files(folder, first, last)
+    files = layer_files(folder, first, last, layer_step)
     if not files:
         raise RuntimeError(f"aucune couche dans {folder} entre {first} et {last}")
     with tifffile.TiffFile(files[0]) as handle:
@@ -168,6 +176,9 @@ def main() -> int:
                              "n'ont pas la meme profondeur, sinon les tiers centraux "
                              "n'ont pas la meme largeur et ne se comparent pas")
     parser.add_argument("--to-layer", type=int, default=10**9)
+    parser.add_argument("--layer-step", type=int, default=1,
+                        help="ne lire qu'une couche sur N : divise d'autant le "
+                             "telechargement ET la lecture (defaut: 1 = toutes)")
     parser.add_argument("--floor", type=float, default=0.5,
                         help="une fenetre dont l'intensite max reste sous cette fraction "
                              "du max global n'a pas de matiere : ecartee et comptee")
@@ -178,7 +189,7 @@ def main() -> int:
         report = []
         for folder in args.folders:
             data = grid_profiles(folder, args.size, args.step, args.floor,
-                                 args.from_layer, args.to_layer)
+                                 args.from_layer, args.to_layer, args.layer_step)
             names = data["layers"]
             print(f"\n=== {folder.name} — {data['avec_matiere']} fenetres avec matiere "
                   f"sur {data['windows']} ===")
@@ -200,7 +211,8 @@ def main() -> int:
     report = []
     for folder in args.folders:
         try:
-            data = profile(folder, args.top, args.left, args.size)
+            data = profile(folder, args.top, args.left, args.size,
+                       args.from_layer, args.to_layer, args.layer_step)
         except (RuntimeError, ValueError) as error:
             print(f"{folder.name} : {error}", file=sys.stderr)
             continue
