@@ -56,21 +56,86 @@ def array_meta(zarr_url: str, level: int, timeout: float) -> dict:
     if raw is None:
         raise RuntimeError(f"pas de .zarray au niveau {level} sous {zarr_url}")
     meta = json.loads(raw)
-    if meta.get("compressor") is not None:
-        raise RuntimeError("chunk compresse : ce lecteur lit du brut uniquement")
+    codec = (meta.get("compressor") or {}).get("id")
+    if codec is not None and codec not in DECODERS:
+        raise RuntimeError(f"compresseur « {codec} » non gere par ce lecteur")
     return meta
+
+
+def chunk_key(meta: dict, level: int, cy: int, cx: int) -> str:
+    """Clé du chunk, avec le séparateur que le tableau DÉCLARE.
+
+    ⚠⚠ Le séparateur n'est pas toujours `/`. Un même corpus mélange les deux : les
+    volumes de Scroll 1 utilisent `/`, celui de `20240304141531` sur PHerc1667 utilise
+    `.`. Le coder en dur ne produit PAS une erreur -- ça produit une requête vers une clé
+    inexistante, que ce lecteur comptait en « chunk vide ». Le segment entier serait
+    alors rapporté comme dépourvu de matière, ce qui ressemble à un résultat.
+    """
+    # ⚠ Le NIVEAU est toujours un repertoire ; seuls les indices de chunk utilisent le
+    # separateur declare. Verifie sur le bucket : `0/0.0.0` d'un cote, `0/0/0/0` de
+    # l'autre. Mettre le separateur partout donne `0.0.0.0`, qui rend un 404 -- et un
+    # 404 etait compte comme « chunk vide », donc le segment entier passait pour
+    # depourvu de matiere.
+    sep = meta.get("dimension_separator", ".")
+    return f"{level}/" + sep.join(("0", str(cy), str(cx)))
+
+
+def decode(raw: bytes, meta: dict, expected: int) -> bytes | None:
+    """Décompresse si besoin. Rend None si le codec est absent de la machine.
+
+    ⚠ On distingue « ce chunk n'existe pas » de « je ne sais pas le lire » : le premier
+    est une information sur le rouleau, le second sur notre installation, et les
+    confondre fait passer un outil incomplet pour une mesure.
+    """
+    codec = (meta.get("compressor") or {}).get("id")
+    if codec is None:
+        return raw if len(raw) == expected else None
+    decoder = DECODERS.get(codec)
+    if decoder is None:
+        return None
+    try:
+        out = decoder(raw)
+    except Exception:
+        return None
+    return out if len(out) == expected else None
+
+
+def _blosc(raw: bytes) -> bytes:
+    import numcodecs
+
+    return numcodecs.Blosc().decode(raw)
+
+
+def _zstd(raw: bytes) -> bytes:
+    import numcodecs
+
+    return numcodecs.Zstd().decode(raw)
+
+
+DECODERS = {"blosc": _blosc, "zstd": _zstd}
+"""Codecs que ce lecteur sait ouvrir. ⚠ `numcodecs` n'est importé qu'au besoin : un
+volume non compressé doit rester lisible sur une machine qui ne l'a pas."""
 
 
 def chunk_profile(zarr_url: str, level: int, meta: dict, cy: int, cx: int,
                   timeout: float):
-    """Profils d'intensite et de contraste d'UN chunk, ou None s'il est vide/absent."""
+    """Profils d'un chunk, ou une CHAINE disant pourquoi il n'y en a pas.
+
+    ⚠ Trois refus differents, et les confondre a deja coute une mesure : « absent »
+    est un fait sur le rouleau, « illisible » un fait sur notre installation, « vide »
+    un fait sur la geometrie du segment. Un lecteur qui rend `None` pour les trois
+    rapporte un segment sans matiere quand il a simplement mal construit sa clef.
+    """
     depth, hy, hx = meta["chunks"]
-    raw = get(f"{zarr_url}/{level}/0/{cy}/{cx}", timeout)
-    if raw is None or len(raw) != depth * hy * hx:
-        return None
-    block = np.frombuffer(raw, dtype=np.dtype(meta["dtype"])).reshape(depth, hy, hx)
+    raw = get(f"{zarr_url}/{chunk_key(meta, level, cy, cx)}", timeout)
+    if raw is None:
+        return "absent"
+    data = decode(raw, meta, depth * hy * hx)
+    if data is None:
+        return "illisible"
+    block = np.frombuffer(data, dtype=np.dtype(meta["dtype"])).reshape(depth, hy, hx)
     if block.max() == 0:
-        return None
+        return "vide"
     patch = block.astype(np.float32)
     mean = patch.mean(axis=(1, 2))
     blur = (patch[:, :-2, 1:-1] + patch[:, 2:, 1:-1] + patch[:, 1:-1, :-2]
@@ -94,9 +159,11 @@ def survey(zarr_url: str, level: int, windows: int, timeout: float, seed: int) -
              for x in np.linspace(0, grid_x - 1, min(steps * 2, grid_x))]
 
     peaks, contrast_peaks, empty, curves, dense = [], [], 0, [], []
+    refus: dict[str, int] = {}
     for cy, cx in picks:
         got = chunk_profile(zarr_url, level, meta, cy, cx, timeout)
-        if got is None:
+        if isinstance(got, str):
+            refus[got] = refus.get(got, 0) + 1
             empty += 1
             continue
         mean, contrast = got
@@ -122,7 +189,8 @@ def survey(zarr_url: str, level: int, windows: int, timeout: float, seed: int) -
         if span > 0:
             curves.append((contrast - contrast.min()) / span)
     if not peaks:
-        raise RuntimeError("aucune fenetre avec de la matiere")
+        detail = ", ".join(f"{k}={v}" for k, v in sorted(refus.items())) or "aucune sonde"
+        raise RuntimeError(f"aucune fenetre avec de la matiere ({detail})")
 
     peaks = np.asarray(peaks)
     low, high = depth // 3, 2 * depth // 3
@@ -131,6 +199,7 @@ def survey(zarr_url: str, level: int, windows: int, timeout: float, seed: int) -
         "layers": int(depth),
         "traced_layer": int(traced),
         "sondees": len(picks), "avec_matiere": int(peaks.size), "vides": empty,
+        "refus": refus,
         "tiers_central": float(((peaks >= low) & (peaks < high)).mean()),
         "au_bord": float(((peaks == 0) | (peaks == depth - 1)).mean()),
         "pic_median": int(np.median(peaks)),

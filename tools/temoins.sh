@@ -147,6 +147,27 @@ except ValueError:
 print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
+run "zarr : clef de chunk"    uv run python - <<'PY'
+import sys; sys.path.insert(0,'../analysis/src')
+from zarr_depth import chunk_key, decode
+n=0
+def ck(c):
+    global n
+    assert c; n+=1
+# ⚠⚠ LE BUG QUE CE TEMOIN GARDE, et il ne levait AUCUNE erreur. Le niveau est toujours
+# un repertoire ; seuls les indices de chunk utilisent `dimension_separator`. Une clef
+# `0.0.0.0` rend un 404, le lecteur comptait le 404 en « chunk vide », et le segment
+# entier passait pour depourvu de matiere -- un resultat, faux, sans le moindre signe.
+ck(chunk_key({"dimension_separator": "/"}, 0, 12, 34) == "0/0/12/34")
+ck(chunk_key({"dimension_separator": "."}, 0, 12, 34) == "0/0.12.34")
+ck(chunk_key({}, 2, 5, 7) == "2/0.5.7")            # defaut zarr v2 : le point
+# ⚠ « absent » et « illisible » doivent rester distincts d'un chunk vide.
+ck(decode(b"abc", {}, 3) == b"abc")                 # brut, taille juste
+ck(decode(b"ab", {}, 3) is None)                    # brut tronque -> refus
+ck(decode(b"xx", {"compressor": {"id": "inconnu"}}, 3) is None)
+print(f'ALL PASS (0 failures, {n} checks)')
+PY
+
 run "juge : choix des bandes" uv run python - <<'PY'
 import sys, pathlib, numpy as np; sys.path.insert(0,'../analysis/src')
 from judge_api import choose_bands, TEXT_BANDS

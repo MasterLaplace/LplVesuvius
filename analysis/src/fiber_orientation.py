@@ -45,7 +45,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from zarr_depth import BUCKET, array_meta, get  # noqa: E402
+from zarr_depth import BUCKET, array_meta, chunk_key, decode, get  # noqa: E402
 
 
 def orientation_profile(block: np.ndarray) -> tuple:
@@ -115,11 +115,12 @@ def survey(zarr_url: str, level: int, windows: int, timeout: float) -> dict:
     flips, coherences, curves, empty = [], [], [], 0
     field = {}
     for cy, cx in picks:
-        raw = get(f"{zarr_url}/{level}/0/{cy}/{cx}", timeout)
-        if raw is None or len(raw) != depth * hy * hx:
+        raw = get(f"{zarr_url}/{chunk_key(meta, level, cy, cx)}", timeout)
+        data = decode(raw, meta, depth * hy * hx) if raw is not None else None
+        if data is None:
             empty += 1
             continue
-        block = np.frombuffer(raw, dtype=np.dtype(meta["dtype"])).reshape(depth, hy, hx)
+        block = np.frombuffer(data, dtype=np.dtype(meta["dtype"])).reshape(depth, hy, hx)
         if block.max() == 0:
             empty += 1
             continue
