@@ -1,0 +1,118 @@
+[
+  {
+    "scan": "bande_niveau0_A.json",
+    "slices": 9,
+    "cells": 41,
+    "predictive": {
+      "tracks": 29,
+      "longest": 4,
+      "span_mm": 0.47460000000000235,
+      "at_least_3": 3,
+      "at_least_4": 1,
+      "at_least_5": 0,
+      "straightness_mean": 0.7777777777777782,
+      "drift_mm_per_mm": 0.2999999999999992
+    },
+    "fixed": {
+      "tracks": 29,
+      "longest": 5,
+      "span_mm": 1.8984000000000023,
+      "at_least_3": 2,
+      "at_least_4": 1,
+      "at_least_5": 1,
+      "straightness_mean": 0.8333333333333337,
+      "drift_mm_per_mm": 0.44999999999999996
+    },
+    "null": {
+      "longest": {
+        "mean": 3.506,
+        "p95": 5.0,
+        "p": 0.4153169366126775
+      },
+      "span_mm": {
+        "mean": 1.014789720000001,
+        "p95": 2.373000000000001,
+        "p": 0.735252949410118
+      },
+      "at_least_3": {
+        "mean": 2.4718,
+        "p95": 4.0,
+        "p": 0.47210557888422316
+      },
+      "at_least_4": {
+        "mean": 0.4662,
+        "p95": 1.0,
+        "p": 0.4153169366126775
+      },
+      "straightness_mean": {
+        "mean": 0.8629507734345451,
+        "p95": 1.0,
+        "p": 0.7190388170055453
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "la prediction n'apporte rien -- lecture \u00ab defaut d'un millimetre \u00bb tenue"
+  },
+  {
+    "scan": "fusions_bande_large_0172.json",
+    "slices": 9,
+    "cells": 32,
+    "predictive": {
+      "tracks": 26,
+      "longest": 5,
+      "span_mm": 4.746000000000002,
+      "at_least_3": 1,
+      "at_least_4": 1,
+      "at_least_5": 1,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": 1.5000000000000007
+    },
+    "fixed": {
+      "tracks": 28,
+      "longest": 3,
+      "span_mm": 1.4238000000000035,
+      "at_least_3": 1,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": 0.9000000000000021
+    },
+    "null": {
+      "longest": {
+        "mean": 2.644,
+        "p95": 4.0,
+        "p": 0.015996800639872025
+      },
+      "span_mm": {
+        "mean": 0.94976952,
+        "p95": 2.8476,
+        "p": 0.0007998400319936012
+      },
+      "at_least_3": {
+        "mean": 0.6036,
+        "p95": 2.0,
+        "p": 0.521495700859828
+      },
+      "at_least_4": {
+        "mean": 0.1104,
+        "p95": 1.0,
+        "p": 0.10937812437512498
+      },
+      "straightness_mean": {
+        "mean": 0.8649045637243062,
+        "p95": 1.0,
+        "p": 0.8256630265210608
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "plus longue que le hasard et que la fenetre fixe, mais pas plus droite"
+  },
+  {
+    "fisher": {
+      "bands": 2,
+      "chi2": 14.87727900083329,
+      "p": 0.004962635138324386,
+      "below_05": 1
+    }
+  }
+]
