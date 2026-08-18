@@ -70,6 +70,74 @@ compte comme une fabrication chacune de ses lectures correctes.
 donc ces trois fenetres SE RECOUVRENT. Elles ne sont pas trois observations
 independantes, et un balayage complet n'en trouve pas d'autres."""
 
+def choose_bands(scores: np.ndarray, height: int, count: int, gap: int,
+                 blank_ceiling: float = 0.02, candidate_floor: float = 0.08) -> tuple:
+    """Choisir les bandes CANDIDATES et VIERGES sur la sortie du detecteur elle-meme.
+
+    ⚠⚠ **Necessaire des qu'on quitte le segment de calibrage.** `TEXT_BANDS` et
+    `BLANK_BANDS` sont des coordonnees mesurees sur `20230909121925`, ou l'etiquetage
+    humain dit ou est le texte. Sur un rouleau sans verite terrain elles ne veulent
+    rien dire, et les y appliquer reviendrait a tirer des fenetres au hasard en
+    croyant tirer des temoins.
+
+    ⚠ **Et le mot « texte » devient un mensonge**, donc il ne sert pas ici : sans
+    etiquetage, on ne sait pas qu'une bande porte du texte, seulement que le detecteur
+    y annonce de l'encre. Le genre s'appelle **candidat**. Ce que l'experience teste
+    est alors : *le juge lit-il des lettres la ou notre detecteur annonce de l'encre,
+    et refuse-t-il la ou il n'en annonce pas ?* -- ce qui est exactement la question
+    quand on transporte un detecteur sur un rouleau qu'il n'a jamais vu.
+
+    Le seuil est **logit > 0**, celui qui a donne l'AUC 0,925, et pas un autre : en
+    inventer un ici ferait dependre le choix des bandes d'un reglage que rien ne
+    valide.
+
+    ⚠ Les bandes rendues ne se **recouvrent pas** et sont separees d'au moins `gap`
+    lignes. Le calibrage de Scroll 1 avait du s'en passer -- sa seule zone franchement
+    vierge fait ~2000 lignes, donc ses trois fenetres se recouvrent et ne sont pas
+    trois observations independantes. C'est une limite subie la-bas ; ici elle est
+    imposee, et si la donnee ne peut pas la satisfaire on rend moins de bandes plutot
+    que des bandes qui se chevauchent.
+    """
+    rows = scores.shape[0]
+    fractions = []
+    for top in range(0, rows - height + 1, height // 2):
+        band = scores[top:top + height]
+        fractions.append((float((band > 0.0).mean()), top))
+    if not fractions:
+        raise JudgeError(f"prediction de {rows} lignes : trop courte pour {height}")
+
+    # ⚠⚠ La separation vaut aussi ENTRE les deux genres, et pas seulement a
+    # l'interieur de chacun -- c'est un temoin qui l'a trouve. Une bande candidate qui
+    # recouvre une bande vierge met la MEME image des deux cotes de la barre noire : la
+    # condition « candidat | vierge » n'oppose alors plus rien, et un modele qui
+    # transcrirait les deux cotes passerait pour coherent.
+    def pick(ordered, taken):
+        chosen = []
+        for fraction, top in ordered:
+            if all(abs(top - other) >= height + gap
+                   for _, other in chosen) and all(abs(top - other) >= height + gap
+                                                   for other in taken):
+                chosen.append((fraction, top))
+            if len(chosen) == count:
+                break
+        return chosen
+
+    # Les bandes chargees d'abord : sur un vrai rouleau elles sont la ressource rare,
+    # donc les servir en second reviendrait a les laisser evincer par des vierges.
+    # ⚠⚠ UN PLAFOND DE PURETE, sans quoi le selecteur repete automatiquement la faute
+    # deja payee a la main. La bande (7168, 1024) avait ete listee comme temoin puis
+    # retiree : elle porte 3,75 % d'encre predite, donc chaque lecture correcte du
+    # modele y aurait compte comme une fabrication. Un « temoin » ou le detecteur
+    # trouve du signal n'est pas un temoin -- il faut refuser d'en rendre plutot que
+    # d'en rendre de faux, et c'est pourquoi ces listes peuvent revenir plus courtes
+    # que demande.
+    high = [b for b in pick(sorted(fractions, reverse=True), []) if b[0] >= candidate_floor]
+    low = [b for b in pick(sorted(fractions), [top for _, top in high])
+           if b[0] <= blank_ceiling]
+    return ([(top, height) for _, top in high], [(top, height) for _, top in low],
+            {"candidat": [f for f, _ in high], "vierge": [f for f, _ in low]})
+
+
 RETRY_CODES = (429, 503)
 """Ce que l'API dit quand elle veut dire « plus tard » et non « non ».
 
@@ -252,8 +320,45 @@ def main() -> int:
     parser.add_argument("--high", type=float, default=0.995)
     parser.add_argument("--timeout", type=float, default=120.0)
     parser.add_argument("--pause", type=float, default=2.0, help="secondes entre appels")
+    parser.add_argument("--bands-only", action="store_true",
+                        help="montrer les bandes retenues et sortir, SANS appel ni cle : "
+                             "on inspecte ce qu'on va soumettre avant de payer des jetons")
+    parser.add_argument("--auto-bands", action="store_true",
+                        help="choisir les bandes sur la sortie du detecteur au lieu des "
+                             "coordonnees de Scroll 1 -- OBLIGATOIRE sur tout autre segment")
+    parser.add_argument("--band-height", type=int, default=1024)
+    parser.add_argument("--band-gap", type=int, default=512)
+    parser.add_argument("--blank-ceiling", type=float, default=0.02,
+                        help="fraction d'encre predite au-dela de laquelle une bande "
+                             "CESSE d'etre un temoin (defaut: 0,02 -- la bande "
+                             "rejetee a la main en portait 0,0375)")
+    parser.add_argument("--candidate-floor", type=float, default=0.08)
     parser.add_argument("--out", type=Path, default=Path("docs/juge_resultats.json"))
     args = parser.parse_args()
+
+    # ⚠ Avant la cle : inspecter ce qu'on va soumettre ne doit dependre d'aucun
+    # compte. Un controle hors ligne qui exigerait une cle d'API ne tournerait pas
+    # sur une machine qui n'en a pas, donc ne tournerait pas.
+    if args.bands_only:
+        if args.prediction is None:
+            print("erreur : chemin de prediction requis", file=sys.stderr)
+            return 2
+        scores = np.load(args.prediction, mmap_mode="r")
+        for count in (1, 2, 3, 4):
+            try:
+                high, low, fractions = choose_bands(
+                    np.asarray(scores), args.band_height, count, args.band_gap,
+                    args.blank_ceiling, args.candidate_floor)
+            except JudgeError as error:
+                print(f"  {count} bandes : {error}")
+                continue
+            print(f"  {count} bande(s) par genre :")
+            for kind, bands, values in (("candidat", high, fractions["candidat"]),
+                                        ("vierge", low, fractions["vierge"])):
+                joined = ", ".join(f"{top} ({v * 100:.2f} %)"
+                                   for (top, _), v in zip(bands, values))
+                print(f"    {kind:9} {joined}")
+        return 0
 
     try:
         key = api_key()
@@ -271,8 +376,30 @@ def main() -> int:
         return 2
 
     scores = np.load(args.prediction)
-    if args.trials > min(len(TEXT_BANDS), len(BLANK_BANDS)):
-        print(f"erreur : au plus {min(len(TEXT_BANDS), len(BLANK_BANDS))} essais "
+    if args.auto_bands:
+        try:
+            text_bands, blank_bands, fractions = choose_bands(
+                scores, args.band_height, max(args.trials, 2), args.band_gap,
+                args.blank_ceiling, args.candidate_floor)
+        except JudgeError as error:
+            print(f"erreur : {error}", file=sys.stderr)
+            return 2
+        print(f"bandes choisies sur la sortie du detecteur ({scores.shape[0]} lignes) :")
+        for kind, bands, values in (("candidat", text_bands, fractions["candidat"]),
+                                    ("vierge", blank_bands, fractions["vierge"])):
+            joined = ", ".join(f"ligne {top} ({v * 100:.2f} %)"
+                               for (top, _), v in zip(bands, values))
+            print(f"  {kind:9} {joined}")
+        # ⚠ Si le detecteur annonce autant d'encre dans les bandes « vierges » que
+        # dans les « candidates », l'experience n'a pas de contraste a mesurer et le
+        # dire vaut mieux que de la lancer.
+        if min(fractions["candidat"]) - max(fractions["vierge"]) < 0.02:
+            print("⚠ contraste faible entre les deux genres : le juge ne pourra pas "
+                  "separer ce que le detecteur ne separe pas", file=sys.stderr)
+    else:
+        text_bands, blank_bands = TEXT_BANDS, BLANK_BANDS
+    if args.trials > min(len(text_bands), len(blank_bands)):
+        print(f"erreur : au plus {min(len(text_bands), len(blank_bands))} essais "
               "(au-dela on repeterait des regions, donc des appels identiques)",
               file=sys.stderr)
         return 2
@@ -283,7 +410,7 @@ def main() -> int:
         ("vierge|vierge", ("vierge", "vierge"), {"gauche": "vierge", "droite": "vierge"}),
         ("texte|texte", ("texte", "texte"), {"gauche": "texte", "droite": "texte"}),
     ]
-    pools = {"texte": TEXT_BANDS, "vierge": BLANK_BANDS}
+    pools = {"texte": text_bands, "vierge": blank_bands}
 
     records = []
     for name, sides, truth in conditions:

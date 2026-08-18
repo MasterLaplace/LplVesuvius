@@ -45,7 +45,82 @@ assert 0.0 <= h['mean'] <= 1.0; n+=1
 print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
+run "track_z : suiveur predictif" uv run python - <<'PY'
+import sys; sys.path.insert(0,'src')
+from excision.track_z import track, straightness, summarise, permute
+import numpy as np
+n=0
+def ck(c):
+    global n
+    assert c; n+=1
+# Un site qui DERIVE d'un millimetre par coupe : la fenetre fixe le perd, la
+# prediction le suit. C'est la revendication entiere du §11, en quatre lignes.
+# ⚠ Les pas sont ceux MESURES sur le vrai site (0,5 / 0,9 / 1,4 / 1,9 mm) et non une
+# derive constante : a derive constante egale a la tolerance on teste une egalite au
+# bord, et le vrai defaut ACCELERE. ⚠ Limite reelle du suiveur, visible ici : le
+# PREMIER lien se fait toujours a vitesse nulle, donc un site qui derive plus vite que
+# la tolerance des sa premiere coupe ne peut pas etre amorce.
+derive=[{'z':100*i,'cells':[(r, 1000.0)]} for i,r in enumerate([10.0,10.5,11.4,12.8,14.7])]
+ck(len(max(track(derive,1.0,1000.0,True ),key=len))==5)
+ck(len(max(track(derive,1.0,1000.0,False),key=len))<5)
+# ⚠ Un site STATIONNAIRE doit donner le MEME resultat des deux cotes : sans quoi la
+# prediction ne serait pas une prediction, ce serait une fenetre elargie.
+fixe=[{'z':100*i,'cells':[(10.0, 1000.0)]} for i in range(5)]
+ck(len(max(track(fixe,1.0,1000.0,True),key=len))==len(max(track(fixe,1.0,1000.0,False),key=len))==5)
+# Un ecart angulaire au-dela de la tolerance rompt, meme si le rayon colle.
+loin=[{'z':0,'cells':[(10.0,1000.0)]},{'z':100,'cells':[(10.0,9000.0)]}]
+ck(len(max(track(loin,1.0,1000.0,True),key=len))==1)
+ck(abs(straightness([(0,10.,0),(1,11.,0),(2,12.,0)])-1.0)<1e-9)   # monotone
+ck(straightness([(0,10.,0),(1,12.,0),(2,10.,0)])==0.0)            # zigzag pur
+ck(abs(summarise(track(derive,1.0,1000.0,True))['span_mm']-4.7)<1e-9)
+ck(len(max(track(derive,1.0,1000.0,False),key=len))==3)   # la fenetre fixe s'arrete a 3
+# La permutation conserve le multiensemble ET les effectifs par coupe.
+g=np.random.default_rng(0); q=permute(derive,g)
+ck(sorted(c for s in q for c in s['cells'])==sorted(c for s in derive for c in s['cells']))
+ck([len(s['cells']) for s in q]==[len(s['cells']) for s in derive])
+print(f'ALL PASS (0 failures, {n} checks)')
+PY
+
 cd "$ROOT/inference_xpu" || exit 2
+run "juge : choix des bandes" uv run python - <<'PY'
+import sys, pathlib, numpy as np; sys.path.insert(0,'../analysis/src')
+from judge_api import choose_bands, TEXT_BANDS
+n=0
+def ck(c):
+    global n
+    assert c; n+=1
+# ⚠ Une carte fabriquee avec DEUX zones encrees separees, et pas une seule : avec une
+# seule, le plancher de candidat en rejette la deuxieme et le temoin plante au lieu de
+# tester ce qu'il annonce.
+faux=np.full((6144,600),-3.0,dtype=np.float32); faux[:1024]=+3.0; faux[3072:4096]=+3.0
+haut,bas,fr=choose_bands(faux,1024,2,512)
+ck(fr['candidat'][0]>0.9 and fr['vierge'][0]<0.05)
+ck(all(abs(a-b)>=1024+512 for (a,_) in haut for (b,_) in bas))   # pas de recouvrement
+ck(abs(haut[0][0]-haut[1][0])>=1024+512)                         # ni entre elles
+# ⚠ LE CONTROLE QUI COMPTE, sur la VRAIE carte de Scroll 1 : le choix automatique
+# doit retrouver la bande de texte mesuree a la main, et surtout ne jamais rendre un
+# faux temoin -- la bande (7168,1024) porte 3,75 % d'encre et avait ete retiree.
+carte=pathlib.Path('../data/out/ink_segment_complet.npy')
+if carte.is_file():
+    v=np.asarray(np.load(carte, mmap_mode='r'))
+    for count in (1,2,3,4):
+        h,b,f=choose_bands(v,1024,count,512)
+        ck(h[0][0]==TEXT_BANDS[0][0])            # retrouve la bande de texte a la main
+        ck(len(b)==1 and f['vierge'][0]<0.02)    # UNE seule zone franchement vierge
+    # ⚠ Le compteur du selecteur doit RETROUVER la mesure faite a la main : la bande
+    # (7168,1024) avait ete listee comme temoin puis retiree apres mesure a 3,75 %.
+    # Si le compteur rendait autre chose ici, le plafond protegerait contre un chiffre
+    # qui n'est pas celui du depot -- et le faux temoin repasserait un jour.
+    ck(abs(float((v[7168:8192] > 0.0).mean()) - 0.0375) < 0.005)
+    ck(float((v[7168:8192] > 0.0).mean()) > 0.02)        # donc inadmissible
+    # ⚠ Le plafond doit etre CE QUI limite, et pas un bug : le relever doit rendre
+    # plus de bandes. Sans ce controle, « une seule bande vierge » serait aussi ce
+    # que rendrait un selecteur casse.
+    _,large,fl=choose_bands(v,1024,3,512,blank_ceiling=0.10)
+    ck(len(large)>1 and max(fl['vierge'])>0.02)
+print(f'ALL PASS (0 failures, {n} checks)')
+PY
+
 run "juge : depouilleur"      uv run python - <<'PY'
 import sys; sys.path.insert(0,'../analysis/src')
 from judge_api import parse
