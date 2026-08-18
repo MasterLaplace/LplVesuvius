@@ -49,47 +49,117 @@ def load_planes(mesh_dir: Path):
 
 
 def tile_proximity(mesh_dir: Path, tile: int, sample: int, apart: int,
-                   search_radius: float, seed: int) -> dict:
-    """Proximite anormale mesuree PAR TUILE de la parametrisation.
+                   search_radius: float, seed: int, block: float = 500.0) -> dict:
+    """Proximite anormale par tuile de la parametrisation, calculee par BLOCS 3D.
 
     Reprend la definition de `excision.proximity` -- distance au plus proche point
     NON ADJACENT dans la parametrisation, rapportee a l'espacement local -- mais
-    l'agrege par tuile au lieu de la trace entiere.
+    l'agrege par tuile au lieu de la trace entiere : une trace ne donne qu'UN point,
+    et surtout la proximite VARIE le long d'une trace, ce qu'une moyenne ecrase.
 
-    ⚠ « Non adjacent » se juge en COLONNES de la parametrisation : deux points
-    voisins sur la meme feuille sont proches par construction et ne disent rien. Le
-    seuil `apart` est ce qui distingue « la meme feuille un peu plus loin » de « la
-    feuille d'a cote ».
+    ⚠ « Non adjacent » se juge en COLONNES de la parametrisation : deux points voisins
+    sur la meme feuille sont proches par construction et ne disent rien. Le seuil
+    `apart` distingue « la meme feuille un peu plus loin » de « la feuille d'a cote ».
+
+    ⚠⚠ **LE DECOUPAGE EST SPATIAL EN 3D, ET C'EST LA SEULE FORME CORRECTE.** Un
+    maillage converti depuis le `.ppm` d'un segment entier fait 21 M de cellules, soit
+    55x le maillage median du corpus windcheck : un `cKDTree` global avec
+    `query_ball_point` y consomme plusieurs gigaoctets et a fait tomber la machine
+    trois fois. Deux remedes ont ete ecartes, chacun pour une raison mesuree :
+
+    - **decimer la grille** : mesure, `below_030` tombe de 0,00030 a 0,00012 en
+      decimant par 2, soit 60 % du signal perdu -- le signal est dans la queue extreme
+      (`06` §3.7) et decimer retire justement la queue ;
+    - **tuiler la PARAMETRISATION** : structurellement faux ici. La metrique cherche
+      des points LOIN dans la parametrisation mais PROCHES en 3D -- precisement ceux
+      qu'une tuile de parametrisation met de l'autre cote de la frontiere.
+
+    Un bloc 3D, lui, contient tous les points physiquement voisins quelle que soit
+    leur distance dans la parametrisation, ce qui est exactement ce qu'il faut. La
+    **marge** vaut le rayon de recherche : sans elle, un point au bord d'un bloc
+    perdrait ses voisins d'en face et sa distance serait surestimee -- une fusion
+    manquee a chaque frontiere de bloc.
     """
     from scipy.spatial import cKDTree
+
+    if search_radius > block:
+        raise ValueError(
+            f"rayon de recherche {search_radius} > cote de bloc {block} : la marge ne "
+            "tiendrait plus dans les blocs adjacents et des voisins seraient manques")
 
     x, y, z = load_planes(mesh_dir)
     valid = (x != MISSING) & (y != MISSING) & (z != MISSING)
     rows, cols = np.nonzero(valid)
-    points = np.column_stack([x[valid], y[valid], z[valid]]).astype(np.float64)
+    points = np.column_stack([x[valid], y[valid], z[valid]]).astype(np.float32)
+    del x, y, z, valid
 
     generator = np.random.default_rng(seed)
     take = generator.choice(points.shape[0], min(sample, points.shape[0]), replace=False)
-    tree = cKDTree(points)
-    neighbourhoods = tree.query_ball_point(points[take], r=search_radius)
+    take.sort()
+    wanted = np.zeros(points.shape[0], dtype=bool)
+    wanted[take] = True
 
-    distance = np.full(take.size, np.nan)
-    for index, (cell, neighbours) in enumerate(zip(take, neighbourhoods)):
-        candidates = np.asarray(neighbours, dtype=np.int64)
-        far = candidates[np.abs(cols[candidates] - cols[cell]) >= apart]
-        if far.size:
-            distance[index] = np.sqrt(((points[far] - points[cell]) ** 2).sum(axis=1)).min()
+    # Indexation par bloc 3D. Les cles sont des entiers, donc le regroupement est un
+    # tri et non une boucle Python sur 21 M de points.
+    keys = np.floor(points / block).astype(np.int64)
+    span = keys.max(axis=0) - keys.min(axis=0) + 1
+    keys -= keys.min(axis=0)
+    flat = (keys[:, 0] * span[1] + keys[:, 1]) * span[2] + keys[:, 2]
+    order = np.argsort(flat, kind="stable")
+    flat_sorted = flat[order]
+    starts = np.flatnonzero(np.r_[True, flat_sorted[1:] != flat_sorted[:-1]])
+    ends = np.r_[starts[1:], flat_sorted.size]
 
-    # ⚠ Reference locale par TUILE, pas par fenetre de colonnes : la mesure de `07`
-    # normalisait sur +/-150 colonnes, or un tour de spire fait ~309 colonnes, donc
-    # sa fenetre couvrait presque un tour entier et n'etait pas locale en rayon
-    # (`06` §3.2). Une tuile est locale dans les DEUX directions.
+    distance = np.full(points.shape[0], np.nan, dtype=np.float32)
+    blocks_done = 0
+    for begin, stop in zip(starts, ends):
+        member = order[begin:stop]
+        queries = member[wanted[member]]
+        if queries.size == 0:
+            continue
+        # ⚠ Le voisinage se prend dans les 27 blocs adjacents, PAS en rebalayant tout
+        # le nuage. Une premiere version faisait `np.flatnonzero(np.all(points >= low
+        # ...))` a chaque bloc : invisible sur 288 K points, mais O(n) par bloc, donc
+        # 21 M x quelques milliers de blocs -- des heures pour un resultat identique.
+        # La marge tient dans un bloc tant que `search_radius <= block`, ce que le
+        # garde ci-dessous impose.
+        home = keys[member[0]]
+        near_parts = []
+        for di in (-1, 0, 1):
+            for dj in (-1, 0, 1):
+                for dk in (-1, 0, 1):
+                    nb = home + (di, dj, dk)
+                    if np.any(nb < 0) or np.any(nb >= span):
+                        continue
+                    code = (nb[0] * span[1] + nb[1]) * span[2] + nb[2]
+                    lo = np.searchsorted(flat_sorted, code, side="left")
+                    hi = np.searchsorted(flat_sorted, code, side="right")
+                    if hi > lo:
+                        near_parts.append(order[lo:hi])
+        near = np.concatenate(near_parts) if near_parts else np.empty(0, dtype=np.int64)
+        if near.size < 2:
+            continue
+        tree = cKDTree(points[near].astype(np.float64))
+        neighbourhoods = tree.query_ball_point(points[queries].astype(np.float64),
+                                               r=search_radius)
+        for index, cell in enumerate(queries):
+            candidates = near[np.asarray(neighbourhoods[index], dtype=np.int64)]
+            far = candidates[np.abs(cols[candidates] - cols[cell]) >= apart]
+            if far.size:
+                distance[cell] = np.sqrt(
+                    ((points[far].astype(np.float64) - points[cell]) ** 2).sum(axis=1)).min()
+        del tree
+        blocks_done += 1
+
+    # ⚠ Reference locale par TUILE, locale dans les DEUX directions -- pas la fenetre
+    # de +/-150 colonnes de `proximity.py`, dont `06` §3.2 a montre qu'elle couvre
+    # 96,9 % d'un tour de spire et n'est donc pas locale en rayon.
     tiles: dict[tuple[int, int], list[float]] = {}
-    for index, cell in enumerate(take):
-        if np.isnan(distance[index]):
+    for cell in take:
+        if not np.isfinite(distance[cell]):
             continue
         key = (int(rows[cell] // tile), int(cols[cell] // tile))
-        tiles.setdefault(key, []).append(float(distance[index]))
+        tiles.setdefault(key, []).append(float(distance[cell]))
 
     out = {}
     for key, values in tiles.items():
@@ -104,11 +174,13 @@ def tile_proximity(mesh_dir: Path, tile: int, sample: int, apart: int,
             "cells": int(values.size),
             "spacing": baseline,
             # La grandeur de `07` : la fraction de la queue basse. Le signal est dans
-            # la queue extreme, pas dans la moyenne -- mesure et documente en `06` §3.7.
+            # la queue extreme, pas dans la moyenne (`06` §3.7).
             "below_030": float((ratio < 0.30).mean()),
             "below_050": float((ratio < 0.50).mean()),
             "ratio_p5": float(np.percentile(ratio, 5)),
         }
+    out["_blocks"] = blocks_done
+    out["_measured"] = int(np.isfinite(distance).sum())
     return out
 
 
@@ -146,6 +218,10 @@ def main() -> int:
     parser.add_argument("--sample", type=int, default=60000)
     parser.add_argument("--apart", type=int, default=200)
     parser.add_argument("--search-radius", type=float, default=80.0)
+    parser.add_argument("--block", type=float, default=500.0,
+                        help="cote d'un bloc 3D, en voxels. ⚠ C'est ce qui BORNE la "
+                             "memoire : un arbre global sur 21 M de points a fait "
+                             "tomber la machine trois fois")
     parser.add_argument("--threshold", type=float, default=0.0)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--json")
@@ -159,7 +235,10 @@ def main() -> int:
     labels = np.array(Image.open(args.labels))[: prediction.shape[0], : prediction.shape[1]] > 0
 
     geometry = tile_proximity(args.mesh, args.tile, args.sample, args.apart,
-                              args.search_radius, args.seed)
+                              args.search_radius, args.seed, args.block)
+    blocks = geometry.pop("_blocks", 0)
+    measured = geometry.pop("_measured", 0)
+    print(f"geometrie : {blocks} blocs 3D, {measured} cellules mesurees")
     ink = tile_legibility(prediction, labels, args.tile, args.threshold)
     shared = sorted(set(geometry) & set(ink))
     print(f"tuiles de {args.tile} px : {len(geometry)} avec geometrie, "
