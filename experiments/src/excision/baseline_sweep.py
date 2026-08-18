@@ -81,6 +81,42 @@ def ball_baseline(points: np.ndarray, sample: np.ndarray, distances: np.ndarray,
     return baseline
 
 
+def contamination(distances: np.ndarray, strip: np.ndarray, ball: np.ndarray) -> dict:
+    """L'anomalie mange-t-elle sa propre reference quand celle-ci est une BOULE 3D ?
+
+    ⚠⚠ **Hypothese a tester, nee d'un resultat contre-intuitif.** La reference 3D est
+    la plus defendable sur le papier -- la grandeur est une distance 3D, donc son
+    voisinage devrait l'etre. Mesuree contre les croisements publies, elle fait
+    **nettement moins bien** que la bande de colonnes qu'elle devait corriger.
+
+    L'explication candidate : un site de croisement est une region 3D **compacte** ou
+    les cellules sont anormalement proches. Une boule centree dessus est donc remplie
+    d'autres cellules du meme site : la mediane tombe a la valeur anormale, le rapport
+    revient a 1, et **l'anomalie se normalise elle-meme**. Une bande de colonnes n'a
+    pas ce defaut parce qu'elle est etroite en colonne mais **entiere en ligne** : elle
+    traverse tout le segment, donc l'essentiel de son contenu vient de regions saines.
+
+    Le test : la reference en boule doit s'effondrer **specifiquement** aux cellules que
+    la bande signale. Si elle baisse autant partout, l'explication est fausse et il
+    faut en chercher une autre.
+    """
+    both = ~np.isnan(distances) & ~np.isnan(strip) & ~np.isnan(ball) & (strip > 0)
+    if both.sum() < 100:
+        return {}
+    ratio = np.full(distances.shape, np.nan)
+    ratio[both] = distances[both] / strip[both]
+    flagged = both & (ratio < 1 / 3)
+    if flagged.sum() < 5:
+        return {"flagged": int(flagged.sum())}
+    shrink = ball[both] / strip[both]
+    return {
+        "flagged": int(flagged.sum()),
+        # < 1 veut dire « la boule rend une reference plus BASSE que la bande ».
+        "shrink_partout": float(np.median(shrink)),
+        "shrink_aux_signalees": float(np.median(ball[flagged] / strip[flagged])),
+    }
+
+
 def summarise(distances: np.ndarray, baseline: np.ndarray) -> dict:
     """Les grandeurs de `proximity.py`, pour une reference donnee."""
     usable = ~np.isnan(distances) & ~np.isnan(baseline) & (baseline > 0)
@@ -147,9 +183,12 @@ def main() -> int:
         for window in COLUMN_WINDOWS:
             record["variants"][f"colonnes_{window}"] = summarise(
                 distances, local_baseline(cols, sample, distances, window))
+        balls = {}
         for radius in BALL_RADII:
-            record["variants"][f"boule_{int(radius)}"] = summarise(
-                distances, ball_baseline(points, sample, distances, radius))
+            balls[radius] = ball_baseline(points, sample, distances, radius)
+            record["variants"][f"boule_{int(radius)}"] = summarise(distances, balls[radius])
+        record["contamination"] = contamination(
+            distances, local_baseline(cols, sample, distances, 50), balls[400.0])
         handle.write(json.dumps(record) + "\n")
         handle.flush()
         ancien = record["variants"]["colonnes_150"].get("fraction_below_third", float("nan"))
