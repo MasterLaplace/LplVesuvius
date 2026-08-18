@@ -33,8 +33,17 @@ class ProximityError(RuntimeError):
     """Leve quand la trace ne permet pas la mesure."""
 
 
-def load_trace(mesh_dir: Path):
-    """Charge une trace et rend (positions 3D, lignes, colonnes) des cellules valides."""
+def load_trace(mesh_dir: Path, decimate: int = 1):
+    """Charge une trace et rend (positions 3D, lignes, colonnes) des cellules valides.
+
+    ⚠ `decimate` garde une cellule sur N dans CHAQUE direction de la grille. Il existe
+    parce qu'un maillage converti depuis le `.ppm` d'un segment entier fait 21 M de
+    cellules -- 55x le maillage median du corpus windcheck et 7x le plus gros -- et
+    que le cKDTree y consomme plusieurs gigaoctets. La decimation porte sur la GRILLE
+    et non sur les points : un tirage aleatoire detruirait la structure de la
+    parametrisation, et le seuil `apart`, qui compte des colonnes, ne voudrait plus
+    rien dire. ⚠ Le biais introduit se MESURE (voir docs/06 §3.8).
+    """
     planes = []
     for axis in ("x", "y", "z"):
         path = mesh_dir / f"{axis}.tif"
@@ -42,6 +51,10 @@ def load_trace(mesh_dir: Path):
             raise ProximityError(f"plan absent : {path}")
         planes.append(tifffile.imread(path))
     x, y, z = planes
+    if decimate > 1:
+        x = x[::decimate, ::decimate]
+        y = y[::decimate, ::decimate]
+        z = z[::decimate, ::decimate]
     valid = (x != MISSING) & (y != MISSING) & (z != MISSING)
     if not valid.any():
         raise ProximityError(f"aucune cellule valide dans {mesh_dir}")
@@ -111,6 +124,16 @@ def main() -> int:
     parser.add_argument("mesh", type=Path, help="repertoire .tifxyz")
     parser.add_argument("--sample", type=int, default=20000, help="cellules tirees (defaut: 20000)")
     parser.add_argument(
+        "--decimate", type=int, default=1,
+        help="ne garder qu'une cellule sur N dans CHAQUE direction de la grille "
+             "(defaut: 1 = tout). ⚠ Un maillage converti depuis un .ppm de segment "
+             "entier fait 21 M de cellules, soit 55x le maillage median du corpus "
+             "windcheck et 7x le plus gros : le cKDTree et query_ball_point y "
+             "consomment plusieurs Go et ont fait tomber la machine deux fois. "
+             "Decimer ramene le cout dans la plage ou l'outil a ete valide -- au prix "
+             "d'un biais qu'il faut MESURER et non supposer",
+    )
+    parser.add_argument(
         "--apart", type=int, default=200,
         help="ecart minimal en colonnes pour dire « non adjacent » (defaut: 200)",
     )
@@ -129,7 +152,7 @@ def main() -> int:
     args = parser.parse_args()
 
     try:
-        points, _, cols = load_trace(args.mesh)
+        points, _, cols = load_trace(args.mesh, args.decimate)
     except ProximityError as error:
         print(f"erreur : {error}", file=sys.stderr)
         return 2
