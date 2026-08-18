@@ -106,17 +106,19 @@ def main() -> int:
     print(f"{args.zarr.split('/')[0]} niveau {args.level} : grille {grid}, "
           f"voxel {voxel:.1f} µm")
 
-    steps = max(1, int(round(args.chunks ** (1 / 3))) + 1)
+    # ⚠⚠ Le balayage couvre TOUTE l'etendue en x/y, pas seulement le milieu. Une
+    # premiere version sondait la moitie centrale, et sa propre limite nº 2 disait
+    # pourquoi c'etait insuffisant : **c'est au coeur qu'un rouleau s'effondre**, et un
+    # sondage qui l'evite rend un rouleau plus facile qu'il n'est.
+    steps = max(2, int(round(args.chunks ** (1 / 3))) + 1)
     picks = sorted({(int(z), int(y), int(x))
-                    for z in np.linspace(grid[0] * 0.3, grid[0] * 0.7, steps)
-                    for y in np.linspace(grid[1] * 0.25, grid[1] * 0.75, steps)
-                    for x in np.linspace(grid[2] * 0.25, grid[2] * 0.75, steps)})
+                    for z in np.linspace(grid[0] * 0.25, grid[0] * 0.75, max(2, steps - 1))
+                    for y in np.linspace(0, grid[1] - 1, steps + 2)
+                    for x in np.linspace(0, grid[2] - 1, steps + 2)})
 
     blocks, absent = [], 0
     for cz, cy, cx in picks:
-        sep = meta.get("dimension_separator", ".")
-        key = f"{args.level}/" + sep.join((str(cz), str(cy), str(cx)))
-        raw = get(f"{url}/{key}", args.timeout)
+        raw = get(f"{url}/{chunk_key(meta, args.level, cy, cx, cz)}", args.timeout)
         if raw is None:
             absent += 1
             continue
@@ -143,7 +145,27 @@ def main() -> int:
         print(f"  ⚠ prediction BINAIRE (valeurs {echantillon.tolist()}) : "
               f"le seuil est deja applique a la publication, le balayer ne dit rien")
     report = {"zarr": args.zarr, "level": args.level, "voxel_um": voxel,
-              "binaire": bool(binaire), "seuils": {}}
+              "binaire": bool(binaire), "seuils": {}, "par_rayon": []}
+
+    # ⚠ Le « rayon » est la distance au centre de la GRILLE de chunks, en chunks. Le
+    # volume est masque, donc le rouleau y est grossierement centre -- c'est une
+    # approximation assumee, et elle suffit a distinguer « coeur » de « bord », qui est
+    # la seule question posee ici. Elle ne remplace pas un ombilic (`06` §2.3).
+    centre = (grid[1] / 2.0, grid[2] / 2.0)
+    radial: dict[int, list[float]] = {}
+    for (cz, cy, cx), block in blocks:
+        r = int(round(np.hypot(cy + 0.5 - centre[0], cx + 0.5 - centre[1])))
+        value = survey_chunk(block, args.seuils[0])
+        if np.isfinite(value):
+            radial.setdefault(r, []).append(value * voxel)
+    if radial:
+        print(f"\n  ecart selon la position, du coeur vers le bord :")
+        print(f"  {'rayon':>8} {'chunks':>7} {'ecart median':>14}")
+        for r in sorted(radial):
+            vals = radial[r]
+            print(f"  {r:>5} ch {len(vals):>7} {np.median(vals):>11.0f} µm")
+            report["par_rayon"].append({"rayon_chunks": r, "chunks": len(vals),
+                                        "median_um": float(np.median(vals))})
     print(f"\n  {'seuil':>6} {'ecart median':>14} {'p10':>9} {'minimum':>10} "
           f"{'sous 150 um':>12}")
     for threshold in args.seuils:

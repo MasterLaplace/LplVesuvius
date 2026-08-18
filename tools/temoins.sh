@@ -161,6 +161,11 @@ def ck(c):
 ck(chunk_key({"dimension_separator": "/"}, 0, 12, 34) == "0/0/12/34")
 ck(chunk_key({"dimension_separator": "."}, 0, 12, 34) == "0/0.12.34")
 ck(chunk_key({}, 2, 5, 7) == "2/0.5.7")            # defaut zarr v2 : le point
+# ⚠ Le troisieme axe n'est pas toujours zero : un volume CT se sonde en z aussi. Il
+# etait recolle a la main par un remplacement de chaine dans un appelant -- exactement
+# la forme sous laquelle un bug silencieux revient.
+ck(chunk_key({"dimension_separator": "."}, 1, 4, 5, 9) == "1/9.4.5")
+ck(chunk_key({"dimension_separator": "/"}, 1, 4, 5, 9) == "1/9/4/5")
 # ⚠ « absent » et « illisible » doivent rester distincts d'un chunk vide.
 ck(decode(b"abc", {}, 3) == b"abc")                 # brut, taille juste
 ck(decode(b"ab", {}, 3) is None)                    # brut tronque -> refus

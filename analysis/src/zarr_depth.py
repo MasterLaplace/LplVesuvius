@@ -62,7 +62,7 @@ def array_meta(zarr_url: str, level: int, timeout: float) -> dict:
     return meta
 
 
-def chunk_key(meta: dict, level: int, cy: int, cx: int) -> str:
+def chunk_key(meta: dict, level: int, cy: int, cx: int, cz: int = 0) -> str:
     """Clé du chunk, avec le séparateur que le tableau DÉCLARE.
 
     ⚠⚠ Le séparateur n'est pas toujours `/`. Un même corpus mélange les deux : les
@@ -77,7 +77,7 @@ def chunk_key(meta: dict, level: int, cy: int, cx: int) -> str:
     # 404 etait compte comme « chunk vide », donc le segment entier passait pour
     # depourvu de matiere.
     sep = meta.get("dimension_separator", ".")
-    return f"{level}/" + sep.join(("0", str(cy), str(cx)))
+    return f"{level}/" + sep.join((str(cz), str(cy), str(cx)))
 
 
 def decode(raw: bytes, meta: dict, expected: int) -> bytes | None:

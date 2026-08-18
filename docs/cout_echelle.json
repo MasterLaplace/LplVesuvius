@@ -1,0 +1,43 @@
+{
+  "observe": {
+    "chunk de volume de surface": {
+      "octets": 1785856,
+      "secondes": 1.03
+    },
+    "chunk de prediction (compresse)": {
+      "octets": 1200000,
+      "secondes": 0.35
+    },
+    "chunk de volume CT (niveau 1)": {
+      "octets": 2097152,
+      "secondes": 0.4
+    }
+  },
+  "par_rouleau_non_trace": 54,
+  "extrapolation": [
+    {
+      "rouleaux": 1,
+      "octets_lus": 97200000,
+      "heures_1_fil": 0.009,
+      "part_du_volume_pct": 0.004209661191063268
+    },
+    {
+      "rouleaux": 13,
+      "octets_lus": 1263600000,
+      "heures_1_fil": 0.11699999999999999,
+      "part_du_volume_pct": 0.004209661191063268
+    },
+    {
+      "rouleaux": 53,
+      "octets_lus": 5151600000,
+      "heures_1_fil": 0.47700000000000004,
+      "part_du_volume_pct": 0.004209661191063268
+    },
+    {
+      "rouleaux": 800,
+      "octets_lus": 77760000000,
+      "heures_1_fil": 7.2,
+      "part_du_volume_pct": 0.004209661191063268
+    }
+  ]
+}
