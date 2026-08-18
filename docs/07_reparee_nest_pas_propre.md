@@ -141,10 +141,10 @@ la queue.
   métrique est un indicateur continu, pas un classifieur : voir la correction du §3.
 - Un seul rouleau, une seule campagne de scan. Scroll 5 se comporte différemment
   (le confond y existe), donc rien ne dit que ces chiffres voyagent.
-- **Le seuil d'un tiers est arbitraire.** Il n'a pas été réglé pour que les chiffres
-  sortent bien — c'est la première valeur essayée — mais il n'est pas non plus
-  justifié. À remplacer par une grandeur sans seuil, ou à calibrer sur une
-  population.
+- ✅ **Le seuil d'un tiers : tranché le 2026-08-18** (voir §8). Il ne peut pas être
+  supprimé — aucune grandeur sans seuil ne l'égale — et ce qui le défend est un
+  **plateau** de 0,15 à 0,40. Ce n'est pas un paramètre réglé, c'est un **sélecteur de
+  queue**, et le plateau montre que la sélection est robuste.
 - **On ne sait pas si ces approches nuisent au texte.** C'est la même frontière que
   `04` : on mesure une anomalie géométrique, pas une perte de lisibilité. Le lien
   reste à établir.
@@ -307,3 +307,49 @@ préfixe par segment, donc on n'énumère pas tout (piège nº 16).
 ⚠ **Une règle d'applicabilité doit être posée dans l'outil**, pas seulement écrite ici :
 une trace sous un tour de couverture doit être **refusée avec sa raison**, pas rendre
 « 0 cellule mesurée » — un message qui ressemble à une panne.
+
+
+---
+
+## 8. ✅ Le seuil d'un tiers : ni arbitraire, ni supprimable
+
+`06` §3.7 l'avait entamé, le §5 ci-dessus le réclamait encore. Tranché.
+
+### Aucune grandeur sans seuil ne l'égale
+
+Mêmes 46 traces, même référence, seule la grandeur corrélée change :
+
+| grandeur | seuil ? | rho ~ croisements |
+|---|---|---:|
+| `fraction_below_third` | oui, 1/3 | **+0,769** |
+| `fraction_below_half` | oui, 1/2 | +0,659 |
+| `ratio_p5` (5ᵉ centile du rapport) | **non** — un centile, pas une valeur | **−0,512** |
+| `shortfall` (déficit moyen) | **non** | **+0,340** |
+
+Le déficit moyen perd **plus de la moitié** de la corrélation : il est dilué par la
+masse des cellules normales. **Le signal est dans la queue extrême**, et toute
+statistique qui moyenne sur la distribution entière l'y noie.
+
+⚠ Le centile (`ratio_p5`) est la meilleure des grandeurs sans seuil de valeur, et il
+reste loin derrière. Ce n'est donc pas « on n'a pas trouvé la bonne » : c'est que la
+grandeur utile *est* une fraction de queue.
+
+### Ce qui le défend : un plateau, pas un réglage
+
+Balayage du seuil sur les mêmes traces :
+
+| seuil | 0,15 | 0,20 | 0,25 | 0,30 | 1/3 | 0,40 | 0,50 | 0,60 | 0,70 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| rho | 0,759 | 0,773 | 0,770 | **0,779** | 0,769 | 0,774 | 0,659 | 0,488 | 0,282 |
+
+**De 0,15 à 0,40 — un facteur 2,7 sur le seuil — le rho ne bouge pas** (0,759 à 0,779).
+Puis il s'effondre. Un paramètre sur-ajusté produirait un **pic** ; celui-ci produit un
+plateau, et 1/3 est simplement dedans.
+
+> **Un seuil qu'on peut multiplier par 2,7 sans que le résultat bouge n'est pas un
+> réglage.** C'est le bord d'un régime, et le nommer 1/3 ou 1/4 est indifférent.
+
+⚠ Ce qui **reste** vrai du §5 : le seuil sélectionne une queue dont on ne sait toujours
+pas ce qu'elle contient sur une trace sans croisement (facteur 18 entre les 7 traces à
+zéro croisement). Le plateau justifie le *choix* du seuil, pas l'interprétation de ce
+qu'il attrape.
