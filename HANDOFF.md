@@ -19,17 +19,32 @@ Document de passation. **À lire en entier avant de reprendre.**
 ⚠ Pousser l'AUC plus haut, chercher un meilleur détecteur d'encre ou faire transcrire
 davantage **ne sert pas** l'objectif.
 
-## 2. ⚠ CE QUI TOURNE (2026-08-18, 10 h 45)
+## 2. ⚠ CE QUI TOURNE (2026-08-18, 11 h 30)
 
-**Rien.** Tout ce qui était lancé est terminé et consigné.
+| quoi | sortie | reste |
+|---|---|---|
+| profondeur sur **80 segments** de Scroll 1 | `docs/profondeur_corpus_2.4um.json` | ~48 |
+| **fibres sur 80 segments**, en file derrière | `docs/fibres_corpus.json` | tout |
+| traces `tifxyz` de **PHerc0814** | `data/traces/PHerc0814` | ~13 |
+
+```bash
+ps -eo etime,pcpu,cmd | grep -E "[z]arr_depth|[f]iber_orient|[f]etch_traces"
+grep -c couches docs/profondeur_corpus.log ; grep -c desaccord docs/fibres_corpus.log
+```
 
 ⚠ **Juger sur un fichier de résultat, jamais sur une notification** : celles-ci
 concernent le *wrapper*, pas le travail `nohup`, et un log vide veut dire « Python
 bufferise ».
 
-⚠ Pour libérer la machine sans rien perdre (réunion, etc.) : `kill -STOP` les calculs
-(ils reprennent à l'identique) et tuer les `curl` — c'est la **bande passante** qui fait
-bégayer un Zoom, pas le processeur. `./tools/reprendre.sh` remet tout en route.
+⚠ Pour libérer la machine sans rien perdre : `kill -STOP` les calculs (ils reprennent à
+l'identique) et tuer les `curl` — c'est la **bande passante** qui fait bégayer un Zoom.
+`./tools/reprendre.sh` remet tout en route.
+
+## 2bis. ⭐ La liste de ce qui reste ouvert
+
+**[`docs/13_batch_epuisement.md`](docs/13_batch_epuisement.md)** — six voies, et elles se
+cochent là. Un item se ferme de **deux** façons également valables : *fait et mesuré*,
+ou *écarté avec la raison écrite*.
 
 ## 3. Le projet
 
@@ -49,7 +64,9 @@ bégayer un Zoom, pas le processeur. `./tools/reprendre.sh` remet tout en route.
 | `08`, `10` | ⭐ la passe d'encre : **AUC 0,925** sur un segment entier |
 | `09` | juge par modèle : 3 juges mécaniques en échec, 1 calibré qui marche |
 | **`11`** | ⭐ **onde radiale, dépliage polaire, fusions localisées en 3D, la dérive** |
-| **`12`** | ⭐ **la profondeur de surface : qualité de tracé SANS vérité terrain** |
+| **`12`** | ⭐⭐ **la profondeur de surface : qualité de tracé SANS vérité terrain** — lire le §10 d'abord, l'instrument a été corrigé deux fois |
+| **`13`** | **la liste du batch d'épuisement**, cochée au fur et à mesure |
+| `14` | ⭐ la direction des fibres — problème ouvert nº 5 |
 
 ## 4. L'outillage, et comment le relancer
 
@@ -60,6 +77,10 @@ bégayer un Zoom, pas le processeur. `./tools/reprendre.sh` remet tout en route.
 ./tools/ppm_to_tifxyz.py <in.ppm> <out.tifxyz>            # .ppm de VC -> tifxyz
 ./tools/survey_fusions.sh <out> <bandes> <par> <pas>      # fusions, niveau 2
 ./tools/bandes_niveau0.sh                                 # bandes niveau 0, hors site
+./tools/fetch_traces.py <index.json> <corpus> <dest>      # traces tifxyz, SANS aws
+./tools/lister_volumes_surface.sh <rouleau> <sortie>      # qui publie un volume Zarr
+./tools/fetch_cartes_encre.sh <rouleau> <dest>            # cartes d'encre PUBLIEES
+./tools/reprendre.sh                                      # degeler apres un kill -STOP
 
 cd experiments   # geometrie
 uv run python src/excision/radial.py {centre|compter|profil|deplier|axe} …
@@ -78,6 +99,10 @@ uv run python ../analysis/src/{evaluate_segment,render_segment,structure}.py …
 uv run python ../analysis/src/judge_api.py --list-models
 uv run python ../analysis/src/judge_api.py <pred.npy> --bands-only   # sans cle
 uv run python ../analysis/src/depth_profile.py <couches…> --grid     # qualite de trace
+uv run python ../analysis/src/zarr_depth.py <cle .zarr> --courbe     # ⭐ a DISTANCE
+uv run python ../analysis/src/fiber_orientation.py <cle .zarr>       # ⭐ fibres
+uv run python ../analysis/src/croiser_instruments.py <index.json> <mesures.json>
+uv run python ../analysis/src/compare_maps.py <a.npy> <b.npy>
 uv run python ../analysis/src/proximity_vs_ink.py <mesh> <pred> <labels>
 ```
 
@@ -126,6 +151,14 @@ transaction sur un nom inconnu.
 8. ⚠ **La migration n'est PAS la règle.** Une seconde bande au niveau 0 (z 3188→3988)
     a ses sites **stationnaires** : piste la plus longue plate à 0,47 mm, p = 0,74. Le
     site à z ≈ 7000 est particulier.
+9bis. ⭐⭐ **Un chunk Zarr = une colonne de profondeur entière, pour 1,78 Mo et 1,03 s.**
+   Les volumes de surface sont publiés en OME-Zarr non compressé, chunks
+   `[109, 128, 128]`. Une campagne qui demandait **32 Go par segment** en demande
+   quelques mégaoctets. Conséquences : **81 segments** de Scroll 1 avec volume de
+   surface, **80 avec une carte d'encre publiée** (récupérées — le résultat sans lancer
+   43 min d'inférence), **3 campagnes** de scan (45,5 / 2,4 / 1,13 µm) dont 37 segments
+   les ont toutes, et **aucune troncature** du profil. Ça débloque `12` §5 *et* `06` §3.6.
+
 9. ⭐⭐ **La profondeur de surface** (`12`) — une mesure de **qualité de tracé** qui ne
     demande **ni vérité terrain, ni modèle, ni juge**. Part des fenêtres dont le pic de
     contraste tombe dans le tiers central des couches lues : Scroll 1 **63 %** et
@@ -151,6 +184,19 @@ transaction sur un nom inconnu.
    d'un panneau dépend de son voisin** (même image, 1 puis 2 puis 0 glyphes, à
    température zéro).
 
+14. ⚠⚠ **La métrique de proximité a un DOMAINE DE DÉFINITION** (`07` §7). Elle exige une
+   trace qui **repasse au-dessus d'elle-même** : sur les 53 traces de Scroll 5, **44
+   rendent zéro cellule**, et la coupure est exactement à **un tour** (mesurées
+   2,99–9,07, écartées 0,50–**1,00**). Ce n'est pas « moins bon sur un second rouleau »,
+   c'est **inapplicable** à cette population. ⚠ Les 9 mesurables sont neuf morceaux du
+   **même** segment : n = 1. ⭐ Le vrai second rouleau est PHerc0139 / PHerc1667 /
+   PHerc0814, majoritairement au-dessus d'un tour — traces récupérées.
+15. ✅ **Le seuil d'un tiers de `07` : ni arbitraire, ni supprimable** (`07` §8). Aucune
+   grandeur sans seuil ne l'égale (**+0,340** et **−0,512** contre **+0,769**) — le
+   signal est dans la queue extrême. Ce qui le défend est un **plateau** : rho 0,759 à
+   0,779 de 0,15 à 0,40, un facteur **2,7**, puis effondrement. Un réglage sur-ajusté
+   ferait un **pic**.
+
 ### La jonction — et c'est un NON
 
 13. ⚠⚠ **La proximité géométrique ne prédit PAS la lisibilité.** rho **+0,019** à
@@ -172,15 +218,19 @@ définitive : **ce type de segment ne porte que 4 à 5 lignes de texte**, et les
 
 ## 7. ⏳ CE QUI RESTE, avec son blocage
 
+⭐ La liste complète et cochable est dans **`docs/13_batch_epuisement.md`**. Ci-dessous
+seulement ce qui n'est ni fait ni en cours.
+
 | # | quoi | blocage |
 |---|---|---|
-| ⭐⭐ | valider la profondeur de surface sur un **corpus** | `12` §5 : trois segments, deux rouleaux, ce n'est pas une population. Les couches sont publiées pour tout segment → téléchargement, pas décision. ⚠ **Poser la prédiction d'avance pour qu'elle puisse échouer** : *sous ~20 % de fenêtres au tiers central, pas d'encre lisible* |
-| ⭐ | retrouver la feuille de Scroll 4 | le cœur de matière est hors des 65 couches. Un volume plus épais (`vc_layers_from_ppm -r 64`) le contiendrait, ou il faut corriger la trace. **C'est du déroulement, donc l'objectif** |
-| **C5** ⭐ | direction des fibres comme séparateur | problème ouvert nº 5, discriminant **physique** donc déroulement pur. Prédictions nnUNet disponibles. Coût élevé, **valeur la plus haute** |
-| C4 / §3.6 | les 4 sites à **2,4 µm** (ESRF) | distinguerait une soudure d'un défaut de résolution. On a **4 endroits précis** |
-| §2.3 | vrai ombilic | `umbilicus.txt` sur Scroll 1 |
-| C4 bis | plus de bandes **niveau 0** ailleurs | 2 bandes seulement (une migre, une non). Le crible niveau 2 ne peut PAS répondre — il regarde ailleurs. ~50 min par bande, `tools/bandes_niveau0.sh` |
-| D (suite) | élargir à d'autres traces | ⚠ **plus bloqué** : `tools/ppm_to_tifxyz.py` convertit n'importe quel `.ppm` publié. C'est une commande, plus une décision |
+| **B4** ⭐⭐ | croiser la profondeur de surface avec les **80 cartes d'encre publiées** et les croisements de `windcheck` | attend la campagne (~48 segments). ⚠ Prédiction **reposée** avant mesure : *écart médian pic↔trace > ~50 µm ⇒ pas d'encre lisible*. Le seuil est le **milieu de l'intervalle observé** à n = 3, donc provisoire par construction |
+| **C4** ⭐ | fibres sur les 80 segments | en file. ⚠ **À n = 12 la mesure ne détecte qu'un rho ≥ 0,73** : le +0,330 observé n'est ni confirmé ni infirmé. Il faut n ≈ 70 |
+| **A5** ⭐ | la métrique de proximité sur PHerc0139 / PHerc1667 / PHerc0814 | traces récupérées (PHerc0814 en cours). C'est **le vrai second rouleau** : populations majoritairement > 1 tour, donc dans le domaine de définition |
+| **D** ⭐ | retrouver la feuille de Scroll 4 | le cœur de matière est hors des 65 couches. ⚠ Les volumes de surface de PHerc1667 sont **repérés** (19 à 2,399 µm, 27 à 1,129 µm) : la mesure se fait à distance, sans réengendrer de couches |
+| §2.3 | vrai ombilic | ⚠ `umbilicus.txt` renvoie **404** à l'adresse notée dans `06`. Chemin à retrouver dans le bucket |
+| E2 | plus de bandes **niveau 0** | 2 faites (une migre, une non). Le crible niveau 2 ne peut PAS répondre — il regarde ailleurs. ~50 min par bande, `tools/bandes_niveau0.sh` |
+| — | la **bascule recto/verso** des fibres | non expliquée. Trois causes candidates (`14` §3), aucune départagée. ⚠ À 1,129 µm la pile ne fait que **123 µm**, soit moins qu'une épaisseur de feuille |
+| — | le **seuil** de la profondeur de surface | il vaut ce que vaut n = 3. La campagne le recalibrera, ou le cassera |
 
 ## 8. ⚠ Les pièges payés, à ne pas repayer
 
@@ -222,6 +272,19 @@ définitive : **ce type de segment ne porte que 4 à 5 lignes de texte**, et les
     Chemins **absolus** dans les scripts de patch (payé 3× le 2026-08-18).
 19. **Mesurer là où la mesure a eu lieu** : le profil de profondeur a d'abord été pris
     à `left 2000` quand l'inférence tournait à `left 17000`, et il a répondu l'inverse.
+20. ⚠⚠ **Afficher la courbe avant de croire son argmax.** Le contraste local a servi
+    d'instrument jusqu'à ce qu'on trace sa courbe : sur un volume à 2,4 µm c'est un
+    **U**, maximal aux deux bords et minimal dans la feuille — il suit les interfaces et
+    le bruit. L'intensité localise la matière ; le contraste non. Les deux coïncidaient
+    à 7,91 µm, donc rien ne les distinguait.
+21. **Une statistique « relative à la fenêtre » n'est pas comparable entre fenêtres.**
+    Le « tiers central » de la fenêtre 15–40 n'est pas centré sur la couche tracée 32,
+    alors qu'il l'est sur un volume de surface. Rapporter un **écart à la trace en µm**.
+22. **Une mesure « entre voisins » exige des voisins** : la première version tirait des
+    fenêtres à vingt chunks d'écart et rendait `NaN` sur **0 paire comparée**.
+23. ⚠ **Un zéro se rapporte avec sa puissance, et la puissance dit quoi faire.** À
+    n = 12, seul un rho ≥ 0,73 est détectable : un +0,330 n'est alors ni confirmé ni
+    infirmé, et la réponse est d'aller chercher n ≈ 70 — pas de conclure.
 
 ## 9. Règles de mesure tenues ici
 
