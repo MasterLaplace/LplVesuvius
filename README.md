@@ -143,13 +143,20 @@ priorisee. A lire en premier si vous reprenez ce chantier.
 | [`docs/05_le_predicat_est_trop_etroit.md`](docs/05_le_predicat_est_trop_etroit.md) | **le resultat qui ouvre la suite** : la reparation laisse le defaut en place |
 | [`docs/06_mesures_a_faire.md`](docs/06_mesures_a_faire.md) | **le carnet de mesures** : faites, en attente, ecartees, avec les regles apprises |
 | [`docs/08_premiere_passe_complete.md`](docs/08_premiere_passe_complete.md) | ⭐ **la passe complete** : des couches aux lettres grecques, AUC 0,92 hors entrainement |
-| [`docs/07_reparee_nest_pas_propre.md`](docs/07_reparee_nest_pas_propre.md) | ⭐ **le resultat** : une trace reparee passe le recensement sans etre saine |
+| [`docs/07_reparee_nest_pas_propre.md`](docs/07_reparee_nest_pas_propre.md) | ⭐ **le resultat** : une trace reparee passe le recensement sans etre saine — et §7 : la metrique est **inapplicable** sous un tour de couverture |
+| [`docs/09_protocole_jugement_modele.md`](docs/09_protocole_jugement_modele.md) | juger un rendu par un modele de langue : 3 juges mecaniques en echec, 1 calibre qui marche |
+| [`docs/10_segment_complet.md`](docs/10_segment_complet.md) | la passe sur un segment entier : **AUC 0,925** sur 44,7 M de pixels |
+| [`docs/11_onde_radiale_et_fusions.md`](docs/11_onde_radiale_et_fusions.md) | ⭐ onde radiale, depliage polaire, fusions localisees en 3D, et le defaut qui **derive** |
+| **[`docs/12_profondeur_de_surface.md`](docs/12_profondeur_de_surface.md)** | ⭐⭐ **un instrument de qualite de trace sans verite terrain, sans modele et sans juge** — lire le §10 en premier |
+| **[`docs/13_batch_epuisement.md`](docs/13_batch_epuisement.md)** | la liste de ce qui reste ouvert, et elle se coche la |
+| [`docs/14_direction_des_fibres.md`](docs/14_direction_des_fibres.md) | ⭐ probleme ouvert nº 5 : l'orientation des fibres comme separateur de feuilles |
 
 ## Rejouer
 
 Tout ce qui est affirme dans `docs/` se regenere. Dans l'ordre :
 
 ```bash
+./tools/temoins.sh                  # ⭐ TOUS les temoins hors ligne, en une commande
 ./tools/mirror_site.sh              # miroir + controle de couverture (sort non nul si incomplet)
 ./tools/clone_repos.sh              # les 33 depots
 ./tools/s3_size.py PHerc0332/ --depth 1   # tailles S3, sans rien telecharger
@@ -167,19 +174,53 @@ uv sync
 uv run python -m excision.analyse ../docs/excision_samples.tsv
 ```
 
-⚠ Le client `aws` est requis par le recuperateur de `windcheck` et n'est pas dans
-ses dependances declarees. Il est installe dans SON environnement plutot que
-contourne par un telechargeur maison : un ecart de resultat deviendrait sinon
-indistinguable d'un ecart de recuperation.
+### Recuperer de la donnee sans `aws`
 
-## Etat de la recuperation (2026-08-16)
+⚠ Le client `aws` est requis par le recuperateur de `windcheck` et n'est pas dans ses
+dependances declarees. Il est installe dans SON environnement plutot que contourne :
+un ecart de resultat deviendrait sinon indistinguable d'un ecart de recuperation.
+
+⚠ **Pour tout le reste, `aws` est inutile** — le bucket est public en HTTPS et son API
+de listage accepte un prefixe par segment, donc on n'enumere pas tout (piege nº 16 :
+`aws s3 cp --include` enumere le prefixe entier avant de filtrer).
+
+```bash
+./tools/fetch_traces.py repos/windcheck/results/index.json PHerc0139 data/traces/PHerc0139
+./tools/lister_volumes_surface.sh PHercParis4    # qui publie un volume de surface Zarr
+./tools/fetch_cartes_encre.sh PHercParis4        # les cartes d'encre PUBLIEES
+./tools/fetch_layers.sh <url> <dest> <largeur> <de> <a>   # couches, reprenable
+```
+
+### Les instruments de qualite de trace
+
+Ils ne demandent **ni verite terrain, ni modele d'encre, ni juge** — c'est ce qui les
+rend utilisables sur n'importe quel segment publie.
+
+```bash
+cd inference_xpu
+# profondeur de surface : ou est la feuille par rapport a la trace
+uv run python ../analysis/src/depth_profile.py <couches...> --grid --from-layer 15 --to-layer 40
+uv run python ../analysis/src/zarr_depth.py <cle S3 du .zarr> --windows 25 --courbe
+# direction des fibres : deux fenetres voisines sur la meme feuille doivent s'accorder
+uv run python ../analysis/src/fiber_orientation.py <cle S3 du .zarr> --windows 36
+```
+
+⭐ **Un chunk Zarr = une colonne de profondeur entiere, pour 1,78 Mo et 1,03 s.** C'est
+ce qui fait passer une campagne sur corpus de « 32 Go par segment » a « quelques
+mega-octets ».
+
+## Etat de la recuperation (2026-08-18)
 
 | element | etat |
 |---|---|
 | Miroir du site | **81 / 81 pages** du sitemap, 228 Mo |
-| Depots clones | **33**, 2,4 Go |
+| Depots clones | **33**, 7,6 Go |
+| Couches rendues | 3 segments (Scroll 1 x2, Scroll 4 avec la pile **complete** 0-64), 32 Go |
+| Traces `tifxyz` | Scroll 1 (55) + Scroll 5 (53) via `windcheck`, plus PHerc0139 / PHerc1667 / PHerc0814 |
+| Cartes d'encre publiees | **80 / 80** segments de Scroll 1 |
+| Volumes de surface reperes | **81** segments Scroll 1, **46** volumes Scroll 4, 3 campagnes (45,5 / 2,4 / 1,13 µm) |
 | Echec | `lukeboi/scroll-viewer` — 404, depot retire du public (le site le reference encore) |
-| Total sur disque | 2,6 Go |
+| Total sur disque | **~76 Go** (plafond 100 Go) |
 
 Note : `repos/villa/scrollprize.org/docs/` contient le **source markdown du site**
 (34 fichiers). Pour lire, c'est superieur au miroir HTML ; le miroir sert a figer
