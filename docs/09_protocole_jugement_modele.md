@@ -514,6 +514,25 @@ Causes candidates, non départagées ici :
 3. Décalage de domaine réel (contraste de l'encre).
 4. La région choisie (`--left 17000`, 8000 de large) peut ne pas porter de texte.
 
+### ✅ La cause nº 1 a été testée : recentrer les couches ne sauve rien
+
+Passe complète relancée sur `--start-layer 0` (les couches 0 à 14 téléchargées pour ça).
+
+| | couches 15–40 | couches 0–25 |
+|---|---:|---:|
+| encre prédite | 9,71 % | 10,06 % |
+| bande candidate | 17,38 % | 18,32 % |
+| **le juge y lit** | 1 puis 2 puis 0 glyphes, lisibilité **1–3** | **refus**, lisibilité **1** |
+
+Les deux cartes se ressemblent fortement — **rho +0,700**, **88,7 %** d'accord de
+classement — et le juge est **plus** catégorique sur la seconde : il refuse les quatre
+panneaux.
+
+⚠⚠ **Mais ce test ne pouvait pas trancher**, et `12` §7 dit pourquoi : sur **61 %** du
+segment le cœur de matière est **hors des 65 couches**, donc aucune fenêtre de 26 prise
+dedans ne peut le contenir. La cause n'est pas le choix des couches — elle est en amont,
+**dans la trace**.
+
 ### Reproduire
 
 ```bash

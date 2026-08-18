@@ -1,0 +1,147 @@
+{
+  "model": "gemini-3.5-flash",
+  "trials_per_condition": 1,
+  "prediction": "../data/out/ink_scroll4_bas.npy",
+  "control_kind": "le plus faible disponible (plafond releve a 5%)",
+  "blank_ceiling": 0.05,
+  "bands": {
+    "candidat": [
+      [
+        2560,
+        1024
+      ]
+    ],
+    "controle": [
+      [
+        0,
+        1024
+      ]
+    ]
+  },
+  "records": [
+    {
+      "condition": "texte|vierge",
+      "trial": 0,
+      "regions": [
+        [
+          2560,
+          1024
+        ],
+        [
+          0,
+          1024
+        ]
+      ],
+      "truth": {
+        "gauche": "texte",
+        "droite": "vierge"
+      },
+      "parsed": {
+        "gauche": {
+          "refused": false,
+          "legibility": 1,
+          "glyphs": 0
+        },
+        "droite": {
+          "refused": true,
+          "legibility": null,
+          "glyphs": 0
+        }
+      },
+      "raw": "PANNEAU: GAUCHE\nLIGNES: 7\nL1: ·\nL1_CONFIANCE: 1\nL2: ·\nL2_CONFIANCE: 2\nL3: ·\nL3_CONFIANCE: 2\nL4: ·\nL4_CONFIANCE: 3\nL5: ·\nL5_CONFIANCE: 3\nL6: ·\nL6_CONFIANCE: 2\nL7: ·\nL7_CONFIANCE: 1\nLISIBILITE: 1\n\nPANNEAU: DROITE\nAUCUNE LETTRE VISIBLE"
+    },
+    {
+      "condition": "vierge|texte",
+      "trial": 0,
+      "regions": [
+        [
+          0,
+          1024
+        ],
+        [
+          2560,
+          1024
+        ]
+      ],
+      "truth": {
+        "gauche": "vierge",
+        "droite": "texte"
+      },
+      "parsed": {
+        "gauche": {
+          "refused": true,
+          "legibility": null,
+          "glyphs": 0
+        },
+        "droite": {
+          "refused": false,
+          "legibility": 1,
+          "glyphs": 0
+        }
+      },
+      "raw": "PANNEAU: GAUCHE\nAUCUNE LETTRE VISIBLE\n\nPANNEAU: DROITE\nLIGNES: 6\nL1: ·\nL1_CONFIANCE: 2\nL2: ··\nL2_CONFIANCE: 33\nL3: ··\nL3_CONFIANCE: 44\nL4: ··\nL4_CONFIANCE: 44\nL5: ··\nL5_CONFIANCE: 33\nL6: ··\nL6_CONFIANCE: 22\nLISIBILITE: 1"
+    },
+    {
+      "condition": "vierge|vierge",
+      "trial": 0,
+      "regions": [
+        [
+          0,
+          1024
+        ],
+        [
+          0,
+          1024
+        ]
+      ],
+      "truth": {
+        "gauche": "vierge",
+        "droite": "vierge"
+      },
+      "parsed": {
+        "gauche": {
+          "refused": true,
+          "legibility": null,
+          "glyphs": 0
+        },
+        "droite": {
+          "refused": true,
+          "legibility": null,
+          "glyphs": 0
+        }
+      },
+      "raw": "PANNEAU: GAUCHE\nAUCUNE LETTRE VISIBLE\n\nPANNEAU: DROITE\nAUCUNE LETTRE VISIBLE"
+    },
+    {
+      "condition": "texte|texte",
+      "trial": 0,
+      "regions": [
+        [
+          2560,
+          1024
+        ],
+        [
+          2560,
+          1024
+        ]
+      ],
+      "truth": {
+        "gauche": "texte",
+        "droite": "texte"
+      },
+      "parsed": {
+        "gauche": {
+          "refused": true,
+          "legibility": null,
+          "glyphs": 0
+        },
+        "droite": {
+          "refused": true,
+          "legibility": null,
+          "glyphs": 0
+        }
+      },
+      "raw": "PANNEAU: GAUCHE\nAUCUNE LETTRE VISIBLE\n\nPANNEAU: DROITE\nAUCUNE LETTRE VISIBLE"
+    }
+  ]
+}

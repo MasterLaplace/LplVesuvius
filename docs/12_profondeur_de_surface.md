@@ -187,19 +187,59 @@ unique ne peut servir tout le segment.** Ce n'est pas un décalage constant qu'o
 corrigerait avec un `--start-layer` ; c'est une trace qui n'est pas sur la feuille au
 même endroit d'un bout à l'autre.
 
-## 7. La suite que ça ouvre
+## 7. 🎯 Le segment entier, sur la pile complète — et le verdict
 
-⭐ **Relancer l'inférence Scroll 4 sur `--start-layer 0`** — lancé. La région inférée
-appartient à la population « pic à la couche 0 », donc la fenêtre 0–25 est celle qui
-contient le plus de matière. C'est le test qui départage :
+Balayage des 232 fenêtres avec matière, sur les **65** couches :
 
-| si | alors |
-|---|---|
-| le détecteur retrouve de la structure de trait | l'instrument **transporte**, `09` §12 devient « mal visé » |
-| rien ne change | le décalage de couches n'était pas la cause, et il reste le décalage de domaine |
+| où tombe le pic de contraste | fenêtres |
+|---|---:|
+| **couche 0** (bord bas) | 45 — **19 %** |
+| **couche 64** (bord haut) | 96 — **41 %** |
+| **à un bord, donc cœur HORS du volume de surface** | **141 — 61 %** |
+| à l'intérieur | 91 — 39 % |
+| dans le **tiers central**, près de la couche tracée | **3 %** |
 
-⚠ Dans les deux cas la trace de ce segment reste suspecte : une trace posée sur la
-feuille n'aurait pas 55 % de ses fenêtres avec le pic à un bord.
+Écart interquartile : **61 couches** — c'est-à-dire la pile presque entière.
+
+> **Pour 61 % de ce segment, la feuille n'est pas dans le volume de surface du tout.**
+> Et pour 3 % seulement le cœur de matière est près de la couche 32, là où une trace
+> posée sur la feuille le mettrait.
+
+⚠⚠ **Conséquence directe, et elle disqualifie le test que je venais de lancer** : si le
+cœur est hors des 65 couches, **aucune fenêtre de 26 couches prise dedans ne peut le
+contenir**. Décaler `--start-layer` ne pouvait pas sauver la détection sur la majorité
+du segment — le test était sous-dimensionné par construction, et la mesure le disait
+déjà avant que je le lance.
+
+## 8. Ce que ça règle
+
+L'échec de `09` §12 n'est pas d'abord un décalage de domaine, ni un mauvais choix de
+couches. **Il est en amont** : on ne détecte pas d'encre sur une surface que le volume
+de surface ne contient pas.
+
+C'est aussi la raison pour laquelle cet instrument mérite d'exister : il se calcule
+**avant** toute inférence, en quelques minutes, à partir des seules couches. Une passe
+d'encre de 43 minutes sur un segment à 61 % hors feuille est du temps dépensé pour un
+résultat qu'on pouvait prédire.
+
+## 9. La suite que ça ouvre
+
+✅ **Fait, et négatif** : l'inférence relancée sur `--start-layer 0` donne une carte
+**très proche** de la première (corrélation de rang **+0,700**, **88,7 %** d'accord de
+classement à logit 0, encre 10,06 % contre 9,71 %) et le juge y **refuse tous les
+panneaux**, y compris la bande à 18,32 % d'encre — lisibilité **1 ou refus**, contre
+1 à 3 auparavant. Recentrer a rendu le négatif **plus net**, pas positif.
+⚠ Mais §7 explique pourquoi ce test ne pouvait pas trancher : le cœur de matière est
+hors de la pile pour 61 % du segment.
+
+⭐ **Valider l'instrument sur un corpus.** Les couches sont publiées pour tout segment :
+c'est un téléchargement, pas une décision. La prédiction à faire d'avance, pour qu'elle
+puisse échouer : *un segment dont moins de ~20 % des fenêtres ont leur pic dans le tiers
+central ne donnera pas d'encre lisible.*
+
+⭐ **Chercher la vraie feuille.** Le cœur de matière est hors des 65 couches ; il serait
+retrouvé en engendrant un volume de surface plus épais (`vc_layers_from_ppm -r 64`) ou
+en corrigeant la trace. C'est du côté du déroulement, donc de l'objectif.
 
 ## Reproduire
 
