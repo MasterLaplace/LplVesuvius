@@ -7,10 +7,24 @@ et devenu autre chose que ce qu'il cherchait.
 
 ## 1. D'où ça vient
 
-Le détecteur GP-2023 lit **26 couches** d'une pile — ici les couches 15 à 40. Ces
-couches sont engendrées **autour de la surface tracée** : si la trace suit bien la
-feuille, la surface tombe au même indice partout, et le modèle la trouve là où il la
-cherche.
+Le détecteur GP-2023 lit **26 couches** d'une pile — ici les couches 15 à 40.
+
+⚠ **La convention est vérifiée à la source, pas supposée.** Le tutoriel officiel
+(miroir local, `site/scrollprize.org/tutorial_VC.html`) donne la commande qui les
+engendre :
+
+```
+vc_layers_from_ppm -v "/full_scrolls/$SCROLL" -p "$SEGMENT.ppm"     --output-dir layers/ -r 32 -f tif
+```
+
+> *« The result of this process are the 65 tifs in the /layers/ directory, also
+> referred to as a "surface volume". »*
+
+**Rayon 32, 65 couches : la couche 32 EST la surface tracée**, et les autres s'en
+écartent d'un voxel par indice. Si la trace suit bien la feuille, la surface tombe donc
+au même indice partout — au voisinage de 32 — et le modèle la trouve là où il la
+cherche. ⚠ Sans cette vérification, tout ce qui suit serait un raisonnement sur une
+convention devinée.
 
 La première cause candidate à l'échec sur Scroll 4 était donc : *et si la surface
 n'était pas dans la fenêtre lue ?* Elle se teste **sans rien télécharger** — la réponse
@@ -113,10 +127,10 @@ la couche 0 jusqu'à 0,000 à la couche 40, et l'intensité moyenne fait de mêm
 0,99–1,00 des couches 0 à 5, puis chute à 0 vers la couche 36). C'est une courbe, pas
 une pointe.
 
-> **La matière occupe les couches 0 à ~28 et le reste est du vide.** Or ces couches sont
-> engendrées **autour de la surface tracée** : la trace est donc posée **à côté de la
-> feuille**, d'une vingtaine de voxels au moins — plus qu'une épaisseur de feuille
-> (142,8 µm, `11` §3).
+> **La matière occupe les couches 0 à ~28 et le reste est du vide.** La surface tracée
+> est la couche **32** : elle tombe donc **dans le vide**, à une vingtaine de voxels au
+> moins de la feuille — soit plus qu'une épaisseur de feuille (142,8 µm, `11` §3).
+> **La trace est posée à côté du papyrus.**
 
 Pour comparaison, le segment Scroll 1 qui donne l'AUC 0,925 a son pic **à l'intérieur**
 de ce qui est lu (couche 26), avec une courbe unimodale propre qui retombe à zéro vers
