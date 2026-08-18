@@ -160,11 +160,23 @@ transaction sur un nom inconnu.
    les ont toutes, et **aucune troncature** du profil. Ça débloque `12` §5 *et* `06` §3.6.
 
 10. ⭐⭐ **La profondeur de surface** (`12`) — une mesure de **qualité de tracé** qui ne
-    demande **ni vérité terrain, ni modèle, ni juge**. Part des fenêtres dont le pic de
-    contraste tombe dans le tiers central des couches lues : Scroll 1 **63 %** et
-    **50 %**, Scroll 4 **7 %** (écart interquartile 4,0 / 11,5 contre **22,0**).
-    Scroll 4 est **bimodal** — 92 fenêtres piquant au bord bas, 49 au bord haut : sa
-    surface **voyage**, ce n'est pas un décalage uniforme.
+   demande **ni vérité terrain, ni modèle, ni juge**, et se calcule **avant** toute
+   inférence. La grandeur est l'**écart entre le pic d'intensité et la surface tracée**,
+   en µm : `20231022170901` **24 µm**, `20230909121925` (AUC 0,925) **32 µm**,
+   Scroll 4 **63 µm** (p90 **134**). ⚠ Ces trois chiffres sont des **bornes
+   inférieures** — la fenêtre 15–40 tronque, et 37 % des fenêtres de Scroll 4 y sont
+   écrêtées. Sur la pile complète de Scroll 4, **61 %** des fenêtres ont leur pic **à un
+   bord** : la feuille est hors du volume de surface.
+   ⚠⚠ **L'instrument a été corrigé DEUX fois le même jour** (`12` §10), et aucun défaut
+   n'a été trouvé en relisant : (a) le **contraste** ne localise pas la matière — sur un
+   volume à 2,4 µm sa courbe est un **U**, maximal aux deux bords et minimal dans la
+   feuille, parce qu'il suit les interfaces et le bruit ; l'**intensité** localise ;
+   (b) « tiers central » se rapportait à la **fenêtre lue**, qui n'est pas centrée sur
+   la couche tracée — d'où l'écart en µm.
+   ⚠ **Correction d'une de mes conclusions du même jour** : j'avais annoncé « l'écart
+   vaut une épaisseur de feuille, donc saut de spire » en important le pas de PHerc0172
+   vers PHerc1667. Piège nº 6. La pile complète le dément : les deux blocs sont séparés
+   de plus de 64 voxels.
 
 ### Encre — l'instrument
 
