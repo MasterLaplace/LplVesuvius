@@ -164,9 +164,22 @@ def main() -> int:
     distances = nearest_non_adjacent(points, cols, sample, args.apart, args.search_radius)
     measured = ~np.isnan(distances)
     if measured.sum() < 100:
+        # ⚠⚠ CE N'EST PAS UNE PANNE, C'EST LE DOMAINE DE DEFINITION. La metrique cherche
+        # deux parties eloignees dans la parametrisation et proches en 3D ; une trace qui
+        # ne fait pas UN TOUR ne repasse jamais au-dessus d'elle-meme, donc il n'existe
+        # aucune paire de ce genre. Mesure (`07` §7) : sur les 53 traces de Scroll 5, les
+        # 44 qui rendent zero cellule couvrent 0,50 a 1,00 tour, et les 9 qui mesurent en
+        # couvrent 2,99 a 9,07. La coupure est nette.
+        #
+        # Le dire ici plutot que de rendre « 0 cellule mesuree » : ce message-la ressemble
+        # a un outil casse, et c'est ce qui a failli faire conclure que la metrique
+        # « marchait moins bien » sur un second rouleau alors qu'elle ne s'y applique pas.
         print(
-            f"erreur : seulement {int(measured.sum())} cellules mesurees, "
-            "trop peu pour une distribution",
+            f"erreur : {int(measured.sum())} cellules mesurees sur {take} tirees.\n"
+            "  La trace ne se recouvre pas : aucune partie non adjacente n'est a moins\n"
+            f"  de {args.search_radius:.0f} voxels d'une autre. C'est le cas d'une trace\n"
+            "  qui couvre moins d'un tour -- HORS DU DOMAINE de cette metrique, pas une\n"
+            "  panne. Verifier `covering_span_rev` dans l'index publie.",
             file=sys.stderr,
         )
         return 3

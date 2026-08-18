@@ -428,7 +428,16 @@ Sur PHerc0172, une coupe, 36 rayons :
 nombre de spires est **supérieur**. Et une seule coupe ne dit rien de la variation
 le long du rouleau.
 
-### 🔄 C2 — le dépliage polaire : la REPRÉSENTATION marche, le suivi PAS ENCORE
+### ✅ C2 — le dépliage polaire : CLOS, le suivi a été remplacé et non réparé
+
+**Clos le 2026-08-18.** Le suivi par continuité de crêtes fragmentait ; il n'a pas été
+réparé, il a été **remplacé** par la méthode du **doublement d'écart** (`11` §6), qui
+ne suit rien — elle normalise l'écart entre murs par l'espacement **local** et cherche
+les cellules où il double. C'est la 4ᵉ formulation, et elle a donné les 4 candidats du
+`11` §7, leur persistance à p = 0,0001, et la dérive mesurée du `11` §11.
+
+⚠ La leçon vaut d'être gardée : trois formulations ont échoué, et c'est la troisième qui
+a **désigné** la bonne — pas un réglage de la première. Le texte d'origine :
 
 2026-08-17. `radial.py deplier` + `fusions.py`. **Classé : en cours, diagnostic établi.**
 
