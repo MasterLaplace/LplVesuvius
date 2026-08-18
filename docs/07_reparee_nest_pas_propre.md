@@ -203,14 +203,17 @@ retenir la valeur qui a le mieux marché sur ces 46 traces, exactement le piège
 ### Deux mesures, et non deux explications
 
 **(1) La non-localité est sans conséquence.** Rapport boule/bande sur les cellules
-ordinaires : **1,003** en médiane sur 10 traces. Les deux références donnent le même
+ordinaires : **1,001** en médiane sur **45 traces**, intervalle p10–p90
+**[0,995 ; 1,015]**. Les deux références donnent le même
 espacement typique — donc l'espacement ne varie pas assez avec le rayon pour que la
 largeur de la fenêtre compte. Le rayon varie beaucoup dans la fenêtre ; l'espacement,
 non. C'est cohérent avec l'invariant fort de `11` §3 (rayon / feuilles constant à
 **cv 1,8 %**), même si celui-là est mesuré sur un autre rouleau et le long de *z*.
 
 **(2) Et la boule détruit le contraste, spécifiquement là où il est.** Rapport
-boule/bande **aux cellules signalées** : **0,875**, sur **9 traces sur 10**. Un site de
+boule/bande **aux cellules signalées** : **0,766** en médiane, intervalle p10–p90
+**[0,454 ; 0,945]**, et l'effondrement est spécifique sur **43 traces sur 45**
+(Wilcoxon apparié, **p = 1,4e-09**). Un site de
 croisement est une région 3D **compacte** où les cellules sont anormalement proches ;
 une boule centrée dessus est donc remplie d'autres cellules du même site, la médiane
 tombe à la valeur anormale, et **l'anomalie normalise sa propre référence**.
@@ -223,10 +226,15 @@ son contenu vient de régions saines même quand son centre est sur une anomalie
 > dans la direction où l'anomalie est PETITE.** Être local dans toutes les dimensions
 > de l'anomalie, c'est mesurer l'anomalie contre elle-même.
 
-⚠ Une trace sur dix va dans l'autre sens (`20231031143852`, 1,127). Et l'ampleur —
-12,5 % de baisse de référence — explique la **direction** du résultat ; qu'elle
-suffise à expliquer la chute de rho de 0,805 à 0,560 n'est pas établi par cette
-mesure seule.
+⚠ Deux traces sur 45 vont dans l'autre sens. Et l'ampleur — **23 %** de baisse de
+référence aux cellules signalées, contre **0,1 %** partout ailleurs — explique la
+**direction** du résultat ; qu'elle suffise à expliquer toute la chute de rho de 0,805
+à 0,560 n'est pas établi par cette mesure seule.
+
+⚠ Ce que le contraste des deux chiffres rend difficile à contester : la référence en
+boule n'est pas globalement plus basse (elle est à **0,1 %** de la bande partout
+ailleurs), elle ne s'effondre **qu'aux endroits qui portent le signal**. Une baisse
+uniforme aurait été un décalage d'échelle, sans effet sur un rang de Spearman.
 
 ### Reproduire
 
