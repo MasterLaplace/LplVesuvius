@@ -159,11 +159,15 @@ proximité de `07` doit y être anormale. C'est la tâche D — *boucler `07` su
 et elle est **bon marché en principe** : on a la métrique d'un côté et l'AUC de
 l'autre.
 
-⚠ **Elle est bloquée sur un fait matériel** : le maillage `tifxyz` de
-`20230909121925` **n'est pas dans notre jeu** (`repos/windcheck/data/scroll1_tifxyz`
-ne le contient pas), et les 46 traces mesurées dans `docs/proximity_scroll1.jsonl`
-ne l'incluent pas. Il faut donc le télécharger avant de pouvoir répondre. Noté plutôt
-que contourné.
+⚠⚠ **PÉRIMÉ — la tâche D a été faite le 2026-08-17, et la réponse est NON.** Le blocage
+noté ici (« le maillage `tifxyz` de `20230909121925` n'est pas dans notre jeu ») a été
+levé par `tools/ppm_to_tifxyz.py` : le `.ppm` publié à côté du segment porte exactement
+la même information, et la conversion est une lecture d'en-tête et trois écritures.
+C'était une prudence mal placée, pas un fait matériel.
+
+Résultat (`06` §3.8) : rho **+0,019** à n = 89 tuiles, contrôle plat, et à ce n la
+mesure détecterait un rho de 0,3 à 80 % de puissance. **La proximité géométrique ne
+prédit pas la lisibilité** — elle mesure un défaut de la *trace*, pas du *résultat*.
 
 ---
 

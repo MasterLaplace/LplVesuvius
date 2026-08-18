@@ -293,9 +293,15 @@ segment entier n'a **pas plus de lignes** — c'est une bande coupée en travers
 texte, l'allonger allonge les lignes sans en ajouter. Le juge mécanique a donc échoué
 une troisième fois, avec une troisième cause. Voir `09` §8.
 
-### B. Le contrôle en aveugle des modèles de langue
+### B. ✅ FAITE — le contrôle en aveugle des modèles de langue
 
-Prévu en `1bis`, pas encore fait. Soumettre des rendus **dont le texte est publié**,
+**Fait le 2026-08-17** : `09` §9, quatre conditions dont `vierge|vierge`, côté tiré au
+sort, température zéro — **15/16, zéro fabrication**, lisibilité séparant sans
+chevauchement le vierge (0–1) du texte (3–6). ⚠ Et une limite du protocole mesurée le
+2026-08-18 (`09` §12) : **la lecture d'un panneau dépend de son voisin**, donc toute
+lecture isolée à lisibilité ≤ 3 doit être répétée en compagnie différente.
+
+Le texte d'origine de la tâche : Soumettre des rendus **dont le texte est publié**,
 mélangés à des rendus de bruit, et mesurer si le modèle retrouve les premiers et
 refuse les seconds. Sans cette calibration, son avis sur du texte inconnu n'est pas
 une donnée. ⚠ À faire **avant** de lui montrer quoi que ce soit d'inconnu, sinon on

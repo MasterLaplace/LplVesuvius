@@ -245,3 +245,65 @@ uv run python src/excision/baseline_sweep.py \
 uv run python src/excision/variant_correlate.py \
     ../docs/baseline_sweep_scroll1.jsonl ../repos/windcheck/results/index.json
 ```
+
+---
+
+## 7. 🎯 Le second rouleau : la métrique n'est pas *moins bonne*, elle est **inapplicable**
+
+2026-08-18. `06` §C et le §5 ci-dessus réclamaient un second rouleau. Les 53 traces de
+Scroll 5 (PHerc0172) étaient déjà sur disque. Le résultat n'est pas celui qu'on
+attendait.
+
+### Ce que la mesure a rendu
+
+Sur les 53 traces, **9 seulement** ont produit une mesure. Les 44 autres : **zéro
+cellule mesurée** — pas « peu », zéro.
+
+Et les 9 survivantes sont `auto_grown_20251115002740308_{0..8}` : **neuf morceaux du
+même segment**, créés à la même seconde. Ce n'est pas n = 9, c'est **n = 1**.
+
+### ⚠⚠ La coupure est exactement à un tour
+
+| | couverture, en tours |
+|---|---|
+| les 9 **mesurées** | **2,99 à 9,07** |
+| les 44 **écartées** | **0,50 à 1,00** |
+
+Une trace qui ne fait pas un tour **ne peut pas se recouvrir** : il n'existe alors
+aucune paire de cellules éloignées dans la paramétrisation et proches en 3D, et c'est
+exactement ce que la métrique mesure. Elle ne rend pas un mauvais chiffre — elle ne rend
+**rien**.
+
+> **La métrique de `07` exige une trace qui repasse au-dessus d'elle-même.** Ce n'est
+> pas un réglage, c'est sa définition. Et personne ne l'avait écrit.
+
+### Ce que ça change
+
+- **`06` §C est répondu**, mais pas comme prévu : le problème n'est pas que les chiffres
+  ne voyagent pas, c'est que la population de traces de Scroll 5 est majoritairement
+  **hors du domaine de définition** (médiane **0,92 tour**).
+- **Le confond longueur/qualité de `05` s'explique** : sur Scroll 5, seules les traces
+  longues sont mesurables, donc toute corrélation y est confondue par construction.
+- ⚠ La corrélation observée sur ces 9 morceaux (**rho +0,433, p = 0,244**) ne doit pas
+  être citée : n = 1 observation indépendante, et aucune trace à zéro croisement.
+
+### 🎯 Et le vrai second rouleau est ailleurs
+
+L'index publié couvre **cinq** corpus, avec des populations très différentes :
+
+| corpus | traces | tours (médiane) | **> 1 tour** |
+|---|---:|---:|---:|
+| PHerc0814 | 13 | 3,10 | **12** |
+| PHerc1667 | 20 | 1,29 | **17** |
+| PHerc0139 | 38 | 1,11 | **35** |
+| Scroll 1 | 55 | 2,70 | 37 |
+| **Scroll 5** | 53 | **0,92** | **10** |
+
+Les trois corpus jamais utilisés sont **majoritairement mesurables**. C'est là qu'est le
+test, et leurs traces se récupèrent depuis le bucket ouvert
+(`tools/fetch_traces.py`) — `aws` est absent, mais l'API de listage HTTPS accepte un
+préfixe par segment, donc on n'énumère pas tout (piège nº 16).
+
+⚠ **Une règle d'applicabilité doit être posée dans l'outil**, pas seulement écrite ici :
+une trace sous un tour de couverture doit être **refusée avec sa raison**, pas rendre
+« 0 cellule mesurée » — un message qui ressemble à une panne.
