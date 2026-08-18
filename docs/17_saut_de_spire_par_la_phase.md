@@ -1,4 +1,9 @@
-# Détecter un saut de spire par la phase d'enroulement publiée
+# Détecter un saut de spire par la phase d'enroulement publiée — ❌ ÉCHEC
+
+> ⚠⚠ **Verdict final : la mesure NE MARCHE PAS.** À n = 38, rho **+0,149** (p = 0,37).
+> L'effet s'est évanoui à mesure que l'échantillon grandissait — **+0,517 (n=8) →
+> +0,306 (n=30) → +0,149 (n=38)** — ce qui est la signature de l'absence d'effet, pas
+> d'un effet modeste. Le §3 ci-dessous raconte l'enquête ; le §7 tire la leçon.
 
 2026-08-18. Le tableau des goulots de `2026_open_problems` réclame, pour les sauts de
 spire : *« stronger local continuity constraints and **conservative failure
@@ -103,3 +108,50 @@ cd inference_xpu
 uv run python ../analysis/src/table_saut_spire.py ../docs/saut_spire \
     ../repos/windcheck/results/index.json
 ```
+
+
+---
+
+## 7. ❌ Le verdict, et la courbe qui le donne
+
+| n | rho ~ croisements (p95) | p | rho détectable à 80 % |
+|---:|---:|---:|---:|
+| 8 | **+0,517** | 0,190 | 0,85 |
+| 30 | **+0,306** | 0,100 | 0,49 |
+| **38** | **+0,150** | **0,368** | 0,44 |
+
+> **Un effet réel ne fond pas quand on l'échantillonne mieux.** Un effet nul, si — et
+> c'est exactement ce qu'on voit : chaque fois que n monte, rho se rapproche de zéro.
+
+À n = 38 la mesure détecte un rho de 0,44 ; le +0,15 observé est très en dessous. Ce
+n'est pas « pas assez de puissance » : c'est que la valeur elle-même s'effondre à mesure
+que la puissance monte.
+
+**La marche de phase entre cellules voisines ne prédit pas les croisements recensés.**
+
+## 8. Ce qu'on garde de l'échec
+
+1. ⭐ **La donnée existe et se lit.** Le canal `cos` du `lasagna` est publié pour quatre
+   rouleaux, chunks 32³ à ~32 Ko, lisible à distance. Personne d'autre ne l'exploite
+   pour juger une trace, et le lecteur est écrit.
+2. ⚠ **Le soupçon non levé reste la meilleure piste** : au niveau 3 (19,2 µm) huit
+   cellules d'un maillage à 2,4 µm partagent un voxel de phase. La plupart des marches
+   valent donc **zéro par construction**, et ce qu'on mesure est le bruit des rares
+   transitions. **Refaire au niveau 0 ou 1 changerait peut-être tout** — et c'est
+   testable.
+3. ⚠⚠ **La discipline a payé trois fois aujourd'hui.** Les fibres (signe **inversé** de
+   n=12 à n=54), ce détecteur (amplitude **divisée par 3,5** de n=8 à n=38), et — dans
+   l'autre sens — l'instrument de profondeur, qui a **tenu** sur trois corpus. Sans la
+   règle « rapporter la puissance avec le résultat », on aurait publié deux faux.
+
+## 9. Ce qui a tenu, pour comparaison
+
+| instrument | corpus | rho | p |
+|---|---|---:|---:|
+| **profondeur** | Scroll 1 (n = 54) | −0,487 | < 0,001 |
+| **profondeur** | PHerc1667 (n = 18) | +0,698 | 0,001 |
+| **profondeur** | PHerc0139 (n = 30) | +0,369 | 0,045 |
+| fibres | Scroll 1 (n = 54) | −0,192 | 0,165 ❌ |
+| phase | PHerc0139 (n = 38) | +0,150 | 0,368 ❌ |
+
+**Un sur trois tient, et c'est celui qui tient sur trois corpus.**
