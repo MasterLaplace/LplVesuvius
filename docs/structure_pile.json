@@ -1,0 +1,57 @@
+[
+  {
+    "folder": "scroll4_20231111135340",
+    "layers": [
+      0,
+      64
+    ],
+    "sommets": [],
+    "vides": [
+      34,
+      46
+    ],
+    "contraste_couche_tracee": 0.23318518985272949,
+    "intensite_couche_tracee": 0.1168995584616519,
+    "distance_au_sommet": 32,
+    "distance_est_une_borne": true,
+    "monte_encore_au_bord_bas": true,
+    "monte_encore_au_bord_haut": true
+  },
+  {
+    "folder": "20230909121925",
+    "layers": [
+      15,
+      40
+    ],
+    "sommets": [
+      16,
+      26
+    ],
+    "vides": [
+      37
+    ],
+    "contraste_couche_tracee": 0.15719652860996194,
+    "intensite_couche_tracee": 0.32094166584989187,
+    "distance_au_sommet": 6,
+    "distance_est_une_borne": false,
+    "monte_encore_au_bord_bas": false,
+    "monte_encore_au_bord_haut": true
+  },
+  {
+    "folder": "scroll4_20231111135340",
+    "layers": [
+      15,
+      40
+    ],
+    "sommets": [],
+    "vides": [
+      25
+    ],
+    "contraste_couche_tracee": 0.2893120937729471,
+    "intensite_couche_tracee": 0.8941582089893028,
+    "distance_au_sommet": 8,
+    "distance_est_une_borne": true,
+    "monte_encore_au_bord_bas": true,
+    "monte_encore_au_bord_haut": true
+  }
+]

@@ -136,30 +136,51 @@ Pour comparaison, le segment Scroll 1 qui donne l'AUC 0,925 a son pic **à l'int
 de ce qui est lu (couche 26), avec une courbe unimodale propre qui retombe à zéro vers
 34 puis **remonte** légèrement en 39–40 — la feuille suivante.
 
-### 🎯 L'arithmétique, et ce qu'elle suggère
+### ⚠⚠ CORRECTION — la pile complète dément mon arithmétique de ce matin
 
-La surface tracée est la couche **32**. Ce que le contraste marque n'est pas le milieu
-de la feuille mais la **face encrée** — l'encre est en surface, d'un côté. L'écart
-attendu entre le pic de contraste et la couche 32 est donc d'une **demi-épaisseur de
-feuille**, soit ~71 µm ≈ **9 voxels** à 7,91 µm.
+J'avais écrit, sur la fenêtre 0–40 : *« l'écart vaut une épaisseur de feuille, donc
+c'est la signature d'un saut de spire »*. Le raisonnement importait le pas
+inter-feuilles **mesuré sur PHerc0172** (142,8 µm, `11` §3) vers **PHerc1667**, qui est
+un autre rouleau avec sa propre compaction. **C'est le piège nº 6 du dépôt — un chiffre
+emprunté n'est pas une mesure — et je l'ai commis.**
 
-| segment | pic de contraste | écart à la couche 32 | en µm |
-|---|---:|---:|---:|
-| `20230909121925` (AUC 0,925) | 26 | **6 couches** | ~47 µm |
-| `scroll4_…` (région inférée) | ≤ 0, matière jusqu'à ~28 → centre ≲ 14 | **≥ 18 couches** | **≥ 142 µm** |
+Les 24 couches manquantes (41 à 64) ont été téléchargées. La pile complète le dément :
 
-Six couches sur Scroll 1 : l'ordre de grandeur d'une demi-épaisseur. La trace est **sur
-la feuille**.
+| couche | ce qu'on voit |
+|---|---|
+| 0 à ~28 | matière, contraste **maximal dès la couche 0** |
+| 34 et **46** | deux **creux** d'intensité — du vide |
+| 48 à 64 | matière **qui remonte encore** à la dernière couche |
 
-⚠⚠ Dix-huit couches ou plus sur Scroll 4 : **une épaisseur de feuille entière**
-(142,8 µm, l'invariant de `11` §3). C'est exactement l'écart qu'on attend d'une trace
-qui a **sauté d'une spire** — le mode d'échec dominant du déroulement, et l'objet même
-de ce dépôt.
+Les deux blocs sont donc séparés de **plus de 64 voxels** entre leurs cœurs, soit
+plusieurs fois le pas de PHerc0172. L'égalité que j'annonçais n'existe pas.
 
-⚠ **C'est une interprétation, pas un fait établi.** Une trace qui aurait simplement
-dérivé dans l'interstice donnerait un écart comparable. Ce qui la départagerait est de
-regarder si, de l'autre côté de la couche 32, une **seconde** feuille apparaît à la
-bonne distance : la pile complète (0 à 64) le dirait, et on n'en a que la moitié basse.
+### 🎯 Ce qui se mesure sans rien emprunter
+
+`analysis/src/stack_structure.py`. La question devient : **à quelle distance la couche
+tracée est-elle du sommet de matière le plus proche, dans sa propre pile ?**
+
+⚠ Un maximum atteint **au bord** n'est pas un sommet — c'est le flanc d'un sommet situé
+dehors. Il est rapporté comme une **borne inférieure**, jamais comme une distance.
+
+| segment | sommets de matière | distance de la couche 32 au plus proche |
+|---|---|---|
+| `20230909121925` (AUC 0,925) | **16 et 26** | **6 voxels (47 µm)** |
+| `scroll4_…` (pile complète 0–64) | **aucun dans les 65 couches** | **≥ 32 voxels (253 µm)** |
+
+Six voxels sur Scroll 1 : l'ordre d'une demi-épaisseur de feuille, ce qu'on attend
+puisque le contraste marque la **face encrée** et non le milieu de la feuille. **La
+trace est sur la feuille.**
+
+⚠⚠ Sur Scroll 4, **aucun sommet n'existe dans la pile entière** : le contraste est
+maximal dès la couche 0 *et* monte encore à la couche 64. La surface tracée est posée
+entre deux blocs de matière dont **aucun cœur n'est visible**, à 253 µm au moins du plus
+proche. Ce n'est plus une extrapolation depuis une demi-fenêtre : c'est tout ce que le
+volume de surface contient.
+
+⚠ Ce qui reste **non tranché** : dire que c'est un *saut de spire* demanderait le pas
+inter-feuilles **de ce rouleau-là**, qui n'est pas mesuré. Ce qui est établi, c'est que
+la trace n'est sur aucune des deux feuilles.
 
 ⚠ Et la bimodalité demeure : 100 fenêtres au bord bas, 26 au bord haut. **Aucune plage
 unique ne peut servir tout le segment.** Ce n'est pas un décalage constant qu'on
