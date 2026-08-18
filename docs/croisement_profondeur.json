@@ -1,0 +1,83 @@
+[
+  {
+    "fichier": "profondeur_corpus_2.4um.json",
+    "grandeur": "au_bord",
+    "n": 54,
+    "rho_croisements": 0.25239180487163115,
+    "p": 0.06558795529348146,
+    "rho_tours": 0.1387131588126509,
+    "rho_detectable": 0.3733416858166984
+  },
+  {
+    "fichier": "profondeur_corpus_2.4um.json",
+    "grandeur": "avec_matiere",
+    "n": 54,
+    "rho_croisements": -0.14849834474063536,
+    "p": 0.2838740057917574,
+    "rho_tours": 0.4687154604561586,
+    "rho_detectable": 0.3733416858166984
+  },
+  {
+    "fichier": "profondeur_corpus_2.4um.json",
+    "grandeur": "ecart_a_la_trace",
+    "n": 54,
+    "rho_croisements": 0.38791414909425764,
+    "p": 0.0037518792719120992,
+    "rho_tours": 0.1521913479382178,
+    "rho_detectable": 0.3733416858166984
+  },
+  {
+    "fichier": "profondeur_corpus_2.4um.json",
+    "grandeur": "iqr",
+    "n": 54,
+    "rho_croisements": 0.18555214439553372,
+    "p": 0.17916897508286003,
+    "rho_tours": 0.3055629730127586,
+    "rho_detectable": 0.3733416858166984
+  },
+  {
+    "fichier": "profondeur_corpus_2.4um.json",
+    "grandeur": "pic_intensite",
+    "n": 54,
+    "rho_croisements": 0.4838401645733844,
+    "p": 0.00021005462646061197,
+    "rho_tours": -0.03152011566511544,
+    "rho_detectable": 0.3733416858166984
+  },
+  {
+    "fichier": "profondeur_corpus_2.4um.json",
+    "grandeur": "pic_median",
+    "n": 54,
+    "rho_croisements": 0.45081642124148597,
+    "p": 0.000623894453733802,
+    "rho_tours": -0.031168938449347417,
+    "rho_detectable": 0.3733416858166984
+  },
+  {
+    "fichier": "profondeur_corpus_2.4um.json",
+    "grandeur": "tiers_central",
+    "n": 54,
+    "rho_croisements": -0.4869629294639027,
+    "p": 0.00018840945059174727,
+    "rho_tours": -0.30971385855309963,
+    "rho_detectable": 0.3733416858166984
+  },
+  {
+    "fichier": "profondeur_corpus_2.4um.json",
+    "grandeur": "tiers_central_contraste",
+    "n": 54,
+    "rho_croisements": -0.2504557397064781,
+    "p": 0.06775462535405319,
+    "rho_tours": -0.3276214500967284,
+    "rho_detectable": 0.3733416858166984
+  },
+  {
+    "fichier": "profondeur_corpus_2.4um.json",
+    "grandeur": "vides",
+    "n": 54,
+    "rho_croisements": 0.14849834474063536,
+    "p": 0.2838740057917574,
+    "rho_tours": -0.4687154604561586,
+    "rho_detectable": 0.3733416858166984
+  }
+]

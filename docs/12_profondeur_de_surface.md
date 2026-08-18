@@ -354,3 +354,72 @@ la campagne sur corpus :
 ⚠ Le seuil est le **milieu de l'intervalle observé** entre les deux groupes connus
 (24–32 µm contre ≥63 µm). C'est le choix le moins arbitraire disponible à n = 3, et il
 est provisoire par construction. Il est écrit ici pour pouvoir échouer.
+
+
+---
+
+## 11. 🎯🎯 L'instrument est VALIDÉ contre un recensement indépendant — 2026-08-18
+
+Campagne sur les **80 segments** de Scroll 1 qui publient un volume de surface à 2,4 µm,
+lus chunk par chunk à distance. Puis croisement avec les **croisements recensés par
+`windcheck`** — une méthode entièrement différente, sur la géométrie du maillage, là où
+la nôtre lit le volume.
+
+⚠ C'est le seul contrôle disponible qui ne demande **ni vérité terrain, ni encre, ni
+juge**. Si l'instrument ne corrélait avec rien, il mesurerait son propre bruit.
+
+### Le résultat, sur 54 segments communs
+
+| grandeur | rho ~ croisements | p |
+|---|---:|---:|
+| **tiers central** (part des fenêtres dont le pic est près de la trace) | **−0,487** | **< 0,001** |
+| pic d'intensité médian | +0,484 | < 0,001 |
+| **écart médian pic ↔ trace** | **+0,388** | **0,004** |
+| au bord de la pile | +0,252 | 0,066 |
+| ⚠ *tiers central, version **contraste*** | **−0,250** | **0,068** |
+
+Les signes sont ceux qu'on attend : **plus la feuille est loin de la trace, plus le
+segment porte de croisements**, et **plus le pic est central, moins il en porte**.
+
+⚠ **Correction pour tests multiples** : neuf grandeurs sont calculées dans le même run.
+Bonferroni : 0,004 × 9 = **0,036**, et < 0,001 × 9 reste **< 0,01**. Les deux principales
+survivent.
+
+⚠ **Puissance** : à n = 54, la mesure détecte un rho de **0,37** à 80 %. Le +0,388 est
+donc **juste au-dessus** du seuil de détection, le −0,487 largement au-dessus. Solide,
+pas écrasant.
+
+### ✅ Et une confirmation indépendante que la correction du §10 était la bonne
+
+La version **contraste** de la même statistique rend **−0,250, p = 0,068** — *non
+significative*. La version **intensité** rend **−0,487, p < 0,001**.
+
+> Le passage du contraste à l'intensité n'était pas un ajustement esthétique : il
+> **double** la corrélation avec un recensement indépendant. Et cette vérification-là
+> n'existait pas quand la correction a été faite — elle a été décidée en regardant une
+> courbe, pas un résultat.
+
+### ⚠ Ce que la validation dit, et ce qu'elle ne dit PAS
+
+Elle dit que l'instrument détecte **le même genre de défaut** qu'un recensement de
+croisements, sans maillage et sans humain.
+
+⚠⚠ Elle **ne dit pas** qu'il prédit la lisibilité. `06` §3.8 a déjà établi que le compte
+de croisements lui-même ne la prédit pas (rho +0,019 à n = 89). Les deux instruments
+mesurent la **trace**, pas le **résultat**, et c'est la frontière que ce dépôt tient
+depuis `07`.
+
+⚠ Le confond de longueur est **absent** sur le pic d'intensité (rho ~ tours = −0,032)
+et **présent mais faible** sur le tiers central (−0,310).
+
+### ⚠ Le seuil posé d'avance n'a pas survécu, et c'est ce qu'un pré-enregistrement sert à faire
+
+La prédiction du §10 disait : *écart médian > ~50 µm ⇒ pas d'encre lisible*. Sur les
+80 segments, l'écart médian est de **67 µm** et s'étale de **24 à 120 µm** — donc **la
+majorité du corpus dépasse le seuil**, y compris des segments dont l'encre est
+publiée. Le seuil, calibré sur n = 3 et sur des **piles tronquées** à 7,91 µm, ne
+transporte pas aux volumes de surface à 2,4 µm.
+
+Ce qui reste vrai est l'**ordre**, pas la coupure : l'écart corrèle avec les
+croisements. L'instrument est **ordinal**, comme le veut la règle nº 1 du dépôt — et
+tout seuil devra être calibré sur une population, pas sur trois segments.
