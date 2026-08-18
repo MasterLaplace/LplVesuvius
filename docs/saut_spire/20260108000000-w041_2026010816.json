@@ -1,0 +1,10 @@
+{
+  "label": "20260108000000-w041_2026010816",
+  "lignes": 20,
+  "marches": 940,
+  "chunks_lus": 119,
+  "marche_mediane": 15.0,
+  "marche_p95": 61.049999999999955,
+  "marche_p99": 87.61000000000001,
+  "marche_max": 126.0
+}
