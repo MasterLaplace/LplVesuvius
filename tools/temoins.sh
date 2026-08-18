@@ -230,6 +230,101 @@ ck(not f['gauche']['refused'] and f['gauche']['glyphs']==3)   # fabrication dete
 print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
+cd "$ROOT/inference_xpu" || exit 2
+run "champ de correction" uv run python - <<'PY'
+import sys, time, random
+from pathlib import Path
+sys.path.insert(0, str(Path("../analysis/src").resolve()))
+import numpy as np
+import champ_correction as C
+import zarr_depth as Z
+
+n = 0
+def ck(c, quoi=""):
+    global n
+    assert c, quoi
+    n += 1
+
+# --- l'ordre du parallelisme : la propriete qui rend la version parallele substituable.
+# Des profils DIFFERENTS par fenetre, des delais ALEATOIRES, et le resultat doit etre
+# celui de la version serie. Sans la garantie d'ordre de executor.map, les medianes et
+# la courbe moyenne dependraient de la latence reseau du moment.
+META = {"chunks": [16, 8, 8], "shape": [16, 64, 64], "dtype": "|u1",
+        "dimension_separator": "/"}
+def faux(url, level, meta, cy, cx, timeout):
+    time.sleep(random.random() * 0.004)
+    pic = (cy * 3 + cx) % 16
+    mean = np.zeros(16, dtype=np.float32); mean[pic] = 1.0
+    return mean, mean
+Z.array_meta = lambda *a, **k: META
+Z.chunk_profile = faux
+C.array_meta = lambda *a, **k: META
+C.chunk_profile = faux
+serie = Z.survey("x", 0, 16, 1.0, 0, threads=1)
+par = Z.survey("x", 0, 16, 1.0, 0, threads=8)
+ck(serie == par, "parallele != serie")
+ck(serie["avec_matiere"] > 0, "temoin vide : il passerait tout")
+
+# --- un bloc de cote 1 ne produit AUCUNE paire de voisins. C'est pour ca que `cote`
+# existe : une grandeur « entre voisins » sans voisins rend NaN sur zero paire (§8.22).
+g = np.full((6, 6), np.nan)
+g[2, 2] = 5.0
+a, b = C._paires_voisines(g, 1)
+ck(a.size == 0, "une fenetre isolee ne peut pas avoir de voisine")
+
+# --- un champ PARFAITEMENT lisse est coherent ; le melange des memes valeurs l'effondre.
+lisse = np.add.outer(np.arange(8.0), np.arange(8.0))
+st = C._statistiques(lisse, 1, 32, 2.4, 64, "x")
+ck(st["coherence_voisins"] > 0.9, "un champ lisse doit etre coherent")
+ck(abs(st["coherence_temoin_melange"]) < 0.5, "le melange doit s'effondrer")
+ck(st["paires_voisines"] == 2 * 8 * 7, "compte de paires")
+
+# --- et un champ de BRUIT ne doit pas l'etre : sans ce cas negatif, la mesure
+# pourrait rendre « coherent » sur n'importe quoi.
+bruit = np.random.default_rng(1).normal(size=(12, 12))
+sb = C._statistiques(bruit, 1, 32, 2.4, 144, "x")
+ck(abs(sb["coherence_voisins"]) < 0.35, "du bruit ne doit pas paraitre coherent")
+
+# --- la translation qui minimise l'ecart, et le residuel qui reste apres.
+decale = np.full((6, 6), 7.0)
+sd = C._statistiques(decale, 1, 32, 2.0, 36, "x")
+ck(abs(sd["decalage_median_um"] - 14.0) < 1e-9, "decalage en um")
+ck(sd["residuel_median_um"] == 0.0, "un decalage pur a un residuel NUL")
+
+print(f"ALL PASS (0 failures, {n} checks)")
+PY
+
+run "decision par permutation" uv run python - <<'PY'
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path("../analysis/src").resolve()))
+import numpy as np
+from croiser_encre import decision
+
+n = 0
+def ck(c, quoi=""):
+    global n
+    assert c, quoi
+    n += 1
+
+# Un critere qui separe PARFAITEMENT : les pires ecarts portent la pire encre.
+ecarts = np.arange(40.0)
+encre = 100.0 - np.arange(40.0)
+d = decision(ecarts, encre, 0.25, 2000, 0)
+ck(d["gain"] > 0, "une regle parfaite doit ameliorer")
+ck(d["p_permutation"] < 0.01, "et battre le hasard")
+
+# ⚠ LE CAS NEGATIF, sans lequel la verification ne peut pas echouer : une cible qui
+# n'a RIEN a voir avec le critere. Le p doit alors etre banal.
+rng = np.random.default_rng(0)
+sans = decision(ecarts, rng.permutation(encre), 0.25, 2000, 0)
+ck(sans["p_permutation"] > 0.05, "un critere sans rapport ne doit pas passer")
+
+# Le sens compte : ecarter les pires doit garder n - k segments, pas n.
+ck(d["segments_gardes"] == 30, "effectif garde")
+print(f"ALL PASS (0 failures, {n} checks)")
+PY
+
 echo
 if [ "$FAIL" -eq 0 ]; then
   echo "TOUS LES TEMOINS PASSENT"

@@ -35,6 +35,7 @@ chiffre pour que le melange se voie.
 from __future__ import annotations
 
 import argparse
+import concurrent.futures as cf
 import json
 import subprocess
 import sys
@@ -144,7 +145,8 @@ def chunk_profile(zarr_url: str, level: int, meta: dict, cy: int, cx: int,
     return mean, contrast
 
 
-def survey(zarr_url: str, level: int, windows: int, timeout: float, seed: int) -> dict:
+def survey(zarr_url: str, level: int, windows: int, timeout: float, seed: int,
+           threads: int = 1) -> dict:
     meta = array_meta(zarr_url, level, timeout)
     depth, hy, hx = meta["chunks"]
     _, rows, cols = meta["shape"]
@@ -160,8 +162,23 @@ def survey(zarr_url: str, level: int, windows: int, timeout: float, seed: int) -
 
     peaks, contrast_peaks, empty, curves, dense = [], [], 0, [], []
     refus: dict[str, int] = {}
-    for cy, cx in picks:
-        got = chunk_profile(zarr_url, level, meta, cy, cx, timeout)
+    # ⚠⚠ Le parallelisme ne doit RIEN changer au resultat. Chaque chunk est une requete
+    # HTTP independante -- il n'y a donc aucune coordination a faire -- mais l'ordre des
+    # profils entre dans les medianes et dans la courbe moyennee. `executor.map` rend les
+    # resultats dans l'ordre des ENTREES, pas dans celui des arrivees : c'est la seule
+    # propriete qui rend cette version substituable a la version serie, et elle est
+    # verifiee par un temoin (`tools/temoins.sh`).
+    if threads > 1:
+        with cf.ThreadPoolExecutor(max_workers=threads) as pool:
+            profils = list(pool.map(
+                lambda pick: chunk_profile(zarr_url, level, meta, pick[0], pick[1],
+                                           timeout),
+                picks))
+    else:
+        profils = [chunk_profile(zarr_url, level, meta, cy, cx, timeout)
+                   for cy, cx in picks]
+
+    for got in profils:
         if isinstance(got, str):
             refus[got] = refus.get(got, 0) + 1
             empty += 1
@@ -223,6 +240,10 @@ def main() -> int:
     parser.add_argument("--windows", type=int, default=36)
     parser.add_argument("--timeout", type=float, default=120.0)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--fils", type=int, default=1,
+                        help="requetes HTTP simultanees. Un chunk est une requete\n"
+                             "independante, donc le gain est celui de la latence\n"
+                             "reseau -- pas du calcul, qui est negligeable ici")
     parser.add_argument("--courbe", action="store_true",
                         help="afficher la courbe de contraste MOYENNE : une statistique "
                              "resumee se lit mal sans la forme qu'elle resume")
@@ -233,7 +254,8 @@ def main() -> int:
     for key in args.zarr:
         url = key if key.startswith("http") else f"{BUCKET}/{key}"
         try:
-            data = survey(url, args.level, args.windows, args.timeout, args.seed)
+            data = survey(url, args.level, args.windows, args.timeout, args.seed,
+                          threads=args.fils)
         except RuntimeError as error:
             print(f"{key.split('/')[2] if '/' in key else key} : {error}", file=sys.stderr)
             continue
