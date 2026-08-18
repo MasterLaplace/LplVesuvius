@@ -198,3 +198,100 @@ Critères des Progress Prizes, mot pour mot : contribution open source sur un
 problème de la *wishlist*, **amélioration quantitative sur données réelles**,
 correction de bugs d'outils réellement utilisés, **documentation qui permet à
 d'autres d'appliquer le travail**.
+
+---
+
+## 9. Ce qui a bougé depuis — bilan au 2026-08-18
+
+Ce document a été consolidé le 2026-08-17. **91 des 99 commits du dépôt** sont
+postérieurs, 49 fichiers créés, 12 outils d'analyse, **58 contrôles hors ligne**. Voici
+le bilan, mesuré contre les repères posés ci-dessus et pas contre une impression.
+
+### 9.1 ⭐⭐ Le trou du §5 : on y est allé, et la réponse est NON
+
+Le §5 dit que **personne ne ferme la boucle** — *le champ sait détecter, il ne sait pas
+montrer que corriger sert*. C'est le seul endroit du document qui désignait un vide
+plutôt qu'un encombrement, et c'est là qu'on a travaillé.
+
+**La boucle est fermée dans un sens, et elle rend un négatif étayé** (`06` §3.8,
+`10` §5) : corrélation par tuile entre l'anomalie géométrique de `07` et l'accord
+encre-prédite ↔ étiquetage-humain, sur le seul segment qui ait **et** un maillage **et**
+une carte d'encre. **rho +0,019 à n = 89**, contrôle plat, et à ce n la mesure
+détecterait un rho de 0,3 à 80 % de puissance.
+
+> **La métrique mesure un défaut de la TRACE, pas du RÉSULTAT.**
+
+⚠ C'est un résultat, pas un échec — mais il faut le nommer pour ce qu'il est : il
+**resserre** le §5 au lieu de le refermer. `windcheck` écrit « whether removing it
+improves ink has not been measured » ; on peut maintenant ajouter que **l'anomalie
+elle-même ne prédit pas la lisibilité**, ce qui rend l'hypothèse « la réparer
+améliorera l'encre » moins probable, sans la trancher.
+
+### 9.2 Ce qui a avancé, problème ouvert par problème ouvert
+
+| # | problème (§3) | où on en est |
+|---|---|---|
+| 1 | régions comprimées | **rien** |
+| 2 | topologie de surface | **rien** |
+| 3 | connectivité : trous, fusions, sauts de spire **sans humain** | ⭐ **fusions localisées en 3D** et persistantes (p = 0,0001), défaut qui **dérive** de 1,50 mm de rayon par mm de hauteur (`11`) — mais dans le **volume**, pas encore sur un maillage |
+| 4 | qualité des étiquettes (« main bottleneck » selon les organisateurs) | ⭐⭐ **un instrument neuf** : `12` mesure l'écart entre la feuille et la surface tracée, **sans vérité terrain, sans modèle d'encre, sans juge, et avant toute inférence** |
+| 5 | traçage de fibres | 🔄 commencé (`14`) : orientation mesurable (cohérence 0,64), ⚠ bascule recto/verso **non observée**, pivot vers la cohérence spatiale, **sous-puissant à n = 12** |
+| 6 | généralisation inter-rouleaux de l'encre | ⭐ **un mécanisme concret** : sur Scroll 4 le modèle ne rend rien de lisible, et la cause est **en amont** — sur 61 % du segment la feuille est **hors du volume de surface**. Avant d'invoquer un décalage de domaine, vérifier que la surface est là |
+| 7 | métriques d'évaluation | ⭐ la métrique de `07` a désormais son **domaine de définition** (> 1 tour de couverture), son **seuil justifié** (plateau de 0,15 à 0,40, facteur 2,7), et une **réplication** : rho **+0,700, p = 0,0012** sur PHerc1667 |
+
+### 9.3 ⭐ Ce qui n'existait dans aucun des six vérificateurs du §4
+
+Le §4 conclut qu'**écrire un septième vérificateur serait un doublon**. Ce qui a été
+construit n'en est pas un — les six travaillent tous sur la **géométrie du maillage**,
+et celui-ci lit **le volume de surface lui-même** :
+
+**`12` — la profondeur de surface.** Écart entre le pic d'intensité et la couche tracée.
+Scroll 1 : **24 et 32 µm**. Scroll 4 : **63 µm**, p90 **134 µm**, et 61 % des fenêtres
+ont leur pic **à un bord** de la pile, c'est-à-dire hors du volume.
+
+Trois propriétés qui le distinguent des six :
+
+1. il ne demande **ni vérité terrain, ni encre, ni humain** ;
+2. il se calcule **avant** l'inférence — deux passes de 43 minutes ont été dépensées sur
+   un segment dont on pouvait prédire le résultat ;
+3. ⭐⭐ il coûte **1,78 Mo et 1,03 s par fenêtre**, parce qu'un chunk OME-Zarr contient
+   toute la colonne de profondeur. La même mesure par téléchargement des couches coûte
+   **32 Go par segment** — un rapport de **18 000**, et c'est ce qui rend une campagne
+   sur corpus possible du tout.
+
+### 9.4 ⚠ Ce qui NE remplit toujours pas le critère des Progress Prizes
+
+Le §8 cite le critère mot pour mot : **« amélioration quantitative sur données
+réelles »**.
+
+> ⚠⚠ **On a des mesures et des instruments, pas une amélioration.** Aucun maillage n'a
+> été rendu meilleur. Tout ce qui précède se range dans « **juger** », et le §2 dit
+> justement que *le manque est du côté juger, pas produire* — donc c'est le bon endroit,
+> mais ce n'est pas encore ce que le prix demande.
+
+Ce qui manquerait pour y arriver, dans l'ordre du moins cher au plus cher :
+
+1. **finir les campagnes en cours** — la profondeur sur 80 segments et les fibres sur 80
+   donneraient la puissance qui manque, et un instrument validé sur une population est
+   défendable là où trois segments ne le sont pas ;
+2. **montrer qu'un instrument change une décision** — par exemple qu'écarter les
+   segments à fort écart profondeur↔trace améliore un agrégat mesurable ;
+3. **corriger une trace** et montrer le gain — c'est le vrai « produire », et rien n'y a
+   été tenté ici.
+
+### 9.5 Les repères du §7 restent vrais, et se sont étendus
+
+Tout ce que `07` (« où nous en sommes ») affirmait tient toujours. S'y ajoutent :
+**AUC 0,925** sur 44,7 M de pixels d'un segment entier avec contrôle mélangé à 0,500
+(`10`), un **juge de langue calibré** à 15/16 sans fabrication (`09`), l'**onde
+radiale** et ses 176 spires avec un invariant à **cv 1,8 %** (`11`), et le corpus est
+passé de 2,6 Go à **~76 Go** dont **80 cartes d'encre publiées** et 71 traces de trois
+corpus jamais utilisés ici.
+
+⚠ **Une correction du §6 de ce document** : il dit que la résolution du scan sépare les
+échantillons tracés des vierges. Mesuré depuis, elle sépare aussi **la métrique de
+`07` elle-même** — elle réplique à 7,91 µm (Scroll 1 **+0,769**, PHerc1667 **+0,700**) et
+pas à 9,362 µm (PHerc0139 **+0,284**, PHerc0814 **+0,141**). ⚠ Les deux derniers sont
+sous-puissants (n = 36 détecte 0,45, n = 12 détecte 0,73) et **les quatre rho sont
+positifs**, donc c'est un motif à vérifier, pas un fait. La vérification appariée — le
+même corpus à 2,403 µm — est lancée.
