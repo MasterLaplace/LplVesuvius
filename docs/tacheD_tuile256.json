@@ -1,0 +1,2601 @@
+{
+  "tile": 256,
+  "shared_tiles": 369,
+  "results": {
+    "tuiles annotees": {
+      "tiles": 89,
+      "rho": 0.018731915274791983,
+      "p": 0.861681850457086
+    },
+    "CONTROLE tuiles vides": {
+      "tiles": 280,
+      "rho": -0.010210598892262638,
+      "p": 0.8649345515195539
+    }
+  },
+  "points": [
+    {
+      "row": 0,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 0,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 1,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 1,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 1,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 1,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 2,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 2,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 2,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 2,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 2,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 2,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 3,
+      "col": 1,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0338134765625
+    },
+    {
+      "row": 3,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 1.0,
+      "ink_labelled": 0.0372314453125
+    },
+    {
+      "row": 3,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 3,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 3,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 3,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 3,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 4,
+      "col": 0,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 4,
+      "col": 1,
+      "below_030": 0.0,
+      "agreement": 0.6068531299188764,
+      "ink_labelled": 0.5111846923828125
+    },
+    {
+      "row": 4,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 0.8716162943495401,
+      "ink_labelled": 0.1472625732421875
+    },
+    {
+      "row": 4,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 4,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 4,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 4,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 4,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 5,
+      "col": 0,
+      "below_030": 0.0,
+      "agreement": 0.5510623714873201,
+      "ink_labelled": 0.0142059326171875
+    },
+    {
+      "row": 5,
+      "col": 1,
+      "below_030": 0.0,
+      "agreement": 0.8175856857296085,
+      "ink_labelled": 0.5526123046875
+    },
+    {
+      "row": 5,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 0.8046998137268949,
+      "ink_labelled": 0.3387298583984375
+    },
+    {
+      "row": 5,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 5,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 5,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 5,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 5,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 5,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 6,
+      "col": 0,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 6,
+      "col": 1,
+      "below_030": 0.0,
+      "agreement": 0.7808377896613191,
+      "ink_labelled": 0.3547515869140625
+    },
+    {
+      "row": 6,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 0.8534647779479326,
+      "ink_labelled": 0.5887603759765625
+    },
+    {
+      "row": 6,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.3151515151515151,
+      "ink_labelled": 0.016326904296875
+    },
+    {
+      "row": 6,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 6,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 6,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 6,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 6,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 7,
+      "col": 1,
+      "below_030": 0.0,
+      "agreement": 0.1691995947315096,
+      "ink_labelled": 0.02972412109375
+    },
+    {
+      "row": 7,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 0.22198830409356726,
+      "ink_labelled": 0.0988006591796875
+    },
+    {
+      "row": 7,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 7,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 7,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.7165447025135221,
+      "ink_labelled": 0.4387664794921875
+    },
+    {
+      "row": 7,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.733580091352969,
+      "ink_labelled": 0.31512451171875
+    },
+    {
+      "row": 7,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 7,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 8,
+      "col": 1,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 8,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 8,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 8,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 8,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.3526046371574827,
+      "ink_labelled": 0.081512451171875
+    },
+    {
+      "row": 8,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 8,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 8,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 9,
+      "col": 1,
+      "below_030": 0.0,
+      "agreement": 0.06387419983300863,
+      "ink_labelled": 0.0070037841796875
+    },
+    {
+      "row": 9,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 0.0712583245706274,
+      "ink_labelled": 0.05816650390625
+    },
+    {
+      "row": 9,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 9,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 9,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 9,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 9,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 9,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 10,
+      "col": 1,
+      "below_030": 0.0,
+      "agreement": 0.4852941176470588,
+      "ink_labelled": 0.007049560546875
+    },
+    {
+      "row": 10,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 0.9503245836861417,
+      "ink_labelled": 0.4040374755859375
+    },
+    {
+      "row": 10,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.6605659580458961,
+      "ink_labelled": 0.0766754150390625
+    },
+    {
+      "row": 10,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.47105561861521,
+      "ink_labelled": 0.0189971923828125
+    },
+    {
+      "row": 10,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 10,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 10,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 10,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 11,
+      "col": 1,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 11,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 0.9207086087796182,
+      "ink_labelled": 0.42706298828125
+    },
+    {
+      "row": 11,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.8788710982517225,
+      "ink_labelled": 0.5932769775390625
+    },
+    {
+      "row": 11,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.4300321355536079,
+      "ink_labelled": 0.044921875
+    },
+    {
+      "row": 11,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 11,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 11,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 11,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 12,
+      "col": 1,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 12,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 0.8698465138688141,
+      "ink_labelled": 0.3642730712890625
+    },
+    {
+      "row": 12,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.681137368646284,
+      "ink_labelled": 0.2878875732421875
+    },
+    {
+      "row": 12,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.370739817123857,
+      "ink_labelled": 0.039093017578125
+    },
+    {
+      "row": 12,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 12,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 12,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 12,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 13,
+      "col": 1,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 13,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 0.45233265720081134,
+      "ink_labelled": 0.04205322265625
+    },
+    {
+      "row": 13,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.5838393731635652,
+      "ink_labelled": 0.236175537109375
+    },
+    {
+      "row": 13,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.040952245996882526,
+      "ink_labelled": 0.0151824951171875
+    },
+    {
+      "row": 13,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 13,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 13,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 13,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 14,
+      "col": 1,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 14,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 14,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.40700711157539476,
+      "ink_labelled": 0.154571533203125
+    },
+    {
+      "row": 14,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.8027355810794121,
+      "ink_labelled": 0.488616943359375
+    },
+    {
+      "row": 14,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 14,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.5811674478057094,
+      "ink_labelled": 0.0326995849609375
+    },
+    {
+      "row": 14,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.9019601966191104,
+      "ink_labelled": 0.6264190673828125
+    },
+    {
+      "row": 14,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.9728547730357412,
+      "ink_labelled": 0.2808837890625
+    },
+    {
+      "row": 15,
+      "col": 1,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 15,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 15,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.5582214215525713,
+      "ink_labelled": 0.1536102294921875
+    },
+    {
+      "row": 15,
+      "col": 4,
+      "below_030": 0.016304347826086956,
+      "agreement": 0.6629691475826972,
+      "ink_labelled": 0.46502685546875
+    },
+    {
+      "row": 15,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 15,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.3732443820224719,
+      "ink_labelled": 0.032440185546875
+    },
+    {
+      "row": 15,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.7983251276860075,
+      "ink_labelled": 0.6295166015625
+    },
+    {
+      "row": 15,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.7584015286835875,
+      "ink_labelled": 0.44427490234375
+    },
+    {
+      "row": 15,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 16,
+      "col": 1,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 16,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 16,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.09624764757844606,
+      "ink_labelled": 0.039154052734375
+    },
+    {
+      "row": 16,
+      "col": 4,
+      "below_030": 0.02040816326530612,
+      "agreement": 0.7242308497279196,
+      "ink_labelled": 0.5347900390625
+    },
+    {
+      "row": 16,
+      "col": 5,
+      "below_030": 0.005555555555555556,
+      "agreement": 0.5633926758275232,
+      "ink_labelled": 0.209716796875
+    },
+    {
+      "row": 16,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 16,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.4507700941572613,
+      "ink_labelled": 0.1578521728515625
+    },
+    {
+      "row": 16,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.4620750260888669,
+      "ink_labelled": 0.302215576171875
+    },
+    {
+      "row": 16,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.5254482359745518,
+      "ink_labelled": 0.1227569580078125
+    },
+    {
+      "row": 17,
+      "col": 1,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 17,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 17,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.039330922242314645,
+      "ink_labelled": 0.009735107421875
+    },
+    {
+      "row": 17,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.8106633546984853,
+      "ink_labelled": 0.707550048828125
+    },
+    {
+      "row": 17,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.929060383340539,
+      "ink_labelled": 0.5274200439453125
+    },
+    {
+      "row": 17,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.8538545059717698,
+      "ink_labelled": 0.1359710693359375
+    },
+    {
+      "row": 17,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.16638590125696515,
+      "ink_labelled": 0.02093505859375
+    },
+    {
+      "row": 17,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.8796709425543782,
+      "ink_labelled": 0.500152587890625
+    },
+    {
+      "row": 17,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.5211019385956775,
+      "ink_labelled": 0.1280364990234375
+    },
+    {
+      "row": 18,
+      "col": 1,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 18,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 18,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 18,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.062,
+      "ink_labelled": 0.02239990234375
+    },
+    {
+      "row": 18,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.797156916347731,
+      "ink_labelled": 0.1617279052734375
+    },
+    {
+      "row": 18,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 18,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 18,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.6765510948905109,
+      "ink_labelled": 0.3238372802734375
+    },
+    {
+      "row": 18,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.9409980282117397,
+      "ink_labelled": 0.217926025390625
+    },
+    {
+      "row": 19,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 19,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 19,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.3573461576209638,
+      "ink_labelled": 0.1377410888671875
+    },
+    {
+      "row": 19,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.8663181879104678,
+      "ink_labelled": 0.525482177734375
+    },
+    {
+      "row": 19,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.3307590883405538,
+      "ink_labelled": 0.02996826171875
+    },
+    {
+      "row": 19,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 19,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.508057346076906,
+      "ink_labelled": 0.1692657470703125
+    },
+    {
+      "row": 19,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.8407063479981732,
+      "ink_labelled": 0.436126708984375
+    },
+    {
+      "row": 19,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.6582138919514884,
+      "ink_labelled": 0.03973388671875
+    },
+    {
+      "row": 20,
+      "col": 2,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 20,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 20,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.7182998917658813,
+      "ink_labelled": 0.341827392578125
+    },
+    {
+      "row": 20,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.8755224854000534,
+      "ink_labelled": 0.49920654296875
+    },
+    {
+      "row": 20,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 20,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 20,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.7017982240863861,
+      "ink_labelled": 0.245941162109375
+    },
+    {
+      "row": 20,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.8120517997632807,
+      "ink_labelled": 0.4076690673828125
+    },
+    {
+      "row": 20,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.6477587969046577,
+      "ink_labelled": 0.1928558349609375
+    },
+    {
+      "row": 21,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 21,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.46438136047134443,
+      "ink_labelled": 0.0582427978515625
+    },
+    {
+      "row": 21,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.5583080738495453,
+      "ink_labelled": 0.3428497314453125
+    },
+    {
+      "row": 21,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 21,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 21,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 21,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 21,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 21,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 22,
+      "col": 3,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 22,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 22,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.6577837423312883,
+      "ink_labelled": 0.105621337890625
+    },
+    {
+      "row": 22,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 22,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 22,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 22,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 22,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 22,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 23,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 23,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 23,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 23,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 23,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 23,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 23,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 23,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 23,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 24,
+      "col": 4,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 24,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 24,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 24,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 24,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 24,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 24,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 24,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 24,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 25,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 25,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 25,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 25,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 25,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 25,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 25,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 25,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 26,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 26,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 26,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 26,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 26,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 26,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 26,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 26,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 26,
+      "col": 13,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 27,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 27,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 27,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 27,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 27,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 27,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 27,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 27,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 27,
+      "col": 13,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 28,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 28,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 28,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 28,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 28,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 28,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 28,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 28,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 28,
+      "col": 13,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 29,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 29,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 29,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 29,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 29,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 29,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 29,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 29,
+      "col": 13,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 30,
+      "col": 6,
+      "below_030": 0.01098901098901099,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 30,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 30,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 30,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 30,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 30,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 30,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 30,
+      "col": 13,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 31,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 31,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 31,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 31,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 31,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 31,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.6724770642201835,
+      "ink_labelled": 0.30584716796875
+    },
+    {
+      "row": 31,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0009310336801433792,
+      "ink_labelled": 0.0006103515625
+    },
+    {
+      "row": 31,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 31,
+      "col": 13,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 32,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 32,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 32,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 32,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 32,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 32,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.9467707987149662,
+      "ink_labelled": 0.39227294921875
+    },
+    {
+      "row": 32,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.6525947091897871,
+      "ink_labelled": 0.128387451171875
+    },
+    {
+      "row": 32,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.27546675401244675,
+      "ink_labelled": 0.079376220703125
+    },
+    {
+      "row": 32,
+      "col": 13,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 33,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 33,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 33,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 33,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 33,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 33,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.3884245387162908,
+      "ink_labelled": 0.0806884765625
+    },
+    {
+      "row": 33,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.646298517859216,
+      "ink_labelled": 0.28179931640625
+    },
+    {
+      "row": 33,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.6272140374110247,
+      "ink_labelled": 0.1635284423828125
+    },
+    {
+      "row": 33,
+      "col": 13,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 34,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 34,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 34,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 34,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 34,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 34,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 34,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 34,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 34,
+      "col": 13,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 35,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 35,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 35,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 35,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 35,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 35,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 35,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 35,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 35,
+      "col": 13,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 36,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 36,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 36,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 36,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 36,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 36,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 36,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 36,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 36,
+      "col": 13,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 37,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 37,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 37,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 37,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 37,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 37,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 37,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 37,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 37,
+      "col": 13,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 38,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 38,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 38,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 38,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 38,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 38,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 38,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.7131443789233403,
+      "ink_labelled": 0.1932373046875
+    },
+    {
+      "row": 38,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.8628644999652029,
+      "ink_labelled": 0.454833984375
+    },
+    {
+      "row": 38,
+      "col": 13,
+      "below_030": 0.0,
+      "agreement": 0.9237241916634203,
+      "ink_labelled": 0.1953887939453125
+    },
+    {
+      "row": 39,
+      "col": 5,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 39,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 39,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 39,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 39,
+      "col": 9,
+      "below_030": 0.08426966292134831,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 39,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 39,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 39,
+      "col": 12,
+      "below_030": 0.023809523809523808,
+      "agreement": 0.7404140593795766,
+      "ink_labelled": 0.40618896484375
+    },
+    {
+      "row": 39,
+      "col": 13,
+      "below_030": 0.0,
+      "agreement": 0.8645664176680741,
+      "ink_labelled": 0.047576904296875
+    },
+    {
+      "row": 39,
+      "col": 14,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 40,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 40,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 40,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 40,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 40,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 40,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.7087959833928744,
+      "ink_labelled": 0.229095458984375
+    },
+    {
+      "row": 40,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.9011779565611356,
+      "ink_labelled": 0.549560546875
+    },
+    {
+      "row": 40,
+      "col": 13,
+      "below_030": 0.0,
+      "agreement": 0.6409655570892049,
+      "ink_labelled": 0.3046875
+    },
+    {
+      "row": 40,
+      "col": 14,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 41,
+      "col": 6,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 41,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 41,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 41,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 41,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 41,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 41,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.7925564531179183,
+      "ink_labelled": 0.4798126220703125
+    },
+    {
+      "row": 41,
+      "col": 13,
+      "below_030": 0.0,
+      "agreement": 0.7908843300880853,
+      "ink_labelled": 0.42022705078125
+    },
+    {
+      "row": 41,
+      "col": 14,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 42,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 42,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 42,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 42,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 42,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 42,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.8310899301513388,
+      "ink_labelled": 0.470611572265625
+    },
+    {
+      "row": 42,
+      "col": 13,
+      "below_030": 0.0,
+      "agreement": 0.3344972067039106,
+      "ink_labelled": 0.0365447998046875
+    },
+    {
+      "row": 42,
+      "col": 14,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 43,
+      "col": 7,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 43,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 43,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 43,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 43,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 43,
+      "col": 12,
+      "below_030": 0.0,
+      "agreement": 0.40530759951749096,
+      "ink_labelled": 0.046142578125
+    },
+    {
+      "row": 43,
+      "col": 13,
+      "below_030": 0.0,
+      "agreement": 0.5241267554915376,
+      "ink_labelled": 0.0444183349609375
+    },
+    {
+      "row": 44,
+      "col": 8,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 44,
+      "col": 9,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 44,
+      "col": 10,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    },
+    {
+      "row": 44,
+      "col": 11,
+      "below_030": 0.0,
+      "agreement": 0.0,
+      "ink_labelled": 0.0
+    }
+  ]
+}

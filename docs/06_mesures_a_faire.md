@@ -269,7 +269,7 @@ perdu du **début** des textes.
 | 3.5 | ✅ **FAITE — OUI, et c'est un facteur 64 sur la donnée** | **89 %** des murs conservés au niveau 2 (33 Gio) contre le niveau 0 (2100 Gio). La **falaise est entre les niveaux 2 et 3** : 89 % → 47 %. ⚠ Et un premier essai rendait « 53 feuilles au niveau 1 » : c'était un artefact de **seuil**, pas de résolution — réduire un volume moyenne les voxels, donc remonte le fond, et un seuil absolu calé sur le niveau 0 ne veut plus rien dire ailleurs. Outil : `pyramid.py` |
 | 3.6 | Effet de la campagne de scan (DLS 7,91 µm vs ESRF 2,4 µm) | le site montre que ça change la séparabilité ; le chiffrer |
 | 3.7 | ✅ **FAITE** — seuil : suppression impossible, mais PLATEAU établi | **Le supprimer dégrade la métrique** : le déficit moyen sans seuil tombe à rho +0,340 (contre +0,769), parce qu'il est dilué par la masse des cellules normales — **le signal est dans la queue extrême**. Mais le balayage montre un **plateau de 0,15 à 0,40** (rho 0,759 à 0,779), puis un effondrement au-delà de 0,5. Le seuil n'est donc pas réglé : n'importe quelle valeur de la plage donne la même réponse |
-| 3.8 | La proximité prédit-elle une perte de **lisibilité** ? | la frontière que ni `04` ni `07` ne franchissent : on mesure une anomalie géométrique, pas une perte de texte. Demande un rendu et un jugement — le maillon le plus cher, et le seul qui convertirait la métrique en argument sur le résultat final |
+| 3.8 | ✅ **FAITE — la réponse est NON, et elle est bien étayée** | Corrélation par tuile entre la proximité anormale et l'accord encre prédite ↔ étiquetage humain, sur le segment `20230909121925` (le seul qui ait **et** un maillage **et** une carte d'encre). **Tuiles de 512 px** : n = 34, rho **+0,186** (p = 0,29). **Tuiles de 256 px** : n = 89, rho **+0,019** (p = 0,86). ⚠ Et le **contrôle est plat des deux côtés** (−0,031 et −0,010 sur les tuiles vides), donc ce qu'on mesure n'est pas la quantité d'encre. À n = 89 la mesure détecterait un rho de 0,3 à 80 % de puissance : le zéro est donc **informatif**, pas un manque de données. Outil : `analysis/src/proximity_vs_ink.py` |
 | 3.9 | ✅ **FAITE** — pas de plancher | Les **7** traces à 0 croisement s'étalent de **0,020 % à 0,372 %**, facteur 18. Donc la métrique **ne classe pas** : elle corrèle. A obligé à corriger `07` |
 
 ## 3bis. ⭐ LA SUITE, dans l'ordre
@@ -321,6 +321,28 @@ maintenant *faisable* — on a la métrique d'un côté, l'AUC de l'autre, et 46
 mesurées. Si la corrélation existe, la métrique cesse d'être un diagnostic
 géométrique pour devenir un **prédicteur de lisibilité**, ce qui est exactement ce
 qu'un Progress Prize récompense.
+
+## 3ter. ⭐ Ce que le NON de 3.8 change
+
+La métrique de `07` **corrèle avec les croisements publiés** (rho +0,77, `06` §3.1)
+mais **pas avec la lisibilité** (rho +0,02 à n = 89). Les deux faits tiennent ensemble
+et disent quelque chose de précis :
+
+> *Elle mesure un défaut de la TRACE, pas un défaut du RÉSULTAT.*
+
+Une auto-intersection est réelle et détectable géométriquement ; elle n'empêche
+apparemment pas l'encre d'être trouvée là où un humain l'a tracée.
+
+⚠ **Conséquence pour l'objectif** (le déroulement, pas le texte) : la proximité reste
+un **contrôle qualité de trace** utile et bon marché — elle attrape ce que `windcheck`
+attrape, sans volume ni modèle. Mais elle ne peut pas servir d'**argument sur le
+résultat final**, et il ne faut plus la présenter comme telle.
+
+⚠ **Portée honnête** : une seule trace. C'est la seule du dépôt qui ait à la fois un
+maillage et une carte d'encre — les 46 traces mesurées en `07` n'ont pas d'encre, et
+les segments à encre n'avaient pas de maillage avant que `tools/ppm_to_tifxyz.py`
+n'existe. Élargir demande de convertir d'autres `.ppm`, ce qui est maintenant **une
+commande**, plus une décision.
 
 ## 4. Écartées, avec la raison
 
