@@ -144,6 +144,10 @@ def main() -> int:
     parser.add_argument("--search-radius", type=float, default=80.0)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--limit", type=int, default=0, help="0 = toutes")
+    parser.add_argument("--variante", default="",
+                        help="ne garder que les tifxyz dont le chemin contient ceci "
+                             "(ex: 9.362um). Indispensable des qu'un segment est trace "
+                             "sur plusieurs campagnes de scan")
     args = parser.parse_args()
 
     # ⚠ La disposition du corpus windcheck est <trace>/mesh/<nom>.tifxyz/{x,y,z}.tif :
@@ -155,6 +159,12 @@ def main() -> int:
         if not entry.is_dir():
             continue
         found = sorted(entry.glob("mesh/*.tifxyz/x.tif")) or sorted(entry.glob("x.tif"))
+        # ⚠ Un segment peut etre trace sur PLUSIEURS volumes (jusqu'a quatre campagnes de
+        # scan : 9,36 / 3,24 / 2,4 / 1,13 µm). Prendre `found[0]` melangerait les
+        # resolutions d'un segment a l'autre, et la comparaison entre corpus deviendrait
+        # une comparaison entre campagnes. La variante se NOMME.
+        if args.variante:
+            found = [f for f in found if args.variante in str(f)]
         if found:
             traces.append((entry.name, found[0].parent))
     if args.limit:

@@ -76,6 +76,18 @@ locale, sur un portable.
 > surface est à portée de main. C'est la même discipline que le catalogue de
 > LplKnowledge : indexer sans rapatrier.
 
+⭐ **Confirmée à un troisième niveau le 2026-08-18** — et c'est elle qui a débloqué la
+campagne sur corpus de `12`. Les **volumes de surface** sont publiés en OME-Zarr avec
+des chunks `[109, 128, 128]` **non compressés** : un chunk contient toute la colonne de
+profondeur d'une fenêtre de 128×128, pour **1,78 Mo et 1,03 s**. La même mesure, faite
+en téléchargeant les couches rendues, coûte **32 Go par segment**. Le rapport est de
+**18 000**, et il transforme « valider un instrument sur une population » de plusieurs
+jours en quelques minutes.
+
+⚠ Le corollaire pratique : avant de télécharger, **chercher si la donnée existe sous une
+forme qui se lit par morceaux**. Ici la réponse était oui et personne ne l'avait
+regardée.
+
 ## 2. Où sont les surfaces déjà tracées
 
 45 échantillons publiés — 35 rouleaux, 10 fragments — et **310 segments** au total.

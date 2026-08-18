@@ -34,6 +34,13 @@ téléchargeur aurait été facile — et c'eût été une erreur : un écart de
 serait alors devenu indistinguable d'un écart de récupération. Le client a été
 installé dans leur environnement virtuel, leur chemin de code reste intact.
 
+⚠ **Portée de cette décision, précisée le 2026-08-18** : elle vaut pour *reproduire
+`windcheck`*, où l'on veut leur chemin de code intact. Pour **notre** récupération, le
+client `aws` est inutile — le bucket est public en HTTPS et son API de listage accepte
+un préfixe **par segment**, ce qui évite en prime le piège nº 16 (`aws s3 cp --include`
+énumère le préfixe entier avant de filtrer). Voir `tools/fetch_traces.py`, qui a
+récupéré les 71 traces de PHerc0139 / PHerc1667 / PHerc0814 sans lui.
+
 ⚠ **80 tests sautés** : à ne pas lire comme « 80 tests verts ». Ce sont des tests
 conditionnés à des données absentes. C'est exactement le *dénominateur silencieux*
 du skill `tests-first` — on n'en tire aucune garantie, et on l'écrit plutôt que de
