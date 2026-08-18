@@ -460,3 +460,103 @@ liens adjacents** — est exactement la signature attendue.
 un site de proche en proche en autorisant sa dérive, plutôt que d'exiger qu'il reste
 au même rayon. C'est un appariement *prédictif* entre coupes, cousin de celui déjà
 écrit pour les colonnes dans `fusions.py track`.
+
+---
+
+## 11. ✅ Les deux lectures sont départagées : le défaut **dérive**
+
+`experiments/src/excision/track_z.py`. Ce qui manquait au §10 n'était pas une donnée
+mais un **appariement prédictif** : suivre un site en autorisant sa dérive au lieu
+d'exiger qu'il reste au même rayon.
+
+### ⚠⚠ Une seule chose change, et c'est le centre de la fenêtre
+
+La tolérance reste **exactement** celle de la mesure publiée — 1,0 mm en rayon,
+1000 colonnes en angle. Elle est simplement posée autour d'une position **prédite**
+(extrapolation linéaire des deux dernières coupes) plutôt qu'autour de la dernière
+position vue. Une piste de vitesse nulle retombe donc **au bit près** sur
+l'appariement à fenêtre fixe : tout gain est attribuable à la prédiction et à rien
+d'autre. Élargir la tolérance aurait mesuré la permissivité de l'outil.
+
+Trois bras, et il en faut trois :
+
+| bras | ce qu'il écarte |
+|---|---|
+| **prédictif** sur les données | — |
+| **fenêtre fixe** sur les données | qu'une piste longue prouve seulement qu'un suiveur suit |
+| **prédictif sur du hasard** | qu'un suiveur permissif enchaîne du bruit |
+
+Le hasard est une **permutation** : le multiensemble exact des cellules est conservé,
+seule leur répartition entre coupes est détruite. L'hypothèse nulle est donc
+précisément *« l'ordre en z ne veut rien dire »*. Un tirage uniforme serait plus
+faible — il détruirait en même temps la distribution radiale, donc répondrait à deux
+questions à la fois.
+
+### 🎯 Le résultat, sur la bande large (9 coupes, z 6567 → 7367)
+
+| grandeur | prédictif | fenêtre fixe | hasard | p |
+|---|---:|---:|---:|---:|
+| piste la plus longue | **5** coupes | 3 | 2,64 | 0,014 |
+| **son étendue radiale** | **4,75 mm** | 1,42 mm | 0,95 mm | **0,0010** |
+| pistes ≥ 4 coupes | 1 | 0 | 0,11 | 0,113 |
+
+```
+z6867 : r 17,1  →  z6967 : r 17,6  →  z7067 : r 18,5  →  z7167 : r 19,9  →  z7267 : r 21,8
+```
+
+**Dérive médiane : 1,50 mm de rayon par millimètre de hauteur.** Le site traverse
+4,75 mm de rayon sur 3,16 mm de hauteur, et la fenêtre fixe le perd après trois
+coupes — exactement là où le §10 prédisait qu'elle le perdrait.
+
+⚠ **Correction pour tests multiples, parce que l'étendue a été retenue *après* avoir
+vu que la longueur était marginale.** Cinq grandeurs sont calculées dans le même run,
+donc Bonferroni : 0,0010 × 5 = **0,005**. Le résultat survit.
+
+⚠ **Ma grandeur discriminante proposée a échoué.** J'avais annoncé la *rectitude*
+(déplacement net / chemin parcouru) comme ce qui séparerait une vraie dérive d'un
+zigzag aléatoire. Mesurée : **1,000 observé contre p95 nul à 1,000, p = 0,82**. À trois
+points une chaîne aléatoire est monotone une fois sur deux, donc la statistique ne peut
+pas discriminer à cette longueur. C'est l'**étendue** qui a tranché, pas elle.
+
+### ⚠⚠ Et le balayage du rouleau entier ne peut PAS confirmer — le crible est aveugle
+
+Passé aux 10 bandes du balayage (niveau 2) : **0 bande sur 10** significative,
+Fisher **p = 0,999**, pistes plates (étendue 0,00 à 0,47 mm, soit zéro ou une cellule).
+
+Lu naïvement : *la migration est propre à ce site*. C'est faux, et la vérification le
+montre — **dans la même plage de z** :
+
+| niveau | ce qu'il trouve, z 6867 → 7267 |
+|---|---|
+| **0** | r 15,7 → 21,8 mm à **77–88 % du tour** |
+| **2** | des sites à 21 %, 32 %, 53 % et 95 % — **rien entre 74 % et 88 %** |
+
+Le niveau 2 ne rate pas le site par manque de sensibilité : il **regarde ailleurs**.
+Le §9 disait déjà que les deux niveaux ne trouvent pas les mêmes sites (fond 10,3 %
+contre 6,6 %) ; la mesure le durcit en **positions angulaires disjointes**.
+
+**Deux conséquences, à porter partout :**
+
+1. **Toute question sur la migration doit se poser au niveau 0.** Le Fisher à 0,999 ne
+   dit rien sur la migration ; il dit que le crible trouve des choses *stationnaires*.
+2. ⚠ Les **18 % de colocation** du balayage du rouleau entier portent sur une **autre
+   population de sites** que les 4 candidats du §7. Les deux résultats sont vrais et ne
+   parlent pas du même objet.
+
+⚠ Piège corrigé en chemin : la tolérance angulaire est en **colonnes**, donc c'est une
+longueur, donc elle suit le niveau de pyramide. Laisser 1000 colonnes au niveau 2
+ferait une fenêtre de **21 % du tour** au lieu de 5,3 % — le piège nº 1 du dépôt, un
+seuil calé sur un niveau qui ne se transporte pas.
+
+### Reproduire
+
+```bash
+cd experiments
+# le site : prédictif contre fenêtre fixe contre permutation
+uv run python src/excision/track_z.py \
+    ../docs/fusions_bande_large_0172.json ../docs/fusions_z_serre_0172.json \
+    --trials 5000 --out ../docs/pistes_z_0172.json
+# le balayage — ⚠ --level 2 divise la tolérance angulaire, sans quoi elle fait 21 % du tour
+uv run python src/excision/track_z.py ../docs/survey/bande_0*.json \
+    --level 2 --trials 5000 --out ../docs/pistes_survey_0172.json
+```

@@ -1,0 +1,110 @@
+[
+  {
+    "scan": "fusions_bande_large_0172.json",
+    "slices": 9,
+    "cells": 32,
+    "predictive": {
+      "tracks": 26,
+      "longest": 5,
+      "span_mm": 4.746000000000002,
+      "at_least_3": 1,
+      "at_least_4": 1,
+      "at_least_5": 1,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": 1.5000000000000007
+    },
+    "fixed": {
+      "tracks": 28,
+      "longest": 3,
+      "span_mm": 1.4238000000000035,
+      "at_least_3": 1,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": 0.9000000000000021
+    },
+    "null": {
+      "longest": {
+        "mean": 2.6444,
+        "p95": 4.0,
+        "p": 0.014197160567886422
+      },
+      "span_mm": {
+        "mean": 0.9457828799999999,
+        "p95": 2.8476,
+        "p": 0.0009998000399920016
+      },
+      "at_least_3": {
+        "mean": 0.6016,
+        "p95": 2.0,
+        "p": 0.518496300739852
+      },
+      "at_least_4": {
+        "mean": 0.1136,
+        "p95": 1.0,
+        "p": 0.11277744451109778
+      },
+      "straightness_mean": {
+        "mean": 0.8620049374445623,
+        "p95": 1.0,
+        "p": 0.819921875
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "plus longue que le hasard et que la fenetre fixe, mais pas plus droite"
+  },
+  {
+    "scan": "fusions_z_serre_0172.json",
+    "slices": 5,
+    "cells": 18,
+    "predictive": {
+      "tracks": 14,
+      "longest": 4,
+      "span_mm": 2.8476,
+      "at_least_3": 1,
+      "at_least_4": 1,
+      "at_least_5": 0,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": 1.2
+    },
+    "fixed": {
+      "tracks": 15,
+      "longest": 3,
+      "span_mm": 1.4238000000000035,
+      "at_least_3": 1,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": 0.9000000000000021
+    },
+    "null": {
+      "longest": {
+        "mean": 3.0466,
+        "p95": 4.0,
+        "p": 0.2573485302939412
+      },
+      "span_mm": {
+        "mean": 1.0370009999999998,
+        "p95": 2.8476,
+        "p": 0.08238352329534093
+      },
+      "at_least_3": {
+        "mean": 0.9408,
+        "p95": 2.0,
+        "p": 0.7598480303939212
+      },
+      "at_least_4": {
+        "mean": 0.2624,
+        "p95": 1.0,
+        "p": 0.2573485302939412
+      },
+      "straightness_mean": {
+        "mean": 0.8589080569443913,
+        "p95": 1.0,
+        "p": 0.7980769230769231
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "la prediction allonge, mais pas au-dela du hasard"
+  }
+]

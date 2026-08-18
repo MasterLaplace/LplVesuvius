@@ -1,0 +1,550 @@
+[
+  {
+    "scan": "bande_00.json",
+    "slices": 5,
+    "cells": 11,
+    "predictive": {
+      "tracks": 9,
+      "longest": 3,
+      "span_mm": 0.4745999999999988,
+      "at_least_3": 1,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": -0.2999999999999992
+    },
+    "fixed": {
+      "tracks": 9,
+      "longest": 3,
+      "span_mm": 0.4745999999999988,
+      "at_least_3": 1,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": -0.2999999999999992
+    },
+    "null": {
+      "longest": {
+        "mean": 1.9408,
+        "p95": 3.0,
+        "p": 0.27714457108578283
+      },
+      "span_mm": {
+        "mean": 0.3088696800000003,
+        "p95": 0.9492000000000012,
+        "p": 0.45310937812437513
+      },
+      "at_least_3": {
+        "mean": 0.277,
+        "p95": 1.0,
+        "p": 0.27714457108578283
+      },
+      "at_least_4": {
+        "mean": 0.0376,
+        "p95": 0.0,
+        "p": 1.0
+      },
+      "straightness_mean": {
+        "mean": 0.7087845968712394,
+        "p95": 1.0,
+        "p": 0.6847041847041847
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "la prediction n'apporte rien -- lecture \u00ab defaut d'un millimetre \u00bb tenue"
+  },
+  {
+    "scan": "bande_01.json",
+    "slices": 5,
+    "cells": 8,
+    "predictive": {
+      "tracks": 8,
+      "longest": 1,
+      "span_mm": 0.0,
+      "at_least_3": 0,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": NaN,
+      "drift_mm_per_mm": NaN
+    },
+    "fixed": {
+      "tracks": 8,
+      "longest": 1,
+      "span_mm": 0.0,
+      "at_least_3": 0,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": NaN,
+      "drift_mm_per_mm": NaN
+    },
+    "null": {
+      "longest": {
+        "mean": 1.5796,
+        "p95": 2.0,
+        "p": 1.0
+      },
+      "span_mm": {
+        "mean": 0.4102442399999994,
+        "p95": 0.9491999999999994,
+        "p": 1.0
+      },
+      "at_least_3": {
+        "mean": 0.0,
+        "p95": 0.0,
+        "p": 1.0
+      },
+      "at_least_4": {
+        "mean": 0.0,
+        "p95": 0.0,
+        "p": 1.0
+      },
+      "straightness_mean": {
+        "mean": NaN,
+        "p95": NaN,
+        "p": NaN
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "la prediction n'apporte rien -- lecture \u00ab defaut d'un millimetre \u00bb tenue"
+  },
+  {
+    "scan": "bande_02.json",
+    "slices": 5,
+    "cells": 14,
+    "predictive": {
+      "tracks": 9,
+      "longest": 3,
+      "span_mm": 0.4745999999999997,
+      "at_least_3": 2,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": -0.75
+    },
+    "fixed": {
+      "tracks": 9,
+      "longest": 4,
+      "span_mm": 0.4745999999999997,
+      "at_least_3": 1,
+      "at_least_4": 1,
+      "at_least_5": 0,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": -0.19999999999999984
+    },
+    "null": {
+      "longest": {
+        "mean": 2.8184,
+        "p95": 4.0,
+        "p": 0.613877224555089
+      },
+      "span_mm": {
+        "mean": 0.5936296799999998,
+        "p95": 1.8984000000000005,
+        "p": 0.7250549890021996
+      },
+      "at_least_3": {
+        "mean": 0.6392,
+        "p95": 1.0,
+        "p": 0.02559488102379524
+      },
+      "at_least_4": {
+        "mean": 0.2106,
+        "p95": 1.0,
+        "p": 1.0
+      },
+      "straightness_mean": {
+        "mean": 0.8372977082654501,
+        "p95": 1.0,
+        "p": 0.8042345276872964
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "la prediction n'apporte rien -- lecture \u00ab defaut d'un millimetre \u00bb tenue"
+  },
+  {
+    "scan": "bande_03.json",
+    "slices": 5,
+    "cells": 13,
+    "predictive": {
+      "tracks": 10,
+      "longest": 2,
+      "span_mm": 0.0,
+      "at_least_3": 0,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": NaN,
+      "drift_mm_per_mm": NaN
+    },
+    "fixed": {
+      "tracks": 10,
+      "longest": 2,
+      "span_mm": 0.0,
+      "at_least_3": 0,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": NaN,
+      "drift_mm_per_mm": NaN
+    },
+    "null": {
+      "longest": {
+        "mean": 2.4878,
+        "p95": 4.0,
+        "p": 0.9718056388722256
+      },
+      "span_mm": {
+        "mean": 0.2662505999999997,
+        "p95": 0.4745999999999997,
+        "p": 1.0
+      },
+      "at_least_3": {
+        "mean": 0.3888,
+        "p95": 1.0,
+        "p": 1.0
+      },
+      "at_least_4": {
+        "mean": 0.1272,
+        "p95": 1.0,
+        "p": 1.0
+      },
+      "straightness_mean": {
+        "mean": 0.7957818930041153,
+        "p95": 1.0,
+        "p": 0.0005141388174807198
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "la prediction n'apporte rien -- lecture \u00ab defaut d'un millimetre \u00bb tenue"
+  },
+  {
+    "scan": "bande_04.json",
+    "slices": 5,
+    "cells": 11,
+    "predictive": {
+      "tracks": 7,
+      "longest": 3,
+      "span_mm": 0.4746000000000006,
+      "at_least_3": 1,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": -0.3000000000000004
+    },
+    "fixed": {
+      "tracks": 7,
+      "longest": 3,
+      "span_mm": 0.4746000000000006,
+      "at_least_3": 1,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": -0.3000000000000004
+    },
+    "null": {
+      "longest": {
+        "mean": 2.2418,
+        "p95": 3.0,
+        "p": 0.3073385322935413
+      },
+      "span_mm": {
+        "mean": 0.22486548000000067,
+        "p95": 0.47460000000000235,
+        "p": 0.47390521895620874
+      },
+      "at_least_3": {
+        "mean": 0.3254,
+        "p95": 1.0,
+        "p": 0.3073385322935413
+      },
+      "at_least_4": {
+        "mean": 0.0,
+        "p95": 0.0,
+        "p": 1.0
+      },
+      "straightness_mean": {
+        "mean": 0.6572265625,
+        "p95": 1.0,
+        "p": 0.6434612882238127
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "la prediction n'apporte rien -- lecture \u00ab defaut d'un millimetre \u00bb tenue"
+  },
+  {
+    "scan": "bande_05.json",
+    "slices": 5,
+    "cells": 13,
+    "predictive": {
+      "tracks": 8,
+      "longest": 5,
+      "span_mm": 0.4746000000000006,
+      "at_least_3": 1,
+      "at_least_4": 1,
+      "at_least_5": 1,
+      "straightness_mean": 0.3333333333333333,
+      "drift_mm_per_mm": 0.1500000000000002
+    },
+    "fixed": {
+      "tracks": 8,
+      "longest": 5,
+      "span_mm": 0.4746000000000006,
+      "at_least_3": 1,
+      "at_least_4": 1,
+      "at_least_5": 1,
+      "straightness_mean": 0.3333333333333333,
+      "drift_mm_per_mm": 0.1500000000000002
+    },
+    "null": {
+      "longest": {
+        "mean": 2.7016,
+        "p95": 5.0,
+        "p": 0.07498500299940011
+      },
+      "span_mm": {
+        "mean": 0.3920195999999999,
+        "p95": 1.4238,
+        "p": 0.4311137772445511
+      },
+      "at_least_3": {
+        "mean": 0.455,
+        "p95": 1.0,
+        "p": 0.45510897820435914
+      },
+      "at_least_4": {
+        "mean": 0.1772,
+        "p95": 1.0,
+        "p": 0.1773645270945811
+      },
+      "straightness_mean": {
+        "mean": 0.7184950430684218,
+        "p95": 1.0,
+        "p": 0.7690058479532164
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "la prediction n'apporte rien -- lecture \u00ab defaut d'un millimetre \u00bb tenue"
+  },
+  {
+    "scan": "bande_06.json",
+    "slices": 5,
+    "cells": 10,
+    "predictive": {
+      "tracks": 8,
+      "longest": 2,
+      "span_mm": 0.0,
+      "at_least_3": 0,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": NaN,
+      "drift_mm_per_mm": NaN
+    },
+    "fixed": {
+      "tracks": 8,
+      "longest": 2,
+      "span_mm": 0.0,
+      "at_least_3": 0,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": NaN,
+      "drift_mm_per_mm": NaN
+    },
+    "null": {
+      "longest": {
+        "mean": 2.3528,
+        "p95": 4.0,
+        "p": 0.8970205958808238
+      },
+      "span_mm": {
+        "mean": 0.27137627999999975,
+        "p95": 0.4746000000000006,
+        "p": 1.0
+      },
+      "at_least_3": {
+        "mean": 0.4198,
+        "p95": 1.0,
+        "p": 1.0
+      },
+      "at_least_4": {
+        "mean": 0.059,
+        "p95": 1.0,
+        "p": 1.0
+      },
+      "straightness_mean": {
+        "mean": 0.7183299731182795,
+        "p95": 1.0,
+        "p": 0.0005037783375314861
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "la prediction n'apporte rien -- lecture \u00ab defaut d'un millimetre \u00bb tenue"
+  },
+  {
+    "scan": "bande_07.json",
+    "slices": 5,
+    "cells": 15,
+    "predictive": {
+      "tracks": 11,
+      "longest": 3,
+      "span_mm": 0.0,
+      "at_least_3": 1,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": NaN,
+      "drift_mm_per_mm": 0.0
+    },
+    "fixed": {
+      "tracks": 11,
+      "longest": 3,
+      "span_mm": 0.0,
+      "at_least_3": 1,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": NaN,
+      "drift_mm_per_mm": 0.0
+    },
+    "null": {
+      "longest": {
+        "mean": 2.182,
+        "p95": 3.0,
+        "p": 0.25414917016596683
+      },
+      "span_mm": {
+        "mean": 0.22391627999999963,
+        "p95": 0.4746000000000006,
+        "p": 1.0
+      },
+      "at_least_3": {
+        "mean": 0.2628,
+        "p95": 1.0,
+        "p": 0.25414917016596683
+      },
+      "at_least_4": {
+        "mean": 0.0,
+        "p95": 0.0,
+        "p": 1.0
+      },
+      "straightness_mean": {
+        "mean": 0.6729074889867841,
+        "p95": 1.0,
+        "p": 0.0011001100110011
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "la prediction n'apporte rien -- lecture \u00ab defaut d'un millimetre \u00bb tenue"
+  },
+  {
+    "scan": "bande_08.json",
+    "slices": 5,
+    "cells": 14,
+    "predictive": {
+      "tracks": 14,
+      "longest": 1,
+      "span_mm": 0.0,
+      "at_least_3": 0,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": NaN,
+      "drift_mm_per_mm": NaN
+    },
+    "fixed": {
+      "tracks": 14,
+      "longest": 1,
+      "span_mm": 0.0,
+      "at_least_3": 0,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": NaN,
+      "drift_mm_per_mm": NaN
+    },
+    "null": {
+      "longest": {
+        "mean": 1.999,
+        "p95": 3.0,
+        "p": 1.0
+      },
+      "span_mm": {
+        "mean": 0.3023202000000006,
+        "p95": 0.47460000000000235,
+        "p": 1.0
+      },
+      "at_least_3": {
+        "mean": 0.0792,
+        "p95": 1.0,
+        "p": 1.0
+      },
+      "at_least_4": {
+        "mean": 0.0,
+        "p95": 0.0,
+        "p": 1.0
+      },
+      "straightness_mean": {
+        "mean": 0.6666666666666666,
+        "p95": 1.0,
+        "p": 0.0025188916876574307
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "la prediction n'apporte rien -- lecture \u00ab defaut d'un millimetre \u00bb tenue"
+  },
+  {
+    "scan": "bande_09.json",
+    "slices": 5,
+    "cells": 15,
+    "predictive": {
+      "tracks": 12,
+      "longest": 3,
+      "span_mm": 0.0,
+      "at_least_3": 1,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": NaN,
+      "drift_mm_per_mm": 0.0
+    },
+    "fixed": {
+      "tracks": 12,
+      "longest": 3,
+      "span_mm": 0.0,
+      "at_least_3": 1,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": NaN,
+      "drift_mm_per_mm": 0.0
+    },
+    "null": {
+      "longest": {
+        "mean": 2.2806,
+        "p95": 3.0,
+        "p": 0.3033393321335733
+      },
+      "span_mm": {
+        "mean": 0.23786952000000006,
+        "p95": 0.4746000000000006,
+        "p": 1.0
+      },
+      "at_least_3": {
+        "mean": 0.3154,
+        "p95": 1.0,
+        "p": 0.3033393321335733
+      },
+      "at_least_4": {
+        "mean": 0.0,
+        "p95": 0.0,
+        "p": 1.0
+      },
+      "straightness_mean": {
+        "mean": 1.0,
+        "p95": 1.0,
+        "p": 0.004347826086956522
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "la prediction n'apporte rien -- lecture \u00ab defaut d'un millimetre \u00bb tenue"
+  },
+  {
+    "fisher": {
+      "bands": 10,
+      "chi2": 5.402521373229604,
+      "p": 0.9994968529880142,
+      "below_05": 0
+    }
+  }
+]
