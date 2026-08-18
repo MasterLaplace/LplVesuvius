@@ -361,3 +361,76 @@ saut de spire. C'est la tâche D, et `10` §5 dit ce qui la bloque (le maillage 
 de ce segment n'est pas dans notre jeu).
 
 **Coût total du calibrage et du verdict : 10 appels, ~34 000 jetons.**
+
+---
+
+## 11. Transporter le juge sur un rouleau sans vérité terrain — 2026-08-18
+
+Le calibrage tient sur `20230909121925` parce qu'un humain y a dit **où** est le
+texte. Sur Scroll 4 personne ne l'a dit, et c'est précisément la situation qu'il faut
+savoir traiter : un détecteur qui ne se juge que là où quelqu'un a déjà annoté ne se
+juge nulle part d'utile.
+
+### ⚠⚠ Les coordonnées de `TEXT_BANDS` / `BLANK_BANDS` ne se transportent PAS
+
+Ce sont des lignes mesurées sur un segment précis. Les appliquer ailleurs revient à
+**tirer des fenêtres au hasard en croyant tirer des témoins**. `--auto-bands` les
+choisit sur la sortie du détecteur lui-même, au seuil **logit > 0** — celui qui a donné
+l'AUC 0,925, et pas un autre : en inventer un ici ferait dépendre le choix des bandes
+d'un réglage que rien ne valide.
+
+⚠ **Et le mot « texte » devient un mensonge.** Sans étiquetage on ne sait pas qu'une
+bande porte du texte, seulement que le détecteur y annonce de l'encre. Le genre
+s'appelle **candidat**, et l'expérience teste alors : *le juge lit-il des lettres là où
+notre détecteur annonce de l'encre, et refuse-t-il là où il n'en annonce pas ?* C'est
+exactement la question quand on transporte un détecteur sur un rouleau qu'il n'a jamais
+vu — et elle n'a pas besoin de vérité terrain pour être posée.
+
+### 🎯 Le sélecteur retrouve la bande choisie à la main, et durcit une limite
+
+`--bands-only` montre ce qu'on soumettrait, **sans clé ni appel** :
+
+| bandes demandées | candidat | vierge |
+|---|---|---|
+| 1 | **3584** (13,91 %) | **6656** (1,14 %) |
+| 2 | + 9728 (12,43 %) | — |
+| 3 | + 1024 (9,46 %) | — |
+| 4 | + 8192 (8,17 %) | — |
+
+- ✅ La première bande candidate est **3584**, c'est-à-dire exactement
+  `TEXT_BANDS[0]`, choisie à la main sur l'étiquetage humain. Le choix automatique
+  **reproduit** le choix humain.
+- ⚠⚠ **Le segment n'a de la place que pour UNE bande vierge**, quel qu'en soit le
+  nombre demandé. `09` notait déjà que la seule zone franchement vierge fait ~2000
+  lignes et que les trois fenêtres retenues à la main **se recouvraient** ; la règle
+  « pas de recouvrement, 512 lignes d'écart » rend ce fait mesurable au lieu de le
+  laisser en note. Les trois « témoins » n'étaient pas trois observations.
+
+### ⚠ Un plafond de pureté, parce que la faute avait déjà été payée
+
+Sans plafond, demander trois bandes vierges en rend trois — à **1,14 %, 6,58 % et
+8,17 %** d'encre prédite. Les deux dernières portent **plus** de signal que la bande
+(7168, 1024) déjà listée puis retirée à la main après mesure à **3,75 %**. Un témoin où
+le détecteur trouve du signal n'est pas un témoin : chaque lecture correcte du modèle y
+compterait comme une fabrication.
+
+`--blank-ceiling` (défaut **0,02**) refuse d'en rendre plutôt que d'en rendre de faux,
+donc **les listes reviennent plus courtes que demandé** — ce qui est l'information, pas
+un défaut.
+
+⚠ Deux témoins hors ligne gardent ça (`tools/temoins.sh`, 14 contrôles) : le compteur
+du sélecteur doit **retrouver les 3,75 %** mesurés à la main sur (7168, 1024), et
+**relever le plafond à 0,10 doit rendre plus de bandes** — sans ce dernier, « une seule
+bande vierge » serait aussi ce que rendrait un sélecteur cassé.
+
+⚠ Un bug réel trouvé par ces témoins : la séparation était imposée à l'intérieur de
+chaque genre mais **pas entre les deux**. Une bande candidate recouvrant une bande
+vierge met la même image des deux côtés de la barre noire — la condition
+`candidat | vierge` n'oppose alors plus rien.
+
+```bash
+cd inference_xpu
+uv run python ../analysis/src/judge_api.py <prediction.npy> --bands-only
+uv run python ../analysis/src/judge_api.py <prediction.npy> --auto-bands \
+    --model gemini-2.5-flash --trials 1
+```
