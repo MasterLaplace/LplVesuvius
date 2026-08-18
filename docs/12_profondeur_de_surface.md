@@ -34,6 +34,21 @@ La première cause candidate à l'échec sur Scroll 4 était donc : *et si la su
 n'était pas dans la fenêtre lue ?* Elle se teste **sans rien télécharger** — la réponse
 est déjà dans les couches qu'on a.
 
+## 1bis. 🎯 Ce que ça donne, en une image
+
+![Deux profils de profondeur](images/profondeur_deux_cas.png)
+
+À gauche un segment de Scroll 1 : une courbe **unimodale propre**, pic à la couche 28,
+soit **32 µm** de la surface tracée. À droite un segment de Scroll 4 : le contraste est
+**maximal dès la première couche lue** et décline sans jamais remonter — pic au bord,
+**127 µm** d'écart. La feuille n'est pas là où la trace la place.
+
+⚠ Les deux panneaux lisent la **même fenêtre de couches** (15 à 40) et sont normalisés
+chacun dans sa propre pile : ce qui se compare est la **forme**, pas le niveau.
+
+`analysis/src/figure_profondeur.py` — tracé avec PIL, sans matplotlib (absent ici, et
+l'ajouter pour deux courbes ferait dépendre une figure d'une pile graphique entière).
+
 ## 2. La mesure
 
 `analysis/src/depth_profile.py`. Pour chaque couche, sur une fenêtre : l'**intensité
