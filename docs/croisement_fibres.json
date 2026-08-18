@@ -1,0 +1,74 @@
+[
+  {
+    "fichier": "fibres_scroll1.json",
+    "grandeur": "bascule_mediane_deg",
+    "n": 12,
+    "rho_croisements": -0.18880087435985166,
+    "p": 0.5567590089589075,
+    "rho_tours": -0.17482517482517487,
+    "rho_detectable": 0.732389290340833
+  },
+  {
+    "fichier": "fibres_scroll1.json",
+    "grandeur": "coherence_mediane",
+    "n": 12,
+    "rho_croisements": 0.35400163942472185,
+    "p": 0.2589267761870701,
+    "rho_tours": -0.21678321678321683,
+    "rho_detectable": 0.732389290340833
+  },
+  {
+    "fichier": "fibres_scroll1.json",
+    "grandeur": "desaccord_voisins_median_deg",
+    "n": 12,
+    "rho_croisements": 0.33040153012974044,
+    "p": 0.294215685053807,
+    "rho_tours": -0.4755244755244756,
+    "rho_detectable": 0.732389290340833
+  },
+  {
+    "fichier": "fibres_scroll1.json",
+    "grandeur": "part_bascule_sup_45",
+    "n": 12,
+    "rho_croisements": -0.18913181392033313,
+    "p": 0.5560548300565741,
+    "rho_tours": -0.5429080129622184,
+    "rho_detectable": 0.732389290340833
+  },
+  {
+    "fichier": "fibres_scroll1.json",
+    "grandeur": "part_voisins_sup_30",
+    "n": 12,
+    "rho_croisements": 0.1180005464749073,
+    "p": 0.7149321886602374,
+    "rho_tours": -0.25874125874125875,
+    "rho_detectable": 0.732389290340833
+  },
+  {
+    "fichier": "fibres_scroll1.json",
+    "grandeur": "utilisables",
+    "n": 12,
+    "rho_croisements": -0.3468644405749113,
+    "p": 0.26932633611035,
+    "rho_tours": -0.2007800501741213,
+    "rho_detectable": 0.732389290340833
+  },
+  {
+    "fichier": "fibres_scroll1.json",
+    "grandeur": "vides",
+    "n": 12,
+    "rho_croisements": 0.22348124025756871,
+    "p": 0.4850429164325091,
+    "rho_tours": 0.06501627617308359,
+    "rho_detectable": 0.732389290340833
+  },
+  {
+    "fichier": "fibres_scroll1.json",
+    "grandeur": "voisins_compares",
+    "n": 12,
+    "rho_croisements": -0.28766907361235516,
+    "p": 0.3645844971574095,
+    "rho_tours": -0.33608889678704473,
+    "rho_detectable": 0.732389290340833
+  }
+]

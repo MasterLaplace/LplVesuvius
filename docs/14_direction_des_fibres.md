@@ -82,18 +82,62 @@ d'aucune autre**, et la statistique rendait `NaN` sur **0 paire comparée** au l
 signaler qu'elle n'avait rien mesuré. Corrigé en échantillonnant des **amas de 2×2
 chunks** répartis : plusieurs mesures *locales* à plusieurs endroits.
 
-Premiers résultats, Scroll 1, volumes 2,4 µm :
+### Résultats sur 12 segments de Scroll 1 (volumes 2,4 µm)
 
 | segment | cohérence | désaccord médian entre voisins | > 30° |
 |---|---:|---:|---:|
 | `20231005123336` | 0,307 | **4,3°** | 18 % |
-| `20230702185753` | 0,291 | **7,7°** | 38 % |
+| `20230702185753` | 0,291 | 7,7° | 38 % |
+| `20231022170901` | 0,308 | 13,3° | 33 % |
+| `20231221180251` | 0,302 | 14,5° | 36 % |
+| `20231007101619` | 0,273 | 15,4° | 38 % |
+| `20231210121321` | 0,330 | 20,0° | 32 % |
+| `20231031143852` | 0,271 | 21,6° | 40 % |
+| `20231106155351` | 0,327 | 23,9° | 48 % |
+| `20230929220926` | 0,244 | 26,0° | 45 % |
+| `20231012184424` | 0,322 | 42,3° | 56 % |
+| `20231016151002` | 0,287 | **42,5°** | 67 % |
 
-## 5. ⏳ Ce qui reste
+L'étalement est large — **4,3° à 42,5°** sur un seul rouleau — ce qui est la première
+condition pour qu'une grandeur puisse discriminer quoi que ce soit.
 
-- la campagne sur les 80 segments de Scroll 1 (lancée) ;
-- ⭐ **le contraste avec Scroll 4**, dont `12` §10 dit que la trace n'est sur aucune
-  feuille : la prédiction, posée ici avant de la mesurer, est un **désaccord entre
-  voisins nettement plus élevé** ;
-- ⭐ croiser avec les **croisements publiés** de `windcheck` : le désaccord d'orientation
-  prédit-il ce qu'un recensement indépendant recense ?
+## 5. ⚠⚠ Le test contre un recensement indépendant : NON CONCLUANT, et c'est la puissance
+
+`windcheck` publie un compte de **croisements** par segment, obtenu par une méthode
+entièrement différente. C'est le seul contrôle disponible qui ne demande ni vérité
+terrain, ni encre, ni juge.
+
+| grandeur | rho ~ croisements | p |
+|---|---:|---:|
+| **désaccord médian entre voisins** | **+0,330** | 0,294 |
+| cohérence médiane | +0,354 | 0,259 |
+| part des voisins > 30° | +0,118 | 0,715 |
+| bascule médiane en profondeur | −0,189 | 0,557 |
+
+> ⚠⚠ **À n = 12, la mesure ne détecte qu'un rho ≥ 0,73 à 80 % de puissance.** Le +0,330
+> observé va dans le sens attendu et **le zéro n'est pas informatif** : il dit que
+> l'échantillon est trop petit, pas que l'effet est absent.
+
+C'est la règle nº 7 du dépôt (rapporter la puissance avec un zéro), et elle dit ici quoi
+faire plutôt que quoi conclure : pour qu'un rho de 0,33 soit détectable au même niveau
+il faut **n ≈ 70**. Le corpus en offre **80**, et la campagne complète est lancée
+(`tools/campagne_fibres.sh`, en file derrière celle de la profondeur — les deux lisent
+le même bucket, se les disputer allongerait les deux).
+
+⚠ Noter aussi : la **bascule en profondeur** ne corrèle avec rien (−0,189), ce qui est
+cohérent avec le §3 — elle ne mesure pas ce qu'elle prétendait.
+
+## 6. ⚠ Le contrôle Scroll 4 ne sépare pas non plus, pour l'instant
+
+Premier segment de PHerc1667 : désaccord **38,7°**, > 30° sur 62 % des paires. C'est
+haut, mais **dans l'intervalle de Scroll 1** (4,3–42,5°). Un segment ne tranche rien
+contre une distribution aussi étalée ; la campagne dira si la *distribution* de Scroll 4
+est décalée.
+
+## 7. ⏳ Ce qui reste
+
+- la campagne sur les 80 segments de Scroll 1 (**en file**), qui donnera la puissance ;
+- ⭐ **le contraste avec Scroll 4** sur une distribution et non un point ;
+- ⚠ la bascule recto/verso reste **non expliquée** : trois causes candidates (contraste
+  entre plis trop faible à 2,4 µm, fenêtre mal centrée, ou fenêtre plus courte qu'une
+  épaisseur de feuille à 1,129 µm) et aucune départagée.
