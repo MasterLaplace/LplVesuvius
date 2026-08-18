@@ -144,6 +144,14 @@ RETRY_CODES = (429, 503)
 Traiter un 429 comme un echec ferait passer un quota momentane pour un verdict, et
 c'est exactement la faute que ce depot a deja payee ailleurs sur un 503 OAI-PMH."""
 
+CALIBRATED_BLANK_CEILING = 0.02
+"""Le plafond sous lequel une bande merite le mot « vierge ».
+
+Ancre sur une mesure et non sur un gout : la bande retenue a la main porte 1,14 % et
+celle retiree apres verification 3,75 %. Au-dessus, l'appeler temoin serait reprendre
+exactement la faute deja payee.
+"""
+
 REFUSAL = "AUCUNE LETTRE VISIBLE"
 """La reponse attendue sur un panneau vierge, imposee mot pour mot par le prompt.
 
@@ -376,10 +384,16 @@ def main() -> int:
         return 2
 
     scores = np.load(args.prediction)
+    control_kind = "vierge"
     if args.auto_bands:
         try:
             text_bands, blank_bands, fractions = choose_bands(
-                scores, args.band_height, max(args.trials, 2), args.band_gap,
+                # ⚠ EXACTEMENT le nombre demande, et non `max(trials, 2)` : demander
+                # deux bandes la ou une seule est admissible en rend ZERO, parce que la
+                # regle de separation elimine la seconde et le plafond la premiere. Le
+                # symptome est un pool vide qui ressemble a « ce segment n'a aucun
+                # temoin » alors qu'il en a un.
+                scores, args.band_height, args.trials, args.band_gap,
                 args.blank_ceiling, args.candidate_floor)
         except JudgeError as error:
             print(f"erreur : {error}", file=sys.stderr)
@@ -390,12 +404,27 @@ def main() -> int:
             joined = ", ".join(f"ligne {top} ({v * 100:.2f} %)"
                                for (top, _), v in zip(bands, values))
             print(f"  {kind:9} {joined}")
-        # ⚠ Si le detecteur annonce autant d'encre dans les bandes « vierges » que
-        # dans les « candidates », l'experience n'a pas de contraste a mesurer et le
-        # dire vaut mieux que de la lancer.
-        if min(fractions["candidat"]) - max(fractions["vierge"]) < 0.02:
+
+        # ⚠⚠ Si le plafond a ete releve au-dessus du calibrage, le mot « vierge » ne
+        # s'applique plus et le rapport doit le DIRE, pas le laisser deviner. C'est la
+        # seule protection qui tienne : un fichier de resultats se relit des mois plus
+        # tard, sans la ligne de commande qui l'a produit.
+        if args.blank_ceiling > CALIBRATED_BLANK_CEILING:
+            control_kind = f"le plus faible disponible (plafond releve a {args.blank_ceiling:.0%})"
+            print(f"⚠⚠ AUCUN TEMOIN VIERGE : le plafond a ete releve a "
+                  f"{args.blank_ceiling:.0%}. Le genre de controle n'est PAS « vierge » "
+                  f"mais « {control_kind} », et le rapport le porte.", file=sys.stderr)
+        if blank_bands and fractions["vierge"] and (
+                min(fractions["candidat"]) - max(fractions["vierge"]) < 0.02):
+            # ⚠ Si le detecteur annonce autant d'encre des deux cotes, l'experience
+            # n'a pas de contraste a mesurer, et le dire vaut mieux que la lancer.
             print("⚠ contraste faible entre les deux genres : le juge ne pourra pas "
                   "separer ce que le detecteur ne separe pas", file=sys.stderr)
+        if not blank_bands:
+            print("erreur : aucune bande ne passe sous le plafond de purete. "
+                  "Ce segment n'offre AUCUN temoin -- relever --blank-ceiling en "
+                  "connaissance de cause, ou juger ailleurs.", file=sys.stderr)
+            return 2
     else:
         text_bands, blank_bands = TEXT_BANDS, BLANK_BANDS
     if args.trials > min(len(text_bands), len(blank_bands)):
@@ -465,7 +494,15 @@ def main() -> int:
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(
-        {"model": args.model, "trials_per_condition": args.trials, "records": records},
+        {"model": args.model, "trials_per_condition": args.trials,
+         "prediction": str(args.prediction),
+         # ⚠ Le genre du controle voyage AVEC le resultat : un fichier se relit des
+         # mois plus tard, sans la ligne de commande qui l'a produit, et « vierge »
+         # y serait lu comme un temoin verifie.
+         "control_kind": control_kind,
+         "blank_ceiling": args.blank_ceiling,
+         "bands": {"candidat": text_bands, "controle": blank_bands},
+         "records": records},
         indent=2, ensure_ascii=False) + "\n")
 
     print()

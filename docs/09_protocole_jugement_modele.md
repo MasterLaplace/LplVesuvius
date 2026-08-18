@@ -434,3 +434,96 @@ uv run python ../analysis/src/judge_api.py <prediction.npy> --bands-only
 uv run python ../analysis/src/judge_api.py <prediction.npy> --auto-bands \
     --model gemini-2.5-flash --trials 1
 ```
+
+---
+
+## 12. 🎯 Le verdict sur Scroll 4 : le détecteur ne transporte PAS — 2026-08-18
+
+Inférence complète du segment `20231111135340`, région 6038 × 8000, **107 730
+fenêtres en 42,6 min**, 48,1 M pixels couverts. Puis le juge calibré du §9, sur les
+bandes que le détecteur lui-même désigne.
+
+### ⚠ Scroll 4 n'offre AUCUN témoin vierge
+
+| | Scroll 1 | Scroll 4 |
+|---|---:|---:|
+| encre prédite globale | 7,34 % | **9,71 %** |
+| logit médian | −1,130 | **−1,385** |
+| logit p95 | +0,826 | **+0,610** |
+| bande la plus pauvre (1024 lignes) | **1,14 %** | **4,59 %** |
+| bande la plus riche | 13,91 % | 17,38 % |
+
+Le modèle est **moins confiant** sur Scroll 4 — médiane et p95 tous deux plus bas — et
+y marque pourtant **plus** de pixels au-dessus de zéro. C'est la signature d'une
+distribution **aplatie**, pas d'un détecteur qui trouve davantage.
+
+⚠ Conséquence directe : **aucune fenêtre de 1024 lignes ne passe sous 2 %**, donc la
+condition décisive `vierge|vierge` n'a pas de témoin. Le plafond a été relevé à 5 % **en
+le disant** — le fichier de résultats porte
+`control_kind: "le plus faible disponible (plafond relevé à 5%)"`, parce qu'un résultat
+se relit des mois plus tard sans la ligne de commande qui l'a produit.
+
+### 🎯 Ce que le juge lit
+
+| condition | panneau candidat | contrôle |
+|---|---|---|
+| candidat \| contrôle | **1 glyphe** (Ο, conf. 7), lisibilité **2** | refus |
+| contrôle \| candidat | **2 glyphes** (Θ conf. 7, Μ conf. 6), lisibilité **3** | refus |
+| contrôle \| contrôle | — | **refus des deux côtés** |
+| candidat \| candidat | **0 glyphe**, lisibilité **1** | **0 glyphe**, lisibilité **1** |
+
+Rappel du calibrage (§9), sur Scroll 1 : **vierge 0–1, texte 3–6, sans chevauchement**.
+
+> **Scroll 4 tombe à 1–3.** C'est-à-dire dans la plage du vierge et au plancher de
+> celle du texte. **Il ne sépare pas.** Le détecteur entraîné sur Scroll 1 ne produit
+> pas, sur ce segment de Scroll 4, quelque chose qu'un lecteur calibré identifie comme
+> des lettres.
+
+✅ Le contrôle a fonctionné malgré tout : la bande à 4,59 % est **refusée trois fois sur
+trois**. La crainte « pas de vrai témoin » ne mord pas ici — même la bande la plus
+chargée du contrôle se lit comme vide.
+
+### ⚠⚠ Et une limite du PROTOCOLE, mesurée pour la première fois
+
+Le panneau candidat est **exactement la même image** dans les trois conditions où il
+apparaît. Le juge en a rendu **1 glyphe, puis 2, puis 0** — et pas les mêmes glyphes
+(Ο une fois, Θ+Μ une autre, rien deux fois). **À température zéro.**
+
+> **La lecture d'un panneau dépend de son voisin.** Le calibrage ne pouvait pas le
+> voir : il ne montrait jamais le même panneau dans deux compagnies différentes.
+
+C'est en soi l'argument le plus fort du lot : un panneau qui porterait vraiment un Ο le
+rendrait à chaque fois. Trois lectures incompatibles de la même image disent que le
+juge **cherche** des formes dans du bruit structuré, et qu'il en trouve autant que le
+contexte l'y invite. ⚠ À porter dans le protocole : toute lecture isolée à lisibilité
+≤ 3 doit être **répétée en compagnie différente** avant d'être retenue.
+
+### Ce que ça ne dit PAS
+
+⚠ **Ce n'est pas un verdict sur le déroulement de Scroll 4**, et la distinction est
+celle de l'objectif (§1 de la passation) : l'encre est **l'instrument**, pas l'ouvrage.
+Ce qui est établi, c'est que **l'instrument ne se transporte pas** sur ce segment. Le
+rouleau peut être parfaitement déroulé et l'instrument aveugle.
+
+Causes candidates, non départagées ici :
+
+1. ⭐ **La tranche de couches.** GP-2023 lit les couches 15 à 40 d'une pile ; rien ne
+   garantit que la surface tombe à la même profondeur sur Scroll 4. **C'est le moins
+   cher à tester** — relancer sur une autre plage.
+2. Campagne de scan différente (énergie, résolution).
+3. Décalage de domaine réel (contraste de l'encre).
+4. La région choisie (`--left 17000`, 8000 de large) peut ne pas porter de texte.
+
+### Reproduire
+
+```bash
+cd inference_xpu
+uv run python src/infer_ink.py ../data/layers/scroll4_20231111135340 \
+    --model ../data/models/timesformer_GP_scroll1 \
+    --top 0 --left 17000 --height 6038 --width 8000 --stride 21 --device xpu \
+    --out ../data/out/ink_scroll4.npy
+uv run python ../analysis/src/judge_api.py ../data/out/ink_scroll4.npy --bands-only
+set -a && . ../.env && set +a
+uv run python ../analysis/src/judge_api.py ../data/out/ink_scroll4.npy --auto-bands \
+    --blank-ceiling 0.05 --model gemini-3.5-flash --trials 1 --out ../docs/juge_scroll4.json
+```
