@@ -151,7 +151,7 @@ transaction sur un nom inconnu.
 8. ⚠ **La migration n'est PAS la règle.** Une seconde bande au niveau 0 (z 3188→3988)
     a ses sites **stationnaires** : piste la plus longue plate à 0,47 mm, p = 0,74. Le
     site à z ≈ 7000 est particulier.
-9bis. ⭐⭐ **Un chunk Zarr = une colonne de profondeur entière, pour 1,78 Mo et 1,03 s.**
+9. ⭐⭐ **Un chunk Zarr = une colonne de profondeur entière, pour 1,78 Mo et 1,03 s.**
    Les volumes de surface sont publiés en OME-Zarr non compressé, chunks
    `[109, 128, 128]`. Une campagne qui demandait **32 Go par segment** en demande
    quelques mégaoctets. Conséquences : **81 segments** de Scroll 1 avec volume de
@@ -159,7 +159,7 @@ transaction sur un nom inconnu.
    43 min d'inférence), **3 campagnes** de scan (45,5 / 2,4 / 1,13 µm) dont 37 segments
    les ont toutes, et **aucune troncature** du profil. Ça débloque `12` §5 *et* `06` §3.6.
 
-9. ⭐⭐ **La profondeur de surface** (`12`) — une mesure de **qualité de tracé** qui ne
+10. ⭐⭐ **La profondeur de surface** (`12`) — une mesure de **qualité de tracé** qui ne
     demande **ni vérité terrain, ni modèle, ni juge**. Part des fenêtres dont le pic de
     contraste tombe dans le tiers central des couches lues : Scroll 1 **63 %** et
     **50 %**, Scroll 4 **7 %** (écart interquartile 4,0 / 11,5 contre **22,0**).
@@ -168,12 +168,12 @@ transaction sur un nom inconnu.
 
 ### Encre — l'instrument
 
-10. **AUC 0,925** sur 44,7 M de pixels d'un segment entier, contrôle mélangé à **0,500**.
+11. **AUC 0,925** sur 44,7 M de pixels d'un segment entier, contrôle mélangé à **0,500**.
    9,2 cm de grec lisible. ⚠ Orientation de lecture = **rotation 270°**.
-11. **Juge de langue calibré** : **15/16, zéro fabrication**, lisibilité séparant sans
+12. **Juge de langue calibré** : **15/16, zéro fabrication**, lisibilité séparant sans
    chevauchement le vierge (0–1) du texte (3–6). Protocole : `data/juge/PROTOCOLE.md`.
 
-12. ⚠⚠ **Rien de lisible sur Scroll 4, et la cause est EN AMONT du modèle** (`09` §12,
+13. ⚠⚠ **Rien de lisible sur Scroll 4, et la cause est EN AMONT du modèle** (`09` §12,
    `12`). Deux passes complètes (couches 15–40 puis 0–25, ~43 min chacune). Le juge
    calibré : lisibilité **1–3** sur la première, **refus de tous les panneaux** sur la
    seconde, quand le calibrage sépare vierge **0–1** de texte **3–6**. Recentrer les
@@ -183,6 +183,8 @@ transaction sur un nom inconnu.
    surface ne contient pas. ⚠ Limite du protocole mesurée au passage : **la lecture
    d'un panneau dépend de son voisin** (même image, 1 puis 2 puis 0 glyphes, à
    température zéro).
+
+### La jonction, et le domaine de définition
 
 14. ⚠⚠ **La métrique de proximité a un DOMAINE DE DÉFINITION** (`07` §7). Elle exige une
    trace qui **repasse au-dessus d'elle-même** : sur les 53 traces de Scroll 5, **44
@@ -197,9 +199,7 @@ transaction sur un nom inconnu.
    0,779 de 0,15 à 0,40, un facteur **2,7**, puis effondrement. Un réglage sur-ajusté
    ferait un **pic**.
 
-### La jonction — et c'est un NON
-
-13. ⚠⚠ **La proximité géométrique ne prédit PAS la lisibilité.** rho **+0,019** à
+16. ⚠⚠ **La proximité géométrique ne prédit PAS la lisibilité.** rho **+0,019** à
    n = 89 tuiles (contrôle plat), et à ce n la mesure détecterait un rho de 0,3.
    La métrique de `07` corrèle avec les croisements publiés (+0,77) mais pas avec le
    résultat : **elle mesure un défaut de la TRACE, pas du RÉSULTAT**. Elle reste un
