@@ -1,0 +1,10 @@
+{
+  "zarr": "PHerc0211/volumes/20250821151803-9.362um-1.2m-113keV-masked.zarr",
+  "level": 1,
+  "voxel_um": 18.724,
+  "chunks": 20,
+  "d_prime_median": 1.5521817207336426,
+  "d_prime_p10": 1.1285999238491058,
+  "d_prime_min": 0.8851707577705383,
+  "part_sous_1": 0.05
+}
