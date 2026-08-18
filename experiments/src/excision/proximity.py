@@ -138,8 +138,17 @@ def main() -> int:
         help="ecart minimal en colonnes pour dire « non adjacent » (defaut: 200)",
     )
     parser.add_argument(
-        "--search-radius", type=float, default=80.0,
-        help="rayon de recherche 3D, en voxels (defaut: 80)",
+        "--sheet-pitch-um", type=float, default=142.8,
+        help="pas inter-feuilles en micrometres (defaut: 142,8, MESURE sur PHerc0172, "
+             "cv 1,8 %%). Le rayon de recherche en est derive : c'est la seule facon "
+             "que le parametre veuille dire la meme chose d'une campagne de scan a "
+             "l'autre",
+    )
+    parser.add_argument(
+        "--search-radius", type=float, default=0.0,
+        help="rayon de recherche 3D en VOXELS. 0 = derive de --sheet-pitch-um et "
+             "--voxel-um. ⚠ Ne le poser a la main que pour un balayage : la valeur "
+             "physique est justifiee, une valeur en voxels ne l'est pas",
     )
     parser.add_argument(
         "--window", type=int, default=150,
@@ -156,6 +165,18 @@ def main() -> int:
     except ProximityError as error:
         print(f"erreur : {error}", file=sys.stderr)
         return 2
+
+    # ⚠⚠ LE RAYON VIENT DE LA PHYSIQUE, PAS D'UN BALAYAGE. La valeur en vigueur
+    # jusqu'au 2026-08-18 etait 80 voxels, soit 633 µm a 7,91 µm et 749 µm a 9,362 µm --
+    # c'est-a-dire PLUSIEURS ecarts inter-feuilles. Un tel rayon trouve la spire
+    # voisine, qui est de la geometrie parfaitement normale, et noie l'anomalie dedans.
+    # Mesure (`07` §9) : a 749 µm, rho +0,284 sur PHerc0139 ; a 142,8 µm, rho +0,666.
+    # Et sur Scroll 1, le rayon issu du pas physique (+0,840) bat le meilleur rayon
+    # trouve par balayage (+0,829) -- donc ce n'est pas un reglage.
+    if args.search_radius <= 0.0:
+        args.search_radius = args.sheet_pitch_um / args.voxel_um
+        print(f"rayon derive : {args.sheet_pitch_um:.1f} µm / {args.voxel_um:.3f} µm "
+              f"= {args.search_radius:.1f} voxels", file=sys.stderr)
 
     generator = np.random.default_rng(args.seed)
     take = min(args.sample, points.shape[0])

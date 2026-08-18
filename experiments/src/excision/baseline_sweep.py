@@ -141,7 +141,13 @@ def main() -> int:
     parser.add_argument("out", type=Path, help="sortie JSON Lines")
     parser.add_argument("--sample", type=int, default=20000)
     parser.add_argument("--apart", type=int, default=200)
-    parser.add_argument("--search-radius", type=float, default=80.0)
+    parser.add_argument("--voxel-um", type=float, default=7.91,
+                        help="taille du voxel de la campagne de scan mesuree")
+    parser.add_argument("--sheet-pitch-um", type=float, default=142.8,
+                        help="pas inter-feuilles MESURE (`11` §3, cv 1,8 %%) ; le rayon "
+                             "en derive")
+    parser.add_argument("--search-radius", type=float, default=0.0,
+                        help="0 = derive du pas et du voxel. Ne le poser qu'en balayage")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--limit", type=int, default=0, help="0 = toutes")
     parser.add_argument("--variante", default="",
@@ -154,6 +160,14 @@ def main() -> int:
     # le repertoire porte le nom de la trace ET celui du volume sur lequel elle a ete
     # tracee. Chercher `mesh/x.tif` rendait « plan absent » sur les 55 traces, ce qui
     # ressemble a un corpus vide et n'est qu'un chemin devine.
+    # ⚠ Meme regle que `proximity.py` : un rayon en voxels ne veut pas dire la meme
+    # chose d'une campagne a l'autre, et c'est ce qui faisait passer une correlation de
+    # +0,666 a +0,284 sur le meme corpus.
+    if args.search_radius <= 0.0:
+        args.search_radius = args.sheet_pitch_um / args.voxel_um
+        print(f"rayon derive : {args.search_radius:.1f} voxels "
+              f"({args.sheet_pitch_um:.1f} µm / {args.voxel_um:.3f} µm)")
+
     traces = []
     for entry in sorted(args.root.iterdir()):
         if not entry.is_dir():
