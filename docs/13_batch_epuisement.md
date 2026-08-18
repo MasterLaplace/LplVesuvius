@@ -19,11 +19,11 @@ Ferme `07` §5 (« un seul rouleau ») et `06` §C.
 
 | # | quoi | état |
 |---|---|---|
-| A1 | métrique sur les **53 traces de Scroll 5**, déjà sur disque | 🔄 |
-| A2 | corréler aux croisements publiés de Scroll 5 | ⏳ |
-| A3 | le **confond longueur/qualité** : `05` dit qu'il existe sur Scroll 5 et pas sur Scroll 1 — re-mesurer | ⏳ |
-| A4 | le **seuil arbitraire** de `07` §5 : trancher entre « le plateau 0,15–0,40 EST la justification » et une grandeur sans seuil | ⏳ |
-| A5 | les 3 corpus restants de l'index — PHerc0139 (38), PHerc1667 (20), PHerc0814 (13) | ⏳ |
+| A1 | métrique sur les **53 traces de Scroll 5** | ✅ **44 sur 53 rendent ZÉRO cellule** — voir A2 |
+| A2 | corréler aux croisements publiés de Scroll 5 | ✅ **la métrique est INAPPLICABLE**, pas moins bonne : elle exige une trace qui se recouvre, et 44 traces couvrent ≤ 1 tour. Les 9 mesurables sont 9 morceaux du **même** segment, donc n = 1. `07` §7 |
+| A3 | le **confond longueur/qualité** de `05` | ✅ **expliqué** : sur Scroll 5 seules les traces longues sont mesurables, donc toute corrélation y est confondue **par construction** |
+| A4 | le **seuil arbitraire** de `07` §5 | ✅ **tranché** (`07` §8) : aucune grandeur sans seuil ne l'égale (`shortfall` +0,340, `ratio_p5` −0,512 contre **+0,769**) — le signal EST dans la queue. Et le plateau tient de 0,15 à 0,40, un facteur **2,7** sans que rho bouge |
+| A5 | les 3 corpus restants — PHerc0139 (38), PHerc1667 (20), PHerc0814 (13) | 🔄 téléchargement (`tools/fetch_traces.py`). ⭐ Majoritairement **> 1 tour**, donc mesurables — c'est là qu'est le vrai second rouleau |
 
 ## Voie B — la profondeur de surface, de l'anecdote à l'instrument
 
@@ -31,10 +31,10 @@ Ferme `12` §5 (« trois segments, deux rouleaux, ce n'est pas un corpus »).
 
 | # | quoi | état |
 |---|---|---|
-| B1 | ⚠ le **sous-échantillonnage des couches** change-t-il le verdict ? Sans lui, une pile = 32 Go et une population est hors de portée | 🔄 |
-| B2 | télécharger ~8–10 piles, sous-échantillonnées si B1 le permet | ⏳ |
-| B3 | mesurer — ⚠ **prédiction posée d'avance** : *sous ~20 % de fenêtres au tiers central, pas d'encre lisible* | ⏳ |
-| B4 | croiser avec les **croisements publiés** : la profondeur prédit-elle ce que `windcheck` recense ? | ⏳ |
+| B1 | le **sous-échantillonnage des couches** | ✅ **sans objet** — les volumes de surface sont en **Zarr**, un chunk = une colonne de profondeur entière pour **1,78 Mo et 1,03 s**. Le problème du téléchargement disparaît |
+| B2 | trouver le corpus | ✅ **81 segments** de Scroll 1 avec volume de surface, **80 avec une carte d'encre publiée** (récupérées), et **3 campagnes** : 45,5 / 2,4 / 1,13 µm |
+| B3 | mesurer les 80 segments | 🔄 en cours. ⚠⚠ **L'instrument a été corrigé deux fois** (`12` §10) : l'intensité localise, le contraste non ; et l'écart se mesure **à la trace en µm**, pas en « tiers central » d'une fenêtre non centrée. Prédiction **reposée** : *écart médian > ~50 µm ⇒ pas d'encre lisible* |
+| B4 | croiser avec les cartes d'encre **et** les croisements publiés | ⏳ les deux jeux sont là |
 
 ## Voie C — la direction des fibres ⭐ valeur la plus haute
 
@@ -42,9 +42,9 @@ Ferme `12` §5 (« trois segments, deux rouleaux, ce n'est pas un corpus »).
 
 | # | quoi | état |
 |---|---|---|
-| C1 | **tenseur de structure** sur une couche → orientation dominante locale | ⏳ |
-| C2 | **cohérence spatiale** de l'orientation = second instrument de qualité de trace, indépendant de la profondeur | ⏳ |
-| C3 | ⭐ le contrôle : les **deux instruments doivent s'accorder** sur les 3 segments connus. S'ils s'accordent, validation mutuelle ; sinon, c'est informatif aussi | ⏳ |
+| C1 | **tenseur de structure** → orientation locale | ✅ fait (`14`), cohérence jusqu'à **0,64** |
+| C2 | **cohérence spatiale** de l'orientation | 🔄 campagne lancée. ⚠ La bascule recto/verso **ne se voit pas** (angle constant à 90–97° sur 109 couches) → pivot vers la dispersion entre **voisins** |
+| C3 | ⭐ les **deux instruments s'accordent-ils** ? | ⏳ prédiction posée : Scroll 4, dont `12` dit que la trace n'est sur aucune feuille, doit montrer un désaccord d'orientation nettement plus élevé |
 | C4 | une **discontinuité** d'orientation marque-t-elle un saut de feuille ? | ⏳ |
 
 ## Voie D — retrouver la feuille de Scroll 4
@@ -68,7 +68,7 @@ Ferme `12` §5 (« trois segments, deux rouleaux, ce n'est pas un corpus »).
 
 | # | quoi | état |
 |---|---|---|
-| F1 | `10` §5 dit « bloqué sur le maillage » — **périmé**, la tâche D est faite | ⏳ |
-| F2 | `06` §7 C2 « le suivi PAS ENCORE » — la méthode du doublement d'écart l'a remplacé | ⏳ |
-| F3 | `06` §B « contrôle en aveugle » — le calibrage de `09` §9 l'a fait, à relier | ⏳ |
-| F4 | `06` §C « un second rouleau » — Scroll 4 a répondu, négativement, avec la cause | ⏳ |
+| F1 | `10` §5 « bloqué sur le maillage » | ✅ corrigé — c'était une prudence mal placée, pas un fait matériel |
+| F2 | `06` §7 C2 « le suivi PAS ENCORE » | ✅ **clos** : le suivi n'a pas été réparé, il a été **remplacé** |
+| F3 | `06` §B « contrôle en aveugle » | ✅ **fait le 2026-08-17** (`09` §9), + la limite du voisin (`09` §12) |
+| F4 | `06` §C « un second rouleau » | ✅ **répondu deux fois** : encre (cause en amont) et géométrie (métrique inapplicable) |
