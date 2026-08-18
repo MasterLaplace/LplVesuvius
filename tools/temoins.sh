@@ -115,6 +115,38 @@ print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
 cd "$ROOT/inference_xpu" || exit 2
+run "pile : sommet ou borne"   uv run python - <<'PY'
+import sys, numpy as np; sys.path.insert(0,'../analysis/src')
+from stack_structure import describe
+n=0
+def ck(c):
+    global n
+    assert c; n+=1
+L=list(range(65))
+# Une pile ou la matiere PIQUE a la couche 26 : le sommet est reel, la distance aussi.
+c=[np.exp(-((i-26)/6.0)**2) for i in L]
+r=describe(L,c,c)
+ck(r['sommets']==[26]); ck(r['distance_au_sommet']==6); ck(not r['distance_est_une_borne'])
+# ⚠ LA regle qui compte : une pile dont le contraste est MAXIMAL au bord n'a pas de
+# sommet -- c'est le flanc d'un sommet situe dehors. Rendre 0 comme distance ferait
+# passer « je ne sais pas ou est la feuille » pour « la trace est dessus ».
+c=[1.0-i/64.0 for i in L]
+r=describe(L,c,c)
+ck(r['sommets']==[]); ck(r['distance_est_une_borne']); ck(r['distance_au_sommet']==32)
+ck(r['monte_encore_au_bord_bas'] and not r['monte_encore_au_bord_haut'])
+# Deux blocs, coeurs hors pile des deux cotes : le cas Scroll 4.
+c=[max(1.0-i/40.0, (i-46)/18.0 if i>46 else 0.0) for i in L]
+r=describe(L,c,c)
+ck(r['sommets']==[]); ck(r['distance_est_une_borne'])
+ck(r['monte_encore_au_bord_bas'] and r['monte_encore_au_bord_haut'])
+# Une pile qui ne contient pas la couche 32 doit REFUSER, pas deviner.
+try:
+    describe(list(range(15,31)),[1.0]*16,[1.0]*16); ck(False)
+except ValueError:
+    ck(True)
+print(f'ALL PASS (0 failures, {n} checks)')
+PY
+
 run "juge : choix des bandes" uv run python - <<'PY'
 import sys, pathlib, numpy as np; sys.path.insert(0,'../analysis/src')
 from judge_api import choose_bands, TEXT_BANDS
