@@ -1,5 +1,9 @@
 # La profondeur de surface : un instrument de tracé sans vérité terrain
 
+> ⚠⚠ **L'instrument a changé deux fois. Lire le §10 en premier** — il donne la version
+> courante et dit ce que les §1 à §9 avaient de faux. Le reste est conservé parce que
+> la trace des corrections vaut plus que la propreté du récit.
+
 2026-08-18. Né d'une enquête sur l'échec du détecteur d'encre sur Scroll 4 (`09` §12),
 et devenu autre chose que ce qu'il cherchait.
 
@@ -253,3 +257,100 @@ uv run python ../analysis/src/depth_profile.py ../data/layers/<a> ../data/layers
     --grid --size 512 --step 1024 --from-layer 15 --to-layer 40 \
     --out ../docs/profil_grille.json
 ```
+
+
+---
+
+## 10. ⚠⚠ L'instrument corrigé — 2026-08-18, seconde moitié
+
+Deux défauts trouvés en portant la mesure sur un autre type de volume. Aucun n'a été
+trouvé en relisant le code.
+
+### Défaut 1 — le contraste ne localise pas la matière
+
+Jusqu'ici le pic était celui du **contraste local** (écart-type d'un passe-haut 3×3).
+Sur les piles à 7,91 µm, contraste et intensité piquent au même endroit, donc rien ne
+distinguait les deux. Sur un volume de surface à **2,4 µm**, la courbe moyenne de
+contraste est un **U** :
+
+```
+couche    0   →  0,648      maximal
+couche   36   →  0,418
+couche   63   →  0,254      minimal, DANS la feuille
+couche  108   →  0,570      maximal
+```
+
+pendant que l'**intensité** pique franchement à la couche **36**. Un passe-haut suit
+les **interfaces et le bruit** ; à 2,4 µm l'intérieur d'une feuille est un bloc dense
+assez uniforme et les bords de pile tombent dans les interstices. À 7,91 µm la
+distinction ne se voyait pas.
+
+> **L'intensité est le localisateur ; le contraste ne l'est pas.**
+
+⚠ Trouvé en **affichant la courbe** au lieu de faire confiance à son argmax. Les deux
+courbes sont désormais rapportées côte à côte, et ce n'est pas un détail d'affichage :
+c'est ce qui empêche de relire l'une pour l'autre.
+
+Effet sur les chiffres, mêmes segments, même balayage :
+
+| segment | contraste, tiers central | **intensité, tiers central** |
+|---|---:|---:|
+| `20231022170901` | 63 % | **96 %** |
+| `20230909121925` (AUC 0,925) | 50 % | **80 %** |
+| `scroll4_…` | 7 % | **19 %** |
+
+La séparation passe de « 50–63 contre 7 » à « **80–96 contre 19** ».
+
+### Défaut 2 — « le tiers central » ne veut pas dire la même chose partout
+
+Le tiers central se rapporte à **la fenêtre lue**. Or la fenêtre 15–40 d'une pile de 65
+n'est **pas centrée sur la couche 32**, qui est la surface tracée — alors que sur un
+volume de surface, elle l'est. Les deux mesures ne portaient donc pas sur la même chose.
+
+**Remplacé par une grandeur sans convention : l'écart entre le pic de matière et la
+surface tracée, en micromètres.**
+
+| segment | écart médian | p90 |
+|---|---:|---:|
+| `20231022170901` (Scroll 1) | **24 µm** | 40 µm |
+| `20230909121925` (AUC 0,925) | **32 µm** | 63 µm |
+| `scroll4_…` | **63 µm** | **134 µm** |
+
+⚠ **Ces trois chiffres sont des bornes INFÉRIEURES** : la fenêtre 15–40 tronque, donc un
+pic réellement hors fenêtre est écrêté à son bord. 37 % des fenêtres de Scroll 4 sont
+dans ce cas, donc son écart réel est plus grand que 63 µm.
+
+### ⭐⭐ Et le vrai débloquage : lire le profil à distance
+
+Les volumes de surface sont publiés en **OME-Zarr** :
+
+```
+shape [109, 21380, 115820]   chunks [109, 128, 128]   dtype u1, SANS compression
+```
+
+**Un chunk contient toute la colonne de profondeur d'une fenêtre de 128×128.** C'est
+exactement l'unité dont le profil a besoin. Mesuré : **1,78 Mo et 1,03 s** par fenêtre,
+contre 32 Go pour télécharger une pile.
+
+Trois conséquences, et la troisième est la plus importante :
+
+1. Une population de segments devient une affaire de minutes, pas de jours.
+2. **Aucune troncature** : la colonne est entière, donc l'écart à la trace est une
+   mesure et non une borne.
+3. Ces volumes sont ceux de la campagne **ESRF à 2,4 µm** — donc `06` §3.6 (« effet de
+   la campagne de scan ») se mesure par la même occasion, sur les mêmes segments.
+
+`analysis/src/zarr_depth.py`, `tools/lister_volumes_surface.sh`.
+
+### ⚠ La prédiction est REPOSÉE, parce que changer de statistique l'invalide
+
+J'avais écrit : *« sous ~20 % de fenêtres au tiers central, pas d'encre lisible »* — pour
+la statistique de **contraste**. Elle ne s'applique plus. La nouvelle, posée **avant**
+la campagne sur corpus :
+
+> **Un segment dont l'écart médian entre le pic de matière et la surface tracée dépasse
+> ~50 µm ne donnera pas d'encre lisible.**
+
+⚠ Le seuil est le **milieu de l'intervalle observé** entre les deux groupes connus
+(24–32 µm contre ≥63 µm). C'est le choix le moins arbitraire disponible à n = 3, et il
+est provisoire par construction. Il est écrit ici pour pouvoir échouer.

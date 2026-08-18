@@ -87,7 +87,8 @@ def profile(folder: Path, top: int, left: int, size: int,
 
 
 def grid_profiles(folder: Path, size: int, step: int, floor: float,
-                  first: int = 0, last: int = 10**9, layer_step: int = 1) -> dict:
+                  first: int = 0, last: int = 10**9, layer_step: int = 1,
+                  traced: int = 32, voxel_um: float = 7.91) -> dict:
     """Le pic de contraste tombe-t-il au MEME endroit partout sur le segment ?
 
     ⚠⚠ **C'est une mesure de qualite de TRACE, et elle ne demande ni verite terrain, ni
@@ -122,6 +123,7 @@ def grid_profiles(folder: Path, size: int, step: int, floor: float,
         raise RuntimeError(f"{rows}x{cols} : trop petit pour des fenetres de {size}")
 
     contrast = np.zeros((len(files), len(windows)))
+    density = np.zeros((len(files), len(windows)))
     peak_value = np.zeros(len(windows))
     for depth, path in enumerate(files):
         with tifffile.TiffFile(path) as handle:
@@ -131,11 +133,22 @@ def grid_profiles(folder: Path, size: int, step: int, floor: float,
             blur = (patch[:-2, 1:-1] + patch[2:, 1:-1] + patch[1:-1, :-2]
                     + patch[1:-1, 2:] + patch[1:-1, 1:-1]) / 5.0
             contrast[depth, index] = float((patch[1:-1, 1:-1] - blur).std())
+            density[depth, index] = float(patch.mean())
             peak_value[index] = max(peak_value[index], float(patch.max()))
 
     alive = peak_value >= floor * peak_value.max()
     peaks = np.argmax(contrast[:, alive], axis=0)
+    # ⚠⚠ L'INTENSITE est le localisateur robuste, le contraste ne l'est pas. Sur les
+    # piles a 7,91 µm les deux coincident ; sur un volume a 2,4 µm qui resout les fibres,
+    # le contraste devient un U -- maximal aux DEUX bords, minimal dans la feuille --
+    # parce qu'il suit les interfaces et le bruit, pas la matiere. Trouve en affichant la
+    # courbe au lieu de faire confiance a son argmax.
+    dense_peaks = np.argmax(density[:, alive], axis=0)
     at_edge = ((peaks == 0) | (peaks == len(files) - 1))
+    # ⚠⚠ « au bord » N'EST PAS comparable entre deux pas de balayage : avec 9 couches
+    # lues au lieu de 65, l'argmax a mecaniquement plus de chances de tomber sur l'une
+    # des deux positions extremes. Mesure : 61 % / 67 % / 72 % / 80 % pour les pas
+    # 1, 2, 4, 8, sur le MEME segment. C'est le tiers central qu'il faut lire.
     # ⚠ La grandeur qui separe les deux segments n'est ni la mediane ni l'ecart
     # interquartile -- toutes deux se laissent tirer par une distribution BIMODALE, et
     # c'est justement la forme qu'on observe. Ce qui se lit sans ambiguite, c'est la
@@ -143,12 +156,34 @@ def grid_profiles(folder: Path, size: int, step: int, floor: float,
     # surface est dedans, ou elle ne l'est pas.
     low, high = len(files) // 3, 2 * len(files) // 3
     inside = ((peaks >= low) & (peaks < high))
+    inside_dense = ((dense_peaks >= low) & (dense_peaks < high))
+    # ⚠⚠ LA grandeur comparable entre conventions : l'ecart entre le pic de matiere et
+    # la SURFACE TRACEE, en micrometres. Un « tiers central » se rapporte a la fenetre
+    # lue, or la fenetre 15-40 d'une pile de 65 n'est PAS centree sur la couche 32 --
+    # donc ce chiffre ne mesure pas la meme chose ici et sur un volume de surface dont
+    # la trace est au milieu. Deux volumes n'ont ni le meme nombre de couches ni la meme
+    # taille de voxel ; un ecart en µm, si.
+    numbers = np.asarray([int(p.stem) for p in files])
+    offsets = np.abs(numbers[dense_peaks] - traced) * voxel_um
+    # ⚠ L'ecart interquartile se rapporte en COUCHES, pas en positions echantillonnees :
+    # sinon un balayage une couche sur 4 annonce 15 la ou il y en a 61, et deux runs du
+    # meme segment a deux pas semblent mesurer deux choses. Mesure : 61,0 / 62,0 / 60,8 /
+    # 64,0 pour les pas 1, 2, 4, 8 -- constant une fois remis a l'echelle.
+    spread = float(np.percentile(peaks, 75) - np.percentile(peaks, 25)) * layer_step
     return {"windows": len(windows), "avec_matiere": int(alive.sum()),
             "tiers_central": float(inside.mean()),
+            "tiers_central_intensite": float(inside_dense.mean()),
+            "au_bord_intensite": float(((dense_peaks == 0)
+                                        | (dense_peaks == len(files) - 1)).mean()),
+            "pic_intensite_median": float(np.median(dense_peaks)),
+            "ecart_trace_um_median": float(np.median(offsets)),
+            "ecart_trace_um_p90": float(np.percentile(offsets, 90)),
+            "couche_tracee": int(traced), "voxel_um": float(voxel_um),
             "layers": [int(p.stem) for p in files],
             "peaks": [int(v) for v in peaks],
             "peak_median": float(np.median(peaks)),
-            "peak_iqr": float(np.percentile(peaks, 75) - np.percentile(peaks, 25)),
+            "peak_iqr": spread,
+            "layer_step": int(layer_step),
             "au_bord": float(at_edge.mean())}
 
 
@@ -176,6 +211,10 @@ def main() -> int:
                              "n'ont pas la meme profondeur, sinon les tiers centraux "
                              "n'ont pas la meme largeur et ne se comparent pas")
     parser.add_argument("--to-layer", type=int, default=10**9)
+    parser.add_argument("--traced-layer", type=int, default=32,
+                        help="indice de la surface tracee dans la pile COMPLETE "
+                             "(defaut: 32, soit le milieu des 65 couches de `-r 32`)")
+    parser.add_argument("--voxel-um", type=float, default=7.91)
     parser.add_argument("--layer-step", type=int, default=1,
                         help="ne lire qu'une couche sur N : divise d'autant le "
                              "telechargement ET la lecture (defaut: 1 = toutes)")
@@ -189,7 +228,8 @@ def main() -> int:
         report = []
         for folder in args.folders:
             data = grid_profiles(folder, args.size, args.step, args.floor,
-                                 args.from_layer, args.to_layer, args.layer_step)
+                                 args.from_layer, args.to_layer, args.layer_step,
+                                 args.traced_layer, args.voxel_um)
             names = data["layers"]
             print(f"\n=== {folder.name} — {data['avec_matiere']} fenetres avec matiere "
                   f"sur {data['windows']} ===")
@@ -199,9 +239,16 @@ def main() -> int:
                 if counts[i]:
                     print(f"  pic a la couche {name:3d}  {counts[i]:4d}  {bar}")
             print(f"  mediane du pic : couche {names[int(data['peak_median'])]} "
-                  f"| ecart interquartile : {data['peak_iqr']:.1f} couches")
-            print(f"  ⭐ pic dans le TIERS CENTRAL : {data['tiers_central'] * 100:.0f} %"
-                  f"   | au bord de la fenetre : {data['au_bord'] * 100:.0f} %")
+                  f"| ecart interquartile : {data['peak_iqr']:.1f} couches "
+                  f"(pas {data['layer_step']})")
+            print(f"  contraste  — tiers central {data['tiers_central'] * 100:5.0f} %"
+                  f"   au bord {data['au_bord'] * 100:5.0f} %")
+            print(f"  ⭐ INTENSITE — tiers central {data['tiers_central_intensite'] * 100:5.0f} %"
+                  f"   au bord {data['au_bord_intensite'] * 100:5.0f} %"
+                  f"   pic median couche {names[int(data['pic_intensite_median'])]}")
+            print(f"  ⭐⭐ ECART A LA TRACE (couche {data['couche_tracee']}) : "
+                  f"median {data['ecart_trace_um_median']:.0f} µm   "
+                  f"p90 {data['ecart_trace_um_p90']:.0f} µm")
             report.append({"folder": folder.name, **data})
         if args.out:
             args.out.write_text(json.dumps(report, indent=2) + "\n")

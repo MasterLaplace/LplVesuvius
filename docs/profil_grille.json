@@ -4,6 +4,13 @@
     "windows": 44,
     "avec_matiere": 30,
     "tiers_central": 0.5,
+    "tiers_central_intensite": 0.8,
+    "au_bord_intensite": 0.06666666666666667,
+    "pic_intensite_median": 13.0,
+    "ecart_trace_um_median": 31.64,
+    "ecart_trace_um_p90": 63.28,
+    "couche_tracee": 32,
+    "voxel_um": 7.91,
     "layers": [
       15,
       16,
@@ -66,6 +73,7 @@
     ],
     "peak_median": 11.0,
     "peak_iqr": 11.5,
+    "layer_step": 1,
     "au_bord": 0.36666666666666664
   },
   {
@@ -73,6 +81,13 @@
     "windows": 210,
     "avec_matiere": 204,
     "tiers_central": 0.6274509803921569,
+    "tiers_central_intensite": 0.9558823529411765,
+    "au_bord_intensite": 0.024509803921568627,
+    "pic_intensite_median": 14.0,
+    "ecart_trace_um_median": 23.73,
+    "ecart_trace_um_p90": 39.55,
+    "couche_tracee": 32,
+    "voxel_um": 7.91,
     "layers": [
       15,
       16,
@@ -309,6 +324,7 @@
     ],
     "peak_median": 14.0,
     "peak_iqr": 4.0,
+    "layer_step": 1,
     "au_bord": 0.14705882352941177
   },
   {
@@ -316,6 +332,13 @@
     "windows": 252,
     "avec_matiere": 230,
     "tiers_central": 0.07391304347826087,
+    "tiers_central_intensite": 0.18695652173913044,
+    "au_bord_intensite": 0.3739130434782609,
+    "pic_intensite_median": 14.0,
+    "ecart_trace_um_median": 63.28,
+    "ecart_trace_um_p90": 134.47,
+    "couche_tracee": 32,
+    "voxel_um": 7.91,
     "layers": [
       15,
       16,
@@ -578,6 +601,7 @@
     ],
     "peak_median": 2.0,
     "peak_iqr": 22.0,
+    "layer_step": 1,
     "au_bord": 0.6130434782608696
   }
 ]
