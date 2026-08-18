@@ -1,0 +1,74 @@
+[
+  {
+    "fichier": "fibres_corpus.json",
+    "grandeur": "bascule_mediane_deg",
+    "n": 54,
+    "rho_croisements": -0.06430443328223183,
+    "p": 0.644109356786601,
+    "rho_tours": -0.1181336488013758,
+    "rho_detectable": 0.3733416858166984
+  },
+  {
+    "fichier": "fibres_corpus.json",
+    "grandeur": "coherence_mediane",
+    "n": 54,
+    "rho_croisements": -0.24599784981440143,
+    "p": 0.0729609717571401,
+    "rho_tours": -0.3683528390989656,
+    "rho_detectable": 0.3733416858166984
+  },
+  {
+    "fichier": "fibres_corpus.json",
+    "grandeur": "desaccord_voisins_median_deg",
+    "n": 54,
+    "rho_croisements": -0.19173025092577609,
+    "p": 0.1648691680412609,
+    "rho_tours": -0.18301376182491294,
+    "rho_detectable": 0.3733416858166984
+  },
+  {
+    "fichier": "fibres_corpus.json",
+    "grandeur": "part_bascule_sup_45",
+    "n": 54,
+    "rho_croisements": -0.2434018316223124,
+    "p": 0.07613623867193278,
+    "rho_tours": -0.27909316217307856,
+    "rho_detectable": 0.3733416858166984
+  },
+  {
+    "fichier": "fibres_corpus.json",
+    "grandeur": "part_voisins_sup_30",
+    "n": 54,
+    "rho_croisements": -0.267645490172481,
+    "p": 0.050391863931762544,
+    "rho_tours": -0.1882985818332809,
+    "rho_detectable": 0.3733416858166984
+  },
+  {
+    "fichier": "fibres_corpus.json",
+    "grandeur": "utilisables",
+    "n": 54,
+    "rho_croisements": -0.08070957729752014,
+    "p": 0.5618054064096175,
+    "rho_tours": 0.02787299206872642,
+    "rho_detectable": 0.3733416858166984
+  },
+  {
+    "fichier": "fibres_corpus.json",
+    "grandeur": "vides",
+    "n": 54,
+    "rho_croisements": 0.09501405728553283,
+    "p": 0.4943419900569076,
+    "rho_tours": -0.11483139670876619,
+    "rho_detectable": 0.3733416858166984
+  },
+  {
+    "fichier": "fibres_corpus.json",
+    "grandeur": "voisins_compares",
+    "n": 54,
+    "rho_croisements": -0.0022862503996794723,
+    "p": 0.9869094231239636,
+    "rho_tours": -0.03189407613122249,
+    "rho_detectable": 0.3733416858166984
+  }
+]

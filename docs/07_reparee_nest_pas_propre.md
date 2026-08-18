@@ -353,3 +353,73 @@ plateau, et 1/3 est simplement dedans.
 pas ce qu'elle contient sur une trace sans croisement (facteur 18 entre les 7 traces à
 zéro croisement). Le plateau justifie le *choix* du seuil, pas l'interprétation de ce
 qu'il attrape.
+
+---
+
+## 9. ⭐⭐ Le rayon de recherche était 4× trop grand — et le bon vient de la physique
+
+2026-08-18. Trouvé en cherchant pourquoi la métrique réplique sur PHerc1667 (+0,700) et
+pas sur PHerc0139 (+0,284). J'ai d'abord cru à un effet de **résolution du scan**. Le
+contrôle l'a réfuté.
+
+### Le contrôle qui sépare deux explications
+
+Le rayon de recherche est en **voxels**, donc sa valeur *physique* dépend de la
+campagne : 80 voxels font **749 µm** à 9,362 µm et **192 µm** à 2,403 µm. Deux lectures
+possibles — (a) la résolution fine résout mieux la géométrie, (b) 749 µm est simplement
+trop grand. Elles se séparent en balayant le rayon **sur la donnée grossière** :
+
+| rayon | physique | rho ~ croisements | p | traces |
+|---|---:|---:|---:|---:|
+| 10 vx | 94 µm | +0,446 | 0,064 | 18 |
+| **20 vx** | **187 µm** | **+0,609** | **1,3e-04** | 34 |
+| 40 vx | 374 µm | +0,459 | 0,0056 | 35 |
+| 80 vx *(valeur en vigueur)* | 749 µm | +0,284 | 0,093 | 36 |
+| 160 vx | 1498 µm | **−0,143** | 0,407 | 36 |
+
+**Ce n'est pas la résolution : c'est le rayon.** Et au-delà, la corrélation **s'inverse**.
+
+⚠ L'explication est physique et se dit en une phrase : un rayon de 749 µm couvre
+**plusieurs écarts inter-feuilles**. Il trouve donc la spire voisine — qui est de la
+géométrie parfaitement normale — et noie l'anomalie dedans.
+
+⚠ Un rayon trop petit coûte des traces : à 94 µm, 18 traces sur 36 ne rendent plus
+aucune mesure.
+
+### ⚠⚠ Et le bon rayon a été choisi par la PHYSIQUE, pas par la courbe
+
+Balayer puis retenir le meilleur, c'est exactement le sur-ajustement que le §8 évite
+pour le seuil. Le pas inter-feuilles a été **mesuré ailleurs et avant** — **142,8 µm,
+cv 1,8 %** (`11` §3) — donc ce nombre ne vient pas de cette corrélation et **peut la
+faire échouer**.
+
+| corpus | rayon en vigueur (80 vx) | **rayon physique** (142,8 µm) |
+|---|---:|---:|
+| **Scroll 1** (7,91 µm → 18 vx) | +0,769 | **+0,840**  (p = 1,1e-12) |
+| **PHerc0139** (9,362 µm → 15 vx) | +0,284 | **+0,666**  (p = 2,3e-05) |
+| PHerc1667 (7,91 µm → 18 vx) | +0,700 | +0,579  (p = 0,019) |
+
+> **Sur Scroll 1, le rayon issu de la physique (+0,840) bat le meilleur rayon du
+> balayage (+0,829 à 16 voxels).** Un paramètre choisi sans regarder la réponse fait
+> mieux que celui choisi en la regardant : ce n'est plus un réglage, c'est une
+> constante physique du problème.
+
+⚠ **PHerc1667 baisse** (+0,700 → +0,579), et c'est le plus petit corpus (n passe de 18
+à 16). Deux corpus sur trois s'améliorent, le troisième se dégrade — à rapporter tel
+quel, pas à moyenner.
+
+### 🎯 Et le gain est le plus grand là où le prix se joue
+
+Le gain massif est sur **PHerc0139, à 9,362 µm** : de **non significatif** (p = 0,093)
+à **p = 2,3e-05**. Or les **13 rouleaux éligibles au Grand Prize 2027 sont tous scannés
+à 8,640–9,362 µm**, et le règlement interdit d'utiliser des scans plus fins du même
+rouleau. C'est exactement le régime où la correction compte.
+
+### Reproduire
+
+```bash
+cd experiments
+uv run python src/excision/baseline_sweep.py <traces> <sortie.jsonl> --search-radius 18
+uv run python src/excision/variant_correlate.py <sortie.jsonl> \
+    ../repos/windcheck/results/index.json --corpus "Scroll 1"
+```

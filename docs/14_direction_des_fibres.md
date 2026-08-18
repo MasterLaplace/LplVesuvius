@@ -141,3 +141,48 @@ est décalée.
 - ⚠ la bascule recto/verso reste **non expliquée** : trois causes candidates (contraste
   entre plis trop faible à 2,4 µm, fenêtre mal centrée, ou fenêtre plus courte qu'une
   épaisseur de feuille à 1,129 µm) et aucune départagée.
+
+
+---
+
+## 8. ⚠⚠ La campagne complète : l'instrument NE valide PAS, et le signe s'inverse
+
+80 segments mesurés, 54 communs avec l'index publié de `windcheck`.
+
+| grandeur | n = 12 | **n = 54** | p |
+|---|---:|---:|---:|
+| **désaccord médian entre voisins** | **+0,330** | **−0,192** | 0,165 |
+| part des voisins > 30° | +0,118 | −0,268 | 0,050 |
+| cohérence médiane | +0,354 | −0,246 | 0,073 |
+| bascule médiane en profondeur | −0,189 | −0,064 | 0,644 |
+
+> **Le signe s'est inversé.** Le +0,330 de n = 12 était du bruit, et l'analyse de
+> puissance le disait déjà : à n = 12, seul un rho ≥ 0,73 était détectable.
+
+Rien n'atteint le seuil après correction pour tests multiples. **L'orientation des
+fibres, telle que mesurée ici, ne prédit pas les croisements recensés.**
+
+### ⚠ Ce que ça ne condamne pas
+
+L'orientation **est** mesurable (cohérence jusqu'à 0,64) et la mesure répond au
+contenu. Ce qui échoue est l'hypothèse que j'en ai tirée : *deux fenêtres voisines en
+désaccord signalent un saut de feuille*. Trois raisons possibles, non départagées :
+
+1. la fenêtre de 128×128 voxels à 2,4 µm fait **307 µm de côté** — une seule cellule de
+   texture, peut-être trop petite pour une orientation stable ;
+2. la courbure du rouleau fait varier l'orientation légitimement, et le filtre « entre
+   voisins » ne l'absorbe qu'imparfaitement ;
+3. ⚠ le compte de croisements de `windcheck` n'est peut-être pas le bon référent — il
+   mesure l'auto-intersection d'un maillage, pas le saut de feuille.
+
+### ⭐ Et ce que le site du concours en dit, mot pour mot
+
+> *« check if you can visually follow **horizontal papyrus fibers** across the page —
+> this is an indication the segmentation is good (**and not jumping between sheets**) »*
+> — page *Prizes*, section « How to get started » du Grand Prize 2027.
+
+Les organisateurs désignent donc la continuité des fibres comme **le** critère visuel
+de bonne segmentation. L'idée n'est pas fausse ; c'est **notre façon de la mesurer** qui
+ne corrèle pas. La bonne suite n'est pas d'abandonner mais de mesurer la continuité
+**le long d'une ligne de texte**, comme un œil le fait, plutôt que la dispersion entre
+carrés voisins.
