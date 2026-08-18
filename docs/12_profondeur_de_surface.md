@@ -423,3 +423,41 @@ transporte pas aux volumes de surface à 2,4 µm.
 Ce qui reste vrai est l'**ordre**, pas la coupure : l'écart corrèle avec les
 croisements. L'instrument est **ordinal**, comme le veut la règle nº 1 du dépôt — et
 tout seuil devra être calibré sur une population, pas sur trois segments.
+
+
+---
+
+## 12. ⭐ La réplication sur un second rouleau — PHerc1667
+
+18 segments de PHerc1667 mesurés sur leurs volumes de surface à 2,399 µm, puis croisés
+avec le même index publié.
+
+| grandeur | **Scroll 1** (n = 54) | **PHerc1667** (n = 18) |
+|---|---:|---:|
+| **pic d'intensité** | +0,484 (p < 0,001) | **+0,698 (p = 0,001)** |
+| écart à la trace | +0,388 (p = 0,004) | +0,478 (p = 0,045) |
+| au bord de la pile | +0,252 (p = 0,066) | +0,517 (p = 0,028) |
+| tiers central | **−0,487 (p < 0,001)** | −0,427 (p = 0,077) |
+
+**Les quatre grandeurs gardent leur signe sur les deux rouleaux**, et le pic
+d'intensité est significatif sur les deux. ⚠ À n = 18 la mesure ne détecte qu'un rho de
+0,62, donc le `tiers_central` à −0,427 n'est ni confirmé ni infirmé — il va simplement
+dans le même sens.
+
+Et les distributions se ressemblent : écart médian **67 µm** sur Scroll 1, **58 µm** sur
+PHerc1667 ; tiers central **38 %** contre **41 %**.
+
+### ⚠⚠ Un confond de longueur, fort sur PHerc1667 et faible sur Scroll 1
+
+| corrélation avec la couverture en tours | Scroll 1 | PHerc1667 |
+|---|---:|---:|
+| écart à la trace | +0,152 | **−0,681** |
+| tiers central | −0,310 | **+0,636** |
+| **pic d'intensité** | **−0,032** | **−0,167** |
+
+Sur PHerc1667, une partie de ce que l'écart mesure est *la longueur de la trace*, pas sa
+qualité. Ça ne s'observe pas sur Scroll 1, donc c'est une propriété de ce corpus-là — et
+ça se dit plutôt que de se moyenner.
+
+> **Le pic d'intensité est la grandeur à retenir** : significative sur les deux rouleaux
+> et **quasiment libre du confond** (−0,032 et −0,167).

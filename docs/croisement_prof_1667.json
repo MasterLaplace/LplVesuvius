@@ -1,0 +1,38 @@
+[
+  {
+    "fichier": "profondeur_1667.json",
+    "grandeur": "tiers_central",
+    "n": 18,
+    "rho_croisements": -0.42672196296866327,
+    "p": 0.0773902968957986,
+    "rho_tours": 0.6359889507621861,
+    "rho_detectable": 0.6189900709973589
+  },
+  {
+    "fichier": "profondeur_1667.json",
+    "grandeur": "ecart_a_la_trace",
+    "n": 18,
+    "rho_croisements": 0.47848684096522626,
+    "p": 0.044567676440803165,
+    "rho_tours": -0.6811627050992157,
+    "rho_detectable": 0.6189900709973589
+  },
+  {
+    "fichier": "profondeur_1667.json",
+    "grandeur": "pic_intensite",
+    "n": 18,
+    "rho_croisements": 0.6977717095765921,
+    "p": 0.0012834060152132783,
+    "rho_tours": -0.1666674703966166,
+    "rho_detectable": 0.6189900709973589
+  },
+  {
+    "fichier": "profondeur_1667.json",
+    "grandeur": "au_bord",
+    "n": 18,
+    "rho_croisements": 0.5169063372556096,
+    "p": 0.02804945453323211,
+    "rho_tours": -0.21703432684918003,
+    "rho_detectable": 0.6189900709973589
+  }
+]
