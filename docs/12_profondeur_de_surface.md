@@ -136,6 +136,31 @@ Pour comparaison, le segment Scroll 1 qui donne l'AUC 0,925 a son pic **à l'int
 de ce qui est lu (couche 26), avec une courbe unimodale propre qui retombe à zéro vers
 34 puis **remonte** légèrement en 39–40 — la feuille suivante.
 
+### 🎯 L'arithmétique, et ce qu'elle suggère
+
+La surface tracée est la couche **32**. Ce que le contraste marque n'est pas le milieu
+de la feuille mais la **face encrée** — l'encre est en surface, d'un côté. L'écart
+attendu entre le pic de contraste et la couche 32 est donc d'une **demi-épaisseur de
+feuille**, soit ~71 µm ≈ **9 voxels** à 7,91 µm.
+
+| segment | pic de contraste | écart à la couche 32 | en µm |
+|---|---:|---:|---:|
+| `20230909121925` (AUC 0,925) | 26 | **6 couches** | ~47 µm |
+| `scroll4_…` (région inférée) | ≤ 0, matière jusqu'à ~28 → centre ≲ 14 | **≥ 18 couches** | **≥ 142 µm** |
+
+Six couches sur Scroll 1 : l'ordre de grandeur d'une demi-épaisseur. La trace est **sur
+la feuille**.
+
+⚠⚠ Dix-huit couches ou plus sur Scroll 4 : **une épaisseur de feuille entière**
+(142,8 µm, l'invariant de `11` §3). C'est exactement l'écart qu'on attend d'une trace
+qui a **sauté d'une spire** — le mode d'échec dominant du déroulement, et l'objet même
+de ce dépôt.
+
+⚠ **C'est une interprétation, pas un fait établi.** Une trace qui aurait simplement
+dérivé dans l'interstice donnerait un écart comparable. Ce qui la départagerait est de
+regarder si, de l'autre côté de la couche 32, une **seconde** feuille apparaît à la
+bonne distance : la pile complète (0 à 64) le dirait, et on n'en a que la moitié basse.
+
 ⚠ Et la bimodalité demeure : 100 fenêtres au bord bas, 26 au bord haut. **Aucune plage
 unique ne peut servir tout le segment.** Ce n'est pas un décalage constant qu'on
 corrigerait avec un `--start-layer` ; c'est une trace qui n'est pas sur la feuille au
