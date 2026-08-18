@@ -19,31 +19,17 @@ Document de passation. **À lire en entier avant de reprendre.**
 ⚠ Pousser l'AUC plus haut, chercher un meilleur détecteur d'encre ou faire transcrire
 davantage **ne sert pas** l'objectif.
 
-## 2. ⚠ CE QUI TOURNE (2026-08-18, matin)
+## 2. ⚠ CE QUI TOURNE (2026-08-18, 10 h 45)
 
-| quoi | sortie | attendu |
-|---|---|---|
-| bande B niveau 0, z 8892→9692 | `docs/bande_niveau0_B.json` | ~50 min |
-| couches Scroll 4 **0 à 14** | `data/layers/scroll4_.../00..14.tif` | ~8 min, 7,5 Go |
-
-```bash
-ps -eo etime,pcpu,cmd | grep -E "[f]usion_scan|[i]nfer_ink|[f]etch_layers"
-tail -3 docs/bandes_niveau0.log docs/fetch_scroll4_bas.log
-```
+**Rien.** Tout ce qui était lancé est terminé et consigné.
 
 ⚠ **Juger sur un fichier de résultat, jamais sur une notification** : celles-ci
 concernent le *wrapper*, pas le travail `nohup`, et un log vide veut dire « Python
 bufferise ».
 
-⭐ **Dès que les couches basses sont là** — le test qui tranche `09` §12 :
-
-```bash
-cd inference_xpu
-uv run python src/infer_ink.py ../data/layers/scroll4_20231111135340 \
-    --model ../data/models/timesformer_GP_scroll1 --start-layer 0 \
-    --top 0 --left 17000 --height 6038 --width 8000 --stride 21 --device xpu \
-    --out ../data/out/ink_scroll4_bas.npy
-```
+⚠ Pour libérer la machine sans rien perdre (réunion, etc.) : `kill -STOP` les calculs
+(ils reprennent à l'identique) et tuer les `curl` — c'est la **bande passante** qui fait
+bégayer un Zoom, pas le processeur. `./tools/reprendre.sh` remet tout en route.
 
 ## 3. Le projet
 
@@ -154,13 +140,16 @@ transaction sur un nom inconnu.
 11. **Juge de langue calibré** : **15/16, zéro fabrication**, lisibilité séparant sans
    chevauchement le vierge (0–1) du texte (3–6). Protocole : `data/juge/PROTOCOLE.md`.
 
-12. ⚠⚠ **Le détecteur ne transporte PAS sur Scroll 4** (`09` §12). Passe complète
-   (107 730 fenêtres, 42,6 min). Le juge calibré lit **1 à 3 de lisibilité** sur la
-   bande la plus chargée, quand le calibrage sépare vierge **0–1** de texte **3–6** :
-   **ça ne sépare pas**. ⚠ Cause probable trouvée : **le modèle a regardé à côté** — la
-   surface n'est pas dans les couches lues (`12`). ⚠⚠ Et une limite du protocole,
-   mesurée pour la première fois : **la lecture d'un panneau dépend de son voisin**
-   (même image, 1 puis 2 puis 0 glyphes, à température zéro).
+12. ⚠⚠ **Rien de lisible sur Scroll 4, et la cause est EN AMONT du modèle** (`09` §12,
+   `12`). Deux passes complètes (couches 15–40 puis 0–25, ~43 min chacune). Le juge
+   calibré : lisibilité **1–3** sur la première, **refus de tous les panneaux** sur la
+   seconde, quand le calibrage sépare vierge **0–1** de texte **3–6**. Recentrer les
+   couches n'a rien sauvé (les deux cartes : rho **+0,700**, **88,7 %** d'accord).
+   ⚠⚠ Et ça ne pouvait pas marcher : sur **61 %** du segment le cœur de matière est
+   **hors des 65 couches**. On ne détecte pas d'encre sur une surface que le volume de
+   surface ne contient pas. ⚠ Limite du protocole mesurée au passage : **la lecture
+   d'un panneau dépend de son voisin** (même image, 1 puis 2 puis 0 glyphes, à
+   température zéro).
 
 ### La jonction — et c'est un NON
 
@@ -185,8 +174,8 @@ définitive : **ce type de segment ne porte que 4 à 5 lignes de texte**, et les
 
 | # | quoi | blocage |
 |---|---|---|
-| **E'** ⭐ | relancer Scroll 4 sur les couches **0–25** | ⚠ **plus bloqué** : le téléchargement des couches 0–14 est lancé. C'est le test qui départage « l'instrument ne transporte pas » de « on l'a mal visé ». ⚠ La bimodalité de `12` dit qu'**aucune plage unique ne conviendra partout** sur ce segment |
-| — | valider la profondeur de surface sur un **corpus** | `12` §5 : trois segments, deux rouleaux, ce n'est pas une population. Les couches sont publiées pour tout segment, donc c'est un téléchargement, pas une décision |
+| ⭐⭐ | valider la profondeur de surface sur un **corpus** | `12` §5 : trois segments, deux rouleaux, ce n'est pas une population. Les couches sont publiées pour tout segment → téléchargement, pas décision. ⚠ **Poser la prédiction d'avance pour qu'elle puisse échouer** : *sous ~20 % de fenêtres au tiers central, pas d'encre lisible* |
+| ⭐ | retrouver la feuille de Scroll 4 | le cœur de matière est hors des 65 couches. Un volume plus épais (`vc_layers_from_ppm -r 64`) le contiendrait, ou il faut corriger la trace. **C'est du déroulement, donc l'objectif** |
 | **C5** ⭐ | direction des fibres comme séparateur | problème ouvert nº 5, discriminant **physique** donc déroulement pur. Prédictions nnUNet disponibles. Coût élevé, **valeur la plus haute** |
 | C4 / §3.6 | les 4 sites à **2,4 µm** (ESRF) | distinguerait une soudure d'un défaut de résolution. On a **4 endroits précis** |
 | §2.3 | vrai ombilic | `umbilicus.txt` sur Scroll 1 |
