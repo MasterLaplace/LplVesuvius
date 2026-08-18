@@ -461,3 +461,29 @@ qualité. Ça ne s'observe pas sur Scroll 1, donc c'est une propriété de ce co
 
 > **Le pic d'intensité est la grandeur à retenir** : significative sur les deux rouleaux
 > et **quasiment libre du confond** (−0,032 et −0,167).
+
+
+---
+
+## 13. ✅ Le point de référence n'est pas une hypothèse — il est confirmé par la donnée
+
+Tout l'instrument se rapporte à **la couche tracée**, supposée au milieu de la pile
+(`shape[0] // 2`) parce que le volume de surface est engendré autour d'elle
+(`vc_layers_from_ppm -r 32`, vérifié §1). C'est l'hypothèse la plus lourde du dispositif,
+et elle se vérifie sans rien supposer d'autre :
+
+| corpus | couches | **trace supposée** | **pic d'intensité médian observé** | quartiles |
+|---|---:|---:|---:|---|
+| Scroll 1 (72 segments) | 109 | **54** | **53** | 47 – 63 |
+| PHerc1667 (18 segments) | 109 | **54** | **55** | 49 – 61 |
+
+Sur **90 segments de deux rouleaux**, la matière tombe **à une couche près** du point
+qu'on suppose être la trace — soit **± 2,4 µm**.
+
+> Si le volume de surface était engendré autour d'un autre indice, la médiane
+> tomberait ailleurs. Elle n'y tombe pas. **Le point zéro de l'instrument est mesuré,
+> pas décrété.**
+
+⚠ Et c'est ce qui donne son sens aux écarts : un segment dont le pic médian est à 53
+quand la population est à 54 est *normal* ; celui dont **61 %** des fenêtres piquent à un
+**bord** de la pile ne l'est pas.
