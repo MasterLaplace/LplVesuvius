@@ -81,6 +81,39 @@ ck([len(s['cells']) for s in q]==[len(s['cells']) for s in derive])
 print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
+run "reference : boule vs bande" uv run python - <<'PY'
+import sys; sys.path.insert(0,'src')
+import numpy as np
+from excision.proximity import local_baseline
+from excision.baseline_sweep import ball_baseline, contamination
+n=0
+def ck(c):
+    global n
+    assert c; n+=1
+g=np.random.default_rng(0)
+N=1200
+# Un nuage ou l'espacement est UNIFORME a 100, sauf 40 cellules groupees en une boule
+# serree ou il tombe a 30 : c'est la forme d'un site de croisement, region 3D compacte.
+pts=g.uniform(0,4000,size=(N,3)); cols=g.integers(0,3000,size=N).astype(float)
+d=np.full(N,100.0); bad=np.arange(40)
+pts[bad]=np.array([2000.,2000.,2000.])+g.uniform(-60,60,size=(40,3)); d[bad]=30.0
+sample=np.arange(N)
+bande=local_baseline(cols,sample,d,50)
+boule=ball_baseline(pts,sample,d,400.0)
+# ⚠ LA revendication du §6 de docs/07, sur une donnee dont on connait la verite :
+# la bande garde 100 aux cellules anormales (ses voisins en colonne sont sains),
+# la boule tombe a 30 (ses voisins en 3D SONT l'anomalie).
+ck(abs(np.median(bande[bad])-100.0)<1.0)
+ck(abs(np.median(boule[bad])-30.0)<1.0)
+ck(abs(np.median(bande[40:])-100.0)<1.0)
+c=contamination(d,bande,boule)
+ck(c['flagged']==40)                                  # les 40 sont signalees
+ck(abs(c['shrink_partout']-1.0)<0.05)                 # ailleurs, les deux s'accordent
+ck(c['shrink_aux_signalees']<0.4)                     # la, la boule s'effondre
+ck(c['shrink_aux_signalees'] < c['shrink_partout'])   # et c'est SPECIFIQUE
+print(f'ALL PASS (0 failures, {n} checks)')
+PY
+
 cd "$ROOT/inference_xpu" || exit 2
 run "juge : choix des bandes" uv run python - <<'PY'
 import sys, pathlib, numpy as np; sys.path.insert(0,'../analysis/src')
