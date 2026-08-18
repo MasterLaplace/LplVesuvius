@@ -95,17 +95,51 @@ ne s'est pas trompé sur l'encre de Scroll 4, **il a regardé à côté**.
 4. Le passe-haut 3×3 est une mesure de netteté locale parmi d'autres. Un autre noyau
    déplacerait les chiffres ; il ne déplacerait pas un facteur 7.
 
-## 6. La suite que ça ouvre
+## 6. ⚠⚠ Avec la pile complète 0–40 : le trait est plus dur
 
-⭐ **Relancer l'inférence Scroll 4 sur une plage de couches recentrée.** C'est le test
-direct : si le détecteur retrouve de la structure de trait quand on l'aime là où la
-surface est, alors l'instrument transporte et le verdict de `09` §12 devient
-« mal visé » plutôt que « ne transporte pas ». ⚠ Coût : ~13 Go de couches
-supplémentaires et ~43 min d'inférence.
+Les couches 0 à 14 ont été téléchargées (7,5 Go) pour voir **sous** la fenêtre lue.
+Résultat sur le segment Scroll 4, 230 fenêtres :
 
-⚠ Mais la bimodalité dit que **aucune plage unique ne conviendra partout** sur ce
-segment : à 92 fenêtres piquant en 15 et 49 en 40, un décalage global en satisfera une
-moitié et pas l'autre.
+| pic de contraste | fenêtres |
+|---|---:|
+| **couche 0** (le bord absolu de la pile) | **100** |
+| couches 1 à 39 | 104, dispersées |
+| **couche 40** | **26** |
+
+⚠ Un pic au bord peut être un **artefact de bord** — un passe-haut réagit fort à une
+troncature. La forme le réfute : à l'endroit exact où l'inférence a tourné
+(`top 2560, left 20000`), le contraste **décroît de façon lisse et monotone** de 1,000 à
+la couche 0 jusqu'à 0,000 à la couche 40, et l'intensité moyenne fait de même (plateau
+0,99–1,00 des couches 0 à 5, puis chute à 0 vers la couche 36). C'est une courbe, pas
+une pointe.
+
+> **La matière occupe les couches 0 à ~28 et le reste est du vide.** Or ces couches sont
+> engendrées **autour de la surface tracée** : la trace est donc posée **à côté de la
+> feuille**, d'une vingtaine de voxels au moins — plus qu'une épaisseur de feuille
+> (142,8 µm, `11` §3).
+
+Pour comparaison, le segment Scroll 1 qui donne l'AUC 0,925 a son pic **à l'intérieur**
+de ce qui est lu (couche 26), avec une courbe unimodale propre qui retombe à zéro vers
+34 puis **remonte** légèrement en 39–40 — la feuille suivante.
+
+⚠ Et la bimodalité demeure : 100 fenêtres au bord bas, 26 au bord haut. **Aucune plage
+unique ne peut servir tout le segment.** Ce n'est pas un décalage constant qu'on
+corrigerait avec un `--start-layer` ; c'est une trace qui n'est pas sur la feuille au
+même endroit d'un bout à l'autre.
+
+## 7. La suite que ça ouvre
+
+⭐ **Relancer l'inférence Scroll 4 sur `--start-layer 0`** — lancé. La région inférée
+appartient à la population « pic à la couche 0 », donc la fenêtre 0–25 est celle qui
+contient le plus de matière. C'est le test qui départage :
+
+| si | alors |
+|---|---|
+| le détecteur retrouve de la structure de trait | l'instrument **transporte**, `09` §12 devient « mal visé » |
+| rien ne change | le décalage de couches n'était pas la cause, et il reste le décalage de domaine |
+
+⚠ Dans les deux cas la trace de ce segment reste suspecte : une trace posée sur la
+feuille n'aurait pas 55 % de ses fenêtres avec le pic à un bord.
 
 ## Reproduire
 
