@@ -1,0 +1,15 @@
+{
+  "zarr": "PHerc1447/representations/predictions/surfaces/20250521151220-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+  "level": 1,
+  "voxel_um": 17.28,
+  "binaire": true,
+  "seuils": {
+    "0.5": {
+      "chunks": 33,
+      "median_um": 172.8,
+      "p10_um": 138.24,
+      "min_um": 120.96000000000001,
+      "part_sous_150um": 0.30303030303030304
+    }
+  }
+}
