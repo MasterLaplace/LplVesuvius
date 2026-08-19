@@ -249,8 +249,11 @@ transaction sur un nom inconnu.
    contraste sur un facteur 1,25 contre 5,1 sur Scroll 1, étendue relative **4,6× plus
    petite** — donc le test est **non concluant**, pas réfutant. **(b)** Et sur Scroll 1 la
    règle sépare une **CLASSE**, pas un gradient : retirer les 16 segments sous un contraste
-   de 3,0 fait tomber rho de **+0,539 à +0,190 (p = 0,13, ns)**. ⚠ Confond restant : 7,91 µm
-   contre 2,4 — PHerc0139 et PHerc1667 publient à 2,399, c'est le test apparié.
+   de 3,0 fait tomber rho de **+0,539 à +0,190 (p = 0,13, ns)**. ⚠⚠ **Et le test apparié a réfuté l'explication (a)** (`19` §12) : PHerc0139, à la **même**
+   résolution que Scroll 1 et avec une étendue **plus grande** (1,628 contre 1,008), rend
+   quand même **−0,229**. L'effet de plancher couvrait un corpus sur trois. **La règle est
+   une propriété du corpus publié de Scroll 1, pas du problème** — elle y reste solide,
+   c'est sa PORTÉE qui tombe.
    ⭐ **Robustesse vérifiée** (`19` §10) : re-mesuré à **5,4× la densité de sondage**
    (72 → 392 fenêtres), l'accord des classements vaut **+0,841** (témoin 0,223) et le
    **plateau 15–25 % survit intact**. ⚠⚠ Un premier contrôle avait conclu l'inverse

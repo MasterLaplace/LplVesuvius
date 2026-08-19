@@ -46,7 +46,7 @@ encore.
 >
 > | field | meaning | evidence |
 > |---|---|---|
-> | `material` | fraction of probed windows containing papyrus | **rho +0.539** vs 80 published Scroll 1 ink maps (p < 1e-6; **+0.561** partialling out area). ⚠ Driven by a near-blank class: **+0.190, ns** once those segments are removed. Did **not** replicate on Scroll 5 — see §4 |
+> | `material` | fraction of probed windows containing papyrus | **rho +0.539** vs 80 published Scroll 1 ink maps (p < 1e-6; **+0.561** partialling out area). ⚠ Driven by a near-blank class: **+0.190, ns** once those segments are removed. **Does not replicate** on three other scrolls — see §4 |
 > | `edge_pinned` | peak sits at a stack edge — the sheet is *outside* the volume | rho −0.275 (p = 0.014) |
 > | `offset` | median distance from traced layer to material peak | rho +0.388 vs published self-crossings (n = 54, p = 0.004) |
 > | `residual` | what remains **after** the best rigid shift | **rho +0.428** vs the same crossings (p = 0.0012) |
@@ -74,29 +74,32 @@ encore.
 > "flags a failure class" is closer to what your bottleneck table asks for than "improves
 > a median" ever was.
 >
-> ⚠⚠ **And it did not replicate on Scroll 5** (PHerc0172, 53 segments, same measurement):
-> rho **−0.217** (p = 0.12), decision p = 0.84. We report the reason rather than the
-> number alone: **Scroll 5's published ink maps barely differ from one another** — their
-> contrast spans a factor of 1.25 against 5.1 on Scroll 1, a relative range **4.6× smaller**
-> — and the whole corpus sits inside what Scroll 1 would call the near-blank band. There is
-> no class there to separate, so the test is **uninformative rather than refuting**. The
-> predictor's own spread is normal; it is the target that is flat.
+> ⚠⚠ **And it does not replicate.** We tested it on 110 further segments across three more
+> scrolls, all with published surface volumes and published ink maps, using the identical
+> measurement:
 >
-> ⚠ Still confounded: Scroll 5 is scanned at 7.91 µm against Scroll 1's 2.4 µm. PHerc0139
-> and PHerc1667 both publish at 2.399 µm — that is the paired test, and it is running.
+> | corpus | n | voxel | target's relative spread | rho | detectable at 80 % |
+> |---|---:|---:|---:|---:|---:|
+> | **Scroll 1** | 80 | 2.4 µm | 1.008 | **+0.539** | 0.31 |
+> | **PHerc0139** | 38 | **2.399 µm** | **1.628** | **−0.229** | 0.44 |
+> | PHerc1667 | 19 | 2.399 µm | 0.720 | +0.425 | 0.60 |
+> | PHerc0172 | 53 | 7.91 µm | 0.220 | −0.217 | 0.37 |
 >
-> **The robustness check we ran on ourselves.** `material` depends on a sampling grid, so
-> we re-measured all 80 segments at **5.4× the probe density** (72 → 392 windows) and
-> compared. Rankings agree at **rho +0.841** (p = 1.7e-22, permutation control p95 = 0.223),
-> and re-running the entire rule on the dense measurement reproduces the table almost
-> exactly — **the 15–25 % plateau survives intact** (p = 0.0010 / 0.0005 / 0.0030).
+> Our first explanation was a floor effect — PHerc0172's ink maps barely differ from one
+> another (relative spread 4.6× smaller than Scroll 1's), so there is nothing there to
+> predict. **That explains one corpus out of three.** PHerc0139 sits at the *same*
+> resolution as Scroll 1, has a *larger* relative spread, and still returns the opposite
+> sign.
 >
-> ⚠ The absolute fraction does move with density (48 % → 73 %), as a finer lattice should
-> find the band where a coarse one misses it. The *ranking*, which is what the rule uses,
-> does not.
+> None of the three negatives is individually significant. But the pattern — one strong
+> positive, three non-positive — is the shape we have twice watched dissolve in this
+> project. **We therefore report the rule as a property of Scroll 1's published corpus,
+> not of the problem.** It remains strong there: it survives Bonferroni over 20 pairings,
+> a 5.4× increase in probe density, and 2000 permutations. What falls is its reach.
 >
-> ⚠ Not tested: a sampler of a different *kind* — random rather than lattice. Both of ours
-> are regular lattices.
+> ⭐ We publish all four corpora rather than the one that works, because that is what makes
+> the measurement usable: anyone reusing it learns at once that it needs re-validating on
+> their corpus, instead of discovering it afterwards.
 >
 > Three more things make this more than a correlation:
 >
