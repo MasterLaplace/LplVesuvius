@@ -128,11 +128,24 @@ en `normal` bat une permutation d'axes de **7×**, un contresens `horizontal` de
 est **la bonne**, et notre champ est **substantiellement juste** — assez pour dominer
 largement les trois erreurs délibérées, pas assez pour faire mieux que rien.
 
-⚠ Ce qui désigne un défaut de **registration** plutôt que d'encodage — l'encodage, lui, est
-mesuré à 6° sur trois rouleaux. Le suspect nommé est la sémantique de `scale` : s'il
-signifie *facteur* et non *niveau*, chaque lecture est décalée d'un facteur deux, ce qui
-donne exactement ce profil — approximativement juste près de l'origine, de plus en plus
-faux en s'en éloignant.
+### ⭐⭐ Et l'intensité se règle — ce qui ferme la question
+
+Une entrée de `direction_fields` accepte une clé **`weight`**. En la portant à 10 :
+
+| poids de l'entrée | croissance (gen 114) | aire sauvée | auto-intersections |
+|---|---|---:|---:|
+| défaut | 1854,47 mm² | 20,75 cm² | 1 176 |
+| **`weight: 10`** | **1854,47 mm²** | **26,84 cm²** | **81 464** |
+
+**Deux choses d'un coup, et elles ferment la question.** L'influence du champ est bien
+**proportionnelle à son poids** — donc il est réellement consommé, ce n'est pas un
+paramètre décoratif. Et la **croissance ne bouge toujours pas d'un centième**, même à dix
+fois l'intensité : ce que le poids amplifie, c'est uniquement l'étape finale, où l'aire
+gonfle de **35 %** et où la surface ajoutée est précisément celle qui se recoupe.
+
+> ⭐ **`direction_fields` ne peut donc pas être le remède d'une trace posée en travers de
+> l'empilement** : la trajectoire est décidée pendant la croissance, et rien de ce
+> paramètre n'y touche — ni sa présence, ni son orientation, ni son intensité.
 
 ### Ce que ça corrige de ce qu'on croyait
 
