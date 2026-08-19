@@ -92,6 +92,7 @@ géométrie à suivre.
 | `23` | ⭐ **l'inventaire des 13 rouleaux du prix** — 10 n'ont AUCUN segment |
 | **`24`** | ⭐⭐ **la première trace d'un rouleau du prix**, condamnée par nos instruments avant le rendu. ⚠ Son §2 est **corrigé** : le verdict tient sur deux instruments, pas trois |
 | **`25`** | ⭐⭐ **la graine choisie sur la planéité** — et la réplication sur 12 rouleaux qui a corrigé la revendication deux fois |
+| **`26`** | ⭐⭐ **`direction_fields`** : le contrat dérivé, l'encodage mesuré sur 3 rouleaux — et le champ qui **n'agit pas sur la croissance** |
 
 ## 4. L'outillage, et comment le relancer
 
@@ -443,7 +444,8 @@ cible — le pool ouvert fait **2 140 000 $** et le Grand Prize n'est pas le seu
 | # | quoi | blocage |
 |---|---|---|
 | ~~T1~~ | ~~faire suivre une feuille au traceur~~ | ✅ **fermé le 2026-08-19** — mais en **deux moitiés**, et une seule est faite (`25`). *Où l'on part* est réglé ; *comment on avance* ne l'est pas |
-| **T1b** ⭐⭐ | **`direction_fields`** — la seule moitié qui reste, et l'image dit pourquoi : notre surface est posée **en travers** de l'empilement, ce que zéro auto-intersection n'interdit pas | ⚠ les `normal-grids` publiées (182 Mo) sont en `xy/ xz/ yz/`, le paramètre veut un **chemin local** et la disposition `<zarr>/{x,y,z}/<niveau>`. `vc_gen_normalgrids` est installé |
+| ~~T1b~~ | ~~brancher `direction_fields`~~ | ✅ **fait, et le résultat est un NÉGATIF** (`26`) : le contrat est dérivé, l'encodage mesuré sur 3 rouleaux, le champ se charge — et la croissance est **identique au centième**, même avec les axes délibérément permutés. Il n'agit que dans l'étape finale, où il fait empirer |
+| **T1c** ⭐⭐ | **trouver ce qui gouverne la trajectoire de croissance**, puisque ce n'est pas `direction_fields` | pistes : les **poids de perte** (`DIST STRAIGHT DIRECTION SNAP NORMAL NORMAL3DLINE REFERENCE_RAY SURFACE_SDT SPACELINE SDIR`, imprimés au démarrage, probablement réglables), `--resume-opt global`, et `search_effort` |
 | ~~T2~~ | ~~rejouer la boucle sur d'autres rouleaux~~ | ✅ **fait** — `tools/campagne_graines.sh`, 12 rouleaux, appariée, reprenable |
 | **T3** ⭐ | le **titre de Scroll 1** — *« looking somewhere new »* | c'est un problème de **recherche** sur le corpus où tous nos instruments marchent |
 | T4 | finir et envoyer la soumission Progress Prize | ⏳ le texte existe (`21`), les chiffres sont gardés, il reste à publier le dépôt et à joindre les figures |
