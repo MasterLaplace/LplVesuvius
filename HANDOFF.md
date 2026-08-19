@@ -262,6 +262,21 @@ transaction sur un nom inconnu.
    divisait par 16 — corrigé : les **800 rouleaux de la villa** se jugent en **0,9 h**,
    pas 0,5 h. Un modèle de coût qui se flatte n'est pas un modèle de coût.
 
+19bis. ⚠⚠ **La prédiction des 50 µm de `12` est testée, et elle se scinde en trois**
+   (`12` §13). Le **sens tient** (4,93 contre 5,91, p = 0,017). Le **seuil tombe** : au
+   balayage, 60 µm est pire que 50 **et** que 70 — une courbe qui monte, redescend et
+   remonte n'a pas de point de coupure, c'est le contraire du plateau de `07` §8. Et la
+   **forme forte est réfutée** : l'écart médian du corpus vaut **67,2 µm**, donc le seuil
+   condamnerait 64 segments sur 80 qui portent visiblement de l'encre, et **8 %** seulement
+   de ceux qui le dépassent tombent dans le premier décile contre 10 % attendus au hasard.
+
+19ter. ⚠ **La sensibilité du centre, au niveau 0** : déplacer le centre jusqu'à 3,16 mm
+   (22 écarts inter-feuilles) déplace l'invariant de **5,65 %** au maximum — soit **trois
+   fois** le cv de 1,8 %. ⚠⚠ La première version, au **niveau 2**, annonçait 1,85 % et
+   était **invalide** : les seuils de comptage sont calés au niveau 0 et y comptaient 42
+   feuilles au lieu de 176 (piège nº 1, repayé). Un balayage fin tourne pour situer la
+   marche.
+
 20. ❌ **Le saut de spire par la phase est mort définitivement** (`17` §10). Le volume
    `cos` n'est publié qu'aux niveaux **3, 4, 5** — le niveau 3 EST le plus fin, donc
    « refaire au niveau 0 » n'avait pas d'objet. Et la quantification n'écrase rien :

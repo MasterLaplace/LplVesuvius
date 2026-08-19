@@ -137,6 +137,14 @@ encore.
 > - **Depth-field measures as legibility predictors** — rho −0.028 at n = 80, where 0.31
 >   would have been detectable. They measure a defect of the **trace**, not of the
 >   **result**.
+> - **A µm threshold separating "legible" from "not"** — we proposed one on three
+>   segments (>50 µm offset ⇒ no readable ink) and tested it on eighty. The *direction*
+>   holds (4.93 vs 5.91, p = 0.017) but 60 µm scores worse than both 50 and 70: a curve
+>   that rises, dips and rises again has no cut point. And the strong form fails outright
+>   — the corpus median offset is 67 µm, so the threshold would condemn 64 of 80 segments
+>   that visibly carry ink, and only 8 % of those above it land in the bottom ink decile
+>   against 10 % expected by chance. **The quantity is ordinal; an absolute threshold on
+>   it does not transport.**
 
 ---
 
