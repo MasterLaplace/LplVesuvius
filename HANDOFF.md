@@ -4,6 +4,29 @@ Document de passation. **À lire en entier avant de reprendre.**
 
 ---
 
+## 0. ⚠⚠ LE CADRAGE — à lire avant tout le reste
+
+Recadré par l'auteur le 2026-08-19, après qu'une première roadmap se soit trompée de
+problème. **Ce projet ne vise ni à traduire, ni à transcrire, ni à dérouler 53 rouleaux
+sur cette machine, ni à scanner, ni à entraîner un gros modèle.**
+
+**Il vise à fermer la chaîne GÉOMÉTRIQUE** : une pipeline assez intelligente pour
+cartographier un papyrus cabossé et carbonisé, **automatiquement**, par l'algorithmique
+et par l'optimisation extrême là où ça bloque — puis **la leur donner à lancer**, pour
+que les chercheurs fassent le calcul et la lecture à leur échelle.
+
+⭐ Et c'est exactement ce que le prix demande, mot pour mot : *« The unrolling pipeline
+should be **fully automated** »*, *« **or renders with ink** »*, et *« consider a **Docker
+image that we can easily run** to reproduce your work »*. Les 775 heures d'annotation de
+l'état de l'art ne sont **pas une barrière à l'entrée — elles sont la cible à
+supprimer**.
+
+> ⚠ Un concours open source ne se conçoit pas pour n'être gagnable que par qui possède des
+> H100 et des téraoctets. Ce qu'il récompense est une **méthode que d'autres peuvent
+> rejouer**.
+
+Détail complet : [`31`](docs/31_roadmap.md).
+
 ## 1. ⭐⭐ L'OBJECTIF — et ce n'est pas le texte
 
 > **Le but est le DÉROULEMENT, pas la lecture.** Traduire n'est pas notre métier.
@@ -184,7 +207,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 | **`28`** | ⭐⭐ **le paysage du contrôle qualité** — ce qui existe, ce qui a été refusé, et la limite mesurée de la détection par la géométrie seule |
 | **`29`** | ⭐ **le registre consolidé de tout ce qui reste** — 525 énoncés repliés, sourcés en `fichier:ligne`. **Commencer par là pour choisir un lot** |
 | **`30`** | ⚠⚠ **le traceur est un TIRAGE** — 13 traces propres sur 14 à paramètres identiques, quand `24` en avait une à 240. Coûte deux explications causales, rapporte un levier |
-| **`31`** | ⭐ **la roadmap** — où est l'argent atteignable, et les trois façons dont elle peut se tromper |
+| **`31`** | ⭐⭐ **la roadmap** — le Grand Prize est un prix d'**algorithmique de géométrie**, pas de lecture, et son critère d'acceptation est une **image Docker qu'ils lancent**. Ce que le Laplace Project a déjà résolu et qui transfère |
 | **`32`** | ⭐ **EduceLab-Scrolls, le papier fondateur** — ce qu'il a posé, et les contrôles négatifs qu'il n'a pas faits (dont un témoin parfait que son pipeline **jette**) |
 
 ## 4. L'outillage, et comment le relancer

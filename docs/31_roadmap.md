@@ -1,274 +1,299 @@
-# Roadmap — ce qu'il faudrait pour finir, et par où passer
+# Roadmap — fermer la chaîne géométrique, et la leur donner à lancer
 
-2026-08-19. Écrit après la lecture intégrale des **quatre** articles primaires, de la
-carte technique officielle, de l'écosystème d'outils, et des 34 documents de ce dépôt.
-C'est une proposition, pas un plan validé : chaque étape porte ce qui la rend possible et
-ce qui pourrait la tuer.
-
-⚠ **Une roadmap est le genre de document qui vieillit le plus vite et se relit le moins.**
-Celle-ci s'appuie sur des mesures datées ; quand l'une tombe, l'étape qu'elle porte tombe
-avec. Les dépendances sont donc écrites, pas implicites.
+2026-08-19. ⚠⚠ **Deuxième version, après recadrage de l'auteur.** La première traitait le
+Grand Prize comme un problème de **lecture** et le déclarait hors de portée parce que
+l'état de l'art vient de dérouler un rouleau avec **775 heures d'annotation**. C'était à
+l'envers : **les 775 heures ne sont pas une barrière à l'entrée, elles sont la cible à
+supprimer.** Le prix ne demande pas de lire du grec ni d'entraîner un gros modèle — il
+demande une **chaîne géométrique automatique**, et il demande qu'on puisse la **lancer**.
 
 ---
 
-## 1. Où est l'argent, et lequel est atteignable
+## 1. Ce que le prix demande vraiment — lu mot pour mot
 
-| prix | montant | ce qu'il faut | atteignable ? |
-|---|---:|---|---|
-| **Progress Prize** | **20 000 $/mois** | la meilleure contribution open source du mois | ⭐⭐⭐ **oui, tout de suite** |
-| **First Letters** | **50 000 $ × 10** | **10 lettres dans UNE zone de 4 cm²**, sur un rouleau où personne n'a rien lu | ⭐⭐ **oui, c'est la cible** |
-| Titre de PHerc. Paris 4 | 50 000 $ | l'image du titre | ⭐ peut-être — c'est un problème de *où chercher* |
-| **Grand Prize** | **800 000 $** | **100 %** du recto d'un rouleau, ≤ **8 h** d'annotation humaine | ❌ **pas nous, pas seuls, pas en dix mois** — voir §7 |
+Trois lignes de `/prizes`, et elles décident de tout :
 
-⭐⭐ **Le calcul qui décide de la stratégie** : le Grand Prize demande 100 % d'un rouleau
-avec 8 h d'humain, quand l'état de l'art vient d'en faire un avec **775 h** (`27` §3).
-Facteur ~100. First Letters demande **4 cm²** — et `24` a tracé **8,48 cm² en 13,9
-secondes**. Ce ne sont pas deux difficultés du même ordre ; ce sont deux problèmes
-différents.
+> *« **100 % of the papyrus recto surface unrolled.** If the scroll possesses flakes or
+> detached patches, they should also be segmented and unrolled […] It is permissible to
+> skip disconnected outer patches if they constitute less than 10 % […] »*
 
-> **La stratégie tient en une phrase : viser les dix First Letters, et laisser le Grand
-> Prize émerger de ce qui aura été construit pour eux — ou pas.**
+> *« Ink detection **or renders with ink** should be produced from or on top of the
+> flattened images. […] at least **70 %** of each counted column's preserved characters
+> are legible. »*
 
-## 2. Le mur de la résolution — et pourquoi il ne ferme PAS First Letters
+> *« The unrolling pipeline should be **fully automated**; up to **8 documented hours** of
+> human annotation / input are tolerated. »*
 
-C'est le premier réflexe après avoir lu `27` §1, et il est faux.
+> ⭐⭐ *« For **fully automated software**, consider a **Docker image that we can easily
+> run** to reproduce your work, and please include system requirements. »*
 
-| | résolution |
+**Ce que ça dit, en clair :**
+
+| ce que le prix demande | ce que ça n'est PAS |
 |---|---|
-| cible de la voie **topographique** (`27` §1) | **~1 µm** |
-| scan de production ESRF/BM18 de `27` §3 | 2,4 µm |
-| **les 13 rouleaux du prix** | **8,64–9,36 µm** |
-| ⭐ **le scan sur lequel le Grand Prize 2023 a été GAGNÉ** | **7,91 µm** |
+| dérouler **100 % du recto** | traduire, transcrire, lire du grec |
+| **automatiquement**, ≤ 8 h d'humain | 775 h d'atelier |
+| un **rendu** sur lequel l'encre est visible | entraîner un modèle d'encre — *« or renders with ink »*, et le modèle de 2023 est public |
+| **une image Docker qu'ILS lancent** | un résultat qu'on leur demande de croire |
 
-⭐⭐ **La dernière ligne est celle qui compte.** Le texte de Scroll 1 a été lu à 7,91 µm,
-par un modèle appris. Les rouleaux du prix sont à 8,64–9,36 µm — **10 à 18 % plus
-grossier**, pas un facteur. La cible de 1 µm de `27` §1 vaut pour la détection **par le
-seul microrelief**, sans modèle ; elle ne borne pas un détecteur appris sur du CT, qui
-exploite autre chose.
+⭐ La dernière ligne est celle qui définit le livrable. **Le prix est un prix
+d'algorithmique de géométrie, et son critère d'acceptation est l'exécutabilité.** Un
+concours open source ne se conçoit pas pour être gagnable seulement par qui possède des
+H100 et des téraoctets ; ce qu'il récompense, c'est une **méthode que d'autres peuvent
+rejouer**.
 
-⚠ **Ce qui reste vrai du mur** : voir l'encre *directement dans le rendu, sans modèle* —
-ce que le règlement autorise explicitement — est bien hors de portée à 9 µm. Il faudra
-donc un **modèle**, et donc une **surface assez bonne pour qu'il ait quelque chose à
-lire**. Ce qui ramène au vrai goulot, qui est géométrique.
+## 2. La thèse
 
-## 3. ⭐⭐⭐ Le levier découvert le 2026-08-19 : le traceur est un **tirage**
+> **Construire une chaîne assez intelligente pour cartographier correctement n'importe
+> quel papyrus, si cabossé et carbonisé soit-il — par l'algorithmique, et par
+> l'optimisation extrême là où la performance bloque. Puis la leur donner à lancer.**
 
-Mesuré ce soir, et c'est ce qui réoriente tout le reste (`30`).
+Ce qui reste hors périmètre, et l'assumer sert la crédibilité plutôt qu'elle ne la coûte :
 
-La graine de `24` — celle qui a donné **240 auto-intersections** — rejouée avec **les
-mêmes paramètres** rend **zéro**, plusieurs fois de suite. Le maillage archivé, lui,
-remesure bien 240 aujourd'hui : **la mesure est fidèle, c'est le traceur qui est
-instable.** Et un run rend **8,475839 cm²** contre **8,476817** pour l'archivé — soit
-**0,01 % d'écart d'aire, et deux verdicts opposés.**
+- ❌ traduire, transcrire, juger du grec — c'est le métier de papyrologues, et `29` §3
+  garde ce cap ;
+- ❌ dérouler les 53 rouleaux sur cette machine — c'est leur calcul, pas le nôtre ;
+- ❌ scanner quoi que ce soit — les volumes sont publiés ;
+- ❌ entraîner un modèle massif — le modèle du Grand Prize 2023 est public, et le papier
+  de juin 2026 mesure qu'il **généralise en *zero-shot*** à des rouleaux non vus.
 
-> **La différence entre une trace condamnée et une trace propre n'est pas dans les
-> paramètres. Elle est dans le tirage.**
+**Ce que ça laisse est exactement le goulot que l'équipe déclare** : *« No method yet
+traces a complete, correct surface through a scroll automatically »*.
 
-⭐⭐ **Conséquence stratégique, et c'est le cœur de cette roadmap :**
+## 3. ⭐⭐ Le capital réel : ce que le Laplace Project a déjà résolu
 
-| fait | conséquence |
+C'est l'argument que la première version ratait. Ce dépôt n'attaque pas ce problème depuis
+zéro : il l'attaque depuis un environnement qui a déjà **construit et prouvé** les
+machineries dont il a besoin.
+
+### 3.1 La représentation — et c'est le pont le plus fort
+
+`00` §2 dit ce qui manque entre les deux familles de mailleurs :
+
+> *« Ce qui manque […] est le **numéro d'enroulement** — la seule quantité qui rende le
+> sheet switching **nommable** : deux points d'une même feuille le partagent, un saut de
+> spire l'incrémente. »*
+
+⭐⭐⭐ **LplPlugin a résolu exactement ce problème de représentation, pour des mondes.**
+`ecs::WorldPosition` : un point n'est pas un flottant global, c'est **un index de cellule
+entier plus un décalage local borné**. La raison écrite dans `procgen/Chunking.hpp` :
+
+> *« Far from the origin a float loses the precision to distinguish adjacent cells, and a
+> world that quietly degrades at its edges is worse than one with a hard boundary. »*
+
+**Transposé au rouleau** : un point n'est pas (x, y, z) flottant, c'est
+**(numéro d'enroulement entier, position d'arc, hauteur)** en virgule fixe. Conséquences
+immédiates, et ce sont exactement celles que le domaine cherche :
+
+| propriété | conséquence |
 |---|---|
-| une trace coûte **~14 s** | on peut en tirer beaucoup |
-| notre juge coûte **0,05 s** et n'exige **aucune vérité terrain** | on peut toutes les juger |
-| la qualité est un **tirage** | **échantillonner et sélectionner est une méthode, pas un bricolage** |
+| l'index d'enroulement est un **entier** | un saut de spire est une **discontinuité entière** — exactement détectable, **sans seuil** |
+| la précision est **constante partout** | elle ne se dégrade pas vers le cœur, là où les spires se serrent |
+| la normalisation vit en **un seul endroit** | `normaliseWorldPosition` existe parce que *« deux implémentations finiraient par ne pas s'accorder sur le côté d'une frontière, et un corps sauterait d'une largeur de chunk »* — c'est mot pour mot le saut de spire |
 
-**Personne ne fait ça, et pour une raison précise : personne n'a de juge assez bon
-marché.** L'équipe du concours corrige à la main (`27` §3) ; les outils communautaires
-jugent *après coup* un maillage qu'on a déjà décidé de garder (`28`).
+⚠ Et ce n'est pas une analogie : c'est **le même bug**, résolu **une fois**, dans un dépôt
+voisin, avec sa justification écrite.
 
-⚠⚠ **Et le piège qui va avec, à traiter dès la conception : la malédiction du
-vainqueur.** Sélectionner le minimum de N tirages avec un juge bruité fait remonter la
-chance autant que la qualité. Le protocole honnête est donc : **sélectionner sur un axe,
-valider sur l'autre.** Nous avons exactement deux axes indépendants (§4), ce qui rend ce
-protocole possible — c'est une chance, pas une élégance.
+### 3.2 L'échelle — un volume de 20 To n'est pas un problème neuf
 
-## 4. ⭐⭐ L'instrument qui n'existe nulle part : le **désaccord** entre deux axes
+Le papier de juin 2026 donne **20 To par volume reconstruit**, jusqu'à **100 To bruts**.
+LplPlugin a traité la même forme de problème et l'a mesurée :
 
-C'est la proposition technique centrale, et elle sort de `28`.
-
-| axe | ce qu'il voit | ce qu'il **ne peut pas** voir |
+| machinerie | ce qu'elle a prouvé | où |
 |---|---|---|
-| **géométrie** — auto-intersection (`vc_tifxyz_selfcross`, `03`) | une surface qui se traverse : un défaut **sans lecture innocente, sans seuil à débattre** | ⚠ *« no geometry-only test can separate [a one-wrap switch] from bending »* — l'auteur de `tifxyz-surgeon`, mesuré : l'écart inter-spires (18–58 vx) est à peine plus large qu'une cellule de grille (20 vx) |
-| **volume** — notre instrument de profondeur (`12`) | où est **réellement** la matière le long de la normale, sans vérité terrain | ⚠ en zone **comprimée**, l'information n'est pas dans le CT : 78 % de pics uniques larges couvrant **deux** feuilles (`villa#191`) |
+| `math::ReliefMosaic` + `ReliefStreamer` | relief tuilé à résidence **bornée**, 64 tuiles max, **aucune allocation**, lisible en ring 0 | Terre entière = 1,78 To à 30 m ; le niveau grossier tient en **27 Mo** |
+| `harvest::CatalogueStream` | bake en flux : **11,9 Go projetés → 7 Mo de RSS**, plat de 4 à 256 tuiles | 19,6 M de lignes en 79 s |
+| `harvest::MappedFile` | interroger **3,71 Go** en **220 Ko** de RSS anonyme, et survivre à un cgroup de 512 Mo qui tue une allocation de 1 Gio | mesuré sous contrainte |
+| partitionnement + `cataloguePartPath` | découper quand ça dépasse, **refuser un ensemble troué** plutôt que répondre sur un sous-ensemble | plafond 4 Gio |
 
-⭐⭐⭐ **Chacun est aveugle là où l'autre voit. Et leur DÉSACCORD est le signal que ni l'un
-ni l'autre ne porte seul :**
+⭐ **La conclusion qui compte** : « le volume est trop gros » n'est pas un obstacle dans ce
+projet, c'est un problème déjà résolu deux fois, avec les mesures pour le prouver.
 
-> Un endroit où la **géométrie dit propre** et où le **volume dit que le pic de matière
-> est à une distance inter-feuilles** est exactement la panne que Henderson nomme —
-> *« the surface **wanders between two true windings**, instead of committing to one »* —
-> et qu'**aucun test géométrique n'attrape**.
+### 3.3 Le déterminisme — et ce que la mesure de ce soir en fait
 
-**Pourquoi c'est faisable ici et pas ailleurs** : il faut les deux instruments, et il faut
-que le second n'exige pas de vérité terrain. Nous avons les deux. `27` §2 montre que la
-seule métrique de saut de spire publiée (WJF) **exige un maillage de référence** — donc
-elle est inapplicable aux treize rouleaux du prix, dont **aucun** n'en a.
+`30` a mesuré que `vc_grow_seg_from_seed` **n'est pas reproductible** : quatorze tirages à
+paramètres identiques, treize propres, un à 79 croisements, et un maillage archivé à 240
+qu'aucun tirage ne reproduit. Les aires vont de **5,69 à 10,34 cm²**.
 
-**La forme du test, sans seuil à régler** : l'unité n'est pas le micromètre, c'est
-**l'écart inter-feuilles du rouleau**, que `16` et `17` mesurent déjà rouleau par rouleau.
-Un pli donne une dérive **lisse** du champ de profondeur le long de la surface ; un saut
-donne une **marche d'une unité**. C'est la dérivée qui discrimine, et son unité naturelle
-rend le seuil sans objet — c'est très exactement la forme que le concours a acceptée en
-24 heures et refusée deux fois autrement (`28` §5).
+⚠⚠ **Une chaîne dont un maillon rend un résultat différent à chaque exécution ne peut pas
+être « fully automated » au sens du prix** : « automatique » veut dire qu'on peut la
+lancer et obtenir le résultat annoncé, pas qu'on peut la lancer.
 
-## 5. ⭐⭐ La correction : un **gauchissement difféomorphe** piloté par la mesure
+Or **le déterminisme est la culture centrale de LplKernel** : vingt et une portes de
+parité (P6 à P21) exigent qu'un calcul soit **bit-identique** entre un oracle Linux et un
+noyau i686. La machinerie qui rend ça possible est disponible :
 
-C'est le lot nº 2 de `29`, et il a maintenant une forme mathématique.
+- **arithmétique en virgule fixe** (`Fixed32`, Q16.16) et **CORDIC** — aucun flottant dans
+  l'état autoritatif, donc aucune dérive d'ordre d'opérations ;
+- **la règle** : *le flottant n'existe que dans les chemins non autoritatifs* ;
+- **les portes de parité** comme forme de preuve — un nombre, deux cibles, bit à bit.
 
-**Ce qui est acquis** : `20` a mesuré que l'erreur d'une trace est **structurée** et que
-**translater ne la répare pas**. Le remède est donc un gauchissement.
+> ⭐⭐ **Un traceur dont la sortie est reproductible au bit près serait, en soi, une
+> contribution que personne n'a.** Et c'est une contribution d'algorithmique, pas de
+> matériel.
 
-**Le danger évident** : déplacer chaque sommet le long de sa normale d'une quantité
-mesurée et bruitée **crée** des auto-intersections — on fabriquerait le défaut qu'on
-prétend enlever.
+### 3.4 Les autres pièces déjà écrites et éprouvées
 
-⭐⭐ **La parade est déjà écrite, dans un papier qu'on vient de lire.** Henderson
-paramètre sa déformation comme l'**intégrale d'un champ de vitesse lisse**, ce qui la
-rend **difféomorphe par construction** : *« the space of flow fields is the Lie algebra
-that generates the Lie group of diffeomorphisms »*. Un difféomorphisme ne peut ni
-déchirer, ni recoller, ni replier — donc **il ne peut pas créer d'auto-intersection.**
+| pièce | ce qu'elle fait ailleurs | ce qu'elle ferait ici |
+|---|---|---|
+| grille de hachage spatial, octree persistant | broad-phase de collision, **0 allocation par pas** mesurée | adjacence de feuilles, voisinage de spire |
+| `procgen` + **portes de jouabilité** | générer une structure **puis vérifier qu'elle est traversable** (Dijkstra, `evaluateCaveSystem`, `goalReachable`) | tracer une surface **puis vérifier qu'elle est une nappe unique** — *même forme de garantie* |
+| `tools/temoins.sh`, 17 batteries / 179 contrôles | une vérification doit pouvoir échouer, et on le **sonde** | ce qui rend nos résultats opposables |
+| `test-tick-allocations` | prouver **zéro allocation** dans une boucle chaude | l'optimisation extrême, quand elle sera nécessaire |
 
-> **La combinaison est neuve** : il pilote cette machinerie par un **a priori global** (la
-> spirale) et des prédictions de réseau ; nous la piloterions par une **mesure locale
-> directe du volume**. Même garantie, source d'information différente — et la nôtre ne
-> demande pas de vérité terrain.
+## 4. Le livrable — et pourquoi il rend le test trivial pour eux
 
-⚠ Trois choses à vérifier avant d'y croire, dans cet ordre :
-1. l'intégration discrète **ne préserve pas** la garantie gratuitement — Henderson le dit
-   lui-même (*« fewer [steps] could cause … not [to] be sufficiently close to the identity
-   »*). Il faut borner le pas ;
-2. le champ de profondeur est bruité : il faut le **régulariser**, et la régularisation
-   est exactement ce qui peut effacer le signal qu'on veut appliquer ;
-3. ⚠⚠ et surtout : **rien ne prouve encore que corriger serve à quelque chose** (§6).
+Le prix le dit : *« a Docker image that we can easily run »*. Donc le livrable n'est pas
+un résultat, c'est **une chaîne exécutable qui s'insère dans la leur**.
 
-## 6. ⭐⭐⭐ La question qui commande tout, et qui n'est pas au bout de la chaîne
+Ce que ça implique, concrètement :
+
+1. **Consommer leurs formats, produire leurs formats.** `tifxyz` en entrée et en sortie,
+   volumes OME-Zarr lus **en streaming depuis leur bucket** — `24` a déjà prouvé que le
+   volume de 893 Go n'a jamais besoin d'être téléchargé.
+2. **Utiliser leurs outils là où ils existent.** `vc_tifxyz_selfcross` est officiel depuis
+   le 4 août ; nos instruments s'ajoutent, ils ne le remplacent pas.
+3. **Rendre le verdict lisible dans leur interface.** Écrire les sites de défaut en
+   *point collection* JSON rechargeable dans VC3D, et **un code de sortie distinct** pour
+   « défaut trouvé » (3) et « erreur » (1) — les deux conventions que `28` §7 a relevées
+   comme étant celles du dépôt.
+4. **Une image Docker, et les besoins système écrits.**
+
+⭐ **C'est ça, « ils n'auront pas le choix de tester »** : si lancer coûte une commande et
+que la sortie se recharge dans l'outil qu'ils utilisent déjà, l'essai coûte moins cher que
+la discussion.
+
+## 5. La chaîne, étage par étage — et ce qui manque à chacun
+
+| étage | état | ce qui manque |
+|---|---|---|
+| **choisir où commencer** | ✅ `trouver_graine.py`, critère de planéité, répliqué sur 12 rouleaux (p = 0,0386) | rien de bloquant |
+| **tracer** | ⚠ l'outil officiel marche mais **n'est pas reproductible** (`30`) | soit le rendre déterministe, soit **tirer N fois et sélectionner** |
+| **juger sans vérité terrain** | ✅ deux axes : auto-intersection (`03`) et profondeur (`12`) | ⭐ **leur désaccord** — §6 |
+| **corriger** | ⚠ `20` sait que l'erreur est structurée et que translater ne répare pas | le **gauchissement difféomorphe** — §7 |
+| **couvrir 100 %** | ❌ rien | l'enchaînement spire à spire, borné en mémoire — §8 |
+| **aplatir** | ✅ `vc_flatten` / SLIM | rien |
+| **rendre** | ✅ `vc_render_tifxyz` | ⚠ la fenêtre de profondeur doit être **centrée sur le pic mesuré**, pas sur la couche tracée (`12`) |
+| **lire** | ❌ **hors périmètre, et c'est délibéré** | eux |
+
+## 6. ⭐ L'instrument : le désaccord entre deux axes
+
+L'auteur du meilleur détecteur géométrique communautaire écrit, dans son propre code :
+
+> *« Gross excursions are caught; a minimal one-wrap switch on a tight winding is not, and
+> **no geometry-only test can separate it from bending**. »*
+
+Nous ne sommes pas géométrie seule : nous lisons le volume. Un endroit où la **géométrie
+dit propre** et où le **volume dit que le pic de matière est à une distance
+inter-feuilles** est exactement la panne que Henderson nomme — *« the surface wanders
+between two true windings »* — et qu'aucun test géométrique n'attrape.
+
+**Sans seuil à régler** : l'unité n'est pas le micromètre, c'est **l'écart inter-feuilles
+du rouleau**, que `16` et `17` mesurent déjà rouleau par rouleau. Un pli donne une dérive
+**lisse** ; un saut donne une **marche d'une unité**.
+
+⭐⭐ Et avec la représentation du §3.1, ce test devient **exact** : la marche est un
+**incrément entier** de l'index d'enroulement, pas une quantité à seuiller.
+
+## 7. La correction : un gauchissement qui ne peut pas créer le défaut qu'il enlève
+
+`20` a mesuré que l'erreur est structurée et que **translater ne la répare pas**. Le
+remède est un gauchissement — et le danger évident est de **fabriquer** les
+auto-intersections qu'on prétend enlever.
+
+La parade est dans un papier qu'on vient de lire : Henderson paramètre sa déformation
+comme l'**intégrale d'un champ de vitesse lisse**, ce qui la rend **difféomorphe par
+construction** — *« the space of flow fields is the Lie algebra that generates the Lie
+group of diffeomorphisms »*. Un difféomorphisme ne peut ni déchirer, ni recoller, ni
+replier, donc **il ne peut pas créer d'auto-intersection**.
+
+⭐ **La combinaison est neuve** : il pilote cette machinerie par un **a priori global** (la
+spirale) ; nous la piloterions par une **mesure locale directe du volume**. Même garantie,
+information différente — et la nôtre n'exige aucune vérité terrain.
+
+⚠ Trois choses à vérifier avant d'y croire : l'intégration discrète ne préserve pas la
+garantie gratuitement (Henderson le dit) ; le champ de profondeur est bruité et le
+régulariser peut effacer le signal ; et **rien ne prouve encore que corriger serve à
+quelque chose** — §9.
+
+## 8. Couvrir 100 % — et pourquoi c'est un problème d'ingénierie, pas de matériel
+
+C'est l'étage vide, et c'est celui qui vaut le prix.
+
+La stratégie que l'état de l'art utilise est le **transfert de spire à spire** : une fois
+une spire bien tracée, on la décale le long de sa normale jusqu'à rencontrer la
+prédiction suivante. C'est ce que le papier de juin 2026 appelle le *« wrap by wrap copy
+tool »*, et c'est là que ses **~25 h par spire** sont dépensées — en **correction
+manuelle** de ce que le transfert rate.
+
+**Donc la question du prix se réduit à une seule** :
+
+> **Qu'est-ce qui remplace l'humain qui corrige le transfert de spire à spire ?**
+
+Et la réponse que ce dépôt peut donner est composée de pièces qui existent :
+
+1. **détecter** que le transfert a fauté → §6, sans vérité terrain, en 0,05 s ;
+2. **corriger** → §7, sans pouvoir empirer la topologie ;
+3. **ne pas propager** → une spire n'est acceptée que si elle passe les deux axes, sinon
+   on retire et on retire — l'échantillonnage de `30` ;
+4. **tenir 31 spires × 1231 cm² en mémoire bornée** → §3.2, déjà résolu deux fois ;
+5. **rester reproductible** → §3.3.
+
+⚠ **Ce qui n'est pas résolu et qu'il ne faut pas se cacher** : les régions comprimées, où
+`villa#191` mesure que **78 %** des points de vérité montrent un **pic unique large
+couvrant deux feuilles**. Là, l'information **n'est pas dans le CT**. Aucune algorithmique
+ne la fabrique. Le prix tolère *« less than 10 % »* de patches déconnectés sautés — c'est
+la marge dans laquelle ce problème doit tenir, et **le mesurer par rouleau est une des
+premières choses à faire**, parce que ça dit sur quel rouleau le prix est jouable.
+
+## 9. ⭐⭐ La question qui commande tout, et qui n'est toujours pas tranchée
 
 > *« Une surface propre donne un meilleur texte » est une affirmation **sur le pipeline**,
 > et **elle n'est pas prouvée. »* — `03`:137
 
-**Aucun étage de cette roadmap n'a de valeur si la réponse est non.** Et ce n'est pas une
-faiblesse locale : `28` montre que l'équipe du concours **ne publie aucun taux d'erreur de
-traçage**, ni avant ni après correction. Personne n'a mesuré ce que coûte un défaut.
+Elle change de sens dans ce cadrage, et devient **plus** importante, pas moins : si la
+qualité géométrique ne décide de rien en aval, alors tout l'appareil d'instruments est un
+raffinement sans conséquence, et le prix se gagnerait avec une chaîne médiocre mais
+complète.
 
-**Le dessin d'expérience est à notre portée, et il est apparié** :
+Le dessin est apparié et à notre portée : un segment **publié** de Scroll 1, deux versions
+(originale et gauchie), le **même** modèle d'encre, la **même** carte publiée — avec un
+gauchissement **nul** et un **aléatoire de même amplitude** comme contrôles.
 
-1. prendre un segment **publié** de Scroll 1 (corpus où tout marche : 80 segments, cartes
-   d'encre publiées, modèle qui tourne) ;
-2. en produire deux versions — l'originale, et la **gauchie** par §5 ;
-3. rendre les deux, passer le **même** modèle d'encre, comparer l'AUC contre la **même**
-   carte publiée.
+⚠ Et EduceLab (`32`) montre qu'il faut aller plus loin que ce que le domaine fait :
+mesurer aussi sur un **substrat connu sans encre**, parce qu'un détecteur qui ne se tait
+jamais ne détecte rien.
 
-⚠ Le contrôle qui rend la mesure honnête : un **gauchissement nul** et un **gauchissement
-aléatoire de même amplitude**. Sans eux, tout gain se lit comme un succès alors qu'il peut
-n'être qu'une perturbation qui aide par hasard.
+## 10. Le calendrier
 
-> ⭐ **Que la réponse soit oui ou non, c'est publiable.** Un « non » mesuré est un résultat
-> que personne n'a, et il redirige tout le domaine. C'est exactement le genre de
-> contribution que les Progress Prizes récompensent — *« amélioration quantitative sur
-> données réelles »* et *« documentation qui permet à d'autres d'appliquer le travail »*.
-
-## 6bis. ⭐⭐ Ce que la lecture d'EduceLab a ajouté — deux instruments, et une place libre
-
-[`32`](32_educelab_le_papier_fondateur.md), lu le soir même. Le papier fondateur du
-domaine laisse **deux trous précis**, tous deux dans notre spécialité — juger sans vérité
-terrain — et tous deux ouverts depuis trois ans.
-
-**(a) L'unique contrôle sans vérité terrain du domaine est *nommé* et jamais *outillé*.**
-Sur les couches cachées, EduceLab valide en écrivant que *« the scale, line separation,
-and script … are **consistent with** those observed on the fragment surfaces »*. C'est un
-**transport de calibration** : on possède une région vérifiable, on montre que les
-statistiques de second ordre coïncident dans celle qui ne l'est pas. La forme est juste,
-et elle est laissée au jugement de l'œil.
-
-Or les trois grandeurs se mesurent **sans jamais connaître le contenu** : interligne par
-autocorrélation du profil de densité, échelle de caractère par tailles de composantes
-connexes, taux de couverture, épaisseur de trait par distance au squelette.
-
-> ⭐ **C'est le meilleur candidat immédiat à un Progress Prize** : petit, mesurable,
-> réutilisable par tous, il comble un trou que le papier fondateur nomme lui-même, et il
-> ne demande ni synchrotron, ni GPU, ni annotation.
-
-**(b) Le contrôle négatif parfait est déjà acquis, et le pipeline le jette.** Les
-fragments d'EduceLab sont montés sur une **feuille de papier de support**, que la
-segmentation capte — un substrat **fibreux**, imagé dans la **même session**, au **même
-voxel**, avec la **même fenêtre d'intensité**, et **connu sans encre**. Le nettoyage
-manuel le supprime. **Le témoin idéal était dans l'image.**
-
-⚠ Et le rappel qui vaut pour nous : EduceLab rapporte un FPR de 0,051 mesuré **sur des
-images qui contiennent de l'encre partout autour**. Un détecteur qui ne se tait jamais ne
-détecte rien — et personne n'a mesuré son silence.
-
-**(c) Une correction gratuite sur un résultat publié** : EduceLab exclut les pixels
-douteux de l'**entraînement** mais pas de l'**évaluation**. Ses métriques mesurent donc en
-partie le bruit de sa propre référence. Exclure les mêmes pixels des deux côtés ne demande
-aucun recalcul lourd.
-
-## 7. Le Grand Prize — l'évaluation honnête
-
-**Ce qu'il demande** : 100 % du recto d'un rouleau, 70 % des caractères lisibles sans
-interpolation papyrologique, pipeline automatisé, **≤ 8 h** d'annotation humaine
-documentée.
-
-**Ce qui sépare l'état de l'art de ça** :
-
-| obstacle | mesuré | qui peut le lever |
+| quand | quoi | pourquoi |
 |---|---|---|
-| **775 h → 8 h** d'annotation | `27` §3 | un traçage automatique fiable — le problème ouvert nº 1 du domaine |
-| la **qualité des étiquettes** est *« one of the main unwrapping bottlenecks »* | page officielle | des annotateurs experts, du temps, une infrastructure |
-| en zone comprimée **l'information n'est pas dans le CT** | 78 % de pics fusionnés | **un rescan plus fin** — donc du temps de synchrotron |
-| le prédicteur de surface a un **Dice de 0,308** | `27` §3 | de l'entraînement à grande échelle |
+| **avant le 31 août** | Progress Prize | ⚠ `15` se déclare **périmé sur deux points** ; à refaire avant l'envoi, pas après |
+| **septembre** | §9 — *corriger sert-il à quelque chose ?* | c'est le socle, et publiable dans les deux sens |
+| septembre | l'échantillonnage de `30` : N tirages, sélection sur un axe, **validation sur l'autre** | bon marché, le levier est mesuré |
+| septembre | ⭐ **mesurer la part comprimée rouleau par rouleau** | ça dit **sur lequel des treize** le prix est jouable, et ça coûte une campagne de séparabilité qu'on sait faire |
+| octobre | §6 — l'instrument de désaccord | c'est la contribution que le concours nomme |
+| oct.–nov. | §3.1 — la représentation en **index d'enroulement + décalage** | c'est elle qui rend §6 exact au lieu d'approché |
+| nov.–janv. | §8 — l'enchaînement automatique de spire à spire | l'étage vide, celui qui vaut le prix |
+| févr.–avril | 100 % d'**un** rouleau, en Docker, avec les besoins système | le livrable |
+| **en continu** | un Progress Prize par mois | 20 000 $/mois, et c'est ce qui garde l'attention du jury |
 
-⚠⚠ **Trois de ces quatre lignes ne sont pas des problèmes d'algorithme.** Ce sont du temps
-de faisceau, des heures d'annotateurs experts, et des GPU. Un projet solo avec un iGPU
-n'en lève aucune.
+⭐ **L'ordre n'est pas négociable sur deux points** : §9 avant §7 (ne pas construire un
+correcteur avant de savoir si corriger sert), et **la mesure de compressibilité avant de
+choisir le rouleau** (ne pas dépenser six mois sur un rouleau où l'information n'est pas
+dans le scan).
 
-> **Verdict honnête : le Grand Prize n'est pas atteignable par ce projet seul d'ici juin
-> 2027.** Ce qui l'est, c'est de fournir **la pièce qui manque à ceux qui peuvent** — la
-> détection conservatrice de panne, que la page officielle réclame nommément et que
-> personne n'a. Et si cette pièce marche, elle vaut une **place au classement** du Grand
-> Prize (100 000 $ / 50 000 $ / 50 000 $) sans avoir à tout faire soi-même.
+## 11. ⚠ Les quatre façons dont cette roadmap peut se tromper
 
-## 8. Le calendrier proposé
-
-| quand | quoi | pourquoi maintenant |
-|---|---|---|
-| **avant le 31 août** | soumettre le Progress Prize | ⚠ échéance dans 12 jours, le texte existe (`21`), il manque **le dépôt publié** et les figures. ⚠⚠ Et `15` se déclare **périmé sur deux points** : à refaire avant l'envoi, pas après |
-| **septembre** | §6 — *corriger sert-il à quelque chose ?* | c'est le socle ; tout le reste en dépend, et le résultat est publiable dans les deux sens |
-| **septembre** | §3 — l'échantillonnage : N tirages, sélection sur un axe, validation sur l'autre | bon marché, et le levier est déjà mesuré |
-| **octobre** | §4 — l'instrument de désaccord | c'est la contribution que le concours nomme, et elle a besoin des deux axes en place |
-| **oct.–nov.** | §5 — le gauchissement difféomorphe | dépend de §6 : si corriger ne sert à rien, cette étape n'existe pas |
-| **nov.–févr.** | **campagne First Letters** sur les 10 rouleaux sans lecture | c'est là qu'est l'argent atteignable, et ça consomme tout ce qui précède |
-| **en continu** | un Progress Prize par mois | 20 000 $/mois, et c'est ce qui finance l'attention du jury |
-
-⭐ **Le meilleur candidat pour le Progress Prize de septembre** est le §6bis (a) :
-quantifier le « consistent with » d'EduceLab. Petit, mesurable, réutilisable, il comble un
-trou que le papier fondateur nomme lui-même, et il ne demande **ni synchrotron, ni GPU, ni
-annotation experte** — c'est-à-dire aucune des trois choses que ce projet n'a pas.
-
-⭐ **L'ordre n'est pas négociable sur un point** : §6 avant §5. Construire un correcteur
-avant de savoir si corriger sert à quelque chose, c'est exactement ce que ce dépôt
-s'interdit.
-
-## 9. Ce qu'on ne peut pas faire, et qu'il faut cesser d'espérer
-
-- **Rescanner** quoi que ce soit — le temps de faisceau ESRF ne s'achète pas.
-- **Entraîner un gros modèle** — un iGPU Arc n'est pas un H100. Ce qui est à notre portée :
-  faire tourner les modèles publiés, et mesurer.
-- **775 heures d'annotation** — ni le temps, ni l'expertise papyrologique.
-- ⚠ **Lire du grec** — le cap du jugement expert (`29` §3) ne se contourne pas. Trois juges
-  mécaniques ont déjà échoué, dont un **définitivement** (un segment de ce type ne porte
-  que 4 à 5 lignes, et les glyphes fusionnent au seuil du modèle).
-
-## 10. ⚠ Les trois façons dont cette roadmap peut se tromper
-
-1. **Si §6 rend « corriger ne change rien »**, les §4 et §5 perdent leur justification
-   *pratique* — ils restent des mesures, ils cessent d'être une voie vers un prix. La
-   roadmap bascule alors entièrement sur la **sélection** (§3), qui ne suppose rien.
-2. **Si l'encre est illisible à 9 µm même avec un modèle**, First Letters se ferme et il ne
-   reste que les Progress Prizes. ⭐ **C'est la première chose à mesurer** : passer le
-   modèle du Grand Prize 2023 sur un rendu de rouleau du prix et regarder. Coût : une
-   trace, un rendu, une inférence. **Cette mesure devrait passer avant tout le reste de
-   cette roadmap.**
-3. **Si le tirage de §3 n'a pas la variance qu'on croit** — cinq runs propres ne font pas
-   une distribution. `30` la mesure sur vingt ; si la queue est trop rare pour être
-   exploitée, l'échantillonnage devient un coût sans gain.
+1. **Si §9 rend « corriger ne change rien »** : les instruments restent vrais, mais ils
+   cessent d'être une voie vers le prix. La chaîne bascule alors sur la **couverture** —
+   tracer 100 %, même moyennement, plutôt que tracer bien.
+2. **Si les treize rouleaux sont tous trop comprimés** : le prix devient inatteignable sur
+   ce corpus, quelle que soit l'algorithmique. ⭐ **C'est mesurable en septembre**, et
+   c'est la mesure qui doit venir tôt.
+3. **Si le traceur ne peut pas être rendu déterministe** et que l'échantillonnage ne suffit
+   pas : « fully automated » devient un mot qu'on ne peut pas tenir. Le repli honnête est
+   de publier le **détecteur** seul, qui n'a pas ce problème.
+4. ⚠⚠ **Si le temps de calcul explose** : 31 spires × 1231 cm², plus N tirages par spire,
+   plus un gauchissement. C'est là que l'optimisation extrême devient le sujet — et c'est
+   la compétence de LplKernel, pas un souhait.
