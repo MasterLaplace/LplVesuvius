@@ -9,6 +9,73 @@ une mesure faite ici et rejouable. Les affirmations non vérifiées sont marqué
 
 ---
 
+## 0. ⭐⭐ Où en est le domaine — août 2026
+
+Ajouté le 2026-08-19, après lecture intégrale des **trois** articles primaires
+([`27`](27_ce_que_la_litterature_dit.md)). Ce document est un état de l'art et il ne
+disait pas le fait le plus important du champ.
+
+**Un rouleau scellé a été entièrement déroulé et lu.** PHerc. 1667, publié le 27 juin
+2026 (arXiv 2606.29085, 27 auteurs, l'équipe entière du concours) : 31 spires,
+**1231 cm²**, **22 colonnes**, transcrites par huit papyrologues. C'est une première, et
+elle est réelle.
+
+**Et le problème reste ouvert.** L'équipe l'écrit elle-même, un mois plus tard, sur sa
+page technique (`/2026_open_problems`, 10 juillet 2026) :
+
+> *« We are **no longer asking whether** a sealed Herculaneum scroll can be read. It can.
+> The harder question is how to make the same process work **automatically, reliably, and
+> at scale** for every scroll. »*
+
+> *« **No method yet traces a complete, correct surface through a scroll
+> automatically** »* — encadré « ⚠️ Open problem » de la même page.
+
+⭐⭐ **Le chiffre qui réconcilie les deux** est enfoui dans la sous-section « Statistics
+and reproducibility » de l'article :
+
+> *« a wrap by wrap copy tool combined with **~25 hours per wrap of manual annotation** »*
+
+**31 spires × 25 h ≈ 775 heures d'annotation humaine** pour ce seul rouleau. Le Grand
+Prize 2027 en tolère **huit**. Un facteur **~100** sépare l'état de l'art de ce qui est
+demandé pour juin 2027.
+
+### Ce qui est résolu, ce qui ne l'est pas
+
+| | état |
+|---|---|
+| **Scanner** un rouleau avec assez de signal | ✅ **résolu** — protocole BM18/ESRF : 2,4 µm, 0,22 m, 78 keV, Paganin δ/β = 1000. Sur PHerc. Paris 4, l'encre devient **directement visible dans le volume** |
+| **Lire** l'encre quand la géométrie est bonne | ✅ largement — modèles entraînés sur fragments, généralisation *zero-shot* démontrée sur deux rouleaux non vus |
+| **Aplatir** une surface correcte | ✅ SLIM |
+| **Tracer** une surface complète et correcte | ❌ **non résolu** — « the first [bottleneck] is **geometric** » |
+| **Détecter automatiquement** qu'une trace a fauté | ❌ **rien n'existe** — le rempart est un masque d'approbation posé à la main, région par région |
+| **Généraliser** à un autre rouleau | ❌ *« does not imply that all sealed Herculaneum rolls are automatically readable »* |
+
+⚠⚠ **Et voici le fait qui justifie ce dépôt** : dans l'article qui vient de lire un
+rouleau entier, **« sheet switches » n'apparaît qu'une seule fois**, dans la liste des
+goulots non résolus — et **aucun taux d'erreur de traçage n'est publié**, ni avant ni
+après correction manuelle. La grandeur que nos instruments produisent n'existe nulle part
+dans la littérature.
+
+⭐ Le tableau des goulots de `/2026_open_problems` le formule en termes d'action :
+
+> **Sheet switches** — *« Meshes can jump from one wrap to another. »*
+> Approche actuelle : *« VC3D inspection and **manual correction** »*.
+> Ce qui aiderait : *« Stronger local continuity constraints and **conservative failure
+> detection** »*.
+
+Et l'un des six appels à contribution de la même page :
+
+> *« help with **automatic topology repair** — building tools that catch mesh-tracing
+> errors like **holes, mergers, and sheet switches without a human checking every traced
+> piece of surface by hand**. »*
+
+⚠ **Portée honnête de cette lecture** : elle dit que la case est ouverte, pas que nous
+l'occupons. Ce dépôt a des instruments qui jugent une trace sans vérité terrain (`03`,
+`12`, `07`) et **une** trace produite puis condamnée par eux (`24`). Ce qu'il n'a pas
+encore, c'est une **amélioration** — voir §9.4.
+
+---
+
 ## 1. La chaîne, et le seul étage qui bloque
 
 ```mermaid
@@ -28,7 +95,7 @@ graph LR
 | **Maillage de la surface** | **le goulot** | `/unwrapping` |
 | Aplatissement 2D | **automatique** | `slim-flatboi`, SLIM |
 | Rendu | **automatique** | Volume Cartographer |
-| Détection d'encre | **résolu** (Grand Prize 2023) | `Vesuvius-Grandprize-Winner` |
+| Détection d'encre | ⚠ **pas « résolu »** : *« ink segmentation remains **weak**, varies across ink recipes and local degradation states »* (`27` §3). Ce qui est acquis, c'est qu'elle **marche quand la géométrie est bonne** — et la généralisation inter-rouleaux est un goulot déclaré | `Vesuvius-Grandprize-Winner` |
 | Lecture | humaine, experte, **en attente d'images** | — |
 
 Le problème n'est pas de trouver *de la* surface — nnUNet le fait bien — mais de
@@ -289,11 +356,21 @@ l'un des **dix** rouleaux du Grand Prize sans aucun segment publié, est tracé
 jamais téléchargé.
 
 > ⚠ **Et la trace est mauvaise** — elle coupe à travers les spires. Ce qui compte est
-> **comment on le sait** : trois mesures indépendantes le disent, et **deux avant que
-> quiconque regarde l'image** (240 auto-intersections à pénétration 200 µm ; **64 %** des
-> fenêtres piquant au bord de la pile, distribution **bimodale**). Les instruments
-> jugeaient le travail des autres ; ils viennent de condamner le nôtre, en 0,05 s, avant
-> le rendu. **C'est la validation qui manquait**, et elle est arrivée par un échec.
+> **comment on le sait** : **240 auto-intersections** à pénétration maximale **200 µm**,
+> mesurées en 0,05 s **avant tout rendu**, sur un rouleau dont l'écart inter-feuilles
+> est de 187 µm — donc une traversée, pas un frôlement. Puis l'image, qui confirme.
+> Les instruments jugeaient le travail des autres ; ils viennent de condamner le nôtre,
+> avant le rendu. **C'est la validation qui manquait**, et elle est arrivée par un échec.
+>
+> ⚠⚠ **Corrigé le 2026-08-19.** Ce paragraphe annonçait **trois** mesures indépendantes,
+> dont « 64 % des fenêtres piquant au bord » et une « distribution bimodale ». Cette
+> troisième jambe a été **retirée** (`24` §2, `25` §5) : la fenêtre de 21 couches ne fait
+> que ±94 µm, soit une **demi**-distance inter-feuilles, et **61 % des profils y sont
+> plats** (amplitude médiane 1,5 %) — l'argmax d'un profil plat est du bruit, et le bruit
+> sort aux deux bords, ce qui *fabrique* la bimodalité. Et sur une fenêtre assez large,
+> la trace **officielle** d'un rouleau du prix échoue le même critère plus mal que la
+> nôtre. Le verdict tient sur **deux** instruments, pas trois — et c'est précisément
+> pourquoi il en fallait plusieurs.
 
 Ce qui manquerait pour y arriver, dans l'ordre du moins cher au plus cher :
 
