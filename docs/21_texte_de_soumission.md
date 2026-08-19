@@ -108,8 +108,11 @@ encore.
 > #### 6. And what it says about repair
 >
 > Because the residual is measured *after* the best translation, it answers a question a
-> median cannot: **is this trace fixable by moving the mesh?** On both scrolls, no — a
-> translation removes only 21.7 % (Scroll 1) and 35.3 % (Scroll 4) of the error. The
+> median cannot: **is this trace fixable by moving the mesh?** On both scrolls, no. The
+> plainest form of the number depends on no normalisation at all: on Scroll 1 the median
+> shift is **14.4 µm** and the median residual is **56.4 µm** — what a translation could
+> remove is **four times smaller** than what it would leave. (Expressed as a share:
+> 21.7 % on Scroll 1, 35.3 % on Scroll 4.) The
 > error is a smooth local deformation inside the sheet, not a mispose. **The useful
 > repair is a warp, not a shift** — and that is worth knowing before anyone builds the
 > shift.

@@ -86,6 +86,13 @@ spectaculaire**.
 > l'erreur reste après le meilleur déplacement rigide. Ce n'est pas une pose ratée : c'est
 > une **déformation locale**, lisse — cohérente entre voisins, mais pas constante.
 
+⚠ **Le fait sur lequel s'appuyer est plus simple que ce ratio**, parce qu'il ne dépend
+d'aucune normalisation : sur Scroll 1, le décalage médian vaut **14,4 µm** et le résiduel
+**56,4 µm**. Ce qu'une translation pourrait enlever est **quatre fois plus petit** que ce
+qu'elle laisserait. `rigid_share` n'est qu'une façon d'écrire ça en pourcentage, et sa
+définition (`|décalage| / (|décalage| + résiduel)`) est un choix — les deux nombres bruts
+n'en sont pas un.
+
 ⚠ Ce que ça dit de la suite : la réparation utile n'est pas une translation mais un
 **gauchissement** guidé par le champ. Ce document ne l'implémente pas ; il établit
 laquelle des deux valait la peine d'être écrite, ce qui était toute la question.

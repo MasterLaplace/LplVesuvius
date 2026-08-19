@@ -35,7 +35,7 @@ objects, so the reads parallelise with no coordination (measured speed-up at 16 
 | `edge_pinned` | fraction whose intensity peak sits at a stack edge — the sheet is *outside* the surface volume | rho −0.275 (p = 0.014) against the same ink maps |
 | `offset_um` | median distance from traced layer to peak of material | rho +0.388 (n = 54, p = 0.004) against independently published self-crossing counts |
 | `residual_um` | what remains **after** the best rigid shift | **rho +0.428** (n = 54, p = 0.0012) against the same crossings |
-| `rigid_share` | share of the error a mesh translation would remove | **21.7 %** median on 80 Scroll 1 segments — so the useful repair is a warp, not a shift |
+| `rigid_share` | share of the error a mesh translation would remove. ⚠ The normalisation is a choice; the raw pair is not — median shift **14.4 µm** against a **56.4 µm** residual | **21.7 %** median on 80 Scroll 1 segments — the useful repair is a warp, not a shift |
 | `coherence` | does a window's error predict its neighbour's | **80/80** Scroll 1 and **19/19** Scroll 4 segments beat their own shuffle control (p = 1.3e-25 / 7.4e-08) |
 
 ### The one that changes a decision
