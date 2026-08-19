@@ -167,8 +167,13 @@ gauche. Le §5 dit pourquoi, et il le dit avec un nombre.
 Conception **appariée** : chaque rouleau est tracé deux fois, une graine par critère, tout
 le reste identique. Un rouleau est donc son propre témoin, et la différence ne peut pas
 être mise sur le dos de « celui-là est plus facile ». Dix rouleaux **sans aucun segment
-publié** (`23`), plus les deux qui en ont — les seuls où une trace officielle existe pour
-comparer.
+publié** (`23`), plus les ⚠ **trois** qui en ont — les seuls où une trace officielle
+existe pour comparer.
+
+⚠ Corrigé le 2026-08-19 : ce paragraphe disait « les **deux** qui en ont ». L'inventaire
+versionné `docs/etat_rouleaux_prix.txt` en recense **trois** : PHerc1447 (16 segments),
+PHerc0800 (6), PHerc1203 (1). La campagne, elle, en couvre bien douze — le compte du
+corpus était juste, c'est sa description qui ne l'était pas.
 
 | rouleau | planéité | voisinage | | rouleau | planéité | voisinage |
 |---|---:|---:|---|---|---:|---:|
@@ -318,8 +323,12 @@ nôtre. Une seule grandeur ne classe pas trois modes d'échec.
   suivants.
 
 Le nom de la seconde est écrit dans `24` §4 : le traceur n'a reçu **aucune information
-d'orientation** (`direction_fields` absent). Les `normal-grids` sont publiées à côté de
-chaque prédiction (182 Mo, `xy/ xz/ yz/`) ; le paramètre attend un **chemin local** et la
+d'orientation** (`direction_fields` absent). ⚠⚠ **Cette seconde piste a depuis été
+mesurée NÉGATIVE trois fois** (`26`), avec son contrôle positif : ni le champ, ni les
+grilles publiées, ni des grilles dérivées du volume ne déplacent la croissance. Le
+paragraphe est gardé parce qu'il dit ce qui a été tenté et pourquoi.
+Les `normal-grids` sont publiées à côté de chaque prédiction (⚠ **10,40 Go**, pas
+182 Mo — inventaire de `26` §6 ; `xy/ xz/ yz/`) ; le paramètre attend un **chemin local** et la
 disposition `<zarr>/{x,y,z}/<niveau>`. C'est une conversion, et c'est la marche suivante.
 
 ## 6. Reproduire

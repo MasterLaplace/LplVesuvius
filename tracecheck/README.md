@@ -126,9 +126,25 @@ thousandths of a percent), and pushed to 600 generations — 127.9 cm² — the 
 *does* self-intersect, 174 times. Its rate stays **21× lower per pair tested**, and First
 Letters needs 4 cm², not 128. **A seed fixes where you start, not how you travel.**
 
-⚠⚠ `vc_grow_seg_from_seed` is **not deterministic** with `thread_limit: 0`: two runs of the
-same seed returned 19.834872 and 19.821850 cm². Set `thread_limit: 1` — the value VC3D
-itself uses, and the one the tool's own startup message recommends.
+⚠⚠ `vc_grow_seg_from_seed` is **not bit-reproducible**, and the obvious remedy does not
+work. Six runs of the same seed, measured:
+
+| | area | self-intersections |
+|---|---:|---:|
+| `thread_limit: 0`, run 1 | 19.834872 cm² | 0 |
+| `thread_limit: 0`, run 2 | 19.821850 cm² | 0 |
+| `thread_limit: 1`, run 1 | 19.838660 cm² | 0 |
+| `thread_limit: 1`, run 2 | 19.823302 cm² | 0 |
+
+**Setting `thread_limit: 1` — the value VC3D itself uses, and the one the tool's own
+startup message recommends — does not fix it.** A ~0.08 % spread survives.
+
+⭐ But "the tracer is not reproducible" is too coarse, and comparing *growth logs* rather
+than final areas says something sharper: **all 118 generations are identical to the
+hundredth across all six runs**, including one given a direction field. **The growth is
+deterministic; the final step is not.** That is a much narrower defect than it first
+looks — and it means a growth trajectory can be compared run to run, which is what makes
+a controlled experiment on this tool possible at all.
 
 ## What it does **not** do
 

@@ -84,7 +84,7 @@ Ferme `13` G3, qui disait « la structure le permet, rien ne le fait ».
 | K1 | paralléliser le lecteur Zarr | ✅ **×8,35 mesuré** (21,80 s → 2,61 s), sortie **bit-pour-bit identique** au sérialisé |
 | K2 | ⚠ le contrôle : `executor.map` rend dans l'ordre des **entrées** — c'est la seule propriété qui rend la version parallèle substituable | ✅ |
 | K3 | rejouer le chiffrage de `13` §G avec la vitesse réelle | ✅ **0,9 h pour les 800 rouleaux** (contre 0,5 h annoncé par un modèle qui divisait par 16) |
-| K4 | passer l'instrument sur un rouleau **jamais tracé** | ✅ **déjà fait par `16`** : les 13 rouleaux du prix n'ont aucune trace, et la métrique de séparabilité les juge quand même |
+| K4 | passer l'instrument sur un rouleau **jamais tracé** | ✅ **déjà fait par `16`** : ⚠ **dix** des 13 rouleaux du prix n'ont aucune trace (pas les treize : PHerc1447 en a 16, PHerc0800 6, PHerc1203 1 — `docs/etat_rouleaux_prix.txt`), et la métrique de séparabilité les juge quand même |
 
 ## Voie L — la phase, au niveau fin
 

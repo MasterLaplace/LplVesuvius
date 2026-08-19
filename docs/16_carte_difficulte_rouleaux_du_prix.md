@@ -37,6 +37,13 @@ rouleaux**, et **aucun n'a de trace publiée** — vérifié : `PHerc0358/segmen
 Nos autres instruments jugent une trace contre le volume ; sur un rouleau non tracé ils
 n'ont rien à mesurer.
 
+⚠⚠ **Corrigé le 2026-08-19 : « aucun » est FAUX.** L'inventaire versionné
+`docs/etat_rouleaux_prix.txt` (produit par `tools/etat_rouleaux_prix.sh`, cf `23` §1)
+recense **trois** rouleaux du prix avec des segments publiés — **PHerc1447 (16)**,
+**PHerc0800 (6)**, **PHerc1203 (1)**. L'affirmation exacte est **dix sur treize** non
+tracés, dont `PHerc0358`, dont le `segments/` est bien vide.
+
+
 Mais `00` §1 nomme la difficulté centrale en une phrase :
 
 > *« Deux spires voisines sont à 300 µm ; une feuille fait 40 µm. Là où le rouleau est
