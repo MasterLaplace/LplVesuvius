@@ -25,6 +25,10 @@
 # fitting elle-meme. Ajoute le 2026-08-19 : le papier etait cite dans nos docs, son code
 # ne l'etait pas.
 1	spiral-fitting	https://github.com/pmh47/spiral-fitting
+# Les quatre detecteurs les plus proches de notre cible -- hole, grid_tear, self_contact,
+# sheet_switch -- et surtout la LIMITE MESUREE de la detection par la geometrie seule,
+# ecrite dans la docstring de find_sheet_switches. Cf docs/28. Ajoute le 2026-08-19.
+1	tifxyz-surgeon	https://github.com/enisme/tifxyz-surgeon
 1	spiralcheck	https://github.com/Nicodol/spiralcheck
 1	windcheck	https://github.com/joe-carr-data/windcheck
 1	herculaneum-scroll-tools	https://github.com/axiosdevs/herculaneum-scroll-tools
