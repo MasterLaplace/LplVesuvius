@@ -111,7 +111,7 @@ domaine au moins une fois dans ce dépôt.
 | sur Scroll 4, **rien n'est lisible, et la cause est en amont du modèle** | 61 % des pics au bord de la pile | `09` §12 · `12` · `HANDOFF`:237, 257 |
 | l'inventaire des treize : **dix** sans segment, pas treize | `docs/etat_rouleaux_prix.txt` | `23` §1 |
 | ⭐ **la trajectoire ne répond qu'à `step_size` et à la prédiction** | trois négatifs mesurés, contrôle positif | `26` |
-| ⭐ et `step_size` **n'est pas un levier de qualité** | 4 pas sur 5 rendent zéro, aires comparables à 3,8 % | `26` §9 |
+| ⭐ **`step_size` a un PLANCHER : ≥ 20** | un pas de 5 rend ~800 croisements/cm² **sur les deux graines** ; au-delà de 20 c'est propre sur deux graines **et** deux tirages ; entre les deux (10, 15) le résultat **se contredit avec lui-même** | `26` §9 |
 | ⚠ en **zone comprimée l'information n'est pas dans le CT** | 78 % de pics uniques couvrant deux feuilles | `28` §4 · `villa#191` |
 | ⚠ **aucun test géométrique** ne sépare un saut d'une spire d'une courbure, dans le cas serré | écart inter-spires 18–58 vx contre 20 vx de cellule | `28` §4 |
 

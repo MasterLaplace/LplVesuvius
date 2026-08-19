@@ -5,28 +5,28 @@
       "statut": "ok",
       "code_sortie": 0,
       "budget_s": 6480,
-      "generations": 478,
-      "aire_cm2": 20.424873,
-      "transverse": 16426,
-      "par_cm2": 804.2155268235939
+      "generations": 328,
+      "aire_cm2": 9.491464,
+      "transverse": 7304,
+      "par_cm2": 769.5335514099827
     },
     {
       "pas": 10,
       "statut": "ok",
       "code_sortie": 0,
       "budget_s": 3600,
-      "generations": 238,
-      "aire_cm2": 20.177398,
-      "transverse": 4613,
-      "par_cm2": 228.62214444102258
+      "generations": 155,
+      "aire_cm2": 8.422616,
+      "transverse": 0,
+      "par_cm2": 0.0
     },
     {
       "pas": 15,
       "statut": "ok",
       "code_sortie": 0,
       "budget_s": 3600,
-      "generations": 158,
-      "aire_cm2": 19.950467,
+      "generations": 106,
+      "aire_cm2": 8.8377,
       "transverse": 0,
       "par_cm2": 0.0
     },
@@ -35,8 +35,8 @@
       "statut": "ok",
       "code_sortie": 0,
       "budget_s": 3600,
-      "generations": 118,
-      "aire_cm2": 19.824008,
+      "generations": 79,
+      "aire_cm2": 8.676429,
       "transverse": 0,
       "par_cm2": 0.0
     },
@@ -45,8 +45,8 @@
       "statut": "ok",
       "code_sortie": 0,
       "budget_s": 3600,
-      "generations": 78,
-      "aire_cm2": 19.573999,
+      "generations": 54,
+      "aire_cm2": 9.053264,
       "transverse": 0,
       "par_cm2": 0.0
     },
@@ -55,15 +55,16 @@
       "statut": "ok",
       "code_sortie": 0,
       "budget_s": 3600,
-      "generations": 58,
-      "aire_cm2": 19.326838,
+      "generations": 40,
+      "aire_cm2": 8.80394,
       "transverse": 0,
       "par_cm2": 0.0
     }
   ],
   "non_mesures": [],
-  "etendue_relative_aires": 0.055234268118930764,
+  "etendue_relative_aires": 0.12035353840646792,
   "pas_a_zero": [
+    10,
     15,
     20,
     30,
@@ -72,11 +73,7 @@
   "pas_non_nuls": [
     [
       5,
-      16426
-    ],
-    [
-      10,
-      4613
+      7304
     ]
   ]
 }

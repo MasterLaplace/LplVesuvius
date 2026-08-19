@@ -505,67 +505,98 @@ et dans `seed.json` :
 
 ---
 
-## 9. ⭐ T1f — `step_size` déplace la trajectoire, mais ne nettoie pas la trace
+## 9. T1f — le balayage complet, deux graines et deux tirages
 
-2026-08-19, soir. Les trois négatifs des §3, §7 et §8 laissaient **un** levier mesuré :
-`step_size`, le contrôle positif qui fait diverger dès la génération 0. Balayage
-{5, 10, 15, 20, 30, 40} sur PHerc0358, graine de `25` (critère de planéité).
-`tools/campagne_pas.sh`, dépouillé par `analysis/src/table_pas.py`.
+2026-08-19, nuit. Balayage {5, 10, 15, 20, 30, 40} sur PHerc0358, **deux graines** — celle
+de `25` (planéité) et celle de `24` — dépouillé par `analysis/src/table_pas.py`.
 
 ⚠ **La comparaison n'est pas triviale, et c'est la moitié du travail.** Une surface croît
 par un **front**, donc son aire va comme (k × pas)² : à générations égales, un pas de 5
 couvre **seize fois moins** qu'un pas de 20. Comparer des comptes bruts ferait passer la
-**lenteur** pour de la **qualité** — un petit morceau a moins d'occasions de se replier
-sur lui-même. Le nombre de générations est donc mis à l'échelle en **1/pas**, et la
-première chose que le dépouillement vérifie est que les aires obtenues sont bien
-comparables.
+**lenteur** pour de la **qualité**. Le nombre de générations est donc mis à l'échelle en
+**1/pas**, et la première chose que le dépouillement vérifie est que les aires obtenues
+sont comparables — elles le sont, à **5,5 %** et **12,0 %** près.
 
-| `step_size` | générations | aire (cm²) | auto-intersections | par cm² |
-|---:|---:|---:|---:|---:|
-| 10 | 238 | 20,076 | **0** | 0,00 |
-| **15** | 158 | 19,961 | **947** | **47,44** |
-| 20 | 118 | 19,823 | **0** | 0,00 |
-| 30 | 78 | 19,573 | **0** | 0,00 |
-| 40 | 58 | 19,326 | **0** | 0,00 |
-| 5 | — | — | — | ⏳ en cours |
+| `step_size` | bonne graine — aire / croisements | mauvaise graine — aire / croisements |
+|---:|---:|---:|
+| **5** | 20,42 cm² / **16 426** *(804 par cm²)* | 9,49 cm² / **7 304** *(770 par cm²)* |
+| 10 | 20,18 cm² / **4 613** | 8,42 cm² / 0 |
+| 15 | 19,95 cm² / 0 | 8,84 cm² / 0 |
+| 20 | 19,82 cm² / 0 | 8,68 cm² / 0 |
+| 30 | 19,57 cm² / 0 | 9,05 cm² / 0 |
+| 40 | 19,33 cm² / 0 | 8,80 cm² / 0 |
 
-✅ **Aires comparables : étendue relative de 3,8 %.** La mise à l'échelle a fait son
-travail, donc le compte brut mesure bien la qualité et pas la taille.
+### ⭐⭐ Et un second tirage est tombé par accident — il démolit la première lecture
 
-### ⚠⚠ Ce que cette campagne peut mesurer, et ce qu'elle ne peut PAS
+Le correctif de la garde de reprise (`statut == ok`) a fait **rejouer tout le balayage de
+la bonne graine**, puisque les résumés antérieurs n'avaient pas ce champ. On dispose donc
+de **deux tirages indépendants du même réglage** :
 
-**Quatre pas sur cinq rendent ZÉRO**, et l'anomalie à 15 est **encadrée de pas plus
-petits ET plus grands** qui rendent zéro. Ce n'est donc pas une tendance : c'est un point
-isolé, sur **une** graine et **un** rouleau, qui demande une réplication avant de
-signifier quoi que ce soit.
+| `step_size` | 1er tirage | 2e tirage |
+|---:|---:|---:|
+| 5 | *tué par le timeout* | **16 426** |
+| **10** | **0** | **4 613** |
+| **15** | **947** | **0** |
+| 20 | 0 | 0 |
+| 30 | 0 | 0 |
+| 40 | 0 | 0 |
 
-> ⚠⚠ **Mais le fait décisif est ailleurs, et c'est un piège de conception qui m'appartient :
-> la trace de départ est DÉJÀ à zéro auto-intersection.** Depuis `25`, la graine choisie
-> sur la planéité rend zéro partout, sur les douze rouleaux du prix et avec les deux
-> critères. Une campagne qui part de zéro **ne peut pas mesurer une réduction** — elle ne
-> peut mesurer qu'une dégradation. C'est le **même effet de plancher** que la saturation
-> de `25` §3, vu par en dessous.
+⚠⚠ **Les pas 10 et 15 se contredisent avec eux-mêmes.** La première version de cette
+section concluait « 4 pas sur 5 rendent zéro, l'anomalie à 15 est un point isolé ». Cette
+lecture reposait sur **un tirage par réglage** — exactement ce que
+[`30`](30_le_traceur_est_un_tirage.md) a mesuré comme n'étant pas une mesure.
 
-**Donc la lecture honnête est en deux temps :**
+### Ce qui survit à la répétition, et c'est utilisable
 
-1. **La question posée par `24` §4** — *« réduire `step_size` : moins de liberté à chaque
-   pas, donc moins de chances de sauter »* — **ne peut pas recevoir de réponse ici.**
-   L'hypothèse suppose une trace fautive à assainir ; il n'y en a plus.
-2. **Ce que la campagne établit réellement**, et qui n'est pas rien : sur une trace saine,
-   `step_size` **ne la dégrade pas** entre 10 et 40, à aire égale. Le paramètre déplace la
-   trajectoire (`26` §6) sans changer sa qualité mesurable. **Il n'est donc pas un levier
-   de qualité, alors qu'il est le seul levier de trajectoire.**
+| constat | réplication |
+|---|---|
+| ⭐ **un pas de 5 détruit la trace** | **deux graines**, ~800 croisements par cm² des deux côtés |
+| ⭐ **au-delà de 20, c'est propre** | deux graines **et** deux tirages, zéro partout |
+| ⚠ **entre les deux (10, 15), le résultat n'est pas reproductible** | 0 contre 4 613 sur le même réglage |
 
-⭐ **Conséquence pour la suite** : pour mesurer un levier de qualité, il faut un cas où
-la qualité est mauvaise. Les deux qui existent sont la graine de `24` (occupation 1,000,
-240 croisements) et un rouleau où le critère de planéité échoue. **Rejouer ce balayage sur
-la MAUVAISE graine est la mesure qui répondrait vraiment à `24` §4** — et elle est bon
-marché, la chaîne est écrite.
+> **Règle utilisable : `step_size` ≥ 20.** Ce n'est pas un réglage à optimiser, c'est un
+> **plancher à ne pas franchir** — et la zone 10–15 est celle où la variance du traceur
+> domine.
 
-⏳ **`pas_5` est en cours de reprise.** Sa première exécution a été **tuée par le
-timeout** à la génération 406 sur 480, et le script l'avait enregistrée
-`aire=0, transverse=0` — c'est-à-dire *exactement le résultat espéré* pour un run qui
-n'avait rien produit. Corrigé le jour même : le code de sortie de `timeout` est lu, un
-`statut` explicite entre dans le résumé, et le budget de temps suit désormais la cible de
-générations au lieu d'être constant — un budget constant favorisait mécaniquement les
-grands pas, donc biaisait la grandeur même qu'on compare.
+⚠⚠ **Et ça inverse l'hypothèse de `24` §4** — *« réduire `step_size` : moins de liberté à
+chaque pas, donc moins de chances de sauter »*. La mesure dit le contraire, et lourdement :
+un pas plus petit demande **quatre fois plus de générations** pour la même aire, donc
+quatre fois plus d'occasions pour la surface de se replier sur elle-même. Ce n'est pas une
+anomalie de réglage, c'est un effet mesuré des deux côtés.
+
+### ⭐ Ce que la campagne a coûté, mesuré
+
+| | `thread_limit: 1` | `thread_limit: 0` |
+|---|---:|---:|
+| durée d'une trace | **65,2 s** | **21,4 s** |
+| CPU | **329 %** (3,3 cœurs) | **1431 %** (14,3 cœurs sur 22) |
+| RAM crête | **91 Mo** | **117 Mo** |
+| réseau | **0,2 Mo** | **0,1 Mo** |
+
+Trois faits qui répondent à « est-ce que c'est optimisé ? » :
+
+1. ⭐ **Ce n'est pas borné par le réseau.** 0,1 Mo par trace : la prédiction est en cache
+   local (`cache_size: 6 Gio`). C'est **borné par le CPU**.
+2. ⭐ **Ce n'est pas borné par la mémoire non plus.** 117 Mo de crête, sur une machine qui
+   en a 31 Gio. Rien à optimiser de ce côté.
+3. ⚠⚠ **`thread_limit: 1` coûte un facteur 3 en temps**, et il ne veut **pas** dire
+   « mono-thread » : il tourne quand même à 3,3 cœurs. Nos campagnes l'ont posé pour
+   réduire la variance entre exécutions — or `30` a mesuré que **ça ne la réduit pas**
+   (le mauvais tirage est arrivé à `thread_limit: 0`, et les deux valeurs donnent des
+   aires variables). **On a payé ×3 pour un déterminisme qu'on n'obtient pas.**
+
+⚠ Et à `thread_limit: 0` l'outil n'utilise que **14,3 cœurs sur 22**. La croissance est
+**séquentielle en générations** — chaque génération dépend de la précédente — donc le
+parallélisme est borné par la taille du front, petit au début. C'est une limite de
+l'algorithme, pas du réglage.
+
+> ⭐⭐ **Conséquence pour la stratégie d'échantillonnage de `30`** : pour tirer N traces, ce
+> qui compte n'est pas la latence d'une trace mais le **débit**. À 3,3 cœurs par trace on
+> en lance **6 en parallèle** sur 22 cœurs ; à 14,3 cœurs, une seule et demie. *(Calcul,
+> pas mesure : 22/3,3 × 1/65 s ≈ **1 trace toutes les 10 s** contre 22/14,3 × 1/21,4 s ≈
+> **1 toutes les 14 s**.)* `thread_limit: 1` est donc le bon réglage — mais pour une
+> raison de **débit**, pas pour la raison de déterminisme qu'on croyait.
+
+⚠ `use_cuda` est à **false**, et le reste : le chemin GPU de l'outil est **CUDA**, et cette
+machine a un iGPU **Intel Arc**. Il n'y a pas de GPU à saturer ici.
+
