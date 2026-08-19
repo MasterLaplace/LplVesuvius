@@ -397,7 +397,22 @@ faire échouer**.
 |---|---:|---:|
 | **Scroll 1** (7,91 µm → 18 vx) | +0,769 | **+0,840**  (p = 1,1e-12) |
 | **PHerc0139** (9,362 µm → 15 vx) | +0,284 | **+0,666**  (p = 2,3e-05) |
-| PHerc1667 (7,91 µm → 18 vx) | +0,700 | +0,579  (p = 0,019) |
+| ⚠ PHerc1667 (**résolution à vérifier**) | +0,700 | +0,579  (p = 0,019) |
+
+⚠⚠ **Corrigé le 2026-08-19 : PHerc1667 n'a AUCUN volume à 7,91 µm.** Vérifié sur le
+bucket : il n'en publie que deux, **2,399 µm** et **1,129 µm**
+(`docs/volumes_surface_PHerc1667.txt` le dit aussi). Les deux autres lignes du tableau se
+tiennent — leur rayon physique est d'environ **140 µm** (18 × 7,91 et 15 × 9,362) — mais
+celle-ci ne peut pas être lue :
+
+- si le rayon **physique** de 140 µm a été appliqué, il vaut **~58 voxels** à 2,399 µm, pas 18 ;
+- si **18 voxels** ont été appliqués tels quels, le rayon physique n'était que de **43 µm**,
+  soit trois fois moins que sur les deux autres rouleaux — et la comparaison n'est plus appariée.
+
+L'artefact `docs/sweep_PHerc1667.jsonl` **n'enregistre ni le zarr ni la taille de voxel**,
+donc rien ici ne tranche. ⏳ **À rejouer en enregistrant la résolution**, et c'est aussi
+une leçon d'outillage : *un artefact de mesure doit porter la résolution sur laquelle il a
+été pris.*
 
 > **Sur Scroll 1, le rayon issu de la physique (+0,840) bat le meilleur rayon du
 > balayage (+0,829 à 16 voxels).** Un paramètre choisi sans regarder la réponse fait

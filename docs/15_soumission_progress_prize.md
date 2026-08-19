@@ -16,7 +16,17 @@ sur la page `Prizes` du miroir**, pas contre une impression.
 >   that resulted in better model results »*
 > - *« Are **released or open-sourced early** »* · *« Actually **get used** »*
 > - *« If you are working on virtual unwrapping, show visually that **papyrus fibers
->   are visible on your output surface, and it doesn't jump across sheets** »*
+>   are visible on your output surface, and it doesn't jump across sheets IN
+>   CROSS-SECTION** »*
+
+⚠⚠ **Corrigé le 2026-08-19 : les deux derniers mots manquaient**, sous un titre qui
+annonce « mot pour mot ». Vérifié dans le miroir (`site/scrollprize.org/prizes.html`).
+
+⭐ Et ils ne sont pas décoratifs : *« in cross-section »* dit **comment** la démonstration
+doit être faite — le maillage montré **contre les coupes du volume**, pas seulement le
+rendu aplati. C'est exactement ce que produit `vc_tifxyz_selfcross` avec `--collection`,
+une *point collection* rechargeable dans VC3D. **Le critère nomme la forme de la preuve,
+et nous savons déjà la produire.**
 
 Barème : **20 000 $ garantis** à la meilleure soumission du mois, puis 10 k / 5 k /
 2,5 k / 1 k / 0,5 k selon l'importance.

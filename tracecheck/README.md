@@ -6,7 +6,7 @@ Judge a Herculaneum scroll segment's trace **before** you spend anything on it.
 $ python3 tracecheck.py Scroll1 20230702185753 --voxel-um 2.4 --prefer 2.4um --sheet-um 172.8
 2.4um-0.22m-78keV-volume-20260411134726.zarr
   296 requests, 96 windows with papyrus
-  material           68.5 %   <- strongest predictor of published ink (rho +0.54, n=80)
+  material           68.5 %   <- correlates with published ink on Scroll 1 (rho +0.54, n=80) -- see the caveat below
   edge pinned         7.3 %   <- sheet outside the surface volume
   offset            -13.2 um
   residual           43.2 um  (p90 128.4)
@@ -14,6 +14,19 @@ $ python3 tracecheck.py Scroll1 20230702185753 --voxel-um 2.4 --prefer 2.4um --s
   coherence        +0.310   (shuffled control -0.081)
   vs 173 um sheet pitch: 0.74 sheets  -> stays on its sheet
 ```
+⚠⚠ **`material` comes with two measured caveats, and neither is optional.** They are
+stated here because this is the only document that leaves the repository, and a tool that
+overstates its own result is worse than one that measures nothing.
+
+1. **The correlation is driven by a near-blank class.** Remove the segments that carry
+   almost no ink and it falls to **rho +0.190, not significant**.
+2. **It does not replicate outside Scroll 1.** On Scroll 5 it is **rho −0.217**
+   (p = 0.12) — the wrong sign. Tested on three other scrolls; it holds on none.
+
+> **Read it as a property of Scroll 1's published corpus, not of the problem.** Within
+> that corpus it is solid and useful. Outside it, we have measured that it is not.
+
+
 
 **No download. No credentials. numpy and Python 3.9+, nothing else.** Roughly 300 HTTPS
 range reads, a few megabytes, ~15 seconds. The equivalent measurement from rendered

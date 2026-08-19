@@ -499,6 +499,11 @@ else
   printf '  ⚠ %-28s villa non clone (tools/clone_repos.sh) — NON VERIFIE\n' "poids GrowPatch vs source"
 fi
 
+# ⚠ La regle centrale du depot porte sur les CHIFFRES ; elle vaut aussi pour les artefacts
+# qui les portent. Un fichier de mesure versionne dont le script est reste dans un terminal
+# est un resultat qu'on ne peut ni rejouer, ni verifier, ni corriger.
+run "artefacts : un producteur" python3 "$ROOT/analysis/src/artefacts_orphelins.py" --verifier
+
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
 sys.path.insert(0, '../analysis/src')

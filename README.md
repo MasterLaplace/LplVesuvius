@@ -35,10 +35,23 @@ graph LR
   style M fill:#c0392b,color:#fff
 ```
 
-**L'étage rouge est le seul qui bloque encore.** L'encre est résolue (Grand Prize
-2023), la lecture est faite par des experts humains qui n'attendent que les images.
-Ce qui coûte, c'est d'isoler la **2-variété** — la feuille de papyrus — dans un
-volume où les spires se touchent, se compriment et se déchirent.
+**L'étage rouge est le seul qui bloque encore.** Ce qui coûte, c'est d'isoler la
+**2-variété** — la feuille de papyrus — dans un volume où les spires se touchent, se
+compriment et se déchirent.
+
+> ⭐⭐ **Où en est le domaine, août 2026.** Un rouleau scellé a été **entièrement déroulé
+> et lu** — PHerc. 1667, arXiv 2606.29085, juin 2026 : 31 spires, 1231 cm², 22 colonnes.
+> Et l'équipe écrit un mois plus tard : *« **No method yet traces a complete, correct
+> surface through a scroll automatically.** »*
+>
+> Le chiffre qui réconcilie les deux est enfoui dans « Statistics and reproducibility » :
+> ***~25 heures d'annotation manuelle par spire***, soit **~775 h** pour ce rouleau. Le
+> Grand Prize 2027 en tolère **huit**. Détail : [`docs/27`](docs/27_ce_que_la_litterature_dit.md).
+
+⚠ **Et « l'encre est résolue » est faux**, contrairement à ce que ce paragraphe disait
+avant le 2026-08-19 : *« Ink segmentation remains **weak**, varies across ink recipes and
+local degradation states »* (même article). Ce qui est acquis, c'est qu'elle **marche
+quand la géométrie est bonne** — ce qui renvoie au même étage rouge.
 
 Deux familles s'y affrontent aujourd'hui :
 
@@ -150,6 +163,21 @@ priorisee. A lire en premier si vous reprenez ce chantier.
 | **[`docs/12_profondeur_de_surface.md`](docs/12_profondeur_de_surface.md)** | ⭐⭐ **un instrument de qualite de trace sans verite terrain, sans modele et sans juge** — lire le §10 en premier |
 | **[`docs/13_batch_epuisement.md`](docs/13_batch_epuisement.md)** | la liste de ce qui reste ouvert, et elle se coche la |
 | [`docs/14_direction_des_fibres.md`](docs/14_direction_des_fibres.md) | ⭐ probleme ouvert nº 5 : l'orientation des fibres comme separateur de feuilles |
+| [`docs/15_soumission_progress_prize.md`](docs/15_soumission_progress_prize.md) | ce qui est soumissionnable, trie contre les criteres. ⚠ **se declare perime sur deux points** |
+| [`docs/16_carte_difficulte_rouleaux_du_prix.md`](docs/16_carte_difficulte_rouleaux_du_prix.md) | quel rouleau du prix attaquer, mesure sur le volume brut |
+| [`docs/17_saut_de_spire_par_la_phase.md`](docs/17_saut_de_spire_par_la_phase.md) | ❌ le saut de spire par la phase — **echec definitif**, et pourquoi |
+| [`docs/18_batch_produire.md`](docs/18_batch_produire.md) · [`19`](docs/19_ecarter_avant_de_payer.md) · [`22`](docs/22_batch_repliquer.md) | trois batchs clos : produire, ecarter avant de payer, repliquer |
+| [`docs/20_le_champ_de_correction.md`](docs/20_le_champ_de_correction.md) | ⭐ l'erreur d'une trace est **structuree**, et translater ne la repare pas |
+| [`docs/21_texte_de_soumission.md`](docs/21_texte_de_soumission.md) | le brouillon de soumission, resultats negatifs compris |
+| [`docs/23_rouleaux_du_prix_traces.md`](docs/23_rouleaux_du_prix_traces.md) | l'inventaire des 13 : **dix** n'ont aucun segment publie |
+| **[`docs/24_premiere_trace_rouleau_du_prix.md`](docs/24_premiere_trace_rouleau_du_prix.md)** | ⭐⭐ **la premiere trace d'un rouleau du prix**, condamnee par nos instruments avant le rendu |
+| **[`docs/25_une_graine_choisie_sur_la_planeite.md`](docs/25_une_graine_choisie_sur_la_planeite.md)** | ⭐⭐ **ou commencer une trace** — critere de planeite, replique sur 12 rouleaux |
+| **[`docs/26_le_champ_de_direction.md`](docs/26_le_champ_de_direction.md)** | ⭐⭐ **ce qui gouverne la trajectoire du traceur**, et les trois mecanismes qui ne la gouvernent pas |
+| **[`docs/27_ce_que_la_litterature_dit.md`](docs/27_ce_que_la_litterature_dit.md)** | ⭐⭐ **les trois articles primaires, lus en entier** — et [`32`](docs/32_educelab_le_papier_fondateur.md) pour le quatrieme |
+| **[`docs/28_le_paysage_du_controle_qualite.md`](docs/28_le_paysage_du_controle_qualite.md)** | ⭐⭐ **ce qui existe deja**, ce qui a ete refuse, et la limite **mesuree** de la geometrie seule |
+| **[`docs/29_ce_qui_reste.md`](docs/29_ce_qui_reste.md)** | ⭐ **le registre consolide** — 525 enonces replies, sources en `fichier:ligne`. Par ou choisir un lot |
+| **[`docs/30_le_traceur_est_un_tirage.md`](docs/30_le_traceur_est_un_tirage.md)** | ⚠⚠ **13 traces propres sur 14** a parametres identiques — un seul trace n'est pas une mesure |
+| **[`docs/31_roadmap.md`](docs/31_roadmap.md)** | ⭐⭐ **la roadmap** : le Grand Prize est un prix d'**algorithmique de geometrie**, et son critere d'acceptation est une image Docker qu'ils lancent |
 
 ## Rejouer
 
@@ -209,12 +237,35 @@ uv run python ../analysis/src/fiber_orientation.py <cle S3 du .zarr> --windows 3
 ce qui fait passer une campagne sur corpus de « 32 Go par segment » a « quelques
 mega-octets ».
 
-## Etat de la recuperation (2026-08-18)
+### La chaine de production, et les gardes du depot
+
+```bash
+./tools/temoins.sh                  # 18 batteries, 741 controles hors ligne, tous verts
+./validate.sh                       # la chaine complete : tests + builds + boot + parite
+
+# les instruments qui jugent une TRACE, sans verite terrain
+vc_tifxyz_selfcross --surface <mesh.tifxyz> -o rapport.json   # exit 3 si defaut
+uv run python tracecheck/tracecheck.py --seed <zarr> ...      # ou commencer
+
+# les gardes qui empechent une doc de pourrir
+python3 analysis/src/poids_growpatch.py --verifier     # la table des poids vient du SOURCE
+python3 analysis/src/artefacts_orphelins.py --verifier # tout artefact a un producteur
+python3 analysis/src/compter_corpus.py                 # les comptes viennent des artefacts
+python3 tracecheck/mutation.py                         # chaque detecteur est PORTEUR
+```
+
+⚠⚠ **Les quatre derniers ne mesurent rien du papyrus** — ils mesurent le depot. Ils
+existent parce que chacun a attrape une faute reelle : une table de poids recopiee a la
+main et fausse, six artefacts dont le script etait reste dans un terminal, un compteur
+« par fenetre » migre dans une phrase qui parlait de « segments », et deux batteries qui
+imprimaient `ALL PASS` **en echouant**.
+
+## Etat de la recuperation (2026-08-19)
 
 | element | etat |
 |---|---|
 | Miroir du site | **81 / 81 pages** du sitemap, 228 Mo |
-| Depots clones | **33**, 7,6 Go |
+| Depots clones | **35** (+ `spiral-fitting` et `tifxyz-surgeon`, ajoutes le 2026-08-19), 13 Go |
 | Couches rendues | 3 segments (Scroll 1 x2, Scroll 4 avec la pile **complete** 0-64), 32 Go |
 | Traces `tifxyz` | Scroll 1 (55) + Scroll 5 (53) via `windcheck`, plus PHerc0139 / PHerc1667 / PHerc0814 |
 | Cartes d'encre publiees | **80 / 80** segments de Scroll 1 |
