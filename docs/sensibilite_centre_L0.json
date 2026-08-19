@@ -1,0 +1,52 @@
+{
+  "centre": "PHerc0172",
+  "niveau": "0",
+  "voxel_um": 7.91,
+  "tranches": [
+    1337,
+    6967,
+    12597
+  ],
+  "mesures": [
+    {
+      "decalage_vx": 0.0,
+      "decalage_um": 0.0,
+      "feuilles_medianes": 166.0,
+      "rayon_mm": 24.71084,
+      "invariant_um": 148.86048192771085,
+      "ecart_pct": 0.0
+    },
+    {
+      "decalage_vx": 25.0,
+      "decalage_um": 197.75,
+      "feuilles_medianes": 173.0,
+      "rayon_mm": 24.71084,
+      "invariant_um": 142.83722543352602,
+      "ecart_pct": -4.046242774566476
+    },
+    {
+      "decalage_vx": 100.0,
+      "decalage_um": 791.0,
+      "feuilles_medianes": 169.0,
+      "rayon_mm": 24.461675,
+      "invariant_um": 144.74363905325444,
+      "ecart_pct": -2.765571373372026
+    },
+    {
+      "decalage_vx": 200.0,
+      "decalage_um": 1582.0,
+      "feuilles_medianes": 168.0,
+      "rayon_mm": 23.824920000000002,
+      "invariant_um": 141.815,
+      "ecart_pct": -4.73294311322481
+    },
+    {
+      "decalage_vx": 400.0,
+      "decalage_um": 3164.0,
+      "feuilles_medianes": 160.0,
+      "rayon_mm": 22.47231,
+      "invariant_um": 140.4519375,
+      "ecart_pct": -5.648607554417409
+    }
+  ]
+}
