@@ -6,8 +6,9 @@ de T1 : *où l'on part* était réglé, *comment on avance* ne l'était pas. Deu
 documente ni l'un ni l'autre**.
 
 **Résultat en une ligne** : les deux contrats sont **dérivés du binaire**, l'encodage des
-octets est **mesuré et répliqué sur trois rouleaux**, les **dix poids de perte** sont
-identifiés et réglables — et **aucun des deux mécanismes ne déplace la croissance d'un
+octets est **mesuré et répliqué sur trois rouleaux**, les **douze poids de perte** sont
+identifiés et réglables (⚠ **douze**, pas dix — deux des noms annoncés ici n'existaient
+pas, corrigé au §4 contre le code source) — et **aucun des deux mécanismes ne déplace la croissance d'un
 centième**, y compris à ×100 d'intensité et avec 1,53 Go de vraies grilles qui coûtent
 **29 fois** le temps de calcul. Le contrôle positif montre que la méthode sait pourtant
 détecter un changement : `step_size` fait diverger dès le premier pas.
@@ -169,9 +170,16 @@ réellement quelque chose — simplement pas assez pour battre **zéro**.
 `25` reprenait ce diagnostic. **Il est faux, ou du moins hors de portée** : donner le champ
 ne change pas la croissance, donc l'absence du champ ne peut pas expliquer la trajectoire.
 
-## 4. ⭐⭐ Les dix poids de perte sont réglables — et personne ne le documente
+## 4. ⭐⭐ Les DOUZE poids de perte, et pourquoi la moitié ne peut rien faire
 
-`vc_grow_seg_from_seed` imprime au démarrage la ligne qui décide de tout :
+⚠⚠ **Corrigé le 2026-08-19, contre le code source.** Cette section annonçait **dix**
+poids et en nommait **deux qui n'existent pas**. Vérifié dans
+`repos/villa/volume-cartographer/core/src/GrowPatch.cpp` :
+`applyJsonWeights()`, lignes 1304–1315, lit **douze** clés, et `surface_sdt_weight`
+comme `spaceline_weight` ont **zéro occurrence dans tout le dépôt villa**.
+
+`vc_grow_seg_from_seed` imprime au démarrage (`GrowPatch.cpp:3468`) la ligne qui décide
+de tout :
 
 ```
 GrowPatch loss weights:
@@ -179,30 +187,84 @@ GrowPatch loss weights:
   NORMAL3DLINE: 0 REFERENCE_RAY: 0 SURFACE_SDT: 0 SPACELINE: 0 SDIR: 1
 ```
 
-Les dix noms se lisent dans `libvc_tracer.so`, et **les dix se règlent depuis le
-`seed.json`** — vérifié en leur donnant des valeurs distinctes et en relisant la ligne :
+⚠ **Le nom imprimé n'est PAS la clé JSON**, et c'est exactement ce qui a produit
+l'erreur : la ligne affiche `SURFACE_SDT` et `SPACELINE`, mais les clés sont
+`sdt_weight` et `space_line_weight`. La table exacte, lue dans le source :
 
-| terme imprimé | clé du `seed.json` | défaut |
-|---|---|---:|
-| `DIST` | `dist_weight` | 1 |
-| `STRAIGHT` | `straight_weight` | 0,2 |
-| **`DIRECTION`** | **`direction_weight`** | **1** |
-| `SNAP` | `snap_weight` | 0,1 |
-| **`NORMAL`** | **`normal_weight`** | **10** |
-| `NORMAL3DLINE` | `normal3dline_weight` | 0 |
-| `REFERENCE_RAY` | `reference_ray_weight` | 0 |
-| `SURFACE_SDT` | `surface_sdt_weight` | 0 |
-| `SPACELINE` | `spaceline_weight` | 0 |
-| `SDIR` | `sdir_weight` | 1 |
+| terme imprimé | clé du `seed.json` | défaut | ⚠ garde : le terme rend **0** si… |
+|---|---|---:|---|
+| `DIST` | `dist_weight` | 1 | — |
+| `STRAIGHT` | `straight_weight` | 0,2 | — |
+| **`DIRECTION`** | **`direction_weight`** | **1** | `direction_fields` est vide (`:2326`) |
+| `SNAP` | `snap_weight` | 0,1 | ni `ngv` ni `patch_normals` |
+| **`NORMAL`** | **`normal_weight`** | **10** | **ni `ngv` ni `patch_normals`** (`:2050`) |
+| `NORMAL3DLINE` | `normal3dline_weight` | 0 | — |
+| `REFERENCE_RAY` | `reference_ray_weight` | 0 | pas de `reference_raycast.surface` |
+| `SURFACE_SDT` | ⚠ **`sdt_weight`** *(pas `surface_sdt_weight`)* | 0 | pas de `cell_reopt_mode` |
+| `SPACELINE` | ⚠ **`space_line_weight`** *(pas `spaceline_weight`)* | 0 | pas de `space_line_volume` |
+| `SDIR` | `sdir_weight` | 1 | — |
+| — | ⚠ **`correction_weight`** *(absent de notre liste)* | 1 | — |
+| — | ⚠ **`patch_normal_weight`** *(absent de notre liste)* | 0 | — |
 
-⚠ **`SDIR` n'est pas « surface direction »** : la bibliothèque le nomme
-`conditional_sdirichlet_loss` — c'est un terme de **Dirichlet**, une régularité de
-paramétrisation, sans rapport avec les champs de direction. Le terme que `direction_fields`
-alimente est `DIRECTION`, à **1** contre un `NORMAL` à **10**.
+⚠ **Et le lecteur est MUET sur une clé inconnue** :
 
-⭐ **C'est probablement pourquoi le champ ne déplace pas la croissance** : son terme pèse
-un dixième de celui qui domine. Le tester est immédiat une fois le nom connu, et c'est
-exactement ce qu'aucune documentation ne donne.
+```cpp
+const auto set_weight = [&](const char* key, LossType type) {
+    if (!params.contains(key) || params[key].is_null()) {
+        return;                       // ← aucun avertissement
+    }
+```
+
+Donc régler `surface_sdt_weight: 7` ne produit ni erreur, ni avertissement, ni effet.
+
+⚠⚠ **La vérification annoncée dans la version précédente ne pouvait pas couvrir ces
+deux clés.** Elle disait « vérifié en leur donnant des valeurs distinctes et en relisant
+la ligne » — or relire `SURFACE_SDT: 0` après avoir posé `surface_sdt_weight: 7` aurait
+sauté aux yeux. Les deux n'ont donc pas été testées individuellement, et la phrase
+couvrait plus que ce qui avait été fait. **Une vérification qui porte sur « les dix » et
+n'en exerce que huit est une vérification incapable d'échouer sur les deux autres.**
+
+### ⭐⭐ Le fait qui explique nos trois négatifs mieux que ce qu'on avait écrit
+
+> **`NORMAL` pèse 10 — dix fois `DIST` — et il rend `0` tant qu'aucune grille de normales
+> n'est chargée.**
+>
+> ```cpp
+> static int gen_normal_loss(...)
+> {
+>     if (!trace_data.ngv && !trace_data.patch_normals) return 0;
+> ```
+
+Autrement dit : **dans toutes nos traces de base, le terme dominant de la fonction de
+coût ne créait aucun résidu.** Ce que le traceur optimisait réellement, c'était
+`DIST` (1), `SDIR` (1), `DIRECTION` (1) et `STRAIGHT` (0,2) — pas ce que la ligne
+imprimée laisse croire.
+
+⭐ Ça affine, sans le contredire, le bilan du §8 : quand on **a** chargé une vraie grille
+(T1c), `NORMAL` s'est activé, le coût par génération a été multiplié par 29 — et **la
+trajectoire n'a toujours pas bougé sur 118 générations**, alors que l'étape finale, elle,
+est passée de 0 à 112 139 auto-intersections. Le terme dominant s'allume et ne déplace
+pas la croissance : c'est un résultat plus fort que « le champ pèse un dixième du terme
+dominant », qui était l'explication proposée ici et qui **était fausse**.
+
+⚠ **`SDIR` n'est toujours pas « surface direction »** : la bibliothèque le nomme
+`conditional_sdirichlet_loss` — un terme de **Dirichlet**, une régularité de
+paramétrisation, sans rapport avec les champs de direction.
+
+### ⚠ Un piège de priorité, où le commentaire dit l'inverse du code
+
+`GrowPatch.cpp:3446`. Le commentaire annonce
+`explicit param > normal_grid > resume_surf > default` ; le code fait :
+
+```cpp
+if (params.contains("step_size"))   step = params.value("step_size", 20.0f);
+else if (resume_surf)               step = 1.0f / resume_surf->scale()[0];   // ← avant ngv
+else if (ngv)                       step = ngv->outputSpiralStep();
+else                                step = 20.0f;
+```
+
+**`resume_surf` passe avant `ngv`.** En reprise de trace, la grille de normales ne fixe
+donc pas le pas — contrairement à ce que la documentation du fichier promet.
 
 ## 5. ⚠ `scale` n'est pas seulement un nom de dossier
 
