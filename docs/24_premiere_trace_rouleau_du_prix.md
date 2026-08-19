@@ -1,4 +1,8 @@
-# Première trace sur un rouleau du Grand Prize — et trois instruments qui la condamnent
+# Première trace sur un rouleau du Grand Prize — et les instruments qui la condamnent
+
+⚠ **Ce titre disait « trois instruments » jusqu'au 2026-08-19.** La troisième jambe — la
+profondeur — a été retirée du verdict le jour même (§2), et le titre ne l'avait pas
+suivi. Un titre qui contredit son propre §2 est ce qu'un lecteur pressé retient.
 
 2026-08-19. VC3D construit, la chaîne officielle pilotée en ligne de commande, et
 `PHerc0358` — un des **dix** rouleaux du prix sans aucun segment publié — tracé pour la
