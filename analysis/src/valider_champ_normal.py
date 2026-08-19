@@ -100,6 +100,10 @@ def main() -> int:
                         "temoin melange ne suffit pas -- dans une fenetre de 192 voxels "
                         "les normales pointent deja presque toutes pareil, donc il rend "
                         "0,89 et ne discrimine rien")
+    p.add_argument("--couverture-min", type=float, default=0.99,
+                   help="⚠ part du bloc reellement couverte par le champ publie. Un "
+                        "chunk absent rend la valeur de remplissage, qui se decode en un "
+                        "vecteur parfaitement defini et parfaitement faux")
     p.add_argument("--timeout", type=float, default=120.0)
     p.add_argument("--out", type=Path, default=None)
     args = p.parse_args()
@@ -125,6 +129,15 @@ def main() -> int:
         m = array_meta(u, args.level, args.timeout)
         comps[nom] = pave(u, args.level, m, z0, y0, x0, forme, args.timeout).astype(np.float64)
 
+    # ⚠⚠ **Un chunk ABSENT rend la valeur de remplissage, pas une erreur** — c'est ce qui
+    # rend la lecture partielle possible, et c'est aussi un piege : un bloc non couvert
+    # decode en un vecteur parfaitement defini, et le comparer produit un desaccord qui
+    # ressemble a un mauvais encodage. Symptome observe : un |cos| de 0,7071 EXACTEMENT
+    # pour deux centres symetriques autour de 128, la signature d'un champ constant.
+    # L'absence se lit sur les valeurs BRUTES (nx = ny = 0), avant tout decodage : un
+    # vecteur (-1, -1) a une norme de 1,41 et ne peut pas etre une normale unitaire.
+    couvert = ((comps["nx"] > 0) & (comps["ny"] > 0)).astype(np.float64)
+
     s = scores_du_chunk(pred, args.bloc)
     forme_bloc = s["forme"]
     valide = ((s["occupation"] >= args.occupation_min)
@@ -139,6 +152,7 @@ def main() -> int:
         nz_, ny_, nx_ = a.shape
         return a.reshape(nz_ // k, k, ny_ // k, k, nx_ // k, k).mean(axis=(1, 3, 5)).ravel()
 
+    couverture = reduire(couvert)
     cx = (reduire(comps["nx"]) - args.centre_encode) / 127.0
     cy = (reduire(comps["ny"]) - args.centre_encode) / 127.0
     norme = np.hypot(cx, cy)
@@ -146,7 +160,8 @@ def main() -> int:
     # la normale d'une spire est horizontale quand l'axe du rouleau est z.
     nx_nous, ny_nous = nos[:, 2], nos[:, 1]
     n_nous = np.hypot(nx_nous, ny_nous)
-    bon = valide & (norme > 1e-3) & (n_nous > 1e-3)
+    bon = (valide & (norme > 1e-3) & (n_nous > 1e-3)
+           & (couverture >= args.couverture_min))
     if not bon.any():
         print("aucun bloc comparable", file=sys.stderr)
         return 1
@@ -154,7 +169,9 @@ def main() -> int:
                  / (norme[bon] * n_nous[bon]))
 
     if args.balayage_centre:
-        print(f"{bon.sum()} blocs comparables — balayage de l'hypothese d'encodage\n")
+        print(f"{bon.sum()} blocs comparables sur {int(valide.sum())} valides "
+              f"({100 * float(couverture[valide].mean()):.0f} % du pave est couvert par "
+              f"le champ) — balayage de l'hypothese d'encodage\n")
         print(f"  {'centre':>8}  {'|cos| median':>13}  {'ecart':>8}")
         lignes = []
         for c in args.balayage_centre:

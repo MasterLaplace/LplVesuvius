@@ -1,0 +1,42 @@
+{
+  "blocs_compares": 1488,
+  "balayage": [
+    {
+      "centre": 0.0,
+      "cos_median": 0.9678473052125597,
+      "angle_deg": 14.568568649343796
+    },
+    {
+      "centre": 64.0,
+      "cos_median": 0.9263724573263468,
+      "angle_deg": 22.123771768799546
+    },
+    {
+      "centre": 96.0,
+      "cos_median": 0.9764980159385486,
+      "angle_deg": 12.446411283403176
+    },
+    {
+      "centre": 128.0,
+      "cos_median": 0.9941315477032091,
+      "angle_deg": 6.210292202861264
+    },
+    {
+      "centre": 160.0,
+      "cos_median": 0.9914764292674957,
+      "angle_deg": 7.486130205312564
+    },
+    {
+      "centre": 192.0,
+      "cos_median": 0.984046941932313,
+      "angle_deg": 10.24798921643844
+    },
+    {
+      "centre": 255.0,
+      "cos_median": 0.987042122590656,
+      "angle_deg": 9.233676243038627
+    }
+  ],
+  "meilleur_centre": 128.0,
+  "meilleur_angle_deg": 6.210292202861264
+}

@@ -24,7 +24,11 @@ dit « pas de contrainte ».
 appelait `curl` une fois par chunk : une poignée de main TLS par chunk, **mesuré à
 7 chunks/s**. Ce qui coûte ici est la **latence**, pas le débit. Un pool de connexions
 persistantes — une par fil, gardée ouverte sur des milliers de requêtes — est le même
-remède que `libcurl` face au binaire `curl`, sans ajouter de dépendance.
+remède que `libcurl` face au binaire `curl`, sans ajouter de dépendance. **Mesuré : 195 à
+209 chunks/s**, soit ×28.
+
+⚠ Ma première mesure du gain annonçait ×6,8 — prise **pendant que les `curl` de l'ancienne
+version tournaient encore**. Un chiffre mesuré sous contention n'est pas le chiffre.
 """
 
 from __future__ import annotations

@@ -554,6 +554,19 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     `verifier_chiffres` cherchait « 80 » et « 10 » dans des documents en prose : trouvés
     toujours, donc contrôles incapables d'échouer — **deux entrées antérieures** étaient
     concernées. Un chiffre se garde **avec son contexte** (« 80 segments »), jamais nu.
+9septies. ⚠⚠ **Un processus par requête coûte une poignée de main TLS par requête.**
+    41 538 chunks avec un `curl` par chunk : **7 chunks/s**. Avec un pool de connexions
+    **persistantes** — une par fil, gardée ouverte sur des milliers de requêtes —
+    **195 à 209 chunks/s**, soit **×28**. C'est la **latence** qui coûte, pas le débit.
+    ⚠ LplKnowledge avait mesuré ×7,9 sur la même bascule (binaire `curl` → `libcurl`).
+    ⚠⚠ **Ma première mesure du gain était fausse — ×6,8 — parce qu'elle a été prise
+    pendant que les `curl` de l'ancienne version tournaient encore.** Un chiffre mesuré
+    sous contention n'est pas le chiffre : arrêter l'ancien avant de mesurer le nouveau.
+9octies. ⚠⚠ **`&&` après une commande qui échoue coupe la chaîne — et le commit ment.**
+    `git rm … && python3 - <<EOF … EOF` : le `git rm` a refusé (modifications locales),
+    donc le patch n'a **jamais** été appliqué, et le message de commit décrivait un
+    changement absent. C'est le piège nº 18 sous un nouveau costume. Vérifier l'effet,
+    pas le code de retour de la dernière commande.
 9sexies. ⚠⚠ **`vc_grow_seg_from_seed` n'est pas reproductible**, même en `thread_limit: 1`
     (la valeur que VC3D utilise) : quatre exécutions de la même graine rendent quatre
     aires, à 0,08 % près. Les quatre rendent **0 auto-intersection** — donc juger par un
