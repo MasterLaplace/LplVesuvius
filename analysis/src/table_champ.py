@@ -224,7 +224,9 @@ def main() -> int:
         publie = {r["segment"]: r for r in json.loads(args.index.read_text())}
         paires = [(r, publie[r["segment"]]) for r in lignes if r["segment"] in publie]
         if len(paires) >= 8:
-            ev = np.array([len(p.get("events", []) or []) for _, p in paires], dtype=float)
+            # ⚠ `events` est un COMPTE dans l'index de windcheck, pas une liste --
+            # verifie sur le fichier plutot que suppose depuis son nom.
+            ev = np.array([float(p.get("events", 0)) for _, p in paires], dtype=float)
             print(f"\n{len(paires)} segments ont un champ ET des croisements publies")
             print(f"{'champ':>26} {'rho ~ croisements':>18} {'p':>9}")
             croix = {}

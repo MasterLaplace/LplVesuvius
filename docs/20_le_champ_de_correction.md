@@ -106,11 +106,33 @@ Non significatif.
 elle est : `part_au_bord` ici, `avec_matiere` dans `19` (+0,539). Ce qui compte pour le
 résultat n'est pas que la trace soit à 50 µm près, c'est qu'elle soit **sur du papyrus**.
 
-> C'est la même forme que la métrique de proximité (`07` §16) : **un défaut de la TRACE,
-> pas du RÉSULTAT.** Et c'est cohérent avec le §5 — sur ce corpus presque rien n'a sauté de
-> feuille, donc la distinction réparable / irréparable n'a presque rien à discriminer. Le
-> corpus où elle compterait est un corpus de traces ratées, et les traces publiées ne le
-> sont pas.
+### Et pourtant il mesure bien un défaut — sur l'autre côté
+
+Contre les **croisements recensés par `windcheck`**, c'est-à-dire contre un défaut de la
+trace et non contre son résultat, sur les 54 segments qui ont les deux :
+
+| grandeur du champ | rho ~ croisements | p |
+|---|---:|---:|
+| **`residuel_median_um`** | **+0,428** | **0,0012** * |
+| `coherence_voisins` | +0,270 | 0,048 |
+
+⚠ À n = 54, rho 0,37 est détectable, et deux corrélations sont testées (Bonferroni
+p < 0,025) : **seul le résiduel tient**. La cohérence est nominale.
+
+> ⭐⭐ **Les deux mesures côte à côte disent exactement ce qu'est cet instrument :**
+>
+> | le résiduel contre… | rho | p |
+> |---|---:|---:|
+> | les **croisements** de la trace | **+0,428** | 0,0012 |
+> | l'**encre** que le pipeline en tire | −0,028 | 0,80 |
+>
+> Une trace plus déformée se recoupe davantage — et rend malgré tout la même encre. C'est
+> la même forme que la métrique de proximité (`07` §16) : **un défaut de la TRACE, pas du
+> RÉSULTAT**, et cette fois mesuré des deux côtés dans le même document.
+
+Et c'est cohérent avec le §5 : sur ce corpus presque rien n'a sauté de feuille, donc la
+distinction réparable / irréparable n'a presque rien à discriminer. Le corpus où elle
+compterait est un corpus de traces ratées, et les traces publiées ne le sont pas.
 
 ## 7. ⚠ Un motif qui n'est PAS établi, et pourquoi je le dis quand même
 

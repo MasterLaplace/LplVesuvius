@@ -40,7 +40,13 @@ def main() -> int:
         description="De combien le centre doit-il etre faux pour que l'invariant bouge ?")
     parser.add_argument("name", help="centre derive (data/axes/<name>.json)")
     parser.add_argument("volume")
-    parser.add_argument("--level", default="2")
+    parser.add_argument("--level", default="0",
+                        help="⚠⚠ Le NIVEAU 0 par defaut, et c'est deliberé. Les seuils "
+                             "`--prominence` et `--min-gap` sont cales au niveau 0 ; a un "
+                             "niveau reduit ils comptent 42 feuilles la ou il y en a 176, "
+                             "parce que reduire MOYENNE les voxels et remonte le fond "
+                             "(piege nº 1 du depot). Une sensibilite mesuree au niveau 2 "
+                             "porte alors sur une grandeur qui n'est pas celle publiee")
     parser.add_argument("--slices", type=int, default=6)
     parser.add_argument("--decalages", type=float, nargs="+",
                         default=[0, 10, 25, 50, 100, 200],
