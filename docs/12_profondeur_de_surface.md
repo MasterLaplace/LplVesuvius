@@ -364,7 +364,7 @@ la statistique de **contraste**. Elle ne s'applique plus. La nouvelle, posée **
 la campagne sur corpus :
 
 > **Un segment dont l'écart médian entre le pic de matière et la surface tracée dépasse
-> ~50 µm ne donnera pas d'encre lisible.**
+> ~50 µm ne donnera pas d'encre lisible.** ⚠⚠ **TESTÉE ET SCINDÉE au §13** : le sens tient, le seuil non, la forme forte est réfutée.
 
 ⚠ Le seuil est le **milieu de l'intervalle observé** entre les deux groupes connus
 (24–32 µm contre ≥63 µm). C'est le choix le moins arbitraire disponible à n = 3, et il
@@ -502,3 +502,69 @@ qu'on suppose être la trace — soit **± 2,4 µm**.
 ⚠ Et c'est ce qui donne son sens aux écarts : un segment dont le pic médian est à 53
 quand la population est à 54 est *normal* ; celui dont **61 %** des fenêtres piquent à un
 **bord** de la pile ne l'est pas.
+
+---
+
+## 13. ⚠⚠ La prédiction du §10 est TESTÉE — le sens tient, le seuil non, la forme forte est réfutée
+
+*(2026-08-19, sur les 80 segments de Scroll 1 et leurs cartes d'encre publiées)*
+
+Le §10 posait, en écrivant lui-même sa faiblesse — *« le seuil est le milieu de
+l'intervalle observé à n = 3, donc provisoire par construction »* :
+
+> **Un segment dont l'écart médian pic ↔ trace dépasse ~50 µm ne donnera pas d'encre
+> lisible.**
+
+### Ce qui tient
+
+Le seuil **sépare** : au-delà, contraste d'encre médian **4,927** ; en deçà, **5,911**.
+Mann-Whitney unilatéral **p = 0,0171**. Le sens de la prédiction était bon, et c'est
+cohérent avec la corrélation partielle de `19` §4 (**−0,382**).
+
+### ❌ Ce qui ne tient pas : que 50 soit un seuil
+
+Balayage complet, mêmes segments, même cible :
+
+| seuil (µm) | segments au-dessus | p |
+|---:|---:|---:|
+| 40 | 72 | 0,093 |
+| **50** | 64 | **0,017** |
+| 60 | 52 | 0,092 |
+| 70 | 32 | **0,0042** |
+| 80 | 16 | 0,013 |
+| 90 | 7 | 0,013 |
+| 100 | 5 | **0,0029** |
+
+> ⚠⚠ **60 µm est PIRE que 50 et que 70.** Une courbe qui monte, redescend et remonte n'a
+> pas de point de coupure : c'est du bruit. C'est exactement le contraire du **plateau**
+> qui a défendu le seuil d'un tiers de `07` §8, et le même critère qui a servi à le
+> défendre sert ici à refuser celui-ci.
+
+### ❌❌ Et la forme FORTE est réfutée
+
+La prédiction ne disait pas « moins d'encre », elle disait **« pas d'encre lisible »**.
+Deux mesures la démentent :
+
+1. **L'écart médian du corpus vaut 67,2 µm** — au-dessus du seuil proposé. Il classerait
+   donc **64 segments sur 80** comme dépourvus d'encre lisible, alors que la plupart en
+   portent. ⚠ Le seuil venait de trois segments dont deux étaient tronqués ; le corpus dit
+   que ces trois-là n'étaient pas représentatifs.
+2. **8 %** des segments au-delà du seuil tombent dans le premier décile d'encre du
+   corpus — contre **10 %** attendus si le seuil ne disait rien du tout.
+
+### Ce qu'il faut retenir
+
+| ✅ | ❌ |
+|---|---|
+| l'écart pic ↔ trace **est** lié à ce qu'un pipeline en tire | un seuil en µm qui séparerait « lisible » de « pas lisible » |
+| la grandeur est **ordinale** et se compare entre segments | une valeur absolue transportable d'un corpus à l'autre |
+
+⭐ C'est la règle nº 1 du dépôt qui gagne : *aucun seuil absolu sur une grandeur physique
+— normaliser, ou être ordinal*. La prédiction l'avait enfreinte, elle est testée, elle
+tombe, et c'est écrit.
+
+```bash
+cd inference_xpu
+uv run python ../analysis/src/tester_prediction_50um.py \
+    ../docs/croisement_encre.json --out ../docs/prediction_50um.json
+```
