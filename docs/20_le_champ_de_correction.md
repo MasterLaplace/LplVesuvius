@@ -100,10 +100,29 @@ qu'elle laisserait. `rigid_share` n'est qu'une façon d'écrire ça en pourcenta
 définition (`|décalage| / (|décalage| + résiduel)`) est un choix — les deux nombres bruts
 n'en sont pas un.
 
-⚠ Ce que ça dit de la suite : sur **ces deux rouleaux**, la réparation utile n'est pas une
-translation mais un **gauchissement** guidé par le champ. Ce document ne l'implémente
-pas ; il établit laquelle des deux valait la peine d'être écrite, ce qui était toute la
-question.
+⚠ Ce que ça dit de la suite : la réparation utile n'est pas une translation mais un
+**gauchissement** guidé par le champ. Ce document ne l'implémente pas ; il établit
+laquelle des deux valait la peine d'être écrite, ce qui était toute la question.
+
+### ⚠⚠ Et pourquoi le gauchissement n'est pas implémentable ICI
+
+Il faut l'écrire à l'endroit où la conclusion est tirée, sinon elle se lit comme une
+promesse qu'on ne tiendra pas.
+
+Un gauchissement déplace le **maillage**. Or ce qu'on mesure vit dans le **volume de
+surface**, qui est un artefact **publié** : il est engendré à partir du maillage par une
+chaîne — paramétrisation, aplatissement, rendu — dont rien n'est ici. Déplacer le maillage
+régénérerait un **autre** volume de surface, qu'on ne sait pas produire.
+
+⚠ Et la contre-mesure évidente ne marche pas : re-échantillonner le volume existant à une
+profondeur décalée **ne corrige rien**, parce que le volume ne contient que la fenêtre de
+profondeur que la trace a déjà découpée. Ce qu'il faudrait atteindre est en dehors —
+c'est exactement ce que `12` §9 a mesuré sur Scroll 4, où **61 %** des fenêtres ont leur
+pic au bord de la pile.
+
+> **Ce qui est livrable, c'est le champ.** De combien, où, et si c'est cohérent — pour qui
+> a la chaîne. Le mesurer coûte 300 requêtes ; l'appliquer demande un outil que ce dépôt
+> n'a pas, et prétendre le contraire serait le seul vrai défaut de ce document.
 
 ⚠⚠ **Une alerte posée puis levée par la mesure, le même jour.** `tracecheck` sur **un**
 segment de Scroll 5 rendait `rigid_share` = **0,67** — une translation y aurait enlevé
