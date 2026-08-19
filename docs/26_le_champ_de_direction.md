@@ -119,13 +119,14 @@ important :
 | aucun (4 exécutions) | 19,82 cm² | **0** |
 | le champ mesuré, `dir: normal` | 20,75 | 1 176 |
 | le même, **axes x/y permutés** (faux de 90°) | 21,56 | 8 282 |
-| le même, `dir: horizontal` | 20,33 | **10 623** |
+| le même, `dir: horizontal` | 20,33 | 10 623 |
+| le même, `dir: vertical` | 20,70 | **16 983** |
 
-⭐ **Le classement est ordonné, et c'est le fait qui compte.** Un champ délibérément faux
-est **7 fois pire** que le nôtre, et une mauvaise *sémantique* (`horizontal` au lieu de
-`normal`) est pire encore — **9 fois**. Donc le champ **est bel et bien consommé**, et le
-nôtre est **le moins faux des quatre** : assez juste pour battre largement une permutation
-et un contresens, pas assez pour aider.
+⭐ **Le classement est ordonné sur un facteur 14, et c'est le fait qui compte.** Notre champ
+en `normal` bat une permutation d'axes de **7×**, un contresens `horizontal` de **9×**, et
+`vertical` de **14×**. Donc le champ **est bel et bien consommé**, la sémantique `normal`
+est **la bonne**, et notre champ est **substantiellement juste** — assez pour dominer
+largement les trois erreurs délibérées, pas assez pour faire mieux que rien.
 
 ⚠ Ce qui désigne un défaut de **registration** plutôt que d'encodage — l'encodage, lui, est
 mesuré à 6° sur trois rouleaux. Le suspect nommé est la sémantique de `scale` : s'il
