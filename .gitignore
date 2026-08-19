@@ -41,3 +41,5 @@ __pycache__/
 # ⚠ Note privee de session : contexte que l'auteur ne veut pas voir partir avec le
 # depot. Le fichier existe, son contenu ne se versionne pas.
 /PRIVE.md
+data/trace/*/render_a/
+data/trace/*/cache_vol/

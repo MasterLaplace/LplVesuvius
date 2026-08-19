@@ -1,0 +1,170 @@
+[
+  {
+    "couche": "00",
+    "emprise_px": 3006081,
+    "moyenne": 94.7749495106752,
+    "ecart_type": 42.28004154684483,
+    "contraste_p99_p50": 1.79,
+    "part_brillante": 0.00023286132343073923
+  },
+  {
+    "couche": "01",
+    "emprise_px": 3004703,
+    "moyenne": 94.74023688863758,
+    "ecart_type": 42.21436686271103,
+    "contraste_p99_p50": 1.79,
+    "part_brillante": 0.00026158991421115497
+  },
+  {
+    "couche": "02",
+    "emprise_px": 3003248,
+    "moyenne": 94.72465310890077,
+    "ecart_type": 42.14934945034499,
+    "contraste_p99_p50": 1.79,
+    "part_brillante": 0.0002697079961428427
+  },
+  {
+    "couche": "03",
+    "emprise_px": 3001861,
+    "moyenne": 94.6622475191223,
+    "ecart_type": 42.115507943412034,
+    "contraste_p99_p50": 1.79,
+    "part_brillante": 0.00023951808561422397
+  },
+  {
+    "couche": "04",
+    "emprise_px": 3000809,
+    "moyenne": 94.57419115978391,
+    "ecart_type": 42.11349983633846,
+    "contraste_p99_p50": 1.78,
+    "part_brillante": 0.00025493125353862907
+  },
+  {
+    "couche": "05",
+    "emprise_px": 2999602,
+    "moyenne": 94.51066341467968,
+    "ecart_type": 42.12910149439349,
+    "contraste_p99_p50": 1.78,
+    "part_brillante": 0.00025236681399732366
+  },
+  {
+    "couche": "06",
+    "emprise_px": 2998870,
+    "moyenne": 94.52208131729618,
+    "ecart_type": 42.16150339932586,
+    "contraste_p99_p50": 1.78,
+    "part_brillante": 0.00025309533257527
+  },
+  {
+    "couche": "07",
+    "emprise_px": 2997899,
+    "moyenne": 94.64563816192607,
+    "ecart_type": 42.210384292436714,
+    "contraste_p99_p50": 1.79,
+    "part_brillante": 0.00026885495475331223
+  },
+  {
+    "couche": "08",
+    "emprise_px": 2996596,
+    "moyenne": 94.7756200702397,
+    "ecart_type": 42.246693061534046,
+    "contraste_p99_p50": 1.79,
+    "part_brillante": 0.00032436804961362826
+  },
+  {
+    "couche": "09",
+    "emprise_px": 2995588,
+    "moyenne": 94.8302490195581,
+    "ecart_type": 42.27466342958088,
+    "contraste_p99_p50": 1.79,
+    "part_brillante": 0.0003518507885597085
+  },
+  {
+    "couche": "10",
+    "emprise_px": 2994868,
+    "moyenne": 94.89866732022914,
+    "ecart_type": 42.2720565224312,
+    "contraste_p99_p50": 1.79,
+    "part_brillante": 0.0003509336638543001
+  },
+  {
+    "couche": "11",
+    "emprise_px": 2993978,
+    "moyenne": 94.99776584864685,
+    "ecart_type": 42.20927344531956,
+    "contraste_p99_p50": 1.7722772277227723,
+    "part_brillante": 0.00027588713076715995
+  },
+  {
+    "couche": "12",
+    "emprise_px": 2993273,
+    "moyenne": 95.04400467314542,
+    "ecart_type": 42.19428237910439,
+    "contraste_p99_p50": 1.7722772277227723,
+    "part_brillante": 0.000303346871468122
+  },
+  {
+    "couche": "13",
+    "emprise_px": 2992527,
+    "moyenne": 95.02963782782912,
+    "ecart_type": 42.184215067773,
+    "contraste_p99_p50": 1.7722772277227723,
+    "part_brillante": 0.00030542748653562693
+  },
+  {
+    "couche": "14",
+    "emprise_px": 2991481,
+    "moyenne": 94.99661338313697,
+    "ecart_type": 42.12902050867021,
+    "contraste_p99_p50": 1.7623762376237624,
+    "part_brillante": 0.0002931658265588182
+  },
+  {
+    "couche": "15",
+    "emprise_px": 2990262,
+    "moyenne": 94.97660171583627,
+    "ecart_type": 42.090517611301536,
+    "contraste_p99_p50": 1.7623762376237624,
+    "part_brillante": 0.0002618499649863457
+  },
+  {
+    "couche": "16",
+    "emprise_px": 2989195,
+    "moyenne": 94.98839486885265,
+    "ecart_type": 42.096765588243926,
+    "contraste_p99_p50": 1.7623762376237624,
+    "part_brillante": 0.0002652888152161368
+  },
+  {
+    "couche": "17",
+    "emprise_px": 2987752,
+    "moyenne": 95.06090699629688,
+    "ecart_type": 42.0908738028815,
+    "contraste_p99_p50": 1.7623762376237624,
+    "part_brillante": 0.0002868377295036536
+  },
+  {
+    "couche": "18",
+    "emprise_px": 2986735,
+    "moyenne": 95.13183258641962,
+    "ecart_type": 42.052838942638274,
+    "contraste_p99_p50": 1.7623762376237624,
+    "part_brillante": 0.0002882746544303395
+  },
+  {
+    "couche": "19",
+    "emprise_px": 2985618,
+    "moyenne": 95.26353404889709,
+    "ecart_type": 41.941518373742355,
+    "contraste_p99_p50": 1.7623762376237624,
+    "part_brillante": 0.0003523558606626836
+  },
+  {
+    "couche": "20",
+    "emprise_px": 2984405,
+    "moyenne": 95.46763157145227,
+    "ecart_type": 41.92791805614093,
+    "contraste_p99_p50": 1.7623762376237624,
+    "part_brillante": 0.0004262156108168965
+  }
+]
