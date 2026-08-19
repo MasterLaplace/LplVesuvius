@@ -114,14 +114,23 @@ information d'orientation** : le paramètre `direction_fields` était absent. Il
 trouvé *une* surface qui satisfait la prédiction — et celle qui coupe les spires en
 satisfait autant que celle qui en suit une.
 
-⚠ Les `normal-grids` publiées à côté de la prédiction (`xy/`, `xz/`, `yz/`, 182 Mo) ne sont
-**pas** dans le format que `direction_fields` attend (`<zarr>/x|y|z/<niveau>`), et ce
-paramètre veut un **chemin local**, pas une URL. La jonction reste à faire.
+⚠⚠ **Ce diagnostic est FAUX, et [`26`](26_le_champ_de_direction.md) l'a mesuré.** La
+jonction a été faite — contrat dérivé, encodage mesuré sur trois rouleaux, grilles
+récupérées — et le champ **ne déplace pas la croissance d'un centième**, ni par sa présence,
+ni par son orientation, ni à cent fois son intensité, ni sous forme de grilles de normales
+générées depuis le **volume** (×22 de coût, 68 générations identiques). Le contrôle positif
+montre que la méthode sait pourtant détecter un changement : `step_size` diverge dès le
+premier pas.
 
-| piste | ce qu'elle demande |
+⚠ Deux chiffres de ce paragraphe étaient faux aussi : les `normal-grids` font **10,40 Go**
+et non 182 Mo, et elles **sont** dans un format que l'outil lit — simplement pas par
+`direction_fields` mais par `normal_grid_path`, une clé distincte.
+
+| piste | ce qu'elle est devenue |
 |---|---|
-| donner des `direction_fields` au traceur | convertir ou régénérer les grilles au bon format |
-| choisir une graine **sur** une feuille et non à une jonction | notre chercheur de graine classe par valeur de voisinage, pas par orientation — il faut y ajouter la planéité locale |
+| donner des `direction_fields` au traceur | ❌ **négatif mesuré** (`26` §3) |
+| choisir une graine **sur** une feuille et non à une jonction | ✅ **c'est le seul levier qui a marché** ([`25`](25_une_graine_choisie_sur_la_planeite.md)) — et le vrai coupable était une occupation de **1,000**, un bloc entièrement plein, donc de tenseur nul |
+| réduire `step_size` | ⏳ le seul paramètre dont on ait mesuré qu'il déplace la trajectoire ; balayage en cours (`tools/campagne_pas.sh`) |
 | réduire `step_size` | moins de liberté à chaque pas, donc moins de chances de sauter |
 
 ## 5. Reproduire
