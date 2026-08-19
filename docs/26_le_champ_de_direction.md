@@ -281,7 +281,46 @@ feuille en a une. J'avais mesuré l'accord à 6°, mais **uniquement sur les com
 x et y** — la seule chose que je pouvais comparer, et donc la seule chose que j'ai
 validée.
 
-## 7. Reproduire
+## 7. ⭐⭐⭐ La grille de normales est consultée massivement — et ne change rien
+
+Avec **1,53 Go** de vraies grilles (une boîte de ±700 voxels autour de la graine, soit
+4 203 tranches) :
+
+| | vitesse de croissance | trajectoire, 66 générations |
+|---|---:|---|
+| sans grille | **73,45 mm²/s** | référence |
+| **avec grille** | **2,57 mm²/s** | **identique au centième** |
+
+⚠⚠ **Un facteur 29 de ralentissement pour zéro déplacement.** La contrainte n'est donc pas
+ignorée — elle est évaluée à chaque pas, et elle coûte vingt-neuf fois le temps de calcul —
+mais la trajectoire qu'elle produit est **exactement** celle du traceur sans elle.
+
+### Et l'explication est dans le nom du dossier
+
+```
+20250821151737-surface-…-th0.2.zarr           <- la prediction que le traceur suit
+20250821151737-surface-…-th0.2.normal-grids   <- les grilles
+```
+
+⭐⭐ **Les grilles sont dérivées de la prédiction elle-même.** Les redonner au traceur est
+une **tautologie** : il suit déjà cette prédiction, la contrainte est donc satisfaite
+partout par construction, et tout ce qu'elle ajoute est son coût. C'est cohérent avec les
+trois mesures : le champ charge, il coûte, et il ne déplace rien.
+
+### Ce que ça désigne, et c'est actionnable
+
+⭐ `vc_gen_normalgrids -i /chemin/volume.zarr -o sortie/` génère des grilles **depuis un
+volume**, pas depuis une prédiction. Des grilles calculées sur le **volume masqué** —
+c'est-à-dire sur la matière elle-même — porteraient une information que la prédiction n'a
+pas, et c'est la seule façon de contraindre le traceur avec autre chose que ce qu'il suit
+déjà. ⚠ C'est un gros calcul (l'outil balaye toutes les tranches, avec `--sparse-volume`
+pour en sauter), donc un lot à soi.
+
+⚠ **Et la conclusion pratique tient** : sur ce rouleau, la seule chose mesurée qui ait
+changé la trace reste **la graine** — ni le champ de direction, ni la grille de normales,
+ni les poids, ni leur intensité.
+
+## 8. Reproduire
 
 ```bash
 # le champ, seulement autour de la trace (626 Mo au lieu de plusieurs Go)
