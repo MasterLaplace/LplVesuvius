@@ -19,9 +19,26 @@ Document de passation. **À lire en entier avant de reprendre.**
 ⚠ Pousser l'AUC plus haut, chercher un meilleur détecteur d'encre ou faire transcrire
 davantage **ne sert pas** l'objectif.
 
-## 2. ⚠ CE QUI TOURNE (2026-08-19, fin de journée)
+## 2. ⚠ CE QUI TOURNE (2026-08-19, soirée)
 
-**Rien.** Toutes les campagnes ont rendu : celle des graines (12 rouleaux) et les six
+⏳ **`tools/campagne_pas.sh`** — le balayage de `step_size` {5,10,15,20,30,40} sur
+PHerc0358, écrit dans `data/trace/PHerc0358/pas/`. Reprenable. C'est **T1f**, le seul
+levier de trajectoire qui reste après les trois négatifs de `26`.
+
+> ⚠⚠ **Un bug de ce script a été attrapé pendant qu'il tournait, et il aurait produit un
+> faux positif.** `timeout 3600` a tué `pas_5` à la génération 406 sur 480 — la trace
+> croissait très bien (1437 mm² au journal) — donc aucun maillage écrit, donc
+> `aire_cm2: 0` **et `transverse: 0`**, c'est-à-dire *exactement le résultat qu'on
+> espère*, enregistré pour un run qui n'a rien produit. Corrigé : le code de sortie de
+> `timeout` est lu, un champ `statut` (ok/timeout/sans_maillage) entre dans le résumé, la
+> garde de reprise n'accepte que `ok`, et le budget de temps **suit** la cible de
+> générations au lieu d'être constant — un budget constant favorisait mécaniquement les
+> grands pas, donc biaisait la grandeur comparée. **`pas_5` est à refaire.**
+>
+> ⚠ Le script a été **basculé par `mv`**, pas édité en place : bash lit un script par
+> offset au fil de l'exécution, et l'instance en cours aurait repris au milieu d'un token.
+
+Toutes les autres campagnes ont rendu : celle des graines (12 rouleaux) et les six
 variantes de `direction_fields`. ⚠ VSCode a été fermé pendant les dernières — **aucune
 n'a été perdue**, elles avaient toutes fini leurs 118 générations. Vérifier l'**état des
 fichiers** avant de conclure qu'un lot est mort : un `ps` vide ne dit rien de ce qui a
@@ -63,6 +80,53 @@ nommé : sa graine était dans un bloc **entièrement plein** (occupation 1,000)
 géométrie à suivre.
 
 > **Le prochain lot n'est plus un batch de mesure.** Il est décrit au §7.
+
+## 2ter. ⭐⭐ La littérature primaire, lue en entier le 2026-08-19
+
+`06` §0 notait **deux** papiers « à lire ». Il y en avait **trois**, et le troisième est
+le plus important. Tout est dans [`27`](docs/27_ce_que_la_litterature_dit.md) ; voici ce
+qu'un repreneur doit savoir avant d'ouvrir quoi que ce soit d'autre.
+
+**Un rouleau scellé a été entièrement déroulé et lu** — PHerc. 1667, arXiv 2606.29085,
+27 juin 2026, 27 auteurs. 31 spires, 1231 cm², 22 colonnes, huit papyrologues.
+
+**Et le problème reste ouvert**, dit par la même équipe un mois plus tard
+(`/2026_open_problems`, 10 juillet 2026) : *« No method yet traces a complete, correct
+surface through a scroll automatically. »*
+
+⭐⭐ **Le chiffre qui réconcilie les deux, et qui cadre tout le reste** : *« ~25 hours per
+wrap of manual annotation »*. **31 spires ≈ 775 heures d'humain.** Le Grand Prize 2027 en
+tolère **huit**. Facteur **~100**.
+
+⚠⚠ **Et le fait qui justifie ce dépôt** : dans cet article, **« sheet switches »
+n'apparaît qu'UNE fois**, dans la liste des goulots non résolus. Le seul rempart contre
+une trace fautive est *« regions **judged** geometrically consistent with a single
+sheet »* — un masque d'approbation posé à la main. **Aucun taux d'erreur de traçage n'est
+publié**, ni avant ni après correction. La grandeur que nos instruments produisent
+n'existe nulle part dans la littérature.
+
+⭐ La page officielle nomme la case en toutes lettres, deux fois :
+- tableau des goulots, ligne *Sheet switches* → ce qui aiderait : *« Stronger local
+  continuity constraints and **conservative failure detection** »* ;
+- appel à contribution nº 2 : *« help with **automatic topology repair** — building tools
+  that catch mesh-tracing errors like holes, mergers, and sheet switches **without a human
+  checking every traced piece of surface by hand** »*.
+
+**Trois corrections que cette lecture a imposées dans nos documents** :
+
+| doc | ce qui était écrit | ce qui est mesuré |
+|---|---|---|
+| `27` §1 | cible de **4 µm** de résolution latérale, facteur 2,2 | **~1 µm** (*« on the order of 1 µm or finer »*), facteur **8,6–9,4**. Le 4 µm n'est **nulle part** dans le papier — écrit depuis le résumé |
+| `00` §2, `01` §3 | le spiral fitting est **immunisé** au saut de spire *par construction* | Henderson mesure **WJF = 3,20 %** et écrit *« the surface sometimes wanders between two true windings »*. La garantie est **topologique**, pas sémantique |
+| `00` §9.4 | **trois** instruments condamnent la trace de `24` | **deux** — la jambe « profondeur » a été retirée (`24` §2, `25` §5) et ce paragraphe la propageait |
+
+⚠ **La leçon de méthode** : la première version de `27` était écrite depuis les
+**résumés**. Elle portait un chiffre faux, une paraphrase entre guillemets, et reprenait
+à son compte une affirmation qu'un des papiers réfute avec un nombre. *Un résumé dit ce
+qu'un papier revendique, pas ce qu'il mesure.*
+
+⭐ **Reste nommé** : le quatrième article, *EduceLab-Scrolls* (arXiv 2304.02084, 2023),
+n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [P2].
 
 ## 3. Le projet
 
@@ -656,6 +720,39 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
 28. ⚠ Deux corrections de nom vérifiées sur le fichier plutôt que devinées : `events` est
     un **compte** dans l'index de `windcheck`, pas une liste ; et le volume `cos` du
     `lasagna` déclare ses niveaux dans son `.zattrs` — il n'en a pas de plus fin que 3.
+
+
+**Ajoutés le 2026-08-19 (soirée)**
+32. ⚠⚠ **Un run TUÉ enregistré comme une mesure — et sa valeur était le résultat
+    espéré.** `timeout 3600` a tué `pas_5` à la génération 406 sur 480 ; sans maillage
+    écrit, le script a enregistré `aire_cm2: 0` **et `transverse: 0`**. Or zéro
+    auto-intersection est exactement ce qu'on cherche. **Un échec et un succès parfait
+    avaient la même représentation.** Remède : lire le code de sortie (124 = tué), écrire
+    un `statut` explicite, et ne laisser la garde de reprise accepter que `ok`.
+33. ⚠ **Un budget de temps CONSTANT biaise la grandeur comparée.** Le même `timeout 3600`
+    pour tous les pas favorise mécaniquement les grands, qui font moins de générations. Un
+    budget doit suivre la cible.
+34. ⚠⚠ **Un fichier vide dit deux choses.** `volumes_surface_PHerc0800.txt` était
+    versionné vide, et signifiait à la fois « ce rouleau ne publie aucun volume » et « le
+    listage a échoué » — le script tronquait la sortie **avant** d'interroger S3. Remède :
+    tester la source avant d'écrire, et faire porter au fichier une ligne qui **dit** son
+    résultat, y compris quand il est zéro.
+35. ⚠ **`awk '$3>0'` compare NUMÉRIQUEMENT dès qu'un champ commence par un chiffre.** Un
+    en-tête tabulé dont le 3ᵉ champ était une date `2026-08-19` passait le filtre et
+    ressortait comme une ligne de données. Attrapé par le contrôle, pas par la relecture.
+    Un en-tête de commentaire ne doit porter **aucun séparateur de champ**.
+36. ⚠⚠ **Lire un papier depuis son résumé produit des chiffres faux.** La première version
+    de `27` annonçait une « cible de 4 µm » absente du texte (la vraie est ~1 µm), une
+    paraphrase entre guillemets, et reprenait une affirmation qu'un des papiers réfute
+    avec un nombre. **Un résumé dit ce qu'un papier revendique, pas ce qu'il mesure** — et
+    ce qui compte est presque toujours dans les tableaux, les limites, ou le code publié.
+37. ⚠ **Le code publié d'un papier dit ce que le papier ne dit pas.** `fit_spiral.py` porte
+    trois réserves en commentaire sur sa propre métrique (mesure en espace spirale, biais
+    par densité, vérité terrain qui **saute elle-même** d'une spire) dont aucune n'est dans
+    l'article. Cloner le dépôt d'une méthode qu'on cite coûte trente secondes.
+38. ⚠ **Les backticks d'un message de commit sont exécutés par le shell.** Un
+    `git commit -m "… \`timeout 3600\` …"` a lancé `timeout` et laissé des trous dans le
+    message. Passer par `git commit -F fichier`.
 
 ## 9. Règles de mesure tenues ici
 
