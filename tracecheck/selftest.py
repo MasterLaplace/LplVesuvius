@@ -115,4 +115,91 @@ try:
 except RuntimeError:
     ck(True)
 
+# ---------------------------------------------------------------------------
+# The seed verb. The claim it rests on is physical, so the controls are physical too:
+# one sheet is planar, TWO PARALLEL SHEETS are just as planar (a regular stack is exactly
+# where a seed belongs), and a junction collapses. Without the second line this would be a
+# "little matter here" detector wearing a geometry's clothes.
+# ---------------------------------------------------------------------------
+K = 8
+
+
+def cube():
+    return np.zeros((K, K, K), np.uint8)
+
+
+def planarity_of(block, k=K, smooth=1):
+    return float(T.planarity_map(block, k, smooth)["planarity"][0])
+
+
+one = cube(); one[4] = 255
+two = cube(); two[2] = 255; two[6] = 255
+cross = cube(); cross[4] = 255; cross[:, 4, :] = 255
+ck(planarity_of(one) > 0.99, "one sheet must be planar")
+ck(planarity_of(two) > 0.99, "TWO PARALLEL sheets must be just as planar")
+ck(planarity_of(cross) < 0.10, "a junction must collapse")
+noise = (np.random.default_rng(0).random((K, K, K)) < 0.15).astype(np.uint8) * 255
+ck(planarity_of(noise) < 0.20, "isotropic noise is not a sheet")
+
+# --- a uniform block -- all void or all matter -- has a NULL tensor. Its eigenvalues are
+# --- ordered noise: a perfectly defined score that means nothing. It must be gated out,
+# --- and the gate must survive an caller who widens the occupancy band to everything.
+for b in (cube(), np.full((K, K, K), 255, np.uint8)):
+    m = T.planarity_map(b, K)
+    ck(float(m["energy"][0]) == 0.0, "a uniform block has no gradient energy")
+
+# --- the orientation bias is MEASURED, not assumed: a thresholded prediction turns a
+# --- tilted sheet into a staircase, and the steps populate a second gradient direction.
+def tilted(k, deg, thick=1.2):
+    g = np.indices((k, k, k)).astype(np.float32) - (k - 1) / 2.0
+    nrm = np.array([np.cos(np.radians(deg)), np.sin(np.radians(deg)), 0.0])
+    d = nrm[0] * g[0] + nrm[1] * g[1] + nrm[2] * g[2]
+    return (np.abs(d) < thick).astype(np.uint8) * 255
+
+
+K2 = 16
+raw = [planarity_of(tilted(K2, t), K2, 0) for t in range(0, 91, 10)]
+blur = [planarity_of(tilted(K2, t), K2, 1) for t in range(0, 91, 10)]
+ck((max(raw) - min(raw)) > 2.5 * (max(blur) - min(blur)),
+   "the blur must cut the orientation bias, not merely shift it")
+ck(min(blur) > 0.85, "and the worst-oriented plane must stay clearly planar")
+ck(min(blur) > planarity_of(cross) + 0.8,
+   "the residual bias must stay far below the signal")
+
+# --- the seed must be a LIT voxel. Returning the block centre puts it in the void as soon
+# --- as the sheet crosses the block off-centre, and the tracer does not complain.
+edge = cube(); edge[1] = 255
+ck(edge[K // 2, K // 2, K // 2] == 0, "this fixture's centre must be void, or the check is empty")
+spot = T.lit_voxel(edge, K, 0, 0, 0)
+ck(spot is not None and edge[spot] > 0, "the seed must land on matter")
+ck(spot[0] == 1)
+ck(T.lit_voxel(cube(), K, 0, 0, 0) is None, "and an empty block yields no seed")
+
+# --- the 3x3x3 aggregation must PAD, never wrap: a block on the rim sees fewer
+# --- neighbours, not the neighbours of the opposite face.
+val = np.zeros((3, 3, 3), np.float32); val[0, 0, 0] = 1.0
+total, count = T._neighbourhood(val, np.ones((3, 3, 3), bool))
+ck(total[2, 2, 2] == 0.0, "the far corner must not see the near one")
+ck(count[0, 0, 0] == 8 and count[1, 1, 1] == 27)
+
+# --- and the end-to-end claim: an isolated fleck, planar by accident, must LOSE against a
+# --- clean extended stack. Without this, the neighbourhood mean is just an argmax.
+C = 48
+chunk = np.zeros((C, C, C), np.uint8)
+gi = np.indices((C, C, C // 2))
+chunk[:, :, :C // 2] = np.where(((gi[0] * 4 + gi[1]) % 20) < 3, 255, 0)
+chunk[16:24, 16:24, 32:40][3] = 255
+m = T.planarity_map(chunk, K)
+valid = ((m["occupancy"] >= 0.02) & (m["occupancy"] <= 0.80) & (m["energy"] > 0))
+shape = m["shape"]
+total, count = T._neighbourhood(m["planarity"].reshape(shape), valid.reshape(shape))
+mean = np.where(count.ravel() > 0, total.ravel() / np.maximum(count.ravel(), 1), 0.0)
+kept = valid & (count.ravel() >= 6)
+brut = m["planarity"].reshape(shape)
+ck(brut[2, 2, 4] >= float(brut[:, :, :(C // 2) // K].max()) - 1e-6,
+   "the fleck must be the single most planar block, or an argmax would not be tempted")
+idx = int(np.argmax(np.where(kept, mean + 1e-6 * count.ravel(), -np.inf)))
+ck(np.unravel_index(idx, shape)[2] < (C // 2) // K, "the seed must not land on the fleck")
+ck(not bool(kept.reshape(shape)[2, 2, 4]), "and the fleck must not even be eligible")
+
 print(f"ALL PASS (0 failures, {n} checks)")

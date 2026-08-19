@@ -472,6 +472,55 @@ assert not bool(cl["retenu"].reshape(forme)[2, 2, 4]), "l'eclat isole a ete rete
 print(f"ALL PASS (0 failures, {n} checks)")
 PY
 
+run "graine : les 2 versions"  uv run python - <<'PY'
+import sys
+sys.path.insert(0, '../analysis/src')
+sys.path.insert(0, '../tracecheck')
+import numpy as np
+import trouver_graine as interne
+import tracecheck as public
+
+# ⚠⚠ Deux implementations du MEME critere existent EXPRES : l'une interne, l'autre dans
+# l'outil public, qui doit tenir sur numpy et urllib seuls. Deux implementations d'une
+# meme idee ne restent pas egales -- ce depot l'a paye avec la boucle de creatures de
+# mapview, qui avait derive DANS LES DEUX SENS. Ce temoin les epingle l'une a l'autre sur
+# des blocs synthetiques, hors ligne.
+n = 0
+K = 8
+rng = np.random.default_rng(7)
+cas = []
+b = np.zeros((K, K, K), np.uint8); b[4] = 255; cas.append(('un plan', b))
+b = np.zeros((K, K, K), np.uint8); b[2] = 255; b[6] = 255; cas.append(('deux paralleles', b))
+b = np.zeros((K, K, K), np.uint8); b[4] = 255; b[:, 4, :] = 255; cas.append(('jonction', b))
+cas.append(('bruit', (rng.random((K, K, K)) < 0.15).astype(np.uint8) * 255))
+C = 24
+g = np.indices((C, C, C))
+cas.append(('empilement incline', np.where(((g[0] * 4 + g[1]) % 20) < 3, 255, 0).astype(np.uint8)))
+
+for nom, bloc in cas:
+    a = interne.scores_du_chunk(bloc, K)
+    q = public.planarity_map(bloc, K)
+    assert np.allclose(a['planarite'], q['planarity'], atol=1e-6), nom
+    n += 1
+    assert np.allclose(a['occupation'], q['occupancy'], atol=1e-6), nom
+    n += 1
+
+# et le voxel rendu doit etre le MEME, pas seulement un voxel allume
+bord = np.zeros((K, K, K), np.uint8); bord[1] = 255
+assert interne.voxel_allume(bord, K, 0, 0, 0) == public.lit_voxel(bord, K, 0, 0, 0)
+n += 1
+
+# et l'agregation de voisinage aussi -- c'est elle qui decide du classement
+val = rng.random((4, 4, 4)).astype(np.float32)
+ok = rng.random((4, 4, 4)) > 0.3
+sa, ca = interne._agreger_voisins(val, ok)
+sq, cq = public._neighbourhood(val, ok)
+assert np.allclose(sa, sq) and (ca == cq).all()
+n += 1
+
+print(f'ALL PASS (0 failures, {n} checks)')
+PY
+
 # ⚠ Celui-ci n'est pas une batterie d'assertions mais un GARDE-FOU de fraicheur : il
 # recalcule les chiffres publies depuis leurs JSON et les cherche dans les documents.
 printf '  %-30s ' "chiffres de la soumission"

@@ -45,6 +45,78 @@ contrast by **+0.381**, against 2000 random draws of the same size: **p = 0.0005
 The threshold is defended by a plateau (15–25 %), not by a peak — 5 % does nothing
 (p = 0.054) and 30 % degrades.
 
+## The other verb: where to *start*
+
+`tracecheck` judges a trace you already have. `--seed` answers the question at the other
+end — **where to put the seed** that `vc_grow_seg_from_seed` needs — and it reads the
+published surface *prediction* instead of a surface volume.
+
+```
+$ python3 tracecheck.py --voxel-um 9.362 --level 0 \
+    --seed PHerc0358/representations/predictions/surfaces/2025...-th0.2.zarr
+  25 chunks probed, 18 empty  block 8^3 = 75 um  smooth r=1
+   planar   nb  region  occup   -s x y z
+   0.9982   14   0.967  0.045   5842 5839 7386
+   0.9979   15   0.589  0.332   1964 2042 7324
+  order is x y z, what vc_grow_seg_from_seed wants -- the zarr is (z, y, x)
+```
+
+### Why not "where is there the most predicted surface"
+
+Because it **saturates, silently**. A surface prediction is *thresholded*, so it is binary:
+any block fully inside predicted matter hits the format ceiling and comes back at 255. Our
+first attempt returned **eight candidates all scoring 255** — and eight tied candidates are
+not a ranking, they are a coin toss wearing a measurement's clothes. The tool now says so
+out loud when it happens.
+
+### What it ranks instead
+
+The 3D structure tensor, `planarity = (lam1 - lam2) / lam1`:
+
+| situation | planarity |
+|---|---:|
+| one sheet crosses the block | **1.00** |
+| **two parallel sheets** | **1.00** |
+| a junction at 90 deg | **0.00** |
+| isotropic noise | 0.04 |
+| a uniform block (all void or all matter) | gated out — a null tensor's eigenvalues are ordered noise |
+
+The second row is the one that matters: a regular stack is exactly where a seed belongs, so
+a criterion that penalised it would be looking for *little matter* rather than *well-ordered
+matter*. What collapses the score is a **junction** — precisely where the tracer can slip
+from one wrap to the next with nothing in the prediction to stop it.
+
+⚠ **An argmax over a chunk's ~13 800 blocks saturates too** — the maximum of a bounded
+score over that many draws is ~1 whatever the terrain, and our first version duly returned
+four candidates at 1.0000. What is ranked is the planarity **averaged over the 3×3×3 block
+neighbourhood**, ties broken by how many valid neighbours there are; each chunk also reports
+its `region` share, a property of the region that no maximum can manufacture.
+
+⚠ **The orientation bias is measured, not assumed.** A thresholded prediction turns a tilted
+sheet into a staircase. Swept 0–90°, raw planarity ranges **0.828–1.000**; with the default
+blur, **0.947–1.000** — and the residual stays far below the signal, since a junction scores
+0.000.
+
+### What it bought, measured
+
+On `PHerc0358`, one variable changed — the seed, everything else identical:
+
+| | neighbourhood seed | **planarity seed** |
+|---|---:|---:|
+| area | 8.48 cm² | 19.82 cm² |
+| pairs tested by `vc_tifxyz_selfcross` | 387 151 | **852 135** |
+| **transverse self-intersections** | **240** | **0** |
+
+⚠ And the honest limits, both measured: **area saturates against the generation budget**
+(two different scrolls both stop at generation 119 of 120 and return the same area to eight
+thousandths of a percent), and pushed to 600 generations — 127.9 cm² — the same planar seed
+*does* self-intersect, 174 times. Its rate stays **21× lower per pair tested**, and First
+Letters needs 4 cm², not 128. **A seed fixes where you start, not how you travel.**
+
+⚠⚠ `vc_grow_seg_from_seed` is **not deterministic** with `thread_limit: 0`: two runs of the
+same seed returned 19.834872 and 19.821850 cm². Set `thread_limit: 1` — the value VC3D
+itself uses, and the one the tool's own startup message recommends.
+
 ## What it does **not** do
 
 - **It does not predict legibility.** `offset`, `residual` and `coherence` show no

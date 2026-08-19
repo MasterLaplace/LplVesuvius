@@ -1,0 +1,490 @@
+[
+  {
+    "couche": "00",
+    "emprise_px": 7852803,
+    "moyenne": 99.87802520959714,
+    "ecart_type": 38.82186716703626,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0006917275271008327
+  },
+  {
+    "couche": "01",
+    "emprise_px": 7852092,
+    "moyenne": 99.88564334192722,
+    "ecart_type": 38.834365157538635,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0007102565787563365
+  },
+  {
+    "couche": "02",
+    "emprise_px": 7851437,
+    "moyenne": 99.9270778075402,
+    "ecart_type": 38.86794030160333,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0007506906060635779
+  },
+  {
+    "couche": "03",
+    "emprise_px": 7850885,
+    "moyenne": 99.96128856810411,
+    "ecart_type": 38.90098667403243,
+    "contraste_p99_p50": 1.6355140186915889,
+    "part_brillante": 0.0007601690764799128
+  },
+  {
+    "couche": "04",
+    "emprise_px": 7850398,
+    "moyenne": 99.95313116608865,
+    "ecart_type": 38.90886270772659,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0007337207616734846
+  },
+  {
+    "couche": "05",
+    "emprise_px": 7849912,
+    "moyenne": 99.91717359379315,
+    "ecart_type": 38.89887072628671,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0007063773453766106
+  },
+  {
+    "couche": "06",
+    "emprise_px": 7849643,
+    "moyenne": 99.90411436545585,
+    "ecart_type": 38.90045109762572,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0006857636710357401
+  },
+  {
+    "couche": "07",
+    "emprise_px": 7849506,
+    "moyenne": 99.92421089938654,
+    "ecart_type": 38.90854466387734,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0006489580363401213
+  },
+  {
+    "couche": "08",
+    "emprise_px": 7848986,
+    "moyenne": 99.94627866580473,
+    "ecart_type": 38.89798261394647,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0006200800969704877
+  },
+  {
+    "couche": "09",
+    "emprise_px": 7848236,
+    "moyenne": 99.9526004314855,
+    "ecart_type": 38.89415145408904,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0005927446626222759
+  },
+  {
+    "couche": "10",
+    "emprise_px": 7847431,
+    "moyenne": 99.96248568480564,
+    "ecart_type": 38.877863074621395,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.000576112105987297
+  },
+  {
+    "couche": "11",
+    "emprise_px": 7847138,
+    "moyenne": 99.98892781036857,
+    "ecart_type": 38.85778409941914,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0005906612066717828
+  },
+  {
+    "couche": "12",
+    "emprise_px": 7846345,
+    "moyenne": 100.05598530271101,
+    "ecart_type": 38.842392778112036,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0005963286090530049
+  },
+  {
+    "couche": "13",
+    "emprise_px": 7845714,
+    "moyenne": 100.14753086844614,
+    "ecart_type": 38.85647108500584,
+    "contraste_p99_p50": 1.6111111111111112,
+    "part_brillante": 0.0005748361462067059
+  },
+  {
+    "couche": "14",
+    "emprise_px": 7845356,
+    "moyenne": 100.21490917684297,
+    "ecart_type": 38.87710796702416,
+    "contraste_p99_p50": 1.6111111111111112,
+    "part_brillante": 0.0005888834107719267
+  },
+  {
+    "couche": "15",
+    "emprise_px": 7844823,
+    "moyenne": 100.2392997267115,
+    "ecart_type": 38.874451437876736,
+    "contraste_p99_p50": 1.6111111111111112,
+    "part_brillante": 0.0005961893595304828
+  },
+  {
+    "couche": "16",
+    "emprise_px": 7844416,
+    "moyenne": 100.23846886753584,
+    "ecart_type": 38.85365940531682,
+    "contraste_p99_p50": 1.6111111111111112,
+    "part_brillante": 0.0006155971330434286
+  },
+  {
+    "couche": "17",
+    "emprise_px": 7843950,
+    "moyenne": 100.23958554044837,
+    "ecart_type": 38.84830827867432,
+    "contraste_p99_p50": 1.6111111111111112,
+    "part_brillante": 0.0006621663830085607
+  },
+  {
+    "couche": "18",
+    "emprise_px": 7843666,
+    "moyenne": 100.2466812074864,
+    "ecart_type": 38.88692540659588,
+    "contraste_p99_p50": 1.6203703703703705,
+    "part_brillante": 0.000700820254202563
+  },
+  {
+    "couche": "19",
+    "emprise_px": 7843580,
+    "moyenne": 100.25071472465379,
+    "ecart_type": 38.9340282358582,
+    "contraste_p99_p50": 1.6203703703703705,
+    "part_brillante": 0.000747235318566267
+  },
+  {
+    "couche": "20",
+    "emprise_px": 7843501,
+    "moyenne": 100.22720389785123,
+    "ecart_type": 38.95505744554568,
+    "contraste_p99_p50": 1.6203703703703705,
+    "part_brillante": 0.0007332184951592408
+  },
+  {
+    "couche": "21",
+    "emprise_px": 7843435,
+    "moyenne": 100.16917460270915,
+    "ecart_type": 38.976477305822115,
+    "contraste_p99_p50": 1.6111111111111112,
+    "part_brillante": 0.0007188177118826126
+  },
+  {
+    "couche": "22",
+    "emprise_px": 7843204,
+    "moyenne": 100.10384161880782,
+    "ecart_type": 39.003944331062705,
+    "contraste_p99_p50": 1.6111111111111112,
+    "part_brillante": 0.0006930841018542932
+  },
+  {
+    "couche": "23",
+    "emprise_px": 7842757,
+    "moyenne": 100.05461013263576,
+    "ecart_type": 39.010884023700996,
+    "contraste_p99_p50": 1.6203703703703705,
+    "part_brillante": 0.0006964387650924286
+  },
+  {
+    "couche": "24",
+    "emprise_px": 7842284,
+    "moyenne": 100.02890050908638,
+    "ecart_type": 38.99987569309191,
+    "contraste_p99_p50": 1.6111111111111112,
+    "part_brillante": 0.0007074469631551217
+  },
+  {
+    "couche": "25",
+    "emprise_px": 7841957,
+    "moyenne": 100.04021190118742,
+    "ecart_type": 38.994820285266975,
+    "contraste_p99_p50": 1.6111111111111112,
+    "part_brillante": 0.0006943419863179561
+  },
+  {
+    "couche": "26",
+    "emprise_px": 7841514,
+    "moyenne": 100.06325615180945,
+    "ecart_type": 38.998459835672975,
+    "contraste_p99_p50": 1.6111111111111112,
+    "part_brillante": 0.0006904278944091664
+  },
+  {
+    "couche": "27",
+    "emprise_px": 7840892,
+    "moyenne": 100.03862200882247,
+    "ecart_type": 38.99897118710736,
+    "contraste_p99_p50": 1.6111111111111112,
+    "part_brillante": 0.0006932884676896455
+  },
+  {
+    "couche": "28",
+    "emprise_px": 7840119,
+    "moyenne": 99.96819040629357,
+    "ecart_type": 38.97764618460337,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0007152952652887029
+  },
+  {
+    "couche": "29",
+    "emprise_px": 7839548,
+    "moyenne": 99.89593341350802,
+    "ecart_type": 38.968142229467645,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0007181536486542336
+  },
+  {
+    "couche": "30",
+    "emprise_px": 7838941,
+    "moyenne": 99.83942180455243,
+    "ecart_type": 38.97795727455754,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.000695884814032916
+  },
+  {
+    "couche": "31",
+    "emprise_px": 7838363,
+    "moyenne": 99.77388952259547,
+    "ecart_type": 38.9900461500449,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0006616177382956109
+  },
+  {
+    "couche": "32",
+    "emprise_px": 7837831,
+    "moyenne": 99.69735619459006,
+    "ecart_type": 39.00167636543504,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0006355074509771899
+  },
+  {
+    "couche": "33",
+    "emprise_px": 7837119,
+    "moyenne": 99.63212093627773,
+    "ecart_type": 39.011578152279505,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0006386275364709914
+  },
+  {
+    "couche": "34",
+    "emprise_px": 7836525,
+    "moyenne": 99.58581105783495,
+    "ecart_type": 39.0257678976326,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0006534784231531195
+  },
+  {
+    "couche": "35",
+    "emprise_px": 7835799,
+    "moyenne": 99.55038407697798,
+    "ecart_type": 39.03074280009223,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.000648689431671231
+  },
+  {
+    "couche": "36",
+    "emprise_px": 7835060,
+    "moyenne": 99.52447817885249,
+    "ecart_type": 39.02690527827045,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.000622075644602594
+  },
+  {
+    "couche": "37",
+    "emprise_px": 7834020,
+    "moyenne": 99.51370050114755,
+    "ecart_type": 39.03160557157611,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0005990538701713807
+  },
+  {
+    "couche": "38",
+    "emprise_px": 7833372,
+    "moyenne": 99.49600376440695,
+    "ecart_type": 39.037885843058355,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0005757418388913485
+  },
+  {
+    "couche": "39",
+    "emprise_px": 7833097,
+    "moyenne": 99.46082896713777,
+    "ecart_type": 39.03986291328645,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0005950392290558894
+  },
+  {
+    "couche": "40",
+    "emprise_px": 7832745,
+    "moyenne": 99.4295491555004,
+    "ecart_type": 39.039740759490414,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0006073222095191405
+  },
+  {
+    "couche": "41",
+    "emprise_px": 7832283,
+    "moyenne": 99.40732338195645,
+    "ecart_type": 39.05145003736389,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0006214024697524336
+  },
+  {
+    "couche": "42",
+    "emprise_px": 7831585,
+    "moyenne": 99.39473899600145,
+    "ecart_type": 39.08920717233137,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0006332051557890261
+  },
+  {
+    "couche": "43",
+    "emprise_px": 7830803,
+    "moyenne": 99.37825048082553,
+    "ecart_type": 39.14913399945844,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0006586808530364
+  },
+  {
+    "couche": "44",
+    "emprise_px": 7830299,
+    "moyenne": 99.33341293863747,
+    "ecart_type": 39.17457313311342,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0006403331469206987
+  },
+  {
+    "couche": "45",
+    "emprise_px": 7829842,
+    "moyenne": 99.27864023309793,
+    "ecart_type": 39.17170857886228,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0006341124124854627
+  },
+  {
+    "couche": "46",
+    "emprise_px": 7829321,
+    "moyenne": 99.25170458587661,
+    "ecart_type": 39.17414825200675,
+    "contraste_p99_p50": 1.6415094339622642,
+    "part_brillante": 0.0006720889333826011
+  },
+  {
+    "couche": "47",
+    "emprise_px": 7828587,
+    "moyenne": 99.25449445730118,
+    "ecart_type": 39.167485509388456,
+    "contraste_p99_p50": 1.6261682242990654,
+    "part_brillante": 0.0006642322554504408
+  },
+  {
+    "couche": "48",
+    "emprise_px": 7827976,
+    "moyenne": 99.26008306617189,
+    "ecart_type": 39.141758488864994,
+    "contraste_p99_p50": 1.6415094339622642,
+    "part_brillante": 0.0007183210577038049
+  },
+  {
+    "couche": "49",
+    "emprise_px": 7827264,
+    "moyenne": 99.25782648956263,
+    "ecart_type": 39.12615949757451,
+    "contraste_p99_p50": 1.6415094339622642,
+    "part_brillante": 0.000736144839371714
+  },
+  {
+    "couche": "50",
+    "emprise_px": 7826328,
+    "moyenne": 99.23208240186202,
+    "ecart_type": 39.14670512299798,
+    "contraste_p99_p50": 1.650943396226415,
+    "part_brillante": 0.0007217944353980564
+  },
+  {
+    "couche": "51",
+    "emprise_px": 7825185,
+    "moyenne": 99.1799860322791,
+    "ecart_type": 39.16142419941585,
+    "contraste_p99_p50": 1.6415094339622642,
+    "part_brillante": 0.0007337845686715393
+  },
+  {
+    "couche": "52",
+    "emprise_px": 7824084,
+    "moyenne": 99.12390229961744,
+    "ecart_type": 39.17645323003428,
+    "contraste_p99_p50": 1.6415094339622642,
+    "part_brillante": 0.0007364440361325364
+  },
+  {
+    "couche": "53",
+    "emprise_px": 7823003,
+    "moyenne": 99.08323478848212,
+    "ecart_type": 39.1796640754204,
+    "contraste_p99_p50": 1.6415094339622642,
+    "part_brillante": 0.0007281091417196184
+  },
+  {
+    "couche": "54",
+    "emprise_px": 7821951,
+    "moyenne": 99.05729261152365,
+    "ecart_type": 39.16260269165947,
+    "contraste_p99_p50": 1.6415094339622642,
+    "part_brillante": 0.0006963735773849772
+  },
+  {
+    "couche": "55",
+    "emprise_px": 7821125,
+    "moyenne": 99.03836979974109,
+    "ecart_type": 39.13939583839578,
+    "contraste_p99_p50": 1.6415094339622642,
+    "part_brillante": 0.0006520801035656635
+  },
+  {
+    "couche": "56",
+    "emprise_px": 7820430,
+    "moyenne": 99.0303470525278,
+    "ecart_type": 39.12205190317756,
+    "contraste_p99_p50": 1.6415094339622642,
+    "part_brillante": 0.0006329575227960611
+  },
+  {
+    "couche": "57",
+    "emprise_px": 7819583,
+    "moyenne": 99.03800867642175,
+    "ecart_type": 39.106594037449064,
+    "contraste_p99_p50": 1.6415094339622642,
+    "part_brillante": 0.0006029733299077457
+  },
+  {
+    "couche": "58",
+    "emprise_px": 7818742,
+    "moyenne": 99.04782175956183,
+    "ecart_type": 39.10154350990858,
+    "contraste_p99_p50": 1.6415094339622642,
+    "part_brillante": 0.0005765633397290767
+  },
+  {
+    "couche": "59",
+    "emprise_px": 7817477,
+    "moyenne": 99.05349411325419,
+    "ecart_type": 39.10338767186131,
+    "contraste_p99_p50": 1.6415094339622642,
+    "part_brillante": 0.0005967398433023852
+  },
+  {
+    "couche": "60",
+    "emprise_px": 7816184,
+    "moyenne": 99.05954823990838,
+    "ecart_type": 39.107311128842944,
+    "contraste_p99_p50": 1.6415094339622642,
+    "part_brillante": 0.0006089928282138701
+  }
+]

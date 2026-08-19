@@ -357,6 +357,226 @@ def judge_scroll(args) -> int:
     return 0
 
 
+# ---------------------------------------------------------------------------
+# Second verb: WHERE TO START, rather than WAS IT WORTH IT.
+#
+# `vc_grow_seg_from_seed` needs one coordinate on a surface prediction. In VC3D you click
+# it; here it is found in the published zarr without downloading anything.
+#
+# The obvious criterion -- "where is there a lot of predicted surface" -- does not work,
+# and the failure is silent. A surface prediction is THRESHOLDED, so it is binary: any
+# block fully inside predicted matter hits the format ceiling, and eight candidates come
+# back tied at 255. Eight tied candidates are not a ranking, they are a coin toss wearing
+# a measurement's clothes.
+#
+# What does work is the 3D structure tensor, because saturation cannot reach it:
+#
+#     J = <grad f . grad f^T>    lam1 >= lam2 >= lam3    planarity = (lam1 - lam2) / lam1
+#
+# One sheet crossing the block puts every gradient along its normal: one direction, so
+# planarity ~ 1. TWO PARALLEL SHEETS score just as high, and that is deliberate -- a
+# regular stack is exactly where a seed belongs. What collapses the score is a JUNCTION:
+# two sheets meeting at an angle populate two directions, lam2 rises, planarity falls. And
+# a junction is precisely where the tracer can slip from one wrap to the next with nothing
+# in the prediction to stop it.
+# ---------------------------------------------------------------------------
+
+
+def _box_blur(f, r: int):
+    """Separable box mean, edge-replicated.
+
+    A thresholded prediction is binary, so a tilted sheet is a STAIRCASE and the steps
+    populate a second gradient direction. Measured on a synthetic plane swept 0-90 deg:
+    raw planarity ranges 0.828-1.000 (spread 0.172); after this blur, 0.947-1.000 (0.053).
+    The residual bias stays far below the signal, since a junction scores 0.000.
+    """
+    if r <= 0:
+        return f
+    for axis in range(3):
+        pad = [(0, 0)] * 3
+        pad[axis] = (r, r)
+        g = np.pad(f, pad, mode="edge")
+        acc = np.zeros_like(f)
+        for d in range(2 * r + 1):
+            sl = [slice(None)] * 3
+            sl[axis] = slice(d, d + f.shape[axis])
+            acc += g[tuple(sl)]
+        f = acc / (2 * r + 1)
+    return f
+
+
+def _blocks(a, k: int):
+    nz, ny, nx = a.shape
+    a = a[: nz - nz % k, : ny - ny % k, : nx - nx % k]
+    nz, ny, nx = a.shape
+    return a.reshape(nz // k, k, ny // k, k, nx // k, k).mean(axis=(1, 3, 5))
+
+
+def planarity_map(block, k: int, smooth: int = 1):
+    """Per-block planarity, occupancy and gradient energy."""
+    raw = block.astype(np.float32)
+    occupancy = _blocks((raw > 0).astype(np.float32), k)
+    f = _box_blur(raw, smooth)
+    grads = []
+    for axis in range(3):
+        d = np.zeros_like(f)
+        lo, hi, mid = [slice(None)] * 3, [slice(None)] * 3, [slice(None)] * 3
+        hi[axis], lo[axis], mid[axis] = slice(2, None), slice(0, -2), slice(1, -1)
+        d[tuple(mid)] = 0.5 * (f[tuple(hi)] - f[tuple(lo)])
+        grads.append(d)
+    gz, gy, gx = grads
+    comps = [_blocks(a * b, k) for a, b in
+             ((gz, gz), (gy, gy), (gx, gx), (gz, gy), (gz, gx), (gy, gx))]
+    shape = comps[0].shape
+    n = int(np.prod(shape))
+    J = np.empty((n, 3, 3), dtype=np.float32)
+    J[:, 0, 0], J[:, 1, 1], J[:, 2, 2] = (c.ravel() for c in comps[:3])
+    J[:, 0, 1] = J[:, 1, 0] = comps[3].ravel()
+    J[:, 0, 2] = J[:, 2, 0] = comps[4].ravel()
+    J[:, 1, 2] = J[:, 2, 1] = comps[5].ravel()
+    vals = np.linalg.eigvalsh(J)
+    lam1, lam2 = vals[:, 2], vals[:, 1]
+    planarity = np.where(lam1 > 0, (lam1 - lam2) / np.maximum(lam1, 1e-12), 0.0)
+    return {"planarity": planarity.astype(np.float32), "occupancy": occupancy.ravel(),
+            "energy": vals.sum(axis=1).astype(np.float32), "shape": shape}
+
+
+def _neighbourhood(value, valid):
+    """Sum and count over the 3x3x3 block neighbourhood, zero-padded (never wrapped)."""
+    total = np.zeros(value.shape, dtype=np.float64)
+    count = np.zeros(value.shape, dtype=np.int32)
+    v = (value * valid).astype(np.float64)
+    m = valid.astype(np.int32)
+    for dz in (-1, 0, 1):
+        for dy in (-1, 0, 1):
+            for dx in (-1, 0, 1):
+                pad = [(max(d, 0), max(-d, 0)) for d in (dz, dy, dx)]
+                sl = tuple(slice(max(-d, 0), max(-d, 0) + n)
+                           for d, n in zip((dz, dy, dx), value.shape))
+                total += np.pad(v, pad)[sl]
+                count += np.pad(m, pad)[sl]
+    return total, count
+
+
+def lit_voxel(block, k: int, iz: int, iy: int, ix: int):
+    """The lit voxel nearest the block centre.
+
+    Returning the geometric centre puts the seed in the void as soon as the sheet crosses
+    the block diagonally, and the tracer does not complain -- it starts from whatever is
+    there.
+    """
+    sub = block[iz * k:(iz + 1) * k, iy * k:(iy + 1) * k, ix * k:(ix + 1) * k]
+    lit = np.argwhere(sub > 0)
+    if lit.size == 0:
+        return None
+    centre = np.array([k / 2.0 - 0.5] * 3)
+    z, y, x = lit[int(np.argmin(((lit - centre) ** 2).sum(axis=1)))]
+    return int(iz * k + z), int(iy * k + y), int(ix * k + x)
+
+
+def pick_seeds(zarr_url: str, level: int, chunks: int, k: int, smooth: int,
+               occ_min: float, occ_max: float, min_neighbours: int,
+               z_fraction: float, timeout: float, threads: int) -> dict:
+    meta = array_meta(zarr_url, level, timeout)
+    dz, dy, dx = meta["chunks"]
+    nz, ny, nx = meta["shape"]
+    factor = 2 ** level
+    gz, gy, gx = -(-nz // dz), -(-ny // dy), -(-nx // dx)
+    cz = min(gz - 1, max(0, int(round(z_fraction * (gz - 1)))))
+    per_axis = max(1, int(np.sqrt(chunks)))
+    points = sorted({(int(y), int(x))
+                     for y in np.linspace(0, gy - 1, per_axis)
+                     for x in np.linspace(0, gx - 1, per_axis)})
+
+    def fetch(p):
+        raw = get(f"{zarr_url}/{chunk_key(meta, level, p[0], p[1], cz)}", timeout)
+        if raw is None:
+            return None
+        data = decode(raw, meta, dz * dy * dx)
+        if data is None:
+            return None
+        return np.frombuffer(data, dtype=np.dtype(meta["dtype"])).reshape(dz, dy, dx)
+
+    with cf.ThreadPoolExecutor(max_workers=threads) as pool:
+        blocks = list(pool.map(fetch, points))
+
+    out, empty = [], 0
+    for (cy, cx), block in zip(points, blocks):
+        if block is None or block.max() == 0:
+            empty += 1
+            continue
+        m = planarity_map(block, k, smooth)
+        valid = ((m["occupancy"] >= occ_min) & (m["occupancy"] <= occ_max)
+                 & (m["energy"] > 0))
+        shape = m["shape"]
+        total, count = _neighbourhood(m["planarity"].reshape(shape), valid.reshape(shape))
+        total, count = total.ravel(), count.ravel()
+        mean = np.where(count > 0, total / np.maximum(count, 1), 0.0)
+        kept = valid & (count >= min_neighbours)
+        if not kept.any():
+            continue
+        # An argmax over the ~13800 blocks of a chunk SATURATES too -- the maximum of a
+        # bounded score over that many draws is ~1 whatever the terrain. Rank on the
+        # neighbourhood mean, break ties on how many valid neighbours there are: a seed in
+        # the middle of a large clean stack beats one on the rim of an isolated fleck that
+        # happens to be planar.
+        key = np.where(kept, mean + 1e-6 * count, -np.inf)
+        idx = int(np.argmax(key))
+        iz, iy, ix = np.unravel_index(idx, shape)
+        pos = lit_voxel(block, k, int(iz), int(iy), int(ix))
+        if pos is None:
+            continue
+        lz, ly, lx = pos
+        share = (float((valid & (m["planarity"] >= 0.90)).sum())
+                 / max(1, int(valid.sum())))
+        out.append({"planarity": round(float(mean[idx]), 4),
+                    "neighbours": int(count[idx]),
+                    "planar_share": round(share, 4),
+                    "occupancy": round(float(m["occupancy"][idx]), 4),
+                    # x y z, the order vc_grow_seg_from_seed wants -- the zarr is (z, y, x)
+                    "x": int((cx * dx + lx) * factor),
+                    "y": int((cy * dy + ly) * factor),
+                    "z": int((cz * dz + lz) * factor)})
+    out.sort(key=lambda c: (-c["planarity"], -c["neighbours"]))
+    return {"zarr": zarr_url, "level": level, "block": k, "smooth": smooth,
+            "empty_chunks": empty, "probed_chunks": len(points), "candidates": out}
+
+
+def seed_mode(args) -> int:
+    key = args.seed
+    url = key if key.startswith("http") else f"{BUCKET}/{key}"
+    try:
+        out = pick_seeds(url, args.level, args.seed_chunks, args.seed_block,
+                         args.smooth, args.occupancy_min, args.occupancy_max,
+                         args.min_neighbours, args.z_fraction, args.timeout,
+                         args.threads)
+    except RuntimeError as error:
+        print(f"{key}: {error}", file=sys.stderr)
+        return 1
+    if not out["candidates"]:
+        print("no usable block found", file=sys.stderr)
+        return 1
+    out["candidates"] = out["candidates"][: args.seed_candidates]
+    if args.json:
+        print(json.dumps(out, indent=2))
+        return 0
+    span = args.seed_block * (2 ** args.level) * args.voxel_um
+    print(f"{key}")
+    print(f"  {out['probed_chunks']} chunks probed, {out['empty_chunks']} empty  "
+          f"block {args.seed_block}^3 = {span:.0f} um  smooth r={args.smooth}")
+    print(f"  {'planar':>7} {'nb':>4} {'region':>7} {'occup':>6}   -s x y z")
+    for c in out["candidates"]:
+        print(f"  {c['planarity']:>7.4f} {c['neighbours']:>4} "
+              f"{c['planar_share']:>7.3f} {c['occupancy']:>6.3f}   "
+              f"{c['x']} {c['y']} {c['z']}")
+    same = {round(c["planarity"], 6) for c in out["candidates"]}
+    if len(out["candidates"]) > 1 and len(same) == 1:
+        print("  WARNING: every candidate scores the same -- this criterion ranks nothing "
+              "here, and the seed you take is a coin toss")
+    print("  order is x y z, what vc_grow_seg_from_seed wants -- the zarr is (z, y, x)")
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Judge a scroll segment's trace from its published surface volume.",
@@ -385,7 +605,29 @@ def main() -> int:
                              "few hundred megabytes")
     parser.add_argument("--csv", action="store_true",
                         help="with --all: comma-separated, for a spreadsheet")
+    parser.add_argument("--seed", metavar="ZARR_KEY",
+                        help="second verb: rank SEEDS on a surface PREDICTION instead of "
+                             "judging a finished trace. Prints coordinates ready for "
+                             "vc_grow_seg_from_seed -s")
+    parser.add_argument("--seed-block", type=int, default=8,
+                        help="block side, in voxels of the requested level")
+    parser.add_argument("--seed-chunks", type=int, default=25)
+    parser.add_argument("--seed-candidates", type=int, default=8)
+    parser.add_argument("--smooth", type=int, default=1,
+                        help="blur radius before the gradients. 0 makes the criterion "
+                             "sensitive to how the sheet sits in the voxel grid "
+                             "(measured spread 0.172 against 0.053 at radius 1)")
+    parser.add_argument("--occupancy-min", type=float, default=0.02)
+    parser.add_argument("--occupancy-max", type=float, default=0.80,
+                        help="a uniform block -- all void or all matter -- has a NULL "
+                             "tensor, and its eigenvalues are ordered noise: a perfectly "
+                             "defined score that means nothing")
+    parser.add_argument("--min-neighbours", type=int, default=6)
+    parser.add_argument("--z-fraction", type=float, default=0.5)
     args = parser.parse_args()
+
+    if args.seed:
+        return seed_mode(args)
 
     if args.all:
         return judge_scroll(args)

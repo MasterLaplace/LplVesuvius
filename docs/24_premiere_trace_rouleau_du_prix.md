@@ -56,6 +56,21 @@ part au centre.
 > Pour comparaison, les **61 %** au bord de `12` §9 étaient le cas d'échec qui expliquait
 > pourquoi la détection d'encre ne rendait rien sur Scroll 4. Ici c'est **64 %**.
 
+⚠⚠ **Correction du 2026-08-19 (`25` §5) : cette jambe-là ne tient pas.** Deux mesures faites
+après coup l'ont retirée du verdict :
+1. la fenêtre de 21 couches vaut **±94 µm**, soit une **demi**-distance inter-feuilles —
+   elle est presque entièrement *dans* la feuille, et **61 % des profils y sont plats**
+   (amplitude médiane 1,5 %). L'argmax d'un profil plat est du bruit, et le bruit sort aux
+   deux bords : la « bimodalité » ci-dessus en est en partie l'artefact ;
+2. sur une fenêtre assez large (61 couches) et à échelle spatiale comparable, la trace
+   **officielle** d'un rouleau du prix — même outil, équipe du concours — rend **2 %** au
+   tiers central contre 16 % ici. Un critère que la référence échoue plus mal que le cas
+   jugé ne peut pas servir à juger.
+
+**Le verdict de ce document tient**, mais sur **deux** instruments et non trois : les
+240 auto-intersections mesurées avant tout rendu, et l'image. C'est assez — et c'est
+précisément pourquoi il en fallait plusieurs.
+
 ### L'image
 
 **Le rendu complet** — 29,4 × 29,2 mm de papyrus, réduit pour tenir sur une page :
