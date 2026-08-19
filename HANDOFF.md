@@ -19,23 +19,40 @@ Document de passation. **À lire en entier avant de reprendre.**
 ⚠ Pousser l'AUC plus haut, chercher un meilleur détecteur d'encre ou faire transcrire
 davantage **ne sert pas** l'objectif.
 
-## 2. ⚠ CE QUI TOURNE (2026-08-19)
+## 2. ⚠ CE QUI TOURNE (2026-08-19, fin de séance)
 
-**Rien.** Les trois campagnes du 18 ont rendu (profondeur ×80, fibres ×80, traces ×71)
-et celle du 19 aussi (champ de correction ×80).
+| quoi | sortie | pourquoi ça compte |
+|---|---|---|
+| **sondage dense**, 392 points par segment | `docs/dense_PHercParis4/` (un fichier par segment) | ⭐⭐ tranche la voie O : le critère de `19` n'est reproductible qu'à **rho +0,280** entre deux grilles. Si l'accord monte avec la densité, c'était de l'erreur d'échantillonnage ; sinon les deux grilles mesurent des choses différentes |
+| **sensibilité du centre, niveau 0** | `docs/sensibilite_centre_L0.json` | ferme `06` §2.3 autrement que par l'ombilic, qui n'existe pas |
 
 ```bash
-ps -eo etime,pcpu,cmd | grep -E "[z]arr_depth|[c]hamp_correction|[f]iber_orient"
+ls docs/dense_PHercParis4/ | wc -l          # sur 80
+tail -3 docs/sensibilite_centre_L0.log
+ps -eo etime,pcpu,cmd | grep -E "[z]arr_depth|[s]ensibilite"
 ```
 
-⚠ **Juger sur un fichier de résultat, jamais sur une notification** : celles-ci
-concernent le *wrapper*, pas le travail `nohup`, et un log vide veut dire « Python
-bufferise ». ⚠ Et **vérifier l'horodatage d'un log avant d'en citer le verdict** — un log
-vieux de sept heures a déjà été lu comme un résultat frais.
+**Quand le dense aura rendu**, la mesure qui conclut la voie O tient en une ligne :
+
+```bash
+cd inference_xpu
+uv run python ../analysis/src/robustesse_material.py \
+    ../docs/dense_PHercParis4 ../docs/champ_PHercParis4 \
+    --nom-a "dense (392 points)" --nom-b "champ (200 points)" \
+    --out ../docs/robustesse_dense.json
+```
+⭐ **La prédiction est posée avant la mesure** : si l'accord monte nettement au-dessus de
++0,280, l'écart venait du bruit d'échantillonnage et un seuil redevient défendable. S'il
+ne monte pas, il faut dire **ce que chaque grille mesure** au lieu d'en moyenner.
+
+⚠ **Juger sur un fichier de résultat, jamais sur une notification**, et **vérifier
+l'horodatage d'un log avant d'en citer le verdict** — un log vieux de sept heures a déjà
+été lu comme un résultat frais. ⚠ Python **bufferise** : lancer avec `python -u`, sinon un
+log vide ressemble à un job mort (payé une fois de plus aujourd'hui).
 
 ⚠ Pour libérer la machine sans rien perdre : `kill -STOP` les calculs (ils reprennent à
 l'identique) et tuer les `curl` — c'est la **bande passante** qui fait bégayer un Zoom.
-`./tools/reprendre.sh` remet tout en route.
+Les deux campagnes sont **reprenables** (un fichier par segment).
 
 ## 2bis. ⭐ La liste de ce qui reste ouvert
 
