@@ -293,7 +293,7 @@ validée.
 Avec **1,53 Go** de vraies grilles (une boîte de ±700 voxels autour de la graine, soit
 4 203 tranches) :
 
-| | vitesse de croissance | trajectoire, 66 générations |
+| | vitesse de croissance | trajectoire, 103 générations |
 |---|---:|---|
 | sans grille | **73,45 mm²/s** | référence |
 | **avec grille** | **2,57 mm²/s** | **identique au centième** |
