@@ -88,7 +88,14 @@ def main() -> int:
         print("la suite de reference est DEJA rouge — rien a muter")
         print(ref.stdout[-800:])
         return 1
-    print(f"reference : {[l for l in ref.stdout.splitlines() if 'ALL PASS' in l][0]}\n")
+    # ⚠⚠ NE PAS reimprimer la ligne de reference telle quelle. Elle contient "ALL PASS",
+    # et `tools/temoins.sh` declare une batterie verte en cherchant CETTE chaine dans la
+    # sortie -- puis affiche le PREMIER match. Une reference recopiee rendait donc la
+    # batterie verte meme si la mutation echouait, et lui faisait afficher les 38 checks
+    # du selftest au lieu des 7 de la mutation. Deuxieme fois en une heure que ce piege
+    # se paie ; la chaine magique ne doit apparaitre QU'a la ligne de verdict.
+    ligne = [l for l in ref.stdout.splitlines() if "ALL PASS" in l][0]
+    print(f"reference : {ligne.replace('ALL PASS', 'suite verte')}\n")
 
     survivants = []
     for nom, bouchon in BOUCHONS.items():
