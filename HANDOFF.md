@@ -81,6 +81,16 @@ géométrie à suivre.
 
 > **Le prochain lot n'est plus un batch de mesure.** Il est décrit au §7.
 
+⭐⭐ **Et depuis le 2026-08-19, tout ce qui reste est consolidé en un seul endroit :**
+[`29`](docs/29_ce_qui_reste.md). Les 34 documents ont été lus **intégralement** — onze
+lecteurs, ligne à ligne, pas de `grep` — et les **525** énoncés de travail ouvert relevés
+y sont repliés en une trentaine d'entrées, chacune sourcée en `fichier:ligne`.
+
+> ⭐⭐⭐ **Le reste le plus profond n'est pas au bout de la chaîne, il est dessous** :
+> *« une surface propre donne un meilleur texte » est une affirmation sur le pipeline, et
+> **elle n'est pas prouvée**.* (`03`:133-137). Tout l'appareil d'instruments de ce dépôt
+> la suppose — et `28` montre que **personne dans le domaine ne l'a mesurée** non plus.
+
 ## 2ter. ⭐⭐ La littérature primaire, lue en entier le 2026-08-19
 
 `06` §0 notait **deux** papiers « à lire ». Il y en avait **trois**, et le troisième est
