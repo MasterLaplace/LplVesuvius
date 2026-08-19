@@ -18,9 +18,12 @@ ce qui justifie l'existence d'un **Title Prize** distinct.
 le **début** — introduction, préface, dédicace. Et le titre, lui, est du côté le
 mieux protégé.
 
-Papiers primaires repérés, à lire :
-[Diffeomorphic Spiral Fitting](https://arxiv.org/pdf/2512.04927) (le spiral fit),
-[Ink Detection from Surface Topography](https://arxiv.org/pdf/2603.27698).
+✅ **Papiers primaires — LUS le 2026-08-19, voir [`27`](27_ce_que_la_litterature_dit.md)** :
+[Diffeomorphic Spiral Fitting](https://arxiv.org/abs/2512.04927) (Henderson, déc. 2025) et
+[Ink Detection from Surface Topography](https://arxiv.org/abs/2603.27698) (Angelotti,
+Nicolardi, Henderson, Seales, mars 2026). ⚠⚠ Le second donne une **cible de 4 µm** de
+résolution latérale — les 13 rouleaux du prix sont à **8,64–9,36 µm**, soit un facteur
+**2,2 trop grossier**.
 
 ---
 
@@ -177,7 +180,15 @@ de course, interrompue). La vérification s'est faite **par le comportement**
 (1.12) — plus forte, puisqu'elle prouve que la donnée est juste et pas seulement
 intacte.
 
-### 2.3 Vérifier 1.11 avec le vrai ombilic
+### 2.3 ✅ CLOSE SANS L'OMBILIC — le fichier n'existe pas, et ça n'a pas d'importance
+
+`18` M1 : `umbilicus.txt` n'existe **sur aucun des 4 corpus** (zéro occurrence), et le
+centre utilisé n'est pas un barycentre mais un **ajustement sur la monotonie** de la
+spirale (mesurée à 1,000). Mesuré : déplacer le centre de **3,16 mm** — 22 écarts
+inter-feuilles — bouge l'invariant de **1,75 %**, c'est-à-dire **sous** son propre cv de
+1,8 %. La question était donc mal posée : l'invariant ne dépend pas du centre.
+
+#### Le texte d'origine
 
 1.11 utilise un barycentre par tranche, sur **une seule trace** qui ne couvre pas
 tout le rouleau — donc centre biaisé. À refaire avec `umbilicus.txt` sur Scroll 1.
@@ -309,12 +320,25 @@ refuse les seconds. Sans cette calibration, son avis sur du texte inconnu n'est 
 une donnée. ⚠ À faire **avant** de lui montrer quoi que ce soit d'inconnu, sinon on
 ne pourra plus le calibrer sans biais.
 
-### C. Un second rouleau
+### C. ✅ FAITE — et la règle NE réplique PAS
+
+Quatre corpus, 110 segments de plus (`19` §11-12) : Scroll 1 **+0,539**, PHerc0139
+**−0,229**, PHerc1667 +0,425, PHerc0172 −0,217. ⚠ Et mon explication par un effet de
+plancher couvrait **un corpus sur trois**. La règle est une propriété du corpus publié de
+Scroll 1, et c'est publié comme tel.
+
+#### Le texte d'origine
 
 Tous les chiffres de `07` et `08` viennent de Scroll 1. Scroll 5 se comporte déjà
 différemment sur le confond longueur/qualité. Rien ne dit que l'AUC voyage.
 
-### D. ⭐ Boucler la métrique de `07` sur le résultat de `08`
+### D. ✅ FAITE — et la réponse est NON
+
+C'est la mesure 3.8 : rho **+0,019 à n = 89**, contrôle plat, et à ce n un rho de 0,3
+serait détectable à 80 %. Le maillage manquant a été obtenu par `tools/ppm_to_tifxyz.py`.
+**La métrique mesure un défaut de la TRACE, pas du RÉSULTAT.**
+
+#### Le texte d'origine
 
 ⚠ **Bloquée sur un fait matériel, constaté le 2026-08-17** : le maillage `tifxyz` de
 `20230909121925` n'est pas dans `repos/windcheck/data/scroll1_tifxyz`, et les 46
