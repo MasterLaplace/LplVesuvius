@@ -1,0 +1,63 @@
+{
+  "mesures": [
+    {
+      "pas": 10,
+      "generations": 238,
+      "aire_cm2": 20.076089,
+      "transverse": 0,
+      "par_cm2": 0.0,
+      "statut": "ok_format_anterieur"
+    },
+    {
+      "pas": 15,
+      "generations": 158,
+      "aire_cm2": 19.960665,
+      "transverse": 947,
+      "par_cm2": 47.443309128227945,
+      "statut": "ok_format_anterieur"
+    },
+    {
+      "pas": 20,
+      "generations": 118,
+      "aire_cm2": 19.822694,
+      "transverse": 0,
+      "par_cm2": 0.0,
+      "statut": "ok_format_anterieur"
+    },
+    {
+      "pas": 30,
+      "generations": 78,
+      "aire_cm2": 19.573291,
+      "transverse": 0,
+      "par_cm2": 0.0,
+      "statut": "ok_format_anterieur"
+    },
+    {
+      "pas": 40,
+      "generations": 58,
+      "aire_cm2": 19.32616,
+      "transverse": 0,
+      "par_cm2": 0.0,
+      "statut": "ok_format_anterieur"
+    }
+  ],
+  "non_mesures": [
+    {
+      "pas": 5,
+      "statut": "en_cours"
+    }
+  ],
+  "etendue_relative_aires": 0.03796766709600509,
+  "pas_a_zero": [
+    10,
+    20,
+    30,
+    40
+  ],
+  "pas_non_nuls": [
+    [
+      15,
+      947
+    ]
+  ]
+}

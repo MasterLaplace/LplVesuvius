@@ -501,3 +501,71 @@ et dans `seed.json` :
   {"zarr": "/chemin/absolu/vers/champ", "dir": "normal", "scale": 2.0}
 ]
 ```
+
+
+---
+
+## 9. ⭐ T1f — `step_size` déplace la trajectoire, mais ne nettoie pas la trace
+
+2026-08-19, soir. Les trois négatifs des §3, §7 et §8 laissaient **un** levier mesuré :
+`step_size`, le contrôle positif qui fait diverger dès la génération 0. Balayage
+{5, 10, 15, 20, 30, 40} sur PHerc0358, graine de `25` (critère de planéité).
+`tools/campagne_pas.sh`, dépouillé par `analysis/src/table_pas.py`.
+
+⚠ **La comparaison n'est pas triviale, et c'est la moitié du travail.** Une surface croît
+par un **front**, donc son aire va comme (k × pas)² : à générations égales, un pas de 5
+couvre **seize fois moins** qu'un pas de 20. Comparer des comptes bruts ferait passer la
+**lenteur** pour de la **qualité** — un petit morceau a moins d'occasions de se replier
+sur lui-même. Le nombre de générations est donc mis à l'échelle en **1/pas**, et la
+première chose que le dépouillement vérifie est que les aires obtenues sont bien
+comparables.
+
+| `step_size` | générations | aire (cm²) | auto-intersections | par cm² |
+|---:|---:|---:|---:|---:|
+| 10 | 238 | 20,076 | **0** | 0,00 |
+| **15** | 158 | 19,961 | **947** | **47,44** |
+| 20 | 118 | 19,823 | **0** | 0,00 |
+| 30 | 78 | 19,573 | **0** | 0,00 |
+| 40 | 58 | 19,326 | **0** | 0,00 |
+| 5 | — | — | — | ⏳ en cours |
+
+✅ **Aires comparables : étendue relative de 3,8 %.** La mise à l'échelle a fait son
+travail, donc le compte brut mesure bien la qualité et pas la taille.
+
+### ⚠⚠ Ce que cette campagne peut mesurer, et ce qu'elle ne peut PAS
+
+**Quatre pas sur cinq rendent ZÉRO**, et l'anomalie à 15 est **encadrée de pas plus
+petits ET plus grands** qui rendent zéro. Ce n'est donc pas une tendance : c'est un point
+isolé, sur **une** graine et **un** rouleau, qui demande une réplication avant de
+signifier quoi que ce soit.
+
+> ⚠⚠ **Mais le fait décisif est ailleurs, et c'est un piège de conception qui m'appartient :
+> la trace de départ est DÉJÀ à zéro auto-intersection.** Depuis `25`, la graine choisie
+> sur la planéité rend zéro partout, sur les douze rouleaux du prix et avec les deux
+> critères. Une campagne qui part de zéro **ne peut pas mesurer une réduction** — elle ne
+> peut mesurer qu'une dégradation. C'est le **même effet de plancher** que la saturation
+> de `25` §3, vu par en dessous.
+
+**Donc la lecture honnête est en deux temps :**
+
+1. **La question posée par `24` §4** — *« réduire `step_size` : moins de liberté à chaque
+   pas, donc moins de chances de sauter »* — **ne peut pas recevoir de réponse ici.**
+   L'hypothèse suppose une trace fautive à assainir ; il n'y en a plus.
+2. **Ce que la campagne établit réellement**, et qui n'est pas rien : sur une trace saine,
+   `step_size` **ne la dégrade pas** entre 10 et 40, à aire égale. Le paramètre déplace la
+   trajectoire (`26` §6) sans changer sa qualité mesurable. **Il n'est donc pas un levier
+   de qualité, alors qu'il est le seul levier de trajectoire.**
+
+⭐ **Conséquence pour la suite** : pour mesurer un levier de qualité, il faut un cas où
+la qualité est mauvaise. Les deux qui existent sont la graine de `24` (occupation 1,000,
+240 croisements) et un rouleau où le critère de planéité échoue. **Rejouer ce balayage sur
+la MAUVAISE graine est la mesure qui répondrait vraiment à `24` §4** — et elle est bon
+marché, la chaîne est écrite.
+
+⏳ **`pas_5` est en cours de reprise.** Sa première exécution a été **tuée par le
+timeout** à la génération 406 sur 480, et le script l'avait enregistrée
+`aire=0, transverse=0` — c'est-à-dire *exactement le résultat espéré* pour un run qui
+n'avait rien produit. Corrigé le jour même : le code de sortie de `timeout` est lu, un
+`statut` explicite entre dans le résumé, et le budget de temps suit désormais la cible de
+générations au lieu d'être constant — un budget constant favorisait mécaniquement les
+grands pas, donc biaisait la grandeur même qu'on compare.
