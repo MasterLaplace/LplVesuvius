@@ -328,7 +328,7 @@ PY
 cd "$ROOT/inference_xpu" || exit 2
 run "tracecheck (outil public)" uv run python "$ROOT/tracecheck/selftest.py"
 
-run "robustesse : deux grilles" uv run python - <<'PY'
+run "robustesse : deux mesures  " uv run python - <<'PY'
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path("../analysis/src").resolve()))
@@ -356,9 +356,12 @@ ck(abs(spearmanr(x, x)[0]) > np.percentile(nuls, 95))
 ck(abs(spearmanr(x, rng.permutation(x))[0]) < 0.5,
    "une permutation ne doit pas ressembler a un accord")
 
-# ⚠ Et le fait que `19` §9 rapporte : +0,280 bat 0,219, mais de peu. Les deux nombres
-# doivent rester du meme ordre, sinon la conclusion « faiblement » serait fausse.
-ck(0.280 > 0.219 and 0.280 < 2 * 0.219, "bat le hasard, et de peu")
+# ⚠⚠ Et le fait que `19` §10 rapporte, APRES correction : la comparaison propre -- meme
+# definition, densite 5,4x differente -- rend +0,841 contre un temoin a 0,223. Le premier
+# controle (+0,280) comparait deux GRANDEURS differentes ; il est conserve ici comme
+# contre-exemple, parce que c'est exactement la forme d'un faux « resultat prudent ».
+ck(0.841 > 3 * 0.223, "la comparaison propre ecrase le hasard")
+ck(0.280 < 2 * 0.219, "et le controle FAUX ressemblait, lui, a une instabilite reelle")
 print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
