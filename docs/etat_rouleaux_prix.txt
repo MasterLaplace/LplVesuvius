@@ -1,0 +1,14 @@
+rouleau        volumes  surfaces   lasagna  segments
+PHerc0125            1         2         1         0
+PHerc0191            1         2         1         0
+PHerc0211            1         2         1         0
+PHerc0257            1         2         1         0
+PHerc0268            1         2         1         0
+PHerc0358            1         2         1         0
+PHerc0800            1         2         1         6
+PHerc0813            1         2         1         0
+PHerc0826            1         2         1         0
+PHerc1203            2         4         1         1
+PHerc1218            1         2         1         0
+PHerc1447            1         2         1        16
+PHerc1545            1         2         1         0
