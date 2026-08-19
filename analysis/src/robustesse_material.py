@@ -37,24 +37,35 @@ import numpy as np
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="La part de matiere est-elle une propriete du segment ou de la grille ?")
-    parser.add_argument("profondeur", type=Path, help="JSON de zarr_depth.py")
-    parser.add_argument("champs", type=Path, help="repertoire des JSON de champ_correction")
+    parser.add_argument("profondeur", type=Path,
+                        help="JSON de zarr_depth.py, ou repertoire d'un fichier par segment")
+    parser.add_argument("champs", type=Path,
+                        help="l'autre grille : JSON unique ou repertoire")
+    parser.add_argument("--nom-a", default="grille A")
+    parser.add_argument("--nom-b", default="grille B")
     parser.add_argument("--out", type=Path, default=None)
     args = parser.parse_args()
 
     from scipy.stats import spearmanr
 
-    a = {}
-    for rec in json.loads(args.profondeur.read_text()):
-        if rec.get("segment") and rec.get("sondees"):
-            a[rec["segment"]] = rec["avec_matiere"] / rec["sondees"]
+    def charger(chemin: Path) -> dict:
+        """Accepte un JSON unique ou un répertoire d'un fichier par segment.
 
-    b = {}
-    for f in sorted(args.champs.glob("*.json")):
-        contenu = json.loads(f.read_text())
-        for rec in (contenu if isinstance(contenu, list) else [contenu]):
-            if rec.get("segment") and rec.get("sondees"):
-                b[rec["segment"]] = rec["avec_matiere"] / rec["sondees"]
+        ⚠ Les deux formes existent dans ce dépôt parce qu'une campagne longue doit être
+        reprenable (piège nº 13) alors qu'une courte n'en a pas besoin. Le lecteur
+        s'adapte plutôt que d'imposer une conversion à chaque appel.
+        """
+        fichiers = sorted(chemin.glob("*.json")) if chemin.is_dir() else [chemin]
+        out = {}
+        for f in fichiers:
+            contenu = json.loads(f.read_text())
+            for rec in (contenu if isinstance(contenu, list) else [contenu]):
+                if rec.get("segment") and rec.get("sondees"):
+                    out[rec["segment"]] = rec["avec_matiere"] / rec["sondees"]
+        return out
+
+    a = charger(args.profondeur)
+    b = charger(args.champs)
 
     communs = sorted(set(a) & set(b))
     if len(communs) < 8:
@@ -66,8 +77,8 @@ def main() -> int:
     rho, p = spearmanr(x, y)
 
     print(f"{len(communs)} segments mesures par les DEUX echantillonneurs")
-    print(f"  grille A (zarr_depth, 36 fenetres)     mediane {np.median(x) * 100:5.1f} %")
-    print(f"  grille B (champ, reperage 10x20)       mediane {np.median(y) * 100:5.1f} %")
+    print(f"  {args.nom_a:<38} mediane {np.median(x) * 100:5.1f} %")
+    print(f"  {args.nom_b:<38} mediane {np.median(y) * 100:5.1f} %")
     print(f"\n  accord des CLASSEMENTS : rho = {rho:+.3f}  (p = {p:.2e})")
 
     # ⚠ Le temoin : un classement au hasard sur les memes valeurs. Sans lui, un rho
