@@ -320,7 +320,35 @@ pour en sauter), donc un lot à soi.
 changé la trace reste **la graine** — ni le champ de direction, ni la grille de normales,
 ni les poids, ni leur intensité.
 
-## 8. Reproduire
+## 8. ⭐⭐ Le contrôle : quelque chose déplace-t-il la croissance ?
+
+Sans lui, « croissance identique » pourrait n'être qu'une comparaison cassée. Deux
+paramètres testés sur les mêmes 20 générations :
+
+| paramètre | trajectoire |
+|---|---|
+| **`step_size: 15`** (défaut 20) | **diverge dès la génération 0** — 0,42 → 0,24 mm² |
+| `search_effort: 3` (défaut 10) | identique sur 18 générations |
+
+⭐ **La méthode sait donc détecter un changement**, et l'invariance mesurée pour les champs
+et les grilles est réelle.
+
+### Le bilan de ce qui gouverne la trajectoire, mesuré
+
+| ce qu'on fournit | la croissance bouge ? |
+|---|---|
+| `step_size` | ✅ **oui**, dès le premier pas |
+| `search_effort` | ❌ non |
+| `direction_fields` — présence, orientation, sémantique | ❌ non |
+| `direction_fields` — intensité, jusqu'à ×100 | ❌ non |
+| `normal_grid_path` — 1,53 Go de vraies grilles, 29× plus lent | ❌ non |
+
+> ⭐⭐ **La trajectoire est décidée par la prédiction et par la géométrie du pas, pas par
+> une contrainte qu'on puisse fournir.** C'est exactement pourquoi la **graine** a été le
+> seul levier qui ait changé quelque chose (`25`) : elle décide *où* la prédiction est lue,
+> et c'est la prédiction qui décide de tout le reste.
+
+## 9. Reproduire
 
 ```bash
 # le champ, seulement autour de la trace (626 Mo au lieu de plusieurs Go)
