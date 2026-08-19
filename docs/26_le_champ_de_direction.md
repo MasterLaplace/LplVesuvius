@@ -114,17 +114,24 @@ axes sont délibérément **permutés** — donc faux de 90° — ne déplace pa
 il agit vraiment, et il fait empirer.** Et le classement est ordonné, ce qui est le fait
 important :
 
-| champ donné à l'étape finale | auto-intersections |
-|---|---:|
-| aucun (4 exécutions) | **0** |
-| le champ mesuré, `dir: normal` | 1 176 |
-| le même, **axes x/y permutés** (donc faux de 90°) | **8 282** |
+| champ donné à l'étape finale | aire sauvée | auto-intersections |
+|---|---:|---:|
+| aucun (4 exécutions) | 19,82 cm² | **0** |
+| le champ mesuré, `dir: normal` | 20,75 | 1 176 |
+| le même, **axes x/y permutés** (faux de 90°) | 21,56 | 8 282 |
+| le même, `dir: horizontal` | 20,33 | **10 623** |
 
-Un champ délibérément faux est **7 fois pire** que le nôtre, et le nôtre est pire que rien.
-Donc le champ **est bien consommé**, et le nôtre est **partiellement** juste — assez pour
-battre largement une permutation, pas assez pour aider. Ce qui désigne un défaut de
-**registration** plutôt qu'un défaut d'encodage : l'encodage est mesuré à 6° sur trois
-rouleaux.
+⭐ **Le classement est ordonné, et c'est le fait qui compte.** Un champ délibérément faux
+est **7 fois pire** que le nôtre, et une mauvaise *sémantique* (`horizontal` au lieu de
+`normal`) est pire encore — **9 fois**. Donc le champ **est bel et bien consommé**, et le
+nôtre est **le moins faux des quatre** : assez juste pour battre largement une permutation
+et un contresens, pas assez pour aider.
+
+⚠ Ce qui désigne un défaut de **registration** plutôt que d'encodage — l'encodage, lui, est
+mesuré à 6° sur trois rouleaux. Le suspect nommé est la sémantique de `scale` : s'il
+signifie *facteur* et non *niveau*, chaque lecture est décalée d'un facteur deux, ce qui
+donne exactement ce profil — approximativement juste près de l'origine, de plus en plus
+faux en s'en éloignant.
 
 ### Ce que ça corrige de ce qu'on croyait
 
