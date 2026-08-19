@@ -123,7 +123,9 @@ domaine au moins une fois dans ce dépôt.
 | **M1bis** ⚠⚠ | **mesurer la distribution des tirages sur d'autres graines et d'autres rouleaux** — 14 tirages ne font pas une distribution, et le taux de 13 % n'a été mesuré que sur une graine | à faire | `30` §5 |
 | **M1ter** ⭐ | **l'encre est-elle lisible à 9 µm ?** passer le modèle du Grand Prize 2023 sur un rendu de rouleau du prix. ⚠ Le rendu de `24` fait **21 couches**, le modèle en attend **26** : il faut re-rendre | **avant tout le reste** | `31` §10 |
 | M2 | relire les 240 croisements de `24` sous un autre `--maxedge` — le filtre peut **masquer comme fabriquer** | quelques minutes | `28` §2 |
-| M3 | lire le quatrième article, *EduceLab-Scrolls* (arXiv 2304.02084) | une session | `27` Références |
+| M3 | lire le quatrième article, *EduceLab-Scrolls* (arXiv 2304.02084) | ✅ **fait le 2026-08-19** → [`32`](32_educelab_le_papier_fondateur.md) | `27` Références |
+| **M7** ⭐⭐ | **quantifier « consistent with »** — l'unique contrôle sans vérité terrain d'EduceLab est *nommé et jamais outillé* : interligne par autocorrélation, échelle de caractère par composantes connexes, taux de couverture, épaisseur de trait. Mesurés là où la vérité existe, **transportés** là où elle n'existe pas | à faire | `32` §4.2 |
+| **M8** ⭐ | **le témoin jeté** — chercher dans nos corpus le substrat *connu sans encre* que le pipeline élimine. Chez EduceLab c'est la **feuille de support en papier**, imagée dans la même session, au même voxel, et supprimée au nettoyage manuel | à faire | `32` §4.3 |
 | M4 | chercher la vraie feuille en engendrant un volume plus profond que 65 couches | à chiffrer | `12`:259 |
 | M5 | revoir les sites de fusion suspects à 2,4 µm | ⚠ **impossible** : PHerc0172 ne publie que du 7,91 µm | `06` §7:613, mesure 3.6 |
 | M6 | savoir si le trend *position dans le rouleau ↔ résiduel* existe | ⚠ **non établi** : trois corpus, trois motifs | `HANDOFF` §7 |

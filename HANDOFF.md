@@ -185,6 +185,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 | **`29`** | ⭐ **le registre consolidé de tout ce qui reste** — 525 énoncés repliés, sourcés en `fichier:ligne`. **Commencer par là pour choisir un lot** |
 | **`30`** | ⚠⚠ **le traceur est un TIRAGE** — 13 traces propres sur 14 à paramètres identiques, quand `24` en avait une à 240. Coûte deux explications causales, rapporte un levier |
 | **`31`** | ⭐ **la roadmap** — où est l'argent atteignable, et les trois façons dont elle peut se tromper |
+| **`32`** | ⭐ **EduceLab-Scrolls, le papier fondateur** — ce qu'il a posé, et les contrôles négatifs qu'il n'a pas faits (dont un témoin parfait que son pipeline **jette**) |
 
 ## 4. L'outillage, et comment le relancer
 

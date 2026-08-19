@@ -645,7 +645,7 @@ annexes et données supplémentaires — et non depuis son résumé.
 C. S. Parker, C. Chapman, M. Hayashida, W. B. Seales, *« EduceLab-Scrolls: Verifiable
 Recovery of Text from Herculaneum Papyri using X-ray CT »*, arXiv:**2304.02084**, 2023.
 C'est le jeu de données sur lequel [P2] travaille et la source des scans à 7,91 µm.
-**C'est le premier reste de ce document.**
+✅ **Lu le 2026-08-19** (v3) → [`32`](32_educelab_le_papier_fondateur.md).
 
 ### Pages officielles du concours
 
