@@ -318,6 +318,63 @@ Trois choses, et elles vont toutes dans le même sens.
    que les auto-intersections verrait le premier et raterait le second — donc `12` et
    `25` §5 ne sont pas redondants avec `03`/`24`, ils couvrent l'autre moitié.
 
+### ⭐⭐ Le code est publié — et il dit trois choses que le papier ne dit pas
+
+`github.com/pmh47/spiral-fitting`, cloné le 2026-08-19 (ajouté à `tools/repos.tsv`, il
+manquait). Le README apprend au passage que **le travail a reçu un prix de 30 000 $** du
+concours (« Awarding the Amazing Autosegmentation »).
+
+La métrique WJF est `evaluate_wrt_gp`, dans `fit_spiral.py:465`. Sa ligne centrale :
+
+```python
+nearest_windings = torch.where(shifted_radius % dr_per_winding > dr_per_winding / 2,
+                               outer_winding, inner_winding)
+frac_gp_jumping_windings = (nearest_windings[:, 0] != nearest_windings[:, 1])[~crosses_zero].float().mean()
+```
+
+Autrement dit : **la fraction des segments de la vérité terrain dont les deux
+extrémités n'ont pas la même spire la plus proche**, en excluant ceux qui franchissent
+θ = 0. C'est net, c'est honnête — et **ça exige un maillage de référence**, ici celui du
+Banner du Grand Prize de Scroll 1.
+
+**Trois réserves sont écrites en commentaire par l'auteur lui-même**, et aucune n'est
+dans l'article :
+
+1. ⚠ **La mesure est faite en espace SPIRALE, pas en espace rouleau.**
+   > `# TODO: measure the distances in scroll space, to be more accurate where the
+   > diffeomorphism has large 2nd derivative`
+
+   Là où la déformation courbe fort — c'est-à-dire exactement dans les régions
+   comprimées, celles qui posent problème — la distance mesurée n'est pas la distance
+   réelle.
+
+2. ⚠ **La métrique est biaisée par la densité de la solution.**
+   > `# This complains if the GP is not parallel with ours, particularly strongly so if
+   > ours is dense`
+
+   Un ajustement plus dense est puni davantage, à erreur géométrique égale.
+
+3. ⚠⚠ **Un défaut connu de la vérité terrain, non corrigé.**
+   > `# FIXME: this assumes the GP starts at the same papyrus winding-index in all
+   > slices -- whereas actually there's a jump at s1350 [...] should be whichever yields
+   > better metrics overall`
+
+   Le maillage de référence **saute lui-même d'une spire** à la tranche 1350, et
+   l'appariement retenu est celui qui *« rend les meilleures métriques »*.
+
+⚠ Et un mode de panne **silencieux** dans le MRWD : quand l'ajustement s'étire trop —
+c'est-à-dire quand il échoue — le tableau des rayons est **complété par répétition de sa
+dernière valeur** (`F.pad(..., value=winding_radii[-1])`) au lieu d'être pénalisé. Le
+commentaire le dit : *« this means the windings have stretched out excessively »*. Le cas
+d'échec est donc partiellement masqué par la mesure censée l'attraper.
+
+> ⭐ **Rien de tout ça n'invalide le travail** — publier son code, avec ses FIXME, est
+> précisément ce qui rend ces réserves connaissables. Mais ça change ce qu'on a le droit
+> de faire du 3,20 % : c'est **un ordre de grandeur mesuré sous conditions**, pas une
+> constante. Et ça renforce le point qui nous concerne : **une métrique qui a besoin
+> d'une vérité terrain hérite des défauts de cette vérité terrain.** Les nôtres n'en ont
+> pas.
+
 ### ⚠ Trois absences du papier, à connaître avant de le citer
 
 - **Les unités de MRWD et ChD ne sont jamais données.** Ni voxels bruts, ni µm. Or

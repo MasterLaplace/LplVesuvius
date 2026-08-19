@@ -21,6 +21,10 @@
 1	winding-ruler	https://github.com/pscamillo/winding-ruler
 1	winding-sync	https://github.com/abundantjoe/winding-sync
 1	tifxyz-doctor	https://github.com/aviad12g/tifxyz-doctor
+# Le code de l'article WACV 2026 de Henderson (arXiv 2512.04927), la methode de spiral
+# fitting elle-meme. Ajoute le 2026-08-19 : le papier etait cite dans nos docs, son code
+# ne l'etait pas.
+1	spiral-fitting	https://github.com/pmh47/spiral-fitting
 1	spiralcheck	https://github.com/Nicodol/spiralcheck
 1	windcheck	https://github.com/joe-carr-data/windcheck
 1	herculaneum-scroll-tools	https://github.com/axiosdevs/herculaneum-scroll-tools
