@@ -58,16 +58,25 @@ for z in range($Z0//cz, $Z1//cz+1):
 N=$(wc -l <<<"$liste")
 echo "$N chunks par composante · chunks ${CZ}x${CY}x${CX} · separateur « $SEP »"
 
+# ⚠⚠ Un `curl` par chunk coute une poignee de main TLS par chunk : mesure a 7 chunks/s,
+# soit plus de trois heures pour cette boite. En passant ~100 chunks a un meme `curl`, la
+# connexion est reutilisee. Ce qui coute ici est la LATENCE, pas le debit -- meme argument
+# que la lecture parallele de zarr_depth.
 for C in nx ny; do
   AXE=${C#n}
   echo "== $C -> $DEST/$AXE/$NIV"
+  # Les repertoires d'abord, en un seul passage : un `mkdir -p` par chunk est lui aussi un
+  # appel systeme par chunk.
+  if [ "$SEP" = "/" ]; then
+    awk -v d="$DEST/$AXE/$NIV/" '{print d $1"/"$2}' <<<"$liste" | sort -u \
+      | xargs -r -P 8 -n 200 mkdir -p
+  fi
   echo "$liste" | while read -r z y x; do
-    K="$z$SEP$y$SEP$x"
-    F="$DEST/$AXE/$NIV/$(echo "$K" | tr '/' '_')"
-    [ "$SEP" = "/" ] && { F="$DEST/$AXE/$NIV/$z/$y/$x"; mkdir -p "$(dirname "$F")"; }
+    if [ "$SEP" = "/" ]; then K="$z/$y/$x"; F="$DEST/$AXE/$NIV/$z/$y/$x"
+    else K="$z$SEP$y$SEP$x"; F="$DEST/$AXE/$NIV/$K"; fi
     [ -s "$F" ] && continue
-    echo "$B/$LAS/${ROU}_${C}.ome.zarr/$NIV/$K -o $F"
-  done | xargs -P "$FILS" -L1 curl -sf --max-time 120 2>/dev/null
+    printf '%s\n-o\n%s\n' "$B/$LAS/${ROU}_${C}.ome.zarr/$NIV/$K" "$F"
+  done | xargs -P "$FILS" -n 300 -d '\n' curl -sf --max-time 600 2>/dev/null
   PRESENTS=$(find "$DEST/$AXE/$NIV" -type f ! -name ".zarray" -size +0c | wc -l)
   echo "   $PRESENTS chunks presents ($(du -sh "$DEST/$AXE/$NIV" | cut -f1))"
 done
