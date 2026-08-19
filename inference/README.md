@@ -1,0 +1,34 @@
+# `inference/` — l'environnement CPU, gardé comme **témoin**
+
+Ce dossier ne porte **aucun code**. Il porte un environnement, et c'est tout son rôle.
+
+## Pourquoi il existe
+
+C'est l'environnement dans lequel la détection d'encre a d'abord tourné, **sur CPU**.
+Il est conservé parce que le passage à l'iGPU Intel Arc a été validé **contre lui** :
+commit `ea1cde9`, *« iGPU Arc via WSL2, ×4,5 à sortie identique »*. Sans un
+environnement CPU qui tourne encore, cette égalité ne serait plus rejouable — et une
+accélération dont on ne peut plus vérifier qu'elle ne change pas le résultat n'est pas
+une accélération, c'est un changement de méthode non mesuré.
+
+## ⚠ Le code vit **une seule fois**, et pas ici
+
+`inference_xpu/src/infer_ink.py` prend `--device {cpu,xpu}` et **défaute à `cpu`**. Le
+même fichier sert donc les deux chemins.
+
+Jusqu'au 2026-08-19 ce dossier portait une **copie octet pour octet** de ce script.
+Deux copies d'un même script sont deux occasions de diverger, et celle-ci n'avait même
+pas de raison d'être : le script gérait déjà les deux appareils. La copie est
+supprimée.
+
+## Lancer le chemin CPU
+
+```bash
+cd inference
+uv sync
+uv run python ../inference_xpu/src/infer_ink.py --device cpu ...
+```
+
+Ce qui diffère entre les deux dossiers est **uniquement** le `pyproject.toml` :
+ici `torch` générique + OpenVINO/ONNX ; là-bas `torch==2.9.1+xpu` depuis l'index
+PyTorch XPU. C'est la seule chose qu'un environnement a le droit de porter.
