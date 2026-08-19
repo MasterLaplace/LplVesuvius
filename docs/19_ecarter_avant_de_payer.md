@@ -119,6 +119,12 @@ qui compte est **0,05 / 8 = 0,0063**.
 trop forte qui se dégrade (30 %). Un réglage sur-ajusté ferait un **pic** ; c'est le même
 critère qui a défendu le seuil d'un tiers de `07` §8.
 
+⚠⚠ **Et ce paragraphe ne tient plus tel quel — voir le §9.** Le contrôle de robustesse,
+fait quelques heures plus tard, montre que **ce plateau est une propriété de la grille de
+sondage** et non du phénomène : mesuré avec l'autre grille, il disparaît. Ce qui survit
+est le **sens** de l'effet, pas le seuil. Le tableau ci-dessus reste exact ; c'est son
+interprétation qui a été trop large.
+
 ### Le critère perdant, gardé parce qu'il informe
 
 Avec `ecart_a_la_trace` comme critère, le gain **croît de façon monotone** avec la
