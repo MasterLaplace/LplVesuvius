@@ -750,7 +750,14 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     trois réserves en commentaire sur sa propre métrique (mesure en espace spirale, biais
     par densité, vérité terrain qui **saute elle-même** d'une spire) dont aucune n'est dans
     l'article. Cloner le dépôt d'une méthode qu'on cite coûte trente secondes.
-38. ⚠ **Les backticks d'un message de commit sont exécutés par le shell.** Un
+38bis. ⚠⚠ **La chaîne magique d'un harnais de test ne doit apparaître QU'à la ligne de
+    verdict.** `tools/temoins.sh` déclarait une batterie verte en cherchant `ALL PASS`
+    *n'importe où* dans sa sortie, et **perdait le code de sortie dans le tube**. Deux
+    batteries écrites le même jour sont passées au vert **en échouant** : l'une imprimait
+    `ALL PASS (1 failures, …)` dans son bloc d'échec, l'autre recopiait la ligne de
+    référence d'une **autre** suite. Fermé structurellement : `run()` exige désormais
+    **code de sortie 0 ET** `ALL PASS`, et lit le **dernier** match, pas le premier.
+39. ⚠ **Les backticks d'un message de commit sont exécutés par le shell.** Un
     `git commit -m "… \`timeout 3600\` …"` a lancé `timeout` et laissé des trous dans le
     message. Passer par `git commit -F fichier`.
 

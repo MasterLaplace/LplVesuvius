@@ -11,14 +11,26 @@ cd "$(dirname "$0")/.." || exit 2
 ROOT=$PWD
 FAIL=0
 
+# ⚠⚠ Une batterie est verte si elle satisfait DEUX conditions, pas une. La version
+# precedente ne testait que la presence de "ALL PASS" quelque part dans la sortie, et
+# perdait le code de sortie dans le tube. Deux batteries ecrites le 2026-08-19 sont
+# passees au vert en echouant, pour la meme raison : elles imprimaient la chaine magique
+# AILLEURS qu'a leur ligne de verdict -- l'une dans un bloc d'echec ("ALL PASS (1
+# failures, ...)"), l'autre en recopiant la ligne de reference d'une autre suite.
+#
+# Deux remedes, tous deux structurels :
+#   1. le code de sortie compte (`PIPESTATUS`, sinon `grep` masque tout) ;
+#   2. le verdict lu est le DERNIER "ALL PASS", pas le premier -- une ligne de contexte
+#      imprimee avant ne peut donc plus se faire passer pour le verdict.
 run() {
   local nom=$1; shift
-  local sortie
-  sortie=$("$@" 2>&1 | grep -vE "SyntaxWarning|if amt")
-  if grep -q "ALL PASS" <<<"$sortie"; then
-    printf '  ✅ %-28s %s\n' "$nom" "$(grep -o 'ALL PASS.*' <<<"$sortie" | head -1)"
+  local sortie rc
+  sortie=$("$@" 2>&1); rc=$?
+  sortie=$(grep -vE "SyntaxWarning|if amt" <<<"$sortie")
+  if [ "$rc" -eq 0 ] && grep -q "ALL PASS" <<<"$sortie"; then
+    printf '  ✅ %-28s %s\n' "$nom" "$(grep -o 'ALL PASS.*' <<<"$sortie" | tail -1)"
   else
-    printf '  ❌ %-28s ECHEC\n' "$nom"
+    printf '  ❌ %-28s ECHEC (code %s)\n' "$nom" "$rc"
     sed 's/^/       /' <<<"$sortie" | tail -5
     FAIL=$((FAIL + 1))
   fi
