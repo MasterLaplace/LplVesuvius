@@ -286,7 +286,9 @@ qui restait à tester — et le test n'en était pas un.
 | 22,3 mm | **0 %** (0/21) | 2,1 % | indistinguable |
 | **0,8 mm** | **7,0 %** (9/128) | 1,1 % | **p = 0,0001** |
 
-*(p exacte sur 20 000 tirages de l'hypothèse nulle.)*
+*(p exacte sur ⚠ **2 000** tirages de l'hypothèse nulle — corrigé le 2026-08-19 : les
+quatre artefacts de `fusion_scan` portent tous `"trials": 2000`, et c'est aussi le défaut
+du script. « 20 000 » était faux d'un facteur dix.)*
 
 Deux points suffisent à faire une **relation dose-effet** : l'effet apparaît quand
 l'espacement descend à l'échelle de la structure. C'est bien plus convaincant qu'un
@@ -439,8 +441,10 @@ s'élargit**. Décomposé par distance :
 | 2,4 mm | 80 | 0 | 0,0 % |
 | 3,2 à 6,3 mm | 171 | 6 | 3,5 % |
 
-**Tout le signal est dans les coupes adjacentes.** Au-delà, il y a **10 coïncidences en
-tout** sur l'ensemble : les taux par tranche de distance sont trop bruités pour porter
+**Tout le signal est dans les coupes adjacentes.** Au-delà, il y a ⚠ **6 coïncidences**
+— corrigé le 2026-08-19 : le tableau ci-dessus donne 10 + 0 + 0 + 6, soit **16 en tout**
+et **6 au-delà de 0,8 mm**. Le « 10 » reprenait le compte **à** 0,8 mm et l'attribuait à
+ce qui vient après : les taux par tranche de distance sont trop bruités pour porter
 une conclusion, et la remontée apparente vers 4–4,7 mm (2/46 et 2/31) est parfaitement
 compatible avec le hasard.
 

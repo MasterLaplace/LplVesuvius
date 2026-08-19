@@ -23,7 +23,9 @@ Ferme `07` §5 (« un seul rouleau ») et `06` §C.
 | A2 | corréler aux croisements publiés de Scroll 5 | ✅ **la métrique est INAPPLICABLE**, pas moins bonne : elle exige une trace qui se recouvre, et 44 traces couvrent ≤ 1 tour. Les 9 mesurables sont 9 morceaux du **même** segment, donc n = 1. `07` §7 |
 | A3 | le **confond longueur/qualité** de `05` | ✅ **expliqué** : sur Scroll 5 seules les traces longues sont mesurables, donc toute corrélation y est confondue **par construction** |
 | A4 | le **seuil arbitraire** de `07` §5 | ✅ **tranché** (`07` §8) : aucune grandeur sans seuil ne l'égale (`shortfall` +0,340, `ratio_p5` −0,512 contre **+0,769**) — le signal EST dans la queue. Et le plateau tient de 0,15 à 0,40, un facteur **2,7** sans que rho bouge |
-| A5 | les 3 corpus restants — PHerc0139 (38), PHerc1667 (20), PHerc0814 (13) | ✅ **71 traces mesurées** (`07` §9). Avec le rayon issu de la physique : PHerc0139 **+0,666** (p = 2,3e-05), PHerc1667 +0,579, PHerc0814 +0,141 (n = 12, sous-puissant). ⭐ Le gain est le plus grand **à 9,362 µm**, la résolution des 13 rouleaux du prix |
+| A5 | les 3 corpus restants — PHerc0139 (38), PHerc1667 (20), PHerc0814 (13) | ✅ **71 traces mesurées** (`07` §9). Avec le rayon issu de la physique : PHerc0139 **+0,666** (p = 2,3e-05), PHerc1667 +0,579, PHerc0814 +0,141 (n = 12, sous-puissant). ⭐ Le gain est le plus grand **à 9,362 µm** — ⚠ qui est le **haut** de la plage des 13
+rouleaux du prix, pas leur résolution : ils sont à **8,640–9,362 µm** (`00`, `07` §11,
+`15`). Corrigé le 2026-08-19 |
 
 ## Voie B — la profondeur de surface, de l'anecdote à l'instrument
 

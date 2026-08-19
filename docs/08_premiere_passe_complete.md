@@ -137,7 +137,9 @@ positif, ou encre réelle non annotée.
 
 **Établi** : la chaîne complète fonctionne — trace → couches publiées → modèle →
 carte d'encre → **lettres grecques visibles à l'œil**, sur du papyrus que le modèle
-n'a jamais vu, en **52 secondes par cm²**.
+n'a jamais vu, en ⚠ **84 secondes par cm²** — corrigé le 2026-08-19 : le §2 donne
+« 4 cm² en 5,6 min », soit 336 s / 4 = **84**, pas 52. Les deux chiffres ne pouvaient pas
+être vrais en même temps.
 
 **Non établi** : que ce soit *lisible* au sens d'un papyrologue. Des lettres
 reconnaissables ne font pas un texte suivi, et personne de compétent ne l'a encore

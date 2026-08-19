@@ -396,7 +396,12 @@ commande**, plus une décision.
 ## 5. Règles de mesure, apprises ici
 
 1. **Aucun seuil absolu.** Trois mesures indépendantes (1.8, 1.11, la capture
-   DLS/ESRF) montrent que l'espacement varie d'un facteur trois selon l'endroit.
+   DLS/ESRF) montrent que l'espacement varie **selon l'endroit**. ⚠ Corrigé le
+   2026-08-19 : cette ligne annonçait « un facteur **trois** », et les deux chiffres que
+   ce document mesure lui-même donnent **+28 %** (mesure 1.11 : 158 µm au cœur, 203 µm
+   dehors), soit un facteur **1,28**. La règle qui suit — normaliser, ou mieux, rester
+   **ordinal** — ne dépend pas de l'amplitude ; c'est le chiffre qui était faux, pas
+   l'énoncé.
    Toute grandeur doit être normalisée — ou mieux, être **ordinale**.
 2. **Un chiffre emprunté n'est pas une mesure.** Le « 300 µm » venait d'un README
    sur un autre rouleau et a produit une conclusion fausse (`05` §4bis).
