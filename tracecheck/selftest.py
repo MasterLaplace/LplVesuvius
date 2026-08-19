@@ -97,6 +97,16 @@ smooth = T.judge("x", 0, 2.0, 6, 3, 1.0, 4)
 ck(smooth["coherence"] > smooth["coherence_shuffled"] + 0.3,
    "a smooth field must beat its own shuffle")
 
+# --- coherence must declare when it has too few pairs to mean anything.
+# ⚠ Measured on a real segment at --blocks 2 --side 3: coherence 0.435 against a shuffle
+# control of 0.423. The control had stopped discriminating and nothing said so.
+T.column = smooth_peak
+thin = T.judge("x", 0, 2.0, 2, 2, 1.0, 4)
+ck(not thin["coherence_reliable"], "a tiny sample must NOT claim a reliable coherence")
+ck(thin["neighbour_pairs"] < 40)
+ck(smooth["coherence_reliable"], "and a proper one must")
+ck(smooth["neighbour_pairs"] >= 40)
+
 # --- an empty canvas is refused, not reported as a perfect trace.
 T.column = lambda *a, **k: "empty"
 try:

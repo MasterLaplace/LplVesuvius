@@ -237,6 +237,12 @@ def judge(zarr_url: str, level: int, voxel_um: float, side: int, blocks: int,
 
     a, b = neighbour_pairs(field)
     coherence = corr(a, b)
+    # ⚠⚠ Coherence is only meaningful with enough neighbour pairs. Measured on a real
+    # segment with --blocks 2 --side 3: coherence 0.435 against a shuffle control of
+    # 0.423 -- the control had stopped discriminating, and nothing in the output said so.
+    # A number that cannot be wrong is not a measurement, so the pair count travels with
+    # it and the caller is told when it is too thin.
+    enough = a.size >= 40
 
     # The control. Same values, same windows, random assignment. If coherence survives
     # the shuffle it comes from the arithmetic, not from the geometry -- and a check
@@ -267,7 +273,88 @@ def judge(zarr_url: str, level: int, voxel_um: float, side: int, blocks: int,
         "rigid_share": rigid,
         "coherence": coherence,
         "coherence_shuffled": corr(sa, sb),
+        "neighbour_pairs": int(a.size),
+        "coherence_reliable": bool(enough),
     }
+
+
+def list_segments(scroll: str, timeout: float) -> list[str]:
+    """Segment ids under a scroll, from the public listing."""
+    base = f"{scroll}/segments/"
+    return [p[len(base):].rstrip("/") for p in list_prefix(base, timeout)]
+
+
+def judge_scroll(args) -> int:
+    """Judge every segment of a scroll and rank them.
+
+    ⚠ Segments are judged **one at a time and printed as they land**, not collected and
+    dumped at the end. A run over two hundred segments takes an hour; a single write at
+    the end means an interruption costs the whole hour. (This project has already paid
+    that once.)
+
+    ⚠ A segment without a published surface volume is **skipped and counted**, never
+    silently dropped: "no volume published" and "volume published but empty" are
+    different facts about the scroll.
+    """
+    scroll = SCROLL_ALIASES.get(args.scroll.lower(), args.scroll) if args.scroll else None
+    if scroll is None:
+        print("--all needs a scroll name", file=sys.stderr)
+        return 2
+
+    segments = list_segments(scroll, args.timeout)
+    if not segments:
+        print(f"no segments listed under {scroll}", file=sys.stderr)
+        return 2
+
+    if args.csv:
+        print("segment,material,edge_pinned,offset_um,residual_um,residual_p90_um,"
+              "rigid_share,coherence,coherence_shuffled,pairs,coherence_reliable,windows")
+    else:
+        print(f"{scroll}: {len(segments)} segments listed\n")
+        print(f"{'segment':<44} {'material':>9} {'edge':>6} {'offset':>8} "
+              f"{'resid':>7} {'rigid':>6} {'coher':>7}")
+
+    rows, skipped, failed = [], 0, 0
+    for segment in segments:
+        key = find_surface_volume(scroll, segment, args.timeout, args.prefer)
+        if key is None:
+            skipped += 1
+            continue
+        url = f"{BUCKET}/{key}"
+        try:
+            out = judge(url, args.level, args.voxel_um, args.side, args.blocks,
+                        args.timeout, args.threads)
+        except RuntimeError:
+            failed += 1
+            continue
+        out["segment"] = segment
+        rows.append(out)
+        if args.csv:
+            print(f"{segment},{out['material']:.4f},{out['edge_pinned']:.4f},"
+                  f"{out['offset_um']:.2f},{out['residual_um']:.2f},"
+                  f"{out['residual_p90_um']:.2f},{out['rigid_share']:.4f},"
+                  f"{out['coherence']:.4f},{out['coherence_shuffled']:.4f},"
+                  f"{out['neighbour_pairs']},{int(out['coherence_reliable'])},"
+                  f"{out['windows_with_papyrus']}", flush=True)
+        else:
+            marque = "" if out["coherence_reliable"] else " ⚠thin"
+            print(f"{segment[:44]:<44} {out['material'] * 100:>8.1f}% "
+                  f"{out['edge_pinned'] * 100:>5.1f}% {out['offset_um']:>+8.1f} "
+                  f"{out['residual_um']:>7.1f} {out['rigid_share'] * 100:>5.1f}% "
+                  f"{out['coherence']:>+7.3f}{marque}", flush=True)
+
+    if not args.csv:
+        print(f"\n{len(rows)} judged · {skipped} without a published surface volume "
+              f"· {failed} with no papyrus found")
+        if rows:
+            # ⚠ The ranking is by `material`, the one field measured against published
+            # ink maps. Ranking by a field we have not validated would look identical
+            # and mean nothing.
+            worst = sorted(rows, key=lambda r: r["material"])[:5]
+            print("\nlowest material — judge these before spending on them:")
+            for r in worst:
+                print(f"  {r['segment'][:44]:<44} {r['material'] * 100:5.1f}%")
+    return 0
 
 
 def main() -> int:
@@ -291,7 +378,17 @@ def main() -> int:
     parser.add_argument("--threads", type=int, default=16)
     parser.add_argument("--timeout", type=float, default=120.0)
     parser.add_argument("--json", action="store_true", help="machine-readable output only")
+    parser.add_argument("--all", action="store_true",
+                        help="judge EVERY segment of the scroll that publishes a surface "
+                             "volume, and rank them. Nobody has published a trace-quality "
+                             "ranking of the challenge's segments; this produces one for a "
+                             "few hundred megabytes")
+    parser.add_argument("--csv", action="store_true",
+                        help="with --all: comma-separated, for a spreadsheet")
     args = parser.parse_args()
+
+    if args.all:
+        return judge_scroll(args)
 
     if args.key:
         key = args.key
@@ -334,7 +431,11 @@ def main() -> int:
     print(f"  rigid share       {out['rigid_share'] * 100:5.1f} %   "
           f"<- what a mesh translation would remove")
     print(f"  coherence        {out['coherence']:+6.3f}   "
-          f"(shuffled control {out['coherence_shuffled']:+.3f})")
+          f"(shuffled control {out['coherence_shuffled']:+.3f}, "
+          f"{out['neighbour_pairs']} neighbour pairs)")
+    if not out["coherence_reliable"]:
+        print("  ⚠ too few neighbour pairs for coherence to mean anything — raise "
+              "--side or --blocks")
     if args.sheet_um:
         verdict = "SHEET JUMP" if out["sheet_jump"] else "stays on its sheet"
         print(f"  vs {args.sheet_um:.0f} um sheet pitch: "

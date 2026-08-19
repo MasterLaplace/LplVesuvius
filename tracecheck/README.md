@@ -63,9 +63,21 @@ The threshold is defended by a plateau (15–25 %), not by a peak — 5 % does n
 ```
 python3 tracecheck.py <scroll> <segment> --voxel-um <um> [--prefer 2.4um] [--sheet-um <um>]
 python3 tracecheck.py --key <full/s3/key.zarr> --voxel-um <um>
-python3 tracecheck.py ... --json          # machine-readable
-python3 selftest.py                       # offline controls, no network
+python3 tracecheck.py ... --json                  # machine-readable, one segment
+python3 tracecheck.py <scroll> --all --csv ...    # every segment of a scroll, ranked
+python3 selftest.py                               # offline controls, no network
 ```
+
+`--all` judges every segment of a scroll that publishes a surface volume and prints each
+row **as it lands** — an interrupted run keeps what it has. Segments without a published
+volume are skipped and counted; "no volume" and "volume with no papyrus" are different
+facts and are reported separately.
+
+⚠ **`coherence` needs neighbour pairs to mean anything.** Measured on a real segment with
+`--blocks 2 --side 3`: coherence 0.435 against a shuffled control of **0.423** — the
+control had stopped discriminating, and nothing in the output said so. The tool now
+reports `pairs` and `coherence_reliable`, and marks a thin row `⚠thin`. Raise `--side` or
+`--blocks` rather than reading a number that cannot be wrong.
 
 Scroll aliases: `Scroll1` → `PHercParis4`, `Scroll4` → `PHerc1667`, `Scroll5` →
 `PHerc0172`. Any published scroll name also works directly.
