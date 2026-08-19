@@ -167,6 +167,42 @@ n'être qu'une perturbation qui aide par hasard.
 > contribution que les Progress Prizes récompensent — *« amélioration quantitative sur
 > données réelles »* et *« documentation qui permet à d'autres d'appliquer le travail »*.
 
+## 6bis. ⭐⭐ Ce que la lecture d'EduceLab a ajouté — deux instruments, et une place libre
+
+[`32`](32_educelab_le_papier_fondateur.md), lu le soir même. Le papier fondateur du
+domaine laisse **deux trous précis**, tous deux dans notre spécialité — juger sans vérité
+terrain — et tous deux ouverts depuis trois ans.
+
+**(a) L'unique contrôle sans vérité terrain du domaine est *nommé* et jamais *outillé*.**
+Sur les couches cachées, EduceLab valide en écrivant que *« the scale, line separation,
+and script … are **consistent with** those observed on the fragment surfaces »*. C'est un
+**transport de calibration** : on possède une région vérifiable, on montre que les
+statistiques de second ordre coïncident dans celle qui ne l'est pas. La forme est juste,
+et elle est laissée au jugement de l'œil.
+
+Or les trois grandeurs se mesurent **sans jamais connaître le contenu** : interligne par
+autocorrélation du profil de densité, échelle de caractère par tailles de composantes
+connexes, taux de couverture, épaisseur de trait par distance au squelette.
+
+> ⭐ **C'est le meilleur candidat immédiat à un Progress Prize** : petit, mesurable,
+> réutilisable par tous, il comble un trou que le papier fondateur nomme lui-même, et il
+> ne demande ni synchrotron, ni GPU, ni annotation.
+
+**(b) Le contrôle négatif parfait est déjà acquis, et le pipeline le jette.** Les
+fragments d'EduceLab sont montés sur une **feuille de papier de support**, que la
+segmentation capte — un substrat **fibreux**, imagé dans la **même session**, au **même
+voxel**, avec la **même fenêtre d'intensité**, et **connu sans encre**. Le nettoyage
+manuel le supprime. **Le témoin idéal était dans l'image.**
+
+⚠ Et le rappel qui vaut pour nous : EduceLab rapporte un FPR de 0,051 mesuré **sur des
+images qui contiennent de l'encre partout autour**. Un détecteur qui ne se tait jamais ne
+détecte rien — et personne n'a mesuré son silence.
+
+**(c) Une correction gratuite sur un résultat publié** : EduceLab exclut les pixels
+douteux de l'**entraînement** mais pas de l'**évaluation**. Ses métriques mesurent donc en
+partie le bruit de sa propre référence. Exclure les mêmes pixels des deux côtés ne demande
+aucun recalcul lourd.
+
 ## 7. Le Grand Prize — l'évaluation honnête
 
 **Ce qu'il demande** : 100 % du recto d'un rouleau, 70 % des caractères lisibles sans
@@ -203,6 +239,11 @@ n'en lève aucune.
 | **oct.–nov.** | §5 — le gauchissement difféomorphe | dépend de §6 : si corriger ne sert à rien, cette étape n'existe pas |
 | **nov.–févr.** | **campagne First Letters** sur les 10 rouleaux sans lecture | c'est là qu'est l'argent atteignable, et ça consomme tout ce qui précède |
 | **en continu** | un Progress Prize par mois | 20 000 $/mois, et c'est ce qui finance l'attention du jury |
+
+⭐ **Le meilleur candidat pour le Progress Prize de septembre** est le §6bis (a) :
+quantifier le « consistent with » d'EduceLab. Petit, mesurable, réutilisable, il comble un
+trou que le papier fondateur nomme lui-même, et il ne demande **ni synchrotron, ni GPU, ni
+annotation experte** — c'est-à-dire aucune des trois choses que ce projet n'a pas.
 
 ⭐ **L'ordre n'est pas négociable sur un point** : §6 avant §5. Construire un correcteur
 avant de savoir si corriger sert à quelque chose, c'est exactement ce que ce dépôt
