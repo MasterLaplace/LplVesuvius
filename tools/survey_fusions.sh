@@ -13,6 +13,10 @@
 # niveau 0, parce que les deux niveaux ne trouvent pas les memes sites (fond 10,3 %
 # contre 6,6 %).
 set -u
+# ⚠ La racine est DERIVEE, pas ecrite en dur : un chemin absolu reste le bon
+# remede au piege du `cd` qui echoue, mais il ne doit pas porter le nom de
+# compte de qui l'a ecrit -- le depot est destine a etre clone.
+ROOT="$(cd "$(dirname "$0")/.." && pwd)" || exit 2
 VOL=${VOL:-s3://vesuvius-challenge-open-data/PHerc0172/volumes/20241024131839-7.910um-53keV-masked.zarr}
 OUT=$(cd "$(dirname "${1:-docs/survey}")" 2>/dev/null && pwd)/$(basename "${1:-docs/survey}")  # ⚠ ABSOLU : le script fait un cd, un chemin relatif ecrirait ailleurs que le mkdir
 BANDS=${2:-10}
@@ -22,7 +26,7 @@ Z0=${5:-1336}
 Z1=${6:-12598}
 
 mkdir -p "$OUT"
-cd /home/masterlaplace/LplVesuvius/experiments || exit 2
+cd $ROOT/experiments || exit 2
 SPAN=$(( (Z1 - Z0) / BANDS ))
 echo "balayage par bandes : $BANDS bandes de $PER coupes, pas $STEP vx, de $Z0 a $Z1"
 for b in $(seq 0 $((BANDS - 1))); do

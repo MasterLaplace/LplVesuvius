@@ -11,8 +11,12 @@
 # ⚠ Bandes de 9 coupes a 100 voxels (0,79 mm), la geometrie exacte ou la migration a
 # ete vue : changer le pas changerait ce qu'une piste peut suivre.
 set -u
+# ⚠ La racine est DERIVEE, pas ecrite en dur : un chemin absolu reste le bon
+# remede au piege du `cd` qui echoue, mais il ne doit pas porter le nom de
+# compte de qui l'a ecrit -- le depot est destine a etre clone.
+ROOT="$(cd "$(dirname "$0")/.." && pwd)" || exit 2
 VOL=${VOL:-s3://vesuvius-challenge-open-data/PHerc0172/volumes/20241024131839-7.910um-53keV-masked.zarr}
-cd /home/masterlaplace/LplVesuvius/experiments || exit 2
+cd $ROOT/experiments || exit 2
 # ⚠⚠ Les bandes couvrent la HAUTEUR du rouleau (z 1336 → 12598), et l'une d'elles (E)
 # encadre le site migrant du §11 EXPRÈS : c'est le témoin positif. Une méthode qui ne
 # retrouverait pas la migration là où elle a déjà été vue ne dirait rien de son absence
@@ -20,7 +24,7 @@ cd /home/masterlaplace/LplVesuvius/experiments || exit 2
 for band in "3188 3988 A" "8892 9692 B" \
             "1400 2200 C" "5000 5800 D" "6600 7400 E" "10500 11300 F"; do
   set -- $band
-  OUT="/home/masterlaplace/LplVesuvius/docs/bande_niveau0_$3.json"
+  OUT="$ROOT/docs/bande_niveau0_$3.json"
   [ -s "$OUT" ] && { echo "bande $3 deja faite"; continue; }
   echo "=== bande $3 : z $1 -> $2, niveau 0, 9 coupes ==="
   uv run python src/excision/fusion_scan.py PHerc0172 "$VOL" "$OUT" \
