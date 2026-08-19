@@ -44,6 +44,12 @@ si la cohérence y survivait, elle viendrait de la façon de compter et non de l
 |---|---:|---:|---:|---|
 | Scroll 1 (PHercParis4, 2,4 µm) | 80 | **+0,325** | −0,008 | **80 / 80** (p = 1,3e-25) |
 | Scroll 4 (PHerc1667, 2,399 µm) | 19 | **+0,481** | −0,035 | **19 / 19** (p = 7,4e-08) |
+| Scroll 5 (PHerc0172, 7,91 µm) | 53 | +0,183 | −0,030 | **51 / 53** (p = 2,7e-15) |
+
+⚠ Scroll 5 est le seul où **deux segments** ne battent pas leur témoin, et sa cohérence
+médiane est la plus basse (+0,183). Son voxel fait **7,91 µm** contre 2,4 : à trois fois
+moins de résolution, une déformation douce se lit sur trois fois moins de pas. À rapporter
+tel quel plutôt qu'à moyenner avec les deux autres.
 
 > **L'erreur d'une trace n'est pas du bruit.** Elle est spatialement structurée partout,
 > et le mélange des mêmes valeurs l'efface à chaque fois. C'est le contrôle qui rend la
@@ -81,6 +87,7 @@ spectaculaire**.
 |---|---:|
 | Scroll 1 | **21,7 %** (p90 47,3 %) |
 | Scroll 4 | **35,3 %** (p90 62,8 %) |
+| Scroll 5 | **28,6 %** (p90 45,8 %) |
 
 > **Translater le maillage est le mauvais remède.** Sur les deux rouleaux, la majorité de
 > l'erreur reste après le meilleur déplacement rigide. Ce n'est pas une pose ratée : c'est
@@ -98,16 +105,19 @@ translation mais un **gauchissement** guidé par le champ. Ce document ne l'impl
 pas ; il établit laquelle des deux valait la peine d'être écrite, ce qui était toute la
 question.
 
-⚠⚠ **Et une raison de ne pas généraliser, trouvée le jour même.** `tracecheck` sur un
-segment de **Scroll 5** (PHerc0172, 7,91 µm) rend `rigid_share` = **0,67** — une
-translation y enlèverait **deux tiers** de l'erreur, l'inverse exact du motif ci-dessus.
-Si ça tient sur les 53 segments de ce rouleau, alors *quelle réparation marche* est une
-propriété du **rouleau** et non une constante du problème.
+⚠⚠ **Une alerte posée puis levée par la mesure, le même jour.** `tracecheck` sur **un**
+segment de Scroll 5 rendait `rigid_share` = **0,67** — une translation y aurait enlevé
+deux tiers de l'erreur, l'inverse du motif. J'ai donc restreint la conclusion à « sur ces
+deux rouleaux » et lancé les 53 segments.
 
-> **n = 1.** C'est une piste, pas un résultat — exactement la situation où les fibres se
-> trouvaient à n = 12 et le détecteur de phase à n = 8. La campagne sur les 53 segments
-> est en file ; d'ici là, la phrase à tenir est **« sur Scroll 1 et Scroll 4 »**, jamais
-> « en général ».
+**Verdict : ce segment était une exception.** La médiane du rouleau vaut **28,6 %**, entre
+Scroll 1 et Scroll 4. La conclusion tient donc sur **trois** rouleaux, deux résolutions et
+152 segments — et la restriction est levée.
+
+> ⭐ C'est l'inverse du motif habituel de ce dépôt : d'ordinaire un effet vu sur peu de
+> points **fond** quand n monte. Ici c'est une **contre-indication** vue sur un point qui
+> a fondu. La règle est la même dans les deux sens — n = 1 n'est pas un résultat — et elle
+> vient de payer dans la direction agréable.
 
 ## 5. Le résiduel reste SOUS une épaisseur de feuille — et j'ai d'abord dit le contraire
 
@@ -117,7 +127,8 @@ est le **pas inter-feuilles**. Sur Scroll 1 il vaut **172,8 µm**
 
 | | résiduel médian | en écarts inter-feuilles | segments au-dessus d'un écart |
 |---|---:|---:|---:|
-| Scroll 1 | 56,4 µm | **0,33** | **1 / 80 (1 %)** — `20260701183146-w118-119`, à 1,02 écart |
+| Scroll 1 (pas 172,8 µm) | 56,4 µm | **0,33** | **1 / 80 (1 %)** — `20260701183146-w118-119`, à 1,02 écart |
+| Scroll 5 (pas **142,8 µm**, mesuré sur lui au `11` §3) | 39,6 µm | **0,28** | **0 / 53 (0 %)** |
 
 ⚠⚠ **Correction d'une mesure faite deux heures plus tôt dans cette même session.** J'avais
 appliqué **142,8 µm** — l'invariant de `11` §3, mesuré sur **PHerc0172** — à des segments
