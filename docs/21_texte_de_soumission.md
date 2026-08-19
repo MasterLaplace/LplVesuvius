@@ -106,10 +106,16 @@ encore.
 > - **The target is another pipeline's output.** The 80 ink maps are the ones published
 >   here, taken as-is. Nothing of ours enters them, so the relationship cannot be a shared
 >   artefact.
-> - **The size confound is real and removed.** Segment footprint correlates with the
->   criterion (+0.384) *and* with ink (+0.463). The **partial** correlation goes from
->   −0.315 to **−0.382** — removing the confound *strengthens* it, the opposite of a size
->   effect.
+> - **The size confound is real and removed.** Segment footprint correlates with
+>   ⚠ **`ecart_a_la_trace`** (+0.384) *and* with ink (+0.463). Its **partial**
+>   correlation goes from −0.315 to **−0.382** — removing the confound *strengthens* it,
+>   the opposite of a size effect. ⚠ **This criterion clears the nominal threshold only:
+>   `19` marks it « ❌ *nominal seulement* » — it does not survive Bonferroni.**
+
+⚠⚠ **Corrigé le 2026-08-19.** Cette puce vivait sous une section qui parle de
+`material` (+0,539) et **importait les chiffres d'un autre critère** — +0,384, +0,463,
+−0,315 → −0,382 appartiennent tous à `ecart_a_la_trace` (`19` §64, §78-79, §88). Deux
+fautes en une : le mauvais critère, et une réserve omise que la source porte.
 > - **The threshold sits on a plateau, not a peak.** 15–25 % all hold at p ≤ 0.001; 5 %
 >   does nothing (p = 0.054) and 30 % degrades. An overfitted knob produces a peak.
 >
@@ -150,7 +156,8 @@ encore.
 >
 > #### 7. Negative results we are also reporting
 >
-> Three ideas were tested and did not survive. They are documented with the power that
+> ⚠ **Four** ideas were tested and did not survive *(corrigé le 2026-08-19 : le texte
+> annonçait « three » et la liste en compte quatre)*. They are documented with the power that
 > would have detected them, because a corpus of dead ends saves other people's months:
 >
 > - **Fibre orientation as a sheet-jump discriminant** — sign *inverted* from n = 12
@@ -246,8 +253,9 @@ encore.
 >
 > #### 10. Two reproducibility facts about the official tracer
 >
-> - **`vc_grow_seg_from_seed`'s growth is deterministic; its final step is not.** Six runs
->   of the same seed — two at `thread_limit: 0`, two at `1`, one with a direction field —
+> - **`vc_grow_seg_from_seed`'s growth is deterministic; its final step is not.**
+>   ⚠ **Five** runs of the same seed — two at `thread_limit: 0`, two at `1`, one with a
+>   direction field — *(corrigé : le texte disait « six » et l'énumération en décrit cinq)*
 >   produce **byte-identical growth logs across all 118 generations**, all ending at
 >   1985.73 mm². The **saved** surfaces then span 19.8219–19.8387 cm² (and 20.7471 with the
 >   field). So what varies is a post-growth optimisation, not the path taken. ⚠ We first
@@ -260,6 +268,14 @@ encore.
 >   stops it. Pushed to 600 generations the same seed reaches 127.9 cm² (and 174
 >   self-intersections, at a rate 21× lower per pair tested than the bad seed). Area is a
 >   proxy for *how far it got*, never a quality score.
+
+⚠⚠ **Et cette affirmation a une PORTÉE, mesurée depuis** :
+[`30`](30_le_traceur_est_un_tirage.md) a rejoué **une autre graine** quatorze fois, et là
+**la croissance elle-même varie** — 64, 78, 79, 80, 81, 84, 86 générations, pour des aires
+de 5,69 à 10,34 cm². *« La croissance est déterministe »* est donc vrai **de cette
+graine-là**, pas du traceur. **À réécrire avant tout envoi** : une soumission qui
+généralise une observation d'une seule graine est exactement ce que ce document reproche
+ailleurs aux autres.
 
 ---
 

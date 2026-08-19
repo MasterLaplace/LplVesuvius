@@ -811,7 +811,21 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     `ALL PASS (1 failures, …)` dans son bloc d'échec, l'autre recopiait la ligne de
     référence d'une **autre** suite. Fermé structurellement : `run()` exige désormais
     **code de sortie 0 ET** `ALL PASS`, et lit le **dernier** match, pas le premier.
-39. ⚠ **Les backticks d'un message de commit sont exécutés par le shell.** Un
+39. ⚠⚠ **Un artefact de mesure doit porter CE SUR QUOI il a été pris.** Payé **trois
+    fois** le même jour : `docs/sweep_PHerc1667.jsonl` n'enregistre ni le zarr ni la taille
+    de voxel, donc `07` §11 attribue à PHerc1667 une résolution de **7,91 µm** que le
+    bucket ne publie pas ; `docs/carte_difficulte/*.json` n'enregistre pas le nombre de
+    chunks, donc `16` cite le nombre **nominal** du script ; et l'artefact des fibres
+    n'enregistre pas la liste des segments, donc `14` annonce **12** au-dessus d'un tableau
+    de **11**. Remède : la provenance (résolution, liste, comptes) va dans l'artefact, pas
+    dans la phrase qui le cite.
+40. ⚠⚠ **Un artefact versionné sans producteur dans l'arbre est une anecdote.** Six
+    fichiers de mesure l'étaient — `analysis/src/artefacts_orphelins.py` les a trouvés et
+    est désormais une batterie de `temoins.sh`. ⚠ Sa première version signalait **389
+    orphelins sur 568** parce qu'elle cherchait le nom de fichier seul, alors qu'un
+    artefact par segment est nommé d'après le segment : *une alerte qui désigne les deux
+    tiers du corpus ne désigne rien.*
+41. ⚠ **Les backticks d'un message de commit sont exécutés par le shell.** Un
     `git commit -m "… \`timeout 3600\` …"` a lancé `timeout` et laissé des trous dans le
     message. Passer par `git commit -F fichier`.
 
