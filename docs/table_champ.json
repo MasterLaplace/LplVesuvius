@@ -1,14 +1,11 @@
 {
   "segments": 80,
   "part_rigide_mediane": 0.2174242424242424,
-  "pas_inter_feuilles_um": 142.8,
-  "residuel_en_ecarts_inter_feuilles": 0.3949579831932773,
-  "segments_residuel_p90_sup_un_ecart": 4,
+  "pas_inter_feuilles_um": 172.8,
+  "residuel_en_ecarts_inter_feuilles": 0.32638888888888884,
+  "segments_residuel_p90_sup_un_ecart": 1,
   "signales": [
-    "20260623171929-w128-129",
-    "20260701183142-w107-109",
-    "20260701183146-w118-119",
-    "20260701183150-w126-127"
+    "20260701183146-w118-119"
   ],
   "coherence_mediane": 0.3252898154475079,
   "temoin_median": -0.008468650920085344,

@@ -54,11 +54,14 @@ def main() -> int:
     parser.add_argument("--index", type=Path, default=None,
                         help="results/index.json de windcheck, pour les croisements")
     parser.add_argument("--cible", default="encre_contraste_p90_p50")
-    parser.add_argument("--pas-um", type=float, default=142.8,
-                        help="pas inter-feuilles, MESURE ailleurs et avant (11 §3, "
-                             "cv 1,8 %%). ⚠ Il sert de seuil entre « la trace ondule "
-                             "dans sa feuille » et « elle a change de feuille » : un "
-                             "seuil qui viendrait de cette mesure-ci serait circulaire")
+    parser.add_argument("--pas-um", type=float, default=None,
+                        help="pas inter-feuilles DE CE ROULEAU, mesure ailleurs et "
+                             "avant. ⚠⚠ SANS DEFAUT, et c'est deliberé : le pas de "
+                             "PHerc0172 (142,8 um) n'est PAS celui de PHercParis4 "
+                             "(172,8 um mesure). Emprunter le chiffre d'un rouleau pour "
+                             "juger un autre est le piege nº 6 du depot, et il a ete "
+                             "commis ici le 2026-08-19 avant d'etre attrape. Sans ce "
+                             "parametre, le compte de sauts de feuille n'est pas rendu")
     parser.add_argument("--out", type=Path, default=None)
     args = parser.parse_args()
 
@@ -102,30 +105,38 @@ def main() -> int:
     print(f"\npart de l'erreur qu'une TRANSLATION enleverait : "
           f"mediane {float(np.median(part_rigide)) * 100:.1f} %  "
           f"(p90 {float(np.percentile(part_rigide, 90)) * 100:.1f} %)")
-    print(f"⚠ le pas inter-feuilles vaut ~{pas:.1f} um ; le residuel median vaut "
-          f"{float(np.median(res)) / pas:.2f} ecart(s) inter-feuilles")
 
     # ⚠⚠ LE LIEN AVEC LE MODE D'ECHEC DOMINANT. Un residuel sous un ecart inter-feuilles
     # veut dire que la trace ondule DANS sa feuille -- genant, pas fatal. Un residuel
     # au-dessus veut dire qu'elle a change de feuille en route, ce qui est le saut de
-    # spire, la panne que tout ce depot cherche. Le seuil n'est pas choisi : c'est le
-    # pas mesure independamment (11 §3, cv 1,8 %).
+    # spire, la panne que tout ce depot cherche.
+    #
+    # ⚠⚠ Le seuil doit venir du pas DE CE ROULEAU. Sans lui, on ne rend rien : refuser
+    # une reponse vaut mieux qu'en rendre une fausse (regle nº 9 du depot).
     p90 = np.array([r["residuel_p90_um"] for r in lignes], dtype=float)
-    saut = p90 > pas
-    print(f"segments dont le residuel p90 depasse UN ecart inter-feuilles : "
-          f"{int(saut.sum())} / {len(lignes)} ({100 * saut.mean():.0f} %)")
-    # ⚠ Un detecteur qui ne NOMME pas ce qu'il signale n'est pas exploitable : la sortie
-    # utile n'est pas un taux, c'est une liste de segments a rouvrir.
-    for i in np.flatnonzero(saut):
-        print(f"    ⚑ {lignes[i]['segment'][:44]:44} p90 {p90[i]:6.1f} um "
-              f"({p90[i] / pas:.2f} ecarts)  coherence {coh[i]:+.3f}")
+    saut = np.zeros(len(lignes), dtype=bool)
+    if pas is None:
+        print("\n⚠ pas inter-feuilles non fourni : le compte de sauts de feuille n'est "
+              "PAS rendu.\n  Emprunter celui d'un autre rouleau serait le piege nº 6.")
+    else:
+        print(f"⚠ pas inter-feuilles de CE rouleau : {pas:.1f} um ; residuel median "
+              f"{float(np.median(res)) / pas:.2f} ecart(s)")
+        saut = p90 > pas
+        print(f"segments dont le residuel p90 depasse UN ecart inter-feuilles : "
+              f"{int(saut.sum())} / {len(lignes)} ({100 * saut.mean():.0f} %)")
+        # ⚠ Un detecteur qui ne NOMME pas ce qu'il signale n'est pas exploitable : la
+        # sortie utile n'est pas un taux, c'est une liste de segments a rouvrir.
+        for i in np.flatnonzero(saut):
+            print(f"    ⚑ {lignes[i]['segment'][:44]:44} p90 {p90[i]:6.1f} um "
+                  f"({p90[i] / pas:.2f} ecarts)  coherence {coh[i]:+.3f}")
 
     rapport = {
         "segments": len(lignes),
         "part_rigide_mediane": float(np.median(part_rigide)),
         "pas_inter_feuilles_um": pas,
-        "residuel_en_ecarts_inter_feuilles": float(np.median(res)) / pas,
-        "segments_residuel_p90_sup_un_ecart": int(saut.sum()),
+        "residuel_en_ecarts_inter_feuilles": (float(np.median(res)) / pas
+                                              if pas else None),
+        "segments_residuel_p90_sup_un_ecart": int(saut.sum()) if pas else None,
         "signales": [lignes[int(i)]["segment"] for i in np.flatnonzero(saut)],
         "coherence_mediane": float(np.median(coh[bon])),
         "temoin_median": float(np.median(tem[bon])),

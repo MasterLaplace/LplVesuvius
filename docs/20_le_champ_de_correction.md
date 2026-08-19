@@ -1,0 +1,148 @@
+# Le champ de correction — l'erreur d'une trace est structurée, et translater ne la répare pas
+
+2026-08-19. Voie J du batch `18`. `12` sait dire qu'une trace est décalée de 63 µm ; ça
+condamne un segment sans dire quoi en faire. Ce document mesure la seule chose qui décide
+entre **réparer** et **reprendre**.
+
+---
+
+## 1. La distinction qu'une médiane ne peut pas faire
+
+Deux segments rendent le **même** écart médian de 63 µm :
+
+| | écart par fenêtre | ce que c'est | remède |
+|---|---|---|---|
+| A | uniformément +63 µm | une **pose ratée** — la trace suit la bonne feuille, à côté | une translation du maillage |
+| B | ±60 µm autour de 63 | un **saut de feuille** — elle change de spire en route | rien de rigide ; il faut retracer |
+
+`12` les confond parce qu'une médiane ne voit pas la dispersion. `champ_correction.py`
+les sépare en mesurant l'écart **fenêtre par fenêtre**, sur des blocs contigus, et en
+rendant trois grandeurs :
+
+- `decalage_median` — la translation qui minimise l'écart ;
+- `residuel` — ce qui **reste après** cette translation, donc le vrai coût ;
+- `coherence_voisins` — l'écart d'une fenêtre prédit-il celui de sa voisine.
+
+⚠ Voisin *de grille* = voisin *sur la feuille* : un volume de surface est déjà paramétré,
+et c'est ce qui rend la mesure licite. ⚠ Le témoin est un **mélange** des mêmes écarts :
+si la cohérence y survivait, elle viendrait de la façon de compter et non de la géométrie.
+
+## 2. ⚠⚠ Deux détails d'échantillonnage qui ont chacun tué une première version
+
+1. **La grille entière est hors de portée** : 167 × 905 chunks, soit **4228 requêtes** par
+   segment. Des blocs suffisent, et ils sont *meilleurs* — une cohérence entre fenêtres
+   distantes de 768 voxels ne mesure pas des voisins.
+2. **Des blocs posés régulièrement tombent dans le vide** : un volume de surface est
+   majoritairement du remplissage (la bande est tordue dans un canevas rectangulaire).
+   Mesuré : **6 fenêtres utiles sur 96**. Une passe de repérage trouve la matière **avant**
+   de la sonder — sans elle, la campagne rapporte « pas assez de matière » sur des segments
+   qui en sont pleins.
+
+## 3. ⭐ Le champ est réel — sur deux rouleaux, 99 segments, sans exception
+
+| corpus | segments | cohérence médiane | témoin mélange | segments battant leur témoin |
+|---|---:|---:|---:|---|
+| Scroll 1 (PHercParis4, 2,4 µm) | 80 | **+0,325** | −0,008 | **80 / 80** (p = 1,3e-25) |
+| Scroll 4 (PHerc1667, 2,399 µm) | 19 | **+0,481** | −0,035 | **19 / 19** (p = 7,4e-08) |
+
+> **L'erreur d'une trace n'est pas du bruit.** Elle est spatialement structurée partout,
+> et le mélange des mêmes valeurs l'efface à chaque fois. C'est le contrôle qui rend la
+> suite lisible : une cohérence qui survivrait au mélange ne mesurerait que l'arithmétique.
+
+## 4. ⭐⭐ Et le chiffre qui décide de la production
+
+| corpus | part de l'erreur qu'une **translation** enlèverait |
+|---|---:|
+| Scroll 1 | **21,7 %** (p90 47,3 %) |
+| Scroll 4 | **35,3 %** (p90 62,8 %) |
+
+> **Translater le maillage est le mauvais remède.** Sur les deux rouleaux, la majorité de
+> l'erreur reste après le meilleur déplacement rigide. Ce n'est pas une pose ratée : c'est
+> une **déformation locale**, lisse — cohérente entre voisins, mais pas constante.
+
+⚠ Ce que ça dit de la suite : la réparation utile n'est pas une translation mais un
+**gauchissement** guidé par le champ. Ce document ne l'implémente pas ; il établit
+laquelle des deux valait la peine d'être écrite, ce qui était toute la question.
+
+## 5. Le résiduel reste SOUS une épaisseur de feuille — et j'ai d'abord dit le contraire
+
+Le seuil qui sépare « la trace ondule dans sa feuille » de « elle a changé de feuille »
+est le **pas inter-feuilles**. Sur Scroll 1 il vaut **172,8 µm**
+(`docs/espacement_PHercParis4_L1.json`).
+
+| | résiduel médian | en écarts inter-feuilles | segments au-dessus d'un écart |
+|---|---:|---:|---:|
+| Scroll 1 | 56,4 µm | **0,33** | **1 / 80 (1 %)** — `20260701183146-w118-119`, à 1,02 écart |
+
+⚠⚠ **Correction d'une mesure faite deux heures plus tôt dans cette même session.** J'avais
+appliqué **142,8 µm** — l'invariant de `11` §3, mesuré sur **PHerc0172** — à des segments
+de **PHercParis4**. C'est le piège nº 6 du dépôt, *un chiffre emprunté n'est pas une
+mesure*, et il gonflait le compte d'un facteur **4** (4 segments signalés au lieu de 1).
+
+Le remède est dans l'outil, pas dans une note : `--pas-um` **n'a plus de défaut**, et sans
+lui le compte de sauts de feuille **n'est pas rendu du tout**. ⚠ C'est aussi pourquoi la
+ligne PHerc1667 est absente du tableau : aucune prédiction de surface n'est publiée pour ce
+rouleau, donc son pas n'est pas mesurable ici, donc on ne le juge pas.
+
+> **Sur les segments publiés de Scroll 1, le saut de feuille est essentiellement absent.**
+> Les traces sont sur la bonne feuille ; elles y ondulent d'un tiers d'épaisseur.
+
+## 6. ❌ Mais le champ ne prédit PAS le résultat
+
+Contre les 80 cartes d'encre publiées, à n = 80 où **rho 0,31 est détectable** :
+
+| grandeur du champ | rho ~ contraste d'encre | p |
+|---|---:|---:|
+| `coherence_voisins` | −0,023 | 0,84 |
+| `residuel_median_um` | −0,028 | 0,80 |
+| `\|decalage_median_um\|` | −0,084 | 0,46 |
+| **`part_au_bord`** | **−0,275** | **0,014** * |
+
+Et le test apparié — *à décalage comparable, un décalage cohérent rend-il une meilleure
+carte ?* — donne **4,882 contre 4,758, p = 0,12** sur les 38 segments les plus décalés.
+Non significatif.
+
+⚠ **La seule grandeur qui prédit est celle qui demande s'il y a de la matière**, pas où
+elle est : `part_au_bord` ici, `avec_matiere` dans `19` (+0,539). Ce qui compte pour le
+résultat n'est pas que la trace soit à 50 µm près, c'est qu'elle soit **sur du papyrus**.
+
+> C'est la même forme que la métrique de proximité (`07` §16) : **un défaut de la TRACE,
+> pas du RÉSULTAT.** Et c'est cohérent avec le §5 — sur ce corpus presque rien n'a sauté de
+> feuille, donc la distinction réparable / irréparable n'a presque rien à discriminer. Le
+> corpus où elle compterait est un corpus de traces ratées, et les traces publiées ne le
+> sont pas.
+
+## 7. ⚠ Un motif qui n'est PAS établi, et pourquoi je le dis quand même
+
+La qualité de trace dépend-elle de la position dans le rouleau ? Les segments portent leur
+indice de fenêtre dans leur nom.
+
+| corpus | grandeur | rho ~ indice | p |
+|---|---|---:|---:|
+| Scroll 1 (n = 57) | `residuel_p90_um` | +0,283 | 0,033 |
+| Scroll 1 | `residuel_median_um` | +0,214 | 0,110 |
+| Scroll 4 (n = 19) | `residuel_median_um` | +0,487 | 0,035 |
+| Scroll 4 | `residuel_p90_um` | +0,127 | 0,61 |
+
+> ⚠⚠ **Les deux corpus rendent significative une grandeur DIFFÉRENTE, et chacun rend l'autre
+> nulle.** Aucune ne survivrait à la correction de multiplicité. À n = 57 la mesure détecte
+> 0,36 ; à n = 19, 0,60.
+
+C'est exactement la configuration des fibres à n = 12 (+0,330, puis **−0,192** à n = 54) et
+du détecteur de phase à n = 8 (+0,52, puis **+0,15** à n = 38). **Ce n'est pas un résultat,
+c'est une invitation à mesurer.** Les quatre signes sont positifs, ce qui vaut la peine
+d'être noté et rien de plus.
+
+## 8. Reproduire
+
+```bash
+./tools/campagne_champ.sh PHercParis4 2.4um  2.4   docs/champ_PHercParis4
+./tools/campagne_champ.sh PHerc1667   2.399um 2.399 docs/champ_PHerc1667
+
+cd inference_xpu
+uv run python ../analysis/src/table_champ.py ../docs/champ_PHercParis4 \
+    --pas-um 172.8 --encre ../docs/croisement_encre.json --out ../docs/table_champ.json
+```
+
+⚠ `--pas-um` prend le pas **de ce rouleau-là**. Sans lui, le compte de sauts de feuille
+n'est pas rendu — refuser une réponse vaut mieux qu'en rendre une fausse.

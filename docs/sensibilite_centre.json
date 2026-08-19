@@ -1,0 +1,63 @@
+{
+  "centre": "PHerc0172",
+  "niveau": "2",
+  "voxel_um": 31.64,
+  "tranches": [
+    335,
+    897,
+    1460,
+    2022,
+    2585,
+    3148
+  ],
+  "mesures": [
+    {
+      "decalage_vx": 0.0,
+      "decalage_um": 0.0,
+      "feuilles_medianes": 42.5,
+      "rayon_mm": 5.8039625,
+      "invariant_um": 136.56382352941176,
+      "ecart_pct": 0.0
+    },
+    {
+      "decalage_vx": 10.0,
+      "decalage_um": 316.4,
+      "feuilles_medianes": 42.5,
+      "rayon_mm": 5.8118725,
+      "invariant_um": 136.74994117647057,
+      "ecart_pct": 0.13628620102213493
+    },
+    {
+      "decalage_vx": 25.0,
+      "decalage_um": 791.0,
+      "feuilles_medianes": 42.0,
+      "rayon_mm": 5.841535,
+      "invariant_um": 139.08416666666668,
+      "ecart_pct": 1.8455423055082412
+    },
+    {
+      "decalage_vx": 50.0,
+      "decalage_um": 1582.0,
+      "feuilles_medianes": 42.0,
+      "rayon_mm": 5.825715000000001,
+      "invariant_um": 138.70750000000004,
+      "ecart_pct": 1.5697249939158238
+    },
+    {
+      "decalage_vx": 100.0,
+      "decalage_um": 3164.0,
+      "feuilles_medianes": 41.5,
+      "rayon_mm": 5.683335,
+      "invariant_um": 136.9478313253012,
+      "ecart_pct": 0.2811929147595428
+    },
+    {
+      "decalage_vx": 200.0,
+      "decalage_um": 6328.0,
+      "feuilles_medianes": 39.0,
+      "rayon_mm": 5.30761,
+      "invariant_um": 136.09256410256413,
+      "ecart_pct": -0.34508365002400715
+    }
+  ]
+}

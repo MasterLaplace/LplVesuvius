@@ -1,0 +1,30 @@
+{
+  "segments": 19,
+  "part_rigide_mediane": 0.3529411764705882,
+  "pas_inter_feuilles_um": null,
+  "residuel_en_ecarts_inter_feuilles": null,
+  "segments_residuel_p90_sup_un_ecart": null,
+  "signales": [],
+  "coherence_mediane": 0.4807387672645758,
+  "temoin_median": -0.034536422100067535,
+  "coherence_bat_temoin": 19,
+  "p_mann_whitney": 7.399032566516033e-08,
+  "rho_detectable": 0.6046192670424827,
+  "par_fenetre": {
+    "residuel_median_um": {
+      "rho": 0.48660560459884605,
+      "p": 0.03462380739958555,
+      "n": 19
+    },
+    "residuel_p90_um": {
+      "rho": 0.12653798100771668,
+      "p": 0.6057119455807013,
+      "n": 19
+    },
+    "coherence_voisins": {
+      "rho": 0.3333333333333333,
+      "p": 0.1631388528440474,
+      "n": 19
+    }
+  }
+}
