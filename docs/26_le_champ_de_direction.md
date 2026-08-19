@@ -140,7 +140,82 @@ faux en s'en éloignant.
 `25` reprenait ce diagnostic. **Il est faux, ou du moins hors de portée** : donner le champ
 ne change pas la croissance, donc l'absence du champ ne peut pas expliquer la trajectoire.
 
-## 4. Reproduire
+## 4. ⭐⭐ Les dix poids de perte sont réglables — et personne ne le documente
+
+`vc_grow_seg_from_seed` imprime au démarrage la ligne qui décide de tout :
+
+```
+GrowPatch loss weights:
+  DIST: 1 STRAIGHT: 0.2 DIRECTION: 1 SNAP: 0.1 NORMAL: 10
+  NORMAL3DLINE: 0 REFERENCE_RAY: 0 SURFACE_SDT: 0 SPACELINE: 0 SDIR: 1
+```
+
+Les dix noms se lisent dans `libvc_tracer.so`, et **les dix se règlent depuis le
+`seed.json`** — vérifié en leur donnant des valeurs distinctes et en relisant la ligne :
+
+| terme imprimé | clé du `seed.json` | défaut |
+|---|---|---:|
+| `DIST` | `dist_weight` | 1 |
+| `STRAIGHT` | `straight_weight` | 0,2 |
+| **`DIRECTION`** | **`direction_weight`** | **1** |
+| `SNAP` | `snap_weight` | 0,1 |
+| **`NORMAL`** | **`normal_weight`** | **10** |
+| `NORMAL3DLINE` | `normal3dline_weight` | 0 |
+| `REFERENCE_RAY` | `reference_ray_weight` | 0 |
+| `SURFACE_SDT` | `surface_sdt_weight` | 0 |
+| `SPACELINE` | `spaceline_weight` | 0 |
+| `SDIR` | `sdir_weight` | 1 |
+
+⚠ **`SDIR` n'est pas « surface direction »** : la bibliothèque le nomme
+`conditional_sdirichlet_loss` — c'est un terme de **Dirichlet**, une régularité de
+paramétrisation, sans rapport avec les champs de direction. Le terme que `direction_fields`
+alimente est `DIRECTION`, à **1** contre un `NORMAL` à **10**.
+
+⭐ **C'est probablement pourquoi le champ ne déplace pas la croissance** : son terme pèse
+un dixième de celui qui domine. Le tester est immédiat une fois le nom connu, et c'est
+exactement ce qu'aucune documentation ne donne.
+
+## 5. ⚠ `scale` n'est pas seulement un nom de dossier
+
+Trois exécutions sur des données **strictement identiques** — le même niveau 2, exposé par
+liens symboliques sous les noms `1`, `3` et `4` :
+
+| `scale` | aire sauvée | auto-intersections |
+|---:|---:|---:|
+| 1,0 | 19,782036 | **0** |
+| **2,0** | 20,747079 | **1 176** |
+| 3,0 | 19,773946 | **0** |
+| 4,0 | 19,773791 | **0** |
+
+⭐ Même contenu, quatre résultats. Donc `scale` sert **aussi** de facteur de conversion de
+coordonnées : à 1, 3 et 4 les lectures tombent hors du champ et la contrainte est inerte ;
+à **2** elles tombent dedans. **2,0 est donc la bonne registration** — et c'est bien là que
+le champ nuit.
+
+## 6. ⏳ La piste qui reste, et elle est nommée
+
+`libvc_core.so` contient un **second mécanisme**, distinct de `direction_fields`, dont les
+messages décrivent exactement le format que le concours publie :
+
+```
+Not a normal-grid directory (expected xy/, xz/, yz/ subdirs and metadata.json).
+Skipping normal_grid '{}': path does not exist
+Remote normal_grid entry '{}' not yet supported.
+```
+
+C'est `NormalGridVolume(path, level)`, consommé par `NormalConstraintPlane::
+calculate_normal_snapping_loss` — donc le terme **`NORMAL`, celui qui pèse 10**. Et les
+`.normal-grids` publiées à côté de chaque prédiction (182 Mo, `xy/ xz/ yz/`) sont
+**déjà dans ce format**, sans conversion : ce sont les sorties de `vc_gen_normalgrids`.
+
+⚠ La clé `normal_grids` **n'est pas lue** par le `seed.json` de ce binaire (un tableau
+d'objets passe sans un mot, quelle que soit la forme essayée). Elle vient donc d'ailleurs —
+le paquet de volume, un manifeste `normal-grids-remote.json`, ou une découverte à côté du
+volume, ce qu'une URL `https://` empêche. **C'est la prochaine chose à trouver**, et c'est
+un meilleur candidat que `direction_fields` : c'est le terme dominant, et son format est
+déjà publié.
+
+## 7. Reproduire
 
 ```bash
 # le champ, seulement autour de la trace (626 Mo au lieu de plusieurs Go)
