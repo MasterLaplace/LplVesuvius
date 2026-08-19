@@ -632,3 +632,45 @@ uv run python -u src/excision/sensibilite_centre.py PHerc0172 "$VOL" \
 ⚠ `python -u` : sans lui le log reste vide pendant une heure et ressemble à un job mort.
 ⚠ Le plan est lu **une fois par tranche**, pas une fois par décalage — la première version
 relisait le même plan à chaque centre et restait bloquée à 0 % de CPU pendant onze minutes.
+
+
+---
+
+## 13. La migration est l'exception — 6 bandes au niveau 0, avec un témoin positif
+
+*(2026-08-19)* Le §8 disait, sur **deux** bandes, que la migration n'est pas la règle. Six
+bandes réparties sur la hauteur du rouleau, dont **une choisie pour encadrer le site
+migrant du §11**, le confirment — et cette fois la conclusion est contrôlée.
+
+| bande | z | étendue prédictive | dérive | p |
+|---|---|---:|---:|---:|
+| C | 1400–2200 | 0,47 mm | 0,30 | 0,79 |
+| A | 3188–3988 | 0,47 mm | 0,30 | 0,75 |
+| D | 5000–5800 | 1,42 mm | 0,45 | 0,084 |
+| **E** ⭐ *témoin positif* | 6600–7400 | **1,90 mm** | **1,20 mm/mm** | **0,0285** |
+| B | 8892–9692 | 0,00 mm | — | 1,00 |
+| **F** | 10500–11300 | — | **0,90 mm/mm** | **< 0,05** |
+
+**Fisher sur les 6 : khi² = 19,4, p = 0,079.** Deux bandes sur six passent, contre 0,3
+attendue au hasard.
+
+### ⭐ Ce que le témoin positif apporte, et pourquoi il fallait le poser
+
+La bande E encadre **exprès** le site du §11. Elle ressort, avec une dérive de
+**1,20 mm/mm** cohérente avec les 1,50 mesurées là-bas sur une fenêtre un peu différente.
+
+> **La méthode retrouve la migration là où elle existe.** Les quatre bandes muettes sont
+> donc de vrais négatifs, pas des échecs de mesure — et sans ce contrôle, une campagne à
+> 4 sur 6 muets n'aurait pu conclure que dans un sens.
+
+### Ce qu'on retient, et ce qu'on ne retient pas
+
+| ✅ | ⚠ |
+|---|---|
+| la migration existe et se mesure — 2 bandes sur 6 | Fisher à **p = 0,079** : le motif d'ensemble n'atteint pas 0,05 |
+| l'enrichissement est de **6,7×** sur l'attendu | 2 sites sur 6 bandes reste un petit effectif |
+| elle **n'est pas la règle** : quatre bandes sur six ne montrent rien | ⚠ et le §7 avait tiré sa lecture d'**un** site |
+
+> ⚠⚠ La lecture « le défaut d'un millimètre » du §7 tient donc **sur la majorité du
+> rouleau**, et échoue là où un site migre. Les deux affirmations coexistent, et c'est le
+> balayage qui le dit — pas l'un des deux sites pris isolément.

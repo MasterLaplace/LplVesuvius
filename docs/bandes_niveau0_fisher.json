@@ -1,0 +1,334 @@
+[
+  {
+    "scan": "bande_niveau0_A.json",
+    "slices": 9,
+    "cells": 41,
+    "predictive": {
+      "tracks": 29,
+      "longest": 4,
+      "span_mm": 0.47460000000000235,
+      "at_least_3": 3,
+      "at_least_4": 1,
+      "at_least_5": 0,
+      "straightness_mean": 0.7777777777777782,
+      "drift_mm_per_mm": 0.2999999999999992
+    },
+    "fixed": {
+      "tracks": 29,
+      "longest": 5,
+      "span_mm": 1.8984000000000023,
+      "at_least_3": 2,
+      "at_least_4": 1,
+      "at_least_5": 1,
+      "straightness_mean": 0.8333333333333337,
+      "drift_mm_per_mm": 0.44999999999999996
+    },
+    "null": {
+      "longest": {
+        "mean": 3.523,
+        "p95": 5.0,
+        "p": 0.4332833583208396
+      },
+      "span_mm": {
+        "mean": 1.0177797000000008,
+        "p95": 2.373000000000001,
+        "p": 0.7456271864067966
+      },
+      "at_least_3": {
+        "mean": 2.502,
+        "p95": 4.0,
+        "p": 0.47976011994003
+      },
+      "at_least_4": {
+        "mean": 0.486,
+        "p95": 1.0499999999999545,
+        "p": 0.4332833583208396
+      },
+      "straightness_mean": {
+        "mean": 0.866126870108399,
+        "p95": 1.0,
+        "p": 0.7297435897435898
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "la prediction n'apporte rien -- lecture \u00ab defaut d'un millimetre \u00bb tenue"
+  },
+  {
+    "scan": "bande_niveau0_B.json",
+    "slices": 9,
+    "cells": 21,
+    "predictive": {
+      "tracks": 20,
+      "longest": 2,
+      "span_mm": 0.0,
+      "at_least_3": 0,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": NaN,
+      "drift_mm_per_mm": NaN
+    },
+    "fixed": {
+      "tracks": 20,
+      "longest": 2,
+      "span_mm": 0.0,
+      "at_least_3": 0,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": NaN,
+      "drift_mm_per_mm": NaN
+    },
+    "null": {
+      "longest": {
+        "mean": 1.838,
+        "p95": 3.0,
+        "p": 0.7711144427786107
+      },
+      "span_mm": {
+        "mean": 0.3267620999999992,
+        "p95": 0.9491999999999994,
+        "p": 1.0
+      },
+      "at_least_3": {
+        "mean": 0.067,
+        "p95": 1.0,
+        "p": 1.0
+      },
+      "at_least_4": {
+        "mean": 0.0,
+        "p95": 0.0,
+        "p": 1.0
+      },
+      "straightness_mean": {
+        "mean": 1.0,
+        "p95": 1.0,
+        "p": 0.0625
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "la prediction n'apporte rien -- lecture \u00ab defaut d'un millimetre \u00bb tenue"
+  },
+  {
+    "scan": "bande_niveau0_C.json",
+    "slices": 9,
+    "cells": 50,
+    "predictive": {
+      "tracks": 45,
+      "longest": 3,
+      "span_mm": 0.474599999999997,
+      "at_least_3": 1,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": 0.2999999999999981
+    },
+    "fixed": {
+      "tracks": 45,
+      "longest": 3,
+      "span_mm": 0.474599999999997,
+      "at_least_3": 1,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": 0.2999999999999981
+    },
+    "null": {
+      "longest": {
+        "mean": 2.837,
+        "p95": 4.0,
+        "p": 0.6931534232883558
+      },
+      "span_mm": {
+        "mean": 0.8369571000000008,
+        "p95": 2.373000000000001,
+        "p": 0.7916041979010495
+      },
+      "at_least_3": {
+        "mean": 1.0405,
+        "p95": 3.0,
+        "p": 0.6931534232883558
+      },
+      "at_least_4": {
+        "mean": 0.1365,
+        "p95": 1.0,
+        "p": 1.0
+      },
+      "straightness_mean": {
+        "mean": 0.8433559407184124,
+        "p95": 1.0,
+        "p": 0.7718373493975904
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "la prediction n'apporte rien -- lecture \u00ab defaut d'un millimetre \u00bb tenue"
+  },
+  {
+    "scan": "bande_niveau0_D.json",
+    "slices": 9,
+    "cells": 19,
+    "predictive": {
+      "tracks": 13,
+      "longest": 5,
+      "span_mm": 1.4238,
+      "at_least_3": 1,
+      "at_least_4": 1,
+      "at_least_5": 1,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": 0.44999999999999996
+    },
+    "fixed": {
+      "tracks": 13,
+      "longest": 5,
+      "span_mm": 1.4238,
+      "at_least_3": 1,
+      "at_least_4": 1,
+      "at_least_5": 1,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": 0.44999999999999996
+    },
+    "null": {
+      "longest": {
+        "mean": 2.7045,
+        "p95": 4.0,
+        "p": 0.01199400299850075
+      },
+      "span_mm": {
+        "mean": 0.5989451999999997,
+        "p95": 1.4238,
+        "p": 0.08395802098950525
+      },
+      "at_least_3": {
+        "mean": 0.7205,
+        "p95": 2.0,
+        "p": 0.5942028985507246
+      },
+      "at_least_4": {
+        "mean": 0.101,
+        "p95": 1.0,
+        "p": 0.10094952523738131
+      },
+      "straightness_mean": {
+        "mean": 0.9485033259423503,
+        "p95": 1.0,
+        "p": 0.9357696566998892
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "la prediction n'apporte rien -- lecture \u00ab defaut d'un millimetre \u00bb tenue"
+  },
+  {
+    "scan": "bande_niveau0_E.json",
+    "slices": 9,
+    "cells": 29,
+    "predictive": {
+      "tracks": 23,
+      "longest": 3,
+      "span_mm": 1.8984000000000023,
+      "at_least_3": 1,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": 1.2000000000000015
+    },
+    "fixed": {
+      "tracks": 24,
+      "longest": 2,
+      "span_mm": 0.0,
+      "at_least_3": 0,
+      "at_least_4": 0,
+      "at_least_5": 0,
+      "straightness_mean": NaN,
+      "drift_mm_per_mm": NaN
+    },
+    "null": {
+      "longest": {
+        "mean": 2.6295,
+        "p95": 4.0,
+        "p": 0.5482258870564718
+      },
+      "span_mm": {
+        "mean": 0.6364386,
+        "p95": 1.8984000000000005,
+        "p": 0.02848575712143928
+      },
+      "at_least_3": {
+        "mean": 0.6855,
+        "p95": 2.0,
+        "p": 0.5482258870564718
+      },
+      "at_least_4": {
+        "mean": 0.0775,
+        "p95": 1.0,
+        "p": 1.0
+      },
+      "straightness_mean": {
+        "mean": 0.8107242254641098,
+        "p95": 1.0,
+        "p": 0.7516843118383061
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "plus longue que le hasard et que la fenetre fixe, mais pas plus droite"
+  },
+  {
+    "scan": "bande_niveau0_F.json",
+    "slices": 9,
+    "cells": 43,
+    "predictive": {
+      "tracks": 35,
+      "longest": 5,
+      "span_mm": 2.8476000000000035,
+      "at_least_3": 1,
+      "at_least_4": 1,
+      "at_least_5": 1,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": 0.900000000000001
+    },
+    "fixed": {
+      "tracks": 35,
+      "longest": 4,
+      "span_mm": 1.4237999999999982,
+      "at_least_3": 1,
+      "at_least_4": 1,
+      "at_least_5": 0,
+      "straightness_mean": 1.0,
+      "drift_mm_per_mm": 0.5999999999999992
+    },
+    "null": {
+      "longest": {
+        "mean": 3.2635,
+        "p95": 5.0,
+        "p": 0.07196401799100449
+      },
+      "span_mm": {
+        "mean": 1.0415096999999998,
+        "p95": 2.8476,
+        "p": 0.043478260869565216
+      },
+      "at_least_3": {
+        "mean": 1.652,
+        "p95": 3.0,
+        "p": 0.8930534732633684
+      },
+      "at_least_4": {
+        "mean": 0.3085,
+        "p95": 1.0,
+        "p": 0.28535732133933034
+      },
+      "straightness_mean": {
+        "mean": 0.8490665047888843,
+        "p95": 1.0,
+        "p": 0.7208380520951302
+      }
+    },
+    "null_kind": "permutation",
+    "verdict": "plus longue que le hasard et que la fenetre fixe, mais pas plus droite"
+  },
+  {
+    "fisher": {
+      "bands": 6,
+      "chi2": 19.397013907776394,
+      "p": 0.07938723312744778,
+      "below_05": 2
+    }
+  }
+]
