@@ -251,11 +251,16 @@ transaction sur un nom inconnu.
    affaiblir un résultat juste. **La prudence n'est pas une méthode.**
 
 18. ⭐⭐ **Le champ de correction** (`20`) : l'erreur d'une trace est **structurée** —
-   **99 segments sur 99**, sur deux rouleaux, battent leur propre témoin de mélange
-   (Scroll 1 p = 1,3e-25, Scroll 4 p = 7,4e-08).
+   **150 segments sur 152**, sur **trois** rouleaux, battent leur propre témoin de mélange
+   (80/80, 19/19, 51/53).
    ⭐⭐ Et le chiffre qui décide de la production : une **translation** du maillage
-   n'enlèverait que **21,7 %** de l'erreur (35,3 % sur Scroll 4). Le bon remède est un
-   **gauchissement**, pas une translation.
+   n'enlèverait que **21,7 / 35,3 / 28,6 %** de l'erreur (Scroll 1 / 4 / 5). Le bon remède
+   est un **gauchissement**, pas une translation.
+   ⚠ Un **seul** segment de Scroll 5 rendait 0,67 et j'avais restreint la conclusion à
+   deux rouleaux ; les 53 rendent 28,6 %. **Une contre-indication vue sur un point a
+   fondu** — la règle « n = 1 n'est pas un résultat » vaut dans les deux sens.
+   ⚠ Saut de feuille : **1/80** sur Scroll 1 et **0/53** sur Scroll 5, chacun contre le pas
+   mesuré **sur ce rouleau-là**.
    ⚠ Le champ **ne prédit pas** l'encre (rho −0,023 à n = 80, où 0,31 est détectable)
    mais **prédit les croisements** (résiduel **+0,428**, p = 0,0012, n = 54) : un défaut
    de la **TRACE**, pas du **RÉSULTAT** — mesuré des deux côtés.

@@ -51,7 +51,7 @@ encore.
 > | `offset` | median distance from traced layer to material peak | rho +0.388 vs published self-crossings (n = 54, p = 0.004) |
 > | `residual` | what remains **after** the best rigid shift | **rho +0.428** vs the same crossings (p = 0.0012) |
 > | `rigid_share` | share of error a mesh translation would remove | **21.7 %** median over 80 segments |
-> | `coherence` | does a window's error predict its neighbour's | **99/99** segments over two scrolls beat their own shuffle control |
+> | `coherence` | does a window's error predict its neighbour's | **150/152** segments over three scrolls beat their own shuffle control (80/80, 19/19, 51/53) |
 >
 > #### 3. The failure case we detected on real scroll data
 >
@@ -109,20 +109,21 @@ encore.
 > #### 6. And what it says about repair
 >
 > Because the residual is measured *after* the best translation, it answers a question a
-> median cannot: **is this trace fixable by moving the mesh?** On both scrolls, no. The
-> plainest form of the number depends on no normalisation at all: on Scroll 1 the median
-> shift is **14.4 µm** and the median residual is **56.4 µm** — what a translation could
-> remove is **four times smaller** than what it would leave. (Expressed as a share:
-> 21.7 % on Scroll 1, 35.3 % on Scroll 4.) The
+> median cannot: **is this trace fixable by moving the mesh?** On all three scrolls
+> measured, no. The plainest form of the number depends on no normalisation at all: on
+> Scroll 1 the median shift is **14.4 µm** and the median residual is **56.4 µm** — what a
+> translation could remove is **four times smaller** than what it would leave. As a share:
+> **21.7 %** (Scroll 1, 80 segments), **35.3 %** (Scroll 4, 19), **28.6 %** (Scroll 5, 53).
+> The
 > error is a smooth local deformation inside the sheet, not a mispose. **On these two
 > scrolls the useful repair is a warp, not a shift** — worth knowing before anyone builds
 > the shift.
 >
-> ⚠ We say *on these two scrolls* deliberately. One Scroll 5 segment returns a rigid share
-> of **0.67** — there a translation would remove two thirds of the error. If that holds
-> across its 53 segments, then *which repair works* is a property of the scroll rather than
-> a constant of the problem. That measurement is running; until it lands, the claim is
-> scoped.
+> ⚠ We nearly scoped this claim to two scrolls: a single Scroll 5 segment returned a rigid
+> share of **0.67**, which would have made *which repair works* a property of the scroll
+> rather than a constant. Measuring all 53 put its median at **28.6 %** — that segment was
+> an outlier. We report the near-miss because one sample is not a result in either
+> direction.
 >
 > #### 7. Negative results we are also reporting
 >
