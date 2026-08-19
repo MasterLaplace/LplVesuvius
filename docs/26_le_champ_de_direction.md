@@ -130,18 +130,27 @@ largement les trois erreurs délibérées, pas assez pour faire mieux que rien.
 
 ### ⭐⭐ Et l'intensité se règle — ce qui ferme la question
 
-Une entrée de `direction_fields` accepte une clé **`weight`**. En la portant à 10 :
+Deux réglages agissent sur l'intensité : la clé **`weight`** *dans* l'entrée, et le poids
+global **`direction_weight`** (§4). Les deux ont été balayés :
 
-| poids de l'entrée | croissance (gen 114) | aire sauvée | auto-intersections |
-|---|---|---:|---:|
-| défaut | 1854,47 mm² | 20,75 cm² | 1 176 |
-| **`weight: 10`** | **1854,47 mm²** | **26,84 cm²** | **81 464** |
+| réglage | croissance, 118 générations | aire sauvée | auto-intersections | par cm² |
+|---|---|---:|---:|---:|
+| aucun champ | **identique** | 19,82 cm² | **0** | **0** |
+| défaut | **identique** | 20,75 | 1 176 | 57 |
+| entrée `weight: 10` | **identique** | 26,84 | **81 464** | 3 035 |
+| entrée `weight: 100` | **identique** | 26,71 | 69 580 | 2 605 |
+| `direction_weight: 10` | **identique** | 27,84 | 66 243 | 2 380 |
+| **`direction_weight: 100`** | **identique** | **137,98** | 34 340 | 249 |
 
-**Deux choses d'un coup, et elles ferment la question.** L'influence du champ est bien
-**proportionnelle à son poids** — donc il est réellement consommé, ce n'est pas un
-paramètre décoratif. Et la **croissance ne bouge toujours pas d'un centième**, même à dix
-fois l'intensité : ce que le poids amplifie, c'est uniquement l'étape finale, où l'aire
-gonfle de **35 %** et où la surface ajoutée est précisément celle qui se recoupe.
+⚠⚠ **Six exécutions, six intensités, et la croissance est identique au centième dans
+toutes** — les 118 générations finissent à **1985,73 mm²** partout, y compris pour le
+réglage qui multiplie l'aire **sauvée** par sept. C'est le fait qui ferme la question :
+ce que le paramètre amplifie est **uniquement l'étape finale**, qui à `direction_weight:
+100` fabrique **sept fois** la surface que la croissance avait produite.
+
+⭐ **Et il est bien consommé** : la densité d'auto-intersections chute d'un facteur **12**
+entre `weight: 10` et `direction_weight: 100` (3 035 → 249 par cm²). Le champ organise donc
+réellement quelque chose — simplement pas assez pour battre **zéro**.
 
 > ⭐ **`direction_fields` ne peut donc pas être le remède d'une trace posée en travers de
 > l'empilement** : la trajectoire est décidée pendant la croissance, et rien de ce
