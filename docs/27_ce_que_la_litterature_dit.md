@@ -1,10 +1,33 @@
-# Ce que la littérature primaire dit — et le seuil de 1 µm
+# Ce que la littérature primaire dit — trois papiers lus en entier
 
-2026-08-19. `06` §0 notait deux papiers « à lire », depuis le 17 août. Ils ne l'avaient
-jamais été. Les voici lus, et **l'un des deux change une décision**.
+2026-08-19. `06` §0 notait **deux** papiers « à lire », depuis le 17 août. Ils ne
+l'avaient jamais été. Les voici lus — et il y en avait **trois**.
 
-⚠ Les deux sont du **cœur de l'équipe** du concours — Paul Henderson écrit les deux, et
-W. Brent Seales cosigne le second. Ce ne sont pas des travaux périphériques.
+⚠ Le troisième, et le plus important, n'était nommé nulle part chez nous : *Complete
+virtual unwrapping and reading of a rolled Herculaneum papyrus* (arXiv 2606.29085,
+27 juin 2026). Il a été trouvé dans la section References de `/2026_open_problems`.
+C'est celui qui donne l'impression que le problème est résolu — et c'est aussi celui
+qui chiffre pourquoi il ne l'est pas.
+
+⚠⚠ **Première version de ce document : écrite depuis les RÉSUMÉS.** Elle contenait un
+chiffre faux (« cible de 4 µm », §1), une citation qui était une paraphrase entre
+guillemets, et elle reprenait à son compte une affirmation de `00` que le papier de
+Henderson **réfute avec un nombre** (§2). Les trois articles ont depuis été lus
+intégralement, corps, tableaux, annexes et données supplémentaires. Le contraste entre
+les deux versions est la leçon : **un résumé dit ce qu'un papier revendique, pas ce
+qu'il mesure.**
+
+⚠ Les trois sont du **cœur de l'équipe** du concours. Paul Henderson signe les trois,
+W. Brent Seales deux, et le troisième est cosigné par Nat Friedman et vingt-quatre
+autres. Ce ne sont pas des travaux périphériques.
+
+### Ce qu'ils établissent ensemble, en trois lignes
+
+| | ce qui est démontré | ce qui reste ouvert |
+|---|---|---|
+| **§3** déroulage complet | **un** rouleau scellé lu de bout en bout | **~25 h d'humain par spire** (~775 h) ; aucun détecteur automatique d'erreur ; aucun taux d'erreur publié |
+| **§2** spiral fitting | une nappe unique **garantie** par construction | **3,20 %** de traversées de spire ; la garantie est topologique, pas sémantique |
+| **§1** topographie d'encre | l'encre lisible par le seul relief, à 0,34 µm | cible **~1 µm** ; les rouleaux du prix sont à 8,6–9,4 µm ; ne généralise pas encore entre papyrus (0,691 poolé) |
 
 ---
 
@@ -330,7 +353,202 @@ contraindre un traceur ascendant, il impose la continuité **dans le modèle**.
 > le WJF de 3,20 % dit que le premier, même contraint par construction, **traverse
 > encore**.
 
-## 3. Ce que la lecture complète des documents a trouvé d'autre
+## 3. ⭐⭐ *Complete virtual unwrapping and reading of a rolled Herculaneum papyrus*
+
+Angelotti, Parsons, Nicolardi, Nader, Johnson, Josey, Henderson, Schilling, Rudolph,
+McDonald, Dal Prá, Tafforeau, Mirone, Parker, Posma, Kyles, Vergara, Lavorante, Villa,
+Robustelli, D'Angelo, Del Mastro, McOsker, Fleischer, Chapman, **Friedman**, **Seales** —
+arXiv **2606.29085**, 27 juin 2026. **27 auteurs**, l'équipe entière du concours plus
+l'ESRF et quatre universités italiennes.
+
+⚠ **Ce papier ne figurait pas dans `06` §0**, qui n'en nommait que deux. Il a été trouvé
+le 2026-08-19 dans la section References de `/2026_open_problems`. C'est **le plus
+important des trois** — et c'est celui qui donne l'impression que tout est résolu.
+
+**Le résultat** : **PHerc. 1667**, un rouleau scellé, est **entièrement déroulé
+virtuellement et lu**. 31 spires, **1231 cm²** de papyrus, **≈ 860 cm²** de surface
+d'écriture préservée, **22 colonnes**, transcrites par **huit papyrologues**. C'est réel,
+c'est une première, et ça mérite d'être dit sans réserve.
+
+### ⚠⚠ Mais le mot qui porte le titre est « rolled », pas « complete »
+
+**PHerc. 1667 est le plus petit et le plus abîmé des objets de la campagne**, pas un
+rouleau intact :
+
+| | PHerc. 1667 aujourd'hui | un rouleau entier |
+|---|---:|---:|
+| hauteur | **8 cm** | 19–24 cm |
+| diamètre | **2 cm** | 4–6 cm |
+| spires | **31** | plusieurs centaines |
+
+Et cet état est le produit de deux siècles de tentatives destructrices — ouverture ratée
+au XIX siècle, tentative Fackelmann abandonnée en 1969, méthode d'Oslo dans les années
+1980 qui en a tiré dix fragments avant de le classer illisible :
+
+> *« These interventions substantially altered the physical state of the artefact,
+> **reducing the diameter of the surviving roll from 4.9 to 2 cm, and its weight from
+> 14 g to approximately 6 g** »*
+
+⭐ **« Complete » veut donc dire « tout ce qui survit encore »**, et les auteurs le
+définissent honnêtement, dans un sens qu'ils qualifient eux-mêmes de **borné** :
+
+> *« We use “complete virtual unwrapping” in a **bounded geometric sense**: the preserved
+> surface included in the claim is **represented by an approved mesh**, can be inspected
+> in the CT volume and is rendered in the flattened coordinate domain. »*
+
+⚠ **Et le titre du traité n'est pas récupéré** : il était dans la partie haute, perdue.
+*« neither the authorship nor the title of the work can be established with certainty »*.
+Ce qu'on sait : un traité d'éthique, contexte stoïcien, mention d'**Aristocréon** (neveu
+de Chrysippe), II siècle av. J.-C. Sur 22 colonnes, **4 sont en « traces »** sans une
+lettre transcrite, et 2 des 18 restantes n'ont **aucune traduction**.
+
+### ⭐⭐⭐ Le chiffre qui décide de tout : **~25 heures d'annotation MANUELLE par spire**
+
+Il est dans la sous-section la plus discrète du papier, « Statistics and
+reproducibility », en **une ligne** :
+
+> *« The unwrapping was completed using the most efficient semi-automated segmentation
+> tooling available at the time, a **wrap by wrap copy tool** combined with **~25 hours
+> per wrap of manual annotation**. »*
+
+**31 spires × 25 h ≈ 775 heures** — soit ~97 jours-personne, ~4,5 mois à temps plein,
+et un débit de **1,6 cm² de papyrus déroulé par heure d'humain**. *(La multiplication est
+de nous : le papier donne les deux facteurs et ne fait pas le produit.)*
+
+Et ces 775 heures ne couvrent **que le déroulage**. Elles n'incluent ni la photogrammétrie
+et la fabrication des coques, ni l'annotation des labels d'entraînement, ni les cinq tours
+de pseudo-labellisation d'encre, ni les 256 voxels cliqués par un expert pour le prototype
+DINO, ni la revue par huit papyrologues.
+
+⚠ Le papier crédite d'ailleurs **un poste permanent de direction des annotations**, occupé
+sans interruption depuis mai 2023 par deux personnes successives.
+
+> ⭐ **À comparer au Grand Prize 2027, qui tolère 8 heures d'annotation humaine
+> documentée.** L'écart est d'un facteur ~100. C'est exactement ce que l'annonce du prix
+> dit en une phrase : *« the methods behind these technical breakthroughs still require
+> humans in the loop. **Full automation is required.** »*
+
+### ⚠⚠ Et voici ce que ce papier NE fait PAS — c'est notre sujet, mot pour mot
+
+**Le traçage automatique d'une surface complète et correcte n'est pas résolu**, et les
+auteurs le nomment comme le **premier des deux goulots dominants** :
+
+> *« Two bottlenecks remain dominant. The first is **geometric**. **Even strong
+> surface-prediction networks can fail in highly compressed regions, where mergers, holes
+> and sheet switches destabilize surface estimation.** »*
+
+⚠⚠ **« sheet switches » n'apparaît qu'UNE fois dans tout l'article** — dans cette phrase,
+comme mode de panne non résolu.
+
+**Il n'y a aucun détecteur automatique d'erreur de traçage.** Le seul rempart est un
+humain qui juge à l'écran :
+
+> *« **Regions judged geometrically consistent with a single sheet** were marked with an
+> approval mask. »*
+
+C'est ça, l'« approved mesh » du critère de complétude : **une catégorie humaine, pas une
+métrique**. Le papier fournit un excellent outillage de *diagnostic* — n'importe quel point
+de la surface aplatie renvoie à ses coordonnées 3D, ce qui laisse *« reviewers inspect the
+underlying papyrus layer, assess local geometric reliability and **distinguish
+surface-placement errors from ink-interpretation errors** »* — mais c'est un **reviewer**
+qui regarde.
+
+⚠⚠ **Conséquence directe : le papier ne publie AUCUN taux d'erreur de traçage.** Ni avant
+correction, ni après. On ne sait pas combien d'erreurs la chaîne automatique produit, ni
+combien la passe manuelle en rattrape.
+
+Le prédicteur de surface lui-même est faible, et le papier le rétrograde explicitement :
+
+| modèle de surface (nnU-Net 3D résiduel, patch 256³) | Dice | IoU |
+|---|---:|---:|
+| **classe surface** | **0,308** | **0,189** |
+| classe fond | 0,883 | 0,801 |
+| moyenne | 0,596 | 0,495 |
+
+> *« The resulting voxelwise prediction was used **only as an intermediate cue** for
+> geometric tracing. The final surface representation **was not the segmentation volume
+> itself**, because dense predictions can contain **local sheet mergers, gaps and false
+> positives** in tightly packed regions. »*
+
+⚠ L'entraînement a d'ailleurs été **arrêté à 3 864 epochs sur 7 500 planifiés**, et le
+pré-entraînement DINOv2 à **342 558 itérations sur 1 000 000**.
+
+### La généralisation, dite par les auteurs eux-mêmes
+
+> *« **This workflow does not imply that all sealed Herculaneum rolls are automatically
+> readable.** Performance depends on scroll general preservation state, scan quality,
+> layer separation, deformation, local ink contrast and surface preservation. »*
+
+⚠ **Et les tables disent quelque chose que le corps du texte ne dit pas : ~20 objets ont
+été scannés, 3 portent un résultat.** PHerc. Paris 3, 1451, 332, 814, 1299, 841, 1203,
+MANB, MANBp, MAN5 sont tous scannés à 2,4 µm et n'apparaissent qu'en « comparison /
+training volume ». **Aucun compte rendu d'échec** n'est donné pour ces quinze objets.
+C'est un biais de sélection non discuté.
+
+### ⭐ Ce qui EST résolu, et bien : le scan
+
+C'est le morceau le plus solide et le plus reproductible du papier.
+
+| paramètre de production | valeur |
+|---|---|
+| voxel | **2,4 µm isotrope** |
+| distance de propagation | **0,22 m** |
+| énergie moyenne | **78 keV** |
+| phase retrieval | Paganin, **δ/β = 1000** |
+| ligne | **BM18, ESRF** |
+| volume reconstruit moyen | **20 To** (jusqu'à > 100 To bruts) |
+
+Le raisonnement physique est la **décohérence** : les couches denses diffusent le
+faisceau et brouillent les projections, *« could be linked to the presence of graphite (a
+very efficient decoherer) »*. Le remède est contre-intuitif — **réduire** la distance de
+propagation et **monter** l'énergie, donc affaiblir volontairement le contraste de phase
+jusqu'au point où il aide sans brouiller. La campagne d'optimisation balaie 4×4 énergies ×
+distances, et donne des valeurs opérationnelles par taille de pixel : **0,22 m à 2,4 µm,
+~0,5 m à 4,6 µm, ~2 m à 8 µm**.
+
+⭐⭐ **Et sur PHerc. Paris 4, ce protocole rend l'encre DIRECTEMENT VISIBLE dans le
+volume** — dépôts de **10–20 µm** d'épaisseur apparente, segmentables en 3D sans aucun
+modèle conditionné à la surface. Projetés sur la surface aplatie, ils **coïncident avec la
+région du Banner du Grand Prize 2023**. C'est une validation physique indépendante de la
+lecture de 2023.
+
+⚠ Mais elle est **ponctuelle**, et les auteurs le bornent : *« under **at least one**
+optimized scan regime and ink preservation state »*. Elle ne s'étend pas aux rouleaux où
+l'encre reste invisible — c'est-à-dire précisément à PHerc. 1667 et 139, où repose le
+résultat principal.
+
+⚠ Enfin, une partie de la lecture de PHerc. 1667 **ne vient pas du volume de production** :
+un scan complémentaire de région d'intérêt à **1,129 µm** (59 keV) a permis *« the reading
+of previously illegible portions of the text »*.
+
+### ⭐⭐ Ce que ce papier dit de NOTRE travail — et c'est la réponse à « tout est déjà fait »
+
+Quatre faits, tirés du papier lui-même :
+
+1. **L'équipe qui vient de lire un rouleau entier n'a aucun détecteur automatique d'erreur
+   de traçage.** Son seul rempart est un masque d'approbation posé à la main, région par
+   région.
+2. **Elle ne publie aucun taux d'erreur de traçage**, ni avant ni après correction. La
+   grandeur que nos instruments produisent n'existe nulle part dans la littérature.
+3. **Elle nomme le saut de spire comme goulot non résolu**, une fois, dans sa Discussion.
+4. **Le coût est de ~25 h/spire**, et le prix suivant en tolère 8 au total. **Un facteur
+   ~100 sépare l'état de l'art de ce qui est demandé pour juin 2027.**
+
+⚠ Et la comparaison de résolution est brutale pour les rouleaux du prix : ce papier
+travaille à **2,4 µm** (et descend à **1,1 µm** pour les passages difficiles), quand les
+treize rouleaux du Grand Prize 2027 sont publiés à **8,64–9,36 µm** — un facteur **3,6 à
+3,9** par rapport au volume de production, et **8 à 8,3** par rapport au scan de secours.
+C'est le même constat que le §1, par un autre chemin : **la résolution est le premier
+mur.**
+
+> ⭐ La conclusion des auteurs est la formulation la plus exacte de l'état du domaine, et
+> elle vaut d'être citée entière :
+>
+> *« The remaining challenge is **not whether** sealed Herculaneum texts can be read
+> non-invasively, but **how broadly, robustly and efficiently the workflow can be
+> extended** across the still-unopened library. »*
+
+## 4. Ce que la lecture complète des documents a trouvé d'autre
 
 ⚠ Un `grep` attrape les marqueurs, pas ce qui a été laissé en passant. Les 8 310 lignes
 de `docs/` et de la passation ont donc été lues. Reste ouvert, dans l'ordre de valeur :
@@ -338,7 +556,7 @@ de `docs/` et de la passation ont donc été lues. Reste ouvert, dans l'ordre de
 | # | quoi | où c'est dit |
 |---|---|---|
 | **1** ⭐⭐ | **appliquer la correction — un GAUCHISSEMENT — et montrer le gain** | `00` §9.3, `18` J6, `22` R2. C'est le dernier ⏳ du « vrai produire », et le seul obstacle écrit (« la chaîne maillage → rendu n'est pas ici ») **est tombé** : VC3D est construit |
-| 2 | extraire les chiffres du papier spiral fitting | §2 ci-dessus |
+| 2 | ~~extraire les chiffres du papier spiral fitting~~ | ✅ **FAIT** le 2026-08-19, §2 ci-dessus — lecture intégrale, WJF compris |
 | 3 | publier la table de qualité de trace, et le dépôt | `22` Q3, `15` §5, `21` |
 | 4 | `06` §2.3 « vérifier 1.11 avec le vrai ombilic » | ⚠ **périmé** : `18` M1 l'a clos **sans** l'ombilic, mesuré à 1,75 % contre un cv de 1,8 % |
 | 5 | `06` §3bis C « un second rouleau » | ⚠ **périmé** : fait quatre fois (`19` §11) |
@@ -346,3 +564,68 @@ de `docs/` et de la passation ont donc été lues. Reste ouvert, dans l'ordre de
 
 ⭐ **Le reste nº 1 est le seul qui vaille un lot.** Les trois « périmés » sont corrigés
 ci-dessous plutôt que laissés à piéger le prochain lecteur.
+
+---
+
+## Références
+
+### Les trois articles primaires
+
+Chacun a été **lu intégralement** le 2026-08-19 — corps, tableaux, légendes, méthodes,
+annexes et données supplémentaires — et non depuis son résumé.
+
+| réf | citation | lu |
+|---|---|---|
+| **[P1]** | G. Angelotti, F. Nicolardi, P. Henderson, W. B. Seales, *« Ink Detection from Surface Topography of the Herculaneum Papyri »*, arXiv:**2603.27698**v1 [cs.CV], 29 mars 2026 · publié dans **Scientific Reports**, DOI `10.1038/s41598-026-58467-1` | v1 (preprint), 9 p., 3 fig., 2 tables |
+| **[P2]** | P. Henderson, *« Virtually Unrolling the Herculaneum Papyri by Diffeomorphic Spiral Fitting »*, arXiv:**2512.04927**v1 [cs.CV], 4 déc. 2025 · **accepté à WACV 2026** · code : `github.com/pmh47/spiral-fitting` | v1 intégral, annexes A/B/C comprises |
+| **[P3]** | G. Angelotti, S. Parsons, F. Nicolardi, Y. Nader, S. Johnson, D. Josey, P. Henderson, H. Schilling, J. Rudolph, F. McDonald, E. R. Dal Prá, P. Tafforeau, A. Mirone, C. S. Parker, J. P. Posma, B. Kyles, C. Vergara, A. Lavorante, R. Villa, M. C. Robustelli, M. D'Angelo, G. Del Mastro, M. McOsker, K. Fleischer, C. Chapman, N. Friedman, W. B. Seales, *« Complete virtual unwrapping and reading of a rolled Herculaneum papyrus »*, arXiv:**2606.29085**v1 [eess.IV], 27 juin 2026 | v1 intégral, Extended Data et Supplementary Tables 1–5 comprises |
+
+⚠ **Un quatrième**, cité par les trois et par le site, **non lu ici** : S. Parsons,
+C. S. Parker, C. Chapman, M. Hayashida, W. B. Seales, *« EduceLab-Scrolls: Verifiable
+Recovery of Text from Herculaneum Papyri using X-ray CT »*, arXiv:**2304.02084**, 2023.
+C'est le jeu de données sur lequel [P2] travaille et la source des scans à 7,91 µm.
+**C'est le premier reste de ce document.**
+
+### Pages officielles du concours
+
+Miroir local complet dans `site/scrollprize.org/` (81 pages sur 81), récupéré par
+`tools/mirror_site.sh`.
+
+| page | ce qu'on en tire | dernière mise à jour affichée |
+|---|---|---|
+| `/2026_open_problems` | la carte technique de toute la chaîne, le tableau des goulots, les six appels à contribution, et la section References d'où vient [P3] | **10 juillet 2026** |
+| `/prizes` | les montants et critères en vigueur (Grand Prize 2027, First Letters ×10, Titre de Paris 4) | — |
+| `/unwrapping` | *« the problem is still unsolved. No method so far manages to perfectly fit the wanted surface to the data »* | — |
+| `/winners`, `/grandprize`, `/firstscroll` | ce qui a été gagné, et par qui | — |
+| `/data`, `/data_browser` | l'inventaire des volumes publiés par rouleau | — |
+
+### Données
+
+- **Bucket AWS Open Data** : `s3://vesuvius-challenge-open-data` — volumes CT en
+  OME-Zarr, prédictions de surface, segments, cartes d'encre. C'est la source de
+  **toutes** nos mesures à distance ; rien n'est téléchargé en entier.
+- **`dl.ash2txt.org`** — le miroir HTTP de la communauté, dont les modèles
+  communautaires (`bruniss`) qu'utilise [P2].
+
+### Code
+
+`tools/repos.tsv` porte le manifeste des **44 dépôts** clonés, en quatre niveaux
+(0 = cœur officiel, 1 = déroulage/segmentation, 2 = encre, 3 = outillage), avec pour
+chacun son URL et, le cas échéant, la raison de le garder alors qu'il est archivé ou
+mort en amont. Les trois qui portent le plus de poids ici :
+
+- `ScrollPrize/villa` — le monorepo officiel : VC3D / volume-cartographer (dont les
+  outils `vc_*` que nous pilotons), lasagna, spiral fit, neural tracing ;
+- `schillij95/ThaumatoAnakalyptor` — l'archétype ascendant, le concurrent de [P2] ;
+- `hendrikschilling/volume-cartographer` — le fork d'où vient VC3D.
+
+⚠ **`pmh47/spiral-fitting`, le code de [P2], n'est PAS dans le manifeste.** À ajouter.
+
+### Ce que nos propres mesures utilisent
+
+Toute affirmation chiffrée de ce dépôt renvoie à un script versionné de
+`analysis/src/` ou `tools/`, ou à un artefact de `docs/` ou `artefacts/`. La règle est
+énoncée dans `HANDOFF.md` §9 : *un chiffre publié dont le calcul n'est pas dans l'arbre
+n'est pas un résultat, c'est une anecdote.* Les batteries de contrôle sont dans
+`tools/temoins.sh`, et la chaîne complète — tests, builds, boot, parité — dans
+`validate.sh`.
