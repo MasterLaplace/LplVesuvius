@@ -1,8 +1,8 @@
 # Ce qui est soumissionnable, et ce qui ne l'est pas
 
-2026-08-18. Échéance Progress Prize : **31 août 2026, 23 h 59 Pacific** — dans **13
-jours**. Ce document trie ce qu'on a **contre les critères écrits sur la page `Prizes`
-du miroir**, pas contre une impression.
+2026-08-18, **révisé le 2026-08-19**. Échéance Progress Prize : **31 août 2026, 23 h 59
+Pacific** — dans **12 jours**. Ce document trie ce qu'on a **contre les critères écrits
+sur la page `Prizes` du miroir**, pas contre une impression.
 
 ---
 
@@ -61,6 +61,73 @@ confondre les deux dans la soumission.
 et **les 13 rouleaux du Grand Prize 2027 sont tous à 8,640–9,362 µm**, avec interdiction
 d'utiliser un scan plus fin du même rouleau.
 
+## 3bis. ⭐⭐ Le troisième, et il tombe sur le critère le plus dur : la RÈGLE (`19`)
+
+Les deux précédents **jugent**. Celui-ci **décide**, et c'est exactement le mot du
+critère : *« detecting failure-cases of existing methods on real scroll data »*.
+
+> Écarter les **20 %** de segments dont le volume de surface porte le moins de matière
+> fait monter le contraste d'encre médian du corpus de **+0,381**, contre **2000
+> permutations** de même effectif : **p = 0,0005**.
+
+**Pourquoi c'est solide, en trois points qu'un relecteur peut vérifier :**
+
+1. **La cible est la sortie d'un autre pipeline.** Les 80 cartes d'encre sont celles que
+   le concours publie, récupérées telles quelles. Rien de notre chaîne n'entre dedans,
+   donc la corrélation ne peut pas être un artefact partagé.
+2. **Le confond de taille était réel et il est retiré.** L'emprise corrèle avec le
+   critère (+0,384) *et* avec l'encre (+0,463) ; la corrélation **partielle** passe de
+   −0,315 à **−0,382** — retirer le confond la **renforce**, ce qui est le contraire
+   d'un effet de taille.
+3. **Le seuil est défendu par un plateau, pas par un pic** : 15–25 % tiennent tous à
+   p ≤ 0,001, 5 % ne fait rien (p = 0,054) et 30 % se dégrade. Un réglage sur-ajusté
+   ferait un pic.
+
+⚠ **Le confond qu'on ne lève pas, et qu'il faut écrire dans la soumission** : une carte
+d'encre vide peut vouloir dire « la trace a raté la feuille » **ou** « ce papyrus est
+vierge ». C'est un **tri de corpus**, jamais un diagnostic sur un segment isolé.
+
+## 3ter. ⭐⭐ Le quatrième : le champ de correction (`20`), et le critère « ne saute pas de feuille »
+
+Le dernier critère de la page est visuel et littéral : *« show visually that papyrus
+fibers are visible on your output surface, and **it doesn't jump across sheets** »*.
+
+`champ_correction.py` mesure ce saut fenêtre par fenêtre et le **montre** avec son
+témoin à côté (`docs/images/20_champ_fort.png`, `20_champ_correction.png`).
+
+| ce qu'on apporte | le chiffre |
+|---|---|
+| l'erreur d'une trace est **structurée**, pas du bruit | **99 segments sur 99**, deux rouleaux, battent leur propre témoin de mélange |
+| **quelle réparation** vaut la peine | une translation n'enlèverait que **21,7 %** de l'erreur → le remède est un **gauchissement** |
+| les segments qui **sautent** de feuille sont nommés | 1 sur 80 sur Scroll 1, avec son nom et son résiduel |
+
+⚠ Et l'honnêteté qui doit accompagner la figure : sur le cas **médian** la différence
+entre les deux panneaux **se voit mal**, ce qui est exactement ce que dit un rho de 0,31.
+Les deux figures sont publiées, pas seulement la belle.
+
+## 3quater. ⭐ Le cinquième : `tracecheck`, le paquet qui répond à « actually get used »
+
+Un fichier, `numpy` et rien d'autre — ni `zarr`, ni `torch`, ni identifiants AWS. Il
+découvre le volume de surface d'un segment depuis un alias de rouleau, lit **~300
+chunks** (quelques mégaoctets, ~15 s) et rend les six grandeurs, chacune avec le rho qui
+la défend. `selftest.py` en donne **16 contrôles hors ligne** avec leurs cas négatifs.
+
+```
+$ python3 tracecheck.py Scroll1 20230702185753 --voxel-um 2.4 --sheet-um 172.8
+  material           68.5 %   <- strongest predictor of published ink (rho +0.54, n=80)
+  rigid share        23.4 %   <- what a mesh translation would remove
+  vs 173 um sheet pitch: 0.74 sheets  -> stays on its sheet
+```
+
+⚠ **Son README dit aussi ce qu'il NE fait pas** : il ne prédit pas la lisibilité, une
+carte vide peut vouloir dire papyrus vierge, et `--sheet-um` **n'a pas de défaut** parce
+que nous avons payé le chiffre emprunté. Un outil qui tait ses limites se fait jeter à la
+première contradiction.
+
+⚠ **La langue de l'outil est l'anglais**, celle des documents reste le français.
+L'auteur a tranché que le français n'est pas un problème pour la soumission ; un outil
+destiné à être *utilisé par d'autres* est un cas différent d'un document qui explique.
+
 ## 4. ⚠ Ce qui n'est PAS soumissionnable, et pourquoi
 
 | | raison |
@@ -72,15 +139,17 @@ d'utiliser un scan plus fin du même rouleau.
 
 ## 5. ⏳ Ce qui manque pour soumettre
 
-1. ⭐⭐ **La généralité** — l'instrument est validé sur **un** rouleau (Scroll 1, 54
-   segments). Le passer sur PHerc1667, PHerc0139 et PHerc0814 le rendrait défendable.
-   *(lancé)*
-2. **Un paquet autonome** : un script, un README, un exemple qui tourne sur une clé S3
-   publique sans rien télécharger. C'est le critère *« actually get used »*.
-3. **Une image** : le site insiste partout sur la preuve visuelle. Montrer un segment
-   sain et un segment hors feuille, côte à côte, avec leur profil.
-4. ⚠ La **langue**. L'auteur juge que ce n'est pas un problème ; noté une fois, et on
-   n'y revient pas.
+1. ✅ **La généralité** — *fait* : **71 traces** sur PHerc0139 / PHerc1667 / PHerc0814
+   (`07` §9), **80 segments** de profondeur, **99 champs de correction** sur deux
+   rouleaux.
+2. ✅ **Un paquet autonome** — *fait* : `tracecheck/`, un fichier, `numpy` seul,
+   16 contrôles hors ligne.
+3. ✅ **Une image** — *fait* : `profondeur_deux_cas.png` (segment sain / hors feuille) et
+   les deux figures de champ avec leur témoin.
+4. ⚠ La **langue**. L'auteur juge que ce n'est pas un problème ; l'outil public est
+   néanmoins en anglais. Noté une fois, et on n'y revient pas.
+5. ⏳ **Le texte de la soumission lui-même** — il n'est pas écrit. C'est désormais le seul
+   reste, et il ne demande aucune machine.
 
 ## 6. Le lien avec le gros prix
 

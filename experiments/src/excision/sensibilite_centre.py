@@ -32,7 +32,27 @@ from types import SimpleNamespace
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from radial import VOXEL_UM, load_centre, open_volume, slice_report  # noqa: E402
+from radial import (VOXEL_UM, count_sheets, load_centre, open_volume,  # noqa: E402
+                    ray_profile, spiral_length_mm)
+
+
+def _rapport_sur_plan(plane, centre: dict, z: int, args) -> dict:
+    """Compte de feuilles sur un plan DEJA LU — copie de `radial.slice_report` sans la
+    lecture, pour que le meme plan serve a tous les centres essayes."""
+    counts, radii = [], []
+    for degrees in range(0, 360, args.step_deg):
+        profile = ray_profile(plane, centre["cx"], centre["cy"], degrees, args.reach)
+        if profile.size < 500:
+            continue
+        peaks, _, smoothed = count_sheets(profile, args.prominence, args.min_gap)
+        body = np.flatnonzero(smoothed > args.body_threshold)
+        outer = int(body.max()) if body.size else 0
+        counts.append(int((peaks <= outer).sum()) if outer else len(peaks))
+        radii.append(outer)
+    if not counts:
+        return {}
+    return {"turns_median": int(np.median(counts)),
+            "outer_radius_mm": float(np.median(radii) * VOXEL_UM / 1000.0)}
 
 
 def main() -> int:
@@ -78,30 +98,39 @@ def main() -> int:
     print(f"{'decalage':>9} {'en um':>8} {'feuilles':>9} {'rayon mm':>9} "
           f"{'invariant um':>13} {'ecart %':>8}")
 
+    # ⚠⚠ LE PLAN EST LU UNE FOIS PAR TRANCHE, pas une fois par decalage. Un plan au
+    # niveau 0 fait des milliers de chunks ; la premiere version bouclait sur les
+    # decalages a l'exterieur et relisait donc le meme plan cinq fois. Mesure : bloquee
+    # a 0 % de CPU pendant onze minutes, sans une ligne de sortie. Le centre change,
+    # le volume non.
+    par_decalage: dict[float, list[tuple[float, float]]] = {d: [] for d in args.decalages}
+    for z in tranches:
+        plane = array[z]
+        print(f"  tranche z={z} lue", flush=True)
+        for d in args.decalages:
+            # ⚠ Le decalage est applique en DIAGONALE : deplacer le centre selon un seul
+            # axe est le cas le plus favorable, parce que la moitie des rayons le
+            # compensent.
+            faux = {"cx": centre["cx"] / facteur + d / np.sqrt(2),
+                    "cy": centre["cy"] / facteur + d / np.sqrt(2)}
+            rep = _rapport_sur_plan(plane, faux, z, reglage)
+            if rep:
+                par_decalage[d].append((rep["turns_median"], rep["outer_radius_mm"]))
+
     lignes, reference = [], None
     for d in args.decalages:
-        # ⚠ Le decalage est applique en DIAGONALE : deplacer le centre selon un seul axe
-        # est le cas le plus favorable, parce que la moitie des rayons le compensent.
-        cx = centre["cx"] / facteur + d / np.sqrt(2)
-        cy = centre["cy"] / facteur + d / np.sqrt(2)
-        faux = {"cx": cx, "cy": cy}
-        tours, rayons = [], []
-        for z in tranches:
-            rep = slice_report(array, faux, z, reglage)
-            if rep:
-                tours.append(rep["turns_median"])
-                rayons.append(rep["outer_radius_mm"])
-        if not tours:
+        mesures = par_decalage[d]
+        if not mesures:
             print(f"{d:>9.0f} {'—':>8} {'aucune tranche mesurable':>44}")
             continue
-        tours_m = float(np.median(tours))
-        rayon_m = float(np.median(rayons))
+        tours_m = float(np.median([m[0] for m in mesures]))
+        rayon_m = float(np.median([m[1] for m in mesures]))
         invariant = rayon_m * 1000.0 / tours_m if tours_m else float("nan")
         if reference is None:
             reference = invariant
         ecart = 100.0 * (invariant - reference) / reference if reference else float("nan")
         print(f"{d:>9.0f} {d * voxel_um:>8.0f} {tours_m:>9.1f} {rayon_m:>9.2f} "
-              f"{invariant:>13.1f} {ecart:>+8.2f}")
+              f"{invariant:>13.1f} {ecart:>+8.2f}", flush=True)
         lignes.append({"decalage_vx": float(d), "decalage_um": float(d * voxel_um),
                        "feuilles_medianes": tours_m, "rayon_mm": rayon_m,
                        "invariant_um": invariant, "ecart_pct": ecart})
