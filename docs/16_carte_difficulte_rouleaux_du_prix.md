@@ -4,6 +4,32 @@
 
 ---
 
+## 0. La carte, d'un coup d'œil
+
+![carte de difficulte des 13 rouleaux du prix](images/16_carte_difficulte.png)
+
+> **La colonne de gauche est là pour échouer, et c'est le résultat.** La séparabilité
+> **médiane** ne distingue rien : les quatorze tiennent entre 1,37 et 1,62, et **six des
+> treize** font aussi bien ou mieux que le témoin — un rouleau **tracé, dont le titre a été
+> retrouvé**, au protocole exact des treize.
+>
+> ⭐ **C'est la queue qui sépare.** Le témoin est à **0 %** de fenêtres indissociables ; les
+> treize s'étalent de **4 %** à **24 %**. La difficulté de ces rouleaux n'est pas globale,
+> elle est **locale** — et c'est ce qui désigne `PHerc0358` (4 %) comme le premier à
+> attaquer.
+
+⚠ **Sans témoin apparié, aucun de ces chiffres ne veut dire quoi que ce soit.** Une part de
+10 % n'est ni bonne ni mauvaise dans l'absolu ; elle l'est par rapport à un rouleau qu'on a
+su lire, mesuré de la même façon.
+
+⚠ Les deux colonnes partagent leur mise en page mais **pas leur échelle** : ce sont deux
+grandeurs sans rapport, et une échelle commune suggérerait une comparaison qui n'a pas de
+sens.
+
+Figure : `analysis/src/figure_difficulte.py`, depuis `docs/carte_separabilite/`.
+
+---
+
 ## 1. La question, et pourquoi elle était sans réponse
 
 Le **Grand Prize 2027** (800 000 $ en première place, 25 juin 2027) porte sur **13
