@@ -1,0 +1,144 @@
+{
+  "zarr": "PHerc0358/representations/predictions/surfaces/20250821151737-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+  "level": 0,
+  "critere": "planarite",
+  "bloc": 8,
+  "lissage": 1,
+  "voisins_min": 6,
+  "seuil_planaire": 0.9,
+  "occupation_min": 0.02,
+  "occupation_max": 0.8,
+  "shape_zyx": [
+    14744,
+    7783,
+    7783
+  ],
+  "candidats": [
+    {
+      "planarite": 0.9982,
+      "planarite_bloc": 0.9988,
+      "voisins": 14,
+      "part_planaire": 0.9671,
+      "blocs_valides": 9702,
+      "voisinage": 11.5,
+      "occupation": 0.0449,
+      "valeur": 255,
+      "normale_zyx": [
+        -0.5486,
+        0.7876,
+        -0.2804
+      ],
+      "x": 5842,
+      "y": 5839,
+      "z": 7386
+    },
+    {
+      "planarite": 0.9979,
+      "planarite_bloc": 0.9979,
+      "voisins": 15,
+      "part_planaire": 0.5887,
+      "blocs_valides": 10471,
+      "voisinage": 84.7,
+      "occupation": 0.332,
+      "valeur": 255,
+      "normale_zyx": [
+        -0.5895,
+        0.2319,
+        -0.7738
+      ],
+      "x": 1964,
+      "y": 2042,
+      "z": 7324
+    },
+    {
+      "planarite": 0.9978,
+      "planarite_bloc": 0.9982,
+      "voisins": 16,
+      "part_planaire": 0.683,
+      "blocs_valides": 10145,
+      "voisinage": 46.3,
+      "occupation": 0.1816,
+      "valeur": 255,
+      "normale_zyx": [
+        -0.3751,
+        0.7267,
+        -0.5755
+      ],
+      "x": 3906,
+      "y": 2061,
+      "z": 7346
+    },
+    {
+      "planarite": 0.9974,
+      "planarite_bloc": 0.9974,
+      "voisins": 15,
+      "part_planaire": 0.7086,
+      "blocs_valides": 9061,
+      "voisinage": 19.4,
+      "occupation": 0.0762,
+      "valeur": 255,
+      "normale_zyx": [
+        -0.2776,
+        -0.5007,
+        0.8199
+      ],
+      "x": 5897,
+      "y": 3942,
+      "z": 7364
+    },
+    {
+      "planarite": 0.9963,
+      "planarite_bloc": 0.9976,
+      "voisins": 21,
+      "part_planaire": 0.5468,
+      "blocs_valides": 9453,
+      "voisinage": 44.3,
+      "occupation": 0.1738,
+      "valeur": 255,
+      "normale_zyx": [
+        -0.5983,
+        0.4324,
+        -0.6746
+      ],
+      "x": 3866,
+      "y": 3917,
+      "z": 7346
+    },
+    {
+      "planarite": 0.9958,
+      "planarite_bloc": 0.9959,
+      "voisins": 13,
+      "part_planaire": 0.6497,
+      "blocs_valides": 3009,
+      "voisinage": 9.5,
+      "occupation": 0.0371,
+      "valeur": 255,
+      "normale_zyx": [
+        -0.1983,
+        -0.4516,
+        0.8699
+      ],
+      "x": 2095,
+      "y": 3986,
+      "z": 7434
+    },
+    {
+      "planarite": 0.9875,
+      "planarite_bloc": 0.9809,
+      "voisins": 16,
+      "part_planaire": 0.1209,
+      "blocs_valides": 7955,
+      "voisinage": 105.1,
+      "occupation": 0.4121,
+      "valeur": 255,
+      "normale_zyx": [
+        -0.7941,
+        -0.5153,
+        0.3222
+      ],
+      "x": 3947,
+      "y": 5899,
+      "z": 7315
+    }
+  ]
+}

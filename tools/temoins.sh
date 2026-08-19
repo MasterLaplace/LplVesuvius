@@ -365,6 +365,113 @@ ck(0.280 < 2 * 0.219, "et le controle FAUX ressemblait, lui, a une instabilite r
 print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
+run "graine : planarite"      uv run python - <<'PY'
+import sys; sys.path.insert(0, '../analysis/src')
+import numpy as np
+from trouver_graine import scores_du_chunk, classement, voxel_allume, _agreger_voisins
+
+n = 0
+K = 8
+
+def cube(shape):
+    return np.zeros(shape, np.uint8)
+
+def pla(K, theta, ep=1.2, shape=None):
+    shape = shape or (K, K, K)
+    g = np.indices(shape).astype(np.float32) - (np.array(shape).reshape(3,1,1,1) - 1) / 2.0
+    n_ = np.array([np.cos(np.radians(theta)), np.sin(np.radians(theta)), 0.0])
+    d = n_[0]*g[0] + n_[1]*g[1] + n_[2]*g[2]
+    return ((np.abs(d) < ep).astype(np.uint8)) * 255
+
+def p1(b, k=K):
+    return float(scores_du_chunk(b, k)["planarite"][0])
+
+# --- une feuille est planaire ; DEUX feuilles PARALLELES le sont autant. C'est la
+# --- revendication qui distingue ce critere d'un detecteur de « peu de matiere ».
+un = cube((K,K,K)); un[4] = 255
+deux = cube((K,K,K)); deux[2] = 255; deux[6] = 255
+assert p1(un) > 0.99, p1(un); n += 1
+assert p1(deux) > 0.99, p1(deux); n += 1
+
+# --- une JONCTION a 90 degres s'effondre : c'est le cas que le critere existe pour voir.
+croix = cube((K,K,K)); croix[4] = 255; croix[:, 4, :] = 255
+assert p1(croix) < 0.10, p1(croix); n += 1
+
+# --- du bruit isotrope n'est pas une feuille, meme s'il occupe autant de voxels.
+bruit = (np.random.default_rng(0).random((K,K,K)) < 0.15).astype(np.uint8) * 255
+assert p1(bruit) < 0.20, p1(bruit); n += 1
+
+# --- un bloc UNIFORME (tout vide ou tout plein) a un tenseur nul : ses valeurs propres
+# --- sont du bruit ordonne, donc un score parfaitement defini et parfaitement vide de
+# --- sens. La barriere doit l'ecarter, pas le classer.
+for b in (cube((K,K,K)), np.full((K,K,K), 255, np.uint8)):
+    s = scores_du_chunk(b, K)
+    assert float(s["trace"][0]) == 0.0; n += 1
+    cl = classement(s, 0.02, 0.80, 0, 0.90)
+    assert not bool(cl["retenu"][0]); n += 1
+# ⚠ Sur du binaire la bande d'occupation ecarte deja ces deux cas : la barriere sur la
+# trace ne se distingue que si l'on RELACHE la bande, ce qu'un appelant a le droit de
+# faire. C'est la seule forme de ce controle qui puisse echouer.
+s = scores_du_chunk(np.full((K,K,K), 255, np.uint8), K)
+cl = classement(s, 0.0, 1.0, 0, 0.90)
+assert not bool(cl["retenu"][0]), "bloc plein retenu malgre un tenseur nul"; n += 1
+
+# --- le biais d'orientation, MESURE : sans lissage il vaut 0,172 ; le lissage le divise
+# --- par trois. Le controle porte sur la comparaison, pas sur un seuil choisi.
+K2 = 16
+brut = [float(scores_du_chunk(pla(K2, t), K2, 0)["planarite"][0]) for t in range(0, 91, 10)]
+lisse = [float(scores_du_chunk(pla(K2, t), K2, 1)["planarite"][0]) for t in range(0, 91, 10)]
+assert (max(brut) - min(brut)) > 2.5 * (max(lisse) - min(lisse)), (brut, lisse); n += 1
+assert min(lisse) > 0.85, min(lisse); n += 1
+# --- et le biais reste tres en dessous du signal : le pire plan bat la meilleure jonction
+assert min(lisse) > p1(croix) + 0.8; n += 1
+
+# --- la graine rendue est un voxel ALLUME. Bloc traverse en diagonale : le centre
+# --- geometrique est vide, et l'ancienne version le rendait quand meme.
+bord = cube((K,K,K)); bord[1] = 255           # feuille au bord : le centre est VIDE
+assert bord[K//2, K//2, K//2] == 0; n += 1
+pose = voxel_allume(bord, K, 0, 0, 0)
+assert pose is not None and bord[pose] > 0, pose; n += 1
+assert pose[0] == 1, pose; n += 1
+vide = cube((K,K,K))
+assert voxel_allume(vide, K, 0, 0, 0) is None; n += 1
+
+# --- l'agregation 3x3x3 ne doit pas ENROULER : un bloc de bord voit moins de voisins,
+# --- pas les voisins de la face opposee.
+val = np.zeros((3,3,3), np.float32); val[0,0,0] = 1.0
+ok = np.ones((3,3,3), bool)
+somme, compte = _agreger_voisins(val, ok)
+assert somme[2,2,2] == 0.0, somme[2,2,2]; n += 1
+assert compte[0,0,0] == 8 and compte[1,1,1] == 27, (compte[0,0,0], compte[1,1,1]); n += 1
+
+# --- LE controle de bout en bout : un chunk moitie empilement propre, moitie jonctions.
+# --- Le classement doit designer la moitie propre. Sans lui, tout ce qui precede ne dit
+# --- que « la formule calcule ce qu'elle calcule ».
+C = 48
+chunk = cube((C, C, C))
+# moitie gauche : un empilement propre mais LEGEREMENT incline, donc planarite < 1
+gi = np.indices((C, C, C // 2))
+chunk[:, :, :C//2] = np.where(((gi[0] * 4 + gi[1]) % 20) < 3, 255, 0)
+# moitie droite : rien, sauf UN bloc parfaitement plan, isole, entoure de vide
+chunk[16:24, 16:24, 32:40][3] = 255
+s = scores_du_chunk(chunk, K)
+cl = classement(s, 0.02, 0.80, 6, 0.90)
+forme = s["forme"]
+brute = s["planarite"].reshape(forme)
+eclat = brute[2, 2, 4]
+propre = brute[:, :, :(C//2)//K]
+# ⚠ l'eclat est le point le PLUS planaire du chunk : un argmax le choisirait
+assert eclat >= float(propre.max()) - 1e-6, (eclat, float(propre.max())); n += 1
+assert eclat > float(propre.mean()); n += 1
+cle = np.where(cl["retenu"], cl["score"] + 1e-6 * cl["voisins"], -np.inf)
+idx = int(np.argmax(cle))
+iz, iy, ix = np.unravel_index(idx, forme)
+assert ix < (C // 2) // K, f"la graine est tombee sur l'eclat isole (ix={ix})"; n += 1
+assert not bool(cl["retenu"].reshape(forme)[2, 2, 4]), "l'eclat isole a ete retenu"; n += 1
+
+print(f"ALL PASS (0 failures, {n} checks)")
+PY
+
 # ⚠ Celui-ci n'est pas une batterie d'assertions mais un GARDE-FOU de fraicheur : il
 # recalcule les chiffres publies depuis leurs JSON et les cherche dans les documents.
 printf '  %-30s ' "chiffres de la soumission"

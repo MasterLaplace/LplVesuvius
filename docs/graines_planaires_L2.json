@@ -1,0 +1,128 @@
+{
+  "zarr": "PHerc0358/representations/predictions/surfaces/20250821151737-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+  "level": 2,
+  "critere": "planarite",
+  "bloc": 8,
+  "lissage": 1,
+  "occupation_min": 0.02,
+  "occupation_max": 0.8,
+  "shape_zyx": [
+    3686,
+    1946,
+    1946
+  ],
+  "candidats": [
+    {
+      "planarite": 1.0,
+      "voisinage": 159.4,
+      "occupation": 0.625,
+      "valeur": 255,
+      "normale_zyx": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "x": 1548,
+      "y": 1548,
+      "z": 7756
+    },
+    {
+      "planarite": 1.0,
+      "voisinage": 95.6,
+      "occupation": 0.375,
+      "valeur": 255,
+      "normale_zyx": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "x": 4084,
+      "y": 1548,
+      "z": 7692
+    },
+    {
+      "planarite": 1.0,
+      "voisinage": 127.5,
+      "occupation": 0.5,
+      "valeur": 255,
+      "normale_zyx": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "x": 1612,
+      "y": 3852,
+      "z": 7692
+    },
+    {
+      "planarite": 1.0,
+      "voisinage": 63.8,
+      "occupation": 0.25,
+      "valeur": 255,
+      "normale_zyx": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "x": 2276,
+      "y": 5452,
+      "z": 7980
+    },
+    {
+      "planarite": 0.9994,
+      "voisinage": 63.8,
+      "occupation": 0.25,
+      "valeur": 255,
+      "normale_zyx": [
+        -1.0,
+        -0.0035,
+        -0.0052
+      ],
+      "x": 6124,
+      "y": 3884,
+      "z": 8356
+    },
+    {
+      "planarite": 0.9963,
+      "voisinage": 10.0,
+      "occupation": 0.0391,
+      "valeur": 255,
+      "normale_zyx": [
+        -0.4267,
+        0.7137,
+        -0.5555
+      ],
+      "x": 4052,
+      "y": 6048,
+      "z": 8340
+    },
+    {
+      "planarite": 0.9925,
+      "voisinage": 48.3,
+      "occupation": 0.1895,
+      "valeur": 255,
+      "normale_zyx": [
+        -0.3696,
+        0.5073,
+        -0.7785
+      ],
+      "x": 6088,
+      "y": 5648,
+      "z": 7916
+    },
+    {
+      "planarite": 0.9917,
+      "voisinage": 37.9,
+      "occupation": 0.1484,
+      "valeur": 255,
+      "normale_zyx": [
+        -0.7152,
+        0.5329,
+        0.4523
+      ],
+      "x": 4460,
+      "y": 4428,
+      "z": 7980
+    }
+  ]
+}

@@ -88,7 +88,8 @@ def profile(folder: Path, top: int, left: int, size: int,
 
 def grid_profiles(folder: Path, size: int, step: int, floor: float,
                   first: int = 0, last: int = 10**9, layer_step: int = 1,
-                  traced: int = 32, voxel_um: float = 7.91) -> dict:
+                  traced: int = 32, voxel_um: float = 7.91,
+                  amplitude_min: float = 0.02) -> dict:
     """Le pic de contraste tombe-t-il au MEME endroit partout sur le segment ?
 
     ⚠⚠ **C'est une mesure de qualite de TRACE, et elle ne demande ni verite terrain, ni
@@ -136,6 +137,19 @@ def grid_profiles(folder: Path, size: int, step: int, floor: float,
             density[depth, index] = float(patch.mean())
             peak_value[index] = max(peak_value[index], float(patch.max()))
 
+    # ⚠⚠ L'AMPLITUDE du profil, et pourquoi elle vient AVANT le pic. Le piege nº 20 du
+    # depot dit « afficher la courbe avant de croire son argmax » ; ce bloc l'ecrit dans
+    # l'outil. Un profil plat a quand meme un maximum, parfaitement defini, et sa position
+    # est du bruit -- mais elle sort en « pic a la couche 0 » exactement comme un vrai pic.
+    # Sur une pile de 21 couches ou la surface est au centre, cette confusion est le mode
+    # d'echec le plus probable : les deux positions extremes ramassent le bruit des deux
+    # bouts et la distribution parait BIMODALE, ce qui ressemble a « la trace est entre
+    # deux feuilles ».
+    with np.errstate(invalid="ignore", divide="ignore"):
+        moyennes = density.mean(axis=0)
+        amplitude = np.where(moyennes > 0,
+                             (density.max(axis=0) - density.min(axis=0))
+                             / np.maximum(moyennes, 1e-9), 0.0)
     alive = peak_value >= floor * peak_value.max()
     peaks = np.argmax(contrast[:, alive], axis=0)
     # ⚠⚠ L'INTENSITE est le localisateur robuste, le contraste ne l'est pas. Sur les
@@ -170,7 +184,25 @@ def grid_profiles(folder: Path, size: int, step: int, floor: float,
     # meme segment a deux pas semblent mesurer deux choses. Mesure : 61,0 / 62,0 / 60,8 /
     # 64,0 pour les pas 1, 2, 4, 8 -- constant une fois remis a l'echelle.
     spread = float(np.percentile(peaks, 75) - np.percentile(peaks, 25)) * layer_step
+
+    # Les memes parts, restreintes aux fenetres dont le profil a REELLEMENT une forme.
+    amp_alive = amplitude[alive]
+    relief = amp_alive >= amplitude_min
+    if relief.any():
+        bord_relief = float(((dense_peaks[relief] == 0)
+                             | (dense_peaks[relief] == len(files) - 1)).mean())
+        centre_relief = float(((dense_peaks[relief] >= low)
+                               & (dense_peaks[relief] < high)).mean())
+    else:
+        bord_relief = centre_relief = float("nan")
+
     return {"windows": len(windows), "avec_matiere": int(alive.sum()),
+            "amplitude_mediane": float(np.median(amp_alive)) if alive.any() else 0.0,
+            "amplitude_min": float(amplitude_min),
+            "fenetres_avec_relief": int(relief.sum()),
+            "part_plates": float(1.0 - relief.mean()) if alive.any() else 1.0,
+            "au_bord_relief": bord_relief,
+            "tiers_central_relief": centre_relief,
             "tiers_central": float(inside.mean()),
             "tiers_central_intensite": float(inside_dense.mean()),
             "au_bord_intensite": float(((dense_peaks == 0)
@@ -221,6 +253,10 @@ def main() -> int:
     parser.add_argument("--floor", type=float, default=0.5,
                         help="une fenetre dont l'intensite max reste sous cette fraction "
                              "du max global n'a pas de matiere : ecartee et comptee")
+    parser.add_argument("--amplitude-min", type=float, default=0.02,
+                        help="⚠ amplitude relative (max-min)/moyenne en dessous de "
+                             "laquelle un profil est PLAT : son argmax est du bruit, et "
+                             "le bruit sort aux deux bords, ce qui imite une bimodalite")
     parser.add_argument("--out", type=Path, default=None)
     args = parser.parse_args()
 
@@ -249,6 +285,18 @@ def main() -> int:
             print(f"  ⭐⭐ ECART A LA TRACE (couche {data['couche_tracee']}) : "
                   f"median {data['ecart_trace_um_median']:.0f} µm   "
                   f"p90 {data['ecart_trace_um_p90']:.0f} µm")
+            plates = data["part_plates"] * 100
+            print(f"  ⚠ AMPLITUDE du profil : mediane {data['amplitude_mediane'] * 100:.1f} %"
+                  f"   plates {plates:.0f} %"
+                  f"   ({data['fenetres_avec_relief']} fenetres avec relief)")
+            if data["fenetres_avec_relief"]:
+                print(f"     restreint au relief — tiers central "
+                      f"{data['tiers_central_relief'] * 100:5.0f} %"
+                      f"   au bord {data['au_bord_relief'] * 100:5.0f} %")
+            if plates >= 50.0:
+                print("  ⚠⚠ plus de la moitie des profils sont PLATS : leur argmax est du "
+                      "bruit, et le bruit sort aux deux bords. Les parts « au bord » "
+                      "ci-dessus ne decrivent alors pas la trace.")
             report.append({"folder": folder.name, **data})
         if args.out:
             args.out.write_text(json.dumps(report, indent=2) + "\n")
