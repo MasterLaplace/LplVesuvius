@@ -113,9 +113,15 @@ encore.
 > shift is **14.4 µm** and the median residual is **56.4 µm** — what a translation could
 > remove is **four times smaller** than what it would leave. (Expressed as a share:
 > 21.7 % on Scroll 1, 35.3 % on Scroll 4.) The
-> error is a smooth local deformation inside the sheet, not a mispose. **The useful
-> repair is a warp, not a shift** — and that is worth knowing before anyone builds the
-> shift.
+> error is a smooth local deformation inside the sheet, not a mispose. **On these two
+> scrolls the useful repair is a warp, not a shift** — worth knowing before anyone builds
+> the shift.
+>
+> ⚠ We say *on these two scrolls* deliberately. One Scroll 5 segment returns a rigid share
+> of **0.67** — there a translation would remove two thirds of the error. If that holds
+> across its 53 segments, then *which repair works* is a property of the scroll rather than
+> a constant of the problem. That measurement is running; until it lands, the claim is
+> scoped.
 >
 > #### 7. Negative results we are also reporting
 >

@@ -93,9 +93,21 @@ qu'elle laisserait. `rigid_share` n'est qu'une façon d'écrire ça en pourcenta
 définition (`|décalage| / (|décalage| + résiduel)`) est un choix — les deux nombres bruts
 n'en sont pas un.
 
-⚠ Ce que ça dit de la suite : la réparation utile n'est pas une translation mais un
-**gauchissement** guidé par le champ. Ce document ne l'implémente pas ; il établit
-laquelle des deux valait la peine d'être écrite, ce qui était toute la question.
+⚠ Ce que ça dit de la suite : sur **ces deux rouleaux**, la réparation utile n'est pas une
+translation mais un **gauchissement** guidé par le champ. Ce document ne l'implémente
+pas ; il établit laquelle des deux valait la peine d'être écrite, ce qui était toute la
+question.
+
+⚠⚠ **Et une raison de ne pas généraliser, trouvée le jour même.** `tracecheck` sur un
+segment de **Scroll 5** (PHerc0172, 7,91 µm) rend `rigid_share` = **0,67** — une
+translation y enlèverait **deux tiers** de l'erreur, l'inverse exact du motif ci-dessus.
+Si ça tient sur les 53 segments de ce rouleau, alors *quelle réparation marche* est une
+propriété du **rouleau** et non une constante du problème.
+
+> **n = 1.** C'est une piste, pas un résultat — exactement la situation où les fibres se
+> trouvaient à n = 12 et le détecteur de phase à n = 8. La campagne sur les 53 segments
+> est en file ; d'ici là, la phrase à tenir est **« sur Scroll 1 et Scroll 4 »**, jamais
+> « en général ».
 
 ## 5. Le résiduel reste SOUS une épaisseur de feuille — et j'ai d'abord dit le contraire
 
