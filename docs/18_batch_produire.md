@@ -103,7 +103,7 @@ plupart des pas sont nuls **par construction**.
 
 | # | quoi | état |
 |---|---|---|
-| M1 | vrai **ombilic** | ❌ **le fichier n'existe pas** (zéro occurrence sur les 4 corpus). Remplacé par une **analyse de sensibilité** : de combien le centre doit-il être faux pour que l'invariant bouge — 🔄 au niveau 0 |
+| M1 | vrai **ombilic** | ❌ **le fichier n'existe pas** (zéro occurrence sur les 4 corpus). Remplacé par une **analyse de sensibilité** — 🔄 au niveau 0. ⚠ La version niveau 2 est **invalide** : les seuils y comptent 42 feuilles au lieu de 176 |
 | M2 | plus de bandes **niveau 0** (2 faites : une migre, une non) | ⏳ |
 | M3 | **ESRF 2,4 µm** sur les 4 sites (`06` §3.6) | ⏳ |
 
@@ -115,3 +115,30 @@ plupart des pas sont nuls **par construction**.
 | N2 | `13` : voies A, C, G, H à clore | ✅ les **huit** voies closes |
 | N3 | `HANDOFF` refait | 🔄 §2, §2bis, §3, §4 faits ; §5 et §7 restent |
 | N4 | `tools/temoins.sh` | ✅ **13 contrôles de plus, 79 au total**, dont l'ordre du parallélisme et le cas négatif de la décision |
+
+
+---
+
+## Voie O — le contrôle de robustesse, et ce qu'il impose ⚠⚠
+
+*(ouverte le 2026-08-19, après coup, parce que la mesure l'a réclamée)*
+
+`19` §9 : le critère `avec_matiere` n'est que **modérément** reproductible d'une grille de
+sondage à l'autre (rho **+0,280**, témoin 0,219). La règle survit en **direction** — dix
+gains positifs sur dix, deux échantillonneurs — mais **le plateau qui défendait le seuil
+de 20 % est une propriété de la grille, pas du phénomène**.
+
+⚠ **Le remède qu'on s'interdit** : choisir la grille qui donne le meilleur p. Ce serait
+exactement le sur-ajustement que ce dépôt refuse partout ailleurs.
+
+| # | quoi | état |
+|---|---|---|
+| O1 | comparer les deux grilles existantes | ✅ rho +0,280 (p = 0,012) contre témoin 0,219 |
+| O2 | rejouer la décision avec l'**autre** critère | ✅ direction tenue, **significativité divisée par ~10**, plateau perdu |
+| O3 | mesurer `avec_matiere` avec un sondage **dense** (392 points au lieu de 72) | 🔄 campagne lancée |
+| O4 | l'accord des grilles monte-t-il avec la densité ? | ⏳ c'est la prédiction que O3 teste |
+| O5 | si oui, refaire la décision sur la mesure dense et **re-défendre** un seuil | ⏳ |
+
+⭐ Ce qui rend O4 falsifiable : si l'accord ne monte **pas** avec la densité, alors ce
+n'est pas de l'erreur d'échantillonnage — c'est que les deux grilles mesurent des choses
+différentes, et il faudra dire lesquelles au lieu d'en moyenner.
