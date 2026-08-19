@@ -89,8 +89,10 @@ voie J est l'outil de réparation.
 | `16` | ⭐ quel rouleau du prix attaquer — `PHerc0358`, désigné par la mesure |
 | `17` | ❌ le saut de spire par la phase — **échec définitif** (§10) |
 | **`18`** | **le batch en cours** : produire, pas juger |
+| **`15`** | ⭐ **ce qui est soumissionnable**, trié contre les critères écrits du concours |
 | **`19`** | ⭐⭐ **la première règle qui CHANGE une décision** — p = 0,0005 contre 2000 permutations |
 | **`20`** | ⭐⭐ **le champ de correction** : l'erreur d'une trace est structurée, et **translater ne la répare pas** |
+| **`21`** | **le brouillon de la soumission**, résultats négatifs compris. ⚠ Ses chiffres sont gardés par `verifier_chiffres.py`, lancé dans `tools/temoins.sh` |
 
 ## 4. L'outillage, et comment le relancer
 
