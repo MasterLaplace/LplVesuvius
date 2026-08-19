@@ -277,12 +277,15 @@ transaction sur un nom inconnu.
    condamnerait 64 segments sur 80 qui portent visiblement de l'encre, et **8 %** seulement
    de ceux qui le dépassent tombent dans le premier décile contre 10 % attendus au hasard.
 
-19ter. ⚠ **La sensibilité du centre, au niveau 0** : déplacer le centre jusqu'à 3,16 mm
-   (22 écarts inter-feuilles) déplace l'invariant de **5,65 %** au maximum — soit **trois
-   fois** le cv de 1,8 %. ⚠⚠ La première version, au **niveau 2**, annonçait 1,85 % et
-   était **invalide** : les seuils de comptage sont calés au niveau 0 et y comptaient 42
-   feuilles au lieu de 176 (piège nº 1, repayé). Un balayage fin tourne pour situer la
-   marche.
+19ter. ✅ **L'invariant tient à un centre faux** (`11` §12) : déplacer le centre de
+   **3,16 mm** — 22 écarts inter-feuilles — bouge l'invariant de **1,75 %** au maximum,
+   soit **sous** le cv de 1,8 %. `06` §2.3 est donc clos **sans ombilic**, lequel n'est de
+   toute façon pas publié (zéro occurrence sur 4 corpus).
+   ⚠⚠ **Deux artefacts traversés avant d'y arriver, et ils se ressemblent** : au niveau 2
+   les seuils de comptage trouvaient 42 feuilles au lieu de 176 (piège nº 1) ; à **3
+   tranches** le bruit d'échantillonnage produisait **5,65 %** et une « marche » nette dès
+   la plus petite perturbation, avec une explication toute prête. À 6 tranches, plus rien.
+   **Un effet réel ne fond pas quand on l'échantillonne mieux.**
 
 20. ❌ **Le saut de spire par la phase est mort définitivement** (`17` §10). Le volume
    `cos` n'est publié qu'aux niveaux **3, 4, 5** — le niveau 3 EST le plus fin, donc

@@ -560,3 +560,75 @@ uv run python src/excision/track_z.py \
 uv run python src/excision/track_z.py ../docs/survey/bande_0*.json \
     --level 2 --trials 5000 --out ../docs/pistes_survey_0172.json
 ```
+
+---
+
+## 12. ✅ L'invariant tient à un centre faux — et `06` §2.3 est clos sans ombilic
+
+*(2026-08-19)* `06` §2.3 voulait revérifier l'onde radiale avec le **vrai ombilic**, en
+soupçonnant le centre d'être biaisé. Deux faits ont remplacé la question :
+
+1. ⚠ **`umbilicus.txt` n'existe pas.** Vérifié préfixe par préfixe sur le bucket ouvert :
+   **zéro occurrence** du mot pour PHercParis4, PHerc0139, PHerc1667 et Scroll1. Le
+   fichier noté dans `06` n'est pas à une autre adresse — il n'est pas publié.
+2. ⭐ **Le centre n'est pas un barycentre**, contrairement à ce que `06` §2.3 dit. Il est
+   ajusté sur la seule condition qu'une trace de rouleau soit une **spirale** : le centre
+   admissible est celui qui rend l'angle monotone le long de la trace, et la mesure
+   **refuse** en dessous de 0,9 de monotonie. Celui de PHerc0172 vaut **1,000**.
+
+La vraie question ne demande alors aucun fichier : **de combien le centre doit-il être
+faux pour que l'invariant bouge ?**
+
+### La mesure
+
+`experiments/src/excision/sensibilite_centre.py`, niveau 0, 6 tranches, décalage appliqué
+**en diagonale** (déplacer selon un seul axe est le cas le plus favorable, la moitié des
+rayons le compensant) :
+
+| décalage | en µm | feuilles | rayon (mm) | invariant (µm) | écart |
+|---:|---:|---:|---:|---:|---:|
+| 0 | 0 | 164,0 | 23,37 | **142,5** | — |
+| 3 | 24 | 163,5 | 23,36 | 142,9 | +0,27 % |
+| 6 | 47 | 162,0 | 23,37 | 144,3 | +1,24 % |
+| 12 | 95 | 163,0 | 23,39 | 143,5 | +0,69 % |
+| 25 | 198 | 164,0 | 23,41 | 142,8 | +0,17 % |
+| 50 | 396 | 161,5 | 23,42 | 145,0 | **+1,75 %** |
+| 100 | 791 | 162,5 | 23,47 | 144,4 | +1,33 % |
+| 200 | 1582 | 162,0 | 23,10 | 142,6 | +0,04 % |
+| 400 | **3164** | 156,5 | 22,12 | 141,3 | −0,83 % |
+
+> ⭐ **Déplacer le centre de 3,16 mm — soit 22 écarts inter-feuilles — déplace l'invariant
+> de 1,75 % au maximum**, c'est-à-dire **sous** le cv de 1,8 % mesuré le long de z avec le
+> bon centre. Aucune erreur de centre plausible n'approche ces perturbations. **L'ombilic
+> n'est pas nécessaire.**
+
+⚠ Et une confirmation indépendante tombe au passage : au décalage nul, l'invariant vaut
+**142,5 µm** contre les **142,8 µm** publiés au §3, sur un jeu de tranches différent.
+
+### ⚠⚠ Deux artefacts traversés avant d'y arriver, et ils se ressemblent
+
+| version | résultat | ce qui n'allait pas |
+|---|---|---|
+| niveau **2**, 6 tranches | 1,85 % | **invalide** : les seuils de comptage sont calés au niveau 0 et y trouvent **42 feuilles au lieu de 176** (piège nº 1) |
+| niveau 0, **3 tranches** | **5,65 %**, avec une « marche » de 4 % dès la plus petite perturbation | **bruit d'échantillonnage** : à 3 tranches la médiane saute. La marche n'existe pas |
+| niveau 0, **6 tranches** | **1,75 %**, aucune marche | ✅ |
+
+> ⚠⚠ **Trois tranches ont produit un effet qui n'existe pas**, et il avait l'air d'un
+> résultat : un seuil net, une amplitude plausible, une explication toute prête (« la
+> mesure compte des pics, donc elle procède par marches »). C'est la forme exacte des
+> fibres à n = 12 et du détecteur de phase à n = 8. **Un effet réel ne fond pas quand on
+> l'échantillonne mieux.**
+
+### Reproduire
+
+```bash
+cd experiments
+VOL="s3://vesuvius-challenge-open-data/PHerc0172/volumes/20241024131839-7.910um-53keV-masked.zarr"
+uv run python -u src/excision/sensibilite_centre.py PHerc0172 "$VOL" \
+    --level 0 --slices 6 --decalages 0 3 6 12 25 50 100 200 400 --step-deg 30 \
+    --out ../docs/sensibilite_centre_L0_fine.json
+```
+
+⚠ `python -u` : sans lui le log reste vide pendant une heure et ressemble à un job mort.
+⚠ Le plan est lu **une fois par tranche**, pas une fois par décalage — la première version
+relisait le même plan à chaque centre et restait bloquée à 0 % de CPU pendant onze minutes.

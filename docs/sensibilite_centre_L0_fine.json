@@ -1,0 +1,87 @@
+{
+  "centre": "PHerc0172",
+  "niveau": "0",
+  "voxel_um": 7.91,
+  "tranches": [
+    1337,
+    3589,
+    5841,
+    8093,
+    10345,
+    12597
+  ],
+  "mesures": [
+    {
+      "decalage_vx": 0.0,
+      "decalage_um": 0.0,
+      "feuilles_medianes": 164.0,
+      "rayon_mm": 23.3720725,
+      "invariant_um": 142.51263719512195,
+      "ecart_pct": 0.0
+    },
+    {
+      "decalage_vx": 3.0,
+      "decalage_um": 23.73,
+      "feuilles_medianes": 163.5,
+      "rayon_mm": 23.3641625,
+      "invariant_um": 142.9000764525994,
+      "ecart_pct": 0.2718630888480258
+    },
+    {
+      "decalage_vx": 6.0,
+      "decalage_um": 47.46,
+      "feuilles_medianes": 162.0,
+      "rayon_mm": 23.37405,
+      "invariant_um": 144.28425925925924,
+      "ecart_pct": 1.243133310144043
+    },
+    {
+      "decalage_vx": 12.0,
+      "decalage_um": 94.92,
+      "feuilles_medianes": 163.0,
+      "rayon_mm": 23.389870000000002,
+      "invariant_um": 143.49613496932517,
+      "ecart_pct": 0.6901126760124815
+    },
+    {
+      "decalage_vx": 25.0,
+      "decalage_um": 197.75,
+      "feuilles_medianes": 164.0,
+      "rayon_mm": 23.4116225,
+      "invariant_um": 142.75379573170733,
+      "ecart_pct": 0.16921905406549342
+    },
+    {
+      "decalage_vx": 50.0,
+      "decalage_um": 395.5,
+      "feuilles_medianes": 161.5,
+      "rayon_mm": 23.4195325,
+      "invariant_um": 145.01258513931887,
+      "ecart_pct": 1.754193868978862
+    },
+    {
+      "decalage_vx": 100.0,
+      "decalage_um": 791.0,
+      "feuilles_medianes": 162.5,
+      "rayon_mm": 23.4669925,
+      "invariant_um": 144.41226153846154,
+      "ecart_pct": 1.332951505724156
+    },
+    {
+      "decalage_vx": 200.0,
+      "decalage_um": 1582.0,
+      "feuilles_medianes": 162.0,
+      "rayon_mm": 23.0972,
+      "invariant_um": 142.5753086419753,
+      "ecart_pct": 0.04397606281578443
+    },
+    {
+      "decalage_vx": 400.0,
+      "decalage_um": 3164.0,
+      "feuilles_medianes": 156.5,
+      "rayon_mm": 22.118337500000003,
+      "invariant_um": 141.33123003194888,
+      "ecart_pct": -0.8289841423364771
+    }
+  ]
+}

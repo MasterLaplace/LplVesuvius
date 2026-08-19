@@ -103,7 +103,7 @@ plupart des pas sont nuls **par construction**.
 
 | # | quoi | état |
 |---|---|---|
-| M1 | vrai **ombilic** | ❌ **le fichier n'existe pas** (zéro occurrence sur les 4 corpus). Remplacé par une **analyse de sensibilité** — 🔄 au niveau 0. ⚠ La version niveau 2 est **invalide** : les seuils y comptent 42 feuilles au lieu de 176 |
+| M1 | vrai **ombilic** | ✅ **clos sans lui** (`11` §12). Le fichier n'existe pas (zéro occurrence sur 4 corpus) et le centre n'est pas un barycentre mais un ajustement sur la monotonie de la spirale (1,000). Mesuré : déplacer le centre de **3,16 mm** — 22 écarts inter-feuilles — bouge l'invariant de **1,75 %**, soit **sous** le cv de 1,8 %. ⚠⚠ Deux artefacts traversés avant : niveau 2 (seuils calés au niveau 0) et **3 tranches**, qui produisaient 5,65 % et une « marche » qui n'existe pas |
 | M2 | plus de bandes **niveau 0** (2 faites : une migre, une non) | ⏳ ~50 min par bande, `tools/bandes_niveau0.sh`. Le crible niveau 2 ne peut PAS répondre : dans la même plage de z il regarde ailleurs (`11` §11) |
 | M3 | **ESRF 2,4 µm** sur les 4 sites (`06` §3.6) | ❌ **impossible, pas en attente** — les 4 sites de fusion sont sur **PHerc0172**, qui ne publie que du **7,91 µm** (deux volumes, vérifié sur le bucket). Le scan plus fin n'existe pas pour ce rouleau. ⚠ La partie « même segment à trois résolutions » de `06` §3.6 est, elle, **faite** : c'est la campagne 45,5 / 2,4 / 1,13 µm de Scroll 1 |
 
