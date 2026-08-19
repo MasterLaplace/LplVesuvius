@@ -1,0 +1,38 @@
+{
+  "segments": 80,
+  "part_rigide_mediane": 0.2174242424242424,
+  "residuel_en_ecarts_inter_feuilles": 0.3949579831932773,
+  "coherence_mediane": 0.3252898154475079,
+  "temoin_median": -0.008468650920085344,
+  "coherence_bat_temoin": 80,
+  "p_mann_whitney": 1.2854821651911385e-25,
+  "rho_detectable": 0.308846943210609,
+  "correlations_encre": {
+    "coherence_voisins": {
+      "rho": -0.022961157089222074,
+      "p": 0.8397875574620309,
+      "n": 80
+    },
+    "residuel_median_um": {
+      "rho": -0.028259791518412406,
+      "p": 0.8034885545914475,
+      "n": 80
+    },
+    "|decalage_median_um|": {
+      "rho": -0.08448098747028694,
+      "p": 0.4562342585384143,
+      "n": 80
+    },
+    "part_au_bord": {
+      "rho": -0.2747627065062093,
+      "p": 0.01364232430925826,
+      "n": 80
+    }
+  },
+  "apparie_decalage": {
+    "n": 38,
+    "encre_coherent": 4.882352941176471,
+    "encre_incoherent": 4.757575757575758,
+    "p": 0.12144576422896408
+  }
+}

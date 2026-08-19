@@ -86,8 +86,22 @@ def main() -> int:
     if gagne <= bon.sum() * 0.6:
         print("⚠⚠ la coherence ne bat pas son temoin : la suite ne veut rien dire")
 
+    # ⚠⚠ LE RAPPORT QUI DIT QUELLE REPARATION EST LA BONNE. Le decalage median est la
+    # part de l'erreur qu'une TRANSLATION du maillage enleverait ; le residuel est ce
+    # qu'elle laisserait. Si le residuel domine, translater ne repare presque rien --
+    # l'erreur est une deformation locale, pas une pose ratee, et le remede n'est pas le
+    # meme. C'est la question de production, et elle se lit dans un seul rapport.
+    part_rigide = dec / np.maximum(dec + res, 1e-9)
+    print(f"\npart de l'erreur qu'une TRANSLATION enleverait : "
+          f"mediane {float(np.median(part_rigide)) * 100:.1f} %  "
+          f"(p90 {float(np.percentile(part_rigide, 90)) * 100:.1f} %)")
+    print(f"⚠ le pas inter-feuilles vaut ~142,8 um ; le residuel median vaut "
+          f"{float(np.median(res)) / 142.8:.2f} ecart(s) inter-feuilles")
+
     rapport = {
         "segments": len(lignes),
+        "part_rigide_mediane": float(np.median(part_rigide)),
+        "residuel_en_ecarts_inter_feuilles": float(np.median(res)) / 142.8,
         "coherence_mediane": float(np.median(coh[bon])),
         "temoin_median": float(np.median(tem[bon])),
         "coherence_bat_temoin": gagne,

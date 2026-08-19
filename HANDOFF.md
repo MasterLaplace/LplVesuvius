@@ -1,4 +1,4 @@
-# Reprise de session — état au 2026-08-18
+# Reprise de session — état au 2026-08-19
 
 Document de passation. **À lire en entier avant de reprendre.**
 
@@ -19,22 +19,19 @@ Document de passation. **À lire en entier avant de reprendre.**
 ⚠ Pousser l'AUC plus haut, chercher un meilleur détecteur d'encre ou faire transcrire
 davantage **ne sert pas** l'objectif.
 
-## 2. ⚠ CE QUI TOURNE (2026-08-18, 11 h 30)
+## 2. ⚠ CE QUI TOURNE (2026-08-19)
 
-| quoi | sortie | reste |
-|---|---|---|
-| profondeur sur **80 segments** de Scroll 1 | `docs/profondeur_corpus_2.4um.json` | ~48 |
-| **fibres sur 80 segments**, en file derrière | `docs/fibres_corpus.json` | tout |
-| traces `tifxyz` de **PHerc0814** | `data/traces/PHerc0814` | ~13 |
+**Rien.** Les trois campagnes du 18 ont rendu (profondeur ×80, fibres ×80, traces ×71)
+et celle du 19 aussi (champ de correction ×80).
 
 ```bash
-ps -eo etime,pcpu,cmd | grep -E "[z]arr_depth|[f]iber_orient|[f]etch_traces"
-grep -c couches docs/profondeur_corpus.log ; grep -c desaccord docs/fibres_corpus.log
+ps -eo etime,pcpu,cmd | grep -E "[z]arr_depth|[c]hamp_correction|[f]iber_orient"
 ```
 
 ⚠ **Juger sur un fichier de résultat, jamais sur une notification** : celles-ci
 concernent le *wrapper*, pas le travail `nohup`, et un log vide veut dire « Python
-bufferise ».
+bufferise ». ⚠ Et **vérifier l'horodatage d'un log avant d'en citer le verdict** — un log
+vieux de sept heures a déjà été lu comme un résultat frais.
 
 ⚠ Pour libérer la machine sans rien perdre : `kill -STOP` les calculs (ils reprennent à
 l'identique) et tuer les `curl` — c'est la **bande passante** qui fait bégayer un Zoom.
@@ -42,9 +39,14 @@ l'identique) et tuer les `curl` — c'est la **bande passante** qui fait bégaye
 
 ## 2bis. ⭐ La liste de ce qui reste ouvert
 
-**[`docs/13_batch_epuisement.md`](docs/13_batch_epuisement.md)** — six voies, et elles se
-cochent là. Un item se ferme de **deux** façons également valables : *fait et mesuré*,
-ou *écarté avec la raison écrite*.
+**[`docs/18_batch_produire.md`](docs/18_batch_produire.md)** — le batch en cours. Le
+précédent, [`13`](docs/13_batch_epuisement.md), est **clos** : ses huit voies sont
+fermées, chacune par une mesure ou par une raison écrite.
+
+⭐ **Ce que `18` attaque est d'une autre nature.** `13` fermait ce qui était ouvert ;
+`18` répond à la remarque que `13` a laissée derrière lui — *tous nos instruments
+jugent, aucun n'a encore changé quoi que ce soit*. La voie I est **faite** (`19`), la
+voie J est l'outil de réparation.
 
 ## 3. Le projet
 
@@ -66,12 +68,16 @@ ou *écarté avec la raison écrite*.
 | **`11`** | ⭐ **onde radiale, dépliage polaire, fusions localisées en 3D, la dérive** |
 | **`12`** | ⭐⭐ **la profondeur de surface : qualité de tracé SANS vérité terrain** — lire le §10 d'abord, l'instrument a été corrigé deux fois |
 | **`13`** | **la liste du batch d'épuisement**, cochée au fur et à mesure |
-| `14` | ⭐ la direction des fibres — problème ouvert nº 5 |
+| `14` | ⭐ la direction des fibres — ❌ **réfutée**, le signe s'inverse quand n monte |
+| `16` | ⭐ quel rouleau du prix attaquer — `PHerc0358`, désigné par la mesure |
+| `17` | ❌ le saut de spire par la phase — **échec définitif** (§10) |
+| **`18`** | **le batch en cours** : produire, pas juger |
+| **`19`** | ⭐⭐ **la première règle qui CHANGE une décision** — p = 0,0005 contre 2000 permutations |
 
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./tools/temoins.sh                      # 16 contrôles hors ligne, tous verts
+./tools/temoins.sh                      # 79 contrôles hors ligne, tous verts
 ./tools/mirror_site.sh                  # miroir + contrôle de couverture
 ./tools/fetch_layers.sh <url> <dest> <largeur> <de> <a>   # couches, reprenable
 ./tools/ppm_to_tifxyz.py <in.ppm> <out.tifxyz>            # .ppm de VC -> tifxyz
@@ -81,6 +87,7 @@ ou *écarté avec la raison écrite*.
 ./tools/lister_volumes_surface.sh <rouleau> <sortie>      # qui publie un volume Zarr
 ./tools/fetch_cartes_encre.sh <rouleau> <dest>            # cartes d'encre PUBLIEES
 ./tools/reprendre.sh                                      # degeler apres un kill -STOP
+./tools/campagne_champ.sh <rouleau> <motif> <voxel_um>    # champ de correction, REPRENABLE
 
 cd experiments   # geometrie
 uv run python src/excision/radial.py {centre|compter|profil|deplier|axe} …
@@ -90,6 +97,7 @@ uv run python src/excision/track_z.py <scans.json> …      # appariement PREDIC
 uv run python src/excision/baseline_sweep.py <traces> <out.jsonl>   # references locales
 uv run python src/excision/variant_correlate.py <sweep> <index.json>
 uv run python src/excision/pyramid.py <volume>            # separabilite par niveau
+uv run python src/excision/sensibilite_centre.py <nom> <volume>    # l'invariant tient-il ?
 uv run python src/excision/shape.py {degradation|ellipticite} <volume>
 uv run python -m excision.proximity <mesh.tifxyz> --json
 
@@ -99,9 +107,13 @@ uv run python ../analysis/src/{evaluate_segment,render_segment,structure}.py …
 uv run python ../analysis/src/judge_api.py --list-models
 uv run python ../analysis/src/judge_api.py <pred.npy> --bands-only   # sans cle
 uv run python ../analysis/src/depth_profile.py <couches…> --grid     # qualite de trace
-uv run python ../analysis/src/zarr_depth.py <cle .zarr> --courbe     # ⭐ a DISTANCE
+uv run python ../analysis/src/zarr_depth.py <cle .zarr> --courbe --fils 16   # ⭐ x8,35
 uv run python ../analysis/src/fiber_orientation.py <cle .zarr>       # ⭐ fibres
 uv run python ../analysis/src/croiser_instruments.py <index.json> <mesures.json>
+uv run python ../analysis/src/champ_correction.py <cle .zarr> --voxel-um 2.4  # ⭐⭐ REPARABLE ?
+uv run python ../analysis/src/croiser_encre.py <profondeur.json> <cartes/>    # ⭐⭐ la DECISION
+uv run python ../analysis/src/table_champ.py <champs/> --encre <rapport.json>
+uv run python ../analysis/src/resolution_phase.py <saut_spire/>
 uv run python ../analysis/src/compare_maps.py <a.npy> <b.npy>
 uv run python ../analysis/src/proximity_vs_ink.py <mesh> <pred> <labels>
 ```
