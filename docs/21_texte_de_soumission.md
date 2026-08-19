@@ -153,6 +153,6 @@ encore.
 | # | quoi |
 |---|---|
 | 1 | publier le dépôt (`tracecheck/` au minimum) et mettre l'adresse dans le texte |
-| 2 | revérifier **chaque chiffre** contre son fichier de sortie, le jour de l'envoi |
+| 2 | ~~revérifier chaque chiffre contre son fichier de sortie~~ ✅ **c'est une commande maintenant** — `analysis/src/verifier_chiffres.py` recalcule les 12 chiffres depuis leurs JSON et les cherche littéralement dans les documents. Sort **1** si l'un manque, **2** si un fichier de résultat est absent (sinon il passerait au vert en ne vérifiant rien) |
 | 3 | joindre les deux figures de champ **et** `profondeur_deux_cas.png` |
 | 4 | ⚠ décider si le corps part en anglais — c'est la seule décision de forme ouverte |

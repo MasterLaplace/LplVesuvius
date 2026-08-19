@@ -362,6 +362,19 @@ ck(0.280 > 0.219 and 0.280 < 2 * 0.219, "bat le hasard, et de peu")
 print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
+# ⚠ Celui-ci n'est pas une batterie d'assertions mais un GARDE-FOU de fraicheur : il
+# recalcule les chiffres publies depuis leurs JSON et les cherche dans les documents.
+printf '  %-30s ' "chiffres de la soumission"
+if uv run python "$ROOT/analysis/src/verifier_chiffres.py" \
+      "$ROOT/docs/21_texte_de_soumission.md" \
+      "$ROOT/docs/19_ecarter_avant_de_payer.md" \
+      "$ROOT/docs/20_le_champ_de_correction.md" \
+      "$ROOT/docs/12_profondeur_de_surface.md" >/tmp/chiffres.log 2>&1; then
+  printf '✅ %s\n' "$(grep -c '✅' /tmp/chiffres.log) chiffres retrouves"
+else
+  printf '❌ ECHEC\n'; sed 's/^/       /' /tmp/chiffres.log | tail -6; FAIL=$((FAIL + 1))
+fi
+
 echo
 if [ "$FAIL" -eq 0 ]; then
   echo "TOUS LES TEMOINS PASSENT"
