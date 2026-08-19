@@ -21,7 +21,7 @@ davantage **ne sert pas** l'objectif.
 
 ## 2. ⚠ CE QUI TOURNE (2026-08-19, fin de journée)
 
-**Rien.** Toutes les campagnes ont rendu.
+**Rien.** Toutes les campagnes ont rendu, y compris celle des graines (12 rouleaux).
 
 ```bash
 ps -eo etime,pcpu,cmd | grep -E "[z]arr_depth|[c]hamp_correction|[v]c_grow|[v]c_render"
@@ -49,6 +49,14 @@ ouvert)*, [`18`](docs/18_batch_produire.md) *(produire, pas juger)*,
 il l'a **réfutée hors de Scroll 1**, puis a débouché sur autre chose : **VC3D est
 construit**, la chaîne officielle est pilotable en ligne de commande, et
 [`24`](docs/24_premiere_trace_rouleau_du_prix.md) a tracé un **rouleau du Grand Prize**.
+
+⭐⭐ **Et le lot du 19 août après-midi a fermé T1**, avec deux corrections que la mesure a
+imposées : [`25`](docs/25_une_graine_choisie_sur_la_planeite.md). Le critère de graine passe
+sur la **planéité locale**, la campagne appariée sur **12 rouleaux du prix** donne
+p = 0,0386 sur l'aire — et **zéro auto-intersection des deux côtés**, donc le « 240 → 0 »
+de `24` est l'accident d'un seul rouleau. Le vrai coupable de `24` est ailleurs et il est
+nommé : sa graine était dans un bloc **entièrement plein** (occupation 1,000), donc sans
+géométrie à suivre.
 
 > **Le prochain lot n'est plus un batch de mesure.** Il est décrit au §7.
 
@@ -82,7 +90,8 @@ construit**, la chaîne officielle est pilotable en ligne de commande, et
 | **`21`** | **le brouillon de la soumission**, résultats négatifs compris. ⚠ Ses chiffres sont gardés par `verifier_chiffres.py`, lancé dans `tools/temoins.sh` |
 | `22` | le batch « répliquer » — clos, et il a réfuté ce qu'il devait consolider |
 | `23` | ⭐ **l'inventaire des 13 rouleaux du prix** — 10 n'ont AUCUN segment |
-| **`24`** | ⭐⭐ **la première trace d'un rouleau du prix**, condamnée par nos instruments avant le rendu |
+| **`24`** | ⭐⭐ **la première trace d'un rouleau du prix**, condamnée par nos instruments avant le rendu. ⚠ Son §2 est **corrigé** : le verdict tient sur deux instruments, pas trois |
+| **`25`** | ⭐⭐ **la graine choisie sur la planéité** — et la réplication sur 12 rouleaux qui a corrigé la revendication deux fois |
 
 ## 4. L'outillage, et comment le relancer
 
@@ -433,15 +442,23 @@ cible — le pool ouvert fait **2 140 000 $** et le Grand Prize n'est pas le seu
 
 | # | quoi | blocage |
 |---|---|---|
-| **T1** ⭐⭐ | **faire suivre UNE feuille au traceur** — c'est tout ce qui sépare `24` d'une soumission First Letters | voir §7bis, tout y est |
-| **T2** ⭐ | rejouer la boucle `24` sur d'autres graines et d'autres rouleaux **une fois T1 réglé** | rien — la chaîne est pilotable et chaque essai coûte ~15 min |
+| ~~T1~~ | ~~faire suivre une feuille au traceur~~ | ✅ **fermé le 2026-08-19** — mais en **deux moitiés**, et une seule est faite (`25`). *Où l'on part* est réglé ; *comment on avance* ne l'est pas |
+| **T1b** ⭐⭐ | **`direction_fields`** — la seule moitié qui reste, et l'image dit pourquoi : notre surface est posée **en travers** de l'empilement, ce que zéro auto-intersection n'interdit pas | ⚠ les `normal-grids` publiées (182 Mo) sont en `xy/ xz/ yz/`, le paramètre veut un **chemin local** et la disposition `<zarr>/{x,y,z}/<niveau>`. `vc_gen_normalgrids` est installé |
+| ~~T2~~ | ~~rejouer la boucle sur d'autres rouleaux~~ | ✅ **fait** — `tools/campagne_graines.sh`, 12 rouleaux, appariée, reprenable |
 | **T3** ⭐ | le **titre de Scroll 1** — *« looking somewhere new »* | c'est un problème de **recherche** sur le corpus où tous nos instruments marchent |
 | T4 | finir et envoyer la soumission Progress Prize | ⏳ le texte existe (`21`), les chiffres sont gardés, il reste à publier le dépôt et à joindre les figures |
 | R2 | exporter le champ de correction en coordonnées de fenêtre | — |
 | — | le **pas inter-feuilles de PHerc1667** | ⚠ aucune prédiction de surface publiée pour ce rouleau : on ne juge pas ses sauts de feuille |
 | — | le trend **position dans le rouleau** ↔ résiduel | ⚠ **NON établi** : trois corpus, trois motifs différents |
 
-## 7bis. ⭐⭐ T1 en détail — reprendre sans rien re-dériver
+## 7bis. ⭐ T1 — ce qui a été fait, et ce qui reste (mis à jour le 2026-08-19)
+
+> ✅ **La moitié « où l'on part » est faite** : `analysis/src/trouver_graine.py` classe sur
+> la planéité locale, `tracecheck.py --seed` la publie, et la campagne appariée sur
+> 12 rouleaux la valide (`25`). ⚠ **La moitié « comment on avance » ne l'est pas** — voir
+> T1b. Ce qui suit est le contexte d'origine, gardé parce qu'il reste exact.
+
+### Le contexte d'origine
 
 **L'état exact** : la chaîne tourne de bout en bout (`docs/24`), les artefacts sont dans
 [`artefacts/PHerc0358/`](artefacts/PHerc0358/) (2,2 Mo, dont le maillage et les paramètres
@@ -520,6 +537,27 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
    d'en rendre plutôt que d'en rendre de faux (`--blank-ceiling`).
 
 **Outillage**
+9bis. ⚠⚠ **`pgrep -x <nom>` échoue en silence au-delà de 15 caractères.** Linux tronque
+    `comm` à 15 octets, donc `pgrep -x vc_render_tifxyz` ne matche **jamais** — et une
+    boucle d'attente bâtie dessus sort **immédiatement**. Symptôme : on lit un TIFF dont
+    l'IFD vaut `0x00000000`, c'est-à-dire un rendu à moitié écrit qui ressemble à un rendu
+    fini. Attendre **par PID** (`while kill -0 $PID`), ou matcher le nom tronqué.
+9ter. ⚠⚠ **Un argmax sur un échantillon nombreux sature contre la borne du score.** Le
+    maximum de 13 824 blocs pour un score borné par 1 vaut ~1 quel que soit le terrain.
+    C'est le piège nº 2 à un étage de plus, et je l'ai écrit **dans le fichier qui
+    documentait déjà le piège**. Classer sur une **moyenne de voisinage**, pas sur un max.
+9quater. ⚠⚠ **Une fenêtre plus étroite que la structure mesurée ne peut rien voir.** 21
+    couches à 9,362 µm valent ±94 µm, soit une **demi**-distance inter-feuilles : le profil
+    est plat à 1,5 %, et l'argmax d'un profil plat sort **aux deux bords**, ce qui imite
+    une bimodalité. Vérifier l'**amplitude** avant de lire une position de pic.
+9quinquies. ⚠⚠ **Un entier nu dans une recherche littérale ne peut pas être absent.**
+    `verifier_chiffres` cherchait « 80 » et « 10 » dans des documents en prose : trouvés
+    toujours, donc contrôles incapables d'échouer — **deux entrées antérieures** étaient
+    concernées. Un chiffre se garde **avec son contexte** (« 80 segments »), jamais nu.
+9sexies. ⚠⚠ **`vc_grow_seg_from_seed` n'est pas reproductible**, même en `thread_limit: 1`
+    (la valeur que VC3D utilise) : quatre exécutions de la même graine rendent quatre
+    aires, à 0,08 % près. Les quatre rendent **0 auto-intersection** — donc juger par un
+    **invariant**, jamais par l'artefact.
 10. ⚠⚠ **Un outil validé sur 300 K cellules ne tient pas sur 21 M** : un `cKDTree`
    global y prend des gigaoctets et **a fait tomber la machine trois fois**. Découper
    en **blocs 3D** (validé à 0,0 % d'écart), jamais en tuiles de paramétrisation —
