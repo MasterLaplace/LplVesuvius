@@ -214,28 +214,72 @@ coordonnées : à 1, 3 et 4 les lectures tombent hors du champ et la contrainte 
 à **2** elles tombent dedans. **2,0 est donc la bonne registration** — et c'est bien là que
 le champ nuit.
 
-## 6. ⏳ La piste qui reste, et elle est nommée
+## 6. ⭐⭐ Le SECOND mécanisme, celui qui manquait : `normal_grid_path`
 
-`libvc_core.so` contient un **second mécanisme**, distinct de `direction_fields`, dont les
-messages décrivent exactement le format que le concours publie :
+`libvc_core.so` porte un mécanisme distinct de `direction_fields`, et ses messages
+décrivent exactement le format que le concours publie :
 
 ```
 Not a normal-grid directory (expected xy/, xz/, yz/ subdirs and metadata.json).
-Skipping normal_grid '{}': path does not exist
-Remote normal_grid entry '{}' not yet supported.
 ```
 
-C'est `NormalGridVolume(path, level)`, consommé par `NormalConstraintPlane::
-calculate_normal_snapping_loss` — donc le terme **`NORMAL`, celui qui pèse 10**. Et les
-`.normal-grids` publiées à côté de chaque prédiction (182 Mo, `xy/ xz/ yz/`) sont
-**déjà dans ce format**, sans conversion : ce sont les sorties de `vc_gen_normalgrids`.
+C'est `NormalGridVolume(chemin, niveau)`, consommé par `NormalConstraintPlane::
+calculate_normal_snapping_loss` — donc le terme **`NORMAL`, celui qui pèse 10**, le
+dominant.
 
-⚠ La clé `normal_grids` **n'est pas lue** par le `seed.json` de ce binaire (un tableau
-d'objets passe sans un mot, quelle que soit la forme essayée). Elle vient donc d'ailleurs —
-le paquet de volume, un manifeste `normal-grids-remote.json`, ou une découverte à côté du
-volume, ce qu'une URL `https://` empêche. **C'est la prochaine chose à trouver**, et c'est
-un meilleur candidat que `direction_fields` : c'est le terme dominant, et son format est
-déjà publié.
+⚠⚠ **Et la clé est `normal_grid_path`, au singulier et à la racine du `seed.json`.**
+Elle est bel et bien lue :
+
+```
+Loaded normal grid level 0 (coordinate_scale=1, output_spiral_step=20)
+```
+
+> ⚠⚠ **Correction d'une affirmation que j'avais publiée quelques heures plus tôt** :
+> j'avais écrit que la clé « n'est pas lue ». Elle l'est. Mon sondage passait un chemin
+> **inexistant**, et le chargeur l'ignore **sans un mot** — c'est un échec silencieux, pas
+> une absence de clé. La leçon est celle que ce dépôt connaît : *sonder avec une entrée
+> valide, sinon on mesure le silence d'un refus au lieu de la présence d'une
+> fonctionnalité.*
+
+⚠ `output_spiral_step=20` doit valoir le `step_size` du traceur — l'outil se plaint sinon
+d'un « step_size parameter mismatch ». Les grilles publiées sont à **20,0**, comme le
+défaut du traceur, donc ça tombe juste.
+
+### Ce que ça pèse, mesuré
+
+⚠ **Correction d'un second chiffre** : j'avais écrit « 182 Mo » de mémoire. Inventaire réel
+des `.normal-grids` de `PHerc0358` :
+
+| dossier | indexé par | fichiers | taille | médiane |
+|---|---|---:|---:|---:|
+| `xy/` | z | 14 744 | 3,83 Go | 276 ko |
+| `xz/` | y | 7 783 | 3,27 Go | 433 ko |
+| `yz/` | x | 7 783 | 3,30 Go | 404 ko |
+| **total** | | **30 310** | **10,40 Go** | |
+
+⭐ **Mais on n'en prend pas 10 Go** : chaque dossier étant indexé par un seul axe, une boîte
+se traduit en trois intervalles de tranches. Une boîte de ±700 voxels autour de la graine
+fait **1,1 Go**, récupéré en moins d'une minute avec le pool de connexions persistantes.
+
+### ⭐ Le chaînon que l'aide de `vc_ngrids` révèle
+
+```
+- Input can be a directory created by vc_gen_normalgrids (contains metadata.json and xy/xz/yz).
+- Or, input can be a normals zarr root (contains x/0, y/0, z/0 datasets).
+    --output-zarr PATH  Write fitted normals to a zarr directory (direction-field encoding)
+    --align-normals     Align normals in an existing normals zarr
+```
+
+**Les deux formats sont les deux bouts d'une même chaîne** : `vc_ngrids --fit-normals
+--output-zarr` convertit une `NormalGridVolume` en la disposition `x/0, y/0, z/0` que
+`direction_fields` attend — celle-là même que j'avais fabriquée à la main depuis les
+`nx`/`ny` de lasagna.
+
+⚠⚠ **Ce qui explique pourquoi mon champ nuisait** : les `nx`/`ny` de lasagna sont un champ
+**2D**, sans composante verticale, et je forçais `z` à zéro. Un vrai champ de normales de
+feuille en a une. J'avais mesuré l'accord à 6°, mais **uniquement sur les composantes
+x et y** — la seule chose que je pouvais comparer, et donc la seule chose que j'ai
+validée.
 
 ## 7. Reproduire
 

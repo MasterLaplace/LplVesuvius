@@ -35,53 +35,19 @@ from __future__ import annotations
 
 import argparse
 import concurrent.futures as cf
-import http.client
 import json
 import sys
-import threading
 import time
 from pathlib import Path
-from urllib.parse import urlsplit
 
 HOTE = "vesuvius-challenge-open-data.s3.amazonaws.com"
-_local = threading.local()
 
-
-def connexion() -> http.client.HTTPSConnection:
-    """Une connexion par fil, gardée ouverte. C'est tout l'intérêt."""
-    c = getattr(_local, "conn", None)
-    if c is None:
-        c = http.client.HTTPSConnection(HOTE, timeout=120)
-        _local.conn = c
-    return c
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from telecharger import obtenir as _obtenir  # noqa: E402
 
 
 def obtenir(chemin: str) -> bytes | None:
-    """Rend le corps, ou None sur 404. ⚠ Un 404 est NORMAL : hors du rouleau."""
-    for essai in range(3):
-        try:
-            c = connexion()
-            c.request("GET", chemin)
-            r = c.getresponse()
-            corps = r.read()
-            if r.status == 200:
-                return corps
-            if r.status == 404:
-                return None
-            raise OSError(f"HTTP {r.status}")
-        except Exception:
-            # ⚠ Une connexion persistante FINIT par être fermée par le serveur. La
-            # rouvrir est le cas normal, pas une erreur — mais on ne réessaie pas
-            # indéfiniment, sinon une panne réelle ressemble à de la lenteur.
-            try:
-                _local.conn.close()
-            except Exception:
-                pass
-            _local.conn = None
-            if essai == 2:
-                raise
-            time.sleep(0.2 * (essai + 1))
-    return None
+    return _obtenir(HOTE, chemin)
 
 
 def main() -> int:
