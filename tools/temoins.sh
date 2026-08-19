@@ -328,6 +328,40 @@ PY
 cd "$ROOT/inference_xpu" || exit 2
 run "tracecheck (outil public)" uv run python "$ROOT/tracecheck/selftest.py"
 
+run "robustesse : deux grilles" uv run python - <<'PY'
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path("../analysis/src").resolve()))
+import numpy as np
+from scipy.stats import spearmanr
+
+n = 0
+def ck(c, quoi=""):
+    global n
+    assert c, quoi
+    n += 1
+
+# ⚠ Ce que le controle de `19` §9 verifie tient en une propriete : un accord de rangs
+# doit se comparer a un temoin de PERMUTATION, pas a zero. Sur 80 points, un |rho| de
+# 0,2 arrive au hasard une fois sur vingt -- donc l'annoncer sans temoin serait annoncer
+# du bruit.
+rng = np.random.default_rng(0)
+x = rng.normal(size=80)
+nuls = np.array([abs(spearmanr(x, rng.permutation(x))[0]) for _ in range(1000)])
+ck(0.15 < np.percentile(nuls, 95) < 0.30, "le p95 du hasard a n=80 vaut ~0,22")
+ck(np.median(nuls) < 0.12, "et sa mediane est proche de zero")
+
+# Un accord PARFAIT doit le battre ; un accord NUL ne doit pas.
+ck(abs(spearmanr(x, x)[0]) > np.percentile(nuls, 95))
+ck(abs(spearmanr(x, rng.permutation(x))[0]) < 0.5,
+   "une permutation ne doit pas ressembler a un accord")
+
+# ⚠ Et le fait que `19` §9 rapporte : +0,280 bat 0,219, mais de peu. Les deux nombres
+# doivent rester du meme ordre, sinon la conclusion « faiblement » serait fausse.
+ck(0.280 > 0.219 and 0.280 < 2 * 0.219, "bat le hasard, et de peu")
+print(f'ALL PASS (0 failures, {n} checks)')
+PY
+
 echo
 if [ "$FAIL" -eq 0 ]; then
   echo "TOUS LES TEMOINS PASSENT"
