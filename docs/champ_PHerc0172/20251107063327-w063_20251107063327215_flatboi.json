@@ -1,0 +1,18 @@
+[
+  {
+    "zarr": "7.91um-53keV-volume-20241024131838.zarr",
+    "layers": 33,
+    "voxel_um": 7.91,
+    "sondees": 292,
+    "avec_matiere": 92,
+    "decalage_median_vx": -2.5,
+    "decalage_median_um": -19.775,
+    "residuel_median_um": 19.775,
+    "residuel_p90_um": 105.99400000000004,
+    "part_au_bord": 0.07608695652173914,
+    "paires_voisines": 137,
+    "coherence_voisins": 0.2736168727212063,
+    "coherence_temoin_melange": 0.021988682421949464,
+    "segment": "20251107063327-w063_20251107063327215_flatboi"
+  }
+]

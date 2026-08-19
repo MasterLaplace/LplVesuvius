@@ -119,26 +119,22 @@ plupart des pas sont nuls **par construction**.
 
 ---
 
-## Voie O — le contrôle de robustesse, et ce qu'il impose ⚠⚠
+## Voie O — le contrôle de robustesse, et la correction qu'il a fallu lui faire ✅
 
-*(ouverte le 2026-08-19, après coup, parce que la mesure l'a réclamée)*
-
-`19` §9 : le critère `avec_matiere` n'est que **modérément** reproductible d'une grille de
-sondage à l'autre (rho **+0,280**, témoin 0,219). La règle survit en **direction** — dix
-gains positifs sur dix, deux échantillonneurs — mais **le plateau qui défendait le seuil
-de 20 % est une propriété de la grille, pas du phénomène**.
-
-⚠ **Le remède qu'on s'interdit** : choisir la grille qui donne le meilleur p. Ce serait
-exactement le sur-ajustement que ce dépôt refuse partout ailleurs.
+*(ouverte le 2026-08-19 après coup, fermée le même jour — en corrigeant d'abord le
+contrôle lui-même)*
 
 | # | quoi | état |
 |---|---|---|
-| O1 | comparer les deux grilles existantes | ✅ rho +0,280 (p = 0,012) contre témoin 0,219 |
-| O2 | rejouer la décision avec l'**autre** critère | ✅ direction tenue, **significativité divisée par ~10**, plateau perdu |
-| O3 | mesurer `avec_matiere` avec un sondage **dense** (392 points au lieu de 72) | 🔄 campagne lancée |
-| O4 | l'accord des grilles monte-t-il avec la densité ? | ⏳ c'est la prédiction que O3 teste |
-| O5 | si oui, refaire la décision sur la mesure dense et **re-défendre** un seuil | ⏳ |
+| O1 | comparer deux grilles | ⚠ **faux** — comparait `zarr_depth` à `champ_correction`, dont le `avec_matiere` mélange repérage **et blocs posés sur la matière**. Rho +0,280, et j'en ai conclu à tort à une instabilité |
+| O2 | rejouer la décision avec l'autre critère | ⚠ **conclusion invalidée par O1** : la dégradation venait d'une grandeur différente, pas d'une grille différente |
+| O3 | mesurer `avec_matiere` avec un sondage **dense** (392 points) | ✅ **80 segments** |
+| O4 | l'accord monte-t-il avec la densité ? | ✅ **la question était mal posée** — même définition, 72 contre 392 points : **rho +0,841** (témoin 0,223). Il n'y avait pas d'instabilité à expliquer |
+| O5 | re-défendre le seuil sur la mesure dense | ✅ **le plateau 15–25 % survit intact** à un quintuplement de la densité (p = 0,0010 / 0,0005 / 0,0030) |
 
-⭐ Ce qui rend O4 falsifiable : si l'accord ne monte **pas** avec la densité, alors ce
-n'est pas de l'erreur d'échantillonnage — c'est que les deux grilles mesurent des choses
-différentes, et il faudra dire lesquelles au lieu d'en moyenner.
+> ⚠⚠ **La leçon vaut plus que la correction.** Un contrôle de robustesse doit d'abord
+> prouver qu'il compare **la même grandeur**. J'ai passé une heure à affaiblir un résultat
+> juste sur un contrôle faux — et affaiblir semblait la position prudente, ce qui est
+> exactement ce qui l'a rendu difficile à voir. **La prudence n'est pas une méthode.**
+> Écrit dans `19` §10 et dans la docstring de `robustesse_material.py`, qui est l'outil
+> qui a rendu l'erreur possible.

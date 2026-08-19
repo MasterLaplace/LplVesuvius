@@ -244,6 +244,11 @@ transaction sur un nom inconnu.
    (−0,315 → **−0,382**, p = 0,0005). C'est le contraire d'un effet de taille.
    ⚠ Confond non levé, et il faut le dire : une carte vide peut vouloir dire « la trace a
    raté » **ou** « ce papyrus est vierge ». C'est un **tri de corpus**, pas un diagnostic.
+   ⭐ **Robustesse vérifiée** (`19` §10) : re-mesuré à **5,4× la densité de sondage**
+   (72 → 392 fenêtres), l'accord des classements vaut **+0,841** (témoin 0,223) et le
+   **plateau 15–25 % survit intact**. ⚠⚠ Un premier contrôle avait conclu l'inverse
+   (+0,280) — il comparait deux **grandeurs différentes**, et j'ai passé une heure à
+   affaiblir un résultat juste. **La prudence n'est pas une méthode.**
 
 18. ⭐⭐ **Le champ de correction** (`20`) : l'erreur d'une trace est **structurée** —
    **99 segments sur 99**, sur deux rouleaux, battent leur propre témoin de mélange
