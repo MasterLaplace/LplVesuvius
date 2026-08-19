@@ -396,6 +396,13 @@ n'est ni fait ni écarté.
 27. ⚠ **Un échantillonnage régulier tombe dans le remplissage.** Un volume de surface est
     majoritairement du vide : des blocs posés à intervalles réguliers ont rendu **6
     fenêtres utiles sur 96**. Il faut **trouver la matière avant de la sonder**.
+28bis. ⚠⚠ **`kill $!` sur un `nohup uv run … &` ne tue que le WRAPPER.** Le vrai
+    travailleur est un petit-fils (`uv run` → `python`), il survit, et il continue
+    d'écrire dans le `--out` qu'on croyait abandonné. Payé **deux fois dans la même
+    heure** : deux campagnes orphelines ont brûlé de la bande passante pendant 37 minutes
+    en doublonnant celles qu'on venait de relancer, et le symptôme était une campagne
+    « lente » et non une campagne fantôme. Remède : `ps -eo pid,ppid,etime,args` puis tuer
+    **le petit-fils**, ou lancer avec `setsid` et tuer le groupe.
 28. ⚠ Deux corrections de nom vérifiées sur le fichier plutôt que devinées : `events` est
     un **compte** dans l'index de `windcheck`, pas une liste ; et le volume `cos` du
     `lasagna` déclare ses niveaux dans son `.zattrs` — il n'en a pas de plus fin que 3.
