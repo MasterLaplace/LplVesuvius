@@ -170,6 +170,93 @@ encore.
 >   that visibly carry ink, and only 8 % of those above it land in the bottom ink decile
 >   against 10 % expected by chance. **The quantity is ordinal; an absolute threshold on
 >   it does not transport.**
+>
+> #### 8. Choosing a seed, measured — and one number that stands in for your own visual test
+>
+> `vc_grow_seg_from_seed` starts from one coordinate. In VC3D you click it; there is no
+> published criterion for choosing it, and we could not find one. `tracecheck --seed`
+> proposes one, reading the published surface *prediction* remotely.
+>
+> **The obvious criterion saturates, silently.** "Where is there the most predicted
+> surface" returned **eight candidates all scoring 255** on `PHerc0358` — a thresholded
+> prediction is binary, so any block fully inside predicted matter hits the format ceiling.
+> Eight tied candidates are a coin toss, not a ranking. The tool now says so out loud.
+>
+> **What we rank instead** is the 3D structure tensor, `(lam1 - lam2) / lam1`. One sheet
+> crossing a block puts every gradient along its normal (planarity ~1); **two parallel
+> sheets score just as high**, which is the point — a regular stack is exactly where a seed
+> belongs; a **junction** populates two directions and collapses to ~0, and a junction is
+> where the tracer can slip between wraps with nothing in the prediction to stop it.
+>
+> ⚠ An argmax over a chunk's ~13 800 blocks **saturates too**, so what is ranked is the
+> planarity averaged over the 3×3×3 block neighbourhood, ties broken on how many valid
+> neighbours exist. The orientation bias a thresholded prediction introduces is measured,
+> not assumed: swept 0–90°, raw planarity spans 0.828–1.000, blurred 0.947–1.000.
+>
+> **Paired campaign, 12 prize scrolls** — ten with no published segment at all, plus the
+> two that have official ones. Each scroll traced twice, one seed per criterion, everything
+> else identical, so each scroll is its own control:
+>
+> | | area, sign test | self-intersections |
+> |---|---|---|
+> | planarity vs neighbourhood | **10 – 2, p = 0.0386** | **0 vs 0** |
+>
+> ⚠⚠ **The self-intersection result does not replicate, and we report that.** On
+> `PHerc0358` the seed change took 240 transverse self-intersections to 0; across the other
+> eleven scrolls both criteria return zero. What replicates is *how far the tracer gets
+> before stalling* — and the extremes say it better than a median: on `PHerc0125` and
+> `PHerc0826` the neighbourhood seed stalls at **0.85 cm²**, barely above `min_area_cm`,
+> where planarity reaches 19.82 and 13.14.
+>
+> ⚠ **And the fix that mattered on `PHerc0358` was not the criterion.** Replayed without an
+> occupancy ceiling, the neighbourhood criterion returns exactly the bad seed — whose block
+> has **occupancy 1.000**. A block entirely full of predicted matter has a **null structure
+> tensor**: no sheet, no normal, no orientation. The prediction had merged several wraps
+> into a solid blob, and the tracer started where there was no geometry to follow.
+>
+> #### 9. The number we would most like others to use
+>
+> Your First Letters brief asks whether one can *"visually follow horizontal papyrus fibers
+> across the page"*. That is an eye's test. **The amplitude of the depth profile of a
+> render is its measurable form**, and the reasoning is geometric: depth is travelled along
+> the surface **normal**, so a surface *parallel* to the sheets has a normal that **crosses**
+> the stack and a profile that swings; a surface *cutting* the stack has a normal that stays
+> in the same material, and a flat profile.
+>
+> Measured at a matched 1.2 mm window, and anchored at both ends by images:
+>
+> | trace | amplitude | what the face shows |
+> |---|---:|---|
+> | Scroll 1 `20230909121925` (AUC 0.925) | **50.1 %** | straight parallel fibres — a sheet's face |
+> | official `PHerc1447` segment | 28.8 % | fibres, on a narrow band |
+> | Scroll 4 `20231111135340` (known failure) | 19.3 % | fragments in the void |
+> | our best `PHerc0358` trace | **8.7 %** | concentric laminations — the roll seen **edge-on** |
+>
+> ⚠⚠ **This told us our own trace is worse than we thought, in a way zero self-intersections
+> cannot catch**: it is not drifting between sheets, it is laid *across* the stack. A surface
+> can slice the roll like a knife without ever crossing itself.
+>
+> ⚠ It is **necessary, not sufficient**: Scroll 4 fails a third way — the trace is in the
+> void — at a *higher* amplitude than ours. One number does not rank three failure modes.
+>
+> ⚠ And the criterion we first reached for — *"does the material peak sit in the central
+> third"* — **does not transport to prize scrolls**: the official `PHerc1447` segment fails
+> it (2 %) worse than either of ours (16 % and 20 %). We retired it rather than keep a
+> verdict a reference fails.
+>
+> #### 10. Two reproducibility facts about the official tracer
+>
+> - **`vc_grow_seg_from_seed` is not deterministic.** Four runs of the same seed, same
+>   params, same machine returned four areas spanning 0.08 % — and `thread_limit: 1`, the
+>   value VC3D uses and the tool's own startup message recommends, does **not** fix it. All
+>   four returned **0 self-intersections**: the surface is not reproducible, the verdict is.
+>   That is an argument for judging a trace by an invariant rather than by the artefact.
+> - **Area saturates against the generation budget.** Two traces on *different scrolls* both
+>   stopped at generation 119 of 120 and returned the same area to eight thousandths of a
+>   percent — a surface grows as a front, so its area is set by the step count when nothing
+>   stops it. Pushed to 600 generations the same seed reaches 127.9 cm² (and 174
+>   self-intersections, at a rate 21× lower per pair tested than the bad seed). Area is a
+>   proxy for *how far it got*, never a quality score.
 
 ---
 
@@ -179,5 +266,5 @@ encore.
 |---|---|
 | 1 | publier le dépôt (`tracecheck/` au minimum) et mettre l'adresse dans le texte |
 | 2 | ~~revérifier chaque chiffre contre son fichier de sortie~~ ✅ **c'est une commande maintenant** — `analysis/src/verifier_chiffres.py` recalcule les 12 chiffres depuis leurs JSON et les cherche littéralement dans les documents. Sort **1** si l'un manque, **2** si un fichier de résultat est absent (sinon il passerait au vert en ne vérifiant rien) |
-| 3 | joindre les deux figures de champ **et** `profondeur_deux_cas.png` |
+| 3 | joindre les deux figures de champ, `profondeur_deux_cas.png`, **et les deux figures de `25`** — `25_signatures.png` surtout, qui met le critère visuel du règlement sur un axe mesurable |
 | 4 | ⚠ décider si le corps part en anglais — c'est la seule décision de forme ouverte |
