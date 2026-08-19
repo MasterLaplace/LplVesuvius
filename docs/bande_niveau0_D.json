@@ -17,6 +17,155 @@
           "rate": 0.18899858956276447
         }
       ]
+    },
+    {
+      "slice": 5200,
+      "background_rate": 0.06459247757073844,
+      "valid_cells": 1382,
+      "anomalous": [
+        {
+          "radius_mm": 4.746,
+          "column": 0,
+          "rate": 0.16223977027997127
+        },
+        {
+          "radius_mm": 13.288800000000002,
+          "column": 7500,
+          "rate": 0.1852112676056338
+        }
+      ]
+    },
+    {
+      "slice": 5300,
+      "background_rate": 0.06564613847671591,
+      "valid_cells": 1386,
+      "anomalous": [
+        {
+          "radius_mm": 4.746,
+          "column": 500,
+          "rate": 0.15859649122807018
+        },
+        {
+          "radius_mm": 5.6952,
+          "column": 10000,
+          "rate": 0.1672473867595819
+        }
+      ]
+    },
+    {
+      "slice": 5400,
+      "background_rate": 0.06611073585505403,
+      "valid_cells": 1388,
+      "anomalous": [
+        {
+          "radius_mm": 5.6952,
+          "column": 0,
+          "rate": 0.16090331686661963
+        }
+      ]
+    },
+    {
+      "slice": 5500,
+      "background_rate": 0.06473594548551959,
+      "valid_cells": 1387,
+      "anomalous": [
+        {
+          "radius_mm": 6.1698,
+          "column": 0,
+          "rate": 0.1928219563687544
+        }
+      ]
+    },
+    {
+      "slice": 5600,
+      "background_rate": 0.06639487478159581,
+      "valid_cells": 1387,
+      "anomalous": [
+        {
+          "radius_mm": 4.746,
+          "column": 1500,
+          "rate": 0.20412844036697247
+        },
+        {
+          "radius_mm": 8.0682,
+          "column": 9000,
+          "rate": 0.1893238434163701
+        }
+      ]
+    },
+    {
+      "slice": 5700,
+      "background_rate": 0.06721105527638191,
+      "valid_cells": 1387,
+      "anomalous": [
+        {
+          "radius_mm": 4.746,
+          "column": 0,
+          "rate": 0.19808306709265175
+        },
+        {
+          "radius_mm": 4.746,
+          "column": 11500,
+          "rate": 0.1812990720913633
+        },
+        {
+          "radius_mm": 17.0856,
+          "column": 6000,
+          "rate": 0.18478260869565216
+        }
+      ]
+    },
+    {
+      "slice": 5800,
+      "background_rate": 0.06749858196256381,
+      "valid_cells": 1385,
+      "anomalous": [
+        {
+          "radius_mm": 4.746,
+          "column": 11000,
+          "rate": 0.1662087912087912
+        },
+        {
+          "radius_mm": 4.746,
+          "column": 11500,
+          "rate": 0.22820694542877393
+        },
+        {
+          "radius_mm": 4.746,
+          "column": 18500,
+          "rate": 0.18756268806419257
+        },
+        {
+          "radius_mm": 5.2206,
+          "column": 18500,
+          "rate": 0.17036290322580644
+        },
+        {
+          "radius_mm": 5.6952,
+          "column": 500,
+          "rate": 0.16642441860465115
+        },
+        {
+          "radius_mm": 5.6952,
+          "column": 9500,
+          "rate": 0.16938775510204082
+        },
+        {
+          "radius_mm": 5.6952,
+          "column": 11000,
+          "rate": 0.17932489451476794
+        }
+      ]
     }
-  ]
+  ],
+  "observed": {
+    "pairs": 144,
+    "colocated": 25,
+    "fraction": 0.1736111111111111
+  },
+  "null": {
+    "trials": 2000,
+    "mean": 0.015930555555555555,
+    "p95": 0.034722222222222224
+  }
 }

@@ -398,3 +398,59 @@ qu'un effet de tri.
 avec le rouleau. **PHerc1667 et PHerc0139 publient tous deux à 2,399 µm** — c'est le test
 apparié qui sépare « la règle est propre à Scroll 1 » de « la règle demande une résolution
 fine ». Les campagnes tournent.
+
+---
+
+## 12. ⚠⚠ Le test apparié RÉFUTE l'explication du §11 — et la règle est propre à Scroll 1
+
+*(même jour, une heure plus tard)* Le §11.5 disait que la résolution restait confondue
+avec le rouleau, et que PHerc0139 et PHerc1667 — tous deux à **2,399 µm** — trancheraient.
+Ils ont tranché, et pas dans le sens que le §11 espérait.
+
+| corpus | n | voxel | **étendue relative de la cible** | rho `avec_matiere` × encre | détectable |
+|---|---:|---:|---:|---:|---:|
+| **Scroll 1** | 80 | 2,4 µm | 1,008 | **+0,539** (p < 1e-6) | 0,31 |
+| **PHerc0139** | 38 | **2,399 µm** | **1,628** | **−0,229** (p = 0,17) | 0,44 |
+| PHerc1667 | 19 | 2,399 µm | 0,720 | +0,425 (p = 0,070) | 0,60 |
+| PHerc0172 | 53 | 7,91 µm | 0,220 | −0,217 (p = 0,12) | 0,37 |
+
+### Ce que ça détruit
+
+Le §11 expliquait l'échec par un **effet de plancher** : la cible de Scroll 5 varie 4,6
+fois moins, donc il n'y a rien à prédire. C'était vrai **pour Scroll 5 seulement**.
+
+> ⚠⚠ **PHerc0139 a une étendue relative de 1,628 — plus GRANDE que celle de Scroll 1
+> (1,008) — 17 de ses 38 segments sont sous un contraste de 2,5, et il rend quand même
+> le signe OPPOSÉ.** L'effet de plancher n'explique rien là. Mon explication du §11
+> couvrait un corpus sur trois et je l'avais écrite comme si elle les couvrait tous.
+
+### Ce que ça laisse
+
+Deux corpus à **la même résolution**, tous deux avec assez d'étendue, rendent **+0,539** et
+**−0,229**. Aucun des trois négatifs n'est individuellement significatif — mais le motif
+d'ensemble (un positif fort, trois non-positifs) est **exactement** celui des fibres
+(+0,330 à n = 12, **−0,192** à n = 54) et du détecteur de phase.
+
+> **La règle est une propriété du corpus publié de Scroll 1, pas du problème.**
+
+⚠ Elle reste solide **sur Scroll 1** — elle y passe Bonferroni sur 20 croisements, survit
+à un quintuplement de la densité de sondage, et bat 2000 permutations. Ce qui tombe n'est
+pas la mesure, c'est sa **portée**.
+
+### Pourquoi ça pouvait arriver, sans que ça excuse quoi que ce soit
+
+Quatre corpus, quatre groupes de traceurs, quatre modèles d'encre, quatre états de
+conservation. N'importe lequel suffirait. ⚠ Et c'est précisément le point : **une règle
+qui dépend du corpus n'est pas une règle sur les traces.**
+
+### Ce qu'il faut écrire dans la soumission
+
+| ✅ | ❌ |
+|---|---|
+| sur les 80 segments de Scroll 1, `material` identifie une classe d'échecs (14 quasi vierges), p = 0,0005 contre permutation | que ce soit un instrument général |
+| la mesure coûte 300 requêtes et se calcule avant l'inférence | qu'elle réplique — **elle ne réplique pas**, testé sur 110 segments de plus |
+| ⭐ **et les trois corpus où elle échoue sont publiés avec le résultat** | de choisir le corpus qui marche |
+
+⭐ Publier les quatre est ce qui rend la soumission utilisable : quelqu'un qui reprend la
+mesure saura tout de suite qu'elle doit être re-validée sur son corpus, au lieu de le
+découvrir après.
