@@ -134,7 +134,15 @@ haut, mais **dans l'intervalle de Scroll 1** (4,3–42,5°). Un segment ne tranc
 contre une distribution aussi étalée ; la campagne dira si la *distribution* de Scroll 4
 est décalée.
 
-## 7. ⏳ Ce qui reste
+## 7. ❌ Rien ne reste — la voie est close
+
+*(2026-08-19)* Ce qui suit était la liste des suites envisagées. **Elle est sans objet** :
+la campagne sur 80 segments a fait **inverser le signe** (+0,330 à n = 12 → **−0,192** à
+n = 54), et une grandeur dont le signe dépend de la taille de l'échantillon ne se
+prolonge pas, elle se jette. Conservé tel quel ci-dessous pour que la raison de l'abandon
+reste lisible.
+
+## 7 bis. *(archive)* Ce qui restait avant la réfutation
 
 - la campagne sur les 80 segments de Scroll 1 (**en file**), qui donnera la puissance ;
 - ⭐ **le contraste avec Scroll 4** sur une distribution et non un point ;

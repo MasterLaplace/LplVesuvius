@@ -19,51 +19,38 @@ Document de passation. **À lire en entier avant de reprendre.**
 ⚠ Pousser l'AUC plus haut, chercher un meilleur détecteur d'encre ou faire transcrire
 davantage **ne sert pas** l'objectif.
 
-## 2. ⚠ CE QUI TOURNE (2026-08-19, fin de séance)
+## 2. ⚠ CE QUI TOURNE (2026-08-19, fin de journée)
 
-| quoi | sortie | pourquoi ça compte |
-|---|---|---|
-| **sondage dense**, 392 points par segment | `docs/dense_PHercParis4/` (un fichier par segment) | ⭐⭐ tranche la voie O : le critère de `19` n'est reproductible qu'à **rho +0,280** entre deux grilles. Si l'accord monte avec la densité, c'était de l'erreur d'échantillonnage ; sinon les deux grilles mesurent des choses différentes |
-| **sensibilité du centre, niveau 0** | `docs/sensibilite_centre_L0.json` | ferme `06` §2.3 autrement que par l'ombilic, qui n'existe pas |
+**Rien.** Toutes les campagnes ont rendu.
 
 ```bash
-ls docs/dense_PHercParis4/ | wc -l          # sur 80
-tail -3 docs/sensibilite_centre_L0.log
-ps -eo etime,pcpu,cmd | grep -E "[z]arr_depth|[s]ensibilite"
+ps -eo etime,pcpu,cmd | grep -E "[z]arr_depth|[c]hamp_correction|[v]c_grow|[v]c_render"
 ```
-
-**Quand le dense aura rendu**, la mesure qui conclut la voie O tient en une ligne :
-
-```bash
-cd inference_xpu
-uv run python ../analysis/src/robustesse_material.py \
-    ../docs/dense_PHercParis4 ../docs/champ_PHercParis4 \
-    --nom-a "dense (392 points)" --nom-b "champ (200 points)" \
-    --out ../docs/robustesse_dense.json
-```
-⭐ **La prédiction est posée avant la mesure** : si l'accord monte nettement au-dessus de
-+0,280, l'écart venait du bruit d'échantillonnage et un seuil redevient défendable. S'il
-ne monte pas, il faut dire **ce que chaque grille mesure** au lieu d'en moyenner.
 
 ⚠ **Juger sur un fichier de résultat, jamais sur une notification**, et **vérifier
 l'horodatage d'un log avant d'en citer le verdict** — un log vieux de sept heures a déjà
-été lu comme un résultat frais. ⚠ Python **bufferise** : lancer avec `python -u`, sinon un
-log vide ressemble à un job mort (payé une fois de plus aujourd'hui).
+été lu comme un résultat frais. ⚠ Python **bufferise** : lancer avec `python -u`.
 
-⚠ Pour libérer la machine sans rien perdre : `kill -STOP` les calculs (ils reprennent à
-l'identique) et tuer les `curl` — c'est la **bande passante** qui fait bégayer un Zoom.
-Les deux campagnes sont **reprenables** (un fichier par segment).
+⚠⚠ **`kill $!` sur un `nohup uv run … &` ne tue que le WRAPPER** ; le travailleur est un
+petit-fils et il survit, en continuant d'écrire dans le `--out` qu'on croyait abandonné.
+Payé **deux fois dans la même heure**. Tuer le petit-fils via `ps -eo pid,ppid,args`.
+
+⚠ Pour libérer la machine : `kill -STOP` les calculs, tuer les `curl` — c'est la **bande
+passante** qui fait bégayer un Zoom. Toutes les campagnes sont **reprenables** (un fichier
+par segment).
 
 ## 2bis. ⭐ La liste de ce qui reste ouvert
 
-**[`docs/18_batch_produire.md`](docs/18_batch_produire.md)** — le batch en cours. Le
-précédent, [`13`](docs/13_batch_epuisement.md), est **clos** : ses huit voies sont
-fermées, chacune par une mesure ou par une raison écrite.
+**Trois batchs, tous clos** : [`13`](docs/13_batch_epuisement.md) *(fermer ce qui était
+ouvert)*, [`18`](docs/18_batch_produire.md) *(produire, pas juger)*,
+[`22`](docs/22_batch_repliquer.md) *(un résultat sur un corpus n'est pas un résultat)*.
 
-⭐ **Ce que `18` attaque est d'une autre nature.** `13` fermait ce qui était ouvert ;
-`18` répond à la remarque que `13` a laissée derrière lui — *tous nos instruments
-jugent, aucun n'a encore changé quoi que ce soit*. La voie I est **faite** (`19`), la
-voie J est l'outil de réparation.
+⭐⭐ **Et le 22 a viré ailleurs qu'où il visait.** Il devait consolider la règle de `19` ;
+il l'a **réfutée hors de Scroll 1**, puis a débouché sur autre chose : **VC3D est
+construit**, la chaîne officielle est pilotable en ligne de commande, et
+[`24`](docs/24_premiere_trace_rouleau_du_prix.md) a tracé un **rouleau du Grand Prize**.
+
+> **Le prochain lot n'est plus un batch de mesure.** Il est décrit au §7.
 
 ## 3. Le projet
 
@@ -93,6 +80,9 @@ voie J est l'outil de réparation.
 | **`19`** | ⭐⭐ **la première règle qui CHANGE une décision** — p = 0,0005 contre 2000 permutations |
 | **`20`** | ⭐⭐ **le champ de correction** : l'erreur d'une trace est structurée, et **translater ne la répare pas** |
 | **`21`** | **le brouillon de la soumission**, résultats négatifs compris. ⚠ Ses chiffres sont gardés par `verifier_chiffres.py`, lancé dans `tools/temoins.sh` |
+| `22` | le batch « répliquer » — clos, et il a réfuté ce qu'il devait consolider |
+| `23` | ⭐ **l'inventaire des 13 rouleaux du prix** — 10 n'ont AUCUN segment |
+| **`24`** | ⭐⭐ **la première trace d'un rouleau du prix**, condamnée par nos instruments avant le rendu |
 
 ## 4. L'outillage, et comment le relancer
 
@@ -108,6 +98,8 @@ voie J est l'outil de réparation.
 ./tools/fetch_cartes_encre.sh <rouleau> <dest>            # cartes d'encre PUBLIEES
 ./tools/reprendre.sh                                      # degeler apres un kill -STOP
 ./tools/campagne_champ.sh <rouleau> <motif> <voxel_um>    # champ de correction, REPRENABLE
+./tools/campagne_dense.sh <rouleau> <motif> <dest>        # part de matiere, 392 points
+./tools/etat_rouleaux_prix.sh                             # ⭐ l'inventaire des 13
 
 cd experiments   # geometrie
 uv run python src/excision/radial.py {centre|compter|profil|deplier|axe} …
@@ -134,9 +126,40 @@ uv run python ../analysis/src/champ_correction.py <cle .zarr> --voxel-um 2.4  # 
 uv run python ../analysis/src/croiser_encre.py <profondeur.json> <cartes/>    # ⭐⭐ la DECISION
 uv run python ../analysis/src/table_champ.py <champs/> --encre <rapport.json>
 uv run python ../analysis/src/resolution_phase.py <saut_spire/>
+uv run python ../analysis/src/trouver_graine.py <prediction .zarr>    # ⭐ graine A DISTANCE
+uv run python ../analysis/src/regarder_rendu.py <render/> --png-dir …  # apercus + stats
+uv run python ../analysis/src/tester_prediction_50um.py <rapport.json>
+uv run python ../analysis/src/robustesse_material.py <A> <B>
+uv run python ../analysis/src/verifier_chiffres.py <docs…>            # fraicheur
 uv run python ../analysis/src/compare_maps.py <a.npy> <b.npy>
 uv run python ../analysis/src/proximity_vs_ink.py <mesh> <pred> <labels>
 ```
+
+### ⭐⭐ VC3D — la chaîne de production, construite le 2026-08-19
+
+**45 outils en ligne de commande** sous `/usr/local/bin/vc_*`, plus le GUI `VC3D`.
+Construits depuis `repos/villa/volume-cartographer/build_from_src_debian.sh`
+(⚠ demande `sudo`, 17 paquets).
+
+```bash
+vc_grow_seg_from_seed -v <zarr|URL> -t <dir> -p seed.json -s <x> <y> <z>
+vc_tifxyz_selfcross --surface <tifxyz> -o rapport.json    # auto-intersections
+vc_flatten -i <tifxyz> -o <tifxyz_flat>
+vc_render_tifxyz -v <cache> --remote-url <URL> --scale 1 -g 0 \
+    -s <flat> --tif-output <dir> -n 21 --auto-crop
+```
+
+⭐ **`-v` accepte `https://` pour le traçage** : le volume de 893 Go n'est **jamais**
+téléchargé. ⚠ Mais `vc_render_tifxyz` veut un chemin **local** en `-v` — c'est
+`--remote-url` qui fait le streaming, et `-v` désigne alors le **cache**.
+
+⚠⚠ **Trois pièges silencieux, chacun ressemblant à un succès** :
+1. **`voxelsize` vaut 0 par défaut** dans `seed.json` → l'aire en cm² est nulle *par
+   construction* et toute surface est rejetée (« area 0 below min_area_cm ») ;
+2. **`--segment-name` fait écrire DANS `-t`** — il tente de remplacer le répertoire
+   courant par lui-même ;
+3. **`[tif] all slices exist, skipping`** saute par-dessus les fichiers **tronqués** d'un
+   run tué. Effacer le répertoire de sortie avant de relancer.
 
 ### Matériel
 
@@ -307,6 +330,58 @@ transaction sur un nom inconnu.
    « refaire au niveau 0 » n'avait pas d'objet. Et la quantification n'écrase rien :
    marche médiane **12,2 / 255**, **0 trace sur 38** à médiane nulle.
 
+### 2026-08-19 (fin) — de juger à produire
+
+21. ⚠⚠ **LA RÈGLE DE `19` NE RÉPLIQUE PAS** (`19` §11–§12). Testée sur **110 segments** de
+   trois autres rouleaux, mêmes outils, même définition :
+
+   | corpus | n | voxel | étendue de la cible | rho |
+   |---|---:|---:|---:|---:|
+   | **Scroll 1** | 80 | 2,4 µm | 1,008 | **+0,539** |
+   | **PHerc0139** | 38 | **2,399 µm** | **1,628** | **−0,229** |
+   | PHerc1667 | 19 | 2,399 µm | 0,720 | +0,425 |
+   | PHerc0172 | 53 | 7,91 µm | 0,220 | −0,217 |
+
+   ⚠ Ma première explication (effet de plancher) couvrait **un corpus sur trois** :
+   PHerc0139 est à la même résolution que Scroll 1, a une étendue **plus grande**, et rend
+   le signe opposé. **La règle est une propriété du corpus publié de Scroll 1.**
+   ⚠⚠ Et sur Scroll 1 même, elle sépare une **CLASSE** et non un gradient : retirer les 16
+   segments quasi vierges fait tomber rho de **+0,539 à +0,190 (p = 0,13, ns)**.
+   ⭐ La revendication corrigée est **meilleure** : « je repère une classe d'échecs avant
+   que vous payiez l'inférence » est le goulot que le concours nomme mot pour mot.
+
+22. ⭐⭐ **UNE TRACE PRODUITE SUR UN ROULEAU DU GRAND PRIZE** (`24`). `PHerc0358`, l'un des
+   **dix** des treize sans aucun segment publié : **8,48 cm²** en **13,9 s** de calcul, le
+   volume de 893 Go n'étant jamais téléchargé. Puis aplati et rendu, 29,4 × 29,2 mm.
+   ⚠ **La trace est mauvaise** — elle coupe à travers les spires. Ce qui compte est
+   **comment on le sait** : trois mesures indépendantes, **deux avant l'image**.
+   240 auto-intersections à pénétration 200 µm (> 1 écart inter-feuilles) ; **64 %** des
+   fenêtres piquant au bord de la pile, distribution **bimodale** (15 à la couche 0, 9 à
+   la 20, une au milieu) — la signature d'une surface posée **entre** deux feuilles.
+   ⭐ **C'est la validation qui manquait** : les instruments jugeaient le travail des
+   autres ; ils viennent de condamner le nôtre, en 0,05 s, avant le rendu.
+   ⚠ Cause identifiée : `direction_fields` absent, donc **aucune information
+   d'orientation** — et une surface qui coupe les spires satisfait la prédiction seuillée
+   autant qu'une qui en suit une.
+
+23. ⭐ **L'inventaire des treize** (`23`) : **dix rouleaux n'ont AUCUN segment**, et les
+   treize publient tous volume + prédiction de surface + `normal-grids` + `lasagna`.
+   `PHerc1447` en a 16, `PHerc0800` 6, `PHerc1203` 1. Et `PHerc1447` est le **seul** à
+   publier des volumes de surface (4, à 8,64 µm) : nos instruments y trouvent
+   immédiatement un segment **hors du papyrus** (9 % de matière contre 51–59 %, 17,4 % au
+   bord, écart +86 µm).
+
+24. ⚠ **La migration est l'exception** (`11` §13) : 2 bandes sur 6, Fisher p = 0,079 — et
+   le **témoin positif** (bande E, autour du site connu) ressort à p = 0,0285 avec une
+   dérive de 1,20 mm/mm. La méthode retrouve la migration là où elle existe, donc les
+   quatre bandes muettes sont de **vrais** négatifs.
+
+25. ⚠⚠ **La prédiction des 50 µm est testée et scindée en trois** (`12` §13) : le **sens**
+   tient (4,93 contre 5,91, p = 0,017), le **seuil** tombe (60 µm est pire que 50 *et* que
+   70 — une courbe qui monte, redescend et remonte n'a pas de point de coupure), et la
+   **forme forte est réfutée** (l'écart médian du corpus vaut 67,2 µm, donc le seuil
+   condamnerait 64 segments sur 80 qui portent visiblement de l'encre).
+
 ### La jonction, et le domaine de définition
 
 14. ⚠⚠ **La métrique de proximité a un DOMAINE DE DÉFINITION** (`07` §7). Elle exige une
@@ -339,20 +414,32 @@ structurel sur région, score structurel sur segment entier. ⚠ La dernière ca
 définitive : **ce type de segment ne porte que 4 à 5 lignes de texte**, et les glyphes
 **fusionnent** au seuil du modèle. Le juge calibré de `09` est le seul disponible.
 
-## 7. ⏳ CE QUI RESTE, avec son blocage
+## 7. ⏳ CE QUI RESTE — et le prochain lot n'est plus une mesure
 
-⭐ La liste cochable est dans **`docs/18_batch_produire.md`**. Ci-dessous seulement ce qui
-n'est ni fait ni écarté.
+⭐⭐ **Le cadrage a changé le 2026-08-19.** Objectif de l'auteur : *tout publiable pour le
+31 août, les confirmations viennent après*. Et la lecture de la page des prix a corrigé la
+cible — le pool ouvert fait **2 140 000 $** et le Grand Prize n'est pas le seul lot :
+
+| prix | montant | ce qu'il faut | échéance |
+|---|---:|---|---|
+| **First Letters** | **50 000 $ × 10 rouleaux** | **10 lettres dans UNE zone de 4 cm²** | 25 juin 2027 |
+| **Titre de PHerc. Paris 4** | **50 000 $** | l'image du titre, lisible par leurs papyrologues | 25 juin 2027 |
+| Progress Prize | 20 000 $ / mois | la meilleure soumission du mois | **31 août** |
+| Grand Prize | 800 000 $ | **100 %** du recto, intégré VC3D, ≤ 8 h d'annotation | 25 juin 2027 |
+
+> ⭐ *« Sometimes ink is visible **directly in the flattened render, with no model at all**…
+> **that by itself qualifies for the prize**. »* — donc l'étape suivante n'est pas
+> d'entraîner, c'est de **regarder**.
 
 | # | quoi | blocage |
 |---|---|---|
-| **J7** ⭐⭐ | **le gauchissement** — la mesure dit que la translation n'enlève que 21,7 % de l'erreur, donc le remède utile est une déformation guidée par le champ | rien ne bloque, c'est le prochain gros morceau. ⚠ Et il faut un **critère de succès** qui ne soit pas circulaire : re-mesurer le champ après correction ne prouverait que l'arithmétique |
-| **M1** | l'analyse de sensibilité du centre, **au niveau 0** | 🔄 lancée. ⚠ La version niveau 2 est **invalide** : les seuils sont calés au niveau 0 et y comptent 42 feuilles au lieu de 176 (piège nº 1) |
-| M2 | plus de bandes **niveau 0** (2 faites : une migre, une non) | ~50 min par bande, `tools/bandes_niveau0.sh`. Le crible niveau 2 ne peut PAS répondre |
-| M3 | **ESRF 2,4 µm** sur les 4 sites (`06` §3.6) | — |
-| — | le **pas inter-feuilles de PHerc1667** | ⚠ **aucune prédiction de surface publiée** pour ce rouleau : la voie `espacement_spires.py` n'existe pas là. Tant qu'il manque, on ne juge pas ses sauts de feuille |
-| — | la **bascule recto/verso** des fibres | non expliquée, et la voie est **réfutée** (`14`) — à ne rouvrir que si une autre mesure la réclame |
-| — | le trend **position dans le rouleau** ↔ résiduel | ⚠ **NON établi** : Scroll 1 rend `p90` significatif et `median` nul, Scroll 4 l'inverse. Configuration exacte des fibres à n = 12. Il faut plus de segments |
+| **T1** ⭐⭐ | **faire suivre UNE feuille au traceur** — c'est tout ce qui sépare `24` d'une soumission First Letters | ⚠ `direction_fields` veut `<zarr>/{x,y,z}/<niveau>` et un chemin **local** ; les `normal-grids` publiées (182 Mo) sont en `xy/ xz/ yz/`. Jonction à faire. Pistes alternatives : graine choisie sur une **planéité locale** plutôt qu'une valeur de voisinage, et `step_size` réduit |
+| **T2** ⭐ | rejouer la boucle `24` sur d'autres graines et d'autres rouleaux **une fois T1 réglé** | rien — la chaîne est pilotable et chaque essai coûte ~15 min |
+| **T3** ⭐ | le **titre de Scroll 1** — *« looking somewhere new »* | c'est un problème de **recherche** sur le corpus où tous nos instruments marchent |
+| T4 | finir et envoyer la soumission Progress Prize | ⏳ le texte existe (`21`), les chiffres sont gardés, il reste à publier le dépôt et à joindre les figures |
+| R2 | exporter le champ de correction en coordonnées de fenêtre | — |
+| — | le **pas inter-feuilles de PHerc1667** | ⚠ aucune prédiction de surface publiée pour ce rouleau : on ne juge pas ses sauts de feuille |
+| — | le trend **position dans le rouleau** ↔ résiduel | ⚠ **NON établi** : trois corpus, trois motifs différents |
 
 ## 8. ⚠ Les pièges payés, à ne pas repayer
 
@@ -421,6 +508,14 @@ n'est ni fait ni écarté.
 27. ⚠ **Un échantillonnage régulier tombe dans le remplissage.** Un volume de surface est
     majoritairement du vide : des blocs posés à intervalles réguliers ont rendu **6
     fenêtres utiles sur 96**. Il faut **trouver la matière avant de la sonder**.
+28quater. ⚠⚠ **Un outil qui saute ses sorties existantes saute aussi ses sorties
+    CORROMPUES.** `vc_render_tifxyz` a affiché « all slices exist, skipping » sur 21 TIFF
+    **tronqués** laissés par un run tué — et ça ressemble parfaitement à un rendu réussi.
+    Effacer le répertoire de sortie avant de relancer.
+28ter. ⚠⚠ **Un défaut par défaut peut annuler une vérification entière.** `voxelsize` vaut
+    **0** dans les paramètres de `vc_grow_seg_from_seed`, donc l'aire en cm² est nulle *par
+    construction* et **toute** surface est rejetée avec « area 0 below min_area_cm ». Le
+    message accuse la surface ; le fautif est le paramètre absent.
 28bis. ⚠⚠ **`kill $!` sur un `nohup uv run … &` ne tue que le WRAPPER.** Le vrai
     travailleur est un petit-fils (`uv run` → `python`), il survit, et il continue
     d'écrire dans le `--out` qu'on croyait abandonné. Payé **deux fois dans la même
@@ -428,6 +523,18 @@ n'est ni fait ni écarté.
     en doublonnant celles qu'on venait de relancer, et le symptôme était une campagne
     « lente » et non une campagne fantôme. Remède : `ps -eo pid,ppid,etime,args` puis tuer
     **le petit-fils**, ou lancer avec `setsid` et tuer le groupe.
+29. ⚠⚠ **Une réponse S3 contient le PRÉFIXE INTERROGÉ** en plus de ses sous-préfixes.
+    Compter les lignes sans l'exclure décale une table de **un partout** — et une table
+    décalée d'un cran ressemble parfaitement à une table juste.
+30. ⚠⚠ **Un contrôle de robustesse doit d'abord prouver qu'il compare LA MÊME GRANDEUR.**
+    J'ai passé une heure à affaiblir un résultat juste parce que je comparais un
+    `avec_matiere` neutre à un mélange repérage+blocs. **La prudence n'est pas une
+    méthode** : affaiblir semblait la position sûre, et c'est ce qui l'a rendu difficile
+    à voir.
+31. ⚠⚠ **Trop peu d'échantillons fabriquent des effets qui n'existent pas, avec leur
+    explication toute prête.** À 3 tranches, la sensibilité du centre donnait **5,65 %** et
+    une « marche » nette dès la plus petite perturbation, expliquée par « la mesure compte
+    des pics, donc elle procède par marches ». À 6 tranches : **1,75 %**, aucune marche.
 28. ⚠ Deux corrections de nom vérifiées sur le fichier plutôt que devinées : `events` est
     un **compte** dans l'index de `windcheck`, pas une liste ; et le volume `cos` du
     `lasagna` déclare ses niveaux dans son `.zattrs` — il n'en a pas de plus fin que 3.

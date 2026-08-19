@@ -240,7 +240,7 @@ déchirure ou un vide. Mais c'est désormais **quatre endroits précis** au lieu
 rouleau entier, ce qui est exactement ce que la piste « revoir les sites suspects à
 2,4 µm (ESRF) » attendait.
 
-## 8. 🔄 En cours : tiennent-ils le long de z ?
+## 8. ✅ *(répondu au §13)* — tiennent-ils le long de z ?
 
 Groupées dans **une** coupe, quatre cellules sur 1392 peuvent encore tomber côte à côte
 par hasard. La troisième dimension tranche : **un dégât physique occupe une hauteur ;

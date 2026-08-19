@@ -99,12 +99,12 @@ plupart des pas sont nuls **par construction**.
 | L2 | si les marches bougent : rejouer les 38 | ➡️ sans objet |
 | L3 | l'échec est **définitif** | ✅ `17` §10, et mesuré : marche médiane **12,2 / 255**, **0 trace sur 38** à médiane nulle. La quantification n'écrase rien |
 
-## Voie M — les restes de géométrie
+## Voie M — les restes de géométrie ✅
 
 | # | quoi | état |
 |---|---|---|
 | M1 | vrai **ombilic** | ✅ **clos sans lui** (`11` §12). Le fichier n'existe pas (zéro occurrence sur 4 corpus) et le centre n'est pas un barycentre mais un ajustement sur la monotonie de la spirale (1,000). Mesuré : déplacer le centre de **3,16 mm** — 22 écarts inter-feuilles — bouge l'invariant de **1,75 %**, soit **sous** le cv de 1,8 %. ⚠⚠ Deux artefacts traversés avant : niveau 2 (seuils calés au niveau 0) et **3 tranches**, qui produisaient 5,65 % et une « marche » qui n'existe pas |
-| M2 | plus de bandes **niveau 0** (2 faites : une migre, une non) | ⏳ ~50 min par bande, `tools/bandes_niveau0.sh`. Le crible niveau 2 ne peut PAS répondre : dans la même plage de z il regarde ailleurs (`11` §11) |
+| M2 | plus de bandes **niveau 0** | ✅ **6 bandes** (`11` §13) : la migration est l'**exception**, 2 sur 6, Fisher p = 0,079 — et le **témoin positif** (bande E, autour du site connu) ressort, ce qui fait des quatre muettes de vrais négatifs |
 | M3 | **ESRF 2,4 µm** sur les 4 sites (`06` §3.6) | ❌ **impossible, pas en attente** — les 4 sites de fusion sont sur **PHerc0172**, qui ne publie que du **7,91 µm** (deux volumes, vérifié sur le bucket). Le scan plus fin n'existe pas pour ce rouleau. ⚠ La partie « même segment à trois résolutions » de `06` §3.6 est, elle, **faite** : c'est la campagne 45,5 / 2,4 / 1,13 µm de Scroll 1 |
 
 ## Voie N — cohérence de la doc
@@ -113,7 +113,7 @@ plupart des pas sont nuls **par construction**.
 |---|---|---|
 | N1 | `00` §9.5 périmé | ✅ corrigé — et c'était **le rayon, pas la résolution** |
 | N2 | `13` : voies A, C, G, H à clore | ✅ les **huit** voies closes |
-| N3 | `HANDOFF` refait | 🔄 §2, §2bis, §3, §4 faits ; §5 et §7 restent |
+| N3 | `HANDOFF` refait | ✅ intégralement |
 | N4 | `tools/temoins.sh` | ✅ **13 contrôles de plus, 79 au total**, dont l'ordre du parallélisme et le cas négatif de la décision |
 
 

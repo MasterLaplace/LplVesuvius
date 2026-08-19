@@ -89,7 +89,11 @@ rho **+0,369, p = 0,045** contre les croisements publiés. C'est son **troisièm
 
 **Trois rouleaux, trois fois le bon signe, deux fois sous 0,05.**
 
-## 6. ⏳ Ce qu'il faudrait pour trancher le détecteur de phase
+## 6. ❌ *(sans objet — le §10 a tranché)* Ce qu'il faudrait pour trancher le détecteur
+
+⚠ Conservé pour que le raisonnement reste lisible, mais **la question est fermée** : le
+volume `cos` n'a pas de niveau plus fin que celui utilisé, et la quantification n'écrase
+rien (marche médiane 12,2 / 255, **0 trace sur 38** à médiane nulle).
 
 1. **n ≈ 85** — soit les trois corpus tracés réunis, avec leurs chemins `lasagna`
    respectifs.

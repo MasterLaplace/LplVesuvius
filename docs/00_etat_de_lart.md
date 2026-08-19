@@ -235,7 +235,7 @@ améliorera l'encre » moins probable, sans la trancher.
 | 2 | topologie de surface | **rien** |
 | 3 | connectivité : trous, fusions, sauts de spire **sans humain** | ⭐ **fusions localisées en 3D** et persistantes (p = 0,0001), défaut qui **dérive** de 1,50 mm de rayon par mm de hauteur (`11`) — mais dans le **volume**, pas encore sur un maillage |
 | 4 | qualité des étiquettes (« main bottleneck » selon les organisateurs) | ⭐⭐ **un instrument neuf** : `12` mesure l'écart entre la feuille et la surface tracée, **sans vérité terrain, sans modèle d'encre, sans juge, et avant toute inférence** |
-| 5 | traçage de fibres | 🔄 commencé (`14`) : orientation mesurable (cohérence 0,64), ⚠ bascule recto/verso **non observée**, pivot vers la cohérence spatiale, **sous-puissant à n = 12** |
+| 5 | traçage de fibres | ❌ **réfuté** (`14`) : l'orientation est mesurable (cohérence 0,64) mais le signe s'**inverse** de n = 12 (+0,330) à n = 54 (**−0,192**). ⚠ Le site en fait pourtant *le* critère visuel — l'idée est bonne et **notre mesure ne l'était pas** |
 | 6 | généralisation inter-rouleaux de l'encre | ⭐ **un mécanisme concret** : sur Scroll 4 le modèle ne rend rien de lisible, et la cause est **en amont** — sur 61 % du segment la feuille est **hors du volume de surface**. Avant d'invoquer un décalage de domaine, vérifier que la surface est là |
 | 7 | métriques d'évaluation | ⭐ la métrique de `07` a désormais son **domaine de définition** (> 1 tour de couverture), son **seuil justifié** (plateau de 0,15 à 0,40, facteur 2,7), et une **réplication** : rho **+0,700, p = 0,0012** sur PHerc1667 |
 
@@ -269,6 +269,18 @@ réelles »**.
 > justement que *le manque est du côté juger, pas produire* — donc c'est le bon endroit,
 > mais ce n'est pas encore ce que le prix demande.
 
+⭐ **Mis à jour le 2026-08-19 — un maillage a été PRODUIT, et jugé** (`24`). `PHerc0358`,
+l'un des **dix** rouleaux du Grand Prize sans aucun segment publié, est tracé
+(**8,48 cm²**, 13,9 s), aplati et rendu (29,4 × 29,2 mm), le volume de 893 Go n'étant
+jamais téléchargé.
+
+> ⚠ **Et la trace est mauvaise** — elle coupe à travers les spires. Ce qui compte est
+> **comment on le sait** : trois mesures indépendantes le disent, et **deux avant que
+> quiconque regarde l'image** (240 auto-intersections à pénétration 200 µm ; **64 %** des
+> fenêtres piquant au bord de la pile, distribution **bimodale**). Les instruments
+> jugeaient le travail des autres ; ils viennent de condamner le nôtre, en 0,05 s, avant
+> le rendu. **C'est la validation qui manquait**, et elle est arrivée par un échec.
+
 Ce qui manquerait pour y arriver, dans l'ordre du moins cher au plus cher :
 
 1. ✅ **finir les campagnes en cours** — *fait le 2026-08-18* : profondeur sur **80**
@@ -277,10 +289,16 @@ Ce qui manquerait pour y arriver, dans l'ordre du moins cher au plus cher :
    écarter les 20 % de segments dont le volume de surface porte le moins de matière fait
    monter le contraste d'encre médian de **+0,381**, p = **0,0005** contre 2000
    permutations de même effectif, et le seuil est défendu par un **plateau** (15–25 %) ;
-3. ⏳ **corriger une trace** et montrer le gain — c'est le vrai « produire ». L'outil
-   existe désormais (`champ_correction.py`, `18` voie J) et sépare ce qu'une médiane
-   confond : un **décalage rigide**, réparable par une translation, d'un **saut de
-   feuille**, qui ne l'est pas. La réparation elle-même n'est pas faite.
+3. ⏳ **corriger une trace** et montrer le gain — le vrai « produire ». Deux moitiés,
+   et la première est tombée le 2026-08-19 :
+   - ✅ **savoir quelle réparation vaut la peine** : `champ_correction.py` sépare ce qu'une
+     médiane confond — un **décalage rigide**, réparable par une translation, d'une
+     **déformation locale**, qui ne l'est pas. Mesuré sur **trois** rouleaux : une
+     translation n'enlèverait que **21,7 / 35,3 / 28,6 %** de l'erreur (`20`) ;
+   - ⏳ **appliquer** la correction. ⚠⚠ `20` §4 écrivait que c'était hors de portée « parce
+     que la chaîne maillage → rendu n'est pas ici ». **C'était faux, et corrigé le jour
+     même** : 32 dépôts sont clonés dont le monorepo officiel, VC3D est construit, et
+     `24` pilote la chaîne complète de bout en bout.
 
 ### 9.5 Les repères du §7 restent vrais, et se sont étendus
 

@@ -148,8 +148,11 @@ destiné à être *utilisé par d'autres* est un cas différent d'un document qu
    les deux figures de champ avec leur témoin.
 4. ⚠ La **langue**. L'auteur juge que ce n'est pas un problème ; l'outil public est
    néanmoins en anglais. Noté une fois, et on n'y revient pas.
-5. ⏳ **Le texte de la soumission lui-même** — il n'est pas écrit. C'est désormais le seul
-   reste, et il ne demande aucune machine.
+5. ✅ **Le texte** — brouillon écrit (`21`), résultats négatifs compris, chiffres gardés
+   par `verifier_chiffres.py`.
+6. ⚠⚠ **Et le tri de ce document est à refaire** — voir le §7. Deux choses l'ont périmé le
+   2026-08-19 : la règle de `19` **ne réplique pas** hors de Scroll 1, et VC3D est
+   construit, donc on **produit** au lieu de seulement juger.
 
 ## 6. Le lien avec le gros prix
 
@@ -165,3 +168,65 @@ prédictions de surface nnUNet, et le volume de winding `lasagna`.
 > La trajectoire est donc en deux temps : **un juge que les autres utilisent**, puis
 > **produire une trace** avec ce juge dans la boucle. Ce document ne couvre que le
 > premier.
+
+
+---
+
+## 7. ⚠⚠ Ce document est périmé sur deux points, et il faut le dire
+
+*(2026-08-19)*
+
+### 7.1 Le candidat « solide » du §2 a perdu sa portée
+
+`19` §12 : la règle qui écarte les segments pauvres en matière **ne réplique pas**. Testée
+sur **110 segments** de trois autres rouleaux :
+
+| corpus | n | voxel | étendue de la cible | rho |
+|---|---:|---:|---:|---:|
+| **Scroll 1** | 80 | 2,4 µm | 1,008 | **+0,539** |
+| **PHerc0139** | 38 | **2,399 µm** | **1,628** | **−0,229** |
+| PHerc1667 | 19 | 2,399 µm | 0,720 | +0,425 |
+| PHerc0172 | 53 | 7,91 µm | 0,220 | −0,217 |
+
+⚠ Ma première explication — un effet de plancher — couvrait **un corpus sur trois** :
+PHerc0139 est à la même résolution que Scroll 1, a une étendue **plus grande**, et rend le
+signe opposé. **La règle est une propriété du corpus publié de Scroll 1.**
+
+⭐ Ce qui reste soumissionnable là-dedans est **plus honnête, pas moins** : sur Scroll 1,
+`material` identifie une **classe d'échecs** (14 segments quasi vierges sur 80), et les
+trois corpus où ça échoue sont publiés **avec** le résultat. Qui reprend la mesure sait
+qu'elle doit être re-validée chez lui, au lieu de le découvrir après.
+
+### 7.2 ⭐⭐ Et le §6 (« nos outils sont des juges ») n'est plus vrai
+
+Il disait : *« un juge n'a rien à mesurer sur un rouleau non tracé »*. Depuis, VC3D est
+construit et `24` a tracé `PHerc0358` — **8,48 cm² sur un rouleau du prix que personne
+n'avait touché**.
+
+Ça ouvre deux prix qui n'étaient pas dans ce document :
+
+| prix | montant | ce qu'il faut | échéance |
+|---|---:|---|---|
+| **First Letters** | **50 000 $ × 10 rouleaux** | **10 lettres dans UNE zone de 4 cm²** | 25 juin 2027 |
+| **Titre de PHerc. Paris 4** | **50 000 $** | l'image du titre, lisible par leurs papyrologues | 25 juin 2027 |
+
+⭐ Et deux phrases de leur page changent le calcul :
+
+> *« Sometimes ink is visible **directly in the flattened render, with no model at all**…
+> **that by itself qualifies for the prize**. »*
+
+> *(sur le titre)* *« …so finding it may take better methods, higher resolution, or
+> **looking somewhere new**. »*
+
+⚠ **Dix rouleaux sur treize n'ont aucun segment** (`23`). Ce n'est pas l'outil qui manque —
+il est public — c'est de savoir par lequel commencer. `16` le dit : `PHerc0358`.
+
+### 7.3 Ce que la soumission doit donc contenir
+
+| ✅ à mettre | ❌ à ne plus prétendre |
+|---|---|
+| la mesure à distance : ~300 requêtes par segment, **0,9 h pour 800 rouleaux** | qu'une règle générale trie les corpus |
+| les **quatre** corpus de `19`, échecs compris | que le seuil de 20 % vaille ailleurs |
+| le **champ de correction** sur trois rouleaux, et que la translation est le mauvais remède | — |
+| ⭐ **la première trace d'un rouleau du prix, condamnée par nos instruments avant le rendu** (`24`) | — |
+| les résultats **négatifs** avec leur puissance | — |
