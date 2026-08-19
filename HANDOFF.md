@@ -96,7 +96,7 @@ géométrie à suivre.
 | `23` | ⭐ **l'inventaire des 13 rouleaux du prix** — 10 n'ont AUCUN segment |
 | **`24`** | ⭐⭐ **la première trace d'un rouleau du prix**, condamnée par nos instruments avant le rendu. ⚠ Son §2 est **corrigé** : le verdict tient sur deux instruments, pas trois |
 | **`25`** | ⭐⭐ **la graine choisie sur la planéité** — et la réplication sur 12 rouleaux qui a corrigé la revendication deux fois |
-| **`26`** | ⭐⭐ **`direction_fields`** : le contrat dérivé, l'encodage mesuré sur 3 rouleaux — et le champ qui **n'agit pas sur la croissance** |
+| **`26`** | ⭐⭐ **ce qui gouverne la trajectoire du traceur** — et les deux mécanismes qui ne la gouvernent pas, contrats dérivés et encodage mesuré |
 
 ## 4. L'outillage, et comment le relancer
 

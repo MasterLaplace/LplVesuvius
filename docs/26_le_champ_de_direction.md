@@ -1,13 +1,20 @@
-# `direction_fields` — le contrat, l'encodage, et un champ qui n'agit pas
+# Ce qui gouverne la trajectoire du traceur — et tout ce qui ne la gouverne pas
 
 2026-08-19, suite de [`25`](25_une_graine_choisie_sur_la_planeite.md). La moitié restante
-de T1 : *où l'on part* était réglé, *comment on avance* ne l'était pas. Le paramètre qui
-devait le régler s'appelle `direction_fields`, et rien ne le documente.
+de T1 : *où l'on part* était réglé, *comment on avance* ne l'était pas. Deux paramètres
+étaient censés le régler — `direction_fields` et les grilles de normales — et **rien ne
+documente ni l'un ni l'autre**.
 
-**Résultat en une ligne** : le contrat est **dérivé**, l'encodage des octets est **mesuré
-et répliqué sur trois rouleaux** — et le champ, une fois branché, **ne change rien à la
-croissance**. Six exécutions, dont trois avec des champs différents, produisent la **même
-trajectoire au centième sur 118 générations**.
+**Résultat en une ligne** : les deux contrats sont **dérivés du binaire**, l'encodage des
+octets est **mesuré et répliqué sur trois rouleaux**, les **dix poids de perte** sont
+identifiés et réglables — et **aucun des deux mécanismes ne déplace la croissance d'un
+centième**, y compris à ×100 d'intensité et avec 1,53 Go de vraies grilles qui coûtent
+**29 fois** le temps de calcul. Le contrôle positif montre que la méthode sait pourtant
+détecter un changement : `step_size` fait diverger dès le premier pas.
+
+> ⭐⭐ **La trajectoire répond à la prédiction et à la géométrie du pas, à rien d'autre.**
+> C'est pourquoi la **graine** reste le seul levier mesuré (`25`) — et c'est un résultat
+> utile en soi : il évite à quiconque de chercher le remède là où il n'est pas.
 
 ---
 
