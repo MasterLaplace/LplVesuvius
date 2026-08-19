@@ -472,6 +472,16 @@ assert not bool(cl["retenu"].reshape(forme)[2, 2, 4]), "l'eclat isole a ete rete
 print(f"ALL PASS (0 failures, {n} checks)")
 PY
 
+# ⚠ Cette batterie lit le SOURCE de villa, donc elle exige le depot clone. Elle est
+# conditionnee plutot que rendue optionnelle : un temoin qui passe au vert quand il ne
+# peut rien verifier est precisement ce que ce fichier existe pour interdire, donc
+# l'absence du clone est DITE, pas avalee.
+if [ -f "$ROOT/repos/villa/volume-cartographer/core/src/GrowPatch.cpp" ]; then
+  run "poids GrowPatch vs source" python3 "$ROOT/analysis/src/poids_growpatch.py" --verifier
+else
+  printf '  ⚠ %-28s villa non clone (tools/clone_repos.sh) — NON VERIFIE\n' "poids GrowPatch vs source"
+fi
+
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
 sys.path.insert(0, '../analysis/src')

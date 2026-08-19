@@ -178,6 +178,24 @@ poids et en nommait **deux qui n'existent pas**. Vérifié dans
 `applyJsonWeights()`, lignes 1304–1315, lit **douze** clés, et `surface_sdt_weight`
 comme `spaceline_weight` ont **zéro occurrence dans tout le dépôt villa**.
 
+⭐ **Et cette table n'est plus transcrite : elle est DÉRIVÉE.**
+`analysis/src/poids_growpatch.py` la lit dans le source à chaque exécution — clés,
+défauts, gardes — et `--verifier` sort en **3** si elle cesse de s'accorder avec ce qui
+est écrit ici. C'est une batterie de `tools/temoins.sh`. La raison est la faute
+elle-même : *une table de correspondance recopiée à la main se désaccorde de sa source
+dès que la source bouge, et rien ne le dit.*
+
+> ⚠ Deux pièges payés en écrivant ce script, tous deux « le premier match n'est pas le
+> bon » : `find("gen_normal_loss")` tombe sur la **déclaration avancée** (l. 1581), qui
+> n'a pas de corps, donc la garde paraissait absente d'un source où elle est bien là ;
+> et la garde de `DIRECTION` vit dans **`conditional_direction_loss`**, pas dans
+> `gen_direction_loss` — deux fonctions au nom voisin, et c'est la seconde qui
+> court-circuite. Plus un troisième, plus grave : le bloc d'échec imprimait **`ALL
+> PASS (1 failures, …)`**, la chaîne exacte que `temoins.sh` cherche pour déclarer une
+> batterie verte. Le contrôle serait passé au vert **en affichant ses propres échecs**.
+> Corrigé, puis **sondé** : casser une clé attendue fait bien sortir en 3, sans
+> `ALL PASS`.
+
 `vc_grow_seg_from_seed` imprime au démarrage (`GrowPatch.cpp:3468`) la ligne qui décide
 de tout :
 
@@ -195,7 +213,7 @@ l'erreur : la ligne affiche `SURFACE_SDT` et `SPACELINE`, mais les clés sont
 |---|---|---:|---|
 | `DIST` | `dist_weight` | 1 | — |
 | `STRAIGHT` | `straight_weight` | 0,2 | — |
-| **`DIRECTION`** | **`direction_weight`** | **1** | `direction_fields` est vide (`:2326`) |
+| **`DIRECTION`** | **`direction_weight`** | **1** | `direction_fields` est vide — ⚠ garde dans `conditional_direction_loss` (`:2316`), **pas** dans `gen_direction_loss` (`:2185`) |
 | `SNAP` | `snap_weight` | 0,1 | ni `ngv` ni `patch_normals` |
 | **`NORMAL`** | **`normal_weight`** | **10** | **ni `ngv` ni `patch_normals`** (`:2050`) |
 | `NORMAL3DLINE` | `normal3dline_weight` | 0 | — |
