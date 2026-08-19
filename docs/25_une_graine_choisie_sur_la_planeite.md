@@ -205,12 +205,28 @@ Quatre exécutions de **la même graine**, mêmes paramètres, même machine :
 | `thread_limit: 1`, essai 2 | 19,823302 cm² | **0** |
 
 ⚠ Passer à `thread_limit: 1` — la valeur que VC3D utilise, et que le message de démarrage
-de l'outil recommande — **ne suffit pas**. L'écart subsiste. Donc `vc_grow_seg_from_seed`
-rend une surface **différente à chaque exécution**, d'environ 0,08 %.
+de l'outil recommande — **ne suffit pas**. L'écart subsiste, d'environ 0,08 %.
 
-> **La surface n'est pas reproductible ; le verdict l'est.** C'est un argument de plus pour
-> juger une trace par un **invariant** plutôt que par l'artefact : les quatre surfaces
-> diffèrent, les quatre passent le même contrôle.
+⚠⚠ **Mais l'affirmation « le traceur n'est pas reproductible » est trop grossière, et la
+mesure suivante l'a corrigée.** En comparant les *journaux de croissance* et non les seules
+aires finales : **les 118 générations sont identiques au centième dans les six exécutions**,
+y compris celle qui reçoit un champ de direction. Toutes finissent la croissance à
+**1985,73 mm²**.
+
+| | croissance (118 générations) | surface sauvée |
+|---|---|---:|
+| `thread_limit: 0`, essais 1 et 2 | **identique** | 19,834872 / 19,821850 cm² |
+| `thread_limit: 1`, essais 1 et 2 | **identique** | 19,838660 / 19,823302 cm² |
+| `thread_limit: 1` + champ de direction | **identique** | 20,747079 cm² |
+
+> **La croissance est déterministe ; l'étape finale ne l'est pas.** Ce n'est pas la même
+> chose que « le traceur n'est pas reproductible », et la différence a des conséquences :
+> ce qui varie d'une exécution à l'autre est une **optimisation post-croissance**, pas le
+> chemin suivi. C'est aussi le seul endroit où un `direction_fields` agit — voir §8.
+
+> **La surface n'est pas reproductible ; le verdict l'est.** Les quatre surfaces sans champ
+> diffèrent, les quatre passent le même contrôle : un argument de plus pour juger une trace
+> par un **invariant** plutôt que par l'artefact.
 
 ## 5. ⚠⚠ Ce que la graine ne règle PAS — et c'est la moitié du résultat
 

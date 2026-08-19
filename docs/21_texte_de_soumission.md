@@ -246,11 +246,14 @@ encore.
 >
 > #### 10. Two reproducibility facts about the official tracer
 >
-> - **`vc_grow_seg_from_seed` is not deterministic.** Four runs of the same seed, same
->   params, same machine returned four areas spanning 0.08 % — and `thread_limit: 1`, the
->   value VC3D uses and the tool's own startup message recommends, does **not** fix it. All
->   four returned **0 self-intersections**: the surface is not reproducible, the verdict is.
->   That is an argument for judging a trace by an invariant rather than by the artefact.
+> - **`vc_grow_seg_from_seed`'s growth is deterministic; its final step is not.** Six runs
+>   of the same seed — two at `thread_limit: 0`, two at `1`, one with a direction field —
+>   produce **byte-identical growth logs across all 118 generations**, all ending at
+>   1985.73 mm². The **saved** surfaces then span 19.8219–19.8387 cm² (and 20.7471 with the
+>   field). So what varies is a post-growth optimisation, not the path taken. ⚠ We first
+>   wrote "the tracer is not reproducible", which is true but too coarse; comparing the
+>   growth logs rather than the final areas is what sharpened it. All four field-free runs
+>   returned **0 self-intersections**: the surface is not reproducible, the verdict is.
 > - **Area saturates against the generation budget.** Two traces on *different scrolls* both
 >   stopped at generation 119 of 120 and returned the same area to eight thousandths of a
 >   percent — a surface grows as a front, so its area is set by the step count when nothing
