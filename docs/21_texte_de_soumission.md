@@ -46,7 +46,7 @@ encore.
 >
 > | field | meaning | evidence |
 > |---|---|---|
-> | `material` | fraction of probed windows containing papyrus | **rho +0.539** vs 80 published Scroll 1 ink maps (p < 1e-6; **+0.561** partialling out area) |
+> | `material` | fraction of probed windows containing papyrus | **rho +0.539** vs 80 published Scroll 1 ink maps (p < 1e-6; **+0.561** partialling out area). ⚠ Driven by a near-blank class: **+0.190, ns** once those segments are removed. Did **not** replicate on Scroll 5 — see §4 |
 > | `edge_pinned` | peak sits at a stack edge — the sheet is *outside* the volume | rho −0.275 (p = 0.014) |
 > | `offset` | median distance from traced layer to material peak | rho +0.388 vs published self-crossings (n = 54, p = 0.004) |
 > | `residual` | what remains **after** the best rigid shift | **rho +0.428** vs the same crossings (p = 0.0012) |
@@ -60,10 +60,30 @@ encore.
 > Ink detection there returns nothing, and this explains why: **there is no papyrus under
 > the trace to detect ink on.** No model change would have helped.
 >
-> #### 4. A rule that changes a decision
+> #### 4. A rule that flags a failure class before you pay for it
 >
-> Dropping the worst **20 %** of segments by `material` raises the corpus median ink
-> contrast by **+0.381**, against **2000 random draws of the same size**: **p = 0.0005**.
+> On Scroll 1, `material` identifies a **class** of segments whose published ink map is
+> nearly flat — **14 of 80**. Dropping the material-poorest **20 %** raises the corpus
+> median ink contrast by **+0.381** against **2000 random draws of the same size**
+> (**p = 0.0005**) because it removes members of that class.
+>
+> ⚠⚠ **It is a class, not a gradient, and we measured which.** Remove the 16 segments
+> below a contrast of 3.0 and the correlation falls from **+0.539 to +0.190 (p = 0.13,
+> not significant)**. Among segments that actually carry ink, `material` says little. We
+> state this because the weaker claim is the one the evidence supports — and because
+> "flags a failure class" is closer to what your bottleneck table asks for than "improves
+> a median" ever was.
+>
+> ⚠⚠ **And it did not replicate on Scroll 5** (PHerc0172, 53 segments, same measurement):
+> rho **−0.217** (p = 0.12), decision p = 0.84. We report the reason rather than the
+> number alone: **Scroll 5's published ink maps barely differ from one another** — their
+> contrast spans a factor of 1.25 against 5.1 on Scroll 1, a relative range **4.6× smaller**
+> — and the whole corpus sits inside what Scroll 1 would call the near-blank band. There is
+> no class there to separate, so the test is **uninformative rather than refuting**. The
+> predictor's own spread is normal; it is the target that is flat.
+>
+> ⚠ Still confounded: Scroll 5 is scanned at 7.91 µm against Scroll 1's 2.4 µm. PHerc0139
+> and PHerc1667 both publish at 2.399 µm — that is the paired test, and it is running.
 >
 > **The robustness check we ran on ourselves.** `material` depends on a sampling grid, so
 > we re-measured all 80 segments at **5.4× the probe density** (72 → 392 windows) and

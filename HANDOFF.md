@@ -244,6 +244,13 @@ transaction sur un nom inconnu.
    (−0,315 → **−0,382**, p = 0,0005). C'est le contraire d'un effet de taille.
    ⚠ Confond non levé, et il faut le dire : une carte vide peut vouloir dire « la trace a
    raté » **ou** « ce papyrus est vierge ». C'est un **tri de corpus**, pas un diagnostic.
+   ⚠⚠ **ET LA RÉPLICATION ÉCHOUE SUR SCROLL 5** (`19` §11) : rho **−0,217** (p = 0,12),
+   décision p = 0,84. Deux mesures qualifient ce zéro. **(a)** La cible y est plate —
+   contraste sur un facteur 1,25 contre 5,1 sur Scroll 1, étendue relative **4,6× plus
+   petite** — donc le test est **non concluant**, pas réfutant. **(b)** Et sur Scroll 1 la
+   règle sépare une **CLASSE**, pas un gradient : retirer les 16 segments sous un contraste
+   de 3,0 fait tomber rho de **+0,539 à +0,190 (p = 0,13, ns)**. ⚠ Confond restant : 7,91 µm
+   contre 2,4 — PHerc0139 et PHerc1667 publient à 2,399, c'est le test apparié.
    ⭐ **Robustesse vérifiée** (`19` §10) : re-mesuré à **5,4× la densité de sondage**
    (72 → 392 fenêtres), l'accord des classements vaut **+0,841** (témoin 0,223) et le
    **plateau 15–25 % survit intact**. ⚠⚠ Un premier contrôle avait conclu l'inverse
