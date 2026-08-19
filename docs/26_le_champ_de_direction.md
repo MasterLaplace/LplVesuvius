@@ -331,7 +331,46 @@ pour en sauter), donc un lot à soi.
 changé la trace reste **la graine** — ni le champ de direction, ni la grille de normales,
 ni les poids, ni leur intensité.
 
-## 8. ⭐⭐ Le contrôle : quelque chose déplace-t-il la croissance ?
+## 8. ⭐⭐ Et depuis le VOLUME, pas depuis la prédiction
+
+Le §7 disait que les grilles publiées sont une tautologie : elles viennent de la prédiction
+que le traceur suit déjà. La seule façon de le contredire est d'en fabriquer depuis le
+**volume masqué** — la matière elle-même.
+
+### Ce que ça a demandé
+
+⚠ `vc_gen_normalgrids` **n'accepte pas d'URL** : il itère un répertoire local. Et le volume
+fait **893 Go**. La sortie est le motif de la boîte :
+
+> Un zarr rend sa valeur de remplissage pour les chunks absents. En copiant le `.zarray`
+> tel quel et en ne peuplant que la boîte, on obtient un tableau **de la taille d'origine**
+> — donc lisible sans la moindre translation de coordonnées — qui ne pèse que la boîte.
+> ⭐ **3,44 Go** pour ±700 voxels autour de la graine, au lieu de 893.
+
+⚠ Le volume est **non compressé** (`"compressor": null`), donc un chunk de 128³ pèse
+exactement 2 Mio et la taille se calcule d'avance au lieu de se découvrir.
+
+Puis `--num-parts` / `--part-id` shardent **par dalle de chunks** : 116 dalles en `xy`,
+61 en `xz` et `yz`. On ne calcule que les **12 dalles par direction** qui recouvrent la
+boîte — 36 sur 238.
+
+### Le résultat
+
+| | vitesse | trajectoire |
+|---|---:|---|
+| sans grille | 23,80 mm²/s | référence |
+| **grilles du VOLUME** | **2,15 mm²/s** | **identique au centième** |
+
+⚠⚠ **Onze fois plus lent, et pas un centième de déplacement.** Les grilles sont donc
+massivement consultées — et une information qui ne vient **pas** de la prédiction ne
+change pas davantage la trajectoire que celle qui en vient.
+
+> ⏳ Mesuré avec `xy` complet et `xz` partiel, `yz` vide : la génération des trois
+> directions tourne encore. **La couverture partielle est nommée**, pas passée sous
+> silence — mais `xy` couvre entièrement la boîte, et le chargeur confirme
+> `Loaded normal grid level 0`.
+
+## 9. ⭐⭐ Le contrôle : quelque chose déplace-t-il la croissance ?
 
 Sans lui, « croissance identique » pourrait n'être qu'une comparaison cassée. Deux
 paramètres testés sur les mêmes 20 générations :
@@ -359,7 +398,7 @@ et les grilles est réelle.
 > seul levier qui ait changé quelque chose (`25`) : elle décide *où* la prédiction est lue,
 > et c'est la prédiction qui décide de tout le reste.
 
-## 9. Reproduire
+## 10. Reproduire
 
 ```bash
 # le champ, seulement autour de la trace (626 Mo au lieu de plusieurs Go)
