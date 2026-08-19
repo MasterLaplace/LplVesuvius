@@ -21,9 +21,13 @@ mieux protégé.
 ✅ **Papiers primaires — LUS le 2026-08-19, voir [`27`](27_ce_que_la_litterature_dit.md)** :
 [Diffeomorphic Spiral Fitting](https://arxiv.org/abs/2512.04927) (Henderson, déc. 2025) et
 [Ink Detection from Surface Topography](https://arxiv.org/abs/2603.27698) (Angelotti,
-Nicolardi, Henderson, Seales, mars 2026). ⚠⚠ Le second donne une **cible de 4 µm** de
-résolution latérale — les 13 rouleaux du prix sont à **8,64–9,36 µm**, soit un facteur
-**2,2 trop grossier**.
+Nicolardi, Henderson, Seales, mars 2026). ⚠⚠ Le second donne une cible de **~1 µm** de
+résolution latérale (*« lateral sampling on the order of 1 µm or finer »*, et seul
+1,02 µm passe encore le seuil de DICE 0,70) — les 13 rouleaux du prix sont à
+**8,64–9,36 µm**, soit un facteur **8,6 à 9,4 trop grossier**, très au-delà du point où
+un modèle appris sur du fin rend **zéro** (3,40 µm). ⚠ Une première version de cette
+ligne annonçait « 4 µm, facteur 2,2 » : chiffre écrit depuis le résumé sans ouvrir le
+corps de l'article, corrigé après lecture intégrale.
 
 ---
 
