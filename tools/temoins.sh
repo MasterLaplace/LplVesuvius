@@ -327,6 +327,11 @@ PY
 
 cd "$ROOT/inference_xpu" || exit 2
 run "tracecheck (outil public)" uv run python "$ROOT/tracecheck/selftest.py"
+# ⚠ Un cran au-dessus du selftest : celui-ci verifie que chaque detecteur est PORTEUR.
+# Un controle par injection attrape un detecteur aveugle, pas un detecteur absent -- une
+# suite qui n'assertit jamais sur une sortie ne distingue pas "n'a rien trouve" de "n'a
+# jamais ete consulte". Cf docs/28 §7.
+run "tracecheck : mutation"     python3 "$ROOT/tracecheck/mutation.py"
 
 run "robustesse : deux mesures  " uv run python - <<'PY'
 import sys

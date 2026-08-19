@@ -170,8 +170,21 @@ avant toute publication.
    d'échouer » poussée d'un cran : ne pas seulement sonder qu'un contrôle *peut* échouer,
    mais remplacer chaque détecteur par un bouchon et **exiger le rouge**.
 
-   ⏳ **À appliquer à `tracecheck` et à `tools/temoins.sh`.** C'est le premier reste de ce
-   document.
+   ✅ **Fait le jour même** : `tracecheck/mutation.py`, batterie de `tools/temoins.sh`.
+   Il remplace tour à tour sept fonctions porteuses par un bouchon **dégénéré** — pas
+   cassé : lever une exception ferait rougir la suite pour la mauvaise raison, on veut
+   prouver qu'une réponse *neutre et plausible* est détectée — et exige le rouge.
+
+   **Résultat : les sept portent du poids.** `judge`, `planarity_map`, `_neighbourhood`,
+   `lit_voxel`, `decode`, `chunk_key`, `find_surface_volume` — débrancher n'importe
+   lequel fait tomber `selftest.py`. Là où l'auteur de `tifxyz-surgeon` a découvert que
+   **trois de ses quatre détecteurs** pouvaient disparaître sans qu'un test le remarque.
+
+   > ⚠ Piège payé en l'écrivant : le python système de cette machine **n'a pas numpy**,
+   > et `temoins.sh` lance ses batteries par `uv run python` **depuis `experiments/`**.
+   > Un script qui suppose son propre interpréteur annonçait « la suite de référence est
+   > déjà rouge » sur une suite parfaitement verte — le pire des diagnostics : faux, et
+   > confiant. Le script cherche donc un interpréteur qui a numpy, et le **dit**.
 
 ## 8. Ce que je n'ai pas vérifié
 
