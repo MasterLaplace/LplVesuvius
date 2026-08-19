@@ -1,0 +1,10 @@
+{
+  "traces": 38,
+  "marches_totales": 35551,
+  "marche_mediane_min": 6.0,
+  "marche_mediane_mediane": 12.25,
+  "marche_mediane_max": 16.0,
+  "traces_a_marche_nulle": 0,
+  "valeurs_distinctes": 14,
+  "verdict": "la quantification n'ecrase PAS le signal"
+}

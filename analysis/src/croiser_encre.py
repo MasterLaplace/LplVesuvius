@@ -75,6 +75,28 @@ def mesures_encre(chemin: Path) -> dict:
     }
 
 
+def _partielle(a: np.ndarray, b: np.ndarray, c: np.ndarray) -> tuple[float, float]:
+    """Spearman partiel de a et b, la variable c retirée des deux.
+
+    ⚠ Le rang d'abord, la régression ensuite : c'est ce qui en fait un *Spearman*
+    partiel et non un Pearson sur des données non normales. On retire de a et de b ce
+    que c explique linéairement **en rangs**, et on corrèle les résidus.
+    """
+    from scipy.stats import rankdata, spearmanr
+
+    if a.size < 6:
+        return float("nan"), float("nan")
+    ra, rb, rc = rankdata(a), rankdata(b), rankdata(c)
+    rc_centre = rc - rc.mean()
+    denom = float((rc_centre ** 2).sum())
+    if denom == 0:
+        return float("nan"), float("nan")
+    resid_a = ra - ra.mean() - rc_centre * float((rc_centre * (ra - ra.mean())).sum()) / denom
+    resid_b = rb - rb.mean() - rc_centre * float((rc_centre * (rb - rb.mean())).sum()) / denom
+    rho, p = spearmanr(resid_a, resid_b)
+    return float(rho), float(p)
+
+
 def decision(ecarts: np.ndarray, encre: np.ndarray, part: float,
              tirages: int, graine: int) -> dict:
     """Écarter la pire fraction par écart : est-ce mieux qu'un tirage au hasard ?"""
@@ -109,8 +131,19 @@ def main() -> int:
         epilog="Une regle qui ne bat pas un tirage au hasard n'est pas une regle.")
     parser.add_argument("profondeur", type=Path, help="JSON de zarr_depth.py")
     parser.add_argument("cartes", type=Path, help="repertoire des cartes d'encre .jpg")
+    parser.add_argument("--depuis", type=Path, default=None,
+                        help="reprendre un rapport deja ecrit au lieu de relire les "
+                             "images. ⚠ Les cartes pesent jusqu'a 99 Mpx : relire pour "
+                             "changer une statistique coute dix minutes et ne mesure "
+                             "rien de nouveau")
     parser.add_argument("--grandeur", default="ecart_a_la_trace",
                         help="la mesure de trace qui decide")
+    parser.add_argument("--sens", choices=("haut", "bas"), default="haut",
+                        help="quel bout de la grandeur est MAUVAIS. « haut » ecarte les "
+                             "grandes valeurs (un ecart), « bas » les petites (une part "
+                             "de fenetres avec de la matiere). ⚠ Se tromper de sens "
+                             "produit une regle qui garde exactement ce qu'il fallait "
+                             "jeter, et son p sort alors banal -- pas faux, inverse")
     parser.add_argument("--cible", default="encre_contraste_p90_p50",
                         help="la grandeur d'encre qu'on cherche a ameliorer")
     parser.add_argument("--parts", type=float, nargs="+",
@@ -122,9 +155,13 @@ def main() -> int:
 
     from scipy.stats import spearmanr
 
-    profond = {r["segment"]: r for r in json.loads(args.profondeur.read_text())
-               if r.get("segment")}
-    lignes = []
+    if args.depuis is not None and args.depuis.exists():
+        lignes = json.loads(args.depuis.read_text())["segments"]
+        profond = {}
+    else:
+        profond = {r["segment"]: r for r in json.loads(args.profondeur.read_text())
+                   if r.get("segment")}
+        lignes = []
     for seg, rec in sorted(profond.items()):
         carte = args.cartes / f"{seg}.jpg"
         if not carte.exists():
@@ -164,7 +201,28 @@ def main() -> int:
 
     # ⚠ Le confond de taille : si l'encre ne suivait que l'etendue du segment, tout ce
     # qui precede serait une mesure de surface deguisee. On le mesure au lieu de l'exclure.
+    # ⚠⚠ La correction de MULTIPLICITE. Vingt correlations testees, cinq seuils de
+    # decision : a 5 % nominal, une sur vingt sort « significative » par pur hasard.
+    # Le seuil de Bonferroni est imprime AVEC les resultats, pas laisse au lecteur.
+    seuil_c = 0.05 / max(1, len(correlations))
+    print(f"\n⚠ seuil de Bonferroni sur {len(correlations)} correlations : "
+          f"p < {seuil_c:.4f}")
+    tenus = [c for c in correlations if c["p"] < seuil_c]
+    for c in tenus:
+        print(f"   TIENT  {c['trace']:>18} x {c['encre']:<26} "
+              f"rho {c['rho']:+.3f}  p {c['p']:.5f}")
+
+    # ⚠⚠ Le CONFOND se ferme en TRIANGLE, pas en un cote. Savoir que l'encre suit
+    # l'emprise ne suffit pas : il faut aussi savoir si le CRITERE la suit. Si les deux
+    # branches existent, la correlation critere x encre peut n'etre qu'un detour par la
+    # taille du segment -- d'ou la correlation PARTIELLE, qui la retire.
     aire = np.array([l["emprise_px"] for l in lignes], dtype=float)
+    print()
+    for ct in champs_trace:
+        a = np.array([l.get(ct, np.nan) for l in lignes], dtype=float)
+        bon = np.isfinite(a)
+        rho, p = spearmanr(aire[bon], a[bon])
+        print(f"{'CONFOND emprise':>18} {ct:>26} {rho:>+8.3f} {p:>9.4f}")
     print()
     for ce in champs_encre:
         b = np.array([l.get(ce, np.nan) for l in lignes], dtype=float)
@@ -172,10 +230,23 @@ def main() -> int:
         rho, p = spearmanr(aire[bon], b[bon])
         print(f"{'CONFOND emprise':>18} {ce:>26} {rho:>+8.3f} {p:>9.4f}")
 
+    print(f"\n{'PARTIELLE (emprise retiree)':>30} {'rho':>8} {'p':>9}")
+    partielles = []
+    for c in correlations:
+        a = np.array([l.get(c["trace"], np.nan) for l in lignes], dtype=float)
+        b = np.array([l.get(c["encre"], np.nan) for l in lignes], dtype=float)
+        bon = np.isfinite(a) & np.isfinite(b)
+        rho_p, pp = _partielle(a[bon], b[bon], aire[bon])
+        partielles.append({**c, "rho_partiel": rho_p, "p_partiel": pp})
+        if c["p"] < 0.05:
+            print(f"{c['trace'] + ' x ' + c['encre']:>30} {rho_p:>+8.3f} {pp:>9.4f}")
+
     ecarts = np.array([l.get(args.grandeur, np.nan) for l in lignes], dtype=float)
+    if args.sens == "bas":
+        ecarts = -ecarts
     cible = np.array([l.get(args.cible, np.nan) for l in lignes], dtype=float)
     bon = np.isfinite(ecarts) & np.isfinite(cible)
-    print(f"\nDECISION : ecarter les pires « {args.grandeur} », "
+    print(f"\nDECISION : ecarter les pires « {args.grandeur} » ({args.sens}), "
           f"cible « {args.cible} », {int(bon.sum())} segments")
     print(f"{'part':>6} {'gardes':>7} {'avant':>8} {'apres':>8} {'gain':>8} "
           f"{'temoin p95':>11} {'p':>8}")
@@ -183,7 +254,9 @@ def main() -> int:
     for part in args.parts:
         d = decision(ecarts[bon], cible[bon], part, args.tirages, args.graine)
         decisions.append(d)
-        marque = " *" if d["p_permutation"] < 0.05 else ""
+        # ⚠ Cinq fractions testees : le seuil qui compte est 0,05 / 5.
+        marque = (" **" if d["p_permutation"] < 0.05 / len(args.parts)
+                  else " *" if d["p_permutation"] < 0.05 else "")
         print(f"{part:>6.2f} {d['segments_gardes']:>7} {d['encre_mediane_avant']:>8.3f} "
               f"{d['encre_mediane_apres']:>8.3f} {d['gain']:>+8.3f} "
               f"{d['temoin_p95']:>11.3f} {d['p_permutation']:>8.4f}{marque}")
@@ -191,7 +264,10 @@ def main() -> int:
     if args.out:
         args.out.write_text(json.dumps(
             {"n": n, "rho_detectable": detectable_rho(n),
-             "correlations": correlations, "decisions": decisions,
+             "correlations": correlations, "partielles": partielles,
+             "seuil_bonferroni_correlations": seuil_c,
+             "seuil_bonferroni_decisions": 0.05 / max(1, len(args.parts)),
+             "decisions": decisions,
              "segments": lignes}, indent=2) + "\n")
         print(f"\necrit : {args.out}")
     return 0

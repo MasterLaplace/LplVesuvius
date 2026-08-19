@@ -1,0 +1,18 @@
+[
+  {
+    "zarr": "2.4um-0.22m-78keV-volume-20260411134726.zarr",
+    "layers": 109,
+    "voxel_um": 2.4,
+    "sondees": 296,
+    "avec_matiere": 96,
+    "decalage_median_vx": 12.5,
+    "decalage_median_um": 30.0,
+    "residuel_median_um": 56.4,
+    "residuel_p90_um": 127.19999999999999,
+    "part_au_bord": 0.052083333333333336,
+    "paires_voisines": 144,
+    "coherence_voisins": 0.3158055151776825,
+    "coherence_temoin_melange": 0.053612824799136226,
+    "segment": "20260623144957-w053-058"
+  }
+]
