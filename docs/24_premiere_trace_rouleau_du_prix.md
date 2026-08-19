@@ -58,9 +58,26 @@ part au centre.
 
 ### L'image
 
-Le détail à pleine résolution (`data/trace/PHerc0358/png_a/detail_centre.png`, 1000×1000 px
-= 9,4 × 9,4 mm) montre des striations parallèles qui bifurquent et s'enroulent : ce ne sont
-pas les fibres **d'une** feuille, ce sont **plusieurs feuilles vues par la tranche**.
+**Le rendu complet** — 29,4 × 29,2 mm de papyrus, réduit pour tenir sur une page :
+
+![rendu complet de la trace](images/24_rendu_ensemble.png)
+
+Deux plaques séparées par du vide : l'aplatissement a dû écarteler une surface qui se
+recoupe. ⚠ Une trace saine rend une bande continue.
+
+**Le détail à pleine résolution** — 1000 × 1000 px, soit **9,4 × 9,4 mm**, l'échelle à
+laquelle une ligne de texte grec se voit :
+
+![detail a pleine resolution](images/24_rendu_detail.png)
+
+> ⚠⚠ **Ce ne sont pas les fibres d'UNE feuille.** Les striations claires bifurquent,
+> s'enroulent et se superposent : ce sont **plusieurs feuilles vues par la tranche**. Une
+> trace saine montrerait des fibres **parallèles** traversant la page — c'est d'ailleurs
+> le critère visuel que le règlement nomme : *« check if you can visually follow horizontal
+> papyrus fibers across the page »*.
+
+⚠ **Et l'œil arrive en dernier.** Les deux mesures ci-dessus avaient déjà rendu le même
+verdict, dont une **avant le rendu**. L'image confirme ; elle ne décide pas.
 
 ## 3. ⭐ Ce que cet échec vaut
 

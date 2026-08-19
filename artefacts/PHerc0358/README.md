@@ -14,8 +14,8 @@ verdict** : trois instruments l'ont condamnée, **deux avant tout rendu**. Analy
 | `mesh_flat.tifxyz/` | la même, aplatie par ABF++ (96,2 % des points rastérisés) |
 | `seed.json` | les paramètres qui marchent. ⚠⚠ **`voxelsize` est obligatoire** : à 0 (le défaut) l'aire en cm² est nulle *par construction* et toute surface est rejetée |
 | `selfcross_a.json` | le verdict de `vc_tifxyz_selfcross` — **240 contacts transverses**, pénétration max 200 µm |
-| `rendu_vue_ensemble.png` | le rendu complet réduit, 29,4 × 29,2 mm |
-| `rendu_detail_9x9mm.png` | ⭐ un détail à **pleine résolution** (1000×1000 px = 9,4 × 9,4 mm) : on y voit **plusieurs feuilles par la tranche**, pas les fibres d'une seule |
+| `rendu_vue_ensemble.png` | le rendu complet réduit, 29,4 × 29,2 mm — *aussi dans `docs/images/24_rendu_ensemble.png`* |
+| `rendu_detail_9x9mm.png` | ⭐ un détail à **pleine résolution** (1000×1000 px = 9,4 × 9,4 mm) : on y voit **plusieurs feuilles par la tranche**, pas les fibres d'une seule — *aussi dans `docs/images/24_rendu_detail.png`* |
 
 ## La graine
 
