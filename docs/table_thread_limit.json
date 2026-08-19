@@ -1,0 +1,122 @@
+{
+  "tirages": [
+    {
+      "thread_limit": 0,
+      "repetition": 1,
+      "statut": "ok",
+      "generations": 84,
+      "aire_cm2": 9.886931,
+      "transverse": 0
+    },
+    {
+      "thread_limit": 0,
+      "repetition": 10,
+      "statut": "ok",
+      "generations": 80,
+      "aire_cm2": 8.913921,
+      "transverse": 0
+    },
+    {
+      "thread_limit": 0,
+      "repetition": 2,
+      "statut": "ok",
+      "generations": 80,
+      "aire_cm2": 8.920213,
+      "transverse": 0
+    },
+    {
+      "thread_limit": 0,
+      "repetition": 3,
+      "statut": "ok",
+      "generations": 78,
+      "aire_cm2": 8.475839,
+      "transverse": 0
+    },
+    {
+      "thread_limit": 0,
+      "repetition": 4,
+      "statut": "ok",
+      "generations": 79,
+      "aire_cm2": 8.697002,
+      "transverse": 0
+    },
+    {
+      "thread_limit": 0,
+      "repetition": 5,
+      "statut": "ok",
+      "generations": 79,
+      "aire_cm2": 8.693065,
+      "transverse": 79
+    },
+    {
+      "thread_limit": 0,
+      "repetition": 6,
+      "statut": "ok",
+      "generations": 86,
+      "aire_cm2": 10.34179,
+      "transverse": 0
+    },
+    {
+      "thread_limit": 0,
+      "repetition": 7,
+      "statut": "ok",
+      "generations": 78,
+      "aire_cm2": 8.476525,
+      "transverse": 0
+    },
+    {
+      "thread_limit": 0,
+      "repetition": 8,
+      "statut": "ok",
+      "generations": 64,
+      "aire_cm2": 5.691978,
+      "transverse": 0
+    },
+    {
+      "thread_limit": 0,
+      "repetition": 9,
+      "statut": "ok",
+      "generations": 81,
+      "aire_cm2": 9.158762,
+      "transverse": 0
+    },
+    {
+      "thread_limit": 1,
+      "repetition": 1,
+      "statut": "ok",
+      "generations": 79,
+      "aire_cm2": 8.687679,
+      "transverse": 0
+    },
+    {
+      "thread_limit": 1,
+      "repetition": 2,
+      "statut": "ok",
+      "generations": 78,
+      "aire_cm2": 8.482125,
+      "transverse": 0
+    },
+    {
+      "thread_limit": 1,
+      "repetition": 3,
+      "statut": "ok",
+      "generations": 79,
+      "aire_cm2": 8.698789,
+      "transverse": 0
+    },
+    {
+      "thread_limit": 1,
+      "repetition": 4,
+      "statut": "ok",
+      "generations": 78,
+      "aire_cm2": 8.477096,
+      "transverse": 0
+    }
+  ],
+  "propres": 13,
+  "total": 14,
+  "aire_min": 5.691978,
+  "aire_max": 10.34179,
+  "reference_aire": 8.476816576532457,
+  "reference_croisements": 240
+}

@@ -21,9 +21,18 @@ davantage **ne sert pas** l'objectif.
 
 ## 2. ⚠ CE QUI TOURNE (2026-08-19, soirée)
 
-⏳ **`tools/campagne_pas.sh`** — le balayage de `step_size` {5,10,15,20,30,40} sur
-PHerc0358, écrit dans `data/trace/PHerc0358/pas/`. Reprenable. C'est **T1f**, le seul
-levier de trajectoire qui reste après les trois négatifs de `26`.
+⏳ **`tools/campagne_pas.sh`** — le balayage de `step_size` sur PHerc0358, deux graines
+(`pas/` et `pas_mauvaise_graine/`). Reprenable. C'est **T1f**.
+✅ **Rendu** : sur les deux graines, 4 pas sur 5 donnent **zéro** auto-intersection
+(`26` §9). `pas_5` des deux campagnes tournait encore au moment d'écrire.
+
+⚠⚠ **Et une mesure lancée dans la foulée a coûté deux explications** :
+[`30`](docs/30_le_traceur_est_un_tirage.md). La graine de `24`, rejouée **quatorze fois à
+paramètres identiques**, rend **treize traces propres sur quatorze** — quand `24` en avait
+une à **240 auto-intersections**, que le maillage archivé porte toujours. La mesure est
+fidèle ; **c'est la trace qui n'est pas reproductible**. Ni le diagnostic de `24` (les
+champs de direction) ni celui de `25` (le bloc plein) n'expliquent donc les 240.
+**Un seul tracé n'est pas une mesure** — et personne dans la littérature ne répète.
 
 > ⚠⚠ **Un bug de ce script a été attrapé pendant qu'il tournait, et il aurait produit un
 > faux positif.** `timeout 3600` a tué `pas_5` à la génération 406 sur 480 — la trace
@@ -173,7 +182,9 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 | **`26`** | ⭐⭐ **ce qui gouverne la trajectoire du traceur** — et les deux mécanismes qui ne la gouvernent pas, contrats dérivés et encodage mesuré. ⚠ Son §4 est **corrigé** : douze poids de perte, pas dix, et deux des noms annoncés n'existaient pas |
 | **`27`** | ⭐⭐ **les trois articles primaires, lus en entier** — un rouleau lu de bout en bout, ~25 h d'humain par spire, et la garantie du spiral fitting qui est topologique et non sémantique |
 | **`28`** | ⭐⭐ **le paysage du contrôle qualité** — ce qui existe, ce qui a été refusé, et la limite mesurée de la détection par la géométrie seule |
-| **`29`** | ⭐⭐⭐ **le registre consolidé de tout ce qui reste** — 525 énoncés repliés, sourcés en `fichier:ligne`. **Commencer par là pour choisir un lot** |
+| **`29`** | ⭐ **le registre consolidé de tout ce qui reste** — 525 énoncés repliés, sourcés en `fichier:ligne`. **Commencer par là pour choisir un lot** |
+| **`30`** | ⚠⚠ **le traceur est un TIRAGE** — 13 traces propres sur 14 à paramètres identiques, quand `24` en avait une à 240. Coûte deux explications causales, rapporte un levier |
+| **`31`** | ⭐ **la roadmap** — où est l'argent atteignable, et les trois façons dont elle peut se tromper |
 
 ## 4. L'outillage, et comment le relancer
 

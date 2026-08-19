@@ -119,7 +119,9 @@ domaine au moins une fois dans ce dépôt.
 
 | # | quoi | coût | source |
 |---|---|---|---|
-| M1 | rejouer le balayage `step_size` sur la **mauvaise** graine de `24` | ⏳ **lancé le 2026-08-19** | `26` §9 |
+| M1 | rejouer le balayage `step_size` sur la **mauvaise** graine de `24` | ✅ **fait** — 4 pas sur 5 à zéro, et ça a mené à `30` | `26` §9 |
+| **M1bis** ⚠⚠ | **mesurer la distribution des tirages sur d'autres graines et d'autres rouleaux** — 14 tirages ne font pas une distribution, et le taux de 13 % n'a été mesuré que sur une graine | à faire | `30` §5 |
+| **M1ter** ⭐ | **l'encre est-elle lisible à 9 µm ?** passer le modèle du Grand Prize 2023 sur un rendu de rouleau du prix. ⚠ Le rendu de `24` fait **21 couches**, le modèle en attend **26** : il faut re-rendre | **avant tout le reste** | `31` §10 |
 | M2 | relire les 240 croisements de `24` sous un autre `--maxedge` — le filtre peut **masquer comme fabriquer** | quelques minutes | `28` §2 |
 | M3 | lire le quatrième article, *EduceLab-Scrolls* (arXiv 2304.02084) | une session | `27` Références |
 | M4 | chercher la vraie feuille en engendrant un volume plus profond que 65 couches | à chiffrer | `12`:259 |

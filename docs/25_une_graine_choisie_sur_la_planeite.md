@@ -144,9 +144,22 @@ prédiction y a fusionné plusieurs spires en un pâté solide, et le traceur es
 endroit où il n'existait aucune géométrie à suivre. C'est la forme extrême du cas
 « jonction », et c'est le **plafond d'occupation** qui l'écarte, pas le choix du critère.
 
+⚠⚠ **Correction du 2026-08-19 au soir : cette explication ne survit pas à la répétition.**
+[`30`](30_le_traceur_est_un_tirage.md) rejoue **quatorze fois** la graine de `24`, à
+paramètres identiques. Elle est toujours dans le même bloc plein, son tenseur y est
+toujours nul — et elle rend une trace propre **treize fois sur quatorze**. Le plafond
+d'occupation écarte peut-être une graine *risquée* ; il n'explique **pas** les 240, qui
+étaient un tirage dans la queue.
+
+> ⭐ **Ce qui reste de ce document, et qui est répliqué** : le critère de planéité fait
+> aller le traceur **plus loin**, 10 fois sur 12, sur douze rouleaux appariés
+> (p = 0,0386). C'est le gain mesuré. Ce qui tombe est l'attribution du « 240 → 0 » — que
+> ce document avait **déjà** commencé à retirer en constatant qu'il ne répliquait pas.
+
+
 | correctif | ce qu'il apporte, mesuré |
 |---|---|
-| **plafond d'occupation** (un bloc ne doit pas être plein) | écarte à lui seul la graine de `24` |
+| **plafond d'occupation** (un bloc ne doit pas être plein) | ⚠ écarte la graine de `24` — mais **n'explique pas** ses 240 croisements, cf ci-dessous |
 | **critère de planéité** | le traceur va plus loin, **10 fois sur 12** (§4bis) |
 | **voxel allumé** au lieu du centre du bloc | sans effet ici — le bloc étant plein, son centre était allumé |
 

@@ -113,6 +113,18 @@ sont validés ici, et ils l'étaient déjà contre `windcheck`.
 
 ## 4. La cause, et ce qu'elle désigne
 
+⚠⚠ **Correction du 2026-08-19 au soir — le verdict tient, la CAUSE non.**
+[`30`](30_le_traceur_est_un_tirage.md) a rejoué cette graine **quatorze fois**, à
+paramètres strictement identiques : **treize traces propres sur quatorze**. Et un tirage
+rend **8,477096 cm²** contre **8,476817** pour le maillage archivé ici — **0,003 %
+d'écart d'aire, et 0 croisement contre 240**.
+
+Le maillage de ce document, remesuré aujourd'hui, porte toujours ses 240 : **la mesure
+est fidèle.** Ce qui n'est pas reproductible, c'est **la trace**. Il n'y avait donc rien à
+diagnostiquer dans cette graine — ni les champs de direction (`26`), ni l'occupation du
+bloc (`25` §4bis) : **240 était un tirage dans la queue.**
+
+
 Le traceur optimise une surface **dans** une prédiction seuillée. Il n'a reçu **aucune
 information d'orientation** : le paramètre `direction_fields` était absent. Il a donc
 trouvé *une* surface qui satisfait la prédiction — et celle qui coupe les spires en
