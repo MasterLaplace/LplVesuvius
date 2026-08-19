@@ -73,6 +73,7 @@ voie J est l'outil de réparation.
 | `17` | ❌ le saut de spire par la phase — **échec définitif** (§10) |
 | **`18`** | **le batch en cours** : produire, pas juger |
 | **`19`** | ⭐⭐ **la première règle qui CHANGE une décision** — p = 0,0005 contre 2000 permutations |
+| **`20`** | ⭐⭐ **le champ de correction** : l'erreur d'une trace est structurée, et **translater ne la répare pas** |
 
 ## 4. L'outillage, et comment le relancer
 
@@ -208,6 +209,47 @@ transaction sur un nom inconnu.
    d'un panneau dépend de son voisin** (même image, 1 puis 2 puis 0 glyphes, à
    température zéro).
 
+### 2026-08-19 — de juger à décider
+
+17. ⭐⭐ **La première règle qui change une décision** (`19`). Écarter les **20 %** de
+   segments dont le volume de surface porte le moins de matière (`avec_matiere`) fait
+   monter le contraste d'encre médian du corpus de **+0,381**, contre **2000
+   permutations** de même effectif : **p = 0,0005**. Cible = les **cartes d'encre
+   publiées**, donc la sortie d'un **autre** pipeline. Coût : **36 requêtes** par segment,
+   **avant** toute inférence.
+   ⭐ Ce qui la défend est sa **forme** : un plateau contigu **15–25 %**, encadré par 5 %
+   qui ne fait rien (p = 0,054) et 30 % qui se dégrade. Un réglage sur-ajusté ferait un
+   **pic** — même critère que le seuil d'un tiers de `07` §8.
+   ⚠⚠ Le **confond de taille était réel** (emprise ↔ écart +0,384, emprise ↔ encre
+   +0,463) et la corrélation **partielle le RENFORCE** au lieu de le dissoudre
+   (−0,315 → **−0,382**, p = 0,0005). C'est le contraire d'un effet de taille.
+   ⚠ Confond non levé, et il faut le dire : une carte vide peut vouloir dire « la trace a
+   raté » **ou** « ce papyrus est vierge ». C'est un **tri de corpus**, pas un diagnostic.
+
+18. ⭐⭐ **Le champ de correction** (`20`) : l'erreur d'une trace est **structurée** —
+   **99 segments sur 99**, sur deux rouleaux, battent leur propre témoin de mélange
+   (Scroll 1 p = 1,3e-25, Scroll 4 p = 7,4e-08).
+   ⭐⭐ Et le chiffre qui décide de la production : une **translation** du maillage
+   n'enlèverait que **21,7 %** de l'erreur (35,3 % sur Scroll 4). Le bon remède est un
+   **gauchissement**, pas une translation.
+   ⚠ Le champ **ne prédit pas** l'encre (rho −0,023 à n = 80, où 0,31 est détectable)
+   mais **prédit les croisements** (résiduel **+0,428**, p = 0,0012, n = 54) : un défaut
+   de la **TRACE**, pas du **RÉSULTAT** — mesuré des deux côtés.
+   ⚠⚠ **Piège nº 6 commis puis attrapé dans la même séance** : j'ai appliqué le pas de
+   PHerc0172 (142,8 µm) à des segments de PHercParis4 (**172,8 µm** mesuré), ce qui
+   gonflait le compte de sauts de feuille d'un facteur 4. `--pas-um` **n'a plus de
+   défaut** et le compte n'est pas rendu sans lui.
+
+19. ⭐ **L'échelle est réelle, pas promise** : `--fils` sur le lecteur Zarr donne **×8,35**
+   mesuré (21,80 s → 2,61 s), sortie **bit pour bit identique**. Le modèle de coût
+   divisait par 16 — corrigé : les **800 rouleaux de la villa** se jugent en **0,9 h**,
+   pas 0,5 h. Un modèle de coût qui se flatte n'est pas un modèle de coût.
+
+20. ❌ **Le saut de spire par la phase est mort définitivement** (`17` §10). Le volume
+   `cos` n'est publié qu'aux niveaux **3, 4, 5** — le niveau 3 EST le plus fin, donc
+   « refaire au niveau 0 » n'avait pas d'objet. Et la quantification n'écrase rien :
+   marche médiane **12,2 / 255**, **0 trace sur 38** à médiane nulle.
+
 ### La jonction, et le domaine de définition
 
 14. ⚠⚠ **La métrique de proximité a un DOMAINE DE DÉFINITION** (`07` §7). Elle exige une
@@ -242,19 +284,18 @@ définitive : **ce type de segment ne porte que 4 à 5 lignes de texte**, et les
 
 ## 7. ⏳ CE QUI RESTE, avec son blocage
 
-⭐ La liste complète et cochable est dans **`docs/13_batch_epuisement.md`**. Ci-dessous
-seulement ce qui n'est ni fait ni en cours.
+⭐ La liste cochable est dans **`docs/18_batch_produire.md`**. Ci-dessous seulement ce qui
+n'est ni fait ni écarté.
 
 | # | quoi | blocage |
 |---|---|---|
-| **B4** ⭐⭐ | croiser la profondeur de surface avec les **80 cartes d'encre publiées** et les croisements de `windcheck` | attend la campagne (~48 segments). ⚠ Prédiction **reposée** avant mesure : *écart médian pic↔trace > ~50 µm ⇒ pas d'encre lisible*. Le seuil est le **milieu de l'intervalle observé** à n = 3, donc provisoire par construction |
-| **C4** ⭐ | fibres sur les 80 segments | en file. ⚠ **À n = 12 la mesure ne détecte qu'un rho ≥ 0,73** : le +0,330 observé n'est ni confirmé ni infirmé. Il faut n ≈ 70 |
-| **A5** ⭐ | la métrique de proximité sur PHerc0139 / PHerc1667 / PHerc0814 | traces récupérées (PHerc0814 en cours). C'est **le vrai second rouleau** : populations majoritairement > 1 tour, donc dans le domaine de définition |
-| **D** ⭐ | retrouver la feuille de Scroll 4 | le cœur de matière est hors des 65 couches. ⚠ Les volumes de surface de PHerc1667 sont **repérés** (19 à 2,399 µm, 27 à 1,129 µm) : la mesure se fait à distance, sans réengendrer de couches |
-| §2.3 | vrai ombilic | ⚠ `umbilicus.txt` renvoie **404** à l'adresse notée dans `06`. Chemin à retrouver dans le bucket |
-| E2 | plus de bandes **niveau 0** | 2 faites (une migre, une non). Le crible niveau 2 ne peut PAS répondre — il regarde ailleurs. ~50 min par bande, `tools/bandes_niveau0.sh` |
-| — | la **bascule recto/verso** des fibres | non expliquée. Trois causes candidates (`14` §3), aucune départagée. ⚠ À 1,129 µm la pile ne fait que **123 µm**, soit moins qu'une épaisseur de feuille |
-| — | le **seuil** de la profondeur de surface | il vaut ce que vaut n = 3. La campagne le recalibrera, ou le cassera |
+| **J7** ⭐⭐ | **le gauchissement** — la mesure dit que la translation n'enlève que 21,7 % de l'erreur, donc le remède utile est une déformation guidée par le champ | rien ne bloque, c'est le prochain gros morceau. ⚠ Et il faut un **critère de succès** qui ne soit pas circulaire : re-mesurer le champ après correction ne prouverait que l'arithmétique |
+| **M1** | l'analyse de sensibilité du centre, **au niveau 0** | 🔄 lancée. ⚠ La version niveau 2 est **invalide** : les seuils sont calés au niveau 0 et y comptent 42 feuilles au lieu de 176 (piège nº 1) |
+| M2 | plus de bandes **niveau 0** (2 faites : une migre, une non) | ~50 min par bande, `tools/bandes_niveau0.sh`. Le crible niveau 2 ne peut PAS répondre |
+| M3 | **ESRF 2,4 µm** sur les 4 sites (`06` §3.6) | — |
+| — | le **pas inter-feuilles de PHerc1667** | ⚠ **aucune prédiction de surface publiée** pour ce rouleau : la voie `espacement_spires.py` n'existe pas là. Tant qu'il manque, on ne juge pas ses sauts de feuille |
+| — | la **bascule recto/verso** des fibres | non expliquée, et la voie est **réfutée** (`14`) — à ne rouvrir que si une autre mesure la réclame |
+| — | le trend **position dans le rouleau** ↔ résiduel | ⚠ **NON établi** : Scroll 1 rend `p90` significatif et `median` nul, Scroll 4 l'inverse. Configuration exacte des fibres à n = 12. Il faut plus de segments |
 
 ## 8. ⚠ Les pièges payés, à ne pas repayer
 
@@ -309,6 +350,23 @@ seulement ce qui n'est ni fait ni en cours.
 23. ⚠ **Un zéro se rapporte avec sa puissance, et la puissance dit quoi faire.** À
     n = 12, seul un rho ≥ 0,73 est détectable : un +0,330 n'est alors ni confirmé ni
     infirmé, et la réponse est d'aller chercher n ≈ 70 — pas de conclure.
+24. ⚠⚠ **Le piège nº 6 se repaie même en le connaissant** (2026-08-19). J'ai pris
+    l'invariant de **PHerc0172** (142,8 µm) comme seuil pour des segments de
+    **PHercParis4**, dont le pas mesuré vaut **172,8 µm** — quatre segments signalés au
+    lieu d'un. Le remède n'est pas une note, c'est **retirer le défaut du paramètre** :
+    sans `--pas-um`, l'outil ne rend plus le compte du tout.
+25. ⚠⚠ **Un modèle de coût qui se flatte n'est pas un modèle de coût.** Le tableau
+    d'échelle divisait par 16 fils ; la mesure dit **×8,35**. 0,5 h annoncé, 0,9 h réel.
+26. ⚠ **Fermer un confond d'un seul côté ne le ferme pas.** Savoir que l'encre suit
+    l'emprise ne suffit pas : il faut aussi savoir si le **critère** la suit. Les deux
+    branches existaient (+0,463 et +0,384) — seule la corrélation **partielle** a tranché,
+    et elle a **renforcé** la relation au lieu de la dissoudre.
+27. ⚠ **Un échantillonnage régulier tombe dans le remplissage.** Un volume de surface est
+    majoritairement du vide : des blocs posés à intervalles réguliers ont rendu **6
+    fenêtres utiles sur 96**. Il faut **trouver la matière avant de la sonder**.
+28. ⚠ Deux corrections de nom vérifiées sur le fichier plutôt que devinées : `events` est
+    un **compte** dans l'index de `windcheck`, pas une liste ; et le volume `cos` du
+    `lasagna` déclare ses niveaux dans son `.zattrs` — il n'en a pas de plus fin que 3.
 
 ## 9. Règles de mesure tenues ici
 

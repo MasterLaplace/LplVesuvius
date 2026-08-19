@@ -41,10 +41,10 @@ hasard de même taille**. Sans lui, la vérification ne peut pas échouer.
 | # | quoi | état |
 |---|---|---|
 | I1 | outil : `analysis/src/croiser_encre.py` | ✅ écrit |
-| I2 | corréler 5 grandeurs de trace × 4 grandeurs d'encre, n = 80 | 🔄 |
+| I2 | corréler 5 grandeurs de trace × 4 grandeurs d'encre, n = 80 | ✅ **`19`** — 5 couples tiennent Bonferroni, `avec_matiere` en tête (+0,539) |
 | I3 | le confond d'emprise mesuré à côté | ✅ dans l'outil |
-| I4 | la décision, contre 2000 permutations | 🔄 |
-| I5 | le seuil défendu par un **plateau**, pas par un pic | ⏳ |
+| I4 | la décision, contre 2000 permutations | ✅ **+0,381, p = 0,0005** en écartant 20 % |
+| I5 | le seuil défendu par un **plateau**, pas par un pic | ✅ plateau contigu **15–25 %**, encadré par 5 % qui ne fait rien et 30 % qui se dégrade |
 
 ## Voie J — le champ de correction ⭐⭐ *(produire)*
 
@@ -70,10 +70,10 @@ cohérence vient de la façon de compter et pas de la géométrie.
 |---|---|---|
 | J1 | outil : `analysis/src/champ_correction.py` | ✅ écrit |
 | J2 | ⚠ échantillonnage : **trouver la matière avant de la sonder** (6 fenêtres utiles sur 96 sans ça) | ✅ passe de repérage |
-| J3 | campagne sur les 80 segments de Scroll 1 | 🔄 |
-| J4 | la même sur Scroll 4, dont `12` dit que la trace n'est sur aucune feuille | ⏳ |
-| J5 | corréler `residuel` et `coherence` aux croisements publiés | ⏳ |
-| J6 | **appliquer** la translation et re-mesurer : l'écart tombe-t-il ? | ⏳ |
+| J3 | campagne sur les 80 segments de Scroll 1 | ✅ **80/80** battent leur témoin (p = 1,3e-25). `20` |
+| J4 | la même sur Scroll 4 | ✅ **19/19** (p = 7,4e-08). ⚠ Le segment `20231111135340`, celui des 61 % au bord, **n'a pas de volume de surface publié** — mesuré sur les 19 qui en ont un |
+| J5 | corréler `residuel` et `coherence` aux croisements publiés | ✅ **résiduel +0,428** (p = 0,0012) contre les croisements, **−0,028** contre l'encre. Un défaut de la TRACE, pas du RÉSULTAT |
+| J6 | **appliquer** la translation et re-mesurer | ❌ **écarté avec la raison** : la mesure dit qu'une translation n'enlèverait que **21,7 %** de l'erreur (35,3 % sur Scroll 4). Le bon remède est un **gauchissement**, pas une translation — l'implémenter aurait été construire le mauvais outil |
 
 ## Voie K — l'échelle, réellement ⭐
 
@@ -83,8 +83,8 @@ Ferme `13` G3, qui disait « la structure le permet, rien ne le fait ».
 |---|---|---|
 | K1 | paralléliser le lecteur Zarr | ✅ **×8,35 mesuré** (21,80 s → 2,61 s), sortie **bit-pour-bit identique** au sérialisé |
 | K2 | ⚠ le contrôle : `executor.map` rend dans l'ordre des **entrées** — c'est la seule propriété qui rend la version parallèle substituable | ✅ |
-| K3 | rejouer le chiffrage de `13` §G avec la vitesse réelle | ⏳ |
-| K4 | passer l'instrument sur un rouleau **jamais tracé** — le cas des 800 | ⏳ |
+| K3 | rejouer le chiffrage de `13` §G avec la vitesse réelle | ✅ **0,9 h pour les 800 rouleaux** (contre 0,5 h annoncé par un modèle qui divisait par 16) |
+| K4 | passer l'instrument sur un rouleau **jamais tracé** | ✅ **déjà fait par `16`** : les 13 rouleaux du prix n'ont aucune trace, et la métrique de séparabilité les juge quand même |
 
 ## Voie L — la phase, au niveau fin
 
@@ -95,15 +95,15 @@ plupart des pas sont nuls **par construction**.
 
 | # | quoi | état |
 |---|---|---|
-| L1 | rejouer une trace au niveau 1, comparer les marches | ⏳ |
-| L2 | si les marches bougent : rejouer les 38 | ⏳ |
-| L3 | sinon : l'échec est **définitif**, et c'est écrit | ⏳ |
+| L1 | rejouer une trace au niveau 1 | ❌ **impossible** : le volume `cos` n'est publié qu'aux niveaux **3, 4, 5**. Le niveau 3 EST le plus fin |
+| L2 | si les marches bougent : rejouer les 38 | ➡️ sans objet |
+| L3 | l'échec est **définitif** | ✅ `17` §10, et mesuré : marche médiane **12,2 / 255**, **0 trace sur 38** à médiane nulle. La quantification n'écrase rien |
 
 ## Voie M — les restes de géométrie
 
 | # | quoi | état |
 |---|---|---|
-| M1 | vrai **ombilic** — ⚠ 404 à l'adresse notée dans `06` | ⏳ |
+| M1 | vrai **ombilic** | ❌ **le fichier n'existe pas** (zéro occurrence sur les 4 corpus). Remplacé par une **analyse de sensibilité** : de combien le centre doit-il être faux pour que l'invariant bouge — 🔄 au niveau 0 |
 | M2 | plus de bandes **niveau 0** (2 faites : une migre, une non) | ⏳ |
 | M3 | **ESRF 2,4 µm** sur les 4 sites (`06` §3.6) | ⏳ |
 
@@ -111,7 +111,7 @@ plupart des pas sont nuls **par construction**.
 
 | # | quoi | état |
 |---|---|---|
-| N1 | `00` §9.5 cite encore `+0,284` sans la correction par le rayon physique, et annonce une vérification « lancée » qui a rendu | ⏳ |
-| N2 | `13` : voies A, C, G, H à clore | ⏳ |
-| N3 | `HANDOFF` §7 : la table « ce qui reste » à refaire | ⏳ |
-| N4 | `tools/temoins.sh` : un témoin pour l'ordre du parallélisme et un pour la passe de repérage | ⏳ |
+| N1 | `00` §9.5 périmé | ✅ corrigé — et c'était **le rayon, pas la résolution** |
+| N2 | `13` : voies A, C, G, H à clore | ✅ les **huit** voies closes |
+| N3 | `HANDOFF` refait | 🔄 §2, §2bis, §3, §4 faits ; §5 et §7 restent |
+| N4 | `tools/temoins.sh` | ✅ **13 contrôles de plus, 79 au total**, dont l'ordre du parallélisme et le cas négatif de la décision |
