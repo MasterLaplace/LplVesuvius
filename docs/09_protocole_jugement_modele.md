@@ -432,7 +432,9 @@ vierge met la même image des deux côtés de la barre noire — la condition
 cd inference_xpu
 uv run python ../analysis/src/judge_api.py <prediction.npy> --bands-only
 uv run python ../analysis/src/judge_api.py <prediction.npy> --auto-bands \
-    --model gemini-2.5-flash --trials 1
+    --model <modele-disponible> --trials 1   # ⚠ PAS gemini-2.5-flash : le §9 de ce
+                                             # document mesure qu'il répond 404
+                                             # (« no longer available to new users »)
 ```
 
 ---

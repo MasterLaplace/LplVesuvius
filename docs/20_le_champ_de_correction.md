@@ -202,7 +202,7 @@ p < 0,025) : **seul le résiduel tient**. La cohérence est nominale.
 > | l'**encre** que le pipeline en tire | −0,028 | 0,80 |
 >
 > Une trace plus déformée se recoupe davantage — et rend malgré tout la même encre. C'est
-> la même forme que la métrique de proximité (`07` §16) : **un défaut de la TRACE, pas du
+> la même forme que la métrique de proximité (⚠ `07` §7 — ce document n'a pas de §16) : **un défaut de la TRACE, pas du
 > RÉSULTAT**, et cette fois mesuré des deux côtés dans le même document.
 
 Et c'est cohérent avec le §5 : sur ce corpus presque rien n'a sauté de feuille, donc la

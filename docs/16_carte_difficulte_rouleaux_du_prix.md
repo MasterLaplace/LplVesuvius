@@ -70,7 +70,12 @@ que `06` §2.3 n'a toujours pas établi.
 
 ⚠ **Niveau 1 de la pyramide et pas 2** : au niveau 2 (37,4 µm) toute la plage utile tient
 dans **8 voxels**, et les trois seuils rendaient trois lignes identiques. Au niveau 1
-(18,7 µm) l'écart fait 8 à 16 voxels — encore quantifié, mais lisible.
+(18,7 µm) l'écart fait ⚠ **8 à 12 voxels** — encore quantifié, mais lisible.
+
+⚠⚠ **Corrigé le 2026-08-19, et les DEUX versions étaient fausses.** Ce paragraphe
+annonçait « 8 à 16 » et le §5 « 7 à 12 » — pour la même grandeur. Les valeurs mesurées
+sont 156 / 169 / 173 / 187 / 190 / 225 µm, donc **8,3 à 12,0 voxels** à 18,7 µm. Le bas
+venait du second, le haut du premier, et aucun des deux ne tenait entier.
 
 ⚠ **La prédiction publiée est BINAIRE** (valeurs 0 et 255 : le seuil est déjà appliqué,
 `th0.2` figure dans le nom du fichier). Balayer le seuil ne peut donc rien dire, et
@@ -128,7 +133,12 @@ est une explication plausible.
 1. **Elle est quantifiée** : au niveau 1 les valeurs tombent sur 121 / 131 / 138 / 150 /
    156 / 169 / 173 / 187 / 190 / 225 µm, c'est-à-dire 7 à 12 voxels. Le **classement
    fin** entre deux rouleaux à 187 µm n'a pas de sens ; les **extrêmes** en ont un.
-2. **27 chunks par rouleau**, pris dans le tiers central en z et la moitié centrale en
+2. ⚠ **27 chunks par rouleau** — *nombre **nominal**, celui que le script demande ;
+   l'échantillonnage réel varie d'un rouleau à l'autre, et **les artefacts ne
+   l'enregistrent pas** (`docs/carte_difficulte/*.json` ne porte que `zarr`, `level`,
+   `voxel_um`, `binaire`, `seuils`). ⏳ À corriger dans le script plutôt qu'ici : un
+   artefact de mesure doit porter le nombre de chunks réellement sondés* —, pris dans le
+   tiers central en z et la moitié centrale en
    x/y. C'est un sondage, pas une carte complète — les bords et le cœur ne sont pas
    couverts, et c'est justement au cœur qu'un rouleau s'effondre.
 3. ⚠ **La médiane et la queue ne classent pas pareil** : `PHerc1545` et `PHerc0257` ont
