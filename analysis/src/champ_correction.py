@@ -50,6 +50,14 @@ from zarr_depth import BUCKET, array_meta, chunk_profile  # noqa: E402
 
 def champ(zarr_url: str, level: int, cote: int, blocs: int, timeout: float,
           threads: int, voxel_um: float) -> dict:
+    """Statistiques du champ. La grille brute passe par `grille_ecarts`."""
+    grille, depth, sondees, _ = grille_ecarts(zarr_url, level, cote, blocs, timeout,
+                                              threads)
+    return _statistiques(grille, 1, depth, voxel_um, sondees, zarr_url)
+
+
+def grille_ecarts(zarr_url: str, level: int, cote: int, blocs: int, timeout: float,
+                  threads: int):
     """Écart pic↔trace sur des BLOCS contigus de fenêtres, répartis sur le segment.
 
     ⚠⚠ **Des blocs contigus, et non une grille clairsemée**, parce que la grandeur
@@ -109,8 +117,7 @@ def champ(zarr_url: str, level: int, cote: int, blocs: int, timeout: float,
         mean, _ = got
         grille[cy, cx] = int(np.argmax(mean)) - traced
 
-    return _statistiques(grille, 1, depth, voxel_um, len(picks) + len(reperage),
-                         zarr_url)
+    return grille, depth, len(picks) + len(reperage), coins
 
 
 def _paires_voisines(grille: np.ndarray, pas: int) -> tuple[np.ndarray, np.ndarray]:

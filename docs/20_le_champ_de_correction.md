@@ -49,6 +49,32 @@ si la cohérence y survivait, elle viendrait de la façon de compter et non de l
 > et le mélange des mêmes valeurs l'efface à chaque fois. C'est le contrôle qui rend la
 > suite lisible : une cohérence qui survivrait au mélange ne mesurerait que l'arithmétique.
 
+### Et ça se regarde
+
+Le concours demande explicitement de *montrer visuellement* qu'une trace ne saute pas de
+feuille. Chaque figure porte son **témoin à droite** : les mêmes valeurs, les mêmes
+fenêtres, une attribution au hasard.
+
+**Le cas le plus net du corpus** — `20260623163339-w110-112`, cohérence **+0,694** (témoin
+−0,074), le maximum sur 80 :
+
+![champ de correction, cas fort](images/20_champ_fort.png)
+
+Le premier bloc est une **plaque** rouge — la trace y est trop profonde de façon
+continue — et le quatrième une plaque bleue. À droite, la même matière est du poivre et
+sel.
+
+**Le cas médian** — `20230702185753`, cohérence **+0,310**, à comparer à la médiane du
+corpus (**+0,325**) :
+
+![champ de correction, cas median](images/20_champ_correction.png)
+
+⚠⚠ **Et c'est là qu'il faut être honnête** : sur le cas médian, la différence entre les
+deux panneaux **se voit mal**. C'est exactement ce qu'un rho de 0,31 veut dire, et
+publier seulement la figure du haut donnerait à croire à un effet qu'on n'a pas mesuré.
+La structure est **réelle et systématique** (99 segments sur 99) ; elle n'est **pas
+spectaculaire**.
+
 ## 4. ⭐⭐ Et le chiffre qui décide de la production
 
 | corpus | part de l'erreur qu'une **translation** enlèverait |
