@@ -3,10 +3,13 @@
 2026-08-19, suite de [`24`](24_premiere_trace_rouleau_du_prix.md). Le traceur suivait
 n'importe quoi ; on lui donne enfin une raison de partir au bon endroit.
 
-**Résultat en une ligne** : la même chaîne, le même rouleau, les mêmes paramètres, **une
-seule chose changée — la graine** : **240 auto-intersections → 0**, sur une surface
-**2,3 fois plus grande**. Et la profondeur, elle, n'a pas bougé d'un pouce : ce sont
-**deux défauts distincts**, et la graine n'en règle qu'un.
+**Résultat en une ligne, et la réplication l'a corrigé deux fois avant que je l'écrive** :
+sur `PHerc0358`, changer la seule graine fait passer **240 auto-intersections à 0** sur une
+surface 2,3 fois plus grande — mais sur **douze** rouleaux du prix, les deux critères
+rendent **0 partout**, donc ce 240 est l'accident d'**un** rouleau. Ce qui réplique est
+ailleurs : le traceur **va plus loin avant de caler**, 10 fois sur 12 (test des signes,
+p = 0,039). Et une **troisième** mesure a désigné le vrai coupable de `24` : sa graine
+était dans un bloc **entièrement plein**, donc sans aucune géométrie à suivre.
 
 ---
 
@@ -92,7 +95,7 @@ chunk près). Le critère saturé, lui, ne s'accordait avec rien.
 d'un bloc traversé en biais tombe dans le vide, et le traceur part alors de rien. L'ancien
 code rendait le centre ; il a marché **par chance**, sur un bloc saturé donc plein.
 
-## 4. ⭐⭐ Le résultat : 240 → 0
+## 4. ⭐⭐ Le résultat sur `PHerc0358` : 240 → 0
 
 Un seul paramètre changé — la graine. Mêmes `seed.json`, même prédiction, même machine.
 
@@ -109,24 +112,43 @@ Un seul paramètre changé — la graine. Mêmes `seed.json`, même prédiction,
 **officiel** d'un rouleau du prix (`PHerc1447`), et son `meta.json` dit
 `source: "vc_grow_seg_from_seed"`, `mode: "explicit_seed"`, `min_area_cm: 0.3` — **la même
 chaîne que la nôtre**, pilotée par l'équipe du concours. Il rend 0 auto-intersection.
-Notre graine planaire aussi ; notre graine par voisinage, non.
+Notre graine planaire aussi ; celle de `24`, non.
 
-⚠ **Et l'aire n'est pas un critère.** La trace officielle en fait 2,89 cm², sept fois moins
-que la nôtre. Ce qui compte pour First Letters, c'est **4 cm² portant dix lettres** — pas
-la surface, et surtout pas une surface qui traverse les spires.
-
-⚠⚠ **Et l'aire ne mesure même pas ce qu'on croit** — troisième saturation de la journée,
-après le score de voisinage contre 255 et l'argmax contre 1,0. Les deux traces planaires
-s'arrêtent à la **génération 119 sur 120** et rendent respectivement **19,821 592** et
-**19,823 246 cm²** : deux rouleaux différents, deux graines différentes, la même aire à
-**huit millièmes de pour-cent près**. Ce n'est pas une coïncidence, c'est un **plafond** :
-la surface croît par un front, donc son aire est fixée par le nombre de pas quand rien ne
-l'arrête. Les traces par voisinage, elles, **calent** — génération 79 sur PHerc0358,
-génération 26 sur PHerc0125.
+⚠ **L'aire n'est pas un critère**, et elle ne mesure même pas ce qu'on croit — **troisième
+saturation de la journée**, après le score de voisinage contre 255 et l'argmax contre 1,0.
+Les deux premières traces planaires s'arrêtent à la **génération 119 sur 120** et rendent
+**19,821 592** et **19,823 246 cm²** : deux rouleaux différents, deux graines différentes,
+la même aire à **huit millièmes de pour-cent près**. C'est un **plafond** — une surface
+croît par un front, donc son aire est fixée par le nombre de pas quand rien ne l'arrête.
+Poussée à 600 générations, la même graine atteint **127,9 cm²**.
 
 > La grandeur qui a un sens n'est donc pas l'aire mais **« le traceur a-t-il consommé son
-> budget ou s'est-il arrêté avant »**. L'aire n'en est le proxy que tant qu'on ne relève
-> pas le budget.
+> budget ou s'est-il arrêté avant »**. Les traces par voisinage **calent** : génération 79
+> sur `PHerc0358`, génération 26 sur `PHerc0125`.
+
+### ⭐⭐ Et ce n'est pas le critère qui a écarté la mauvaise graine
+
+En cherchant pourquoi la campagne ne reproduisait pas le 240, la mesure a désigné autre
+chose. Le critère par voisinage, **rejoué sans la barrière d'occupation**, rend
+**exactement la graine de `24`** :
+
+```
+planar.3³  vois   part voisinage  occup.  val  -s x y z
+   1.0000     8  0.483     255.0   1.000  255  1544 1544 7768
+⚠⚠ les 3 candidats ont le MEME score « voisinage » (255.0) : ce critere ne classe rien ici
+```
+
+⭐ **`occup. = 1,000`.** Le bloc est **entièrement plein** de matière prédite. Un bloc
+uniforme a un **tenseur nul** : il n'y a là ni feuille, ni normale, ni orientation — la
+prédiction y a fusionné plusieurs spires en un pâté solide, et le traceur est parti d'un
+endroit où il n'existait aucune géométrie à suivre. C'est la forme extrême du cas
+« jonction », et c'est le **plafond d'occupation** qui l'écarte, pas le choix du critère.
+
+| correctif | ce qu'il apporte, mesuré |
+|---|---|
+| **plafond d'occupation** (un bloc ne doit pas être plein) | écarte à lui seul la graine de `24` |
+| **critère de planéité** | le traceur va plus loin, **10 fois sur 12** (§4bis) |
+| **voxel allumé** au lieu du centre du bloc | sans effet ici — le bloc étant plein, son centre était allumé |
 
 ### Les deux traces, à la même échelle
 
@@ -137,11 +159,58 @@ grande passerait pour identique. À gauche, les deux plaques écartelées de `24
 que devient une surface qui se recoupe quand on l'aplatit. À droite, une nappe d'un seul
 tenant.
 
-⚠ **Mais regardez les striations à droite.** Elles s'enroulent, bifurquent et se
-superposent, exactement comme à gauche. Le règlement demande *« can you visually follow
-horizontal papyrus fibers across the page »* : la réponse est **non**, des deux côtés. La
-trace B ne se recoupe plus ; elle ne suit pas pour autant **une** feuille. L'œil dit ici la
-même chose que le §5, et il le dit après les mesures, pas avant.
+⚠ **Mais regardez les striations à droite.** Elles s'enroulent et se superposent, comme à
+gauche. Le §5 dit pourquoi, et il le dit avec un nombre.
+
+## 4bis. ⭐ La réplication sur douze rouleaux du prix
+
+Conception **appariée** : chaque rouleau est tracé deux fois, une graine par critère, tout
+le reste identique. Un rouleau est donc son propre témoin, et la différence ne peut pas
+être mise sur le dos de « celui-là est plus facile ». Dix rouleaux **sans aucun segment
+publié** (`23`), plus les deux qui en ont — les seuls où une trace officielle existe pour
+comparer.
+
+| rouleau | planéité | voisinage | | rouleau | planéité | voisinage |
+|---|---:|---:|---|---|---:|---:|
+| PHerc0125 | **19,82** | 0,85 | | PHerc0800 | 16,88 | 16,89 |
+| PHerc0191 | **19,82** | 14,27 | | PHerc0813 | **17,26** | 10,32 |
+| PHerc0211 | **14,54** | 9,60 | | PHerc0826 | **13,14** | 0,85 |
+| PHerc0257 | **19,82** | 8,26 | | PHerc1218 | **11,43** | 9,19 |
+| PHerc0268 | 16,90 | 16,99 | | PHerc1447 | **13,64** | 10,72 |
+| PHerc0358 | **19,82** | 10,08 | | PHerc1545 | **15,15** | 11,57 |
+
+**Sur 12 rouleaux du prix — aire : planéité 10, voisinage 2, aucun ex æquo, test des
+signes p = 0,0386.**
+
+⚠⚠ **Auto-intersections : 0 partout, des deux côtés.** Le « 240 → 0 » de `PHerc0358` **ne
+réplique pas** comme propriété générale du critère : sur onze autres rouleaux, la graine par
+voisinage — passée par la même barrière d'occupation — n'en produit aucune. Ce qui réplique,
+c'est la distance parcourue avant de caler, et les deux cas extrêmes le disent mieux qu'une
+moyenne : sur `PHerc0125` et `PHerc0826`, le voisinage cale à **0,85 cm²**, à peine
+au-dessus du `min_area_cm` de 0,3, quand la planéité atteint 19,82 et 13,14.
+
+⚠ **Ce que la colonne « voisinage » n'est pas** : un rejeu à l'identique de `24`. C'est le
+**critère** de `24` sous la machinerie actuelle — barrière d'occupation et voxel allumé
+compris. Le rejeu à l'identique est ci-dessus, et il rend bien 1544 1544 7768.
+
+## 4ter. ⚠⚠ Le traceur n'est pas reproductible — mais son verdict l'est
+
+Quatre exécutions de **la même graine**, mêmes paramètres, même machine :
+
+| | aire | auto-intersections |
+|---|---:|---:|
+| `thread_limit: 0`, essai 1 | 19,834872 cm² | **0** |
+| `thread_limit: 0`, essai 2 | 19,821850 cm² | **0** |
+| `thread_limit: 1`, essai 1 | 19,838660 cm² | **0** |
+| `thread_limit: 1`, essai 2 | 19,823302 cm² | **0** |
+
+⚠ Passer à `thread_limit: 1` — la valeur que VC3D utilise, et que le message de démarrage
+de l'outil recommande — **ne suffit pas**. L'écart subsiste. Donc `vc_grow_seg_from_seed`
+rend une surface **différente à chaque exécution**, d'environ 0,08 %.
+
+> **La surface n'est pas reproductible ; le verdict l'est.** C'est un argument de plus pour
+> juger une trace par un **invariant** plutôt que par l'artefact : les quatre surfaces
+> diffèrent, les quatre passent le même contrôle.
 
 ## 5. ⚠⚠ Ce que la graine ne règle PAS — et c'est la moitié du résultat
 
@@ -184,35 +253,58 @@ fenêtre sur la même pile :
 
 ⚠⚠ **Et c'est la dernière ligne qui décide — dans l'autre sens que prévu.** La trace
 **officielle** d'un rouleau du prix, faite avec le même outil par l'équipe du concours,
-échoue au critère du tiers central **plus mal que les nôtres** : 2 %, contre 16 et 20 %.
-Ses pics ne sont pas décalés d'un cran constant, ils sont **étalés sur les 61 couches**.
-
-> Donc le critère « pic dans le tiers central », calibré sur Scroll 1, **ne sépare pas les
-> traces sur les rouleaux du prix**. Il est hors de son domaine de validité, et l'instrument
-> ne peut pas départager B de A tant qu'il ne départage pas non plus l'officielle du reste.
+échoue au critère du **tiers central** plus mal que les nôtres : 2 %, contre 16 et 20 %.
+Un critère que la référence rate plus mal que le cas jugé ne peut pas servir à juger.
 
 ⚠ **Cela oblige à corriger `24`.** La trace A y était condamnée par *trois* instruments ;
-l'un des trois — la profondeur — s'avère muet sur ce rouleau. Le verdict tient toujours,
-parce que les deux autres suffisent (240 auto-intersections avant tout rendu, et l'image),
-mais il tient sur **deux** jambes et non trois. Corrigé sur place, `24` §2.
+celui de la profondeur, dans sa forme « tiers central », s'avère muet sur ce rouleau. Le
+verdict tient toujours — 240 auto-intersections avant tout rendu, et l'image — mais sur
+**deux** jambes et non trois. Corrigé sur place, `24` §2.
 
-Ce qui reste lisible dans cette table, c'est l'**amplitude**, et elle ordonne : Scroll 1
-(50 %) ≫ officiel rouleau du prix (28,8 %) > notre A (14,8 %) > notre B (8,7 %).
-⚠ Mais elle mélange deux causes — la qualité de la trace et celle du **scan** — et les deux
-lignes du milieu ne portent pas sur le même rouleau. La seule façon de les séparer est de
-tracer **nous-mêmes** `PHerc1447`, où une trace officielle existe pour comparer à volume
-égal. C'est ce que fait `tools/campagne_graines.sh`.
+### ⭐⭐ Ce qui reste lisible, c'est l'AMPLITUDE — et elle a une signification physique
 
-⚠⚠ **Donc la graine planaire a supprimé les auto-intersections sans qu'on puisse encore
-dire si elle rapproche la trace de la feuille.** Ce sont deux questions distinctes, et une
-seule a aujourd'hui un instrument valide sur ces rouleaux.
+Le tiers central ne transporte pas. L'amplitude, si, et le raisonnement est géométrique :
 
-- **Où l'on part** décide si la surface se recoupe. C'est réglé.
-- **Comment on avance** décide si elle reste sur *une* feuille. Ça ne l'est pas.
+> La profondeur d'un rendu se parcourt **le long de la normale à la surface**. Si la surface
+> est **parallèle** aux feuilles, sa normale **traverse** l'empilement : le profil oscille
+> fortement. Si la surface **coupe** l'empilement, sa normale reste dans une même matière :
+> le profil est plat.
 
-Et la seconde a un nom, déjà écrit dans `24` §4 : le traceur n'a reçu **aucune information
-d'orientation** (`direction_fields` absent). Une bonne graine ne peut pas s'y substituer —
-elle place le premier pas, pas les 112 337 suivants.
+L'amplitude est donc la forme **mesurable** du critère que le règlement énonce à l'œil :
+*« can you visually follow horizontal papyrus fibers across the page »*. Les deux bouts de
+l'échelle sont ancrés sur des images, à surface physique égale :
+
+![quatre signatures de trace](images/25_signatures.png)
+
+| trace | amplitude | ce que la face montre |
+|---|---:|---|
+| Scroll 1, AUC 0,925 | **50,1 %** | des **fibres parallèles rectilignes** — la face d'une feuille |
+| officiel `PHerc1447` | 28,8 % | des fibres, sur une bande étroite |
+| Scroll 4, l'échec de `12` §9 | 19,3 % | des **fragments dans le vide** |
+| **notre B** | **8,7 %** | des **stratifications concentriques** — le rouleau vu en **tranche** |
+
+⚠⚠ **Donc notre surface n'est pas mal posée sur une feuille : elle est posée EN TRAVERS de
+l'empilement.** C'est un défaut plus grave que « elle dérive d'une spire à l'autre », et il
+explique tout le reste d'un coup — le profil plat, les striations qui s'enroulent, et
+l'absence d'encre. Et il est parfaitement compatible avec **zéro auto-intersection** : une
+surface peut trancher le rouleau comme un couteau sans jamais se recouper elle-même.
+
+⚠ **L'amplitude est nécessaire, pas suffisante**, et la figure le montre : Scroll 4 échoue
+d'une troisième façon — la trace est dans le vide — pour une amplitude *plus haute* que la
+nôtre. Une seule grandeur ne classe pas trois modes d'échec.
+
+### Ce que ça désigne
+
+- **Où l'on part** décide si la surface se recoupe, et si elle a une géométrie à suivre.
+  C'est réglé : plafond d'occupation plus planéité.
+- **Comment on avance** décide si elle reste *parallèle* aux feuilles. Ça ne l'est pas, et
+  une graine ne peut pas s'y substituer — elle place le premier pas, pas les 112 337
+  suivants.
+
+Le nom de la seconde est écrit dans `24` §4 : le traceur n'a reçu **aucune information
+d'orientation** (`direction_fields` absent). Les `normal-grids` sont publiées à côté de
+chaque prédiction (182 Mo, `xy/ xz/ yz/`) ; le paramètre attend un **chemin local** et la
+disposition `<zarr>/{x,y,z}/<niveau>`. C'est une conversion, et c'est la marche suivante.
 
 ## 6. Reproduire
 

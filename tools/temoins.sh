@@ -528,7 +528,8 @@ if uv run python "$ROOT/analysis/src/verifier_chiffres.py" \
       "$ROOT/docs/21_texte_de_soumission.md" \
       "$ROOT/docs/19_ecarter_avant_de_payer.md" \
       "$ROOT/docs/20_le_champ_de_correction.md" \
-      "$ROOT/docs/12_profondeur_de_surface.md" >/tmp/chiffres.log 2>&1; then
+      "$ROOT/docs/12_profondeur_de_surface.md" \
+      "$ROOT/docs/25_une_graine_choisie_sur_la_planeite.md" >/tmp/chiffres.log 2>&1; then
   printf '✅ %s\n' "$(grep -c '✅' /tmp/chiffres.log) chiffres retrouves"
 else
   printf '❌ ECHEC\n'; sed 's/^/       /' /tmp/chiffres.log | tail -6; FAIL=$((FAIL + 1))

@@ -1,0 +1,263 @@
+{
+  "rouleaux": 12,
+  "lignes": [
+    {
+      "rouleau": "PHerc0125",
+      "voxel_um": 9.362,
+      "planarite": {
+        "critere": "planarite",
+        "x": 6234,
+        "y": 4127,
+        "z": 10434,
+        "aire_cm2": 19.823246,
+        "transverse": 0
+      },
+      "voisinage": {
+        "critere": "voisinage",
+        "x": 468,
+        "y": 3928,
+        "z": 10760,
+        "aire_cm2": 0.845456,
+        "transverse": 0
+      }
+    },
+    {
+      "rouleau": "PHerc0191",
+      "voxel_um": 9.362,
+      "planarite": {
+        "critere": "planarite",
+        "x": 4197,
+        "y": 6288,
+        "z": 9529,
+        "aire_cm2": 19.823041,
+        "transverse": 0
+      },
+      "voisinage": {
+        "critere": "voisinage",
+        "x": 2124,
+        "y": 1924,
+        "z": 9224,
+        "aire_cm2": 14.26611,
+        "transverse": 0
+      }
+    },
+    {
+      "rouleau": "PHerc0211",
+      "voxel_um": 9.362,
+      "planarite": {
+        "critere": "planarite",
+        "x": 1931,
+        "y": 2106,
+        "z": 9611,
+        "aire_cm2": 14.540794,
+        "transverse": 0
+      },
+      "voisinage": {
+        "critere": "voisinage",
+        "x": 1544,
+        "y": 1924,
+        "z": 9424,
+        "aire_cm2": 9.602598,
+        "transverse": 0
+      }
+    },
+    {
+      "rouleau": "PHerc0257",
+      "voxel_um": 9.362,
+      "planarite": {
+        "critere": "planarite",
+        "x": 4106,
+        "y": 4189,
+        "z": 9491,
+        "aire_cm2": 19.823347,
+        "transverse": 0
+      },
+      "voisinage": {
+        "critere": "voisinage",
+        "x": 1804,
+        "y": 1564,
+        "z": 9224,
+        "aire_cm2": 8.261076,
+        "transverse": 0
+      }
+    },
+    {
+      "rouleau": "PHerc0268",
+      "voxel_um": 8.64,
+      "planarite": {
+        "critere": "planarite",
+        "x": 3059,
+        "y": 2891,
+        "z": 7307,
+        "aire_cm2": 16.898719,
+        "transverse": 0
+      },
+      "voisinage": {
+        "critere": "voisinage",
+        "x": 2692,
+        "y": 2892,
+        "z": 7688,
+        "aire_cm2": 16.991311,
+        "transverse": 0
+      }
+    },
+    {
+      "rouleau": "PHerc0358",
+      "voxel_um": 9.362,
+      "planarite": {
+        "critere": "planarite",
+        "x": 5842,
+        "y": 5839,
+        "z": 7386,
+        "aire_cm2": 19.82317,
+        "transverse": 0
+      },
+      "voisinage": {
+        "critere": "voisinage",
+        "x": 2124,
+        "y": 1604,
+        "z": 7688,
+        "aire_cm2": 10.0782,
+        "transverse": 0
+      }
+    },
+    {
+      "rouleau": "PHerc0800",
+      "voxel_um": 8.64,
+      "planarite": {
+        "critere": "planarite",
+        "x": 4982,
+        "y": 2315,
+        "z": 12107,
+        "aire_cm2": 16.884104,
+        "transverse": 0
+      },
+      "voisinage": {
+        "critere": "voisinage",
+        "x": 2372,
+        "y": 2312,
+        "z": 12536,
+        "aire_cm2": 16.885188,
+        "transverse": 0
+      }
+    },
+    {
+      "rouleau": "PHerc0813",
+      "voxel_um": 9.362,
+      "planarite": {
+        "critere": "planarite",
+        "x": 2010,
+        "y": 3851,
+        "z": 8515,
+        "aire_cm2": 17.262397,
+        "transverse": 0
+      },
+      "voisinage": {
+        "critere": "voisinage",
+        "x": 4208,
+        "y": 1564,
+        "z": 8456,
+        "aire_cm2": 10.315674,
+        "transverse": 0
+      }
+    },
+    {
+      "rouleau": "PHerc0826",
+      "voxel_um": 9.362,
+      "planarite": {
+        "critere": "planarite",
+        "x": 1945,
+        "y": 5966,
+        "z": 8578,
+        "aire_cm2": 13.136295,
+        "transverse": 0
+      },
+      "voisinage": {
+        "critere": "voisinage",
+        "x": 468,
+        "y": 4388,
+        "z": 8456,
+        "aire_cm2": 0.846351,
+        "transverse": 0
+      }
+    },
+    {
+      "rouleau": "PHerc1218",
+      "voxel_um": 8.64,
+      "planarite": {
+        "critere": "planarite",
+        "x": 1852,
+        "y": 3820,
+        "z": 11635,
+        "aire_cm2": 11.42501,
+        "transverse": 0
+      },
+      "voisinage": {
+        "critere": "voisinage",
+        "x": 1724,
+        "y": 3220,
+        "z": 11528,
+        "aire_cm2": 9.193798,
+        "transverse": 0
+      }
+    },
+    {
+      "rouleau": "PHerc1447",
+      "voxel_um": 8.64,
+      "planarite": {
+        "critere": "planarite",
+        "x": 1963,
+        "y": 1931,
+        "z": 12244,
+        "aire_cm2": 13.643426,
+        "transverse": 0
+      },
+      "voisinage": {
+        "critere": "voisinage",
+        "x": 1924,
+        "y": 1744,
+        "z": 12296,
+        "aire_cm2": 10.723407,
+        "transverse": 0
+      }
+    },
+    {
+      "rouleau": "PHerc1545",
+      "voxel_um": 9.362,
+      "planarite": {
+        "critere": "planarite",
+        "x": 1739,
+        "y": 1899,
+        "z": 10379,
+        "aire_cm2": 15.147979,
+        "transverse": 0
+      },
+      "voisinage": {
+        "critere": "voisinage",
+        "x": 1884,
+        "y": 2264,
+        "z": 10980,
+        "aire_cm2": 11.568002,
+        "transverse": 0
+      }
+    }
+  ],
+  "signes_aire": {
+    "pour_planarite": 10,
+    "pour_voisinage": 2,
+    "ex_aequo": 0,
+    "n_paires": 12,
+    "p_signes": 0.03857421875
+  },
+  "signes_croisements": {
+    "pour_planarite": 0,
+    "pour_voisinage": 0,
+    "ex_aequo": 12,
+    "n_paires": 0,
+    "p_signes": 1.0
+  },
+  "croisements_cumules": {
+    "planarite": 0,
+    "voisinage": 0
+  }
+}

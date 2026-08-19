@@ -21,7 +21,13 @@ mkdir -p "$DEST"
 
 # Les dix rouleaux du Grand Prize SANS aucun segment publie (docs/23) : leur prix
 # First Letters de 50 000 $ est intact.
-ROULEAUX="PHerc0125 PHerc0191 PHerc0211 PHerc0257 PHerc0268 PHerc0358 PHerc0813 PHerc0826 PHerc1218 PHerc1545"
+#
+# ⭐ Plus DEUX rouleaux qui, eux, ont des segments officiels -- et c'est la seule facon de
+# lever le confond « notre trace » contre « ce rouleau-la est moins bien scanne ». Leurs
+# segments s'appellent `auto_grown_*` et leur meta.json dit `source: vc_grow_seg_from_seed`
+# avec `mode: explicit_seed` : c'est EXACTEMENT notre chaine, pilotee par le concours. Sur
+# ces deux rouleaux on peut donc comparer a resolution egale, sur le meme volume.
+ROULEAUX="PHerc0125 PHerc0191 PHerc0211 PHerc0257 PHerc0268 PHerc0358 PHerc0813 PHerc0826 PHerc1218 PHerc1545 PHerc1447 PHerc0800"
 
 lister() { curl -s --max-time 60 "$B/?list-type=2&prefix=$1&delimiter=/" \
            | tr '<' '\n' | grep "^Prefix>" | sed 's|^Prefix>||' | grep -vxF "$1"; }
