@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -53,11 +54,17 @@ def main() -> int:
     parser.add_argument("--index", type=Path, default=None,
                         help="results/index.json de windcheck, pour les croisements")
     parser.add_argument("--cible", default="encre_contraste_p90_p50")
+    parser.add_argument("--pas-um", type=float, default=142.8,
+                        help="pas inter-feuilles, MESURE ailleurs et avant (11 §3, "
+                             "cv 1,8 %%). ⚠ Il sert de seuil entre « la trace ondule "
+                             "dans sa feuille » et « elle a change de feuille » : un "
+                             "seuil qui viendrait de cette mesure-ci serait circulaire")
     parser.add_argument("--out", type=Path, default=None)
     args = parser.parse_args()
 
     from scipy.stats import mannwhitneyu, spearmanr
 
+    pas = args.pas_um
     lignes = charger(args.champs)
     if len(lignes) < 8:
         print(f"seulement {len(lignes)} segments", file=sys.stderr)
@@ -95,19 +102,65 @@ def main() -> int:
     print(f"\npart de l'erreur qu'une TRANSLATION enleverait : "
           f"mediane {float(np.median(part_rigide)) * 100:.1f} %  "
           f"(p90 {float(np.percentile(part_rigide, 90)) * 100:.1f} %)")
-    print(f"⚠ le pas inter-feuilles vaut ~142,8 um ; le residuel median vaut "
-          f"{float(np.median(res)) / 142.8:.2f} ecart(s) inter-feuilles")
+    print(f"⚠ le pas inter-feuilles vaut ~{pas:.1f} um ; le residuel median vaut "
+          f"{float(np.median(res)) / pas:.2f} ecart(s) inter-feuilles")
+
+    # ⚠⚠ LE LIEN AVEC LE MODE D'ECHEC DOMINANT. Un residuel sous un ecart inter-feuilles
+    # veut dire que la trace ondule DANS sa feuille -- genant, pas fatal. Un residuel
+    # au-dessus veut dire qu'elle a change de feuille en route, ce qui est le saut de
+    # spire, la panne que tout ce depot cherche. Le seuil n'est pas choisi : c'est le
+    # pas mesure independamment (11 §3, cv 1,8 %).
+    p90 = np.array([r["residuel_p90_um"] for r in lignes], dtype=float)
+    saut = p90 > pas
+    print(f"segments dont le residuel p90 depasse UN ecart inter-feuilles : "
+          f"{int(saut.sum())} / {len(lignes)} ({100 * saut.mean():.0f} %)")
+    # ⚠ Un detecteur qui ne NOMME pas ce qu'il signale n'est pas exploitable : la sortie
+    # utile n'est pas un taux, c'est une liste de segments a rouvrir.
+    for i in np.flatnonzero(saut):
+        print(f"    ⚑ {lignes[i]['segment'][:44]:44} p90 {p90[i]:6.1f} um "
+              f"({p90[i] / pas:.2f} ecarts)  coherence {coh[i]:+.3f}")
 
     rapport = {
         "segments": len(lignes),
         "part_rigide_mediane": float(np.median(part_rigide)),
-        "residuel_en_ecarts_inter_feuilles": float(np.median(res)) / 142.8,
+        "pas_inter_feuilles_um": pas,
+        "residuel_en_ecarts_inter_feuilles": float(np.median(res)) / pas,
+        "segments_residuel_p90_sup_un_ecart": int(saut.sum()),
+        "signales": [lignes[int(i)]["segment"] for i in np.flatnonzero(saut)],
         "coherence_mediane": float(np.median(coh[bon])),
         "temoin_median": float(np.median(tem[bon])),
         "coherence_bat_temoin": gagne,
         "p_mann_whitney": float(pu),
         "rho_detectable": detectable_rho(int(bon.sum())),
     }
+
+    # ⚠⚠ LA QUALITE DE TRACE EST-ELLE UNE FONCTION DE LA POSITION DANS LE ROULEAU ?
+    # Les segments portent leur indice de fenetre dans leur nom (`w107-109`). Si les
+    # defauts se groupaient dans une plage, ce ne serait pas un accident de tracage mais
+    # une propriete du rouleau a cet endroit -- et ca dit ou porter l'effort, ce qu'un
+    # taux global ne dit pas.
+    rapport_w: dict = {}
+    fenetres, res_f, coh_f, p90_f = [], [], [], []
+    for i, r in enumerate(lignes):
+        m = re.search(r"[-_]w(\d+)", r["segment"])
+        if m:
+            fenetres.append(int(m.group(1)))
+            res_f.append(res[i]); coh_f.append(coh[i]); p90_f.append(p90[i])
+    if len(fenetres) >= 10:
+        w = np.array(fenetres, dtype=float)
+        print(f"\n{len(w)} segments portent un indice de fenetre "
+              f"(w{int(w.min())} a w{int(w.max())})")
+        print(f"{'grandeur':>26} {'rho ~ fenetre':>14} {'p':>9}")
+        rapport_w = {}
+        for nom, v in (("residuel_median_um", res_f), ("residuel_p90_um", p90_f),
+                       ("coherence_voisins", coh_f)):
+            x = np.array(v, dtype=float)
+            m2 = np.isfinite(x)
+            rho, pv = spearmanr(w[m2], x[m2])
+            rapport_w[nom] = {"rho": float(rho), "p": float(pv), "n": int(m2.sum())}
+            print(f"{nom:>26} {rho:>+14.3f} {pv:>9.4f}{' *' if pv < 0.05 else ''}")
+
+    rapport["par_fenetre"] = rapport_w or None
 
     if args.encre is not None and args.encre.exists():
         enc = {r["segment"]: r for r in json.loads(args.encre.read_text())["segments"]}
