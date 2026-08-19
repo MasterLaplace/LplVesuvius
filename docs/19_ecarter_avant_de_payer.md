@@ -316,3 +316,85 @@ d'abord prouver qu'il compare **la même grandeur**. J'ai passé une heure à af
 résultat juste, sur un contrôle faux — et l'affaiblir semblait être la position prudente,
 ce qui est exactement ce qui l'a rendu difficile à voir. La prudence n'est pas une
 méthode.
+
+---
+
+## 11. ⚠⚠ Ce que la règle sépare vraiment — et pourquoi elle ne réplique pas sur Scroll 5
+
+*(2026-08-19, batch `22` voie P)* La règle reposait sur **un** corpus. Répliquée sur
+PHerc0172 (53 segments, 7,91 µm, cartes d'encre publiées, même définition de
+`avec_matiere`), elle **ne tient pas** :
+
+| | Scroll 1 (n = 80) | Scroll 5 (n = 53) |
+|---|---:|---:|
+| `avec_matiere` × contraste d'encre | **+0,539** (p < 1e-6) | **−0,217** (p = 0,118) |
+| décision, 20 % écartés | +0,381 · **p = 0,0005** | −0,020 · p = 0,84 |
+| corrélations passant Bonferroni | 5 / 20 | **0 / 20** |
+
+Le premier réflexe serait de dire que la règle est une propriété de Scroll 1. **Deux
+mesures disent autre chose, et il faut les deux.**
+
+### 11.1 La cible de Scroll 5 n'a presque rien à prédire
+
+| corpus | contraste d'encre p10 → p90 | **étendue relative** |
+|---|---|---:|
+| Scroll 1 | 1,25 → 6,36 (facteur **5,1**) | **1,008** |
+| Scroll 5 | 2,20 → 2,76 (facteur **1,25**) | **0,220** |
+
+> **Les cartes d'encre publiées de Scroll 5 se ressemblent toutes.** L'étendue de la
+> grandeur à expliquer y est **4,6 fois** plus petite. À n = 53 la mesure détecterait un
+> rho de 0,37, et elle rend −0,217 : le résultat est **non concluant**, pas réfutant.
+
+⚠ Et le prédicteur, lui, varie normalement (étendue relative 0,228 contre 0,333). C'est
+bien la **cible** qui est plate, pas la mesure.
+
+### 11.2 ⚠⚠ Et sur Scroll 1, la règle sépare une CLASSE, pas un gradient
+
+C'est la mesure qui compte, et elle n'avait pas été faite. Sur Scroll 1, **14 segments
+sur 80** ont un contraste d'encre sous 2,5 — c'est-à-dire une carte quasi plate. En les
+retirant :
+
+| corpus | rho `avec_matiere` × encre | p |
+|---|---:|---:|
+| les 80 | **+0,539** | < 1e-6 |
+| les 66 au-dessus de 2,5 | +0,249 | 0,044 |
+| les 64 au-dessus de 3,0 | **+0,190** | **0,132** |
+| les 58 au-dessus de 4,0 | +0,157 | 0,239 |
+
+> ⭐ **La corrélation est portée par une poignée de segments quasi vierges.** Parmi les
+> segments qui portent réellement de l'encre, la relation est **faible et non
+> significative**. Ce que `avec_matiere` détecte n'est pas « un peu plus ou un peu moins
+> d'encre » — c'est **une classe d'échecs**.
+
+### 11.3 Les deux mesures se répondent
+
+Le corpus entier de Scroll 5 se tient entre 2,20 et 2,76, c'est-à-dire **dans la plage que
+Scroll 1 appelle « quasi vierge »**. Il n'y a donc **aucune classe à séparer** : ni des
+segments qui portent du texte, ni des segments qui n'en portent pas — tout y ressemble à
+la seconde catégorie.
+
+⚠ Deux lectures restent possibles et rien ici ne les départage : soit la détection d'encre
+de ce corpus rend une sortie plate partout, soit le rendu 8 bits n'est pas comparable d'un
+corpus à l'autre. **La seconde suffirait à interdire toute comparaison de contraste absolu
+entre rouleaux** — ce que la règle nº 1 du dépôt dit déjà.
+
+### 11.4 Ce qu'on a le droit d'affirmer, réécrit
+
+| ✅ soutenable | ❌ plus soutenable |
+|---|---|
+| sur Scroll 1, `avec_matiere` **identifie une classe** de segments dont la carte d'encre publiée est quasi plate — 14 sur 80 | que la règle améliore un corpus **en général** |
+| écarter les 20 % les plus pauvres retire des membres de cette classe, d'où le gain | qu'elle réplique sur un autre rouleau |
+| c'est de la **détection conservative d'échec**, ce que le concours demande mot pour mot | que ce soit un gradient de qualité |
+| ⚠ la relation **dans** les segments porteurs d'encre est faible (+0,19, ns) | — |
+
+⭐ **Et c'est une meilleure revendication que la précédente**, pas une moins bonne : « je
+repère une classe d'échecs avant que vous payiez l'inférence » est exactement le goulot
+que le concours nomme, alors que « j'améliore une médiane » aurait toujours pu n'être
+qu'un effet de tri.
+
+### 11.5 Ce que ça n'a pas encore tranché
+
+⚠ Scroll 5 est à **7,91 µm** quand Scroll 1 est à **2,4 µm** : la résolution est confondue
+avec le rouleau. **PHerc1667 et PHerc0139 publient tous deux à 2,399 µm** — c'est le test
+apparié qui sépare « la règle est propre à Scroll 1 » de « la règle demande une résolution
+fine ». Les campagnes tournent.

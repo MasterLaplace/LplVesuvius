@@ -1,0 +1,22 @@
+{
+  "slices": [
+    {
+      "slice": 5000,
+      "background_rate": 0.06794883649252581,
+      "valid_cells": 1374,
+      "anomalous": []
+    },
+    {
+      "slice": 5100,
+      "background_rate": 0.0655829596412556,
+      "valid_cells": 1373,
+      "anomalous": [
+        {
+          "radius_mm": 4.746,
+          "column": 0,
+          "rate": 0.18899858956276447
+        }
+      ]
+    }
+  ]
+}

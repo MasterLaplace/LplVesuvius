@@ -129,7 +129,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Croiser la profondeur de trace avec les cartes d'encre publiees.",
         epilog="Une regle qui ne bat pas un tirage au hasard n'est pas une regle.")
-    parser.add_argument("profondeur", type=Path, help="JSON de zarr_depth.py")
+    parser.add_argument("profondeur", type=Path,
+                        help="JSON de zarr_depth.py, ou repertoire d'un fichier par segment")
     parser.add_argument("cartes", type=Path, help="repertoire des cartes d'encre .jpg")
     parser.add_argument("--depuis", type=Path, default=None,
                         help="reprendre un rapport deja ecrit au lieu de relire les "
@@ -165,8 +166,17 @@ def main() -> int:
         lignes = json.loads(args.depuis.read_text())["segments"]
         profond = {}
     else:
-        profond = {r["segment"]: r for r in json.loads(args.profondeur.read_text())
-                   if r.get("segment")}
+        # ⚠ Accepte un JSON unique ou un repertoire d'un fichier par segment : une
+        # campagne longue doit etre reprenable (piege nº 13), une courte n'en a pas
+        # besoin, et le lecteur s'adapte plutot que d'imposer une conversion.
+        fichiers = (sorted(args.profondeur.glob("*.json")) if args.profondeur.is_dir()
+                    else [args.profondeur])
+        profond = {}
+        for f in fichiers:
+            contenu = json.loads(f.read_text())
+            for r in (contenu if isinstance(contenu, list) else [contenu]):
+                if r.get("segment"):
+                    profond[r["segment"]] = r
         lignes = []
     for seg, rec in sorted(profond.items()):
         carte = args.cartes / f"{seg}.jpg"
