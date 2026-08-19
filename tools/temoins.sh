@@ -325,6 +325,9 @@ ck(d["segments_gardes"] == 30, "effectif garde")
 print(f"ALL PASS (0 failures, {n} checks)")
 PY
 
+cd "$ROOT/inference_xpu" || exit 2
+run "tracecheck (outil public)" uv run python "$ROOT/tracecheck/selftest.py"
+
 echo
 if [ "$FAIL" -eq 0 ]; then
   echo "TOUS LES TEMOINS PASSENT"
