@@ -356,19 +356,19 @@ boîte — 36 sur 238.
 
 ### Le résultat
 
-| | vitesse | trajectoire |
-|---|---:|---|
-| sans grille | 23,80 mm²/s | référence |
-| **grilles du VOLUME** | **2,15 mm²/s** | **identique au centième** |
+| couverture | vitesse | ralentissement | trajectoire |
+|---|---:|---:|---|
+| sans grille | 23,80 mm²/s | — | référence |
+| `xy` seul (1 536 tranches) | 2,15 mm²/s | ×11 | **identique** |
+| **les trois directions** (4 608 tranches, 540 Mo) | **1,37 mm²/s** | **×17** | **identique** |
 
-⚠⚠ **Onze fois plus lent, et pas un centième de déplacement.** Les grilles sont donc
-massivement consultées — et une information qui ne vient **pas** de la prédiction ne
-change pas davantage la trajectoire que celle qui en vient.
+⚠⚠ **Dix-sept fois plus lent, et pas un centième de déplacement.** Les grilles sont donc
+massivement consultées — et une information qui ne vient **pas** de la prédiction ne change
+pas davantage la trajectoire que celle qui en vient.
 
-> ⏳ Mesuré avec `xy` complet et `xz` partiel, `yz` vide : la génération des trois
-> directions tourne encore. **La couverture partielle est nommée**, pas passée sous
-> silence — mais `xy` couvre entièrement la boîte, et le chargeur confirme
-> `Loaded normal grid level 0`.
+> ⏳ La course avec grilles complètes est comparée sur ses premières dizaines de
+> générations et continue de tourner ; celle avec les grilles **publiées** a été comparée
+> sur **118 générations**, la course entière (§7). Les deux disent la même chose.
 
 ## 9. ⭐⭐ Le contrôle : quelque chose déplace-t-il la croissance ?
 
