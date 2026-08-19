@@ -489,8 +489,22 @@ et elle se vérifie sans rien supposer d'autre :
 
 | corpus | couches | **trace supposée** | **pic d'intensité médian observé** | quartiles |
 |---|---:|---:|---:|---|
-| Scroll 1 (72 segments) | 109 | **54** | **53** | 47 – 63 |
+| Scroll 1 (**80** segments) | 109 | **54** | **53** | 47 – 63 |
 | PHerc1667 (18 segments) | 109 | **54** | **55** | 49 – 61 |
+
+⚠⚠ **Corrigé le 2026-08-19 : le « 72 » venait d'une AUTRE campagne.**
+`analysis/src/compter_corpus.py` mesure les deux artefacts versionnés :
+
+| artefact | entrées (= segments) | `sondees` (= fenêtres par segment) |
+|---|---:|---:|
+| `docs/profondeur_corpus_2.4um.json` | **80** | **50** |
+| `docs/fibres_corpus.json` | 80 | **72** |
+
+Le 72 est le nombre de fenêtres de la campagne **fibres** (treillis 6 × 12), et il a
+migré dans une phrase qui parle de **segments de profondeur**. Un compteur *par entrée*
+n'est pas un nombre de segments — c'est exactement ce que le script existe pour rendre
+vérifiable en une commande.
+
 
 Sur **90 segments de deux rouleaux**, la matière tombe **à une couche près** du point
 qu'on suppose être la trace — soit **± 2,4 µm**.
@@ -505,7 +519,7 @@ quand la population est à 54 est *normal* ; celui dont **61 %** des fenêtres p
 
 ---
 
-## 13. ⚠⚠ La prédiction du §10 est TESTÉE — le sens tient, le seuil non, la forme forte est réfutée
+## 14. ⚠⚠ La prédiction du §10 est TESTÉE — le sens tient, le seuil non, la forme forte est réfutée
 
 *(2026-08-19, sur les 80 segments de Scroll 1 et leurs cartes d'encre publiées)*
 

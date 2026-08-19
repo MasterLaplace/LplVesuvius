@@ -1,0 +1,447 @@
+[
+  {
+    "fichier": "docs/amplitude_reference.json",
+    "entrees": 2,
+    "layers": "listes de 26–65 éléments",
+    "avec_matiere": "27–205, 2 valeurs",
+    "rouleaux": {
+      "?": 2
+    }
+  },
+  {
+    "fichier": "docs/amplitude_reference_1mm.json",
+    "entrees": 2,
+    "layers": "listes de 26–65 éléments",
+    "avec_matiere": "1017–9606, 2 valeurs",
+    "rouleaux": {
+      "?": 2
+    }
+  },
+  {
+    "fichier": "docs/balayage_fenetre_A_128.json",
+    "entrees": 1,
+    "layers": "liste de 61 éléments (constant)",
+    "avec_matiere": "195 (constant)",
+    "rouleaux": {
+      "?": 1
+    }
+  },
+  {
+    "fichier": "docs/balayage_fenetre_B_1024.json",
+    "entrees": 1,
+    "layers": "liste de 61 éléments (constant)",
+    "avec_matiere": "9 (constant)",
+    "rouleaux": {
+      "?": 1
+    }
+  },
+  {
+    "fichier": "docs/balayage_fenetre_B_128.json",
+    "entrees": 1,
+    "layers": "liste de 61 éléments (constant)",
+    "avec_matiere": "486 (constant)",
+    "rouleaux": {
+      "?": 1
+    }
+  },
+  {
+    "fichier": "docs/balayage_fenetre_B_256.json",
+    "entrees": 1,
+    "layers": "liste de 61 éléments (constant)",
+    "avec_matiere": "122 (constant)",
+    "rouleaux": {
+      "?": 1
+    }
+  },
+  {
+    "fichier": "docs/balayage_fenetre_B_512.json",
+    "entrees": 1,
+    "layers": "liste de 61 éléments (constant)",
+    "avec_matiere": "34 (constant)",
+    "rouleaux": {
+      "?": 1
+    }
+  },
+  {
+    "fichier": "docs/bandes_niveau0_fisher.json",
+    "entrees": 7,
+    "rouleaux": {
+      "?": 7
+    }
+  },
+  {
+    "fichier": "docs/croisement_encre.json",
+    "entrees": 80,
+    "sondees": "50 (constant)",
+    "layers": "109 (constant)",
+    "avec_matiere": "11–26, 13 valeurs",
+    "rouleaux": {
+      "?": 69,
+      "Scroll1 (horodatage seul)": 11
+    }
+  },
+  {
+    "fichier": "docs/croisement_encre_0172.json",
+    "entrees": 53,
+    "sondees": "392 (constant)",
+    "layers": "33 (constant)",
+    "avec_matiere": "166–328, 35 valeurs",
+    "rouleaux": {
+      "?": 53
+    }
+  },
+  {
+    "fichier": "docs/croisement_encre_PHerc0139.json",
+    "entrees": 38,
+    "sondees": "392 (constant)",
+    "layers": "109 (constant)",
+    "avec_matiere": "221–311, 24 valeurs",
+    "rouleaux": {
+      "?": 38
+    }
+  },
+  {
+    "fichier": "docs/croisement_encre_PHerc1667.json",
+    "entrees": 19,
+    "sondees": "392 (constant)",
+    "layers": "109 (constant)",
+    "avec_matiere": "54–307, 19 valeurs",
+    "rouleaux": {
+      "?": 19
+    }
+  },
+  {
+    "fichier": "docs/croisement_fibres.json",
+    "entrees": 8,
+    "rouleaux": {
+      "?": 8
+    }
+  },
+  {
+    "fichier": "docs/croisement_fibres_corpus.json",
+    "entrees": 8,
+    "rouleaux": {
+      "?": 8
+    }
+  },
+  {
+    "fichier": "docs/croisement_prof_1667.json",
+    "entrees": 4,
+    "rouleaux": {
+      "?": 4
+    }
+  },
+  {
+    "fichier": "docs/croisement_profondeur.json",
+    "entrees": 9,
+    "rouleaux": {
+      "?": 9
+    }
+  },
+  {
+    "fichier": "docs/decision_avec_matiere.json",
+    "entrees": 80,
+    "sondees": "50 (constant)",
+    "layers": "109 (constant)",
+    "avec_matiere": "11–26, 13 valeurs",
+    "rouleaux": {
+      "?": 69,
+      "Scroll1 (horodatage seul)": 11
+    }
+  },
+  {
+    "fichier": "docs/decision_dense.json",
+    "entrees": 80,
+    "sondees": "392 (constant)",
+    "layers": "109 (constant)",
+    "avec_matiere": "146–314, 58 valeurs",
+    "rouleaux": {
+      "?": 69,
+      "Scroll1 (horodatage seul)": 11
+    }
+  },
+  {
+    "fichier": "docs/decision_grille_B.json",
+    "entrees": 80,
+    "sondees": "296 (constant)",
+    "layers": "109 (constant)",
+    "avec_matiere": "86–96, 9 valeurs",
+    "rouleaux": {
+      "?": 69,
+      "Scroll1 (horodatage seul)": 11
+    }
+  },
+  {
+    "fichier": "docs/degradation_0172.json",
+    "entrees": 3,
+    "rouleaux": {
+      "?": 3
+    }
+  },
+  {
+    "fichier": "docs/ellipticite_0172.json",
+    "entrees": 8,
+    "rouleaux": {
+      "?": 8
+    }
+  },
+  {
+    "fichier": "docs/fibres_1667.json",
+    "entrees": 7,
+    "sondees": "72 (constant)",
+    "utilisables": "13–19, 4 valeurs",
+    "voisins_compares": "16–27, 5 valeurs",
+    "layers": "109 (constant)",
+    "rouleaux": {
+      "?": 7
+    }
+  },
+  {
+    "fichier": "docs/fibres_corpus.json",
+    "entrees": 80,
+    "sondees": "72 (constant)",
+    "utilisables": "8–20, 13 valeurs",
+    "voisins_compares": "5–30, 17 valeurs",
+    "layers": "109 (constant)",
+    "rouleaux": {
+      "?": 80
+    }
+  },
+  {
+    "fichier": "docs/fibres_scroll1.json",
+    "entrees": 12,
+    "sondees": "72 (constant)",
+    "utilisables": "9–20, 7 valeurs",
+    "voisins_compares": "10–25, 6 valeurs",
+    "layers": "109 (constant)",
+    "rouleaux": {
+      "?": 12
+    }
+  },
+  {
+    "fichier": "docs/juge_inconnu.json",
+    "entrees": 2,
+    "rouleaux": {
+      "?": 2
+    }
+  },
+  {
+    "fichier": "docs/pistes_bande_A.json",
+    "entrees": 3,
+    "rouleaux": {
+      "?": 3
+    }
+  },
+  {
+    "fichier": "docs/pistes_survey_0172.json",
+    "entrees": 11,
+    "rouleaux": {
+      "?": 11
+    }
+  },
+  {
+    "fichier": "docs/pistes_z_0172.json",
+    "entrees": 2,
+    "rouleaux": {
+      "?": 2
+    }
+  },
+  {
+    "fichier": "docs/profil_grille.json",
+    "entrees": 3,
+    "layers": "liste de 26 éléments (constant)",
+    "avec_matiere": "30–230, 3 valeurs",
+    "rouleaux": {
+      "?": 3
+    }
+  },
+  {
+    "fichier": "docs/profil_grille_0_64.json",
+    "entrees": 1,
+    "layers": "liste de 65 éléments (constant)",
+    "avec_matiere": "232 (constant)",
+    "rouleaux": {
+      "?": 1
+    }
+  },
+  {
+    "fichier": "docs/profil_grille_scroll4_complet.json",
+    "entrees": 1,
+    "layers": "liste de 41 éléments (constant)",
+    "avec_matiere": "230 (constant)",
+    "rouleaux": {
+      "?": 1
+    }
+  },
+  {
+    "fichier": "docs/profil_pile_complete.json",
+    "entrees": 1,
+    "layers": "liste de 65 éléments (constant)",
+    "rouleaux": {
+      "?": 1
+    }
+  },
+  {
+    "fichier": "docs/profil_profondeur.json",
+    "entrees": 2,
+    "layers": "liste de 26 éléments (constant)",
+    "rouleaux": {
+      "?": 2
+    }
+  },
+  {
+    "fichier": "docs/profil_profondeur_scroll4_region.json",
+    "entrees": 1,
+    "layers": "liste de 26 éléments (constant)",
+    "rouleaux": {
+      "?": 1
+    }
+  },
+  {
+    "fichier": "docs/profondeur_0139_1.129.json",
+    "entrees": 38,
+    "sondees": "50 (constant)",
+    "layers": "116–231, 2 valeurs",
+    "avec_matiere": "7–16, 3 valeurs",
+    "rouleaux": {
+      "?": 38
+    }
+  },
+  {
+    "fichier": "docs/profondeur_0139_2.399.json",
+    "entrees": 38,
+    "sondees": "50 (constant)",
+    "layers": "109 (constant)",
+    "avec_matiere": "17–24, 3 valeurs",
+    "rouleaux": {
+      "?": 38
+    }
+  },
+  {
+    "fichier": "docs/profondeur_0139_9.362.json",
+    "entrees": 38,
+    "sondees": "50 (constant)",
+    "layers": "28 (constant)",
+    "avec_matiere": "19–43, 11 valeurs",
+    "rouleaux": {
+      "?": 38
+    }
+  },
+  {
+    "fichier": "docs/profondeur_1667.json",
+    "entrees": 18,
+    "sondees": "50 (constant)",
+    "layers": "109 (constant)",
+    "avec_matiere": "5–26, 10 valeurs",
+    "rouleaux": {
+      "?": 18
+    }
+  },
+  {
+    "fichier": "docs/profondeur_A61.json",
+    "entrees": 1,
+    "layers": "liste de 61 éléments (constant)",
+    "avec_matiere": "25 (constant)",
+    "rouleaux": {
+      "?": 1
+    }
+  },
+  {
+    "fichier": "docs/profondeur_B61.json",
+    "entrees": 1,
+    "layers": "liste de 61 éléments (constant)",
+    "avec_matiere": "61 (constant)",
+    "rouleaux": {
+      "?": 1
+    }
+  },
+  {
+    "fichier": "docs/profondeur_corpus_2.4um.json",
+    "entrees": 80,
+    "sondees": "50 (constant)",
+    "layers": "109 (constant)",
+    "avec_matiere": "11–26, 13 valeurs",
+    "rouleaux": {
+      "?": 80
+    }
+  },
+  {
+    "fichier": "docs/profondeur_notre_trace.json",
+    "entrees": 1,
+    "layers": "liste de 21 éléments (constant)",
+    "avec_matiere": "25 (constant)",
+    "rouleaux": {
+      "?": 1
+    }
+  },
+  {
+    "fichier": "docs/profondeur_officiel_PHerc1447.json",
+    "entrees": 1,
+    "layers": "liste de 61 éléments (constant)",
+    "avec_matiere": "60 (constant)",
+    "rouleaux": {
+      "?": 1
+    }
+  },
+  {
+    "fichier": "docs/profondeur_trace_B.json",
+    "entrees": 1,
+    "layers": "liste de 21 éléments (constant)",
+    "avec_matiere": "61 (constant)",
+    "rouleaux": {
+      "?": 1
+    }
+  },
+  {
+    "fichier": "docs/profondeur_traces_AB.json",
+    "entrees": 2,
+    "layers": "liste de 21 éléments (constant)",
+    "avec_matiere": "25–61, 2 valeurs",
+    "rouleaux": {
+      "?": 2
+    }
+  },
+  {
+    "fichier": "docs/pyramide_0172.json",
+    "entrees": 5,
+    "rouleaux": {
+      "?": 5
+    }
+  },
+  {
+    "fichier": "docs/rendu_PHerc0358.json",
+    "entrees": 21,
+    "rouleaux": {
+      "?": 21
+    }
+  },
+  {
+    "fichier": "docs/rendu_PHerc0358_B.json",
+    "entrees": 61,
+    "rouleaux": {
+      "?": 61
+    }
+  },
+  {
+    "fichier": "docs/structure_pile.json",
+    "entrees": 3,
+    "layers": "liste de 2 éléments (constant)",
+    "rouleaux": {
+      "?": 3
+    }
+  },
+  {
+    "fichier": "docs/variantes_reference.json",
+    "entrees": 8,
+    "rouleaux": {
+      "?": 8
+    }
+  },
+  {
+    "fichier": "docs/variantes_scroll5.json",
+    "entrees": 8,
+    "rouleaux": {
+      "?": 8
+    }
+  }
+]

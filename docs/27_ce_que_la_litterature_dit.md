@@ -180,8 +180,8 @@ différentes**, et il faut le dire avant qu'un lecteur croie à un doublon :
 la première version de ce document en donnait une **paraphrase entre guillemets**, ce
 qui est une faute de citation : *« Diminishing segmentation performance with decreasing
 lateral resolution provides insight into the characteristic spatial scales that must be
-resolved on our dataset to exploit the morphological signal. »* C'est la même forme que notre `12` §H2 (un d′ **baisse** quand on résout
-plus de structure) et que le balayage de fenêtre de `25` §5. **Deux mesures indépendantes
+resolved on our dataset to exploit the morphological signal. »* C'est la même forme que notre **`13` H2** (⚠ pas `12` §H2 : ce document n'a pas de
+section H2 — un d′ **baisse** quand on résout plus de structure) et que le balayage de fenêtre de `25` §5. **Deux mesures indépendantes
 disent que la résolution décide** — à citer comme convergence, pas comme priorité.
 
 ## 2. *Virtually Unrolling the Herculaneum Papyri by Diffeomorphic Spiral Fitting*
@@ -619,8 +619,12 @@ de `docs/` et de la passation ont donc été lues. Reste ouvert, dans l'ordre de
 | 5 | `06` §3bis C « un second rouleau » | ⚠ **périmé** : fait quatre fois (`19` §11) |
 | 6 | `06` §3bis D « boucler la métrique sur le résultat » | ⚠ **périmé** : c'est la mesure 3.8, et la réponse est **NON** |
 
-⭐ **Le reste nº 1 est le seul qui vaille un lot.** Les trois « périmés » sont corrigés
-ci-dessous plutôt que laissés à piéger le prochain lecteur.
+⭐ **Le reste nº 1 est le seul qui vaille un lot.**
+
+⚠ Cette phrase disait « les trois « périmés » sont corrigés **ci-dessous** » — et c'était
+la dernière ligne du fichier, donc rien ne suivait. Les corrections sont **dans
+`06`** lui-même (§2.3, §3bis C, §3bis D), là où le piège attend son lecteur ; c'est le
+renvoi qui était faux, pas le travail.
 
 ---
 
