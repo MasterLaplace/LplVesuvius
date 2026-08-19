@@ -293,14 +293,18 @@ validée.
 Avec **1,53 Go** de vraies grilles (une boîte de ±700 voxels autour de la graine, soit
 4 203 tranches) :
 
-| | vitesse de croissance | trajectoire, 103 générations |
-|---|---:|---|
-| sans grille | **73,45 mm²/s** | référence |
-| **avec grille** | **2,57 mm²/s** | **identique au centième** |
+| | vitesse de croissance | trajectoire, **118 générations** | aire sauvée | auto-intersections |
+|---|---:|---|---:|---:|
+| sans grille | **73,45 mm²/s** | référence | 19,82 cm² | **0** |
+| **avec grille** | **2,57 mm²/s** | **identique au centième** | 24,06 | **112 139** |
 
-⚠⚠ **Un facteur 29 de ralentissement pour zéro déplacement.** La contrainte n'est donc pas
-ignorée — elle est évaluée à chaque pas, et elle coûte vingt-neuf fois le temps de calcul —
-mais la trajectoire qu'elle produit est **exactement** celle du traceur sans elle.
+⚠⚠ **Un facteur 29 de ralentissement pour zéro déplacement, sur la course entière.** La
+contrainte n'est donc pas ignorée — elle est évaluée à chaque pas, et elle coûte vingt-neuf
+fois le temps de calcul — mais la trajectoire qu'elle produit est **exactement** celle du
+traceur sans elle, du premier pas au dernier.
+
+⚠ Et comme pour `direction_fields`, elle n'agit que dans l'**étape finale** — où elle fait
+le pire résultat de tout ce qui a été testé : **112 139** auto-intersections contre zéro.
 
 ### Et l'explication est dans le nom du dossier
 
