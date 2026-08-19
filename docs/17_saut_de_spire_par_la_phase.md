@@ -1,4 +1,4 @@
-# Détecter un saut de spire par la phase d'enroulement publiée — ❌ ÉCHEC
+# Détecter un saut de spire par la phase d'enroulement publiée — ❌ ÉCHEC (définitif, §10)
 
 > ⚠⚠ **Verdict final : la mesure NE MARCHE PAS.** À n = 38, rho **+0,149** (p = 0,37).
 > L'effet s'est évanoui à mesure que l'échantillon grandissait — **+0,517 (n=8) →
@@ -134,11 +134,8 @@ que la puissance monte.
 1. ⭐ **La donnée existe et se lit.** Le canal `cos` du `lasagna` est publié pour quatre
    rouleaux, chunks 32³ à ~32 Ko, lisible à distance. Personne d'autre ne l'exploite
    pour juger une trace, et le lecteur est écrit.
-2. ⚠ **Le soupçon non levé reste la meilleure piste** : au niveau 3 (19,2 µm) huit
-   cellules d'un maillage à 2,4 µm partagent un voxel de phase. La plupart des marches
-   valent donc **zéro par construction**, et ce qu'on mesure est le bruit des rares
-   transitions. **Refaire au niveau 0 ou 1 changerait peut-être tout** — et c'est
-   testable.
+2. ~~⚠ Le soupçon non levé reste la meilleure piste : refaire au niveau 0 ou 1
+   changerait peut-être tout.~~ **RÉFUTÉ le 2026-08-19, deux fois** — voir le §10.
 3. ⚠⚠ **La discipline a payé trois fois aujourd'hui.** Les fibres (signe **inversé** de
    n=12 à n=54), ce détecteur (amplitude **divisée par 3,5** de n=8 à n=38), et — dans
    l'autre sens — l'instrument de profondeur, qui a **tenu** sur trois corpus. Sans la
@@ -155,3 +152,60 @@ que la puissance monte.
 | phase | PHerc0139 (n = 38) | +0,150 | 0,368 ❌ |
 
 **Un sur trois tient, et c'est celui qui tient sur trois corpus.**
+
+
+---
+
+## 10. ⚠⚠ Le soupçon est levé, et l'échec devient définitif
+
+*(2026-08-19)* Le §8 laissait **une** porte ouverte : la campagne tournait au niveau 3
+(19,2 µm), où huit cellules d'un maillage à 2,4 µm partagent un voxel de phase, donc
+« la plupart des marches valent zéro par construction ». Deux mesures la ferment, et
+elles échouent différemment — c'est pour ça qu'il en fallait deux.
+
+### 10.1 Il n'existe pas de niveau plus fin
+
+Le `.zattrs` du volume `cos` déclare ses niveaux, et le bucket les confirme :
+
+```
+$ curl … /?list-type=2&prefix=…_cos.ome.zarr/&delimiter=/
+.zattrs   .zgroup   3/   4/   5/
+
+$ curl … /_cos.ome.zarr/2/.zarray   →  absent
+$ curl … /_cos.ome.zarr/3/.zarray   →  shape [9620, 3314, 3314]  chunks [32,32,32]
+```
+
+> **Le niveau 3 n'était pas un choix : c'est la résolution la plus fine qui existe.**
+> « Refaire au niveau 0 ou 1 » n'a pas d'objet — ces niveaux ne sont pas publiés.
+
+⚠ C'est une correction de ma propre formulation du §8, qui présentait un niveau imposé
+par l'éditeur comme un réglage de notre campagne.
+
+### 10.2 Et la quantification n'écrase rien — mesuré, pas supposé
+
+La suspicion reste testable **par sa conséquence** : si le partage de voxels écrasait le
+signal, la distribution des marches serait dominée par le zéro. Sur les 38 traces déjà
+calculées (`analysis/src/resolution_phase.py`) :
+
+| grandeur | min | médiane | max |
+|---|---:|---:|---:|
+| marche médiane | 6,0 | **12,2** | 16,0 |
+| marche p95 | 37,0 | 55,5 | 70,0 |
+| marche max | 93,0 | 117,0 | 185,0 |
+
+> **35 551 marches, et ZÉRO trace sur 38 dont la marche médiane soit nulle.** Sur une
+> échelle de 0 à 255, une médiane à 12,2 dit que le champ **varie** entre cellules
+> adjacentes. La quantification n'est pas ce qui a tué le signal.
+
+⚠ 14 valeurs distinctes de marche médiane sur 38 traces : on n'est pas non plus dans un
+régime où la mesure ne pourrait prendre que deux ou trois valeurs.
+
+### 10.3 Verdict
+
+**L'échec est définitif, et il est propre.** Le canal `cos` se lit, le lecteur marche,
+la résolution disponible suffit, et la marche de phase entre cellules voisines **ne
+prédit pas** les croisements recensés (+0,517 à n = 8, +0,306 à n = 30, **+0,150 à
+n = 38**). Un effet réel ne fond pas quand on l'échantillonne mieux.
+
+⭐ Ce qui reste acquis : le lecteur de champ `lasagna`, écrit et contrôlé, prêt pour la
+prochaine idée qui aura besoin de la phase d'enroulement.

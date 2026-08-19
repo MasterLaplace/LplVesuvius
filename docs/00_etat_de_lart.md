@@ -271,13 +271,16 @@ réelles »**.
 
 Ce qui manquerait pour y arriver, dans l'ordre du moins cher au plus cher :
 
-1. **finir les campagnes en cours** — la profondeur sur 80 segments et les fibres sur 80
-   donneraient la puissance qui manque, et un instrument validé sur une population est
-   défendable là où trois segments ne le sont pas ;
-2. **montrer qu'un instrument change une décision** — par exemple qu'écarter les
-   segments à fort écart profondeur↔trace améliore un agrégat mesurable ;
-3. **corriger une trace** et montrer le gain — c'est le vrai « produire », et rien n'y a
-   été tenté ici.
+1. ✅ **finir les campagnes en cours** — *fait le 2026-08-18* : profondeur sur **80**
+   segments, fibres sur **80**. La première tient, la seconde s'est **inversée** ;
+2. ✅ **montrer qu'un instrument change une décision** — *fait le 2026-08-19* (`19`) :
+   écarter les 20 % de segments dont le volume de surface porte le moins de matière fait
+   monter le contraste d'encre médian de **+0,381**, p = **0,0005** contre 2000
+   permutations de même effectif, et le seuil est défendu par un **plateau** (15–25 %) ;
+3. ⏳ **corriger une trace** et montrer le gain — c'est le vrai « produire ». L'outil
+   existe désormais (`champ_correction.py`, `18` voie J) et sépare ce qu'une médiane
+   confond : un **décalage rigide**, réparable par une translation, d'un **saut de
+   feuille**, qui ne l'est pas. La réparation elle-même n'est pas faite.
 
 ### 9.5 Les repères du §7 restent vrais, et se sont étendus
 
@@ -288,10 +291,23 @@ radiale** et ses 176 spires avec un invariant à **cv 1,8 %** (`11`), et le corp
 passé de 2,6 Go à **~76 Go** dont **80 cartes d'encre publiées** et 71 traces de trois
 corpus jamais utilisés ici.
 
-⚠ **Une correction du §6 de ce document** : il dit que la résolution du scan sépare les
-échantillons tracés des vierges. Mesuré depuis, elle sépare aussi **la métrique de
-`07` elle-même** — elle réplique à 7,91 µm (Scroll 1 **+0,769**, PHerc1667 **+0,700**) et
-pas à 9,362 µm (PHerc0139 **+0,284**, PHerc0814 **+0,141**). ⚠ Les deux derniers sont
-sous-puissants (n = 36 détecte 0,45, n = 12 détecte 0,73) et **les quatre rho sont
-positifs**, donc c'est un motif à vérifier, pas un fait. La vérification appariée — le
-même corpus à 2,403 µm — est lancée.
+⚠ **Une correction du §6 de ce document, puis une correction de cette correction.**
+Le §6 dit que la résolution du scan sépare les échantillons tracés des vierges. J'ai cru
+mesurer qu'elle séparait aussi **la métrique de `07` elle-même** — répliquant à 7,91 µm
+(Scroll 1 +0,769, PHerc1667 +0,700) et pas à 9,362 µm (PHerc0139 +0,284).
+
+**C'était le RAYON, pas la résolution** (`07` §9). Le rayon de recherche était fixé en
+voxels, donc à 9,362 µm il couvrait 749 µm, c'est-à-dire **plusieurs écarts
+inter-feuilles** : il trouvait la spire voisine — de la géométrie parfaitement normale —
+et noyait l'anomalie dedans. Dérivé du pas mesuré ailleurs et avant (**142,8 µm,
+cv 1,8 %**, `11` §3) :
+
+| corpus | rayon en voxels | **rayon physique** |
+|---|---:|---:|
+| Scroll 1 (7,91 µm) | +0,769 | **+0,840** (p = 1,1e-12) |
+| **PHerc0139 (9,362 µm)** | +0,284 *(p = 0,093)* | **+0,666** (p = 2,3e-05) |
+| PHerc1667 (7,91 µm) | +0,700 | +0,579 (p = 0,019) |
+
+⭐ **Le gain est le plus grand exactement là où le prix se joue** : les 13 rouleaux
+éligibles sont tous scannés à 8,640–9,362 µm. ⚠ PHerc1667 **baisse**, et c'est le plus
+petit corpus — deux sur trois s'améliorent, à rapporter tel quel plutôt qu'à moyenner.

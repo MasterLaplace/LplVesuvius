@@ -23,7 +23,7 @@ Ferme `07` §5 (« un seul rouleau ») et `06` §C.
 | A2 | corréler aux croisements publiés de Scroll 5 | ✅ **la métrique est INAPPLICABLE**, pas moins bonne : elle exige une trace qui se recouvre, et 44 traces couvrent ≤ 1 tour. Les 9 mesurables sont 9 morceaux du **même** segment, donc n = 1. `07` §7 |
 | A3 | le **confond longueur/qualité** de `05` | ✅ **expliqué** : sur Scroll 5 seules les traces longues sont mesurables, donc toute corrélation y est confondue **par construction** |
 | A4 | le **seuil arbitraire** de `07` §5 | ✅ **tranché** (`07` §8) : aucune grandeur sans seuil ne l'égale (`shortfall` +0,340, `ratio_p5` −0,512 contre **+0,769**) — le signal EST dans la queue. Et le plateau tient de 0,15 à 0,40, un facteur **2,7** sans que rho bouge |
-| A5 | les 3 corpus restants — PHerc0139 (38), PHerc1667 (20), PHerc0814 (13) | 🔄 téléchargement (`tools/fetch_traces.py`). ⭐ Majoritairement **> 1 tour**, donc mesurables — c'est là qu'est le vrai second rouleau |
+| A5 | les 3 corpus restants — PHerc0139 (38), PHerc1667 (20), PHerc0814 (13) | ✅ **71 traces mesurées** (`07` §9). Avec le rayon issu de la physique : PHerc0139 **+0,666** (p = 2,3e-05), PHerc1667 +0,579, PHerc0814 +0,141 (n = 12, sous-puissant). ⭐ Le gain est le plus grand **à 9,362 µm**, la résolution des 13 rouleaux du prix |
 
 ## Voie B — la profondeur de surface, de l'anecdote à l'instrument
 
@@ -33,8 +33,8 @@ Ferme `12` §5 (« trois segments, deux rouleaux, ce n'est pas un corpus »).
 |---|---|---|
 | B1 | le **sous-échantillonnage des couches** | ✅ **sans objet** — les volumes de surface sont en **Zarr**, un chunk = une colonne de profondeur entière pour **1,78 Mo et 1,03 s**. Le problème du téléchargement disparaît |
 | B2 | trouver le corpus | ✅ **81 segments** de Scroll 1 avec volume de surface, **80 avec une carte d'encre publiée** (récupérées), et **3 campagnes** : 45,5 / 2,4 / 1,13 µm |
-| B3 | mesurer les 80 segments | 🔄 en cours. ⚠⚠ **L'instrument a été corrigé deux fois** (`12` §10) : l'intensité localise, le contraste non ; et l'écart se mesure **à la trace en µm**, pas en « tiers central » d'une fenêtre non centrée. Prédiction **reposée** : *écart médian > ~50 µm ⇒ pas d'encre lisible* |
-| B4 | croiser avec les cartes d'encre **et** les croisements publiés | ⏳ les deux jeux sont là |
+| B3 | mesurer les 80 segments | ✅ **80 segments** mesurés. ⚠⚠ **L'instrument a été corrigé deux fois** (`12` §10) : l'intensité localise, le contraste non ; et l'écart se mesure **à la trace en µm**, pas en « tiers central » d'une fenêtre non centrée. Prédiction **reposée** : *écart médian > ~50 µm ⇒ pas d'encre lisible* |
+| B4 | croiser avec les cartes d'encre **et** les croisements publiés | ✅ **les deux** : croisements `+0,388` (p = 0,0038, n = 54, `croisement_profondeur.json`) ; cartes d'encre **`19`** — et c'est là qu'est né le premier résultat qui change une décision |
 
 ## Voie C — la direction des fibres ⭐ valeur la plus haute
 
@@ -43,9 +43,9 @@ Ferme `12` §5 (« trois segments, deux rouleaux, ce n'est pas un corpus »).
 | # | quoi | état |
 |---|---|---|
 | C1 | **tenseur de structure** → orientation locale | ✅ fait (`14`), cohérence jusqu'à **0,64** |
-| C2 | **cohérence spatiale** de l'orientation | 🔄 campagne lancée. ⚠ La bascule recto/verso **ne se voit pas** (angle constant à 90–97° sur 109 couches) → pivot vers la dispersion entre **voisins** |
-| C3 | ⭐ les **deux instruments s'accordent-ils** ? | ⏳ prédiction posée : Scroll 4, dont `12` dit que la trace n'est sur aucune feuille, doit montrer un désaccord d'orientation nettement plus élevé |
-| C4 | une **discontinuité** d'orientation marque-t-elle un saut de feuille ? | ⏳ |
+| C2 | **cohérence spatiale** de l'orientation | ✅ campagne finie, **80 segments** (`fibres_corpus.json`) |
+| C3 | ⭐ les **deux instruments s'accordent-ils** ? | ❌ **non** — le signe s'INVERSE de n = 12 à n = 54 (+0,330 → −0,192). `14` |
+| C4 | une **discontinuité** d'orientation marque-t-elle un saut de feuille ? | ❌ **écarté** avec C3 : la grandeur dont il dépend n'a pas survécu à la montée en puissance |
 
 ## Voie D — retrouver la feuille de Scroll 4
 
@@ -53,16 +53,16 @@ Ferme `12` §5 (« trois segments, deux rouleaux, ce n'est pas un corpus »).
 
 | # | quoi | état |
 |---|---|---|
-| D1 | mesurer **dans le volume**, le long de la normale à la trace, sans réengendrer de couches | ⏳ |
-| D2 | en déduire de combien la trace est décalée, et si c'est un décalage ou une dérive | ⏳ |
+| D1 | mesurer **dans le volume**, le long de la normale à la trace, sans réengendrer de couches | ➡️ **repris et élargi** par la voie J de `18` : `champ_correction.py` mesure l'écart fenêtre par fenêtre, sur tout segment, sans réengendrer de couches |
+| D2 | en déduire de combien la trace est décalée, et si c'est un décalage ou une dérive | ➡️ **c'est exactement** ce que `residuel` et `coherence_voisins` séparent (`18` voie J) |
 
 ## Voie E — les restes de géométrie
 
 | # | quoi | état |
 |---|---|---|
-| E1 | vrai **ombilic** (`06` §2.3) — ⚠ 404 à l'adresse notée, chemin à retrouver | ⏳ |
-| E2 | plus de bandes **niveau 0** : 2 faites, une migre et une non | ⏳ |
-| E3 | **ESRF 2,4 µm** sur les 4 sites (`06` §3.6) | ⏳ |
+| E1 | vrai **ombilic** (`06` §2.3) — ⚠ 404 à l'adresse notée, chemin à retrouver | ➡️ `18` M1 |
+| E2 | plus de bandes **niveau 0** : 2 faites, une migre et une non | ➡️ `18` M2 |
+| E3 | **ESRF 2,4 µm** sur les 4 sites (`06` §3.6) | ➡️ `18` M3 |
 
 ## Voie F — cohérence de la doc, sans machine
 
@@ -105,7 +105,7 @@ n'est pas la même chose que dérouler 800 rouleaux.
 |---|---|---|
 | G1 | chiffrer le coût par rouleau | ✅ 97 Mo, 30 s pour un rouleau non tracé |
 | G2 | extrapoler à 53 et 800 | ✅ 5,2 Go / 78 Go, part du volume **constante** |
-| G3 | paralléliser réellement les campagnes | ⏳ la structure le permet, rien ne le fait |
+| G3 | paralléliser réellement les campagnes | ✅ **×8,35 mesuré** (21,80 s → 2,61 s sur 16 fenêtres), sortie **bit-pour-bit identique** au sérialisé. `18` voie K |
 
 ## Voie H — la qualité de scan (nommée par le concours)
 
@@ -117,4 +117,26 @@ Le tableau des goulots de `2026_open_problems` dit, pour les régions comprimée
 | H1 | métrique de séparabilité (d′ feuille / interstice) | ✅ `analysis/src/separabilite_scan.py` |
 | H2 | ⚠ sa **limite d'échelle**, mesurée | ✅ un d′ **baisse** quand on résout plus de structure : valide à résolution égale seulement |
 | H3 | témoin apparié : même rouleau, deux protocoles | ✅ PHerc0139 en 9,362 **et** 2,399 µm |
-| H4 | carte des 13 rouleaux du prix | 🔄 relancée avec les paramètres dérivés du pas |
+| H4 | carte des 13 rouleaux du prix | ✅ **13 rouleaux mesurés** (`16`). Compression et médiane de qualité **écartées** ; c'est la **queue** qui sépare (témoin 0 %, les treize 4–24 %). `PHerc0358` désigné |
+
+
+---
+
+## ✅ Clôture du batch — 2026-08-19
+
+**Les huit voies sont fermées**, chacune par une mesure ou par une raison écrite. Trois
+items de géométrie (E1–E3) et la suite « produire » passent au batch suivant,
+**`18_batch_produire.md`**, qui n'est pas une continuation de celui-ci : il attaque ce
+que `00` §9 nommait comme le vrai manque — *aucun de nos instruments n'a encore changé
+quoi que ce soit*.
+
+| voie | verdict |
+|---|---|
+| A — proximité sur un second rouleau | ✅ **réplique**, et le rayon vient de la physique |
+| B — profondeur, de l'anecdote à l'instrument | ✅ **80 segments**, corrélée aux croisements **et** à l'encre publiée |
+| C — direction des fibres | ❌ **réfutée** : le signe s'inverse quand n monte |
+| D — la feuille de Scroll 4 | ➡️ reprise et élargie par `18` voie J |
+| E — restes de géométrie | ➡️ `18` voie M |
+| F — cohérence de la doc | ✅ |
+| G — passage à l'échelle | ✅ chiffré **et** réalisé (×8,35) |
+| H — qualité de scan | ✅ métrique, limite d'échelle, témoin apparié, carte des 13 |
