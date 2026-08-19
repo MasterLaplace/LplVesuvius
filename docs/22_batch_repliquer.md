@@ -85,7 +85,11 @@ cohérent — pour qui a la chaîne.
 
 ## ✅ Clôture du batch — 2026-08-19, et il a viré ailleurs qu'où il visait
 
-**Les quatre voies sont fermées**, mais le lot s'est terminé sur un terrain qu'il n'avait
+⚠ **Trois voies sur quatre sont fermées** *(corrigé le 2026-08-19 : cette ligne disait
+« les quatre »)*. Restent ouverts, dans les tableaux ci-dessus : **Q2** 🔄 — fait sur
+**un seul** rouleau, PHerc1447 —, **Q3** ⏳ *publier la table*, et **R2** ⏳ *exporter le
+champ en coordonnées de fenêtre*. Ce dernier est le lot nº 2 de
+[`29`](29_ce_qui_reste.md). Le lot s'est terminé sur un terrain qu'il n'avait
 pas prévu.
 
 | voie | verdict |

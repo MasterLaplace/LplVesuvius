@@ -158,6 +158,12 @@ traite pareil, et c'est assumé.
 | *scan-quality metrics* | `separabilite_scan.py` et la carte des 13 (`16`) |
 | coût | **36 requêtes** par segment, ~2,6 s à 16 fils, **avant** l'inférence |
 
+⚠ **Trois nombres circulent dans ce document pour des grandeurs voisines** — **36**
+requêtes/fenêtres, **50** (`sondees` dans `docs/profondeur_corpus_2.4um.json`), et **72**
+(le treillis 6 × 12 de la campagne **fibres**). Ils ne décrivent pas la même chose, et le
+document ne le dit nulle part. ⏳ À démêler en une passe :
+`analysis/src/compter_corpus.py` donne les comptes réels par artefact.
+
 ⚠ **Ce que ça ne fait pas** : ça n'améliore aucune trace, ça n'en déroule aucune. Une
 règle de tri sépare ce qui va rater de ce qui va marcher ; elle ne répare rien. La
 réparation est la voie J du batch (`18`), et son outil existe déjà.
