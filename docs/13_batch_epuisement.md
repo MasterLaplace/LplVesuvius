@@ -85,16 +85,16 @@ sur les **~800 de la villa**. Chiffrée, pas affirmée
 | rouleaux | donnée lue | 1 fil | 16 fils | **part du volume** |
 |---:|---:|---:|---:|---:|
 | 13 (le prix) | 1,3 Go | 6 min | < 1 min | **0,0042 %** |
-| 53 (publiés) | 5,2 Go | 30 min | 2 min | 0,0042 % |
-| **800 (la villa)** | **78 Go** | 7,2 h | **0,5 h** | **0,0042 %** |
+| 53 (publiés) | 5,2 Go | 30 min | 4 min | 0,0042 % |
+| **800 (la villa)** | **78 Go** | 7,2 h | **0,9 h** | **0,0042 %** |
 
 > On lit **quatre millièmes de pour-cent** d'un rouleau pour le juger. C'est ce que
 > permet un chunk OME-Zarr : il contient toute la colonne de profondeur d'une fenêtre,
 > et les chunks se lisent indépendamment par HTTP. **On ne télécharge jamais un rouleau.**
 
-⚠ Les campagnes sont **parallélisables sans coordination** — chaque chunk est une requête
-indépendante. Le « 16 fils » n'est pas une promesse d'implémentation, c'est ce que la
-structure permet.
+⚠ **La colonne « 16 fils » est désormais MESURÉE** (×8,35, 2026-08-19), plus supposée.
+La première version divisait par 16 — un parallélisme parfait — donc annonçait 0,5 h là
+où la mesure dit **0,9 h**. Un modèle de coût qui se flatte n'est pas un modèle de coût.
 
 ⚠⚠ **Ce qui NE passe PAS à l'échelle, et il faut le dire** : la détection d'encre (42 min
 par segment sur cet iGPU) et le **traçage** lui-même, qui reste semi-manuel. Nos

@@ -36,6 +36,17 @@ VOLUME_ROULEAU_TIO = 2.1
 """Taille d'un volume complet au niveau 0, mesuree en `02` : ~2,1 Tio."""
 
 
+ACCELERATION_16_FILS = 8.35
+"""Accélération réellement obtenue à 16 requêtes simultanées, mesurée le 2026-08-19.
+
+⚠⚠ **Mesurée, pas déduite du nombre de fils.** 16 fenêtres d'un vrai segment :
+**21,80 s** en série, **2,61 s** à 16 fils, et la sortie est **bit pour bit identique**
+(`tools/temoins.sh`, batterie « champ de correction »). Le reste est la latence que le
+serveur, la connexion et le décodage imposent — c'est-à-dire tout ce qu'un parallélisme
+n'enlève pas.
+"""
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Cout de nos instruments a 1, 53 et 800 rouleaux.",
@@ -70,7 +81,8 @@ def main() -> int:
         total = n * VOLUME_ROULEAU_TIO * 1024 ** 4
         heures = n * par_rouleau_non_trace * secondes / 3600
         print(f"{n:>9} {lus / 1e9:>10.1f} Go {heures:>10.1f} h "
-              f"{heures / 16:>11.1f} h {lus / total * 100:>14.5f} %")
+              f"{heures / ACCELERATION_16_FILS:>11.1f} h "
+              f"{lus / total * 100:>14.5f} %")
         report.append({"rouleaux": n, "octets_lus": lus, "heures_1_fil": heures,
                        "part_du_volume_pct": lus / total * 100})
 
@@ -79,9 +91,10 @@ def main() -> int:
     print("  TOUTE la colonne de profondeur d'une fenetre, et les chunks se lisent")
     print("  independamment par HTTP. On ne telecharge jamais un rouleau.")
     print()
-    print("⚠ Les campagnes sont **parallelisables sans coordination** : chaque chunk est")
-    print("  une requete independante. Le temps 16 fils ci-dessus n'est pas une")
-    print("  promesse d'implementation, c'est ce que la structure permet.")
+    print(f"⚠ L'acceleration a 16 fils est MESUREE ({ACCELERATION_16_FILS}), pas supposee.")
+    print("  La version initiale de ce modele divisait par 16 -- un parallelisme parfait,")
+    print("  donc un chiffre optimiste d'un facteur 1,9. Un modele de cout qui se flatte")
+    print("  n'est pas un modele de cout.")
     print()
     print("⚠ Ce qui NE passe PAS a l'echelle, et qu'il faut dire : la detection d'encre")
     print("  (42 min par segment sur cet iGPU) et le TRACAGE lui-meme, qui reste")
