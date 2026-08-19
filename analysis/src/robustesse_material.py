@@ -18,6 +18,21 @@ mêmes segments**, sans que ce soit prévu :
 Nombre de fenêtres, forme du treillis et densité diffèrent tous. Si les deux s'accordent
 sur le classement des segments, la grandeur est une propriété du **segment**.
 
+⚠⚠ **LE PIÈGE QUE CE FICHIER A LUI-MÊME FAIT TOMBER DANS, le 2026-08-19.** Les deux
+entrées doivent mesurer **la même grandeur**. `champ_correction.py` rapporte un
+`avec_matiere / sondees` qui mélange sa **passe de repérage** (répartie) et ses **blocs**
+(posés *sur* la matière, par construction) : ce n'est pas la part de matière d'un
+échantillonnage neutre, c'est un mélange. Le comparer à celui de `zarr_depth` a rendu
+**rho +0,280**, et j'en ai conclu — à tort — que le critère de `19` était instable.
+
+La comparaison propre, **même outil, même définition, densité 5,4× différente**, rend
+**rho +0,841**. Il n'y a pas d'instabilité : il y avait deux grandeurs différentes.
+
+> **Ce fichier ne peut pas détecter ça tout seul.** Un écart de médiane entre 48 % et 73 %
+> est un effet de densité parfaitement légitime, et rien ne le distingue d'un mélange.
+> C'est à l'appelant de savoir ce qu'il compare — d'où cet avertissement plutôt qu'un
+> contrôle qui ferait semblant.
+
 ⚠ On compare des **rangs**, pas des valeurs : les deux grilles n'ont ni le même nombre de
 points ni la même couverture, donc leurs fractions absolues n'ont aucune raison d'être
 égales. C'est le classement qui porte la règle de `19`, et c'est donc le classement qu'il
@@ -76,6 +91,9 @@ def main() -> int:
     y = np.array([b[s] for s in communs])
     rho, p = spearmanr(x, y)
 
+    print("⚠ les deux entrees doivent mesurer LA MEME grandeur : un `avec_matiere` "
+          "issu\n  d'un echantillonnage neutre ne se compare pas a un melange "
+          "repérage+blocs.\n  Voir la docstring — l'erreur a deja ete commise ici.\n")
     print(f"{len(communs)} segments mesures par les DEUX echantillonneurs")
     print(f"  {args.nom_a:<38} mediane {np.median(x) * 100:5.1f} %")
     print(f"  {args.nom_b:<38} mediane {np.median(y) * 100:5.1f} %")

@@ -1,4 +1,4 @@
-# Écarter avant de payer — la première règle qui change une décision ✅ ⚠ *(à lire avec le §9)*
+# Écarter avant de payer — la première règle qui change une décision ✅ *(§9 corrigé au §10)*
 
 2026-08-19. `00` §9 nommait le manque : *tous nos instruments jugent, aucun n'a encore
 changé quoi que ce soit*. Et le tableau des goulots du concours demande, mot pour mot,
@@ -248,3 +248,71 @@ bruité. Le remède est de mesurer `avec_matiere` **mieux**, pas de choisir la g
 donne le meilleur p — ce dernier serait exactement le sur-ajustement que ce dépôt refuse
 partout ailleurs. La voie évidente est un sondage plus dense, et son coût est connu :
 200 fenêtres au lieu de 72, soit **~4 s de plus par segment** à 16 fils.
+
+
+---
+
+## 10. ⚠⚠ Le §9 était FAUX — je comparais deux grandeurs différentes
+
+*(quelques heures plus tard, le 2026-08-19, une fois la campagne dense revenue)*
+
+Le §9 concluait que le critère `avec_matiere` n'était que « modérément reproductible »
+(rho **+0,280**) et que le plateau de 15–25 % était une propriété de la grille. **Les deux
+affirmations sont fausses**, et l'erreur est la mienne.
+
+### L'erreur
+
+Je comparais `zarr_depth.avec_matiere / sondees` à `champ_correction.avec_matiere /
+sondees`. Le second **n'est pas la même grandeur** : il mélange la passe de **repérage**
+(répartie sur le canevas) et les **blocs**, qui sont posés *sur* la matière par
+construction. Son dénominateur contient donc des points choisis pour toucher, et son
+numérateur aussi. Ce n'est pas un échantillonnage neutre, c'est un mélange.
+
+⚠ Rien dans les chiffres ne le criait : 48 % contre 32 % ressemble parfaitement à deux
+grilles qui échantillonnent différemment.
+
+### La comparaison propre
+
+**Même outil, même définition, densité 5,4× différente** — 72 points contre 392 :
+
+| | médiane | accord des classements |
+|---|---:|---:|
+| `zarr_depth`, 72 points | 48,0 % | — |
+| `zarr_depth`, **392 points** | 73,3 % | **rho +0,841** (p = 1,7e-22) |
+
+Témoin de permutation : |rho| p95 = 0,223. **+0,841 contre 0,223** — ce n'est pas
+« modérément » reproductible, c'est très reproductible.
+
+⚠ La médiane monte avec la densité (48 % → 73 %), et c'est **attendu** : un maillage plus
+fin trouve la bande là où un maillage grossier passe à côté. La **valeur absolue** dépend
+donc de la grille ; le **classement**, qui est ce que la règle utilise, non.
+
+### Et la règle, rejouée sur la mesure dense
+
+| écartés | grille 72 points (§5) | **dense, 392 points** |
+|---:|---:|---:|
+| 5 % | 0,054 | 0,054 |
+| 10 % | 0,0075 | 0,0075 |
+| **15 %** | **0,0010** | **0,0010** |
+| **20 %** | **0,0005** | **0,0005** |
+| **25 %** | **0,0005** | **0,0030** |
+| 30 % | 0,0255 | 0,0255 |
+| 40 % | 0,0015 | 0,0015 |
+| 50 % | 0,0250 | 0,0010 |
+
+> ⭐ **Le plateau de 15–25 % survit intact à un quintuplement de la densité de sondage.**
+> Le §5 tenait ; c'est le §9 qui était de trop.
+
+### Ce qui reste vrai du §9, et ce qui tombe
+
+| ✅ garde | ❌ retire |
+|---|---|
+| qu'il fallait tester la dépendance à la grille | que le critère soit instable |
+| que la mesure de `champ_correction` n'est pas comparable telle quelle | que le plateau soit un artefact de grille |
+| ⚠ qu'un sampler d'un **autre genre** (aléatoire, non-treillis) reste non testé | — |
+
+⚠ **La leçon, et elle vaut plus que la correction** : un contrôle de robustesse doit
+d'abord prouver qu'il compare **la même grandeur**. J'ai passé une heure à affaiblir un
+résultat juste, sur un contrôle faux — et l'affaiblir semblait être la position prudente,
+ce qui est exactement ce qui l'a rendu difficile à voir. La prudence n'est pas une
+méthode.
