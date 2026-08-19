@@ -21,7 +21,11 @@ davantage **ne sert pas** l'objectif.
 
 ## 2. ⚠ CE QUI TOURNE (2026-08-19, fin de journée)
 
-**Rien.** Toutes les campagnes ont rendu, y compris celle des graines (12 rouleaux).
+**Rien.** Toutes les campagnes ont rendu : celle des graines (12 rouleaux) et les six
+variantes de `direction_fields`. ⚠ VSCode a été fermé pendant les dernières — **aucune
+n'a été perdue**, elles avaient toutes fini leurs 118 générations. Vérifier l'**état des
+fichiers** avant de conclure qu'un lot est mort : un `ps` vide ne dit rien de ce qui a
+été écrit.
 
 ```bash
 ps -eo etime,pcpu,cmd | grep -E "[z]arr_depth|[c]hamp_correction|[v]c_grow|[v]c_render"
