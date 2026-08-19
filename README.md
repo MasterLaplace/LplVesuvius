@@ -220,7 +220,15 @@ mega-octets ».
 | Cartes d'encre publiees | **80 / 80** segments de Scroll 1 |
 | Volumes de surface reperes | **81** segments Scroll 1, **46** volumes Scroll 4, 3 campagnes (45,5 / 2,4 / 1,13 µm) |
 | Echec | `lukeboi/scroll-viewer` — 404, depot retire du public (le site le reference encore) |
-| Total sur disque | **~76 Go** (plafond 100 Go) |
+| Total sur disque | ⚠ **103G** hors `.git` — **le plafond de 100 Go est franchi** |
+
+> ⚠⚠ **Mesuré le 2026-08-19 : 103G, contre « ~76 Go » annoncé ici.** Le seul dossier
+> `data/` en fait **79 Go**, soit plus que le total que cette ligne annonçait — donc le
+> chiffre n'avait pas été repris depuis plusieurs campagnes. Il reste **797 Go libres**
+> sur le disque, donc rien n'est en danger ; ce qui est en cause est le **plafond que le
+> dépôt s'était donné**, et il faut soit le relever explicitement, soit reprendre les
+> ~8 Go d'expériences closes de `26` (`data/ngrid_*`, `data/volume_PHerc0358`), qui sont
+> reproductibles par téléchargement.
 
 Note : `repos/villa/scrollprize.org/docs/` contient le **source markdown du site**
 (34 fichiers). Pour lire, c'est superieur au miroir HTML ; le miroir sert a figer

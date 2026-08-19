@@ -151,7 +151,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 | `14` | ⭐ la direction des fibres — ❌ **réfutée**, le signe s'inverse quand n monte |
 | `16` | ⭐ quel rouleau du prix attaquer — `PHerc0358`, désigné par la mesure |
 | `17` | ❌ le saut de spire par la phase — **échec définitif** (§10) |
-| **`18`** | **le batch en cours** : produire, pas juger |
+| **`18`** | ✅ batch **clos** : produire, pas juger |
 | **`15`** | ⭐ **ce qui est soumissionnable**, trié contre les critères écrits du concours |
 | **`19`** | ⭐⭐ **la première règle qui CHANGE une décision** — p = 0,0005 contre 2000 permutations |
 | **`20`** | ⭐⭐ **le champ de correction** : l'erreur d'une trace est structurée, et **translater ne la répare pas** |
@@ -215,9 +215,9 @@ uv run python ../analysis/src/proximity_vs_ink.py <mesh> <pred> <labels>
 
 ### ⭐⭐ VC3D — la chaîne de production, construite le 2026-08-19
 
-**45 outils en ligne de commande** sous `/usr/local/bin/vc_*`, plus le GUI `VC3D`.
+**44 outils en ligne de commande** *(compté le 2026-08-19 : `ls /usr/local/bin/vc_* | wc -l`)* sous `/usr/local/bin/vc_*`, plus le GUI `VC3D`.
 Construits depuis `repos/villa/volume-cartographer/build_from_src_debian.sh`
-(⚠ demande `sudo`, 17 paquets).
+(⚠ demande `sudo`, **31 paquets** dans sa liste principale — mesuré le 2026-08-19 sur `volume-cartographer/build_from_src_debian.sh`, qui fait par ailleurs **trois** appels `apt` distincts ; « 17 » était faux).
 
 ```bash
 vc_grow_seg_from_seed -v <zarr|URL> -t <dir> -p seed.json -s <x> <y> <z>
@@ -438,7 +438,10 @@ transaction sur un nom inconnu.
    la 20, une au milieu) — la signature d'une surface posée **entre** deux feuilles.
    ⭐ **C'est la validation qui manquait** : les instruments jugeaient le travail des
    autres ; ils viennent de condamner le nôtre, en 0,05 s, avant le rendu.
-   ⚠ Cause identifiée : `direction_fields` absent, donc **aucune information
+   ⚠⚠ **Cause FAUSSE, mesurée trois fois négative par `26` avec son contrôle positif.**
+   La vraie cause de `24` est une graine dans un bloc entièrement plein (occupation
+   1,000, tenseur nul), cf `25`. Texte d'origine, gardé pour la trace du raisonnement :
+   « cause identifiée : `direction_fields` absent, donc **aucune information
    d'orientation** — et une surface qui coupe les spires satisfait la prédiction seuillée
    autant qu'une qui en suit une.
 
@@ -530,7 +533,10 @@ cible — le pool ouvert fait **2 140 000 $** et le Grand Prize n'est pas le seu
 > ✅ **La moitié « où l'on part » est faite** : `analysis/src/trouver_graine.py` classe sur
 > la planéité locale, `tracecheck.py --seed` la publie, et la campagne appariée sur
 > 12 rouleaux la valide (`25`). ⚠ **La moitié « comment on avance » ne l'est pas** — voir
-> T1b. Ce qui suit est le contexte d'origine, gardé parce qu'il reste exact.
+> T1b. ⚠ Ce qui suit est le contexte d'origine. **Il ne reste PAS exact en entier** :
+> les trois pistes qu'il propose ont été mesurées négatives (`26`), et les chiffres de
+> grilles qu'il cite ont été corrigés. Gardé pour la trace du raisonnement, pas comme
+> consigne.
 
 ### Le contexte d'origine
 
@@ -563,7 +569,7 @@ d'orientation**.
    sauter. Un essai coûte ~15 min.
 3. **`direction_fields`**. ⚠ Deux obstacles vérifiés : le paramètre attend un chemin
    **local** (`std::filesystem::path`, pas d'URL) et la disposition `<zarr>/{x,y,z}/<niveau>`,
-   alors que les `normal-grids` publiées (182 Mo) sont en `xy/ xz/ yz/`. Il faut soit les
+   alors que les `normal-grids` publiées (⚠ **10,40 Go**, pas 182 Mo — inventaire de `26` §6) sont en `xy/ xz/ yz/`. Il faut soit les
    convertir, soit les régénérer avec `vc_gen_normalgrids`, qui est installé.
 
 ### La boucle complète, une fois une trace obtenue

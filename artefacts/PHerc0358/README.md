@@ -6,7 +6,15 @@ le volume** (893 Go).
 
 ⚠⚠ **La trace est MAUVAISE** — elle coupe à travers les spires. Elle est conservée ici
 parce que ce qui a de la valeur n'est pas la surface, c'est **la boucle complète et son
-verdict** : trois instruments l'ont condamnée, **deux avant tout rendu**. Analyse : `docs/24`.
+verdict** : **240 auto-intersections** à pénétration maximale **200 µm**, mesurées en
+0,05 s **avant tout rendu**, sur un rouleau dont l'écart inter-feuilles est de 187 µm.
+Puis l'image, qui confirme. Analyse : `docs/24`.
+
+⚠ **Corrigé le 2026-08-19.** Cette fiche annonçait **trois** instruments : la jambe
+« profondeur » a été retirée du verdict (`docs/24` §2, `docs/25` §5) — la fenêtre de
+21 couches ne fait que ±94 µm, soit une demi-distance inter-feuilles, et 61 % des profils
+y sont plats. Le verdict tient sur **deux** instruments, et c'est précisément pourquoi il
+en fallait plusieurs.
 
 | fichier | quoi |
 |---|---|
