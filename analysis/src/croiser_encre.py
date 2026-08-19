@@ -148,6 +148,12 @@ def main() -> int:
                         help="la grandeur d'encre qu'on cherche a ameliorer")
     parser.add_argument("--parts", type=float, nargs="+",
                         default=[0.10, 0.20, 0.25, 0.33, 0.50])
+    parser.add_argument("--material-depuis", type=Path, default=None,
+                        help="repertoire de champ_correction : la part de matiere y est "
+                             "mesuree par une AUTRE grille (repérage 10x20 au lieu du "
+                             "treillis de 36). ⚠⚠ C'est le contrôle qui compte : si la "
+                             "règle de `19` ne tenait qu'avec notre grille, elle trierait "
+                             "des grilles et non des traces")
     parser.add_argument("--tirages", type=int, default=2000)
     parser.add_argument("--graine", type=int, default=0)
     parser.add_argument("--out", type=Path, default=None)
@@ -171,6 +177,25 @@ def main() -> int:
             continue
         lignes.append({"segment": seg, **{k: v for k, v in rec.items()
                                           if isinstance(v, (int, float))}, **enc})
+
+    if args.material_depuis is not None:
+        autre = {}
+        for f in sorted(args.material_depuis.glob("*.json")):
+            contenu = json.loads(f.read_text())
+            for rec in (contenu if isinstance(contenu, list) else [contenu]):
+                if rec.get("segment") and rec.get("sondees"):
+                    autre[rec["segment"]] = rec["avec_matiere"]
+                    autre[rec["segment"] + "__sondees"] = rec["sondees"]
+        garde = []
+        for l in lignes:
+            if l["segment"] in autre:
+                l = dict(l)
+                l["avec_matiere"] = autre[l["segment"]]
+                l["sondees"] = autre[l["segment"] + "__sondees"]
+                garde.append(l)
+        lignes = garde
+        print(f"⚠ critere remplace par la mesure d'une AUTRE grille "
+              f"({len(lignes)} segments)")
 
     if len(lignes) < 8:
         print(f"seulement {len(lignes)} segments appaires", file=sys.stderr)

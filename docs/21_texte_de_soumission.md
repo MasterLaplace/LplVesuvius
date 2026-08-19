@@ -65,7 +65,19 @@ encore.
 > Dropping the worst **20 %** of segments by `material` raises the corpus median ink
 > contrast by **+0.381**, against **2000 random draws of the same size**: **p = 0.0005**.
 >
-> Three things make this more than a correlation:
+> ⚠ **And the robustness check, which we ran on ourselves and which cuts this down.**
+> `material` depends on a sampling grid. Two of our tools measure it with different grids
+> (72 vs 200 probes), and they agree on the *ranking* only moderately: rho +0.280
+> (p = 0.012, permutation control p95 = 0.219). Re-running the whole rule with the second
+> grid's criterion: **every gain stays positive and every p stays under 0.09, but the
+> significance drops an order of magnitude and the 15–25 % plateau disappears.**
+>
+> So what we claim is the **direction**, which replicates on two independent samplers:
+> dropping the material-poorest segments improves what the corpus yields. We do **not**
+> claim that 20 % is the right threshold. The fix is to measure `material` better — a
+> denser probe, ~4 s more per segment — not to pick the grid with the better p-value.
+>
+> Three things still make this more than a correlation:
 >
 > - **The target is another pipeline's output.** The 80 ink maps are the ones published
 >   here, taken as-is. Nothing of ours enters them, so the relationship cannot be a shared

@@ -1,4 +1,4 @@
-# Écarter avant de payer — la première règle qui change une décision ✅
+# Écarter avant de payer — la première règle qui change une décision ✅ ⚠ *(à lire avec le §9)*
 
 2026-08-19. `00` §9 nommait le manque : *tous nos instruments jugent, aucun n'a encore
 changé quoi que ce soit*. Et le tableau des goulots du concours demande, mot pour mot,
@@ -170,3 +170,75 @@ uv run python ../analysis/src/croiser_encre.py \
 ⚠ `--depuis <rapport.json>` reprend un rapport déjà écrit au lieu de relire les images :
 les cartes pèsent jusqu'à 99 Mpx et une relecture coûte dix minutes sans rien mesurer de
 neuf.
+
+
+---
+
+## 9. ⚠⚠ Le contrôle de robustesse, et il affaiblit ce document
+
+*(ajouté quelques heures après le reste, le 2026-08-19)*
+
+La règle repose sur `avec_matiere` — la part de fenêtres **sondées** qui contiennent du
+papyrus. Un relecteur posera immédiatement la bonne objection : **cette part dépend d'une
+grille de sondage.** Si elle en dépendait beaucoup, la règle trierait des grilles et non
+des traces.
+
+Le test ne coûtait rien, parce que **deux échantillonneurs différents avaient déjà mesuré
+les mêmes 80 segments**, sans que ce soit prévu :
+
+| outil | grille | part de matière médiane |
+|---|---|---:|
+| `zarr_depth.py` | treillis 6 × 12, **72 points** | 48,0 % |
+| `champ_correction.py` | repérage **10 × 20**, 200 points | 32,4 % |
+
+### Ce que la comparaison dit
+
+**Accord des classements : rho = +0,280** (p = 0,012), contre un témoin de 1000
+permutations dont le |rho| p95 vaut **0,219**.
+
+> ⭐ **La grandeur est bien une propriété du segment** — elle bat le hasard.
+> ⚠ **Mais faiblement.** Un rho de 0,28 veut dire que les deux grilles sont largement en
+> désaccord sur *quels* segments sont les pires.
+
+### Et la question qui compte : la règle tient-elle avec l'AUTRE grille ?
+
+Même corpus, même cible, même témoin de permutation — seul le **critère** change de
+source :
+
+| écartés | grille A (celle du §5) | **grille B** |
+|---:|---:|---:|
+| 10 % | +0,247 · p = **0,0075** | +0,199 · p = 0,0425 |
+| 15 % | +0,300 · p = **0,0010** | +0,199 · p = 0,082 |
+| 20 % | +0,381 · p = **0,0005** | +0,247 · p = 0,042 |
+| 25 % | +0,381 · p = **0,0005** | +0,247 · p = 0,073 |
+| 30 % | +0,300 · p = 0,026 | +0,300 · p = 0,026 |
+
+> ⚠⚠ **La direction réplique, la force non.** Les **dix** gains sont positifs et tous les
+> p sont sous 0,09 — mais la grille B perd **un ordre de grandeur** de significativité, et
+> **aucun** de ses seuils ne survivrait à la correction de Bonferroni sur cinq fractions
+> (p < 0,01).
+>
+> ⚠⚠ **Et le plateau de 15–25 % est une propriété de la grille A, pas du phénomène.**
+> C'était l'argument principal du §5. Il ne tient plus tel quel.
+
+### Ce qu'il faut donc dire, et ne pas dire
+
+| ✅ soutenable | ❌ plus soutenable |
+|---|---|
+| écarter les segments les plus pauvres en matière **améliore** ce que le corpus rend | « le seuil de 20 % est le bon » |
+| le sens de l'effet réplique sur deux échantillonneurs indépendants | « p = 0,0005 », sans dire lequel des deux critères |
+| `avec_matiere` mesure une propriété du segment | qu'il la mesure **précisément** |
+
+⚠ Une part de l'atténuation est **attendue** : les deux grilles n'ont ni le même nombre de
+points (72 contre 200) ni la même couverture, donc chacune porte sa propre erreur
+d'échantillonnage, et deux mesures bruitées corrèlent toujours moins que les grandeurs
+qu'elles estiment. Ça explique une partie de +0,280 — **pas** le fait que le plateau
+disparaisse.
+
+### La suite que ça désigne
+
+Ce n'est pas un échec, c'est un **cadrage** : la règle est réelle et son critère est
+bruité. Le remède est de mesurer `avec_matiere` **mieux**, pas de choisir la grille qui
+donne le meilleur p — ce dernier serait exactement le sur-ajustement que ce dépôt refuse
+partout ailleurs. La voie évidente est un sondage plus dense, et son coût est connu :
+200 fenêtres au lieu de 72, soit **~4 s de plus par segment** à 16 fils.
