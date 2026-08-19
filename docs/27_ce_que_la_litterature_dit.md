@@ -163,36 +163,172 @@ disent que la résolution décide** — à citer comme convergence, pas comme pr
 
 ## 2. *Virtually Unrolling the Herculaneum Papyri by Diffeomorphic Spiral Fitting*
 
-Paul Henderson — arXiv **2512.04927**, 4 décembre 2025.
+Paul Henderson (auteur unique) — arXiv **2512.04927**, 4 décembre 2025, **accepté à
+WACV 2026**. Code publié : `github.com/pmh47/spiral-fitting`.
 
-**La thèse** : la **première** méthode descendante qui ajuste automatiquement un modèle de
-surface à un CT de rouleau sévèrement abîmé. Un modèle paramétrique explicite de la
-géométrie déformée est ajusté aux prédictions du réseau, et la surface obtenue est
-**garantie être une seule nappe 2D continue** — *y compris là où elle n'est pas détectable
-dans le CT*.
+**La thèse** : la **première** méthode descendante qui ajuste automatiquement un modèle
+de surface au CT d'un rouleau sévèrement abîmé. On n'essaie pas de tracer la feuille —
+on **inverse le processus physique**. Le rouleau était une feuille rectangulaire unique,
+enroulée puis déformée ; on cherche donc le couple (spirale idéale, déformation) qui
+explique le scan.
 
-⭐ C'est exactement la famille « spiral fitting » que `00` §2 décrit, et la garantie citée
-est ce que `00` §2 appelle *« immunisé au sheet switching par construction »*. Le papier
-le formule mieux que nous : la continuité n'est pas un résultat, c'est une **contrainte du
-modèle**.
+### La construction, en trois pièces
 
-**Résultats** : deux rouleaux à haute résolution, « de larges régions » déroulées, et une
-performance **supérieure à la seule méthode automatique existante** adaptée à ces données.
-⚠ Les chiffres détaillés sont dans le corps du PDF, qui dépasse la limite de récupération
-d'ici — **à extraire dans une prochaine session**, c'est le premier reste de ce document.
+1. **La spirale canonique** : spirale d'Archimède extrudée selon z, avec **un seul
+   paramètre inconnu** — ω, le taux d'enroulement, qui est lui-même optimisé.
+2. **Le difféomorphisme**, composé de trois étages : une affine par tranche en z, un
+   **champ de vitesse stationnaire** intégré par 16 pas d'Euler, et un « gap expander »
+   qui écarte les spires. ⚠ L'auteur reconnaît que le champ **suffirait seul** ; les
+   deux autres existent pour faciliter l'optimisation et baisser la résolution mémoire.
+3. **Sept pertes** pondérées, dont deux méritent d'être retenues :
+   - la **stratégie en deux temps**, qui est la vraie idée anti-minimum-local. Les
+     pertes principales contraignent *la densité et l'orientation* des spires mais
+     **pas la phase** — donc le modèle peut librement glisser d'une spire vers
+     l'intérieur ou l'extérieur sans être puni, ce qui évite le piège de la
+     périodicité. La perte d'alignement exact n'est activée **qu'à mi-parcours**
+     (itération 10 000 sur 20 000), une fois la structure globale trouvée ;
+   - la **perte de rayon**, qui « déroule » l'accroissement dû à la spirale par un
+     terme `−ω·arctan(y/x)` : être sur une spire devient *être à rayon constant*.
+
+⭐ **Et l'aplatissement est gratuit** : θ et z de l'espace canonique **sont** déjà les
+coordonnées U et V. Là où la chaîne officielle a besoin d'une étape SLIM séparée, le
+modèle la porte dans sa paramétrisation.
+
+### ⚠⚠ La garantie est TOPOLOGIQUE, et ce n'est pas ce que `00` en disait
+
+La propriété est réelle et bien fondée : l'espace des champs de vitesse est **l'algèbre
+de Lie qui engendre le groupe de Lie des difféomorphismes**, donc intégrer un champ
+lisse produit une transformation bijective, lisse, d'inverse lisse. Un difféomorphisme
+ne peut ni déchirer, ni recoller, ni replier. La spirale canonique étant une nappe
+unique, son image l'est aussi — *« guaranteed to be manifold and free of
+intersections »*.
+
+**Mais elle garantit que la sortie EST une nappe, jamais que c'est LA nappe.** Et
+l'auteur mesure l'écart, le nomme, et en donne la cause :
+
+| ce qui est mesuré | valeur |
+|---|---:|
+| **WJF** — *winding jump fraction*, la fraction de segments de la vérité terrain qui traversent deux spires différentes de la spirale ajustée | **3,20 %** |
+| MRWD — écart radial moyen entre la K-ième spire ajustée et la K-ième réelle | 7,64 |
+| ChD — distance de chanfrein, vérité terrain → prédiction | 5,29 |
+| AD — défaut angulaire moyen (courbure de Gauss intrinsèque, nul si développable) | 0,0568 |
+| Str — étirement dans la feuille | 1,239 |
+
+> *« when paths are contradictory due to imperfect U-Net predictions, **the surface
+> sometimes wanders between two true windings, instead of committing to one** »*
+> — section Limitations.
+
+⭐ **La cause est diagnostiquée et le remède nommé** : les pertes sont en **norme L1**,
+et une somme de L1 sur des contraintes contradictoires converge vers la **médiane**,
+c'est-à-dire vers un compromis « entre les deux ». Une norme Lᵖ avec p < 1, ou un
+lagrangien augmenté, forcerait un régime *winner-takes-all* — un **engagement** sur une
+spire. L'auteur le propose comme travail futur et ne l'implémente pas.
+
+⚠ **Aucune configuration testée n'atteint zéro** : toutes les variantes du tableau
+d'ablations sont entre **2,77 % et 3,90 %**.
+
+⚠⚠ **Et deux métriques sont en tension directe.** Retirer la contrainte de numéro
+d'enroulement **améliore** le WJF (2,77 %, le meilleur du tableau) mais fait exploser le
+MRWD de 7,64 à **25,67**. Autrement dit : sans contrainte globale la spirale glisse
+localement pour épouser ce qu'elle voit — moins de croisements, mais un rayon
+globalement faux. **On ne peut pas optimiser les deux à la fois dans cette
+formulation.** C'est le même arbitrage global/local que `00` §2 décrit, mesuré.
+
+### Ce que ça coûte, et ce que ça demande à un humain
+
+| | |
+|---|---|
+| matériel | une **RTX 3090** |
+| durée totale (PHerc. Paris 4) | **19 h**, dont **16 h de post-traitement** des sorties nnUNet et **3 h** d'ajustement |
+| intervention humaine | ⭐ **un bit** — le sens d'enroulement, *« easy to observe visually »* |
+
+⚠ **Les « numéros d'enroulement relatifs » ne sont PAS annotés**, contrairement à ce
+qu'on pourrait croire : ils sont dérivés automatiquement par lancer de rayons le long
+des normales, construction d'un graphe, suppression des nœuds appartenant à un cycle
+(*« since these imply a contradiction »*) et vote majoritaire. C'est directement le
+point que le §7 de l'article officiel des problèmes ouverts réclame — *« Automating
+these procedures will boost scalability by a great extent »*.
+
+⚠ Le travail humain **hérité** n'est pas compté : les trois U-Net viennent de la
+communauté, entraînés *« on a tiny fraction of PHerc. Paris 4 »*, et le coût
+d'annotation de cette fraction n'est ni chiffré ni discuté.
+
+### La comparaison à ThaumatoAnakalyptor — et le trou qu'elle laisse
+
+C'est *« the only existing work to unroll substantial regions of Herculaneum papyri
+fully automatically »*, l'archétype ascendant : fragments de surface extraits d'un nuage
+de points, puis recousus par heuristiques.
+
+| métrique | spiral fitting | Thaumato | écart |
+|---|---:|---:|---|
+| ChD ↓ | **5,29** | 5,59 | −5,4 % |
+| AD ↓ | **0,0568** | 0,1567 | −63,8 % |
+| Str ↓ | 1,239 (1,031 avec SLIM) | **1,027** | défavorable sans SLIM, nul avec |
+| **WJF** | 3,20 % | **non mesuré** | — |
+| **MRWD** | 7,64 | **non mesuré** | — |
+
+⚠⚠ **Les deux métriques qui portent tout l'argument théorique ne sont PAS comparables
+au concurrent** — *« not those metrics which rely on access to the canonical spiral
+representation »*. **Personne n'a donc jamais comparé le taux de saut de spire de deux
+méthodes de traçage.** C'est un trou réel dans l'état de l'art.
+
+⚠ Et la comparaison AD est probablement **0,0933 vs 0,1567** et non 0,0568 vs 0,1567 :
+le texte dit *« if like [49] we use SLIM »*, donc Thaumato aplatit avec SLIM. À
+conditions égales l'avantage tombe de ×2,76 à ×1,68 — réel, moins spectaculaire.
+
+### ⭐⭐ Ce que ce papier dit de NOTRE travail
+
+Trois choses, et elles vont toutes dans le même sens.
+
+1. **Le WJF exige une vérité terrain.** Il est défini *contre* un maillage manuel — celui
+   de PHerc. Paris 4, ~30 spires, *« a tour de force manual annotation effort requiring
+   hundreds of hours of human input »*. Sur PHerc. 172, qui n'en a pas, **il n'est pas
+   mesuré du tout**, et c'est pourtant là que le résultat visuel est le plus
+   impressionnant. **Nos instruments — auto-intersection, profondeur — n'ont besoin
+   d'aucune vérité terrain.** C'est exactement la différence qui les rend utilisables sur
+   les treize rouleaux du prix, dont **aucun** n'a de maillage de référence.
+2. **La garantie ne dispense pas du contrôle.** Une méthode dont la sortie est
+   *garantie* propre produit quand même 3,2 % de traversées. Un contrôle qui ne
+   regarderait que la topologie déclarerait cette sortie parfaite.
+3. **Le mode d'échec change de forme, pas de nature.** Ascendant : saut discret,
+   fragment, recollage faux. Descendant : dérive lisse. Une méthode qui ne détecterait
+   que les auto-intersections verrait le premier et raterait le second — donc `12` et
+   `25` §5 ne sont pas redondants avec `03`/`24`, ils couvrent l'autre moitié.
+
+### ⚠ Trois absences du papier, à connaître avant de le citer
+
+- **Les unités de MRWD et ChD ne sont jamais données.** Ni voxels bruts, ni µm. Or
+  l'espacement inter-spires de ce rouleau est de l'ordre de 10 à 16 voxels : selon la
+  lecture, une erreur de 5,29 vaut **un tiers** ou **plus d'un** interstice. C'est la
+  différence entre « lisible » et « illisible », et elle n'est pas décidable à la
+  lecture.
+- **L'exactitude dans les régions non détectées n'est jamais mesurée.** C'est pourtant
+  le bénéfice unique revendiqué (*« passes through missing regions »*, *« interpolated
+  correctly »*) — et par construction il n'y a là ni vérité terrain, ni prédiction.
+  **Le bénéfice le plus revendiqué est le seul jamais isolé.**
+- **Aucun texte n'est transcrit.** Le papier applique un TimeSformer tiers et montre
+  *« many letters forming complete words »* — sans transcription, sans décompte de
+  caractères, sans validation papyrologique, et sans comparer au texte que le maillage
+  manuel de la même région donne déjà.
+
+⚠ Et une idéalisation, posée en introduction puis jamais traitée : la spirale est
+d'**épaisseur nulle**, alors que le papyrus est une **bi-couche** dont recto et verso se
+sont par endroits séparés — *« sometimes the entire front and back surfaces have
+separated over a larger area »*. Quand les deux faces sont écartées, le modèle doit en
+choisir une, et **rien dans les pertes ne dit laquelle porte l'encre**.
 
 ### ⚠⚠ Ce que ça dit de notre journée
 
 `26` a mesuré que la trajectoire de `vc_grow_seg_from_seed` ne répond ni aux champs de
-direction, ni aux grilles de normales, ni à leurs poids — seulement à `step_size` et à la
-prédiction. Le papier de Henderson attaque le **même problème par l'autre bout** : au lieu
-de contraindre un traceur ascendant, il impose la continuité **dans le modèle**.
+direction, ni aux grilles de normales, ni à leurs poids — seulement à `step_size` et à
+la prédiction. Henderson attaque le **même problème par l'autre bout** : au lieu de
+contraindre un traceur ascendant, il impose la continuité **dans le modèle**.
 
 > ⭐ Ce n'est pas une contradiction, c'est la carte du §2 de `00` qui se vérifie : *l'un
 > porte une contrainte globale sans souplesse locale, l'autre l'inverse*. Nos trois
-> négatifs disent que le second **ne se laisse pas contraindre par ce qu'on lui donne**.
-
----
+> négatifs disent que le second **ne se laisse pas contraindre par ce qu'on lui donne** ;
+> le WJF de 3,20 % dit que le premier, même contraint par construction, **traverse
+> encore**.
 
 ## 3. Ce que la lecture complète des documents a trouvé d'autre
 

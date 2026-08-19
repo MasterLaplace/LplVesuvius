@@ -45,9 +45,17 @@ fiable aujourd'hui est un humain qui lit du grec.
 **Spiral fitting** — descendante. On pose une spirale canonique 2D et on la
 déforme en 3D par optimisation d'un champ de flot, sous contraintes de fidélité aux
 données et d'alignement des fibres. *Quasi aucune intervention humaine.* Sa force
-est sa faiblesse : elle **suppose** la spirale, donc elle est structurellement
-immunisée contre le sheet switching, et structurellement incapable d'encaisser une
-déchirure, un décollement ou un noyau effondré.
+est sa faiblesse : elle **suppose** la spirale, donc elle rend une nappe unique quoi
+qu'il arrive, et elle est structurellement incapable d'encaisser une déchirure, un
+décollement ou un noyau effondré.
+
+⚠⚠ **Corrigé le 2026-08-19.** Ce paragraphe disait « structurellement **immunisée**
+contre le sheet switching ». C'est faux, et le papier de la méthode le mesure :
+*winding jump fraction* = **3,20 %**, avec pour limite déclarée que *« the surface
+sometimes wanders between two true windings, instead of committing to one »*. La
+garantie porte sur la **topologie** de la sortie (une nappe, manifold, sans
+auto-intersection), pas sur le fait qu'elle suive la bonne spire. Voir
+[`27`](27_ce_que_la_litterature_dit.md) §2.
 
 **Surface tracer** — ascendante. On sème des patches, on les fait croître, on
 recolle ceux qui se recouvrent, sous contraintes de fidélité, continuité et

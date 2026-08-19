@@ -47,9 +47,23 @@ seul détecteur fiable aujourd'hui est un humain qui lit du grec.
 | sens | descendante, globale | ascendante, locale |
 | principe | spirale canonique 2D déformée en 3D par champ de flot | patches semés puis crus et recollés |
 | humain | **quasi nul** | **~4 h par soumission** |
-| force | immunisé au sheet switching *par construction* | épouse la vraie géométrie, même pathologique |
+| force | sortie **garantie** être une nappe unique, manifold, sans auto-intersection | épouse la vraie géométrie, même pathologique |
 | faiblesse | **suppose** la spirale : déchirures, décollements, cœur effondré | dérive |
 | code | `villa/volume-cartographer/apps/diffusion/spiral*.{hpp,cpp}` (Ceres) | `villa`, VC3D |
+
+⚠⚠ **Correction du 2026-08-19 : « immunisé au sheet switching par construction » était
+FAUX**, et c'est le papier de la méthode qui le dit. La garantie du spiral fitting est
+**topologique, pas sémantique** : elle assure que la sortie **est** une nappe, jamais
+que c'est **la bonne** nappe. Henderson mesure lui-même un *winding jump fraction* de
+**3,20 %** et écrit, dans ses limites : *« when paths are contradictory due to imperfect
+U-Net predictions, **the surface sometimes wanders between two true windings, instead of
+committing to one** »*. Détail et chiffres : [`27`](27_ce_que_la_litterature_dit.md) §2.
+
+> ⭐ Ce que la méthode fait réellement, c'est **convertir** un saut *topologique*
+> (fragment, non-manifold, recollage faux) en une **dérive de recalage** — une nappe
+> propre, continue, et par endroits sur la mauvaise spire. C'est un progrès réel : une
+> erreur qui reste une nappe unique est diagnosticable et bornée. Ce n'est pas une
+> élimination.
 
 L'un porte une contrainte globale sans souplesse locale, l'autre l'inverse. Ce qui
 manque entre les deux est le **numéro d'enroulement** (*winding number*) — la seule
