@@ -433,13 +433,70 @@ cible — le pool ouvert fait **2 140 000 $** et le Grand Prize n'est pas le seu
 
 | # | quoi | blocage |
 |---|---|---|
-| **T1** ⭐⭐ | **faire suivre UNE feuille au traceur** — c'est tout ce qui sépare `24` d'une soumission First Letters | ⚠ `direction_fields` veut `<zarr>/{x,y,z}/<niveau>` et un chemin **local** ; les `normal-grids` publiées (182 Mo) sont en `xy/ xz/ yz/`. Jonction à faire. Pistes alternatives : graine choisie sur une **planéité locale** plutôt qu'une valeur de voisinage, et `step_size` réduit |
+| **T1** ⭐⭐ | **faire suivre UNE feuille au traceur** — c'est tout ce qui sépare `24` d'une soumission First Letters | voir §7bis, tout y est |
 | **T2** ⭐ | rejouer la boucle `24` sur d'autres graines et d'autres rouleaux **une fois T1 réglé** | rien — la chaîne est pilotable et chaque essai coûte ~15 min |
 | **T3** ⭐ | le **titre de Scroll 1** — *« looking somewhere new »* | c'est un problème de **recherche** sur le corpus où tous nos instruments marchent |
 | T4 | finir et envoyer la soumission Progress Prize | ⏳ le texte existe (`21`), les chiffres sont gardés, il reste à publier le dépôt et à joindre les figures |
 | R2 | exporter le champ de correction en coordonnées de fenêtre | — |
 | — | le **pas inter-feuilles de PHerc1667** | ⚠ aucune prédiction de surface publiée pour ce rouleau : on ne juge pas ses sauts de feuille |
 | — | le trend **position dans le rouleau** ↔ résiduel | ⚠ **NON établi** : trois corpus, trois motifs différents |
+
+## 7bis. ⭐⭐ T1 en détail — reprendre sans rien re-dériver
+
+**L'état exact** : la chaîne tourne de bout en bout (`docs/24`), les artefacts sont dans
+[`artefacts/PHerc0358/`](artefacts/PHerc0358/) (2,2 Mo, dont le maillage et les paramètres
+qui marchent), et **le seul défaut connu est que le traceur n'a aucune information
+d'orientation**.
+
+### Ce qui est établi et n'est pas à refaire
+
+| fait | où |
+|---|---|
+| VC3D et ses 44 outils CLI sont installés sous `/usr/local/bin/` | §4 |
+| `vc_grow_seg_from_seed -v` accepte `https://` — le volume n'est jamais téléchargé | `24` §1 |
+| `seed.json` **doit** porter `"voxelsize"`, sinon tout est rejeté à 0 cm² | `24` §1 |
+| la graine `1544 1544 7768` (ordre **x y z**) donne 8,48 cm² en 13,9 s | `artefacts/PHerc0358/` |
+| la trace obtenue **coupe les spires** — 240 auto-intersections, 64 % de pics au bord | `24` §2 |
+| `PHerc0358` est le rouleau **le moins difficile** des treize | `16` |
+| **dix** rouleaux sur treize n'ont aucun segment | `23` |
+
+### Les trois pistes, dans l'ordre du moins cher
+
+1. ⭐ **Une graine choisie sur la PLANÉITÉ locale**, pas sur la valeur de voisinage.
+   `analysis/src/trouver_graine.py` classe aujourd'hui par la moyenne d'un cube 5³ — ce qui
+   trouve « beaucoup de surface », y compris une **jonction** entre spires. Ce qu'il faut
+   est un endroit où la prédiction forme un **plan** : mesurer l'anisotropie locale (le
+   tenseur de structure de `analysis/src/fiber_orientation.py` sait déjà le faire) et
+   retenir les points les plus plans. **Aucune donnée nouvelle à télécharger.**
+2. **`step_size` réduit** (défaut 20) : moins de liberté par pas, donc moins de chances de
+   sauter. Un essai coûte ~15 min.
+3. **`direction_fields`**. ⚠ Deux obstacles vérifiés : le paramètre attend un chemin
+   **local** (`std::filesystem::path`, pas d'URL) et la disposition `<zarr>/{x,y,z}/<niveau>`,
+   alors que les `normal-grids` publiées (182 Mo) sont en `xy/ xz/ yz/`. Il faut soit les
+   convertir, soit les régénérer avec `vc_gen_normalgrids`, qui est installé.
+
+### La boucle complète, une fois une trace obtenue
+
+```bash
+cd ~/LplVesuvius/data/trace/PHerc0358
+S=".../surfaces/20250821151737-surface-...-th0.2.zarr"     # prediction
+V=".../volumes/20250821151737-9.362um-1.2m-113keV-masked.zarr"
+vc_grow_seg_from_seed -v "$S" -t . -p seed.json -s <x> <y> <z>
+vc_tifxyz_selfcross --surface auto_grown_* -o selfcross.json   # ⚠ JUGER AVANT DE RENDRE
+vc_flatten -i auto_grown_* -o flat
+rm -rf render && vc_render_tifxyz -v cache_vol --remote-url "$V" --scale 1 -g 0 \
+    -s flat --tif-output render -n 21 --slice-step 1 --auto-crop
+cd ~/LplVesuvius/inference_xpu
+uv run python ../analysis/src/depth_profile.py ../data/trace/PHerc0358/render \
+    --grid --step 400 --traced-layer 10 --voxel-um 9.362
+uv run python ../analysis/src/regarder_rendu.py ../data/trace/PHerc0358/render --png-dir ../data/trace/PHerc0358/png
+```
+
+⭐ **Le critère de succès est mesurable avant de regarder** : une bonne trace doit rendre
+la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `24` donne
+**64 % au bord, 16 % au centre, distribution bimodale**. C'est le nombre à faire descendre.
+
+⚠ Et le but n'est que **4 cm²** avec 10 lettres — la trace ratée en faisait déjà 8,48.
 
 ## 8. ⚠ Les pièges payés, à ne pas repayer
 
