@@ -97,7 +97,7 @@ sheet into a staircase. Swept 0–90°, raw planarity ranges **0.828–1.000**; 
 blur, **0.947–1.000** — and the residual stays far below the signal, since a junction scores
 0.000.
 
-### What it bought, measured
+### What it bought, measured — and what did not replicate
 
 On `PHerc0358`, one variable changed — the seed, everything else identical:
 
@@ -106,6 +106,19 @@ On `PHerc0358`, one variable changed — the seed, everything else identical:
 | area | 8.48 cm² | 19.82 cm² |
 | pairs tested by `vc_tifxyz_selfcross` | 387 151 | **852 135** |
 | **transverse self-intersections** | **240** | **0** |
+
+⚠⚠ **We then ran it paired over 12 prize scrolls, and the self-intersection result did not
+replicate**: both criteria return **zero** on the other eleven. That 240 is one scroll's
+accident, and we report it as such. What *does* replicate is how far the tracer gets before
+stalling — **10 – 2, sign test p = 0.0386** — and the extremes say it best: on `PHerc0125`
+and `PHerc0826` the neighbourhood seed stalls at **0.85 cm²**, barely above `min_area_cm`,
+where planarity reaches 19.82 and 13.14.
+
+⚠ **And on `PHerc0358` the fix that mattered was not the criterion but the occupancy
+ceiling.** Replayed without it, the neighbourhood criterion returns exactly the bad seed —
+whose block has **occupancy 1.000**, entirely full of predicted matter. A uniform block has
+a **null structure tensor**: no sheet, no normal, nothing to follow. The prediction had
+merged several wraps into a solid blob.
 
 ⚠ And the honest limits, both measured: **area saturates against the generation budget**
 (two different scrolls both stop at generation 119 of 120 and return the same area to eight
