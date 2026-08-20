@@ -162,7 +162,10 @@ destiné à être *utilisé par d'autres* est un cas différent d'un document qu
    par `verifier_chiffres.py`.
 6. ⚠⚠ **Et le tri de ce document est à refaire** — voir le §7. Deux choses l'ont périmé le
    2026-08-19 : la règle de `19` **ne réplique pas** hors de Scroll 1, et VC3D est
-   construit, donc on **produit** au lieu de seulement juger.
+   construit, donc on **produit** au lieu de seulement juger. ⚠ **Une troisième le
+   2026-08-20** (§7.4) : le classement des treize rouleaux est inversé par un
+   échantillonnage plus dense, et trois candidats neufs portent sur **l'outillage de la
+   communauté** plutôt que sur le papyrus.
 
 ## 6. Le lien avec le gros prix
 
@@ -230,6 +233,34 @@ n'avait touché**.
 
 ⚠ **Dix rouleaux sur treize n'ont aucun segment** (`23`). Ce n'est pas l'outil qui manque —
 il est public — c'est de savoir par lequel commencer. `16` le dit : `PHerc0358`.
+
+### 7.4 ⚠⚠ Un TROISIÈME point périmé, et trois candidats neufs *(2026-08-20)*
+
+**Périmé** : le §7.2 finit par *« c'est de savoir par lequel commencer. `16` le dit :
+`PHerc0358` »*. [`33`](33_la_carte_nest_pas_resolue.md) mesure que ce classement n'est pas
+résolu — **0 des 78 paires séparée** — et la campagne dense l'a **inversé** : rho de
+Spearman **−0,297**, les treize changent tous de rang, et `PHerc0800` devient le meilleur
+point observé. ⚠ Ça n'invalide pas d'avoir commencé par `PHerc0358` ; ça invalide de dire
+que **la mesure le désignait**.
+
+**Et trois candidats neufs, qui portent sur l'outillage de la communauté elle-même** — donc
+directement utilisables par elle, ce que le §2 de ce document classe comme le critère le
+plus fort :
+
+| candidat | pourquoi il est soumissionnable | source |
+|---|---|---|
+| ⭐⭐ **un verdict qui ne mesure rien** | `vc_tifxyz_selfcross` — officiel depuis le 4 août — rend `clean_of_transverse_self_intersection: true` avec **`pairs_tested: 0`** dès que `--maxedge` a jeté tous les quads, ce qui arrive **au réglage par défaut** sur un maillage à pas ≥ 60. Un portail bâti sur `--fail-on-crossing` laisse alors passer n'importe quelle surface, avec le code de sortie que le script attend. **Reproductible en deux commandes, et corrigeable en une ligne chez eux.** | [`34`](34_un_verdict_qui_ne_mesure_rien.md) |
+| ⭐⭐ **le traceur est un tirage** | `vc_grow_seg_from_seed` rend un résultat différent à chaque exécution : **72 tirages, 12 rouleaux, 4 rouleaux où le VERDICT bascule** à paramètres strictement identiques, **0 reproductible**. Personne ne publie ni répétition ni barre d'erreur (`27` §2), et le papier du déroulage complet ne publie **aucun** taux d'erreur de traçage. ⭐ Et l'aire **ne signale pas** le mauvais tirage — on ne peut pas l'écarter sans le juger. | [`35`](35_le_tirage_sur_douze_rouleaux.md) |
+| ⭐ **un compte n'est pas comparable entre deux pas** | le même maillage, décimé sans que sa géométrie change, passe de **240** croisements à 123, 72, 49. Toute table d'ablation qui compare des `step_size` par leur nombre d'auto-intersections compare des instruments de sensibilités différentes. | `34` §3 |
+
+⚠ **Les trois sont des résultats sur des OUTILS, pas sur du papyrus.** C'est une force pour
+un prix qui demande *« what would help : scan-quality metrics »* et dont la page insiste sur
+la reproductibilité — et c'est une faiblesse s'ils cherchent des lettres. À présenter comme
+ce qu'ils sont : de quoi **empêcher un résultat faux**, pas de quoi lire un rouleau.
+
+⚠ Et le premier a une propriété que les autres n'ont pas : **il se corrige chez eux en une
+ligne**, et il concerne un outil que le dépôt vient d'officialiser. C'est le candidat dont
+l'utilité ne dépend d'aucune de nos hypothèses.
 
 ### 7.3 Ce que la soumission doit donc contenir
 

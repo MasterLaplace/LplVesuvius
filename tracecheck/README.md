@@ -215,6 +215,51 @@ match whichever one is read.
    because it follows interfaces and noise. The two agree only on coarse volumes, so
    nothing distinguishes them until you plot the curve.
 
+## A bug in `vc_tifxyz_selfcross`, with a two-second reproducer
+
+`repro_empty_verdict.py` in this folder builds a small flat surface, runs the official
+tool twice, and shows this:
+
+```
+   --maxedge   clean  pairs tested  quads dropped
+  -----------------------------------------------
+          60    true         12320              0
+          19    true             0           1058
+
+  --fail-on-crossing exit code on the empty verdict: 0
+```
+
+**A verdict and an absence of measurement come out through the same field.** When
+`--maxedge` falls below the mesh's own step size the filter drops every quad, `clean`
+stays `true`, and a gate built on `--fail-on-crossing` passes any surface at all — with
+the exit code the calling script expects.
+
+This is not only a silly setting. The default is `--maxedge 60`, so a segmentation grown
+at `step_size 60` or coarser reaches the same state on the defaults. Measured on a real
+self-intersecting mesh, decimated so that only its *description* coarsens while its
+geometry does not:
+
+| step | crossings (default) | pairs tested | crossings (`--maxedge 0`) |
+|---:|---:|---:|---:|
+| ~20 vx | 240 | 751 169 | 240 |
+| ~40 vx | 123 | 32 255 | 123 |
+| ~60 vx | **0** | **0** | 72 |
+| ~80 vx | **0** | **0** | 49 |
+
+Two separate losses, and the right-hand column separates them: coarsening the mesh alone
+takes 240 down to 49 on geometry that never changes, and the filter then turns the last
+two into silent zeros.
+
+**Suggested fix, one line on your side**: make `clean_of_transverse_self_intersection`
+false — or add an explicit `measured: false` — when `pairs_tested == 0`. Until then, any
+consumer has to check `pairs_tested` itself, which is what this repository now does in a
+single shared reader.
+
+> A second consequence, for anyone comparing `step_size` settings by their crossing
+> counts: **those counts are not comparable across steps.** The detector finds 51 % of a
+> known set of crossings at step 40, and less beyond. A sweep that reports "zero at a
+> coarse step" is partly reporting its own loss of sensitivity.
+
 ## Licence and provenance
 
 Written for the Vesuvius Challenge. The measurements quoted above are reproducible from
