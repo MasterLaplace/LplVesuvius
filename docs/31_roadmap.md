@@ -293,7 +293,9 @@ dans le scan).
    c'est la mesure qui doit venir tôt. ⚠⚠ **Et on ne sait pas encore la faire assez
    finement** : [`33`](33_la_carte_nest_pas_resolue.md) montre qu'aux effectifs de `16`
    aucun des treize n'a d'intervalle qui exclut d'être sous 10 %, ni au-dessus. La
-   question n'a aujourd'hui de réponse pour **aucun** rouleau.
+   question n'a aujourd'hui de réponse pour **aucun** rouleau. Et la campagne dense du
+   2026-08-20 a **inversé le classement** (rho −0,297, treize rangs changés) : le rouleau
+   par lequel commencer n'est pas celui que `16` désignait.
 3. **Si le traceur ne peut pas être rendu déterministe** et que l'échantillonnage ne suffit
    pas : « fully automated » devient un mot qu'on ne peut pas tenir. Le repli honnête est
    de publier le **détecteur** seul, qui n'a pas ce problème.

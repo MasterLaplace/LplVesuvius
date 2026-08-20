@@ -1,0 +1,221 @@
+{
+  "creux": "/home/masterlaplace/LplVesuvius/docs/carte_separabilite",
+  "dense": "/home/masterlaplace/LplVesuvius/docs/carte_separabilite_dense",
+  "temoin": {
+    "rouleau": "PHerc0139",
+    "n": 91,
+    "k": 4,
+    "part": 0.04395604395604396,
+    "d_prime_median": 1.5355215668678284,
+    "d_prime_min": 0.9262479841709137,
+    "temoin": true
+  },
+  "lignes": [
+    {
+      "rouleau": "PHerc0358",
+      "creux_k": 1,
+      "creux_n": 28,
+      "creux_part": 0.03571428571428571,
+      "creux_ic": [
+        0.0009037987556580578,
+        0.18347759754462362
+      ],
+      "dense_k": 11,
+      "dense_n": 86,
+      "dense_part": 0.12790697674418605,
+      "dense_dans_ic_creux": true,
+      "ecart": 0.09219269102990034
+    },
+    {
+      "rouleau": "PHerc0211",
+      "creux_k": 1,
+      "creux_n": 20,
+      "creux_part": 0.05,
+      "creux_ic": [
+        0.0012650894979498038,
+        0.24873276277202777
+      ],
+      "dense_k": 11,
+      "dense_n": 61,
+      "dense_part": 0.18032786885245902,
+      "dense_dans_ic_creux": true,
+      "ecart": 0.130327868852459
+    },
+    {
+      "rouleau": "PHerc1447",
+      "creux_k": 1,
+      "creux_n": 18,
+      "creux_part": 0.05555555555555555,
+      "creux_ic": [
+        0.0014055561673694222,
+        0.27294359967336845
+      ],
+      "dense_k": 4,
+      "dense_n": 57,
+      "dense_part": 0.07017543859649122,
+      "dense_dans_ic_creux": true,
+      "ecart": 0.014619883040935672
+    },
+    {
+      "rouleau": "PHerc0268",
+      "creux_k": 3,
+      "creux_n": 35,
+      "creux_part": 0.08571428571428572,
+      "creux_ic": [
+        0.018037639814217493,
+        0.23057501865887717
+      ],
+      "dense_k": 15,
+      "dense_n": 115,
+      "dense_part": 0.13043478260869565,
+      "dense_dans_ic_creux": true,
+      "ecart": 0.044720496894409933
+    },
+    {
+      "rouleau": "PHerc0257",
+      "creux_k": 2,
+      "creux_n": 19,
+      "creux_part": 0.10526315789473684,
+      "creux_ic": [
+        0.013012164371777464,
+        0.33137666445676595
+      ],
+      "dense_k": 10,
+      "dense_n": 61,
+      "dense_part": 0.16393442622950818,
+      "dense_dans_ic_creux": true,
+      "ecart": 0.05867126833477135
+    },
+    {
+      "rouleau": "PHerc1545",
+      "creux_k": 2,
+      "creux_n": 17,
+      "creux_part": 0.11764705882352941,
+      "creux_ic": [
+        0.014579316840302493,
+        0.36440916210125024
+      ],
+      "dense_k": 10,
+      "dense_n": 63,
+      "dense_part": 0.15873015873015872,
+      "dense_dans_ic_creux": true,
+      "ecart": 0.04108309990662931
+    },
+    {
+      "rouleau": "PHerc0826",
+      "creux_k": 2,
+      "creux_n": 15,
+      "creux_part": 0.13333333333333333,
+      "creux_ic": [
+        0.016575913440083623,
+        0.40460269660337206
+      ],
+      "dense_k": 13,
+      "dense_n": 57,
+      "dense_part": 0.22807017543859648,
+      "dense_dans_ic_creux": true,
+      "ecart": 0.09473684210526315
+    },
+    {
+      "rouleau": "PHerc0813",
+      "creux_k": 4,
+      "creux_n": 27,
+      "creux_part": 0.14814814814814814,
+      "creux_ic": [
+        0.04188739647376728,
+        0.3373108640242444
+      ],
+      "dense_k": 12,
+      "dense_n": 77,
+      "dense_part": 0.15584415584415584,
+      "dense_dans_ic_creux": true,
+      "ecart": 0.007696007696007701
+    },
+    {
+      "rouleau": "PHerc1203",
+      "creux_k": 6,
+      "creux_n": 32,
+      "creux_part": 0.1875,
+      "creux_ic": [
+        0.07207616545849763,
+        0.3643923098640901
+      ],
+      "dense_k": 7,
+      "dense_n": 77,
+      "dense_part": 0.09090909090909091,
+      "dense_dans_ic_creux": true,
+      "ecart": -0.09659090909090909
+    },
+    {
+      "rouleau": "PHerc0800",
+      "creux_k": 5,
+      "creux_n": 25,
+      "creux_part": 0.2,
+      "creux_ic": [
+        0.06831146401248402,
+        0.4070374322786773
+      ],
+      "dense_k": 2,
+      "dense_n": 76,
+      "dense_part": 0.02631578947368421,
+      "dense_dans_ic_creux": false,
+      "ecart": -0.1736842105263158
+    },
+    {
+      "rouleau": "PHerc0191",
+      "creux_k": 6,
+      "creux_n": 26,
+      "creux_part": 0.23076923076923078,
+      "creux_ic": [
+        0.08974011088457516,
+        0.4364750969413865
+      ],
+      "dense_k": 11,
+      "dense_n": 87,
+      "dense_part": 0.12643678160919541,
+      "dense_dans_ic_creux": true,
+      "ecart": -0.10433244916003537
+    },
+    {
+      "rouleau": "PHerc1218",
+      "creux_k": 4,
+      "creux_n": 17,
+      "creux_part": 0.23529411764705882,
+      "creux_ic": [
+        0.06810774043735666,
+        0.4989932732045801
+      ],
+      "dense_k": 5,
+      "dense_n": 57,
+      "dense_part": 0.08771929824561403,
+      "dense_dans_ic_creux": true,
+      "ecart": -0.1475748194014448
+    },
+    {
+      "rouleau": "PHerc0125",
+      "creux_k": 5,
+      "creux_n": 21,
+      "creux_part": 0.23809523809523808,
+      "creux_ic": [
+        0.08217587559302258,
+        0.4716598276546214
+      ],
+      "dense_k": 9,
+      "dense_n": 65,
+      "dense_part": 0.13846153846153847,
+      "dense_dans_ic_creux": true,
+      "ecart": -0.09963369963369961
+    }
+  ],
+  "rho": -0.2967032967032967,
+  "rangs_changes": 13,
+  "paires": 78,
+  "paires_separees": 1,
+  "distinguables_holm": [
+    "PHerc0826"
+  ],
+  "hors_intervalle": [
+    "PHerc0800"
+  ],
+  "hors_par_le_haut": []
+}

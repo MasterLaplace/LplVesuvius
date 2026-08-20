@@ -97,6 +97,57 @@ Ce qu'on peut dire sans confondre : **aucun** des treize n'a un intervalle qui e
 sous 10 %, et **aucun** n'a un intervalle qui exclut d'être au-dessus. Sur cette donnée,
 la question « ce rouleau tient-il dans la marge ? » n'a de réponse pour aucun des treize.
 
+## 4bis. ⭐⭐ La prédiction a été testée — le même jour, et elle tient
+
+La §3 disait qu'il faut **50 fenêtres par rouleau**. La campagne dense a tourné
+(`tools/carte_separabilite.sh docs/carte_separabilite_dense 125`, 57 à 115 fenêtres par
+rouleau), et **le dépouilleur avait été écrit avant qu'elle rende** —
+`analysis/src/comparer_cartes.py`, avec ses seuils d'interprétation posés d'avance : rho
+> 0,7 réfute ce document, rho < 0,3 le confirme.
+
+| rouleau | creux | dense | écart |
+|---|---:|---:|---:|
+| **PHerc0800** | 20,0 % *(10ᵉ sur 13)* | **2,6 %** *(1ᵉʳ)* | **−17,4** |
+| PHerc1447 | 5,6 % | 7,0 % | +1,5 |
+| PHerc1218 | 23,5 % | 8,8 % | −14,8 |
+| PHerc1203 | 18,8 % | 9,1 % | −9,7 |
+| PHerc0191 | 23,1 % | 12,6 % | −10,4 |
+| **PHerc0358** | **3,6 %** *(1ᵉʳ)* | **12,8 %** *(6ᵉ)* | **+9,2** |
+| PHerc0268 | 8,6 % | 13,0 % | +4,5 |
+| PHerc0125 | 23,8 % | 13,8 % | −10,0 |
+| PHerc0813 | 14,8 % | 15,6 % | +0,8 |
+| PHerc1545 | 11,8 % | 15,9 % | +4,1 |
+| PHerc0257 | 10,5 % | 16,4 % | +5,9 |
+| PHerc0211 | 5,0 % | 18,0 % | +13,0 |
+| PHerc0826 | 13,3 % | 22,8 % | +9,5 |
+
+> ⭐⭐ **rho de Spearman = −0,297. Les treize rouleaux changent tous de rang.** Le
+> classement ne se reproduit pas — il ne se reproduit même pas *un peu*.
+
+![le classement avant et apres un echantillonnage trois fois plus dense](images/33_comparaison.png)
+
+Figure : `analysis/src/figure_comparaison.py`, depuis `docs/comparaison_cartes.json`.
+
+**Et l'inversion est complète sur ce qui décidait** : `PHerc0358`, que `16` désignait comme
+le premier à attaquer, passe de **1ᵉʳ à 6ᵉ** ; `PHerc0800`, que `16` plaçait 10ᵉ sur 13,
+devient **le meilleur du lot avec 2,6 %**.
+
+⚠⚠ **Et le témoin n'est plus à 0 %.** À échantillonnage dense, `PHerc0139` mesure **4 %** —
+exactement la valeur que `16` attribuait à `PHerc0358` comme le minimum des treize. La
+propriété *« que ne partage aucun des treize »* était une propriété de **24 fenêtres**, pas
+du rouleau. La §1 l'annonçait par son intervalle ; la mesure le confirme par un chiffre.
+
+⚠ **Les deux campagnes mesurent bien la même chose** : 12 des 13 estimations denses tombent
+dans l'intervalle de la campagne creuse. Le sondage creux n'était donc pas **biaisé**, il
+était **bruité** — ce qui est le diagnostic le moins grave des deux, et celui que ce document
+avançait. Le seul rouleau hors intervalle est `PHerc0800`, et une sortie sur treize à 95 % est
+exactement ce que le hasard produit.
+
+⚠ **Ça ne suffit toujours pas.** À 57–115 fenêtres, **1 paire sur 78** est séparée et **1
+rouleau sur 13** se distingue du témoin. La §3 promettait de séparer les **extrêmes**, et
+c'est ce qui arrive — pas de trancher le classement, qui demanderait bien davantage et qui
+n'a peut-être pas de réponse.
+
 ## 5. Ce que ce document change ailleurs
 
 | document | ce qui devient faux | ce qui reste |
@@ -104,6 +155,13 @@ la question « ce rouleau tient-il dans la marge ? » n'a de réponse pour aucun
 | `16` §0, §6 | *« c'est la queue qui sépare »* comme énoncé de classement ; la désignation de `PHerc0358` | la médiane ne sépare rien ; les treize pris ensemble diffèrent du témoin |
 | `13` H4 | *« `PHerc0358` désigné »* | la carte existe, le témoin est apparié |
 | `31` §10, §11.2 | *« ça dit **sur lequel** des treize le prix est jouable »* | *« mesurer la part comprimée rouleau par rouleau »* reste la bonne mesure — il faut juste **50 fenêtres**, pas 27 sondes |
+
+⚠⚠ **Mis à jour le 2026-08-20, après la campagne dense** : `PHerc0358` n'est plus le meilleur
+point observé — c'est **`PHerc0800`** (2,6 % contre 12,8 %). Le choix par défaut change donc
+de rouleau, et c'est précisément ce qui montre qu'il s'agissait d'un **choix par défaut** :
+une conclusion de mesure n'aurait pas changé de sujet en triplant l'échantillonnage. ⚠ Rien
+n'oblige à changer de rouleau pour autant — la §4bis mesure qu'à 78 paires une seule est
+séparée, donc « 2,6 % » ne bat pas « 12,8 % » de façon établie non plus.
 
 ⚠ **`PHerc0358` reste un choix défendable** — il a la part observée la plus basse, et il
 faut bien commencer par un rouleau. Ce qui tombe, c'est que **la mesure le désigne**. Un

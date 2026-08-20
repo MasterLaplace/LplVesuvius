@@ -240,6 +240,13 @@ et elle va plus loin qu'il n'y paraissait : elle vaut aussi pour **l'ordre entre
 treize**. ⭐ Et `33` §3 chiffre ce qu'il faudrait pour trancher : **50 fenêtres par
 rouleau** au lieu de 15–35, soit un échantillonnage plus dense de l'instrument existant.
 
+⚠⚠ **Et elle a été lancée le jour même.** À 57–115 fenêtres par rouleau, **les treize
+changent tous de rang** (rho de Spearman **−0,297**) : `PHerc0358` passe du 1ᵉʳ au **6ᵉ**,
+et `PHerc0800` — 10ᵉ sur 13 ici — devient **le meilleur du lot à 2,6 %**. Le témoin, lui,
+n'est plus à 0 % mais à **4 %**. Tous les chiffres de ce document restent les meilleures
+estimations de leur campagne ; c'est leur **ordre** qui n'existait pas.
+[`33` §4bis](33_la_carte_nest_pas_resolue.md).
+
 ### ⚠⚠ Et une limite qui vaut pour NOS DEUX instruments
 
 Le d′ **et** l'écart feuille↔trace comparent des scans **à résolution égale**, jamais

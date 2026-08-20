@@ -239,7 +239,11 @@ def main() -> int:
             "rouleau": rouleau, "n": len(lots), "graine": lots[0]["graine"],
             "voxel_um": lots[0]["voxel_um"],
             "generations_min": min(gens), "generations_max": max(gens),
-            "aire_min": min(aires), "aire_max": max(aires),
+            # ⚠ Les aires PAR TIRAGE, et pas seulement min/max/mediane : la figure place
+            # un point par tirage et le colore par son compte de croisements. Sans la liste
+            # elle devrait reconstruire une plage, et un point rouge tomberait alors sur le
+            # mauvais tirage. Un artefact doit porter ce que ses consommateurs lisent.
+            "aires": aires, "aire_min": min(aires), "aire_max": max(aires),
             "aire_mediane": statistics.median(aires), "etendue_relative": etendue,
             "croisements": crois, "propres": sum(1 for c in crois if c == 0),
             "aire_identique": aire_identique, "verdict_bascule": bascule,
@@ -257,6 +261,25 @@ def main() -> int:
     bascules = [l["rouleau"] for l in lignes if l["verdict_bascule"]]
     reproductibles = [l["rouleau"] for l in lignes if l["aire_identique"]]
     non_concluants = [l["rouleau"] for l in lignes if l["verdict_bascule"] is None]
+
+    # ⭐ L'AIRE PREDIT-ELLE LE VERDICT ? Question posee par la figure : les trois rouleaux
+    # dont les six tirages ont la MEME aire sont ceux qui portent les pires croisements. Si
+    # un mauvais tirage se reconnaissait a son etendue, on pourrait le jeter sans le juger,
+    # et ce serait un raccourci considerable. On le mesure au lieu de le lire a l'oeil.
+    #
+    # ⚠ Le rang est central-normalise : 0 = l'aire mediane du rouleau, 1 = la plus extreme.
+    # Sous « l'aire ne dit rien », un mauvais tirage tombe a un rang uniforme, d'esperance
+    # ~0,5 sur cette echelle.
+    rangs_mauvais, disp_bascule, disp_sans = [], [], []
+    for l in lignes:
+        aires_l, crois_l, n_l = l["aires"], l["croisements"], l["n"]
+        ordre = sorted(range(n_l), key=lambda j: aires_l[j])
+        rang_de = {j: r for r, j in enumerate(ordre)}
+        centre = (n_l - 1) / 2
+        for j, c in enumerate(crois_l):
+            if c > 0 and centre > 0:
+                rangs_mauvais.append(abs(rang_de[j] - centre) / centre)
+        (disp_bascule if l["verdict_bascule"] else disp_sans).append(l["etendue_relative"])
 
     print(f"\n  mauvais tirages : {mauvais}/{total} = {mauvais/total:.1%} "
           f"(IC 95 % exact : {bas:.1%} – {haut:.1%})")
@@ -282,6 +305,22 @@ def main() -> int:
         print("     verdict. Le taux de mauvais tirages n'est donc PAS mesuré à zéro ici,")
         print("     il est mesuré comme plus rare que ce corpus ne peut voir.")
 
+    if rangs_mauvais:
+        moyen = statistics.fmean(rangs_mauvais)
+        print(f"\n  ⭐ l'aire prédit-elle le verdict ? {len(rangs_mauvais)} mauvais tirages, "
+              f"excentricité de rang moyenne {moyen:.2f}")
+        print("     (0 = l'aire médiane de son rouleau, 1 = l'extrême ; ~0,50 attendu si "
+              "l'aire ne dit rien)")
+        if moyen < 0.7:
+            print("     → l'étendue ne signale PAS le mauvais tirage. On ne peut pas")
+            print("        l'écarter sur sa taille : il faut le juger.")
+        else:
+            print("     → les mauvais tirages sont aux extrêmes ; l'étendue serait un filtre.")
+    if disp_bascule and disp_sans:
+        print(f"  dispersion médiane — rouleaux qui basculent : "
+              f"{statistics.median(disp_bascule):.1%}, "
+              f"les autres : {statistics.median(disp_sans):.1%}")
+
     if a.json:
         Path(a.json).write_text(json.dumps({
             "tirages_total": total, "rouleaux": len(lignes),
@@ -289,6 +328,10 @@ def main() -> int:
             "ic95_bas": bas, "ic95_haut": haut,
             "rouleaux_bascule": bascules, "rouleaux_reproductibles": reproductibles,
             "rouleaux_non_concluants": non_concluants,
+            "excentricite_rang_mauvais": rangs_mauvais,
+            "dispersion_mediane_bascule": (statistics.median(disp_bascule)
+                                           if disp_bascule else None),
+            "dispersion_mediane_sans": (statistics.median(disp_sans) if disp_sans else None),
             "sans_maillage": rejetes, "reverifies": revérifiés,
             "desaccords": [{"rouleau": r, "repetition": i, "resume": d, "rapport": v}
                            for r, i, d, v in desaccords],
