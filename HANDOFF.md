@@ -42,6 +42,57 @@ Détail complet : [`31`](docs/31_roadmap.md).
 ⚠ Pousser l'AUC plus haut, chercher un meilleur détecteur d'encre ou faire transcrire
 davantage **ne sert pas** l'objectif.
 
+## 2bis. ⏳ REPRENDRE ICI — 2026-08-20, fin de journée
+
+**Deux campagnes tournent en fond** (détachées, elles survivent à la fermeture de la session) :
+
+```bash
+tail -f docs/convergence_essais.log     # essai_ng2 puis essai_scale1, 4 rendus
+ps -eo pid,etime,args | grep '\.lances/'   # ce qui vit encore
+```
+
+### Ce que la journée a établi, dans l'ordre où ça s'enchaîne
+
+1. ⭐⭐⭐ **[`38`](docs/38_ce_qui_bouge_avec_la_fenetre.md) — le test de convergence.** On rend
+   la même surface dans des fenêtres de plus en plus profondes. Un bon segment officiel garde
+   sa distance (**α = +0,00**) ; nos traces la voient **suivre la fenêtre** (**α = +1,01**,
+   jusqu'à 691 µm sans rien trouver). Aucun seuil, aucune vérité terrain, aucune échelle.
+   **Toutes les distances publiées avant sont sans objet pour nos traces.**
+2. **Ce que ça veut dire physiquement** : profil plat = la normale reste dans la même
+   matière = **notre surface est une coupe radiale** à travers le rouleau. C'est ce que
+   montre `docs/images/38_en_travers.png` à côté de `36_papyrus_PHerc1447.png`.
+3. ⚠ **Cinq causes éliminées par mesure** : la graine (on a rejoué **la leur**), la
+   prédiction (planarité 0,993 au point — `sonder_point.py`), la longueur (0,98 cm² échoue
+   comme 23), le sens de la normale (identique avec `--flip-normals`), les paramètres
+   (fichier minimal identique au leur → 23,05 cm² contre leurs 3,95).
+4. ⭐⭐ **[`39`](docs/39_le_seam_de_correction.md) — le seam** : `vc_grow_seg_from_seed
+   --resume --rewind-gen --correct <points.json>` prend une **liste de points 3D**. Chaque
+   maillon existe **sauf un** : *dire où la surface aurait dû passer*.
+5. ⚠⚠ **M1ter répondu, négativement, et disculpé** : le modèle du Grand Prize 2023 sort une
+   **constante** sur un rouleau du prix (σ **45×** plus petit qu'où il marche) — et **le
+   volume publié donne la même**, donc notre chaîne n'y est pour rien.
+
+### Le lot en cours, et pourquoi
+
+⭐ **L'hypothèse qui inverse** (`tools/convergence_des_essais.sh`, en fond) : une coupe
+radiale **ne peut pas** se croiser elle-même ; une surface qui suit une spire revient près
+d'elle-même à chaque tour. Nous aurions donc jeté les bonnes traces. `essai_ng2`
+(112 139 croisements, poussée **avec** les vraies grilles de normales) est le candidat.
+⚠ Ce qui joue contre, dit d'avance : le segment officiel converge **sans** compte de
+croisements catastrophique.
+
+### Les trois pistes qui suivent, par coût croissant
+
+| # | quoi | pourquoi maintenant |
+|---|---|---|
+| **A** | ⭐ passer le modèle d'encre sur les **8 volumes de surface publiés** des rouleaux du prix (`PHerc1447` 4, `PHerc0800` 2, `PHerc1203` 2) | le pont existe (`zarr_vers_couches.py`), aucun traçage ni rendu, et c'est la voie la plus courte vers **First Letters** |
+| **B** | écrire le producteur de points de correction **depuis la prédiction** (planarité 0,993) plutôt que depuis le volume (plat) | c'est le seul maillon manquant de `39` |
+| **C** | relire tous les essais de `26` au test de convergence | ses conclusions ont été prises sur des critères aveugles à la coupe radiale |
+
+⚠ **Une fenêtre de volume de surface tombe le plus souvent dans le vide** (piège nº 27) :
+`zarr_vers_couches.py` imprime la couverture et alerte sous 5 %. Trouver la matière avant de
+sonder.
+
 ## 2. ⚠ CE QUI TOURNE (2026-08-19, soirée)
 
 ⏳ **`tools/campagne_pas.sh`** — le balayage de `step_size` sur PHerc0358, deux graines
