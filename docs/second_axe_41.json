@@ -1,0 +1,251 @@
+{
+  "tirages": 16,
+  "censures": 10,
+  "plafond_um": 187.24,
+  "rouleaux_testables": 4,
+  "accords": {
+    "ecart_um": 0,
+    "au_bord": 1
+  },
+  "detail": [
+    {
+      "rouleau": "PHerc0125",
+      "ecart_um": {
+        "mauvais": 187.24,
+        "propre_max": 187.24,
+        "accord": false,
+        "ex_aequo": true
+      },
+      "au_bord": {
+        "mauvais": 0.7666666666666667,
+        "propre_max": 0.6,
+        "accord": true,
+        "ex_aequo": false
+      }
+    },
+    {
+      "rouleau": "PHerc0257",
+      "ecart_um": {
+        "mauvais": 168.516,
+        "propre_max": 177.87800000000001,
+        "accord": false,
+        "ex_aequo": false
+      },
+      "au_bord": {
+        "mauvais": 0.40625,
+        "propre_max": 0.4948453608247423,
+        "accord": false,
+        "ex_aequo": false
+      }
+    },
+    {
+      "rouleau": "PHerc0268",
+      "ecart_um": {
+        "mauvais": 146.88,
+        "propre_max": 172.8,
+        "accord": false,
+        "ex_aequo": false
+      },
+      "au_bord": {
+        "mauvais": 0.38571428571428573,
+        "propre_max": 0.8135593220338984,
+        "accord": false,
+        "ex_aequo": false
+      }
+    },
+    {
+      "rouleau": "PHerc1447",
+      "ecart_um": {
+        "mauvais": 172.8,
+        "propre_max": 172.8,
+        "accord": false,
+        "ex_aequo": true
+      },
+      "au_bord": {
+        "mauvais": 0.6470588235294118,
+        "propre_max": 0.9393939393939394,
+        "accord": false,
+        "ex_aequo": false
+      }
+    }
+  ],
+  "lignes": [
+    {
+      "rouleau": "PHerc0125",
+      "repetition": "r1",
+      "transverse": 1615,
+      "bascule": true,
+      "ecart_um": 187.24,
+      "au_bord": 0.7666666666666667,
+      "part_plates": 0.4,
+      "plafond_um": 187.24,
+      "censure": true
+    },
+    {
+      "rouleau": "PHerc0125",
+      "repetition": "r2",
+      "transverse": 0,
+      "bascule": true,
+      "ecart_um": 187.24,
+      "au_bord": 0.6,
+      "part_plates": 0.5,
+      "plafond_um": 187.24,
+      "censure": true
+    },
+    {
+      "rouleau": "PHerc0125",
+      "repetition": "r3",
+      "transverse": 0,
+      "bascule": true,
+      "ecart_um": 187.24,
+      "au_bord": 0.5657894736842105,
+      "part_plates": 0.4473684210526315,
+      "plafond_um": 187.24,
+      "censure": true
+    },
+    {
+      "rouleau": "PHerc0257",
+      "repetition": "r1",
+      "transverse": 0,
+      "bascule": true,
+      "ecart_um": 177.87800000000001,
+      "au_bord": 0.4948453608247423,
+      "part_plates": 0.6494845360824743,
+      "plafond_um": 187.24,
+      "censure": false
+    },
+    {
+      "rouleau": "PHerc0257",
+      "repetition": "r2",
+      "transverse": 0,
+      "bascule": true,
+      "ecart_um": 177.87800000000001,
+      "au_bord": 0.4375,
+      "part_plates": 0.7395833333333333,
+      "plafond_um": 187.24,
+      "censure": false
+    },
+    {
+      "rouleau": "PHerc0257",
+      "repetition": "r6",
+      "transverse": 428,
+      "bascule": true,
+      "ecart_um": 168.516,
+      "au_bord": 0.40625,
+      "part_plates": 0.7395833333333333,
+      "plafond_um": 187.24,
+      "censure": false
+    },
+    {
+      "rouleau": "PHerc0268",
+      "repetition": "r1",
+      "transverse": 607,
+      "bascule": true,
+      "ecart_um": 146.88,
+      "au_bord": 0.38571428571428573,
+      "part_plates": 0.6142857142857143,
+      "plafond_um": 172.8,
+      "censure": false
+    },
+    {
+      "rouleau": "PHerc0268",
+      "repetition": "r2",
+      "transverse": 0,
+      "bascule": true,
+      "ecart_um": 172.8,
+      "au_bord": 0.6451612903225806,
+      "part_plates": 0.6290322580645161,
+      "plafond_um": 172.8,
+      "censure": true
+    },
+    {
+      "rouleau": "PHerc0268",
+      "repetition": "r3",
+      "transverse": 0,
+      "bascule": true,
+      "ecart_um": 172.8,
+      "au_bord": 0.8135593220338984,
+      "part_plates": 0.4915254237288136,
+      "plafond_um": 172.8,
+      "censure": true
+    },
+    {
+      "rouleau": "PHerc0826",
+      "repetition": "r1",
+      "transverse": 0,
+      "bascule": false,
+      "ecart_um": 187.24,
+      "au_bord": 0.5121951219512195,
+      "part_plates": 0.5365853658536586,
+      "plafond_um": 187.24,
+      "censure": true
+    },
+    {
+      "rouleau": "PHerc0826",
+      "repetition": "r2",
+      "transverse": 0,
+      "bascule": false,
+      "ecart_um": 187.24,
+      "au_bord": 0.75,
+      "part_plates": 0.2272727272727273,
+      "plafond_um": 187.24,
+      "censure": true
+    },
+    {
+      "rouleau": "PHerc1218",
+      "repetition": "r1",
+      "transverse": 0,
+      "bascule": false,
+      "ecart_um": 164.16000000000003,
+      "au_bord": 0.4358974358974359,
+      "part_plates": 0.3589743589743589,
+      "plafond_um": 172.8,
+      "censure": false
+    },
+    {
+      "rouleau": "PHerc1218",
+      "repetition": "r2",
+      "transverse": 0,
+      "bascule": false,
+      "ecart_um": 172.8,
+      "au_bord": 0.525,
+      "part_plates": 0.42500000000000004,
+      "plafond_um": 172.8,
+      "censure": true
+    },
+    {
+      "rouleau": "PHerc1447",
+      "repetition": "r1",
+      "transverse": 0,
+      "bascule": true,
+      "ecart_um": 172.8,
+      "au_bord": 0.9393939393939394,
+      "part_plates": 0.0,
+      "plafond_um": 172.8,
+      "censure": true
+    },
+    {
+      "rouleau": "PHerc1447",
+      "repetition": "r2",
+      "transverse": 0,
+      "bascule": true,
+      "ecart_um": 159.84000000000003,
+      "au_bord": 0.4,
+      "part_plates": 0.525,
+      "plafond_um": 172.8,
+      "censure": false
+    },
+    {
+      "rouleau": "PHerc1447",
+      "repetition": "r4",
+      "transverse": 1371,
+      "bascule": true,
+      "ecart_um": 172.8,
+      "au_bord": 0.6470588235294118,
+      "part_plates": 0.27450980392156865,
+      "plafond_um": 172.8,
+      "censure": true
+    }
+  ],
+  "orphelins": []
+}

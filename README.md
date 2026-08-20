@@ -181,7 +181,8 @@ priorisee. A lire en premier si vous reprenez ce chantier.
 | **[`docs/33_la_carte_nest_pas_resolue.md`](docs/33_la_carte_nest_pas_resolue.md)** | ⚠⚠ le classement des 13 rouleaux de [`16`](docs/16_carte_difficulte_rouleaux_du_prix.md) **ne separe aucune des 78 paires** — et ce qu'il faudrait pour trancher : 50 fenetres |
 | **[`docs/34_un_verdict_qui_ne_mesure_rien.md`](docs/34_un_verdict_qui_ne_mesure_rien.md)** | ⚠⚠ `vc_tifxyz_selfcross` peut declarer une surface **propre en n'ayant teste aucune paire** — et la perte de sensibilite mesuree quand un maillage grossit |
 | **[`docs/35_le_tirage_sur_douze_rouleaux.md`](docs/35_le_tirage_sur_douze_rouleaux.md)** | ⭐⭐ **72 tirages, 12 rouleaux, parametres identiques** : 4 rouleaux ou le VERDICT bascule, 0 reproductible, et l'aire ne signale pas le mauvais tirage |
-| **[`docs/36_lorigine_de_la_pile.md`](docs/36_lorigine_de_la_pile.md)** | ⏳⚠⚠ **d'ou se mesure un ecart a la trace** : un segment OFFICIEL lit 3,0 µm dans son volume publie et 237,6 µm dans notre rendu. Controle en cours |
+| **[`docs/36_lorigine_de_la_pile.md`](docs/36_lorigine_de_la_pile.md)** | ⭐⭐ **une hypothese testee et REFUTEE** — et ce qu'elle a trouve a la place : « officiel » n'est pas synonyme de « bon », un rouleau publie des segments de 18 % a 68 % |
+| **[`docs/37_les_deux_axes_ne_saccordent_pas.md`](docs/37_les_deux_axes_ne_saccordent_pas.md)** | ⭐⭐ **selectionner sur un axe et valider sur l'autre** : teste, et les deux juges ne se recoupent pas — 1 accord sur 8 |
 
 ## Rejouer
 

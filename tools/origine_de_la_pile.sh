@@ -49,9 +49,18 @@ if [ ! -s "$DEST/rendu.json" ]; then
   M="$DEST/mesh.tifxyz"
   if [ ! -f "$M/meta.json" ]; then
     mkdir -p "$M"
+    # ⚠ Le chemin a ete LISTE, pas devine : la premiere version cherchait
+    # `<segment>/<segment>.tifxyz/` -- la convention d'un maillage local -- et le bucket
+    # range le sien sous `mesh/tifxyz/`. Elle a echoue sur « meta.json absent », message
+    # qui accuse le segment la ou le fautif etait le chemin.
+    #
+    # ⭐ Et le listage a montre autre chose : le segment publie aussi un
+    # `<segment>_flattened.obj`. LEUR chaine aplatit donc elle aussi, ce qui rend la
+    # comparaison plus juste qu'espere -- ce ne sont pas deux chaines de formes
+    # differentes, ce sont deux executions de la meme forme.
     for f in meta.json x.tif y.tif z.tif mask.tif; do
       curl -sfL --max-time 600 -o "$M/$f" \
-        "$B/$ROULEAU/segments/$SEG/$SEG.tifxyz/$f" || rm -f "$M/$f"
+        "$B/$ROULEAU/segments/$SEG/mesh/tifxyz/$f" || rm -f "$M/$f"
     done
     # ⚠ `mask.tif` est optionnel selon les segments ; les trois grilles et le meta ne le
     # sont pas. On refuse plutot que de rendre une surface incomplete.
@@ -79,11 +88,26 @@ import json, sys
 dest, seg, couches = sys.argv[1], sys.argv[2], int(sys.argv[3])
 
 def lis(p):
+    """Les deux producteurs n'ecrivent pas les memes noms de champs.
+
+    ⚠ `zarr_depth.py` ecrit `ecart_a_la_trace` / `tiers_central` / `au_bord` et un `layers`
+    ENTIER ; `depth_profile.py` ecrit `ecart_trace_um_median` / `tiers_central_intensite` /
+    `au_bord_intensite` et un `layers` LISTE. La premiere version de ce rapport supposait
+    les seconds partout et levait un TypeError sur `len(int)` -- donc l'experience decisive
+    ne rendait rien alors que ses deux moities avaient abouti.
+    """
     try:
         d = json.load(open(p))
     except OSError:
         return None
-    return (d[0] if isinstance(d, list) else d)
+    d = (d[0] if isinstance(d, list) else d)
+    lay = d.get("layers")
+    return {
+        "couches": lay if isinstance(lay, int) else len(lay or []),
+        "ecart": d.get("ecart_trace_um_median", d.get("ecart_a_la_trace")),
+        "centre": d.get("tiers_central_intensite", d.get("tiers_central")),
+        "bord": d.get("au_bord_intensite", d.get("au_bord")),
+    }
 
 pub, ren = lis(f"{dest}/publie.json"), lis(f"{dest}/rendu.json")
 print(f"\nsegment {seg} — LE MÊME, mesuré deux fois\n")
@@ -93,11 +117,10 @@ for nom, d in (("volume de surface publié", pub), ("notre vc_render_tifxyz", re
     if not d:
         print(f"  {nom:<28} {'—':>8} {'non mesuré':>9}")
         continue
-    print(f"  {nom:<28} {len(d.get('layers') or []) or couches:>8} "
-          f"{d['ecart_trace_um_median']:>9.2f} {d['tiers_central_intensite']:>8.3f} "
-          f"{d['au_bord_intensite']:>7.3f}")
+    print(f"  {nom:<28} {d['couches'] or couches:>8} "
+          f"{d['ecart']:>9.2f} {d['centre']:>8.3f} {d['bord']:>7.3f}")
 if pub and ren:
-    ecart = abs(ren["ecart_trace_um_median"] - pub["ecart_trace_um_median"])
+    ecart = abs(ren["ecart"] - pub["ecart"])
     json.dump({"segment": seg, "couches": couches, "publie": pub, "rendu": ren,
                "difference_um": ecart},
               open(f"{dest}/comparaison.json", "w"), indent=2)

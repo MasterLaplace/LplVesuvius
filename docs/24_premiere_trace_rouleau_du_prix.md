@@ -52,7 +52,7 @@ rouleau). Ce n'est pas un frôlement, c'est une traversée.
 | fenêtres dont le pic est dans le **tiers central** | 16 % |
 | écart médian pic ↔ couche tracée | **94 µm** |
 
-⏳ **Signalé le 2026-08-20** : cet écart est mesuré depuis la couche tracée **supposée au milieu** d'un rendu `vc_render_tifxyz`. [`36`](36_lorigine_de_la_pile.md) mesure qu'un segment **officiel** rendu par notre chaîne lit **237,6 µm** là où son volume de surface publié lit **3,0 µm** — un facteur 79. Le contrôle qui tranche (le même segment, mesuré des deux façons) est en cours ; d'ici là ce chiffre est **signalé, pas retiré**.
+✅ **Signalement levé le 2026-08-20.** Ce chiffre a été soupçonné d'être mesuré depuis une mauvaise origine ; [`36`](36_lorigine_de_la_pile.md) a testé l'hypothèse sur **le même segment officiel mesuré des deux façons** et l'a **réfutée** — 3,00 µm dans le volume publié contre 17,28 µm dans notre rendu, soit 14,3 µm d'écart. L'origine est bonne, la mesure tient.
 
 ⚠⚠ **Et la distribution est BIMODALE** : 15 fenêtres piquent à la couche **0**, 9 à la
 couche **20**, une seule au milieu. C'est la signature exacte d'une surface posée **entre**

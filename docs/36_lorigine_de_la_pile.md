@@ -1,110 +1,121 @@
-# L'origine de la pile — d'où se mesure un écart à la trace
+# L'origine de la pile — une hypothèse testée, réfutée, et ce qu'elle a trouvé à la place
 
-2026-08-20, après-midi. ⏳ **Ce document porte un résultat mesuré et un contrôle en cours.**
-Il est écrit avant que le contrôle rende, parce que les documents qu'il met en cause sont
-cités activement — et qu'une réserve écrite après coup n'a protégé personne.
+2026-08-20. ⚠⚠ **Ce document a été écrit sur une hypothèse, et la mesure l'a réfutée.** Il
+est conservé sous cette forme parce que la réfutation a produit un résultat meilleur que
+l'hypothèse — et parce qu'effacer une piste fausse fait perdre la raison pour laquelle on
+l'avait suivie.
 
 ---
 
-## 1. L'hypothèse, et où elle est vérifiée
+## 1. L'hypothèse, et pourquoi elle était sérieuse
 
 Tout l'instrument de profondeur de [`12`](12_profondeur_de_surface.md) se rapporte à **la
 couche tracée**, et son §13 le dit sans détour :
 
 > *« Tout l'instrument se rapporte à la couche tracée, **supposée** au milieu de la pile
-> (`shape[0] // 2`) parce que le volume de surface est engendré autour d'elle
-> (`vc_layers_from_ppm -r 32`). C'est l'hypothèse la plus lourde du dispositif. »*
+> […]. C'est l'hypothèse la plus lourde du dispositif. »*
 
-Et `12` §13 la **vérifie** — sérieusement, sur 98 segments :
+`12` §13 la **vérifie** — sur 98 segments, et le pic observé tombe à une couche du milieu
+supposé. Mais il la vérifie sur les **volumes de surface publiés**, engendrés autour de la
+trace par `vc_layers_from_ppm -r 32`. Nos piles viennent d'un **autre producteur** —
+`vc_flatten` puis `vc_render_tifxyz` — et cette chaîne n'avait jamais été vérifiée.
 
-| corpus | couches | trace supposée | pic observé |
+Deux chiffres rendaient le soupçon lourd. Sur des segments **officiels** de `PHerc1447`,
+donc publiés pour être lus :
+
+| producteur | segment | écart médian | tiers central |
+|---|---|---:|---:|
+| volume de surface publié | `20250702235910` | **3,0 µm** | 62,5 % |
+| notre chaîne de rendu | `auto_grown_20250502160708188` | **237,6 µm** | 2 % |
+
+Un facteur **79** — mais sur des segments **différents**, donc confondant le producteur et
+le segment.
+
+## 2. ⭐⭐ Le contrôle, et il tranche contre l'hypothèse
+
+`tools/origine_de_la_pile.sh` prend **un seul** segment officiel qui publie les deux — son
+`tifxyz` et son volume de surface — et le mesure des deux façons.
+
+| producteur | couches | écart médian | tiers central | au bord |
+|---|---:|---:|---:|---:|
+| volume de surface publié | 31 | **3,00 µm** | 62,5 % | 12,5 % |
+| notre `vc_flatten` → `vc_render_tifxyz` | 31 | **17,28 µm** | **100 %** | **0 %** |
+
+> ✅ **14,3 µm d'écart sur le même segment. Les deux producteurs s'accordent.** L'hypothèse
+> du milieu **transporte**, et notre chaîne place sa pile au moins aussi bien : elle rend
+> **100 %** de pics dans le tiers central là où le volume publié en rend 62,5 %.
+
+⚠ **Le seuil de décision était écrit avant la mesure** (50 µm, dans le script), avec ses
+deux issues et leur signification. C'est ce qui empêche de relire un résultat de 14 µm comme
+« presque une confirmation ».
+
+## 3. ⭐⭐⭐ Ce que la réfutation a trouvé à la place
+
+Si le producteur n'explique pas les 237,6 µm, alors c'est **le segment**. Et ça pose une
+question que personne n'avait posée : **un segment officiel est-il une référence ?**
+
+Les **quatre** segments de `PHerc1447` qui publient un volume de surface, lus par le même
+instrument (`docs/officiels_PHerc1447.json`) :
+
+| segment | fenêtres avec matière | **tiers central** | écart médian |
 |---|---:|---:|---:|
-| Scroll 1 (80 segments) | 109 | 54 | **53** |
-| PHerc1667 (18 segments) | 109 | 54 | **55** |
+| `20250703025628` | 22 / 50 | **68,2 %** | 3,0 µm |
+| `20250702235910` | 24 / 50 | 62,5 % | 3,0 µm |
+| `20250703034159` | 22 / 50 | **18,2 %** | 10,5 µm |
+| `20251105093211-z_dbg_gen_00320` | ⚠ **4** / 50 | 25,0 % | 11,0 µm |
 
-⭐ **Mais elle la vérifie sur les volumes de surface PUBLIÉS**, ceux qu'engendre
-`vc_layers_from_ppm` autour de la trace. Nos propres piles viennent d'un **autre
-producteur** — `vc_flatten` puis `vc_render_tifxyz` — et cette chaîne-là n'a jamais été
-vérifiée. L'hypothèse a été **transportée d'un producteur à l'autre** sans le dire.
+> ⚠⚠ **« Officiel » n'est pas synonyme de « bon ».** Sur un seul rouleau, le tiers central va
+> de **18 % à 68 %** — un facteur 3,7 — et le quatrième segment s'appelle littéralement
+> `z_dbg_gen_00320`, un artefact de débogage, avec 4 fenêtres exploitables sur 50.
 
-## 2. ⭐⭐ Ce que la mesure dit
+## 4. ⭐⭐ Ce que ça corrige dans `25`, et le sens n'est pas celui prévu
 
-Deux segments **officiels** du même rouleau du prix, `PHerc1447` — donc deux surfaces qui
-suivent leur feuille par construction, puisque l'équipe du concours les publie pour être
-lues :
+[`25`](25_une_graine_choisie_sur_la_planeite.md) a **retiré** le critère du tiers central en
+écrivant :
 
-| producteur | segment | couches | **écart médian** | tiers central | au bord |
-|---|---|---:|---:|---:|---:|
-| **volume de surface publié** | `20250702235910` | 31 | **3,0 µm** | **62,5 %** | 12,5 % |
-| **notre `vc_flatten` → `vc_render_tifxyz`** | `auto_grown_20250502160708188` | 61 | **237,6 µm** | **2 %** | 38 % |
+> *« La trace officielle d'un rouleau du prix […] échoue au critère du tiers central plus
+> mal que les nôtres : 2 %, contre 16 et 20 %. Un critère que la référence rate plus mal que
+> le cas jugé ne peut pas servir à juger. »*
 
-> **Un facteur 79 sur l'écart.** Soit un segment officiel est à 238 µm de sa propre
-> feuille — ce qui n'est pas crédible pour une surface publiée pour être lue — soit
-> **l'origine de nos piles n'est pas celle qu'on suppose**.
+Le **raisonnement est juste**. Ce qui ne l'est pas, c'est de traiter **un** segment officiel
+comme **la** référence. Sur ce même rouleau, deux autres segments officiels rendent 62 % et
+68 % — soit trois à quatre fois mieux que nos traces, ce qui est exactement le
+comportement qu'on attendrait d'une référence.
 
-⚠ **Ces deux lignes portent sur des segments DIFFÉRENTS**, donc elles confondent le
-producteur et le segment. C'est exactement pourquoi le contrôle ci-dessous existe.
+⏳ **Le critère mérite donc d'être reconsidéré** — pas parce que la mesure était fausse, mais
+parce que **la référence n'en était pas une**. ⚠ Reconsidéré, pas rétabli : le remettre
+demande de choisir une référence sur un motif défendable, et « le meilleur des quatre » n'en
+est pas un.
 
-## 3. ⏳ Le contrôle qui tranche — en cours
+## 5. Ce qui n'est PAS touché
 
-`tools/origine_de_la_pile.sh` prend **un seul** segment officiel qui publie **les deux** —
-son `tifxyz` et son volume de surface — et le mesure des deux façons. Le confond disparaît
-par construction.
+- [`24`](24_premiere_trace_rouleau_du_prix.md) §2, *« écart médian 94 µm »* : la mesure tient,
+  l'origine est bonne. Le signalement posé ce matin est **retiré**.
+- [`37`](37_les_deux_axes_ne_saccordent_pas.md) : ses valeurs absolues tiennent aussi, en
+  plus de la comparaison intra-producteur qui était déjà à l'abri.
+- `12` §13 : intact, et c'est même lui qui avait raison — sa conclusion transporte.
 
-| issue | ce qu'elle voudrait dire |
-|---|---|
-| **différence > 50 µm** | l'origine diffère selon le producteur, et tout écart mesuré depuis un rendu à nous est pris depuis un mauvais point |
-| **différence < 50 µm** | l'hypothèse du milieu transporte, et les 237 µm du segment officiel sont une propriété de **ce segment-là** |
+⚠ Il reste vrai que les seize rendus de `37` lisent des écarts de **146 à 187 µm**, contre
+3 à 11 µm pour les segments officiels publiés. Ce n'est donc pas un artefact de mesure :
+**nos traces sont réellement loin de leur feuille**, d'un ordre de grandeur, et c'est le
+fait le plus dur de la journée pour la suite.
 
-⚠ Et le remède, si c'est la première : ce n'est pas de renoncer à l'instrument, c'est de
-**calibrer l'origine** — un segment officiel suit sa feuille, donc la position de son pic
-*est* la couche tracée pour cette géométrie de rendu.
+## 6. ⚠ Ce que ce document ne dit pas
 
-⚠⚠ **La chaîne suspecte contient DEUX étages**, et cette expérience ne les sépare pas :
-`vc_flatten` s'intercale entre le maillage et le rendu chez nous, et pas chez eux. Ce qui
-serait établi est que **notre chaîne** décale l'origine, pas lequel de ses deux maillons.
-
-## 4. Ce qui en dépend — et il faut le dire avant de savoir
-
-| document | ce qui serait touché |
-|---|---|
-| [`24`](24_premiere_trace_rouleau_du_prix.md) §2 | *« écart médian pic ↔ couche tracée : 94 µm »* — une des trois jambes qui condamnaient la trace |
-| [`25`](25_une_graine_choisie_sur_la_planeite.md) | le critère du **tiers central**, **retiré** au motif qu'un segment officiel y échouait (2 % contre 16 et 20 %) |
-| [`35`](35_le_tirage_sur_douze_rouleaux.md) et le second axe | 32 rendus, tous mesurés depuis le milieu supposé |
-| [`21`](21_texte_de_soumission.md) | le §9 reprend le tiers central et son retrait |
-
-⭐⭐ **Et la conséquence la plus intéressante est une réhabilitation, pas une perte.** `25`
-a retiré le critère du tiers central parce qu'*« un critère que la référence rate plus mal
-que le cas jugé ne peut pas servir à juger »*. Le raisonnement est juste ; sa prémisse ne
-l'est peut-être pas. Si l'origine est décalée, la référence ne ratait pas le critère — **on
-la mesurait depuis le mauvais point**, et un critère parfaitement utilisable a été rangé
-pour cette raison.
-
-⚠ Ce serait la deuxième fois aujourd'hui qu'une conclusion tombe non pas parce que la
-mesure était bruitée, mais parce qu'elle était **décalée** : un décalage a l'air d'un
-résultat, là où du bruit a l'air de bruit. Voir aussi [`34`](34_un_verdict_qui_ne_mesure_rien.md),
-où un filtre transformait des croisements réels en zéros silencieux.
-
-## 5. ⚠ Ce que ce document ne dit pas
-
-- **Il ne dit pas que `vc_render_tifxyz` est fautif.** Un rendu le long de la normale n'a
-  aucune obligation de centrer sa pile sur la surface ; c'est une convention, et il se peut
-  qu'elle soit documentée quelque part que nous n'avons pas lu. Ce qui est fautif est de
-  l'avoir **supposée** identique à celle d'un autre outil.
-- **Il ne mesure pas encore de correction.** Tant que le contrôle n'a pas rendu, aucun
-  chiffre de `24`, `25` ou `35` n'est retiré — ils sont **signalés**, ce qui est différent.
-- **Il ne remet pas en cause `12` §13.** Cette vérification-là est bonne, et sur 98
-  segments. Ce qui a échoué est le **transport** de sa conclusion à un autre producteur.
+- **Il ne dit pas que les segments officiels sont mauvais.** Deux des quatre sont excellents.
+  Il dit qu'il faut **regarder lequel** avant de s'en servir comme référence.
+- **Le contrôle porte sur UN segment.** Un seul same-segment suffit à réfuter « le
+  producteur décale systématiquement », pas à établir qu'il ne décale jamais.
+- **La chaîne a deux étages** (`vc_flatten`, `vc_render_tifxyz`) et le contrôle les teste
+  ensemble. ⓘ Le bucket publie un `<segment>_flattened.obj` : leur chaîne aplatit aussi, donc
+  ce sont deux exécutions de la même forme, pas deux formes différentes.
 
 ## Reproduire
 
 ```bash
-# le volume de surface publié d'un segment officiel de PHerc1447
-cd inference_xpu
-uv run python ../analysis/src/zarr_depth.py \
-  "PHerc1447/segments/20250702235910-auto_grown_20250702235910292/surface-volumes/8.64um-1.2m-116keV-volume-20250521151220.zarr" \
-  --windows 25 --out ../docs/origine_officiel_PHerc1447.json
-
-# le contrôle : le MÊME segment, mesuré des deux façons
-./tools/lancer.sh --fond tools/origine_de_la_pile.sh
+./tools/lancer.sh tools/origine_de_la_pile.sh          # le même segment, deux fois
+cd inference_xpu                                        # les quatre segments publiés
+for k in $(cut -f2 ../docs/volumes_surface_PHerc1447.txt); do
+  uv run python ../analysis/src/zarr_depth.py "$k" --windows 25
+done
 ```

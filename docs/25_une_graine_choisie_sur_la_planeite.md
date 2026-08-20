@@ -290,7 +290,9 @@ fenêtre sur la même pile :
 échoue au critère du **tiers central** plus mal que les nôtres : 2 %, contre 16 et 20 %.
 Un critère que la référence rate plus mal que le cas jugé ne peut pas servir à juger.
 
-⏳ ⚠⚠ **Signalé le 2026-08-20 — et c'est la PRÉMISSE qui est en cause, pas le raisonnement.** [`36`](36_lorigine_de_la_pile.md) mesure que le volume de surface **publié** d'un segment officiel de `PHerc1447` rend **62,5 %** de pics dans le tiers central et un écart de **3,0 µm**, là où notre rendu d'un autre segment officiel du même rouleau rend **2 %** et **237,6 µm**. Si l'origine de nos piles est décalée, la référence ne ratait pas le critère : **on la mesurait depuis le mauvais point**, et un critère utilisable a été retiré pour cette raison. Contrôle en cours ; rien n'est rétabli tant qu'il n'a pas rendu.
+⚠⚠ **Corrigé le 2026-08-20 — le raisonnement tient, la PRÉMISSE non.** [`36`](36_lorigine_de_la_pile.md) a d'abord soupçonné une origine de mesure décalée, puis **réfuté** ce soupçon sur le même segment mesuré des deux façons (14,3 µm d'écart). Ce qui reste est autre chose, et plus simple : **un segment officiel n'est pas une référence.** Sur ce même rouleau, les quatre segments qui publient un volume de surface rendent **18,2 %, 25,0 %, 62,5 % et 68,2 %** de pics dans le tiers central — un facteur 3,7 — et le dernier s'appelle `z_dbg_gen_00320`, un artefact de débogage à 4 fenêtres exploitables sur 50. Deux d'entre eux battent nos traces de trois à quatre fois, ce qui est exactement ce qu'on attend d'une référence.
+
+⏳ Le critère du tiers central mérite donc d'être **reconsidéré** — pas parce que la mesure était fausse, mais parce que la référence choisie n'en était pas une. ⚠ Reconsidéré, pas rétabli : le remettre demande de choisir une référence sur un motif défendable, et « le meilleur des quatre » n'en est pas un.
 
 ⚠ **Cela oblige à corriger `24`.** La trace A y était condamnée par *trois* instruments ;
 celui de la profondeur, dans sa forme « tiers central », s'avère muet sur ce rouleau. Le

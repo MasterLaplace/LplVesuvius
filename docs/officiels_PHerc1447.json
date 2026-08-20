@@ -1,0 +1,58 @@
+{
+  "rouleau": "PHerc1447",
+  "publies": [
+    {
+      "segment": "20250702235910-auto_grown_20250702235910292",
+      "couches": 31,
+      "sondees": 50,
+      "avec_matiere": 24,
+      "tiers_central": 0.625,
+      "au_bord": 0.125,
+      "ecart_a_la_trace": 3.0
+    },
+    {
+      "segment": "20250703025628-auto_grown_20250703025628283",
+      "couches": 31,
+      "sondees": 50,
+      "avec_matiere": 22,
+      "tiers_central": 0.6818181818181818,
+      "au_bord": 0.09090909090909091,
+      "ecart_a_la_trace": 3.0
+    },
+    {
+      "segment": "20250703034159-auto_grown_20250703034159599",
+      "couches": 31,
+      "sondees": 50,
+      "avec_matiere": 22,
+      "tiers_central": 0.18181818181818182,
+      "au_bord": 0.18181818181818182,
+      "ecart_a_la_trace": 10.5
+    },
+    {
+      "segment": "20251105093211-z_dbg_gen_00320",
+      "couches": 31,
+      "sondees": 50,
+      "avec_matiere": 4,
+      "tiers_central": 0.25,
+      "au_bord": 0.25,
+      "ecart_a_la_trace": 11.0
+    }
+  ],
+  "meme_segment": {
+    "segment": "20250702235910-auto_grown_20250702235910292",
+    "couches": 31,
+    "publie": {
+      "couches": 31,
+      "ecart": 3.0,
+      "centre": 0.625,
+      "bord": 0.125
+    },
+    "rendu": {
+      "couches": 31,
+      "ecart": 17.28,
+      "centre": 1.0,
+      "bord": 0.0
+    },
+    "difference_um": 14.280000000000001
+  }
+}
