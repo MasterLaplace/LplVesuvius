@@ -610,6 +610,13 @@ n += 1
 print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
+printf '  %-30s ' "marche sur nappe"
+if uv run python "$ROOT/analysis/src/suivre_nappe.py" --verifier >/tmp/nappe.log 2>&1; then
+  printf '✅ %s\n' "$(grep -c '✅' /tmp/nappe.log) checks"
+else
+  printf '❌ ECHEC\n'; sed 's/^/       /' /tmp/nappe.log | tail -6; FAIL=$((FAIL + 1))
+fi
+
 printf '  %-30s ' "mosaique : assemblage"
 if uv run python "$ROOT/analysis/src/assembler_mosaique.py" --verifier >/tmp/mos.log 2>&1; then
   printf '✅ %s\n' "$(grep -c '✅' /tmp/mos.log) checks"

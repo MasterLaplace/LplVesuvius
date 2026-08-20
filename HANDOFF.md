@@ -105,6 +105,24 @@ volumes reste faisable, mais `36` §5bis a déjà mesuré qu'il y sort une **con
 volume *publié* donne la même — donc la piste A n'est pas courte, elle est **bouchée à son
 extrémité**.
 
+### ✅ Fait dans la foulée — la piste B est construite (pas encore branchée)
+
+⭐⭐⭐ **[`41`](docs/41_marcher_le_long_dune_nappe.md) : `analysis/src/suivre_nappe.py`**,
+24 témoins. Marche le long d'une nappe (tenseur de structure → normale, recentrage
+sous-voxel sur la crête, reprojection de la direction à chaque pas) et écrit un
+`PointCollections` que `--correct` sait relire — format **lu dans la source**, ordre des
+points signifiant, coordonnées en (x, y, z).
+
+⚠⚠ **Témoin négatif mesuré** : « au plus proche », sur deux spires à 4 voxels avec un trou
+de 17, quitte sa nappe de **5,94 voxels** (au-delà de la voisine) là où la marche sur crête
+reste à **0,67**. Facteur 9. Et le chemin naïf reste **connexe et plausible** — rien dans sa
+forme ne le trahit.
+
+⚠ **Ce qui reste avant de brancher** : la marche n'est validée que sur des nappes
+**fabriquées**. La faire tourner sur une vraie prédiction coûte du réseau, pas de la
+conception. Puis `--resume --rewind-gen --correct`, puis le test de convergence de `38`
+comme juge.
+
 ### Les deux pistes qui restent, par coût croissant
 
 | # | quoi | pourquoi maintenant |
