@@ -829,6 +829,41 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     `git commit -m "… \`timeout 3600\` …"` a lancé `timeout` et laissé des trous dans le
     message. Passer par `git commit -F fichier`.
 
+**Ajoutés le 2026-08-20**
+42. ⚠⚠ **Un verdict et une absence de mesure peuvent sortir par le même champ.**
+    `vc_tifxyz_selfcross` rend `clean_of_transverse_self_intersection: true` avec
+    `pairs_tested: 0` dès que son filtre `--maxedge` a jeté tous les quads — ce qui arrive
+    **au réglage par défaut** sur un maillage à pas ≥ 60. Un portail bâti sur
+    `--fail-on-crossing` laisserait alors passer n'importe quelle surface, avec le code de
+    sortie 0 que le script attend. Six scripts d'ici lisaient ce rapport sans regarder
+    `pairs_tested`. Remède : un **seul** lecteur, qui **refuse** au lieu de rendre un zéro
+    assorti d'une réserve (`analysis/src/lire_selfcross.py`, `34`).
+43. ⚠⚠ **Un compte n'est pas comparable entre deux résolutions de la chose qui compte.**
+    Le même maillage, décimé sans que sa géométrie change, passe de **240** croisements à
+    123, 72, 49. « Zéro au pas 40 » vaut donc moins que « zéro au pas 20 », et l'écart est
+    mesuré (`34` §3). La règle générale : avant de comparer deux comptes, vérifier que
+    l'**instrument** avait la même sensibilité des deux côtés.
+44. ⚠⚠ **Une proportion sans son effectif ordonne ce qui n'est pas ordonné.** `16`
+    classait treize rouleaux sur des parts de 4 à 24 %, mesurées sur **15 à 35 fenêtres**.
+    Aucune des 78 paires n'est séparée, et le « 0 % » du témoin est compatible avec 14 %
+    (`33`). Publier une part **sans son intervalle** est ce qui a rendu ce classement
+    crédible pendant deux jours.
+45. ⚠⚠ **Éditer un script pendant qu'il tourne le casse** — payé le 2026-08-20 sur
+    `campagne_tirages.sh`, alors que le piège est écrit dans le `CLAUDE.md` de l'espace de
+    travail. `bash` lit par offset : la campagne a fini son rouleau courant puis est morte
+    sur « syntax error near unexpected token `done` ». Les 48 tirages déjà écrits étaient
+    bons — vérifié, pas supposé, par un **contrôle d'intégrité** ajouté dans
+    `table_tirages.py` : le résumé est une copie, le rapport `selfcross.json` est le
+    record, et un désaccord est imprimé plutôt que résolu en silence.
+46. ⚠⚠ **Une garde qui refuse pour une raison fausse est pire qu'une garde absente.**
+    `campagne_tirages.sh` comparait deux tailles de voxel **comme du texte** et a sauté
+    `PHerc0268` et `PHerc0800` en annonçant « 8.640 µm ≠ 8.64 µm ». Elle avait l'air de
+    protéger la comparabilité des aires ; elle retirait des données.
+47. ⚠ **Une étiquette sur un seul échantillon ne peut pas être fausse.** Mon propre
+    dépouillement a affiché « reproductible » pour un rouleau qui n'avait qu'**un** tirage
+    — l'aire y est trivialement identique à elle-même. Toute statistique de dispersion
+    doit exiger n ≥ 2 et dire « non concluant » sinon.
+
 ## 9. Règles de mesure tenues ici
 
 1. **Aucun seuil absolu** sur une grandeur physique — normaliser, ou être **ordinal**.

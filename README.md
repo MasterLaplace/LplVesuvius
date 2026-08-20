@@ -178,6 +178,8 @@ priorisee. A lire en premier si vous reprenez ce chantier.
 | **[`docs/29_ce_qui_reste.md`](docs/29_ce_qui_reste.md)** | ⭐ **le registre consolide** — 525 enonces replies, sources en `fichier:ligne`. Par ou choisir un lot |
 | **[`docs/30_le_traceur_est_un_tirage.md`](docs/30_le_traceur_est_un_tirage.md)** | ⚠⚠ **13 traces propres sur 14** a parametres identiques — un seul trace n'est pas une mesure |
 | **[`docs/31_roadmap.md`](docs/31_roadmap.md)** | ⭐⭐ **la roadmap** : le Grand Prize est un prix d'**algorithmique de geometrie**, et son critere d'acceptation est une image Docker qu'ils lancent |
+| **[`docs/33_la_carte_nest_pas_resolue.md`](docs/33_la_carte_nest_pas_resolue.md)** | ⚠⚠ le classement des 13 rouleaux de [`16`](docs/16_carte_difficulte_rouleaux_du_prix.md) **ne separe aucune des 78 paires** — et ce qu'il faudrait pour trancher : 50 fenetres |
+| **[`docs/34_un_verdict_qui_ne_mesure_rien.md`](docs/34_un_verdict_qui_ne_mesure_rien.md)** | ⚠⚠ `vc_tifxyz_selfcross` peut declarer une surface **propre en n'ayant teste aucune paire** — et la perte de sensibilite mesuree quand un maillage grossit |
 
 ## Rejouer
 
@@ -252,13 +254,15 @@ python3 analysis/src/poids_growpatch.py --verifier     # la table des poids vien
 python3 analysis/src/artefacts_orphelins.py --verifier # tout artefact a un producteur
 python3 analysis/src/compter_corpus.py                 # les comptes viennent des artefacts
 python3 tracecheck/mutation.py                         # chaque detecteur est PORTEUR
+python3 analysis/src/lire_selfcross.py --verifier       # un verdict qui n'a rien teste est REFUSE
 ```
 
-⚠⚠ **Les quatre derniers ne mesurent rien du papyrus** — ils mesurent le depot. Ils
+⚠⚠ **Les cinq derniers ne mesurent rien du papyrus** — ils mesurent le depot. Ils
 existent parce que chacun a attrape une faute reelle : une table de poids recopiee a la
 main et fausse, six artefacts dont le script etait reste dans un terminal, un compteur
-« par fenetre » migre dans une phrase qui parlait de « segments », et deux batteries qui
-imprimaient `ALL PASS` **en echouant**.
+« par fenetre » migre dans une phrase qui parlait de « segments », deux batteries qui
+imprimaient `ALL PASS` **en echouant**, et un outil officiel qui declare une surface
+`clean` avec `pairs_tested: 0` ([`34`](docs/34_un_verdict_qui_ne_mesure_rien.md)).
 
 ## Etat de la recuperation (2026-08-19)
 

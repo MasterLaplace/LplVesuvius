@@ -62,8 +62,15 @@ else:
   if [ -z "$UM" ]; then echo "   ⚠ taille de voxel illisible dans « $(basename "$VOL") » — rouleau saute"; continue; fi
   # Le desaccord ARRETE le rouleau : tracer a une echelle qui n'est pas celle de la table
   # rendrait des aires incomparables a tout ce que ce depot a deja mesure.
-  if [ "$UM" != "$UM_TABLE" ]; then
-    echo "   ⚠ voxel S3 $UM µm ≠ table $UM_TABLE µm — rouleau saute (aires incomparables)"; continue
+  #
+  # ⚠⚠ La comparaison est NUMERIQUE, pas textuelle. La premiere version comparait les deux
+  # chaines et a saute PHerc0268 et PHerc0800 en annoncant « 8.640 µm ≠ 8.64 µm » -- deux
+  # ecritures du meme nombre. Une garde qui refuse pour une raison fausse est pire qu'une
+  # garde absente : elle retire des donnees en ayant l'air de proteger.
+  if ! python3 -c "
+import sys
+sys.exit(0 if abs(float('$UM') - float('$UM_TABLE')) < 1e-6 else 1)"; then
+    echo "   ⚠ voxel S3 $UM µm ≠ table $UM_TABLE µm — rouleau sauté (aires incomparables)"; continue
   fi
   echo "   graine $X $Y $Z   voxel $UM µm"
 
