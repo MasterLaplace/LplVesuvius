@@ -110,6 +110,14 @@ segment officiel et nos propres traces, **sur le même rouleau, par la même cha
 > **Un facteur d'au moins 9,2 — et le vrai facteur est plus grand**, puisque deux de nos
 > trois valeurs sont des **bornes basses** butant sur le plafond de leur fenêtre.
 
+⚠⚠ **Mesuré depuis, et c'est pire que la borne.** Le même tirage `r2`, rendu dans une
+fenêtre de **deux spires** (81 couches, plafond 345,6 µm), lit **311,0 µm** — non censuré.
+Il en lisait 159,84 à 41 couches. **Toutes les valeurs d'écart de ce dépôt sont donc des
+sous-estimations**, y compris les 94 µm de [`24`](24_premiere_trace_rouleau_du_prix.md) et
+les 146–187 µm de [`37`](37_les_deux_axes_ne_saccordent_pas.md) : leurs fenêtres ne
+pouvaient pas montrer plus. Le facteur réel contre le segment officiel est **≥ 18**, pas
+9,2. Voir [`38`](38_pas_une_spire.md).
+
 ⭐ Cette comparaison-ci ne souffre d'aucun des confonds précédents : même rouleau, même
 taille de voxel, même `vc_flatten`, même `vc_render_tifxyz`, même instrument de dépouillement.
 **Nos traces sont réellement loin de leur feuille**, d'un ordre de grandeur, et aucun réglage

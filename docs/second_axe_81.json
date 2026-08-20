@@ -1,0 +1,25 @@
+{
+  "tirages": 1,
+  "censures": 0,
+  "plafond_um": 345.6,
+  "rouleaux_testables": 0,
+  "accords": {
+    "ecart_um": 0,
+    "au_bord": 0
+  },
+  "detail": [],
+  "lignes": [
+    {
+      "rouleau": "PHerc1447",
+      "repetition": "r2",
+      "transverse": 0,
+      "bascule": true,
+      "ecart_um": 311.04,
+      "au_bord": 0.35,
+      "part_plates": 0.4,
+      "plafond_um": 345.6,
+      "censure": false
+    }
+  ],
+  "orphelins": []
+}

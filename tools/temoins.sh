@@ -542,6 +542,18 @@ cd "$ROOT/experiments" || exit 2
 # conclure que les deux axes s'accordent alors que rien n'a pu etre departage.
 run "second axe : accord"     uv run python "$ROOT/analysis/src/table_second_axe.py" --verifier
 
+# ⚠⚠ Cet instrument existe pour REFUSER. Rapporte a l'ecart inter-spires de son rouleau,
+# chaque ecart mesure devient un nombre de spires -- et les seize premieres mesures
+# donnaient 0,65 a 1,25 spire, motif tres convaincant. Toutes etaient censurees ou prises
+# dans une fenetre plus etroite que 1,4 spire : le motif venait de la fenetre, pas du
+# papyrus. Les deux refus (censure, fenetre trop etroite) sont ce que le temoin verifie.
+run "écart en spires"         uv run python "$ROOT/analysis/src/ecart_en_spires.py" --verifier
+
+# ⚠ La grandeur qui tranche un « rien » de detecteur d'encre est l'ECART-TYPE, pas la
+# mediane : un modele qui ne s'accroche a rien rend une constante, et sa mediane peut
+# tomber n'importe ou. Le temoin le sonde sur deux tableaux de MEME mediane.
+run "encre : σ contre témoin"  uv run python "$ROOT/analysis/src/comparer_encre.py" --verifier
+
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
 sys.path.insert(0, '../analysis/src')
