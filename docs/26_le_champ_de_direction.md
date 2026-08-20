@@ -160,6 +160,25 @@ ce que le paramètre amplifie est **uniquement l'étape finale**, qui à `direct
 entre `weight: 10` et `direction_weight: 100` (3 035 → 249 par cm²). Le champ organise donc
 réellement quelque chose — simplement pas assez pour battre **zéro**.
 
+⚠⚠ **Réserve ajoutée le 2026-08-20, et elle porte précisément sur la phrase ci-dessus.**
+L'audit de [`34`](34_un_verdict_qui_ne_mesure_rien.md) montre que les **cinq** comptes de ce
+tableau ont été mesurés avec des quads **jetés** par le filtre `--maxedge` — de 3 358 à
+**82 000** selon la ligne. Un compte ne porte donc pas sur la même fraction de surface d'une
+ligne à l'autre, et ce tableau les compare.
+
+- Trois re-mesures **filtre désactivé** donnent un ratio serré — `weight: 10` ×2,73,
+  `weight: 100` ×2,87, `direction_weight: 10` ×2,79 — donc **entre ces trois-là la
+  comparaison tient**.
+- ⏳ **`direction_weight: 100` n'est pas tranché** : c'est la ligne au compte publié le plus
+  **bas** et au nombre de quads jetés le plus **haut** (82 000, trois fois les autres). Sa
+  re-mesure est en cours. Tant qu'elle n'a pas rendu, le « facteur 12 » doit être lu comme
+  une **borne**, pas comme une mesure.
+
+⚠ Ce qui n'est **pas** en cause : jeter des quads ne peut que **retirer** des croisements,
+jamais en ajouter. Les comptes publiés sont donc des sous-estimations, et l'énoncé qui porte
+tout le §7 — *tous ces réglages font bien pire que zéro* — en sort **renforcé**, pas
+affaibli. Seule la comparaison **entre lignes** est en suspens.
+
 > ⭐ **`direction_fields` ne peut donc pas être le remède d'une trace posée en travers de
 > l'empilement** : la trajectoire est décidée pendant la croissance, et rien de ce
 > paramètre n'y touche — ni sa présence, ni son orientation, ni son intensité.
