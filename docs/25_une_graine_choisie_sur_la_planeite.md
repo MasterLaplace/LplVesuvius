@@ -290,6 +290,8 @@ fenêtre sur la même pile :
 échoue au critère du **tiers central** plus mal que les nôtres : 2 %, contre 16 et 20 %.
 Un critère que la référence rate plus mal que le cas jugé ne peut pas servir à juger.
 
+⏳ ⚠⚠ **Signalé le 2026-08-20 — et c'est la PRÉMISSE qui est en cause, pas le raisonnement.** [`36`](36_lorigine_de_la_pile.md) mesure que le volume de surface **publié** d'un segment officiel de `PHerc1447` rend **62,5 %** de pics dans le tiers central et un écart de **3,0 µm**, là où notre rendu d'un autre segment officiel du même rouleau rend **2 %** et **237,6 µm**. Si l'origine de nos piles est décalée, la référence ne ratait pas le critère : **on la mesurait depuis le mauvais point**, et un critère utilisable a été retiré pour cette raison. Contrôle en cours ; rien n'est rétabli tant qu'il n'a pas rendu.
+
 ⚠ **Cela oblige à corriger `24`.** La trace A y était condamnée par *trois* instruments ;
 celui de la profondeur, dans sa forme « tiers central », s'avère muet sur ce rouleau. Le
 verdict tient toujours — 240 auto-intersections avant tout rendu, et l'image — mais sur
