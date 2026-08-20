@@ -83,6 +83,16 @@ lisible* ne l'est **pas**. Des lettres reconnaissables ne font pas un texte suiv
 segment entier — cette dernière cause étant **définitive** : un segment de ce type ne
 porte que 4 à 5 lignes, et les glyphes fusionnent au seuil du modèle.
 
+## ⭐ 3bis. Ce que le 2026-08-20 a ouvert
+
+Trois entrées neuves, chacune née d'une mesure de la journée.
+
+| # | quoi | source |
+|---|---|---|
+| **N1** ⏳ | **`PHerc1203` n'a jamais eu de graine cherchée**, sur aucune campagne — il manque à `25`, à `docs/table_graines.json` et donc à `35`. C'est l'un des **trois** rouleaux du prix avec un segment publié, donc l'un des rares où comparer notre trace à la leur | `35` §5 |
+| **N2** ⏳ | **le protocole « sélectionner sur un axe, valider sur l'autre »** n'est toujours pas testé. `35` chiffre le levier de l'échantillonnage ; il ne teste pas la parade à la malédiction du vainqueur | `35` §4 · `31` §4 |
+| **N3** ⏳ | **la dispersion d'aire n'est pas expliquée** : 0,24 % à 35 % selon le rouleau, et les rouleaux stables sont ceux qui plafonnent en générations. Mesure qui trancherait : relever le plafond et rejouer | `35` §3 |
+
 ## ⭐ 4. Publier — et la seule échéance courte du dépôt
 
 | quoi | où | état |
@@ -112,6 +122,10 @@ domaine au moins une fois dans ce dépôt.
 | l'inventaire des treize : **dix** sans segment, pas treize | `docs/etat_rouleaux_prix.txt` | `23` §1 |
 | ⭐ **la trajectoire ne répond qu'à `step_size` et à la prédiction** | trois négatifs mesurés, contrôle positif | `26` |
 | ⭐ **`step_size` a un PLANCHER : ≥ 20** | un pas de 5 rend ~800 croisements/cm² **sur les deux graines** ; au-delà de 20 c'est propre sur deux graines **et** deux tirages ; entre les deux (10, 15) le résultat **se contredit avec lui-même** | `26` §9 |
+| ⚠⚠ **un compte de croisements n'est pas comparable entre deux pas** | le même maillage, décimé sans que sa géométrie change, passe de 240 à 123, 72, 49. « Zéro au pas 40 » vaut donc moins que « zéro au pas 20 » | `34` §3 |
+| ⚠⚠ **un verdict « propre » peut sortir sur ZÉRO paire testée** | au réglage `--maxedge` par défaut, dès que le maillage a un pas ≥ 60. Un portail bâti sur `--fail-on-crossing` laisserait tout passer | `34` §2 |
+| ⚠⚠ **le classement des treize rouleaux n'existe pas** | rho de Spearman **−0,297** entre deux échantillonnages, treize rangs changés ; le témoin passe de 0 % à 4 % | `33` §4bis |
+| ⭐ **le traceur est un tirage sur douze rouleaux** | 4 rouleaux sur 12 où le verdict bascule à paramètres identiques ; 0 reproductible ; et **l'aire ne signale pas** le mauvais tirage | `35` |
 | ⚠ en **zone comprimée l'information n'est pas dans le CT** | 78 % de pics uniques couvrant deux feuilles | `28` §4 · `villa#191` |
 | ⚠ **aucun test géométrique** ne sépare un saut d'une spire d'une courbure, dans le cas serré | écart inter-spires 18–58 vx contre 20 vx de cellule | `28` §4 |
 
@@ -120,9 +134,9 @@ domaine au moins une fois dans ce dépôt.
 | # | quoi | coût | source |
 |---|---|---|---|
 | M1 | rejouer le balayage `step_size` sur la **mauvaise** graine de `24` | ✅ **fait** — 4 pas sur 5 à zéro, et ça a mené à `30` | `26` §9 |
-| **M1bis** ⚠⚠ | **mesurer la distribution des tirages sur d'autres graines et d'autres rouleaux** — 14 tirages ne font pas une distribution, et le taux de 13 % n'a été mesuré que sur une graine | à faire | `30` §5 |
+| **M1bis** | **mesurer la distribution des tirages sur d'autres graines et d'autres rouleaux** | ✅ **fait le 2026-08-20** → [`35`](35_le_tirage_sur_douze_rouleaux.md) : 72 tirages, 12 rouleaux, **4 rouleaux où le verdict bascule**, 0 reproductible, taux 5,6 % IC [1,5–13,6 %]. ⭐ Et **l'aire ne signale pas** le mauvais tirage | `30` §5 |
 | **M1ter** ⭐ | **l'encre est-elle lisible à 9 µm ?** passer le modèle du Grand Prize 2023 sur un rendu de rouleau du prix. ⚠ Le rendu de `24` fait **21 couches**, le modèle en attend **26** : il faut re-rendre | **avant tout le reste** | `31` §10 |
-| M2 | relire les 240 croisements de `24` sous un autre `--maxedge` — le filtre peut **masquer comme fabriquer** | quelques minutes | `28` §2 |
+| M2 | relire les 240 croisements de `24` sous un autre `--maxedge` — le filtre peut **masquer comme fabriquer** | ✅ **fait le 2026-08-20** → [`34`](34_un_verdict_qui_ne_mesure_rien.md) : les 240 survivent au filtre **désactivé**, donc ni masqués ni fabriqués. ⚠⚠ Mais le balayage a trouvé qu'un verdict « propre » peut sortir sur **zéro paire testée**, et que ça arrive **au réglage par défaut** dès que le maillage grossit | `28` §2 |
 | M3 | lire le quatrième article, *EduceLab-Scrolls* (arXiv 2304.02084) | ✅ **fait le 2026-08-19** → [`32`](32_educelab_le_papier_fondateur.md) | `27` Références |
 | **M7** ⭐⭐ | **quantifier « consistent with »** — l'unique contrôle sans vérité terrain d'EduceLab est *nommé et jamais outillé* : interligne par autocorrélation, échelle de caractère par composantes connexes, taux de couverture, épaisseur de trait. Mesurés là où la vérité existe, **transportés** là où elle n'existe pas | à faire | `32` §4.2 |
 | **M8** ⭐ | **le témoin jeté** — chercher dans nos corpus le substrat *connu sans encre* que le pipeline élimine. Chez EduceLab c'est la **feuille de support en papier**, imagée dans la même session, au même voxel, et supprimée au nettoyage manuel | à faire | `32` §4.3 |
