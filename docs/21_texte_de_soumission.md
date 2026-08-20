@@ -269,13 +269,47 @@ fautes en une : le mauvais critère, et une réserve omise que la source porte.
 >   self-intersections, at a rate 21× lower per pair tested than the bad seed). Area is a
 >   proxy for *how far it got*, never a quality score.
 
-⚠⚠ **Et cette affirmation a une PORTÉE, mesurée depuis** :
-[`30`](30_le_traceur_est_un_tirage.md) a rejoué **une autre graine** quatorze fois, et là
-**la croissance elle-même varie** — 64, 78, 79, 80, 81, 84, 86 générations, pour des aires
-de 5,69 à 10,34 cm². *« La croissance est déterministe »* est donc vrai **de cette
-graine-là**, pas du traceur. **À réécrire avant tout envoi** : une soumission qui
-généralise une observation d'une seule graine est exactement ce que ce document reproche
-ailleurs aux autres.
+⚠⚠ **Le §10 ci-dessus est PÉRIMÉ, et sa dernière phrase est fausse.** Il conclut *« the
+surface is not reproducible, the verdict is »*, sur cinq exécutions d'une seule graine.
+[`30`](30_le_traceur_est_un_tirage.md) a d'abord montré qu'une **autre** graine fait varier
+la croissance elle-même (64 à 86 générations, 5,69 à 10,34 cm²), puis
+[`35`](35_le_tirage_sur_douze_rouleaux.md) a mesuré **12 rouleaux, 72 tirages** — et le
+verdict, lui aussi, bascule. Le §10 est donc à **remplacer** par le texte ci-dessous, pas à
+nuancer.
+
+### 10 bis. ⭐⭐ Le remplacement, écrit sur 72 tirages *(2026-08-20)*
+
+> #### 10. The official tracer is a draw, not a function
+>
+> `vc_grow_seg_from_seed` returns a different result on every run. **72 tirages**, twelve
+> prize scrolls, six per scroll, strictly identical parameters and seeds:
+>
+> | | |
+> |---|---:|
+> | scrolls whose six runs return the same area | **0 of 12** |
+> | ⭐ scrolls where the **verdict flips** between runs | **4 sur 12** |
+> | bad runs | **4 / 72 = 5,6 %** (exact 95 % CI: **1,5 % – 13,6 %**) |
+>
+> The four flips, with the worst count each scroll produced: 1615, 428, 607, 1371
+> self-intersections — against zero on the other five runs of the same scroll.
+>
+> ⚠ **This corrects our own earlier claim.** An earlier draft of this section said *« the
+> surface is not reproducible, the verdict is »*, on five runs of one seed. The verdict is
+> not reproducible either; we had simply not repeated on enough scrolls to see it.
+>
+> ⭐⭐ **And the extent does not tell you which run went wrong.** The three scrolls whose six
+> areas agree to within a third of a percent are the ones carrying the worst counts. Ranking
+> a bad run by how far it grew gives a rank excentricity of 0,60 where 0,50 is what "area
+> says nothing" predicts — on four events, that is nothing. The usable conclusion is
+> negative and sufficient: **you cannot discard a bad run by looking at its size. You have to
+> judge it**, which is what a 0.05 s judge is for.
+>
+> ⚠ We do not know **why**. `thread_limit` was ruled out; nothing replaced it. And a clean
+> run is not thereby a *good* run — zero self-intersections is necessary, never sufficient.
+>
+> **Why this matters to anyone comparing methods**: published ablation tables give one line
+> per configuration, with no repetition and no error bar, and the full-unwrapping paper
+> publishes no trace-error rate at all. On this evidence, a single run is not a measurement.
 
 ---
 

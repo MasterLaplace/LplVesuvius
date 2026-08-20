@@ -55,7 +55,13 @@ def discriminante(ecriture: str) -> bool:
     donc soit un séparateur décimal, soit un signe explicite, soit une longueur suffisante.
     """
     e = ecriture.strip()
-    return ("," in e) or ("." in e) or (e[:1] in "+-") or len(e) >= 5
+    # ⚠⚠ Un separateur decimal NE SUFFIT PAS quand le nombre est court. Le 2026-08-20,
+    # « 5,6 » a ete declare trouve dans un document ou il designait la part d'un tout autre
+    # rouleau : dans un texte plein de pourcentages, trois caracteres et une virgule se
+    # rencontrent par accident. Une ecriture doit donc etre longue ASSEZ, separateur ou pas.
+    if len(e) >= 5:
+        return True
+    return (e[:1] in "+-") and len(e) >= 5
 
 
 def fr(x: float, n: int = 3) -> str:
@@ -106,7 +112,10 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     p = racine / "docs" / "table_champ.json"
     if p.exists():
         d = json.loads(p.read_text())
-        ajoute("part rigide Scroll 1", d["part_rigide_mediane"] * 100, 1, p.name)
+        # ⚠ Avec son contexte : « 21,7 » nu est trop court pour etre absent d'un texte.
+        out.append(("part rigide Scroll 1",
+                    [f"{fr(d['part_rigide_mediane']*100,1)} %",
+                     f"{en(d['part_rigide_mediane']*100,1)} %"], p.name))
         out.append(("segments du champ",
                     [f"{d['segments']} segments", f"{d['segments']} published"], p.name))
 
@@ -120,8 +129,14 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     if p.exists():
         d = json.loads(p.read_text())
         ajoute("p du seuil de 50 um", d["p_seuil_propose"], 3, p.name)
-        ajoute("encre au-dessus du seuil", d["encre_au_dessus"], 2, p.name)
-        ajoute("encre au-dessous du seuil", d["encre_au_dessous"], 2, p.name)
+        # ⚠ Les deux moyennes d'encre encadrent le seuil : c'est leur PAIRE qui est le
+        # resultat, et l'ecrire comme une paire la rend verifiable là où chaque moitie,
+        # a quatre caracteres, ne l'etait pas.
+        out.append(("encre de part et d'autre du seuil",
+                    [f"{fr(d['encre_au_dessus'],2)} contre {fr(d['encre_au_dessous'],2)}",
+                     f"{fr(d['encre_au_dessus'],2)} vs {fr(d['encre_au_dessous'],2)}",
+                     f"{en(d['encre_au_dessus'],2)} vs {en(d['encre_au_dessous'],2)}"],
+                   p.name))
 
     p = racine / "docs" / "table_graines.json"
     if p.exists():
@@ -139,6 +154,59 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         out.append(("auto-intersections cumulees des deux criteres",
                     [f"{d['croisements_cumules']['planarite'] + d['croisements_cumules']['voisinage']} partout"],
                     p.name))
+
+    # ⚠ Les chiffres du 2026-08-20. Chacun est ecrit AVEC son contexte : « 72 » ou « 240 »
+    # nus se trouvent dans n'importe quel texte, donc `discriminante()` les rapporterait a
+    # part au lieu de les verifier -- ce qui est le contraire d'un garde-fou.
+    p = racine / "docs" / "table_tirages.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        out.append(("tirages de la campagne",
+                    [f"{d['tirages_total']} tirages", f"{d['tirages_total']} draws"], p.name))
+        out.append(("rouleaux qui basculent",
+                    [f"{len(d['rouleaux_bascule'])} rouleaux sur {d['rouleaux']}",
+                     f"{len(d['rouleaux_bascule'])} of {d['rouleaux']} scrolls",
+                     f"{len(d['rouleaux_bascule'])} sur {d['rouleaux']}"], p.name))
+        # ⚠ Avec leur contexte : « 5,6 » nu a deja ete trouve par accident (cf.
+        # `discriminante`). C'est la forme comptee qui est sans ambiguite.
+        out.append(("taux de mauvais tirages",
+                    [f"{d['mauvais']} / {d['tirages_total']} = {fr(d['taux_mauvais']*100,1)} %",
+                     f"{d['mauvais']}/{d['tirages_total']} = {fr(d['taux_mauvais']*100,1)} %",
+                     f"{d['mauvais']} mauvais tirages sur {d['tirages_total']}"], p.name))
+        out.append(("intervalle du taux",
+                    [f"{fr(d['ic95_bas']*100,1)} % – {fr(d['ic95_haut']*100,1)} %",
+                     f"{fr(d['ic95_bas']*100,1)} % - {fr(d['ic95_haut']*100,1)} %"], p.name))
+
+    p = racine / "docs" / "comparaison_cartes.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        ajoute("rho entre les deux campagnes", d["rho"], 3, p.name, signe=True)
+        out.append(("rangs changes",
+                    [f"{d['rangs_changes']}/{len(d['lignes'])} rouleaux",
+                     f"{d['rangs_changes']} of {len(d['lignes'])} scrolls",
+                     f"{d['rangs_changes']} rouleaux changent"], p.name))
+
+    p = racine / "docs" / "incertitude_carte.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        out.append(("paires separees",
+                    [f"{d['paires_separees']} des {d['paires']} paires",
+                     f"{d['paires_separees']} of the {d['paires']} pairs",
+                     f"{d['paires_separees']} sur {d['paires']}"], p.name))
+        out.append(("intervalle du temoin",
+                    [f"{fr(d['temoin']['ic95'][0]*100,1)} % – "
+                     f"{fr(d['temoin']['ic95'][1]*100,1)} %",
+                     f"jusqu'à {fr(d['temoin']['ic95'][1]*100,1)} %"], p.name))
+
+    p = racine / "docs" / "sensibilite_maillage.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        brut = [l["brut"]["transverse"] for l in sorted(d["lignes"], key=lambda l: l["facteur"])]
+        if len(brut) >= 4:
+            out.append(("perte de sensibilite du detecteur",
+                        [" → ".join(str(x) for x in brut[:4]),
+                         " -> ".join(str(x) for x in brut[:4]),
+                         ", ".join(str(x) for x in brut[:4])], p.name))
 
     p = racine / "docs" / "cout_echelle.json"
     if p.exists():
@@ -195,8 +263,16 @@ def main() -> int:
             print(f"{nom:>32} {ecritures[0]:>16} {source:>28}  ✅ {', '.join(trouve)}")
         else:
             manquants += 1
+            # ⚠⚠ Le chemin d'ERREUR supposait toujours DEUX ecritures et levait un
+            # IndexError sur une entree qui n'en a qu'une -- donc le garde-fou plantait
+            # exactement au moment ou il avait quelque chose a signaler, et n'imprimait
+            # jamais le reste de la table. Trouve le 2026-08-20 en lui ajoutant des
+            # chiffres a ecriture unique.
+            autres = ecritures[1:]
+            suffixe = (f" — accepte aussi {', '.join('« ' + e + ' »' for e in autres)}"
+                       if autres else "")
             print(f"{nom:>32} {ecritures[0]:>16} {source:>28}  ⚠ ABSENT "
-                  f"(ou perime) — accepte aussi « {ecritures[1]} »")
+                  f"(ou perime){suffixe}")
 
     if faibles:
         print(f"\n⚠ {len(faibles)} chiffre(s) NON VERIFIABLES par recherche litterale — "

@@ -121,7 +121,7 @@ rouleau), et **le dépouilleur avait été écrit avant qu'elle rende** —
 | PHerc0211 | 5,0 % | 18,0 % | +13,0 |
 | PHerc0826 | 13,3 % | 22,8 % | +9,5 |
 
-> ⭐⭐ **rho de Spearman = −0,297. Les treize rouleaux changent tous de rang.** Le
+> ⭐⭐ **rho de Spearman = −0,297. 13/13 rouleaux changent de rang.** Le
 > classement ne se reproduit pas — il ne se reproduit même pas *un peu*.
 
 ![le classement avant et apres un echantillonnage trois fois plus dense](images/33_comparaison.png)
