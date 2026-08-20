@@ -53,6 +53,26 @@ feuille à portée.** La surface est posée *en travers* de l'empilement — exa
 montrait déjà l'image de [`24`](24_premiere_trace_rouleau_du_prix.md), des lamelles
 concentriques, le rouleau vu par la tranche. Ce document met un nombre dessus.
 
+## 2 bis. ⭐⭐ Et l'œil est d'accord avec le test
+
+Un verdict qu'on peut vérifier en regardant vaut mieux qu'un verdict qu'il faut croire. Les
+deux surfaces, rendues par la même chaîne sur le même rouleau :
+
+| une feuille — α = +0,00 | des tranches — α = +1,01 |
+|---|---|
+| ![face d une feuille](images/36_papyrus_PHerc1447.png) | ![tranches d un empilement](images/38_en_travers.png) |
+| segment officiel, 25 × 27 mm | notre trace depuis **leur** graine, 49 × 49 mm |
+| **treillis de fibres croisées**, trous, bords déchirés — la *face* d'une feuille | **longues striations parallèles** — les *bords* de dizaines de feuilles empilées |
+
+> ⚠ **Et la seconde est SIX FOIS plus grande.** Une surface plus étendue n'est pas une
+> meilleure surface : c'est plus de rouleau vu par la tranche. L'aire mesure jusqu'où le
+> traceur est allé, jamais s'il est allé au bon endroit — `25` le disait déjà, cette image
+> le montre.
+
+⭐ C'est la validation visuelle du test : là où il dit « converge », l'œil voit une feuille ;
+là où il dit « suit la fenêtre », l'œil voit une coupe. Aucun seuil n'a été réglé pour
+obtenir cet accord.
+
 ## 3. Pourquoi ce test vaut mieux que ce qu'il remplace
 
 | propriété | les instruments précédents | celui-ci |
