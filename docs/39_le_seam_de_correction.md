@@ -1,0 +1,87 @@
+# Le seam de correction — où l'humain se branche, et donc où on le remplace
+
+2026-08-20, soir. `31` §8 pose la question qui vaut le prix :
+
+> *« Qu'est-ce qui remplace l'humain qui corrige le transfert de spire à spire ? »*
+
+Elle a une réponse concrète, et elle était dans l'aide de l'outil depuis le début.
+
+---
+
+## 1. L'API existe, et elle est publique
+
+```
+vc_grow_seg_from_seed
+  --resume arg               Path to a tifxyz surface to resume from
+  --rewind-gen arg           Generation to rewind to
+  --correct arg              JSON file with point-based corrections for resume mode
+  --resume-opt arg           Resume optimization option (skip, local, global)
+  --resume-generations arg   Number of additional generations to grow from current
+```
+
+C'est le *« wrap by wrap copy tool »* que le papier de juin 2026 décrit, et **c'est là que
+ses ~25 heures par spire sont dépensées**. Trois faits lus dans la source
+(`apps/src/vc_grow_seg_from_seed.cpp`, `core/src/GrowPatch.cpp`) :
+
+- `--correct` charge un **`PointCollections`** — le format *point collection* de VC3D, celui
+  que [`31`](31_roadmap.md) §4 nommait déjà comme la bonne sortie pour nos instruments ;
+- une correction est **une liste de points 3D** (plus un ancrage 2D optionnel dans la
+  grille), vers lesquels le traceur tire la surface pendant qu'il la refait pousser ;
+- ⚠ `--correct` **exige** `--resume` : on ne corrige pas une trace, on la **re-pousse** en
+  lui donnant des points de passage.
+
+⚠ Et un détail qui dit la nature de l'outil : dès qu'il y a des corrections, la surface est
+rechargée avec `SURF_LOAD_IGNORE_MASK`. Le masque d'une trace corrigée est donc jeté — ce
+qui n'a de sens que si l'on considère qu'il porte des décisions qu'on est en train de
+révoquer.
+
+## 2. ⭐⭐ Ce que ça change pour nous
+
+La chaîne complète devient nommable, et chaque maillon existe déjà **sauf un** :
+
+| étage | ce qu'on a |
+|---|---|
+| tracer | ✅ `vc_grow_seg_from_seed` |
+| **juger** | ✅ [`38`](38_ce_qui_bouge_avec_la_fenetre.md) — sans seuil, sans vérité terrain |
+| **dire où la surface aurait dû passer** | ❌ **c'est le trou** |
+| appliquer | ✅ `--resume --rewind-gen --correct` |
+| revérifier | ✅ le même test de convergence |
+
+⭐ **Le trou est étroit et bien défini** : produire, pour une trace donnée, une liste de
+points 3D par lesquels elle aurait dû passer. Ce n'est plus « corriger une trace » — c'est
+« écrire un fichier de points ».
+
+## 3. ⚠⚠ Et pourquoi ce n'est pas fait ce soir
+
+L'instrument de profondeur sait dire *où est la matière le long de la normale* — c'est
+exactement la forme d'un point de correction. Mais sur nos traces il ne trouve **rien** :
+`part_plates = 1,000`, c'est-à-dire **aucune structure de profondeur dans aucune fenêtre**,
+et dans les deux sens de normale.
+
+> Une surface couchée dans le plan des spires n'a pas de feuille « au-dessus » ni
+> « en-dessous » : sa normale reste dans la même matière. **Il n'y a rien vers quoi tirer.**
+
+⭐ La sortie possible est donc de **corriger depuis la prédiction et non depuis le volume** :
+`analysis/src/sonder_point.py` mesure qu'au point de départ la prédiction publiée a une
+planarité de **0,993** — elle sait parfaitement où sont les nappes, là où le volume brut ne
+le dit qu'à qui est déjà proche. C'est le prochain lot, et c'est la première fois de la
+journée qu'un lot est un **constructeur** et non un diagnostic.
+
+## 4. ⚠ Ce que ce document ne dit pas
+
+- **Il n'a rien fait tourner.** Aucune correction n'a été écrite ni appliquée ; ce document
+  établit *que le seam existe et quelle forme il prend*, pas qu'il marche pour nous.
+- **Il ne dit pas que les segments officiels sont hand-corrigés.** C'est plausible — l'API
+  existe, le papier décrit 25 h par spire — mais leur métadonnée ne l'enregistre pas, et
+  supposer une provenance est exactement ce que [`36`](36_lorigine_de_la_pile.md) a payé.
+- ⚠ **`--rewind-gen` demande de choisir une génération**, donc de savoir *à partir d'où* la
+  trace a divergé. Notre test de convergence rend un verdict sur une trace entière, pas une
+  génération. C'est une deuxième pièce manquante, plus petite que la première.
+
+## Reproduire
+
+```bash
+vc_grow_seg_from_seed --help          # les cinq options de reprise
+grep -n "corrections" repos/villa/volume-cartographer/apps/src/vc_grow_seg_from_seed.cpp
+sed -n '560,600p' repos/villa/volume-cartographer/core/src/GrowPatch.cpp   # PointCorrection
+```
