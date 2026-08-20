@@ -554,6 +554,13 @@ run "écart en spires"         uv run python "$ROOT/analysis/src/ecart_en_spires
 # tomber n'importe ou. Le temoin le sonde sur deux tableaux de MEME mediane.
 run "encre : σ contre témoin"  uv run python "$ROOT/analysis/src/comparer_encre.py" --verifier
 
+# ⭐⭐ Le seul juge de trace de ce depot qui n'ait NI seuil, NI verite terrain, NI echelle :
+# on rend la meme surface dans des fenetres de plus en plus profondes et on regarde si la
+# distance mesuree bouge. Ses TROIS REFUS sont ce que le temoin verifie -- une seule
+# fenetre, deux fenetres trop proches, un ecart nul -- parce que sans eux il rendrait un
+# verdict sur rien, et qu'un test incapable d'echouer est ce que ce depot traque.
+run "convergence de la trace"  uv run python "$ROOT/analysis/src/test_convergence.py" --verifier
+
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
 sys.path.insert(0, '../analysis/src')

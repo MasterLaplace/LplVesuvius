@@ -1,0 +1,48 @@
+{
+  "series": [
+    {
+      "verdict": "converge",
+      "sens": "la distance ne bouge pas quand la fenêtre s'élargit — la matière est là, tout près",
+      "serie": [
+        [
+          31,
+          17.28
+        ],
+        [
+          81,
+          17.3
+        ]
+      ],
+      "croissance": 1.0011574074074074,
+      "elargissement": 2.6129032258064515,
+      "alpha": 0.0012043560159756108,
+      "nom": "segment officiel PHerc1447 (bonne surface)"
+    },
+    {
+      "verdict": "suit la fenêtre",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement",
+      "serie": [
+        [
+          21,
+          86.4
+        ],
+        [
+          41,
+          159.84
+        ],
+        [
+          81,
+          311.04
+        ],
+        [
+          161,
+          682.56
+        ]
+      ],
+      "croissance": 7.899999999999999,
+      "elargissement": 7.666666666666667,
+      "alpha": 1.0147189838599286,
+      "nom": "notre trace PHerc1447 r2"
+    }
+  ]
+}
