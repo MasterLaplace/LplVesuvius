@@ -77,7 +77,9 @@ Deux conséquences, opposées :
   ne repose donc pas sur la statistique saturée.
 
 ⚠⚠ **Et la censure est elle-même un résultat** : sur ces seize rendus, le pic de matière est
-hors d'une fenêtre de ±187 µm pour plus de la moitié. `12` posait un seuil de lisibilité à
+hors d'une fenêtre de ±187 µm pour plus de la moitié.
+
+⚠⚠ **Recadré le 2026-08-20 par [`38`](38_ce_qui_bouge_avec_la_fenetre.md).** Toute distance mesurée sur une de NOS traces est sans objet : le test de convergence montre que la mesure **suit la fenêtre de rendu** (α = +1,01) au lieu de suivre le papyrus — il n'y a aucune feuille à portée, même à quatre spires. Ce ne sont donc pas des sous-estimations, ce sont des mesures d'une grandeur qui n'existe pas là. ⭐ Elles restent valides pour une surface qui **converge**, comme le segment officiel (α = +0,00). `12` posait un seuil de lisibilité à
 **~50 µm** ; on est trois à quatre fois au-dessus, sur des traces propres comme sur des
 mauvaises. Ça a ouvert une question plus lourde que celle-ci —
 [`36`](36_lorigine_de_la_pile.md).

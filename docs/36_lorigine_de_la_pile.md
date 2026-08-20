@@ -110,6 +110,8 @@ segment officiel et nos propres traces, **sur le même rouleau, par la même cha
 > **Un facteur d'au moins 9,2 — et le vrai facteur est plus grand**, puisque deux de nos
 > trois valeurs sont des **bornes basses** butant sur le plafond de leur fenêtre.
 
+⚠⚠ **Recadré le 2026-08-20 par [`38`](38_ce_qui_bouge_avec_la_fenetre.md).** Toute distance mesurée sur une de NOS traces est sans objet : le test de convergence montre que la mesure **suit la fenêtre de rendu** (α = +1,01) au lieu de suivre le papyrus — il n'y a aucune feuille à portée, même à quatre spires. Ce ne sont donc pas des sous-estimations, ce sont des mesures d'une grandeur qui n'existe pas là. ⭐ Elles restent valides pour une surface qui **converge**, comme le segment officiel (α = +0,00).
+
 ⚠⚠ **Mesuré depuis, et c'est pire que la borne.** Le même tirage `r2`, rendu dans une
 fenêtre de **deux spires** (81 couches, plafond 345,6 µm), lit **311,0 µm** — non censuré.
 Il en lisait 159,84 à 41 couches. **Toutes les valeurs d'écart de ce dépôt sont donc des

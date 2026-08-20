@@ -480,6 +480,8 @@ qualité. Ça ne s'observe pas sur Scroll 1, donc c'est une propriété de ce co
 
 ---
 
+⚠⚠ **Portée ajoutée le 2026-08-20** : cet instrument rend une **distance** seulement quand la surface a une feuille à portée. Sur une surface posée en travers de l'empilement, il n'y a aucun pic à trouver, et la valeur rendue suit la **fenêtre de rendu** au lieu du papyrus — mesuré, α = +1,01 contre +0,00 pour un segment officiel ([`38`](38_ce_qui_bouge_avec_la_fenetre.md)). Le seuil de ~50 µm de ce document ne s'applique donc qu'aux surfaces dont la mesure **converge**, et la convergence se teste en rendant deux fois.
+
 ## 13. ✅ Le point de référence n'est pas une hypothèse — il est confirmé par la donnée
 
 Tout l'instrument se rapporte à **la couche tracée**, supposée au milieu de la pile
