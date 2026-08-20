@@ -536,6 +536,12 @@ cd "$ROOT" || exit 2
 run "lancer : gel d'un script"  "$ROOT/tools/lancer.sh" --verifier
 cd "$ROOT/experiments" || exit 2
 
+# ⚠⚠ Le controle qui compte dans ce temoin est qu'un EX-AEQUO n'est pas un accord : si le
+# mauvais tirage et le meilleur propre butent tous deux sur le plafond de la fenetre
+# rendue, ils sont egaux par CENSURE et non par mesure. Les compter comme un accord ferait
+# conclure que les deux axes s'accordent alors que rien n'a pu etre departage.
+run "second axe : accord"     uv run python "$ROOT/analysis/src/table_second_axe.py" --verifier
+
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
 sys.path.insert(0, '../analysis/src')

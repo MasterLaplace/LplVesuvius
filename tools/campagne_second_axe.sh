@@ -72,12 +72,15 @@ for T in $TIRAGES; do
       --voxel-um "${UM_DE[$R]}" --out "$OUT" ) > "$W/profil.log" 2>&1 \
     || { echo "== $R/$I : depth_profile a échoué"; continue; }
   FIN=$(date +%s)
+  # ⚠ `depth_profile.py --out` ecrit une LISTE (une entree par repertoire de couches), pas
+  # un dictionnaire. La premiere version annotait `d['rouleau']` et levait un TypeError sur
+  # chaque tirage -- la mesure etait ecrite, l'etiquette perdue. On enveloppe.
   python3 -c "
 import json
 d = json.load(open('$OUT'))
-d['rouleau'] = '$R'; d['repetition'] = '$I'; d['secondes'] = $FIN - $DEBUT
-d['couches'] = $COUCHES
-json.dump(d, open('$OUT','w'), indent=2)
+profils = d if isinstance(d, list) else [d]
+json.dump({'rouleau': '$R', 'repetition': '$I', 'secondes': $FIN - $DEBUT,
+           'couches': $COUCHES, 'profils': profils}, open('$OUT','w'), indent=2)
 print(f\"== $R/$I  {$FIN - $DEBUT} s\")"
   rm -rf "$W/cache"
 done
