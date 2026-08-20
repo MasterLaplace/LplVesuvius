@@ -95,10 +95,29 @@ est pas un.
   plus de la comparaison intra-producteur qui était déjà à l'abri.
 - `12` §13 : intact, et c'est même lui qui avait raison — sa conclusion transporte.
 
-⚠ Il reste vrai que les seize rendus de `37` lisent des écarts de **146 à 187 µm**, contre
-3 à 11 µm pour les segments officiels publiés. Ce n'est donc pas un artefact de mesure :
-**nos traces sont réellement loin de leur feuille**, d'un ordre de grandeur, et c'est le
-fait le plus dur de la journée pour la suite.
+### ⚠⚠ Et la comparaison contrôlée, qui est le fait le plus dur de la journée
+
+Le contrôle a produit sans le chercher la seule comparaison **appariée** disponible : un bon
+segment officiel et nos propres traces, **sur le même rouleau, par la même chaîne**.
+
+| surface — `PHerc1447`, notre chaîne | écart médian |
+|---|---:|
+| segment officiel `20250702235910` | **17,28 µm** *(plafond 129,6 — non censuré)* |
+| notre tirage `r2` | **159,84 µm** |
+| notre tirage `r1` | **≥ 172,80 µm** ⚠ *au plafond* |
+| notre tirage `r4` | **≥ 172,80 µm** ⚠ *au plafond* |
+
+> **Un facteur d'au moins 9,2 — et le vrai facteur est plus grand**, puisque deux de nos
+> trois valeurs sont des **bornes basses** butant sur le plafond de leur fenêtre.
+
+⭐ Cette comparaison-ci ne souffre d'aucun des confonds précédents : même rouleau, même
+taille de voxel, même `vc_flatten`, même `vc_render_tifxyz`, même instrument de dépouillement.
+**Nos traces sont réellement loin de leur feuille**, d'un ordre de grandeur, et aucun réglage
+de mesure ne l'explique — l'origine vient d'être vérifiée juste au-dessus.
+
+⚠ C'est cohérent avec ce que `09` et `12` avaient trouvé sans pouvoir le nommer : rien n'est
+lisible sur nos rendus. Un détecteur d'encre entraîné sur des surfaces posées **sur** la
+feuille n'a aucune raison de rendre quoi que ce soit sur une surface qui en est à 170 µm.
 
 ## 6. ⚠ Ce que ce document ne dit pas
 
