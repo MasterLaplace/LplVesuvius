@@ -66,6 +66,13 @@ def lignes_de(fichiers: list[Path], racine: Path) -> list[dict]:
                 # ⚠ Le plafond vaut-il presque une spire ? Si oui, meme une valeur NON
                 # censuree est suspecte, parce que la fenetre ne pouvait pas montrer plus.
                 "plafond_en_spires": l["plafond_um"] / sp,
+                # ⚠⚠ La censure stricte (ecart == plafond) ne suffit pas. Une valeur a 90 %
+                # de la portee de sa fenetre n'est pas tronquee, mais elle est SUSPECTE :
+                # si la vraie matiere est plus loin, le pic mesure n'est que le plus fort
+                # de ce que la fenetre contenait. Mesure le 2026-08-20 : le meme tirage lit
+                # 160 µm a 41 couches et 311 a 81 -- l'ecart a DOUBLE avec la fenetre. Une
+                # mesure qui suit son propre plafond n'a pas converge.
+                "part_du_plafond": (l["ecart_um"] / l["plafond_um"]) if l["plafond_um"] else 1.0,
             })
     return out
 
@@ -97,13 +104,16 @@ def main() -> int:
             m = "  ⚠ censuré"
         elif l["plafond_en_spires"] < 1.4:
             m = "  ⚠ fenêtre < 1,4 spire"
+        elif l["part_du_plafond"] > 0.8:
+            m = f"  ⚠ {l['part_du_plafond']:.0%} du plafond — non convergé"
         print(f"  {l['rouleau']:<12} {l['repetition']:>5} {l['ecart_um']:>9.1f} "
               f"{l['espacement_um']:>9.1f} {l['spires']:>9.2f} "
               f"{l['plafond_en_spires']:>8.2f}s{m}")
 
-    utiles = [l for l in lignes if not l["censure"] and l["plafond_en_spires"] >= 1.4]
-    print(f"\n  lignes utilisables (non censurées ET fenêtre ≥ 1,4 spire) : "
-          f"{len(utiles)}/{len(lignes)}")
+    utiles = [l for l in lignes if not l["censure"] and l["plafond_en_spires"] >= 1.4
+              and l["part_du_plafond"] <= 0.8]
+    print(f"\n  lignes utilisables (non censurées, fenêtre ≥ 1,4 spire, écart ≤ 80 % du "
+          f"plafond) : {len(utiles)}/{len(lignes)}")
     if utiles:
         v = [l["spires"] for l in utiles]
         print(f"  écart en spires : {min(v):.2f} à {max(v):.2f}, médiane {statistics.median(v):.2f}")
@@ -160,20 +170,37 @@ def verifier() -> int:
             # deux spires, fenetre large : utilisable, et PAS « une spire »
             {"rouleau": "R", "repetition": "r4", "ecart_um": 200.0, "censure": False,
              "plafond_um": 300.0},
+            # ⭐ non censuree, fenetre large, mais a 90 % de sa portee : NON CONVERGEE
+            {"rouleau": "R", "repetition": "r5", "ecart_um": 270.0, "censure": False,
+             "plafond_um": 300.0},
         ]}))
         lignes = lignes_de([f], racine)
 
     par = {l["repetition"]: l for l in lignes}
-    v("les quatre lignes sont lues", len(lignes) == 4, str(len(lignes)))
+    v("les cinq lignes sont lues", len(lignes) == 5, str(len(lignes)))
     v("100 µm sur une spire de 100 µm = 1,00", abs(par["r1"]["spires"] - 1.0) < 1e-9)
     v("200 µm = 2,00 spires", abs(par["r4"]["spires"] - 2.0) < 1e-9)
     v("le plafond est converti en spires",
       abs(par["r1"]["plafond_en_spires"] - 3.0) < 1e-9, str(par["r1"]["plafond_en_spires"]))
     # ⭐ Les deux refus : ce sont eux qui empechent de lire un plafond comme un resultat.
-    utiles = [l for l in lignes if not l["censure"] and l["plafond_en_spires"] >= 1.4]
+    utiles = [l for l in lignes if not l["censure"] and l["plafond_en_spires"] >= 1.4
+              and l["part_du_plafond"] <= 0.8]
+    # ⚠⚠ Le refus de non-convergence SUBSUME celui de censure : une valeur censuree vaut
+    # son plafond, donc 100 % de sa portee. Les deux ne sont pas independants, et une sonde
+    # qui retirerait `censure` du filtre laisserait le temoin VERT -- constate le
+    # 2026-08-20. On asserte donc la subsomption au lieu de pretendre les distinguer, et on
+    # garde les deux tests parce que le message « censuré » est plus lisible que « 100 % ».
     v("une ligne censurée est écartée", "r2" not in {l["repetition"] for l in utiles})
+    v("toute ligne censurée vaut 100 % de son plafond",
+      all(abs(l["part_du_plafond"] - 1.0) < 1e-9 for l in lignes if l["censure"]),
+      str([l["part_du_plafond"] for l in lignes if l["censure"]]))
     v("une fenêtre < 1,4 spire est écartée", "r3" not in {l["repetition"] for l in utiles})
-    v("les deux lignes larges restent",
+    # ⭐ Le troisieme refus : une mesure a 90 % de sa portee suit peut-etre son plafond.
+    v("une mesure à 90 % du plafond est écartée",
+      "r5" not in {l["repetition"] for l in utiles})
+    v("... et elle est bien détectée comme telle",
+      abs(par["r5"]["part_du_plafond"] - 0.9) < 1e-9, str(par["r5"]["part_du_plafond"]))
+    v("les deux lignes franches restent",
       {l["repetition"] for l in utiles} == {"r1", "r4"},
       str(sorted(l["repetition"] for l in utiles)))
     v("un rouleau sans espacement mesuré est ignoré, pas deviné",

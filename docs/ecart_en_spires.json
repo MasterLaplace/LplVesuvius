@@ -1,0 +1,39 @@
+{
+  "lignes": [
+    {
+      "source": "second_axe_81.json",
+      "rouleau": "PHerc0257",
+      "repetition": "r6",
+      "ecart_um": 351.07500000000005,
+      "espacement_um": 168.516,
+      "spires": 2.083333333333334,
+      "censure": false,
+      "plafond_um": 374.48,
+      "plafond_en_spires": 2.2222222222222223
+    },
+    {
+      "source": "second_axe_81.json",
+      "rouleau": "PHerc1447",
+      "repetition": "r2",
+      "ecart_um": 311.04,
+      "espacement_um": 172.8,
+      "spires": 1.8,
+      "censure": false,
+      "plafond_um": 345.6,
+      "plafond_en_spires": 2.0
+    },
+    {
+      "source": "second_axe_81.json",
+      "rouleau": "PHerc1447",
+      "repetition": "r4",
+      "ecart_um": 311.04,
+      "espacement_um": 172.8,
+      "spires": 1.8,
+      "censure": false,
+      "plafond_um": 345.6,
+      "plafond_en_spires": 2.0
+    }
+  ],
+  "utilisables": 3,
+  "total": 3
+}

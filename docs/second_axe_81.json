@@ -1,14 +1,41 @@
 {
-  "tirages": 1,
+  "tirages": 3,
   "censures": 0,
-  "plafond_um": 345.6,
-  "rouleaux_testables": 0,
+  "plafond_um": 374.48,
+  "rouleaux_testables": 1,
   "accords": {
     "ecart_um": 0,
-    "au_bord": 0
+    "au_bord": 1
   },
-  "detail": [],
+  "detail": [
+    {
+      "rouleau": "PHerc1447",
+      "ecart_um": {
+        "mauvais": 311.04,
+        "propre_max": 311.04,
+        "accord": false,
+        "ex_aequo": true
+      },
+      "au_bord": {
+        "mauvais": 0.4230769230769231,
+        "propre_max": 0.35,
+        "accord": true,
+        "ex_aequo": false
+      }
+    }
+  ],
   "lignes": [
+    {
+      "rouleau": "PHerc0257",
+      "repetition": "r6",
+      "transverse": 428,
+      "bascule": true,
+      "ecart_um": 351.07500000000005,
+      "au_bord": 0.375,
+      "part_plates": 0.5520833333333333,
+      "plafond_um": 374.48,
+      "censure": false
+    },
     {
       "rouleau": "PHerc1447",
       "repetition": "r2",
@@ -17,6 +44,17 @@
       "ecart_um": 311.04,
       "au_bord": 0.35,
       "part_plates": 0.4,
+      "plafond_um": 345.6,
+      "censure": false
+    },
+    {
+      "rouleau": "PHerc1447",
+      "repetition": "r4",
+      "transverse": 1371,
+      "bascule": true,
+      "ecart_um": 311.04,
+      "au_bord": 0.4230769230769231,
+      "part_plates": 0.13461538461538458,
       "plafond_um": 345.6,
       "censure": false
     }
