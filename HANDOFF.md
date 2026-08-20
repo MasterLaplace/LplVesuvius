@@ -898,6 +898,31 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     avant de lancer ; corriger `campagne_second_axe.sh` **pendant qu'elle tournait** n'a rien
     cassé, là où la même chose avait tué deux campagnes le matin.
 
+**Ajoutés le 2026-08-20 (soir) — et le premier est la leçon du jour**
+55. ⭐⭐⭐ **Quand trois statistiques différentes dépendent toutes du réglage, la dépendance
+    EST le signal.** En une après-midi, trois hypothèses sont tombées pour la même raison :
+    l'écart à la trace suivait la fenêtre de rendu, l'écart *en spires* aussi, et la part de
+    fenêtres plates aussi. La quatrième tentative n'a pas cherché une meilleure statistique —
+    elle a **mesuré la dépendance** : une surface qui suit sa feuille garde sa distance quand
+    la fenêtre triple (α = +0,00), la nôtre la suit (α = +1,01). ⭐ Le meilleur instrument du
+    dépôt est sorti de l'échec des trois précédents, et il n'a ni seuil, ni vérité terrain,
+    ni échelle. **Avant de chercher une statistique de plus, regarder ce que les échecs ont
+    en commun.**
+56. ⚠⚠ **Une valeur non censurée peut quand même suivre son plafond.** Le refus « écart ==
+    plafond » ne suffisait pas : des valeurs à **90–94 %** de leur portée paraissaient
+    mesurées et ne l'étaient pas. La règle générale : une mesure bornée par un réglage doit
+    être écartée bien avant sa borne, et le seuil (80 %) doit être écrit dans l'instrument,
+    pas dans la tête de qui le lit.
+57. ⚠ **Deux refus peuvent se subsumer sans qu'on le voie.** Le refus de non-convergence
+    couvre entièrement celui de censure — une valeur censurée vaut 100 % de sa portée — donc
+    retirer la censure du filtre laissait le témoin **vert**. Trouvé par sonde, pas par
+    relecture. Le remède n'est pas de choisir : c'est d'**asserter la subsomption**, et de
+    garder les deux messages parce que « censuré » se lit mieux que « 100 % ».
+58. ⚠ **Une métadonnée publiée peut porter la recette entière.** Le `meta.json` d'un segment
+    officiel est dépouillé, mais `mesh/intermediate/tifxyz_original/meta.json` porte **la
+    graine, le mode, les paramètres et le nombre de générations**. Regarder les
+    intermédiaires avant de conclure qu'une provenance n'est pas publiée.
+
 ## 9. Règles de mesure tenues ici
 
 1. **Aucun seuil absolu** sur une grandeur physique — normaliser, ou être **ordinal**.
