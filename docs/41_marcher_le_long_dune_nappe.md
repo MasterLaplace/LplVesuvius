@@ -155,6 +155,54 @@ porte une structure qu'elle ne porte pas.
    deux axes de plus grande étendue — et la tranche est prise à la médiane du chemin sur le
    troisième.
 
+## 6ter. ⚠⚠ CORRECTION — le masque n'est pas le problème, le POIDS l'est
+
+Écrit une heure plus tard, en relisant `GrowPatch.cpp` pour le format des corrections.
+**Mon explication ci-dessus est fausse telle qu'elle est formulée**, et il faut le dire
+plutôt que la laisser.
+
+Le traceur **calcule bien un champ de distance** à partir du masque, et même un champ
+**signé** : `get_or_compute_sdt_chunk` écrit `binaire ? -edt_interieur : edt_exterieur`,
+donc à l'intérieur de la matière la valeur est négative et l'axe médian est le **minimum**
+du champ. C'est exactement la crête que je reconstruis, au signe près. Le remède que je
+présentais comme manquant est **dans le code depuis toujours**.
+
+⭐⭐ Ce qui manque n'est pas le champ, c'est **son poids**. Les douze familles de résidus ont
+des poids par défaut (`GrowPatch.cpp:1264`) :
+
+```
+SNAP 0,1   NORMAL 10   DIST 1   STRAIGHT 0,2   DIRECTION 1   SDIR 1   CORRECTION 1
+NORMAL3DLINE 0   REFERENCE_RAY 0   SURFACE_SDT 0   SPACELINE 0   PATCH_NORMAL 0
+```
+
+Et trois verrous, lus dans la source, décident lesquels s'appliquent réellement :
+
+| terme | ce qu'il exige | dans nos runs de base |
+|---|---|---|
+| `NORMAL`, `SNAP` | une **grille de normales** (`normal_grid_path`) — `GrowPatch.cpp:2050` sort immédiatement sans elle | **absente** |
+| `DIRECTION` | des `direction_fields` | **absents** |
+| `SURFACE_SDT` | `sdt_weight` > 0 — le résidu n'est même pas créé sinon (`GrowPatch.cpp:1789`) | **poids 0 par défaut** |
+
+⚠⚠ **Il ne reste alors que `DIST` et `STRAIGHT`**, et ce n'est pas une déduction : la
+boucle de croissance les nomme, `local_optimization(… LOSS_DIST | LOSS_STRAIGHT |
+LOSS_NORMALSNAP)`, et `NORMALSNAP` est justement celui qui a besoin de la grille. Or `DIST`
+maintient les points à distance fixe et `STRAIGHT` les maintient alignés : **une surface
+optimisée pour ces deux-là seuls est une grille plate et régulière**. Posée dans un rouleau,
+une grille plate est une **coupe radiale**.
+
+⭐ Voilà pourquoi `essai_ng2` — le seul essai poussé **avec** une grille de normales — est
+aussi le moins radial des essais mesurés (α = +0,65 contre +0,99 et +1,01).
+
+⚠ **Deux leviers n'ont JAMAIS été essayés dans ce dépôt**, vérifié sur les 17 fichiers
+`seed.json` de `data/trace/PHerc0358/essai_*` :
+1. **`sdt_weight`** — le terme de distance à la surface, jamais réglé, donc jamais actif ;
+2. **les fibres horizontales ET verticales ensemble** — `normal` seul, `horizontal` seul et
+   `vertical` seul ont été testés, jamais la **paire**, alors que c'est la paire qui définit
+   les axes u, v de la feuille.
+
+C'est ce que mesure `tools/leviers_de_perte.sh` (conception appariée : même graine, même
+volume, même nombre de générations, une seule clé change à la fois).
+
 ## 6bis. ⚠⚠ Une panne d'installation qui avait pris la forme d'un fait sur le rouleau
 
 Avant d'arriver là, j'ai mesuré — et j'allais écrire — que **la graine n'était pas couverte

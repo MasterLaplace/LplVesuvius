@@ -118,23 +118,41 @@ de 17, quitte sa nappe de **5,94 voxels** (au-delà de la voisine) là où la ma
 reste à **0,67**. Facteur 9. Et le chemin naïf reste **connexe et plausible** — rien dans sa
 forme ne le trahit.
 
-⭐⭐⭐ **ET LA MARCHE SUR LA VRAIE PRÉDICTION A TROUVÉ, PEUT-ÊTRE, LA CAUSE DE TOUT.** La
-prédiction publiée de `PHerc1447` s'appelle `…-th0.2.zarr` et porte **exactement deux
-valeurs**, 0 et 255 : c'est un **masque seuillé**, pas une probabilité. Un masque n'a
-aucun gradient à l'intérieur de la matière — il a un plateau. Donc **il n'y a rien à
-suivre**, et une trace poussée là-dessus n'a aucune raison de se coucher sur une feuille
-plutôt qu'en travers. C'est exactement l'état que [`38`](docs/38_ce_qui_bouge_avec_la_fenetre.md)
-constate sans l'expliquer.
+⭐⭐⭐ **LA CAUSE CANDIDATE, LUE DANS LA SOURCE DU TRACEUR** (et elle CORRIGE une première
+version de moi : j'avais accusé le masque binaire, à tort — le traceur en calcule
+lui-même un champ de distance **signé**, `get_or_compute_sdt_chunk`).
 
-Le remède est la **transformée de distance** : elle rend à chaque nappe son axe médian,
-donc une crête. C'est ce que désigne le « cache EDT » que le pipeline officiel utilise et
-que le bucket ne publie pas. Mesuré à bloc et départ identiques : 106 pas / distance au
-bord médiane **1,34 vx** sur le masque, contre 138 pas / **1,74 vx** sur la distance.
+`vc_grow_seg_from_seed` est un moindres carrés Ceres à **douze familles de résidus**, aux
+poids par défaut `SNAP 0,1 · NORMAL 10 · DIST 1 · STRAIGHT 0,2 · DIRECTION 1 · SDIR 1 ·
+CORRECTION 1`, et **`SURFACE_SDT 0`, `SPACELINE 0`, `REFERENCE_RAY 0`, `PATCH_NORMAL 0`**.
+Trois verrous décident lesquels s'appliquent :
 
-⚠⚠ **HYPOTHÈSE, PAS CONCLUSION** : que le masque binaire soit *la* cause de nos coupes
-radiales n'est pas démontré — il faudrait relancer `vc_grow_seg_from_seed` sur un volume
-EDT et voir la convergence changer. C'est le contrôle qui manque, et c'est le prochain
-geste.
+| terme | exige | nos runs de base |
+|---|---|---|
+| `NORMAL`, `SNAP` | `normal_grid_path` — `GrowPatch.cpp:2050` sort sans elle | **absent** |
+| `DIRECTION` | `direction_fields` | **absents** |
+| `SURFACE_SDT` | `sdt_weight` > 0 (`GrowPatch.cpp:1789`) | **0 par défaut** |
+
+⚠⚠ **Il ne reste que `DIST` et `STRAIGHT`** — la boucle de croissance les nomme
+explicitement (`local_optimization(… LOSS_DIST | LOSS_STRAIGHT | LOSS_NORMALSNAP)`, et
+`NORMALSNAP` est celui qui a besoin de la grille). Points équidistants et alignés = une
+**grille plate**. Une grille plate posée dans un rouleau **est** une coupe radiale.
+⭐ Cohérent avec la mesure : `essai_ng2`, seul essai poussé avec une grille de normales, est
+le moins radial (α = +0,65 contre +0,99 et +1,01).
+
+⚠ **Deux leviers JAMAIS essayés ici** (vérifié sur les 17 `seed.json` de
+`data/trace/PHerc0358/essai_*`) : **`sdt_weight`**, et **les fibres horizontales ET
+verticales ENSEMBLE** (`normal` seul, `horizontal` seul, `vertical` seul ont été testés,
+jamais la paire — alors que c'est la paire qui définit les axes u, v de la feuille).
+
+⏳ **DEUX CAMPAGNES TOURNENT** (détachées, chaînées) :
+```bash
+tail -f .lances/convergence_des_essais-20260820-*.log   # les 17 essais de 26, rejugés
+tail -f .lances/leviers_de_perte-20260820-*.log         # sdt_weight et les fibres h+v
+```
+La première est la **piste C** (relire `26` au test de convergence), la seconde teste les
+deux leviers. Conception appariée : même graine (5842 5839 7386), même volume, mêmes
+générations, une seule clé change à la fois.
 
 ⚠ **Reste aussi** : donner les points à `--resume --rewind-gen --correct`, puis juger au
 test de convergence de `38`.

@@ -146,15 +146,22 @@ bonne trace, il devrait en avoir. Donc au mieux « beaucoup de croisements » es
 
 ## ⭐⭐ Une cause candidate, trouvée le lendemain
 
-[`41`](41_marcher_le_long_dune_nappe.md) mesure que la prédiction de surface publiée de
-`PHerc1447` est un **masque binaire** (`…-th0.2.zarr`, deux valeurs : 0 et 255). Un masque
-n'a **pas de gradient à l'intérieur de la matière** — il a un plateau — donc un traceur n'y
-trouve rien à suivre, et rien ne le ramène vers une feuille plutôt qu'en travers.
+⚠ **Une première version de cette section accusait le masque binaire** (`…-th0.2.zarr`,
+deux valeurs). C'était faux et [`41`](41_marcher_le_long_dune_nappe.md) §6ter le corrige :
+le traceur calcule lui-même un champ de distance **signé** à partir du masque.
+
+⭐⭐ **Ce qui manque n'est pas le champ, c'est son poids.** Lu dans `GrowPatch.cpp` :
+`SURFACE_SDT` vaut **0** par défaut, `NORMAL`/`SNAP` ne s'appliquent qu'avec une grille de
+normales, `DIRECTION` qu'avec des champs de direction. Nos runs de base n'ont aucun des
+trois — il ne reste donc que `DIST` et `STRAIGHT`, deux termes **purement géométriques**.
+Une surface optimisée pour « points équidistants et alignés » est une **grille plate**, et
+une grille plate posée dans un rouleau est exactement une coupe radiale.
 
 ⚠⚠ **C'est une hypothèse, pas la conclusion de ce document.** Elle expliquerait α = +1,01,
-mais l'établir demande de relancer le traceur sur un champ de distance et de voir la
-convergence changer. Tant que ce contrôle n'a pas tourné, ce document dit ce qu'il mesure —
-la surface est en travers — et pas pourquoi.
+et elle est cohérente avec le fait qu'`essai_ng2` — le seul essai poussé avec une grille de
+normales — soit le moins radial (α = +0,65). L'établir demande de relancer les mêmes traces
+avec `sdt_weight` puis avec les fibres, et de voir la convergence changer :
+`tools/leviers_de_perte.sh`.
 
 ## Reproduire
 

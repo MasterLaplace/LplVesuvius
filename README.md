@@ -43,13 +43,14 @@ nôtres (α = +1,01) — à quatre spires de portée, le pic n'a toujours rien t
 ⭐ **L'objectif est donc nommable** : pas « réduire l'écart », mais **faire converger la
 mesure**. Une trace qui converge suit une feuille, quelle que soit sa valeur.
 
-⭐⭐ **Et une cause candidate est apparue** ([`41`](docs/41_marcher_le_long_dune_nappe.md)) :
-la prédiction de surface publiée est un **masque binaire** (`…-th0.2.zarr`, deux valeurs).
-Un masque n'a pas de gradient à l'intérieur de la matière — il a un plateau — donc un
-traceur n'y trouve **rien à suivre**. La transformée de distance rend à chaque nappe son axe
-médian, et une marche dessus suit une feuille sur 2,4 mm sans traverser un seul vide.
-⚠ Hypothèse, pas conclusion : le contrôle qui l'établirait est de relancer le traceur sur un
-champ de distance et de voir la convergence changer.
+⭐⭐ **Et une cause candidate est apparue, lue dans la source du traceur**
+([`41`](docs/41_marcher_le_long_dune_nappe.md) §6ter) : `vc_grow_seg_from_seed` est un
+moindres carrés à **douze familles de résidus**, et dans nos runs de base **trois des quatre
+termes qui regardent les données sont inactifs** — `SURFACE_SDT` a un poids nul par défaut,
+`NORMAL`/`SNAP` exigent une grille de normales, `DIRECTION` des champs de direction. Il ne
+reste que `DIST` et `STRAIGHT`, purement géométriques : une grille **plate et régulière**,
+c'est-à-dire une coupe radiale.
+⚠ Hypothèse, pas conclusion — `tools/leviers_de_perte.sh` la mesure, à conception appariée.
 
 ### Et voici la cible, assemblée
 
