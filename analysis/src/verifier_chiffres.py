@@ -208,6 +208,28 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                          " -> ".join(str(x) for x in brut[:4]),
                          ", ".join(str(x) for x in brut[:4])], p.name))
 
+    # ⚠ La mosaique : les trois chiffres qui font sa revendication. « 44 spires sans
+    # trou » est ce que l'image PRETEND etre ; si une spire venait a manquer, le document
+    # dirait toujours 44 et l'image ressemblerait toujours a un rouleau.
+    p = racine / "docs" / "mosaique_PHerc0172.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        out.append(("spires de la mosaique",
+                    [f"{d['bandes']} spires", f"**{d['bandes']} spires"], p.name))
+        out.append(("etendue de la mosaique",
+                    [f"{d['spire_min']:03d} à {d['spire_max']:03d}",
+                     f"{d['spire_min']:03d} → {d['spire_max']:03d}",
+                     f"de la {d['spire_min']:03d} à la {d['spire_max']:03d}"], p.name))
+        out.append(("spires manquantes",
+                    ["sans un trou" if not d["trous"] else
+                     f"{len(d['trous'])} spire(s) manquante(s)"], p.name))
+        ecart = round(100 * (1 - d["largeur_min_bande"] / d["largeur_max_bande"]))
+        out.append(("ecart de largeur des bandes",
+                    [f"{d['largeur_min_bande']} à {d['largeur_max_bande']} px, soit {ecart} %",
+                     f"{ecart} %"], p.name))
+        out.append(("taille de la mosaique",
+                    [f"{d['largeur_px']} × {d['hauteur_px']} px"], p.name))
+
     p = racine / "docs" / "cout_echelle.json"
     if p.exists():
         d = json.loads(p.read_text())

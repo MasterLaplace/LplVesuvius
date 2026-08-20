@@ -610,6 +610,13 @@ n += 1
 print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
+printf '  %-30s ' "mosaique : assemblage"
+if uv run python "$ROOT/analysis/src/assembler_mosaique.py" --verifier >/tmp/mos.log 2>&1; then
+  printf '✅ %s\n' "$(grep -c '✅' /tmp/mos.log) checks"
+else
+  printf '❌ ECHEC\n'; sed 's/^/       /' /tmp/mos.log | tail -6; FAIL=$((FAIL + 1))
+fi
+
 # ⚠ Celui-ci n'est pas une batterie d'assertions mais un GARDE-FOU de fraicheur : il
 # recalcule les chiffres publies depuis leurs JSON et les cherche dans les documents.
 printf '  %-30s ' "chiffres de la soumission"
@@ -621,10 +628,31 @@ if uv run python "$ROOT/analysis/src/verifier_chiffres.py" \
       "$ROOT/docs/25_une_graine_choisie_sur_la_planeite.md" \
       "$ROOT/docs/33_la_carte_nest_pas_resolue.md" \
       "$ROOT/docs/34_un_verdict_qui_ne_mesure_rien.md" \
-      "$ROOT/docs/35_le_tirage_sur_douze_rouleaux.md" >/tmp/chiffres.log 2>&1; then
+      "$ROOT/docs/35_le_tirage_sur_douze_rouleaux.md" \
+      "$ROOT/docs/40_le_rouleau_entier.md" >/tmp/chiffres.log 2>&1; then
   printf '✅ %s\n' "$(grep -c '✅' /tmp/chiffres.log) chiffres retrouves"
 else
   printf '❌ ECHEC\n'; sed 's/^/       /' /tmp/chiffres.log | tail -6; FAIL=$((FAIL + 1))
+fi
+
+# ⚠⚠ GARDE ANTI-DERIVE DU DEPOT, pas une batterie d'assertions. Un depot qui grossit
+# par accretion finit par contenir des instruments que plus personne ne sait relancer :
+# un script qu'aucun document ni aucun autre script ne nomme est mort sans que rien ne le
+# dise. Ce controle les COMPTE et les nomme. Il ne fait pas echouer les temoins -- un
+# orphelin n'est pas un bug -- mais il rend la derive visible a chaque passage.
+printf '  %-30s ' "scripts sans appelant"
+ORPH=""
+for f in "$ROOT"/analysis/src/*.py "$ROOT"/tools/*.sh; do
+  b=$(basename "$f")
+  n=$(grep -rl --include='*.sh' --include='*.md' --include='*.py' -- "$b" "$ROOT" 2>/dev/null \
+      | grep -v '/\.git/' | grep -v '/\.lances/' | grep -v -x -- "$f" | wc -l)
+  [ "$n" -eq 0 ] && ORPH="$ORPH $b"
+done
+NORPH=$(printf '%s' "$ORPH" | wc -w)
+if [ "$NORPH" -eq 0 ]; then
+  printf '✅ aucun\n'
+else
+  printf '⚠ %s orphelin(s) :%s\n' "$NORPH" "$ORPH"
 fi
 
 echo

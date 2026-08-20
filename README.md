@@ -43,6 +43,15 @@ nôtres (α = +1,01) — à quatre spires de portée, le pic n'a toujours rien t
 ⭐ **L'objectif est donc nommable** : pas « réduire l'écart », mais **faire converger la
 mesure**. Une trace qui converge suit une feuille, quelle que soit sa valeur.
 
+### Et voici la cible, assemblée
+
+![44 spires consecutives de PHerc0172](docs/images/mosaique_PHerc0172.jpg)
+
+**44 spires consécutives d'un rouleau, sans un trou** ([`40`](docs/40_le_rouleau_entier.md)).
+⚠ Chaque bande est déroulée et lue **par l'équipe du concours** ; ce dépôt n'ajoute que
+l'ordre. C'est la référence contre laquelle mesurer une chaîne automatique — jusqu'ici,
+« ça marche » n'avait rien à quoi se comparer.
+
 ---
 
 ## Ce que le concours a résolu, et ce qui reste
@@ -210,6 +219,7 @@ priorisee. A lire en premier si vous reprenez ce chantier.
 | **[`docs/37_les_deux_axes_ne_saccordent_pas.md`](docs/37_les_deux_axes_ne_saccordent_pas.md)** | ⭐⭐ **selectionner sur un axe et valider sur l'autre** : teste, et les deux juges ne se recoupent pas — 1 accord sur 8 |
 | **[`docs/38_ce_qui_bouge_avec_la_fenetre.md`](docs/38_ce_qui_bouge_avec_la_fenetre.md)** | ⭐⭐⭐ **un test de trace sans seuil, sans verite terrain et sans echelle** — ne de trois hypotheses refutees : une bonne surface garde sa distance quand la fenetre s'elargit, la notre la suit (α = +0,00 contre +1,01) |
 | **[`docs/39_le_seam_de_correction.md`](docs/39_le_seam_de_correction.md)** | ⭐⭐ **ou l'humain se branche** : `--resume --rewind-gen --correct` prend une liste de POINTS 3D. Le trou restant est etroit et nomme — dire ou la surface aurait du passer |
+| **[`docs/40_le_rouleau_entier.md`](docs/40_le_rouleau_entier.md)** | ⭐⭐⭐ **la cible, en une image** : 44 spires consecutives d'un rouleau, sans un trou, assemblees depuis les cartes d'encre publiees. Le deroulement est le leur, l'ordre est le notre — et c'est la reference que notre chaine doit egaler |
 
 ## Rejouer
 

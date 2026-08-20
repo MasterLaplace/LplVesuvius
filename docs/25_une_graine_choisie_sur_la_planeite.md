@@ -167,6 +167,8 @@ d'occupation écarte peut-être une graine *risquée* ; il n'explique **pas** le
 
 ![deux traces du meme rouleau](images/25_deux_traces.png)
 
+Figure : `analysis/src/figure_deux_traces.py`.
+
 ⚠⚠ **La figure est à échelle physique commune** — sans quoi une surface deux fois plus
 grande passerait pour identique. À gauche, les deux plaques écartelées de `24` : c'est ce
 que devient une surface qui se recoupe quand on l'aplatit. À droite, une nappe d'un seul
@@ -313,6 +315,8 @@ L'amplitude est donc la forme **mesurable** du critère que le règlement énonc
 l'échelle sont ancrés sur des images, à surface physique égale :
 
 ![quatre signatures de trace](images/25_signatures.png)
+
+Figure : `analysis/src/figure_signatures.py`.
 
 | trace | amplitude | ce que la face montre |
 |---|---:|---|

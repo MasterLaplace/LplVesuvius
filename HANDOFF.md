@@ -78,14 +78,37 @@ ps -eo pid,etime,args | grep '\.lances/'   # ce qui vit encore
 radiale **ne peut pas** se croiser elle-même ; une surface qui suit une spire revient près
 d'elle-même à chaque tour. Nous aurions donc jeté les bonnes traces. `essai_ng2`
 (112 139 croisements, poussée **avec** les vraies grilles de normales) est le candidat.
-⚠ Ce qui joue contre, dit d'avance : le segment officiel converge **sans** compte de
-croisements catastrophique.
+✅ **Rendu le 2026-08-20 au soir, et le résultat va dans le sens de l'hypothèse** :
+`essai_scale1` (**0** croisement) donne **α = +0,99**, `essai_ng2` (**112 139**) donne
+**α = +0,65**. Celui que le filtre condamne est le moins radial des deux.
+⚠ Mais +0,65 n'est pas +0,00 : un intermédiaire n'est pas un demi-succès. Et ce qui joue
+contre reste vrai — le segment officiel converge **sans** compte de croisements
+catastrophique, donc « beaucoup de croisements » est au mieux un *symptôme*, jamais un
+critère. Détail : [`38`](docs/38_ce_qui_bouge_avec_la_fenetre.md) §« l'hypothèse qui inverse ».
 
-### Les trois pistes qui suivent, par coût croissant
+### ✅ Fait le 2026-08-20 au soir — la cible existe en image
+
+⭐⭐⭐ **[`40`](docs/40_le_rouleau_entier.md) : 44 spires consécutives de `PHerc0172`, sans un
+trou**, assemblées depuis les cartes d'encre publiées (`tools/mosaique_rouleau.sh`,
+`analysis/src/assembler_mosaique.py`, 18 témoins). 21 Mo téléchargés, ~3 min, **rien de
+tracé ni rendu ici**.
+
+⚠ **Le déroulement est le leur ; l'ordre est le nôtre.** Ce n'est pas un résultat de la
+chaîne — c'est la **référence** qu'elle doit égaler, et jusqu'ici « ça marche » n'avait rien
+à quoi se comparer.
+
+⚠⚠ **Et ça referme la piste A** : la mosaïque est possible exactement là où le travail est
+déjà fait (`PHerc0172` 53 segments, `PHerc0139` 38, `PHercParis4` 80) et **impossible sur les
+rouleaux du prix** — `PHerc1447` publie 4 volumes de surface et **zéro** carte d'encre,
+`PHerc0800` et `PHerc1203` ne publient ni l'un ni l'autre. Passer notre modèle sur ces 8
+volumes reste faisable, mais `36` §5bis a déjà mesuré qu'il y sort une **constante**, et le
+volume *publié* donne la même — donc la piste A n'est pas courte, elle est **bouchée à son
+extrémité**.
+
+### Les deux pistes qui restent, par coût croissant
 
 | # | quoi | pourquoi maintenant |
 |---|---|---|
-| **A** | ⭐ passer le modèle d'encre sur les **8 volumes de surface publiés** des rouleaux du prix (`PHerc1447` 4, `PHerc0800` 2, `PHerc1203` 2) | le pont existe (`zarr_vers_couches.py`), aucun traçage ni rendu, et c'est la voie la plus courte vers **First Letters** |
 | **B** | écrire le producteur de points de correction **depuis la prédiction** (planarité 0,993) plutôt que depuis le volume (plat) | c'est le seul maillon manquant de `39` |
 | **C** | relire tous les essais de `26` au test de convergence | ses conclusions ont été prises sur des critères aveugles à la coupe radiale |
 

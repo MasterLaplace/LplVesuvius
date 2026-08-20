@@ -1,0 +1,22 @@
+{
+  "series": [
+    {
+      "verdict": "suit la fenêtre",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement",
+      "serie": [
+        [
+          41,
+          187.24
+        ],
+        [
+          161,
+          730.24
+        ]
+      ],
+      "croissance": 3.900021362956633,
+      "elargissement": 3.926829268292683,
+      "alpha": 0.9949918805931237,
+      "nom": "essai_scale1 (0 croisements)"
+    }
+  ]
+}

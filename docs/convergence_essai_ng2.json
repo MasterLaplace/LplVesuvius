@@ -1,0 +1,22 @@
+{
+  "series": [
+    {
+      "verdict": "intermédiaire",
+      "sens": "la mesure bouge sans suivre la fenêtre — ni convergée ni clairement en travers",
+      "serie": [
+        [
+          41,
+          112.34
+        ],
+        [
+          161,
+          271.5
+        ]
+      ],
+      "croissance": 2.416770518070144,
+      "elargissement": 3.926829268292683,
+      "alpha": 0.6451318289378238,
+      "nom": "essai_ng2 (112139 croisements)"
+    }
+  ]
+}

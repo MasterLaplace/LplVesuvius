@@ -114,6 +114,36 @@ ce cas, et son témoin le sonde.
   Les deux axes de [`37`](37_les_deux_axes_ne_saccordent_pas.md) restent indépendants, et
   celui-ci est une meilleure version du second, pas du premier.
 
+## L'hypothèse qui inverse : testée, et le résultat va dans son sens
+
+2026-08-20, soir. Une coupe radiale **ne peut pas** se croiser elle-même ; une surface qui
+suit une spire revient près d'elle-même à chaque tour. Si c'est vrai, le filtre
+d'auto-intersection écarte précisément les bonnes traces — et
+[`34`](34_un_verdict_qui_ne_mesure_rien.md) a déjà montré que ce filtre ne mesure pas ce
+qu'il prétend.
+
+Deux essais du même rouleau, passés au test de convergence
+(`tools/convergence_des_essais.sh`, en fond) :
+
+| essai | auto-intersections | 41 couches | 161 couches | **α** | verdict |
+|---|---:|---:|---:|---:|---|
+| `essai_scale1` | **0** | 187,2 µm | 730,2 µm | **+0,99** | suit la fenêtre — **en travers** |
+| `essai_ng2` | **112 139** | 112,3 µm | 271,5 µm | **+0,65** | intermédiaire |
+
+⭐ **Celui qui a zéro croisement est le plus radial des deux.** L'essai catastrophique au
+sens du filtre est celui qui se rapproche le plus d'une feuille. C'est la direction que
+l'hypothèse prédisait, et elle a été écrite **avant** la mesure.
+
+⚠ **Mais α = +0,65 n'est pas une trace qui suit une feuille** : le segment officiel donne
++0,00. Un intermédiaire n'est pas un demi-succès, c'est une surface qui traverse *moins*
+d'empilement — peut-être une feuille suivie par morceaux, peut-être une coupe oblique. Le
+test sépare « posée à côté » de « posée en travers » et ne dit rien de plus.
+
+⚠ **Ce qui joue contre l'hypothèse, dit d'avance et toujours vrai** : le segment officiel
+converge **sans** compte de croisements catastrophique. Si se croiser était la marque d'une
+bonne trace, il devrait en avoir. Donc au mieux « beaucoup de croisements » est un
+*symptôme* de suivi de spire, jamais son critère.
+
 ## Reproduire
 
 ```bash

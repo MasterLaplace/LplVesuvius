@@ -1,0 +1,370 @@
+{
+  "rouleau": "PHerc0172",
+  "bandes": 44,
+  "spire_min": 52,
+  "spire_max": 95,
+  "trous": [],
+  "largeur_px": 4518,
+  "hauteur_px": 10000,
+  "largeur_min_bande": 666,
+  "largeur_max_bande": 1247,
+  "colonnes": 4,
+  "contraste": [
+    {
+      "spire": 52,
+      "moyenne": 56.9,
+      "sigma": 45.23,
+      "score_lignes": 0.599,
+      "axe": "lignes verticales",
+      "interligne_px": 32
+    },
+    {
+      "spire": 53,
+      "moyenne": 56.85,
+      "sigma": 43.5,
+      "score_lignes": 0.416,
+      "axe": "lignes verticales",
+      "interligne_px": 32
+    },
+    {
+      "spire": 54,
+      "moyenne": 62.75,
+      "sigma": 49.22,
+      "score_lignes": 0.332,
+      "axe": "lignes verticales",
+      "interligne_px": 32
+    },
+    {
+      "spire": 55,
+      "moyenne": 57.38,
+      "sigma": 44.81,
+      "score_lignes": 0.511,
+      "axe": "lignes verticales",
+      "interligne_px": 31
+    },
+    {
+      "spire": 56,
+      "moyenne": 61.37,
+      "sigma": 46.54,
+      "score_lignes": 0.416,
+      "axe": "lignes verticales",
+      "interligne_px": 32
+    },
+    {
+      "spire": 57,
+      "moyenne": 66.66,
+      "sigma": 51.46,
+      "score_lignes": 0.401,
+      "axe": "lignes verticales",
+      "interligne_px": 31
+    },
+    {
+      "spire": 58,
+      "moyenne": 63.92,
+      "sigma": 50.55,
+      "score_lignes": 0.336,
+      "axe": "lignes verticales",
+      "interligne_px": 31
+    },
+    {
+      "spire": 59,
+      "moyenne": 67.36,
+      "sigma": 53.65,
+      "score_lignes": 0.495,
+      "axe": "lignes verticales",
+      "interligne_px": 35
+    },
+    {
+      "spire": 60,
+      "moyenne": 62.03,
+      "sigma": 50.16,
+      "score_lignes": 0.41,
+      "axe": "lignes horizontales",
+      "interligne_px": 31
+    },
+    {
+      "spire": 61,
+      "moyenne": 59.87,
+      "sigma": 47.81,
+      "score_lignes": 0.321,
+      "axe": "lignes horizontales",
+      "interligne_px": 28
+    },
+    {
+      "spire": 62,
+      "moyenne": 63.28,
+      "sigma": 51.36,
+      "score_lignes": 0.339,
+      "axe": "lignes verticales",
+      "interligne_px": 27
+    },
+    {
+      "spire": 63,
+      "moyenne": 58.57,
+      "sigma": 45.37,
+      "score_lignes": 0.224,
+      "axe": "lignes verticales",
+      "interligne_px": 26
+    },
+    {
+      "spire": 64,
+      "moyenne": 61.79,
+      "sigma": 49.62,
+      "score_lignes": 0.339,
+      "axe": "lignes verticales",
+      "interligne_px": 25
+    },
+    {
+      "spire": 65,
+      "moyenne": 56.04,
+      "sigma": 52.07,
+      "score_lignes": 0.75,
+      "axe": "lignes horizontales",
+      "interligne_px": 22
+    },
+    {
+      "spire": 66,
+      "moyenne": 50.98,
+      "sigma": 52.97,
+      "score_lignes": 0.808,
+      "axe": "lignes horizontales",
+      "interligne_px": 20
+    },
+    {
+      "spire": 67,
+      "moyenne": 63.26,
+      "sigma": 50.0,
+      "score_lignes": 0.176,
+      "axe": "lignes horizontales",
+      "interligne_px": 46
+    },
+    {
+      "spire": 68,
+      "moyenne": 64.52,
+      "sigma": 50.44,
+      "score_lignes": 0.199,
+      "axe": "lignes verticales",
+      "interligne_px": 26
+    },
+    {
+      "spire": 69,
+      "moyenne": 53.91,
+      "sigma": 50.17,
+      "score_lignes": 0.708,
+      "axe": "lignes verticales",
+      "interligne_px": 20
+    },
+    {
+      "spire": 70,
+      "moyenne": 63.0,
+      "sigma": 49.01,
+      "score_lignes": 0.176,
+      "axe": "lignes verticales",
+      "interligne_px": 26
+    },
+    {
+      "spire": 71,
+      "moyenne": 61.08,
+      "sigma": 47.33,
+      "score_lignes": 0.231,
+      "axe": "lignes verticales",
+      "interligne_px": 26
+    },
+    {
+      "spire": 72,
+      "moyenne": 64.17,
+      "sigma": 50.18,
+      "score_lignes": 0.187,
+      "axe": "lignes verticales",
+      "interligne_px": 26
+    },
+    {
+      "spire": 73,
+      "moyenne": 61.42,
+      "sigma": 48.73,
+      "score_lignes": 0.292,
+      "axe": "lignes verticales",
+      "interligne_px": 26
+    },
+    {
+      "spire": 74,
+      "moyenne": 60.85,
+      "sigma": 48.41,
+      "score_lignes": 0.238,
+      "axe": "lignes verticales",
+      "interligne_px": 26
+    },
+    {
+      "spire": 75,
+      "moyenne": 62.36,
+      "sigma": 49.64,
+      "score_lignes": 0.214,
+      "axe": "lignes verticales",
+      "interligne_px": 27
+    },
+    {
+      "spire": 76,
+      "moyenne": 58.66,
+      "sigma": 50.64,
+      "score_lignes": 0.589,
+      "axe": "lignes verticales",
+      "interligne_px": 25
+    },
+    {
+      "spire": 77,
+      "moyenne": 49.6,
+      "sigma": 52.23,
+      "score_lignes": 0.82,
+      "axe": "lignes horizontales",
+      "interligne_px": 21
+    },
+    {
+      "spire": 78,
+      "moyenne": 58.51,
+      "sigma": 53.75,
+      "score_lignes": 0.741,
+      "axe": "lignes verticales",
+      "interligne_px": 24
+    },
+    {
+      "spire": 79,
+      "moyenne": 41.86,
+      "sigma": 53.76,
+      "score_lignes": 0.855,
+      "axe": "lignes verticales",
+      "interligne_px": 23
+    },
+    {
+      "spire": 80,
+      "moyenne": 55.68,
+      "sigma": 55.58,
+      "score_lignes": 0.63,
+      "axe": "lignes verticales",
+      "interligne_px": 27
+    },
+    {
+      "spire": 81,
+      "moyenne": 58.04,
+      "sigma": 58.64,
+      "score_lignes": 0.728,
+      "axe": "lignes verticales",
+      "interligne_px": 29
+    },
+    {
+      "spire": 82,
+      "moyenne": 52.28,
+      "sigma": 53.37,
+      "score_lignes": 0.724,
+      "axe": "lignes verticales",
+      "interligne_px": 23
+    },
+    {
+      "spire": 83,
+      "moyenne": 53.86,
+      "sigma": 52.38,
+      "score_lignes": 0.778,
+      "axe": "lignes verticales",
+      "interligne_px": 24
+    },
+    {
+      "spire": 84,
+      "moyenne": 51.59,
+      "sigma": 55.88,
+      "score_lignes": 0.791,
+      "axe": "lignes verticales",
+      "interligne_px": 35
+    },
+    {
+      "spire": 85,
+      "moyenne": 62.13,
+      "sigma": 53.42,
+      "score_lignes": 0.464,
+      "axe": "lignes verticales",
+      "interligne_px": 27
+    },
+    {
+      "spire": 86,
+      "moyenne": 62.96,
+      "sigma": 52.36,
+      "score_lignes": 0.467,
+      "axe": "lignes verticales",
+      "interligne_px": 27
+    },
+    {
+      "spire": 87,
+      "moyenne": 66.21,
+      "sigma": 57.55,
+      "score_lignes": 0.525,
+      "axe": "lignes verticales",
+      "interligne_px": 27
+    },
+    {
+      "spire": 88,
+      "moyenne": 48.54,
+      "sigma": 58.24,
+      "score_lignes": 0.832,
+      "axe": "lignes verticales",
+      "interligne_px": 23
+    },
+    {
+      "spire": 89,
+      "moyenne": 53.76,
+      "sigma": 56.79,
+      "score_lignes": 0.794,
+      "axe": "lignes verticales",
+      "interligne_px": 26
+    },
+    {
+      "spire": 90,
+      "moyenne": 54.11,
+      "sigma": 56.18,
+      "score_lignes": 0.808,
+      "axe": "lignes verticales",
+      "interligne_px": 26
+    },
+    {
+      "spire": 91,
+      "moyenne": 51.63,
+      "sigma": 52.13,
+      "score_lignes": 0.817,
+      "axe": "lignes verticales",
+      "interligne_px": 26
+    },
+    {
+      "spire": 92,
+      "moyenne": 43.62,
+      "sigma": 46.4,
+      "score_lignes": 0.808,
+      "axe": "lignes verticales",
+      "interligne_px": 25
+    },
+    {
+      "spire": 93,
+      "moyenne": 27.2,
+      "sigma": 39.41,
+      "score_lignes": 0.94,
+      "axe": "lignes verticales",
+      "interligne_px": 22
+    },
+    {
+      "spire": 94,
+      "moyenne": 43.74,
+      "sigma": 42.5,
+      "score_lignes": 0.781,
+      "axe": "lignes verticales",
+      "interligne_px": 30
+    },
+    {
+      "spire": 95,
+      "moyenne": 33.69,
+      "sigma": 40.2,
+      "score_lignes": 0.852,
+      "axe": "lignes horizontales",
+      "interligne_px": 23
+    }
+  ],
+  "spire_plus_contrastee": 81,
+  "spire_moins_contrastee": 93,
+  "spire_plus_ecrite": 93,
+  "sortie": "../docs/images/mosaique_PHerc0172.jpg"
+}

@@ -66,6 +66,8 @@ fenêtres, une attribution au hasard.
 
 ![champ de correction, cas fort](images/20_champ_fort.png)
 
+Figure : `analysis/src/figure_champ.py`.
+
 Le premier bloc est une **plaque** rouge — la trace y est trop profonde de façon
 continue — et le quatrième une plaque bleue. À droite, la même matière est du poivre et
 sel.
