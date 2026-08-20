@@ -94,6 +94,52 @@ def lire_chunk(url: str, level: int, meta: dict, cz: int, cy: int, cx: int,
     return np.frombuffer(data, dtype=np.dtype(meta["dtype"])).reshape(dz, dy, dx)
 
 
+def lire_bloc(url: str, level: int, meta: dict, z: float, y: float, x: float,
+              rayon: int, timeout: float, parallele: int = 8):
+    """Lire un CUBE de cote 2*rayon+1 autour de (z, y, x), en assemblant les chunks.
+
+    ⚠ `lire_chunk` rend un chunk entier et le point demande tombe rarement en son centre :
+    une marche partie du bord sortirait du bloc au troisieme pas et l'arret se lirait comme
+    « la nappe finit ici ». Ce lecteur recouvre donc le cube VOULU, quitte a tirer quatre
+    chunks, et rend aussi le coin du bloc dans le volume pour que les points ecrits soient
+    absolus.
+
+    ⚠ Les chunks absents (hors volume, ou jamais ecrits) sont laisses a ZERO et comptes.
+    Un trou silencieux ferait croire a une fin de nappe la ou il n'y a qu'une lacune de
+    stockage -- deux faits que la marche doit pouvoir distinguer.
+
+    Retourne (bloc, origine (z0, y0, x0), nombre de chunks manquants).
+    """
+    import concurrent.futures as cf
+
+    nz, ny, nx = meta["shape"]
+    dz, dy, dx = meta["chunks"]
+    z0 = max(0, int(z) - rayon); y0 = max(0, int(y) - rayon); x0 = max(0, int(x) - rayon)
+    z1 = min(nz, int(z) + rayon + 1); y1 = min(ny, int(y) + rayon + 1)
+    x1 = min(nx, int(x) + rayon + 1)
+    if z1 <= z0 or y1 <= y0 or x1 <= x0:
+        return None, (0, 0, 0), 0
+
+    bloc = np.zeros((z1 - z0, y1 - y0, x1 - x0), dtype=np.dtype(meta["dtype"]))
+    taches = [(cz, cy, cx)
+              for cz in range(z0 // dz, (z1 - 1) // dz + 1)
+              for cy in range(y0 // dy, (y1 - 1) // dy + 1)
+              for cx in range(x0 // dx, (x1 - 1) // dx + 1)]
+    manquants = 0
+    with cf.ThreadPoolExecutor(max_workers=parallele) as ex:
+        for (cz, cy, cx), data in zip(
+                taches, ex.map(lambda t: lire_chunk(url, level, meta, *t, timeout), taches)):
+            if data is None:
+                manquants += 1
+                continue
+            az, ay, ax = cz * dz, cy * dy, cx * dx
+            sz0, sy0, sx0 = max(z0, az), max(y0, ay), max(x0, ax)
+            sz1 = min(z1, az + dz); sy1 = min(y1, ay + dy); sx1 = min(x1, ax + dx)
+            bloc[sz0 - z0:sz1 - z0, sy0 - y0:sy1 - y0, sx0 - x0:sx1 - x0] = \
+                data[sz0 - az:sz1 - az, sy0 - ay:sy1 - ay, sx0 - ax:sx1 - ax]
+    return bloc, (z0, y0, x0), manquants
+
+
 def _reduire(a: np.ndarray, k: int) -> np.ndarray:
     """Moyenne par blocs cubiques de côté k. Le reste non divisible est écarté."""
     nz, ny, nx = a.shape

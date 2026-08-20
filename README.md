@@ -43,6 +43,14 @@ nôtres (α = +1,01) — à quatre spires de portée, le pic n'a toujours rien t
 ⭐ **L'objectif est donc nommable** : pas « réduire l'écart », mais **faire converger la
 mesure**. Une trace qui converge suit une feuille, quelle que soit sa valeur.
 
+⭐⭐ **Et une cause candidate est apparue** ([`41`](docs/41_marcher_le_long_dune_nappe.md)) :
+la prédiction de surface publiée est un **masque binaire** (`…-th0.2.zarr`, deux valeurs).
+Un masque n'a pas de gradient à l'intérieur de la matière — il a un plateau — donc un
+traceur n'y trouve **rien à suivre**. La transformée de distance rend à chaque nappe son axe
+médian, et une marche dessus suit une feuille sur 2,4 mm sans traverser un seul vide.
+⚠ Hypothèse, pas conclusion : le contrôle qui l'établirait est de relancer le traceur sur un
+champ de distance et de voir la convergence changer.
+
 ### Et voici la cible, assemblée
 
 ![44 spires consecutives de PHerc0172](docs/images/mosaique_PHerc0172.jpg)

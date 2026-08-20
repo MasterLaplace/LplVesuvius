@@ -64,6 +64,106 @@ RAYON = 2
 SAUT_MAX = 2.0
 
 
+def champ_de_distance(masque: np.ndarray, seuil: float = 0.5) -> np.ndarray:
+    """Transformer un masque BINAIRE en champ dont la crete est l'axe median des nappes.
+
+    ⚠⚠ POURQUOI CE PASSAGE EST OBLIGATOIRE, ET LA MESURE QUI L'IMPOSE. La prediction de
+    surface publiee de PHerc1447 s'appelle « ...-th0.2.zarr » et elle porte **exactement
+    deux valeurs**, 0 et 255 : c'est un masque seuille, pas une probabilite. Un masque
+    n'a **aucun gradient a l'interieur de la matiere** -- il a un plateau. Donc :
+
+      - le tenseur de structure n'y voit rien tant qu'on n'est pas sur un bord ;
+      - le recentrage sur le maximum est un `argmax` sur une constante, qui rend le
+        premier indice : la marche se colle au BORD de la nappe au lieu de son milieu ;
+      - et une trace poussee la-dessus n'a rien a suivre, ce qui est exactement l'etat
+        constate par `38` (nos traces posees en travers de l'empilement).
+
+    La transformee de distance rend a chaque voxel de matiere sa distance au vide. Son
+    maximum local est donc le MILIEU de la nappe, et le champ redevient une crete que
+    tout le reste de ce fichier sait suivre. C'est ce que designe le « cache EDT » que le
+    pipeline officiel utilise et que le bucket ne publie pas.
+
+    ⚠ La distance est rendue en flottant SANS normalisation par le maximum global : une
+    nappe epaisse et une nappe fine doivent garder des hauteurs de crete differentes,
+    sinon `valeur_min` cesse de vouloir dire quelque chose de comparable d'un bloc a
+    l'autre.
+    """
+    m = masque > (seuil * (255.0 if masque.max() > 1.5 else 1.0))
+    return _edt(m)
+
+
+def _edt_1d(f: np.ndarray) -> np.ndarray:
+    """Transformee de distance EUCLIDIENNE CARREE d'une ligne, algorithme de Felzenszwalb.
+
+    ⚠ Ecrite ici plutot qu'importee de scipy pour une raison bete et bloquante : les
+    environnements de ce depot sont separes, `scipy` vit dans `experiments/` et `Pillow`
+    dans `inference/`, donc aucune figure ne pourrait a la fois lire un bloc et le
+    dessiner. Une fonction de vingt lignes vaut mieux qu'un troisieme environnement.
+
+    ⚠ C'est l'EDT EXACTE, pas un chanfrein : l'enveloppe inferieure des paraboles
+    y = (x - i)^2 + f(i). Une approximation ferait deriver la crete du milieu de la nappe,
+    et le milieu de la nappe est exactement ce qu'on cherche.
+    """
+    n = f.size
+    d = np.empty(n, dtype=np.float64)
+    v = np.zeros(n, dtype=np.int64)
+    z = np.empty(n + 1, dtype=np.float64)
+    k = 0
+    v[0] = 0
+    z[0], z[1] = -np.inf, np.inf
+    for q in range(1, n):
+        while True:
+            s = ((f[q] + q * q) - (f[v[k]] + v[k] * v[k])) / (2.0 * q - 2.0 * v[k])
+            if s <= z[k]:
+                k -= 1
+                if k < 0:
+                    k = 0
+                    break
+            else:
+                break
+        k += 1
+        v[k] = q
+        z[k] = s
+        z[k + 1] = np.inf
+    k = 0
+    for q in range(n):
+        while z[k + 1] < q:
+            k += 1
+        d[q] = (q - v[k]) ** 2 + f[v[k]]
+    return d
+
+
+def _edt(masque: np.ndarray) -> np.ndarray:
+    """EDT 3D exacte, par separabilite : une passe 1D par axe sur le carre des distances.
+
+    ⚠ On prend scipy QUAND IL EST LA, et la version ecrite ici sinon. Ce n'est pas une
+    preference de style : la version pure fait une boucle Python par ligne, soit ~200 000
+    appels sur un cube de 257, ce qui met des minutes la ou scipy met une fraction de
+    seconde. Et le repli n'est pas un risque, parce qu'un temoin compare les deux
+    EXACTEMENT (ecart max 0,0) partout ou la reference est installee.
+    """
+    try:
+        from scipy import ndimage
+    except ImportError:
+        pass
+    else:
+        return ndimage.distance_transform_edt(masque).astype(np.float32)
+
+    f = np.where(masque, 1e12, 0.0)
+    for axe in range(masque.ndim):
+        f = np.apply_along_axis(_edt_1d, axe, f)
+    return np.sqrt(f).astype(np.float32)
+
+
+def est_binaire(bloc: np.ndarray) -> bool:
+    """Le bloc ne porte-t-il que deux valeurs ? (donc : est-ce un masque seuille ?)
+
+    ⚠ Sert a REFUSER de marcher sur un masque brut plutot qu'a le deviner : une marche
+    qui tourne sur un plateau rend un chemin, et un chemin rendu ressemble a un succes.
+    """
+    return len(np.unique(bloc)) <= 2
+
+
 def echantillon(bloc: np.ndarray, p: np.ndarray) -> float:
     """Valeur trilineaire du bloc au point p (z, y, x) ; 0 hors du bloc.
 
@@ -212,8 +312,14 @@ def marcher(bloc: np.ndarray, depart, direction, pas: float = PAS,
             break
         p = q
         chemin.append(p.copy())
+    # ⚠ La VALEUR le long du chemin est ce qui dit si la marche est restée sur l'axe
+    # médian ou l'a longé de biais. Un chemin de 137 points et un chemin de 137 points
+    # collés au bord d'une nappe se ressemblent parfaitement sur une liste de coordonnées.
+    vals = [echantillon(bloc, np.asarray(c)) for c in chemin]
     return {"points": [c.tolist() for c in chemin], "arret": arret,
-            "pas_faits": len(chemin) - 1, "sauts_refuses": sauts}
+            "pas_faits": len(chemin) - 1, "sauts_refuses": sauts,
+            "valeur_min": float(min(vals)) if vals else 0.0,
+            "valeur_mediane": float(np.median(vals)) if vals else 0.0}
 
 
 def marcher_plus_proche(bloc: np.ndarray, depart, pas: float = PAS, n_pas: int = 200,
@@ -453,6 +559,50 @@ def verifier() -> int:
     ok(e_naif > 4 * e_notre,
        f"les deux méthodes sont séparées d'un facteur {e_naif / max(e_notre, 1e-6):.0f}")
 
+    # ⚠⚠ LE CHAMP DE DISTANCE : un masque binaire n'a pas de crête, et c'est ce qui a été
+    # MESURÉ sur la prédiction publiée de PHerc1447 (deux valeurs, 0 et 255). La
+    # transformée de distance doit rendre le maximum au MILIEU de la nappe.
+    dalle = np.zeros((40, 40, 40), dtype=np.float32)
+    dalle[:, :, 18:23] = 1.0                       # une nappe de 5 voxels d'épaisseur
+    ok(est_binaire(dalle), "un masque seuillé est reconnu comme binaire")
+    ok(not est_binaire(_nappe_cylindrique(40, 12.0)),
+       "une prédiction continue ne l'est pas")
+    dist = champ_de_distance(dalle)
+    ligne = dist[20, 20, :]
+    ok(int(np.argmax(ligne)) == 20,
+       f"la crête de la distance tombe au MILIEU de la nappe (indice {int(np.argmax(ligne))} "
+       f"pour une nappe de 18 à 22)")
+    ok(abs(float(ligne.max()) - 3.0) < 0.01,
+       f"et sa hauteur est la demi-épaisseur ({ligne.max():.2f} pour 5 voxels)")
+    # ⚠ Sonde : sur le masque BRUT, l'argmax est le premier voxel de la nappe, pas son
+    # milieu — c'est très exactement la panne que la transformée corrige.
+    ok(int(np.argmax(dalle[20, 20, :])) == 18,
+       "sur le masque brut, l'argmax est le BORD de la nappe (la panne)")
+
+    # ⚠⚠ L'EDT est écrite ici (Felzenszwalb) et non importée, parce que scipy et Pillow
+    # vivent dans deux environnements différents de ce dépôt. Une réimplémentation doit
+    # donc être vérifiée CONTRE la référence, là où la référence est disponible — sinon
+    # « exacte » n'est qu'une affirmation dans une docstring.
+    try:
+        from scipy import ndimage as _nd
+    except ImportError:
+        print("  ⓘ scipy absent ici — la comparaison de l'EDT à la référence est SAUTÉE "
+              "(elle tourne depuis experiments/)")
+    else:
+        rng2 = np.random.default_rng(11)
+        pires = []
+        for forme in ((24, 24, 24), (31, 17, 23)):
+            m = rng2.random(forme) > 0.6
+            f = np.where(m, 1e12, 0.0)
+            for axe in range(3):
+                f = np.apply_along_axis(_edt_1d, axe, f)
+            pires.append(float(np.max(np.abs(
+                np.sqrt(f).astype(np.float32)
+                - _nd.distance_transform_edt(m).astype(np.float32)))))
+        ok(max(pires) == 0.0,
+           f"notre EDT écrite à la main est EXACTEMENT celle de scipy "
+           f"(écart max {max(pires):.1e}) — donc le repli sans scipy est sûr")
+
     # Le fichier de correction : format lu dans la source, et ordre significatif.
     with tempfile.TemporaryDirectory() as tmp:
         f = Path(tmp) / "c.json"
@@ -478,6 +628,16 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--bloc", type=Path, help="un .npy de prédiction (z, y, x)")
+    ap.add_argument("--zarr", help="clé S3 d'une prédiction de surface (au lieu de --bloc)")
+    ap.add_argument("--xyz", type=float, nargs=3,
+                    help="le point de départ dans le VOLUME, en x y z (avec --zarr)")
+    ap.add_argument("--rayon", type=int, default=48,
+                    help="demi-côté du cube lu autour du point")
+    ap.add_argument("--level", type=int, default=0)
+    ap.add_argument("--distance", action="store_true",
+                    help="passer par la transformée de distance (obligatoire sur un masque)")
+    ap.add_argument("--garder-bloc", type=Path,
+                    help="écrire le cube lu en .npy, pour rejouer hors ligne")
     ap.add_argument("--depart", type=float, nargs=3, help="point de départ, en z y x du bloc")
     ap.add_argument("--direction", type=float, nargs=3, default=(0.0, 1.0, 0.0))
     ap.add_argument("--origine", type=float, nargs=3, default=(0.0, 0.0, 0.0),
@@ -492,17 +652,61 @@ def main() -> int:
     a = ap.parse_args()
     if a.verifier:
         return verifier()
-    if not a.bloc or not a.depart:
-        ap.error("donner --bloc et --depart, ou --verifier")
+    if a.zarr:
+        # ⚠ Le chemin réseau est SÉPARÉ des témoins, exprès : la marche se valide hors
+        # ligne sur des nappes fabriquées, et une batterie qui exigerait S3 ne tournerait
+        # plus le jour où le réseau tombe — donc ne tournerait plus du tout.
+        if not a.xyz:
+            ap.error("--zarr demande --xyz")
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from trouver_graine import lire_bloc            # noqa: E402
+        from zarr_depth import BUCKET, array_meta       # noqa: E402
 
-    bloc = np.load(a.bloc).astype(np.float32)
+        url = f"{BUCKET}/{a.zarr.strip('/')}"
+        meta = array_meta(url, a.level, 120.0)
+        x, y, z = a.xyz
+        cube, origine, manquants = lire_bloc(url, a.level, meta, z, y, x, a.rayon, 120.0)
+        if cube is None:
+            print("le point est hors du volume", file=sys.stderr)
+            return 3
+        print(f"cube {cube.shape} lu autour de ({x:.0f}, {y:.0f}, {z:.0f}), "
+              f"origine (z,y,x) = {origine}, {manquants} chunk(s) manquant(s)")
+        if a.garder_bloc:
+            a.garder_bloc.parent.mkdir(parents=True, exist_ok=True)
+            np.save(a.garder_bloc, cube)
+        a.bloc = None
+        bloc = cube.astype(np.float32)
+        a.origine = origine
+        if a.depart is None:
+            a.depart = [z - origine[0], y - origine[1], x - origine[2]]
+    elif not a.bloc or not a.depart:
+        ap.error("donner --bloc et --depart, ou --zarr et --xyz, ou --verifier")
+    else:
+        bloc = np.load(a.bloc).astype(np.float32)
     if bloc.max() > 1.5:
         # ⚠ Une prédiction publiée est en uint8 ; la ramener dans [0,1] rend `valeur_min`
         # comparable d'un volume à l'autre au lieu de dépendre du dtype.
         bloc = bloc / 255.0
+    # ⚠⚠ Un masque binaire n'a pas de crête : marcher dessus rendrait un chemin collé au
+    # bord des nappes, et un chemin rendu ressemble à un succès. On refuse, en nommant le
+    # remède, plutôt que de convertir en douce — convertir sans le dire ferait croire que
+    # la prédiction publiée porte une structure qu'elle ne porte pas.
+    if a.distance:
+        avant = float(bloc.max())
+        bloc = champ_de_distance(bloc)
+        print(f"transformée de distance : crête max {bloc.max():.1f} voxels "
+              f"(le masque valait {avant:.0f})")
+    elif est_binaire(bloc):
+        print("⚠ ce bloc est un MASQUE binaire (deux valeurs) : il n'a pas de crête à "
+              "suivre.\n  relancer avec --distance, qui rend à chaque nappe son axe médian.",
+              file=sys.stderr)
+        return 4
+
     r = marcher(bloc, a.depart, a.direction, a.pas, a.n_pas)
     chemin = list(r["points"])
     print(f"marche avant : {r['pas_faits']} pas — {r['arret']}")
+    print(f"  valeur le long du chemin : médiane {r['valeur_mediane']:.2f}, "
+          f"minimum {r['valeur_min']:.2f} (crête du bloc : {bloc.max():.2f})")
     if a.deux_sens:
         r2 = marcher(bloc, a.depart, [-d for d in a.direction], a.pas, a.n_pas)
         print(f"marche arrière : {r2['pas_faits']} pas — {r2['arret']}")

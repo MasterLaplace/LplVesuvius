@@ -34,6 +34,102 @@ NAIF = (232, 96, 72)
 NOTRE = (250, 176, 60)
 
 
+def figure_reelle(bloc_npy: Path, depart, sortie: Path, n_pas: int = 800) -> dict | None:
+    """La meme marche, sur la VRAIE prediction publiee, avant et apres la distance.
+
+    ⚠⚠ Les deux moities sont le meme bloc, le meme depart et le meme code : seul le CHAMP
+    change. Si l'une avait un autre reglage, on ne saurait pas ce qui explique la difference.
+
+    ⚠⚠ ET LE PLAN DE COUPE EST CHOISI PAR LA MARCHE, PAS PAR MOI. Premiere version : je
+    coupais en z, au z du depart. Le chemin y traversait visiblement cinq nappes -- une
+    image accablante, et FAUSSE : la marche avait parcouru 125 voxels en z pour 57 en y,
+    donc elle s'enfoncait dans l'ecran et sa projection sur une tranche de z ne pouvait
+    que croiser des bandes. Mesure qui tranche : la valeur de la distance le long du
+    chemin ne descend jamais sous 1,22 et ne traverse AUCUN vide. Le plan est donc celui
+    des deux axes de plus grande etendue, et la tranche est prise a la mediane du chemin
+    sur le troisieme -- la ou le chemin est reellement.
+    """
+    from PIL import Image, ImageDraw
+    from suivre_nappe import champ_de_distance, echantillon
+
+    if not bloc_npy.exists():
+        return None
+    brut = np.load(bloc_npy).astype(np.float32)
+    if brut.max() > 1.5:
+        brut = brut / 255.0
+    dist = champ_de_distance(brut)
+
+    n = brut.shape[0]
+    ech = max(1, 760 // n)
+    panneaux = []
+    # ⚠⚠ LES DEUX CHEMINS SONT JUGES SUR LE MEME CHAMP, celui de la distance. Compter
+    # « les vides traverses » sur le champ de chacun ne separait rien : sur un masque, la
+    # matiere est un plateau, donc y rester est facile et ne dit rien de la position dans
+    # l'epaisseur. Ce qui separe, c'est la distance au bord LE LONG du chemin -- une
+    # marche sur l'axe median est loin des bords, une marche collee au bord ne l'est pas.
+    for champ, titre in ((brut, "masque publie (th0.2) - deux valeurs, aucune crete"),
+                         (dist, "transformee de distance - la crete est l'axe median")):
+        res = marcher(champ, depart, [0.0, 1.0, 0.0], n_pas=n_pas)
+        pts = np.array(res["points"])
+        if pts.ndim != 2 or len(pts) < 2:
+            pts = np.array([depart, depart], dtype=float)
+        etendue = pts.max(0) - pts.min(0)
+        a1, a2 = sorted(int(k) for k in np.argsort(etendue)[-2:])
+        perp = ({0, 1, 2} - {a1, a2}).pop()
+        tranche = int(round(float(np.median(pts[:, perp]))))
+        coupe = np.take(champ, min(max(tranche, 0), champ.shape[perp] - 1), axis=perp)
+
+        m = float(coupe.max()) or 1.0
+        h, w = coupe.shape
+        im = Image.new("RGB", (w * ech, h * ech + 60), FOND)
+        d = ImageDraw.Draw(im)
+        for y in range(h):
+            for x in range(w):
+                v = float(coupe[y, x]) / m
+                if v > 0.03:
+                    g = tuple(int(FOND[i] + (NAPPE[i] - FOND[i]) * min(v, 1.0)) for i in range(3))
+                    d.rectangle([x * ech, y * ech + 60, (x + 1) * ech - 1,
+                                 (y + 1) * ech + 59], fill=g)
+        d.line([(q[a2] * ech + ech / 2, q[a1] * ech + ech / 2 + 60) for q in pts],
+               fill=NOTRE, width=2, joint="curve")
+        dx, dy = depart[a2] * ech + ech / 2, depart[a1] * ech + ech / 2 + 60
+        d.ellipse([dx - 4, dy - 4, dx + 4, dy + 4], outline=(255, 255, 255), width=2)
+
+        # ⚠ Un vide est une valeur de distance quasi nulle, en VOXELS -- pas une fraction
+        # du maximum de la tranche. Une premiere version prenait 0,6 x max : sur la
+        # tranche la plus epaisse, ca mettait le seuil a 2,4 voxels et comptait 25
+        # « vides » sur un chemin qui n'en traverse aucun.
+        edt_chemin = np.array([echantillon(dist, q) for q in pts])
+        vides = int(np.sum(np.diff((edt_chemin < 0.5).astype(int)) == 1))
+        mediane = float(np.median(edt_chemin))
+        noms = "zyx"
+        d.text((8, 6), titre, fill=(226, 226, 230))
+        d.text((8, 24), f"{res['pas_faits']} pas - {res['arret']}", fill=NOTRE)
+        d.text((8, 42), f"plan {noms[a1]}{noms[a2]} (tranche {noms[perp]}={tranche}) - "
+                        f"distance au bord le long du chemin : mediane {mediane:.2f} vx, "
+                        f"{vides} vide(s) traverse(s)", fill=(150, 150, 156))
+        panneaux.append((im, res, (vides, mediane)))
+
+    largeur = sum(im.width for im, _, _ in panneaux) + 8
+    hauteur = max(im.height for im, _, _ in panneaux)
+    toile = Image.new("RGB", (largeur, hauteur), FOND)
+    x = 0
+    for im, _, _ in panneaux:
+        toile.paste(im, (x, 0))
+        x += im.width + 8
+    sortie.parent.mkdir(parents=True, exist_ok=True)
+    toile.save(sortie)
+    return {"sortie": str(sortie),
+            "pas_masque": panneaux[0][1]["pas_faits"],
+            "pas_distance": panneaux[1][1]["pas_faits"],
+            "vides_masque": panneaux[0][2][0],
+            "vides_distance": panneaux[1][2][0],
+            "edt_median_masque": panneaux[0][2][1],
+            "edt_median_distance": panneaux[1][2][1],
+            "arret_masque": panneaux[0][1]["arret"],
+            "arret_distance": panneaux[1][1]["arret"]}
+
+
 def main() -> int:
     from PIL import Image, ImageDraw
 
@@ -91,6 +187,20 @@ def main() -> int:
     print(f"ecrit : {sortie}  ({im.width}x{im.height})")
     print(f"  naif  : ecart max {e_naif:.2f} voxels, {naif['pas_faits']} pas — {naif['arret']}")
     print(f"  notre : ecart max {e_notre:.2f} voxel, {notre['pas_faits']} pas — {notre['arret']}")
+
+    # ⚠ La figure reelle n'est produite QUE si le bloc a ete telecharge : une figure
+    # fabriquee a partir de rien serait indistinguable d'une figure de donnees.
+    r = figure_reelle(RACINE / "data" / "nappe" / "bloc_1447_r128.npy",
+                      [128.0, 128.0, 128.0],
+                      RACINE / "docs" / "images" / "41_marche_reelle.png")
+    if r is None:
+        print("  (pas de bloc réel sous data/nappe/ — figure réelle non produite)")
+    else:
+        print(f"ecrit : {r['sortie']}")
+        print(f"  masque    : {r['pas_masque']} pas, distance au bord médiane "
+              f"{r['edt_median_masque']:.2f} vx, {r['vides_masque']} vide(s) — {r['arret_masque']}")
+        print(f"  distance  : {r['pas_distance']} pas, distance au bord médiane "
+              f"{r['edt_median_distance']:.2f} vx, {r['vides_distance']} vide(s) — {r['arret_distance']}")
     return 0
 
 

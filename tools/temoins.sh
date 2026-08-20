@@ -161,7 +161,7 @@ PY
 
 run "zarr : clef de chunk"    uv run python - <<'PY'
 import sys; sys.path.insert(0,'../analysis/src')
-from zarr_depth import chunk_key, decode
+from zarr_depth import chunk_key, decode, CodecIndisponible
 n=0
 def ck(c):
     global n
@@ -181,7 +181,17 @@ ck(chunk_key({"dimension_separator": "/"}, 1, 4, 5, 9) == "1/9/4/5")
 # ⚠ « absent » et « illisible » doivent rester distincts d'un chunk vide.
 ck(decode(b"abc", {}, 3) == b"abc")                 # brut, taille juste
 ck(decode(b"ab", {}, 3) is None)                    # brut tronque -> refus
-ck(decode(b"xx", {"compressor": {"id": "inconnu"}}, 3) is None)
+# ⚠⚠ CE CONTROLE A CHANGE DE SENS LE 2026-08-20, et le changement est le correctif.
+# Avant, un codec que la machine ne sait pas lire rendait None -- donc la meme valeur
+# qu'un chunk absent. Paye : `numcodecs` manquait dans un environnement, TOUS les chunks
+# blosc d'une prediction sont revenus vides, et j'en ai conclu que la graine n'etait pas
+# couverte par la prediction publiee. Elle l'etait. Un defaut d'installation avait pris
+# la forme d'un fait sur le rouleau. Desormais ca LEVE.
+try:
+    decode(b"xx", {"compressor": {"id": "inconnu"}}, 3)
+    raise AssertionError("un codec inconnu doit LEVER, pas rendre None")
+except CodecIndisponible:
+    ck(True)
 print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
@@ -610,15 +620,19 @@ n += 1
 print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
+# ⚠ Ces deux-la tournent depuis `inference/` : c'est le seul environnement du depot qui
+# porte Pillow, et `temoins.sh` s'execute depuis `experiments/` pour le reste. Lance
+# ailleurs, l'import echoue en disant « pas de module PIL », ce qui se lit comme une
+# dependance manquante et non comme un mauvais repertoire.
 printf '  %-30s ' "marche sur nappe"
-if uv run python "$ROOT/analysis/src/suivre_nappe.py" --verifier >/tmp/nappe.log 2>&1; then
+if (cd "$ROOT/inference" && uv run python "$ROOT/analysis/src/suivre_nappe.py" --verifier) >/tmp/nappe.log 2>&1; then
   printf '✅ %s\n' "$(grep -c '✅' /tmp/nappe.log) checks"
 else
   printf '❌ ECHEC\n'; sed 's/^/       /' /tmp/nappe.log | tail -6; FAIL=$((FAIL + 1))
 fi
 
 printf '  %-30s ' "mosaique : assemblage"
-if uv run python "$ROOT/analysis/src/assembler_mosaique.py" --verifier >/tmp/mos.log 2>&1; then
+if (cd "$ROOT/inference" && uv run python "$ROOT/analysis/src/assembler_mosaique.py" --verifier) >/tmp/mos.log 2>&1; then
   printf '✅ %s\n' "$(grep -c '✅' /tmp/mos.log) checks"
 else
   printf '❌ ECHEC\n'; sed 's/^/       /' /tmp/mos.log | tail -6; FAIL=$((FAIL + 1))

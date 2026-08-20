@@ -81,21 +81,40 @@ def chunk_key(meta: dict, level: int, cy: int, cx: int, cz: int = 0) -> str:
     return f"{level}/" + sep.join((str(cz), str(cy), str(cx)))
 
 
-def decode(raw: bytes, meta: dict, expected: int) -> bytes | None:
-    """Décompresse si besoin. Rend None si le codec est absent de la machine.
+class CodecIndisponible(RuntimeError):
+    """Le chunk est là, la machine ne sait pas le décompresser.
 
-    ⚠ On distingue « ce chunk n'existe pas » de « je ne sais pas le lire » : le premier
-    est une information sur le rouleau, le second sur notre installation, et les
-    confondre fait passer un outil incomplet pour une mesure.
+    ⚠⚠ Cette exception existe parce que la docstring de `decode` PROMETTAIT de distinguer
+    « ce chunk n'existe pas » de « je ne sais pas le lire » pendant que le code rendait
+    `None` dans les deux cas. Payé le 2026-08-20 : `numcodecs` manque dans
+    l'environnement `inference/`, donc tous les chunks blosc d'une prédiction sont revenus
+    vides, et j'en ai conclu — en le mesurant, en l'écrivant — que **la graine n'était pas
+    couverte par la prédiction publiée**. C'était faux : le chunk `0/69/14/24` existe.
+    Une panne d'installation avait pris la forme d'un fait sur le rouleau.
+    """
+
+
+def decode(raw: bytes, meta: dict, expected: int) -> bytes | None:
+    """Décompresse si besoin.
+
+    Rend `None` seulement quand les octets ne font pas la taille attendue — c'est-à-dire
+    quand le chunk est réellement inutilisable. Si le codec déclaré n'est pas installé,
+    **lève** `CodecIndisponible` : un défaut de notre machine ne doit jamais ressortir
+    comme une information sur le rouleau.
     """
     codec = (meta.get("compressor") or {}).get("id")
     if codec is None:
         return raw if len(raw) == expected else None
     decoder = DECODERS.get(codec)
     if decoder is None:
-        return None
+        raise CodecIndisponible(
+            f"codec « {codec} » non géré par ce lecteur — le chunk existe pourtant")
     try:
         out = decoder(raw)
+    except ImportError as e:
+        raise CodecIndisponible(
+            f"codec « {codec} » déclaré mais sa bibliothèque manque ici ({e}) — "
+            f"lancer depuis un environnement qui a numcodecs (experiments/)") from e
     except Exception:
         return None
     return out if len(out) == expected else None

@@ -1,0 +1,12 @@
+{
+  "pas_avant": 138,
+  "arret": "sortie du bloc",
+  "points": 283,
+  "origine": [
+    13222,
+    2612,
+    4554
+  ],
+  "collections": 1,
+  "fichier": "../data/nappe/correction_1447.json"
+}

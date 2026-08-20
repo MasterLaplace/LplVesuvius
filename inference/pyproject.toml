@@ -15,4 +15,5 @@ dependencies = [
     "openvino>=2026.3.0",
     "onnxscript>=0.7.1",
     "onnx>=1.22.0",
+    "scipy>=1.11",
 ]

@@ -144,6 +144,18 @@ converge **sans** compte de croisements catastrophique. Si se croiser était la 
 bonne trace, il devrait en avoir. Donc au mieux « beaucoup de croisements » est un
 *symptôme* de suivi de spire, jamais son critère.
 
+## ⭐⭐ Une cause candidate, trouvée le lendemain
+
+[`41`](41_marcher_le_long_dune_nappe.md) mesure que la prédiction de surface publiée de
+`PHerc1447` est un **masque binaire** (`…-th0.2.zarr`, deux valeurs : 0 et 255). Un masque
+n'a **pas de gradient à l'intérieur de la matière** — il a un plateau — donc un traceur n'y
+trouve rien à suivre, et rien ne le ramène vers une feuille plutôt qu'en travers.
+
+⚠⚠ **C'est une hypothèse, pas la conclusion de ce document.** Elle expliquerait α = +1,01,
+mais l'établir demande de relancer le traceur sur un champ de distance et de voir la
+convergence changer. Tant que ce contrôle n'a pas tourné, ce document dit ce qu'il mesure —
+la surface est en travers — et pas pourquoi.
+
 ## Reproduire
 
 ```bash

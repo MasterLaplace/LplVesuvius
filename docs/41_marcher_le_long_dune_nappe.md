@@ -1,7 +1,7 @@
 # Marcher le long d'une nappe — et pourquoi « au plus proche » ne marche pas
 
 2026-08-20, nuit. Le maillon manquant de [`39`](39_le_seam_de_correction.md).
-Instrument : `analysis/src/suivre_nappe.py` (24 témoins, dont un **témoin négatif**).
+Instrument : `analysis/src/suivre_nappe.py` (29 témoins, dont un **témoin négatif**).
 Figure : `analysis/src/figure_marche.py`.
 
 ---
@@ -98,11 +98,83 @@ horizontales** et **l'axe v les fibres verticales**. Autrement dit :
 Et `CORRECTION` est exactement le résidu que nos points de passage alimentent : nous
 n'ajoutons pas une méthode à côté du solveur, nous **remplissons un terme qu'il attend déjà**.
 
-## 6. ⚠ Ce que ce lot ne fait pas
+## 6. ⭐⭐⭐ Sur la vraie prédiction : ce qui manquait n'était pas la marche, c'était le CHAMP
 
-- **Il n'a rien tracé.** La marche est validée sur des nappes **fabriquées** (cylindre
-  courbe, doublé, troué, estompé) — pas encore sur une vraie prédiction. C'est le lot suivant,
-  et il coûte du réseau, pas de la conception.
+Lancée sur la prédiction publiée de `PHerc1447` à **leur** graine, la marche s'arrête au
+bout de 9 pas en refusant un saut. Mesure du bloc avant d'accuser quoi que ce soit :
+
+```sh
+valeurs distinctes : 2   ->   0 et 255
+x: ........................#########################################################
+y: ......####......................####............####.........####................
+```
+
+⚠⚠ **La prédiction publiée est un MASQUE BINAIRE.** Son nom le disait —
+`…-surface-m7-L0-th0.2.zarr`, *th* pour *threshold* — et ça change tout : **un masque n'a
+pas de gradient à l'intérieur de la matière, il a un plateau.**
+
+| conséquence | ce que ça produit |
+|---|---|
+| le tenseur de structure ne voit rien hors des bords | pas de normale fiable |
+| `argmax` sur un plateau rend le **premier** indice | la marche se colle au **bord** de la nappe |
+| rien à suivre pour un traceur | **exactement l'état constaté par [`38`](38_ce_qui_bouge_avec_la_fenetre.md)** |
+
+⭐ **Le remède rend la crête** : la transformée de distance donne à chaque voxel de matière
+sa distance au vide, donc son maximum local est le **milieu** de la nappe — son axe médian.
+C'est ce que désigne le *cache EDT* que le pipeline officiel utilise et que le bucket ne
+publie pas. Ajouté (`champ_de_distance`), mesuré **à bloc, départ et code identiques** :
+
+![la marche sur la vraie prediction, avant et apres la distance](images/41_marche_reelle.png)
+
+| sur le même bloc réel, même départ | pas | distance au bord, médiane | vides traversés | arrêt |
+|---|---:|---:|---:|---|
+| masque brut | 106 | **1,34 vx** | 0 | saut de nappe refusé |
+| **transformée de distance** | **138** | **1,74 vx** | 0 | **sortie du bloc** |
+
+Les deux restent dans la matière — sur un masque, la matière est un plateau et y rester est
+facile. Ce qui les sépare est la **position dans l'épaisseur** : la marche sur la distance se
+tient plus près de l'axe médian et va plus loin, jusqu'à ce que le cube se termine.
+**283 points de passage** dans les deux sens, soit ≈ 2,4 mm de nappe suivie à 8,64 µm le voxel.
+
+⚠ Et le refus est explicite : sur un masque binaire sans `--distance`, l'outil **refuse de
+marcher** et nomme le remède. Convertir en douce ferait croire que la prédiction publiée
+porte une structure qu'elle ne porte pas.
+
+### ⚠⚠ Deux mesures que j'ai failli publier fausses, dans cette seule section
+
+1. **Une comparaison entre deux blocs différents.** J'avais d'abord opposé « 9 pas sur le
+   masque » à « 138 sur la distance » — mais le 9 venait d'un cube de rayon 64 et le 138 d'un
+   cube de rayon 128. Deux nombres qui ne se comparent pas, présentés comme un facteur 15. Les
+   chiffres du tableau ci-dessus sont **appariés** : même bloc, même départ, même code.
+2. **Un chemin 3D projeté sur une seule tranche.** La première figure coupait en `z`, au `z` du
+   départ, et le chemin y traversait visiblement cinq nappes — une image accablante, et fausse.
+   La marche avait parcouru **125 voxels en z pour 57 en y** : elle s'enfonçait dans l'écran,
+   donc sa projection ne pouvait que croiser des bandes. Ce qui a tranché est une mesure, pas
+   un second regard : la distance au bord le long du chemin ne descend jamais sous 1,22 et
+   **aucun vide n'est traversé**. Le plan de coupe est désormais choisi par la marche — les
+   deux axes de plus grande étendue — et la tranche est prise à la médiane du chemin sur le
+   troisième.
+
+## 6bis. ⚠⚠ Une panne d'installation qui avait pris la forme d'un fait sur le rouleau
+
+Avant d'arriver là, j'ai mesuré — et j'allais écrire — que **la graine n'était pas couverte
+par la prédiction publiée** : cube entièrement à zéro, chunk rapporté absent à tous les
+niveaux de la pyramide. C'était faux. Le chunk `0/69/14/24` existe et porte 19,3 % de
+matière.
+
+La cause : `numcodecs` manque dans l'environnement `inference/`, donc **aucun** chunk *blosc*
+n'était décodable — et `lire_chunk` rendait `None`, la même valeur que pour un chunk absent.
+
+⚠ Le plus instructif : la docstring de `decode` **promettait déjà** de distinguer « ce chunk
+n'existe pas » de « je ne sais pas le lire », en écrivant que les confondre *« fait passer un
+outil incomplet pour une mesure »*. Le commentaire était juste, le code faisait l'inverse, et
+c'est exactement ce qui s'est produit. Corrigé : `decode` **lève** `CodecIndisponible` au lieu
+de rendre `None`, et le message nomme l'environnement à utiliser.
+
+## 7. ⚠ Ce que ce lot ne fait pas
+
+- **Il n'a rien tracé.** La marche produit des points de passage ; les donner à
+  `--resume --rewind-gen --correct` et juger le résultat au test de convergence reste à faire.
 - **Il ne dit pas quelle nappe suivre.** Il suit celle sur laquelle on le pose. Choisir est
   le travail de la graine ([`25`](25_une_graine_choisie_sur_la_planeite.md)), vérifier que la
   trace obtenue suit bien une feuille est celui du test de convergence
@@ -121,6 +193,13 @@ n'ajoutons pas une méthode à côté du solveur, nous **remplissons un terme qu
 
 ```bash
 cd inference
-uv run python ../analysis/src/suivre_nappe.py --verifier     # 24 témoins
+uv run python ../analysis/src/suivre_nappe.py --verifier     # 29 témoins
 uv run python ../analysis/src/figure_marche.py               # la figure
+
+# sur la vraie prédiction — ⚠ depuis experiments/, le seul env qui a numcodecs
+cd ../experiments
+uv run python ../analysis/src/suivre_nappe.py \
+  --zarr PHerc1447/representations/predictions/surfaces/20250521151220-surface-20260413222639-surface-m7-L0-th0.2.zarr \
+  --xyz 4682 2740 13350 --rayon 128 --n-pas 800 --deux-sens --distance \
+  --sortie ../data/nappe/correction_1447.json
 ```

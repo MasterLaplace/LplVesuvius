@@ -118,10 +118,33 @@ de 17, quitte sa nappe de **5,94 voxels** (au-delà de la voisine) là où la ma
 reste à **0,67**. Facteur 9. Et le chemin naïf reste **connexe et plausible** — rien dans sa
 forme ne le trahit.
 
-⚠ **Ce qui reste avant de brancher** : la marche n'est validée que sur des nappes
-**fabriquées**. La faire tourner sur une vraie prédiction coûte du réseau, pas de la
-conception. Puis `--resume --rewind-gen --correct`, puis le test de convergence de `38`
-comme juge.
+⭐⭐⭐ **ET LA MARCHE SUR LA VRAIE PRÉDICTION A TROUVÉ, PEUT-ÊTRE, LA CAUSE DE TOUT.** La
+prédiction publiée de `PHerc1447` s'appelle `…-th0.2.zarr` et porte **exactement deux
+valeurs**, 0 et 255 : c'est un **masque seuillé**, pas une probabilité. Un masque n'a
+aucun gradient à l'intérieur de la matière — il a un plateau. Donc **il n'y a rien à
+suivre**, et une trace poussée là-dessus n'a aucune raison de se coucher sur une feuille
+plutôt qu'en travers. C'est exactement l'état que [`38`](docs/38_ce_qui_bouge_avec_la_fenetre.md)
+constate sans l'expliquer.
+
+Le remède est la **transformée de distance** : elle rend à chaque nappe son axe médian,
+donc une crête. C'est ce que désigne le « cache EDT » que le pipeline officiel utilise et
+que le bucket ne publie pas. Mesuré à bloc et départ identiques : 106 pas / distance au
+bord médiane **1,34 vx** sur le masque, contre 138 pas / **1,74 vx** sur la distance.
+
+⚠⚠ **HYPOTHÈSE, PAS CONCLUSION** : que le masque binaire soit *la* cause de nos coupes
+radiales n'est pas démontré — il faudrait relancer `vc_grow_seg_from_seed` sur un volume
+EDT et voir la convergence changer. C'est le contrôle qui manque, et c'est le prochain
+geste.
+
+⚠ **Reste aussi** : donner les points à `--resume --rewind-gen --correct`, puis juger au
+test de convergence de `38`.
+
+⚠⚠ **Piège payé, et il est générique** : `decode` (`analysis/src/zarr_depth.py`) rendait
+`None` aussi bien pour « ce chunk n'existe pas » que pour « je ne sais pas le décompresser »
+— alors que sa propre docstring promettait de les distinguer. `numcodecs` manque dans
+`inference/`, donc tous les chunks blosc sont revenus vides et j'ai **mesuré, puis écrit**,
+que la graine n'était pas couverte par la prédiction publiée. Elle l'était. Corrigé : ça
+**lève** `CodecIndisponible`. ⚠ Les lectures zarr se font depuis **`experiments/`**.
 
 ### Les deux pistes qui restent, par coût croissant
 
