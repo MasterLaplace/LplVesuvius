@@ -90,7 +90,9 @@ Trois entrées neuves, chacune née d'une mesure de la journée.
 | # | quoi | source |
 |---|---|---|
 | **N1** ⏳ | **`PHerc1203` n'a jamais eu de graine cherchée**, sur aucune campagne — il manque à `25`, à `docs/table_graines.json` et donc à `35`. C'est l'un des **trois** rouleaux du prix avec un segment publié, donc l'un des rares où comparer notre trace à la leur | `35` §5 |
-| **N2** ⏳ | **le protocole « sélectionner sur un axe, valider sur l'autre »** n'est toujours pas testé. `35` chiffre le levier de l'échantillonnage ; il ne teste pas la parade à la malédiction du vainqueur | `35` §4 · `31` §4 |
+| **N2** | **le protocole « sélectionner sur un axe, valider sur l'autre »** | ✅ **testé le 2026-08-20** → [`37`](37_les_deux_axes_ne_saccordent_pas.md) : **1 accord sur 8**, là où le hasard en donnerait 4. Sélectionner sur la géométrie n'achète rien sur la profondeur | `35` §4 · `31` §4 |
+| **N4** ⏳ | **choisir une référence défendable pour le critère du tiers central.** [`36`](36_lorigine_de_la_pile.md) montre qu'un segment officiel n'en est pas une — 18 % à 68 % sur un seul rouleau — donc le critère retiré par `25` mérite d'être reconsidéré, mais pas rétabli sur « le meilleur des quatre » | `36` §4 |
+| **N5** ⚠⚠ | **nos traces sont à 146–187 µm de leur feuille**, contre 3–11 µm pour les segments officiels publiés. L'origine de mesure vient d'être vérifiée, donc ce n'est pas un artefact — c'est le fait le plus dur pour la suite | `37` §3 · `36` §5 |
 | **N3** ⏳ | **la dispersion d'aire n'est pas expliquée** : 0,24 % à 35 % selon le rouleau, et les rouleaux stables sont ceux qui plafonnent en générations. Mesure qui trancherait : relever le plafond et rejouer | `35` §3 |
 
 ## ⭐ 4. Publier — et la seule échéance courte du dépôt
@@ -126,6 +128,9 @@ domaine au moins une fois dans ce dépôt.
 | ⚠⚠ **un verdict « propre » peut sortir sur ZÉRO paire testée** | au réglage `--maxedge` par défaut, dès que le maillage a un pas ≥ 60. Un portail bâti sur `--fail-on-crossing` laisserait tout passer | `34` §2 |
 | ⚠⚠ **le classement des treize rouleaux n'existe pas** | rho de Spearman **−0,297** entre deux échantillonnages, treize rangs changés ; le témoin passe de 0 % à 4 % | `33` §4bis |
 | ⭐ **le traceur est un tirage sur douze rouleaux** | 4 rouleaux sur 12 où le verdict bascule à paramètres identiques ; 0 reproductible ; et **l'aire ne signale pas** le mauvais tirage | `35` |
+| ⭐⭐ **les deux axes de jugement ne se recoupent pas** | 1 accord sur 8 comparaisons, sur deux tailles de fenêtre | `37` |
+| ⚠⚠ **« officiel » n'est pas synonyme de « bon »** | quatre segments publiés d'un même rouleau : 18,2 / 25,0 / 62,5 / 68,2 % de pics dans le tiers central | `36` §3 |
+| ✅ **l'origine de nos piles de rendu est bonne** | le même segment officiel : 3,00 µm côté publié, 17,28 µm côté nous | `36` §2 |
 | ⚠ en **zone comprimée l'information n'est pas dans le CT** | 78 % de pics uniques couvrant deux feuilles | `28` §4 · `villa#191` |
 | ⚠ **aucun test géométrique** ne sépare un saut d'une spire d'une courbure, dans le cas serré | écart inter-spires 18–58 vx contre 20 vx de cellule | `28` §4 |
 
