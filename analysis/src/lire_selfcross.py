@@ -57,6 +57,48 @@ def lire(chemin: str | Path) -> dict:
     return r
 
 
+def auditer(racine: Path) -> int:
+    """Parcourir un arbre et nommer tout rapport dont le verdict ne mesure rien.
+
+    ⚠ Existe parce que la question « un de nos chiffres publies depend-il d'un verdict
+    vide ? » se repond par un nombre, pas par une conviction. Elle a ete posee le
+    2026-08-20 sur l'arbre entier, et la reponse etait non -- mais elle etait *verifiee*.
+    """
+    vides, filtres, lus = [], [], 0
+    for f in sorted(racine.rglob("*.json")):
+        try:
+            d = json.loads(f.read_text())
+        except (json.JSONDecodeError, UnicodeDecodeError, OSError):
+            continue
+        if not isinstance(d, dict) or "clean_of_transverse_self_intersection" not in d:
+            continue
+        lus += 1
+        try:
+            r = lire(f)
+        except RapportVide:
+            vides.append(f)
+            continue
+        if r["jetes"]:
+            filtres.append((f, r["jetes"], r["transverse"]))
+
+    print(f"{lus} rapports selfcross sous {racine}")
+    if vides:
+        print(f"\n⚠⚠ {len(vides)} rapport(s) déclarent un verdict sans avoir testé une seule "
+              f"paire — leur « propre » ne mesure rien :")
+        for f in vides:
+            print(f"     {f}")
+    else:
+        print("  ✅ aucun verdict rendu sur zéro paire testée")
+    if filtres:
+        print(f"\n⚠ {len(filtres)} rapport(s) où le filtre --maxedge a jeté des quads : le "
+              f"compte porte sur une partie de la surface seulement :")
+        for f, jetes, tr in filtres:
+            print(f"     {f}  ({jetes} quads jetés, {tr} croisements sur le reste)")
+    else:
+        print("  ✅ aucun rapport où le filtre a jeté un quad")
+    return 1 if vides else 0
+
+
 def verifier() -> int:
     """Temoin hors ligne : le refus doit se declencher, et ne se declencher que la."""
     import tempfile
@@ -120,10 +162,14 @@ def main() -> int:
     ap.add_argument("--champ", default="transverse",
                     choices=["transverse", "paires", "jetes", "coplanaire", "rasant"])
     ap.add_argument("--verifier", action="store_true")
+    ap.add_argument("--auditer", type=Path,
+                    help="parcourir un arbre et nommer tout verdict rendu sur zéro paire")
     a = ap.parse_args()
 
     if a.verifier:
         return verifier()
+    if a.auditer:
+        return auditer(a.auditer)
     if not a.rapport:
         ap.error("donner un rapport, ou --verifier")
     try:
