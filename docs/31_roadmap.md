@@ -271,7 +271,7 @@ jamais ne détecte rien.
 | **avant le 31 août** | Progress Prize | ⚠ `15` se déclare **périmé sur deux points** ; à refaire avant l'envoi, pas après |
 | **septembre** | §9 — *corriger sert-il à quelque chose ?* | c'est le socle, et publiable dans les deux sens |
 | septembre | l'échantillonnage de `30` : N tirages, sélection sur un axe, **validation sur l'autre** | bon marché, le levier est mesuré |
-| septembre | ⭐ **mesurer la part comprimée rouleau par rouleau** | ça dit **sur lequel des treize** le prix est jouable, et ça coûte une campagne de séparabilité qu'on sait faire |
+| septembre | ⭐ **mesurer la part comprimée rouleau par rouleau**, à **50 fenêtres** minimum | ça dit **sur lequel des treize** le prix est jouable — ⚠⚠ et [`33`](33_la_carte_nest_pas_resolue.md) mesure que la campagne de `16`, à 15–35 fenêtres, **ne sépare aucune paire** : l'effectif est le paramètre qui décide, pas l'instrument |
 | octobre | §6 — l'instrument de désaccord | c'est la contribution que le concours nomme |
 | oct.–nov. | §3.1 — la représentation en **index d'enroulement + décalage** | c'est elle qui rend §6 exact au lieu d'approché |
 | nov.–janv. | §8 — l'enchaînement automatique de spire à spire | l'étage vide, celui qui vaut le prix |
@@ -290,7 +290,10 @@ dans le scan).
    tracer 100 %, même moyennement, plutôt que tracer bien.
 2. **Si les treize rouleaux sont tous trop comprimés** : le prix devient inatteignable sur
    ce corpus, quelle que soit l'algorithmique. ⭐ **C'est mesurable en septembre**, et
-   c'est la mesure qui doit venir tôt.
+   c'est la mesure qui doit venir tôt. ⚠⚠ **Et on ne sait pas encore la faire assez
+   finement** : [`33`](33_la_carte_nest_pas_resolue.md) montre qu'aux effectifs de `16`
+   aucun des treize n'a d'intervalle qui exclut d'être sous 10 %, ni au-dessus. La
+   question n'a aujourd'hui de réponse pour **aucun** rouleau.
 3. **Si le traceur ne peut pas être rendu déterministe** et que l'échantillonnage ne suffit
    pas : « fully automated » devient un mot qu'on ne peut pas tenir. Le repli honnête est
    de publier le **détecteur** seul, qui n'a pas ce problème.

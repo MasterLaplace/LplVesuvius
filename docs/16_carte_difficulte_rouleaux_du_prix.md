@@ -15,8 +15,17 @@
 >
 > ⭐ **C'est la queue qui sépare.** Le témoin est à **0 %** de fenêtres indissociables ; les
 > treize s'étalent de **4 %** à **24 %**. La difficulté de ces rouleaux n'est pas globale,
-> elle est **locale** — et c'est ce qui désigne `PHerc0358` (4 %) comme le premier à
-> attaquer.
+> elle est **locale**.
+
+⚠⚠ **Corrigé le 2026-08-20 : la dernière proposition de ce bloc a été retirée.** Elle
+disait *« et c'est ce qui désigne `PHerc0358` (4 %) comme le premier à attaquer »*.
+[`33`](33_la_carte_nest_pas_resolue.md) mesure l'incertitude de ces parts — elles portent
+sur **15 à 35 fenêtres** — et trouve que **0 des 78 paires** de rouleaux est réellement
+séparée, et **0 des 13** distinguable du témoin après correction de Holm. Le classement
+n'est donc pas établi. Ce qui survit : la médiane ne sépare rien (ci-dessous), et les
+treize **pris ensemble** diffèrent du témoin (42/300 contre 0/24). `PHerc0358` reste un
+départ défendable — il a le meilleur point observé — mais c'est un choix par défaut
+assumé, pas une conclusion de la mesure.
 
 ⚠ **Sans témoin apparié, aucun de ces chiffres ne veut dire quoi que ce soit.** Une part de
 10 % n'est ni bonne ni mauvaise dans l'absolu ; elle l'est par rapport à un rouleau qu'on a
@@ -218,9 +227,18 @@ dit — *« scan quality is local. A scan can hold excellent regions and
 nearly-impossible-to-unwrap ones in the very same volume »* — et c'est maintenant
 chiffré par rouleau.
 
-⭐ **Actionnable** : `PHerc0358` a la meilleure combinaison — d′ médian 1,53 (au-dessus
-du témoin) et seulement **4 %** de zones indissociables, le minimum des treize. C'est
-lui qu'on attaquerait en premier.
+⭐ **Actionnable** : `PHerc0358` a la meilleure combinaison observée — d′ médian 1,53
+(au-dessus du témoin) et **4 %** de zones indissociables, le minimum des treize. C'est
+lui qu'on attaque en premier.
+
+⚠⚠ **Corrigé le 2026-08-20.** Ce paragraphe disait *« C'est lui qu'on attaquerait en
+premier »* comme si la mesure le désignait. Elle ne le désigne pas :
+[`33`](33_la_carte_nest_pas_resolue.md) montre que son intervalle de confiance exact va de
+**0,1 % à 18,3 %** et recouvre celui de chacun des douze autres. La réserve du paragraphe
+précédent — « ce qui se défend est l'ordre de grandeur, pas le zéro exact » — était juste,
+et elle va plus loin qu'il n'y paraissait : elle vaut aussi pour **l'ordre entre les
+treize**. ⭐ Et `33` §3 chiffre ce qu'il faudrait pour trancher : **50 fenêtres par
+rouleau** au lieu de 15–35, soit un échantillonnage plus dense de l'instrument existant.
 
 ### ⚠⚠ Et une limite qui vaut pour NOS DEUX instruments
 

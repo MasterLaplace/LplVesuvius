@@ -504,6 +504,16 @@ fi
 # est un resultat qu'on ne peut ni rejouer, ni verifier, ni corriger.
 run "artefacts : un producteur" python3 "$ROOT/analysis/src/artefacts_orphelins.py" --verifier
 
+# ⚠⚠ Deux instruments ecrits le 2026-08-20, et tous deux rendent un verdict STATISTIQUE :
+# un intervalle de confiance, une correction de comparaisons multiples, une fonction de
+# puissance. Une erreur dans l'un d'eux ne produit pas une erreur, elle produit un tableau
+# entierement plausible. La sonde qui compte dans le premier temoin est celle qui verifie
+# que la puissance tombe au niveau du test SOUS L'HYPOTHESE NULLE ; dans le second, que le
+# basculement d'un verdict ne se lit pas comme une simple dispersion d'aire.
+cd "$ROOT/experiments" || exit 2
+run "carte : incertitude"     uv run python "$ROOT/analysis/src/incertitude_carte.py" --verifier
+run "tirages : dépouillement" uv run python "$ROOT/analysis/src/table_tirages.py" --verifier
+
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
 sys.path.insert(0, '../analysis/src')
