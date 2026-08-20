@@ -83,9 +83,9 @@ else:
     CROIS=""
     if [ -n "$SURFDIR" ]; then
       vc_tifxyz_selfcross --surface "$SURFDIR" -o "$D/selfcross.json" > /dev/null 2>&1
-      CROIS=$(python3 -c "
-import json; d = json.load(open('$D/selfcross.json'))
-print(sum(c['transverse'] for c in d['census']))" 2>/dev/null)
+      # ⚠ `lire_selfcross.py` REFUSE (code 3) un rapport ou aucune paire n'a ete testee :
+      # l'outil declare alors « propre » sans avoir rien mesure. Voir docs/34.
+      CROIS=$(python3 "$ROOT/analysis/src/lire_selfcross.py" "$D/selfcross.json" 2>/dev/null)
     fi
     if [ "$RC" -eq 124 ]; then STATUT=timeout
     elif [ -z "$SURFDIR" ] || [ -z "${AIRE:-}" ]; then STATUT=sans_maillage

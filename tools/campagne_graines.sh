@@ -76,10 +76,9 @@ print(c[0]['x'], c[0]['y'], c[0]['z']) if c else sys.exit(1)")" || { echo "   �
     if [ -z "$SURFDIR" ]; then echo "   ⚠ $CRIT : aucune surface produite"; continue; fi
     vc_tifxyz_selfcross --surface "$SURFDIR" -o "$DEST/$R.$CRIT.selfcross.json" \
         > "$DEST/$R.$CRIT.selfcross.log" 2>&1
-    CROIS=$(python3 -c "
-import json
-d=json.load(open('$DEST/$R.$CRIT.selfcross.json'))
-print(sum(c['transverse'] for c in d['census']))" 2>/dev/null || echo "?")
+    # ⚠ Refus (code 3) si aucune paire n'a ete testee — voir docs/34.
+    CROIS=$(python3 "$ROOT/analysis/src/lire_selfcross.py" \
+              "$DEST/$R.$CRIT.selfcross.json" 2>/dev/null || echo "?")
     printf '   %-10s graine %6s %6s %6s   aire %8s cm²   auto-intersections %s\n' \
         "$CRIT" "$X" "$Y" "$Z" "${AIRE:-?}" "$CROIS"
     LIGNES="$LIGNES{\"critere\":\"$CRIT\",\"x\":$X,\"y\":$Y,\"z\":$Z,\"aire_cm2\":${AIRE:-null},\"transverse\":${CROIS:-null}},"

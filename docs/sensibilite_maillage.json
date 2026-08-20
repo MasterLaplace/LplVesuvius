@@ -1,0 +1,70 @@
+{
+  "maillage": "/home/masterlaplace/LplVesuvius/artefacts/PHerc0358/mesh.tifxyz",
+  "step_size": 20.0,
+  "lignes": [
+    {
+      "facteur": 1,
+      "pas_equivalent": 20.0,
+      "defaut": {
+        "paires": 751169,
+        "jetes": 0,
+        "transverse": 240,
+        "declare_propre": false
+      },
+      "brut": {
+        "paires": 751169,
+        "jetes": 0,
+        "transverse": 240,
+        "declare_propre": false
+      }
+    },
+    {
+      "facteur": 2,
+      "pas_equivalent": 40.0,
+      "defaut": {
+        "paires": 32255,
+        "jetes": 0,
+        "transverse": 123,
+        "declare_propre": false
+      },
+      "brut": {
+        "paires": 32255,
+        "jetes": 0,
+        "transverse": 123,
+        "declare_propre": false
+      }
+    },
+    {
+      "facteur": 3,
+      "pas_equivalent": 60.0,
+      "defaut": {
+        "paires": 0,
+        "jetes": 5202,
+        "transverse": 0,
+        "declare_propre": true
+      },
+      "brut": {
+        "paires": 3180,
+        "jetes": 0,
+        "transverse": 72,
+        "declare_propre": false
+      }
+    },
+    {
+      "facteur": 4,
+      "pas_equivalent": 80.0,
+      "defaut": {
+        "paires": 0,
+        "jetes": 2888,
+        "transverse": 0,
+        "declare_propre": true
+      },
+      "brut": {
+        "paires": 1191,
+        "jetes": 0,
+        "transverse": 49,
+        "declare_propre": false
+      }
+    }
+  ]
+}

@@ -34,6 +34,9 @@ import statistics
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import lire_selfcross  # noqa: E402  -- le seul lecteur de rapports selfcross
+
 RACINE = Path(__file__).resolve().parents[2]
 
 
@@ -81,6 +84,7 @@ def verifier() -> int:
         "DISPERSE": [(10.0, 0), (11.0, 0), (12.0, 0)],      # varie, verdict tenu
         "BASCULE": [(10.0, 0), (10.0, 7), (10.0, 0)],       # verdict oppose
         "RATE": [(10.0, 3), (10.0, 5)],                     # jamais propre
+        "SEUL": [(10.0, 0)],                                # ⚠ un seul tirage
     }
     with tempfile.TemporaryDirectory() as tmp:
         racine = Path(tmp)
@@ -120,10 +124,21 @@ def verifier() -> int:
     verifie("RATE ne bascule pas (aucun propre)", not par_nom["RATE"]["verdict_bascule"])
     verifie("RATE compte 0 propre", par_nom["RATE"]["propres"] == 0)
     verifie("mauvais = 1 (BASCULE) + 2 (RATE)", d["mauvais"] == 3, str(d["mauvais"]))
-    verifie("total = 3+3+3+2", d["tirages_total"] == 11, str(d["tirages_total"]))
+    verifie("total = 3+3+3+2+1", d["tirages_total"] == 12, str(d["tirages_total"]))
     verifie("IC encadre le taux", d["ic95_bas"] <= d["taux_mauvais"] <= d["ic95_haut"])
     verifie("bascules recensées", d["rouleaux_bascule"] == ["BASCULE"],
             str(d["rouleaux_bascule"]))
+    # ⭐ Le controle qui a manque a la premiere version : un seul tirage ne peut etre dit
+    # ni reproductible ni basculant, et ne doit se compter dans aucune des deux listes.
+    verifie("un seul tirage n'est PAS dit reproductible",
+            par_nom["SEUL"]["aire_identique"] is None,
+            str(par_nom["SEUL"]["aire_identique"]))
+    verifie("un seul tirage n'est PAS dit basculant",
+            par_nom["SEUL"]["verdict_bascule"] is None)
+    verifie("un seul tirage est recensé comme non concluant",
+            d["rouleaux_non_concluants"] == ["SEUL"], str(d["rouleaux_non_concluants"]))
+    verifie("un seul tirage n'entre pas dans les reproductibles",
+            "SEUL" not in d["rouleaux_reproductibles"])
 
     if echecs:
         print(f"\nECHEC ({echecs} failures, {controles} checks)")
@@ -158,18 +173,42 @@ def main() -> int:
         return verifier()
 
     par_rouleau: dict[str, list[dict]] = {}
-    rejetes = 0
+    rejetes, desaccords, revérifiés = 0, [], 0
     for f in sorted(Path(a.dossier).glob("*/*/resume.json")):
         r = json.loads(f.read_text())
         if r.get("statut") != "ok":
             rejetes += 1
             continue
+        # ⚠ Le resume est une COPIE ecrite par la campagne ; le rapport selfcross est le
+        # record. On relit le record quand il est la : un resume peut avoir ete ecrit par
+        # une campagne interrompue, ou par un script modifie pendant qu'il tournait -- ce
+        # dernier cas s'est produit le 2026-08-20, et un desaccord silencieux entre les
+        # deux aurait ete indetectable.
+        rapport = f.parent / "selfcross.json"
+        if rapport.is_file():
+            try:
+                vrai = lire_selfcross.lire(rapport)["transverse"]
+                revérifiés += 1
+                if vrai != r.get("transverse"):
+                    desaccords.append((r["rouleau"], r["repetition"], r.get("transverse"), vrai))
+                    r["transverse"] = vrai
+            except lire_selfcross.RapportVide:
+                desaccords.append((r["rouleau"], r["repetition"], r.get("transverse"),
+                                   "aucune paire testée"))
+                rejetes += 1
+                continue
         par_rouleau.setdefault(r["rouleau"], []).append(r)
     if not par_rouleau:
         print(f"aucun tirage exploitable sous {a.dossier}")
         return 1
 
     lignes = []
+    if desaccords:
+        print(f"⚠⚠ {len(desaccords)} désaccord(s) entre un résumé et son rapport — "
+              f"le rapport fait foi :")
+        for rouleau, rep, dit, vrai in desaccords:
+            print(f"     {rouleau} r{rep} : le résumé dit {dit}, le rapport dit {vrai}")
+        print()
     print(f"{sum(len(v) for v in par_rouleau.values())} tirages exploitables "
           f"sur {len(par_rouleau)} rouleaux"
           + (f" ({rejetes} sans maillage ou en dépassement)" if rejetes else "") + "\n")
@@ -185,9 +224,17 @@ def main() -> int:
         gens = [r["generations"] for r in lots]
         etendue = (max(aires) - min(aires)) / statistics.mean(aires) if statistics.mean(aires) else 0.0
         # Le controle : identique au bit pres ET meme verdict = tirage reproductible ici.
-        aire_identique = len(set(aires)) == 1
-        verdict_identique = len(set(bool(c) for c in crois)) == 1
-        bascule = not verdict_identique
+        #
+        # ⚠⚠ Il faut AU MOINS DEUX tirages pour que ces deux etiquettes veuillent dire
+        # quelque chose. Sur un seul tirage l'aire est trivialement identique a elle-meme
+        # et le verdict ne peut pas basculer : la premiere version de ce fichier a
+        # affiche « reproductible » pour un rouleau qui n'avait qu'un tirage, ce qui est
+        # une affirmation incapable d'etre fausse. n < 2 rend maintenant `None`, qui
+        # s'imprime « non concluant » et ne se compte nulle part.
+        concluant = len(lots) >= 2
+        aire_identique = (len(set(aires)) == 1) if concluant else None
+        verdict_identique = (len(set(bool(c) for c in crois)) == 1) if concluant else None
+        bascule = (not verdict_identique) if concluant else None
         lignes.append({
             "rouleau": rouleau, "n": len(lots), "graine": lots[0]["graine"],
             "voxel_um": lots[0]["voxel_um"],
@@ -197,7 +244,9 @@ def main() -> int:
             "croisements": crois, "propres": sum(1 for c in crois if c == 0),
             "aire_identique": aire_identique, "verdict_bascule": bascule,
         })
-        marque = " ⭐ bascule" if bascule else ("  reproductible" if aire_identique else "")
+        marque = ("  non concluant (1 tirage)" if not concluant
+                  else " ⭐ bascule" if bascule
+                  else "  reproductible" if aire_identique else "")
         print(f"  {rouleau:<12} {len(lots):>2} {min(gens):>3}–{max(gens):<3} "
               f"{min(aires):>10.6f} {max(aires):>10.6f} {etendue:>7.2%} "
               f"{','.join(str(c) for c in crois):>26}{marque}")
@@ -207,6 +256,7 @@ def main() -> int:
     bas, haut = clopper_pearson(mauvais, total)
     bascules = [l["rouleau"] for l in lignes if l["verdict_bascule"]]
     reproductibles = [l["rouleau"] for l in lignes if l["aire_identique"]]
+    non_concluants = [l["rouleau"] for l in lignes if l["verdict_bascule"] is None]
 
     print(f"\n  mauvais tirages : {mauvais}/{total} = {mauvais/total:.1%} "
           f"(IC 95 % exact : {bas:.1%} – {haut:.1%})")
@@ -215,12 +265,15 @@ def main() -> int:
     print(f"  rouleaux où l'aire est identique sur tous les tirages : "
           f"{len(reproductibles)}/{len(lignes)}"
           + (f"  ({', '.join(reproductibles)})" if reproductibles else ""))
+    if non_concluants:
+        print(f"  ⚠ rouleaux à un seul tirage, donc ni l'un ni l'autre : "
+              f"{len(non_concluants)}  ({', '.join(non_concluants)})")
 
     if bascules:
         print("\n  ⭐ Un basculement est la preuve la plus forte disponible : deux exécutions")
         print("     à paramètres strictement identiques, deux verdicts opposés. Aucun seuil,")
         print("     aucune vérité terrain. Le résultat de `30` ne tient pas à sa graine.")
-    elif reproductibles == [l["rouleau"] for l in lignes]:
+    elif reproductibles and reproductibles == [l["rouleau"] for l in lignes]:
         print("\n  ⚠ Aucun basculement ET aucune dispersion d'aire : sur ce corpus le traceur")
         print("     s'est comporté de façon reproductible. Le résultat de `30` serait alors")
         print("     propre à sa graine — et c'est ce qu'il faudrait écrire.")
@@ -235,7 +288,11 @@ def main() -> int:
             "mauvais": mauvais, "taux_mauvais": mauvais / total,
             "ic95_bas": bas, "ic95_haut": haut,
             "rouleaux_bascule": bascules, "rouleaux_reproductibles": reproductibles,
-            "sans_maillage": rejetes, "lignes": lignes,
+            "rouleaux_non_concluants": non_concluants,
+            "sans_maillage": rejetes, "reverifies": revérifiés,
+            "desaccords": [{"rouleau": r, "repetition": i, "resume": d, "rapport": v}
+                           for r, i, d, v in desaccords],
+            "lignes": lignes,
         }, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         print(f"\n  écrit : {a.json}")
     return 0

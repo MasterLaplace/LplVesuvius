@@ -514,6 +514,13 @@ cd "$ROOT/experiments" || exit 2
 run "carte : incertitude"     uv run python "$ROOT/analysis/src/incertitude_carte.py" --verifier
 run "tirages : dépouillement" uv run python "$ROOT/analysis/src/table_tirages.py" --verifier
 
+# ⚠⚠ Le lecteur unique des rapports `vc_tifxyz_selfcross`. Il existe parce que l'outil peut
+# declarer une surface « propre » en n'ayant teste AUCUNE paire de quads : son filtre
+# `--maxedge` les jette tous des que le maillage est assez grossier. Six scripts de ce
+# depot lisaient ce rapport sans regarder `pairs_tested`. Le temoin verifie que le refus se
+# declenche, et qu'il ne se declenche QUE la.
+run "selfcross : refus du vide" python3 "$ROOT/analysis/src/lire_selfcross.py" --verifier
+
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
 sys.path.insert(0, '../analysis/src')

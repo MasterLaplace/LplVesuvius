@@ -40,9 +40,8 @@ json.dump(p, open('$D/seed.json','w'), indent=2)"
     CROIS=""
     if [ -n "$SURF" ]; then
       vc_tifxyz_selfcross --surface "$SURF" -o "$D/selfcross.json" > /dev/null 2>&1
-      CROIS=$(python3 -c "
-import json; d=json.load(open('$D/selfcross.json'))
-print(sum(c['transverse'] for c in d['census']))" 2>/dev/null)
+      # ⚠ Refus (code 3) si aucune paire n'a ete testee — voir docs/34.
+      CROIS=$(python3 "$ROOT/analysis/src/lire_selfcross.py" "$D/selfcross.json" 2>/dev/null)
     fi
     if [ "$RC" -eq 124 ]; then STATUT=timeout
     elif [ -z "$SURF" ] || [ -z "${AIRE:-}" ]; then STATUT=sans_maillage
