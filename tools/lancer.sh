@@ -27,7 +27,18 @@ set -u
 cd "$(dirname "$0")/.." || exit 2
 RACINE=$PWD
 FOND=0
-[ "${1:-}" = "--fond" ] && { FOND=1; shift; }
+APRES=""
+while true; do
+  case "${1:-}" in
+    --fond)  FOND=1; shift ;;
+    # ⚠ Attendre un PID avant de demarrer. Sur cette machine une campagne longue tient le
+    # reseau et le CPU ; en lancer deux en parallele ne les fait pas finir plus tot, ca
+    # fausse en prime les temps par tirage qu'on mesure. `--apres` enchaine sans exiger
+    # qu'un humain soit reveille au bon moment.
+    --apres) APRES=${2:?--apres veut un PID}; shift 2 ;;
+    *) break ;;
+  esac
+done
 SCRIPT=${1:?usage: tools/lancer.sh [--fond] <script> [args...]}; shift
 
 if [ "${1:-}" = "--verifier" ] || [ "$SCRIPT" = "--verifier" ]; then
@@ -95,6 +106,19 @@ p = pathlib.Path(sys.argv[1]); p.write_text('# ligne inseree pendant que ca tour
   for _ in $(seq 1 80); do kill -0 "$PID" 2>/dev/null || break; sleep 0.2; done
   ok "par le gel, l'édition ne change rien" "$(grep -c 'phase2=original' "$T/gel")" "1"
 
+  # 4. `--apres` attend vraiment : lance derriere un dormeur, le travail ne commence pas
+  # avant que celui-ci finisse. Sans ce controle l'option pourrait ignorer son argument et
+  # tout demarrer tout de suite, ce qui ne se verrait qu'a une campagne faussee.
+  ecrire_cible
+  sleep 3 & DORMEUR=$!
+  LPLV_JOURNAL="$T/apres" "$RACINE/tools/lancer.sh" --apres "$DORMEUR" \
+      tools/.temoin_lancer.sh > /dev/null 2>&1
+  sleep 1
+  ok "--apres n'a pas démarré pendant l'attente" "$(grep -c 'racine=' "$T/apres" 2>/dev/null)" "0"
+  PID2=$(cat "$RACINE"/.lances/.temoin_lancer-*.pid 2>/dev/null | tail -1)
+  for _ in $(seq 1 100); do kill -0 "$PID2" 2>/dev/null || break; sleep 0.2; done
+  ok "--apres démarre une fois le pid parti" "$(grep -c 'phase2=original' "$T/apres" 2>/dev/null)" "1"
+
   rm -f "$CIBLE" "$RACINE"/.lances/.temoin_lancer-*; rm -rf "$T"
   if [ "$E" -gt 0 ]; then echo "ECHEC ($E failures, $N checks)"; exit 1; fi
   echo "ALL PASS ($E failures, $N checks)"; exit 0
@@ -108,6 +132,18 @@ GEL="$LANCES/$(basename "$SCRIPT" .sh)-$HORO.sh"
 cp "$SCRIPT" "$GEL"
 chmod +x "$GEL"
 echo "figé : $GEL"
+
+if [ -n "$APRES" ]; then
+  # Le gel est deja pris : editer le script pendant l'attente reste sans effet, ce qui est
+  # tout l'interet de figer AVANT d'attendre plutot qu'apres.
+  echo "  attend la fin du pid $APRES avant de démarrer"
+  ( while kill -0 "$APRES" 2>/dev/null; do sleep 20; done
+    cd "$RACINE" && exec bash "$GEL" "$@" ) \
+      > "${LPLV_JOURNAL:-$LANCES/$(basename "$GEL" .sh).log}" 2>&1 < /dev/null &
+  echo "$!" > "$LANCES/$(basename "$GEL" .sh).pid"
+  echo "  enchaîné en fond — pid $!"
+  exit 0
+fi
 
 if [ "$FOND" -eq 1 ]; then
   # ⚠ La sortie de l'enfant est REDIRIGEE vers un journal, et non heritee. Sans ça il garde
