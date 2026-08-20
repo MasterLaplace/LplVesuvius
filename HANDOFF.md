@@ -864,6 +864,40 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     — l'aire y est trivialement identique à elle-même. Toute statistique de dispersion
     doit exiger n ≥ 2 et dire « non concluant » sinon.
 
+**Ajoutés le 2026-08-20 (après-midi)**
+48. ⚠⚠ **Une hypothèse vérifiée pour un producteur, utilisée pour un autre.** `12` §13
+    vérifie sérieusement — 98 segments — que la couche tracée est au milieu de la pile, mais
+    sur les **volumes de surface publiés**. Nos piles viennent de `vc_flatten` →
+    `vc_render_tifxyz`, et le transport n'était dit nulle part. ⭐ Le contrôle a **réfuté**
+    le soupçon (14,3 µm sur le même segment), et c'est le bon dénouement : la question
+    méritait d'être posée, et sa réponse est maintenant écrite au lieu d'être supposée.
+49. ⚠⚠ **Un exemplaire d'une classe n'est pas la classe.** `25` a retiré un critère parce
+    qu'**un** segment officiel y échouait. Les quatre segments publiés du même rouleau vont
+    de **18 % à 68 %**, et le quatrième s'appelle `z_dbg_gen_00320`. Avant d'appeler quelque
+    chose « la référence », regarder combien il y en a et comment ils se distribuent.
+50. ⚠ **Un chemin S3 se LISTE, il ne se devine pas.** J'ai supposé
+    `<segment>/<segment>.tifxyz/` — la convention d'un maillage local — là où le bucket range
+    sous `mesh/tifxyz/`. Le script a échoué sur « meta.json absent », message qui accuse le
+    segment quand le fautif est le chemin. ⭐ Et le listage a rendu un fait qu'aucune
+    supposition n'aurait donné : le dépôt publie aussi un `_flattened.obj`, donc leur chaîne
+    aplatit comme la nôtre.
+51. ⚠⚠ **Deux instruments qui mesurent la même chose n'écrivent pas les mêmes noms de
+    champs.** `zarr_depth.py` écrit `ecart_a_la_trace` et un `layers` **entier** ;
+    `depth_profile.py` écrit `ecart_trace_um_median` et un `layers` **liste**. Le rapport de
+    l'expérience décisive supposait les seconds partout et levait un `TypeError` sur
+    `len(int)` — donc **l'expérience ne rendait rien alors que ses deux moitiés avaient
+    abouti**. Un lecteur qui joint deux producteurs doit réconcilier explicitement.
+52. ⚠ **Une légende écrite à la main sur une figure juste.** Deux fois le même jour :
+    « 11ᵉ » là où l'artefact dit 10ᵉ, et « il ne l'est sur aucun des quatre » là où la figure
+    montrait le contraire sur une ligne. Les comptes et les rangs d'une légende se
+    **dérivent des données**, comme le reste.
+53. ⚠ **Le piège nº 41 se repaie en le connaissant** : les backticks d'un message de commit
+    sont exécutés par le shell, et deux numéros de document ont disparu du message. Toujours
+    `git commit -F fichier`, y compris quand le message paraît anodin.
+54. ⭐ **Le remède structurel a fonctionné le jour même.** `tools/lancer.sh` gèle une copie
+    avant de lancer ; corriger `campagne_second_axe.sh` **pendant qu'elle tournait** n'a rien
+    cassé, là où la même chose avait tué deux campagnes le matin.
+
 ## 9. Règles de mesure tenues ici
 
 1. **Aucun seuil absolu** sur une grandeur physique — normaliser, ou être **ordinal**.
