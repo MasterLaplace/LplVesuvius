@@ -20,6 +20,31 @@ que `LplKnowledge` peut ingérer.
 
 ---
 
+## ⭐⭐ Où en est le déroulement (2026-08-20)
+
+**La chaîne complète tourne** — `trace → auto-intersection → aplatissement → rendu` — sur un
+rouleau du Grand Prize que personne n'avait touché (`24`), et sur un segment officiel d'un
+autre (`36`). Elle produit du papyrus : treillis de fibres croisées, trous, bords déchirés.
+
+![papyrus de PHerc1447 deroule et aplati par notre chaine](docs/images/36_papyrus_PHerc1447.png)
+
+⚠⚠ **Mais nos propres traces ne suivent aucune feuille**, et c'est maintenant mesuré sans
+seuil ni vérité terrain. En élargissant la fenêtre de rendu, la distance à la matière la plus
+proche **reste identique** sur une bonne surface (α = +0,00) et **suit la fenêtre** sur les
+nôtres (α = +1,01) — à quatre spires de portée, le pic n'a toujours rien trouvé
+([`38`](docs/38_ce_qui_bouge_avec_la_fenetre.md)).
+
+| ce qui marche | ce qui ne marche pas encore |
+|---|---|
+| dérouler, aplatir, rendre — de bout en bout | poser la surface **sur** une feuille |
+| juger une trace sans vérité terrain (3 instruments) | l'encre : le modèle de 2023 sort une **constante** à 8,6 µm ([`36`](docs/36_lorigine_de_la_pile.md) §5bis) |
+| choisir où commencer (`25`), à distance et pour rien (`G`) | enchaîner spire après spire |
+
+⭐ **L'objectif est donc nommable** : pas « réduire l'écart », mais **faire converger la
+mesure**. Une trace qui converge suit une feuille, quelle que soit sa valeur.
+
+---
+
 ## Ce que le concours a résolu, et ce qui reste
 
 La chaîne complète va du volume tomographique au texte lisible :
