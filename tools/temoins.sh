@@ -527,6 +527,15 @@ run "selfcross : refus du vide" python3 "$ROOT/analysis/src/lire_selfcross.py" -
 # ordre inverse -- sans quoi il rendrait le meme verdict dans les deux cas.
 run "cartes : ordre conservé ?" uv run python "$ROOT/analysis/src/comparer_cartes.py" --verifier
 
+# ⚠⚠ Le seul temoin d'ici qui protege le DEPOT contre l'operateur et non contre le code.
+# Editer un script pendant qu'il tourne le casse -- paye TROIS fois le 2026-08-20, alors
+# que le piege est ecrit dans deux fichiers du projet. Il porte son controle NEGATIF : le
+# meme script lance en direct DOIT casser, sinon la propriete qu'il verifie serait
+# invérifiable sur cette machine.
+cd "$ROOT" || exit 2
+run "lancer : gel d'un script"  "$ROOT/tools/lancer.sh" --verifier
+cd "$ROOT/experiments" || exit 2
+
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
 sys.path.insert(0, '../analysis/src')

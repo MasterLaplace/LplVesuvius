@@ -1,0 +1,345 @@
+{
+  "tirages_total": 72,
+  "rouleaux": 12,
+  "mauvais": 4,
+  "taux_mauvais": 0.05555555555555555,
+  "ic95_bas": 0.0153425371111306,
+  "ic95_haut": 0.136178649312924,
+  "rouleaux_bascule": [
+    "PHerc0125",
+    "PHerc0257",
+    "PHerc0268",
+    "PHerc1447"
+  ],
+  "rouleaux_reproductibles": [],
+  "rouleaux_non_concluants": [],
+  "sans_maillage": 0,
+  "reverifies": 72,
+  "desaccords": [],
+  "lignes": [
+    {
+      "rouleau": "PHerc0125",
+      "n": 6,
+      "graine": [
+        6234,
+        4127,
+        10434
+      ],
+      "voxel_um": 9.362,
+      "generations_min": 118,
+      "generations_max": 118,
+      "aire_min": 19.823416,
+      "aire_max": 19.884657,
+      "aire_mediane": 19.8251055,
+      "etendue_relative": 0.0030868206813036785,
+      "croisements": [
+        1615,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "propres": 5,
+      "aire_identique": false,
+      "verdict_bascule": true
+    },
+    {
+      "rouleau": "PHerc0191",
+      "n": 6,
+      "graine": [
+        4197,
+        6288,
+        9529
+      ],
+      "voxel_um": 9.362,
+      "generations_min": 118,
+      "generations_max": 118,
+      "aire_min": 19.823004,
+      "aire_max": 19.981209,
+      "aire_mediane": 19.829728000000003,
+      "etendue_relative": 0.007967313626443817,
+      "croisements": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "propres": 6,
+      "aire_identique": false,
+      "verdict_bascule": false
+    },
+    {
+      "rouleau": "PHerc0211",
+      "n": 6,
+      "graine": [
+        1931,
+        2106,
+        9611
+      ],
+      "voxel_um": 9.362,
+      "generations_min": 96,
+      "generations_max": 106,
+      "aire_min": 12.872559,
+      "aire_max": 15.716351,
+      "aire_mediane": 14.2618975,
+      "etendue_relative": 0.19911508436841005,
+      "croisements": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "propres": 6,
+      "aire_identique": false,
+      "verdict_bascule": false
+    },
+    {
+      "rouleau": "PHerc0257",
+      "n": 6,
+      "graine": [
+        4106,
+        4189,
+        9491
+      ],
+      "voxel_um": 9.362,
+      "generations_min": 118,
+      "generations_max": 118,
+      "aire_min": 19.823708,
+      "aire_max": 19.871551,
+      "aire_mediane": 19.8380495,
+      "etendue_relative": 0.0024109070578187666,
+      "croisements": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        428
+      ],
+      "propres": 5,
+      "aire_identique": false,
+      "verdict_bascule": true
+    },
+    {
+      "rouleau": "PHerc0268",
+      "n": 6,
+      "graine": [
+        3059,
+        2891,
+        7307
+      ],
+      "voxel_um": 8.64,
+      "generations_min": 118,
+      "generations_max": 118,
+      "aire_min": 16.881953,
+      "aire_max": 16.938079,
+      "aire_mediane": 16.891439499999997,
+      "etendue_relative": 0.0033216355321612533,
+      "croisements": [
+        607,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "propres": 5,
+      "aire_identique": false,
+      "verdict_bascule": true
+    },
+    {
+      "rouleau": "PHerc0358",
+      "n": 6,
+      "graine": [
+        5842,
+        5839,
+        7386
+      ],
+      "voxel_um": 9.362,
+      "generations_min": 118,
+      "generations_max": 118,
+      "aire_min": 19.822871,
+      "aire_max": 20.026998,
+      "aire_mediane": 19.827311,
+      "etendue_relative": 0.010271936657958941,
+      "croisements": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "propres": 6,
+      "aire_identique": false,
+      "verdict_bascule": false
+    },
+    {
+      "rouleau": "PHerc0800",
+      "n": 6,
+      "graine": [
+        4982,
+        2315,
+        12107
+      ],
+      "voxel_um": 8.64,
+      "generations_min": 117,
+      "generations_max": 118,
+      "aire_min": 16.325952,
+      "aire_max": 16.955225,
+      "aire_mediane": 16.916875,
+      "etendue_relative": 0.0373932474432935,
+      "croisements": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "propres": 6,
+      "aire_identique": false,
+      "verdict_bascule": false
+    },
+    {
+      "rouleau": "PHerc0813",
+      "n": 6,
+      "graine": [
+        2010,
+        3851,
+        8515
+      ],
+      "voxel_um": 9.362,
+      "generations_min": 103,
+      "generations_max": 107,
+      "aire_min": 14.849313,
+      "aire_max": 16.022397,
+      "aire_mediane": 15.726365,
+      "etendue_relative": 0.07531661450613764,
+      "croisements": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "propres": 6,
+      "aire_identique": false,
+      "verdict_bascule": false
+    },
+    {
+      "rouleau": "PHerc0826",
+      "n": 6,
+      "graine": [
+        1945,
+        5966,
+        8578
+      ],
+      "voxel_um": 9.362,
+      "generations_min": 99,
+      "generations_max": 112,
+      "aire_min": 13.693017,
+      "aire_max": 17.537943,
+      "aire_mediane": 15.141994,
+      "etendue_relative": 0.25216504306563386,
+      "croisements": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "propres": 6,
+      "aire_identique": false,
+      "verdict_bascule": false
+    },
+    {
+      "rouleau": "PHerc1218",
+      "n": 6,
+      "graine": [
+        1852,
+        3820,
+        11635
+      ],
+      "voxel_um": 8.64,
+      "generations_min": 89,
+      "generations_max": 104,
+      "aire_min": 9.419681,
+      "aire_max": 12.889499,
+      "aire_mediane": 11.4282985,
+      "etendue_relative": 0.30590898606878825,
+      "croisements": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "propres": 6,
+      "aire_identique": false,
+      "verdict_bascule": false
+    },
+    {
+      "rouleau": "PHerc1447",
+      "n": 6,
+      "graine": [
+        1963,
+        1931,
+        12244
+      ],
+      "voxel_um": 8.64,
+      "generations_min": 99,
+      "generations_max": 116,
+      "aire_min": 11.660774,
+      "aire_max": 16.163614,
+      "aire_mediane": 12.2638265,
+      "etendue_relative": 0.35135258646073775,
+      "croisements": [
+        0,
+        0,
+        0,
+        1371,
+        0,
+        0
+      ],
+      "propres": 5,
+      "aire_identique": false,
+      "verdict_bascule": true
+    },
+    {
+      "rouleau": "PHerc1545",
+      "n": 6,
+      "graine": [
+        1739,
+        1899,
+        10379
+      ],
+      "voxel_um": 9.362,
+      "generations_min": 85,
+      "generations_max": 93,
+      "aire_min": 10.079486,
+      "aire_max": 12.104656,
+      "aire_mediane": 11.4631675,
+      "etendue_relative": 0.18006000607262532,
+      "croisements": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "propres": 6,
+      "aire_identique": false,
+      "verdict_bascule": false
+    }
+  ]
+}

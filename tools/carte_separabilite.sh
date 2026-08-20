@@ -26,9 +26,19 @@ OUT=${1:-docs/carte_separabilite}
 # chiffres publies de `16` doivent rester reproductibles a cote.
 SONDES=${2:-27}
 mkdir -p "$OUT"
+# ⚠⚠ Le temoin est DANS la boucle depuis le 2026-08-20. L'en-tete de ce fichier promettait
+# « plus des temoins » depuis le debut et la boucle n'en produisait aucun : le temoin de
+# `16` avait ete lance a la main, donc la campagne ne pouvait pas reproduire la comparaison
+# qui porte tout son resultat. Une campagne qui ne refait pas son propre temoin ne se
+# rejoue pas -- elle se rejoue a moitie, et c'est la moitie qui fixe le zero qui manque.
+#
+# ⚠ Il porte un prefixe `_TEMOIN_` parce que les depouilleurs le reconnaissent par la : il
+# ne doit jamais entrer dans le classement qu'il sert a calibrer.
 for s in PHerc0125 PHerc0191 PHerc0211 PHerc0257 PHerc0268 PHerc0358 \
-         PHerc0800 PHerc0813 PHerc0826 PHerc1203 PHerc1218 PHerc1447 PHerc1545; do
+         PHerc0800 PHerc0813 PHerc0826 PHerc1203 PHerc1218 PHerc1447 PHerc1545 \
+         _TEMOIN_PHerc0139; do
   f="$OUT/$s.json"
+  s=${s#_TEMOIN_}
   [ -s "$f" ] && { echo "  $s deja fait"; continue; }
   # ⚠ Le nom du volume porte la taille de voxel : on la LIT au lieu de la deviner.
   k=$(curl -s --max-time 40 "$B/?list-type=2&prefix=$s/volumes/&delimiter=/" \

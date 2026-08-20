@@ -156,9 +156,10 @@ réglage qui multiplie l'aire **sauvée** par sept. C'est le fait qui ferme la q
 ce que le paramètre amplifie est **uniquement l'étape finale**, qui à `direction_weight:
 100` fabrique **sept fois** la surface que la croissance avait produite.
 
-⭐ **Et il est bien consommé** : la densité d'auto-intersections chute d'un facteur **12**
+⭐ ~~**Et il est bien consommé** : la densité d'auto-intersections chute d'un facteur **12**
 entre `weight: 10` et `direction_weight: 100` (3 035 → 249 par cm²). Le champ organise donc
-réellement quelque chose — simplement pas assez pour battre **zéro**.
+réellement quelque chose — simplement pas assez pour battre **zéro**.~~ **Retiré le
+2026-08-20 — voir juste en dessous : la mesure dit l'inverse.**
 
 ⚠⚠ **Réserve ajoutée le 2026-08-20, et elle porte précisément sur la phrase ci-dessus.**
 L'audit de [`34`](34_un_verdict_qui_ne_mesure_rien.md) montre que les **cinq** comptes de ce
@@ -169,10 +170,31 @@ ligne à l'autre, et ce tableau les compare.
 - Trois re-mesures **filtre désactivé** donnent un ratio serré — `weight: 10` ×2,73,
   `weight: 100` ×2,87, `direction_weight: 10` ×2,79 — donc **entre ces trois-là la
   comparaison tient**.
-- ⏳ **`direction_weight: 100` n'est pas tranché** : c'est la ligne au compte publié le plus
-  **bas** et au nombre de quads jetés le plus **haut** (82 000, trois fois les autres). Sa
-  re-mesure est en cours. Tant qu'elle n'a pas rendu, le « facteur 12 » doit être lu comme
-  une **borne**, pas comme une mesure.
+- ⚠⚠ **`direction_weight: 100` a rendu, et il RETOURNE la phrase.** C'est la ligne au compte
+  publié le plus **bas** et au nombre de quads jetés le plus **haut** (82 000, trois fois les
+  autres). Filtre désactivé, elle mesure **2 455 822** auto-intersections au lieu de 34 340 —
+  un ratio de **71,5×**, contre 2,7 à 2,9 pour les trois autres.
+
+**Le tableau, relu sur la totalité de chaque surface** (`docs/sans_filtre.json`,
+`tools/remesurer_sans_filtre.sh`) :
+
+| réglage | aire | publié | par cm² | **sans filtre** | **par cm² corrigé** |
+|---|---:|---:|---:|---:|---:|
+| entrée `weight: 10` | 26,84 | 81 464 | 3 035 | 222 272 | **8 281** |
+| entrée `weight: 100` | 26,71 | 69 580 | 2 605 | 199 833 | **7 481** |
+| `direction_weight: 10` | 27,84 | 66 243 | 2 380 | 184 587 | **6 630** |
+| **`direction_weight: 100`** | 137,98 | 34 340 | 249 | **2 455 822** | **17 798** |
+
+⚠⚠ **La densité ne chute donc pas d'un facteur 12 : elle DOUBLE** (8 281 → 17 798 par cm²).
+La phrase ci-dessus — *« le champ organise donc réellement quelque chose »* — est **retirée**.
+Elle reposait entièrement sur un compte que le filtre avait vidé des trois quarts de sa
+surface, précisément sur la configuration qui produit la géométrie la plus dégénérée.
+
+⚠ **Aucune des deux lectures n'est « la vérité »**, et il faut le dire : filtre actif on
+compare des fractions différentes ; filtre désactivé on teste des triangles bâtis à travers
+une discontinuité de grille, que l'aide de l'outil décrit comme *« crossing everything it
+passes through »*. Ce qui rend la seconde utilisable dans un tableau n'est pas une prétention
+à l'exactitude — c'est qu'elle **traite les quatre lignes pareil**.
 
 ⚠ Ce qui n'est **pas** en cause : jeter des quads ne peut que **retirer** des croisements,
 jamais en ajouter. Les comptes publiés sont donc des sous-estimations, et l'énoncé qui porte
@@ -182,6 +204,12 @@ affaibli. Seule la comparaison **entre lignes** est en suspens.
 > ⭐ **`direction_fields` ne peut donc pas être le remède d'une trace posée en travers de
 > l'empilement** : la trajectoire est décidée pendant la croissance, et rien de ce
 > paramètre n'y touche — ni sa présence, ni son orientation, ni son intensité.
+
+⭐ **La correction du 2026-08-20 RENFORCE cette conclusion au lieu de l'affaiblir.** Ce qui
+tombe est la consolation — « le champ organise quand même quelque chose » ; ce qui reste est
+que monter son intensité fait passer la densité d'auto-intersections de **8 281 à 17 798 par
+cm²**, contre **zéro** sans champ du tout. Le paramètre ne rate pas sa cible : **il tire dans
+la mauvaise direction.**
 
 ### Ce que ça corrige de ce qu'on croyait
 

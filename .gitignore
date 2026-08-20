@@ -43,3 +43,4 @@ __pycache__/
 /PRIVE.md
 data/trace/*/render_a/
 data/trace/*/cache_vol/
+.lances/
