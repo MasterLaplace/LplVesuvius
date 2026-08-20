@@ -84,7 +84,10 @@ p = pathlib.Path(sys.argv[1]); p.write_text('# ligne inseree pendant que ca tour
 
   # 3. ⭐ la propriete : par le gel, la meme edition ne change RIEN au run.
   ecrire_cible
-  "$RACINE/tools/lancer.sh" --fond tools/.temoin_lancer.sh > "$T/gel" 2>&1
+  # ⚠ La sortie de l'enfant va au JOURNAL, pas au tube de l'appelant, depuis que `--fond`
+  # detache vraiment. Le temoin le lit donc la, en imposant le chemin par LPLV_JOURNAL --
+  # sinon il verifierait le message du wrapper et pas le travail du script.
+  LPLV_JOURNAL="$T/gel" "$RACINE/tools/lancer.sh" --fond tools/.temoin_lancer.sh > /dev/null 2>&1
   # ⚠ On attend le PID que le wrapper ecrit, pas `wait` : le travailleur est un petit-fils
   # du shell de test, donc `wait` ne le voit pas (piege nº 28bis du HANDOFF).
   PID=$(cat "$RACINE"/.lances/.temoin_lancer-*.pid 2>/dev/null | tail -1)
@@ -107,9 +110,15 @@ chmod +x "$GEL"
 echo "figé : $GEL"
 
 if [ "$FOND" -eq 1 ]; then
-  ( cd "$RACINE" && exec bash "$GEL" "$@" ) &
+  # ⚠ La sortie de l'enfant est REDIRIGEE vers un journal, et non heritee. Sans ça il garde
+  # le tube de l'appelant ouvert, donc un `tools/lancer.sh --fond … | tail` bloque jusqu'a
+  # la fin de la campagne -- c'est-a-dire l'inverse de ce que « en fond » veut dire.
+  JOURNAL=${LPLV_JOURNAL:-$LANCES/$(basename "$GEL" .sh).log}
+  ( cd "$RACINE" && exec bash "$GEL" "$@" ) > "$JOURNAL" 2>&1 < /dev/null &
   echo "$!" > "$LANCES/$(basename "$GEL" .sh).pid"
-  echo "lancé en fond — pid $!  (pidfile : $LANCES/$(basename "$GEL" .sh).pid)"
+  echo "lancé en fond — pid $!"
+  echo "  journal : $JOURNAL"
+  echo "  pidfile : $LANCES/$(basename "$GEL" .sh).pid"
 else
   ( cd "$RACINE" && exec bash "$GEL" "$@" )
 fi

@@ -1,0 +1,132 @@
+{
+  "cibles": [
+    {
+      "rouleau": "PHerc0125",
+      "repetition": 1,
+      "role": "mauvais",
+      "transverse": 1615,
+      "chemin": "/home/masterlaplace/LplVesuvius/data/tirages/PHerc0125/r1",
+      "existe": true
+    },
+    {
+      "rouleau": "PHerc0125",
+      "repetition": 2,
+      "role": "propre",
+      "transverse": 0,
+      "chemin": "/home/masterlaplace/LplVesuvius/data/tirages/PHerc0125/r2",
+      "existe": true
+    },
+    {
+      "rouleau": "PHerc0125",
+      "repetition": 3,
+      "role": "propre",
+      "transverse": 0,
+      "chemin": "/home/masterlaplace/LplVesuvius/data/tirages/PHerc0125/r3",
+      "existe": true
+    },
+    {
+      "rouleau": "PHerc0257",
+      "repetition": 6,
+      "role": "mauvais",
+      "transverse": 428,
+      "chemin": "/home/masterlaplace/LplVesuvius/data/tirages/PHerc0257/r6",
+      "existe": true
+    },
+    {
+      "rouleau": "PHerc0257",
+      "repetition": 1,
+      "role": "propre",
+      "transverse": 0,
+      "chemin": "/home/masterlaplace/LplVesuvius/data/tirages/PHerc0257/r1",
+      "existe": true
+    },
+    {
+      "rouleau": "PHerc0257",
+      "repetition": 2,
+      "role": "propre",
+      "transverse": 0,
+      "chemin": "/home/masterlaplace/LplVesuvius/data/tirages/PHerc0257/r2",
+      "existe": true
+    },
+    {
+      "rouleau": "PHerc0268",
+      "repetition": 1,
+      "role": "mauvais",
+      "transverse": 607,
+      "chemin": "/home/masterlaplace/LplVesuvius/data/tirages/PHerc0268/r1",
+      "existe": true
+    },
+    {
+      "rouleau": "PHerc0268",
+      "repetition": 2,
+      "role": "propre",
+      "transverse": 0,
+      "chemin": "/home/masterlaplace/LplVesuvius/data/tirages/PHerc0268/r2",
+      "existe": true
+    },
+    {
+      "rouleau": "PHerc0268",
+      "repetition": 3,
+      "role": "propre",
+      "transverse": 0,
+      "chemin": "/home/masterlaplace/LplVesuvius/data/tirages/PHerc0268/r3",
+      "existe": true
+    },
+    {
+      "rouleau": "PHerc1447",
+      "repetition": 4,
+      "role": "mauvais",
+      "transverse": 1371,
+      "chemin": "/home/masterlaplace/LplVesuvius/data/tirages/PHerc1447/r4",
+      "existe": true
+    },
+    {
+      "rouleau": "PHerc1447",
+      "repetition": 1,
+      "role": "propre",
+      "transverse": 0,
+      "chemin": "/home/masterlaplace/LplVesuvius/data/tirages/PHerc1447/r1",
+      "existe": true
+    },
+    {
+      "rouleau": "PHerc1447",
+      "repetition": 2,
+      "role": "propre",
+      "transverse": 0,
+      "chemin": "/home/masterlaplace/LplVesuvius/data/tirages/PHerc1447/r2",
+      "existe": true
+    },
+    {
+      "rouleau": "PHerc1218",
+      "repetition": 1,
+      "role": "témoin",
+      "transverse": 0,
+      "chemin": "/home/masterlaplace/LplVesuvius/data/tirages/PHerc1218/r1",
+      "existe": true
+    },
+    {
+      "rouleau": "PHerc1218",
+      "repetition": 2,
+      "role": "témoin",
+      "transverse": 0,
+      "chemin": "/home/masterlaplace/LplVesuvius/data/tirages/PHerc1218/r2",
+      "existe": true
+    },
+    {
+      "rouleau": "PHerc0826",
+      "repetition": 1,
+      "role": "témoin",
+      "transverse": 0,
+      "chemin": "/home/masterlaplace/LplVesuvius/data/tirages/PHerc0826/r1",
+      "existe": true
+    },
+    {
+      "rouleau": "PHerc0826",
+      "repetition": 2,
+      "role": "témoin",
+      "transverse": 0,
+      "chemin": "/home/masterlaplace/LplVesuvius/data/tirages/PHerc0826/r2",
+      "existe": true
+    }
+  ]
+}
