@@ -521,6 +521,12 @@ run "tirages : dépouillement" uv run python "$ROOT/analysis/src/table_tirages.p
 # declenche, et qu'il ne se declenche QUE la.
 run "selfcross : refus du vide" python3 "$ROOT/analysis/src/lire_selfcross.py" --verifier
 
+# ⚠ Ecrit AVANT que la campagne dense ait fini : `33` avance une prediction falsifiable
+# (« l'ordre des treize ne se reproduira pas »), et un depouilleur ecrit apres coup ne
+# peut plus la tester. Le temoin verifie que le fichier distingue un ordre conserve d'un
+# ordre inverse -- sans quoi il rendrait le meme verdict dans les deux cas.
+run "cartes : ordre conservé ?" uv run python "$ROOT/analysis/src/comparer_cartes.py" --verifier
+
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
 sys.path.insert(0, '../analysis/src')
