@@ -155,9 +155,15 @@ Grand Prize 2023, une fenêtre de 1200 × 1200, 26 couches à partir de la 3ᵉ
 > **Le modèle sort une constante — σ 45 fois plus petit.** Ce n'est pas « peu d'encre »,
 > c'est **aucun signal**.
 
+⭐ **Et le contrôle qui écarte notre chaîne, mesuré le même soir.** Le même segment lu dans
+son **volume de surface publié** — donc sans que nous ayons tracé, aplati ni rendu quoi que
+ce soit — donne exactement la même constante : `-1,275 / -1,121 / -1,010`, σ **45,0×** plus
+petit que le témoin, contre 45,2× pour notre rendu. **Notre chaîne n'y est pour rien.**
+(`docs/m1ter_volume_publie.json`, pont `analysis/src/zarr_vers_couches.py`.)
+
 ⚠ Ce que ça n'établit pas : qu'il n'y a pas d'encre là (une fenêtre, un segment), ni
-laquelle des causes joue — la résolution, ce rouleau-ci, ou un papyrus réellement vierge à
-cet endroit. ⚠⚠ Mais ça contredit une prémisse que [`31`](31_roadmap.md) §2 tient du papier
+laquelle des causes restantes joue — la résolution, ce rouleau-ci, ou un papyrus réellement
+vierge à cet endroit. ⚠⚠ Mais ça contredit une prémisse que [`31`](31_roadmap.md) §2 tient du papier
 de juin 2026 : *« le modèle de 2023 généralise en zero-shot »*. À 8,64 µm, 26 couches
 couvrent **225 µm** de profondeur là où l'entraînement en voyait **62** — quatre fois plus
 d'épaisseur pour la même fenêtre. Ce n'est peut-être pas gratuit, et c'est à mesurer avant

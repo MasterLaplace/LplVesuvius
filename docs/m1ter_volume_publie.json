@@ -1,0 +1,34 @@
+{
+  "question": "M1ter bis — le volume publié d'un rouleau du prix porte-t-il de l'encre lisible ?",
+  "contexte": {
+    "modele": "timesformer_GP_scroll1",
+    "segment": "20250702235910-auto_grown_20250702235910292",
+    "substrat": "surface-volume publie, pas notre rendu",
+    "fenetre_px": [
+      1200,
+      1200
+    ],
+    "couche_depart": 3
+  },
+  "temoin_positif": {
+    "nom": "Scroll 1 (AUC 0,925, 2,4 µm)",
+    "fichier": "ink_segment_complet.npy",
+    "n": 44725780,
+    "min": -1.8620885610580444,
+    "median": -1.1304415464401245,
+    "max": 2.590935707092285,
+    "etendue": 4.453024387359619,
+    "sigma": 0.7711818814277649
+  },
+  "cible": {
+    "nom": "PHerc1447, volume PUBLIE (8,64 µm)",
+    "fichier": "encre_publie_PHerc1447.npy",
+    "n": 1401856,
+    "min": -1.2749074697494507,
+    "median": -1.1212396621704102,
+    "max": -1.0101397037506104,
+    "etendue": 0.26476776599884033,
+    "sigma": 0.017140138894319534
+  },
+  "rapport_sigma": 44.99274400182046
+}
