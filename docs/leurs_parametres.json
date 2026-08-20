@@ -1,0 +1,22 @@
+{
+  "series": [
+    {
+      "verdict": "suit la fenêtre",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement",
+      "serie": [
+        [
+          41,
+          155.52
+        ],
+        [
+          161,
+          639.36
+        ]
+      ],
+      "croissance": 4.111111111111111,
+      "elargissement": 3.926829268292683,
+      "alpha": 1.0335282600692448,
+      "nom": "leurs paramètres exacts (23.045468 cm²)"
+    }
+  ]
+}
