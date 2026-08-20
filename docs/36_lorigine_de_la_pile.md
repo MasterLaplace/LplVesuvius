@@ -119,6 +119,40 @@ de mesure ne l'explique — l'origine vient d'être vérifiée juste au-dessus.
 lisible sur nos rendus. Un détecteur d'encre entraîné sur des surfaces posées **sur** la
 feuille n'a aucune raison de rendre quoi que ce soit sur une surface qui en est à 170 µm.
 
+## 5 bis. ⭐ Et voilà le papyrus — puis la mauvaise nouvelle
+
+Le contrôle a produit, en passant, **un rendu d'un rouleau du Grand Prize par notre propre
+chaîne**, sur une surface qu'on vient de mesurer à 17 µm de sa feuille :
+
+![papyrus de PHerc1447 deroule et aplati par notre chaine](images/36_papyrus_PHerc1447.png)
+
+> `PHerc1447`, segment officiel `20250702235910`, **25,4 × 27,5 mm**, couche 11 sur 31 (la
+> plus contrastée). Le treillis de fibres croisées, les trous, les bords déchirés. **La
+> chaîne déroule et aplatit ; ce n'est pas le maillon qui manque.**
+
+### ⚠⚠ M1ter, répondu, et la réponse est négative
+
+`29` marquait M1ter « **avant tout le reste** » : *l'encre est-elle lisible à 9 µm ?* Ce
+rendu permet de le mesurer sur un rouleau du prix, sur une **bonne** surface — le modèle du
+Grand Prize 2023, une fenêtre de 1200 × 1200, 26 couches à partir de la 3ᵉ
+(`docs/m1ter_encre_a_9um.json`) :
+
+| | étendue de sortie | **σ** |
+|---|---:|---:|
+| Scroll 1, `20230909121925` — où le modèle marche (AUC 0,925), 2,4 µm | 4,453 | **0,7712** |
+| `PHerc1447`, segment officiel, 8,64 µm | 0,264 | **0,0171** |
+
+> **Le modèle sort une constante — σ 45 fois plus petit.** Ce n'est pas « peu d'encre »,
+> c'est **aucun signal**.
+
+⚠ Ce que ça n'établit pas : qu'il n'y a pas d'encre là (une fenêtre, un segment), ni
+laquelle des causes joue — la résolution, ce rouleau-ci, ou un papyrus réellement vierge à
+cet endroit. ⚠⚠ Mais ça contredit une prémisse que [`31`](31_roadmap.md) §2 tient du papier
+de juin 2026 : *« le modèle de 2023 généralise en zero-shot »*. À 8,64 µm, 26 couches
+couvrent **225 µm** de profondeur là où l'entraînement en voyait **62** — quatre fois plus
+d'épaisseur pour la même fenêtre. Ce n'est peut-être pas gratuit, et c'est à mesurer avant
+de bâtir dessus.
+
 ## 6. ⚠ Ce que ce document ne dit pas
 
 - **Il ne dit pas que les segments officiels sont mauvais.** Deux des quatre sont excellents.

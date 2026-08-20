@@ -1,0 +1,35 @@
+{
+  "question": "M1ter — l encre est-elle lisible a 9 µm ?",
+  "modele": "timesformer_GP_scroll1 (Grand Prize 2023)",
+  "cible": {
+    "rouleau": "PHerc1447",
+    "segment": "20250702235910-auto_grown_20250702235910292",
+    "voxel_um": 8.64,
+    "ecart_a_la_feuille_um": 17.28,
+    "fenetre_px": [
+      1200,
+      1200
+    ],
+    "couche_depart": 3,
+    "couches": 26,
+    "n": 1401856,
+    "min": -1.273184895515442,
+    "median": -1.1213946342468262,
+    "max": -1.0093469619750977,
+    "etendue": 0.26383793354034424,
+    "sigma": 0.017066892236471176
+  },
+  "temoin_positif": {
+    "rouleau": "Scroll 1",
+    "segment": "20230909121925",
+    "voxel_um": 2.4,
+    "auc": 0.925,
+    "n": 44725780,
+    "min": -1.8620885610580444,
+    "median": -1.1304415464401245,
+    "max": 2.590935707092285,
+    "etendue": 4.453024387359619,
+    "sigma": 0.7711818814277649
+  },
+  "rapport_sigma": 45.18584114451629
+}
