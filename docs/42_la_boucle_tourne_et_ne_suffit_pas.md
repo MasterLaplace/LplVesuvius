@@ -10,7 +10,7 @@ Verdicts : `docs/boucle_temoin.json`, `docs/boucle_corrige_gen5.json`.
 Les maillons de [`39`](39_le_seam_de_correction.md) existaient séparément. Ils sont
 désormais **bout à bout** :
 
-```
+```sh
 tracer → marcher la prédiction → écrire les points → --resume --rewind-gen --correct → juger
 ```
 
@@ -168,6 +168,36 @@ une tendance.
   (`41` §6ter), et un quatrième existe dont je ne sais pas dire s'il tire.
 
 ---
+
+## 6. ⭐⭐⭐ La sortie par le haut : un mode public que ce dépôt n'avait jamais lancé
+
+Puisque redresser une trace mal orientée plafonne, autant **ne pas partir d'une trace mal
+orientée**. En cherchant dans la source ce que `mode` accepte, il y a quatre valeurs —
+`seed`, `resume`, `expansion` et **`gen_neighbor`** — et la dernière n'a jamais été lancée ici.
+
+`gen_neighbor` (`apps/src/vc_grow_seg_from_seed.cpp:625`) prend une surface par `--resume`,
+tire un rayon depuis **chaque sommet** le long de la normale (`neighbor_dir` = `in` ou `out`),
+avance par pas de `neighbor_step` voxels, et s'arrête dès qu'il touche de la matière au-dessus
+de `neighbor_threshold`. Autrement dit : **il construit la spire voisine**. C'est le
+*« wrap by wrap copy tool »* que le papier de juin 2026 décrit, et il est public.
+
+⭐ Et il n'a rien à redresser : on part d'un **segment officiel dont la convergence est déjà
+mesurée** (α = +0,00 sur `PHerc1447`, 2,89 cm²). La question devient donc exactement celle du
+graal :
+
+> **La convergence survit-elle à l'enchaînement, et sur combien de spires ?**
+
+`tools/spire_suivante.sh` la pose : spire 0 = le segment officiel **rejugé par notre chaîne**
+(et non son chiffre repris — sinon un écart entre la spire 0 et la spire 1 mélangerait la
+surface et le chemin de mesure), puis N spires générées, chacune jugée dans les **mêmes
+fenêtres** (31 et 81, celles où l'officiel a été mesuré).
+
+⚠ Un échec à une spire est un **résultat** — « la chaîne casse au tour k » — et pas une panne
+du script : on ne peut pas générer la voisine d'une surface qui n'existe pas, donc la boucle
+s'arrête là en le disant.
+
+⚠ **Rien de tout ça n'est encore mesuré.** La campagne est en file derrière le balayage de
+correction ; ce paragraphe dit ce qui va être tenté et pourquoi, pas ce qui a marché.
 
 ## Reproduire
 

@@ -191,6 +191,14 @@ ajouté à `tools/boucle_de_correction.sh`, chaîné derrière le run en cours.
 11 753 croisements sans que α s'améliore. Beaucoup de croisements n'est ni un symptôme de
 bon suivi ni son contraire.
 
+⭐⭐⭐ **LA SORTIE PAR LE HAUT, trouvée dans la source et jamais lancée ici** :
+`mode: "gen_neighbor"` (`vc_grow_seg_from_seed.cpp:625`) prend une surface par `--resume`,
+tire un rayon depuis chaque sommet le long de la normale et s'arrête sur la matière suivante
+— **il construit la spire voisine**. C'est le « wrap by wrap copy tool » du papier, public.
+Et il part d'un segment **officiel qui converge déjà** (α = +0,00), donc il n'a rien à
+redresser. `tools/spire_suivante.sh` demande : **la convergence survit-elle à
+l'enchaînement, et sur combien de spires ?** En file derrière le balayage.
+
 ⏳ **CAMPAGNES** (détachées) :
 ```bash
 tail -f .lances/convergence_des_essais-20260820-*.log   # les 17 essais de 26, rejugés
