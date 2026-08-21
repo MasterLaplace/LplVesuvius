@@ -374,8 +374,10 @@ qu'elle n'est ni meilleure ni pire, et deux de ses trois plus mauvais tours sont
 
 Les α et les aires sont des grandeurs continues, mesurées directement. Un compte de verdicts
 (« 4/7 », « 6/9 ») est un compte de **franchissements de seuil**, et le recensement de
-[`44`](44_ou_la_chaine_se_trouve.md) §8bis trouve **10 verdicts fragiles sur 55** — dont le
-plus fragile de tous, `pas025_spire07`, à **deux millièmes** de son seuil.
+[`44`](44_ou_la_chaine_se_trouve.md) §8bis en trouve **un sur cinq** — dont le plus fragile de
+tous, `pas025_spire07`, à **deux millièmes** de son seuil. ⚠ Le compte exact n'est pas répété
+ici : il change à chaque campagne, et le recopier dans plusieurs documents l'a fait périmer
+quatre fois dans la même journée.
 
 ⚠ **C'est ce qui a fait retirer la première version de cette section**, publiée le matin même :
 elle annonçait « la rupture est repoussée du tour 06 au tour 07 » et reposait entièrement sur
@@ -431,18 +433,19 @@ trancher.
 
 ### ⭐⭐⭐ La prédiction était falsifiable des deux côtés, et elle est CONFIRMÉE
 
-Si la courbe en U vient de ce couplage, alors compenser les comptes pour garder une portée
-physique constante doit l'aplatir. Pour retrouver la portée du pas optimal (0,25 voxel) à pas
-0,125, il faut `exit_count = 2`. Campagne lancée sur neuf tours, et mesurée à profondeur
-égale :
+Compenser les comptes pour garder une portée physique constante doit aplatir la courbe en U.
+À pas 0,125, `exit_count = 2` redonne la portée du pas 0,25. Mesuré à profondeur égale, plus
+une portée **0,375** qu'aucun pas ne peut produire (le pas seul ne donne que des puissances
+de deux) :
 
-| campagne | pas | **portée** | α moyen | α du pire tour |
-|---|---:|---:|---:|---:|
-| défauts | 1,0 | 1,0 | +0,357 | +1,475 |
-| défauts | 0,5 | 0,5 | +0,129 | +0,583 |
-| défauts | **0,25** | **0,25** | ⭐ **+0,102** | ⭐ **+0,246** |
-| défauts | 0,125 | 0,125 | +0,327 | +0,758 |
-| **`exit_count=2`** | **0,125** | **0,25** | ⭐ **+0,130** | +0,350 |
+| campagne | pas | **portée sortie** | portée pic | α moyen | α du pire tour | verdicts fragiles |
+|---|---:|---:|---:|---:|---:|---:|
+| défauts | 1,0 | 1,0 | 2,0 | +0,357 | +1,475 | 1/7 |
+| défauts | 0,5 | 0,5 | 1,0 | +0,129 | +0,583 | 1/7 |
+| défauts | 0,25 | 0,25 | 0,5 | **+0,102** | **+0,246** | 1/9 |
+| défauts | 0,125 | 0,125 | 0,25 | +0,327 | +0,758 | **4/11** |
+| `exit_count=2` | 0,125 | 0,25 | 0,5 | **+0,130** | +0,350 | ⭐ **0/10** |
+| `exit_count=3` | 0,125 | 0,375 | 0,75 | +0,185 | +0,612 | 1/10 |
 
 > **À pas égal, changer la seule portée fait passer l'α moyen de +0,327 à +0,130.** Et deux
 > campagnes dont les pas diffèrent d'un facteur deux, mais qui partagent la portée 0,25,
@@ -452,22 +455,51 @@ physique constante doit l'aplatir. Pour retrouver la portée du pas optimal (0,2
 0,25 : la 02 à +0,202 et la 06 à +0,246. Même volume, même chaîne, même portée — un pas deux
 fois plus fin ne change rien dès que la portée est tenue.
 
-⭐⭐⭐ **Donc ce n'est pas le pas qui a un optimum, c'est la PORTÉE.** La courbe en U du
-paragraphe précédent était l'ombre d'une courbe en U dans la portée, vue à travers un
-paramètre qui la divise. Conséquence pratique : **le pas peut être affiné librement** — ce qui
-localise mieux la nappe — à condition de relever `exit_count` du même facteur.
+⭐⭐⭐ **Donc ce n'est pas le pas qui décide, c'est la PORTÉE.** La courbe en U du paragraphe
+précédent était l'ombre d'une courbe en U dans la portée, vue à travers un paramètre qui la
+divise. Conséquence pratique : **le pas peut être affiné librement** — ce qui localise mieux
+la nappe — à condition de relever `exit_count` du même facteur.
 
 ![ce qui décide, c'est la portée](images/43_optimum_du_pas.png)
 
-⚠ La figure a **changé d'abscisse** pour cette raison. Elle portait le pas ; deux campagnes à
-pas 0,125 avec des α opposés y auraient été deux points au même x, c'est-à-dire une figure
-illisible parce qu'elle traçait la mauvaise variable. L'abscisse est maintenant la portée, et
-le pas est écrit sur chaque point.
+### ⚠⚠ Et ce n'est pas un optimum, c'est un BASSIN — correction de ma propre phrase
 
-⚠ **Ce que ça ne dit pas** : où est l'optimum de la portée. Trois portées sont mesurées
-(0,125, 0,25, 0,5, 1,0) et la meilleure est 0,25 — mais l'échantillonnage est grossier, et
-`neighbor_exit_threshold` (défaut `threshold × 0,5`) n'a jamais été touché. La portée optimale
-pourrait dépendre de lui.
+J'ai écrit ci-dessus, et publié, « le pas du rayon a un optimum à 0,25 ». **C'est trop
+précis.** Quatre campagnes tiennent dans **une seule largeur de résolution** :
+
+| portée sortie | α moyen |
+|---:|---:|
+| 0,25 | +0,102 |
+| 0,5 | +0,129 |
+| 0,25 *(pas 0,125)* | +0,130 |
+| 0,375 | +0,185 |
+
+Elles s'étalent sur 0,083, quand l'instrument ne discrimine pas à **±0,2** près. Désigner la
+plus basse serait un podium sur un bassin plat.
+
+⭐ **Ce qui EST résolu, c'est ce qui est dehors** : portée 0,125 (+0,327) et portée 1,0
+(+0,357), deux à trois fois pires. La consigne utile n'est donc pas « réglez la portée à
+0,25 » mais :
+
+> **La portée du test de sortie doit tomber entre 0,25 et 0,5 voxel.** À l'intérieur, ce
+> dépôt ne sait pas distinguer ; en dehors, l'α triple.
+
+⚠⚠ **Déterminisme n'est pas résolution, et confondre les deux était le piège.** Vérifié dans
+la source : `gen_neighbor` n'utilise **aucun** générateur aléatoire, ni l'aplatissement, ni le
+rendu. Les six nombres ci-dessus sont donc exacts et rejouables au bit. Ça ne rend pas leurs
+**écarts** significatifs pour autant : une mesure parfaitement reproductible dont la
+résolution est ±0,2 ne peut pas départager deux valeurs séparées de 0,08. `table_chaine.py
+--comparer` refuse désormais de classer ce qui tient dans une largeur de résolution — il
+nomme le bassin et ne désigne pas de gagnant.
+
+⚠ **Un défaut de conception de ma part, trouvé en lisant les métas et non le résultat.** Les
+deux portées n'ont **jamais** été séparées : dans les six campagnes, `portée pic = 2 × portée
+sortie`, défauts compris. Ce qui a été balayé est donc **une famille à ratio fixe**, pas la
+portée de sortie seule. Ce que ça change : rien de ce qui est écrit ci-dessus, puisque toutes
+les campagnes sont sur la même famille et donc comparables entre elles — mais on ne sait pas
+laquelle des deux portées agit. Le séparer demande une campagne à `exit_count` et
+`spike_window` non proportionnels, et la table les affiche maintenant **côte à côte** pour que
+cette confusion ne puisse plus passer inaperçue.
 
 ### ⭐ Ce que l'érosion dit, en refusant de bouger
 

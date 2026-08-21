@@ -274,9 +274,9 @@ donc un futur désaccord est inlivrable, et un témoin l'assère.
 lecteur pouvait raisonnablement croire que le verdict venait d'elle. Supprimée : une
 constante morte au nom trompeur est une explication fausse posée dans le code.
 
-**2. ⚠⚠ Dix verdicts sur cinquante-cinq sont des tirages au sort.** [`43`](43_la_chaine_des_spires.md)
+**2. ⚠⚠ Douze verdicts sur soixante-cinq sont des tirages au sort.** [`43`](43_la_chaine_des_spires.md)
 écrit noir sur blanc que *« α sur deux fenêtres ne discrimine pas à ±0,2 près »*. Chaque
-verdict porte donc désormais sa **marge au seuil** et un drapeau `fragile`, et le recensement est net — **10 verdicts fragiles sur 55** :
+verdict porte donc désormais sa **marge au seuil** et un drapeau `fragile`, et le recensement est net — **12 verdicts fragiles sur 65** :
 
 | verdict | α | marge au seuil | étiquette |
 |---|---:|---:|---|
@@ -298,11 +298,12 @@ qualité que la moyenne des α ne porte pas :
 |---|---:|
 | pas 0,125 (défauts) | **4 / 11** |
 | `in` | 2 / 7 |
+| portée 0,375 | 2 / 10 |
+| repousse | 1 / 4 |
 | pas 1,0 | 1 / 7 |
 | pas 0,5 | 1 / 7 |
 | pas 0,25 | 1 / 9 |
-| repousse | 1 / 4 |
-| **pas 0,125 à portée compensée** | ⭐ **0 / 10** |
+| **portée 0,25 à pas 0,125** | ⭐ **0 / 10** |
 
 La campagne compensée ([`43`](43_la_chaine_des_spires.md) §6quinquies) est la seule dont
 **aucun** verdict ne tombe dans la zone d'indécision, là où la même chaîne aux réglages par
@@ -319,6 +320,13 @@ même. Corrigé là-bas.
 seuil**. Un écart entre nappes, une longueur d'arc, une part de sommets valides et une
 fraction de tour sont des grandeurs continues mesurées directement. C'est précisément
 pourquoi ils survivent à ce genre de correction, et les comptes de verdicts non.
+
+⚠⚠ **Ce total vieillit à chaque campagne**, et le garde-fou de `verifier_chiffres.py` l'a
+attrapé périmé **quatre fois le 2026-08-21** — chaque fois dans les minutes qui suivaient la
+fin d'une campagne. Le défaut n'était pas le chiffre mais le fait qu'il était recopié dans
+trois documents : il n'est donc plus écrit qu'**ici**, et les deux autres renvoient à cette
+section au lieu de le répéter. Il se recalcule par
+`test_convergence.py --depuis docs/spire_*.json`.
 
 ⚠ Et `--depuis` **recalcule** désormais chaque verdict depuis sa série au lieu de faire
 confiance au champ stocké, en signalant tout verdict périmé. Un verdict écrit hier a été

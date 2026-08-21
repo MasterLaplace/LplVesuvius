@@ -196,9 +196,14 @@ def compensation_de(racine: Path) -> dict:
             continue
         return {"exit_count": par.get("neighbor_exit_count"),
                 "spike_window": par.get("neighbor_spike_window"),
+                # ⚠ Defauts de l'outil, ecrits ici parce que l'ABSENCE de la cle veut dire
+                # « defaut » et qu'une portee ne se calcule pas avec un None.
+                "exit_count_eff": par.get("neighbor_exit_count", 1),
+                "spike_window_eff": par.get("neighbor_spike_window", 2),
                 "compense": ("neighbor_exit_count" in par
                              or "neighbor_spike_window" in par)}
-    return {"exit_count": None, "spike_window": None, "compense": False}
+    return {"exit_count": None, "spike_window": None, "exit_count_eff": 1,
+            "spike_window_eff": 2, "compense": False}
 
 
 def comparer(racines: list[Path], voxel_um: float, docs: Path) -> dict:
@@ -214,7 +219,7 @@ def comparer(racines: list[Path], voxel_um: float, docs: Path) -> dict:
     c'est-a-dire constant sur un facteur HUIT de pas. Toute la tendance etait l'artefact.
 
     **Sans seuil.** On compare des α et des aires, jamais des COMPTES de verdicts. Un compte
-    de verdicts est un compte de franchissements de seuil, et 10 des 55 verdicts de ce depot
+    de verdicts est un compte de franchissements de seuil, et un cinquieme des verdicts de ce depot
     ont un α a moins de 0,2 du seuil quand l'instrument ne discrimine pas a ±0,2 pres.
     """
     campagnes = []
@@ -244,7 +249,12 @@ def comparer(racines: list[Path], voxel_um: float, docs: Path) -> dict:
         # ⭐ La PORTEE PHYSIQUE du test de sortie, en voxels : c'est elle qui compte, pas le
         # pas. Deux campagnes de pas differents mais de meme portee sont comparables ; deux
         # campagnes de meme pas et de portees differentes ne le sont pas.
-        c["portee_sortie_vox"] = ((c["exit_count"] or 1) * pr) if pr else None
+        c["portee_sortie_vox"] = (c["exit_count_eff"] * pr) if pr else None
+        # ⚠⚠ La SECONDE portee physique. Jusqu'au 2026-08-22 aucune campagne ne les avait
+        # separees : toutes avaient portee_pic = 2 x portee_sortie, defauts compris. Les
+        # afficher cote a cote est le seul moyen de voir qu'un « balayage de la portee »
+        # n'en balaie en realite qu'UNE FAMILLE a ratio fixe.
+        c["portee_pic_vox"] = (c["spike_window_eff"] * pr) if pr else None
     return {"campagnes": campagnes, "profondeur_commune": profondeur}
 
 
@@ -300,6 +310,21 @@ def dessiner_comparaison(res: dict, sortie: Path) -> None:
     def py(a):
         return Y0 - (Y0 - Y1) * (a / amax)
 
+    # ⭐⭐ LA BANDE DE RESOLUTION, dessinee AVANT les courbes pour rester derriere elles.
+    # α sur deux fenetres ne discrimine pas a ±0,2 pres, donc tout ce qui tombe dans cette
+    # bande est indistinguable. Un marqueur « optimum » sur un point de cette bande serait
+    # un podium sur un bassin plat — c'est la formulation que cette figure a d'abord eue et
+    # que la mesure a corrigee.
+    import sys as _sys
+    _sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from test_convergence import BRUIT_ALPHA as _RES
+    a_min = min(x[1] for x in pts)
+    art.rectangle([X0 + 1, py(min(a_min + _RES, amax)), X1, py(a_min)],
+                  fill=(250, 243, 233))
+    art.text((X0 + 8, py(min(a_min + _RES, amax)) - 16),
+             f"bande de résolution (±{_RES}) — indistinguable",
+             fill=(180, 150, 115), font=f_p)
+
     art.line([X0, Y0, X1, Y0], fill=GRIS)
     art.line([X0, Y0, X0, Y1], fill=GRIS)
     for a in (0.0, 0.5, 1.0, 1.5):
@@ -348,9 +373,10 @@ def dessiner_comparaison(res: dict, sortie: Path) -> None:
         art.text((px(v) - 20, py(moy) + dy), f"pas {pas:g} → {moy:+.2f}",
                  fill=AMBRE if comp else (140, 110, 80), font=f_p)
         art.text((px(v) + 12, py(mx) - 7), f"{mx:+.2f}", fill=(170, 150, 125), font=f_p)
-    # ⚠ « optimum » se place A GAUCHE du point et non dessous : l'espace du dessous est celui
-    # des etiquettes de campagne, et deux campagnes peuvent partager cette portee.
-    art.text((px(meilleur[0]) - 86, py(meilleur[1]) - 6), "optimum >", fill=AMBRE, font=f_p)
+    # ⚠⚠ AUCUN marqueur « optimum ». Il y en avait un, pointant le point le plus bas — mais
+    # quatre campagnes tiennent dans une largeur de resolution, donc designer le plus bas
+    # ferait passer un bassin plat pour un podium. La bande dessinee plus haut dit ce qui est
+    # su ; rien ne designe un gagnant.
 
     yl = Y1 - 4
     art.ellipse([X0 + 8, yl, X0 + 16, yl + 8], fill=AMBRE)
@@ -362,12 +388,19 @@ def dessiner_comparaison(res: dict, sortie: Path) -> None:
              fill=(110, 110, 110), font=f_p)
 
     bas = Y0 + 62
-    doubles = [v for v, g in grp.items() if len(g) > 1]
-    if doubles:
-        art.text((26, bas), "→ Deux campagnes partagent la portée 0,25 avec des pas dans un "
-                            "rapport 2 — et donnent le même α.", fill=(60, 60, 60), font=f_n)
-        art.text((26, bas + 20), "À pas égal (0,125), changer la seule portée fait passer "
-                                 "l'α moyen de +0,33 à +0,13.", fill=(60, 60, 60), font=f_n)
+    dans = [x for x in pts if x[1] - a_min < _RES]
+    dehors = [x for x in pts if x[1] - a_min >= _RES]
+    if dehors:
+        # ⚠ Dedoublonner pour l'affichage : deux campagnes peuvent partager une portee, et
+        # « 0,25, 0,25 » se lit comme une coquille alors que c'est un fait.
+        vues = sorted({x[0] for x in dans})
+        art.text((26, bas), f"→ {len(dans)} campagnes, {len(vues)} portées distinctes "
+                            f"({', '.join(f'{v:g}' for v in vues)}) tiennent dans la bande. "
+                            f"Ce dépôt ne sait pas les distinguer.",
+                 fill=(60, 60, 60), font=f_n)
+        art.text((26, bas + 20), "Ce qui EST résolu : "
+                 + " et ".join(f"portée {x[0]:g} ({x[1]:+.2f})" for x in sorted(dehors))
+                 + " — deux à trois fois pires.", fill=(60, 60, 60), font=f_n)
     ers = [c["erosion_par_tour"] for c in res["campagnes"]
            if c["erosion_par_tour"] is not None]
     if ers:
@@ -405,12 +438,13 @@ def main() -> int:
             return 3
         p = res["profondeur_commune"]
         print(f"  À PROFONDEUR ÉGALE — les {p} premiers tours de chaque campagne\n")
-        print(f"  {'campagne':<26}{'pas':>7}{'portée':>8}{'long.':>7}{'α moyen':>10}"
-              f"{'α médian':>10}{'α max':>9}{'érosion/tour':>14}")
+        print(f"  {'campagne':<26}{'pas':>7}{'p.sortie':>10}{'p.pic':>7}{'long.':>7}"
+              f"{'α moyen':>10}{'α médian':>10}{'α max':>9}{'érosion/tour':>14}")
         for c in res["campagnes"]:
             e, pr, po = c["erosion_par_tour"], c.get("pas_du_rayon"), c.get("portee_sortie_vox")
+            pp = c.get("portee_pic_vox")
             print(f"  {c['nom']:<26}{(f'{pr:g}' if pr else '?'):>7}"
-                  f"{(f'{po:g}' if po else '?'):>8}"
+                  f"{(f'{po:g}' if po else '?'):>10}{(f'{pp:g}' if pp else '?'):>7}"
                   f"{c['longueur_reelle']:>7}{c['alpha_moyen']:>+10.3f}"
                   f"{c['alpha_median']:>+10.3f}{c['alpha_max']:>+9.3f}"
                   f"{(f'{e:.1f} %' if e is not None else '—'):>14}")
@@ -429,6 +463,26 @@ def main() -> int:
                   f"(portée {g[-1]['portee_sortie_vox']:g}).")
             print("     Même pas, même volume, même chaîne : ce qui change est la PORTÉE "
                   "PHYSIQUE du test\n     de sortie, pas la finesse de la marche.")
+        # ⭐⭐ La RESOLUTION avant le classement. α sur deux fenetres ne discrimine pas a
+        # ±0,2 pres (`43`), donc deux campagnes plus proches que ca sont indistinguables —
+        # meme si `gen_neighbor` est deterministe et que leurs nombres sont rejouables au
+        # bit. Determinisme et resolution sont deux choses differentes, et confondre les
+        # deux ferait classer un bassin plat en podium.
+        import sys as _sys
+        _sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from test_convergence import BRUIT_ALPHA as _RES
+        tri = sorted(res["campagnes"], key=lambda c: c["alpha_moyen"])
+        bassin = [c for c in tri if c["alpha_moyen"] - tri[0]["alpha_moyen"] < _RES]
+        if len(bassin) > 1:
+            print(f"\n  ⚠⚠ {len(bassin)} campagnes tiennent dans UNE largeur de résolution "
+                  f"(±{_RES}) autour de la meilleure :")
+            for c in bassin:
+                print(f"       {c['nom']:<26} α = {c['alpha_moyen']:+.3f}  "
+                      f"portée sortie {c['portee_sortie_vox']:g}")
+            print("     Les classer serait un podium sur un bassin plat. Ce qui est résolu, "
+                  "c'est ce qui\n     est DEHORS : "
+                  + ", ".join(f"{c['nom']} ({c['alpha_moyen']:+.3f})"
+                              for c in tri if c not in bassin) + ".")
         meilleure = min(res["campagnes"], key=lambda c: c["alpha_moyen"])
         print(f"\n  ⭐ α moyen le plus bas : {meilleure['nom']} "
               f"({meilleure['alpha_moyen']:+.3f})")
@@ -439,7 +493,7 @@ def main() -> int:
                   f"{max(ers):.1f} % par tour — donc le réglage change où la surface se "
                   f"pose,\n    pas combien elle en perd.")
         print("\n  ⚠ aucun COMPTE de verdict ici : un compte est un compte de "
-              "franchissements de seuil,\n    et 10 des 55 verdicts du dépôt ont un α à "
+              "franchissements de seuil,\n    et un cinquième des verdicts du dépôt ont un α à "
               "moins de 0,2 de ce seuil.")
         if a.json:
             Path(a.json).write_text(json.dumps(res, indent=2, ensure_ascii=False) + "\n",
