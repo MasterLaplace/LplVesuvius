@@ -162,6 +162,8 @@ def main() -> int:
     ap.add_argument("--champ", default="transverse",
                     choices=["transverse", "paires", "jetes", "coplanaire", "rasant"])
     ap.add_argument("--verifier", action="store_true")
+    ap.add_argument("--grille", action="store_true",
+                    help="imprimer « colonnes lignes » de la grille au lieu du compte")
     ap.add_argument("--auditer", type=Path,
                     help="parcourir un arbre et nommer tout verdict rendu sur zéro paire")
     a = ap.parse_args()
@@ -172,6 +174,21 @@ def main() -> int:
         return auditer(a.auditer)
     if not a.rapport:
         ap.error("donner un rapport, ou --verifier")
+    if a.grille:
+        # ⚠ Pourquoi ce mode : un maillage produit par `mode: gen_neighbor` n'a PAS de
+        # `area_cm2` dans son meta.json (verifie : bbox, format, scale, source,
+        # target_volume, type, uuid, vc_gsfs_*). Le rapport de selfcross, lui, porte
+        # `grid_cols`/`grid_rows`, donc la taille de la surface est deja la — il suffit de
+        # ne pas la jeter. Sans ca une campagne d'enchainement affiche « ? cm² » a chaque
+        # spire et on ne peut pas dire si les spires gardent leur taille.
+        import json as _json
+        d = _json.loads(Path(a.rapport).read_text(encoding="utf-8"))
+        c, r = d.get("grid_cols"), d.get("grid_rows")
+        if not c or not r:
+            print("rapport sans grid_cols/grid_rows", file=sys.stderr)
+            return 3
+        print(f"{c} {r}")
+        return 0
     try:
         print(lire(a.rapport)[a.champ])
     except RapportVide as e:

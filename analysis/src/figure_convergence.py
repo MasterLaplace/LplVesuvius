@@ -93,7 +93,12 @@ def main() -> int:
     art.text((px(n_b) - 130, py(e_ref * n_b / n_a) - 18), "pente 1 : suit la fenêtre",
              fill=(170, 170, 170), font=f_p)
 
-    couleurs = [(60, 130, 90), (190, 85, 40), (110, 110, 180)]
+    # ⚠⚠ Une palette de TROIS couleurs pour SEPT series rend la legende inutilisable : le
+    # lecteur ne peut pas relier une ligne a son nom, et une figure qu'on ne peut pas lire
+    # ne prouve rien. Paye sur `43` (la chaine de spires). Huit teintes distinctes, et le
+    # cycle ne recommence qu'au-dela.
+    couleurs = [(60, 130, 90), (190, 85, 40), (110, 110, 180), (200, 150, 40),
+                (60, 140, 170), (170, 70, 130), (110, 130, 60), (140, 90, 60)]
     for i, s in enumerate(series):
         c = couleurs[i % len(couleurs)]
         serie = sorted(s["serie"])
@@ -105,8 +110,10 @@ def main() -> int:
         # ⚠ Deux séries qui finissent au même endroit superposent leurs étiquettes et le
         # chiffre devient illisible — vu sur 42 (+0,98 et +1,03 empilés au même pixel).
         # On les décale par rang, ce qui coûte une ligne et rend la figure lisible.
-        art.text((px(nf) + 12, py(ef) - 7 + 15 * i), f"α = {s['alpha']:+.2f}",
-                 fill=c, font=f_n)
+        # ⚠ Le decalage suit le rang ET alterne de cote quand il y a beaucoup de series,
+        # sinon la colonne d'etiquettes sort du cadre.
+        art.text((px(nf) + 12, py(ef) - 7 + 16 * (i - len(series) // 2)),
+                 f"α = {s['alpha']:+.2f}", fill=c, font=f_n)
         art.text((14, 86 + i * 20), f"■ {s['nom']}", fill=c, font=f_n)
 
     bas = Y0 + 56

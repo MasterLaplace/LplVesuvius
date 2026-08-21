@@ -191,6 +191,39 @@ ajouté à `tools/boucle_de_correction.sh`, chaîné derrière le run en cours.
 11 753 croisements sans que α s'améliore. Beaucoup de croisements n'est ni un symptôme de
 bon suivi ni son contraire.
 
+## ⭐⭐⭐ RÉSULTAT DU 2026-08-21 — LA CHAÎNE TIENT SIX TOURS
+
+[`43`](docs/43_la_chaine_des_spires.md). Un segment officiel qui converge, puis **six spires
+générées** par `mode: gen_neighbor`, chacune source de la suivante, toutes jugées dans les
+mêmes fenêtres :
+
+| spire | aire | 31 c | 81 c | **α** | verdict |
+|---|---:|---:|---:|---:|---|
+| 00 (officiel) | 7,12 cm² | 17,28 | 17,28 | **+0,000** | converge |
+| 01 | 6,71 | 90,72 | 90,72 | **+0,000** | converge |
+| 02 | 6,35 | 43,20 | 51,84 | +0,190 | converge |
+| 03 | 6,14 | 12,96 | 21,60 | +0,532 | intermédiaire |
+| 04 | 5,89 | 77,76 | 77,76 | **+0,000** | converge |
+| 05 | 5,64 | 129,60 | 172,80 | +0,300 | intermédiaire |
+| **06** | 5,39 | 69,12 | **285,12** | **+1,475** | ⚠⚠ **suit la fenêtre** |
+
+⭐⭐⭐ **Première fois de tout ce dépôt qu'une surface que NOUS produisons converge.** Les
+dix-sept essais en `mode: seed`, les quatre rembobinages corrigés, les deux semis et les deux
+poids sont tous à α ≈ 1 sans exception. Ici six d'affilée ne le sont pas.
+
+⚠ **α dit qu'une feuille est à portée, pas que c'est la bonne** : la spire 01 converge à
+90,72 µm, pas à 17. Et α sur deux fenêtres ne discrimine pas à ±0,2 près — ce qui est solide,
+c'est l'écart entre 0,00–0,53 et **1,475**.
+
+⭐⭐ **L'érosion est mesurée et borne la chaîne avant la qualité** : la grille rétrécit de
+**4,0 % par tour** (162×149 → 141×130, 7,12 → 5,39 cm²). À ce rythme, **la moitié est perdue
+en douze tours**. Ce qui manque est une **repousse** entre deux tours — c'est-à-dire ce que
+`mode: seed` sait faire et que la chaîne n'utilise pas.
+
+**Ce qui reste ouvert** : pourquoi la 7ᵉ casse (`neighbor_max_distance`,
+`neighbor_min_clearance`) · repousser entre deux tours · le sens `in` · et la validation par
+**l'encre**, parce que α ne dit pas qu'on lit du texte.
+
 ⭐⭐⭐ **LA SORTIE PAR LE HAUT, trouvée dans la source et jamais lancée ici** :
 `mode: "gen_neighbor"` (`vc_grow_seg_from_seed.cpp:625`) prend une surface par `--resume`,
 tire un rayon depuis chaque sommet le long de la normale et s'arrête sur la matière suivante

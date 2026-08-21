@@ -232,6 +232,7 @@ priorisee. A lire en premier si vous reprenez ce chantier.
 | **[`docs/40_le_rouleau_entier.md`](docs/40_le_rouleau_entier.md)** | ⭐⭐⭐ **la cible, en une image** : 44 spires consecutives d'un rouleau, sans un trou, assemblees depuis les cartes d'encre publiees. Le deroulement est le leur, l'ordre est le notre — et c'est la reference que notre chaine doit egaler |
 | **[`docs/41_marcher_le_long_dune_nappe.md`](docs/41_marcher_le_long_dune_nappe.md)** | ⭐⭐⭐ **le maillon manquant de `39`, construit** : suivre une nappe par tenseur de structure + recentrage sur la crete, et ecrire les points de passage que `--correct` sait relire. Temoin negatif : « au plus proche » quitte sa spire de 5,9 voxels la ou la marche reste a 0,67 |
 | **[`docs/42_la_boucle_tourne_et_ne_suffit_pas.md`](docs/42_la_boucle_tourne_et_ne_suffit_pas.md)** | ⭐⭐⭐ **la boucle de correction entiere, exercee pour la premiere fois** : le seam fonctionne, la trace change (0 → 11 753 croisements) et son α NE change pas (+0,98 → +1,03). 318 points contre 56 630 : un coup de pouce local, pas une reorientation |
+| **[`docs/43_la_chaine_des_spires.md`](docs/43_la_chaine_des_spires.md)** | ⭐⭐⭐ **six tours tiennent, le septieme casse** : un segment officiel qui converge, puis six spires generees par `mode: gen_neighbor`. 4 sur 7 convergent, 0 en travers jusqu'a la 7e (α = +1,475). Premiere fois qu'une surface que NOUS produisons converge — et l'erosion (4,0 % par tour) borne la chaine avant la qualite |
 
 ## Rejouer
 

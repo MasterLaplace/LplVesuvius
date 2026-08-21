@@ -208,6 +208,34 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                          " -> ".join(str(x) for x in brut[:4]),
                          ", ".join(str(x) for x in brut[:4])], p.name))
 
+    # ⚠⚠ La chaine des spires : le compte de spires qui convergent, l'erosion par tour et
+    # l'alpha de la spire qui casse sont TOUTE la revendication de `43`. Si l'un bouge et
+    # que le document ne bouge pas, le document annonce une chaine qui n'existe plus.
+    p = racine / "docs" / "chaine_spires.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        if d:
+            conv = sum(1 for l in d if l["verdict"] == "converge")
+            out.append(("spires qui convergent",
+                        [f"**{conv} spires sur {len(d)} convergent",
+                         f"{conv} spires sur {len(d)}",
+                         f"{conv} sur {len(d)}"], p.name))
+            a0, a1 = d[0]["aire_grille_cm2"], d[-1]["aire_grille_cm2"]
+            tours = len(d) - 1
+            if a0 and tours:
+                par = 100 * (1 - a1 / a0) / tours
+                out.append(("erosion par tour",
+                            [f"{fr(par, 1)} % par tour", f"{par:.1f} % par tour"], p.name))
+                out.append(("aires de la chaine",
+                            [f"{fr(a0, 2)} → {fr(a1, 2)} cm²",
+                             f"{a0:.2f} → {a1:.2f} cm²"], p.name))
+            casse = [l for l in d if l["verdict"] == "suit la fenêtre"]
+            if casse:
+                out.append(("alpha de la spire qui casse",
+                            [f"**{casse[0]['alpha']:+.3f}**",
+                             f"{fr(casse[0]['alpha'], 3)}",
+                             f"{casse[0]['alpha']:+.3f}"], p.name))
+
     # ⚠⚠ Le test de convergence : les deux α sont la revendication ENTIERE de la section 11
     # de la soumission. Si l'un bouge et que le texte ne bouge pas, le texte annonce une
     # separation qui n'existe plus — et c'est la seule chose que cette section apporte.
