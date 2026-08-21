@@ -55,6 +55,37 @@ REPOUSSE=${REPOUSSE:-0}
 # et peut cesser de manquer une nappe mince. Aucun autre reglage de `gen_neighbor` n'agit
 # aussi directement sur ce qui est trouve ou pas.
 PAS_RAYON=${PAS_RAYON:-1.0}
+
+# ⚠⚠ LE PIEGE DU PAS, TROUVE DANS LA SOURCE LE 2026-08-21 (fin). Trois reglages de
+# `gen_neighbor` comptent des PAS et non une distance, donc leur portee physique est
+# silencieusement divisee quand on affine le pas :
+#
+#   `neighbor_exit_count`   (defaut 1) — nombre d'echantillons CONSECUTIFS sous le
+#     demi-seuil qu'il faut voir pour declarer « j'ai quitte la nappe de depart »
+#     (vc_grow_seg_from_seed.cpp:784). Sa portee vaut exit_count x pas :
+#       pas 1,0   -> 1,0 voxel = 8,6 µm
+#       pas 0,125 -> 0,125 voxel = 1,1 µm
+#     A pas fin, UN SEUL echantillon sous-voxel interpole sous le demi-seuil suffit donc, et
+#     le rayon peut sortir puis rentrer dans LA MEME feuille — il se pose sur la face proche
+#     de sa nappe de depart au lieu de la suivante. Ca predit un ecart entre nappes plus
+#     COURT, et c'est exactement ce que la mesure montre : 116 -> 109 -> 107 -> 102 µm quand
+#     le pas est halve trois fois (`44` §4).
+#
+#   `neighbor_spike_window` (defaut 2) — alimente `max_fold_iters = spike_window * 4`
+#     (:879), donc encore un compte de pas.
+#
+#   `neighbor_min_clearance` est le SEUL des trois exprime en distance, et la source le
+#     convertit correctement (`ceil(min_clearance / neighbor_step)`, :677). L'auteur
+#     connaissait donc le probleme pour celui-la ; les deux autres sont restes des comptes.
+#
+# ⭐ D'ou la compensation : pour garder une PORTEE PHYSIQUE constante, exit_count et
+# spike_window doivent varier en 1/pas. La valeur de reference est celle du pas OPTIMAL
+# mesure (0,25) avec les defauts, soit une portee de 0,25 voxel pour la sortie.
+# Laisser ces variables vides garde les defauts de l'outil (aucune compensation).
+SORTIE_PAS=${SORTIE_PAS:-}          # neighbor_exit_count
+FENETRE_PIC=${FENETRE_PIC:-}        # neighbor_spike_window
+DISTANCE_MAX=${DISTANCE_MAX:-250.0} # neighbor_max_distance, en VOXELS (une distance, elle)
+DEGAGEMENT=${DEGAGEMENT:-}          # neighbor_min_clearance, en VOXELS (une distance aussi)
 B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 VOL="$B/$ROULEAU/volumes/20250521151220-8.640um-1.2m-116keV-masked.zarr"
 # ⚠⚠ LE SEGMENT DE DEPART DOIT CONVERGER, et le choisir sur son nom ne suffit pas. Paye le
@@ -82,6 +113,8 @@ mkdir -p "$DEST"
 [ -n "$ETIQUETTE" ] && echo "etiquette des verdicts : spire_${ETIQUETTE}<spire>.json"
 echo "depart : $SOURCE"
 echo "prediction : $SURF   sens : $SENS   pas du rayon : $PAS_RAYON   fenetres : $FENETRES"
+echo "compensation : exit_count=${SORTIE_PAS:-defaut} spike_window=${FENETRE_PIC:-defaut} \
+degagement=${DEGAGEMENT:-defaut} distance_max=$DISTANCE_MAX"
 
 juger() {   # $1 = repertoire, $2 = maillage, $3 = nom
   local W=$1 M=$2 NOM=$3
@@ -163,12 +196,19 @@ for k in $(seq 1 "$N_SPIRES"); do
     mkdir -p "$W/trace"
     python3 -c "
 import json
-json.dump({'mode': 'gen_neighbor', 'voxelsize': $UM, 'thread_limit': 0,
-           'cache_size': 6000000000,
-           'neighbor_dir': '$SENS', 'neighbor_step': $PAS_RAYON,
-           'neighbor_max_distance': 250.0, 'neighbor_threshold': 1.0,
-           'neighbor_fill': True},
-          open('$W/trace/seed.json','w'), indent=2)"
+par = {'mode': 'gen_neighbor', 'voxelsize': $UM, 'thread_limit': 0,
+       'cache_size': 6000000000,
+       'neighbor_dir': '$SENS', 'neighbor_step': $PAS_RAYON,
+       'neighbor_max_distance': $DISTANCE_MAX, 'neighbor_threshold': 1.0,
+       'neighbor_fill': True}
+# ⚠ On n'ecrit un reglage que s'il est demande : ecrire le defaut de l'outil a la main
+# ferait mentir le meta du maillage sur ce qui a ete choisi et ce qui a ete subi.
+for cle, val in (('neighbor_exit_count', '$SORTIE_PAS'),
+                 ('neighbor_spike_window', '$FENETRE_PIC'),
+                 ('neighbor_min_clearance', '$DEGAGEMENT')):
+    if val:
+        par[cle] = float(val) if '.' in val else int(val)
+json.dump(par, open('$W/trace/seed.json','w'), indent=2)"
     ( cd "$W/trace" && timeout 7200 vc_grow_seg_from_seed -v "$B/$SURF" -t . -p seed.json \
         --resume "$PREC" > trace.log 2>&1 )
   fi

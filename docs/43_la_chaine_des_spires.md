@@ -382,6 +382,70 @@ elle annonçait « la rupture est repoussée du tour 06 au tour 07 » et reposai
 ce verdict-là. Un lancer de pièce publié comme un résultat. Ce qui le remplace ci-dessus ne
 passe par aucun seuil et dit une chose plus faible et plus solide.
 
+### ⭐⭐⭐ Le mécanisme, trouvé dans la source : trois réglages comptent des PAS
+
+Après avoir dit ci-dessus que le mécanisme était inconnu, je suis allé le chercher là où il
+pouvait être écrit — dans `vc_grow_seg_from_seed.cpp`. Il y est, et il est arithmétique.
+
+Le rayon ne s'arrête pas au premier échantillon au-dessus du seuil : il doit d'abord
+**quitter** la nappe de départ. Le test de sortie (ligne 784) compte des échantillons
+**consécutifs** sous le demi-seuil :
+
+```cpp
+if (v <= neighbor_exit_threshold) {
+    below_counter += 1;
+    if (below_counter >= neighbor_exit_count) { left_surface = true; }
+} else { below_counter = 0; }
+```
+
+`neighbor_exit_count` vaut **1** par défaut. C'est un **compte de pas**, donc sa portée
+physique est `exit_count × neighbor_step` :
+
+| pas du rayon | portée du test de sortie |
+|---:|---:|
+| 1,0 | 1,0 voxel = 8,6 µm |
+| 0,5 | 0,5 voxel = 4,3 µm |
+| 0,25 | 0,25 voxel = 2,2 µm |
+| **0,125** | **0,125 voxel = 1,1 µm** |
+
+⚠⚠ **À pas fin, un seul échantillon sous-voxel interpolé sous le demi-seuil suffit pour
+déclarer « j'ai quitté la nappe ».** Le rayon peut donc sortir puis rentrer dans **la même
+feuille**, et se poser sur la face proche de sa nappe de départ au lieu de la suivante. Ça
+prédit un écart entre nappes plus **court** — et c'est exactement ce que la mesure montre :
+**116 → 109 → 107 → 102 µm** quand le pas est halvé trois fois
+([`44`](44_ou_la_chaine_se_trouve.md) §4).
+
+`neighbor_spike_window` (défaut 2) est le second : il alimente
+`max_fold_iters = spike_window * 4` (ligne 879), donc encore un compte de pas.
+
+⭐ **Et `neighbor_min_clearance` est le seul des trois exprimé en distance** — la source le
+convertit correctement, `ceil(min_clearance / neighbor_step)` (ligne 677). L'auteur
+connaissait donc le problème pour celui-là ; les deux autres sont restés des comptes.
+
+⚠⚠ **Ce qui corrige ma phrase du paragraphe précédent** : j'y écrivais « le mécanisme de la
+dégradation reste inconnu » et que mon hypothèse du rayon s'arrêtant trop tôt était
+« réfutée ». Elle était **juste en direction** — la source prédit précisément le petit effet
+monotone que j'avais mesuré puis écarté comme du bruit. C'était une réfutation trop rapide :
+un effet réel mais petit ressemble exactement à du bruit, et seule la source a permis de
+trancher.
+
+### La prédiction, et elle est falsifiable des deux côtés
+
+Si la courbe en U vient de ce couplage, alors **compenser les deux comptes pour garder une
+portée physique constante doit l'aplatir**. Pour retrouver la portée du pas optimal (0,25
+voxel de sortie, 0,5 voxel de fenêtre) à pas 0,125, il faut `exit_count = 2` et
+`spike_window = 4`.
+
+| ce qui se passerait | ce que ça voudrait dire |
+|---|---|
+| la chaîne compensée ressemble à **pas 0,25** | le couplage EST le mécanisme, et l'optimum n'est pas dans le pas mais dans la **portée physique** — donc réglable |
+| elle ressemble encore à **pas 0,125** | le couplage n'est pas le mécanisme, et il faut chercher ailleurs |
+
+Campagne lancée (`data/spires_pas0125_compense`, 9 tours). `tools/spire_suivante.sh` expose
+désormais `SORTIE_PAS`, `FENETRE_PIC`, `DEGAGEMENT` et `DISTANCE_MAX` — et n'écrit un réglage
+dans le JSON **que s'il est demandé**, parce qu'écrire le défaut de l'outil à la main ferait
+mentir le `meta.json` du maillage sur ce qui a été choisi et ce qui a été subi.
+
 ### ⭐ Ce que l'érosion dit, en refusant de bouger
 
 À profondeur égale, l'érosion est de **4,0 % par tour pour les quatre campagnes** — constante
@@ -398,9 +462,9 @@ là où l'α est mauvais. Ce qui se dégrade n'est pas *quelle* feuille est trou
 s'arrêter le rayon **avant** la nappe suivante, ce qui se serait vu sur un écart plus petit.
 Mesuré : 115 µm à pas 0,125 sur toute la chaîne, indistinguable des 113 et 114 des deux
 autres. À profondeur égale la tendance existe mais est minuscule (116 → 102 µm) et va dans le
-sens prédit sans en avoir l'ampleur. **Le mécanisme de la dégradation reste inconnu.** Les
-leviers non sondés sont `neighbor_max_distance`, `neighbor_threshold` et
-`neighbor_min_clearance`.
+sens prédit sans en avoir l'ampleur. ~~Le mécanisme de la dégradation reste inconnu.~~ ⭐ **Trouvé dans la
+source** — voir la section suivante : trois réglages de `gen_neighbor` comptent des **pas** et
+non une distance, donc leur portée physique est divisée quand on affine le pas.
 
 ⚠ **Et le chiffre d'érosion de ce tableau porte sur l'aire de GRILLE.** Sur l'aire utile il
 vaut 12,8 à 13,0 % par tour, à profondeur égale — également constant sur le facteur huit.
