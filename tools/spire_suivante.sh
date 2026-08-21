@@ -136,7 +136,13 @@ json.dump({'mode': 'gen_neighbor', 'voxelsize': $UM, 'thread_limit': 0,
     ( cd "$W/trace" && timeout 7200 vc_grow_seg_from_seed -v "$B/$SURF" -t . -p seed.json \
         --resume "$PREC" > trace.log 2>&1 )
   fi
-  M=$(ls -d "$W/trace"/auto_grown_* 2>/dev/null | head -1)
+  # ⚠⚠ `gen_neighbor` nomme sa sortie `neighbor_<sens>_<horodatage>`, PAS `auto_grown_*` ni
+  # `*.tifxyz`. Paye le 2026-08-21 : le journal disait « AUCUN MAILLAGE — la chaine casse au
+  # tour 1 » alors que le maillage etait la, avec ses x.tif/y.tif/z.tif et son meta.json, et
+  # que le log de trace annoncait « Output grid: 157x145 ». Un faux negatif produit par mon
+  # propre glob, et qui avait exactement la forme du resultat attendu.
+  M=$(ls -d "$W/trace"/neighbor_* 2>/dev/null | head -1)
+  [ -z "$M" ] && M=$(ls -d "$W/trace"/auto_grown_* 2>/dev/null | head -1)
   [ -z "$M" ] && M=$(ls -d "$W/trace"/*.tifxyz 2>/dev/null | head -1)
   if [ -z "$M" ]; then
     echo "== spire$KK : AUCUN MAILLAGE — la chaîne casse au tour $k"
