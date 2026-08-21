@@ -1,0 +1,22 @@
+{
+  "series": [
+    {
+      "verdict": "intermédiaire",
+      "sens": "la mesure bouge sans suivre la fenêtre — ni convergée ni clairement en travers",
+      "serie": [
+        [
+          31,
+          64.8
+        ],
+        [
+          81,
+          112.32
+        ]
+      ],
+      "croissance": 1.7333333333333334,
+      "elargissement": 2.6129032258064515,
+      "alpha": 0.5726893572535711,
+      "nom": "spire02 (12.19 cm², 1449 croisements)"
+    }
+  ]
+}

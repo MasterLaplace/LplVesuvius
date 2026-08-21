@@ -117,10 +117,17 @@ non contraint qui repousse.*
 Comparaison **appariée** — même surface de départ, même sens, mêmes fenêtres, même nombre de
 spires ; **seule la repousse change** :
 
-| spire 01 | grille | aire | 31 c | 81 c | **α** | verdict |
-|---|---|---:|---:|---:|---:|---|
-| sans repousse | 157×145 | 6,71 cm² | 90,72 µm | 90,72 µm | **+0,000** | **converge** |
-| **repoussée** (20 générations) | **212×200** | **12,47 cm²** | 86,40 µm | **129,60 µm** | **+0,422** | intermédiaire |
+![la repousse, comparaison appariee](images/43_repousse_appariee.png)
+
+| | 31 c | 81 c | **α** | verdict |
+|---|---:|---:|---:|---|
+| **spire 01** sans repousse | 90,72 µm | 90,72 µm | **+0,000** | **converge** |
+| **spire 01** repoussée (20 gén.) | 86,40 µm | 129,60 µm | **+0,422** | intermédiaire |
+| **spire 02** sans repousse | 43,20 µm | 51,84 µm | **+0,190** | **converge** |
+| **spire 02** repoussée | 64,80 µm | 112,32 µm | **+0,573** | intermédiaire |
+
+Et la surface, sur la première paire : grille **157×145 → 212×200**, aire
+**6,71 → 12,47 cm²**.
 
 ⭐ **La repousse marche, au sens où elle rend la surface** : la grille passe de 157×145 à
 212×200, l'aire de 6,71 à 12,47 cm² — **près du double**, et bien au-delà de ce que l'érosion
@@ -136,8 +143,14 @@ qui tire la mesure**.
 > qui est celui dont [`42`](42_la_boucle_tourne_et_ne_suffit_pas.md) montre qu'il produit des
 > coupes radiales quand rien ne le contraint.
 
-⚠ **Une seule paire pour l'instant.** La campagne appariée continue ; deux verdicts ne font
-pas une tendance, et la conclusion ci-dessus est à confirmer sur les tours suivants.
+⚠ **Deux paires, et elles vont dans le même sens avec la même ampleur** : α augmente de
+**+0,42** puis de **+0,38**, et les deux spires passent de « converge » à « intermédiaire ».
+Ce n'est pas encore une loi, mais ce n'est plus une anecdote — et la répétition est ce qui
+distingue les deux. La campagne continue.
+
+⚠ La spire 00 est **identique** dans les deux campagnes (+0,000 des deux côtés), ce qui est
+le contrôle : c'est la même surface de départ, réellement partagée, donc l'écart des paires
+suivantes vient bien de la repousse et pas du hasard de deux exécutions.
 
 ⭐ La suite naturelle n'est donc pas « repousser plus » mais **repousser sous contrainte** :
 les points de passage de [`41`](41_marcher_le_long_dune_nappe.md) existent, `correction_weight`
