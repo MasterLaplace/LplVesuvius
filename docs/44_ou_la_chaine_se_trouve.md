@@ -26,12 +26,17 @@ le long de la circonférence **tourne**, une ligne qui court le long de l'axe es
 On n'a donc pas besoin de savoir où est l'axe pour savoir laquelle des deux directions de
 grille est laquelle — il suffit de regarder laquelle courbe.
 
-La courbure se mesure par la **flèche** de l'arc : pour un arc de demi-angle @f$\varphi@f$,
-corde @f$= 2R\sin\varphi@f$ et flèche @f$= R(1-\cos\varphi)@f$, donc
+La courbure se mesure par la **flèche** de l'arc — la distance maximale entre l'arc et sa
+corde. Pour un arc de demi-angle φ :
 
-$$\varphi = 2\arctan\!\left(\frac{2 \times \text{flèche}}{\text{corde}}\right)$$
+$$\text{corde} = 2R\sin\varphi
+\qquad
+\text{flèche} = R\,(1-\cos\varphi)
+\qquad\Longrightarrow\qquad
+\varphi = 2\arctan\!\left(\frac{2 \times \text{flèche}}{\text{corde}}\right)$$
 
-exactement, sans approximation petit-angle.
+Exactement, sans approximation petit-angle — et le rayon s'élimine, ce qui est ce qui rend la
+mesure utilisable là où le rayon, lui, n'est pas déterminé (§6).
 
 ⚠⚠ **La première version de ce discriminant était fausse et le témoin l'a refutée.** Elle
 ajustait un cercle sur chaque ligne et divisait la longueur d'arc par le rayon. Sur une ligne

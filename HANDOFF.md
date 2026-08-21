@@ -1235,6 +1235,24 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     graine, le mode, les paramètres et le nombre de générations**. Regarder les
     intermédiaires avant de conclure qu'une provenance n'est pas publiée.
 
+
+**Ajoutés le 2026-08-21 (soir)**
+59. ⚠⚠ **Une syntaxe correcte dans un dépôt voisin peut être du texte mort dans celui-ci.**
+    `44` a été écrite avec `@f$…@f$` pour ses maths en ligne — la syntaxe **Doxygen**, qui
+    est la bonne dans le livre LplKernel parce que Doxygen la traite. Ici les documents sont
+    du Markdown rendu par un viewer : les délimiteurs se sont affichés **littéralement**, en
+    plein milieu d'une phrase. Signalé par l'auteur, pas par un contrôle.
+    ⭐ Et le diagnostic n'était pas celui qu'on croit : ce n'est pas que le dépôt préfère
+    `$…$`, c'est que **le dépôt n'a AUCUNE notation mathématique** — `44` est la seule des 45
+    pages à en porter, donc il n'y avait pas de convention à suivre, seulement une habitude
+    importée d'ailleurs. ⚠ Mon premier grep a « trouvé » six documents en `$…$` : c'étaient
+    des **variables shell** (`$PWD`, `$SCROLL`) dans des blocs de code. Compter des motifs
+    sans les lire, une fois de plus.
+    **Remède tenu** : le seul bloc dont le rendu est *prouvé* (la capture de l'auteur montre
+    `$$…$$` s'affichant correctement) porte désormais les trois relations, et il n'y a plus
+    aucune math en ligne — donc plus de dépendance à un réglage de viewer qu'on ne peut pas
+    vérifier d'ici.
+
 ## 9. Règles de mesure tenues ici
 
 1. **Aucun seuil absolu** sur une grandeur physique — normaliser, ou être **ordinal**.
