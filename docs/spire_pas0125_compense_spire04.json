@@ -1,0 +1,24 @@
+{
+  "series": [
+    {
+      "verdict": "intermédiaire",
+      "sens": "la mesure bouge sans suivre la fenêtre — ni convergée ni clairement en travers",
+      "serie": [
+        [
+          31,
+          43.2
+        ],
+        [
+          81,
+          60.48
+        ]
+      ],
+      "croissance": 1.4,
+      "elargissement": 2.6129032258064515,
+      "alpha": 0.35032333821823963,
+      "marge_au_seuil": 0.3496766617817603,
+      "fragile": false,
+      "nom": "spire04 (? cm², 0 croisements)"
+    }
+  ]
+}

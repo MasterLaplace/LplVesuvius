@@ -374,7 +374,7 @@ qu'elle n'est ni meilleure ni pire, et deux de ses trois plus mauvais tours sont
 
 Les α et les aires sont des grandeurs continues, mesurées directement. Un compte de verdicts
 (« 4/7 », « 6/9 ») est un compte de **franchissements de seuil**, et le recensement de
-[`44`](44_ou_la_chaine_se_trouve.md) §8bis trouve **10 verdicts fragiles sur 45** — dont le
+[`44`](44_ou_la_chaine_se_trouve.md) §8bis trouve **10 verdicts fragiles sur 55** — dont le
 plus fragile de tous, `pas025_spire07`, à **deux millièmes** de son seuil.
 
 ⚠ **C'est ce qui a fait retirer la première version de cette section**, publiée le matin même :
@@ -429,22 +429,45 @@ monotone que j'avais mesuré puis écarté comme du bruit. C'était une réfutat
 un effet réel mais petit ressemble exactement à du bruit, et seule la source a permis de
 trancher.
 
-### La prédiction, et elle est falsifiable des deux côtés
+### ⭐⭐⭐ La prédiction était falsifiable des deux côtés, et elle est CONFIRMÉE
 
-Si la courbe en U vient de ce couplage, alors **compenser les deux comptes pour garder une
-portée physique constante doit l'aplatir**. Pour retrouver la portée du pas optimal (0,25
-voxel de sortie, 0,5 voxel de fenêtre) à pas 0,125, il faut `exit_count = 2` et
-`spike_window = 4`.
+Si la courbe en U vient de ce couplage, alors compenser les comptes pour garder une portée
+physique constante doit l'aplatir. Pour retrouver la portée du pas optimal (0,25 voxel) à pas
+0,125, il faut `exit_count = 2`. Campagne lancée sur neuf tours, et mesurée à profondeur
+égale :
 
-| ce qui se passerait | ce que ça voudrait dire |
-|---|---|
-| la chaîne compensée ressemble à **pas 0,25** | le couplage EST le mécanisme, et l'optimum n'est pas dans le pas mais dans la **portée physique** — donc réglable |
-| elle ressemble encore à **pas 0,125** | le couplage n'est pas le mécanisme, et il faut chercher ailleurs |
+| campagne | pas | **portée** | α moyen | α du pire tour |
+|---|---:|---:|---:|---:|
+| défauts | 1,0 | 1,0 | +0,357 | +1,475 |
+| défauts | 0,5 | 0,5 | +0,129 | +0,583 |
+| défauts | **0,25** | **0,25** | ⭐ **+0,102** | ⭐ **+0,246** |
+| défauts | 0,125 | 0,125 | +0,327 | +0,758 |
+| **`exit_count=2`** | **0,125** | **0,25** | ⭐ **+0,130** | +0,350 |
 
-Campagne lancée (`data/spires_pas0125_compense`, 9 tours). `tools/spire_suivante.sh` expose
-désormais `SORTIE_PAS`, `FENETRE_PIC`, `DEGAGEMENT` et `DISTANCE_MAX` — et n'écrit un réglage
-dans le JSON **que s'il est demandé**, parce qu'écrire le défaut de l'outil à la main ferait
-mentir le `meta.json` du maillage sur ce qui a été choisi et ce qui a été subi.
+> **À pas égal, changer la seule portée fait passer l'α moyen de +0,327 à +0,130.** Et deux
+> campagnes dont les pas diffèrent d'un facteur deux, mais qui partagent la portée 0,25,
+> donnent le même α (+0,102 et +0,130).
+
+⭐⭐ **Deux spires sont identiques au millième** entre la campagne compensée et celle du pas
+0,25 : la 02 à +0,202 et la 06 à +0,246. Même volume, même chaîne, même portée — un pas deux
+fois plus fin ne change rien dès que la portée est tenue.
+
+⭐⭐⭐ **Donc ce n'est pas le pas qui a un optimum, c'est la PORTÉE.** La courbe en U du
+paragraphe précédent était l'ombre d'une courbe en U dans la portée, vue à travers un
+paramètre qui la divise. Conséquence pratique : **le pas peut être affiné librement** — ce qui
+localise mieux la nappe — à condition de relever `exit_count` du même facteur.
+
+![ce qui décide, c'est la portée](images/43_optimum_du_pas.png)
+
+⚠ La figure a **changé d'abscisse** pour cette raison. Elle portait le pas ; deux campagnes à
+pas 0,125 avec des α opposés y auraient été deux points au même x, c'est-à-dire une figure
+illisible parce qu'elle traçait la mauvaise variable. L'abscisse est maintenant la portée, et
+le pas est écrit sur chaque point.
+
+⚠ **Ce que ça ne dit pas** : où est l'optimum de la portée. Trois portées sont mesurées
+(0,125, 0,25, 0,5, 1,0) et la meilleure est 0,25 — mais l'échantillonnage est grossier, et
+`neighbor_exit_threshold` (défaut `threshold × 0,5`) n'a jamais été touché. La portée optimale
+pourrait dépendre de lui.
 
 ### ⭐ Ce que l'érosion dit, en refusant de bouger
 

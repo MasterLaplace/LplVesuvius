@@ -1236,6 +1236,45 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     intermédiaires avant de conclure qu'une provenance n'est pas publiée.
 
 
+### ⭐⭐⭐ RÉSULTAT DU 2026-08-21 (nuit) — ce n'est pas le PAS, c'est la PORTÉE
+
+Le mécanisme de la courbe en U est lu dans `vc_grow_seg_from_seed.cpp` : `neighbor_exit_count`
+(défaut 1) compte des **pas** et non une distance, donc la portée physique du test de sortie
+du rayon vaut `exit_count × neighbor_step` — 8,6 µm à pas 1,0, **1,1 µm à pas 0,125**. À pas
+fin, un seul échantillon sous-voxel interpolé suffit à déclarer « j'ai quitté la nappe », et le
+rayon peut sortir puis rentrer dans **la même feuille**.
+
+**Prédiction lancée, falsifiable des deux côtés, CONFIRMÉE** :
+
+| campagne | pas | **portée** | α moyen | α pire tour | verdicts fragiles |
+|---|---:|---:|---:|---:|---:|
+| défauts | 1,0 | 1,0 | +0,357 | +1,475 | 1/7 |
+| défauts | 0,5 | 0,5 | +0,129 | +0,583 | 1/7 |
+| défauts | **0,25** | **0,25** | ⭐ **+0,102** | ⭐ **+0,246** | 1/9 |
+| défauts | 0,125 | 0,125 | +0,327 | +0,758 | **4/11** |
+| **`exit_count=2`** | **0,125** | **0,25** | ⭐ **+0,130** | +0,350 | ⭐ **0/10** |
+
+⭐⭐ **À pas égal, changer la seule portée fait passer l'α de +0,327 à +0,130.** Deux campagnes
+dont les pas diffèrent d'un facteur 2 mais qui partagent la portée 0,25 donnent le même α, et
+**deux de leurs spires sont identiques au millième** (02 à +0,202, 06 à +0,246).
+
+> **Ce n'est pas le pas qui a un optimum, c'est la PORTÉE.** Le pas peut donc être affiné
+> librement — ce qui localise mieux la nappe — à condition de relever `exit_count` du même
+> facteur.
+
+⭐ Et la campagne compensée est **la seule dont aucun verdict n'est fragile** (0/10 contre 4/11
+pour la même chaîne aux défauts) : tenir la portée ne fait pas que baisser les α, ça rend les
+verdicts tranchés.
+
+⚠ **Ce qui reste ouvert** : où est l'optimum de la portée. Quatre valeurs mesurées seulement
+(0,125 / 0,25 / 0,5 / 1,0), et `neighbor_exit_threshold` (défaut `threshold × 0,5`) n'a jamais
+été touché — la portée optimale peut dépendre de lui.
+
+⚠ `tools/spire_suivante.sh` expose `SORTIE_PAS`, `FENETRE_PIC`, `DEGAGEMENT`, `DISTANCE_MAX`
+et n'écrit un réglage dans le JSON **que s'il est demandé** — c'est ce qui permet à
+`table_chaine.py --comparer` de lire dans le `meta.json` si une campagne est compensée ou non,
+au lieu de le déduire du nom du dossier.
+
 ### ⭐⭐⭐ RÉSULTAT DU 2026-08-21 (fin) — le pas du rayon a un OPTIMUM
 
 Quatre campagnes d'enchaînement, comparées **à profondeur égale** (7 premiers tours) et
@@ -1271,7 +1310,7 @@ l'aire *utile*), et l'écart entre nappes reste à 102–116 µm partout.
 ⚠ **Une revendication publiée le matin a été RETIRÉE le soir.** « Halver le pas repousse la
 rupture d'un tour » reposait sur `pas025_spire07`, α = +0,702 pour un seuil de 0,700 — **deux
 millièmes**, quand l'instrument ne discrimine pas à ±0,2 près. C'est ce qui a produit le
-recensement de fragilité (10 verdicts sur 45) et la règle : **comparer des α, jamais des
+recensement de fragilité (10 verdicts sur 55) et la règle : **comparer des α, jamais des
 comptes de franchissements de seuil.**
 
 **Ajoutés le 2026-08-21 (soir)**

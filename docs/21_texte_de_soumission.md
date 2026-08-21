@@ -415,7 +415,7 @@ nuancer.
 >
 > ⚠ **One methodological note, because it changed our own numbers.** α on two windows does not
 > discriminate to better than ±0.2, so a *count* of verdicts is a count of threshold
-> crossings: 10 of our 45 wrap verdicts sit inside that width, one of them two
+> crossings: 10 of our 55 wrap verdicts sit inside that width, one of them two
 > thousandths from its threshold. We had published a conclusion resting on that wrap and
 > retracted it the same day. Every figure in this section is an α or an area — a continuous
 > quantity measured directly — and never a count.

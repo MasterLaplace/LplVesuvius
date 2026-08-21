@@ -174,6 +174,33 @@ def pas_du_rayon(racine: Path) -> float | None:
     return None
 
 
+def compensation_de(racine: Path) -> dict:
+    """Les comptes de pas reellement demandes, lus dans le meta d'un maillage.
+
+    ⚠⚠ `neighbor_exit_count` et `neighbor_spike_window` comptent des PAS et non une
+    distance, donc leur portee physique vaut `compte x neighbor_step`
+    (`vc_grow_seg_from_seed.cpp:784` et `:879`). Une campagne qui les laisse aux defauts a
+    donc une portee qui se divise quand on affine le pas -- c'est le mecanisme de la courbe
+    en U. Une campagne qui les compense n'est PAS comparable a l'autre sur le seul pas.
+
+    ⚠ Lu dans le meta, jamais deduit du nom du dossier ; et `spire_suivante.sh` n'ecrit ces
+    cles que si elles ont ete demandees, donc leur ABSENCE veut dire « defauts de l'outil ».
+    """
+    for meta in sorted(racine.glob("spire*/trace/*/meta.json")):
+        try:
+            d = json.loads(meta.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            continue
+        par = d.get("vc_gsfs_params") or {}
+        if "neighbor_step" not in par:
+            continue
+        return {"exit_count": par.get("neighbor_exit_count"),
+                "spike_window": par.get("neighbor_spike_window"),
+                "compense": ("neighbor_exit_count" in par
+                             or "neighbor_spike_window" in par)}
+    return {"exit_count": None, "spike_window": None, "compense": False}
+
+
 def comparer(racines: list[Path], voxel_um: float, docs: Path) -> dict:
     """Comparer plusieurs campagnes d'enchainement A PROFONDEUR EGALE.
 
@@ -187,7 +214,7 @@ def comparer(racines: list[Path], voxel_um: float, docs: Path) -> dict:
     c'est-a-dire constant sur un facteur HUIT de pas. Toute la tendance etait l'artefact.
 
     **Sans seuil.** On compare des α et des aires, jamais des COMPTES de verdicts. Un compte
-    de verdicts est un compte de franchissements de seuil, et 10 des 45 verdicts de ce depot
+    de verdicts est un compte de franchissements de seuil, et 10 des 55 verdicts de ce depot
     ont un α a moins de 0,2 du seuil quand l'instrument ne discrimine pas a ±0,2 pres.
     """
     campagnes = []
@@ -212,6 +239,12 @@ def comparer(racines: list[Path], voxel_um: float, docs: Path) -> dict:
                                  if a0 and profondeur > 1 else None)
         c["longueur_reelle"] = len(c["lignes"])
         c["pas_du_rayon"] = pas_du_rayon(Path(c["racine"]))
+        c.update(compensation_de(Path(c["racine"])))
+        pr = c["pas_du_rayon"]
+        # ⭐ La PORTEE PHYSIQUE du test de sortie, en voxels : c'est elle qui compte, pas le
+        # pas. Deux campagnes de pas differents mais de meme portee sont comparables ; deux
+        # campagnes de meme pas et de portees differentes ne le sont pas.
+        c["portee_sortie_vox"] = ((c["exit_count"] or 1) * pr) if pr else None
     return {"campagnes": campagnes, "profondeur_commune": profondeur}
 
 
@@ -219,25 +252,28 @@ def comparer(racines: list[Path], voxel_um: float, docs: Path) -> dict:
 # et l'isoler creerait un fichier dont la seule fonction serait de relire le JSON que
 # celui-ci vient d'ecrire.
 def dessiner_comparaison(res: dict, sortie: Path) -> None:
-    """La courbe en U du pas du rayon : α contre pas, a profondeur egale.
+    """α contre la PORTEE PHYSIQUE du test de sortie, a profondeur egale.
 
-    ⭐ Deux courbes et pas une : l'α MOYEN dit ce que la campagne vaut en gros, l'α MAX dit
-    ce que vaut son pire tour -- et c'est le pire tour qui casse une chaine. Une figure qui
-    ne montrerait que la moyenne cacherait qu'a pas 1,0 un tour part a +1,475.
+    ⚠⚠ L'abscisse est la PORTEE, pas le pas du rayon, et ce choix EST le resultat. La
+    premiere version de cette figure mettait le pas en abscisse et montrait une courbe en U ;
+    une campagne a pas 0,125 avec les comptes compenses tombe sur la meme portee qu'une
+    campagne a pas 0,25 et lui ressemble, pas a l'autre campagne a pas 0,125. Mettre le pas
+    en abscisse dessinerait donc DEUX points a la meme x avec des α opposes -- une figure qui
+    ne peut pas etre lue, parce qu'elle trace la mauvaise variable.
 
-    ⚠ Aucun seuil n'est trace. Les verdicts sont des franchissements de seuil et 10 des 45
-    verdicts du depot sont a moins de 0,2 du leur ; poser une ligne horizontale ici
-    inviterait a relire la figure en comptant des cotes de la ligne.
+    ⭐ Deux courbes : l'α MOYEN dit ce que la campagne vaut, l'α MAX dit ce que vaut son pire
+    tour -- et c'est le pire tour qui casse une chaine.
     """
     from PIL import Image, ImageDraw, ImageFont
 
-    pts = [(c["pas_du_rayon"], c["alpha_moyen"], c["alpha_max"], c["nom"])
-           for c in res["campagnes"] if c.get("pas_du_rayon")]
+    pts = [(c["portee_sortie_vox"], c["alpha_moyen"], c["alpha_max"],
+            c.get("pas_du_rayon"), bool(c.get("compense")))
+           for c in res["campagnes"] if c.get("portee_sortie_vox")]
     if len(pts) < 2:
         return
     pts.sort()
-    L, H = 900, 600
-    X0, X1, Y0, Y1 = 110, 830, 450, 110
+    L, H = 940, 620
+    X0, X1, Y0, Y1 = 120, 860, 460, 120
     img = Image.new("RGB", (L, H), (255, 255, 255))
     art = ImageDraw.Draw(img)
     try:
@@ -248,66 +284,97 @@ def dessiner_comparaison(res: dict, sortie: Path) -> None:
         f_t = f_n = f_p = ImageFont.load_default()
     AMBRE, ENCRE, GRIS = (196, 116, 24), (30, 30, 30), (150, 150, 150)
 
-    art.text((26, 22), "Le pas du rayon a un optimum", fill=ENCRE, font=f_t)
-    art.text((26, 44), f"α mesuré sur les {res['profondeur_commune']} premiers tours de "
-                       f"chaque campagne — à profondeur ÉGALE, sans seuil",
+    art.text((26, 22), "Ce qui décide, c'est la portée — pas la finesse du pas",
+             fill=ENCRE, font=f_t)
+    art.text((26, 44), f"α sur les {res['profondeur_commune']} premiers tours de chaque "
+                       f"campagne, à profondeur ÉGALE et sans seuil",
              fill=(110, 110, 110), font=f_n)
 
     import math
-    lo, hi = math.log(min(p[0] for p in pts)), math.log(max(p[0] for p in pts))
-    amax = max(p[2] for p in pts) * 1.12
+    lo, hi = math.log(min(x[0] for x in pts)), math.log(max(x[0] for x in pts))
+    amax = max(x[2] for x in pts) * 1.14
 
-    def px(pas):
-        return X0 + (X1 - X0) * (math.log(pas) - lo) / (hi - lo)
+    def px(v):
+        return X0 + (X1 - X0) * ((math.log(v) - lo) / (hi - lo) if hi > lo else 0.5)
 
-    def py(al):
-        return Y0 - (Y0 - Y1) * (al / amax)
+    def py(a):
+        return Y0 - (Y0 - Y1) * (a / amax)
 
     art.line([X0, Y0, X1, Y0], fill=GRIS)
     art.line([X0, Y0, X0, Y1], fill=GRIS)
-    for al in (0.0, 0.5, 1.0, 1.5):
-        if al <= amax:
-            y = py(al)
+    for a in (0.0, 0.5, 1.0, 1.5):
+        if a <= amax:
+            y = py(a)
             art.line([X0 - 4, y, X1, y], fill=(240, 240, 240))
-            art.text((X0 - 46, y - 7), f"{al:+.1f}", fill=(140, 140, 140), font=f_p)
-    for pas, _, _, _ in pts:
-        art.text((px(pas) - 14, Y0 + 10), f"{pas:g}", fill=(120, 120, 120), font=f_p)
-    art.text((X0 + (X1 - X0) // 2 - 60, Y0 + 30), "pas du rayon (échelle log)",
+            art.text((X0 - 48, y - 7), f"{a:+.1f}", fill=(140, 140, 140), font=f_p)
+    art.text((26, Y1 - 26), "α", fill=(120, 120, 120), font=f_n)
+    art.text((X0 + (X1 - X0) // 2 - 130, Y0 + 34),
+             "portée physique du test de sortie = exit_count × pas   (voxels, échelle log)",
              fill=(120, 120, 120), font=f_p)
-    art.text((26, Y1 - 24), "α", fill=(120, 120, 120), font=f_n)
 
-    for (pa, ma, xa, _), (pb, mb, xb, _) in zip(pts, pts[1:]):
-        art.line([px(pa), py(xa), px(pb), py(xb)], fill=(228, 214, 198), width=3)
-        art.line([px(pa), py(ma), px(pb), py(mb)], fill=AMBRE, width=3)
+    # ⚠ Une portee peut porter DEUX campagnes (pas differents, meme portee). On relie les
+    # medianes par portee, sinon la ligne zigzague entre deux points de meme x.
+    from collections import OrderedDict
+    grp: "OrderedDict[float, list]" = OrderedDict()
+    for v, moy, mx, _, _ in pts:
+        grp.setdefault(v, []).append((moy, mx))
+    ligne = [(v, sum(m for m, _ in g) / len(g), sum(x for _, x in g) / len(g))
+             for v, g in grp.items()]
+    for (va, ma, xa), (vb, mb, xb) in zip(ligne, ligne[1:]):
+        art.line([px(va), py(xa), px(vb), py(xb)], fill=(228, 214, 198), width=3)
+        art.line([px(va), py(ma), px(vb), py(mb)], fill=AMBRE, width=3)
+
     meilleur = min(pts, key=lambda t: t[1])
-    for pas, moy, mx, nom in pts:
-        art.ellipse([px(pas) - 5, py(mx) - 5, px(pas) + 5, py(mx) + 5],
+    # ⚠ Deux campagnes peuvent partager une portee (pas differents, comptes compenses) :
+    # leurs marqueurs tombent au meme pixel. On decale les etiquettes par rang DANS le
+    # groupe, sinon les deux chiffres se superposent et la figure perd le fait qu'elle
+    # existe pour montrer — que deux pas donnent le meme α a portee egale.
+    rang: dict = {}
+    for v, *_ in pts:
+        rang[v] = rang.get(v, -1) + 1
+    rang = {}
+    for v, moy, mx, pas, comp in pts:
+        art.ellipse([px(v) - 5, py(mx) - 5, px(v) + 5, py(mx) + 5],
                     outline=(190, 170, 145), width=2)
-        art.ellipse([px(pas) - 5, py(moy) - 5, px(pas) + 5, py(moy) + 5], fill=AMBRE)
-        art.text((px(pas) + 10, py(mx) - 7), f"{mx:+.2f}", fill=(170, 150, 125), font=f_p)
-        art.text((px(pas) + 10, py(moy) - 7), f"{moy:+.2f}", fill=AMBRE, font=f_p)
-    # ⚠ Pas d'emoji dans une image : DejaVu ne les porte pas et ⭐ sort en carré vide.
-    art.text((px(meilleur[0]) - 20, py(meilleur[1]) + 14), "^ optimum",
-             fill=AMBRE, font=f_p)
+        # ⭐ Un contour marque une campagne dont les comptes ont ete COMPENSES : sans ce
+        # marquage, un lecteur croirait que deux points a la meme portee sont deux mesures
+        # du meme reglage, alors que l'un a un pas deux fois plus fin.
+        if comp:
+            art.ellipse([px(v) - 8, py(moy) - 8, px(v) + 8, py(moy) + 8],
+                        outline=AMBRE, width=2)
+        art.ellipse([px(v) - 5, py(moy) - 5, px(v) + 5, py(moy) + 5], fill=AMBRE)
+        k = rang[v] = rang.get(v, -1) + 1
+        dy = 14 + 17 * k if comp else -22 - 17 * k
+        art.text((px(v) - 20, py(moy) + dy), f"pas {pas:g} → {moy:+.2f}",
+                 fill=AMBRE if comp else (140, 110, 80), font=f_p)
+        art.text((px(v) + 12, py(mx) - 7), f"{mx:+.2f}", fill=(170, 150, 125), font=f_p)
+    # ⚠ « optimum » se place A GAUCHE du point et non dessous : l'espace du dessous est celui
+    # des etiquettes de campagne, et deux campagnes peuvent partager cette portee.
+    art.text((px(meilleur[0]) - 86, py(meilleur[1]) - 6), "optimum >", fill=AMBRE, font=f_p)
 
-    art.ellipse([X0 + 8, Y1 + 4, X0 + 16, Y1 + 12], fill=AMBRE)
-    art.text((X0 + 22, Y1 + 2), "α moyen de la campagne", fill=(110, 110, 110), font=f_p)
-    art.ellipse([X0 + 190, Y1 + 4, X0 + 198, Y1 + 12], outline=(190, 170, 145), width=2)
-    art.text((X0 + 204, Y1 + 2), "α du PIRE tour — c'est lui qui casse une chaîne",
+    yl = Y1 - 4
+    art.ellipse([X0 + 8, yl, X0 + 16, yl + 8], fill=AMBRE)
+    art.text((X0 + 22, yl - 2), "α moyen", fill=(110, 110, 110), font=f_p)
+    art.ellipse([X0 + 108, yl, X0 + 116, yl + 8], outline=(190, 170, 145), width=2)
+    art.text((X0 + 122, yl - 2), "α du PIRE tour", fill=(110, 110, 110), font=f_p)
+    art.ellipse([X0 + 248, yl - 2, X0 + 258, yl + 8], outline=AMBRE, width=2)
+    art.text((X0 + 264, yl - 2), "comptes compensés (exit_count relevé)",
              fill=(110, 110, 110), font=f_p)
 
-    bas = Y0 + 60
-    art.text((26, bas), "Trop grossier ou trop fin, c'est trois fois pire : ce n'est pas "
-                        "une amélioration monotone, c'est une courbe en U.",
-             fill=(60, 60, 60), font=f_n)
+    bas = Y0 + 62
+    doubles = [v for v, g in grp.items() if len(g) > 1]
+    if doubles:
+        art.text((26, bas), "→ Deux campagnes partagent la portée 0,25 avec des pas dans un "
+                            "rapport 2 — et donnent le même α.", fill=(60, 60, 60), font=f_n)
+        art.text((26, bas + 20), "À pas égal (0,125), changer la seule portée fait passer "
+                                 "l'α moyen de +0,33 à +0,13.", fill=(60, 60, 60), font=f_n)
     ers = [c["erosion_par_tour"] for c in res["campagnes"]
            if c["erosion_par_tour"] is not None]
     if ers:
-        art.text((26, bas + 20), f"⚠ L'érosion, elle, ne bouge pas : "
-                                 f"{min(ers):.1f} % par tour sur un facteur "
-                                 f"{max(p[0] for p in pts) / min(p[0] for p in pts):g} de pas.",
+        art.text((26, bas + 42), f"!! L'érosion ne bouge dans aucun des cas : "
+                                 f"{min(ers):.1f} % par tour partout.",
                  fill=(120, 120, 120), font=f_n)
-    art.text((26, bas + 40), "Donc le réglage décide OÙ la surface se pose, pas combien "
+    art.text((26, bas + 62), "Donc le réglage décide OÙ la surface se pose, pas combien "
                              "elle en perd.", fill=(120, 120, 120), font=f_n)
     sortie.parent.mkdir(parents=True, exist_ok=True)
     img.save(sortie)
@@ -338,14 +405,30 @@ def main() -> int:
             return 3
         p = res["profondeur_commune"]
         print(f"  À PROFONDEUR ÉGALE — les {p} premiers tours de chaque campagne\n")
-        print(f"  {'campagne':<18}{'pas':>7}{'longueur':>9}{'α moyen':>10}"
+        print(f"  {'campagne':<26}{'pas':>7}{'portée':>8}{'long.':>7}{'α moyen':>10}"
               f"{'α médian':>10}{'α max':>9}{'érosion/tour':>14}")
         for c in res["campagnes"]:
-            e, pr = c["erosion_par_tour"], c.get("pas_du_rayon")
-            print(f"  {c['nom']:<18}{(f'{pr:g}' if pr else '?'):>7}"
-                  f"{c['longueur_reelle']:>9}{c['alpha_moyen']:>+10.3f}"
+            e, pr, po = c["erosion_par_tour"], c.get("pas_du_rayon"), c.get("portee_sortie_vox")
+            print(f"  {c['nom']:<26}{(f'{pr:g}' if pr else '?'):>7}"
+                  f"{(f'{po:g}' if po else '?'):>8}"
+                  f"{c['longueur_reelle']:>7}{c['alpha_moyen']:>+10.3f}"
                   f"{c['alpha_median']:>+10.3f}{c['alpha_max']:>+9.3f}"
                   f"{(f'{e:.1f} %' if e is not None else '—'):>14}")
+        # ⭐⭐ Si deux campagnes partagent un pas et diffèrent par la portée, la comparaison
+        # « α contre pas » n'a plus de sens seule — c'est la portée qui varie.
+        par_pas: dict = {}
+        for c in res["campagnes"]:
+            par_pas.setdefault(c.get("pas_du_rayon"), []).append(c)
+        for pr, groupe in sorted(par_pas.items(), key=lambda kv: (kv[0] or 0)):
+            if len(groupe) < 2:
+                continue
+            g = sorted(groupe, key=lambda c: c["alpha_moyen"])
+            print(f"\n  ⭐⭐ à pas {pr:g}, DEUX portées mesurées : "
+                  f"α moyen {g[0]['alpha_moyen']:+.3f} (portée "
+                  f"{g[0]['portee_sortie_vox']:g}) contre {g[-1]['alpha_moyen']:+.3f} "
+                  f"(portée {g[-1]['portee_sortie_vox']:g}).")
+            print("     Même pas, même volume, même chaîne : ce qui change est la PORTÉE "
+                  "PHYSIQUE du test\n     de sortie, pas la finesse de la marche.")
         meilleure = min(res["campagnes"], key=lambda c: c["alpha_moyen"])
         print(f"\n  ⭐ α moyen le plus bas : {meilleure['nom']} "
               f"({meilleure['alpha_moyen']:+.3f})")
@@ -356,7 +439,7 @@ def main() -> int:
                   f"{max(ers):.1f} % par tour — donc le réglage change où la surface se "
                   f"pose,\n    pas combien elle en perd.")
         print("\n  ⚠ aucun COMPTE de verdict ici : un compte est un compte de "
-              "franchissements de seuil,\n    et 10 des 45 verdicts du dépôt ont un α à "
+              "franchissements de seuil,\n    et 10 des 55 verdicts du dépôt ont un α à "
               "moins de 0,2 de ce seuil.")
         if a.json:
             Path(a.json).write_text(json.dumps(res, indent=2, ensure_ascii=False) + "\n",

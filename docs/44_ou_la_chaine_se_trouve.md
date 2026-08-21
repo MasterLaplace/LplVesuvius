@@ -274,9 +274,9 @@ donc un futur désaccord est inlivrable, et un témoin l'assère.
 lecteur pouvait raisonnablement croire que le verdict venait d'elle. Supprimée : une
 constante morte au nom trompeur est une explication fausse posée dans le code.
 
-**2. ⚠⚠ Dix verdicts sur quarante-cinq sont des tirages au sort.** [`43`](43_la_chaine_des_spires.md)
+**2. ⚠⚠ Dix verdicts sur cinquante-cinq sont des tirages au sort.** [`43`](43_la_chaine_des_spires.md)
 écrit noir sur blanc que *« α sur deux fenêtres ne discrimine pas à ±0,2 près »*. Chaque
-verdict porte donc désormais sa **marge au seuil** et un drapeau `fragile`, et le recensement est net — **10 verdicts fragiles sur 45** :
+verdict porte donc désormais sa **marge au seuil** et un drapeau `fragile`, et le recensement est net — **10 verdicts fragiles sur 55** :
 
 | verdict | α | marge au seuil | étiquette |
 |---|---:|---:|---|
@@ -290,6 +290,25 @@ verdict porte donc désormais sa **marge au seuil** et un drapeau `fragile`, et 
 | `repousse_spire02` | +0,573 | 0,127 | intermédiaire |
 | `spire03` | +0,532 | 0,168 | intermédiaire |
 | `pas0125_spire05` | +0,532 | 0,168 | intermédiaire |
+
+⭐⭐ **Et la fragilité se répartit très inégalement entre campagnes** — c'est un signal de
+qualité que la moyenne des α ne porte pas :
+
+| campagne | verdicts fragiles |
+|---|---:|
+| pas 0,125 (défauts) | **4 / 11** |
+| `in` | 2 / 7 |
+| pas 1,0 | 1 / 7 |
+| pas 0,5 | 1 / 7 |
+| pas 0,25 | 1 / 9 |
+| repousse | 1 / 4 |
+| **pas 0,125 à portée compensée** | ⭐ **0 / 10** |
+
+La campagne compensée ([`43`](43_la_chaine_des_spires.md) §6quinquies) est la seule dont
+**aucun** verdict ne tombe dans la zone d'indécision, là où la même chaîne aux réglages par
+défaut en met quatre sur onze. Tenir la portée physique ne fait donc pas seulement baisser les
+α : ça rend les verdicts **tranchés**, ce qui est une propriété différente et qu'on ne lit pas
+sur une moyenne.
 
 ⚠⚠ **La première ligne est la revendication du §6quinquies de [`43`](43_la_chaine_des_spires.md)** :
 « la rupture tombe au tour 07 » repose sur un α à **0,002 du seuil** — deux millièmes. Ce n'est
