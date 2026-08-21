@@ -148,8 +148,13 @@ def trous(spires: list[int]) -> list[int]:
     return [s for s in range(min(spires), max(spires) + 1) if s not in set(spires)]
 
 
+LEGENDE_DEFAUT = ("cartes d'encre publiees par le concours, empilees par numero de spire, "
+                  "NON recalees")
+
+
 def assembler(entrees, sortie: Path, rouleau: str, hauteur_bande: int = HAUTEUR_BANDE,
-              colonnes: int = 1, um_par_px: float | None = None):
+              colonnes: int = 1, um_par_px: float | None = None,
+              legende: str = LEGENDE_DEFAUT):
     from PIL import Image, ImageDraw
 
     bandes = []
@@ -219,9 +224,12 @@ def assembler(entrees, sortie: Path, rouleau: str, hauteur_bande: int = HAUTEUR_
             y += im.height + MARGE
         x0 += larg_col[ic]
 
-    d.text((MARGE, 6), f"{rouleau} — spires {bandes[0][0]:03d} a {bandes[-1][0]:03d} "
-                       f"({len(bandes)} bandes) — cartes d'encre publiees par le concours, "
-                       f"empilees par numero de spire, NON recalees", fill=210)
+    # ⚠⚠ LA LEGENDE EST UN PARAMETRE, et ca a ete paye. Elle etait ecrite en dur — « cartes
+    # d'encre publiees par le concours » — et le meme assembleur a servi a empiler NOS
+    # rendus de spires : la figure annoncait donc une provenance fausse, en gros, en haut de
+    # l'image. Une legende fausse sur une image est pire qu'une legende absente.
+    d.text((MARGE, 6), f"{rouleau} — bandes {bandes[0][0]:03d} a {bandes[-1][0]:03d} "
+                       f"({len(bandes)}) — {legende}", fill=210)
     sortie.parent.mkdir(parents=True, exist_ok=True)
     toile.save(sortie, optimize=True)
     return {
@@ -350,6 +358,8 @@ def main() -> int:
     ap.add_argument("--sortie", type=Path)
     ap.add_argument("--rouleau", default="?")
     ap.add_argument("--hauteur-bande", type=int, default=HAUTEUR_BANDE)
+    ap.add_argument("--legende", default=LEGENDE_DEFAUT,
+                    help="ce que les bandes SONT — une légende fausse est pire qu'absente")
     ap.add_argument("--um-par-px", type=float, default=None,
                     help="résolution des images ; sans elle le score de lignes n'est PAS calibré")
     ap.add_argument("--colonnes", type=int, default=1,
@@ -367,7 +377,7 @@ def main() -> int:
         print("index vide — rien à assembler", file=sys.stderr)
         return 3
     r = assembler(entrees, a.sortie, a.rouleau, a.hauteur_bande, a.colonnes,
-                  a.um_par_px)
+                  a.um_par_px, a.legende)
 
     print(f"{r['rouleau']} : {r['bandes']} spires, {r['spire_min']:03d} → {r['spire_max']:03d}")
     if r["trous"]:

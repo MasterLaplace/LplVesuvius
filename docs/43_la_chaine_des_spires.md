@@ -33,6 +33,31 @@ converge. Toutes les traces poussées en `mode: seed` — dix-sept essais, quatr
 corrigés, deux semis, deux poids — sont à α ≈ 1 sans exception
 ([`42`](42_la_boucle_tourne_et_ne_suffit_pas.md)). Ici six surfaces d'affilée ne le sont pas.
 
+## 1bis. ⭐⭐⭐ Et ça se VOIT — les sept spires, rendues
+
+![les sept spires rendues, couche de surface](images/43_chaine_rendus.jpg)
+
+Chaque bande est la **couche de surface** (40 sur 81) du rendu de cette spire, étirée entre
+ses percentiles 1 et 99. ⚠ L'étirement est **par bande** : c'est le bon choix pour regarder
+(chaque spire a son exposition) et le mauvais pour mesurer — **aucune mesure de ce dépôt ne
+passe par ces images**.
+
+La dégradation est **visible, et elle suit les chiffres** :
+
+| bandes | ce qu'on voit | α |
+|---|---|---|
+| **000, 001** | treillis de fibres croisées partout, trous nets aux bords | +0,000 |
+| **002, 003** | le treillis tient, mais des plages grises lisses apparaissent | +0,190 / +0,532 |
+| **004, 005, 006** | les plages grises gagnent, avec des volutes — la surface quitte la feuille | +0,000 / +0,300 / **+1,475** |
+
+⭐ Et l'érosion se voit aussi : l'empreinte rétrécit de bande en bande, exactement comme la
+grille (7,12 → 5,39 cm²).
+
+⚠ **Ce que ces images ne montrent pas : de l'encre.** Ce sont des rendus de matière, pas des
+cartes d'encre. Voir du papyrus prouve qu'on est **sur** une feuille ; lire du texte
+demanderait un détecteur, et [`36`](36_lorigine_de_la_pile.md) §5bis mesure que le modèle de
+2023 sort une constante sur ce rouleau.
+
 ## 2. ⚠ Ce que « converge » dit et ne dit pas
 
 **α mesure s'il y a une feuille à portée, pas si c'est la bonne.** La spire 01 converge
