@@ -374,7 +374,7 @@ qu'elle n'est ni meilleure ni pire, et deux de ses trois plus mauvais tours sont
 
 Les α et les aires sont des grandeurs continues, mesurées directement. Un compte de verdicts
 (« 4/7 », « 6/9 ») est un compte de **franchissements de seuil**, et le recensement de
-[`44`](44_ou_la_chaine_se_trouve.md) §8bis trouve **9 verdicts fragiles sur 40** — dont le
+[`44`](44_ou_la_chaine_se_trouve.md) §8bis trouve **10 verdicts fragiles sur 45** — dont le
 plus fragile de tous, `pas025_spire07`, à **deux millièmes** de son seuil.
 
 ⚠ **C'est ce qui a fait retirer la première version de cette section**, publiée le matin même :

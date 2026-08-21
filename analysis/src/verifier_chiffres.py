@@ -254,6 +254,44 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                 [f"**+{fr(a, 3)}**", f"+{fr(a, 3)}",
                                  f"{a:+.3f}"], p.name))
 
+    # ⚠⚠ Le recensement de FRAGILITE. Ce chiffre est publie dans DEUX documents (`44` §8bis
+    # et la section 12 de la soumission) et c'est lui qui justifie de ne jamais comparer des
+    # comptes de verdicts. Il se recalcule depuis les series, pas depuis un champ stocke : un
+    # verdict ecrit hier a ete rendu par les seuils d'hier.
+    verdicts = sorted((racine / "docs").glob("spire_*.json"))
+    if verdicts:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "tc", racine / "analysis" / "src" / "test_convergence.py")
+        tc = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(tc)
+        n = fragiles = 0
+        pire = None
+        for f in verdicts:
+            try:
+                d = json.loads(f.read_text(encoding="utf-8"))
+            except (json.JSONDecodeError, OSError):
+                continue
+            for serie in d.get("series", []):
+                r = tc.analyser([tuple(x) for x in serie["serie"]])
+                if "fragile" not in r:
+                    continue
+                n += 1
+                if r["fragile"]:
+                    fragiles += 1
+                    if pire is None or r["marge_au_seuil"] < pire:
+                        pire = r["marge_au_seuil"]
+        if n:
+            out.append(("verdicts fragiles",
+                        [f"**{fragiles} verdicts fragiles sur {n}**",
+                         f"{fragiles} verdicts fragiles sur {n}",
+                         f"{fragiles} verdicts sur {n}", f"{fragiles} sur {n}",
+                         f"{fragiles} of our {n} wrap verdicts"], "spire_*.json"))
+        if pire is not None:
+            out.append(("marge du verdict le plus fragile",
+                        [f"**{fr(pire, 3)}**", f"{fr(pire, 3)} du seuil",
+                         f"{pire:.3f}"], "spire_*.json"))
+
     # ⚠⚠ La comparaison des campagnes A PROFONDEUR EGALE (`43` §6quinquies) : l'optimum du
     # pas du rayon EST la revendication de la section, et c'est un α, pas un compte. Si l'un
     # de ces nombres bouge sans que la page bouge, la page annonce un optimum qui a change

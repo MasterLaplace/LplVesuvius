@@ -274,25 +274,25 @@ donc un futur désaccord est inlivrable, et un témoin l'assère.
 lecteur pouvait raisonnablement croire que le verdict venait d'elle. Supprimée : une
 constante morte au nom trompeur est une explication fausse posée dans le code.
 
-**2. ⚠⚠ Neuf verdicts sur quarante sont des tirages au sort.** [`43`](43_la_chaine_des_spires.md)
+**2. ⚠⚠ Dix verdicts sur quarante-cinq sont des tirages au sort.** [`43`](43_la_chaine_des_spires.md)
 écrit noir sur blanc que *« α sur deux fenêtres ne discrimine pas à ±0,2 près »*. Chaque
-verdict porte donc désormais sa **marge au seuil** et un drapeau `fragile`, et le recensement
-est net :
+verdict porte donc désormais sa **marge au seuil** et un drapeau `fragile`, et le recensement est net — **10 verdicts fragiles sur 45** :
 
 | verdict | α | marge au seuil | étiquette |
 |---|---:|---:|---|
-| `pas025_spire07` | +0,702 | **0,002** | suit la fenêtre |
+| `pas025_spire07` | +0,702 | 0,002 | suit la fenêtre |
 | `dedans_spire02` | +0,686 | 0,014 | intermédiaire |
 | `dedans_spire04` | +0,722 | 0,022 | suit la fenêtre |
 | `pas0125_spire04` | +0,722 | 0,022 | suit la fenêtre |
 | `pas0125_spire02` | +0,758 | 0,058 | suit la fenêtre |
+| `pas0125_spire07` | +0,583 | 0,117 | intermédiaire |
 | `pas05_spire06` | +0,583 | 0,117 | intermédiaire |
 | `repousse_spire02` | +0,573 | 0,127 | intermédiaire |
 | `spire03` | +0,532 | 0,168 | intermédiaire |
 | `pas0125_spire05` | +0,532 | 0,168 | intermédiaire |
 
 ⚠⚠ **La première ligne est la revendication du §6quinquies de [`43`](43_la_chaine_des_spires.md)** :
-« la rupture tombe au tour 07 » repose sur un α à **deux millièmes** de son seuil. Ce n'est
+« la rupture tombe au tour 07 » repose sur un α à **0,002 du seuil** — deux millièmes. Ce n'est
 pas une mesure, c'est un lancer de pièce — et je l'avais publié comme un résultat le jour
 même. Corrigé là-bas.
 

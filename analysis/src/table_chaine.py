@@ -187,7 +187,7 @@ def comparer(racines: list[Path], voxel_um: float, docs: Path) -> dict:
     c'est-a-dire constant sur un facteur HUIT de pas. Toute la tendance etait l'artefact.
 
     **Sans seuil.** On compare des α et des aires, jamais des COMPTES de verdicts. Un compte
-    de verdicts est un compte de franchissements de seuil, et 9 des 40 verdicts de ce depot
+    de verdicts est un compte de franchissements de seuil, et 10 des 45 verdicts de ce depot
     ont un α a moins de 0,2 du seuil quand l'instrument ne discrimine pas a ±0,2 pres.
     """
     campagnes = []
@@ -225,7 +225,7 @@ def dessiner_comparaison(res: dict, sortie: Path) -> None:
     ce que vaut son pire tour -- et c'est le pire tour qui casse une chaine. Une figure qui
     ne montrerait que la moyenne cacherait qu'a pas 1,0 un tour part a +1,475.
 
-    ⚠ Aucun seuil n'est trace. Les verdicts sont des franchissements de seuil et 9 des 40
+    ⚠ Aucun seuil n'est trace. Les verdicts sont des franchissements de seuil et 10 des 45
     verdicts du depot sont a moins de 0,2 du leur ; poser une ligne horizontale ici
     inviterait a relire la figure en comptant des cotes de la ligne.
     """
@@ -356,7 +356,7 @@ def main() -> int:
                   f"{max(ers):.1f} % par tour — donc le réglage change où la surface se "
                   f"pose,\n    pas combien elle en perd.")
         print("\n  ⚠ aucun COMPTE de verdict ici : un compte est un compte de "
-              "franchissements de seuil,\n    et 9 des 40 verdicts du dépôt ont un α à "
+              "franchissements de seuil,\n    et 10 des 45 verdicts du dépôt ont un α à "
               "moins de 0,2 de ce seuil.")
         if a.json:
             Path(a.json).write_text(json.dumps(res, indent=2, ensure_ascii=False) + "\n",

@@ -356,6 +356,72 @@ nuancer.
 > **Cost**: two renders of the same surface. No model, no annotation, no download of a full
 > volume.
 
+### 12. What made our surfaces converge: project them, do not grow them
+
+> The test above condemns our own traces, so the obvious question is what to do instead. We
+> have an answer, and it is measured rather than argued.
+>
+> **Seventeen attempts at growing a surface from a seed all gave α ≈ 1** — every one lying
+> across the stack, with no exception. Four rewound-and-corrected runs got to +0.89 at best:
+> feeding a tracer a list of points it should have passed through does not reorient a surface
+> that has already grown.
+>
+> What works is not growing at all. `vc_grow_seg_from_seed`'s `gen_neighbor` mode takes an
+> existing surface and **projects** it along its own vertex normals to the next sheet. It has
+> no freedom, so it has no drift. Chaining it — each surface the source of the next — gives:
+>
+> | | α |
+> |---|---:|
+> | the official segment we start from | **+0.00** |
+> | **six consecutive surfaces we generate**, each grown from the previous | **all ≤ +0.246** |
+>
+> For scale: a surface lying across the stack gives α ≈ 1. **These are the first surfaces we
+> produce that the convergence test does not condemn.**
+>
+> **And the mode has one tunable that decides everything — with a measured optimum.** The
+> ray-marching step `neighbor_step`, swept over a factor of eight, at *equal chain depth*:
+>
+> | step | mean α | α of the worst wrap |
+> |---:|---:|---:|
+> | 1.0 | +0.357 | +1.475 |
+> | 0.5 | +0.129 | +0.583 |
+> | **0.25** | **+0.102** | **+0.246** |
+> | 0.125 | +0.327 | +0.758 |
+>
+> A U-curve, not a monotone improvement: too coarse and too fine are both three times worse.
+> Halving again is not the way.
+>
+> ⭐ **What the step does NOT change is as informative.** Erosion holds at 4.0 % of grid area
+> per turn across all four settings, and the measured distance between consecutive sheets
+> stays at 102–116 µm throughout — so the ray lands on the *correct* sheet even where α is
+> bad. The step decides **where the surface settles, not how much of it survives.** Why too
+> fine a step degrades is still unknown; we say so rather than guess.
+>
+> **Three limits we state because they bound what this is worth.**
+>
+> - ⚠ **Erosion bounds the chain before quality does.** On the surface actually carrying
+>   material — not the grid — it is 15.6 % per turn, so half the area is gone in four turns.
+>   The published 4.0 % figure counts invalid grid vertices as surface; the fraction of valid
+>   vertices falls from 58 % to 23 % along a nine-wrap chain.
+> - ⚠⚠ **A radial chain is a column, not a strip.** Each window covers ~10 % of one turn, and
+>   consecutive wraps sit 113 µm apart in the *same* angular window — separated, along the
+>   papyrus, by a full circumference we do not have. Gluing them end to end would produce a
+>   band that does not exist. Reaching a length of unrolled papyrus needs a *tangential*
+>   chain, and no mode of the tool does that today.
+> - ⚠⚠ **We do not know why a wrap fails.** The best predictor of a wrap's α, across four
+>   campaigns and forty wraps, is its **ordinal position in the chain** (ρ = +0.53, p = 0.001)
+>   — better than erosion, arc length, area, or any single-render statistic we tried. Depth is
+>   a clock, and we cannot yet separate it from a cause.
+>
+> ⚠ **One methodological note, because it changed our own numbers.** α on two windows does not
+> discriminate to better than ±0.2, so a *count* of verdicts is a count of threshold
+> crossings: 10 of our 45 wrap verdicts sit inside that width, one of them two
+> thousandths from its threshold. We had published a conclusion resting on that wrap and
+> retracted it the same day. Every figure in this section is an α or an area — a continuous
+> quantity measured directly — and never a count.
+>
+> **Cost**: one `gen_neighbor` call and two renders per wrap. No model, no annotation.
+
 ---
 
 ## Ce qu'il reste à faire avant d'envoyer
@@ -364,6 +430,7 @@ nuancer.
 |---|---|
 | 1 | publier le dépôt (`tracecheck/` au minimum) et mettre l'adresse dans le texte |
 | 2 | ~~revérifier chaque chiffre contre son fichier de sortie~~ ✅ **c'est une commande maintenant** — `analysis/src/verifier_chiffres.py` recalcule les 12 chiffres depuis leurs JSON et les cherche littéralement dans les documents. Sort **1** si l'un manque, **2** si un fichier de résultat est absent (sinon il passerait au vert en ne vérifiant rien) |
+| 3 ter | ⭐⭐ joindre `43_optimum_du_pas.png` (la courbe en U du pas du rayon) et `44_geometrie_chaine.png` (où la chaîne se trouve dans le rouleau) — la section 12 ne se lit pas sans la première, et la seconde est ce qui rend honnête la limite « une colonne, pas une bande » |
 | 3 bis | ⭐ joindre `38_convergence.png` et `38_en_travers.png` — la section 11 ne se lit pas sans elles : l'une montre les deux pentes, l'autre montre à quoi ressemble une surface posée en travers (des laminations concentriques, pas du papyrus) |
 | 3 | joindre les deux figures de champ, `profondeur_deux_cas.png`, **et les deux figures de `25`** — `25_signatures.png` surtout, qui met le critère visuel du règlement sur un axe mesurable |
 | 4 | ⚠ décider si le corps part en anglais — c'est la seule décision de forme ouverte |

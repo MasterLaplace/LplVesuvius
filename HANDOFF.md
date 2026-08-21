@@ -1271,7 +1271,7 @@ l'aire *utile*), et l'écart entre nappes reste à 102–116 µm partout.
 ⚠ **Une revendication publiée le matin a été RETIRÉE le soir.** « Halver le pas repousse la
 rupture d'un tour » reposait sur `pas025_spire07`, α = +0,702 pour un seuil de 0,700 — **deux
 millièmes**, quand l'instrument ne discrimine pas à ±0,2 près. C'est ce qui a produit le
-recensement de fragilité (9 verdicts sur 40) et la règle : **comparer des α, jamais des
+recensement de fragilité (10 verdicts sur 45) et la règle : **comparer des α, jamais des
 comptes de franchissements de seuil.**
 
 **Ajoutés le 2026-08-21 (soir)**
