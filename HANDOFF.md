@@ -220,6 +220,25 @@ c'est l'écart entre 0,00–0,53 et **1,475**.
 en douze tours**. Ce qui manque est une **repousse** entre deux tours — c'est-à-dire ce que
 `mode: seed` sait faire et que la chaîne n'utilise pas.
 
+⚠⚠ **LA REPOUSSE : mesurée, et elle échange de la surface contre de la convergence.**
+Comparaison appariée sur la spire 01 (même départ, même sens, mêmes fenêtres ; seule la
+repousse change) :
+
+| spire 01 | grille | aire | 31 c | 81 c | **α** |
+|---|---|---:|---:|---:|---:|
+| sans repousse | 157×145 | 6,71 cm² | 90,72 | 90,72 | **+0,000** converge |
+| repoussée (20 gén.) | **212×200** | **12,47 cm²** | 86,40 | **129,60** | **+0,422** intermédiaire |
+
+La repousse **rend** la surface (près du double, bien au-delà de ce que l'érosion avait pris)
+et **dégrade** la convergence. Le détail dit où : la fenêtre 31 s'améliore un peu, la 81 se
+dégrade nettement — c'est **la part regagnée qui tire la mesure**.
+⭐ Donc **l'érosion n'est pas un défaut à corriger, c'est le prix de rester sur la feuille** —
+au moins avec ce repousseur, qui est le traceur non contraint de `42`.
+⚠ Une seule paire pour l'instant ; la campagne continue.
+⭐ La suite n'est pas « repousser plus » mais **repousser sous contrainte** : les points de
+passage de `41` existent, `correction_weight` existe, et la repousse corrigée est la seule
+combinaison des deux qui n'ait pas été essayée.
+
 **Ce qui reste ouvert** : pourquoi la 7ᵉ casse (`neighbor_max_distance`,
 `neighbor_min_clearance`) · repousser entre deux tours · le sens `in` · et la validation par
 **l'encre**, parce que α ne dit pas qu'on lit du texte.

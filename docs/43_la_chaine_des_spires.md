@@ -107,6 +107,42 @@ verdict est **lu dans le JSON**, et la campagne sort en le nommant si ce n'est p
 segment-là est à α = +1,02 avec 72–78 % de pics au bord ([`36`](36_lorigine_de_la_pile.md)).
 Le nom d'un répertoire n'est pas une mesure.
 
+## 6. ⭐⭐ La repousse : la surface regagnée n'est pas sur la feuille
+
+L'érosion de 4 % par tour vient de ce qu'un sommet dont le rayon ne trouve rien est perdu
+**définitivement**. `mode: resume` sait faire repousser une surface — d'où le pari, posé
+avant de le lancer : *ça peut aussi la tirer hors de sa feuille, parce que c'est le traceur
+non contraint qui repousse.*
+
+Comparaison **appariée** — même surface de départ, même sens, mêmes fenêtres, même nombre de
+spires ; **seule la repousse change** :
+
+| spire 01 | grille | aire | 31 c | 81 c | **α** | verdict |
+|---|---|---:|---:|---:|---:|---|
+| sans repousse | 157×145 | 6,71 cm² | 90,72 µm | 90,72 µm | **+0,000** | **converge** |
+| **repoussée** (20 générations) | **212×200** | **12,47 cm²** | 86,40 µm | **129,60 µm** | **+0,422** | intermédiaire |
+
+⭐ **La repousse marche, au sens où elle rend la surface** : la grille passe de 157×145 à
+212×200, l'aire de 6,71 à 12,47 cm² — **près du double**, et bien au-delà de ce que l'érosion
+avait pris.
+
+⚠⚠ **Et elle dégrade la convergence** : α passe de +0,000 à +0,422. Le détail dit où : la
+fenêtre 31 s'améliore un peu (90,72 → 86,40 µm) et la fenêtre 81 se dégrade nettement
+(90,72 → 129,60). Ce n'est donc pas la surface entière qui s'abîme, c'est **la part regagnée
+qui tire la mesure**.
+
+> Ce qu'on apprend : **la surface qu'on récupère n'est pas sur la feuille.** L'érosion n'est
+> pas un défaut à corriger, c'est le **prix** de rester dessus — au moins avec ce repousseur,
+> qui est celui dont [`42`](42_la_boucle_tourne_et_ne_suffit_pas.md) montre qu'il produit des
+> coupes radiales quand rien ne le contraint.
+
+⚠ **Une seule paire pour l'instant.** La campagne appariée continue ; deux verdicts ne font
+pas une tendance, et la conclusion ci-dessus est à confirmer sur les tours suivants.
+
+⭐ La suite naturelle n'est donc pas « repousser plus » mais **repousser sous contrainte** :
+les points de passage de [`41`](41_marcher_le_long_dune_nappe.md) existent, `correction_weight`
+existe, et une repousse corrigée est la seule combinaison des deux qui n'ait pas été essayée.
+
 ---
 
 ## Ce qui reste ouvert
