@@ -311,6 +311,51 @@ nuancer.
 > per configuration, with no repetition and no error bar, and the full-unwrapping paper
 > publishes no trace-error rate at all. On this evidence, a single run is not a measurement.
 
+
+### 11. ⭐⭐⭐ Juger une trace sans vérité terrain, sans seuil et sans échelle *(2026-08-21)*
+
+> #### 11. Trace quality without ground truth, without a threshold, and without a scale
+>
+> **The problem.** Every published way of judging a traced surface needs something you do
+> not have at scale: a reference segment, a human eye, or a threshold calibrated on one
+> scroll. Self-intersection counts are not it — the same mesh, decimated without changing
+> its geometry, goes from 240 crossings to 49 (section 9), so a count is a property of the
+> sampling as much as of the surface.
+>
+> **The test.** Render the *same* surface in progressively deeper windows and measure, in
+> each, the distance from the surface to the nearest material. A surface that lies **on**
+> its sheet has that material right there: widening the window changes nothing. A surface
+> lying **across** the stack has no peak to find, so the "peak" it reports is the strongest
+> thing the window happened to contain — and it moves **with** the window.
+>
+> One dimensionless number says which: `α = log(growth) / log(widening)`.
+>
+> | | layers | distance | **α** |
+> |---|---:|---:|---:|
+> | an official segment (`PHerc1447`) | 31 → 81 | 17.28 µm → 17.30 µm | **+0.00** |
+> | one of our traces, same scroll, same chain | 21 → 161 | 86.40 µm → 682.56 µm | **+1.01** |
+>
+> **Three properties, and we know of no other trace test that has all three:**
+>
+> - **no threshold** — the surface is compared to *itself* in another window;
+> - **no ground truth** — no reference segment, no ink map, no annotation;
+> - **no scale** — α is a ratio, so it crosses scrolls, voxel sizes and resolutions without
+>   being re-calibrated.
+>
+> ⚠ **What it does not tell you: by how much to correct.** A trace that does not converge has
+> no distance to its sheet, because there is no sheet within reach. The test separates *lying
+> beside* from *lying across*, and that is all — which is already what nothing else did.
+>
+> ⭐⭐ **The consequence for anyone publishing a distance.** Every distance-to-sheet figure we
+> had published for our own non-converging traces — 94 µm, 146–187 µm, 311 µm — is **without
+> object**. Not an underestimate: a measurement of a quantity that does not exist at that
+> location. We found this by measuring our own numbers, and we expect it applies to any
+> pipeline that reports a surface-to-sheet distance without first showing that the figure is
+> stable under the rendering depth.
+>
+> **Cost**: two renders of the same surface. No model, no annotation, no download of a full
+> volume.
+
 ---
 
 ## Ce qu'il reste à faire avant d'envoyer
@@ -319,5 +364,6 @@ nuancer.
 |---|---|
 | 1 | publier le dépôt (`tracecheck/` au minimum) et mettre l'adresse dans le texte |
 | 2 | ~~revérifier chaque chiffre contre son fichier de sortie~~ ✅ **c'est une commande maintenant** — `analysis/src/verifier_chiffres.py` recalcule les 12 chiffres depuis leurs JSON et les cherche littéralement dans les documents. Sort **1** si l'un manque, **2** si un fichier de résultat est absent (sinon il passerait au vert en ne vérifiant rien) |
+| 3 bis | ⭐ joindre `38_convergence.png` et `38_en_travers.png` — la section 11 ne se lit pas sans elles : l'une montre les deux pentes, l'autre montre à quoi ressemble une surface posée en travers (des laminations concentriques, pas du papyrus) |
 | 3 | joindre les deux figures de champ, `profondeur_deux_cas.png`, **et les deux figures de `25`** — `25_signatures.png` surtout, qui met le critère visuel du règlement sur un axe mesurable |
 | 4 | ⚠ décider si le corps part en anglais — c'est la seule décision de forme ouverte |

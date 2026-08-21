@@ -208,6 +208,22 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                          " -> ".join(str(x) for x in brut[:4]),
                          ", ".join(str(x) for x in brut[:4])], p.name))
 
+    # ⚠⚠ Le test de convergence : les deux α sont la revendication ENTIERE de la section 11
+    # de la soumission. Si l'un bouge et que le texte ne bouge pas, le texte annonce une
+    # separation qui n'existe plus — et c'est la seule chose que cette section apporte.
+    p = racine / "docs" / "convergence.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        for s_ in d.get("series", []):
+            court = "officiel" if "officiel" in s_["nom"] else "notre trace"
+            a = s_["alpha"]
+            out.append((f"alpha de {court}",
+                        [f"**{a:+.2f}**", f"α = {a:+.2f}", f"{a:+.2f}"], p.name))
+            serie = s_["serie"]
+            out.append((f"serie de {court}",
+                        [f"{serie[0][1]:.2f} µm → {serie[-1][1]:.2f} µm",
+                         f"{fr(serie[0][1], 2)} µm", f"{serie[0][1]:.2f} µm"], p.name))
+
     # ⚠ La mosaique : les trois chiffres qui font sa revendication. « 44 spires sans
     # trou » est ce que l'image PRETEND etre ; si une spire venait a manquer, le document
     # dirait toujours 44 et l'image ressemblerait toujours a un rouleau.
