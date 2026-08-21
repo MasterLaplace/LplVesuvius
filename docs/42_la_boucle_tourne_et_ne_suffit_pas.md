@@ -44,9 +44,29 @@ la correction porte sur **0,56 %** de la surface, avec un `correction_weight` qu
 
 > Une correction de 318 points est un **coup de pouce local**, pas une réorientation.
 
-⭐ Et ça désigne le levier suivant sans avoir à deviner : `correction_weight` est une clé
-JSON que `applyJsonWeights` accepte (`GrowPatch.cpp:1311`), jamais réglée ici. Le balayage
-est ajouté à `tools/boucle_de_correction.sh` (`POIDS`, défaut `1 100`).
+⭐ Et ça désigne **deux** leviers sans avoir à deviner, tous deux ajoutés à
+`tools/boucle_de_correction.sh` :
+
+1. **`correction_weight`** (`POIDS`, défaut `1 100`) — une clé JSON que `applyJsonWeights`
+   accepte (`GrowPatch.cpp:1311`) et qui n'avait jamais été réglée ici ;
+2. ⭐⭐ **plus de points** (`SEMIS`, défaut `ligne nappe`). `suivre_nappe.py` gagne un mode
+   `--nappe` : une **échine et ses côtes**, chaque côte marchant dans la direction tangente
+   perpendiculaire (le produit vectoriel de la normale locale et de la direction d'échine,
+   donc encore dans le plan de la nappe). Mesuré sur `PHerc0358`, au même point de départ :
+
+| semis | points | collections | part des 56 630 points de grille |
+|---|---:|---:|---:|
+| ligne (`--deux-sens`) | 318 | 1 | **0,56 %** |
+| **nappe** (échine + 48 côtes) | **5 707** | 49 | **10,1 %** |
+
+⚠ Chaque côte est sa **propre collection**, pas la suite de la précédente :
+`PointCorrection` traite une collection comme un chemin et ancre sur son premier point, donc
+concaténer les côtes ferait un chemin qui saute d'un bord à l'autre à chaque rangée.
+
+⚠ Et la couverture est **vérifiée**, pas supposée : sur un cylindre de contrôle, tous les
+points restent à moins de 0,32 voxel de la nappe, et les côtes explorent 89 voxels le long
+de l'axe que l'échine ne parcourt pas (0,0). Une « couverture 2D » qui recopierait l'échine
+serait une ligne épaissie.
 
 ## 4. ⚠ Ce que ce résultat retire à une hypothèse séduisante
 
@@ -65,8 +85,18 @@ une tendance.
 - **Que les points de passage soient faux.** [`41`](41_marcher_le_long_dune_nappe.md) mesure
   que la marche suit une nappe sur ≈ 2,4 mm **sans traverser un seul vide**. Ce sont des
   points sur une feuille ; ils sont simplement trop peu nombreux et trop peu pondérés.
-- **Que `--rewind-gen 5` soit le bon rembobinage.** Le balayage en essaie deux (5 et 40) ;
-  `39` notait déjà que notre juge porte sur une trace entière et pas sur une génération.
+- **Que `--rewind-gen 5` soit le bon rembobinage** — et la mesure penche déjà dans l'autre
+  sens. Rembobiner **moins** dérange moins et fait mieux :
+
+| | croisements | écart 41 c | écart 161 c | **α** |
+|---|---:|---:|---:|---:|
+| témoin | 0 | 187,2 µm | 711,5 µm | +0,98 |
+| corrigé, `--rewind-gen 5` | 11 753 | 168,5 µm | 692,8 µm | +1,03 |
+| corrigé, **`--rewind-gen 40`** | **18** | **154,5 µm** | **519,6 µm** | **+0,89** |
+
+  ⚠ α passe de 0,98 à 0,89 et l'écart à 161 couches baisse de **27 %** — le plus grand
+  mouvement qu'un levier ait produit ici. Mais deux fenêtres et 0,09 d'écart en α, ça ne
+  fait pas une tendance : à confirmer par le balayage, pas à annoncer.
 - **Que la cause soit trouvée.** Trois leviers de données restent éteints chez nous
   (`41` §6ter), et un quatrième existe dont je ne sais pas dire s'il tire.
 

@@ -322,6 +322,67 @@ def marcher(bloc: np.ndarray, depart, direction, pas: float = PAS,
             "valeur_mediane": float(np.median(vals)) if vals else 0.0}
 
 
+def marcher_nappe(bloc: np.ndarray, depart, direction=(0.0, 1.0, 0.0),
+                  pas: float = PAS, n_pas: int = 200, ecart_cotes: float = 4.0,
+                  n_cotes: int = 12, **kw) -> dict:
+    """Couvrir un MORCEAU de nappe, pas seulement une ligne : une echine et ses cotes.
+
+    ⚠⚠ Pourquoi ce mode existe, et c'est une mesure qui l'exige. `42` etablit que 318 points
+    de passage sur une ligne ne reorientent pas une surface : ils pesent **0,56 %** des
+    56 630 points de grille d'une trace. Une nappe est un objet a DEUX dimensions ; lui
+    donner un seul fil, c'est demander a un solveur de deviner le reste.
+
+    L'echine est une marche ordinaire. Chaque cote part d'un point de l'echine et marche
+    dans la direction tangente PERPENDICULAIRE a l'echine -- c'est-a-dire le produit
+    vectoriel de la normale locale et de la direction d'echine, donc encore dans le plan de
+    la nappe.
+
+    ⚠ Chaque cote est sa PROPRE collection, pas une suite de la precedente.
+    `PointCorrection` traite une collection comme un CHEMIN et ancre sur son premier point ;
+    concatener les cotes ferait un chemin qui saute d'un bord a l'autre a chaque rangee.
+
+    ⚠ Les cotes partent d'un point sur DEUX ou plus (`ecart_cotes`), pas de chaque point :
+    une cote par point de l'echine donnerait des milliers de collections dont les chemins se
+    recouvrent, et le solveur paierait le meme renseignement des dizaines de fois.
+
+    Retourne {"chemins": [...], "echine": {...}, "points": N, "cotes": N}.
+    """
+    ech = marcher(bloc, depart, direction, pas, n_pas, **kw)
+    if not ech["points"]:
+        return {"chemins": [], "echine": ech, "points": 0, "cotes": 0}
+
+    chemins = [list(ech["points"])]
+    pts = np.asarray(ech["points"], dtype=np.float64)
+    saut = max(1, int(round(ecart_cotes / max(pas, 1e-6))))
+    indices = list(range(0, len(pts), saut))[:n_cotes]
+
+    for k in indices:
+        p = pts[k]
+        # La direction locale de l'echine : difference avant/arriere quand elle existe.
+        j = min(k + 1, len(pts) - 1)
+        i = max(k - 1, 0)
+        t = pts[j] - pts[i]
+        if np.linalg.norm(t) < 1e-6:
+            continue
+        t = t / np.linalg.norm(t)
+        n, aniso = normale_locale(bloc, p)
+        if n is None or aniso < kw.get("aniso_min", 0.35):
+            continue
+        # ⚠ Le produit vectoriel de la normale et de la tangente est l'AUTRE direction
+        # tangente : elle reste dans le plan de la nappe, ce qu'une direction arbitraire
+        # perpendiculaire a l'echine ne garantirait pas.
+        c = np.cross(n, t)
+        if np.linalg.norm(c) < 1e-6:
+            continue
+        c = c / np.linalg.norm(c)
+        for sens in (1.0, -1.0):
+            r = marcher(bloc, p, sens * c, pas, n_pas // 2, **kw)
+            if len(r["points"]) > 2:
+                chemins.append(list(r["points"]))
+    return {"chemins": chemins, "echine": ech,
+            "points": sum(len(c) for c in chemins), "cotes": len(chemins) - 1}
+
+
 def marcher_plus_proche(bloc: np.ndarray, depart, pas: float = PAS, n_pas: int = 200,
                         valeur_min: float = 0.15, rayon_recherche: float = 6.0) -> dict:
     """La methode NAIVE, implementee pour etre mesuree : aller au voxel allume le plus proche.
@@ -603,6 +664,33 @@ def verifier() -> int:
            f"notre EDT écrite à la main est EXACTEMENT celle de scipy "
            f"(écart max {max(pires):.1e}) — donc le repli sans scipy est sûr")
 
+    # ⚠⚠ LE MODE NAPPE doit couvrir une SURFACE, pas une ligne — c'est la réponse mesurée
+    # au « 0,56 % de la surface » de `42`. Contrôle : sur le même cylindre, la couverture
+    # 2D doit apporter beaucoup plus de points que l'échine seule, et les côtes doivent
+    # rester sur la nappe (rayon constant), pas partir en travers.
+    r2 = marcher_nappe(bloc, [48.0, c, c + rayon], [0.0, 1.0, 0.0],
+                       n_pas=90, ecart_cotes=6.0, n_cotes=8)
+    ok(r2["cotes"] >= 8, f"le mode nappe produit des côtes ({r2['cotes']})")
+    ok(r2["points"] > 3 * len(r2["echine"]["points"]),
+       f"et beaucoup plus de points que l'échine seule "
+       f"({r2['points']} contre {len(r2['echine']['points'])})")
+    tous = np.array([q for ch in r2["chemins"] for q in ch])
+    rr2 = np.hypot(tous[:, 1] - c, tous[:, 2] - c)
+    ok(float(np.max(np.abs(rr2 - rayon))) < 1.5,
+       f"tous les points restent sur la nappe (écart max {np.max(np.abs(rr2 - rayon)):.2f} vx)")
+    # ⚠ Sonde : chaque côte est sa PROPRE collection. Un seul chemin voudrait dire qu'on a
+    # concaténé, et `PointCorrection` lirait un chemin qui saute d'un bord à l'autre.
+    ok(len(r2["chemins"]) == r2["cotes"] + 1,
+       "chaque côte est un chemin distinct, l'échine comprise")
+    # ⚠ Les côtes doivent être PERPENDICULAIRES à l'échine, sinon elles la recopient et la
+    # « couverture 2D » est une ligne épaissie. Mesuré par l'étendue le long de l'axe z,
+    # que l'échine ne parcourt pas (elle tourne dans le plan yx).
+    etendue_z_echine = float(np.ptp(np.array(r2["echine"]["points"])[:, 0]))
+    etendue_z_tous = float(np.ptp(tous[:, 0]))
+    ok(etendue_z_tous > etendue_z_echine + 5,
+       f"les côtes explorent l'axe que l'échine ne parcourt pas "
+       f"({etendue_z_tous:.1f} contre {etendue_z_echine:.1f} voxels)")
+
     # Le fichier de correction : format lu dans la source, et ordre significatif.
     with tempfile.TemporaryDirectory() as tmp:
         f = Path(tmp) / "c.json"
@@ -644,6 +732,10 @@ def main() -> int:
                     help="coin du bloc dans le volume, en z y x — les points écrits sont absolus")
     ap.add_argument("--pas", type=float, default=PAS)
     ap.add_argument("--n-pas", type=int, default=200)
+    ap.add_argument("--nappe", action="store_true",
+                    help="couvrir un morceau de nappe (échine + côtes) au lieu d'une ligne")
+    ap.add_argument("--ecart-cotes", type=float, default=4.0)
+    ap.add_argument("--n-cotes", type=int, default=12)
     ap.add_argument("--deux-sens", action="store_true",
                     help="marcher aussi dans le sens opposé et concaténer")
     ap.add_argument("--sortie", type=Path)
@@ -701,6 +793,28 @@ def main() -> int:
               "suivre.\n  relancer avec --distance, qui rend à chaque nappe son axe médian.",
               file=sys.stderr)
         return 4
+
+    if a.nappe:
+        rn = marcher_nappe(bloc, a.depart, a.direction, a.pas, a.n_pas,
+                           a.ecart_cotes, a.n_cotes)
+        if not rn["chemins"]:
+            print("aucun point — voir l'échine", file=sys.stderr)
+            return 3
+        oz, oy, ox = a.origine
+        chemins = [[[z + oz, y + oy, x + ox] for z, y, x in ch] for ch in rn["chemins"]]
+        print(f"nappe : {rn['cotes']} côte(s), {rn['points']} points "
+              f"(échine : {len(rn['echine']['points'])}) — {rn['echine']['arret']}")
+        resume = {"cotes": rn["cotes"], "points": rn["points"],
+                  "echine_pas": rn["echine"]["pas_faits"],
+                  "arret_echine": rn["echine"]["arret"], "origine": list(a.origine)}
+        if a.sortie:
+            resume.update(ecrire_point_collection(chemins, a.sortie, nom="nappe"))
+            print(f"  écrit : {a.sortie} ({rn['points']} points, "
+                  f"{len(chemins)} collections)")
+        if a.json:
+            Path(a.json).write_text(json.dumps(resume, indent=2, ensure_ascii=False) + "\n",
+                                    encoding="utf-8")
+        return 0
 
     r = marcher(bloc, a.depart, a.direction, a.pas, a.n_pas)
     chemin = list(r["points"])

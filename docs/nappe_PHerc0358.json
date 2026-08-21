@@ -1,0 +1,13 @@
+{
+  "cotes": 48,
+  "points": 5707,
+  "echine_pas": 169,
+  "arret_echine": "sortie du bloc",
+  "origine": [
+    7258,
+    5711,
+    5714
+  ],
+  "collections": 49,
+  "fichier": "../data/nappe/nappe_0358.json"
+}

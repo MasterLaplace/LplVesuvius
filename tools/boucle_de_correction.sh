@@ -30,6 +30,12 @@ REWINDS=${REWINDS:-"5 40"}
 # poids est un coup de pouce local, pas une reorientation. La cle existe
 # (`GrowPatch.cpp:1311`, `applyJsonWeights`) et n'avait jamais ete reglee ici.
 POIDS=${POIDS:-"1 100"}
+# ⚠⚠ DEUX SEMIS DE POINTS, et c'est la seconde reponse au diagnostic de `42`. Un seul fil
+# de 318 points pese 0,56 % des 56 630 points de grille d'une trace ; le mode `nappe` de
+# `suivre_nappe.py` (une echine et ses cotes) en produit **5707** sur le meme rouleau,
+# soit ~10 %. Un solveur a qui l'on donne un fil doit deviner la surface autour ; a qui
+# l'on donne un morceau de nappe, beaucoup moins.
+SEMIS=${SEMIS:-"ligne nappe"}
 RAYON=${RAYON:-128}
 B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 VOL="$B/$ROULEAU/volumes/20250821151737-9.362um-1.2m-113keV-masked.zarr"
@@ -64,21 +70,31 @@ MT=$(ls -d "$T/trace"/auto_grown_* 2>/dev/null | head -1)
 # --- 2. les points de passage, calcules depuis la PREDICTION -------------------
 # ⚠ Pas depuis la trace : `38` etablit qu'elle est posee en travers, donc l'ecart a la
 # feuille n'y existe pas. Le chemin est calcule independamment d'elle.
-PTS="$DEST/correction.json"
-if [ ! -s "$PTS" ]; then
-  ( cd "$ROOT/experiments" && uv run python ../analysis/src/suivre_nappe.py \
-      --zarr "$SURF" --xyz $GX $GY $GZ --rayon "$RAYON" --n-pas 800 --deux-sens --distance \
-      --sortie "$PTS" --json "$DEST/marche.json" ) > "$DEST/marche.log" 2>&1
-fi
-if [ ! -s "$PTS" ]; then
-  echo "aucun point de passage — voir $DEST/marche.log" >&2
-  sed 's/^/   /' "$DEST/marche.log" | tail -5 >&2
-  exit 4
-fi
-N_PTS=$(python3 -c "
+declare -A FICHIER_PTS
+for SEM in $SEMIS; do
+  case "$SEM" in
+    ligne) PTS="$DEST/correction.json"; SUP_MARCHE="--deux-sens" ;;
+    nappe) PTS="$DEST/nappe.json";      SUP_MARCHE="--nappe --ecart-cotes 6 --n-cotes 24" ;;
+    *) echo "semis inconnu : $SEM" >&2; exit 3 ;;
+  esac
+  if [ ! -s "$PTS" ]; then
+    ( cd "$ROOT/experiments" && uv run python ../analysis/src/suivre_nappe.py \
+        --zarr "$SURF" --xyz $GX $GY $GZ --rayon "$RAYON" --n-pas 800 --distance \
+        $SUP_MARCHE --sortie "$PTS" --json "$DEST/marche_$SEM.json" ) \
+        > "$DEST/marche_$SEM.log" 2>&1
+  fi
+  if [ ! -s "$PTS" ]; then
+    echo "semis $SEM : aucun point de passage — voir $DEST/marche_$SEM.log" >&2
+    sed 's/^/   /' "$DEST/marche_$SEM.log" | tail -5 >&2
+    continue
+  fi
+  FICHIER_PTS[$SEM]=$PTS
+  N_PTS=$(python3 -c "
 import json; d=json.load(open('$PTS'))
-print(sum(len(c['points']) for c in d['collections'].values()))")
-echo "points de passage : $N_PTS"
+print(sum(len(c['points']) for c in d['collections'].values()), len(d['collections']))")
+  echo "semis $SEM : $N_PTS (points, collections)"
+done
+[ ${#FICHIER_PTS[@]} -eq 0 ] && { echo "aucun semis utilisable" >&2; exit 4; }
 
 # --- 3. juger : le temoin, puis chaque reprise corrigee ------------------------
 juger() {   # $1 = repertoire de travail, $2 = maillage, $3 = nom
@@ -119,14 +135,20 @@ print(f\"{d['ecart_trace_um_median']:.2f}\")" 2>/dev/null) || continue
 cp -n "$T/trace/trace.log" "$T/trace.log" 2>/dev/null || true
 juger "$T" "$MT" "temoin"
 
-for G in $REWINDS; do
+for SEM in "${!FICHIER_PTS[@]}"; do
+ PTS=${FICHIER_PTS[$SEM]}
+ for G in $REWINDS; do
  for P in $POIDS; do
   # ⚠ Le nom porte les DEUX variables. Une premiere version nommait par la generation
   # seule : deux poids differents auraient ecrit dans le meme repertoire, et le second
   # aurait trouve la trace du premier deja la et ne l'aurait jamais refaite -- un balayage
   # qui rend deux fois le meme resultat en ayant l'air d'avoir teste deux reglages.
-  if [ "$P" = "1" ]; then W="$DEST/corrige_gen$G"; NOM="corrige_gen$G"
-  else W="$DEST/corrige_gen${G}_poids$P"; NOM="corrige_gen${G}_poids$P"; fi
+  # ⚠ Le nom porte les TROIS variables. Les runs deja faits en mode ligne a poids 1
+  # gardent leur ancien nom, pour ne pas etre refaits pour rien.
+  if [ "$SEM" = "ligne" ] && [ "$P" = "1" ]; then NOM="corrige_gen$G"
+  elif [ "$SEM" = "ligne" ]; then NOM="corrige_gen${G}_poids$P"
+  else NOM="corrige_${SEM}_gen${G}_poids$P"; fi
+  W="$DEST/$NOM"
   if [ ! -d "$W/trace" ]; then
     mkdir -p "$W/trace"
     python3 -c "
@@ -148,5 +170,6 @@ json.dump(p, open('$W/trace/seed.json','w'), indent=2)"
   fi
   cp -n "$W/trace/trace.log" "$W/trace.log" 2>/dev/null || true
   juger "$W" "$M" "$NOM"
+ done
  done
 done
