@@ -199,6 +199,27 @@ Et il part d'un segment **officiel qui converge déjà** (α = +0,00), donc il n
 redresser. `tools/spire_suivante.sh` demande : **la convergence survit-elle à
 l'enchaînement, et sur combien de spires ?** En file derrière le balayage.
 
+⚠⚠ **PIÈGE DE DIAGNOSTIC PAYÉ LE 2026-08-21, ET IL FABRIQUE UN FAUX RÉSULTAT.**
+`ps` affiche un **sous-shell bash avec la ligne de commande de son parent**. Deux lignes
+identiques — même script gelé, même environnement — ne sont donc PAS forcément deux
+instances : c'est souvent une instance et son sous-shell. Le seul indice était le temps
+écoulé (`01:25` contre `00:00`).
+
+J'ai lu ça comme un doublon et j'ai tué le « doublon ». C'était le
+`vc_grow_seg_from_seed` de la cellule `corrige_nappe_gen1_poids1`, et le journal a alors
+écrit **« AUCUN MAILLAGE — la reprise corrigée ne produit rien »** : un verdict **faux**,
+d'apparence normale, sur une cellule qui n'avait simplement pas eu le temps de finir. La
+cellule a été supprimée pour être refaite.
+
+⭐ Remède : lire l'**arbre** (`ps -eo pid,ppid,etime,args | awk '$2==<pid>'`) avant de
+conclure au doublon, et se rappeler qu'une campagne de ce dépôt lance des sous-shells à
+chaque étape. Même famille que `pkill -f` qui matche sa propre ligne de commande.
+
+⚠ Et le pendant structurel, déjà corrigé : **supprimer un artefact n'arrête pas le travail**
+— le cache d'un rendu EST le signal d'arrêt du script, donc l'effacer fait tout refaire.
+Une décision humaine d'abandon s'écrit dans un fichier que le script LIT
+(`<cellule>/ABANDONNE`), jamais déduite d'une absence.
+
 ⏳ **CAMPAGNES** (détachées) :
 ```bash
 tail -f .lances/convergence_des_essais-20260820-*.log   # les 17 essais de 26, rejugés

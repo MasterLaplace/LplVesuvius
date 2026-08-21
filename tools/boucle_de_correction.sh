@@ -149,6 +149,16 @@ for SEM in "${!FICHIER_PTS[@]}"; do
   elif [ "$SEM" = "ligne" ]; then NOM="corrige_gen${G}_poids$P"
   else NOM="corrige_${SEM}_gen${G}_poids$P"; fi
   W="$DEST/$NOM"
+  # ⚠⚠ UNE CELLULE ABANDONNEE RESTE ABANDONNEE. Paye le 2026-08-21 : la cellule
+  # `gen40_poids100` produisait une surface de 3603 cm2 (182x le temoin), son rendu a
+  # 41 couches pesait 8,9 Go, et on l'a arretee en SUPPRIMANT ses rendus. Or le cache d'un
+  # rendu est justement le signal d'arret du script : l'effacer fait tout refaire. Le run
+  # suivant a donc relance le rendu a 161 couches pour 28 minutes. Une decision humaine
+  # d'abandon doit etre ecrite quelque part que le script LIT, pas deduite d'une absence.
+  if [ -f "$W/ABANDONNE" ]; then
+    echo "== $NOM : ABANDONNEE — $(head -3 "$W/ABANDONNE" | tail -1)"
+    continue
+  fi
   if [ ! -d "$W/trace" ]; then
     mkdir -p "$W/trace"
     python3 -c "
