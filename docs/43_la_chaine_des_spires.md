@@ -182,14 +182,31 @@ existe, et une repousse corrigée est la seule combinaison des deux qui n'ait pa
 
 ---
 
+## 7. ⭐⭐ Ce que les trois campagnes disent ensemble
+
+| ce qu'on a essayé | ce que ça fait à la surface | α |
+|---|---|---|
+| `mode: seed` — la faire pousser depuis un point | elle prend l'orientation qu'elle veut | ≈ **1** (17 essais, sans exception) |
+| `--correct` — lui dire où passer après coup | 318 puis 5 695 points ne réorienté pas ce qui a poussé | **+0,89** au mieux |
+| **`gen_neighbor`** — la **projeter** d'une feuille à la suivante | aucune liberté, donc aucune dérive… | **+0,00** six tours de suite |
+| `resume` — lui rendre ce que la projection a perdu | la liberté revient, et la dérive avec | **+1,46** au 3ᵉ tour |
+
+> **Ce qui garde une surface sur sa feuille, c'est de ne pas la laisser croître librement.**
+> Les quatre lignes ci-dessus sont quatre façons de le mesurer, et elles sont d'accord.
+
+⭐ Ça explique aussi pourquoi `gen_neighbor` réussit là où tout le reste échoue : il ne fait
+pas *croître* une surface, il en **projette** une existante. Et l'érosion de 4 % par tour
+n'est pas un défaut de cette méthode — c'est **le prix de sa contrainte**.
+
 ## Ce qui reste ouvert
 
 | # | quoi |
 |---|---|
-| 1 | ⭐ **pourquoi la 7ᵉ casse.** Est-ce l'érosion (5,39 cm² de grille, moins de sommets pour voter), un interstice manqué, ou le rayon qui saute une spire ? La sonde naturelle est `neighbor_max_distance` et `neighbor_min_clearance`, tous deux paramétrables |
-| 2 | **repousser entre deux tours** : une passe `mode: seed` ou `resume` sur la spire générée, pour rendre les sommets perdus avant de tirer la suivante |
-| 3 | **le sens `in`** : la campagne tourne en `out`. Rien ne dit que l'erreur s'accumule pareil vers l'intérieur, où les spires se serrent |
+| 1 | ⭐ **pourquoi la 7ᵉ casse.** Est-ce l'érosion (5,39 cm² de grille, moins de sommets pour voter), un interstice manqué, ou le rayon qui saute une spire ? La sonde naturelle est `neighbor_max_distance`, `neighbor_min_clearance` et `neighbor_step`, tous paramétrables |
+| 2 | ~~repousser entre deux tours~~ **✅ mesuré, et c'est non** : §6 — la chaîne casse deux fois plus tôt |
+| 3 | ⏳ **le sens `in`** : les deux chaînes tournent en `out`. Vers l'intérieur les spires se serrent, donc le rayon a moins de chemin à faire et l'erreur n'a aucune raison de s'accumuler pareil. Campagne lancée (`data/spires_dedans`) |
 | 4 | ⚠ **la validation par l'encre.** α dit qu'une feuille est à portée ; il ne dit pas qu'on lit du texte. Le seul juge qui trancherait est un rendu, et six spires en donnent la matière |
+| 5 | **recoller les six spires en une seule surface.** Elles sont voisines par construction ; une surface unique de six spires serait la première chose de ce dépôt qui ressemble à un morceau de rouleau déroulé |
 
 ## Reproduire
 
