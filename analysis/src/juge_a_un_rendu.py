@@ -35,9 +35,13 @@ from pathlib import Path
 RACINE = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from derive_ou_loterie import permutation, spearman  # noqa: E402
+from test_convergence import ALPHA_TRAVERS  # noqa: E402
 
-# α au-dela duquel le vrai juge dit « en travers » (seuil de test_convergence).
-SEUIL_TRAVERS = 0.75
+# ⚠⚠ IMPORTE, pas redefini. Ce fichier portait `SEUIL_TRAVERS = 0.75` avec le commentaire
+# « seuil de test_convergence » — alors que test_convergence utilisait 0,7. Le commentaire
+# affirmait l'accord que le code ne tenait pas, et le cas reel a suivi : α = +0,722 est « en
+# travers » pour l'un et pas condamne pour l'autre. Importer rend le desaccord impossible.
+SEUIL_TRAVERS = ALPHA_TRAVERS
 
 # ⭐ Les candidats, du plus cher au moins cher. `au_bord` et `ecart_un_rendu_um` coutent UN
 # rendu ; `erosion`, `arc_court` et `aire_petite` n'en coutent AUCUN -- ils se lisent dans le

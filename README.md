@@ -38,7 +38,7 @@ nôtres (α = +1,01) — à quatre spires de portée, le pic n'a toujours rien t
 |---|---|
 | dérouler, aplatir, rendre — de bout en bout | poser la surface **sur** une feuille **en partant d'une graine** — dix-sept essais, tous à α ≈ 1 ([`42`](docs/42_la_boucle_tourne_et_ne_suffit_pas.md)) |
 | juger une trace sans vérité terrain (3 instruments) | l'encre : le modèle de 2023 sort une **constante** à 8,6 µm ([`36`](docs/36_lorigine_de_la_pile.md) §5bis) |
-| choisir où commencer (`25`), à distance et pour rien (`G`) | tenir la chaîne **au-delà de sept tours** : halver le pas du rayon **repousse** la rupture d'un tour, il ne la supprime pas ([`43`](docs/43_la_chaine_des_spires.md) §6quinquies) |
+| choisir où commencer (`25`), à distance et pour rien (`G`) | tenir la chaîne **au-delà de sept tours** : halver le pas du rayon **fait baisser les α** sans supprimer la rupture ([`43`](docs/43_la_chaine_des_spires.md) §6quinquies) |
 | ⭐⭐⭐ **enchaîner spire après spire** — 9 tours, **6 convergent** au pas de rayon 0,25 ([`43`](docs/43_la_chaine_des_spires.md)) | savoir POURQUOI une spire casse : l'érosion est **réfutée**, le meilleur prédicteur est le simple **numéro** de la spire ([`44`](docs/44_ou_la_chaine_se_trouve.md) §8) |
 | ⭐⭐ **savoir où la chaîne est dans le rouleau** : écart entre nappes **113 µm**, donc elle avance bien d'**une feuille à la fois** ([`44`](docs/44_ou_la_chaine_se_trouve.md)) | recoller les spires en un morceau déroulé : ⚠ **la tâche était mal posée** — une chaîne radiale est une **colonne**, il faut une chaîne **tangentielle**, jamais tentée ([`44`](docs/44_ou_la_chaine_se_trouve.md) §7) |
 
@@ -65,7 +65,9 @@ Sept bandes : un segment officiel qui converge, puis **six spires que nous avons
 plages grises lisses.
 
 ⭐⭐⭐ **Et en halvant un seul paramètre — le pas du rayon — la même chaîne va deux tours plus
-loin**, neuf nappes, **6 convergentes**, la rupture repoussée du tour 06 au tour 07 :
+loin**, neuf nappes, **6 convergentes**, et les α des tours 03, 05 et 06 tous plus bas qu'au
+pas 1,0 (⚠ « la rupture est repoussée d'un tour » a été **retiré** : ce tour-là sort à deux
+millièmes de son seuil — [`44`](docs/44_ou_la_chaine_se_trouve.md) §8bis) :
 
 ![la chaine a pas de rayon 0,25, neuf nappes](docs/images/43_chaine_pas025_rendus.jpg)
 

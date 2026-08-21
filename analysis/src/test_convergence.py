@@ -48,8 +48,25 @@ from pathlib import Path
 RACINE = Path(__file__).resolve().parents[2]
 # Une surface qui suit sa feuille garde sa distance ; on tolere le bruit de mesure.
 CONVERGE = 1.25
-# Doubler la fenetre double la mesure : le pic suit la fenetre, il n'y a pas de feuille.
-SUIT_LA_FENETRE = 1.6
+
+# ⚠⚠ LE seuil sur α, nomme et EXPORTE. Il etait un litteral `0.7` enfoui dans `analyser`,
+# et `juge_a_un_rendu.py` en avait redefini un SECOND a 0,75 pour la meme notion. Le cas
+# qui l'a revele est reel : la spire 04 de la chaine a pas 0,125 sort a α = +0,722 — « suit
+# la fenetre » pour ce fichier, PAS condamnee pour l'autre. Le meme tour, deux verdicts
+# opposes, dans le meme depot. Un seuil, un endroit.
+ALPHA_TRAVERS = 0.7
+
+# ⚠⚠ La resolution de l'instrument, ecrite dans `43` : « α sur deux fenetres ne discrimine
+# pas a ±0,2 pres ». Ce n'est donc PAS un seuil de plus — c'est la largeur en dessous de
+# laquelle une comparaison de verdicts ne veut rien dire. Un verdict dont l'α est a moins de
+# ca du seuil est un tirage au sort, et le compter dans un tableau « 4/7 contre 6/7 » fait
+# passer un tirage pour une mesure.
+BRUIT_ALPHA = 0.2
+
+# ⚠ Une constante `SUIT_LA_FENETRE = 1.6` (un rapport de CROISSANCE) vivait ici, definie et
+# utilisee nulle part, portant le nom d'un verdict que α seul decide. Un lecteur pouvait
+# raisonnablement croire que le verdict venait d'elle. Supprimee plutot que gardee « au cas
+# ou » : une constante morte au nom trompeur est une explication fausse posee dans le code.
 
 
 def analyser(serie: list[tuple[int, float]]) -> dict:
@@ -77,15 +94,20 @@ def analyser(serie: list[tuple[int, float]]) -> dict:
     if croissance <= CONVERGE:
         verdict, sens = "converge", ("la distance ne bouge pas quand la fenêtre s'élargit — "
                                      "la matière est là, tout près")
-    elif alpha >= 0.7:
+    elif alpha >= ALPHA_TRAVERS:
         verdict, sens = "suit la fenêtre", ("le « pic » s'éloigne avec la fenêtre — il n'y a "
                                             "aucune feuille à portée, la surface est posée "
                                             "en travers de l'empilement")
     else:
         verdict, sens = "intermédiaire", ("la mesure bouge sans suivre la fenêtre — ni "
                                           "convergée ni clairement en travers")
+    # ⭐ Chaque verdict porte sa propre FRAGILITE. Sans ce champ, un tableau qui compare
+    # deux campagnes en comptant les verdicts ne peut pas dire lesquels de ses comptes
+    # tiennent — et ce depot en a publie trois.
+    marge = abs(alpha - ALPHA_TRAVERS)
     return {"verdict": verdict, "sens": sens, "serie": serie,
-            "croissance": croissance, "elargissement": fenetre, "alpha": alpha}
+            "croissance": croissance, "elargissement": fenetre, "alpha": alpha,
+            "marge_au_seuil": marge, "fragile": bool(marge < BRUIT_ALPHA)}
 
 
 def verifier() -> int:
@@ -119,6 +141,38 @@ def verifier() -> int:
       analyser([(41, 100.0), (61, 150.0)])["verdict"])
     v("un écart nul est indécidable, pas convergé",
       analyser([(21, 0.0), (81, 0.0)])["verdict"] == "indecidable")
+
+    # ⭐⭐ La FRAGILITE d'un verdict. Le cas est reel et il est la raison de ce champ : la
+    # spire 04 de la chaine a pas 0,125 sort a α = +0,722, donc « suit la fenetre » — a
+    # 0,022 du seuil, quand l'instrument ne discrimine pas a ±0,2 pres. La compter comme une
+    # rupture dans un tableau « 4/7 contre 6/7 » fait passer un tirage au sort pour une mesure.
+    r_bord = analyser([(31, 100.0), (81, 200.0)])
+    v("un α juste au-dessus du seuil est bien « suit la fenêtre »",
+      r_bord["verdict"] == "suit la fenêtre", f"{r_bord['alpha']:.3f} {r_bord['verdict']}")
+    v("... et il est marqué FRAGILE", r_bord["fragile"],
+      f"α = {r_bord['alpha']:.3f}, marge {r_bord['marge_au_seuil']:.3f}")
+    v("le cas réel de la spire 04 tombe bien à 0,022 du seuil",
+      abs(r_bord["marge_au_seuil"] - 0.022) < 0.005, f"{r_bord['marge_au_seuil']:.4f}")
+
+    r_franc = analyser([(31, 100.0), (81, 355.0)])
+    v("un α franchement en travers n'est PAS fragile", not r_franc["fragile"],
+      f"α = {r_franc['alpha']:.3f}, marge {r_franc['marge_au_seuil']:.3f}")
+    r_plat = analyser([(31, 100.0), (81, 100.0)])
+    v("une convergence franche n'est PAS fragile", not r_plat["fragile"],
+      f"α = {r_plat['alpha']:.3f}, marge {r_plat['marge_au_seuil']:.3f}")
+    # ⚠ Temoin du temoin : si la largeur de bruit etait nulle, RIEN ne serait jamais fragile
+    # et le champ ne dirait rien. Il faut donc qu'elle soit non nulle ET que le verdict le
+    # plus proche du seuil du depot y tombe.
+    v("la largeur de bruit est celle documentée dans `43`", BRUIT_ALPHA == 0.2,
+      str(BRUIT_ALPHA))
+
+    # ⚠⚠ Un SEUL seuil pour tout le depot. `juge_a_un_rendu.py` en avait redefini un second
+    # a 0,75 en pretendant en commentaire reprendre celui d'ici. Ce controle rend un futur
+    # desaccord impossible a livrer.
+    import juge_a_un_rendu
+    v("le juge à un rendu utilise LE seuil, pas une copie",
+      juge_a_un_rendu.SEUIL_TRAVERS == ALPHA_TRAVERS,
+      f"{juge_a_un_rendu.SEUIL_TRAVERS} contre {ALPHA_TRAVERS}")
 
     # Un cas intermediaire doit etre nomme, pas range de force.
     m = analyser([(21, 100.0), (81, 160.0)])
@@ -157,10 +211,21 @@ def main() -> int:
         if not p_json.is_file():
             print(f"⚠ absent, ignoré : {chemin}", file=sys.stderr)
             continue
-        for serie in json.loads(p_json.read_text(encoding="utf-8")).get("series", []):
-            if renomme:
-                serie["nom"] = renomme
-            reprises.append(serie)
+        for brut_serie in json.loads(p_json.read_text(encoding="utf-8")).get("series", []):
+            # ⚠⚠ RECALCULER au lieu de faire confiance aux champs stockes. Un verdict ecrit
+            # hier a ete rendu par les seuils d'hier ; si un seuil a bouge depuis, le champ
+            # `verdict` du fichier est perime et rien ne le dit. Ce depot a deja publie une
+            # mesure faite sur un binaire perime, et lit desormais ses catalogues en
+            # recalculant pour la meme raison. La SERIE, elle, est une donnee : elle ne
+            # peut pas etre perimee.
+            recalcule = analyser([tuple(x) for x in brut_serie["serie"]])
+            avant = brut_serie.get("verdict")
+            if avant and avant != recalcule["verdict"]:
+                print(f"⚠ verdict PÉRIMÉ dans {p_json.name} : « {avant} » recalculé en "
+                      f"« {recalcule['verdict']} »", file=sys.stderr)
+                recalcule["etait"] = avant
+            recalcule["nom"] = renomme or brut_serie.get("nom", p_json.stem)
+            reprises.append(recalcule)
 
     if not a.serie and not reprises:
         ap.error("donner au moins une --serie ou un --depuis, ou --verifier")
@@ -168,8 +233,9 @@ def main() -> int:
     sorties = list(reprises)
     for r in reprises:
         pts = "  ".join(f"{n}c→{e:.1f}" for n, e in r["serie"])
+        marque = "  ⚠ FRAGILE" if r.get("fragile") else ""
         print(f"\n  {r['nom']}  (repris)\n    {pts}\n    α = {r.get('alpha', 0.0):+.2f} "
-              f"— {r.get('verdict', '?')}")
+              f"— {r.get('verdict', '?')}{marque}")
 
     for i, brut in enumerate(a.serie):
         nom = a.nom[i] if i < len(a.nom) else f"série {i + 1}"
@@ -186,6 +252,20 @@ def main() -> int:
                   f"(α = {r['alpha']:+.2f})")
             marque = {"converge": "✅", "suit la fenêtre": "⚠⚠", "intermédiaire": "⚠"}[r["verdict"]]
             print(f"    {marque} {r['verdict'].upper()} — {r['sens']}")
+
+    # ⭐⭐ Le recensement de fragilite. Un tableau qui compare deux campagnes en COMPTANT
+    # les verdicts ne dit rien de ce que ses comptes valent ; celui-ci le dit.
+    juges = [r for r in sorties if "fragile" in r]
+    fragiles = [r for r in juges if r["fragile"]]
+    if len(juges) >= 2:
+        print(f"\n  {len(fragiles)} verdict(s) sur {len(juges)} sont FRAGILES — leur α est "
+              f"à moins de {BRUIT_ALPHA} du seuil de {ALPHA_TRAVERS},")
+        print(f"  or l'instrument ne discrimine pas à ±{BRUIT_ALPHA} près (`43`). "
+              f"Les compter comme des mesures ferait")
+        print("  passer un tirage au sort pour un résultat.")
+        for r in fragiles:
+            print(f"    ⚠ {r['nom']} : α = {r['alpha']:+.3f}, à "
+                  f"{r['marge_au_seuil']:.3f} du seuil — verdict « {r['verdict']} »")
 
     if a.json:
         Path(a.json).write_text(json.dumps({"series": sorties}, indent=2,

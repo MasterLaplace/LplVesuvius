@@ -229,15 +229,18 @@ les deux candidats qui coûtent un rendu.
 
 | candidat | coût | ρ contre α | p | condamnées signalées |
 |---|---|---:|---:|---:|
-| `au_bord` | 1 rendu | +0,301 | 0,086 | 3/4 |
-| `ecart_un_rendu_um` | 1 rendu | +0,368 | 0,034 | 3/4 |
-| `erosion` | **0 rendu** | +0,415 | 0,016 | 3/4 |
-| `arc_court` | **0 rendu** | +0,444 | 0,010 | 3/4 |
-| `aire_petite` | **0 rendu** | +0,445 | 0,009 | 3/4 |
-| **`indice` de spire** | **0 rendu** | **+0,534** | **0,001** | **4/4** |
+| `au_bord` | 1 rendu | +0,265 | 0,099 | 5/8 |
+| `ecart_un_rendu_um` | 1 rendu | +0,327 | 0,039 | 5/8 |
+| `erosion` | **0 rendu** | +0,429 | 0,007 | 6/8 |
+| `arc_court` | **0 rendu** | +0,442 | 0,005 | 6/8 |
+| `aire_petite` | **0 rendu** | +0,460 | 0,003 | 6/8 |
+| **`indice` de spire** | **0 rendu** | **+0,530** | **0,001** | **7/8** |
 
-⚠⚠ **Le simple numéro de la spire bat tous les candidats**, et signale les quatre spires
-condamnées là où les autres en attrapent trois. Tout ce que j'ai mesuré n'est donc qu'un proxy
+*(n = 40 spires, quatre campagnes. ⚠ Une version antérieure de ce tableau donnait n = 34 et
+un seuil de condamnation à 0,75 — voir §8bis : le seuil était **dupliqué** dans le dépôt.)*
+
+⚠⚠ **Le simple numéro de la spire bat tous les candidats**, et signale sept des huit spires
+condamnées là où les autres en attrapent six. Tout ce que j'ai mesuré n'est donc qu'un proxy
 de la **profondeur dans la chaîne** : l'érosion et α croissent tous deux avec le tour, et
 rien dans ces corrélations ne distingue une **cause** d'une **horloge**.
 
@@ -250,6 +253,57 @@ sauter change la conclusion. Un contre-exemple achève de fermer la porte :
 `spires_repousse/spire03` a **93 % de sommets valides et un arc de 35,8 mm** — beaucoup plus
 de matière que n'importe quelle spire de la chaîne à pas 0,25 — et α = **+1,461**, en travers.
 L'érosion n'est donc même pas nécessaire pour casser.
+
+---
+
+## 8bis. ⚠⚠ Un seuil écrit deux fois, et neuf verdicts qui sont des tirages au sort
+
+En construisant le tableau du §8, deux défauts sont apparus dans la façon dont ce dépôt lit
+ses propres chaînes. Aucun n'a été trouvé en relisant : c'est une spire de la campagne en
+cours qui les a rendus visibles.
+
+**1. Le seuil sur α était écrit DEUX fois, avec deux valeurs.** `test_convergence.py`
+tranchait à **0,70** et `juge_a_un_rendu.py` à **0,75** — ce dernier avec un commentaire qui
+affirmait reprendre le premier. Le cas qui l'a révélé est réel : `spires_pas0125/spire04`
+sort à **α = +0,722**, donc « suit la fenêtre » pour l'un et **pas condamnée** pour l'autre.
+Le même tour, deux verdicts opposés, dans le même dépôt. Le seuil est maintenant **importé**,
+donc un futur désaccord est inlivrable, et un témoin l'assère.
+
+⚠ Au passage, une constante `SUIT_LA_FENETRE = 1.6` vivait dans `test_convergence.py`,
+**définie et utilisée nulle part**, portant le nom d'un verdict que α seul décide — un
+lecteur pouvait raisonnablement croire que le verdict venait d'elle. Supprimée : une
+constante morte au nom trompeur est une explication fausse posée dans le code.
+
+**2. ⚠⚠ Neuf verdicts sur quarante sont des tirages au sort.** [`43`](43_la_chaine_des_spires.md)
+écrit noir sur blanc que *« α sur deux fenêtres ne discrimine pas à ±0,2 près »*. Chaque
+verdict porte donc désormais sa **marge au seuil** et un drapeau `fragile`, et le recensement
+est net :
+
+| verdict | α | marge au seuil | étiquette |
+|---|---:|---:|---|
+| `pas025_spire07` | +0,702 | **0,002** | suit la fenêtre |
+| `dedans_spire02` | +0,686 | 0,014 | intermédiaire |
+| `dedans_spire04` | +0,722 | 0,022 | suit la fenêtre |
+| `pas0125_spire04` | +0,722 | 0,022 | suit la fenêtre |
+| `pas0125_spire02` | +0,758 | 0,058 | suit la fenêtre |
+| `pas05_spire06` | +0,583 | 0,117 | intermédiaire |
+| `repousse_spire02` | +0,573 | 0,127 | intermédiaire |
+| `spire03` | +0,532 | 0,168 | intermédiaire |
+| `pas0125_spire05` | +0,532 | 0,168 | intermédiaire |
+
+⚠⚠ **La première ligne est la revendication du §6quinquies de [`43`](43_la_chaine_des_spires.md)** :
+« la rupture tombe au tour 07 » repose sur un α à **deux millièmes** de son seuil. Ce n'est
+pas une mesure, c'est un lancer de pièce — et je l'avais publié comme un résultat le jour
+même. Corrigé là-bas.
+
+⭐ Ce que ça n'invalide pas : les chiffres du §3 au §7 de cette page ne passent par **aucun
+seuil**. Un écart entre nappes, une longueur d'arc, une part de sommets valides et une
+fraction de tour sont des grandeurs continues mesurées directement. C'est précisément
+pourquoi ils survivent à ce genre de correction, et les comptes de verdicts non.
+
+⚠ Et `--depuis` **recalcule** désormais chaque verdict depuis sa série au lieu de faire
+confiance au champ stocké, en signalant tout verdict périmé. Un verdict écrit hier a été
+rendu par les seuils d'hier ; la série, elle, est une donnée et ne peut pas être périmée.
 
 ---
 

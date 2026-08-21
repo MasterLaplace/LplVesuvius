@@ -332,16 +332,36 @@ elle n'avait pas encore été cherchée.
 | 03 | +0,532 | +0,000 | +0,000 | +0,986 |
 | 04 | +0,000 | +0,000 | +0,174 | +0,722 |
 | 05 | +0,300 | +0,160 | +0,095 | +0,000 |
-| 06 | **+1,475** ⚠⚠ | +0,583 | **+0,246** | +0,257 |
-| 07 | — | — | **+0,702** ⚠⚠ | — |
+| 06 | **+1,475** ⚠⚠ | +0,583 🎲 | **+0,246** | +0,257 |
+| 07 | — | — | **+0,702** 🎲 | — |
 | 08 | — | — | **+1,321** ⚠⚠ | — |
 | | 4/7, 1 casse | 6/7, 0 casse | **6/9, 2 cassent** | 3/7, 2 cassent |
+
+🎲 = **verdict fragile**, α à moins de 0,2 du seuil, donc l'étiquette est un tirage au sort
+([`44`](44_ou_la_chaine_se_trouve.md) §8bis). ⚠ Les comptes de la dernière ligne héritent de
+cette fragilité : ce sont des comptes de franchissements de seuil, pas des mesures.
 
 ![la chaine a pas 0,25, neuf spires](images/43_chaine_pas025.png)
 
 > **Halver le pas ne supprime pas la rupture : il la repousse d'un tour.** À pas 1,0 la
 > chaîne casse au tour 06 ; à pas 0,25 le tour 06 est le meilleur des trois réglages
 > (+0,246 contre +0,583 et +1,475) et c'est le tour **07** qui cède.
+
+⚠⚠ **CORRECTION, le jour même — cette phrase repose sur un lancer de pièce.** Le tour 07
+sort à **α = +0,702** pour un seuil de **0,700** : deux millièmes, quand cette page écrit
+elle-même que *« α sur deux fenêtres ne discrimine pas à ±0,2 près »*. Le recensement complet
+([`44`](44_ou_la_chaine_se_trouve.md) §8bis) trouve **9 verdicts fragiles sur 40**, et
+celui-ci est le plus fragile de tous.
+
+Ce qui reste vrai, sans seuil : à pas 0,25 les α des tours 03, 05 et 06 sont **tous plus bas**
+qu'à pas 1,0 (+0,000 contre +0,532 ; +0,095 contre +0,300 ; +0,246 contre +1,475), et ça, un
+seuil ne le décide pas. **Le pas du rayon améliore bien la chaîne — mais « il repousse la
+rupture d'un tour » est une phrase que la mesure ne porte pas.** Ce qu'elle porte est que les
+α baissent, ce qui est plus faible et plus solide.
+
+⚠ Chaque verdict porte désormais sa `marge_au_seuil` et un drapeau `fragile`, et `--depuis`
+recalcule au lieu de relire un verdict stocké — donc ce genre de phrase ne peut plus être
+écrite sans que le chiffre qui la mine soit sous les yeux.
 
 ⚠ **Et la comparaison honnête se fait à profondeur égale.** Sur les sept premiers tours, pas
 0,25 et pas 0,5 comptent le même nombre de convergences — le gain du quart de pas n'est pas
