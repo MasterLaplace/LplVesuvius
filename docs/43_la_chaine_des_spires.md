@@ -267,25 +267,51 @@ est établi, c'est qu'il n'y a pas de relation d'ensemble — ce qui suffit à n
 ⚠ Conséquence pratique : essayer K candidats par tour coûte **2K rendus**. C'est ce prix-là
 ou rien.
 
-## 6quater. ⏳ Le pas du rayon : trois tours identiques, donc ce n'est pas l'échantillonnage
+## 6quater. ⭐⭐⭐ Le pas du rayon : LE levier — et ma conclusion provisoire était fausse
 
 `gen_neighbor` arrête son rayon au **premier** échantillon au-dessus du seuil, par pas de
-`neighbor_step` voxels. Un pas plus fin localise donc la nappe plus précisément, et c'était
-le dernier levier mécanique non testé pour « pourquoi un tour rate ».
+`neighbor_step` voxels. Un pas plus fin localise donc la nappe plus précisément.
 
-| spire | pas 1,0 | pas 0,5 |
-|---|---:|---:|
-| 00 (contrôle) | +0,000 | +0,000 |
-| 01 | +0,000 | +0,000 |
-| 02 | +0,190 | **+0,160** |
+⚠⚠ **Après trois tours, j'avais écrit que ça ne changeait rien.** Les spires 00, 01 et 02
+étaient identiques à 0,03 près, et j'en ai conclu — en le publiant — que « les tours qui
+ratent ne ratent pas par manque de résolution ». **C'était faux, et la campagne complète le
+montre** : la différence apparaît exactement là où la chaîne de référence commence à céder.
 
-⚠ **Trois tours, aucune différence utile.** Diviser le pas par deux ne change rien à ce que
-le rayon trouve — donc les tours qui ratent ne ratent pas par manque de résolution le long
-du rayon. C'est une cause de moins, et elle coûtait un doublement du travail par tour.
+| spire | pas 1,0 | **pas 0,5** | `in` |
+|---|---:|---:|---:|
+| 00 (contrôle) | +0,000 | +0,000 | +0,000 |
+| 01 | +0,000 | +0,000 | +0,038 |
+| 02 | +0,190 | +0,160 | +0,686 |
+| **03** | +0,532 *interm.* | **+0,000 converge** | +0,986 |
+| 04 | +0,000 | +0,000 | +0,722 |
+| **05** | +0,300 *interm.* | **+0,160 converge** | +0,000 |
+| **06** | **+1,475 EN TRAVERS** | **+0,583** *interm.* | +0,257 |
+| | **4/7 convergent, 1 casse** | ⭐ **6/7 convergent, 0 casse** | 3/7, 2 cassent |
 
-⏳ Campagne en cours : les tours 03 à 06 diront si ça reste vrai là où la chaîne à pas 1,0
-se dégrade (+0,532) puis casse (+1,475). Tant qu'ils manquent, la conclusion ci-dessus ne
-porte que sur les trois premiers tours.
+> **Halver le pas du rayon fait passer la chaîne de 4 spires convergentes sur 7 à 6 sur 7,
+> et supprime la rupture.** La spire 06, qui suivait la fenêtre à +1,475, tombe à +0,583.
+
+⭐ **Et ça ne coûte rien en surface** : l'érosion reste à **4,0 % par tour** (7,12 → 5,43 cm²),
+identique au pas 1,0. Le gain est gratuit — le rayon fait le même trajet, il l'échantillonne
+seulement deux fois plus finement.
+
+![la chaine a pas 0,5](images/43_chaine_pas05.png)
+
+Et ça se voit sur les rendus : le treillis de fibres tient sur **les sept** bandes, là où au
+pas 1,0 les bandes 004 à 006 devenaient des plages grises lisses.
+
+![les sept spires a pas 0,5](images/43_chaine_pas05_rendus.jpg)
+
+### ⚠⚠ La leçon de méthode, et elle est chère
+
+**Les premiers tours d'une chaîne ne discriminent pas.** Trois tours identiques m'ont fait
+publier « ce levier ne sert à rien » sur le levier qui s'est avéré être le meilleur de la
+journée. Une chaîne ne se juge qu'**au tour où la référence cède** — avant ça, tous les
+réglages se ressemblent parce qu'il n'y a encore rien à départager.
+
+⚠ Corollaire pratique : une campagne d'enchaînement doit aller **jusqu'à la rupture de la
+référence**, sinon elle mesure le début facile. Trois tours coûtent trois fois moins cher et
+ne valent rien.
 
 ## 7. ⭐⭐ Ce que les trois campagnes disent ensemble
 
