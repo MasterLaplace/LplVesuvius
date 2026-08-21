@@ -1,0 +1,130 @@
+{
+  "series": [
+    {
+      "verdict": "converge",
+      "sens": "la distance ne bouge pas quand la fenêtre s'élargit — la matière est là, tout près",
+      "serie": [
+        [
+          31,
+          17.28
+        ],
+        [
+          81,
+          17.28
+        ]
+      ],
+      "croissance": 1.0,
+      "elargissement": 2.6129032258064515,
+      "alpha": 0.0,
+      "nom": "spire 0"
+    },
+    {
+      "verdict": "converge",
+      "sens": "la distance ne bouge pas quand la fenêtre s'élargit — la matière est là, tout près",
+      "serie": [
+        [
+          31,
+          116.64
+        ],
+        [
+          81,
+          120.96
+        ]
+      ],
+      "croissance": 1.037037037037037,
+      "elargissement": 2.6129032258064515,
+      "alpha": 0.037864742235528444,
+      "nom": "spire 1"
+    },
+    {
+      "verdict": "intermédiaire",
+      "sens": "la mesure bouge sans suivre la fenêtre — ni convergée ni clairement en travers",
+      "serie": [
+        [
+          31,
+          129.6
+        ],
+        [
+          81,
+          250.56
+        ]
+      ],
+      "croissance": 1.9333333333333333,
+      "elargissement": 2.6129032258064515,
+      "alpha": 0.6863839101129507,
+      "nom": "spire 2"
+    },
+    {
+      "verdict": "suit la fenêtre",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement",
+      "serie": [
+        [
+          31,
+          112.32
+        ],
+        [
+          81,
+          289.44
+        ]
+      ],
+      "croissance": 2.576923076923077,
+      "elargissement": 2.6129032258064515,
+      "alpha": 0.9855633335447546,
+      "nom": "spire 3"
+    },
+    {
+      "verdict": "suit la fenêtre",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement",
+      "serie": [
+        [
+          31,
+          8.64
+        ],
+        [
+          81,
+          17.28
+        ]
+      ],
+      "croissance": 2.0,
+      "elargissement": 2.6129032258064515,
+      "alpha": 0.7216810415287975,
+      "nom": "spire 4"
+    },
+    {
+      "verdict": "converge",
+      "sens": "la distance ne bouge pas quand la fenêtre s'élargit — la matière est là, tout près",
+      "serie": [
+        [
+          31,
+          8.64
+        ],
+        [
+          81,
+          8.64
+        ]
+      ],
+      "croissance": 1.0,
+      "elargissement": 2.6129032258064515,
+      "alpha": 0.0,
+      "nom": "spire 5"
+    },
+    {
+      "verdict": "intermédiaire",
+      "sens": "la mesure bouge sans suivre la fenêtre — ni convergée ni clairement en travers",
+      "serie": [
+        [
+          31,
+          108.0
+        ],
+        [
+          81,
+          138.24
+        ]
+      ],
+      "croissance": 1.28,
+      "elargissement": 2.6129032258064515,
+      "alpha": 0.2570222358974111,
+      "nom": "spire 6"
+    }
+  ]
+}

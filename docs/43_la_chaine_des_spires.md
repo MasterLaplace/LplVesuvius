@@ -187,6 +187,58 @@ existe, et une repousse corrigée est la seule combinaison des deux qui n'ait pa
 
 ---
 
+## 6bis. ⭐⭐ Le sens `in` : ni meilleur, ni pire — et c'est la découverte
+
+Vers l'intérieur les spires se serrent, donc le rayon a moins de chemin à faire. L'attente
+était une chaîne plus solide. Mesuré, sur les **sept** tours, à conception appariée :
+
+| spire | `out` | `in` |
+|---|---:|---:|
+| 00 (contrôle) | +0,000 | +0,000 |
+| 01 | +0,000 | **+0,038** |
+| 02 | +0,190 | +0,686 |
+| 03 | +0,532 | +0,986 |
+| 04 | +0,000 | +0,722 |
+| 05 | +0,300 | **+0,000** |
+| 06 | **+1,475** | +0,257 |
+
+![la chaine vers l'interieur](images/43_chaine_dedans.png)
+
+⚠ **Aucun des deux sens ne gagne.** `in` se dégrade plus vite au début (02 et 03 nettement
+pires) puis **se rétablit** — la spire 05 est un +0,000 parfait après deux mauvais tours —
+là où `out` tient longtemps puis casse net au 06.
+
+⭐⭐ Et c'est ça, la découverte : **α oscille dans les deux sens.** Un tour parfait arrive
+après deux mauvais. Ça contredit la lecture naturelle — « l'erreur s'accumule, la chaîne a
+une longueur maximale » — et ça ouvre une lecture bien plus utile : **chaque tour joue sa
+propre partie**, et un mauvais tour ne condamnerait pas la suite.
+
+### ⚠⚠ Alors on l'a mesuré au lieu de le croire
+
+`analysis/src/derive_ou_loterie.py` (11 témoins) teste la corrélation de rang au **décalage
+1** entre α(tour N) et α(tour N+1), sur les **12 paires** des deux chaînes cumulées — sans
+jamais recoller la fin d'une chaîne au début de l'autre.
+
+| | |
+|---|---:|
+| ρ au décalage 1 | **+0,299** |
+| p (permutation) | **0,344** |
+| puissance à ρ = 0,7 | 68 % |
+| **puissance à l'effet observé (ρ = 0,30)** | **15 %** |
+
+> **Verdict : pas de dérive FORTE — une dérive de cette ampleur aurait été vue. Une dérive
+> modérée, non.**
+
+⚠ **Et la première version de ce verdict était trop généreuse** : elle concluait « loterie »
+dès que la puissance à ρ = 0,7 dépassait 50 %. Ne pas voir une dérive *forte* ne dit rien
+d'une dérive *modérée* — et le ρ observé valait justement 0,3, où le test n'a que **15 %** de
+chances de voir quoi que ce soit. Le verdict ne peut exclure que ce que le test aurait su
+voir, et il le dit maintenant.
+
+⭐ Ce qui reste actionnable malgré l'indécision : **juger chaque spire et rejouer les
+mauvaises** vaut la peine d'être essayé. Si les tours étaient fortement enchaînés, ça ne
+servirait à rien — et c'est précisément ce que la mesure exclut.
+
 ## 7. ⭐⭐ Ce que les trois campagnes disent ensemble
 
 | ce qu'on a essayé | ce que ça fait à la surface | α |
