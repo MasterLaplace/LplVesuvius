@@ -62,14 +62,23 @@ def pas_du_maillage(dossier: Path) -> float:
     return PAS_DEFAUT_VOXELS
 
 
+def etiquette_de(racine_spires: Path) -> str:
+    """L'etiquette que `spire_suivante.sh` met dans le nom des verdicts d'une campagne."""
+    base = racine_spires.name
+    return "" if base == "spires" else base.removeprefix("spires_") + "_"
+
+
 def depouiller(racine_spires: Path, voxel_um: float, docs: Path) -> list[dict]:
+    etiquette = etiquette_de(racine_spires)
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from lire_selfcross import lire  # noqa: E402
 
     lignes = []
     for d in sorted(p for p in racine_spires.glob("spire*") if p.is_dir()):
         rapport = d / "selfcross.json"
-        verdict = docs / f"spire_{d.name}.json"
+        # ⚠ L'etiquette de campagne fait partie du nom du verdict : sans elle, depouiller
+        # la campagne A rendrait les chiffres de la campagne B (paye le 2026-08-21).
+        verdict = docs / f"spire_{etiquette}{d.name}.json"
         if not rapport.is_file() or not verdict.is_file():
             continue
         brut = json.loads(rapport.read_text(encoding="utf-8"))
@@ -121,6 +130,15 @@ def verifier() -> int:
     # L'aire doit doubler si le pas double dans une seule direction ? non : elle quadruple.
     ok(abs(aire_grille_cm2(3, 3, 40.0, 8.64) / aire_grille_cm2(3, 3, 20.0, 8.64) - 4.0) < 1e-9,
        "doubler le pas quadruple l'aire (c'est un carré, pas une longueur)")
+
+    # ⚠⚠ L'etiquette est ce qui empeche deux campagnes d'ecraser leurs verdicts. Sans elle,
+    # depouiller `spires` rendrait les chiffres de `spires_repousse`.
+    ok(etiquette_de(Path("data/spires")) == "",
+       "la campagne de base n'a pas d'etiquette")
+    ok(etiquette_de(Path("data/spires_repousse")) == "repousse_",
+       "une campagne nommee spires_<x> porte l'etiquette <x>_")
+    ok(etiquette_de(Path("data/spires")) != etiquette_de(Path("data/spires_repousse")),
+       "deux campagnes ne peuvent pas partager un nom de verdict (la sonde)")
 
     import tempfile
     with tempfile.TemporaryDirectory() as tmp:

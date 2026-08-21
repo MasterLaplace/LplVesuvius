@@ -62,7 +62,18 @@ SOURCE=${SOURCE:-$ROOT/data/origine_pile/mesh.tifxyz}
 SURF=$(curl -s --max-time 60 "$B/?list-type=2&prefix=$ROULEAU/representations/predictions/surfaces/&delimiter=/" \
        | tr '<' '\n' | grep "^Prefix>" | sed 's|^Prefix>||' | grep '\.zarr/$' | head -1 | sed 's|/$||')
 [ -z "$SURF" ] && { echo "pas de prediction publiee pour $ROULEAU" >&2; exit 3; }
+# ⚠⚠ LES VERDICTS PORTENT L'ETIQUETTE DE LA CAMPAGNE, et ca a ete paye. `juger` ecrivait
+# `docs/spire_<nom>.json` sans tenir compte du repertoire de destination : deux campagnes
+# (avec et sans repousse) ecrivaient donc dans LES MEMES fichiers, et la seconde ecrasait la
+# ligne de base de la premiere **pendant** qu'on croyait les comparer. Pire, `table_chaine.py`
+# lit ces fichiers : relancer le depouillement de la campagne A aurait rendu les chiffres de
+# la campagne B, sans que rien n'ait l'air faux.
+#
+# L'etiquette vient du nom du repertoire quand il ne s'appelle pas simplement « spires ».
+BASE_DEST=$(basename "$DEST")
+if [ "$BASE_DEST" = "spires" ]; then ETIQUETTE=""; else ETIQUETTE="${BASE_DEST#spires_}_"; fi
 mkdir -p "$DEST"
+[ -n "$ETIQUETTE" ] && echo "etiquette des verdicts : spire_${ETIQUETTE}<spire>.json"
 echo "depart : $SOURCE"
 echo "prediction : $SURF   sens : $SENS   fenetres : $FENETRES"
 
@@ -98,7 +109,7 @@ print(f\"{d['ecart_trace_um_median']:.2f}\")" 2>/dev/null) || continue
   echo "== $NOM  ($AIRE cm², $CROIS auto-intersections)"
   ( cd "$ROOT/experiments" && uv run python ../analysis/src/test_convergence.py \
       --serie "${SERIE%,}" --nom "$NOM ($AIRE cm², $CROIS croisements)" \
-      --json "$ROOT/docs/spire_$NOM.json" | tail -3 )
+      --json "$ROOT/docs/spire_${ETIQUETTE}$NOM.json" | tail -3 )
 }
 
 # --- spire 0 : la surface de depart, jugee par NOTRE chaine ---------------------
@@ -122,7 +133,7 @@ juger "$W0" "$SOURCE" "spire00" || { echo "la surface de depart ne se juge pas �
 # resultat. Le verdict est LU dans le JSON du juge, pas suppose.
 V0=$(python3 -c "
 import json
-print(json.load(open('$ROOT/docs/spire_spire00.json'))['series'][0]['verdict'])" 2>/dev/null)
+print(json.load(open('$ROOT/docs/spire_${ETIQUETTE}spire00.json'))['series'][0]['verdict'])" 2>/dev/null)
 if [ "$V0" != "converge" ]; then
   echo "REFUS : la surface de depart ne converge pas (verdict « ${V0:-inconnu} »)." >&2
   echo "  Enchainer depuis elle mesurerait la propagation d'un defaut, pas une chaine." >&2
