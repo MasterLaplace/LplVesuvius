@@ -39,7 +39,7 @@ nôtres (α = +1,01) — à quatre spires de portée, le pic n'a toujours rien t
 | dérouler, aplatir, rendre — de bout en bout | poser la surface **sur** une feuille **en partant d'une graine** — dix-sept essais, tous à α ≈ 1 ([`42`](docs/42_la_boucle_tourne_et_ne_suffit_pas.md)) |
 | juger une trace sans vérité terrain (3 instruments) | l'encre : le modèle de 2023 sort une **constante** à 8,6 µm ([`36`](docs/36_lorigine_de_la_pile.md) §5bis) |
 | choisir où commencer (`25`), à distance et pour rien (`G`) | tenir la chaîne **au-delà de six tours** : la 7ᵉ casse, et la grille perd 4,0 % par tour ([`43`](docs/43_la_chaine_des_spires.md)) |
-| ⭐⭐⭐ **enchaîner spire après spire** — 6 tours, 4 convergent, 0 en travers ([`43`](docs/43_la_chaine_des_spires.md)) | — |
+| ⭐⭐⭐ **enchaîner spire après spire** — 7 tours, **6 convergent, aucune en travers** au pas de rayon 0,5 ([`43`](docs/43_la_chaine_des_spires.md)) | — |
 
 ⭐ **L'objectif est donc nommable** : pas « réduire l'écart », mais **faire converger la
 mesure**. Une trace qui converge suit une feuille, quelle que soit sa valeur.
@@ -61,7 +61,14 @@ je n'ai pas su suivre le fil (`41` §6ter) — mais **trois leviers de données 
 Sept bandes : un segment officiel qui converge, puis **six spires que nous avons générées**
 (`mode: gen_neighbor`), chacune source de la suivante. **4 sur 7 convergent**, la 7ᵉ casse
 (α = +1,475), et la dégradation se **voit** — le treillis de fibres cède la place à des
-plages grises lisses. Détail : [`43`](docs/43_la_chaine_des_spires.md).
+plages grises lisses.
+
+⭐⭐⭐ **Et en halvant un seul paramètre — le pas du rayon — la même chaîne passe à 6 sur 7,
+sans aucune rupture, et sans coûter un pouce de surface** :
+
+![la chaine a pas de rayon 0,5](docs/images/43_chaine_pas05_rendus.jpg)
+
+Détail : [`43`](docs/43_la_chaine_des_spires.md).
 
 ### Et voici la cible, assemblée
 
