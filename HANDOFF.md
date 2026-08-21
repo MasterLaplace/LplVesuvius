@@ -1236,6 +1236,44 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     intermédiaires avant de conclure qu'une provenance n'est pas publiée.
 
 
+### ⭐⭐⭐ RÉSULTAT DU 2026-08-21 (fin) — le pas du rayon a un OPTIMUM
+
+Quatre campagnes d'enchaînement, comparées **à profondeur égale** (7 premiers tours) et
+**sans aucun seuil** — que des α et des aires, jamais un compte de verdicts :
+
+| pas du rayon | α moyen | α du pire tour | érosion/tour |
+|---|---:|---:|---:|
+| 1,0 | +0,357 | **+1,475** | 4,0 % |
+| 0,5 | +0,129 | +0,583 | 4,0 % |
+| **0,25** | ⭐ **+0,102** | ⭐ **+0,246** | 4,0 % |
+| 0,125 | +0,327 | +0,758 | 4,0 % |
+
+⭐ **Courbe en U sur un facteur 8.** Trop grossier et trop fin sont tous deux trois fois
+pires, et 0,125 est presque aussi mauvais que 1,0. Donc « halver encore » n'est PAS la voie —
+la prédiction « chaque halvage achète un tour » est réfutée.
+
+⭐⭐ **Et l'érosion refuse de bouger** : 4,0 % par tour dans les quatre cas (12,8 à 13,0 % sur
+l'aire *utile*), et l'écart entre nappes reste à 102–116 µm partout.
+
+> **Le pas du rayon décide OÙ la surface se pose, pas combien elle en perd.**
+
+⚠⚠ **Deux artefacts de comparaison, et ils allaient dans le sens de mes hypothèses.**
+- L'érosion lue sur *toute* la longueur de chaque chaîne allait de 13,2 à 18,0 % et semblait
+  suivre le pas. À profondeur égale : 12,8 à 13,0 %. **Toute la tendance était l'artefact de
+  chaînes de longueurs différentes** — le même confondant que celui qui a réfuté « la rupture
+  est une érosion ». D'où `geometrie_chaine.py --tours N` et `table_chaine.py --comparer`.
+- J'ai supposé qu'un pas trop fin faisait s'arrêter le rayon **avant** la nappe suivante.
+  Mesuré : 115 µm à pas 0,125, indistinguable des 113 et 114. **Réfuté.** À profondeur égale
+  la tendance existe (116 → 102 µm) mais est minuscule. **Le mécanisme reste inconnu**, et
+  les leviers non sondés sont `neighbor_max_distance`, `neighbor_threshold`,
+  `neighbor_min_clearance`.
+
+⚠ **Une revendication publiée le matin a été RETIRÉE le soir.** « Halver le pas repousse la
+rupture d'un tour » reposait sur `pas025_spire07`, α = +0,702 pour un seuil de 0,700 — **deux
+millièmes**, quand l'instrument ne discrimine pas à ±0,2 près. C'est ce qui a produit le
+recensement de fragilité (9 verdicts sur 40) et la règle : **comparer des α, jamais des
+comptes de franchissements de seuil.**
+
 **Ajoutés le 2026-08-21 (soir)**
 59. ⚠⚠ **Une provenance inventée est pire que la coquille qu'elle explique.** `44` a été
     écrite avec `@f$…@f$` pour ses maths en ligne, et les délimiteurs se sont affichés

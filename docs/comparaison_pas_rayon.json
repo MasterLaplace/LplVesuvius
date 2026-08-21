@@ -1,0 +1,499 @@
+{
+  "campagnes": [
+    {
+      "nom": "spires",
+      "racine": "../data/spires",
+      "lignes": [
+        {
+          "spire": "spire00",
+          "grille": [
+            162,
+            149
+          ],
+          "aire_grille_cm2": 7.12,
+          "croisements": null,
+          "ecart_31c_um": 17.28,
+          "ecart_81c_um": 17.28,
+          "alpha": 0.0,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire01",
+          "grille": [
+            157,
+            145
+          ],
+          "aire_grille_cm2": 6.71,
+          "croisements": null,
+          "ecart_31c_um": 90.72,
+          "ecart_81c_um": 90.72,
+          "alpha": 0.0,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire02",
+          "grille": [
+            153,
+            141
+          ],
+          "aire_grille_cm2": 6.35,
+          "croisements": null,
+          "ecart_31c_um": 43.2,
+          "ecart_81c_um": 51.84,
+          "alpha": 0.19,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire03",
+          "grille": [
+            150,
+            139
+          ],
+          "aire_grille_cm2": 6.14,
+          "croisements": null,
+          "ecart_31c_um": 12.96,
+          "ecart_81c_um": 21.6,
+          "alpha": 0.532,
+          "verdict": "intermédiaire"
+        },
+        {
+          "spire": "spire04",
+          "grille": [
+            147,
+            136
+          ],
+          "aire_grille_cm2": 5.89,
+          "croisements": null,
+          "ecart_31c_um": 77.76,
+          "ecart_81c_um": 77.76,
+          "alpha": 0.0,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire05",
+          "grille": [
+            144,
+            133
+          ],
+          "aire_grille_cm2": 5.64,
+          "croisements": null,
+          "ecart_31c_um": 129.6,
+          "ecart_81c_um": 172.8,
+          "alpha": 0.3,
+          "verdict": "intermédiaire"
+        },
+        {
+          "spire": "spire06",
+          "grille": [
+            141,
+            130
+          ],
+          "aire_grille_cm2": 5.39,
+          "croisements": null,
+          "ecart_31c_um": 69.12,
+          "ecart_81c_um": 285.12,
+          "alpha": 1.475,
+          "verdict": "suit la fenêtre"
+        }
+      ],
+      "profondeur": 7,
+      "alpha_moyen": 0.3567142857142857,
+      "alpha_median": 0.19,
+      "alpha_max": 1.475,
+      "erosion_par_tour": 4.049625468164796,
+      "longueur_reelle": 7,
+      "pas_du_rayon": 1.0
+    },
+    {
+      "nom": "spires_pas05",
+      "racine": "../data/spires_pas05",
+      "lignes": [
+        {
+          "spire": "spire00",
+          "grille": [
+            162,
+            149
+          ],
+          "aire_grille_cm2": 7.12,
+          "croisements": null,
+          "ecart_31c_um": 17.28,
+          "ecart_81c_um": 17.28,
+          "alpha": 0.0,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire01",
+          "grille": [
+            157,
+            145
+          ],
+          "aire_grille_cm2": 6.71,
+          "croisements": null,
+          "ecart_31c_um": 86.4,
+          "ecart_81c_um": 86.4,
+          "alpha": 0.0,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire02",
+          "grille": [
+            153,
+            142
+          ],
+          "aire_grille_cm2": 6.4,
+          "croisements": null,
+          "ecart_31c_um": 51.84,
+          "ecart_81c_um": 60.48,
+          "alpha": 0.16,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire03",
+          "grille": [
+            150,
+            139
+          ],
+          "aire_grille_cm2": 6.14,
+          "croisements": null,
+          "ecart_31c_um": 25.92,
+          "ecart_81c_um": 25.92,
+          "alpha": 0.0,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire04",
+          "grille": [
+            147,
+            137
+          ],
+          "aire_grille_cm2": 5.93,
+          "croisements": null,
+          "ecart_31c_um": 60.48,
+          "ecart_81c_um": 60.48,
+          "alpha": 0.0,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire05",
+          "grille": [
+            144,
+            134
+          ],
+          "aire_grille_cm2": 5.68,
+          "croisements": null,
+          "ecart_31c_um": 103.68,
+          "ecart_81c_um": 120.96,
+          "alpha": 0.16,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire06",
+          "grille": [
+            141,
+            131
+          ],
+          "aire_grille_cm2": 5.43,
+          "croisements": null,
+          "ecart_31c_um": 103.68,
+          "ecart_81c_um": 181.44,
+          "alpha": 0.583,
+          "verdict": "intermédiaire"
+        }
+      ],
+      "profondeur": 7,
+      "alpha_moyen": 0.129,
+      "alpha_median": 0.0,
+      "alpha_max": 0.583,
+      "erosion_par_tour": 3.9559925093632966,
+      "longueur_reelle": 7,
+      "pas_du_rayon": 0.5
+    },
+    {
+      "nom": "spires_pas025",
+      "racine": "../data/spires_pas025",
+      "lignes": [
+        {
+          "spire": "spire00",
+          "grille": [
+            162,
+            149
+          ],
+          "aire_grille_cm2": 7.12,
+          "croisements": null,
+          "ecart_31c_um": 17.28,
+          "ecart_81c_um": 17.28,
+          "alpha": 0.0,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire01",
+          "grille": [
+            158,
+            145
+          ],
+          "aire_grille_cm2": 6.75,
+          "croisements": null,
+          "ecart_31c_um": 86.4,
+          "ecart_81c_um": 86.4,
+          "alpha": 0.0,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire02",
+          "grille": [
+            154,
+            141
+          ],
+          "aire_grille_cm2": 6.4,
+          "croisements": null,
+          "ecart_31c_um": 60.48,
+          "ecart_81c_um": 73.44,
+          "alpha": 0.202,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire03",
+          "grille": [
+            151,
+            138
+          ],
+          "aire_grille_cm2": 6.14,
+          "croisements": null,
+          "ecart_31c_um": 34.56,
+          "ecart_81c_um": 34.56,
+          "alpha": 0.0,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire04",
+          "grille": [
+            148,
+            135
+          ],
+          "aire_grille_cm2": 5.88,
+          "croisements": null,
+          "ecart_31c_um": 47.52,
+          "ecart_81c_um": 56.16,
+          "alpha": 0.174,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire05",
+          "grille": [
+            145,
+            132
+          ],
+          "aire_grille_cm2": 5.63,
+          "croisements": null,
+          "ecart_31c_um": 90.72,
+          "ecart_81c_um": 99.36,
+          "alpha": 0.095,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire06",
+          "grille": [
+            142,
+            129
+          ],
+          "aire_grille_cm2": 5.39,
+          "croisements": null,
+          "ecart_31c_um": 129.6,
+          "ecart_81c_um": 164.16,
+          "alpha": 0.246,
+          "verdict": "intermédiaire"
+        },
+        {
+          "spire": "spire07",
+          "grille": [
+            137,
+            125
+          ],
+          "aire_grille_cm2": 5.04,
+          "croisements": null,
+          "ecart_31c_um": 116.64,
+          "ecart_81c_um": 228.96,
+          "alpha": 0.702,
+          "verdict": "suit la fenêtre"
+        },
+        {
+          "spire": "spire08",
+          "grille": [
+            131,
+            119
+          ],
+          "aire_grille_cm2": 4.58,
+          "croisements": null,
+          "ecart_31c_um": 77.76,
+          "ecart_81c_um": 276.48,
+          "alpha": 1.321,
+          "verdict": "suit la fenêtre"
+        }
+      ],
+      "profondeur": 7,
+      "alpha_moyen": 0.10242857142857142,
+      "alpha_median": 0.095,
+      "alpha_max": 0.246,
+      "erosion_par_tour": 4.049625468164796,
+      "longueur_reelle": 9,
+      "pas_du_rayon": 0.25
+    },
+    {
+      "nom": "spires_pas0125",
+      "racine": "../data/spires_pas0125",
+      "lignes": [
+        {
+          "spire": "spire00",
+          "grille": [
+            162,
+            149
+          ],
+          "aire_grille_cm2": 7.12,
+          "croisements": null,
+          "ecart_31c_um": 17.28,
+          "ecart_81c_um": 17.28,
+          "alpha": 0.0,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire01",
+          "grille": [
+            158,
+            145
+          ],
+          "aire_grille_cm2": 6.75,
+          "croisements": null,
+          "ecart_31c_um": 82.08,
+          "ecart_81c_um": 82.08,
+          "alpha": 0.0,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire02",
+          "grille": [
+            154,
+            141
+          ],
+          "aire_grille_cm2": 6.4,
+          "croisements": null,
+          "ecart_31c_um": 60.48,
+          "ecart_81c_um": 125.28,
+          "alpha": 0.758,
+          "verdict": "suit la fenêtre"
+        },
+        {
+          "spire": "spire03",
+          "grille": [
+            151,
+            138
+          ],
+          "aire_grille_cm2": 6.14,
+          "croisements": null,
+          "ecart_31c_um": 34.56,
+          "ecart_81c_um": 34.56,
+          "alpha": 0.0,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire04",
+          "grille": [
+            148,
+            135
+          ],
+          "aire_grille_cm2": 5.88,
+          "croisements": null,
+          "ecart_31c_um": 34.56,
+          "ecart_81c_um": 69.12,
+          "alpha": 0.722,
+          "verdict": "suit la fenêtre"
+        },
+        {
+          "spire": "spire05",
+          "grille": [
+            145,
+            132
+          ],
+          "aire_grille_cm2": 5.63,
+          "croisements": null,
+          "ecart_31c_um": 77.76,
+          "ecart_81c_um": 129.6,
+          "alpha": 0.532,
+          "verdict": "intermédiaire"
+        },
+        {
+          "spire": "spire06",
+          "grille": [
+            142,
+            129
+          ],
+          "aire_grille_cm2": 5.39,
+          "croisements": null,
+          "ecart_31c_um": 112.32,
+          "ecart_81c_um": 146.88,
+          "alpha": 0.279,
+          "verdict": "intermédiaire"
+        },
+        {
+          "spire": "spire07",
+          "grille": [
+            137,
+            124
+          ],
+          "aire_grille_cm2": 4.99,
+          "croisements": null,
+          "ecart_31c_um": 103.68,
+          "ecart_81c_um": 181.44,
+          "alpha": 0.583,
+          "verdict": "intermédiaire"
+        },
+        {
+          "spire": "spire08",
+          "grille": [
+            131,
+            119
+          ],
+          "aire_grille_cm2": 4.58,
+          "croisements": null,
+          "ecart_31c_um": 103.68,
+          "ecart_81c_um": 306.72,
+          "alpha": 1.129,
+          "verdict": "suit la fenêtre"
+        },
+        {
+          "spire": "spire09",
+          "grille": [
+            126,
+            114
+          ],
+          "aire_grille_cm2": 4.22,
+          "croisements": null,
+          "ecart_31c_um": 95.04,
+          "ecart_81c_um": 293.76,
+          "alpha": 1.175,
+          "verdict": "suit la fenêtre"
+        },
+        {
+          "spire": "spire10",
+          "grille": [
+            121,
+            110
+          ],
+          "aire_grille_cm2": 3.91,
+          "croisements": null,
+          "ecart_31c_um": 129.6,
+          "ecart_81c_um": 190.08,
+          "alpha": 0.399,
+          "verdict": "intermédiaire"
+        }
+      ],
+      "profondeur": 7,
+      "alpha_moyen": 0.3272857142857143,
+      "alpha_median": 0.279,
+      "alpha_max": 0.758,
+      "erosion_par_tour": 4.049625468164796,
+      "longueur_reelle": 11,
+      "pas_du_rayon": 0.125
+    }
+  ],
+  "profondeur_commune": 7
+}

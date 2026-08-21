@@ -254,6 +254,35 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                 [f"**+{fr(a, 3)}**", f"+{fr(a, 3)}",
                                  f"{a:+.3f}"], p.name))
 
+    # ⚠⚠ La comparaison des campagnes A PROFONDEUR EGALE (`43` §6quinquies) : l'optimum du
+    # pas du rayon EST la revendication de la section, et c'est un α, pas un compte. Si l'un
+    # de ces nombres bouge sans que la page bouge, la page annonce un optimum qui a change
+    # de place.
+    p = racine / "docs" / "comparaison_pas_rayon.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        for c in d.get("campagnes", []):
+            pr = c.get("pas_du_rayon")
+            if pr is None:
+                continue
+            out.append((f"alpha moyen a pas {pr:g}",
+                        [f"**{fr(c['alpha_moyen'], 3)}**", f"+{fr(c['alpha_moyen'], 3)}",
+                         f"{c['alpha_moyen']:+.3f}"], p.name))
+            out.append((f"alpha du pire tour a pas {pr:g}",
+                        [f"**{fr(c['alpha_max'], 3)}**", f"+{fr(c['alpha_max'], 3)}",
+                         f"{c['alpha_max']:+.3f}"], p.name))
+        # ⭐ L'optimum lui-meme : lequel des pas gagne, et de combien.
+        bons = [c for c in d.get("campagnes", []) if c.get("pas_du_rayon")]
+        if bons:
+            best = min(bons, key=lambda c: c["alpha_moyen"])
+            pv = f"{best['pas_du_rayon']:g}".replace(".", ",")
+            out.append(("pas du rayon optimal",
+                        [f"**pas {pv}**", f"pas {pv}", f"optimum … {pv}",
+                         f"{best['pas_du_rayon']:g}"], p.name))
+            out.append(("profondeur commune de comparaison",
+                        [f"les {d['profondeur_commune']} premiers tours",
+                         f"{d['profondeur_commune']} premiers tours"], p.name))
+
     # ⚠⚠ La geometrie de la chaine (`44`) : ces cinq chiffres SONT la page. L'ecart entre
     # nappes est le seul qui dise que la chaine avance d'une feuille a la fois ; l'erosion
     # utile CORRIGE un chiffre publie dans `43` (4,0 % contre 15,6 %) ; et le nombre de

@@ -317,64 +317,95 @@ réglages se ressemblent parce qu'il n'y a encore rien à départager.
 référence**, sinon elle mesure le début facile. Trois tours coûtent trois fois moins cher et
 ne valent rien.
 
-## 6quinquies. ⭐⭐ Le pas 0,25, sur HUIT tours : la rupture est repoussée, pas supprimée
+## 6quinquies. ⭐⭐⭐ Le pas du rayon a un OPTIMUM — et il n'est pas au bout
 
-La leçon ci-dessus a été appliquée immédiatement : puisque halver le pas avait fait
-disparaître la rupture *dans les sept tours mesurés*, la campagne suivante est allée
-**au-delà** — huit tours, deux de plus que la référence, pour aller chercher la rupture là où
-elle n'avait pas encore été cherchée.
+La leçon du §6quater a été appliquée : puisque halver le pas améliorait les sept tours
+mesurés, les deux campagnes suivantes sont allées **au-delà** — pas 0,25 sur huit tours, pas
+0,125 sur dix. La question était : « chaque halvage achète-t-il un tour ? »
 
-| spire | pas 1,0 | pas 0,5 | **pas 0,25** | `in` |
-|---|---:|---:|---:|---:|
-| 00 *(contrôle)* | +0,000 | +0,000 | +0,000 | +0,000 |
-| 01 | +0,000 | +0,000 | +0,000 | +0,038 |
-| 02 | +0,190 | +0,160 | +0,202 | +0,686 |
-| 03 | +0,532 | +0,000 | +0,000 | +0,986 |
-| 04 | +0,000 | +0,000 | +0,174 | +0,722 |
-| 05 | +0,300 | +0,160 | +0,095 | +0,000 |
-| 06 | **+1,475** ⚠⚠ | +0,583 🎲 | **+0,246** | +0,257 |
-| 07 | — | — | **+0,702** 🎲 | — |
-| 08 | — | — | **+1,321** ⚠⚠ | — |
-| | 4/7, 1 casse | 6/7, 0 casse | **6/9, 2 cassent** | 3/7, 2 cassent |
+**Non. Halver deux fois de trop annule le gain.**
 
-🎲 = **verdict fragile**, α à moins de 0,2 du seuil, donc l'étiquette est un tirage au sort
-([`44`](44_ou_la_chaine_se_trouve.md) §8bis). ⚠ Les comptes de la dernière ligne héritent de
-cette fragilité : ce sont des comptes de franchissements de seuil, pas des mesures.
+![le pas du rayon a un optimum](images/43_optimum_du_pas.png)
 
-![la chaine a pas 0,25, neuf spires](images/43_chaine_pas025.png)
+À **profondeur égale** — les 7 premiers tours de chaque campagne, parce qu'une chaîne se
+dégrade avec le rang et qu'un tableau à profondeurs inégales fait passer la profondeur pour
+un effet du réglage ([`44`](44_ou_la_chaine_se_trouve.md) §8) :
 
-> **Halver le pas ne supprime pas la rupture : il la repousse d'un tour.** À pas 1,0 la
-> chaîne casse au tour 06 ; à pas 0,25 le tour 06 est le meilleur des trois réglages
-> (+0,246 contre +0,583 et +1,475) et c'est le tour **07** qui cède.
+| pas du rayon | longueur | **α moyen** | α médian | **α du pire tour** | érosion/tour |
+|---|---:|---:|---:|---:|---:|
+| 1,0 | 7 | +0,357 | +0,190 | **+1,475** | 4,0 % |
+| 0,5 | 7 | +0,129 | +0,000 | +0,583 | 4,0 % |
+| **0,25** | 9 | ⭐ **+0,102** | +0,095 | ⭐ **+0,246** | 4,0 % |
+| 0,125 | 11 | +0,327 | +0,279 | +0,758 | 4,0 % |
 
-⚠⚠ **CORRECTION, le jour même — cette phrase repose sur un lancer de pièce.** Le tour 07
-sort à **α = +0,702** pour un seuil de **0,700** : deux millièmes, quand cette page écrit
-elle-même que *« α sur deux fenêtres ne discrimine pas à ±0,2 près »*. Le recensement complet
-([`44`](44_ou_la_chaine_se_trouve.md) §8bis) trouve **9 verdicts fragiles sur 40**, et
-celui-ci est le plus fragile de tous.
+⭐ **C'est une courbe en U, pas une amélioration monotone.** Trop grossier (1,0) et trop fin
+(0,125) sont tous deux **trois fois pires** que l'optimum, et 0,125 est presque aussi mauvais
+que 1,0 — sur un facteur **huit** de réglage.
 
-Ce qui reste vrai, sans seuil : à pas 0,25 les α des tours 03, 05 et 06 sont **tous plus bas**
-qu'à pas 1,0 (+0,000 contre +0,532 ; +0,095 contre +0,300 ; +0,246 contre +1,475), et ça, un
-seuil ne le décide pas. **Le pas du rayon améliore bien la chaîne — mais « il repousse la
-rupture d'un tour » est une phrase que la mesure ne porte pas.** Ce qu'elle porte est que les
-α baissent, ce qui est plus faible et plus solide.
+⭐⭐ **Et la colonne qui compte est celle du pire tour**, parce que c'est lui qui casse une
+chaîne : +1,475 → +0,583 → **+0,246** → +0,758. À pas 0,25, le plus mauvais des sept tours
+est encore près de converger.
 
-⚠ Chaque verdict porte désormais sa `marge_au_seuil` et un drapeau `fragile`, et `--depuis`
-recalcule au lieu de relire un verdict stocké — donc ce genre de phrase ne peut plus être
-écrite sans que le chiffre qui la mine soit sous les yeux.
+### Les α, tour par tour — des mesures, pas des étiquettes
 
-⚠ **Et la comparaison honnête se fait à profondeur égale.** Sur les sept premiers tours, pas
-0,25 et pas 0,5 comptent le même nombre de convergences — le gain du quart de pas n'est pas
-un tour de plus qui converge, c'est une **marge** plus grande au tour critique. Comparer
-« 6/7 » à « 6/9 » comme si le second était pire serait exactement l'erreur inverse de celle
-du §6quater : juger deux campagnes à des profondeurs différentes.
+| spire | pas 1,0 | pas 0,5 | **pas 0,25** | pas 0,125 | `in` |
+|---|---|---|---|---|---|
+| 00 | **+0,000** | **+0,000** | **+0,000** | **+0,000** | **+0,000** |
+| 01 | **+0,000** | **+0,000** | **+0,000** | **+0,000** | +0,038 |
+| 02 | +0,190 | +0,160 | +0,202 | +0,758 🎲 | +0,686 🎲 |
+| 03 | +0,532 🎲 | **+0,000** | **+0,000** | **+0,000** | +0,986 |
+| 04 | **+0,000** | **+0,000** | +0,174 | +0,722 🎲 | +0,722 🎲 |
+| 05 | +0,300 | +0,160 | +0,095 | +0,532 🎲 | **+0,000** |
+| 06 | +1,475 | +0,583 🎲 | +0,246 | +0,279 | +0,257 |
+| 07 | — | — | +0,702 🎲 | +0,583 🎲 | — |
+| 08 | — | — | +1,321 | +1,129 | — |
+| 09 | — | — | — | +1,175 | — |
+| 10 | — | — | — | +0,399 | — |
 
-![les neuf spires a pas 0,25](images/43_chaine_pas025_rendus.jpg)
+🎲 = α à moins de 0,2 du seuil de 0,7, donc une
+étiquette de verdict y serait un tirage au sort ([`44`](44_ou_la_chaine_se_trouve.md) §8bis).
+Les α eux-mêmes, en revanche, sont des mesures : c'est pour ça que ce tableau les donne et ne
+donne aucun verdict.
 
-⭐ **Où va la géométrie de cette chaîne** : elle est mesurée dans
-[`44`](44_ou_la_chaine_se_trouve.md) — écart entre nappes **113 µm** (la chaîne avance bien
-d'une feuille à la fois), et l'érosion de l'aire **utile** est de **15,6 % par tour**, pas les
-4,0 % du §3, qui portent sur l'aire de grille.
+⚠ La colonne `in` (sens de la normale vers l'intérieur) est là pour mémoire — §6bis mesure
+qu'elle n'est ni meilleure ni pire, et deux de ses trois plus mauvais tours sont fragiles.
+
+### ⚠⚠ Ce tableau ne compte AUCUN verdict, et c'est délibéré
+
+Les α et les aires sont des grandeurs continues, mesurées directement. Un compte de verdicts
+(« 4/7 », « 6/9 ») est un compte de **franchissements de seuil**, et le recensement de
+[`44`](44_ou_la_chaine_se_trouve.md) §8bis trouve **9 verdicts fragiles sur 40** — dont le
+plus fragile de tous, `pas025_spire07`, à **deux millièmes** de son seuil.
+
+⚠ **C'est ce qui a fait retirer la première version de cette section**, publiée le matin même :
+elle annonçait « la rupture est repoussée du tour 06 au tour 07 » et reposait entièrement sur
+ce verdict-là. Un lancer de pièce publié comme un résultat. Ce qui le remplace ci-dessus ne
+passe par aucun seuil et dit une chose plus faible et plus solide.
+
+### ⭐ Ce que l'érosion dit, en refusant de bouger
+
+À profondeur égale, l'érosion est de **4,0 % par tour pour les quatre campagnes** — constante
+sur un facteur huit de pas.
+
+> **Le pas du rayon décide OÙ la surface se pose, pas combien elle en perd.**
+
+Deux mesures indépendantes le disent : l'α bouge d'un facteur trois quand l'érosion ne bouge
+pas du tout, et l'écart entre nappes reste à 102–116 µm ([`44`](44_ou_la_chaine_se_trouve.md)
+§4) dans les quatre cas — donc le rayon atterrit sur la **bonne** feuille partout, y compris
+là où l'α est mauvais. Ce qui se dégrade n'est pas *quelle* feuille est trouvée.
+
+⚠ **Une hypothèse énoncée, mesurée, et réfutée** : j'ai supposé qu'un pas trop fin faisait
+s'arrêter le rayon **avant** la nappe suivante, ce qui se serait vu sur un écart plus petit.
+Mesuré : 115 µm à pas 0,125 sur toute la chaîne, indistinguable des 113 et 114 des deux
+autres. À profondeur égale la tendance existe mais est minuscule (116 → 102 µm) et va dans le
+sens prédit sans en avoir l'ampleur. **Le mécanisme de la dégradation reste inconnu.** Les
+leviers non sondés sont `neighbor_max_distance`, `neighbor_threshold` et
+`neighbor_min_clearance`.
+
+⚠ **Et le chiffre d'érosion de ce tableau porte sur l'aire de GRILLE.** Sur l'aire utile il
+vaut 12,8 à 13,0 % par tour, à profondeur égale — également constant sur le facteur huit.
+Une érosion lue sur toute la longueur de chaque chaîne semblait au contraire suivre le pas
+(13,2 → 18,0 %) : c'était entièrement l'artefact de profondeurs inégales.
 
 ## 7. ⭐⭐ Ce que les trois campagnes disent ensemble
 

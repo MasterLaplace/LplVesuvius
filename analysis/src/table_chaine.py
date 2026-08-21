@@ -155,13 +155,175 @@ def verifier() -> int:
     return 1 if echecs else 0
 
 
+def pas_du_rayon(racine: Path) -> float | None:
+    """Le `neighbor_step` reellement utilise, lu dans le meta d'un maillage produit avec lui.
+
+    ⚠⚠ PAS depuis le nom du dossier. « Le nom d'un dossier n'est pas une mesure » est un
+    piege deja paye ici : un dossier nomme `PHerc1447_officiel` contenait un segment a
+    α = +1,02. Le traceur ecrit ses parametres dans le `meta.json` de ce qu'il produit
+    (`vc_gsfs_params`), donc la valeur se lit a la source.
+    """
+    for meta in sorted(racine.glob("spire*/trace/*/meta.json")):
+        try:
+            d = json.loads(meta.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            continue
+        v = (d.get("vc_gsfs_params") or {}).get("neighbor_step")
+        if v is not None:
+            return float(v)
+    return None
+
+
+def comparer(racines: list[Path], voxel_um: float, docs: Path) -> dict:
+    """Comparer plusieurs campagnes d'enchainement A PROFONDEUR EGALE.
+
+    ⚠⚠ Deux regles, et chacune corrige une erreur reellement commise dans ce depot.
+
+    **A profondeur egale.** Une chaine se degrade avec le rang -- le meilleur predicteur
+    d'un echec de spire est son NUMERO (`44` §8) -- donc comparer une campagne de 7 tours a
+    une de 11 sur un taux « par tour » fait passer la profondeur pour un effet du reglage.
+    Mesure : le taux d'erosion des quatre campagnes lu sur toute leur longueur allait de
+    13,2 a 18,0 % et semblait suivre le pas ; a profondeur egale il est de 12,8 a 13,0 %,
+    c'est-a-dire constant sur un facteur HUIT de pas. Toute la tendance etait l'artefact.
+
+    **Sans seuil.** On compare des α et des aires, jamais des COMPTES de verdicts. Un compte
+    de verdicts est un compte de franchissements de seuil, et 9 des 40 verdicts de ce depot
+    ont un α a moins de 0,2 du seuil quand l'instrument ne discrimine pas a ±0,2 pres.
+    """
+    campagnes = []
+    for r in racines:
+        lignes = depouiller(r, voxel_um, docs)
+        if lignes:
+            campagnes.append({"nom": r.name, "racine": str(r), "lignes": lignes})
+    if len(campagnes) < 2:
+        return {"campagnes": campagnes, "raison": "moins de deux campagnes lisibles"}
+    # ⚠ La profondeur commune est celle de la campagne la plus COURTE. Prendre la plus
+    # longue et completer les autres reviendrait a comparer du vide a des mesures.
+    profondeur = min(len(c["lignes"]) for c in campagnes)
+    for c in campagnes:
+        tronc = c["lignes"][:profondeur]
+        alphas = sorted(l["alpha"] for l in tronc)
+        c["profondeur"] = profondeur
+        c["alpha_moyen"] = sum(alphas) / len(alphas)
+        c["alpha_median"] = alphas[len(alphas) // 2]
+        c["alpha_max"] = alphas[-1]
+        a0, a1 = tronc[0]["aire_grille_cm2"], tronc[-1]["aire_grille_cm2"]
+        c["erosion_par_tour"] = (100 * (1 - a1 / a0) / (profondeur - 1)
+                                 if a0 and profondeur > 1 else None)
+        c["longueur_reelle"] = len(c["lignes"])
+        c["pas_du_rayon"] = pas_du_rayon(Path(c["racine"]))
+    return {"campagnes": campagnes, "profondeur_commune": profondeur}
+
+
+# ⚠ La figure vit ici et non dans un `figure_*.py` separe : un producteur, un consommateur,
+# et l'isoler creerait un fichier dont la seule fonction serait de relire le JSON que
+# celui-ci vient d'ecrire.
+def dessiner_comparaison(res: dict, sortie: Path) -> None:
+    """La courbe en U du pas du rayon : α contre pas, a profondeur egale.
+
+    ⭐ Deux courbes et pas une : l'α MOYEN dit ce que la campagne vaut en gros, l'α MAX dit
+    ce que vaut son pire tour -- et c'est le pire tour qui casse une chaine. Une figure qui
+    ne montrerait que la moyenne cacherait qu'a pas 1,0 un tour part a +1,475.
+
+    ⚠ Aucun seuil n'est trace. Les verdicts sont des franchissements de seuil et 9 des 40
+    verdicts du depot sont a moins de 0,2 du leur ; poser une ligne horizontale ici
+    inviterait a relire la figure en comptant des cotes de la ligne.
+    """
+    from PIL import Image, ImageDraw, ImageFont
+
+    pts = [(c["pas_du_rayon"], c["alpha_moyen"], c["alpha_max"], c["nom"])
+           for c in res["campagnes"] if c.get("pas_du_rayon")]
+    if len(pts) < 2:
+        return
+    pts.sort()
+    L, H = 900, 600
+    X0, X1, Y0, Y1 = 110, 830, 450, 110
+    img = Image.new("RGB", (L, H), (255, 255, 255))
+    art = ImageDraw.Draw(img)
+    try:
+        f_t = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 16)
+        f_n = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 12)
+        f_p = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 11)
+    except OSError:
+        f_t = f_n = f_p = ImageFont.load_default()
+    AMBRE, ENCRE, GRIS = (196, 116, 24), (30, 30, 30), (150, 150, 150)
+
+    art.text((26, 22), "Le pas du rayon a un optimum", fill=ENCRE, font=f_t)
+    art.text((26, 44), f"α mesuré sur les {res['profondeur_commune']} premiers tours de "
+                       f"chaque campagne — à profondeur ÉGALE, sans seuil",
+             fill=(110, 110, 110), font=f_n)
+
+    import math
+    lo, hi = math.log(min(p[0] for p in pts)), math.log(max(p[0] for p in pts))
+    amax = max(p[2] for p in pts) * 1.12
+
+    def px(pas):
+        return X0 + (X1 - X0) * (math.log(pas) - lo) / (hi - lo)
+
+    def py(al):
+        return Y0 - (Y0 - Y1) * (al / amax)
+
+    art.line([X0, Y0, X1, Y0], fill=GRIS)
+    art.line([X0, Y0, X0, Y1], fill=GRIS)
+    for al in (0.0, 0.5, 1.0, 1.5):
+        if al <= amax:
+            y = py(al)
+            art.line([X0 - 4, y, X1, y], fill=(240, 240, 240))
+            art.text((X0 - 46, y - 7), f"{al:+.1f}", fill=(140, 140, 140), font=f_p)
+    for pas, _, _, _ in pts:
+        art.text((px(pas) - 14, Y0 + 10), f"{pas:g}", fill=(120, 120, 120), font=f_p)
+    art.text((X0 + (X1 - X0) // 2 - 60, Y0 + 30), "pas du rayon (échelle log)",
+             fill=(120, 120, 120), font=f_p)
+    art.text((26, Y1 - 24), "α", fill=(120, 120, 120), font=f_n)
+
+    for (pa, ma, xa, _), (pb, mb, xb, _) in zip(pts, pts[1:]):
+        art.line([px(pa), py(xa), px(pb), py(xb)], fill=(228, 214, 198), width=3)
+        art.line([px(pa), py(ma), px(pb), py(mb)], fill=AMBRE, width=3)
+    meilleur = min(pts, key=lambda t: t[1])
+    for pas, moy, mx, nom in pts:
+        art.ellipse([px(pas) - 5, py(mx) - 5, px(pas) + 5, py(mx) + 5],
+                    outline=(190, 170, 145), width=2)
+        art.ellipse([px(pas) - 5, py(moy) - 5, px(pas) + 5, py(moy) + 5], fill=AMBRE)
+        art.text((px(pas) + 10, py(mx) - 7), f"{mx:+.2f}", fill=(170, 150, 125), font=f_p)
+        art.text((px(pas) + 10, py(moy) - 7), f"{moy:+.2f}", fill=AMBRE, font=f_p)
+    # ⚠ Pas d'emoji dans une image : DejaVu ne les porte pas et ⭐ sort en carré vide.
+    art.text((px(meilleur[0]) - 20, py(meilleur[1]) + 14), "^ optimum",
+             fill=AMBRE, font=f_p)
+
+    art.ellipse([X0 + 8, Y1 + 4, X0 + 16, Y1 + 12], fill=AMBRE)
+    art.text((X0 + 22, Y1 + 2), "α moyen de la campagne", fill=(110, 110, 110), font=f_p)
+    art.ellipse([X0 + 190, Y1 + 4, X0 + 198, Y1 + 12], outline=(190, 170, 145), width=2)
+    art.text((X0 + 204, Y1 + 2), "α du PIRE tour — c'est lui qui casse une chaîne",
+             fill=(110, 110, 110), font=f_p)
+
+    bas = Y0 + 60
+    art.text((26, bas), "Trop grossier ou trop fin, c'est trois fois pire : ce n'est pas "
+                        "une amélioration monotone, c'est une courbe en U.",
+             fill=(60, 60, 60), font=f_n)
+    ers = [c["erosion_par_tour"] for c in res["campagnes"]
+           if c["erosion_par_tour"] is not None]
+    if ers:
+        art.text((26, bas + 20), f"⚠ L'érosion, elle, ne bouge pas : "
+                                 f"{min(ers):.1f} % par tour sur un facteur "
+                                 f"{max(p[0] for p in pts) / min(p[0] for p in pts):g} de pas.",
+                 fill=(120, 120, 120), font=f_n)
+    art.text((26, bas + 40), "Donc le réglage décide OÙ la surface se pose, pas combien "
+                             "elle en perd.", fill=(120, 120, 120), font=f_n)
+    sortie.parent.mkdir(parents=True, exist_ok=True)
+    img.save(sortie)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("racine", nargs="?", type=Path)
+    ap.add_argument("racine", nargs="*", type=Path)
+    ap.add_argument("--comparer", action="store_true",
+                    help="comparer plusieurs campagnes à PROFONDEUR ÉGALE, sur les α et "
+                         "les aires — jamais sur des comptes de verdicts")
     ap.add_argument("--voxel-um", type=float, default=8.64)
     ap.add_argument("--docs", type=Path, default=RACINE / "docs")
     ap.add_argument("--json")
+    ap.add_argument("--figure", type=Path)
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()
     if a.verifier:
@@ -169,7 +331,43 @@ def main() -> int:
     if not a.racine:
         ap.error("donner la racine des spires, ou --verifier")
 
-    lignes = depouiller(a.racine, a.voxel_um, a.docs)
+    if a.comparer:
+        res = comparer(list(a.racine), a.voxel_um, a.docs)
+        if "raison" in res:
+            print(f"⚠ {res['raison']}", file=sys.stderr)
+            return 3
+        p = res["profondeur_commune"]
+        print(f"  À PROFONDEUR ÉGALE — les {p} premiers tours de chaque campagne\n")
+        print(f"  {'campagne':<18}{'pas':>7}{'longueur':>9}{'α moyen':>10}"
+              f"{'α médian':>10}{'α max':>9}{'érosion/tour':>14}")
+        for c in res["campagnes"]:
+            e, pr = c["erosion_par_tour"], c.get("pas_du_rayon")
+            print(f"  {c['nom']:<18}{(f'{pr:g}' if pr else '?'):>7}"
+                  f"{c['longueur_reelle']:>9}{c['alpha_moyen']:>+10.3f}"
+                  f"{c['alpha_median']:>+10.3f}{c['alpha_max']:>+9.3f}"
+                  f"{(f'{e:.1f} %' if e is not None else '—'):>14}")
+        meilleure = min(res["campagnes"], key=lambda c: c["alpha_moyen"])
+        print(f"\n  ⭐ α moyen le plus bas : {meilleure['nom']} "
+              f"({meilleure['alpha_moyen']:+.3f})")
+        ers = [c["erosion_par_tour"] for c in res["campagnes"]
+               if c["erosion_par_tour"] is not None]
+        if ers:
+            print(f"  ⚠ l'érosion, elle, ne bouge pas : de {min(ers):.1f} % à "
+                  f"{max(ers):.1f} % par tour — donc le réglage change où la surface se "
+                  f"pose,\n    pas combien elle en perd.")
+        print("\n  ⚠ aucun COMPTE de verdict ici : un compte est un compte de "
+              "franchissements de seuil,\n    et 9 des 40 verdicts du dépôt ont un α à "
+              "moins de 0,2 de ce seuil.")
+        if a.json:
+            Path(a.json).write_text(json.dumps(res, indent=2, ensure_ascii=False) + "\n",
+                                    encoding="utf-8")
+            print(f"\n  écrit : {a.json}")
+        if a.figure:
+            dessiner_comparaison(res, a.figure)
+            print(f"  figure : {a.figure}")
+        return 0
+
+    lignes = depouiller(a.racine[0], a.voxel_um, a.docs)
     if not lignes:
         print("aucune spire jugée sous cette racine", file=sys.stderr)
         return 3

@@ -304,8 +304,20 @@ def espacement(a: np.ndarray, b: np.ndarray) -> float:
     return float(np.median(d))
 
 
-def analyser_chaine(dossier: Path, voxel_um: float, prefere: str = "trace") -> dict:
+def analyser_chaine(dossier: Path, voxel_um: float, prefere: str = "trace",
+                    tours: int | None = None) -> dict:
+    """Mesurer une chaine, eventuellement TRONQUEE a ses `tours` premiers tours.
+
+    ⚠⚠ La troncature existe pour une raison precise : comparer deux campagnes de longueurs
+    differentes sur un taux « par tour » est faux. Le taux est une moyenne geometrique sur
+    toute la chaine, et l'erosion s'accelere avec la profondeur -- donc une chaine plus
+    longue affiche un taux plus eleve pour la seule raison qu'elle est allee plus loin.
+    C'est le meme confondant que celui qui a demasque « la rupture est une erosion » : deux
+    grandeurs qui croissent avec le rang ne se comparent qu'a rang egal.
+    """
     spires = sorted(d for d in dossier.iterdir() if d.is_dir())
+    if tours is not None:
+        spires = spires[:max(tours, 0)]
     maillages, noms, genres, chemins = [], [], [], []
     for s in spires:
         m, genre = maillage_de_spire(s, prefere)
@@ -572,6 +584,20 @@ def verifier() -> int:
             v("l'aire utile est calculée pour chaque spire",
               all("aire_valide_cm2" in s for s in res["spires"]))
 
+            # ⭐ La troncature : comparer deux campagnes de longueurs differentes sur un
+            # taux « par tour » est faux, donc l'outil doit savoir s'arreter au meme rang.
+            rt2 = analyser_chaine(racine, voxel_um=1.0, tours=2)
+            v("une chaîne peut être tronquée à ses N premiers tours",
+              len(rt2["spires"]) == 2, f"{len(rt2['spires'])} spires")
+            v("... et les tours gardés sont bien les PREMIERS",
+              [x["nom"] for x in rt2["spires"]] == ["spire00", "spire01"],
+              str([x["nom"] for x in rt2["spires"]]))
+            v("... et leurs mesures sont identiques à celles de la chaîne entière",
+              abs(rt2["spires"][1]["espacement_vox"]
+                  - res["spires"][1]["espacement_vox"]) < 1e-9)
+            v("tronquer à plus long que la chaîne la rend entière",
+              len(analyser_chaine(racine, 1.0, tours=99)["spires"]) == 4)
+
         # Une chaine plane doit etre REFUSEE, avec sa raison, et non mesuree.
         racine2 = Path(tmp) / "plate"
         ecrire_chaine(racine2, [plaque_plane(), plaque_plane()])
@@ -748,6 +774,9 @@ def main() -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("dossier", nargs="?", type=Path)
     ap.add_argument("--voxel-um", type=float, default=8.64)
+    ap.add_argument("--tours", type=int, default=None,
+                    help="ne mesurer que les N premières spires — pour comparer deux "
+                         "campagnes de longueurs différentes à profondeur ÉGALE")
     ap.add_argument("--maillage", choices=("trace", "plat"), default="trace",
                     help="lequel des deux maillages d'une spire mesurer (défaut : celui "
                          "que la chaîne a fait pousser)")
@@ -763,7 +792,7 @@ def main() -> int:
         print(f"absent : {a.dossier}", file=sys.stderr)
         return 1
 
-    res = analyser_chaine(a.dossier, a.voxel_um, a.maillage)
+    res = analyser_chaine(a.dossier, a.voxel_um, a.maillage, a.tours)
     if not res["spires"]:
         print(f"⚠ {res.get('raison', 'rien à mesurer')}", file=sys.stderr)
         return 1
