@@ -267,6 +267,26 @@ est établi, c'est qu'il n'y a pas de relation d'ensemble — ce qui suffit à n
 ⚠ Conséquence pratique : essayer K candidats par tour coûte **2K rendus**. C'est ce prix-là
 ou rien.
 
+## 6quater. ⏳ Le pas du rayon : trois tours identiques, donc ce n'est pas l'échantillonnage
+
+`gen_neighbor` arrête son rayon au **premier** échantillon au-dessus du seuil, par pas de
+`neighbor_step` voxels. Un pas plus fin localise donc la nappe plus précisément, et c'était
+le dernier levier mécanique non testé pour « pourquoi un tour rate ».
+
+| spire | pas 1,0 | pas 0,5 |
+|---|---:|---:|
+| 00 (contrôle) | +0,000 | +0,000 |
+| 01 | +0,000 | +0,000 |
+| 02 | +0,190 | **+0,160** |
+
+⚠ **Trois tours, aucune différence utile.** Diviser le pas par deux ne change rien à ce que
+le rayon trouve — donc les tours qui ratent ne ratent pas par manque de résolution le long
+du rayon. C'est une cause de moins, et elle coûtait un doublement du travail par tour.
+
+⏳ Campagne en cours : les tours 03 à 06 diront si ça reste vrai là où la chaîne à pas 1,0
+se dégrade (+0,532) puis casse (+1,475). Tant qu'ils manquent, la conclusion ci-dessus ne
+porte que sur les trois premiers tours.
+
 ## 7. ⭐⭐ Ce que les trois campagnes disent ensemble
 
 | ce qu'on a essayé | ce que ça fait à la surface | α |
