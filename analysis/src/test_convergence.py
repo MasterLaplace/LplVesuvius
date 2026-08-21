@@ -138,15 +138,39 @@ def main() -> int:
     ap.add_argument("--serie", action="append", default=[],
                     help="couches:écart,couches:écart… (répétable)")
     ap.add_argument("--nom", action="append", default=[])
+    ap.add_argument("--depuis", action="append", default=[], metavar="JSON[=nom]",
+                    help="reprendre les séries d'un verdict déjà écrit (répétable) ; "
+                         "« fichier.json=nom » renomme la série")
     ap.add_argument("--json")
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()
     if a.verifier:
         return verifier()
-    if not a.serie:
-        ap.error("donner au moins une --serie, ou --verifier")
+    # ⚠⚠ Rassembler des verdicts DÉJÀ écrits plutôt que de recopier leurs nombres à la
+    # main. Une figure qui compare trois surfaces a besoin des trois séries dans un seul
+    # fichier ; les retaper est le mode de panne que ce dépôt a payé plusieurs fois — un
+    # chiffre juste au moment où on le lit et faux dès que la mesure bouge.
+    reprises = []
+    for spec in a.depuis:
+        chemin, _, renomme = spec.partition("=")
+        p_json = Path(chemin)
+        if not p_json.is_file():
+            print(f"⚠ absent, ignoré : {chemin}", file=sys.stderr)
+            continue
+        for serie in json.loads(p_json.read_text(encoding="utf-8")).get("series", []):
+            if renomme:
+                serie["nom"] = renomme
+            reprises.append(serie)
 
-    sorties = []
+    if not a.serie and not reprises:
+        ap.error("donner au moins une --serie ou un --depuis, ou --verifier")
+
+    sorties = list(reprises)
+    for r in reprises:
+        pts = "  ".join(f"{n}c→{e:.1f}" for n, e in r["serie"])
+        print(f"\n  {r['nom']}  (repris)\n    {pts}\n    α = {r.get('alpha', 0.0):+.2f} "
+              f"— {r.get('verdict', '?')}")
+
     for i, brut in enumerate(a.serie):
         nom = a.nom[i] if i < len(a.nom) else f"série {i + 1}"
         serie = [(int(p.split(":")[0]), float(p.split(":")[1])) for p in brut.split(",")]

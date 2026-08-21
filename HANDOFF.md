@@ -169,7 +169,29 @@ Même famille que « deux écrivains, un fichier de log » — payé le même jo
 `temoins.sh`, dont la sortie mélangée annonçait **à la fois** « TOUS LES TÉMOINS PASSENT »
 et « 1 batterie en échec », avec des NUL entre les deux.
 
-⏳ **DEUX CAMPAGNES TOURNENT** (détachées, chaînées) :
+⭐⭐⭐ **RÉSULTAT DU 2026-08-21 — la boucle tourne, et 318 points ne suffisent pas**
+([`42`](docs/42_la_boucle_tourne_et_ne_suffit_pas.md)). Le seam `--resume --rewind-gen
+--correct` **fonctionne mécaniquement** : la reprise lit le fichier et produit une surface
+différente. Mais à conception appariée (même graine, même volume, mêmes paramètres, seuls
+les points diffèrent) :
+
+| | aire | croisements | **α** |
+|---|---:|---:|---:|
+| témoin | 19,82 cm² | **0** | **+0,98** |
+| corrigé, 318 points | 20,65 cm² | **11 753** | **+1,03** |
+
+⚠⚠ La correction change la trace et **pas sa nature**. Diagnostic mesuré : **318 points de
+passage contre 56 630 points de grille** (0,56 % de la surface) avec un `correction_weight`
+qui vaut **1,0 par défaut**, le même ordre que `DIST` qui s'applique partout. Un coup de
+pouce local, pas une réorientation.
+⭐ Levier suivant, jamais réglé ici : **`correction_weight`** — balayage `POIDS="1 100"`
+ajouté à `tools/boucle_de_correction.sh`, chaîné derrière le run en cours.
+
+⚠ Et ça retire son dernier appui à **l'hypothèse qui inverse** : une trace passe de 0 à
+11 753 croisements sans que α s'améliore. Beaucoup de croisements n'est ni un symptôme de
+bon suivi ni son contraire.
+
+⏳ **CAMPAGNES** (détachées) :
 ```bash
 tail -f .lances/convergence_des_essais-20260820-*.log   # les 17 essais de 26, rejugés
 tail -f .lances/leviers_de_perte-20260820-*.log         # sdt_weight et les fibres h+v

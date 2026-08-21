@@ -1,0 +1,58 @@
+{
+  "series": [
+    {
+      "verdict": "suit la fenêtre",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement",
+      "serie": [
+        [
+          41,
+          187.24
+        ],
+        [
+          161,
+          711.51
+        ]
+      ],
+      "croissance": 3.7999893185216833,
+      "elargissement": 3.926829268292683,
+      "alpha": 0.97599556428928,
+      "nom": "témoin, sans correction"
+    },
+    {
+      "verdict": "suit la fenêtre",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement",
+      "serie": [
+        [
+          41,
+          168.52
+        ],
+        [
+          161,
+          692.79
+        ]
+      ],
+      "croissance": 4.1110253975789215,
+      "elargissement": 3.926829268292683,
+      "alpha": 1.033513017371047,
+      "nom": "corrigé, 318 points de passage"
+    },
+    {
+      "verdict": "converge",
+      "sens": "la distance ne bouge pas quand la fenêtre s'élargit — la matière est là, tout près",
+      "serie": [
+        [
+          31,
+          17.28
+        ],
+        [
+          81,
+          17.3
+        ]
+      ],
+      "croissance": 1.0011574074074074,
+      "elargissement": 2.6129032258064515,
+      "alpha": 0.0012043560159756108,
+      "nom": "segment officiel (bonne surface)"
+    }
+  ]
+}

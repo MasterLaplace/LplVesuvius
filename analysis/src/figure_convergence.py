@@ -102,7 +102,11 @@ def main() -> int:
         for n, e in serie:
             art.ellipse([px(n) - 5, py(e) - 5, px(n) + 5, py(e) + 5], fill=c)
         nf, ef = serie[-1]
-        art.text((px(nf) + 12, py(ef) - 7), f"α = {s['alpha']:+.2f}", fill=c, font=f_n)
+        # ⚠ Deux séries qui finissent au même endroit superposent leurs étiquettes et le
+        # chiffre devient illisible — vu sur 42 (+0,98 et +1,03 empilés au même pixel).
+        # On les décale par rang, ce qui coûte une ligne et rend la figure lisible.
+        art.text((px(nf) + 12, py(ef) - 7 + 15 * i), f"α = {s['alpha']:+.2f}",
+                 fill=c, font=f_n)
         art.text((14, 86 + i * 20), f"■ {s['nom']}", fill=c, font=f_n)
 
     bas = Y0 + 56

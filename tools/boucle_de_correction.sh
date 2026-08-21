@@ -24,6 +24,12 @@ ROULEAU=PHerc0358
 UM=9.362
 GENERATIONS=${GENERATIONS:-120}
 REWINDS=${REWINDS:-"5 40"}
+# ⚠⚠ POURQUOI UN BALAYAGE DE POIDS, mesure a l'appui (`42`) : 318 points de passage contre
+# 56 630 points de grille, soit 0,56 % de la surface, avec un `correction_weight` qui vaut
+# 1,0 par defaut -- le meme ordre que `DIST`, qui s'applique partout. Une correction a ce
+# poids est un coup de pouce local, pas une reorientation. La cle existe
+# (`GrowPatch.cpp:1311`, `applyJsonWeights`) et n'avait jamais ete reglee ici.
+POIDS=${POIDS:-"1 100"}
 RAYON=${RAYON:-128}
 B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 VOL="$B/$ROULEAU/volumes/20250821151737-9.362um-1.2m-113keV-masked.zarr"
@@ -114,10 +120,20 @@ cp -n "$T/trace/trace.log" "$T/trace.log" 2>/dev/null || true
 juger "$T" "$MT" "temoin"
 
 for G in $REWINDS; do
-  W="$DEST/corrige_gen$G"
+ for P in $POIDS; do
+  # ⚠ Le nom porte les DEUX variables. Une premiere version nommait par la generation
+  # seule : deux poids differents auraient ecrit dans le meme repertoire, et le second
+  # aurait trouve la trace du premier deja la et ne l'aurait jamais refaite -- un balayage
+  # qui rend deux fois le meme resultat en ayant l'air d'avoir teste deux reglages.
+  if [ "$P" = "1" ]; then W="$DEST/corrige_gen$G"; NOM="corrige_gen$G"
+  else W="$DEST/corrige_gen${G}_poids$P"; NOM="corrige_gen${G}_poids$P"; fi
   if [ ! -d "$W/trace" ]; then
     mkdir -p "$W/trace"
-    cp "$T/trace/seed.json" "$W/trace/seed.json"
+    python3 -c "
+import json
+p = json.load(open('$T/trace/seed.json'))
+if $P != 1: p['correction_weight'] = float($P)
+json.dump(p, open('$W/trace/seed.json','w'), indent=2)"
     ( cd "$W/trace" && timeout 7200 vc_grow_seg_from_seed -v "$B/$SURF" -t . -p seed.json \
         -s $GX $GY $GZ --resume "$MT" --rewind-gen "$G" --correct "$PTS" \
         > trace.log 2>&1 )
@@ -126,10 +142,11 @@ for G in $REWINDS; do
   if [ -z "$M" ]; then
     # ⚠ Un echec ici est un RESULTAT sur le seam, pas une panne du script : il veut dire
     # que la reprise corrigee ne produit rien, et c'est ce qu'il faut savoir.
-    echo "== corrige_gen$G : AUCUN MAILLAGE — la reprise corrigée ne produit rien"
+    echo "== $NOM : AUCUN MAILLAGE — la reprise corrigée ne produit rien"
     sed 's/^/   /' "$W/trace/trace.log" | tail -4
     continue
   fi
   cp -n "$W/trace/trace.log" "$W/trace.log" 2>/dev/null || true
-  juger "$W" "$M" "corrige_gen$G"
+  juger "$W" "$M" "$NOM"
+ done
 done

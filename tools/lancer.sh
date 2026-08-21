@@ -52,7 +52,12 @@ SCRIPT=${1:?usage: tools/lancer.sh [--fond] <script> [args...]}; shift
 # ⚠ Deux exemplaires du MEME script sont pires que deux campagnes differentes : ils
 # partagent leur repertoire de sortie, donc l'un lit les fichiers a moitie ecrits de
 # l'autre. Refuse par defaut ; `--force` pour le cas ou l'on sait ce qu'on fait.
-if [ "${LANCER_FORCE:-0}" != "1" ] && [ "${1:-}" != "--verifier" ] && [ "$SCRIPT" != "--verifier" ]; then
+# ⚠⚠ `--apres` EST la reponse au refus, donc le refus ne doit pas s'y appliquer. Premiere
+# version : le garde bloquait aussi un lancement `--apres`, tout en RECOMMANDANT `--apres`
+# dans son message d'erreur -- un refus qui conseille une commande qu'il refuse. Attrape en
+# le lancant, pas en le relisant.
+if [ -z "$APRES" ] && [ "${LANCER_FORCE:-0}" != "1" ] \
+   && [ "${1:-}" != "--verifier" ] && [ "$SCRIPT" != "--verifier" ]; then
   BASE=$(basename "$SCRIPT" .sh)
   for pf in "$RACINE"/.lances/"$BASE"-*.pid; do
     [ -f "$pf" ] || continue
