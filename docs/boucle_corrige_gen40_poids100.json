@@ -1,0 +1,15 @@
+{
+  "series": [
+    {
+      "verdict": "indecidable",
+      "raison": "une seule fenêtre",
+      "serie": [
+        [
+          41,
+          140.43
+        ]
+      ],
+      "nom": "corrige_gen40_poids100 (3603.094732 cm², 25 croisements)"
+    }
+  ]
+}

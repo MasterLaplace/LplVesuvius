@@ -116,6 +116,20 @@ sans dimension et comparable — c'est même pour ça qu'il a été choisi — m
 ⭐ **Le meilleur résultat reste `--rewind-gen 40` à poids 1** : α = +0,89 et un écart à
 161 couches en baisse de 27 %. Rembobiner **moins** dérange moins.
 
+⚠⚠ **Et le poids fort fait FUIR la surface — mesuré, puis la cellule a été arrêtée.**
+`correction_weight: 100` donne **204 cm²** à `--rewind-gen 5` et **3 603 cm²** à
+`--rewind-gen 40`, soit **182 fois** le témoin. Son rendu à 41 couches pèse **8,9 Go** et
+celui à 161 en aurait pesé une trentaine.
+
+La cellule a été interrompue **délibérément**, et la raison n'est pas le coût : un écart
+médian mesuré sur 3 603 cm² et un mesuré sur 19,8 cm² **n'échantillonnent pas le même
+rouleau**. Le chiffre obtenu (140,4 µm à 41 couches, le plus bas de toutes les variantes)
+serait le plus flatteur du tableau et le moins interprétable — exactement le genre de
+résultat que ce dépôt existe pour ne pas publier.
+
+> Ce qu'on retient du levier `correction_weight` : il ne réorienté pas la surface, **il la
+> laisse s'étendre**. Plus le poids monte, plus elle fuit.
+
 ⚠⚠ **Et aucune variante ne s'approche de +0,00.** La meilleure est à 0,89 ; le segment
 officiel est à 0,00. **Le seam de correction, à tous les réglages essayés, ne transforme pas
 une coupe radiale en suiveuse de feuille.**
