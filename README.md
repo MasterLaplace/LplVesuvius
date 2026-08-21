@@ -38,8 +38,9 @@ nôtres (α = +1,01) — à quatre spires de portée, le pic n'a toujours rien t
 |---|---|
 | dérouler, aplatir, rendre — de bout en bout | poser la surface **sur** une feuille **en partant d'une graine** — dix-sept essais, tous à α ≈ 1 ([`42`](docs/42_la_boucle_tourne_et_ne_suffit_pas.md)) |
 | juger une trace sans vérité terrain (3 instruments) | l'encre : le modèle de 2023 sort une **constante** à 8,6 µm ([`36`](docs/36_lorigine_de_la_pile.md) §5bis) |
-| choisir où commencer (`25`), à distance et pour rien (`G`) | tenir la chaîne **au-delà de six tours** : la 7ᵉ casse, et la grille perd 4,0 % par tour ([`43`](docs/43_la_chaine_des_spires.md)) |
-| ⭐⭐⭐ **enchaîner spire après spire** — 7 tours, **6 convergent, aucune en travers** au pas de rayon 0,5 ([`43`](docs/43_la_chaine_des_spires.md)) | — |
+| choisir où commencer (`25`), à distance et pour rien (`G`) | tenir la chaîne **au-delà de sept tours** : halver le pas du rayon **repousse** la rupture d'un tour, il ne la supprime pas ([`43`](docs/43_la_chaine_des_spires.md) §6quinquies) |
+| ⭐⭐⭐ **enchaîner spire après spire** — 9 tours, **6 convergent** au pas de rayon 0,25 ([`43`](docs/43_la_chaine_des_spires.md)) | savoir POURQUOI une spire casse : l'érosion est **réfutée**, le meilleur prédicteur est le simple **numéro** de la spire ([`44`](docs/44_ou_la_chaine_se_trouve.md) §8) |
+| ⭐⭐ **savoir où la chaîne est dans le rouleau** : écart entre nappes **113 µm**, donc elle avance bien d'**une feuille à la fois** ([`44`](docs/44_ou_la_chaine_se_trouve.md)) | recoller les spires en un morceau déroulé : ⚠ **la tâche était mal posée** — une chaîne radiale est une **colonne**, il faut une chaîne **tangentielle**, jamais tentée ([`44`](docs/44_ou_la_chaine_se_trouve.md) §7) |
 
 ⭐ **L'objectif est donc nommable** : pas « réduire l'écart », mais **faire converger la
 mesure**. Une trace qui converge suit une feuille, quelle que soit sa valeur.
@@ -63,12 +64,19 @@ Sept bandes : un segment officiel qui converge, puis **six spires que nous avons
 (α = +1,475), et la dégradation se **voit** — le treillis de fibres cède la place à des
 plages grises lisses.
 
-⭐⭐⭐ **Et en halvant un seul paramètre — le pas du rayon — la même chaîne passe à 6 sur 7,
-sans aucune rupture, et sans coûter un pouce de surface** :
+⭐⭐⭐ **Et en halvant un seul paramètre — le pas du rayon — la même chaîne va deux tours plus
+loin**, neuf nappes, **6 convergentes**, la rupture repoussée du tour 06 au tour 07 :
 
-![la chaine a pas de rayon 0,5](docs/images/43_chaine_pas05_rendus.jpg)
+![la chaine a pas de rayon 0,25, neuf nappes](docs/images/43_chaine_pas025_rendus.jpg)
 
-Détail : [`43`](docs/43_la_chaine_des_spires.md).
+⚠ Ce que ces neuf bandes **sont** est maintenant mesuré, et ce n'est pas un morceau de rouleau
+déroulé : c'est une **colonne** de neuf feuilles dans une même fenêtre angulaire, à 113 µm
+l'une de l'autre, chacune couvrant **10 % d'un tour**. Il en faudrait au moins huit côte à côte
+pour fermer un seul tour.
+
+![ou la chaine se trouve dans le rouleau](docs/images/44_geometrie_chaine.png)
+
+Détail : [`43`](docs/43_la_chaine_des_spires.md) et [`44`](docs/44_ou_la_chaine_se_trouve.md).
 
 ### Et voici la cible, assemblée
 
@@ -249,7 +257,8 @@ priorisee. A lire en premier si vous reprenez ce chantier.
 | **[`docs/40_le_rouleau_entier.md`](docs/40_le_rouleau_entier.md)** | ⭐⭐⭐ **la cible, en une image** : 44 spires consecutives d'un rouleau, sans un trou, assemblees depuis les cartes d'encre publiees. Le deroulement est le leur, l'ordre est le notre — et c'est la reference que notre chaine doit egaler |
 | **[`docs/41_marcher_le_long_dune_nappe.md`](docs/41_marcher_le_long_dune_nappe.md)** | ⭐⭐⭐ **le maillon manquant de `39`, construit** : suivre une nappe par tenseur de structure + recentrage sur la crete, et ecrire les points de passage que `--correct` sait relire. Temoin negatif : « au plus proche » quitte sa spire de 5,9 voxels la ou la marche reste a 0,67 |
 | **[`docs/42_la_boucle_tourne_et_ne_suffit_pas.md`](docs/42_la_boucle_tourne_et_ne_suffit_pas.md)** | ⭐⭐⭐ **la boucle de correction entiere, exercee pour la premiere fois** : le seam fonctionne, la trace change (0 → 11 753 croisements) et son α NE change pas (+0,98 → +1,03). 318 points contre 56 630 : un coup de pouce local, pas une reorientation |
-| **[`docs/43_la_chaine_des_spires.md`](docs/43_la_chaine_des_spires.md)** | ⭐⭐⭐ **six tours tiennent, le septieme casse** : un segment officiel qui converge, puis six spires generees par `mode: gen_neighbor`. 4 sur 7 convergent, 0 en travers jusqu'a la 7e (α = +1,475). Premiere fois qu'une surface que NOUS produisons converge — et l'erosion (4,0 % par tour) borne la chaine avant la qualite |
+| **[`docs/43_la_chaine_des_spires.md`](docs/43_la_chaine_des_spires.md)** | ⭐⭐⭐ **la chaine tient plusieurs tours, puis casse** : un segment officiel qui converge, puis jusqu'a huit spires generees par `mode: gen_neighbor`. Au pas de rayon 0,25, **6 sur 9 convergent** et la rupture tombe au tour 07 (α = +0,702 puis +1,321) au lieu du tour 06. Premiere fois qu'une surface que NOUS produisons converge — et la lecon de methode : **les premiers tours d'une chaine ne discriminent pas** |
+| **[`docs/44_ou_la_chaine_se_trouve.md`](docs/44_ou_la_chaine_se_trouve.md)** | ⭐⭐ **ou la chaine est dans le rouleau**, mesure sans connaitre l'axe : ecart entre nappes **113 µm** (elle avance d'une feuille a la fois), erosion de l'aire UTILE **15,6 % par tour** (et non 4,0 %, qui portait sur la grille), chaque fenetre couvre **10 % d'un tour**. Deux resultats negatifs qui comptent : le **rayon** d'une nappe est refuse (deux estimateurs en desaccord d'un facteur deux) et l'hypothese « la rupture est une erosion » est **refutee** par le simple numero de spire |
 
 ## Rejouer
 

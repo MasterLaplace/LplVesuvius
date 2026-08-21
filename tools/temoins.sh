@@ -570,6 +570,7 @@ run "encre : σ contre témoin"  uv run python "$ROOT/analysis/src/comparer_encr
 # fenetre, deux fenetres trop proches, un ecart nul -- parce que sans eux il rendrait un
 # verdict sur rien, et qu'un test incapable d'echouer est ce que ce depot traque.
 run "convergence de la trace"  uv run python "$ROOT/analysis/src/test_convergence.py" --verifier
+run "géométrie de la chaîne"   uv run python "$ROOT/analysis/src/geometrie_chaine.py" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
@@ -641,16 +642,14 @@ fi
 # ⚠ Celui-ci n'est pas une batterie d'assertions mais un GARDE-FOU de fraicheur : il
 # recalcule les chiffres publies depuis leurs JSON et les cherche dans les documents.
 printf '  %-30s ' "chiffres de la soumission"
-if uv run python "$ROOT/analysis/src/verifier_chiffres.py" \
-      "$ROOT/docs/21_texte_de_soumission.md" \
-      "$ROOT/docs/19_ecarter_avant_de_payer.md" \
-      "$ROOT/docs/20_le_champ_de_correction.md" \
-      "$ROOT/docs/12_profondeur_de_surface.md" \
-      "$ROOT/docs/25_une_graine_choisie_sur_la_planeite.md" \
-      "$ROOT/docs/33_la_carte_nest_pas_resolue.md" \
-      "$ROOT/docs/34_un_verdict_qui_ne_mesure_rien.md" \
-      "$ROOT/docs/35_le_tirage_sur_douze_rouleaux.md" \
-      "$ROOT/docs/40_le_rouleau_entier.md" >/tmp/chiffres.log 2>&1; then
+# ⚠⚠ TOUS les documents, pas une liste tenue a la main. La version precedente en nommait
+# neuf, choisis un par un -- donc la couverture du garde-fou dependait de quelqu'un qui se
+# souvienne d'ajouter un nom. Elle a dument echoue : les chiffres de `43` (la chaine des
+# spires) etaient recalcules et cherches dans des documents qui ne les citent pas, et
+# rapportes « absents » pendant des jours. Meme classe de panne qu'une sentinelle qu'il faut
+# deplacer a chaque ajout : le remede n'est pas de la deplacer mieux, c'est de ne plus avoir
+# a le faire.
+if uv run python "$ROOT/analysis/src/verifier_chiffres.py" "$ROOT"/docs/*.md >/tmp/chiffres.log 2>&1; then
   printf '✅ %s\n' "$(grep -c '✅' /tmp/chiffres.log) chiffres retrouves"
 else
   printf '❌ ECHEC\n'; sed 's/^/       /' /tmp/chiffres.log | tail -6; FAIL=$((FAIL + 1))

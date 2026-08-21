@@ -95,10 +95,33 @@ def main() -> int:
 
     # ⚠⚠ Une palette de TROIS couleurs pour SEPT series rend la legende inutilisable : le
     # lecteur ne peut pas relier une ligne a son nom, et une figure qu'on ne peut pas lire
-    # ne prouve rien. Paye sur `43` (la chaine de spires). Huit teintes distinctes, et le
-    # cycle ne recommence qu'au-dela.
-    couleurs = [(60, 130, 90), (190, 85, 40), (110, 110, 180), (200, 150, 40),
-                (60, 140, 170), (170, 70, 130), (110, 130, 60), (140, 90, 60)]
+    # ne prouve rien. Paye sur `43` (la chaine de spires).
+    # ⚠⚠ La deuxieme version epinglait HUIT teintes en disant « le cycle ne recommence
+    # qu'au-dela ». Il a recommence : une chaine de NEUF spires a donne a la spire 8
+    # (α = +1,32, la pire) la couleur exacte de la spire 0 (le controle, α = 0) -- les deux
+    # series les plus opposees de la figure, indistinguables. La palette est donc ENGENDREE
+    # depuis le nombre de series : elle ne peut plus cycler, quel qu'il soit.
+    import colorsys
+    n_s = max(len(series), 1)
+    couleurs = []
+    for i in range(n_s):
+        # Teintes reparties sur la roue ; la valeur alterne legerement pour que deux teintes
+        # voisines se separent aussi en clarte et pas seulement en couleur.
+        h = (i / n_s + 0.30) % 1.0
+        r, g, b = colorsys.hsv_to_rgb(h, 0.62, 0.58 + 0.10 * (i % 2))
+        couleurs.append((int(r * 255), int(g * 255), int(b * 255)))
+
+    # ⚠ Les etiquettes α se chevauchaient encore : un decalage par RANG suppose que deux
+    # series de rangs eloignes finissent loin l'une de l'autre, ce qui est faux. On place
+    # donc par y CROISSANT avec un ecart minimal impose -- une vraie de-collision.
+    fins = sorted(range(len(series)), key=lambda i: py(sorted(series[i]["serie"])[-1][1]))
+    y_etiquette, precedent = {}, None
+    for i in fins:
+        vise = py(sorted(series[i]["serie"])[-1][1]) - 7
+        pose = vise if precedent is None else max(vise, precedent + 15)
+        y_etiquette[i] = pose
+        precedent = pose
+
     for i, s in enumerate(series):
         c = couleurs[i % len(couleurs)]
         serie = sorted(s["serie"])
@@ -107,13 +130,7 @@ def main() -> int:
         for n, e in serie:
             art.ellipse([px(n) - 5, py(e) - 5, px(n) + 5, py(e) + 5], fill=c)
         nf, ef = serie[-1]
-        # ⚠ Deux séries qui finissent au même endroit superposent leurs étiquettes et le
-        # chiffre devient illisible — vu sur 42 (+0,98 et +1,03 empilés au même pixel).
-        # On les décale par rang, ce qui coûte une ligne et rend la figure lisible.
-        # ⚠ Le decalage suit le rang ET alterne de cote quand il y a beaucoup de series,
-        # sinon la colonne d'etiquettes sort du cadre.
-        art.text((px(nf) + 12, py(ef) - 7 + 16 * (i - len(series) // 2)),
-                 f"α = {s['alpha']:+.2f}", fill=c, font=f_n)
+        art.text((px(nf) + 12, y_etiquette[i]), f"α = {s['alpha']:+.2f}", fill=c, font=f_n)
         art.text((14, 86 + i * 20), f"■ {s['nom']}", fill=c, font=f_n)
 
     bas = Y0 + 56

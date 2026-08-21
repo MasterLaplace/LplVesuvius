@@ -39,14 +39,49 @@ from derive_ou_loterie import permutation, spearman  # noqa: E402
 # α au-dela duquel le vrai juge dit « en travers » (seuil de test_convergence).
 SEUIL_TRAVERS = 0.75
 
+# ⭐ Les candidats, du plus cher au moins cher. `au_bord` et `ecart_un_rendu_um` coutent UN
+# rendu ; `erosion`, `arc_court` et `aire_petite` n'en coutent AUCUN -- ils se lisent dans le
+# maillage. Un proxy gratuit qui predit α permettrait a une campagne de s'arreter d'elle-meme
+# avant de bruler des heures de rendu sur une surface qui a deja perdu sa matiere.
+# ⚠ Les candidats geometriques sont signes pour que « plus grand » veuille dire « pire » chez
+# tous : sans ca un ρ negatif et un ρ positif diraient la meme chose et la comparaison entre
+# candidats serait illisible.
+# ⚠⚠ `indice` n'est PAS un proxy, c'est le CONTROLE. L'erosion et α croissent tous deux avec
+# la profondeur dans la chaine, donc leur correlation pourrait etre entierement due a cette
+# cause commune. Si le simple numero de la spire predit α aussi bien que l'erosion, alors
+# l'erosion n'apporte aucune information et « la rupture est une erosion » n'est pas etabli.
+CANDIDATS = ("au_bord", "ecart_un_rendu_um", "erosion", "arc_court", "aire_petite", "indice")
+
 
 def etiquette_de(dossier: str) -> str:
     base = Path(dossier).name
     return "" if base == "spires" else base.removeprefix("spires_") + "_"
 
 
-def recolter(racine: Path, fenetre: int = 31) -> list[dict]:
+def geometries(racine: Path, voxel_um: float = 8.64) -> dict[str, dict]:
+    """Mesurer la geometrie de chaque campagne d'enchainement, sans passer par un JSON.
+
+    ⚠ On recalcule au lieu de relire un `docs/geometrie_*.json` : un fichier ecrit
+    hier est un chiffre juste au moment ou on l'a ecrit, et ce depot a deja publie une
+    mesure faite sur un binaire perime. La geometrie coute quelques secondes par chaine.
+    """
+    import geometrie_chaine as gc
+
+    out = {}
+    for d in sorted(racine.glob("spires*")):
+        if not d.is_dir():
+            continue
+        try:
+            r = gc.analyser_chaine(d, voxel_um)
+        except (OSError, ValueError):
+            continue
+        out[d.name] = {s["nom"]: s for s in r.get("spires", [])}
+    return out
+
+
+def recolter(racine: Path, fenetre: int = 31, geo: dict[str, dict] | None = None) -> list[dict]:
     """Apparier, pour chaque spire, la statistique d'UN rendu et l'α des DEUX."""
+    geo = geo or {}
     lignes = []
     for prof in sorted(glob.glob(str(racine / "spires*" / "spire*" / f"profil_{fenetre}c.json"))):
         p = Path(prof)
@@ -57,11 +92,20 @@ def recolter(racine: Path, fenetre: int = 31) -> list[dict]:
         d = json.loads(p.read_text(encoding="utf-8"))
         d = d[0] if isinstance(d, list) else d
         s = json.loads(verdict.read_text(encoding="utf-8"))["series"][0]
+        g = geo.get(campagne, {}).get(spire, {})
         lignes.append({
             "campagne": campagne, "spire": spire,
             "au_bord": d.get("au_bord_relief"),
             "part_plates": d.get("part_plates"),
             "ecart_un_rendu_um": d.get("ecart_trace_um_median"),
+            # ⭐ Candidats GEOMETRIQUES : ils ne coutent AUCUN rendu du tout, seulement une
+            # lecture du maillage. Si l'un d'eux predit α, une campagne d'enchainement peut
+            # s'arreter d'elle-meme avant de bruler des heures de rendu sur une surface qui
+            # a deja perdu sa matiere.
+            "erosion": (1.0 - g["fraction_valide"]) if "fraction_valide" in g else None,
+            "arc_court": (-g["arc_mm"]) if "arc_mm" in g else None,
+            "aire_petite": (-g["aire_valide_cm2"]) if "aire_valide_cm2" in g else None,
+            "indice": float(spire.removeprefix("spire")) if spire[-1].isdigit() else None,
             "alpha": s["alpha"], "verdict": s["verdict"],
         })
     return lignes
@@ -143,29 +187,40 @@ def main() -> int:
     ap.add_argument("--fenetre", type=int, default=31)
     ap.add_argument("--json")
     ap.add_argument("--verifier", action="store_true")
+    ap.add_argument("--sans-geometrie", action="store_true",
+                    help="ne pas mesurer les maillages (plus rapide, sans les candidats "
+                         "géométriques)")
+    ap.add_argument("--voxel-um", type=float, default=8.64)
     a = ap.parse_args()
     if a.verifier:
         return verifier()
 
-    lignes = recolter(a.racine, a.fenetre)
+    geo = {} if a.sans_geometrie else geometries(a.racine, a.voxel_um)
+    lignes = recolter(a.racine, a.fenetre, geo)
     if not lignes:
         print("aucune spire jugée des deux façons", file=sys.stderr)
         return 3
 
     print(f"{'campagne':<18}{'spire':<9}{'au bord':>9}{'plates':>8}"
-          f"{'écart 1 rendu':>15}{'α (2 rendus)':>14}")
+          f"{'écart 1 rendu':>15}{'érosion':>9}{'arc mm':>8}{'α (2 rendus)':>14}")
     for l in lignes:
+        e = l.get("erosion")
+        ac = l.get("arc_court")
         print(f"{l['campagne']:<18}{l['spire']:<9}"
               f"{(l['au_bord'] if l['au_bord'] is not None else -1):>9.3f}"
               f"{(l['part_plates'] if l['part_plates'] is not None else -1):>8.3f}"
-              f"{l['ecart_un_rendu_um']:>15.1f}{l['alpha']:>+14.3f}")
+              f"{l['ecart_un_rendu_um']:>15.1f}"
+              f"{(f'{e * 100:.0f} %' if e is not None else '—'):>9}"
+              f"{(f'{-ac:.1f}' if ac is not None else '—'):>8}"
+              f"{l['alpha']:>+14.3f}")
 
-    for clef in ("au_bord", "ecart_un_rendu_um"):
+    for clef in CANDIDATS:
         r = juger_le_juge(lignes, clef)
         if not r["assez"]:
             print(f"\n  {clef} : {r['n']} point(s), trop peu")
             continue
-        print(f"\n  {clef} contre α : ρ = {r['rho']:+.3f}  p = {r['p']:.3f}  (n = {r['n']})")
+        marque = "  (CONTRÔLE)" if clef == "indice" else ""
+        print(f"\n  {clef}{marque} contre α : ρ = {r['rho']:+.3f}  p = {r['p']:.3f}  (n = {r['n']})")
         print(f"    spires que le vrai juge condamne (α ≥ {SEUIL_TRAVERS}) : "
               f"{r['mauvaises']} — dont {r['mauvaises_signalees']} au-dessus de la médiane "
               f"du proxy")
@@ -178,11 +233,25 @@ def main() -> int:
         else:
             print("    ✅ relation détectable ; reste à vérifier qu'elle tient sur les cas durs")
 
+    juges = {c: juger_le_juge(lignes, c) for c in CANDIDATS}
+    ctrl = juges.get("indice", {})
+    if ctrl.get("assez"):
+        print(f"\n  ⚠⚠ CONTRÔLE — le simple numéro de spire prédit α à ρ = "
+              f"{ctrl['rho']:+.3f} (p = {ctrl['p']:.3f}).")
+        mieux = [c for c in CANDIDATS if c != "indice" and juges[c].get("assez")
+                 and juges[c]["rho"] > ctrl["rho"]]
+        if mieux:
+            print(f"     Battu par : {', '.join(mieux)} — ces candidats portent donc de "
+                  f"l'information que\n     la profondeur dans la chaîne ne porte pas.")
+        else:
+            print("     AUCUN candidat ne le bat : tous ne mesurent que la profondeur dans "
+                  "la chaîne,\n     et « la rupture est une érosion » n'est pas établi par "
+                  "ces corrélations.")
+
     if a.json:
         Path(a.json).write_text(json.dumps(
             {"spires": lignes,
-             "juges": {c: juger_le_juge(lignes, c)
-                       for c in ("au_bord", "ecart_un_rendu_um")}},
+             "juges": juges},
             indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         print(f"\n  écrit : {a.json}")
     return 0

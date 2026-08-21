@@ -1,0 +1,22 @@
+{
+  "series": [
+    {
+      "verdict": "converge",
+      "sens": "la distance ne bouge pas quand la fenêtre s'élargit — la matière est là, tout près",
+      "serie": [
+        [
+          31,
+          90.72
+        ],
+        [
+          81,
+          99.36
+        ]
+      ],
+      "croissance": 1.0952380952380953,
+      "elargissement": 2.6129032258064515,
+      "alpha": 0.09471669147121034,
+      "nom": "spire05 (? cm², 0 croisements)"
+    }
+  ]
+}

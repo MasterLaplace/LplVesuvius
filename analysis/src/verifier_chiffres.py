@@ -236,6 +236,91 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                              f"{fr(casse[0]['alpha'], 3)}",
                              f"{casse[0]['alpha']:+.3f}"], p.name))
 
+    # ⚠⚠ La chaine a pas 0,25 (`43` §6quinquies) : le compte de convergences et les alphas
+    # des spires qui cassent sont la revendication entiere de la section -- « halver le pas
+    # repousse la rupture d'un tour » n'a de sens que si ces nombres sont ceux-la.
+    p = racine / "docs" / "chaine_pas025_convergence.json"
+    if p.exists():
+        d = json.loads(p.read_text()).get("series", [])
+        if d:
+            conv = sum(1 for x in d if x.get("verdict") == "converge")
+            out.append(("convergences a pas 0,25",
+                        [f"**{conv}/{len(d)}", f"{conv}/{len(d)}",
+                         f"{conv} sur {len(d)}"], p.name))
+            for x in d:
+                if x.get("verdict") == "suit la fenêtre":
+                    a = x["alpha"]
+                    out.append((f"alpha de {x['nom']} a pas 0,25",
+                                [f"**+{fr(a, 3)}**", f"+{fr(a, 3)}",
+                                 f"{a:+.3f}"], p.name))
+
+    # ⚠⚠ La geometrie de la chaine (`44`) : ces cinq chiffres SONT la page. L'ecart entre
+    # nappes est le seul qui dise que la chaine avance d'une feuille a la fois ; l'erosion
+    # utile CORRIGE un chiffre publie dans `43` (4,0 % contre 15,6 %) ; et le nombre de
+    # fenetres par tour porte la conclusion structurelle. Si l'un bouge sans que la page
+    # bouge, la page annonce une chaine qui n'existe plus.
+    p = racine / "docs" / "geometrie_pas025.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        bons = [x for x in d.get("spires", []) if x.get("angle_rad", 0.0) > 0]
+        if len(bons) >= 2:
+            esp = sorted(x["espacement_um"] for x in bons
+                         if x.get("espacement_um") is not None)
+            if esp:
+                med = esp[len(esp) // 2]
+                out.append(("ecart median entre nappes",
+                            [f"**{med:.0f} µm**", f"{med:.0f} µm",
+                             f"médiane {med:.0f} µm"], p.name))
+                out.append(("plage des ecarts",
+                            [f"de {esp[0]:.0f} à {esp[-1]:.0f}",
+                             f"{esp[0]:.0f} à {esp[-1]:.0f}"], p.name))
+            a0, a1 = bons[0]["aire_valide_cm2"], bons[-1]["aire_valide_cm2"]
+            tours = len(bons) - 1
+            if a0 > 0 and a1 > 0 and tours:
+                par = 100 * (1 - (a1 / a0) ** (1 / tours))
+                out.append(("erosion UTILE par tour",
+                            [f"**{fr(par, 1)} % par tour**", f"{fr(par, 1)} % par tour",
+                             f"{par:.1f} % par tour"], p.name))
+                out.append(("aires utiles de la chaine",
+                            [f"{fr(a0, 2)} → {fr(a1, 2)} cm²",
+                             f"{a0:.2f} → {a1:.2f} cm²"], p.name))
+            f0 = bons[0]["fraction_valide"] * 100
+            f1 = bons[-1]["fraction_valide"] * 100
+            out.append(("part de sommets valides",
+                        [f"de {f0:.0f} % à {f1:.0f} %", f"{f0:.0f} % à {f1:.0f} %",
+                         f"{f0:.0f} % → {f1:.0f} %"], p.name))
+            nmin = min(x["spires_par_tour_min"] for x in bons)
+            out.append(("fenetres par tour (minorant)",
+                        [f"au moins **{nmin:.0f}**", f"au moins {nmin:.0f}",
+                         f"AU MOINS {nmin:.0f}"], p.name))
+            indet = sum(1 for x in bons if not x.get("rayon_determine"))
+            out.append(("nappes au rayon indetermine",
+                        [f"**{indet} nappes sur {len(bons)}**",
+                         f"{indet} nappes sur {len(bons)}",
+                         f"{indet} sur {len(bons)}"], p.name))
+            total = sum(x["aire_valide_cm2"] for x in bons)
+            out.append(("aire utile totale de la chaine",
+                        [f"**{fr(total, 1)} cm²**", f"{fr(total, 1)} cm²",
+                         f"{total:.1f} cm²"], p.name))
+
+    # ⚠⚠ Le CONTROLE de `44` §8 : si le rho de l'indice de spire cesse de battre les
+    # candidats, la page dit l'inverse de ce qui est mesure. C'est le seul chiffre de ce
+    # depot dont la valeur REFUTE une conclusion plutot que de la porter.
+    p = racine / "docs" / "juge_a_un_rendu.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        for clef, j in (d.get("juges") or {}).items():
+            if not j.get("assez"):
+                continue
+            # ⚠ La prose francaise ecrit « +0,445 » : signe ET virgule. Les variantes ne
+            # portaient que « 0,445 » et « +0.445 », donc AUCUNE ne matchait le document et
+            # six chiffres justes etaient rapportes absents. Un garde-fou qui crie au loup
+            # sur des chiffres corrects finit ignore.
+            signe = "+" if j["rho"] >= 0 else "−"
+            out.append((f"rho de {clef} contre alpha",
+                        [f"{signe}{fr(abs(j['rho']), 3)}", f"**{fr(j['rho'], 3)}**",
+                         f"ρ = {fr(j['rho'], 3)}", f"{j['rho']:+.3f}"], p.name))
+
     # ⚠⚠ Le test de convergence : les deux α sont la revendication ENTIERE de la section 11
     # de la soumission. Si l'un bouge et que le texte ne bouge pas, le texte annonce une
     # separation qui n'existe plus — et c'est la seule chose que cette section apporte.

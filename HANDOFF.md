@@ -291,6 +291,58 @@ test de convergence de `38`.
 que la graine n'était pas couverte par la prédiction publiée. Elle l'était. Corrigé : ça
 **lève** `CodecIndisponible`. ⚠ Les lectures zarr se font depuis **`experiments/`**.
 
+### ⭐⭐ SUITE DU 2026-08-21 — le pas du rayon, puis OÙ la chaîne se trouve
+
+**1. Le pas du rayon est LE levier, et ma conclusion provisoire était fausse.**
+`neighbor_step` 1,0 → 0,5 → 0,25. Chaînes complètes, jugées dans les mêmes fenêtres :
+
+| spire | pas 1,0 | pas 0,5 | **pas 0,25** |
+|---|---:|---:|---:|
+| 06 | **+1,475** ⚠⚠ | +0,583 | **+0,246** |
+| 07 | — | — | **+0,702** ⚠⚠ |
+| 08 | — | — | **+1,321** ⚠⚠ |
+| | 4/7, 1 casse | 6/7, 0 casse | **6/9, casse au 07** |
+
+> **Halver le pas ne supprime pas la rupture : il la repousse d'un tour.**
+
+⚠⚠ **La leçon de méthode, payée cher** : après trois tours identiques j'ai publié « le pas du
+rayon ne change rien ». Faux. **Les premiers tours d'une chaîne ne discriminent pas** — une
+chaîne ne se juge qu'au tour où la référence cède. Corollaire : une campagne d'enchaînement
+doit aller **jusqu'à la rupture de la référence**, sinon elle mesure le début facile.
+
+**2. ⭐⭐ [`44`](docs/44_ou_la_chaine_se_trouve.md) — où la chaîne se trouve dans le rouleau.**
+Nouvel instrument `analysis/src/geometrie_chaine.py` (39 témoins). Mesure sans connaître l'axe
+du rouleau : une ligne de grille circonférentielle **tourne**, une ligne axiale est **droite**.
+
+| ce qui est mesuré | valeur | portée |
+|---|---|---|
+| écart entre nappes | **113 µm** (100 à 138) | ⭐ le seul chiffre qui dise que la chaîne avance d'**une feuille à la fois** |
+| érosion de l'aire **utile** | **15,6 % / tour** | ⚠ **corrige** les 4,0 % de `43`, qui portaient sur l'aire de GRILLE |
+| sommets valides | **58 % → 23 %** | la grille se **creuse** autant qu'elle rétrécit |
+| couverture angulaire | **10 % d'un tour** | il en faudrait **au moins 8** côte à côte pour fermer un tour |
+| rayon d'une nappe | **REFUSÉ**, 9/9 | deux estimateurs en désaccord d'un **facteur 2** ; le gondolement (0,5 mm) est 10× l'écart entre nappes, donc un cercle n'est pas un modèle de cette surface |
+
+**3. ⚠⚠ Deux résultats NÉGATIFS qui changent la suite.**
+
+- **La tâche « recoller les spires en un morceau déroulé » était MAL POSÉE.** `gen_neighbor`
+  avance radialement, donc les nappes occupent la **même** fenêtre angulaire à 113 µm l'une de
+  l'autre. Dans un rouleau déroulé, deux nappes consécutives sont séparées par **une
+  circonférence entière** — celle qu'on ne possède pas. Une chaîne radiale est une
+  **colonne**. Il faut une chaîne **tangentielle**, qui suit UNE feuille autour du tour, et
+  **elle n'a jamais été tentée**. C'est elle qui produirait un morceau de rouleau déroulé.
+- **« La rupture est une érosion » est RÉFUTÉE.** `juge_a_un_rendu.py` généralisé à cinq
+  candidats plus un **contrôle** : le simple **numéro** de la spire prédit α à ρ = **+0,534**
+  (p = 0,001, 4 condamnées signalées sur 4), mieux que l'érosion (+0,415), l'arc (+0,444),
+  l'aire (+0,445) et les deux proxys qui coûtent un rendu. Tout ce qui a été mesuré n'est
+  qu'un proxy de la **profondeur dans la chaîne**. Contre-exemple qui ferme la porte :
+  `spires_repousse/spire03` a **93 %** de sommets valides et α = **+1,461**.
+
+⚠ Trois défauts de l'instrument trouvés par les vraies données, pas par relecture : la
+sentinelle d'invalidité vaut **`-1`** et non `(0,0,0)` (mon témoin testait ma propre
+hypothèse) ; une spire porte **deux** maillages (`trace/neighbor_out_*` poussé, `plat/`
+aplati) ; et l'axe circonférentiel est en **colonnes** pour `spire00`, en **rangées** pour les
+autres — le décider une fois rendait des rayons de **312 mètres**.
+
 ### Les deux pistes qui restent, par coût croissant
 
 | # | quoi | pourquoi maintenant |

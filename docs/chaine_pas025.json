@@ -1,0 +1,93 @@
+[
+  {
+    "spire": "spire00",
+    "grille": [
+      162,
+      149
+    ],
+    "aire_grille_cm2": 7.12,
+    "croisements": null,
+    "ecart_31c_um": 17.28,
+    "ecart_81c_um": 17.28,
+    "alpha": 0.0,
+    "verdict": "converge"
+  },
+  {
+    "spire": "spire01",
+    "grille": [
+      158,
+      145
+    ],
+    "aire_grille_cm2": 6.75,
+    "croisements": null,
+    "ecart_31c_um": 86.4,
+    "ecart_81c_um": 86.4,
+    "alpha": 0.0,
+    "verdict": "converge"
+  },
+  {
+    "spire": "spire02",
+    "grille": [
+      154,
+      141
+    ],
+    "aire_grille_cm2": 6.4,
+    "croisements": null,
+    "ecart_31c_um": 60.48,
+    "ecart_81c_um": 73.44,
+    "alpha": 0.202,
+    "verdict": "converge"
+  },
+  {
+    "spire": "spire03",
+    "grille": [
+      151,
+      138
+    ],
+    "aire_grille_cm2": 6.14,
+    "croisements": null,
+    "ecart_31c_um": 34.56,
+    "ecart_81c_um": 34.56,
+    "alpha": 0.0,
+    "verdict": "converge"
+  },
+  {
+    "spire": "spire04",
+    "grille": [
+      148,
+      135
+    ],
+    "aire_grille_cm2": 5.88,
+    "croisements": null,
+    "ecart_31c_um": 47.52,
+    "ecart_81c_um": 56.16,
+    "alpha": 0.174,
+    "verdict": "converge"
+  },
+  {
+    "spire": "spire05",
+    "grille": [
+      145,
+      132
+    ],
+    "aire_grille_cm2": 5.63,
+    "croisements": null,
+    "ecart_31c_um": 90.72,
+    "ecart_81c_um": 99.36,
+    "alpha": 0.095,
+    "verdict": "converge"
+  },
+  {
+    "spire": "spire06",
+    "grille": [
+      142,
+      129
+    ],
+    "aire_grille_cm2": 5.39,
+    "croisements": null,
+    "ecart_31c_um": 129.6,
+    "ecart_81c_um": 164.16,
+    "alpha": 0.246,
+    "verdict": "intermédiaire"
+  }
+]

@@ -295,6 +295,10 @@ montre** : la différence apparaît exactement là où la chaîne de référence
 identique au pas 1,0. Le gain est gratuit — le rayon fait le même trajet, il l'échantillonne
 seulement deux fois plus finement.
 
+⚠ Ces 4,0 % portent sur l'aire de la **grille**, sommets invalides compris. Sur l'aire
+réellement portée par de la matière, l'érosion est de **15,6 % par tour** —
+[`44`](44_ou_la_chaine_se_trouve.md) §5.
+
 ![la chaine a pas 0,5](images/43_chaine_pas05.png)
 
 Et ça se voit sur les rendus : le treillis de fibres tient sur **les sept** bandes, là où au
@@ -313,31 +317,73 @@ réglages se ressemblent parce qu'il n'y a encore rien à départager.
 référence**, sinon elle mesure le début facile. Trois tours coûtent trois fois moins cher et
 ne valent rien.
 
+## 6quinquies. ⭐⭐ Le pas 0,25, sur HUIT tours : la rupture est repoussée, pas supprimée
+
+La leçon ci-dessus a été appliquée immédiatement : puisque halver le pas avait fait
+disparaître la rupture *dans les sept tours mesurés*, la campagne suivante est allée
+**au-delà** — huit tours, deux de plus que la référence, pour aller chercher la rupture là où
+elle n'avait pas encore été cherchée.
+
+| spire | pas 1,0 | pas 0,5 | **pas 0,25** | `in` |
+|---|---:|---:|---:|---:|
+| 00 *(contrôle)* | +0,000 | +0,000 | +0,000 | +0,000 |
+| 01 | +0,000 | +0,000 | +0,000 | +0,038 |
+| 02 | +0,190 | +0,160 | +0,202 | +0,686 |
+| 03 | +0,532 | +0,000 | +0,000 | +0,986 |
+| 04 | +0,000 | +0,000 | +0,174 | +0,722 |
+| 05 | +0,300 | +0,160 | +0,095 | +0,000 |
+| 06 | **+1,475** ⚠⚠ | +0,583 | **+0,246** | +0,257 |
+| 07 | — | — | **+0,702** ⚠⚠ | — |
+| 08 | — | — | **+1,321** ⚠⚠ | — |
+| | 4/7, 1 casse | 6/7, 0 casse | **6/9, 2 cassent** | 3/7, 2 cassent |
+
+![la chaine a pas 0,25, neuf spires](images/43_chaine_pas025.png)
+
+> **Halver le pas ne supprime pas la rupture : il la repousse d'un tour.** À pas 1,0 la
+> chaîne casse au tour 06 ; à pas 0,25 le tour 06 est le meilleur des trois réglages
+> (+0,246 contre +0,583 et +1,475) et c'est le tour **07** qui cède.
+
+⚠ **Et la comparaison honnête se fait à profondeur égale.** Sur les sept premiers tours, pas
+0,25 et pas 0,5 comptent le même nombre de convergences — le gain du quart de pas n'est pas
+un tour de plus qui converge, c'est une **marge** plus grande au tour critique. Comparer
+« 6/7 » à « 6/9 » comme si le second était pire serait exactement l'erreur inverse de celle
+du §6quater : juger deux campagnes à des profondeurs différentes.
+
+![les neuf spires a pas 0,25](images/43_chaine_pas025_rendus.jpg)
+
+⭐ **Où va la géométrie de cette chaîne** : elle est mesurée dans
+[`44`](44_ou_la_chaine_se_trouve.md) — écart entre nappes **113 µm** (la chaîne avance bien
+d'une feuille à la fois), et l'érosion de l'aire **utile** est de **15,6 % par tour**, pas les
+4,0 % du §3, qui portent sur l'aire de grille.
+
 ## 7. ⭐⭐ Ce que les trois campagnes disent ensemble
 
 | ce qu'on a essayé | ce que ça fait à la surface | α |
 |---|---|---|
 | `mode: seed` — la faire pousser depuis un point | elle prend l'orientation qu'elle veut | ≈ **1** (17 essais, sans exception) |
 | `--correct` — lui dire où passer après coup | 318 puis 5 695 points ne réorienté pas ce qui a poussé | **+0,89** au mieux |
-| **`gen_neighbor`** — la **projeter** d'une feuille à la suivante | aucune liberté, donc aucune dérive… | **+0,00** six tours de suite |
+| **`gen_neighbor`** — la **projeter** d'une feuille à la suivante | aucune liberté, donc aucune dérive… | **6 tours sur 9** convergent (pas 0,25) |
 | `resume` — lui rendre ce que la projection a perdu | la liberté revient, et la dérive avec | **+1,46** au 3ᵉ tour |
 
 > **Ce qui garde une surface sur sa feuille, c'est de ne pas la laisser croître librement.**
 > Les quatre lignes ci-dessus sont quatre façons de le mesurer, et elles sont d'accord.
 
 ⭐ Ça explique aussi pourquoi `gen_neighbor` réussit là où tout le reste échoue : il ne fait
-pas *croître* une surface, il en **projette** une existante. Et l'érosion de 4 % par tour
-n'est pas un défaut de cette méthode — c'est **le prix de sa contrainte**.
+pas *croître* une surface, il en **projette** une existante. Et l'érosion n'est pas un défaut
+de cette méthode — c'est **le prix de sa contrainte**. ⚠ Ce prix est plus lourd qu'annoncé :
+**15,6 % de l'aire utile par tour**, pas 4 % ([`44`](44_ou_la_chaine_se_trouve.md) §5), donc
+la moitié de la surface part en quatre tours.
 
 ## Ce qui reste ouvert
 
 | # | quoi |
 |---|---|
-| 1 | ⭐ **pourquoi la 7ᵉ casse.** Est-ce l'érosion (5,39 cm² de grille, moins de sommets pour voter), un interstice manqué, ou le rayon qui saute une spire ? La sonde naturelle est `neighbor_max_distance`, `neighbor_min_clearance` et `neighbor_step`, tous paramétrables |
+| 1 | ⭐ **pourquoi une spire casse** — partiellement répondu, voir la ligne 6 : ce n'est pas l'érosion, et `neighbor_step` ne fait que **repousser** la rupture d'un tour (§6quinquies). Restent `neighbor_max_distance` et `neighbor_min_clearance`, jamais sondés |
 | 2 | ~~repousser entre deux tours~~ **✅ mesuré, et c'est non** : §6 — la chaîne casse deux fois plus tôt |
 | 3 | ⏳ **le sens `in`** : les deux chaînes tournent en `out`. Vers l'intérieur les spires se serrent, donc le rayon a moins de chemin à faire et l'erreur n'a aucune raison de s'accumuler pareil. Campagne lancée (`data/spires_dedans`) |
 | 4 | ⚠ **la validation par l'encre.** α dit qu'une feuille est à portée ; il ne dit pas qu'on lit du texte. Le seul juge qui trancherait est un rendu, et six spires en donnent la matière |
-| 5 | **recoller les six spires en une seule surface.** Elles sont voisines par construction ; une surface unique de six spires serait la première chose de ce dépôt qui ressemble à un morceau de rouleau déroulé |
+| 5 | ~~recoller les spires en une seule surface~~ ⚠⚠ **tâche MAL POSÉE, et c'est mesuré** : [`44`](44_ou_la_chaine_se_trouve.md) §7. Une chaîne radiale est une **colonne**, pas une bande — deux nappes voisines sont séparées, le long du papyrus, par la circonférence entière qu'on ne possède pas. Ce qu'il faut est une chaîne **tangentielle**, qui suit UNE feuille autour du tour, et elle n'a jamais été tentée |
+| 6 | ⚠⚠ ~~pourquoi la 7ᵉ casse : l'érosion ?~~ **hypothèse RÉFUTÉE par un contrôle** : [`44`](44_ou_la_chaine_se_trouve.md) §8. Le simple **numéro** de la spire prédit α mieux que l'érosion, l'arc, l'aire ou n'importe quelle statistique de rendu (ρ = +0,534, et 4 condamnées signalées sur 4 contre 3). Tout ce qu'on a mesuré n'est qu'un proxy de la profondeur dans la chaîne |
 
 ## Reproduire
 
