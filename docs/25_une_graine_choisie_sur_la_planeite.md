@@ -399,3 +399,10 @@ rendre le centre était indistinguable de rendre un voxel allumé ; la barrière
 était redondante avec la bande d'occupation sur des données binaires ; et le chunk de
 contrôle n'avait aucun éclat isolé, donc l'argmax brut trouvait la bonne moitié tout seul.
 Refaites, les cinq tombent.
+
+## Reproduire
+
+```bash
+./tools/lancer.sh --fond tools/campagne_graines.sh       # la campagne appariée
+cd experiments && uv run python ../analysis/src/table_graines.py --help   # le dépouillement
+```

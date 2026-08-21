@@ -78,9 +78,26 @@ journée qu'un lot est un **constructeur** et non un diagnostic.
   trace a divergé. Notre test de convergence rend un verdict sur une trace entière, pas une
   génération. C'est une deuxième pièce manquante, plus petite que la première.
 
+## La boucle entière, écrite
+
+Le chaînon manquant est construit ([`41`](41_marcher_le_long_dune_nappe.md)) et
+`tools/boucle_de_correction.sh` met les maillons bout à bout pour la première fois :
+tracer → marcher la prédiction → écrire les points → `--resume --rewind-gen --correct` →
+juger au test de convergence, contre un témoin **apparié** (même graine, même volume,
+mêmes paramètres, seuls les points de passage diffèrent).
+
+⚠ `--rewind-gen` demande toujours de choisir une génération, et notre juge porte sur une
+trace entière. On **balaie** donc quelques valeurs plutôt que d'en deviner une : une trace
+de ce rouleau coûte une vingtaine de secondes, le balayage est moins cher que le
+raisonnement.
+
+⚠ Une reprise qui ne produit aucun maillage est rapportée comme **résultat sur le seam**,
+pas comme panne du script — c'est précisément ce qu'il faut savoir.
+
 ## Reproduire
 
 ```bash
+./tools/lancer.sh --fond tools/boucle_de_correction.sh   # la boucle entière, appariée
 vc_grow_seg_from_seed --help          # les cinq options de reprise
 grep -n "corrections" repos/villa/volume-cartographer/apps/src/vc_grow_seg_from_seed.cpp
 sed -n '560,600p' repos/villa/volume-cartographer/core/src/GrowPatch.cpp   # PointCorrection

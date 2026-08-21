@@ -219,6 +219,24 @@ outil incomplet pour une mesure »*. Le commentaire était juste, le code faisai
 c'est exactement ce qui s'est produit. Corrigé : `decode` **lève** `CodecIndisponible` au lieu
 de rendre `None`, et le message nomme l'environnement à utiliser.
 
+### ⚠⚠ Et l'outil qui aurait attrapé ça existait — personne ne le nommait
+
+`tools/verifier_zarr.sh` a été écrit pour exactement cette panne. Son en-tête la décrit mot
+pour mot :
+
+> *« Un lecteur qui code `/` en dur et ignore le compresseur ne plante pas : il reçoit des
+> 404, les compte en “chunk vide”, et rapporte un segment DÉPOURVU DE MATIÈRE. C'est-à-dire
+> un résultat, faux, sans le moindre signe. »*
+
+Il n'a pas tourné, parce qu'**aucun document ne le nommait** : le garde anti-dérive de
+`tools/temoins.sh` le comptait parmi les huit scripts sans appelant. C'est le coût d'un
+orphelin, mesuré pour une fois — **une heure, et une mesure publiée fausse**.
+
+Les huit sont désormais nommés par le document qui décrit leur expérience
+(`36` pour les trois campagnes de causes éliminées, `09`, `11`, `16`, `25` pour les
+dépouilleurs, et celui-ci). Le garde continue de les compter : ce n'est pas un échec, c'est
+la seule chose qui rend la dérive visible avant qu'elle ne coûte.
+
 ## 7. ⚠ Ce que ce lot ne fait pas
 
 - **Il n'a rien tracé.** La marche produit des points de passage ; les donner à
@@ -240,6 +258,8 @@ de rendre `None`, et le message nomme l'environnement à utiliser.
 ## Reproduire
 
 ```bash
+./tools/verifier_zarr.sh docs/volumes_surface_PHerc1447.txt   # les volumes sont-ils LISIBLES ?
+
 cd inference
 uv run python ../analysis/src/suivre_nappe.py --verifier     # 29 témoins
 uv run python ../analysis/src/figure_marche.py               # la figure

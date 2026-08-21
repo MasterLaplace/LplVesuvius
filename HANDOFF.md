@@ -145,6 +145,22 @@ le moins radial (α = +0,65 contre +0,99 et +1,01).
 verticales ENSEMBLE** (`normal` seul, `horizontal` seul, `vertical` seul ont été testés,
 jamais la paire — alors que c'est la paire qui définit les axes u, v de la feuille).
 
+⚠⚠ **CONTRAINTE MACHINE, MESURÉE, QUI COMMANDE TOUTE CAMPAGNE** : un seul
+`vc_render_tifxyz` culmine à **16,7 Gio de RSS** sur une machine qui a **31 Gio**. Deux
+rendus ne tiennent donc pas, et le processus qui meurt est **celui qui demande de la
+mémoire ensuite**, pas celui qui l'a prise — le 2026-08-21, trois campagnes en parallèle
+ont fait tuer une *trace* à la génération 104, sans erreur lisible, à l'autre bout du
+pipeline. Le symptôme apparaît chez la victime, jamais chez le coupable.
+⭐ Remède structurel plutôt qu'une note : **`tools/lancer.sh` REFUSE** un second exemplaire
+du même script quand un tourne (`--apres <pid>` pour enchaîner, `LANCER_FORCE=1` pour
+passer outre). Sondé : le refus se déclenche.
+
+⚠ Et deux exemplaires du même script sont pires que deux campagnes différentes : ils
+partagent leur répertoire de sortie, donc l'un lit les fichiers à moitié écrits de l'autre.
+Même famille que « deux écrivains, un fichier de log » — payé le même jour sur
+`temoins.sh`, dont la sortie mélangée annonçait **à la fois** « TOUS LES TÉMOINS PASSENT »
+et « 1 batterie en échec », avec des NUL entre les deux.
+
 ⏳ **DEUX CAMPAGNES TOURNENT** (détachées, chaînées) :
 ```bash
 tail -f .lances/convergence_des_essais-20260820-*.log   # les 17 essais de 26, rejugés

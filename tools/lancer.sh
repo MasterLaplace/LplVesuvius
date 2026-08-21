@@ -41,6 +41,34 @@ while true; do
 done
 SCRIPT=${1:?usage: tools/lancer.sh [--fond] <script> [args...]}; shift
 
+# ⚠⚠ REFUSER UN SECOND EXEMPLAIRE DU MEME SCRIPT, et mesurer pourquoi plutot que le
+# supposer. Le 2026-08-21, trois campagnes ont tourne en parallele et la trace de l'une a
+# ete tuee a la generation 104 sans erreur lisible. La cause, mesuree : **un seul
+# `vc_render_tifxyz` culmine a 16,7 Gio de RSS** sur une machine qui a 31 Gio. Deux rendus
+# ne tiennent donc pas, et le troisieme processus qui demande de la memoire est celui qui
+# meurt -- pas celui qui l'a prise. Le symptome apparait chez la victime, jamais chez le
+# coupable, et c'est ce qui rend la panne illisible.
+#
+# ⚠ Deux exemplaires du MEME script sont pires que deux campagnes differentes : ils
+# partagent leur repertoire de sortie, donc l'un lit les fichiers a moitie ecrits de
+# l'autre. Refuse par defaut ; `--force` pour le cas ou l'on sait ce qu'on fait.
+if [ "${LANCER_FORCE:-0}" != "1" ] && [ "${1:-}" != "--verifier" ] && [ "$SCRIPT" != "--verifier" ]; then
+  BASE=$(basename "$SCRIPT" .sh)
+  for pf in "$RACINE"/.lances/"$BASE"-*.pid; do
+    [ -f "$pf" ] || continue
+    vieux=$(cat "$pf" 2>/dev/null)
+    [ -n "$vieux" ] || continue
+    if kill -0 "$vieux" 2>/dev/null; then
+      echo "REFUS : $BASE tourne deja (pid $vieux)." >&2
+      echo "  Un second exemplaire partagerait son repertoire de sortie, et un seul rendu" >&2
+      echo "  prend deja 16,7 Gio sur les 31 de cette machine." >&2
+      echo "  Attendre, ou : ./tools/lancer.sh --apres $vieux $SCRIPT …" >&2
+      echo "  (LANCER_FORCE=1 pour passer outre)" >&2
+      exit 5
+    fi
+  done
+fi
+
 if [ "${1:-}" = "--verifier" ] || [ "$SCRIPT" = "--verifier" ]; then
   # ⭐ Deux proprietes, et la seconde est la raison d'etre du fichier.
   #

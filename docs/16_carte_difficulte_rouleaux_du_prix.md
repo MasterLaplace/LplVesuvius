@@ -266,3 +266,13 @@ autres — donc elle **tronque**, et son 18 µm est une borne inférieure.
 > **Deux instruments, une même règle : ils classent des rouleaux à qualité de scan
 > comparable. Ils ne disent rien sur « faut-il scanner plus fin ».** Le prétendre
 > serait lire un artefact de quantification comme un résultat.
+
+## Reproduire
+
+```bash
+./tools/carte_separabilite.sh                            # la campagne, témoin PHerc0139 inclus
+cd experiments && uv run python ../analysis/src/table_separabilite.py --help
+```
+
+⚠ Et la suite de cette carte est [`33`](33_la_carte_nest_pas_resolue.md) : elle **n'est pas
+résolue** — 0 des 78 paires séparées, 0 des 13 rouleaux distingué du témoin après Holm.

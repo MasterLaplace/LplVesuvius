@@ -183,6 +183,9 @@ de bâtir dessus.
 
 ```bash
 ./tools/lancer.sh tools/origine_de_la_pile.sh          # le même segment, deux fois
+./tools/lancer.sh --fond tools/leur_graine.sh          # LEUR graine dans NOTRE chaîne
+./tools/lancer.sh --fond tools/leurs_parametres.sh     # EXACTEMENT leurs paramètres
+./tools/lancer.sh --fond tools/petite_trace.sh         # une trace courte converge-t-elle ?
 cd inference_xpu                                        # les quatre segments publiés
 for k in $(cut -f2 ../docs/volumes_surface_PHerc1447.txt); do
   uv run python ../analysis/src/zarr_depth.py "$k" --windows 25

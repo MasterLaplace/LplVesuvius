@@ -548,3 +548,11 @@ set -a && . ../.env && set +a
 uv run python ../analysis/src/judge_api.py ../data/out/ink_scroll4.npy --auto-bands \
     --blank-ceiling 0.05 --model gemini-3.5-flash --trials 1 --out ../docs/juge_scroll4.json
 ```
+
+## Reproduire
+
+```bash
+# l'image de calibrage à deux panneaux, témoin inclus — c'est ce que le protocole exige
+# de montrer AVANT tout inconnu, et l'ordre est irréversible.
+cd inference && uv run python ../analysis/src/make_panel.py <sortie.png> --help
+```

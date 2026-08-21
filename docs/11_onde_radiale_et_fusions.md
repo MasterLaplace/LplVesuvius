@@ -678,3 +678,12 @@ La bande E encadre **exprès** le site du §11. Elle ressort, avec une dérive d
 > ⚠⚠ La lecture « le défaut d'un millimètre » du §7 tient donc **sur la majorité du
 > rouleau**, et échoue là où un site migre. Les deux affirmations coexistent, et c'est le
 > balayage qui le dit — pas l'un des deux sites pris isolément.
+
+## Reproduire
+
+```bash
+./tools/scan_z.sh                # compte de feuilles le long de z : une rupture localise un dégât
+```
+
+⚠ Ce script écrit un **marqueur de fin** : juger son avancement par artefact et non par PID,
+parce qu'un PID absent ne distingue pas « fini » de « mort ».
