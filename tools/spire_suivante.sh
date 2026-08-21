@@ -49,6 +49,12 @@ FENETRES=${FENETRES:-"31 81"}
 # inchangee) et la comparaison appariee : meme surface de depart, meme sens, memes fenetres,
 # seule la repousse change.
 REPOUSSE=${REPOUSSE:-0}
+# ⚠ Le pas du rayon, en voxels. Defaut de l'outil : 1,0. C'est le levier le plus
+# mecaniquement plausible pour la question « pourquoi un tour rate » : le rayon s'arrete au
+# PREMIER echantillon au-dessus du seuil, donc un pas plus fin le localise plus precisement
+# et peut cesser de manquer une nappe mince. Aucun autre reglage de `gen_neighbor` n'agit
+# aussi directement sur ce qui est trouve ou pas.
+PAS_RAYON=${PAS_RAYON:-1.0}
 B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 VOL="$B/$ROULEAU/volumes/20250521151220-8.640um-1.2m-116keV-masked.zarr"
 # ⚠⚠ LE SEGMENT DE DEPART DOIT CONVERGER, et le choisir sur son nom ne suffit pas. Paye le
@@ -75,7 +81,7 @@ if [ "$BASE_DEST" = "spires" ]; then ETIQUETTE=""; else ETIQUETTE="${BASE_DEST#s
 mkdir -p "$DEST"
 [ -n "$ETIQUETTE" ] && echo "etiquette des verdicts : spire_${ETIQUETTE}<spire>.json"
 echo "depart : $SOURCE"
-echo "prediction : $SURF   sens : $SENS   fenetres : $FENETRES"
+echo "prediction : $SURF   sens : $SENS   pas du rayon : $PAS_RAYON   fenetres : $FENETRES"
 
 juger() {   # $1 = repertoire, $2 = maillage, $3 = nom
   local W=$1 M=$2 NOM=$3
@@ -159,7 +165,7 @@ for k in $(seq 1 "$N_SPIRES"); do
 import json
 json.dump({'mode': 'gen_neighbor', 'voxelsize': $UM, 'thread_limit': 0,
            'cache_size': 6000000000,
-           'neighbor_dir': '$SENS', 'neighbor_step': 1.0,
+           'neighbor_dir': '$SENS', 'neighbor_step': $PAS_RAYON,
            'neighbor_max_distance': 250.0, 'neighbor_threshold': 1.0,
            'neighbor_fill': True},
           open('$W/trace/seed.json','w'), indent=2)"

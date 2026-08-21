@@ -1,0 +1,190 @@
+{
+  "spires": [
+    {
+      "campagne": "spires",
+      "spire": "spire00",
+      "au_bord": 0.0,
+      "part_plates": 0.0,
+      "ecart_un_rendu_um": 17.28,
+      "alpha": 0.0,
+      "verdict": "converge"
+    },
+    {
+      "campagne": "spires",
+      "spire": "spire01",
+      "au_bord": 0.3,
+      "part_plates": 0.0,
+      "ecart_un_rendu_um": 90.72,
+      "alpha": 0.0,
+      "verdict": "converge"
+    },
+    {
+      "campagne": "spires",
+      "spire": "spire02",
+      "au_bord": 0.0,
+      "part_plates": 0.0,
+      "ecart_un_rendu_um": 43.2,
+      "alpha": 0.1898269439600407,
+      "verdict": "converge"
+    },
+    {
+      "campagne": "spires",
+      "spire": "spire03",
+      "au_bord": 0.0,
+      "part_plates": 0.0,
+      "ecart_un_rendu_um": 12.96,
+      "alpha": 0.5318540975687568,
+      "verdict": "intermédiaire"
+    },
+    {
+      "campagne": "spires",
+      "spire": "spire04",
+      "au_bord": 0.0,
+      "part_plates": 0.0,
+      "ecart_un_rendu_um": 77.76,
+      "alpha": 0.0,
+      "verdict": "converge"
+    },
+    {
+      "campagne": "spires",
+      "spire": "spire05",
+      "au_bord": 0.55,
+      "part_plates": 0.0,
+      "ecart_un_rendu_um": 129.60000000000002,
+      "alpha": 0.29952469475306365,
+      "verdict": "intermédiaire"
+    },
+    {
+      "campagne": "spires",
+      "spire": "spire06",
+      "au_bord": 0.0,
+      "part_plates": 0.0,
+      "ecart_un_rendu_um": 69.12,
+      "alpha": 1.4754004773539575,
+      "verdict": "suit la fenêtre"
+    },
+    {
+      "campagne": "spires_dedans",
+      "spire": "spire00",
+      "au_bord": 0.0,
+      "part_plates": 0.0,
+      "ecart_un_rendu_um": 17.28,
+      "alpha": 0.0,
+      "verdict": "converge"
+    },
+    {
+      "campagne": "spires_dedans",
+      "spire": "spire01",
+      "au_bord": 0.26666666666666666,
+      "part_plates": 0.0,
+      "ecart_un_rendu_um": 116.64000000000001,
+      "alpha": 0.037864742235528444,
+      "verdict": "converge"
+    },
+    {
+      "campagne": "spires_dedans",
+      "spire": "spire02",
+      "au_bord": 0.64,
+      "part_plates": 0.0,
+      "ecart_un_rendu_um": 129.60000000000002,
+      "alpha": 0.6863839101129507,
+      "verdict": "intermédiaire"
+    },
+    {
+      "campagne": "spires_dedans",
+      "spire": "spire03",
+      "au_bord": 0.1,
+      "part_plates": 0.0,
+      "ecart_un_rendu_um": 112.32000000000001,
+      "alpha": 0.9855633335447546,
+      "verdict": "suit la fenêtre"
+    },
+    {
+      "campagne": "spires_dedans",
+      "spire": "spire04",
+      "au_bord": 0.0,
+      "part_plates": 0.0,
+      "ecart_un_rendu_um": 8.64,
+      "alpha": 0.7216810415287975,
+      "verdict": "suit la fenêtre"
+    },
+    {
+      "campagne": "spires_dedans",
+      "spire": "spire05",
+      "au_bord": 0.0,
+      "part_plates": 0.0,
+      "ecart_un_rendu_um": 8.64,
+      "alpha": 0.0,
+      "verdict": "converge"
+    },
+    {
+      "campagne": "spires_dedans",
+      "spire": "spire06",
+      "au_bord": 0.375,
+      "part_plates": 0.0,
+      "ecart_un_rendu_um": 108.0,
+      "alpha": 0.2570222358974111,
+      "verdict": "intermédiaire"
+    },
+    {
+      "campagne": "spires_repousse",
+      "spire": "spire00",
+      "au_bord": 0.0,
+      "part_plates": 0.0,
+      "ecart_un_rendu_um": 17.28,
+      "alpha": 0.0,
+      "verdict": "converge"
+    },
+    {
+      "campagne": "spires_repousse",
+      "spire": "spire01",
+      "au_bord": 0.1694915254237288,
+      "part_plates": 0.18055555555555558,
+      "ecart_un_rendu_um": 86.4,
+      "alpha": 0.42215634677573377,
+      "verdict": "intermédiaire"
+    },
+    {
+      "campagne": "spires_repousse",
+      "spire": "spire02",
+      "au_bord": 0.13793103448275862,
+      "part_plates": 0.19444444444444442,
+      "ecart_un_rendu_um": 64.80000000000001,
+      "alpha": 0.5726893572535711,
+      "verdict": "intermédiaire"
+    },
+    {
+      "campagne": "spires_repousse",
+      "spire": "spire03",
+      "au_bord": 0.22727272727272727,
+      "part_plates": 0.5164835164835164,
+      "ecart_un_rendu_um": 64.80000000000001,
+      "alpha": 1.4605718246282915,
+      "verdict": "suit la fenêtre"
+    }
+  ],
+  "juges": {
+    "au_bord": {
+      "n": 18,
+      "assez": true,
+      "clef": "au_bord",
+      "rho": 0.22571934127555385,
+      "p": 0.3602,
+      "exact": false,
+      "mauvaises": 3,
+      "mauvaises_signalees": 2,
+      "seuil_proxy_median": 0.1
+    },
+    "ecart_un_rendu_um": {
+      "n": 18,
+      "assez": true,
+      "clef": "ecart_un_rendu_um",
+      "rho": 0.20413618548158993,
+      "p": 0.4081,
+      "exact": false,
+      "mauvaises": 3,
+      "mauvaises_signalees": 2,
+      "seuil_proxy_median": 69.12
+    }
+  }
+}

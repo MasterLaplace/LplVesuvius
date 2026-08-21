@@ -239,6 +239,34 @@ voir, et il le dit maintenant.
 mauvaises** vaut la peine d'être essayé. Si les tours étaient fortement enchaînés, ça ne
 servirait à rien — et c'est précisément ce que la mesure exclut.
 
+## 6ter. ⚠⚠ Un juge à un seul rendu : mesuré AVANT de s'en servir, et il ne marche pas
+
+Le test de convergence demande **deux** rendus, et un rendu est l'étape la plus chère de tout
+le dépôt. Un juge à un seul rendu diviserait par deux le coût de toute campagne — et
+permettrait d'essayer **plusieurs candidats par tour** là où on n'en essaie qu'un.
+
+Le candidat naturel était `au_bord_relief`, déjà calculé : la part des fenêtres dont le pic
+tombe **au bord** de la fenêtre rendue. C'est la forme locale de ce que α mesure globalement.
+Vérifié sur les **18 spires** déjà jugées des deux façons :
+
+| statistique d'UN rendu | ρ contre α | p |
+|---|---:|---:|
+| `au_bord_relief` | **+0,226** | 0,360 |
+| écart médian à 31 couches | **+0,204** | 0,408 |
+
+> **Aucune relation détectable. Le juge à un rendu n'existe pas.**
+
+⭐ Et c'est précisément à ça que sert un contrôle posé **avant** : la campagne « essayer
+plusieurs candidats par tour et garder le meilleur » allait être bâtie sur ce proxy. Chaque
+sélection aurait été du bruit, et le résultat aurait ressemblé à une amélioration.
+
+⚠ Réserve honnête : seules **3 des 18** spires sont condamnées par le vrai juge (α ≥ 0,75),
+donc la puissance à décider si le proxy rate *spécifiquement* les cas durs est faible. Ce qui
+est établi, c'est qu'il n'y a pas de relation d'ensemble — ce qui suffit à ne pas s'en servir.
+
+⚠ Conséquence pratique : essayer K candidats par tour coûte **2K rendus**. C'est ce prix-là
+ou rien.
+
 ## 7. ⭐⭐ Ce que les trois campagnes disent ensemble
 
 | ce qu'on a essayé | ce que ça fait à la surface | α |
