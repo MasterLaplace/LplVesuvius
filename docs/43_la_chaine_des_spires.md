@@ -143,10 +143,34 @@ qui tire la mesure**.
 > qui est celui dont [`42`](42_la_boucle_tourne_et_ne_suffit_pas.md) montre qu'il produit des
 > coupes radiales quand rien ne le contraint.
 
-⚠ **Deux paires, et elles vont dans le même sens avec la même ampleur** : α augmente de
-**+0,42** puis de **+0,38**, et les deux spires passent de « converge » à « intermédiaire ».
-Ce n'est pas encore une loi, mais ce n'est plus une anecdote — et la répétition est ce qui
-distingue les deux. La campagne continue.
+⭐⭐ **Et les trois mesures de la journée disent la même chose sous trois angles** :
+`mode: seed` ne pose jamais la surface sur une feuille (17 essais, tous α ≈ 1) · les points
+de correction ne réorienté pas ce qui a déjà poussé (`42`) · et faire repousser une bonne
+surface la fait sortir de sa feuille (ici). **Ce qui garde une surface sur sa feuille, c'est
+de ne pas la laisser croître librement.**
+
+### ⭐⭐ Et à la troisième paire, la chaîne repoussée CASSE — deux fois plus tôt
+
+| spire | base | repoussée | écart |
+|---|---:|---:|---:|
+| 00 (contrôle) | +0,000 | +0,000 | **0** |
+| 01 | +0,000 | +0,422 | +0,42 |
+| 02 | +0,190 | +0,573 | +0,38 |
+| **03** | +0,532 | **+1,461** ⚠⚠ | **+0,93** |
+
+La spire 03 repoussée fait **26,20 cm²** — quatre fois la spire 03 de base — avec **2 921
+auto-intersections**, et son α la met franchement **en travers de l'empilement**.
+
+> **La chaîne de base tient six tours ; la chaîne repoussée casse au troisième.** Faire
+> repousser la matière perdue ne prolonge pas la chaîne : **ça la coupe en deux.**
+
+⚠ Et la dégradation **accélère** : +0,42, +0,38, puis +0,93. Ce n'est pas un décalage
+constant qu'on pourrait compenser, c'est une dérive qui se nourrit d'elle-même — chaque
+repousse part d'une surface déjà un peu plus en travers que la précédente.
+
+⚠ Trois paires, un contrôle à écart nul, et une rupture franche. La campagne continue vers
+les spires 04 à 06, mais la conclusion ne dépend plus de ce qui reste : une chaîne qui casse
+au troisième tour ne se rattrape pas au cinquième.
 
 ⚠ La spire 00 est **identique** dans les deux campagnes (+0,000 des deux côtés), ce qui est
 le contrôle : c'est la même surface de départ, réellement partagée, donc l'écart des paires
