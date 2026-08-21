@@ -1,0 +1,22 @@
+{
+  "series": [
+    {
+      "verdict": "suit la fenêtre",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement",
+      "serie": [
+        [
+          31,
+          60.48
+        ],
+        [
+          81,
+          125.28
+        ]
+      ],
+      "croissance": 2.0714285714285716,
+      "elargissement": 2.6129032258064515,
+      "alpha": 0.7582169186704452,
+      "nom": "spire02 (? cm², 0 croisements)"
+    }
+  ]
+}

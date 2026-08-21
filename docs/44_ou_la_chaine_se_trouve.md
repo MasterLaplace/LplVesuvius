@@ -27,16 +27,16 @@ On n'a donc pas besoin de savoir où est l'axe pour savoir laquelle des deux dir
 grille est laquelle — il suffit de regarder laquelle courbe.
 
 La courbure se mesure par la **flèche** de l'arc — la distance maximale entre l'arc et sa
-corde. Pour un arc de demi-angle φ :
+corde. Pour un arc de demi-angle $\varphi$, la corde vaut $2R\sin\varphi$ et la flèche
+$R(1-\cos\varphi)$, d'où
 
-$$\text{corde} = 2R\sin\varphi
-\qquad
-\text{flèche} = R\,(1-\cos\varphi)
-\qquad\Longrightarrow\qquad
-\varphi = 2\arctan\!\left(\frac{2 \times \text{flèche}}{\text{corde}}\right)$$
+$$\varphi = 2\arctan\!\left(\frac{2\,\text{flèche}}{\text{corde}}\right)$$
 
-Exactement, sans approximation petit-angle — et le rayon s'élimine, ce qui est ce qui rend la
-mesure utilisable là où le rayon, lui, n'est pas déterminé (§6).
+exactement, sans approximation petit-angle.
+
+⭐ **Et le rayon s'élimine.** C'est ce qui rend cette mesure utilisable là où le rayon,
+lui, n'est pas déterminé (§6) : l'angle balayé se lit sur la forme de l'arc, sans jamais
+avoir à décider de quel cercle il est un morceau.
 
 ⚠⚠ **La première version de ce discriminant était fausse et le témoin l'a refutée.** Elle
 ajustait un cercle sur chaque ligne et divisait la longueur d'arc par le rayon. Sur une ligne

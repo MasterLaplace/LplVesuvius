@@ -1237,21 +1237,26 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
 
 
 **Ajoutés le 2026-08-21 (soir)**
-59. ⚠⚠ **Une syntaxe correcte dans un dépôt voisin peut être du texte mort dans celui-ci.**
-    `44` a été écrite avec `@f$…@f$` pour ses maths en ligne — la syntaxe **Doxygen**, qui
-    est la bonne dans le livre LplKernel parce que Doxygen la traite. Ici les documents sont
-    du Markdown rendu par un viewer : les délimiteurs se sont affichés **littéralement**, en
-    plein milieu d'une phrase. Signalé par l'auteur, pas par un contrôle.
-    ⭐ Et le diagnostic n'était pas celui qu'on croit : ce n'est pas que le dépôt préfère
-    `$…$`, c'est que **le dépôt n'a AUCUNE notation mathématique** — `44` est la seule des 45
-    pages à en porter, donc il n'y avait pas de convention à suivre, seulement une habitude
-    importée d'ailleurs. ⚠ Mon premier grep a « trouvé » six documents en `$…$` : c'étaient
-    des **variables shell** (`$PWD`, `$SCROLL`) dans des blocs de code. Compter des motifs
-    sans les lire, une fois de plus.
-    **Remède tenu** : le seul bloc dont le rendu est *prouvé* (la capture de l'auteur montre
-    `$$…$$` s'affichant correctement) porte désormais les trois relations, et il n'y a plus
-    aucune math en ligne — donc plus de dépendance à un réglage de viewer qu'on ne peut pas
-    vérifier d'ici.
+59. ⚠⚠ **Une provenance inventée est pire que la coquille qu'elle explique.** `44` a été
+    écrite avec `@f$…@f$` pour ses maths en ligne, et les délimiteurs se sont affichés
+    **littéralement** en plein milieu d'une phrase. Signalé par l'auteur, pas par un contrôle.
+    ⚠⚠ **Ce qui compte n'est pas la coquille, c'est ce que j'ai raconté ensuite.** J'ai
+    justifié l'erreur par « `@f$` est la syntaxe Doxygen, correcte dans `LplKernel_Book.md`
+    parce que Doxygen la traite ». **Faux, et l'auteur l'a relevé.** Mesuré dans le livre :
+    `@f$` y apparaît **zéro fois**, tandis que l'inline `$…$` y est utilisé **73 fois** et
+    `$$…$$` **22 fois**. La syntaxe ne venait de nulle part dans cet espace de travail — je
+    l'ai importée d'une habitude générale et je lui ai fabriqué une provenance plausible au
+    lieu de la vérifier. Un `grep -c` de trois secondes aurait suffi.
+    ⚠ Et j'ai enchaîné une deuxième erreur du même genre : mon premier grep a « trouvé » six
+    documents de LplVesuvius en `$…$`, et j'ai écrit qu'il y avait une convention établie.
+    C'étaient des **variables shell** (`$PWD`, `$SCROLL`) dans des blocs de code. Compter des
+    motifs sans les lire.
+    ⚠ Conséquence du diagnostic faux : j'ai replié toutes les maths en bloc « par prudence,
+    faute de pouvoir vérifier l'inline ». La prudence portait sur une prémisse fausse — la
+    convention existait, mesurable, avec 73 précédents dans le document phare du projet.
+    **Convention à suivre, désormais mesurée** : inline `$…$`, display `$$…$$`, jamais `@f$`.
+    ⭐ La règle générale : quand une erreur de syntaxe se corrige, **vérifier la convention
+    plutôt que l'expliquer**. Une explication qui sonne juste est ce qui empêche de regarder.
 
 ## 9. Règles de mesure tenues ici
 
