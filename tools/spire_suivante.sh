@@ -37,6 +37,18 @@ ROULEAU=PHerc1447
 UM=8.64
 SENS=${SENS:-out}
 FENETRES=${FENETRES:-"31 81"}
+# ⚠⚠ REPOUSSE : le nombre de generations a faire repousser APRES chaque `gen_neighbor`.
+# Mesure de `43` : la grille perd **4,0 % par tour** (7,12 -> 5,39 cm2 en six tours), parce
+# qu'un sommet dont le rayon ne trouve rien est perdu definitivement. `neighbor_fill` est
+# deja a `true` ; ce qui manque est une repousse, c'est-a-dire ce que `mode: resume` sait
+# faire.
+#
+# ⚠ ET C'EST UN PARI, pas une amelioration evidente : `mode: resume` fait tourner le traceur
+# NON contraint, celui-la meme qui produit des coupes radiales (`42`). Faire repousser une
+# bonne spire avec lui peut tres bien la tirer hors de sa feuille. D'ou le defaut a 0 (chaine
+# inchangee) et la comparaison appariee : meme surface de depart, meme sens, memes fenetres,
+# seule la repousse change.
+REPOUSSE=${REPOUSSE:-0}
 B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 VOL="$B/$ROULEAU/volumes/20250521151220-8.640um-1.2m-116keV-masked.zarr"
 # ⚠⚠ LE SEGMENT DE DEPART DOIT CONVERGER, et le choisir sur son nom ne suffit pas. Paye le
@@ -149,6 +161,34 @@ json.dump({'mode': 'gen_neighbor', 'voxelsize': $UM, 'thread_limit': 0,
     sed 's/^/   /' "$W/trace/trace.log" | tail -6
     break
   fi
+  # --- repousse optionnelle, avant de juger -----------------------------------
+  if [ "$REPOUSSE" -gt 0 ] && [ ! -d "$W/repousse" ]; then
+    mkdir -p "$W/repousse"
+    python3 -c "
+import json
+json.dump({'mode': 'resume', 'voxelsize': $UM, 'thread_limit': 0,
+           'cache_size': 6000000000, 'step_size': 20.0, 'search_effort': 10,
+           'min_area_cm': 0.3, 'resume_generations': $REPOUSSE},
+          open('$W/repousse/seed.json','w'), indent=2)"
+    ( cd "$W/repousse" && timeout 7200 vc_grow_seg_from_seed -v "$B/$SURF" -t . \
+        -p seed.json --resume "$M" > trace.log 2>&1 )
+    MR=$(ls -d "$W/repousse"/auto_grown_* 2>/dev/null | head -1)
+    [ -z "$MR" ] && MR=$(ls -d "$W/repousse"/neighbor_* 2>/dev/null | head -1)
+    if [ -n "$MR" ]; then
+      A_AV=$(python3 analysis/src/lire_selfcross.py "$W/selfcross.json" --grille 2>/dev/null || echo "? ?")
+      echo "   repousse de $REPOUSSE generations : $(basename "$MR")"
+      M=$MR
+      rm -f "$W/selfcross.json"     # le verdict doit porter sur la surface REPOUSSEE
+      rm -rf "$W/plat"
+    else
+      # ⚠ Une repousse qui ne produit rien est un RESULTAT sur la repousse, pas une panne :
+      # on juge alors la spire non repoussee, et on le DIT, sinon le tableau melangerait
+      # silencieusement des spires repoussees et des spires qui ne l'ont pas ete.
+      echo "   ⚠ repousse SANS EFFET (aucun maillage) — la spire est jugée non repoussée"
+      sed 's/^/      /' "$W/repousse/trace.log" | tail -3
+    fi
+  fi
+
   juger "$W" "$M" "spire$KK" || break
   PREC=$M
 done
