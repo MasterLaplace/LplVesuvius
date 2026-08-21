@@ -153,9 +153,10 @@ le traceur calcule lui-même un champ de distance **signé** à partir du masque
 ⭐⭐ **Ce qui manque n'est pas le champ, c'est son poids.** Lu dans `GrowPatch.cpp` :
 `SURFACE_SDT` vaut **0** par défaut, `NORMAL`/`SNAP` ne s'appliquent qu'avec une grille de
 normales, `DIRECTION` qu'avec des champs de direction. Nos runs de base n'ont aucun des
-trois — il ne reste donc que `DIST` et `STRAIGHT`, deux termes **purement géométriques**.
-Une surface optimisée pour « points équidistants et alignés » est une **grille plate**, et
-une grille plate posée dans un rouleau est exactement une coupe radiale.
+trois. ⚠ **Mais « il ne reste que la géométrie » serait trop fort** : la doc officielle du
+traceur décrit un terme de données primaire (`thresholdedDistance`) que je n'ai pas su
+suivre jusqu'aux résidus — corrigé dans [`41`](41_marcher_le_long_dune_nappe.md) §6ter.
+Ce qui est vérifié, c'est que **trois leviers de données sont éteints chez nous**.
 
 ⚠⚠ **C'est une hypothèse, pas la conclusion de ce document.** Elle expliquerait α = +1,01,
 et elle est cohérente avec le fait qu'`essai_ng2` — le seul essai poussé avec une grille de

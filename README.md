@@ -47,9 +47,10 @@ mesure**. Une trace qui converge suit une feuille, quelle que soit sa valeur.
 ([`41`](docs/41_marcher_le_long_dune_nappe.md) §6ter) : `vc_grow_seg_from_seed` est un
 moindres carrés à **douze familles de résidus**, et dans nos runs de base **trois des quatre
 termes qui regardent les données sont inactifs** — `SURFACE_SDT` a un poids nul par défaut,
-`NORMAL`/`SNAP` exigent une grille de normales, `DIRECTION` des champs de direction. Il ne
-reste que `DIST` et `STRAIGHT`, purement géométriques : une grille **plate et régulière**,
-c'est-à-dire une coupe radiale.
+`NORMAL`/`SNAP` exigent une grille de normales, `DIRECTION` des champs de direction. ⚠ Dire
+qu'il ne reste alors *que* de la géométrie serait trop fort — un quatrième terme existe dont
+je n'ai pas su suivre le fil (`41` §6ter) — mais **trois leviers de données sont bien
+éteints chez nous**, et aucun de nos 17 essais ne règle `sdt_weight`.
 ⚠ Hypothèse, pas conclusion — `tools/leviers_de_perte.sh` la mesure, à conception appariée.
 
 ### Et voici la cible, assemblée

@@ -133,10 +133,18 @@ Trois verrous décident lesquels s'appliquent :
 | `DIRECTION` | `direction_fields` | **absents** |
 | `SURFACE_SDT` | `sdt_weight` > 0 (`GrowPatch.cpp:1789`) | **0 par défaut** |
 
-⚠⚠ **Il ne reste que `DIST` et `STRAIGHT`** — la boucle de croissance les nomme
-explicitement (`local_optimization(… LOSS_DIST | LOSS_STRAIGHT | LOSS_NORMALSNAP)`, et
-`NORMALSNAP` est celui qui a besoin de la grille). Points équidistants et alignés = une
-**grille plate**. Une grille plate posée dans un rouleau **est** une coupe radiale.
+⚠⚠ **CORRECTION, une heure plus tard : « il ne reste que `DIST` et `STRAIGHT` » est trop
+fort et j'avais écrit ça.** La doc officielle du traceur décrit le processus général comme
+*« optimize a surface from a thresholded surface prediction »*, et `thresholdedDistance`
+(`GrowPatch.cpp:3078`) **est** une transformée de distance. Il existe donc un terme de
+données primaire que je n'ai pas su suivre jusqu'aux résidus (l'interpolateur est construit
+lignes 3563/4804/4938, je n'ai pas trouvé où il entre dans l'optimisation).
+⚠ **C'est la deuxième fois dans la même journée que je transforme « j'ai trouvé un
+interrupteur éteint » en « rien n'est allumé ».** Le motif est à surveiller.
+
+**Ce qui reste vérifié** : trois leviers de données sont **éteints chez nous**, et aucun de
+nos 17 `seed.json` ne règle `sdt_weight`. C'est assez pour justifier l'expérience, pas pour
+annoncer la cause.
 ⭐ Cohérent avec la mesure : `essai_ng2`, seul essai poussé avec une grille de normales, est
 le moins radial (α = +0,65 contre +0,99 et +1,01).
 

@@ -203,6 +203,36 @@ aussi le moins radial des essais mesurés (α = +0,65 contre +0,99 et +1,01).
 C'est ce que mesure `tools/leviers_de_perte.sh` (conception appariée : même graine, même
 volume, même nombre de générations, une seule clé change à la fois).
 
+### ⚠⚠ Et une SECONDE correction, une heure plus tard : « il ne reste que la géométrie » est trop fort
+
+La doc officielle du traceur (`repos/villa/volume-cartographer/docs/tracing.md`) décrit le
+processus général comme *« optimize a surface from a thresholded surface prediction (using
+`CachedChunked3dInterpolator<uint8_t, thresholdedDistance>`) »*. Et `thresholdedDistance`
+(`GrowPatch.cpp:3078`) **est** une transformée de distance : au-dessus du seuil 170 la
+valeur est 0, en dessous elle s'éloigne, plafonnée à 15.
+
+Il existe donc un **terme de données primaire** que je n'ai pas su suivre jusqu'aux
+résidus : l'interpolateur est construit (lignes 3563, 4804, 4938) et je n'ai pas trouvé où
+il entre dans l'optimisation. Tant que ce n'est pas établi, **« il ne reste que `DIST` et
+`STRAIGHT` » n'est pas une mesure, c'est une extrapolation** — et c'est la deuxième fois
+aujourd'hui que je transforme « j'ai trouvé un interrupteur éteint » en « rien n'est
+allumé ».
+
+**Ce qui reste vérifié, ligne par ligne :**
+
+| fait | où |
+|---|---|
+| `SURFACE_SDT` vaut **0** par défaut | `GrowPatch.cpp:1274` |
+| et son résidu n'est **pas créé** si le poids est nul | `GrowPatch.cpp:1789` |
+| `NORMAL`/`SNAP` sortent immédiatement sans grille de normales | `GrowPatch.cpp:2050` |
+| `DIRECTION` exige des `direction_fields` | `GrowPatch.cpp:2204` |
+| aucun de nos 17 `seed.json` ne règle `sdt_weight` | `data/trace/PHerc0358/essai_*` |
+
+⭐ Autrement dit : **trois leviers de données sont éteints chez nous, et un quatrième existe
+dont je ne sais pas dire s'il tire.** C'est assez pour justifier l'expérience, pas pour
+annoncer la cause — et l'expérience, elle, tranchera sans avoir besoin que je lise juste.
+
+
 ## 6bis. ⚠⚠ Une panne d'installation qui avait pris la forme d'un fait sur le rouleau
 
 Avant d'arriver là, j'ai mesuré — et j'allais écrire — que **la graine n'était pas couverte
