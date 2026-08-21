@@ -93,6 +93,48 @@ de 1,5 de crête, c'est une distance, pas une probabilité). Coût de la correct
 sur 5 707. Même famille que la borne de lag choisie pour la commodité — **un seuil est
 attaché à une unité, et changer le champ change l'unité.**
 
+## 3bis. Le balayage, à mesure — et le poids fort n'est pas le remède
+
+| variante | aire | croisements | 41 c | 161 c | **α** |
+|---|---:|---:|---:|---:|---:|
+| témoin | 19,8 cm² | 0 | 187,2 µm | 711,5 µm | +0,98 |
+| ligne, gen 5, poids 1 | 20,7 cm² | 11 753 | 168,5 µm | 692,8 µm | +1,03 |
+| ligne, gen 5, **poids 100** | **204,2 cm²** | 2 766 | 177,9 µm | 655,3 µm | +0,95 |
+| **ligne, gen 40, poids 1** | 20,7 cm² | **18** | **154,5 µm** | **519,6 µm** | **+0,89** |
+
+⚠⚠ **Le poids fort n'achète presque rien, et il coûte cher.** α passe de 0,98 à 0,95 —
+dans le bruit de ce que deux fenêtres permettent d'affirmer — pendant que la surface passe
+de 19,8 à **204 cm²**, soit dix fois plus. Le rendu qui en découle fait 17 601 × 17 181 et son
+profil de profondeur demande plus de vingt minutes. `correction_weight` ne pousse pas la
+surface vers la bonne feuille : il la fait **s'étendre**.
+
+⚠ Et une réserve de méthode qu'il faut poser : comparer un écart **médian** mesuré sur
+204 cm² à un écart médian mesuré sur 19,8 cm² n'est pas un contrôle apparié au sens strict.
+Les deux surfaces n'échantillonnent pas la même part du rouleau. Le rapport α reste
+sans dimension et comparable — c'est même pour ça qu'il a été choisi — mais les µm bruts, non.
+
+⭐ **Le meilleur résultat reste `--rewind-gen 40` à poids 1** : α = +0,89 et un écart à
+161 couches en baisse de 27 %. Rembobiner **moins** dérange moins.
+
+⚠⚠ **Et aucune variante ne s'approche de +0,00.** La meilleure est à 0,89 ; le segment
+officiel est à 0,00. **Le seam de correction, à tous les réglages essayés, ne transforme pas
+une coupe radiale en suiveuse de feuille.**
+
+### Ce que ce plateau désigne
+
+`--rewind-gen N` **garde les N premières générations**, et celles-là ont été poussées par
+l'objectif **non contraint** — donc ce sont déjà un morceau de coupe radiale. Aucune
+correction appliquée ensuite ne peut les faire pivoter : `DIST` et `STRAIGHT` s'y opposent.
+
+> Si l'orientation se décide dans les premières générations, alors la correction doit y être
+> **avant elles**, et elle doit porter une information à **deux dimensions** — un fil ne
+> définit pas une orientation de surface.
+
+D'où la cellule que le balayage teste ensuite, et elle n'est pas choisie au hasard :
+**`--rewind-gen 1` avec le semis `nappe`** (5 695 points, 49 collections). C'est le plus petit
+reste de trace non contrainte, et la plus grande quantité d'information 2D qu'on sache
+produire.
+
 ## 4. ⚠ Ce que ce résultat retire à une hypothèse séduisante
 
 [`38`](38_ce_qui_bouge_avec_la_fenetre.md) posait qu'une coupe radiale **ne peut pas** se

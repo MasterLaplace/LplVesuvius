@@ -1,0 +1,22 @@
+{
+  "series": [
+    {
+      "verdict": "suit la fenêtre",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement",
+      "serie": [
+        [
+          41,
+          177.88
+        ],
+        [
+          161,
+          655.34
+        ]
+      ],
+      "croissance": 3.68416910276591,
+      "elargissement": 3.926829268292683,
+      "alpha": 0.9533661552840828,
+      "nom": "corrige_gen5_poids100 (204.164234 cm², 2766 croisements)"
+    }
+  ]
+}
