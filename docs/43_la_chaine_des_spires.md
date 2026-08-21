@@ -168,9 +168,14 @@ auto-intersections**, et son α la met franchement **en travers de l'empilement*
 constant qu'on pourrait compenser, c'est une dérive qui se nourrit d'elle-même — chaque
 repousse part d'une surface déjà un peu plus en travers que la précédente.
 
-⚠ Trois paires, un contrôle à écart nul, et une rupture franche. La campagne continue vers
-les spires 04 à 06, mais la conclusion ne dépend plus de ce qui reste : une chaîne qui casse
-au troisième tour ne se rattrape pas au cinquième.
+⚠ Trois paires, un contrôle à écart nul, et une rupture franche.
+
+⚠⚠ **La campagne a été arrêtée au tour 4, délibérément**, et la raison est écrite dans
+`data/spires_repousse/ABANDONNE` : les spires 04 à 06 ne mesureraient que **de combien
+empire une chaîne déjà cassée**, et elles coûtent cher — la repousse fait grossir les
+surfaces (26,20 cm² au tour 3 contre 6,14 sans repousse), donc chaque rendu est plus lent.
+Une chaîne qui casse au troisième tour ne se rattrape pas au cinquième, et la machine était
+mieux employée sur la question encore ouverte (le sens `in`).
 
 ⚠ La spire 00 est **identique** dans les deux campagnes (+0,000 des deux côtés), ce qui est
 le contrôle : c'est la même surface de départ, réellement partagée, donc l'écart des paires

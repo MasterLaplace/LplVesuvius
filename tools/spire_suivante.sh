@@ -146,6 +146,13 @@ PREC=$SOURCE
 for k in $(seq 1 "$N_SPIRES"); do
   KK=$(printf '%02d' "$k")
   W="$DEST/spire$KK"
+  # ⚠⚠ Meme garde que `boucle_de_correction.sh`, et pour la meme raison : supprimer un
+  # artefact n'arrete pas le travail, parce que le cache d'un rendu EST le signal d'arret du
+  # script. Une decision humaine d'abandon s'ecrit dans un fichier que le script LIT.
+  if [ -f "$DEST/ABANDONNE" ] || [ -f "$W/ABANDONNE" ]; then
+    echo "== spire$KK : campagne ABANDONNEE — $(head -3 "$DEST/ABANDONNE" "$W/ABANDONNE" 2>/dev/null | tail -1)"
+    break
+  fi
   if [ ! -d "$W/trace" ]; then
     mkdir -p "$W/trace"
     python3 -c "
