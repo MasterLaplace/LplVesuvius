@@ -57,16 +57,41 @@ la correction porte sur **0,56 %** de la surface, avec un `correction_weight` qu
 | semis | points | collections | part des 56 630 points de grille |
 |---|---:|---:|---:|
 | ligne (`--deux-sens`) | 318 | 1 | **0,56 %** |
-| **nappe** (échine + 48 côtes) | **5 707** | 49 | **10,1 %** |
+| **nappe** (échine + 48 côtes) | **5 695** | 49 | **10,1 %** |
 
 ⚠ Chaque côte est sa **propre collection**, pas la suite de la précédente :
 `PointCorrection` traite une collection comme un chemin et ancre sur son premier point, donc
 concaténer les côtes ferait un chemin qui saute d'un bord à l'autre à chaque rangée.
 
+![un morceau de nappe : une echine et ses cotes](images/42_morceau_de_nappe.png)
+
 ⚠ Et la couverture est **vérifiée**, pas supposée : sur un cylindre de contrôle, tous les
 points restent à moins de 0,32 voxel de la nappe, et les côtes explorent 89 voxels le long
 de l'axe que l'échine ne parcourt pas (0,0). Une « couverture 2D » qui recopierait l'échine
 serait une ligne épaissie.
+
+### ⚠⚠ Un seuil juste dans une unité, faux dans l'autre — trouvé par la figure
+
+Sur l'image ci-dessus, les côtes ont l'air de **couper les nappes en diagonale**, comme un
+peigne. Vérifié plutôt que cru — les chemins voyagent surtout dans le troisième axe, donc la
+projection ment encore, exactement comme dans [`41`](41_marcher_le_long_dune_nappe.md) §6bis.
+Mais la mesure a trouvé **autre chose** :
+
+| plancher de valeur | côtes traversant un vide | minimum des minima |
+|---|---:|---:|
+| `0,15` (calibré pour une probabilité) | **4 sur 48** | 0,15 |
+| **`1,0` (un voxel de matière)** | **0 sur 48** | **1,01** |
+
+`valeur_min = 0,15` avait été réglé pour une prédiction ramenée dans `[0, 1]`, où il veut
+dire « il y a un peu de matière ». Sur une **transformée de distance en voxels**, il veut
+dire « je suis à un sixième de voxel du vide » — c'est-à-dire **collée au bord**. La marche
+traversait donc des filaments au lieu de s'arrêter, et quatre côtes sur quarante-huit
+partaient sur la nappe voisine.
+
+⭐ `plancher_pour(bloc)` choisit désormais le plancher d'après les **unités du champ** (au-delà
+de 1,5 de crête, c'est une distance, pas une probabilité). Coût de la correction : 12 points
+sur 5 707. Même famille que la borne de lag choisie pour la commodité — **un seuil est
+attaché à une unité, et changer le champ change l'unité.**
 
 ## 4. ⚠ Ce que ce résultat retire à une hypothèse séduisante
 

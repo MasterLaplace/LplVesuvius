@@ -130,6 +130,78 @@ def figure_reelle(bloc_npy: Path, depart, sortie: Path, n_pas: int = 800) -> dic
             "arret_distance": panneaux[1][1]["arret"]}
 
 
+def figure_nappe(bloc_npy: Path, depart, sortie: Path) -> dict | None:
+    """L'echine et ses cotes, sur la vraie prediction — un morceau de nappe, pas un fil.
+
+    ⚠⚠ Le plan de coupe est choisi par LA COUVERTURE, pas par moi : les deux axes de plus
+    grande etendue de l'ENSEMBLE des chemins. Sur un fil unique c'etait deja le remede a une
+    figure trompeuse (`41` §6bis) ; ici c'est encore plus necessaire, parce que les cotes
+    explorent justement l'axe que l'echine ne parcourt pas -- donc la tranche du fil serait
+    la mauvaise.
+
+    ⚠ L'echine est dessinee dans une couleur distincte : sans ca, une figure ou toutes les
+    cotes sont paralleles et aucune echine visible ressemblerait a un peigne pose a plat,
+    c'est-a-dire exactement au defaut que le mode `--nappe` existe pour eviter.
+    """
+    from PIL import Image, ImageDraw
+    from suivre_nappe import champ_de_distance, marcher_nappe
+
+    if not bloc_npy.exists():
+        return None
+    brut = np.load(bloc_npy).astype(np.float32)
+    if brut.max() > 1.5:
+        brut = brut / 255.0
+    dist = champ_de_distance(brut)
+
+    r = marcher_nappe(dist, depart, [0.0, 1.0, 0.0], n_pas=800,
+                      ecart_cotes=6.0, n_cotes=24)
+    if not r["chemins"]:
+        return None
+
+    tous = np.array([q for ch in r["chemins"] for q in ch])
+    etendue = tous.max(0) - tous.min(0)
+    a1, a2 = sorted(int(k) for k in np.argsort(etendue)[-2:])
+    perp = ({0, 1, 2} - {a1, a2}).pop()
+    tranche = int(round(float(np.median(tous[:, perp]))))
+    coupe = np.take(dist, min(max(tranche, 0), dist.shape[perp] - 1), axis=perp)
+
+    n = dist.shape[0]
+    ech = max(1, 900 // n)
+    m = float(coupe.max()) or 1.0
+    h, w = coupe.shape
+    im = Image.new("RGB", (w * ech, h * ech + 62), FOND)
+    d = ImageDraw.Draw(im)
+    for y in range(h):
+        for x in range(w):
+            v = float(coupe[y, x]) / m
+            if v > 0.03:
+                g = tuple(int(FOND[i] + (NAPPE[i] - FOND[i]) * min(v, 1.0)) for i in range(3))
+                d.rectangle([x * ech, y * ech + 62, (x + 1) * ech - 1,
+                             (y + 1) * ech + 61], fill=g)
+    for k, ch in enumerate(r["chemins"]):
+        pts = np.array(ch)
+        if len(pts) < 2:
+            continue
+        couleur = NOTRE if k == 0 else (110, 170, 235)
+        d.line([(q[a2] * ech + ech / 2, q[a1] * ech + ech / 2 + 62) for q in pts],
+               fill=couleur, width=3 if k == 0 else 1, joint="curve")
+    dx, dy = depart[a2] * ech + ech / 2, depart[a1] * ech + ech / 2 + 62
+    d.ellipse([dx - 4, dy - 4, dx + 4, dy + 4], outline=(255, 255, 255), width=2)
+
+    noms = "zyx"
+    d.text((8, 6), f"un morceau de nappe : 1 echine (ambre) + {r['cotes']} cotes (bleu)",
+           fill=(226, 226, 230))
+    d.text((8, 24), f"{r['points']} points de passage, contre {len(r['chemins'][0])} "
+                    f"pour l'echine seule", fill=NOTRE)
+    d.text((8, 42), f"plan {noms[a1]}{noms[a2]} (tranche {noms[perp]}={tranche}) "
+                    f"- etendue {etendue[a1]:.0f} x {etendue[a2]:.0f} voxels",
+           fill=(150, 150, 156))
+    sortie.parent.mkdir(parents=True, exist_ok=True)
+    im.save(sortie)
+    return {"sortie": str(sortie), "points": r["points"], "cotes": r["cotes"],
+            "echine": len(r["chemins"][0])}
+
+
 def main() -> int:
     from PIL import Image, ImageDraw
 
@@ -201,6 +273,19 @@ def main() -> int:
               f"{r['edt_median_masque']:.2f} vx, {r['vides_masque']} vide(s) — {r['arret_masque']}")
         print(f"  distance  : {r['pas_distance']} pas, distance au bord médiane "
               f"{r['edt_median_distance']:.2f} vx, {r['vides_distance']} vide(s) — {r['arret_distance']}")
+
+    # ⚠ Le bloc de PHerc0358 est celui de la campagne `42` ; s'il n'a pas été téléchargé,
+    # la figure n'est pas produite — une figure fabriquée à partir de rien serait
+    # indistinguable d'une figure de données.
+    rn = figure_nappe(RACINE / "data" / "nappe" / "bloc_0358_r128.npy",
+                      [128.0, 128.0, 128.0],
+                      RACINE / "docs" / "images" / "42_morceau_de_nappe.png")
+    if rn is None:
+        print("  (pas de bloc PHerc0358 sous data/nappe/ — figure nappe non produite)")
+    else:
+        print(f"ecrit : {rn['sortie']}")
+        print(f"  {rn['cotes']} côtes, {rn['points']} points "
+              f"(échine seule : {rn['echine']})")
     return 0
 
 

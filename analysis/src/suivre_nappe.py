@@ -62,6 +62,15 @@ PAS = 1.0
 RAYON = 2
 # ⚠ Un recentrage plus grand que ca n'est pas une correction, c'est un changement de nappe.
 SAUT_MAX = 2.0
+# ⚠⚠ LE PLANCHER DE VALEUR DEPEND DES UNITES DU CHAMP, et l'oublier est un bug mesure.
+# Sur une prediction ramenee dans [0,1], 0,15 veut dire « il y a un peu de matiere ». Sur une
+# TRANSFORMEE DE DISTANCE en voxels, 0,15 veut dire « je suis a un sixieme de voxel du vide »,
+# c'est-a-dire collee au bord -- donc la marche traverse des filaments au lieu de s'arreter.
+# Mesure : sur 48 cotes d'un morceau de nappe reel, 4 traversaient un vide avec le plancher
+# de 0,15 ; le plancher d'un voxel est ce qui les arrete. Meme famille que la borne de lag
+# choisie pour la commodite : un seuil juste dans une unite, faux dans l'autre.
+VALEUR_MIN_PROBA = 0.15
+VALEUR_MIN_DISTANCE = 1.0
 
 
 def champ_de_distance(masque: np.ndarray, seuil: float = 0.5) -> np.ndarray:
@@ -244,8 +253,18 @@ def recentrer(bloc: np.ndarray, p: np.ndarray, n: np.ndarray,
     return p + t * n, float(t), float(vals[k])
 
 
+def plancher_pour(bloc: np.ndarray) -> float:
+    """Le plancher de valeur qui convient aux UNITES de ce champ.
+
+    ⚠ Un champ dont le maximum depasse 1,5 n'est pas une probabilite : c'est une distance en
+    voxels. Le plancher passe alors de « un peu de matiere » a « au moins un voxel de
+    matiere autour », sinon la marche longe les bords au lieu de suivre les axes medians.
+    """
+    return VALEUR_MIN_DISTANCE if float(bloc.max()) > 1.5 else VALEUR_MIN_PROBA
+
+
 def marcher(bloc: np.ndarray, depart, direction, pas: float = PAS,
-            n_pas: int = 200, valeur_min: float = 0.15,
+            n_pas: int = 200, valeur_min: float | None = None,
             aniso_min: float = 0.35, saut_max: float = SAUT_MAX,
             rayon: int = RAYON) -> dict:
     """Suivre la nappe depuis `depart` dans `direction`, et rendre le chemin.
@@ -254,6 +273,8 @@ def marcher(bloc: np.ndarray, depart, direction, pas: float = PAS,
     refuse un saut de nappe se ressemblent sur une liste de points, et ne veulent pas dire
     la meme chose.
     """
+    if valeur_min is None:
+        valeur_min = plancher_pour(bloc)
     p = np.asarray(depart, dtype=np.float64)
     d = np.asarray(direction, dtype=np.float64)
     d = d / (np.linalg.norm(d) or 1.0)
@@ -663,6 +684,25 @@ def verifier() -> int:
         ok(max(pires) == 0.0,
            f"notre EDT écrite à la main est EXACTEMENT celle de scipy "
            f"(écart max {max(pires):.1e}) — donc le repli sans scipy est sûr")
+
+    # ⚠⚠ LE PLANCHER SUIT LES UNITÉS DU CHAMP. Un seuil juste sur une probabilité est faux
+    # sur une distance en voxels : 0,15 voxel du vide, c'est collé au bord. Mesuré : avec
+    # l'ancien plancher, 4 des 48 côtes d'un morceau de nappe réel traversaient un vide.
+    ok(plancher_pour(np.array([[[0.0, 1.0]]], dtype=np.float32)) == VALEUR_MIN_PROBA,
+       "un champ dans [0,1] garde le plancher des probabilités")
+    ok(plancher_pour(np.array([[[0.0, 6.5]]], dtype=np.float32)) == VALEUR_MIN_DISTANCE,
+       "un champ de distance en voxels reçoit le plancher d'un voxel")
+    # ⚠ Sonde : sur la nappe cylindrique passée en distance, le plancher permissif laisse la
+    # marche approcher le bord ; le plancher d'un voxel l'en tient à l'écart.
+    dcyl = champ_de_distance(_nappe_cylindrique(n, rayon, epaisseur=1.4) > 0.5)
+    r_lache = marcher(dcyl, [48.0, c, c + rayon], [0.0, 1.0, 0.0], n_pas=120,
+                      valeur_min=0.05)
+    r_strict = marcher(dcyl, [48.0, c, c + rayon], [0.0, 1.0, 0.0], n_pas=120)
+    v_lache = min(echantillon(dcyl, np.asarray(q)) for q in r_lache["points"])
+    v_strict = min(echantillon(dcyl, np.asarray(q)) for q in r_strict["points"])
+    ok(v_strict >= v_lache,
+       f"le plancher strict ne descend jamais plus bas que le permissif "
+       f"({v_strict:.2f} contre {v_lache:.2f})")
 
     # ⚠⚠ LE MODE NAPPE doit couvrir une SURFACE, pas une ligne — c'est la réponse mesurée
     # au « 0,56 % de la surface » de `42`. Contrôle : sur le même cylindre, la couverture
