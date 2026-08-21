@@ -39,7 +39,13 @@ SENS=${SENS:-out}
 FENETRES=${FENETRES:-"31 81"}
 B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 VOL="$B/$ROULEAU/volumes/20250521151220-8.640um-1.2m-116keV-masked.zarr"
-SOURCE=${SOURCE:-$ROOT/data/trace/$ROULEAU\_officiel/mesh.tifxyz}
+# ⚠⚠ LE SEGMENT DE DEPART DOIT CONVERGER, et le choisir sur son nom ne suffit pas. Paye le
+# 2026-08-21 : `data/trace/PHerc1447_officiel/` porte « officiel » dans son nom, donc je l'ai
+# pris pour le bon. Mesure : alpha = +1,02, 72 a 78 % de fenetres dont le pic tombe au BORD
+# — il ne converge pas. Le segment qui converge est celui de `origine_pile`
+# (17,28 um a 81 couches, 0 % de pics au bord). `36` avait deja etabli que « officiel »
+# n'est pas synonyme de « bon » ; ici c'est le test de convergence qui le redit.
+SOURCE=${SOURCE:-$ROOT/data/origine_pile/mesh.tifxyz}
 [ -d "$SOURCE" ] || { echo "surface de depart absente : $SOURCE" >&2; exit 3; }
 SURF=$(curl -s --max-time 60 "$B/?list-type=2&prefix=$ROULEAU/representations/predictions/surfaces/&delimiter=/" \
        | tr '<' '\n' | grep "^Prefix>" | sed 's|^Prefix>||' | grep '\.zarr/$' | head -1 | sed 's|/$||')
@@ -89,7 +95,29 @@ print(f\"{d['ecart_trace_um_median']:.2f}\")" 2>/dev/null) || continue
 # spire 1 melangerait la surface et le chemin de mesure.
 W0="$DEST/spire00"
 mkdir -p "$W0"
+# ⚠ Si la surface de depart a deja un aplatissement (cas de `origine_pile`), on le reutilise
+# plutot que d'en refaire un : deux aplatissements de la meme surface n'ont aucune raison
+# d'etre identiques, et la spire 0 doit etre jugee sur celui qui a servi a la mesurer.
+if [ ! -d "$W0/plat" ] && [ -d "$(dirname "$SOURCE")/plat" ]; then
+  ln -s "$(cd "$(dirname "$SOURCE")/plat" && pwd)" "$W0/plat"
+  echo "  aplatissement de depart reutilise : $(dirname "$SOURCE")/plat"
+fi
 juger "$W0" "$SOURCE" "spire00" || { echo "la surface de depart ne se juge pas — la chaine ne dit RIEN" >&2; exit 4; }
+
+# ⚠⚠ REFUSER DE PARTIR D'UNE SURFACE QUI NE CONVERGE PAS. Generer la voisine d'une surface
+# posee en travers de l'empilement ne peut pas donner une surface posee sur une feuille : on
+# mesurerait la propagation d'un defaut, pas une chaine. Et le resultat aurait l'air d'un
+# resultat. Le verdict est LU dans le JSON du juge, pas suppose.
+V0=$(python3 -c "
+import json
+print(json.load(open('$ROOT/docs/spire_spire00.json'))['series'][0]['verdict'])" 2>/dev/null)
+if [ "$V0" != "converge" ]; then
+  echo "REFUS : la surface de depart ne converge pas (verdict « ${V0:-inconnu} »)." >&2
+  echo "  Enchainer depuis elle mesurerait la propagation d'un defaut, pas une chaine." >&2
+  echo "  Choisir une autre surface avec SOURCE=<chemin vers un mesh.tifxyz>." >&2
+  exit 5
+fi
+echo "spire 0 converge — on peut enchainer"
 
 PREC=$SOURCE
 for k in $(seq 1 "$N_SPIRES"); do

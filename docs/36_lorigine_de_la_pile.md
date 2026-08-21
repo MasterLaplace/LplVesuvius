@@ -179,6 +179,33 @@ de bâtir dessus.
   ensemble. ⓘ Le bucket publie un `<segment>_flattened.obj` : leur chaîne aplatit aussi, donc
   ce sont deux exécutions de la même forme, pas deux formes différentes.
 
+## ⭐⭐ Confirmé par le test de convergence : deux segments officiels, un seul converge *(2026-08-21)*
+
+Ce document établissait que « officiel » n'est pas synonyme de « bon », en mesurant la part
+du tiers central (18,2 / 25,0 / 62,5 / 68,2 %). Le test de convergence de
+[`38`](38_ce_qui_bouge_avec_la_fenetre.md) le redit, sur le même rouleau, dans les **mêmes
+fenêtres** (31 et 81 couches) et par la **même chaîne** :
+
+| segment publié de `PHerc1447` | aire | 31 c | 81 c | pics au bord | **α** |
+|---|---:|---:|---:|---:|---:|
+| `20250702235910-auto_grown_…292` | — | 17,28 µm | 17,30 µm | **0 %** | **+0,00** |
+| `auto_grown_20250502160708188` | 2,89 cm² | **129,6 µm** | **345,6 µm** | **72–78 %** | **+1,02** |
+
+Le second **ne converge pas** : son écart suit la fenêtre exactement comme les nôtres, et
+trois quarts de ses fenêtres ont leur pic **au bord** — c'est-à-dire qu'il n'y a pas de pic
+à trouver dedans.
+
+⚠⚠ **Et c'est un piège de nommage qui m'a eu.** Le répertoire local du second s'appelle
+`data/trace/PHerc1447_officiel/`. J'ai monté toute une campagne d'enchaînement de spires
+dessus **parce que son nom disait « officiel »**, en supposant qu'il s'agissait du segment
+mesuré à α = +0,00. Ce sont deux segments différents. Le nom d'un répertoire n'est pas une
+mesure.
+
+⭐ Remède structurel plutôt qu'une note : `tools/spire_suivante.sh` **refuse de partir d'une
+surface qui ne converge pas** — il juge la spire 0, **lit le verdict dans le JSON** et sort
+en le nommant. Enchaîner depuis une surface posée en travers mesurerait la propagation d'un
+défaut, et le résultat aurait l'air d'un résultat.
+
 ## Reproduire
 
 ```bash
