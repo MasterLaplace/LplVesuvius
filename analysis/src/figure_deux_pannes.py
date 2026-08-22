@@ -171,11 +171,16 @@ def main() -> int:
     # ── le bandeau, sous le cadre et jamais dessus ──────────────────────────────────
     y = Y(A_MIN) + 52
     x = MARGE
+    # ⚠ L'espacement suit la LARGEUR RÉELLE du libellé traduit, pas un pas fixe : l'anglais
+    # est plus long que le français, et un pas de 210 px suffisait à l'un et faisait
+    # chevaucher l'autre. Une mise en page calée sur une seule langue casse dans la seconde.
+    dessin = ImageDraw.Draw(img)
     for coul, lib in ((CONVERGE, "converge"), (PRES, "indiscernable du plafond"),
                       (LOIN, "discriminante")):
         g.ellipse([x, y + 3, x + 8, y + 11], fill=coul)
         g.text((x + 14, y), lib, font=f_p, fill=coul)
-        x += 210
+        trad = lib if not a.anglais else ANGLAIS.get(lib, lib)
+        x += 14 + int(dessin.textlength(trad, font=f_p)) + 40
     g.rectangle([MARGE, y + 24, MARGE + 8, y + 32], fill=BANDE, outline=(220, 150, 150))
     g.text((MARGE + 14, y + 22),
            "bande d'indiscernabilité, largeur = la résolution déclarée de α",

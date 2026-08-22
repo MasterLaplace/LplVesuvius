@@ -345,6 +345,17 @@ each series' measured $alpha$ alongside the $alpha$ it would have if every readi
 own window edge.
 
 #figure(
+  image("figures/49_deux_pannes.png", width: 100%),
+  caption: [
+    Each series placed on its *measured* $alpha$ against the $alpha$ it would have if every
+    reading were its own window edge. The ceiling $alpha$ is always near 1, so the band ---
+    whose width is $alpha$'s own declared resolution, not a display choice --- collects
+    exactly the series that cannot say whether a peak was there. The gap between the green
+    cloud and the band *is* the reassurance: no converging verdict is anywhere near it.
+  ],
+) <fig:twofailures>
+
+#figure(
   table(
     columns: (1fr, auto),
     align: (left, right),

@@ -30,6 +30,8 @@ uv run python ../analysis/src/figure_temoin_negatif.py --anglais \
     --positif "$ROOT/data/temoin_negatif/sur_sa_feuille.npy" \
     --negatif "$ROOT/data/temoin_negatif/en_travers.npy" \
     --sortie "$FIG/46_temoin_negatif.png"
+uv run python ../analysis/src/figure_deux_pannes.py --anglais \
+    --json "$ROOT/docs/audit_profils.json" --sortie "$FIG/49_deux_pannes.png"
 uv run python ../analysis/src/figure_derive_profondeur.py --anglais \
     --json "$ROOT/docs/derive_profondeur.json" --docs "$ROOT/docs" \
     --sortie "$FIG/47_derive_profondeur.png"

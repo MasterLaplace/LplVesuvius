@@ -97,11 +97,24 @@ class Traduisant:
         return getattr(self._d, nom)
 
     def traduire(self, s: str) -> str:
+        """Traduire en UNE passe : ce qui vient d'être traduit ne se retraduit pas.
+
+        ⚠⚠ La version séquentielle — une boucle de `str.replace` — laissait la SORTIE d'un
+        remplacement être reprise par une clé plus courte. Mesuré le 2026-08-22 :
+        « 0 parmi celles qui convergent » devenait « 0 among those that converge », puis la
+        clé « converge » → « converges » repassait dessus et rendait **« that converges »**.
+        Le libellé était juste dans la table et faux à l'écran, et le garde de langue ne
+        pouvait pas le voir puisque le résultat est de l'anglais.
+
+        ⭐ Une alternation unique, les clés les plus longues d'abord, remplace chaque
+        portion du texte SOURCE exactement une fois. C'est la même règle que le tri du
+        constructeur voulait déjà obtenir — il la rendait seulement probable.
+        """
         if not self._table:
             return s
-        out = s
-        for fr, en in self._table:
-            out = out.replace(fr, en)
+        motif = re.compile("|".join(re.escape(fr) for fr, _ in self._table))
+        table = dict(self._table)
+        out = motif.sub(lambda m: table[m.group(0)], s)
         if self._point:
             out = re.sub(r"(?<=\d),(?=\d)", ".", out)
         if reste_du_francais(out):
@@ -165,6 +178,25 @@ def verifier() -> int:
     # table de traduction et son CONNECTEUR nulle part : « rendu {a} contre {b} couches »
     # sortait « depth 21 contre 41 layers », et le garde le laissait passer. Le remede n'est
     # pas de mieux relire, c'est que le connecteur soit un mot temoin.
+    # ⚠⚠ LA CASCADE, epinglee. Deux cles dont l'une apparait dans la VALEUR de l'autre : la
+    # boucle sequentielle repassait sur sa propre sortie et rendait « that converges ».
+    dc = FauxDessin()
+    casc = Traduisant(dc, {"celles qui convergent": "those that converge",
+                           "converge": "converges"})
+    casc.text((0, 0), "0 parmi celles qui convergent")
+    v("une traduction n'est pas retraduite",
+      dc.ecrit[-1] == "0 parmi those that converge", dc.ecrit[-1])
+    # ⚠ Et le controle : chacune des deux cles doit encore fonctionner seule, sinon le
+    # remede aurait casse la traduction au lieu de la reparer.
+    casc.text((0, 0), "le verdict converge ici")
+    v("... et la clé courte s'applique quand elle est seule",
+      dc.ecrit[-1] == "le verdict converges ici", dc.ecrit[-1])
+    # ⚠ La cle la PLUS LONGUE gagne quand les deux matchent au meme endroit.
+    dl = FauxDessin()
+    Traduisant(dl, {"aire utile": "useful area", "aire": "area"}).text(
+        (0, 0), "aire utile et aire")
+    v("la clé la plus longue gagne", dl.ecrit[-1] == "useful area et area", dl.ecrit[-1])
+
     v("un connecteur français resté dans une phrase anglaise est vu",
       reste_du_francais("depth 21 contre 41 layers"))
     v("... et les autres connecteurs aussi",
