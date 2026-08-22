@@ -1246,6 +1246,12 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     octets et la sortie à 328. Le garde aurait tué un rendu sain et on en aurait conclu
     « injouable » sur un rendu qui marchait. ⭐ Surveiller l'**activité du processus**
     (`/proc/<pid>/io`, somme lecture + écriture) et pas son résultat.
+    ⚠⚠ **Et le chiffre que j'en avais tiré était faux.** J'ai annoncé « plus de douze
+    heures » à partir d'**un seul échantillon de quinze minutes** à 57 Ko/s ; le rendu
+    suivant, même échelle et même volume, a fait **1108 Kio/s** — vingt fois plus. Une
+    extrapolation depuis un point n'est pas une mesure, et j'ai arrêté une campagne
+    là-dessus. ⭐ C'est le rapport de débit du chien de garde lui-même qui l'a corrigé :
+    l'instrument construit pour diagnostiquer le problème a démenti le diagnostic.
 61. ⚠⚠ **α ≈ 1 a deux causes, et le verdict n'en nommait qu'une.** Un profil plat n'a pas de
     pic, donc l'écart rapporté est le **bord de la fenêtre** — et le rapport de deux bords
     vaut le rapport des fenêtres, donc α = 1 **par identité arithmétique**. Le verdict

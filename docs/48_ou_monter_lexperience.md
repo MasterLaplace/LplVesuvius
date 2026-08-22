@@ -117,11 +117,23 @@ troncature est bien levée. Mais le rendu, lui, devient inabordable : mesuré su
 ~2,6 milliards de voxels cela fait **plus de douze heures** pour une seule fenêtre, et
 quatre fois plus pour celle à 161 couches.
 
-⭐ Rien dans la sortie ne le disait. D'où `tools/rendre_surveille.sh` : il surveille la
-**croissance** de la sortie plutôt que le temps écoulé — un rendu long n'est pas un rendu
+⭐ Rien dans la sortie ne le disait. D'où `tools/rendre_surveille.sh` : il surveille
+l'**activité du processus** plutôt que le temps écoulé — un rendu long n'est pas un rendu
 bloqué — abandonne en le disant, et **rapporte le débit dans les deux cas**, succès compris.
-C'est ce chiffre qui dit si la même campagne est jouable à une autre échelle, et le deviner
-après coup est impossible.
+
+> ⚠⚠ **Et c'est ce rapport qui a corrigé mon propre diagnostic.** Le rendu suivant, même
+> échelle et même volume, a écrit **148 Mo en 131 s — 1108 Kio/s**, soit **vingt fois** le
+> débit que j'avais mesuré. Mon « plus de douze heures » était une extrapolation depuis **un
+> seul échantillon de quinze minutes**, et une extrapolation n'est pas une mesure.
+>
+> ⚠ Je ne sais pas ce qui explique l'écart. Deux candidats, non séparés : la **localité** —
+> une surface onze fois plus grande touche beaucoup plus de morceaux du zarr distant, et un
+> accès dispersé coûte bien plus qu'un accès séquentiel — et la simple **variabilité du
+> réseau**. Les distinguer demanderait de rejouer le même rendu deux fois, ce qui n'a pas
+> été fait.
+>
+> ⭐ Ce qui est acquis : le débit est désormais **rapporté à chaque rendu**, donc les runs
+> suivants donneront une distribution au lieu d'un point.
 
 ⚠ `ECHELLE` devient un paramètre. Une échelle plus grossière réduit l'échantillonnage **dans
 le plan** et pas le long de la normale, donc les microns du profil restent des microns ; ce

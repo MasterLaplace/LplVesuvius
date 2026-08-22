@@ -31,6 +31,13 @@ set -u
 cd "$(dirname "$0")/.." || exit 2
 ROOT=$PWD
 DEST=${1:-$ROOT/data/prediction_paris4}
+# ⚠⚠ RENDRE LA DESTINATION ABSOLUE. Plusieurs etapes s'executent depuis un autre repertoire
+# (`inference_xpu` pour le profil de profondeur), donc un chemin relatif passe en argument
+# se resout ailleurs et le fichier « n'existe pas » alors qu'il vient d'etre ecrit. Paye le
+# 2026-08-22 : le rendu a produit 148 Mo et l'etape suivante a rapporte
+# `FileNotFoundError: data/paris4_croise/.../rendu_41`. Un script qui marche ou casse selon
+# la forme de son argument est un script qui casse.
+case "$DEST" in /*) ;; *) DEST="$ROOT/$DEST" ;; esac
 B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 S="PHercParis4/representations/predictions/surfaces"
 GENERATIONS=${GENERATIONS:-60}
