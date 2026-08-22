@@ -108,6 +108,27 @@ paramètres identiques et on juge au test de convergence
 > fenêtre**. C'est ce que [`49`](49_alpha_ne_separe_pas_deux_pannes.md) a trouvé, et
 > l'instrument refuse désormais de conclure dans ce cas.
 
+### ⚠⚠ Et relever le plafond bute sur le coût du rendu, mesuré
+
+À 200 générations la trace passe de 0,317 à **3,655542 cm²** — onze fois plus, donc la
+troncature est bien levée. Mais le rendu, lui, devient inabordable : mesuré sur
+`/proc/<pid>/io`, `vc_render_tifxyz` à `--scale 1` sur ce rouleau à 2,4 µm a lu **51 Mo et
+écrit 1592 octets en quinze minutes** — 41 fichiers de sortie de **8 octets**. Pour
+~2,6 milliards de voxels cela fait **plus de douze heures** pour une seule fenêtre, et
+quatre fois plus pour celle à 161 couches.
+
+⭐ Rien dans la sortie ne le disait. D'où `tools/rendre_surveille.sh` : il surveille la
+**croissance** de la sortie plutôt que le temps écoulé — un rendu long n'est pas un rendu
+bloqué — abandonne en le disant, et **rapporte le débit dans les deux cas**, succès compris.
+C'est ce chiffre qui dit si la même campagne est jouable à une autre échelle, et le deviner
+après coup est impossible.
+
+⚠ `ECHELLE` devient un paramètre. Une échelle plus grossière réduit l'échantillonnage **dans
+le plan** et pas le long de la normale, donc les microns du profil restent des microns ; ce
+qui change est le nombre de fenêtres. C'est une vraie différence de mesure, et c'est
+pourquoi **les deux prédictions sont rendues à la même échelle** : la comparaison reste une
+comparaison, seule la valeur absolue cesse d'être comparable à un run à l'échelle 1.
+
 ⚠ Et les deux aires valent **0,317 cm²** à cinq chiffres près — les deux traces butent sur
 le même plafond de 60 générations. C'est la troncature de `35` : deux traces coupées au même
 endroit ont la même aire pour une raison qui n'a rien à voir avec la prédiction. **La

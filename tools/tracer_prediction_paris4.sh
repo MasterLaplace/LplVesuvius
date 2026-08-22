@@ -35,6 +35,20 @@ B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 S="PHercParis4/representations/predictions/surfaces"
 GENERATIONS=${GENERATIONS:-60}
 FENETRES=${FENETRES:-"41 161"}
+# ⚠⚠ L'ECHELLE DU RENDU, et pourquoi elle est un parametre. Mesure du 2026-08-22 : a
+# `--scale 1` sur ce rouleau a 2,4 µm, une surface de 3,65 cm² rendait ~57 Ko/s, soit plus
+# de DOUZE HEURES pour une fenetre -- et quatre fois plus pour la fenetre a 161 couches.
+#
+# ⭐ Une echelle plus grossiere reduit l'echantillonnage DANS LE PLAN, pas le long de la
+# normale : le profil de profondeur mesure le long de la normale au pas de `--slice-step`,
+# donc ses microns restent des microns. Ce qui change est le NOMBRE de fenetres, plus
+# grosses et moins nombreuses -- c'est une vraie difference de mesure, et c'est pourquoi
+# les DEUX predictions sont rendues a la meme echelle. La comparaison reste une
+# comparaison ; c'est la valeur absolue qui n'est pas comparable a un run a l'echelle 1.
+ECHELLE=${ECHELLE:-1}
+# ⚠ Patience du chien de garde, en secondes SANS croissance de la sortie. Le temps ecoule
+# ne dit rien -- un rendu long n'est pas un rendu bloque.
+PATIENCE=${PATIENCE:-300}
 
 declare -A PRED=(
   [ps256]="$S/20260411134726-surface-20260413141734-surface-recto-2um-ps256-L0-th0.45.zarr"
@@ -50,7 +64,7 @@ fi
 VOL=$(printf '%s' "$VOLS" | sed 's|/$||')
 UM=$(printf '%s' "$VOL" | grep -oE '[0-9]+\.[0-9]+um' | head -1 | sed 's/um$//')
 [ -n "$UM" ] || { echo "refus : resolution illisible sur $VOL" >&2; exit 3; }
-echo "== volume $(basename "$VOL")  ($UM µm)  ·  plafond $GENERATIONS generations"
+echo "== volume $(basename "$VOL")  ($UM µm)  ·  plafond $GENERATIONS generations  ·  échelle $ECHELLE"
 
 for NOM in ps256 m7; do
   G="$DEST/graine_$NOM.json"
@@ -101,9 +115,15 @@ PY
     OUT="$W/profil_${N}c.json"
     if [ ! -s "$OUT" ]; then
       rm -rf "$W/rendu_$N"
-      vc_render_tifxyz -v "$W/cache" --remote-url "$B/$VOL" --scale 1 -g 0 -s "$W/plat" \
+      if ! "$ROOT/tools/rendre_surveille.sh" "$W/rendu_$N" "$PATIENCE" -- \
+          -v "$W/cache" --remote-url "$B/$VOL" --scale "$ECHELLE" -g 0 -s "$W/plat" \
           --tif-output "$W/rendu_$N" -n "$N" --slice-step 1 --auto-crop \
-          > "$W/rendu_$N.log" 2>&1 || { echo "   ⚠ rendu $N couches echoue"; continue; }
+          > "$W/rendu_$N.log" 2>&1; then
+        echo "   ⚠ rendu $N couches abandonné :"
+        sed 's/^/     /' "$W/rendu_$N.log" | tail -4
+        continue
+      fi
+      sed -n '/rendu :/p' "$W/rendu_$N.log"
       ( cd "$ROOT/inference_xpu" && uv run python ../analysis/src/depth_profile.py \
           "$W/rendu_$N" --grid --step 200 --traced-layer $((N / 2)) --voxel-um "$UM" \
           --out "$OUT" ) > "$W/profil_$N.log" 2>&1 || { echo "   ⚠ profil $N echoue"; continue; }

@@ -763,6 +763,12 @@ fi
 # comptees a part et NON incluses : elles n'impriment pas « ALL PASS (n checks) », donc les
 # additionner demanderait de deviner leur compte -- et un total devine vaut moins qu'un
 # total plus petit mais exact.
+# ⚠⚠ COROLLAIRE, paye le 2026-08-22 : NE PAS ANTICIPER le compte. Ecrire dans les documents
+# la valeur qu'on PREVOIT pour ce run-ci fait echouer ce run-ci -- la garde compare aux
+# totaux du run PRECEDENT -- meme quand la prevision est exacte (46/1348 predits, 46/1348
+# mesures, et la batterie rouge quand meme). La marche a suivre est : lancer, LIRE le compte,
+# l'ecrire, et le run suivant confirme.
+#
 # ⚠ DECALAGE D'UN RUN, assume. Le garde-fou des chiffres a deja tourne quand ces totaux
 # sont ecrits, donc il a compare les documents au `temoins.json` du run PRECEDENT. Un compte
 # qui change n'est donc signale qu'au run suivant. Ce n'est pas un passage silencieux -- il
