@@ -161,11 +161,23 @@ def resumer(profils: list[dict]) -> dict:
     # ⚠ Ce constat est publie comme une mesure : le plus petit α parmi les non
     # discriminants, et le plus grand parmi ceux qui convergent. Si un jour une serie
     # convergente devenait non discriminante, ces deux nombres se croiseraient.
+    # ⚠⚠ LES SERIES OU UN CRITERE RELATIF SERAIT CONSTRUCTIBLE. `47` propose de lire un
+    # critere a DEUX profondeurs, comme l'exposant α, pour qu'il cesse d'avoir besoin d'une
+    # reference -- et note que ca demande des traces NON CENSUREES aux deux bouts, en
+    # affirmant que le depot en a deux. C'est verifiable ici : une serie est utilisable
+    # quand aucun de ses profils n'a son ecart pose sur le bord de sa fenetre.
+    #
+    # ⭐ Le compte est publie parce que c'est lui qui dit si le lot suivant est faisable, et
+    # il grandira avec les campagnes -- donc le deviner une fois ne suffirait pas.
+    utilisables = sorted(d for d, xs in par_dossier.items()
+                         if len(xs) >= 2 and not any(y.get("au_plafond") for y in xs)
+                         and all(y["etat"] == "mesure" for y in xs))
     alphas_ind = [j["alpha_mesure"] for j in indiscernables.values()]
     convergents = [j["alpha_mesure"] for j in juges.values() if j["alpha_mesure"] < 0.5]
     return {"profils": len(profils),
             "resolution_alpha": RESOLUTION,
             "series_indiscernables_du_plafond": indiscernables,
+            "series_utilisables_pour_un_critere_relatif": utilisables,
             # ⚠⚠ TOUTES les series jugees, et pas seulement celles qui echouent. Ne garder
             # que les 20 non discriminantes serait publier un echantillon filtre : un
             # lecteur ne pourrait pas voir que les 87 autres sont loin de leur plafond, et
@@ -253,6 +265,16 @@ def verifier() -> int:
       alpha_discriminant([{"couche_tracee": 20, "ecart_um": 44.0, "plafond_um": 48.0},
                           {"couche_tracee": 80, "ecart_um": 180.0, "plafond_um": 192.0}],
                          0.2)["ecart"] < 0.2)
+    # ⚠ Une serie « utilisable » exige DEUX fenetres au moins et AUCUN profil au bord : une
+    # seule fenetre ne fait pas un rapport, et un seul bord suffit a fausser l'exposant.
+    dossier = {"a/p1.json": {"au_plafond": False, "etat": "mesure"},
+               "a/p2.json": {"au_plafond": False, "etat": "mesure"}}
+    v("deux profils libres du bord font une série utilisable",
+      all(not x["au_plafond"] for x in dossier.values()) and len(dossier) >= 2)
+    v("... et un seul profil au bord la disqualifie",
+      any(x["au_plafond"] for x in {**dossier, "a/p3.json": {"au_plafond": True,
+                                                             "etat": "mesure"}}.values()))
+
     v("une série d'un seul point ne rend pas de jugement",
       alpha_discriminant([tout_au_bord[0]], 0.2) is None)
 
@@ -319,6 +341,14 @@ def main() -> int:
                   f"écart {j['ecart']:.4f}")
     else:
         print("\n  ⭐ tout α publié se sépare de son α de plafond d'au moins une résolution")
+    u = r["series_utilisables_pour_un_critere_relatif"]
+    print(f"\n  séries où AUCUN profil n'est au bord de sa fenêtre — celles sur lesquelles "
+          f"un critère relatif serait constructible : {len(u)}")
+    for x in u[:8]:
+        print(f"      {x}")
+    if len(u) > 8:
+        print(f"      … et {len(u) - 8} autre(s)")
+
     if r["alpha_min_indiscernable"] is not None:
         print(f"\n  ⭐⭐ et ce qui perd sa discrimination est EXACTEMENT le verdict "
               f"« suit la fenêtre » : le plus petit α non discriminant vaut "

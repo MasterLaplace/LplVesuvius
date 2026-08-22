@@ -783,6 +783,12 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                          ("series_jugees", "series jugees")):
             if d.get(cle) is not None:
                 out.append((nom, [str(d[cle])], p.name))
+        if d.get("series_utilisables_pour_un_critere_relatif") is not None:
+            # ⚠ Ce compte contredit un « deux » ecrit dans `47`, qui portait en fait sur une
+            # AUTRE population. Le garder sous garde evite que la correction se reperde.
+            out.append(("series utilisables pour un critere relatif",
+                        [str(len(d["series_utilisables_pour_un_critere_relatif"]))],
+                        p.name))
         for cle, nom in (("series_entierement_plates", "series entierement plates"),
                          ("series_indiscernables_du_plafond", "series indiscernables"),
                          ("convergents_indiscernables", "convergents indiscernables")):

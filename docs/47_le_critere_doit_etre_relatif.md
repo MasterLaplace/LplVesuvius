@@ -92,7 +92,17 @@ croit comparer.
 
 ⚠ Ce que ce document **n'établit pas** : que la forme relative fonctionne. Il établit que la
 forme absolue ne peut pas. Construire l'exposant demande des traces rendues à deux
-profondeurs **sans censure des deux côtés**, et le dépôt en a **deux**.
+profondeurs **sans censure des deux côtés**.
+
+> ⚠⚠ **Correction du 2026-08-22, et elle est de bonne nouvelle.** Ce paragraphe disait
+> « le dépôt en a **deux** ». Ce deux est juste — mais il porte sur la **cohorte de 16
+> traces** du second axe, pas sur le dépôt. L'audit de
+> [`49`](49_alpha_ne_separe_pas_deux_pannes.md) balaie les fichiers `profil*.json`, que
+> cette cohorte n'utilise pas : **deux populations disjointes**. Mesuré sur l'arbre entier,
+> **92 séries** ont au moins deux fenêtres et **aucun** profil posé sur son bord.
+>
+> ⭐ Le lot suivant n'est donc pas bloqué par le manque de matière. Il l'est par le travail
+> de définir le critère.
 
 ## Reproduire
 

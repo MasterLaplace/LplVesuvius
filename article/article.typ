@@ -982,8 +982,9 @@ Three properties recur in the instruments above and are worth naming.
 
 + *The relative criterion is proposed, not built* (#link(<sec:depth>)[Section 5.3]). We
   show that an absolute threshold on a profile criterion compares settings; we do not show
-  that reading the same criterion as an exponent works. That needs traces uncensored at
-  both depths, and this corpus contains two.
+  that reading the same criterion as an exponent works. It needs traces uncensored at both
+  depths --- 92 of our series qualify --- so what is missing is the definition of the
+  criterion, not the material to build it on.
 
 + *$alpha approx 1$ has two causes and does not separate them* (#link(<sec:twofailures>)[Section 3.5]).
   A flat profile yields $alpha approx 1$ by identity. Both causes condemn the trace, and no
