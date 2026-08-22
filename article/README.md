@@ -65,6 +65,19 @@ section Résultats. C'est la forme standard.
   arrangerait. C'est ce qui rend le reste crédible.
 - **On publie le corpus qui échoue.** Le §4.3 donne quatre corpus dont un seul marche.
   Publier le seul qui marche serait choisir son échantillon après l'avoir vu.
+- ⭐⭐ **Un zéro se rapporte avec sa puissance, ou il ne se rapporte pas.** Le §4.3 a d'abord
+  écrit « trois corpus non positifs » — et l'un des trois rendait **+0,425**. La colonne
+  *detectable ρ* montre qu'aucun des trois n'avait la puissance de voir l'effet cherché :
+  « ça ne réplique pas » et « on ne pouvait pas le voir » sont deux phrases très
+  différentes, et compter les secondes comme les premières gonfle une réfutation.
+- ⭐⭐ **Une section qui affaiblit votre propre instrument est ce qui le rend croyable.** Le
+  §3.5 dit que α ≈ 1 a **deux** causes et que le test n'en distingue pas — sur un instrument
+  qui est la contribution nº 1 de l'article. ⚠ Et la façon de l'écrire compte : on borne le
+  dégât (aucun verdict positif touché, mesuré) au lieu de le minimiser, et on montre la
+  borne en figure plutôt que de demander qu'on la croie.
+- ⚠ **Une réserve se met là où le lecteur en a besoin**, pas reléguée en Limitations. Les
+  encadrés rouges vivent dans la section qu'ils tempèrent ; Limitations récapitule, elle ne
+  révèle pas.
 
 ## Ce qu'il reste à faire avant d'en faire un vrai dépôt
 

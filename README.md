@@ -355,7 +355,7 @@ mega-octets ».
 ### La chaine de production, et les gardes du depot
 
 ```bash
-./tools/temoins.sh                  # 47 batteries, 1358 controles hors ligne, tous verts
+./tools/temoins.sh                  # 49 batteries, 1389 controles hors ligne, tous verts
                                     # ⚠ ces deux chiffres sont ECRITS PAR LE SCRIPT dans
                                     # docs/temoins.json et gardes comme tous les autres :
                                     # la version precedente disait 18 et 741, recopies a
