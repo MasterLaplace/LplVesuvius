@@ -24,6 +24,18 @@
 # d'une trace complete, et le plafond est donc RAPPORTE a cote du verdict -- c'est
 # exactement la lecon de `35`.
 #
+# ⚠⚠ UNE CELLULE = UN TIRAGE, ET LE TRACEUR EST UN TIRAGE. C'est le constat fondateur de
+# `30` et `35`, et il vaut jusqu'ici : la MEME graine, dans la MEME prediction, au MEME
+# plafond et a la MEME echelle, a rendu alpha = +0,89 puis +1,12 sur deux executions --
+# 0,23 d'ecart, soit PLUS que la resolution de +-0,2 que `38` §3.4 declare pour son propre
+# alpha. Le premier run lisait 41c→48,00 (le plafond) et le second 41c→38,40 (une vraie
+# mesure) : les deux tirages n'ont meme pas trouve la meme chose.
+#
+# ⚠ Donc ce 2×2 a un tirage par cellule ne peut PAS separer trois facteurs -- la prediction,
+# l'endroit, et le bruit de tirage. Il donne une premiere forme ; conclure demande de
+# repeter chaque cellule. C'est le meme piege que `35` a documente pour l'aire, applique a
+# alpha, et je l'ai vu en comparant deux runs que je croyais identiques.
+#
 # ⚠ Reprenable a chaque etape : ce qui existe est saute.
 #
 #   ./tools/tracer_prediction_paris4.sh [dest]

@@ -133,7 +133,9 @@ bloqué — abandonne en le disant, et **rapporte le débit dans les deux cas**,
 > été fait.
 >
 > ⭐ Ce qui est acquis : le débit est désormais **rapporté à chaque rendu**, donc les runs
-> suivants donneront une distribution au lieu d'un point.
+> suivants donnent une distribution au lieu d'un point. Mesurés depuis :
+> **1108, 1116, 3848 et 1834 Kio/s**. Le 57 Ko/s initial est une valeur aberrante d'un
+> facteur vingt à soixante-dix, et un seul point ne pouvait pas le montrer.
 
 ⚠ `ECHELLE` devient un paramètre. Une échelle plus grossière réduit l'échantillonnage **dans
 le plan** et pas le long de la normale, donc les microns du profil restent des microns ; ce
