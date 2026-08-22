@@ -1278,6 +1278,15 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     pour un run aux **mêmes** paramètres. ⭐ Corollaire pour qui lit un audit de l'arbre : un
     écart avec un document publié n'est pas forcément une erreur du document — regarder les
     horodatages d'abord.
+62 quater. ⚠⚠ **Conclure à une absence depuis UNE SEULE orthographe.** Payé deux fois dans
+    le même quart d'heure sur `21`. (a) J'ai grepé `^> #### ` et conclu « il n'y a pas de
+    section 13 » — elle existe, écrite `### ` hors de la citation. (b) J'ai cherché
+    « 0 candidat » dans un texte **anglais** et conclu que son contenu manquait — il est là,
+    sous « 105 pairs » et « 79 µm ». ⚠⚠⚠ Et la première m'a fait *renuméroter* un schéma
+    parfaitement cohérent : le « doublon 10 » est un **10 bis**, annoncé par un séparateur
+    juste au-dessus que mon motif ne voyait pas. ⭐ Chercher le **contenu** avant de conclure
+    à l'absence d'une **forme** — et, devant une incohérence apparente dans un document
+    ancien, se demander d'abord si c'est le motif de recherche qui est trop étroit.
 63. ⚠ **Ne pas anticiper un compte, même juste.** Écrire dans les documents le total qu'on
     prévoit pour le run courant le fait échouer — la garde compare aux totaux du run
     **précédent**. Prédiction 46/1348, mesure 46/1348, batterie rouge quand même. Lancer,
