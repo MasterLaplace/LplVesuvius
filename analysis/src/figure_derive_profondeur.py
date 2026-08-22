@@ -25,22 +25,29 @@ import json
 import sys
 from pathlib import Path
 
+# ⚠⚠ DEUX PANNEAUX COTE A COTE, et ce n'est pas qu'une question de place. Empiles, les deux
+# bandes faisaient 1178 px de haut : dans l'article la figure ne tenait plus sous son texte
+# et laissait une demi-page blanche, ce qui se lit comme une page tronquee. Cote a cote,
+# elles tiennent -- ET les deux criteres d'une meme trace se retrouvent sur la MEME ligne,
+# donc on lit d'un coup qu'une trace collee a son plafond a gauche peut bouger beaucoup a
+# droite. La contrainte de mise en page a produit une meilleure figure.
 LARGEUR = 1120
-X0, LARG = 210, 660
+X0, LARG = 190, 400          # panneau gauche : la distance
+X1, LARG1 = 660, 300         # panneau droit : un critere sans plafond
 MARGE = 40
-LIGNE = 26
+LIGNE = 22
 
 ANGLAIS = {
     "Un critère mesuré à une profondeur ne juge pas une trace rendue à une autre":
         "A criterion measured at one depth does not judge a trace rendered at another",
     "distance à la matière (µm) — ": "distance to matter (µm) — ",
     "plafond du rendu": "render ceiling",
-    "trait vertical = le plafond de CETTE trace (deux voxels, deux plafonds)":
-        "vertical tick = the ceiling of THIS trace (two voxels, two ceilings)",
     "au plafond : la valeur est le RÉGLAGE, pas la surface":
         "at the ceiling: the value is the SETTING, not the surface",
     "mesurée entre les deux plafonds": "measured between the two ceilings",
-    "part au bord du profil (sans plafond) — ": "share at the profile edge (no ceiling) — ",
+    "part au bord du profil (sans plafond)": "share at the profile edge (no ceiling)",
+    "│ = le plafond de CETTE trace": "│ = the ceiling of THIS trace",
+    " contre ": " against ",
     "rendu ": "depth ",
     " couches": " layers",
     "traces au plafond : ": "traces at the ceiling: ",
@@ -142,8 +149,7 @@ def main() -> int:
         return ImageFont.load_default()
 
     f_t, f_n, f_p = police(22, True), police(15), police(12)
-    haut_bande = LIGNE * len(paires) + 54
-    hauteur = MARGE + 34 + haut_bande + 58 + LIGNE * len(paires) + 40 + 4 * 20 + MARGE
+    hauteur = MARGE + 34 + 30 + LIGNE * len(paires) + 108 + 4 * 20 + MARGE
     img = Image.new("RGB", (LARGEUR, hauteur), FOND)
     g = langue.Traduisant(ImageDraw.Draw(img), ANGLAIS if a.anglais else None)
 
@@ -155,62 +161,67 @@ def main() -> int:
     # ── bande 1 : la distance, et les deux plafonds ──────────────────────────────────
     g.text((MARGE, y), f"distance à la matière (µm) — rendu {pb} contre {ph} couches",
            font=f_n, fill=TEXTE)
-    y0 = y + 26
-    # ⚠⚠ Le plafond est tracé PAR TRACE et non pour la cohorte. La cohorte mélange deux
-    # tailles de voxel, donc deux plafonds : une ligne unique ferait passer les traces de
-    # l'autre voxel pour des traces SOUS le plafond alors qu'elles sont exactement AU leur,
-    # et la moitié de la censure disparaîtrait de la figure sans qu'aucun chiffre ne bouge.
+    g.text((X1, y), "part au bord du profil (sans plafond)", font=f_n, fill=TEXTE)
+    y0 = y + 28
+
     for um, coul in ((d["plafond_bas_um"], BAS), (d["plafond_haut_um"], HAUT)):
         xx = x_de(um, umax)
-        g.text((xx - 10, y0 - 20), f"{um:.0f}".replace(".", ","), font=f_p, fill=coul)
+        g.text((xx - 10, y0 - 18), f"{um:.0f}".replace(".", ","), font=f_p, fill=coul)
+    for t in (0.0, 0.5, 1.0):
+        xx = X1 + int(t * LARG1)
+        g.line([xx, y0 - 4, xx, y0 + LIGNE * len(paires) + 4], fill=(232, 232, 232))
+        g.text((xx - 8, y0 + LIGNE * len(paires) + 6), f"{t:.1f}".replace(".", ","),
+               font=f_p, fill=DOUX)
+
     for i, (x_, y_) in enumerate(paires):
         yy = y0 + i * LIGNE + LIGNE // 2
-        g.text((MARGE, yy - 8), f"{x_['rouleau']} {x_['repetition']}", font=f_p, fill=TEXTE)
+        g.text((MARGE, yy - 7), f"{x_['rouleau']} {x_['repetition']}", font=f_p, fill=TEXTE)
+        # ── gauche : la distance, avec le plafond DE CETTE TRACE ────────────────────
+        # ⚠⚠ Le plafond est tracé par trace. La cohorte mélange deux tailles de voxel, donc
+        # deux plafonds : une ligne unique ferait passer les traces de l'autre voxel pour
+        # des traces SOUS le plafond alors qu'elles sont exactement AU leur, et la moitié
+        # de la censure disparaîtrait sans qu'aucun chiffre ne bouge.
         for ligne, coul in ((x_, BAS), (y_, HAUT)):
             if ligne.get("plafond_um") is not None:
                 xp = x_de(float(ligne["plafond_um"]), umax)
-                g.line([xp, yy - 10, xp, yy + 10], fill=coul, width=1)
+                g.line([xp, yy - 8, xp, yy + 8], fill=coul, width=1)
             if ligne.get("ecart_um") is None:
                 continue
             xx = x_de(float(ligne["ecart_um"]), umax)
             if ligne.get("censure"):
-                # ⚠ Une valeur censuree est dessinee CREUSE : pleine, elle se lirait comme
-                # une mesure, ce qu'elle n'est pas.
-                g.ellipse([xx - 5, yy - 5, xx + 5, yy + 5], outline=ALERTE, width=2)
+                # ⚠ Une valeur censurée est creuse : pleine, elle se lirait comme une
+                # mesure, ce qu'elle n'est pas.
+                g.ellipse([xx - 4, yy - 4, xx + 4, yy + 4], outline=ALERTE, width=2)
             else:
-                g.ellipse([xx - 4, yy - 4, xx + 4, yy + 4], fill=coul)
-    y = y0 + LIGNE * len(paires) + 16
-    g.ellipse([X0, y, X0 + 10, y + 10], outline=ALERTE, width=2)
-    g.text((X0 + 18, y - 2), "au plafond : la valeur est le RÉGLAGE, pas la surface",
+                g.ellipse([xx - 3, yy - 3, xx + 3, yy + 3], fill=coul)
+        # ── droite : un critère sans plafond, sur la MÊME ligne ─────────────────────
+        if x_.get("au_bord") is not None and y_.get("au_bord") is not None:
+            xa = X1 + int(float(x_["au_bord"]) * LARG1)
+            xb = X1 + int(float(y_["au_bord"]) * LARG1)
+            g.line([xa, yy, xb, yy], fill=DOUX, width=2)
+            g.ellipse([xa - 3, yy - 3, xa + 3, yy + 3], fill=BAS)
+            g.ellipse([xb - 3, yy - 3, xb + 3, yy + 3], fill=HAUT)
+
+    y = y0 + LIGNE * len(paires) + 26
+    # ⚠⚠ LE CODE COULEUR ETAIT NULLE PART. Deux points par ligne, gris et vert, et rien ne
+    # disait lequel est quelle profondeur -- donc la figure entiere etait illisible pour qui
+    # ne l'a pas ecrite. Trouve en la regardant, pas en relisant le code.
+    for i, (coul, lib) in enumerate(((BAS, f"rendu {pb} couches"),
+                                     (HAUT, f"rendu {ph} couches"))):
+        xx = MARGE + i * 160
+        g.ellipse([xx, y + 1, xx + 8, y + 9], fill=coul)
+        g.text((xx + 14, y - 2), lib, font=f_p, fill=coul)
+    y += 20
+    g.ellipse([MARGE, y, MARGE + 9, y + 9], outline=ALERTE, width=2)
+    g.text((MARGE + 16, y - 2), "au plafond : la valeur est le RÉGLAGE, pas la surface",
            font=f_p, fill=ALERTE)
-    g.ellipse([X0 + 430, y + 1, X0 + 438, y + 9], fill=HAUT)
-    g.text((X0 + 446, y - 2), "mesurée entre les deux plafonds", font=f_p, fill=TEXTE)
-    g.text((X0, y + 16),
-           "trait vertical = le plafond de CETTE trace (deux voxels, deux plafonds)",
-           font=f_p, fill=DOUX)
-    y += 58
+    # ⚠ La legende du trait vertical appartient au panneau GAUCHE, ou les traits sont --
+    # posee a droite, elle designait des traits qui n'y sont pas.
+    y += 18
+    g.text((MARGE, y - 2), "│ = le plafond de CETTE trace", font=f_p, fill=DOUX)
+    y += 24
 
-    # ── bande 2 : un critère SANS plafond, qui bouge quand même ──────────────────────
     ab = next((x for x in d["derives"] if x["critere"] == "au_bord"), None)
-    g.text((MARGE, y), f"part au bord du profil (sans plafond) — rendu {pb} contre {ph} "
-                       f"couches", font=f_n, fill=TEXTE)
-    y0 = y + 26
-    for i, (x_, y_) in enumerate(paires):
-        yy = y0 + i * LIGNE + LIGNE // 2
-        if x_.get("au_bord") is None or y_.get("au_bord") is None:
-            continue
-        xa = X0 + int(float(x_["au_bord"]) * LARG)
-        xb = X0 + int(float(y_["au_bord"]) * LARG)
-        g.line([xa, yy, xb, yy], fill=DOUX, width=2)
-        g.ellipse([xa - 4, yy - 4, xa + 4, yy + 4], fill=BAS)
-        g.ellipse([xb - 4, yy - 4, xb + 4, yy + 4], fill=HAUT)
-    for t in (0.0, 0.5, 1.0):
-        xx = X0 + int(t * LARG)
-        g.line([xx, y0 - 4, xx, y0 + LIGNE * len(paires) + 4], fill=(230, 230, 230))
-        g.text((xx - 8, y0 + LIGNE * len(paires) + 6), f"{t:.1f}".replace(".", ","),
-               font=f_p, fill=DOUX)
-    y = y0 + LIGNE * len(paires) + 34
-
     lignes = [f"traces au plafond : {d['censurees_en_bas']}/{d['lignes_en_bas']} en bas, "
               f"{d['censurees_en_haut']}/{d['lignes_en_haut']} en haut"]
     if ab and ab["derive_mediane"] is not None:

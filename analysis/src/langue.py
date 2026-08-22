@@ -38,6 +38,15 @@ MOTS_TEMOINS = (
     "sont", "aire", "trace", "traces", "rouleau", "rouleaux", "tirage", "tirages",
     "nappe", "nappes", "seuil", "plafond", "graine", "graines", "fenetre", "spire",
     "couches", "ecart", "ecarts", "paire", "paires", "voisinage", "meme", "toujours",
+    # ⚠⚠ LES CONNECTEURS, ajoutes le 2026-08-22 apres une fuite reelle. Un libelle compose
+    # par f-string — « rendu {pb} contre {ph} couches » — a ses MORCEAUX dans la table, donc
+    # « rendu » et « couches » etaient traduits, et « contre » est passe tel quel : la
+    # figure anglaise disait « depth 21 contre 41 layers ». Le garde ne l'a pas vu parce
+    # qu'aucun connecteur n'etait dans la liste. Ceux-ci n'ont pas d'homographe anglais,
+    # donc ils ne peuvent pas faire crier le garde sur une legende correcte.
+    "contre", "chaque", "entre", "vers", "cette", "cet", "ces", "leur", "leurs",
+    "ainsi", "donc", "mais", "alors", "aussi", "encore", "depuis", "selon", "chez",
+    "tres", "peu", "beaucoup", "hauteur", "largeur", "profondeur", "niveau", "niveaux",
 )
 
 # ⚠⚠ Ces mots existent DANS LES DEUX LANGUES, donc ils ne discriminent rien — les garder
@@ -152,6 +161,21 @@ def verifier() -> int:
     v("un mot outil aussi, même sans accent", reste_du_francais("aire par tour"))
     v("une phrase anglaise passe", not reste_du_francais("median gap per turn"))
     v("un nom propre n'est pas du français", not reste_du_francais("PHerc1447 gap"))
+    # ⚠⚠ LA fuite reelle, epinglee. Un libelle compose par f-string a ses morceaux dans la
+    # table de traduction et son CONNECTEUR nulle part : « rendu {a} contre {b} couches »
+    # sortait « depth 21 contre 41 layers », et le garde le laissait passer. Le remede n'est
+    # pas de mieux relire, c'est que le connecteur soit un mot temoin.
+    v("un connecteur français resté dans une phrase anglaise est vu",
+      reste_du_francais("depth 21 contre 41 layers"))
+    v("... et les autres connecteurs aussi",
+      all(reste_du_francais(f"one {m} two") for m in
+          ("contre", "entre", "vers", "chaque", "selon", "depuis")))
+    # ⚠ Et le controle du controle : ces mots ne doivent pas faire crier le garde sur une
+    # legende anglaise ordinaire. Un garde qui crie au loup finit ignore.
+    for phrase in ("depth 21 against 41 layers", "median drift per trace",
+                   "share at the profile edge", "the ceiling of THIS trace",
+                   "area reached (cm²) — log scale", "one dot per run"):
+        v(f"« {phrase} » passe", not reste_du_francais(phrase))
     # ⚠ « la » est un mot temoin ; « plafond » aussi. Sans eux, une legende sans accent
     # passerait pour traduite.
     v("une légende oubliée est signalée", reste_du_francais("plafond de generations"))

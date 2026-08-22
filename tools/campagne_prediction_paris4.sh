@@ -31,7 +31,6 @@ ROOT=$PWD
 DEST=${1:-$ROOT/data/prediction_paris4}
 B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 S="PHercParis4/representations/predictions/surfaces"
-VOL="PHercParis4/volumes/20241024131838-7.910um-53keV-masked.zarr"
 mkdir -p "$DEST"
 
 # ⚠ Les deux predictions, nommees par leur MODELE et pas par leur rang : « la premiere » et
@@ -43,10 +42,47 @@ declare -A PRED=(
   [m7]="$S/20260411134726-surface-20260413222639-surface-m7-L2-th0.2.zarr"
 )
 
-# ⚠⚠ La resolution du VOLUME, pas celle de la prediction. `vc_grow_seg_from_seed` calcule une
-# aire avec `voxelsize` : s'y tromper rend une aire fausse d'un facteur constant, et le
-# message d'erreur accuse la surface. Le volume publie de ce rouleau est a 7,910 µm.
-VOXEL=7.910
+# ⚠⚠ LA RESOLUTION EST DERIVEE DU SCAN, PAS ECRITE. `vc_grow_seg_from_seed` calcule une aire
+# avec `voxelsize` : s'y tromper rend une aire fausse d'un facteur constant, et le message
+# d'erreur accuse la surface.
+#
+# ⚠ La premiere version ecrivait `7.910` -- la resolution de `PHerc0172`, empruntee au
+# listage voisin. C'est EXACTEMENT le piege nº 6 contre lequel `campagne_graines.sh` met en
+# garde, commis deux lignes sous l'avertissement. Il a ete attrape parce qu'une graine
+# sortait a z = 38740, impossible a 7,910 µm sur un rouleau de dix centimetres et banale a
+# 2,400. Un chiffre emprunte se lit comme un chiffre juste ; c'est sa CONSEQUENCE qui le
+# trahit.
+#
+# ⭐ Les deux predictions portent le meme identifiant de scan en tete de leur nom, et le
+# volume qui le porte est unique. La resolution se lit donc dessus.
+SCAN=$(basename "${PRED[ps256]}" | cut -d- -f1)
+SCAN_M7=$(basename "${PRED[m7]}" | cut -d- -f1)
+if [ "$SCAN" != "$SCAN_M7" ]; then
+  echo "refus : les deux predictions ne viennent pas du meme scan ($SCAN vs $SCAN_M7) —" >&2
+  echo "        les comparer melangerait deux volumes." >&2
+  exit 2
+fi
+# ⚠ On garde les prefixes qui finissent par `.zarr/` et RIEN d'autre. Un listage S3 renvoie
+# aussi le prefixe demande lui-meme, qui ne finit pas par `.zarr/` -- et une premiere version
+# filtrait `grep -v '/$'`, ce qui elimine exactement les dossiers qu'on cherche, puisqu'ils
+# finissent tous par un slash. Le refus qui a suivi etait un FAUX negatif.
+VOLS=$(curl -s --max-time 60 "$B/?list-type=2&prefix=PHercParis4/volumes/$SCAN&delimiter=/" \
+       | tr '<' '\n' | grep "^Prefix>" | sed 's|^Prefix>||' | grep '\.zarr/$')
+# ⚠⚠ Un scan qui designerait PLUSIEURS volumes rendrait le choix ambigu, et prendre le
+# premier serait un tirage au sort deguise -- le defaut meme que `48` refuse de commettre.
+if [ "$(printf '%s\n' "$VOLS" | grep -c .)" -gt 1 ]; then
+  echo "refus : le scan $SCAN désigne plusieurs volumes — le choix appartient à l'appelant" >&2
+  printf '        %s\n' $VOLS >&2
+  exit 3
+fi
+VOL=$(printf '%s' "$VOLS" | head -1)
+VOXEL=$(printf '%s' "$VOL" | grep -oE '[0-9]+\.[0-9]+um' | head -1 | sed 's/um$//')
+if [ -z "${VOXEL:-}" ]; then
+  echo "refus : aucun volume trouvé pour le scan $SCAN — la résolution ne peut pas être" >&2
+  echo "        devinée, et l'emprunter à un rouleau voisin est le piège nº 6." >&2
+  exit 3
+fi
+echo "== scan $SCAN → volume $(basename "$VOL")  ($VOXEL µm)"
 NIVEAU=${NIVEAU:-2}
 CHUNKS=${CHUNKS:-24}
 

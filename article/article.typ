@@ -536,10 +536,11 @@ paired them by identity rather than by list position.
 #figure(
   image("figures/47_derive_profondeur.png", width: 100%),
   caption: [
-    Top: each trace's distance to matter at both render depths, with the ceiling of *that
+    Left: each trace's distance to matter at both render depths, with the ceiling of *that
     trace* drawn as a vertical tick. Hollow red marks sit exactly on their ceiling: the
-    value is the setting, not the surface. Bottom: a criterion with no ceiling --- a
-    bounded fraction --- moving between the same two depths.
+    value is the setting, not the surface. Right, on the *same rows*: a criterion with no
+    ceiling --- a bounded fraction --- moving between the same two depths. A trace pinned
+    to its ceiling on the left can still travel a long way on the right.
   ],
 ) <fig:depth>
 
