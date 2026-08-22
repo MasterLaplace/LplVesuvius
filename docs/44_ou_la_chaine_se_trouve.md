@@ -376,6 +376,40 @@ surface — le même maillage décimé passe de 240 à 49. Le plafond ne sert qu
 vingt minutes de rendu sur une surface manifestement repliée. Une surface sous le plafond
 n'est pas déclarée bonne : elle est jugée normalement.
 
+### ⚠⚠ « Enchaîner à budget constant » n'existe pas — le budget est CUMULATIF
+
+Première chaîne lancée, quatre pas au budget 100. Le deuxième pas rend **exactement la même
+aire que le premier** — 13,02 cm², 0 croisement, α = +0,000. Il n'a rien ajouté.
+
+Le journal du traceur le dit en toutes lettres :
+
+```
+GrowPatch work grid 271x258 (resume=219x206, extra_cols=1, extra_rows=1, …)
+Resuming from generation 99 with 43430 points.
+```
+
+Un `resume` **reprend le compteur de générations de la surface reprise** et s'arrête dès que
+`generation >= stop_gen` (`GrowPatch.cpp:4680`). La surface étendue est déjà à la génération
+99 ; avec `generations: 100`, il ne reste **qu'une** génération à faire, et une génération sur
+une grille de 219×206 n'ajoute rien de mesurable.
+
+⭐ **Donc « enchaîner à budget constant » n'est pas une opération.** Ce qui existe, c'est
+atteindre un budget total **en plusieurs séances**, chacune relançant l'optimisation globale.
+Le pas *I* doit viser *I × G*.
+
+⭐⭐ **Et ça rend la question de la chaîne beaucoup plus nette qu'elle ne l'était** :
+
+> Atteindre le budget 200 **en deux fois 100** vaut-il mieux que l'atteindre **d'un coup** —
+> ce qui a été mesuré à α = +1,313, 25 036 auto-intersections ?
+
+Même budget final, deux chemins. Si le passage par une étape intermédiaire — qui relance
+l'optimisation depuis une surface convergente — suffit à garder la nappe sur sa feuille, alors
+la bande peut grandir par paliers. Sinon, l'extension a une taille maximale et il faudra
+autre chose.
+
+⚠ La première chaîne a été arrêtée dès le diagnostic : continuer aurait fait deux pas de plus
+à une génération chacun, c'est-à-dire quarante minutes de rendu pour rien.
+
 ### ⚠ Une mesure tentée et écartée : « l'extension reste-t-elle mince ? »
 
 La question est bonne — une nappe étendue *le long d'elle-même* doit rester mince

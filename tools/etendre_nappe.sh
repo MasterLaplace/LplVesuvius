@@ -250,7 +250,18 @@ if [ "$ENCHAINER" -gt 0 ]; then
   # temps ferait varier deux choses par pas, et aucun ecart ne serait attribuable.
   G=$(echo "$GENERATIONS" | awk '{print $1}')
   echo
-  echo "=== ENCHAINEMENT : $ENCHAINER pas, budget $G a chaque pas ==="
+  # ⚠⚠ LE BUDGET EST CUMULATIF, ET C'EST MESURE. Un `resume` reprend le compteur de
+  # generations de la surface reprise (`Resuming from generation 99` dans le journal) et
+  # s'arrete des que `generation >= stop_gen` (GrowPatch.cpp:4680). Donc rejouer le MEME
+  # budget sur une surface deja etendue n'autorise plus qu'une seule generation -- mesure le
+  # 2026-08-22 : le pas 2 a rendu la meme aire a deux decimales pres, avec
+  # « extra_cols=1, extra_rows=1 » dans son journal.
+  #
+  # ⭐ « Enchainer a budget constant » n'existe donc pas. Ce qui existe, c'est atteindre un
+  # budget total en PLUSIEURS SEANCES, chacune relancant l'optimisation globale. Le pas I
+  # vise donc I x G, et la question que la chaine pose devient nette : atteindre 200 en deux
+  # fois 100 vaut-il mieux que 200 d'un coup (mesure a α = +1,313) ?
+  echo "=== ENCHAINEMENT : $ENCHAINER pas, budget CUMULATIF par pas de $G ==="
   COURANTE="$SOURCE"
   for I in $(seq 1 "$ENCHAINER"); do
     W="$DEST/pas$(printf '%03d' "$I")"
@@ -261,8 +272,9 @@ if [ "$ENCHAINER" -gt 0 ]; then
 import json
 json.dump({'mode': 'resume', 'voxelsize': $UM, 'thread_limit': $FILS,
            'cache_size': 6000000000,
-           'min_area_cm': $AIRE_MIN, 'generations': $G},
+           'min_area_cm': $AIRE_MIN, 'generations': $((I * G))},
           open('$W/trace/seed.json','w'), indent=2)"
+      echo "   budget cumulatif du pas $I : $((I * G))"
       ( cd "$W/trace" && timeout 7200 vc_grow_seg_from_seed -v "$B/$SURF" -t . -p seed.json \
           --resume "$COURANTE" > extend.log 2>&1 )
     fi
