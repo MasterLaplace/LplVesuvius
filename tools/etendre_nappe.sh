@@ -204,8 +204,13 @@ print(f\"{d['ecart_trace_um_median']:.2f}\")" 2>/dev/null) || continue
 # ⚠ Un reglage peut apparaitre DEUX FOIS dans la liste : c'est ainsi qu'on teste le
 # determinisme, en refaisant exactement la meme chose. Le dossier prend donc un indice de
 # repetition, sinon la seconde ecraserait la premiere et le test serait impossible.
+# ⚠⚠ EN MODE ENCHAINEMENT, ON NE BALAIE PAS. Paye le 2026-08-22 : demander une chaine
+# faisait d'abord tourner le balayage, dont le premier point (meme source, meme budget) EST
+# le premier pas de la chaine — donc vingt minutes de croissance et deux rendus payes deux
+# fois pour le meme resultat. Les deux modes repondent a deux questions differentes et il n'y
+# a aucune raison de payer l'une quand on pose l'autre.
 declare -A VU=()
-for G in $GENERATIONS; do
+for G in $([ "$ENCHAINER" -gt 0 ] && echo "" || echo "$GENERATIONS"); do
   VU[$G]=$(( ${VU[$G]:-0} + 1 ))
   if [ "${VU[$G]}" -gt 1 ]; then
     W="$DEST/gen$(printf '%03d' "$G")_bis${VU[$G]}"

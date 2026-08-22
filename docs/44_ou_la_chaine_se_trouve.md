@@ -376,6 +376,32 @@ surface — le même maillage décimé passe de 240 à 49. Le plafond ne sert qu
 vingt minutes de rendu sur une surface manifestement repliée. Une surface sous le plafond
 n'est pas déclarée bonne : elle est jugée normalement.
 
+### ⚠ Une mesure tentée et écartée : « l'extension reste-t-elle mince ? »
+
+La question est bonne — une nappe étendue *le long d'elle-même* doit rester mince
+radialement ; si elle avalait des feuilles voisines, ce serait autre chose qu'une extension.
+J'ai essayé de la mesurer par l'étalement des points autour du cercle ajusté :
+
+| | étalement radial (5–95 %) | en écarts entre nappes |
+|---|---:|---:|
+| source officielle | 1389 µm | **12,3** |
+| extension budget 100 | 3572 µm | 31,6 |
+| extension budget 200 | 5311 µm | 47,0 |
+
+⚠⚠ **La première ligne réfute l'instrument.** La source est un segment officiel qui converge
+parfaitement, et elle affiche déjà douze écarts entre nappes d'« épaisseur ». Ce que cette
+mesure capte n'est pas l'épaisseur mais l'**écart à la circularité** — la nappe n'est pas un
+arc de cercle, elle ondule (§6), et cette ondulation domine.
+
+⭐ **Et la bonne mesure existe déjà** : une surface qui se replie sur elle-même, c'est
+exactement ce que `vc_tifxyz_selfcross` détecte. Elle donne **0** auto-intersection au budget
+100 et **25 036** au budget 200. La question était donc déjà répondue, et la réponse est que
+l'extension reste bien une nappe simple tant que le budget tient.
+
+⚠ La mesure est consignée ici plutôt que supprimée : quelqu'un d'autre — ou moi dans deux
+jours — aurait essayé le même contournement, et savoir *pourquoi* il ne marche pas coûte moins
+cher que de le refaire.
+
 ### Deux façons d'obtenir une grande bande, et une seule reste
 
 | | ce que ça fait | verdict |
