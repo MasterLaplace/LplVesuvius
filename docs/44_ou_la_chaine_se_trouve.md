@@ -587,6 +587,35 @@ donnent 6,87 et 7,51 cm², à comparer aux 6,02 cm² de la source propre. Jugeme
 campagne aux mauvais seuils a été arrêtée dès le diagnostic plutôt que de rendre trois verdicts
 identiques.
 
+### ⚠⚠ Le gain net, lui, est nul : le cycle est un point fixe autour de 6 cm²
+
+Rogner l'extension 3 dans la bonne plage de générations :
+
+| | aire utile | α | **pic au bord** |
+|---|---:|---:|---:|
+| cycle 1, point propre | 6,02 cm² | +0,000 | ⭐ **0 %** |
+| cycle 2, rogné à gen ≤ 103 | 6,87 cm² | +0,000 | 3 % |
+| cycle 2, rogné à gen ≤ 106 | 7,51 cm² | +0,000 | 2 % |
+
+⚠⚠ **Aucun des deux ne revient à 0 %.** Et le seul moyen d'y revenir est de rogner sous la
+génération 100 — ce qui, on l'a vu, rend **exactement** la surface du cycle 1, 6,02 cm². Les
+options du second tour sont donc : 6,02 cm² **propre** (identique au tour précédent), ou 7,51
+cm² **à 2 %** — et une source à 2 % est mesurée pour rendre α = +0,422 au tour suivant.
+
+> **Le cycle rogner-étendre ne diverge pas : il converge vers un point fixe autour de 6 cm² de
+> surface propre.** Chaque tour regagne ce qu'il vient de perdre.
+
+⭐ Ce qui reste, et qui est réel : **une extension unique triple n'importe quel segment officiel
+qui converge** (4,28 → 12,97 cm², α = +0,000), et **on sait la ramener à une qualité de source**
+en rognant (6,02 cm² à 0 %, soit +41 % de matière propre en plus). Ce n'est pas la bande
+continue que le graal demande, mais c'est un gain net sur de la matière déjà validée, et c'est
+mesuré des deux côtés.
+
+⚠ Ce qui n'est **pas** exploré, et qui reste la voie ouverte : rien de tout ceci ne touche à
+**quelle** partie du rouleau la nappe couvre. Étendre une seule nappe est une opération locale ;
+couvrir un tour demande soit de partir de plusieurs segments officiels et de les **raccorder**
+(`vc_merge_tifxyz` existe et n'a jamais été essayé ici), soit un mécanisme que ce dépôt n'a pas.
+
 ### ⚠⚠ ~~Mais le cycle ne se referme pas — l'extension est une opération UNIQUE~~ *(réfuté ci-dessus)*
 
 Étendre depuis la nappe rognée, avec exactement la même quantité de croissance que la première
