@@ -69,7 +69,22 @@ BRUIT_ALPHA = 0.2
 # ou » : une constante morte au nom trompeur est une explication fausse posee dans le code.
 
 
-def analyser(serie: list[tuple[int, float]]) -> dict:
+# ⚠⚠ α EST UNE MEDIANE, DONC IL CACHE UNE MINORITE. Mesure du 2026-08-22 : une nappe etendue
+# rend α = +0,000 et un ecart median de 17,3 µm — exactement ceux du segment officiel de
+# reference — alors que **9,1 % de ses fenetres ont leur pic AU BORD**, contre 0,0 % pour la
+# reference. Un dixieme de la surface n'a aucune feuille a portee, et le verdict ne le dit
+# pas, parce qu'une mediane est insensible a une minorite. La periphERIE se VOIT sur le rendu
+# (`44`), pas dans α.
+#
+# ⭐ Le complement est `au_bord_relief`, deja calcule par `depth_profile` pour chaque surface.
+# Au-dela de ce seuil, le verdict porte une reserve : ce n'est pas un second verdict, c'est
+# la mention qu'une part de la surface echappe a celui qui est rendu.
+# Valeur posee a partir des cas mesures : 0,000 sur la reference et sur les spires radiales
+# qui convergent, 0,091 sur l'extension, 0,25 a 0,31 sur celles qui cassent.
+AU_BORD_RESERVE = 0.05
+
+
+def analyser(serie: list[tuple[int, float]], au_bord: float | None = None) -> dict:
     """Rendre le verdict d'une serie (couches, ecart) -- ou refuser de le rendre."""
     serie = sorted(serie)
     if len(serie) < 2:
@@ -105,9 +120,17 @@ def analyser(serie: list[tuple[int, float]]) -> dict:
     # deux campagnes en comptant les verdicts ne peut pas dire lesquels de ses comptes
     # tiennent — et ce depot en a publie trois.
     marge = abs(alpha - ALPHA_TRAVERS)
-    return {"verdict": verdict, "sens": sens, "serie": serie,
-            "croissance": croissance, "elargissement": fenetre, "alpha": alpha,
-            "marge_au_seuil": marge, "fragile": bool(marge < BRUIT_ALPHA)}
+    r = {"verdict": verdict, "sens": sens, "serie": serie,
+         "croissance": croissance, "elargissement": fenetre, "alpha": alpha,
+         "marge_au_seuil": marge, "fragile": bool(marge < BRUIT_ALPHA)}
+    if au_bord is not None:
+        r["au_bord"] = au_bord
+        r["reserve"] = bool(au_bord >= AU_BORD_RESERVE)
+        if r["reserve"]:
+            r["sens"] += (f" — ⚠ mais {au_bord * 100:.0f} % des fenêtres ont leur pic AU "
+                          f"BORD : cette part de la surface n'a aucune feuille à portée, "
+                          f"et α ne le montre pas (c'est une médiane)")
+    return r
 
 
 def verifier() -> int:
@@ -174,6 +197,25 @@ def verifier() -> int:
       juge_a_un_rendu.SEUIL_TRAVERS == ALPHA_TRAVERS,
       f"{juge_a_un_rendu.SEUIL_TRAVERS} contre {ALPHA_TRAVERS}")
 
+    # ⭐⭐ LA RESERVE : α est une mediane, donc il cache une minorite. Le cas est reel et
+    # c'est la figure qui l'a montre, pas le verdict — une extension a α = +0,000 dont 9,1 %
+    # des fenetres ont leur pic au bord.
+    r_ok = analyser([(31, 17.3), (81, 17.3)], au_bord=0.0)
+    v("une surface sans pic au bord ne porte aucune réserve", not r_ok["reserve"])
+    r_res = analyser([(31, 17.3), (81, 17.3)], au_bord=0.091)
+    v("le cas mesuré (9,1 % au bord) porte une réserve", r_res["reserve"],
+      f"au_bord={r_res['au_bord']}")
+    v("... et le verdict reste « converge » — la réserve n'est PAS un second verdict",
+      r_res["verdict"] == "converge", r_res["verdict"])
+    v("... et la réserve est DITE dans le sens, pas seulement dans un champ",
+      "AU BORD" in r_res["sens"])
+    v("sans mesure de bord, aucun champ n'est inventé",
+      "au_bord" not in analyser([(31, 17.3), (81, 17.3)]))
+    # ⚠ Temoin du temoin : si le seuil etait a zero, TOUT porterait une reserve et la mention
+    # ne voudrait plus rien.
+    v("une surface parfaite ne porte pas de réserve à cause d'un seuil nul",
+      AU_BORD_RESERVE > 0.0, str(AU_BORD_RESERVE))
+
     # Un cas intermediaire doit etre nomme, pas range de force.
     m = analyser([(21, 100.0), (81, 160.0)])
     v("une croissance lente est dite intermédiaire", m["verdict"] == "intermédiaire",
@@ -192,6 +234,10 @@ def main() -> int:
     ap.add_argument("--serie", action="append", default=[],
                     help="couches:écart,couches:écart… (répétable)")
     ap.add_argument("--nom", action="append", default=[])
+    ap.add_argument("--au-bord", action="append", default=[], type=float,
+                    help="part des fenêtres dont le pic tombe AU BORD (`au_bord_relief` de "
+                         "depth_profile) — le complément que α, étant une médiane, ne "
+                         "montre pas")
     ap.add_argument("--depuis", action="append", default=[], metavar="JSON[=nom]",
                     help="reprendre les séries d'un verdict déjà écrit (répétable) ; "
                          "« fichier.json=nom » renomme la série")
@@ -218,7 +264,8 @@ def main() -> int:
             # mesure faite sur un binaire perime, et lit desormais ses catalogues en
             # recalculant pour la meme raison. La SERIE, elle, est une donnee : elle ne
             # peut pas etre perimee.
-            recalcule = analyser([tuple(x) for x in brut_serie["serie"]])
+            recalcule = analyser([tuple(x) for x in brut_serie["serie"]],
+                                 brut_serie.get("au_bord"))
             avant = brut_serie.get("verdict")
             if avant and avant != recalcule["verdict"]:
                 print(f"⚠ verdict PÉRIMÉ dans {p_json.name} : « {avant} » recalculé en "
@@ -240,7 +287,7 @@ def main() -> int:
     for i, brut in enumerate(a.serie):
         nom = a.nom[i] if i < len(a.nom) else f"série {i + 1}"
         serie = [(int(p.split(":")[0]), float(p.split(":")[1])) for p in brut.split(",")]
-        r = analyser(serie)
+        r = analyser(serie, a.au_bord[i] if i < len(a.au_bord) else None)
         r["nom"] = nom
         sorties.append(r)
         pts = "  ".join(f"{n}c→{e:.1f}" for n, e in r["serie"])

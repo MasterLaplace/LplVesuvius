@@ -195,7 +195,18 @@ print(f\"{d['ecart_trace_um_median']:.2f}\")" 2>/dev/null) || continue
   rm -rf "$W/cache"
   [ -z "$SERIE" ] && { echo "== $NOM : $AIRE cm², $CROIS croisements — aucun profil"; return 1; }
   echo "== $NOM  ($AIRE cm², $CROIS auto-intersections)"
+  # ⚠ Le complement d'α, lu dans le profil de la fenetre la plus ETROITE — c'est la que
+  # « le pic tombe au bord » a un sens, une fenetre large finissant par contenir quelque
+  # chose. α est une mediane et ne montre pas cette part ; sans elle un verdict se lit trop
+  # bien (mesure : une extension a α = +0,000 dont 9,1 % des fenetres sont au bord).
+  local N0 BORD
+  N0=$(echo "$FENETRES" | awk '{print $1}')
+  BORD=$(python3 -c "
+import json,sys
+d=json.load(open(sys.argv[1])); d=d[0] if isinstance(d,list) else d
+print(d.get('au_bord_relief',''))" "$W/profil_${N0}c.json" 2>/dev/null || echo "")
   ( cd "$ROOT/experiments" && uv run python ../analysis/src/test_convergence.py \
+      ${BORD:+--au-bord "$BORD"} \
       --serie "${SERIE%,}" --nom "$NOM ($AIRE cm², $CROIS croisements)" \
       --json "$ROOT/docs/extension_${ETIQUETTE}_$NOM.json" | tail -4 )
 }

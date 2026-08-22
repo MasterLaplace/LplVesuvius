@@ -410,6 +410,25 @@ médiane est insensible à une minorité.
 > tout verdict α de ce dépôt en hérite. Le complément est `au_bord_relief`, qui est déjà
 > calculé partout et qu'il suffit de lire à côté.
 
+⭐ **Et il n'est plus « à côté » : chaque verdict le porte.** `test_convergence.py` accepte
+`--au-bord` et, au-delà de **5 %**, ajoute une **réserve** au verdict — pas un second verdict,
+la mention qu'une part de la surface échappe à celui qui est rendu. Les deux scripts de
+campagne le transmettent, lu dans le profil de la fenêtre la plus **étroite** : c'est là que
+« le pic tombe au bord » a un sens, une fenêtre large finissant par contenir quelque chose.
+
+Concrètement, deux α strictement identiques ne se lisent plus pareil :
+
+```
+source officielle     ✅ CONVERGE — la matière est là, tout près
+extension budget 100  ✅ CONVERGE — la matière est là, tout près
+                      — ⚠ mais 9 % des fenêtres ont leur pic AU BORD : cette part de la
+                        surface n'a aucune feuille à portée, et α ne le montre pas
+```
+
+⚠ Le seuil de 5 % vient des cas mesurés : 0,0 % sur la référence et sur les spires radiales
+qui convergent, 9,1 % sur l'extension, 25 à 31 % sur celles qui cassent. Et un témoin vérifie
+qu'il n'est **pas nul** — sinon tout porterait une réserve et la mention ne voudrait plus rien.
+
 ⭐ Conséquence pratique pour l'enchaînement, et c'est une prédiction que la chaîne en cours
 teste : si chaque pas ajoute ~9 % de périphérie mauvaise, l'enchaînement la **compose**.
 
