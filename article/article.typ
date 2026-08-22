@@ -42,7 +42,7 @@
 // pour quoi il existe, et un préprint reste en ligne bien plus longtemps qu'une adresse
 // d'école. Renseigner ici (« 0000-0000-0000-0000 ») et la ligne s'affiche ; laisser vide
 // et elle disparaît, plutôt qu'un gabarit qui partirait tel quel.
-#let ORCID = ""
+#let ORCID = "0009-0006-1371-4119"
 
 // Un raccourci pour les réserves, très utilisé dans ce texte.
 #let caveat(body) = block(
@@ -70,7 +70,7 @@
   #text(size: 9pt, font: ("DejaVu Sans Mono", "DejaVu Sans"))[guillaume.papineau\@epitech.eu]
   #if ORCID != "" [
     #v(0.2em)
-    #text(size: 9pt)[ORCID #ORCID]
+    #text(size: 9pt)[ORCID iD #link("https://orcid.org/" + ORCID)[#ORCID]]
   ]
   #v(0.5em)
   #text(size: 9pt)[Preprint --- 22 August 2026]
