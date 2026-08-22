@@ -76,6 +76,11 @@ BRUIT_ALPHA = 0.2
 # pas, parce qu'une mediane est insensible a une minorite. La periphERIE se VOIT sur le rendu
 # (`44`), pas dans α.
 #
+# ⚠⚠ ET LE COMPTE D'AUTO-INTERSECTIONS NE REMPLACE PAS CE COMPLEMENT. Contre-exemple mesure
+# le 2026-08-22 : une surface a **ZERO** auto-intersection et α = **+1,806**, la pire de toute
+# sa campagne. Une surface peut donc etre posee entierement en travers sans se croiser une
+# seule fois — se replier et etre mal posee sont deux defauts differents.
+#
 # ⭐ Le complement est `au_bord_relief`, deja calcule par `depth_profile` pour chaque surface.
 # Au-dela de ce seuil, le verdict porte une reserve : ce n'est pas un second verdict, c'est
 # la mention qu'une part de la surface echappe a celui qui est rendu.

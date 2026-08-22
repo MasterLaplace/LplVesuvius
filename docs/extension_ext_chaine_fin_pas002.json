@@ -1,0 +1,26 @@
+{
+  "series": [
+    {
+      "verdict": "suit la fenêtre",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement — et 20 % des fenêtres ont leur pic AU BORD, ce qui chiffre l'étendue du mal que α ne fait que signaler",
+      "serie": [
+        [
+          31,
+          25.92
+        ],
+        [
+          81,
+          146.88
+        ]
+      ],
+      "croissance": 5.666666666666666,
+      "elargissement": 2.6129032258064515,
+      "alpha": 1.8060070521792715,
+      "marge_au_seuil": 1.1060070521792715,
+      "fragile": false,
+      "au_bord": 0.1956521739130435,
+      "reserve": true,
+      "nom": "pas002 (20.06 cm², 0 croisements)"
+    }
+  ]
+}

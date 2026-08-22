@@ -514,6 +514,48 @@ une taille de pas qui tient, et la bande peut grandir indéfiniment.
 sauvé une campagne le 2026-08-20. Les deux verdicts ont été **re-jugés depuis leurs profils
 existants**, sans aucun rendu.
 
+### ⚠⚠ Découper aide OU nuit — et ce qui décide n'est pas la taille du pas
+
+Deux chaînes, deux conclusions opposées :
+
+| budget final | atteint | aire | croisements | α | bord |
+|---:|---|---:|---:|---:|---:|
+| 200 | d'un coup | 28,62 cm² | 25 036 | +1,313 | 30 % |
+| 200 | **en deux fois 100** | 50,30 cm² | 4 996 | **+1,040** *(mieux)* | 56 % |
+| **100** | **d'un coup** | 12,97 cm² | 0 | ⭐ **+0,000** | 9 % |
+| **100** | **en deux fois 50** | 20,06 cm² | **0** | ⚠⚠ **+1,806** *(pire)* | 20 % |
+
+Découper 200 en deux **aide** ; découper 100 en deux **nuit gravement**. La taille du pas ne
+peut donc pas être la règle.
+
+⭐⭐ **Ce qui sépare les deux, c'est la surface dont on repart.** Les deux premiers pas
+« convergent », mais l'un porte 9 % de périphérie sans feuille et l'autre 12 %. Repartir de
+celle à 12 % ne corrige pas ce défaut : il le **propage et l'amplifie** — 20 % au pas suivant,
+et α = +1,806.
+
+> **La qualité de la surface dont on repart compte au moins autant que la taille du pas.**
+
+⚠ Hypothèse soutenue par **trois points**, pas une loi : source à 0 % → succès, à 9 % → échec
+partiel, à 12 % → échec franc. C'est monotone, et c'est tout ce qu'on peut en dire.
+
+⭐ **Rendu opérationnel** : l'enchaînement refuse désormais de repartir d'une surface qui porte
+une **réserve**, en plus de refuser celles qui ne convergent pas. Le verdict seul ne suffisait
+pas — dans les deux chaînes ci-dessus, le premier pas convergeait.
+
+### ⚠⚠ Et zéro auto-intersection ne veut pas dire « bien posée »
+
+La ligne la plus instructive du tableau est la dernière : **0 auto-intersection et α = +1,806**,
+la pire surface de toute la campagne. La porte que j'avais ajoutée pour économiser des rendus
+(100 croisements/cm²) l'aurait laissée passer sans broncher.
+
+> **Se replier sur soi-même et être mal posée sont deux défauts différents.** Un compte de
+> croisements attrape le premier et ignore le second.
+
+⭐ Ça confirme sur le chemin de l'extension ce que [`43`](43_la_chaine_des_spires.md) §4 avait
+établi sur celui de la chaîne radiale — et c'est pourquoi la porte est documentée dans l'outil
+comme une **économie de calcul**, jamais comme un critère. Le contre-exemple est écrit à côté
+du seuil.
+
 ### ⚠ Une mesure tentée et écartée : « l'extension reste-t-elle mince ? »
 
 La question est bonne — une nappe étendue *le long d'elle-même* doit rester mince

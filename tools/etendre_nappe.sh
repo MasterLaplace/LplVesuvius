@@ -310,6 +310,29 @@ print(json.load(open(sys.argv[1]))['series'][0].get('verdict','?'))" "$VJ" 2>/de
       echo "   ARRET : le pas $I ne converge pas (« $V ») — enchainer plus loin ne mesurerait rien"
       break
     fi
+    # ⚠⚠ ET REFUSER D'ENCHAINER DEPUIS UNE SURFACE QUI PORTE UNE RESERVE. Le verdict seul ne
+    # suffit pas : mesure du 2026-08-22, deux chaines contradictoires que seule la reserve
+    # separe.
+    #   budget 100 atteint D'UN COUP depuis la source (0 % au bord)  -> α = +0,000, 9 % au bord
+    #   budget 100 atteint EN DEUX FOIS 50, le pas 1 etant a 12 % au bord -> α = +1,806
+    # Les deux pas 1 « convergent » ; celui qui porte 12 % de peripherie sans feuille propage
+    # et amplifie ce defaut (20 % au pas 2) au lieu de le corriger. La qualite de la surface
+    # dont on REPART compte donc au moins autant que la taille du pas.
+    #
+    # ⚠ Hypothese soutenue par trois points, pas une loi : source a 0 % -> succes, a 9 % ->
+    # echec partiel, a 12 % -> echec franc. C'est monotone, et c'est tout ce qu'on peut dire.
+    R=$(python3 -c "
+import json,sys
+print('1' if json.load(open(sys.argv[1]))['series'][0].get('reserve') else '0')" "$VJ" 2>/dev/null || echo "0")
+    if [ "$R" = "1" ]; then
+      B=$(python3 -c "
+import json,sys
+print(f\"{json.load(open(sys.argv[1]))['series'][0].get('au_bord',0)*100:.0f}\")" "$VJ" 2>/dev/null || echo "?")
+      echo "   ARRET : le pas $I converge mais porte une RESERVE ($B % de fenêtres au bord)."
+      echo "   Repartir d'une surface dont une part n'a pas de feuille propage ce défaut :"
+      echo "   mesuré, 12 % au pas 1 sont devenus 20 % au pas 2, avec α = +1,806."
+      break
+    fi
     COURANTE="$M"
   done
 fi
