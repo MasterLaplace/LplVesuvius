@@ -665,6 +665,11 @@ run "liens d'images valides"   "$ROOT/tools/images_des_docs.sh"
 # donc le milieu exact tombait un pixel a gauche quand la division ne se ferme pas en
 # binaire. Placer un point sur un axe est un ARRONDI.
 run "figure du 2×2"            uv run python "$ROOT/analysis/src/figure_2x2.py" --verifier
+# ⚠⚠ Les candidats de graine. Sa sonde la plus utile est celle du PLANCHER : a huit points,
+# la correlation detectable a 80 % de puissance depasse 0,84, donc un rho moyen n est pas une
+# absence d effet mais une absence de puissance. Le fichier refuse de conclure dessus, et le
+# controle exige qu une correlation PARFAITE, elle, passe -- sinon le refus ne vaut rien.
+run "candidats de graine"      uv run python "$ROOT/analysis/src/comparer_candidats.py" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys

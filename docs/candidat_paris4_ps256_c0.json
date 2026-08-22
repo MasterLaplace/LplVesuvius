@@ -1,0 +1,31 @@
+{
+  "series": [
+    {
+      "verdict": "suit la fenêtre",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement — et 100 % des fenêtres ont leur pic AU BORD, ce qui chiffre l'étendue du mal que α ne fait que signaler",
+      "serie": [
+        [
+          41,
+          48.0
+        ],
+        [
+          161,
+          192.0
+        ]
+      ],
+      "croissance": 4.0,
+      "elargissement": 3.926829268292683,
+      "alpha": 1.013497314592548,
+      "marge_au_seuil": 0.31349731459254815,
+      "fragile": false,
+      "amplitude": 0.04621853869177194,
+      "au_bord": 1.0,
+      "reserve": true,
+      "nom": "ps256_c0 (occ 0.0215, 15v)",
+      "profils": [
+        "/home/masterlaplace/LplVesuvius/data/paris4_candidats/ps256_c0/profil_41c.json",
+        "/home/masterlaplace/LplVesuvius/data/paris4_candidats/ps256_c0/profil_161c.json"
+      ]
+    }
+  ]
+}
