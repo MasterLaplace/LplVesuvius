@@ -1,0 +1,282 @@
+{
+  "PHerc0125": {
+    "paires": [
+      {
+        "surface": "20250821151825-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+        "volume": "20250821151825-9.362um-1.2m-113keV-masked.zarr",
+        "scan": "20250821151825",
+        "voxel_um": 9.362,
+        "volumes_du_scan": 1
+      }
+    ],
+    "orphelines": [],
+    "par_position": {
+      "surface": "20250821151825-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+      "volume": "20250821151825-9.362um-1.2m-113keV-masked.zarr",
+      "meme_scan": true,
+      "voxel_um": 9.362
+    },
+    "scans": 1
+  },
+  "PHerc0139": {
+    "paires": [
+      {
+        "surface": "20250728140407-surface-20250701154204-surface-recto-090.zarr",
+        "volume": "20250728140407-9.362um-1.2m-113keV-masked.zarr",
+        "scan": "20250728140407",
+        "voxel_um": 9.362,
+        "volumes_du_scan": 1
+      },
+      {
+        "surface": "20250728140407-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+        "volume": "20250728140407-9.362um-1.2m-113keV-masked.zarr",
+        "scan": "20250728140407",
+        "voxel_um": 9.362,
+        "volumes_du_scan": 1
+      }
+    ],
+    "orphelines": [],
+    "par_position": {
+      "surface": "20250728140407-surface-20250701154204-surface-recto-090.zarr",
+      "volume": "20250728140407-9.362um-1.2m-113keV-masked.zarr",
+      "meme_scan": true,
+      "voxel_um": 9.362
+    },
+    "scans": 7
+  },
+  "PHerc0191": {
+    "paires": [
+      {
+        "surface": "20250821151635-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+        "volume": "20250821151635-9.362um-1.2m-113keV-masked.zarr",
+        "scan": "20250821151635",
+        "voxel_um": 9.362,
+        "volumes_du_scan": 1
+      }
+    ],
+    "orphelines": [],
+    "par_position": {
+      "surface": "20250821151635-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+      "volume": "20250821151635-9.362um-1.2m-113keV-masked.zarr",
+      "meme_scan": true,
+      "voxel_um": 9.362
+    },
+    "scans": 1
+  },
+  "PHerc0211": {
+    "paires": [
+      {
+        "surface": "20250821151803-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+        "volume": "20250821151803-9.362um-1.2m-113keV-masked.zarr",
+        "scan": "20250821151803",
+        "voxel_um": 9.362,
+        "volumes_du_scan": 1
+      }
+    ],
+    "orphelines": [],
+    "par_position": {
+      "surface": "20250821151803-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+      "volume": "20250821151803-9.362um-1.2m-113keV-masked.zarr",
+      "meme_scan": true,
+      "voxel_um": 9.362
+    },
+    "scans": 1
+  },
+  "PHerc0257": {
+    "paires": [
+      {
+        "surface": "20250821151750-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+        "volume": "20250821151750-9.362um-1.2m-113keV-masked.zarr",
+        "scan": "20250821151750",
+        "voxel_um": 9.362,
+        "volumes_du_scan": 1
+      }
+    ],
+    "orphelines": [],
+    "par_position": {
+      "surface": "20250821151750-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+      "volume": "20250821151750-9.362um-1.2m-113keV-masked.zarr",
+      "meme_scan": true,
+      "voxel_um": 9.362
+    },
+    "scans": 1
+  },
+  "PHerc0268": {
+    "paires": [
+      {
+        "surface": "20251110183117-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+        "volume": "20251110183117-8.640um-1.2m-116keV-masked.zarr",
+        "scan": "20251110183117",
+        "voxel_um": 8.64,
+        "volumes_du_scan": 1
+      }
+    ],
+    "orphelines": [],
+    "par_position": {
+      "surface": "20251110183117-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+      "volume": "20251110183117-8.640um-1.2m-116keV-masked.zarr",
+      "meme_scan": true,
+      "voxel_um": 8.64
+    },
+    "scans": 1
+  },
+  "PHerc0358": {
+    "paires": [
+      {
+        "surface": "20250821151737-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+        "volume": "20250821151737-9.362um-1.2m-113keV-masked.zarr",
+        "scan": "20250821151737",
+        "voxel_um": 9.362,
+        "volumes_du_scan": 1
+      }
+    ],
+    "orphelines": [],
+    "par_position": {
+      "surface": "20250821151737-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+      "volume": "20250821151737-9.362um-1.2m-113keV-masked.zarr",
+      "meme_scan": true,
+      "voxel_um": 9.362
+    },
+    "scans": 1
+  },
+  "PHerc0800": {
+    "paires": [
+      {
+        "surface": "20250521135224-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+        "volume": "20250521135224-8.640um-1.2m-116keV-masked.zarr",
+        "scan": "20250521135224",
+        "voxel_um": 8.64,
+        "volumes_du_scan": 1
+      }
+    ],
+    "orphelines": [],
+    "par_position": {
+      "surface": "20250521135224-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+      "volume": "20250521135224-8.640um-1.2m-116keV-masked.zarr",
+      "meme_scan": true,
+      "voxel_um": 8.64
+    },
+    "scans": 1
+  },
+  "PHerc0813": {
+    "paires": [
+      {
+        "surface": "20250821151723-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+        "volume": "20250821151723-9.362um-1.2m-113keV-masked.zarr",
+        "scan": "20250821151723",
+        "voxel_um": 9.362,
+        "volumes_du_scan": 1
+      }
+    ],
+    "orphelines": [],
+    "par_position": {
+      "surface": "20250821151723-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+      "volume": "20250821151723-9.362um-1.2m-113keV-masked.zarr",
+      "meme_scan": true,
+      "voxel_um": 9.362
+    },
+    "scans": 1
+  },
+  "PHerc0826": {
+    "paires": [
+      {
+        "surface": "20250821151701-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+        "volume": "20250821151701-9.362um-1.2m-113keV-masked.zarr",
+        "scan": "20250821151701",
+        "voxel_um": 9.362,
+        "volumes_du_scan": 1
+      }
+    ],
+    "orphelines": [],
+    "par_position": {
+      "surface": "20250821151701-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+      "volume": "20250821151701-9.362um-1.2m-113keV-masked.zarr",
+      "meme_scan": true,
+      "voxel_um": 9.362
+    },
+    "scans": 1
+  },
+  "PHerc1203": {
+    "paires": [
+      {
+        "surface": "20250820131727-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+        "volume": "20250820131727-9.362um-1.2m-113keV-masked.zarr",
+        "scan": "20250820131727",
+        "voxel_um": 9.362,
+        "volumes_du_scan": 1
+      },
+      {
+        "surface": "20260319130212-surface-20260413222639-surface-m7-L2-th0.2.zarr",
+        "volume": "20260319130212-2.403um-0.2m-77keV-masked.zarr",
+        "scan": "20260319130212",
+        "voxel_um": 2.403,
+        "volumes_du_scan": 1
+      }
+    ],
+    "orphelines": [],
+    "par_position": {
+      "surface": "20250820131727-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+      "volume": "20250820131727-9.362um-1.2m-113keV-masked.zarr",
+      "meme_scan": true,
+      "voxel_um": 9.362
+    },
+    "scans": 2
+  },
+  "PHerc1218": {
+    "paires": [
+      {
+        "surface": "20250521120456-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+        "volume": "20250521120456-8.640um-1.2m-116keV-masked.zarr",
+        "scan": "20250521120456",
+        "voxel_um": 8.64,
+        "volumes_du_scan": 1
+      }
+    ],
+    "orphelines": [],
+    "par_position": {
+      "surface": "20250521120456-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+      "volume": "20250521120456-8.640um-1.2m-116keV-masked.zarr",
+      "meme_scan": true,
+      "voxel_um": 8.64
+    },
+    "scans": 1
+  },
+  "PHerc1447": {
+    "paires": [
+      {
+        "surface": "20250521151220-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+        "volume": "20250521151220-8.640um-1.2m-116keV-masked.zarr",
+        "scan": "20250521151220",
+        "voxel_um": 8.64,
+        "volumes_du_scan": 1
+      }
+    ],
+    "orphelines": [],
+    "par_position": {
+      "surface": "20250521151220-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+      "volume": "20250521151220-8.640um-1.2m-116keV-masked.zarr",
+      "meme_scan": true,
+      "voxel_um": 8.64
+    },
+    "scans": 1
+  },
+  "PHerc1545": {
+    "paires": [
+      {
+        "surface": "20250821151648-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+        "volume": "20250821151648-9.362um-1.2m-113keV-masked.zarr",
+        "scan": "20250821151648",
+        "voxel_um": 9.362,
+        "volumes_du_scan": 1
+      }
+    ],
+    "orphelines": [],
+    "par_position": {
+      "surface": "20250821151648-surface-20260413222639-surface-m7-L0-th0.2.zarr",
+      "volume": "20250821151648-9.362um-1.2m-113keV-masked.zarr",
+      "meme_scan": true,
+      "voxel_um": 9.362
+    },
+    "scans": 1
+  }
+}

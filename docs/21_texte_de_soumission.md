@@ -200,17 +200,17 @@ fautes en une : le mauvais critère, et une réserve omise que la source porte.
 > neighbours exist. The orientation bias a thresholded prediction introduces is measured,
 > not assumed: swept 0–90°, raw planarity spans 0.828–1.000, blurred 0.947–1.000.
 >
-> **Paired campaign, 12 prize scrolls** — ten with no published segment at all, plus the
-> two that have official ones. Each scroll traced twice, one seed per criterion, everything
-> else identical, so each scroll is its own control:
+> **Paired campaign, 13 prize scrolls** — ten with no published segment at all, plus the
+> three that have official ones. Each scroll traced twice, one seed per criterion,
+> everything else identical, so each scroll is its own control:
 >
 > | | area, sign test | self-intersections |
 > |---|---|---|
-> | planarity vs neighbourhood | **10 – 2, p = 0.0386** | **0 vs 0** |
+> | planarity vs neighbourhood | **11 – 2, p = 0.0225** | **0 vs 0** |
 >
 > ⚠⚠ **The self-intersection result does not replicate, and we report that.** On
 > `PHerc0358` the seed change took 240 transverse self-intersections to 0; across the other
-> eleven scrolls both criteria return zero. What replicates is *how far the tracer gets
+> twelve scrolls both criteria return zero. What replicates is *how far the tracer gets
 > before stalling* — and the extremes say it better than a median: on `PHerc0125` and
 > `PHerc0826` the neighbourhood seed stalls at **0.85 cm²**, barely above `min_area_cm`,
 > where planarity reaches 19.82 and 13.14.

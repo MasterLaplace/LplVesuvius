@@ -22,12 +22,24 @@ mkdir -p "$DEST"
 # Les dix rouleaux du Grand Prize SANS aucun segment publie (docs/23) : leur prix
 # First Letters de 50 000 $ est intact.
 #
-# ⭐ Plus DEUX rouleaux qui, eux, ont des segments officiels -- et c'est la seule facon de
-# lever le confond « notre trace » contre « ce rouleau-la est moins bien scanne ». Leurs
+# ⭐ Plus les TROIS rouleaux qui, eux, ont des segments officiels -- et c'est la seule facon
+# de lever le confond « notre trace » contre « ce rouleau-la est moins bien scanne ». Leurs
 # segments s'appellent `auto_grown_*` et leur meta.json dit `source: vc_grow_seg_from_seed`
 # avec `mode: explicit_seed` : c'est EXACTEMENT notre chaine, pilotee par le concours. Sur
-# ces deux rouleaux on peut donc comparer a resolution egale, sur le meme volume.
-ROULEAUX="PHerc0125 PHerc0191 PHerc0211 PHerc0257 PHerc0268 PHerc0358 PHerc0813 PHerc0826 PHerc1218 PHerc1545 PHerc1447 PHerc0800"
+# ces trois rouleaux on peut donc comparer a resolution egale, sur le meme volume.
+#
+# ⚠⚠ `PHerc1203` manquait, et son absence n'etait ecrite nulle part : `docs/35` §5 l'a
+# trouvee en constatant que la campagne des tirages ne couvrait que douze rouleaux sur
+# treize. Il est l'un des trois a segment publie, donc l'un des rares comparables.
+ROULEAUX="PHerc0125 PHerc0191 PHerc0211 PHerc0257 PHerc0268 PHerc0358 PHerc0813 PHerc0826 PHerc1218 PHerc1545 PHerc1447 PHerc0800 PHerc1203"
+
+# ⚠⚠ La resolution a prendre quand un rouleau a PLUSIEURS scans. `PHerc1203` est scanne a
+# 9,362 µm ET a 2,403 µm ; les douze autres sont tous a 8,64 ou 9,362. La campagne est une
+# comparaison APPARIEE, donc le treizieme doit etre trace dans la resolution de la cohorte
+# -- sinon il n'est comparable a rien, et rien ne le dirait. Un rouleau absent d'ici et a
+# scan unique n'a pas de choix a faire ; un rouleau a plusieurs scans absent d'ici fait
+# ECHOUER l'appariement, ce qui est le comportement voulu.
+declare -A VOXEL_COHORTE=( [PHerc1203]=9.362 [PHerc0139]=9.362 )
 
 lister() { curl -s --max-time 60 "$B/?list-type=2&prefix=$1&delimiter=/" \
            | tr '<' '\n' | grep "^Prefix>" | sed 's|^Prefix>||' | grep -vxF "$1"; }
@@ -37,15 +49,23 @@ for R in $ROULEAUX; do
   if [ -s "$OUT" ]; then echo "== $R deja fait"; continue; fi
   echo "== $R"
 
-  SURF=$(lister "$R/representations/predictions/surfaces/" | grep '\.zarr/$' | head -1 | sed 's|/$||')
-  VOL=$(lister "$R/volumes/" | head -1 | sed 's|/$||')
-  if [ -z "$SURF" ] || [ -z "$VOL" ]; then echo "   ⚠ pas de prediction ou pas de volume"; continue; fi
-
-  # ⚠ La resolution est DANS le nom du volume (« ...-9.362um-... »). On la lit, on ne la
-  # suppose pas -- et on refuse de tracer si elle est absente.
-  UM=$(basename "$VOL" | grep -oE '[0-9]+\.[0-9]+um' | head -1 | sed 's/um$//')
-  if [ -z "$UM" ]; then echo "   ⚠ taille de voxel illisible dans « $(basename "$VOL") » — rouleau saute"; continue; fi
-  echo "   voxel $UM µm"
+  # ⚠⚠ Surface et volume sont apparies par IDENTITE DE SCAN, pas par position dans deux
+  # listages. La version d'avant prenait `head -1` de chacun : juste tant qu'un rouleau
+  # n'a qu'un scan, et faux des qu'il en a deux si les deux listes ne se trient pas
+  # pareil. La panne serait muette -- tracer la surface d'un scan avec la resolution d'un
+  # autre rend une surface dont l'aire et la geometrie sont fausses d'un facteur constant,
+  # sans un seul message. Mesure du 2026-08-22 : le defaut est LATENT (0 rouleau mal
+  # apparie aujourd'hui), et deux rouleaux ont plusieurs scans.
+  CIBLE=${VOXEL_COHORTE[$R]:-}
+  if ! PAIRE=$(python3 "$ROOT/analysis/src/apparier_volumes.py" "$R" --pour-campagne \
+                 ${CIBLE:+--voxel-um "$CIBLE"} 2>"$DEST/$R.appariement.log"); then
+    echo "   ⚠ appariement refuse : $(cat "$DEST/$R.appariement.log")"; continue
+  fi
+  read -r SURF VOL UM <<<"$PAIRE"
+  if [ -z "$SURF" ] || [ -z "$VOL" ] || [ -z "$UM" ]; then
+    echo "   ⚠ pas de prediction ou pas de volume"; continue
+  fi
+  echo "   voxel $UM µm  ($(sed 's/^ *# *//' "$DEST/$R.appariement.log"))"
 
   WORK="$DEST/$R.trace"; rm -rf "$WORK"; mkdir -p "$WORK"
   sed "s/\"voxelsize\": [0-9.]*/\"voxelsize\": $UM/" \

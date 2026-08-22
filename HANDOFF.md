@@ -382,7 +382,7 @@ champs de direction) ni celui de `25` (le bloc plein) n'expliquent donc les 240.
 > ⚠ Le script a été **basculé par `mv`**, pas édité en place : bash lit un script par
 > offset au fil de l'exécution, et l'instance en cours aurait repris au milieu d'un token.
 
-Toutes les autres campagnes ont rendu : celle des graines (12 rouleaux) et les six
+Toutes les autres campagnes ont rendu : celle des graines (13 rouleaux) et les six
 variantes de `direction_fields`. ⚠ VSCode a été fermé pendant les dernières — **aucune
 n'a été perdue**, elles avaient toutes fini leurs 118 générations. Vérifier l'**état des
 fichiers** avant de conclure qu'un lot est mort : un `ps` vide ne dit rien de ce qui a
@@ -417,8 +417,8 @@ construit**, la chaîne officielle est pilotable en ligne de commande, et
 
 ⭐⭐ **Et le lot du 19 août après-midi a fermé T1**, avec deux corrections que la mesure a
 imposées : [`25`](docs/25_une_graine_choisie_sur_la_planeite.md). Le critère de graine passe
-sur la **planéité locale**, la campagne appariée sur **12 rouleaux du prix** donne
-p = 0,0386 sur l'aire — et **zéro auto-intersection des deux côtés**, donc le « 240 → 0 »
+sur la **planéité locale**, la campagne appariée sur **13 rouleaux du prix** donne
+p = 0,0225 sur l'aire — et **zéro auto-intersection des deux côtés**, donc le « 240 → 0 »
 de `24` est l'accident d'un seul rouleau. Le vrai coupable de `24` est ailleurs et il est
 nommé : sa graine était dans un bloc **entièrement plein** (occupation 1,000), donc sans
 géométrie à suivre.
@@ -892,7 +892,7 @@ cible — le pool ouvert fait **2 140 000 $** et le Grand Prize n'est pas le seu
 
 > ✅ **La moitié « où l'on part » est faite** : `analysis/src/trouver_graine.py` classe sur
 > la planéité locale, `tracecheck.py --seed` la publie, et la campagne appariée sur
-> 12 rouleaux la valide (`25`). ⚠ **La moitié « comment on avance » ne l'est pas** — voir
+> 13 rouleaux la valide (`25`). ⚠ **La moitié « comment on avance » ne l'est pas** — voir
 > T1b. ⚠ Ce qui suit est le contexte d'origine. **Il ne reste PAS exact en entier** :
 > les trois pistes qu'il propose ont été mesurées négatives (`26`), et les chiffres de
 > grilles qu'il cite ont été corrigés. Gardé pour la trace du raisonnement, pas comme

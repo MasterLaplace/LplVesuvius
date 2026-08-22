@@ -1,5 +1,5 @@
 {
-  "rouleaux": 12,
+  "rouleaux": 13,
   "lignes": [
     {
       "rouleau": "PHerc0125",
@@ -182,6 +182,26 @@
       }
     },
     {
+      "rouleau": "PHerc1203",
+      "voxel_um": 9.362,
+      "planarite": {
+        "critere": "planarite",
+        "x": 3443,
+        "y": 5133,
+        "z": 9419,
+        "aire_cm2": 19.835653,
+        "transverse": 0
+      },
+      "voisinage": {
+        "critere": "voisinage",
+        "x": 1564,
+        "y": 1924,
+        "z": 9224,
+        "aire_cm2": 9.603327,
+        "transverse": 0
+      }
+    },
+    {
       "rouleau": "PHerc1218",
       "voxel_um": 8.64,
       "planarite": {
@@ -243,16 +263,16 @@
     }
   ],
   "signes_aire": {
-    "pour_planarite": 10,
+    "pour_planarite": 11,
     "pour_voisinage": 2,
     "ex_aequo": 0,
-    "n_paires": 12,
-    "p_signes": 0.03857421875
+    "n_paires": 13,
+    "p_signes": 0.0224609375
   },
   "signes_croisements": {
     "pour_planarite": 0,
     "pour_voisinage": 0,
-    "ex_aequo": 12,
+    "ex_aequo": 13,
     "n_paires": 0,
     "p_signes": 1.0
   },

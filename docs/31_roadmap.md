@@ -167,7 +167,7 @@ la discussion.
 
 | étage | état | ce qui manque |
 |---|---|---|
-| **choisir où commencer** | ✅ `trouver_graine.py`, critère de planéité, répliqué sur 12 rouleaux (p = 0,0386) | rien de bloquant |
+| **choisir où commencer** | ✅ `trouver_graine.py`, critère de planéité, répliqué sur 13 rouleaux (p = 0,0225) | rien de bloquant |
 | **tracer** | ⚠ l'outil officiel marche mais **n'est pas reproductible** (`30`) | soit le rendre déterministe, soit **tirer N fois et sélectionner** |
 | **juger sans vérité terrain** | ✅ deux axes : auto-intersection (`03`) et profondeur (`12`) | ⭐ **leur désaccord** — §6 |
 | **corriger** | ⚠ `20` sait que l'erreur est structurée et que translater ne répare pas | le **gauchissement difféomorphe** — §7 |

@@ -85,7 +85,7 @@ treize fois sur quatorze. Le plafond d'occupation écarte peut-être une graine 
 il n'explique **pas** les 240.
 
 > ⚠ **Ce qui reste vrai de `25`** : le critère de planéité fait aller le traceur **plus
-> loin**, 10 fois sur 12, sur douze rouleaux appariés (p = 0,0386 sur l'aire). Ça, c'est
+> loin**, 11 fois sur 13, sur treize rouleaux appariés (p = 0,0225 sur l'aire). Ça, c'est
 > mesuré et répliqué. Ce qui tombe, c'est l'attribution des 240 — que `25` avait **déjà**
 > commencé à retirer en constatant que le « 240 → 0 » ne répliquait pas.
 

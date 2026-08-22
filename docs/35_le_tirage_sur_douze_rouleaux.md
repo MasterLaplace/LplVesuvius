@@ -110,12 +110,23 @@ teste pas.
   **groupé** ; savoir si un rouleau est plus instable qu'un autre demanderait bien plus de
   tirages, exactement comme `33` le mesure pour la carte de difficulté.
 - ⚠ **Un rouleau du prix manque, et pas pour la raison qu'on croirait.** La campagne
-  couvre 12 des 13 parce que `docs/table_graines.json` en contient 12 : **`PHerc1203` n'a
-  jamais eu de graine cherchée**, sur aucune campagne — `tools/campagne_graines.sh` ne le
-  liste pas, alors que `tools/carte_separabilite.sh` le liste. Ce n'est donc pas une
-  limite de cette campagne-ci, c'est un trou en amont, et il vaut aussi pour `25`. ⏳ À
-  combler : `PHerc1203` est l'un des trois rouleaux du prix qui ont un segment publié
-  (`16` §1), donc l'un des rares où l'on pourrait comparer notre trace à la leur.
+  couvre 12 des 13 parce que `docs/table_graines.json` en contenait 12 : **`PHerc1203`
+  n'avait jamais eu de graine cherchée**, sur aucune campagne — `tools/campagne_graines.sh`
+  ne le listait pas, alors que `tools/carte_separabilite.sh` le liste. Ce n'était donc pas
+  une limite de cette campagne-ci, c'était un trou en amont, et il valait aussi pour `25`.
+
+  ✅ **Comblé le 2026-08-22, côté graines** : `PHerc1203` a maintenant ses deux graines,
+  planéité **19,84 cm²** et voisinage **9,60 cm²**, zéro auto-intersection des deux côtés.
+  La campagne appariée de [`25`](25_une_graine_choisie_sur_la_planeite.md) passe de 12 à
+  **13 rouleaux**, et le résultat se **renforce** : 10/12 à p = 0,0386 devient **11/13 à
+  p = 0,0225**. ⚠ Le combler a demandé de réparer d'abord un appariement surface/volume
+  par POSITION, décrit dans `25` §4bis — `PHerc1203` est l'un des deux seuls rouleaux du
+  prix à avoir plusieurs scans, donc le seul endroit où ce défaut latent aurait mordu.
+
+  ⏳ **Et il reste ouvert du côté des tirages** : cette campagne-ci, elle, couvre toujours
+  **12 rouleaux**, parce que les six tirages de `PHerc1203` n'ont pas été faits. Le chiffre
+  publié ici (5,6 %, IC [1,5–13,6 %]) porte donc sur douze rouleaux, et le dire est moins
+  coûteux que de laisser croire qu'il en couvre treize.
 
 ## Reproduire
 

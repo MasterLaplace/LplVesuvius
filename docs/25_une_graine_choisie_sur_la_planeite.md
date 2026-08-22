@@ -152,8 +152,8 @@ d'occupation écarte peut-être une graine *risquée* ; il n'explique **pas** le
 étaient un tirage dans la queue.
 
 > ⭐ **Ce qui reste de ce document, et qui est répliqué** : le critère de planéité fait
-> aller le traceur **plus loin**, 10 fois sur 12, sur douze rouleaux appariés
-> (p = 0,0386). C'est le gain mesuré. Ce qui tombe est l'attribution du « 240 → 0 » — que
+> aller le traceur **plus loin**, 11 fois sur 13, sur treize rouleaux appariés
+> (p = 0,0225). C'est le gain mesuré. Ce qui tombe est l'attribution du « 240 → 0 » — que
 > ce document avait **déjà** commencé à retirer en constatant qu'il ne répliquait pas.
 
 
@@ -177,7 +177,7 @@ tenant.
 ⚠ **Mais regardez les striations à droite.** Elles s'enroulent et se superposent, comme à
 gauche. Le §5 dit pourquoi, et il le dit avec un nombre.
 
-## 4bis. ⭐ La réplication sur douze rouleaux du prix
+## 4bis. ⭐ La réplication sur treize rouleaux du prix
 
 Conception **appariée** : chaque rouleau est tracé deux fois, une graine par critère, tout
 le reste identique. Un rouleau est donc son propre témoin, et la différence ne peut pas
@@ -187,8 +187,14 @@ existe pour comparer.
 
 ⚠ Corrigé le 2026-08-19 : ce paragraphe disait « les **deux** qui en ont ». L'inventaire
 versionné `docs/etat_rouleaux_prix.txt` en recense **trois** : PHerc1447 (16 segments),
-PHerc0800 (6), PHerc1203 (1). La campagne, elle, en couvre bien douze — le compte du
-corpus était juste, c'est sa description qui ne l'était pas.
+PHerc0800 (6), PHerc1203 (1). La campagne, elle, n'en couvrait alors que douze — le compte
+du corpus était juste, c'est sa description qui ne l'était pas.
+
+⭐ **Corrigé pour de bon le 2026-08-22** : `PHerc1203` y est. Son absence n'était pas une
+décision, c'était un trou — `tools/campagne_graines.sh` ne le listait pas alors que
+`tools/carte_separabilite.sh` le liste, et [`35`](35_le_tirage_sur_douze_rouleaux.md) §5 l'a
+trouvé en constatant que la campagne des tirages ne couvrait que douze rouleaux sur treize.
+⚠ Le combler a demandé de réparer autre chose d'abord, et c'est le sujet du bloc ci-dessous.
 
 | rouleau | planéité | voisinage | | rouleau | planéité | voisinage |
 |---|---:|---:|---|---|---:|---:|
@@ -198,12 +204,30 @@ corpus était juste, c'est sa description qui ne l'était pas.
 | PHerc0257 | **19,82** | 8,26 | | PHerc1218 | **11,43** | 9,19 |
 | PHerc0268 | 16,90 | 16,99 | | PHerc1447 | **13,64** | 10,72 |
 | PHerc0358 | **19,82** | 10,08 | | PHerc1545 | **15,15** | 11,57 |
+| PHerc1203 | **19,84** | 9,60 | | | | |
 
-**Sur 12 rouleaux du prix — aire : planéité 10, voisinage 2, aucun ex æquo, test des
-signes p = 0,0386.**
+**Sur 13 rouleaux du prix — aire : planéité 11, voisinage 2, aucun ex æquo, test des
+signes p = 0,0225.**
+
+![la campagne appariée, un rouleau par ligne](images/25_campagne_graines.png)
+
+⚠⚠ **La figure porte deux réserves que les trois nombres ne portent pas.** D'abord les deux
+« défaites » se jouent à **0,09 et 0,001 cm²** — ce sont des égalités que le test des signes
+compte comme des pertes, donc l'erreur va dans le sens conservateur, et il faut pouvoir le
+voir. Ensuite **cinq traces de planéité sur treize butent sur le plafond de générations**
+(19,82–19,84 cm²) : sur celles-là, « la planéité va plus loin » veut dire « la planéité va
+jusqu'au budget », et la distance réellement atteignable n'est pas mesurée, elle est
+tronquée. ⭐ Le plafond n'est pas écrit en dur dans la figure — il est **dérivé** de la
+campagne (trois traces ou plus qui s'arrêtent ensemble), parce qu'un plafond est une
+propriété du budget et bougerait si la campagne était rejouée autrement.
+
+⭐ Le treizième rouleau **renforce** le résultat plutôt que de l'user : 10/12 à p = 0,0386
+devient **11/13 à p = 0,0225**. Ce n'est pas une surprise heureuse, c'est ce qu'un
+échantillon de plus fait quand l'effet est réel — et c'est exactement pourquoi le trou
+méritait d'être comblé plutôt que noté.
 
 ⚠⚠ **Auto-intersections : 0 partout, des deux côtés.** Le « 240 → 0 » de `PHerc0358` **ne
-réplique pas** comme propriété générale du critère : sur onze autres rouleaux, la graine par
+réplique pas** comme propriété générale du critère : sur douze autres rouleaux, la graine par
 voisinage — passée par la même barrière d'occupation — n'en produit aucune. Ce qui réplique,
 c'est la distance parcourue avant de caler, et les deux cas extrêmes le disent mieux qu'une
 moyenne : sur `PHerc0125` et `PHerc0826`, le voisinage cale à **0,85 cm²**, à peine
@@ -212,6 +236,38 @@ au-dessus du `min_area_cm` de 0,3, quand la planéité atteint 19,82 et 13,14.
 ⚠ **Ce que la colonne « voisinage » n'est pas** : un rejeu à l'identique de `24`. C'est le
 **critère** de `24` sous la machinerie actuelle — barrière d'occupation et voxel allumé
 compris. Le rejeu à l'identique est ci-dessus, et il rend bien 1544 1544 7768.
+
+### ⚠⚠ Le trou en cachait un autre : surface et volume étaient appariés PAR POSITION
+
+`campagne_graines.sh` choisissait quoi tracer avec `lister .../surfaces/ | head -1` et
+`lister .../volumes/ | head -1`. Tant qu'un rouleau n'a qu'un scan, les deux listes ont un
+élément et le résultat est juste. **`PHerc1203` en a deux** — 9,362 µm et 2,403 µm — et la
+première surface n'est le même scan que le premier volume **que si les deux listages se
+trient pareil**. Rien ne le garantit.
+
+⚠⚠ **Et la panne aurait été muette, du genre le plus coûteux.** Le script lit la taille de
+voxel dans le nom du volume : il aurait tracé la surface d'un scan avec la résolution d'un
+autre. `vc_grow_seg_from_seed` n'a aucun moyen de s'en apercevoir — il rend une surface dont
+l'aire, les coordonnées et la géométrie sont fausses d'un **facteur constant**, sans un seul
+message. C'est le piège que l'en-tête du script nomme déjà (« emprunter le chiffre d'un
+rouleau voisin ») appliqué à deux scans d'un **même** rouleau.
+
+⭐ Le remède est dans les noms : une prédiction s'appelle `<scan>-surface-….zarr` et son
+volume `<scan>-<voxel>um-….zarr`. [`analysis/src/apparier_volumes.py`](../analysis/src/apparier_volumes.py)
+apparie sur ce préfixe, et le script de campagne l'appelle.
+
+⚠ **Mesuré avant de conclure, et le résultat est plus sobre que la crainte** : sur les
+quatorze rouleaux du prix, **0 est mal apparié aujourd'hui** et **2 ont plusieurs scans**
+(`PHerc0139`, `PHerc1203`). Le défaut était donc **latent**, pas actif — aucun chiffre publié
+n'en dépend. Il est corrigé parce qu'un piège armé finit par se déclencher, pas parce qu'il
+avait déjà mordu.
+
+⭐⭐ **Et un rouleau à plusieurs scans pose une question que l'ordre d'un listage ne peut pas
+trancher.** Les douze autres sont tous à 8,64 ou 9,362 µm ; la campagne est une comparaison
+**appariée**, donc `PHerc1203` doit être tracé dans la résolution de la cohorte — sinon le
+treizième n'est comparable à rien, et rien ne le dirait. Le choix est donc **déclaré**
+(`VOXEL_COHORTE`) et l'outil **refuse** plutôt que de deviner : sans résolution demandée sur
+un rouleau à deux scans, il sort en erreur en nommant ce qui existe.
 
 ## 4ter. ⚠⚠ Le traceur n'est pas reproductible — mais son verdict l'est
 

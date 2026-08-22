@@ -577,6 +577,13 @@ run "géométrie de la chaîne"   uv run python "$ROOT/analysis/src/geometrie_ch
 # la premiere version confondait dans un seul `None` — et cette confusion a fait
 # publier « 49 paires eloignees » pour 45 mesurees.
 run "carte des segments"       uv run python "$ROOT/analysis/src/carte_segments.py" --verifier
+# ⚠⚠ L'appariement surface/volume : le script de campagne prenait `head -1` de deux
+# listages S3, ce qui est juste tant qu'un rouleau n'a qu'un scan et FAUX SANS UN MOT
+# des qu'il en a deux. Le temoin sonde justement le cas ou les deux listes ne se trient
+# pas pareil -- le seul qui justifie ce fichier.
+run "appariement des scans"    uv run python "$ROOT/analysis/src/apparier_volumes.py" --verifier
+run "campagne des graines"     uv run python "$ROOT/analysis/src/figure_graines.py" --verifier
+run "écarts entre segments"    uv run python "$ROOT/analysis/src/figure_segments.py" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
