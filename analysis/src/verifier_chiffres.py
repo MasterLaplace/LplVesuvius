@@ -768,6 +768,43 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         if d.get("bruit_retenu") is not None:
             ajoute("bruit retenu du 2x2", d["bruit_retenu"], 2, p.name)
 
+    p = racine / "docs" / "paris4_candidats.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        # ⚠ L alpha de chaque candidat, garde individuellement : c est la ligne du tableau
+        # de `48`, et un seul chiffre qui bouge sans que la campagne soit relancee est
+        # exactement ce que ce fichier existe pour attraper.
+        for l in d.get("lignes") or []:
+            if isinstance(l.get("alpha"), (int, float)):
+                ajoute(f"alpha du candidat {l['prediction']} c{l['candidat']}",
+                       l["alpha"], 2, p.name, signe=True)
+            # ⚠ Le NOMBRE DE DECIMALES gardees doit etre celui que le document ecrit,
+            # pas le plus precis disponible. Garder l occupation a quatre decimales
+            # forcerait « 0,7500 » dans un tableau ou trois suffisent a identifier la
+            # valeur -- c est le garde qui imposerait sa mise en forme au texte, alors
+            # qu il est la pour verifier le texte.
+            for cle, n in (("planarite", 4), ("occupation", 3)):
+                if isinstance(l.get(cle), (int, float)):
+                    ajoute(f"{cle} de {l['prediction']} c{l['candidat']}",
+                           l[cle], n, p.name)
+        for cle, nom in (("candidats", "candidats traces"), ("avec_alpha", "candidats avec alpha"),
+                         ("indecidables", "candidats indecidables"),
+                         ):
+            if d.get(cle) is not None:
+                out.append((nom, [str(d[cle])], p.name))
+        # ⚠ « convergents » est une LISTE de noms, pas un nombre : la garder telle quelle
+        # afficherait « = [] », ce qui ne se cherche dans aucun texte et ne verifie rien.
+        # C est son COMPTE que les documents citent.
+        if isinstance(d.get("convergents"), list):
+            out.append(("candidats convergents", [str(len(d["convergents"]))], p.name))
+        # ⚠⚠ Le plancher de detection : c est LUI qui justifie le refus de conclure sur une
+        # correlation. S il baissait sans qu on ajoute de points, le refus deviendrait faux.
+        if d.get("rho_detectable") is not None:
+            ajoute("plancher de correlation a huit points", d["rho_detectable"], 2, p.name)
+        if d.get("etendue_relative_aires") is not None:
+            ajoute("etendue relative des aires au plafond",
+                   d["etendue_relative_aires"] * 100, 2, p.name)
+
     p = racine / "docs" / "audit_profils.json"
     if p.exists():
         d = json.loads(p.read_text())

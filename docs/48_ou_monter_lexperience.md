@@ -205,6 +205,64 @@ endroit ont la même aire pour une raison qui n'a rien à voir avec la prédicti
 comparaison n'est donc pas encore concluante**, et relever le plafond est le prochain pas —
 pas un choix de prédiction.
 
+### ✅ Les huit candidats tracés — et ce n'était pas le classement, le 2026-08-22 (nuit)
+
+Le 2×2 a conclu que **c'est l'endroit qui décide**. En relisant les listes de candidats, un
+détail rendait cette conclusion suspecte : `trouver_graine` classe sur la **planarité seule**,
+et la graine utilisée par les seize cellules du 2×2 était, sur `m7`, celle qui a une planarité
+de 1,0000 sur **9 voisins** — moins soutenue que 0,987 sur **27**. Trois dix-millièmes séparent
+les planarités pendant que l'occupation varie **d'un facteur vingt**.
+
+⚠ Je n'ai **pas** inventé un score composite pour reclasser : choisir la pondération, c'est
+choisir la réponse avant de l'avoir mesurée. Les **huit** candidats ont été tracés.
+
+![huit candidats, trois propriétés, un seul résultat par rouleau](images/48_candidats.png)
+
+| candidat | planarité | occupation | voisins | résultat |
+|---|---|---|---|---|
+| `m7` c0 | 1,0000 | 0,750 | 9 | profil **plat** |
+| `m7` c1 | 1,0000 | 0,500 | 9 | profil **plat** |
+| `m7` c2 | 0,9891 | 0,502 | 27 | profil **plat** |
+| `m7` c3 | 0,9873 | 0,449 | 27 | profil **plat** |
+| `m7` c4 | 0,9870 | 0,414 | 27 | profil **plat** |
+| `ps256` c0 | 0,9977 | 0,022 | 15 | α = **+1,01** |
+| `ps256` c1 | 0,9974 | 0,356 | 18 | α = **+1,17** |
+| `ps256` c2 | 0,9938 | 0,465 | 25 | α = **+1,01** |
+
+> ⭐⭐ **Zéro convergence sur huit.** L'α le plus bas obtenu est **+1,01**, pour un seuil de
+> condamnation à 0,7. Les propriétés de graine varient d'un facteur vingt en occupation et de
+> trois en nombre de voisins ; le résultat, lui, **ne varie que par rouleau**.
+
+⚠ **L'instrument refuse de calculer une corrélation**, et c'est voulu : trois α seulement, et
+à huit points la corrélation détectable à 80 % de puissance dépasse **0,84** — rien de moins
+qu'une relation quasi parfaite ne serait visible. Un ρ moyen ne serait pas une absence
+d'effet, ce serait une absence de puissance.
+
+⚠ Les cinq graines `m7` tombent toutes sous le **refus du profil plat** de
+[`49`](49_alpha_ne_separe_pas_deux_pannes.md) : elles rapportent `41c→48,0` et `161c→192,0`,
+c'est-à-dire les **bords de fenêtre**, dont le rapport vaut celui des fenêtres — α ≈ 1 par
+identité arithmétique, quoi qu'il y ait dans le volume.
+
+### ⚠⚠ Et une colonne dont personne ne parlait : elles butent toutes sur le plafond
+
+Les huit aires tiennent entre **0,3174 et 0,3176 cm²** — **0.06%** d'écart, pour des graines
+séparées par des kilovoxels dans deux prédictions différentes. Ce n'est pas de la robustesse :
+les huit s'arrêtent à la **génération 59**. L'aire mesure le **réglage**, pas la donnée.
+
+Et ce plafond de 60 n'a jamais été un choix. Il a été fixé le jour où j'estimais le rendu à
+**57 Kio/s** — une extrapolation faite sur *un* échantillon, corrigée depuis par la mesure à
+**1108–5861 Kio/s**, vingt à cent fois plus vite. Tout ce que ce dépôt affirme sur ce rouleau
+a été mesuré sous un budget dimensionné pour un coût qui n'existe pas.
+
+> ⭐ **La leçon n'est pas « 60 était trop petit »** — on ne le sait pas encore, et
+> `tools/plafond_generations.sh` le mesure. Elle est plus gênante : un réglage pris pour une
+> raison qui a cessé d'être vraie ne se signale jamais tout seul, et la **cohérence** des
+> résultats qu'il produit est précisément ce qui le rend invisible.
+
+⚠ Le dépouillement compare la variation d'α au **bruit du tireur** — le même
+`vc_grow_seg_from_seed`, sur la même graine, rend déjà α de +0,89 à +1,12. Un écart de budget
+qui ne dépasse pas ce bruit ne veut rien dire, et le lire comme un effet serait lire du hasard.
+
 ## 5. Ce que ce document n'établit pas
 
 - ⚠ **Que la statistique typographique d'une carte prouve qu'elle porte du texte.** `45` le

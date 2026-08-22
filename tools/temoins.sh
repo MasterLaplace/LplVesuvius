@@ -681,6 +681,11 @@ run "effet du plafond"         uv run python "$ROOT/analysis/src/effet_du_plafon
 # sonde se matcherait elle-meme -- pkill -f sous un nouveau costume.
 run "traceur d une graine"     "$ROOT/tools/tracer_une_graine.sh" --verifier
 run "campagne du plafond"      "$ROOT/tools/plafond_generations.sh" --verifier
+# ⚠⚠ La figure des candidats. Ses deux sondes de mise en page attrapent deux defauts
+# DIFFERENTS, et le premier controle que j avais ecrit n attrapait que l un des deux :
+# retrecir l ecart entre colonnes retrecit AUSSI le cadre, donc tout reste dedans en se
+# recouvrant. Il faut mesurer la place libre, pas seulement le hors-cadre.
+run "figure des candidats"     uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_candidats.py" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
