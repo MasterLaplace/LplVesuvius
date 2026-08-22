@@ -595,6 +595,56 @@ truncations at the same place.
   by a rule stated before looking at what excluding them does.
 ]
 
+#caveat[
+  *And we then failed to apply it to ourselves.* Every trace we made on `PHercParis4` ---
+  the sixteen cells of the prediction cross, the eight seed candidates of
+  #link(<sec:seedchoice>)[Section 6.4] --- was run at 60 generations, and all of them stop
+  at generation 59. Their areas agree to *0.06 %* (0.3174 to 0.3176 cm#super[2]) across
+  seeds separated by thousands of voxels in two different predictions. That agreement is
+  exactly the signature this section teaches one to recognise, and we read it as nothing at
+  all for a week. The budget itself was not a choice: it was set when we estimated render
+  throughput at 57 KiB/s from a *single* observation, later measured at 1108--5861 KiB/s.
+  #linebreak()
+  The general lesson is worse than the local one. A setting adopted for a reason that has
+  since stopped being true never announces itself; the *coherence* of the results it
+  produces is precisely what makes it invisible. Eight traces agreeing to four significant
+  figures look like a robust measurement.
+]
+
+== Seed choice does not predict convergence <sec:seedchoice>
+
+#link(<sec:triage>)[Section 4] left one lever untried. Our seed finder ranks candidates by
+*planarity alone*, and on one prediction the seed every earlier trace had used scored 1.0000
+on *nine* supporting neighbours --- less supported than 0.987 on *twenty-seven*. Three
+ten-thousandths separate the planarities while occupancy varies by a factor of thirty-five.
+
+We did not invent a composite ranking to break the tie: choosing the weights is choosing the
+answer before measuring it. We traced all eight candidates.
+
+#figure(
+  image("figures/48_candidats.png", width: 100%),
+  caption: [
+    Eight seed candidates on `PHercParis4`. Each property is drawn on *its own observed
+    range*, printed above the column --- a full planarity bar spans 0.987 to 1.000, not 0 to
+    1. Five candidates return a profile too flat to measure at all; three return
+    $alpha approx 1$. The properties vary widely; the outcome varies only by prediction.
+  ],
+) <fig:candidates>
+
+*Zero of eight converge.* The lowest $alpha$ obtained is $+1.01$ against a condemnation
+threshold of 0.7. The five candidates of the second prediction all fall under the flat-profile
+refusal of #link(<sec:twofailures>)[Section 3.4]: they report window *edges*, whose ratio is
+the ratio of the windows, so $alpha approx 1$ by arithmetic identity whatever the volume
+contains.
+
+#caveat[
+  *We decline to report a correlation, and that is the point.* Only three candidates yield an
+  $alpha$ at all. With eight points, the correlation detectable at 80 % power and
+  $alpha = 0.05$ exceeds *0.84*: nothing short of a near-perfect relationship would be
+  visible. A middling $rho$ here would not be an absence of effect, it would be an absence of
+  power, and reporting it as the former is the most common way a null result is manufactured.
+]
+
 == A second ceiling: the render depth <sec:depth>
 
 The budget of #link(<sec:ceiling>)[Section 5.2] is not the only one. Rendering a surface

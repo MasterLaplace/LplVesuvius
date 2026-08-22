@@ -36,6 +36,24 @@ PLAT = (196, 168, 96)         # profil plat : aucune mesure possible
 GROUPE_A = (243, 241, 236)
 GROUPE_B = (247, 244, 238)
 
+# ⚠ La table est complete ou la figure le DIT : `langue.Traduisant` collecte tout libelle
+# non traduit et le fichier refuse de se taire dessus. Une figure a moitie traduite est pire
+# qu une figure francaise dans un article anglais -- elle a l air relue.
+ANGLAIS = {
+    "Huit graines candidates de PHercParis4": "Eight candidate seeds on PHercParis4",
+    "les propriétés varient beaucoup ; le résultat ne varie que par rouleau":
+        "the properties vary widely; the outcome varies only by prediction",
+    "planarité": "planarity",
+    "occupation": "occupancy",
+    "voisins": "neighbours",
+    "résultat du test de convergence": "convergence test outcome",
+    "condamnation au-delà de α = ": "condemned beyond α = ",
+    "profil plat — aucun α mesurable": "flat profile — no α measurable",
+    " candidats · ": " candidates · ",
+    " avec un α, tous au-delà du seuil · ": " with an α, all beyond the threshold · ",
+    " profils plats · aucune convergence": " flat profiles · no convergence",
+}
+
 
 def _pixels(im):
     """Les pixels d'une image, quelle que soit la version de Pillow.
@@ -86,7 +104,8 @@ def fraction(valeur: float, bornes: tuple[float, float]) -> float:
     return (valeur - lo) / (hi - lo)
 
 
-def dessiner(lignes: list[dict], sortie: Path, seuil: float = 0.7) -> dict:
+def dessiner(lignes: list[dict], sortie: Path, seuil: float = 0.7,
+             anglais: bool = False) -> dict:
     clefs = ("planarite", "occupation", "voisins")
     titres = {"planarite": "planarité", "occupation": "occupation", "voisins": "voisins"}
     et = etendues(lignes, clefs)
@@ -110,7 +129,8 @@ def dessiner(lignes: list[dict], sortie: Path, seuil: float = 0.7) -> dict:
     H = marge + 74 + len(lignes) * hl + 56
 
     img = Image.new("RGB", (L, H), FOND)
-    d = ImageDraw.Draw(img)
+    import langue
+    d = langue.Traduisant(ImageDraw.Draw(img), ANGLAIS if anglais else None)
     xmax = 0.0   # ⚠ le point le plus a droite reellement dessine, pour pouvoir l asserter
     # ⚠⚠ Le chevauchement entre colonnes est un defaut DIFFERENT du hors-cadre, et une
     # sonde a montre que le second ne l attrape pas : reduire l ecart retrecit aussi le
@@ -133,7 +153,8 @@ def dessiner(lignes: list[dict], sortie: Path, seuil: float = 0.7) -> dict:
         # planarite se lirait comme une variation, alors que les huit tiennent a 1,3 %.
         d.text((x, y_head + 15), f"{fmt.format(lo)} → {fmt.format(hi)}", fill=GRIS, font=pp)
     d.text((x_alpha, y_head), "résultat du test de convergence", fill=ENCRE, font=p)
-    d.text((x_alpha, y_head + 15), f"condamnation au-delà de α = {seuil}", fill=GRIS, font=pp)
+    d.text((x_alpha, y_head + 15), "condamnation au-delà de α = " + f"{seuil}",
+           fill=GRIS, font=pp)
 
     y = y_head + 40
     groupe_precedent = None
@@ -178,8 +199,9 @@ def dessiner(lignes: list[dict], sortie: Path, seuil: float = 0.7) -> dict:
 
     mes = sum(1 for l in lignes if isinstance(l.get("alpha"), (int, float)))
     d.text((marge, y + 14),
-           f"{len(lignes)} candidats · {mes} avec un α, tous au-delà du seuil · "
-           f"{len(lignes) - mes} profils plats · aucune convergence",
+           f"{len(lignes)}" + " candidats · " + f"{mes}"
+           + " avec un α, tous au-delà du seuil · " + f"{len(lignes) - mes}"
+           + " profils plats · aucune convergence",
            fill=ENCRE, font=p)
 
     sortie.parent.mkdir(parents=True, exist_ok=True)
@@ -188,6 +210,7 @@ def dessiner(lignes: list[dict], sortie: Path, seuil: float = 0.7) -> dict:
             "bord_droit_dessine": round(xmax, 1), "deborde": xmax > L - 2,
             "place_entre_colonnes": round(place_libre, 1),
             "colonnes_se_chevauchent": place_libre < 0,
+            "intraduits": d.intraduits(), "inchanges": d.inchanges(),
             "etendues": {k: list(v) for k, v in et.items()}}
 
 
@@ -251,6 +274,21 @@ def _verifier() -> int:
         long = [dict(x, alpha=None, verdict="indecidable") for x in base]
         v("une figure toute en profils plats reste dans son cadre",
           not dessiner(long, Path(td) / "c4.png")["deborde"])
+        # ⚠⚠ La table anglaise doit etre COMPLETE : un libelle oublie sort en francais au
+        # milieu d un article anglais, et rien ne le signale a la lecture d un PDF.
+        ra = dessiner(base, Path(td) / "en.png", anglais=True)
+        v("aucun libellé ne reste en français", not ra["intraduits"],
+          ", ".join(ra["intraduits"]))
+        # ⚠⚠ Le controle FORT, et le seul des deux qui attrape un nom commun oublie :
+        # `intraduits` cherche des mots-temoins francais, et « voisins » n en contient
+        # aucun -- sonde faite, la table amputee de cette cle restait verte. Ici on
+        # demande a la table d avoir EU UN EFFET sur chaque libelle porteur d un mot.
+        # ⚠ Les exceptions sont nommees une par une : les tolerer en silence rouvrirait
+        # le trou. Ici, aucune -- cette figure ne dessine aucun nom propre.
+        v("chaque libellé porteur d'un mot a été touché par la table",
+          not ra["inchanges"], ", ".join(ra["inchanges"]))
+        v("la version anglaise se dessine", (Path(td) / "en.png").stat().st_size > 0)
+        v("... et reste dans son cadre", not ra["deborde"])
         f3 = Path(td) / "c3.png"
         r3 = dessiner(base[:1], f3)
         v("un seul candidat se dessine encore", f3.is_file() and r3["candidats"] == 1)
@@ -267,6 +305,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--json", type=Path, default=Path("docs/paris4_candidats.json"))
     ap.add_argument("--sortie", type=Path, default=Path("docs/images/48_candidats.png"))
+    ap.add_argument("--anglais", action="store_true")
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()
     if a.verifier:
@@ -276,7 +315,11 @@ def main() -> int:
     if not lignes:
         print(f"aucune ligne de candidat dans {a.json}", file=sys.stderr)
         return 2
-    r = dessiner(lignes, a.sortie)
+    r = dessiner(lignes, a.sortie, anglais=a.anglais)
+    if a.anglais and r["intraduits"]:
+        print("  ⚠ libellés non traduits : " + ", ".join(r["intraduits"]),
+              file=sys.stderr)
+        return 3
     print(f"  écrit : {a.sortie}  ({r['largeur']}×{r['hauteur']}, "
           f"{r['candidats']} candidats, {r['avec_alpha']} avec un α)")
     return 0

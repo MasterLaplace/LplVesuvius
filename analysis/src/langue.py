@@ -26,6 +26,9 @@ une image à moitié traduite.
 """
 from __future__ import annotations
 
+import atexit
+import os
+import sys
 import re
 import unicodedata
 
@@ -76,6 +79,33 @@ def reste_du_francais(s: str) -> bool:
     return any(m in MOTS_TEMOINS and m not in AMBIGUS for m in mots)
 
 
+# ⚠⚠ Registre d audit. Chaque figure declare sa propre table, donc un oubli est local a
+# une figure et invisible depuis les autres. Avec `LANGUE_AUDIT=1`, tout ce qui a traverse
+# une table sans etre touche est imprime a la fin du processus -- ce qui permet d auditer
+# les huit figures de l article EN UNE PASSE, sans modifier une seule d entre elles.
+#
+# ⚠ Le hook n echoue JAMAIS : un audit qui casse le build de l article serait un audit
+# qu on desactive. Il rapporte, l appelant decide.
+_AUDIT: list["Traduisant"] = []
+
+
+def _rapport_audit() -> None:
+    if os.environ.get("LANGUE_AUDIT") != "1":
+        return
+    vus: list[str] = []
+    for t in _AUDIT:
+        for x in t.inchanges():
+            if x not in vus:
+                vus.append(x)
+    if vus:
+        print("[LANGUE_AUDIT] libellés non touchés par la table :", file=sys.stderr)
+        for x in vus:
+            print(f"  · {x!r}", file=sys.stderr)
+
+
+atexit.register(_rapport_audit)
+
+
 class Traduisant:
     """Un `ImageDraw` qui traduit ce qu'on lui demande d'écrire.
 
@@ -88,6 +118,8 @@ class Traduisant:
         # Du plus long au plus court : sinon un fragment court mange le début d'un long.
         self._table = sorted((table or {}).items(), key=lambda kv: -len(kv[0]))
         self._rates: list[str] = []
+        self._inchanges: list[str] = []
+        _AUDIT.append(self)
         # ⚠ Le séparateur décimal fait partie de la langue, et aucune table de fragments ne
         # peut l'atteindre : il vit entre deux chiffres CALCULÉS. On le réécrit par motif,
         # et seulement là — « 0,3 % » devient « 0.3 % », « PHerc1447 » ne bouge pas.
@@ -119,6 +151,10 @@ class Traduisant:
             out = re.sub(r"(?<=\d),(?=\d)", ".", out)
         if reste_du_francais(out):
             self._rates.append(out)
+        # ⚠ « La table n'a rien changé » est un signal distinct de « il reste du français » :
+        # voir `inchanges`. On l'enregistre ici, une seule fois, à l'endroit qui sait.
+        if out == s and re.search(r"[A-Za-zÀ-ÿ]{3,}", s):
+            self._inchanges.append(s)
         return out
 
     def text(self, xy, s, *args, **kw):
@@ -127,6 +163,26 @@ class Traduisant:
     def intraduits(self) -> list[str]:
         """Les chaînes écrites qui contiennent encore du français."""
         return list(dict.fromkeys(self._rates))
+
+    def inchanges(self) -> list[str]:
+        """Les libellés que la table N'A PAS TOUCHÉS, et qui portent pourtant un mot.
+
+        ⚠⚠ **Pourquoi ceci existe à côté d'`intraduits`.** Le premier détecte du français
+        par une liste de mots-témoins — des connecteurs, « contre », « selon », « chaque ».
+        Un libellé d'un seul nom commun, `voisins`, n'en contient aucun : il traverse la
+        table sans être traduit *et* sans être signalé. Mesuré le 2026-08-22 en retirant sa
+        clé de la table d'une figure — la sonde est restée verte.
+
+        ⭐ Le critère ici n'est pas « est-ce du français » mais « la table a-t-elle eu un
+        effet ». Un libellé qui ressort identique alors qu'il contient un mot d'au moins
+        trois lettres est *soit* traduit par coïncidence, *soit* oublié — et l'appelant est
+        le seul à pouvoir trancher, donc il reçoit la liste et déclare ses exceptions.
+
+        ⚠ Le seuil de trois lettres écarte les nombres, `α`, `m7`, `c0`. Un nom propre
+        (`PHercParis4`) ressort ici et doit être toléré **nommément** par l'appelant : le
+        tolérer en silence rouvrirait le trou qu'on vient de fermer.
+        """
+        return list(dict.fromkeys(self._inchanges))
 
 
 def verifier() -> int:
@@ -235,6 +291,28 @@ def verifier() -> int:
     # serait signalee comme du francais et la figure refuserait de s'ecrire.
     v("un mot commun aux deux langues ne déclenche pas le garde",
       not reste_du_francais("red = the trace self-intersects"))
+
+    # ⚠⚠ Le trou que `inchanges` ferme, sonde a l appui. « voisins » ne contient aucun
+    # mot-temoin, donc `intraduits` le laisse passer -- exactement ce qui s est produit le
+    # 2026-08-22 en retirant sa cle de la table d une figure : la sonde est restee verte.
+    d6 = FauxDessin()
+    t6 = Traduisant(d6, {"planarité": "planarity"})
+    t6.text((0, 0), "voisins")
+    t6.text((0, 0), "planarité")
+    v("un nom commun oublié n'est PAS vu par intraduits", t6.intraduits() == [],
+      str(t6.intraduits()))
+    v("... mais il est vu par inchanges", t6.inchanges() == ["voisins"], str(t6.inchanges()))
+    v("... et un libellé réellement traduit n'y figure pas",
+      "planarité" not in t6.inchanges())
+
+    # ⚠ Le seuil de trois lettres : sans lui, chaque nombre et chaque « α » ressortiraient
+    # comme des oublis et la liste deviendrait du bruit que personne ne lirait.
+    d7 = FauxDessin()
+    t7 = Traduisant(d7, {"x": "y"})
+    for court in ("α", "27", "+1.01", "m7", "c0"):
+        t7.text((0, 0), court)
+    v("les libellés sans mot ne sont pas comptés comme oubliés", t7.inchanges() == [],
+      str(t7.inchanges()))
 
     if echecs:
         print(f"\nECHEC ({echecs} failures, {controles} checks)")
