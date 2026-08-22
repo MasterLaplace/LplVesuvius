@@ -113,8 +113,29 @@ surface vers la bonne feuille : il la fait **s'étendre**.
 Les deux surfaces n'échantillonnent pas la même part du rouleau. Le rapport α reste
 sans dimension et comparable — c'est même pour ça qu'il a été choisi — mais les µm bruts, non.
 
-⭐ **Le meilleur résultat reste `--rewind-gen 40` à poids 1** : α = +0,89 et un écart à
-161 couches en baisse de 27 %. Rembobiner **moins** dérange moins.
+⚠⚠ **Correction du 2026-08-22 : « le meilleur résultat » n'est pas défendable, et ce
+document se contredisait.** Deux paragraphes plus haut il note qu'un écart de 0,03 est
+« dans le bruit de ce que deux fenêtres permettent d'affirmer » — puis il classait quatre
+valeurs séparées par **0,09 au plus**. Un écart sous la résolution ne range rien.
+
+L'audit de [`49`](49_alpha_ne_separe_pas_deux_pannes.md) ajoute une seconde couche, et elle
+est plus dure : les **quatre** séries de cette page sont **non discriminantes de leur
+plafond**.
+
+| série | α mesuré | α si tout était au bord |
+|---|---:|---:|
+| `témoin` | +0,976 | +1,014 |
+| `corrigé gen5` | +1,034 | +1,014 |
+| `corrigé gen5 poids 100` | +0,953 | +1,014 |
+| `corrigé gen40` | +0,887 | +1,014 |
+
+> ⚠ Aucune des quatre ne peut dire si son pic reculait ou s'il n'y en avait pas. Ce qui
+> tient, et qui suffit à la conclusion de cette page : **les quatre sont condamnées**. Ce
+> qui ne tient pas : les ordonner entre elles.
+
+⚠ `--rewind-gen 40` à poids 1 garde un intérêt **pour une autre raison, mesurée** : son
+écart à 161 couches baisse de 27 % et sa surface ne fuit pas. Rembobiner **moins** dérange
+moins — c'est un constat sur le coût et l'étendue, pas un classement de convergence.
 
 ⚠⚠ **Et le poids fort fait FUIR la surface — mesuré, puis la cellule a été arrêtée.**
 `correction_weight: 100` donne **204 cm²** à `--rewind-gen 5` et **3 603 cm²** à

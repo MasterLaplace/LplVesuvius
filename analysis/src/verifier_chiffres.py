@@ -783,6 +783,17 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                          ("series_jugees", "series jugees")):
             if d.get(cle) is not None:
                 out.append((nom, [str(d[cle])], p.name))
+        # ⚠ Les series que `42` CITE nommement, gardees parce qu'il les tabule. La liste est
+        # tenue a la main et c'est assume : « les series qu'un document cite » n'est pas
+        # derivable, et garder les 111 noierait le tableau dans du bruit. Si une entree
+        # disparait, le garde le dit -- une entree nommee qui n'existe plus est un controle
+        # mort, et `exiger` a deja ce reflexe.
+        for cle in ("data/boucle/temoin", "data/boucle/corrige_gen5",
+                    "data/boucle/corrige_gen5_poids100", "data/boucle/corrige_gen40"):
+            j = (d.get("jugees") or {}).get(cle)
+            if j and j.get("alpha_mesure") is not None:
+                ajoute(f"alpha mesure, {cle.split('/')[-1]}", j["alpha_mesure"], 3, p.name,
+                       signe=True)
         if d.get("series_utilisables_pour_un_critere_relatif") is not None:
             # ⚠ Ce compte contredit un « deux » ecrit dans `47`, qui portait en fait sur une
             # AUTRE population. Le garder sous garde evite que la correction se reperde.
