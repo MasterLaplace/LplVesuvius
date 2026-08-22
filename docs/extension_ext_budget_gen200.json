@@ -2,7 +2,7 @@
   "series": [
     {
       "verdict": "suit la fenêtre",
-      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement — ⚠ mais 30 % des fenêtres ont leur pic AU BORD : cette part de la surface n'a aucune feuille à portée, et α ne le montre pas (c'est une médiane)",
       "serie": [
         [
           31,
@@ -18,6 +18,8 @@
       "alpha": 1.3130465167516117,
       "marge_au_seuil": 0.6130465167516117,
       "fragile": false,
+      "au_bord": 0.305,
+      "reserve": true,
       "nom": "gen200 (28.62 cm², 25036 croisements)"
     }
   ]

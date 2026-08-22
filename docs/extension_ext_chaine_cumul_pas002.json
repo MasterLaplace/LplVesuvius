@@ -1,0 +1,26 @@
+{
+  "series": [
+    {
+      "verdict": "suit la fenêtre",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement — ⚠ mais 56 % des fenêtres ont leur pic AU BORD : cette part de la surface n'a aucune feuille à portée, et α ne le montre pas (c'est une médiane)",
+      "serie": [
+        [
+          31,
+          120.96
+        ],
+        [
+          81,
+          328.32
+        ]
+      ],
+      "croissance": 2.7142857142857144,
+      "elargissement": 2.6129032258064515,
+      "alpha": 1.039633928149274,
+      "marge_au_seuil": 0.33963392814927396,
+      "fragile": false,
+      "au_bord": 0.557,
+      "reserve": true,
+      "nom": "pas002 (50.30 cm², 4996 croisements)"
+    }
+  ]
+}

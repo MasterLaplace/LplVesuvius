@@ -466,6 +466,38 @@ autre chose.
 ⚠ La première chaîne a été arrêtée dès le diagnostic : continuer aurait fait deux pas de plus
 à une génération chacun, c'est-à-dire quarante minutes de rendu pour rien.
 
+### ⚠⚠ Enchaîner AIDE beaucoup — et ne suffit pas
+
+Même budget final de 200, deux chemins :
+
+| chemin | aire | auto-intersections | α | pic au bord |
+|---|---:|---:|---:|---:|
+| **d'un coup** | 28,62 cm² | 25 036 | +1,313 | 30 % |
+| **en deux fois 100** | ⭐ **50,30 cm²** | ⭐ **4 996** | **+1,040** | ⚠⚠ **56 %** |
+
+⭐ Le découpage donne **76 % d'aire en plus** et **cinq fois moins** de croisements. Passer par
+une étape intermédiaire — qui relance l'optimisation depuis une surface convergente — aide
+donc beaucoup.
+
+⚠⚠ **Et ça ne suffit pas** : la surface reste posée en travers. Le script s'est arrêté de
+lui-même plutôt que de payer un troisième pas, ce qui est la garde faite pour ça.
+
+⭐⭐ **Et les deux mesures se contredisent, ce qui est précisément le point du §précédent** :
+la chaîne a un **meilleur α** (+1,040 contre +1,313) et une **part au bord bien pire** (56 %
+contre 30 %). Juger sur α seul aurait donc conclu « la chaîne est meilleure » ; le complément
+dit que sa part mauvaise a presque doublé. Une médiane peut s'améliorer pendant qu'une
+minorité empire.
+
+⏳ La question qui reste est celle du **pas** : 100 par séance était encore trop gros à ce
+stade. Chaîne à pas de 50 lancée — si l'amélioration continue quand le pas diminue, il existe
+une taille de pas qui tient, et la bande peut grandir indéfiniment.
+
+⚠ **Le câblage de la réserve n'avait PAS pris sur cette campagne**, et pour une bonne raison :
+`lancer.sh` **gèle une copie du script avant de lancer**, donc une campagne en cours ignore les
+éditions faites pendant qu'elle tourne. C'est le garde-fou qui fait son travail — il a déjà
+sauvé une campagne le 2026-08-20. Les deux verdicts ont été **re-jugés depuis leurs profils
+existants**, sans aucun rendu.
+
 ### ⚠ Une mesure tentée et écartée : « l'extension reste-t-elle mince ? »
 
 La question est bonne — une nappe étendue *le long d'elle-même* doit rester mince

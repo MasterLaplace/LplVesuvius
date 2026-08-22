@@ -127,9 +127,18 @@ def analyser(serie: list[tuple[int, float]], au_bord: float | None = None) -> di
         r["au_bord"] = au_bord
         r["reserve"] = bool(au_bord >= AU_BORD_RESERVE)
         if r["reserve"]:
-            r["sens"] += (f" — ⚠ mais {au_bord * 100:.0f} % des fenêtres ont leur pic AU "
-                          f"BORD : cette part de la surface n'a aucune feuille à portée, "
-                          f"et α ne le montre pas (c'est une médiane)")
+            # ⚠ La formulation depend du verdict, et la premiere version ne le faisait pas :
+            # elle disait « et α ne le montre pas » meme sur une surface deja condamnee, ou
+            # α le montre parfaitement. La reserve n'a de valeur d'ALERTE que quand le
+            # verdict est bon ; sur un verdict mauvais elle CHIFFRE l'etendue du mal.
+            if verdict == "converge":
+                r["sens"] += (f" — ⚠ mais {au_bord * 100:.0f} % des fenêtres ont leur pic AU "
+                              f"BORD : cette part de la surface n'a aucune feuille à portée, "
+                              f"et α ne le montre pas (c'est une médiane)")
+            else:
+                r["sens"] += (f" — et {au_bord * 100:.0f} % des fenêtres ont leur pic AU "
+                              f"BORD, ce qui chiffre l'étendue du mal que α ne fait que "
+                              f"signaler")
     return r
 
 
@@ -211,6 +220,15 @@ def verifier() -> int:
       "AU BORD" in r_res["sens"])
     v("sans mesure de bord, aucun champ n'est inventé",
       "au_bord" not in analyser([(31, 17.3), (81, 17.3)]))
+    # ⚠⚠ La formulation DEPEND du verdict. Premiere version : « et α ne le montre pas »
+    # etait ajoute meme sur une surface deja condamnee, ou α le montre parfaitement.
+    r_mauvais = analyser([(31, 100.0), (81, 355.0)], au_bord=0.557)
+    v("sur un verdict mauvais, la réserve CHIFFRE au lieu de prétendre qu'α cache",
+      "ne le montre pas" not in r_mauvais["sens"] and "56 %" in r_mauvais["sens"],
+      r_mauvais["sens"][-90:])
+    v("sur un verdict bon, elle dit bien qu'α ne le montre pas",
+      "ne le montre pas" in r_res["sens"])
+
     # ⚠ Temoin du temoin : si le seuil etait a zero, TOUT porterait une reserve et la mention
     # ne voudrait plus rien.
     v("une surface parfaite ne porte pas de réserve à cause d'un seuil nul",
