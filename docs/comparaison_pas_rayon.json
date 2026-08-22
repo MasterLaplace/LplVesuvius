@@ -821,6 +821,156 @@
       "compense": true,
       "portee_sortie_vox": 0.375,
       "portee_pic_vox": 0.75
+    },
+    {
+      "nom": "spires_pic025",
+      "racine": "../data/spires_pic025",
+      "lignes": [
+        {
+          "spire": "spire00",
+          "grille": [
+            162,
+            149
+          ],
+          "aire_grille_cm2": 7.12,
+          "croisements": null,
+          "ecart_31c_um": 17.28,
+          "ecart_81c_um": 17.28,
+          "alpha": 0.0,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire01",
+          "grille": [
+            158,
+            145
+          ],
+          "aire_grille_cm2": 6.75,
+          "croisements": null,
+          "ecart_31c_um": 86.4,
+          "ecart_81c_um": 86.4,
+          "alpha": 0.0,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire02",
+          "grille": [
+            154,
+            141
+          ],
+          "aire_grille_cm2": 6.4,
+          "croisements": null,
+          "ecart_31c_um": 60.48,
+          "ecart_81c_um": 73.44,
+          "alpha": 0.202,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire03",
+          "grille": [
+            151,
+            138
+          ],
+          "aire_grille_cm2": 6.14,
+          "croisements": null,
+          "ecart_31c_um": 34.56,
+          "ecart_81c_um": 34.56,
+          "alpha": 0.0,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire04",
+          "grille": [
+            148,
+            135
+          ],
+          "aire_grille_cm2": 5.88,
+          "croisements": null,
+          "ecart_31c_um": 43.2,
+          "ecart_81c_um": 60.48,
+          "alpha": 0.35,
+          "verdict": "intermédiaire"
+        },
+        {
+          "spire": "spire05",
+          "grille": [
+            145,
+            132
+          ],
+          "aire_grille_cm2": 5.63,
+          "croisements": null,
+          "ecart_31c_um": 77.76,
+          "ecart_81c_um": 86.4,
+          "alpha": 0.11,
+          "verdict": "converge"
+        },
+        {
+          "spire": "spire06",
+          "grille": [
+            142,
+            129
+          ],
+          "aire_grille_cm2": 5.39,
+          "croisements": null,
+          "ecart_31c_um": 129.6,
+          "ecart_81c_um": 164.16,
+          "alpha": 0.246,
+          "verdict": "intermédiaire"
+        },
+        {
+          "spire": "spire07",
+          "grille": [
+            137,
+            124
+          ],
+          "aire_grille_cm2": 4.99,
+          "croisements": null,
+          "ecart_31c_um": 86.4,
+          "ecart_81c_um": 207.36,
+          "alpha": 0.912,
+          "verdict": "suit la fenêtre"
+        },
+        {
+          "spire": "spire08",
+          "grille": [
+            131,
+            118
+          ],
+          "aire_grille_cm2": 4.54,
+          "croisements": null,
+          "ecart_31c_um": 86.4,
+          "ecart_81c_um": 328.32,
+          "alpha": 1.39,
+          "verdict": "suit la fenêtre"
+        },
+        {
+          "spire": "spire09",
+          "grille": [
+            124,
+            112
+          ],
+          "aire_grille_cm2": 4.08,
+          "croisements": null,
+          "ecart_31c_um": 95.04,
+          "ecart_81c_um": 263.52,
+          "alpha": 1.062,
+          "verdict": "suit la fenêtre"
+        }
+      ],
+      "profondeur": 7,
+      "alpha_moyen": 0.12971428571428573,
+      "alpha_median": 0.11,
+      "alpha_max": 0.35,
+      "erosion_par_tour": 4.049625468164796,
+      "longueur_reelle": 10,
+      "pas_du_rayon": 0.125,
+      "exit_count": 2,
+      "spike_window": 2,
+      "exit_count_eff": 2,
+      "spike_window_eff": 2,
+      "compense": true,
+      "portee_sortie_vox": 0.25,
+      "portee_pic_vox": 0.25
     }
   ],
   "profondeur_commune": 7

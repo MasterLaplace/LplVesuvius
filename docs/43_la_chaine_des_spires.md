@@ -374,7 +374,7 @@ qu'elle n'est ni meilleure ni pire, et deux de ses trois plus mauvais tours sont
 
 Les α et les aires sont des grandeurs continues, mesurées directement. Un compte de verdicts
 (« 4/7 », « 6/9 ») est un compte de **franchissements de seuil**, et le recensement de
-[`44`](44_ou_la_chaine_se_trouve.md) §8bis en trouve **un sur cinq** — dont le plus fragile de
+[`44`](44_ou_la_chaine_se_trouve.md) §8bis en trouve **presque un quart** — dont le plus fragile de
 tous, `pas025_spire07`, à **deux millièmes** de son seuil. ⚠ Le compte exact n'est pas répété
 ici : il change à chaque campagne, et le recopier dans plusieurs documents l'a fait périmer
 quatre fois dans la même journée.
@@ -446,6 +446,7 @@ de deux) :
 | défauts | 0,125 | 0,125 | 0,25 | +0,327 | +0,758 | **4/11** |
 | `exit_count=2` | 0,125 | 0,25 | 0,5 | **+0,130** | +0,350 | ⭐ **0/10** |
 | `exit_count=3` | 0,125 | 0,375 | 0,75 | +0,185 | +0,612 | 1/10 |
+| `exit_count=2`, `spike=2` | 0,125 | 0,25 | **0,25** | **+0,130** | **+0,350** | 0/10 |
 
 > **À pas égal, changer la seule portée fait passer l'α moyen de +0,327 à +0,130.** Et deux
 > campagnes dont les pas diffèrent d'un facteur deux, mais qui partagent la portée 0,25,
@@ -492,14 +493,36 @@ résolution est ±0,2 ne peut pas départager deux valeurs séparées de 0,08. `
 --comparer` refuse désormais de classer ce qui tient dans une largeur de résolution — il
 nomme le bassin et ne désigne pas de gagnant.
 
-⚠ **Un défaut de conception de ma part, trouvé en lisant les métas et non le résultat.** Les
-deux portées n'ont **jamais** été séparées : dans les six campagnes, `portée pic = 2 × portée
-sortie`, défauts compris. Ce qui a été balayé est donc **une famille à ratio fixe**, pas la
-portée de sortie seule. Ce que ça change : rien de ce qui est écrit ci-dessus, puisque toutes
-les campagnes sont sur la même famille et donc comparables entre elles — mais on ne sait pas
-laquelle des deux portées agit. Le séparer demande une campagne à `exit_count` et
-`spike_window` non proportionnels, et la table les affiche maintenant **côte à côte** pour que
-cette confusion ne puisse plus passer inaperçue.
+### ⭐⭐⭐ Les deux portées séparées : `spike_window` est INERTE
+
+**Un défaut de conception de ma part**, trouvé en lisant les métas et non le résultat : les
+deux portées n'avaient **jamais** été séparées — dans les six premières campagnes,
+`portée pic = 2 × portée sortie`, défauts compris. Ce qui avait été balayé était donc une
+*famille à ratio fixe*, et on ne savait pas laquelle des deux portées agissait.
+
+La campagne qui les sépare (`exit_count = 2`, `spike_window = 2`, donc portée de pic **divisée
+par deux** à portée de sortie constante) rend une réponse sans ambiguïté :
+
+> **Les dix spires sont identiques à la campagne compensée, une par une** — et les maillages
+> sont identiques **octet pour octet** sur les quatre spires vérifiées. Diviser `spike_window`
+> par deux ne change pas un bit.
+
+⭐ **Et la source dit pourquoi.** `spike_window` ne sert qu'à dimensionner une boucle de
+correction de plis (`max_fold_iters = spike_window * 4`), et cette boucle n'imprime son compte
+que s'il est non nul (`if (fold_corrections > 0)`, ligne 929). Ce message **n'apparaît dans
+aucun journal de campagne** : la boucle n'a jamais fait une seule correction sur aucune de ces
+chaînes. Le paramètre est donc inerte **par construction sur ces données**, pas seulement en
+dessous de la résolution.
+
+⚠ **Conséquence pratique, écrite pour que personne n'y perde une campagne** : `spike_window`
+n'est pas un levier à essayer. Il ne pourrait agir que sur une chaîne où les rayons se
+croisent, et aucune des nôtres ne le fait.
+
+⭐⭐ **Et le défaut de conception se révèle nul en pratique** : puisque le second paramètre est
+inerte, les six campagnes antérieures ne faisaient bien varier qu'**une** chose qui compte. Ce
+qui était une confusion possible est maintenant une confusion **mesurée absente** — ce qui
+n'est pas la même chose que supposée absente. La table affiche les deux portées côte à côte
+pour que la question reste posable.
 
 ### ⭐ Ce que l'érosion dit, en refusant de bouger
 

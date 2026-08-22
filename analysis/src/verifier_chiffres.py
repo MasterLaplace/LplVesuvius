@@ -265,7 +265,14 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             "tc", racine / "analysis" / "src" / "test_convergence.py")
         tc = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(tc)
-        n = fragiles = 0
+        # ⚠⚠ DEDOUBLONNER PAR CONTENU. Deux campagnes peuvent produire des maillages
+        # identiques octet pour octet -- c'est arrive le 2026-08-22, `spires_pic025` et
+        # `spires_pas0125_compense` ne differant que par un parametre INERTE. Compter leurs
+        # verdicts deux fois gonfle le denominateur d'un recensement avec dix mesures qui
+        # sont la meme mesure. La cle est la SERIE, parce que c'est la donnee ; deux series
+        # egales sont le meme verdict, quel que soit le dossier qui les porte.
+        vus: set = set()
+        n = fragiles = doublons = 0
         pire = None
         for f in verdicts:
             try:
@@ -276,11 +283,21 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 r = tc.analyser([tuple(x) for x in serie["serie"]])
                 if "fragile" not in r:
                     continue
+                cle = tuple(tuple(x) for x in serie["serie"])
+                if cle in vus:
+                    doublons += 1
+                    continue
+                vus.add(cle)
                 n += 1
                 if r["fragile"]:
                     fragiles += 1
                     if pire is None or r["marge_au_seuil"] < pire:
                         pire = r["marge_au_seuil"]
+        if doublons:
+            out.append(("verdicts en double ecartes du recensement",
+                        [f"**{doublons} verdicts** identiques",
+                         f"{doublons} verdicts identiques",
+                         f"{doublons} en double"], "spire_*.json"))
         if n:
             out.append(("verdicts fragiles",
                         [f"**{fragiles} verdicts fragiles sur {n}**",

@@ -274,9 +274,9 @@ donc un futur désaccord est inlivrable, et un témoin l'assère.
 lecteur pouvait raisonnablement croire que le verdict venait d'elle. Supprimée : une
 constante morte au nom trompeur est une explication fausse posée dans le code.
 
-**2. ⚠⚠ Douze verdicts sur soixante-cinq sont des tirages au sort.** [`43`](43_la_chaine_des_spires.md)
+**2. ⚠⚠ Onze verdicts sur quarante-huit sont des tirages au sort.** [`43`](43_la_chaine_des_spires.md)
 écrit noir sur blanc que *« α sur deux fenêtres ne discrimine pas à ±0,2 près »*. Chaque
-verdict porte donc désormais sa **marge au seuil** et un drapeau `fragile`, et le recensement est net — **12 verdicts fragiles sur 65** :
+verdict porte donc désormais sa **marge au seuil** et un drapeau `fragile`, et le recensement est net — **11 verdicts fragiles sur 48** :
 
 | verdict | α | marge au seuil | étiquette |
 |---|---:|---:|---|
@@ -296,14 +296,15 @@ qualité que la moyenne des α ne porte pas :
 
 | campagne | verdicts fragiles |
 |---|---:|
-| pas 0,125 (défauts) | **4 / 11** |
+| pas 0,125 (défauts) | **4 / 11**|
 | `in` | 2 / 7 |
-| portée 0,375 | 2 / 10 |
 | repousse | 1 / 4 |
+| portée 0,375 | 2 / 10 |
 | pas 1,0 | 1 / 7 |
 | pas 0,5 | 1 / 7 |
 | pas 0,25 | 1 / 9 |
-| **portée 0,25 à pas 0,125** | ⭐ **0 / 10** |
+| portée 0,25 à pas 0,125 | ⭐ **0 / 10**|
+| portée 0,25, pic 0,25 | ⭐ **0 / 10**|
 
 La campagne compensée ([`43`](43_la_chaine_des_spires.md) §6quinquies) est la seule dont
 **aucun** verdict ne tombe dans la zone d'indécision, là où la même chaîne aux réglages par
@@ -320,6 +321,20 @@ même. Corrigé là-bas.
 seuil**. Un écart entre nappes, une longueur d'arc, une part de sommets valides et une
 fraction de tour sont des grandeurs continues mesurées directement. C'est précisément
 pourquoi ils survivent à ce genre de correction, et les comptes de verdicts non.
+
+⚠⚠ **Le recensement DÉDOUBLONNE, et ça change le chiffre dans le sens qui compte.** Neuf
+campagnes ont écrit **75** verdicts, mais seulement **48** séries distinctes : **27 verdicts** identiques y sont
+la même mesure comptée à nouveau. La plus grosse duplication est structurelle — `spire00` est
+**le même segment officiel de départ dans les neuf campagnes**, donc son verdict apparaît neuf
+fois. S'y ajoutent les tours qui sortent identiques quand deux réglages ont la même portée
+effective, jusqu'à deux campagnes entières identiques **octet pour octet**
+(`spike_window` étant inerte, cf. [`43`](43_la_chaine_des_spires.md)).
+
+⭐ Compter 75 aurait **sous-estimé** la fragilité : 12/75 = 16 %, alors que le taux réel est
+**11/48 = 23 %**, presque un quart. Un dénominateur gonflé par des doublons dilue le problème
+qu'il est censé mesurer. La clé de déduplication est la **série** elle-même — la donnée — et
+non le nom du dossier, parce que deux séries égales sont le même verdict quel que soit le
+dossier qui les porte.
 
 ⚠⚠ **Ce total vieillit à chaque campagne**, et le garde-fou de `verifier_chiffres.py` l'a
 attrapé périmé **quatre fois le 2026-08-21** — chaque fois dans les minutes qui suivaient la
