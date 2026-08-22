@@ -12,6 +12,18 @@ feuille à portée », affirmé avec la même assurance que sur une vraie mesure
 `amplitude_min`. L'information était là ; personne ne la lisait. Cet audit la lit sur
 **tous** les profils de l'arbre et dit lesquels ne mesurent rien.
 
+⚠⚠ **Ce que cet audit lit, et ce qu'il ne lit pas.** Il balaie les profils **présents sur
+disque**, pas ceux qui ont produit les tableaux publiés. Une campagne relancée dans la même
+destination écrase les siens : mesuré le 2026-08-22, `data/spires_pas025/spire03` porte des
+profils de 14 h 29 alors que le verdict que [`43`](../docs/43_la_chaine_des_spires.md)
+tabule date de 08 h 02 le même jour — six heures et un tirage plus tôt. Les deux sont
+justes ; ils ne parlent pas du même run.
+
+⭐ Conséquence pratique : un écart entre ce tableau et un document n'est pas forcément une
+erreur du document. Vérifier les horodatages avant de conclure. Et la vraie leçon est en
+amont — **une campagne qui réécrit sa propre destination détruit la preuve derrière un
+tableau déjà publié**, alors que les verdicts, eux, survivent dans `docs/`.
+
 ⚠ Ce qu'il n'établit pas : qu'un verdict rendu sur un profil plat est faux. Il établit qu'il
 n'est **pas soutenu par une mesure** — ce qui est différent, et suffisant pour le retirer
 d'un tableau de comptes.

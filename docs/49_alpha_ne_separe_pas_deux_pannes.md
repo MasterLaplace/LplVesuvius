@@ -77,6 +77,19 @@ exactement le verdict *« suit la fenêtre »* — et ses deux causes possibles,
 et *il n'y avait pas de pic*, **condamnent la trace toutes les deux**. La conclusion
 pratique tient ; c'est la **formulation** qui sur-affirme.
 
+## 3bis. ⚠⚠ Ce que l'audit lit, et pourquoi un écart n'est pas forcément une erreur
+
+Il balaie les profils **présents sur disque**, pas ceux qui ont produit les tableaux
+publiés. Une campagne relancée dans la même destination écrase les siens : mesuré,
+`data/spires_pas025/spire03` porte des profils de **14 h 29** alors que le verdict que
+[`43`](43_la_chaine_des_spires.md) tabule date de **08 h 02 le même jour** — six heures et
+un tirage plus tôt. Les deux sont justes, et ils ne parlent pas du même run.
+
+> ⚠ **La vraie leçon est en amont** : une campagne qui réécrit sa propre destination détruit
+> la preuve derrière un tableau déjà publié. Les **verdicts** survivent dans `docs/`, les
+> profils non. C'est la règle « un run à paramètres différents prend sa propre destination »,
+> qui vaut aussi pour un run aux **mêmes** paramètres — puisque le traceur est un tirage.
+
 ## 4. ⚠ Ce que ça change pour les résultats déjà publiés
 
 - **[`38`](38_ce_qui_bouge_avec_la_fenetre.md), α = +1,01 sur notre trace.** Sa série a

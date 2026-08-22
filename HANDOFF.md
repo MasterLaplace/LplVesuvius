@@ -1270,6 +1270,14 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     bloc `--verifier` que je venais d'insérer (`v: command not found`). C'est le piège nº 45
     par une porte que le gel ne ferme pas. La règle pratique reste la même — **ne pas éditer
     un script pendant qu'un run l'utilise**, helper compris.
+62 ter. ⚠⚠ **Une campagne relancée dans la même destination détruit la preuve d'un tableau
+    publié.** `data/spires_pas025/spire03` porte des profils de 14 h 29 quand le verdict que
+    `43` tabule date de 08 h 02 le même jour — et le traceur étant un tirage, ce n'est pas le
+    même résultat. Les **verdicts** survivent dans `docs/`, les profils non. La règle « un run
+    prend sa propre destination » ne vaut pas que pour des paramètres différents : elle vaut
+    pour un run aux **mêmes** paramètres. ⭐ Corollaire pour qui lit un audit de l'arbre : un
+    écart avec un document publié n'est pas forcément une erreur du document — regarder les
+    horodatages d'abord.
 63. ⚠ **Ne pas anticiper un compte, même juste.** Écrire dans les documents le total qu'on
     prévoit pour le run courant le fait échouer — la garde compare aux totaux du run
     **précédent**. Prédiction 46/1348, mesure 46/1348, batterie rouge quand même. Lancer,
