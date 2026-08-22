@@ -86,7 +86,26 @@ def spearman(xs, ys) -> float | None:
     return (num / (dx * dy)) if dx > 0 and dy > 0 else None
 
 
-def charger(docs: Path, graines: Path) -> list[dict]:
+def lire_trace(log: Path) -> dict:
+    """La génération atteinte et l'aire produite, lues dans le journal du traceur.
+
+    ⚠⚠ **Parce qu'une aire peut ne rien mesurer.** Sur `PHercParis4`, les sept premières
+    traces font toutes 0,3174 à 0,3182 cm² — quatre chiffres identiques pour des graines
+    situées à des kilovoxels les unes des autres, dans deux prédictions différentes. Elles
+    butent toutes sur la génération 59. L'aire mesure donc le **plafond** et pas la donnée,
+    et la comparer d'un candidat à l'autre serait comparer un réglage à lui-même. C'est la
+    troncature de `35`, à l'état pur.
+    """
+    if not log.is_file():
+        return {}
+    t = log.read_text(encoding="utf-8", errors="replace")
+    gens = re.findall(r"^gen (\d+) ", t, re.M)
+    aires = re.findall(r"generated surface .*?\(([0-9.]+) cm\^2\)", t)
+    return {"generation_max": int(gens[-1]) if gens else None,
+            "aire_cm2": float(aires[-1]) if aires else None}
+
+
+def charger(docs: Path, graines: Path, travaux: Path | None = None) -> list[dict]:
     """Chaque candidat, avec ses propriétés de graine ET son verdict de trace.
 
     ⚠ Les propriétés viennent du fichier de graines, le verdict du fichier de convergence,
@@ -109,11 +128,12 @@ def charger(docs: Path, graines: Path) -> list[dict]:
         if c is None:
             continue
         d = json.loads(p.read_text(encoding="utf-8"))
+        tr = lire_trace(travaux / f"{cle[0]}_c{cle[1]}" / "trace.log") if travaux else {}
         for x in (d.get("series") or ([d] if "verdict" in d else [])):
             out.append({"prediction": cle[0], "candidat": cle[1],
                         "planarite": c.get("planarite"), "occupation": c.get("occupation"),
                         "voisins": c.get("voisins"),
-                        "verdict": x.get("verdict"), "alpha": x.get("alpha")})
+                        "verdict": x.get("verdict"), "alpha": x.get("alpha"), **tr})
     return out
 
 
@@ -126,6 +146,16 @@ def confronter(lignes: list[dict]) -> dict:
          "convergents": [f"{l['prediction']}_c{l['candidat']}" for l in convergents],
          "alpha_min": min((l["alpha"] for l in juges), default=None),
          "seuil_converge": ALPHA_TRAVERS, "resolution": BRUIT_ALPHA}
+    # ⚠⚠ Si TOUTES les traces butent sur la meme generation, l'aire ne mesure que le
+    # plafond -- et il faut le dire avant qu'on ne compare des aires.
+    gens = [l["generation_max"] for l in lignes if l.get("generation_max") is not None]
+    d["generations_atteintes"] = sorted(set(gens))
+    d["toutes_au_plafond"] = bool(gens) and len(set(gens)) == 1
+    aires = [l["aire_cm2"] for l in lignes if l.get("aire_cm2") is not None]
+    if aires:
+        d["aire_min_cm2"], d["aire_max_cm2"] = min(aires), max(aires)
+        d["etendue_relative_aires"] = (max(aires) - min(aires)) / max(aires)
+
     plancher = rho_detectable(len(juges))
     d["rho_detectable"] = plancher
     d["correlations"] = {}
@@ -186,6 +216,24 @@ def verifier() -> int:
       rm["correlations"]["occupation"]["concluant"] is False,
       str(rm["correlations"]["occupation"]))
 
+    # ⚠⚠ Le plafond de generations, et sa sonde. Des aires identiques a quatre chiffres pres
+    # ne sont pas une coincidence : c'est une troncature commune, et il faut le DIRE avant
+    # que quiconque compare des aires.
+    plafonnees = [dict(x, generation_max=59, aire_cm2=0.3174 + 0.0001 * (i % 3))
+                  for i, x in enumerate(base)]
+    rp = confronter(plafonnees)
+    v("des traces toutes à la même génération sont signalées", rp["toutes_au_plafond"])
+    v("... et leur étendue d'aire est chiffrée",
+      rp["etendue_relative_aires"] < 0.01, f"{rp['etendue_relative_aires']}")
+    # ⚠ Le controle : des generations DIFFERENTES ne doivent pas etre dites au plafond,
+    # sinon l'avertissement s'afficherait toujours et cesserait d'informer.
+    variees = [dict(x, generation_max=40 + i, aire_cm2=0.3 + 0.1 * i)
+               for i, x in enumerate(base)]
+    v("des générations différentes ne sont PAS dites au plafond",
+      confronter(variees)["toutes_au_plafond"] is False)
+    v("sans journal de trace, aucune affirmation sur le plafond",
+      confronter(base)["toutes_au_plafond"] is False)
+
     conv = base + [{"prediction": "b", "candidat": 0, "planarite": 0.9, "occupation": 0.4,
                     "voisins": 27, "verdict": "converge", "alpha": 0.02}]
     v("un convergent est nommé", confronter(conv)["convergents"] == ["b_c0"])
@@ -210,13 +258,15 @@ def main() -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--docs", type=Path, default=Path("docs"))
     ap.add_argument("--graines", type=Path, default=Path("data/prediction_paris4"))
+    ap.add_argument("--travaux", type=Path, default=Path("data/paris4_candidats"),
+                    help="dossiers de travail, pour lire les journaux de trace")
     ap.add_argument("--json", type=Path)
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()
     if a.verifier:
         return verifier()
 
-    lignes = charger(a.docs, a.graines)
+    lignes = charger(a.docs, a.graines, a.travaux)
     if not lignes:
         print(f"aucun candidat tracé sous {a.docs} — lancer "
               f"tools/tracer_tous_candidats.sh", file=sys.stderr)
@@ -231,6 +281,13 @@ def main() -> int:
         print(f"  {l['prediction'] + '_c' + str(l['candidat']):<12} "
               f"{l['planarite']:>10.4f} {l['occupation']:>11.4f} {l['voisins']:>8} "
               f"{A:>8}  {l['verdict']}")
+
+    if d.get("toutes_au_plafond"):
+        print(f"\n  ⚠⚠ les {len(lignes)} traces butent TOUTES sur la génération "
+              f"{d['generations_atteintes'][0]} — leurs aires "
+              f"({d['aire_min_cm2']:.4f} à {d['aire_max_cm2']:.4f} cm², "
+              f"{d['etendue_relative_aires']:.2%} d'écart) mesurent le PLAFOND et pas la "
+              f"donnée. Aucune n'a eu le droit de pousser.")
 
     print(f"\n  ⭐ traces qui CONVERGENT : "
           + (", ".join(d["convergents"]) if d["convergents"] else "aucune"))
