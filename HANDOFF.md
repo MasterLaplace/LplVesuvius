@@ -1537,8 +1537,27 @@ comptes de franchissements de seuil.**
 
 ## ⭐⭐⭐ 2026-08-22, soirée — le registre est vide, et α a perdu une certitude
 
-**Ce qui tourne** : `tail -f .lances/tracer_prediction_paris4-*.log` — la comparaison des deux
-prédictions de `PHercParis4` à 200 générations et à l'échelle 4.
+### ⏳ CE QUI TOURNE, et quoi en faire
+
+```bash
+tail -f .lances/tracer_prediction_paris4-20260822-213653.log   # 12 cellules, ~5 min chacune
+python3 analysis/src/comparer_predictions.py --docs docs --json docs/paris4_2x2.json
+```
+
+Le **2×2 répété** : les deux prédictions de `PHercParis4` × les deux graines × **trois
+tirages**, à 60 générations et à l'échelle 1. Il écrit ses verdicts dans
+`docs/prediction_paris4_<prédiction>_sur_graine_<graine>_r<n>.json`, et l'instrument
+ci-dessus les croise.
+
+⭐ **La première passe (un tirage par cellule) a déjà conclu** — l'effet est **l'endroit**,
+pas la prédiction : α = +1,12 et +0,95 à la graine de `ps256` (écart 0,17, **sous** le bruit
+de 0,20), et les **deux** prédictions rendent un profil **plat** à la graine de `m7`. Les
+répétitions servent à savoir si ce 0,17 tient : mesuré sur la première cellule, l'étendue
+intra-cellule vaut déjà **0,89 à 1,12**, donc il est probable que non.
+
+⚠ **Ce qu'il ne faut pas en conclure** : « les deux prédictions se valent ». Les deux α
+mesurables valent **≈ 1**, donc elles sont indistinguables *et* mauvaises à cet endroit. La
+suite utile n'est pas de choisir une prédiction — c'est de chercher une meilleure **graine**.
 
 ### Le registre de [`29`](docs/29_ce_qui_reste.md) est vidé de ce qui était actionnable
 
