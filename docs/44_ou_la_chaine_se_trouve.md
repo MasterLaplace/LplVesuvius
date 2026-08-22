@@ -514,6 +514,40 @@ une taille de pas qui tient, et la bande peut grandir indéfiniment.
 sauvé une campagne le 2026-08-20. Les deux verdicts ont été **re-jugés depuis leurs profils
 existants**, sans aucun rendu.
 
+### ⭐⭐⭐ Rogner la périphérie tardive la ramène de 9 % à 2 %
+
+Si la mauvaise périphérie est ce qui a poussé **en dernier**, alors l'information pour la
+retirer est déjà dans le maillage : `generations.tif`, le compteur par sommet. Rogner par
+génération ne demande **aucun rendu**.
+
+Distribution mesurée sur l'extension : **33 %** des sommets sont à la génération 1 — le segment
+source hérité — et **41 %** viennent des générations 50 à 99. La croissance accélère sur la fin.
+
+| surface | aire utile | α | **pic au bord** |
+|---|---:|---:|---:|
+| source officielle | 4,28 cm² | +0,000 | 0 % |
+| extension | 12,97 cm² | +0,000 | 9 % |
+| extension rognée à gen ≤ 50 | 7,59 cm² | +0,000 | ⭐ **7 %** |
+| **extension rognée à gen ≤ 25** | **6,93 cm²** | +0,000 | ⭐⭐ **2 %** |
+
+> **L'hypothèse est confirmée : la mauvaise périphérie EST ce qui a poussé en dernier.** La
+> retirer ramène la part sans feuille de 9 % à **2 %** — presque le niveau de la source — tout
+> en gardant **62 % de surface en plus** qu'elle.
+
+⭐ Et ça ouvre un cycle que rien d'autre n'ouvrait : **rogner → étendre → rogner → étendre**.
+Chaque tour devrait rendre du terrain (+62 %) en revenant à une périphérie propre, là où
+enchaîner sans rogner propage le défaut ([§précédent](#-découper-aide-ou-nuit--et-ce-qui-décide-nest-pas-la-taille-du-pas)).
+L'extension depuis la nappe rognée est lancée, avec **la même quantité de croissance** que la
+première (cent générations de plus) pour que la comparaison soit appariée.
+
+⚠ Ce que le rognage **ne** dit **pas** : que « poussé en dernier » et « mal posé » sont la même
+chose. Ils **coïncident** ici, ce qui est mesuré ; le lien de cause n'est pas établi et n'a pas
+besoin de l'être pour que le remède marche.
+
+⚠ `rogner_nappe.py` recopie `meta.json` avec son `area_cm2` **recalculé** — le laisser tel quel
+ferait lire à tout consommateur l'aire d'avant le rognage. Un témoin vérifie qu'il ne vaut plus
+la valeur d'origine.
+
 ### ⚠⚠ Découper aide OU nuit — et ce qui décide n'est pas la taille du pas
 
 Deux chaînes, deux conclusions opposées :
