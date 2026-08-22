@@ -9,7 +9,14 @@
 # est une campagne qui gaspille une journee.
 #
 # ⭐ Le chien de garde ne mesure pas le temps ecoule -- un rendu long n'est pas un rendu
-# bloque -- mais la CROISSANCE de la sortie. Tant que les octets augmentent, il attend.
+# bloque -- mais l'ACTIVITE DU PROCESSUS, lue dans `/proc/<pid>/io`.
+#
+# ⚠⚠ Et pas la croissance de la SORTIE, qui etait ma premiere version et qui etait fausse :
+# `vc_render_tifxyz` telecharge tout avant d'ecrire. Mesure prise sur le run suivant --
+# `rchar` passait de 6,56 a 8,21 Mo en douze secondes pendant que `wchar` restait a 500
+# octets et que la sortie restait a 328. Un chien de garde sur la sortie aurait tue un rendu
+# parfaitement sain, ce qui est pire que pas de chien de garde du tout : on aurait conclu
+# « ce rendu est injouable » sur un rendu qui marchait.
 #
 # ⚠ Et il rapporte le debit dans les deux cas, succes compris : c'est ce chiffre qui dit si
 # la meme campagne est jouable a une autre echelle, et le deviner apres coup est impossible.
@@ -22,17 +29,22 @@ shift 2
 [ "${1:-}" = "--" ] && shift
 
 taille() { du -sb "$SORTIE" 2>/dev/null | cut -f1 || echo 0; }
+# ⚠ Somme des octets lus ET ecrits : un rendu qui telecharge fait bouger `rchar` seul, un
+# rendu qui vide ses tampons fait bouger `wchar` seul. Prendre l'un des deux raterait la
+# moitie des phases.
+activite() { awk '/^rchar:|^wchar:/{t += $2} END{print t + 0}' "/proc/$1/io" 2>/dev/null \
+             || echo 0; }
 
 mkdir -p "$SORTIE"
 DEBUT=$(date +%s)
 vc_render_tifxyz "$@" &
 PID=$!
 
-DERNIERE=$(taille); IMMOBILE=0
+DERNIERE=$(activite "$PID"); IMMOBILE=0
 while kill -0 "$PID" 2>/dev/null; do
   sleep 10
-  T=$(taille)
-  if [ "$T" -gt "$DERNIERE" ]; then
+  T=$(activite "$PID")
+  if [ "${T:-0}" -gt "${DERNIERE:-0}" ]; then
     DERNIERE=$T; IMMOBILE=0
   else
     IMMOBILE=$((IMMOBILE + 10))
@@ -42,8 +54,8 @@ while kill -0 "$PID" 2>/dev/null; do
       kill "$PID" 2>/dev/null
       wait "$PID" 2>/dev/null
       ECOULE=$(( $(date +%s) - DEBUT ))
-      echo "⚠⚠ RENDU ABANDONNE — la sortie n'a pas grossi depuis ${PATIENCE} s" >&2
-      echo "   ${DERNIERE} octets en ${ECOULE} s" >&2
+      echo "⚠⚠ RENDU ABANDONNE — le processus n'a ni lu ni écrit depuis ${PATIENCE} s" >&2
+      echo "   ${DERNIERE} octets d'activité en ${ECOULE} s, sortie $(taille) octets" >&2
       echo "   Ce n'est pas une panne du script : c'est la mesure que ce rendu-la n'est" >&2
       echo "   pas jouable a cette echelle. Baisser --scale, ou reduire l'aire." >&2
       exit 4

@@ -92,6 +92,18 @@ PY
   fi
 
   M=$(ls -d "$W"/auto_grown_* 2>/dev/null | head -1)
+  # ⚠⚠ RAPPORTER LE BUDGET DE LA TRACE, PAS CELUI QU'ON A DEMANDE. Le script saute la pousse
+  # quand une surface existe deja -- et son `seed.json` peut porter un tout autre plafond que
+  # la variable d'environnement du run courant. Paye le 2026-08-22 : la campagne a imprime
+  # « plafond 60 generations » en jugeant une trace poussee a 200. Un en-tete qui decrit
+  # l'intention plutot que l'artefact est un nombre qui ment.
+  BUDGET=$(python3 -c "
+import json,sys
+try: print(json.load(open('$W/seed.json'))['generations'])
+except Exception: print('$GENERATIONS')" 2>/dev/null)
+  if [ -n "$M" ] && [ "$BUDGET" != "$GENERATIONS" ]; then
+    echo "   ⚠ surface déjà là, poussée à $BUDGET générations (et non $GENERATIONS demandées)"
+  fi
   if [ -z "$M" ]; then
     ( cd "$W" && timeout 7200 vc_grow_seg_from_seed -v "$B/${PRED[$NOM]}" -t . \
         -p seed.json -s "$X" "$Y" "$Z" ) > "$W/trace.log" 2>&1
