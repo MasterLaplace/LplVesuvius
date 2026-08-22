@@ -1299,6 +1299,20 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     recopiée deux fois**, et rien dans le tableau ne les distingue. `04` donnait la même
     moyenne, médiane, quartiles et σ aux deux populations. ⭐ L'instrument compare désormais
     les **multiensembles** de valeurs et refuse de dessiner si ce sont les mêmes données.
+66. ⚠⚠ **Un budget choisi sur un coût faux devient un résultat.** Toutes les traces jamais
+    faites sur `PHercParis4` s'arrêtent à la génération 59, et leurs aires coïncident à
+    quatre chiffres — 0,3174 à 0,3182 cm², **0,25 % d'écart** — pour des graines séparées par
+    des kilovoxels, dans deux prédictions différentes. Elles mesurent le **plafond**, pas la
+    donnée. Or ce plafond de 60 a été fixé le jour où j'estimais le rendu à **57 Kio/s**, une
+    extrapolation faite sur *un* échantillon ; la mesure l'a corrigé à **1108–5861 Kio/s**,
+    vingt à cent fois plus vite. ⭐ **La leçon n'est pas « 60 était trop petit »** — on ne le
+    sait pas encore, `tools/plafond_generations.sh` le mesure. Elle est plus gênante : un
+    réglage pris pour une raison qui a cessé d'être vraie ne se signale jamais tout seul, et
+    la **cohérence** des résultats qu'il produit est précisément ce qui le rend invisible.
+    Sept traces d'accord à quatre chiffres ressemblent à une mesure robuste. ⚠ Corollaire :
+    quand des runs indépendants s'accordent **au-delà de ce que leur bruit permet**, ce n'est
+    pas une bonne nouvelle, c'est un réglage partagé qui parle à leur place. Ce qui l'a
+    attrapé : avoir regardé une colonne qui n'était le sujet d'aucune question.
 
 
 ### ⭐⭐ 2026-08-22 (fin) — la voie du raccordement est fermée, et deux gardes de plus
