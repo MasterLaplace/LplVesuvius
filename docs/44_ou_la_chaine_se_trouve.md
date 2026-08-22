@@ -611,10 +611,47 @@ en rognant (6,02 cm² à 0 %, soit +41 % de matière propre en plus). Ce n'est p
 continue que le graal demande, mais c'est un gain net sur de la matière déjà validée, et c'est
 mesuré des deux côtés.
 
-⚠ Ce qui n'est **pas** exploré, et qui reste la voie ouverte : rien de tout ceci ne touche à
-**quelle** partie du rouleau la nappe couvre. Étendre une seule nappe est une opération locale ;
-couvrir un tour demande soit de partir de plusieurs segments officiels et de les **raccorder**
-(`vc_merge_tifxyz` existe et n'a jamais été essayé ici), soit un mécanisme que ce dépôt n'a pas.
+### ⚠⚠ Et le raccordement de segments officiels n'a AUCUN candidat — mesuré pour 4,5 Mo
+
+La voie qui restait nommée était de partir de plusieurs segments officiels et de les
+**raccorder** : `vc_merge_tifxyz` sait le faire — recouvrement par index de patchs, RANSAC,
+ajustement de faisceau affine conjoint, TPS RBF, fusion EDT à N voies. Il exige des surfaces
+**qui se recouvrent**.
+
+⭐ Le dépôt public de `PHerc1447` en publie **quinze**, et ce dépôt n'en avait jamais utilisé
+qu'un. La question — se recouvrent-ils ? — se lit sans télécharger un maillage : leurs
+`meta.json` portent une boîte englobante. **51 paires sur 105 se recouvrent d'au moins 5 %**,
+beaucoup à 90–100 %.
+
+⚠⚠ **Mais un recouvrement de boîtes ne distingue pas « deux patchs d'une feuille » de « deux
+feuilles voisines »** — dans un rouleau, deux nappes séparées de 113 µm occupent presque le
+même volume. Le discriminant est celui construit plus haut pour la chaîne radiale : la
+**distance médiane au plus proche voisin**.
+
+Les maillages font 0,1 Mo par canal, donc les quinze coûtent **4,5 Mo** :
+
+| écart médian | ce que ça veut dire | paires |
+|---|---|---:|
+| **< 40 µm** | deux patchs de la **même feuille** — raccordables | ⚠⚠ **0** |
+| 40 à 250 µm | nappes **voisines** — à ne surtout pas fusionner | 2 *(79 et 89 µm)* |
+| ≥ 318 µm | plusieurs feuilles d'écart | 49 |
+
+> **Aucun des quinze segments publiés n'est un patch de la même feuille qu'un autre.** La
+> segmentation publiée de ce rouleau est un ensemble d'échantillons **un patch par feuille**,
+> pas le pavage d'une feuille. Il n'y a donc rien à raccorder, et `vc_merge_tifxyz` n'a pas de
+> candidat ici.
+
+⭐ Ce que ça coûte de le savoir : **4,5 Mo et quelques secondes**, contre monter un volpkg,
+écrire une grille de fusion et lancer un merge qui aurait échoué faute d'arêtes.
+
+⭐⭐ **Et ça referme la boucle de tout ce travail.** Pour couvrir un tour il faudrait *produire*
+soi-même les patchs voisins — et l'extension tangentielle est le seul mécanisme qui sache le
+faire, or elle converge vers un point fixe. Les deux voies vers une bande continue sont donc
+mesurées et fermées, chacune par sa propre raison.
+
+⚠ Ce qui reste, et que rien de mesuré ici n'exclut : un mécanisme que ce dépôt n'a pas encore —
+ou une segmentation publiée plus dense qu'aujourd'hui. `analysis/src/carte_segments.py` refait
+la carte en une commande le jour où le dépôt public grandit.
 
 ### ⚠⚠ ~~Mais le cycle ne se referme pas — l'extension est une opération UNIQUE~~ *(réfuté ci-dessus)*
 
