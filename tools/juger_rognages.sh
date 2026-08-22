@@ -10,9 +10,13 @@ ROOT=$PWD
 # shellcheck source=/dev/null
 . "$ROOT/tools/juger_nappe.sh"
 
-for D in "$ROOT"/data/rogne/gen*; do
+# ⚠ La racine est un parametre : un second cycle de rognage doit pouvoir vivre dans son
+# propre dossier, sinon `gen30` du cycle 1 et `gen30` du cycle 2 ecriraient le meme verdict.
+RACINE=${1:-$ROOT/data/rogne}
+ETIQ=${2:-rognage_}
+for D in "$RACINE"/gen*; do
   [ -d "$D/trace/rogne" ] || continue
   G=$(basename "$D")
-  juger_nappe "$D" "$D/trace/rogne" "$G" "rognage_"
+  juger_nappe "$D" "$D/trace/rogne" "$G" "$ETIQ"
 done
-echo "fin — $(ls -d "$ROOT"/data/rogne/gen* 2>/dev/null | wc -l) rognage(s) juge(s)"
+echo "fin — $(ls -d "$RACINE"/gen* 2>/dev/null | wc -l) rognage(s) juge(s) dans $RACINE"

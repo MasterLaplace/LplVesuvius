@@ -548,7 +548,46 @@ besoin de l'être pour que le remède marche.
 ferait lire à tout consommateur l'aire d'avant le rognage. Un témoin vérifie qu'il ne vaut plus
 la valeur d'origine.
 
-### ⚠⚠ Mais le cycle ne se referme pas — l'extension est une opération UNIQUE
+### ⭐⭐⭐ LE CYCLE SE REFERME — et ce qui le commande est la propreté de la source
+
+L'extension depuis la nappe rognée à **0 %** rend **α = +0,000, converge**. Les trois
+extensions, appariées sur ce qui compte :
+
+| extension | source | **bord de la source** | résultat | α | bord |
+|---|---|---:|---:|---:|---:|
+| 1 | segment officiel, 4,28 cm² | **0 %** | 12,97 cm² | ⭐ **+0,000** | 9 % |
+| 2 | rognée à gen ≤ 25, 6,93 cm² | 2 % | 12,38 cm² | ⚠ +0,422 | 6 % |
+| **3** | **rognée à gen ≤ 10, 6,02 cm²** | **0 %** | **8,13 cm²** | ⭐ **+0,000** | 4 % |
+
+> **Ce qui prédit le succès d'une extension est la propreté de la périphérie de sa source** —
+> pas la taille du pas, pas le budget, pas le nombre de séances. Deux sources à 0 % donnent
+> +0,000 ; celle à 2 % donne +0,422.
+
+⭐ Et ça referme la boucle **rogner → étendre** que la section précédente donnait pour perdue :
+la tentative qui avait échoué partait d'une surface à 2 %, pas d'une surface propre.
+
+⚠ **La question qui reste est celle du gain net** : l'aire *propre* croît-elle d'un tour à
+l'autre, ou le cycle est-il un tapis roulant ? Un tour complet donne 4,28 → 6,02 cm²
+(**+41 %**) ; il faut savoir ce que le second rend.
+
+⚠⚠ **Et une erreur de ma part, corrigée par la mesure, qui vaut d'être écrite.** J'ai d'abord
+rogné l'extension 3 aux mêmes seuils que la première (20, 30, 45) — et les trois ont rendu
+**exactement** la même surface, 20 164 sommets, c'est-à-dire la source telle quelle. La raison
+est dans la distribution des générations, que je n'avais pas regardée :
+
+| | valeurs de génération distinctes | où vit la croissance |
+|---|---:|---|
+| extension 1 | **99** | étalée de 1 à 99 |
+| extension 3 | **20** | gens 1–10 héritées, puis **tout entre 100 et 109** |
+
+Un `resume` ne renumérote pas : il **continue** le compteur près de son plafond. Trimmer
+au-dessous de 100 retire donc *toute* la croissance d'un coup, et il n'existe aucun état
+intermédiaire dans cette plage. Les seuils utiles pour l'extension 3 sont **103 et 106** — qui
+donnent 6,87 et 7,51 cm², à comparer aux 6,02 cm² de la source propre. Jugement lancé, et la
+campagne aux mauvais seuils a été arrêtée dès le diagnostic plutôt que de rendre trois verdicts
+identiques.
+
+### ⚠⚠ ~~Mais le cycle ne se referme pas — l'extension est une opération UNIQUE~~ *(réfuté ci-dessus)*
 
 Étendre depuis la nappe rognée, avec exactement la même quantité de croissance que la première
 fois (cent générations de plus) :
