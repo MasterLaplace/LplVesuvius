@@ -670,6 +670,11 @@ run "figure du 2×2"            uv run python "$ROOT/analysis/src/figure_2x2.py"
 # absence d effet mais une absence de puissance. Le fichier refuse de conclure dessus, et le
 # controle exige qu une correlation PARFAITE, elle, passe -- sinon le refus ne vaut rien.
 run "candidats de graine"      uv run python "$ROOT/analysis/src/comparer_candidats.py" --verifier
+# ⚠⚠ L effet du plafond de generations. Sa sonde centrale est un CONTROLE : la meme
+# variation d alpha doit etre dite « stable » sous le bruit du tireur et « effet » sous un
+# bruit plus fin. Si les deux donnaient le meme verdict, le bruit ne servirait a rien et le
+# fichier ne ferait que rehabiller une soustraction.
+run "effet du plafond"         uv run python "$ROOT/analysis/src/effet_du_plafond.py" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
