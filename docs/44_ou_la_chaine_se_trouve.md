@@ -573,7 +573,35 @@ périphérie, plus mauvais α.
 être triplé une fois, en gardant α = +0,000.** Ce n'est pas une chaîne, mais c'est un facteur
 trois gratuit sur de la matière déjà validée.
 
-⏳ Le seul essai qui reste à faire de cette famille : **un rognage plus profond**. Si retirer
+### ⭐⭐ La profondeur du rognage commande la propreté, et elle atteint 0 %
+
+| rognage | aire utile | α | **pic au bord** |
+|---|---:|---:|---:|
+| **gen ≤ 10** | **6,02 cm²** | +0,000 | ⭐⭐ **0 %** |
+| gen ≤ 25 | 6,93 cm² | +0,000 | 2 % |
+| gen ≤ 50 | 7,59 cm² | +0,000 | 7 % |
+| *(non rognée)* | 12,97 cm² | +0,000 | 9 % |
+| *(source officielle)* | 4,28 cm² | +0,000 | 0 % |
+
+Monotone : plus on retire de générations tardives, plus la périphérie est propre. Et à
+**gen ≤ 10** on retrouve **exactement la qualité de la source — 0 % au bord — en gardant
+41 % de surface en plus qu'elle**.
+
+⭐⭐ **C'est le point de départ que le test du cycle n'avait pas.** La tentative précédente
+partait d'une surface à 2 % et rendait α = +0,422 ; celle-ci part d'une surface à **0 %**,
+comme la toute première extension. Les deux sont donc enfin appariées sur ce qui compte :
+
+| extension | source | bord de la source | α obtenu |
+|---|---|---:|---:|
+| 1 | segment officiel, 4,28 cm² | 0 % | ⭐ +0,000 |
+| 2 | rognée à gen ≤ 25, 6,93 cm² | 2 % | +0,422 |
+| **3** | **rognée à gen ≤ 10, 6,02 cm²** | **0 %** | ⏳ *en cours* |
+
+Si la troisième rend +0,000, le cycle existe : chaque tour gagne ~41 % et revient à une
+périphérie propre, et le seul coût est le rognage. Si elle rend +0,4 comme la deuxième, alors
+ce n'est pas la propreté du bord qui commande, et l'extension est bien une opération unique.
+
+⏳ ~~Le seul essai qui reste à faire de cette famille : **un rognage plus profond**.~~ Si retirer
 plus (gen ≤ 10, soit 54 % des sommets, 6,02 cm² — encore 41 % de plus que la source) restaure
 α = +0,000 à l'extension suivante, alors le cycle existe et c'est la profondeur du rognage qui
 le commande. Sinon, l'opération est unique et il faudra chercher ailleurs. Jugement lancé.
