@@ -32,26 +32,39 @@ STRIDE=${STRIDE:-8}
 COTE=${COTE:-1100}
 mkdir -p "$DEST"
 
+# ⚠⚠ LES FENETRES SONT DECLAREES UNE FOIS. Elles servent DEUX fois -- a l'inference, et a
+# la description de ce que le modele a recu (le controle du controle, sans lequel deux
+# sorties identiques ont une explication ennuyeuse indistinguable de la conclusion). Deux
+# litteraux qui doivent s'accorder finissent par ne plus s'accorder, et le desaccord serait
+# invisible : la description parlerait d'une fenetre que l'inference n'a pas vue.
+#
+# couches officielles : 1200x1200, 31 couches, surface a la 15 -> 26 couches centrees = 2..27
+POS_COUCHES="$ROOT/data/couches/PHerc1447_20250702235910"
+POS_TOP=50 ; POS_LEFT=50 ; POS_DEPART=2
+# notre trace : 5641x5721, 41 couches, surface a la 20 -> 26 couches centrees = 7..32
+NEG_COUCHES="$ROOT/data/leur_graine/rendu_41"
+NEG_TOP=2270 ; NEG_LEFT=2310 ; NEG_DEPART=7
+
+MODELE="$ROOT/data/models/timesformer_GP_scroll1"
+
 cd "$ROOT/inference_xpu" || exit 2
 
-# couches officielles : 1200x1200, 31 couches, surface a la 15 -> 26 couches centrees = 2..27
 if [ ! -s "$DEST/sur_sa_feuille.npy" ]; then
   echo "== controle POSITIF — segment officiel, alpha = +0,00"
-  uv run python src/infer_ink.py "$ROOT/data/couches/PHerc1447_20250702235910" \
-    --model "$ROOT/data/models/timesformer_GP_scroll1" --start-layer 2 \
-    --top 50 --left 50 --height "$COTE" --width "$COTE" --stride "$STRIDE" \
-    --device xpu --out "$DEST/sur_sa_feuille.npy" || exit 3
+  uv run python src/infer_ink.py "$POS_COUCHES" \
+    --model "$MODELE" --start-layer "$POS_DEPART" \
+    --top "$POS_TOP" --left "$POS_LEFT" --height "$COTE" --width "$COTE" \
+    --stride "$STRIDE" --device xpu --out "$DEST/sur_sa_feuille.npy" || exit 3
 else
   echo "== controle POSITIF deja fait"
 fi
 
-# notre trace : 5641x5721, 41 couches, surface a la 20 -> 26 couches centrees = 7..32
 if [ ! -s "$DEST/en_travers.npy" ]; then
   echo "== controle NEGATIF — notre trace, alpha = +1,01, aucune feuille a portee"
-  uv run python src/infer_ink.py "$ROOT/data/leur_graine/rendu_41" \
-    --model "$ROOT/data/models/timesformer_GP_scroll1" --start-layer 7 \
-    --top 2270 --left 2310 --height "$COTE" --width "$COTE" --stride "$STRIDE" \
-    --device xpu --out "$DEST/en_travers.npy" || exit 3
+  uv run python src/infer_ink.py "$NEG_COUCHES" \
+    --model "$MODELE" --start-layer "$NEG_DEPART" \
+    --top "$NEG_TOP" --left "$NEG_LEFT" --height "$COTE" --width "$COTE" \
+    --stride "$STRIDE" --device xpu --out "$DEST/en_travers.npy" || exit 3
 else
   echo "== controle NEGATIF deja fait"
 fi
@@ -59,4 +72,11 @@ fi
 cd "$ROOT/inference" || exit 2
 uv run python "$ROOT/analysis/src/temoin_negatif.py" \
   --positif "$DEST/sur_sa_feuille.npy" --negatif "$DEST/en_travers.npy" \
-  --json "$ROOT/docs/temoin_negatif.json"
+  --entree-positif "$POS_COUCHES" --fenetre-positif "$POS_TOP" "$POS_LEFT" "$POS_DEPART" \
+  --entree-negatif "$NEG_COUCHES" --fenetre-negatif "$NEG_TOP" "$NEG_LEFT" "$NEG_DEPART" \
+  --cote "$COTE" --json "$ROOT/docs/temoin_negatif.json" || exit 4
+
+uv run python "$ROOT/analysis/src/figure_temoin_negatif.py" \
+  --json "$ROOT/docs/temoin_negatif.json" \
+  --positif "$DEST/sur_sa_feuille.npy" --negatif "$DEST/en_travers.npy" \
+  --sortie "$ROOT/docs/images/46_temoin_negatif.png"

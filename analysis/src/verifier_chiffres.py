@@ -630,6 +630,66 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             out.append(("cartes ecrites du premier rouleau",
                         [f"{x['cartes_ecrites']}/{x['n']}"], p.name))
 
+    p = racine / "docs" / "derive_profondeur.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        # ⚠⚠ Les censures d'abord : c'est le chiffre qui porte la conclusion de `47`, et
+        # le seul qui dise si un seuil absolu compare des surfaces ou des reglages.
+        out.append(("traces au plafond, rendu bas",
+                    [f"{d['censurees_en_bas']}/{d['lignes_en_bas']}"], p.name))
+        out.append(("traces au plafond, rendu haut",
+                    [f"{d['censurees_en_haut']}/{d['lignes_en_haut']}"], p.name))
+        for cle, nom in (("plafond_bas_um", "plafond du rendu bas"),
+                         ("plafond_haut_um", "plafond du rendu haut")):
+            if d.get(cle) is not None:
+                ajoute(nom, d[cle], 2, p.name)
+        if d.get("rapport_plafonds") is not None:
+            ajoute("rapport des plafonds", d["rapport_plafonds"], 2, p.name)
+        for x in d.get("derives", []):
+            for c, nom in (("derive_mediane", "derive mediane"), ("derive_max", "derive max")):
+                if x.get(c) is not None:
+                    ajoute(f"{nom} de {x['critere']}", x[c], 3, p.name)
+            out.append((f"traces comparees de {x['critere']}",
+                        [f"{x['n_compare']}"], p.name))
+        if d.get("rho_au_bord_part_plates") is not None:
+            ajoute("rho au_bord / part_plates", d["rho_au_bord_part_plates"], 3, p.name,
+                   signe=True)
+        for cle in ("plafonds_bas_um", "plafonds_haut_um"):
+            for v_ in d.get(cle) or []:
+                ajoute(f"plafond present ({cle})", v_, 2, p.name)
+
+    p = racine / "docs" / "temoin_negatif.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        # ⚠⚠ Les chiffres qui portent la conclusion de `46`, et la PORTEE avec eux : sans
+        # elle, le tableau se lirait comme la these forte, qui est hors de portee.
+        if d.get("accord_pixel") is not None:
+            ajoute("accord pixel des deux cartes", d["accord_pixel"], 4, p.name, signe=True)
+        # ⚠⚠ Ces cinq-la sont des POURCENTAGES a une decimale, donc des chaines de trois
+        # caracteres : trop courtes pour qu'une recherche litterale veuille dire quelque
+        # chose dans un texte en prose. On les cherche AVEC leur signe, ce qui les rend
+        # verifiables au lieu de les laisser dans la zone grise « ni reussite ni echec ».
+        for cle, nom in (("ecart_median_en_variation_interne", "ecart des deux cartes"),
+                         ("ecart_attendu_si_independantes", "ecart si etrangeres"),
+                         ("part_du_modele_qui_marche", "sigma du positif rapporte au modele"),
+                         ("ecart_relatif_sigma_entree", "ecart des deux entrees")):
+            if d.get(cle) is not None:
+                v = d[cle] * 100
+                out.append((nom, [f"{fr(v, 1)} %", f"{fr(v, 1)}%",
+                                  f"{en(v, 1)} %", f"{en(v, 1)}%"], p.name))
+        for cote in ("positif", "negatif"):
+            if d.get(cote, {}).get("sigma") is not None:
+                ajoute(f"sigma du controle {cote}", d[cote]["sigma"], 4, p.name)
+            e = d.get(f"entree_{cote}") or {}
+            if e.get("sigma") is not None:
+                ajoute(f"sigma de l'entree {cote}", e["sigma"], 2, p.name)
+                v = e["part_non_nulle"] * 100
+                out.append((f"part non nulle de l'entree {cote}",
+                            [f"{fr(v, 1)} %", f"{fr(v, 1)}%",
+                             f"{en(v, 1)} %", f"{en(v, 1)}%"], p.name))
+        if d.get("porte"):
+            out.append(("portee du temoin negatif", [d["porte"]], p.name))
+
     p = racine / "docs" / "temoins.json"
     if p.exists():
         d = json.loads(p.read_text())

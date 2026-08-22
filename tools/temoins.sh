@@ -608,6 +608,21 @@ run "plafond : les 2 campagnes" uv run python "$ROOT/analysis/src/comparer_plafo
 run "figure du plafond"        uv run python "$ROOT/analysis/src/figure_plafond.py" --verifier
 run "campagne des graines"     uv run python "$ROOT/analysis/src/figure_graines.py" --verifier
 run "écarts entre segments"    uv run python "$ROOT/analysis/src/figure_segments.py" --verifier
+# ⚠⚠ Le temoin negatif : sa garde REFUSE de conclure quand le controle POSITIF est plat.
+# Sans elle, deux cartes plates rendent un rapport proche de 1 et le verdict se lirait
+# « le temoin trompe le detecteur » alors qu'il veut dire « le detecteur est eteint des
+# deux cotes ». Et sa sonde verifie qu'une experience NON CONCLUANTE reste imprimable :
+# la premiere version la faisait sortir par le chemin d'erreur, sans ecrire son JSON.
+run "témoin négatif"           uv run python "$ROOT/analysis/src/temoin_negatif.py" --verifier
+run "figure du témoin négatif" uv run python "$ROOT/analysis/src/figure_temoin_negatif.py" --verifier
+# ⚠⚠ La derive avec la profondeur : sa sonde verifie qu'une trace CENSUREE est ecartee de
+# la derive. La compter ferait mesurer le deplacement du PLAFOND en croyant mesurer la
+# surface -- et comme le plafond monte avec la profondeur, l'erreur irait toujours dans le
+# meme sens, donc ressemblerait a un effet. Et sa fixture a TROIS traces et pas deux : a
+# deux, l'appariement positionnel rend le meme nombre que l'appariement par identite, donc
+# la sonde ne pouvait pas echouer.
+run "dérive avec la profondeur" uv run python "$ROOT/analysis/src/derive_avec_profondeur.py" --verifier
+run "figure de la dérive"      uv run python "$ROOT/analysis/src/figure_derive_profondeur.py" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys

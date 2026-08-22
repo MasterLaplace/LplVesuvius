@@ -25,6 +25,14 @@ uv run python ../analysis/src/figure_tirages.py     --anglais --sortie "$FIG/35_
 uv run python ../analysis/src/figure_plafond.py     --anglais --sortie "$FIG/35_plafond.png"
 uv run python ../analysis/src/figure_graines.py     --anglais --sortie "$FIG/25_campagne_graines.png"
 uv run python ../analysis/src/figure_segments.py    --anglais --sortie "$FIG/44_ecarts_segments.png"
+uv run python ../analysis/src/figure_temoin_negatif.py --anglais \
+    --json "$ROOT/docs/temoin_negatif.json" \
+    --positif "$ROOT/data/temoin_negatif/sur_sa_feuille.npy" \
+    --negatif "$ROOT/data/temoin_negatif/en_travers.npy" \
+    --sortie "$FIG/46_temoin_negatif.png"
+uv run python ../analysis/src/figure_derive_profondeur.py --anglais \
+    --json "$ROOT/docs/derive_profondeur.json" --docs "$ROOT/docs" \
+    --sortie "$FIG/47_derive_profondeur.png"
 # ⚠ Celle-ci est DEJA en anglais : elle a ete ecrite pour l'article, donc elle n'a pas de
 # table de traduction — la traduire serait traduire vers sa propre langue.
 uv run python ../analysis/src/figure_typographie.py           --sortie "$FIG/45_typographie.png"

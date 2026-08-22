@@ -350,7 +350,7 @@ mega-octets ».
 ### La chaine de production, et les gardes du depot
 
 ```bash
-./tools/temoins.sh                  # 37 batteries, 1164 controles hors ligne, tous verts
+./tools/temoins.sh                  # 41 batteries, 1236 controles hors ligne, tous verts
                                     # ⚠ ces deux chiffres sont ECRITS PAR LE SCRIPT dans
                                     # docs/temoins.json et gardes comme tous les autres :
                                     # la version precedente disait 18 et 741, recopies a
@@ -360,6 +360,16 @@ mega-octets ».
 # « consistent with » quantifie : interligne, echelle, couverture, epaisseur de trait,
 # mesures sans lire une lettre (docs/45)
 ./tools/lancer.sh --fond tools/campagne_typographie.sh
+
+# le temoin negatif que le domaine n'a pas : une surface dont la GEOMETRIE prouve qu'aucune
+# feuille n'est a portee (alpha = +1,01), contre le segment officiel du meme rouleau
+# (alpha = +0,00). Meme volume, meme modele, meme region, meme pas (docs/46)
+./tools/lancer.sh --fond tools/campagne_temoin_negatif.sh
+
+# un critere mesure a une profondeur juge-t-il une trace rendue a une autre ? (docs/47)
+# la reponse est non : 13 traces sur 16 butent sur le plafond du rendu, donc un seuil
+# absolu compare des reglages et pas des surfaces
+python3 analysis/src/derive_avec_profondeur.py --docs docs --json docs/derive_profondeur.json
 
 # la carte des segments publies d'un rouleau : y a-t-il deux patchs d'UNE MEME feuille ?
 uv run python analysis/src/carte_segments.py --rouleau PHerc1447 \

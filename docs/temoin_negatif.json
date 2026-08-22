@@ -1,0 +1,66 @@
+{
+  "positif": {
+    "n": 1201216,
+    "moyenne": -1.1217346127531087,
+    "sigma": 0.012937937255707768,
+    "p05": -1.1405011415481567,
+    "mediane": -1.1229503154754639,
+    "p95": -1.1026461720466614,
+    "contraste_p95_p50": 0.02030414342880249,
+    "part_haute": 0.03557644919814588
+  },
+  "negatif": {
+    "n": 1201216,
+    "moyenne": -1.1217873095714814,
+    "sigma": 0.012920733547243587,
+    "p05": -1.1404335498809814,
+    "mediane": -1.1230411529541016,
+    "p95": -1.1026790142059326,
+    "contraste_p95_p50": 0.020362138748168945,
+    "part_haute": 0.03710989530608983
+  },
+  "rapport_sigma": 1.001331480786387,
+  "accord_pixel": 0.9979206914447931,
+  "ecart_median": 0.0003775358200073242,
+  "ecart_median_en_sigma_utile": 0.0004895433350717379,
+  "ecart_median_en_variation_interne": 0.029199940158117835,
+  "ecart_attendu_si_independantes": 0.9539,
+  "rapport_contraste": 0.9971518061003454,
+  "sigma_reference": 0.7712,
+  "part_du_modele_qui_marche": 0.01677637092285758,
+  "raison": "le contrôle POSITIF est plat : σ = 0.0129, soit 1.7% de ce que ce modèle rend là où il marche (0.7712). Il n'y a pas de détecteur en marche à contrôler, donc le témoin négatif ne peut rien dire",
+  "concluant": true,
+  "porte": "faible",
+  "these_etablie": "la sortie du modèle ne dépend PAS de la présence d'une feuille : sur une surface qui suit une face de papyrus et sur une surface qui coupe l'empilement, il rend la même carte — leur écart vaut 2.9% de ce que chacune varie, contre 95% si elles étaient étrangères l'une à l'autre",
+  "these_hors_de_portee": "que le détecteur signale de l'encre là où il n'y a pas de feuille — il n'en signale nulle part sur ce rouleau",
+  "entree_positif": {
+    "dossier": "../data/couches/PHerc1447_20250702235910",
+    "couches": 26,
+    "fenetre": [
+      50,
+      50,
+      1100,
+      1100
+    ],
+    "moyenne": 89.45019411951685,
+    "sigma": 39.26125105316548,
+    "part_non_nulle": 0.9344614748887476
+  },
+  "entree_negatif": {
+    "dossier": "../data/leur_graine/rendu_41",
+    "couches": 26,
+    "fenetre": [
+      2270,
+      2310,
+      1100,
+      1100
+    ],
+    "moyenne": 96.86340247933883,
+    "sigma": 34.949033189736426,
+    "part_non_nulle": 0.999995104895105
+  },
+  "entrees_valides": true,
+  "fenetres_vides": [],
+  "ecart_relatif_sigma_entree": 0.10983393925959417,
+  "entrees_identiques": false
+}

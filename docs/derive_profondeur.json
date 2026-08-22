@@ -1,0 +1,67 @@
+{
+  "profondeur_basse": 21,
+  "profondeur_haute": 41,
+  "traces_appariees": 16,
+  "plafond_bas_um": 93.62,
+  "plafond_haut_um": 187.24,
+  "censurees_en_bas": 13,
+  "censurees_en_haut": 10,
+  "lignes_en_bas": 16,
+  "lignes_en_haut": 16,
+  "plafonds_bas_um": [
+    86.4,
+    93.62
+  ],
+  "plafonds_haut_um": [
+    172.8,
+    187.24
+  ],
+  "censure_bas": {
+    "censurees_au_plafond": 13,
+    "censurees_ailleurs": 0,
+    "coherente": true
+  },
+  "censure_haut": {
+    "censurees_au_plafond": 10,
+    "censurees_ailleurs": 0,
+    "coherente": true
+  },
+  "derives": [
+    {
+      "critere": "ecart_um",
+      "n_compare": 2,
+      "n_censurees": 14,
+      "derive_mediane": 88.93900000000001,
+      "derive_max": 93.62000000000002
+    },
+    {
+      "critere": "au_bord",
+      "n_compare": 16,
+      "n_censurees": 0,
+      "derive_mediane": 0.07530569211904514,
+      "derive_max": 0.44999999999999996
+    },
+    {
+      "critere": "part_plates",
+      "n_compare": 16,
+      "n_censurees": 0,
+      "derive_mediane": 0.15312500000000007,
+      "derive_max": 0.24985388661601404
+    }
+  ],
+  "rapport_plafonds": 2.0,
+  "rapport_profondeurs": 1.9523809523809523,
+  "rho_au_bord_part_plates": -0.5283297971904711,
+  "verdict": {
+    "part_censuree_en_bas": 0.8125,
+    "criteres_stables_en_profondeur": [],
+    "seuil_absolu_defendable": false,
+    "raison": "un seuil absolu comparerait des plafonds : 13/16 traces butent sur le plafond du rendu le moins profond, et ce plafond monte d'un facteur 2.00 avec la profondeur"
+  },
+  "profondeurs_disponibles": {
+    "21": 16,
+    "41": 16,
+    "81": 3,
+    "161": 1
+  }
+}

@@ -60,7 +60,7 @@
       in the virtual unwrapping of Herculaneum papyri
     ]
     #v(0.4em)
-    #text(size: 11.5pt)[and three artefacts the measurement reveals]
+    #text(size: 11.5pt)[and four artefacts the measurement reveals]
   ]
   #v(1.1em)
   #text(size: 10.5pt)[Guillaume Papineau]
@@ -92,18 +92,22 @@
   window depth. A surface lying on its sheet gives $alpha approx 0$; one lying across the
   stack gives $alpha approx 1$, because its "peak" is merely the strongest thing the
   window happened to contain. Applying this and a complementary remote triage to 13 of
-  the scrolls in the Vesuvius Challenge prize set, we report three findings that bear on
+  the scrolls in the Vesuvius Challenge prize set, we report four findings that bear on
   how the community's results are read. First, the reference tracer is *a draw, not a
   function*: over 78 runs with strictly identical parameters, 5 of 13 scrolls flip
   between a clean and a self-intersecting verdict. Second, both the *stability* and the
   *cleanliness* usually attributed to a good trace are artefacts of the generation
   budget: raising it from 120 to 400 moves the median area dispersion from 0.55 % to
-  86.00 %, and the share of self-intersecting runs from 1/12 to 9/12. Third, the
+  86.00 %, and the share of self-intersecting runs from 1/12 to 9/12. Third, the render
+  window imposes a second ceiling of the same kind: 13 of 16 traces sit exactly on it, so
+  an absolute threshold on a distance compares settings rather than surfaces. Fourth, the
   published segmentation of a prize scroll is a set of samples --- *one patch per sheet*
   --- not a tiling of one sheet: of 105 pairs among 15 published segments, none is closer
-  than 79 #um, twice the same-sheet threshold. We argue that repetition and error
-  bars, absent from the primary literature, are the cheapest available improvement to the
-  field's evidentiary standard.
+  than 79 #um, twice the same-sheet threshold. We also show that a surface with
+  $alpha approx 1$ is a *negative control by construction* for an ink detector, since its
+  geometry rules out a papyrus face being within reach --- the control the foundational
+  work lacks. We argue that repetition and error bars, absent from the primary literature,
+  are the cheapest available improvement to the field's evidentiary standard.
 ]
 
 #v(0.8em)
@@ -145,16 +149,24 @@ This paper is about the judging step. We contribute:
   published segment from a few megabytes of its published surface volume, before any
   download or inference is paid for.
 
-+ *Three empirical findings* (#link(<sec:results>)[Section 5]) obtained by applying these
++ *Four empirical findings* (#link(<sec:results>)[Section 5]) obtained by applying these
   to 13 prize scrolls: the tracer is non-deterministic in a way that changes verdicts; the
-  stability and cleanliness of a trace are budget artefacts; and published segments do not
-  tile a sheet.
+  stability and cleanliness of a trace are artefacts of its generation budget; the render
+  window imposes a second ceiling, so that an absolute threshold on a distance compares
+  settings rather than surfaces on 14 of 16 traces; and published segments do not tile a
+  sheet.
+
++ *A negative control that costs nothing extra* (#link(<sec:negctrl>)[Section 6.4]). A
+  surface whose convergence exponent is near 1 carries a geometric proof that no papyrus
+  face is within reach, so any ink reported on it is a false positive by construction. This
+  is the control the foundational paper lacks, and any pipeline that traces surfaces can
+  produce one deliberately.
 
 + *An argument about method* (#link(<sec:disc>)[Section 6]): every number here is a
-  measurement repeated, and the repetition is what produced the findings. None of the
-  three would have been visible from a single run. The same move applied one step
-  downstream --- to the field's only ground-truth-free argument about *reading* --- shows
-  that two of the three properties that argument groups together do not go together.
+  measurement repeated, and the repetition is what produced the findings. None of them
+  would have been visible from a single run. The same move applied one step downstream ---
+  to the field's only ground-truth-free argument about *reading* --- shows that two of the
+  three properties that argument groups together do not go together.
 
 #caveat[
   *What this paper does not claim.* It does not propose a better segmentation algorithm,
@@ -512,6 +524,64 @@ truncations at the same place.
   by a rule stated before looking at what excluding them does.
 ]
 
+== A second ceiling: the render depth <sec:depth>
+
+The budget of #link(<sec:ceiling>)[Section 5.2] is not the only one. Rendering a surface
+flattens a window of $n$ layers around it, so a measurement of *how far the nearest matter
+lies* cannot report a distance larger than that window. It reports the window.
+
+We rendered the same 16 traces, across 4 scrolls, at two depths --- 21 and 41 layers --- and
+paired them by identity rather than by list position.
+
+#figure(
+  image("figures/47_derive_profondeur.png", width: 100%),
+  caption: [
+    Top: each trace's distance to matter at both render depths, with the ceiling of *that
+    trace* drawn as a vertical tick. Hollow red marks sit exactly on their ceiling: the
+    value is the setting, not the surface. Bottom: a criterion with no ceiling --- a
+    bounded fraction --- moving between the same two depths.
+  ],
+) <fig:depth>
+
+#figure(
+  table(
+    columns: (auto, auto, auto, auto, auto),
+    align: (left, right, right, right, right),
+    table.header[criterion][compared][censored][median drift][max drift],
+    [distance to matter (#um)], [*2*], [*14*], [88.939], [93.620],
+    [share at profile edge], [16], [0], [*0.075*], [*0.450*],
+    [share of flat columns], [16], [0], [0.153], [0.250],
+  ),
+  caption: [
+    The same 16 traces at render depth 21 and 41. The ceiling doubles with the depth
+    ($93.62 -> 187.24$ #um, a factor 2.00 for a factor 1.95 of depth), and 13 of 16 traces
+    sit on it at the shallower depth, 10 of 16 at the deeper one.
+  ],
+) <tab:depth>
+
+Two things follow. First, a threshold on the distance compares *settings* rather than
+surfaces on 14 of 16 traces --- the same failure as the generation budget, in a different
+part of the pipeline. Second, a criterion that *cannot* be truncated drifts anyway: a
+median 0.075 on a quantity whose typical value is 0.5, and a maximum of 0.450, which is
+almost the full range of the criterion, produced by changing nothing but the render depth.
+
+#caveat[
+  *The cohort has two ceilings, not one.* It mixes two voxel sizes, 8.64 and
+  9.362 #um, so the ceiling is proportional to the scroll's voxel: 86.40 and 93.62 #um at
+  the shallow depth. Drawing a single cohort-level ceiling makes the traces of the other
+  voxel look as though they sit *below* the ceiling when they sit exactly *on* theirs, and
+  half the censoring disappears from the figure without a single number changing. Each
+  trace carries its own tick above.
+]
+
+The consequence for practice is not that a better reference must be found. It is that an
+absolute threshold on such a criterion is not a statement about a surface. The convergence
+test of #link(<sec:conv>)[Section 3] escapes this by construction: it is an *exponent*
+relating two window sizes, so it has no reference, no threshold and no scale. A
+profile-based criterion read the same way --- at two depths, as a ratio --- would inherit
+the same property. We have not built it: it needs traces uncensored at both depths, and
+this corpus contains two.
+
 == Where a radial chain actually sits <sec:geom>
 
 The neighbour mode projects a surface onto the next sheet, and chaining it produces a
@@ -680,6 +750,13 @@ outputs measures the budget. The diagnostic is cheap: record the stopping condit
 alongside the result, and check whether the low-variance instances are the ones that hit
 it.
 
+We met the same mechanism three times in this work, in three unrelated parts of the
+pipeline: the generation budget of the tracer (#link(<sec:ceiling>)[Section 5.2]), the
+render window of the flattening step (#link(<sec:depth>)[Section 5.3]), and --- in the
+opposite direction --- the fact that the *absence* of a stopping condition is what made the
+convergence test of #link(<sec:conv>)[Section 3] transportable. A quantity that a setting
+can cap is a quantity whose reported spread is, in part, a property of the setting.
+
 == The same move works one step downstream
 
 The instruments above judge *geometry*. The field's only ground-truth-free argument about
@@ -722,6 +799,60 @@ see that two of its properties point in opposite directions. A number can.*
   over $k$ lags of an $n$-point profile peaks near $sqrt(2 ln k) \/ sqrt(n)$, so the floor
   rises by itself on a smaller map.
 ]
+
+== The control the field does not have <sec:negctrl>
+
+The same paper reports a false-positive rate for its ink detector @seales2023, measured on
+images that contain ink all around. It never measures what the detector returns on a
+substrate *known* to carry none. The ideal control was in the scan --- the paper sheet the
+fragments are mounted on, imaged in the same session at the same voxel --- and the
+preprocessing removes it: "These are removed manually."
+
+A traced surface with a high convergence exponent is a better control than a paper backing,
+and it costs nothing extra. A surface with $alpha approx 1$ has a *geometric proof* that no
+papyrus face is within reach: its distance to matter follows the render window. Any ink
+reported there is a false positive by construction. We ran the published ink model on such a
+surface and, as a positive control, on the official segment of the *same scroll* --- same
+volume, same voxel, same model, same region size, same stride. The only thing that differs
+is whether there is a sheet under the surface.
+
+#figure(
+  image("figures/46_temoin_negatif.png", width: 100%),
+  caption: [
+    Top: what the model received --- a woven papyrus face against a slice cut across the
+    stack, two textures no eye would confuse, differing by 11.0 % in dispersion. Middle:
+    what it returned, on a *shared* colour scale. Bottom: the gap between the two outputs
+    against the gap two unrelated maps would show.
+  ],
+) <fig:negctrl>
+
+#caveat[
+  *The intended claim is out of reach, and that comes first.* On this scroll the detector
+  returns a constant: $sigma = 0.0129$, which is 1.7 % of the 0.7712 it returns where it
+  reaches an AUC of 0.925. There is no working detector to control, so "it reports ink
+  where there is no sheet" cannot be tested here --- it reports none anywhere. Our
+  instrument refuses to print a verdict below a tenth of the working dispersion, because
+  two flat maps otherwise give a dispersion ratio near 1, which would read as "the control
+  fools the detector" when it means "the detector is off on both sides".
+]
+
+A narrower claim is established. A ratio of dispersions cannot separate *two maps of equal
+amplitude* from *the same map*, and that distinction is the one left: a detector returning
+two different maps is responding to its inputs, however weakly. Pixel to pixel, the two
+predictions correlate at $rho = +0.9979$, and their median difference is 2.9 % of what each
+map itself varies by --- against 95.4 % for two unrelated maps of the same dispersion, a
+value derived rather than chosen.#footnote[For two independent maps of dispersion $sigma$,
+the difference has dispersion $sigma sqrt(2)$, so the median of its absolute value is
+$0.6745 sigma sqrt(2) = 0.9539 sigma$.]
+
+The boring explanation is excluded by measurement rather than by argument: both input
+windows are full and different --- 93.4 % and 100 % non-zero, dispersions 39.26 against
+34.95. The model receives two clearly distinct volumes and returns the same map.
+
+The generalisable part is the design. A negative control for an ink detector does not
+require a special acquisition or a substrate known to be blank. It requires a surface whose
+*geometry* rules out the thing being detected, and any pipeline that can trace surfaces can
+produce one deliberately.
 
 == What a good measurement looked like here
 

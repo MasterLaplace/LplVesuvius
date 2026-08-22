@@ -525,7 +525,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./tools/temoins.sh                      # 37 batteries, 1164 contrôles hors ligne, tous verts
+./tools/temoins.sh                      # 41 batteries, 1236 contrôles hors ligne, tous verts
 ./tools/mirror_site.sh                  # miroir + contrôle de couverture
 ./tools/fetch_layers.sh <url> <dest> <largeur> <de> <a>   # couches, reprenable
 ./tools/ppm_to_tifxyz.py <in.ppm> <out.tifxyz>            # .ppm de VC -> tifxyz
