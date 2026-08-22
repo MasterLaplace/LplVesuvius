@@ -112,6 +112,54 @@ def discriminante(ecriture: str) -> bool:
     return (e[:1] in "+-") and len(e) >= 5
 
 
+def ou_trouve(ecritures, textes: dict) -> list[str]:
+    """Les documents qui contiennent l'une des écritures acceptées de ce chiffre.
+
+    ⚠ Extrait de `main` pour être testable. Un garde-fou dont le cœur n'est appelable que
+    par la ligne de commande ne peut pas être sondé, et c'est lui qui protège tous les
+    chiffres publiés du dépôt.
+    """
+    return [d.name for d, t in textes.items()
+            if any(normaliser(e) in t for e in ecritures)]
+
+
+def perimee(attendu: str, textes: dict) -> list[str]:
+    """Où vit l'ANCIENNE valeur de ce chiffre ?
+
+    ⚠⚠ « ABSENT » et « périmé » sont deux diagnostics très différents, et la première
+    version ne disait que le premier. Un chiffre absent demande de l'écrire ; un chiffre
+    périmé demande de le REMPLACER, et il faut savoir où. Le compte de témoins de ce dépôt
+    a fait payer cette différence trois fois dans une même journée : le garde disait
+    « 45 batteries, 1322 controles ABSENT » et il fallait grep soi-même les trois documents
+    qui citaient l'ancien.
+
+    ⭐ On cherche la même phrase avec d'autres chiffres : c'est ce qui distingue « personne
+    n'en parle » de « quelqu'un en parle et se trompe ».
+
+    ⚠ Refuse les motifs trop peu spécifiques. Une chaîne qui n'est QUE des chiffres
+    matcherait n'importe quel nombre du dépôt, et signalerait périmé un document qui parle
+    d'autre chose — un garde qui crie à tort finit ignoré.
+    """
+    import re as _re
+    if not _re.search(r"[^\d\s.,+-]", attendu):
+        return []
+    motif = _re.escape(attendu)
+    # ⚠ `re.escape` protege les chiffres tels quels ; on les rouvre un par un.
+    motif = _re.sub(r"(?:\\?[0-9])+(?:[.,](?:\\?[0-9])+)?", r"[-+0-9  .,]+", motif)
+    try:
+        rx = _re.compile(motif)
+    except _re.error:
+        return []
+    out = []
+    for d, t in textes.items():
+        for i, ligne in enumerate(t.splitlines(), 1):
+            m = rx.search(ligne)
+            if m and m.group(0).strip() != attendu.strip():
+                out.append(f"{d.name}:{i} dit « {m.group(0).strip()} »")
+                break
+    return out
+
+
 def fr(x: float, n: int = 3) -> str:
     """Écrit un nombre à la française — la prose du dépôt utilise la virgule."""
     return f"{x:.{n}f}".replace(".", ",")
@@ -777,10 +825,81 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     return out
 
 
+def verifier() -> int:
+    """Le garde-fou se garde lui-même.
+
+    ⚠⚠ Il n'en avait aucun. Ce fichier protège 140 chiffres publiés répartis sur 28
+    fichiers de résultat, et rien ne vérifiait qu'il sait encore les trouver — ni, surtout,
+    qu'il sait ÉCHOUER. Une vérification qu'on ne vérifie pas est de la même famille qu'une
+    vérification incapable d'échouer.
+    """
+    from pathlib import Path as _P
+    echecs = controles = 0
+
+    def v(nom, cond, detail=""):
+        nonlocal echecs, controles
+        controles += 1
+        if not cond:
+            echecs += 1
+            print(f"  ECHEC  {nom}" + (f"  — {detail}" if detail else ""))
+
+    # ⚠⚠ `normaliser` replie la typographie SANS SENS NUMERIQUE, et rien d'autre. Le signe
+    # moins typographique que la prose ecrit (U+2212) et le trait d'union ASCII que
+    # `f"{x}"` produit designent le meme nombre ; la virgule et le point, eux, sont deux
+    # ECRITURES d'un meme nombre et c'est la liste des ecritures acceptees qui s'en occupe.
+    # Mes trois premiers temoins supposaient l'inverse, et c'est l'auto-test qui a corrige
+    # ma lecture de la fonction plutot que la fonction.
+    v("le moins typographique devient un moins ASCII",
+      normaliser("−0,382") == "-0,382", normaliser("−0,382"))
+    v("le tiret demi-cadratin aussi", normaliser("–5") == "-5")
+    v("l'espace insécable devient une espace", normaliser("75\u00a0810") == "75 810")
+    v("l'espace fine insécable aussi", normaliser("75\u202f810") == "75 810")
+    # ⚠ Et la propriete qu'il ne faut PAS avoir : virgule et point ne sont pas confondus
+    # ici, sinon « 0,859 » matcherait un document qui dit « 0.859 » ET un qui dit autre
+    # chose de la meme forme. Le partage des roles est ce qui garde le garde precis.
+    v("la virgule et le point restent distincts",
+      normaliser("12,97") != normaliser("12.97"))
+    v("fr écrit à la française", fr(0.859, 3) == "0,859")
+    v("en écrit à l'anglaise", en(0.859, 3) == "0.859")
+
+    doc = {_P("bon.md"): normaliser("le taux vaut 6,4 % sur 78 tirages")}
+    v("un chiffre présent est trouvé", ou_trouve(["6,4 %"], doc) == ["bon.md"])
+    v("... et les deux écritures fournies suffisent",
+      ou_trouve(["6.4 %", "6,4 %"], doc) == ["bon.md"])
+    v("... alors qu'une seule, la mauvaise, ne trouve rien",
+      ou_trouve(["6.4 %"], doc) == [])
+    # ⚠⚠ LA sonde qui compte : le garde doit ECHOUER sur un chiffre faux. Sans elle, un
+    # garde qui rendrait toujours « trouve » passerait pour une protection.
+    v("un chiffre FAUX n'est pas trouvé", ou_trouve(["6,5 %"], doc) == [])
+    v("... ni un chiffre absent", ou_trouve(["99,9 %"], doc) == [])
+    v("aucun document, aucune trouvaille", ou_trouve(["6,4 %"], {}) == [])
+
+    vieux = {_P("perime.md"): normaliser("on a 43 batteries, 1272 controles ici")}
+    d_ = perimee("45 batteries, 1322 controles", vieux)
+    v("une valeur PÉRIMÉE est localisée", len(d_) == 1 and "perime.md:1" in d_[0], str(d_))
+    v("... et l'ancienne valeur est citée", "43 batteries" in d_[0])
+    # ⚠ Un motif qui n'est QUE des chiffres matcherait n'importe quel nombre du depot.
+    v("un chiffre nu ne déclenche pas de diagnostic périmé", perimee("1322", vieux) == [])
+    v("un document qui n'en parle pas n'est pas accusé",
+      perimee("45 batteries, 1322 controles", {_P("autre.md"): "rien"}) == [])
+    # ⚠ Et le controle du controle : la meme valeur presente ne doit PAS etre dite perimee.
+    memes = {_P("a.md"): normaliser("45 batteries, 1322 controles")}
+    v("une valeur À JOUR n'est pas signalée périmée",
+      perimee("45 batteries, 1322 controles", memes) == [])
+
+    if echecs:
+        print(f"\nECHEC ({echecs} failures, {controles} checks)")
+        return 1
+    print(f"ALL PASS ({echecs} failures, {controles} checks)")
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Verifier que les chiffres d'un document viennent bien de leurs fichiers.")
-    parser.add_argument("documents", type=Path, nargs="+")
+    parser.add_argument("documents", type=Path, nargs="*")
+    parser.add_argument("--verifier", action="store_true",
+                        help="le garde-fou se garde lui-même, hors ligne")
     parser.add_argument("--racine", type=Path,
                         default=Path(__file__).resolve().parents[2])
     parser.add_argument("--soumission", type=Path,
@@ -798,6 +917,10 @@ def main() -> int:
                              "REFUSE au lieu de passer au vert : un fichier de resultat "
                              "absent ferait sinon un controle qui ne verifie rien")
     args = parser.parse_args()
+    if args.verifier:
+        return verifier()
+    if not args.documents:
+        parser.error("donner au moins un document, ou --verifier")
 
     attendus = collecter(args.racine)
     # ⚠⚠ LE TROU QU'IL FAUT BOUCHER : si un fichier de résultat manque, `collecter` le
@@ -823,8 +946,7 @@ def main() -> int:
     print(f"{'chiffre':>32} {'attendu':>16} {'source':>28}  ou")
     manquants = 0
     for nom, ecritures, source in attendus:
-        trouve = [d.name for d, t in textes.items()
-                  if any(normaliser(e) in t for e in ecritures)]
+        trouve = ou_trouve(ecritures, textes)
         if trouve:
             print(f"{nom:>32} {ecritures[0]:>16} {source:>28}  ✅ {', '.join(trouve)}")
         else:
@@ -837,8 +959,14 @@ def main() -> int:
             autres = ecritures[1:]
             suffixe = (f" — accepte aussi {', '.join('« ' + e + ' »' for e in autres)}"
                        if autres else "")
-            print(f"{nom:>32} {ecritures[0]:>16} {source:>28}  ⚠ ABSENT "
-                  f"(ou perime){suffixe}")
+            vieilles = perimee(ecritures[0], textes)
+            etat = "PERIME" if vieilles else "ABSENT"
+            print(f"{nom:>32} {ecritures[0]:>16} {source:>28}  ⚠ {etat}{suffixe}")
+            # ⭐ Dire OU vit l'ancienne valeur transforme une chasse au grep en un
+            # remplacement. C'est la difference entre « ce chiffre manque » et « ce
+            # document se trompe, ligne 353 ».
+            for v in vieilles[:3]:
+                print(f"{'':>32} {'':>16} {'':>28}    → {v}")
 
     # ⚠⚠ Le TOTAL, imprime par l'outil et non compte a la main. `21` citait « 85 chiffres »,
     # un nombre exact le jour ou il a ete ecrit et faux depuis -- et le compter au grep

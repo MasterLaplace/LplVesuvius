@@ -639,6 +639,10 @@ run "audit des profils plats"  uv run python "$ROOT/analysis/src/audit_profils_p
 # echantillon. Deux resumes identiques a la decimale sont le resultat -- et aussi ce a quoi
 # ressemble une colonne recopiee deux fois.
 run "excision : deux populations" uv run python "$ROOT/analysis/src/figure_excision.py" --verifier
+# ⚠⚠ Le garde-fou des chiffres se garde lui-meme. Il n'avait AUCUN auto-test : il protege
+# les 140 chiffres publies du depot et rien ne verifiait qu'il sait encore les trouver -- ni,
+# surtout, qu'il sait ECHOUER. Sa sonde exige qu'un chiffre FAUX ne soit pas trouve.
+run "le garde-fou se garde"    uv run python "$ROOT/analysis/src/verifier_chiffres.py" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
