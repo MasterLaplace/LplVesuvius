@@ -43,24 +43,28 @@ SERRE, PLAFOND = (200, 40, 40), (120, 120, 180)
 # ⚠ Un ecart sous ce seuil n'est pas une victoire, c'est une egalite que le test des
 # signes tranche quand meme. Nomme ici parce que la figure ET la prose le citent.
 ECART_SERRE_CM2 = 0.2
-# ⚠ Le plafond n'est pas une constante du monde : c'est le budget de generations de CETTE
-# campagne, lu comme « toutes les traces qui s'arretent a la meme aire ». On le DERIVE.
-TOLERANCE_PLAFOND_CM2 = 0.05
 
 
-def plafond_de(aires: list[float]) -> float | None:
-    """L'aire à laquelle plusieurs traces s'arrêtent ensemble, ou rien.
+def plafond_de(lignes: list[dict]) -> int | None:
+    """Le nombre de générations auquel les traces butent, ou rien.
 
-    ⚠ Dérivé, jamais écrit en dur : le plafond est une propriété du budget de
-    générations, donc il bouge si la campagne est rejouée avec un autre budget. Une
-    constante ici deviendrait fausse en silence, et la figure annoncerait un plafond là
-    où il n'y en a plus.
+    ⚠⚠ **En GÉNÉRATIONS, pas en aire — et la première version se trompait de grandeur.**
+    Elle groupait les traces qui s'arrêtent à la même *aire*, ce qui ne trouve le plafond
+    que pour les rouleaux d'une même résolution : à 9,362 µm le budget est atteint vers
+    19,82 cm², à 8,64 µm vers 16,9 cm². Les seconds étaient donc comptés comme non
+    plafonnés alors qu'ils le sont, et le compte publié disait 5 sur 13 là où il y en a
+    **7**. Les deux manquants sont précisément ceux qui expliquent les deux « égalités »
+    du tableau : sur eux, les DEUX critères butent.
+
+    ⚠ Dérivé de la campagne, jamais écrit en dur : le plafond est une propriété du budget
+    du `seed.json`, donc une constante deviendrait fausse le jour où il change.
     """
-    if not aires:
+    gens = [g for l in lignes for c in ("planarite", "voisinage")
+            if (g := l.get(c, {}).get("generations")) is not None]
+    if not gens:
         return None
-    haut = max(aires)
-    groupe = [a for a in aires if haut - a <= TOLERANCE_PLAFOND_CM2]
-    return haut if len(groupe) >= 3 else None
+    haut = max(gens)
+    return haut if sum(1 for g in gens if g == haut) >= 3 else None
 
 
 def x_de(aire: float) -> int:
@@ -77,21 +81,31 @@ def verifier() -> int:
             echecs += 1
             print(f"  ECHEC  {nom}" + (f"  — {detail}" if detail else ""))
 
+    def faux(nom, gp, gv):
+        return {"rouleau": nom, "planarite": {"generations": gp},
+                "voisinage": {"generations": gv}}
+
     v("l'axe est croissant et ancré à zéro", x_de(0) == X0 and x_de(10) < x_de(20))
     v("une aire au-delà de la borne reste dans le cadre", X0 <= x_de(999) <= X0 + LARG)
     v("... et une aire négative aussi", X0 <= x_de(-5) <= X0 + LARG)
 
-    # ⭐ Le plafond est DERIVE : trois traces ou plus qui s'arretent ensemble en font un.
-    v("trois aires groupées au sommet font un plafond",
-      plafond_de([19.82, 19.83, 19.82, 11.4, 3.0]) == 19.83)
+    # ⭐ Le plafond est DERIVE : trois traces ou plus qui s'arretent au meme numero.
+    v("trois traces arrêtées au même numéro font un plafond",
+      plafond_de([faux("A", 118, 25), faux("B", 118, 77), faux("C", 118, 118)]) == 118)
     # ⚠⚠ La sonde qui compte : deux traces au sommet ne suffisent PAS. Sans ce refus,
     # n'importe quelle campagne aurait un « plafond » — celui de son maximum — et la
     # figure annoncerait une troncature partout, y compris la ou il n'y en a aucune.
     v("... mais deux, non — sinon tout maximum serait un plafond",
-      plafond_de([19.82, 19.83, 11.4, 3.0]) is None)
-    v("des aires étalées n'ont pas de plafond",
-      plafond_de([1.0, 5.0, 9.0, 14.0, 19.0]) is None)
+      plafond_de([faux("A", 118, 25), faux("B", 118, 77), faux("C", 90, 60)]) is None)
+    v("des durées étalées n'ont pas de plafond",
+      plafond_de([faux("A", 90, 25), faux("B", 104, 77), faux("C", 111, 60)]) is None)
     v("une campagne vide n'a pas de plafond", plafond_de([]) is None)
+    # ⚠⚠ LA sonde qui distingue les deux grandeurs : deux rouleaux de résolutions
+    # différentes butent sur le MÊME budget à des aires très différentes. Un plafond
+    # cherché dans les aires n'en verrait qu'un.
+    mixte = [faux("neuf", 118, 25), faux("neuf2", 118, 77), faux("huit", 118, 118)]
+    v("le plafond se voit même quand les aires diffèrent d'un rouleau à l'autre",
+      plafond_de(mixte) == 118)
 
     if echecs:
         print(f"\nECHEC ({echecs} failures, {controles} checks)")
@@ -120,7 +134,7 @@ def main() -> int:
         return 1
     d = json.loads(a.entree.read_text())
     lignes = sorted(d["lignes"], key=lambda l: -l["planarite"]["aire_cm2"])
-    plafond = plafond_de([l["planarite"]["aire_cm2"] for l in lignes])
+    plafond = plafond_de(lignes)
     signes = d["signes_aire"]
 
     hauteur = MARGE_H + len(lignes) * LIGNE + 150
@@ -140,10 +154,12 @@ def main() -> int:
 
     y0 = MARGE_H + 12
     if plafond is not None:
-        xp = x_de(plafond)
-        for y in range(y0 - 6, y0 + len(lignes) * LIGNE, 7):
-            g.line([xp, y, xp, y + 3], fill=PLAFOND)
-        g.text((xp - 76, y0 - 24), f"plafond de générations {plafond:.2f} cm²",
+        # ⚠ Plus de ligne verticale : le plafond est un nombre de GENERATIONS, il n'a pas
+        # de position sur un axe d'aires -- les rouleaux de resolutions differentes y
+        # butent a des aires differentes, et une ligne unique mentirait sur la moitie
+        # d'entre eux. Chaque trace tronquee est marquee individuellement, la ou elle est.
+        g.text((X0 - 24, y0 - 26), f"⌐ trace arrêtée par le budget "
+                                   f"({plafond} générations) — son aire est tronquée",
                font=f_p, fill=PLAFOND)
 
     for aire in (0, 5, 10, 15, 20):
@@ -173,6 +189,11 @@ def main() -> int:
                   fill=VOISINAGE, outline=(255, 255, 255))
         g.ellipse([xp - 5, y - 5 - dy, xp + 5, y + 5 - dy],
                   fill=PLANARITE, outline=(255, 255, 255))
+        # ⚠ Un chevron sur toute trace que le budget a coupée : son point ne dit pas
+        # « la trace s'arrête là », il dit « on l'a arrêtée là ».
+        for essai, xx, yy in ((l["planarite"], xp, y - dy), (l["voisinage"], xv, y + dy)):
+            if plafond is not None and essai.get("generations") == plafond:
+                g.line([xx + 8, yy - 5, xx + 13, yy, xx + 8, yy + 5], fill=PLAFOND, width=2)
         if serre:
             # ⚠ Trois decimales sous le centieme : « ecart 0,00 » sur une difference de
             # 0,001 cm² se lit comme une egalite exacte, ce qu'elle n'est pas.
@@ -186,17 +207,20 @@ def main() -> int:
     g.ellipse([164, yb + 1, 174, yb + 11], fill=VOISINAGE, outline=(255, 255, 255))
     g.text((182, yb), "voisinage", font=f_n, fill=VOISINAGE)
 
-    au_plafond = (sum(1 for l in lignes
-                      if plafond is not None
-                      and plafond - l["planarite"]["aire_cm2"] <= TOLERANCE_PLAFOND_CM2)
-                  if plafond is not None else 0)
+    au_plafond = sum(1 for l in lignes
+                     if plafond is not None
+                     and l["planarite"].get("generations") == plafond)
+    deux = [l["rouleau"] for l in lignes
+            if plafond is not None
+            and l["planarite"].get("generations") == plafond
+            and l["voisinage"].get("generations") == plafond]
     for i, t in enumerate((
             f"planéité {signes['pour_planarite']}, voisinage "
             f"{signes['pour_voisinage']}, test des signes p = "
             f"{signes['p_signes']:.4f}".replace(".", ","),
-            f"⚠ {serres} des {signes['pour_voisinage']} « défaites » se jouent à moins de "
-            f"{ECART_SERRE_CM2:.1f} cm² — des égalités comptées comme des pertes"
-            .replace("0.1", "0,1").replace("0.2", "0,2"),
+            f"⚠⚠ les {signes['pour_voisinage']} « défaites » sont les "
+            f"{len(deux)} rouleaux où LES DEUX critères butent sur le budget "
+            f"({', '.join(deux)}) — deux troncatures, pas deux critères",
             f"⚠⚠ {au_plafond} traces de planéité sur {len(lignes)} butent sur le plafond : "
             f"leur distance atteignable n'est pas mesurée, elle est tronquée")):
         g.text((40, yb + 28 + i * 20), t, font=f_n,

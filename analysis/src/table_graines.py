@@ -25,6 +25,28 @@ from pathlib import Path
 CRITERES = ("planarite", "voisinage")
 
 
+def generations_de(log: Path) -> int | None:
+    """Combien de générations cette trace a-t-elle réellement faites ?
+
+    ⚠⚠ **Le chiffre n'est pas dans le JSON de la campagne, il est dans le LOG de la
+    trace** — et il change la lecture du tableau. Cinq traces de planéité sur treize
+    s'arrêtent à la même aire, 19,82 cm², ce qui est la signature d'un **plafond** et non
+    d'un rouleau : à budget 120 générations elles butent toutes à 118. « La planéité va
+    plus loin » veut alors dire « la planéité va jusqu'au budget », et la distance
+    réellement atteignable n'est pas mesurée. Sans le compte de générations, la seule
+    façon de s'en apercevoir est de remarquer une coïncidence d'aires à huit millièmes de
+    pour-cent près — c'est-à-dire à l'œil.
+
+    ⚠ Lu dans le log plutôt que recalculé : le log est le record de ce qui s'est passé,
+    et le JSON n'en est qu'un résumé. Même règle que pour `selfcross.json`.
+    """
+    if not log.is_file():
+        return None
+    n = sum(1 for l in log.read_text(errors="replace").splitlines()
+            if l.startswith("gen "))
+    return n or None
+
+
 def lire(dossier: Path) -> list[dict]:
     lignes = []
     for p in sorted(dossier.glob("PHerc*.json")):
@@ -34,6 +56,10 @@ def lire(dossier: Path) -> list[dict]:
         essais = {e["critere"]: e for e in d.get("essais", [])}
         if not all(c in essais for c in CRITERES):
             continue
+        for c in CRITERES:
+            essais[c] = dict(essais[c])
+            essais[c]["generations"] = generations_de(
+                dossier / f"{d['rouleau']}.{c}.trace.log")
         lignes.append({"rouleau": d["rouleau"], "voxel_um": d["voxel_um"],
                        **{c: essais[c] for c in CRITERES}})
     return lignes
@@ -103,17 +129,57 @@ def main() -> int:
 
     tot_p = sum(l["planarite"].get("transverse") or 0 for l in lignes)
     tot_v = sum(l["voisinage"].get("transverse") or 0 for l in lignes)
-    plafond = sum(1 for l in lignes if (l["planarite"].get("aire_cm2") or 0) > 19.8)
+
+    # ⚠⚠ LE PLAFOND SE LIT DANS LES GENERATIONS, PAS DANS L'AIRE. La version precedente
+    # comptait les traces d'aire > 19,8 cm² -- un seuil qui n'a de sens qu'a 9,362 µm.
+    # Les rouleaux scannes a 8,64 µm butent sur le MEME budget a une aire toute autre
+    # (~16,9 cm²), donc ils etaient comptes comme non plafonnes alors qu'ils le sont.
+    # Le compte publie passe de 5 a 7 sur 13, et les deux traces manquantes sont
+    # precisement celles qui expliquent les deux « egalites » du tableau.
+    gens = [g for l in lignes for c in CRITERES
+            if (g := l[c].get("generations")) is not None]
+    plafond_gen = max(gens) if gens else None
+
+    def bute(essai: dict) -> bool:
+        return plafond_gen is not None and essai.get("generations") == plafond_gen
+
+    plafond = sum(1 for l in lignes if bute(l["planarite"]))
+    # ⚠⚠ Une paire dont LES DEUX traces butent sur le budget ne compare pas deux criteres :
+    # elle compare deux troncatures au meme endroit. Son ecart d'aire -- 0,001 cm² sur
+    # PHerc0800 -- ne mesure rien. La convention du test des signes est deja d'ECARTER les
+    # ex aequo plutot que de les attribuer ; ces paires-la sont des ex aequo que seule la
+    # troncature empeche d'etre exactement egaux.
+    deux_plafonds = [l["rouleau"] for l in lignes
+                     if bute(l["planarite"]) and bute(l["voisinage"])]
+    informatives = [l for l in lignes
+                    if not (bute(l["planarite"]) and bute(l["voisinage"]))]
+    aire_info = signes(informatives, "aire_cm2", +1)
+
     print(f"\nauto-intersections cumulees : planarite {tot_p}   voisinage {tot_v}")
-    print(f"traces qui atteignent le plafond de generations (aire > 19,8 cm²) : "
+    print(f"traces qui butent sur le budget ({plafond_gen} générations) : "
           f"{plafond} / {len(lignes)} en planarite")
-    print("⚠ l'aire sature contre le budget de generations — voir l'en-tete de ce fichier")
+    print("⚠ leur aire est TRONQUEE, pas atteinte — voir l'en-tete de ce fichier")
+    if deux_plafonds:
+        print(f"\n⚠⚠ {len(deux_plafonds)} paire(s) où LES DEUX criteres butent sur le "
+              f"budget : {', '.join(deux_plafonds)}")
+        print(f"   ces paires comparent deux troncatures, pas deux criteres. Sur les "
+              f"{aire_info['n_paires']} paires informatives :")
+        print(f"   aire — planarite {aire_info['pour_planarite']} / voisinage "
+              f"{aire_info['pour_voisinage']}  (test des signes p = "
+              f"{aire_info['p_signes']:.4f})")
+        print(f"   ⚠ le chiffre PUBLIE reste celui des {len(lignes)} paires "
+              f"(p = {aire['p_signes']:.4f}) : c'est le conservateur, et ne publier que "
+              f"le plus favorable serait choisir son echantillon apres l'avoir vu.")
 
     if args.out:
         args.out.write_text(json.dumps(
             {"rouleaux": len(lignes), "lignes": lignes, "signes_aire": aire,
              "signes_croisements": crois,
-             "croisements_cumules": {"planarite": tot_p, "voisinage": tot_v}},
+             "croisements_cumules": {"planarite": tot_p, "voisinage": tot_v},
+             "budget_generations_atteint": plafond_gen,
+             "planarite_au_plafond": plafond,
+             "paires_deux_plafonds": deux_plafonds,
+             "signes_aire_informatives": aire_info},
             indent=2) + "\n")
         print(f"\necrit : {args.out}")
     return 0

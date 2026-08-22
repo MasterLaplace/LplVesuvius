@@ -10,7 +10,8 @@
         "y": 4127,
         "z": 10434,
         "aire_cm2": 19.823246,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 118
       },
       "voisinage": {
         "critere": "voisinage",
@@ -18,7 +19,8 @@
         "y": 3928,
         "z": 10760,
         "aire_cm2": 0.845456,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 25
       }
     },
     {
@@ -30,7 +32,8 @@
         "y": 6288,
         "z": 9529,
         "aire_cm2": 19.823041,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 118
       },
       "voisinage": {
         "critere": "voisinage",
@@ -38,7 +41,8 @@
         "y": 1924,
         "z": 9224,
         "aire_cm2": 14.26611,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 101
       }
     },
     {
@@ -50,7 +54,8 @@
         "y": 2106,
         "z": 9611,
         "aire_cm2": 14.540794,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 102
       },
       "voisinage": {
         "critere": "voisinage",
@@ -58,7 +63,8 @@
         "y": 1924,
         "z": 9424,
         "aire_cm2": 9.602598,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 83
       }
     },
     {
@@ -70,7 +76,8 @@
         "y": 4189,
         "z": 9491,
         "aire_cm2": 19.823347,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 118
       },
       "voisinage": {
         "critere": "voisinage",
@@ -78,7 +85,8 @@
         "y": 1564,
         "z": 9224,
         "aire_cm2": 8.261076,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 77
       }
     },
     {
@@ -90,7 +98,8 @@
         "y": 2891,
         "z": 7307,
         "aire_cm2": 16.898719,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 118
       },
       "voisinage": {
         "critere": "voisinage",
@@ -98,7 +107,8 @@
         "y": 2892,
         "z": 7688,
         "aire_cm2": 16.991311,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 118
       }
     },
     {
@@ -110,7 +120,8 @@
         "y": 5839,
         "z": 7386,
         "aire_cm2": 19.82317,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 118
       },
       "voisinage": {
         "critere": "voisinage",
@@ -118,7 +129,8 @@
         "y": 1604,
         "z": 7688,
         "aire_cm2": 10.0782,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 85
       }
     },
     {
@@ -130,7 +142,8 @@
         "y": 2315,
         "z": 12107,
         "aire_cm2": 16.884104,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 118
       },
       "voisinage": {
         "critere": "voisinage",
@@ -138,7 +151,8 @@
         "y": 2312,
         "z": 12536,
         "aire_cm2": 16.885188,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 118
       }
     },
     {
@@ -150,7 +164,8 @@
         "y": 3851,
         "z": 8515,
         "aire_cm2": 17.262397,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 111
       },
       "voisinage": {
         "critere": "voisinage",
@@ -158,7 +173,8 @@
         "y": 1564,
         "z": 8456,
         "aire_cm2": 10.315674,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 86
       }
     },
     {
@@ -170,7 +186,8 @@
         "y": 5966,
         "z": 8578,
         "aire_cm2": 13.136295,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 97
       },
       "voisinage": {
         "critere": "voisinage",
@@ -178,7 +195,8 @@
         "y": 4388,
         "z": 8456,
         "aire_cm2": 0.846351,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 25
       }
     },
     {
@@ -190,7 +208,8 @@
         "y": 5133,
         "z": 9419,
         "aire_cm2": 19.835653,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 118
       },
       "voisinage": {
         "critere": "voisinage",
@@ -198,7 +217,8 @@
         "y": 1924,
         "z": 9224,
         "aire_cm2": 9.603327,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 83
       }
     },
     {
@@ -210,7 +230,8 @@
         "y": 3820,
         "z": 11635,
         "aire_cm2": 11.42501,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 98
       },
       "voisinage": {
         "critere": "voisinage",
@@ -218,7 +239,8 @@
         "y": 3220,
         "z": 11528,
         "aire_cm2": 9.193798,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 88
       }
     },
     {
@@ -230,7 +252,8 @@
         "y": 1931,
         "z": 12244,
         "aire_cm2": 13.643426,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 107
       },
       "voisinage": {
         "critere": "voisinage",
@@ -238,7 +261,8 @@
         "y": 1744,
         "z": 12296,
         "aire_cm2": 10.723407,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 95
       }
     },
     {
@@ -250,7 +274,8 @@
         "y": 1899,
         "z": 10379,
         "aire_cm2": 15.147979,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 104
       },
       "voisinage": {
         "critere": "voisinage",
@@ -258,7 +283,8 @@
         "y": 2264,
         "z": 10980,
         "aire_cm2": 11.568002,
-        "transverse": 0
+        "transverse": 0,
+        "generations": 91
       }
     }
   ],
@@ -279,5 +305,18 @@
   "croisements_cumules": {
     "planarite": 0,
     "voisinage": 0
+  },
+  "budget_generations_atteint": 118,
+  "planarite_au_plafond": 7,
+  "paires_deux_plafonds": [
+    "PHerc0268",
+    "PHerc0800"
+  ],
+  "signes_aire_informatives": {
+    "pour_planarite": 11,
+    "pour_voisinage": 0,
+    "ex_aequo": 0,
+    "n_paires": 11,
+    "p_signes": 0.0009765625
   }
 }

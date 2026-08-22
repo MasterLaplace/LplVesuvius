@@ -166,6 +166,22 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         out.append(("planarite contre voisinage sur l'aire",
                     [f"planéité {d['signes_aire']['pour_planarite']}, voisinage "
                      f"{d['signes_aire']['pour_voisinage']}"], p.name))
+        # ⚠⚠ Le partage informatif/tronque est ce qui rend le tableau lisible, et il
+        # repose sur des COMPTES. Le premier jet en publiait 5 la ou il y en a 7, parce
+        # qu'il cherchait le plafond dans les aires — un seuil qui n'a de sens qu'a une
+        # seule resolution. Un compte faux qui a l'air plausible ne se relit pas.
+        if d.get("budget_generations_atteint"):
+            out.append(("traces de planarite au plafond",
+                        [f"{d['planarite_au_plafond']} traces de planéité sur "
+                         f"{d['rouleaux']}",
+                         f"{d['planarite_au_plafond']} sur {d['rouleaux']} butent"],
+                        p.name))
+            info = d.get("signes_aire_informatives") or {}
+            if info:
+                out.append(("paires informatives du test des signes",
+                            [f"{info['n_paires']} paires informatives",
+                             f"{info['n_paires']} informative pairs"], p.name))
+                ajoute("p des paires informatives", info["p_signes"], 4, p.name)
         out.append(("rouleaux de la campagne",
                     [f"{d['rouleaux']} rouleaux du prix", f"sur {d['rouleaux']} rouleaux"],
                     p.name))

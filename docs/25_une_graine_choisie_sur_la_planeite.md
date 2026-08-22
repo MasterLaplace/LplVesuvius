@@ -211,15 +211,34 @@ signes p = 0,0225.**
 
 ![la campagne appariée, un rouleau par ligne](images/25_campagne_graines.png)
 
-⚠⚠ **La figure porte deux réserves que les trois nombres ne portent pas.** D'abord les deux
-« défaites » se jouent à **0,09 et 0,001 cm²** — ce sont des égalités que le test des signes
-compte comme des pertes, donc l'erreur va dans le sens conservateur, et il faut pouvoir le
-voir. Ensuite **cinq traces de planéité sur treize butent sur le plafond de générations**
-(19,82–19,84 cm²) : sur celles-là, « la planéité va plus loin » veut dire « la planéité va
-jusqu'au budget », et la distance réellement atteignable n'est pas mesurée, elle est
-tronquée. ⭐ Le plafond n'est pas écrit en dur dans la figure — il est **dérivé** de la
-campagne (trois traces ou plus qui s'arrêtent ensemble), parce qu'un plafond est une
-propriété du budget et bougerait si la campagne était rejouée autrement.
+⚠⚠ **La figure porte deux réserves que les trois nombres ne portent pas.** D'abord,
+**7 traces de planéité sur 13 butent sur le plafond de générations** : sur celles-là, « la
+planéité va plus loin » veut dire « la planéité va **jusqu'au budget** », et la distance
+réellement atteignable n'est pas mesurée, elle est tronquée. Ensuite les deux « défaites » se
+jouent à **0,09 et 0,001 cm²** — des égalités que le test des signes compte comme des pertes,
+donc l'erreur va dans le sens conservateur.
+
+⭐⭐ **Et les deux ne sont pas indépendantes : ce sont les mêmes rouleaux.** `PHerc0268` et
+`PHerc0800` sont les deux seuls où **les deux critères** butent sur le budget — leurs quatre
+traces s'arrêtent toutes à 118 générations. Leur écart d'aire ne compare donc pas deux
+critères, il compare **deux troncatures au même endroit**, et 0,001 cm² est exactement ce
+qu'on attend de deux traces coupées ensemble. Sur les **11 paires informatives** — celles où
+au moins un des deux critères s'arrête de lui-même — c'est **11 à 0**, test des signes
+**p = 0,0010**.
+
+> ⚠ **Le chiffre publié reste celui des treize paires, p = 0,0225.** C'est le conservateur.
+> Ne publier que le plus favorable, une fois qu'on a vu lequel l'est, serait choisir son
+> échantillon après coup — et les deux paires écartées le sont pour une raison écrite avant
+> d'en regarder le résultat, pas parce qu'elles gênaient.
+
+⚠⚠ **Le compte de traces tronquées était faux, et la cause vaut d'être notée.** La première
+version cherchait le plafond dans les **aires** — « les traces qui s'arrêtent au-dessus de
+19,8 cm² » — ce qui ne le trouve que pour une résolution : à 9,362 µm le budget est atteint
+vers 19,82 cm², à 8,64 µm vers 16,9. Les rouleaux de la seconde famille étaient donc comptés
+comme non plafonnés alors qu'ils le sont, et le compte disait **5 sur 13** au lieu de **7**.
+Les deux manquants sont précisément ceux qui expliquent les deux égalités. ⭐ Le plafond se lit
+maintenant dans les **générations**, relevées dans le log de chaque trace — le record de ce
+qui s'est passé, là où le JSON n'en est qu'un résumé.
 
 ⭐ Le treizième rouleau **renforce** le résultat plutôt que de l'user : 10/12 à p = 0,0386
 devient **11/13 à p = 0,0225**. Ce n'est pas une surprise heureuse, c'est ce qu'un
