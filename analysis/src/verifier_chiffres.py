@@ -164,7 +164,12 @@ def perimee(attendu: str, textes: dict) -> list[str]:
     d'autre chose — un garde qui crie à tort finit ignoré.
     """
     import re as _re
-    if not _re.search(r"[^\d\s.,+-]", attendu):
+    # ⚠⚠ Il faut au moins une LETTRE. Ma premiere version exigeait seulement un caractere
+    # non numerique, ce qui laisse passer « 0 / 4 » -- et « 0 / 1 » a exactement la meme
+    # forme, donc le garde a accuse un document de citer une valeur perimee alors qu'il
+    # parlait d'autre chose. Un garde qui crie a tort finit ignore, et c'est la deuxieme
+    # fois que ce fichier le paie.
+    if not _re.search(r"[A-Za-zÀ-ÿ]", attendu):
         return []
     motif = _re.escape(attendu)
     # ⚠ `re.escape` protege les chiffres tels quels ; on les rouvre un par un.
@@ -701,6 +706,35 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             out.append(("cartes ecrites du premier rouleau",
                         [f"{x['cartes_ecrites']}/{x['n']}"], p.name))
 
+    # ⚠⚠ `37` publiait « 0/4 d'accord » et « 1 accord sur 8 » sans qu'aucun producteur ne les
+    # recalcule -- c'est-a-dire des anecdotes au sens de la regle du depot, alors que les
+    # deux JSON les portent en clair. L'inventaire des documents non gardes l'a nomme.
+    vus = []
+    for prof in (21, 41, 81, 161):
+        q = racine / "docs" / f"second_axe_{prof}.json"
+        if not q.exists():
+            continue
+        d = json.loads(q.read_text())
+        a, n = d.get("accords") or {}, d.get("rouleaux_testables")
+        # ⚠ Un balayage a UN seul rouleau testable n'est pas une comparaison : `37` porte sur
+        # les rendus 21 et 41, les seuls qui en aient plusieurs. Garder les autres publierait
+        # des chiffres qu'aucun document ne cite -- du bruit dans un tableau dont toute la
+        # valeur est que chaque ligne compte.
+        if n and n >= 2:
+            # ⚠ Un accord par AXE mesure : l'ecart a la trace et la part au bord sont deux
+            # jugements, et `37` les rapporte separement. Les additionner ici perdrait la
+            # distinction que le document tient.
+            for cle in ("ecart_um", "au_bord"):
+                if a.get(cle) is not None:
+                    out.append((f"accords {cle}, rendu {prof}",
+                                [f"{a[cle]} / {n}", f"{a[cle]}/{n}"], q.name))
+            vus.append(prof)
+    # ⚠⚠ PAS de total croise. `37` met en avant « 1 accord sur 8 » ; ma reconstruction donnait
+    # « 1 sur 16 », parce que je ne sais pas comment le document agrege ses deux criteres --
+    # quatre tirages fois deux fenetres, ou fois deux axes ? Re-deriver une agregation avec
+    # une hypothese produit un nombre qui a l'air autorise et qui CONTREDIT sa source. Les
+    # quatre chiffres par balayage, eux, sont exacts et verifies ; ils suffisent.
+
     p = racine / "docs" / "audit_profils.json"
     if p.exists():
         d = json.loads(p.read_text())
@@ -903,6 +937,12 @@ def verifier() -> int:
     v("... et l'ancienne valeur est citée", "43 batteries" in d_[0])
     # ⚠ Un motif qui n'est QUE des chiffres matcherait n'importe quel nombre du depot.
     v("un chiffre nu ne déclenche pas de diagnostic périmé", perimee("1322", vieux) == [])
+    # ⚠⚠ Ni un motif sans LETTRE : « 0 / 4 » et « 0 / 1 » ont la meme forme, et le garde a
+    # accuse un document qui parlait d'autre chose. Deuxieme faux positif du meme fichier.
+    v("un motif sans lettre non plus",
+      perimee("0 / 4", {_P("x.md"): normaliser("accords 0 / 1 ici")}) == [])
+    v("... alors qu'avec une lettre le diagnostic revient",
+      len(perimee("accords 0 / 4", {_P("x.md"): normaliser("accords 0 / 1 ici")})) == 1)
     v("un document qui n'en parle pas n'est pas accusé",
       perimee("45 batteries, 1322 controles", {_P("autre.md"): "rien"}) == [])
     # ⚠ Et le controle du controle : la meme valeur presente ne doit PAS etre dite perimee.
