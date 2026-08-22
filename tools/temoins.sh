@@ -655,6 +655,12 @@ run "chien de garde des rendus" "$ROOT/tools/rendre_surveille.sh" --verifier
 # est un tirage, et la meme graine a rendu +0,89 puis +1,12.
 run "2×2 des prédictions"      uv run python "$ROOT/analysis/src/comparer_predictions.py" --verifier
 run "figure des deux pannes"   uv run python "$ROOT/analysis/src/figure_deux_pannes.py" --verifier
+# ⚠⚠ Les images des documents. Un lien vers une image absente ne casse rien a l'execution :
+# il s'affiche avec une icone brisee, et personne ne le voit tant que personne n'ouvre le
+# document. ⚠ Le test utilise `-s` et non `-e` : un rendu interrompu laisse un fichier de
+# zero octet, et un lien vers un fichier vide s'affiche exactement comme un lien vers rien.
+run "images des documents"     "$ROOT/tools/images_des_docs.sh" --verifier
+run "liens d'images valides"   "$ROOT/tools/images_des_docs.sh"
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
