@@ -44,6 +44,20 @@ distance mesurée bouge.
 > ✅ **L'officiel : ×1,00 pour ×2,6 de fenêtre, α = +0,00.** La matière est là, tout près ;
 > la mesure ne dépend pas du réglage, donc c'est une **distance**.
 >
+> ⚠⚠ **Réserve ajoutée le 2026-08-22, voir [`49`](49_alpha_ne_separe_pas_deux_pannes.md).**
+> α ≈ 1 a **deux** causes : un pic qui recule, et **aucun pic du tout**. Un profil plat
+> rapporte le bord de la fenêtre par défaut, et le rapport de deux bords vaut celui des
+> fenêtres — donc α = 1 par identité. Le seul profil de cette trace encore sur disque (41
+> couches) a une amplitude de **0,0194** pour un seuil de détection de 0,02, et un écart de
+> **172,80 µm** qui est exactement la demi-fenêtre à 8,64 µm. Les trois autres fenêtres de
+> la série ne sont pas dans l'arbre.
+>
+> ⭐ Ce que ça change : le verdict *pratique* tient — « aucune feuille dans la fenêtre » est
+> vrai sous les deux lectures — mais l'affirmation que la surface **coupe** l'empilement
+> repose sur la géométrie du rendu, pas sur ce profil. Et **aucun verdict de convergence
+> n'est touché** : l'α de plafond vaut ~1, donc une trace qui converge en est loin par
+> construction (mesuré : 0 série convergente sur 107).
+
 > ⚠⚠ **Le nôtre : ×7,90 pour ×7,7 de fenêtre, α = +1,01.** Le « pic » n'est pas une feuille,
 > c'est **le plus fort de ce que la fenêtre contenait** — et il s'éloigne avec elle. À
 > 691 µm de portée, soit **quatre spires**, il n'a toujours rien trouvé.

@@ -379,6 +379,10 @@ python3 analysis/src/derive_avec_profondeur.py --docs docs --json docs/derive_pr
 # TRACER et ceux dont la sortie publiee porte du TEXTE sont disjoints (docs/48)
 python3 analysis/src/eligibilite_aval.py --docs docs --sonder --json docs/eligibilite_aval.json
 
+# α ≈ 1 a DEUX causes : un pic qui recule, et aucun pic du tout. Un profil plat rapporte le
+# bord de la fenetre, donc α = 1 par identite arithmetique (docs/49)
+python3 analysis/src/audit_profils_plats.py --racine . --json docs/audit_profils.json
+
 # la carte des segments publies d'un rouleau : y a-t-il deux patchs d'UNE MEME feuille ?
 uv run python analysis/src/carte_segments.py --rouleau PHerc1447 \
      --telecharger data/segments_officiels --json docs/segments_PHerc1447.json

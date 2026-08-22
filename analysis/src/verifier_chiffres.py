@@ -630,6 +630,59 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             out.append(("cartes ecrites du premier rouleau",
                         [f"{x['cartes_ecrites']}/{x['n']}"], p.name))
 
+    p = racine / "docs" / "audit_profils.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        # ⚠⚠ Les deux nombres qui portent la conclusion de `49` sont les BORNES des deux
+        # populations : si un jour elles se croisaient, une serie convergente deviendrait
+        # indiscernable de son plafond et la moitie rassurante tomberait.
+        for cle, nom, n in (("alpha_min_indiscernable", "plus petit alpha indiscernable", 4),
+                            ("alpha_max_convergent", "plus grand alpha convergent", 4)):
+            if d.get(cle) is not None:
+                ajoute(nom, d[cle], n, p.name, signe=True)
+        for cle, nom in (("profils", "profils lus"), ("series", "series de profils"),
+                         ("plats", "profils plats"), ("au_plafond", "profils au plafond"),
+                         ("series_jugees", "series jugees")):
+            if d.get(cle) is not None:
+                out.append((nom, [str(d[cle])], p.name))
+        for cle, nom in (("series_entierement_plates", "series entierement plates"),
+                         ("series_indiscernables_du_plafond", "series indiscernables"),
+                         ("convergents_indiscernables", "convergents indiscernables")):
+            if d.get(cle) is not None:
+                out.append((nom, [str(len(d[cle]))], p.name))
+
+    p = racine / "docs" / "excision_resume.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        mw = d.get("mann_whitney") or {}
+        mz = d.get("mann_whitney_sans_vide") or {}
+        if mw.get("u"):
+            # ⚠ U est un entier a onze chiffres : on l'ecrit avec les espaces fines que la
+            # prose francaise utilise, ET sans, parce que les deux lectures existent.
+            u = int(round(mw["u"]))
+            out.append(("U de Mann-Whitney", [f"{u:,}".replace(",", " "), str(u)], p.name))
+        for cle, nom, n in ((mw.get("p"), "p de l'excision", 3),
+                            (mw.get("cliff_delta"), "delta de Cliff", 4),
+                            (mz.get("p"), "p sans le vide", 3),
+                            (mz.get("cliff_delta"), "delta de Cliff sans le vide", 4)):
+            if cle is not None:
+                ajoute(nom, cle, n, p.name, signe=(n == 4))
+        for cote in ("excisees", "temoins"):
+            if (d.get(cote) or {}).get("n"):
+                # ⚠ La prose francaise groupe les milliers par une espace : « 75 810 ». La
+                # premiere version ne cherchait que « 75810 » et rapportait absent un
+                # chiffre present dans le document -- un garde qui crie a tort finit ignore.
+                n_ = d[cote]["n"]
+                out.append((f"cellules {cote}",
+                            [f"{n_:,}".replace(",", " "), str(n_)], p.name))
+            v_ = (d.get("part_vide") or {}).get(cote)
+            if v_ is not None:
+                out.append((f"part de vide, {cote}",
+                            [f"{fr(v_ * 100, 1)} %", f"{fr(v_ * 100, 1)}%"], p.name))
+        if d.get("niveaux_differents") is not None:
+            out.append(("niveaux qui different",
+                        [f"{d['niveaux_differents']}/{d['niveaux_vus']}"], p.name))
+
     p = racine / "docs" / "eligibilite_aval.json"
     if p.exists():
         d = json.loads(p.read_text())

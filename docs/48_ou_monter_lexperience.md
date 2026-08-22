@@ -81,9 +81,38 @@ sort »*. Ce n'est pas une ambiguïté de volume mais de **produit de surface**,
 hasard entre deux prédictions est exactement le défaut que ce dépôt recense sous « supposer
 une provenance ».
 
-⭐ **Ce qui déciderait** : `analysis/src/sonder_point.py` mesure la planarité d'une
-prédiction ; la faire tourner sur les deux et prendre celle qui décrit mieux les nappes est
-une mesure, pas un choix. C'est le prochain lot, et il est court.
+### ✅ Tranché par la mesure, le 2026-08-22 — et la réponse est « ni l'une ni l'autre, pas encore »
+
+Ce ne sont pas deux versions d'une même chose : leurs métadonnées disent qu'elles sortent du
+**même volume** (`2.4um_PHerc-Paris4_masked.zarr`), générées à deux secondes d'intervalle,
+par **deux modèles différents** — `ps256_trainpy` à seuil 0,45 et `m7_nnunet` à seuil 0,2.
+
+⚠ **Les scores internes ne tranchent pas**, et il fallait le mesurer pour le savoir : les
+deux meilleures graines sont aux **extrêmes** de la bande admissible — `ps256` à une
+occupation de **0,0215** quand le plancher est 0,02, `m7` à **0,75** avec une planarité de
+**1,0** quand le plafond est 0,80. « Tout est surface ET parfaitement plan » est la signature
+d'une prédiction **saturée** que [`39`](39_le_seam_de_correction.md) §3 décrit : il n'y a
+alors aucun gradient à suivre.
+
+Le critère du dépôt, lui, tranche — on trace la meilleure graine de chacune avec des
+paramètres identiques et on juge au test de convergence
+(`tools/tracer_prediction_paris4.sh`) :
+
+| prédiction | aire | croisements | verdict |
+|---|---:|---:|---|
+| `ps256` | 0,317 cm² | 0 | α = **+0,89**, *suit la fenêtre*, ⚠ fragile, 100 % des fenêtres au bord |
+| `m7` | 0,317 cm² | 0 | ⚠⚠ **INDÉCIDABLE** — profil plat |
+
+> ⚠⚠ **Aucune des deux ne donne une trace posée sur une feuille**, et `m7` ne donne même pas
+> une mesure : son profil est plat, donc son α de 1,01 était le **rapport de deux bords de
+> fenêtre**. C'est ce que [`49`](49_alpha_ne_separe_pas_deux_pannes.md) a trouvé, et
+> l'instrument refuse désormais de conclure dans ce cas.
+
+⚠ Et les deux aires valent **0,317 cm²** à cinq chiffres près — les deux traces butent sur
+le même plafond de 60 générations. C'est la troncature de `35` : deux traces coupées au même
+endroit ont la même aire pour une raison qui n'a rien à voir avec la prédiction. **La
+comparaison n'est donc pas encore concluante**, et relever le plafond est le prochain pas —
+pas un choix de prédiction.
 
 ## 5. Ce que ce document n'établit pas
 

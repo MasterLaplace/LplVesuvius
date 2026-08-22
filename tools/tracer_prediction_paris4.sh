@@ -96,7 +96,7 @@ PY
   CROIS=$(python3 "$ROOT/analysis/src/lire_selfcross.py" "$W/selfcross.json" 2>/dev/null || echo "?")
   [ -d "$W/plat" ] || vc_flatten -i "$M" -o "$W/plat" > "$W/flatten.log" 2>&1
 
-  SERIE=""
+  SERIE=""; PROFILS=""
   for N in $FENETRES; do
     OUT="$W/profil_${N}c.json"
     if [ ! -s "$OUT" ]; then
@@ -112,13 +112,19 @@ PY
 import json; d=json.load(open('$OUT')); d=d[0] if isinstance(d,list) else d
 print(f\"{d['ecart_trace_um_median']:.2f}\")" 2>/dev/null) || continue
     SERIE="$SERIE$N:$E,"
+    PROFILS="$PROFILS --profil $OUT"
   done
   rm -rf "$W/cache"
   echo "   aire ${AIRE:-?} cm²  croisements ${CROIS:-?}  série ${SERIE%,}"
-  if [ -n "$SERIE" ]; then
+  if [ -n "$PROFILS" ]; then
+    # ⚠⚠ `--profil` et pas `--serie` : le juge lit alors l'amplitude et la part au bord DANS
+    # le profil, donc il refuse quand le profil est plat. La premiere version recopiait les
+    # ecarts a la main, et a rendu un verdict confiant « suit la fenetre » sur un profil
+    # dont l'amplitude etait nulle -- voir `49`. Recopier un nombre, c'est perdre ce qui
+    # l'accompagne.
     ( cd "$ROOT/experiments" && uv run python ../analysis/src/test_convergence.py \
-        --serie "${SERIE%,}" --nom "$NOM (${AIRE:-?} cm²)" \
-        --json "$ROOT/docs/prediction_paris4_$NOM.json" | tail -3 )
+        $PROFILS --nom "$NOM (${AIRE:-?} cm²)" \
+        --json "$ROOT/docs/prediction_paris4_$NOM.json" | tail -4 )
   else
     echo "   ⚠ aucune fenetre rendue — pas de verdict de convergence"
   fi

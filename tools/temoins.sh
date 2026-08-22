@@ -630,6 +630,15 @@ run "figure de la dérive"      uv run python "$ROOT/analysis/src/figure_derive_
 # comme ca qu'une cle inexistante a rendu « 0 rouleau tracable » et un verdict confiant.
 run "où monter l'expérience"   uv run python "$ROOT/analysis/src/eligibilite_aval.py" --verifier
 run "figure de l'éligibilité"  uv run python "$ROOT/analysis/src/figure_eligibilite.py" --verifier
+# ⚠⚠ L'audit des profils plats : sa sonde verifie qu'une serie dont TOUTES les lectures sont
+# le bord de la fenetre a un α mesure EGAL a son α de plafond -- donc que α ne separe pas
+# « le pic recule » de « il n'y avait pas de pic ». Et son controle, que la moitie
+# rassurante tienne : une serie qui converge en est loin par construction.
+run "audit des profils plats"  uv run python "$ROOT/analysis/src/audit_profils_plats.py" --verifier
+# ⚠ L'excision : sa sonde refuse de dessiner si les deux populations sont le MEME
+# echantillon. Deux resumes identiques a la decimale sont le resultat -- et aussi ce a quoi
+# ressemble une colonne recopiee deux fois.
+run "excision : deux populations" uv run python "$ROOT/analysis/src/figure_excision.py" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys

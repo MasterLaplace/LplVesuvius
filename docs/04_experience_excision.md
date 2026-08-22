@@ -115,6 +115,13 @@ on écrit du calcul lourd ; ce n'était pas le cas ici.
 
 ## 6. RÉSULTAT
 
+![les deux distributions se suivent sur les 256 niveaux](images/04_excision.png)
+
+⭐ **Recalculé le 2026-08-22** par [`analysis/src/figure_excision.py`](../analysis/src/figure_excision.py)
+(19 témoins), depuis `docs/excision_samples.tsv` — les chiffres de tête ci-dessous sortent
+désormais d'un calcul qui est **dans l'arbre**, et non d'une exécution perdue.
+
+
 Mesuré sur **52 segments** de PHerc0172 (le 53ᵉ était déjà propre, donc sans
 cellule excisée), **75 810 cellules excisées** contre **303 235 témoins appariés**.
 
@@ -135,6 +142,41 @@ ecart des medianes : +0,0 niveau de gris
 > Les cellules que `windcheck` retire sont **indiscernables**, dans le CT, du
 > papyrus qu'il garde. Le défaut géométrique n'a **pas** de contrepartie
 > matérielle à l'endroit excisé.
+
+### ⭐⭐ Ce que le recalcul de 2026-08-22 ajoute, et une réserve qu'il lève
+
+| | valeur |
+|---|---:|
+| Mann-Whitney U | **11 489 329 924** — identique au chiffre publié ci-dessus |
+| p | **0,859** — identique |
+| δ de Cliff | **−0,0004** (le tableau l'arrondissait à −0,000) |
+
+⚠⚠ **La réserve que personne n'avait posée : le niveau 0 est du vide, et il pèse 3,4 % des
+excisées contre 3,5 % des témoins.** Comparer deux échantillons qui contiennent chacun une
+part de néant inclut du vide-contre-vide, identique par construction — donc **qui dilue
+toute différence réelle vers zéro**. Un p de 0,859 obtenu ainsi serait rassurant pour une
+mauvaise raison.
+
+> ⭐ **Refait sans le niveau 0 : p = 0,504, δ de Cliff = −0,0016.** La conclusion **survit**,
+> et le résultat en sort plus fort qu'il n'était énoncé : il n'était pas porté par du vide
+> partagé.
+
+⚠ **Et une garde contre l'explication ennuyeuse.** Le tableau ci-dessus donne la **même**
+moyenne, la même médiane, les mêmes quartiles et le même écart-type aux deux populations. À
+la lecture, c'est indiscernable d'**une colonne recopiée deux fois**. L'instrument compare
+donc les **multiensembles** de valeurs et refuse de dessiner si ce sont les mêmes données :
+mesuré, **256/256 niveaux diffèrent en densité**, donc ce sont bien deux échantillons.
+
+⚠⚠ **Ce que la figure montre et que le tableau cachait** : les écarts **par segment**
+s'étalent sur **±15,6 niveaux de gris**. Les segments diffèrent individuellement, et
+s'annulent en agrégat. « Pas de différence en moyenne » n'est pas « pas de différence », et
+la figure est ce qui empêche de lire l'un pour l'autre.
+
+⚠ **Un chiffre de ce document reste irreproductible** : la ligne par segment ci-dessous
+(30 négatifs, 22 positifs, médiane −0,011). Le recalcul donne **29 / 23, médiane −0,478**
+pour un écart de moyennes et **29 / 17 / 6 nuls, médiane −1** pour un écart de médianes —
+donc la statistique d'origine était une troisième quantité, dont le code n'est pas dans
+l'arbre. Elle est gardée telle quelle et signalée, plutôt que remplacée en silence.
 
 Par segment : 30 deltas négatifs, 22 positifs, médiane **−0,011**, et les deltas
 les plus positifs portent sur des échantillons minuscules (n = 2, 16, 19). Le zéro

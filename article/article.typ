@@ -290,7 +290,11 @@ The interpretation of the orange series is worth stating carefully, because it i
 stronger than it first appears. It is *not* "our trace is 311 #um away from its
 sheet". At 161 layers the search reached 691 #um --- about four inter-sheet spacings
 --- and still found nothing. The correct reading is that *there is no sheet within reach at
-all*: the surface is lying across the stack.
+all*.
+
+That the surface is lying *across the stack*, rather than merely far from everything, is
+settled by the rendering below and not by $alpha$ alone --- a distinction we make precise in
+#link(<sec:twofailures>)[Section 3.5].
 
 #figure(
   image("figures/38_en_travers.png", width: 78%),
@@ -323,6 +327,49 @@ and we retracted a published conclusion that rested on it the same day.
   measured at $alpha = +0.000$ can carry 9 % of such windows, and a chain with the *better*
   $alpha$ ($+1.040$ against $+1.313$) can have nearly double the edge-pinned fraction
   (56 % against 30 %). The two measurements disagree, and both are reported.
+]
+
+== What $alpha approx 1$ does not distinguish <sec:twofailures>
+
+A depth profile reports the distance to the nearest peak. When the profile is *flat* there
+is no peak, and the reported distance defaults to the edge of the window. The ratio of two
+window edges is the ratio of the two windows, so such a series yields $alpha approx 1$ *by
+arithmetic identity*, whatever the volume contains.
+
+The two situations are different. A receding peak is a measurement: there is a sheet, it is
+far, and its distance tracks the window. A flat profile is not a measurement at all. Both
+print the same verdict.
+
+We audited every depth profile in our tree --- 217 profiles across 110 series --- computing
+each series' measured $alpha$ alongside the $alpha$ it would have if every reading were its
+own window edge.
+
+#figure(
+  table(
+    columns: (1fr, auto),
+    align: (left, right),
+    table.header[quantity][value],
+    [profiles whose reading *is* the window edge], [16 / 217],
+    [flat profiles (nothing to measure)], [10 / 217],
+    [series where no window measures anything], [2 / 110],
+    [series where $alpha$ cannot separate the two failures], [*20 / 107*],
+    [*converging* series so affected], [*0 / 107*],
+  ),
+  caption: [
+    The audit. What loses discriminating power is exactly the *across-the-stack* verdict.
+    The smallest non-discriminating $alpha$ is $+0.8729$; the largest converging $alpha$ is
+    $+0.4222$. The two populations do not overlap.
+  ],
+) <tab:twofailures>
+
+#caveat[
+  *This weakens a phrase, not a conclusion.* The ceiling $alpha$ is always near 1, so a
+  converging surface is far from it by construction and no positive verdict is affected. And
+  the two causes of $alpha approx 1$ --- the peak recedes, or there is no peak --- both mean
+  *no sheet within the window*, which is what the verdict is used for. What over-claims is
+  the wording "the peak moves with the window", which presumes a peak. Our tool now reads
+  the profile's own amplitude against its own detection floor and returns *undecidable*
+  rather than a confident sentence about an object that is not there.
 ]
 
 = Remote triage from published surface volumes <sec:triage>
@@ -913,6 +960,11 @@ Three properties recur in the instruments above and are worth naming.
   show that an absolute threshold on a profile criterion compares settings; we do not show
   that reading the same criterion as an exponent works. That needs traces uncensored at
   both depths, and this corpus contains two.
+
++ *$alpha approx 1$ has two causes and does not separate them* (#link(<sec:twofailures>)[Section 3.5]).
+  A flat profile yields $alpha approx 1$ by identity. Both causes condemn the trace, and no
+  converging verdict is affected, but 20 of 107 series in our tree cannot be said to be
+  *across the stack* rather than *unmeasured*.
 
 + *The negative control establishes the narrow claim only* (#link(<sec:negctrl>)[Section 6.4]).
   On the one scroll where we have both a sheet-following and a stack-crossing surface, the

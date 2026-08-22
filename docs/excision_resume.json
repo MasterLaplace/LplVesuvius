@@ -1,0 +1,70 @@
+{
+  "excisees": {
+    "n": 75810,
+    "moyenne": 72.07889460493338,
+    "mediane": 65,
+    "q1": 40,
+    "q3": 105,
+    "ecart_type": 42.026970933725856
+  },
+  "temoins": {
+    "n": 303235,
+    "moyenne": 72.09479116856564,
+    "mediane": 65,
+    "q1": 40,
+    "q3": 105,
+    "ecart_type": 42.02114114671194
+  },
+  "distinctes": true,
+  "niveaux_differents": 256,
+  "niveaux_vus": 256,
+  "segments": 52,
+  "deltas_par_segment": {
+    "mediane_n": 52,
+    "mediane_negatifs": 29,
+    "mediane_positifs": 17,
+    "mediane_nuls": 6,
+    "mediane_mediane": -1,
+    "moyenne_n": 52,
+    "moyenne_negatifs": 29,
+    "moyenne_positifs": 23,
+    "moyenne_nuls": 0,
+    "moyenne_mediane": -0.4776093088857536
+  },
+  "mann_whitney": {
+    "u": 11489329924.0,
+    "z": -0.17786783533665665,
+    "p": 0.8588267716953432,
+    "cliff_delta": -0.0004169740601798475,
+    "ex_aequo": 182660002
+  },
+  "part_vide": {
+    "excisees": 0.03396649518533179,
+    "temoins": 0.03503553349712274
+  },
+  "mann_whitney_sans_vide": {
+    "u": 10697602884.0,
+    "z": -0.6682629702307695,
+    "p": 0.5039657460297532,
+    "cliff_delta": -0.001594112306796398,
+    "ex_aequo": 155303202
+  },
+  "sans_vide": {
+    "excisees": {
+      "n": 73235,
+      "moyenne": 74.61324503311258,
+      "mediane": 67,
+      "q1": 42,
+      "q3": 106,
+      "ecart_type": 40.487942443878424
+    },
+    "temoins": {
+      "n": 292611,
+      "moyenne": 74.71237923386339,
+      "mediane": 68,
+      "q1": 42,
+      "q3": 106,
+      "ecart_type": 40.426738080109594
+    }
+  }
+}

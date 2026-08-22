@@ -89,8 +89,27 @@ BRUIT_ALPHA = 0.2
 AU_BORD_RESERVE = 0.05
 
 
-def analyser(serie: list[tuple[int, float]], au_bord: float | None = None) -> dict:
-    """Rendre le verdict d'une serie (couches, ecart) -- ou refuser de le rendre."""
+def analyser(serie: list[tuple[int, float]], au_bord: float | None = None,
+             amplitude: float | None = None, amplitude_min: float | None = None) -> dict:
+    """Rendre le verdict d'une serie (couches, ecart) -- ou refuser de le rendre.
+
+    ⚠⚠ **α = 1 a DEUX causes, et elles ne veulent pas dire la meme chose.** Un pic qui
+    RECULE avec la fenetre est une mesure : il y a un pic, il est loin, sa distance suit la
+    fenetre. Un profil PLAT n'en est pas une : il n'y a aucun pic, donc l'ecart rapporte est
+    le bord de la fenetre par defaut -- et le rapport de deux bords de fenetre vaut le
+    rapport des fenetres, donc α = 1 **par identite arithmetique**, quoi qu'il y ait dans le
+    volume.
+
+    Mesure du 2026-08-22 qui l'a impose : sur `PHercParis4`, la prediction `m7` rend
+    `amplitude_mediane = 0,0` (le minimum de detection de l'instrument est 0,02),
+    `au_bord = 1,0`, `au_bord_relief = nan`, et des ecarts de 48,00 et 192,00 µm qui sont
+    exactement les demi-fenetres a 41 et 161 couches. Le verdict imprime etait pourtant
+    « suit la fenetre — il n'y a aucune feuille a portee », affirme avec la meme assurance
+    que sur une vraie mesure.
+
+    ⭐ `amplitude` distingue les deux, et `depth_profile` la calcule deja. Sous le minimum,
+    ce fichier REFUSE : « je n'ai rien mesure » n'est pas « la feuille est loin ».
+    """
     serie = sorted(serie)
     if len(serie) < 2:
         return {"verdict": "indecidable", "raison": "une seule fenêtre", "serie": serie}
@@ -102,6 +121,15 @@ def analyser(serie: list[tuple[int, float]], au_bord: float | None = None) -> di
     if e0 <= 0:
         return {"verdict": "indecidable", "raison": "écart nul dans la fenêtre étroite",
                 "serie": serie}
+    # ⚠⚠ Le refus qui compte : sans relief, les ecarts ne sont pas des mesures.
+    if amplitude is not None and amplitude_min is not None and amplitude < amplitude_min:
+        return {"verdict": "indecidable",
+                "raison": (f"profil PLAT — amplitude {amplitude:.4f} sous le minimum de "
+                           f"détection {amplitude_min:.4f} de l'instrument. Les écarts "
+                           f"rapportés sont les bords de fenêtre, donc leur rapport vaut "
+                           f"celui des fenêtres et α ≈ 1 par identité, quoi qu'il y ait "
+                           f"dans le volume"),
+                "serie": serie, "amplitude": amplitude, "amplitude_min": amplitude_min}
 
     croissance = e1 / e0
     fenetre = n1 / n0
@@ -128,6 +156,8 @@ def analyser(serie: list[tuple[int, float]], au_bord: float | None = None) -> di
     r = {"verdict": verdict, "sens": sens, "serie": serie,
          "croissance": croissance, "elargissement": fenetre, "alpha": alpha,
          "marge_au_seuil": marge, "fragile": bool(marge < BRUIT_ALPHA)}
+    if amplitude is not None:
+        r["amplitude"] = amplitude
     if au_bord is not None:
         r["au_bord"] = au_bord
         r["reserve"] = bool(au_bord >= AU_BORD_RESERVE)
@@ -240,6 +270,31 @@ def verifier() -> int:
       AU_BORD_RESERVE > 0.0, str(AU_BORD_RESERVE))
 
     # Un cas intermediaire doit etre nomme, pas range de force.
+    # ⚠⚠ LE REFUS DU PROFIL PLAT, et sa sonde. Mesure du 2026-08-22 sur `PHercParis4` : la
+    # prediction `m7` rend une amplitude de 0,0 pour un minimum de detection de 0,02, et des
+    # ecarts de 48,00 et 192,00 µm qui sont EXACTEMENT les demi-fenetres a 41 et 161
+    # couches. Leur rapport vaut donc celui des fenetres, et α = 1,01 sort par identite
+    # arithmetique -- pourtant le verdict imprime etait « suit la fenetre », affirme avec la
+    # meme assurance que sur une vraie mesure.
+    plat = analyser([(41, 48.0), (161, 192.0)], au_bord=1.0, amplitude=0.0,
+                    amplitude_min=0.02)
+    v("un profil PLAT rend le verdict indécidable", plat["verdict"] == "indecidable",
+      plat.get("verdict"))
+    v("... en nommant l'amplitude", "amplitude" in (plat.get("raison") or ""))
+    # ⚠ Et le controle : la MEME serie avec du relief doit rester jugee, sinon le refus
+    # eteindrait aussi les vraies mesures qui se trouvent avoir α = 1.
+    avec = analyser([(41, 48.0), (161, 192.0)], au_bord=1.0, amplitude=0.09,
+                    amplitude_min=0.02)
+    v("... alors qu'avec du relief la même série est jugée",
+      avec["verdict"] == "suit la fenêtre", avec.get("verdict"))
+    v("... et α y vaut bien ~1", abs(avec["alpha"] - 1.0) < 0.05, f"{avec['alpha']:.3f}")
+    # ⚠ Sans amplitude fournie, rien ne change : les appelants anciens gardent leur verdict.
+    v("sans amplitude, le comportement est inchangé",
+      analyser([(41, 48.0), (161, 192.0)])["verdict"] == "suit la fenêtre")
+    v("une amplitude AU-DESSUS du minimum ne refuse pas",
+      analyser([(31, 17.3), (81, 17.3)], amplitude=0.5,
+               amplitude_min=0.02)["verdict"] == "converge")
+
     m = analyser([(21, 100.0), (81, 160.0)])
     v("une croissance lente est dite intermédiaire", m["verdict"] == "intermédiaire",
       f"{m['verdict']} alpha={m['alpha']:.2f}")
@@ -265,6 +320,12 @@ def main() -> int:
                     help="reprendre les séries d'un verdict déjà écrit (répétable) ; "
                          "« fichier.json=nom » renomme la série")
     ap.add_argument("--json")
+    # ⚠⚠ `--profil` construit la serie DEPUIS les fichiers de profil, et lit au passage
+    # l'amplitude et la part au bord. C'est ce qui evite de recopier a la main des ecarts
+    # que le profil contient deja -- une transcription est une occasion de se tromper, et
+    # c'est en la faisant que j'ai lance un verdict sur un profil plat sans le voir.
+    ap.add_argument("--profil", action="append", default=[], metavar="FICHIER",
+                    help="profil de depth_profile.py ; répétable, un par fenêtre")
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()
     if a.verifier:
@@ -297,15 +358,55 @@ def main() -> int:
             recalcule["nom"] = renomme or brut_serie.get("nom", p_json.stem)
             reprises.append(recalcule)
 
+    # ⚠⚠ La serie construite DEPUIS les profils : l'ecart, la part au bord ET l'amplitude
+    # viennent du meme fichier, donc ils ne peuvent pas se contredire. Le chemin `--serie`
+    # reste, pour les references dont on n'a que les nombres.
+    if a.profil:
+        pts, bords, ampl = [], [], []
+        for f in a.profil:
+            pf = Path(f)
+            if not pf.is_file():
+                ap.error(f"profil absent : {f}")
+            d_ = json.loads(pf.read_text(encoding="utf-8"))
+            d_ = d_[0] if isinstance(d_, list) else d_
+            manquant = [k for k in ("ecart_trace_um_median", "couche_tracee")
+                        if k not in d_]
+            if manquant:
+                ap.error(f"{f} : champs absents {manquant}")
+            # ⚠ Le nombre de couches se deduit de `couche_tracee`, qui est la MOITIE de la
+            # fenetre par construction du rendu. Le lire dans le nom du fichier marcherait
+            # aussi et dependrait d'une convention de nommage, qui n'est pas une donnee.
+            pts.append((int(d_["couche_tracee"]) * 2 + 1, float(d_["ecart_trace_um_median"])))
+            if d_.get("au_bord") is not None:
+                bords.append(float(d_["au_bord"]))
+            if d_.get("amplitude_mediane") is not None:
+                ampl.append((float(d_["amplitude_mediane"]),
+                             float(d_.get("amplitude_min") or 0.0)))
+        nom = a.nom[len(a.serie)] if len(a.nom) > len(a.serie) else "série de profils"
+        # ⚠ On prend le MAXIMUM d'amplitude sur les fenetres : si une seule fenetre a du
+        # relief, la mesure n'est pas vide. Prendre la mediane condamnerait une serie dont
+        # une fenetre sur trois mesure quelque chose.
+        amax = max((x for x, _ in ampl), default=None)
+        amin = max((y for _, y in ampl), default=None)
+        r = analyser(pts, max(bords) if bords else None, amax, amin)
+        r["nom"] = nom
+        r["profils"] = [str(f) for f in a.profil]
+        reprises.append(r)
+
     if not a.serie and not reprises:
-        ap.error("donner au moins une --serie ou un --depuis, ou --verifier")
+        ap.error("donner au moins une --serie, un --depuis ou un --profil, ou --verifier")
 
     sorties = list(reprises)
     for r in reprises:
         pts = "  ".join(f"{n}c→{e:.1f}" for n, e in r["serie"])
         marque = "  ⚠ FRAGILE" if r.get("fragile") else ""
-        print(f"\n  {r['nom']}  (repris)\n    {pts}\n    α = {r.get('alpha', 0.0):+.2f} "
-              f"— {r.get('verdict', '?')}{marque}")
+        print(f"\n  {r['nom']}\n    {pts}")
+        if r.get("verdict") == "indecidable":
+            print(f"    ⚠⚠ INDÉCIDABLE — {r['raison']}")
+        else:
+            print(f"    α = {r.get('alpha', 0.0):+.2f} — {r.get('verdict', '?')}{marque}")
+            if r.get("sens"):
+                print(f"    {r['sens']}")
 
     for i, brut in enumerate(a.serie):
         nom = a.nom[i] if i < len(a.nom) else f"série {i + 1}"
