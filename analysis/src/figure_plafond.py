@@ -63,6 +63,22 @@ def apparier(origine: dict, releve: dict) -> list[tuple[dict, dict]]:
             if l["rouleau"] in par_nom]
 
 
+def jugeables(origine: dict, releve: dict) -> set[str]:
+    """Les rouleaux que le VERDICT retient, décidés par `comparer_plafond`.
+
+    ⚠⚠ Importé plutôt que réécrit. Qui compte dans le verdict est une règle — écarter
+    ceux qui butent aussi sur le nouveau plafond, écarter ceux qui n'ont pas deux tirages
+    des deux côtés — et deux implémentations d'une même règle finissent par ne pas
+    s'accorder. La figure afficherait alors une moyenne que le tableau ne donne pas, sans
+    qu'aucune ligne ne dise laquelle est la bonne.
+    """
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from comparer_plafond import confronter
+    d = confronter(origine, releve)
+    ecartes = set(d["rouleaux_satures_ecartes"]) | set(d["rouleaux_trop_peu_de_tirages"])
+    return {l["rouleau"] for l in d["lignes"]} - ecartes
+
+
 def verifier() -> int:
     echecs = controles = 0
 
@@ -97,6 +113,18 @@ def verifier() -> int:
                {"lignes": [{"rouleau": "B"}, {"rouleau": "A"}]})[0][1]["rouleau"] == "B")
     v("deux campagnes sans recouvrement n'apparient rien",
       apparier({"lignes": [{"rouleau": "A"}]}, {"lignes": [{"rouleau": "Z"}]}) == [])
+    # ⚠⚠ La regle « qui compte » est IMPORTEE, pas reecrite : la sonde verifie que la
+    # figure ecarte exactement ce que le tableau ecarte. Deux definitions divergeraient,
+    # et la figure afficherait une moyenne que le tableau ne donne pas.
+    def l(nom, n, disp, gmax=250):
+        return {"rouleau": nom, "generations_min": 200, "generations_max": gmax,
+                "aire_mediane": 50.0, "etendue_relative": disp, "n": n,
+                "verdict_bascule": False, "propres": n}
+    av = {"budget_generations": 120,
+          "lignes": [l("A", 6, 0.003, 118), l("B", 6, 0.004, 118)]}
+    ap = {"budget_generations": 400, "lignes": [l("A", 6, 1.10), l("B", 1, 0.0)]}
+    v("la figure retient ce que le tableau retient",
+      jugeables(av, ap) == {"A"}, str(jugeables(av, ap)))
 
     if echecs:
         print(f"\nECHEC ({echecs} failures, {controles} checks)")
@@ -130,7 +158,7 @@ def main() -> int:
         print("aucun rouleau tracé des deux côtés", file=sys.stderr)
         return 1
 
-    hauteur = 130 + len(paires) * BLOC + 110
+    hauteur = 130 + len(paires) * BLOC + 130
     try:
         f_t = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 17)
         f_n = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 13)
@@ -172,30 +200,48 @@ def main() -> int:
                           fill=SALE if cr else PROPRE, outline=(255, 255, 255))
             sales = sum(1 for c in l["croisements"] if c)
             g.text((X0 - 118, y - 7), etiq, font=f_p, fill=coul)
+            # ⚠ Une decimale sous 10 % : « 0 % » se lit comme une egalite exacte alors
+            # que la dispersion vaut 0,31 % — et c'est justement la petitesse de ce
+            # nombre qui est le resultat, donc l'arrondir a zero l'efface.
+            d = l["etendue_relative"]
+            txt = (f"{d:.1%}" if d < 0.10 else f"{d:.0%}").replace(".", ",")
             g.text((X0 + LARG + 12, y - 7),
-                   f"{l['etendue_relative']:.0%}".rjust(4)
-                   + f"  {sales}/{len(l['aires'])} sale", font=f_p,
+                   txt.rjust(6) + f"  {sales}/{len(l['aires'])} sale", font=f_p,
                    fill=SALE if sales > len(l["aires"]) / 2 else (110, 110, 110))
 
     yb = y0 + len(paires) * BLOC + 44
-    disp_av = [av["etendue_relative"] for av, _ in paires]
-    disp_ap = [ap_["etendue_relative"] for _, ap_ in paires]
-    sales_av = sum(1 for av, _ in paires for c in av["croisements"] if c)
-    sales_ap = sum(1 for _, ap_ in paires for c in ap_["croisements"] if c)
-    n_av = sum(len(av["aires"]) for av, _ in paires)
-    n_ap = sum(len(ap_["aires"]) for _, ap_ in paires)
+    retenus = jugeables(o, r)
+    juges = [(av, ap_) for av, ap_ in paires if ap_["rouleau"] in retenus]
+    ecartes = [ap_["rouleau"] for _, ap_ in paires if ap_["rouleau"] not in retenus]
+    disp_av = [av["etendue_relative"] for av, _ in juges]
+    disp_ap = [ap_["etendue_relative"] for _, ap_ in juges]
+    sales_av = sum(1 for av, _ in juges for c in av["croisements"] if c)
+    sales_ap = sum(1 for _, ap_ in juges for c in ap_["croisements"] if c)
+    n_av = sum(len(av["aires"]) for av, _ in juges)
+    n_ap = sum(len(ap_["aires"]) for _, ap_ in juges)
+    if not juges:
+        print("aucun rouleau ne passe le filtre du verdict", file=sys.stderr)
+        return 1
     for i, t in enumerate((
-            f"dispersion d'aire : {min(disp_av):.1%}–{max(disp_av):.0%} au plafond "
-            f"d'origine, {min(disp_ap):.0%}–{max(disp_ap):.0%} une fois relevé",
+            f"dispersion d'aire : {min(disp_av):.1%} à {max(disp_av):.1%} au plafond "
+            f"d'origine, {min(disp_ap):.0%} à {max(disp_ap):.0%} une fois relevé"
+            .replace(".", ","),
             f"tirages qui s'auto-intersectent : {sales_av}/{n_av} contre "
             f"{sales_ap}/{n_ap}",
             "⚠⚠ la stabilité ET la propreté étaient des effets du budget, "
             "pas des propriétés du rouleau")):
         g.text((40, yb + i * 20), t, font=f_n, fill=SALE if i == 2 else TEXTE)
 
+    if ecartes:
+        g.text((40, yb + 3 * 20), f"⚠ hors du verdict, dessinés quand même : "
+                                  f"{', '.join(ecartes)} — moins de deux tirages, ou "
+                                  f"buté sur le nouveau plafond", font=f_n,
+               fill=(120, 120, 120))
+
     a.sortie.parent.mkdir(parents=True, exist_ok=True)
     img.save(a.sortie)
-    print(f"écrit : {a.sortie}  ({LARGEUR}×{hauteur})  {len(paires)} rouleau(x)")
+    print(f"écrit : {a.sortie}  ({LARGEUR}×{hauteur})  {len(paires)} rouleau(x), "
+          f"{len(juges)} au verdict")
     return 0
 
 

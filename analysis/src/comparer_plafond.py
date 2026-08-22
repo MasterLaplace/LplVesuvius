@@ -55,6 +55,14 @@ def confronter(origine: dict, releve: dict) -> dict:
         # Les deux notions ont failli porter le meme nom, et le test aurait ete trivial.
         budget = r.get("budget_generations") or releve.get("budget_generations")
         sature = budget is not None and r["generations_max"] >= budget
+        # ⚠⚠ ET un rouleau a MOINS DE DEUX tirages d'un cote a une dispersion nulle PAR
+        # CONSTRUCTION -- un seul nombre ne se disperse pas. L'inclure dans une mediane de
+        # dispersions tire le resultat vers le bas sans qu'aucune ligne ne le signale,
+        # c'est-a-dire AFFAIBLIT l'effet mesure pour une raison etrangere au phenomene.
+        # `table_tirages.py` applique deja cette regle a « reproductible » et « bascule ».
+        # Le cas s'est presente : la campagne a ete arretee au premier tirage de son
+        # troisieme rouleau.
+        assez = min(a["n"], r["n"]) >= 2
         ligne = {
             "rouleau": r["rouleau"],
             "gen_avant": [a["generations_min"], a["generations_max"]],
@@ -67,16 +75,21 @@ def confronter(origine: dict, releve: dict) -> dict:
             "bascule_apres": r["verdict_bascule"],
             "propres_avant": a["propres"],
             "propres_apres": r["propres"],
+            "n_avant": a["n"], "n_apres": r["n"],
             "sature_au_nouveau_plafond": sature,
+            "trop_peu_de_tirages": not assez,
         }
-        (satures if sature else lignes).append(ligne)
+        (lignes if (assez and not sature) else satures).append(ligne)
 
     jugeables = lignes
     return {
         "plafond_avant": origine.get("budget_generations"),
         "plafond_apres": releve.get("budget_generations"),
         "rouleaux_compares": len(jugeables),
-        "rouleaux_satures_ecartes": [l["rouleau"] for l in satures],
+        "rouleaux_satures_ecartes": [l["rouleau"] for l in satures
+                                     if l["sature_au_nouveau_plafond"]],
+        "rouleaux_trop_peu_de_tirages": [l["rouleau"] for l in satures
+                                         if l["trop_peu_de_tirages"]],
         "dispersion_mediane_avant": (statistics.median(
             [l["dispersion_avant"] for l in jugeables]) if jugeables else None),
         "dispersion_mediane_apres": (statistics.median(
@@ -95,9 +108,9 @@ def verifier() -> int:
             echecs += 1
             print(f"  ECHEC  {nom}" + (f"  — {detail}" if detail else ""))
 
-    def ligne(nom, gmin, gmax, med, disp, bascule=False, propres=6):
+    def ligne(nom, gmin, gmax, med, disp, bascule=False, propres=6, n=6):
         return {"rouleau": nom, "generations_min": gmin, "generations_max": gmax,
-                "aire_mediane": med, "etendue_relative": disp,
+                "aire_mediane": med, "etendue_relative": disp, "n": n,
                 "verdict_bascule": bascule, "propres": propres}
 
     avant = {"budget_generations": 120,
@@ -135,6 +148,21 @@ def verifier() -> int:
     v("... et elle ne monte pas quand les tirages restent groupés",
       plat["dispersion_mediane_apres"] <= plat["dispersion_mediane_avant"],
       f"{plat['dispersion_mediane_avant']} → {plat['dispersion_mediane_apres']}")
+    # ⚠⚠ La seconde sonde : un rouleau a UN SEUL tirage a une dispersion nulle par
+    # construction. L'inclure ferait tomber la mediane « apres » et affaiblirait l'effet
+    # pour une raison qui n'a rien a voir avec le phenomene mesure.
+    seul = confronter(avant, {"budget_generations": 400,
+                              "lignes": [ligne("A", 230, 333, 110.0, 1.10),
+                                         ligne("Z", 220, 260, 40.0, 0.35),
+                                         ligne("B", 200, 210, 60.0, 0.0, n=1)]})
+    v("un rouleau à un seul tirage est ÉCARTÉ du verdict",
+      seul["rouleaux_trop_peu_de_tirages"] == ["B"],
+      str(seul["rouleaux_trop_peu_de_tirages"]))
+    v("... et ne tire pas la dispersion médiane vers le bas",
+      seul["dispersion_mediane_apres"] > 0.3, str(seul["dispersion_mediane_apres"]))
+    v("... mais il reste dans les lignes, nommé",
+      any(l["rouleau"] == "B" and l["trop_peu_de_tirages"] for l in seul["lignes"]))
+
     v("deux campagnes vides ne rendent aucun verdict",
       confronter({}, {})["dispersion_mediane_apres"] is None)
 
@@ -168,7 +196,9 @@ def main() -> int:
     print(entete)
     print("  " + "-" * (len(entete) - 2))
     for l in d["lignes"]:
-        marque = "  ⚠ sature au nouveau plafond" if l["sature_au_nouveau_plafond"] else ""
+        marque = ("  ⚠ sature au nouveau plafond" if l["sature_au_nouveau_plafond"]
+                  else f"  ⚠ {min(l['n_avant'], l['n_apres'])} tirage(s) seulement"
+                  if l["trop_peu_de_tirages"] else "")
         print(f"  {l['rouleau']:<12} "
               f"{l['gen_avant'][0]:>4}–{l['gen_avant'][1]:<5} "
               f"{l['gen_apres'][0]:>4}–{l['gen_apres'][1]:<5} "
@@ -189,6 +219,10 @@ def main() -> int:
         print(f"\n  ⚠ écartés du verdict, car ils butent aussi sur le nouveau plafond : "
               f"{', '.join(d['rouleaux_satures_ecartes'])} — comparer une troncature à une "
               f"autre ne dit rien")
+    if d["rouleaux_trop_peu_de_tirages"]:
+        print(f"\n  ⚠ écartés du verdict, car moins de deux tirages d'un côté : "
+              f"{', '.join(d['rouleaux_trop_peu_de_tirages'])} — un seul nombre ne se "
+              f"disperse pas, l'inclure baisserait la médiane sans rien mesurer")
 
     if a.json:
         a.json.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n",

@@ -563,6 +563,22 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # alors qu'il y en avait 24 et 1092 : le chiffre avait ete recopie a la main et n'avait
     # aucun producteur, donc rien ne pouvait le rafraichir ni le contredire. C'est le meme
     # defaut que les deux cartouches embarquees qui avaient derive, un etage plus haut.
+    # ⚠⚠ La mesure de `35` §3bis : la stabilite des rouleaux plafonnes etait-elle une
+    # troncature ? Le verdict tient dans deux dispersions medianes, donc dans deux
+    # nombres — et un nombre qui porte un verdict est le premier a deriver.
+    p = racine / "docs" / "comparaison_plafond.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        if d.get("dispersion_mediane_avant") is not None:
+            out.append(("dispersion aux deux plafonds",
+                        [f"{d['dispersion_mediane_avant']*100:.2f} % à "
+                         f"{d['dispersion_mediane_apres']*100:.2f} %".replace(".", ","),
+                         f"{d['dispersion_mediane_avant']*100:.2f}% to "
+                         f"{d['dispersion_mediane_apres']*100:.2f}%"], p.name))
+        out.append(("plafonds confrontes",
+                    [f"{d['plafond_avant']} générations contre {d['plafond_apres']}",
+                     f"{d['plafond_avant']} contre {d['plafond_apres']}"], p.name))
+
     p = racine / "docs" / "temoins.json"
     if p.exists():
         d = json.loads(p.read_text())

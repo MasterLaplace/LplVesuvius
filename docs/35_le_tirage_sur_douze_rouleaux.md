@@ -106,6 +106,57 @@ deviendrait fausse en silence le jour où le budget du `seed.json` change.
 > plafond effectif voyage dans chaque résumé, pour que deux campagnes à plafonds différents
 > ne produisent pas des lignes indistinguables.
 
+## 3bis. ⭐⭐⭐ La mesure a été faite : la stabilité ÉTAIT une troncature
+
+Le §3 nommait la mesure qui trancherait — *relever le plafond de générations et rejouer*.
+Faite le 2026-08-22 sur deux rouleaux plafonnés, six tirages chacun, **seul le budget
+change** : 120 générations contre 400.
+
+![le même rouleau aux deux plafonds](images/35_plafond.png)
+
+| rouleau | générations | aire médiane | dispersion | tirages sales |
+|---|---|---:|---:|---:|
+| `PHerc0125` — plafond 120 | 118–118 | 19,83 cm² | **0,3 %** | 1/6 |
+| `PHerc0125` — **plafond 400** | 207–333 | **71,31 cm²** | ⭐⭐ **115 %** | ⚠ **5/6** |
+| `PHerc0191` — plafond 120 | 118–118 | 19,83 cm² | **0,8 %** | 0/6 |
+| `PHerc0191` — **plafond 400** | 216–283 | **80,39 cm²** | ⭐⭐ **57 %** | ⚠ **4/6** |
+
+> **La dispersion médiane passe de 0,55 % à 86,00 %** — un facteur 156. Six traces coupées au
+> même endroit ont forcément la même aire : ce n'était pas une propriété du rouleau, c'était
+> le budget qui les coupait. **L'hypothèse du §3 est confirmée.**
+
+⚠⚠ **Et un second résultat, que la mesure n'était pas conçue pour chercher : la PROPRETÉ
+aussi était une troncature.** Les tirages qui s'auto-intersectent passent de **1 sur 12** à
+**9 sur 12**. `PHerc0191` ne basculait pas du tout au plafond d'origine — zéro tirage sale sur
+six — et bascule à 4 sur 6 une fois relevé. Les traces étaient propres **parce qu'elles
+étaient courtes**.
+
+⭐ C'est cohérent avec ce que [`44`](44_ou_la_chaine_se_trouve.md) mesure sur l'extension
+tangentielle — budget 200 → 25 036 auto-intersections — mais ici c'est sur le chemin
+principal du dépôt, celui dont tous les chiffres de trace viennent.
+
+⭐ Un **troisième** rouleau va dans le même sens sans pouvoir entrer dans le verdict :
+`PHerc0358`, 19,83 → **211,43 cm²** (facteur 10,7) avec **9 907 auto-intersections**. Il n'a
+qu'un tirage, et un seul nombre ne se disperse pas — l'inclure ferait baisser la dispersion
+médiane sans rien mesurer. `comparer_plafond.py` l'**écarte en le nommant**, et la figure le
+dessine quand même en le disant.
+
+⚠ **Ce que ça ne dit pas.** Deux rouleaux au verdict, pas treize : la mesure établit que la
+troncature explique la faible dispersion **là où elle a été faite**, pas que tous les rouleaux
+plafonnés se comportent ainsi. Et elle ne dit rien de la cause du non-déterminisme, qui reste
+ouverte.
+
+⚠⚠ **Un coût mesuré, à connaître avant de « juste augmenter le budget »** : à plafond relevé
+une trace devient beaucoup plus lente — le nombre de candidats de frange croît avec la
+génération — au point que le tirage de `PHerc0358` a pris **40 minutes** contre ~2 à 4 au
+plafond d'origine. La campagne a donc été **arrêtée** après treize tirages sur vingt-quatre :
+les onze restants auraient coûté ~7 heures pour une valeur marginale, et `PHerc0358` bute déjà
+à **386 générations sur 400**, donc il aurait probablement été écarté comme re-tronqué.
+
+> ⭐ Reproduire : `GENERATIONS=400 ./tools/lancer.sh --fond tools/campagne_tirages.sh
+> "$PWD/data/tirages_plafond" 6 <rouleaux>`, puis `table_tirages.py` sur les deux dossiers et
+> `comparer_plafond.py` pour les confronter.
+
 ## 4. Ce que ça change pour la chaîne
 
 `31` §5 disait que l'étage « tracer » est le maillon dont *« l'outil officiel marche mais

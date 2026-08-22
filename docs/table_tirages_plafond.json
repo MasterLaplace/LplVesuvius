@@ -1,0 +1,144 @@
+{
+  "tirages_total": 13,
+  "rouleaux": 3,
+  "mauvais": 10,
+  "taux_mauvais": 0.7692307692307693,
+  "ic95_bas": 0.461868460765959,
+  "ic95_haut": 0.9496189265088485,
+  "rouleaux_bascule": [
+    "PHerc0125",
+    "PHerc0191"
+  ],
+  "rouleaux_reproductibles": [],
+  "rouleaux_non_concluants": [
+    "PHerc0358"
+  ],
+  "excentricite_rang_mauvais": [
+    1.0,
+    0.2,
+    0.6,
+    0.6,
+    0.2,
+    0.6,
+    0.2,
+    0.2,
+    1.0
+  ],
+  "dispersion_mediane_bascule": 0.8600056314476026,
+  "dispersion_mediane_sans": 0.0,
+  "generations_max_observees": 386,
+  "budget_generations": 400,
+  "plafonnes": 1,
+  "non_plafonnes": 2,
+  "bascules_plafonnes": 0,
+  "bascules_non_plafonnes": 2,
+  "p_fisher_plafond": 0.3333333333333333,
+  "dispersion_mediane_plafonnes": 0.0,
+  "dispersion_mediane_non_plafonnes": 0.8600056314476026,
+  "sans_maillage": 0,
+  "reverifies": 13,
+  "desaccords": [],
+  "lignes": [
+    {
+      "rouleau": "PHerc0125",
+      "n": 6,
+      "graine": [
+        6234,
+        4127,
+        10434
+      ],
+      "voxel_um": 9.362,
+      "generations_min": 207,
+      "generations_max": 333,
+      "budget_generations": 400,
+      "aires": [
+        157.71664,
+        74.40968,
+        65.572818,
+        60.253899,
+        81.009773,
+        68.204116
+      ],
+      "aire_min": 60.253899,
+      "aire_max": 157.71664,
+      "aire_mediane": 71.30689799999999,
+      "etendue_relative": 1.153025593786453,
+      "croisements": [
+        6243,
+        7220,
+        2440,
+        0,
+        1568,
+        1905
+      ],
+      "propres": 1,
+      "aire_identique": false,
+      "verdict_bascule": true,
+      "plafonne": false
+    },
+    {
+      "rouleau": "PHerc0191",
+      "n": 6,
+      "graine": [
+        4197,
+        6288,
+        9529
+      ],
+      "voxel_um": 9.362,
+      "generations_min": 216,
+      "generations_max": 283,
+      "budget_generations": 400,
+      "aires": [
+        65.608783,
+        100.807234,
+        79.32898,
+        81.449423,
+        113.455263,
+        65.675072
+      ],
+      "aire_min": 65.608783,
+      "aire_max": 113.455263,
+      "aire_mediane": 80.3892015,
+      "etendue_relative": 0.5669856691087521,
+      "croisements": [
+        0,
+        2568,
+        799,
+        834,
+        5164,
+        0
+      ],
+      "propres": 2,
+      "aire_identique": false,
+      "verdict_bascule": true,
+      "plafonne": false
+    },
+    {
+      "rouleau": "PHerc0358",
+      "n": 1,
+      "graine": [
+        5842,
+        5839,
+        7386
+      ],
+      "voxel_um": 9.362,
+      "generations_min": 386,
+      "generations_max": 386,
+      "budget_generations": 400,
+      "aires": [
+        211.430286
+      ],
+      "aire_min": 211.430286,
+      "aire_max": 211.430286,
+      "aire_mediane": 211.430286,
+      "etendue_relative": 0.0,
+      "croisements": [
+        9907
+      ],
+      "propres": 0,
+      "aire_identique": null,
+      "verdict_bascule": null,
+      "plafonne": true
+    }
+  ]
+}
