@@ -30,7 +30,35 @@ import statistics
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
 LARGEUR, MARGE_H, LIGNE = 1080, 108, 30
+
+# ⚠ La table de traduction de cette figure. Les cles matchent le texte SOURCE.
+ANGLAIS = {
+    "Le même appel, six fois — sur douze rouleaux":
+        "The same call, six times — across thirteen scrolls",
+    "Même graine, mêmes paramètres. Si le traceur était déterministe, chaque ":
+        "Same seed, same parameters. If the tracer were deterministic, every ",
+    "ligne serait un point unique. ": "row would be a single point. ",
+    " rouleaux sur ": " scrolls out of ",
+    " ne le sont pas.": " are not.",
+    "● trace propre": "● clean trace",
+    "● auto-intersections non nulles": "● non-zero self-intersections",
+    "médiane": "median",
+    " croisements": " crossings",
+    " tirages · ": " runs · ",
+    " mauvais ": " bad ",
+    "IC 95 %": "95 % CI",
+    " rouleaux où le VERDICT bascule": " scrolls where the VERDICT flips",
+    "L'axe est relatif à la médiane de chaque rouleau : les traces vont de 9,4 à ":
+        "The axis is relative to each scroll's median: traces span 9.4 to ",
+    "20,0 cm², un axe absolu écraserait les petites.":
+        "20.0 cm², and an absolute axis would crush the small ones.",
+    "Rouge = auto-intersections non nulles. C'est une condition nécessaire de ":
+        "Red = non-zero self-intersections. It is a necessary condition for a ",
+    "défaut, jamais suffisante.": "defect, never a sufficient one.",
+}
 X0, LARG = 250, 620
 ETENDUE = 0.22          # ±22 % autour de la mediane : au-dela aucun tirage ne sort
 
@@ -42,9 +70,13 @@ def main() -> int:
                     default=Path(__file__).resolve().parents[2] / "docs/table_tirages.json")
     ap.add_argument("--sortie", type=Path,
                     default=Path(__file__).resolve().parents[2] / "docs/images/35_tirages.png")
+    ap.add_argument("--anglais", action="store_true",
+                    help="écrire la figure en anglais (pour l'article)")
     a = ap.parse_args()
+    anglais = a.anglais
 
     from PIL import Image, ImageDraw, ImageFont
+    from langue import Traduisant
 
     if not a.entree.is_file():
         print(f"absent : {a.entree} — lancer d'abord table_tirages.py --json", file=sys.stderr)
@@ -54,7 +86,8 @@ def main() -> int:
 
     hauteur = MARGE_H + len(lignes) * LIGNE + 112
     im = Image.new("RGB", (LARGEUR, hauteur), (255, 255, 255))
-    art = ImageDraw.Draw(im)
+    # ⭐ Envelopper l'objet de dessin suffit a traduire la figure entiere.
+    art = Traduisant(ImageDraw.Draw(im), ANGLAIS if anglais else None)
     try:
         f_t = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 15)
         f_n = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 12)
@@ -125,6 +158,12 @@ def main() -> int:
              fill=(150, 90, 20), font=f_p)
 
     a.sortie.parent.mkdir(parents=True, exist_ok=True)
+    # ⚠⚠ Une figure a moitie traduite a l'air traduite. On REFUSE de l'ecrire.
+    if anglais and art.intraduits():
+        print("des libellés n'ont pas de traduction :", file=sys.stderr)
+        for _t in art.intraduits():
+            print(f"    « {_t} »", file=sys.stderr)
+        return 1
     im.save(a.sortie)
     print(f"écrit : {a.sortie}  ({LARGEUR}x{hauteur}, {len(lignes)} rouleaux)")
     return 0

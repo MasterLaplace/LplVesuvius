@@ -588,6 +588,7 @@ run "géométrie de la chaîne"   uv run python "$ROOT/analysis/src/geometrie_ch
 # la premiere version confondait dans un seul `None` — et cette confusion a fait
 # publier « 49 paires eloignees » pour 45 mesurees.
 run "carte des segments"       uv run python "$ROOT/analysis/src/carte_segments.py" --verifier
+run "langue des figures"       uv run python "$ROOT/analysis/src/langue.py"
 # ⚠⚠ L'appariement surface/volume : le script de campagne prenait `head -1` de deux
 # listages S3, ce qui est juste tant qu'un rouleau n'a qu'un scan et FAUX SANS UN MOT
 # des qu'il en a deux. Le temoin sonde justement le cas ou les deux listes ne se trient
@@ -683,8 +684,14 @@ printf '  %-30s ' "chiffres de la soumission"
 # chiffre existe quelque part » est satisfait par le document SOURCE et une faute de frappe
 # dans le dossier passe. Sonde faite : transposer 12,97 en 12,79 dans une copie fait
 # echouer le controle, ce qu'il ne faisait pas avant.
+# ⚠ `--article` fait la meme chose pour `article/article.typ`, qui recopie lui aussi ses
+# chiffres a l'anglaise et part vers un lectorat qui ne peut pas les recouper. Sa section
+# « Reproducibility » AFFIRME que chaque nombre est cherche litteralement dans sa source :
+# sans ce controle, l'affirmation serait flatteuse au lieu d'etre vraie.
 if uv run python "$ROOT/analysis/src/verifier_chiffres.py" "$ROOT"/docs/*.md \
-     --soumission "$ROOT/docs/21_texte_de_soumission.md" >/tmp/chiffres.log 2>&1; then
+     "$ROOT/article/article.typ" \
+     --soumission "$ROOT/docs/21_texte_de_soumission.md" \
+     --article "$ROOT/article/article.typ" >/tmp/chiffres.log 2>&1; then
   printf '✅ %s\n' "$(grep -c '✅' /tmp/chiffres.log) chiffres retrouves"
 else
   printf '❌ ECHEC\n'; sed 's/^/       /' /tmp/chiffres.log | tail -6; FAIL=$((FAIL + 1))

@@ -29,8 +29,35 @@ import math
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
 LARGEUR, HAUTEUR = 940, 600
 X0, X1, Y0, Y1 = 130, 780, 470, 110      # cadre du graphe
+
+# ⚠ La table de traduction de cette figure. Les cles matchent le texte SOURCE.
+ANGLAIS = {
+    "Élargir la fenêtre : ce qui bouge, et ce qui ne bouge pas":
+        "Widening the window: what moves, and what does not",
+    "Distance mesurée à la matière la plus proche, en fonction de la profondeur ":
+        "Measured distance to the nearest material, against the rendered ",
+    "rendue. Axes logarithmiques.": "depth. Logarithmic axes.",
+    "couches rendues (fenêtre)": "rendered layers (window)",
+    "pente 1 : suit la fenêtre": "slope 1: follows the window",
+    "segment officiel PHerc1447 (bonne surface)":
+        "published PHerc1447 segment (good surface)",
+    "notre trace PHerc1447 r2": "our own PHerc1447 trace, run 2",
+    "— Pente nulle : la matière est là, tout près. La mesure ne dépend pas du ":
+        "— Zero slope: the material is right there. The measurement does not depend on the ",
+    "réglage — c'est une distance.": "setting — it is a distance.",
+    "!! Pente 1 : le « pic » s'éloigne avec la fenêtre. Il n'y a aucune feuille à ":
+        "!! Slope 1: the “peak” recedes with the window. There is no sheet within ",
+    "portée — la surface est posée EN TRAVERS.":
+        "reach — the surface lies ACROSS the stack.",
+    "Même rouleau, même chaîne, même instrument. Aucun seuil, aucune vérité ":
+        "Same scroll, same chain, same instrument. No threshold, no ground ",
+    "terrain, aucune échelle : on compare une mesure à elle-même.":
+        "truth, no scale: a measurement is compared to itself.",
+}
 
 
 def main() -> int:
@@ -39,9 +66,13 @@ def main() -> int:
     racine = Path(__file__).resolve().parents[2]
     ap.add_argument("--entree", type=Path, default=racine / "docs/convergence.json")
     ap.add_argument("--sortie", type=Path, default=racine / "docs/images/38_convergence.png")
+    ap.add_argument("--anglais", action="store_true",
+                    help="écrire la figure en anglais (pour l'article)")
     a = ap.parse_args()
+    anglais = a.anglais
 
     from PIL import Image, ImageDraw, ImageFont
+    from langue import Traduisant
 
     if not a.entree.is_file():
         print(f"absent : {a.entree} — lancer test_convergence.py --json", file=sys.stderr)
@@ -57,7 +88,8 @@ def main() -> int:
     def py(e): return Y0 + int((math.log10(e) - ly0) / (ly1 - ly0) * (Y1 - Y0))
 
     im = Image.new("RGB", (LARGEUR, HAUTEUR), (255, 255, 255))
-    art = ImageDraw.Draw(im)
+    # ⭐ Tout ce qui s'ecrit passe par `.text` : envelopper suffit a traduire la figure.
+    art = Traduisant(ImageDraw.Draw(im), ANGLAIS if anglais else None)
     try:
         f_t = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 15)
         f_n = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 12)
@@ -146,6 +178,13 @@ def main() -> int:
              "Même rouleau, même chaîne, même instrument. Aucun seuil, aucune vérité "
              "terrain, aucune échelle : on compare une mesure à elle-même.",
              fill=(120, 120, 120), font=f_p)
+
+    # ⚠⚠ Une figure a moitie traduite a l'air traduite. On REFUSE de l'ecrire.
+    if anglais and art.intraduits():
+        print("des libellés n'ont pas de traduction :", file=sys.stderr)
+        for _t in art.intraduits():
+            print(f"    « {_t} »", file=sys.stderr)
+        return 1
 
     a.sortie.parent.mkdir(parents=True, exist_ok=True)
     im.save(a.sortie)

@@ -138,7 +138,7 @@ noyau i686. La machinerie qui rend ça possible est disponible :
 |---|---|---|
 | grille de hachage spatial, octree persistant | broad-phase de collision, **0 allocation par pas** mesurée | adjacence de feuilles, voisinage de spire |
 | `procgen` + **portes de jouabilité** | générer une structure **puis vérifier qu'elle est traversable** (Dijkstra, `evaluateCaveSystem`, `goalReachable`) | tracer une surface **puis vérifier qu'elle est une nappe unique** — *même forme de garantie* |
-| `tools/temoins.sh`, 34 batteries, 1116 contrôles | une vérification doit pouvoir échouer, et on le **sonde** | ce qui rend nos résultats opposables |
+| `tools/temoins.sh`, 35 batteries, 1134 contrôles | une vérification doit pouvoir échouer, et on le **sonde** | ce qui rend nos résultats opposables |
 | `test-tick-allocations` | prouver **zéro allocation** dans une boucle chaude | l'optimisation extrême, quand elle sera nécessaire |
 
 ## 4. Le livrable — et pourquoi il rend le test trivial pour eux

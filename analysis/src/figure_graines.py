@@ -37,6 +37,34 @@ LIGNE = 26                   # hauteur d'une ligne de rouleau
 AIRE_MAX = 21.0              # borne de l'axe : le plafond mesuré est a 19,84
 
 FOND, TEXTE, TRAIT = (255, 255, 255), (25, 25, 25), (150, 150, 150)
+
+# ⚠ La table de traduction de cette figure. Elle vit ici plutot que dans `langue.py` :
+# partager une table entre figures obligerait a formuler les libelles pareil partout.
+ANGLAIS = {
+    "Campagne appariée des critères de graine — ": "Paired campaign of seed criteria — ",
+    "rouleaux du prix": "prize scrolls",
+    "même rouleau, même volume, mêmes paramètres ; seule la graine change":
+        "same scroll, same volume, same parameters; only the seed changes",
+    "⌐ trace arrêtée par le budget ": "⌐ trace stopped by the budget ",
+    "générations": "generations",
+    "— son aire est tronquée": "— its area is truncated",
+    "aire atteinte (cm²)": "area reached (cm²)",
+    "planéité": "planarity",
+    "voisinage": "neighbourhood",
+    "écart ": "gap ",
+    ", test des signes p = ": ", sign test p = ",
+    "les ": "the ",
+    " « défaites » sont les ": " “defeats” are the ",
+    " rouleaux où LES DEUX critères butent sur le budget ":
+        " scrolls where BOTH criteria hit the budget ",
+    "— deux troncatures, pas deux critères": "— two truncations, not two criteria",
+    # ⚠ La cle doit matcher le texte SOURCE, pas le texte deja traduit : ecrite
+    # « traces de planarity », elle ne matchait jamais, et le residu sortait en franglais.
+    " traces de planéité sur ": " planarity traces out of ",
+    " butent sur le plafond : ": " hit the budget: ",
+    "leur distance atteignable n'est pas mesurée, elle est tronquée":
+        "their reachable distance is not measured, it is truncated",
+}
 PLANARITE, VOISINAGE = (40, 110, 60), (185, 95, 25)
 SERRE, PLAFOND = (200, 40, 40), (120, 120, 180)
 
@@ -122,11 +150,15 @@ def main() -> int:
     ap.add_argument("--sortie", type=Path,
                     default=racine / "docs/images/25_campagne_graines.png")
     ap.add_argument("--verifier", action="store_true")
+    ap.add_argument("--anglais", action="store_true",
+                    help="écrire la figure en anglais (pour l'article)")
     a = ap.parse_args()
     if a.verifier:
         return verifier()
+    anglais = a.anglais
 
     from PIL import Image, ImageDraw, ImageFont
+    from langue import Traduisant
 
     if not a.entree.is_file():
         print(f"absent : {a.entree} — lancer d'abord table_graines.py --out",
@@ -146,7 +178,9 @@ def main() -> int:
         f_t = f_n = f_p = ImageFont.load_default()
 
     img = Image.new("RGB", (LARGEUR, hauteur), FOND)
-    g = ImageDraw.Draw(img)
+    # ⭐ Tout ce qui s'ecrit passe par `.text`, donc envelopper l'objet de dessin
+    # suffit a traduire la figure entiere.
+    g = Traduisant(ImageDraw.Draw(img), ANGLAIS if anglais else None)
     g.text((40, 26), f"Campagne appariée des critères de graine — "
                      f"{d['rouleaux']} rouleaux du prix", font=f_t, fill=TEXTE)
     g.text((40, 50), "même rouleau, même volume, mêmes paramètres ; seule la graine change",
@@ -227,6 +261,12 @@ def main() -> int:
                fill=TEXTE if i == 0 else SERRE if i else TEXTE)
 
     a.sortie.parent.mkdir(parents=True, exist_ok=True)
+    # ⚠⚠ Une figure a moitie traduite a l'air traduite. On REFUSE de l'ecrire.
+    if anglais and g.intraduits():
+        print("des libellés n'ont pas de traduction :", file=sys.stderr)
+        for _t in g.intraduits():
+            print(f"    « {_t} »", file=sys.stderr)
+        return 1
     img.save(a.sortie)
     print(f"écrit : {a.sortie}  ({LARGEUR}×{hauteur})  "
           f"{serres} paire(s) serrée(s), {au_plafond} au plafond")

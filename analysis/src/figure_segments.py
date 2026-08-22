@@ -53,6 +53,32 @@ ESPACEMENT_NAPPES_UM = 113.0  # mesuré au §4 de `44`
 FOND, TRAIT, TEXTE = (255, 255, 255), (120, 120, 120), (25, 25, 25)
 CANDIDAT, VOISINE, LOIN = (200, 40, 40), (215, 130, 20), (70, 110, 170)
 
+# ⚠ La table de traduction de cette figure. Les cles matchent le texte SOURCE.
+ANGLAIS = {
+    "écart entre les ": "gap between the ",
+    " segments publiés, paire par paire": " published segments, pair by pair",
+    "un point = une paire dont les boîtes se recouvrent ; écart médian point-à-point":
+        "one dot = one pair whose boxes overlap; median point-to-point gap",
+    "raccordables": "mergeable",
+    "(vide)": "(empty)",
+    "écart médian (µm, échelle log)": "median gap (µm, log scale)",
+    "seuil même feuille ": "same-sheet threshold ",
+    "nappes voisines mesurées ": "neighbouring sheets, measured ",
+    "hors de portée": "out of reach",
+    " et ": " and ",
+    " paire sous ": " pair below ",
+    " paires sous ": " pairs below ",
+    " — la bande des raccordables est vide": " — the mergeable band is empty",
+    " paires entre ": " pairs between ",
+    " — des nappes VOISINES, à ne surtout pas fusionner":
+        " — NEIGHBOURING sheets, on no account to be merged",
+    " mesurées et ": " measured and ",
+    " hors de portée au-delà": " out of reach beyond",
+    "la paire la plus proche du rouleau est encore à ":
+        "the closest pair in the scroll is still ",
+    ", soit deux fois le seuil": " away — twice the threshold",
+}
+
 
 def x_de(um: float) -> int:
     """Position d'un écart sur l'axe logarithmique, écrêtée aux bornes."""
@@ -132,11 +158,15 @@ def main() -> int:
     ap.add_argument("--sortie", type=Path,
                     default=racine / "docs/images/44_ecarts_segments.png")
     ap.add_argument("--verifier", action="store_true")
+    ap.add_argument("--anglais", action="store_true",
+                    help="écrire la figure en anglais (pour l'article)")
     a = ap.parse_args()
     if a.verifier:
         return verifier()
+    anglais = a.anglais
 
     from PIL import Image, ImageDraw, ImageFont
+    from langue import Traduisant
 
     if not a.entree.is_file():
         print(f"absent : {a.entree} — lancer d'abord carte_segments.py --json",
@@ -154,7 +184,9 @@ def main() -> int:
         f_t = f_n = f_p = ImageFont.load_default()
 
     img = Image.new("RGB", (LARGEUR, HAUTEUR), FOND)
-    g = ImageDraw.Draw(img)
+    # ⭐ Tout ce qui s'ecrit passe par `.text`, donc envelopper l'objet de dessin
+    # suffit a traduire la figure entiere.
+    g = Traduisant(ImageDraw.Draw(img), ANGLAIS if anglais else None)
 
     g.text((X0 - 24, 26), f"PHerc1447 — écart entre les {n_seg} segments publiés, "
                           f"paire par paire", font=f_t, fill=TEXTE)
@@ -233,6 +265,12 @@ def main() -> int:
         g.text((X0 - 24, y), ("⚠ " if i == 0 else "  ") + t, font=f_n, fill=coul)
 
     a.sortie.parent.mkdir(parents=True, exist_ok=True)
+    # ⚠⚠ Une figure a moitie traduite a l'air traduite. On REFUSE de l'ecrire.
+    if anglais and g.intraduits():
+        print("des libellés n'ont pas de traduction :", file=sys.stderr)
+        for _t in g.intraduits():
+            print(f"    « {_t} »", file=sys.stderr)
+        return 1
     img.save(a.sortie)
     print(f"écrit : {a.sortie}  ({LARGEUR}×{HAUTEUR})")
     return 0

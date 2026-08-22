@@ -54,6 +54,29 @@ CITES_PAR_LA_SOUMISSION = (
 )
 
 
+# ⚠⚠ **Et l'article aussi.** Il recopie ses chiffres a l'anglaise depuis une prose
+# francaise, exactement comme le dossier de soumission, et il part vers un lectorat qui ne
+# peut pas les recouper. Sa section « Reproducibility » affirme que chaque nombre du texte
+# est recalcule depuis son fichier et cherche litteralement dans la source : cette liste
+# est ce qui rend l'affirmation vraie plutot que flatteuse.
+CITES_PAR_L_ARTICLE = (
+    "gain a 20 %",
+    "p de la decision",
+    "rho avec_matiere x encre",
+    "part rigide Scroll 1",
+    "p du test des signes sur l'aire",
+    "paires informatives du test des signes",
+    "p des paires informatives",
+    "rouleaux qui basculent",
+    "sommets valides de l'extension",
+    "alpha de officiel",
+    "alpha de notre trace",
+    "segments publies du rouleau",
+    "dispersion aux deux plafonds",
+    "traces de planarite au plafond",
+)
+
+
 def normaliser(t: str) -> str:
     """Aplatit ce qui diffère typographiquement sans rien dire de la valeur.
 
@@ -174,7 +197,8 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             out.append(("traces de planarite au plafond",
                         [f"{d['planarite_au_plafond']} traces de planéité sur "
                          f"{d['rouleaux']}",
-                         f"{d['planarite_au_plafond']} sur {d['rouleaux']} butent"],
+                         f"{d['planarite_au_plafond']} sur {d['rouleaux']} butent",
+                         f"{d['planarite_au_plafond']} of the {d['rouleaux']} planarity"],
                         p.name))
             info = d.get("signes_aire_informatives") or {}
             if info:
@@ -574,7 +598,9 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                         [f"{d['dispersion_mediane_avant']*100:.2f} % à "
                          f"{d['dispersion_mediane_apres']*100:.2f} %".replace(".", ","),
                          f"{d['dispersion_mediane_avant']*100:.2f}% to "
-                         f"{d['dispersion_mediane_apres']*100:.2f}%"], p.name))
+                         f"{d['dispersion_mediane_apres']*100:.2f}%",
+                         f"{d['dispersion_mediane_avant']*100:.2f} % to "
+                         f"{d['dispersion_mediane_apres']*100:.2f} %"], p.name))
         out.append(("plafonds confrontes",
                     [f"{d['plafond_avant']} générations contre {d['plafond_apres']}",
                      f"{d['plafond_avant']} contre {d['plafond_apres']}"], p.name))
@@ -607,6 +633,9 @@ def main() -> int:
                         help="document qui PART : les chiffres de "
                              "CITES_PAR_LA_SOUMISSION doivent apparaitre dans CELUI-LA, "
                              "et pas seulement quelque part dans le depot")
+    parser.add_argument("--article", type=Path,
+                        help="l'article : les chiffres de CITES_PAR_L_ARTICLE doivent "
+                             "apparaitre dans CELUI-LA")
     parser.add_argument("--minimum", type=int, default=8,
                         help="nombre minimal de chiffres recalculables ET DISCRIMINANTS. "
                              "⚠ Le plancher porte sur les discriminants, sinon il se "
@@ -664,34 +693,41 @@ def main() -> int:
         for nom, ecritures, source in faibles:
             print(f"    {nom:>40} = {ecritures[0]:<8} ({source})")
 
-    if args.soumission:
-        cible = args.soumission.resolve()
+    def exiger(cible: Path, noms, quoi: str) -> int:
+        """Ces chiffres-la doivent etre DANS ce document, pas seulement quelque part."""
+        manque = 0
+        cible = cible.resolve()
         t = normaliser(cible.read_text()) if cible.is_file() else None
         if t is None:
-            print(f"\n⚠ document de soumission introuvable : {cible}", file=sys.stderr)
-            manquants += 1
-        else:
-            connus = {nom for nom, _, _ in attendus}
-            # ⚠ Une entree nommee qui n'existe plus est un controle mort : le nom se
-            # renomme et la liste cesse silencieusement de garder quoi que ce soit.
-            orphelines = [n for n in CITES_PAR_LA_SOUMISSION if n not in connus]
-            if orphelines:
-                print(f"\n⚠ {len(orphelines)} entrée(s) de CITES_PAR_LA_SOUMISSION ne "
-                      f"correspondent à aucun chiffre recalculé — la liste est périmée :")
-                for n in orphelines:
-                    print(f"    {n}")
-                manquants += len(orphelines)
-            print(f"\n{len(CITES_PAR_LA_SOUMISSION) - len(orphelines)} chiffre(s) que le "
-                  f"corps de {cible.name} cite, cherchés DANS CE DOCUMENT :")
-            for nom, ecritures, source in attendus:
-                if nom not in CITES_PAR_LA_SOUMISSION:
-                    continue
-                if any(normaliser(e) in t for e in ecritures):
-                    print(f"    {nom:>36}  ✅")
-                else:
-                    manquants += 1
-                    print(f"    {nom:>36}  ⚠ ABSENT de la soumission — "
-                          f"accepte {', '.join('« ' + e + ' »' for e in ecritures)}")
+            print(f"\n⚠ {quoi} introuvable : {cible}", file=sys.stderr)
+            return 1
+        connus = {nom for nom, _, _ in attendus}
+        # ⚠ Une entree nommee qui n'existe plus est un controle mort : le nom se
+        # renomme et la liste cesse silencieusement de garder quoi que ce soit.
+        orphelines = [n for n in noms if n not in connus]
+        if orphelines:
+            print(f"\n⚠ {len(orphelines)} entrée(s) nommée(s) ne correspondent à aucun "
+                  f"chiffre recalculé — la liste est périmée :")
+            for n in orphelines:
+                print(f"    {n}")
+            manque += len(orphelines)
+        print(f"\n{len(noms) - len(orphelines)} chiffre(s) que {quoi} cite, cherchés "
+              f"DANS {cible.name} :")
+        for nom, ecritures, source in attendus:
+            if nom not in noms:
+                continue
+            if any(normaliser(e) in t for e in ecritures):
+                print(f"    {nom:>38}  ✅")
+            else:
+                manque += 1
+                print(f"    {nom:>38}  ⚠ ABSENT — "
+                      f"accepte {', '.join('« ' + e + ' »' for e in ecritures)}")
+        return manque
+
+    if args.soumission:
+        manquants += exiger(args.soumission, CITES_PAR_LA_SOUMISSION, "le dossier")
+    if args.article:
+        manquants += exiger(args.article, CITES_PAR_L_ARTICLE, "l'article")
 
     print()
     if manquants:

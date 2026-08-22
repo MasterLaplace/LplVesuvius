@@ -44,3 +44,4 @@ __pycache__/
 data/trace/*/render_a/
 data/trace/*/cache_vol/
 .lances/
+article/pg-*.png

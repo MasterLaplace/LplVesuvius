@@ -661,7 +661,39 @@ def verifier() -> int:
 # convention du depot : elle a exactement UN producteur et UN consommateur, et l'isoler
 # creerait un second fichier dont la seule fonction serait de relire un JSON que celui-ci
 # vient d'ecrire. Le depot a deja assez de scripts qui se relisent entre eux.
-def dessiner(res: dict, sortie: Path) -> None:
+# ⚠ La table de traduction de la figure. Les cles matchent le texte SOURCE.
+ANGLAIS = {
+    "Où la chaîne se trouve dans le rouleau": "Where the chain sits inside the scroll",
+    " nappes — ce qui est mesurable, et ce qui ne l'est pas":
+        " sheets — what is measurable, and what is not",
+    "Rayon de la nappe — deux estimateurs indépendants":
+        "Sheet radius — two independent estimators",
+    "arc / angle (flèche)": "arc / angle (sagitta)",
+    "ajustement de cercle": "circle fit",
+    " nappes sur ": " sheets out of ",
+    " ont un rayon INDÉTERMINÉ : les deux estimateurs se contredisent.":
+        " have an UNDETERMINED radius: the two estimators contradict each other.",
+    "écart": "gap",
+    "Un tour déroulé — ce que la chaîne couvre":
+        "One unrolled turn — what the chain covers",
+    "largeur du cadre = un tour complet de papyrus":
+        "frame width = one full turn of papyrus",
+    "chaque fenêtre en couvre ": "each window covers ",
+    " — il en faudrait ": " of it — one would need ",
+    "AU MOINS ": "AT LEAST ",
+    ", côte à côte,": ", side by side,",
+    "pour fermer UN seul tour. Une chaîne radiale est une colonne, ":
+        "to close ONE turn. A radial chain is a column, ",
+    "pas une bande.": "not a strip.",
+    "L'écart entre nappes, lui, ne suppose aucun modèle : ":
+        "The sheet-to-sheet gap assumes no model at all: ",
+    "médiane ": "median ",
+    "spire": "sheet",
+    "nappe ": "sheet ",
+}
+
+
+def dessiner(res: dict, sortie: Path, anglais: bool = False) -> None:
     """Deux panneaux : l'incertitude du rayon, puis ce que la chaine couvre d'un tour.
 
     ⚠⚠ Le panneau de gauche montre les DEUX estimateurs de rayon, pas une moyenne. Sur les
@@ -674,13 +706,15 @@ def dessiner(res: dict, sortie: Path) -> None:
     conclusion -- une chaine radiale est une colonne, pas une bande.
     """
     from PIL import Image, ImageDraw, ImageFont
+    from langue import Traduisant
 
     spires = [s for s in res["spires"] if s.get("angle_rad", 0.0) > 0]
     if not spires:
         return
     L, H = 1180, 640
     img = Image.new("RGB", (L, H), (255, 255, 255))
-    art = ImageDraw.Draw(img)
+    # ⭐ Envelopper l'objet de dessin suffit a traduire la figure entiere.
+    art = Traduisant(ImageDraw.Draw(img), ANGLAIS if anglais else None)
     try:
         f_t = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 16)
         f_n = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 12)
@@ -766,6 +800,12 @@ def dessiner(res: dict, sortie: Path) -> None:
     art.text((A1 + 6, B0 - 16), "écart", fill=GRIS, font=f_p)
 
     sortie.parent.mkdir(parents=True, exist_ok=True)
+    # ⚠⚠ Une figure a moitie traduite a l'air traduite. On REFUSE de l'ecrire.
+    if anglais and art.intraduits():
+        print("des libellés n'ont pas de traduction :", file=sys.stderr)
+        for _t in art.intraduits():
+            print(f"    « {_t} »", file=sys.stderr)
+        raise SystemExit(1)
     img.save(sortie)
 
 
@@ -783,6 +823,8 @@ def main() -> int:
     ap.add_argument("--json", type=Path)
     ap.add_argument("--figure", type=Path)
     ap.add_argument("--verifier", action="store_true")
+    ap.add_argument("--anglais", action="store_true",
+                    help="écrire la figure en anglais (pour l'article)")
     a = ap.parse_args()
     if a.verifier:
         return verifier()
@@ -867,7 +909,7 @@ def main() -> int:
                           encoding="utf-8")
         print(f"\n  écrit : {a.json}")
     if a.figure:
-        dessiner(res, a.figure)
+        dessiner(res, a.figure, a.anglais)
         print(f"  figure : {a.figure}")
     return 0
 

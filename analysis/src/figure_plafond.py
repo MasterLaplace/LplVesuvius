@@ -40,6 +40,32 @@ X0, LARG = 210, 700          # origine et largeur de l'axe des aires
 BLOC = 62                    # hauteur d'un rouleau (deux lignes)
 CM2_MIN, CM2_MAX = 8.0, 300.0
 
+# ⚠ La table de traduction de CETTE figure. Elle vit a cote du dessin plutot que dans
+# `langue.py` : une table partagee entre figures obligerait a formuler les libelles pareil
+# partout, ce qui contraindrait la figure au lieu de la servir.
+ANGLAIS = {
+    "Le même rouleau, le même appel — seul le budget de générations change":
+        "The same scroll, the same call — only the generation budget changes",
+    "un point = un tirage ; rouge = la trace s'auto-intersecte ; ":
+        "one dot = one run; red = the trace self-intersects; ",
+    "générations": "generations",
+    "gén.": "gen.",
+    "aire atteinte (cm², échelle log)": "area reached (cm², log scale)",
+    "dispersion d'aire : ": "area dispersion: ",
+    "% à ": "% to ",
+    " au plafond d'origine, ": " at the original budget, ",
+    " une fois relevé": " once raised",
+    "tirages qui s'auto-intersectent : ": "self-intersecting runs: ",
+    " contre ": " against ",
+    "la stabilité ET la propreté étaient des effets du budget, ":
+        "stability AND cleanliness were effects of the budget, ",
+    "pas des propriétés du rouleau": "not properties of the scroll",
+    "hors du verdict, dessinés quand même : ": "outside the verdict, drawn anyway: ",
+    "moins de deux tirages, ou ": "fewer than two runs, or ",
+    "buté sur le nouveau plafond": "hit the new budget",
+    " sale": " dirty",
+}
+
 FOND, TEXTE = (255, 255, 255), (25, 25, 25)
 PROPRE, SALE = (60, 110, 170), (200, 45, 45)
 AVANT, APRES = (150, 150, 150), (40, 110, 60)
@@ -142,11 +168,14 @@ def main() -> int:
                     default=racine / "docs/table_tirages_plafond.json")
     ap.add_argument("--sortie", type=Path, default=racine / "docs/images/35_plafond.png")
     ap.add_argument("--verifier", action="store_true")
+    ap.add_argument("--anglais", action="store_true",
+                    help="écrire la figure en anglais (pour l'article)")
     a = ap.parse_args()
     if a.verifier:
         return verifier()
 
     from PIL import Image, ImageDraw, ImageFont
+    from langue import Traduisant
 
     for f in (a.origine, a.releve):
         if not f.is_file():
@@ -167,7 +196,9 @@ def main() -> int:
         f_t = f_n = f_p = ImageFont.load_default()
 
     img = Image.new("RGB", (LARGEUR, hauteur), FOND)
-    g = ImageDraw.Draw(img)
+    # ⭐ UNE ligne : tout ce qui s'ecrit passe par `g.text`, donc envelopper l'objet de
+    # dessin suffit a traduire la figure entiere.
+    g = Traduisant(ImageDraw.Draw(img), ANGLAIS if a.anglais else None)
     g.text((40, 26), f"Le même rouleau, le même appel — seul le budget de générations change",
            font=f_t, fill=TEXTE)
     g.text((40, 50), f"un point = un tirage ; rouge = la trace s'auto-intersecte ; "
@@ -237,6 +268,13 @@ def main() -> int:
                                   f"{', '.join(ecartes)} — moins de deux tirages, ou "
                                   f"buté sur le nouveau plafond", font=f_n,
                fill=(120, 120, 120))
+
+    # ⚠⚠ Une figure a moitie traduite a l'air traduite. On REFUSE de l'ecrire.
+    if a.anglais and g.intraduits():
+        print("des libellés n'ont pas de traduction :", file=sys.stderr)
+        for t in g.intraduits():
+            print(f"    « {t} »", file=sys.stderr)
+        return 1
 
     a.sortie.parent.mkdir(parents=True, exist_ok=True)
     img.save(a.sortie)
