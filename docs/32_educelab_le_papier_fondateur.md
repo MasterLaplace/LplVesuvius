@@ -140,6 +140,12 @@ ne sont mesurés. Or les trois sont mesurables **sans jamais connaître le conte
 > **quantifiée** de « consistent with ». Le papier a nommé le contrôle et ne l'a pas
 > outillé — trois ans plus tard, personne ne l'a fait.
 
+✅ **Construit le 2026-08-22** → [`45`](45_consistent_with_quantifie.md). Les quatre
+grandeurs sont mesurées sur 190 cartes publiées, et le résultat est plus intéressant que
+prévu : deux d'entre elles retrouvent le classement du contraste d'encre (épaisseur de trait
+AUC 0,857, netteté 0,753), et la **séparation des lignes va à contre-sens** (0,319). La
+phrase du papier réunit trois propriétés qui, mesurées, ne vont pas ensemble.
+
 ### 4.3 ⭐⭐⭐ Le contrôle négatif parfait est dans leurs données, et le pipeline le jette
 
 Le papier n'a **aucun contrôle négatif au sens fort**. Il rapporte un FPR de 0,051, mais

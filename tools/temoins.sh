@@ -589,6 +589,13 @@ run "géométrie de la chaîne"   uv run python "$ROOT/analysis/src/geometrie_ch
 # publier « 49 paires eloignees » pour 45 mesurees.
 run "carte des segments"       uv run python "$ROOT/analysis/src/carte_segments.py" --verifier
 run "langue des figures"       uv run python "$ROOT/analysis/src/langue.py"
+# ⚠⚠ La typographie : ses temoins tournent sur des pages SYNTHETIQUES dont on a choisi
+# l'interligne et l'epaisseur de trait. C'est ce qui rend l'instrument falsifiable --
+# mesurer un vrai corpus ne dit jamais si la mesure est juste, faute de reference.
+# Et ses controles negatifs (une marge vierge, du bruit) sont ce qui empeche
+# « periodique » de vouloir dire « il y a des pixels ».
+run "typographie sans lecture" uv run python "$ROOT/analysis/src/typographie.py" --verifier
+run "figure typographique"     uv run python "$ROOT/analysis/src/figure_typographie.py" --verifier
 # ⚠⚠ L'appariement surface/volume : le script de campagne prenait `head -1` de deux
 # listages S3, ce qui est juste tant qu'un rouleau n'a qu'un scan et FAUX SANS UN MOT
 # des qu'il en a deux. Le temoin sonde justement le cas ou les deux listes ne se trient

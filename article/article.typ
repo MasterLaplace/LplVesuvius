@@ -4,7 +4,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 #set document(
   title: "Measuring segmentation quality without ground truth in virtual unwrapping",
-  author: "MasterLaplace",
+  author: "Guillaume Papineau",
 )
 #set page(
   paper: "a4",
@@ -38,6 +38,12 @@
 // séparés. On définit donc l'unité comme un seul mot.
 #let um = [μm]
 
+// ⚠ L'ORCID est l'identifiant qui SURVIT aux changements d'adresse — c'est exactement ce
+// pour quoi il existe, et un préprint reste en ligne bien plus longtemps qu'une adresse
+// d'école. Renseigner ici (« 0000-0000-0000-0000 ») et la ligne s'affiche ; laisser vide
+// et elle disparaît, plutôt qu'un gabarit qui partirait tel quel.
+#let ORCID = ""
+
 // Un raccourci pour les réserves, très utilisé dans ce texte.
 #let caveat(body) = block(
   inset: (left: 0.8em, y: 0.5em), stroke: (left: 1.6pt + rgb("#b03030")),
@@ -57,10 +63,16 @@
     #text(size: 11.5pt)[and three artefacts the measurement reveals]
   ]
   #v(1.1em)
-  #text(size: 10.5pt)[MasterLaplace]
-  #v(0.2em)
+  #text(size: 10.5pt)[Guillaume Papineau]
+  #v(0.3em)
   #text(size: 9pt, style: "italic")[Independent researcher]
-  #v(0.2em)
+  #v(0.25em)
+  #text(size: 9pt, font: ("DejaVu Sans Mono", "DejaVu Sans"))[guillaume.papineau\@epitech.eu]
+  #if ORCID != "" [
+    #v(0.2em)
+    #text(size: 9pt)[ORCID #ORCID]
+  ]
+  #v(0.5em)
   #text(size: 9pt)[Preprint --- 22 August 2026]
 ]
 

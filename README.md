@@ -350,12 +350,16 @@ mega-octets ».
 ### La chaine de production, et les gardes du depot
 
 ```bash
-./tools/temoins.sh                  # 35 batteries, 1134 controles hors ligne, tous verts
+./tools/temoins.sh                  # 37 batteries, 1163 controles hors ligne, tous verts
                                     # ⚠ ces deux chiffres sont ECRITS PAR LE SCRIPT dans
                                     # docs/temoins.json et gardes comme tous les autres :
                                     # la version precedente disait 18 et 741, recopies a
                                     # la main et donc faux depuis longtemps
 ./validate.sh                       # la chaine complete : tests + builds + boot + parite
+
+# « consistent with » quantifie : interligne, echelle, couverture, epaisseur de trait,
+# mesures sans lire une lettre (docs/45)
+./tools/lancer.sh --fond tools/campagne_typographie.sh
 
 # la carte des segments publies d'un rouleau : y a-t-il deux patchs d'UNE MEME feuille ?
 uv run python analysis/src/carte_segments.py --rouleau PHerc1447 \

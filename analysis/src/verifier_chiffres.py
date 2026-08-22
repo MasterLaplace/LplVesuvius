@@ -605,6 +605,27 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                     [f"{d['plafond_avant']} générations contre {d['plafond_apres']}",
                      f"{d['plafond_avant']} contre {d['plafond_apres']}"], p.name))
 
+    # ⚠⚠ La typographie (`45`) : son resultat tient dans un tableau d'AUC, donc dans des
+    # nombres, et le plus important d'entre eux est celui qui va A CONTRE-SENS. Un chiffre
+    # inattendu est le premier qu'on est tente d'arrondir dans le bon sens.
+    p = racine / "docs" / "typographie.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        cr = d.get("croisement_encre") or {}
+        for nom, court in (("epaisseur_trait_px", "epaisseur de trait"),
+                           ("nettete_mediane", "nettete du pic"),
+                           ("part_periodique", "separabilite des lignes")):
+            g = (cr.get("grandeurs") or {}).get(nom)
+            if g and g.get("auc") is not None:
+                ajoute(f"AUC de la {court}", g["auc"], 3, p.name)
+                if g.get("rho") is not None:
+                    ajoute(f"rho de la {court}", g["rho"], 3, p.name, signe=True)
+        r = d.get("resume") or {}
+        if r.get("PHercParis4"):
+            x = r["PHercParis4"]
+            out.append(("cartes ecrites du premier rouleau",
+                        [f"{x['cartes_ecrites']}/{x['n']}"], p.name))
+
     p = racine / "docs" / "temoins.json"
     if p.exists():
         d = json.loads(p.read_text())
