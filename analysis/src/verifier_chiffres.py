@@ -755,6 +755,19 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         if c:
             ajoute(f"rho du tri, {nom}", c[0]["rho"], 3, q.name, signe=True)
 
+    p = racine / "docs" / "paris4_2x2.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        for t in d.get("cases") or []:
+            if t.get("alpha_median") is not None:
+                ajoute(f"alpha, {t['prediction']} sur graine {t['graine']}",
+                       t["alpha_median"], 2, p.name, signe=True)
+        e = d.get("effet_prediction") or {}
+        if e.get("max") is not None:
+            ajoute("ecart des deux predictions", e["max"], 2, p.name)
+        if d.get("bruit_retenu") is not None:
+            ajoute("bruit retenu du 2x2", d["bruit_retenu"], 2, p.name)
+
     p = racine / "docs" / "audit_profils.json"
     if p.exists():
         d = json.loads(p.read_text())

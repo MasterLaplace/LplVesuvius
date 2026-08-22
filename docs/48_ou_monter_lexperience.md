@@ -143,6 +143,40 @@ qui change est le nombre de fenêtres. C'est une vraie différence de mesure, et
 pourquoi **les deux prédictions sont rendues à la même échelle** : la comparaison reste une
 comparaison, seule la valeur absolue cesse d'être comparable à un run à l'échelle 1.
 
+### ✅ Le 2×2 croisé tranche — et la question se dissout
+
+⚠⚠ Tracer chaque prédiction à **sa** graine confondait « quelle prédiction » avec « quel
+endroit » : les deux graines tombent à des kilovoxels l'une de l'autre. Les deux prédictions
+couvrant le même volume, une graine y est une coordonnée valide des deux côtés — d'où les
+quatre cellules.
+
+| | graine de `ps256` | graine de `m7` |
+|---|---|---|
+| prédiction **`ps256`** | α = **+1,12** | ⚠⚠ **indécidable** (profil plat) |
+| prédiction **`m7`** | α = **+0,95** | ⚠⚠ **indécidable** (profil plat) |
+
+| facteur | écart | verdict |
+|---|---:|---|
+| **prédiction** | 0,17 | ⚠ **sous le bruit** de 0,20 — indistinguables |
+| **endroit** | catégorique | ⭐ les **2** cellules indécidables sont du même côté |
+
+> ⭐⭐ **La question bloquante se dissout, comme celle de [`47`](47_le_critere_doit_etre_relatif.md).**
+> Il n'y a pas de bonne prédiction à choisir : les deux se comportent pareil au même endroit,
+> et ce qui décide est **la graine**. L'effort doit aller là.
+
+⚠ Trois réserves, et elles comptent :
+- **un tirage par cellule**, alors que le traceur *est* un tirage — la même graine dans la
+  même prédiction a rendu α = +0,89 puis **+1,12** (0,23 d'écart, plus que la résolution).
+  `REPETITIONS` existe pour ça et vaut 1 ici ;
+- les deux α mesurables valent **≈ 1** : les deux prédictions sont indistinguables *et*
+  mauvaises à cet endroit ;
+- l'effet catégorique repose sur **deux** cellules.
+
+Instrument : [`analysis/src/comparer_predictions.py`](../analysis/src/comparer_predictions.py)
+(19 témoins). ⭐ Il **refuse** quand l'écart est sous le bruit, et le bruit n'est pas choisi :
+c'est le plus grand de la résolution que `test_convergence` déclare et de l'étendue
+intra-cellule mesurée.
+
 ⚠ Et les deux aires valent **0,317 cm²** à cinq chiffres près — les deux traces butent sur
 le même plafond de 60 générations. C'est la troncature de `35` : deux traces coupées au même
 endroit ont la même aire pour une raison qui n'a rien à voir avec la prédiction. **La

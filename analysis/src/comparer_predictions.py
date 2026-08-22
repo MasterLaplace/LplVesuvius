@@ -45,11 +45,18 @@ def charger(dossier: Path) -> list[dict]:
         if not m:
             continue
         d = json.loads(p.read_text(encoding="utf-8"))
-        out.append({"prediction": m.group(1), "graine": m.group(2),
-                    "tirage": int(m.group(3) or 1), "fichier": p.name,
-                    "verdict": d.get("verdict"), "alpha": d.get("alpha"),
-                    "raison": d.get("raison"), "au_bord": d.get("au_bord"),
-                    "serie": d.get("serie")})
+        # ⚠⚠ `test_convergence` enveloppe ses verdicts dans une clé `series`. Ma première
+        # version lisait la racine, donc `alpha` valait None pour TOUTES les cellules -- et
+        # l'instrument a imprimé « aucun facteur ne ressort du bruit » avec assurance sur
+        # une lecture vide. C'est le même défaut qu'`eligibilite_aval` a eu le matin même :
+        # un lecteur écrit contre une forme SUPPOSÉE, et un vide silencieux qui satisfait la
+        # conclusion. On lit la forme réelle, et on refuse plus bas si rien n'a été lu.
+        for x in (d.get("series") or ([d] if "verdict" in d else [])):
+            out.append({"prediction": m.group(1), "graine": m.group(2),
+                        "tirage": int(m.group(3) or 1), "fichier": p.name,
+                        "verdict": x.get("verdict"), "alpha": x.get("alpha"),
+                        "raison": x.get("raison"), "au_bord": x.get("au_bord"),
+                        "serie": x.get("serie")})
     return out
 
 
@@ -254,6 +261,20 @@ def verifier() -> int:
     v("aucune indécidabilité ⇒ aucun verdict catégorique",
       not [x for x in croiser(plat, 0.2)["verdicts"] if x.get("categorique")])
 
+    # ⚠⚠ LE REFUS SUR UNE LECTURE VIDE, et la sonde sur le VRAI fichier -- une fixture
+    # ecrite d'apres le code ne prouve que leur accord, et c'est ainsi que la cle `series`
+    # est passee inapercue.
+    reel = Path(__file__).resolve().parents[2] / "docs"
+    vus = charger(reel) if reel.is_dir() else []
+    if vus:
+        v("le lecteur tire un verdict des VRAIS fichiers",
+          any(x.get("verdict") for x in vus), f"{len(vus)} cellule(s) sans verdict")
+        v("... et un α d'au moins une cellule",
+          any(x.get("alpha") is not None for x in vus))
+        saute = ""
+    else:
+        saute = "  ⚠ 2 contrôles SAUTÉS : aucun verdict de campagne sous docs/"
+
     # ⚠⚠ Une cellule INDECIDABLE n'est pas une cellule a alpha nul.
     mixte = [{"prediction": "A", "graine": "a", "tirage": 1, "alpha": None,
               "verdict": "indecidable"}, cel("B", "a", 1.00)]
@@ -265,7 +286,7 @@ def verifier() -> int:
     if echecs:
         print(f"\nECHEC ({echecs} failures, {controles} checks)")
         return 1
-    print(f"ALL PASS ({echecs} failures, {controles} checks)")
+    print(f"ALL PASS ({echecs} failures, {controles} checks){saute}")
     return 0
 
 
@@ -290,6 +311,14 @@ def main() -> int:
         print(f"aucune cellule sous {a.docs} — lancer tools/tracer_prediction_paris4.sh",
               file=sys.stderr)
         return 1
+    # ⚠⚠ REFUSER plutôt que conclure sur du vide. Des cellules trouvées mais dont aucune ne
+    # porte de verdict veut dire que la forme du fichier n'est pas celle qu'on lit — et
+    # « aucun facteur ne ressort du bruit » est satisfait par l'absence de données, donc
+    # l'instrument rendrait un verdict confiant et faux. Payé deux fois le 2026-08-22.
+    if not any(c.get("verdict") for c in cellules):
+        print(f"{len(cellules)} cellule(s) lues et AUCUNE ne porte de verdict — la forme "
+              f"des fichiers n'est pas celle attendue", file=sys.stderr)
+        return 2
     d = croiser(cellules, RESOLUTION)
 
     print(f"\n  {len(cellules)} cellule(s), résolution déclarée de α : {RESOLUTION}")
