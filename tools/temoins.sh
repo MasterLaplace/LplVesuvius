@@ -661,6 +661,10 @@ run "figure des deux pannes"   uv run python "$ROOT/analysis/src/figure_deux_pan
 # zero octet, et un lien vers un fichier vide s'affiche exactement comme un lien vers rien.
 run "images des documents"     "$ROOT/tools/images_des_docs.sh" --verifier
 run "liens d'images valides"   "$ROOT/tools/images_des_docs.sh"
+# ⚠⚠ La figure du 2×2. Sa sonde de linearite a attrape un vrai defaut d axe : `int` tronque,
+# donc le milieu exact tombait un pixel a gauche quand la division ne se ferme pas en
+# binaire. Placer un point sur un axe est un ARRONDI.
+run "figure du 2×2"            uv run python "$ROOT/analysis/src/figure_2x2.py" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
