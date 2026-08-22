@@ -1239,6 +1239,39 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     intermédiaires avant de conclure qu'une provenance n'est pas publiée.
 
 
+60. ⚠⚠ **Un chien de garde peut surveiller la mauvaise chose et tuer ce qui va bien.** Ma
+    première version de `tools/rendre_surveille.sh` abandonnait un rendu dont la **sortie**
+    ne grossissait plus. Or `vc_render_tifxyz` télécharge tout avant d'écrire : mesuré,
+    `rchar` passait de 6,56 à 8,21 Mo en douze secondes pendant que `wchar` restait à 500
+    octets et la sortie à 328. Le garde aurait tué un rendu sain et on en aurait conclu
+    « injouable » sur un rendu qui marchait. ⭐ Surveiller l'**activité du processus**
+    (`/proc/<pid>/io`, somme lecture + écriture) et pas son résultat.
+61. ⚠⚠ **α ≈ 1 a deux causes, et le verdict n'en nommait qu'une.** Un profil plat n'a pas de
+    pic, donc l'écart rapporté est le **bord de la fenêtre** — et le rapport de deux bords
+    vaut le rapport des fenêtres, donc α = 1 **par identité arithmétique**. Le verdict
+    imprimait quand même « le pic s'éloigne avec la fenêtre », une phrase sur un objet qui
+    n'existe pas. Voir [`49`](docs/49_alpha_ne_separe_pas_deux_pannes.md). ⭐ Aucun verdict de
+    convergence n'est touché — mesuré, 0 série convergente sur 107.
+62. ⚠⚠ **Une fixture écrite d'après le code ne prouve que leur accord.** Mon lecteur de
+    `table_tirages.json` cherchait la clé `tirages` (le fichier a `n`), a rendu **zéro
+    rouleau traçable**, et le verdict « les deux ensembles sont disjoints » en découlait,
+    parfaitement confiant — un ensemble vide le satisfait. Le témoin n'a rien vu parce que sa
+    fixture utilisait la clé supposée. ⭐ Remède : le lecteur **refuse** au lieu de rendre
+    vide, et une sonde tourne sur le **vrai fichier de résultat**.
+63. ⚠ **Ne pas anticiper un compte, même juste.** Écrire dans les documents le total qu'on
+    prévoit pour le run courant le fait échouer — la garde compare aux totaux du run
+    **précédent**. Prédiction 46/1348, mesure 46/1348, batterie rouge quand même. Lancer,
+    **lire**, écrire, et le run suivant confirme.
+64. ⚠ **Recopier un nombre, c'est perdre ce qui l'accompagne.** J'ai passé les écarts au juge
+    de convergence par `--serie "41:48.0,161:192.0"` et perdu, au passage, l'amplitude et la
+    part au bord que le profil portait — donc le juge n'a pas pu refuser. Le chemin
+    `--profil` construit la série depuis les fichiers eux-mêmes.
+65. ⚠ **Un résumé identique à la décimale est un résultat ET le symptôme d'une colonne
+    recopiée deux fois**, et rien dans le tableau ne les distingue. `04` donnait la même
+    moyenne, médiane, quartiles et σ aux deux populations. ⭐ L'instrument compare désormais
+    les **multiensembles** de valeurs et refuse de dessiner si ce sont les mêmes données.
+
+
 ### ⭐⭐ 2026-08-22 (fin) — la voie du raccordement est fermée, et deux gardes de plus
 
 **Le résultat, pour 4,5 Mo.** `vc_merge_tifxyz` sait raccorder des surfaces mais exige qu'elles
@@ -1481,6 +1514,52 @@ comptes de franchissements de seuil.**
     **Convention à suivre, désormais mesurée** : inline `$…$`, display `$$…$$`, jamais `@f$`.
     ⭐ La règle générale : quand une erreur de syntaxe se corrige, **vérifier la convention
     plutôt que l'expliquer**. Une explication qui sonne juste est ce qui empêche de regarder.
+
+## ⭐⭐⭐ 2026-08-22, soirée — le registre est vide, et α a perdu une certitude
+
+**Ce qui tourne** : `tail -f .lances/tracer_prediction_paris4-*.log` — la comparaison des deux
+prédictions de `PHercParis4` à 200 générations et à l'échelle 4.
+
+### Le registre de [`29`](docs/29_ce_qui_reste.md) est vidé de ce qui était actionnable
+
+| | |
+|---|---|
+| **M7** | ✅ [`45`](docs/45_consistent_with_quantifie.md) — « consistent with » quantifié |
+| **M8** | ✅ [`46`](docs/46_le_temoin_negatif.md) — le témoin négatif |
+| **N1** | ✅ graines **et** tirages de `PHerc1203` : 13 rouleaux, 78 tirages, 5/13 bascules |
+| **N3** | ✅ la troncature explique stabilité **et** propreté |
+| **N4** | ✅ [`47`](docs/47_le_critere_doit_etre_relatif.md) — la question se dissout |
+
+### Les quatre constats de la journée, du plus dur au plus fin
+
+1. ⚠⚠⚠ **[`49`](docs/49_alpha_ne_separe_pas_deux_pannes.md) — α ≈ 1 a deux causes.** Un pic
+   qui recule et un profil **plat** donnent le même verdict, et le second sort par identité
+   arithmétique. Audit des **217 profils** : 20 séries sur 107 ne séparent pas les deux.
+   ⭐ Mesuré : le plus petit α non discriminant vaut **+0,8729**, le plus grand α convergent
+   **+0,4222** — **0 verdict positif n'est touché**, les deux populations ne se recouvrent
+   pas. C'est la *formulation* qui sur-affirmait.
+2. ⭐⭐ **[`46`](docs/46_le_temoin_negatif.md) — le modèle rend la même carte sur une feuille
+   et sur une coupe en travers** (ρ = +0,9979, écart 2,9 % contre 95,4 % si étrangères), avec
+   deux entrées distinctes de 11,0 %. La thèse forte est **hors de portée** (le détecteur est
+   inerte ici, σ = 1,7 % de sa valeur utile) et l'instrument **refuse** de la conclure.
+3. ⭐⭐ **[`48`](docs/48_ou_monter_lexperience.md) — traçable et lisible sont disjoints.**
+   13 rouleaux contre 3, intersection **vide**. L'expérience « réparer sert-il ? » doit être
+   montée sur `PHercParis4`. ⚠ Et le rendu à 2,4 µm coûte **plus de douze heures** par fenêtre
+   à l'échelle 1 — mesuré sur `/proc/<pid>/io`, pas estimé.
+4. ⭐ **[`04`](docs/04_experience_excision.md) recalculé** : U, p et δ reproduits exactement,
+   plus une réserve neuve — le niveau 0 est du **vide** et pèse 3,4 % ; sans lui p = 0,504 et
+   la conclusion **survit**.
+
+### Ce qui a changé dans l'outillage, et qu'il faut connaître
+
+- `test_convergence.py` a un chemin **`--profil`** : il lit l'écart, l'amplitude et la part au
+  bord dans le même fichier, donc il peut **refuser**. Le préférer à `--serie`.
+- `verifier_chiffres.py` a enfin **son propre auto-test** (`--verifier`), dit **où** vit une
+  valeur périmée, et liste les documents dont **aucun** chiffre n'est gardé (7 sur ~50).
+- `tools/rendre_surveille.sh` abandonne un rendu inactif **en rapportant son débit**.
+- `tools/dossier_soumission.sh` rassemble ce qui part, la liste des figures **dérivée du
+  texte**, et refuse un dossier incomplet.
+- L'article fait **17 pages** et se reconstruit par `./article/build.sh`.
 
 ## 9. Règles de mesure tenues ici
 
