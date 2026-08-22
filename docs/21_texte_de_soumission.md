@@ -407,7 +407,7 @@ nuancer.
 >   consecutive wraps sit 113 µm apart in the *same* angular window — separated, along the
 >   papyrus, by a full circumference we do not have. Gluing them end to end would produce a
 >   band that does not exist. Reaching a length of unrolled papyrus needs a *tangential*
->   chain, and no mode of the tool does that today.
+>   chain — section 13 is what happened when we tried.
 > - ⚠⚠ **We do not know why a wrap fails.** The best predictor of a wrap's α, across four
 >   campaigns and forty wraps, is its **ordinal position in the chain** (ρ = +0.53, p = 0.001)
 >   — better than erosion, arc length, area, or any single-render statistic we tried. Depth is
@@ -422,6 +422,70 @@ nuancer.
 >
 > **Cost**: one `gen_neighbor` call and two renders per wrap. No model, no annotation.
 
+### 13. Growing sideways: one extension triples a published segment — and the cycle has a fixed point
+
+> Section 12 ends on a limit: a radial chain stacks sheets, it does not lengthen one. So we
+> asked the cheapest question we had never asked — **what happens if we let a published
+> segment simply keep growing along itself?**
+>
+> | | useful area | arc | valid vertices | α |
+> |---|---:|---:|---:|---:|
+> | published segment, as downloaded | 4.28 cm² | 21.9 mm | 59 % | **+0.000** |
+> | after one extension | **12.97 cm²** | **37.2 mm** | **96 %** | **+0.000** |
+>
+> ⭐ **Three times the useful area, 70 % more arc, and the convergence test still does not
+> condemn it.** This is the largest converging surface this work has produced, and it costs one
+> call.
+>
+> ⚠⚠ **But the first time we measured it, the result was a coin flip, and saying so is the
+> point.** The growth mode draws from an unseeded generator and runs multi-threaded: three runs
+> of *identical* parameters gave 0, 596 and 0 self-intersections, and α of +0.000, +0.422,
+> +0.000. Pinning the seed and forcing a single thread makes it reproducible — two runs then
+> give the same mesh, bit for bit. Every number above is from the pinned configuration. A
+> result that only replicates two times in three is not a result, and it took a repeat to see
+> it.
+>
+> ⚠⚠ **More growth does not give more surface.** The budget is the one knob, and past a point
+> it fails hard rather than gradually:
+>
+> | growth budget | area | self-intersections | α |
+> |---:|---:|---:|---:|
+> | **100** | 12.97 cm² | ⭐ **0** | ⭐ **+0.000** |
+> | 200 | 28.62 cm² | 25 036 | **+1.313** — across the stack |
+> | 200, in two sessions of 100 | 50.30 cm² | 4 996 | +1.040 |
+>
+> Splitting the budget helps a great deal and still does not save it. What decides the outcome
+> is not the size of the step but **how clean the surface it starts from is** — measured on its
+> periphery, which is where a growth mode's newest and worst vertices live.
+>
+> ⭐⭐ **That gives a repair, and it works.** Every vertex carries the generation at which it was
+> created, so trimming the late periphery is a filter, not a guess. Trimming the extension to
+> its first ten generations returns **6.02 cm² with a periphery as clean as the source's** —
+> **41 % more validated material than the published segment**, at α = +0.000.
+>
+> ⚠⚠ **And then the cycle closes on itself.** Extending *that* clean surface again converges
+> too (α = +0.000) — but trimming the result back to a clean periphery returns 6.02 cm² again,
+> exactly. **The trim-and-extend cycle does not diverge; it converges to a fixed point near
+> 6 cm².** Each turn regains what it just gave up. We report this because a cycle that appears
+> to work for one iteration is exactly what a reader would extrapolate from, and it does not.
+>
+> ⚠⚠ **The remaining route — stitching published segments together — has no candidate.** The
+> tool for it exists (`vc_merge_tifxyz`: patch-index overlap, RANSAC, joint affine bundle
+> adjustment, TPS RBF, N-way EDT blending) and it needs surfaces that *overlap*. This scroll
+> has **15 published segments**, and 51 of their 105 pairs do overlap by bounding box — but a
+> box overlap cannot tell "two patches of one sheet" from "two adjacent sheets", which in a
+> scroll occupy nearly the same volume. Measuring the median point-to-point gap instead:
+> **0 pairs under 40 µm**, 2 between 40 and 250 µm, the rest further. **The closest pair in the
+> whole scroll is still 79 µm apart** — twice the same-sheet threshold, and about the sheet
+> spacing we measured. The published segmentation of this scroll is a set of samples, **one
+> patch per sheet**, not a tiling of one sheet. Cost of establishing this: 4.5 MB and a few
+> seconds, against building a volpkg for a merge that would have found no edges.
+>
+> **What we claim, exactly**: any published segment that converges can be **tripled once**, and
+> **grown by 41 % of clean, validated surface permanently**, both at α = +0.000 and
+> reproducibly. That is a real gain on already-validated material. It is not a continuous
+> strip, and both named routes to one are now measured and closed — each for its own reason.
+
 ---
 
 ## Ce qu'il reste à faire avant d'envoyer
@@ -429,8 +493,10 @@ nuancer.
 | # | quoi |
 |---|---|
 | 1 | publier le dépôt (`tracecheck/` au minimum) et mettre l'adresse dans le texte |
-| 2 | ~~revérifier chaque chiffre contre son fichier de sortie~~ ✅ **c'est une commande maintenant** — `analysis/src/verifier_chiffres.py` recalcule les 12 chiffres depuis leurs JSON et les cherche littéralement dans les documents. Sort **1** si l'un manque, **2** si un fichier de résultat est absent (sinon il passerait au vert en ne vérifiant rien) |
+| 2 | ~~revérifier chaque chiffre contre son fichier de sortie~~ ✅ **c'est une commande maintenant** — `analysis/src/verifier_chiffres.py` recalcule 85 chiffres depuis leurs JSON et les cherche littéralement dans les documents. Sort **1** si l'un manque, **2** si un fichier de résultat est absent (sinon il passerait au vert en ne vérifiant rien) |
+| 2 bis | ~~relire la transcription anglaise du corps~~ ✅ **`--soumission docs/21…md`** — les chiffres que le corps cite doivent être trouvés **dans ce document-là**, pas seulement quelque part dans le dépôt. ⚠ Sans ça, la recherche globale était satisfaite par la prose française source et une faute de frappe à la recopie passait : la sonde `12,97 → 12,79` le montre |
 | 3 ter | ⭐⭐ joindre `43_optimum_du_pas.png` (la courbe en U du pas du rayon) et `44_geometrie_chaine.png` (où la chaîne se trouve dans le rouleau) — la section 12 ne se lit pas sans la première, et la seconde est ce qui rend honnête la limite « une colonne, pas une bande » |
+| 3 quater | ⭐⭐ joindre `44_ecarts_segments.png` (la distribution des écarts entre segments publiés) et `44_extension.jpg` — la **section 13** en dépend : le tableau y donne « 0 candidat », et un compte de zéro se lit comme un résultat faible tant qu'on n'a pas vu le **trou d'un facteur deux** sous le seuil |
 | 3 bis | ⭐ joindre `38_convergence.png` et `38_en_travers.png` — la section 11 ne se lit pas sans elles : l'une montre les deux pentes, l'autre montre à quoi ressemble une surface posée en travers (des laminations concentriques, pas du papyrus) |
 | 3 | joindre les deux figures de champ, `profondeur_deux_cas.png`, **et les deux figures de `25`** — `25_signatures.png` surtout, qui met le critère visuel du règlement sur un axe mesurable |
 | 4 | ⚠ décider si le corps part en anglais — c'est la seule décision de forme ouverte |

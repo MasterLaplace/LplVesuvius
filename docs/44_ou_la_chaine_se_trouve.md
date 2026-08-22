@@ -597,6 +597,12 @@ Rogner l'extension 3 dans la bonne plage de générations :
 | cycle 2, rogné à gen ≤ 103 | 6,87 cm² | +0,000 | 3 % |
 | cycle 2, rogné à gen ≤ 106 | 7,51 cm² | +0,000 | 2 % |
 
+Les deux verdicts sortent du chemin de jugement partagé, appelé par
+[`tools/juger_rognages.sh`](../tools/juger_rognages.sh) — `tools/juger_rognages.sh
+data/rogne_cycle2 cycle2_`. ⚠ L'étiquette fait partie du **nom** du résultat, donc elle est
+écrite dans le script : sans elle `docs/cycle2_gen103.json` n'avait aucun producteur dans
+l'arbre, et l'audit des artefacts le signalait — à raison, la commande vivait dans un terminal.
+
 ⚠⚠ **Aucun des deux ne revient à 0 %.** Et le seul moyen d'y revenir est de rogner sous la
 génération 100 — ce qui, on l'a vu, rend **exactement** la surface du cycle 1, 6,02 cm². Les
 options du second tour sont donc : 6,02 cm² **propre** (identique au tour précédent), ou 7,51
@@ -618,8 +624,8 @@ La voie qui restait nommée était de partir de plusieurs segments officiels et 
 ajustement de faisceau affine conjoint, TPS RBF, fusion EDT à N voies. Il exige des surfaces
 **qui se recouvrent**.
 
-⭐ Le dépôt public de `PHerc1447` en publie **quinze**, et ce dépôt n'en avait jamais utilisé
-qu'un. La question — se recouvrent-ils ? — se lit sans télécharger un maillage : leurs
+⭐ Le dépôt public de `PHerc1447` en publie **15 segments**, et ce dépôt n'en avait jamais
+utilisé qu'un. La question — se recouvrent-ils ? — se lit sans télécharger un maillage : leurs
 `meta.json` portent une boîte englobante. **51 paires sur 105 se recouvrent d'au moins 5 %**,
 beaucoup à 90–100 %.
 
@@ -634,9 +640,36 @@ Les maillages font 0,1 Mo par canal, donc les quinze coûtent **4,5 Mo** :
 |---|---|---:|
 | **< 40 µm** | deux patchs de la **même feuille** — raccordables | ⚠⚠ **0** |
 | 40 à 250 µm | nappes **voisines** — à ne surtout pas fusionner | 2 *(79 et 89 µm)* |
-| ≥ 318 µm | plusieurs feuilles d'écart | 49 |
+| ≥ 318 µm | plusieurs feuilles d'écart | 45 |
+| *hors de portée* | aucun point à moins de 432 µm — donc éloignées aussi | 4 |
 
-> **Aucun des quinze segments publiés n'est un patch de la même feuille qu'un autre.** La
+Soit **0 paire sous 40 µm**, **2 paires entre 40 et 250 µm**, et le reste
+— **45 mesurées et 4 hors de portée** — à plusieurs feuilles d'écart.
+
+![les écarts entre segments publiés, paire par paire](images/44_ecarts_segments.png)
+
+⭐ **Ce que la figure ajoute au tableau.** Un compte de zéro se lit comme « on n'a pas
+trouvé », c'est-à-dire comme un résultat faible. La distribution montre autre chose : il n'y a
+pas *un peu* moins de candidats que prévu, il y a un **trou d'un facteur deux** entre le seuil
+et la paire la plus proche du rouleau. Elle est produite par
+[`analysis/src/figure_segments.py`](../analysis/src/figure_segments.py), dont le témoin vérifie
+que les quatre bandes **totalisent** les paires jugeables — la sonde qui aurait attrapé la
+faute corrigée juste en dessous.
+
+⚠ **Correction d'un chiffre publié la veille.** La première version de ce tableau écrivait 49
+dans la dernière ligne : elle supposait que les 51 paires recouvrantes avaient toutes été
+mesurées, alors que 4 ne l'ont pas été. L'outil rendait `None` pour trois raisons différentes —
+maillage illisible, patch trop maigre, *aucun point à moins de la marge* — et seule la
+troisième est une mesure, celle qui dit « ces deux nappes sont loin ». `ecart_entre` rend
+désormais une **raison** à côté de sa valeur, et `verifier_chiffres.py` recompte les quatre
+bandes depuis le JSON. Personne ne relit une somme de trois nombres ; une machine, si.
+
+⚠ **Et la paire la plus proche du rouleau est encore à 79 µm** — près du double du seuil de
+même-feuille, et de l'ordre de l'espacement entre nappes voisines mesuré au §4 (113 µm). Ce
+n'est pas « on n'a pas trouvé de candidat » : c'est **la bande des candidats est vide**, et son
+plus proche voisin est à deux fois le seuil.
+
+> **Aucun des 15 segments publiés n'est un patch de la même feuille qu'un autre.** La
 > segmentation publiée de ce rouleau est un ensemble d'échantillons **un patch par feuille**,
 > pas le pavage d'une feuille. Il n'y a donc rien à raccorder, et `vc_merge_tifxyz` n'a pas de
 > candidat ici.

@@ -4,6 +4,14 @@
 # ⚠ Un script plutot qu'une commande tapee : c'est une mesure dont le resultat sera cite, donc
 # son calcul doit etre dans l'arbre. Il ne fait que boucler sur les rognages et appeler le
 # chemin de jugement PARTAGE — aucune logique propre, donc rien qui puisse diverger.
+#
+# Les deux invocations reellement passees, ecrites ici parce que l'etiquette fait partie du
+# NOM du resultat : `docs/cycle2_gen103.json` n'est tracable que si `cycle2` apparait dans
+# l'arbre. Sans elles, l'audit des artefacts signalait deux JSON sans producteur — et il
+# avait raison, la commande vivait dans un terminal.
+#
+#   tools/juger_rognages.sh                                   # cycle 1 -> docs/rognage_gen*.json
+#   tools/juger_rognages.sh data/rogne_cycle2 cycle2_         # cycle 2 -> docs/cycle2_gen*.json
 set -u
 cd "$(dirname "$0")/.." || exit 2
 ROOT=$PWD

@@ -32,6 +32,27 @@ import json
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from carte_segments import MEME_FEUILLE_UM, VOISINES_UM  # noqa: E402
+
+
+# ⚠⚠ **Le document qui PART merite son propre controle.** Les chiffres du dossier sont
+# recopies a l'anglaise (`12.97`) depuis une prose francaise (`12,97`), donc chacun traverse
+# une transcription a la main que rien ne relisait : la recherche « le chiffre apparait
+# quelque part » est satisfaite par le document source, et une faute de frappe dans le
+# dossier passe. Les entrees nommees ici doivent apparaitre DANS le document de soumission,
+# pas seulement dans un document du depot.
+CITES_PAR_LA_SOUMISSION = (
+    "aire utile de l'extension",
+    "arc de l'extension",
+    "sommets valides de l'extension",
+    "segments publies du rouleau",
+    "paires qui se recouvrent",
+    "paires de la meme feuille",
+    "paires de nappes voisines",
+    "ecart de la paire la plus proche",
+)
+
 
 def normaliser(t: str) -> str:
     """Aplatit ce qui diffère typographiquement sans rien dire de la valeur.
@@ -268,9 +289,11 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             e = bons[0]
             out.append(("aire utile de l'extension",
                         [f"**{fr(e['aire_valide_cm2'], 2)} cm²**",
-                         f"{fr(e['aire_valide_cm2'], 2)} cm²"], p.name))
+                         f"{fr(e['aire_valide_cm2'], 2)} cm²",
+                         f"{en(e['aire_valide_cm2'], 2)} cm²"], p.name))
             out.append(("arc de l'extension",
-                        [f"**{fr(e['arc_mm'], 1)} mm**", f"{fr(e['arc_mm'], 1)} mm"], p.name))
+                        [f"**{fr(e['arc_mm'], 1)} mm**", f"{fr(e['arc_mm'], 1)} mm",
+                         f"{en(e['arc_mm'], 1)} mm"], p.name))
             out.append(("sommets valides de l'extension",
                         [f"**{e['fraction_valide'] * 100:.0f} %**",
                          f"{e['fraction_valide'] * 100:.0f} %"], p.name))
@@ -476,6 +499,50 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         out.append(("taille de la mosaique",
                     [f"{d['largeur_px']} × {d['hauteur_px']} px"], p.name))
 
+    # ⚠⚠ La carte des segments publies : la conclusion « il n'y a rien a raccorder »
+    # repose entierement sur des COMPTES, et un compte est ce qui derive le plus
+    # silencieusement. Le premier jet du document publiait « 49 paires eloignees » la ou
+    # 45 avaient ete mesurees — les 4 autres etant hors de portee, donc eloignees pour une
+    # raison que le tableau ne disait pas. Personne ne relit une somme de trois nombres.
+    p = racine / "docs" / "segments_PHerc1447.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        segs, paires = d["segments"], d["paires"]
+        n = len(segs)
+        mes = sorted((x for x in paires if x.get("ecart_um") is not None),
+                     key=lambda x: x["ecart_um"])
+        hors = [x for x in paires if x.get("raison") == "hors_portee"]
+        proches = [x for x in mes if x["ecart_um"] < MEME_FEUILLE_UM]
+        voisines = [x for x in mes if MEME_FEUILLE_UM <= x["ecart_um"] < VOISINES_UM]
+        loin = [x for x in mes if x["ecart_um"] >= VOISINES_UM]
+        out.append(("segments publies du rouleau",
+                    [f"{n} segments", f"{n} published segments"], p.name))
+        out.append(("paires qui se recouvrent",
+                    [f"{len(paires)} paires sur {n * (n - 1) // 2}",
+                     f"{len(paires)} of {n * (n - 1) // 2}",
+                     f"{len(paires)} of their {n * (n - 1) // 2} pairs"], p.name))
+        out.append(("paires de la meme feuille",
+                    [f"{len(proches)} paire sous {MEME_FEUILLE_UM:.0f} µm",
+                     f"{len(proches)} pair under {MEME_FEUILLE_UM:.0f} µm",
+                     f"{len(proches)} pairs under {MEME_FEUILLE_UM:.0f} µm"], p.name))
+        out.append(("paires de nappes voisines",
+                    [f"{len(voisines)} paires entre {MEME_FEUILLE_UM:.0f} et "
+                     f"{VOISINES_UM:.0f} µm",
+                     f"{len(voisines)} pairs between {MEME_FEUILLE_UM:.0f} and "
+                     f"{VOISINES_UM:.0f} µm",
+                     f"{len(voisines)} between {MEME_FEUILLE_UM:.0f} and "
+                     f"{VOISINES_UM:.0f} µm"], p.name))
+        out.append(("paires eloignees et hors de portee",
+                    [f"{len(loin)} mesurées et {len(hors)} hors de portée",
+                     f"{len(loin)} measured and {len(hors)} out of reach"], p.name))
+        if mes:
+            # ⚠ « 79 µm » nu se rencontre dans deux autres documents qui parlent d'autre
+            # chose : l'ecriture doit porter son contexte, sinon le controle passe au vert
+            # sur un chiffre homonyme — exactement le defaut que `discriminante` traque.
+            out.append(("ecart de la paire la plus proche",
+                        [f"encore à {mes[0]['ecart_um']:.0f} µm",
+                         f"still {mes[0]['ecart_um']:.0f} µm apart"], p.name))
+
     p = racine / "docs" / "cout_echelle.json"
     if p.exists():
         d = json.loads(p.read_text())
@@ -492,6 +559,10 @@ def main() -> int:
     parser.add_argument("documents", type=Path, nargs="+")
     parser.add_argument("--racine", type=Path,
                         default=Path(__file__).resolve().parents[2])
+    parser.add_argument("--soumission", type=Path,
+                        help="document qui PART : les chiffres de "
+                             "CITES_PAR_LA_SOUMISSION doivent apparaitre dans CELUI-LA, "
+                             "et pas seulement quelque part dans le depot")
     parser.add_argument("--minimum", type=int, default=8,
                         help="nombre minimal de chiffres recalculables ET DISCRIMINANTS. "
                              "⚠ Le plancher porte sur les discriminants, sinon il se "
@@ -548,6 +619,35 @@ def main() -> int:
               f"echec. Les ecrire AVEC leur contexte les rendrait verifiables :")
         for nom, ecritures, source in faibles:
             print(f"    {nom:>40} = {ecritures[0]:<8} ({source})")
+
+    if args.soumission:
+        cible = args.soumission.resolve()
+        t = normaliser(cible.read_text()) if cible.is_file() else None
+        if t is None:
+            print(f"\n⚠ document de soumission introuvable : {cible}", file=sys.stderr)
+            manquants += 1
+        else:
+            connus = {nom for nom, _, _ in attendus}
+            # ⚠ Une entree nommee qui n'existe plus est un controle mort : le nom se
+            # renomme et la liste cesse silencieusement de garder quoi que ce soit.
+            orphelines = [n for n in CITES_PAR_LA_SOUMISSION if n not in connus]
+            if orphelines:
+                print(f"\n⚠ {len(orphelines)} entrée(s) de CITES_PAR_LA_SOUMISSION ne "
+                      f"correspondent à aucun chiffre recalculé — la liste est périmée :")
+                for n in orphelines:
+                    print(f"    {n}")
+                manquants += len(orphelines)
+            print(f"\n{len(CITES_PAR_LA_SOUMISSION) - len(orphelines)} chiffre(s) que le "
+                  f"corps de {cible.name} cite, cherchés DANS CE DOCUMENT :")
+            for nom, ecritures, source in attendus:
+                if nom not in CITES_PAR_LA_SOUMISSION:
+                    continue
+                if any(normaliser(e) in t for e in ecritures):
+                    print(f"    {nom:>36}  ✅")
+                else:
+                    manquants += 1
+                    print(f"    {nom:>36}  ⚠ ABSENT de la soumission — "
+                          f"accepte {', '.join('« ' + e + ' »' for e in ecritures)}")
 
     print()
     if manquants:

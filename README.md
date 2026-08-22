@@ -353,6 +353,10 @@ mega-octets ».
 ./tools/temoins.sh                  # 18 batteries, 741 controles hors ligne, tous verts
 ./validate.sh                       # la chaine complete : tests + builds + boot + parite
 
+# la carte des segments publies d'un rouleau : y a-t-il deux patchs d'UNE MEME feuille ?
+uv run python analysis/src/carte_segments.py --rouleau PHerc1447 \
+     --telecharger data/segments_officiels --json docs/segments_PHerc1447.json
+
 # les instruments qui jugent une TRACE, sans verite terrain
 vc_tifxyz_selfcross --surface <mesh.tifxyz> -o rapport.json   # exit 3 si defaut
 uv run python tracecheck/tracecheck.py --seed <zarr> ...      # ou commencer
@@ -363,6 +367,8 @@ python3 analysis/src/artefacts_orphelins.py --verifier # tout artefact a un prod
 python3 analysis/src/compter_corpus.py                 # les comptes viennent des artefacts
 python3 tracecheck/mutation.py                         # chaque detecteur est PORTEUR
 python3 analysis/src/lire_selfcross.py --verifier       # un verdict qui n'a rien teste est REFUSE
+uv run python analysis/src/verifier_chiffres.py docs/*.md \
+     --soumission docs/21_texte_de_soumission.md          # 93 chiffres recalcules depuis leur JSON
 ```
 
 ⚠⚠ **Les cinq derniers ne mesurent rien du papyrus** — ils mesurent le depot. Ils

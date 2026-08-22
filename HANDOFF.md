@@ -1236,6 +1236,60 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     intermédiaires avant de conclure qu'une provenance n'est pas publiée.
 
 
+### ⭐⭐ 2026-08-22 (fin) — la voie du raccordement est fermée, et deux gardes de plus
+
+**Le résultat, pour 4,5 Mo.** `vc_merge_tifxyz` sait raccorder des surfaces mais exige qu'elles
+se **recouvrent**. Le dépôt public de `PHerc1447` publie **15 segments** — ce dépôt n'en avait
+jamais utilisé qu'un. 51 de leurs 105 paires se recouvrent par boîte englobante, beaucoup à
+90–100 %, mais un recouvrement de boîtes ne distingue pas « deux patchs d'une feuille » de
+« deux nappes voisines » : à 113 µm d'écart elles occupent presque le même volume. Le
+discriminant est la **distance médiane point-à-point** :
+
+| écart médian | ce que ça veut dire | paires |
+|---|---|---:|
+| < 40 µm | patchs de la **même feuille**, raccordables | ⚠⚠ **0** |
+| 40 à 250 µm | nappes **voisines** | 2 *(79 et 89 µm)* |
+| ≥ 318 µm | plusieurs feuilles | 45 mesurées + 4 hors de portée |
+
+> **La segmentation publiée de ce rouleau est un ensemble d'échantillons UN PATCH PAR
+> FEUILLE, pas le pavage d'une feuille.** Les deux voies vers une bande continue sont donc
+> mesurées et fermées : l'extension tangentielle converge vers un point fixe (~6 cm²), et le
+> raccordement n'a aucun candidat. Outil : `analysis/src/carte_segments.py` — il refait la
+> carte en une commande le jour où le dépôt public grandit.
+
+**⚠⚠ Un chiffre publié la veille était faux, et c'est la garde qui l'a dit.** Le tableau
+annonçait 49 paires éloignées : il supposait que les 51 recouvrantes avaient toutes été
+mesurées, alors que 4 ne l'ont pas été. `ecart_entre` rendait `None` pour **trois** raisons
+— maillage illisible, patch trop maigre, *aucun point à moins de 432 µm* — et seule la
+troisième est une mesure (« ces deux nappes sont loin »). Il rend désormais une **raison** à
+côté de sa valeur, et `verifier_chiffres.py` recompte les quatre bandes depuis le JSON.
+⭐ Le témoin a gagné la sonde qui manquait : les bandes doivent **totaliser** les paires
+jugeables.
+
+**⚠⚠ Et une garde neuve, parce que le dossier PART.** Les chiffres de
+[`21`](docs/21_texte_de_soumission.md) sont recopiés **à l'anglaise** (`12.97`) depuis une
+prose française (`12,97`) : la recherche « ce chiffre existe quelque part » était donc
+satisfaite par le document **source**, et une faute de frappe à la recopie passait au vert.
+`verifier_chiffres.py --soumission docs/21…md` exige que les chiffres cités par le corps
+soient trouvés **dans ce document-là**. Sonde faite : transposer `12,97` en `12,79` dans une
+copie fait échouer le contrôle. Câblé dans `tools/temoins.sh`.
+
+**Le dossier est à jour** : la section 12 affirmait « aucun mode de l'outil ne fait de chaîne
+tangentielle **aujourd'hui** » — réfuté par nos propres mesures depuis. Elle renvoie
+maintenant à une **section 13** qui publie l'extension (×3 d'aire utile à α = +0,000), son
+non-déterminisme corrigé, le point fixe du cycle, et la fermeture du raccordement.
+
+⭐ Figure neuve : `docs/images/44_ecarts_segments.png`. Un compte de zéro se lit comme un
+résultat faible ; la distribution montre un **trou d'un facteur deux** sous le seuil — la
+paire la plus proche du rouleau est encore à 79 µm.
+
+**Vérifié** : `tools/temoins.sh` — **TOUS LES TEMOINS PASSENT**, `93 chiffres retrouvés`
+(contre 68 en début de session), 0 script sans appelant, 0 artefact sans producteur.
+⚠ Les deux JSON `docs/cycle2_gen10*.json` étaient orphelins : leur producteur
+`tools/juger_rognages.sh` existait mais l'**étiquette** (`cycle2_`), qui fait partie du nom du
+résultat, ne vivait que dans un terminal. Les deux invocations réelles sont écrites dans le
+script.
+
 ### ⭐⭐ MATIN DU 2026-08-22 — ce que l'extension tangentielle sait faire, et où elle s'arrête
 
 Suite du bloc ci-dessous. Toutes les mesures sont sous graine et `thread_limit: 1`, donc

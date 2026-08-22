@@ -36,6 +36,14 @@ from pathlib import Path
 BASE = "https://vesuvius-challenge-open-data.s3.amazonaws.com"
 META = "mesh/intermediate/tifxyz_original/meta.json"
 
+# ⚠⚠ Les deux seuils qui donnent son verdict a cet outil, nommes ici parce qu'ils sont
+# lus DEUX fois : par l'affichage ci-dessous, et par `verifier_chiffres.py`, qui recompte
+# les paires depuis le JSON pour garantir que la prose ne derive pas. Deux ecritures d'un
+# meme seuil finiraient par ne pas s'accorder, et le desaccord porterait sur la phrase
+# « aucun des quinze segments n'est un patch de la meme feuille » -- la conclusion entiere.
+MEME_FEUILLE_UM = 40.0   # deux patchs d'une meme nappe : raccordables
+VOISINES_UM = 250.0      # deux nappes distinctes mais adjacentes : a ne surtout pas fusionner
+
 
 def lister(rouleau: str, delai: int = 30) -> list[str]:
     """Les noms de segments publies, lus dans le listing S3."""
@@ -93,8 +101,19 @@ def telecharger(rouleau: str, segment: str, dest: Path, delai: int = 120) -> Pat
     return dest if (dest / "z.tif").is_file() else None
 
 
-def ecart_entre(a: Path, b: Path, voxel_um: float = 8.64) -> float | None:
-    """Distance MEDIANE d'un point de `b` au plus proche point de `a`, en µm.
+def ecart_entre(a: Path, b: Path,
+                voxel_um: float = 8.64) -> tuple[float | None, str]:
+    """Distance MEDIANE d'un point de `b` au plus proche point de `a`, en µm, ET pourquoi.
+
+    ⚠⚠ **Rend une raison, parce qu'un `None` nu confondait TROIS faits differents** :
+    un maillage illisible, un patch trop maigre pour qu'une mediane veuille dire quelque
+    chose, et — le cas qui compte — *aucun point de `b` a moins de la marge de `a`*. Le
+    dernier n'est pas une mesure manquante : c'est la mesure « ces deux nappes sont loin ».
+    Les compter comme « inconnues » affaiblirait a tort la conclusion, les compter comme
+    « eloignees » sans le dire la renforcerait a tort. Trouve en recomptant les bandes
+    depuis le JSON : le document publiait 49 paires eloignees la ou 45 avaient ete
+    mesurees, les 4 autres etant hors de portee — donc eloignees, mais pour une raison
+    que le tableau ne disait pas.
 
     ⭐⭐ C'est le discriminant que le recouvrement de boites ne peut pas donner. Deux patchs de
     la MEME feuille qui se recouvrent ont un ecart proche de zero dans leur zone commune ;
@@ -112,12 +131,12 @@ def ecart_entre(a: Path, b: Path, voxel_um: float = 8.64) -> float | None:
 
     pa, pb = g.lire_tifxyz(a), g.lire_tifxyz(b)
     if pa is None or pb is None:
-        return None
+        return None, "illisible"
     pa = pa.reshape(-1, 3)[~np.isnan(g.lire_tifxyz(a).reshape(-1, 3)[:, 0])]
     pb = pb.reshape(-1, 3)
     pb = pb[~np.isnan(pb[:, 0])]
     if len(pa) < 10 or len(pb) < 10:
-        return None
+        return None, "trop_maigre"
     # ⚠⚠ La boite est ELARGIE d'une marge, et le temoin a montre pourquoi : une nappe est
     # plate, donc sa boite peut avoir une epaisseur quasi nulle dans une direction — et une
     # nappe VOISINE, celle qu'on veut justement mesurer a 113 µm, tombe alors entierement
@@ -129,9 +148,9 @@ def ecart_entre(a: Path, b: Path, voxel_um: float = 8.64) -> float | None:
     lo, hi = pa.min(axis=0) - MARGE, pa.max(axis=0) + MARGE
     dedans = np.all((pb >= lo) & (pb <= hi), axis=1)
     if dedans.sum() < 10:
-        return None
+        return None, "hors_portee"
     d, _ = cKDTree(pa).query(pb[dedans], k=1)
-    return float(np.median(d) * voxel_um)
+    return float(np.median(d) * voxel_um), "mesure"
 
 
 def verifier() -> int:
@@ -173,8 +192,23 @@ def verifier() -> int:
                 tifffile.imwrite(d / f"{c}.tif", arr.astype(np.float32))
             return d
         m0, m1, m2 = ecrire("a", 0.0), ecrire("b", 0.0), ecrire("c", 13.1)
-        e_meme = ecart_entre(m0, m1)
-        e_voisin = ecart_entre(m0, m2)
+        e_meme, r_meme = ecart_entre(m0, m1)
+        e_voisin, r_voisin = ecart_entre(m0, m2)
+        v("une mesure reussie se declare comme telle",
+          r_meme == "mesure" and r_voisin == "mesure", f"{r_meme}/{r_voisin}")
+        # ⭐⭐ La sonde qui rend la raison utile : une nappe posee LOIN doit sortir
+        # « hors_portee » et non « illisible ». Sans cette separation, une paire eloignee
+        # et un fichier casse etaient le meme `None`, et le tableau publie a effectivement
+        # compte les quatre paires hors de portee dans une bande mesuree.
+        m3 = ecrire("d", 500.0)
+        e_loin, r_loin = ecart_entre(m0, m3)
+        v("une nappe hors de portee est nommee, pas confondue avec un fichier casse",
+          e_loin is None and r_loin == "hors_portee", f"{e_loin}/{r_loin}")
+        vide = Path(t) / "vide"
+        vide.mkdir()
+        e_nul, r_nul = ecart_entre(m0, vide)
+        v("... et un maillage absent se declare illisible",
+          e_nul is None and r_nul == "illisible", f"{e_nul}/{r_nul}")
         v("deux patchs confondus ont un écart nul", e_meme is not None and e_meme < 1.0,
           f"{e_meme}")
         # 13,1 voxels x 8,64 µm = 113 µm, l'espacement mesure entre nappes de ce rouleau.
@@ -259,25 +293,39 @@ def main() -> int:
                 chemins[x["nom"]] = d
         print(f"  {len(chemins)} maillage(s) sur place\n")
         print(f"  {'écart médian':>14}  paire")
-        mesures = []
+        mesures, ailleurs = [], {}
         for pr in paires:
             if pr["a"] not in chemins or pr["b"] not in chemins:
+                pr["raison"] = "absent"
+                ailleurs["absent"] = ailleurs.get("absent", 0) + 1
                 continue
-            e = ecart_entre(chemins[pr["a"]], chemins[pr["b"]], a.voxel_um)
+            e, raison = ecart_entre(chemins[pr["a"]], chemins[pr["b"]], a.voxel_um)
+            pr["raison"] = raison
             if e is None:
+                ailleurs[raison] = ailleurs.get(raison, 0) + 1
                 continue
             pr["ecart_um"] = e
             mesures.append(pr)
         mesures.sort(key=lambda p: p["ecart_um"])
         for pr in mesures[:14]:
-            marque = "⭐ MEME FEUILLE" if pr["ecart_um"] < 40 else (
-                "nappes voisines" if pr["ecart_um"] < 250 else "éloignées")
+            marque = "⭐ MEME FEUILLE" if pr["ecart_um"] < MEME_FEUILLE_UM else (
+                "nappes voisines" if pr["ecart_um"] < VOISINES_UM else "éloignées")
             print(f"  {pr['ecart_um']:11.0f} µm  {pr['a'][:24]} × {pr['b'][:24]}  {marque}")
-        proches = [p for p in mesures if p["ecart_um"] < 40]
-        print(f"\n  ⭐ {len(proches)} paire(s) sous 40 µm — candidates à un raccordement "
-              f"(deux patchs d'une même feuille).")
-        print(f"     {sum(1 for p in mesures if 40 <= p['ecart_um'] < 250)} paire(s) entre 40 "
-              f"et 250 µm : des nappes VOISINES, à ne surtout pas fusionner.")
+        # ⚠⚠ Les paires qu'on n'a PAS pu mesurer sont dites, pas tues. « hors_portee »
+        # veut dire qu'aucun point de l'une n'approche l'autre a moins de la marge, soit
+        # 432 µm — donc bien plus loin que le seuil de meme-feuille : ce sont des paires
+        # eloignees, et les omettre du compte ferait un tableau dont les bandes ne
+        # totalisent pas les paires.
+        for raison, n in sorted(ailleurs.items()):
+            print(f"  {'—':>11}     {n} paire(s) non mesurée(s) : {raison}"
+                  + ("  (aucun point à moins de 432 µm : donc éloignées)"
+                     if raison == "hors_portee" else ""))
+        proches = [p for p in mesures if p["ecart_um"] < MEME_FEUILLE_UM]
+        print(f"\n  ⭐ {len(proches)} paire(s) sous {MEME_FEUILLE_UM:.0f} µm — candidates à "
+              f"un raccordement (deux patchs d'une même feuille).")
+        print(f"     {sum(1 for p in mesures if MEME_FEUILLE_UM <= p['ecart_um'] < VOISINES_UM)}"
+              f" paire(s) entre {MEME_FEUILLE_UM:.0f} et {VOISINES_UM:.0f} µm : des nappes "
+              f"VOISINES, à ne surtout pas fusionner.")
 
     print("\n  ⚠ Un recouvrement de boîtes est un FILTRE, jamais une preuve : dans un rouleau,")
     print("    deux nappes VOISINES sont à 113 µm l'une de l'autre et leurs boîtes se")

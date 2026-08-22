@@ -571,6 +571,12 @@ run "encre : σ contre témoin"  uv run python "$ROOT/analysis/src/comparer_encr
 # verdict sur rien, et qu'un test incapable d'echouer est ce que ce depot traque.
 run "convergence de la trace"  uv run python "$ROOT/analysis/src/test_convergence.py" --verifier
 run "géométrie de la chaîne"   uv run python "$ROOT/analysis/src/geometrie_chaine.py" --verifier
+# ⚠ Cet outil rend un VERDICT sur une conclusion entiere — « aucun des 15 segments
+# publies n'est un patch de la meme feuille ». Son temoin verifie surtout ses trois
+# REFUS : un maillage illisible, un patch trop maigre, et une nappe hors de portee, que
+# la premiere version confondait dans un seul `None` — et cette confusion a fait
+# publier « 49 paires eloignees » pour 45 mesurees.
+run "carte des segments"       uv run python "$ROOT/analysis/src/carte_segments.py" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
@@ -649,7 +655,13 @@ printf '  %-30s ' "chiffres de la soumission"
 # rapportes « absents » pendant des jours. Meme classe de panne qu'une sentinelle qu'il faut
 # deplacer a chaque ajout : le remede n'est pas de la deplacer mieux, c'est de ne plus avoir
 # a le faire.
-if uv run python "$ROOT/analysis/src/verifier_chiffres.py" "$ROOT"/docs/*.md >/tmp/chiffres.log 2>&1; then
+# ⚠⚠ `--soumission` ajoute le controle que la recherche globale NE PEUT PAS faire : les
+# chiffres du dossier sont recopies a l'anglaise depuis une prose francaise, donc « le
+# chiffre existe quelque part » est satisfait par le document SOURCE et une faute de frappe
+# dans le dossier passe. Sonde faite : transposer 12,97 en 12,79 dans une copie fait
+# echouer le controle, ce qu'il ne faisait pas avant.
+if uv run python "$ROOT/analysis/src/verifier_chiffres.py" "$ROOT"/docs/*.md \
+     --soumission "$ROOT/docs/21_texte_de_soumission.md" >/tmp/chiffres.log 2>&1; then
   printf '✅ %s\n' "$(grep -c '✅' /tmp/chiffres.log) chiffres retrouves"
 else
   printf '❌ ECHEC\n'; sed 's/^/       /' /tmp/chiffres.log | tail -6; FAIL=$((FAIL + 1))
