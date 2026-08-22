@@ -1236,6 +1236,49 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     intermédiaires avant de conclure qu'une provenance n'est pas publiée.
 
 
+### ⭐⭐ MATIN DU 2026-08-22 — ce que l'extension tangentielle sait faire, et où elle s'arrête
+
+Suite du bloc ci-dessous. Toutes les mesures sont sous graine et `thread_limit: 1`, donc
+rejouables ; l'outil est `tools/etendre_nappe.sh`.
+
+| surface | aire utile | croisements | α | **pic au bord** |
+|---|---:|---:|---:|---:|
+| segment officiel (départ) | 4,28 cm² | — | +0,000 | **0 %** |
+| **extension, budget 100** | ⭐ **12,97 cm²** | **0** | ⭐ **+0,000** | 9 % |
+| extension, budget 50 | 7,54 cm² | 0 | +0,000 | 12 % |
+| budget 200 **d'un coup** | 28,62 cm² | 25 036 | ⚠ +1,313 | 30 % |
+| budget 200 **en deux fois 100** | 50,30 cm² | 4 996 | ⚠ +1,040 | ⚠⚠ 56 % |
+| budget 400 d'un coup | 78,30 cm² | 168 104 | *(non jugé)* | — |
+
+**Ce qui est acquis :**
+- ⭐ **Une extension triple la surface utile sans quitter la feuille** — 4,28 → 12,97 cm², arc
+  21,9 → 37,2 mm, sommets valides 59 → 96 %, α = +0,000, reproduit **quatre fois**. C'est la
+  première fois qu'une surface que nous produisons **gagne** de la surface (la chaîne radiale
+  en perd 15,6 % par tour).
+- ⚠ **Le gros budget ne tient pas.** Doubler le budget double l'aire et détruit la
+  convergence : la surface **se replie sur elle-même** (25 036 auto-intersections).
+- ⚠ **Enchaîner aide beaucoup et ne suffit pas.** Même budget final atteint en deux séances :
+  +76 % d'aire et **cinq fois moins** de croisements qu'en une seule — mais toujours en
+  travers.
+- ⚠⚠ **Le budget est CUMULATIF** (`generations`, compté depuis le compteur de la surface
+  reprise) : « enchaîner à budget constant » n'existe pas, le pas *I* doit viser *I × G*.
+
+**⚠⚠ ET UNE LIMITE DE L'INSTRUMENT, trouvée en REGARDANT une figure :** α est une **médiane**,
+donc il cache une minorité. L'extension à α = +0,000 a **9 % de fenêtres dont le pic tombe au
+bord** — une périphérie sans feuille à portée, visible sur le rendu et invisible dans le
+verdict. Pire : la chaîne à deux pas a un **meilleur α** (+1,040 contre +1,313) et une part au
+bord **presque doublée** (56 % contre 30 %). **Une médiane peut s'améliorer pendant qu'une
+minorité empire.**
+⭐ Corrigé structurellement : `test_convergence.py --au-bord` attache une **réserve** à tout
+verdict au-delà de 5 %, et les deux scripts de campagne la transmettent. Tout verdict α du
+dépôt hérite de cette limite ; désormais il la porte.
+⚠ Réserve sur la réserve : `au_bord_relief` est une **fraction**, donc sensible au rapport
+périmètre/aire — mais la source, qui est la plus petite, est à 0 %, donc la taille n'explique
+pas tout. À ne pas comparer entre surfaces de tailles très différentes sans y penser.
+
+**⏳ En cours** : chaîne à pas de 50 (quatre pas cumulatifs). Si l'amélioration continue quand
+le pas diminue, il existe une taille de pas qui tient et la bande peut grandir.
+
 ### ⭐⭐⭐ NUIT DU 2026-08-22 — la chaîne TANGENTIELLE, et un non-déterminisme trouvé
 
 **Le contexte** : [`44`](docs/44_ou_la_chaine_se_trouve.md) §7 a établi qu'une chaîne radiale

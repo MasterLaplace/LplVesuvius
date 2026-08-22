@@ -1,0 +1,26 @@
+{
+  "series": [
+    {
+      "verdict": "converge",
+      "sens": "la distance ne bouge pas quand la fenêtre s'élargit — la matière est là, tout près — ⚠ mais 12 % des fenêtres ont leur pic AU BORD : cette part de la surface n'a aucune feuille à portée, et α ne le montre pas (c'est une médiane)",
+      "serie": [
+        [
+          31,
+          17.28
+        ],
+        [
+          81,
+          17.28
+        ]
+      ],
+      "croissance": 1.0,
+      "elargissement": 2.6129032258064515,
+      "alpha": 0.0,
+      "marge_au_seuil": 0.7,
+      "fragile": false,
+      "au_bord": 0.11904761904761904,
+      "reserve": true,
+      "nom": "pas001 (7.54 cm², 0 croisements)"
+    }
+  ]
+}

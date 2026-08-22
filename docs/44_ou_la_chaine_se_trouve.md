@@ -429,6 +429,22 @@ extension budget 100  ✅ CONVERGE — la matière est là, tout près
 qui convergent, 9,1 % sur l'extension, 25 à 31 % sur celles qui cassent. Et un témoin vérifie
 qu'il n'est **pas nul** — sinon tout porterait une réserve et la mention ne voudrait plus rien.
 
+⚠⚠ **Une réserve sur la réserve.** `au_bord_relief` est une **fraction**, donc mécaniquement
+sensible au rapport périmètre/aire : une petite surface a proportionnellement plus de bord.
+Mesuré, l'effet existe — l'extension à budget 50 (7,54 cm²) affiche **12 %** contre **9 %**
+pour celle à budget 100 (12,97 cm²), donc la plus petite paraît pire.
+
+⭐ **Mais la taille n'explique pas tout, et c'est la référence qui le prouve** : le segment
+officiel est la **plus petite** des trois (4,28 cm²) et il est à **0 %**. Le rapport
+périmètre/aire ne peut donc pas produire à lui seul les 9 ou 12 % des extensions — il y a bien
+une périphérie que la croissance pose mal. La leçon est de ne pas comparer deux surfaces de
+tailles très différentes sur cette fraction sans y penser, pas de la disqualifier.
+
+⚠ La formulation de la réserve **dépend du verdict**, et ma première version ne le faisait
+pas : elle disait « et α ne le montre pas » même sur une surface déjà condamnée, où α le
+montre parfaitement. Elle **alerte** quand α est bon et **chiffre l'étendue du mal** quand il
+est mauvais — trouvé en lisant la sortie, pas en relisant le code.
+
 ⭐ Conséquence pratique pour l'enchaînement, et c'est une prédiction que la chaîne en cours
 teste : si chaque pas ajoute ~9 % de périphérie mauvaise, l'enchaînement la **compose**.
 
