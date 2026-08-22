@@ -66,16 +66,29 @@ UM=$(printf '%s' "$VOL" | grep -oE '[0-9]+\.[0-9]+um' | head -1 | sed 's/um$//')
 [ -n "$UM" ] || { echo "refus : resolution illisible sur $VOL" >&2; exit 3; }
 echo "== volume $(basename "$VOL")  ($UM µm)  ·  plafond $GENERATIONS generations  ·  échelle $ECHELLE"
 
-for NOM in ps256 m7; do
-  G="$DEST/graine_$NOM.json"
-  [ -s "$G" ] || { echo "== $NOM : pas de graine — lancer campagne_prediction_paris4.sh"; continue; }
-  read -r X Y Z <<<"$(python3 -c "
+# ⚠⚠ UN 2×2, ET PAS DEUX TRACES. Chaque prediction propose sa meilleure graine, et les deux
+# tombent a des endroits TOTALEMENT DIFFERENTS du rouleau -- (10752, 10616, 38740) contre
+# (2924, 5324, 9260). Tracer chacune dans sa propre prediction confond donc « quelle
+# prediction » avec « quel endroit », a n'importe quel plafond de generations : c'est un
+# defaut de conception, pas de budget.
+#
+# ⭐ Les deux predictions couvrent LE MEME VOLUME, donc une graine est une coordonnee valide
+# dans les deux. On trace les DEUX graines dans les DEUX predictions. Si une prediction est
+# meilleure, elle gagne aux deux graines ; si c'est l'endroit qui compte, les deux
+# predictions se comportent pareil a chaque graine. Le 2×2 separe les deux facteurs, et
+# c'est la conception appariee que `campagne_graines.sh` defend deja.
+for GRAINE in ps256 m7; do
+ G="$DEST/graine_$GRAINE.json"
+ [ -s "$G" ] || { echo "== graine $GRAINE absente — lancer campagne_prediction_paris4.sh"; continue; }
+ read -r X Y Z <<<"$(python3 -c "
 import json,sys
 c=json.load(open('$G'))['candidats']
-print(c[0]['x'], c[0]['y'], c[0]['z']) if c else sys.exit(1)")" || { echo "== $NOM : json vide"; continue; }
+print(c[0]['x'], c[0]['y'], c[0]['z']) if c else sys.exit(1)")" || { echo "== graine $GRAINE : json vide"; continue; }
+ for NOM in ps256 m7; do
+  CAS="${NOM}_sur_graine_${GRAINE}"
 
-  W="$DEST/$NOM"; mkdir -p "$W"
-  echo "== $NOM  graine $X $Y $Z"
+  W="$DEST/$CAS"; mkdir -p "$W"
+  echo "== prédiction $NOM · graine de $GRAINE  ($X $Y $Z)"
 
   # ⚠ Le seed.json de reference, avec SA resolution et SON plafond. Le patcher plutot que
   # d'en ecrire un neuf garde tous les autres parametres identiques entre les deux
@@ -155,9 +168,10 @@ print(f\"{d['ecart_trace_um_median']:.2f}\")" 2>/dev/null) || continue
     # dont l'amplitude etait nulle -- voir `49`. Recopier un nombre, c'est perdre ce qui
     # l'accompagne.
     ( cd "$ROOT/experiments" && uv run python ../analysis/src/test_convergence.py \
-        $PROFILS --nom "$NOM (${AIRE:-?} cm²)" \
-        --json "$ROOT/docs/prediction_paris4_$NOM.json" | tail -4 )
+        $PROFILS --nom "$CAS (${AIRE:-?} cm²)" \
+        --json "$ROOT/docs/prediction_paris4_$CAS.json" | tail -4 )
   else
     echo "   ⚠ aucune fenetre rendue — pas de verdict de convergence"
   fi
+ done
 done
