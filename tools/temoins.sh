@@ -648,6 +648,12 @@ run "le garde-fou se garde"    uv run python "$ROOT/analysis/src/verifier_chiffr
 # court -- c'est-a-dire les bons. Et son controle exige qu'un processus qui travaille ne soit
 # PAS tue : un garde qui tue ce qui va bien est la pire panne possible.
 run "chien de garde des rendus" "$ROOT/tools/rendre_surveille.sh" --verifier
+# ⚠⚠ Le 2×2 des predictions. Ses deux sondes qui comptent sont SYMETRIQUES : un effet franc
+# de prediction doit etre attribue a la prediction, et un effet franc d'ENDROIT a l'endroit.
+# Sans la seconde, un instrument qui dirait toujours « prediction » passerait la premiere.
+# Et il refuse quand l'ecart entre cellules est sous le bruit de tirage mesure -- le traceur
+# est un tirage, et la meme graine a rendu +0,89 puis +1,12.
+run "2×2 des prédictions"      uv run python "$ROOT/analysis/src/comparer_predictions.py" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys

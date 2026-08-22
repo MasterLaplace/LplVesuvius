@@ -65,6 +65,12 @@ FENETRES=${FENETRES:-"41 161"}
 # les DEUX predictions sont rendues a la meme echelle. La comparaison reste une
 # comparaison ; c'est la valeur absolue qui n'est pas comparable a un run a l'echelle 1.
 ECHELLE=${ECHELLE:-1}
+# ⚠⚠ REPETITIONS par cellule. Le traceur est un tirage (`30`, `35`), et la mesure du
+# 2026-08-22 le confirme jusqu'a alpha : deux executions de la MEME graine dans la MEME
+# prediction ont rendu +0,89 et +1,12. Une cellule a un tirage ne peut donc pas separer la
+# prediction, l'endroit et le bruit. Le defaut reste 1 pour que la premiere forme soit
+# bon marche ; conclure demande de relever ce nombre.
+REPETITIONS=${REPETITIONS:-1}
 # ⚠ Patience du chien de garde, en secondes SANS croissance de la sortie. Le temps ecoule
 # ne dit rien -- un rendu long n'est pas un rendu bloque.
 PATIENCE=${PATIENCE:-300}
@@ -104,10 +110,14 @@ import json,sys
 c=json.load(open('$G'))['candidats']
 print(c[0]['x'], c[0]['y'], c[0]['z']) if c else sys.exit(1)")" || { echo "== graine $GRAINE : json vide"; continue; }
  for NOM in ps256 m7; do
-  CAS="${NOM}_sur_graine_${GRAINE}"
+  for REP in $(seq 1 "$REPETITIONS"); do
+  # ⚠ A une seule repetition le nom de dossier reste celui d'avant : un run existant est
+  # ainsi reutilise au lieu d'etre refait, et la reprise garde son sens.
+  if [ "$REPETITIONS" -eq 1 ]; then CAS="${NOM}_sur_graine_${GRAINE}"
+  else CAS="${NOM}_sur_graine_${GRAINE}_r${REP}"; fi
 
   W="$DEST/$CAS"; mkdir -p "$W"
-  echo "== prédiction $NOM · graine de $GRAINE  ($X $Y $Z)"
+  echo "== prédiction $NOM · graine de $GRAINE  ($X $Y $Z)${REPETITIONS:+ · tirage $REP/$REPETITIONS}"
 
   # ⚠ Le seed.json de reference, avec SA resolution et SON plafond. Le patcher plutot que
   # d'en ecrire un neuf garde tous les autres parametres identiques entre les deux
@@ -192,5 +202,6 @@ print(f\"{d['ecart_trace_um_median']:.2f}\")" 2>/dev/null) || continue
   else
     echo "   ⚠ aucune fenetre rendue — pas de verdict de convergence"
   fi
+  done
  done
 done
