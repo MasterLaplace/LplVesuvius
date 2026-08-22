@@ -90,12 +90,40 @@ def juger(x: dict) -> dict:
 
 
 def balayer(racine: Path) -> list[dict]:
-    """Tous les profils de l'arbre, jugés."""
+    """Les profils de la famille `profil*`, jugés."""
     out = []
     for p in sorted(racine.rglob("profil*.json")):
         x = lire_profil(p)
         if x:
             out.append(juger(x))
+    return out
+
+
+def hors_portee(racine: Path) -> list[str]:
+    """Les fichiers qui PORTENT un profil et que le balayage ne prend pas.
+
+    ⚠⚠ **Mesurer ce qu'on ne couvre pas, plutôt que dire « tout ».** Le balayage sélectionne
+    par NOM de fichier, et une famille nommée autrement passerait inaperçue — le défaut de
+    « forme supposée » que ce dépôt a déjà payé deux fois. Mesuré le 2026-08-22 : **33**
+    fichiers portent un `ecart_trace_um_median` hors de la famille `profil*`.
+
+    ⭐ Et ils ne sont pas simplement oubliés : `data/second_axe/*.json` a une structure
+    **différente** — un fichier par trace, pas un par fenêtre — donc le regroupement par
+    dossier en ferait une seule série de seize au lieu de seize traces. C'est
+    `analysis/src/derive_avec_profondeur.py` qui les analyse, avec la bonne notion de série.
+    Forcer un outil à couvrir les deux structures serait pire que deux outils qui disent
+    chacun sa portée.
+
+    ⚠ Le compte est publié pour qu'il ne grandisse pas en silence : une troisième famille
+    apparaîtrait ici avant d'apparaître dans une conclusion.
+    """
+    out = []
+    for p in sorted(racine.rglob("*.json")):
+        if p.name.startswith("profil") or ".git" in p.parts:
+            continue
+        x = lire_profil(p)
+        if x:
+            out.append(str(p))
     return out
 
 
@@ -290,6 +318,24 @@ def verifier() -> int:
     v("une série d'un seul point ne rend pas de jugement",
       alpha_discriminant([tout_au_bord[0]], 0.2) is None)
 
+    # ⚠⚠ La portee, mesuree et non affirmee : un fichier qui porte un profil sans s'appeler
+    # `profil*` doit etre COMPTE comme hors portee, pas ignore en silence.
+    import tempfile, os
+    with tempfile.TemporaryDirectory() as t:
+        d0 = Path(t)
+        (d0 / "profil_41c.json").write_text(json.dumps(
+            {"ecart_trace_um_median": 10.0, "couche_tracee": 20, "voxel_um": 2.4,
+             "amplitude_mediane": 0.5, "amplitude_min": 0.02}), encoding="utf-8")
+        (d0 / "autre_nom.json").write_text(json.dumps(
+            {"ecart_trace_um_median": 10.0, "couche_tracee": 20, "voxel_um": 2.4,
+             "amplitude_mediane": 0.5, "amplitude_min": 0.02}), encoding="utf-8")
+        (d0 / "sans_profil.json").write_text(json.dumps({"x": 1}), encoding="utf-8")
+        v("le balayage prend la famille nommée", len(balayer(d0)) == 1)
+        v("... et compte hors portée celui qui ne l'est pas",
+          hors_portee(d0) == [str(d0 / "autre_nom.json")], str(hors_portee(d0)))
+        v("... sans compter un fichier qui ne porte pas de profil",
+          all("sans_profil" not in x for x in hors_portee(d0)))
+
     v("les comptes s'additionnent",
       r["plats"] + r["mesures"] + r["inconnus"] == r["profils"])
 
@@ -311,12 +357,18 @@ def main() -> int:
         return verifier()
 
     profils = balayer(a.racine)
+    dehors = hors_portee(a.racine)
     if not profils:
         print(f"aucun profil sous {a.racine}", file=sys.stderr)
         return 1
     r = resumer(profils)
 
+    r["fichiers_hors_portee"] = dehors
     print(f"\n  {r['profils']} profils dans {r['series']} série(s)")
+    if dehors:
+        print(f"  ⚠ {len(dehors)} fichier(s) portent un profil HORS de la famille "
+              f"« profil* » et ne sont pas ici — structure différente, analysés par "
+              f"`derive_avec_profondeur.py`")
     print(f"    mesurent quelque chose : {r['mesures']}")
     print(f"    PLATS (rien à mesurer)  : {r['plats']}")
     print(f"    amplitude non rapportée : {r['inconnus']}")

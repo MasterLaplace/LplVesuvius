@@ -1,5 +1,5 @@
 {
-  "profils": 229,
+  "profils": 235,
   "resolution_alpha": 0.2,
   "series_indiscernables_du_plafond": {
     "data/boucle/corrige_gen40": {
@@ -86,6 +86,20 @@
       "resolution": 0.2,
       "discriminant": false
     },
+    "data/paris4_croise_r3/m7_sur_graine_ps256_r1": {
+      "alpha_mesure": 0.9663142489355092,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.04718306565703889,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/paris4_croise_r3/m7_sur_graine_ps256_r2": {
+      "alpha_mesure": 1.013497314592548,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.0,
+      "resolution": 0.2,
+      "discriminant": false
+    },
     "data/paris4_croise_r3/ps256_sur_graine_ps256_r1": {
       "alpha_mesure": 1.013497314592548,
       "alpha_si_tout_au_plafond": 1.013497314592548,
@@ -97,6 +111,13 @@
       "alpha_mesure": 0.9364699510843889,
       "alpha_si_tout_au_plafond": 1.013497314592548,
       "ecart": 0.0770273635081592,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/paris4_croise_r3/ps256_sur_graine_ps256_r3": {
+      "alpha_mesure": 1.0948125717699624,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.08131525717741428,
       "resolution": 0.2,
       "discriminant": false
     },
@@ -469,6 +490,20 @@
       "resolution": 0.2,
       "discriminant": false
     },
+    "data/paris4_croise_r3/m7_sur_graine_ps256_r1": {
+      "alpha_mesure": 0.9663142489355092,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.04718306565703889,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/paris4_croise_r3/m7_sur_graine_ps256_r2": {
+      "alpha_mesure": 1.013497314592548,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.0,
+      "resolution": 0.2,
+      "discriminant": false
+    },
     "data/paris4_croise_r3/ps256_sur_graine_ps256_r1": {
       "alpha_mesure": 1.013497314592548,
       "alpha_si_tout_au_plafond": 1.013497314592548,
@@ -480,6 +515,13 @@
       "alpha_mesure": 0.9364699510843889,
       "alpha_si_tout_au_plafond": 1.013497314592548,
       "ecart": 0.0770273635081592,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/paris4_croise_r3/ps256_sur_graine_ps256_r3": {
+      "alpha_mesure": 1.0948125717699624,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.08131525717741428,
       "resolution": 0.2,
       "discriminant": false
     },
@@ -1072,16 +1114,16 @@
       "discriminant": true
     }
   },
-  "series_jugees": 113,
+  "series_jugees": 116,
   "alpha_min_indiscernable": 0.8728573451391766,
   "alpha_max_convergent": 0.42215634677573416,
   "convergents_indiscernables": [],
-  "au_plafond": 24,
-  "plats": 16,
-  "mesures": 212,
+  "au_plafond": 27,
+  "plats": 17,
+  "mesures": 217,
   "inconnus": 1,
   "sans_seuil_declare": 1,
-  "series": 116,
+  "series": 119,
   "series_entierement_plates": [
     "data/leur_graine",
     "data/paris4_croise/m7_sur_graine_m7",
@@ -1095,9 +1137,45 @@
     "data/leurs_parametres",
     "data/paris4_croise/m7_sur_graine_ps256",
     "data/paris4_croise_r3/ps256_sur_graine_ps256_r1",
+    "data/paris4_croise_r3/ps256_sur_graine_ps256_r3",
     "data/petite_trace/g30",
     "data/petite_trace/g60",
     "data/spires_repousse/spire03"
+  ],
+  "fichiers_hors_portee": [
+    "data/officiel_appariee/officiel_81c.json",
+    "data/origine_pile/rendu.json",
+    "data/second_axe/PHerc0125_r1.json",
+    "data/second_axe/PHerc0125_r2.json",
+    "data/second_axe/PHerc0125_r3.json",
+    "data/second_axe/PHerc0257_r1.json",
+    "data/second_axe/PHerc0257_r2.json",
+    "data/second_axe/PHerc0257_r6.json",
+    "data/second_axe/PHerc0268_r1.json",
+    "data/second_axe/PHerc0268_r2.json",
+    "data/second_axe/PHerc0268_r3.json",
+    "data/second_axe/PHerc0826_r1.json",
+    "data/second_axe/PHerc0826_r2.json",
+    "data/second_axe/PHerc1218_r1.json",
+    "data/second_axe/PHerc1218_r2.json",
+    "data/second_axe/PHerc1447_r1.json",
+    "data/second_axe/PHerc1447_r2.json",
+    "data/second_axe/PHerc1447_r4.json",
+    "data/sens_normale/inverse_41c.json",
+    "data/sens_normale/normal_41c.json",
+    "docs/amplitude_reference.json",
+    "docs/amplitude_reference_1mm.json",
+    "docs/balayage_fenetre_A_128.json",
+    "docs/balayage_fenetre_B_1024.json",
+    "docs/balayage_fenetre_B_128.json",
+    "docs/balayage_fenetre_B_256.json",
+    "docs/balayage_fenetre_B_512.json",
+    "docs/profondeur_A61.json",
+    "docs/profondeur_B61.json",
+    "docs/profondeur_notre_trace.json",
+    "docs/profondeur_officiel_PHerc1447.json",
+    "docs/profondeur_trace_B.json",
+    "docs/profondeur_traces_AB.json"
   ],
   "detail": [
     {
@@ -1885,6 +1963,62 @@
       "etat": "mesure"
     },
     {
+      "fichier": "data/paris4_croise_r3/m7_sur_graine_ps256_r1/profil_161c.json",
+      "ecart_um": 180.0,
+      "plafond_um": 192.0,
+      "au_plafond": false,
+      "amplitude": 0.07348346346718568,
+      "seuil_declare": 0.02,
+      "seuil": 0.02,
+      "seuil_est_un_repli": false,
+      "au_bord": 1.0,
+      "couche_tracee": 80,
+      "avec_matiere": 49,
+      "etat": "mesure"
+    },
+    {
+      "fichier": "data/paris4_croise_r3/m7_sur_graine_ps256_r1/profil_41c.json",
+      "ecart_um": 48.0,
+      "plafond_um": 48.0,
+      "au_plafond": true,
+      "amplitude": 0.02311095918425919,
+      "seuil_declare": 0.02,
+      "seuil": 0.02,
+      "seuil_est_un_repli": false,
+      "au_bord": 1.0,
+      "couche_tracee": 20,
+      "avec_matiere": 49,
+      "etat": "mesure"
+    },
+    {
+      "fichier": "data/paris4_croise_r3/m7_sur_graine_ps256_r2/profil_161c.json",
+      "ecart_um": 192.0,
+      "plafond_um": 192.0,
+      "au_plafond": true,
+      "amplitude": 0.07168915317598314,
+      "seuil_declare": 0.02,
+      "seuil": 0.02,
+      "seuil_est_un_repli": false,
+      "au_bord": 0.9591836734693877,
+      "couche_tracee": 80,
+      "avec_matiere": 49,
+      "etat": "mesure"
+    },
+    {
+      "fichier": "data/paris4_croise_r3/m7_sur_graine_ps256_r2/profil_41c.json",
+      "ecart_um": 48.0,
+      "plafond_um": 48.0,
+      "au_plafond": true,
+      "amplitude": 0.020496234735753852,
+      "seuil_declare": 0.02,
+      "seuil": 0.02,
+      "seuil_est_un_repli": false,
+      "au_bord": 1.0,
+      "couche_tracee": 20,
+      "avec_matiere": 49,
+      "etat": "mesure"
+    },
+    {
       "fichier": "data/paris4_croise_r3/ps256_sur_graine_ps256_r1/profil_161c.json",
       "ecart_um": 192.0,
       "plafond_um": 192.0,
@@ -1939,6 +2073,34 @@
       "couche_tracee": 20,
       "avec_matiere": 49,
       "etat": "mesure"
+    },
+    {
+      "fichier": "data/paris4_croise_r3/ps256_sur_graine_ps256_r3/profil_161c.json",
+      "ecart_um": 182.4,
+      "plafond_um": 192.0,
+      "au_plafond": false,
+      "amplitude": 0.06497377631108218,
+      "seuil_declare": 0.02,
+      "seuil": 0.02,
+      "seuil_est_un_repli": false,
+      "au_bord": 0.9795918367346939,
+      "couche_tracee": 80,
+      "avec_matiere": 49,
+      "etat": "mesure"
+    },
+    {
+      "fichier": "data/paris4_croise_r3/ps256_sur_graine_ps256_r3/profil_41c.json",
+      "ecart_um": 40.8,
+      "plafond_um": 48.0,
+      "au_plafond": false,
+      "amplitude": 0.018409177714314225,
+      "seuil_declare": 0.02,
+      "seuil": 0.02,
+      "seuil_est_un_repli": false,
+      "au_bord": 1.0,
+      "couche_tracee": 20,
+      "avec_matiere": 49,
+      "etat": "plat"
     },
     {
       "fichier": "data/petite_trace/g30/profil_161c.json",
