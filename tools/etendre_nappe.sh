@@ -66,6 +66,27 @@ UM=${UM:-8.64}
 # avec son point a 20 generations reste appariee.
 AIRE_MIN=${AIRE_MIN:-0.3}
 
+# ⚠⚠⚠ `mode: resume` N'EST PAS DETERMINISTE PAR DEFAUT, et ça a failli me faire publier un
+# tirage pour une propriete. Deux causes, toutes deux dans `GrowPatch.cpp` :
+#
+#   1. Le generateur aleatoire des perturbations est `thread_local` et, SANS GRAINE, il est
+#      seme par `std::random_device` (:99-107). Avec 22 threads OpenMP, ça fait 22
+#      generateurs irreproductibles. La graine se pose par la variable d'environnement
+#      **`VC_GROWPATCH_RNG_SEED`** (:83) -- pas par une cle de parametres, et la fonction
+#      `set_random_perturbation_seed` est marquee `[[maybe_unused]]`, donc jamais appelee.
+#
+#   2. Le nombre de threads. L'outil l'ecrit lui-meme au demarrage : « tracing does not
+#      scale past a few threads. Set "thread_limit" in the params JSON (VC3D uses 1) ».
+#      Meme graine identique sur tous les threads, l'ORDRE d'attribution du travail peut
+#      varier -- d'ou `thread_limit: 1`.
+#
+# ⭐ La preuve que ça comptait : trois runs cense partager leurs parametres effectifs ont
+# donne 0, 596 et 0 auto-intersections, et α = +0,000 / +0,422 / +0,000. Ce n'etait pas le
+# parametre balaye (il est ignore), c'etait l'alea.
+GRAINE=${GRAINE:-20260822}
+FILS=${FILS:-1}
+export VC_GROWPATCH_RNG_SEED="$GRAINE"
+
 B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 VOL="$B/$ROULEAU/volumes/20250521151220-8.640um-1.2m-116keV-masked.zarr"
 
@@ -74,6 +95,7 @@ echo "etiquette des verdicts : extension_${ETIQUETTE}_<generations>.json"
 echo "source : $SOURCE"
 echo "generations balayees : $GENERATIONS   fenetres : $FENETRES   min_area_cm : $AIRE_MIN"
 echo "  (cle JSON : 'generations' — 'resume_generations' n'est lu par personne, cf. en-tete)"
+echo "  reproductibilite : VC_GROWPATCH_RNG_SEED=$GRAINE, thread_limit=$FILS"
 
 [ -d "$SOURCE" ] || { echo "source absente : $SOURCE"; exit 3; }
 mkdir -p "$DEST"
@@ -137,8 +159,17 @@ print(f\"{d['ecart_trace_um_median']:.2f}\")" 2>/dev/null) || continue
 }
 
 # --- le balayage --------------------------------------------------------------------
+# ⚠ Un reglage peut apparaitre DEUX FOIS dans la liste : c'est ainsi qu'on teste le
+# determinisme, en refaisant exactement la meme chose. Le dossier prend donc un indice de
+# repetition, sinon la seconde ecraserait la premiere et le test serait impossible.
+declare -A VU=()
 for G in $GENERATIONS; do
-  W="$DEST/gen$(printf '%03d' "$G")"
+  VU[$G]=$(( ${VU[$G]:-0} + 1 ))
+  if [ "${VU[$G]}" -gt 1 ]; then
+    W="$DEST/gen$(printf '%03d' "$G")_bis${VU[$G]}"
+  else
+    W="$DEST/gen$(printf '%03d' "$G")"
+  fi
   # ⚠ Sentinelle d'abandon : le cache de rendu EST le signal d'arret, donc supprimer un
   # rendu ne suffit pas a empecher un relancement de refaire 28 minutes de travail. Paye
   # le 2026-08-21.
@@ -147,7 +178,7 @@ for G in $GENERATIONS; do
   if [ ! -d "$W/trace" ] || [ -z "$(ls -d "$W/trace"/auto_grown_* 2>/dev/null)" ]; then
     python3 -c "
 import json
-json.dump({'mode': 'resume', 'voxelsize': $UM, 'thread_limit': 0,
+json.dump({'mode': 'resume', 'voxelsize': $UM, 'thread_limit': $FILS,
            'cache_size': 6000000000,
            'min_area_cm': $AIRE_MIN, 'generations': $G},
           open('$W/trace/seed.json','w'), indent=2)"
@@ -164,7 +195,7 @@ json.dump({'mode': 'resume', 'voxelsize': $UM, 'thread_limit': 0,
     touch "$W/ABANDONNE"
     continue
   fi
-  juger "$W" "$M" "gen$(printf '%03d' "$G")"
+  juger "$W" "$M" "$(basename "$W")"
 done
 
 echo "fin — $(echo "$GENERATIONS" | wc -w) réglage(s) balayé(s)"

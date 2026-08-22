@@ -232,7 +232,7 @@ une surface posée en travers de l'empilement ne mesure rien — et les trois ch
 sont testés. Campagne lancée sur 1, 3 et 10 générations ; le point à 20 n'est pas refait,
 il est déjà mesuré.
 
-### ⭐⭐⭐ Premier résultat : étendre le segment officiel TRIPLE sa surface utile en restant sur sa feuille
+### ⭐⭐ Premier résultat : étendre le segment officiel triple sa surface utile — ⚠ dans deux tirages sur trois
 
 Une seule exécution de `mode: resume` sur le segment officiel qui converge :
 
@@ -242,6 +242,9 @@ Une seule exécution de `mode: resume` sur le segment officiel qui converge :
 | après extension | 219×206 | ⭐ **96 %** | ⭐ **12,97 cm²** | ⭐ **37,2 mm** | **14,5 %** | ⭐ **déterminé** |
 
 Et le verdict : **α = +0,000, converge**, 0 auto-intersection.
+
+⚠⚠ **À lire avec la section suivante** : ce n'est qu'un des trois tirages, et le tracé n'est
+pas déterministe. Deux tirages sur trois donnent ce résultat, le troisième donne +0,422.
 
 ⭐⭐ **L'extension ne fait pas qu'ajouter de la grille, elle rebouche les trous** : la part de
 sommets valides passe de 59 % à 96 %. C'est la première fois dans ce dépôt qu'une surface que
@@ -255,6 +258,48 @@ laissait indéterminé (§6).
 monte aussi de 24,4 à 34,2 mm. « Tangentiel » décrit ce que la surface **est**
 géométriquement (une nappe s'étend le long d'elle-même), pas une direction qu'on aurait
 choisie.
+
+### ⚠⚠⚠ CORRECTION — ce résultat est UN TIRAGE, pas une propriété
+
+Le balayage a fini, et ses trois points se contredisent alors que leurs paramètres effectifs
+sont les mêmes :
+
+| réglage (ignoré) | aire | auto-intersections | α |
+|---|---:|---:|---:|
+| 1 | 12,96 cm² | **0** | **+0,000** converge |
+| 3 | 13,01 cm² | **596** | **+0,422** intermédiaire |
+| 10 | 12,98 cm² | **0** | **+0,000** converge |
+
+Trois exécutions censées faire la même chose donnent 0, 596 et 0 croisements. Ce n'est pas le
+paramètre balayé — il est ignoré, §précédent. **C'est de l'aléa**, et la source le confirme sur
+deux points :
+
+1. **Le générateur des perturbations est `thread_local` et, sans graine, semé par
+   `std::random_device`** (`GrowPatch.cpp:99-107`). Avec 22 threads OpenMP, ce sont 22
+   générateurs irreproductibles. La graine se pose par la variable d'environnement
+   **`VC_GROWPATCH_RNG_SEED`** (ligne 83) — pas par une clé de paramètres, et la fonction
+   `set_random_perturbation_seed` est marquée `[[maybe_unused]]`, donc jamais appelée.
+2. **Le nombre de threads.** L'outil l'écrit lui-même au démarrage : *« tracing does not scale
+   past a few threads. Set "thread_limit" in the params JSON (VC3D uses 1) »*. Même avec une
+   graine identique partout, l'ordre d'attribution du travail peut varier.
+
+⚠⚠ **Ce que ça fait au résultat ci-dessus** : le ×3 d'aire utile à α = +0,000 est **un tirage
+sur trois**, dont deux bons et un mauvais. Ce n'est donc pas « étendre le segment officiel
+converge » mais « converge **deux fois sur trois**, sur trois tirages » — ce qui est une
+distribution, pas une propriété, et bien plus faible que ce que j'avais écrit.
+
+⚠⚠ **Et ça se propage en arrière** : la campagne `spires_repousse`
+([`43`](43_la_chaine_des_spires.md) §6) tournait aussi sans graine et sur 22 threads. Son
++0,422 peut donc être le même mauvais tirage, et non « resume sur une surface projetée
+dérive ». **Le contraste source-officielle contre source-projetée que je venais de publier
+n'est pas établi.**
+
+⭐ La suite est déterminée par ça, et rien d'autre : `tools/etendre_nappe.sh` pose désormais
+`VC_GROWPATCH_RNG_SEED` et `thread_limit: 1`, et sait **répéter un même réglage** — un réglage
+qui apparaît deux fois dans la liste reçoit un dossier suffixé, sinon le second écraserait le
+premier et le test serait impossible à faire. Le premier run est un **test de déterminisme** :
+deux fois exactement la même chose. Tant qu'il n'est pas passé, aucun balayage ne veut dire
+quoi que ce soit.
 
 ### ⚠⚠ Et le paramètre que je balayais n'est lu par personne
 
