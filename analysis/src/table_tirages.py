@@ -281,6 +281,36 @@ def main() -> int:
                 rangs_mauvais.append(abs(rang_de[j] - centre) / centre)
         (disp_bascule if l["verdict_bascule"] else disp_sans).append(l["etendue_relative"])
 
+    # ⚠⚠ LE CONFOND QUE `35` §3 NOMME, ENFIN CALCULE DANS L'ARBRE. Le document annonçait
+    # « un test exact donne p ≈ 0,55 » — un nombre sans producteur, donc une anecdote au
+    # sens de la règle de ce dépôt, et périmé dès qu'un rouleau s'ajoute. L'observation
+    # est que les rouleaux à faible dispersion d'aire sont ceux dont tous les tirages
+    # butent sur le plafond de générations : leur dispersion ne mesure alors pas le
+    # traceur, elle mesure la troncature.
+    #
+    # ⚠ Le plafond est DÉRIVÉ de la campagne — le maximum de générations observé — et non
+    # écrit en dur : il dépend du budget du `seed.json`, donc une constante deviendrait
+    # fausse en silence le jour où le budget change. C'est exactement la mesure que
+    # `29` N3 demande.
+    plafond_gen = max(l["generations_max"] for l in lignes)
+    plafonnes = [l for l in lignes
+                 if l["generations_min"] == l["generations_max"] == plafond_gen]
+    for l in lignes:
+        l["plafonne"] = (l["generations_min"] == l["generations_max"] == plafond_gen)
+    a_b = sum(1 for l in plafonnes if l["verdict_bascule"])
+    b_b = sum(1 for l in lignes if not l["plafonne"] and l["verdict_bascule"])
+    n_a, n_b = len(plafonnes), len(lignes) - len(plafonnes)
+    p_fisher = None
+    try:
+        from scipy.stats import fisher_exact
+        p_fisher = float(fisher_exact([[a_b, n_a - a_b], [b_b, n_b - b_b]]).pvalue)
+    except Exception:
+        pass
+    disp_plaf = statistics.median([l["etendue_relative"] for l in plafonnes]) if plafonnes else None
+    disp_non = (statistics.median([l["etendue_relative"] for l in lignes
+                                   if not l["plafonne"]])
+                if n_b else None)
+
     print(f"\n  mauvais tirages : {mauvais}/{total} = {mauvais/total:.1%} "
           f"(IC 95 % exact : {bas:.1%} – {haut:.1%})")
     print(f"  rouleaux où le VERDICT bascule d'un tirage à l'autre : "
@@ -291,6 +321,16 @@ def main() -> int:
     if non_concluants:
         print(f"  ⚠ rouleaux à un seul tirage, donc ni l'un ni l'autre : "
               f"{len(non_concluants)}  ({', '.join(non_concluants)})")
+
+    print(f"\n  ⚠ le PLAFOND de générations ({plafond_gen}) comme confond : "
+          f"{n_a} rouleaux plafonnés, {n_b} non")
+    print(f"     basculements : {a_b}/{n_a} chez les plafonnés contre {b_b}/{n_b} chez "
+          f"les autres" + (f"  (test exact p = {p_fisher:.2f})" if p_fisher is not None
+                           else "  (scipy absent, test non calculé)"))
+    if disp_plaf is not None and disp_non is not None:
+        print(f"     dispersion médiane : {disp_plaf:.1%} chez les plafonnés contre "
+              f"{disp_non:.1%} chez les autres — c'est CE partage qui explique la "
+              f"différence attribuée au basculement")
 
     if bascules:
         print("\n  ⭐ Un basculement est la preuve la plus forte disponible : deux exécutions")
@@ -332,6 +372,14 @@ def main() -> int:
             "dispersion_mediane_bascule": (statistics.median(disp_bascule)
                                            if disp_bascule else None),
             "dispersion_mediane_sans": (statistics.median(disp_sans) if disp_sans else None),
+            # ⚠ Le confond du plafond voyage dans l'artefact : sans lui, la prose qui
+            # le cite serait de nouveau un nombre sans producteur.
+            "plafond_generations": plafond_gen,
+            "plafonnes": n_a, "non_plafonnes": n_b,
+            "bascules_plafonnes": a_b, "bascules_non_plafonnes": b_b,
+            "p_fisher_plafond": p_fisher,
+            "dispersion_mediane_plafonnes": disp_plaf,
+            "dispersion_mediane_non_plafonnes": disp_non,
             "sans_maillage": rejetes, "reverifies": revérifiés,
             "desaccords": [{"rouleau": r, "repetition": i, "resume": d, "rapport": v}
                            for r, i, d, v in desaccords],

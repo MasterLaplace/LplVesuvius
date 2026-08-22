@@ -543,6 +543,18 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                         [f"encore à {mes[0]['ecart_um']:.0f} µm",
                          f"still {mes[0]['ecart_um']:.0f} µm apart"], p.name))
 
+    # ⚠⚠ Le depot se compte lui-meme. `README` annoncait « 18 batteries, 741 controles »
+    # alors qu'il y en avait 24 et 1092 : le chiffre avait ete recopie a la main et n'avait
+    # aucun producteur, donc rien ne pouvait le rafraichir ni le contredire. C'est le meme
+    # defaut que les deux cartouches embarquees qui avaient derive, un etage plus haut.
+    p = racine / "docs" / "temoins.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        out.append(("batteries de temoins",
+                    [f"{d['batteries_all_pass']} batteries, {d['controles']} controles",
+                     f"{d['batteries_all_pass']} batteries, {d['controles']} contrôles"],
+                    p.name))
+
     p = racine / "docs" / "cout_echelle.json"
     if p.exists():
         d = json.loads(p.read_text())

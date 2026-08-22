@@ -273,24 +273,24 @@ fautes en une : le mauvais critère, et une réserve omise que la source porte.
 surface is not reproducible, the verdict is »*, sur cinq exécutions d'une seule graine.
 [`30`](30_le_traceur_est_un_tirage.md) a d'abord montré qu'une **autre** graine fait varier
 la croissance elle-même (64 à 86 générations, 5,69 à 10,34 cm²), puis
-[`35`](35_le_tirage_sur_douze_rouleaux.md) a mesuré **12 rouleaux, 72 tirages** — et le
+[`35`](35_le_tirage_sur_douze_rouleaux.md) a mesuré **13 rouleaux, 78 tirages** — et le
 verdict, lui aussi, bascule. Le §10 est donc à **remplacer** par le texte ci-dessous, pas à
 nuancer.
 
-### 10 bis. ⭐⭐ Le remplacement, écrit sur 72 tirages *(2026-08-20)*
+### 10 bis. ⭐⭐ Le remplacement, écrit sur 78 tirages *(2026-08-20, étendu le 08-22)*
 
 > #### 10. The official tracer is a draw, not a function
 >
-> `vc_grow_seg_from_seed` returns a different result on every run. **72 tirages**, twelve
-> prize scrolls, six per scroll, strictly identical parameters and seeds:
+> `vc_grow_seg_from_seed` returns a different result on every run. **78 tirages**,
+> thirteen prize scrolls, six per scroll, strictly identical parameters and seeds:
 >
 > | | |
 > |---|---:|
-> | scrolls whose six runs return the same area | **0 of 12** |
-> | ⭐ scrolls where the **verdict flips** between runs | **4 sur 12** |
-> | bad runs | **4 / 72 = 5,6 %** (exact 95 % CI: **1,5 % – 13,6 %**) |
+> | scrolls whose six runs return the same area | **0 of 13** |
+> | ⭐ scrolls where the **verdict flips** between runs | **5 sur 13** |
+> | bad runs | **5 / 78 = 6,4 %** (exact 95 % CI: **2,1 % – 14,3 %**) |
 >
-> The four flips, with the worst count each scroll produced: 1615, 428, 607, 1371
+> The five flips, with the worst count each scroll produced: 1615, 428, 607, 140, 1371
 > self-intersections — against zero on the other five runs of the same scroll.
 >
 > ⚠ **This corrects our own earlier claim.** An earlier draft of this section said *« the

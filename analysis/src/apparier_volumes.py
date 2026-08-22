@@ -114,9 +114,17 @@ def choisir(paires: list[dict], voxel_cible: float | None,
     if voxel_cible is None:
         return None, (f"{len(paires)} scans et aucune resolution demandee — refus, "
                       f"le choix appartient a l'appelant")
-    proches = [p for p in paires
-               if p["voxel_um"] is not None
-               and abs(p["voxel_um"] - voxel_cible) <= tolerance]
+    # ⚠ Un match EXACT gagne toujours sur la tolerance. Sans cette priorite, un rouleau
+    # scanne a 8,64 ET a 9,362 serait declare « ambigu » pour une cible de 9,362 -- les
+    # deux tombant dans le ± 1 µm -- alors qu'un des deux est exactement celui demande.
+    # Refuser la ou la reponse est evidente est une garde qui coute des donnees.
+    exacts = [p for p in paires
+              if p["voxel_um"] is not None and abs(p["voxel_um"] - voxel_cible) < 1e-6]
+    if len(exacts) == 1:
+        return exacts[0], f"résolution exacte, {exacts[0]['voxel_um']} µm"
+    proches = exacts or [p for p in paires
+                         if p["voxel_um"] is not None
+                         and abs(p["voxel_um"] - voxel_cible) <= tolerance]
     if not proches:
         dispo = ", ".join(f"{p['voxel_um']} µm" for p in paires)
         return None, f"aucun scan a {voxel_cible} µm ± {tolerance} — disponibles : {dispo}"
@@ -204,6 +212,17 @@ def verifier() -> int:
       pick is not None and pourquoi == "scan unique", pourquoi)
     pick, pourquoi = choisir([], 9.362)
     v("aucune paire ne rend aucun choix", pick is None)
+    # ⚠⚠ Deux scans PROCHES mais dont un seul est exact : la tolerance les rendrait tous
+    # deux candidats et l'outil refuserait, alors que la reponse est evidente. Sonde :
+    # retirer la priorite de l'exact fait echouer ce controle.
+    voisin = apparier(["20250101000000-surface-a.zarr", "20250202000000-surface-b.zarr"],
+                      ["20250101000000-8.640um-x.zarr", "20250202000000-9.362um-y.zarr"])
+    pick, pourquoi = choisir(voisin["paires"], 9.362)
+    v("un match exact gagne sur une resolution seulement proche",
+      pick is not None and pick["voxel_um"] == 9.362, pourquoi)
+    pick, pourquoi = choisir(voisin["paires"], 8.64)
+    v("... dans les deux sens", pick is not None and pick["voxel_um"] == 8.64, pourquoi)
+
     # ⚠ Deux scans a la MEME resolution : la resolution ne discrimine plus, donc le
     # choix redeviendrait un tirage. Refus.
     ambigu = apparier(["20250101000000-surface-a.zarr", "20250202000000-surface-b.zarr"],

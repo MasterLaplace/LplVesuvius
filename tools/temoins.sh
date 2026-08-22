@@ -22,12 +22,23 @@ FAIL=0
 #   1. le code de sortie compte (`PIPESTATUS`, sinon `grep` masque tout) ;
 #   2. le verdict lu est le DERNIER "ALL PASS", pas le premier -- une ligne de contexte
 #      imprimee avant ne peut donc plus se faire passer pour le verdict.
+# ⚠⚠ Les totaux sont COMPTES, pas ecrits dans une doc. `README` annoncait « 18 batteries,
+# 741 controles » alors qu'il y en avait 24 et 1092 : un chiffre recopie a la main dans une
+# prose vieillit en silence, et c'est precisement le defaut que ce depot outille ailleurs
+# (`analysis/src/verifier_chiffres.py`). Ils sont donc ecrits dans `docs/temoins.json` et
+# gardes comme tous les autres chiffres publies.
+BATTERIES=0
+CONTROLES=0
+
 run() {
   local nom=$1; shift
   local sortie rc
   sortie=$("$@" 2>&1); rc=$?
   sortie=$(grep -vE "SyntaxWarning|if amt" <<<"$sortie")
+  BATTERIES=$((BATTERIES + 1))
   if [ "$rc" -eq 0 ] && grep -q "ALL PASS" <<<"$sortie"; then
+    CONTROLES=$((CONTROLES + $(grep -o 'ALL PASS.*' <<<"$sortie" | tail -1 \
+                  | grep -oE '[0-9]+ checks' | grep -oE '[0-9]+' || echo 0)))
     printf '  ✅ %-28s %s\n' "$nom" "$(grep -o 'ALL PASS.*' <<<"$sortie" | tail -1)"
   else
     printf '  ❌ %-28s ECHEC (code %s)\n' "$nom" "$rc"
@@ -693,6 +704,17 @@ if [ "$NORPH" -eq 0 ]; then
 else
   printf '⚠ %s orphelin(s) :%s\n' "$NORPH" "$ORPH"
 fi
+
+# ⚠ Les quatre batteries hors `run` (marche sur nappe, mosaique, chiffres, orphelins) sont
+# comptees a part et NON incluses : elles n'impriment pas « ALL PASS (n checks) », donc les
+# additionner demanderait de deviner leur compte -- et un total devine vaut moins qu'un
+# total plus petit mais exact.
+python3 -c "
+import json, sys
+json.dump({'batteries_all_pass': $BATTERIES, 'controles': $CONTROLES,
+           'echecs': $FAIL}, open('$ROOT/docs/temoins.json', 'w'), indent=2)
+print()
+print(f'  {\"batteries\":<30} {$BATTERIES} batteries, {$CONTROLES} controles')"
 
 echo
 if [ "$FAIL" -eq 0 ]; then

@@ -21,12 +21,23 @@
 #
 # ⚠ Reprenable au tirage pres : un tirage qui a deja son `resume.json` est saute.
 #
+# ⭐ `GENERATIONS` releve le plafond de generations du seed.json (defaut : celui du
+# fichier). C'est la mesure que `29` N3 nomme : les rouleaux a faible dispersion d'aire
+# sont ceux dont les six tirages BUTENT sur ce plafond (118 sur 118), donc dont la trace
+# sature -- et une dispersion mesuree sous une troncature commune ne mesure pas la
+# dispersion du traceur, elle mesure la troncature. Relever le plafond et rejouer tranche.
+# ⚠ Un run a plafond releve doit avoir sa PROPRE destination : ses aires ne sont pas
+# comparables a celles du plafond d'origine, et les melanger dans un meme dossier ferait
+# un tableau dont les lignes ne parlent pas de la meme chose.
+#
 #   ./tools/campagne_tirages.sh [dest] [repetitions] [rouleaux...]
+#   GENERATIONS=400 ./tools/campagne_tirages.sh data/tirages_plafond 6 PHerc0125
 set -u
 cd "$(dirname "$0")/.." || exit 2
 ROOT=$PWD
 DEST=${1:-$ROOT/data/tirages}
 REPETITIONS=${2:-6}
+GENERATIONS=${GENERATIONS:-}
 shift 2 2>/dev/null || true
 B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 mkdir -p "$DEST"
@@ -55,11 +66,23 @@ for l in d['lignes']:
 else:
     sys.exit(1)")" || { echo "   ⚠ pas de graine planarite dans la table — rouleau saute"; continue; }
 
-  SURF=$(lister "$R/representations/predictions/surfaces/" | grep '\.zarr/$' | head -1 | sed 's|/$||')
-  VOL=$(lister "$R/volumes/" | head -1 | sed 's|/$||')
-  if [ -z "$SURF" ] || [ -z "$VOL" ]; then echo "   ⚠ pas de prediction ou pas de volume"; continue; fi
-  UM=$(basename "$VOL" | grep -oE '[0-9]+\.[0-9]+um' | head -1 | sed 's/um$//')
-  if [ -z "$UM" ]; then echo "   ⚠ taille de voxel illisible dans « $(basename "$VOL") » — rouleau saute"; continue; fi
+  # ⚠⚠ Surface et volume sont apparies par IDENTITE DE SCAN, pas par position dans deux
+  # listages -- meme correctif que `campagne_graines.sh`, et pour la meme raison : `head -1`
+  # de chaque liste n'est le meme scan que si les deux se trient pareil, ce que rien ne
+  # garantit des qu'un rouleau a plusieurs scans (PHerc0139, PHerc1203).
+  #
+  # ⭐ Ici la resolution cible n'a meme pas a etre declaree : c'est celle de la TABLE, donc
+  # celle a laquelle la graine a ete trouvee. Le scan choisi est par construction celui
+  # auquel cette graine se rapporte, et un rouleau qui n'aurait pas de scan a cette
+  # resolution est arrete au lieu d'etre trace a une autre echelle.
+  if ! PAIRE=$(python3 "$ROOT/analysis/src/apparier_volumes.py" "$R" --pour-campagne \
+                 --voxel-um "$UM_TABLE" 2>"$DEST/$R.appariement.log"); then
+    echo "   ⚠ appariement refuse : $(cat "$DEST/$R.appariement.log")"; continue
+  fi
+  read -r SURF VOL UM <<<"$PAIRE"
+  if [ -z "$SURF" ] || [ -z "$VOL" ] || [ -z "$UM" ]; then
+    echo "   ⚠ pas de prediction ou pas de volume"; continue
+  fi
   # Le desaccord ARRETE le rouleau : tracer a une echelle qui n'est pas celle de la table
   # rendrait des aires incomparables a tout ce que ce depot a deja mesure.
   #
@@ -80,6 +103,9 @@ sys.exit(0 if abs(float('$UM') - float('$UM_TABLE')) < 1e-6 else 1)"; then
     rm -rf "$D"; mkdir -p "$D"
     sed "s/\"voxelsize\": [0-9.]*/\"voxelsize\": $UM/" \
         "$ROOT/artefacts/PHerc0358/seed.json" > "$D/seed.json"
+    if [ -n "$GENERATIONS" ]; then
+      sed -i "s/\"generations\": [0-9]*/\"generations\": $GENERATIONS/" "$D/seed.json"
+    fi
     ( cd "$D" && timeout 2400 vc_grow_seg_from_seed -v "$B/$SURF" -t . -p seed.json \
         -s "$X" "$Y" "$Z" > trace.log 2>&1 )
     RC=$?
@@ -103,6 +129,7 @@ ok = '$STATUT' == 'ok'
 json.dump({'rouleau': '$R', 'repetition': $I, 'statut': '$STATUT',
            'graine': [$X, $Y, $Z], 'voxel_um': $UM, 'surface': '$SURF',
            'generations': $GEN,
+           'plafond_generations': json.load(open('$D/seed.json'))['generations'],
            'aire_cm2': (${AIRE:-0} or 0) if ok else None,
            'transverse': (${CROIS:-0} or 0) if ok else None},
           open('$D/resume.json', 'w'), indent=2)"

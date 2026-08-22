@@ -1,20 +1,24 @@
-# Le tirage, sur douze rouleaux — M1bis
+# Le tirage, sur treize rouleaux — M1bis
+
+> ⚠ Le nom du fichier dit « douze » : c'est l'état du 2026-08-20, et il est **gardé** pour
+> que les liens des autres documents continuent de résoudre. La campagne en couvre **treize**
+> depuis le 2026-08-22 — `PHerc1203` a reçu ses graines et ses six tirages (§5).
 
 2026-08-20. `30` avait mesuré que `vc_grow_seg_from_seed` rend un résultat différent à
 chaque exécution — mais sur **une** graine, d'**un** rouleau, en quatorze tirages. `29`
 marquait le manque ⚠⚠ : *« 14 tirages ne font pas une distribution, et le taux de 13 % n'a
 été mesuré que sur une graine »*.
 
-**72 tirages, 12 rouleaux, six par rouleau, paramètres strictement identiques.**
+**78 tirages, 13 rouleaux, six par rouleau, paramètres strictement identiques.**
 
 ---
 
 ## 0. La forme, d'un coup d'œil
 
-![douze rouleaux, six tirages chacun](images/35_tirages.png)
+![treize rouleaux, six tirages chacun](images/35_tirages.png)
 
 > **Si le traceur était déterministe, chaque ligne serait un point unique.** Aucune ne
-> l'est. Et sur quatre lignes un point est rouge : le même appel qui rend une trace propre
+> l'est. Et sur cinq lignes un point est rouge : le même appel qui rend une trace propre
 > cinq fois rend une trace auto-intersectée la sixième.
 
 Figure : `analysis/src/figure_tirages.py`, depuis `docs/table_tirages.json`.
@@ -23,26 +27,27 @@ Figure : `analysis/src/figure_tirages.py`, depuis `docs/table_tirages.json`.
 
 | | |
 |---|---:|
-| tirages exploitables | **72** |
-| rouleaux | **12** |
-| rouleaux dont l'aire est identique sur les six tirages | **0 sur 12** |
-| ⭐ rouleaux où le **VERDICT bascule** d'un tirage à l'autre | **4 sur 12** |
-| mauvais tirages | **4 / 72 = 5,6 %** (IC 95 % exact : 1,5 % – 13,6 %) |
+| tirages exploitables | **78** |
+| rouleaux | **13** |
+| rouleaux dont l'aire est identique sur les six tirages | **0 sur 13** |
+| ⭐ rouleaux où le **VERDICT bascule** d'un tirage à l'autre | **5 sur 13** |
+| mauvais tirages | **5 / 78 = 6,4 %** (IC 95 % exact : 2,1 % – 14,3 %) |
 
-Les quatre basculements, avec le pire compte du rouleau :
+Les cinq basculements, avec le pire compte du rouleau :
 
 | rouleau | croisements par tirage | dispersion d'aire |
 |---|---|---:|
 | `PHerc0125` | **1615**, 0, 0, 0, 0, 0 | 0,31 % |
 | `PHerc0257` | 0, 0, 0, 0, 0, **428** | 0,24 % |
 | `PHerc0268` | **607**, 0, 0, 0, 0, 0 | 0,33 % |
+| `PHerc1203` | **140**, 0, 0, 0, 0, 0 | 0,63 % |
 | `PHerc1447` | 0, 0, 0, **1371**, 0, 0 | 35,14 % |
 
 > ⭐ **Un basculement est la preuve la plus forte disponible** : deux exécutions à
 > paramètres strictement identiques, deux verdicts opposés. Aucun seuil, aucune vérité
 > terrain, aucune interprétation. Le résultat de `30` ne tenait pas à sa graine.
 
-⚠ Le taux de 5,6 % est **compatible** avec les 13 % de `30` (2 sur 15) — les deux
+⚠ Le taux de 6,4 % est **compatible** avec les 13 % de `30` (2 sur 15) — les deux
 intervalles se recouvrent largement. Ce que la campagne apporte n'est pas un taux plus
 petit, c'est un intervalle **quatre fois plus étroit** et une **généralité** : le phénomène
 existe sur des rouleaux, des graines et des tailles de trace différents.
@@ -71,15 +76,35 @@ d'aire l'un de l'autre, deux verdicts opposés — généralisée à douze roule
 La dispersion médiane vaut **0,3 %** chez les rouleaux qui basculent et **12,8 %** chez les
 autres — un facteur 40, dans le sens contraire de l'intuition.
 
-**C'est trop beau, et ça ne tient pas debout sur ces effectifs.** Quatre rouleaux contre
-huit, et un confond visible dans le tableau : les rouleaux à faible dispersion sont ceux
-dont les six tirages atteignent le **plafond de générations** (118 sur 118), donc dont la
-trace sature. Répartis ainsi, 3 basculements sur 6 rouleaux plafonnés contre 1 sur 6 non
-plafonnés — un test exact donne p ≈ 0,55.
+**C'est trop beau, et ça ne tient pas debout.** Le confond est visible dans le tableau : les
+rouleaux à faible dispersion sont ceux dont les six tirages atteignent le **plafond de
+générations**, donc dont la trace **sature**. Une dispersion mesurée sous une troncature
+commune ne mesure pas le traceur, elle mesure la troncature.
 
-> **Rien n'est établi ici.** C'est noté parce qu'une hypothèse écartée avec sa raison vaut
-> mieux qu'une hypothèse oubliée, et parce que la mesure qui trancherait est bon marché :
-> relever le plafond de générations et rejouer.
+⭐ **Et le partage par plafond est plus net que le partage par basculement**, ce qui désigne
+lequel des deux explique l'autre :
+
+| partage | dispersion médiane | | facteur |
+|---|---:|---:|---:|
+| par **basculement** | 0,3 % | 12,8 % | 43 |
+| par **plafond** | **0,5 %** | **19,9 %** | **40** |
+
+Et l'association entre les deux reste **non significative** : **4 basculements sur 6
+rouleaux plafonnés contre 1 sur 7** — test exact **p = 0,10**.
+
+⚠⚠ **Ce chiffre est recalculé, il ne l'était pas.** La version du 2026-08-20 écrivait
+« un test exact donne p ≈ 0,55 » — un nombre sans producteur dans l'arbre, donc une anecdote
+au sens de la règle de ce dépôt, et périmé dès que le treizième rouleau est arrivé.
+`analysis/src/table_tirages.py` le calcule désormais, avec le plafond **dérivé** de la
+campagne (le maximum de générations observé) plutôt qu'écrit en dur : une constante
+deviendrait fausse en silence le jour où le budget du `seed.json` change.
+
+> **Rien n'est encore établi sur la CAUSE.** C'est noté parce qu'une hypothèse écartée avec
+> sa raison vaut mieux qu'une hypothèse oubliée, et parce que la mesure qui trancherait est
+> bon marché : relever le plafond de générations et rejouer. C'est désormais un paramètre —
+> `GENERATIONS=400 ./tools/campagne_tirages.sh data/tirages_plafond 6 <rouleaux>` — et le
+> plafond effectif voyage dans chaque résumé, pour que deux campagnes à plafonds différents
+> ne produisent pas des lignes indistinguables.
 
 ## 4. Ce que ça change pour la chaîne
 

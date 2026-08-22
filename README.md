@@ -278,7 +278,7 @@ priorisee. A lire en premier si vous reprenez ce chantier.
 | **[`docs/31_roadmap.md`](docs/31_roadmap.md)** | ⭐⭐ **la roadmap** : le Grand Prize est un prix d'**algorithmique de geometrie**, et son critere d'acceptation est une image Docker qu'ils lancent |
 | **[`docs/33_la_carte_nest_pas_resolue.md`](docs/33_la_carte_nest_pas_resolue.md)** | ⚠⚠ le classement des 13 rouleaux de [`16`](docs/16_carte_difficulte_rouleaux_du_prix.md) **ne separe aucune des 78 paires** — et ce qu'il faudrait pour trancher : 50 fenetres |
 | **[`docs/34_un_verdict_qui_ne_mesure_rien.md`](docs/34_un_verdict_qui_ne_mesure_rien.md)** | ⚠⚠ `vc_tifxyz_selfcross` peut declarer une surface **propre en n'ayant teste aucune paire** — et la perte de sensibilite mesuree quand un maillage grossit |
-| **[`docs/35_le_tirage_sur_douze_rouleaux.md`](docs/35_le_tirage_sur_douze_rouleaux.md)** | ⭐⭐ **72 tirages, 12 rouleaux, parametres identiques** : 4 rouleaux ou le VERDICT bascule, 0 reproductible, et l'aire ne signale pas le mauvais tirage |
+| **[`docs/35_le_tirage_sur_douze_rouleaux.md`](docs/35_le_tirage_sur_douze_rouleaux.md)** | ⭐⭐ **78 tirages, 13 rouleaux, parametres identiques** : 5 rouleaux ou le VERDICT bascule, 0 reproductible, et l'aire ne signale pas le mauvais tirage |
 | **[`docs/36_lorigine_de_la_pile.md`](docs/36_lorigine_de_la_pile.md)** | ⭐⭐ **une hypothese testee et REFUTEE** — et ce qu'elle a trouve a la place : « officiel » n'est pas synonyme de « bon », un rouleau publie des segments de 18 % a 68 % |
 | **[`docs/37_les_deux_axes_ne_saccordent_pas.md`](docs/37_les_deux_axes_ne_saccordent_pas.md)** | ⭐⭐ **selectionner sur un axe et valider sur l'autre** : teste, et les deux juges ne se recoupent pas — 1 accord sur 8 |
 | **[`docs/38_ce_qui_bouge_avec_la_fenetre.md`](docs/38_ce_qui_bouge_avec_la_fenetre.md)** | ⭐⭐⭐ **un test de trace sans seuil, sans verite terrain et sans echelle** — ne de trois hypotheses refutees : une bonne surface garde sa distance quand la fenetre s'elargit, la notre la suit (α = +0,00 contre +1,01) |
@@ -350,7 +350,11 @@ mega-octets ».
 ### La chaine de production, et les gardes du depot
 
 ```bash
-./tools/temoins.sh                  # 18 batteries, 741 controles hors ligne, tous verts
+./tools/temoins.sh                  # 32 batteries, 1095 controles hors ligne, tous verts
+                                    # ⚠ ces deux chiffres sont ECRITS PAR LE SCRIPT dans
+                                    # docs/temoins.json et gardes comme tous les autres :
+                                    # la version precedente disait 18 et 741, recopies a
+                                    # la main et donc faux depuis longtemps
 ./validate.sh                       # la chaine complete : tests + builds + boot + parite
 
 # la carte des segments publies d'un rouleau : y a-t-il deux patchs d'UNE MEME feuille ?

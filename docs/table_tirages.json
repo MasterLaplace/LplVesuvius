@@ -1,14 +1,15 @@
 {
-  "tirages_total": 72,
-  "rouleaux": 12,
-  "mauvais": 4,
-  "taux_mauvais": 0.05555555555555555,
-  "ic95_bas": 0.0153425371111306,
-  "ic95_haut": 0.136178649312924,
+  "tirages_total": 78,
+  "rouleaux": 13,
+  "mauvais": 5,
+  "taux_mauvais": 0.0641025641025641,
+  "ic95_bas": 0.021139720411461376,
+  "ic95_haut": 0.1432875961068856,
   "rouleaux_bascule": [
     "PHerc0125",
     "PHerc0257",
     "PHerc0268",
+    "PHerc1203",
     "PHerc1447"
   ],
   "rouleaux_reproductibles": [],
@@ -17,12 +18,21 @@
     1.0,
     0.6,
     0.2,
+    1.0,
     0.6
   ],
-  "dispersion_mediane_bascule": 0.0032042281067324657,
+  "dispersion_mediane_bascule": 0.0033216355321612533,
   "dispersion_mediane_sans": 0.1276883102893815,
+  "plafond_generations": 118,
+  "plafonnes": 6,
+  "non_plafonnes": 7,
+  "bascules_plafonnes": 4,
+  "bascules_non_plafonnes": 1,
+  "p_fisher_plafond": 0.10256410256410257,
+  "dispersion_mediane_plafonnes": 0.004804398851711449,
+  "dispersion_mediane_non_plafonnes": 0.19911508436841005,
   "sans_maillage": 0,
-  "reverifies": 72,
+  "reverifies": 78,
   "desaccords": [],
   "lignes": [
     {
@@ -58,7 +68,8 @@
       ],
       "propres": 5,
       "aire_identique": false,
-      "verdict_bascule": true
+      "verdict_bascule": true,
+      "plafonne": true
     },
     {
       "rouleau": "PHerc0191",
@@ -93,7 +104,8 @@
       ],
       "propres": 6,
       "aire_identique": false,
-      "verdict_bascule": false
+      "verdict_bascule": false,
+      "plafonne": true
     },
     {
       "rouleau": "PHerc0211",
@@ -128,7 +140,8 @@
       ],
       "propres": 6,
       "aire_identique": false,
-      "verdict_bascule": false
+      "verdict_bascule": false,
+      "plafonne": false
     },
     {
       "rouleau": "PHerc0257",
@@ -163,7 +176,8 @@
       ],
       "propres": 5,
       "aire_identique": false,
-      "verdict_bascule": true
+      "verdict_bascule": true,
+      "plafonne": true
     },
     {
       "rouleau": "PHerc0268",
@@ -198,7 +212,8 @@
       ],
       "propres": 5,
       "aire_identique": false,
-      "verdict_bascule": true
+      "verdict_bascule": true,
+      "plafonne": true
     },
     {
       "rouleau": "PHerc0358",
@@ -233,7 +248,8 @@
       ],
       "propres": 6,
       "aire_identique": false,
-      "verdict_bascule": false
+      "verdict_bascule": false,
+      "plafonne": true
     },
     {
       "rouleau": "PHerc0800",
@@ -268,7 +284,8 @@
       ],
       "propres": 6,
       "aire_identique": false,
-      "verdict_bascule": false
+      "verdict_bascule": false,
+      "plafonne": false
     },
     {
       "rouleau": "PHerc0813",
@@ -303,7 +320,8 @@
       ],
       "propres": 6,
       "aire_identique": false,
-      "verdict_bascule": false
+      "verdict_bascule": false,
+      "plafonne": false
     },
     {
       "rouleau": "PHerc0826",
@@ -338,7 +356,44 @@
       ],
       "propres": 6,
       "aire_identique": false,
-      "verdict_bascule": false
+      "verdict_bascule": false,
+      "plafonne": false
+    },
+    {
+      "rouleau": "PHerc1203",
+      "n": 6,
+      "graine": [
+        3443,
+        5133,
+        9419
+      ],
+      "voxel_um": 9.362,
+      "generations_min": 118,
+      "generations_max": 118,
+      "aires": [
+        19.947905,
+        19.828304,
+        19.823454,
+        19.838529,
+        19.823024,
+        19.915923
+      ],
+      "aire_min": 19.823024,
+      "aire_max": 19.947905,
+      "aire_mediane": 19.8334165,
+      "etendue_relative": 0.006287162171261644,
+      "croisements": [
+        140,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "propres": 5,
+      "aire_identique": false,
+      "verdict_bascule": true,
+      "plafonne": true
     },
     {
       "rouleau": "PHerc1218",
@@ -373,7 +428,8 @@
       ],
       "propres": 6,
       "aire_identique": false,
-      "verdict_bascule": false
+      "verdict_bascule": false,
+      "plafonne": false
     },
     {
       "rouleau": "PHerc1447",
@@ -408,7 +464,8 @@
       ],
       "propres": 5,
       "aire_identique": false,
-      "verdict_bascule": true
+      "verdict_bascule": true,
+      "plafonne": false
     },
     {
       "rouleau": "PHerc1545",
@@ -443,7 +500,8 @@
       ],
       "propres": 6,
       "aire_identique": false,
-      "verdict_bascule": false
+      "verdict_bascule": false,
+      "plafonne": false
     }
   ]
 }
