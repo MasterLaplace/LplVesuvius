@@ -57,45 +57,15 @@ print(c['x'], c['y'], c['z'], round(c['planarite'],4), round(c['occupation'],4),
     W="$DEST/$CAS"; mkdir -p "$W"
     echo "== $NOM candidat $I  planarité $PLAN  occupation $OCC  voisins $VOIS  ($X $Y $Z)"
 
-    [ -s "$W/seed.json" ] || python3 - "$ROOT/artefacts/PHerc0358/seed.json" "$W/seed.json" "$UM" "$GENERATIONS" <<'PY'
-import json, sys
-src, dst, um, gen = sys.argv[1], sys.argv[2], float(sys.argv[3]), int(sys.argv[4])
-d = json.load(open(src)); d["voxelsize"] = um; d["generations"] = gen
-json.dump(d, open(dst, "w"), indent=2)
-PY
-
-    M=$(ls -d "$W"/auto_grown_* 2>/dev/null | head -1)
-    if [ -z "$M" ]; then
-      ( cd "$W" && timeout 3600 vc_grow_seg_from_seed -v "$B/${PRED[$NOM]}" -t . \
-          -p seed.json -s "$X" "$Y" "$Z" ) > "$W/trace.log" 2>&1
-      M=$(ls -d "$W"/auto_grown_* 2>/dev/null | head -1)
-    fi
-    # ⚠⚠ « aucune surface » est un RESULTAT sur ce candidat -- une graine posee dans du vide
-    # n'a rien a faire pousser -- et pas une panne du script.
-    [ -n "$M" ] || { echo "   ⚠ aucune surface — résultat sur ce candidat"; continue; }
-    AIRE=$(grep -oE 'generated surface .* \(([0-9.]+) cm\^2\)' "$W/trace.log" \
-           | grep -oE '\(([0-9.]+)' | tr -d '(' | tail -1)
-    [ -d "$W/plat" ] || vc_flatten -i "$M" -o "$W/plat" > "$W/flatten.log" 2>&1
-
-    PROFILS=""
-    for F in $FENETRES; do
-      OUT="$W/profil_${F}c.json"
-      if [ ! -s "$OUT" ]; then
-        rm -rf "$W/rendu_$F"
-        "$ROOT/tools/rendre_surveille.sh" "$W/rendu_$F" "$PATIENCE" -- \
-            -v "$W/cache" --remote-url "$B/$VOL" --scale 1 -g 0 -s "$W/plat" \
-            --tif-output "$W/rendu_$F" -n "$F" --slice-step 1 --auto-crop \
-            > "$W/rendu_$F.log" 2>&1 || { echo "   ⚠ rendu $F abandonné"; continue; }
-        ( cd "$ROOT/inference_xpu" && uv run python ../analysis/src/depth_profile.py \
-            "$W/rendu_$F" --grid --step 200 --traced-layer $((F / 2)) --voxel-um "$UM" \
-            --out "$OUT" ) > "$W/profil_$F.log" 2>&1 || { echo "   ⚠ profil $F échoué"; continue; }
-      fi
-      PROFILS="$PROFILS --profil $OUT"
-    done
-    rm -rf "$W/cache"
-    echo "   aire ${AIRE:-?} cm²"
-    [ -n "$PROFILS" ] && ( cd "$ROOT/experiments" && uv run python \
-        ../analysis/src/test_convergence.py $PROFILS --nom "$CAS (occ $OCC, ${VOIS}v)" \
-        --json "$ROOT/docs/candidat_paris4_$CAS.json" | tail -4 )
+    # ⚠ La trace, le rendu, le profil et le jugement sont delegues au traceur PARTAGE.
+    # Ce corps etait inline ici et plafond_generations.sh allait le recopier -- deux
+    # definitions de « tracer une graine », libres de diverger sur le pas de tranche ou le
+    # recadrage, donc deux traces qu on croirait comparables.
+    # ⚠ VOL et UM sont passes : les redemander a S3 huit fois couterait huit fois et
+    # pourrait rendre deux reponses differentes en cours de campagne.
+    PREDICTION="$NOM" DEST="$W" GENERATIONS="$GENERATIONS" FENETRES="$FENETRES" \
+      PATIENCE="$PATIENCE" VOL="$VOL" UM="$UM" \
+      ETIQUETTE="$CAS (occ $OCC, ${VOIS}v)" JSON="$ROOT/docs/candidat_paris4_$CAS.json" \
+      "$ROOT/tools/tracer_une_graine.sh" "$X" "$Y" "$Z"
   done
 done

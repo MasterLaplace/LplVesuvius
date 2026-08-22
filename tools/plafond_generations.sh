@@ -1,73 +1,77 @@
 #!/usr/bin/env bash
 # ⚠⚠ Le plafond de generations est-il en train de FABRIQUER le resultat negatif ?
 #
-# Toute trace jamais faite sur PHercParis4 s arrete a la generation 59. Ce budget de 60
-# a ete choisi le jour ou j estimais le rendu a 57 Kio/s -- une extrapolation faite sur UN
-# echantillon, corrigee depuis par la mesure : 1108 a 5861 Kio/s, soit vingt a cent fois
-# plus vite. Le budget etait donc dimensionne pour un cout qui n existe pas.
+# Toute trace jamais faite sur PHercParis4 s arrete a la generation 59, et leurs aires
+# coincident a quatre chiffres -- elles mesurent le PLAFOND, pas la donnee. Or ce budget de
+# 60 a ete fixe le jour ou j estimais le rendu a 57 Kio/s, une extrapolation faite sur UN
+# echantillon ; la mesure l a corrige a 1108-5861 Kio/s, vingt a cent fois plus vite.
 #
-# Ce que ce script mesure : α a budget croissant, MEME graine, meme prediction. Deux
-# issues, et elles ne se ressemblent pas.
-#
-#   α stable        -- 60 generations suffisaient pour juger, le resultat negatif tient,
-#                      et on le saura au lieu de l esperer.
-#   α qui baisse    -- la surface avait besoin de place pour reveler sa feuille, et TOUT
-#                      ce que ce depot affirme sur ce rouleau est a refaire plus grand.
+# Deux issues, et elles ne se ressemblent pas :
+#   α stable      -- 60 suffisaient pour juger, le resultat negatif tient, et on le SAURA.
+#   α qui baisse  -- la surface avait besoin de place, et tout ce rouleau est a refaire.
 #
 # ⚠ Ce n est pas un test de convergence de plus : c est le test de l INSTRUMENT qui a
-# produit tous les autres. Il passe donc avant d ajouter une seizieme trace a 60.
+# produit tous les autres.
 #
-# ⚠ La graine est passee en argument et pas devinee : la campagne des candidats vient de
-# montrer que trouver_graine classe sur la planarite seule, donc « la » graine d une
-# prediction n est pas une notion qui va de soi.
+# ⚠ La trace elle-meme est deleguee a tracer_une_graine.sh. Deux traces qu on compare
+# doivent avoir ete faites pareil ; les ecrire deux fois serait mesurer la difference des
+# scripts en croyant mesurer celle des budgets.
 #
-# Usage : tools/plafond_generations.sh <prediction> <indice-candidat> [budgets...]
+# Usage : tools/plafond_generations.sh <prediction> <indice> [budgets...]
 set -uo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-PRED="${1:?prediction (m7 ou ps256)}"
-IDX="${2:?indice du candidat}"
+
+if [ "${1:-}" = "--verifier" ]; then
+  ok=0; n=0
+  chk() { n=$((n+1)); if eval "$2"; then :; else echo "  FAIL $1"; ok=1; fi; }
+  chk "le traceur partage existe" '[ -x "$ROOT/tools/tracer_une_graine.sh" ]'
+  # ⚠⚠ Le motif est coupe en deux morceaux concatenes : ecrit d un bloc, il apparaitrait
+  # dans le fichier que la sonde inspecte, donc la sonde se matcherait ELLE-MEME et
+  # signalerait une duplication qui n existe pas. Meme piege que pkill -f.
+  chk "aucune trace n est reecrite ici" \
+      '! grep -q "vc_grow""_seg_from_seed" "$ROOT/tools/plafond_generations.sh"'
+  chk "le depouilleur existe" '[ -f "$ROOT/analysis/src/effet_du_plafond.py" ]'
+  out=$("$ROOT/tools/plafond_generations.sh" inexistante 0 2>&1); rc=$?
+  chk "une prediction sans graines est refusee (2)" '[ "$rc" = 2 ]'
+  chk "... et le refus nomme le fichier attendu" 'printf "%s" "$out" | grep -q graine_inexistante'
+  chk "au moins deux budgets par defaut" \
+      'grep -qE "BUDGETS=\(60 200\)" "$ROOT/tools/plafond_generations.sh"'
+  echo "$([ $ok = 0 ] && echo 'ALL PASS' || echo FAILURES) ($ok failures, $n checks)"
+  exit $ok
+fi
+
+PRED="${1:-}"; IDX="${2:-}"
+[ -n "$PRED" ] && [ -n "$IDX" ] || { echo "usage : $0 <prediction> <indice> [budgets...]" >&2; exit 2; }
 shift 2
-BUDGETS=("${@:-60 200}")
+BUDGETS=(60 200)
 [ $# -gt 0 ] && BUDGETS=("$@")
 
-GRAINES="$ROOT/data/prediction_paris4/graines_${PRED}.json"
-[ -f "$GRAINES" ] || { echo "graines absentes : $GRAINES" >&2; exit 2; }
+G="$ROOT/data/prediction_paris4/graine_${PRED}.json"
+[ -s "$G" ] || { echo "refus : graines absentes — $G" >&2; exit 2; }
+read -r X Y Z PLAN OCC VOIS <<<"$(python3 -c "
+import json
+c = json.load(open('$G'))['candidats'][$IDX]
+print(c['x'], c['y'], c['z'], round(c['planarite'], 4), round(c['occupation'], 4), c['voisins'])")" \
+  || { echo "refus : candidat $IDX absent de $G" >&2; exit 2; }
 
-lire() { python3 - "$GRAINES" "$IDX" "$1" <<'PY'
-import json,sys
-d=json.load(open(sys.argv[1])); c=d["candidats"][int(sys.argv[2])]
-print(c[sys.argv[3]] if sys.argv[3] in c else c["xyz"][{"x":0,"y":1,"z":2}[sys.argv[3]]])
-PY
-}
-X=$(lire x); Y=$(lire y); Z=$(lire z)
-echo "graine ${PRED} c${IDX} : ${X} ${Y} ${Z}"
-echo "budgets : ${BUDGETS[*]}"
+echo "== ${PRED} candidat ${IDX}  planarité $PLAN  occupation $OCC  voisins $VOIS  ($X $Y $Z)"
+echo "== budgets : ${BUDGETS[*]}"
 
-for G in "${BUDGETS[@]}"; do
-  DEST="$ROOT/data/paris4_plafond/${PRED}_c${IDX}_g${G}"
-  if [ -s "$DEST/profil.json" ]; then echo "== g${G} deja mesure, saute"; continue; fi
-  mkdir -p "$DEST"
-  echo "== g${G} — trace"
-  # ⚠ DEST est ABSOLU : depth_profile tourne depuis inference_xpu, un chemin relatif
-  # y designerait un autre dossier. Piege deja paye une fois.
-  if ! GENERATIONS="$G" DEST="$DEST" "$ROOT/tools/tracer_une_graine.sh" "$X" "$Y" "$Z" \
-        > "$DEST/trace.log" 2>&1; then
-    echo "   trace en echec (voir $DEST/trace.log) — on s arrete la, un budget plus grand"
-    echo "   ne peut que couter davantage"; break
-  fi
-  A=$(grep -oE 'generated surface .*\(([0-9.]+) cm\^2\)' "$DEST/trace.log" | grep -oE '[0-9.]+ cm' | tr -d ' cm' | tail -1)
-  echo "   aire ${A:-?} cm²"
-  echo "== g${G} — profil de profondeur"
-  if ! "$ROOT/tools/rendre_surveille.sh" "$DEST" > "$DEST/profil.log" 2>&1; then
-    echo "   rendu en echec ou tue par le chien de garde (voir $DEST/profil.log)"; break
-  fi
-  uv run --project "$ROOT" python "$ROOT/analysis/src/test_convergence.py" \
-      --profil "$DEST/profil.json" --json "$ROOT/docs/plafond_${PRED}_c${IDX}_g${G}.json" \
-      2>&1 | tail -4
+for B in "${BUDGETS[@]}"; do
+  J="$ROOT/docs/plafond_${PRED}_c${IDX}_g${B}.json"
+  if [ -s "$J" ]; then echo "== g${B} déjà mesuré, sauté"; continue; fi
+  echo "== g${B}"
+  PREDICTION="$PRED" DEST="$ROOT/data/paris4_plafond/${PRED}_c${IDX}_g${B}" \
+    GENERATIONS="$B" ETIQUETTE="${PRED}_c${IDX} @ ${B} générations" JSON="$J" \
+    "$ROOT/tools/tracer_une_graine.sh" "$X" "$Y" "$Z"
+  rc=$?
+  # ⚠ 4 = la graine n a rien fait pousser : c est un resultat, et un budget PLUS GRAND ne
+  # peut pas y changer quoi que ce soit, donc on s arrete plutot que de payer la suite.
+  [ "$rc" = 4 ] && { echo "   aucune surface — inutile d'aller plus haut"; break; }
 done
 
 echo
 echo "== confrontation"
 uv run --project "$ROOT" python "$ROOT/analysis/src/effet_du_plafond.py" \
     --docs "$ROOT/docs" --prediction "$PRED" --candidat "$IDX" \
-    --json "$ROOT/docs/plafond_${PRED}_c${IDX}.json" || true
+    --json "$ROOT/docs/plafond_${PRED}_c${IDX}.json"

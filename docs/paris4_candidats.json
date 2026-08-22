@@ -1,0 +1,124 @@
+{
+  "candidats": 8,
+  "avec_alpha": 3,
+  "indecidables": 5,
+  "convergents": [],
+  "alpha_min": 1.013497314592548,
+  "seuil_converge": 0.7,
+  "resolution": 0.2,
+  "generations_atteintes": [
+    59
+  ],
+  "toutes_au_plafond": true,
+  "aire_min_cm2": 0.317392,
+  "aire_max_cm2": 0.31759,
+  "etendue_relative_aires": 0.0006234453225856481,
+  "rho_detectable": null,
+  "correlations": {
+    "planarite": {
+      "rho": 0.0,
+      "n": 3,
+      "concluant": false
+    },
+    "occupation": {
+      "rho": 0.0,
+      "n": 3,
+      "concluant": false
+    },
+    "voisins": {
+      "rho": 0.0,
+      "n": 3,
+      "concluant": false
+    }
+  },
+  "lignes": [
+    {
+      "prediction": "m7",
+      "candidat": 0,
+      "planarite": 1.0,
+      "occupation": 0.75,
+      "voisins": 9,
+      "verdict": "indecidable",
+      "alpha": null,
+      "generation_max": 59,
+      "aire_cm2": 0.317488
+    },
+    {
+      "prediction": "m7",
+      "candidat": 1,
+      "planarite": 1.0,
+      "occupation": 0.5,
+      "voisins": 9,
+      "verdict": "indecidable",
+      "alpha": null,
+      "generation_max": 59,
+      "aire_cm2": 0.31759
+    },
+    {
+      "prediction": "m7",
+      "candidat": 2,
+      "planarite": 0.9891,
+      "occupation": 0.502,
+      "voisins": 27,
+      "verdict": "indecidable",
+      "alpha": null,
+      "generation_max": 59,
+      "aire_cm2": 0.317413
+    },
+    {
+      "prediction": "m7",
+      "candidat": 3,
+      "planarite": 0.9873,
+      "occupation": 0.4492,
+      "voisins": 27,
+      "verdict": "indecidable",
+      "alpha": null,
+      "generation_max": 59,
+      "aire_cm2": 0.317491
+    },
+    {
+      "prediction": "m7",
+      "candidat": 4,
+      "planarite": 0.987,
+      "occupation": 0.4141,
+      "voisins": 27,
+      "verdict": "indecidable",
+      "alpha": null,
+      "generation_max": 59,
+      "aire_cm2": 0.317443
+    },
+    {
+      "prediction": "ps256",
+      "candidat": 0,
+      "planarite": 0.9977,
+      "occupation": 0.0215,
+      "voisins": 15,
+      "verdict": "suit la fenêtre",
+      "alpha": 1.013497314592548,
+      "generation_max": 59,
+      "aire_cm2": 0.317392
+    },
+    {
+      "prediction": "ps256",
+      "candidat": 1,
+      "planarite": 0.9974,
+      "occupation": 0.3555,
+      "voisins": 18,
+      "verdict": "suit la fenêtre",
+      "alpha": 1.166820592048243,
+      "generation_max": 59,
+      "aire_cm2": 0.317449
+    },
+    {
+      "prediction": "ps256",
+      "candidat": 2,
+      "planarite": 0.9938,
+      "occupation": 0.4648,
+      "voisins": 25,
+      "verdict": "suit la fenêtre",
+      "alpha": 1.013497314592548,
+      "generation_max": 59,
+      "aire_cm2": 0.317445
+    }
+  ]
+}

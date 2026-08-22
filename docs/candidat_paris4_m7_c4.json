@@ -1,0 +1,25 @@
+{
+  "series": [
+    {
+      "verdict": "indecidable",
+      "raison": "profil PLAT — amplitude 0.0000 sous le minimum de détection 0.0200 de l'instrument. Les écarts rapportés sont les bords de fenêtre, donc leur rapport vaut celui des fenêtres et α ≈ 1 par identité, quoi qu'il y ait dans le volume",
+      "serie": [
+        [
+          41,
+          48.0
+        ],
+        [
+          161,
+          192.0
+        ]
+      ],
+      "amplitude": 0.0,
+      "amplitude_min": 0.02,
+      "nom": "m7_c4 (occ 0.4141, 27v)",
+      "profils": [
+        "/home/masterlaplace/LplVesuvius/data/paris4_candidats/m7_c4/profil_41c.json",
+        "/home/masterlaplace/LplVesuvius/data/paris4_candidats/m7_c4/profil_161c.json"
+      ]
+    }
+  ]
+}

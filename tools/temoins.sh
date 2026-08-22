@@ -675,6 +675,12 @@ run "candidats de graine"      uv run python "$ROOT/analysis/src/comparer_candid
 # bruit plus fin. Si les deux donnaient le meme verdict, le bruit ne servirait a rien et le
 # fichier ne ferait que rehabiller une soustraction.
 run "effet du plafond"         uv run python "$ROOT/analysis/src/effet_du_plafond.py" --verifier
+# ⚠⚠ Les deux campagnes de trace. La sonde la plus utile du traceur partage est le CODE de
+# refus : ${X:?} sortirait en 1, indistinguable d une panne, et un appelant qui trie les deux
+# lirait le mauvais cas. Celle du plafond a son propre motif COUPE EN DEUX, sans quoi la
+# sonde se matcherait elle-meme -- pkill -f sous un nouveau costume.
+run "traceur d une graine"     "$ROOT/tools/tracer_une_graine.sh" --verifier
+run "campagne du plafond"      "$ROOT/tools/plafond_generations.sh" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
