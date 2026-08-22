@@ -3,8 +3,8 @@
     {
       "prediction": "m7",
       "graine": "m7",
-      "tirages": 1,
-      "indecidables": 1,
+      "tirages": 4,
+      "indecidables": 4,
       "alphas": [],
       "alpha_median": null,
       "etendue": null
@@ -12,19 +12,22 @@
     {
       "prediction": "m7",
       "graine": "ps256",
-      "tirages": 1,
+      "tirages": 4,
       "indecidables": 0,
       "alphas": [
-        0.946554025096736
+        0.946554025096736,
+        0.9663142489355092,
+        1.013497314592548,
+        1.013497314592548
       ],
-      "alpha_median": 0.946554025096736,
-      "etendue": null
+      "alpha_median": 0.9899057817640287,
+      "etendue": 0.06694328949581207
     },
     {
       "prediction": "ps256",
       "graine": "m7",
-      "tirages": 1,
-      "indecidables": 1,
+      "tirages": 4,
+      "indecidables": 4,
       "alphas": [],
       "alpha_median": null,
       "etendue": null
@@ -32,36 +35,39 @@
     {
       "prediction": "ps256",
       "graine": "ps256",
-      "tirages": 1,
+      "tirages": 4,
       "indecidables": 0,
       "alphas": [
-        1.1196375263912042
+        1.1196375263912042,
+        1.013497314592548,
+        0.9364699510843889,
+        1.0948125717699624
       ],
-      "alpha_median": 1.1196375263912042,
-      "etendue": null
+      "alpha_median": 1.0541549431812554,
+      "etendue": 0.18316757530681527
     }
   ],
   "resolution_alpha": 0.2,
   "effet_prediction": {
     "ecarts": [
-      0.17308350129446815
+      0.0642491614172267
     ],
-    "max": 0.17308350129446815,
-    "median": 0.17308350129446815
+    "max": 0.0642491614172267,
+    "median": 0.0642491614172267
   },
   "effet_endroit": null,
   "indecidabilite_par_prediction": {
     "par_niveau": {
       "m7": {
-        "indecidables": 1,
-        "tirages": 2
+        "indecidables": 4,
+        "tirages": 8
       },
       "ps256": {
-        "indecidables": 1,
-        "tirages": 2
+        "indecidables": 4,
+        "tirages": 8
       }
     },
-    "total": 2,
+    "total": 8,
     "niveaux_touches": [
       "m7",
       "ps256"
@@ -71,28 +77,28 @@
   "indecidabilite_par_endroit": {
     "par_niveau": {
       "m7": {
-        "indecidables": 2,
-        "tirages": 2
+        "indecidables": 8,
+        "tirages": 8
       },
       "ps256": {
         "indecidables": 0,
-        "tirages": 2
+        "tirages": 8
       }
     },
-    "total": 2,
+    "total": 8,
     "niveaux_touches": [
       "m7"
     ],
     "concentree": true
   },
-  "bruit_mesure": null,
+  "bruit_mesure": 0.18316757530681527,
   "bruit_retenu": 0.2,
   "verdicts": [
     {
       "facteur": "prédiction",
       "concluant": false,
-      "ecart_max": 0.17308350129446815,
-      "raison": "écart maximal 0.17 sous le bruit 0.20 — il faudrait au moins ça pour distinguer"
+      "ecart_max": 0.0642491614172267,
+      "raison": "écart maximal 0.06 sous le bruit 0.20 — il faudrait au moins ça pour distinguer"
     },
     {
       "facteur": "endroit",
@@ -103,7 +109,7 @@
       "facteur": "endroit",
       "concluant": true,
       "categorique": true,
-      "raison": "toutes les 2 cellule(s) indécidables sont du côté « m7 », aucune de l'autre — l'indécidabilité suit ce facteur"
+      "raison": "toutes les 8 cellule(s) indécidables sont du côté « m7 », aucune de l'autre — l'indécidabilité suit ce facteur"
     }
   ]
 }

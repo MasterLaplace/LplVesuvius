@@ -525,7 +525,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./tools/temoins.sh                      # 49 batteries, 1389 contrôles hors ligne, tous verts
+./tools/temoins.sh                      # 52 batteries, 1469 contrôles hors ligne, tous verts
 ./tools/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)
@@ -1558,7 +1558,22 @@ tirages**, à 60 générations et à l'échelle 1. Il écrit ses verdicts dans
 `docs/prediction_paris4_<prédiction>_sur_graine_<graine>_r<n>.json`, et l'instrument
 ci-dessus les croise.
 
-⭐ **La première passe (un tirage par cellule) a déjà conclu** — l'effet est **l'endroit**,
+### ✅ TERMINÉ le 2026-08-22 au soir — 16 cellules, quatre tirages chacune
+
+| | graine `ps256` | graine `m7` |
+|---|---|---|
+| **`ps256`** | médiane **+1,05**, étendue 0,18 | ⚠⚠ **4 indécidables** |
+| **`m7`** | médiane **+0,99**, étendue 0,07 | ⚠⚠ **4 indécidables** |
+
+⭐⭐ **Effet prédiction : 0,06**, loin sous le bruit de 0,20 — et il a **rétréci** depuis
+0,17 en répétant, ce qui est le comportement d'une différence due au bruit. **Effet endroit :
+catégorique**, les huit indécidables du même côté.
+
+> ⭐ **Conclusion pratique** : il n'y a pas de prédiction à choisir, prendre l'une ou l'autre.
+> Ce qui décide est la **graine**, et c'est là que l'effort doit aller. ⚠ Les deux α
+> mesurables valent ≈ 1 : indistinguables *et* mauvaises à cet endroit.
+
+⭐ **La première passe (un tirage par cellule) avait déjà conclu** — l'effet est **l'endroit**,
 pas la prédiction : α = +1,12 et +0,95 à la graine de `ps256` (écart 0,17, **sous** le bruit
 de 0,20), et les **deux** prédictions rendent un profil **plat** à la graine de `m7`. Les
 répétitions servent à savoir si ce 0,17 tient : mesuré sur la première cellule, l'étendue

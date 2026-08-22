@@ -164,16 +164,38 @@ quatre cellules.
 > Il n'y a pas de bonne prédiction à choisir : les deux se comportent pareil au même endroit,
 > et ce qui décide est **la graine**. L'effort doit aller là.
 
-⚠ Trois réserves, et elles comptent :
-- **un tirage par cellule**, alors que le traceur *est* un tirage — la même graine dans la
-  même prédiction a rendu α = +0,89 puis **+1,12** (0,23 d'écart, plus que la résolution).
-  `REPETITIONS` existe pour ça et vaut 1 ici ;
+### ✅ Répété quatre fois par cellule, et l'écart RÉTRÉCIT
+
+![le 2×2, chaque tirage](images/48_2x2.png)
+
+⚠ La première passe avait un tirage par cellule, or le traceur *en est un* : la même graine
+dans la même prédiction avait rendu α = +0,89 puis +1,12. Le 2×2 a donc été rejoué à
+**quatre tirages par cellule** — seize runs, parfaitement équilibrés.
+
+| | graine de `ps256` | graine de `m7` |
+|---|---|---|
+| **`ps256`** | +1,12 · +1,01 · +0,94 · +1,09 — médiane **+1,05** | ⚠⚠ **4 indécidables** |
+| **`m7`** | +1,01 · +1,01 · +0,97 · +0,95 — médiane **+0,99** | ⚠⚠ **4 indécidables** |
+
+> ⭐⭐ **L'écart entre prédictions passe de 0,17 à 0,06** — il a *rétréci* en répétant, ce qui
+> est exactement le comportement d'une différence due au bruit. Il faudrait au moins **0,20**
+> pour distinguer. Et l'indécidabilité suit la graine à **chacune** des huit répétitions.
+
+⭐ **Le bruit de tirage est mesuré, plus déduit** : l'étendue intra-cellule vaut **0,18** sur
+la cellule la plus dispersée. ⚠ Ce n'est pas la même quantité que le ±0,2 de
+[`43`](43_la_chaine_des_spires.md) — celui-ci est une **demi-largeur** (bande de 0,4) sur un
+mode *déterministe*, donc une résolution de **mesure**. Ce qu'on peut dire, et pas plus :
+l'étendue de tirage observée **tient dans** la bande déclarée, donc celle-ci n'est pas trop
+généreuse.
+
+⚠ Deux réserves restent :
 - les deux α mesurables valent **≈ 1** : les deux prédictions sont indistinguables *et*
   mauvaises à cet endroit ;
-- l'effet catégorique repose sur **deux** cellules.
+- l'effet catégorique repose sur **deux endroits**, pas deux cents — huit répétitions
+  n'élargissent pas l'échantillon de graines, elles ne font que fiabiliser chaque case.
 
 Instrument : [`analysis/src/comparer_predictions.py`](../analysis/src/comparer_predictions.py)
-(19 témoins). ⭐ Il **refuse** quand l'écart est sous le bruit, et le bruit n'est pas choisi :
+(19 témoins) et [`figure_2x2.py`](../analysis/src/figure_2x2.py) (6 témoins). ⭐ Il **refuse** quand l'écart est sous le bruit, et le bruit n'est pas choisi :
 c'est le plus grand de la résolution que `test_convergence` déclare et de l'étendue
 intra-cellule mesurée.
 
