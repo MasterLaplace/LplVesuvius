@@ -56,6 +56,18 @@ shift || true
 # une marge fixe de 25 cellules de chaque cote. C'est donc le budget d'EXTENSION.
 GENERATIONS=${GENERATIONS:-${*:-"100 200 400"}}
 
+# ⚠⚠ DEUX MODES, et la difference compte pour ce qu'on mesure.
+#   - BALAYAGE (defaut) : chaque reglage repart de LA MEME source. Conception appariee, donc
+#     on mesure ce que le reglage fait, et rien d'autre.
+#   - ENCHAINEMENT (`ENCHAINER=N`) : chaque pas repart de l'extension precedente, comme
+#     `spire_suivante.sh` le fait radialement. C'est ce qui produirait une BANDE qui grandit,
+#     mais ça compose aussi les erreurs — donc on refuse d'enchainer depuis une extension qui
+#     ne converge pas, exactement comme la chaine radiale refuse un depart non convergent.
+#
+# ⚠ Ce sont deux questions differentes et il ne faut pas les melanger : le balayage dit
+# « jusqu'ou un seul pas peut aller », l'enchainement dit « les pas se composent-ils ».
+ENCHAINER=${ENCHAINER:-0}
+
 ROULEAU=${ROULEAU:-PHerc1447}
 SOURCE=${SOURCE:-$ROOT/data/origine_pile/mesh.tifxyz}
 SURF=${SURF:-PHerc1447/representations/predictions/surfaces/20250521151220-surface-20260413222639-surface-m7-L0-th0.2.zarr}
@@ -198,4 +210,50 @@ json.dump({'mode': 'resume', 'voxelsize': $UM, 'thread_limit': $FILS,
   juger "$W" "$M" "$(basename "$W")"
 done
 
-echo "fin — $(echo "$GENERATIONS" | wc -w) réglage(s) balayé(s)"
+if [ "$ENCHAINER" -gt 0 ]; then
+  # ⚠ Un seul budget en enchainement : le premier de la liste. Enchainer ET balayer en meme
+  # temps ferait varier deux choses par pas, et aucun ecart ne serait attribuable.
+  G=$(echo "$GENERATIONS" | awk '{print $1}')
+  echo
+  echo "=== ENCHAINEMENT : $ENCHAINER pas, budget $G a chaque pas ==="
+  COURANTE="$SOURCE"
+  for I in $(seq 1 "$ENCHAINER"); do
+    W="$DEST/pas$(printf '%03d' "$I")"
+    [ -f "$W/ABANDONNE" ] && { echo "== pas$I : abandonne, saute"; break; }
+    mkdir -p "$W/trace"
+    if [ -z "$(ls -d "$W/trace"/auto_grown_* 2>/dev/null)" ]; then
+      python3 -c "
+import json
+json.dump({'mode': 'resume', 'voxelsize': $UM, 'thread_limit': $FILS,
+           'cache_size': 6000000000,
+           'min_area_cm': $AIRE_MIN, 'generations': $G},
+          open('$W/trace/seed.json','w'), indent=2)"
+      ( cd "$W/trace" && timeout 7200 vc_grow_seg_from_seed -v "$B/$SURF" -t . -p seed.json \
+          --resume "$COURANTE" > extend.log 2>&1 )
+    fi
+    M=$(ls -d "$W/trace"/auto_grown_* 2>/dev/null | head -1)
+    if [ -z "$M" ]; then
+      echo "== pas$I : AUCUN MAILLAGE — resume n'a rien produit"
+      tail -3 "$W/trace/extend.log" 2>/dev/null | sed 's/^/     /'
+      touch "$W/ABANDONNE"; break
+    fi
+    juger "$W" "$M" "pas$(printf '%03d' "$I")"
+    # ⚠⚠ REFUSER D'ENCHAINER DEPUIS UNE SURFACE QUI NE CONVERGE PAS. Sans ça la chaine
+    # continue de s'etendre en travers de l'empilement et chaque pas suivant mesure une
+    # surface qui n'a plus de feuille — exactement la panne que la chaine radiale evite.
+    # ⚠ Le nom du verdict est calcule dans une variable AVANT d'entrer dans python : imbriquer
+    # un `$(printf ...)` dans une chaine python entre guillemets melange les guillemets des
+    # deux langages, et le script ne parse meme plus.
+    VJ="$ROOT/docs/extension_${ETIQUETTE}_$(basename "$W").json"
+    V=$(python3 -c "
+import json,sys
+print(json.load(open(sys.argv[1]))['series'][0].get('verdict','?'))" "$VJ" 2>/dev/null || echo "?")
+    if [ "$V" != "converge" ]; then
+      echo "   ARRET : le pas $I ne converge pas (« $V ») — enchainer plus loin ne mesurerait rien"
+      break
+    fi
+    COURANTE="$M"
+  done
+fi
+
+echo "fin — $(echo "$GENERATIONS" | wc -w) réglage(s) balayé(s)$([ "$ENCHAINER" -gt 0 ] && echo ", $ENCHAINER pas d'enchaînement demandés")"

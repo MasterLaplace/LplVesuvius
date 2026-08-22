@@ -341,6 +341,32 @@ la source), d'où les maillages identiques au bit entre campagnes constatés plu
 non-déterminisme est propre au chemin de croissance, et c'est pourquoi il n'avait jamais été
 remarqué.
 
+### ⏳ Le budget d'extension scale, et l'outil sait maintenant enchaîner
+
+Le vrai bouton est `generations` (§suivant), et son effet est déjà lisible dans le journal du
+traceur avant même le jugement : **`generations = 100` produit 13,0 cm², `generations = 200`
+en produit 28,4**. Doubler le budget double à peu près l'étendue. Reste à savoir si α survit —
+c'est ce que le balayage en cours mesure.
+
+⭐ **Et ça pose une question de conception plus intéressante que prévu.** Deux façons d'obtenir
+une grande bande :
+
+| | ce que ça fait | ce que ça risque |
+|---|---|---|
+| **un seul pas, gros budget** | une surface étendue d'un coup | le traceur travaille plus longtemps, et sa grille de travail grossit |
+| **enchaîner des petits pas** | chaque pas repart de l'étendue précédente | **compose les erreurs** — c'est ce qui casse la chaîne radiale au bout de six à huit tours |
+
+Si le gros budget tient, il est **préférable** : il n'y a rien à composer. `tools/etendre_nappe.sh`
+sait désormais faire les deux, et la distinction est écrite dans son en-tête parce que
+mélanger les deux ferait varier deux choses par pas :
+
+- **balayage** (défaut) : chaque réglage repart de **la même** source — conception appariée,
+  donc on mesure ce que le réglage fait et rien d'autre ;
+- **enchaînement** (`ENCHAINER=N`) : chaque pas repart de l'extension précédente, et le
+  script **s'arrête** dès qu'un pas ne converge pas, parce qu'enchaîner depuis une surface
+  posée en travers ne mesurerait plus rien. Un seul budget est utilisé en enchaînement, pour
+  la même raison.
+
 ### ⚠⚠ Et le paramètre que je balayais n'est lu par personne
 
 Le balayage devait porter sur `resume_generations`. En vérifiant pourquoi 1 et 3 générations
