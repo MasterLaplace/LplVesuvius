@@ -208,6 +208,30 @@ appel ne donnent pas le même monde — et le prix demande explicitement une pip
 tangente latérale par `cross(n, t)` — c'est ainsi qu'il émet ses « côtes ». Ce qu'il produit
 est une liste de points 3D, c'est-à-dire exactement le format que `--correct` consomme.
 
+### ⏳ Et la question la moins chère n'avait jamais été posée
+
+Avant d'écrire un mécanisme, il fallait vérifier ce que `resume` fait déjà — c'est le seul des
+trois modes qui étende une surface le long d'elle-même. La campagne `spires_repousse` de
+[`43`](43_la_chaine_des_spires.md) §6 l'a fait, **avec `resume_generations = 20` et cette
+valeur seule** :
+
+| | aire | α |
+|---|---:|---:|
+| source (segment officiel) | 7,12 cm² | +0,000 |
+| après 20 générations de repousse | **12,54 cm²** | **+0,422** |
+
+⭐ Donc `resume` étend **réellement** — +76 % d'aire — et il dérive **dès le premier coup**.
+Mais rien n'est su de ce qui se passe **entre 1 et 20 générations**, et c'est là que la
+question se joue : s'il existe un régime où la surface gagne de l'aire en restant convergée,
+la chaîne tangentielle est possible.
+
+`tools/etendre_nappe.sh` balaie `resume_generations` sur **la même** surface convergente, à
+conception appariée (même source, même aplatissement, mêmes fenêtres, une seule variable).
+Il **refuse** de partir d'une source dont le verdict écrit n'est pas « converge » — étendre
+une surface posée en travers de l'empilement ne mesure rien — et les trois chemins de refus
+sont testés. Campagne lancée sur 1, 3 et 10 générations ; le point à 20 n'est pas refait,
+il est déjà mesuré.
+
 ⚠ Ce n'est pas pour autant une solution acquise : [`42`](42_la_boucle_tourne_et_ne_suffit_pas.md)
 a mesuré que des points de correction **ne réorientent pas ce qui a déjà poussé** (+0,89 au
 mieux). La question ouverte est donc précise, et c'est déjà mieux qu'une intention : *un
