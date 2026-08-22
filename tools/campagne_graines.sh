@@ -33,13 +33,46 @@ mkdir -p "$DEST"
 # treize. Il est l'un des trois a segment publie, donc l'un des rares comparables.
 ROULEAUX="PHerc0125 PHerc0191 PHerc0211 PHerc0257 PHerc0268 PHerc0358 PHerc0813 PHerc0826 PHerc1218 PHerc1545 PHerc1447 PHerc0800 PHerc1203"
 
+# ⚠⚠ `ROULEAUX` peut etre remplace -- et un run qui le remplace DOIT avoir sa propre
+# destination. La liste ci-dessus n'est pas un defaut commode, c'est la definition de la
+# comparaison appariee de `25` : y ajouter un rouleau change ce que le test des signes
+# compte, sans qu'aucune ligne ne le dise. Meme discipline que `GENERATIONS` dans
+# `campagne_tirages.sh`, et pour la meme raison -- des mesures qui ne repondent pas a la
+# meme question ne doivent pas atterrir dans le meme dossier.
+#
+# ⭐ L'usage prevu est celui que `48` nomme : etendre la recherche de graine a un rouleau
+# LISIBLE (dont la sortie publiee porte du texte), pour qu'il existe enfin un rouleau ou
+# l'on sait a la fois tracer et lire.
+#
+#   ROULEAUX_CIBLE=PHerc0172 ./tools/campagne_graines.sh data/graines_lisibles
+#
+# ⚠ La regle « sa propre destination » est IMPOSEE et pas seulement ecrite : un override
+# vers le dossier par defaut est refuse. Une regle qu'on doit se rappeler de suivre n'est
+# pas une garantie -- ce depot l'a paye avec la sentinelle de boot et avec la liste des
+# figures a joindre.
+if [ "${ROULEAUX_CIBLE:-}" != "" ]; then
+  if [ "$DEST" = "$ROOT/data/graines" ]; then
+    echo "refus : ROULEAUX_CIBLE demande sa PROPRE destination — ses mesures ne répondent" >&2
+    echo "        pas à la même question que la cohorte appariée de \`25\`." >&2
+    echo "        ex. ROULEAUX_CIBLE=$ROULEAUX_CIBLE $0 data/graines_lisibles" >&2
+    exit 2
+  fi
+  ROULEAUX=$ROULEAUX_CIBLE
+fi
+
 # ⚠⚠ La resolution a prendre quand un rouleau a PLUSIEURS scans. `PHerc1203` est scanne a
 # 9,362 µm ET a 2,403 µm ; les douze autres sont tous a 8,64 ou 9,362. La campagne est une
 # comparaison APPARIEE, donc le treizieme doit etre trace dans la resolution de la cohorte
 # -- sinon il n'est comparable a rien, et rien ne le dirait. Un rouleau absent d'ici et a
 # scan unique n'a pas de choix a faire ; un rouleau a plusieurs scans absent d'ici fait
 # ECHOUER l'appariement, ce qui est le comportement voulu.
-declare -A VOXEL_COHORTE=( [PHerc1203]=9.362 [PHerc0139]=9.362 )
+declare -A VOXEL_COHORTE=( [PHerc1203]=9.362 [PHerc0139]=9.362 [PHercParis4]=2.4 )
+# ⚠ `PHercParis4` n'est PAS de la cohorte appariee -- il n'entre que par `ROULEAUX_CIBLE`,
+# donc dans sa propre destination. Sa resolution est ici pour une autre raison : il a DEUX
+# predictions et cinq volumes, donc l'appariement REFUSE sans resolution demandee (c'est le
+# seul rouleau ou l'appariement par position donne le mauvais volume). 2,4 µm est celle ou
+# `36` §5bis mesure le detecteur a AUC 0,925 -- choisir une autre resolution reviendrait a
+# tracer la ou on ne sait pas lire, ce qui annulerait la raison d'y aller.
 
 lister() { curl -s --max-time 60 "$B/?list-type=2&prefix=$1&delimiter=/" \
            | tr '<' '\n' | grep "^Prefix>" | sed 's|^Prefix>||' | grep -vxF "$1"; }

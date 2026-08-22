@@ -757,7 +757,7 @@ opposite direction --- the fact that the *absence* of a stopping condition is wh
 convergence test of #link(<sec:conv>)[Section 3] transportable. A quantity that a setting
 can cap is a quantity whose reported spread is, in part, a property of the setting.
 
-== The same move works one step downstream
+== The same move works one step downstream <sec:downstream>
 
 The instruments above judge *geometry*. The field's only ground-truth-free argument about
 the *reading* step has the same shape, and the same gap. Defending what it reads on hidden
@@ -861,6 +861,14 @@ cannot separate them --- a difference far larger than any repair leaves the outp
 unchanged. Before spending compute on such an experiment, one can measure whether the
 detector responds on the target scroll at all: one inference on one window, and compare its
 dispersion to what the model returns where it is known to work.
+
+Applied across the prize set, that condition is restrictive. Crossing the scrolls we can
+trace with those whose published ink maps carry the typographic statistics of a written page
+(#link(<sec:downstream>)[Section 6.3]) gives an *empty* intersection: 13 against 3, disjoint.
+The experiment is therefore not mountable on the prize set as it stands --- not because
+repair cannot be measured, but because the scrolls where it could be read are not the ones
+that have been traced. Naming that before running the experiment is cheaper than discovering
+it after.
 
 == What a good measurement looked like here
 

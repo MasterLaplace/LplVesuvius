@@ -630,6 +630,18 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             out.append(("cartes ecrites du premier rouleau",
                         [f"{x['cartes_ecrites']}/{x['n']}"], p.name))
 
+    p = racine / "docs" / "eligibilite_aval.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        out.append(("rouleaux tracables", [f"**{len(d['tracables'])}**",
+                                           f"{len(d['tracables'])} rouleaux"], p.name))
+        for nom, x in (d.get("lisibles") or {}).items():
+            v_ = x["part_ecrite"] * 100
+            out.append((f"part ecrite de {nom}",
+                        [f"{fr(v_, 0)} %", f"{fr(v_, 0)}%", f"{en(v_, 0)} %"], p.name))
+        if d.get("premier_candidat"):
+            out.append(("premier candidat", [d["premier_candidat"]], p.name))
+
     p = racine / "docs" / "derive_profondeur.json"
     if p.exists():
         d = json.loads(p.read_text())

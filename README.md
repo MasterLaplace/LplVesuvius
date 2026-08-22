@@ -375,6 +375,10 @@ mega-octets ».
 # absolu compare des reglages et pas des surfaces
 python3 analysis/src/derive_avec_profondeur.py --docs docs --json docs/derive_profondeur.json
 
+# ou l'experience « reparer sert-il ? » peut-elle etre montee ? les rouleaux qu'on sait
+# TRACER et ceux dont la sortie publiee porte du TEXTE sont disjoints (docs/48)
+python3 analysis/src/eligibilite_aval.py --docs docs --sonder --json docs/eligibilite_aval.json
+
 # la carte des segments publies d'un rouleau : y a-t-il deux patchs d'UNE MEME feuille ?
 uv run python analysis/src/carte_segments.py --rouleau PHerc1447 \
      --telecharger data/segments_officiels --json docs/segments_PHerc1447.json

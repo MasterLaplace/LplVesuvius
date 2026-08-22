@@ -59,6 +59,16 @@ version réparée, et le **même** aval appliqué aux deux. C'est exactement le 
 > dépenser** : σ de la sortie du modèle sur le rouleau visé, rapporté aux **0,7712** qu'il
 > rend là où il atteint AUC 0,925. Une inférence sur une fenêtre suffit à le savoir.
 
+> ⚠⚠ **Et la condition est mesurée sur tout le jeu** ([`48`](48_ou_monter_lexperience.md)) :
+> les **13** rouleaux qu'on sait tracer et les **3** dont la sortie publiée porte du texte
+> sont des ensembles **disjoints**. Le lot n'est donc pas montable sur ce qui est en main.
+>
+> ⭐ Ce n'est pas une impasse, c'est une adresse : l'expérience doit être montée sur
+> **`PHercParis4`** — le seul rouleau où le détecteur est mesuré directement (AUC 0,925) et
+> qui publie à la fois une prédiction de surface et des segments. ⚠ Un blocage court reste,
+> nommé plutôt que contourné : il publie **deux** prédictions du même scan à 2,4 µm, et
+> l'appariement refuse de tirer au sort. `sonder_point.py` sur les deux le tranche.
+
 ## ⭐⭐ 2. Appliquer la correction, et montrer le gain
 
 Le seul ⏳ du « vrai produire », nommé dans cinq documents.

@@ -623,6 +623,13 @@ run "figure du témoin négatif" uv run python "$ROOT/analysis/src/figure_temoin
 # la sonde ne pouvait pas echouer.
 run "dérive avec la profondeur" uv run python "$ROOT/analysis/src/derive_avec_profondeur.py" --verifier
 run "figure de la dérive"      uv run python "$ROOT/analysis/src/figure_derive_profondeur.py" --verifier
+# ⚠⚠ L'eligibilite : sa sonde verifie qu'un candidat SANS prediction de surface est ECARTE
+# et pas classe dernier -- la campagne de graines ne peut structurellement pas y tourner, et
+# le garder ferait recommander une experience irrealisable. Et une sonde sur le VRAI fichier
+# de resultat, parce qu'une fixture ecrite d'apres le code ne prouve que leur accord : c'est
+# comme ca qu'une cle inexistante a rendu « 0 rouleau tracable » et un verdict confiant.
+run "où monter l'expérience"   uv run python "$ROOT/analysis/src/eligibilite_aval.py" --verifier
+run "figure de l'éligibilité"  uv run python "$ROOT/analysis/src/figure_eligibilite.py" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys

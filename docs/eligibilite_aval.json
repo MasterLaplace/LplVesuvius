@@ -1,0 +1,115 @@
+{
+  "tracables": [
+    "PHerc0125",
+    "PHerc0191",
+    "PHerc0211",
+    "PHerc0257",
+    "PHerc0268",
+    "PHerc0358",
+    "PHerc0800",
+    "PHerc0813",
+    "PHerc0826",
+    "PHerc1203",
+    "PHerc1218",
+    "PHerc1447",
+    "PHerc1545"
+  ],
+  "lisibles": {
+    "PHerc0139": {
+      "cartes": 38,
+      "ecrites": 14,
+      "part_ecrite": 0.3684210526315789,
+      "lisible": false
+    },
+    "PHerc0172": {
+      "cartes": 53,
+      "ecrites": 49,
+      "part_ecrite": 0.9245283018867925,
+      "lisible": true,
+      "publie": [
+        "photos",
+        "segments",
+        "volumes"
+      ],
+      "a_prediction": false,
+      "a_segments": true
+    },
+    "PHerc1667": {
+      "cartes": 19,
+      "ecrites": 13,
+      "part_ecrite": 0.6842105263157895,
+      "lisible": true,
+      "publie": [
+        "photos",
+        "representations",
+        "segments",
+        "volumes"
+      ],
+      "a_prediction": true,
+      "a_segments": true
+    },
+    "PHercParis4": {
+      "cartes": 80,
+      "ecrites": 44,
+      "part_ecrite": 0.55,
+      "lisible": true,
+      "publie": [
+        "photos",
+        "representations",
+        "segments",
+        "volumes"
+      ],
+      "a_prediction": true,
+      "a_segments": true
+    }
+  },
+  "tracables_et_lisibles": [],
+  "part_ecrite_min": 0.5,
+  "aval_mesure_directement": {
+    "rouleau": "PHerc1447",
+    "sigma": 0.012937937255707768,
+    "part_du_modele_qui_marche": 0.01677637092285758,
+    "repond": false
+  },
+  "candidats_a_tracer": [
+    "PHerc1667",
+    "PHercParis4"
+  ],
+  "publications": {
+    "PHerc0172": {
+      "publie": [
+        "photos",
+        "segments",
+        "volumes"
+      ],
+      "a_prediction": false,
+      "a_segments": true
+    },
+    "PHerc1667": {
+      "publie": [
+        "photos",
+        "representations",
+        "segments",
+        "volumes"
+      ],
+      "a_prediction": true,
+      "a_segments": true
+    },
+    "PHercParis4": {
+      "publie": [
+        "photos",
+        "representations",
+        "segments",
+        "volumes"
+      ],
+      "a_prediction": true,
+      "a_segments": true
+    }
+  },
+  "candidats_ecartes": {
+    "PHerc0172": "aucune prédiction de surface publiée (`representations/` absent)"
+  },
+  "verdict": "aucun rouleau n'est à la fois DÉJÀ tracé par nos campagnes et lisible par la sortie publiée : les deux ensembles sont disjoints, et l'expérience « réparer sert-il ? » n'est donc pas montable sur ce qui est déjà en main",
+  "action": "étendre la campagne de graines à un rouleau lisible — PHerc1667, PHercParis4 — en commençant par PHercParis4 (le détecteur y est mesuré directement (AUC 0,925))",
+  "premier_candidat": "PHercParis4"
+}
