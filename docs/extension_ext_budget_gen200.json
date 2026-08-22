@@ -1,0 +1,24 @@
+{
+  "series": [
+    {
+      "verdict": "suit la fenêtre",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement",
+      "serie": [
+        [
+          31,
+          73.44
+        ],
+        [
+          81,
+          259.2
+        ]
+      ],
+      "croissance": 3.5294117647058822,
+      "elargissement": 2.6129032258064515,
+      "alpha": 1.3130465167516117,
+      "marge_au_seuil": 0.6130465167516117,
+      "fragile": false,
+      "nom": "gen200 (28.62 cm², 25036 croisements)"
+    }
+  ]
+}

@@ -135,6 +135,21 @@ else
 fi
 
 # --- juger une surface, exactement comme `spire_suivante.sh` le fait ------------------
+# ⚠⚠ Un plafond de croisements PAR CENTIMETRE CARRE, verifie AVANT de payer les rendus.
+# Mesure du 2026-08-22 sur le balayage du budget d'extension :
+#   budget 100 -> 12,97 cm2,     0 croisement     -> α = +0,000, converge
+#   budget 200 -> 28,62 cm2,  25 036 croisements  -> α = +1,313, en travers
+#   budget 400 -> 78,30 cm2, 168 104 croisements  -> (inutile de juger)
+# Soit 0, 875 et 2147 croisements par cm2. Le seuil est pose a 100/cm2 : un ordre de grandeur
+# au-dessus du bon cas et presque un ordre en dessous du premier mauvais.
+#
+# ⚠ CE N'EST PAS UN CRITERE DE QUALITE, et `43` §4 explique pourquoi : un compte de
+# croisements est une propriete de l'ECHANTILLONNAGE autant que de la surface (le meme
+# maillage decime passe de 240 a 49). Ce plafond ne sert donc qu'a une chose : ne pas bruler
+# vingt minutes de rendu sur une surface qui s'est manifestement repliee sur elle-meme. Une
+# surface sous le plafond n'est pas declaree bonne pour autant -- elle est jugee normalement.
+PLAFOND_CROISEMENTS_PAR_CM2=${PLAFOND_CROISEMENTS_PAR_CM2:-100}
+
 juger() {
   local W=$1 M=$2 NOM=$3
   [ -s "$W/selfcross.json" ] || vc_tifxyz_selfcross --surface "$M" -o "$W/selfcross.json" > /dev/null 2>&1
@@ -142,6 +157,21 @@ juger() {
   CROIS=$(python3 "$ROOT/analysis/src/lire_selfcross.py" "$W/selfcross.json" 2>/dev/null || echo "?")
   AIRE=$(python3 -c "
 import json;print(f\"{json.load(open('$M/meta.json'))['area_cm2']:.2f}\")" 2>/dev/null || echo "?")
+  # ⭐ La porte, avant les rendus.
+  if [ "$CROIS" != "?" ] && [ "$AIRE" != "?" ]; then
+    local TROP
+    TROP=$(python3 -c "
+c, a, p = $CROIS, $AIRE, $PLAFOND_CROISEMENTS_PAR_CM2
+print(1 if a > 0 and c / a > p else 0)" 2>/dev/null || echo 0)
+    if [ "$TROP" = "1" ]; then
+      echo "== $NOM  ($AIRE cm², $CROIS auto-intersections)"
+      echo "   ⚠⚠ REPLIEE : $(python3 -c "print(f'{$CROIS/$AIRE:.0f}')") croisements/cm², " \
+           "au-dessus du plafond de $PLAFOND_CROISEMENTS_PAR_CM2 — rendus NON payés."
+      echo "   (mesuré : 0/cm² sur la surface qui converge, 875/cm² sur la première qui casse)"
+      touch "$W/ABANDONNE"
+      return 1
+    fi
+  fi
   [ -d "$W/plat" ] || vc_flatten -i "$M" -o "$W/plat" > "$W/flatten.log" 2>&1
   [ -d "$W/plat" ] || { echo "== $NOM : $AIRE cm², $CROIS croisements — vc_flatten a échoué"; return 1; }
   SERIE=""

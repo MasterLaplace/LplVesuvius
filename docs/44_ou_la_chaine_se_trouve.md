@@ -348,15 +348,40 @@ traceur avant même le jugement : **`generations = 100` produit 13,0 cm², `gene
 en produit 28,4**. Doubler le budget double à peu près l'étendue. Reste à savoir si α survit —
 c'est ce que le balayage en cours mesure.
 
-⭐ **Et ça pose une question de conception plus intéressante que prévu.** Deux façons d'obtenir
-une grande bande :
+### ⚠⚠ Et le gros budget NE tient pas — la réponse est nette
 
-| | ce que ça fait | ce que ça risque |
+| budget | aire | auto-intersections | croisements/cm² | α |
+|---:|---:|---:|---:|---:|
+| **100** | 12,97 cm² | ⭐ **0** | **0** | ⭐ **+0,000** converge |
+| 200 | 28,62 cm² | ⚠⚠ **25 036** | 875 | ⚠⚠ **+1,313** en travers |
+| 400 | 78,30 cm² | ⚠⚠ **168 104** | 2147 | *(inutile de juger)* |
+
+Doubler le budget double l'aire **et détruit la convergence**. Les 25 036 auto-intersections
+sont le mécanisme rendu visible : une surface qui s'étend trop **se replie sur elle-même**.
+
+> **Donc le chemin vers une grande bande passe par l'enchaînement de petits pas, pas par un
+> seul grand.** C'est l'inverse de ce que j'espérais une demi-heure plus tôt, et ça rend la
+> capacité d'enchaînement nécessaire au lieu d'être un repli.
+
+⭐ Le point à 400 a été obtenu **gratuitement** : sa croissance était finie quand j'ai arrêté
+la campagne devenue sans objet, donc le maillage existait et son compte de croisements ne coûte
+aucun rendu.
+
+⭐⭐ **Et ça donne une porte gratuite**, ajoutée à l'outil : refuser de payer les deux rendus
+quand les croisements dépassent **100 par cm²** — un ordre de grandeur au-dessus du cas qui
+converge (0) et presque un ordre en dessous du premier qui casse (875).
+⚠ Ce n'est **pas** un critère de qualité, et [`43`](43_la_chaine_des_spires.md) §4 explique
+pourquoi : un compte de croisements est une propriété de l'**échantillonnage** autant que de la
+surface — le même maillage décimé passe de 240 à 49. Le plafond ne sert qu'à ne pas brûler
+vingt minutes de rendu sur une surface manifestement repliée. Une surface sous le plafond
+n'est pas déclarée bonne : elle est jugée normalement.
+
+### Deux façons d'obtenir une grande bande, et une seule reste
+
+| | ce que ça fait | verdict |
 |---|---|---|
-| **un seul pas, gros budget** | une surface étendue d'un coup | le traceur travaille plus longtemps, et sa grille de travail grossit |
-| **enchaîner des petits pas** | chaque pas repart de l'étendue précédente | **compose les erreurs** — c'est ce qui casse la chaîne radiale au bout de six à huit tours |
-
-Si le gros budget tient, il est **préférable** : il n'y a rien à composer. `tools/etendre_nappe.sh`
+| un seul pas, gros budget | une surface étendue d'un coup | ⚠⚠ **écarté** — mesuré ci-dessus, α = +1,313 dès le double du budget |
+| **enchaîner des petits pas** | chaque pas repart de l'étendue précédente | ⏳ **la seule piste restante** ; risque connu : ça **compose** les erreurs, comme la chaîne radiale qui casse au bout de six à huit tours | `tools/etendre_nappe.sh`
 sait désormais faire les deux, et la distinction est écrite dans son en-tête parce que
 mélanger les deux ferait varier deux choses par pas :
 
