@@ -1264,6 +1264,12 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     parfaitement confiant — un ensemble vide le satisfait. Le témoin n'a rien vu parce que sa
     fixture utilisait la clé supposée. ⭐ Remède : le lecteur **refuse** au lieu de rendre
     vide, et une sonde tourne sur le **vrai fichier de résultat**.
+62 bis. ⚠⚠ **`lancer.sh` gèle le script de campagne, PAS ses helpers.** Une campagne qui
+    appelle `tools/rendre_surveille.sh` par chemin le relit **pendant** qu'on l'édite, et
+    bash lit un script *par offset* : le run en cours s'est mis à exécuter des morceaux du
+    bloc `--verifier` que je venais d'insérer (`v: command not found`). C'est le piège nº 45
+    par une porte que le gel ne ferme pas. La règle pratique reste la même — **ne pas éditer
+    un script pendant qu'un run l'utilise**, helper compris.
 63. ⚠ **Ne pas anticiper un compte, même juste.** Écrire dans les documents le total qu'on
     prévoit pour le run courant le fait échouer — la garde compare aux totaux du run
     **précédent**. Prédiction 46/1348, mesure 46/1348, batterie rouge quand même. Lancer,

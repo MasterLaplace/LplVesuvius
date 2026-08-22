@@ -23,6 +23,51 @@
 #
 #   ./tools/rendre_surveille.sh <sortie_tif> <patience_s> -- <arguments de vc_render_tifxyz>
 set -u
+
+# ⚠⚠ La commande est INJECTABLE, et c'est une prise de test assumee. Un chien de garde qui
+# ne peut etre exercé qu'en lancant un vrai rendu de cent mégaoctets n'est pas exercé -- et
+# celui-ci a DEJA eu un defaut (il surveillait la taille de la sortie, donc il aurait tué un
+# rendu sain). La valeur par defaut reste `vc_render_tifxyz` ; seule la batterie de temoins
+# la remplace.
+RENDU=${RENDU:-vc_render_tifxyz}
+
+if [ "${1:-}" = "--verifier" ]; then
+  T=$(mktemp -d); E=0; N=0
+  v() { N=$((N + 1)); if [ "$2" != "$3" ]; then E=$((E + 1))
+        echo "  ECHEC  $1 — attendu $3, obtenu $2"; fi; }
+
+  # ⚠ Un processus qui ne fait RIEN doit etre abandonne. `sleep` ne lit ni n'ecrit, donc son
+  # compteur d'activite ne bouge pas : c'est exactement le cas que le chien de garde existe
+  # pour attraper.
+  RENDU="sleep" "$0" "$T/vide" 10 -- 120 > "$T/vide.log" 2>&1; v "un processus inactif est abandonné" "$?" "4"
+  grep -q "ABANDONNE" "$T/vide.log"; v "... en le disant" "$?" "0"
+  grep -q "octets d'activité" "$T/vide.log"; v "... avec son activité mesurée" "$?" "0"
+
+  # ⚠⚠ Le controle : un processus qui TRAVAILLE ne doit pas etre tue. Sans lui, un chien de
+  # garde qui tuerait tout passerait ses temoins -- c'est le defaut qu'il a deja eu.
+  # ⚠ Le travail est fait EN PROCESSUS, par le builtin `read` -- c'est un modele fidele de
+  # l'appelant reel. Ma premiere version bouclait sur `cat`, donc l'I/O partait dans des
+  # ENFANTS et les compteurs du parent restaient plats : le controle echouait sur une forme
+  # que `vc_render_tifxyz` n'a pas, et il aurait fait « corriger » l'outil contre un cas
+  # imaginaire.
+  RENDU="bash" "$0" "$T/actif" 10 -- -c 'for i in $(seq 1 60); do read -r _ < /etc/hostname; sleep 0.3; done' \
+      > "$T/actif.log" 2>&1; v "un processus qui travaille n'est PAS tué" "$?" "0"
+  grep -q "rendu :" "$T/actif.log"; v "... et son débit est rapporté" "$?" "0"
+
+  # ⚠⚠ LA COURSE : un rendu qui finit ENTRE deux sondages ne doit pas etre declare
+  # abandonne. Le sondage vaut 10 s, donc une commande de ~12 s traverse exactement ce cas.
+  RENDU="bash" "$0" "$T/court" 10 -- -c 'for i in $(seq 1 40); do read -r _ < /etc/hostname; sleep 0.3; done' \
+      > "$T/court.log" 2>&1; v "un rendu qui finit entre deux sondages réussit" "$?" "0"
+  grep -q "ABANDONNE" "$T/court.log"; v "... et n'est pas dit abandonné" "$?" "1"
+
+  # ⚠ Un processus qui echoue doit propager SON code, pas un succes.
+  RENDU="false" "$0" "$T/rate" 10 -- > "$T/rate.log" 2>&1; v "un rendu qui échoue propage son code" "$?" "1"
+
+  rm -rf "$T"
+  if [ "$E" -gt 0 ]; then echo "ECHEC ($E failures, $N checks)"; exit 1; fi
+  echo "ALL PASS (0 failures, $N checks)"; exit 0
+fi
+
 SORTIE=${1:?sortie tif}
 PATIENCE=${2:?patience en secondes}
 shift 2
@@ -32,18 +77,45 @@ taille() { du -sb "$SORTIE" 2>/dev/null | cut -f1 || echo 0; }
 # ⚠ Somme des octets lus ET ecrits : un rendu qui telecharge fait bouger `rchar` seul, un
 # rendu qui vide ses tampons fait bouger `wchar` seul. Prendre l'un des deux raterait la
 # moitie des phases.
-activite() { awk '/^rchar:|^wchar:/{t += $2} END{print t + 0}' "/proc/$1/io" 2>/dev/null \
-             || echo 0; }
+#
+# ⚠⚠ Et la TAILLE DE SORTIE s'ajoute, en OU et pas en ET. Les compteurs de `/proc` ne
+# couvrent que le processus DIRECT : une commande qui fait son travail dans des processus
+# ENFANTS a des compteurs immobiles alors qu'elle avance. Trouve par le controle de
+# l'auto-test, qui utilisait `cat` dans une boucle -- le chien de garde a tue un processus
+# parfaitement actif. N'importe lequel des deux signaux suffit desormais a dire « vivant ».
+#
+# ⚠⚠ LIMITE ASSUMEE, et j'ai d'abord voulu la retirer plutot que l'ecrire. Le OU ne couvre
+# pas le cas ou une commande fait TOUT son travail dans des processus enfants ET n'ecrit
+# rien avant la fin : les deux signaux restent alors plats et elle sera abandonnee a tort.
+# La couvrir demanderait de marcher l'arbre de processus a chaque sondage, ce qui est de la
+# complexite pour une forme que l'appelant n'a pas -- `vc_render_tifxyz` est un processus
+# unique a threads, et les threads PARTAGENT les compteurs de `/proc`. La limite est donc
+# nommee ici pour que le prochain appelant verifie, plutot que codee contre un cas
+# hypothetique.
+# ⚠⚠ Rend une chaine VIDE quand `/proc/<pid>/io` n'existe plus, et jamais zero. Le processus
+# peut finir entre le `kill -0` et cette lecture : lire alors « 0 » se lit comme une
+# inactivite totale, et le chien de garde declare abandonne un rendu qui VIENT DE REUSSIR.
+# Trouve par l'auto-test, sur un rendu de 18 secondes -- donc il aurait frappe n'importe
+# quel rendu court, c'est-a-dire les bons.
+activite() {
+  [ -r "/proc/$1/io" ] || return 1
+  A=$(awk '/^rchar:|^wchar:/{t += $2} END{print t + 0}' "/proc/$1/io" 2>/dev/null) || return 1
+  [ -n "${A:-}" ] || return 1
+  echo $(( A + $(taille) ))
+}
 
 mkdir -p "$SORTIE"
 DEBUT=$(date +%s)
-vc_render_tifxyz "$@" &
+"$RENDU" "$@" &
 PID=$!
 
-DERNIERE=$(activite "$PID"); IMMOBILE=0
+DERNIERE=$(activite "$PID" || echo 0); IMMOBILE=0
 while kill -0 "$PID" 2>/dev/null; do
   sleep 10
-  T=$(activite "$PID")
+  # ⚠ Si la lecture echoue, le processus est parti : on sort par la porte normale et c'est
+  # `wait` qui donnera son code. Le traiter comme « inactif » serait tuer un mort et le
+  # rapporter comme un echec.
+  T=$(activite "$PID") || break
   if [ "${T:-0}" -gt "${DERNIERE:-0}" ]; then
     DERNIERE=$T; IMMOBILE=0
   else
@@ -54,7 +126,7 @@ while kill -0 "$PID" 2>/dev/null; do
       kill "$PID" 2>/dev/null
       wait "$PID" 2>/dev/null
       ECOULE=$(( $(date +%s) - DEBUT ))
-      echo "⚠⚠ RENDU ABANDONNE — le processus n'a ni lu ni écrit depuis ${PATIENCE} s" >&2
+      echo "⚠⚠ RENDU ABANDONNE — ni activité du processus ni sortie depuis ${PATIENCE} s" >&2
       echo "   ${DERNIERE} octets d'activité en ${ECOULE} s, sortie $(taille) octets" >&2
       echo "   Ce n'est pas une panne du script : c'est la mesure que ce rendu-la n'est" >&2
       echo "   pas jouable a cette echelle. Baisser --scale, ou reduire l'aire." >&2

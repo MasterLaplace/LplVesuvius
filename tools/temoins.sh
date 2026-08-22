@@ -643,6 +643,11 @@ run "excision : deux populations" uv run python "$ROOT/analysis/src/figure_excis
 # les 140 chiffres publies du depot et rien ne verifiait qu'il sait encore les trouver -- ni,
 # surtout, qu'il sait ECHOUER. Sa sonde exige qu'un chiffre FAUX ne soit pas trouve.
 run "le garde-fou se garde"    uv run python "$ROOT/analysis/src/verifier_chiffres.py" --verifier
+# ⚠⚠ Le chien de garde des rendus. Sa sonde la plus utile est la COURSE : un rendu qui finit
+# ENTRE deux sondages etait declare abandonne, donc il aurait frappe n'importe quel rendu
+# court -- c'est-a-dire les bons. Et son controle exige qu'un processus qui travaille ne soit
+# PAS tue : un garde qui tue ce qui va bien est la pire panne possible.
+run "chien de garde des rendus" "$ROOT/tools/rendre_surveille.sh" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
