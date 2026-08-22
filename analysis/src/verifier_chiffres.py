@@ -78,6 +78,16 @@ CITES_PAR_L_ARTICLE = (
     "AUC de la nettete du pic",
     "AUC de la separabilite des lignes",
     "rho de la separabilite des lignes",
+    # ⚠⚠ Ajoutes le 2026-08-22 avec la section 3.5 de l'article. Un lecteur de preprint ne
+    # peut pas recouper : si l'article cite un chiffre, ce chiffre doit etre cherche DANS
+    # l'article et pas seulement quelque part dans le depot. Ces deux-la portent toute la
+    # moitie rassurante de `49` -- si un jour ils se croisaient, une serie convergente
+    # deviendrait indiscernable de son plafond.
+    "plus petit alpha indiscernable",
+    "plus grand alpha convergent",
+    # ⚠ Et ceux du temoin negatif, meme raison : ils portent la these etroite de `46`.
+    "accord pixel des deux cartes",
+    "sigma du controle positif",
 )
 
 
@@ -121,6 +131,19 @@ def ou_trouve(ecritures, textes: dict) -> list[str]:
     """
     return [d.name for d, t in textes.items()
             if any(normaliser(e) in t for e in ecritures)]
+
+
+def documents_sans_garde(attendus, textes: dict) -> list[str]:
+    """Les documents qui citent des nombres dont AUCUN n'est recalculé.
+
+    ⚠ Un document SANS chiffre n'est pas concerné : il n'a rien à garder, et le lister
+    ferait crier le garde sur une page de prose qui a raison.
+    """
+    gardes = set()
+    for _, ecritures, _ in attendus:
+        gardes.update(ou_trouve(ecritures, textes))
+    return sorted(d.name for d in textes
+                  if d.name not in gardes and any(c.isdigit() for c in textes[d]))
 
 
 def perimee(attendu: str, textes: dict) -> list[str]:
@@ -887,6 +910,20 @@ def verifier() -> int:
     v("une valeur À JOUR n'est pas signalée périmée",
       perimee("45 batteries, 1322 controles", memes) == [])
 
+    # ⚠⚠ L'inventaire des documents non gardes. Sa sonde porte sur le cas qui n'est pas
+    # evident : un document SANS chiffre ne doit pas y figurer, sinon le garde crie sur des
+    # pages de prose qui ont raison -- et un garde qui crie a tort finit ignore.
+    att = [("x", ["6,4 %"], "src.json")]
+    trois = {_P("garde.md"): normaliser("le taux vaut 6,4 %"),
+             _P("nu.md"): normaliser("on a mesuré 999 choses"),
+             _P("prose.md"): normaliser("aucun nombre ici")}
+    sg = documents_sans_garde(att, trois)
+    v("un document dont un chiffre est gardé n'est pas listé", "garde.md" not in sg)
+    v("un document qui cite des nombres non gardés est listé", "nu.md" in sg)
+    v("... et un document SANS chiffre ne l'est pas", "prose.md" not in sg, str(sg))
+    v("sans aucun chiffre attendu, tout document chiffré est listé",
+      documents_sans_garde([], trois) == ["garde.md", "nu.md"])
+
     if echecs:
         print(f"\nECHEC ({echecs} failures, {controles} checks)")
         return 1
@@ -967,6 +1004,23 @@ def main() -> int:
             # document se trompe, ligne 353 ».
             for v in vieilles[:3]:
                 print(f"{'':>32} {'':>16} {'':>28}    → {v}")
+
+    # ⚠⚠ QUELS DOCUMENTS N'ONT AUCUN CHIFFRE SOUS GARDE. Le tableau ci-dessus dit ce qui
+    # est verifie ; il ne dit rien de ce qui ne l'est pas. Un document plein de nombres dont
+    # AUCUN n'est recalcule depuis un fichier de resultat publie des anecdotes au sens de la
+    # regle de ce depot -- et rien ne le signalait. C'est ainsi que `04` a garde son
+    # « U = 11 489 329 924 » sans producteur pendant des semaines.
+    #
+    # ⚠ « Aucun chiffre garde » n'est pas « mauvais document ». Une feuille de route, une
+    # revue de litterature ou un registre de taches n'ont pas de mesure a garder. Le compte
+    # est donc une LISTE a regarder, jamais un echec -- un garde qui echouerait la-dessus
+    # crierait sur des documents qui ont raison.
+    sans_garde = documents_sans_garde(attendus, textes)
+    if sans_garde:
+        print(f"\n⚠ {len(sans_garde)} document(s) citent des nombres dont AUCUN n'est "
+              f"recalcule depuis un fichier de resultat — a regarder, pas un echec :")
+        for n in sans_garde:
+            print(f"    {n}")
 
     # ⚠⚠ Le TOTAL, imprime par l'outil et non compte a la main. `21` citait « 85 chiffres »,
     # un nombre exact le jour ou il a ete ecrit et faux depuis -- et le compter au grep
