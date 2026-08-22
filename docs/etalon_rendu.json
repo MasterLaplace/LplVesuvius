@@ -1,0 +1,11 @@
+{
+  "essais": [
+    {
+      "cache_gb": 1,
+      "secondes": 64.88,
+      "pic_rss_kio": 2067228,
+      "empreinte": "71107ecc3722",
+      "couches": 41
+    }
+  ]
+}
