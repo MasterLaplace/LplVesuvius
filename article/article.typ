@@ -152,7 +152,9 @@ This paper is about the judging step. We contribute:
 
 + *An argument about method* (#link(<sec:disc>)[Section 6]): every number here is a
   measurement repeated, and the repetition is what produced the findings. None of the
-  three would have been visible from a single run.
+  three would have been visible from a single run. The same move applied one step
+  downstream --- to the field's only ground-truth-free argument about *reading* --- shows
+  that two of the three properties that argument groups together do not go together.
 
 #caveat[
   *What this paper does not claim.* It does not propose a better segmentation algorithm,
@@ -677,6 +679,49 @@ for a reason that has nothing to do with the instance. Reporting a dispersion ov
 outputs measures the budget. The diagnostic is cheap: record the stopping condition
 alongside the result, and check whether the low-variance instances are the ones that hit
 it.
+
+== The same move works one step downstream
+
+The instruments above judge *geometry*. The field's only ground-truth-free argument about
+the *reading* step has the same shape, and the same gap. Defending what it reads on hidden
+layers, the foundational paper writes that "the scale, line separation, and script of the
+revealed characters are consistent with those observed on the fragment surfaces"
+@seales2023. The form is right — a verifiable region, an unverifiable one, and confidence
+transported by second-order statistics. It is left to the eye.
+
+All four quantities are measurable without reading a letter: line spacing by
+autocorrelation of the row-density profile, character scale by connected components, ink
+coverage, and stroke width by the distance transform. We measured them on 190 published ink
+maps across four scrolls, and crossed them against the published ink contrast of one
+scroll's 80 maps, split at its median.
+
+#figure(
+  image("figures/45_typographie.png", width: 100%),
+  caption: [
+    Each typographic quantity against the published ink contrast, as an AUC (0.50 = no
+    association). Three recover the ranking. *Coverage is quasi-tautological* — the
+    published contrast is built on ink percentiles — so the informative agreements are
+    stroke width (0.857) and peak sharpness (0.753), which are genuinely different
+    quantities obtained by a distance transform and an autocorrelation. Right: the same 80
+    maps behind the one quantity that runs the other way.
+  ],
+) <fig:typo>
+
+⚠⚠ *And the three properties the sentence groups together do not go together.* Line
+separability runs *against* the contrast (AUC 0.319, $rho = -0.281$). The association is
+weak and not monotone — it falls over the first three quartiles and then flattens — and we
+do not present the obvious mechanism (heavier ink, lines closer to merging) as established.
+What matters here is the form of the finding: *an eye that judges a page "consistent" cannot
+see that two of its properties point in opposite directions. A number can.*
+
+#caveat[
+  *And this instrument has the same shape of limit as the first.* A prediction that fails
+  the typographic test is certainly not text; one that passes may be a periodic artefact —
+  necessary, never sufficient, exactly as the absence of self-intersections is for a traced
+  surface. Its periodicity floor is derived rather than chosen: white-noise autocorrelation
+  over $k$ lags of an $n$-point profile peaks near $sqrt(2 ln k) \/ sqrt(n)$, so the floor
+  rises by itself on a smaller map.
+]
 
 == What a good measurement looked like here
 

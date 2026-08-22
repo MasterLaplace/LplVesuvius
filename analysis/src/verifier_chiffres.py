@@ -74,6 +74,10 @@ CITES_PAR_L_ARTICLE = (
     "segments publies du rouleau",
     "dispersion aux deux plafonds",
     "traces de planarite au plafond",
+    "AUC de la epaisseur de trait",
+    "AUC de la nettete du pic",
+    "AUC de la separabilite des lignes",
+    "rho de la separabilite des lignes",
 )
 
 
