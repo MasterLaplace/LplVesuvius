@@ -70,8 +70,30 @@ section Résultats. C'est la forme standard.
 
 | # | quoi |
 |---|---|
-| 1 | ⚠ **l'affiliation et l'identité de l'auteur** — « Independent researcher » est une affiliation valide sur arXiv, mais il faut un nom civil et un e-mail joignable |
+| 1 | ✅ **identité de l'auteur** — Guillaume Papineau, *Independent researcher*, adresse jointe, ORCID `0009-0006-1371-4119` en lien. ⏳ Reste le dossier ORCID lui-même, ci-dessous |
 | 2 | ⚠ **arXiv exige un endossement** (*endorsement*) pour un premier dépôt dans une catégorie comme `cs.CV`, obtenu auprès d'un auteur déjà publié dans cette catégorie |
 | 3 | **une licence** sur le texte et les figures (CC BY 4.0 est l'usage) |
 | 4 | **l'adresse du code** dans le texte : un article de méthode sans code exécutable ne sera pas repris |
 | 5 | relire l'anglais avec quelqu'un dont c'est la langue — la structure est bonne, la langue se corrige |
+
+## Le dossier ORCID — la liste, par ordre d'importance
+
+⚠⚠ **Ce n'est pas de la décoration.** L'article porte l'identifiant ; un lecteur qui le suit
+tombe sur ce dossier, et ce qu'il y trouve devient une partie de ce que l'article vaut à ses
+yeux. Un endosseur arXiv regardera exactement cette page.
+
+| # | quoi | pourquoi |
+|---|---|---|
+| **1** | ⚠⚠ **Le nom public dit « Master Laplace », l'article signe « Guillaume Papineau »** — mettre le nom civil dans *Names*, et **garder « Master Laplace » dans *Also known as*** | un identifiant qui renvoie à un autre nom annule ce qu'il sert à garantir. Le champ *Also known as* existe précisément pour les pseudonymes, et il rend le dossier trouvable sous les deux |
+| **2** | ⚠⚠ **Ajouter et VÉRIFIER une adresse personnelle permanente** — les deux adresses actuelles sont scolaires, et seul `ulaval.ca` est un domaine vérifié | le jour où les deux comptes d'école expirent, le dossier devient irrécupérable. C'est la seule action vraiment irréversible si elle est faite trop tard |
+| **3** | ⚠ **Université Laval est classée *Employment*** — une année d'échange dans le cadre d'une scolarité relève d'*Education and qualifications* | classer des études en emploi est une inexactitude que quelqu'un qui lit vraiment le dossier remarquera. Et y mettre une **date de fin**, sinon le dossier laisse entendre que c'est en cours |
+| **4** | **Ajouter Epitech** dans *Education and qualifications* | le dossier ne montre aujourd'hui aucune formation, ce qui est plus étrange qu'un cursus sans diplôme |
+| **5** | ⭐ **Remplir *Websites & social links*** : GitHub, les dépôts du projet | c'est là que le pseudonyme gagne sa place — il relie l'identité d'auteur à l'identité de développeur, et c'est ce qui donne du corps au dossier tant qu'il n'y a pas de publication |
+| **6** | ⭐ **Remplir la *Biography*** : trois ou quatre phrases sur ce qu'on cherche | c'est la première chose qu'un lecteur lit après le nom |
+| **7** | **Remplir les *Keywords*** : virtual unwrapping, Herculaneum papyri, X-ray tomography, surface segmentation, computational imaging | c'est ce qui rend le dossier trouvable par sujet |
+| **8** | ⭐ **Ajouter les dépôts comme *Works* de type « software »** | ORCID accepte le logiciel comme production de recherche. Un dossier à zéro travaux se lit comme un compte vide ; deux dépôts et un préprint se lisent comme un travail en cours |
+| **9** | Une fois le préprint en ligne, l'ajouter dans *Works* avec son identifiant arXiv, puis l'épingler en *Featured work* | c'est ce qui transforme l'identifiant en trace |
+| 10 | Activer la mise à jour automatique (Crossref, DataCite) dans *Trusted parties* | les futurs DOI arrivent tout seuls, et le dossier cesse de demander de l'entretien |
+
+⚠ Les points **1 et 2** sont les seuls urgents : le premier parce que l'article est déjà écrit
+avec le lien, le second parce qu'il devient impossible après expiration des comptes.
