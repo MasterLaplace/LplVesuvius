@@ -735,6 +735,26 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # une hypothese produit un nombre qui a l'air autorise et qui CONTREDIT sa source. Les
     # quatre chiffres par balayage, eux, sont exacts et verifies ; ils suffisent.
 
+    # ⚠⚠ Les PLANCHERS DE DETECTION des quatre corpus du tri a distance. Sans eux, « trois
+    # corpus non positifs » se lit comme trois refutations -- alors qu'aucun des trois
+    # n'avait la puissance de voir l'effet mesure sur le premier. Un zero se rapporte avec
+    # sa puissance, ou il ne se rapporte pas.
+    for nom, fichier in (("Scroll 1", "croisement_encre.json"),
+                         ("PHerc0139", "croisement_encre_PHerc0139.json"),
+                         ("PHerc1667", "croisement_encre_PHerc1667.json"),
+                         ("PHerc0172", "croisement_encre_0172.json")):
+        q = racine / "docs" / fichier
+        if not q.exists():
+            continue
+        d = json.loads(q.read_text())
+        if d.get("rho_detectable") is not None:
+            ajoute(f"plancher detectable, {nom}", d["rho_detectable"], 3, q.name)
+        c = [x for x in (d.get("correlations") or [])
+             if x.get("trace") == "avec_matiere"
+             and x.get("encre") == "encre_contraste_p90_p50"]
+        if c:
+            ajoute(f"rho du tri, {nom}", c[0]["rho"], 3, q.name, signe=True)
+
     p = racine / "docs" / "audit_profils.json"
     if p.exists():
         d = json.loads(p.read_text())

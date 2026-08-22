@@ -423,26 +423,39 @@ all with published surface volumes and published ink maps:
   table(
     columns: (auto, auto, auto, auto, auto),
     align: (left, right, right, right, right),
-    table.header[corpus][$n$][voxel][target spread][$rho$],
-    [`Scroll 1`], [80], [2.4 #um], [1.008], [$bold(+0.539)$],
-    [`PHerc0139`], [38], [2.399 #um], [1.628], [$-0.229$],
-    [`PHerc1667`], [19], [2.399 #um], [0.720], [$+0.425$],
-    [`PHerc0172`], [53], [7.91 #um], [0.220], [$-0.217$],
+    table.header[corpus][$n$][voxel][target spread][$rho$][detectable $rho$],
+    [`Scroll 1`], [80], [2.4 #um], [1.008], [$bold(+0.539)$], [0.309],
+    [`PHerc0139`], [38], [2.399 #um], [1.628], [$-0.229$], [0.441],
+    [`PHerc1667`], [19], [2.399 #um], [0.720], [$+0.425$], [0.605],
+    [`PHerc0172`], [53], [7.91 #um], [0.220], [$-0.217$], [0.377],
   ),
   caption: [
-    The rule does not replicate. Our first explanation was a floor effect --- `PHerc0172`'s
-    ink maps barely differ from one another --- but that explains one corpus out of three:
-    `PHerc0139` sits at the same resolution as `Scroll 1`, has a *larger* relative spread,
-    and returns the opposite sign.
+    The rule does not replicate --- and the last column says why that sentence must be read
+    carefully. *Detectable $rho$* is the correlation each corpus could find at 80 % power
+    and $alpha = 0.05$, given its $n$ alone. Only `Scroll 1` exceeds its own floor. Our
+    first explanation was a target floor effect --- `PHerc0172`'s ink maps barely differ from
+    one another --- but that explains one corpus out of three: `PHerc0139` sits at the same
+    resolution as `Scroll 1`, has a *larger* relative spread, and returns the opposite sign.
   ],
 ) <tab:replication>
 
-None of the three negatives is individually significant. But the shape --- one strong
-positive, three non-positive --- is the shape of a result that will dissolve. We therefore
-report the rule as a property of `Scroll 1`'s published corpus, *not* of the problem. We
-publish all four corpora rather than the one that works, because that is what makes the
-measurement usable: a reader learns at once that it needs re-validating on their corpus,
-instead of discovering it afterwards.
+The honest reading is narrower than "it does not replicate". *None of the three had the
+power to detect an effect the size of the one measured on `Scroll 1`*: each $abs(rho)$ falls
+below its own 80 %-power floor. `PHerc1667` in particular returns $+0.425$ --- the same sign
+and a comparable magnitude --- on 19 segments, where 0.605 would be needed. Two corpora do
+return the opposite sign, which no amount of power explains away, and that is the part of
+the shape that suggests a result which will dissolve.
+
+We therefore report the rule as a property of `Scroll 1`'s published corpus, *not* of the
+problem, and we publish all four corpora rather than the one that works: a reader learns at
+once that it needs re-validating on their corpus, instead of discovering it afterwards.
+
+#caveat[
+  *A zero is reported with its power, or it is not reported.* Writing "three non-positive"
+  --- as an earlier draft of this section did --- puts a corpus returning $+0.425$ in the
+  same bin as one returning $-0.229$, and hides that neither could have seen the effect. The
+  three negatives constrain the rule far less than their count suggests.
+]
 
 = Results <sec:results>
 
