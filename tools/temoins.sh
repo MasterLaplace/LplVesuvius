@@ -686,6 +686,13 @@ run "campagne du plafond"      "$ROOT/tools/plafond_generations.sh" --verifier
 # retrecir l ecart entre colonnes retrecit AUSSI le cadre, donc tout reste dedans en se
 # recouvrant. Il faut mesurer la place libre, pas seulement le hors-cadre.
 run "figure des candidats"     uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_candidats.py" --verifier
+# ⚠⚠ L etalonnage du rendu. Sa sonde centrale n est pas une performance : c est que la
+# sortie ne BOUGE PAS entre les reglages, et que le depouilleur REFUSE de parler de temps
+# quand l etendue dans une meme valeur depasse l ecart entre valeurs -- sans quoi la serie
+# publierait la meteo du reseau.
+run "étalon du rendu"          "$ROOT/tools/etalonner_rendu.sh" --verifier
+run "effet du cache"           uv run python "$ROOT/analysis/src/effet_du_cache.py" --verifier
+run "figure de l'étalon"       uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_etalon_rendu.py" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys

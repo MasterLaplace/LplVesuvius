@@ -30,6 +30,8 @@ if [ "${1:-}" = "--verifier" ]; then
   chk "le depouilleur existe" '[ -f "$ROOT/analysis/src/effet_du_cache.py" ]'
   chk "le pic de RSS est releve" 'grep -q "Maximum resident set size" "$ROOT/tools/etalonner_rendu.sh"'
   chk "le cache disque est chauffe avant la serie" 'grep -q "chauffe" "$ROOT/tools/etalonner_rendu.sh"'
+  chk "chaque valeur est repetee" 'grep -q "REPETITIONS" "$ROOT/tools/etalonner_rendu.sh"'
+  chk "... au moins trois fois par defaut" 'grep -qE "REPETITIONS:-[3-9]" "$ROOT/tools/etalonner_rendu.sh"'
   chk "la sortie est comparee entre essais" 'grep -q "sha256sum" "$ROOT/tools/etalonner_rendu.sh"'
   out=$("$ROOT/tools/etalonner_rendu.sh" /inexistant 2>&1); rc=$?
   chk "une surface absente est refusee (2)" '[ "$rc" = 2 ]'
@@ -42,6 +44,12 @@ SRC="${1:-$ROOT/data/paris4_plafond/ps256_c2_g60}"
 [ -d "$SRC/plat" ] || { echo "refus : pas de surface aplatie dans $SRC" >&2; exit 2; }
 COUCHES="${COUCHES:-41}"
 VALEURS="${VALEURS:-1 2 4 8 16}"
+# ⚠⚠ REPETITIONS, et ce depot avait deja ecrit la lecon : campagne_thread_limit.sh dit
+# « une seule execution par valeur ne distinguerait pas l effet du reglage de la variance
+# de run ». Elle vaut DOUBLE ici -- le cache disque n est jamais materialise (verifie : le
+# repertoire -v reste vide), donc chaque essai retelecharge et le chronometre porte autant
+# le reseau que le reglage. Un seul essai par valeur mesurerait la meteo du reseau.
+REPETITIONS="${REPETITIONS:-3}"
 DEST="${DEST:-$ROOT/data/etalon_rendu}"
 B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 VOL="${VOL:-PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr}"
@@ -65,38 +73,44 @@ if [ ! -d "$CACHE" ]; then
 fi
 
 echo
-printf '%10s %12s %14s %14s\n' "cache-gb" "temps (s)" "pic RSS (Go)" "sortie"
+printf '%10s %6s %12s %14s %14s\n' "cache-gb" "essai" "temps (s)" "pic RSS (Go)" "sortie"
 REF=""
 for G in $VALEURS; do
-  D="$DEST/gb$G"
+ for R in $(seq 1 "$REPETITIONS"); do
+  D="$DEST/gb${G}_r${R}"
   rm -rf "$D"
-  /usr/bin/time -v -o "$DEST/gb$G.time" \
+  /usr/bin/time -v -o "$DEST/gb${G}_r${R}.time" \
     vc_render_tifxyz -v "$CACHE" --remote-url "$B/$VOL" --scale 1 -g 0 -s "$SRC/plat" \
       --tif-output "$D" -n "$COUCHES" --slice-step 1 --auto-crop \
-      --cache-gb "$G" > "$DEST/gb$G.log" 2>&1
+      --cache-gb "$G" > "$DEST/gb${G}_r${R}.log" 2>&1
   rc=$?
-  T=$(grep -oE "Elapsed \(wall clock\) time.*" "$DEST/gb$G.time" | grep -oE "[0-9:.]+$")
+  T=$(grep -oE "Elapsed \(wall clock\) time.*" "$DEST/gb${G}_r${R}.time" | grep -oE "[0-9:.]+$")
   SEC=$(printf '%s' "$T" | awk -F: '{n=NF; s=0; for(i=1;i<=n;i++) s=s*60+$i; print s}')
-  RSS=$(grep -oE "Maximum resident set size \(kbytes\): [0-9]+" "$DEST/gb$G.time" \
+  RSS=$(grep -oE "Maximum resident set size \(kbytes\): [0-9]+" "$DEST/gb${G}_r${R}.time" \
         | grep -oE "[0-9]+$")
   H=$(cat "$D"/*.tif 2>/dev/null | sha256sum | cut -c1-12)
   [ -z "$REF" ] && REF="$H"
   MARQ=$([ "$H" = "$REF" ] && echo "identique" || echo "⚠ DIFFERENTE")
   [ "$rc" = 0 ] || MARQ="⚠ ECHEC($rc)"
-  printf '%10s %12s %14.2f %14s\n' "$G" "${SEC:-?}" "$(echo "${RSS:-0}/1048576" | bc -l)" "$MARQ"
-  python3 - "$JSON" "$G" "${SEC:-0}" "${RSS:-0}" "$H" "$COUCHES" <<'PY'
+  printf '%10s %6s %12s %14.2f %14s\n' "$G" "r$R" "${SEC:-?}" \
+      "$(echo "${RSS:-0}/1048576" | bc -l)" "$MARQ"
+  python3 - "$JSON" "$G" "${SEC:-0}" "${RSS:-0}" "$H" "$COUCHES" "$R" <<'PY'
 import json, sys
 from pathlib import Path
 p = Path(sys.argv[1])
 d = json.loads(p.read_text()) if p.exists() else {"essais": []}
-d["essais"] = [e for e in d["essais"] if e["cache_gb"] != int(sys.argv[2])]
-d["essais"].append({"cache_gb": int(sys.argv[2]), "secondes": float(sys.argv[3]),
+rep = int(sys.argv[7])
+d["essais"] = [e for e in d["essais"]
+               if not (e["cache_gb"] == int(sys.argv[2]) and e.get("repetition", 1) == rep)]
+d["essais"].append({"cache_gb": int(sys.argv[2]), "repetition": rep,
+                    "secondes": float(sys.argv[3]),
                     "pic_rss_kio": int(sys.argv[4]), "empreinte": sys.argv[5],
                     "couches": int(sys.argv[6])})
-d["essais"].sort(key=lambda e: e["cache_gb"])
+d["essais"].sort(key=lambda e: (e["cache_gb"], e.get("repetition", 1)))
 p.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 PY
   rm -rf "$D"
+ done
 done
 
 echo

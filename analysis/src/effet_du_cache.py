@@ -29,6 +29,40 @@ from pathlib import Path
 PART_UTILISABLE = 0.5
 
 
+def mediane(v: list[float]) -> float:
+    """La médiane, calculée ici plutôt qu'importée — pas de dépendance pour trois lignes."""
+    x = sorted(v)
+    n = len(x)
+    return x[n // 2] if n % 2 else (x[n // 2 - 1] + x[n // 2]) / 2
+
+
+def grouper(essais: list[dict]) -> list[dict]:
+    """Une ligne par valeur de `--cache-gb`, avec la médiane et l'étendue de ses essais.
+
+    ⚠⚠ **Pourquoi la médiane et pas la moyenne** : un essai qui tombe sur une lenteur réseau
+    tire une moyenne sans limite, et le cache disque n'est jamais matérialisé ici — vérifié,
+    le répertoire passé à `-v` reste vide — donc chaque essai retélécharge et le chronomètre
+    porte autant le réseau que le réglage. La médiane de trois essais survit à un mauvais.
+
+    ⚠ L'étendue est conservée à côté, parce que c'est **elle** qui décide si la différence
+    entre deux valeurs veut dire quelque chose.
+    """
+    par: dict[int, list[dict]] = {}
+    for e in essais:
+        if e.get("secondes", 0) > 0:
+            par.setdefault(e["cache_gb"], []).append(e)
+    out = []
+    for gb, lot in sorted(par.items()):
+        t = [x["secondes"] for x in lot]
+        r = [x["pic_rss_kio"] / 1048576.0 for x in lot]
+        out.append({"cache_gb": gb, "n": len(lot),
+                    "secondes": mediane(t), "etendue_s": max(t) - min(t),
+                    "pic_go": mediane(r),
+                    "empreinte": lot[0].get("empreinte"),
+                    "empreintes": sorted({x.get("empreinte") for x in lot if x.get("empreinte")})})
+    return out
+
+
 def confronter(essais: list[dict], ram_go: float | None = None) -> dict:
     d: dict = {"n_essais": len(essais),
                "valeurs": [e["cache_gb"] for e in essais]}
@@ -47,14 +81,14 @@ def confronter(essais: list[dict], ram_go: float | None = None) -> dict:
                        f"réglage de performance, c'est un réglage qui change le résultat")
         return d
 
-    ok = [e for e in essais if e.get("secondes", 0) > 0]
+    ok = grouper(essais)
+    d["valeurs"] = [e["cache_gb"] for e in ok]
+    d["repetitions"] = [e["n"] for e in ok]
     if len(ok) < 2:
         d["verdict"] = "insuffisant"
-        d["raison"] = "il faut au moins deux essais chronométrés"
+        d["raison"] = "il faut au moins deux valeurs de --cache-gb chronométrées"
         return d
 
-    for e in ok:
-        e["pic_go"] = e["pic_rss_kio"] / 1048576.0
     lent = max(ok, key=lambda e: e["secondes"])
     vite = min(ok, key=lambda e: e["secondes"])
     d["plus_lent"] = {"cache_gb": lent["cache_gb"], "secondes": lent["secondes"]}
@@ -66,6 +100,25 @@ def confronter(essais: list[dict], ram_go: float | None = None) -> dict:
     # ⚠⚠ Le nombre qui décide : le plus PETIT cache dont le temps est à moins de 5 % du
     # meilleur. Prendre simplement le plus rapide choisirait souvent le plus gros, donc
     # reconduirait le défaut qu'on est en train de corriger.
+    # ⚠⚠ Le contrôle qui décide si l'on a le droit de parler de temps. Si l'étendue DANS
+    # une valeur dépasse l'écart ENTRE les valeurs, la série ne mesure pas le réglage : elle
+    # mesure la variance de run. C'est la leçon que `campagne_thread_limit.sh` avait déjà
+    # écrite, appliquée ici parce que le cache disque n'est jamais matérialisé et que chaque
+    # essai retélécharge.
+    d["etendue_intra_max_s"] = round(max(e["etendue_s"] for e in ok), 2)
+    d["ecart_inter_s"] = round(lent["secondes"] - vite["secondes"], 2)
+    d["temps_concluant"] = d["ecart_inter_s"] > d["etendue_intra_max_s"]
+    if not d["temps_concluant"]:
+        # ⚠ La mémoire, elle, reste concluante : elle ne dépend pas du réseau. On refuse
+        # de conclure sur le TEMPS sans jeter la moitié qui tient.
+        d["verdict"] = "temps non concluant"
+        d["raison"] = (f"l'étendue dans une même valeur ({d['etendue_intra_max_s']} s) "
+                       f"dépasse l'écart entre valeurs ({d['ecart_inter_s']} s) : cette "
+                       f"série mesure la variance de run, pas le réglage")
+        d["recommande_par_la_memoire"] = min(
+            (e for e in ok), key=lambda e: (e["pic_go"], e["cache_gb"]))["cache_gb"]
+        return d
+
     seuil = vite["secondes"] * 1.05
     tenables = sorted((e for e in ok if e["secondes"] <= seuil), key=lambda e: e["cache_gb"])
     d["assez_bons"] = [e["cache_gb"] for e in tenables]
@@ -92,6 +145,11 @@ def rapporter(d: dict) -> None:
         print(f"  ⚠⚠ {d['raison']}")
         return
     print(f"  sorties identiques sur les {d['n_essais']} essais  ✅")
+    if d["verdict"] == "temps non concluant":
+        print(f"\n  ⚠⚠ {d['raison']}")
+        print(f"  ⭐ mais la mémoire, elle, ne dépend pas du réseau : "
+              f"--cache-gb {d['recommande_par_la_memoire']} pour le pic le plus bas")
+        return
     print(f"  temps : {d['plus_lent']['secondes']:.0f} s à --cache-gb "
           f"{d['plus_lent']['cache_gb']}  →  {d['plus_rapide']['secondes']:.0f} s à "
           f"{d['plus_rapide']['cache_gb']}   ({d['gain_relatif']:.0%})")
@@ -142,6 +200,30 @@ def _verifier() -> int:
     petit = [e(1, 300, 1.0), e(2, 295, 2.0)]
     v("... et ne se déclenche pas quand le pic est modeste",
       confronter(petit, ram_go=32)["depasse_la_part_utilisable"] is False)
+
+    # ⚠⚠ Repetitions : trois essais par valeur, et l ecart INTRA doit pouvoir annuler la
+    # conclusion sur le temps. Sans ce controle la serie publierait « 45 % plus rapide »
+    # a partir de la meteo du reseau.
+    bruyant = ([e(2, 60, 2.9), e(2, 130, 2.9), e(2, 95, 2.9)]
+               + [e(8, 100, 8.0), e(8, 105, 8.0), e(8, 102, 8.0)])
+    rb = confronter(bruyant, ram_go=32)
+    v("une étendue intra plus grande que l'écart inter annule le temps",
+      rb["verdict"] == "temps non concluant", rb["verdict"])
+    v("... et la mémoire reste conclue", rb["recommande_par_la_memoire"] == 2)
+    # ⚠ Valeur attendue calculée à la main et INDÉPENDAMMENT : les médianes sont 95
+    # (de 60/95/130) et 102 (de 100/102/105), donc l'écart inter vaut 7 — pas 42, qui est
+    # ce qu'on obtient en comparant des extrêmes. Ma première version écrivait 42 et le
+    # témoin a corrigé le rédacteur, pas le code.
+    v("... et le refus chiffre les deux étendues",
+      rb["etendue_intra_max_s"] == 70.0 and rb["ecart_inter_s"] == 7.0,
+      f"{rb['etendue_intra_max_s']} / {rb['ecart_inter_s']}")
+    net = ([e(2, 60, 2.9), e(2, 62, 2.9), e(2, 61, 2.9)]
+           + [e(8, 200, 8.0), e(8, 202, 8.0), e(8, 201, 8.0)])
+    rn = confronter(net, ram_go=32)
+    v("une série propre conclut bien sur le temps", rn["temps_concluant"])
+    v("... et recommande la valeur rapide", rn["recommande"] == 2, rn["verdict"])
+    v("les répétitions sont comptées", rn["repetitions"] == [3, 3], str(rn["repetitions"]))
+    v("la médiane est utilisée, pas la moyenne", mediane([1, 2, 100]) == 2)
 
     v("aucun essai, aucun verdict", confronter([])["verdict"] == "insuffisant")
     v("un seul essai chronométré ne conclut pas",
