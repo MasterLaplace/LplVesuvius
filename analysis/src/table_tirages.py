@@ -197,10 +197,29 @@ def main() -> int:
                                    "aucune paire testée"))
                 rejetes += 1
                 continue
+        # ⚠⚠ Le budget de generations : le RECORD est le `seed.json` que la campagne a
+        # ecrit a cote de la trace, pas le resume. Les tirages d'avant le 2026-08-22 n'ont
+        # pas le champ dans leur resume -- le relire ici les rend comparables au lieu de
+        # les laisser « budget inconnu », et c'est la meme regle que pour `selfcross.json` :
+        # un resume est une copie, le fichier d'a cote est ce qui a reellement servi.
+        if r.get("plafond_generations") is None:
+            graine = f.parent / "seed.json"
+            if graine.is_file():
+                try:
+                    r["plafond_generations"] = json.loads(graine.read_text())["generations"]
+                except (ValueError, KeyError):
+                    pass
         par_rouleau.setdefault(r["rouleau"], []).append(r)
     if not par_rouleau:
         print(f"aucun tirage exploitable sous {a.dossier}")
         return 1
+
+    # ⚠ Le budget est LU dans les resumes, pas suppose. Une campagne dont les tirages
+    # n'ont pas tous le meme budget ne se resume pas par un nombre : on rend `None` plutot
+    # qu'un des deux, parce qu'un budget faux est pire qu'un budget absent.
+    budgets = {r.get("plafond_generations") for v in par_rouleau.values() for r in v}
+    budgets.discard(None)
+    budget_gen = budgets.pop() if len(budgets) == 1 else None
 
     lignes = []
     if desaccords:
@@ -239,6 +258,7 @@ def main() -> int:
             "rouleau": rouleau, "n": len(lots), "graine": lots[0]["graine"],
             "voxel_um": lots[0]["voxel_um"],
             "generations_min": min(gens), "generations_max": max(gens),
+            "budget_generations": lots[0].get("plafond_generations"),
             # ⚠ Les aires PAR TIRAGE, et pas seulement min/max/mediane : la figure place
             # un point par tirage et le colore par son compte de croisements. Sans la liste
             # elle devrait reconstruire une plage, et un point rouge tomberait alors sur le
@@ -292,7 +312,12 @@ def main() -> int:
     # écrit en dur : il dépend du budget du `seed.json`, donc une constante deviendrait
     # fausse en silence le jour où le budget change. C'est exactement la mesure que
     # `29` N3 demande.
-    plafond_gen = max(l["generations_max"] for l in lignes)
+    # ⚠⚠ DEUX notions, deux noms. « le budget demande » (celui du seed.json, qui voyage
+    # dans chaque resume) et « le maximum reellement atteint » ne sont pas la meme chose :
+    # a budget 120 les traces s'arretent a 118, a budget 400 elles s'arretent ou elles
+    # veulent. Les confondre sous un seul `plafond_generations` rendait le test « cette
+    # trace a-t-elle sature ? » trivialement vrai pour le rouleau qui va le plus loin.
+    plafond_gen = max(l["generations_max"] for l in lignes)   # atteint, pas demande
     plafonnes = [l for l in lignes
                  if l["generations_min"] == l["generations_max"] == plafond_gen]
     for l in lignes:
@@ -374,7 +399,8 @@ def main() -> int:
             "dispersion_mediane_sans": (statistics.median(disp_sans) if disp_sans else None),
             # ⚠ Le confond du plafond voyage dans l'artefact : sans lui, la prose qui
             # le cite serait de nouveau un nombre sans producteur.
-            "plafond_generations": plafond_gen,
+            "generations_max_observees": plafond_gen,
+            "budget_generations": budget_gen,
             "plafonnes": n_a, "non_plafonnes": n_b,
             "bascules_plafonnes": a_b, "bascules_non_plafonnes": b_b,
             "p_fisher_plafond": p_fisher,

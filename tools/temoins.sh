@@ -593,6 +593,10 @@ run "carte des segments"       uv run python "$ROOT/analysis/src/carte_segments.
 # des qu'il en a deux. Le temoin sonde justement le cas ou les deux listes ne se trient
 # pas pareil -- le seul qui justifie ce fichier.
 run "appariement des scans"    uv run python "$ROOT/analysis/src/apparier_volumes.py" --verifier
+# ⚠⚠ La comparaison des deux plafonds : sa sonde verifie qu'un rouleau qui bute AUSSI
+# sur le nouveau plafond est ECARTE du verdict. L'inclure comparerait une troncature a
+# une autre et affaiblirait l'effet mesure sans qu'aucune ligne ne le signale.
+run "plafond : les 2 campagnes" uv run python "$ROOT/analysis/src/comparer_plafond.py" --verifier
 run "campagne des graines"     uv run python "$ROOT/analysis/src/figure_graines.py" --verifier
 run "écarts entre segments"    uv run python "$ROOT/analysis/src/figure_segments.py" --verifier
 

@@ -23,7 +23,8 @@
   ],
   "dispersion_mediane_bascule": 0.0033216355321612533,
   "dispersion_mediane_sans": 0.1276883102893815,
-  "plafond_generations": 118,
+  "generations_max_observees": 118,
+  "budget_generations": 120,
   "plafonnes": 6,
   "non_plafonnes": 7,
   "bascules_plafonnes": 4,
@@ -46,6 +47,7 @@
       "voxel_um": 9.362,
       "generations_min": 118,
       "generations_max": 118,
+      "budget_generations": 120,
       "aires": [
         19.823416,
         19.823562,
@@ -82,6 +84,7 @@
       "voxel_um": 9.362,
       "generations_min": 118,
       "generations_max": 118,
+      "budget_generations": 120,
       "aires": [
         19.823004,
         19.853836,
@@ -118,6 +121,7 @@
       "voxel_um": 9.362,
       "generations_min": 96,
       "generations_max": 106,
+      "budget_generations": 120,
       "aires": [
         14.554794,
         15.716351,
@@ -154,6 +158,7 @@
       "voxel_um": 9.362,
       "generations_min": 118,
       "generations_max": 118,
+      "budget_generations": 120,
       "aires": [
         19.824852,
         19.823708,
@@ -190,6 +195,7 @@
       "voxel_um": 8.64,
       "generations_min": 118,
       "generations_max": 118,
+      "budget_generations": 120,
       "aires": [
         16.894678,
         16.938079,
@@ -226,6 +232,7 @@
       "voxel_um": 9.362,
       "generations_min": 118,
       "generations_max": 118,
+      "budget_generations": 120,
       "aires": [
         19.824886,
         19.822871,
@@ -262,6 +269,7 @@
       "voxel_um": 8.64,
       "generations_min": 117,
       "generations_max": 118,
+      "budget_generations": 120,
       "aires": [
         16.914836,
         16.955225,
@@ -298,6 +306,7 @@
       "voxel_um": 9.362,
       "generations_min": 103,
       "generations_max": 107,
+      "budget_generations": 120,
       "aires": [
         16.007222,
         14.849313,
@@ -334,6 +343,7 @@
       "voxel_um": 9.362,
       "generations_min": 99,
       "generations_max": 112,
+      "budget_generations": 120,
       "aires": [
         15.154326,
         15.129662,
@@ -370,6 +380,7 @@
       "voxel_um": 9.362,
       "generations_min": 118,
       "generations_max": 118,
+      "budget_generations": 120,
       "aires": [
         19.947905,
         19.828304,
@@ -406,6 +417,7 @@
       "voxel_um": 8.64,
       "generations_min": 89,
       "generations_max": 104,
+      "budget_generations": 120,
       "aires": [
         12.889499,
         11.661286,
@@ -442,6 +454,7 @@
       "voxel_um": 8.64,
       "generations_min": 99,
       "generations_max": 116,
+      "budget_generations": 120,
       "aires": [
         12.384153,
         12.644888,
@@ -478,6 +491,7 @@
       "voxel_um": 9.362,
       "generations_min": 85,
       "generations_max": 93,
+      "budget_generations": 120,
       "aires": [
         11.378204,
         11.548131,
