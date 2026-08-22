@@ -654,6 +654,7 @@ run "chien de garde des rendus" "$ROOT/tools/rendre_surveille.sh" --verifier
 # Et il refuse quand l'ecart entre cellules est sous le bruit de tirage mesure -- le traceur
 # est un tirage, et la meme graine a rendu +0,89 puis +1,12.
 run "2×2 des prédictions"      uv run python "$ROOT/analysis/src/comparer_predictions.py" --verifier
+run "figure des deux pannes"   uv run python "$ROOT/analysis/src/figure_deux_pannes.py" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys

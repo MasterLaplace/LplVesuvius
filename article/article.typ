@@ -340,7 +340,7 @@ The two situations are different. A receding peak is a measurement: there is a s
 far, and its distance tracks the window. A flat profile is not a measurement at all. Both
 print the same verdict.
 
-We audited every depth profile in our tree --- 217 profiles across 110 series --- computing
+We audited every depth profile in our tree --- 225 profiles across 114 series --- computing
 each series' measured $alpha$ alongside the $alpha$ it would have if every reading were its
 own window edge.
 
@@ -349,11 +349,11 @@ own window edge.
     columns: (1fr, auto),
     align: (left, right),
     table.header[quantity][value],
-    [profiles whose reading *is* the window edge], [16 / 217],
-    [flat profiles (nothing to measure)], [10 / 217],
-    [series where no window measures anything], [2 / 110],
-    [series where $alpha$ cannot separate the two failures], [*20 / 107*],
-    [*converging* series so affected], [*0 / 107*],
+    [profiles whose reading *is* the window edge], [21 / 225],
+    [flat profiles (nothing to measure)], [15 / 225],
+    [series where no window measures anything], [4 / 114],
+    [series where $alpha$ cannot separate the two failures], [*24 / 111*],
+    [*converging* series so affected], [*0 / 111*],
   ),
   caption: [
     The audit. What loses discriminating power is exactly the *across-the-stack* verdict.
@@ -976,7 +976,7 @@ Three properties recur in the instruments above and are worth naming.
 
 + *$alpha approx 1$ has two causes and does not separate them* (#link(<sec:twofailures>)[Section 3.5]).
   A flat profile yields $alpha approx 1$ by identity. Both causes condemn the trace, and no
-  converging verdict is affected, but 20 of 107 series in our tree cannot be said to be
+  converging verdict is affected, but 24 of 111 series in our tree cannot be said to be
   *across the stack* rather than *unmeasured*.
 
 + *The negative control establishes the narrow claim only* (#link(<sec:negctrl>)[Section 6.4]).

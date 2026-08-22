@@ -1,5 +1,5 @@
 {
-  "profils": 217,
+  "profils": 225,
   "resolution_alpha": 0.2,
   "series_indiscernables_du_plafond": {
     "data/boucle/corrige_gen40": {
@@ -55,6 +55,34 @@
       "alpha_mesure": 1.0335282600692448,
       "alpha_si_tout_au_plafond": 1.013497314592548,
       "ecart": 0.020030945476696704,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/paris4_croise/m7_sur_graine_m7": {
+      "alpha_mesure": 1.013497314592548,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.0,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/paris4_croise/m7_sur_graine_ps256": {
+      "alpha_mesure": 0.946554025096736,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.06694328949581207,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/paris4_croise/ps256_sur_graine_m7": {
+      "alpha_mesure": 1.013497314592548,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.0,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/paris4_croise/ps256_sur_graine_ps256": {
+      "alpha_mesure": 1.1196375263912042,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.10614021179865607,
       "resolution": 0.2,
       "discriminant": false
     },
@@ -143,18 +171,799 @@
       "discriminant": false
     }
   },
-  "series_jugees": 107,
+  "jugees": {
+    "data/boucle/corrige_gen40": {
+      "alpha_mesure": 0.8868211705272998,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.1266761440652483,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/boucle/corrige_gen5": {
+      "alpha_mesure": 1.033528260069245,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.020030945476696926,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/boucle/corrige_gen5_poids100": {
+      "alpha_mesure": 0.9533743752962804,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.06012293929626766,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/boucle/temoin": {
+      "alpha_mesure": 0.9759976193067708,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.037499695285777346,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/convergence_essais/essai_b": {
+      "alpha_mesure": 1.2053075714474089,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.19181025685486075,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/convergence_essais/essai_ng2": {
+      "alpha_mesure": 0.6451004127537756,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.3683969018387725,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/convergence_essais/essai_scale1": {
+      "alpha_mesure": 0.9949878759602514,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.018509438632296704,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/ext_apres_rognage/gen125": {
+      "alpha_mesure": 0.422156346775734,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.599049389506127,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/ext_budget/gen200": {
+      "alpha_mesure": 1.313046516751612,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.29184078046975115,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/ext_chaine/gen100": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/ext_chaine/pas001": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/ext_chaine/pas002": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/ext_chaine_cumul/pas001": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/ext_chaine_cumul/pas002": {
+      "alpha_mesure": 1.039633928149274,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.018428191867412957,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/ext_chaine_fin/pas001": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/ext_chaine_fin/pas002": {
+      "alpha_mesure": 1.8060070521792715,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.7848013158974105,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/ext_cycle_propre/gen110": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/ext_determinisme/gen100": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/ext_determinisme/gen100_bis2": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/extension_tangentielle/gen001": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/extension_tangentielle/gen003": {
+      "alpha_mesure": 0.422156346775734,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.599049389506127,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/extension_tangentielle/gen010": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/leurs_parametres": {
+      "alpha_mesure": 1.0335282600692448,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.020030945476696704,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/paris4_croise/m7_sur_graine_m7": {
+      "alpha_mesure": 1.013497314592548,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.0,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/paris4_croise/m7_sur_graine_ps256": {
+      "alpha_mesure": 0.946554025096736,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.06694328949581207,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/paris4_croise/ps256_sur_graine_m7": {
+      "alpha_mesure": 1.013497314592548,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.0,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/paris4_croise/ps256_sur_graine_ps256": {
+      "alpha_mesure": 1.1196375263912042,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.10614021179865607,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/petite_trace/g30": {
+      "alpha_mesure": 1.013497314592548,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.0,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/petite_trace/g60": {
+      "alpha_mesure": 0.8728573451391766,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.14063996945337154,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/prediction_paris4/m7": {
+      "alpha_mesure": 1.013497314592548,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.0,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/prediction_paris4/ps256": {
+      "alpha_mesure": 0.8946823621293564,
+      "alpha_si_tout_au_plafond": 1.013497314592548,
+      "ecart": 0.11881495246319174,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/rogne/gen10": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/rogne/gen25": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/rogne/gen50": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/rogne_cycle2/gen103": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/rogne_cycle2/gen106": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires/spire00": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires/spire01": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires/spire02": {
+      "alpha_mesure": 0.1898269439600407,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.8313787923218202,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires/spire03": {
+      "alpha_mesure": 0.5318540975687568,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.48935163871310416,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires/spire04": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires/spire05": {
+      "alpha_mesure": 0.2995246947530635,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.7216810415287975,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires/spire06": {
+      "alpha_mesure": 1.4754004773539575,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.45419474107209656,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_dedans/spire00": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_dedans/spire01": {
+      "alpha_mesure": 0.037864742235528444,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.9833409940463325,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_dedans/spire02": {
+      "alpha_mesure": 0.6863839101129505,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.33482182616891043,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_dedans/spire03": {
+      "alpha_mesure": 0.9855633335447544,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.035642402737106504,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/spires_dedans/spire04": {
+      "alpha_mesure": 0.7216810415287975,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.2995246947530634,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_dedans/spire05": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_dedans/spire06": {
+      "alpha_mesure": 0.2570222358974111,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.7641835003844499,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas0125/spire00": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas0125/spire01": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas0125/spire02": {
+      "alpha_mesure": 0.7582169186704452,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.2629888176114158,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas0125/spire03": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas0125/spire04": {
+      "alpha_mesure": 0.7216810415287975,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.2995246947530634,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas0125/spire05": {
+      "alpha_mesure": 0.5318540975687567,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.4893516387131043,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas0125/spire06": {
+      "alpha_mesure": 0.2793072505812094,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.7418984857006515,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas0125/spire07": {
+      "alpha_mesure": 0.5826527410339327,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.43855299524792823,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas0125/spire08": {
+      "alpha_mesure": 1.1292753934519375,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.10806965717007655,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/spires_pas0125/spire09": {
+      "alpha_mesure": 1.174919268376782,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.153713532094921,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/spires_pas0125/spire10": {
+      "alpha_mesure": 0.3987583809867963,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.6224473552950647,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas0125_compense/spire00": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas0125_compense/spire01": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas0125_compense/spire02": {
+      "alpha_mesure": 0.2021485748634774,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.8190571614183836,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas0125_compense/spire03": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas0125_compense/spire04": {
+      "alpha_mesure": 0.35032333821823963,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.6708823980636214,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas0125_compense/spire05": {
+      "alpha_mesure": 0.10969775079302287,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.911507985488838,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas0125_compense/spire06": {
+      "alpha_mesure": 0.24611987806298202,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.7750858582188789,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas0125_compense/spire07": {
+      "alpha_mesure": 0.9115079854888382,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.1096977507930228,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/spires_pas0125_compense/spire08": {
+      "alpha_mesure": 1.3899572663675137,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.36875153008565276,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas0125_compense/spire09": {
+      "alpha_mesure": 1.0618134436414954,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.04060770735963448,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/spires_pas025/spire00": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas025/spire01": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas025/spire02": {
+      "alpha_mesure": 0.2021485748634774,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.8190571614183836,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas025/spire03": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas025/spire04": {
+      "alpha_mesure": 0.1739309762667748,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.8472747600150862,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas025/spire05": {
+      "alpha_mesure": 0.09471669147121034,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.9264890448106506,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas025/spire06": {
+      "alpha_mesure": 0.24611987806298202,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.7750858582188789,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas025/spire07": {
+      "alpha_mesure": 0.7022194345296785,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.31898630175218246,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas025/spire08": {
+      "alpha_mesure": 1.3207304310349246,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.29952469475306365,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas05/spire00": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas05/spire01": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas05/spire02": {
+      "alpha_mesure": 0.16049639425819898,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.860709342023662,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas05/spire03": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas05/spire04": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas05/spire05": {
+      "alpha_mesure": 0.16049639425819898,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.860709342023662,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pas05/spire06": {
+      "alpha_mesure": 0.5826527410339327,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.43855299524792823,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pic025/spire00": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pic025/spire01": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pic025/spire02": {
+      "alpha_mesure": 0.2021485748634774,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.8190571614183836,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pic025/spire03": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pic025/spire04": {
+      "alpha_mesure": 0.35032333821823963,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.6708823980636214,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pic025/spire05": {
+      "alpha_mesure": 0.10969775079302287,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.911507985488838,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pic025/spire06": {
+      "alpha_mesure": 0.24611987806298202,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.7750858582188789,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pic025/spire07": {
+      "alpha_mesure": 0.9115079854888382,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.1096977507930228,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/spires_pic025/spire08": {
+      "alpha_mesure": 1.3899572663675137,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.36875153008565276,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_pic025/spire09": {
+      "alpha_mesure": 1.0618134436414954,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.04060770735963448,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/spires_portee0375/spire00": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_portee0375/spire01": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_portee0375/spire02": {
+      "alpha_mesure": 0.26165995251753515,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.7595457837643258,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_portee0375/spire03": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_portee0375/spire04": {
+      "alpha_mesure": 0.1739309762667748,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.8472747600150862,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_portee0375/spire05": {
+      "alpha_mesure": 0.6119832907357747,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.4092224455460862,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_portee0375/spire06": {
+      "alpha_mesure": 0.24611987806298202,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.7750858582188789,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_portee0375/spire07": {
+      "alpha_mesure": 1.4910573988609552,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.4698516625790943,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_portee0375/spire08": {
+      "alpha_mesure": 1.190119037007185,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.16891330072532407,
+      "resolution": 0.2,
+      "discriminant": false
+    },
+    "data/spires_portee0375/spire09": {
+      "alpha_mesure": 0.5318540975687568,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.48935163871310416,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_repousse/spire00": {
+      "alpha_mesure": 0.0,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 1.021205736281861,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_repousse/spire01": {
+      "alpha_mesure": 0.42215634677573416,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.5990493895061269,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_repousse/spire02": {
+      "alpha_mesure": 0.572689357253571,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.44851637902829,
+      "resolution": 0.2,
+      "discriminant": true
+    },
+    "data/spires_repousse/spire03": {
+      "alpha_mesure": 1.4605718246282915,
+      "alpha_si_tout_au_plafond": 1.021205736281861,
+      "ecart": 0.43936608834643054,
+      "resolution": 0.2,
+      "discriminant": true
+    }
+  },
+  "series_jugees": 111,
   "alpha_min_indiscernable": 0.8728573451391766,
   "alpha_max_convergent": 0.42215634677573416,
   "convergents_indiscernables": [],
-  "au_plafond": 16,
-  "plats": 10,
-  "mesures": 206,
+  "au_plafond": 21,
+  "plats": 15,
+  "mesures": 209,
   "inconnus": 1,
   "sans_seuil_declare": 1,
-  "series": 110,
+  "series": 114,
   "series_entierement_plates": [
     "data/leur_graine",
+    "data/paris4_croise/m7_sur_graine_m7",
+    "data/paris4_croise/ps256_sur_graine_m7",
     "data/prediction_paris4/m7"
   ],
   "series_partiellement_plates": [
@@ -162,6 +971,7 @@
     "data/boucle/temoin",
     "data/convergence_essais/essai_scale1",
     "data/leurs_parametres",
+    "data/paris4_croise/m7_sur_graine_ps256",
     "data/petite_trace/g30",
     "data/petite_trace/g60",
     "data/spires_repousse/spire03"
@@ -838,6 +1648,118 @@
       "couche_tracee": 20,
       "avec_matiere": 423,
       "etat": "plat"
+    },
+    {
+      "fichier": "data/paris4_croise/m7_sur_graine_m7/profil_161c.json",
+      "ecart_um": 192.0,
+      "plafond_um": 192.0,
+      "au_plafond": true,
+      "amplitude": 0.0,
+      "seuil_declare": 0.02,
+      "seuil": 0.02,
+      "seuil_est_un_repli": false,
+      "au_bord": 1.0,
+      "couche_tracee": 80,
+      "avec_matiere": 49,
+      "etat": "plat"
+    },
+    {
+      "fichier": "data/paris4_croise/m7_sur_graine_m7/profil_41c.json",
+      "ecart_um": 48.0,
+      "plafond_um": 48.0,
+      "au_plafond": true,
+      "amplitude": 0.0,
+      "seuil_declare": 0.02,
+      "seuil": 0.02,
+      "seuil_est_un_repli": false,
+      "au_bord": 1.0,
+      "couche_tracee": 20,
+      "avec_matiere": 49,
+      "etat": "plat"
+    },
+    {
+      "fichier": "data/paris4_croise/m7_sur_graine_ps256/profil_161c.json",
+      "ecart_um": 175.2,
+      "plafond_um": 192.0,
+      "au_plafond": false,
+      "amplitude": 0.05945590982511182,
+      "seuil_declare": 0.02,
+      "seuil": 0.02,
+      "seuil_est_un_repli": false,
+      "au_bord": 1.0,
+      "couche_tracee": 80,
+      "avec_matiere": 49,
+      "etat": "mesure"
+    },
+    {
+      "fichier": "data/paris4_croise/m7_sur_graine_ps256/profil_41c.json",
+      "ecart_um": 48.0,
+      "plafond_um": 48.0,
+      "au_plafond": true,
+      "amplitude": 0.01538716806607137,
+      "seuil_declare": 0.02,
+      "seuil": 0.02,
+      "seuil_est_un_repli": false,
+      "au_bord": 1.0,
+      "couche_tracee": 20,
+      "avec_matiere": 49,
+      "etat": "plat"
+    },
+    {
+      "fichier": "data/paris4_croise/ps256_sur_graine_m7/profil_161c.json",
+      "ecart_um": 192.0,
+      "plafond_um": 192.0,
+      "au_plafond": true,
+      "amplitude": 0.0,
+      "seuil_declare": 0.02,
+      "seuil": 0.02,
+      "seuil_est_un_repli": false,
+      "au_bord": 1.0,
+      "couche_tracee": 80,
+      "avec_matiere": 49,
+      "etat": "plat"
+    },
+    {
+      "fichier": "data/paris4_croise/ps256_sur_graine_m7/profil_41c.json",
+      "ecart_um": 48.0,
+      "plafond_um": 48.0,
+      "au_plafond": true,
+      "amplitude": 0.0,
+      "seuil_declare": 0.02,
+      "seuil": 0.02,
+      "seuil_est_un_repli": false,
+      "au_bord": 1.0,
+      "couche_tracee": 20,
+      "avec_matiere": 49,
+      "etat": "plat"
+    },
+    {
+      "fichier": "data/paris4_croise/ps256_sur_graine_ps256/profil_161c.json",
+      "ecart_um": 177.6,
+      "plafond_um": 192.0,
+      "au_plafond": false,
+      "amplitude": 0.06479025169116005,
+      "seuil_declare": 0.02,
+      "seuil": 0.02,
+      "seuil_est_un_repli": false,
+      "au_bord": 0.7142857142857143,
+      "couche_tracee": 80,
+      "avec_matiere": 49,
+      "etat": "mesure"
+    },
+    {
+      "fichier": "data/paris4_croise/ps256_sur_graine_ps256/profil_41c.json",
+      "ecart_um": 38.4,
+      "plafond_um": 48.0,
+      "au_plafond": false,
+      "amplitude": 0.02050948636816665,
+      "seuil_declare": 0.02,
+      "seuil": 0.02,
+      "seuil_est_un_repli": false,
+      "au_bord": 1.0,
+      "couche_tracee": 20,
+      "avec_matiere": 49,
+      "etat": "mesure"
     },
     {
       "fichier": "data/petite_trace/g30/profil_161c.json",

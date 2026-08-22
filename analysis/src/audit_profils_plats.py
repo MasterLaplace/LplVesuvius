@@ -166,6 +166,11 @@ def resumer(profils: list[dict]) -> dict:
     return {"profils": len(profils),
             "resolution_alpha": RESOLUTION,
             "series_indiscernables_du_plafond": indiscernables,
+            # ⚠⚠ TOUTES les series jugees, et pas seulement celles qui echouent. Ne garder
+            # que les 20 non discriminantes serait publier un echantillon filtre : un
+            # lecteur ne pourrait pas voir que les 87 autres sont loin de leur plafond, et
+            # c'est justement ce qui rend le constat supportable.
+            "jugees": juges,
             "series_jugees": len(juges),
             "alpha_min_indiscernable": min(alphas_ind) if alphas_ind else None,
             "alpha_max_convergent": max(convergents) if convergents else None,

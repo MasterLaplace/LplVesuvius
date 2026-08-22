@@ -38,6 +38,17 @@ def charger(dossier: Path) -> list[dict]:
     c'est la campagne qui l'écrit — donc lire le nom ici et le composer là-bas sont deux
     endroits qui doivent s'accorder. Un désaccord se voit tout de suite : la cellule
     manque du tableau, elle ne s'y trompe pas de case.
+
+    ⚠⚠ **Deux verdicts plus anciens sont délibérément ignorés** : `prediction_paris4_ps256`
+    et `prediction_paris4_m7`, écrits avant que la campagne ne devienne un 2×2. Leur nom ne
+    dit pas quelle graine les a produits. Je *sais* laquelle — chaque prédiction traçait la
+    sienne — mais relabelliser des fichiers de données d'après mon souvenir d'un script
+    depuis modifié est exactement la provenance inventée que ce dépôt s'interdit. Deux
+    tirages perdus valent mieux qu'un tirage rangé dans la mauvaise case.
+
+    ⭐ Les verdicts sans suffixe `_r` comptent comme un tirage : plusieurs campagnes aux
+    **mêmes** paramètres écrivent dans le même dossier de documents, et leurs cellules
+    s'additionnent légitimement.
     """
     out = []
     for p in sorted(dossier.glob(f"{PREFIXE}*.json")):

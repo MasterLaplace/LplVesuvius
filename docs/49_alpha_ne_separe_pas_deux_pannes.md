@@ -51,19 +51,26 @@ fichier, donc ils ne peuvent plus se contredire.
 (16 témoins) lit les **217 profils** du dépôt et calcule, pour chaque série, l'α mesuré
 **et** l'α qu'on obtiendrait si chaque lecture était le bord de sa fenêtre.
 
+![α mesuré contre α de plafond](images/49_deux_pannes.png)
+
 | | |
 |---|---:|
-| profils lus | **217** dans **110** séries |
-| profils dont l'écart EST le bord de la fenêtre | **16** |
-| profils plats (rien à mesurer) | **10** |
-| séries dont **aucune** fenêtre ne mesure rien | **2** |
-| séries dont α ne sépare pas les deux pannes | **20** |
+| profils lus | **225** dans **114** séries |
+| profils dont l'écart EST le bord de la fenêtre | **21** |
+| profils plats (rien à mesurer) | **15** |
+| séries dont **aucune** fenêtre ne mesure rien | **4** |
+| séries dont α ne sépare pas les deux pannes | **24** sur **111** jugées |
+
+⚠ **Ces totaux bougent, et c'est normal** : l'audit balaie l'arbre, donc chaque campagne en
+ajoute. Ils valaient 217 / 110 / 20 à l'écriture de ce document et ont grandi de nos propres
+runs du même jour. ⭐ Ce qui **ne bouge pas**, et qui porte la conclusion, ce sont les deux
+bornes ci-dessous.
 
 > ⭐⭐ **Et voici ce qui rend le constat supportable, mesuré et non supposé.** L'α de plafond
 > vaut toujours ~1. Une série qui **converge** en est donc loin par construction : le plus
 > petit α non discriminant vaut **+0,8729**, le plus grand α convergent **+0,4222**, et
-> **0 série convergente sur 107** est concernée. Les deux populations ne se recouvrent même
-> pas.
+> **0 série convergente** n'est concernée. Les deux populations ne se recouvrent même pas —
+> c'est le trou visible entre le nuage vert et la bande rose de la figure.
 
 ⚠ **Aucun verdict positif n'est touché.** Ce qui perd son pouvoir de discrimination est
 exactement le verdict *« suit la fenêtre »* — et ses deux causes possibles, *le pic recule*
