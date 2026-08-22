@@ -124,8 +124,77 @@ def verifier() -> int:
     ok(etirer(np.array([], dtype=np.float32)).size == 0,
        "une image vide ne casse pas l'étirement")
 
+    # ⭐⭐ Le mode cote-a-cote NE DOIT RIEN REDIMENSIONNER. C'est toute sa raison d'etre :
+    # `assembler_mosaique.py` ramene les bandes a une largeur commune, ce qui a fait ressortir
+    # deux rendus de 2941 et 4101 px a 924 et 944 px — 2 % d'ecart pour 39 % de difference
+    # reelle. Un temoin qui ne verifierait que « l'image existe » laisserait revenir ça.
+    from PIL import Image
+    import tempfile
+    petite, grande = Image.new("L", (100, 60), 90), Image.new("L", (300, 120), 200)
+    with tempfile.TemporaryDirectory() as t:
+        out = Path(t) / "cc.jpg"
+        cote_a_cote([("petite", petite), ("grande", grande)], out, marge=10)
+        im = Image.open(out)
+        ok(im.width == 100 + 300 + 30,
+           f"la largeur est la SOMME des largeurs plus les marges ({im.width})")
+        ok(im.height >= 120 + 20, f"la hauteur suit la plus grande ({im.height})")
+        # ⚠ La sonde : si le mode redimensionnait a largeur commune, la largeur totale ne
+        # dependrait plus du RAPPORT des tailles. On le verifie en changeant une seule image.
+        out2 = Path(t) / "cc2.jpg"
+        cote_a_cote([("petite", petite), ("double", Image.new("L", (600, 120), 200))],
+                    out2, marge=10)
+        ok(Image.open(out2).width == 100 + 600 + 30,
+           "doubler une image double sa place — rien n'est ramené à une largeur commune")
+        out3 = Path(t) / "cc3.jpg"
+        cote_a_cote([], out3, marge=10)
+        ok(not out3.exists(), "aucune image : rien n'est écrit, pas de fichier vide")
+
     print(f"\n{'tous les témoins passent' if not echecs else f'{echecs} échec(s)'}")
     return 1 if echecs else 0
+
+
+def cote_a_cote(images: list[tuple[str, "object"]], sortie: Path,
+                marge: int = 24, legende: str = "") -> None:
+    """Poser plusieurs couches cote a cote A L'ECHELLE RELATIVE VRAIE.
+
+    ⚠⚠ Pourquoi ce mode existe alors que `assembler_mosaique.py` assemble deja des bandes :
+    ce dernier RE-ECHELONNE les bandes a une largeur commune, ce qui est juste pour une
+    mosaique de rouleau (on veut aligner des spires) et FAUX pour une comparaison de taille.
+    Mesure : deux rendus de 2941 et 4101 px de large en sont ressortis a 924 et 944 px, soit
+    2 % d'ecart la ou la difference reelle est de 39 % — la figure aurait montre le contraire
+    de ce qu'elle devait montrer.
+
+    ⭐ Ici, rien n'est redimensionne : les images sont posees telles quelles et le cadre est
+    complete par du fond. Une surface deux fois plus grande occupe donc deux fois plus de
+    place, ce qui est le seul comportement qui rende la comparaison honnete.
+    """
+    from PIL import Image, ImageDraw, ImageFont
+
+    if not images:
+        return
+    h = max(im.height for _, im in images)
+    w = sum(im.width for _, im in images) + marge * (len(images) + 1)
+    bande = 46 if legende else 0
+    canevas = Image.new("L", (w, h + marge * 2 + bande), 16)
+    x = marge
+    for _, im in images:
+        # ⚠ Aligne en BAS et non centre : deux surfaces posees sur une meme ligne de base se
+        # comparent a l'oeil, deux surfaces centrees ne se comparent pas.
+        canevas.paste(im, (x, marge + (h - im.height)))
+        x += im.width + marge
+    art = ImageDraw.Draw(canevas)
+    try:
+        f = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 22)
+    except OSError:
+        f = ImageFont.load_default()
+    x = marge
+    for nom, im in images:
+        art.text((x + 6, marge + (h - im.height) - 30), nom, fill=210, font=f)
+        x += im.width + marge
+    if legende:
+        art.text((marge, h + marge * 2 + 6), legende, fill=170, font=f)
+    sortie.parent.mkdir(parents=True, exist_ok=True)
+    canevas.save(sortie, quality=88)
 
 
 def main() -> int:
@@ -139,6 +208,10 @@ def main() -> int:
     ap.add_argument("--couche", type=int, default=None)
     ap.add_argument("--bas", type=float, default=BAS)
     ap.add_argument("--haut", type=float, default=HAUT)
+    ap.add_argument("--cote-a-cote", type=Path,
+                    help="poser les couches côte à côte À L'ÉCHELLE RELATIVE VRAIE "
+                         "(aucun redimensionnement) — pour comparer des TAILLES")
+    ap.add_argument("--legende", default="")
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()
     if a.verifier:
@@ -153,6 +226,27 @@ def main() -> int:
             return 3
         print(f"{r['pile']} → couche {r['couche']}/{r['couches']} "
               f"({r['taille'][0]}×{r['taille'][1]}) → {r['sortie']}")
+        return 0
+
+    if a.cote_a_cote:
+        from PIL import Image
+        import tempfile
+        vues = []
+        with tempfile.TemporaryDirectory() as tmp:
+            for pile in a.piles:
+                png = Path(tmp) / f"{pile.parent.name}.png"
+                r = extraire(pile, png, a.couche, a.bas, a.haut)
+                if r is None:
+                    print(f"pile vide : {pile}", file=sys.stderr)
+                    continue
+                im = Image.open(png).convert("L")
+                im.load()
+                vues.append((pile.parent.name, im))
+                print(f"  {pile.parent.name} : {r['taille'][0]}×{r['taille'][1]} px")
+            if not vues:
+                return 3
+            cote_a_cote(vues, a.cote_a_cote, legende=a.legende)
+        print(f"  écrit : {a.cote_a_cote}")
         return 0
 
     if not a.dossier_sortie:

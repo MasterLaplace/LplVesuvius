@@ -376,6 +376,43 @@ surface — le même maillage décimé passe de 240 à 49. Le plafond ne sert qu
 vingt minutes de rendu sur une surface manifestement repliée. Une surface sous le plafond
 n'est pas déclarée bonne : elle est jugée normalement.
 
+### ⭐⭐ La voir, et découvrir que α cache une minorité
+
+![une nappe étendue le long d'elle-même](images/44_extension.jpg)
+
+À gauche le segment officiel de départ, à droite la même nappe après une extension, **à
+l'échelle relative vraie**. Les trous noirs de gauche sont les 41 % de sommets invalides ; à
+droite ils sont rebouchés, et le treillis de fibres continue sur une surface bien plus large.
+
+⚠⚠ **Mais la périphérie de droite n'a pas la même texture que son cœur** : le haut-droite, le
+bas et le bord gauche montrent des laminations tourbillonnantes, qui sont exactement ce à quoi
+[`38`](38_ce_qui_bouge_avec_la_fenetre.md) dit que ressemble une surface posée *en travers* de
+l'empilement. Regarder l'image a donc posé une question que le verdict ne posait pas — et
+l'instrument pour y répondre existait déjà, calculé pour chaque surface :
+
+| surface | pic **au bord** | fenêtres plates | écart médian |
+|---|---:|---:|---:|
+| source officielle | **0,000** | 0,000 | 17,3 µm |
+| **extension budget 100** | **0,091** | 0,083 | ⭐ **17,3 µm** |
+| extension budget 200 *(cassée)* | 0,305 | 0,464 | 73,4 µm |
+| spire radiale qui casse | 0,250 | 0,000 | 77,8 µm |
+
+⭐ **L'écart médian de l'extension est 17,3 µm — exactement celui du segment officiel.** Le
+gros de la surface est donc aussi bien posé que la référence, ce qui est plus fort que ce que
+α seul disait.
+
+⚠⚠ **Et 9,1 % de ses fenêtres ont leur pic AU BORD**, contre 0,0 % pour la source : environ un
+dixième de l'extension n'a aucune feuille à portée. C'est la périphérie qu'on voit tourbillonner
+sur l'image, et **α ne le montre pas** — parce qu'il est calculé sur une **médiane**, et qu'une
+médiane est insensible à une minorité.
+
+> **α cache une minorité mauvaise.** C'est une limite de l'instrument, pas de cette surface :
+> tout verdict α de ce dépôt en hérite. Le complément est `au_bord_relief`, qui est déjà
+> calculé partout et qu'il suffit de lire à côté.
+
+⭐ Conséquence pratique pour l'enchaînement, et c'est une prédiction que la chaîne en cours
+teste : si chaque pas ajoute ~9 % de périphérie mauvaise, l'enchaînement la **compose**.
+
 ### ⚠⚠ « Enchaîner à budget constant » n'existe pas — le budget est CUMULATIF
 
 Première chaîne lancée, quatre pas au budget 100. Le deuxième pas rend **exactement la même
