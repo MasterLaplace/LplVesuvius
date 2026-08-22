@@ -82,13 +82,15 @@ def verifier() -> int:
             echecs += 1
             print(f"  ECHEC  {nom}" + (f"  — {detail}" if detail else ""))
 
-    # ⚠ Les sondes sont DERIVEES des bornes, pas ecrites en dur : la premiere version
-    # testait la decade 10 → 100 alors que l'axe commence a 20, donc elle mesurait un
-    # ecretage et non une echelle. Un temoin qui vieillit avec la figure ne vaut rien.
-    d1, d2, d3 = UM_MIN, UM_MIN * 10, UM_MIN * 100
-    assert d3 <= UM_MAX, "les sondes doivent tenir dans le domaine de l'axe"
+    # ⚠⚠ Les sondes sont derivees des bornes PAR RATIO GEOMETRIQUE, donc elles tiennent
+    # dans le domaine quelle que soit son etendue. Une version anterieure testait la decade
+    # `MIN`, `MIN*10`, `MIN*100` -- correct sur un axe qui couvre plus de deux decades,
+    # faux sinon : la troisieme sonde sortait du domaine et le temoin mesurait un ECRETAGE
+    # en croyant mesurer une echelle. C'est la deuxieme fois que ce piege se paie.
+    k = (UM_MAX / UM_MIN) ** 0.5
+    d1, d2, d3 = UM_MIN, UM_MIN * k, UM_MAX
     v("l'axe est croissant", x_de(d1) < x_de(d2) < x_de(d3))
-    v("... et logarithmique : une décade fait toujours la même largeur",
+    v("... et logarithmique : un même rapport fait toujours la même largeur",
       abs((x_de(d2) - x_de(d1)) - (x_de(d3) - x_de(d2))) <= 1,
       f"{x_de(d2) - x_de(d1)} contre {x_de(d3) - x_de(d2)}")
     # ⚠ Un ecart hors bornes doit etre ECRETE, pas sortir du cadre : un point dessine a

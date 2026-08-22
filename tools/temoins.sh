@@ -597,6 +597,7 @@ run "appariement des scans"    uv run python "$ROOT/analysis/src/apparier_volume
 # sur le nouveau plafond est ECARTE du verdict. L'inclure comparerait une troncature a
 # une autre et affaiblirait l'effet mesure sans qu'aucune ligne ne le signale.
 run "plafond : les 2 campagnes" uv run python "$ROOT/analysis/src/comparer_plafond.py" --verifier
+run "figure du plafond"        uv run python "$ROOT/analysis/src/figure_plafond.py" --verifier
 run "campagne des graines"     uv run python "$ROOT/analysis/src/figure_graines.py" --verifier
 run "écarts entre segments"    uv run python "$ROOT/analysis/src/figure_segments.py" --verifier
 
