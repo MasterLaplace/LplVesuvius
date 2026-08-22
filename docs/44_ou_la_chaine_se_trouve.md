@@ -548,6 +548,36 @@ besoin de l'être pour que le remède marche.
 ferait lire à tout consommateur l'aire d'avant le rognage. Un témoin vérifie qu'il ne vaut plus
 la valeur d'origine.
 
+### ⚠⚠ Mais le cycle ne se referme pas — l'extension est une opération UNIQUE
+
+Étendre depuis la nappe rognée, avec exactement la même quantité de croissance que la première
+fois (cent générations de plus) :
+
+| | aire utile | α | pic au bord |
+|---|---:|---:|---:|
+| extension 1, depuis la source *(0 % au bord)* | 12,97 cm² | ⭐ **+0,000** | 9 % |
+| **extension 2, depuis la rognée** *(2 % au bord)* | 12,38 cm² | ⚠ **+0,422** | ⭐ **6 %** |
+
+⭐ La croissance, elle, marche : 6,93 → 12,38 cm², soit **+79 %**, du même ordre que le +203 %
+de la première. Et le rognage tient sa promesse sur la périphérie — **6 %** contre 9 %.
+
+⚠⚠ **Mais α passe de +0,000 à +0,422.** Ce qui se dégrade n'est pas le bord, c'est le
+**placement du cœur**. Et c'est la troisième fois que les deux mesures divergent : meilleure
+périphérie, plus mauvais α.
+
+> **Sur ces données, l'extension tangentielle est une opération UNIQUE.** Elle fonctionne une
+> fois, depuis un segment officiel intact, et rien de ce qui a été essayé ne permet de la
+> répéter : ni un budget plus grand, ni un découpage en séances, ni un rognage entre deux.
+
+⭐ Ce qui reste acquis et vaut la peine : **n'importe quel segment officiel qui converge peut
+être triplé une fois, en gardant α = +0,000.** Ce n'est pas une chaîne, mais c'est un facteur
+trois gratuit sur de la matière déjà validée.
+
+⏳ Le seul essai qui reste à faire de cette famille : **un rognage plus profond**. Si retirer
+plus (gen ≤ 10, soit 54 % des sommets, 6,02 cm² — encore 41 % de plus que la source) restaure
+α = +0,000 à l'extension suivante, alors le cycle existe et c'est la profondeur du rognage qui
+le commande. Sinon, l'opération est unique et il faudra chercher ailleurs. Jugement lancé.
+
 ### ⚠⚠ Découper aide OU nuit — et ce qui décide n'est pas la taille du pas
 
 Deux chaînes, deux conclusions opposées :
