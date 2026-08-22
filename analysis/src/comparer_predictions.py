@@ -105,6 +105,37 @@ def croiser(cellules: list[dict], resolution: float) -> dict:
     d["effet_prediction"] = ecart_par("graine", "prediction")
     d["effet_endroit"] = ecart_par("prediction", "graine")
 
+    # ⚠⚠ LE SIGNAL QUE LA COMPARAISON D'α NE PEUT PAS VOIR. Une cellule indecidable n'a pas
+    # d'α, donc elle disparait des ecarts ci-dessus -- et c'est justement la ou le signal
+    # etait le plus fort : mesure du 2026-08-22, les DEUX predictions rendent un profil plat
+    # a la graine de `m7` et un α mesurable a celle de `ps256`. L'indecidabilite suit
+    # l'ENDROIT, et c'est categorique, pas une petite difference d'α.
+    #
+    # ⭐ Un facteur « explique » l'indecidabilite quand elle est ENTIEREMENT concentree sur
+    # un de ses niveaux : toutes les cellules indecidables d'un cote, aucune de l'autre. Un
+    # partage partiel n'est pas concluant, et le dire ainsi evite d'avoir a inventer un
+    # seuil sur un compte de quatre.
+    def concentration(cle: str) -> dict | None:
+        niveaux = sorted({t[cle] for t in tableau})
+        if len(niveaux) < 2:
+            return None
+        par = {v: (sum(t["indecidables"] for t in tableau if t[cle] == v),
+                   sum(t["tirages"] for t in tableau if t[cle] == v))
+               for v in niveaux}
+        total = sum(x for x, _ in par.values())
+        touches = [v for v, (x, _) in par.items() if x]
+        # ⚠ Zero indecidable partout n'est pas une concentration : il n'y a rien a
+        # concentrer, et l'appeler « concluant » serait conclure sur une absence.
+        entiere = bool(total) and len(touches) == 1 and \
+            all(par[touches[0]][0] == par[touches[0]][1] for _ in (0,))
+        return {"par_niveau": {v: {"indecidables": x, "tirages": n}
+                               for v, (x, n) in par.items()},
+                "total": total, "niveaux_touches": touches,
+                "concentree": entiere}
+
+    d["indecidabilite_par_prediction"] = concentration("prediction")
+    d["indecidabilite_par_endroit"] = concentration("graine")
+
     # ⚠⚠ Le bruit retenu est le PLUS GRAND des deux : l'etendue intra-cellule mesuree si
     # elle existe, et la resolution que l'instrument declare. Prendre le plus petit
     # laisserait conclure sur un ecart que l'instrument ne resout pas.
@@ -126,6 +157,15 @@ def croiser(cellules: list[dict], resolution: float) -> dict:
             verdicts.append({"facteur": nom, "concluant": True, "ecart_max": e["max"],
                              "raison": (f"écart maximal {e['max']:.2f} au-dessus du bruit "
                                         f"{d['bruit_retenu']:.2f}")})
+    for nom, cle in (("prédiction", "indecidabilite_par_prediction"),
+                     ("endroit", "indecidabilite_par_endroit")):
+        c = d.get(cle)
+        if c and c["concentree"]:
+            verdicts.append({
+                "facteur": nom, "concluant": True, "categorique": True,
+                "raison": (f"toutes les {c['total']} cellule(s) indécidables sont du côté "
+                           f"« {c['niveaux_touches'][0]} », aucune de l'autre — "
+                           f"l'indécidabilité suit ce facteur")})
     d["verdicts"] = verdicts
     return d
 
@@ -188,6 +228,32 @@ def verifier() -> int:
     v("... et le bruit retombe sur la résolution déclarée",
       croiser(plat, 0.2)["bruit_retenu"] == 0.2)
 
+    # ⚠⚠ LA CONCENTRATION DE L'INDECIDABILITE, que la comparaison d'α ne peut pas voir.
+    def ind(pred, gr):
+        return {"prediction": pred, "graine": gr, "tirage": 1, "alpha": None,
+                "verdict": "indecidable"}
+    suit_endroit = [cel("A", "a", 1.10), cel("B", "a", 0.95), ind("A", "b"), ind("B", "b")]
+    rc = croiser(suit_endroit, 0.2)
+    ve = [x for x in rc["verdicts"] if x["facteur"] == "endroit" and x.get("categorique")]
+    v("une indécidabilité concentrée sur un endroit est vue", len(ve) == 1, str(rc["verdicts"]))
+    v("... et n'est PAS attribuée à la prédiction",
+      not [x for x in rc["verdicts"]
+           if x["facteur"] == "prédiction" and x.get("categorique")])
+    # ⚠ Le symetrique, sinon l'instrument pourrait toujours repondre « endroit ».
+    suit_pred = [cel("A", "a", 1.10), ind("B", "a"), cel("A", "b", 0.95), ind("B", "b")]
+    vp = [x for x in croiser(suit_pred, 0.2)["verdicts"]
+          if x["facteur"] == "prédiction" and x.get("categorique")]
+    v("une indécidabilité concentrée sur une prédiction est vue", len(vp) == 1)
+    # ⚠⚠ Un partage PARTIEL n'est pas une concentration -- sinon n'importe quelle
+    # repartition inegale passerait pour un effet.
+    partage = [ind("A", "a"), cel("B", "a", 1.0), ind("A", "b"), cel("B", "b", 1.0),
+               ind("B", "b")]
+    v("un partage partiel n'est pas concluant",
+      not [x for x in croiser(partage, 0.2)["verdicts"] if x.get("categorique")])
+    # ⚠ Et zero indecidable partout n'est pas une concentration : rien a concentrer.
+    v("aucune indécidabilité ⇒ aucun verdict catégorique",
+      not [x for x in croiser(plat, 0.2)["verdicts"] if x.get("categorique")])
+
     # ⚠⚠ Une cellule INDECIDABLE n'est pas une cellule a alpha nul.
     mixte = [{"prediction": "A", "graine": "a", "tirage": 1, "alpha": None,
               "verdict": "indecidable"}, cel("B", "a", 1.00)]
@@ -242,7 +308,8 @@ def main() -> int:
     print(f"  bruit retenu : {d['bruit_retenu']:.2f}")
     for x in d["verdicts"]:
         marque = "⭐" if x["concluant"] else "⚠⚠"
-        print(f"  {marque} effet {x['facteur']} : {x['raison']}")
+        cat = " (catégorique)" if x.get("categorique") else ""
+        print(f"  {marque} effet {x['facteur']}{cat} : {x['raison']}")
     if not any(x["concluant"] for x in d["verdicts"]):
         print("\n  ⚠⚠ Aucun des deux facteurs ne ressort du bruit. Ce n'est pas « les deux")
         print("      prédictions se valent » — c'est « cette expérience ne peut pas les")
