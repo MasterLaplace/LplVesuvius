@@ -1249,7 +1249,7 @@ converge.
 | | aire utile | sommets valides | arc | % d'un tour | α |
 |---|---:|---:|---:|---:|---:|
 | source officielle | 4,28 cm² | 59 % | 21,9 mm | 11,5 % | +0,000 |
-| **extension** | ⭐ **13,02 cm²** | ⭐ **96 %** | ⭐ **37,2 mm** | **14,5 %** | ⭐ **+0,000** |
+| **extension** | ⭐ **12,97 cm²** | ⭐ **96 %** | ⭐ **37,2 mm** | **14,5 %** | ⭐ **+0,000** |
 
 ⭐⭐ **Première fois dans ce dépôt qu'une surface que nous produisons GAGNE de la surface** — la
 chaîne radiale en perd 15,6 % par tour. Et elle rebouche ses trous (59 → 96 %), et son arc
@@ -1272,7 +1272,7 @@ grandit de 70 %, ce qui est la grandeur qui compte pour le graal.
    / +0,000.
    **Correctif vérifié** : `VC_GROWPATCH_RNG_SEED` (variable d'ENVIRONNEMENT, pas une clé de
    params) + `thread_limit: 1` → deux exécutions identiques donnent un maillage **identique
-   octet pour octet**, 13,024947 cm² des deux côtés.
+   octet pour octet**, 13,024947 cm² d'aire de méta des deux côtés (à ne pas confondre avec l'aire UTILE, 12,97 cm²).
 3. **Ce que ça fait aux résultats passés** : ⭐ les 17 essais de `42` en sortent *renforcés*
    (17 tirages indépendants tous à α ≈ 1 échantillonnent la distribution) ; ⚠ mais l'unique
    point à +0,422 de la repousse est un tirage, donc **« resume sur une surface projetée

@@ -239,21 +239,23 @@ Une seule exécution de `mode: resume` sur le segment officiel qui converge :
 | | grille | sommets valides | **aire utile** | **arc** | % d'un tour | rayon |
 |---|---|---:|---:|---:|---:|---|
 | source officielle | 162×149 | 59 % | **4,28 cm²** | 21,9 mm | 11,5 % | indéterminé |
-| après extension | 219×206 | ⭐ **96 %** | ⭐ **12,97 cm²** | ⭐ **37,2 mm** | **14,5 %** | ⭐ **déterminé** |
+| après extension | 219×206 | ⭐ **96 %** | ⭐ **12,97 cm²** | ⭐ **37,2 mm** | **15,4 %** | indéterminé |
 
 Et le verdict : **α = +0,000, converge**, 0 auto-intersection.
 
 ⚠⚠ **Mesuré avant que le traçage soit rendu reproductible** : ce n'était qu'un des trois
 tirages, dont un donnait +0,422. Le résultat a été **refait sous graine** et il tient —
-13,02 cm² à α = +0,000, octet pour octet rejouable. Voir deux sections plus bas.
+12,97 cm² d'aire utile à α = +0,000, octet pour octet rejouable. Voir deux sections plus bas.
 
 ⭐⭐ **L'extension ne fait pas qu'ajouter de la grille, elle rebouche les trous** : la part de
 sommets valides passe de 59 % à 96 %. C'est la première fois dans ce dépôt qu'une surface que
 nous produisons **gagne** de la surface — la chaîne radiale, elle, en **perd** 15,6 % par tour.
 
-⭐ Le rayon devient même **déterminé** (40,8 et 47,9 mm par les deux estimateurs, qui
-s'accordent enfin à 17 %) : une plaque plus grande résout l'ajustement de cercle que la source
-laissait indéterminé (§6).
+⚠⚠ **Une revendication retirée** : j'avais écrit que le rayon devenait **déterminé** sur cette
+surface. C'était vrai du tirage non déterministe (40,8 et 47,9 mm, accord à 17 %) et **faux du
+run reproductible**, où les deux estimateurs donnent 38,4 et 47,9 mm — soit 25 % d'écart, donc
+toujours indéterminé (§6). Étendre la plaque ne suffit pas à résoudre le rayon ; ce que ça
+change est l'arc, pas la courbure.
 
 ⚠ Ça reste **une** surface, et l'extension va dans **toutes** les directions — la hauteur
 monte aussi de 24,4 à 34,2 mm. « Tangentiel » décrit ce que la surface **est**
@@ -305,15 +307,19 @@ quoi que ce soit.
 ### ⭐⭐⭐ Le correctif est vérifié : deux exécutions identiques donnent le MÊME maillage
 
 Avec `VC_GROWPATCH_RNG_SEED` posée et `thread_limit: 1`, la même commande lancée deux fois
-produit un maillage **identique octet pour octet** — 13,024947 cm² des deux côtés, à la
+produit un maillage **identique octet pour octet** — 13,024947 cm² d'aire de méta des deux côtés (à ne pas confondre avec l'aire UTILE, 12,97 cm²), à la
 sixième décimale. Le traçage par croissance est donc **reproductible**, et il ne l'était pas.
 
 Et le résultat qui survit à la correction :
 
-| | aire utile | auto-intersections | α |
-|---|---:|---:|---:|
-| source officielle | 4,28 cm² | — | +0,000 |
-| **extension reproductible** | ⭐ **13,02 cm²** | **0** | ⭐ **+0,000** |
+| | aire utile | arc | auto-intersections | α |
+|---|---:|---:|---:|---:|
+| source officielle | 4,28 cm² | 21,9 mm | — | +0,000 |
+| **extension reproductible** | ⭐ **12,97 cm²** | ⭐ **37,2 mm** | **0** | ⭐ **+0,000** |
+
+⭐ Et un contrôle indépendant de l'identité des deux répétitions : `geometrie_chaine.py` mesure
+un **écart de 0 µm** entre elles — la distance au plus proche voisin entre les deux surfaces
+est nulle, ce que `cmp` disait déjà sur les octets mais qu'un second instrument confirme.
 
 > **Étendre le segment officiel triple sa surface utile en la laissant sur sa feuille, et
 > c'est maintenant rejouable.** Sans la graine, un tirage sur trois donnait +0,422.

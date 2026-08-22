@@ -254,6 +254,39 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                 [f"**+{fr(a, 3)}**", f"+{fr(a, 3)}",
                                  f"{a:+.3f}"], p.name))
 
+    # ⚠⚠ L'EXTENSION TANGENTIELLE (`44`) : ces chiffres sont la revendication la plus forte
+    # du depot -- la premiere surface que nous produisons qui GAGNE de l'aire sans quitter sa
+    # feuille -- et ils sont publies dans trois documents. En cablant cette garde j'ai
+    # d'ailleurs trouve deux erreurs a moi : « 13,02 cm2 d'aire utile » melangeait l'aire du
+    # meta avec l'aire utile (12,97), et « le rayon devient determine » venait du tirage NON
+    # deterministe alors que le run reproductible le laisse indetermine.
+    p = racine / "docs" / "geometrie_extension.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        bons = [x for x in d.get("spires", []) if x.get("angle_rad", 0.0) > 0]
+        if bons:
+            e = bons[0]
+            out.append(("aire utile de l'extension",
+                        [f"**{fr(e['aire_valide_cm2'], 2)} cm²**",
+                         f"{fr(e['aire_valide_cm2'], 2)} cm²"], p.name))
+            out.append(("arc de l'extension",
+                        [f"**{fr(e['arc_mm'], 1)} mm**", f"{fr(e['arc_mm'], 1)} mm"], p.name))
+            out.append(("sommets valides de l'extension",
+                        [f"**{e['fraction_valide'] * 100:.0f} %**",
+                         f"{e['fraction_valide'] * 100:.0f} %"], p.name))
+            out.append(("fraction de tour de l'extension",
+                        [f"**{fr(e['fraction_de_tour'] * 100, 1)} %**",
+                         f"{fr(e['fraction_de_tour'] * 100, 1)} %"], p.name))
+            # ⚠ Le rayon est-il determine ? La reponse est publiee, donc elle est gardee.
+            out.append(("verdict de rayon de l'extension",
+                        ["déterminé"] if e.get("rayon_determine") else ["indéterminé"],
+                        p.name))
+        if len(bons) >= 2 and bons[1].get("espacement_um") is not None:
+            # ⭐ Le controle de reproductibilite, mesure par un second instrument.
+            out.append(("écart entre les deux répétitions",
+                        [f"**{bons[1]['espacement_um']:.0f} µm**",
+                         f"écart de {bons[1]['espacement_um']:.0f} µm"], p.name))
+
     # ⚠⚠ Le recensement de FRAGILITE. Ce chiffre est publie dans DEUX documents (`44` §8bis
     # et la section 12 de la soumission) et c'est lui qui justifie de ne jamais comparer des
     # comptes de verdicts. Il se recalcule depuis les series, pas depuis un champ stocke : un

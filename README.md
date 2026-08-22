@@ -40,7 +40,9 @@ nôtres (α = +1,01) — à quatre spires de portée, le pic n'a toujours rien t
 | juger une trace sans vérité terrain (3 instruments) | l'encre : le modèle de 2023 sort une **constante** à 8,6 µm ([`36`](docs/36_lorigine_de_la_pile.md) §5bis) |
 | ⭐⭐⭐ **savoir ce qui décide où la surface se pose** : la **portée physique** du test de sortie, à tenir entre **0,25 et 0,5 voxel** — le pas peut être affiné librement si `exit_count` suit ([`43`](docs/43_la_chaine_des_spires.md) §6quinquies) | distinguer À L'INTÉRIEUR du bassin : quatre campagnes y tiennent dans une largeur de résolution, donc il faudrait plus de deux fenêtres par verdict |
 | ⭐⭐⭐ **enchaîner spire après spire** — 9 tours, **6 convergent** au pas de rayon 0,25 ([`43`](docs/43_la_chaine_des_spires.md)) | savoir POURQUOI une spire casse : l'érosion est **réfutée**, le meilleur prédicteur est le simple **numéro** de la spire ([`44`](docs/44_ou_la_chaine_se_trouve.md) §8) |
-| ⭐⭐ **savoir où la chaîne est dans le rouleau** : écart entre nappes **113 µm**, donc elle avance bien d'**une feuille à la fois** ([`44`](docs/44_ou_la_chaine_se_trouve.md)) | recoller les spires en un morceau déroulé : ⚠ **la tâche était mal posée** — une chaîne radiale est une **colonne**, il faut une chaîne **tangentielle**, jamais tentée ([`44`](docs/44_ou_la_chaine_se_trouve.md) §7) |
+| ⭐⭐ **savoir où la chaîne est dans le rouleau** : écart entre nappes **113 µm**, donc elle avance bien d'**une feuille à la fois** ([`44`](docs/44_ou_la_chaine_se_trouve.md)) | enchaîner l'extension tangentielle : un seul pas est mesuré, et une chaîne demande que le pas suivant parte de l'étendue |
+| ⭐⭐⭐ **ÉTENDRE une nappe le long d'elle-même** : la surface utile passe de **4,28 à 12,97 cm²** et l'arc de 21,9 à **37,2 mm**, à **α = +0,000** — la première fois qu'une surface que nous produisons **gagne** de la surface ([`44`](docs/44_ou_la_chaine_se_trouve.md)) | — |
+| ⭐⭐ **rendre le traçage par croissance REPRODUCTIBLE** : `VC_GROWPATCH_RNG_SEED` + `thread_limit: 1` → maillages identiques octet pour octet ([`44`](docs/44_ou_la_chaine_se_trouve.md)) | savoir si la repousse d'une surface *projetée* dérive vraiment : son unique point est un tirage d'avant le correctif |
 
 ⭐ **L'objectif est donc nommable** : pas « réduire l'écart », mais **faire converger la
 mesure**. Une trace qui converge suit une feuille, quelle que soit sa valeur.
@@ -73,7 +75,26 @@ des *pas* et non une distance :
 
 ![le pas du rayon a un optimum](docs/images/43_optimum_du_pas.png)
 
-Les neuf nappes de la campagne optimale, rendues :
+### ⭐⭐⭐ Et une nappe qui GRANDIT au lieu de s'éroder
+
+Toute la chaîne radiale **perd** de la surface — 15,6 % d'aire utile par tour. Étendre une
+nappe le long d'elle-même fait l'inverse, et sans quitter sa feuille :
+
+| | aire utile | sommets valides | arc | α |
+|---|---:|---:|---:|---:|
+| segment officiel de départ | 4,28 cm² | 59 % | 21,9 mm | +0,000 |
+| **après extension** | ⭐ **12,97 cm²** | ⭐ **96 %** | ⭐ **37,2 mm** | ⭐ **+0,000** |
+
+Elle ne fait pas qu'ajouter de la grille : elle **rebouche ses trous** (59 → 96 % de sommets
+valides), et son arc grandit de 70 % — c'est-à-dire qu'elle couvre plus d'un **tour**, la
+grandeur qui bloquait le déroulement. Détail : [`44`](docs/44_ou_la_chaine_se_trouve.md).
+
+⚠ Obtenu après avoir trouvé que `mode: resume` **n'était pas déterministe** (générateur
+`thread_local` semé par `std::random_device`, 22 threads OpenMP). Avec
+`VC_GROWPATCH_RNG_SEED` et `thread_limit: 1`, deux exécutions donnent des maillages
+identiques **octet pour octet** — et le résultat tient.
+
+Les neuf nappes de la campagne radiale optimale, rendues :
 
 ![la chaine a pas de rayon 0,25, neuf nappes](docs/images/43_chaine_pas025_rendus.jpg)
 

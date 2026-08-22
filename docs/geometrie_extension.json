@@ -1,0 +1,83 @@
+{
+  "spires": [
+    {
+      "points": 43430,
+      "axe_circonferentiel": 1,
+      "angle_rad": 0.9694244185519398,
+      "arc_vox": 4305.801132164526,
+      "fraction_de_tour": 0.15428868816652772,
+      "rayon_fleche_vox": 4441.6058124430565,
+      "rayon_cercle_vox": 5547.685403790834,
+      "residu_vox": 114.65414911851668,
+      "sagitta_vox": 511.63264687847226,
+      "residu_sur_sagitta": 0.22409466991216143,
+      "desaccord_relatif": 0.24902695963003318,
+      "rayon_determine": false,
+      "angle_plan_rad": 0.7685441737404082,
+      "hauteur_vox": 3983.8451649987,
+      "theta_milieu": 1.5093820566297942,
+      "nom": "gen100",
+      "maillage": "poussé",
+      "grille": [
+        219,
+        206
+      ],
+      "sommets": 45114,
+      "fraction_valide": 0.9626723411801215,
+      "aire_valide_cm2": 12.968128125519666,
+      "arc_mm": 37.20212178190151,
+      "hauteur_mm": 34.42042222558877,
+      "rayon_fleche_mm": 38.375474219508014,
+      "rayon_cercle_mm": 47.932001888752815,
+      "spires_par_tour_min": 6.481356552339563
+    },
+    {
+      "points": 43430,
+      "axe_circonferentiel": 1,
+      "angle_rad": 0.9694244185519398,
+      "arc_vox": 4305.801132164526,
+      "fraction_de_tour": 0.15428868816652772,
+      "rayon_fleche_vox": 4441.6058124430565,
+      "rayon_cercle_vox": 5547.685403790834,
+      "residu_vox": 114.65414911851668,
+      "sagitta_vox": 511.63264687847226,
+      "residu_sur_sagitta": 0.22409466991216143,
+      "desaccord_relatif": 0.24902695963003318,
+      "rayon_determine": false,
+      "angle_plan_rad": 0.7685441737404082,
+      "hauteur_vox": 3983.8451649987,
+      "theta_milieu": 1.5093820566297942,
+      "nom": "gen100_bis2",
+      "maillage": "poussé",
+      "grille": [
+        219,
+        206
+      ],
+      "sommets": 45114,
+      "fraction_valide": 0.9626723411801215,
+      "aire_valide_cm2": 12.968128125519666,
+      "espacement_vox": 0.0,
+      "espacement_um": 0.0,
+      "arc_mm": 37.20212178190151,
+      "hauteur_mm": 34.42042222558877,
+      "rayon_fleche_mm": 38.375474219508014,
+      "rayon_cercle_mm": 47.932001888752815,
+      "spires_par_tour_min": 6.481356552339563
+    }
+  ],
+  "axe": [
+    -0.060244777329258814,
+    0.2548351133589887,
+    -0.9651060210173074
+  ],
+  "axes_circonferentiels": [
+    1,
+    1
+  ],
+  "tourne": [
+    0.9694244185519398,
+    0.9694244185519398
+  ],
+  "voxel_um": 8.64,
+  "maillage_prefere": "trace"
+}
