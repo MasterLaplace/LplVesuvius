@@ -697,6 +697,10 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                     [f"{d['batteries_all_pass']} batteries, {d['controles']} controles",
                      f"{d['batteries_all_pass']} batteries, {d['controles']} contrôles"],
                     p.name))
+        if d.get("chiffres_recalcules"):
+            out.append(("chiffres recalcules par le garde-fou",
+                        [f"{d['chiffres_recalcules']} chiffres",
+                         f"**{d['chiffres_recalcules']} chiffres**"], p.name))
 
     p = racine / "docs" / "cout_echelle.json"
     if p.exists():
@@ -770,6 +774,13 @@ def main() -> int:
                        if autres else "")
             print(f"{nom:>32} {ecritures[0]:>16} {source:>28}  ⚠ ABSENT "
                   f"(ou perime){suffixe}")
+
+    # ⚠⚠ Le TOTAL, imprime par l'outil et non compte a la main. `21` citait « 85 chiffres »,
+    # un nombre exact le jour ou il a ete ecrit et faux depuis -- et le compter au grep
+    # aurait produit un second nombre a la main, donc un second nombre a laisser vieillir.
+    # Un chiffre publie dont le calcul n'est pas dans l'arbre est une anecdote.
+    sources = {source for _, _, source in attendus}
+    print(f"\n{len(attendus)} chiffres recalcules depuis {len(sources)} fichiers de resultat")
 
     if faibles:
         print(f"\n⚠ {len(faibles)} chiffre(s) NON VERIFIABLES par recherche litterale — "

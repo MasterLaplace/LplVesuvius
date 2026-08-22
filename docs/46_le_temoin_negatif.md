@@ -129,7 +129,25 @@ pas par l'argument.
 > ⭐ Aucun des quatre n'a été trouvé en relisant le code. Deux viennent des témoins, un d'un
 > avertissement du compilateur numérique, et le dernier d'avoir **regardé la figure**.
 
-## 6. Ce qui reste ouvert
+## 6. ⭐⭐ Ce que ça dit du point le plus profond du registre
+
+[`29`](29_ce_qui_reste.md) §1 porte la question la plus fondamentale du dépôt — *réparer
+une trace sert-il à quelque chose ?* — et nomme ce qu'il faudrait pour y répondre : **une
+trace fautive, sa version réparée, et le MÊME aval appliqué aux deux**.
+
+> ⚠⚠ **Sur `PHerc1447`, cet aval est aveugle, et c'est maintenant mesuré.** Le détecteur
+> rend la même carte à ρ = 0,9979 sur une face de papyrus et sur une surface qui coupe
+> l'empilement. Une différence de surface bien plus grande que celle entre une trace
+> fautive et sa réparation ne le fait pas bouger — donc **aucune réparation ne peut
+> montrer de gain à travers lui ici**, quelle qu'elle soit.
+
+⭐ C'est une bonne nouvelle méthodologique : ça transforme « le lot 1 n'a pas abouti » en
+« le lot 1 exige un rouleau où l'aval répond ». La condition est **nommable et
+vérifiable avant de dépenser** — σ de la sortie du modèle sur le rouleau visé, rapporté
+aux 0,7712 qu'il rend là où il marche. Ce document fournit la mesure ; elle coûte une
+inférence sur une fenêtre.
+
+## 7. Ce qui reste ouvert
 
 - ⚠ **La thèse forte demande un rouleau où le détecteur fonctionne** — et une surface en
   travers de **ce** rouleau-là. Le dépôt a la seconde condition sur `PHerc1447`, où le

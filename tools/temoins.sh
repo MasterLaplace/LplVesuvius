@@ -743,12 +743,33 @@ fi
 # comptees a part et NON incluses : elles n'impriment pas « ALL PASS (n checks) », donc les
 # additionner demanderait de deviner leur compte -- et un total devine vaut moins qu'un
 # total plus petit mais exact.
+# ⚠ DECALAGE D'UN RUN, assume. Le garde-fou des chiffres a deja tourne quand ces totaux
+# sont ecrits, donc il a compare les documents au `temoins.json` du run PRECEDENT. Un compte
+# qui change n'est donc signale qu'au run suivant. Ce n'est pas un passage silencieux -- il
+# est signale, une fois -- et l'inverse (ecrire le json avant de verifier) ferait verifier
+# les documents contre des totaux que la meme execution vient de produire, ce qui est une
+# verification incapable d'echouer.
+# ⚠⚠ Le compte des chiffres recalcules est PUBLIE lui aussi, pour la meme raison que les
+# deux autres : `21` en citait un, exact le jour ou il a ete ecrit et faux depuis. Il est
+# lu de la sortie de l'outil et non compte ici -- deux comptes du meme objet finiraient par
+# ne pas s'accorder, et c'est ce fichier qui a deja paye ce defaut.
+RECALCULES=$(grep -oE '^[0-9]+ chiffres recalcules' /tmp/chiffres.log 2>/dev/null \
+             | head -1 | cut -d' ' -f1)
+SOURCES=$(grep -oE 'depuis [0-9]+ fichiers' /tmp/chiffres.log 2>/dev/null \
+          | head -1 | cut -d' ' -f2)
 python3 -c "
 import json, sys
-json.dump({'batteries_all_pass': $BATTERIES, 'controles': $CONTROLES,
-           'echecs': $FAIL}, open('$ROOT/docs/temoins.json', 'w'), indent=2)
+d = {'batteries_all_pass': $BATTERIES, 'controles': $CONTROLES, 'echecs': $FAIL}
+# ⚠ Absents plutot que zero : un zero se lit comme « aucun chiffre garde », ce qui est un
+# resultat, alors que l'absence veut dire « la batterie des chiffres n'a pas tourne ».
+for cle, val in (('chiffres_recalcules', '$RECALCULES'), ('fichiers_de_resultat', '$SOURCES')):
+    if val:
+        d[cle] = int(val)
+json.dump(d, open('$ROOT/docs/temoins.json', 'w'), indent=2)
 print()
-print(f'  {\"batteries\":<30} {$BATTERIES} batteries, {$CONTROLES} controles')"
+print(f'  {\"batteries\":<30} {$BATTERIES} batteries, {$CONTROLES} controles')
+if '$RECALCULES':
+    print(f'  {\"chiffres gardés\":<30} $RECALCULES depuis $SOURCES fichiers de résultat')"
 
 echo
 if [ "$FAIL" -eq 0 ]; then

@@ -854,6 +854,14 @@ require a special acquisition or a substrate known to be blank. It requires a su
 *geometry* rules out the thing being detected, and any pipeline that can trace surfaces can
 produce one deliberately.
 
+It also yields a cheap entry condition for a question this field has not answered: *does
+repairing a trace improve what is read from it?* Answering it requires a faulty trace, its
+repaired version, and the same downstream applied to both. On this scroll the downstream
+cannot separate them --- a difference far larger than any repair leaves the output
+unchanged. Before spending compute on such an experiment, one can measure whether the
+detector responds on the target scroll at all: one inference on one window, and compare its
+dispersion to what the model returns where it is known to work.
+
 == What a good measurement looked like here
 
 Three properties recur in the instruments above and are worth naming.
@@ -892,6 +900,17 @@ Three properties recur in the instruments above and are worth naming.
   single-render statistic we tried. Depth is a clock, and we cannot yet separate it from a
   cause.
 
++ *The relative criterion is proposed, not built* (#link(<sec:depth>)[Section 5.3]). We
+  show that an absolute threshold on a profile criterion compares settings; we do not show
+  that reading the same criterion as an exponent works. That needs traces uncensored at
+  both depths, and this corpus contains two.
+
++ *The negative control establishes the narrow claim only* (#link(<sec:negctrl>)[Section 6.4]).
+  On the one scroll where we have both a sheet-following and a stack-crossing surface, the
+  ink model returns a constant, so "it reports ink where there is no sheet" is untested.
+  What is established --- that its output does not depend on a sheet being present --- rests
+  on one scroll and one model.
+
 + *Nothing here reads text.* The measurements judge geometry. A surface that passes every
   test in this paper may still carry no ink.
 
@@ -901,9 +920,12 @@ Segmentation quality can be measured on a sealed scroll, without ground truth, w
 physical threshold and without a scale, by comparing a surface to itself under a change of
 rendering depth. Doing so on 13 prize scrolls shows that the reference tracer is a draw
 rather than a function, that the stability and cleanliness usually read as signs of a good
-trace are artefacts of the generation budget, and that the published segmentation of a
-prize scroll samples sheets rather than tiling one. Each of the three was found by
-repeating a measurement that the field currently performs once.
+trace are artefacts of the generation budget, that the render window imposes a second
+ceiling of the same kind, and that the published segmentation of a prize scroll samples
+sheets rather than tiling one. Each of the four was found by repeating a measurement that
+the field currently performs once. The same construction that judges a surface also
+supplies what the field's reading step lacks: a surface whose geometry rules out a papyrus
+face is a negative control that costs one extra render.
 
 #v(0.6em)
 #block(inset: (left: 0.8em, y: 0.5em), stroke: (left: 1.6pt + rgb("#404040")))[

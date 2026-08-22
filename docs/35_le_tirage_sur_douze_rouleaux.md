@@ -199,10 +199,16 @@ teste pas.
   par POSITION, décrit dans `25` §4bis — `PHerc1203` est l'un des deux seuls rouleaux du
   prix à avoir plusieurs scans, donc le seul endroit où ce défaut latent aurait mordu.
 
-  ⏳ **Et il reste ouvert du côté des tirages** : cette campagne-ci, elle, couvre toujours
-  **12 rouleaux**, parce que les six tirages de `PHerc1203` n'ont pas été faits. Le chiffre
-  publié ici (5,6 %, IC [1,5–13,6 %]) porte donc sur douze rouleaux, et le dire est moins
-  coûteux que de laisser croire qu'il en couvre treize.
+  ✅ **Comblé aussi côté tirages, le 2026-08-22** : les six tirages de `PHerc1203` ont été
+  faits, et cette campagne-ci couvre donc **13 rouleaux, 78 tirages** — c'est le chiffre
+  publié en tête de ce document. ⭐ Le rouleau **bascule** (`140,0,0,0,0,0` : un tirage sur
+  six s'auto-intersecte, cinq sont propres), donc il rejoint les quatre autres bascules et
+  le compte passe de 4/12 à **5/13**. Le taux de mauvais tirages devient **5/78 = 6,4 %**
+  (IC 95 % exact [2,1–14,3 %]).
+
+  ⚠ Et il confirme le partage de la troncature plutôt que de le brouiller : ses six tirages
+  butent tous sur le plafond (118–118) et sa dispersion d'aire vaut **0,63 %** — il est donc
+  du côté « plafonné », qui bascule 4 fois sur 6 contre 1 fois sur 7 chez les autres.
 
 ## Reproduire
 

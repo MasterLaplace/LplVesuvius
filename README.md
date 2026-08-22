@@ -350,12 +350,16 @@ mega-octets ».
 ### La chaine de production, et les gardes du depot
 
 ```bash
-./tools/temoins.sh                  # 41 batteries, 1236 controles hors ligne, tous verts
+./tools/temoins.sh                  # 41 batteries, 1238 controles hors ligne, tous verts
                                     # ⚠ ces deux chiffres sont ECRITS PAR LE SCRIPT dans
                                     # docs/temoins.json et gardes comme tous les autres :
                                     # la version precedente disait 18 et 741, recopies a
                                     # la main et donc faux depuis longtemps
 ./validate.sh                       # la chaine complete : tests + builds + boot + parite
+
+# rassembler ce qui PART : le texte, ses figures, le journal des chiffres. La liste des
+# figures est DERIVEE du document, et le script REFUSE un dossier incomplet
+./tools/dossier_soumission.sh
 
 # « consistent with » quantifie : interligne, echelle, couverture, epaisseur de trait,
 # mesures sans lire une lettre (docs/45)

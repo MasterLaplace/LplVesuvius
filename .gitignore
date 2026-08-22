@@ -45,3 +45,9 @@ data/trace/*/render_a/
 data/trace/*/cache_vol/
 .lances/
 article/pg-*.png
+
+# le dossier de soumission est DERIVE : tools/dossier_soumission.sh le reconstruit
+# depuis le texte et docs/images/, donc le versionner dupliquerait 8 Mo d'images qui
+# vivent deja dans l'arbre -- et il refuserait de se reconstruire a l'identique le jour ou
+# une figure change, ce qui est justement ce qu'on veut qu'il detecte.
+soumission/

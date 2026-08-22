@@ -49,6 +49,16 @@ concurrent. **Personne n'a mesuré ce que coûte un défaut de trace.**
 **Ce qu'il faudrait** : un cas où l'on tient les deux bouts — une trace fautive, sa
 version réparée, et le **même** aval appliqué aux deux. C'est exactement le lot nº 2.
 
+> ⚠⚠ **Et une condition préalable est désormais mesurée** ([`46`](46_le_temoin_negatif.md)
+> §6) : sur `PHerc1447`, l'aval est **aveugle**. Le détecteur rend la même carte à
+> ρ = 0,9979 sur une face de papyrus et sur une surface qui coupe l'empilement — une
+> différence bien plus grande que celle entre une trace fautive et sa réparation. **Aucune
+> réparation ne peut donc montrer de gain à travers lui sur ce rouleau.**
+>
+> ⭐ Ça ne ferme pas le lot, ça lui donne une **condition d'entrée vérifiable avant de
+> dépenser** : σ de la sortie du modèle sur le rouleau visé, rapporté aux **0,7712** qu'il
+> rend là où il atteint AUC 0,925. Une inférence sur une fenêtre suffit à le savoir.
+
 ## ⭐⭐ 2. Appliquer la correction, et montrer le gain
 
 Le seul ⏳ du « vrai produire », nommé dans cinq documents.
@@ -89,7 +99,7 @@ Trois entrées neuves, chacune née d'une mesure de la journée.
 
 | # | quoi | source |
 |---|---|---|
-| **N1** | ~~**`PHerc1203` n'a jamais eu de graine cherchée**~~ ✅ **fait le 2026-08-22** → [`25`](25_une_graine_choisie_sur_la_planeite.md) §4bis : planéité **19,84 cm²**, voisinage **9,60 cm²**, 0 auto-intersection des deux côtés. La campagne appariée passe de 12 à **13 rouleaux** et le résultat se **renforce** (10/12 p = 0,0386 → **11/13 p = 0,0225**). ⚠ Le combler a d'abord exigé de réparer un appariement surface/volume **par position**, latent sur les 2 rouleaux à plusieurs scans. ⏳ Reste ouvert : les **six tirages** de `PHerc1203` pour que `35` couvre 13 rouleaux | `35` §5 |
+| **N1** | ~~**`PHerc1203` n'a jamais eu de graine cherchée**~~ ✅ **fait le 2026-08-22** → [`25`](25_une_graine_choisie_sur_la_planeite.md) §4bis : planéité **19,84 cm²**, voisinage **9,60 cm²**, 0 auto-intersection des deux côtés. La campagne appariée passe de 12 à **13 rouleaux** et le résultat se **renforce** (10/12 p = 0,0386 → **11/13 p = 0,0225**). ⚠ Le combler a d'abord exigé de réparer un appariement surface/volume **par position**, latent sur les 2 rouleaux à plusieurs scans. ✅ **Et les six tirages faits le même jour** : `35` couvre désormais **13 rouleaux, 78 tirages**, `PHerc1203` **bascule** (1 tirage sale sur 6) et rejoint les bascules — 4/12 → **5/13**, taux **6,4 %** (IC [2,1–14,3 %]) | `35` §5 |
 | **N2** | **le protocole « sélectionner sur un axe, valider sur l'autre »** | ✅ **testé le 2026-08-20** → [`37`](37_les_deux_axes_ne_saccordent_pas.md) : **1 accord sur 8**, là où le hasard en donnerait 4. Sélectionner sur la géométrie n'achète rien sur la profondeur | `35` §4 · `31` §4 |
 | **N4** | ~~**choisir une référence défendable**~~ ✅ **fait le 2026-08-22** → [`47`](47_le_critere_doit_etre_relatif.md), et la réponse est que **la question se dissout**. ⚠⚠ Le rendu impose un plafond PROPORTIONNEL à sa profondeur : **13 traces sur 16** butent dessus au rendu le moins profond, donc un seuil absolu compare des plafonds et non des surfaces — la troncature de `35` dans un troisième endroit. ⚠ Et un critère sans plafond dérive quand même (`au_bord` : médiane **0,075**, max **0,450** entre les rendus 21 et 41). ⭐⭐ Il faut donc un critère **auto-référentiel**, lu à deux profondeurs comme l'exposant α, qui n'a besoin d'aucune référence. ⏳ Reste : le construire, ce qui demande des traces non censurées des deux côtés — le dépôt en a **deux** | `36` §4 |
 | **N5** ⚠⚠⚠ | **nos traces n'ont aucune feuille à portée** — pas « à 311 µm de leur feuille » : le test de convergence de [`38`](38_ce_qui_bouge_avec_la_fenetre.md) montre que la distance mesurée **suit la fenêtre** (α = +1,01) là où un segment officiel ne bouge pas (α = +0,00), et à quatre spires de portée le pic n'a toujours rien trouvé. ⭐ L'objectif devient **faire converger la mesure**, pas réduire un nombre | `38` |
