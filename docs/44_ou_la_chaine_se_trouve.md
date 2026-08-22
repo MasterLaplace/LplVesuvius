@@ -232,7 +232,7 @@ une surface posée en travers de l'empilement ne mesure rien — et les trois ch
 sont testés. Campagne lancée sur 1, 3 et 10 générations ; le point à 20 n'est pas refait,
 il est déjà mesuré.
 
-### ⭐⭐ Premier résultat : étendre le segment officiel triple sa surface utile — ⚠ dans deux tirages sur trois
+### ⭐⭐ Premier résultat : étendre le segment officiel triple sa surface utile
 
 Une seule exécution de `mode: resume` sur le segment officiel qui converge :
 
@@ -243,8 +243,9 @@ Une seule exécution de `mode: resume` sur le segment officiel qui converge :
 
 Et le verdict : **α = +0,000, converge**, 0 auto-intersection.
 
-⚠⚠ **À lire avec la section suivante** : ce n'est qu'un des trois tirages, et le tracé n'est
-pas déterministe. Deux tirages sur trois donnent ce résultat, le troisième donne +0,422.
+⚠⚠ **Mesuré avant que le traçage soit rendu reproductible** : ce n'était qu'un des trois
+tirages, dont un donnait +0,422. Le résultat a été **refait sous graine** et il tient —
+13,02 cm² à α = +0,000, octet pour octet rejouable. Voir deux sections plus bas.
 
 ⭐⭐ **L'extension ne fait pas qu'ajouter de la grille, elle rebouche les trous** : la part de
 sommets valides passe de 59 % à 96 %. C'est la première fois dans ce dépôt qu'une surface que
@@ -300,6 +301,39 @@ qui apparaît deux fois dans la liste reçoit un dossier suffixé, sinon le seco
 premier et le test serait impossible à faire. Le premier run est un **test de déterminisme** :
 deux fois exactement la même chose. Tant qu'il n'est pas passé, aucun balayage ne veut dire
 quoi que ce soit.
+
+### ⭐⭐⭐ Le correctif est vérifié : deux exécutions identiques donnent le MÊME maillage
+
+Avec `VC_GROWPATCH_RNG_SEED` posée et `thread_limit: 1`, la même commande lancée deux fois
+produit un maillage **identique octet pour octet** — 13,024947 cm² des deux côtés, à la
+sixième décimale. Le traçage par croissance est donc **reproductible**, et il ne l'était pas.
+
+Et le résultat qui survit à la correction :
+
+| | aire utile | auto-intersections | α |
+|---|---:|---:|---:|
+| source officielle | 4,28 cm² | — | +0,000 |
+| **extension reproductible** | ⭐ **13,02 cm²** | **0** | ⭐ **+0,000** |
+
+> **Étendre le segment officiel triple sa surface utile en la laissant sur sa feuille, et
+> c'est maintenant rejouable.** Sans la graine, un tirage sur trois donnait +0,422.
+
+⚠⚠ **Ce que ça implique pour tout le dépôt, et c'est plus large que cette page** : *toute*
+campagne passée par le chemin de **croissance** était irreproductible — les dix-sept essais en
+`mode: seed` de [`42`](42_la_boucle_tourne_et_ne_suffit_pas.md), et la repousse de
+[`43`](43_la_chaine_des_spires.md) §6.
+
+- ⭐ Pour les dix-sept essais, ça ne change **rien, et ça renforce même** : dix-sept tirages
+  indépendants tous à α ≈ 1 échantillonnent la distribution au lieu de répéter un point. La
+  conclusion « `mode: seed` ne pose jamais une surface sur une feuille » en sort plus solide,
+  pas moins.
+- ⚠ Pour la repousse, ça change tout : son **unique** point à +0,422 est un tirage, donc
+  « resume sur une surface projetée dérive » n'est pas établi. À refaire avec la graine.
+
+⭐ La chaîne radiale, elle, n'est pas concernée : `gen_neighbor` n'a aucun aléa (vérifié dans
+la source), d'où les maillages identiques au bit entre campagnes constatés plus haut. Le
+non-déterminisme est propre au chemin de croissance, et c'est pourquoi il n'avait jamais été
+remarqué.
 
 ### ⚠⚠ Et le paramètre que je balayais n'est lu par personne
 

@@ -1236,6 +1236,53 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     intermédiaires avant de conclure qu'une provenance n'est pas publiée.
 
 
+### ⭐⭐⭐ NUIT DU 2026-08-22 — la chaîne TANGENTIELLE, et un non-déterminisme trouvé
+
+**Le contexte** : [`44`](docs/44_ou_la_chaine_se_trouve.md) §7 a établi qu'une chaîne radiale
+(`gen_neighbor`) est une **colonne**, pas une bande — donc pour un morceau de rouleau déroulé
+il faut étendre une nappe le long d'elle-même, et aucun mode de l'outil ne le fait
+explicitement. `mode: resume` est le seul candidat.
+
+**Le résultat, reproductible** : `tools/etendre_nappe.sh` étend le segment officiel qui
+converge.
+
+| | aire utile | sommets valides | arc | % d'un tour | α |
+|---|---:|---:|---:|---:|---:|
+| source officielle | 4,28 cm² | 59 % | 21,9 mm | 11,5 % | +0,000 |
+| **extension** | ⭐ **13,02 cm²** | ⭐ **96 %** | ⭐ **37,2 mm** | **14,5 %** | ⭐ **+0,000** |
+
+⭐⭐ **Première fois dans ce dépôt qu'une surface que nous produisons GAGNE de la surface** — la
+chaîne radiale en perd 15,6 % par tour. Et elle rebouche ses trous (59 → 96 %), et son arc
+grandit de 70 %, ce qui est la grandeur qui compte pour le graal.
+
+**⚠⚠⚠ TROIS PIÈGES TROUVÉS EN Y ARRIVANT, tous dans la source :**
+
+1. **`resume_generations` n'est lu par personne.** L'application écrit cette clé
+   (`--resume-generations`, app :308) et `GrowPatch.cpp` lit `params.value("generations", 100)`
+   (:3428). Dans GrowPatch, `resume_generations` n'est qu'une **variable locale** (le canal de
+   générations par sommet, :3493). Donc la campagne `spires_repousse` (`resume_generations: 20`)
+   et mon balayage (1, 3, 10) ont **tous** tourné à 100 générations — le journal le dit :
+   « gen 96, 97, 98, 99 ». Un paramètre mort qui a l'air vivant : présent dans l'aide, dans le
+   méta du maillage, dans nos scripts.
+2. ⚠⚠⚠ **`mode: resume` N'ÉTAIT PAS DÉTERMINISTE.** Le générateur des perturbations est
+   `thread_local` et, sans graine, semé par `std::random_device` (:99-107) ; les runs
+   tournaient sur **22 threads OpenMP** alors que l'outil écrit lui-même *« tracing does not
+   scale past a few threads (VC3D uses 1) »*. Mesuré : trois exécutions aux paramètres
+   effectifs identiques ont donné **0, 596 et 0** auto-intersections et α = +0,000 / **+0,422**
+   / +0,000.
+   **Correctif vérifié** : `VC_GROWPATCH_RNG_SEED` (variable d'ENVIRONNEMENT, pas une clé de
+   params) + `thread_limit: 1` → deux exécutions identiques donnent un maillage **identique
+   octet pour octet**, 13,024947 cm² des deux côtés.
+3. **Ce que ça fait aux résultats passés** : ⭐ les 17 essais de `42` en sortent *renforcés*
+   (17 tirages indépendants tous à α ≈ 1 échantillonnent la distribution) ; ⚠ mais l'unique
+   point à +0,422 de la repousse est un tirage, donc **« resume sur une surface projetée
+   dérive » n'est PAS établi** — à refaire sous graine.
+   ⭐ La chaîne radiale n'est pas concernée : `gen_neighbor` n'a aucun aléa (vérifié), d'où ses
+   maillages identiques au bit entre campagnes.
+
+**Restant** : le vrai balayage de `generations` (100 mesuré, 200 et 400 à faire) — c'est le
+budget d'extension, et le ×3 ci-dessus a été obtenu avec sa valeur **par défaut**.
+
 ### ⭐⭐⭐ RÉSULTAT DU 2026-08-21 (nuit) — ce n'est pas le PAS, c'est la PORTÉE
 
 Le mécanisme de la courbe en U est lu dans `vc_grow_seg_from_seed.cpp` : `neighbor_exit_count`
