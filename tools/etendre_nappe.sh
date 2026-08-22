@@ -28,17 +28,33 @@
 #
 # Usage :
 #   ./tools/lancer.sh --fond tools/etendre_nappe.sh <dest> [generations...]
-#   GENERATIONS="1 3 10" ./tools/lancer.sh --fond tools/etendre_nappe.sh "$PWD/data/extension"
+#   GENERATIONS="100 200 400" ./tools/lancer.sh --fond tools/etendre_nappe.sh "$PWD/data/ext"
 set -u
 cd "$(dirname "$0")/.." || exit 2
 ROOT=$PWD
 
 DEST=${1:?donner un dossier de destination}
 shift || true
-# ⚠ Les generations a balayer. Defaut choisi pour couvrir deux ordres de grandeur en trois
-# points : si la derive est graduelle on la verra monter, si elle est immediate le point a 1
-# suffit a le dire. Le 20 n'est PAS refait -- il est deja mesure (`43` §6).
-GENERATIONS=${GENERATIONS:-${*:-"1 3 10"}}
+# ⚠⚠ LA CLE EST `generations`, PAS `resume_generations`. Piege paye le 2026-08-22 : la
+# premiere version de ce script ecrivait `resume_generations`, qui est ce que la ligne de
+# commande de l'outil accepte (`--resume-generations`, app :308) et que le JSON de la
+# campagne `spires_repousse` porte aussi. Or dans `GrowPatch.cpp`, `resume_generations`
+# n'est JAMAIS une cle de parametres : c'est une variable locale, le canal de generations
+# par sommet de la surface reprise (:3493, :3579). Ce que le traceur lit reellement est
+# `params.value("generations", 100)` (:3428). La cle ecrite par l'application n'est donc
+# relue par personne, et TOUS nos runs ont tourne a 100 generations -- ce que le journal
+# confirme (« gen 96, 97, 98, 99 »).
+#
+# ⭐ Consequence sur l'interpretation : la campagne `spires_repousse` (`resume_generations:
+# 20`) et les premiers essais de ce script (1, 3, 10) ont tous fait la MEME chose. La
+# difference mesuree entre eux ne peut donc pas venir du nombre de generations -- elle vient
+# de la SOURCE, projetee dans un cas, officielle dans l'autre.
+#
+# ⭐ Ce que `generations` controle vraiment : `stop_gen`, donc a la fois quand la croissance
+# s'arrete ET la taille de la grille de travail, via
+# `gen_diff = stop_gen - start_gen` -> `grow_max_extra_cols/rows` (:3510-3515), par-dessus
+# une marge fixe de 25 cellules de chaque cote. C'est donc le budget d'EXTENSION.
+GENERATIONS=${GENERATIONS:-${*:-"100 200 400"}}
 
 ROULEAU=${ROULEAU:-PHerc1447}
 SOURCE=${SOURCE:-$ROOT/data/origine_pile/mesh.tifxyz}
@@ -57,6 +73,7 @@ ETIQUETTE=$(basename "$DEST"); ETIQUETTE=${ETIQUETTE#data_}
 echo "etiquette des verdicts : extension_${ETIQUETTE}_<generations>.json"
 echo "source : $SOURCE"
 echo "generations balayees : $GENERATIONS   fenetres : $FENETRES   min_area_cm : $AIRE_MIN"
+echo "  (cle JSON : 'generations' — 'resume_generations' n'est lu par personne, cf. en-tete)"
 
 [ -d "$SOURCE" ] || { echo "source absente : $SOURCE"; exit 3; }
 mkdir -p "$DEST"
@@ -132,7 +149,7 @@ for G in $GENERATIONS; do
 import json
 json.dump({'mode': 'resume', 'voxelsize': $UM, 'thread_limit': 0,
            'cache_size': 6000000000,
-           'min_area_cm': $AIRE_MIN, 'resume_generations': $G},
+           'min_area_cm': $AIRE_MIN, 'generations': $G},
           open('$W/trace/seed.json','w'), indent=2)"
     ( cd "$W/trace" && timeout 7200 vc_grow_seg_from_seed -v "$B/$SURF" -t . -p seed.json \
         --resume "$SOURCE" > extend.log 2>&1 )

@@ -232,6 +232,57 @@ une surface posée en travers de l'empilement ne mesure rien — et les trois ch
 sont testés. Campagne lancée sur 1, 3 et 10 générations ; le point à 20 n'est pas refait,
 il est déjà mesuré.
 
+### ⭐⭐⭐ Premier résultat : étendre le segment officiel TRIPLE sa surface utile en restant sur sa feuille
+
+Une seule exécution de `mode: resume` sur le segment officiel qui converge :
+
+| | grille | sommets valides | **aire utile** | **arc** | % d'un tour | rayon |
+|---|---|---:|---:|---:|---:|---|
+| source officielle | 162×149 | 59 % | **4,28 cm²** | 21,9 mm | 11,5 % | indéterminé |
+| après extension | 219×206 | ⭐ **96 %** | ⭐ **12,97 cm²** | ⭐ **37,2 mm** | **14,5 %** | ⭐ **déterminé** |
+
+Et le verdict : **α = +0,000, converge**, 0 auto-intersection.
+
+⭐⭐ **L'extension ne fait pas qu'ajouter de la grille, elle rebouche les trous** : la part de
+sommets valides passe de 59 % à 96 %. C'est la première fois dans ce dépôt qu'une surface que
+nous produisons **gagne** de la surface — la chaîne radiale, elle, en **perd** 15,6 % par tour.
+
+⭐ Le rayon devient même **déterminé** (40,8 et 47,9 mm par les deux estimateurs, qui
+s'accordent enfin à 17 %) : une plaque plus grande résout l'ajustement de cercle que la source
+laissait indéterminé (§6).
+
+⚠ Ça reste **une** surface, et l'extension va dans **toutes** les directions — la hauteur
+monte aussi de 24,4 à 34,2 mm. « Tangentiel » décrit ce que la surface **est**
+géométriquement (une nappe s'étend le long d'elle-même), pas une direction qu'on aurait
+choisie.
+
+### ⚠⚠ Et le paramètre que je balayais n'est lu par personne
+
+Le balayage devait porter sur `resume_generations`. En vérifiant pourquoi 1 et 3 générations
+donnaient la même grille, le journal a répondu : **« gen 96, 97, 98, 99 »**. Les deux runs
+avaient fait une centaine de générations.
+
+La source explique pourquoi. Dans `GrowPatch.cpp`, `resume_generations` n'est **jamais** une
+clé de paramètres : c'est une variable locale, le canal de générations par sommet de la
+surface reprise (lignes 3493 et 3579). Ce que le traceur lit est
+`params.value("generations", 100)` (ligne 3428). La clé que la ligne de commande de l'outil
+écrit (`--resume-generations`, app ligne 308) **n'est relue par personne** — un paramètre mort
+qui a l'air vivant : il apparaît dans l'aide, dans le méta du maillage, et dans nos scripts de
+campagne.
+
+⭐⭐ **Ce que ça change, et c'est en faveur du résultat** : la campagne `spires_repousse`
+portait `resume_generations: 20` et a donc tourné, elle aussi, à 100 générations. La
+différence entre ses +0,422 et les +0,000 ci-dessus **ne peut pas** venir du nombre de
+générations. Elle vient de la **source** — une surface projetée dans un cas, le segment
+officiel dans l'autre. Le confondant que je voulais retirer par le balayage se trouve retiré
+par le fait que le paramètre est inerte.
+
+⭐ Le vrai bouton est `generations` : il fixe `stop_gen`, donc à la fois quand la croissance
+s'arrête **et** la taille de la grille de travail
+(`gen_diff = stop_gen − start_gen → grow_max_extra_cols/rows`, lignes 3510-3515, par-dessus
+une marge fixe de 25 cellules de chaque côté). C'est le **budget d'extension**, et le ×3
+ci-dessus a été obtenu avec sa valeur par défaut.
+
 ⚠ Ce n'est pas pour autant une solution acquise : [`42`](42_la_boucle_tourne_et_ne_suffit_pas.md)
 a mesuré que des points de correction **ne réorientent pas ce qui a déjà poussé** (+0,89 au
 mieux). La question ouverte est donc précise, et c'est déjà mieux qu'une intention : *un

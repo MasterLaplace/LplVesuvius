@@ -1,0 +1,24 @@
+{
+  "series": [
+    {
+      "verdict": "converge",
+      "sens": "la distance ne bouge pas quand la fenêtre s'élargit — la matière est là, tout près",
+      "serie": [
+        [
+          31,
+          17.28
+        ],
+        [
+          81,
+          17.28
+        ]
+      ],
+      "croissance": 1.0,
+      "elargissement": 2.6129032258064515,
+      "alpha": 0.0,
+      "marge_au_seuil": 0.7,
+      "fragile": false,
+      "nom": "gen001 (12.96 cm², 0 croisements)"
+    }
+  ]
+}
