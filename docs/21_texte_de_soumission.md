@@ -361,10 +361,19 @@ nuancer.
 > The test above condemns our own traces, so the obvious question is what to do instead. We
 > have an answer, and it is measured rather than argued.
 >
-> **Seventeen attempts at growing a surface from a seed all gave α ≈ 1** — every one lying
-> across the stack, with no exception. Four rewound-and-corrected runs got to +0.89 at best:
+> **Seventeen attempts at growing a surface from a seed all gave α ≈ 1** — every one
+> condemned, with no exception. Four rewound-and-corrected runs got to +0.89 at best:
 > feeding a tracer a list of points it should have passed through does not reorient a surface
 > that has already grown.
+>
+> ⚠ *A note on what α ≈ 1 does and does not say.* It has two causes: a peak that recedes with
+> the window, and **no peak at all** — a flat profile reports the window edge by default, and
+> the ratio of two edges is the ratio of the two windows, so α ≈ 1 follows by arithmetic. Both
+> mean *no sheet within the window*, which is what the verdict is used for here; what would
+> over-claim is the wording "lying across the stack", which presumes a peak. We audited every
+> depth profile we hold: **no converging verdict is affected** — the ceiling α is always near
+> 1, and the largest converging α we measure is +0.4222 against a smallest non-discriminating
+> +0.8729. The positive results below are therefore untouched.
 >
 > What works is not growing at all. `vc_grow_seg_from_seed`'s `gen_neighbor` mode takes an
 > existing surface and **projects** it along its own vertex normals to the next sheet. It has
@@ -375,8 +384,8 @@ nuancer.
 > | the official segment we start from | **+0.00** |
 > | **six consecutive surfaces we generate**, each grown from the previous | **all ≤ +0.246** |
 >
-> For scale: a surface lying across the stack gives α ≈ 1. **These are the first surfaces we
-> produce that the convergence test does not condemn.**
+> For scale: a surface with no sheet within reach gives α ≈ 1. **These are the first surfaces
+> we produce that the convergence test does not condemn.**
 >
 > **And the mode has one tunable that decides everything — with a measured optimum.** The
 > ray-marching step `neighbor_step`, swept over a factor of eight, at *equal chain depth*:
