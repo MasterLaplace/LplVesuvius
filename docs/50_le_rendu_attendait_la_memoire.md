@@ -219,6 +219,59 @@ et l'écart d'α serait crédible sans qu'on sache lequel des deux il décrit.
 
 ---
 
+---
+
+## 8. ✅ Le verdict : le plafond ne fabriquait pas le résultat
+
+C'était la question qui avait ouvert tout ce document. La voici tranchée, sur la **même
+graine**, le **même maillage**, au **même niveau de pyramide** :
+
+| budget | aire tracée | α |
+|---|---|---|
+| 60 générations | 0,317 cm² | **+0,89** |
+| 200 générations | **3,656 cm²** | **+0,95** |
+
+> ⭐ **Variation +0,06, pour un bruit de tireur de 0,16** (mesuré sur les répétitions
+> présentes, pas repris d'une constante). Elle reste **sous** le bruit : 60 générations
+> suffisaient pour juger, et le résultat négatif de ce rouleau tient.
+
+⚠⚠ **Ce que cette phrase dit exactement.** Elle ne dit pas « le budget ne change rien » :
+elle dit qu'on **ne peut pas affirmer** qu'il change quelque chose, parce que l'écart observé
+est plus petit que ce que le tireur produit tout seul. Un seul tirage par budget, donc le
++0,06 pourrait lui-même n'être qu'un tirage. La différence entre les deux formulations est
+tout ce qui sépare une mesure d'une conviction.
+
+⚠ Et l'aire, elle, a bien été multipliée par **onze et demi** — le plafond bornait donc
+réellement la surface. Il ne bornait simplement pas le **verdict**.
+
+### Le contrôle de résolution, sur la grande surface aussi
+
+La petite surface ne peut pas valider le niveau 2 : à 9,6 µm elle ferait 590 px de côté,
+sous la fenêtre d'analyse de 1024. La grande, elle, tient — donc c'est **elle** qui porte le
+contrôle du niveau 2 :
+
+| surface | niveaux comparés | α | écart |
+|---|---|---|---|
+| 0,317 cm² | 0 et 1 | +0,91 / +0,89 | **0,02** |
+| 3,656 cm² | 1 et 2 | +0,95 / **+1,01** | **0,06** |
+
+⭐ Les deux écarts restent sous la résolution de α (0,20), sur deux surfaces et trois
+niveaux. La pyramide est validée là où on l'utilise.
+
+### ⚠⚠ Trois pièges opérationnels payés pour arriver là
+
+1. **Un orphelin a survécu à une mise en veille.** Tuer une campagne ne tue pas ce qu'elle a
+   lancé : un rendu de la veille tournait encore **4 h 32 plus tard**, sur la mesure qu'on
+   savait impossible, à 24,6 Go — laissant 274 Mo à tout le reste. Vérifier par `pgrep -af`
+   ce qui tourne *réellement*, pas ce qu'on croit avoir arrêté.
+2. **Un script édité pendant son exécution se casse.** `bash` lit par offset au fil de
+   l'exécution ; une insertion décale les octets sous ses pieds et il reprend au milieu d'un
+   token — avec une erreur de syntaxe sur une ligne parfaitement valide. Les deux campagnes
+   sont mortes après leurs rendus, juste avant de juger. ⭐ Sans conséquence ici, parce que
+   les profils étaient écrits : il a suffi de relancer le **jugement**, pas le calcul.
+3. **Le plancher de la pyramide dépend de la surface**, pas de la machine — voir le tableau
+   ci-dessus. `tools/profiler_une_surface.sh` refuse maintenant *avant* de rendre.
+
 ## Reproduire
 
 ```bash

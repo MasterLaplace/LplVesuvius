@@ -29,6 +29,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -805,6 +806,28 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     if len(alphas) >= 2:
         v = sorted(alphas.values())
         ajoute("ecart entre niveaux de pyramide", v[-1] - v[0], 2, "resolution_g*.json")
+
+    # ⚠⚠ Le verdict du plafond de generations : deux alphas, leur variation et le bruit
+    # auquel on la compare. Si le bruit baissait sans que la variation baisse, la
+    # conclusion « stable » basculerait -- et rien d autre ne le dirait.
+    for f in sorted(racine.glob("docs/plafond_ps256_c2_g*_niv*.json")):
+        try:
+            d = json.loads(f.read_text())
+        except Exception:
+            continue
+        for x in (d.get("series") or ([d] if "alpha" in d else [])):
+            if isinstance(x.get("alpha"), (int, float)):
+                m = re.search(r"_g(\d+)_niv(\d+)", f.stem)
+                if m:
+                    ajoute(f"alpha du budget {m.group(1)} au niveau {m.group(2)}",
+                           x["alpha"], 2, f.name, signe=True)
+    pv = racine / "docs" / "plafond_ps256_c2_niv1.json"
+    if pv.exists():
+        d = json.loads(pv.read_text())
+        for cle, nom in (("variation", "variation du plafond"),
+                         ("bruit_de_tirage", "bruit de tirage du plafond")):
+            if isinstance(d.get(cle), (int, float)):
+                ajoute(nom, d[cle], 2, pv.name, signe=(cle == "variation"))
 
     p = racine / "docs" / "etalon_rendu.json"
     if p.exists():

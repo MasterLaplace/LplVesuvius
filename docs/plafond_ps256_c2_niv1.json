@@ -1,0 +1,25 @@
+{
+  "n_budgets": 2,
+  "niveau": 1,
+  "bruit_de_tirage": 0.15834262068557348,
+  "origine_du_bruit": "mesuré sur 2 série(s) de répétitions",
+  "budgets": [
+    60,
+    200
+  ],
+  "n_mesures": 2,
+  "n_indecidables": 0,
+  "budgets_qui_convergent": [],
+  "converge": false,
+  "alpha_min": 0.8918801214980382,
+  "alpha_max": 0.9488913949026188,
+  "etendue_alpha": 0.057011273404580565,
+  "alpha_au_plus_petit": 0.8918801214980382,
+  "alpha_au_plus_grand": 0.9488913949026188,
+  "variation": 0.057011273404580565,
+  "depasse_le_bruit": false,
+  "verdict": "α stable sous le bruit de tirage",
+  "consequence": "la variation +0.06 reste sous le bruit du tireur (0.16) — 60 générations suffisaient pour juger, et le résultat négatif de ce rouleau tient",
+  "prediction": "ps256",
+  "candidat": 2
+}
