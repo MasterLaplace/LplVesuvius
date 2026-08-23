@@ -135,13 +135,43 @@ def juger_serie(xs: list[dict]) -> dict | None:
     if len(xs) < 2:
         return None
     s = sorted(xs, key=lambda y: y["couche_tracee"])
-    e, g = s[0], s[-1]
-    if e["couche_tracee"] == g["couche_tracee"]:
+    if s[0]["couche_tracee"] == s[-1]["couche_tracee"]:
         return None
+    # ⚠⚠ **Le couple le plus LARGE dont les DEUX bouts mesurent**, et non simplement les
+    # extremes. Une serie de trois fenetres offre trois couples, et prendre les extremes
+    # maximise le bras de levier au prix de reintroduire un appui vide.
+    #
+    # Mesure du 2026-08-24 : la campagne de plafond au niveau 2 tient 11, 41 et 83 couches.
+    # Les extremes donnent 11/83, dont l appui etroit est PLAT -- alors qu un rendu a ete
+    # paye exactement pour disposer de 41/83, dont les deux bouts mesurent. Prendre les
+    # extremes jetait la mesure qu on venait d acheter.
+    #
+    # ⚠ Le repli reste les extremes : quand aucun couple ne mesure des deux cotes, le plus
+    # large est encore ce qui se rapproche le plus d une pente, et son verdict portera de
+    # toute facon la mention « les appuis ne portent pas ».
+    def _rapport_ok(a, b):
+        return (2 * b["couche_tracee"] + 1) >= 2 * (2 * a["couche_tracee"] + 1)
+
+    e, g = s[0], s[-1]
+    meilleur = None
+    for i, a in enumerate(s):
+        for b in s[i + 1:]:
+            if a["couche_tracee"] == b["couche_tracee"] or not _rapport_ok(a, b):
+                continue
+            if appui(a) == APPUI_MESURE and appui(b) == APPUI_MESURE:
+                bras = b["couche_tracee"] / a["couche_tracee"]
+                if meilleur is None or bras > meilleur[0]:
+                    meilleur = (bras, a, b)
+    if meilleur:
+        e, g = meilleur[1], meilleur[2]
     a_e, a_g = appui(e), appui(g)
     b = borne(a_e, a_g)
     a = alpha_de([(y["couche_tracee"] * 2 + 1, y["ecart_um"]) for y in s])
     return {"alpha": a, "appui_etroit": a_e, "appui_large": a_g, "borne": b,
+            # ⚠ Le couple RETENU est rapporte : sur une serie de plus de deux fenetres, un
+            # lecteur ne peut pas deviner lesquelles ont produit α.
+            "fenetres_disponibles": [y["couche_tracee"] * 2 + 1 for y in s],
+            "couple_choisi_pour_ses_appuis": bool(meilleur),
             "verdict": (None if a is None else
                         ("suit la fenêtre" if a >= ALPHA_TRAVERS else "converge")),
             "tient": survit(a, b),
@@ -278,6 +308,38 @@ def verifier() -> int:
     v("pile au seuil, c'est une condamnation, qu'un majorant ne sauve pas",
       not survit(ALPHA_TRAVERS, BORNE_MAJORANT))
     v("pile au seuil, un minorant la sauve", survit(ALPHA_TRAVERS, BORNE_MINORANT))
+
+    # --- le choix du couple dans une serie de plus de deux fenetres ----------------------
+    def prof3(ct, ecart, plafond, ampl=0.09):
+        n = 2 * ct + 1
+        return {"couche_tracee": ct, "ecart_um": ecart, "plafond_um": plafond,
+                "bords_um": [plafond], "au_plafond": ecart >= plafond * (1 - 1e-9),
+                "amplitude": ampl, "seuil": 0.02, "seuil_est_un_repli": False,
+                "layers": list(range(n))}
+
+    # ⚠⚠ Le cas reel : 11, 41 et 83 couches, l appui a 11 est PLAT. Les extremes donneraient
+    # 11/83 et jetteraient le couple 41/83, dont les deux bouts mesurent -- celui pour lequel
+    # un rendu a ete paye.
+    trois = juger_serie([prof3(5, 48.0, 96.0, 0.007),
+                         prof3(20, 182.4, 192.0, 0.031),
+                         prof3(41, 384.0, 393.6, 0.046)])
+    v("le couple retenu est le plus large dont les DEUX bouts mesurent",
+      trois["couches"] == [41, 83], str(trois["couches"]))
+    v("... et il est signale comme choisi", trois["couple_choisi_pour_ses_appuis"])
+    v("... toutes les fenetres disponibles sont rapportees",
+      trois["fenetres_disponibles"] == [11, 41, 83], str(trois["fenetres_disponibles"]))
+    # ⚠ Quand aucun couple ne mesure des deux cotes, on retombe sur les extremes et le
+    # verdict portera sa mention.
+    aucun = juger_serie([prof3(5, 48.0, 96.0, 0.007), prof3(41, 384.0, 393.6, 0.007)])
+    v("sans couple mesurant, on retombe sur les extremes",
+      aucun["couches"] == [11, 83] and not aucun["couple_choisi_pour_ses_appuis"],
+      str(aucun["couches"]))
+    # ⚠ Un couple mesurant mais TROP SERRE ne doit pas etre prefere : le verdict le
+    # refuserait pour rapport insuffisant.
+    serre = juger_serie([prof3(20, 182.4, 192.0, 0.031), prof3(30, 250.0, 288.0, 0.040),
+                         prof3(41, 384.0, 393.6, 0.046)])
+    v("un couple trop serre n est pas retenu", serre["couches"] == [41, 83],
+      str(serre["couches"]))
 
     # --- la serie ----------------------------------------------------------------------
     def prof(ct, ecart, plafond, ampl=0.09):

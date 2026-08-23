@@ -62,7 +62,25 @@ def lire_profil(p: Path) -> dict | None:
     # `couche_tracee` couches, soit `couche_tracee * voxel_um` microns. Un ecart pose
     # exactement dessus n'est pas une distance mesuree, c'est le bord du regard.
     ct, vx = d.get("couche_tracee"), d.get("voxel_um")
-    plafond = (float(ct) * float(vx)) if (ct is not None and vx) else None
+    # ⚠⚠ LE BORD LE PLUS LOIN, pas la demi-fenetre. Une fenetre de N tranches centree sur
+    # `couche_tracee` n est pas symetrique quand N est PAIR : 40 tranches centrees sur la
+    # 20e atteignent 20 couches d un cote et 19 de l autre. Le plafond du regard est donc le
+    # PLUS GRAND des deux, et un ecart pose sur le plus petit est quand meme un bord.
+    #
+    # ⚠⚠⚠ Paye le 2026-08-24, et de justesse. Un couple 40/83 tranches au niveau 2 a rendu
+    # α = +1,056 avec des appuis declares « mesure » : l ecart etroit valait 182,4 µm pour
+    # une demi-fenetre de 192,0, donc pas au bord selon l ancienne regle. Il valait
+    # exactement 19 x 9,6 -- le bord OPPOSE. Le resultat allait etre publie comme le premier
+    # α de ce rouleau dont les deux appuis mesurent.
+    n = len(d.get("layers") or [])
+    plafond, bords = None, []
+    if ct is not None and vx:
+        # ⚠⚠ DEUX bords, pas un. Une fenetre atteint `ct` couches d un cote et `n-1-ct` de
+        # l autre, et les deux ne sont egaux que si le compte est impair. Un pic pose sur
+        # l un OU l autre rend un ecart qui est un bord du regard, pas une distance mesuree.
+        bords = sorted({int(ct) * float(vx),
+                        (n - 1 - int(ct)) * float(vx) if n else int(ct) * float(vx)})
+        plafond = max(bords)
     e = float(d["ecart_trace_um_median"])
     return {"fichier": str(p), "ecart_um": e,
             "plafond_um": plafond,
@@ -73,7 +91,12 @@ def lire_profil(p: Path) -> dict | None:
             # ⚠ Comparaison a une tolerance relative : les ecarts sont des medianes de
             # quantites discretisees au pas de couche, donc exiger l'egalite exacte raterait
             # un ecart pose au bord a un arrondi pres.
-            "au_plafond": (plafond is not None and e >= plafond * (1 - 1e-9)),
+            "bords_um": bords,
+            # ⚠ Tolerance d une DEMI-COUCHE : les ecarts sont des medianes de distances
+            # quantifiees au pas de couche, donc exiger l egalite exacte raterait un bord a
+            # un arrondi pres -- et une tolerance plus large avalerait la couche voisine.
+            "au_plafond": bool(bords) and (
+                min(abs(e - b) for b in bords) <= float(vx) / 2.0 or e >= plafond),
             "amplitude": a, "seuil_declare": seuil,
             "seuil": seuil if seuil is not None else AMPLITUDE_MIN_DEFAUT,
             "seuil_est_un_repli": seuil is None,
@@ -280,6 +303,32 @@ def verifier() -> int:
             print(f"  ECHEC  {nom}" + (f"  — {detail}" if detail else ""))
 
     plat = juger({"amplitude": 0.0, "seuil": 0.02, "seuil_est_un_repli": False})
+    # --- le plafond du regard --------------------------------------------------------
+    # ⚠ Une fenetre PAIRE n est pas symetrique : 40 tranches centrees sur la 20e atteignent
+    # 20 couches d un cote et 19 de l autre, donc le plafond est 20 -- et un ecart de 19
+    # couches est quand meme un bord.
+    import tempfile as _tf, json as _j
+    def _lu(n, ct, ecart, vx=9.6):
+        with _tf.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
+            _j.dump({"ecart_trace_um_median": ecart, "couche_tracee": ct, "voxel_um": vx,
+                     "layers": list(range(n)), "amplitude_mediane": 0.5,
+                     "amplitude_min": 0.02}, f)
+            nom = f.name
+        return lire_profil(Path(nom))
+    v("une fenetre impaire est symetrique",
+      abs(_lu(83, 41, 1.0)["plafond_um"] - 41 * 9.6) < 1e-9)
+    v("une fenetre PAIRE plafonne au bord le plus loin",
+      abs(_lu(40, 20, 1.0)["plafond_um"] - 20 * 9.6) < 1e-9)
+    # ⚠⚠ LE CONTROLE QUI A MANQUE, et il a failli coûter un resultat publie. Une fenetre de
+    # 40 tranches centree sur la 20e atteint 19 couches du cote oppose, soit 182,4 µm a
+    # 9,6 µm la tranche. Cet ecart EST un bord, et l ancienne regle -- comparer a la
+    # demi-fenetre de 192,0 -- repondait « non ».
+    v("un ecart au bord OPPOSE est reconnu comme un bord",
+      _lu(40, 20, 19 * 9.6)["au_plafond"] is True,
+      str(_lu(40, 20, 19 * 9.6)["au_plafond"]))
+    v("un ecart franchement interieur ne l est pas",
+      _lu(40, 20, 5 * 9.6)["au_plafond"] is False)
+
     v("une amplitude nulle est PLATE", plat["etat"] == "plat")
     v("une amplitude au-dessus du seuil MESURE",
       juger({"amplitude": 0.09, "seuil": 0.02, "seuil_est_un_repli": False})["etat"]

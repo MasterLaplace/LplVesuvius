@@ -197,9 +197,9 @@ qui répond en deux temps et dans cet ordre :
 
 | état | séries |
 |---|---:|
-| couple confortable disponible | **95** |
+| couple confortable disponible | **96** |
 | couple disponible, sans marge | **9** |
-| il faut rendre une fenêtre plus profonde | **34** |
+| il faut rendre une fenêtre plus profonde | **33** |
 
 Pour les trois candidats `PHercParis4`, la cible vaut **73,9**, **72,6** et **74,6**
 couches, avec un facteur d'extrapolation de **×1,00** — autrement dit *dans* l'intervalle
@@ -291,6 +291,48 @@ couple est donc rendable, et c'est le rendu en cours.
 
 ⚠ Sans mémoire déclarée, l'instrument **laisse la faisabilité ouverte** au lieu d'y répondre
 au jugé : répondre au juge serait pire que ne pas répondre.
+
+## 6ter. ⚠⚠ Le couple acheté ne porte pas non plus, et un bug de l'instrument l'a d'abord caché
+
+Le couple admissible a été rendu au niveau 2 sur la grande surface — 41 et 83 couches,
+796,8 µm de portée, 25 fenêtres d'analyse, campagne complète. Verdict imprimé : α = **+1,06**,
+*suit la fenêtre*, **sans** la mention « les appuis ne portent pas ». Le premier α de ce
+rouleau dont les deux appuis mesurent, donc.
+
+> ⚠⚠⚠ **Faux, et je l'ai failli publier.** Le profil disait `au_bord = 1,0` — *toutes* les
+> fenêtres ont leur pic sur un bord de pile — pendant que l'instrument classait son écart
+> comme intérieur. Les deux ne pouvaient pas être vrais en même temps.
+
+**Le bug** : une fenêtre de N tranches centrée sur `couche_tracee` n'est **pas symétrique**
+quand N est pair. Quarante tranches centrées sur la vingtième atteignent 20 couches d'un côté
+et **19** de l'autre. L'instrument comparait l'écart à la demi-fenêtre — 192,0 µm — et
+répondait « intérieur » à un écart de **182,4 µm**, qui est exactement 19 × 9,6 : **l'autre
+bord**. Un profil a donc **deux** bords, et un pic posé sur l'un ou l'autre rend un écart qui
+est un bord du regard, pas une distance mesurée.
+
+Corrigé (`bords_um`, tolérance d'une demi-couche), le couple se relit ainsi :
+
+| fenêtre | écart | bords | appui |
+|---|---:|---|---|
+| 41 couches | 182,4 µm | {182,4 · 192,0} | ⚠ **au bord** |
+| 83 couches | 384,0 µm | {393,6} | ⭐ mesure |
+
+→ borne **majorant**, donc α vrai est **en dessous** de +1,06 — ce qui ne sauve pas une
+condamnation. **Le couple acheté ne porte pas de verdict.**
+
+### ⚠ Et un second défaut, révélé par le même run
+
+La campagne au niveau 2 contient désormais quatre fenêtres (11, 41, 81, 83). `juger_serie`
+prenait les **extrêmes**, soit 11/83 — dont l'appui étroit est **plat**. Autrement dit
+l'instrument jetait exactement le couple pour lequel un rendu venait d'être payé. Il retient
+maintenant **le plus large couple dont les deux bouts mesurent**, se rabat sur les extrêmes
+quand il n'y en a pas, et **dit lequel il a retenu** — sur une série de plus de deux fenêtres,
+un lecteur ne peut pas le deviner.
+
+⭐ **Ce que le run établit tout de même, et c'est plus fort que ce qu'il visait** : à 100,8 µm,
+à 384 µm et à 796,8 µm de portée, **100 % des fenêtres ont leur pic sur un bord de pile**.
+Élargir le regard jusqu'à ce que la mémoire le permette ne fait pas apparaître de pic à
+l'intérieur.
 
 ## 7. Ce que ce document n'établit pas
 

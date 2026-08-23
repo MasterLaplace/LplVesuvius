@@ -2,8 +2,8 @@
   "series": 138,
   "par_etat": {
     "couple disponible, sans marge": 9,
-    "il faut rendre une fenêtre plus profonde": 34,
-    "couple confortable disponible": 95
+    "il faut rendre une fenêtre plus profonde": 33,
+    "couple confortable disponible": 96
   },
   "a_rendre": [
     "data/boucle/corrige_gen5",
@@ -20,7 +20,6 @@
     "data/paris4_croise_r3/ps256_sur_graine_ps256_r1",
     "data/paris4_croise_r3/ps256_sur_graine_ps256_r3",
     "data/paris4_plafond/ps256_c2_g200#g1",
-    "data/paris4_plafond/ps256_c2_g200#g2",
     "data/paris4_plafond/ps256_c2_g60",
     "data/paris4_plafond/ps256_c2_g60#g1",
     "data/petite_trace/g30",
@@ -1269,28 +1268,40 @@
       ]
     },
     "data/paris4_plafond/ps256_c2_g200#g2": {
-      "etat": "il faut rendre une fenêtre plus profonde",
-      "couple_strict": null,
-      "couple_confortable": null,
+      "etat": "couple confortable disponible",
+      "couple_strict": [
+        41,
+        83
+      ],
+      "couple_confortable": [
+        41,
+        83
+      ],
       "prediction": {
-        "beta": 1.0836880051715843,
+        "beta": 0.9132681420083112,
         "atteignable": true,
-        "profondeur_cible": 36.14183814172093,
+        "profondeur_cible": 45.12459844221839,
         "cible_amplitude": 0.026600000000000002,
         "profondeurs_mesurees": [
           11,
-          41
+          41,
+          81,
+          83
         ],
         "facteur_extrapolation": 1.0,
-        "loi_testable": false
+        "loi_testable": true
       },
       "profondeurs": [
         11,
-        41
+        41,
+        81,
+        83
       ],
       "amplitudes": [
         0.0073,
-        0.0305
+        0.0305,
+        0.0464,
+        0.0464
       ]
     },
     "data/paris4_plafond/ps256_c2_g60": {

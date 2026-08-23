@@ -82,6 +82,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -102,6 +107,11 @@
       "appui_etroit": "plat",
       "appui_large": "mesure",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -122,6 +132,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -142,6 +157,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "mesure",
       "borne": "majorant",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -162,6 +182,11 @@
       "appui_etroit": "plat",
       "appui_large": "mesure",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -182,6 +207,11 @@
       "appui_etroit": "plat",
       "appui_large": "mesure",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        21,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -202,6 +232,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -222,6 +257,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -242,6 +282,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "mesure",
       "borne": "majorant",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -262,6 +307,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -282,6 +332,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -302,6 +357,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -322,6 +382,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -342,6 +407,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -362,6 +432,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -382,6 +457,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -402,6 +482,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -422,6 +507,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -442,6 +532,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -462,6 +557,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -482,6 +582,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -502,6 +607,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -522,6 +632,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -542,6 +657,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -562,6 +682,11 @@
       "appui_etroit": "plat",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -582,6 +707,11 @@
       "appui_etroit": "plat",
       "appui_large": "mesure",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -602,6 +732,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -622,6 +757,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -642,6 +782,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -662,6 +807,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -682,6 +832,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -702,6 +857,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -722,6 +882,11 @@
       "appui_etroit": "plat",
       "appui_large": "mesure",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -742,6 +907,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -762,6 +932,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -782,6 +957,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "mesure",
       "borne": "majorant",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -802,6 +982,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -822,6 +1007,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -842,6 +1032,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -862,6 +1057,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -882,6 +1082,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -902,6 +1107,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "mesure",
       "borne": "majorant",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -922,6 +1132,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -942,6 +1157,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -962,6 +1182,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -982,6 +1207,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -1002,6 +1232,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -1022,6 +1257,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -1042,6 +1282,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "mesure",
       "borne": "majorant",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -1062,6 +1307,11 @@
       "appui_etroit": "plat",
       "appui_large": "mesure",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -1082,6 +1332,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "mesure",
       "borne": "majorant",
+      "fenetres_disponibles": [
+        21,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -1098,23 +1353,30 @@
       ]
     },
     "data/paris4_plafond/ps256_c2_g200#g2": {
-      "alpha": 1.0146877051536598,
+      "alpha": 1.0289449722704447,
       "appui_etroit": "au_bord",
       "appui_large": "mesure",
       "borne": "majorant",
+      "fenetres_disponibles": [
+        11,
+        41,
+        81,
+        83
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
         11,
-        41
+        83
       ],
       "ecarts_um": [
         48.0,
-        182.4
+        384.0
       ],
       "plafonds_um": [
         48.0,
-        192.0
+        393.59999999999997
       ]
     },
     "data/paris4_plafond/ps256_c2_g60": {
@@ -1122,6 +1384,11 @@
       "appui_etroit": "plat",
       "appui_large": "mesure",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -1142,6 +1409,11 @@
       "appui_etroit": "plat",
       "appui_large": "mesure",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        21,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -1162,6 +1434,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -1182,6 +1459,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "mesure",
       "borne": "majorant",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -1202,6 +1484,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "au_bord",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -1222,6 +1509,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "mesure",
       "borne": "majorant",
+      "fenetres_disponibles": [
+        41,
+        161
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [
@@ -1242,6 +1534,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1262,6 +1559,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1282,6 +1584,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1302,6 +1609,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1322,6 +1634,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1342,6 +1659,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1362,6 +1684,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1382,6 +1709,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1402,6 +1734,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1422,6 +1759,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1442,6 +1784,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "mesure",
       "borne": "majorant",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1462,6 +1809,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -1482,6 +1834,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1502,6 +1859,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1522,6 +1884,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "mesure",
       "borne": "majorant",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1542,6 +1909,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -1562,6 +1934,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -1582,6 +1959,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1602,6 +1984,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1622,6 +2009,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1642,6 +2034,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1662,6 +2059,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -1682,6 +2084,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1702,6 +2109,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -1722,6 +2134,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1742,6 +2159,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1762,6 +2184,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1782,6 +2209,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -1802,6 +2234,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -1822,6 +2259,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "mesure",
       "borne": "majorant",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1842,6 +2284,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1862,6 +2309,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1882,6 +2334,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1902,6 +2359,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1922,6 +2384,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1942,6 +2409,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1962,6 +2434,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "mesure",
       "borne": "majorant",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -1982,6 +2459,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -2002,6 +2484,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -2022,6 +2509,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -2042,6 +2534,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2062,6 +2559,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2082,6 +2584,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2102,6 +2609,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2122,6 +2634,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2142,6 +2659,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2162,6 +2684,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "mesure",
       "borne": "majorant",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2182,6 +2709,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -2202,6 +2734,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -2222,6 +2759,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2242,6 +2784,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2262,6 +2809,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2282,6 +2834,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2302,6 +2859,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2322,6 +2884,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2342,6 +2909,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2362,6 +2934,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2382,6 +2959,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2402,6 +2984,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2422,6 +3009,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2442,6 +3034,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2462,6 +3059,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2482,6 +3084,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "mesure",
       "borne": "majorant",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2502,6 +3109,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -2522,6 +3134,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -2542,6 +3159,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -2562,6 +3184,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2582,6 +3209,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2602,6 +3234,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2622,6 +3259,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2642,6 +3284,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2662,6 +3309,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2682,6 +3334,11 @@
       "appui_etroit": "au_bord",
       "appui_large": "mesure",
       "borne": "majorant",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2702,6 +3359,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -2722,6 +3384,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "suit la fenêtre",
       "tient": true,
       "couches": [
@@ -2742,6 +3409,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2762,6 +3434,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2782,6 +3459,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2802,6 +3484,11 @@
       "appui_etroit": "mesure",
       "appui_large": "mesure",
       "borne": "exacte",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": true,
       "verdict": "converge",
       "tient": true,
       "couches": [
@@ -2822,6 +3509,11 @@
       "appui_etroit": "plat",
       "appui_large": "mesure",
       "borne": "aucune",
+      "fenetres_disponibles": [
+        31,
+        81
+      ],
+      "couple_choisi_pour_ses_appuis": false,
       "verdict": "suit la fenêtre",
       "tient": false,
       "couches": [

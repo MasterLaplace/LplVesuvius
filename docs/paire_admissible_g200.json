@@ -1,18 +1,36 @@
 {
   "series": [
     {
-      "verdict": "indecidable",
-      "raison": "une seule fenêtre",
+      "verdict": "suit la fenêtre",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement — et 100 % des fenêtres ont leur pic AU BORD, ce qui chiffre l'étendue du mal que α ne fait que signaler",
       "serie": [
         [
-          81,
-          172.79999999999998
+          41,
+          182.4
+        ],
+        [
+          83,
+          384.0
         ]
       ],
-      "nom": "grande surface, 81/163 tranches au niveau 1",
+      "croissance": 2.1052631578947367,
+      "elargissement": 2.024390243902439,
+      "alpha": 1.055541870327206,
+      "marge_au_seuil": 0.35554187032720597,
+      "fragile": false,
+      "amplitude": 0.046407856971545904,
+      "borne": "exacte",
+      "appuis_portent": true,
+      "au_bord": 1.0,
+      "reserve": true,
+      "nom": "grande surface, 40/83 tranches au niveau 2",
       "profils": [
-        "/home/masterlaplace/LplVesuvius/data/paris4_plafond/ps256_c2_g200/g1_n81/profil.json"
+        "/home/masterlaplace/LplVesuvius/data/paris4_plafond/ps256_c2_g200/g2_n40/profil.json",
+        "/home/masterlaplace/LplVesuvius/data/paris4_plafond/ps256_c2_g200/g2_n83/profil.json"
       ]
     }
-  ]
+  ],
+  "fenetres_produites": 2,
+  "fenetres_demandees": 2,
+  "campagne_complete": true
 }
