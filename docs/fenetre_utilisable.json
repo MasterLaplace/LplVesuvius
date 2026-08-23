@@ -1,14 +1,17 @@
 {
-  "series": 132,
+  "series": 138,
   "par_etat": {
     "couple disponible, sans marge": 9,
-    "il faut rendre une fenêtre plus profonde": 28,
+    "il faut rendre une fenêtre plus profonde": 34,
     "couple confortable disponible": 95
   },
   "a_rendre": [
     "data/boucle/corrige_gen5",
     "data/boucle/temoin",
+    "data/controle_resolution#g0",
+    "data/controle_resolution#g1",
     "data/convergence_essais/essai_scale1",
+    "data/fenetre_profonde/ps256_c0#g1",
     "data/leurs_parametres",
     "data/paris4_candidats/ps256_c0",
     "data/paris4_candidats/ps256_c1",
@@ -16,7 +19,10 @@
     "data/paris4_croise/m7_sur_graine_ps256",
     "data/paris4_croise_r3/ps256_sur_graine_ps256_r1",
     "data/paris4_croise_r3/ps256_sur_graine_ps256_r3",
+    "data/paris4_plafond/ps256_c2_g200#g1",
+    "data/paris4_plafond/ps256_c2_g200#g2",
     "data/paris4_plafond/ps256_c2_g60",
+    "data/paris4_plafond/ps256_c2_g60#g1",
     "data/petite_trace/g30",
     "data/petite_trace/g60",
     "data/spires_repousse/spire03"
@@ -131,6 +137,56 @@
       "amplitudes": [
         0.0188,
         0.0516
+      ]
+    },
+    "data/controle_resolution#g0": {
+      "etat": "il faut rendre une fenêtre plus profonde",
+      "couple_strict": null,
+      "couple_confortable": null,
+      "prediction": {
+        "beta": 0.841659403068499,
+        "atteignable": true,
+        "profondeur_cible": 83.43925679872186,
+        "cible_amplitude": 0.026600000000000002,
+        "profondeurs_mesurees": [
+          41,
+          161
+        ],
+        "facteur_extrapolation": 1.0,
+        "loi_testable": false
+      },
+      "profondeurs": [
+        41,
+        161
+      ],
+      "amplitudes": [
+        0.0146,
+        0.0463
+      ]
+    },
+    "data/controle_resolution#g1": {
+      "etat": "il faut rendre une fenêtre plus profonde",
+      "couple_strict": null,
+      "couple_confortable": null,
+      "prediction": {
+        "beta": 0.6653441848564281,
+        "atteignable": true,
+        "profondeur_cible": 51.32112333753865,
+        "cible_amplitude": 0.026600000000000002,
+        "profondeurs_mesurees": [
+          21,
+          81
+        ],
+        "facteur_extrapolation": 1.0,
+        "loi_testable": false
+      },
+      "profondeurs": [
+        21,
+        81
+      ],
+      "amplitudes": [
+        0.0147,
+        0.036
       ]
     },
     "data/convergence_essais/essai_b": {
@@ -665,6 +721,31 @@
         0.0985
       ]
     },
+    "data/fenetre_profonde/ps256_c0#g1": {
+      "etat": "il faut rendre une fenêtre plus profonde",
+      "couple_strict": null,
+      "couple_confortable": null,
+      "prediction": {
+        "beta": 1.5098509650696865,
+        "atteignable": true,
+        "profondeur_cible": 67.63639781696465,
+        "cible_amplitude": 0.026600000000000002,
+        "profondeurs_mesurees": [
+          41,
+          161
+        ],
+        "facteur_extrapolation": 1.0,
+        "loi_testable": false
+      },
+      "profondeurs": [
+        41,
+        161
+      ],
+      "amplitudes": [
+        0.0125,
+        0.0985
+      ]
+    },
     "data/leurs_parametres": {
       "etat": "il faut rendre une fenêtre plus profonde",
       "couple_strict": null,
@@ -1162,6 +1243,56 @@
         0.065
       ]
     },
+    "data/paris4_plafond/ps256_c2_g200#g1": {
+      "etat": "il faut rendre une fenêtre plus profonde",
+      "couple_strict": null,
+      "couple_confortable": null,
+      "prediction": {
+        "beta": 1.0182958511901379,
+        "atteignable": true,
+        "profondeur_cible": 80.69321874981564,
+        "cible_amplitude": 0.026600000000000002,
+        "profondeurs_mesurees": [
+          21,
+          81
+        ],
+        "facteur_extrapolation": 1.0,
+        "loi_testable": false
+      },
+      "profondeurs": [
+        21,
+        81
+      ],
+      "amplitudes": [
+        0.0068,
+        0.0267
+      ]
+    },
+    "data/paris4_plafond/ps256_c2_g200#g2": {
+      "etat": "il faut rendre une fenêtre plus profonde",
+      "couple_strict": null,
+      "couple_confortable": null,
+      "prediction": {
+        "beta": 1.0836880051715843,
+        "atteignable": true,
+        "profondeur_cible": 36.14183814172093,
+        "cible_amplitude": 0.026600000000000002,
+        "profondeurs_mesurees": [
+          11,
+          41
+        ],
+        "facteur_extrapolation": 1.0,
+        "loi_testable": false
+      },
+      "profondeurs": [
+        11,
+        41
+      ],
+      "amplitudes": [
+        0.0073,
+        0.0305
+      ]
+    },
     "data/paris4_plafond/ps256_c2_g60": {
       "etat": "il faut rendre une fenêtre plus profonde",
       "couple_strict": null,
@@ -1185,6 +1316,31 @@
       "amplitudes": [
         0.0146,
         0.0463
+      ]
+    },
+    "data/paris4_plafond/ps256_c2_g60#g1": {
+      "etat": "il faut rendre une fenêtre plus profonde",
+      "couple_strict": null,
+      "couple_confortable": null,
+      "prediction": {
+        "beta": 0.6653441848564281,
+        "atteignable": true,
+        "profondeur_cible": 51.32112333753865,
+        "cible_amplitude": 0.026600000000000002,
+        "profondeurs_mesurees": [
+          21,
+          81
+        ],
+        "facteur_extrapolation": 1.0,
+        "loi_testable": false
+      },
+      "profondeurs": [
+        21,
+        81
+      ],
+      "amplitudes": [
+        0.0147,
+        0.036
       ]
     },
     "data/petite_trace/g30": {

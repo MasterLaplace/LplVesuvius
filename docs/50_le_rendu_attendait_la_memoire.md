@@ -184,6 +184,20 @@ avec elle, c'est une pente à voir.
 > ⭐⭐⭐ **Écart 0,02, pour une résolution déclarée de 0,20** — dix fois à l'intérieur. Les
 > deux niveaux rendent le même verdict, sur la même surface.
 
+### ⚠⚠ Corrigé le 2026-08-23 : ces deux nombres ne sont pas des α
+
+[`51`](51_une_pente_a_deux_appuis.md) mesure que les **deux** séries ont leur fenêtre étroite
+sous le plancher de détection — `controle_resolution#g0` et `#g1`, appuis *plat / mesure*,
+borne **aucune**. Une pente a deux appuis, et un appui qui ne mesure rien n'en est pas un.
+
+> ⭐ **Ce qui survit, et c'est ce dont ce document a besoin.** La question posée ici est
+> « le **même calcul**, sur la **même surface**, à deux résolutions, rend-il le même
+> nombre ? ». 0,02 y répond sans que le nombre ait à être une distance à une feuille, et
+> c'est cela qui autorise à rendre moins cher.
+>
+> ⚠ **Ce qui tombe** : appeler ce nombre un α, donc une mesure de l'éloignement d'une
+> feuille. Même correction que `49` sur `38`.
+
 ⚠⚠ **Le seuil de cette confrontation n'est pas le bruit du tireur** (0,23) mais la
 résolution de α (0,20). C'est la *même* surface rendue deux fois : aucun tirage neuf
 n'intervient, donc tout écart au-delà de la résolution serait un effet de l'instrument, et
@@ -234,6 +248,18 @@ graine**, le **même maillage**, au **même niveau de pyramide** :
 > ⭐ **Variation +0,06, pour un bruit de tireur de 0,16** (mesuré sur les répétitions
 > présentes, pas repris d'une constante). Elle reste **sous** le bruit : 60 générations
 > suffisaient pour juger, et le résultat négatif de ce rouleau tient.
+
+### ⚠⚠ Corrigé le 2026-08-23 : ces deux α ne portent pas de verdict non plus
+
+Même mesure, même conclusion partielle. `paris4_plafond/ps256_c2_g60#g1` a ses appuis
+*plat / mesure* — borne **aucune** — et `ps256_c2_g200#g1` ses appuis *au bord / mesure*,
+donc une borne **majorant** : α vrai est **en dessous** du mesuré, ce qui ne sauve pas une
+condamnation. Voir [`51`](51_une_pente_a_deux_appuis.md).
+
+> ⚠ La comparaison **de budget à budget** garde son sens — deux fois le même calcul sur la
+> même graine — donc « on ne voit pas d'effet du budget » tient. C'est « α passe de +0,89 à
+> +0,95 » qui sur-affirme, en présentant comme deux mesures ce qui est deux fois le même
+> calcul sur un appui vide.
 
 ⚠⚠ **Ce que cette phrase dit exactement.** Elle ne dit pas « le budget ne change rien » :
 elle dit qu'on **ne peut pas affirmer** qu'il change quelque chose, parce que l'écart observé

@@ -83,15 +83,25 @@ résultats qu'il produit est ce qui le rend invisible.
 
 | | |
 |---|---:|
-| séries jugeables | **132** |
+| séries jugeables | **138** |
 | à deux appuis mesurés — α exact | **92** |
-| appui étroit au bord — α **majorant** | **14** |
+| appui étroit au bord — α **majorant** | **16** |
 | appui large au bord — α **minorant** | **0** |
-| ⚠⚠ aucun appui qui porte | **26** |
-| séries dont le verdict ne tient plus | **33** |
+| ⚠⚠ aucun appui qui porte | **30** |
+| séries dont le verdict ne tient plus | **39** |
 | séries sauvées par le **signe** de la borne | **7** |
 | séries convergentes | **75** |
 | ⭐ convergentes perdues | **0** |
+
+⚠⚠ **Ce tableau a d'abord annoncé 132 séries, et il en manquait six.** Deux conventions de
+rangement coexistent : les campagnes anciennes posent `profil_41c.json` et `profil_161c.json`
+côte à côte, `tools/profiler_une_surface.sh` écrit **une fenêtre par sous-dossier**
+(`g<niveau>_n<tranches>/profil.json`). Grouper par dossier parent découpait les secondes en
+séries d'un seul profil, donc injugeables — et elles comprennent le contrôle de pyramide et
+la campagne de plafond à 200 générations, parmi les plus importantes du dépôt. La clé de
+série est désormais partagée (`audit_profils_plats.serie_de`) et **le niveau en fait
+partie** : réunir deux résolutions comparerait deux voxels en croyant comparer deux
+profondeurs.
 
 > ⭐⭐ **Et cette fois la moitié rassurante a une RAISON, pas seulement un constat.** Le seul
 > signe observé dans tout l'arbre est le **majorant** : quatorze séries ont leur appui
@@ -142,6 +152,35 @@ amplitude de **0,0194** pour un seuil de 0,02. **C'est un appui au bord, et il e
 > portée, c'est de rejuger la série : les trois autres profils ne sont pas dans l'arbre,
 > donc les redemander veut dire relancer le rendu, pas relire un fichier.
 
+### ⚠⚠ Et les six séries retrouvées touchent `50`, pas seulement `48`
+
+| série | α | appuis | borne |
+|---|---:|---|---|
+| `controle_resolution#g0` | +0,9104 | plat / mesure | ⚠ aucune |
+| `controle_resolution#g1` | +0,8919 | plat / mesure | ⚠ aucune |
+| `paris4_plafond/ps256_c2_g200#g1` | +0,9489 | au bord / mesure | majorant |
+| `paris4_plafond/ps256_c2_g200#g2` | +1,0147 | au bord / mesure | majorant |
+| `paris4_plafond/ps256_c2_g60#g1` | +0,8919 | plat / mesure | ⚠ aucune |
+| `fenetre_profonde/ps256_c0#g1` | +1,3870 | plat / au bord | ⚠ aucune |
+
+Ce sont les α que [`50`](50_le_rendu_attendait_la_memoire.md) publie pour la **pyramide**
+(+0,91 contre +0,89, écart 0,02) et pour le **plafond de générations** (+0,89 → +0,95).
+**Aucun ne porte de verdict** : leur fenêtre étroite ne mesure rien.
+
+> ⭐ **Ce qui survit, et pourquoi.** La comparaison de `50` demande « le même calcul, sur la
+> même surface, à deux résolutions, rend-il le même nombre ? » — et 0,02 d'écart y répond
+> sans que le nombre ait besoin d'être une distance à une feuille. C'est ce qu'il faut pour
+> justifier de rendre moins cher, et ça tient.
+>
+> ⚠ **Ce qui tombe** : appeler ce nombre un α, c'est-à-dire une mesure de l'éloignement
+> d'une feuille. Même correction que `49` sur `38` — la conclusion pratique survit, la
+> **quantification** non.
+
+⚠ Le plafond est le cas le plus net : `+0,89 → +0,95` est présenté dans `50` §8 comme « sous
+le bruit du tireur », donc comme un budget sans effet visible. Les deux valeurs reposent sur
+un appui qui ne mesure rien, et celle à 200 générations porte en plus une borne **majorant**
+sur une condamnation — donc elle **ne tient pas** au sens de ce document.
+
 ## 6. ⭐ Le pas suivant, chiffré : quel couple de fenêtres peut porter une pente
 
 Si la fenêtre de 41 couches est sous le plancher sur ce rouleau, relancer la même campagne
@@ -160,7 +199,7 @@ qui répond en deux temps et dans cet ordre :
 |---|---:|
 | couple confortable disponible | **95** |
 | couple disponible, sans marge | **9** |
-| il faut rendre une fenêtre plus profonde | **28** |
+| il faut rendre une fenêtre plus profonde | **34** |
 
 Pour les trois candidats `PHercParis4`, la cible vaut **73,9**, **72,6** et **74,6**
 couches, avec un facteur d'extrapolation de **×1,00** — autrement dit *dans* l'intervalle

@@ -36,6 +36,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -91,6 +92,32 @@ def juger(x: dict) -> dict:
     if x["amplitude"] is None:
         return {**x, "etat": "inconnu"}
     return {**x, "etat": "plat" if x["amplitude"] < x["seuil"] else "mesure"}
+
+
+FENETRE_DANS_SON_DOSSIER = re.compile(r"^g(\d+)_n(\d+)$")
+
+
+def serie_de(chemin: Path) -> str:
+    """La série à laquelle ce profil appartient : UNE surface, à UNE résolution.
+
+    ⚠⚠ **Deux conventions de rangement coexistent dans cet arbre, et une seule était vue.**
+    Les campagnes anciennes posent `profil_41c.json` et `profil_161c.json` côte à côte dans
+    le dossier de la trace ; `tools/profiler_une_surface.sh` écrit une fenêtre par
+    sous-dossier, `g<niveau>_n<tranches>/profil.json`. Grouper par dossier parent voyait les
+    premières et **découpait les secondes en séries d'un seul profil**, donc injugeables.
+    Mesuré le 2026-08-23 : quatre campagnes, douze profils, dont le contrôle de pyramide et
+    la campagne de plafond à 200 générations — parmi les plus importantes du dépôt.
+
+    ⭐ Le niveau fait **partie de la clé**. Un dossier de campagne peut porter des fenêtres
+    au niveau 1 et au niveau 2 (`ps256_c2_g200` en a) : les réunir comparerait deux
+    résolutions en croyant comparer deux profondeurs, ce qui est précisément le piège
+    d'unités que `tools/controle_resolution.sh` écrit en tête.
+    """
+    parent = chemin.parent
+    m = FENETRE_DANS_SON_DOSSIER.match(parent.name)
+    if m:
+        return f"{parent.parent}#g{m.group(1)}"
+    return str(parent)
 
 
 def balayer(racine: Path) -> list[dict]:
@@ -269,6 +296,26 @@ def verifier() -> int:
     v("une amplitude absente est INCONNUE, pas plate",
       juger({"amplitude": None, "seuil": 0.02, "seuil_est_un_repli": False})["etat"]
       == "inconnu")
+
+    # --- la cle de serie -----------------------------------------------------------------
+    from pathlib import Path as _P
+    v("une fenetre dans son propre dossier remonte a la campagne",
+      serie_de(_P("data/camp/g1_n81/profil.json")) == "data/camp#g1",
+      serie_de(_P("data/camp/g1_n81/profil.json")))
+    # ⚠⚠ Le niveau fait PARTIE de la cle : reunir deux resolutions comparerait deux voxels
+    # en croyant comparer deux profondeurs.
+    v("deux niveaux de la meme campagne sont deux series",
+      serie_de(_P("data/camp/g1_n81/profil.json"))
+      != serie_de(_P("data/camp/g2_n40/profil.json")))
+    v("deux fenetres du meme niveau sont la MEME serie",
+      serie_de(_P("data/camp/g1_n21/profil.json"))
+      == serie_de(_P("data/camp/g1_n81/profil.json")))
+    # ⚠ L ancienne convention ne bouge pas : les profils cote a cote restent groupes par
+    # leur dossier, sinon toutes les series publiees changeraient de cle.
+    v("l ancienne convention est inchangee",
+      serie_de(_P("data/trace/profil_41c.json")) == "data/trace")
+    v("un dossier qui RESSEMBLE a une fenetre sans en etre une n est pas decoupe",
+      serie_de(_P("data/g1_nimportequoi/profil.json")) == "data/g1_nimportequoi")
 
     faux = [{"fichier": "a/p1.json", "etat": "plat"}, {"fichier": "a/p2.json", "etat": "plat"},
             {"fichier": "b/p1.json", "etat": "plat"}, {"fichier": "b/p2.json", "etat": "mesure"},

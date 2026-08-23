@@ -422,11 +422,22 @@ follows rather than being guessed.
   ],
 ) <tab:footings>
 
-Over the 132 judgeable series of our tree: 92 rest on two measured footings, 14 on an upper
-bound, *none* on a lower bound, and 26 on no footing that holds. *33 verdicts no longer
+Over the 138 judgeable series of our tree: 92 rest on two measured footings, 16 on an upper
+bound, *none* on a lower bound, and 30 on no footing that holds. *39 verdicts no longer
 stand*; 7 are saved by the sign; and *0 of the 75 converging series* is lost --- because the
 only sign observed preserves exactly what sits below the threshold. The reassurance of
 #link(<sec:twofailures>)[Section 3.5] is thereby given a mechanism instead of an observation.
+
+#caveat[
+  *The first count was 132, and it was missing six.* Two directory conventions coexist in our
+  tree: older campaigns write the profiles of a surface side by side, while our profiling
+  tool writes *one window per subdirectory*. Grouping by parent directory cut the latter into
+  series of a single profile, which are unjudgeable --- and they include the pyramid control
+  and the raised-budget campaign, among the most consequential runs we have. None of the six
+  carries a verdict. The series key is now shared and *the pyramid level is part of it*:
+  merging two resolutions would compare two voxel sizes while appearing to compare two
+  depths.
+]
 
 #caveat[
   *Twenty series returned the same number, to four decimals.* When both footings are at the

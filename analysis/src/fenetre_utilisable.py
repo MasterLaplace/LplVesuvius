@@ -37,7 +37,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from audit_profils_plats import lire_profil, juger              # noqa: E402
+from audit_profils_plats import lire_profil, juger, serie_de              # noqa: E402
 
 # ⚠ Le rapport minimal entre les deux fenetres vient de `test_convergence`, qui REFUSE une
 # serie dont les fenetres sont trop proches. Le recopier ici ferait deux seuils pour une
@@ -293,7 +293,10 @@ def balayer(racine: Path) -> dict[str, list[dict]]:
     for p in sorted(racine.rglob("profil*.json")):
         x = lire_profil(p)
         if x:
-            par.setdefault(str(p.parent), []).append(x)
+            # ⚠ La cle vient de `serie_de` et non du dossier parent : deux
+            # conventions de rangement coexistent, et grouper par parent
+            # decoupait les campagnes du profileur en series d un seul profil.
+            par.setdefault(serie_de(p), []).append(x)
     return par
 
 

@@ -1,9 +1,9 @@
 {
-  "series_jugees": 132,
+  "series_jugees": 138,
   "par_borne": {
     "exacte": 92,
-    "aucune": 26,
-    "majorant": 14
+    "aucune": 30,
+    "majorant": 16
   },
   "identites_du_couple_de_fenetres": [
     {
@@ -26,7 +26,10 @@
   "series_qui_tombent": [
     "data/boucle/corrige_gen5",
     "data/boucle/temoin",
+    "data/controle_resolution#g0",
+    "data/controle_resolution#g1",
     "data/convergence_essais/essai_scale1",
+    "data/fenetre_profonde/ps256_c0#g1",
     "data/leurs_parametres",
     "data/paris4_candidats/m7_c0",
     "data/paris4_candidats/m7_c1",
@@ -51,7 +54,10 @@
     "data/paris4_croise_r3/ps256_sur_graine_ps256_r1",
     "data/paris4_croise_r3/ps256_sur_graine_ps256_r2",
     "data/paris4_croise_r3/ps256_sur_graine_ps256_r3",
+    "data/paris4_plafond/ps256_c2_g200#g1",
+    "data/paris4_plafond/ps256_c2_g200#g2",
     "data/paris4_plafond/ps256_c2_g60",
+    "data/paris4_plafond/ps256_c2_g60#g1",
     "data/petite_trace/g30",
     "data/petite_trace/g60",
     "data/prediction_paris4/m7",
@@ -149,6 +155,46 @@
       "plafonds_um": [
         187.24,
         748.96
+      ]
+    },
+    "data/controle_resolution#g0": {
+      "alpha": 0.9103570404249541,
+      "appui_etroit": "plat",
+      "appui_large": "mesure",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        45.6,
+        158.4
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/controle_resolution#g1": {
+      "alpha": 0.8918801214980382,
+      "appui_etroit": "plat",
+      "appui_large": "mesure",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        21,
+        81
+      ],
+      "ecarts_um": [
+        43.199999999999996,
+        144.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
       ]
     },
     "data/convergence_essais/essai_b": {
@@ -509,6 +555,26 @@
       "plafonds_um": [
         129.60000000000002,
         345.6
+      ]
+    },
+    "data/fenetre_profonde/ps256_c0#g1": {
+      "alpha": 1.386953639909824,
+      "appui_etroit": "plat",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        57.599999999999994,
+        384.0
+      ],
+      "plafonds_um": [
+        96.0,
+        384.0
       ]
     },
     "data/leurs_parametres": {
@@ -1011,6 +1077,46 @@
         192.0
       ]
     },
+    "data/paris4_plafond/ps256_c2_g200#g1": {
+      "alpha": 0.9488913949026188,
+      "appui_etroit": "au_bord",
+      "appui_large": "mesure",
+      "borne": "majorant",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        21,
+        81
+      ],
+      "ecarts_um": [
+        48.0,
+        172.79999999999998
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_plafond/ps256_c2_g200#g2": {
+      "alpha": 1.0146877051536598,
+      "appui_etroit": "au_bord",
+      "appui_large": "mesure",
+      "borne": "majorant",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        11,
+        41
+      ],
+      "ecarts_um": [
+        48.0,
+        182.4
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
     "data/paris4_plafond/ps256_c2_g60": {
       "alpha": 0.9103570404249541,
       "appui_etroit": "plat",
@@ -1025,6 +1131,26 @@
       "ecarts_um": [
         45.6,
         158.4
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_plafond/ps256_c2_g60#g1": {
+      "alpha": 0.8918801214980382,
+      "appui_etroit": "plat",
+      "appui_large": "mesure",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        21,
+        81
+      ],
+      "ecarts_um": [
+        43.199999999999996,
+        144.0
       ],
       "plafonds_um": [
         48.0,
