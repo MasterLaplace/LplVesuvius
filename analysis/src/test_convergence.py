@@ -90,7 +90,8 @@ AU_BORD_RESERVE = 0.05
 
 
 def analyser(serie: list[tuple[int, float]], au_bord: float | None = None,
-             amplitude: float | None = None, amplitude_min: float | None = None) -> dict:
+             amplitude: float | None = None, amplitude_min: float | None = None,
+             borne: str | None = None) -> dict:
     """Rendre le verdict d'une serie (couches, ecart) -- ou refuser de le rendre.
 
     ⚠⚠ **α = 1 a DEUX causes, et elles ne veulent pas dire la meme chose.** Un pic qui
@@ -109,6 +110,15 @@ def analyser(serie: list[tuple[int, float]], au_bord: float | None = None,
 
     ⭐ `amplitude` distingue les deux, et `depth_profile` la calcule deja. Sous le minimum,
     ce fichier REFUSE : « je n'ai rien mesure » n'est pas « la feuille est loin ».
+
+    ⚠⚠ **Et le refus ci-dessus ne suffit pas, mesure du 2026-08-23.** L'amplitude passee
+    ici est un MAXIMUM sur les fenetres — « si une seule fenetre a du relief, la mesure
+    n'est pas vide ». Juste pour « y a-t-il quelque chose ici », faux pour « quelle est
+    la pente » : α est une pente a deux appuis, et un appui qui ne mesure rien n'en est
+    pas un. `borne` porte ce que `appui_de_pente` en dit — `exacte`, `majorant`,
+    `minorant` ou `aucune` — et le verdict rendu porte alors le champ `appuis_portent`.
+    ⭐ Ce n'est PAS un refus de plus : un appui au bord est une borne, donc α garde un
+    SIGNE, et un majorant preserve exactement ce qui est sous le seuil.
     """
     serie = sorted(serie)
     if len(serie) < 2:
@@ -158,6 +168,20 @@ def analyser(serie: list[tuple[int, float]], au_bord: float | None = None,
          "marge_au_seuil": marge, "fragile": bool(marge < BRUIT_ALPHA)}
     if amplitude is not None:
         r["amplitude"] = amplitude
+    if borne is not None:
+        # ⚠ « tient » ne veut pas dire « juste » : il veut dire qu'aucune valeur
+        # admissible de α vrai ne fait changer le verdict de cote du seuil.
+        r["borne"] = borne
+        condamne = alpha >= ALPHA_TRAVERS
+        r["appuis_portent"] = bool(
+            borne == "exacte"
+            or (borne == "minorant" and condamne)
+            or (borne == "majorant" and not condamne))
+        if not r["appuis_portent"]:
+            r["reserve_appuis"] = (
+                f"⚠⚠ les appuis ne portent pas ce verdict — la borne est "
+                f"« {borne} », donc α vrai peut être de l'autre côté du seuil "
+                f"{ALPHA_TRAVERS}. Voir `appui_de_pente.py`")
     if au_bord is not None:
         r["au_bord"] = au_bord
         r["reserve"] = bool(au_bord >= AU_BORD_RESERVE)
@@ -288,6 +312,31 @@ def verifier() -> int:
     v("... alors qu'avec du relief la même série est jugée",
       avec["verdict"] == "suit la fenêtre", avec.get("verdict"))
     v("... et α y vaut bien ~1", abs(avec["alpha"] - 1.0) < 0.05, f"{avec['alpha']:.3f}")
+    # --- les APPUIS de la pente, 2026-08-23 ------------------------------------------
+    # ⚠⚠ Le refus « profil PLAT » ci-dessus prend l'amplitude MAXIMALE des fenetres. Une
+    # serie dont la fenetre etroite ne mesure rien et la large mesure passe donc au travers,
+    # et c'est exactement le cas des trois candidats `ps256` publies dans `48`.
+    maj = analyser([(41, 48.0), (161, 172.8)], borne="majorant")
+    v("une condamnation sur un MAJORANT ne tient pas", maj["appuis_portent"] is False,
+      f"α = {maj['alpha']:.3f}")
+    v("... et elle le dit", "appuis ne portent pas" in (maj.get("reserve_appuis") or ""))
+    v("une convergence sur un MAJORANT tient",
+      analyser([(31, 100.0), (81, 104.0)], borne="majorant")["appuis_portent"] is True)
+    v("une condamnation sur un MINORANT tient",
+      analyser([(41, 48.0), (161, 172.8)], borne="minorant")["appuis_portent"] is True)
+    v("une convergence sur un MINORANT ne tient pas",
+      analyser([(31, 100.0), (81, 104.0)], borne="minorant")["appuis_portent"] is False)
+    v("deux appuis francs portent tout",
+      analyser([(41, 48.0), (161, 172.8)], borne="exacte")["appuis_portent"] is True
+      and analyser([(31, 100.0), (81, 104.0)], borne="exacte")["appuis_portent"] is True)
+    v("sans appui, rien ne porte",
+      analyser([(41, 48.0), (161, 172.8)], borne="aucune")["appuis_portent"] is False)
+    # ⚠ Sans borne fournie, le champ est ABSENT et non False : « on n'a pas regarde » n'est
+    # pas « les appuis ne portent pas ». Confondre les deux ferait lire une absence de
+    # controle comme un echec de controle -- le defaut que ce depot a paye sur l'index zero.
+    v("sans borne, le champ est absent et non faux",
+      "appuis_portent" not in analyser([(41, 48.0), (161, 172.8)]))
+
     # ⚠ Sans amplitude fournie, rien ne change : les appelants anciens gardent leur verdict.
     v("sans amplitude, le comportement est inchangé",
       analyser([(41, 48.0), (161, 192.0)])["verdict"] == "suit la fenêtre")
@@ -304,6 +353,42 @@ def verifier() -> int:
         return 1
     print(f"ALL PASS ({echecs} failures, {controles} checks)")
     return 0
+
+
+def borne_des_appuis(profils: list[dict]) -> str | None:
+    """Le signe que les deux appuis de la pente donnent à α, ou None si on ne sait pas.
+
+    ⚠ Délégué à `appui_de_pente`, jamais réécrit ici : deux réponses à « cet appui
+    mesure-t-il quelque chose » finiraient par se contredire, et c'est précisément le
+    désaccord qu'une borne existe pour empêcher.
+
+    ⚠ L'import est différé parce que `appui_de_pente` lit `ALPHA_TRAVERS` dans ce
+    fichier-ci. Le faire au niveau du module ferait un cycle.
+    """
+    if len(profils) < 2:
+        return None
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    try:
+        from appui_de_pente import appui, borne
+        from audit_profils_plats import lire_profil            # noqa: F401
+    except ImportError:                                        # pragma: no cover
+        return None
+    vus = []
+    for d in profils:
+        ct, vx = d.get("couche_tracee"), d.get("voxel_um")
+        if ct is None or not vx:
+            return None
+        plafond = float(ct) * float(vx)
+        e = float(d["ecart_trace_um_median"])
+        vus.append({"couche_tracee": int(ct),
+                    "au_plafond": e >= plafond * (1 - 1e-9),
+                    "amplitude": d.get("amplitude_mediane"),
+                    "seuil": d.get("amplitude_min") if d.get("amplitude_min") is not None
+                    else 0.02})
+    vus.sort(key=lambda y: y["couche_tracee"])
+    if vus[0]["couche_tracee"] == vus[-1]["couche_tracee"]:
+        return None
+    return borne(appui(vus[0]), appui(vus[-1]))
 
 
 def main() -> int:
@@ -362,7 +447,7 @@ def main() -> int:
     # viennent du meme fichier, donc ils ne peuvent pas se contredire. Le chemin `--serie`
     # reste, pour les references dont on n'a que les nombres.
     if a.profil:
-        pts, bords, ampl = [], [], []
+        pts, bords, ampl, bruts = [], [], [], []
         for f in a.profil:
             pf = Path(f)
             if not pf.is_file():
@@ -382,13 +467,15 @@ def main() -> int:
             if d_.get("amplitude_mediane") is not None:
                 ampl.append((float(d_["amplitude_mediane"]),
                              float(d_.get("amplitude_min") or 0.0)))
+            bruts.append(d_)
         nom = a.nom[len(a.serie)] if len(a.nom) > len(a.serie) else "série de profils"
         # ⚠ On prend le MAXIMUM d'amplitude sur les fenetres : si une seule fenetre a du
         # relief, la mesure n'est pas vide. Prendre la mediane condamnerait une serie dont
         # une fenetre sur trois mesure quelque chose.
         amax = max((x for x, _ in ampl), default=None)
         amin = max((y for _, y in ampl), default=None)
-        r = analyser(pts, max(bords) if bords else None, amax, amin)
+        r = analyser(pts, max(bords) if bords else None, amax, amin,
+                     borne_des_appuis(bruts))
         r["nom"] = nom
         r["profils"] = [str(f) for f in a.profil]
         reprises.append(r)
@@ -407,6 +494,11 @@ def main() -> int:
             print(f"    α = {r.get('alpha', 0.0):+.2f} — {r.get('verdict', '?')}{marque}")
             if r.get("sens"):
                 print(f"    {r['sens']}")
+            if r.get("reserve_appuis"):
+                print(f"    {r['reserve_appuis']}")
+            elif r.get("borne") in ("majorant", "minorant"):
+                print(f"    ⭐ appui au bord, mais α est un {r['borne']} — le "
+                      f"verdict tient malgré tout")
 
     for i, brut in enumerate(a.serie):
         nom = a.nom[i] if i < len(a.nom) else f"série {i + 1}"

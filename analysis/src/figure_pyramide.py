@@ -2,7 +2,7 @@
 """α est une pente, et deux résolutions doivent la lire pareil.
 
 ⚠⚠ **Le choix d'axe est tout le dessin.** α est défini comme
-@f$\\log(d_1/d_0) / \\log(n_1/n_0)@f$ : c'est la **pente** de l'écart mesuré contre la
+$\\log(d_1/d_0) / \\log(n_1/n_0)$ : c'est la **pente** de l'écart mesuré contre la
 profondeur de fenêtre, en échelle log-log. Le montrer autrement — deux barres, deux
 nombres — donne à lire un résultat sans donner à lire ce qu'il mesure.
 

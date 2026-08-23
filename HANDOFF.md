@@ -32,12 +32,24 @@ quoi que ce soit.
 
 | mur | ce qui est mesuré | document |
 |---|---|---|
-| le tracé ne suit pas de feuille | 8 graines candidates, α de +1,01 à +1,17, 5 profils plats | [`48`](docs/48_ou_monter_lexperience.md) |
+| le tracé ne suit pas de feuille | ⚠ **corrigé le 2026-08-23** : sur 27 séries `PHercParis4`, **une seule** porte un verdict — α = +1,12, deux appuis mesurés, *suit la fenêtre*. Les 26 autres reposent sur un appui au bord | [`51`](docs/51_une_pente_a_deux_appuis.md) puis [`48`](docs/48_ou_monter_lexperience.md) |
 | les patchs publiés ne se recollent pas | un patch PAR feuille, paire la plus proche à 79 µm ≈ 2× le seuil | [`44`](docs/44_ou_la_chaine_se_trouve.md) |
 | l'extension tangentielle est un point fixe | le cycle rogner-étendre converge vers ~6 cm² | [`44`](docs/44_ou_la_chaine_se_trouve.md) §7 |
 | la chaîne casse au sixième tour | et la repousse la coupe au troisième | [`43`](docs/43_la_chaine_des_spires.md) |
 
 ### Ce qui vient d'être fermé
+
+- ⚠⚠ **Une pente a deux appuis, et vingt séries rendaient le même nombre.** Le refus « profil
+  plat » de `49` agrège les amplitudes par un **maximum** — juste pour « y a-t-il quelque
+  chose ici », faux pour « quelle est la pente ». `analysis/src/appui_de_pente.py`
+  (37 témoins) classe chaque appui et transforme un écart au bord en **borne signée** plutôt
+  qu'en refus : appui étroit au bord ⇒ α majorant ⇒ une convergence tient ; appui large ⇒
+  minorant ⇒ une condamnation tient ; les deux ⇒ rien. Sur 132 séries : 92 exactes,
+  14 majorants, 0 minorant, 26 sans appui qui porte, **33 verdicts tombent**, 7 sauvés par le
+  signe, et **0 des 75 convergentes** n'est perdue — parce que le seul signe observé préserve
+  exactement ce qui est sous le seuil. ⭐⭐ **Vingt séries rendent +1,0135**, qui est
+  `log(192/48)/log(161/41)`, l'identité du couple de fenêtres. Voir
+  [`51`](docs/51_une_pente_a_deux_appuis.md).
 
 - **Le plafond de générations ne fabriquait pas le résultat** : à budget ×3,3 l'aire est
   ×11,5 mais α passe de +0,89 à +0,95, **sous le bruit du tireur** (0,16). Voir
@@ -65,6 +77,12 @@ quoi que ce soit.
   `tools/temoins_release.sh` a un verrou ; `tools/temoins.sh` n'en a pas encore.
 - **Un échec avec un code de retour zéro n'est pas un échec** : c'est le lecteur qui se
   trompe de convention.
+- **Une sonde qui cite son propre motif se matche elle-même** (septième fois, 2026-08-23 :
+  la garde anti-`@f$` citait le marqueur dans son commentaire et voyait `temoins.sh`). Le
+  remède n'est pas d'exclure le fichier — ça l'aveuglerait à une vraie occurrence — mais de
+  **composer la chaîne à l'exécution**, pour qu'elle n'existe nulle part dans la source.
+- **Les formules des documents s'écrivent entre dollars**, jamais avec le marqueur Doxygen,
+  qui s'affiche littéralement. Repris par l'auteur ; `temoins.sh` le garde désormais.
 
 ### La règle de commit, désormais vérifiée
 
@@ -601,7 +619,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./tools/temoins.sh                      # 69 batteries, 1730 contrôles hors ligne, tous verts
+./tools/temoins.sh                      # 72 batteries, 1829 contrôles hors ligne, tous verts
 ./tools/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)

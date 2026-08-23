@@ -844,6 +844,33 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 out.append((f"series saturees sur {g['grandeur']}",
                             [str(g["saturees"])], p.name))
 
+    p = racine / "docs" / "appui_de_pente.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        out.append(("series jugeables par leurs appuis", [str(d.get("series_jugees"))],
+                    p.name))
+        for cle, nom in (("exacte", "series a deux appuis mesures"),
+                         ("majorant", "series dont alpha est un majorant"),
+                         ("minorant", "series dont alpha est un minorant"),
+                         ("aucune", "series sans appui qui porte")):
+            v = (d.get("par_borne") or {}).get(cle)
+            if v is not None:
+                out.append((nom, [str(v)], p.name))
+        out.append(("series dont le verdict tombe",
+                    [str(len(d.get("series_qui_tombent") or []))], p.name))
+        out.append(("series sauvees par le signe",
+                    [str(len(d.get("series_sauvees_par_le_signe") or []))], p.name))
+        out.append(("series convergentes", [str(d.get("convergents"))], p.name))
+        # ⚠⚠ Le chiffre qui porte tout `51` : combien de series rendent l IDENTITE de leur
+        # couple de fenetres. Sans garde, il vieillirait en silence a la prochaine campagne.
+        if d.get("series_sur_une_identite") is not None:
+            out.append(("series sur l identite du couple de fenetres",
+                        [str(d["series_sur_une_identite"])], p.name))
+        for x in d.get("identites_du_couple_de_fenetres") or []:
+            if x.get("colle_a_l_identite"):
+                ajoute(f"alpha d identite {x['couches'][0]}c/{x['couches'][1]}c",
+                       x["alpha"], 4, p.name)
+
     p = racine / "docs" / "etalon_rendu.json"
     if p.exists():
         d = json.loads(p.read_text())

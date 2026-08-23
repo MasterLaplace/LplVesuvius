@@ -720,6 +720,15 @@ run "commandes du README"      "$ROOT/tools/readme_apparie.sh" --verifier
 # beta = 0, donc « propriete de la surface », alors qu elle dit seulement qu elle ne peut pas
 # monter plus haut. Mesure : 104 series sur pic_intensite_median.
 run "critere relatif"          uv run --project "$ROOT" python "$ROOT/analysis/src/critere_relatif.py" --verifier
+# ⚠⚠ Les APPUIS de la pente. Sa sonde centrale est le SIGNE : un appui etroit au bord rend
+# alpha majorant, un appui large le rend minorant, et inverser les deux ferait tenir
+# exactement les verdicts qui tombent. Mesure : 20 series rendaient l identite +1,0135 du
+# couple de fenetres 41c/161c, la meme valeur a la quatrieme decimale.
+run "appuis de la pente"       uv run --project "$ROOT" python "$ROOT/analysis/src/appui_de_pente.py" --verifier
+# ⚠ La figure des appuis. Sa sonde centrale est que les DEUX formes de domaine apparaissent,
+# une par panneau : un coin dit « une part des pentes est exclue », un lavis dit « aucune ».
+# Compter des traits laisserait passer deux panneaux dessines pareil.
+run "figure des appuis"        uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_appuis.py" --verifier
 # ⚠⚠ La figure de la pyramide. Sa sonde centrale est celle de l AXE : au niveau 1, 21
 # tranches de 4,8 µm couvrent ce que 41 de 2,4 couvrent. Tracer contre le compte de tranches
 # decalerait les deux series d un facteur deux et montrerait un desaccord qui n existe pas.
@@ -818,6 +827,28 @@ if uv run python "$ROOT/analysis/src/verifier_chiffres.py" "$ROOT"/docs/*.md \
   printf '✅ %s\n' "$(grep -c '✅' /tmp/chiffres.log) chiffres retrouves"
 else
   printf '❌ ECHEC\n'; sed 's/^/       /' /tmp/chiffres.log | tail -6; FAIL=$((FAIL + 1))
+fi
+
+# ⚠⚠ GARDE DE SYNTAXE DES FORMULES. Les documents sont du Markdown : les maths s'y ecrivent
+# entre dollars, jamais avec le marqueur Doxygen (arobase, f, dollar), qui s'affiche
+# litteralement au lieu de rendre une formule. Repris par l'auteur le 2026-08-23.
+#
+# ⚠⚠ ET LE MOTIF N'EST PAS ECRIT EN CLAIR DANS CE FICHIER, deliberement. Une premiere
+# version le citait dans son propre commentaire, donc le grep matchait `temoins.sh` et la
+# garde etait rouge en permanence -- le piege « une sonde qui scanne son propre fichier se
+# matche elle-meme », paye six fois dans ce depot. Le remede n'est PAS d'exclure ce fichier
+# du balayage (ce qui l'aveuglerait a une vraie occurrence ici) : c'est de composer la
+# chaine a l'execution, pour qu'elle n'existe nulle part dans la source.
+printf '  %-30s ' "syntaxe des formules"
+DOXY=$(printf '@%s$' f)
+FORM=$(grep -rlnF --include='*.md' --include='*.py' --include='*.sh' -- "$DOXY" \
+       "$ROOT/docs" "$ROOT/analysis" "$ROOT/tools" "$ROOT/apprendre" "$ROOT/README.md" \
+       2>/dev/null | grep -v '/\.git/' | sed "s#$ROOT/##" | tr '\n' ' ')
+if [ -z "$FORM" ]; then
+  printf '✅ aucun marqueur Doxygen dans les documents\n'
+else
+  printf '⚠ marqueur Doxygen au lieu de dollars dans : %s\n' "$FORM"
+  FAIL=$((FAIL + 1))
 fi
 
 # ⚠⚠ GARDE ANTI-DERIVE DU DEPOT, pas une batterie d'assertions. Un depot qui grossit

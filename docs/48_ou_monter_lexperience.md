@@ -181,6 +181,13 @@ dans la même prédiction avait rendu α = +0,89 puis +1,12. Le 2×2 a donc ét�
 > est exactement le comportement d'une différence due au bruit. Il faudrait au moins **0,20**
 > pour distinguer. Et l'indécidabilité suit la graine à **chacune** des huit répétitions.
 
+> ⚠⚠ **Corrigé le 2026-08-23.** La plupart de ces cellules rendent l'identité **+1,0135** du
+> couple de fenêtres ([`51`](51_une_pente_a_deux_appuis.md)) : leur accord est arithmétique
+> et non empirique. Et l'« étendue intra-cellule » de 0,18 mélange deux choses non séparées
+> — la vraie variation du traceur, et le saut entre une cellule tombée sur l'identité et une
+> cellule qui mesure. **La conclusion « c'est l'endroit qui décide » n'est plus portée par
+> ces nombres.**
+
 ⭐ **Le bruit de tirage est mesuré, plus déduit** : l'étendue intra-cellule vaut **0,18** sur
 la cellule la plus dispersée. ⚠ Ce n'est pas la même quantité que le ±0,2 de
 [`43`](43_la_chaine_des_spires.md) — celui-ci est une **demi-largeur** (bande de 0,4) sur un
@@ -242,6 +249,25 @@ d'effet, ce serait une absence de puissance.
 [`49`](49_alpha_ne_separe_pas_deux_pannes.md) : elles rapportent `41c→48,0` et `161c→192,0`,
 c'est-à-dire les **bords de fenêtre**, dont le rapport vaut celui des fenêtres — α ≈ 1 par
 identité arithmétique, quoi qu'il y ait dans le volume.
+
+### ⚠⚠ Corrigé le 2026-08-23 : les trois α de ce tableau n'en sont pas
+
+[`51`](51_une_pente_a_deux_appuis.md) mesure que les **trois** candidats `ps256` ont eux
+aussi leur fenêtre étroite sous le seuil de détection, et que deux d'entre eux ont *les
+deux* écarts posés exactement sur la demi-fenêtre. Le refus de `49` ne les voyait pas parce
+qu'il prend l'amplitude **maximale** des fenêtres — règle juste pour « y a-t-il quelque
+chose ici », fausse pour « quelle est la pente ».
+
+> ⭐⭐ **Vingt séries de l'arbre rendent exactement +1,0135**, qui est
+> $\log(192/48)/\log(161/41)$ — l'identité du couple de fenêtres, indépendante de la
+> graine, de la prédiction et du tirage. La colonne « résultat » ci-dessus lisait donc, pour
+> les huit lignes, une propriété du réglage de mesure et non du rouleau.
+
+⚠ **La conclusion pratique ne bouge pas** : un appui au bord veut dire « aucun pic dans la
+fenêtre », ce qui condamne la trace de la même façon. C'est la **quantification** qui tombe.
+⭐ Et sur les 27 séries `PHercParis4` de l'arbre, il en reste **une** dont les deux appuis
+mesurent — `paris4_croise/ps256_sur_graine_ps256`, α = **+1,12**, borne exacte, *suit la
+fenêtre*. Le mur tient sur elle, donc sur une mesure au lieu de vingt-sept.
 
 ### ⚠⚠ Et une colonne dont personne ne parlait : elles butent toutes sur le plafond
 

@@ -1,0 +1,2715 @@
+{
+  "series_jugees": 132,
+  "par_borne": {
+    "exacte": 92,
+    "aucune": 26,
+    "majorant": 14
+  },
+  "identites_du_couple_de_fenetres": [
+    {
+      "couches": [
+        41,
+        161
+      ],
+      "alpha": 1.0135,
+      "series": 20,
+      "identite_du_couple": 1.013497314592548,
+      "colle_a_l_identite": true,
+      "exemples": [
+        "data/paris4_candidats/m7_c0",
+        "data/paris4_candidats/m7_c1",
+        "data/paris4_candidats/m7_c2"
+      ]
+    }
+  ],
+  "series_sur_une_identite": 20,
+  "series_qui_tombent": [
+    "data/boucle/corrige_gen5",
+    "data/boucle/temoin",
+    "data/convergence_essais/essai_scale1",
+    "data/leurs_parametres",
+    "data/paris4_candidats/m7_c0",
+    "data/paris4_candidats/m7_c1",
+    "data/paris4_candidats/m7_c2",
+    "data/paris4_candidats/m7_c3",
+    "data/paris4_candidats/m7_c4",
+    "data/paris4_candidats/ps256_c0",
+    "data/paris4_candidats/ps256_c1",
+    "data/paris4_candidats/ps256_c2",
+    "data/paris4_croise/m7_sur_graine_m7",
+    "data/paris4_croise/m7_sur_graine_ps256",
+    "data/paris4_croise/ps256_sur_graine_m7",
+    "data/paris4_croise_r3/m7_sur_graine_m7_r1",
+    "data/paris4_croise_r3/m7_sur_graine_m7_r2",
+    "data/paris4_croise_r3/m7_sur_graine_m7_r3",
+    "data/paris4_croise_r3/m7_sur_graine_ps256_r1",
+    "data/paris4_croise_r3/m7_sur_graine_ps256_r2",
+    "data/paris4_croise_r3/m7_sur_graine_ps256_r3",
+    "data/paris4_croise_r3/ps256_sur_graine_m7_r1",
+    "data/paris4_croise_r3/ps256_sur_graine_m7_r2",
+    "data/paris4_croise_r3/ps256_sur_graine_m7_r3",
+    "data/paris4_croise_r3/ps256_sur_graine_ps256_r1",
+    "data/paris4_croise_r3/ps256_sur_graine_ps256_r2",
+    "data/paris4_croise_r3/ps256_sur_graine_ps256_r3",
+    "data/paris4_plafond/ps256_c2_g60",
+    "data/petite_trace/g30",
+    "data/petite_trace/g60",
+    "data/prediction_paris4/m7",
+    "data/prediction_paris4/ps256",
+    "data/spires_repousse/spire03"
+  ],
+  "series_sauvees_par_le_signe": [
+    "data/spires/spire05",
+    "data/spires_dedans/spire02",
+    "data/spires_pas0125/spire10",
+    "data/spires_pas0125_compense/spire06",
+    "data/spires_pas025/spire06",
+    "data/spires_pic025/spire06",
+    "data/spires_portee0375/spire06"
+  ],
+  "convergents": 75,
+  "convergents_qui_tombent": [],
+  "seuil_alpha": 0.7,
+  "detail": {
+    "data/boucle/corrige_gen40": {
+      "alpha": 0.8868211705272998,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        154.473,
+        519.591
+      ],
+      "plafonds_um": [
+        187.24,
+        748.96
+      ]
+    },
+    "data/boucle/corrige_gen5": {
+      "alpha": 1.033528260069245,
+      "appui_etroit": "plat",
+      "appui_large": "mesure",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        168.516,
+        692.788
+      ],
+      "plafonds_um": [
+        187.24,
+        748.96
+      ]
+    },
+    "data/boucle/corrige_gen5_poids100": {
+      "alpha": 0.9533743752962804,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        177.87800000000001,
+        655.34
+      ],
+      "plafonds_um": [
+        187.24,
+        748.96
+      ]
+    },
+    "data/boucle/temoin": {
+      "alpha": 0.9759976193067708,
+      "appui_etroit": "au_bord",
+      "appui_large": "mesure",
+      "borne": "majorant",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        187.24,
+        711.5120000000001
+      ],
+      "plafonds_um": [
+        187.24,
+        748.96
+      ]
+    },
+    "data/convergence_essais/essai_b": {
+      "alpha": 1.2053075714474089,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        140.43,
+        730.236
+      ],
+      "plafonds_um": [
+        187.24,
+        748.96
+      ]
+    },
+    "data/convergence_essais/essai_ng2": {
+      "alpha": 0.6451004127537756,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        112.344,
+        271.498
+      ],
+      "plafonds_um": [
+        187.24,
+        748.96
+      ]
+    },
+    "data/convergence_essais/essai_scale1": {
+      "alpha": 0.9949878759602514,
+      "appui_etroit": "au_bord",
+      "appui_large": "mesure",
+      "borne": "majorant",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        187.24,
+        730.236
+      ],
+      "plafonds_um": [
+        187.24,
+        748.96
+      ]
+    },
+    "data/ext_apres_rognage/gen125": {
+      "alpha": 0.422156346775734,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        25.92
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/ext_budget/gen200": {
+      "alpha": 1.313046516751612,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        73.44,
+        259.20000000000005
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/ext_chaine/gen100": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/ext_chaine/pas001": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/ext_chaine/pas002": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/ext_chaine_cumul/pas001": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/ext_chaine_cumul/pas002": {
+      "alpha": 1.039633928149274,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        120.96000000000001,
+        328.32000000000005
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/ext_chaine_fin/pas001": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/ext_chaine_fin/pas002": {
+      "alpha": 1.8060070521792715,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        25.92,
+        146.88
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/ext_cycle_propre/gen110": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/ext_determinisme/gen100": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/ext_determinisme/gen100_bis2": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/extension_tangentielle/gen001": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/extension_tangentielle/gen003": {
+      "alpha": 0.422156346775734,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        25.92
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/extension_tangentielle/gen010": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/leurs_parametres": {
+      "alpha": 1.0335282600692448,
+      "appui_etroit": "plat",
+      "appui_large": "mesure",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        155.52,
+        639.36
+      ],
+      "plafonds_um": [
+        172.8,
+        691.2
+      ]
+    },
+    "data/paris4_candidats/m7_c0": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_candidats/m7_c1": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_candidats/m7_c2": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_candidats/m7_c3": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_candidats/m7_c4": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_candidats/ps256_c0": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_candidats/ps256_c1": {
+      "alpha": 1.166820592048243,
+      "appui_etroit": "plat",
+      "appui_large": "mesure",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        36.0,
+        177.6
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_candidats/ps256_c2": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_croise/m7_sur_graine_m7": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_croise/m7_sur_graine_ps256": {
+      "alpha": 0.946554025096736,
+      "appui_etroit": "au_bord",
+      "appui_large": "mesure",
+      "borne": "majorant",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        175.2
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_croise/ps256_sur_graine_m7": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_croise/ps256_sur_graine_ps256": {
+      "alpha": 1.1196375263912042,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        38.4,
+        177.6
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_croise_r3/m7_sur_graine_m7_r1": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_croise_r3/m7_sur_graine_m7_r2": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_croise_r3/m7_sur_graine_m7_r3": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_croise_r3/m7_sur_graine_ps256_r1": {
+      "alpha": 0.9663142489355092,
+      "appui_etroit": "au_bord",
+      "appui_large": "mesure",
+      "borne": "majorant",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        180.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_croise_r3/m7_sur_graine_ps256_r2": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_croise_r3/m7_sur_graine_ps256_r3": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_croise_r3/ps256_sur_graine_m7_r1": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_croise_r3/ps256_sur_graine_m7_r2": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_croise_r3/ps256_sur_graine_m7_r3": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_croise_r3/ps256_sur_graine_ps256_r1": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_croise_r3/ps256_sur_graine_ps256_r2": {
+      "alpha": 0.9364699510843889,
+      "appui_etroit": "au_bord",
+      "appui_large": "mesure",
+      "borne": "majorant",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        172.79999999999998
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_croise_r3/ps256_sur_graine_ps256_r3": {
+      "alpha": 1.0948125717699624,
+      "appui_etroit": "plat",
+      "appui_large": "mesure",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        40.8,
+        182.4
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/paris4_plafond/ps256_c2_g60": {
+      "alpha": 0.9103570404249541,
+      "appui_etroit": "plat",
+      "appui_large": "mesure",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        45.6,
+        158.4
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/petite_trace/g30": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        172.8,
+        691.2
+      ],
+      "plafonds_um": [
+        172.8,
+        691.2
+      ]
+    },
+    "data/petite_trace/g60": {
+      "alpha": 0.8728573451391766,
+      "appui_etroit": "au_bord",
+      "appui_large": "mesure",
+      "borne": "majorant",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        172.8,
+        570.24
+      ],
+      "plafonds_um": [
+        172.8,
+        691.2
+      ]
+    },
+    "data/prediction_paris4/m7": {
+      "alpha": 1.013497314592548,
+      "appui_etroit": "au_bord",
+      "appui_large": "au_bord",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        192.0
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/prediction_paris4/ps256": {
+      "alpha": 0.8946823621293564,
+      "appui_etroit": "au_bord",
+      "appui_large": "mesure",
+      "borne": "majorant",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        41,
+        161
+      ],
+      "ecarts_um": [
+        48.0,
+        163.2
+      ],
+      "plafonds_um": [
+        48.0,
+        192.0
+      ]
+    },
+    "data/rogne/gen10": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/rogne/gen25": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/rogne/gen50": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/rogne_cycle2/gen103": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/rogne_cycle2/gen106": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires/spire00": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires/spire01": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        90.72,
+        90.72
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires/spire02": {
+      "alpha": 0.1898269439600407,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        43.2,
+        51.84
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires/spire03": {
+      "alpha": 0.5318540975687568,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        12.96,
+        21.6
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires/spire04": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        77.76,
+        77.76
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires/spire05": {
+      "alpha": 0.2995246947530635,
+      "appui_etroit": "au_bord",
+      "appui_large": "mesure",
+      "borne": "majorant",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        129.60000000000002,
+        172.8
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires/spire06": {
+      "alpha": 1.4754004773539575,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        69.12,
+        285.12
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_dedans/spire00": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_dedans/spire01": {
+      "alpha": 0.037864742235528444,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        116.64000000000001,
+        120.96000000000001
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_dedans/spire02": {
+      "alpha": 0.6863839101129505,
+      "appui_etroit": "au_bord",
+      "appui_large": "mesure",
+      "borne": "majorant",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        129.60000000000002,
+        250.56
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_dedans/spire03": {
+      "alpha": 0.9855633335447544,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        112.32000000000001,
+        289.44
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_dedans/spire04": {
+      "alpha": 0.7216810415287975,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        8.64,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_dedans/spire05": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        8.64,
+        8.64
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_dedans/spire06": {
+      "alpha": 0.2570222358974111,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        108.0,
+        138.24
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125/spire00": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125/spire01": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        82.08000000000001,
+        82.08000000000001
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125/spire02": {
+      "alpha": 0.7582169186704452,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        60.480000000000004,
+        125.28000000000002
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125/spire03": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        34.56,
+        34.56
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125/spire04": {
+      "alpha": 0.7216810415287975,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        34.56,
+        69.12
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125/spire05": {
+      "alpha": 0.5318540975687567,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        77.76,
+        129.6
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125/spire06": {
+      "alpha": 0.2793072505812094,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        112.32000000000001,
+        146.88
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125/spire07": {
+      "alpha": 0.5826527410339327,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        103.68,
+        181.44
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125/spire08": {
+      "alpha": 1.1292753934519375,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        103.68,
+        306.72
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125/spire09": {
+      "alpha": 1.174919268376782,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        95.04,
+        293.76
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125/spire10": {
+      "alpha": 0.3987583809867963,
+      "appui_etroit": "au_bord",
+      "appui_large": "mesure",
+      "borne": "majorant",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        129.60000000000002,
+        190.08
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125_compense/spire00": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125_compense/spire01": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        86.4,
+        86.4
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125_compense/spire02": {
+      "alpha": 0.2021485748634774,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        60.480000000000004,
+        73.44
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125_compense/spire03": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        34.56,
+        34.56
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125_compense/spire04": {
+      "alpha": 0.35032333821823963,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        43.2,
+        60.480000000000004
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125_compense/spire05": {
+      "alpha": 0.10969775079302287,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        77.76,
+        86.4
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125_compense/spire06": {
+      "alpha": 0.24611987806298202,
+      "appui_etroit": "au_bord",
+      "appui_large": "mesure",
+      "borne": "majorant",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        129.60000000000002,
+        164.16000000000003
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125_compense/spire07": {
+      "alpha": 0.9115079854888382,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        86.4,
+        207.36
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125_compense/spire08": {
+      "alpha": 1.3899572663675137,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        86.4,
+        328.32000000000005
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas0125_compense/spire09": {
+      "alpha": 1.0618134436414954,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        95.04,
+        263.52000000000004
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas025/spire00": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas025/spire01": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        86.4,
+        86.4
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas025/spire02": {
+      "alpha": 0.2021485748634774,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        60.480000000000004,
+        73.44
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas025/spire03": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        34.56,
+        34.56
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas025/spire04": {
+      "alpha": 0.1739309762667748,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        47.52,
+        56.160000000000004
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas025/spire05": {
+      "alpha": 0.09471669147121034,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        90.72,
+        99.36000000000001
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas025/spire06": {
+      "alpha": 0.24611987806298202,
+      "appui_etroit": "au_bord",
+      "appui_large": "mesure",
+      "borne": "majorant",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        129.60000000000002,
+        164.16000000000003
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas025/spire07": {
+      "alpha": 0.7022194345296785,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        116.64000000000001,
+        228.96000000000004
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas025/spire08": {
+      "alpha": 1.3207304310349246,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        77.76,
+        276.48
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas05/spire00": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas05/spire01": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        86.4,
+        86.4
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas05/spire02": {
+      "alpha": 0.16049639425819898,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        51.84,
+        60.480000000000004
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas05/spire03": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        25.92,
+        25.92
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas05/spire04": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        60.480000000000004,
+        60.480000000000004
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas05/spire05": {
+      "alpha": 0.16049639425819898,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        103.68,
+        120.96000000000001
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pas05/spire06": {
+      "alpha": 0.5826527410339327,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        103.68,
+        181.44
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pic025/spire00": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pic025/spire01": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        86.4,
+        86.4
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pic025/spire02": {
+      "alpha": 0.2021485748634774,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        60.480000000000004,
+        73.44
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pic025/spire03": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        34.56,
+        34.56
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pic025/spire04": {
+      "alpha": 0.35032333821823963,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        43.2,
+        60.480000000000004
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pic025/spire05": {
+      "alpha": 0.10969775079302287,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        77.76,
+        86.4
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pic025/spire06": {
+      "alpha": 0.24611987806298202,
+      "appui_etroit": "au_bord",
+      "appui_large": "mesure",
+      "borne": "majorant",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        129.60000000000002,
+        164.16000000000003
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pic025/spire07": {
+      "alpha": 0.9115079854888382,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        86.4,
+        207.36
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pic025/spire08": {
+      "alpha": 1.3899572663675137,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        86.4,
+        328.32000000000005
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_pic025/spire09": {
+      "alpha": 1.0618134436414954,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        95.04,
+        263.52000000000004
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_portee0375/spire00": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_portee0375/spire01": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        86.4,
+        86.4
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_portee0375/spire02": {
+      "alpha": 0.26165995251753515,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        60.480000000000004,
+        77.76
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_portee0375/spire03": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        30.240000000000002,
+        30.240000000000002
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_portee0375/spire04": {
+      "alpha": 0.1739309762667748,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        47.52,
+        56.160000000000004
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_portee0375/spire05": {
+      "alpha": 0.6119832907357747,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        86.4,
+        155.52
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_portee0375/spire06": {
+      "alpha": 0.24611987806298202,
+      "appui_etroit": "au_bord",
+      "appui_large": "mesure",
+      "borne": "majorant",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        129.60000000000002,
+        164.16000000000003
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_portee0375/spire07": {
+      "alpha": 1.4910573988609552,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        69.12,
+        289.44
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_portee0375/spire08": {
+      "alpha": 1.190119037007185,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "suit la fenêtre",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        95.04000000000002,
+        298.08000000000004
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_portee0375/spire09": {
+      "alpha": 0.5318540975687568,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        116.64000000000001,
+        194.40000000000003
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_repousse/spire00": {
+      "alpha": 0.0,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        17.28,
+        17.28
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_repousse/spire01": {
+      "alpha": 0.42215634677573416,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        86.4,
+        129.60000000000002
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_repousse/spire02": {
+      "alpha": 0.572689357253571,
+      "appui_etroit": "mesure",
+      "appui_large": "mesure",
+      "borne": "exacte",
+      "verdict": "converge",
+      "tient": true,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        64.80000000000001,
+        112.32000000000001
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    },
+    "data/spires_repousse/spire03": {
+      "alpha": 1.4605718246282915,
+      "appui_etroit": "plat",
+      "appui_large": "mesure",
+      "borne": "aucune",
+      "verdict": "suit la fenêtre",
+      "tient": false,
+      "couches": [
+        31,
+        81
+      ],
+      "ecarts_um": [
+        64.80000000000001,
+        263.52000000000004
+      ],
+      "plafonds_um": [
+        129.60000000000002,
+        345.6
+      ]
+    }
+  }
+}
