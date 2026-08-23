@@ -1,8 +1,84 @@
-# Reprise de session — état au 2026-08-19
+# Reprise de session
 
-Document de passation. **À lire en entier avant de reprendre.**
+Document de passation. ⚠ Le bloc **REPRISE** ci-dessous est l'état courant ; le reste est
+l'historique, daté, et se lit ensuite.
 
 ---
+
+---
+
+## ⭐ REPRISE — état au 2026-08-23
+
+Ce bloc est en tête pour une raison : c'est ce qu'il faut lire en premier après une coupure.
+
+### Où en est le dépôt
+
+`MasterLaplace/LplVesuvius`, **privé**, `main` à jour. Une branche `release/progress-prize`
+et un tag `v0.1.0-progress` portent la vue allégée : 922 fichiers sur 1116, 26 Mo. Elle se
+reconstruit en une commande et **ne se tague que si sa batterie passe** :
+
+```bash
+tools/faire_la_release.sh v0.1.1-progress
+git push origin release/progress-prize && git push origin v0.1.1-progress
+```
+
+### ⚠⚠ Le cadrage, qui n'a jamais changé
+
+**L'objectif est le Grand Prix, quel que soit le temps que ça prend.** Le Progress Prize est
+un jalon en chemin, pas la cible. Ne jamais rédiger comme si l'échéance du 31 août fermait
+quoi que ce soit.
+
+### Les quatre murs, mesurés, sur lesquels le travail continue
+
+| mur | ce qui est mesuré | document |
+|---|---|---|
+| le tracé ne suit pas de feuille | 8 graines candidates, α de +1,01 à +1,17, 5 profils plats | [`48`](docs/48_ou_monter_lexperience.md) |
+| les patchs publiés ne se recollent pas | un patch PAR feuille, paire la plus proche à 79 µm ≈ 2× le seuil | [`44`](docs/44_ou_la_chaine_se_trouve.md) |
+| l'extension tangentielle est un point fixe | le cycle rogner-étendre converge vers ~6 cm² | [`44`](docs/44_ou_la_chaine_se_trouve.md) §7 |
+| la chaîne casse au sixième tour | et la repousse la coupe au troisième | [`43`](docs/43_la_chaine_des_spires.md) |
+
+### Ce qui vient d'être fermé
+
+- **Le plafond de générations ne fabriquait pas le résultat** : à budget ×3,3 l'aire est
+  ×11,5 mais α passe de +0,89 à +0,95, **sous le bruit du tireur** (0,16). Voir
+  [`50`](docs/50_le_rendu_attendait_la_memoire.md) §8. ⚠ Un seul tirage par budget, donc on
+  ne peut pas *affirmer* que le budget est sans effet, seulement qu'on ne le voit pas.
+- **La pyramide préserve α** : 0,02 d'écart entre niveaux 0 et 1 sur la petite surface, 0,06
+  entre 1 et 2 sur la grande, pour une résolution de 0,20. Le plancher dépend de la
+  **surface** : `depth_profile` refuse une image plus petite que sa fenêtre de 1024 px.
+- **Le critère auto-référentiel a sa définition** : `analysis/src/critere_relatif.py`
+  (23 témoins). Ce n'est pas un critère de plus, c'est **le test qu'un candidat doit
+  passer** — β = log(C₁/C₀)/log(n₁/n₀), lu comme α. ⚠ Appliqué au matériel réel : **une
+  seule grandeur sur treize se lit en absolu** (`tiers_central`, 11 séries). Le profil
+  n'offre pas de second critère absolu, ce qui **renforce** `47` au lieu de le lever.
+
+### ⚠ Les pièges qui se sont repayés, et leur remède définitif
+
+- **`pkill -f` et `pgrep -f` matchent leur propre ligne de commande.** Payé six fois, dont
+  une où mon shell est mort (exit 144). Tuer **par PID**.
+- **Une sonde qui scanne son propre fichier se matche elle-même.** Payé cinq fois. Le remède
+  n'est pas de couper le motif : c'est de l'**ancrer sur la syntaxe** (début de ligne,
+  position de commande).
+- **Éditer un script pendant qu'il tourne le casse** : `bash` lit par offset, une insertion
+  décale les octets et il reprend au milieu d'un token.
+- **Un auto-test qui écrit sa fixture à un chemin FIXE ne supporte pas deux exécutions.**
+  `tools/temoins_release.sh` a un verrou ; `tools/temoins.sh` n'en a pas encore.
+- **Un échec avec un code de retour zéro n'est pas un échec** : c'est le lecteur qui se
+  trompe de convention.
+
+### La règle de commit, désormais vérifiée
+
+`type(scope): sujet`, **en anglais**, **zéro tiret cadratin**. Types : `chore clean docs feat
+fix measure mesure perf resultat test`. `tools/format_des_commits.sh` (14 contrôles) le
+vérifie, et la détection du français est déléguée à `analysis/src/langue.py`.
+
+### Vérifier que tout va bien, en deux commandes
+
+```bash
+./tools/temoins.sh            # tout, hors ligne
+./tools/temoins_release.sh    # ce que la release livre, avec son verrou
+```
+
 
 ## 0. ⚠⚠ LE CADRAGE — à lire avant tout le reste
 
@@ -525,7 +601,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./tools/temoins.sh                      # 61 batteries, 1632 contrôles hors ligne, tous verts
+./tools/temoins.sh                      # 69 batteries, 1730 contrôles hors ligne, tous verts
 ./tools/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)

@@ -715,6 +715,11 @@ run "format des commits"       "$ROOT/tools/format_des_commits.sh" --verifier
 # et hors ligne, TOURNER. Un exemple perime est la premiere cause de perte de confiance
 # dans une doc, et il ne se voit jamais a la relecture -- le chemin a change, la prose non.
 run "commandes du README"      "$ROOT/tools/readme_apparie.sh" --verifier
+# ⚠⚠ Le test qu un critere candidat doit passer avant qu on ecrive un seuil dessus. Sa
+# sonde centrale est un REFUS : une grandeur collee a sa borne aux deux profondeurs rendrait
+# beta = 0, donc « propriete de la surface », alors qu elle dit seulement qu elle ne peut pas
+# monter plus haut. Mesure : 104 series sur pic_intensite_median.
+run "critere relatif"          uv run --project "$ROOT" python "$ROOT/analysis/src/critere_relatif.py" --verifier
 # ⚠⚠ La figure de la pyramide. Sa sonde centrale est celle de l AXE : au niveau 1, 21
 # tranches de 4,8 µm couvrent ce que 41 de 2,4 couvrent. Tracer contre le compte de tranches
 # decalerait les deux series d un facteur deux et montrerait un desaccord qui n existe pas.

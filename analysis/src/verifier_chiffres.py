@@ -829,6 +829,21 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             if isinstance(d.get(cle), (int, float)):
                 ajoute(nom, d[cle], 2, pv.name, signe=(cle == "variation"))
 
+    # ⚠⚠ Le test du critere relatif. Le nombre qui compte n est pas un beta mais le COMPTE
+    # de grandeurs lisibles en absolu : s il montait sans qu on ait ajoute de mesure, c est
+    # qu un refus aurait cesse de refuser.
+    p = racine / "docs" / "critere_relatif.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        lis = [g for g in d.get("grandeurs") or []
+               if g.get("verdict") == "lisible en absolu"]
+        out.append(("grandeurs lisibles en absolu", [str(len(lis))], p.name))
+        out.append(("series a deux profondeurs", [str(d.get("series_utilisables"))], p.name))
+        for g in d.get("grandeurs") or []:
+            if g.get("saturees", 0) >= 50:
+                out.append((f"series saturees sur {g['grandeur']}",
+                            [str(g["saturees"])], p.name))
+
     p = racine / "docs" / "etalon_rendu.json"
     if p.exists():
         d = json.loads(p.read_text())
