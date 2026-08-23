@@ -334,6 +334,38 @@ un lecteur ne peut pas le deviner.
 Élargir le regard jusqu'à ce que la mémoire le permette ne fait pas apparaître de pic à
 l'intérieur.
 
+### ⭐⭐⭐ Le contraste : 0 sur 75 contre 34 sur 63
+
+Trente-neuf séries rendent un verdict que leurs appuis ne portent pas, donc **empiler des α
+ne dit plus rien**. Mais « la fenêtre étroite montre-t-elle du relief » est une question
+**binaire, posée à l'intérieur de chaque fenêtre** — ni seuil à régler, ni profondeurs à
+apparier, ni pente à poser sur deux appuis.
+
+| | séries |
+|---|---:|
+| séries qui **convergent** dont la fenêtre étroite est plate | **0 / 75** |
+| séries **condamnées** dont la fenêtre étroite est plate | **34 / 63** |
+
+> ⭐⭐ **Pas une seule.** Sur une surface qui suit une feuille, le relief est **déjà là dans
+> une fenêtre étroite** — c'est ce que veut dire « suivre une feuille ». Sur une surface
+> posée en travers, il n'apparaît qu'en élargissant, c'est-à-dire que ce qu'on lit est la
+> fenêtre et non la surface.
+
+⚠ **Ce n'est pas circulaire, et il faut le dire.** La partition se fait sur le **signe de α**,
+qui vient des écarts ; la platitude vient des **amplitudes**. Deux grandeurs différentes des
+mêmes profils. Elles sont liées par un mécanisme — un pic dans la fenêtre donne à la fois un
+écart stable et une amplitude franche — et ce lien **est** le contenu du constat, pas son
+défaut.
+
+⚠ Le contraste n'est pas parfait dans l'autre sens : 29 séries condamnées ont une fenêtre
+étroite qui mesure. La condition est donc **suffisante et non nécessaire** — une fenêtre
+étroite plate condamne, une fenêtre étroite qui mesure n'absout pas.
+
+⚠⚠ Et la lecture porte sur l'**amplitude**, pas sur l'état d'appui : `appui()` fait gagner
+« au bord » sur « plat » quand les deux sont vrais, ce qui est juste pour choisir un signe de
+borne et faux pour « cette fenêtre montre-t-elle du relief ». Une fenêtre à la fois plate et
+au bord est plate. Sondé dans les deux sens.
+
 ### ⭐ Le témoin positif existe déjà dans l'arbre, et il n'a rien coûté
 
 Si « le pic est sur un bord » condamnait tout le monde, ça ne condamnerait personne. Les

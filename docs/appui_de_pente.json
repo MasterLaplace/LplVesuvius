@@ -5,6 +5,13 @@
     "aucune": 30,
     "majorant": 16
   },
+  "contraste_des_appuis": {
+    "convergentes": 75,
+    "convergentes_appui_etroit_plat": 0,
+    "condamnees": 63,
+    "condamnees_appui_etroit_plat": 34,
+    "convergentes_plates_nommees": []
+  },
   "identites_du_couple_de_fenetres": [
     {
       "couches": [

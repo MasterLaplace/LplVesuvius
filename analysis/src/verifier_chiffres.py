@@ -861,6 +861,19 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         out.append(("series sauvees par le signe",
                     [str(len(d.get("series_sauvees_par_le_signe") or []))], p.name))
         out.append(("series convergentes", [str(d.get("convergents"))], p.name))
+        # ⚠⚠ LE CONTRASTE, qui est le constat le plus fort du document : aucune serie
+        # convergente n a de fenetre etroite plate. Un contre-exemple futur doit etre
+        # bruyant, donc les quatre comptes sont gardes.
+        # ⚠⚠ Ecrits en PAIRE, jamais nus. « 0 » et « 34 » font un et deux caracteres : le
+        # garde ne peut pas les chercher, et un ✅ dessus ne voudrait rien dire. C est le
+        # conseil que ce fichier donne ailleurs, applique au constat le plus fort de `51`.
+        c = d.get("contraste_des_appuis") or {}
+        for a, b, nom in (("convergentes_appui_etroit_plat", "convergentes",
+                           "convergentes a fenetre etroite plate"),
+                          ("condamnees_appui_etroit_plat", "condamnees",
+                           "condamnees a fenetre etroite plate")):
+            if c.get(a) is not None and c.get(b) is not None:
+                out.append((nom, [f"{c[a]} / {c[b]}", f"{c[a]}/{c[b]}"], p.name))
         # ⚠⚠ Le chiffre qui porte tout `51` : combien de series rendent l IDENTITE de leur
         # couple de fenetres. Sans garde, il vieillirait en silence a la prochaine campagne.
         if d.get("series_sur_une_identite") is not None:

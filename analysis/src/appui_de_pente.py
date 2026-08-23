@@ -180,6 +180,57 @@ def juger_serie(xs: list[dict]) -> dict | None:
             "plafonds_um": [e.get("plafond_um"), g.get("plafond_um")]}
 
 
+def contraste_des_appuis(par: dict[str, list[dict]]) -> dict:
+    """Une surface posée sur une feuille a-t-elle le même genre d'appuis que la nôtre ?
+
+    ⚠⚠ **La question que α seul ne peut pas trancher sur ce rouleau.** Trente-neuf séries
+    rendent un verdict que leurs appuis ne portent pas, donc empiler des α ne dit plus rien.
+    Mais l'ÉTAT d'un appui — le pic est-il sur un bord de la fenêtre — est une question
+    binaire posée à l'intérieur de chaque fenêtre, quelle que soit sa profondeur, et elle ne
+    demande ni seuil à régler ni profondeurs appariées.
+
+    ⭐ Ce que ça mesure : sur une surface qui suit une feuille, le relief est **déjà là dans
+    une fenêtre étroite**. Sur une surface posée en travers, il n'apparaît qu'en élargissant
+    — c'est-à-dire que ce qu'on lit est la fenêtre et non la surface.
+
+    ⚠ **Ce n'est pas circulaire, et il faut le dire.** La partition se fait sur le SIGNE de α,
+    qui vient des écarts ; l'état de l'appui vient des amplitudes. Deux grandeurs différentes
+    des mêmes profils. Elles sont liées par un mécanisme — un pic dans la fenêtre donne à la
+    fois un écart stable et une amplitude franche — et ce lien est le contenu du constat, pas
+    son défaut.
+    """
+    conv_plat = conv_total = cond_plat = cond_total = 0
+    exemples: list[str] = []
+    for k, xs in sorted(par.items()):
+        j = juger_serie(xs)
+        if not j or j["alpha"] is None:
+            continue
+        # ⚠⚠ On lit l AMPLITUDE de la fenetre etroite, pas son etat d appui. `appui()` fait
+        # gagner « au bord » sur « plat » quand les deux sont vrais -- c est juste pour
+        # choisir un SIGNE de borne, et faux pour la question posee ici, qui est « cette
+        # fenetre montre-t-elle du relief ». Une fenetre a la fois plate et au bord est
+        # plate, et c est ce qui compte.
+        s = sorted([x for x in xs if x.get("couche_tracee") and x.get("ecart_um")],
+                   key=lambda y: y["couche_tracee"])
+        if not s:
+            continue
+        etroit_plat = juger(s[0])["etat"] == "plat"
+        if j["alpha"] < ALPHA_TRAVERS:
+            conv_total += 1
+            if etroit_plat:
+                conv_plat += 1
+                exemples.append(k)
+        else:
+            cond_total += 1
+            if etroit_plat:
+                cond_plat += 1
+    return {"convergentes": conv_total, "convergentes_appui_etroit_plat": conv_plat,
+            "condamnees": cond_total, "condamnees_appui_etroit_plat": cond_plat,
+            # ⚠ Nommees, pas seulement comptees : une convergente a l appui plat serait un
+            # contre-exemple, et un compte sans nom ne se verifie pas.
+            "convergentes_plates_nommees": exemples}
+
+
 def balayer(racine: Path) -> dict[str, list[dict]]:
     """Les profils de l'arbre, groupés par série (le dossier qui les contient)."""
     par: dict[str, list[dict]] = {}
@@ -246,7 +297,9 @@ def resumer(par: dict[str, list[dict]]) -> dict:
     convergents = [k for k, j in juges.items() if j["verdict"] == "converge"]
     conv_tombent = sorted(k for k in convergents if not juges[k]["tient"])
     ident = identites(juges)
+    contraste = contraste_des_appuis(par)
     return {"series_jugees": len(juges), "par_borne": par_borne,
+            "contraste_des_appuis": contraste,
             "identites_du_couple_de_fenetres": ident,
             "series_sur_une_identite": sum(x["series"] for x in ident
                                            if x["colle_a_l_identite"]),
@@ -373,6 +426,38 @@ def verifier() -> int:
       sp["verdict"] == "converge" and sp["tient"],
       f"{sp['verdict']} borne={sp['borne']}")
 
+    # --- le contraste entre les deux populations -----------------------------------------
+    def pf(ct, ecart, plafond, ampl):
+        n = 2 * ct + 1
+        return {"couche_tracee": ct, "ecart_um": ecart, "plafond_um": plafond,
+                "bords_um": [plafond], "au_plafond": ecart >= plafond * (1 - 1e-9),
+                "amplitude": ampl, "seuil": 0.02, "seuil_est_un_repli": False,
+                "layers": list(range(n))}
+
+    c = contraste_des_appuis({
+        # convergente, relief franc des la fenetre etroite
+        "bonne": [pf(15, 100.0, 129.6, 0.12), pf(40, 104.0, 345.6, 0.13)],
+        # condamnee, appui etroit PLAT
+        "mauvaise": [pf(20, 48.0, 48.0, 0.005), pf(80, 192.0, 192.0, 0.046)],
+        # condamnee mais dont l appui etroit mesure : la separation n est pas parfaite
+        "mitigee": [pf(20, 100.0, 192.0, 0.09), pf(80, 400.0, 768.0, 0.12)]})
+    v("les convergentes sont comptees", c["convergentes"] == 1, str(c))
+    v("les condamnees aussi", c["condamnees"] == 2, str(c))
+    v("une fenetre etroite sans relief chez une condamnee est comptee",
+      c["condamnees_appui_etroit_plat"] == 1, str(c))
+    # ⚠⚠ Le controle qui distingue les deux lectures : une fenetre a la fois PLATE et AU
+    # BORD est plate. `appui()` la dirait « au bord » -- juste pour choisir un signe de
+    # borne, faux pour « montre-t-elle du relief ».
+    v("... y compris quand elle est AUSSI au bord",
+      contraste_des_appuis({"x": [pf(20, 48.0, 48.0, 0.005),
+                                  pf(80, 192.0, 192.0, 0.046)]}
+                           )["condamnees_appui_etroit_plat"] == 1)
+    # ⚠⚠ Le controle qui porte le constat : AUCUNE convergente ne doit avoir d appui etroit
+    # plat. S il y en avait, elles seraient NOMMEES, parce qu un compte sans nom ne se
+    # verifie pas.
+    v("aucune convergente n a d appui etroit plat ici",
+      c["convergentes_appui_etroit_plat"] == 0 and c["convergentes_plates_nommees"] == [])
+
     # --- le resume ---------------------------------------------------------------------
     r = resumer({"a": [prof(20, 48.0, 48.0, 0.0175), prof(80, 192.0, 192.0, 0.0462)],
                  "b": [prof(15, 129.6, 129.6), prof(40, 172.8, 345.6)],
@@ -451,6 +536,17 @@ def main() -> int:
               f"appuis {j['appui_etroit']}/{j['appui_large']}")
     if len(r["series_qui_tombent"]) > 12:
         print(f"      … et {len(r['series_qui_tombent']) - 12} autre(s)")
+
+    ct = r["contraste_des_appuis"]
+    if ct["convergentes"] and ct["condamnees"]:
+        print(f"\n  ⭐⭐ l'appui ÉTROIT, question binaire posée dans chaque fenêtre — "
+              f"ni seuil à régler, ni profondeurs à apparier :")
+        print(f"      {ct['convergentes_appui_etroit_plat']:3d} / {ct['convergentes']:3d} "
+              f"séries qui CONVERGENT ont leur appui étroit plat")
+        print(f"      {ct['condamnees_appui_etroit_plat']:3d} / {ct['condamnees']:3d} "
+              f"séries CONDAMNÉES l'ont")
+        for k in ct["convergentes_plates_nommees"][:5]:
+            print(f"      ⚠ contre-exemple : {k}")
 
     if r["identites_du_couple_de_fenetres"]:
         print(f"\n  ⚠⚠ {r['series_sur_une_identite']} série(s) rendent un α qui est "
