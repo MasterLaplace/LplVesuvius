@@ -1,0 +1,23 @@
+# Ce que le depot livre a besoin pour tourner, declare A LA RACINE.
+#
+# ⚠⚠ Pourquoi ce fichier existe. Les dependances vivaient dans des sous-projets
+# (`inference/`, `experiments/`, `inference_xpu/`) que la branche de release ne porte pas.
+# Le livrable annonce « un seul fichier, numpy et rien d autre » et, sur un arbre allege,
+# il ne pouvait pas demarrer : `ModuleNotFoundError: numpy`. Une promesse d outil autonome
+# qu on ne peut pas executer est une promesse fausse.
+#
+# ⚠ La liste est celle MESUREE en lancant chaque auto-test avec un python nu : 11 fichiers
+# demandent numpy, 3 scipy, et les figures pillow. Rien d autre n a ete ajoute « au cas ou ».
+[project]
+name = "lplvesuvius"
+version = "0.1.0"
+description = "Measuring whether a traced surface follows a papyrus sheet"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=1.26",
+    "pillow>=10.0",
+    "scipy>=1.11",
+]
+
+[tool.uv]
+package = false
