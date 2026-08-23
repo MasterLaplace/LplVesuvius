@@ -21,7 +21,7 @@
       "amplitude": 0.046252786224217864,
       "au_bord": 1.0,
       "reserve": true,
-      "nom": "niveau 0 (voxel 2.4 µm)",
+      "nom": "niveau 0",
       "profils": [
         "/home/masterlaplace/LplVesuvius/data/controle_resolution/g0_n41/profil.json",
         "/home/masterlaplace/LplVesuvius/data/controle_resolution/g0_n161/profil.json"

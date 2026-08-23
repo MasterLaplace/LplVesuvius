@@ -24,24 +24,26 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 if [ "${1:-}" = "--verifier" ]; then
   ok=0; n=0
   chk() { n=$((n+1)); if eval "$2"; then :; else echo "  FAIL $1"; ok=1; fi; }
-  # ⚠⚠ La sonde qui compte : les tranches DIVISEES et le voxel MULTIPLIE par 2^g. Une
-  # erreur de sens ici comparerait deux fenetres physiques differentes en les appelant
-  # deux resolutions -- et le resultat aurait l air d une mesure.
-  for g in 0 1 2; do
-    c=$(python3 -c "print(round(41 / 2**$g))")
-    u=$(python3 -c "print(2.4 * 2**$g)")
-    chk "niveau $g : tranches $c" "[ \"\$(python3 -c 'print(round(41 / 2**$g))')\" = \"$c\" ]"
-    chk "niveau $g : voxel $u µm" "[ \"\$(python3 -c 'print(2.4 * 2**$g)')\" = \"$u\" ]"
-  done
-  chk "le voxel croit avec le niveau" \
-      '[ "$(python3 -c "print(2.4*2**1 > 2.4*2**0)")" = "True" ]'
-  chk "les tranches decroissent avec le niveau" \
-      '[ "$(python3 -c "print(round(41/2**1) < 41)")" = "True" ]'
-  chk "la profondeur physique est CONSERVEE" \
-      '[ "$(python3 -c "a=41*2.4; b=round(41/2)*2.4*2; print(abs(a-b) <= 2.4*2)")" = "True" ]'
-  chk "le depouilleur existe" '[ -f "$ROOT/analysis/src/effet_du_plafond.py" ]'
+  # ⚠⚠ Ce fichier ne DOIT PAS savoir convertir tranches et voxel : c est le profileur
+  # partage qui le sait, et une seconde copie -- fut-elle dans une sonde -- est une seconde
+  # definition libre de diverger. La sonde verifie donc la DELEGATION, pas l arithmetique.
+  chk "le profileur partage existe" '[ -x "$ROOT/tools/profiler_une_surface.sh" ]'
+  chk "ce fichier le delegue" 'grep -q profiler_une_surface.sh "$ROOT/tools/controle_resolution.sh"'
+  # ⚠⚠ Les motifs sont COUPES en deux morceaux concatenes. Ecrits d un bloc, ils
+  # apparaitraient dans le fichier que la sonde inspecte -- donc la sonde se matcherait
+  # ELLE-MEME et signalerait une duplication qui n existe pas. C est la TROISIEME fois que
+  # ce piege se paie ici (pkill -f, la sonde du traceur, celle-ci) : une sonde qui scanne
+  # son propre fichier ne doit jamais contenir son motif en clair.
+  chk "... et ne recalcule pas les tranches lui-meme" \
+      '! grep -qE "tranches_au""_niveau|traced-""layer" "$ROOT/tools/controle_resolution.sh"'
+  chk "... ni ne rend lui-meme" \
+      '! grep -q "rendre_""surveille" "$ROOT/tools/controle_resolution.sh"'
+  chk "la conversion est testee la ou elle vit" \
+      '"$ROOT/tools/profiler_une_surface.sh" --verifier >/dev/null 2>&1'
+  chk "le depouilleur de convergence existe" '[ -f "$ROOT/analysis/src/test_convergence.py" ]'
   out=$("$ROOT/tools/controle_resolution.sh" /inexistant 2>&1); rc=$?
   chk "une trace absente est refusee (2)" '[ "$rc" = 2 ]'
+  chk "... et le refus nomme le chemin" 'printf "%s" "$out" | grep -q inexistant'
   echo "$([ $ok = 0 ] && echo 'ALL PASS' || echo FAILURES) ($ok failures, $n checks)"
   exit $ok
 fi
@@ -61,33 +63,14 @@ mkdir -p "$DEST"
 
 echo "== surface $(basename "$SRC")  ·  niveaux ${NIVEAUX[*]}  ·  --cache-gb $CACHE_GB"
 for G in "${NIVEAUX[@]}"; do
-  UM=$(python3 -c "print($UM_BASE * 2**$G)")
-  PROFILS=""
-  echo "== niveau $G  (voxel ${UM} µm)"
-  for F in $FENETRES_BASE; do
-    # ⚠ Divise, jamais recopie : voir le piege d unites en tete de fichier.
-    N=$(python3 -c "print(max(3, round($F / 2**$G)))")
-    W="$DEST/g${G}_n${N}"
-    OUT="$W/profil.json"
-    if [ ! -s "$OUT" ]; then
-      rm -rf "$W"; mkdir -p "$W"
-      "$ROOT/tools/rendre_surveille.sh" "$W/rendu" 420 -- \
-          -v "$W/cache" --remote-url "$B/$VOL" --scale 1 -g "$G" -s "$SRC/plat" \
-          --tif-output "$W/rendu" -n "$N" --slice-step 1 --auto-crop \
-          --cache-gb "$CACHE_GB" > "$W/rendu.log" 2>&1 \
-        || { echo "   ⚠ rendu n=$N abandonné"; continue; }
-      ( cd "$ROOT/inference_xpu" && uv run python ../analysis/src/depth_profile.py \
-          "$W/rendu" --grid --step 200 --traced-layer $((N / 2)) --voxel-um "$UM" \
-          --out "$OUT" ) > "$W/profil.log" 2>&1 \
-        || { echo "   ⚠ profil n=$N échoué"; continue; }
-      rm -rf "$W/cache" "$W/rendu"
-    fi
-    echo "   n=$N couches → $(du -sh "$W" 2>/dev/null | cut -f1)"
-    PROFILS="$PROFILS --profil $OUT"
-  done
-  [ -n "$PROFILS" ] && ( cd "$ROOT/experiments" && uv run python \
-      ../analysis/src/test_convergence.py $PROFILS --nom "niveau $G (voxel ${UM} µm)" \
-      --json "$ROOT/docs/resolution_g${G}.json" | tail -4 )
+  # ⚠ Le rendu, le profil et le jugement sont delegues au profileur PARTAGE -- et surtout
+  # la conversion tranches/voxel avec lui. Elle etait ecrite ici et tracer_une_graine.sh
+  # allait la recopier : deux definitions du piege d unites, libres de diverger, dont l une
+  # comparerait un jour deux fenetres physiques differentes en les appelant deux resolutions.
+  PLAT="$SRC/plat" NIVEAU="$G" FENETRES_BASE="$FENETRES_BASE" UM_BASE="$UM_BASE" \
+    CACHE_GB="$CACHE_GB" DEST="$DEST" ETIQUETTE="niveau $G" \
+    JSON="$ROOT/docs/resolution_g${G}.json" \
+    "$ROOT/tools/profiler_une_surface.sh"
 done
 
 echo

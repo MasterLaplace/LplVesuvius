@@ -1313,6 +1313,17 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     quand des runs indépendants s'accordent **au-delà de ce que leur bruit permet**, ce n'est
     pas une bonne nouvelle, c'est un réglage partagé qui parle à leur place. Ce qui l'a
     attrapé : avoir regardé une colonne qui n'était le sujet d'aucune question.
+67. ⚠⚠ **Une sonde qui scanne son propre fichier ne doit jamais contenir son motif en
+    clair.** Payé **trois fois** dans la même session : `pkill -f "validate.sh"` a tué mon
+    propre shell ; `grep -q vc_grow_seg_from_seed` dans une sonde « aucune trace n'est
+    réécrite ici » a signalé une duplication qui n'existait pas ; puis `grep -q
+    rendre_surveille` dans une sonde « ce fichier ne rend pas lui-même ». À chaque fois le
+    symptôme est le même et il est trompeur : **la sonde échoue sur un fichier correct**, et
+    on part chercher le défaut dans le code au lieu de la sonde. ⭐ Remède : couper le motif
+    en deux morceaux concaténés (`"tranches_au""_niveau"`), ce que le shell recolle et que
+    le fichier ne contient donc pas d'un bloc. Corollaire plus général : quand une
+    vérification échoue sur quelque chose qu'on vient d'écrire correctement, **suspecter la
+    vérification avant le code**.
 
 
 ### ⭐⭐ 2026-08-22 (fin) — la voie du raccordement est fermée, et deux gardes de plus
