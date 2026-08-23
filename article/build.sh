@@ -39,6 +39,8 @@ uv run python ../analysis/src/figure_derive_profondeur.py --anglais \
     --sortie "$FIG/47_derive_profondeur.png"
 uv run python ../analysis/src/figure_appuis.py --anglais \
     --json "$ROOT/docs/appui_de_pente.json" --sortie "$FIG/51_appuis.png"
+uv run python ../analysis/src/figure_contraste.py --anglais \
+    --json "$ROOT/docs/appui_de_pente.json" --sortie "$FIG/51_contraste.png"
 # ⚠ Celle-ci est DEJA en anglais : elle a ete ecrite pour l'article, donc elle n'a pas de
 # table de traduction — la traduire serait traduire vers sa propre langue.
 uv run python ../analysis/src/figure_typographie.py           --sortie "$FIG/45_typographie.png"

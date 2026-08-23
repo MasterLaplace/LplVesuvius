@@ -8,9 +8,999 @@
   "contraste_des_appuis": {
     "convergentes": 75,
     "convergentes_appui_etroit_plat": 0,
+    "signaux_compares": {
+      "amplitude_sous_le_plancher": {
+        "convergentes": {
+          "sur": 75,
+          "compte": 0
+        },
+        "condamnees": {
+          "sur": 63,
+          "compte": 34
+        }
+      },
+      "au_bord_au_moins_90_pourcent": {
+        "convergentes": {
+          "sur": 75,
+          "compte": 6
+        },
+        "condamnees": {
+          "sur": 63,
+          "compte": 39
+        }
+      }
+    },
     "condamnees": 63,
     "condamnees_appui_etroit_plat": 34,
-    "convergentes_plates_nommees": []
+    "convergentes_plates_nommees": [],
+    "points": [
+      {
+        "serie": "data/boucle/corrige_gen40",
+        "converge": false,
+        "amplitude_sur_plancher": 1.2937521776571115,
+        "au_bord": 0.8732394366197183,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/boucle/corrige_gen5",
+        "converge": false,
+        "amplitude_sur_plancher": 0.8925595141939642,
+        "au_bord": 0.8421052631578947,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/boucle/corrige_gen5_poids100",
+        "converge": false,
+        "amplitude_sur_plancher": 1.5643058725400674,
+        "au_bord": 0.8947368421052632,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/boucle/temoin",
+        "converge": false,
+        "amplitude_sur_plancher": 0.9413107901273292,
+        "au_bord": 0.8769230769230769,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/controle_resolution#g0",
+        "converge": false,
+        "amplitude_sur_plancher": 0.7313526718139985,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/controle_resolution#g1",
+        "converge": false,
+        "amplitude_sur_plancher": 0.7339170201965166,
+        "au_bord": 1.0,
+        "couches_etroite": 21
+      },
+      {
+        "serie": "data/convergence_essais/essai_b",
+        "converge": false,
+        "amplitude_sur_plancher": 1.179727885517848,
+        "au_bord": 0.9344262295081968,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/convergence_essais/essai_ng2",
+        "converge": true,
+        "amplitude_sur_plancher": 3.3465197274254175,
+        "au_bord": 0.8285714285714286,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/convergence_essais/essai_scale1",
+        "converge": false,
+        "amplitude_sur_plancher": 0.8462726608668176,
+        "au_bord": 0.7901234567901234,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/ext_apres_rognage/gen125",
+        "converge": true,
+        "amplitude_sur_plancher": 4.686769780669947,
+        "au_bord": 0.6944444444444444,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/ext_budget/gen200",
+        "converge": false,
+        "amplitude_sur_plancher": 1.105035597705935,
+        "au_bord": 0.8826530612244898,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/ext_chaine/gen100",
+        "converge": true,
+        "amplitude_sur_plancher": 4.1474682892096615,
+        "au_bord": 0.7361111111111112,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/ext_chaine/pas001",
+        "converge": true,
+        "amplitude_sur_plancher": 4.1474682892096615,
+        "au_bord": 0.7361111111111112,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/ext_chaine/pas002",
+        "converge": true,
+        "amplitude_sur_plancher": 4.1474682892096615,
+        "au_bord": 0.7361111111111112,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/ext_chaine_cumul/pas001",
+        "converge": true,
+        "amplitude_sur_plancher": 4.1474682892096615,
+        "au_bord": 0.7361111111111112,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/ext_chaine_cumul/pas002",
+        "converge": false,
+        "amplitude_sur_plancher": 1.4620319563790676,
+        "au_bord": 0.9102564102564102,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/ext_chaine_fin/pas001",
+        "converge": true,
+        "amplitude_sur_plancher": 8.435926326045232,
+        "au_bord": 0.6190476190476191,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/ext_chaine_fin/pas002",
+        "converge": false,
+        "amplitude_sur_plancher": 2.1246679766421868,
+        "au_bord": 0.8099173553719008,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/ext_cycle_propre/gen110",
+        "converge": true,
+        "amplitude_sur_plancher": 7.117427602880902,
+        "au_bord": 0.7142857142857143,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/ext_determinisme/gen100",
+        "converge": true,
+        "amplitude_sur_plancher": 4.1474682892096615,
+        "au_bord": 0.7361111111111112,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/ext_determinisme/gen100_bis2",
+        "converge": true,
+        "amplitude_sur_plancher": 4.1474682892096615,
+        "au_bord": 0.7361111111111112,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/extension_tangentielle/gen001",
+        "converge": true,
+        "amplitude_sur_plancher": 5.090487483192624,
+        "au_bord": 0.75,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/extension_tangentielle/gen003",
+        "converge": true,
+        "amplitude_sur_plancher": 4.118951043309597,
+        "au_bord": 0.6666666666666666,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/extension_tangentielle/gen010",
+        "converge": true,
+        "amplitude_sur_plancher": 4.853263899275626,
+        "au_bord": 0.7361111111111112,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/fenetre_profonde/ps256_c0#g1",
+        "converge": false,
+        "amplitude_sur_plancher": 0.6246189483829264,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/leurs_parametres",
+        "converge": false,
+        "amplitude_sur_plancher": 0.7529929313116136,
+        "au_bord": 0.9574468085106383,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_candidats/m7_c0",
+        "converge": false,
+        "amplitude_sur_plancher": 0.0,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_candidats/m7_c1",
+        "converge": false,
+        "amplitude_sur_plancher": 0.0,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_candidats/m7_c2",
+        "converge": false,
+        "amplitude_sur_plancher": 0.0,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_candidats/m7_c3",
+        "converge": false,
+        "amplitude_sur_plancher": 0.0,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_candidats/m7_c4",
+        "converge": false,
+        "amplitude_sur_plancher": 0.0,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_candidats/ps256_c0",
+        "converge": false,
+        "amplitude_sur_plancher": 0.8752338361040514,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_candidats/ps256_c1",
+        "converge": false,
+        "amplitude_sur_plancher": 0.9635835422861416,
+        "au_bord": 0.9795918367346939,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_candidats/ps256_c2",
+        "converge": false,
+        "amplitude_sur_plancher": 0.6905540251897505,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_croise/m7_sur_graine_m7",
+        "converge": false,
+        "amplitude_sur_plancher": 0.0,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_croise/m7_sur_graine_ps256",
+        "converge": false,
+        "amplitude_sur_plancher": 0.7693584033035685,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_croise/ps256_sur_graine_m7",
+        "converge": false,
+        "amplitude_sur_plancher": 0.0,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_croise/ps256_sur_graine_ps256",
+        "converge": false,
+        "amplitude_sur_plancher": 1.0254743184083326,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_croise_r3/m7_sur_graine_m7_r1",
+        "converge": false,
+        "amplitude_sur_plancher": 0.0,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_croise_r3/m7_sur_graine_m7_r2",
+        "converge": false,
+        "amplitude_sur_plancher": 0.0,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_croise_r3/m7_sur_graine_m7_r3",
+        "converge": false,
+        "amplitude_sur_plancher": 0.0,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_croise_r3/m7_sur_graine_ps256_r1",
+        "converge": false,
+        "amplitude_sur_plancher": 1.1555479592129596,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_croise_r3/m7_sur_graine_ps256_r2",
+        "converge": false,
+        "amplitude_sur_plancher": 1.0248117367876926,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_croise_r3/m7_sur_graine_ps256_r3",
+        "converge": false,
+        "amplitude_sur_plancher": 1.0398497174143955,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_croise_r3/ps256_sur_graine_m7_r1",
+        "converge": false,
+        "amplitude_sur_plancher": 0.0,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_croise_r3/ps256_sur_graine_m7_r2",
+        "converge": false,
+        "amplitude_sur_plancher": 0.0,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_croise_r3/ps256_sur_graine_m7_r3",
+        "converge": false,
+        "amplitude_sur_plancher": 0.0,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_croise_r3/ps256_sur_graine_ps256_r1",
+        "converge": false,
+        "amplitude_sur_plancher": 0.686847088437414,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_croise_r3/ps256_sur_graine_ps256_r2",
+        "converge": false,
+        "amplitude_sur_plancher": 1.026527607928453,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_croise_r3/ps256_sur_graine_ps256_r3",
+        "converge": false,
+        "amplitude_sur_plancher": 0.9204588857157112,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_plafond/ps256_c2_g200#g1",
+        "converge": false,
+        "amplitude_sur_plancher": 0.3377052538131276,
+        "au_bord": 0.9955555555555555,
+        "couches_etroite": 21
+      },
+      {
+        "serie": "data/paris4_plafond/ps256_c2_g200#g2",
+        "converge": false,
+        "amplitude_sur_plancher": 0.3664370660247052,
+        "au_bord": 1.0,
+        "couches_etroite": 11
+      },
+      {
+        "serie": "data/paris4_plafond/ps256_c2_g60",
+        "converge": false,
+        "amplitude_sur_plancher": 0.7313526718139985,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/paris4_plafond/ps256_c2_g60#g1",
+        "converge": false,
+        "amplitude_sur_plancher": 0.7339170201965166,
+        "au_bord": 1.0,
+        "couches_etroite": 21
+      },
+      {
+        "serie": "data/petite_trace/g30",
+        "converge": false,
+        "amplitude_sur_plancher": 0.4322327572761427,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/petite_trace/g60",
+        "converge": false,
+        "amplitude_sur_plancher": 0.38616239855061,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/prediction_paris4/m7",
+        "converge": false,
+        "amplitude_sur_plancher": 0.0,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/prediction_paris4/ps256",
+        "converge": false,
+        "amplitude_sur_plancher": 1.1225001033802942,
+        "au_bord": 1.0,
+        "couches_etroite": 41
+      },
+      {
+        "serie": "data/rogne/gen10",
+        "converge": true,
+        "amplitude_sur_plancher": 9.700103180991146,
+        "au_bord": 0.6,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/rogne/gen25",
+        "converge": true,
+        "amplitude_sur_plancher": 8.298744320481285,
+        "au_bord": 0.6666666666666666,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/rogne/gen50",
+        "converge": true,
+        "amplitude_sur_plancher": 8.115183098022285,
+        "au_bord": 0.6428571428571429,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/rogne_cycle2/gen103",
+        "converge": true,
+        "amplitude_sur_plancher": 8.07831160256436,
+        "au_bord": 0.5833333333333334,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/rogne_cycle2/gen106",
+        "converge": true,
+        "amplitude_sur_plancher": 8.669843796854359,
+        "au_bord": 0.6428571428571429,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires/spire00",
+        "converge": true,
+        "amplitude_sur_plancher": 14.027642619478991,
+        "au_bord": 0.23333333333333334,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires/spire01",
+        "converge": true,
+        "amplitude_sur_plancher": 9.78391998200886,
+        "au_bord": 0.1,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires/spire02",
+        "converge": true,
+        "amplitude_sur_plancher": 7.639388415579922,
+        "au_bord": 0.4666666666666667,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires/spire03",
+        "converge": true,
+        "amplitude_sur_plancher": 5.824120659424046,
+        "au_bord": 0.8,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires/spire04",
+        "converge": true,
+        "amplitude_sur_plancher": 4.999610691554823,
+        "au_bord": 0.8,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires/spire05",
+        "converge": true,
+        "amplitude_sur_plancher": 4.571645375493626,
+        "au_bord": 0.3,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires/spire06",
+        "converge": false,
+        "amplitude_sur_plancher": 3.684576204759338,
+        "au_bord": 0.6842105263157895,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_dedans/spire00",
+        "converge": true,
+        "amplitude_sur_plancher": 14.027642619478991,
+        "au_bord": 0.23333333333333334,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_dedans/spire01",
+        "converge": true,
+        "amplitude_sur_plancher": 9.686404086731812,
+        "au_bord": 0.8666666666666667,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_dedans/spire02",
+        "converge": true,
+        "amplitude_sur_plancher": 5.366295860553643,
+        "au_bord": 0.76,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_dedans/spire03",
+        "converge": false,
+        "amplitude_sur_plancher": 4.342869807508044,
+        "au_bord": 0.75,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_dedans/spire04",
+        "converge": false,
+        "amplitude_sur_plancher": 4.3565864491105435,
+        "au_bord": 0.2,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_dedans/spire05",
+        "converge": true,
+        "amplitude_sur_plancher": 4.994044579167361,
+        "au_bord": 0.0,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_dedans/spire06",
+        "converge": true,
+        "amplitude_sur_plancher": 3.1997027034528225,
+        "au_bord": 0.375,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125/spire00",
+        "converge": true,
+        "amplitude_sur_plancher": 14.027642619478991,
+        "au_bord": 0.23333333333333334,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125/spire01",
+        "converge": true,
+        "amplitude_sur_plancher": 10.041959804534061,
+        "au_bord": 0.06666666666666667,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125/spire02",
+        "converge": false,
+        "amplitude_sur_plancher": 5.580321401278253,
+        "au_bord": 0.8,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125/spire03",
+        "converge": true,
+        "amplitude_sur_plancher": 6.545982770918945,
+        "au_bord": 0.4,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125/spire04",
+        "converge": false,
+        "amplitude_sur_plancher": 5.945835407971248,
+        "au_bord": 0.55,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125/spire05",
+        "converge": true,
+        "amplitude_sur_plancher": 4.597684441522564,
+        "au_bord": 0.9,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125/spire06",
+        "converge": true,
+        "amplitude_sur_plancher": 4.870351763312853,
+        "au_bord": 0.5263157894736842,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125/spire07",
+        "converge": true,
+        "amplitude_sur_plancher": 3.0045623703457687,
+        "au_bord": 0.08333333333333333,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125/spire08",
+        "converge": false,
+        "amplitude_sur_plancher": 2.9116196903185405,
+        "au_bord": 0.16666666666666666,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125/spire09",
+        "converge": false,
+        "amplitude_sur_plancher": 3.1317443258808377,
+        "au_bord": 0.25,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125/spire10",
+        "converge": true,
+        "amplitude_sur_plancher": 3.4898732704293014,
+        "au_bord": 0.6666666666666666,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125_compense/spire00",
+        "converge": true,
+        "amplitude_sur_plancher": 14.027642619478991,
+        "au_bord": 0.23333333333333334,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125_compense/spire01",
+        "converge": true,
+        "amplitude_sur_plancher": 10.047869120813422,
+        "au_bord": 0.06666666666666667,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125_compense/spire02",
+        "converge": true,
+        "amplitude_sur_plancher": 5.582897819368754,
+        "au_bord": 0.7666666666666667,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125_compense/spire03",
+        "converge": true,
+        "amplitude_sur_plancher": 6.429055174731449,
+        "au_bord": 0.55,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125_compense/spire04",
+        "converge": true,
+        "amplitude_sur_plancher": 5.741483955149261,
+        "au_bord": 0.75,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125_compense/spire05",
+        "converge": true,
+        "amplitude_sur_plancher": 4.305862972174458,
+        "au_bord": 1.0,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125_compense/spire06",
+        "converge": true,
+        "amplitude_sur_plancher": 4.250699169170657,
+        "au_bord": 0.8,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125_compense/spire07",
+        "converge": false,
+        "amplitude_sur_plancher": 2.981705621501675,
+        "au_bord": 0.0,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125_compense/spire08",
+        "converge": false,
+        "amplitude_sur_plancher": 2.8332203773463993,
+        "au_bord": 0.5,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas0125_compense/spire09",
+        "converge": false,
+        "amplitude_sur_plancher": 2.680716188385086,
+        "au_bord": 0.08333333333333333,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas025/spire00",
+        "converge": true,
+        "amplitude_sur_plancher": 14.027642619478991,
+        "au_bord": 0.23333333333333334,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas025/spire01",
+        "converge": true,
+        "amplitude_sur_plancher": 10.047746223166982,
+        "au_bord": 0.0,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas025/spire02",
+        "converge": true,
+        "amplitude_sur_plancher": 5.766499827561142,
+        "au_bord": 0.7333333333333333,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas025/spire03",
+        "converge": true,
+        "amplitude_sur_plancher": 6.793597458807294,
+        "au_bord": 0.35,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas025/spire04",
+        "converge": true,
+        "amplitude_sur_plancher": 5.76716658810093,
+        "au_bord": 0.4,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas025/spire05",
+        "converge": true,
+        "amplitude_sur_plancher": 4.421522004574071,
+        "au_bord": 0.95,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas025/spire06",
+        "converge": true,
+        "amplitude_sur_plancher": 4.132366298068797,
+        "au_bord": 0.6666666666666666,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas025/spire07",
+        "converge": false,
+        "amplitude_sur_plancher": 2.456374021268601,
+        "au_bord": 0.0,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas025/spire08",
+        "converge": false,
+        "amplitude_sur_plancher": 2.878668098786929,
+        "au_bord": 0.25,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas05/spire00",
+        "converge": true,
+        "amplitude_sur_plancher": 14.027642619478991,
+        "au_bord": 0.23333333333333334,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas05/spire01",
+        "converge": true,
+        "amplitude_sur_plancher": 9.863048254181288,
+        "au_bord": 0.13333333333333333,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas05/spire02",
+        "converge": true,
+        "amplitude_sur_plancher": 6.878233223678187,
+        "au_bord": 0.5666666666666667,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas05/spire03",
+        "converge": true,
+        "amplitude_sur_plancher": 6.704667332635833,
+        "au_bord": 0.55,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas05/spire04",
+        "converge": true,
+        "amplitude_sur_plancher": 5.501662727289216,
+        "au_bord": 0.75,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas05/spire05",
+        "converge": true,
+        "amplitude_sur_plancher": 5.5146810804996695,
+        "au_bord": 0.85,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pas05/spire06",
+        "converge": true,
+        "amplitude_sur_plancher": 3.9008138963245904,
+        "au_bord": 0.13333333333333333,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pic025/spire00",
+        "converge": true,
+        "amplitude_sur_plancher": 14.027642619478991,
+        "au_bord": 0.23333333333333334,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pic025/spire01",
+        "converge": true,
+        "amplitude_sur_plancher": 10.047869120813422,
+        "au_bord": 0.06666666666666667,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pic025/spire02",
+        "converge": true,
+        "amplitude_sur_plancher": 5.582897819368754,
+        "au_bord": 0.7666666666666667,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pic025/spire03",
+        "converge": true,
+        "amplitude_sur_plancher": 6.429055174731449,
+        "au_bord": 0.55,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pic025/spire04",
+        "converge": true,
+        "amplitude_sur_plancher": 5.741483955149261,
+        "au_bord": 0.75,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pic025/spire05",
+        "converge": true,
+        "amplitude_sur_plancher": 4.305862972174458,
+        "au_bord": 1.0,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pic025/spire06",
+        "converge": true,
+        "amplitude_sur_plancher": 4.250699169170657,
+        "au_bord": 0.8,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pic025/spire07",
+        "converge": false,
+        "amplitude_sur_plancher": 2.981705621501675,
+        "au_bord": 0.0,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pic025/spire08",
+        "converge": false,
+        "amplitude_sur_plancher": 2.8332203773463993,
+        "au_bord": 0.5,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_pic025/spire09",
+        "converge": false,
+        "amplitude_sur_plancher": 2.680716188385086,
+        "au_bord": 0.08333333333333333,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_portee0375/spire00",
+        "converge": true,
+        "amplitude_sur_plancher": 14.027642619478991,
+        "au_bord": 0.23333333333333334,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_portee0375/spire01",
+        "converge": true,
+        "amplitude_sur_plancher": 10.024119399165807,
+        "au_bord": 0.03333333333333333,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_portee0375/spire02",
+        "converge": true,
+        "amplitude_sur_plancher": 5.828147952042414,
+        "au_bord": 0.7666666666666667,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_portee0375/spire03",
+        "converge": true,
+        "amplitude_sur_plancher": 7.170988660346524,
+        "au_bord": 0.45,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_portee0375/spire04",
+        "converge": true,
+        "amplitude_sur_plancher": 5.439500696392263,
+        "au_bord": 0.4,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_portee0375/spire05",
+        "converge": true,
+        "amplitude_sur_plancher": 4.250204018975243,
+        "au_bord": 0.9,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_portee0375/spire06",
+        "converge": true,
+        "amplitude_sur_plancher": 3.823357246336032,
+        "au_bord": 0.7333333333333333,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_portee0375/spire07",
+        "converge": false,
+        "amplitude_sur_plancher": 2.269770770448375,
+        "au_bord": 0.5,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_portee0375/spire08",
+        "converge": false,
+        "amplitude_sur_plancher": 3.1361189306337147,
+        "au_bord": 0.3333333333333333,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_portee0375/spire09",
+        "converge": true,
+        "amplitude_sur_plancher": 2.964779606988835,
+        "au_bord": 0.08333333333333333,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_repousse/spire00",
+        "converge": true,
+        "amplitude_sur_plancher": 14.027642619478991,
+        "au_bord": 0.23333333333333334,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_repousse/spire01",
+        "converge": true,
+        "amplitude_sur_plancher": 3.119122089010323,
+        "au_bord": 0.6527777777777778,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_repousse/spire02",
+        "converge": true,
+        "amplitude_sur_plancher": 2.2461024462665744,
+        "au_bord": 0.9444444444444444,
+        "couches_etroite": 31
+      },
+      {
+        "serie": "data/spires_repousse/spire03",
+        "converge": false,
+        "amplitude_sur_plancher": 0.9756332406777014,
+        "au_bord": 1.0,
+        "couches_etroite": 31
+      }
+    ]
   },
   "identites_du_couple_de_fenetres": [
     {

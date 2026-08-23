@@ -428,6 +428,35 @@ stand*; 7 are saved by the sign; and *0 of the 75 converging series* is lost ---
 only sign observed preserves exactly what sits below the threshold. The reassurance of
 #link(<sec:twofailures>)[Section 3.5] is thereby given a mechanism instead of an observation.
 
+Thirty-nine verdicts that no longer stand means stacking alphas says little. But *does the
+narrow window show relief* is a binary question asked *inside* one window: no threshold to
+tune, no depths to match, no slope resting on two footings.
+
+#figure(
+  image("figures/51_contraste.png", width: 100%),
+  caption: [
+    Amplitude of the narrowest window of each series, in multiples of the instrument's own
+    detection floor, on a logarithmic axis. Every series that *converges* sits to the right
+    of the floor; the lowest is at 2.25 times it. Series lying *across the stack* straddle
+    it, and the tall column on the left is amplitude exactly zero, which has no logarithm
+    and is therefore placed apart rather than crushed onto the smallest non-zero value.
+  ],
+) <fig:contrast>
+
+*Not one.* Zero of 75 converging series has a flat narrow window, against *34 of 63*
+condemned ones. On a surface that follows a sheet the relief is already there in a narrow
+window, which is what following a sheet means; on a surface lying across the stack it appears
+only by widening, that is, what one reads is the window and not the surface.
+
+#caveat[
+  *This is not circular, and the contrast is one-sided.* The partition is by the sign of
+  $alpha$, which comes from the gaps; the flatness comes from the amplitudes. Two different
+  quantities from the same profiles, linked by a mechanism --- a peak inside the window gives
+  both a stable gap and a frank amplitude --- and that link is the content of the finding
+  rather than a flaw in it. In the other direction 29 condemned series do have a measuring
+  narrow window: a flat one condemns, a measuring one does not absolve.
+]
+
 #caveat[
   *The first count was 132, and it was missing six.* Two directory conventions coexist in our
   tree: older campaigns write the profiles of a surface side by side, while our profiling

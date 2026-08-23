@@ -874,6 +874,18 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                            "condamnees a fenetre etroite plate")):
             if c.get(a) is not None and c.get(b) is not None:
                 out.append((nom, [f"{c[a]} / {c[b]}", f"{c[a]}/{c[b]}"], p.name))
+        # ⚠⚠ Les DEUX signaux compares : c est ce qui dit que l outil PUBLIC publie le
+        # moins bon des deux. Ecrits en paire, jamais nus -- « 0 » et « 34 » ne se cherchent
+        # pas dans un texte en prose.
+        for nom, cle in (("amplitude sous le plancher", "amplitude_sous_le_plancher"),
+                         ("pic au bord sur 90 pourcent", "au_bord_au_moins_90_pourcent")):
+            g = ((c.get("signaux_compares") or {}).get(cle)) or {}
+            for pop in ("convergentes", "condamnees"):
+                x = g.get(pop)
+                if x:
+                    out.append((f"{nom}, {pop}",
+                                [f"{x['compte']} / {x['sur']}", f"{x['compte']}/{x['sur']}"],
+                                p.name))
         # ⚠⚠ Le chiffre qui porte tout `51` : combien de series rendent l IDENTITE de leur
         # couple de fenetres. Sans garde, il vieillirait en silence a la prochaine campagne.
         if d.get("series_sur_une_identite") is not None:

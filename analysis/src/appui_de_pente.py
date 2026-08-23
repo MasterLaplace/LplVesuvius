@@ -201,6 +201,9 @@ def contraste_des_appuis(par: dict[str, list[dict]]) -> dict:
     """
     conv_plat = conv_total = cond_plat = cond_total = 0
     exemples: list[str] = []
+    # ⚠ Le RAPPORT au plancher, et non l amplitude nue : le plancher peut differer d un
+    # profil a l autre, et comparer des amplitudes brutes comparerait aussi des seuils.
+    points: list[dict] = []
     for k, xs in sorted(par.items()):
         j = juger_serie(xs)
         if not j or j["alpha"] is None:
@@ -215,6 +218,18 @@ def contraste_des_appuis(par: dict[str, list[dict]]) -> dict:
         if not s:
             continue
         etroit_plat = juger(s[0])["etat"] == "plat"
+        a0, seuil = s[0].get("amplitude"), s[0].get("seuil")
+        if a0 is not None and seuil:
+            points.append({"serie": k, "converge": j["alpha"] < ALPHA_TRAVERS,
+                           "amplitude_sur_plancher": float(a0) / float(seuil),
+                           # ⚠ La part de fenetres dont le pic est colle a un bord est
+                           # rapportee A COTE de l amplitude, parce que c est exactement ce
+                           # que l outil public `tracecheck` publie deja sous le nom
+                           # `edge_pinned`. Les deux ensemble disent lequel des deux signaux
+                           # separe le mieux -- et la reponse n est pas celui qu on publie.
+                           "au_bord": (float(s[0]["au_bord"])
+                                       if s[0].get("au_bord") is not None else None),
+                           "couches_etroite": s[0]["couche_tracee"] * 2 + 1})
         if j["alpha"] < ALPHA_TRAVERS:
             conv_total += 1
             if etroit_plat:
@@ -224,11 +239,31 @@ def contraste_des_appuis(par: dict[str, list[dict]]) -> dict:
             cond_total += 1
             if etroit_plat:
                 cond_plat += 1
+    # ⚠⚠ LES DEUX SIGNAUX COMPARES, et c est le point : `edge_pinned` est ce que l outil
+    # public publie deja, l amplitude est ce que personne ne publie. Les compter cote a cote
+    # dit lequel separe -- et ce n est pas celui qui est publie.
+    def _sous(pop, cle, seuil, sens):
+        v = [x[cle] for x in points if x["converge"] is pop and x.get(cle) is not None]
+        if not v:
+            return None
+        n = sum(1 for y in v if (y < seuil if sens == "<" else y >= seuil))
+        return {"sur": len(v), "compte": n}
+
+    signaux = {
+        "amplitude_sous_le_plancher": {
+            "convergentes": _sous(True, "amplitude_sur_plancher", 1.0, "<"),
+            "condamnees": _sous(False, "amplitude_sur_plancher", 1.0, "<")},
+        "au_bord_au_moins_90_pourcent": {
+            "convergentes": _sous(True, "au_bord", 0.90, ">="),
+            "condamnees": _sous(False, "au_bord", 0.90, ">=")}}
+
     return {"convergentes": conv_total, "convergentes_appui_etroit_plat": conv_plat,
+            "signaux_compares": signaux,
             "condamnees": cond_total, "condamnees_appui_etroit_plat": cond_plat,
             # ⚠ Nommees, pas seulement comptees : une convergente a l appui plat serait un
             # contre-exemple, et un compte sans nom ne se verifie pas.
-            "convergentes_plates_nommees": exemples}
+            "convergentes_plates_nommees": exemples,
+            "points": points}
 
 
 def balayer(racine: Path) -> dict[str, list[dict]]:
@@ -427,12 +462,12 @@ def verifier() -> int:
       f"{sp['verdict']} borne={sp['borne']}")
 
     # --- le contraste entre les deux populations -----------------------------------------
-    def pf(ct, ecart, plafond, ampl):
+    def pf(ct, ecart, plafond, ampl, au_bord=0.5):
         n = 2 * ct + 1
         return {"couche_tracee": ct, "ecart_um": ecart, "plafond_um": plafond,
                 "bords_um": [plafond], "au_plafond": ecart >= plafond * (1 - 1e-9),
                 "amplitude": ampl, "seuil": 0.02, "seuil_est_un_repli": False,
-                "layers": list(range(n))}
+                "au_bord": au_bord, "layers": list(range(n))}
 
     c = contraste_des_appuis({
         # convergente, relief franc des la fenetre etroite
@@ -455,6 +490,18 @@ def verifier() -> int:
     # ⚠⚠ Le controle qui porte le constat : AUCUNE convergente ne doit avoir d appui etroit
     # plat. S il y en avait, elles seraient NOMMEES, parce qu un compte sans nom ne se
     # verifie pas.
+    # ⚠ Les points portent le RAPPORT au plancher : 0,12 pour un plancher de 0,02 fait 6.
+    v("un point porte le rapport de l amplitude au plancher",
+      any(abs(x["amplitude_sur_plancher"] - 6.0) < 1e-9 for x in c["points"]),
+      str([round(x["amplitude_sur_plancher"], 2) for x in c["points"]]))
+    v("... et chaque serie jugee a son point", len(c["points"]) == 3)
+    # ⚠⚠ Les deux signaux doivent etre comptes SEPAREMENT : les confondre ferait croire que
+    # l outil public mesure deja ce qui separe.
+    sig = c["signaux_compares"]
+    v("les deux signaux sont comptes a part",
+      set(sig) == {"amplitude_sous_le_plancher", "au_bord_au_moins_90_pourcent"}, str(sig))
+    v("chaque signal porte son denominateur",
+      all(x and "sur" in x for g in sig.values() for x in g.values()), str(sig))
     v("aucune convergente n a d appui etroit plat ici",
       c["convergentes_appui_etroit_plat"] == 0 and c["convergentes_plates_nommees"] == [])
 
@@ -495,6 +542,36 @@ def verifier() -> int:
                              "appui_large": APPUI_BORD, "couches": [41, 161]}})
     v("un α au bord qui ne colle pas à l'identité est listé, non exclu",
       len(autre) == 1 and not autre[0]["colle_a_l_identite"])
+
+    # --- le chemin de SORTIE, que la batterie n exercait pas ------------------------------
+    # ⚠⚠ Paye le 2026-08-24 : une variable de boucle nommee `a` dans `main` a ecrase le
+    # namespace argparse, et `a.json` a plante. La batterie etait verte -- elle n appelle
+    # jamais `main`. Un chemin de sortie non exerce est un chemin non teste.
+    import tempfile as _t
+    import subprocess as _sp
+    with _t.TemporaryDirectory() as td:
+        # ⚠⚠ DEUX series, une convergente et une condamnee, et c est indispensable : le bloc
+        # d affichage qui portait le bug est garde par « il y a des deux ». Une premiere
+        # version de cette sonde n avait qu une serie, donc le bloc ne s executait pas et la
+        # sonde restait verte en reintroduisant le defaut. Verifie.
+        for nom, trois in (("bonne", ((15, 100.0, 0.12, 0.3), (40, 104.0, 0.13, 0.3))),
+                           ("mauvaise", ((20, 48.0, 0.005, 1.0), (80, 192.0, 0.046, 1.0)))):
+            d = Path(td) / "arbre" / nom
+            d.mkdir(parents=True)
+            for ct, ecart, ampl, bord in trois:
+                n = 2 * ct + 1
+                (d / f"profil_{n}c.json").write_text(json.dumps({
+                    "ecart_trace_um_median": ecart, "couche_tracee": ct, "voxel_um": 8.64,
+                    "amplitude_mediane": ampl, "amplitude_min": 0.02, "au_bord": bord,
+                    "layers": list(range(n))}), encoding="utf-8")
+        sortie = Path(td) / "r.json"
+        pr = _sp.run([sys.executable, str(Path(__file__).resolve()),
+                      "--racine", str(Path(td) / "arbre"), "--json", str(sortie)],
+                     capture_output=True, text=True)
+        v("le chemin --json va au bout", pr.returncode == 0,
+          (pr.stderr or "").strip().splitlines()[-1] if pr.stderr else "")
+        v("... et il ecrit un JSON relisible",
+          sortie.is_file() and "series_jugees" in json.loads(sortie.read_text()))
 
     if echecs:
         print(f"\nECHEC ({echecs} failures, {controles} checks)")
@@ -545,6 +622,23 @@ def main() -> int:
               f"séries qui CONVERGENT ont leur appui étroit plat")
         print(f"      {ct['condamnees_appui_etroit_plat']:3d} / {ct['condamnees']:3d} "
               f"séries CONDAMNÉES l'ont")
+        sig = ct.get("signaux_compares") or {}
+        if sig:
+            print("      et le meme partage lu par les DEUX signaux disponibles :")
+            for nom, libelle in (("amplitude_sous_le_plancher",
+                                  "amplitude sous le plancher"),
+                                 ("au_bord_au_moins_90_pourcent",
+                                  "pic au bord sur ≥ 90 % des fenêtres")):
+                g = sig.get(nom) or {}
+                # ⚠⚠ Surtout PAS `a` : c est le namespace argparse de cette fonction, et
+                # l ecraser faisait planter `a.json` vingt lignes plus bas -- sur le seul
+                # chemin que la batterie n exerce pas. Une variable d une lettre dans une
+                # fonction qui en a deja une du meme nom est un piege qui attend son tour.
+                cv, cd = g.get("convergentes"), g.get("condamnees")
+                if cv and cd:
+                    print(f"        {libelle:38s} convergentes "
+                          f"{cv['compte']:3d}/{cv['sur']:3d}"
+                          f"   condamnées {cd['compte']:3d}/{cd['sur']:3d}")
         for k in ct["convergentes_plates_nommees"][:5]:
             print(f"      ⚠ contre-exemple : {k}")
 

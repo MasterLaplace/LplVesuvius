@@ -341,10 +341,15 @@ ne dit plus rien**. Mais « la fenêtre étroite montre-t-elle du relief » est 
 **binaire, posée à l'intérieur de chaque fenêtre** — ni seuil à régler, ni profondeurs à
 apparier, ni pente à poser sur deux appuis.
 
+![le relief de la fenêtre étroite sépare les deux populations](images/51_contraste.png)
+
 | | séries |
 |---|---:|
 | séries qui **convergent** dont la fenêtre étroite est plate | **0 / 75** |
 | séries **condamnées** dont la fenêtre étroite est plate | **34 / 63** |
+
+⭐ Et la figure dit plus que le compte binaire : la plus basse série convergente est à
+**2,25×** le plancher, la médiane des condamnées à **0,94×** — c'est-à-dire *sous* lui.
 
 > ⭐⭐ **Pas une seule.** Sur une surface qui suit une feuille, le relief est **déjà là dans
 > une fenêtre étroite** — c'est ce que veut dire « suivre une feuille ». Sur une surface
@@ -360,6 +365,28 @@ défaut.
 ⚠ Le contraste n'est pas parfait dans l'autre sens : 29 séries condamnées ont une fenêtre
 étroite qui mesure. La condition est donc **suffisante et non nécessaire** — une fenêtre
 étroite plate condamne, une fenêtre étroite qui mesure n'absout pas.
+
+### ⚠⚠ Et l'outil public publie le MOINS bon des deux signaux
+
+`tracecheck`, le seul livrable qui quitte le dépôt, rapporte déjà `edge_pinned` — la part
+des fenêtres dont le pic est collé à un bord de pile. C'est **exactement** la grandeur
+`au_bord` de nos profils. Le même partage, lu par les deux signaux disponibles :
+
+| signal | convergentes | condamnées |
+|---|---:|---:|
+| **amplitude** sous le plancher de détection | **0 / 75** | **34 / 63** |
+| pic au bord sur ≥ 90 % des fenêtres (`edge_pinned`) | **6 / 75** | **39 / 63** |
+
+> ⚠⚠ **L'amplitude ne se trompe jamais dans le sens qui coûte cher**, `edge_pinned` six
+> fois : six surfaces qui suivent une feuille ont malgré tout plus de 90 % de leurs pics au
+> bord. Un outil qui écarte une surface sur ce critère écarte donc des surfaces bonnes.
+
+⭐ Et l'amplitude ne coûte rien de plus à calculer : `tracecheck` lit déjà les colonnes de
+profondeur et en extrait les pics, donc il a le profil sous la main. ⚠ Ce qui ne se
+transporte **pas**, c'est le seuil : `critere_relatif` mesure β = +1,01 pour l'amplitude sur
+les séries condamnées, donc elle dépend de la profondeur de fenêtre, et un volume de surface
+publié n'a pas la profondeur de nos rendus. Ce qui se transporte est le **rapport au plancher
+de l'instrument**, que le corpus de l'appelant calibre.
 
 ⚠⚠ Et la lecture porte sur l'**amplitude**, pas sur l'état d'appui : `appui()` fait gagner
 « au bord » sur « plat » quand les deux sont vrais, ce qui est juste pour choisir un signe de
@@ -413,6 +440,8 @@ cd inference && uv run python ../analysis/src/figure_fenetre.py \
     --json ../docs/fenetre_utilisable.json --sortie ../docs/images/51_fenetre.png
 cd inference && uv run python ../analysis/src/figure_appuis.py \
     --json ../docs/appui_de_pente.json --sortie ../docs/images/51_appuis.png
+cd inference && uv run python ../analysis/src/figure_contraste.py \
+    --json ../docs/appui_de_pente.json --sortie ../docs/images/51_contraste.png
 
 # le verdict porte désormais son appui
 cd inference && uv run python ../analysis/src/test_convergence.py --nom ps256_c0 \
@@ -429,5 +458,6 @@ PLAT=data/paris4_plafond/ps256_c2_g200/plat NIVEAU=1 FENETRES_BASE="162 326" \
   JSON=docs/paire_admissible_g200.json tools/profiler_une_surface.sh
 python3 analysis/src/figure_fenetre.py --verifier
 python3 analysis/src/figure_appuis.py --verifier
+python3 analysis/src/figure_contraste.py --verifier
 python3 analysis/src/test_convergence.py --verifier
 ```

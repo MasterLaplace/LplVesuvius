@@ -735,6 +735,11 @@ run "fenêtre utilisable"       uv run --project "$ROOT" python "$ROOT/analysis/
 # Mesure le 2026-08-23 : SIX renvois sur trente-deux pointaient ailleurs, dont un qui
 # envoyait du choix de graine (5.3) vers le temoin negatif (6.4).
 run "renvois de l'article"     uv run --project "$ROOT" python "$ROOT/analysis/src/renvois_article.py" --verifier
+# ⚠⚠ La figure du contraste. Sa sonde centrale est que le constat porte : AUCUNE serie
+# convergente sous le plancher. Sa seconde est l amplitude NULLE, qui n a pas de logarithme
+# et doit etre posee a part et comptee -- l ecraser sur la plus petite valeur non nulle
+# ferait passer « rien du tout » pour « presque rien ».
+run "figure du contraste"      uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_contraste.py" --verifier
 # ⚠ La figure du plancher de detection. Sa sonde centrale est la COULEUR : les points sous
 # le plancher et ceux qui le degagent n'ont pas la meme, sinon le lecteur cherche le
 # plancher au lieu de le voir. Sa seconde sonde exige que la cible tombe ENTRE les deux
