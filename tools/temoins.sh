@@ -693,6 +693,7 @@ run "figure des candidats"     uv run --project "$ROOT/inference" python "$ROOT/
 run "étalon du rendu"          "$ROOT/tools/etalonner_rendu.sh" --verifier
 run "effet du cache"           uv run python "$ROOT/analysis/src/effet_du_cache.py" --verifier
 run "figure de l'étalon"       uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_etalon_rendu.py" --verifier
+run "contrôle de résolution"   "$ROOT/tools/controle_resolution.sh" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys

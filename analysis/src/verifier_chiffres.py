@@ -768,6 +768,30 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         if d.get("bruit_retenu") is not None:
             ajoute("bruit retenu du 2x2", d["bruit_retenu"], 2, p.name)
 
+    p = racine / "docs" / "etalon_rendu.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        r = d.get("resume") or {}
+        # ⚠ Le pic de memoire par valeur : c est la colonne du tableau de `50`, et c est
+        # elle qui autorise a plafonner le cache dans le chemin commun.
+        par = {}
+        for e in d.get("essais") or []:
+            par.setdefault(e["cache_gb"], []).append(e["pic_rss_kio"] / 1048576.0)
+        for gb, v in sorted(par.items()):
+            x = sorted(v)
+            med = x[len(x) // 2] if len(x) % 2 else (x[len(x)//2 - 1] + x[len(x)//2]) / 2
+            ajoute(f"pic RSS a --cache-gb {gb}", med, 2, p.name)
+        for cle, nom, n in (("pic_min_go", "pic RSS le plus bas", 2),
+                            ("pic_max_go", "pic RSS le plus haut", 2),
+                            ("etendue_intra_max_s", "etendue intra maximale", 1),
+                            ("ecart_inter_s", "ecart entre valeurs de cache", 1),
+                            ("marge_temps", "marge du temps", 2)):
+            if r.get(cle) is not None:
+                ajoute(nom, r[cle], n, p.name)
+        if r.get("recommande") is not None:
+            out.append(("cache recommande", [str(r["recommande"])], p.name))
+        out.append(("essais d etalonnage", [str(len(d.get("essais") or []))], p.name))
+
     p = racine / "docs" / "paris4_candidats.json"
     if p.exists():
         d = json.loads(p.read_text())

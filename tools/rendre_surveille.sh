@@ -39,6 +39,24 @@ if [ "${1:-}" = "--verifier" ]; then
   # ⚠ Un processus qui ne fait RIEN doit etre abandonne. `sleep` ne lit ni n'ecrit, donc son
   # compteur d'activite ne bouge pas : c'est exactement le cas que le chien de garde existe
   # pour attraper.
+  # ⚠⚠ Le plafond de cache ne doit se poser que sur le VRAI moteur. Un faux moteur qui le
+  # recevrait echouerait sur un argument inconnu -- ce qui est exactement arrive quand je
+  # l ai pose sans condition, et que cette batterie a attrape dans la seconde.
+  RENDU="echo" "$0" "$T/faux" 10 -- args > "$T/faux.log" 2>&1
+  grep -q -- "--cache-gb" "$T/faux.log"; v "un faux moteur ne reçoit PAS --cache-gb" "$?" "1"
+  # ⚠ Un faux moteur PORTANT LE NOM du vrai : « $RENDU » est un chemin de commande, pas une
+  # ligne de shell, donc on ne peut pas y glisser un argument. Il faut un exécutable.
+  mkdir -p "$T/bin"
+  printf '#!/bin/sh\necho "$@"\n' > "$T/bin/vc_render_tifxyz"; chmod +x "$T/bin/vc_render_tifxyz"
+  RENDU="$T/bin/vc_render_tifxyz" "$0" "$T/vrai" 10 -- args > "$T/vrai.log" 2>&1
+  grep -q -- "--cache-gb 1" "$T/vrai.log"; v "le vrai moteur le reçoit" "$?" "0"
+  RENDU="$T/bin/vc_render_tifxyz" CACHE_GB=7 "$0" "$T/sept" 10 -- args > "$T/sept.log" 2>&1
+  grep -q -- "--cache-gb 7" "$T/sept.log"; v "... et CACHE_GB le pilote" "$?" "0"
+  RENDU="$T/bin/vc_render_tifxyz" "$0" "$T/expl" 10 -- --cache-gb 9 > "$T/expl.log" 2>&1
+  test "$(grep -o -- "--cache-gb" "$T/expl.log" | wc -l)" = "1"
+  v "... et un choix explicite n'est pas doublé" "$?" "0"
+  grep -q -- "--cache-gb 9" "$T/expl.log"; v "... c'est le choix de l'appelant qui reste" "$?" "0"
+
   RENDU="sleep" "$0" "$T/vide" 10 -- 120 > "$T/vide.log" 2>&1; v "un processus inactif est abandonné" "$?" "4"
   grep -q "ABANDONNE" "$T/vide.log"; v "... en le disant" "$?" "0"
   grep -q "octets d'activité" "$T/vide.log"; v "... avec son activité mesurée" "$?" "0"
@@ -106,6 +124,33 @@ activite() {
 
 mkdir -p "$SORTIE"
 DEBUT=$(date +%s)
+
+# ⚠⚠ Le cache de chunks, plafonne ICI parce que c est le seul endroit que toutes les
+# campagnes traversent. Son defaut est 16 Go -- la moitie de cette machine -- et aucun des
+# 28 appels du depot ne le reglait : sur une surface de 3,66 cm2 il l atteint reellement et
+# met la machine en swap (28,2 Go de RSS, 274 Mo libres, 23,7 % d UN c ur sur 22).
+#
+# ⚠ La valeur vient d une MESURE (docs/50, tools/etalonner_rendu.sh) : quinze rendus, cinq
+# valeurs, trois repetitions. 1 Go donne le pic le plus bas ET la mediane la plus basse, et
+# surtout les quinze sorties sont IDENTIQUES au sha256 -- donc plafonner ne change aucun
+# resultat deja publie. Sans cette verification on ne pourrait pas le poser ici.
+#
+# ⚠ Un appelant qui passe deja --cache-gb garde le sien : le defaut ne doit pas ecraser un
+# choix explicite, sinon on ne pourrait plus etalonner.
+# ⚠⚠ Conditionne au MOTEUR : ce script est generique (RENDU est surchargeable, et sa propre
+# batterie l appelle avec `sleep`), donc ajouter un drapeau specifique a vc_render_tifxyz a
+# tout ce qui passe casse l auto-test -- il l a d ailleurs attrape dans la seconde. Un
+# drapeau propre a un programme ne se pose que sur ce programme.
+CACHE_GB=${CACHE_GB:-1}
+case "$RENDU" in
+  *vc_render_tifxyz*)
+    case " $* " in
+      *" --cache-gb "*) ;;
+      *) set -- "$@" --cache-gb "$CACHE_GB" ;;
+    esac
+    ;;
+esac
+
 "$RENDU" "$@" &
 PID=$!
 

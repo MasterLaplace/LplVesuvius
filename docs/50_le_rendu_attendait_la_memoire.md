@@ -36,13 +36,18 @@ programme faisait.
 --cache-gb arg (=16)    Zarr chunk cache size in GB
 ```
 
-⚠⚠ **Le cache de chunks vaut 16 Go par défaut** — la moitié de la RAM de cette machine,
-réservée avant même que la surface soit allouée. Et **aucun des 28 appels à
-`vc_render_tifxyz` de ce dépôt, répartis sur 14 scripts, ne règle cette valeur.**
+⚠⚠ **Le cache de chunks vaut 16 Go par défaut** — la moitié de la RAM de cette machine.
+Et **aucun des 28 appels à `vc_render_tifxyz` de ce dépôt, répartis sur 14 scripts, ne
+réglait cette valeur.**
 
-Sur une surface de 0,3 cm² le défaut ne se voyait pas : le cache n'était jamais rempli.
-C'est l'exacte forme d'un réglage qui attend son heure — inoffensif à toutes les tailles
-qu'on a essayées, décisif à la première qui compte.
+> ⚠ **Correction d'une première lecture.** J'ai d'abord écrit que « la cause, c'est
+> `--cache-gb 16` ». L'étalonnage dit : *à moitié*. Sur la petite surface le pic sature à
+> **4,53 Go même à `--cache-gb 16`** — le cache est alloué **paresseusement** et ne se
+> remplit qu'à hauteur de ce que la surface touche. Ce n'est donc pas un plafond qu'on
+> *paie*, c'est un plafond qu'on **atteint** quand la surface est assez grande.
+
+C'est l'exacte forme d'un réglage qui attend son heure : inoffensif à toutes les tailles
+qu'on avait essayées, décisif à la première qui compte.
 
 ---
 
@@ -100,6 +105,46 @@ que tous les rendus déjà publiés dépendaient d'une valeur que personne n'ava
 meilleur ».** Prendre le plus rapide choisirait presque toujours le plus gros cache, donc
 reconduirait exactement le défaut qu'on est en train de corriger.
 
+⚠⚠ **Et chaque valeur est répétée trois fois** — leçon que ce dépôt avait déjà écrite
+ailleurs (`tools/campagne_thread_limit.sh` : *« une seule exécution par valeur ne
+distinguerait pas l'effet du réglage de la variance de run »*). Elle vaut double ici : le
+répertoire passé à `-v` reste **vide**, donc le cache disque n'est jamais matérialisé et
+chaque essai retélécharge — le chronomètre porte autant le réseau que le réglage.
+
+### Le résultat, 15 rendus
+
+![ce que coûte le cache de chunks](images/50_etalon_rendu.png)
+
+| `--cache-gb` | temps médian | étendue | pic RSS médian |
+|---|---|---|---|
+| **1** | **71 s** | 13,1 s | **1,81 Go** |
+| 2 | 110 s | **61,7 s** | 2,98 Go |
+| 4 | 118 s | 21,9 s | 4,36 Go |
+| 8 | 141 s | 23,8 s | 4,53 Go |
+| 16 (défaut) | 135 s | 22,6 s | 4,52 Go |
+
+> ⭐ **`--cache-gb 1`** : le pic le plus bas *et* la médiane la plus basse. Les **quinze
+> sorties sont identiques** au `sha256` — donc plafonner ne déplace aucun résultat déjà
+> publié, et c'est cette vérification-là qui autorise à poser le réglage dans le chemin
+> commun (`tools/rendre_surveille.sh`).
+
+⚠ **La conclusion sur le temps penche, elle ne tranche pas.** L'écart entre valeurs (70,3 s)
+ne dépasse l'étendue à l'intérieur d'une valeur (61,7 s, à `--cache-gb 2`) que d'un facteur
+**1,14** — le dépouilleur le signale plutôt que de rendre un « concluant » nu, parce qu'une
+marge mince se lit exactement comme une conclusion solide. **La mémoire, elle, tranche** :
+1,81 contre 4,53 Go, avec des étendues de quelques centièmes.
+
+### Ce que le plafond change pour la grande surface
+
+| | mémoire attendue |
+|---|---|
+| fenêtre 41 au défaut | 25,7 Go — **swap** |
+| fenêtre 41 à `--cache-gb 1` | **10,7 Go** — tient |
+| fenêtre 161 à `--cache-gb 1` | 39,2 Go — **ne tient pas** |
+
+⭐ La fenêtre superficielle devient donc mesurable. La profonde reste hors d'atteinte au
+niveau 0, et c'est la pyramide qu'il faut interroger — voir §6.
+
 ---
 
 ## 6. Ce que ce document n'établit pas
@@ -117,10 +162,19 @@ reconduirait exactement le défaut qu'on est en train de corriger.
 ## Reproduire
 
 ```bash
-tools/etalonner_rendu.sh                       # étalonne --cache-gb sur une petite surface
+tools/etalonner_rendu.sh                       # 5 valeurs × 3 répétitions
 python3 analysis/src/effet_du_cache.py --json docs/etalon_rendu.json
+cd inference && uv run python ../analysis/src/figure_etalon_rendu.py \
+    --json ../docs/etalon_rendu.json --sortie ../docs/images/50_etalon_rendu.png \
+    --projection "fenêtre 41 au défaut=25.7" \
+    --projection "fenêtre 41 à --cache-gb 1=10.7" \
+    --projection "fenêtre 161 à --cache-gb 1=39.2"
+tools/controle_resolution.sh                   # la pyramide préserve-t-elle α ?
 
 # les témoins, hors ligne
 tools/etalonner_rendu.sh --verifier
+tools/controle_resolution.sh --verifier
+tools/rendre_surveille.sh --verifier
 python3 analysis/src/effet_du_cache.py --verifier
+cd inference && uv run python ../analysis/src/figure_etalon_rendu.py --verifier
 ```

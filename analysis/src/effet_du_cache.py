@@ -108,6 +108,12 @@ def confronter(essais: list[dict], ram_go: float | None = None) -> dict:
     d["etendue_intra_max_s"] = round(max(e["etendue_s"] for e in ok), 2)
     d["ecart_inter_s"] = round(lent["secondes"] - vite["secondes"], 2)
     d["temps_concluant"] = d["ecart_inter_s"] > d["etendue_intra_max_s"]
+    # ⚠⚠ Un booleen cache la marge, et une marge mince se lit comme une conclusion solide.
+    # Le rapport est publie a cote du verdict : a 1,1 la serie « passe » sans convaincre,
+    # a 10 elle est ecrasante, et rien dans un « concluant » nu ne les distingue.
+    d["marge_temps"] = (round(d["ecart_inter_s"] / d["etendue_intra_max_s"], 2)
+                        if d["etendue_intra_max_s"] > 0 else None)
+    d["marge_mince"] = bool(d["marge_temps"] is not None and d["marge_temps"] < 1.5)
     if not d["temps_concluant"]:
         # ⚠ La mémoire, elle, reste concluante : elle ne dépend pas du réseau. On refuse
         # de conclure sur le TEMPS sans jeter la moitié qui tient.
@@ -154,8 +160,17 @@ def rapporter(d: dict) -> None:
           f"{d['plus_lent']['cache_gb']}  →  {d['plus_rapide']['secondes']:.0f} s à "
           f"{d['plus_rapide']['cache_gb']}   ({d['gain_relatif']:.0%})")
     print(f"  pic de RSS : {d['pic_min_go']:.2f} à {d['pic_max_go']:.2f} Go")
+    if d.get("marge_temps") is not None:
+        print(f"  marge du temps : écart inter {d['ecart_inter_s']:.1f} s contre "
+              f"étendue intra {d['etendue_intra_max_s']:.1f} s  "
+              f"→ ×{d['marge_temps']:.2f}"
+              + ("   ⚠ mince : le temps penche, il ne tranche pas"
+                 if d["marge_mince"] else ""))
     print(f"\n  ⭐ {d['verdict']}   (le plus petit à moins de 5 % du meilleur ; "
           f"pic {d['pic_du_recommande_go']:.2f} Go)")
+    if d.get("marge_mince"):
+        print(f"     ⭐ la MÉMOIRE, elle, tranche sans ambiguïté : "
+              f"{d['pic_min_go']:.2f} contre {d['pic_max_go']:.2f} Go")
     if d.get("depasse_la_part_utilisable"):
         print(f"  ⚠⚠ ce pic dépasse la moitié des {d['ram_go']:.0f} Go de la machine — "
               f"prévoir du swap")
@@ -221,6 +236,20 @@ def _verifier() -> int:
            + [e(8, 200, 8.0), e(8, 202, 8.0), e(8, 201, 8.0)])
     rn = confronter(net, ram_go=32)
     v("une série propre conclut bien sur le temps", rn["temps_concluant"])
+    v("... avec une marge écrasante", rn["marge_temps"] > 10 and not rn["marge_mince"],
+      str(rn["marge_temps"]))
+    # ⚠⚠ Le cas reel de ce depot : 70,3 contre 61,7. La regle passe, et il faut que le
+    # rapport le DISE -- sinon un « concluant » nu se lit comme une conclusion solide.
+    # ⚠ La fixture reprend la série RÉELLE, valeur bruyante comprise : c'est elle qui
+    # crée la marge mince (--cache-gb 2 s'étend sur 61,7 s), et une fixture qui l'omet
+    # rend ×2,92 au lieu de ×1,14 — donc ne teste pas le cas qu'on veut attraper.
+    mince = ([e(1, 71, 1.8), e(1, 67, 1.8), e(1, 80, 1.8)]
+             + [e(2, 144, 3.0), e(2, 110, 3.0), e(2, 82, 3.0)]
+             + [e(8, 141, 4.5), e(8, 153, 4.5), e(8, 129, 4.5)])
+    rm = confronter(mince, ram_go=32)
+    v("une marge mince est signalée comme telle", rm["marge_mince"], str(rm["marge_temps"]))
+    v("... tout en concluant quand même", rm["temps_concluant"])
+    v("... et sans marge mince quand elle est large", not rn["marge_mince"])
     v("... et recommande la valeur rapide", rn["recommande"] == 2, rn["verdict"])
     v("les répétitions sont comptées", rn["repetitions"] == [3, 3], str(rn["repetitions"]))
     v("la médiane est utilisée, pas la moyenne", mediane([1, 2, 100]) == 2)
