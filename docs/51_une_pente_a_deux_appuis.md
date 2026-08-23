@@ -334,6 +334,31 @@ un lecteur ne peut pas le deviner.
 Élargir le regard jusqu'à ce que la mémoire le permette ne fait pas apparaître de pic à
 l'intérieur.
 
+### ⭐ Le témoin positif existe déjà dans l'arbre, et il n'a rien coûté
+
+Si « le pic est sur un bord » condamnait tout le monde, ça ne condamnerait personne. Les
+séries qui **convergent** répondent :
+
+| | séries qui convergent | nos traces `PHercParis4` |
+|---|---|---|
+| appuis au bord | **aucun des deux**, sur toutes celles vérifiées | **100 %** des fenêtres |
+| amplitude | **0,08 à 0,19** | **0,007 à 0,046** |
+| plancher de détection | ×4 à ×10 au-dessus | au niveau, ou dessous |
+
+⚠⚠ **Et la seconde ligne ne peut PAS être lue telle quelle.** `critere_relatif` mesure que
+l'amplitude est une propriété de la **fenêtre** autant que de la surface — β = **+1,01** sur
+la grande surface, donc elle croît presque proportionnellement à la profondeur. Or les séries
+convergentes sont à 31/81 couches de 8,64 µm (699,8 µm) et les nôtres à 81 couches de 4,8 µm
+(388,8 µm) : **les profondeurs physiques ne coïncident pas**, donc comparer les amplitudes
+brutes compare aussi deux fenêtres.
+
+⭐ La **première** ligne, elle, tient sans réserve : « le pic est-il sur un bord » est une
+question binaire posée à l'intérieur de chaque fenêtre, quelle que soit sa profondeur.
+
+> **Le pas suivant, nommé** : rendre une série convergente et une des nôtres à la **même
+> profondeur physique**, pour que la comparaison d'amplitude devienne licite. C'est le
+> protocole de `47` appliqué à l'amplitude, et rien dans l'arbre ne l'offre gratuitement.
+
 ## 7. Ce que ce document n'établit pas
 
 - ⚠ **Que la fenêtre de 41 couches soit trop étroite pour ce rouleau.** L'amplitude passe de
