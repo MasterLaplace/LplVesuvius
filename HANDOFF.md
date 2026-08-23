@@ -45,7 +45,7 @@ quoi que ce soit.
 
 | mur | ce qui est mesuré | document |
 |---|---|---|
-| le tracé ne suit pas de feuille | ⚠ **corrigé le 2026-08-23** : sur 27 séries `PHercParis4`, **une seule** porte un verdict — α = +1,12, deux appuis mesurés, *suit la fenêtre*. Les 26 autres reposent sur un appui au bord | [`51`](docs/51_une_pente_a_deux_appuis.md) puis [`48`](docs/48_ou_monter_lexperience.md) |
+| le tracé ne suit pas de feuille | ⚠ **révisé le 2026-08-24** : sur 27 séries `PHercParis4`, **une seule** porte un verdict (α = +1,12). Un couple acheté exprès (41/83 couches, 796,8 µm) n'en porte pas non plus. ⭐ Mais à **100,8, 384 et 796,8 µm**, **100 % des fenêtres ont leur pic sur un bord de pile** | [`51`](docs/51_une_pente_a_deux_appuis.md) puis [`48`](docs/48_ou_monter_lexperience.md) |
 | les patchs publiés ne se recollent pas | un patch PAR feuille, paire la plus proche à 79 µm ≈ 2× le seuil | [`44`](docs/44_ou_la_chaine_se_trouve.md) |
 | l'extension tangentielle est un point fixe | le cycle rogner-étendre converge vers ~6 cm² | [`44`](docs/44_ou_la_chaine_se_trouve.md) §7 |
 | la chaîne casse au sixième tour | et la repousse la coupe au troisième | [`43`](docs/43_la_chaine_des_spires.md) |
@@ -76,6 +76,29 @@ quoi que ce soit.
   passer** — β = log(C₁/C₀)/log(n₁/n₀), lu comme α. ⚠ Appliqué au matériel réel : **une
   seule grandeur sur treize se lit en absolu** (`tiers_central`, 11 séries). Le profil
   n'offre pas de second critère absolu, ce qui **renforce** `47` au lieu de le lever.
+
+### Ce que la nuit du 2026-08-24 a ajouté
+
+- ⚠⚠ **Une fenêtre a DEUX bords.** Une fenêtre de N tranches centrée sur `couche_tracee`
+  n'est pas symétrique quand N est pair : 40 tranches centrées sur la 20e atteignent 20
+  couches d'un côté et **19** de l'autre. Comparer l'écart à la seule demi-fenêtre déclarait
+  « intérieur » un écart posé sur l'autre bord — et allait faire publier α = +1,06 comme le
+  premier α de ce rouleau dont les deux appuis mesurent. C'est `au_bord = 1,0` dans le
+  profil, contre un verdict qui disait l'inverse, qui a tranché.
+- ⚠ **Une série de plus de deux fenêtres a plusieurs couples.** Prendre les extrêmes
+  maximise le bras de levier et peut réintroduire un appui vide : sur la campagne au
+  niveau 2 (11, 41, 81, 83 couches) ça jetait le couple 41/83 qu'un rendu venait de payer.
+  `juger_serie` retient le plus large couple **dont les deux bouts mesurent**, et dit lequel.
+- ⚠ **Deux conventions de rangement des profils** coexistent, et une seule était vue :
+  `audit_profils_plats.serie_de` les réconcilie, **niveau de pyramide inclus dans la clé**.
+- ⭐ **Le niveau 2 coûte huit fois moins que le niveau 1** pour le même couple physique :
+  6 h 30 contre ~11 min, mesuré. Le vérifier avant de lancer un rendu long.
+- ⚠ **`profiler_une_surface.sh` refuse maintenant AVANT de rendre** un couple dont le
+  rapport sera jugé insuffisant — une fenêtre de N tranches vaut `2*(N//2)+1` couches, donc
+  40/81 tranches se lit 41/81, rapport 1,98, refusé après deux rendus payés.
+- ⭐ **`rendre_surveille.sh` journalise son propre débit.** Sans ça j'ai mesuré à la main,
+  avec une horloge que je ne contrôlais pas, et conclu « bloqué à 0,6 Kio/s » sur un rendu
+  qui avançait à 89.
 
 ### ⚠ Les pièges qui se sont repayés, et leur remède définitif
 
