@@ -18,15 +18,18 @@ d'ailleurs sur ce constat — son α = 0,91 *est* la mesure réelle de `PHercPar
 
 ## Les épisodes
 
-| n° | titre | ce qu'on y comprend | état |
+| n° | titre | ce qu'on y comprend | durée |
 |---|---|---|---|
-| **1** | Suivre une feuille | rouleau, spire, coupe, pile, graine, trace, rendu | ✅ 72 s |
-| **2** | Comment savoir si c'est la bonne feuille ? | le profil de profondeur, le logarithme, **α** | ✅ 3 min 15 |
-| **3** | Le mur invisible | la troncature : quand la stabilité est un réglage | 🔨 |
-| 4 | Le traceur n'est pas une fonction | le bruit de tirage, pourquoi il faut répéter | ⏳ |
-| 5 | Le témoin négatif | prouver qu'un détecteur ne prouve rien | ⏳ |
-| 6 | α ≈ 1 a deux causes | le pic qui recule *contre* le profil plat | ⏳ |
-| 7 | Ce que mesurer coûte | le mur mémoire, et pourquoi il était invisible | ⏳ |
+| **1** | Suivre une feuille | rouleau, spire, coupe, pile, graine, trace, rendu | 1 min 12 |
+| **2** | Comment savoir si c'est la bonne feuille ? | le profil de profondeur, le logarithme, **α** | 3 min 15 |
+| **3** | Le mur invisible | la troncature : quand la stabilité n'est qu'un réglage | 1 min 46 |
+| **4** | Le traceur n'est pas une fonction | le bruit de tirage, et pourquoi il faut **répéter** | 1 min 05 |
+| **5** | Le témoin négatif | prouver qu'un détecteur **ne prouve rien** | 1 min 25 |
+| **6** | α ≈ 1 a deux causes | le pic qui recule *contre* le profil plat | 1 min 11 |
+| **7** | Ce que mesurer coûte | le mur mémoire, et pourquoi il était invisible | 1 min 52 |
+
+**7 épisodes, 11 min 48 au total.**
+
 
 ## Fabriquer
 
