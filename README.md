@@ -48,6 +48,7 @@ nôtres (α = +1,01) — à quatre spires de portée, le pic n'a toujours rien t
 | ⭐⭐ **savoir qu'un seuil absolu compare des réglages** : 13 traces sur 16 butent sur le plafond du rendu, qui double avec la profondeur ([`47`](docs/47_le_critere_doit_etre_relatif.md)) | construire le critère **auto-référentiel** qui remplacerait ce seuil — il faut des traces non censurées aux deux profondeurs, et le dépôt en a deux |
 | ⭐⭐⭐ **α ≈ 1 a DEUX causes** — un pic qui recule, et aucun pic du tout — et l'audit des **217 profils** dit lesquelles : 20 séries sur 107, **0 verdict positif touché** ([`49`](docs/49_alpha_ne_separe_pas_deux_pannes.md)) | — |
 | ⭐ **savoir où monter l'expérience « réparer sert-il ? »** : traçables et lisibles sont **disjoints** (13 contre 3), donc c'est `PHercParis4` ([`48`](docs/48_ou_monter_lexperience.md)) | la monter : il faut une trace fautive, sa réparation, et un aval qui **réponde** — la condition se vérifie en une inférence |
+| ⭐⭐ **un rendu peut être limité par une ressource que personne ne mesure** : 28,2 Go de RSS sur 32, 3,4 Go en swap, **23,7 % d'un cœur sur 22** — le cache de chunks vaut 16 Go par défaut et aucun des 28 appels du dépôt ne le réglait ([`50`](docs/50_le_rendu_attendait_la_memoire.md)) | la fenêtre profonde : 38,2 Go de tampons, qu'aucun réglage de cache ne réduit — reste la pyramide, à valider |
 
 ⭐ **L'objectif est donc nommable** : pas « réduire l'écart », mais **faire converger la
 mesure**. Une trace qui converge suit une feuille, quelle que soit sa valeur.
