@@ -51,3 +51,11 @@ article/pg-*.png
 # vivent deja dans l'arbre -- et il refuserait de se reconstruire a l'identique le jour ou
 # une figure change, ce qui est justement ce qu'on veut qu'il detecte.
 soumission/
+
+# Manim : l'environnement, les rendus intermédiaires et les vidéos assemblées.
+# ⚠ Les SCÈNES sont versionnées (c'est le code) ; les mp4 ne le sont pas — ils se
+# régénèrent par `apprendre/rendre.sh` et pèsent des mégaoctets à chaque itération.
+apprendre/.venv/
+apprendre/media/
+apprendre/videos/
+apprendre/vignettes/
