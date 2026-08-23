@@ -142,7 +142,70 @@ amplitude de **0,0194** pour un seuil de 0,02. **C'est un appui au bord, et il e
 > portée, c'est de rejuger la série : les trois autres profils ne sont pas dans l'arbre,
 > donc les redemander veut dire relancer le rendu, pas relire un fichier.
 
-## 6. Ce que ce document n'établit pas
+## 6. ⭐ Le pas suivant, chiffré : quel couple de fenêtres peut porter une pente
+
+Si la fenêtre de 41 couches est sous le plancher sur ce rouleau, relancer la même campagne
+avec le même couple redonnera **le même nombre**. D'où
+[`analysis/src/fenetre_utilisable.py`](../analysis/src/fenetre_utilisable.py) (37 témoins),
+qui répond en deux temps et dans cet ordre :
+
+1. ⭐ **un fait, sans modèle** — parmi les profondeurs déjà mesurées, y en a-t-il deux qui
+   dégagent le plancher avec un rapport d'au moins deux ?
+2. ⚠ **une prédiction, avec son étiquette** — sinon, à quelle profondeur l'amplitude
+   croiserait le plancher, en supposant amplitude ∝ n^β.
+
+![le plancher de détection, et la fenêtre qu'il faut rendre](images/51_fenetre.png)
+
+| état | séries |
+|---|---:|
+| couple confortable disponible | **95** |
+| couple disponible, sans marge | **9** |
+| il faut rendre une fenêtre plus profonde | **28** |
+
+Pour les trois candidats `PHercParis4`, la cible vaut **73,9**, **72,6** et **74,6**
+couches, avec un facteur d'extrapolation de **×1,00** — autrement dit *dans* l'intervalle
+41→161 déjà mesuré. Ce n'est pas une extrapolation, c'est une interpolation entre deux points
+qu'on possède.
+
+> ⚠⚠ **Et l'étiquette compte plus que le chiffre.** Avec exactement deux profondeurs il n'y a
+> **aucun résidu**, donc la loi de puissance n'est pas réfutable : la prédiction est
+> l'extrapolation d'un modèle qu'on n'a pas pu tester. Ce dépôt a déjà publié un débit de
+> rendu extrapolé depuis *un* échantillon, corrigé depuis d'un facteur vingt à soixante-dix.
+> Le pas suivant n'est donc pas « rendre 81 couches parce que le modèle le dit », c'est
+> **rendre une fenêtre intermédiaire et mesurer**.
+
+### ⚠⚠ Le +1 interdit le couple évident
+
+La couche tracée est au **centre** de sa fenêtre, donc une fenêtre de demi-largeur n compte
+2n+1 couches. Doubler la demi-fenêtre ne double donc **pas** la fenêtre : 81/41 = **1,976**,
+et `test_convergence` refuse un rapport sous 2. Un couple utilisable exige un saut d'un
+facteur **quatre** en demi-fenêtre — d'où (41, 161) aujourd'hui, et **(81, 321)** demain.
+Je l'attendais faux, et c'est le témoin qui m'a repris.
+
+### La pyramide préserve-t-elle l'amplitude ? Mesuré, et la réponse est mitigée
+
+`50` établit que la pyramide préserve **α**. Mais α est un rapport d'écarts, pas une
+amplitude, et un niveau plus grossier **moyenne** des voxels : il peut lisser le relief que
+le plancher cherche. Sur la seule surface rendue aux deux niveaux
+(`data/controle_resolution`) :
+
+| profondeur physique | voxel 2,4 → 4,8 µm | écart | plancher |
+|---|---|---:|---|
+| 99,6 µm | 0,0146 → 0,0147 | **+0,4 %** | ⭐ même camp (sous) |
+| 387,6 µm | 0,0463 → 0,0360 | **−22,1 %** | ⭐ même camp (au-dessus) |
+
+⭐ Ce qui décide n'est pas l'écart mais le **camp** : les deux niveaux rendent le même verdict
+aux deux profondeurs, donc rendre moins cher est légitime *ici*. ⚠ Mais l'amplitude perd 22 %
+à la fenêtre profonde, donc ce n'est pas une invariance : c'est une marge qui suffit
+aujourd'hui, sur une surface, avec deux points.
+
+⚠⚠ **Et l'appariement de ce tableau est DÉCLARÉ, jamais deviné.** Ma première version
+balayait l'arbre et appariait par profondeur seule : elle a mis face à face deux traces sans
+rapport à 99,6 µm et rapporté « −53,8 % » comme si la pyramide avait mangé le relief. Un
+chiffre parfaitement plausible, et une comparaison entre étrangers. L'outil exige désormais
+`--niveaux <dossiers>`.
+
+## 7. Ce que ce document n'établit pas
 
 - ⚠ **Que la fenêtre de 41 couches soit trop étroite pour ce rouleau.** L'amplitude passe de
   0,0175 à 0,0462 entre 41 et 161 couches sur `ps256` c0 : elle croît avec la fenêtre. Une
@@ -158,10 +221,12 @@ amplitude de **0,0194** pour un seuil de 0,02. **C'est un appui au bord, et il e
 
 ```bash
 python3 analysis/src/appui_de_pente.py --racine . --json docs/appui_de_pente.json
+python3 analysis/src/fenetre_utilisable.py --racine . \
+    --niveaux data/controle_resolution --json docs/fenetre_utilisable.json
+cd inference && uv run python ../analysis/src/figure_fenetre.py \
+    --json ../docs/fenetre_utilisable.json --sortie ../docs/images/51_fenetre.png
 cd inference && uv run python ../analysis/src/figure_appuis.py \
     --json ../docs/appui_de_pente.json --sortie ../docs/images/51_appuis.png
-cd inference && uv run python ../analysis/src/figure_appuis.py \
-    --json ../docs/appui_de_pente.json --sortie ../docs/images/en/51_appuis.png --anglais
 
 # le verdict porte désormais son appui
 cd inference && uv run python ../analysis/src/test_convergence.py --nom ps256_c0 \
@@ -170,6 +235,8 @@ cd inference && uv run python ../analysis/src/test_convergence.py --nom ps256_c0
 
 # les témoins, hors ligne
 python3 analysis/src/appui_de_pente.py --verifier
+python3 analysis/src/fenetre_utilisable.py --verifier
+python3 analysis/src/figure_fenetre.py --verifier
 python3 analysis/src/figure_appuis.py --verifier
 python3 analysis/src/test_convergence.py --verifier
 ```

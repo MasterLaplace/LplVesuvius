@@ -11,6 +11,19 @@ l'historique, daté, et se lit ensuite.
 
 Ce bloc est en tête pour une raison : c'est ce qu'il faut lire en premier après une coupure.
 
+### Le prompt de la boucle, gardé ici parce qu'il se perd ailleurs
+
+⚠ Il vit dans l'historique d'une session, donc il disparaît avec elle. Copié verbatim :
+
+```
+/loop continue à vider les tâches et tenter d'atteindre le graal; n'oublie cependant pas de mettre à jour la documentation et que chaque script dans le terminal peut être perdu, donc s'il mérite d'être du vrai code n'hésite pas. et également que c'est bien les illustrations/figures/images dans les doc.
+```
+
+Quatre exigences permanentes : **(a)** vider le registre de tâches et viser le graal,
+**(b)** tenir la documentation à jour, **(c)** tout script de terminal qui mérite d'être du
+vrai code doit le devenir — un script perdu est une mesure perdue, **(d)** les
+illustrations, figures et images des documents comptent.
+
 ### Où en est le dépôt
 
 `MasterLaplace/LplVesuvius`, **privé**, `main` à jour. Une branche `release/progress-prize`
@@ -619,7 +632,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./tools/temoins.sh                      # 72 batteries, 1829 contrôles hors ligne, tous verts
+./tools/temoins.sh                      # 75 batteries, 1900 contrôles hors ligne, tous verts
 ./tools/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)

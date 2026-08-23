@@ -65,6 +65,10 @@ def lire_profil(p: Path) -> dict | None:
     e = float(d["ecart_trace_um_median"])
     return {"fichier": str(p), "ecart_um": e,
             "plafond_um": plafond,
+            # ⚠ L'epaisseur d'un voxel est reportee telle quelle : c'est la SEULE grandeur
+            # qui rend deux niveaux de pyramide comparables, et la deduire du plafond
+            # ailleurs ferait un second calcul de la meme chose.
+            "voxel_um": (float(vx) if vx else None),
             # ⚠ Comparaison a une tolerance relative : les ecarts sont des medianes de
             # quantites discretisees au pas de couche, donc exiger l'egalite exacte raterait
             # un ecart pose au bord a un arrondi pres.

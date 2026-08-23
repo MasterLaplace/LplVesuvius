@@ -195,7 +195,7 @@ material.
 
 Two geometric facts matter throughout. The sheets are thin and close: on `PHerc1447` we
 measure a median centre-to-centre spacing of 113 #um between neighbouring sheets
-(#link(<sec:geom>)[Section 5.4]), which is about 13 voxels at 8.64 #um. And a
+(#link(<sec:geom>)[Section 5.5]), which is about 13 voxels at 8.64 #um. And a
 segment is small relative to a turn: each of ours spans 8 to 22 mm of arc, between 7.7 %
 and 11.8 % of one revolution.
 
@@ -208,7 +208,7 @@ budget matters a great deal, and #link(<sec:ceiling>)[Section 5.2] is about that
 
 The tool also offers a *neighbour* mode that projects an existing surface along its own
 vertex normals to the next sheet, and a *resume* mode that lets an existing surface keep
-growing. We use both in #link(<sec:chain>)[Section 5.4].
+growing. We use both in #link(<sec:chain>)[Section 5.6].
 
 == Existing quality signals
 
@@ -381,6 +381,64 @@ own window edge.
   the wording "the peak moves with the window", which presumes a peak. Our tool now reads
   the profile's own amplitude against its own detection floor and returns *undecidable*
   rather than a confident sentence about an object that is not there.
+]
+
+== A slope has two footings <sec:footings>
+
+The refusal above aggregates window amplitudes with a *maximum*: if one window has relief,
+the series is not empty. That rule answers "is there anything here". It does not answer
+"what is the slope", and $alpha$ is a slope through two points. A footing that measures
+nothing is not a footing.
+
+The remedy is not another refusal. A reading pinned to the window edge is not missing data:
+it is a *bound*. The peak is at least that far, possibly further. Since
+$alpha = log(e_1 slash e_0) slash log(n_1 slash n_0)$ with $n_1 > n_0$, the direction
+follows rather than being guessed.
+
+#figure(
+  image("figures/51_appuis.png", width: 100%),
+  caption: [
+    A gap at the window edge is an *arrow*, not a point. *Left:* both footings at the edge,
+    so no slope is excluded and $alpha = +1.01$ carries nothing. *Right:* only the narrow
+    footing is at the edge, so the admissible slopes open into a single corner --- all of
+    them below the drawn line --- and the converging verdict survives.
+  ],
+) <fig:footings>
+
+#figure(
+  table(
+    columns: (1fr, auto),
+    align: (left, right),
+    table.header[footing at the edge][$alpha$ is],
+    [neither], [exact],
+    [the *narrow* one], [an *upper* bound: convergence holds, condemnation does not],
+    [the *wide* one], [a *lower* bound: condemnation holds, convergence does not],
+    [both], [nothing],
+  ),
+  caption: [
+    The sign of the bound decides which verdict survives. A footing that is *flat but not at
+    the edge* gives no sign at all: its reading is the argmax of noise, neither an upper nor
+    a lower bound.
+  ],
+) <tab:footings>
+
+Over the 132 judgeable series of our tree: 92 rest on two measured footings, 14 on an upper
+bound, *none* on a lower bound, and 26 on no footing that holds. *33 verdicts no longer
+stand*; 7 are saved by the sign; and *0 of the 75 converging series* is lost --- because the
+only sign observed preserves exactly what sits below the threshold. The reassurance of
+#link(<sec:twofailures>)[Section 3.5] is thereby given a mechanism instead of an observation.
+
+#caveat[
+  *Twenty series returned the same number, to four decimals.* When both footings are at the
+  edge, $alpha = log(192 slash 48) slash log(161 slash 41) = 1.0135$ --- a property of the
+  *window pair* and of nothing else. Twenty independent runs, on seeds thousands of voxels
+  apart, in two different predictions, with different draws of a stochastic tracer, return
+  it identically. This is the lesson of
+  #link(<sec:ceiling>)[Section 5.2] one level deeper: there, eight areas agreed to four
+  significant figures because a budget truncated them all; here, twenty exponents agree to
+  four decimals because a window pair determines them all. In both cases the *coherence* is
+  what makes the artefact invisible, and each individual value --- 0.3175 cm#super[2],
+  $+1.01$ --- looks entirely plausible on its own.
 ]
 
 = Remote triage from published surface volumes <sec:triage>
@@ -598,7 +656,7 @@ truncations at the same place.
 #caveat[
   *And we then failed to apply it to ourselves.* Every trace we made on `PHercParis4` ---
   the sixteen cells of the prediction cross, the eight seed candidates of
-  #link(<sec:seedchoice>)[Section 6.4] --- was run at 60 generations, and all of them stop
+  #link(<sec:seedchoice>)[Section 5.3] --- was run at 60 generations, and all of them stop
   at generation 59. Their areas agree to *0.06 %* (0.3174 to 0.3176 cm#super[2]) across
   seeds separated by thousands of voxels in two different predictions. That agreement is
   exactly the signature this section teaches one to recognise, and we read it as nothing at
@@ -627,19 +685,30 @@ answer before measuring it. We traced all eight candidates.
     Eight seed candidates on `PHercParis4`. Each property is drawn on *its own observed
     range*, printed above the column --- a full planarity bar spans 0.987 to 1.000, not 0 to
     1. Five candidates return a profile too flat to measure at all; three return
-    $alpha approx 1$. The properties vary widely; the outcome varies only by prediction.
+    $alpha approx 1$ --- and #link(<sec:footings>)[Section 3.6] shows that those three do
+    not measure either. The properties vary widely; the outcome does not vary at all.
   ],
 ) <fig:candidates>
 
 *Zero of eight converge.* The lowest $alpha$ obtained is $+1.01$ against a condemnation
 threshold of 0.7. The five candidates of the second prediction all fall under the flat-profile
-refusal of #link(<sec:twofailures>)[Section 3.4]: they report window *edges*, whose ratio is
+refusal of #link(<sec:twofailures>)[Section 3.5]: they report window *edges*, whose ratio is
 the ratio of the windows, so $alpha approx 1$ by arithmetic identity whatever the volume
 contains.
 
+*And zero of eight measure.* The remaining three, which we first reported as yielding an
+$alpha$, have their narrow window *below the instrument's detection floor*; two of them have
+*both* readings pinned to the half-window. By #link(<sec:footings>)[Section 3.6] none of the
+eight rests on two footings that carry a verdict. Of the 27 `PHercParis4` series in our tree,
+*26 fall and one holds*: `ps256_sur_graine_ps256`, at $alpha = +1.12$ on two measured
+footings, still condemning the trace. The wall stands on one measurement rather than
+twenty-seven --- harder to state, and easier to defend, since twenty-seven numbers of which
+twenty are the same arithmetic identity are not twenty-seven witnesses.
+
 #caveat[
-  *We decline to report a correlation, and that is the point.* Only three candidates yield an
-  $alpha$ at all. With eight points, the correlation detectable at 80 % power and
+  *We decline to report a correlation, and that is the point.* Only three candidates yielded
+  an $alpha$ at all --- and by #link(<sec:footings>)[Section 3.6], none of the three carries
+  information. With eight points, the correlation detectable at 80 % power and
   $alpha = 0.05$ exceeds *0.84*: nothing short of a near-perfect relationship would be
   visible. A middling $rho$ here would not be an absence of effect, it would be an absence of
   power, and reporting it as the former is the most common way a null result is manufactured.
@@ -846,7 +915,7 @@ point-to-point gap.
 
 The published segmentation of this scroll is a set of samples --- *one patch per sheet* ---
 not a tiling of one sheet. There is nothing to stitch. Combined with the fixed point of
-#link(<sec:chain>)[Section 5.5], both named routes to a continuous strip are measured and
+#link(<sec:chain>)[Section 5.6], both named routes to a continuous strip are measured and
 closed, each for its own reason.
 
 = Discussion <sec:disc>
@@ -874,7 +943,7 @@ it.
 
 We met the same mechanism three times in this work, in three unrelated parts of the
 pipeline: the generation budget of the tracer (#link(<sec:ceiling>)[Section 5.2]), the
-render window of the flattening step (#link(<sec:depth>)[Section 5.3]), and --- in the
+render window of the flattening step (#link(<sec:depth>)[Section 5.4]), and --- in the
 opposite direction --- the fact that the *absence* of a stopping condition is what made the
 convergence test of #link(<sec:conv>)[Section 3] transportable. A quantity that a setting
 can cap is a quantity whose reported spread is, in part, a property of the setting.
@@ -1030,7 +1099,7 @@ Three properties recur in the instruments above and are worth naming.
   single-render statistic we tried. Depth is a clock, and we cannot yet separate it from a
   cause.
 
-+ *The relative criterion is proposed, not built* (#link(<sec:depth>)[Section 5.3]). We
++ *The relative criterion is proposed, not built* (#link(<sec:depth>)[Section 5.4]). We
   show that an absolute threshold on a profile criterion compares settings; we do not show
   that reading the same criterion as an exponent works. It needs traces uncensored at both
   depths --- 92 of our series qualify --- so what is missing is the definition of the

@@ -725,6 +725,21 @@ run "critere relatif"          uv run --project "$ROOT" python "$ROOT/analysis/s
 # exactement les verdicts qui tombent. Mesure : 20 series rendaient l identite +1,0135 du
 # couple de fenetres 41c/161c, la meme valeur a la quatrieme decimale.
 run "appuis de la pente"       uv run --project "$ROOT" python "$ROOT/analysis/src/appui_de_pente.py" --verifier
+# ⚠⚠ Le choix du couple de fenetres. Sa sonde centrale est le +1 : la couche tracee est au
+# CENTRE, donc doubler la demi-fenetre ne double pas la fenetre (81/41 = 1,976) et le couple
+# evident est refuse. Sa seconde sonde est l appariement inter-niveaux, qui doit etre
+# DECLARE : une premiere version balayait l arbre et comparait deux traces etrangeres.
+run "fenêtre utilisable"       uv run --project "$ROOT" python "$ROOT/analysis/src/fenetre_utilisable.py" --verifier
+# ⚠⚠ Les renvois de l article. Typst numerote seul, mais le TEXTE d un `#link` est ecrit a
+# la main : inserer une sous-section decale la numerotation sans toucher un de ces textes.
+# Mesure le 2026-08-23 : SIX renvois sur trente-deux pointaient ailleurs, dont un qui
+# envoyait du choix de graine (5.3) vers le temoin negatif (6.4).
+run "renvois de l'article"     uv run --project "$ROOT" python "$ROOT/analysis/src/renvois_article.py" --verifier
+# ⚠ La figure du plancher de detection. Sa sonde centrale est la COULEUR : les points sous
+# le plancher et ceux qui le degagent n'ont pas la meme, sinon le lecteur cherche le
+# plancher au lieu de le voir. Sa seconde sonde exige que la cible tombe ENTRE les deux
+# fenetres mesurees -- c'est ce que le pied de la figure affirme.
+run "figure de la fenêtre"     uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_fenetre.py" --verifier
 # ⚠ La figure des appuis. Sa sonde centrale est que les DEUX formes de domaine apparaissent,
 # une par panneau : un coin dit « une part des pentes est exclue », un lavis dit « aucune ».
 # Compter des traits laisserait passer deux panneaux dessines pareil.
@@ -827,6 +842,18 @@ if uv run python "$ROOT/analysis/src/verifier_chiffres.py" "$ROOT"/docs/*.md \
   printf '✅ %s\n' "$(grep -c '✅' /tmp/chiffres.log) chiffres retrouves"
 else
   printf '❌ ECHEC\n'; sed 's/^/       /' /tmp/chiffres.log | tail -6; FAIL=$((FAIL + 1))
+fi
+
+# ⚠⚠ ET LE VRAI CONTROLE, sur le document lui-meme. La batterie `--verifier` ci-dessus ne
+# teste que l'instrument ; sans cette ligne, il ne regarderait JAMAIS l'article, et une
+# batterie verte voudrait dire « le compteur de sections fonctionne » et rien de plus.
+printf '  %-30s ' "renvois de l'article"
+if uv run --project "$ROOT" python "$ROOT/analysis/src/renvois_article.py" \
+     "$ROOT/article/article.typ" --pdf "$ROOT/article/article.pdf" \
+     --readme "$ROOT/article/README.md" > /tmp/renvois.log 2>&1; then
+  printf '✅ %s\n' "$(grep -o '[0-9]* renvoi(s) de section' /tmp/renvois.log | head -1)"
+else
+  printf '❌ ECHEC\n'; sed 's/^/       /' /tmp/renvois.log | tail -8; FAIL=$((FAIL + 1))
 fi
 
 # ⚠⚠ GARDE DE SYNTAXE DES FORMULES. Les documents sont du Markdown : les maths s'y ecrivent

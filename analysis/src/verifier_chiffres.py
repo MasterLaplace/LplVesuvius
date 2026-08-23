@@ -871,6 +871,41 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"alpha d identite {x['couches'][0]}c/{x['couches'][1]}c",
                        x["alpha"], 4, p.name)
 
+    p = racine / "docs" / "fenetre_utilisable.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        for etat, nom in (("couple confortable disponible", "series a couple confortable"),
+                          ("couple disponible, sans marge", "series a couple sans marge"),
+                          ("il faut rendre une fenêtre plus profonde",
+                           "series demandant une fenetre plus profonde")):
+            v = (d.get("par_etat") or {}).get(etat)
+            if v is not None:
+                out.append((nom, [str(v)], p.name))
+        # ⚠ La profondeur cible des candidats : c est le chiffre sur lequel le prochain
+        # rendu sera dimensionne, donc il doit vieillir bruyamment.
+        for k, j in sorted((d.get("detail") or {}).items()):
+            if "paris4_candidats/ps256" not in k:
+                continue
+            pr = j.get("prediction") or {}
+            if pr.get("profondeur_cible") is not None:
+                ajoute(f"profondeur cible {k.rsplit('/', 1)[-1]}",
+                       pr["profondeur_cible"], 1, p.name)
+        # ⚠⚠ L ecart d amplitude entre deux niveaux de pyramide : c est le chiffre qui
+        # autorise (ou non) a rendre la fenetre suivante moins cher. Sans garde, il
+        # vieillirait au premier rendu supplementaire.
+        for x in d.get("amplitude_entre_niveaux") or []:
+            if x.get("ecart_relatif") is None:
+                continue
+            # ⚠⚠ Ecritures SIGNEES ET UNITEES seulement, jamais la forme nue. « 0,4 » fait
+            # trois caracteres : mesure, il apparait dans 36 documents du depot, donc un
+            # ✅ dessus ne veut rien dire. C'est le conseil que ce fichier donne deja
+            # ailleurs -- « 1,81 Go » se cherche, « 1,81 » non -- applique ici.
+            pc = x["ecart_relatif"] * 100.0
+            signe = "+" if pc >= 0 else "-"
+            out.append((f"ecart d amplitude a {x['profondeur_um']:g} um",
+                        [f"{signe}{fr(abs(pc), 1)} %", f"{signe}{en(abs(pc), 1)} %"],
+                        p.name))
+
     p = racine / "docs" / "etalon_rendu.json"
     if p.exists():
         d = json.loads(p.read_text())
