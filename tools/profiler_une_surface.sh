@@ -38,6 +38,12 @@ FENETRE_ANALYSE=${FENETRE_ANALYSE:-1024}
 
 tranches_au_niveau() { python3 -c "print(max(3, int($1 / 2**$2 + 0.5)))"; }
 voxel_au_niveau()    { python3 -c "print($1 * 2**$2)"; }
+# ⚠⚠ LE COMPTE DE COUCHES QUE LE VERDICT LIRA, qui n est pas le compte de tranches. Le
+# profil enregistre `couche_tracee = N / 2` (division entiere) et `test_convergence` en
+# deduit `2 x couche_tracee + 1`. Une fenetre de 40 tranches est donc relue comme 41
+# couches. Sans cette fonction on raisonne sur 40 et 81 -- rapport 2,03, admissible --
+# alors que le verdict verra 41 et 81, rapport 1,98, et REFUSERA apres deux rendus.
+couches_effectives() { python3 -c "print(2 * ($1 // 2) + 1)"; }
 
 if [ "${1:-}" = "--verifier" ]; then
   ok=0; n=0
@@ -78,6 +84,23 @@ if [ "${1:-}" = "--verifier" ]; then
   # ⚠⚠ Le niveau de la reference : sans lui, une reference rendue au niveau 1 fait refuser
   # une surface analysable. La regle est testee sur les deux formes de chemin.
   niv_ref() { case "$1" in */g[0-9]_n[0-9]*/rendu/*) echo "$1" | sed -n 's|.*/g\([0-9]\)_n[0-9]*/rendu/.*|\1|p' ;; *) echo 0 ;; esac; }
+  # ⚠⚠ Le +1 : une fenetre de 40 tranches est relue comme 41 couches, donc un couple
+  # 40/81 a un rapport de 1,98 et non 2,03. Le refuser AVANT le rendu est le meme argument
+  # que le refus a 1024 px, que ce fichier applique deja.
+  chk "40 tranches valent 41 couches" '[ "$(couches_effectives 40)" = 41 ]'
+  chk "81 tranches en valent 81" '[ "$(couches_effectives 81)" = 81 ]'
+  chk "83 tranches en valent 83" '[ "$(couches_effectives 83)" = 83 ]'
+  L_REFUS=$(grep -n 'exit 6' "$ROOT/tools/profiler_une_surface.sh" | cut -d: -f1 | head -1)
+  L_RENDU=$(grep -n 'rendre_surveille.sh' "$ROOT/tools/profiler_une_surface.sh" | cut -d: -f1 | head -1)
+  chk "le refus du rapport sort AVANT le rendu" \
+      '[ -n "$L_REFUS" ] && [ -n "$L_RENDU" ] && [ "$L_REFUS" -lt "$L_RENDU" ]'
+  # ⚠⚠ Une campagne tronquee doit se DIRE. Sans ca son JSON ressemble a un resultat.
+  chk "une campagne tronquee est signalee" \
+      'grep -q "CAMPAGNE TRONQUEE" "$ROOT/tools/profiler_une_surface.sh"'
+  chk "... et la mention voyage dans le JSON" \
+      'grep -q "campagne_complete" "$ROOT/tools/profiler_une_surface.sh"'
+  chk "les fenetres produites sont comptees, pas supposees" \
+      '[ "$(grep -c "PRODUITES=\$((PRODUITES + 1))" "$ROOT/tools/profiler_une_surface.sh")" = 1 ]'
   chk "une reference dans g1_n163 est lue au niveau 1" \
       '[ "$(niv_ref a/g1_n163/rendu/000.tif)" = 1 ]'
   chk "une reference hors de cette forme est au niveau 0" \
@@ -159,8 +182,27 @@ if [ -n "$REF" ]; then
     fi
   fi
 fi
-PROFILS=""
+# ⚠⚠ LE REFUS AVANT DE PAYER, et ce fichier le pratiquait deja pour la taille de fenetre
+# d analyse sans l appliquer au RAPPORT. Paye le 2026-08-24 : un couple demande a 40 et 81
+# tranches a coute deux rendus, puis le verdict a repondu « fenetres trop proches (41 et 81,
+# rapport 1.98) ». Le meme argument que le refus a 1024 px vaut ici -- rendre serait payer
+# un calcul entier pour un refus a la toute derniere etape.
+RAPPORT_MIN=2
+EFF=""
 for F in $FENETRES_BASE; do
+  EFF="$EFF $(couches_effectives "$(tranches_au_niveau "$F" "$NIVEAU")")"
+done
+if ! python3 -c "import sys; c=sorted(int(x) for x in sys.argv[1].split()); sys.exit(0 if len(c)<2 or c[-1]/c[0] >= float(sys.argv[2]) else 1)" "$EFF" "$RAPPORT_MIN"; then
+  echo "   ⚠⚠ refus : au niveau $NIVEAU ces fenetres seront relues comme$EFF couches," >&2
+  echo "      dont le rapport est sous $RAPPORT_MIN. Le verdict refuserait APRES le rendu." >&2
+  echo "      Une fenetre de N tranches vaut 2*(N//2)+1 couches : 40 tranches font 41." >&2
+  exit 6
+fi
+
+PROFILS=""
+DEMANDEES=0; PRODUITES=0
+for F in $FENETRES_BASE; do
+  DEMANDEES=$((DEMANDEES + 1))
   N=$(tranches_au_niveau "$F" "$NIVEAU")
   W="$DEST/g${NIVEAU}_n${N}"
   OUT="$W/profil.json"
@@ -177,8 +219,35 @@ for F in $FENETRES_BASE; do
     rm -rf "$W/cache" "$W/rendu"
   fi
   echo "   n=$N couches"
+  PRODUITES=$((PRODUITES + 1))
   PROFILS="$PROFILS --profil $OUT"
 done
 [ -n "$PROFILS" ] || { echo "   ⚠ aucun profil produit"; exit 3; }
+# ⚠⚠ UNE CAMPAGNE TRONQUEE NE DOIT PAS RESSEMBLER A UNE CAMPAGNE COMPLETE. Paye le
+# 2026-08-24 : un run interrompu au second rendu a quand meme ecrit son JSON, avec une serie
+# a UN point et un verdict « indecidable ». Le fichier est arrive dans `docs/` et rien en lui
+# ne disait qu il venait d un run avorte -- un lecteur y voit un resultat.
+#
+# ⚠ On ECRIT quand meme, et on refuse de se taire : jeter le fichier perdrait la fenetre qui,
+# elle, a bien ete rendue. Ce qui manquait n est pas le refus, c est la MENTION.
+if [ "$PRODUITES" -lt "$DEMANDEES" ]; then
+  echo "   ⚠⚠ CAMPAGNE TRONQUEE — $PRODUITES fenêtre(s) sur $DEMANDEES demandées." >&2
+  echo "      Le verdict qui suit ne porte que sur ce qui a été produit." >&2
+fi
 ( cd "$ROOT/experiments" && uv run python ../analysis/src/test_convergence.py $PROFILS \
     --nom "$ETIQUETTE" --json "$JSON" | tail -4 )
+# ⚠ La mention voyage AVEC le resultat, pas seulement dans le terminal : un JSON relu six
+# mois plus tard n a pas le journal de son run a cote.
+python3 - "$JSON" "$PRODUITES" "$DEMANDEES" <<'PY'
+import json, sys
+chemin, produites, demandees = sys.argv[1], int(sys.argv[2]), int(sys.argv[3])
+try:
+    d = json.load(open(chemin, encoding="utf-8"))
+except (OSError, json.JSONDecodeError):
+    raise SystemExit(0)
+if isinstance(d, dict):
+    d["fenetres_produites"] = produites
+    d["fenetres_demandees"] = demandees
+    d["campagne_complete"] = produites == demandees
+    json.dump(d, open(chemin, "w", encoding="utf-8"), indent=2, ensure_ascii=False)
+PY
