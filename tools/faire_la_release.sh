@@ -139,13 +139,35 @@ tail -5 /tmp/release_temoins.log | sed 's/^/   /'
 
 if [ -n "$TAG" ]; then
   echo
-  echo "== tag $TAG"
-  git tag -s -m "Progress Prize : instruments de mesure de la qualité d'une trace
+  # ⚠⚠ La branche de release est REFAITE a chaque fois, donc le tag doit etre REPOINTE a
+  # chaque fois. Ma premiere version faisait `git tag` sans -f, echouait avec « tag already
+  # exists »... et imprimait quand meme « posé sur <sha> ». Le tag designait un commit
+  # obsolete pendant que la sortie annoncait un succes -- exactement la classe de mensonge
+  # que ce depot passe son temps a traquer ailleurs.
+  ANCIEN=$(git rev-parse --short "$TAG" 2>/dev/null || true)
+  if [ -n "$ANCIEN" ]; then
+    echo "== tag $TAG : déplacé depuis $ANCIEN"
+  else
+    echo "== tag $TAG"
+  fi
+  if ! git tag -f -s -m "Progress Prize: instruments that measure a trace's quality
 
-Tout ce qu'il faut pour vérifier les affirmations, et rien d'autre.
-La batterie complète passe sur ce tag." "$TAG" \
-    || git tag -a -m "Progress Prize : instruments de mesure de la qualité d'une trace" "$TAG"
-  echo "   posé sur $(git rev-parse --short HEAD)"
+Everything needed to verify the claims, and nothing else. The release battery
+passes on this tag." "$TAG" > /dev/null 2>&1; then
+    # ⚠ Repli sans signature : une cle GPG absente ne doit pas empecher de taguer, mais
+    # elle doit se DIRE, sinon on croit avoir un tag signe.
+    git tag -f -a -m "Progress Prize: instruments that measure a trace's quality" "$TAG" \
+      > /dev/null 2>&1 || { echo "   ⚠⚠ ÉCHEC : le tag n'a PAS été posé" >&2; exit 5; }
+    echo "   ⚠ posé SANS signature (clé GPG indisponible)"
+  fi
+  # ⚠⚠ On VERIFIE que le tag designe bien ce commit avant de l annoncer. Un script qui
+  # annonce ce qu il a tente, et non ce qu il a fait, est un script qu on ne peut pas croire.
+  POSE=$(git rev-parse "$TAG^{commit}" 2>/dev/null)
+  ICI=$(git rev-parse HEAD)
+  if [ "$POSE" != "$ICI" ]; then
+    echo "   ⚠⚠ ÉCHEC : $TAG désigne $POSE, pas $ICI" >&2; exit 5
+  fi
+  echo "   posé sur $(git rev-parse --short HEAD), vérifié"
 fi
 
 cd "$ROOT"
