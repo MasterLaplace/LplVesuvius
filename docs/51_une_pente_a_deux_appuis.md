@@ -205,6 +205,54 @@ rapport à 99,6 µm et rapporté « −53,8 % » comme si la pyramide avait mang
 chiffre parfaitement plausible, et une comparaison entre étrangers. L'outil exige désormais
 `--niveaux <dossiers>`.
 
+## 6bis. ⚠ La prédiction a été mesurée, et elle était fausse
+
+Le couple (81, 321) a été rendu au niveau 1 sur la surface du candidat. Résultat :
+
+| profondeur | tranches | amplitude | plancher | fenêtres d'analyse |
+|---|---:|---:|---|---:|
+| 196,8 µm | 41 | **0,0125** | ⚠ sous | **1** |
+| 772,8 µm | 161 | **0,0985** | ⭐ au-dessus | **1** |
+
+La fenêtre de ~82 couches, que l'interpolation plaçait juste au-dessus du plancher, est
+**encore dessous**. ⚠ Mais j'ai changé deux choses à la fois — la profondeur *et* le niveau
+de pyramide — donc ce run ne réfute pas proprement la loi de puissance : il montre seulement
+que la cible prédite depuis le niveau 0 ne se transporte pas telle quelle au niveau 1.
+
+⚠⚠ **Et il révèle une limite de la route choisie** : sur une surface de 0,317 cm², le
+niveau 1 n'admet qu'**une seule fenêtre d'analyse**. Le profileur refuse en dessous de
+1024 px et 1171 px passe — de justesse, pour une unique position. Une médiane sur une
+fenêtre est cette fenêtre.
+
+### ⭐ La grande surface tranche, avec 225 fenêtres
+
+La campagne de plafond de `48` a produit une surface onze fois plus grande (3,656 cm²,
+4001×3991 px au niveau 1). Ses profils étaient déjà sur disque :
+
+| profondeur | tranches | amplitude | plancher | fenêtres |
+|---|---:|---:|---|---:|
+| 100,8 µm | 21 | **0,0068** | ⚠ sous | **225** |
+| 388,8 µm | 81 | **0,0267** | ⭐ au-dessus | **225** |
+
+> ⭐ **La platitude de la fenêtre étroite n'est donc PAS un artefact de la petite surface.**
+> Elle tient avec deux cent vingt-cinq fenêtres d'analyse comme avec une. C'est un fait sur
+> ce rouleau, pas sur notre échantillonnage.
+
+### ⭐⭐ Et le couple admissible existe, sur cette machine
+
+`paire_admissible` pose la question structurelle : un couple doit avoir ses **deux** bouts
+au-dessus du plancher **et** un rapport d'au moins deux. Avec β = **+1,01** sur la grande
+surface, la plus petite fenêtre qui dégage est à **81 tranches** (387 µm) et son double à
+**163** (782 µm).
+
+⭐ Le plafond de profondeur n'est pas une opinion : la loi mémoire de
+[`50`](50_le_rendu_attendait_la_memoire.md) donne aire × profondeur × 4 octets, soit
+**10,4 Go** pour 4001×3991 × 163 — qui **tiennent** dans les 31,8 Go de la machine. Le
+couple est donc rendable, et c'est le rendu en cours.
+
+⚠ Sans mémoire déclarée, l'instrument **laisse la faisabilité ouverte** au lieu d'y répondre
+au jugé : répondre au juge serait pire que ne pas répondre.
+
 ## 7. Ce que ce document n'établit pas
 
 - ⚠ **Que la fenêtre de 41 couches soit trop étroite pour ce rouleau.** L'amplitude passe de
@@ -236,6 +284,11 @@ cd inference && uv run python ../analysis/src/test_convergence.py --nom ps256_c0
 # les témoins, hors ligne
 python3 analysis/src/appui_de_pente.py --verifier
 python3 analysis/src/fenetre_utilisable.py --verifier
+
+# le couple admissible, sur la grande surface
+PLAT=data/paris4_plafond/ps256_c2_g200/plat NIVEAU=1 FENETRES_BASE="162 326" \
+  DEST=data/paris4_plafond/ps256_c2_g200 PATIENCE=5400 \
+  JSON=docs/paire_admissible_g200.json tools/profiler_une_surface.sh
 python3 analysis/src/figure_fenetre.py --verifier
 python3 analysis/src/figure_appuis.py --verifier
 python3 analysis/src/test_convergence.py --verifier

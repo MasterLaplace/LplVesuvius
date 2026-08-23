@@ -217,6 +217,54 @@ def amplitude_a_travers_les_niveaux(xs: list[dict],
     return sorted(out, key=lambda d: d["profondeur_um"])
 
 
+# ⚠ L'octet par échantillon du tampon de rendu. Mesuré dans `50` : les tampons valent
+# aire x profondeur x 4 octets, et c'est cette loi qui rend une profondeur IMPOSSIBLE plutôt
+# que lente.
+OCTETS_PAR_ECHANTILLON = 4
+
+
+def paire_admissible(xs: list[dict], memoire_octets: float | None = None,
+                     pixels: int | None = None,
+                     marge: float = MARGE_RECOMMANDATION,
+                     rapport_min: float = RAPPORT_MIN) -> dict | None:
+    """Existe-t-il un couple de fenêtres dont les DEUX bouts dégagent le plancher ?
+
+    ⚠⚠ **La question structurelle, et elle n'est pas « quelle fenêtre rendre ensuite ».**
+    Un couple doit satisfaire deux contraintes à la fois : les deux bouts au-dessus du
+    plancher, *et* un rapport d'au moins deux entre eux. Si l'amplitude croît comme n^β avec
+    β proche de 1, la plus petite fenêtre qui dégage est déjà profonde, et son double l'est
+    deux fois plus. Le couple peut donc ne pas exister sur cette machine — ce qui est un
+    énoncé bien plus fort que « on ne l'a pas encore mesuré ».
+
+    ⭐ Le plafond de profondeur n'est pas une opinion : les tampons de rendu valent
+    aire x profondeur x 4 octets (`50`), donc une mémoire et une surface le déterminent.
+    Passer `memoire_octets` et `pixels` le calcule ; ne rien passer laisse la question de la
+    faisabilité ouverte au lieu d'y répondre au jugé.
+    """
+    pred = profondeur_predite(xs, marge)
+    if not pred or not pred.get("atteignable"):
+        return None
+    n_min = pred["profondeur_cible"]
+    # ⚠ Le second bout doit etre au moins `rapport_min` fois le premier, et IMPAIR : la
+    # couche tracee est au centre de sa fenetre.
+    n_pair = math.ceil(n_min * rapport_min)
+    if n_pair % 2 == 0:
+        n_pair += 1
+    out = {"profondeur_min_qui_degage": n_min, "profondeur_du_second_bout": float(n_pair),
+           "rapport_min": rapport_min, "beta": pred["beta"],
+           "loi_testable": pred["loi_testable"]}
+    if memoire_octets and pixels:
+        besoin = float(pixels) * n_pair * OCTETS_PAR_ECHANTILLON
+        out["octets_necessaires"] = besoin
+        out["memoire_octets"] = float(memoire_octets)
+        out["tient_en_memoire"] = besoin <= float(memoire_octets)
+        # ⚠ La profondeur que la memoire autorise, pour que le refus dise QUOI est possible
+        # au lieu de dire seulement que ca ne l'est pas.
+        out["profondeur_maximale_rendable"] = float(memoire_octets) / (
+            float(pixels) * OCTETS_PAR_ECHANTILLON)
+    return out
+
+
 def juger_serie(xs: list[dict]) -> dict | None:
     """Le verdict d'une série : couple utilisable aujourd'hui, ou profondeur à atteindre."""
     xs = [juger(x) for x in xs if x.get("couche_tracee")]
@@ -397,6 +445,31 @@ def verifier() -> int:
     v("une amplitude nulle au niveau fin ne divise pas par zéro",
       amplitude_a_travers_les_niveaux(
           [pro(20, 0.0, 2.4), pro(10, 0.01, 4.8)])[0]["ecart_relatif"] is None)
+
+    # --- le couple admissible -----------------------------------------------------------
+    # ⚠ Les valeurs mesurees sur la GRANDE surface (225 fenetres) : 0,0068 a 100,8 µm et
+    # 0,0267 a 388,8 µm, soit beta ~ 1,01 -- l'amplitude suit la profondeur.
+    grande = [prof(10, 0.0068, 0.02), prof(40, 0.0267, 0.02)]
+    pa = paire_admissible(grande)
+    v("le second bout est le double du premier, arrondi à l'impair",
+      pa and pa["profondeur_du_second_bout"] >= 2 * pa["profondeur_min_qui_degage"]
+      and pa["profondeur_du_second_bout"] % 2 == 1,
+      str(pa))
+    # ⚠⚠ La loi memoire de `50` : aire x profondeur x 4 octets. Une surface de 4001x3991 au
+    # niveau 1 avec 32 Go ne peut pas porter une fenetre arbitrairement profonde.
+    px = 4001 * 3991
+    pa2 = paire_admissible(grande, memoire_octets=32e9, pixels=px)
+    v("la mémoire décide si le couple est rendable",
+      pa2 and "tient_en_memoire" in pa2, str(pa2))
+    v("... et le refus dit quelle profondeur serait possible",
+      pa2 and pa2["profondeur_maximale_rendable"] > 0,
+      f"{pa2['profondeur_maximale_rendable']:.0f}" if pa2 else "")
+    # ⚠ Sans memoire declaree, la faisabilite reste OUVERTE : repondre au juge serait pire
+    # que ne pas repondre.
+    v("sans mémoire déclarée, la faisabilité n'est pas tranchée",
+      "tient_en_memoire" not in paire_admissible(grande))
+    v("une amplitude décroissante n'a aucun couple",
+      paire_admissible([prof(10, 0.05, 0.02), prof(40, 0.01, 0.02)]) is None)
 
     r = resumer({"a": [prof(20, 0.09), prof(80, 0.12)],
                  "b": [prof(20, 0.0175), prof(80, 0.0462)]})
