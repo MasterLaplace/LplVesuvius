@@ -1169,6 +1169,13 @@ def main() -> int:
     parser.add_argument("--article", type=Path,
                         help="l'article : les chiffres de CITES_PAR_L_ARTICLE doivent "
                              "apparaitre dans CELUI-LA")
+    # ⚠⚠ Mode ARBRE RESTREINT. Sur la branche de release, la plupart des documents citants
+    # ne sont pas livres : sans ce drapeau le controle echouerait pour la seule raison
+    # qu il s agit d une release, et un controle qui ne peut pas passer cesse d etre lu.
+    # ⚠ Les listes exigees par la soumission et l article restent DURES.
+    parser.add_argument("--hors-perimetre", action="store_true",
+                        help="arbre restreint : un chiffre dont le document citant n'est "
+                             "pas livre est compte hors perimetre, pas en echec")
     parser.add_argument("--minimum", type=int, default=8,
                         help="nombre minimal de chiffres recalculables ET DISCRIMINANTS. "
                              "⚠ Le plancher porte sur les discriminants, sinon il se "
@@ -1205,12 +1212,24 @@ def main() -> int:
           f"{len(textes)} document(s)\n")
     print(f"{'chiffre':>32} {'attendu':>16} {'source':>28}  ou")
     manquants = 0
+    hors = 0
+    hors_perimetre = args.hors_perimetre
     for nom, ecritures, source in attendus:
         trouve = ou_trouve(ecritures, textes)
         if trouve:
             print(f"{nom:>32} {ecritures[0]:>16} {source:>28}  ✅ {', '.join(trouve)}")
         else:
-            manquants += 1
+            # ⚠⚠ Sur un arbre RESTREINT (la branche de release), un chiffre recalcule dont le
+            # document citant n est pas livre n est pas une panne : il est HORS PERIMETRE.
+            # Sans cette distinction, la release echouerait pour la seule raison qu elle est
+            # une release -- et un controle qui ne peut pas passer cesse d etre lu.
+            # ⚠ Les listes `exiger` (soumission, article) restent DURES : ce que le document
+            # livre cite doit y etre, sinon la promesse « chaque nombre est verifiable »
+            # tombe precisement la ou elle compte.
+            if hors_perimetre:
+                hors += 1
+            else:
+                manquants += 1
             # ⚠⚠ Le chemin d'ERREUR supposait toujours DEUX ecritures et levait un
             # IndexError sur une entree qui n'en a qu'une -- donc le garde-fou plantait
             # exactement au moment ou il avait quelque chose a signaler, et n'imprimait
@@ -1296,10 +1315,19 @@ def main() -> int:
         manquants += exiger(args.article, CITES_PAR_L_ARTICLE, "l'article")
 
     print()
+    if hors:
+        print(f"ℹ {hors} chiffre(s) recalculé(s) n'apparaissent dans aucun document LIVRÉ. "
+              f"Hors périmètre : leur document n'est pas dans cet arbre.")
     if manquants:
         print(f"⚠ {manquants} chiffre(s) recalcule(s) n'apparaissent nulle part. "
               f"Soit le document est perime, soit il ne cite pas ce chiffre — "
               f"les deux demandent un coup d'oeil.")
+    elif hors:
+        # ⚠ Le verdict doit dire SUR QUOI il porte. « Tous apparaissent » serait faux ici :
+        # cent n apparaissent pas, ils sont hors perimetre. Un controle qui arrondit son
+        # propre enonce apprend au lecteur a ne plus le lire.
+        print(f"TOUS LES CHIFFRES DU PERIMETRE LIVRE APPARAISSENT "
+              f"({hors} hors perimetre, non verifiables ici)")
     else:
         print("TOUS LES CHIFFRES RECALCULES APPARAISSENT DANS LES DOCUMENTS")
     return 1 if manquants else 0

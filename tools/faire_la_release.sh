@@ -37,6 +37,9 @@ TRAVAIL="${TRAVAIL:-/tmp/lplvesuvius-release}"
 #   LICENSE           ⚠ absente du depot jusqu ici, et ca compte pour quelque chose qu on
 #                     soumet : sans licence, personne n a le droit de reutiliser l outil.
 #   README.md tools/  le point d entree et la verification.
+#   pyproject.toml    ⚠ les dependances, DECLAREES A LA RACINE. Elles vivaient dans des
+#                     sous-projets que la release ne porte pas, donc le livrable qui
+#                     annonce « numpy et rien d autre » ne demarrait pas sur l arbre allege.
 #
 # ⚠ Ce qui part et qu on pourrait croire necessaire : `docs/images/` (31 Mo). Ce sont les
 # figures FRANCAISES, celles des 51 documents de travail. L article utilise ses propres
@@ -49,17 +52,18 @@ GARDES=(
   "README.md"
   "LICENSE"
   "docs/21_texte_de_soumission.md"
+  "pyproject.toml"
 )
 
 if [ "${1:-}" = "--verifier" ]; then
   ok=0; n=0
   chk() { n=$((n+1)); if eval "$2"; then :; else echo "  FAIL $1"; ok=1; fi; }
-  chk "la batterie existe" '[ -x "$ROOT/tools/temoins.sh" ]'
+  chk "la batterie de release existe" '[ -x "$ROOT/tools/temoins_release.sh" ]'
   chk "chaque exclusion a une raison ecrite" \
       '[ "$(grep -cE "^#   [a-z.]" "$ROOT/tools/faire_la_release.sh")" -ge 3 ]'
   # ⚠⚠ La regle centrale, verifiee comme du code : le tag ne se pose qu APRES la batterie.
   chk "le tag est pose apres la batterie, pas avant" \
-      '[ "$(grep -n "temoins.sh" "$ROOT/tools/faire_la_release.sh" | head -1 | cut -d: -f1)" -lt "$(grep -n "git tag" "$ROOT/tools/faire_la_release.sh" | head -1 | cut -d: -f1)" ]'
+      '[ "$(grep -n "temoins_release.sh" "$ROOT/tools/faire_la_release.sh" | head -1 | cut -d: -f1)" -lt "$(grep -n "git tag" "$ROOT/tools/faire_la_release.sh" | head -1 | cut -d: -f1)" ]'
   # ⚠ Motif ANCRE sur le debut de ligne : il ne vise qu une COMMANDE, pas une mention.
   # Une version qui cherchait la sous-chaine nue se matchait elle-meme -- cinquieme fois
   # du jour, et c est l ancrage syntaxique le remede, pas la coupure du motif.
@@ -122,8 +126,11 @@ casserait la vérification — ce qui est précisément pourquoi la batterie tou
 avant que le tag soit posé." 2>/dev/null || echo "   (rien à commiter)"
 
 echo
-echo "== la batterie, SUR la branche nettoyée"
-if ! ./tools/temoins.sh > /tmp/release_temoins.log 2>&1; then
+# ⚠⚠ La batterie de RELEASE, pas la generale : celle-ci appelle experiments/, inference/ et
+# repos/, que l arbre allege ne porte pas -- elle echouerait pour la seule raison qu il
+# s agit d une release, et un controle qui ne peut pas passer cesse d etre lu.
+echo "== la batterie de release, SUR la branche nettoyée"
+if ! ./tools/temoins_release.sh > /tmp/release_temoins.log 2>&1; then
   echo "   ⚠⚠ ÉCHEC — la release ne se vérifie pas elle-même, aucun tag posé" >&2
   tail -18 /tmp/release_temoins.log | sed 's/^/      /'
   exit 4
