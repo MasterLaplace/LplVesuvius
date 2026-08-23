@@ -58,6 +58,17 @@ if [ "${1:-}" = "--verifier" ]; then
   grep -q -- "--cache-gb 9" "$T/expl.log"; v "... c'est le choix de l'appelant qui reste" "$?" "0"
 
   RENDU="sleep" "$0" "$T/vide" 10 -- 120 > "$T/vide.log" 2>&1; v "un processus inactif est abandonné" "$?" "4"
+  # ⚠⚠ Le journal doit RAPPORTER, sinon il n existe que dans un commentaire. On force un
+  # intervalle d une seconde sur un processus qui vit assez longtemps pour en produire.
+  RENDU="sleep" JOURNAL=1 "$0" "$T/journal" 10 -- 12 > "$T/journal.log" 2>&1 || true
+  v "le journal rapporte le débit" \
+    "$( [ "$(grep -c 'Kio/s sur les dernières' "$T/journal.log" 2>/dev/null || true)" -ge 1 ] \
+        && echo oui || echo non )" "oui"
+  # ⚠ Et il doit pouvoir etre ETEINT : une campagne courte n a pas besoin d une ligne toutes
+  # les cinq minutes, et un journal qu on ne peut pas taire finit par etre filtre au grep.
+  RENDU="sleep" JOURNAL=0 "$0" "$T/muet" 10 -- 12 > "$T/muet.log" 2>&1 || true
+  v "... et il se tait quand on le met à zéro" \
+    "$(grep -c 'Kio/s sur les dernières' "$T/muet.log" 2>/dev/null || true)" "0"
   grep -q "ABANDONNE" "$T/vide.log"; v "... en le disant" "$?" "0"
   grep -q "octets d'activité" "$T/vide.log"; v "... avec son activité mesurée" "$?" "0"
 
@@ -154,9 +165,32 @@ esac
 "$RENDU" "$@" &
 PID=$!
 
+# ⚠⚠ LE JOURNAL DE PROGRESSION, ajoute le 2026-08-24 apres l avoir fait a la main -- et
+# faux. Devant un rendu de 45 minutes sans une ligne de sortie, j ai lu `/proc/<pid>/io`
+# deux fois dans un shell dont je ne controlais pas l horloge, conclu « 0,6 Kio/s, donc
+# bloque », et failli tuer un rendu qui avancait a 89 Kio/s. Le chien de garde CONNAIT
+# deja ce debit : il le calcule a chaque sondage pour decider. Ne pas l ecrire obligeait
+# a le remesurer dehors, avec une horloge moins sure que la sienne.
+#
+# ⚠ Ce n est PAS un changement de politique : aucun rendu n est abandonne pour lenteur. Le
+# depot a mesure des debits legitimes de 36 a 5861 Kio/s, un facteur cent soixante, donc un
+# plancher de debit tuerait des runs que ce depot a deja acceptes. On rapporte, on ne juge
+# pas.
+JOURNAL=${JOURNAL:-300}
+JALON=$(date +%s); JALON_OCTETS=0
 DERNIERE=$(activite "$PID" || echo 0); IMMOBILE=0
 while kill -0 "$PID" 2>/dev/null; do
   sleep 10
+  MAINTENANT=$(date +%s)
+  if [ "$JOURNAL" -gt 0 ] && [ $((MAINTENANT - JALON)) -ge "$JOURNAL" ]; then
+    # ⚠ Le debit est calcule sur l intervalle ECOULE et non depuis le debut : une moyenne
+    # depuis le lancement lisse justement le decrochage qu on cherche a voir.
+    ECART=$(( MAINTENANT - JALON ))
+    OCTETS=$(( ${DERNIERE:-0} - JALON_OCTETS ))
+    echo "   [$(( (MAINTENANT - DEBUT) / 60 ))m] activité ${DERNIERE:-0} o," \
+         "sortie $(taille) o, $(( OCTETS / ECART / 1024 )) Kio/s sur les dernières ${ECART}s" >&2
+    JALON=$MAINTENANT; JALON_OCTETS=${DERNIERE:-0}
+  fi
   # ⚠ Si la lecture echoue, le processus est parti : on sort par la porte normale et c'est
   # `wait` qui donnera son code. Le traiter comme « inactif » serait tuer un mort et le
   # rapporter comme un echec.

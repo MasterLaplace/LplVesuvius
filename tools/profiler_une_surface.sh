@@ -75,6 +75,15 @@ if [ "${1:-}" = "--verifier" ]; then
   # ⚠⚠ Le controle du correctif de chemin : ce script `cd` dans deux sous-projets, donc
   # tout chemin qu il recoit doit etre rendu absolu AVANT le premier `cd`. Sans ca le rendu
   # reussit et le profil meurt sur un fichier qui existe pourtant.
+  # ⚠⚠ Le niveau de la reference : sans lui, une reference rendue au niveau 1 fait refuser
+  # une surface analysable. La regle est testee sur les deux formes de chemin.
+  niv_ref() { case "$1" in */g[0-9]_n[0-9]*/rendu/*) echo "$1" | sed -n 's|.*/g\([0-9]\)_n[0-9]*/rendu/.*|\1|p' ;; *) echo 0 ;; esac; }
+  chk "une reference dans g1_n163 est lue au niveau 1" \
+      '[ "$(niv_ref a/g1_n163/rendu/000.tif)" = 1 ]'
+  chk "une reference hors de cette forme est au niveau 0" \
+      '[ "$(niv_ref a/rendu_41/000.tif)" = 0 ]'
+  chk "le guard ramene la cote au niveau 0 avant de descendre" \
+      'grep -q "COTE0=\$((COTE \* (1 << NIV_REF)))" "$ROOT/tools/profiler_une_surface.sh"'
   chk "les chemins sont rendus absolus avant tout cd" \
       '[ "$(grep -cE "^(PLAT|DEST|JSON)=.*pwd" "$ROOT/tools/profiler_une_surface.sh")" -ge 3 ]'
   # ⚠ Les deux numeros sont lus dans des variables et testes pour etre NON VIDES d abord :
@@ -127,8 +136,21 @@ echo "== niveau $NIVEAU  (voxel ${UM} µm)  ·  $ETIQUETTE"
 REF=$(find "$(dirname "$PLAT")" -path "*rendu*" -name "*.tif" 2>/dev/null | head -1)
 if [ -n "$REF" ]; then
   COTE=$(python3 "$ROOT/analysis/src/dimensions_tiff.py" "$REF" --cote 2>/dev/null || true)
+  # ⚠⚠ LE NIVEAU DE LA REFERENCE, lu et non suppose. La premiere version divisait la cote
+  # trouvee par 2^NIVEAU en la croyant toujours au niveau 0 : quand la reference est
+  # elle-meme un rendu au niveau 1 -- ce que ce script produit, dans `g1_n<N>/rendu/` -- le
+  # calcul divise deux fois et refuse une surface parfaitement analysable. Mesure le
+  # 2026-08-24 sur `ps256_c2_g200` : reference a 4001 px au niveau 1, le guard annoncait
+  # 1000 px au niveau 2 alors que le rendu y fait 2001. Le nom du dossier porte le niveau,
+  # donc on le lit plutot que de le deviner.
+  NIV_REF=0
+  case "$REF" in
+    */g[0-9]_n[0-9]*/rendu/*) NIV_REF=$(echo "$REF" | sed -n 's|.*/g\([0-9]\)_n[0-9]*/rendu/.*|\1|p') ;;
+  esac
   if [ -n "${COTE:-}" ]; then
-    ICI=$((COTE / (1 << NIVEAU)))
+    # ⚠ La cote est d abord ramenee au niveau 0, PUIS descendue au niveau demande.
+    COTE0=$((COTE * (1 << NIV_REF)))
+    ICI=$((COTE0 / (1 << NIVEAU)))
     if [ "$ICI" -lt "$FENETRE_ANALYSE" ]; then
       echo "   ⚠⚠ refus : au niveau $NIVEAU cette surface ferait ~${ICI} px de côté," >&2
       echo "      sous la fenêtre d'analyse de ${FENETRE_ANALYSE}. La rendre serait payer" >&2

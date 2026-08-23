@@ -1,0 +1,18 @@
+{
+  "series": [
+    {
+      "verdict": "indecidable",
+      "raison": "une seule fenêtre",
+      "serie": [
+        [
+          81,
+          172.79999999999998
+        ]
+      ],
+      "nom": "grande surface, 81/163 tranches au niveau 1",
+      "profils": [
+        "/home/masterlaplace/LplVesuvius/data/paris4_plafond/ps256_c2_g200/g1_n81/profil.json"
+      ]
+    }
+  ]
+}
