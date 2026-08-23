@@ -149,15 +149,75 @@ niveau 0, et c'est la pyramide qu'il faut interroger — voir §6.
 
 ## 6. Ce que ce document n'établit pas
 
-- ⚠ **Que la pyramide sauve la fenêtre profonde.** Le volume a six niveaux (`-g 0` à `-g 5`)
-  et `-g 1` diviserait les pixels par quatre, ce qui ferait tenir les 161 couches. Mais α
-  est un **rapport** entre deux profondeurs : une réduction uniforme *ne devrait pas* le
-  biaiser, et « ne devrait pas » n'est pas « mesuré ». [`35`](35_le_tirage_sur_douze_rouleaux.md)
-  a déjà établi qu'un seuil calé sur le niveau 0 ne se transporte pas à résolution réduite.
-  Le contrôle est bon marché et il reste à faire.
+- ✅ **Que la pyramide sauve la fenêtre profonde — mesuré, voir §7.** C'était la seule
+  inconnue qui bloquait la mesure ; elle est levée.
 - ⚠ **Que 16 Go soit un mauvais défaut en général.** Sur une machine à 128 Go il est sans
   doute raisonnable. Ce qui est mesuré ici, c'est qu'un défaut dimensionné pour une autre
   machine est un défaut, et qu'on ne l'avait jamais posé.
+
+---
+
+## 7. ✅ La pyramide préserve α — la fenêtre profonde redevient mesurable
+
+α est un **rapport** entre deux profondeurs, donc une réduction uniforme de résolution *ne
+devrait pas* le biaiser. Mais « ne devrait pas » n'est pas « mesuré », et
+[`35`](35_le_tirage_sur_douze_rouleaux.md) a déjà établi qu'un seuil calé sur le niveau 0 ne
+se transporte pas à résolution réduite. La même surface a donc été rendue aux deux niveaux.
+
+![α est une pente : deux résolutions la lisent pareil](images/50_pyramide.png)
+
+> ⚠⚠ **L'axe des abscisses est la profondeur PHYSIQUE, pas le nombre de tranches.** Au
+> niveau 1 une tranche vaut deux fois l'épaisseur, donc 21 tranches y couvrent ce que 41
+> couvrent au niveau 0. Tracer contre le compte de tranches décalerait les deux séries d'un
+> facteur deux et ferait *paraître* un désaccord là où il y a coïncidence — l'erreur serait
+> purement dans le dessin, et parfaitement crédible.
+
+⭐ La droite rouge est le **référentiel de lecture** : elle a la pente 1, c'est-à-dire
+« l'écart double quand la fenêtre double ». Sans elle, « α ≈ 1 » est un chiffre à croire ;
+avec elle, c'est une pente à voir.
+
+| niveau | voxel | fenêtres | α | verdict |
+|---|---|---|---|---|
+| 0 | 2,4 µm | 41 / 161 | **+0,91** | suit la fenêtre, 100 % au bord |
+| 1 | 4,8 µm | 21 / 81 | **+0,89** | suit la fenêtre, 100 % au bord |
+
+> ⭐⭐⭐ **Écart 0,02, pour une résolution déclarée de 0,20** — dix fois à l'intérieur. Les
+> deux niveaux rendent le même verdict, sur la même surface.
+
+⚠⚠ **Le seuil de cette confrontation n'est pas le bruit du tireur** (0,23) mais la
+résolution de α (0,20). C'est la *même* surface rendue deux fois : aucun tirage neuf
+n'intervient, donc tout écart au-delà de la résolution serait un effet de l'instrument, et
+condamnerait la pyramide.
+
+### ⚠⚠ Le piège d'unités, qui aurait tout faussé
+
+Au niveau *g*, un voxel fait 2^g fois l'épaisseur, donc **une tranche couvre 2^g fois plus
+de profondeur**. Rendre 41 tranches au niveau 1 couvre **deux fois** la profondeur physique
+de 41 tranches au niveau 0 : on aurait comparé deux **fenêtres** différentes en croyant
+comparer deux **résolutions**. Le nombre de tranches est donc divisé par 2^g et `--voxel-um`
+multiplié — et la conversion vit dans **une seule fonction**
+(`tools/profiler_une_surface.sh`), qu'un témoin empêche les appelants de réapprendre.
+
+⭐ **L'arrondi est « au supérieur à la moitié », pas `round()`**, et la vraie raison n'est
+pas que `round(41/2)` vaut 20 en Python : c'est qu'une fenêtre est **centrée** sur sa couche
+tracée, donc elle doit rester **impaire**. 41 → 21 → 11 garde un centre ; 41 → 20 n'en a
+pas, et le décalage serait d'une demi-tranche par niveau, en silence. La mesure l'a
+confirmé : avec l'arrondi pair l'écart entre niveaux valait **0,10**, avec l'arrondi impair
+il tombe à **0,02**.
+
+### Ce que ça débloque
+
+| | mémoire |
+|---|---|
+| fenêtre profonde au niveau 0 | 38,2 Go — **impossible** |
+| fenêtre profonde au niveau 1 | **≈ 4,8 Go** — tient largement |
+
+⚠ Et le niveau devient une **clé** de la mesure, pas un détail de rendu : comparer un budget
+mesuré au niveau 0 à un budget mesuré au niveau 1 confondrait le plafond avec la résolution,
+et l'écart d'α serait crédible sans qu'on sache lequel des deux il décrit.
+`analysis/src/effet_du_plafond.py` **refuse** un lot mélangé.
+
+---
 
 ## Reproduire
 

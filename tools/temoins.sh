@@ -695,6 +695,10 @@ run "effet du cache"           uv run python "$ROOT/analysis/src/effet_du_cache.
 run "figure de l'étalon"       uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_etalon_rendu.py" --verifier
 run "profileur d'une surface" "$ROOT/tools/profiler_une_surface.sh" --verifier
 run "contrôle de résolution"   "$ROOT/tools/controle_resolution.sh" --verifier
+# ⚠⚠ La figure de la pyramide. Sa sonde centrale est celle de l AXE : au niveau 1, 21
+# tranches de 4,8 µm couvrent ce que 41 de 2,4 couvrent. Tracer contre le compte de tranches
+# decalerait les deux series d un facteur deux et montrerait un desaccord qui n existe pas.
+run "figure de la pyramide"    uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_pyramide.py" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys

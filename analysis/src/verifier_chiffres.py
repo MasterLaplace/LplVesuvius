@@ -788,6 +788,24 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         if d.get("bruit_retenu") is not None:
             ajoute("bruit retenu du 2x2", d["bruit_retenu"], 2, p.name)
 
+    # ⚠ Les deux alphas du controle de resolution : c est LA revendication de `50` §7, et
+    # si un jour ils s ecartaient de plus de la resolution declaree, la fenetre profonde
+    # cesserait d etre mesurable sans que rien d autre ne le dise.
+    alphas = {}
+    for f in sorted(racine.glob("docs/resolution_g*.json")):
+        try:
+            d = json.loads(f.read_text())
+        except Exception:
+            continue
+        niv = f.stem.split("g")[-1]
+        for x in (d.get("series") or ([d] if "alpha" in d else [])):
+            if isinstance(x.get("alpha"), (int, float)):
+                alphas[niv] = x["alpha"]
+                ajoute(f"alpha au niveau {niv}", x["alpha"], 2, f.name, signe=True)
+    if len(alphas) >= 2:
+        v = sorted(alphas.values())
+        ajoute("ecart entre niveaux de pyramide", v[-1] - v[0], 2, "resolution_g*.json")
+
     p = racine / "docs" / "etalon_rendu.json"
     if p.exists():
         d = json.loads(p.read_text())
