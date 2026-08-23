@@ -72,12 +72,37 @@ if [ "${1:-}" = "--verifier" ]; then
       '[ -f "$ROOT/analysis/src/dimensions_tiff.py" ] && grep -q dimensions_tiff "$ROOT/tools/profiler_une_surface.sh"'
   chk "au moins un appelant utilise ce script" \
       'grep -lq profiler_une_surface.sh "$ROOT"/tools/*.sh'
+  # ⚠⚠ Le controle du correctif de chemin : ce script `cd` dans deux sous-projets, donc
+  # tout chemin qu il recoit doit etre rendu absolu AVANT le premier `cd`. Sans ca le rendu
+  # reussit et le profil meurt sur un fichier qui existe pourtant.
+  chk "les chemins sont rendus absolus avant tout cd" \
+      '[ "$(grep -cE "^(PLAT|DEST|JSON)=.*pwd" "$ROOT/tools/profiler_une_surface.sh")" -ge 3 ]'
+  # ⚠ Les deux numeros sont lus dans des variables et testes pour etre NON VIDES d abord :
+  # une premiere version comparait directement, et quand un motif ne matchait plus le
+  # controle sortait « test: invalid integer » -- un echec illisible se lit comme un bug de
+  # la sonde et finit par etre ignore.
+  # ⚠⚠ ANCRES EN DEBUT DE LIGNE, et c est la huitieme fois que ce depot paie ce piege : sans
+  # le `^`, chacun de ces deux greps matche SA PROPRE LIGNE ici meme, donc le controle reste
+  # vert quand le correctif disparait. Verifie par sonde : retirer la resolution laissait la
+  # batterie verte. Le remede n est pas de couper le motif, c est de l ancrer sur la syntaxe
+  # -- les vraies occurrences sont en colonne zero, les mentions sont indentees.
+  L_MKDIR=$(grep -n '^mkdir -p "$DEST"' "$ROOT/tools/profiler_une_surface.sh" | cut -d: -f1 | head -1)
+  L_RESOL=$(grep -n '^DEST=$(cd' "$ROOT/tools/profiler_une_surface.sh" | cut -d: -f1 | head -1)
+  chk "... et la destination est creee avant d etre resolue" \
+      '[ -n "$L_MKDIR" ] && [ -n "$L_RESOL" ] && [ "$L_MKDIR" -lt "$L_RESOL" ]'
   echo "$([ $ok = 0 ] && echo 'ALL PASS' || echo FAILURES) ($ok failures, $n checks)"
   exit $ok
 fi
 
 PLAT="${PLAT:-}"
 [ -d "$PLAT" ] || { echo "refus : surface aplatie absente — PLAT=$PLAT" >&2; exit 2; }
+# ⚠⚠ LES CHEMINS SONT RENDUS ABSOLUS ICI, et c est un correctif paye le 2026-08-23. Ce
+# script fait `cd` dans deux sous-projets (`inference_xpu` pour le profil, `experiments`
+# pour le verdict), donc un chemin RELATIF passe par l appelant cesse d exister apres le
+# premier `cd`. Le symptome ne ressemble pas a la cause : le rendu reussit, puis le profil
+# meurt sur un `FileNotFoundError` nommant un chemin qui existe bel et bien -- depuis le
+# repertoire de l appelant. Resoudre au bord, une fois, est le seul endroit ou ca se fait.
+PLAT=$(cd "$PLAT" && pwd)
 NIVEAU="${NIVEAU:-0}"
 FENETRES_BASE="${FENETRES_BASE:-41 161}"
 UM_BASE="${UM_BASE:-2.4}"
@@ -85,6 +110,11 @@ PATIENCE="${PATIENCE:-420}"
 DEST="${DEST:?DEST requis}"
 ETIQUETTE="${ETIQUETTE:-$(basename "$DEST")}"
 JSON="${JSON:?JSON requis}"
+# ⚠ `mkdir -p` avant de resoudre : un chemin qui n existe pas encore n a pas de forme
+# absolue, et la destination est justement ce que ce script cree.
+mkdir -p "$DEST" "$(dirname "$JSON")"
+DEST=$(cd "$DEST" && pwd)
+JSON="$(cd "$(dirname "$JSON")" && pwd)/$(basename "$JSON")"
 B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 VOL="${VOL:-PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr}"
 
