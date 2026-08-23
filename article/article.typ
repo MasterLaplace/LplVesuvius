@@ -1047,6 +1047,24 @@ Three properties recur in the instruments above and are worth naming.
   What is established --- that its output does not depend on a sheet being present --- rests
   on one scroll and one model.
 
++ *A render's cost is dominated by a setting nobody had set, and by a wall nobody had
+  measured.* Our renderer's Zarr chunk cache defaults to 16 GB; none of the 28 call sites
+  in our tree set it. On small surfaces this is invisible --- the cache is allocated lazily
+  and never fills. On a 3.66 cm#super[2] surface it fills, and together with the output
+  buffers the process held *28.2 GB* on a 32 GB machine: 274 MB free, 3.4 GB swapped, and
+  *23.7 % of one core* while 22 sat idle and the process carried 59 threads. It was not
+  computing; it was waiting on memory. Capping the cache at 1 GB is measured to be both the
+  smallest peak and the fastest median over 15 runs (peak *1.81 GB* against
+  *4.53 GB* at the default), with all 15 outputs byte-identical --- which is what
+  licenses changing the setting at all.
+  #linebreak()
+  The wall behind it is harder. Buffers scale as area times depth: 41 layers of that
+  surface need 9.7 GB, 161 need *38.2 GB*, and no cache setting moves that. The deep window
+  of our own convergence test is therefore not slow on this machine, it is *impossible* ---
+  a fact no amount of patience discovers, and one that our published cost caveat
+  (#link(<sec:ceiling>)[Section 5.2]) priced in minutes when it should also have priced in
+  gibibytes.
+
 + *Nothing here reads text.* The measurements judge geometry. A surface that passes every
   test in this paper may still carry no ink.
 

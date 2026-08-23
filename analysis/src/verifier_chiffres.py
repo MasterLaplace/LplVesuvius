@@ -88,6 +88,12 @@ CITES_PAR_L_ARTICLE = (
     # ⚠ Et ceux du temoin negatif, meme raison : ils portent la these etroite de `46`.
     "accord pixel des deux cartes",
     "sigma du controle positif",
+    # ⚠⚠ Ajoutes le 2026-08-23 avec la limitation sur le cout d un rendu. Ce sont les
+    # DEUX bornes de la memoire : celle qu on paie sans le savoir (le pic au defaut) et
+    # celle qu on choisit (le pic plafonne). Un lecteur qui voudrait refaire la mesure
+    # sur sa machine a besoin des deux, et de rien d autre.
+    "pic RSS le plus bas",
+    "pic RSS le plus haut",
 )
 
 
@@ -207,9 +213,23 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     """
     out = []
 
-    def ajoute(nom: str, valeur: float, n: int, source: str, signe: bool = False):
+    def ajoute(nom: str, valeur: float, n: int, source: str, signe: bool = False,
+               unites: tuple[str, ...] = ()):
+        """Enregistre un chiffre, avec ses deux écritures et, s'il le faut, son unité.
+
+        ⚠⚠ **Pourquoi `unites` existe.** Un nombre de moins de cinq caractères est écarté
+        par `discriminante` — « 5,6 » avait déjà été déclaré trouvé dans un document où il
+        désignait un tout autre rouleau. Mais un chiffre COURT peut être exigé dans
+        l'article, et alors les deux règles se contredisent : il est *requis* et
+        *incontrôlable*, donc l'échec devient irréparable — écrire le nombre ne le répare
+        pas. Le remède est celui que ce fichier conseille déjà ailleurs : **l'écrire avec
+        son contexte**. « 1,81 Go » se cherche, « 1,81 » non.
+        """
         s = "+" if (signe and valeur >= 0) else ""
-        out.append((nom, [s + fr(valeur, n), s + en(valeur, n)], source))
+        ecritures = [s + fr(valeur, n), s + en(valeur, n)]
+        for u in unites:
+            ecritures += [f"{s}{fr(valeur, n)} {u}", f"{s}{en(valeur, n)} {u}"]
+        out.append((nom, ecritures, source))
 
     p = racine / "docs" / "decision_avec_matiere.json"
     if p.exists():
@@ -780,14 +800,17 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         for gb, v in sorted(par.items()):
             x = sorted(v)
             med = x[len(x) // 2] if len(x) % 2 else (x[len(x)//2 - 1] + x[len(x)//2]) / 2
-            ajoute(f"pic RSS a --cache-gb {gb}", med, 2, p.name)
+            ajoute(f"pic RSS a --cache-gb {gb}", med, 2, p.name, unites=("Go", "GB"))
         for cle, nom, n in (("pic_min_go", "pic RSS le plus bas", 2),
                             ("pic_max_go", "pic RSS le plus haut", 2),
                             ("etendue_intra_max_s", "etendue intra maximale", 1),
                             ("ecart_inter_s", "ecart entre valeurs de cache", 1),
                             ("marge_temps", "marge du temps", 2)):
             if r.get(cle) is not None:
-                ajoute(nom, r[cle], n, p.name)
+                # ⚠ Les pics portent leur unite : sans elle « 1,81 » fait quatre caracteres
+                # et `discriminante` l ecarte, alors que l article DOIT le citer.
+                ajoute(nom, r[cle], n, p.name,
+                       unites=("Go", "GB") if cle.endswith("_go") else ("s",))
         if r.get("recommande") is not None:
             out.append(("cache recommande", [str(r["recommande"])], p.name))
         out.append(("essais d etalonnage", [str(len(d.get("essais") or []))], p.name))
@@ -1072,6 +1095,14 @@ def verifier() -> int:
     v("un document dont un chiffre est gardé n'est pas listé", "garde.md" not in sg)
     v("un document qui cite des nombres non gardés est listé", "nu.md" in sg)
     v("... et un document SANS chiffre ne l'est pas", "prose.md" not in sg, str(sg))
+    # ⚠⚠ La contradiction que `unites` resout : un chiffre court est ecarte par
+    # `discriminante` (« 5,6 » avait ete faussement trouve), mais l article peut EXIGER
+    # ce chiffre -- et alors il est requis et incontrolable a la fois, donc l echec ne se
+    # repare pas en ecrivant le nombre. Avec son unite il redevient cherchable.
+    v("un chiffre court n'est pas discriminant", not discriminante("1,81"))
+    v("... mais il l'est avec son unité", discriminante("1,81 Go"))
+    v("... et l'écriture anglaise aussi", discriminante("1.81 GB"))
+
     v("sans aucun chiffre attendu, tout document chiffré est listé",
       documents_sans_garde([], trois) == ["garde.md", "nu.md"])
 
