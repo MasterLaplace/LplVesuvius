@@ -272,6 +272,50 @@ niveaux. La pyramide est validée là où on l'utilise.
 3. **Le plancher de la pyramide dépend de la surface**, pas de la machine — voir le tableau
    ci-dessus. `tools/profiler_une_surface.sh` refuse maintenant *avant* de rendre.
 
+---
+
+## 9. ⚠⚠ Le décompte honnête : ce que ces heures ont coûté et rapporté
+
+![un croisillon contre un tourbillon](images/50_deux_surfaces.png)
+
+Cette image a coûté **quarante secondes**. Elle montre, à gauche, un segment officiel de
+`Scroll 1` — un **croisillon régulier**, qui est exactement ce qu'est du papyrus : deux
+couches de fibres perpendiculaires. Et à droite, notre trace : des **tourbillons** et des
+déchirures noires, c'est-à-dire les tranches de plusieurs feuillets vus par la tranche.
+
+⚠ **La comparaison n'est pas contrôlée** — deux rouleaux, deux scans, deux résolutions. Elle
+ne *prouve* pas qu'α sépare les deux ; la preuve, c'est α. Elle dit seulement que ce qu'α
+condamne ne ressemble pas à ce qu'il accepte, ce que rien n'avait vérifié jusqu'ici.
+
+### Ce que les heures ont réellement produit
+
+| | temps | résultat |
+|---|---|---|
+| tentative niveau 0, 161 couches | **4 h 32** | **rien** — toutes les tranches pré-allouées, index jamais écrit |
+| mesure niveau 1, deux fenêtres | ~2 h | α = +0,95 à 200 générations |
+| mesure niveau 2, contrôle | ~2 min | α = +1,01 |
+| **l'image ci-dessus** | **40 s** | ce qu'un œil peut lire |
+
+> ⚠⚠ **L'image aurait pu être obtenue à n'importe quel moment des quatorze heures
+> précédentes.** Je ne l'ai jamais faite, parce que la question posée était numérique et que
+> le script *supprimait* le rendu après en avoir tiré son profil. Un pipeline dont le seul
+> artefact lisible par un humain part à la poubelle pour économiser du disque, c'est un
+> défaut de conception — pas une économie.
+
+⭐ **La règle qui manquait** : *regarder la chose avant de la mesurer*. Quarante secondes
+auraient montré que cette surface est un désordre, avant qu'on passe des heures à chiffrer
+de combien.
+
+### Et ce que les heures ont quand même acheté
+
+Le verdict du §8 : à budget ×3,3, α passe de +0,89 à +0,95, sous le bruit du tireur. C'est
+un **résultat négatif** — le plafond ne fabriquait pas la conclusion — et il vaut d'être eu,
+parce que sans lui tout ce que ce dépôt affirme sur ce rouleau restait suspect.
+
+⚠ Mais il a coûté bien plus qu'il n'aurait dû, et le surcoût est identifiable : une
+estimation de débit fausse d'un facteur vingt, un réglage de cache jamais posé, un processus
+orphelin qui a tourné 4 h 32 pour rien, et un aperçu qu'on n'a pas pensé à faire.
+
 ## Reproduire
 
 ```bash

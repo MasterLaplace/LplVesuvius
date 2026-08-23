@@ -700,6 +700,13 @@ run "contrôle de résolution"   "$ROOT/tools/controle_resolution.sh" --verifier
 # interrompu laisse des tranches PRE-ALLOUEES dont aucun decodeur ne veut, et les confondre
 # ferait perdre l information qu on cherchait.
 run "dimensions d'un TIFF"     uv run python "$ROOT/analysis/src/dimensions_tiff.py" --verifier
+# ⚠⚠ La conversion en image. Sa sonde centrale REFUSE une sortie sans variete : un
+# `ffmpeg -i tranche.tif sortie.png` a rendu du noir, silencieusement et en code zero, sur
+# un fichier dont 74,5 %% des pixels sont non nuls -- on a failli en conclure que le rendu
+# n avait rien produit.
+run "tif vers png"             uv run --project "$ROOT/inference" python "$ROOT/analysis/src/tif_en_png.py" --verifier
+run "aperçu d'une surface"     "$ROOT/tools/apercu_surface.sh" --verifier
+run "deux surfaces côte à côte" uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_deux_surfaces.py" --verifier
 # ⚠⚠ La figure de la pyramide. Sa sonde centrale est celle de l AXE : au niveau 1, 21
 # tranches de 4,8 µm couvrent ce que 41 de 2,4 couvrent. Tracer contre le compte de tranches
 # decalerait les deux series d un facteur deux et montrerait un desaccord qui n existe pas.
