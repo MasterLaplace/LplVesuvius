@@ -18,25 +18,37 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BRANCHE="${BRANCHE:-release/progress-prize}"
 TRAVAIL="${TRAVAIL:-/tmp/lplvesuvius-release}"
 
-# ⚠⚠ Ce que la release ne porte PAS, et POURQUOI. Chaque ligne est une decision, pas un
-# nettoyage : si une entree n a pas de raison ecrite, elle n a rien a faire ici.
+# ⚠⚠ La release est definie par ce qu elle GARDE, pas par ce qu elle retire. Une liste de
+# suppressions grandit a chaque ajout dans main et finit par en oublier une ; une liste
+# d inclusions se relit d un coup d oeil et ne peut rien laisser passer par accident.
 #
-#   apprendre/          les videos pedagogiques. Elles existent pour l auteur, pas pour un
-#                       jury, et rien dans la verification ne les appelle.
-#   docs/champ_*        les champs de direction par rouleau : zero reference dans le code,
-#                       la soumission ou l article. Mesure, pas suppose.
-#   .lances/            les journaux de campagne : des traces d execution locales.
+# Ce qui est garde, et pourquoi chaque ligne :
 #
-# ⚠ TOUT LE RESTE EST GARDE, y compris les 51 documents de travail en francais : ils sont
-# la piste d audit de chaque chiffre publie, et `verifier_chiffres.py` cherche litteralement
-# dedans. Les retirer casserait la verification -- ce qui est exactement la raison pour
-# laquelle on lance la batterie avant de taguer.
-EXCLUS=(
-  "apprendre"
-  "docs/champ_PHercParis4"
-  "docs/champ_PHerc0172"
-  "docs/champ_PHerc1667"
-  ".lances"
+#   article/          l article, ses sources typst, ses figures ANGLAISES et son build.
+#                     C est l enonce complet des affirmations. ⚠ Mesure : il ne renvoie a
+#                     AUCUN document de travail francais, donc il se lit seul.
+#   tracecheck/       LE livrable. Un seul fichier, numpy et rien d autre, 16 auto-tests
+#                     hors ligne. C est ce qu un lecteur va utiliser ; l article le decrit.
+#   analysis/src/     le code qui produit les figures et recalcule les chiffres. Sans lui,
+#                     « reproductible » est un mot.
+#   docs/*.json       les 297 fichiers de resultat d ou chaque chiffre est RECALCULE. C est
+#                     ce qui rend « chaque nombre est verifiable » vrai plutot que flatteur.
+#   docs/21_*.md      le texte de soumission lui-meme.
+#   LICENSE           ⚠ absente du depot jusqu ici, et ca compte pour quelque chose qu on
+#                     soumet : sans licence, personne n a le droit de reutiliser l outil.
+#   README.md tools/  le point d entree et la verification.
+#
+# ⚠ Ce qui part et qu on pourrait croire necessaire : `docs/images/` (31 Mo). Ce sont les
+# figures FRANCAISES, celles des 51 documents de travail. L article utilise ses propres
+# figures anglaises, regenerees par article/build.sh avec --anglais. Verifie, pas suppose.
+GARDES=(
+  "article"
+  "tracecheck"
+  "analysis/src"
+  "tools"
+  "README.md"
+  "LICENSE"
+  "docs/21_texte_de_soumission.md"
 )
 
 if [ "${1:-}" = "--verifier" ]; then
@@ -54,7 +66,12 @@ if [ "${1:-}" = "--verifier" ]; then
   chk "main n est jamais supprimee" \
       '! grep -qE "^[[:space:]]*git (branch -D|push[^|]*--force[^|]*) main" "$ROOT/tools/faire_la_release.sh"'
   chk "le travail se fait dans un worktree" 'grep -q "worktree add" "$ROOT/tools/faire_la_release.sh"'
-  chk "les exclusions sont declarees, pas devinees" '[ "${#EXCLUS[@]}" -ge 1 ]'
+  # ⚠⚠ Une liste d INCLUSIONS, pas d exclusions : rien de nouveau dans main ne peut
+  # atterrir dans la release par oubli -- il faudrait l avoir ajoute ici.
+  chk "la release est definie par ce qu elle garde" '[ "${#GARDES[@]}" -ge 5 ]'
+  chk "le livrable en fait partie" 'printf "%s\n" "${GARDES[@]}" | grep -qx tracecheck'
+  chk "l article aussi" 'printf "%s\n" "${GARDES[@]}" | grep -qx article'
+  chk "et une licence" 'printf "%s\n" "${GARDES[@]}" | grep -qx LICENSE'
   echo "$([ $ok = 0 ] && echo 'ALL PASS' || echo FAILURES) ($ok failures, $n checks)"
   exit $ok
 fi
@@ -71,15 +88,28 @@ git worktree add -b "$BRANCHE" "$TRAVAIL" main > /dev/null 2>&1 \
   || { echo "refus : worktree impossible" >&2; exit 3; }
 
 cd "$TRAVAIL" || exit 3
-RETIRES=0
-for e in "${EXCLUS[@]}"; do
-  if git ls-files --error-unmatch "$e" > /dev/null 2>&1 || [ -e "$e" ]; then
-    n=$(git rm -r --quiet --ignore-unmatch "$e" 2>/dev/null; git diff --cached --name-only | wc -l)
-    echo "   retiré : $e"
-    RETIRES=$((RETIRES + 1))
-  fi
+
+# ⚠⚠ On liste ce que git suit, on retranche ce qu on garde, et on supprime le reste. C est
+# l inverse d une liste de suppressions : rien de nouveau dans main ne peut se retrouver
+# dans la release par oubli -- il faudrait l avoir AJOUTE a GARDES.
+mapfile -t TOUT < <(git ls-files)
+A_RETIRER=()
+for f in "${TOUT[@]}"; do
+  garde=0
+  for g in "${GARDES[@]}"; do
+    case "$f" in "$g"|"$g"/*) garde=1; break;; esac
+  done
+  # ⚠ Les fichiers de resultat sont gardes par MOTIF et pas un par un : il y en a 297 et
+  # ils naissent au rythme des mesures.
+  case "$f" in docs/*.json) garde=1;; esac
+  [ "$garde" = 0 ] && A_RETIRER+=("$f")
 done
-[ "$RETIRES" -gt 0 ] || { echo "   ⚠ rien à retirer"; }
+
+echo "   gardés : $(( ${#TOUT[@]} - ${#A_RETIRER[@]} )) fichiers sur ${#TOUT[@]}"
+if [ "${#A_RETIRER[@]}" -gt 0 ]; then
+  printf '%s\0' "${A_RETIRER[@]}" | xargs -0 git rm -r --quiet --ignore-unmatch --
+fi
+echo "   poids : $(git ls-files -z | xargs -0 du -ch 2>/dev/null | tail -1 | cut -f1)"
 
 git -c user.name=MasterLaplace commit -S -q -m "Release : l'essentiel, et rien que ce qui se vérifie
 

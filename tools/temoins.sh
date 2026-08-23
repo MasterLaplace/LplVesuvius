@@ -707,6 +707,10 @@ run "dimensions d'un TIFF"     uv run python "$ROOT/analysis/src/dimensions_tiff
 run "tif vers png"             uv run --project "$ROOT/inference" python "$ROOT/analysis/src/tif_en_png.py" --verifier
 run "aperçu d'une surface"     "$ROOT/tools/apercu_surface.sh" --verifier
 run "deux surfaces côte à côte" uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_deux_surfaces.py" --verifier
+# ⚠⚠ Le format des messages de commit. 108 commits d affilee se sont ecartes du format du
+# depot sans que rien ne le signale : une convention qu on se rappelle est une convention
+# qu on oublie. Trois regles, chacune enfreinte au moins une fois.
+run "format des commits"       "$ROOT/tools/format_des_commits.sh" --verifier
 # ⚠⚠ La figure de la pyramide. Sa sonde centrale est celle de l AXE : au niveau 1, 21
 # tranches de 4,8 µm couvrent ce que 41 de 2,4 couvrent. Tracer contre le compte de tranches
 # decalerait les deux series d un facteur deux et montrerait un desaccord qui n existe pas.
