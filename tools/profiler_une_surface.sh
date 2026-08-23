@@ -26,6 +26,16 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 #   - une fenetre est CENTREE sur sa couche tracee (--traced-layer N/2), donc elle doit
 #     rester IMPAIRE : 41 -> 21 -> 11 garde un centre, 41 -> 20 n en a pas. Une fenetre
 #     paire decale le centre d une demi-tranche a chaque niveau, silencieusement.
+# ⚠⚠ LE PLANCHER DE LA PYRAMIDE, et il depend de la SURFACE, pas de la machine.
+# `depth_profile` analyse par fenetres carrees de 1024 px et REFUSE une image plus petite --
+# refus correct, retrecir la fenetre mesurerait autre chose. Donc plus la surface est
+# petite, moins on peut regarder grossier : mesure, 2361 px tiennent jusqu au niveau 1,
+# 8000 px jusqu au niveau 2.
+#
+# ⚠ Le controle passe AVANT le rendu. Sans lui on paie un calcul entier pour recevoir le
+# refus a la derniere etape -- ce qui vient d arriver deux fois, sur les fenetres 10 et 40.
+FENETRE_ANALYSE=${FENETRE_ANALYSE:-1024}
+
 tranches_au_niveau() { python3 -c "print(max(3, int($1 / 2**$2 + 0.5)))"; }
 voxel_au_niveau()    { python3 -c "print($1 * 2**$2)"; }
 
@@ -54,6 +64,12 @@ if [ "${1:-}" = "--verifier" ]; then
   chk "une fenetre trop divisee est plancheee a 3" '[ "$(tranches_au_niveau 5 4)" = 3 ]'
   out=$(PLAT=/inexistant "$ROOT/tools/profiler_une_surface.sh" 2>&1); rc=$?
   chk "une surface absente est refusee (2)" '[ "$rc" = 2 ]'
+  chk "le plancher de la pyramide est verifie avant de rendre" \
+      'grep -q "FENETRE_ANALYSE" "$ROOT/tools/profiler_une_surface.sh"'
+  chk "le refus a son propre code de sortie" \
+      'grep -q "exit 5" "$ROOT/tools/profiler_une_surface.sh"'
+  chk "la lecture d en-tete est deleguee, pas recopiee" \
+      '[ -f "$ROOT/analysis/src/dimensions_tiff.py" ] && grep -q dimensions_tiff "$ROOT/tools/profiler_une_surface.sh"'
   chk "au moins un appelant utilise ce script" \
       'grep -lq profiler_une_surface.sh "$ROOT"/tools/*.sh'
   echo "$([ $ok = 0 ] && echo 'ALL PASS' || echo FAILURES) ($ok failures, $n checks)"
@@ -74,6 +90,23 @@ VOL="${VOL:-PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr}"
 
 UM=$(voxel_au_niveau "$UM_BASE" "$NIVEAU")
 echo "== niveau $NIVEAU  (voxel ${UM} µm)  ·  $ETIQUETTE"
+
+# ⚠ La taille est estimee depuis un rendu DEJA fait de la meme surface, s il en existe un :
+# c est la seule facon de la connaitre sans rendre. Sans reference on n avertit pas -- une
+# garde qui devine serait pire que pas de garde.
+REF=$(find "$(dirname "$PLAT")" -path "*rendu*" -name "*.tif" 2>/dev/null | head -1)
+if [ -n "$REF" ]; then
+  COTE=$(python3 "$ROOT/analysis/src/dimensions_tiff.py" "$REF" --cote 2>/dev/null || true)
+  if [ -n "${COTE:-}" ]; then
+    ICI=$((COTE / (1 << NIVEAU)))
+    if [ "$ICI" -lt "$FENETRE_ANALYSE" ]; then
+      echo "   ⚠⚠ refus : au niveau $NIVEAU cette surface ferait ~${ICI} px de côté," >&2
+      echo "      sous la fenêtre d'analyse de ${FENETRE_ANALYSE}. La rendre serait payer" >&2
+      echo "      un calcul entier pour un refus à la toute dernière étape." >&2
+      exit 5
+    fi
+  fi
+fi
 PROFILS=""
 for F in $FENETRES_BASE; do
   N=$(tranches_au_niveau "$F" "$NIVEAU")
