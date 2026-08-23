@@ -64,7 +64,8 @@ def bruit_de_tirage(docs: Path) -> tuple[float, str]:
     return BRUIT_TIRAGE_ENREGISTRE, "repli : étendue enregistrée de la campagne r3"
 
 
-def charger(docs: Path, prediction: str, candidat: int) -> list[dict]:
+def charger(docs: Path, prediction: str, candidat: int,
+            niveau: int | None = None) -> list[dict]:
     """Les mesures d'un même candidat aux différents budgets.
 
     ⚠ Le budget vient du NOM (`..._g200.json`) et pas d'un champ, parce que c'est la campagne
@@ -72,23 +73,43 @@ def charger(docs: Path, prediction: str, candidat: int) -> list[dict]:
     confiance à un outil pour rapporter une consigne qu'il n'a pas reçue.
     """
     out = []
-    motif = re.compile(rf"^plafond_{re.escape(prediction)}_c{candidat}_g(\d+)\.json$")
+    # ⚠⚠ Le NIVEAU de pyramide fait partie de l'identité d'une mesure. Comparer un budget
+    # mesuré au niveau 0 à un budget mesuré au niveau 1 confondrait le plafond avec la
+    # résolution, et rendrait un écart d'α parfaitement crédible dont on ne saurait pas
+    # lequel des deux il décrit. Le niveau est donc lu dans le nom et sert de CLÉ.
+    motif = re.compile(
+        rf"^plafond_{re.escape(prediction)}_c{candidat}_g(\d+)(?:_niv(\d+))?\.json$")
     for f in sorted(docs.glob(f"plafond_{prediction}_c{candidat}_g*.json")):
         m = motif.match(f.name)
         if not m:
+            continue
+        niv = int(m.group(2) or 0)
+        if niveau is not None and niv != niveau:
             continue
         try:
             d = json.loads(f.read_text(encoding="utf-8"))
         except Exception:
             continue
         for x in (d.get("series") or ([d] if "verdict" in d else [])):
-            out.append({"budget": int(m.group(1)), "verdict": x.get("verdict"),
+            out.append({"budget": int(m.group(1)), "niveau": niv,
+                        "verdict": x.get("verdict"),
                         "alpha": x.get("alpha"), "aire_cm2": x.get("aire_cm2")})
     return sorted(out, key=lambda r: r["budget"])
 
 
 def confronter(lignes: list[dict], bruit: float, origine_bruit: str = "fourni") -> dict:
-    d: dict = {"n_budgets": len(lignes), "bruit_de_tirage": bruit,
+    # ⚠⚠ Refus net : deux niveaux dans un même lot ne se comparent pas. Un écart d'α
+    # entre eux serait crédible et indéchiffrable — plafond ou résolution, on ne saurait
+    # pas. Mieux vaut ne rien dire que dire une chose dont on ignore le sujet.
+    niveaux = sorted({l.get("niveau", 0) for l in lignes})
+    if len(niveaux) > 1:
+        return {"n_budgets": len(lignes), "niveaux": niveaux,
+                "verdict": "niveaux mélangés",
+                "raison": (f"les mesures viennent des niveaux de pyramide {niveaux} : un "
+                           f"écart d'α entre elles confondrait le plafond avec la "
+                           f"résolution")}
+    d: dict = {"n_budgets": len(lignes), "niveau": niveaux[0] if niveaux else 0,
+               "bruit_de_tirage": bruit,
                "origine_du_bruit": origine_bruit,
                "budgets": [l["budget"] for l in lignes]}
     mesures = [l for l in lignes if isinstance(l.get("alpha"), (int, float))]
@@ -140,8 +161,9 @@ def rapporter(d: dict) -> None:
     print(f"  bruit de tirage : {d['bruit_de_tirage']:.2f}  ({d['origine_du_bruit']})")
     if d.get("converge"):
         print(f"\n  ⭐⭐⭐ UNE TRACE CONVERGE aux budgets {d['budgets_qui_convergent']}")
-    if d["verdict"] == "insuffisant":
-        print(f"\n  ⚠ {d['raison']}")
+    if d["verdict"] in ("insuffisant", "niveaux mélangés"):
+        print(f"\n  ⚠⚠ {d['raison']}" if d["verdict"] == "niveaux mélangés"
+              else f"\n  ⚠ {d['raison']}")
         return
     print(f"\n  α : {d['alpha_au_plus_petit']:+.2f} au budget {d['budgets'][0]}"
           f"  →  {d['alpha_au_plus_grand']:+.2f} au budget {d['budgets'][-1]}"
@@ -220,6 +242,18 @@ def _verifier() -> int:
         v("... et un autre candidat n'est pas ramassé", all(l["alpha"] != 0.10 for l in lg))
         v("... dans l'ordre croissant", lg == sorted(lg, key=lambda r: r["budget"]))
 
+    # ⚠⚠ Le refus qui evite le confond : deux niveaux dans un lot ne se comparent pas.
+    melange = [{"budget": 60, "niveau": 0, "alpha": 1.01, "verdict": "traverse"},
+               {"budget": 200, "niveau": 1, "alpha": 0.75, "verdict": "traverse"}]
+    rm = confronter(melange, 0.23)
+    v("deux niveaux de pyramide ne se comparent pas",
+      rm["verdict"] == "niveaux mélangés", rm["verdict"])
+    v("... et le refus nomme les niveaux", rm["niveaux"] == [0, 1])
+    v("... et ne rend aucun alpha", "variation" not in rm)
+    meme = [dict(x, niveau=1) for x in melange]
+    v("un même niveau se compare normalement",
+      confronter(meme, 0.23)["verdict"] != "niveaux mélangés")
+
     v("le seuil de convergence est importé", ALPHA_TRAVERS == 0.7)
     v("aucun budget, aucun verdict", confronter([], 0.23)["verdict"] == "insuffisant")
 
@@ -236,13 +270,15 @@ def main() -> int:
     ap.add_argument("--docs", type=Path, default=Path("docs"))
     ap.add_argument("--prediction", default="ps256")
     ap.add_argument("--candidat", type=int, default=0)
+    ap.add_argument("--niveau", type=int,
+                    help="ne charger que les mesures de ce niveau de pyramide")
     ap.add_argument("--json", type=Path)
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()
     if a.verifier:
         return _verifier()
 
-    lignes = charger(a.docs, a.prediction, a.candidat)
+    lignes = charger(a.docs, a.prediction, a.candidat, a.niveau)
     if not lignes:
         print(f"aucune mesure plafond_{a.prediction}_c{a.candidat}_g*.json dans {a.docs}",
               file=sys.stderr)
