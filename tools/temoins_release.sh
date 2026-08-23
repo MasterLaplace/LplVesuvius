@@ -33,8 +33,31 @@ trap 'rm -f "$VERROU"' EXIT INT TERM
 
 FAIL=0; BATTERIES=0; CONTROLES=0
 
+# ⚠⚠ Certains controles dependent d une entree qui n est PAS livree : le depot amont clone
+# dans `repos/`, ou le code d une experience que la release ne porte pas. Sur l arbre
+# complet ils tournent ; sur l arbre allege ils echoueraient pour la seule raison que leur
+# entree est ailleurs.
+#
+# ⚠ Le saut est CONDITIONNEL a l absence reelle, verifiee ici : si l entree est presente, le
+# controle TOURNE. Une liste de sauts inconditionnelle serait une facon de balayer un echec
+# sous le tapis, et elle finirait par cacher une vraie panne le jour ou l entree revient.
+#
+#   poids_growpatch     lit GrowPatch.cpp du depot amont volume-cartographer
+#   artefacts_orphelins exige que le producteur de chaque artefact soit dans l arbre
+declare -A DEPEND=(
+  [poids_growpatch]="repos/villa/volume-cartographer"
+  [artefacts_orphelins]="experiments/src/excision"
+)
+SAUTES=0
+
 run() {
   local nom=$1; shift
+  local dep="${DEPEND[$nom]:-}"
+  if [ -n "$dep" ] && [ ! -e "$ROOT/$dep" ]; then
+    printf '  ⏭  %-33s SAUTÉ — %s absent de la release\n' "$nom" "$dep"
+    SAUTES=$((SAUTES + 1))
+    return 0
+  fi
   local sortie rc
   sortie=$("$@" 2>&1); rc=$?
   sortie=$(grep -vE "SyntaxWarning|DeprecationWarning|^  [a-z_]+ =" <<<"$sortie")
@@ -105,6 +128,11 @@ fi
 
 echo
 printf '  %-36s %s\n' "batteries" "$BATTERIES batteries, $CONTROLES controles"
+# ⚠ Les sauts sont COMPTES et imprimes : un controle saute en silence est un controle qu on
+# croit avoir passe. Zero saut sur l arbre complet, deux sur la release -- et la difference
+# doit se voir.
+[ "$SAUTES" -gt 0 ] && printf '  %-36s %s\n' "sautés" \
+    "$SAUTES, faute d'une entrée hors périmètre"
 echo
 if [ "$FAIL" -gt 0 ]; then echo "$FAIL batterie(s) en echec"; exit 1; fi
 echo "LA RELEASE SE VERIFIE ELLE-MEME"
