@@ -35,23 +35,42 @@ overstates its own result is worse than one that measures nothing.
 so a change of scanner gain does not move it. Below the instrument's floor of **0.02** the
 column carries no structure: what you are reading is noise, not a sheet.
 
-We profiled **138 series** offline, split by whether their surface follows a sheet or lies
-across the stack, and read the same split with both signals this tool can compute:
+⚠ **Where this comparison was measured, stated because it matters.** We profiled **138
+series** from *rendered layer stacks*, in 1024-pixel analysis windows — not from published
+surface volumes in 128-pixel chunks, which is what this tool reads. The mechanism is
+instrument-independent: relief present in a narrow window is what following a sheet *means*.
+The two error counts below are not, and we have not measured them on this instrument.
 
 | signal | follows a sheet | lies across the stack |
 |---|---:|---:|
 | **relief** below the floor | **0 / 75** | **34 / 63** |
 | `edge_pinned` at 90 % or more | **6 / 75** | **39 / 63** |
 
-> **`relief` never errs in the direction that costs you; `edge_pinned` does so six times.**
-> Six surfaces that genuinely follow a sheet still have more than 90 % of their peaks at an
-> edge. Discarding on that criterion discards good work.
+> **On those rendered stacks, `relief` never erred in the direction that costs you;
+> `edge_pinned` did so six times.** Six surfaces that genuinely follow a sheet still had more
+> than 90 % of their peaks at an edge. That is why `relief` is printed first — but read both,
+> and calibrate both where you are reading them.
 
-⚠ **The threshold does not transport, and the ratio does.** `relief` grows with the depth of
-the window it is read in — measured exponent **+1.01** on surfaces lying across the stack —
-so a cutoff calibrated at one depth is meaningless at another. Read the **ratio to the
-floor**, and let your own corpus tell you what is normal for it. For reference, the lowest
-ratio we measured on a surface that does follow a sheet is **2.25**.
+⚠⚠ **No threshold transports between instruments, and we got this wrong for an hour.** An
+earlier version of this file offered **2.25** as the lowest ratio measured on a surface that
+does follow a sheet. That number was measured in **1024-pixel** analysis windows; this tool
+reads **128-pixel** chunks, and the window size moves the reading as much as the depth does.
+Measured on one unchanged rendered stack:
+
+| analysis window | relief |
+|---:|---:|
+| 1024 px | 0.046 |
+| 512 px | 0.081 |
+| 256 px | 0.146 |
+
+It triples across two halvings. `relief` also grows with the **depth** of the window it is
+read in — measured exponent **+1.01** on surfaces lying across the stack. So a cutoff
+calibrated on one instrument is meaningless on another, and the reference point has been
+withdrawn rather than carried over.
+
+⭐ **Calibrate on your own corpus, which is one command.** `--all --csv` judges every
+published segment of a scroll and gives you the distribution `relief` takes where you are
+reading it. Compare a candidate to that, never to a number from somewhere else.
 
 **No download. No credentials. numpy and Python 3.9+, nothing else.** Roughly 300 HTTPS
 range reads, a few megabytes, ~15 seconds. The equivalent measurement from rendered

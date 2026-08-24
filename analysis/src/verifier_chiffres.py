@@ -896,6 +896,26 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"alpha d identite {x['couches'][0]}c/{x['couches'][1]}c",
                        x["alpha"], 4, p.name)
 
+    p = racine / "docs" / "effet_taille_fenetre.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        # ⚠⚠ Ces chiffres ont RETIRE un repere du README public. Ils doivent vieillir
+        # bruyamment : si l effet de la taille de fenetre s averait plus petit qu annonce,
+        # la mise en garde publiee changerait de force.
+        if d.get("exposant_taille") is not None:
+            ajoute("exposant du relief contre la taille de fenetre",
+                   d["exposant_taille"], 3, p.name, signe=True)
+        if d.get("rapport_extreme") is not None:
+            # ⚠ Ecrit AVEC son signe multiplicatif et jamais nu : « 3,16 » fait quatre
+            # caracteres et se rencontre partout, donc un ✅ dessus ne voudrait rien dire.
+            out.append(("rapport de relief entre 1024 et 256 px",
+                        [f"×{fr(d['rapport_extreme'], 2)}",
+                         f"x{fr(d['rapport_extreme'], 2)}",
+                         f"×{en(d['rapport_extreme'], 2)}"], p.name))
+        for m in d.get("mesures") or []:
+            if m.get("amplitude") is not None:
+                ajoute(f"relief a {m['taille']} px", m["amplitude"], 3, p.name)
+
     p = racine / "docs" / "fenetre_utilisable.json"
     if p.exists():
         d = json.loads(p.read_text())

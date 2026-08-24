@@ -381,6 +381,37 @@ des fenêtres dont le pic est collé à un bord de pile. C'est **exactement** la
 > fois : six surfaces qui suivent une feuille ont malgré tout plus de 90 % de leurs pics au
 > bord. Un outil qui écarte une surface sur ce critère écarte donc des surfaces bonnes.
 
+#### ⚠⚠ Corrigé une heure après l'avoir publié : le seuil ne transporte pas non plus entre INSTRUMENTS
+
+J'avais écrit dans le README public que **2,25 fois le plancher** est le relief le plus bas
+mesuré sur une surface qui suit une feuille, et je l'offrais à un outil qui lit des morceaux
+de **128 px** alors que ce nombre vient de fenêtres d'analyse de **1024 px**.
+
+Le premier balayage l'a montré immédiatement : les segments publiés de Scroll1 lisent
+**0,74 à 0,85**, contre 0,08 à 0,19 pour nos séries convergentes. Un facteur dix sans
+explication physique. Vérifié sur une pile rendue **inchangée** — même surface, même
+profondeur, mêmes voxels, seule la fenêtre d'analyse change :
+
+| fenêtre d'analyse | relief |
+|---:|---:|
+| 1024 px | **0,046** |
+| 512 px | **0,081** |
+| 256 px | **0,146** |
+
+⭐ Il **triple** en deux divisions par deux : exposant **−0,830**, rapport **×3,16** entre les
+extrêmes — du même ordre que l'effet de la profondeur. Ma mise en garde publiée parlait de
+la profondeur et **ne nommait pas l'étendue dans le plan**.
+
+⚠ Ce n'est pas un défaut du relief : toute statistique de contraste lue sur une moyenne de
+patch se comporte ainsi — une fenêtre large moyenne davantage, donc écrase les extrêmes qui
+font l'amplitude. Ce qu'il faut en retenir n'est pas « la grandeur est mauvaise » mais
+**« elle se compare à l'intérieur d'un instrument, jamais entre deux »**.
+
+Le repère est **retiré** du README, remplacé par ce tableau et par la seule instruction qui
+tienne : calibrer sur son propre corpus, ce qui est une commande.
+Instrument : [`analysis/src/effet_taille_fenetre.py`](../analysis/src/effet_taille_fenetre.py)
+(8 témoins), dont la sonde centrale est le **signe** de l'exposant.
+
 ⭐ Et l'amplitude ne coûte rien de plus à calculer : `tracecheck` lit déjà les colonnes de
 profondeur et en extrait les pics, donc il a le profil sous la main. ⚠ Ce qui ne se
 transporte **pas**, c'est le seuil : `critere_relatif` mesure β = +1,01 pour l'amplitude sur

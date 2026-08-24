@@ -198,6 +198,45 @@ def relief_of(column) -> float:
     return float((a.max() - a.min()) / max(mean, 1e-9))
 
 
+# ⚠⚠ ONE TABLE, TWO VIEWS, DECLARED ONCE. The header and the row used to be two separate
+# string literals, so adding a column to one and not the other would shift every field after
+# it -- silently, producing a table of confident wrong numbers that nothing downstream can
+# detect. A single list of (column, how to format it) makes that failure unexpressible, and
+# the selftest checks the two views still have the same width.
+CSV_FIELDS: tuple[tuple[str, str], ...] = (
+    ("segment", "{segment}"),
+    ("material", "{material:.4f}"),
+    # ⚠ `relief` sits right after `material` because it is the field to read first.
+    ("relief", "{relief:.4f}"),
+    ("edge_pinned", "{edge_pinned:.4f}"),
+    ("offset_um", "{offset_um:.2f}"),
+    ("residual_um", "{residual_um:.2f}"),
+    ("residual_p90_um", "{residual_p90_um:.2f}"),
+    ("rigid_share", "{rigid_share:.4f}"),
+    ("coherence", "{coherence:.4f}"),
+    ("coherence_shuffled", "{coherence_shuffled:.4f}"),
+    ("pairs", "{neighbour_pairs}"),
+    ("coherence_reliable", "{coherence_reliable:d}"),
+    ("windows", "{windows_with_papyrus}"),
+)
+
+
+def csv_header() -> str:
+    return ",".join(name for name, _ in CSV_FIELDS)
+
+
+def csv_row(out: dict) -> str:
+    """One judged segment as a CSV row, in the order the header declares.
+
+    ⚠ Missing fields default rather than raising: a run over two hundred segments must not
+    die on the one whose judge returned early, and a zero is visibly not a measurement.
+    """
+    d = dict(out)
+    d.setdefault("relief", 0.0)
+    d["coherence_reliable"] = int(bool(d.get("coherence_reliable")))
+    return ",".join(fmt.format(**d) for _, fmt in CSV_FIELDS)
+
+
 def judge(zarr_url: str, level: int, voxel_um: float, side: int, blocks: int,
           timeout: float, threads: int) -> dict:
     meta = array_meta(zarr_url, level, timeout)
@@ -344,12 +383,11 @@ def judge_scroll(args) -> int:
         return 2
 
     if args.csv:
-        print("segment,material,edge_pinned,offset_um,residual_um,residual_p90_um,"
-              "rigid_share,coherence,coherence_shuffled,pairs,coherence_reliable,windows")
+        print(csv_header())
     else:
         print(f"{scroll}: {len(segments)} segments listed\n")
-        print(f"{'segment':<44} {'material':>9} {'edge':>6} {'offset':>8} "
-              f"{'resid':>7} {'rigid':>6} {'coher':>7}")
+        print(f"{'segment':<44} {'material':>9} {'relief':>7} {'edge':>6} "
+              f"{'offset':>8} {'resid':>7} {'rigid':>6} {'coher':>7}")
 
     rows, skipped, failed = [], 0, 0
     for segment in segments:
@@ -367,15 +405,11 @@ def judge_scroll(args) -> int:
         out["segment"] = segment
         rows.append(out)
         if args.csv:
-            print(f"{segment},{out['material']:.4f},{out['edge_pinned']:.4f},"
-                  f"{out['offset_um']:.2f},{out['residual_um']:.2f},"
-                  f"{out['residual_p90_um']:.2f},{out['rigid_share']:.4f},"
-                  f"{out['coherence']:.4f},{out['coherence_shuffled']:.4f},"
-                  f"{out['neighbour_pairs']},{int(out['coherence_reliable'])},"
-                  f"{out['windows_with_papyrus']}", flush=True)
+            print(csv_row(out), flush=True)
         else:
             marque = "" if out["coherence_reliable"] else " ⚠thin"
             print(f"{segment[:44]:<44} {out['material'] * 100:>8.1f}% "
+                  f"{out.get('relief', 0.0):>7.3f} "
                   f"{out['edge_pinned'] * 100:>5.1f}% {out['offset_um']:>+8.1f} "
                   f"{out['residual_um']:>7.1f} {out['rigid_share'] * 100:>5.1f}% "
                   f"{out['coherence']:>+7.3f}{marque}", flush=True)

@@ -720,6 +720,11 @@ run "commandes du README"      "$ROOT/tools/readme_apparie.sh" --verifier
 # beta = 0, donc « propriete de la surface », alors qu elle dit seulement qu elle ne peut pas
 # monter plus haut. Mesure : 104 series sur pic_intensite_median.
 run "critere relatif"          uv run --project "$ROOT" python "$ROOT/analysis/src/critere_relatif.py" --verifier
+# ⚠⚠ L effet de la TAILLE DE FENETRE sur le relief. Sa sonde centrale est le SIGNE de
+# l exposant : il doit etre NEGATIF (une fenetre plus large moyenne plus, donc ecrase
+# l amplitude), et son ampleur comparable a celle de la profondeur -- c est ce qui justifie
+# d avoir retire du README public un repere transporte d un instrument a l autre.
+run "effet de la taille"       uv run --project "$ROOT" python "$ROOT/analysis/src/effet_taille_fenetre.py" --verifier
 # ⚠⚠ Les APPUIS de la pente. Sa sonde centrale est le SIGNE : un appui etroit au bord rend
 # alpha majorant, un appui large le rend minorant, et inverser les deux ferait tenir
 # exactement les verdicts qui tombent. Mesure : 20 series rendaient l identite +1,0135 du

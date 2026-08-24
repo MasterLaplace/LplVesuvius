@@ -1,0 +1,26 @@
+{
+  "mesures": [
+    {
+      "taille": 1024,
+      "amplitude": 0.04621853869177194,
+      "fenetres": 49
+    },
+    {
+      "taille": 512,
+      "amplitude": 0.08132517418143126,
+      "fenetres": 100
+    },
+    {
+      "taille": 256,
+      "amplitude": 0.14614002579925645,
+      "fenetres": 121
+    }
+  ],
+  "exposant_taille": -0.8304039078584368,
+  "rapport_extreme": 3.1619352306626047,
+  "tailles": [
+    1024,
+    512,
+    256
+  ]
+}

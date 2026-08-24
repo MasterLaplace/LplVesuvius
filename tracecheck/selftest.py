@@ -91,6 +91,25 @@ ck(T.relief_of([0.0, 0.0, 0.0]) == 0.0, "an all-zero column claims no relief")
 ck(T.RELIEF_FLOOR == 0.02, "the floor is the profiler's own 0.02")
 
 
+# ⚠⚠ THE CSV HEADER AND ITS ROW MUST HAVE THE SAME WIDTH. A column added to one and not
+# the other shifts every field after it, silently, and the result is a table of confident
+# wrong numbers -- the worst failure this tool can have, because nothing downstream can see
+# it. The two views now come from one declaration, so the width is checked rather than
+# trusted, and a missing field must not kill a two-hundred-segment run.
+_fake = {"segment": "s", "material": 0.5, "relief": 0.18, "edge_pinned": 0.07,
+         "offset_um": -13.2, "residual_um": 43.2, "residual_p90_um": 128.4,
+         "rigid_share": 0.234, "coherence": 0.31, "coherence_shuffled": -0.081,
+         "neighbour_pairs": 150, "coherence_reliable": True,
+         "windows_with_papyrus": 96}
+ck(len(T.csv_header().split(",")) == len(T.csv_row(_fake).split(",")),
+   "the CSV header and its row have the same width")
+ck(T.csv_header().split(",")[2] == "relief", "relief is the third column, after material")
+ck(T.csv_row(_fake).split(",")[2] == "0.1800", "and the row puts it there too")
+# ⚠ Un champ absent ne doit pas tuer un balayage de deux cents segments.
+ck(T.csv_row({k: v for k, v in _fake.items() if k != "relief"}).split(",")[2] == "0.0000",
+   "a missing relief defaults to a visible zero instead of raising")
+
+
 def noisy_peak(url, level, meta, cy, cx, timeout):
     """Peaks scattered with no spatial structure: coherence must stay near zero."""
     rng = np.random.default_rng(cy * 1000 + cx)
