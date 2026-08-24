@@ -83,6 +83,20 @@ JSON
   chk "... et le moteur de rendu n est PAS invoque ici" \
       '! grep -q "vc_render""_tifxyz" "$ROOT/tools/portee_tangentielle.sh"'
   chk "le rendu est opt-in" 'grep -q "RENDRE:-0" "$ROOT/tools/portee_tangentielle.sh"'
+  # ⚠⚠ Un fichier provisoire dans `docs/` se lit comme un resultat. Le repertoire des
+  # resultats ne doit contenir que des resultats -- une campagne interrompue y laissait un
+  # JSON a moitie ecrit, et l auteur est tombe dessus.
+  # ⚠⚠ LE MOTIF EST COMPOSE A L EXECUTION. Ecrit en clair, ce grep contient exactement ce
+  # qu il interdit et echoue toujours -- ce qui vient d arriver, et c est la SECONDE fois
+  # aujourd hui que j ecris ce bug alors que le remede est deja ecrit dans
+  # `tools/temoin_du_rendu.sh`. Un remede connu ne sert que si on le relit.
+  INTERDIT="JSON"".tmp"
+  chk "aucun fichier provisoire n est ecrit dans docs/" \
+      '! grep -q "$INTERDIT" "$ROOT/tools/portee_tangentielle.sh"'
+  chk "... le provisoire passe par mktemp" \
+      'grep -q "TMP=\$(mktemp)" "$ROOT/tools/portee_tangentielle.sh"'
+  chk "... et il est nettoye meme en cas d interruption" \
+      'grep -q "trap .rm -f" "$ROOT/tools/portee_tangentielle.sh"'
   chk "le resultat part dans un JSON" 'grep -q "portee_tangentielle.json" "$ROOT/tools/portee_tangentielle.sh"'
   echo "$([ $ok = 0 ] && echo 'ALL PASS' || echo FAILURES) ($ok failures, $n checks)"
   exit $ok
@@ -96,7 +110,15 @@ PAS_DEFAUT="0 1 2 5 10 20 50"
 PAS="${*:-$PAS_DEFAUT}"
 
 mkdir -p "$DEST"
-echo "[" > "$JSON.tmp"
+# ⚠⚠ LE FICHIER PROVISOIRE NE VIT PAS DANS `docs/`. Il y vivait, sous le nom du resultat
+# suffixe de « provisoire », et une campagne interrompue y laissait un JSON a moitie ecrit
+# ⚠ -- et le suffixe n est PAS epele ici, sinon la sonde qui l interdit le trouverait dans ce
+# commentaire meme -- dans le repertoire des
+# RESULTATS, ou tout ce qui traine se lit comme un resultat. C est la meme regle que « une
+# campagne tronquee ne doit pas ressembler a une campagne complete », un cran plus bas.
+TMP=$(mktemp)
+trap 'rm -f "$TMP"' EXIT
+echo "[" > "$TMP"
 PREMIER=1
 # ⚠⚠ LA COLONNE QUI DECIDE EST « mediane », PAS « matiere ». Premiere version de cette
 # campagne : elle ne rapportait que la part de points dont le BLOC contient de la matiere, et
@@ -136,11 +158,11 @@ import json;print(round(json.load(open('$D/meta.json'))['pas_voxels'],1))" 2>/de
   LIGNE=$(ligne_de "$R")
   set -- $LIGNE
   printf '%6s %10s %10s %10s\n' "$K" "${VOX:-?}" "${1:-?}" "${2:-?}"
-  [ "$PREMIER" = 1 ] || echo "," >> "$JSON.tmp"
+  [ "$PREMIER" = 1 ] || echo "," >> "$TMP"
   PREMIER=0
   printf '{"pas": %s, "pas_voxels": %s, "matiere": "%s", "valeur_mediane": %s, "valeurs_nulles": %s, "part": %s}' \
-      "$K" "${VOX:-0}" "${1:-0/0}" "${2:-null}" "${3:-0}" "${4:-0}" >> "$JSON.tmp"
+      "$K" "${VOX:-0}" "${1:-0/0}" "${2:-null}" "${3:-0}" "${4:-0}" >> "$TMP"
 done
-echo "]" >> "$JSON.tmp"
-mv "$JSON.tmp" "$JSON"
+echo "]" >> "$TMP"
+mv "$TMP" "$JSON"
 echo "écrit : $JSON"
