@@ -18,12 +18,32 @@
 set -uo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
+# ⚠⚠ Le traceur est INJECTABLE, et c est une prise de test assumee -- meme raison que
+# `rendre_surveille.sh` : un garde qu on ne peut exercer qu en lancant une vraie trace de deux
+# heures n est pas exerce. Sans ca, seul le chemin de REFUS etait testable, donc la batterie
+# ne verifiait jamais qu une graine VALIDE passe -- et un garde qui refuse tout est aussi
+# inutile qu un garde qui n existe pas. La valeur par defaut reste le vrai traceur.
+TRACEUR=${TRACEUR:-vc_grow_seg_from_seed}
+
 B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 S="PHercParis4/representations/predictions/surfaces"
 declare -A PRED=(
   [ps256]="$S/20260411134726-surface-20260413141734-surface-recto-2um-ps256-L0-th0.45.zarr"
   [m7]="$S/20260411134726-surface-20260413222639-surface-m7-L2-th0.2.zarr"
 )
+
+# ⚠⚠ LE NIVEAU DE PYRAMIDE EST ECRIT DANS LE NOM DE LA PREDICTION, et personne ne le lisait :
+# `...-recto-2um-ps256-L0-th0.45.zarr` contre `...-m7-L2-th0.2.zarr`. Une graine donnee pour
+# une prediction L2 est une coordonnee L2 ; la meme suite de chiffres, lue dans le volume
+# scanne, designe un point QUATRE FOIS plus proche de l origine -- dans le vide. C est ce qui
+# a produit treize rendus entierement noirs, et le renseignement etait dans l URL que ce
+# script tient deja.
+#
+# ⚠ Un nom sans `-L<n>-` est REFUSE et pas defaute a zero : defauter ferait exactement
+# l erreur qu on repare, en silence.
+niveau_de_prediction() {
+  printf '%s' "$1" | grep -oE -- '-L[0-9]+-' | head -1 | tr -dc '0-9'
+}
 
 resoudre_volume() {
   local scan="$1"
@@ -50,6 +70,47 @@ if [ "${1:-}" = "--verifier" ]; then
   chk "... et le refus dit pourquoi" 'printf "%s" "$out" | grep -qi absolu'
   out=$(PREDICTION=ps256 DEST=/tmp/x "$ROOT/tools/tracer_une_graine.sh" 1 2 2>&1); rc=$?
   chk "trois coordonnees exigees" '[ "$rc" = 3 ]'
+  # ⚠⚠ Le niveau lu dans le nom de la prediction : c est le renseignement qui manquait.
+  chk "ps256 est lue au niveau 0" '[ "$(niveau_de_prediction "${PRED[ps256]}")" = 0 ]'
+  chk "m7 est lue au niveau 2" '[ "$(niveau_de_prediction "${PRED[m7]}")" = 2 ]'
+  chk "une URL sans -L<n>- ne rend rien" '[ -z "$(niveau_de_prediction "sans-niveau.zarr")" ]'
+  # ⚠ Le facteur, qui est ce qui transforme une coordonnee de prediction en coordonnee de scan.
+  chk "le niveau 2 vaut un facteur 4" '[ "$((1 << 2))" = 4 ]'
+  chk "le niveau 0 ne change rien" '[ "$((1 << 0))" = 1 ]'
+  # ⚠⚠ La sonde doit passer AVANT le trace, sinon elle ne sert a rien : on aurait deja paye.
+  L_SONDE=$(grep -n "sonde de graine : prédiction" "$ROOT/tools/tracer_une_graine.sh" | cut -d: -f1 | head -1)
+  # ⚠⚠ Le motif vise l INVOCATION, pas le nom du binaire : depuis que le traceur est
+  # injectable, son nom apparait aussi dans la valeur par defaut, tout en haut du fichier --
+  # donc chercher le nom faisait croire que le trace precede la sonde. Ce controle a attrape
+  # sa propre fragilite a la seconde ou elle est apparue.
+  L_TRACE=$(grep -n 'timeout 7200 "\$TRACEUR"' "$ROOT/tools/tracer_une_graine.sh" | cut -d: -f1 | head -1)
+  chk "la sonde de graine passe AVANT le tracé" \
+      '[ -n "$L_SONDE" ] && [ -n "$L_TRACE" ] && [ "$L_SONDE" -lt "$L_TRACE" ]'
+  # ⚠⚠ LE CHEMIN QUI PASSE, exerce avec un faux traceur : sans ce controle la batterie ne
+  # verifiait que le REFUS, et un garde qui refuse tout est aussi inutile qu un garde absent.
+  T_OK=$(mktemp -d)
+  out=$(PREDICTION=ps256 DEST="$T_OK" TRACEUR=true \
+        VOL="PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr" UM=2.4 \
+        timeout 300 "$ROOT/tools/tracer_une_graine.sh" 10752 10616 38740 2>&1); rc=$?
+  chk "une graine VALIDE passe la sonde" '[ "$rc" != 5 ]'
+  chk "... et la sonde a bien trouvé de la matière" \
+      'printf "%s" "$out" | grep -q "valeur au point"'
+  # ⚠ Et le hors-ligne : SANS_SONDE saute la sonde sans rien changer d autre.
+  out=$(PREDICTION=m7 DEST="$T_OK/b" TRACEUR=true SANS_SONDE=1 \
+        VOL="PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr" UM=2.4 \
+        timeout 300 "$ROOT/tools/tracer_une_graine.sh" 2924 5324 9260 2>&1); rc=$?
+  chk "SANS_SONDE saute la sonde" '[ "$rc" != 5 ]'
+  chk "... et la sonde ne tourne alors PAS" \
+      '! printf "%s" "$out" | grep -q "sonde de graine"'
+  # ⚠⚠ Et le refus, exerce lui aussi de bout en bout : la graine m7 designe un bloc absent.
+  out=$(PREDICTION=m7 DEST="$T_OK/c" TRACEUR=true \
+        VOL="PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr" UM=2.4 \
+        timeout 300 "$ROOT/tools/tracer_une_graine.sh" 2924 5324 9260 2>&1); rc=$?
+  chk "la graine m7 est refusee (5)" '[ "$rc" = 5 ]'
+  chk "... et le refus dit ce qui manque" 'printf "%s" "$out" | grep -q "aucune matière scannée"'
+  rm -rf "$T_OK"
+  chk "et une sortie propre existe pour le hors-ligne" \
+      'grep -q "SANS_SONDE" "$ROOT/tools/tracer_une_graine.sh"'
   chk "le script est appele par au moins une campagne" \
       'grep -lq tracer_une_graine.sh "$ROOT"/tools/*.sh'
   echo "$([ $ok = 0 ] && echo 'ALL PASS' || echo FAILURES) ($ok failures, $n checks)"
@@ -79,6 +140,30 @@ if [ -z "${VOL:-}" ] || [ -z "${UM:-}" ]; then
 fi
 [ -n "${VOL:-}" ] && [ -n "${UM:-}" ] || { echo "refus : volume introuvable" >&2; exit 3; }
 
+# ⚠⚠ LA SONDE DE GRAINE, ET ELLE PASSE AVANT TOUT. Une trace coute des heures, un bloc zarr
+# coute une requete. Le 2026-08-24 : la graine `m7` designe un bloc que le depot n a jamais
+# ecrit, et treize rendus entierement noirs en sont sortis -- pendant que le traceur imprimait
+# `value is 0` puis `empty space tracing` et poussait quand meme. Il imprime la meme chose sur
+# les graines qui MARCHENT, donc cette ligne ne discrimine rien ; ce qui discrimine est « y
+# a-t-il de la matiere scannee la », et rien ne posait la question.
+NIV=$(niveau_de_prediction "${PRED[$NOM]}")
+[ -n "$NIV" ] || { echo "refus : impossible de lire le niveau (-L<n>-) dans « ${PRED[$NOM]} »" >&2; exit 3; }
+if [ "${SANS_SONDE:-0}" != 1 ]; then
+  # ⚠ La graine est donnee dans le repere de la PREDICTION ; le volume scanne est au niveau 0.
+  F=$((1 << NIV))
+  SX=$((X * F)); SY=$((Y * F)); SZ=$((Z * F))
+  echo "== sonde de graine : prédiction $NOM (niveau $NIV) → scan ($SZ, $SY, $SX)"
+  if ! uv run --project "$ROOT" python "$ROOT/analysis/src/matiere_au_point.py" \
+       --point "$SZ" "$SY" "$SX" --niveau 0 --volume "$VOL" 2>&1 | tee /dev/stderr \
+       | grep -q "valeur au point"; then
+    echo "   ⚠⚠ refus : cette graine ne désigne aucune matière scannée. Tracer ici produirait" >&2
+    echo "      une surface dans le vide, et son rendu serait entièrement noir." >&2
+    echo "      Pour passer outre (hors ligne, ou graine volontairement dans le vide) :" >&2
+    echo "      SANS_SONDE=1" >&2
+    exit 5
+  fi
+fi
+
 mkdir -p "$DEST"
 [ -s "$DEST/seed.json" ] || python3 - "$ROOT/artefacts/PHerc0358/seed.json" "$DEST/seed.json" \
     "$UM" "$GENERATIONS" <<'PY'
@@ -90,7 +175,7 @@ PY
 
 M=$(ls -d "$DEST"/auto_grown_* 2>/dev/null | head -1)
 if [ -z "$M" ]; then
-  ( cd "$DEST" && timeout 7200 vc_grow_seg_from_seed -v "$B/${PRED[$NOM]}" -t . \
+  ( cd "$DEST" && timeout 7200 "$TRACEUR" -v "$B/${PRED[$NOM]}" -t . \
       -p seed.json -s "$X" "$Y" "$Z" ) > "$DEST/trace.log" 2>&1
   M=$(ls -d "$DEST"/auto_grown_* 2>/dev/null | head -1)
 fi
