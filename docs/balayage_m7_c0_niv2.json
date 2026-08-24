@@ -1,0 +1,150 @@
+{
+  "maillage": "data/paris4_candidats/m7_c0/plat",
+  "niveau": 2,
+  "sondes": 31,
+  "blocs_distincts": 31,
+  "comptes": {
+    "matiere": 8,
+    "bloc_vide": 0,
+    "bloc_absent": 23,
+    "hors_volume": 0,
+    "illisible": 0
+  },
+  "exemples": [
+    {
+      "grille": [
+        1,
+        1
+      ],
+      "zyx": [
+        9346,
+        6489,
+        1776
+      ],
+      "refus": "bloc absent du d\u00e9p\u00f4t"
+    },
+    {
+      "grille": [
+        4,
+        106
+      ],
+      "zyx": [
+        8026,
+        5676,
+        2986
+      ],
+      "refus": "bloc absent du d\u00e9p\u00f4t"
+    },
+    {
+      "grille": [
+        8,
+        93
+      ],
+      "zyx": [
+        8251,
+        5688,
+        2842
+      ],
+      "refus": "bloc absent du d\u00e9p\u00f4t"
+    }
+  ],
+  "avec_matiere": [
+    {
+      "grille": [
+        74,
+        108
+      ],
+      "zyx": [
+        8817,
+        4669,
+        3496
+      ],
+      "max_bloc": 255
+    },
+    {
+      "grille": [
+        78,
+        95
+      ],
+      "zyx": [
+        9042,
+        4693,
+        3364
+      ],
+      "max_bloc": 255
+    },
+    {
+      "grille": [
+        82,
+        82
+      ],
+      "zyx": [
+        9206,
+        4878,
+        3385
+      ],
+      "max_bloc": 255
+    },
+    {
+      "grille": [
+        86,
+        69
+      ],
+      "zyx": [
+        9273,
+        5127,
+        3461
+      ],
+      "max_bloc": 255
+    },
+    {
+      "grille": [
+        90,
+        56
+      ],
+      "zyx": [
+        9251,
+        5384,
+        3538
+      ],
+      "max_bloc": 52
+    },
+    {
+      "grille": [
+        109,
+        113
+      ],
+      "zyx": [
+        9125,
+        4273,
+        3929
+      ],
+      "max_bloc": 255
+    },
+    {
+      "grille": [
+        113,
+        104
+      ],
+      "zyx": [
+        9199,
+        4438,
+        4000
+      ],
+      "max_bloc": 255
+    },
+    {
+      "grille": [
+        117,
+        95
+      ],
+      "zyx": [
+        9213,
+        4615,
+        4080
+      ],
+      "max_bloc": 255
+    }
+  ],
+  "part_matiere": 0.25806451612903225
+}

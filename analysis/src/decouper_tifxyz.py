@@ -267,6 +267,11 @@ def main() -> int:
     p.add_argument("--comme", help="tifxyz dont on copie la taille de grille")
     p.add_argument("--taille", nargs=2, type=int, metavar=("LIGNES", "COLONNES"))
     p.add_argument("--nombre", type=int, default=4)
+    p.add_argument("--origine", nargs=2, type=int, metavar=("LIGNE", "COLONNE"),
+                   help="découper A CET endroit précis, au lieu de balayer les positions "
+                        "pleines. ⚠ Utile quand un autre instrument a déjà dit OÙ regarder — "
+                        "un maillage peut être sans trou et pourtant hors du volume scanné, "
+                        "et ce fichier ne connaît que les trous.")
     p.add_argument("--pas", type=int, default=0,
                    help="pas d'énumération, 0 = un quart du côté du morceau")
     p.add_argument("--json", help="où écrire le compte rendu")
@@ -294,10 +299,28 @@ def main() -> int:
               f"{forme[0]}×{forme[1]}", file=sys.stderr)
         return 2
 
-    pas = a.pas or max(1, min(hauteur, largeur) // 4)
-    pos = positions_pleines(plans, hauteur, largeur, pas)
-    print(f"grille {forme[0]} × {forme[1]}  ·  {len(pos)} position(s) sans trou "
-          f"pour un morceau {hauteur} × {largeur} (pas {pas})")
+    if a.origine:
+        r0, c0 = a.origine
+        if r0 < 0 or c0 < 0 or r0 + hauteur > forme[0] or c0 + largeur > forme[1]:
+            print(f"refus : le morceau ({r0}, {c0}) + {hauteur}×{largeur} sort de la grille "
+                  f"{forme[0]}×{forme[1]}", file=sys.stderr)
+            return 4
+        import numpy as np
+        bon = masque_valide(plans)[r0:r0 + hauteur, c0:c0 + largeur]
+        trous = int(bon.size - bon.sum())
+        # ⚠ On DIT les trous plutôt que de refuser : l'appelant a choisi cet endroit pour une
+        # raison que ce fichier ne connaît pas, et lui refuser sans chiffre l'enverrait
+        # deviner. Le balayage automatique, lui, reste strict.
+        print(f"grille {forme[0]} × {forme[1]}  ·  découpe imposée en ({r0}, {c0})"
+              + (f"  ⚠ {trous} trou(s) sur {bon.size}" if trous else "  (sans trou)"))
+        pos = [(r0, c0)]
+        pas = 0
+    else:
+        pas = a.pas or max(1, min(hauteur, largeur) // 4)
+        pos = positions_pleines(plans, hauteur, largeur, pas)
+    if not a.origine:
+        print(f"grille {forme[0]} × {forme[1]}  ·  {len(pos)} position(s) sans trou "
+              f"pour un morceau {hauteur} × {largeur} (pas {pas})")
     if not pos:
         print("refus : aucun morceau de cette taille n'est plein", file=sys.stderr)
         return 3

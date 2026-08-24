@@ -114,6 +114,11 @@ def balayer(maillage: Path, zarr_url: str, niveau: int, combien: int = 25,
     comptes = {"matiere": 0, "bloc_vide": 0, "bloc_absent": 0, "hors_volume": 0,
                "illisible": 0}
     exemples = []
+    # ⚠⚠ Les points QUI MARCHENT sont enregistrés aussi, et pas seulement les refus. Un
+    # instrument qui ne rapporte que ses échecs dit qu'il y a un problème et pas OÙ regarder
+    # — or sur une nappe qui déborde du scan, savoir quelle partie est dedans est
+    # exactement ce dont on a besoin pour découper un morceau lisible.
+    trouves = []
     for k in range(0, len(rs), pas):
         r, c = int(rs[k]), int(cs[k])
         x, y, z = (int(round(float(plans[n][r, c]))) for n in ("x", "y", "z"))
@@ -128,9 +133,11 @@ def balayer(maillage: Path, zarr_url: str, niveau: int, combien: int = 25,
             comptes["bloc_vide"] += 1
         else:
             comptes["matiere"] += 1
+            trouves.append({"grille": [r, c], "zyx": [z, y, x], "max_bloc": int(bloc.max())})
     total = sum(comptes.values())
     return {"maillage": str(maillage), "niveau": niveau, "sondes": total,
             "blocs_distincts": len(cache), "comptes": comptes, "exemples": exemples,
+            "avec_matiere": trouves,
             "part_matiere": comptes["matiere"] / total if total else None}
 
 
@@ -211,7 +218,10 @@ def main() -> int:
         print(f"  matière {c['matiere']}   bloc vide {c['bloc_vide']}   "
               f"bloc absent {c['bloc_absent']}   hors du volume {c['hors_volume']}")
         for e in r["exemples"]:
-            print(f"    ex. grille {e['grille']} → z,y,x {e['zyx']} : {e['refus']}")
+            print(f"    refus  grille {e['grille']} → z,y,x {e['zyx']} : {e['refus']}")
+        for e in r.get("avec_matiere", [])[:5]:
+            print(f"    ⭐ matière grille {e['grille']} → z,y,x {e['zyx']} "
+                  f"(max du bloc {e['max_bloc']})")
         if a.json:
             a.json.parent.mkdir(parents=True, exist_ok=True)
             a.json.write_text(json.dumps(r, indent=2), encoding="utf-8")

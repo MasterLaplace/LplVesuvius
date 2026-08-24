@@ -178,6 +178,35 @@ du 2×2. ⚠ Et l'observation la plus robuste de ce 2×2 — « l'indécidabilit
 chacune des huit répétitions » — était **exacte** ; c'est son mécanisme qui était faux. « Cet
 endroit n'a pas de feuille » n'a jamais été mesuré : **on n'a jamais regardé cet endroit**.
 
+## 3 ter. ⚠⚠ Et la vraie panne du maillage `m7` : il déborde du volume scanné
+
+Remis dans son repère, le maillage `m7` n'est toujours pas lisible partout. Le sondage
+(`analysis/src/matiere_au_point.py`, un bloc zarr par point, sur la **surface** et non au
+centre de sa boîte) :
+
+| maillage | niveau | matière | bloc absent du dépôt |
+|---|---|---:|---:|
+| `ps256_c0` | 0 | **13 / 13** | 0 |
+| `m7_c0` | 2 | **3 / 11** | **8 / 11** |
+
+⭐ Et les deux méthodes s'accordent : le rendu de `m7_c0` au niveau 2 lit **24,4 %** de pixels
+allumés, le sondage **27 %** de points dans la matière. Deux instruments qui n'ont rien en
+commun donnent le même quart.
+
+**Un « bloc absent » dans un volume `-masked` veut dire que le dépôt n'a rien écrit là**,
+c'est-à-dire que le point est hors du masque du scan. Donc les trois quarts du maillage `m7`
+tombent là où il n'y a **pas de données** — pas là où le papyrus est plat.
+
+⚠ Ce que ça ne dit pas : si la trace est sortie du rouleau, ou si le masque exclut une région
+que la prédiction couvre quand même. Les deux se mesurent, et ce n'est pas la même panne. Ce
+qui est acquis, c'est que « profil plat » était le troisième nom d'un fait qui n'en est pas
+un.
+
+⚠ Corollaire méthodologique : découper un morceau d'un maillage sans vérifier qu'il y a de la
+matière dessous refait la même erreur d'un cran plus bas. Le premier morceau `m7` découpé au
+hasard des trous a rendu, lui aussi, une pile entièrement noire — et pour la troisième raison
+différente de la journée.
+
 ## 4. Ce que ça change
 
 - ⚠⚠ **La ligne « `m7` : relief 0,0000, rang 0/80 » de [`52`](52_calibrer_sur_son_corpus.md)
