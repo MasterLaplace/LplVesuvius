@@ -794,6 +794,12 @@ run "projection tangentielle"  uv run --project "$ROOT" python "$ROOT/analysis/s
 # gagne « mediane » pendant que l extraction rendait `bloc_absent`, et un grep du mot restait
 # vert. ⚠ Et dans un `chk` qui est une FONCTION, $1 est l argument de la fonction, pas la
 # colonne -- le symptome « $3: unbound variable » ne ressemble pas a la cause.
+# ⚠⚠ La figure de la portee. Son controle central : elle ANNONCE une degradation monotone,
+# donc elle doit refuser de le dire si les points ne le sont pas -- `monotone()` est sonde
+# dans les deux sens. ⚠ Et le debordement des libelles est verifie dans LES DEUX LANGUES :
+# « peak at the stack edge » est plus long que son equivalent francais, donc une legende qui
+# tient en francais peut sortir du canevas une fois traduite.
+run "figure de la portée"      uv run --project "$ROOT" python "$ROOT/analysis/src/figure_portee.py" --verifier
 run "portée tangentielle"      "$ROOT/tools/portee_tangentielle.sh" --verifier
 run "graine admissible"        uv run --project "$ROOT" python "$ROOT/analysis/src/graine_admissible.py" --verifier
 run "matiere au point"         uv run --project "$ROOT" python "$ROOT/analysis/src/matiere_au_point.py" --verifier

@@ -1,8 +1,4 @@
 [
-{"pas": 0, "pas_voxels": 0.0, "matiere": "9/10", "valeur_mediane": 1, "valeurs_nulles": 0.9, "part": 0},
-{"pas": 1, "pas_voxels": 19.8, "matiere": "9/10", "valeur_mediane": 1, "valeurs_nulles": 0.9, "part": 0},
-{"pas": 2, "pas_voxels": 39.7, "matiere": "9/10", "valeur_mediane": 1, "valeurs_nulles": 0.9, "part": 0},
-{"pas": 5, "pas_voxels": 99.2, "matiere": "9/10", "valeur_mediane": 1, "valeurs_nulles": 0.9, "part": 0},
-{"pas": 10, "pas_voxels": 198.4, "matiere": "9/10", "valeur_mediane": 1, "valeurs_nulles": 0.9, "part": 0},
-{"pas": 20, "pas_voxels": 396.8, "matiere": "9/10", "valeur_mediane": 1, "valeurs_nulles": 0.9, "part": 0},
-{"pas": 50, "pas_voxels": 992.0, "matiere": "9/10", "valeur_mediane": 1, "valeurs_nulles": 0.9, "part": 0}]
+{"pas": 0, "pas_voxels": 0.0, "matiere": "5/6", "valeur_mediane": 42, "valeurs_nulles": 0, "part": 0.833},
+{"pas": 10, "pas_voxels": 198.4, "matiere": "5/6", "valeur_mediane": 42, "valeurs_nulles": 0, "part": 0.833},
+{"pas": 50, "pas_voxels": 992.0, "matiere": "5/6", "valeur_mediane": 45, "valeurs_nulles": 0, "part": 0.833}]

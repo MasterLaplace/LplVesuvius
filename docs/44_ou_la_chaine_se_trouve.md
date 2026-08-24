@@ -253,6 +253,39 @@ réponse au rabais. Ce qui la tranche est le **profil de profondeur** — air �
 c'est-à-dire l'instrument que ce dépôt a déjà, et qui coûte **un rendu par pas**. La campagne
 suivante est donc chiffrée : quelques rendus, pas quelques requêtes.
 
+#### ⭐⭐⭐ La campagne chiffrée, faite : la tangente se dégrade PROGRESSIVEMENT
+
+Trois rendus de 41 couches sur le maillage publié, le pas 0 en contrôle.
+
+![jusqu'où la tangente reste sur la feuille](images/44_portee_tangentielle.png)
+
+| pas | déplacement | amplitude | pic au bord | tiers central | fenêtres avec relief |
+|---:|---:|---:|---:|---:|---:|
+| **0** (contrôle) | 0 µm | **0,1929** | **6,1 %** | 47 % | 49/49 |
+| 10 | 476 µm | 0,1140 | 18,4 % | 20 % | 49/49 |
+| **50** | **2,4 mm** | **0,0390** | **61,2 %** | 16 % | **45/49** |
+
+> ⭐⭐ **Monotone sur les quatre colonnes.** L'amplitude est divisée par **5**, le pic au bord
+> multiplié par **10**, le tiers central par 3, et quatre fenêtres perdent tout relief. Le
+> profil de profondeur **discrimine**, là où les deux sondes bon marché rendaient le même
+> chiffre de 0 µm à 2,4 mm.
+
+⭐ Et c'est une **pente**, pas un décrochement — ce n'est pas la même nouvelle. Un décrochement
+dirait « au-delà de X, rien » et donnerait un pas de chaîne franc ; une pente dit qu'il faut le
+**choisir** contre un budget de rendus. À 476 µm la surface a encore du relief partout (49/49)
+mais a déjà perdu 41 % d'amplitude et triplé son pic au bord ; à 2,4 mm elle est essentiellement
+sortie de sa feuille — 61 % au bord est la signature que ce dépôt appelle « la surface est hors
+de la fenêtre ».
+
+⚠⚠ **Ce que ça ne dit PAS, et c'est ce qui empêche d'en conclure que la chaîne est morte** :
+ces trois points mesurent une projection **pure**, sans réoptimisation. Une vraie chaîne
+recollerait la nappe projetée sur la matière — c'est le rôle de `--correct`, que ce document
+nommait déjà. Ces chiffres sont donc le **plancher** de ce qu'une chaîne tangentielle peut
+faire, pas son plafond.
+
+⚠ Et l'échantillonnage est grossier : la plage intéressante — celle où la nappe tient encore —
+est **sous 476 µm**, et elle n'a aucun point. C'est là que la campagne suivante doit aller.
+
 ⚠ Deux défauts de l'outillage trouvés en chemin, tous deux de la famille « vérification
 incapable d'échouer ». La campagne a d'abord gagné une colonne « médiane » dans son **en-tête**
 pendant que son extraction rendait toujours `bloc_absent` — et la sonde restait verte parce

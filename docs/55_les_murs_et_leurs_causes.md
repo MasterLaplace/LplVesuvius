@@ -65,7 +65,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | augmenter le budget d'un seul coup | ❌ | budget 200 : 28,6 cm² mais 25 036 auto-intersections et α = +1,313, la surface se replie sur elle-même | [`44`](44_ou_la_chaine_se_trouve.md) |
 | enchaîner rogner puis étendre | ❌ | le cycle converge vers un point fixe autour de 6 cm² : chaque tour regagne ce qu'il vient de perdre | [`44`](44_ou_la_chaine_se_trouve.md) |
 | juger la projection par un sondage de points | ❌ | bloc avec matière et valeur au point rendent le MÊME chiffre de 0 µm à 2,4 mm : un bloc fait 307 µm quand les feuilles sont à 10-20 µm | [`44`](44_ou_la_chaine_se_trouve.md) |
-| la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour | ⏳ | la projection tangentielle est écrite et marche ; ce qui manque est de juger si elle reste sur la feuille, et deux sondes bon marché en sont incapables | [`44`](44_ou_la_chaine_se_trouve.md) |
+| la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour | ⏳ | la projection existe et se dégrade PROGRESSIVEMENT : amplitude ÷5 et pic au bord ×10 sur 2,4 mm, mais sans réoptimisation — c'est le plancher, pas le plafond | [`44`](44_ou_la_chaine_se_trouve.md) |
 
 ## 4. La chaîne casse au sixième tour
 
@@ -87,7 +87,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 |---|---|---|
 | le tracé ne suit pas de feuille | **la graine, c'est-à-dire l'endroit** | le 2×2 tenait un NOMBRE constant, pas un endroit ; la première trace m7 à une graine VALIDE donne α = +0,487 sans appui qui porte, et 96 % de pics au bord — soit l'échec commun |
 | le tracé ne suit pas de feuille | **comparer le relief d'une trace L2 à une trace L0** | à aire égale un maillage L2 rend quatre fois moins de pixels de côté, donc les deux ne tiennent jamais dans la même fenêtre d'analyse — le relief ne peut pas les départager |
-| l'extension tangentielle est un point fixe | **la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour** | la projection tangentielle est écrite et marche ; ce qui manque est de juger si elle reste sur la feuille, et deux sondes bon marché en sont incapables |
+| l'extension tangentielle est un point fixe | **la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour** | la projection existe et se dégrade PROGRESSIVEMENT : amplitude ÷5 et pic au bord ×10 sur 2,4 mm, mais sans réoptimisation — c'est le plancher, pas le plafond |
 
 ⚠ **Une cause éliminée ne se rouvre pas sans une mesure neuve.** Les treize
 éliminations de ce document ont chacune coûté une campagne ; les refaire par doute
