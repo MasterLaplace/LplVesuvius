@@ -720,6 +720,12 @@ run "commandes du README"      "$ROOT/tools/readme_apparie.sh" --verifier
 # beta = 0, donc « propriete de la surface », alors qu elle dit seulement qu elle ne peut pas
 # monter plus haut. Mesure : 104 series sur pic_intensite_median.
 run "critere relatif"          uv run --project "$ROOT" python "$ROOT/analysis/src/critere_relatif.py" --verifier
+# ⚠ La figure de calibration. Sa sonde centrale est le seuil venu d AILLEURS : il doit etre
+# dessine, et la figure doit DIRE qu aucun point ne l atteint plutot que de laisser un vide
+# muet. Sa seconde sonde est la bande brute, verifiee pixel pour pixel entre les deux
+# langues : les libelles intraduisibles n entrent pas dans le garde de langue, ils sont
+# dessines a cote.
+run "figure de calibration"    uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_calibration.py" --verifier
 # ⚠⚠ La calibration d un corpus. Ses sondes centrales sont des REFUS : deux geometries dans
 # un meme fichier (deux balayages concatenes ne calibrent rien), une geometrie ni lue ni
 # declaree, et une geometrie declaree a la main qui doit se signaler comme telle. Ecrit
