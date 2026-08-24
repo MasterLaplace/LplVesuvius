@@ -925,6 +925,18 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 out.append((f"segments a edge_pinned 90 a {n} couches",
                             [str(g["au_bord_90"])], p.name))
 
+    p = racine / "docs" / "situer_notre_trace.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        ajoute("relief de notre trace a la geometrie du corpus", d["relief"], 4, p.name)
+        out.append(("rang de notre trace dans le corpus",
+                    [f"{d['rang']}ᵉʳ sur {d['corpus_n']}",
+                     f"{d['rang']} sur {d['corpus_n']}"], p.name))
+        if d.get("rapport_a_la_mediane") is not None:
+            out.append(("rapport de notre trace a la mediane publiee",
+                        [f"×{fr(d['rapport_a_la_mediane'], 2)}",
+                         f"x{fr(d['rapport_a_la_mediane'], 2)}"], p.name))
+
     p = racine / "docs" / "effet_taille_fenetre.json"
     if p.exists():
         d = json.loads(p.read_text())

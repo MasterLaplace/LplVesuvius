@@ -1,0 +1,14 @@
+{
+  "relief": 0.19779944099779057,
+  "corpus_n": 80,
+  "rang": 1,
+  "percentile": 1.25,
+  "mediane_corpus": 0.7441,
+  "rapport_a_la_mediane": 0.26582373471010695,
+  "sous_le_minimum": false,
+  "geometrie": {
+    "declaree": false,
+    "layers": 109,
+    "window_px": 128
+  }
+}

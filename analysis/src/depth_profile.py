@@ -216,6 +216,12 @@ def grid_profiles(folder: Path, size: int, step: int, floor: float,
             "peak_median": float(np.median(peaks)),
             "peak_iqr": spread,
             "layer_step": int(layer_step),
+            # ⚠⚠ LA GEOMETRIE DE LECTURE DANS LE PROFIL LUI-MEME. L amplitude depend de
+            # l etendue de la fenetre d analyse (exposant mesure -0,83) autant que de la
+            # profondeur, donc un profil qui ne dit pas dans quelle fenetre il a ete lu ne
+            # se compare a rien. Paye le 2026-08-24 : un seuil, deux taux d erreur et une
+            # profondeur transportes hors de leur geometrie, aucun trouve en relisant.
+            "size": int(size),
             "au_bord": float(at_edge.mean())}
 
 

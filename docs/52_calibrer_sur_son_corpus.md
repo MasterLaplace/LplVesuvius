@@ -91,7 +91,40 @@ il peut être mince, mal exposé, ou tomber sur une région pauvre. Le critère 
 **nécessaire, jamais suffisant** — la même prudence que [`45`](45_consistent_with_quantifie.md)
 impose à la statistique typographique.
 
-## 6. Ce que ce document n'établit pas
+## 6. ⭐⭐ Situer NOTRE trace dans le corpus de son propre rouleau
+
+`Scroll 1` **est** `PHercParis4` — l'alias de l'outil le dit, et c'est le rouleau sur lequel
+toutes nos traces ont échoué. Le corpus qu'on vient de calibrer est donc celui du rouleau
+qui nous résiste, et la comparaison qui manquait depuis le début devient possible : **à
+condition de lire les deux dans la même géométrie.**
+
+Notre trace `ps256_c0` a donc été reprofilée à **128 px × 109 couches** — exactement la
+fenêtre du corpus — au lieu des 1024 px × 41 ou 161 couches de nos campagnes :
+
+| | relief | ×plancher | rang |
+|---|---:|---:|---|
+| **notre trace** | **0,1978** | **×9,9** | **1ᵉʳ sur 80** |
+| corpus publié, médiane | 0,7441 | ×37,2 | — |
+| corpus publié, minimum | 0,0400 | ×2,0 | — |
+
+> ⭐⭐ **Notre trace n'est PAS plate**, et c'est une correction. Lue à 1024 px elle donnait
+> 0,046 — « au plancher ». Lue là où le corpus est lu, elle donne **0,1978**, soit dix fois
+> le plancher. La platitude était en partie un artefact de la fenêtre de lecture.
+>
+> ⚠ Ce qu'elle est, en revanche : **au premier percentile de son propre rouleau**, à
+> **×0,27** de la médiane publiée. Un seul segment publié fait moins bien.
+
+⚠ **Ce que ça ne renverse pas** : le contraste de [`51`](51_une_pente_a_deux_appuis.md) §6
+(0/75 contre 34/63) reste valide — il était interne à une seule géométrie, tous les profils
+lus à 1024 px. Ce qui doit être qualifié, c'est la **formulation** « nos traces ne montrent
+aucun relief » : à la géométrie du corpus publié, elles en montrent, tout en bas.
+
+⭐ L'outil qui le dit est `--situer`, et il **refuse** quand les deux géométries diffèrent —
+y compris quand seule la profondeur change. Situer une lecture à 1024 px dans une
+distribution mesurée à 128 px placerait le candidat quatre fois trop bas, et le classement
+paraîtrait parfaitement sensé.
+
+## 7. Ce que ce document n'établit pas
 
 - ⚠ **Que le relief mesure la qualité d'une surface.** Il mesure si la colonne lue porte de
   la structure. [`51`](51_une_pente_a_deux_appuis.md) §6 montre qu'une fenêtre étroite plate
@@ -109,6 +142,13 @@ cd inference && uv run python ../tracecheck/tracecheck.py Scroll1 --all --csv \
 
 python3 analysis/src/calibration_corpus.py docs/balayage_scroll1.csv \
     --par-geometrie --json docs/calibration_scroll1.json
+
+# notre trace, relue A LA GEOMETRIE DU CORPUS, puis situee dedans
+cd inference_xpu && uv run python ../analysis/src/depth_profile.py \
+    ../data/paris4_candidats/ps256_c0/rendu_161 --grid --size 128 --step 200 \
+    --from-layer 26 --to-layer 134 --traced-layer 54 --voxel-um 2.4 --out /tmp/nous_128.json
+python3 analysis/src/calibration_corpus.py docs/balayage_scroll1.csv --layers 109 \
+    --situer /tmp/nous_128.json --json docs/situer_notre_trace.json
 
 cd inference && uv run python ../analysis/src/figure_calibration.py \
     --csv ../docs/balayage_scroll1.csv --layers 109 \

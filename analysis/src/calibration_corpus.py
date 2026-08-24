@@ -117,6 +117,35 @@ def resumer(lignes: list[dict], geo: dict, plancher: float = 0.02) -> dict:
     return out
 
 
+def situer(candidat: dict, corpus: list[float], geo_candidat: dict,
+           geo_corpus: dict) -> dict:
+    """Où tombe un candidat dans la distribution d'un corpus.
+
+    ⚠⚠ **REFUS si les deux géométries diffèrent**, et c'est tout l'intérêt. Le relief dépend
+    de la profondeur lue (exposant +1,01) et de l'étendue dans le plan (exposant −0,83) :
+    situer une lecture à 1024 px dans une distribution mesurée à 128 px placerait le
+    candidat quatre fois trop bas, et le classement paraîtrait parfaitement sensé.
+
+    ⭐ C'est exactement ce que le README public conseille à ses lecteurs — comparer un
+    candidat à la distribution mesurée LÀ OÙ ON LE LIT — rendu exécutable plutôt que
+    recommandé.
+    """
+    for cle in ("layers", "window_px"):
+        if geo_candidat.get(cle) != geo_corpus.get(cle):
+            raise ValueError(
+                f"{cle} diffère : candidat {geo_candidat.get(cle)}, corpus "
+                f"{geo_corpus.get(cle)} — situer l'un dans l'autre ne veut rien dire")
+    v = float(candidat["relief"])
+    tri = sorted(corpus)
+    dessous = sum(1 for x in tri if x < v)
+    return {"relief": v, "corpus_n": len(tri),
+            "rang": dessous, "percentile": (100.0 * dessous / len(tri)) if tri else None,
+            "mediane_corpus": st.median(tri) if tri else None,
+            "rapport_a_la_mediane": (v / st.median(tri)) if tri and st.median(tri) else None,
+            "sous_le_minimum": bool(tri and v < tri[0]),
+            "geometrie": dict(geo_corpus)}
+
+
 def verifier() -> int:
     echecs = controles = 0
 
@@ -165,6 +194,32 @@ def verifier() -> int:
     v("... et le groupe d un seul segment se voit",
       sorted(len(v) for v in g.values()) == [1, 3], str([len(v) for v in g.values()]))
 
+    # --- situer un candidat --------------------------------------------------------------
+    # ⚠ Les valeurs REELLES : notre trace lue a 128 px sur 109 couches contre le corpus
+    # publie du meme rouleau, meme geometrie.
+    g128 = {"layers": 109, "window_px": 128}
+    sit = situer({"relief": 0.1978}, [0.04, 0.744, 0.975], g128, g128)
+    v("le candidat est situe dans le corpus", sit["rang"] == 1, str(sit["rang"]))
+    v("... et son rapport a la mediane est chiffre",
+      abs(sit["rapport_a_la_mediane"] - 0.2659) < 0.001,
+      f"{sit['rapport_a_la_mediane']:.4f}")
+    v("... et il n est pas sous le minimum du corpus", not sit["sous_le_minimum"])
+    v("un candidat sous le minimum est signale",
+      situer({"relief": 0.01}, [0.04, 0.744], g128, g128)["sous_le_minimum"])
+    # ⚠⚠ LE REFUS : situer une lecture a 1024 px dans une distribution a 128 px la placerait
+    # quatre fois trop bas, et le classement paraitrait sense.
+    try:
+        situer({"relief": 0.0462}, [0.04, 0.744],
+               {"layers": 109, "window_px": 1024}, g128)
+        v("deux geometries differentes sont refusees", False)
+    except ValueError as e:
+        v("deux geometries differentes sont refusees", "ne veut rien dire" in str(e))
+    try:
+        situer({"relief": 0.2}, [0.04], {"layers": 41, "window_px": 128}, g128)
+        v("... y compris quand seule la profondeur differe", False)
+    except ValueError:
+        v("... y compris quand seule la profondeur differe", True)
+
     r = resumer(lignes, geo)
     v("la distribution du relief est resumee",
       r["relief"]["n"] == 3 and abs(r["relief"]["mediane"] - 0.80) < 1e-9, str(r["relief"]))
@@ -176,6 +231,16 @@ def verifier() -> int:
     # que les deux signaux ne se departagent pas sur ce corpus.
     v("le compte a 90 % est rapporte meme nul", r["au_bord_90"] == 0)
     v("un corpus vide ne rend pas de distribution", distribution([]) is None)
+    # ⚠ Le filtre : sur un fichier qui PORTE la colonne, `--layers` doit retenir le groupe
+    # et non declarer une valeur qui contredirait les lignes.
+    # ⚠ Le filtre : sur un fichier qui PORTE la colonne, retenir un groupe doit en ecarter
+    # les autres, et le groupe retenu doit etre d une seule geometrie -- sinon `geometrie`
+    # refuserait juste apres, ce qui est le comportement voulu mais pas le filtre teste.
+    retenu = [r for r in melange if r.get("window_px") == "128"]
+    v("le filtre retient le bon groupe", len(retenu) == 3 and len(melange) == 4,
+      f"{len(retenu)} sur {len(melange)}")
+    v("... et le groupe retenu est d une seule geometrie",
+      geometrie(retenu, None, None)["window_px"] == 128)
 
     if echecs:
         print(f"\nECHEC ({echecs} failures, {controles} checks)")
@@ -191,6 +256,8 @@ def main() -> int:
     ap.add_argument("--layers", type=int, help="profondeur lue, si le fichier ne la porte pas")
     ap.add_argument("--window-px", type=int, help="étendue dans le plan, idem")
     ap.add_argument("--plancher", type=float, default=0.02)
+    ap.add_argument("--situer", type=Path,
+                    help="un profil de candidat à placer dans la distribution du corpus")
     ap.add_argument("--par-geometrie", action="store_true",
                     help="une calibration par géométrie plutôt qu'un refus")
     ap.add_argument("--json", type=Path)
@@ -202,9 +269,56 @@ def main() -> int:
         ap.error("donner un CSV de balayage, ou --verifier")
 
     lignes = lire(a.csv)
+    # ⚠⚠ `--layers` FILTRE quand le fichier porte la colonne, et DECLARE quand il ne la
+    # porte pas. Les deux sens sont utiles et ils ne se confondent pas : filtrer un fichier
+    # qui ne dit rien est impossible, declarer sur un fichier qui dit deux choses serait un
+    # mensonge. Le compte ecarte est annonce, jamais silencieux.
+    if a.layers is not None and any(r.get("layers") for r in lignes):
+        avant = len(lignes)
+        lignes = [r for r in lignes if r.get("layers") == str(a.layers)]
+        if len(lignes) != avant:
+            print(f"  ⚠ {avant - len(lignes)} segment(s) écarté(s) : lus à une autre "
+                  f"profondeur", file=sys.stderr)
     if not lignes:
         print(f"aucune ligne dans {a.csv}", file=sys.stderr)
         return 2
+    if a.situer:
+        # ⚠ Le corpus doit etre d une seule geometrie pour qu on y situe quoi que ce soit :
+        # `geometrie` refuse s il en porte deux, et c est le bon moment pour le decouvrir.
+        try:
+            geo_corpus = geometrie(lignes, a.layers, a.window_px)
+        except ValueError as e:
+            print(f"refus : {e}", file=sys.stderr)
+            return 3
+        d = json.loads(a.situer.read_text(encoding="utf-8"))
+        d = d[0] if isinstance(d, list) and d else d
+        # ⚠⚠ La geometrie du CANDIDAT est lue dans son propre profil, jamais supposee egale
+        # a celle du corpus -- c est precisement ce qu on verifie.
+        geo_cand = {"layers": len(d.get("layers") or []),
+                    "window_px": int(d.get("size") or d.get("window_px") or 0)}
+        if not geo_cand["window_px"] and a.window_px:
+            geo_cand["window_px"] = int(a.window_px)
+        cand = {"relief": float(d["amplitude_mediane"])}
+        try:
+            r = situer(cand, nombres(lignes, "relief"), geo_cand, geo_corpus)
+        except ValueError as e:
+            print(f"refus : {e}", file=sys.stderr)
+            return 3
+        print(f"\n  candidat lu à {geo_cand['window_px']} px × {geo_cand['layers']} "
+              f"couches, comme le corpus")
+        print(f"    relief {r['relief']:.4f}  ×{r['relief'] / a.plancher:.1f} le plancher")
+        print(f"    rang {r['rang']} sur {r['corpus_n']} "
+              f"({r['percentile']:.0f}ᵉ percentile)")
+        print(f"    médiane du corpus {r['mediane_corpus']:.4f} — le candidat vaut "
+              f"×{r['rapport_a_la_mediane']:.2f} de cette médiane")
+        if r["sous_le_minimum"]:
+            print("    ⚠⚠ SOUS le minimum du corpus")
+        if a.json:
+            a.json.write_text(json.dumps(r, indent=2, ensure_ascii=False) + "\n",
+                              encoding="utf-8")
+            print(f"\n  écrit : {a.json}")
+        return 0
+
     if a.par_geometrie:
         groupes = par_geometrie(lignes)
         tout = {"corpus": len(lignes), "geometries": len(groupes), "groupes": []}
