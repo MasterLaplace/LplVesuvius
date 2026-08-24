@@ -274,7 +274,10 @@ def main() -> int:
                         "et ce fichier ne connaît que les trous.")
     p.add_argument("--pas", type=int, default=0,
                    help="pas d'énumération, 0 = un quart du côté du morceau")
-    p.add_argument("--json", help="où écrire le compte rendu")
+    p.add_argument("--json", help="où écrire le compte rendu — par convention "
+                                  "`docs/decoupe_<sujet>.json`, pour que le garde des "
+                                  "artefacts sache d'où il vient (`artefacts_orphelins.py` "
+                                  "cherche le nom, ou sa racine, dans un script)")
     p.add_argument("--verifier", action="store_true")
     a = p.parse_args()
     if a.verifier:

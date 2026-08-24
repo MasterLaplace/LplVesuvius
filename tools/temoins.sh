@@ -755,6 +755,11 @@ run "situer nos traces"        "$ROOT/tools/situer_nos_traces.sh" --verifier
 # temoins sont ARITHMETIQUES et ne touchent pas le reseau : une batterie qui dependrait du
 # depot serait rouge des que la connexion tombe, donc elle finirait ignoree -- et c est la
 # qu elle cesse d etre une batterie.
+# ⚠ La figure des piles vides. Sa sonde centrale est le REPLI des titres : le premier tirage
+# laissait une legende passer par-dessus la suivante, donc deux panneaux cessaient de dire ce
+# qu ils montraient. Et le cadre rouge n apparait QUE s il y a une pile vide -- cas negatif
+# sonde, sinon la figure serait trois vignettes sans verdict.
+run "figure des piles vides"   uv run --project "$ROOT" python "$ROOT/analysis/src/figure_piles_vides.py" --verifier
 run "matiere au point"         uv run --project "$ROOT" python "$ROOT/analysis/src/matiere_au_point.py" --verifier
 run "matiere des piles"        uv run --project "$ROOT" python "$ROOT/analysis/src/matiere_des_piles.py" --verifier
 run "niveau du maillage"       uv run --project "$ROOT" python "$ROOT/analysis/src/niveau_du_maillage.py" --verifier

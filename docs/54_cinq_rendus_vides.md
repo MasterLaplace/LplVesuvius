@@ -6,6 +6,17 @@
 > de la surface tracée : les cinq piles rendues sont **entièrement noires**, et un défaut de
 > l'instrument les a comptées comme « 49 fenêtres avec matière ».
 
+![le même maillage, deux repères](images/54_piles_vides.png)
+
+*Les trois vignettes sont des couches **réelles** des piles rendues, et les chiffres sous
+chacune sont recalculés depuis la couche affichée. Les deux premières viennent du **même
+maillage** — seul le repère dans lequel on l'a lu diffère. La zone noire de la seconde est
+la part du maillage qui tombe hors du volume scanné (§3 ter).*
+
+⚠ *Le 24,5 % de la vignette porte sur **une** couche, celle qui est dessinée ; le 24,4 % du
+texte porte sur un échantillon de la pile entière. Deux chiffres proches et deux mesures
+différentes — les confondre serait le transport que ce document existe pour éviter.*
+
 ## 1. Ce qui a été mesuré
 
 Le déclencheur n'est pas une relecture. C'est une **taille de fichier** :

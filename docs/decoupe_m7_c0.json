@@ -1,0 +1,34 @@
+{
+  "source": "data/paris4_candidats/m7_c0/plat_niveau0",
+  "grille": [
+    119,
+    120
+  ],
+  "taille": [
+    30,
+    30
+  ],
+  "pas": 0,
+  "positions_pleines": 1,
+  "morceaux": [
+    {
+      "dossier": "data/temoin_rendu/m7_c0_matiere/morceau_00",
+      "origine": [
+        72,
+        66
+      ],
+      "bbox": [
+        [
+          12734.7021484375,
+          18483.82421875,
+          35853.9921875
+        ],
+        [
+          15054.578125,
+          20763.876953125,
+          37103.96875
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "maillage": "data/temoin_rendu/m7_c0_matiere/morceau_00",
+  "niveau": 0,
+  "sondes": 9,
+  "blocs_distincts": 9,
+  "comptes": {
+    "matiere": 9,
+    "bloc_vide": 0,
+    "bloc_absent": 0,
+    "hors_volume": 0,
+    "illisible": 0
+  },
+  "exemples": [],
+  "avec_matiere": [
+    {
+      "grille": [
+        0,
+        0
+      ],
+      "zyx": [
+        37023,
+        20764,
+        12735
+      ],
+      "max_bloc": 172
+    },
+    {
+      "grille": [
+        3,
+        10
+      ],
+      "zyx": [
+        36869,
+        19986,
+        12980
+      ],
+      "max_bloc": 255
+    },
+    {
+      "grille": [
+        6,
+        20
+      ],
+      "zyx": [
+        36652,
+        19235,
+        13246
+      ],
+      "max_bloc": 255
+    },
+    {
+      "grille": [
+        10,
+        0
+      ],
+      "zyx": [
+        37104,
+        20747,
+        13526
+      ],
+      "max_bloc": 221
+    },
+    {
+      "grille": [
+        13,
+        10
+      ],
+      "zyx": [
+        36929,
+        19977,
+        13773
+      ],
+      "max_bloc": 255
+    },
+    {
+      "grille": [
+        16,
+        20
+      ],
+      "zyx": [
+        36799,
+        19197,
+        14018
+      ],
+      "max_bloc": 255
+    },
+    {
+      "grille": [
+        20,
+        0
+      ],
+      "zyx": [
+        37063,
+        20746,
+        14320
+      ],
+      "max_bloc": 245
+    },
+    {
+      "grille": [
+        23,
+        10
+      ],
+      "zyx": [
+        37002,
+        19964,
+        14566
+      ],
+      "max_bloc": 255
+    },
+    {
+      "grille": [
+        26,
+        20
+      ],
+      "zyx": [
+        36862,
+        19188,
+        14810
+      ],
+      "max_bloc": 255
+    }
+  ],
+  "part_matiere": 1.0
+}

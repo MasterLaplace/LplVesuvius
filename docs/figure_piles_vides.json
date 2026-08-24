@@ -1,0 +1,18 @@
+{
+  "sortie": "docs/images/54_piles_vides.png",
+  "vides": 1,
+  "mesures": [
+    {
+      "max": 0,
+      "part": 0.0
+    },
+    {
+      "max": 255,
+      "part": 0.24450950838227567
+    },
+    {
+      "max": 255,
+      "part": 0.9633446177299818
+    }
+  ]
+}
