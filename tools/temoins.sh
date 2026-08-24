@@ -720,6 +720,10 @@ run "commandes du README"      "$ROOT/tools/readme_apparie.sh" --verifier
 # beta = 0, donc « propriete de la surface », alors qu elle dit seulement qu elle ne peut pas
 # monter plus haut. Mesure : 104 series sur pic_intensite_median.
 run "critere relatif"          uv run --project "$ROOT" python "$ROOT/analysis/src/critere_relatif.py" --verifier
+# ⚠⚠ Les scenes pedagogiques. Cette batterie n etait PAS lancee, et elle avait quelque chose
+# a dire : une legende posee a la main dans la video 2. Une sonde qu on n execute jamais est
+# une sonde qui n existe pas.
+run "scenes pedagogiques"      "$ROOT/apprendre/rendre.sh" --verifier
 # ⚠⚠ Situer nos traces a la geometrie d un corpus. Ses sondes centrales portent sur la
 # SOUS-FENETRE : elle doit etre centree (161 couches lues sur 109 laissent 26 de chaque
 # cote) et la couche tracee doit etre le milieu de la SOUS-fenetre, pas de la pile -- la

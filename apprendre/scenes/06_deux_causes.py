@@ -22,8 +22,18 @@ def phrase(txt, taille=23, couleur=CRAIE):
     return Text(txt, font_size=taille, color=couleur)
 
 
-def legende(txt, taille=21, couleur=CRAIE):
-    return phrase(txt, taille, couleur).to_edge(DOWN, buff=0.6)
+def legende(txt, taille=21, couleur=CRAIE, rang=0):
+    """La légende, ancrée en bas — `rang` 1 la pose au-dessus de la ligne principale.
+
+    ⚠⚠ Le `rang` existe parce que deux scènes posaient une seconde ligne À LA MAIN, avec un
+    `buff` choisi au jugé. La sonde n'en voyait qu'une des deux : elle vise l'appel en UNE
+    ligne, et la seconde était écrite sur deux. Une sonde qui attrape une ORTHOGRAPHE et pas
+    la règle laisse passer exactement ce qu'elle surveille.
+
+    ⚠ Et le motif n'est PAS cité en clair ici : l'écrire faisait matcher la sonde sur cette
+    docstring même — neuvième fois que ce dépôt paie l'auto-match.
+    """
+    return phrase(txt, taille, couleur).to_edge(DOWN, buff=0.6 + rang * 0.9)
 
 
 def profil(centre, plat, hauteur=2.2, largeur=2.4, couleur=AMBRE):

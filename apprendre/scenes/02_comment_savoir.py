@@ -214,7 +214,7 @@ class RegarderDeuxFois(Scene):
         self.play(FadeIn(rg), FadeIn(rd))
         self.wait(2)
 
-        sur_prise = phrase("les deux se ressemblent !", 22, CRAIE).to_edge(DOWN, buff=1.6)
+        sur_prise = legende("les deux se ressemblent !", 22, CRAIE, rang=1)
         self.play(FadeIn(sur_prise))
         self.wait(2)
         self.play(FadeOut(sur_prise))

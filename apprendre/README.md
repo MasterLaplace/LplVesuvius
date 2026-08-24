@@ -27,8 +27,15 @@ d'ailleurs sur ce constat — son α = 0,91 *est* la mesure réelle de `PHercPar
 | **5** | Le témoin négatif | prouver qu'un détecteur **ne prouve rien** | 1 min 25 |
 | **6** | α ≈ 1 a deux causes | le pic qui recule *contre* le profil plat | 1 min 11 |
 | **7** | Ce que mesurer coûte | le mur mémoire, et pourquoi il était invisible | 1 min 52 |
+| **8** | La fenêtre qui mesure | le **relief**, et pourquoi un seuil ne voyage pas | 2 min 12 |
 
-**7 épisodes, 11 min 48 au total.**
+**8 épisodes, 14 min 00 au total.**
+
+⚠⚠ L'épisode 8 raconte le piège le plus cher du dépôt, payé **cinq fois en une nuit** : un
+nombre parfaitement juste, déplacé hors de la géométrie qui l'a produit, devient faux **sans
+cesser d'avoir l'air sensé**. Il construit la grandeur (le relief), montre qu'elle dépend de
+la fenêtre où on la lit, et finit sur le résultat que la règle a débloqué — cinq de nos
+traces à zéro, trois dernières de leur propre rouleau.
 
 
 ## Fabriquer
