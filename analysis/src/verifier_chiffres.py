@@ -937,6 +937,23 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                         [f"×{fr(d['rapport_a_la_mediane'], 2)}",
                          f"x{fr(d['rapport_a_la_mediane'], 2)}"], p.name))
 
+    p = racine / "docs" / "situer_nos_traces.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        for cle, nom in (("n", "candidats situes dans le corpus"),
+                         ("plates_a_la_geometrie_du_corpus",
+                          "candidats plats a la geometrie du corpus"),
+                         ("sous_tout_le_corpus", "candidats sous tout le corpus"),
+                         ("au_premier_rang", "candidats au premier rang")):
+            if d.get(cle) is not None:
+                out.append((nom, [str(d[cle])], p.name))
+        # ⚠ Les bornes du groupe qui MESURE : ce sont elles qui disent que la coupure entre
+        # les deux predictions est nette, et elles doivent vieillir bruyamment.
+        mesurent = [x["relief"] for x in d.get("traces") or [] if x["relief"] > 0]
+        if mesurent:
+            ajoute("relief minimal des candidats qui mesurent", min(mesurent), 3, p.name)
+            ajoute("relief maximal des candidats qui mesurent", max(mesurent), 4, p.name)
+
     p = racine / "docs" / "effet_taille_fenetre.json"
     if p.exists():
         d = json.loads(p.read_text())

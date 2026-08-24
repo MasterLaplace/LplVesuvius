@@ -1,0 +1,76 @@
+{
+  "traces": [
+    {
+      "trace": "m7_c0",
+      "couches_pile": 161,
+      "relief": 0.0,
+      "rapport_plancher": 0.0,
+      "rang": 0,
+      "corpus_n": 80
+    },
+    {
+      "trace": "m7_c1",
+      "couches_pile": 161,
+      "relief": 0.0,
+      "rapport_plancher": 0.0,
+      "rang": 0,
+      "corpus_n": 80
+    },
+    {
+      "trace": "m7_c2",
+      "couches_pile": 161,
+      "relief": 0.0,
+      "rapport_plancher": 0.0,
+      "rang": 0,
+      "corpus_n": 80
+    },
+    {
+      "trace": "m7_c3",
+      "couches_pile": 161,
+      "relief": 0.0,
+      "rapport_plancher": 0.0,
+      "rang": 0,
+      "corpus_n": 80
+    },
+    {
+      "trace": "m7_c4",
+      "couches_pile": 161,
+      "relief": 0.0,
+      "rapport_plancher": 0.0,
+      "rang": 0,
+      "corpus_n": 80
+    },
+    {
+      "trace": "ps256_c0",
+      "couches_pile": 161,
+      "relief": 0.1978,
+      "rapport_plancher": 9.9,
+      "rang": 1,
+      "corpus_n": 80
+    },
+    {
+      "trace": "ps256_c1",
+      "couches_pile": 161,
+      "relief": 0.1686,
+      "rapport_plancher": 8.4,
+      "rang": 1,
+      "corpus_n": 80
+    },
+    {
+      "trace": "ps256_c2",
+      "couches_pile": 161,
+      "relief": 0.1635,
+      "rapport_plancher": 8.2,
+      "rang": 1,
+      "corpus_n": 80
+    }
+  ],
+  "n": 8,
+  "plates_a_la_geometrie_du_corpus": 5,
+  "sous_tout_le_corpus": 5,
+  "au_premier_rang": 3,
+  "geometrie": {
+    "layers": 109,
+    "window_px": 128
+  }
+}

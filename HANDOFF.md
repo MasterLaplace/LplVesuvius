@@ -140,12 +140,24 @@ rien télécharger. Sur `Scroll1`, 80 segments à 128 px × 109 couches : relief
 ⚠⚠ **Le refus a payé au premier usage réel** : un corpus publié n'est PAS homogène — 80
 segments à 109 couches et **un à 6**. Une distribution unique les aurait fondus.
 
-> ⭐⭐ **Ce que ça ouvre, et c'est le prochain pas** : le crible tourne à distance et pour
-> rien. Si les segments **publiés** de `PHercParis4` lisent un relief franc là où **nos
-> traces** sont plates, la panne est localisée dans notre traceur et pas dans le rouleau —
-> ce qui redirige tout. ⚠ À vérifier d'abord : ce rouleau publie-t-il des volumes de surface
-> exploitables par `tracecheck` (il publie `representations/`, ce qui n'est pas la même
-> chose).
+#### ⭐⭐⭐ ET C'EST FAIT : `Scroll 1` EST `PHercParis4`
+
+L'alias de l'outil le dit — le corpus calibré **est** celui du rouleau qui nous résiste. Les
+huit candidats relus **à la géométrie du corpus** (128 px × 109 couches, `tools/situer_nos_traces.sh`) :
+
+| candidats | relief | ×plancher | rang sur 80 |
+|---|---:|---:|---|
+| `m7` c0…c4 | **0,0000** | 0,0 | **0** — sous tout le corpus |
+| `ps256` c0…c2 | 0,164 – 0,198 | ×8,2 – ×9,9 | **1** |
+
+⭐ **Les cinq `m7` lisent zéro à TOUTES les géométries essayées** : leur platitude est réelle,
+pas un artefact de fenêtre. Les trois `ps256` lisent de la structure et restent au bas de
+leur propre rouleau. ⚠ La coupure entre les deux prédictions, que le 2×2 de `48` n'avait pas
+pu établir faute d'appuis, se voit ici **sans pente, sans deux fenêtres et sans seuil**.
+
+⚠⚠ Corollaire à ne pas oublier : « nos traces sont plates » vaut pour `m7`, **pas** pour
+`ps256` — lues à 1024 px elles donnaient 0,046, lues à 128 px elles donnent 0,198. Détail :
+[`52`](docs/52_calibrer_sur_son_corpus.md) §6.
 
 ### ⚠ Les pièges qui se sont repayés, et leur remède définitif
 
@@ -702,7 +714,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./tools/temoins.sh                      # 79 batteries, 2020 contrôles hors ligne, tous verts
+./tools/temoins.sh                      # 80 batteries, 2028 contrôles hors ligne, tous verts
 ./tools/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)

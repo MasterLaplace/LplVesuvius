@@ -124,6 +124,37 @@ y compris quand seule la profondeur change. Situer une lecture à 1024 px dans u
 distribution mesurée à 128 px placerait le candidat quatre fois trop bas, et le classement
 paraîtrait parfaitement sensé.
 
+### ⭐⭐ Les huit candidats, et la coupure est nette
+
+Situer une trace ne prouve rien sur les autres. Les huit candidats de
+[`48`](48_ou_monter_lexperience.md) ont donc été **relus à la géométrie du corpus** —
+`tools/situer_nos_traces.sh`, une pile de 161 couches ramenée à sa sous-fenêtre **centrée**
+de 109 :
+
+| candidats | relief | ×plancher | rang sur 80 |
+|---|---:|---:|---|
+| `m7` c0…c4 (5) | **0,0000** | 0,0 | **0** |
+| `ps256` c0…c2 (3) | 0,164 – 0,198 | ×8,2 – ×9,9 | **1** |
+
+> ⭐⭐ **Les cinq candidats `m7` lisent exactement zéro, même à la géométrie du corpus.**
+> Leur platitude n'est donc **pas** un artefact de fenêtre : elle est réelle, à toutes les
+> géométries essayées, et elle les place **sous la totalité du corpus publié** — sous le
+> minimum de 0,040 lui-même.
+>
+> ⚠ Ce qui corrige une fois de plus la formulation d'il y a deux paragraphes : « notre trace
+> n'est pas plate » vaut pour `ps256`, **pas pour `m7`**.
+
+⭐ Et les trois `ps256` sont **toutes** au rang 1 sur 80 : elles lisent de la structure, huit
+à dix fois le plancher, et restent au bas de leur propre rouleau. La coupure entre les deux
+prédictions, que le 2×2 de `48` n'avait pas pu établir faute d'appuis, se voit ici sans
+ambiguïté — **par une grandeur qui n'a besoin ni de pente, ni de deux fenêtres, ni de
+seuil**.
+
+⚠ La sous-fenêtre est **calculée et centrée**, jamais posée : une pile de 161 couches lue
+sur 109 laisse 26 de chaque côté, et la couche tracée est le milieu de la **sous-fenêtre**,
+pas de la pile. La donner en coordonnées de pile décalerait le profil de vingt-six couches
+sans rien signaler.
+
 ## 7. Ce que ce document n'établit pas
 
 - ⚠ **Que le relief mesure la qualité d'une surface.** Il mesure si la colonne lue porte de
@@ -149,6 +180,10 @@ cd inference_xpu && uv run python ../analysis/src/depth_profile.py \
     --from-layer 26 --to-layer 134 --traced-layer 54 --voxel-um 2.4 --out /tmp/nous_128.json
 python3 analysis/src/calibration_corpus.py docs/balayage_scroll1.csv --layers 109 \
     --situer /tmp/nous_128.json --json docs/situer_notre_trace.json
+
+# les huit candidats d'un coup
+CORPUS=docs/balayage_scroll1.csv tools/situer_nos_traces.sh \
+    data/paris4_candidats/*/rendu_161
 
 cd inference && uv run python ../analysis/src/figure_calibration.py \
     --csv ../docs/balayage_scroll1.csv --layers 109 \

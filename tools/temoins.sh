@@ -720,6 +720,11 @@ run "commandes du README"      "$ROOT/tools/readme_apparie.sh" --verifier
 # beta = 0, donc « propriete de la surface », alors qu elle dit seulement qu elle ne peut pas
 # monter plus haut. Mesure : 104 series sur pic_intensite_median.
 run "critere relatif"          uv run --project "$ROOT" python "$ROOT/analysis/src/critere_relatif.py" --verifier
+# ⚠⚠ Situer nos traces a la geometrie d un corpus. Ses sondes centrales portent sur la
+# SOUS-FENETRE : elle doit etre centree (161 couches lues sur 109 laissent 26 de chaque
+# cote) et la couche tracee doit etre le milieu de la SOUS-fenetre, pas de la pile -- la
+# donner en coordonnees de pile decalerait le profil de vingt-six couches sans rien dire.
+run "situer nos traces"        "$ROOT/tools/situer_nos_traces.sh" --verifier
 # ⚠ La figure de calibration. Sa sonde centrale est le seuil venu d AILLEURS : il doit etre
 # dessine, et la figure doit DIRE qu aucun point ne l atteint plutot que de laisser un vide
 # muet. Sa seconde sonde est la bande brute, verifiee pixel pour pixel entre les deux
