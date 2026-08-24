@@ -16,6 +16,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import statistics as st
 import sys
 from pathlib import Path
 
@@ -146,7 +147,20 @@ def dessiner(relief: list[float], bord: list[float], geo: dict, plancher: float,
         for v, rang in empiler([max(v, bas) for v in vals], X):
             x, y = X(v), base - 10 - rang * 8
             d.ellipse([x - 3, y - 3, x + 3, y + 3], fill=couleur)
-        med = sorted(vals)[len(vals) // 2] if vals else 0.0
+        # ⚠⚠ LA MEDIANE VIENT DE `calibration_corpus`, jamais recalculee ici. Une version
+        # anterieure prenait `sorted(vals)[len//2]` -- le milieu SUPERIEUR -- la ou
+        # `statistics.median` moyenne les deux valeurs centrales sur un compte pair. Les
+        # deux ont produit 0,746 et 0,744 pour les memes quatre-vingts segments, et le
+        # premier est parti dans un document. Deux definitions d une meme grandeur dans un
+        # meme depot finissent toujours par se contredire.
+        med = st.median(vals) if vals else 0.0
+        if i == 0:
+            # ⚠⚠ La valeur RAPPORTEE est celle qui est DESSINEE, pas une seconde qu on
+            # recalculerait dans le `return`. Ma premiere version renvoyait `st.median` a
+            # part : le controle comparait alors `st.median` a `st.median` et ne pouvait
+            # pas echouer -- verifie par sonde, il restait vert en remettant la mediane
+            # maison dans le dessin.
+            mediane_dessinee = med
         brut.text((marge, base + 24), f"{nom}", fill=ENCRE, font=p)
         brut.text((marge + 96, base + 24), f"{len(vals)} segments", fill=GRIS, font=p)
         d.text((marge + 226, base + 24), "médiane " + f"{med:.3f}", fill=GRIS, font=p)
@@ -169,6 +183,7 @@ def dessiner(relief: list[float], bord: list[float], geo: dict, plancher: float,
     sortie.parent.mkdir(parents=True, exist_ok=True)
     img.save(sortie)
     return {"largeur": L, "hauteur": H, "points": len(relief),
+            "mediane_relief": mediane_dessinee,
             "bande_brute": (marge - 4, y0 + hauteur_rangee + 20,
                             marge + 216, y0 + hauteur_rangee + 42),
             "graduations": graduations, "au_bord_90": atteints,
@@ -204,6 +219,13 @@ def _verifier() -> int:
         # ⚠⚠ Le controle qui porte la figure : le seuil venu d ailleurs n est jamais
         # atteint, et la figure doit le DIRE plutot que de laisser un vide muet.
         v("le seuil venu d'ailleurs n'est jamais atteint ici", r["au_bord_90"] == 0)
+        # ⚠⚠ La mediane doit etre CELLE de `calibration_corpus` : deux definitions ont deja
+        # rendu 0,746 et 0,744 sur les memes donnees.
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from calibration_corpus import distribution as _dist
+        v("la mediane est celle de calibration_corpus",
+          abs(r["mediane_relief"] - _dist(sorted(rel))["mediane"]) < 1e-12,
+          f"{r['mediane_relief']} contre {_dist(sorted(rel))['mediane']}")
         v("... et un corpus qui l'atteindrait serait compté",
           dessiner(rel, [0.95, 0.05], {"window_px": 128, "layers": 109}, 0.02,
                    Path(td) / "b.png")["au_bord_90"] == 1)
@@ -240,6 +262,12 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--json", type=Path, default=Path("docs/calibration_scroll1.json"))
     ap.add_argument("--csv", type=Path, help="le balayage, pour les points individuels")
+    # ⚠⚠ UNE figure, UNE geometrie. Un corpus publie n est pas homogene -- mesure sur
+    # `Scroll1` : 80 segments a 109 couches et un a 6 -- et le relief depend de la
+    # profondeur, donc superposer deux geometries dessinerait un instrument qui n existe
+    # pas. Le groupe se choisit ici, explicitement, et la figure l estampille.
+    ap.add_argument("--layers", type=int,
+                    help="ne dessiner que les segments lus à cette profondeur")
     ap.add_argument("--sortie", type=Path,
                     default=Path("docs/images/52_calibration.png"))
     ap.add_argument("--anglais", action="store_true")
@@ -253,6 +281,15 @@ def main() -> int:
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from calibration_corpus import lire, nombres, geometrie
     lignes = lire(a.csv)
+    if a.layers is not None:
+        avant = len(lignes)
+        lignes = [r for r in lignes if r.get("layers") == str(a.layers)]
+        if not lignes:
+            print(f"aucun segment à {a.layers} couches dans {a.csv}", file=sys.stderr)
+            return 2
+        if len(lignes) != avant:
+            print(f"  ⚠ {avant - len(lignes)} segment(s) écarté(s) : lus à une autre "
+                  f"profondeur", file=sys.stderr)
     geo = geometrie(lignes, None, None)
     r = dessiner(nombres(lignes, "relief"), nombres(lignes, "edge_pinned"), geo,
                  0.02, a.sortie, anglais=a.anglais)

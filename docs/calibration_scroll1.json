@@ -1,0 +1,76 @@
+{
+  "corpus": 81,
+  "geometries": 2,
+  "groupes": [
+    {
+      "segments": 80,
+      "geometrie": {
+        "layers": 109,
+        "window_px": 128,
+        "declaree": false
+      },
+      "plancher": 0.02,
+      "relief": {
+        "n": 80,
+        "min": 0.04,
+        "max": 0.9746,
+        "mediane": 0.7441,
+        "q1": 0.6379,
+        "q3": 0.828
+      },
+      "edge_pinned": {
+        "n": 80,
+        "min": 0.0,
+        "max": 0.2632,
+        "mediane": 0.0729,
+        "q1": 0.0417,
+        "q3": 0.1146
+      },
+      "relief_sur_plancher": {
+        "n": 80,
+        "min": 2.0,
+        "max": 48.73,
+        "mediane": 37.205,
+        "q1": 31.895,
+        "q3": 41.4
+      },
+      "sous_le_plancher": 0,
+      "au_bord_90": 0
+    },
+    {
+      "segments": 1,
+      "geometrie": {
+        "layers": 6,
+        "window_px": 128,
+        "declaree": false
+      },
+      "plancher": 0.02,
+      "relief": {
+        "n": 1,
+        "min": 0.5111,
+        "max": 0.5111,
+        "mediane": 0.5111,
+        "q1": 0.5111,
+        "q3": 0.5111
+      },
+      "edge_pinned": {
+        "n": 1,
+        "min": 0.6941,
+        "max": 0.6941,
+        "mediane": 0.6941,
+        "q1": 0.6941,
+        "q3": 0.6941
+      },
+      "relief_sur_plancher": {
+        "n": 1,
+        "min": 25.555,
+        "max": 25.555,
+        "mediane": 25.555,
+        "q1": 25.555,
+        "q3": 25.555
+      },
+      "sous_le_plancher": 0,
+      "au_bord_90": 0
+    }
+  ]
+}

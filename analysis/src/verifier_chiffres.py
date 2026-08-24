@@ -896,6 +896,35 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"alpha d identite {x['couches'][0]}c/{x['couches'][1]}c",
                        x["alpha"], 4, p.name)
 
+    p = racine / "docs" / "calibration_scroll1.json"
+    if p.exists():
+        d = json.loads(p.read_text())
+        out.append(("segments du balayage", [str(d.get("corpus"))], p.name))
+        out.append(("geometries de lecture du corpus",
+                    [str(d.get("geometries"))], p.name))
+        for g in d.get("groupes") or []:
+            geo = g.get("geometrie") or {}
+            n = geo.get("layers")
+            # ⚠ Seul le groupe PRINCIPAL est garde : un groupe d un seul segment n a pas de
+            # distribution a laisser vieillir, et le garder ferait du bruit a chaque
+            # balayage.
+            if (g.get("relief") or {}).get("n", 0) < 10:
+                continue
+            for cle, nom in (("min", "relief minimal du corpus"),
+                             ("mediane", "relief median du corpus"),
+                             ("max", "relief maximal du corpus")):
+                v = (g.get("relief") or {}).get(cle)
+                if v is not None:
+                    ajoute(f"{nom} a {n} couches", v, 3, p.name)
+            out.append((f"segments du corpus a {n} couches",
+                        [str((g.get("relief") or {}).get("n"))], p.name))
+            if g.get("sous_le_plancher") is not None:
+                out.append((f"segments sous le plancher a {n} couches",
+                            [str(g["sous_le_plancher"])], p.name))
+            if g.get("au_bord_90") is not None:
+                out.append((f"segments a edge_pinned 90 a {n} couches",
+                            [str(g["au_bord_90"])], p.name))
+
     p = racine / "docs" / "effet_taille_fenetre.json"
     if p.exists():
         d = json.loads(p.read_text())

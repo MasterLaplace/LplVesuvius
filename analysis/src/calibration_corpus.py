@@ -70,6 +70,25 @@ def geometrie(lignes: list[dict], couches: int | None,
     return out
 
 
+def par_geometrie(lignes: list[dict]) -> dict[tuple[str, str], list[dict]]:
+    """Les lignes groupées par géométrie de lecture.
+
+    ⚠⚠ **Un corpus publié n'est PAS homogène, mesuré et non supposé.** Sur les 81 segments
+    de `Scroll1`, quatre-vingts sont lus sur 109 couches et **un** sur 6. Une distribution
+    unique aurait mélangé une lecture sur six couches à quatre-vingts lectures sur cent neuf
+    — et le relief dépend de la profondeur (exposant +1,01), donc ce mélange n'aurait décrit
+    aucun instrument. C'est le refus de `geometrie` qui l'a trouvé, au premier usage réel.
+
+    ⭐ Grouper vaut mieux que refuser OU que moyenner : chaque groupe est une calibration
+    valide, et le groupe d'un seul segment se voit tout de suite comme tel.
+    """
+    out: dict[tuple[str, str], list[dict]] = {}
+    for r in lignes:
+        cle = (r.get("layers") or "?", r.get("window_px") or "?")
+        out.setdefault(cle, []).append(r)
+    return out
+
+
 def distribution(valeurs: list[float]) -> dict | None:
     if not valeurs:
         return None
@@ -139,6 +158,13 @@ def verifier() -> int:
         v("deux geometries dans un meme fichier sont refusees",
           "calibrent rien" in str(e))
 
+    # ⚠⚠ Le groupage : mesure du 2026-08-24 sur `Scroll1`, 80 segments a 109 couches et UN
+    # a 6. Une distribution unique aurait melange les deux.
+    g = par_geometrie(melange)
+    v("les geometries sont groupees et non fondues", len(g) == 2, str(list(g)))
+    v("... et le groupe d un seul segment se voit",
+      sorted(len(v) for v in g.values()) == [1, 3], str([len(v) for v in g.values()]))
+
     r = resumer(lignes, geo)
     v("la distribution du relief est resumee",
       r["relief"]["n"] == 3 and abs(r["relief"]["mediane"] - 0.80) < 1e-9, str(r["relief"]))
@@ -165,6 +191,8 @@ def main() -> int:
     ap.add_argument("--layers", type=int, help="profondeur lue, si le fichier ne la porte pas")
     ap.add_argument("--window-px", type=int, help="étendue dans le plan, idem")
     ap.add_argument("--plancher", type=float, default=0.02)
+    ap.add_argument("--par-geometrie", action="store_true",
+                    help="une calibration par géométrie plutôt qu'un refus")
     ap.add_argument("--json", type=Path)
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()
@@ -177,6 +205,29 @@ def main() -> int:
     if not lignes:
         print(f"aucune ligne dans {a.csv}", file=sys.stderr)
         return 2
+    if a.par_geometrie:
+        groupes = par_geometrie(lignes)
+        tout = {"corpus": len(lignes), "geometries": len(groupes), "groupes": []}
+        print(f"\n  {len(lignes)} segments répartis en {len(groupes)} géométrie(s) de "
+              f"lecture")
+        for (couches, fenetre), sous in sorted(groupes.items(),
+                                               key=lambda kv: -len(kv[1])):
+            g = {"layers": int(couches), "window_px": int(fenetre), "declaree": False}
+            rr = resumer(sous, g, a.plancher)
+            tout["groupes"].append(rr)
+            d = rr.get("relief")
+            marque = "  ⚠ un seul segment" if len(sous) == 1 else ""
+            print(f"    {fenetre} px × {couches} couches : {len(sous)} segment(s){marque}")
+            if d:
+                print(f"        relief min {d['min']:.3f}  médiane {d['mediane']:.3f}  "
+                      f"max {d['max']:.3f}   sous le plancher : {rr['sous_le_plancher']}")
+        print("\n  ⚠⚠ chaque groupe est une calibration ; les mélanger n'en serait pas une")
+        if a.json:
+            a.json.write_text(json.dumps(tout, indent=2, ensure_ascii=False) + "\n",
+                              encoding="utf-8")
+            print(f"\n  écrit : {a.json}")
+        return 0
+
     try:
         geo = geometrie(lignes, a.layers, a.window_px)
     except ValueError as e:
