@@ -130,6 +130,23 @@ code à trois endroits plutôt que dans ma vigilance :
   lui déclare à la main ;
 - `figure_calibration.py` **l'imprime** sur le dessin.
 
+#### ⭐ La calibration de `Scroll1`, et ce qu'elle ouvre
+
+`tracecheck --all --csv` juge tous les segments publiés d'un rouleau en ~1,2 min chacun, sans
+rien télécharger. Sur `Scroll1`, 80 segments à 128 px × 109 couches : relief **0,040 à
+0,975**, médiane **0,744**, **aucun** sous le plancher. Détail et figure :
+[`52`](docs/52_calibrer_sur_son_corpus.md).
+
+⚠⚠ **Le refus a payé au premier usage réel** : un corpus publié n'est PAS homogène — 80
+segments à 109 couches et **un à 6**. Une distribution unique les aurait fondus.
+
+> ⭐⭐ **Ce que ça ouvre, et c'est le prochain pas** : le crible tourne à distance et pour
+> rien. Si les segments **publiés** de `PHercParis4` lisent un relief franc là où **nos
+> traces** sont plates, la panne est localisée dans notre traceur et pas dans le rouleau —
+> ce qui redirige tout. ⚠ À vérifier d'abord : ce rouleau publie-t-il des volumes de surface
+> exploitables par `tracecheck` (il publie `representations/`, ce qui n'est pas la même
+> chose).
+
 ### ⚠ Les pièges qui se sont repayés, et leur remède définitif
 
 - **`pkill -f` et `pgrep -f` matchent leur propre ligne de commande.** Payé six fois, dont
