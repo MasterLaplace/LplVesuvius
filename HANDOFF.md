@@ -173,6 +173,15 @@ correctif de l'instrument ne déplace pas leur chiffre d'un dix-millième.
 
 ### ⚠ Les pièges qui se sont repayés, et leur remède définitif
 
+- ⚠⚠ **`a && b && nohup c &` met TOUTE la liste en tâche de fond**, pas seulement `c`. Deux
+  conséquences, et la seconde coûte cher : les variables affectées dans la chaîne
+  n'atteignent jamais le shell appelant (symptôme : un `tail "$W/rendu.log"` qui lit
+  `/rendu.log`), et surtout on n'a plus de poignée propre sur le processus. Payé le
+  2026-08-24 : un rendu lancé ainsi a tourné **58 minutes** en écrivant dans un répertoire
+  que j'avais supprimé, à manger 2,3 Go de RSS et la moitié de la bande passante, pendant
+  que je cherchais pourquoi tout était lent. **Supprimer la sortie d'un rendu ne l'arrête
+  pas.** Lancer en tâche de fond par l'outil prévu, et tuer **par PID**.
+
 - **`pkill -f` et `pgrep -f` matchent leur propre ligne de commande.** Payé six fois, dont
   une où mon shell est mort (exit 144). Tuer **par PID**.
 - **Une sonde qui scanne son propre fichier se matche elle-même.** Payé cinq fois. Le remède

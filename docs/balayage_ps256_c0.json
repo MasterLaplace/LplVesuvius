@@ -1,0 +1,15 @@
+{
+  "maillage": "data/paris4_candidats/ps256_c0/plat",
+  "niveau": 0,
+  "sondes": 13,
+  "blocs_distincts": 13,
+  "comptes": {
+    "matiere": 13,
+    "bloc_vide": 0,
+    "bloc_absent": 0,
+    "hors_volume": 0,
+    "illisible": 0
+  },
+  "exemples": [],
+  "part_matiere": 1.0
+}
