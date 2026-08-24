@@ -167,6 +167,36 @@ batteries : [`54`](docs/54_cinq_rendus_vides.md).
 et restent au bas de leur propre rouleau. Leur maillage était dans la bonne frame, et le
 correctif de l'instrument ne déplace pas leur chiffre d'un dix-millième.
 
+#### ⭐⭐⭐ Et le témoin positif tranche : notre chaîne de rendu est FIDÈLE
+
+La question que le classement n'avait jamais posée — *nos piles sont-elles comparables aux
+piles publiées ?* — a sa réponse. Un maillage **publié** (segment `20230702185753`, format
+`tifxyz` identique au nôtre), découpé à la taille de nos candidats, rendu **par notre chaîne**,
+relu à 128 px × 109 couches :
+
+| | relief | ×plancher | rang sur 80 |
+|---|---:|---:|---|
+| **notre rendu du maillage publié** | **0,8726** | **×43,6** | **72ᵉ sur 80** |
+| le segment d'origine, tel que publié | 0,7912 | — | — |
+| corpus, médiane | 0,7441 | — | — |
+| nos `ps256` | 0,164 – 0,198 | ×8,2 – ×9,9 | 1ᵉʳ |
+
+Le critère avait été **écrit et commité avant la mesure** ([`53`](docs/53_le_temoin_positif_du_rendu.md)
+§3) : revenir dans la distribution ⇒ la chaîne est fidèle. Il revient **au-dessus de la
+médiane**. Donc le déficit de relief de nos traces est une propriété de **nos traces**, pas de
+notre instrument.
+
+⚠ Coût : 80 min de rendu, 399 Mo, pour un morceau de 2380 × 2400 px sur 161 couches. Les trois
+autres morceaux découpés n'ont pas été rendus — le critère ne demandait pas quatre points.
+
+#### ⭐ L'audit du dépôt entier : 31 piles vides sur 322, et le rayon de souffle est borné
+
+322 piles rendues (175 Go) lues une couche sur quarante : **291 avec matière, 31 noires**,
+9 illisibles (rendu en cours). Les 31 se rangent en **deux causes** : 29 viennent d'une graine
+`m7` (repère de niveau 2), et 2 sont `boucle/corrige_nappe_gen1_poids100`, un **aplatissement
+dégénéré** — grille 364 × 14, plan `x` entièrement négatif, zéro point valide sur 5096. ⭐ Aucun
+document ne cite cette dernière. Détail : [`54`](docs/54_cinq_rendus_vides.md) §5.
+
 ⚠⚠ Corollaire à ne pas oublier : « nos traces sont plates » vaut pour `m7`, **pas** pour
 `ps256` — lues à 1024 px elles donnaient 0,046, lues à 128 px elles donnent 0,198. Détail :
 [`52`](docs/52_calibrer_sur_son_corpus.md) §6.

@@ -1219,6 +1219,20 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # que treize rendus publies ne mesuraient rien. Un chiffre de correction qui derive en
     # silence laisserait la correction se defaire toute seule.
     vides = 0
+    # ⚠ L'audit du depot entier est garde a part : ses deux comptes (piles vides, piles
+    # lues) sont ce qui borne le rayon de souffle, et un rayon de souffle qui derive en
+    # silence est pire qu'un rayon de souffle inconnu.
+    f = racine / "docs" / "matiere_des_piles_toutes.json"
+    if f.exists():
+        d = json.loads(f.read_text())
+        piles = d.get("piles", [])
+        n_vides = sum(1 for r in piles if r.get("vide"))
+        out.append(("piles vides sur tout le depot",
+                    [f"{n_vides} piles", f"**{n_vides} piles", f"{n_vides} sur {len(piles)}"],
+                    f.name))
+        out.append(("piles lues par l'audit",
+                    [f"{len(piles)} piles", f"**{len(piles)} piles**",
+                     f"sur {len(piles)}"], f.name))
     for nom in ("matiere_des_piles.json", "matiere_des_piles_croise.json"):
         f = racine / "docs" / nom
         if not f.exists():

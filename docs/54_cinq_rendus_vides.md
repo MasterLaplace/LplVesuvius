@@ -235,7 +235,56 @@ différente de la journée.
   inchangées — leur maillage était dans la bonne frame, et le correctif de l'instrument ne
   déplace pas leur chiffre d'un dix-millième.
 
-## 5. Reproduire
+## 5. ⭐⭐ L'audit du dépôt entier : 31 piles vides sur 322, et trois causes
+
+Extrapoler treize cas à l'ensemble aurait été exactement le geste que ce document reproche.
+Les **322 piles rendues** de l'arbre (175 Go) ont donc été lues, une couche sur quarante :
+
+| | piles |
+|---|---:|
+| avec de la matière | **291** |
+| entièrement noires | **31** |
+| illisibles (rendu en cours au moment de l'audit) | 9 |
+
+Et la liste des 31 se range d'elle-même en **deux familles**, plus mon propre essai :
+
+- **29 piles** viennent d'une **graine `m7`** — `m7`, `m7_c0…c4`, `m7_sur_graine_m7*`,
+  `ps256_sur_graine_m7*`, chacune dans ses deux fenêtres (41 et 161), plus `m7_c0_niv0`,
+  qui est le premier morceau que j'ai découpé aujourd'hui **au hasard des trous**, c'est-à-dire
+  hors de la zone couverte par le volume ;
+- **2 piles** sont `boucle/corrige_nappe_gen1_poids100`, et c'est une **cause différente**.
+
+### La seconde cause : un aplatissement dégénéré
+
+`corrige_nappe_gen1_poids100/plat` est une grille de **364 × 14** points — un ruban — et son
+plan `x` est **entièrement négatif** : minimum −1239, maximum −1, **zéro** point positif sur
+5096. Les plans `y` et `z` en ont 2370. Un indice de voxel négatif ne désigne rien, donc le
+maillage n'a **aucun point valide** et son rendu ne pouvait qu'être noir.
+
+⚠ Ce n'est ni un problème de niveau ni un problème de masque : c'est un aplatissement qui a
+échoué en produisant quand même un fichier. Et le fichier a l'air d'un maillage — `meta.json`,
+trois images, la bonne `scale`.
+
+⭐ **Aucun document ne cite cette pile** (vérifié par recherche sur tout `docs/`,
+`analysis/src/` et `tools/`). Le rayon de souffle reste donc la famille `m7`.
+
+⚠ Ce que l'audit ne dit pas : si une pile **avec** de la matière est pour autant posée sur une
+feuille. « Il y a quelque chose ici » est le plancher, pas le verdict — c'est ce que le relief
+mesure, et c'est [`51`](51_une_pente_a_deux_appuis.md) et [`52`](52_calibrer_sur_son_corpus.md)
+qui s'en occupent.
+
+## 5 bis. ⚠ Un troisième état, nommé après avoir fait tomber l'audit
+
+La première exécution de l'audit est morte sur la première pile encore en écriture. Un moteur
+de rendu **pré-alloue** ses sorties puis les remplit bande par bande, donc entre les deux un
+`.tif` existe et n'a aucune page.
+
+« Il n'y a rien dedans » et « il n'y a rien **encore** » ne veulent pas dire la même chose, et
+la première lecture condamnerait un rendu parfaitement sain qu'on a seulement regardé trop
+tôt. Les piles illisibles sont donc comptées et rapportées **à part**, et l'outil ne prétend
+alors ni maximum ni part allumée.
+
+## 6. Reproduire
 
 ```bash
 # le diagnostic, sur les huit candidats
@@ -252,7 +301,22 @@ uv run --project . python analysis/src/niveau_du_maillage.py \
     --maillage data/paris4_candidats/m7_c0/plat \
     --rebaser data/paris4_candidats/m7_c0/plat_niveau0
 
+# l'audit du depot entier : 322 piles, une couche sur quarante
+find data -maxdepth 4 -type d -name "rendu*" | sort > /tmp/piles.txt
+uv run --project . python analysis/src/matiere_des_piles.py $(cat /tmp/piles.txt) \
+    --pas 40 --json docs/matiere_des_piles_toutes.json
+
+# la figure des trois vignettes
+uv run --project . python analysis/src/figure_piles_vides.py \
+    --vide data/paris4_candidats/m7_c0/rendu_161 \
+    --rebase data/temoin_rendu/m7_c0_g2/rendu \
+    --temoin data/paris4_candidats/ps256_c0/rendu_161 \
+    --sortie docs/images/54_piles_vides.png --json docs/figure_piles_vides.json
+
 # les temoins, hors ligne
 uv run --project . python analysis/src/niveau_du_maillage.py --verifier
 uv run --project . python analysis/src/depth_profile.py --verifier
+uv run --project . python analysis/src/matiere_des_piles.py --verifier
+uv run --project . python analysis/src/matiere_au_point.py --verifier
+uv run --project . python analysis/src/figure_piles_vides.py --verifier
 ```

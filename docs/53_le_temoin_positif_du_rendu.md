@@ -82,6 +82,36 @@ la valeur publiée (0,7912) est lue sur ses 96 fenêtres. Les deux lectures part
 quelques dixièmes ne se lira donc pas comme une panne ; un effondrement d'un facteur quatre,
 si.
 
+## 3 bis. ⭐⭐⭐ Le résultat : notre chaîne est fidèle
+
+Le maillage publié du segment `20230702185753`, découpé à la taille de nos candidats, rendu
+**par notre chaîne**, relu à 128 px × 109 couches :
+
+| | relief | ×plancher | rang sur 80 |
+|---|---:|---:|---|
+| **notre rendu du maillage publié** | **0,8726** | **×43,6** | **72ᵉ sur 80** |
+| le segment d'origine, tel que publié | 0,7912 | ×39,6 | — |
+| corpus publié, médiane | 0,7441 | ×37,2 | — |
+| nos `ps256` | 0,164 – 0,198 | ×8,2 – ×9,9 | 1ᵉʳ |
+
+⭐⭐ **Le morceau publié revient au-dessus de la médiane de son propre corpus.** Il n'y a pas
+d'effondrement, pas de facteur quatre, pas même de perte : le critère écrit avant la mesure
+est satisfait dans son premier sens.
+
+**Donc le déficit de relief de nos traces est une propriété de NOS TRACES, et non de notre
+instrument.** Le classement de [`52`](52_calibrer_sur_son_corpus.md) tient — pour la partie
+`ps256`, qui est celle qui reste après [`54`](54_cinq_rendus_vides.md).
+
+⚠ L'écart entre 0,8726 et 0,7912 n'est pas une amélioration : ce sont deux aires
+d'échantillonnage différentes du même segment, et le morceau tombe sur une zone qui porte un
+peu plus de structure que la moyenne des 96 fenêtres. Ce qui compte est qu'il tombe **dans la
+distribution**, là où nos traces tombent quatre fois plus bas.
+
+⚠ Coût mesuré, pour qui voudra refaire l'expérience : **80 minutes** de rendu pour un morceau
+de 2380 × 2400 px sur 161 couches, soit 399 Mo, à 81 Kio/s de débit soutenu. Les trois autres
+morceaux découpés n'ont pas été rendus : le critère ne demandait pas quatre points, et trois
+rendus de plus auraient coûté quatre heures de bande passante pour une réponse déjà donnée.
+
 ## 4. Un vrai défaut trouvé avant même le premier rendu
 
 ⚠⚠ Le garde de taille de `profiler_une_surface.sh` cherchait un rendu de référence avec

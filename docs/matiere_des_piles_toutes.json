@@ -1,0 +1,2912 @@
+{
+  "pas": 40,
+  "piles": [
+    {
+      "pile": "data/boucle/corrige_gen40/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.38065210749402495,
+      "vide": false
+    },
+    {
+      "pile": "data/boucle/corrige_gen40/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.38057080701177365,
+      "vide": false
+    },
+    {
+      "pile": "data/boucle/corrige_gen5/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.05261532552728431,
+      "vide": false
+    },
+    {
+      "pile": "data/boucle/corrige_gen5/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.05271615344421904,
+      "vide": false
+    },
+    {
+      "pile": "data/boucle/corrige_gen5_poids100/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.03750439914109123,
+      "vide": false
+    },
+    {
+      "pile": "data/boucle/corrige_gen5_poids100/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.03753766900708496,
+      "vide": false
+    },
+    {
+      "pile": "data/boucle/corrige_nappe_gen1_poids100/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/boucle/corrige_nappe_gen1_poids100/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/boucle/temoin/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.37252210570081523,
+      "vide": false
+    },
+    {
+      "pile": "data/boucle/temoin/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.37220374213706753,
+      "vide": false
+    },
+    {
+      "pile": "data/controle_resolution/g2_n10/rendu",
+      "couches": 10,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9619433712744639,
+      "vide": false
+    },
+    {
+      "pile": "data/controle_resolution/g2_n40/rendu",
+      "couches": 40,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9619433712744639,
+      "vide": false
+    },
+    {
+      "pile": "data/convergence_essais/essai_b/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.3356997018783715,
+      "vide": false
+    },
+    {
+      "pile": "data/convergence_essais/essai_b/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.33579247149158636,
+      "vide": false
+    },
+    {
+      "pile": "data/convergence_essais/essai_budget/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 2,
+      "max": null,
+      "part_allumee": null,
+      "vide": null,
+      "refus": "aucune page lisible \u2014 rendu probablement en cours"
+    },
+    {
+      "pile": "data/convergence_essais/essai_ng2/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.7321653279975859,
+      "vide": false
+    },
+    {
+      "pile": "data/convergence_essais/essai_ng2/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.7321679662733263,
+      "vide": false
+    },
+    {
+      "pile": "data/convergence_essais/essai_scale1/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5095846251003592,
+      "vide": false
+    },
+    {
+      "pile": "data/convergence_essais/essai_scale1/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5107791015847015,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_apres_rognage/gen125/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9181170674175069,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_apres_rognage/gen125/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9180811668978468,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_budget/gen200/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.8481353894858801,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_budget/gen200/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.8462974738254992,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_chaine/gen100/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.964436281518922,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_chaine/gen100/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9644149735795595,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_chaine/pas001/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.964436281518922,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_chaine/pas001/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9644149735795595,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_chaine/pas002/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.964436281518922,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_chaine/pas002/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9644149735795595,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_chaine/pas003/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 1,
+      "max": null,
+      "part_allumee": null,
+      "vide": null,
+      "refus": "aucune page lisible \u2014 rendu probablement en cours"
+    },
+    {
+      "pile": "data/ext_chaine_cumul/pas001/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.964436281518922,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_chaine_cumul/pas001/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9644149735795595,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_chaine_cumul/pas002/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.588354047355867,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_chaine_cumul/pas002/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5871921406464917,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_chaine_fin/pas001/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.8591317497634275,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_chaine_fin/pas001/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.8591334240508443,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_chaine_fin/pas002/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9266203908577882,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_chaine_fin/pas002/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9245476465176979,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_cycle_propre/gen110/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.7642995082951258,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_cycle_propre/gen110/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.764299220845073,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_determinisme/gen100/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.964436281518922,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_determinisme/gen100/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9644149735795595,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_determinisme/gen100_bis2/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.964436281518922,
+      "vide": false
+    },
+    {
+      "pile": "data/ext_determinisme/gen100_bis2/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9644149735795595,
+      "vide": false
+    },
+    {
+      "pile": "data/extension_tangentielle/gen001/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9742335002809951,
+      "vide": false
+    },
+    {
+      "pile": "data/extension_tangentielle/gen001/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9737154934886633,
+      "vide": false
+    },
+    {
+      "pile": "data/extension_tangentielle/gen003/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9044683586858294,
+      "vide": false
+    },
+    {
+      "pile": "data/extension_tangentielle/gen003/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9044666919069623,
+      "vide": false
+    },
+    {
+      "pile": "data/extension_tangentielle/gen010/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.975944783969405,
+      "vide": false
+    },
+    {
+      "pile": "data/extension_tangentielle/gen010/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9759430658705913,
+      "vide": false
+    },
+    {
+      "pile": "data/leur_graine/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 5,
+      "max": null,
+      "part_allumee": null,
+      "vide": null,
+      "refus": "aucune page lisible \u2014 rendu probablement en cours"
+    },
+    {
+      "pile": "data/leur_graine/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4957459464831004,
+      "vide": false
+    },
+    {
+      "pile": "data/leurs_parametres/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4358233419732861,
+      "vide": false
+    },
+    {
+      "pile": "data/leurs_parametres/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.43522900851220436,
+      "vide": false
+    },
+    {
+      "pile": "data/leviers/temoin/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 2,
+      "max": null,
+      "part_allumee": null,
+      "vide": null,
+      "refus": "aucune page lisible \u2014 rendu probablement en cours"
+    },
+    {
+      "pile": "data/officiel_appariee/rendu",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460521700253079,
+      "vide": false
+    },
+    {
+      "pile": "data/origine_pile/rendu",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460528826322475,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_candidats/m7_c0/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_candidats/m7_c0/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_candidats/m7_c1/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_candidats/m7_c1/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_candidats/m7_c2/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_candidats/m7_c2/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_candidats/m7_c3/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_candidats/m7_c3/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_candidats/m7_c4/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_candidats/m7_c4/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_candidats/ps256_c0/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9633310844147773,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_candidats/ps256_c0/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9633674144908877,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_candidats/ps256_c1/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9598243804043578,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_candidats/ps256_c1/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9597938475376643,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_candidats/ps256_c2/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9576458194244036,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_candidats/ps256_c2/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9576337590363175,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise/m7_sur_graine_m7/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise/m7_sur_graine_m7/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise/m7_sur_graine_ps256/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9626138910796094,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise/m7_sur_graine_ps256/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9626255246647384,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise/ps256_sur_graine_m7/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise/ps256_sur_graine_m7/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise/ps256_sur_graine_ps256/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9632817276181492,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise/ps256_sur_graine_ps256/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9632809315407842,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise_r3/m7_sur_graine_m7_r1/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise_r3/m7_sur_graine_m7_r1/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise_r3/m7_sur_graine_m7_r2/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise_r3/m7_sur_graine_m7_r2/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise_r3/m7_sur_graine_m7_r3/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise_r3/m7_sur_graine_m7_r3/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise_r3/m7_sur_graine_ps256_r1/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9387277560571238,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise_r3/m7_sur_graine_ps256_r1/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9387253071265105,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise_r3/m7_sur_graine_ps256_r2/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9640940160130962,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise_r3/m7_sur_graine_ps256_r2/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9640862361661203,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise_r3/m7_sur_graine_ps256_r3/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.964295821625116,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise_r3/m7_sur_graine_ps256_r3/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9642901405275569,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise_r3/ps256_sur_graine_m7_r1/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise_r3/ps256_sur_graine_m7_r1/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise_r3/ps256_sur_graine_m7_r2/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise_r3/ps256_sur_graine_m7_r2/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise_r3/ps256_sur_graine_m7_r3/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise_r3/ps256_sur_graine_m7_r3/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise_r3/ps256_sur_graine_ps256_r1/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9570059240820821,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise_r3/ps256_sur_graine_ps256_r1/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9570101939515852,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise_r3/ps256_sur_graine_ps256_r2/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9420810181139511,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise_r3/ps256_sur_graine_ps256_r2/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9420595519824156,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise_r3/ps256_sur_graine_ps256_r3/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9591062301578973,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise_r3/ps256_sur_graine_ps256_r3/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9591159174364017,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_plafond/ps256_c2_g200/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 5,
+      "max": null,
+      "part_allumee": null,
+      "vide": null,
+      "refus": "aucune page lisible \u2014 rendu probablement en cours"
+    },
+    {
+      "pile": "data/paris4_plafond/ps256_c2_g200/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 2,
+      "max": null,
+      "part_allumee": null,
+      "vide": null,
+      "refus": "aucune page lisible \u2014 rendu probablement en cours"
+    },
+    {
+      "pile": "data/paris4_plafond/ps256_c2_g60/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9643892159741608,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_plafond/ps256_c2_g60/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9643911880749059,
+      "vide": false
+    },
+    {
+      "pile": "data/petite_trace/g30/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9294216598905737,
+      "vide": false
+    },
+    {
+      "pile": "data/petite_trace/g30/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9294240410605885,
+      "vide": false
+    },
+    {
+      "pile": "data/petite_trace/g60/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.8450204312305114,
+      "vide": false
+    },
+    {
+      "pile": "data/petite_trace/g60/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.8458415583911956,
+      "vide": false
+    },
+    {
+      "pile": "data/prediction_paris4/m7/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/prediction_paris4/m7/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/prediction_paris4/ps256/rendu_161",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9651859808604909,
+      "vide": false
+    },
+    {
+      "pile": "data/prediction_paris4/ps256/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9651954071401988,
+      "vide": false
+    },
+    {
+      "pile": "data/prediction_paris4_g200/ps256/rendu_41",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 2,
+      "max": null,
+      "part_allumee": null,
+      "vide": null,
+      "refus": "aucune page lisible \u2014 rendu probablement en cours"
+    },
+    {
+      "pile": "data/rogne/gen10/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.8057852896555553,
+      "vide": false
+    },
+    {
+      "pile": "data/rogne/gen10/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.805785359086974,
+      "vide": false
+    },
+    {
+      "pile": "data/rogne/gen25/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.8293546916215787,
+      "vide": false
+    },
+    {
+      "pile": "data/rogne/gen25/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.8293559097424792,
+      "vide": false
+    },
+    {
+      "pile": "data/rogne/gen50/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.8730499623531146,
+      "vide": false
+    },
+    {
+      "pile": "data/rogne/gen50/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.8730512403401967,
+      "vide": false
+    },
+    {
+      "pile": "data/rogne_cycle2/gen103/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.8292015916437859,
+      "vide": false
+    },
+    {
+      "pile": "data/rogne_cycle2/gen103/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.8292018724758463,
+      "vide": false
+    },
+    {
+      "pile": "data/rogne_cycle2/gen106/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.8174675765983979,
+      "vide": false
+    },
+    {
+      "pile": "data/rogne_cycle2/gen106/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.8174683567086403,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe/PHerc0125.r1.travail/rendu",
+      "couches": 21,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4012982671685658,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe/PHerc0125.r2.travail/rendu",
+      "couches": 21,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.3646424480722156,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe/PHerc0125.r3.travail/rendu",
+      "couches": 21,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.38711993220356633,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe/PHerc0257.r1.travail/rendu",
+      "couches": 21,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.7537360941917178,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe/PHerc0257.r2.travail/rendu",
+      "couches": 21,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.6008427692037476,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe/PHerc0257.r6.travail/rendu",
+      "couches": 21,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.7007202378700855,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe/PHerc0268.r1.travail/rendu",
+      "couches": 21,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4387415625147994,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe/PHerc0268.r2.travail/rendu",
+      "couches": 21,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.38234146824820225,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe/PHerc0268.r3.travail/rendu",
+      "couches": 21,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.3869711301021119,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe/PHerc0826.r1.travail/rendu",
+      "couches": 21,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.42891509425099583,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe/PHerc0826.r2.travail/rendu",
+      "couches": 21,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4175437722096751,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe/PHerc1218.r1.travail/rendu",
+      "couches": 21,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.28626718080578517,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe/PHerc1218.r2.travail/rendu",
+      "couches": 21,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.29752502117956026,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe/PHerc1447.r1.travail/rendu",
+      "couches": 21,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.17408090192230224,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe/PHerc1447.r2.travail/rendu",
+      "couches": 21,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.29848219530195796,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe/PHerc1447.r4.travail/rendu",
+      "couches": 21,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4302544652206699,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_161/PHerc1447.r2.travail/rendu",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.2971166476063119,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_41/PHerc0125.r1.travail/rendu",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.39884116049399315,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_41/PHerc0125.r2.travail/rendu",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.3630744986308907,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_41/PHerc0125.r3.travail/rendu",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.38669490294759923,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_41/PHerc0257.r1.travail/rendu",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.7522181483881645,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_41/PHerc0257.r2.travail/rendu",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5996822558804474,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_41/PHerc0257.r6.travail/rendu",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.7009172958088977,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_41/PHerc0268.r1.travail/rendu",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.44064035203403024,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_41/PHerc0268.r2.travail/rendu",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.3833281890284331,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_41/PHerc0268.r3.travail/rendu",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.38607199041069323,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_41/PHerc0826.r1.travail/rendu",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.42910853430174634,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_41/PHerc0826.r2.travail/rendu",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4173340268344989,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_41/PHerc1218.r1.travail/rendu",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.28643903773492,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_41/PHerc1218.r2.travail/rendu",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.2955317739063632,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_41/PHerc1447.r1.travail/rendu",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.17102609309245678,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_41/PHerc1447.r2.travail/rendu",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.29757837751299065,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_41/PHerc1447.r4.travail/rendu",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4270464249771107,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_81/PHerc0257.r1.travail/rendu",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.7520512645572498,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_81/PHerc0257.r6.travail/rendu",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.7007981443267779,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_81/PHerc1447.r2.travail/rendu",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.29753687306145316,
+      "vide": false
+    },
+    {
+      "pile": "data/second_axe_81/PHerc1447.r4.travail/rendu",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4269227445131898,
+      "vide": false
+    },
+    {
+      "pile": "data/sens_normale/rendu_inverse",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9294240410605885,
+      "vide": false
+    },
+    {
+      "pile": "data/sens_normale/rendu_normal",
+      "couches": 41,
+      "lues": 2,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9294240410605885,
+      "vide": false
+    },
+    {
+      "pile": "data/spires/spire00/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460528826322475,
+      "vide": false
+    },
+    {
+      "pile": "data/spires/spire00/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460521700253079,
+      "vide": false
+    },
+    {
+      "pile": "data/spires/spire01/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5328268180435083,
+      "vide": false
+    },
+    {
+      "pile": "data/spires/spire01/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5328271966446249,
+      "vide": false
+    },
+    {
+      "pile": "data/spires/spire02/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5176399138597856,
+      "vide": false
+    },
+    {
+      "pile": "data/spires/spire02/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.517639793693201,
+      "vide": false
+    },
+    {
+      "pile": "data/spires/spire03/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5065920948720976,
+      "vide": false
+    },
+    {
+      "pile": "data/spires/spire03/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5065912233601119,
+      "vide": false
+    },
+    {
+      "pile": "data/spires/spire04/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4802032407764669,
+      "vide": false
+    },
+    {
+      "pile": "data/spires/spire04/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.48020512069954413,
+      "vide": false
+    },
+    {
+      "pile": "data/spires/spire05/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.46536328823584183,
+      "vide": false
+    },
+    {
+      "pile": "data/spires/spire05/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4653630883112434,
+      "vide": false
+    },
+    {
+      "pile": "data/spires/spire06/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.45415813707646036,
+      "vide": false
+    },
+    {
+      "pile": "data/spires/spire06/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4541596767881263,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_dedans/spire00/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460528826322475,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_dedans/spire00/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460521700253079,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_dedans/spire01/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5277509571750322,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_dedans/spire01/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5277506924669332,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_dedans/spire02/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5068310819422441,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_dedans/spire02/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5068307174461557,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_dedans/spire03/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5024464597961882,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_dedans/spire03/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5024490398165197,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_dedans/spire04/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4858064824685864,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_dedans/spire04/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4858079937994482,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_dedans/spire05/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4721466799135262,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_dedans/spire05/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4721472685201461,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_dedans/spire06/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4461236436409857,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_dedans/spire06/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.44612346802927305,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire00/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460528826322475,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire00/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460521700253079,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire01/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5329300625679991,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire01/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5329296461067708,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire02/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5113619833034497,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire02/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5113628937235362,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire03/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5008399488107522,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire03/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5008402504004357,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire04/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4794107205515929,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire04/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.47940893380673827,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire05/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.47130807429398697,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire05/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.47130958123473,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire06/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.46237813586803683,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire06/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.462377465098609,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire07/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4362417778217085,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire07/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.43624060988774127,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire08/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.39882511771792667,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire08/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.39882424074880213,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire09/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.36277120870674023,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire09/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.3627727625051052,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire10/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.32406079488998124,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125/spire10/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.3240591511628958,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire00/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460528826322475,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire00/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460521700253079,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire01/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5327367488378744,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire01/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5327364080968695,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire02/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.511528946430605,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire02/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5115283130948928,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire03/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.49934290522971,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire03/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.49934517100003795,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire04/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4777615550507772,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire04/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4777607303993059,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire05/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.46728680292123476,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire05/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4672864513017281,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire06/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4568121268671576,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire06/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.456811844423457,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire07/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.434101084321085,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire07/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4341001100718917,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire08/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.39356289821565793,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire08/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.3935633704298019,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire09/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.35569376208955883,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas0125_compense/spire09/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.3556927746830178,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas025/spire00/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460528826322475,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas025/spire00/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460521700253079,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas025/spire01/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5326910895432151,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas025/spire01/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5326910138229918,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas025/spire02/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5121223424095487,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas025/spire02/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5121219465747285,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas025/spire03/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.49927586162772347,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas025/spire03/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4992763786386095,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas025/spire04/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4808430718961582,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas025/spire04/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.48084242545219796,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas025/spire05/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4669509762727281,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas025/spire05/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.466952213994344,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas025/spire06/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.45810669958885325,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas025/spire06/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.458106313488957,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas025/spire07/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.43855493595566114,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas025/spire07/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4385540534245265,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas025/spire08/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4035868178159998,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas025/spire08/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.40358586240131333,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas05/spire00/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460528826322475,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas05/spire00/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460521700253079,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas05/spire01/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5346673873717522,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas05/spire01/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5346674252318638,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas05/spire02/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5192257148498679,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas05/spire02/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5192260376845762,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas05/spire03/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5024266094435007,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas05/spire03/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5024263081964628,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas05/spire04/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.48492807221159806,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas05/spire04/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.48492927381566553,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas05/spire05/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4720279757290046,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas05/spire05/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4720274716836119,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas05/spire06/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4582489084286991,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pas05/spire06/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.45824818607657386,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire00/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460528826322475,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire00/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460521700253079,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire01/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5327367488378744,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire01/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5327364080968695,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire02/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.511528946430605,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire02/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5115283130948928,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire03/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.49934290522971,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire03/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.49934517100003795,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire04/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4777615550507772,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire04/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4777607303993059,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire05/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.46728680292123476,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire05/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4672864513017281,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire06/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4568121268671576,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire06/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.456811844423457,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire07/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.434101084321085,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire07/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4341001100718917,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire08/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.39356289821565793,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire08/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.3935633704298019,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire09/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.35569376208955883,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_pic025/spire09/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.3556927746830178,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire00/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460528826322475,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire00/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460521700253079,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire01/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5326912031235501,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire01/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5326910895432151,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire02/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5139290489052671,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire02/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5139300870530868,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire03/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5003188964860595,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire03/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5003196659929634,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire04/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4806286994650885,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire04/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4806298457596478,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire05/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.46921493360193045,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire05/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.46921553637822766,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire06/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.46438251145497667,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire06/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.46438273371716904,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire07/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.43864942757075287,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire07/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.4386493057896037,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire08/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.38877624724077586,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire08/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.38877730584069936,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire09/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.35560060462478404,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_portee0375/spire09/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.3556002314548931,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_repousse/spire00/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460528826322475,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_repousse/spire00/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.5460521700253079,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_repousse/spire01/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9459134219489237,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_repousse/spire01/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9454174468258725,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_repousse/spire02/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.944590190580155,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_repousse/spire02/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.9445886583058315,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_repousse/spire03/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.8418280573180285,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_repousse/spire03/rendu_81",
+      "couches": 81,
+      "lues": 3,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.841514489404681,
+      "vide": false
+    },
+    {
+      "pile": "data/spires_repousse/spire04/rendu_31",
+      "couches": 31,
+      "lues": 1,
+      "illisibles": 1,
+      "max": null,
+      "part_allumee": null,
+      "vide": null,
+      "refus": "aucune page lisible \u2014 rendu probablement en cours"
+    },
+    {
+      "pile": "data/temoin_rendu/m7_c0_g2/rendu",
+      "couches": 21,
+      "lues": 1,
+      "illisibles": 0,
+      "max": 255,
+      "part_allumee": 0.2466491109532637,
+      "vide": false
+    },
+    {
+      "pile": "data/temoin_rendu/m7_c0_lisible/rendu",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 5,
+      "max": null,
+      "part_allumee": null,
+      "vide": null,
+      "refus": "aucune page lisible \u2014 rendu probablement en cours"
+    },
+    {
+      "pile": "data/temoin_rendu/m7_c0_niv0/rendu",
+      "couches": 161,
+      "lues": 5,
+      "illisibles": 0,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/temoin_rendu/rendus",
+      "couches": 0,
+      "lues": 0,
+      "max": null,
+      "part_allumee": null,
+      "vide": null,
+      "refus": "aucune couche"
+    }
+  ]
+}
