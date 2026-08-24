@@ -773,6 +773,12 @@ run "figure feuille/tranche"   uv run --project "$ROOT" python "$ROOT/analysis/s
 # depot serait rouge des que la connexion tombe, donc elle finirait ignoree.
 run "tuile publiee"            uv run --project "$ROOT" python "$ROOT/analysis/src/tuile_surface_publiee.py" --verifier
 run "figure des piles vides"   uv run --project "$ROOT" python "$ROOT/analysis/src/figure_piles_vides.py" --verifier
+# ⚠⚠ Peut-on semer ici. Le sens compte : on part d une coordonnee du SCAN et on demande a
+# chaque prediction ce qu elle en dit DANS SON REPERE, le niveau etant lu dans son nom
+# (`-L0-`, `-L2-`). L autre sens obligerait a deviner le niveau, ce qui est l erreur d origine.
+# ⚠ La regle d admissibilite porte sur le BLOC et pas sur le voxel exact : la graine `ps256`
+# qui a produit huit traces avec matiere lit ZERO a son voxel, 255 autour.
+run "graine admissible"        uv run --project "$ROOT" python "$ROOT/analysis/src/graine_admissible.py" --verifier
 run "matiere au point"         uv run --project "$ROOT" python "$ROOT/analysis/src/matiere_au_point.py" --verifier
 run "matiere des piles"        uv run --project "$ROOT" python "$ROOT/analysis/src/matiere_des_piles.py" --verifier
 run "niveau du maillage"       uv run --project "$ROOT" python "$ROOT/analysis/src/niveau_du_maillage.py" --verifier

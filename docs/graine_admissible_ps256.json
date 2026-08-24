@@ -1,0 +1,37 @@
+{
+  "scan": [
+    38740,
+    10616,
+    10752
+  ],
+  "predictions": {
+    "ps256": {
+      "niveau": 0,
+      "coordonnee": [
+        38740,
+        10616,
+        10752
+      ],
+      "valeur": 0,
+      "max_bloc": 255,
+      "part_allumee": 0.22569864988327026
+    },
+    "m7": {
+      "niveau": 2,
+      "coordonnee": [
+        9685,
+        2654,
+        2688
+      ],
+      "valeur": 255,
+      "max_bloc": 255,
+      "part_allumee": 0.16644696836118344
+    }
+  },
+  "matiere": {
+    "valeur": 34,
+    "max_bloc": 245,
+    "part_allumee": 0.9999985694885254
+  },
+  "cle_scan": "0/302/82/84"
+}

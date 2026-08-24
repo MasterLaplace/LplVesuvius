@@ -25,6 +25,12 @@ dependencies = [
     # pas lire une seule donnée réelle. Une batterie qui passe dans un environnement où
     # l'outil ne marche pas est une batterie qui ne couvre pas la panne.
     "imagecodecs>=2024.1",
+    # ⚠⚠ Les volumes de PRÉDICTION sont compressés en blosc/zstd ; le volume de scan, lui,
+    # ne l'est pas. Sans `numcodecs`, le lecteur de blocs rend « illisible » sur les
+    # prédictions et parfaitement bien sur le scan — donc l'outil paraît marcher et refuse
+    # exactement la moitié des questions qu'on lui pose. Deuxième fois aujourd'hui qu'une
+    # dépendance de décodage manquante se lit comme un fait sur la donnée.
+    "numcodecs>=0.12",
 ]
 
 [tool.uv]

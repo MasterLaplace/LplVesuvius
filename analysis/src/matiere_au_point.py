@@ -75,7 +75,20 @@ def lire_bloc(zarr_url: str, niveau: int, z: int, y: int, x: int, timeout: float
         n = tailles[0] * tailles[1] * tailles[2]
         donnees = tc.decode(brut, meta, n)
         if donnees is None:
-            return None, "bloc illisible", cle
+            # ⚠⚠ « illisible » sans cause est un fait sans diagnostic attaché. Le codec est
+            # dans la métadonnée, donc le refus peut le nommer — et distinguer « ce codec
+            # n'est pas supporté ici » de « le bloc décodé n'a pas la taille annoncée ».
+            codec = (meta.get("compressor") or {}).get("id")
+            try:
+                import numcodecs  # noqa: F401
+                dispo = True
+            except ImportError:
+                dispo = False
+            raison = ("bloc illisible : codec « %s » et numcodecs absent" % codec
+                      if codec and not dispo else
+                      "bloc illisible : codec « %s », taille décodée inattendue" % codec
+                      if codec else "bloc illisible : taille inattendue")
+            return None, raison, cle
         bloc = np.frombuffer(donnees, dtype=np.dtype(meta["dtype"])).reshape(tailles)
         if cache is not None:
             cache[cle] = bloc
