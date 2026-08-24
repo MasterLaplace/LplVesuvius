@@ -458,6 +458,24 @@ only by widening, that is, what one reads is the window and not the surface.
 ]
 
 #caveat[
+  *And we then transported those two counts, which is the same error one level up.* The
+  0 of 75 and 34 of 63 above were measured on *rendered layer stacks in 1024-pixel analysis
+  windows*. We first published them, and a threshold drawn from them, as a property of our
+  remote screening tool, which reads *128-pixel chunks of published surface volumes*. Relief
+  depends on the depth of the window it is read in --- exponent $+1.01$ --- and on its extent
+  in the plane: measured on one unchanged stack where only the window changes, 0.046 at
+  1024 px, 0.081 at 512, 0.146 at 256, an exponent of $-0.830$. A corpus sweep confirmed it
+  in the field, where `edge_pinned` never reaches the threshold at which we had called it
+  wrong.
+  #linebreak()
+  What is instrument-independent is the *mechanism*: relief present in a narrow window is
+  what following a sheet means. The two counts are not. The threshold was withdrawn, and the
+  rule now lives in three places rather than in our vigilance --- the tool writes its reading
+  geometry into its own output, the calibration refuses to mix two geometries in one file,
+  and the figure prints the geometry on itself.
+]
+
+#caveat[
   *The first count was 132, and it was missing six.* Two directory conventions coexist in our
   tree: older campaigns write the profiles of a surface side by side, while our profiling
   tool writes *one window per subdirectory*. Grouping by parent directory cut the latter into

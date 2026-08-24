@@ -1,6 +1,6 @@
 # L'article — ce qu'il est, comment il se construit, et pourquoi il a cette forme
 
-`article.typ` → `article.pdf`, 22 pages, **autonome** : il ne renvoie à aucun fichier de ce
+`article.typ` → `article.pdf`, 23 pages, **autonome** : il ne renvoie à aucun fichier de ce
 dépôt et se lit sans le connaître.
 
 ```bash
