@@ -43,6 +43,18 @@ quoi que ce soit.
 
 ### Les quatre murs, mesurés, sur lesquels le travail continue
 
+> ⭐⭐ **La feuille de route est [`55`](docs/55_les_murs_et_leurs_causes.md)** — un tableau par
+> mur, une ligne par **cause candidate**, avec son verdict et le document qui le porte.
+> **20 causes, 13 éliminées, 5 confirmées, 2 ouvertes.** Un mur n'est pas une tâche, c'est un
+> espace de causes dont on retire une entrée à la fois : lister des tâches laisse croire qu'on
+> avance quand on tourne, lister des éliminations montre l'espace rétrécir.
+>
+> ⚠ Le document est **rendu** depuis `docs/murs_et_causes.tsv` et **gardé** : chaque ligne
+> doit pointer vers un document qui contient encore son ancre, et la batterie compare le rendu
+> au fichier. C'est la panne d'`EXTRACTION.md` — une table tenue à la main qui dérive en
+> silence — rendue impossible.
+
+
 | mur | ce qui est mesuré | document |
 |---|---|---|
 | le tracé ne suit pas de feuille | ⚠ **révisé le 2026-08-24** : sur 27 séries `PHercParis4`, **une seule** porte un verdict (α = +1,12). Un couple acheté exprès (41/83 couches, 796,8 µm) n'en porte pas non plus. ⭐ Mais à **100,8, 384 et 796,8 µm**, **100 % des fenêtres ont leur pic sur un bord de pile** | [`51`](docs/51_une_pente_a_deux_appuis.md) puis [`48`](docs/48_ou_monter_lexperience.md) |

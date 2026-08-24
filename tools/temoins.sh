@@ -763,6 +763,11 @@ run "situer nos traces"        "$ROOT/tools/situer_nos_traces.sh" --verifier
 # des vraies feuilles aplaties ? ». Sa sonde centrale est le REFUS de deux etendues
 # differentes -- comparer une tuile de 512 voxels a une de 2400 ferait passer une difference
 # d echelle pour une difference de surface, ce qui est la faute que tout ce depot traque.
+# ⚠⚠ Le registre des murs et de leurs causes. La garde qui compte : chaque ligne pointe vers
+# un document qui doit contenir ENCORE son ancre. C est ce qui empeche ce tableau de devenir
+# `EXTRACTION.md` -- une table tenue a la main qui derive en silence de ce qu elle decrit.
+# Sonde : remplacer une ancre par une chaine inventee fait rougir la batterie.
+run "murs et causes"           uv run --project "$ROOT" python "$ROOT/analysis/src/murs_et_causes.py" --verifier
 run "figure feuille/tranche"   uv run --project "$ROOT" python "$ROOT/analysis/src/figure_feuille_ou_tranche.py" --verifier
 # ⚠ La tuile de reference publiee. Temoins ARITHMETIQUES : une batterie qui appellerait le
 # depot serait rouge des que la connexion tombe, donc elle finirait ignoree.
@@ -963,7 +968,20 @@ fi
 # un script qu'aucun document ni aucun autre script ne nomme est mort sans que rien ne le
 # dise. Ce controle les COMPTE et les nomme. Il ne fait pas echouer les temoins -- un
 # orphelin n'est pas un bug -- mais il rend la derive visible a chaque passage.
-printf '  %-30s ' "scripts sans appelant"
+# ⚠⚠ Le document 55 est RENDU depuis le registre : s il n est pas a jour, il ment. Le
+# controle le regenere dans un temporaire et compare -- il ne reecrit rien tout seul, parce
+# qu une batterie qui repare ce qu elle mesure ne mesure plus rien.
+printf '  %-30s ' "doc 55 a jour"
+T55=$(mktemp)
+uv run --project "$ROOT" python "$ROOT/analysis/src/murs_et_causes.py" --rendre "$T55" >/dev/null 2>&1
+if diff -q "$T55" "$ROOT/docs/55_les_murs_et_leurs_causes.md" >/dev/null 2>&1; then
+  printf '✅ rendu identique au registre\n'
+else
+  printf '❌ PERIME — relancer : murs_et_causes.py --rendre\n'; FAIL=$((FAIL + 1))
+fi
+rm -f "$T55"
+
+printf '  %-30s ' "scripts sans appelant"printf '  %-30s ' "scripts sans appelant"
 ORPH=""
 for f in "$ROOT"/analysis/src/*.py "$ROOT"/tools/*.sh; do
   b=$(basename "$f")

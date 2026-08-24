@@ -1,5 +1,9 @@
 # Roadmap — fermer la chaîne géométrique, et la leur donner à lancer
 
+> ⭐⭐ **Pour « par quoi continuer », lire [`55`](55_les_murs_et_leurs_causes.md)** : un tableau
+> par mur, une ligne par cause candidate, son verdict et le document qui le porte. Ce document
+> **-ci** dit ce que le projet vise ; le `55` dit ce qui a été éliminé et ce qui reste ouvert.
+
 2026-08-19. ⚠⚠ **Deuxième version, après recadrage de l'auteur.** La première traitait le
 Grand Prize comme un problème de **lecture** et le déclarait hors de portée parce que
 l'état de l'art vient de dérouler un rouleau avec **775 heures d'annotation**. C'était à

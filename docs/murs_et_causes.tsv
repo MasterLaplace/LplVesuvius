@@ -1,0 +1,21 @@
+mur	cause	verdict	mesure	doc	ancre
+le tracé ne suit pas de feuille	la fenêtre de lecture	éliminée	relu à 128 px × 109 couches, la géométrie du corpus : le classement ne bouge pas	52_calibrer_sur_son_corpus.md	otre trace n'est PAS plate
+le tracé ne suit pas de feuille	la chaîne de rendu	éliminée	un maillage PUBLIÉ passé par notre chaîne revient à 0,873 — au-dessus de la médiane du corpus	53_le_temoin_positif_du_rendu.md	notre chaîne est fidèle
+le tracé ne suit pas de feuille	le champ de normales (NORMAL pèse 10)	éliminée	chargé pour de vrai : coût par génération ×29, trajectoire INCHANGÉE sur 118 générations	26_le_champ_de_direction.md	trajectoire n'a toujours pas bougé
+le tracé ne suit pas de feuille	le plafond de générations	éliminée	budget ×3,3 : aire ×11,5, α +0,89 → +0,95, sous le bruit du tireur (0,16)	50_le_rendu_attendait_la_memoire.md	sous le bruit
+le tracé ne suit pas de feuille	le niveau de pyramide	éliminée	0,02 d'écart entre niveaux 0 et 1, pour une résolution de 0,20	50_le_rendu_attendait_la_memoire.md	pyramide préserve
+le tracé ne suit pas de feuille	la prédiction de surface (ps256 contre m7)	éliminée	lues correctement, les deux familles sont indiscernables : 0,159 contre 0,164 – 0,198	54_cinq_rendus_vides.md	sont au même endroit
+le tracé ne suit pas de feuille	la graine, c'est-à-dire l'endroit	ouverte	le 2×2 croisé concluait « l'endroit décide » — sur huit rendus VIDES. La question est reposée intacte	54_cinq_rendus_vides.md	on n'a jamais regardé cet endroit
+le tracé ne suit pas de feuille	le traceur est un tirage, pas une fonction	confirmée	13 traces propres sur 14 à paramètres identiques ; toute comparaison à un seul tirage ne vaut rien	30_le_traceur_est_un_tirage.md	tirage
+le tracé ne suit pas de feuille	ce qui est établi : la surface est EN TRAVERS de l'empilement	confirmée	des spires coupées en travers, vues à l'image à étendue égale contre une feuille publiée	25_une_graine_choisie_sur_la_planeite.md	EN TRAVERS
+les patchs publiés ne se recollent pas	raccorder deux segments officiels	éliminée	l'outil exige des surfaces qui se recouvrent, et il n'existe AUCUN candidat — mesuré sur 4,5 Mo de catalogue	44_ou_la_chaine_se_trouve.md	AUCUN candidat
+les patchs publiés ne se recollent pas	un patch par feuille, pas par région	confirmée	la paire la plus proche est à 79 µm, soit environ deux fois le seuil de séparation	44_ou_la_chaine_se_trouve.md	une colonne, pas une bande
+l'extension tangentielle est un point fixe	augmenter le budget d'un seul coup	éliminée	budget 200 : 28,6 cm² mais 25 036 auto-intersections et α = +1,313, la surface se replie sur elle-même	44_ou_la_chaine_se_trouve.md	NE tient pas
+l'extension tangentielle est un point fixe	enchaîner rogner puis étendre	éliminée	le cycle converge vers un point fixe autour de 6 cm² : chaque tour regagne ce qu'il vient de perdre	44_ou_la_chaine_se_trouve.md	point fixe autour de 6 cm²
+l'extension tangentielle est un point fixe	une extension UNIQUE, puis rognage	confirmée	4,28 → 12,97 cm² à α = +0,000, ramenée à 6,02 cm² propres, soit +41 % de matière validée	44_ou_la_chaine_se_trouve.md	+41 %
+l'extension tangentielle est un point fixe	la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour	ouverte	jamais tentée, et vérifié dans la source : l'outil n'a aucun mode qui la fasse	44_ou_la_chaine_se_trouve.md	jamais tentée
+la chaîne casse au sixième tour	le pas du rayon	confirmée	halvé de 1,0 à 0,5 : 4 spires convergentes sur 7 deviennent 6 sur 7, et la rupture disparaît — gratuitement	43_la_chaine_des_spires.md	6/7 convergent, 0 casse
+la chaîne casse au sixième tour	halver le pas indéfiniment	éliminée	il y a un OPTIMUM à 0,25 : à 0,125 l'α moyen remonte de +0,102 à +0,327	43_la_chaine_des_spires.md	pas au bout
+la chaîne casse au sixième tour	le sens de croissance (in contre out)	éliminée	mesuré au lieu d'être supposé : ni meilleur, ni pire	43_la_chaine_des_spires.md	ni meilleur, ni pire
+la chaîne casse au sixième tour	juger par le compte d'auto-intersections	éliminée	c'est une propriété de l'échantillonnage autant que de la surface : le même maillage décimé passe de 240 à 49	43_la_chaine_des_spires.md	ne mesure rien
+la chaîne casse au sixième tour	juger sur un seul rendu	éliminée	mesuré AVANT de s'en servir, et il ne marche pas	43_la_chaine_des_spires.md	il ne marche pas
