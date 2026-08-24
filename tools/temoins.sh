@@ -720,6 +720,11 @@ run "commandes du README"      "$ROOT/tools/readme_apparie.sh" --verifier
 # beta = 0, donc « propriete de la surface », alors qu elle dit seulement qu elle ne peut pas
 # monter plus haut. Mesure : 104 series sur pic_intensite_median.
 run "critere relatif"          uv run --project "$ROOT" python "$ROOT/analysis/src/critere_relatif.py" --verifier
+# ⚠⚠ La calibration d un corpus. Ses sondes centrales sont des REFUS : deux geometries dans
+# un meme fichier (deux balayages concatenes ne calibrent rien), une geometrie ni lue ni
+# declaree, et une geometrie declaree a la main qui doit se signaler comme telle. Ecrit
+# apres avoir declare « 65 couches » sur un corpus qui en a 109.
+run "calibration du corpus"    uv run --project "$ROOT" python "$ROOT/analysis/src/calibration_corpus.py" --verifier
 # ⚠⚠ L effet de la TAILLE DE FENETRE sur le relief. Sa sonde centrale est le SIGNE de
 # l exposant : il doit etre NEGATIF (une fenetre plus large moyenne plus, donc ecrase
 # l amplitude), et son ampleur comparable a celle de la profondeur -- c est ce qui justifie

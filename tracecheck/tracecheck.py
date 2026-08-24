@@ -218,6 +218,13 @@ CSV_FIELDS: tuple[tuple[str, str], ...] = (
     ("pairs", "{neighbour_pairs}"),
     ("coherence_reliable", "{coherence_reliable:d}"),
     ("windows", "{windows_with_papyrus}"),
+    # ⚠⚠ LA GEOMETRIE DE LECTURE VOYAGE AVEC LES NOMBRES. Paye deux fois le 2026-08-24 : un
+    # seuil et deux taux d erreur transportes d un instrument a un autre, tous deux faux.
+    # `relief` depend de la profondeur lue (exposant +1,01) ET de l etendue dans le plan
+    # (exposant -0,83), donc une table de calibration qui ne dit pas dans quelle fenetre
+    # elle a ete lue ne calibre rien. Ces deux colonnes rendent le fichier auto-descriptif.
+    ("layers", "{layers}"),
+    ("window_px", "{window_px}"),
 )
 
 
@@ -233,6 +240,8 @@ def csv_row(out: dict) -> str:
     """
     d = dict(out)
     d.setdefault("relief", 0.0)
+    d.setdefault("layers", 0)
+    d.setdefault("window_px", 0)
     d["coherence_reliable"] = int(bool(d.get("coherence_reliable")))
     return ",".join(fmt.format(**d) for _, fmt in CSV_FIELDS)
 
@@ -343,6 +352,9 @@ def judge(zarr_url: str, level: int, voxel_um: float, side: int, blocks: int,
         # ne se trompe jamais. Le calculer ne coute rien : la colonne est deja lue.
         "relief": float(np.median(reliefs)) if reliefs else 0.0,
         "relief_floor": RELIEF_FLOOR,
+        # ⚠ L etendue dans le plan d une fenetre de lecture, en pixels : c est un morceau
+        # du zarr, donc `hy` par `hx`. Rapportee parce que le relief en depend.
+        "window_px": int(hy),
         "offset_um": shift * voxel_um,
         "residual_um": float(np.median(residual)) * voxel_um,
         "residual_p90_um": float(np.percentile(residual, 90)) * voxel_um,
