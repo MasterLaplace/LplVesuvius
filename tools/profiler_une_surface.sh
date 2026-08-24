@@ -44,6 +44,11 @@ voxel_au_niveau()    { python3 -c "print($1 * 2**$2)"; }
 # couches. Sans cette fonction on raisonne sur 40 et 81 -- rapport 2,03, admissible --
 # alors que le verdict verra 41 et 81, rapport 1,98, et REFUSERA apres deux rendus.
 couches_effectives() { python3 -c "print(2 * ($1 // 2) + 1)"; }
+# ⚠⚠ Une FONCTION et pas un test en ligne, pour que la sonde porte sur le COMPORTEMENT et
+# pas sur une orthographe. Ce depot a paye ce matin meme une sonde qui visait un appel ecrit
+# en une ligne et laissait passer le meme appel ecrit sur deux : elle attrapait la facon
+# d ecrire la regle, jamais la regle.
+garder_rendu() { [ "${GARDER_RENDU:-0}" = 1 ]; }
 
 if [ "${1:-}" = "--verifier" ]; then
   ok=0; n=0
@@ -122,6 +127,29 @@ if [ "${1:-}" = "--verifier" ]; then
   L_RESOL=$(grep -n '^DEST=$(cd' "$ROOT/tools/profiler_une_surface.sh" | cut -d: -f1 | head -1)
   chk "... et la destination est creee avant d etre resolue" \
       '[ -n "$L_MKDIR" ] && [ -n "$L_RESOL" ] && [ "$L_MKDIR" -lt "$L_RESOL" ]'
+  # ⚠⚠ La pile rendue est le seul artefact relisible a une AUTRE geometrie. Les trois
+  # sondes portent sur la fonction elle-meme : par defaut on jette, `1` garde, et rien
+  # d autre ne garde -- un `GARDER_RENDU=oui` qui conserverait remplirait le disque en
+  # silence a 562 Mo la pile.
+  chk "par defaut la pile est jetee" '! ( unset GARDER_RENDU; garder_rendu )'
+  chk "GARDER_RENDU=1 la conserve" 'GARDER_RENDU=1 garder_rendu'
+  chk "une autre valeur ne garde pas" '! GARDER_RENDU=oui garder_rendu'
+  # ⚠⚠ Le garde de taille cherche un RENDU, pas un fichier dont le chemin contient le mot.
+  # Sonde : un arbre ou le maillage vit sous un dossier nomme `..._rendu` -- exactement le
+  # cas qui a refuse quatre surfaces le 2026-08-24.
+  T_REF=$(mktemp -d)
+  mkdir -p "$T_REF/temoin_rendu/morceaux/m0" "$T_REF/vrai/rendu_161"
+  : > "$T_REF/temoin_rendu/morceaux/m0/x.tif"
+  : > "$T_REF/vrai/rendu_161/000.tif"
+  chk "un maillage sous un dossier « ...rendu » n est pas pris pour un rendu" \
+      '[ -z "$(find "$T_REF/temoin_rendu/morceaux" \( -path "*/rendu/*" -o -path "*/rendu_*/*" \) -name "*.tif" 2>/dev/null)" ]'
+  chk "... alors qu un vrai rendu est bien trouve" \
+      '[ -n "$(find "$T_REF/vrai" \( -path "*/rendu/*" -o -path "*/rendu_*/*" \) -name "*.tif" 2>/dev/null)" ]'
+  chk "... et l ancienne forme, elle, se trompait" \
+      '[ -n "$(find "$T_REF/temoin_rendu/morceaux" -path "*rendu*" -name "*.tif" 2>/dev/null)" ]'
+  rm -rf "$T_REF"
+  chk "le cache part dans tous les cas" \
+      '[ "$(grep -c '"'"'^    rm -rf "$W/cache"$'"'"' "$ROOT/tools/profiler_une_surface.sh")" = 1 ]'
   echo "$([ $ok = 0 ] && echo 'ALL PASS' || echo FAILURES) ($ok failures, $n checks)"
   exit $ok
 fi
@@ -156,7 +184,15 @@ echo "== niveau $NIVEAU  (voxel ${UM} µm)  ·  $ETIQUETTE"
 # ⚠ La taille est estimee depuis un rendu DEJA fait de la meme surface, s il en existe un :
 # c est la seule facon de la connaitre sans rendre. Sans reference on n avertit pas -- une
 # garde qui devine serait pire que pas de garde.
-REF=$(find "$(dirname "$PLAT")" -path "*rendu*" -name "*.tif" 2>/dev/null | head -1)
+# ⚠⚠ LE COMPOSANT DE CHEMIN, PAS LA SOUS-CHAINE. La premiere version cherchait `*rendu*`
+# n importe ou dans le chemin -- donc n importe quel DOSSIER dont le nom contient « rendu »
+# empoisonnait l estimation. Paye le 2026-08-24 : les morceaux du temoin vivent sous
+# `data/temoin_rendu/`, le find y a trouve le `x.tif` du MAILLAGE (119 x 120 points de
+# grille), et le garde a refuse quatre surfaces parfaitement rendables en annoncant « ~119
+# px de cote » -- pour des surfaces qui en font 2400. Un maillage n est pas un rendu, et la
+# seule chose qui les distingue de facon fiable est le nom du DOSSIER qui les contient.
+REF=$(find "$(dirname "$PLAT")" \( -path "*/rendu/*" -o -path "*/rendu_*/*" \) \
+        -name "*.tif" 2>/dev/null | head -1)
 if [ -n "$REF" ]; then
   COTE=$(python3 "$ROOT/analysis/src/dimensions_tiff.py" "$REF" --cote 2>/dev/null || true)
   # ⚠⚠ LE NIVEAU DE LA REFERENCE, lu et non suppose. La premiere version divisait la cote
@@ -216,7 +252,14 @@ for F in $FENETRES_BASE; do
         "$W/rendu" --grid --step 200 --traced-layer $((N / 2)) --voxel-um "$UM" \
         --out "$OUT" ) > "$W/profil.log" 2>&1 \
       || { echo "   ⚠ profil n=$N échoué"; continue; }
-    rm -rf "$W/cache" "$W/rendu"
+    # ⚠⚠ Le cache part toujours -- c est du volume telecharge, reconstructible et enorme.
+    # La PILE, elle, est le seul artefact qu un second lecteur puisse relire a une AUTRE
+    # geometrie ; la jeter oblige a repayer le rendu pour poser une question differente sur
+    # la meme surface. C est exactement ce qu il a fallu faire pour situer nos traces dans
+    # leur corpus. `GARDER_RENDU=1` la conserve ; le defaut reste de la jeter, parce qu une
+    # campagne de plusieurs fenetres remplirait le disque en silence (562 Mo par pile).
+    rm -rf "$W/cache"
+    garder_rendu || rm -rf "$W/rendu"
   fi
   echo "   n=$N couches"
   PRODUITES=$((PRODUITES + 1))

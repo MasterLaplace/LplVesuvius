@@ -729,6 +729,16 @@ run "scenes pedagogiques"      "$ROOT/apprendre/rendre.sh" --verifier
 # cote) et la couche tracee doit etre le milieu de la SOUS-fenetre, pas de la pile -- la
 # donner en coordonnees de pile decalerait le profil de vingt-six couches sans rien dire.
 run "situer nos traces"        "$ROOT/tools/situer_nos_traces.sh" --verifier
+# ⚠⚠ Le decoupage d un maillage publie a la taille des notres. Trois refus y sont sondes
+# avec leur cas negatif : une bbox recopiee (deux morceaux differents DOIVENT avoir deux
+# bboxes), un morceau troue, et une repartition qui entasse les morceaux en haut de grille.
+run "decouper un tifxyz"       uv run --project "$ROOT" python "$ROOT/analysis/src/decouper_tifxyz.py" --verifier
+# ⚠⚠ Le temoin positif de notre chaine de rendu. Ses sondes portent autant sur des ABSENCES
+# que sur des presences -- ce fichier ne doit contenir ni l invocation du moteur ni le calcul
+# de la sous-fenetre, sinon la comparaison mesurerait la difference des scripts. ⚠ Les deux
+# motifs interdits y sont composes a l execution : ecrits en clair ils se matcheraient
+# eux-memes, ce qui est la forme MIROIR de l auto-match et echoue toujours.
+run "temoin du rendu"          "$ROOT/tools/temoin_du_rendu.sh" --verifier
 # ⚠ La figure de calibration. Sa sonde centrale est le seuil venu d AILLEURS : il doit etre
 # dessine, et la figure doit DIRE qu aucun point ne l atteint plutot que de laisser un vide
 # muet. Sa seconde sonde est la bande brute, verifiee pixel pour pixel entre les deux
