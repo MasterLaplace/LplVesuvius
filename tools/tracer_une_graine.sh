@@ -109,6 +109,16 @@ if [ "${1:-}" = "--verifier" ]; then
   chk "la graine m7 est refusee (5)" '[ "$rc" = 5 ]'
   chk "... et le refus dit ce qui manque" 'printf "%s" "$out" | grep -q "aucune matière scannée"'
   rm -rf "$T_OK"
+  # ⚠⚠ Le rebasage : sonder la graine ne suffit pas, le maillage sort dans le repere de la
+  # prediction. Les deux moities du meme defaut, et la seconde a ete demontree EN PRODUCTION.
+  chk "le maillage est rebasé quand la prédiction n est pas au niveau 0" \
+      'grep -q "rebaser" "$ROOT/tools/tracer_une_graine.sh"'
+  chk "... et le rendu suit le niveau de la prédiction" \
+      'grep -q -- "-g \"\$NIVEAU_RENDU\"" "$ROOT/tools/tracer_une_graine.sh"'
+  chk "... et le voxel du profil aussi" \
+      'grep -q "2\*\*\$NIVEAU_RENDU" "$ROOT/tools/tracer_une_graine.sh"'
+  # ⚠ Le facteur du rebasage est 2^niveau, pas le niveau.
+  chk "le niveau 2 rebase par 4" '[ "$((1 << 2))" = 4 ]'
   chk "et une sortie propre existe pour le hors-ligne" \
       'grep -q "SANS_SONDE" "$ROOT/tools/tracer_une_graine.sh"'
   chk "le script est appele par au moins une campagne" \
@@ -185,17 +195,41 @@ AIRE=$(grep -oE 'generated surface .* \(([0-9.]+) cm\^2\)' "$DEST/trace.log" \
        | grep -oE '\(([0-9.]+)' | tr -d '(' | tail -1)
 [ -d "$DEST/plat" ] || vc_flatten -i "$M" -o "$DEST/plat" > "$DEST/flatten.log" 2>&1
 
+# ⚠⚠ LE MAILLAGE SORT DANS LE REPERE DE LA PREDICTION, ET LE RENDU LIT LE SCAN. Sonder la
+# graine ne suffit pas -- c est la MOITIE du defaut. Demontre en production le 2026-08-24 :
+# une graine `m7` valide, sondee et acceptee, a quand meme produit un rendu entierement noir,
+# parce que son maillage sort a z ~ 9 100 (repere L2) alors que le rouleau est a z ~ 30 000
+# dans le scan. Le refus de `depth_profile` l a attrape immediatement, ce qui est exactement
+# ce pour quoi il a ete ecrit.
+#
+# ⚠ Le rendu se fait alors AU NIVEAU DE LA PREDICTION : un maillage L2 a une resolution L2,
+# donc le rendre a 2,4 µm interpolerait quatre fois entre deux points de grille -- on paierait
+# seize fois le calcul sans gagner un bit d information.
+PLAT="$DEST/plat"
+NIVEAU_RENDU=0
+if [ "$NIV" -gt 0 ]; then
+  if [ ! -d "$DEST/plat_niveau0" ]; then
+    uv run --project "$ROOT" python "$ROOT/analysis/src/niveau_du_maillage.py" \
+        --maillage "$DEST/plat" --rebaser "$DEST/plat_niveau0" --facteur "$((1 << NIV))" \
+        > "$DEST/rebase.log" 2>&1 || { echo "   ⚠ rebasage échoué" >&2; exit 6; }
+  fi
+  PLAT="$DEST/plat_niveau0"
+  NIVEAU_RENDU="$NIV"
+  echo "   maillage rebasé ×$((1 << NIV)) — rendu au niveau $NIV (voxel $(python3 -c "print($UM * 2**$NIV)") µm)"
+fi
+
 PROFILS=""
 for F in $FENETRES; do
   OUT="$DEST/profil_${F}c.json"
   if [ ! -s "$OUT" ]; then
     rm -rf "$DEST/rendu_$F"
     "$ROOT/tools/rendre_surveille.sh" "$DEST/rendu_$F" "$PATIENCE" -- \
-        -v "$DEST/cache" --remote-url "$B/$VOL" --scale 1 -g 0 -s "$DEST/plat" \
+        -v "$DEST/cache" --remote-url "$B/$VOL" --scale 1 -g "$NIVEAU_RENDU" -s "$PLAT" \
         --tif-output "$DEST/rendu_$F" -n "$F" --slice-step 1 --auto-crop \
         > "$DEST/rendu_$F.log" 2>&1 || { echo "   ⚠ rendu $F abandonné"; continue; }
     ( cd "$ROOT/inference_xpu" && uv run python ../analysis/src/depth_profile.py \
-        "$DEST/rendu_$F" --grid --step 200 --traced-layer $((F / 2)) --voxel-um "$UM" \
+        "$DEST/rendu_$F" --grid --step 200 --traced-layer $((F / 2)) \
+        --voxel-um "$(python3 -c "print($UM * 2**$NIVEAU_RENDU)")" \
         --out "$OUT" ) > "$DEST/profil_$F.log" 2>&1 || { echo "   ⚠ profil $F échoué"; continue; }
   fi
   PROFILS="$PROFILS --profil $OUT"

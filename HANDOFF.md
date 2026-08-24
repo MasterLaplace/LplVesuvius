@@ -293,8 +293,12 @@ document ne cite cette dernière. Détail : [`54`](docs/54_cinq_rendus_vides.md)
   que je cherchais pourquoi tout était lent. **Supprimer la sortie d'un rendu ne l'arrête
   pas.** Lancer en tâche de fond par l'outil prévu, et tuer **par PID**.
 
-- **`pkill -f` et `pgrep -f` matchent leur propre ligne de commande.** Payé six fois, dont
-  une où mon shell est mort (exit 144). Tuer **par PID**.
+- **`pkill -f` et `pgrep -f` matchent leur propre ligne de commande.** Payé **sept fois**,
+  dont deux où mon shell est mort (exit 144) — la seconde le 2026-08-24, dans un
+  `for p in $(pgrep -f …)` dont la boucle m'a tué moi-même. ⭐ Le remède qui marche vraiment
+  n'est pas « tuer par PID » mais **ne pas chercher par ligne de commande** :
+  `ps -eo pid,etime,comm | grep -E "vc_render|vc_grow"` ne peut pas se matcher lui-même,
+  parce que `comm` est le nom court du binaire et non la ligne complète.
 - **Une sonde qui scanne son propre fichier se matche elle-même.** Payé cinq fois. Le remède
   n'est pas de couper le motif : c'est de l'**ancrer sur la syntaxe** (début de ligne,
   position de commande).
