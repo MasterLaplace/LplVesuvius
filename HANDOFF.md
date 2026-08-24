@@ -147,13 +147,25 @@ huit candidats relus **à la géométrie du corpus** (128 px × 109 couches, `to
 
 | candidats | relief | ×plancher | rang sur 80 |
 |---|---:|---:|---|
-| `m7` c0…c4 | **0,0000** | 0,0 | **0** — sous tout le corpus |
+| ~~`m7` c0…c4~~ | ~~**0,0000**~~ | — | ⚠⚠ **retiré, voir ci-dessous** |
 | `ps256` c0…c2 | 0,164 – 0,198 | ×8,2 – ×9,9 | **1** |
 
-⭐ **Les cinq `m7` lisent zéro à TOUTES les géométries essayées** : leur platitude est réelle,
-pas un artefact de fenêtre. Les trois `ps256` lisent de la structure et restent au bas de
-leur propre rouleau. ⚠ La coupure entre les deux prédictions, que le 2×2 de `48` n'avait pas
-pu établir faute d'appuis, se voit ici **sans pente, sans deux fenêtres et sans seuil**.
+⚠⚠ **CORRIGÉ le 2026-08-24 — la ligne `m7` mesurait du VIDE.** Cette entrée affirmait que
+« les cinq `m7` lisent zéro à toutes les géométries essayées, donc leur platitude est réelle
+et non un artefact de fenêtre ». **Faux.** Les cinq piles rendues sont **entièrement noires**
+(max 0, 0,0 % de pixels allumés, sur 161 couches) parce que leur maillage est écrit dans le
+volume au **niveau 2** et a été rendu contre le **niveau 0** — le moteur a échantillonné des
+coordonnées au quart de leur vraie position, donc dans le vide. Et l'instrument a compté
+« 49 fenêtres avec matière » sur ces images noires, son seuil de matière étant **relatif au
+maximum de la pile** : sur un tableau de zéros, `>= 0,5 × 0` est vrai partout.
+⭐ Rebasé ×4 et rendu au niveau 2, `m7_c0` rend **max 255, 24,4 % de pixels allumés** : la
+surface existe. **La coupure entre les deux familles de prédiction n'est plus établie**, et
+cinq traces reviennent dans le jeu — elles n'ont jamais été lues. Détail, correctif et
+batteries : [`54`](docs/54_cinq_rendus_vides.md).
+
+⭐ Ce qui **reste** vrai : les trois `ps256` lisent de la structure (0,164 – 0,198, rang 1/80)
+et restent au bas de leur propre rouleau. Leur maillage était dans la bonne frame, et le
+correctif de l'instrument ne déplace pas leur chiffre d'un dix-millième.
 
 ⚠⚠ Corollaire à ne pas oublier : « nos traces sont plates » vaut pour `m7`, **pas** pour
 `ps256` — lues à 1024 px elles donnaient 0,046, lues à 128 px elles donnent 0,198. Détail :

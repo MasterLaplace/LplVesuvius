@@ -732,6 +732,27 @@ run "situer nos traces"        "$ROOT/tools/situer_nos_traces.sh" --verifier
 # ⚠⚠ Le decoupage d un maillage publie a la taille des notres. Trois refus y sont sondes
 # avec leur cas negatif : une bbox recopiee (deux morceaux differents DOIVENT avoir deux
 # bboxes), un morceau troue, et une repartition qui entasse les morceaux en haut de grille.
+# ⚠⚠ L INSTRUMENT QUI JUGE TOUT LE RESTE, et qui n avait AUCUNE batterie. Il produit chaque
+# chiffre de relief du projet, et son test de matiere etait relatif au maximum de la pile --
+# donc une pile ENTIEREMENT NOIRE le satisfaisait entierement, et cinq rendus vides ont ete
+# publies comme « surfaces parfaitement plates ». Les trois piles de controle sont
+# fabriquees par la batterie : noire (refusee), uniforme mais ECLAIREE (plate), et avec une
+# bosse (du relief, pic au bon endroit).
+# ⚠⚠ Le niveau de pyramide d un maillage. Un tifxyz porte des INDICES DE VOXEL, et un indice
+# ne veut rien dire sans le volume qui le numerote -- ni `meta.json`, ni `scale`, ni le
+# fichier de parametres du traceur ne le disent. Cinq traces `m7` ont ete tracees au niveau 2
+# puis rendues au niveau 0 : 161 images entierement noires, lues comme « surface plate ».
+# Les refus sont sondes autant que la reponse : rapport anisotrope, facteur non puissance de
+# deux, maillage plus grand que le volume.
+# ⚠⚠ Y a-t-il quoi que ce soit dans ces piles. Le declencheur du 2026-08-24 n a pas ete une
+# relecture mais une TAILLE DE FICHIER : 7,6 Mo contre 562 Mo pour des images de memes
+# dimensions. La sonde qui compte le plus est la LIMITE de l echantillonnage, sondee plutot
+# qu affirmee : une pile dont une seule couche porte quelque chose est declaree vide par un
+# pas qui saute cette couche, et le taire ferait de `--pas` un reglage qui change le verdict
+# sans le dire.
+run "matiere des piles"        uv run --project "$ROOT" python "$ROOT/analysis/src/matiere_des_piles.py" --verifier
+run "niveau du maillage"       uv run --project "$ROOT" python "$ROOT/analysis/src/niveau_du_maillage.py" --verifier
+run "profil de profondeur"     uv run --project "$ROOT" python "$ROOT/analysis/src/depth_profile.py" --verifier
 run "decouper un tifxyz"       uv run --project "$ROOT" python "$ROOT/analysis/src/decouper_tifxyz.py" --verifier
 # ⚠⚠ Le temoin positif de notre chaine de rendu. Ses sondes portent autant sur des ABSENCES
 # que sur des presences -- ce fichier ne doit contenir ni l invocation du moteur ni le calcul

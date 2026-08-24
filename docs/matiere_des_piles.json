@@ -1,0 +1,77 @@
+{
+  "pas": 20,
+  "piles": [
+    {
+      "pile": "data/paris4_candidats/m7_c0/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_candidats/m7_c1/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_candidats/m7_c2/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_candidats/m7_c3/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_candidats/m7_c4/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_candidats/ps256_c0/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 255,
+      "part_allumee": 0.9633434718610473,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_candidats/ps256_c1/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 255,
+      "part_allumee": 0.959818863040798,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_candidats/ps256_c2/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 255,
+      "part_allumee": 0.957643749536369,
+      "vide": false
+    },
+    {
+      "pile": "data/temoin_rendu/m7_c0_g2/rendu",
+      "couches": 21,
+      "lues": 2,
+      "max": 255,
+      "part_allumee": 0.24442144106997454,
+      "vide": false
+    }
+  ]
+}

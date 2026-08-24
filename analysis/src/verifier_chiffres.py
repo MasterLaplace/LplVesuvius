@@ -1215,6 +1215,29 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         if d.get("porte"):
             out.append(("portee du temoin negatif", [d["porte"]], p.name))
 
+    # ⚠⚠ Les piles VIDES, gardees parce que ce sont des chiffres de CORRECTION : ils disent
+    # que treize rendus publies ne mesuraient rien. Un chiffre de correction qui derive en
+    # silence laisserait la correction se defaire toute seule.
+    vides = 0
+    for nom in ("matiere_des_piles.json", "matiere_des_piles_croise.json"):
+        f = racine / "docs" / nom
+        if not f.exists():
+            continue
+        d = json.loads(f.read_text())
+        piles = d.get("piles", [])
+        vides += sum(1 for r in piles if r.get("vide"))
+        # ⚠ La part allumee la plus forte : c'est elle qui donne son sens au zero d'en face.
+        parts = [r["part_allumee"] for r in piles if r.get("part_allumee")]
+        if parts:
+            v = max(parts) * 100
+            out.append((f"part allumee la plus forte ({nom})",
+                        [f"{fr(v, 1)} %", f"{fr(v, 1)}%", f"{en(v, 1)} %", f"{en(v, 1)}%"],
+                        nom))
+    if vides:
+        out.append(("piles entierement noires",
+                    [f"{vides} rendus", f"**{vides} rendus**",
+                     f"{vides} piles", f"**{vides} piles**"], "matiere_des_piles*.json"))
+
     p = racine / "docs" / "temoins.json"
     if p.exists():
         d = json.loads(p.read_text())

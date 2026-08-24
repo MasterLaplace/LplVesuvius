@@ -150,7 +150,35 @@ def grid_profiles(folder: Path, size: int, step: int, floor: float,
         amplitude = np.where(moyennes > 0,
                              (density.max(axis=0) - density.min(axis=0))
                              / np.maximum(moyennes, 1e-9), 0.0)
-    alive = peak_value >= floor * peak_value.max()
+    # ⚠⚠ LE SEUIL DE MATIERE EST RELATIF, ET UNE PILE VIDE LE SATISFAIT ENTIEREMENT.
+    # `peak_value >= floor * peak_value.max()` demande « cette fenetre est-elle claire par
+    # rapport a la plus claire d ici ». Sur une pile ENTIEREMENT NOIRE le maximum vaut 0,
+    # donc le seuil vaut 0, donc `>= 0` est vrai partout : les 49 fenetres sont declarees
+    # « avec matiere » sur une image ou aucun pixel n est allume. C est la vérification
+    # incapable d echouer, dans l instrument qui juge tout le reste -- et elle a fait
+    # publier « les cinq m7 lisent zero, leur platitude est reelle » sur cinq rendus VIDES.
+    # Mesure : max des pixels = 0 sur les 161 couches des cinq piles m7, 255 sur ps256.
+    #
+    # ⚠ Le correctif n est PAS un seuil absolu choisi -- ce serait un nombre transporte de
+    # plus. Un pixel a zero n a pas de matiere par definition du format, sans calibration :
+    # il suffit d exiger que le pic soit STRICTEMENT positif.
+    pic_global = float(peak_value.max())
+    alive = (peak_value >= floor * pic_global) & (peak_value > 0.0)
+    # ⚠⚠ Et la pile vide se DIT, au lieu de sortir en statistiques nulles qui ressemblent a
+    # une surface plate. « il n y a rien a lire » et « ce que je lis est plat » sont deux
+    # faits differents, et les confondre est exactement ce qui vient d etre paye.
+    pile_vide = bool(pic_global <= 0.0)
+    # ⚠⚠ ON REFUSE, on ne rapporte pas. Laisser passer une pile vide produirait un profil
+    # entierement a zero et a nan -- un fichier qui a l air d un resultat, et qui a ete lu
+    # comme « surface parfaitement plate ». Le refus nomme le fait mesure (le pic global),
+    # donc l appelant sait si le rendu a echoue ou si la surface est reellement sombre.
+    if pile_vide:
+        raise RuntimeError(
+            f"{folder} : la pile est VIDE — pic global = {pic_global:g} sur "
+            f"{len(files)} couches. Ce n'est pas une surface plate, c'est un rendu qui n'a "
+            f"rien produit. Le seuil de matiere etant relatif au maximum de la pile, une "
+            f"pile noire le satisfait entierement : sans ce refus, les "
+            f"{len(windows)} fenetres sortiraient « avec matiere ».")
     peaks = np.argmax(contrast[:, alive], axis=0)
     # ⚠⚠ L'INTENSITE est le localisateur robuste, le contraste ne l'est pas. Sur les
     # piles a 7,91 µm les deux coincident ; sur un volume a 2,4 µm qui resout les fibres,
@@ -197,6 +225,9 @@ def grid_profiles(folder: Path, size: int, step: int, floor: float,
         bord_relief = centre_relief = float("nan")
 
     return {"windows": len(windows), "avec_matiere": int(alive.sum()),
+            # ⚠ Le pic global voyage AVEC le profil : un lecteur doit pouvoir voir a quel
+            # point une pile est proche du vide sans relire les images.
+            "pic_global": pic_global, "pile_vide": pile_vide,
             "amplitude_mediane": float(np.median(amp_alive)) if alive.any() else 0.0,
             "amplitude_min": float(amplitude_min),
             "fenetres_avec_relief": int(relief.sum()),
@@ -237,7 +268,12 @@ def main() -> int:
         description="Profil de profondeur : la surface est-elle dans la fenetre lue ?",
         epilog="Compare la FORME des profils, jamais les niveaux bruts.",
     )
-    parser.add_argument("folders", type=Path, nargs="+", help="repertoires de couches")
+    # ⚠ `nargs="*"` et non `"+"` : `--verifier` fabrique ses propres piles et n'a aucun
+    # repertoire a recevoir. Un drapeau de verification qui exige un argument de travail est
+    # un drapeau que personne ne lance.
+    parser.add_argument("folders", type=Path, nargs="*", help="repertoires de couches")
+    parser.add_argument("--verifier", action="store_true",
+                        help="lancer les temoins hors ligne et sortir")
     parser.add_argument("--top", type=int, default=2000)
     parser.add_argument("--left", type=int, default=2000)
     parser.add_argument("--size", type=int, default=1024)
@@ -265,6 +301,10 @@ def main() -> int:
                              "le bruit sort aux deux bords, ce qui imite une bimodalite")
     parser.add_argument("--out", type=Path, default=None)
     args = parser.parse_args()
+    if args.verifier:
+        return verifier()
+    if not args.folders:
+        parser.error("donner au moins un repertoire de couches, ou --verifier")
 
     if args.grid:
         report = []
@@ -342,6 +382,119 @@ def main() -> int:
         args.out.write_text(json.dumps(report, indent=2) + "\n")
         print(f"\necrit : {args.out}")
     return 0
+
+
+def verifier() -> int:
+    """Les temoins de l'instrument qui juge tout le reste.
+
+    ⚠⚠ CE FICHIER N'EN AVAIT AUCUN. Il produit chaque chiffre de relief de ce projet -- donc
+    le classement des candidats, la calibration, le contraste des appuis -- et rien ne
+    verifiait qu'il sait encore mesurer, ni surtout qu'il sait ECHOUER. Le prix a ete paye :
+    son test de matiere etant relatif au maximum de la pile, une pile entierement noire le
+    satisfaisait entierement, et cinq rendus VIDES ont ete publies comme « surfaces
+    parfaitement plates ».
+
+    Les piles de controle sont fabriquees ici, en memoire puis sur disque, parce que la
+    distinction qui compte ne se voit que sur trois cas cote a cote : une pile noire, une
+    pile uniformement ECLAIREE, et une pile qui porte une bosse. Les deux premieres sortaient
+    le meme verdict ; ce sont deux faits differents.
+    """
+    import shutil
+    import tempfile
+
+    import numpy as np
+    import tifffile
+
+    echecs = controles = 0
+
+    def v(nom, cond, detail=""):
+        nonlocal echecs, controles
+        controles += 1
+        if not cond:
+            echecs += 1
+            print(f"  ECHEC  {nom}" + (f"  --- {detail}" if detail else ""))
+
+    racine = Path(tempfile.mkdtemp(prefix="depth_profile_temoins_"))
+
+    def pile(nom, faire, couches=21, cote=300):
+        d = racine / nom
+        d.mkdir(parents=True, exist_ok=True)
+        for i in range(couches):
+            tifffile.imwrite(str(d / f"{i:03d}.tif"), faire(i, cote))
+        return d
+
+    def vide(_i, cote):
+        return np.zeros((cote, cote), dtype=np.uint8)
+
+    def uniforme(_i, cote):
+        # ⚠ Uniforme mais ECLAIREE, et avec du grain dans le PLAN : sans grain le contraste
+        # est nul partout et on testerait un cas degenere qui n'existe pas dans un rendu.
+        g = np.zeros((cote, cote), dtype=np.uint8)
+        g[::3, ::3] = 200
+        g[1::5, 2::5] = 120
+        return g + 40
+
+    def bosse(i, cote, centre=10, largeur=3.0):
+        # Une vraie surface : l'intensite culmine a la couche `centre`.
+        poids = float(np.exp(-((i - centre) ** 2) / (2 * largeur ** 2)))
+        return (uniforme(i, cote).astype(np.float64) * (0.2 + 0.8 * poids)).astype(np.uint8)
+
+    d_vide = pile("vide", vide)
+    d_plate = pile("plate", uniforme)
+    d_bosse = pile("bosse", bosse)
+
+    # ⚠⚠ LE CAS QUI A COUTE : une pile noire est REFUSEE, et le refus nomme le pic global.
+    try:
+        grid_profiles(d_vide, 128, 100, 0.1, 0, 10**9, 1, 10, 2.4)
+        v("une pile vide est refusee", False, "aucune exception")
+    except RuntimeError as erreur:
+        v("une pile vide est refusee", True)
+        v("... et le refus nomme le pic global", "pic global" in str(erreur), str(erreur)[:80])
+        v("... et il dit que ce n'est pas une surface plate",
+          "plate" in str(erreur), str(erreur)[:80])
+
+    plate = grid_profiles(d_plate, 128, 100, 0.1, 0, 10**9, 1, 10, 2.4)
+    v("une pile uniforme ECLAIREE n'est pas refusee", plate["avec_matiere"] > 0)
+    v("... son pic global est celui des pixels", plate["pic_global"] > 0.0,
+      str(plate["pic_global"]))
+    v("... elle n'est pas dite vide", plate["pile_vide"] is False)
+    # ⚠ C'est ICI que « plat » veut dire quelque chose : de la matiere, et pas de forme.
+    v("... et elle se lit PLATE", plate["part_plates"] == 1.0, str(plate["part_plates"]))
+    v("... donc aucune fenetre n'a de relief", plate["fenetres_avec_relief"] == 0)
+
+    forme = grid_profiles(d_bosse, 128, 100, 0.1, 0, 10**9, 1, 10, 2.4)
+    v("une pile avec bosse a du relief", forme["fenetres_avec_relief"] > 0,
+      str(forme["fenetres_avec_relief"]))
+    v("... et son amplitude depasse celle de la plate",
+      forme["amplitude_mediane"] > plate["amplitude_mediane"],
+      f"{forme['amplitude_mediane']:.4f} contre {plate['amplitude_mediane']:.4f}")
+    # ⚠⚠ La position du pic est ce qui distingue une mesure d'un argmax de bruit. La bosse
+    # est posee couche 10 sur 21, donc au tiers central.
+    v("... et son pic d'intensite tombe sur la bosse",
+      abs(forme["pic_intensite_median"] - 10) <= 1, str(forme["pic_intensite_median"]))
+    v("... donc dans le tiers central", forme["tiers_central_intensite"] > 0.5,
+      str(forme["tiers_central_intensite"]))
+
+    # ⚠ LE CAS NEGATIF DU SEUIL RELATIF, qui reste utile quand la pile n'est pas vide : une
+    # fenetre sombre a cote d'une fenetre claire doit etre ECARTEE, pas creditee d'un pic.
+    d_mixte = racine / "mixte"
+    d_mixte.mkdir()
+    # ⚠ L'image est plus large que les autres, et la zone morte assez grande pour qu'une
+    # fenetre ENTIERE y tombe : avec 300 px de cote et un pas de 100, toutes les fenetres
+    # de 128 px mordent sur la moitie eclairee, donc le controle ne pouvait pas echouer --
+    # il rendait « 4 sur 4 » et disait seulement que le decoupage chevauche.
+    for i in range(21):
+        g = bosse(i, 500)
+        g[:, 250:] = 0  # la moitie droite n'a aucune matiere
+        tifffile.imwrite(str(d_mixte / f"{i:03d}.tif"), g)
+    mixte = grid_profiles(d_mixte, 128, 100, 0.1, 0, 10**9, 1, 10, 2.4)
+    v("une moitie sans matiere est ecartee", mixte["avec_matiere"] < mixte["windows"],
+      f"{mixte['avec_matiere']} sur {mixte['windows']}")
+    v("... mais pas toutes les fenetres", mixte["avec_matiere"] > 0)
+
+    shutil.rmtree(racine, ignore_errors=True)
+    print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
+    return 1 if echecs else 0
 
 
 if __name__ == "__main__":

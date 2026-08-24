@@ -19,6 +19,12 @@ dependencies = [
     "pillow>=10.0",
     "scipy>=1.11",
     "tifffile>=2024.1",
+    # ⚠⚠ Les piles rendues sont en LZW, et `tifffile` seul REFUSE de les décoder :
+    # « <COMPRESSION.LZW: 5> requires the 'imagecodecs' package ». Sans lui, un outil dont
+    # la batterie est verte — parce qu'elle écrit ses fixtures sans compression — ne peut
+    # pas lire une seule donnée réelle. Une batterie qui passe dans un environnement où
+    # l'outil ne marche pas est une batterie qui ne couvre pas la panne.
+    "imagecodecs>=2024.1",
 ]
 
 [tool.uv]

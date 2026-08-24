@@ -1,0 +1,218 @@
+# 54 — Cinq rendus vides, lus comme cinq surfaces plates
+
+> ⚠⚠ **Correction d'un résultat publié.** [`52`](52_calibrer_sur_son_corpus.md) §6 affirme
+> que « les cinq `m7` lisent zéro à toutes les géométries essayées : leur platitude est
+> réelle, pas un artefact de fenêtre ». **C'est faux.** Leur platitude n'est pas une propriété
+> de la surface tracée : les cinq piles rendues sont **entièrement noires**, et un défaut de
+> l'instrument les a comptées comme « 49 fenêtres avec matière ».
+
+## 1. Ce qui a été mesuré
+
+Le déclencheur n'est pas une relecture. C'est une **taille de fichier** :
+
+| | pile de 161 couches | par couche |
+|---|---:|---:|
+| `ps256_c0` | 562 Mo | 3,7 Mo |
+| `m7_c0` | **7,6 Mo** | **47 Ko** |
+
+Les images ont pourtant **les mêmes dimensions** (2361 × 2341 contre 2341 × 2361). Un facteur
+80 sur des images de même taille ne peut venir que de la compression, donc du contenu. Lecture
+directe des pixels, une couche sur vingt, sur les huit candidats :
+
+| pile | couches | max | pixels allumés |
+|---|---:|---:|---:|
+| `m7_c0` … `m7_c4` (5) | 161 | **0** | **0,0 %** |
+| `ps256_c0` … `c2` (3) | 161 | 255 | 95,8 – 96,3 % |
+
+**Les cinq piles `m7` sont entièrement noires.** Aucun pixel allumé, sur aucune couche.
+
+⚠ Le coup d'œil est devenu une mesure : `analysis/src/matiere_des_piles.py`, sortie dans
+`docs/matiere_des_piles.json`. La question qu'il pose est **binaire et sans seuil** — le
+maximum de la pile est-il strictement positif — parce qu'un pixel à zéro n'a pas de matière
+par définition du format. La part allumée est **rapportée à côté** : « il y a de la matière »
+et « la pile est copieusement remplie » sont deux faits différents.
+
+⚠⚠ Sa batterie sonde une **limite** plutôt que de l'affirmer : une pile dont une seule couche
+porte quelque chose est déclarée vide par un pas d'échantillonnage qui saute cette couche.
+Taire ça ferait de `--pas` un réglage qui change le verdict sans le dire.
+
+⚠ Et un défaut d'environnement trouvé en le lançant : le projet racine n'avait pas
+`imagecodecs`, donc `tifffile` **refusait** de décoder les piles réelles (LZW) — pendant que
+la batterie passait au vert, parce qu'elle écrit ses fixtures sans compression. Une batterie
+verte dans un environnement où l'outil ne peut lire aucune donnée réelle est une batterie qui
+ne couvre pas la panne. Ajouté aux dépendances.
+
+## 2. ⚠⚠ Pourquoi l'instrument a dit « 49 fenêtres avec matière »
+
+`analysis/src/depth_profile.py` écartait les fenêtres sans matière ainsi :
+
+```python
+alive = peak_value >= floor * peak_value.max()
+```
+
+C'est-à-dire : *cette fenêtre est-elle claire par rapport à la plus claire d'ici ?* Sur une
+pile entièrement noire, `peak_value.max()` vaut **0**, donc le seuil vaut 0, donc `>= 0` est
+vrai **partout**. Un tableau de zéros satisfait le test de matière à 100 %.
+
+C'est la **vérification incapable d'échouer**, dans l'instrument qui produit tous les chiffres
+de relief du projet — et elle a fait publier un rendu raté comme une propriété de nos traces.
+
+⚠ La docstring, elle, disait juste : « une fenêtre sans matière n'a pas de surface ».
+L'intention était bonne, l'implémentation était auto-référentielle.
+
+### Le correctif, et pourquoi ce n'est pas un seuil
+
+Un pixel à zéro n'a pas de matière **par définition du format**, sans calibration. Il suffit
+donc d'exiger que le pic soit strictement positif — aucun nombre transporté n'entre dans le
+remède :
+
+```python
+pic_global = float(peak_value.max())
+alive = (peak_value >= floor * pic_global) & (peak_value > 0.0)
+```
+
+Et une pile vide **est refusée**, pas rapportée. « Il n'y a rien à lire » et « ce que je lis
+est plat » sont deux faits différents, et les confondre est exactement ce qui vient d'être
+payé. Le refus nomme le pic global mesuré, donc l'appelant sait s'il regarde un rendu raté ou
+une surface réellement sombre.
+
+⭐ **Vérifié que le correctif ne déplace aucun chiffre réel** : `ps256_c0` relu à la géométrie
+du corpus rend `amplitude_mediane = 0,19779944`, exactement la valeur publiée (**0,1978**).
+
+### `depth_profile.py` n'avait AUCUNE batterie
+
+C'est l'instrument dont sort chaque relief de ce projet, et rien ne vérifiait qu'il sait
+encore mesurer, ni surtout qu'il sait **échouer**. Il en a une (14 contrôles), et elle
+fabrique **trois** piles parce que la distinction qui compte ne se voit qu'à trois :
+
+| pile de contrôle | ce qu'elle doit rendre |
+|---|---|
+| entièrement noire | **refusée**, en nommant le pic global |
+| uniforme mais **éclairée** | acceptée, et lue **plate** (`part_plates` = 1) |
+| avec une bosse | du relief, et le pic **sur la bosse** |
+
+Les deux premières sortaient le même verdict. Ce sont deux faits différents.
+
+## 3. ⭐⭐ La cause : un maillage au niveau 2 rendu contre le volume au niveau 0
+
+Un `tifxyz` porte des **indices de voxel**, et un indice ne veut rien dire sans le volume qui
+le numérote. Rien ne dit lequel : ni `meta.json`, ni `scale` (qui est le pas de la grille dans
+le plan, pas la résolution du volume), ni le fichier de paramètres du traceur — `seed.json`
+enregistre `voxelsize: 2.4` pour `m7` **comme pour** `ps256`.
+
+Les deux journaux, eux, impriment la forme du tableau zarr qu'ils ouvrent :
+
+```
+traceur (m7) : zarr dataset size for scale group 0 [18946, 8174, 8174]
+rendu        : zarr dataset size for group 0       [75784 32693 32693]
+rapport      : 4,0000  3,9996  3,9996        ⇒  niveau 2
+```
+
+**Le maillage `m7` est écrit dans le volume au niveau 2, et il a été rendu contre le niveau 0.**
+Le moteur a échantillonné consciencieusement des coordonnées situées au quart de leur vraie
+position, c'est-à-dire dans le vide, et a produit 161 images noires.
+
+La confirmation est dans les boîtes englobantes, avant et après remise à l'échelle :
+
+| | x | y | z |
+|---|---|---|---|
+| `m7_c0` tel quel | 1 776 – 4 084 | 4 188 – 6 489 | **7 822 – 9 500** |
+| `m7_c0` ×4 | 7 104 – 16 334 | 16 752 – 25 955 | **31 286 – 38 001** |
+| `ps256_c0` (niveau 0) | 9 628 – 11 876 | 9 461 – 11 758 | **38 723 – 39 342** |
+| segment publié `20230702185753` | 14 037 – 21 224 | 11 637 – 24 401 | 29 438 – 73 920 |
+
+Avant remise à l'échelle, `m7` est à `z ≈ 8 000` quand tout le reste du rouleau est à
+`z ≈ 30 000 – 74 000`. Après, il est **dedans**.
+
+⚠ Le diagnostic porte sur les **huit** candidats et non sur un seul :
+`analysis/src/niveau_du_maillage.py` lit les deux journaux et rend le rapport. **Les cinq
+`m7` sont au niveau 2, les trois `ps256` au niveau 0.** Les deux familles ont été tracées à
+deux résolutions, et seule l'une des deux a été rendue dans une frame qui lui correspond.
+
+### Le détecteur refuse plus qu'il n'affirme
+
+Le rapport est vérifié sur **les trois axes** — un volume peut être anisotrope, et un facteur
+lu sur un seul axe passerait sans rien dire sur un recadrage qui n'est pas une pyramide. Sont
+refusés : un rapport anisotrope, un facteur qui n'est pas une puissance de deux, un maillage
+plus grand que le volume, des dimensions dépareillées. Rendre « niveau 2 » sur des rapports
+(4, 4, 3,7) laisserait corriger un maillage vers une position qui n'est pas la bonne, et le
+résultat ressemblerait à une surface un peu de travers.
+
+### ⭐⭐ Et la surface existe : rebasée, elle rend de la matière
+
+`m7_c0` remis à l'échelle ×4 puis rendu au niveau 2 (21 couches, 591 × 586 px) :
+**max 255, 24,4 % des pixels allumés, sur toutes les couches**. Contre 0 et 0,0 % pour le même
+maillage rendu tel quel.
+
+**La trace `m7` n'est donc pas une feuille plate : c'est une surface réelle qu'on regardait au
+mauvais endroit.**
+
+⚠ La remise à l'échelle **ne crée aucun détail**. Un maillage tracé au niveau 2 reste une
+description grossière de la feuille ; le rebaser le place au bon endroit dans le volume fin,
+rien de plus. Ce qu'on mesure ensuite est le relief de **cette surface-là**, ce qui est
+précisément la question.
+
+## 3 bis. ⭐⭐ Ce n'est pas la prédiction qui décide, c'est la GRAINE — et ça touche treize rendus
+
+Le nom du produit de surface le disait depuis le début, et personne ne l'a lu :
+
+```
+20260411134726-surface-20260413141734-surface-recto-
+20260411134726-surface-20260413222639-surface-m7-L2-      ← L2
+```
+
+Le 2×2 croisé de [`48`](48_ou_monter_lexperience.md) a tracé chaque prédiction à **chaque**
+graine, quatre fois. Mesuré sur ses seize piles :
+
+| | graine `ps256` | graine `m7` |
+|---|---|---|
+| prédiction `ps256` | max 255, 94,2 – 95,9 % allumé | **max 0, 0,0 %** |
+| prédiction `m7` | max 255, jusqu'à **96,4 %** allumé | **max 0, 0,0 %** |
+
+⭐⭐ **Le vide suit la graine, pas la prédiction.** Une graine est une coordonnée ; celle de
+`m7` est choisie dans le produit `-L2-`, donc la trace qui en sort porte des coordonnées de
+niveau 2, quelle que soit la prédiction où elle a poussé.
+
+Bilan : **13 piles entièrement noires** — les 5 candidats plus les 8 cellules « graine `m7` »
+du 2×2. ⚠ Et l'observation la plus robuste de ce 2×2 — « l'indécidabilité suit la graine à
+chacune des huit répétitions » — était **exacte** ; c'est son mécanisme qui était faux. « Cet
+endroit n'a pas de feuille » n'a jamais été mesuré : **on n'a jamais regardé cet endroit**.
+
+## 4. Ce que ça change
+
+- ⚠⚠ **La ligne « `m7` : relief 0,0000, rang 0/80 » de [`52`](52_calibrer_sur_son_corpus.md)
+  ne veut rien dire** et doit être retirée du tableau des candidats. Ce n'était pas une mesure
+  de surface, c'était une mesure de vide.
+- **La coupure entre les deux familles de prédiction n'est plus établie.** [`52`](52_calibrer_sur_son_corpus.md)
+  §6 la présentait comme « nette, sans pente, sans deux fenêtres et sans seuil » : elle
+  reposait entièrement sur le zéro des `m7`.
+- ⭐ **Treize rendus reviennent dans le jeu** — cinq candidats et les huit cellules « graine
+  `m7` » du 2×2 croisé. Aucun n'a jamais été lu.
+- ⚠ **« Cet endroit n'a pas de feuille » n'est plus établi**, et c'était la conclusion la plus
+  robuste du 2×2 (8 répétitions sur 8). Ce qui reste établi, c'est que le vide **suit la
+  graine** — mais pour une raison de repère, pas de papyrus.
+- Ce qui **ne** change **pas** : les trois `ps256` (relief 0,164 – 0,198, rang 1/80) sont
+  inchangées — leur maillage était dans la bonne frame, et le correctif de l'instrument ne
+  déplace pas leur chiffre d'un dix-millième.
+
+## 5. Reproduire
+
+```bash
+# le diagnostic, sur les huit candidats
+for c in data/paris4_candidats/*/; do
+  echo "=== $(basename $c)"
+  uv run --project . python analysis/src/niveau_du_maillage.py \
+      --trace-log $c/trace.log --rendu-log $c/rendu_161.log | tail -1
+done
+
+# la remise a l'echelle d'un maillage de niveau 2 vers le niveau 0
+uv run --project . python analysis/src/niveau_du_maillage.py \
+    --trace-log data/paris4_candidats/m7_c0/trace.log \
+    --rendu-log data/paris4_candidats/m7_c0/rendu_161.log \
+    --maillage data/paris4_candidats/m7_c0/plat \
+    --rebaser data/paris4_candidats/m7_c0/plat_niveau0
+
+# les temoins, hors ligne
+uv run --project . python analysis/src/niveau_du_maillage.py --verifier
+uv run --project . python analysis/src/depth_profile.py --verifier
+```

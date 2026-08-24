@@ -13,7 +13,7 @@ propre rouleau, à la géométrie de ce corpus (128 px × 109 couches) :
 |---|---:|---|
 | corpus publié `Scroll1` | médiane **0,744** | — |
 | nos `ps256` | 0,164 – 0,198 | **1** |
-| nos `m7` | **0,0000** | **0** |
+| ~~nos `m7`~~ | ~~**0,0000**~~ | ⚠⚠ **retiré** — cinq rendus **vides**, voir [`54`](54_cinq_rendus_vides.md) |
 
 La lecture naturelle est « nos traces portent peu de structure ». Elle repose sur une
 hypothèse, et cette hypothèse n'avait **aucun contrôle** : que *notre* chaîne de rendu

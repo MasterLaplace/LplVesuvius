@@ -101,12 +101,13 @@ paramètres identiques et on juge au test de convergence
 | prédiction | aire | croisements | verdict |
 |---|---:|---:|---|
 | `ps256` | 0,317 cm² | 0 | α = **+0,89**, *suit la fenêtre*, ⚠ fragile, 100 % des fenêtres au bord |
-| `m7` | 0,317 cm² | 0 | ⚠⚠ **INDÉCIDABLE** — profil plat |
+| `m7` | 0,317 cm² | 0 | ⚠⚠ **rendu VIDE** — voir [`54`](54_cinq_rendus_vides.md) |
 
-> ⚠⚠ **Aucune des deux ne donne une trace posée sur une feuille**, et `m7` ne donne même pas
-> une mesure : son profil est plat, donc son α de 1,01 était le **rapport de deux bords de
-> fenêtre**. C'est ce que [`49`](49_alpha_ne_separe_pas_deux_pannes.md) a trouvé, et
-> l'instrument refuse désormais de conclure dans ce cas.
+> ⚠⚠ **Corrigé le 2026-08-24** : le profil de `m7` n'est pas plat, il est **vide** — sa pile
+> rendue n'a aucun pixel allumé, parce que la graine `m7` vient du produit `…-m7-L2-`, au
+> niveau 2, rendu contre le niveau 0. Son α de 1,01 restait bien le rapport de deux bords de
+> fenêtre ([`49`](49_alpha_ne_separe_pas_deux_pannes.md)), mais la cause est en amont : il n'y
+> avait rien à profiler. ⭐ Reste vrai pour `ps256` : sa trace ne se pose pas sur une feuille.
 
 ### ⚠⚠ Et relever le plafond bute sur le coût du rendu, mesuré
 
@@ -180,6 +181,25 @@ dans la même prédiction avait rendu α = +0,89 puis +1,12. Le 2×2 a donc ét�
 > ⭐⭐ **L'écart entre prédictions passe de 0,17 à 0,06** — il a *rétréci* en répétant, ce qui
 > est exactement le comportement d'une différence due au bruit. Il faudrait au moins **0,20**
 > pour distinguer. Et l'indécidabilité suit la graine à **chacune** des huit répétitions.
+
+> ⚠⚠⚠ **Corrigé le 2026-08-24 — les huit cellules « indécidables » sont huit rendus VIDES.**
+> L'observation la plus robuste de ce 2×2 (« l'indécidabilité suit la graine à chacune des
+> huit répétitions ») est exacte, et son mécanisme n'est pas celui qu'on lui prêtait. Mesuré
+> sur les seize piles (`analysis/src/matiere_des_piles.py`) :
+>
+> | | graine `ps256` | graine `m7` |
+> |---|---|---|
+> | prédiction `ps256` | max 255, ~96 % allumé | **max 0, 0,0 %** |
+> | prédiction `m7` | max 255, ~96 % allumé | **max 0, 0,0 %** |
+>
+> Ce n'est **pas la prédiction** qui décide, c'est la **graine** : la graine `m7` est choisie
+> dans `…-surface-m7-**L2**-`, un produit au **niveau 2** de la pyramide, donc la trace qui en
+> sort porte des coordonnées de niveau 2 et son rendu au niveau 0 tombe dans le vide. Le `L2`
+> était dans le nom du fichier depuis le début, et rien ne le lisait.
+>
+> ⭐ Donc « cet endroit n'a pas de feuille » n'a jamais été mesuré : **on n'a jamais regardé
+> cet endroit**. Détail, correctif de l'instrument et batteries :
+> [`54`](54_cinq_rendus_vides.md).
 
 > ⚠⚠ **Corrigé le 2026-08-23.** La plupart de ces cellules rendent l'identité **+1,0135** du
 > couple de fenêtres ([`51`](51_une_pente_a_deux_appuis.md)) : leur accord est arithmétique

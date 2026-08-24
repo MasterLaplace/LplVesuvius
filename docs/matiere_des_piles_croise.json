@@ -1,0 +1,133 @@
+{
+  "pas": 20,
+  "piles": [
+    {
+      "pile": "data/paris4_croise/m7_sur_graine_m7/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise/m7_sur_graine_ps256/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 255,
+      "part_allumee": 0.9626128497460865,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise/ps256_sur_graine_m7/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise/ps256_sur_graine_ps256/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 255,
+      "part_allumee": 0.9632842485298049,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise_r3/m7_sur_graine_m7_r1/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise_r3/m7_sur_graine_m7_r2/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise_r3/m7_sur_graine_m7_r3/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise_r3/m7_sur_graine_ps256_r1/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 255,
+      "part_allumee": 0.9387259290771425,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise_r3/m7_sur_graine_ps256_r2/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 255,
+      "part_allumee": 0.9640893320225397,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise_r3/m7_sur_graine_ps256_r3/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 255,
+      "part_allumee": 0.9642952868862799,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise_r3/ps256_sur_graine_m7_r1/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise_r3/ps256_sur_graine_m7_r2/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise_r3/ps256_sur_graine_m7_r3/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 0,
+      "part_allumee": 0.0,
+      "vide": true
+    },
+    {
+      "pile": "data/paris4_croise_r3/ps256_sur_graine_ps256_r1/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 255,
+      "part_allumee": 0.9570079625226076,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise_r3/ps256_sur_graine_ps256_r2/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 255,
+      "part_allumee": 0.9420720996487256,
+      "vide": false
+    },
+    {
+      "pile": "data/paris4_croise_r3/ps256_sur_graine_ps256_r3/rendu_161",
+      "couches": 161,
+      "lues": 9,
+      "max": 255,
+      "part_allumee": 0.9590985959445902,
+      "vide": false
+    }
+  ]
+}

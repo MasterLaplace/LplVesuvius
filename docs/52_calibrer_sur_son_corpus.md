@@ -133,22 +133,30 @@ de 109 :
 
 | candidats | relief | ×plancher | rang sur 80 |
 |---|---:|---:|---|
-| `m7` c0…c4 (5) | **0,0000** | 0,0 | **0** |
+| ~~`m7` c0…c4 (5)~~ | ~~**0,0000**~~ | — | ⚠⚠ **retiré** |
 | `ps256` c0…c2 (3) | 0,164 – 0,198 | ×8,2 – ×9,9 | **1** |
 
-> ⭐⭐ **Les cinq candidats `m7` lisent exactement zéro, même à la géométrie du corpus.**
-> Leur platitude n'est donc **pas** un artefact de fenêtre : elle est réelle, à toutes les
-> géométries essayées, et elle les place **sous la totalité du corpus publié** — sous le
-> minimum de 0,040 lui-même.
+> ⚠⚠ **CORRIGÉ le 2026-08-24 — la ligne `m7` ne mesurait pas une surface, elle mesurait du
+> vide.** Ce document a affirmé ici que « les cinq `m7` lisent exactement zéro, même à la
+> géométrie du corpus, donc leur platitude est réelle et non un artefact de fenêtre ».
+> **C'est faux.** Les cinq piles rendues sont **entièrement noires** — aucun pixel allumé sur
+> aucune des 161 couches — parce que leur maillage est écrit dans le volume au **niveau 2** et
+> qu'il a été rendu contre le **niveau 0** : le moteur a échantillonné des coordonnées situées
+> au quart de leur vraie position, donc dans le vide.
 >
-> ⚠ Ce qui corrige une fois de plus la formulation d'il y a deux paragraphes : « notre trace
-> n'est pas plate » vaut pour `ps256`, **pas pour `m7`**.
+> Et l'instrument a compté « 49 fenêtres avec matière » sur ces images noires, parce que son
+> seuil de matière était **relatif au maximum de la pile** : sur un tableau de zéros,
+> `>= 0,5 × 0` est vrai partout. Détail complet, correctif et batterie :
+> [`54`](54_cinq_rendus_vides.md).
+>
+> ⭐ Conséquence : **la coupure entre les deux familles de prédiction n'est plus établie** —
+> elle reposait entièrement sur ce zéro. Et cinq traces reviennent dans le jeu : elles n'ont
+> jamais été lues.
 
-⭐ Et les trois `ps256` sont **toutes** au rang 1 sur 80 : elles lisent de la structure, huit
-à dix fois le plancher, et restent au bas de leur propre rouleau. La coupure entre les deux
-prédictions, que le 2×2 de `48` n'avait pas pu établir faute d'appuis, se voit ici sans
-ambiguïté — **par une grandeur qui n'a besoin ni de pente, ni de deux fenêtres, ni de
-seuil**.
+⭐ Ce qui **reste** vrai : les trois `ps256` sont **toutes** au rang 1 sur 80 — elles lisent
+de la structure, huit à dix fois le plancher, et restent au bas de leur propre rouleau. Leur
+maillage était dans la bonne frame, et le correctif de l'instrument ne déplace pas leur chiffre
+d'un dix-millième (`0,19779944` avant comme après).
 
 ⚠ La sous-fenêtre est **calculée et centrée**, jamais posée : une pile de 161 couches lue
 sur 109 laisse 26 de chaque côté, et la couche tracée est le milieu de la **sous-fenêtre**,
