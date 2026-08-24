@@ -212,6 +212,30 @@ prédiction dont elles sortent, portent **quatre à cinq fois moins** de structu
 que l'avant-dernier segment publié de leur propre rouleau — pendant qu'un maillage publié
 passé par la même chaîne revient **au-dessus de la médiane**.
 
+#### ⭐⭐⭐ ET EN REGARDANT : ce ne sont pas des feuilles, ce sont des spires en travers
+
+Question de l'auteur devant la figure des piles vides : *« un jour on aura une vue des vraies
+feuilles aplaties ou bien ? »*. Le dépôt mesurait le relief depuis des semaines **sans jamais
+mettre une couche publiée à côté d'une des nôtres**. Fait, à étendue égale (512 voxels de
+côté, 1,2 mm) et avec **la même chaîne de rendu** pour les trois dernières :
+
+| vignette | ce qu'on voit | relief |
+|---|---|---:|
+| référence publiée | une **feuille de face** : fibres, mouchetures, déchirures | 0,791 |
+| maillage publié, **notre** rendu | une feuille aussi : couverture continue, fibres | 0,873 |
+| `ps256_c0` | des **rubans clairs séparés de vide**, des dizaines, parallèles | 0,198 |
+| `m7_c0` | la même chose, plus serrée | 0,159 |
+
+⭐⭐ **Ce ne sont pas deux qualités du même objet, ce sont deux objets.** Nos traces ne suivent
+pas une feuille, elles en **traversent plusieurs**. Et c'est exactement ce que le relief disait
+en moins lisible : une surface posée sur une feuille traverse air → papyrus → air, donc grande
+amplitude ; une surface transverse rencontre du papyrus à toutes les profondeurs, donc profil
+plat.
+
+⚠ **La réponse à la question posée est NON** : ce dépôt n'a jamais produit une vue de vraie
+feuille aplatie. Il en a mesuré l'absence de plusieurs façons sans jamais la regarder.
+Figure et détail : [`54`](docs/54_cinq_rendus_vides.md) §3 quinquies.
+
 #### ⭐ L'audit du dépôt entier : 31 piles vides sur 322, et le rayon de souffle est borné
 
 322 piles rendues (175 Go) lues une couche sur quarante : **291 avec matière, 31 noires**,

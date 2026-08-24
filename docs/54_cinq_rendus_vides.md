@@ -247,6 +247,48 @@ que soit la prédiction dont elles sortent, portent quatre à cinq fois moins de
 profondeur que l'avant-dernier segment publié de leur propre rouleau** — pendant qu'un
 maillage publié passé par la même chaîne revient au-dessus de la médiane.
 
+## 3 quinquies. ⭐⭐⭐ Et en REGARDANT : ce ne sont pas des feuilles, ce sont des spires en travers
+
+Question de l'auteur, devant la figure précédente : *« c'est toujours la vue en tranche, mais
+un jour on aura une vue des vraies feuilles aplaties ou bien ? »*. Elle méritait une réponse
+mesurée, et elle en avait une — le dépôt mesurait le relief depuis des semaines **sans jamais
+mettre une couche publiée à côté d'une des nôtres**.
+
+![une feuille aplatie, ou des spires vues de côté](images/54_feuille_ou_tranche.png)
+
+*Les quatre vignettes couvrent **la même étendue de papyrus** — 512 voxels de côté, soit
+1,2 mm — et le programme **refuse** de dessiner si ce n'est pas le cas : comparer une tuile de
+512 voxels à une de 2400 ferait passer une différence d'échelle pour une différence de
+surface. Les trois dernières sortent de **la même chaîne de rendu**.*
+
+| vignette | ce qu'on voit | relief |
+|---|---|---:|
+| référence publiée (surface-volume de la communauté) | une **feuille de face** : fibres horizontales, mouchetures, déchirures | 0,791 |
+| le maillage publié passé par **notre** chaîne | une feuille aussi : couverture continue, fibres, zones arrachées | 0,873 |
+| `ps256_c0`, notre trace | des **rubans clairs séparés de vide**, des dizaines, parallèles | 0,198 |
+| `m7_c0`, notre trace | la même chose, encore plus serrée | 0,159 |
+
+> ⭐⭐⭐ **Ce ne sont pas deux qualités du même objet, ce sont deux objets.** Une surface
+> publiée montre du papyrus *vu de face*. Nos traces montrent ce qui ressemble à des **spires
+> coupées en travers** : la surface tracée ne suit pas une feuille, elle en traverse
+> plusieurs.
+
+⭐ Et c'est **exactement ce que le relief disait**, en moins lisible : une surface bien posée
+sur une feuille traverse air → papyrus → air en profondeur, donc son profil a une grande
+amplitude ; une surface transverse rencontre du papyrus à toutes les profondeurs, donc son
+profil est plat. 0,79 et 0,87 contre 0,16 et 0,20.
+
+⚠ **La chaîne de rendu est innocentée une seconde fois, et par l'image cette fois** : les
+vignettes 2, 3 et 4 sortent du même moteur avec les mêmes réglages. Seule l'entrée change, et
+la catégorie du résultat change avec elle.
+
+⚠ Ce que ça ne dit pas : *pourquoi* le traceur produit une surface transverse. C'est la
+question suivante, et elle n'a pas de réponse ici.
+
+⭐ La réponse à la question posée, enfin, est **non** : ce dépôt n'a **jamais** produit une
+vue de vraie feuille aplatie. Il en a mesuré l'absence de plusieurs façons sans jamais la
+regarder.
+
 ## 4. Ce que ça change
 
 - ⚠⚠ **La ligne « `m7` : relief 0,0000, rang 0/80 » de [`52`](52_calibrer_sur_son_corpus.md)
@@ -345,8 +387,22 @@ uv run --project . python analysis/src/figure_piles_vides.py \
     --temoin data/paris4_candidats/ps256_c0/rendu_161 \
     --sortie docs/images/54_piles_vides.png --json docs/figure_piles_vides.json
 
+# la tuile de reference publiee, puis la figure feuille-ou-tranche
+uv run --project . python analysis/src/tuile_surface_publiee.py \
+    --sortie data/temoin_rendu/reference_publiee.tif
+uv run --project . python analysis/src/figure_feuille_ou_tranche.py \
+    --reference data/temoin_rendu/reference_publiee.tif \
+    --publie data/temoin_rendu/rendus/morceau_00/g0_n161/rendu \
+    --nos-traces data/paris4_candidats/ps256_c0/rendu_161 \
+                 data/temoin_rendu/m7_c0_lisible/rendu \
+    --noms ps256_c0 m7_c0 --reliefs 0.7912 0.8726 0.1978 0.1589 \
+    --sortie docs/images/54_feuille_ou_tranche.png \
+    --json docs/figure_feuille_ou_tranche.json
+
 # les temoins, hors ligne
 uv run --project . python analysis/src/niveau_du_maillage.py --verifier
+uv run --project . python analysis/src/tuile_surface_publiee.py --verifier
+uv run --project . python analysis/src/figure_feuille_ou_tranche.py --verifier
 uv run --project . python analysis/src/depth_profile.py --verifier
 uv run --project . python analysis/src/matiere_des_piles.py --verifier
 uv run --project . python analysis/src/matiere_au_point.py --verifier

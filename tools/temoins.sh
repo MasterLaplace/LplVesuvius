@@ -759,6 +759,14 @@ run "situer nos traces"        "$ROOT/tools/situer_nos_traces.sh" --verifier
 # laissait une legende passer par-dessus la suivante, donc deux panneaux cessaient de dire ce
 # qu ils montraient. Et le cadre rouge n apparait QUE s il y a une pile vide -- cas negatif
 # sonde, sinon la figure serait trois vignettes sans verdict.
+# ⚠⚠ La figure feuille-ou-tranche, nee d une question de l auteur : « un jour on aura une vue
+# des vraies feuilles aplaties ? ». Sa sonde centrale est le REFUS de deux etendues
+# differentes -- comparer une tuile de 512 voxels a une de 2400 ferait passer une difference
+# d echelle pour une difference de surface, ce qui est la faute que tout ce depot traque.
+run "figure feuille/tranche"   uv run --project "$ROOT" python "$ROOT/analysis/src/figure_feuille_ou_tranche.py" --verifier
+# ⚠ La tuile de reference publiee. Temoins ARITHMETIQUES : une batterie qui appellerait le
+# depot serait rouge des que la connexion tombe, donc elle finirait ignoree.
+run "tuile publiee"            uv run --project "$ROOT" python "$ROOT/analysis/src/tuile_surface_publiee.py" --verifier
 run "figure des piles vides"   uv run --project "$ROOT" python "$ROOT/analysis/src/figure_piles_vides.py" --verifier
 run "matiere au point"         uv run --project "$ROOT" python "$ROOT/analysis/src/matiere_au_point.py" --verifier
 run "matiere des piles"        uv run --project "$ROOT" python "$ROOT/analysis/src/matiere_des_piles.py" --verifier
