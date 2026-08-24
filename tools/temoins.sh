@@ -784,6 +784,17 @@ run "figure des piles vides"   uv run --project "$ROOT" python "$ROOT/analysis/s
 # (`-L0-`, `-L2-`). L autre sens obligerait a deviner le niveau, ce qui est l erreur d origine.
 # ⚠ La regle d admissibilite porte sur le BLOC et pas sur le voxel exact : la graine `ps256`
 # qui a produit huit traces avec matiere lit ZERO a son voxel, 255 autour.
+# ⚠⚠ La projection tangentielle -- ce que `44` §7 nommait comme la seule chaine jamais
+# tentee. Sonde centrale : l axe le plus long est mesure par CHEMIN PARCOURU et non par somme
+# des tangentes locales, qui vaut « points fois pas » dans les deux directions et ne
+# departage rien. Et la difference finie ne doit pas enjamber un trou : elle aurait la bonne
+# forme et le mauvais sens.
+run "projection tangentielle"  uv run --project "$ROOT" python "$ROOT/analysis/src/projeter_tangentiel.py" --verifier
+# ⚠⚠ La campagne de portee. Ses sondes portent sur la COLONNE et pas sur le mot : l en-tete a
+# gagne « mediane » pendant que l extraction rendait `bloc_absent`, et un grep du mot restait
+# vert. ⚠ Et dans un `chk` qui est une FONCTION, $1 est l argument de la fonction, pas la
+# colonne -- le symptome « $3: unbound variable » ne ressemble pas a la cause.
+run "portée tangentielle"      "$ROOT/tools/portee_tangentielle.sh" --verifier
 run "graine admissible"        uv run --project "$ROOT" python "$ROOT/analysis/src/graine_admissible.py" --verifier
 run "matiere au point"         uv run --project "$ROOT" python "$ROOT/analysis/src/matiere_au_point.py" --verifier
 run "matiere des piles"        uv run --project "$ROOT" python "$ROOT/analysis/src/matiere_des_piles.py" --verifier

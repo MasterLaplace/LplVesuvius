@@ -132,6 +132,7 @@ def balayer(maillage: Path, zarr_url: str, niveau: int, combien: int = 25,
     # — or sur une nappe qui déborde du scan, savoir quelle partie est dedans est
     # exactement ce dont on a besoin pour découper un morceau lisible.
     trouves = []
+    valeurs: list[int] = []
     for k in range(0, len(rs), pas):
         r, c = int(rs[k]), int(cs[k])
         x, y, z = (int(round(float(plans[n][r, c]))) for n in ("x", "y", "z"))
@@ -147,10 +148,25 @@ def balayer(maillage: Path, zarr_url: str, niveau: int, combien: int = 25,
         else:
             comptes["matiere"] += 1
             trouves.append({"grille": [r, c], "zyx": [z, y, x], "max_bloc": int(bloc.max())})
+        # ⚠⚠ LA VALEUR AU POINT, ET C'EST ELLE QUI DISCRIMINE. Le compte « matière » porte sur
+        # le BLOC de 128³ voxels, soit 307 µm de côté : à l'intérieur d'un rouleau, presque
+        # tous en contiennent. Mesuré le 2026-08-24 : une nappe projetée le long de sa
+        # tangente rendait 9/10 « matière » à 0 µm comme à 2,4 mm — une réponse identique à
+        # toutes les distances, donc une mesure qui ne mesure rien. Un point POSÉ sur du
+        # papyrus lit une valeur haute ; un point tombé entre deux spires lit près de zéro.
+        if bloc is not None:
+            valeurs.append(int(val))
     total = sum(comptes.values())
+    vals = sorted(valeurs)
     return {"maillage": str(maillage), "niveau": niveau, "sondes": total,
             "blocs_distincts": len(cache), "comptes": comptes, "exemples": exemples,
             "avec_matiere": trouves,
+            # ⚠ La médiane ET le compte de zéros : « la moitié des points sont sur du
+            # papyrus » et « aucun point n'est dans le vide » sont deux faits différents, et
+            # une nappe qui glisse hors de sa feuille perd le second avant le premier.
+            "valeurs": vals,
+            "valeur_mediane": (vals[len(vals) // 2] if vals else None),
+            "valeurs_nulles": sum(1 for x in vals if x == 0),
             "part_matiere": comptes["matiere"] / total if total else None}
 
 
@@ -230,6 +246,10 @@ def main() -> int:
         print(f"{a.maillage} au niveau {a.niveau} — {r['sondes']} points sondés")
         print(f"  matière {c['matiere']}   bloc vide {c['bloc_vide']}   "
               f"bloc absent {c['bloc_absent']}   hors du volume {c['hors_volume']}")
+        if r.get("valeur_mediane") is not None:
+            print(f"  ⭐ valeur AU POINT : médiane {r['valeur_mediane']}, "
+                  f"{r['valeurs_nulles']} nulle(s) sur {len(r['valeurs'])} — "
+                  f"c'est elle qui dit si le point est SUR une feuille")
         for e in r["exemples"]:
             print(f"    refus  grille {e['grille']} → z,y,x {e['zyx']} : {e['refus']}")
         for e in r.get("avec_matiere", [])[:5]:

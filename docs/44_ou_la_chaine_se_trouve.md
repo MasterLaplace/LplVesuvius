@@ -208,6 +208,59 @@ appel ne donnent pas le même monde — et le prix demande explicitement une pip
 tangente latérale par `cross(n, t)` — c'est ainsi qu'il émet ses « côtes ». Ce qu'il produit
 est une liste de points 3D, c'est-à-dire exactement le format que `--correct` consomme.
 
+### ⚠⚠ La projection tangentielle existe — et DEUX sondes bon marché n'ont pas pu la juger
+
+`analysis/src/projeter_tangentiel.py` fait ce que ce document nommait : il projette une nappe
+le long de sa **tangente** et non de sa normale. Le fait qui rend ça simple est qu'un `tifxyz`
+**encode déjà ses propres tangentes** — la grille est une paramétrisation de la nappe, donc
+`∂P/∂u` et `∂P/∂v` se lisent par différences finies, sans remarcher le volume.
+
+⚠ L'axe est **mesuré** et non supposé : sur une grille de nappe, l'un des deux axes court le
+long de la feuille et l'autre en travers, et se tromper projette dans l'épaisseur du rouleau
+— c'est-à-dire la colonne qu'on a déjà. `axe_le_plus_long` compare les **chemins parcourus**.
+⭐ Ma première version comparait la somme des tangentes locales, qui vaut « nombre de points
+fois le pas » dans les deux directions sur une grille régulière : elle rendait le même nombre
+des deux côtés et ne départageait rien. Le témoin l'a dit au premier lancement.
+
+#### ⚠⚠ Et les deux mesures bon marché rendent le MÊME chiffre à toutes les distances
+
+`tools/portee_tangentielle.sh` projette le maillage **publié** — une nappe dont on sait qu'elle
+suit une feuille — à 0, 1, 2, 5, 10, 20 et 50 pas de grille, et mesure à chaque fois si les
+points tombent encore sur du papyrus. Le pas 0 est le **contrôle**.
+
+| pas | déplacement | bloc avec matière | valeur **au point**, médiane |
+|---:|---:|---:|---:|
+| 0 (contrôle) | 0 µm | 9/10 | 44 |
+| 1 | 48 µm | 9/10 | 42 |
+| 2 | 95 µm | 9/10 | 43 |
+| 5 | 238 µm | 9/10 | 44 |
+| 10 | 476 µm | 9/10 | 44 |
+| 20 | 952 µm | 9/10 | 42 |
+| **50** | **2,4 mm** | **9/10** | **45** |
+
+> ⚠⚠ **Une mesure qui rend le même chiffre à 0 µm et à 2,4 mm ne mesure rien**, et c'est vrai
+> des **deux** colonnes. Ni « le bloc contient de la matière » ni « la valeur au point » ne
+> peut dire si la nappe est encore *sur sa feuille*.
+
+Les raisons sont physiques et se disent en une ligne chacune :
+- un bloc zarr fait 128 voxels de côté, soit **307 µm**, quand les feuilles sont à **10–20 µm**
+  l'une de l'autre : à l'intérieur d'un rouleau, presque tout bloc contient du papyrus ;
+- un voxel isolé d'un rouleau comprimé lit un gris moyen à peu près partout, parce que les
+  interstices sont fins et souvent refermés.
+
+⭐ **Ce que ça établit** : la question « la tangente reste-t-elle sur la feuille » n'a pas de
+réponse au rabais. Ce qui la tranche est le **profil de profondeur** — air → papyrus → air —
+c'est-à-dire l'instrument que ce dépôt a déjà, et qui coûte **un rendu par pas**. La campagne
+suivante est donc chiffrée : quelques rendus, pas quelques requêtes.
+
+⚠ Deux défauts de l'outillage trouvés en chemin, tous deux de la famille « vérification
+incapable d'échouer ». La campagne a d'abord gagné une colonne « médiane » dans son **en-tête**
+pendant que son extraction rendait toujours `bloc_absent` — et la sonde restait verte parce
+qu'elle cherchait le *mot* `valeur_mediane` dans le fichier, où il figurait ailleurs. Elle
+compare désormais la **colonne** à la donnée, sur une fixture. Et dans un `chk` qui est une
+**fonction**, `$1` désigne l'argument de la fonction et non la colonne : le symptôme
+(`$3: unbound variable`) ne ressemblait pas du tout à la cause.
+
 ### ⏳ Et la question la moins chère n'avait jamais été posée
 
 Avant d'écrire un mécanisme, il fallait vérifier ce que `resume` fait déjà — c'est le seul des
