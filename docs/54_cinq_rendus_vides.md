@@ -334,6 +334,38 @@ différents — et dans le repère pleine résolution, un point où il n'y a rie
 en position de conclure. Et la cause « la graine, c'est-à-dire l'endroit » reste **ouverte** —
 avec, maintenant, un préalable écrit : *sonder la graine avant de payer le tracé*.
 
+## 3 septies. ⭐⭐⭐ Une TROISIÈME conséquence : toutes les aires `m7` sont fausses d'un facteur 16
+
+Le niveau n'était propagé nulle part. Trois choses en dépendaient, et voici la troisième.
+
+Le traceur écrit `voxelsize` dans son `seed.json` et s'en sert pour deux choses : convertir son
+aire en cm², et appliquer `min_area_cm`. On y écrivait **2,4 µm** quelle que soit la prédiction.
+Or un voxel de la prédiction `m7` fait **9,6 µm** — donc chaque longueur est sous-estimée d'un
+facteur 4, et chaque **aire d'un facteur seize**.
+
+Mesuré sur deux maillages de **même grille** (120 × 119, ~13 777 points valides) :
+
+| trace | pas de grille réel | aire annoncée | **aire réelle** |
+|---|---:|---:|---:|
+| `ps256` (L0) | 48 µm | 0,317 cm² | **0,317 cm²** |
+| `m7` (L2) | **192 µm** | 0,317 cm² | ⚠⚠ **5,079 cm²** — aire REELLE |
+
+⭐⭐ **Les deux se sont arrêtées au même nombre de points parce que `min_area_cm: 0.3` était
+évalué dans deux unités différentes.** Ce n'était pas une comparaison contrôlée, c'était le
+même plancher atteint dans deux systèmes.
+
+⚠⚠ **Donc toute comparaison d'aire entre les deux familles de prédiction est fausse d'un
+facteur 16** — y compris le tableau de [`48`](48_ou_monter_lexperience.md) §4, qui annonce
+« 0,317 cm² » des deux côtés et ressemblait à un contrôle parfait.
+
+⚠ Et une conséquence de plus, qui explique le refus rencontré en voulant comparer : un maillage
+`m7` couvre **seize fois** l'aire d'un maillage `ps256` de même grille, donc les deux ne se
+rendent pas à la même échelle et ne se lisent pas dans la même fenêtre. La comparaison
+« prédiction contre prédiction, au même endroit » **reste donc à faire**, avec des aires
+réellement appariées — et non des aires nominalement égales.
+
+`tools/tracer_une_graine.sh` écrit désormais `voxelsize = UM × 2^niveau`.
+
 ## 4. Ce que ça change
 
 - ⚠⚠ **La ligne « `m7` : relief 0,0000, rang 0/80 » de [`52`](52_calibrer_sur_son_corpus.md)

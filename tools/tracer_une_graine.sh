@@ -119,6 +119,14 @@ if [ "${1:-}" = "--verifier" ]; then
       'grep -q "2\*\*\$NIVEAU_RENDU" "$ROOT/tools/tracer_une_graine.sh"'
   # ⚠ Le facteur du rebasage est 2^niveau, pas le niveau.
   chk "le niveau 2 rebase par 4" '[ "$((1 << 2))" = 4 ]'
+  # ⚠⚠ Le voxel ecrit dans seed.json suit le niveau de la PREDICTION : sinon `min_area_cm`
+  # et l aire rapportee sont fausses d un facteur 2^(2n) -- seize au niveau 2.
+  chk "le voxel du seed suit le niveau" \
+      'grep -q "UM_PRED=\$(python3 -c \"print(\$UM \* 2\*\*\$NIV)\")" "$ROOT/tools/tracer_une_graine.sh"'
+  chk "... et c est UM_PRED qui est passe au gabarit" \
+      'grep -q "\"\$UM_PRED\" \"\$GENERATIONS\"" "$ROOT/tools/tracer_une_graine.sh"'
+  chk "le niveau 2 quadruple le voxel" '[ "$(python3 -c "print(2.4 * 2**2)")" = 9.6 ]'
+  chk "... donc seize fois l aire" '[ "$(python3 -c "print((2**2)**2)")" = 16 ]'
   chk "et une sortie propre existe pour le hors-ligne" \
       'grep -q "SANS_SONDE" "$ROOT/tools/tracer_une_graine.sh"'
   chk "le script est appele par au moins une campagne" \
@@ -175,8 +183,21 @@ if [ "${SANS_SONDE:-0}" != 1 ]; then
 fi
 
 mkdir -p "$DEST"
+# ⚠⚠ LE VOXEL ECRIT DANS seed.json EST CELUI DE LA PREDICTION, PAS CELUI DU SCAN. Le traceur
+# s en sert pour convertir son aire en cm² ET pour appliquer `min_area_cm`. Une prediction L2
+# a des voxels QUATRE fois plus gros, donc y ecrire 2,4 µm sous-estime chaque longueur d un
+# facteur 4 et chaque aire d un facteur SEIZE.
+#
+# Mesure du 2026-08-24, sur deux maillages de meme grille (120 x 119, ~13 777 points valides) :
+#   ps256 (L0) : pas de grille 48 µm  -> aire annoncee 0,317 cm², aire REELLE 0,317 cm²
+#   m7    (L2) : pas de grille 192 µm -> aire annoncee 0,317 cm², aire REELLE 5,079 cm²
+# Les deux se sont arretees au meme nombre de points parce que `min_area_cm: 0.3` etait
+# evalue dans deux unites differentes. Toute comparaison d aire entre les deux familles de
+# prediction de ce depot est donc fausse d un facteur 16 -- y compris le tableau de `48` qui
+# annonce « 0,317 cm² » des deux cotes et ressemblait a une comparaison controlee.
+UM_PRED=$(python3 -c "print($UM * 2**$NIV)")
 [ -s "$DEST/seed.json" ] || python3 - "$ROOT/artefacts/PHerc0358/seed.json" "$DEST/seed.json" \
-    "$UM" "$GENERATIONS" <<'PY'
+    "$UM_PRED" "$GENERATIONS" <<'PY'
 import json, sys
 src, dst, um, gen = sys.argv[1], sys.argv[2], float(sys.argv[3]), int(sys.argv[4])
 d = json.load(open(src)); d["voxelsize"] = um; d["generations"] = gen

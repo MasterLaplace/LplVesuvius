@@ -45,7 +45,7 @@ quoi que ce soit.
 
 > ⭐⭐ **La feuille de route est [`55`](docs/55_les_murs_et_leurs_causes.md)** — un tableau par
 > mur, une ligne par **cause candidate**, avec son verdict et le document qui le porte.
-> **21 causes, 13 éliminées, 6 confirmées, 2 ouvertes.** Un mur n'est pas une tâche, c'est un
+> **22 causes, 13 éliminées, 7 confirmées, 2 ouvertes.** Un mur n'est pas une tâche, c'est un
 > espace de causes dont on retire une entrée à la fois : lister des tâches laisse croire qu'on
 > avance quand on tourne, lister des éliminations montre l'espace rétrécir.
 >
@@ -223,6 +223,31 @@ trois quarts tombent hors du volume scanné.
 prédiction dont elles sortent, portent **quatre à cinq fois moins** de structure en profondeur
 que l'avant-dernier segment publié de leur propre rouleau — pendant qu'un maillage publié
 passé par la même chaîne revient **au-dessus de la médiane**.
+
+#### ⚠⚠⚠ TROIS conséquences du même oubli, et la troisième fausse toutes les aires
+
+Le **niveau de la prédiction** n'était propagé nulle part, et trois choses en dépendaient :
+
+1. **la graine** — un nombre L2 lu comme un nombre L0 désigne un point au quart de sa
+   position, dans le vide → 13 rendus noirs ;
+2. **le maillage** — il sort dans le repère de la prédiction, donc un rendu contre le scan
+   tombe dans le vide même avec une graine valide (démontré en production le 2026-08-24) ;
+3. ⚠⚠ **l'aire** — le traceur écrit `voxelsize` dans son `seed.json` et s'en sert pour
+   `min_area_cm` **et** pour convertir en cm². On y écrivait 2,4 µm quelle que soit la
+   prédiction ; un voxel `m7` fait **9,6 µm**, donc chaque aire est fausse d'un facteur
+   **seize**.
+
+| trace | pas de grille réel | aire annoncée | **aire réelle** |
+|---|---:|---:|---:|
+| `ps256` (L0) | 48 µm | 0,317 cm² | **0,317 cm²** |
+| `m7` (L2) | **192 µm** | 0,317 cm² | ⚠⚠ **5,079 cm²** |
+
+⭐⭐ Les deux se sont arrêtées au **même nombre de points** parce que `min_area_cm: 0.3` était
+évalué dans deux unités. Le tableau de [`48`](docs/48_ou_monter_lexperience.md) §4, qui annonce
+0,317 cm² des deux côtés, n'était pas un contrôle : c'était le même plancher dans deux systèmes.
+
+⚠ **La comparaison « prédiction contre prédiction, au même endroit » reste donc à faire**, avec
+des aires réellement appariées. Les trois correctifs sont dans `tools/tracer_une_graine.sh`.
 
 #### ⚠⚠ CORRECTION — c'est la GRAINE, pas le maillage, et une requête HTTP l'aurait dit
 

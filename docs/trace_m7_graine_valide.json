@@ -1,0 +1,34 @@
+{
+  "series": [
+    {
+      "verdict": "intermédiaire",
+      "sens": "la mesure bouge sans suivre la fenêtre — ni convergée ni clairement en travers — et 96 % des fenêtres ont leur pic AU BORD, ce qui chiffre l'étendue du mal que α ne fait que signaler",
+      "serie": [
+        [
+          41,
+          182.4
+        ],
+        [
+          161,
+          355.2
+        ]
+      ],
+      "croissance": 1.9473684210526314,
+      "elargissement": 3.926829268292683,
+      "alpha": 0.48725193455058896,
+      "marge_au_seuil": 0.212748065449411,
+      "fragile": false,
+      "amplitude": 0.048265170280331914,
+      "borne": "aucune",
+      "appuis_portent": false,
+      "reserve_appuis": "⚠⚠ les appuis ne portent pas ce verdict — la borne est « aucune », donc α vrai peut être de l'autre côté du seuil 0.7. Voir `appui_de_pente.py`",
+      "au_bord": 0.9591836734693877,
+      "reserve": true,
+      "nom": "m7_graine_valide",
+      "profils": [
+        "/home/masterlaplace/LplVesuvius/data/paris4_2x2_correct/m7_sur_graine_valide/profil_41c.json",
+        "/home/masterlaplace/LplVesuvius/data/paris4_2x2_correct/m7_sur_graine_valide/profil_161c.json"
+      ]
+    }
+  ]
+}
