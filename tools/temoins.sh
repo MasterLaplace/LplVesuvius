@@ -750,6 +750,12 @@ run "situer nos traces"        "$ROOT/tools/situer_nos_traces.sh" --verifier
 # qu affirmee : une pile dont une seule couche porte quelque chose est declaree vide par un
 # pas qui saute cette couche, et le taire ferait de `--pas` un reglage qui change le verdict
 # sans le dire.
+# ⚠⚠ Y a-t-il de la matiere a CETTE coordonnee. Une trace commence par une graine, qui est
+# une coordonnee, et une coordonnee ne veut rien dire sans le volume qui la numerote. Les
+# temoins sont ARITHMETIQUES et ne touchent pas le reseau : une batterie qui dependrait du
+# depot serait rouge des que la connexion tombe, donc elle finirait ignoree -- et c est la
+# qu elle cesse d etre une batterie.
+run "matiere au point"         uv run --project "$ROOT" python "$ROOT/analysis/src/matiere_au_point.py" --verifier
 run "matiere des piles"        uv run --project "$ROOT" python "$ROOT/analysis/src/matiere_des_piles.py" --verifier
 run "niveau du maillage"       uv run --project "$ROOT" python "$ROOT/analysis/src/niveau_du_maillage.py" --verifier
 run "profil de profondeur"     uv run --project "$ROOT" python "$ROOT/analysis/src/depth_profile.py" --verifier
