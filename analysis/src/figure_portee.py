@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 """Jusqu'où la tangente d'une nappe reste-t-elle sur la nappe ?
 
-⚠⚠ CE QUE LA FIGURE DOIT RENDRE ÉVIDENT, et qu'un tableau de trois lignes ne rend pas : la
-dégradation est **progressive et monotone**, pas un décrochement. Ce n'est pas la même
-nouvelle — un décrochement dirait « au-delà de X, rien » et donnerait un pas de chaîne franc ;
-une pente dit qu'il faut **choisir** le pas contre un budget de rendus.
+⚠⚠ CE QUE LA FIGURE DOIT RENDRE ÉVIDENT : il y a un **plateau** puis une **falaise**, et pas
+une pente. La forme décide du pas d'une chaîne tangentielle, donc elle vaut la peine d'être
+regardée plutôt que résumée.
+
+⚠ **Correction d'une conclusion que j'avais publiée une heure plus tôt** : sur trois points
+(0, 476, 2381 µm) la dégradation paraissait progressive et monotone, et je l'ai écrit. Sur
+six, elle ne l'est pas — l'amplitude MONTE jusqu'à 238 µm. Un échantillonnage grossier avait
+rendu une forme fausse et parfaitement plausible. C'est la leçon de
+[`43`](../docs/43_la_chaine_des_spires.md) §6quater sous un autre costume : les premiers
+points ne discriminent pas, et une courbe se juge là où elle change.
 
 ⭐ Deux grandeurs sur un seul axe parce qu'elles disent la même chose de deux façons :
 l'**amplitude** tombe (le profil s'aplatit) pendant que le **pic au bord** monte (la surface
@@ -98,13 +104,33 @@ def dessiner(points: list[dict], sortie: Path, anglais: bool = False) -> dict:
     d = ImageDraw.Draw(im)
     d.text((24, 16), T("jusqu'où la tangente reste-t-elle sur la feuille"), font=g1, fill=ENCRE)
 
-    xs = [p["um"] for p in points]
-    xmax = max(xs) or 1.0
+    import math
+
+    # ⚠⚠ ÉCHELLE LOGARITHMIQUE, et ce n'est pas une préférence. Les points couvrent 48 µm à
+    # 2381 µm, un facteur cinquante : en linéaire les quatre premiers s'entassent dans le
+    # premier dixième de l'axe et le PLATEAU — qui est le résultat — devient un pâté. Mesuré
+    # sur le premier tirage à six points.
+    #
+    # ⚠ Le contrôle à 0 µm n'a pas de logarithme. Il est dessiné à part, à gauche, avec une
+    # rupture d'axe visible : le fondre dans l'échelle demanderait de lui inventer une
+    # abscisse, et une abscisse inventée sur un contrôle est exactement ce qu'un contrôle ne
+    # doit pas avoir.
+    positifs = [p for p in points if p["um"] > 0]
+    controle = next((p for p in points if p["um"] <= 0), None)
+    if not positifs:
+        raise ValueError("aucun point à abscisse positive — un axe logarithmique en a besoin")
+    lo, hi = math.log10(min(p["um"] for p in positifs)), math.log10(
+        max(p["um"] for p in positifs))
+    if hi <= lo:
+        hi = lo + 1.0
+    saut = 46 if controle else 0
     # ⚠ L'axe des y est FIXÉ de 0 à 1 pour les deux grandeurs : ce sont deux fractions, et les
     # mettre chacune à sa propre échelle ferait paraître identiques deux pentes qui ne le sont
     # pas — le piège le plus commun d'un graphe à deux courbes.
     def X(v):
-        return gx + gw * (v / xmax)
+        if v <= 0:
+            return gx + 12
+        return gx + saut + (gw - saut) * (math.log10(v) - lo) / (hi - lo)
 
     def Y(v):
         return gy + gh * (1.0 - max(0.0, min(1.0, v)))
@@ -119,6 +145,11 @@ def dessiner(points: list[dict], sortie: Path, anglais: bool = False) -> dict:
         d.line([(X(p["um"]), gy + gh), (X(p["um"]), gy + gh + 5)], fill=GRIS, width=1)
         t = f"{p['um']:.0f}"
         d.text((X(p["um"]) - d.textlength(t, font=g3) / 2, gy + gh + 8), t, font=g3, fill=GRIS)
+    if controle:
+        # La rupture d'axe, dessinée : deux barres obliques entre le contrôle et l'échelle.
+        xb = gx + saut - 14
+        for k in (0, 5):
+            d.line([(xb + k, gy + gh + 6), (xb + k + 6, gy + gh - 4)], fill=GRIS, width=1)
     d.text((gx, gy + gh + 26), T("déplacement le long de la tangente") + " (µm)",
            font=g3, fill=GRIS)
 
@@ -143,7 +174,11 @@ def dessiner(points: list[dict], sortie: Path, anglais: bool = False) -> dict:
             w = d.textlength(t, font=g3)
             # ⚠ La dernière valeur s'écrit à GAUCHE de son point : à droite elle sortirait.
             tx = x - w - 8 if i == len(pts) - 1 else x + 7
-            d.text((tx, y - 6), t, font=g3, fill=couleur)
+            # ⚠⚠ Une valeur sur deux passe SOUS son point. Sans ça, six étiquettes serrées
+            # sur un plateau se recouvrent et le plateau devient illisible — c'est-à-dire que
+            # la figure cache précisément ce qu'elle existe pour montrer.
+            ty = y - 6 if i % 2 == 0 else y + 4
+            d.text((tx, ty), t, font=g3, fill=couleur)
 
     d.text((X(points[0]["um"]) - 12, gy - 16), T("contrôle"), font=g3, fill=GRIS)
     d.line([(24, hauteur - 30), (largeur - 24, hauteur - 30)], fill=TRAIT, width=1)
