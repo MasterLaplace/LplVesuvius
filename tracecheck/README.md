@@ -7,6 +7,7 @@ $ python3 tracecheck.py Scroll1 20230702185753 --voxel-um 2.4 --prefer 2.4um --s
 2.4um-0.22m-78keV-volume-20260411134726.zarr
   296 requests, 96 windows with papyrus
   material           68.5 %   <- correlates with published ink on Scroll 1 (rho +0.54, n=80) -- see the caveat below
+  relief             0.184     <- x9.20 the detection floor of 0.02; below it the column is noise, not a sheet
   edge pinned         7.3 %   <- sheet outside the surface volume
   offset            -13.2 um
   residual           43.2 um  (p90 128.4)
@@ -27,6 +28,30 @@ overstates its own result is worse than one that measures nothing.
 > that corpus it is solid and useful. Outside it, we have measured that it is not.
 
 
+
+## `relief` is the field to read first, and we measured why
+
+`relief` is the peak-to-trough spread of a depth column divided by its mean — dimensionless,
+so a change of scanner gain does not move it. Below the instrument's floor of **0.02** the
+column carries no structure: what you are reading is noise, not a sheet.
+
+We profiled **138 series** offline, split by whether their surface follows a sheet or lies
+across the stack, and read the same split with both signals this tool can compute:
+
+| signal | follows a sheet | lies across the stack |
+|---|---:|---:|
+| **relief** below the floor | **0 / 75** | **34 / 63** |
+| `edge_pinned` at 90 % or more | **6 / 75** | **39 / 63** |
+
+> **`relief` never errs in the direction that costs you; `edge_pinned` does so six times.**
+> Six surfaces that genuinely follow a sheet still have more than 90 % of their peaks at an
+> edge. Discarding on that criterion discards good work.
+
+⚠ **The threshold does not transport, and the ratio does.** `relief` grows with the depth of
+the window it is read in — measured exponent **+1.01** on surfaces lying across the stack —
+so a cutoff calibrated at one depth is meaningless at another. Read the **ratio to the
+floor**, and let your own corpus tell you what is normal for it. For reference, the lowest
+ratio we measured on a surface that does follow a sheet is **2.25**.
 
 **No download. No credentials. numpy and Python 3.9+, nothing else.** Roughly 300 HTTPS
 range reads, a few megabytes, ~15 seconds. The equivalent measurement from rendered

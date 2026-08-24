@@ -71,12 +71,39 @@ ck(out["rigid_share"] > 0.99, "and a translation would remove all of it")
 ck(out["material"] == 1.0)
 
 
+# --- relief: the signal that separates, measured offline on 138 series -----------------
+# ⚠⚠ Its formula is (max - min) / mean, the same as the offline profiler's, and these
+# checks pin it. A second definition of one quantity would drift from the numbers it is
+# meant to be compared against.
+ck(abs(T.relief_of([0.0, 0.0, 1.0, 0.0, 0.0]) - 5.0) < 1e-9,
+   "one spike in five layers: (1-0)/0.2 = 5")
+ck(T.relief_of([1.0, 1.0, 1.0, 1.0]) == 0.0, "a flat column has no relief")
+# ⚠ Dimensionless: the same shape in different intensity units must read the same. Without
+# this the number would be a property of the scanner's gain, not of the surface.
+ck(abs(T.relief_of([0.0, 0.0, 1.0, 0.0, 0.0])
+       - T.relief_of([0.0, 0.0, 1000.0, 0.0, 0.0])) < 1e-9,
+   "relief is dimensionless: a gain of 1000 does not move it")
+# ⚠ An empty or non-positive column must not divide by zero, and must not claim relief.
+ck(T.relief_of([]) == 0.0, "an empty column claims no relief")
+ck(T.relief_of([0.0, 0.0, 0.0]) == 0.0, "an all-zero column claims no relief")
+# ⚠⚠ And the floor must be the SAME number the offline profiler uses. Two floors for one
+# quantity would let a surface pass here and fail there.
+ck(T.RELIEF_FLOOR == 0.02, "the floor is the profiler's own 0.02")
+
+
 def noisy_peak(url, level, meta, cy, cx, timeout):
     """Peaks scattered with no spatial structure: coherence must stay near zero."""
     rng = np.random.default_rng(cy * 1000 + cx)
     mean = np.zeros(DEPTH, dtype=np.float32)
     mean[int(rng.integers(0, DEPTH))] = 1.0
     return mean
+
+
+# ⚠ Et le champ doit remonter jusqu au verdict, pas seulement exister dans la fonction :
+# une colonne a un seul pic sur DEPTH couches a un relief de DEPTH.
+ck(abs(out["relief"] - float(DEPTH)) < 1e-6,
+   f"a single spike over {DEPTH} layers reads a relief of {DEPTH}")
+ck(out["relief_floor"] == T.RELIEF_FLOOR, "and the verdict carries the floor with it")
 
 
 T.column = noisy_peak

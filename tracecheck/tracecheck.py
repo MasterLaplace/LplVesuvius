@@ -171,6 +171,33 @@ def column(zarr_url: str, level: int, meta: dict, cy: int, cx: int, timeout: flo
     return block.astype(np.float32).mean(axis=(1, 2))
 
 
+# The instrument's own detection floor for `relief`, carried from the offline profiler so
+# the two cannot drift apart. A column flatter than this is noise, not a sheet.
+RELIEF_FLOOR = 0.02
+
+
+def relief_of(column) -> float:
+    """Peak-to-trough spread of a depth column, divided by its mean.
+
+    ⚠⚠ Same formula as the offline profiler, deliberately, character for character:
+    `(max - min) / mean`. Two definitions of one quantity in one repository end up
+    disagreeing, and this one is compared against numbers measured with the other.
+
+    It is dimensionless, so it survives a change of intensity units. It is **not**
+    depth-independent: measured beta of +1.01 against window depth on surfaces lying across
+    the stack, so a threshold calibrated on one depth does not transport to another. What
+    transports is the ratio to the instrument's floor, which the caller's own corpus
+    calibrates.
+    """
+    a = np.asarray(column, dtype=float)
+    if a.size == 0:
+        return 0.0
+    mean = float(a.mean())
+    if mean <= 0:
+        return 0.0
+    return float((a.max() - a.min()) / max(mean, 1e-9))
+
+
 def judge(zarr_url: str, level: int, voxel_um: float, side: int, blocks: int,
           timeout: float, threads: int) -> dict:
     meta = array_meta(zarr_url, level, timeout)
@@ -206,13 +233,14 @@ def judge(zarr_url: str, level: int, voxel_um: float, side: int, blocks: int,
                      for dy in range(side) for dx in range(side)})
 
     field = np.full((grid_y, grid_x), np.nan)
-    peaks = []
+    peaks, reliefs = [], []
     for (cy, cx), got in zip(points, read(points)):
         if isinstance(got, str):
             continue
         peak = int(np.argmax(got))
         peaks.append(peak)
         field[cy, cx] = peak - traced
+        reliefs.append(relief_of(got))
 
     if len(peaks) < 8:
         raise RuntimeError(f"only {len(peaks)} windows with papyrus")
@@ -267,6 +295,15 @@ def judge(zarr_url: str, level: int, voxel_um: float, side: int, blocks: int,
         "windows_with_papyrus": int(values.size),
         "material": material,
         "edge_pinned": float(((peaks_arr == 0) | (peaks_arr == depth - 1)).mean()),
+        # ⚠⚠ MESURE DU 2026-08-24, ET C EST POURQUOI CE CHAMP EXISTE. On avait deja
+        # `edge_pinned` et pas le relief. Sur 138 series profilees hors ligne, le meme
+        # partage lu par les deux signaux donne : relief sous le plancher, 0 / 75 surfaces
+        # qui suivent une feuille contre 34 / 63 posees en travers ; pic au bord sur au
+        # moins 90 % des fenetres, 6 / 75 contre 39 / 63. `edge_pinned` se trompe donc six
+        # fois dans le sens qui coute cher -- ecarter une surface bonne -- la ou le relief
+        # ne se trompe jamais. Le calculer ne coute rien : la colonne est deja lue.
+        "relief": float(np.median(reliefs)) if reliefs else 0.0,
+        "relief_floor": RELIEF_FLOOR,
         "offset_um": shift * voxel_um,
         "residual_um": float(np.median(residual)) * voxel_um,
         "residual_p90_um": float(np.percentile(residual, 90)) * voxel_um,
@@ -666,6 +703,14 @@ def main() -> int:
     print(f"  {out['requests']} requests, {out['windows_with_papyrus']} windows with papyrus")
     print(f"  material          {out['material'] * 100:5.1f} %   "
           f"<- strongest predictor of published ink (rho +0.54, n=80)")
+    # ⚠ Le relief est imprime AVANT `edge pinned` parce que c est le signal qui separe :
+    # mesure hors ligne, il ne se trompe sur aucune des 75 surfaces qui suivent une feuille
+    # la ou `edge_pinned` en ecarte six.
+    r = out.get("relief")
+    if r is not None:
+        floor = out.get("relief_floor") or RELIEF_FLOOR
+        print(f"  relief            {r:5.3f}     <- x{r / floor:.2f} the detection floor "
+              f"of {floor:g}; below it the column is noise, not a sheet")
     print(f"  edge pinned       {out['edge_pinned'] * 100:5.1f} %   "
           f"<- sheet outside the surface volume")
     print(f"  offset          {out['offset_um']:+7.1f} um")
