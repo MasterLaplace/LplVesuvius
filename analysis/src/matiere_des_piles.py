@@ -53,17 +53,36 @@ def matiere(dossier: Path, pas: int = 20) -> dict:
                 "part_allumee": None, "vide": None, "refus": "aucune couche"}
     lues = fichiers[::max(1, pas)]
     pic = 0
-    allumes = total = 0
+    allumes = total = illisibles = 0
     for f in lues:
-        a = tifffile.imread(str(f))
+        # ⚠⚠ Une couche ILLISIBLE n'est pas une couche noire, et laisser l'exception
+        # remonter ferait mourir un audit de trois cents piles sur la premiere qui est en
+        # cours d'ecriture. Le moteur de rendu pre-alloue ses sorties puis les remplit bande
+        # par bande : entre les deux, un `.tif` existe et n'a aucune page.
+        try:
+            a = tifffile.imread(str(f))
+        except Exception:
+            illisibles += 1
+            continue
         if a.size == 0:
+            illisibles += 1
             continue
         pic = max(pic, int(a.max()))
         allumes += int((a > 0).sum())
         total += int(a.size)
+    if total == 0:
+        # ⚠⚠ UN TROISIEME ETAT, et le confondre avec « vide » serait la meme faute que celle
+        # que ce fichier existe pour attraper. Des fichiers .tif qui existent mais ne
+        # contiennent AUCUNE page, c'est un rendu en cours d'ecriture : le moteur pre-alloue
+        # ses sorties puis les remplit bande par bande. « il n'y a rien dedans » et « il n'y
+        # a rien ENCORE » ne veulent pas dire la meme chose, et la premiere lecture ferait
+        # condamner un rendu parfaitement sain qu'on a seulement regarde trop tot.
+        return {"pile": str(dossier), "couches": len(fichiers), "lues": len(lues),
+                "illisibles": illisibles, "max": None, "part_allumee": None, "vide": None,
+                "refus": "aucune page lisible — rendu probablement en cours"}
     return {"pile": str(dossier), "couches": len(fichiers), "lues": len(lues),
-            "max": pic, "part_allumee": (allumes / total) if total else None,
-            "vide": pic == 0}
+            "illisibles": illisibles, "max": pic,
+            "part_allumee": (allumes / total) if total else None, "vide": pic == 0}
 
 
 def verifier() -> int:
@@ -120,6 +139,18 @@ def verifier() -> int:
     v("un pas trop grand rate la couche unique", matiere(rare, pas=5)["vide"] is True)
     v("... et un pas de 1 la trouve", matiere(rare, pas=1)["vide"] is False)
 
+    # ⚠⚠ Le troisieme etat : des fichiers qui existent et n'ont aucune page.
+    encours = racine / "encours"
+    encours.mkdir()
+    # ⚠ Un en-tete tronque, pas un fichier vide : c'est ce qu'un moteur laisse derriere lui
+    # entre la pre-allocation et le remplissage, et c'est ce que le lecteur doit encaisser.
+    for i in range(4):
+        (encours / f"{i:03d}.tif").write_bytes(b"II*\x00")
+    r = matiere(encours, pas=1)
+    v("un rendu en cours n'est pas dit vide", r["vide"] is None, str(r["vide"]))
+    v("... et il est nomme", "en cours" in (r.get("refus") or ""), str(r.get("refus")))
+    v("... et il ne pretend pas mesurer", r["max"] is None and r["part_allumee"] is None)
+
     r = matiere(racine / "inexistante")
     v("un dossier sans couche est signale", r["refus"] == "aucune couche")
     v("... et ne se dit pas vide", r["vide"] is None)
@@ -158,12 +189,16 @@ def main() -> int:
         r = matiere(d, a.pas)
         lignes.append(r)
         if r.get("refus"):
-            print(f"{etiquette(d):38s} {'—':>7s} {'—':>5s} {'—':>8s}  ⚠ {r['refus']}")
+            n = r.get("couches", 0)
+            print(f"{etiquette(d):38s} {n:7d} {'—':>5s} {'—':>8s}  ⚠ {r['refus']}")
             continue
         part = f"{100 * r['part_allumee']:.1f} %"
         verdict = "⚠⚠ VIDE — rien n'a ete rendu" if r["vide"] else "matiere"
         print(f"{etiquette(d):38s} {r['couches']:7d} {r['max']:5d} {part:>8s}  {verdict}")
 
+    encours = [r for r in lignes if r.get("vide") is None and r.get("couches")]
+    if encours:
+        print(f"\n⚠ {len(encours)} pile(s) illisibles — rendu en cours, pas un verdict.")
     vides = [r for r in lignes if r.get("vide")]
     if vides:
         print(f"\n⚠⚠ {len(vides)} pile(s) sur {len(lignes)} sont ENTIEREMENT NOIRES. Ce n'est "
