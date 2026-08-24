@@ -100,6 +100,36 @@ quoi que ce soit.
   avec une horloge que je ne contrôlais pas, et conclu « bloqué à 0,6 Kio/s » sur un rendu
   qui avançait à 89.
 
+#### ⭐⭐ Le résultat de la nuit : 0 sur 75 contre 34 sur 63
+
+« La fenêtre étroite montre-t-elle du relief » est **binaire, posée à l'intérieur de chaque
+fenêtre** — ni seuil à régler, ni profondeurs à apparier, ni pente à poser sur deux appuis.
+**Aucune** des 75 séries qui convergent n'a de fenêtre étroite plate ; **34 des 63**
+condamnées en ont une. Suffisant, pas nécessaire. Le signal est entré dans l'outil public
+(`tracecheck` publie `relief`), qui publiait jusque-là le moins bon des deux
+(`edge_pinned`). Détail : [`51`](docs/51_une_pente_a_deux_appuis.md).
+
+#### ⚠⚠⚠ LA RÈGLE À NE PAS ROUVRIR : une grandeur appartient à sa géométrie de lecture
+
+**Trois fois dans la même nuit** j'ai déplacé un nombre hors de la géométrie qui l'avait
+produit, et **aucune** n'a été trouvée par relecture — les trois par une mesure qui ne
+collait pas :
+
+1. le seuil de **2,25×** du README, mesuré en fenêtres de 1024 px, offert à un outil qui lit
+   des morceaux de 128 px ;
+2. les **taux d'erreur** comparant `relief` et `edge_pinned`, mesurés sur des piles rendues
+   et présentés comme une propriété de l'outil ;
+3. la **profondeur du corpus**, que j'ai déclarée « 65 couches » quand elle vaut **109**.
+
+Le relief dépend de la profondeur (exposant **+1,01**) **et** de l'étendue dans le plan
+(exposant **−0,830**, rapport ×3,16 entre 1024 et 256 px). La règle est désormais dans le
+code à trois endroits plutôt que dans ma vigilance :
+
+- `tracecheck` **écrit** `layers` et `window_px` dans son CSV ;
+- `calibration_corpus.py` **refuse** deux géométries dans un fichier, et marque celle qu'on
+  lui déclare à la main ;
+- `figure_calibration.py` **l'imprime** sur le dessin.
+
 ### ⚠ Les pièges qui se sont repayés, et leur remède définitif
 
 - **`pkill -f` et `pgrep -f` matchent leur propre ligne de commande.** Payé six fois, dont
