@@ -109,6 +109,15 @@ def rebaser(source: Path, dest: Path, facteur: float) -> dict:
             bas[i] = float(b[bon].min())
             haut[i] = float(b[bon].max())
     sortie = dict(meta)
+    # ⚠⚠ `scale` DOIT etre divise par le facteur, et l'oublier est un bug silencieux.
+    # `scale` vaut « points de grille par voxel » : apres avoir multiplie les coordonnees
+    # par 4, la MEME grille couvre quatre fois plus de voxels, donc sa densite en points par
+    # voxel est divisee par 4. Le laisser tel quel fait croire au moteur de rendu que la
+    # grille est quatre fois plus dense qu'elle ne l'est, et la sortie tombe a un seizieme
+    # de sa taille. Mesure : le premier rebasage a rendu 591 x 586 px la ou il en fallait
+    # 2400, et rien dans la sortie ne le disait -- l'image etait juste petite.
+    ancienne = meta.get("scale", [0.05, 0.05])
+    sortie["scale"] = [float(v) / facteur for v in ancienne]
     sortie["bbox"] = [bas, haut]
     sortie["uuid"] = dest.name
     sortie["rebase_facteur"] = facteur
@@ -158,6 +167,45 @@ def verifier() -> int:
     # ⚠ Une tolérance existe, mais elle est étroite : 4,05 n'est pas 4.
     v("un rapport à 1 % passe", niveau_entre((1000, 1000, 1000), (4000, 4002, 3998))[0] == 2)
     v("... mais pas à 5 %", niveau_entre((1000, 1000, 1000), (4000, 4200, 3800))[0] is None)
+
+    # ⚠⚠ Le rebasage sur une vraie paire de fichiers : ce qui compte est que `scale` SUIVE.
+    import shutil
+    import tempfile
+
+    import numpy as np
+    import tifffile
+
+    racine = Path(tempfile.mkdtemp(prefix="niveau_temoins_"))
+    src = racine / "src"
+    src.mkdir()
+    g = np.zeros((6, 5), dtype=np.float32)
+    for r in range(6):
+        for c in range(5):
+            g[r, c] = 100.0 + r * 10 + c
+    g[2, 2] = -1.0  # un trou
+    for nom in ("x", "y", "z"):
+        tifffile.imwrite(str(src / f"{nom}.tif"), g)
+    (src / "meta.json").write_text(json.dumps(
+        {"format": "tifxyz", "scale": [0.05, 0.05], "uuid": "src",
+         "area_vx2": 123.0, "bbox": [[0, 0, 0], [1, 1, 1]]}), encoding="utf-8")
+
+    m = rebaser(src, racine / "dst", 4.0)
+    v("le rebasage divise scale par le facteur",
+      abs(m["scale"][0] - 0.0125) < 1e-9, str(m["scale"]))
+    v("... sur les deux axes", m["scale"][0] == m["scale"][1])
+    # ⚠ L'attendu est CALCULE depuis la fixture et non tape a la main : ma premiere version
+    # disait 4 x 151 en visant le mauvais coin de la grille, et c'est l'assertion qui avait
+    # tort. Un attendu ecrit a la main est une seconde implementation, et elle peut etre la
+    # fausse des deux.
+    attendu = 4.0 * float(g[g > 0].max())
+    v("... et multiplie la bbox", abs(m["bbox"][1][0] - attendu) < 1e-3,
+      f'{m["bbox"][1][0]} contre {attendu}')
+    v("... et jette l'aire en voxels", "area_vx2" not in m)
+    v("... et note le facteur", m["rebase_facteur"] == 4.0)
+    relu = tifffile.imread(str(racine / "dst" / "x.tif"))
+    v("un trou reste un trou", float(relu[2, 2]) == -1.0, str(relu[2, 2]))
+    v("... et un point valide est multiplie", float(relu[0, 0]) == 400.0, str(relu[0, 0]))
+    shutil.rmtree(racine, ignore_errors=True)
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
