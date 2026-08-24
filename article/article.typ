@@ -541,6 +541,41 @@ objects, so reads parallelise with no coordination. A whole segment is judged fr
   ],
 ) <tab:triage>
 
+== What a corpus reads, on the instrument that reads it <sec:calibration>
+
+The footnote above admits a gap: `relief` earns its place from a contrast measured
+elsewhere. Closing it costs one command --- `--all --csv` judges every published segment of
+a scroll --- and the answer is a distribution, not a threshold.
+
+#figure(
+  image("figures/52_calibration.png", width: 100%),
+  caption: [
+    Where a published corpus sits, and in which window it was read. Each dot is one of the
+    80 `Scroll 1` segments read over 109 layers; the geometry is printed on the figure
+    because a reading averaged over a patch belongs to the patch. `relief` clusters far from
+    the detection floor --- x2 at the lowest, x37 at the median --- and `edge_pinned` never
+    reaches the threshold at which it was called wrong on the other instrument.
+  ],
+) <fig:calibration>
+
+*The corpus is not homogeneous, and the tool refused before we noticed.* Of 81 segments, 80
+are read over 109 layers and *one over 6*. A single distribution would have blended a
+six-layer reading into eighty hundred-and-nine-layer ones. The calibration now groups by
+geometry, and a group of one segment shows as one.
+
+#caveat[
+  *On this instrument the two signals do not separate, and that is the honest report.*
+  `edge_pinned` runs from 0.000 to 0.254 across the corpus and never approaches 90 %, so it
+  has no occasion to misfire here. Reciting the rendered-stack comparison as if it were a
+  property of this tool would have been the fourth number of the day carried out of the
+  geometry that produced it.
+  #linebreak()
+  One published segment reads *0.040*, twice the floor, where the next lowest is already at
+  x19. It is alone, invisible in a table and obvious in the figure. That does not make it
+  wrong --- thin, poorly exposed, or a lean region all read the same way. The criterion is
+  necessary and never sufficient.
+]
+
 == A rule, and its failure to replicate
 
 On `Scroll 1`, dropping the 20 % of segments poorest in `material` raises the corpus
