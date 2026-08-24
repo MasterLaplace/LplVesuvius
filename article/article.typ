@@ -519,6 +519,9 @@ objects, so reads parallelise with no coordination. A whole segment is judged fr
     table.header[field][meaning][evidence],
     [`material`], [fraction of probed windows containing papyrus],
       [$rho = +0.539$],
+    [`relief`], [peak-to-trough spread of a depth column over its mean --- flat means
+      noise, not a sheet],
+      [0 of 75 #super[†]],
     [`edge_pinned`], [peak sits at a stack edge --- the sheet is outside the volume],
       [$rho = -0.275$],
     [`offset`], [median distance from the traced layer to the material peak],
@@ -531,7 +534,10 @@ objects, so reads parallelise with no coordination. A whole segment is judged fr
     Fields measured remotely, and their correlation with an independent target: the
     published ink maps of 80 `Scroll 1` segments, taken as-is. Nothing of ours enters the
     target, so the relationship cannot be a shared artefact. `coherence` is compared to
-    each segment's own shuffle control.
+    each segment's own shuffle control. #super[†] `relief` has no correlation against that
+    target: its evidence is the contrast of #link(<sec:footings>)[Section 3.6], where it
+    misses none of the 75 surfaces that follow a sheet --- but that count was measured on
+    *rendered stacks*, not on this instrument, and does not transport between the two.
   ],
 ) <tab:triage>
 
