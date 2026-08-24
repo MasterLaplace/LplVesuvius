@@ -11,7 +11,7 @@ la fois. Une feuille de route qui liste des tâches laisse croire qu'on avance q
 tourne ; celle-ci liste des causes **éliminées**, et montre l'espace rétrécir. C'est le
 seul progrès mesurable sur un problème que personne n'a résolu.
 
-**22 causes candidates** sur **4 murs** : ❌ **13** éliminées · ✅ **7** confirmées · ⏳ **2** ouvertes
+**23 causes candidates** sur **4 murs** : ❌ **13** éliminées · ✅ **7** confirmées · ⏳ **2** ouvertes · 🔒 **1** bloquée
 
 | symbole | verdict | ce que ça veut dire |
 |---|---|---|
@@ -20,9 +20,16 @@ seul progrès mesurable sur un problème que personne n'a résolu.
 | ⏳ | **ouverte** | nommée, pas encore testée |
 | 🔒 | **bloquée** | ne peut pas être testée aujourd'hui, et on dit pourquoi |
 
+![l'espace de causes, mur par mur](images/55_espace_de_causes.png)
+
+*Une case par cause, dans l'ordre du vocabulaire — donc ce qui reste à faire tombe
+toujours à droite. Ce n'est **pas** une jauge de progression : rien ne dit que
+l'espace est borné. Produite par `analysis/src/figure_murs.py`, dont les comptes
+viennent du même registre et sont vérifiés contre ce tableau.*
+
 ## 1. Le tracé ne suit pas de feuille
 
-❌ 6 éliminées · ✅ 4 confirmées · ⏳ 1 ouverte
+❌ 6 éliminées · ✅ 4 confirmées · ⏳ 1 ouverte · 🔒 1 bloquée
 
 | cause candidate | | ce qui a été mesuré | où |
 |---|---|---|---|
@@ -36,7 +43,8 @@ seul progrès mesurable sur un problème que personne n'a résolu.
 | le plafond de générations | ❌ | budget ×3,3 : aire ×11,5, α +0,89 → +0,95, sous le bruit du tireur (0,16) | [`50`](50_le_rendu_attendait_la_memoire.md) |
 | le niveau de pyramide | ❌ | 0,02 d'écart entre niveaux 0 et 1, pour une résolution de 0,20 | [`50`](50_le_rendu_attendait_la_memoire.md) |
 | la prédiction de surface (ps256 contre m7) | ❌ | lues correctement, les deux familles sont indiscernables : 0,159 contre 0,164 – 0,198 | [`54`](54_cinq_rendus_vides.md) |
-| la graine, c'est-à-dire l'endroit | ⏳ | le 2×2 croisé tenait un NOMBRE constant, pas un endroit : sa colonne « graine m7 » désigne deux points différents dans deux repères | [`54`](54_cinq_rendus_vides.md) |
+| la graine, c'est-à-dire l'endroit | ⏳ | le 2×2 tenait un NOMBRE constant, pas un endroit ; la première trace m7 à une graine VALIDE donne α = +0,487 sans appui qui porte, et 96 % de pics au bord — soit l'échec commun | [`54`](54_cinq_rendus_vides.md) |
+| comparer le relief d'une trace L2 à une trace L0 | 🔒 | à aire égale un maillage L2 rend quatre fois moins de pixels de côté, donc les deux ne tiennent jamais dans la même fenêtre d'analyse — le relief ne peut pas les départager | [`54`](54_cinq_rendus_vides.md) |
 
 ## 2. Les patchs publiés ne se recollent pas
 
@@ -76,7 +84,8 @@ seul progrès mesurable sur un problème que personne n'a résolu.
 
 | mur | cause | pourquoi elle est encore ouverte |
 |---|---|---|
-| le tracé ne suit pas de feuille | **la graine, c'est-à-dire l'endroit** | le 2×2 croisé tenait un NOMBRE constant, pas un endroit : sa colonne « graine m7 » désigne deux points différents dans deux repères |
+| le tracé ne suit pas de feuille | **la graine, c'est-à-dire l'endroit** | le 2×2 tenait un NOMBRE constant, pas un endroit ; la première trace m7 à une graine VALIDE donne α = +0,487 sans appui qui porte, et 96 % de pics au bord — soit l'échec commun |
+| le tracé ne suit pas de feuille | **comparer le relief d'une trace L2 à une trace L0** | à aire égale un maillage L2 rend quatre fois moins de pixels de côté, donc les deux ne tiennent jamais dans la même fenêtre d'analyse — le relief ne peut pas les départager |
 | l'extension tangentielle est un point fixe | **la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour** | jamais tentée, et vérifié dans la source : l'outil n'a aucun mode qui la fasse |
 
 ⚠ **Une cause éliminée ne se rouvre pas sans une mesure neuve.** Les treize

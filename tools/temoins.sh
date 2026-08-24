@@ -767,6 +767,12 @@ run "situer nos traces"        "$ROOT/tools/situer_nos_traces.sh" --verifier
 # un document qui doit contenir ENCORE son ancre. C est ce qui empeche ce tableau de devenir
 # `EXTRACTION.md` -- une table tenue a la main qui derive en silence de ce qu elle decrit.
 # Sonde : remplacer une ancre par une chaine inventee fait rougir la batterie.
+# ⚠⚠ La figure de l espace de causes. Son controle central : ses comptes doivent etre ceux du
+# TABLEAU -- deux dessins d un meme registre libres de diverger, c est la panne que le `55`
+# existe pour empecher. ⚠ Et la table de traduction est appliquee du plus long au plus court :
+# sans ca « eliminee » se substitue a l interieur de la note de bas de page, qui ressort a
+# moitie traduite.
+run "figure des murs"          uv run --project "$ROOT" python "$ROOT/analysis/src/figure_murs.py" --verifier
 run "murs et causes"           uv run --project "$ROOT" python "$ROOT/analysis/src/murs_et_causes.py" --verifier
 run "figure feuille/tranche"   uv run --project "$ROOT" python "$ROOT/analysis/src/figure_feuille_ou_tranche.py" --verifier
 # ⚠ La tuile de reference publiee. Temoins ARITHMETIQUES : une batterie qui appellerait le

@@ -97,14 +97,26 @@ def rendre(entrees: list[dict]) -> str:
         "seul progrès mesurable sur un problème que personne n'a résolu.",
         "",
         f"**{total} causes candidates** sur **{len(murs(entrees))} murs** : "
-        + " · ".join(f"{VERDICTS[v][0]} **{c[v]}** {v}s" for v in VERDICTS if c.get(v)),
+        # ⚠ L'accord se fait sur le compte : « 1 bloquées » se lit comme une faute de frappe
+        # et fait douter du reste du tableau.
+        + " · ".join(f"{VERDICTS[v][0]} **{c[v]}** {v}{'s' if c[v] > 1 else ''}"
+                     for v in VERDICTS if c.get(v)),
         "",
         "| symbole | verdict | ce que ça veut dire |",
         "|---|---|---|",
     ]
     for v, (sym, sens) in VERDICTS.items():
         lignes.append(f"| {sym} | **{v}** | {sens} |")
-    lignes.append("")
+    lignes += [
+        "",
+        "![l'espace de causes, mur par mur](images/55_espace_de_causes.png)",
+        "",
+        "*Une case par cause, dans l'ordre du vocabulaire — donc ce qui reste à faire tombe",
+        "toujours à droite. Ce n'est **pas** une jauge de progression : rien ne dit que",
+        "l'espace est borné. Produite par `analysis/src/figure_murs.py`, dont les comptes",
+        "viennent du même registre et sont vérifiés contre ce tableau.*",
+        "",
+    ]
 
     for i, mur in enumerate(murs(entrees), start=1):
         rangs = [e for e in entrees if e["mur"] == mur]

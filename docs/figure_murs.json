@@ -1,0 +1,11 @@
+{
+  "sortie": "docs/images/55_espace_de_causes.png",
+  "murs": 4,
+  "cases": 23,
+  "total": {
+    "\u00e9limin\u00e9e": 13,
+    "confirm\u00e9e": 7,
+    "ouverte": 2,
+    "bloqu\u00e9e": 1
+  }
+}
