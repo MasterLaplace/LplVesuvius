@@ -45,7 +45,7 @@ quoi que ce soit.
 
 > ⭐⭐ **La feuille de route est [`55`](docs/55_les_murs_et_leurs_causes.md)** — un tableau par
 > mur, une ligne par **cause candidate**, avec son verdict et le document qui le porte.
-> **20 causes, 13 éliminées, 5 confirmées, 2 ouvertes.** Un mur n'est pas une tâche, c'est un
+> **21 causes, 13 éliminées, 6 confirmées, 2 ouvertes.** Un mur n'est pas une tâche, c'est un
 > espace de causes dont on retire une entrée à la fois : lister des tâches laisse croire qu'on
 > avance quand on tourne, lister des éliminations montre l'espace rétrécir.
 >
@@ -223,6 +223,28 @@ trois quarts tombent hors du volume scanné.
 prédiction dont elles sortent, portent **quatre à cinq fois moins** de structure en profondeur
 que l'avant-dernier segment publié de leur propre rouleau — pendant qu'un maillage publié
 passé par la même chaîne revient **au-dessus de la médiane**.
+
+#### ⚠⚠ CORRECTION — c'est la GRAINE, pas le maillage, et une requête HTTP l'aurait dit
+
+J'ai écrit que « le maillage `m7` est écrit au niveau 2 et rendu contre le niveau 0 ». Le
+rapport de formes valait bien 4, mais c'était un **corrélat**, pas le mécanisme. Deux cellules
+du 2×2 le prouvent l'une par l'autre : `ps256_sur_graine_m7` ouvre le volume **pleine
+résolution** et produit quand même un maillage dans le vide, tandis que `m7_sur_graine_ps256`
+ouvre le volume **L2** avec une graine hors de ses bornes et produit un maillage **avec
+matière**. **Le maillage suit le repère de la GRAINE**, pas celui du volume ouvert.
+
+| graine | ce qu'il y a là (un bloc zarr) | ce que le traceur en a fait |
+|---|---|---|
+| `ps256` `[10752, 10616, 38740]` | valeur 34, bloc allumé à **100 %** | 8 traces avec matière |
+| `m7` `[2924, 5324, 9260]` | ⚠⚠ **bloc absent du dépôt** | **13 rendus noirs** |
+
+⚠⚠ Le traceur imprime `value is 0` puis `empty space tracing` et pousse quand même — sur les
+**quatre** cellules, celles qui marchent comprises, donc cette ligne ne discrimine rien.
+
+⭐⭐⭐ **Et le 2×2 croisé n'était pas en position de conclure** : sa colonne « graine `m7` »
+tenait un **nombre** constant, pas un **endroit**. Préalable qui en sort, et il coûte une
+requête : **sonder la graine dans le volume scanné avant de payer un tracé**
+(`analysis/src/matiere_au_point.py`).
 
 #### ⭐⭐⭐ ET EN REGARDANT : ce ne sont pas des feuilles, ce sont des spires en travers
 
@@ -824,7 +846,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./tools/temoins.sh                      # 81 batteries, 2036 contrôles hors ligne, tous verts
+./tools/temoins.sh                      # 91 batteries, 2367 contrôles hors ligne, tous verts
 ./tools/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)

@@ -11,7 +11,7 @@ la fois. Une feuille de route qui liste des tâches laisse croire qu'on avance q
 tourne ; celle-ci liste des causes **éliminées**, et montre l'espace rétrécir. C'est le
 seul progrès mesurable sur un problème que personne n'a résolu.
 
-**20 causes candidates** sur **4 murs** : ❌ **13** éliminées · ✅ **5** confirmées · ⏳ **2** ouvertes
+**21 causes candidates** sur **4 murs** : ❌ **13** éliminées · ✅ **6** confirmées · ⏳ **2** ouvertes
 
 | symbole | verdict | ce que ça veut dire |
 |---|---|---|
@@ -22,10 +22,11 @@ seul progrès mesurable sur un problème que personne n'a résolu.
 
 ## 1. Le tracé ne suit pas de feuille
 
-❌ 6 éliminées · ✅ 2 confirmées · ⏳ 1 ouverte
+❌ 6 éliminées · ✅ 3 confirmées · ⏳ 1 ouverte
 
 | cause candidate | | ce qui a été mesuré | où |
 |---|---|---|---|
+| le traceur accepte une graine qui ne désigne rien | ✅ | graine m7 : bloc absent du dépôt, et il trace quand même — 13 rendus noirs ; graine ps256 : bloc allumé à 100 %, 8 traces avec matière | [`54`](54_cinq_rendus_vides.md) |
 | le traceur est un tirage, pas une fonction | ✅ | 13 traces propres sur 14 à paramètres identiques ; toute comparaison à un seul tirage ne vaut rien | [`30`](30_le_traceur_est_un_tirage.md) |
 | ce qui est établi : la surface est EN TRAVERS de l'empilement | ✅ | des spires coupées en travers, vues à l'image à étendue égale contre une feuille publiée | [`25`](25_une_graine_choisie_sur_la_planeite.md) |
 | la fenêtre de lecture | ❌ | relu à 128 px × 109 couches, la géométrie du corpus : le classement ne bouge pas | [`52`](52_calibrer_sur_son_corpus.md) |
@@ -34,7 +35,7 @@ seul progrès mesurable sur un problème que personne n'a résolu.
 | le plafond de générations | ❌ | budget ×3,3 : aire ×11,5, α +0,89 → +0,95, sous le bruit du tireur (0,16) | [`50`](50_le_rendu_attendait_la_memoire.md) |
 | le niveau de pyramide | ❌ | 0,02 d'écart entre niveaux 0 et 1, pour une résolution de 0,20 | [`50`](50_le_rendu_attendait_la_memoire.md) |
 | la prédiction de surface (ps256 contre m7) | ❌ | lues correctement, les deux familles sont indiscernables : 0,159 contre 0,164 – 0,198 | [`54`](54_cinq_rendus_vides.md) |
-| la graine, c'est-à-dire l'endroit | ⏳ | le 2×2 croisé concluait « l'endroit décide » — sur huit rendus VIDES. La question est reposée intacte | [`54`](54_cinq_rendus_vides.md) |
+| la graine, c'est-à-dire l'endroit | ⏳ | le 2×2 croisé tenait un NOMBRE constant, pas un endroit : sa colonne « graine m7 » désigne deux points différents dans deux repères | [`54`](54_cinq_rendus_vides.md) |
 
 ## 2. Les patchs publiés ne se recollent pas
 
@@ -74,7 +75,7 @@ seul progrès mesurable sur un problème que personne n'a résolu.
 
 | mur | cause | pourquoi elle est encore ouverte |
 |---|---|---|
-| le tracé ne suit pas de feuille | **la graine, c'est-à-dire l'endroit** | le 2×2 croisé concluait « l'endroit décide » — sur huit rendus VIDES. La question est reposée intacte |
+| le tracé ne suit pas de feuille | **la graine, c'est-à-dire l'endroit** | le 2×2 croisé tenait un NOMBRE constant, pas un endroit : sa colonne « graine m7 » désigne deux points différents dans deux repères |
 | l'extension tangentielle est un point fixe | **la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour** | jamais tentée, et vérifié dans la source : l'outil n'a aucun mode qui la fasse |
 
 ⚠ **Une cause éliminée ne se rouvre pas sans une mesure neuve.** Les treize

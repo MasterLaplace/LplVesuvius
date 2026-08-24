@@ -289,6 +289,51 @@ question suivante, et elle n'a pas de réponse ici.
 vue de vraie feuille aplatie. Il en a mesuré l'absence de plusieurs façons sans jamais la
 regarder.
 
+## 3 sexies. ⚠⚠ CORRECTION de ma propre §3 : c'est la GRAINE, pas le maillage
+
+La §3 dit que « le maillage `m7` est écrit dans le volume au niveau 2 et a été rendu contre le
+niveau 0 ». Le rapport de formes valait bien 4, mais **ce n'était pas le mécanisme** : c'était
+un corrélat. Le mécanisme est un cran en amont, et deux cellules du 2×2 croisé le prouvent
+l'une par l'autre.
+
+| cellule | volume que le traceur ouvre | graine | z du maillage | rendu |
+|---|---|---|---:|---|
+| `m7_sur_graine_m7` | 18 946³ (L2) | [2924, 5324, 9260] | 8 675 – 10 238 | **vide** |
+| `ps256_sur_graine_m7` | **75 784³ (pleine résolution)** | [2924, 5324, 9260] | 8 298 – 10 130 | **vide** |
+| `m7_sur_graine_ps256` | 18 946³ (L2) | [10752, 10616, 38740] | 38 528 – 39 083 | matière |
+| `ps256_sur_graine_ps256` | 75 784³ | [10752, 10616, 38740] | 38 513 – 39 706 | matière |
+
+⭐⭐ **Le maillage suit le repère de la GRAINE, pas celui du volume ouvert.** `ps256_sur_graine_m7`
+ouvre le volume pleine résolution et produit quand même un maillage à `z ≈ 8 300` ;
+`m7_sur_graine_ps256` ouvre le volume L2 avec une graine **hors de ses bornes** (38 740 > 18 946)
+et produit un maillage à `z ≈ 38 500`, **avec de la matière**.
+
+### Une requête HTTP aurait tout arrêté
+
+Les deux graines, sondées dans le volume scanné à pleine résolution — **un bloc zarr chacune**,
+`analysis/src/matiere_au_point.py` :
+
+| graine | ce qu'il y a là | ce que le traceur en a fait |
+|---|---|---|
+| `ps256` `[10752, 10616, 38740]` | **valeur 34, bloc allumé à 100 %** | 8 traces avec matière |
+| `m7` `[2924, 5324, 9260]` | ⚠⚠ **bloc absent du dépôt** | **13 rendus entièrement noirs** |
+
+⚠⚠ **Et le traceur ne refuse rien.** Il imprime `seed location [2924, 5324, 9260] value is 0`,
+puis `empty space tracing`, puis il pousse. Sur les **quatre** cellules — celles qui marchent
+comprises — il annonce `value is 0`, donc cette ligne ne discrimine pas ; ce qui discrimine,
+c'est *y a-t-il de la matière scannée là*, et rien ne posait la question.
+
+### ⭐⭐⭐ Conséquence : le 2×2 croisé ne pouvait PAS répondre
+
+Sa question était *« la prédiction ou l'endroit ? »*, et son plan était de tracer chaque
+prédiction à chaque graine. Mais la colonne « graine `m7` » ne trace pas **un endroit** : elle
+trace un **nombre**, réutilisé dans deux systèmes de coordonnées où il désigne deux points
+différents — et dans le repère pleine résolution, un point où il n'y a rien.
+
+**L'endroit n'a jamais été tenu constant.** Le 2×2 n'a donc pas conclu à tort : il n'était pas
+en position de conclure. Et la cause « la graine, c'est-à-dire l'endroit » reste **ouverte** —
+avec, maintenant, un préalable écrit : *sonder la graine avant de payer le tracé*.
+
 ## 4. Ce que ça change
 
 - ⚠⚠ **La ligne « `m7` : relief 0,0000, rang 0/80 » de [`52`](52_calibrer_sur_son_corpus.md)
@@ -305,6 +350,10 @@ regarder.
 - ⚠ **« Cet endroit n'a pas de feuille » n'est plus établi**, et c'était la conclusion la plus
   robuste du 2×2 (8 répétitions sur 8). Ce qui reste établi, c'est que le vide **suit la
   graine** — mais pour une raison de repère, pas de papyrus.
+- ⚠⚠ **Et le 2×2 n'était pas en position de conclure du tout** : sa colonne « graine `m7` »
+  tenait un *nombre* constant, pas un *endroit* (§3 sexies). Un préalable en sort : **sonder la
+  graine dans le volume scanné avant de payer un tracé** — une requête HTTP contre treize
+  rendus.
 - Ce qui **ne** change **pas** : les trois `ps256` (relief 0,164 – 0,198, rang 1/80) sont
   inchangées — leur maillage était dans la bonne frame, et le correctif de l'instrument ne
   déplace pas leur chiffre d'un dix-millième.

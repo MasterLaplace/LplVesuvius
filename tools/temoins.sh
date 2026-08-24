@@ -981,7 +981,7 @@ else
 fi
 rm -f "$T55"
 
-printf '  %-30s ' "scripts sans appelant"printf '  %-30s ' "scripts sans appelant"
+printf '  %-30s ' "scripts sans appelant"
 ORPH=""
 for f in "$ROOT"/analysis/src/*.py "$ROOT"/tools/*.sh; do
   b=$(basename "$f")
