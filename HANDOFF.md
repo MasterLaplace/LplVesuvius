@@ -189,6 +189,29 @@ notre instrument.
 ⚠ Coût : 80 min de rendu, 399 Mo, pour un morceau de 2380 × 2400 px sur 161 couches. Les trois
 autres morceaux découpés n'ont pas été rendus — le critère ne demandait pas quatre points.
 
+#### ⭐⭐⭐ La première VRAIE lecture d'une trace `m7` réfute la coupure
+
+Le sondage disait **où** le maillage `m7` a de la matière. Ce morceau-là (30 × 30 points,
+9 sondages sur 9 dans la matière) a été rendu au niveau 0 dans le repère rebasé — 2400 ×
+2400 px, 161 couches, 600 Mo, 87,1 % de pixels allumés — puis relu à la géométrie du corpus :
+
+| | relief | ×plancher | rang sur 80 |
+|---|---:|---:|---|
+| **`m7_c0`, enfin lisible** | **0,1589** | ×7,9 | **1ᵉʳ sur 80** |
+| nos `ps256` | 0,164 – 0,198 | ×8,2 – ×9,9 | 1ᵉʳ sur 80 |
+| corpus, médiane | 0,7441 | ×37,2 | — |
+| maillage **publié** via notre chaîne | 0,8726 | ×43,6 | 72ᵉ sur 80 |
+
+⭐⭐ **`m7` et `ps256` sont au même endroit.** La « coupure nette entre les deux familles de
+prédiction » n'est pas seulement non établie : elle est **réfutée**. ⚠ Portée : cet énoncé
+porte sur le morceau de `m7` **qui a de la matière**, pas sur le maillage entier, dont les
+trois quarts tombent hors du volume scanné.
+
+⭐ **Le mur se dit maintenant en une phrase au lieu de deux** : nos traces, quelle que soit la
+prédiction dont elles sortent, portent **quatre à cinq fois moins** de structure en profondeur
+que l'avant-dernier segment publié de leur propre rouleau — pendant qu'un maillage publié
+passé par la même chaîne revient **au-dessus de la médiane**.
+
 #### ⭐ L'audit du dépôt entier : 31 piles vides sur 322, et le rayon de souffle est borné
 
 322 piles rendues (175 Go) lues une couche sur quarante : **291 avec matière, 31 noires**,

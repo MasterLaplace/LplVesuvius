@@ -218,6 +218,35 @@ matière dessous refait la même erreur d'un cran plus bas. Le premier morceau `
 hasard des trous a rendu, lui aussi, une pile entièrement noire — et pour la troisième raison
 différente de la journée.
 
+## 3 quater. ⭐⭐⭐ La première VRAIE lecture d'une trace `m7` : elle est au même endroit que `ps256`
+
+Le sondage disait où le maillage `m7` a de la matière. Ce morceau-là — 30 × 30 points de
+grille, sans trou, **9 sondages sur 9 dans la matière** — a été rendu au niveau 0 dans le
+repère rebasé (2400 × 2400 px, 161 couches, 600 Mo, 87,1 % de pixels allumés) puis relu à la
+géométrie du corpus :
+
+| | relief | ×plancher | rang sur 80 |
+|---|---:|---:|---|
+| **`m7_c0`, enfin lisible** | **0,1589** | **×7,9** | **1ᵉʳ sur 80** |
+| nos `ps256` | 0,164 – 0,198 | ×8,2 – ×9,9 | 1ᵉʳ sur 80 |
+| corpus publié, médiane | 0,7441 | ×37,2 | — |
+| un maillage **publié** passé par notre chaîne | 0,8726 | ×43,6 | 72ᵉ sur 80 |
+
+> ⭐⭐⭐ **`m7` et `ps256` sont au même endroit.** La « coupure nette entre les deux familles
+> de prédiction », que [`52`](52_calibrer_sur_son_corpus.md) §6 annonçait comme visible « sans
+> pente, sans deux fenêtres et sans seuil », était **entièrement** un artefact des rendus
+> vides. Mesurées correctement, les deux familles sont indiscernables : 0,159 contre
+> 0,164 – 0,198, toutes au rang 1 sur 80.
+
+⚠ Portée exacte de cet énoncé : il porte sur **le morceau du maillage `m7` qui a de la
+matière**, pas sur le maillage entier — dont les trois quarts tombent hors du volume scanné
+(§3 ter). *Là où `m7` a quelque chose à lire, il lit comme `ps256`.*
+
+⭐ Et le mur, lui, se dit maintenant en une seule phrase au lieu de deux : **nos traces, quelle
+que soit la prédiction dont elles sortent, portent quatre à cinq fois moins de structure en
+profondeur que l'avant-dernier segment publié de leur propre rouleau** — pendant qu'un
+maillage publié passé par la même chaîne revient au-dessus de la médiane.
+
 ## 4. Ce que ça change
 
 - ⚠⚠ **La ligne « `m7` : relief 0,0000, rang 0/80 » de [`52`](52_calibrer_sur_son_corpus.md)
@@ -228,6 +257,9 @@ différente de la journée.
   reposait entièrement sur le zéro des `m7`.
 - ⭐ **Treize rendus reviennent dans le jeu** — cinq candidats et les huit cellules « graine
   `m7` » du 2×2 croisé. Aucun n'a jamais été lu.
+- ⭐⭐ **Et le premier qui l'a été rend le verdict inverse de celui qui était publié** : `m7`
+  n'est pas sous le corpus, il est **exactement là où `ps256` est** (§3 quater). Les deux
+  familles de prédiction ne se départagent pas.
 - ⚠ **« Cet endroit n'a pas de feuille » n'est plus établi**, et c'était la conclusion la plus
   robuste du 2×2 (8 répétitions sur 8). Ce qui reste établi, c'est que le vide **suit la
   graine** — mais pour une raison de repère, pas de papyrus.

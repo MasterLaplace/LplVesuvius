@@ -152,6 +152,11 @@ de 109 :
 > ⭐ Conséquence : **la coupure entre les deux familles de prédiction n'est plus établie** —
 > elle reposait entièrement sur ce zéro. Et cinq traces reviennent dans le jeu : elles n'ont
 > jamais été lues.
+>
+> ⭐⭐⭐ **Mesuré depuis** : le morceau de `m7_c0` qui a effectivement de la matière, rendu
+> dans le bon repère et relu ici, donne **0,1589 — rang 1ᵉʳ sur 80**, c'est-à-dire
+> *exactement* où sont les `ps256` (0,164 – 0,198, rang 1ᵉʳ). La coupure n'est pas seulement
+> non établie : elle est **réfutée**. Les deux familles sont indiscernables.
 
 ⭐ Ce qui **reste** vrai : les trois `ps256` sont **toutes** au rang 1 sur 80 — elles lisent
 de la structure, huit à dix fois le plancher, et restent au bas de leur propre rouleau. Leur
