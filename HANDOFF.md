@@ -57,9 +57,9 @@ quoi que ce soit.
 
 | mur | ce qui est mesuré | document |
 |---|---|---|
-| le tracé ne suit pas de feuille | ⚠ **révisé le 2026-08-24** : sur 27 séries `PHercParis4`, **une seule** porte un verdict (α = +1,12). Un couple acheté exprès (41/83 couches, 796,8 µm) n'en porte pas non plus. ⭐ Mais à **100,8, 384 et 796,8 µm**, **100 % des fenêtres ont leur pic sur un bord de pile** | [`51`](docs/51_une_pente_a_deux_appuis.md) puis [`48`](docs/48_ou_monter_lexperience.md) |
+| le tracé ne suit pas de feuille | ⭐⭐ **la surface est EN TRAVERS de l'empilement, et ça se VOIT** : à étendue égale, une couche publiée montre une feuille de face, les nôtres des spires coupées en travers. Relief 0,79 et 0,87 contre 0,16 et 0,20. ⚠ Sur 27 séries, une seule porte un verdict α ; à 100,8, 384 et 796,8 µm, **100 % des fenêtres ont leur pic sur un bord de pile** | [`54`](docs/54_cinq_rendus_vides.md) §3 quinquies, [`53`](docs/53_le_temoin_positif_du_rendu.md), [`51`](docs/51_une_pente_a_deux_appuis.md) |
 | les patchs publiés ne se recollent pas | un patch PAR feuille, paire la plus proche à 79 µm ≈ 2× le seuil | [`44`](docs/44_ou_la_chaine_se_trouve.md) |
-| l'extension tangentielle est un point fixe | le cycle rogner-étendre converge vers ~6 cm² | [`44`](docs/44_ou_la_chaine_se_trouve.md) §7 |
+| l'extension tangentielle est un point fixe | le cycle rogner-étendre converge vers ~6 cm². ⭐ La projection **tangentielle** existe désormais (`projeter_tangentiel.py`) ; ce qui manque est de juger si elle reste sur la feuille, et ça coûte **un rendu par pas** | [`44`](docs/44_ou_la_chaine_se_trouve.md) §7 |
 | la chaîne casse au sixième tour | et la repousse la coupe au troisième | [`43`](docs/43_la_chaine_des_spires.md) |
 
 ### Ce qui vient d'être fermé

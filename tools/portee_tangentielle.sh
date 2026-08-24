@@ -75,6 +75,14 @@ JSON
   chk "un JSON illisible ne fait pas tomber la campagne" \
       '[ "$(ligne_de /inexistant)" = "? ? ? ?" ]'
   rm -f "$T_J"
+  # ⚠⚠ Le profil de profondeur est la seule mesure qui tranche, et il est OPTIONNEL parce
+  # qu il coute un rendu par pas -- les deux colonnes bon marche, elles, ne coutent qu une
+  # requete et ne tranchent rien. Delegue, jamais recopie.
+  chk "le profil est delegue au profileur" \
+      'grep -q "profiler_une_surface.sh" "$ROOT/tools/portee_tangentielle.sh"'
+  chk "... et le moteur de rendu n est PAS invoque ici" \
+      '! grep -q "vc_render""_tifxyz" "$ROOT/tools/portee_tangentielle.sh"'
+  chk "le rendu est opt-in" 'grep -q "RENDRE:-0" "$ROOT/tools/portee_tangentielle.sh"'
   chk "le resultat part dans un JSON" 'grep -q "portee_tangentielle.json" "$ROOT/tools/portee_tangentielle.sh"'
   echo "$([ $ok = 0 ] && echo 'ALL PASS' || echo FAILURES) ($ok failures, $n checks)"
   exit $ok
@@ -108,6 +116,23 @@ import json;print(round(json.load(open('$D/meta.json'))['pas_voxels'],1))" 2>/de
   R="$DEST/mesure_$K.json"
   uv run --project "$ROOT" python "$ROOT/analysis/src/matiere_au_point.py" \
       --maillage "$D" --niveau 0 --balayer --combien "$SONDES" --json "$R" > "$D.mesure" 2>&1
+  # ⚠⚠ LE PROFIL DE PROFONDEUR EST LA SEULE MESURE QUI TRANCHE, et il coûte un rendu par pas.
+  # Les deux colonnes bon marché ci-dessus rendent le même chiffre de 0 µm à 2,4 mm : un bloc
+  # zarr fait 307 µm quand les feuilles sont à 10-20 µm, et un voxel isolé d un rouleau
+  # comprimé lit un gris moyen presque partout. Ce qui distingue « sur la feuille » de « entre
+  # deux spires » est la traversée air → papyrus → air, donc le profil.
+  #
+  # ⚠ Le rendu est DELEGUE a `profiler_une_surface.sh` : il porte l invocation du moteur et le
+  # piege d unites de la pyramide, et une seconde copie serait libre d en diverger.
+  if [ "${RENDRE:-0}" = 1 ]; then
+    W="$DEST/profil_$K"
+    if [ ! -s "$W/verdict.json" ]; then
+      GARDER_RENDU=0 PLAT="$D" NIVEAU="${NIVEAU_RENDU:-0}" FENETRES_BASE="${FENETRES:-41}" \
+        UM_BASE="${UM_BASE:-2.4}" DEST="$W" ETIQUETTE="portee_$K" \
+        JSON="$W/verdict.json" "$ROOT/tools/profiler_une_surface.sh" \
+        > "$W.profil.log" 2>&1 || echo "   ⚠ profil du pas $K abandonné"
+    fi
+  fi
   LIGNE=$(ligne_de "$R")
   set -- $LIGNE
   printf '%6s %10s %10s %10s\n' "$K" "${VOX:-?}" "${1:-?}" "${2:-?}"
