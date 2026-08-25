@@ -1,0 +1,169 @@
+{
+ "espacement_um": 173.0,
+ "sondes": {
+  "m7_converti_en_L0": {
+   "trouve": true,
+   "distance_blocs": 5,
+   "bloc": [
+    287,
+    161,
+    96
+   ],
+   "decalage": [
+    -2,
+    -5,
+    5
+   ],
+   "demandes": 941,
+   "rayon_regarde": 5,
+   "point": [
+    37040,
+    21296,
+    11696
+   ],
+   "niveau": 0,
+   "bloc_centre": [
+    289,
+    166,
+    91
+   ],
+   "cote_bloc": 128,
+   "distance_um": 1536.0,
+   "distance_um_max": 1536.0,
+   "distance_spires_max": 8.878612716763005
+  },
+  "m7_dans_son_repere": {
+   "trouve": true,
+   "distance_blocs": 1,
+   "bloc": [
+    71,
+    40,
+    23
+   ],
+   "decalage": [
+    -1,
+    -1,
+    1
+   ],
+   "demandes": 4,
+   "rayon_regarde": 1,
+   "point": [
+    9260,
+    5324,
+    2924
+   ],
+   "niveau": 2,
+   "bloc_centre": [
+    72,
+    41,
+    22
+   ],
+   "cote_bloc": 128,
+   "distance_um": 1228.8,
+   "distance_um_max": 1228.8,
+   "distance_spires_max": 7.102890173410405
+  },
+  "m7_lu_en_L0_sans_conversion": {
+   "trouve": false,
+   "distance_blocs": null,
+   "bloc": null,
+   "decalage": null,
+   "demandes": 4913,
+   "rayon_regarde": 8,
+   "point": [
+    9260,
+    5324,
+    2924
+   ],
+   "niveau": 0,
+   "bloc_centre": [
+    72,
+    41,
+    22
+   ],
+   "cote_bloc": 128
+  },
+  "ps256_converti_en_L2": {
+   "trouve": true,
+   "distance_blocs": 0,
+   "bloc": [
+    75,
+    20,
+    21
+   ],
+   "decalage": [
+    0,
+    0,
+    0
+   ],
+   "demandes": 1,
+   "rayon_regarde": 0,
+   "point": [
+    9685,
+    2654,
+    2688
+   ],
+   "niveau": 2,
+   "bloc_centre": [
+    75,
+    20,
+    21
+   ],
+   "cote_bloc": 128,
+   "distance_um": 0.0,
+   "distance_um_max": 0.0,
+   "distance_spires_max": 0.0
+  },
+  "ps256_dans_son_repere": {
+   "trouve": true,
+   "distance_blocs": 0,
+   "bloc": [
+    302,
+    82,
+    84
+   ],
+   "decalage": [
+    0,
+    0,
+    0
+   ],
+   "demandes": 1,
+   "rayon_regarde": 0,
+   "point": [
+    38740,
+    10616,
+    10752
+   ],
+   "niveau": 0,
+   "bloc_centre": [
+    302,
+    82,
+    84
+   ],
+   "cote_bloc": 128,
+   "distance_um": 0.0,
+   "distance_um_max": 0.0,
+   "distance_spires_max": 0.0
+  },
+  "ps256_lu_en_L2_sans_conversion": {
+   "trouve": false,
+   "distance_blocs": null,
+   "bloc": null,
+   "decalage": null,
+   "demandes": 4913,
+   "rayon_regarde": 8,
+   "point": [
+    38740,
+    10616,
+    10752
+   ],
+   "niveau": 2,
+   "bloc_centre": [
+    302,
+    82,
+    84
+   ],
+   "cote_bloc": 128
+  }
+ }
+}

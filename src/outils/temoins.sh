@@ -849,6 +849,13 @@ run "empreinte de surface"     uv run --project "$ROOT" python "$ROOT/src/depot/
 # large que la large, et meme largeur (ce n est pas une derivation).
 run "sous-fenetre derivee"     uv run --project "$ROOT" python "$ROOT/src/depot/sous_fenetre.py" --verifier
 run "figure sous-fenetre"      uv run --project "$ROOT" python "$ROOT/src/figures/figure_sous_fenetre.py" --verifier
+# ⚠⚠ Le prealable de `54` : sonder la graine AVANT de payer le trace. `matiere_au_point` repond
+# oui ou non ; celui-ci repond A QUELLE DISTANCE, ce qui separe « a cote de la feuille » (un
+# calcul corrige) de « dans le vide » (rien ne sauve). Le lecteur de blocs est INJECTE, et c est
+# ce qui rend l algorithme verifiable hors ligne, sans reseau et sans S3.
+run "distance a la matiere"    uv run --project "$ROOT" python "$ROOT/src/nappe/distance_a_la_matiere.py" --verifier
+run "graines : l endroit"      "$ROOT/src/campagnes/campagne_graines_endroit.sh" --verifier
+run "figure des graines"       uv run --project "$ROOT" python "$ROOT/src/figures/figure_graine_endroit.py" --verifier
 run "figure des doublons"      uv run --project "$ROOT" python "$ROOT/src/figures/figure_doublons.py" --verifier
 # ⚠⚠ La campagne de portee. Ses sondes portent sur la COLONNE et pas sur le mot : l en-tete a
 # gagne « mediane » pendant que l extraction rendait `bloc_absent`, et un grep du mot restait

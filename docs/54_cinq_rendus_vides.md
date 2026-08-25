@@ -334,6 +334,58 @@ différents — et dans le repère pleine résolution, un point où il n'y a rie
 en position de conclure. Et la cause « la graine, c'est-à-dire l'endroit » reste **ouverte** —
 avec, maintenant, un préalable écrit : *sonder la graine avant de payer le tracé*.
 
+## 3 octies. ⭐⭐⭐ La cause « la graine, c'est-à-dire l'endroit » se ferme : ≈ 7 spires
+
+![Où commence la matière sous chaque graine](images/54_graines_endroit.png)
+
+```bash
+./src/campagnes/campagne_graines_endroit.sh      # → docs/graines_endroit.json
+uv run python src/figures/figure_graine_endroit.py
+```
+
+Le §3 sexies laisse la cause **ouverte** avec un préalable écrit : *sonder la graine avant de
+payer le tracé*. `matiere_au_point.py` répond **oui ou non** — et c'est déjà ce qui aurait
+arrêté treize rendus. Mais « non » recouvre deux situations qui ne demandent pas la même chose :
+une graine **à côté** de la feuille, qu'un calcul corrige, et une graine **dans le vide**, que
+rien ne sauve. Un nombre les sépare, et il coûte quelques requêtes.
+
+| sonde | ce qu'on lit | distance à la matière |
+|---|---|---:|
+| `ps256` dans son repère (niveau 0) | valeur 34, bloc 100 % allumé | **0 µm** |
+| `ps256` converti en niveau 2 | valeur 35, bloc 100 % allumé | **0 µm** |
+| `ps256` lu en niveau 2 **sans conversion** | rien | *rien dans 8 blocs, 4 913 requêtes* |
+| `m7` **dans son propre repère** (niveau 2) | rien | ≤ 1 229 µm — **≈ 7,1 spires** |
+| `m7` converti en niveau 0 | rien | ≤ 1 536 µm — **≈ 8,9 spires** |
+| `m7` lu en niveau 0 **sans conversion** | rien | *rien dans 8 blocs, 4 913 requêtes* |
+
+⭐⭐⭐ **La graine `ps256` désigne de la matière dans LES DEUX repères ; la graine `m7` n'en
+désigne dans AUCUN.** Ce n'est donc **pas** un défaut de conversion : convertie correctement,
+elle rate quand même. L'endroit est vide.
+
+⚠ Et l'unité qui rend le nombre lisible n'est pas le micromètre mais la **spire** : à 173 µm
+d'espacement inter-spires ([`16`](16_carte_difficulte_rouleaux_du_prix.md)), la graine `m7`
+rate la feuille de **sept épaisseurs de papyrus**. Ni une erreur d'arrondi — qui se corrigerait
+par un calcul — ni le vide interplanétaire.
+
+⚠ Les distances sont des **majorants** : la recherche s'arrête au premier bloc publié et un
+bloc fait 128 voxels de côté. « ≤ 7,1 spires » veut dire *au plus*, jamais *exactement*.
+
+### Ce que ça ferme, et ce que ça ne ferme pas
+
+⭐ **Ça ferme la cause** : l'endroit explique la famille `m7`. Ses traces n'ont jamais eu de
+feuille à suivre, parce qu'il n'y en avait pas là. C'est aussi la **cause** de la note de
+portée du §3 quater — *« les trois quarts du maillage tombent hors du volume scanné »* : c'est
+le **point de départ** qui est dehors, pas seulement le maillage.
+
+⚠ **Ça ne ferme pas le mur.** La famille `ps256` part d'un point **sur** de la matière et ses
+traces portent quand même quatre à cinq fois moins de structure que le segment publié. Le mur
+tient donc dans les termes du §3 quater, et il ne se dit plus qu'en une phrase.
+
+⚠⚠ **Et lire une coordonnée dans le mauvais repère ne rend pas une erreur.** Les deux sondes
+« sans conversion » ont parcouru **4 913 blocs chacune** sans rien trouver — pas un refus, pas
+un avertissement : *un autre endroit, ou rien, avec le même aplomb*. C'est la même forme de
+panne que celle qui a produit treize rendus noirs, vue depuis l'autre bout.
+
 ## 3 septies. ⭐⭐⭐ Une TROISIÈME conséquence : toutes les aires `m7` sont fausses d'un facteur 16
 
 Le niveau n'était propagé nulle part. Trois choses en dépendaient, et voici la troisième.

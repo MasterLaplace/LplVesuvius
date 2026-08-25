@@ -14,6 +14,47 @@ l'historique, daté, et se lit ensuite.
 > **stable dans le commit visé**, et le vérifier au lieu de le supposer — c'est ce que fait
 > désormais le contrôle « le dossier témoin existe bien dans le commit visé », ajouté à côté.
 
+## ⭐⭐⭐⭐⭐ LE REGISTRE N'A PLUS AUCUNE CAUSE OUVERTE — la graine rate de SEPT SPIRES
+
+![Où commence la matière sous chaque graine](docs/images/54_graines_endroit.png)
+
+La dernière cause ouverte du dépôt — *« la graine, c'est-à-dire l'endroit »* — est **fermée par
+la mesure**. `54` avait écrit le préalable (*sonder la graine avant de payer le tracé*) et
+`matiere_au_point.py` répondait **oui ou non**. Mais « non » recouvrait deux situations qui ne
+demandent pas la même chose : une graine **à côté** de la feuille, qu'un calcul corrige, et une
+graine **dans le vide**, que rien ne sauve.
+
+| sonde | distance à la matière |
+|---|---:|
+| `ps256` dans son repère (L0) | **0 µm** |
+| `ps256` converti en L2 | **0 µm** |
+| `m7` **dans son propre repère** (L2) | ≈ **7,1 spires** |
+| `m7` converti en L0 | ≈ **8,9 spires** |
+| l'un ou l'autre lu **sans conversion** | rien dans 8 blocs, 4 913 requêtes |
+
+⭐⭐⭐ **`ps256` désigne de la matière dans LES DEUX repères ; `m7` n'en désigne dans AUCUN.**
+Ce n'est donc pas un défaut de conversion : convertie correctement, elle rate quand même.
+À 173 µm d'espacement inter-spires, elle rate la feuille de **sept épaisseurs de papyrus**.
+
+⭐ **Ce que ça ferme** : l'endroit explique la famille `m7` — ses traces n'ont jamais eu de
+feuille à suivre. C'est la **cause** de la note de portée de `54` (*« les trois quarts du
+maillage tombent hors du volume »*) : c'est le **point de départ** qui est dehors.
+
+⚠ **Ce que ça ne ferme pas** : le mur. `ps256` part **sur** de la matière et ses traces portent
+quand même quatre à cinq fois moins de structure que le segment publié.
+
+⚠⚠ Et lire une coordonnée dans le mauvais repère **ne rend pas une erreur** : 4 913 blocs
+parcourus sans rien trouver, sans un refus ni un avertissement — *un autre endroit, ou rien,
+avec le même aplomb*.
+
+**Registre : 30 causes, 19 éliminées, 10 confirmées, 1 bloquée, ZÉRO ouverte.**
+
+⚠ Trois fois dans la même passe, un contrôle a cherché son propre motif dans le fichier qui le
+contient. La parade n'est pas un meilleur motif : c'est de faire de la chose contrôlée une
+**donnée** (`LEGENDE`, `GLYPHES_ABSENTS`) au lieu d'un texte à grepper.
+
+---
+
 ## ⭐⭐⭐⭐⭐ LE RACCOURCI EST CÂBLÉ — et il est incapable d'empirer les choses
 
 `profiler_une_surface.sh` demande son plan à `sous_fenetre.py --shell`, rend les fenêtres
@@ -1256,7 +1297,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 120 batteries, 3129 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 123 batteries, 3161 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)

@@ -11,7 +11,7 @@ la fois. Une feuille de route qui liste des tâches laisse croire qu'on avance q
 tourne ; celle-ci liste des causes **éliminées**, et montre l'espace rétrécir. C'est le
 seul progrès mesurable sur un problème que personne n'a résolu.
 
-**30 causes candidates** sur **4 murs** : ❌ **19** éliminées · ✅ **9** confirmées · ⏳ **1** ouverte · 🔒 **1** bloquée
+**30 causes candidates** sur **4 murs** : ❌ **19** éliminées · ✅ **10** confirmées · 🔒 **1** bloquée
 
 | symbole | verdict | ce que ça veut dire |
 |---|---|---|
@@ -29,10 +29,11 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 
 ## 1. Le tracé ne suit pas de feuille
 
-❌ 6 éliminées · ✅ 4 confirmées · ⏳ 1 ouverte · 🔒 1 bloquée
+❌ 6 éliminées · ✅ 5 confirmées · 🔒 1 bloquée
 
 | cause candidate | | ce qui a été mesuré | où |
 |---|---|---|---|
+| la graine, c'est-à-dire l'endroit | ✅ | sondée dans le volume scanné : la graine m7 n'a AUCUNE matière à ≈ 7,1 spires dans son repère ni à ≈ 8,9 converties, quand la graine ps256 est SUR de la matière dans les deux repères (0 µm) — l'endroit explique la famille m7, pas le mur | [`54`](54_cinq_rendus_vides.md) |
 | le traceur accepte une graine qui ne désigne rien | ✅ | graine m7 : bloc absent du dépôt, et il trace quand même — 13 rendus noirs ; graine ps256 : bloc allumé à 100 %, 8 traces avec matière | [`54`](54_cinq_rendus_vides.md) |
 | le traceur est un tirage, pas une fonction | ✅ | 13 traces propres sur 14 à paramètres identiques ; toute comparaison à un seul tirage ne vaut rien | [`30`](30_le_traceur_est_un_tirage.md) |
 | ce qui est établi : la surface est EN TRAVERS de l'empilement | ✅ | des spires coupées en travers, vues à l'image à étendue égale contre une feuille publiée | [`25`](25_une_graine_choisie_sur_la_planeite.md) |
@@ -43,7 +44,6 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | le plafond de générations | ❌ | budget ×3,3 : aire ×11,5, α +0,89 → +0,95, sous le bruit du tireur (0,16) | [`50`](50_le_rendu_attendait_la_memoire.md) |
 | le niveau de pyramide | ❌ | 0,02 d'écart entre niveaux 0 et 1, pour une résolution de 0,20 | [`50`](50_le_rendu_attendait_la_memoire.md) |
 | la prédiction de surface (ps256 contre m7) | ❌ | lues correctement, les deux familles sont indiscernables : 0,159 contre 0,164 – 0,198 | [`54`](54_cinq_rendus_vides.md) |
-| la graine, c'est-à-dire l'endroit | ⏳ | le 2×2 tenait un NOMBRE constant, pas un endroit ; la première trace m7 à une graine VALIDE donne α = +0,487 sans appui qui porte, et 96 % de pics au bord — soit l'échec commun | [`54`](54_cinq_rendus_vides.md) |
 | comparer le relief d'une trace L2 à une trace L0 | 🔒 | à aire égale un maillage L2 rend quatre fois moins de pixels de côté, donc les deux ne tiennent jamais dans la même fenêtre d'analyse — le relief ne peut pas les départager | [`54`](54_cinq_rendus_vides.md) |
 
 ## 2. Les patchs publiés ne se recollent pas
@@ -91,7 +91,6 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 
 | mur | cause | pourquoi elle est encore ouverte |
 |---|---|---|
-| le tracé ne suit pas de feuille | **la graine, c'est-à-dire l'endroit** | le 2×2 tenait un NOMBRE constant, pas un endroit ; la première trace m7 à une graine VALIDE donne α = +0,487 sans appui qui porte, et 96 % de pics au bord — soit l'échec commun |
 | le tracé ne suit pas de feuille | **comparer le relief d'une trace L2 à une trace L0** | à aire égale un maillage L2 rend quatre fois moins de pixels de côté, donc les deux ne tiennent jamais dans la même fenêtre d'analyse — le relief ne peut pas les départager |
 
 ⚠ **Une cause éliminée ne se rouvre pas sans une mesure neuve.** Les treize

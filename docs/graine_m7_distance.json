@@ -1,0 +1,29 @@
+{
+ "trouve": true,
+ "distance_blocs": 1,
+ "bloc": [
+  71,
+  40,
+  23
+ ],
+ "decalage": [
+  -1,
+  -1,
+  1
+ ],
+ "demandes": 4,
+ "rayon_regarde": 1,
+ "point": [
+  9260,
+  5324,
+  2924
+ ],
+ "niveau": 2,
+ "bloc_centre": [
+  72,
+  41,
+  22
+ ],
+ "cote_bloc": 128,
+ "distance_um": 1228.8
+}
