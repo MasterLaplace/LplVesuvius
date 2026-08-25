@@ -14,8 +14,8 @@ diagonale. **Aucun verdict positif n'est concerné**, et ça se lit sans lire un
 ⚠ Tracé avec PIL, sans matplotlib (absent de cet environnement).
 
 Usage :
-    cd inference && uv run python ../analysis/src/figure_deux_pannes.py \\
-        --json ../docs/audit_profils.json --sortie ../docs/images/49_deux_pannes.png
+    uv run python analysis/src/figure_deux_pannes.py \\
+        --json docs/audit_profils.json --sortie docs/images/49_deux_pannes.png
 """
 from __future__ import annotations
 

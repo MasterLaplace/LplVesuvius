@@ -21,8 +21,8 @@ la difficulté du rouleau.
 ⚠ Tracé avec PIL, sans matplotlib (absent de cet environnement).
 
 Usage :
-    cd inference && uv run python ../analysis/src/figure_graines.py \\
-        --entree ../docs/table_graines.json --sortie ../docs/images/25_campagne_graines.png
+    uv run python analysis/src/figure_graines.py \\
+        --entree docs/table_graines.json --sortie docs/images/25_campagne_graines.png
 """
 from __future__ import annotations
 

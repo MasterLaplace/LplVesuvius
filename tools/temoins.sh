@@ -685,14 +685,14 @@ run "campagne du plafond"      "$ROOT/tools/plafond_generations.sh" --verifier
 # DIFFERENTS, et le premier controle que j avais ecrit n attrapait que l un des deux :
 # retrecir l ecart entre colonnes retrecit AUSSI le cadre, donc tout reste dedans en se
 # recouvrant. Il faut mesurer la place libre, pas seulement le hors-cadre.
-run "figure des candidats"     uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_candidats.py" --verifier
+run "figure des candidats"     uv run --project "$ROOT" python "$ROOT/analysis/src/figure_candidats.py" --verifier
 # ⚠⚠ L etalonnage du rendu. Sa sonde centrale n est pas une performance : c est que la
 # sortie ne BOUGE PAS entre les reglages, et que le depouilleur REFUSE de parler de temps
 # quand l etendue dans une meme valeur depasse l ecart entre valeurs -- sans quoi la serie
 # publierait la meteo du reseau.
 run "étalon du rendu"          "$ROOT/tools/etalonner_rendu.sh" --verifier
 run "effet du cache"           uv run python "$ROOT/analysis/src/effet_du_cache.py" --verifier
-run "figure de l'étalon"       uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_etalon_rendu.py" --verifier
+run "figure de l'étalon"       uv run --project "$ROOT" python "$ROOT/analysis/src/figure_etalon_rendu.py" --verifier
 run "profileur d'une surface" "$ROOT/tools/profiler_une_surface.sh" --verifier
 run "contrôle de résolution"   "$ROOT/tools/controle_resolution.sh" --verifier
 # ⚠⚠ Le lecteur d en-tete TIFF, ecrit trois fois a la main dans des commandes jetables avant
@@ -704,9 +704,9 @@ run "dimensions d'un TIFF"     uv run python "$ROOT/analysis/src/dimensions_tiff
 # `ffmpeg -i tranche.tif sortie.png` a rendu du noir, silencieusement et en code zero, sur
 # un fichier dont 74,5 %% des pixels sont non nuls -- on a failli en conclure que le rendu
 # n avait rien produit.
-run "tif vers png"             uv run --project "$ROOT/inference" python "$ROOT/analysis/src/tif_en_png.py" --verifier
+run "tif vers png"             uv run --project "$ROOT" python "$ROOT/analysis/src/tif_en_png.py" --verifier
 run "aperçu d'une surface"     "$ROOT/tools/apercu_surface.sh" --verifier
-run "deux surfaces côte à côte" uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_deux_surfaces.py" --verifier
+run "deux surfaces côte à côte" uv run --project "$ROOT" python "$ROOT/analysis/src/figure_deux_surfaces.py" --verifier
 # ⚠⚠ Le format des messages de commit. 108 commits d affilee se sont ecartes du format du
 # depot sans que rien ne le signale : une convention qu on se rappelle est une convention
 # qu on oublie. Trois regles, chacune enfreinte au moins une fois.
@@ -799,6 +799,16 @@ run "projection tangentielle"  uv run --project "$ROOT" python "$ROOT/analysis/s
 run "ecart de maillages"       uv run --project "$ROOT" python "$ROOT/analysis/src/ecart_de_maillages.py" --verifier
 run "region locale"            uv run --project "$ROOT" python "$ROOT/analysis/src/region_locale.py" --verifier
 run "recalage sur matiere"     uv run --project "$ROOT" python "$ROOT/analysis/src/recaler_sur_la_matiere.py" --verifier
+# ⚠⚠ Ces deux-la servent le MENAGE, pas la mesure du rouleau. `permalien` garantit qu'un
+# document qui cite un fichier retire continue de pointer vers quelque chose : son invariant
+# est que le commit vise soit sur le DISTANT, sinon le lien serait mort pour tout le monde
+# sauf cette machine. ⚠ Le depot etant PRIVE, l'URL rend 404 sans session -- d'ou le controle
+# qu'elle porte le commit et le chemin verbatim, pour que `git show` s'en deduise hors ligne.
+# ⚠⚠ `poids_recuperable` existe parce que `du` a MENTI d'un facteur quatre : uv installe en
+# liens durs vers son cache, donc supprimer un venv ne libere pas ses octets tant qu'un autre
+# nom les tient. Le compte de liens est la seule chose qui repond.
+run "permalien de document"    uv run --project "$ROOT" python "$ROOT/analysis/src/permalien.py" --verifier
+run "poids recuperable"        uv run --project "$ROOT" python "$ROOT/analysis/src/poids_recuperable.py" --verifier
 # ⚠⚠ La campagne de portee. Ses sondes portent sur la COLONNE et pas sur le mot : l en-tete a
 # gagne « mediane » pendant que l extraction rendait `bloc_absent`, et un grep du mot restait
 # vert. ⚠ Et dans un `chk` qui est une FONCTION, $1 est l argument de la fonction, pas la
@@ -827,7 +837,7 @@ run "temoin du rendu"          "$ROOT/tools/temoin_du_rendu.sh" --verifier
 # muet. Sa seconde sonde est la bande brute, verifiee pixel pour pixel entre les deux
 # langues : les libelles intraduisibles n entrent pas dans le garde de langue, ils sont
 # dessines a cote.
-run "figure de calibration"    uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_calibration.py" --verifier
+run "figure de calibration"    uv run --project "$ROOT" python "$ROOT/analysis/src/figure_calibration.py" --verifier
 # ⚠⚠ La calibration d un corpus. Ses sondes centrales sont des REFUS : deux geometries dans
 # un meme fichier (deux balayages concatenes ne calibrent rien), une geometrie ni lue ni
 # declaree, et une geometrie declaree a la main qui doit se signaler comme telle. Ecrit
@@ -857,20 +867,20 @@ run "renvois de l'article"     uv run --project "$ROOT" python "$ROOT/analysis/s
 # convergente sous le plancher. Sa seconde est l amplitude NULLE, qui n a pas de logarithme
 # et doit etre posee a part et comptee -- l ecraser sur la plus petite valeur non nulle
 # ferait passer « rien du tout » pour « presque rien ».
-run "figure du contraste"      uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_contraste.py" --verifier
+run "figure du contraste"      uv run --project "$ROOT" python "$ROOT/analysis/src/figure_contraste.py" --verifier
 # ⚠ La figure du plancher de detection. Sa sonde centrale est la COULEUR : les points sous
 # le plancher et ceux qui le degagent n'ont pas la meme, sinon le lecteur cherche le
 # plancher au lieu de le voir. Sa seconde sonde exige que la cible tombe ENTRE les deux
 # fenetres mesurees -- c'est ce que le pied de la figure affirme.
-run "figure de la fenêtre"     uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_fenetre.py" --verifier
+run "figure de la fenêtre"     uv run --project "$ROOT" python "$ROOT/analysis/src/figure_fenetre.py" --verifier
 # ⚠ La figure des appuis. Sa sonde centrale est que les DEUX formes de domaine apparaissent,
 # une par panneau : un coin dit « une part des pentes est exclue », un lavis dit « aucune ».
 # Compter des traits laisserait passer deux panneaux dessines pareil.
-run "figure des appuis"        uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_appuis.py" --verifier
+run "figure des appuis"        uv run --project "$ROOT" python "$ROOT/analysis/src/figure_appuis.py" --verifier
 # ⚠⚠ La figure de la pyramide. Sa sonde centrale est celle de l AXE : au niveau 1, 21
 # tranches de 4,8 µm couvrent ce que 41 de 2,4 couvrent. Tracer contre le compte de tranches
 # decalerait les deux series d un facteur deux et montrerait un desaccord qui n existe pas.
-run "figure de la pyramide"    uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_pyramide.py" --verifier
+run "figure de la pyramide"    uv run --project "$ROOT" python "$ROOT/analysis/src/figure_pyramide.py" --verifier
 run "figure de l emballement"  uv run --project "$ROOT" python "$ROOT/analysis/src/figure_emballement.py" --verifier
 run "figure matiere chaine"    uv run --project "$ROOT" python "$ROOT/analysis/src/figure_matiere_de_la_chaine.py" --verifier
 # ⚠⚠ CES SIX BATTERIES N ONT JAMAIS TOURNE, et le garde-fou de la fin de ce fichier existe
@@ -934,19 +944,20 @@ n += 1
 print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
-# ⚠ Ces deux-la tournent depuis `inference/` : c'est le seul environnement du depot qui
-# porte Pillow, et `temoins.sh` s'execute depuis `experiments/` pour le reste. Lance
-# ailleurs, l'import echoue en disant « pas de module PIL », ce qui se lit comme une
-# dependance manquante et non comme un mauvais repertoire.
+# ⚠ Ces deux-la tournaient depuis `inference/` jusqu'au 2026-08-25, au motif que c'etait le
+# seul environnement porteur de Pillow -- `temoins.sh` s'execute depuis `experiments/` pour le
+# reste. Le motif etait FAUX (la racine declare pillow>=10.0) et NUISIBLE : `inference/`
+# n'avait pas `numcodecs`. Ils tournent depuis la RACINE, qui porte PIL, numcodecs, numpy,
+# scipy et tifffile -- strictement plus que ce que `inference/` portait.
 printf '  %-30s ' "marche sur nappe"
-if (cd "$ROOT/inference" && uv run python "$ROOT/analysis/src/suivre_nappe.py" --verifier) >/tmp/nappe.log 2>&1; then
+if (cd "$ROOT" && uv run python "$ROOT/analysis/src/suivre_nappe.py" --verifier) >/tmp/nappe.log 2>&1; then
   printf '✅ %s\n' "$(grep -c '✅' /tmp/nappe.log) checks"
 else
   printf '❌ ECHEC\n'; sed 's/^/       /' /tmp/nappe.log | tail -6; FAIL=$((FAIL + 1))
 fi
 
 printf '  %-30s ' "mosaique : assemblage"
-if (cd "$ROOT/inference" && uv run python "$ROOT/analysis/src/assembler_mosaique.py" --verifier) >/tmp/mos.log 2>&1; then
+if (cd "$ROOT" && uv run python "$ROOT/analysis/src/assembler_mosaique.py" --verifier) >/tmp/mos.log 2>&1; then
   printf '✅ %s\n' "$(grep -c '✅' /tmp/mos.log) checks"
 else
   printf '❌ ECHEC\n'; sed 's/^/       /' /tmp/mos.log | tail -6; FAIL=$((FAIL + 1))

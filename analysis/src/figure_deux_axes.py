@@ -21,7 +21,7 @@ plus de dynamique qu'un autre, ce qui serait un artefact de mise en page.
 ⚠ Trace avec PIL, sans matplotlib (absent de cet environnement).
 
 Usage :
-    cd inference && uv run python ../analysis/src/figure_deux_axes.py
+    uv run python analysis/src/figure_deux_axes.py
 """
 from __future__ import annotations
 

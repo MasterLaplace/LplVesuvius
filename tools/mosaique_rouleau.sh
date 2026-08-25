@@ -57,9 +57,11 @@ done <<< "$SEGMENTS"
 sort -n -o "$INDEX" "$INDEX"
 echo "$n spire(s) recuperee(s), $manques manque(s) — index : $INDEX"
 [ "$n" -eq 0 ] && exit 4
-# ⚠ Les scripts PIL tournent depuis `inference/` : c'est le seul environnement uv du
-# depot qui porte Pillow. Lance ailleurs, l'import echoue en disant « pas de module PIL »,
-# ce qui se lit comme une dependance manquante et non comme un mauvais repertoire.
-cd inference && uv run python ../analysis/src/assembler_mosaique.py "../$INDEX" \
-   --sortie "../docs/images/mosaique_$ROULEAU.png" --rouleau "$ROULEAU" \
-   --json "../docs/mosaique_$ROULEAU.json"
+# ⚠ Tournait depuis `inference/` jusqu'au 2026-08-25, au motif que c'etait le seul
+# environnement porteur de Pillow. C'etait FAUX depuis que la racine declare pillow>=10.0,
+# et surtout NUISIBLE : `inference/` n'avait pas `numcodecs`, ce qui a deja fait conclure a
+# tort qu'une graine n'etait pas couverte par la prediction (cf. `zarr_depth.py`). La racine
+# porte PIL, numcodecs, numpy, scipy et tifffile -- strictement plus. `inference/` est retire.
+uv run python analysis/src/assembler_mosaique.py "$INDEX" \
+   --sortie "docs/images/mosaique_$ROULEAU.png" --rouleau "$ROULEAU" \
+   --json "docs/mosaique_$ROULEAU.json"

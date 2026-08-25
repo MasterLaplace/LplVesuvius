@@ -75,7 +75,7 @@ PNG="${PNG:-$SORTIE.png}"
 # 255 et dont 74,5 % des pixels sont non nuls -- silencieusement, code de retour zero. On a
 # failli en conclure que le rendu n avait rien produit. Le convertisseur maison COMPARE les
 # statistiques de la sortie a celles de l entree et refuse d ecrire une image sans variete.
-uv run --project "$ROOT/inference" python "$ROOT/analysis/src/tif_en_png.py" \
+uv run --project "$ROOT" python "$ROOT/analysis/src/tif_en_png.py" \
     "$MILIEU" "$PNG" || { echo "refus : conversion refusée (voir ci-dessus)" >&2; exit 3; }
 echo "   écrit : $PNG  ($(du -h "$PNG" | cut -f1))"
 echo

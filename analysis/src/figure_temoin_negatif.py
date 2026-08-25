@@ -18,11 +18,11 @@ qu'auraient **deux cartes étrangères l'une à l'autre**, valeur dérivée et n
 ⚠ Tracé avec PIL, sans matplotlib (absent de cet environnement).
 
 Usage :
-    cd inference && uv run python ../analysis/src/figure_temoin_negatif.py \\
-        --json ../docs/temoin_negatif.json \\
-        --positif ../data/temoin_negatif/sur_sa_feuille.npy \\
-        --negatif ../data/temoin_negatif/en_travers.npy \\
-        --sortie ../docs/images/46_temoin_negatif.png
+    uv run python analysis/src/figure_temoin_negatif.py \\
+        --json docs/temoin_negatif.json \\
+        --positif data/temoin_negatif/sur_sa_feuille.npy \\
+        --negatif data/temoin_negatif/en_travers.npy \\
+        --sortie docs/images/46_temoin_negatif.png
 """
 from __future__ import annotations
 

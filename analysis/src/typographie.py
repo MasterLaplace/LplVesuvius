@@ -33,9 +33,9 @@ artefact périodique. C'est un contrôle nécessaire, jamais suffisant — exact
 l'absence d'auto-intersection l'est pour une trace.
 
 Usage :
-    cd inference && uv run python ../analysis/src/typographie.py ../data/encre \\
-        --json ../docs/typographie.json
-    python3 ../analysis/src/typographie.py --verifier
+    uv run python analysis/src/typographie.py data/encre \\
+        --json docs/typographie.json
+    python3 analysis/src/typographie.py --verifier
 """
 from __future__ import annotations
 

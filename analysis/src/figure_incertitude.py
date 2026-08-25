@@ -24,8 +24,8 @@ dit.
 ⚠ Trace avec PIL, sans matplotlib (absent de cet environnement).
 
 Usage :
-    cd inference && uv run python ../analysis/src/figure_incertitude.py \\
-        --entree ../docs/incertitude_carte.json --sortie ../docs/images/33_incertitude.png
+    uv run python analysis/src/figure_incertitude.py \\
+        --entree docs/incertitude_carte.json --sortie docs/images/33_incertitude.png
 """
 from __future__ import annotations
 

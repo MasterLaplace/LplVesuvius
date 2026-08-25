@@ -14,8 +14,8 @@ valeur.
 ⚠ Tracé avec PIL, sans matplotlib (absent de cet environnement).
 
 Usage :
-    cd inference && uv run python ../analysis/src/figure_2x2.py \\
-        --json ../docs/paris4_2x2.json --sortie ../docs/images/48_2x2.png
+    uv run python analysis/src/figure_2x2.py \\
+        --json docs/paris4_2x2.json --sortie docs/images/48_2x2.png
 """
 from __future__ import annotations
 

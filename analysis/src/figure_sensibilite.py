@@ -22,7 +22,7 @@ c'est tout le sujet.
 ⚠ Trace avec PIL, sans matplotlib (absent de cet environnement).
 
 Usage :
-    cd inference && uv run python ../analysis/src/figure_sensibilite.py
+    uv run python analysis/src/figure_sensibilite.py
 """
 from __future__ import annotations
 

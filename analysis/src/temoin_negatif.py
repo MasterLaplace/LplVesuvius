@@ -27,10 +27,10 @@ carte de cette taille porte réellement — le **niveau** et la **dispersion** d
 prédiction — et pas sa typographie. Prétendre le contraire serait mesurer du bruit.
 
 Usage :
-    cd inference && uv run python ../analysis/src/temoin_negatif.py \\
-        --positif ../data/temoin_negatif/sur_sa_feuille.npy \\
-        --negatif ../data/temoin_negatif/en_travers.npy \\
-        --json ../docs/temoin_negatif.json
+    uv run python analysis/src/temoin_negatif.py \\
+        --positif data/temoin_negatif/sur_sa_feuille.npy \\
+        --negatif data/temoin_negatif/en_travers.npy \\
+        --json docs/temoin_negatif.json
     python3 ../analysis/src/temoin_negatif.py --verifier
 """
 from __future__ import annotations

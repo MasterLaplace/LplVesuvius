@@ -21,8 +21,8 @@ chose.
 ⚠ Tracé avec PIL, sans matplotlib (absent de cet environnement).
 
 Usage :
-    cd inference && uv run python ../analysis/src/figure_typographie.py \\
-        --entree ../docs/typographie.json --sortie ../docs/images/45_typographie.png
+    uv run python analysis/src/figure_typographie.py \\
+        --entree docs/typographie.json --sortie docs/images/45_typographie.png
 """
 from __future__ import annotations
 

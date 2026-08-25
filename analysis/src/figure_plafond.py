@@ -23,9 +23,9 @@ croire que seul l'étalement change.
 ⚠ Tracé avec PIL, sans matplotlib (absent de cet environnement).
 
 Usage :
-    cd inference && uv run python ../analysis/src/figure_plafond.py \\
-        --origine ../docs/table_tirages.json --releve ../docs/table_tirages_plafond.json \\
-        --sortie ../docs/images/35_plafond.png
+    uv run python analysis/src/figure_plafond.py \\
+        --origine docs/table_tirages.json --releve docs/table_tirages_plafond.json \\
+        --sortie docs/images/35_plafond.png
 """
 from __future__ import annotations
 

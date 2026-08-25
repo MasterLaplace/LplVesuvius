@@ -14,9 +14,9 @@ un seuil absolu posé à une profondeur ne juge pas une trace rendue à une autr
 ⚠ Tracé avec PIL, sans matplotlib (absent de cet environnement).
 
 Usage :
-    cd inference && uv run python ../analysis/src/figure_derive_profondeur.py \\
-        --json ../docs/derive_profondeur.json --docs ../docs \\
-        --sortie ../docs/images/47_derive_profondeur.png
+    uv run python analysis/src/figure_derive_profondeur.py \\
+        --json docs/derive_profondeur.json --docs ../docs \\
+        --sortie docs/images/47_derive_profondeur.png
 """
 from __future__ import annotations
 

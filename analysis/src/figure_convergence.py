@@ -19,7 +19,7 @@ c'est l'erreur que ce depot a faite trois fois le 2026-08-20 avant d'arriver a c
 ⚠ Trace avec PIL, sans matplotlib (absent de cet environnement).
 
 Usage :
-    cd inference && uv run python ../analysis/src/figure_convergence.py
+    uv run python analysis/src/figure_convergence.py
 """
 from __future__ import annotations
 

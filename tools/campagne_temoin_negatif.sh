@@ -69,7 +69,11 @@ else
   echo "== controle NEGATIF deja fait"
 fi
 
-cd "$ROOT/inference" || exit 2
+# ⚠ Tournait depuis `inference/` (l'environnement temoin CPU) jusqu'au 2026-08-25 : la
+# racine porte PIL, numcodecs, numpy, scipy et tifffile, donc STRICTEMENT plus. `inference/`
+# reste ce qu'il declare etre -- le temoin CPU du ×4,5 XPU -- et n'est plus emprunte pour
+# des figures, ce qui evite de garder chaud un venv de 2,5 Gio pour du dessin.
+cd "$ROOT" || exit 2
 uv run python "$ROOT/analysis/src/temoin_negatif.py" \
   --positif "$DEST/sur_sa_feuille.npy" --negatif "$DEST/en_travers.npy" \
   --entree-positif "$POS_COUCHES" --fenetre-positif "$POS_TOP" "$POS_LEFT" "$POS_DEPART" \

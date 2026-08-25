@@ -1,0 +1,42 @@
+{
+ "immediat": 165481709,
+ "apres_prune": 4394178174,
+ "jamais": 3287964774,
+ "inodes": 60738,
+ "par_liens": {
+  "1": {
+   "octets": 165481709,
+   "fichiers": 8228
+  },
+  "2": {
+   "octets": 4394178174,
+   "fichiers": 42994
+  },
+  "3": {
+   "octets": 2959571851,
+   "fichiers": 3221
+  },
+  "4": {
+   "octets": 30695599,
+   "fichiers": 1053
+  },
+  "5": {
+   "octets": 176115416,
+   "fichiers": 3041
+  },
+  "6": {
+   "octets": 113667143,
+   "fichiers": 1541
+  },
+  "7": {
+   "octets": 7160824,
+   "fichiers": 604
+  },
+  "8": {
+   "octets": 753941,
+   "fichiers": 56
+  }
+ },
+ "liens_symboliques": 6,
+ "chemins_introuvables": 0
+}

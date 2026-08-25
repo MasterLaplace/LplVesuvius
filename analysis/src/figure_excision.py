@@ -18,9 +18,9 @@ contrepartie matérielle locale — c'est même la lecture que `04` retient.
 ⚠ Tracé avec PIL, sans matplotlib (absent de cet environnement).
 
 Usage :
-    cd inference && uv run python ../analysis/src/figure_excision.py \\
-        --tsv ../docs/excision_samples.tsv --sortie ../docs/images/04_excision.png \\
-        --json ../docs/excision_resume.json
+    uv run python analysis/src/figure_excision.py \\
+        --tsv docs/excision_samples.tsv --sortie docs/images/04_excision.png \\
+        --json docs/excision_resume.json
 """
 from __future__ import annotations
 

@@ -20,7 +20,7 @@ rangs sont ecrits a cote des noms, ils ne structurent pas le dessin.
 ⚠ Trace avec PIL, sans matplotlib (absent de cet environnement).
 
 Usage :
-    cd inference && uv run python ../analysis/src/figure_comparaison.py
+    uv run python analysis/src/figure_comparaison.py
 """
 from __future__ import annotations
 

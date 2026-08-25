@@ -50,7 +50,11 @@ echo "== texte"
 cp "$TEXTE" "$DEST/"
 
 echo "== chiffres du document qui part"
-cd "$ROOT/inference" || exit 2
+# ⚠ Tournait depuis `inference/` (l'environnement temoin CPU) jusqu'au 2026-08-25 : la
+# racine porte PIL, numcodecs, numpy, scipy et tifffile, donc STRICTEMENT plus. `inference/`
+# reste ce qu'il declare etre -- le temoin CPU du ×4,5 XPU -- et n'est plus emprunte pour
+# des figures, ce qui evite de garder chaud un venv de 2,5 Gio pour du dessin.
+cd "$ROOT" || exit 2
 if uv run python "$ROOT/analysis/src/verifier_chiffres.py" "$ROOT"/docs/*.md \
      "$ROOT/article/article.typ" --soumission "$TEXTE" --article "$ROOT/article/article.typ" \
      > "$DEST/chiffres.log" 2>&1; then

@@ -15,8 +15,8 @@ justement le cas de celui dont la part écrite est la plus haute.
 ⚠ Tracé avec PIL, sans matplotlib (absent de cet environnement).
 
 Usage :
-    cd inference && uv run python ../analysis/src/figure_eligibilite.py \\
-        --json ../docs/eligibilite_aval.json --sortie ../docs/images/48_eligibilite.png
+    uv run python analysis/src/figure_eligibilite.py \\
+        --json docs/eligibilite_aval.json --sortie docs/images/48_eligibilite.png
 """
 from __future__ import annotations
 

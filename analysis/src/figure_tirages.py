@@ -20,7 +20,7 @@ geometrique ne voit un saut d'une seule spire dans le cas serre).
 ⚠ Trace avec PIL, sans matplotlib (absent de cet environnement).
 
 Usage :
-    cd inference && uv run python ../analysis/src/figure_tirages.py
+    uv run python analysis/src/figure_tirages.py
 """
 from __future__ import annotations
 
