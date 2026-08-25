@@ -181,10 +181,8 @@ défaut assumé, pas une conclusion.
 ## Reproduire
 
 ```bash
-cd experiments
-uv run python ../analysis/src/incertitude_carte.py --json ../docs/incertitude_carte.json
-cd ../inference
-uv run python ../analysis/src/figure_incertitude.py
+(cd experiments && uv run python ../analysis/src/incertitude_carte.py --json ../docs/incertitude_carte.json)
+uv run python analysis/src/figure_incertitude.py
 ```
 
 Une campagne dense s'écrit dans **son propre dossier**, pour que les chiffres publiés de

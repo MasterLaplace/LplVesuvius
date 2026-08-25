@@ -214,9 +214,8 @@ teste pas.
 
 ```bash
 ./tools/lancer.sh --fond tools/campagne_tirages.sh "$PWD/data/tirages" 6
-cd experiments
-uv run python ../analysis/src/table_tirages.py --json ../docs/table_tirages.json
-cd ../inference && uv run python ../analysis/src/figure_tirages.py
+(cd experiments && uv run python ../analysis/src/table_tirages.py --json ../docs/table_tirages.json)
+uv run python analysis/src/figure_tirages.py
 ```
 
 ⚠ Passer par `tools/lancer.sh` n'est pas décoratif : la première exécution de cette

@@ -165,6 +165,6 @@ inférence sur une fenêtre.
 ./tools/lancer.sh --fond tools/campagne_temoin_negatif.sh
 
 # les témoins, hors ligne
-cd inference && uv run python ../analysis/src/temoin_negatif.py --verifier
+uv run python analysis/src/temoin_negatif.py --verifier
 uv run python ../analysis/src/figure_temoin_negatif.py --verifier
 ```

@@ -173,7 +173,7 @@ que chacun est du genre à ressortir ailleurs.
 
 ```bash
 ./tools/lancer.sh --fond tools/campagne_typographie.sh
-cd inference && uv run python ../analysis/src/figure_typographie.py
+uv run python analysis/src/figure_typographie.py
 
 # les témoins, hors ligne — sur des pages SYNTHÉTIQUES dont on connaît l'interligne
 uv run python ../analysis/src/typographie.py --verifier

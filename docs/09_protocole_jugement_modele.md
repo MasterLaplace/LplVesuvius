@@ -554,5 +554,5 @@ uv run python ../analysis/src/judge_api.py ../data/out/ink_scroll4.npy --auto-ba
 ```bash
 # l'image de calibrage à deux panneaux, témoin inclus — c'est ce que le protocole exige
 # de montrer AVANT tout inconnu, et l'ordre est irréversible.
-cd inference && uv run python ../analysis/src/make_panel.py <sortie.png> --help
+uv run python analysis/src/make_panel.py <sortie.png> --help
 ```

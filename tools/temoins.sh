@@ -809,6 +809,19 @@ run "recalage sur matiere"     uv run --project "$ROOT" python "$ROOT/analysis/s
 # nom les tient. Le compte de liens est la seule chose qui repond.
 run "permalien de document"    uv run --project "$ROOT" python "$ROOT/analysis/src/permalien.py" --verifier
 run "poids recuperable"        uv run --project "$ROOT" python "$ROOT/analysis/src/poids_recuperable.py" --verifier
+# ⚠⚠ Le point d'entree de l'INFERENCE, auto-teste SANS torch et SANS GPU. C'est ce qui a
+# permis de supprimer `inference/` : le temoin CPU est devenu un MODE (`--device cpu`) au lieu
+# d'un second environnement, et la regle qui le gouverne -- « auto » retombe, « xpu » REFUSE --
+# est une fonction pure qui prend la disponibilite en argument, donc elle se verifie ici.
+run "appareil d'inference"     uv run --project "$ROOT" python "$ROOT/inference_xpu/src/infer_ink.py" --verifier
+# ⚠⚠ Le point d entree du depot. Ce qu il garantit tient en une phrase : `lplv <verbe> --help`
+# EXECUTE le module avec `--help` au lieu de re-decrire son argparse, donc l aide ne peut pas
+# perimer. Ses trois controles porteurs : un nom revendique deux fois est REFUSE (une ambiguite
+# silencieuse lancerait celui que le systeme de fichiers a mis devant), tout ce qui suit le
+# verbe passe VERBATIM (sinon il faudrait ecrire une seconde aide a cote), et un fichier en `_`
+# n est pas un verbe.
+run "point d entree lplv"      uv run --project "$ROOT" python "$ROOT/analysis/src/lplv.py" --verifier
+run "recensement des verbes"   uv run --project "$ROOT" python "$ROOT/analysis/src/figure_verbes.py" --verifier
 # ⚠⚠ La campagne de portee. Ses sondes portent sur la COLONNE et pas sur le mot : l en-tete a
 # gagne « mediane » pendant que l extraction rendait `bloc_absent`, et un grep du mot restait
 # vert. ⚠ Et dans un `chk` qui est une FONCTION, $1 est l argument de la fonction, pas la
@@ -1056,7 +1069,12 @@ rm -f "$T55"
 # cette distinction et sa raison est ecrite chez lui ; c est la meme forme qui est testee ici.
 printf '  %-30s ' "batteries non lancees"
 JAMAIS=""
-for f in "$ROOT"/analysis/src/*.py; do
+# ⚠⚠ La PORTEE du garde etait une paire de globs ecrite a la main, donc un module hors de
+# `analysis/src` echappait au controle -- exactement le cas de `inference_xpu/src/infer_ink.py`,
+# le point d entree de l inference. La liste suit desormais celle de `artefacts_orphelins.py`.
+# Mesure du 2026-08-25 : l elargissement ne signale RIEN de neuf, il ferme juste le trou.
+for f in "$ROOT"/analysis/src/*.py "$ROOT"/inference_xpu/src/*.py "$ROOT"/tracecheck/*.py \
+         "$ROOT"/tools/*.py "$ROOT"/experiments/src/*/*.py; do
   grep -q -- 'add_argument("--verifier"' "$f" || continue
   b=$(basename "$f")
   # ⚠ Le motif porte le GUILLEMET FERMANT : une ligne de lancement ecrit

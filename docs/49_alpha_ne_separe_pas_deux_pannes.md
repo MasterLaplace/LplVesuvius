@@ -121,9 +121,9 @@ maintenant lui-même ce que le profil dit, et refuse.
 ```bash
 python3 analysis/src/audit_profils_plats.py --racine . --json docs/audit_profils.json
 
-cd inference && uv run python ../analysis/src/test_convergence.py --nom m7 \
-    --profil ../data/prediction_paris4/m7/profil_41c.json \
-    --profil ../data/prediction_paris4/m7/profil_161c.json
+uv run python analysis/src/test_convergence.py --nom m7 \
+    --profil data/prediction_paris4/m7/profil_41c.json \
+    --profil data/prediction_paris4/m7/profil_161c.json
 
 # les témoins, hors ligne
 python3 analysis/src/audit_profils_plats.py --verifier

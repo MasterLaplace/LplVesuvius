@@ -347,8 +347,8 @@ orphelin qui a tourné 4 h 32 pour rien, et un aperçu qu'on n'a pas pensé à f
 ```bash
 tools/etalonner_rendu.sh                       # 5 valeurs × 3 répétitions
 python3 analysis/src/effet_du_cache.py --json docs/etalon_rendu.json
-cd inference && uv run python ../analysis/src/figure_etalon_rendu.py \
-    --json ../docs/etalon_rendu.json --sortie ../docs/images/50_etalon_rendu.png \
+uv run python analysis/src/figure_etalon_rendu.py \
+    --json docs/etalon_rendu.json --sortie docs/images/50_etalon_rendu.png \
     --projection "fenêtre 41 au défaut=25.7" \
     --projection "fenêtre 41 à --cache-gb 1=10.7" \
     --projection "fenêtre 161 à --cache-gb 1=39.2"
@@ -359,5 +359,5 @@ tools/etalonner_rendu.sh --verifier
 tools/controle_resolution.sh --verifier
 tools/rendre_surveille.sh --verifier
 python3 analysis/src/effet_du_cache.py --verifier
-cd inference && uv run python ../analysis/src/figure_etalon_rendu.py --verifier
+uv run python analysis/src/figure_etalon_rendu.py --verifier
 ```

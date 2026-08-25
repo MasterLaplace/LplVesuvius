@@ -1,0 +1,1746 @@
+[
+ {
+  "nom": "analyse",
+  "chemin": "experiments/src/excision/analyse.py",
+  "langage": "python",
+  "resume": "Compare la distribution d'intensite CT des cellules excisees et des temoins.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "apercu_surface",
+  "chemin": "tools/apercu_surface.sh",
+  "langage": "shell",
+  "resume": "Une IMAGE de la surface, regardable par un humain.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "apparier_volumes",
+  "chemin": "analysis/src/apparier_volumes.py",
+  "langage": "python",
+  "resume": "Quel volume va avec quelle prediction de surface — par IDENTITE, pas par position.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "appui_de_pente",
+  "chemin": "analysis/src/appui_de_pente.py",
+  "langage": "python",
+  "resume": "α est une PENTE : elle a deux appuis, et un appui qui ne mesure rien n'en est pas un.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "artefacts_orphelins",
+  "chemin": "analysis/src/artefacts_orphelins.py",
+  "langage": "python",
+  "resume": "Quel artefact versionne n'a AUCUN producteur dans l'arbre ?",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "assembler_mosaique",
+  "chemin": "analysis/src/assembler_mosaique.py",
+  "langage": "python",
+  "resume": "Empiler les cartes d'encre publiees d'un rouleau, une par spire, en une seule image.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "audit_profils_plats",
+  "chemin": "analysis/src/audit_profils_plats.py",
+  "langage": "python",
+  "resume": "Combien de nos profils de profondeur ne mesurent RIEN, et quels verdicts en dépendent ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "balayage_maxedge",
+  "chemin": "tools/balayage_maxedge.sh",
+  "langage": "shell",
+  "resume": "Le filtre `--maxedge` masque-t-il, ou fabrique-t-il, les auto-intersections ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "bandes_niveau0",
+  "chemin": "tools/bandes_niveau0.sh",
+  "langage": "shell",
+  "resume": "Deux bandes au NIVEAU 0, loin du site migrant, pour trancher une question que le",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "baseline_sweep",
+  "chemin": "experiments/src/excision/baseline_sweep.py",
+  "langage": "python",
+  "resume": "La ligne de base « locale » de `proximity.py` n'est pas locale. Balayer les remedes.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "boucle_de_correction",
+  "chemin": "tools/boucle_de_correction.sh",
+  "langage": "shell",
+  "resume": "LA BOUCLE ENTIERE : tracer -> juger -> dire ou la surface aurait du passer -> re-pousser.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "calibration_corpus",
+  "chemin": "analysis/src/calibration_corpus.py",
+  "langage": "python",
+  "resume": "Ce que vaut le relief SUR UN CORPUS, lu par l'instrument qui l'a lu.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "campagne_champ",
+  "chemin": "tools/campagne_champ.sh",
+  "langage": "shell",
+  "resume": "Champ de correction sur tous les segments d'un rouleau qui publient un volume de surface.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "campagne_dense",
+  "chemin": "tools/campagne_dense.sh",
+  "langage": "shell",
+  "resume": "Re-mesurer la part de matiere avec un sondage DENSE, un fichier par segment.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "campagne_fibres",
+  "chemin": "tools/campagne_fibres.sh",
+  "langage": "shell",
+  "resume": "Campagne fibres sur TOUT le corpus Scroll 1, en file derriere la campagne profondeur.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "campagne_graines",
+  "chemin": "tools/campagne_graines.sh",
+  "langage": "shell",
+  "resume": "Le critere de graine tient-il sur les DIX rouleaux du prix que personne n'a traces ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "campagne_pas",
+  "chemin": "tools/campagne_pas.sh",
+  "langage": "shell",
+  "resume": "`step_size` est le SEUL parametre mesure qui deplace la trajectoire de croissance.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "campagne_prediction_paris4",
+  "chemin": "tools/campagne_prediction_paris4.sh",
+  "langage": "shell",
+  "resume": "Laquelle des DEUX predictions de surface de PHercParis4 vaut-il mieux tracer ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "campagne_saut_spire",
+  "chemin": "tools/campagne_saut_spire.sh",
+  "langage": "shell",
+  "resume": "Detecteur de saut de spire sur TOUT le corpus PHerc0139, contre les croisements publies.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "campagne_second_axe",
+  "chemin": "tools/campagne_second_axe.sh",
+  "langage": "shell",
+  "resume": "SELECTIONNER SUR UN AXE, VALIDER SUR L'AUTRE — la parade a la malediction du vainqueur.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "campagne_temoin_negatif",
+  "chemin": "tools/campagne_temoin_negatif.sh",
+  "langage": "shell",
+  "resume": "M8 — LE TEMOIN NEGATIF QUE LE DOMAINE N'A PAS.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "campagne_thread_limit",
+  "chemin": "tools/campagne_thread_limit.sh",
+  "langage": "shell",
+  "resume": "`thread_limit` change-t-il le VERDICT, et pas seulement l'aire ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "campagne_tirages",
+  "chemin": "tools/campagne_tirages.sh",
+  "langage": "shell",
+  "resume": "Le traceur est-il un tirage AILLEURS que sur la graine de `24` ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "campagne_typographie",
+  "chemin": "tools/campagne_typographie.sh",
+  "langage": "shell",
+  "resume": "Mesurer la signature typographique des cartes d'encre publiees.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "carte_difficulte",
+  "chemin": "tools/carte_difficulte.sh",
+  "langage": "shell",
+  "resume": "Ecart entre spires sur les 13 rouleaux ELIGIBLES au Grand Prize 2027, plus un temoin.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "carte_segments",
+  "chemin": "analysis/src/carte_segments.py",
+  "langage": "python",
+  "resume": "Quels segments officiels d'un rouleau se RECOUVRENT ? -- lu dans leurs metas, sans rendu.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "carte_separabilite",
+  "chemin": "tools/carte_separabilite.sh",
+  "langage": "shell",
+  "resume": "Separabilite des feuilles sur les 13 rouleaux du Grand Prize, plus des temoins.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "chainer_tangentiel",
+  "chemin": "tools/chainer_tangentiel.sh",
+  "langage": "shell",
+  "resume": "ENCHAINER la projection tangentielle, et comparer au saut direct de meme longueur.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "champ_correction",
+  "chemin": "analysis/src/champ_correction.py",
+  "langage": "python",
+  "resume": "Le champ de correction d'une trace : de combien, et est-ce RÉPARABLE ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "choisir_tirages",
+  "chemin": "analysis/src/choisir_tirages.py",
+  "langage": "python",
+  "resume": "Quels tirages valent le second axe ? -- parce qu'un rendu coute dix minutes.",
+  "verifie": false,
+  "json": true
+ },
+ {
+  "nom": "clone_repos",
+  "chemin": "tools/clone_repos.sh",
+  "langage": "shell",
+  "resume": "Clone (ou met a jour) les depots listes dans repos.tsv.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "compare_maps",
+  "chemin": "analysis/src/compare_maps.py",
+  "langage": "python",
+  "resume": "Deux cartes d'encre du MEME segment disent-elles la meme chose ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "comparer_candidats",
+  "chemin": "analysis/src/comparer_candidats.py",
+  "langage": "python",
+  "resume": "Quelle propriété d'une graine prédit qu'elle donnera une trace qui converge ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "comparer_cartes",
+  "chemin": "analysis/src/comparer_cartes.py",
+  "langage": "python",
+  "resume": "Deux campagnes de separabilite, et ce que la seconde fait a l'ordre de la premiere.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "comparer_encre",
+  "chemin": "analysis/src/comparer_encre.py",
+  "langage": "python",
+  "resume": "Un detecteur d'encre a-t-il RENDU quelque chose ? -- juge par un temoin ou il marche.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "comparer_plafond",
+  "chemin": "analysis/src/comparer_plafond.py",
+  "langage": "python",
+  "resume": "La faible dispersion des rouleaux « stables » est-elle une TRONCATURE ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "comparer_predictions",
+  "chemin": "analysis/src/comparer_predictions.py",
+  "langage": "python",
+  "resume": "Le 2×2 croisé : la prédiction change-t-elle quelque chose, ou est-ce l'endroit ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "compter_corpus",
+  "chemin": "analysis/src/compter_corpus.py",
+  "langage": "python",
+  "resume": "Compter ce que chaque artefact de corpus contient REELLEMENT.",
+  "verifie": false,
+  "json": true
+ },
+ {
+  "nom": "controle_resolution",
+  "chemin": "tools/controle_resolution.sh",
+  "langage": "shell",
+  "resume": "La pyramide du volume preserve-t-elle alpha ?",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "convergence_des_essais",
+  "chemin": "tools/convergence_des_essais.sh",
+  "langage": "shell",
+  "resume": "Les traces que nos instruments CONDAMNENT convergent-elles ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "correlate",
+  "chemin": "experiments/src/excision/correlate.py",
+  "langage": "python",
+  "resume": "Joint les mesures de proximite a l'index publie de `windcheck`.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "couche_de_rendu",
+  "chemin": "analysis/src/couche_de_rendu.py",
+  "langage": "python",
+  "resume": "Extraire UNE couche d'une pile rendue, en image regardable — et l'index qui va avec.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "cout_passage_echelle",
+  "chemin": "analysis/src/cout_passage_echelle.py",
+  "langage": "python",
+  "resume": "Combien coûte notre mesure sur 53 rouleaux, et sur les 800 de la villa ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "critere_relatif",
+  "chemin": "analysis/src/critere_relatif.py",
+  "langage": "python",
+  "resume": "Quelles grandeurs d'un profil décrivent la SURFACE, et lesquelles décrivent la FENÊTRE ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "croiser_encre",
+  "chemin": "analysis/src/croiser_encre.py",
+  "langage": "python",
+  "resume": "L'instrument change-t-il une DÉCISION ? — profondeur de trace contre encre publiée.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "croiser_instruments",
+  "chemin": "analysis/src/croiser_instruments.py",
+  "langage": "python",
+  "resume": "Nos instruments de trace predisent-ils ce qu'un recensement INDEPENDANT recense ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "decimer_tifxyz",
+  "chemin": "analysis/src/decimer_tifxyz.py",
+  "langage": "python",
+  "resume": "Sous-echantillonner une surface tifxyz, pour mesurer ce qu'un maillage grossier VOIT.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "decouper_tifxyz",
+  "chemin": "analysis/src/decouper_tifxyz.py",
+  "langage": "python",
+  "resume": "Découper un `tifxyz` en morceaux de la taille d'un autre, pour comparer ce qui est comparable.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "depth_profile",
+  "chemin": "analysis/src/depth_profile.py",
+  "langage": "python",
+  "resume": "Ou se trouve la SURFACE dans la pile de couches, et est-elle au meme endroit ?",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "derive_avec_profondeur",
+  "chemin": "analysis/src/derive_avec_profondeur.py",
+  "langage": "python",
+  "resume": "Un critère mesuré à une profondeur de rendu peut-il juger une trace mesurée à une autre ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "derive_ou_loterie",
+  "chemin": "analysis/src/derive_ou_loterie.py",
+  "langage": "python",
+  "resume": "Une chaine de spires DERIVE-t-elle, ou chaque tour est-il un tirage ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "dimensions_tiff",
+  "chemin": "analysis/src/dimensions_tiff.py",
+  "langage": "python",
+  "resume": "Les dimensions d'un TIFF, lues dans son en-tête — même s'il est inachevé.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "dossier_soumission",
+  "chemin": "tools/dossier_soumission.sh",
+  "langage": "shell",
+  "resume": "Rassembler ce qui PART : le texte, ses figures, et la preuve que ses chiffres tiennent.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "ecart_de_maillages",
+  "chemin": "analysis/src/ecart_de_maillages.py",
+  "langage": "python",
+  "resume": "Deux maillages qui prétendent au même endroit y sont-ils ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "ecart_en_spires",
+  "chemin": "analysis/src/ecart_en_spires.py",
+  "langage": "python",
+  "resume": "Nos traces sont-elles PERDUES, ou a UNE SPIRE de leur feuille ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "effet_du_cache",
+  "chemin": "analysis/src/effet_du_cache.py",
+  "langage": "python",
+  "resume": "Quelle taille de cache de chunks donner au rendu, mesurée plutôt que devinée.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "effet_du_plafond",
+  "chemin": "analysis/src/effet_du_plafond.py",
+  "langage": "python",
+  "resume": "Le plafond de générations fabrique-t-il le résultat, ou le résultat tient-il ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "effet_taille_fenetre",
+  "chemin": "analysis/src/effet_taille_fenetre.py",
+  "langage": "python",
+  "resume": "Le relief dépend de la taille de la FENÊTRE D'ANALYSE, pas seulement de la profondeur.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "eligibilite_aval",
+  "chemin": "analysis/src/eligibilite_aval.py",
+  "langage": "python",
+  "resume": "Sur quel rouleau peut-on à la fois TRACER et LIRE ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "espacement_spires",
+  "chemin": "analysis/src/espacement_spires.py",
+  "langage": "python",
+  "resume": "Où ce rouleau est-il difficile à tracer ? Mesuré sur les prédictions de surface.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "etalonner_rendu",
+  "chemin": "tools/etalonner_rendu.sh",
+  "langage": "shell",
+  "resume": "Combien de RAM le rendu doit-il avoir, et combien lui en donner ?",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "etat_rouleaux_prix",
+  "chemin": "tools/etat_rouleaux_prix.sh",
+  "langage": "shell",
+  "resume": "Ce que chaque rouleau du Grand Prize publie -- et si quelqu'un l'a deja trace.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "etendre_nappe",
+  "chemin": "tools/etendre_nappe.sh",
+  "langage": "shell",
+  "resume": "ETENDRE UNE NAPPE LE LONG D'ELLE-MEME : le compromis entre extension et derive.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "evaluate_segment",
+  "chemin": "analysis/src/evaluate_segment.py",
+  "langage": "python",
+  "resume": "Evaluation d'une carte d'encre contre un etiquetage PARTIEL.",
+  "verifie": false,
+  "json": true
+ },
+ {
+  "nom": "exposition_historique",
+  "chemin": "tools/exposition_historique.sh",
+  "langage": "shell",
+  "resume": "Combien de commits exposent une phrase donnee, et de quelle facon.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "faire_la_release",
+  "chemin": "tools/faire_la_release.sh",
+  "langage": "shell",
+  "resume": "Construire la branche de release : l essentiel, et RIEN QUE ce qui se verifie.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "fenetre_utilisable",
+  "chemin": "analysis/src/fenetre_utilisable.py",
+  "langage": "python",
+  "resume": "Quel couple de fenêtres peut porter une pente, et lequel rendra l'identité.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "fetch_cartes_encre",
+  "chemin": "tools/fetch_cartes_encre.sh",
+  "langage": "shell",
+  "resume": "Recuperer les cartes d'encre PUBLIEES (version reduite) d'un rouleau.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "fetch_champ_normal",
+  "chemin": "tools/fetch_champ_normal.py",
+  "langage": "python",
+  "resume": "Assembler un `direction_fields` local pour `vc_grow_seg_from_seed`.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "fetch_layers",
+  "chemin": "tools/fetch_layers.sh",
+  "langage": "shell",
+  "resume": "Recuperer les couches rendues d'un segment, pour la detection d'encre.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "fetch_normal_grids",
+  "chemin": "tools/fetch_normal_grids.py",
+  "langage": "python",
+  "resume": "Récupérer une tranche des `normal-grids` publiées, pour `normal_grid_path`.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "fetch_traces",
+  "chemin": "tools/fetch_traces.py",
+  "langage": "python",
+  "resume": "Recuperer les traces `tifxyz` d'un corpus publie, depuis le bucket ouvert.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "fetch_zarr_boite",
+  "chemin": "tools/fetch_zarr_boite.py",
+  "langage": "python",
+  "resume": "Récupérer une BOÎTE d'un tableau OME-Zarr distant, en gardant ses coordonnées absolues.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "fiber_orientation",
+  "chemin": "analysis/src/fiber_orientation.py",
+  "langage": "python",
+  "resume": "La direction des fibres change-t-elle avec la profondeur ? (problème ouvert nº 5)",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "figure_2x2",
+  "chemin": "analysis/src/figure_2x2.py",
+  "langage": "python",
+  "resume": "Le 2×2 croisé : chaque tirage, la bande de bruit, et ce qui ne se plote pas.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "figure_appuis",
+  "chemin": "analysis/src/figure_appuis.py",
+  "langage": "python",
+  "resume": "Un écart posé sur le bord de la fenêtre est une FLÈCHE, pas un point.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "figure_calibration",
+  "chemin": "analysis/src/figure_calibration.py",
+  "langage": "python",
+  "resume": "La distribution du relief sur un corpus, avec la géométrie où elle a été lue.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "figure_candidats",
+  "chemin": "analysis/src/figure_candidats.py",
+  "langage": "python",
+  "resume": "Huit candidats, trois propriétés, et un résultat qui ne dépend d'aucune des trois.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "figure_champ",
+  "chemin": "analysis/src/figure_champ.py",
+  "langage": "python",
+  "resume": "Le champ de correction en image — la preuve visuelle que le concours réclame.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "figure_comparaison",
+  "chemin": "analysis/src/figure_comparaison.py",
+  "langage": "python",
+  "resume": "Le classement des treize, avant et apres un echantillonnage trois fois plus dense.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "figure_contraste",
+  "chemin": "analysis/src/figure_contraste.py",
+  "langage": "python",
+  "resume": "Le relief d'une fenêtre étroite, sur une surface qui suit une feuille et sur une qui n'en suit pas.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "figure_convergence",
+  "chemin": "analysis/src/figure_convergence.py",
+  "langage": "python",
+  "resume": "Deux surfaces, la meme mesure, des fenetres de plus en plus larges.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "figure_derive_profondeur",
+  "chemin": "analysis/src/figure_derive_profondeur.py",
+  "langage": "python",
+  "resume": "Ce qu'un critère mesure quand la plupart des traces butent sur le plafond du rendu.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "figure_deux_axes",
+  "chemin": "analysis/src/figure_deux_axes.py",
+  "langage": "python",
+  "resume": "Deux juges, quatre rouleaux — et ils ne classent pas pareil.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "figure_deux_pannes",
+  "chemin": "analysis/src/figure_deux_pannes.py",
+  "langage": "python",
+  "resume": "α mesuré contre α de plafond : là où le verdict cesse de distinguer deux pannes.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "figure_deux_surfaces",
+  "chemin": "analysis/src/figure_deux_surfaces.py",
+  "langage": "python",
+  "resume": "Ce qu'α mesure, rendu visible : un croisillon contre un tourbillon.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "figure_deux_traces",
+  "chemin": "analysis/src/figure_deux_traces.py",
+  "langage": "python",
+  "resume": "Deux traces d'un même rouleau, côte à côte, à la MÊME échelle physique.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "figure_difficulte",
+  "chemin": "analysis/src/figure_difficulte.py",
+  "langage": "python",
+  "resume": "La carte de difficulté des 13 rouleaux du prix, en image.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "figure_eligibilite",
+  "chemin": "analysis/src/figure_eligibilite.py",
+  "langage": "python",
+  "resume": "Deux ensembles disjoints : ce qu'on sait tracer, et ce qu'on sait lire.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "figure_emballement",
+  "chemin": "analysis/src/figure_emballement.py",
+  "langage": "python",
+  "resume": "Une chaîne tangentielle s'emballe, et son PAS le dit avant sa boîte.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "figure_etalon_rendu",
+  "chemin": "analysis/src/figure_etalon_rendu.py",
+  "langage": "python",
+  "resume": "Ce que coûte un cache de chunks, et où la machine bascule.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "figure_excision",
+  "chemin": "analysis/src/figure_excision.py",
+  "langage": "python",
+  "resume": "Les cellules que `windcheck` retire sont-elles vraiment indiscernables de celles qu'il garde ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "figure_fenetre",
+  "chemin": "analysis/src/figure_fenetre.py",
+  "langage": "python",
+  "resume": "Le plancher de détection, et de quel côté chaque fenêtre tombe.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "figure_feuille_ou_tranche",
+  "chemin": "analysis/src/figure_feuille_ou_tranche.py",
+  "langage": "python",
+  "resume": "Une feuille aplatie, ou des spires vues de côté ? La question se règle à l'œil.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "figure_graines",
+  "chemin": "analysis/src/figure_graines.py",
+  "langage": "python",
+  "resume": "La campagne appariée des critères de graine, un rouleau par ligne.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "figure_incertitude",
+  "chemin": "analysis/src/figure_incertitude.py",
+  "langage": "python",
+  "resume": "Les treize rouleaux du prix, avec l'incertitude que `16` n'affichait pas.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "figure_marche",
+  "chemin": "analysis/src/figure_marche.py",
+  "langage": "python",
+  "resume": "Deux facons de suivre une nappe, sur la MEME coupe : le plus proche, et la crete.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "figure_matiere_de_la_chaine",
+  "chemin": "analysis/src/figure_matiere_de_la_chaine.py",
+  "langage": "python",
+  "resume": "La nappe reste-t-elle POSÉE SUR LA MATIÈRE à mesure que la chaîne avance ?",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "figure_murs",
+  "chemin": "analysis/src/figure_murs.py",
+  "langage": "python",
+  "resume": "L'espace de causes, mur par mur, et ce qu'il en reste.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "figure_piles_vides",
+  "chemin": "analysis/src/figure_piles_vides.py",
+  "langage": "python",
+  "resume": "Le même maillage, deux repères : rien, et un papyrus.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "figure_plafond",
+  "chemin": "analysis/src/figure_plafond.py",
+  "langage": "python",
+  "resume": "Deux campagnes, deux plafonds : ce que la troncature cachait.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "figure_portee",
+  "chemin": "analysis/src/figure_portee.py",
+  "langage": "python",
+  "resume": "Jusqu'où la tangente d'une nappe reste-t-elle sur la nappe ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "figure_profondeur",
+  "chemin": "analysis/src/figure_profondeur.py",
+  "langage": "python",
+  "resume": "Rendre le profil de profondeur en image — la preuve visuelle que le concours réclame.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "figure_pyramide",
+  "chemin": "analysis/src/figure_pyramide.py",
+  "langage": "python",
+  "resume": "α est une pente, et deux résolutions doivent la lire pareil.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "figure_segments",
+  "chemin": "analysis/src/figure_segments.py",
+  "langage": "python",
+  "resume": "Les écarts entre segments publiés : la bande des raccordables est VIDE.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "figure_sensibilite",
+  "chemin": "analysis/src/figure_sensibilite.py",
+  "langage": "python",
+  "resume": "Ce qu'un maillage plus grossier VOIT d'une surface qui se croise.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "figure_signatures",
+  "chemin": "analysis/src/figure_signatures.py",
+  "langage": "python",
+  "resume": "Quatre traces, quatre signatures — et l'amplitude de profondeur à côté de chacune.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "figure_temoin_negatif",
+  "chemin": "analysis/src/figure_temoin_negatif.py",
+  "langage": "python",
+  "resume": "Le détecteur reçoit deux volumes différents et rend la même carte.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "figure_tirages",
+  "chemin": "analysis/src/figure_tirages.py",
+  "langage": "python",
+  "resume": "Douze rouleaux, six tirages chacun, parametres strictement identiques.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "figure_typographie",
+  "chemin": "analysis/src/figure_typographie.py",
+  "langage": "python",
+  "resume": "« Consistent with », mesuré : ce qui suit le contraste d'encre, et ce qui va contre.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "figure_verbes",
+  "chemin": "analysis/src/figure_verbes.py",
+  "langage": "python",
+  "resume": "Les 217 greffons du dépôt, par famille et par ce qu'ils savent faire d'eux-mêmes.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "format_des_commits",
+  "chemin": "tools/format_des_commits.sh",
+  "langage": "shell",
+  "resume": "Les messages de commit suivent-ils le format du depot ?",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "fusion_scan",
+  "chemin": "experiments/src/excision/fusion_scan.py",
+  "langage": "python",
+  "resume": "Les sites suspects persistent-ils le long de z, ou sont-ils du bruit de coupe ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "fusions",
+  "chemin": "experiments/src/excision/fusions.py",
+  "langage": "python",
+  "resume": "Localiser les fusions de feuilles en SUIVANT les spires, pas en les recomptant.",
+  "verifie": false,
+  "json": true
+ },
+ {
+  "nom": "geometrie_chaine",
+  "chemin": "analysis/src/geometrie_chaine.py",
+  "langage": "python",
+  "resume": "Ou chaque spire d'une chaine se trouve DANS le rouleau -- rayon, angle balaye, espacement.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "graine_admissible",
+  "chemin": "analysis/src/graine_admissible.py",
+  "langage": "python",
+  "resume": "Peut-on semer ICI, et dans quelle prédiction ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "images_des_docs",
+  "chemin": "tools/images_des_docs.sh",
+  "langage": "shell",
+  "resume": "Toute image qu'un document reference existe-t-elle vraiment ?",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "incertitude_carte",
+  "chemin": "analysis/src/incertitude_carte.py",
+  "langage": "python",
+  "resume": "Le classement des treize rouleaux du prix est-il RESOLU par ses propres donnees ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "infer_ink",
+  "chemin": "inference_xpu/src/infer_ink.py",
+  "langage": "python",
+  "resume": "Detection d'encre par fenetre glissante, a partir des couches publiees.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "judge_api",
+  "chemin": "analysis/src/judge_api.py",
+  "langage": "python",
+  "resume": "Calibrer un modele de langue comme juge, automatiquement et en aveugle.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "juge_a_un_rendu",
+  "chemin": "analysis/src/juge_a_un_rendu.py",
+  "langage": "python",
+  "resume": "Peut-on juger une spire avec UN rendu au lieu de deux ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "juger_nappe",
+  "chemin": "tools/juger_nappe.sh",
+  "langage": "shell",
+  "resume": "JUGER UNE NAPPE : aplatir, rendre dans deux fenetres, mesurer la convergence.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "juger_rognages",
+  "chemin": "tools/juger_rognages.sh",
+  "langage": "shell",
+  "resume": "Juger les nappes ROGNEES : la peripherie tardive retiree change-t-elle la part au bord ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "lancer",
+  "chemin": "tools/lancer.sh",
+  "langage": "shell",
+  "resume": "Lancer un script long depuis une COPIE FIGEE, pour qu'on puisse editer l'original.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "langue",
+  "chemin": "analysis/src/langue.py",
+  "langage": "python",
+  "resume": "Écrire une figure dans une autre langue sans réécrire la figure.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "leur_graine",
+  "chemin": "tools/leur_graine.sh",
+  "langage": "shell",
+  "resume": "LEUR graine dans NOTRE chaine -- le seed suffit-il ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "leurs_parametres",
+  "chemin": "tools/leurs_parametres.sh",
+  "langage": "shell",
+  "resume": "EXACTEMENT leurs parametres -- rien de plus, rien de moins.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "leviers_de_perte",
+  "chemin": "tools/leviers_de_perte.sh",
+  "langage": "shell",
+  "resume": "Les termes de perte que nos traces N'ONT JAMAIS ACTIVES.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "lire_selfcross",
+  "chemin": "analysis/src/lire_selfcross.py",
+  "langage": "python",
+  "resume": "Lire un rapport `vc_tifxyz_selfcross` -- en refusant un verdict qui n'a rien mesure.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "lister_volumes_surface",
+  "chemin": "tools/lister_volumes_surface.sh",
+  "langage": "shell",
+  "resume": "Quels segments publient un volume de surface Zarr — donc un profil de profondeur",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "lplv",
+  "chemin": "analysis/src/lplv.py",
+  "langage": "python",
+  "resume": "`lplv` — le point d'entrée qui nomme les cent quatre-vingt-dix greffons déjà là.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "make_panel",
+  "chemin": "analysis/src/make_panel.py",
+  "langage": "python",
+  "resume": "Fabriquer une image de calibrage a DEUX panneaux, temoin inclus.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "matiere_au_point",
+  "chemin": "analysis/src/matiere_au_point.py",
+  "langage": "python",
+  "resume": "Y a-t-il de la matière à CETTE coordonnée, dans CE volume, à CE niveau ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "matiere_des_piles",
+  "chemin": "analysis/src/matiere_des_piles.py",
+  "langage": "python",
+  "resume": "Y a-t-il quoi que ce soit dans ces piles rendues ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "measure",
+  "chemin": "experiments/src/excision/measure.py",
+  "langage": "python",
+  "resume": "Mesure ce que les cellules excisees par `windcheck` echantillonnaient dans le CT.",
+  "verifie": false,
+  "json": true
+ },
+ {
+  "nom": "mirror_site",
+  "chemin": "tools/mirror_site.sh",
+  "langage": "shell",
+  "resume": "Miroir de scrollprize.org, puis CONTROLE que chaque URL du sitemap est bien",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "mosaique_rouleau",
+  "chemin": "tools/mosaique_rouleau.sh",
+  "langage": "shell",
+  "resume": "Assembler les SPIRES PUBLIEES d'un rouleau en une seule image.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "murs_et_causes",
+  "chemin": "analysis/src/murs_et_causes.py",
+  "langage": "python",
+  "resume": "Les murs, leurs causes candidates, et le verdict de chacune.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "mutation",
+  "chemin": "tracecheck/mutation.py",
+  "langage": "python",
+  "resume": "Chaque détecteur doit porter du poids : le débrancher doit faire ROUGIR selftest.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "niveau_du_maillage",
+  "chemin": "analysis/src/niveau_du_maillage.py",
+  "langage": "python",
+  "resume": "À quel niveau de pyramide les coordonnées d'un maillage sont-elles écrites ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "officiel_fenetre_appariee",
+  "chemin": "tools/officiel_fenetre_appariee.sh",
+  "langage": "shell",
+  "resume": "Le segment officiel, rendu dans LA MEME fenetre que nos tirages.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "origine_de_la_pile",
+  "chemin": "tools/origine_de_la_pile.sh",
+  "langage": "shell",
+  "resume": "La couche tracee est-elle AU MILIEU de la pile ? -- selon QUI l'a produite.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "permalien",
+  "chemin": "analysis/src/permalien.py",
+  "langage": "python",
+  "resume": "Transformer une mention de chemin en lien git PERMANENT, et refuser quand le lien serait mort.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "petite_trace",
+  "chemin": "tools/petite_trace.sh",
+  "langage": "shell",
+  "resume": "Une trace COURTE converge-t-elle ? -- la piste que la comparaison avec eux designe.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "plafond_generations",
+  "chemin": "tools/plafond_generations.sh",
+  "langage": "shell",
+  "resume": "⚠⚠ Le plafond de generations est-il en train de FABRIQUER le resultat negatif ?",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "poids_growpatch",
+  "chemin": "analysis/src/poids_growpatch.py",
+  "langage": "python",
+  "resume": "Extraire du SOURCE de villa la table des poids de perte de GrowPatch.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "poids_recuperable",
+  "chemin": "analysis/src/poids_recuperable.py",
+  "langage": "python",
+  "resume": "Ce qu'un dossier libère VRAIMENT quand on le supprime — `du` ne sait pas répondre.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "portee_tangentielle",
+  "chemin": "tools/portee_tangentielle.sh",
+  "langage": "shell",
+  "resume": "JUSQU OU la tangente d une nappe reste-t-elle sur la nappe ?",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "ppm_to_tifxyz",
+  "chemin": "tools/ppm_to_tifxyz.py",
+  "langage": "python",
+  "resume": "Convertir un `.ppm` de Volume Cartographer en `tifxyz`.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "profiler_une_surface",
+  "chemin": "tools/profiler_une_surface.sh",
+  "langage": "shell",
+  "resume": "Rendre une surface DEJA aplatie a plusieurs profondeurs, et juger sa convergence.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "projeter_tangentiel",
+  "chemin": "analysis/src/projeter_tangentiel.py",
+  "langage": "python",
+  "resume": "Projeter une nappe le long de sa TANGENTE, et non de sa normale.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "proximity",
+  "chemin": "experiments/src/excision/proximity.py",
+  "langage": "python",
+  "resume": "Mesure la proximite anormale entre regions NON ADJACENTES d'une trace aplatie.",
+  "verifie": false,
+  "json": true
+ },
+ {
+  "nom": "proximity_vs_ink",
+  "chemin": "analysis/src/proximity_vs_ink.py",
+  "langage": "python",
+  "resume": "La geometrie predit-elle la LISIBILITE ? — tache D, `06` §3.8.",
+  "verifie": false,
+  "json": true
+ },
+ {
+  "nom": "pyramid",
+  "chemin": "experiments/src/excision/pyramid.py",
+  "langage": "python",
+  "resume": "Jusqu'a quelle resolution les spires restent-elles separables ?",
+  "verifie": false,
+  "json": true
+ },
+ {
+  "nom": "radial",
+  "chemin": "experiments/src/excision/radial.py",
+  "langage": "python",
+  "resume": "L'onde radiale : compter les feuilles depuis l'axe, et deplier la coupe.",
+  "verifie": false,
+  "json": true
+ },
+ {
+  "nom": "readme_apparie",
+  "chemin": "tools/readme_apparie.sh",
+  "langage": "shell",
+  "resume": "Les commandes du README existent-elles, et tournent-elles ?",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "recalage_de_la_chaine",
+  "chemin": "tools/recalage_de_la_chaine.sh",
+  "langage": "shell",
+  "resume": "La chaine tangentielle S ELOIGNE-T-ELLE de la matiere a mesure qu elle avance ?",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "recaler_sur_la_matiere",
+  "chemin": "analysis/src/recaler_sur_la_matiere.py",
+  "langage": "python",
+  "resume": "Recoller une nappe projetée sur la MATIÈRE, point par point.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "regarder_rendu",
+  "chemin": "analysis/src/regarder_rendu.py",
+  "langage": "python",
+  "resume": "Regarder un rendu de surface — chercher de l'encre visible à l'œil, sans modèle.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "region_locale",
+  "chemin": "analysis/src/region_locale.py",
+  "langage": "python",
+  "resume": "Lire une RÉGION d'un zarr posé sur le disque — la moitié lecture de `fetch_zarr_boite.py`.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "remesurer_sans_filtre",
+  "chemin": "tools/remesurer_sans_filtre.sh",
+  "langage": "shell",
+  "resume": "Les comptes d'un tableau portent-ils sur la MEME fraction de surface ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "render_segment",
+  "chemin": "analysis/src/render_segment.py",
+  "langage": "python",
+  "resume": "Rendre une carte d'encre en images lisibles par un humain.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "rendre_surveille",
+  "chemin": "tools/rendre_surveille.sh",
+  "langage": "shell",
+  "resume": "`vc_render_tifxyz` sous surveillance : un rendu qui n'avance plus le DIT.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "renvois_article",
+  "chemin": "analysis/src/renvois_article.py",
+  "langage": "python",
+  "resume": "Les renvois « Section N.M » de l'article disent-ils la bonne section ?",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "reprendre",
+  "chemin": "tools/reprendre.sh",
+  "langage": "shell",
+  "resume": "Reprendre ce qui a ete gele pour liberer la machine (reunion Zoom du 2026-08-18).",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "repro_empty_verdict",
+  "chemin": "tracecheck/repro_empty_verdict.py",
+  "langage": "python",
+  "resume": "Minimal reproducer: `vc_tifxyz_selfcross` can report `clean` having tested nothing.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "resolution_phase",
+  "chemin": "analysis/src/resolution_phase.py",
+  "langage": "python",
+  "resume": "La résolution du champ de phase explique-t-elle l'échec de `docs/17` ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "robustesse_material",
+  "chemin": "analysis/src/robustesse_material.py",
+  "langage": "python",
+  "resume": "`material` mesure-t-il le segment, ou notre façon de l'échantillonner ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "rogner_nappe",
+  "chemin": "analysis/src/rogner_nappe.py",
+  "langage": "python",
+  "resume": "Rogner une nappe etendue en retirant ce qui a pousse EN DERNIER.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "s3_size",
+  "chemin": "tools/s3_size.py",
+  "langage": "python",
+  "resume": "Mesure la taille d'un prefixe du bucket public Vesuvius, sans rien telecharger.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "saut_de_spire",
+  "chemin": "analysis/src/saut_de_spire.py",
+  "langage": "python",
+  "resume": "Détecter les sauts de spire d'une trace, en lisant la phase d'enroulement publiée.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "scan_z",
+  "chemin": "tools/scan_z.sh",
+  "langage": "shell",
+  "resume": "Compte de feuilles le long de z : une rupture brutale localise un degat en 3D.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "selftest",
+  "chemin": "tracecheck/selftest.py",
+  "langage": "python",
+  "resume": "Offline controls for tracecheck — no network, no bucket, no credentials.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "sens_de_la_normale",
+  "chemin": "tools/sens_de_la_normale.sh",
+  "langage": "shell",
+  "resume": "La pile est-elle rendue DU BON COTE de la surface ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "sensibilite_centre",
+  "chemin": "experiments/src/excision/sensibilite_centre.py",
+  "langage": "python",
+  "resume": "L'invariant rayon/feuilles survit-il à un centre faux ? — la question de `06` §2.3.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "sensibilite_maillage",
+  "chemin": "tools/sensibilite_maillage.sh",
+  "langage": "shell",
+  "resume": "Un maillage grossier VOIT-IL les auto-intersections qu'il traverse ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "separabilite_scan",
+  "chemin": "analysis/src/separabilite_scan.py",
+  "langage": "python",
+  "resume": "Peut-on distinguer deux feuilles voisines ? — une métrique de qualité de scan.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "shape",
+  "chemin": "experiments/src/excision/shape.py",
+  "langage": "python",
+  "resume": "Deux questions de FORME sur une coupe : le dommage, et l'ecrasement.",
+  "verifie": false,
+  "json": true
+ },
+ {
+  "nom": "situer_nos_traces",
+  "chemin": "tools/situer_nos_traces.sh",
+  "langage": "shell",
+  "resume": "Reprofiler nos traces A LA GEOMETRIE D UN CORPUS PUBLIE, puis les y situer.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "sonder_point",
+  "chemin": "analysis/src/sonder_point.py",
+  "langage": "python",
+  "resume": "Que voit le traceur A CET ENDROIT ? -- la prediction de surface autour d'un point.",
+  "verifie": false,
+  "json": true
+ },
+ {
+  "nom": "spire_suivante",
+  "chemin": "tools/spire_suivante.sh",
+  "langage": "shell",
+  "resume": "ENCHAINER LES SPIRES : partir d'une surface qui CONVERGE, et generer sa voisine.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "stack_structure",
+  "chemin": "analysis/src/stack_structure.py",
+  "langage": "python",
+  "resume": "Ou est la surface tracee par rapport a la matiere, sur une pile COMPLETE.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "structure",
+  "chemin": "analysis/src/structure.py",
+  "langage": "python",
+  "resume": "Y a-t-il de l'ECRITURE dans cette region, ou seulement du signal ?",
+  "verifie": false,
+  "json": true
+ },
+ {
+  "nom": "suivre_nappe",
+  "chemin": "analysis/src/suivre_nappe.py",
+  "langage": "python",
+  "resume": "Marcher LE LONG d'une nappe dans la prediction, et en ecrire les points de passage.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "survey_fusions",
+  "chemin": "tools/survey_fusions.sh",
+  "langage": "shell",
+  "resume": "Balayer le rouleau ENTIER a la recherche de fusions, par BANDES.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "table_chaine",
+  "chemin": "analysis/src/table_chaine.py",
+  "langage": "python",
+  "resume": "Depouiller une chaine de spires : taille, ecarts, alpha, verdict, et l'EROSION.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "table_champ",
+  "chemin": "analysis/src/table_champ.py",
+  "langage": "python",
+  "resume": "Le corpus des champs de correction : qui est réparable, et est-ce que ça se voit ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "table_difficulte",
+  "chemin": "analysis/src/table_difficulte.py",
+  "langage": "python",
+  "resume": "Le tableau de difficulté des rouleaux, avec son témoin.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "table_graines",
+  "chemin": "analysis/src/table_graines.py",
+  "langage": "python",
+  "resume": "Agréger la campagne appariée des deux critères de graine.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "table_pas",
+  "chemin": "analysis/src/table_pas.py",
+  "langage": "python",
+  "resume": "Depouiller le balayage de `step_size` (tools/campagne_pas.sh).",
+  "verifie": false,
+  "json": true
+ },
+ {
+  "nom": "table_saut_spire",
+  "chemin": "analysis/src/table_saut_spire.py",
+  "langage": "python",
+  "resume": "La marche de phase prédit-elle les croisements recensés ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "table_second_axe",
+  "chemin": "analysis/src/table_second_axe.py",
+  "langage": "python",
+  "resume": "Les deux axes s'accordent-ils ? -- la parade a la malediction du vainqueur, mesuree.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "table_separabilite",
+  "chemin": "analysis/src/table_separabilite.py",
+  "langage": "python",
+  "resume": "Tableau de séparabilité des rouleaux, avec son témoin.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "table_thread_limit",
+  "chemin": "analysis/src/table_thread_limit.py",
+  "langage": "python",
+  "resume": "Depouiller les repetitions de trace a parametres identiques.",
+  "verifie": false,
+  "json": true
+ },
+ {
+  "nom": "table_tirages",
+  "chemin": "analysis/src/table_tirages.py",
+  "langage": "python",
+  "resume": "La non-reproductibilite du traceur replique-t-elle sur d'AUTRES rouleaux ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "telecharger",
+  "chemin": "tools/telecharger.py",
+  "langage": "python",
+  "resume": "Un pool de connexions HTTPS persistantes, une par fil.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "temoin_du_rendu",
+  "chemin": "tools/temoin_du_rendu.sh",
+  "langage": "shell",
+  "resume": "LE TEMOIN POSITIF DE NOTRE CHAINE DE RENDU : rendre une surface PUBLIEE avec nos outils.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "temoin_negatif",
+  "chemin": "analysis/src/temoin_negatif.py",
+  "langage": "python",
+  "resume": "Que produit un détecteur d'encre sur un substrat dont on SAIT qu'il n'en porte pas ?",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "temoins",
+  "chemin": "tools/temoins.sh",
+  "langage": "shell",
+  "resume": "Relancer TOUS les temoins du depot d'un coup.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "temoins_release",
+  "chemin": "tools/temoins_release.sh",
+  "langage": "shell",
+  "resume": "Les temoins de la BRANCHE DE RELEASE : exactement ce qui est livre, et rien d autre.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "test_convergence",
+  "chemin": "analysis/src/test_convergence.py",
+  "langage": "python",
+  "resume": "Une trace suit-elle une feuille ? -- par la CONVERGENCE, sans seuil ni verite terrain.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "tester_prediction_50um",
+  "chemin": "analysis/src/tester_prediction_50um.py",
+  "langage": "python",
+  "resume": "La prédiction de `docs/12` tient-elle ? — *écart médian > ~50 µm ⇒ pas d'encre lisible*",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "tif_en_png",
+  "chemin": "analysis/src/tif_en_png.py",
+  "langage": "python",
+  "resume": "Convertir une tranche de rendu en PNG regardable — et REFUSER si le résultat est vide.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "tracecheck",
+  "chemin": "tracecheck/tracecheck.py",
+  "langage": "python",
+  "resume": "tracecheck — judge a segment's trace before you spend anything on it.",
+  "verifie": false,
+  "json": true
+ },
+ {
+  "nom": "tracer_prediction_paris4",
+  "chemin": "tools/tracer_prediction_paris4.sh",
+  "langage": "shell",
+  "resume": "Laquelle des deux predictions de PHercParis4 donne une trace qui SUIT UNE FEUILLE ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "tracer_tous_candidats",
+  "chemin": "tools/tracer_tous_candidats.sh",
+  "langage": "shell",
+  "resume": "Et si la graine choisie etait la MOINS bien soutenue de celles qu'on avait ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "tracer_une_graine",
+  "chemin": "tools/tracer_une_graine.sh",
+  "langage": "shell",
+  "resume": "Tracer UNE graine, la rendre a plusieurs profondeurs, et juger sa convergence.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "track_z",
+  "chemin": "experiments/src/excision/track_z.py",
+  "langage": "python",
+  "resume": "Un site suspect fait-il UN millimetre de haut, ou DERIVE-t-il sur plusieurs ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "trouver_graine",
+  "chemin": "analysis/src/trouver_graine.py",
+  "langage": "python",
+  "resume": "Trouver un point de départ pour `vc_grow_seg_from_seed`, à distance.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "tuile_surface_publiee",
+  "chemin": "analysis/src/tuile_surface_publiee.py",
+  "langage": "python",
+  "resume": "À quoi ressemble une feuille RÉELLEMENT aplatie, telle que la communauté la publie.",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "typographie",
+  "chemin": "analysis/src/typographie.py",
+  "langage": "python",
+  "resume": "« Consistent with » — la version quantifiée, celle que le papier fondateur ne construit pas.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "valider_blocs",
+  "chemin": "tools/valider_blocs.py",
+  "langage": "python",
+  "resume": "Le decoupage en blocs 3D donne-t-il la MEME chose que l'arbre global ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "valider_champ_normal",
+  "chemin": "analysis/src/valider_champ_normal.py",
+  "langage": "python",
+  "resume": "Le champ de normales publié dit-il la même chose que la géométrie de la prédiction ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "variant_correlate",
+  "chemin": "experiments/src/excision/variant_correlate.py",
+  "langage": "python",
+  "resume": "Chaque definition de reference locale corrige-t-elle quelque chose ?",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "verifier_chiffres",
+  "chemin": "analysis/src/verifier_chiffres.py",
+  "langage": "python",
+  "resume": "Chaque chiffre de la soumission est-il encore celui que son fichier de résultat dit ?",
+  "verifie": true,
+  "json": false
+ },
+ {
+  "nom": "verifier_zarr",
+  "chemin": "tools/verifier_zarr.sh",
+  "langage": "shell",
+  "resume": "Verifier qu'un lot de volumes Zarr est bien dans la forme que notre lecteur suppose.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "zarr_depth",
+  "chemin": "analysis/src/zarr_depth.py",
+  "langage": "python",
+  "resume": "Profil de profondeur d'un segment, lu **a distance**, un chunk a la fois.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "zarr_vers_couches",
+  "chemin": "analysis/src/zarr_vers_couches.py",
+  "langage": "python",
+  "resume": "Ecrire une fenetre d'un volume de surface publie en couches TIFF numerotees.",
+  "verifie": false,
+  "json": false
+ }
+]

@@ -188,10 +188,9 @@ done
 # le segment officiel dans la même fenêtre
 ./tools/lancer.sh tools/officiel_fenetre_appariee.sh "$PWD/data/officiel_appariee" 81
 
-cd experiments
-uv run python ../analysis/src/test_convergence.py \
+(cd experiments && uv run python ../analysis/src/test_convergence.py \
   --serie "31:17.28,81:17.30"                      --nom "segment officiel" \
   --serie "21:86.4,41:159.84,81:311.04,161:682.56" --nom "notre trace" \
-  --json ../docs/convergence.json
-cd ../inference && uv run python ../analysis/src/figure_convergence.py
+  --json ../docs/convergence.json)
+uv run python analysis/src/figure_convergence.py
 ```

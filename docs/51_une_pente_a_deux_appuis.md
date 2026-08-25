@@ -467,17 +467,17 @@ question binaire posée à l'intérieur de chaque fenêtre, quelle que soit sa p
 python3 analysis/src/appui_de_pente.py --racine . --json docs/appui_de_pente.json
 python3 analysis/src/fenetre_utilisable.py --racine . \
     --niveaux data/controle_resolution --json docs/fenetre_utilisable.json
-cd inference && uv run python ../analysis/src/figure_fenetre.py \
-    --json ../docs/fenetre_utilisable.json --sortie ../docs/images/51_fenetre.png
-cd inference && uv run python ../analysis/src/figure_appuis.py \
-    --json ../docs/appui_de_pente.json --sortie ../docs/images/51_appuis.png
-cd inference && uv run python ../analysis/src/figure_contraste.py \
-    --json ../docs/appui_de_pente.json --sortie ../docs/images/51_contraste.png
+uv run python analysis/src/figure_fenetre.py \
+    --json docs/fenetre_utilisable.json --sortie docs/images/51_fenetre.png
+uv run python analysis/src/figure_appuis.py \
+    --json docs/appui_de_pente.json --sortie docs/images/51_appuis.png
+uv run python analysis/src/figure_contraste.py \
+    --json docs/appui_de_pente.json --sortie docs/images/51_contraste.png
 
 # le verdict porte désormais son appui
-cd inference && uv run python ../analysis/src/test_convergence.py --nom ps256_c0 \
-    --profil ../data/paris4_candidats/ps256_c0/profil_41c.json \
-    --profil ../data/paris4_candidats/ps256_c0/profil_161c.json
+uv run python analysis/src/test_convergence.py --nom ps256_c0 \
+    --profil data/paris4_candidats/ps256_c0/profil_41c.json \
+    --profil data/paris4_candidats/ps256_c0/profil_161c.json
 
 # les témoins, hors ligne
 python3 analysis/src/appui_de_pente.py --verifier

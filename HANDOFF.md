@@ -7,6 +7,53 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+## ⭐⭐⭐⭐ CHANTIER C LIVRÉ — `lplv`, le point d'entrée que 218 greffons attendaient
+
+Le chantier C de [`56`](docs/56_le_grand_menage.md). **Aucune architecture n'a été créée ici :
+elle a été constatée et nommée.**
+
+![Les 218 greffons du dépôt](docs/images/56_verbes.png)
+
+**218 verbes, zéro nom ambigu, 98 qui s'auto-testent, 72 qui rendent du JSON.** Rien n'est
+déclaré à la main — la famille vient du chemin, `--verifier` et `--json` sont lus dans le
+fichier, et le résumé est la première ligne de docstring, c'est-à-dire **exactement la chaîne
+que le module donne déjà à son `argparse`**.
+
+```bash
+./lplv --help              # les verbes, chacun avec sa propre première ligne
+./lplv <verbe> --help      # SON aide, produite par lui-même
+./lplv --version           # de quel palier il s'agit
+```
+
+⭐ **`lplv <verbe> --help` EXÉCUTE le module.** Re-lire son `argparse` pour en refabriquer une
+aide produirait une seconde description libre de dériver — la panne exacte que ce point d'entrée
+existe pour empêcher (skill `doc-derivee`, cran 2).
+
+**Les paliers tombent tout seuls, mesuré** : l'arbre allégé de la release, construit dans un
+dossier temporaire depuis la seule liste `GARDES`, rend **204 verbes au lieu de 218**, sans
+erreur ni configuration. Et un verbe absent de ce palier ne répond **pas** « commande
+inconnue » : il dit qu'il existe ailleurs, nomme son dossier, et sort en 3 au lieu de 2.
+
+### `inference/` est parti aussi — et c'est une CORRECTION de ma conclusion de la veille
+
+J'avais écrit qu'il restait, sur l'argument de son README (témoin CPU du ×4,5 iGPU). L'auteur a
+objecté que le témoin devait être un **mode**, pas un dossier. Il a raison, et la mesure va plus
+loin : deux dossiers, c'étaient **deux constructions de torch différentes**, donc la comparaison
+mélangeait l'appareil ET la build. `infer_ink.py` prend désormais `--device auto`, et la règle
+qui en fait un pipeline adaptatif plutôt que silencieux est : **« auto » retombe, « xpu »
+REFUSE**. Le choix est une fonction pure — 10 contrôles hors ligne, sans GPU, sans torch.
+
+### ⚠ Ce qui est demandé et PAS fait, avec son coût mesuré
+
+L'auteur veut **un seul `src/` avec des sous-dossiers et un namespace**. C'est le bon état final
+et `lplv` est précisément ce qui le rend abordable — mais c'est un chantier à part, mesuré :
+**~490 citations de chemin** (178 dans `tools/*.sh`, 227 dans `docs/*.md`, 86 dans `temoins.sh`),
+plus 24 imports entre frères et 51 `sys.path.insert`. Il lui faut son propre outil de réécriture,
+qui **refuse** de laisser une citation pendante. Familles dérivées des préfixes réels :
+`figure_*` 38, `table_*` 10, `campagne_*` 12.
+
+---
+
 ## ⭐⭐⭐ MÉNAGE — état au 2026-08-25 (nuit) : `htr/` retiré, les 25 emprunts repointés
 
 Premier morceau du grand ménage ([`56`](docs/56_le_grand_menage.md)). Deux modules neufs, une
@@ -1049,7 +1096,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./tools/temoins.sh                      # 111 batteries, 2944 contrôles hors ligne, tous verts
+./tools/temoins.sh                      # 114 batteries, 2999 contrôles hors ligne, tous verts
 ./tools/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)

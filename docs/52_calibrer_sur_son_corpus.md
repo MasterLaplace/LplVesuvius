@@ -181,8 +181,8 @@ sans rien signaler.
 ## Reproduire
 
 ```bash
-cd inference && uv run python ../tracecheck/tracecheck.py Scroll1 --all --csv \
-    --voxel-um 2.4 --prefer 2.4um > ../docs/balayage_scroll1.csv
+uv run python tracecheck/tracecheck.py Scroll1 --all --csv \
+    --voxel-um 2.4 --prefer 2.4um > docs/balayage_scroll1.csv
 
 python3 analysis/src/calibration_corpus.py docs/balayage_scroll1.csv \
     --par-geometrie --json docs/calibration_scroll1.json
@@ -198,9 +198,9 @@ python3 analysis/src/calibration_corpus.py docs/balayage_scroll1.csv --layers 10
 CORPUS=docs/balayage_scroll1.csv tools/situer_nos_traces.sh \
     data/paris4_candidats/*/rendu_161
 
-cd inference && uv run python ../analysis/src/figure_calibration.py \
-    --csv ../docs/balayage_scroll1.csv --layers 109 \
-    --sortie ../docs/images/52_calibration.png
+uv run python analysis/src/figure_calibration.py \
+    --csv docs/balayage_scroll1.csv --layers 109 \
+    --sortie docs/images/52_calibration.png
 
 # les témoins, hors ligne
 python3 analysis/src/calibration_corpus.py --verifier

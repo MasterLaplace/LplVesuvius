@@ -240,11 +240,11 @@ correction ; ce paragraphe dit ce qui va être tenté et pourquoi, pas ce qui a 
 ./tools/lancer.sh --fond tools/boucle_de_correction.sh      # la boucle entière, appariée
 
 # la figure, depuis les verdicts eux-mêmes — jamais des nombres recopiés
-cd experiments && uv run python ../analysis/src/test_convergence.py \
+(cd experiments && uv run python ../analysis/src/test_convergence.py \
   --serie "31:17.28,81:17.30" --nom "segment officiel (bonne surface)" \
   --depuis "../docs/boucle_temoin.json=témoin, sans correction" \
   --depuis "../docs/boucle_corrige_gen5.json=corrigé, 318 points de passage" \
-  --json ../docs/boucle_convergence.json
-cd ../inference && uv run python ../analysis/src/figure_convergence.py \
-  --entree ../docs/boucle_convergence.json --sortie ../docs/images/42_boucle_convergence.png
+  --json ../docs/boucle_convergence.json)
+uv run python analysis/src/figure_convergence.py \
+  --entree docs/boucle_convergence.json --sortie docs/images/42_boucle_convergence.png
 ```

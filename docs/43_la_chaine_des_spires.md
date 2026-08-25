@@ -584,10 +584,10 @@ la moitié de la surface part en quatre tours.
 ./tools/lancer.sh --fond tools/spire_suivante.sh "$PWD/data/spires" 6
 python3 analysis/src/table_chaine.py data/spires --voxel-um 8.64 --json docs/chaine_spires.json
 
-cd experiments && uv run python ../analysis/src/test_convergence.py \
+(cd experiments && uv run python ../analysis/src/test_convergence.py \
   --depuis "../docs/spire_spire00.json=spire 0 (segment officiel)" \
   --depuis "../docs/spire_spire01.json=spire 1" \
-  --json ../docs/chaine_convergence.json     # … une ligne par spire
-cd ../inference && uv run python ../analysis/src/figure_convergence.py \
-  --entree ../docs/chaine_convergence.json --sortie ../docs/images/43_chaine_spires.png
+  --json ../docs/chaine_convergence.json)    # … une ligne par spire
+uv run python analysis/src/figure_convergence.py \
+  --entree docs/chaine_convergence.json --sortie docs/images/43_chaine_spires.png
 ```

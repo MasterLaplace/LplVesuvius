@@ -108,9 +108,9 @@ profondeurs **sans censure des deux côtés**.
 
 ```bash
 python3 analysis/src/derive_avec_profondeur.py --docs docs --json docs/derive_profondeur.json
-cd inference && uv run python ../analysis/src/figure_derive_profondeur.py \
-    --json ../docs/derive_profondeur.json --docs ../docs \
-    --sortie ../docs/images/47_derive_profondeur.png
+uv run python analysis/src/figure_derive_profondeur.py \
+    --json docs/derive_profondeur.json --docs ../docs \
+    --sortie docs/images/47_derive_profondeur.png
 
 # les témoins, hors ligne
 python3 analysis/src/derive_avec_profondeur.py --verifier

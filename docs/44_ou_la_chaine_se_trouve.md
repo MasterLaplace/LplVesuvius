@@ -1815,9 +1815,9 @@ uv run --project . python analysis/src/ecart_de_maillages.py --verifier
 uv run --project . python analysis/src/figure_emballement.py --verifier
 
 # La géométrie de n'importe quelle campagne d'enchaînement
-cd inference && uv run python ../analysis/src/geometrie_chaine.py ../data/spires_pas025 \
-  --voxel-um 8.64 --json ../docs/geometrie_pas025.json \
-  --figure ../docs/images/44_geometrie_chaine.png
+uv run python analysis/src/geometrie_chaine.py data/spires_pas025 \
+  --voxel-um 8.64 --json docs/geometrie_pas025.json \
+  --figure docs/images/44_geometrie_chaine.png
 
 # Les témoins de l'instrument, hors ligne (39 contrôles)
 uv run python ../analysis/src/geometrie_chaine.py --verifier

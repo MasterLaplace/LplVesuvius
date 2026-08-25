@@ -134,5 +134,5 @@ lire ce qu'il doit mesurer ne mesure rien.
 ./tools/balayage_maxedge.sh          # le filtre masque-t-il ? fabrique-t-il ?
 ./tools/sensibilite_maillage.sh      # que voit un maillage plus grossier ?
 python3 analysis/src/lire_selfcross.py --verifier
-cd inference && uv run python ../analysis/src/figure_sensibilite.py
+uv run python analysis/src/figure_sensibilite.py
 ```

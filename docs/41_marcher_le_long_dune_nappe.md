@@ -290,12 +290,12 @@ la seule chose qui rend la dérive visible avant qu'elle ne coûte.
 ```bash
 ./tools/verifier_zarr.sh docs/volumes_surface_PHerc1447.txt   # les volumes sont-ils LISIBLES ?
 
-cd inference
-uv run python ../analysis/src/suivre_nappe.py --verifier     # 29 témoins
-uv run python ../analysis/src/figure_marche.py               # la figure
+uv run python analysis/src/suivre_nappe.py --verifier     # 29 témoins
+uv run python analysis/src/figure_marche.py               # la figure
 
-# sur la vraie prédiction — ⚠ depuis experiments/, le seul env qui a numcodecs
-cd ../experiments
+# sur la vraie prédiction, depuis experiments/ (⚠ « le seul env qui a numcodecs »
+# était faux : la racine en a aussi, mesuré le 2026-08-25)
+cd experiments
 uv run python ../analysis/src/suivre_nappe.py \
   --zarr PHerc1447/representations/predictions/surfaces/20250521151220-surface-20260413222639-surface-m7-L0-th0.2.zarr \
   --xyz 4682 2740 13350 --rayon 128 --n-pas 800 --deux-sens --distance \

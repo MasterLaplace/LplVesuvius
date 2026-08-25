@@ -27,7 +27,7 @@ c'est le plus gros.
 | `tracecheck/` | 4 | 1 310 | 144 K | 144 K |
 | [`htr/`](https://github.com/MasterLaplace/LplVesuvius/tree/3caf6910914eedaca3b3b26a3b2ea206762d6a9f/htr) | **1** | 185 | 264 K | ~~5,1 G~~ **retiré le 2026-08-25** |
 | `inference_xpu/` | **1** | 169 | 128 K | **6,3 G** |
-| `inference/` | **0** | 0 | 256 K | ~~5,2 G~~ **256 K**, venv retiré |
+| `inference/` | **0** | 0 | 256 K | ~~5,2 G~~ **retiré le 2026-08-25** |
 
 [`htr/`](https://github.com/MasterLaplace/LplVesuvius/tree/3caf6910914eedaca3b3b26a3b2ea206762d6a9f/htr), `inference/` et `inference_xpu/` ne portent **aucun code** ou presque : ce sont des
 `.venv`. Ce qui donne l'impression d'une montagne est un environnement, pas un programme.
@@ -62,12 +62,26 @@ depuis là — vérifié, pas supposé.
 
 **Ce qui est parti, et ce qui ne l'est pas.** `htr/` : un seul fichier, remplacé par
 `analysis/src/structure.py`, **zéro site d'appel** sous quelque orthographe que ce soit.
-`inference/` **reste** : son README argumente correctement qu'il est le témoin CPU contre lequel
-le ×4,5 iGPU a été validé à sortie identique, et une accélération qu'on ne peut plus vérifier
-n'est pas une accélération, c'est un changement de méthode non mesuré. Seul son venv part ;
-`pyproject.toml` et `uv.lock` restent versionnés, donc le témoin reste rejouable à la commande
-près. `inference_xpu/` reste entier : c'est l'environnement de l'encre, et l'encre est le
-prochain chantier nommé.
+⚠⚠ **`inference/` est parti aussi, et c'est une correction de MA conclusion.** J'avais écrit
+qu'il restait, sur l'argument de son propre README : témoin CPU du ×4,5 iGPU, et *« une
+accélération qu'on ne peut plus vérifier n'est pas une accélération »*. L'auteur a objecté que
+le témoin devait être un **mode**, pas un dossier — *« au pire faire un mode fallback vers cpu
+si gpu pas dispo, c'est ça un pipeline adaptatif »*. Il a raison, et la mesure va plus loin que
+son argument : **deux dossiers, c'étaient deux constructions de torch différentes** (générique
+d'un côté, `2.9.1+xpu` de l'autre), donc la comparaison mélangeait l'appareil ET la build. Le
+témoin en mode change **une** variable, ce qu'un témoin doit faire. Vérifié le 2026-08-25 : la
+build `+xpu` exécute le chemin CPU sans rien de particulier.
+
+`inference_xpu/src/infer_ink.py` prenait déjà `--device {cpu,xpu}` ; il prend désormais
+**`--device auto` par défaut**, et la règle qui le gouverne est la seule chose qui distingue un
+pipeline adaptatif d'un pipeline silencieux : **« auto » retombe, « xpu » REFUSE.** Demander
+explicitement le GPU et obtenir le CPU sans le savoir ferait publier un temps mesuré sur l'autre
+appareil — la panne exacte que le repli est censé éviter, déplacée d'un cran. Le choix est une
+**fonction pure** qui prend la disponibilité en argument, donc il s'auto-teste sans GPU, sans
+torch, et sans modèle : 10 contrôles hors ligne, deux sondes.
+
+`inference_xpu/` reste entier : c'est l'environnement de l'encre, et l'encre est le prochain
+chantier nommé.
 
 ⚠⚠ **Et la vraie montagne n'a jamais été là.** Le dépôt pèse **203 Gio**, dont **177 dans
 `data/`**. Les 4,24 Gio de venvs sont **2 %** du problème. Le lever, c'est le chantier A (97 Gio
@@ -269,6 +283,61 @@ personne n'a besoin ici (skill §7, tableau palier/plugin).
 ⚠ Le piège nommé par le skill (§7) s'applique déjà : **le palier que personne ne construit
 pourrit**. La release est construite par un script ; le vérifier reste une tâche de ce chantier.
 
+#### ✅ Livré le 2026-08-25 — `lplv`, et ce que la mesure a dit
+
+![Les 218 greffons du dépôt](images/56_verbes.png)
+
+```bash
+./lplv --verbes --json > docs/verbes.json
+uv run python analysis/src/figure_verbes.py     # → docs/images/56_verbes.png
+```
+
+**218 verbes découverts, zéro nom ambigu, 98 qui s'auto-testent, 72 qui rendent du JSON.**
+Rien n'est déclaré à la main : la famille vient du chemin, `--verifier` et `--json` sont lus
+dans le fichier, le résumé est la première ligne de docstring — c'est-à-dire **exactement la
+chaîne que le module donne déjà à son `argparse`**, donc l'aide de `lplv` et celle du module ne
+peuvent pas diverger : c'est le même octet.
+
+⭐ **`lplv <verbe> --help` EXÉCUTE le module avec `--help`.** L'alternative tentante — relire
+son `argparse` pour en refabriquer une aide — produirait une **seconde description** de la même
+chose, libre de dériver de la première, c'est-à-dire précisément la panne que ce point d'entrée
+existe pour empêcher. On délègue ; il n'y a donc rien à tenir à jour.
+
+Trois règles portent le reste, chacune sondée en la cassant :
+
+| règle | ce qu'elle empêche | la sonde |
+|---|---|---|
+| un nom revendiqué deux fois est **refusé** | `lplv x` lancerait celui que le système de fichiers a mis devant, en silence | départager → 2 échecs |
+| tout ce qui suit le verbe passe **verbatim** | manger un `--help` obligerait à écrire une seconde aide à côté | filtrer `--help` → 1 échec |
+| un fichier en `_` n'est pas un verbe | `lplv __init__` ne veut rien dire | le réadmettre → 3 échecs |
+
+**Et les paliers tombent tout seuls, mesuré plutôt qu'affirmé.** L'arbre allégé de la release a
+été construit dans un dossier temporaire à partir de la seule liste `GARDES` : `./lplv --help`
+y rend **204 verbes au lieu de 218**, sans erreur et sans configuration, parce que
+`experiments/src` et `inference_xpu/src` n'y sont pas. C'est la définition d'un palier
+**additif** — et le piège du skill §7 (« le palier que personne ne construit pourrit ») est
+traité en ajoutant `lplv` aux `GARDES` : sans ça la release aurait porté `analysis/src/lplv.py`
+sans la commande qui le lance, soit la moitié d'une surface.
+
+⚠ `os.execvp` et non `subprocess` : le verbe **remplace** le processus, donc son code de sortie
+et ses signaux sont les siens. Un sous-processus ajouterait un maillon qui peut avaler un
+Ctrl-C ou un code de retour — et un code de retour avalé est exactement ce qui fait lire un
+échec comme un succès. Ce dépôt a payé ce piège trois fois dans la même journée, sous la forme
+du code de sortie d'un pipeline.
+
+⚠ **Ce qui n'est PAS fait, et qui appartient au chantier D** : les deux gardes-fous de
+`tools/temoins.sh` (« batteries non lancées », « scripts sans appelant ») redérivent chacun
+*leur* réponse à « quels sont les modules de ce dépôt », alors que `lplv --verbes --json` la
+donne. Ce sont trois réponses à une question, et c'est le motif que ce dépôt paie en boucle. La
+portée du premier a quand même été élargie ici, parce que la batterie neuve de `infer_ink.py`
+en dépendait — mesuré : l'élargissement ne signale rien de neuf, il ferme un trou.
+
+⚠ **Et un emprunt d'environnement du même genre que celui d'`inference/` reste ouvert** :
+quatorze blocs « Reproduire » font `cd experiments` pour emprunter son venv. Mesuré le
+2026-08-25 : la racine porte numcodecs, PIL, numpy, scipy et tifffile ; `experiments/.venv`
+**n'a pas PIL**. C'est le même diagnostic, et il n'a pas été appliqué ici pour ne pas mélanger
+deux chantiers dans un diff.
+
 ### ⭐ Chantier D — l'extraction du dessin, et le rangement de `docs/`
 
 Deux petites choses, groupées parce qu'elles ne coûtent presque rien.
@@ -338,11 +407,11 @@ C'est la partie que le skill dit qu'on oublie toujours d'écrire.
 | Écarté | La raison, mesurée |
 |---|---|
 | **Un grand refactor monolithique** | 0,8 % de duplication réelle. Les chiffres ne le justifient pas, et un diff que personne ne peut relire est approuvé, pas relu |
-| **Supprimer `inference/`** | il porte **25 sites d'appel**. Il ne contient aucun code parce que c'est un environnement, pas un programme |
+| ~~**Supprimer `inference/`**~~ **FAIT le 2026-08-25** | la raison écrite ici est tombée à la mesure : les 25 sites étaient des **emprunts** à un environnement plus pauvre que la racine. Le témoin CPU est devenu `--device auto/cpu`, un mode et non un dossier |
 | **Fusionner `analysis/` et `tools/`** | frontière réelle et à sens unique : `tools/*.sh` orchestre, `analysis/src/*.py` mesure. Aucune mesure n'appelle un outil. C'est déjà la bonne direction (skill §7) |
 | **Un registre de plugins à l'exécution** | même dépôt, même build : la découverte par le système de fichiers suffit. Le liage tardif n'a aucun demandeur |
 | **Effacer les 17,4 Go de « doublons »** | le proxy *même nom + même taille* **surcompte** sur les chunks zarr. À hacher avant d'effacer — et un effacement n'est pas réversible |
-| **Toucher aux `.venv`** | 16,6 Go, mais reconstructibles et déjà hors de git. Le poids n'est pas dans le dépôt versionné |
+| ~~**Toucher aux `.venv`**~~ **partiellement fait** | les « 16,6 Go » n'existaient pas (liens durs, §1.1). `htr/` et `inference/` sont partis avec leur code ; `experiments/` et `inference_xpu/` gardent le leur, ils portent de vraies sources |
 | **Réécrire les 57 documents** | ils portent des mesures datées. Les chemins qu'ils citent se réparent par des liens, pas par une réécriture |
 
 ---

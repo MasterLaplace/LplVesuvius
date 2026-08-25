@@ -28,6 +28,23 @@ uv run --project . python tracecheck/tracecheck.py Scroll1 20230702185753 --voxe
 Dependencies are declared at the root, so the tool runs from a fresh clone with no
 sub-project to set up. Rebuilding the paper is `./article/build.sh`.
 
+## Every instrument, from one entry point
+
+```bash
+./lplv --help              # the verbs, each with the first line of its own docstring
+./lplv <verb> --help       # ITS help, produced by the module itself
+./lplv --version           # which tier this build is, and which families it carries
+```
+
+⭐ This page deliberately does **not** list the verbs. `lplv --help` derives them from the
+tree, so it cannot go stale, while any list written here would announce twenty-six verbs the
+day there are thirty and nobody would notice. Same rule for options: `lplv <verb> --help`
+*executes* the module with `--help` rather than re-describing its parser, so there is exactly
+one description of every flag in this repository.
+
+⚠ A verb that exists in the tree but not in the tier you are running does **not** answer
+"unknown command" — it says so, and names the families this build carries.
+
 `tools/temoins.sh` runs every self-test in the repository and prints one line per battery.
 It ends with a count, and that count is itself a guarded number: a battery that stops being
 run stops being counted, and the discrepancy shows.
