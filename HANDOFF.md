@@ -7,6 +7,62 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+## ⭐⭐⭐⭐ REPRISE — état au 2026-08-25 (soir) : LA CHAÎNE TANGENTIELLE MARCHE
+
+Le mur « l'extension tangentielle est un point fixe » a **une** cause qui marche, et elle a
+**deux conditions qui se composent**. Détail complet : [`44`](docs/44_ou_la_chaine_se_trouve.md).
+
+### Les deux corrections, et pourquoi il fallait les deux
+
+1. **Un pas FIXE en voxels** (`PAS_VOX`), pas un pas de grille. Un pas de grille couvre
+   `pas × longueur moyenne de tangente`, donc un maillage qui cisaille **s'envoie lui-même
+   plus loin au coup suivant** : boucle de rétroaction, mesurée à 95 → **650 µm** en dix
+   maillons. À pas fixe : **96,0 µm exactement sur vingt maillons**, boîte ×1,92, tous les
+   points gardés.
+2. **Un RECALAGE sur la matière à chaque maillon** (`RECALER=1`) : chaque point ramené sur la
+   crête du champ de distance de la prédiction, le long de la normale du **maillage**.
+
+⭐ **Le résultat, jugé contre le plancher du hasard mesuré à chaque distance :**
+
+| parcouru | pas fixe seul | **les deux** |
+|---:|---:|---:|
+| 480 µm | +24,1 | +24,4 |
+| **768 µm** | ⚠⚠ **+1,5** (mort) | ⭐⭐ **+19,0** |
+| **1 920 µm** | ⚠⚠ **−1,7** (mort) | ⭐⭐⭐ **+15,1** |
+
+**Quatre fois plus loin.** Le segment publié, pour référence, est à +30,6.
+
+### ⚠⚠ Ce qui rend ces nombres lisibles, et sans quoi ils ne le sont pas
+
+Un « % de points posés sur la matière » **ne veut rien dire seul** : une nappe jetée n'importe
+où dans un volume dont un quart est de la matière en trouve sous une partie de ses points.
+`--plancher` mesure ce hasard — **la même nappe translatée au hasard**, plusieurs tirages,
+graine fixée — et **par maillage**, parce que la densité locale varie de onze points le long
+d'une seule chaîne.
+
+⭐ Il a corrigé une conclusion que je venais de publier : « à 1 920 µm un seul bond garde plus
+de matière que vingt maillons » (46,1 contre 35,4 %) était **faux** — les deux sont au niveau
+du hasard, +1,6 et −1,7. Ce n'était pas un croisement, c'était deux mesures mortes comparées
+sur une échelle brute.
+
+⭐ Et la circularité a été **contrôlée** : mesurer la projection **avant** son recalage donne
++19,1 et +15,3 contre +19,0 et +15,1 après. Identique à la première décimale, alors que la
+demande de déplacement passe de 1,6 / 3,4 voxels à 0,06.
+
+### ⚠ Ce que ça ne dit PAS
+
+Que la chaîne suit la **bonne** feuille. Elle est sur *du* papyrus, franchement au-dessus du
+hasard, sur près de deux millimètres. Savoir si c'est la feuille qui prolonge le texte demande
+de l'**encre** — tâche ouverte de [`43`](docs/43_la_chaine_des_spires.md).
+
+### Registre des murs
+
+**30 causes sur 4 murs — 19 éliminées, 9 confirmées, 1 ouverte, 1 bloquée.**
+La seule cause encore ouverte est **« la graine, c'est-à-dire l'endroit »**, sur le mur
+« le tracé ne suit pas de feuille » ([`54`](docs/54_cinq_rendus_vides.md)).
+
+---
+
 ## ⭐ REPRISE — état au 2026-08-25
 
 ### ⭐⭐⭐ Le dernier résultat : enchaîner la projection tangentielle MARCHE, et c'est borné

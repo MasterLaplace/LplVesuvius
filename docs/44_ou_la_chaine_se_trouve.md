@@ -756,6 +756,59 @@ courbe verte **rejoint la courbe du plancher** exactement là.
 ⚠ Le plancher lui-même descend le long de la chaîne (48,4 → 47,4 → 38,2 → 37,1) : elle dérive
 vers une région moins dense. Un plancher unique l'aurait masqué.
 
+#### ⭐⭐⭐⭐ LES DEUX CORRECTIONS ENSEMBLE : la chaîne vit quatre fois plus loin
+
+Pas **fixe** (la géométrie) **et** recalage sur la matière à chaque maillon (la donnée). Vingt
+maillons de 96 µm, jugés contre le **plancher du hasard mesuré à chaque distance** :
+
+| parcouru | pas fixe **seul** | **pas fixe + recalage** |
+|---:|---:|---:|
+| 288 µm | +30,5 | ⭐ **+29,0** |
+| 480 µm | +24,1 | ⭐ **+24,4** |
+| **768 µm** | ⚠⚠ **+1,5** | ⭐⭐ **+19,0** |
+| 1 440 µm | — | ⭐⭐ **+17,5** |
+| **1 920 µm** | ⚠⚠ **−1,7** | ⭐⭐⭐ **+15,1** |
+
+*(avantage sur le plancher, en points ; le segment publié est à +30,6)*
+
+![Les deux chaînes contre leurs propres planchers du hasard](images/44_deux_corrections.png)
+
+> ⭐⭐⭐⭐ **Là où la chaîne sans recalage est morte à 768 µm, celle qui repose sa nappe sur la
+> matière est encore à +15 points au-dessus du hasard à 1 920 µm** — soit **quatre fois plus
+> loin**. Sur la figure, la courbe verte **plonge dans son plancher** pendant que la bleue
+> reste franchement au-dessus des deux.
+>
+> ⭐ Le pas tient **96,0 µm exactement** sur les vingt maillons et la boîte ne grossit que de
+> **×1,92**. Les deux corrections sont **indépendantes** et se composent : l'une tient la
+> géométrie, l'autre tient la feuille.
+
+##### ⚠⚠ Le confondant, vérifié plutôt qu'écarté
+
+La colonne « demande » de la chaîne corrigée vaut **0,06 voxel** — évidemment : on mesure
+« cette nappe est-elle sur la crête ? » sur une nappe **qu'on vient de poser sur la crête**. La
+mesure pouvait donc être **circulaire**.
+
+⭐ **Le contrôle : la même mesure sur la projection AVANT son recalage** (les maillages
+`projete_N`, gardés sur le disque pour cette raison), qui est exactement ce que la chaîne sans
+recalage offre :
+
+| maillage | posé | plancher | avantage | demande |
+|---|---:|---:|---:|---:|
+| `projete_8` (avant) | 64,6 % | 45,5 % | **+19,1** | 1,60 vox |
+| `maillon_8` (après) | 64,6 % | 45,6 % | **+19,0** | 0,06 vox |
+| `projete_20` (avant) | 58,6 % | 43,3 % | **+15,3** | 3,44 vox |
+| `maillon_20` (après) | 58,6 % | 43,5 % | **+15,1** | 0,06 vox |
+
+> ⭐⭐ **Identiques à la première décimale.** La mesure n'est donc **pas** circulaire :
+> « ce point a-t-il de la matière autour de lui » ne dépend pas de savoir s'il vient d'être
+> recalé. Et la colonne « demande » prouve que les maillages sont bien différents — 1,6 et
+> 3,4 voxels avant, 0,06 après. **La comparaison avec la chaîne sans recalage est juste.**
+
+⚠ **Ce que ça ne dit toujours PAS** : que la chaîne suit la **bonne** feuille. Elle est sur *du*
+papyrus, franchement au-dessus du hasard, sur près de deux millimètres. Savoir si c'est la
+feuille qui prolonge le texte demande de l'**encre**, et c'est la tâche ouverte de
+[`43`](43_la_chaine_des_spires.md).
+
 #### ⭐⭐⭐ Et le remède n'est PAS spéculatif : il est mesuré ailleurs, à 2,4 mm
 
 [`41`](41_marcher_le_long_dune_nappe.md) §6 fait exactement le geste qui manque — suivre la
@@ -1660,6 +1713,21 @@ tools/fetch_zarr_boite.py "$PREDICTION_PS256" data/pred_ps256_niv2 --niveau 2 \
 ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 tools/recalage_de_la_chaine.sh \
   data/temoin_rendu/morceaux/morceau_00 data/chaine_courte/maillon_3 \
   data/chaine_courte/direct data/chaine_longue_95/maillon_{5,6,8}
+
+# LES DEUX CORRECTIONS ENSEMBLE — pas fixe ET recalage sur la matière
+SOURCE=$PWD/data/temoin_rendu/morceaux/morceau_00 PAS_VOX=40 MAILLONS=20 PROFILS=0 RECALER=1 \
+  ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 DEST=$PWD/data/chaine_deux_fixes \
+  JSON=$PWD/docs/chaine_deux_fixes.json tools/chainer_tangentiel.sh
+ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 PLANCHER=300 JSON=$PWD/docs/recalage_deux_fixes.json \
+  tools/recalage_de_la_chaine.sh data/temoin_rendu/morceaux/morceau_00 \
+  data/chaine_deux_fixes/maillon_{3,5,8,15,20}
+# … et LE CONTRÔLE du confondant : la projection AVANT son recalage
+ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 PLANCHER=300 \
+  JSON=$PWD/docs/recalage_avant_recalage.json tools/recalage_de_la_chaine.sh \
+  data/chaine_deux_fixes/projete_{8,20}
+uv run --project . python analysis/src/figure_matiere_de_la_chaine.py \
+  docs/recalage_avec_plancher.json --corrigee docs/recalage_deux_fixes.json \
+  --nom-chaine "pas fixe SEUL" --sortie docs/images/44_deux_corrections.png
 
 # LE PLANCHER DU HASARD — sans lui, aucun « % posé » n'est interprétable
 ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 PLANCHER=300 TIRAGES=3 \

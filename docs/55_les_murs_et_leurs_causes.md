@@ -11,7 +11,7 @@ la fois. Une feuille de route qui liste des tâches laisse croire qu'on avance q
 tourne ; celle-ci liste des causes **éliminées**, et montre l'espace rétrécir. C'est le
 seul progrès mesurable sur un problème que personne n'a résolu.
 
-**29 causes candidates** sur **4 murs** : ❌ **18** éliminées · ✅ **8** confirmées · ⏳ **2** ouvertes · 🔒 **1** bloquée
+**30 causes candidates** sur **4 murs** : ❌ **19** éliminées · ✅ **9** confirmées · ⏳ **1** ouverte · 🔒 **1** bloquée
 
 | symbole | verdict | ce que ça veut dire |
 |---|---|---|
@@ -57,11 +57,12 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 
 ## 3. L'extension tangentielle est un point fixe
 
-❌ 7 éliminées · ✅ 2 confirmées · ⏳ 1 ouverte
+❌ 8 éliminées · ✅ 3 confirmées
 
 | cause candidate | | ce qui a été mesuré | où |
 |---|---|---|---|
 | une extension UNIQUE, puis rognage | ✅ | 4,28 → 12,97 cm² à α = +0,000, ramenée à 6,02 cm² propres, soit +41 % de matière validée | [`44`](44_ou_la_chaine_se_trouve.md) |
+| la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour | ✅ | elle marche, à DEUX conditions qui se composent : un pas FIXE en voxels (la géométrie) et un RECALAGE sur la matière à chaque maillon (la donnée). 20 maillons de 96 µm : pas tenu à 96,0 exactement, boîte ×1,92, et +15,1 points au-dessus du plancher du hasard à 1 920 µm — là où la chaîne sans recalage est morte dès 768 (+1,5). Quatre fois plus loin. ⚠ Ne dit pas que c'est la BONNE feuille : ça demande de l'encre | [`44`](44_ou_la_chaine_se_trouve.md) |
 | enchaîner la projection à PETIT pas (95 µm/maillon) | ✅ | un LEVIER qui marche À COURTE DISTANCE, confirmé sur trois grandeurs indépendantes. À 478 µm, là où un seul bond quitte sa feuille (18,4 % de pic au bord), la chaîne y est encore (2,0 %) avec +31 % d'amplitude ; et lue contre le PLANCHER DU HASARD elle est à +30,5 points à 288 µm, +24,1 à 480, puis +1,5 à 768 — soit morte entre les deux. ⚠⚠ Le « croisement » que j'avais publié à 1 920 µm n'existe pas : chaîne ET bond y sont au niveau du hasard (−1,7 et +1,6) | [`44`](44_ou_la_chaine_se_trouve.md) |
 | augmenter le budget d'un seul coup | ❌ | budget 200 : 28,6 cm² mais 25 036 auto-intersections et α = +1,313, la surface se replie sur elle-même | [`44`](44_ou_la_chaine_se_trouve.md) |
 | enchaîner rogner puis étendre | ❌ | le cycle converge vers un point fixe autour de 6 cm² : chaque tour regagne ce qu'il vient de perdre | [`44`](44_ou_la_chaine_se_trouve.md) |
@@ -70,7 +71,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | enchaîner la projection à GRAND pas (238 µm/maillon) | ❌ | cinq maillons de 238 µm étalent la boîte ×2,38 à nombre de points constant, contre ×1,10 pour le bond direct — et finissent 5,33 SPIRES à côté de lui. ⚠ Le pas réel dérive avant la boîte : 238 → 963 µm par maillon | [`44`](44_ou_la_chaine_se_trouve.md) |
 | l'emballement du pas d'une chaîne | ❌ | ce n'était pas l'enchaînement mais l'UNITÉ : un pas de grille couvre pas × longueur de tangente, donc un maillage qui cisaille s'envoie lui-même plus loin. À pas FIXE en voxels, vingt maillons tiennent 96,0 µm (×1,00), boîte ×1,55, 14 280 points sur 14 280 — contre ×2 692, ×4 976 545 et 615 points au pas de grille | [`44`](44_ou_la_chaine_se_trouve.md) |
 | un pas contrôlé suffit-il à rester sur la feuille ? | ❌ | non, et les deux pannes sont distinctes : à pas fixe la géométrie est saine sur 20 maillons (tous les points, pas au dixième de µm) et le contact matière tombe quand même à 39,7 % dès 768 µm puis plafonne vers 35 % | [`44`](44_ou_la_chaine_se_trouve.md) |
-| la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour | ⏳ | la projection existe et a DEUX seuils : contraste maximal vers 240 µm, et la nappe reste sur sa feuille jusqu'à ~380 µm. Reste à enchaîner et à réoptimiser | [`44`](44_ou_la_chaine_se_trouve.md) |
+| le recalage mesure-t-il sa propre sortie ? (circularité) | ❌ | contrôle sur la projection AVANT son recalage : +19,1 contre +19,0 à 768 µm et +15,3 contre +15,1 à 1 920 — identiques à la première décimale, alors que la demande de déplacement passe de 1,6 et 3,4 voxels à 0,06. La mesure ne dépend pas du recalage | [`44`](44_ou_la_chaine_se_trouve.md) |
 
 ## 4. La chaîne casse au sixième tour
 
@@ -92,7 +93,6 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 |---|---|---|
 | le tracé ne suit pas de feuille | **la graine, c'est-à-dire l'endroit** | le 2×2 tenait un NOMBRE constant, pas un endroit ; la première trace m7 à une graine VALIDE donne α = +0,487 sans appui qui porte, et 96 % de pics au bord — soit l'échec commun |
 | le tracé ne suit pas de feuille | **comparer le relief d'une trace L2 à une trace L0** | à aire égale un maillage L2 rend quatre fois moins de pixels de côté, donc les deux ne tiennent jamais dans la même fenêtre d'analyse — le relief ne peut pas les départager |
-| l'extension tangentielle est un point fixe | **la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour** | la projection existe et a DEUX seuils : contraste maximal vers 240 µm, et la nappe reste sur sa feuille jusqu'à ~380 µm. Reste à enchaîner et à réoptimiser |
 
 ⚠ **Une cause éliminée ne se rouvre pas sans une mesure neuve.** Les treize
 éliminations de ce document ont chacune coûté une campagne ; les refaire par doute
