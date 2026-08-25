@@ -822,6 +822,13 @@ run "appareil d'inference"     uv run --project "$ROOT" python "$ROOT/inference_
 # n est pas un verbe.
 run "point d entree lplv"      uv run --project "$ROOT" python "$ROOT/analysis/src/lplv.py" --verifier
 run "recensement des verbes"   uv run --project "$ROOT" python "$ROOT/analysis/src/figure_verbes.py" --verifier
+# ⚠⚠ L outil du grand rangement. Son invariant : apres application, AUCUNE citation d un
+# ancien chemin ne subsiste. ⚠ La premiere version de ce controle etait une TAUTOLOGIE --
+# elle relisait exactement les fichiers que la reecriture venait de traiter, donc elle ne
+# pouvait rien trouver. Deux sondes l ont montre en ne faisant echouer aucun controle. La
+# recherche porte desormais PLUS LARGE que la reecriture, et un chemin ASSEMBLE a l execution
+# est nomme plutot que tu, parce qu aucune reecriture textuelle ne peut le voir.
+run "deplacement de fichiers"  uv run --project "$ROOT" python "$ROOT/analysis/src/deplacer.py" --verifier
 # ⚠⚠ La campagne de portee. Ses sondes portent sur la COLONNE et pas sur le mot : l en-tete a
 # gagne « mediane » pendant que l extraction rendait `bloc_absent`, et un grep du mot restait
 # vert. ⚠ Et dans un `chk` qui est une FONCTION, $1 est l argument de la fonction, pas la
