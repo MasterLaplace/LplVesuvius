@@ -84,9 +84,11 @@ def extraire(dossier: Path, sortie: Path, couche: int | None = None,
 def verifier() -> int:
     import tempfile
     echecs = 0
+    controles = 0
 
     def ok(cond, quoi):
-        nonlocal echecs
+        nonlocal echecs, controles
+        controles += 1
         print(("  ✅ " if cond else "  ❌ ") + quoi)
         if not cond:
             echecs += 1
@@ -149,7 +151,12 @@ def verifier() -> int:
         cote_a_cote([], out3, marge=10)
         ok(not out3.exists(), "aucune image : rien n'est écrit, pas de fichier vide")
 
-    print(f"\n{'tous les témoins passent' if not echecs else f'{echecs} échec(s)'}")
+    # ⚠⚠ LE VERDICT EST ECRIT DANS LA FORME QUE `tools/temoins.sh` SAIT LIRE. Cette batterie
+    # a passe des mois sans jamais tourner : elle imprimait « tous les temoins passent », le
+    # lanceur cherche « ALL PASS », donc l enregistrer n aurait rien lance. Une batterie que
+    # personne ne lance est une verification incapable d echouer -- exactement ce que ce
+    # depot traque ailleurs. Un seul format, et un garde-fou le verifie desormais.
+    print(f"\n{'ALL PASS' if not echecs else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
 

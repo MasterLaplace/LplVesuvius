@@ -868,6 +868,18 @@ run "figure des appuis"        uv run --project "$ROOT/inference" python "$ROOT/
 # tranches de 4,8 µm couvrent ce que 41 de 2,4 couvrent. Tracer contre le compte de tranches
 # decalerait les deux series d un facteur deux et montrerait un desaccord qui n existe pas.
 run "figure de la pyramide"    uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_pyramide.py" --verifier
+run "figure de l emballement"  uv run --project "$ROOT" python "$ROOT/analysis/src/figure_emballement.py" --verifier
+# ⚠⚠ CES SIX BATTERIES N ONT JAMAIS TOURNE, et le garde-fou de la fin de ce fichier existe
+# pour ca. Quatre d entre elles imprimaient « tous les temoins passent » au lieu de
+# « ALL PASS » : les enregistrer sans corriger leur verdict n aurait rien lance non plus. Un
+# controle que personne ne lance est une verification incapable d echouer -- exactement ce que
+# ce depot traque partout ailleurs.
+run "couche de rendu"          uv run --project "$ROOT" python "$ROOT/analysis/src/couche_de_rendu.py" --verifier
+run "derive ou loterie"        uv run --project "$ROOT" python "$ROOT/analysis/src/derive_ou_loterie.py" --verifier
+run "juge a un rendu"          uv run --project "$ROOT" python "$ROOT/analysis/src/juge_a_un_rendu.py" --verifier
+run "rogner la nappe"          uv run --project "$ROOT" python "$ROOT/analysis/src/rogner_nappe.py" --verifier
+run "table de la chaine"       uv run --project "$ROOT" python "$ROOT/analysis/src/table_chaine.py" --verifier
+run "faire la release"         "$ROOT/tools/faire_la_release.sh" --verifier
 
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
@@ -1015,6 +1027,44 @@ else
   printf '❌ PERIME — relancer : murs_et_causes.py --rendre\n'; FAIL=$((FAIL + 1))
 fi
 rm -f "$T55"
+
+# ⚠⚠ LE GARDE-FOU DE CE FICHIER LUI-MEME. La liste des `run` ci-dessus est tenue A LA MAIN,
+# donc elle derive : mesure du 2026-08-25, SIX batteries sur 90 n avaient jamais tourne -- dont
+# quatre qui imprimaient « tous les temoins passent » au lieu de « ALL PASS », si bien que meme
+# les enregistrer n aurait rien lance. C est la meme classe de panne que la sentinelle de boot
+# qu il faut deplacer a chaque ajout : le remede n est pas de mieux tenir la liste, c est de la
+# faire VERIFIER par la machine.
+#
+# ⭐ La detection cherche le fichier qui GERE `--verifier`, pas celui qui le MENTIONNE -- ce
+# fichier le passe a quatre-vingt-dix autres sans le gerer lui-meme, donc un test sur la
+# mention se rangerait tout seul dans sa propre liste. `tools/temoins_release.sh` fait deja
+# cette distinction et sa raison est ecrite chez lui ; c est la meme forme qui est testee ici.
+printf '  %-30s ' "batteries non lancees"
+JAMAIS=""
+for f in "$ROOT"/analysis/src/*.py; do
+  grep -q -- 'add_argument("--verifier"' "$f" || continue
+  b=$(basename "$f")
+  # ⚠ Le motif porte le GUILLEMET FERMANT : une ligne de lancement ecrit
+  # `"$ROOT/analysis/src/x.py" --verifier`, donc chercher `x.py --verifier` ne matche jamais
+  # et le garde-fou accuserait les quatre-vingt-dix batteries d un coup.
+  grep -q -- "$b\" --verifier" "$ROOT/tools/temoins.sh" || JAMAIS="$JAMAIS $b"
+done
+for f in "$ROOT"/tools/*.sh; do
+  b=$(basename "$f")
+  # ⚠⚠ AUCUNE EXEMPTION, et c est le test de FORME qui la rend inutile : les deux lanceurs
+  # (`temoins.sh`, `temoins_release.sh`) ne GERENT pas `--verifier`, ils le TRANSMETTENT, donc
+  # ils ne matchent pas et ne se rangent pas dans leur propre liste. J avais d abord ecrit une
+  # exemption nommee pour eux ; elle etait non seulement inutile mais nuisible, puisqu elle
+  # aurait fait sauter un vrai auto-test le jour ou l un d eux en gagnerait un.
+  grep -qE '\[ "\$\{1:-\}" = "--verifier" \]|^\s*--verifier\)' "$f" || continue
+  grep -q -- "$b\" --verifier" "$ROOT/tools/temoins.sh" || JAMAIS="$JAMAIS $b"
+done
+NJAM=$(printf '%s' "$JAMAIS" | wc -w)
+if [ "$NJAM" -eq 0 ]; then
+  printf '✅ toutes les batteries sont lancees\n'
+else
+  printf '❌ %s batterie(s) jamais lancee(s) :%s\n' "$NJAM" "$JAMAIS"; FAIL=$((FAIL + 1))
+fi
 
 printf '  %-30s ' "scripts sans appelant"
 ORPH=""
