@@ -199,17 +199,37 @@ def volume_englobant(meta: dict) -> float:
 
 
 def croissance(dossiers: list[Path]) -> list[dict]:
-    """Le volume englobant de chaque maillage d'une chaîne, et son rapport au premier."""
+    """Le volume englobant de chaque maillage d'une chaîne, son rapport au premier, et le
+    PAS RÉELLEMENT PARCOURU à chaque maillon.
+
+    ⚠⚠ Les deux colonnes ne disent pas la même chose, et la seconde est la plus tranchante.
+    `--pas` est un pas **de grille** : la distance couverte vaut `pas × longueur moyenne de
+    tangente`. Quand un maillage cisaille, ses tangentes s'allongent — donc **la même commande
+    couvre une distance de plus en plus grande**, et une chaîne qui s'emballe le fait d'abord
+    sur son propre pas, avant que sa boîte ne s'en aperçoive. Une chaîne dont le pas dérive n'a
+    plus de longueur totale connue : elle ne va plus là où on l'a envoyée.
+
+    ⚠ Les maillages qui ne portent pas `pas_voxels` — une source, par exemple — n'ont pas de
+    pas : le champ vaut `None` plutôt que zéro, qui serait un pas nul mesuré.
+    """
     out = []
     for d in dossiers:
         meta = json.loads((d / "meta.json").read_text(encoding="utf-8"))
         v = volume_englobant(meta)
+        pas = meta.get("pas_voxels")
         out.append({"maillage": d.name, "volume_vox": v,
-                    "points": int(meta.get("points_projetes", 0)) or None})
+                    "points": int(meta.get("points_projetes", 0)) or None,
+                    "pas_voxels": float(pas) if pas is not None else None})
     if out:
         base = out[0]["volume_vox"] or 1.0
         for r in out:
             r["rapport"] = r["volume_vox"] / base
+        # ⭐ Le pas de référence est celui du PREMIER maillon qui en a un, pas celui de la
+        # source : une source n'a pas été projetée, donc elle n'a pas de pas à dériver.
+        premier = next((r["pas_voxels"] for r in out if r["pas_voxels"]), None)
+        for r in out:
+            r["rapport_pas"] = (r["pas_voxels"] / premier
+                                if premier and r["pas_voxels"] else None)
     return out
 
 
@@ -337,6 +357,34 @@ def verifier() -> int:
     v("le compte de points voyage", c[0]["points"] == 100)
     shutil.rmtree(racine2, ignore_errors=True)
 
+    # ⚠⚠ LE PAS EFFECTIF, et c est le discriminant le plus tranchant : `--pas` est un pas de
+    # GRILLE, donc la distance couverte suit la longueur des tangentes. Une chaine qui
+    # cisaille allonge ses tangentes, donc la meme commande couvre de plus en plus de terrain
+    # -- et la chaine cesse d aller la ou on l a envoyee. Sonde dans les deux sens.
+    racine3 = Path(tempfile.mkdtemp(prefix="pas_temoins_"))
+    for i, (cote, pas) in enumerate(((10, None), (10, 40.0), (10, 40.0), (10, 80.0))):
+        d = racine3 / f"m{i}"
+        d.mkdir()
+        meta = {"bbox": [[0, 0, 0], [cote, 10, 10]], "points_projetes": 100}
+        if pas is not None:
+            meta["pas_voxels"] = pas
+        (d / "meta.json").write_text(json.dumps(meta), encoding="utf-8")
+    c = croissance([racine3 / f"m{i}" for i in range(4)])
+    # ⚠ Une source n a PAS ete projetee : elle n a pas de pas, et zero serait un pas nul
+    # mesure. Elle ne peut donc pas non plus servir de reference.
+    v("une source sans pas rend None, pas zero", c[0]["pas_voxels"] is None)
+    v("... et n annonce aucun rapport de pas", c[0]["rapport_pas"] is None)
+    v("le pas de reference est celui du premier MAILLON",
+      abs(c[1]["rapport_pas"] - 1.0) < 1e-9, str(c[1]["rapport_pas"]))
+    v("un pas tenu reste a 1", abs(c[2]["rapport_pas"] - 1.0) < 1e-9)
+    v("un pas double est vu double", abs(c[3]["rapport_pas"] - 2.0) < 1e-9,
+      str(c[3]["rapport_pas"]))
+    v("le pas voyage en voxels", c[1]["pas_voxels"] == 40.0)
+    # ⚠ Une chaine sans aucun pas ne fabrique pas de reference a partir de rien.
+    c2 = croissance([racine3 / "m0"])
+    v("aucun pas du tout : aucun rapport invente", c2[0]["rapport_pas"] is None)
+    shutil.rmtree(racine3, ignore_errors=True)
+
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -349,6 +397,8 @@ def main() -> int:
                    help="0 = lignes, 1 = colonnes ; défaut : l'axe le plus long, MESURÉ")
     p.add_argument("--pas", type=float, default=1.0,
                    help="en pas de grille ; négatif pour projeter de l'autre côté")
+    p.add_argument("--voxel-um", type=float, default=2.4,
+                   help="taille du voxel, pour lire le pas en µm (défaut : niveau 0 du scan)")
     p.add_argument("--croissance", type=Path, nargs="*",
                    help="mesurer le volume englobant d'une suite de maillages — le "
                         "discriminant d'une chaîne, et il ne coûte aucun rendu")
@@ -359,10 +409,13 @@ def main() -> int:
         return verifier()
     if a.croissance:
         c = croissance([Path(x) for x in a.croissance])
-        print(f"{'maillage':16s} {'volume (Gvox)':>14s} {'×premier':>10s} {'points':>8s}")
+        print(f"{'maillage':16s} {'volume (Gvox)':>14s} {'×premier':>10s} "
+              f"{'pas (µm)':>10s} {'×pas':>7s} {'points':>8s}")
         for r in c:
+            pas = f"{r['pas_voxels'] * a.voxel_um:10.1f}" if r['pas_voxels'] else f"{'—':>10}"
+            rp = f"{r['rapport_pas']:7.2f}" if r['rapport_pas'] else f"{'—':>7}"
             print(f"{r['maillage']:16s} {r['volume_vox'] / 1e9:14.2f} "
-                  f"{r['rapport']:10.2f} {r['points'] or '—':>8}")
+                  f"{r['rapport']:10.2f} {pas} {rp} {r['points'] or '—':>8}")
         if a.json:
             a.json.parent.mkdir(parents=True, exist_ok=True)
             a.json.write_text(json.dumps(c, indent=2), encoding="utf-8")

@@ -11,7 +11,7 @@ la fois. Une feuille de route qui liste des tâches laisse croire qu'on avance q
 tourne ; celle-ci liste des causes **éliminées**, et montre l'espace rétrécir. C'est le
 seul progrès mesurable sur un problème que personne n'a résolu.
 
-**26 causes candidates** sur **4 murs** : ❌ **16** éliminées · ✅ **7** confirmées · ⏳ **2** ouvertes · 🔒 **1** bloquée
+**27 causes candidates** sur **4 murs** : ❌ **16** éliminées · ✅ **7** confirmées · ⏳ **3** ouvertes · 🔒 **1** bloquée
 
 | symbole | verdict | ce que ça veut dire |
 |---|---|---|
@@ -57,7 +57,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 
 ## 3. L'extension tangentielle est un point fixe
 
-❌ 5 éliminées · ✅ 1 confirmée · ⏳ 1 ouverte
+❌ 5 éliminées · ✅ 1 confirmée · ⏳ 2 ouvertes
 
 | cause candidate | | ce qui a été mesuré | où |
 |---|---|---|---|
@@ -66,8 +66,9 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | enchaîner rogner puis étendre | ❌ | le cycle converge vers un point fixe autour de 6 cm² : chaque tour regagne ce qu'il vient de perdre | [`44`](44_ou_la_chaine_se_trouve.md) |
 | juger une courbe sur trois points | ❌ | trois points donnaient « pente monotone », six « plateau puis falaise », neuf « maximum puis descente douce » — chaque forme plausible, chaque forme fausse | [`44`](44_ou_la_chaine_se_trouve.md) |
 | juger la projection par un sondage de points | ❌ | bloc avec matière et valeur au point rendent le MÊME chiffre de 0 µm à 2,4 mm : un bloc fait 307 µm quand les feuilles sont à 10-20 µm | [`44`](44_ou_la_chaine_se_trouve.md) |
-| enchaîner la projection sans réoptimiser | ❌ | cinq maillons de 238 µm étalent la boîte ×2,38 à nombre de points constant, contre ×1,10 pour le bond direct. ⚠ Comparaison de profils non concluante : à 1,19 mm les deux sont hors feuille | [`44`](44_ou_la_chaine_se_trouve.md) |
+| enchaîner la projection à GRAND pas (238 µm/maillon) | ❌ | cinq maillons de 238 µm étalent la boîte ×2,38 à nombre de points constant, contre ×1,10 pour le bond direct — et finissent 5,33 SPIRES à côté de lui. ⚠ Le pas réel dérive avant la boîte : 238 → 963 µm par maillon | [`44`](44_ou_la_chaine_se_trouve.md) |
 | la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour | ⏳ | la projection existe et a DEUX seuils : contraste maximal vers 240 µm, et la nappe reste sur sa feuille jusqu'à ~380 µm. Reste à enchaîner et à réoptimiser | [`44`](44_ou_la_chaine_se_trouve.md) |
+| enchaîner la projection à PETIT pas (95 µm/maillon) | ⏳ | trois maillons de 95 µm étalent la boîte ×1,01 — EXACTEMENT comme le bond direct de même longueur — et finissent à 0,047 spire de lui. Le « strictement pire » appartenait au pas, pas à l'enchaînement. ⚠ Le pire point est déjà à 0,686 spire | [`44`](44_ou_la_chaine_se_trouve.md) |
 
 ## 4. La chaîne casse au sixième tour
 
@@ -90,6 +91,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | le tracé ne suit pas de feuille | **la graine, c'est-à-dire l'endroit** | le 2×2 tenait un NOMBRE constant, pas un endroit ; la première trace m7 à une graine VALIDE donne α = +0,487 sans appui qui porte, et 96 % de pics au bord — soit l'échec commun |
 | le tracé ne suit pas de feuille | **comparer le relief d'une trace L2 à une trace L0** | à aire égale un maillage L2 rend quatre fois moins de pixels de côté, donc les deux ne tiennent jamais dans la même fenêtre d'analyse — le relief ne peut pas les départager |
 | l'extension tangentielle est un point fixe | **la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour** | la projection existe et a DEUX seuils : contraste maximal vers 240 µm, et la nappe reste sur sa feuille jusqu'à ~380 µm. Reste à enchaîner et à réoptimiser |
+| l'extension tangentielle est un point fixe | **enchaîner la projection à PETIT pas (95 µm/maillon)** | trois maillons de 95 µm étalent la boîte ×1,01 — EXACTEMENT comme le bond direct de même longueur — et finissent à 0,047 spire de lui. Le « strictement pire » appartenait au pas, pas à l'enchaînement. ⚠ Le pire point est déjà à 0,686 spire |
 
 ⚠ **Une cause éliminée ne se rouvre pas sans une mesure neuve.** Les treize
 éliminations de ce document ont chacune coûté une campagne ; les refaire par doute

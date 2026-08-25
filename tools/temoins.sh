@@ -795,6 +795,7 @@ run "figure des piles vides"   uv run --project "$ROOT" python "$ROOT/analysis/s
 # ce sont des projections independantes sous un autre nom.
 run "chaîne tangentielle"      "$ROOT/tools/chainer_tangentiel.sh" --verifier
 run "projection tangentielle"  uv run --project "$ROOT" python "$ROOT/analysis/src/projeter_tangentiel.py" --verifier
+run "ecart de maillages"       uv run --project "$ROOT" python "$ROOT/analysis/src/ecart_de_maillages.py" --verifier
 # ⚠⚠ La campagne de portee. Ses sondes portent sur la COLONNE et pas sur le mot : l en-tete a
 # gagne « mediane » pendant que l extraction rendait `bloc_absent`, et un grep du mot restait
 # vert. ⚠ Et dans un `chk` qui est une FONCTION, $1 est l argument de la fonction, pas la

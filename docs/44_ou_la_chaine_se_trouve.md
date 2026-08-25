@@ -355,11 +355,95 @@ bond direct tient encore — par exemple trois maillons de 95 µm, soit 286 µm,
 unique lit 0,181 et 2,0 % de pic au bord. Là, « la chaîne tient-elle là où un seul bond
 tient ? » devient une vraie question.
 
-> ⭐⭐⭐ **Donc une chaîne tangentielle PUREMENT GÉOMÉTRIQUE ne marche pas**, et ce n'est pas
+> ~~⭐⭐⭐ **Donc une chaîne tangentielle PUREMENT GÉOMÉTRIQUE ne marche pas**, et ce n'est pas
 > un détail de réglage : elle est strictement moins bonne que la projection unique qu'elle
-> prétend prolonger. Ce qui manque n'est pas un meilleur pas, c'est la **réoptimisation entre
-> les maillons** — recoller la nappe projetée sur la matière, ce que ce document nommait déjà
-> (`--correct`). La chaîne a besoin de la donnée, pas seulement de la géométrie.
+> prétend prolonger.~~ *(⚠⚠ **corrigé ci-dessous** : c'est vrai à 238 µm par maillon, et **faux**
+> à 95 µm. Le verdict n'appartenait pas à l'enchaînement mais au **pas**.)* Ce qui manque
+> n'est pas seulement un meilleur pas, c'est aussi la **réoptimisation entre les maillons** —
+> recoller la nappe projetée sur la matière, ce que ce document nommait déjà (`--correct`).
+
+---
+
+#### ⭐⭐⭐ Le plan d'expérience juste, fait : à 95 µm par maillon, enchaîner ne coûte RIEN
+
+Trois maillons de 95 µm, soit **286 µm** au total — une distance où la projection unique tient
+encore (0,181 d'amplitude, 2,0 % de pic au bord). Témoin : le **bond direct** de ces mêmes
+286 µm. Et le verdict **s'inverse** :
+
+| maillage | boîte ×premier | pas réel | ×pas | points |
+|---|---:|---:|---:|---:|
+| source | 1,00 | — | — | 14 280 |
+| maillon 1 | 1,00 | 95,2 µm | 1,00 | 14 280 |
+| maillon 2 | 1,01 | 95,4 µm | 1,00 | 14 280 |
+| maillon 3 | 1,01 | 95,6 µm | **1,00** | 14 280 |
+| **bond direct, même distance** | **1,01** | 285,7 µm | 3,00 | 14 280 |
+
+> ⭐⭐ **×1,01 des deux côtés.** À 95 µm par maillon, trois projections enchaînées étalent le
+> maillage **exactement autant** qu'un seul bond de la même longueur — c'est-à-dire pas du
+> tout. Le « strictement pire » de la campagne précédente n'était pas une propriété de
+> l'enchaînement : c'était une propriété du **pas**.
+
+![L'emballement d'une chaîne tangentielle : le pas le dit avant la boîte](images/44_emballement.png)
+
+#### ⚠⚠ Et le vrai instrument d'alerte n'est pas la boîte, c'est le PAS RÉELLEMENT PARCOURU
+
+En regardant les `meta.json` des maillons — donc sans aucun rendu — une seconde grandeur
+apparaît, et elle est plus tranchante que le volume englobant.
+
+⭐ `--pas` est un pas **de grille**. La distance réellement couverte vaut
+`pas × longueur de tangente`, donc **un maillage qui cisaille allonge ses tangentes, et la
+même commande couvre de plus en plus de terrain** :
+
+| maillon | pas demandé | pas réel (238 µm) | ×pas | boîte |
+|---|---:|---:|---:|---:|
+| 1 | 238 µm | 238,1 µm | 1,00 | 1,01 |
+| 2 | 238 µm | 240,4 µm | 1,01 | 1,02 |
+| 3 | 238 µm | 251,5 µm | **1,06** | 1,04 |
+| 4 | 238 µm | 351,0 µm | **1,47** | 1,22 |
+| 5 | 238 µm | **963,3 µm** | ⚠⚠ **4,05** | 2,38 |
+
+> ⚠⚠ **Le pas PRÉCÈDE la boîte.** Au quatrième maillon il est déjà à **+47 %** quand la boîte
+> n'est qu'à +22 %. Une chaîne qui dérive sur son propre pas **ne va plus là où on l'a
+> envoyée** : ces cinq maillons de 238 µm ont parcouru 2 044 µm et non 1 190.
+>
+> ⭐ C'est donc `pas_voxels` — un nombre déjà écrit dans chaque `meta.json`, gratuit — qui doit
+> servir de garde-fou à une chaîne, un maillon à la fois, et pas un rendu à la fin.
+
+#### ⭐⭐⭐ Et la question la plus élémentaire : les deux atterrissent-elles au MÊME endroit ?
+
+Comparer par le **profil** demande deux rendus, et à 1,19 mm ça n'apprend rien (§ précédent).
+Mais deux `tifxyz` issus d'une même source **partagent leur paramétrisation** : le point de
+grille (i, j) désigne le même point de la nappe des deux côtés. On peut donc les soustraire —
+et ça ne coûte **aucun rendu**.
+
+⭐ Lu en **spires** (`PHercParis4` : écart inter-spires médian **173 µm**, cf.
+[`16`](16_carte_difficulte_rouleaux_du_prix.md)), parce que « 8 µm » ne dit pas si deux
+maillages sont sur la même feuille alors que « 0,05 spire » le dit :
+
+| chaîne | écart médian | **en spires** | p90 | max | le long | en travers |
+|---|---:|---:|---:|---:|---:|---:|
+| **3 × 95 µm** (286 µm) | 8,1 µm | ⭐ **0,047** | 0,147 | 0,686 | −0,6 µm | 8,1 µm |
+| **5 × 238 µm** (1190 µm) | 922,5 µm | ⚠⚠ **5,33** | 7,56 | 11,63 | −671,6 µm | 649,5 µm |
+
+> ⭐⭐⭐ **À 95 µm par maillon, la chaîne et le bond direct finissent à un vingtième de spire
+> l'un de l'autre — la MÊME feuille.** À 238 µm, ils finissent **cinq spires** l'un de
+> l'autre, c'est-à-dire dans deux endroits sans rapport du rouleau.
+
+⚠ **L'écart se décompose, et les deux moitiés sont deux échecs différents.** *Le long* du
+déplacement, la chaîne courte va aussi loin que le bond (−0,6 µm) : le pas est calibré. *En
+travers*, elle a dérivé de 8,1 µm — c'est le **cisaillement**, et c'est lui qui fait changer
+de feuille. La chaîne longue, elle, est à la fois **671 µm trop courte** et **649 µm de
+côté** : elle a perdu les deux.
+
+⚠⚠ **Ce que la chaîne courte n'a pas gagné pour autant** : son **pire** point est à
+**0,686 spire**, soit les deux tiers du chemin vers la feuille voisine. La médiane tient, la
+queue est déjà en train de partir — et un texte se lit sur toute une bande, pas sur sa
+médiane.
+
+⚠ **Ce que cette comparaison ne dit PAS** : que l'un des deux est sur la BONNE feuille. Elle
+mesure un **accord**, pas une vérité. Deux méthodes qui se trompent de la même façon
+s'accordent parfaitement ; c'est le rendu qui tranche, et c'est ce que le paragraphe suivant
+mesure.
 
 ⚠⚠ **Ce que ça ne dit PAS, et c'est ce qui empêche d'en conclure que la chaîne est morte** :
 ces trois points mesurent une projection **pure**, sans réoptimisation. Une vraie chaîne
@@ -1184,6 +1268,32 @@ rendu par les seuils d'hier ; la série, elle, est une donnée et ne peut pas ê
 ## Reproduire
 
 ```bash
+# LA CHAÎNE JUSTE : trois maillons de 95 µm contre un bond direct de 286 µm
+SOURCE=$PWD/data/temoin_rendu/morceaux/morceau_00 PAS=2 MAILLONS=3 \
+  DEST=$PWD/data/chaine_courte JSON=$PWD/docs/chaine_courte.json \
+  tools/chainer_tangentiel.sh
+
+# Les deux discriminants qui ne coûtent AUCUN rendu — boîte englobante et pas réel
+uv run --project . python analysis/src/projeter_tangentiel.py --croissance \
+  data/temoin_rendu/morceaux/morceau_00 data/chaine_courte/maillon_{1,2,3} \
+  data/chaine_courte/direct --json docs/croissance_chaine_courte.json
+
+# … et le troisième : les deux maillages atterrissent-ils au même endroit ?
+uv run --project . python analysis/src/ecart_de_maillages.py \
+  data/chaine_courte/maillon_3 data/chaine_courte/direct \
+  --depuis data/temoin_rendu/morceaux/morceau_00 --spire-um 173 \
+  --json docs/ecart_chaine_courte.json
+
+# La figure des deux chaînes, à échelle verticale PARTAGÉE
+uv run --project . python analysis/src/figure_emballement.py \
+  docs/croissance_chaine_courte.json docs/croissance_chaine_longue.json \
+  --titres "3 maillons de 95 µm" "5 maillons de 238 µm" \
+  --sortie docs/images/44_emballement.png
+
+# Les témoins des deux instruments, hors ligne (31 + 26 contrôles)
+uv run --project . python analysis/src/ecart_de_maillages.py --verifier
+uv run --project . python analysis/src/figure_emballement.py --verifier
+
 # La géométrie de n'importe quelle campagne d'enchaînement
 cd inference && uv run python ../analysis/src/geometrie_chaine.py ../data/spires_pas025 \
   --voxel-um 8.64 --json ../docs/geometrie_pas025.json \
