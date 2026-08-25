@@ -1,0 +1,178 @@
+[
+  {
+    "maillage": "morceau_00",
+    "volume_vox": 10035076137.979567,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.0,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_1",
+    "volume_vox": 10061808765.160976,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.0026639187200819,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_2",
+    "volume_vox": 10097173635.535875,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.0061880444854114,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_3",
+    "volume_vox": 10137498193.17432,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.010206405391098,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_4",
+    "volume_vox": 10166918641.138268,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.0131381667010695,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_5",
+    "volume_vox": 10160493939.777618,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.01249794222521,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_6",
+    "volume_vox": 10180259246.948038,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.014467564268795,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_7",
+    "volume_vox": 10397578875.013454,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.0361235661842096,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_8",
+    "volume_vox": 10628397078.713768,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.059124707433825,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_9",
+    "volume_vox": 10838868925.18345,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.0800983247313674,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_10",
+    "volume_vox": 11349626674.897242,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.1309955718165925,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_11",
+    "volume_vox": 11703618179.971489,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.1662709897812356,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_12",
+    "volume_vox": 12299762274.563944,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.2256770258088288,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_13",
+    "volume_vox": 12686807055.015882,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.2642462180232354,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_14",
+    "volume_vox": 13194218480.641241,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.3148100023581613,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_15",
+    "volume_vox": 13687471436.674805,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.3639628886194581,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_16",
+    "volume_vox": 14109941186.347448,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.4060621954771042,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_17",
+    "volume_vox": 14470094864.578665,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.4419516768601253,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_18",
+    "volume_vox": 14899274547.218006,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.4847196316557079,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_19",
+    "volume_vox": 15197141447.510555,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.5144022066752654,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_20",
+    "volume_vox": 15555241573.27435,
+    "points": 14280,
+    "pas_voxels": 40.0,
+    "rapport": 1.5500870506007138,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "direct",
+    "volume_vox": 12092348364.263868,
+    "points": 14280,
+    "pas_voxels": 800.0,
+    "rapport": 1.2050081332714737,
+    "rapport_pas": 20.0
+  }
+]

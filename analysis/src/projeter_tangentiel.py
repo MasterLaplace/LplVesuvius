@@ -128,11 +128,24 @@ def axe_le_plus_long(plans) -> int:
     return int(np.argmax(chemins))
 
 
-def projeter(plans, meta, axe: int, pas: float) -> tuple[dict, dict]:
-    """La grille déplacée de `pas` fois sa tangente unitaire, le long de `axe`.
+def projeter(plans, meta, axe: int, pas: float,
+             pas_vox: float | None = None) -> tuple[dict, dict]:
+    """La grille déplacée le long de sa tangente unitaire, sur l'axe `axe`.
 
     ⚠ `pas` est en **pas de grille**, pas en voxels : c'est la seule unité dans laquelle
-    « à côté » veut dire la même chose sur deux nappes d'échantillonnage différent.
+    « à côté » veut dire la même chose sur deux nappes d'échantillonnage différent. C'est le
+    bon choix pour COMPARER deux nappes ; c'en est un mauvais pour ENCHAÎNER.
+
+    ⚠⚠ `pas_vox` fixe le déplacement en **voxels**, et il existe pour casser une boucle de
+    rétroaction mesurée : un pas de grille couvre `pas × longueur moyenne de tangente`, donc
+    un maillage qui cisaille allonge ses tangentes, donc le maillon suivant couvre plus de
+    terrain, donc il cisaille davantage. Mesuré sur vingt maillons de « 95 µm » :
+    95 · 96 · 97 · 101 · 110 · 127 · 159 · 223 · 360 · **650 µm**. La chaîne ne va plus là où
+    on l'envoie, et sa distance totale n'est plus connue.
+
+    ⚠ Ce que `pas_vox` ne fait PAS : empêcher la grille de cisailler. Il fixe la distance
+    parcourue, pas la forme du maillage — la boîte englobante peut encore grossir. Il coupe la
+    rétroaction, il ne supprime pas la cause.
     """
     import numpy as np
 
@@ -147,14 +160,21 @@ def projeter(plans, meta, axe: int, pas: float) -> tuple[dict, dict]:
     # Le déplacement vaut `pas` fois la longueur moyenne d'un pas de grille, pour que
     # « un pas » soit la même distance physique partout sur la nappe.
     moyen = float(norme[utilisable].mean()) if utilisable.any() else 0.0
-    Q = P + U * (pas * moyen)
+    # ⚠⚠ C'est ICI que la rétroaction se coupe : avec `pas_vox`, le déplacement ne dépend plus
+    # de `moyen`, donc un maillage étiré ne s'envoie plus lui-même plus loin au coup suivant.
+    depl = float(pas_vox) if pas_vox is not None else pas * moyen
+    Q = P + U * depl
     out = {}
     for i, n in enumerate(("x", "y", "z")):
         a = np.full(P.shape[:2], -1.0, dtype=np.float32)
         a[utilisable] = Q[..., i][utilisable]
         out[n] = a
-    rendu = {"axe": axe, "pas_grille": pas, "pas_voxels": pas * moyen,
-             "pas_moyen_voxels": moyen,
+    rendu = {"axe": axe, "pas_grille": None if pas_vox is not None else pas,
+             "pas_voxels": depl, "pas_moyen_voxels": moyen,
+             # ⚠ Le meta DIT dans quelle unité le pas a été demandé. Deux chaînes dont l'une
+             # a un pas fixe et l'autre un pas de grille ne se comparent pas maillon à
+             # maillon, et rien d'autre dans le fichier ne permettrait de les distinguer.
+             "pas_fixe": pas_vox is not None,
              "points_valides": int(valide(plans).sum()),
              "points_projetes": int(utilisable.sum()),
              "tangente_nulle": int((ok & ~(norme > 1e-9)).sum())}
@@ -167,7 +187,7 @@ def projeter(plans, meta, axe: int, pas: float) -> tuple[dict, dict]:
     # ⚠ C est une somme de pas, pas une distance a vol d oiseau : les deux coincident tant que
     # la chaine marche droit (mesure : 481,0 contre 479,5 sur cinq maillons, 0,3 % d ecart) et
     # divergeraient si elle tournait. `ecart_de_maillages.py` mesure la vraie, quand il faut.
-    rendu["parcouru_vox"] = float(meta.get("parcouru_vox", 0.0)) + pas * moyen
+    rendu["parcouru_vox"] = float(meta.get("parcouru_vox", 0.0)) + depl
     return out, rendu
 
 
@@ -300,6 +320,29 @@ def verifier() -> int:
     v("trois pas déplacent trois fois plus",
       abs(float(proj3["x"][4, 10]) - (gx[4, 10] + 30.0)) < 1e-3)
     # ⚠ Un pas négatif projette de l'autre côté — une chaîne se parcourt dans les deux sens.
+    # ⚠⚠ LE PAS FIXE, et la propriété qui le justifie : il ne dépend PAS de la longueur des
+    # tangentes du maillage. Sondé sur DEUX nappes d'échantillonnage différent — c'est ce que
+    # le pas de grille ne peut pas faire, et c'est la boucle de rétroaction d'une chaîne.
+    _, rf = projeter(plans, {"scale": [0.05, 0.05]}, 1, 1.0, pas_vox=7.0)
+    v("un pas fixe déplace du nombre de voxels demandé",
+      abs(rf["pas_voxels"] - 7.0) < 1e-9, str(rf["pas_voxels"]))
+    v("... et le meta le DIT", rf["pas_fixe"] is True)
+    v("... un pas de grille ne le dit pas", r["pas_fixe"] is False)
+    v("... et n'annonce pas de pas de grille", rf["pas_grille"] is None)
+    # La même nappe, échantillonnée DEUX FOIS plus large : ses tangentes doublent.
+    large = {n: a * 2.0 for n, a in plans.items()}
+    _, rl = projeter(large, {"scale": [0.05, 0.05]}, 1, 1.0)
+    v("un pas de GRILLE suit la longueur des tangentes",
+      abs(rl["pas_voxels"] - 2.0 * r["pas_voxels"]) < 1e-6,
+      f"{rl['pas_voxels']} vs {r['pas_voxels']}")
+    _, rlf = projeter(large, {"scale": [0.05, 0.05]}, 1, 1.0, pas_vox=7.0)
+    v("... alors qu'un pas FIXE ne la suit pas",
+      abs(rlf["pas_voxels"] - 7.0) < 1e-9, str(rlf["pas_voxels"]))
+    # ⚠ Et le cumul suit le déplacement réel, pas la valeur demandée.
+    _, rc2 = projeter(plans, {"parcouru_vox": 100.0}, 1, 1.0, pas_vox=7.0)
+    v("le cumul s'incrémente du pas fixe", abs(rc2["parcouru_vox"] - 107.0) < 1e-9,
+      str(rc2["parcouru_vox"]))
+
     projm, _ = projeter(plans, {"scale": [0.05, 0.05]}, 1, -1.0)
     v("un pas négatif projette en arrière",
       abs(float(projm["x"][4, 10]) - (gx[4, 10] - 10.0)) < 1e-3)
@@ -405,6 +448,9 @@ def main() -> int:
     p.add_argument("--dest", type=Path)
     p.add_argument("--axe", type=int, choices=(0, 1),
                    help="0 = lignes, 1 = colonnes ; défaut : l'axe le plus long, MESURÉ")
+    p.add_argument("--pas-vox", type=float,
+                   help="déplacement FIXE en voxels — casse la rétroaction d'une chaîne, "
+                        "au prix de ne plus être comparable d'une nappe à l'autre")
     p.add_argument("--pas", type=float, default=1.0,
                    help="en pas de grille ; négatif pour projeter de l'autre côté")
     p.add_argument("--voxel-um", type=float, default=2.4,
@@ -435,14 +481,15 @@ def main() -> int:
 
     plans, meta = lire(a.source)
     axe = a.axe if a.axe is not None else axe_le_plus_long(plans)
-    proj, r = projeter(plans, meta, axe, a.pas)
+    proj, r = projeter(plans, meta, axe, a.pas, a.pas_vox)
     if r["points_projetes"] == 0:
         print(f"refus : aucune tangente utilisable dans {a.source}", file=sys.stderr)
         return 3
     m = ecrire(proj, meta, a.dest, r)
+    unite = (f"  ·  pas FIXE de {r['pas_voxels']:.1f} voxels" if r["pas_fixe"]
+             else f"  ·  pas {a.pas:g} de grille = {r['pas_voxels']:.1f} voxels")
     print(f"{a.source} → {a.dest}\n"
-          f"  axe {axe} ({'lignes' if axe == 0 else 'colonnes'})"
-          f"  ·  pas {a.pas:g} de grille = {r['pas_voxels']:.1f} voxels\n"
+          f"  axe {axe} ({'lignes' if axe == 0 else 'colonnes'}){unite}\n"
           f"  {r['points_projetes']} points projetés sur {r['points_valides']} valides"
           + (f"  ⚠ {r['tangente_nulle']} tangente(s) nulle(s)" if r["tangente_nulle"] else ""))
     print(f"  bbox {[round(v) for v in m['bbox'][0]]} → {[round(v) for v in m['bbox'][1]]}")

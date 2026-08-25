@@ -69,6 +69,16 @@ if [ "${1:-}" = "--verifier" ]; then
   # ecrite puis jetee et la chaine resterait geometrique en ayant l air corrigee.
   chk "... et le maillon recale alimente le suivant" \
       'grep -q "CIBLE=\"\$DEST/projete_" "$ROOT/tools/chainer_tangentiel.sh"'
+  # ⚠⚠ PAS_VOX casse la retroaction : un pas de GRILLE couvre `pas x longueur de
+  # tangente`, donc un maillage etire s envoie lui-meme plus loin au coup suivant. Mesure sur
+  # vingt maillons de « 95 µm » : le pas reel va jusqu a 650.
+  chk "PAS_VOX existe" 'grep -q "PAS_VOX:-" "$ROOT/tools/chainer_tangentiel.sh"'
+  chk "... et il est passe a la projection" \
+      'grep -q -- "--pas-vox" "$ROOT/tools/chainer_tangentiel.sh"'
+  # ⚠ Le temoin suit la MEME unite que la chaine, sinon on compare deux longueurs
+  # differentes en croyant comparer deux methodes.
+  chk "... et le temoin suit la meme unite" \
+      'grep -q "ARG_DIRECT=(--pas-vox" "$ROOT/tools/chainer_tangentiel.sh"'
   echo "$([ $ok = 0 ] && echo 'ALL PASS' || echo FAILURES) ($ok failures, $n checks)"
   exit $ok
 fi
@@ -80,10 +90,30 @@ DEST="${DEST:-$ROOT/data/chaine_tangentielle}"
 JSON="${JSON:-$ROOT/docs/chaine_tangentielle.json}"
 FENETRES="${FENETRES:-41}"
 UM_BASE="${UM_BASE:-2.4}"
-DIRECT=$((PAS * MAILLONS))
+# ⚠⚠ PAS_VOX : un pas FIXE en voxels, qui casse la retroaction d une chaine. Un pas de
+# GRILLE couvre `pas x longueur moyenne de tangente`, donc un maillage qui cisaille s envoie
+# lui-meme plus loin au coup suivant : mesure sur vingt maillons de « 95 µm », le pas reel va
+# 95 · 96 · 97 · 101 · 110 · 127 · 159 · 223 · 360 · 650. Avec PAS_VOX la distance ne depend
+# plus du maillage.
+# ⚠ Le TEMOIN suit la meme unite que la chaine, sinon on comparerait deux longueurs
+# differentes en croyant comparer deux methodes.
+PAS_VOX="${PAS_VOX:-}"
+if [ -n "$PAS_VOX" ]; then
+  ARG_PAS=(--pas-vox "$PAS_VOX")
+  ARG_DIRECT=(--pas-vox "$(python3 -c "print($PAS_VOX * $MAILLONS)")")
+  DIRECT="${PAS_VOX}vox x $MAILLONS"
+else
+  ARG_PAS=(--pas "$PAS")
+  ARG_DIRECT=(--pas "$((PAS * MAILLONS))")
+  DIRECT=$((PAS * MAILLONS))
+fi
 
 mkdir -p "$DEST"
-echo "== chaîne : $MAILLONS maillons de $PAS pas  ·  témoin : un bond direct de $DIRECT pas"
+if [ -n "$PAS_VOX" ]; then
+  echo "== chaîne : $MAILLONS maillons de $PAS_VOX voxels FIXES  ·  témoin : un bond direct de $DIRECT"
+else
+  echo "== chaîne : $MAILLONS maillons de $PAS pas  ·  témoin : un bond direct de $DIRECT pas"
+fi
 
 # ⚠⚠ RECALER=1 : la chaine CORRIGEE. Chaque maillon est reprojete puis **repose sur la
 # matiere** avant de servir de source au suivant. C est le geste que `44` nomme comme le seul
@@ -107,7 +137,7 @@ for M in $(seq 1 "$MAILLONS"); do
     CIBLE="$D"
     [ "$RECALER" = 1 ] && CIBLE="$DEST/projete_$M"
     uv run --project "$ROOT" python "$ROOT/analysis/src/projeter_tangentiel.py" \
-        "$COURANT" --dest "$CIBLE" --pas "$PAS" > "$D.log" 2>&1 \
+        "$COURANT" --dest "$CIBLE" "${ARG_PAS[@]}" > "$D.log" 2>&1 \
       || { echo "   ⚠ maillon $M échoué — la chaîne s arrête là" >&2; break; }
     if [ "$RECALER" = 1 ]; then
       uv run --project "$ROOT" python "$ROOT/analysis/src/recaler_sur_la_matiere.py" \
@@ -125,7 +155,7 @@ done
 
 if [ ! -f "$DEST/direct/meta.json" ]; then
   uv run --project "$ROOT" python "$ROOT/analysis/src/projeter_tangentiel.py" \
-      "$SOURCE" --dest "$DEST/direct" --pas "$DIRECT" > "$DEST/direct.log" 2>&1 \
+      "$SOURCE" --dest "$DEST/direct" "${ARG_DIRECT[@]}" > "$DEST/direct.log" 2>&1 \
     || echo "   ⚠ témoin direct échoué" >&2
 fi
 

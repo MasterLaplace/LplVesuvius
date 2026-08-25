@@ -42,6 +42,7 @@ ANGLAIS = {
     "segment publié — la référence": "published segment — the reference",
     "bond direct, même distance": "direct jump, same distance",
     "chaîne de 95 µm": "95 µm chain",
+    "chaîne CORRIGÉE sur la matière": "chain RE-SEATED on the material",
     "⚠ le pas s'emballe ici": "⚠ the step runs away here",
 }
 
@@ -85,9 +86,19 @@ def part_posee(r: dict) -> float:
     return (int(r["recales"]) + int(r.get("borne", 0))) / interroges
 
 
+CORRIGEE = (58, 96, 168)
+
+
 def dessiner(rangs: list[dict], sortie: Path, anglais: bool = False,
-             emballement_um: float | None = None) -> dict:
-    """La part posée contre la distance, la source en repère et le bond en marqueur."""
+             emballement_um: float | None = None,
+             corrigee: list[dict] | None = None) -> dict:
+    """La part posée contre la distance, la source en repère et le bond en marqueur.
+
+    ⭐ `corrigee` superpose une SECONDE chaîne — celle qui repose sa nappe sur la matière entre
+    deux projections. Les deux vivent sur les mêmes axes parce que la question est « laquelle
+    tient plus loin », et deux figures côte à côte laisseraient le lecteur comparer deux
+    échelles au lieu de deux courbes.
+    """
     if len(rangs) < 2:
         raise ValueError("moins de deux maillages — une tendance en demande au moins deux")
     g1, g2, g3 = _police()
@@ -121,7 +132,8 @@ def dessiner(rangs: list[dict], sortie: Path, anglais: bool = False,
     d = ImageDraw.Draw(im)
     d.text((24, 16), T("la nappe reste-t-elle posée sur la matière ?"), font=g1, fill=ENCRE)
 
-    hi = max([float(r["parcouru_um"]) for r in chaine + bonds] + [1.0]) * 1.06
+    hi = max([float(r["parcouru_um"]) for r in chaine + bonds]
+             + [float(r["parcouru_um"]) for r in (corrigee or [])] + [1.0]) * 1.06
 
     def X(v):
         return gx + gw * max(0.0, min(hi, v)) / hi
@@ -177,10 +189,32 @@ def dessiner(rangs: list[dict], sortie: Path, anglais: bool = False,
         t = f"{part_posee(r) * 100:.0f} %"
         d.text((x + 12, y + 8), t, font=g3, fill=BOND)
 
+    corr_traces = 0
+    if corrigee:
+        cc = sorted((r for r in corrigee if float(r["parcouru_um"]) > 0.0),
+                    key=lambda r: float(r["parcouru_um"]))
+        cpts = [(X(float(r["parcouru_um"])), Y(part_posee(r))) for r in cc]
+        if source is not None:
+            cpts.insert(0, (X(0.0), Y(repere)))
+        if len(cpts) > 1:
+            d.line(cpts, fill=CORRIGEE, width=2)
+        for (x, y) in (cpts[1:] if source is not None else cpts):
+            d.ellipse([x - 4, y - 4, x + 4, y + 4], fill=CORRIGEE)
+            corr_traces += 1
+        # ⚠ Seule la DERNIÈRE valeur est étiquetée : les deux courbes se croisent, donc
+        # étiqueter chaque point mettrait deux nombres de deux séries au même endroit — le
+        # défaut que la version précédente a déjà payé sur le bond direct.
+        if cc:
+            t = f"{part_posee(cc[-1]) * 100:.0f} %"
+            x, y = cpts[-1]
+            d.text((x - d.textlength(t, font=g3) - 8, y - 6), t, font=g3, fill=CORRIGEE)
+
     lx = 24
     depassement = 0
-    for couleur, nom, plein in ((POSE, "chaîne de 95 µm", True),
-                                (BOND, "bond direct, même distance", False)):
+    series = [(POSE, "chaîne de 95 µm", True), (BOND, "bond direct, même distance", False)]
+    if corrigee:
+        series.insert(1, (CORRIGEE, "chaîne CORRIGÉE sur la matière", True))
+    for couleur, nom, plein in series:
         if plein:
             d.rectangle([lx, 52, lx + 12, 60], fill=couleur)
         else:
@@ -196,7 +230,11 @@ def dessiner(rangs: list[dict], sortie: Path, anglais: bool = False,
     # quantitatif en impression. Éclaircies quand elles se touchent, comme ailleurs.
     etiquettes_x = 0
     dernier = -1e9
-    for r in sorted(chaine + bonds, key=lambda q: float(q["parcouru_um"])):
+    # ⚠⚠ La chaîne CORRIGÉE entre dans les graduations. Sans elle, l'axe s'étendait pour la
+    # contenir mais ne portait de nombres que jusqu'au dernier point de la chaîne pure — donc
+    # toute la moitié droite, celle où la comparaison se joue, n'avait aucune abscisse lisible.
+    for r in sorted(chaine + bonds + list(corrigee or []),
+                    key=lambda q: float(q["parcouru_um"])):
         um = float(r["parcouru_um"])
         x = X(um)
         d.line([(x, gy + gh), (x, gy + gh + 5)], fill=GRIS, width=1)
@@ -216,7 +254,7 @@ def dessiner(rangs: list[dict], sortie: Path, anglais: bool = False,
     sortie.parent.mkdir(parents=True, exist_ok=True)
     im.save(sortie)
     return {"maillons": len(chaine), "bonds": len(bonds), "repere": repere,
-            "etiquettes_x": etiquettes_x,
+            "etiquettes_x": etiquettes_x, "corrigee_traces": corr_traces,
             "largeur": largeur, "hauteur": hauteur, "depassement": int(depassement),
             "emballement_trace": emb_trace,
             "parts": [part_posee(r) for r in chaine],
@@ -301,7 +339,27 @@ def _verifier() -> int:
             v("une campagne sans maillon est refusée", False)
         except ValueError:
             v("une campagne sans maillon est refusée", True)
-        ra = dessiner(faux, Path(td) / "en.png", anglais=True, emballement_um=580.0)
+        # ⭐ La SECONDE chaîne, celle qui repose sur la matière. L'axe doit s'étendre pour la
+        # contenir, sinon ses points lointains seraient écrasés au bord et la comparaison
+        # « laquelle tient plus loin » deviendrait illisible exactement où elle se joue.
+        corr = [{"maillage": f"maillon_{i}", "parcouru_um": 300.0 * i, "points": 100,
+                 "recales": 70 - 3 * i, "borne": 10, "hors_boite": 0} for i in range(1, 5)]
+        rc = dessiner(faux, Path(td) / "deux.png", corrigee=corr)
+        v("la chaîne corrigée est tracée", rc["corrigee_traces"] == 4,
+          str(rc["corrigee_traces"]))
+        # ⚠ Et l'axe porte les abscisses des DEUX chaînes : la moitié droite est celle où la
+        # comparaison se joue, et un axe sans nombres y transforme un résultat en impression.
+        v("... et l'axe porte plus de graduations qu'avec une seule chaîne",
+          rc["etiquettes_x"] > r["etiquettes_x"],
+          f"{rc['etiquettes_x']} vs {r['etiquettes_x']}")
+        pxc = _pixels(Image.open(Path(td) / "deux.png").convert("RGB"))
+        v("... dans sa propre couleur", CORRIGEE in pxc)
+        v("sans elle, aucune trace corrigée", r["corrigee_traces"] == 0)
+        v("... et sa légende ne déborde pas", rc["depassement"] == 0,
+          f"{rc['depassement']} px")
+
+        ra = dessiner(faux, Path(td) / "en.png", anglais=True, emballement_um=580.0,
+                      corrigee=corr)
         v("la version anglaise ne laisse pas d'accent", not ra["intraduits"],
           ", ".join(ra["intraduits"][:2]))
         v("... ni de libellé intraduit", not ra["inchanges"], ", ".join(ra["inchanges"][:2]))
@@ -321,6 +379,8 @@ def main() -> int:
                    help="le JSON écrit par tools/recalage_de_la_chaine.sh")
     p.add_argument("--sortie", type=Path,
                    default=Path("docs/images/44_matiere_de_la_chaine.png"))
+    p.add_argument("--corrigee", type=Path,
+                   help="une seconde campagne : la chaîne qui repose sur la matière")
     p.add_argument("--emballement-um", type=float,
                    help="où le pas s'emballe, pour le tracer en repère")
     p.add_argument("--anglais", action="store_true")
@@ -331,7 +391,8 @@ def main() -> int:
     if not a.campagne:
         p.error("le JSON de campagne est requis")
     rangs = json.loads(a.campagne.read_text(encoding="utf-8"))
-    r = dessiner(rangs, a.sortie, a.anglais, a.emballement_um)
+    corr = json.loads(a.corrigee.read_text(encoding="utf-8")) if a.corrigee else None
+    r = dessiner(rangs, a.sortie, a.anglais, a.emballement_um, corr)
     print(f"écrit : {a.sortie}  ({r['maillons']} maillons, {r['bonds']} témoin(s), "
           f"référence {r['repere'] * 100:.0f} %)")
     print("  parts : " + "  ".join(f"{x * 100:.0f} %" for x in r["parts"]))
