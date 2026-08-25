@@ -79,6 +79,11 @@ if [ "${1:-}" = "--verifier" ]; then
   # differentes en croyant comparer deux methodes.
   chk "... et le temoin suit la meme unite" \
       'grep -q "ARG_DIRECT=(--pas-vox" "$ROOT/tools/chainer_tangentiel.sh"'
+  # ⚠⚠ Un temoin PERIME est un temoin qui ment : la campagne est reprenable, donc la
+  # relancer avec PLUS de maillons laisserait le bond direct de l ANCIENNE longueur se comparer
+  # a une chaine qui va desormais plus loin, sans que rien dans le tableau ne le dise.
+  chk "un temoin perime est refait" \
+      'grep -q "temoin perime" "$ROOT/tools/chainer_tangentiel.sh"'
   echo "$([ $ok = 0 ] && echo 'ALL PASS' || echo FAILURES) ($ok failures, $n checks)"
   exit $ok
 fi
@@ -152,6 +157,21 @@ for M in $(seq 1 "$MAILLONS"); do
   COURANT="$D"
   echo "   maillon $M → $(basename "$D")"
 done
+
+# ⚠⚠ UN TEMOIN PERIME EST UN TEMOIN QUI MENT. La campagne est reprenable — elle saute les
+# maillons deja calcules — mais si on la relance avec PLUS de maillons, le bond direct deja
+# ecrit couvre l ANCIENNE longueur et se compare a une chaine qui va desormais plus loin.
+# Rien dans le tableau ne le dirait. On verifie donc que le temoin porte bien la longueur
+# demandee, et on le refait sinon.
+if [ -f "$DEST/direct/meta.json" ] && [ -n "$PAS_VOX" ]; then
+  ATTENDU=$(python3 -c "print(round($PAS_VOX * $MAILLONS, 3))")
+  TROUVE=$(python3 -c "
+import json; print(round(float(json.load(open('$DEST/direct/meta.json')).get('pas_voxels', 0)), 3))")
+  if [ "$ATTENDU" != "$TROUVE" ]; then
+    echo "   ⚠ temoin perime ($TROUVE voxels au lieu de $ATTENDU) - refait" >&2
+    rm -rf "$DEST/direct"
+  fi
+fi
 
 if [ ! -f "$DEST/direct/meta.json" ]; then
   uv run --project "$ROOT" python "$ROOT/analysis/src/projeter_tangentiel.py" \
