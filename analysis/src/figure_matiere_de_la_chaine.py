@@ -43,6 +43,7 @@ ANGLAIS = {
     "bond direct, même distance": "direct jump, same distance",
     "chaîne de 95 µm": "95 µm chain",
     "chaîne CORRIGÉE sur la matière": "chain RE-SEATED on the material",
+    "plancher du hasard": "chance floor",
     "⚠ le pas s'emballe ici": "⚠ the step runs away here",
 }
 
@@ -87,6 +88,21 @@ def part_posee(r: dict) -> float:
 
 
 CORRIGEE = (58, 96, 168)
+HASARD = (198, 168, 120)
+
+
+def plancher_de(r: dict) -> float | None:
+    """Le plancher du hasard porté par un rang, ou `None`.
+
+    ⚠ La campagne écrit `-1` quand elle n'a PAS mesuré de plancher — un plancher de zéro serait
+    un plancher mesuré à zéro, c'est-à-dire « rien de ce qu'on lit n'est du hasard », soit
+    l'affirmation la plus flatteuse possible. Absence et zéro ne peuvent pas partager une valeur.
+    """
+    v = r.get("plancher")
+    if v is None:
+        return None
+    v = float(v)
+    return None if v < 0.0 else v
 
 
 def dessiner(rangs: list[dict], sortie: Path, anglais: bool = False,
@@ -189,6 +205,25 @@ def dessiner(rangs: list[dict], sortie: Path, anglais: bool = False,
         t = f"{part_posee(r) * 100:.0f} %"
         d.text((x + 12, y + 8), t, font=g3, fill=BOND)
 
+    # ⚠⚠ LE PLANCHER DU HASARD, tracé COMME UNE COURBE et non comme une ligne unique : il
+    # dépend de la densité locale de matière, mesurée à onze points d'écart entre deux endroits
+    # du même rouleau. Une ligne unique prêterait à un maillage la densité du quartier d'un
+    # autre — et c'est précisément l'erreur qui aurait déclaré la chaîne « au-dessus du hasard ».
+    plancher_traces = 0
+    pl_pts = [(X(float(r["parcouru_um"])), Y(plancher_de(r)))
+              for r in sorted(rangs, key=lambda q: float(q["parcouru_um"]))
+              if plancher_de(r) is not None]
+    if len(pl_pts) > 1:
+        d.line(pl_pts, fill=HASARD, width=2)
+    for (x, y) in pl_pts:
+        d.line([(x - 5, y), (x + 5, y)], fill=HASARD, width=2)
+        plancher_traces += 1
+    if pl_pts:
+        t = T("plancher du hasard")
+        x, y = pl_pts[-1]
+        d.text((min(x + 8, gx + gw - d.textlength(t, font=g3)), y + 5), t, font=g3,
+               fill=HASARD)
+
     corr_traces = 0
     if corrigee:
         cc = sorted((r for r in corrigee if float(r["parcouru_um"]) > 0.0),
@@ -255,6 +290,7 @@ def dessiner(rangs: list[dict], sortie: Path, anglais: bool = False,
     im.save(sortie)
     return {"maillons": len(chaine), "bonds": len(bonds), "repere": repere,
             "etiquettes_x": etiquettes_x, "corrigee_traces": corr_traces,
+            "plancher_traces": plancher_traces,
             "largeur": largeur, "hauteur": hauteur, "depassement": int(depassement),
             "emballement_trace": emb_trace,
             "parts": [part_posee(r) for r in chaine],
@@ -339,6 +375,28 @@ def _verifier() -> int:
             v("une campagne sans maillon est refusée", False)
         except ValueError:
             v("une campagne sans maillon est refusée", True)
+        # ⚠⚠ LE PLANCHER DU HASARD. Sans lui, « 35 % posé » peut vouloir dire à moitié
+        # perdue comme complètement perdue. Il est tracé en COURBE parce qu'il dépend de la
+        # densité locale — deux endroits du même rouleau en diffèrent de onze points.
+        avec_pl = [dict(x) for x in faux]
+        for k, val in zip(avec_pl, (0.48, 0.47, 0.46, 0.37)):
+            k["plancher"] = val
+        rp = dessiner(avec_pl, Path(td) / "pl.png")
+        v("le plancher est tracé par point", rp["plancher_traces"] == 4,
+          str(rp["plancher_traces"]))
+        v("... dans sa propre couleur", HASARD in _pixels(
+            Image.open(Path(td) / "pl.png").convert("RGB")))
+        v("sans plancher mesuré, aucune trace", r["plancher_traces"] == 0)
+        # ⚠ La campagne écrit -1 quand elle n'a PAS mesuré : un plancher de zéro serait un
+        # plancher MESURÉ à zéro, soit l'affirmation la plus flatteuse possible.
+        v("un plancher absent est None", plancher_de({"maillage": "m"}) is None)
+        v("... et -1 aussi", plancher_de({"plancher": -1.0}) is None)
+        v("... mais zéro est une VALEUR", plancher_de({"plancher": 0.0}) == 0.0)
+        sans = [dict(x) for x in faux]
+        sans[0]["plancher"] = -1.0
+        rs2 = dessiner(sans, Path(td) / "pl2.png")
+        v("un rang sans plancher ne casse pas la courbe", rs2["plancher_traces"] == 0)
+
         # ⭐ La SECONDE chaîne, celle qui repose sur la matière. L'axe doit s'étendre pour la
         # contenir, sinon ses points lointains seraient écrasés au bord et la comparaison
         # « laquelle tient plus loin » deviendrait illisible exactement où elle se joue.
