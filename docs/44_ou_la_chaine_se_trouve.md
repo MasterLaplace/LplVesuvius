@@ -475,6 +475,32 @@ total :
 très différentes se croisent forcément quelque part, et les points de croisement s'affichent
 comme des accords. Lus comme « les endroits qui ont tenu », ils seraient trompeurs.
 
+#### ⭐⭐ Et le rendu tranche : à distance égale, la chaîne est au SOMMET de la courbe de portée
+
+Deux rendus, dans la même campagne, mêmes fenêtres, même code :
+
+| surface, à **286 µm** de la source | amplitude | pic au bord |
+|---|---:|---:|
+| source (0 µm) | 0,1929 | 6,1 % |
+| **chaîne, 3 × 95 µm** | ⭐ **0,2146** | 4,1 % |
+| **bond direct, un seul saut** | 0,1807 | 2,0 % |
+
+⭐ **Un contrôle de déterminisme écrit AVANT la mesure, et il a tenu.** Le bond direct de cette
+campagne et le point `pas_6` de la courbe de portée sont le **même maillage** — écart mesuré
+**0,000 voxel sur 14 280 points**. Le profil devait donc rendre exactement `0,1807 / 0,020`.
+Il l'a fait, à la quatrième décimale. La chaîne rendu → profil est reproductible.
+
+> ⭐⭐ **La chaîne rend 0,2146, c'est-à-dire le MAXIMUM de la courbe de portée**
+> (0,2162 à 238 µm), pendant que le bond direct a déjà commencé à en redescendre (0,1807).
+> À distance égale, la nappe enchaînée est mieux posée sur sa feuille que celle qui a sauté.
+
+⚠ **Et la réserve, parce qu'elle est réelle** : l'écart vaut 0,034 d'amplitude, quand deux
+points voisins de la courbe de portée s'écartent déjà de 0,01 à 0,03. C'est au bord de ce que
+la dispersion propre de la courbe expliquerait. Le pic au bord va d'ailleurs dans l'autre sens
+— 4,1 % contre 2,0 % — même si les deux restent sous les 6,1 % de la source. **Ce point seul
+n'est donc pas décisif** ; ce qui le rendrait décisif est la même comparaison là où le bond
+direct est franchement mauvais, et c'est ce que la suite fait à 479 µm.
+
 #### ⭐⭐⭐ L'HORIZON d'une chaîne purement géométrique : **six maillons, 580 µm** — mesuré en secondes
 
 Puisque le pas réel refuse une chaîne **sans aucun rendu**, une chaîne longue se sonde
