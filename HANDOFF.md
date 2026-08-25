@@ -7,6 +7,50 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+## ⭐⭐⭐⭐⭐ LE RACCOURCI DE RENDU — éprouvé par 13 agents, il tient
+
+![La géométrie du raccourci](docs/images/56_sous_fenetre.png)
+
+**Rendre n=161 produit déjà n=81, n=41 et n=31.** Ce sont **les mêmes fichiers**, pas des images
+qui se ressemblent : un rendu de N couches est une pile **centrée** sur la surface, donc deux
+fenêtres rendues au même endroit partagent toutes les tranches de la plus étroite.
+
+⭐ **Et il n'y avait rien à construire** : `depth_profile.py` porte déjà `--from-layer`,
+`--to-layer`, `--traced-layer`. Ce qui manquait était l'**arithmétique dite une fois** —
+`src/depot/sous_fenetre.py`. Sur la série du dépôt : **3 rendus évités sur 4**.
+
+**8 mesures indépendantes + 5 tentatives de réfutation** (13 agents, 2,95 M tokens) :
+**6 sites confirment**, chacun **toutes** ses tranches identiques octet pour octet et **23
+mesures de profil sur 23**, zéro différence. **Aucun ne réfute.** Les 2 restants sont
+IMPOSSIBLE pour des raisons de **données**.
+
+### ⚠⚠ Trois choses que je n'aurais pas trouvées seul
+
+1. **Une borne que RIEN ne vérifiait** : `--from-layer` désigne des **numéros de fichier**, pas
+   des positions. Sur une pile trouée, la sous-plage rend un profil **plus court, en silence**.
+   `verifier_pile` refuse désormais — et une pile du dépôt utilise vraiment trois chiffres
+   (`060.tif`), donc le contrôle porte sur l'**ensemble des numéros**, pas sur les noms.
+2. **Un piège de l'instrument** : la **console** imprime les indices de pic en **ABSOLU**, le
+   **JSON** les stocke **RELATIFS**. Trois vérificateurs ont failli conclure à une réfutation en
+   lisant « couche 42 » contre « couche 17 » — un écart qui est exactement le décalage de
+   fenêtre. Ce n'était dit nulle part ; ça l'est maintenant.
+3. **1,89 Gio de TIFF illisibles** : `data/leur_graine/rendu_161`, 161 fichiers, en-tête `II*\0`
+   correct puis offset d'IFD **nul**. [`51`](docs/51_une_pente_a_deux_appuis.md) disait « le
+   profil **survivant** » sans nommer ce qui avait tué l'autre. ⚠ Ce n'est **pas** la panne de
+   [`54`](docs/54_cinq_rendus_vides.md) : celles-là s'ouvrent et sont noires, celle-ci ne
+   s'ouvre pas.
+
+⭐ Le réfuteur « arithmétique » a **redérivé indépendamment** la condition de parité que
+`peut_deriver` portait déjà : le décalage est `N//2 − N//2`, pas `(N_large − N_étroite)/2`. La
+réfutation a validé le module en tombant sur la formulation naïve de ma consigne.
+
+⚠ **Pas encore câblé** dans `profiler_une_surface.sh` : il faudrait garder le rendu large vivant
+pendant toute la boucle, alors que le script le supprime à chaque tour (562 Mo par pile). C'est
+un changement d'ordonnancement **et** de disposition disque dans un script qui produit des
+résultats publiés. L'arithmétique, elle, est livrée et éprouvée.
+
+---
+
 ## ⭐⭐⭐⭐ CHANTIER A — le doublonnage mesuré, et une découverte qui vaut du TEMPS
 
 ![Le contenu identique de data/, par motif](docs/images/56_doublons.png)
@@ -1169,7 +1213,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 118 batteries, 3072 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 120 batteries, 3110 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)

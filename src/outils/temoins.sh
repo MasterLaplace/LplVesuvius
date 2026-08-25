@@ -842,6 +842,13 @@ run "contenu en double"        uv run --project "$ROOT" python "$ROOT/src/depot/
 # meme surface), et tout reglage qui change le profil doit changer la cle -- sinon le cache
 # rend le profil d un AUTRE reglage, ce qui est pire qu un cache absent.
 run "empreinte de surface"     uv run --project "$ROOT" python "$ROOT/src/depot/empreinte_surface.py" --verifier
+# ⚠⚠ L arithmetique du raccourci de rendu, dite UNE fois. Mesure : la tranche i de n=31 est la
+# tranche i+25 de n=81, octet pour octet, et le PROFIL est identique sur 23 mesures / 23. Ses
+# refus sont ce qui l empeche de mentir : parites differentes (les centres seraient decales
+# d une demi-tranche, donc le profil serait decale -- pire qu un rendu de plus), fenetre plus
+# large que la large, et meme largeur (ce n est pas une derivation).
+run "sous-fenetre derivee"     uv run --project "$ROOT" python "$ROOT/src/depot/sous_fenetre.py" --verifier
+run "figure sous-fenetre"      uv run --project "$ROOT" python "$ROOT/src/figures/figure_sous_fenetre.py" --verifier
 run "figure des doublons"      uv run --project "$ROOT" python "$ROOT/src/figures/figure_doublons.py" --verifier
 # ⚠⚠ La campagne de portee. Ses sondes portent sur la COLONNE et pas sur le mot : l en-tete a
 # gagne « mediane » pendant que l extraction rendait `bloc_absent`, et un grep du mot restait

@@ -143,6 +143,20 @@ pratique. C'est la **quantification** qui tombe, pas le constat.
 notre trace. Cette série a quatre fenêtres et **un seul de ses profils est encore sur
 disque** — donc l'instrument ne la juge pas : il faut deux profondeurs pour poser une pente.
 
+> ⚠⚠ **Et on sait maintenant CE QUI a tué l'autre — mesuré le 2026-08-25.** Ce document dit
+> « un seul de ses profils est encore sur disque » sans nommer la cause. La voici :
+> `data/leur_graine/rendu_161` est **entièrement sur le disque**, 161 fichiers, **1,89 Gio** —
+> et **les 161 sont illisibles**. Leur en-tête `II*\0` est correct, puis l'offset du premier
+> répertoire d'image vaut `0x00000000` : zéro page, malgré 12,4 à 12,8 Mo de charge utile par
+> fichier. Confirmé par deux lecteurs indépendants (`tifffile` : *contains no pages* ; PIL :
+> `UnidentifiedImageError`). `rendu_41`, au même endroit, s'ouvre parfaitement — 41 fichiers,
+> une page, 5641 × 5721.
+>
+> ⚠ Ce n'est **pas** la panne de [`54`](54_cinq_rendus_vides.md), qui décrit des piles
+> **noires** : celles-là s'ouvrent et ne contiennent rien, celle-ci ne s'ouvre pas. Deux
+> pannes, deux symptômes, et seule la première était nommée. Trouvé par réfutation
+> adversariale en vérifiant tout autre chose ; le rapport de la campagne, lui, n'avait rien dit.
+
 Ce qu'on peut dire du profil survivant, et rien de plus : `data/leur_graine/profil_41c.json`
 a un écart de **172,80 µm** pour une demi-fenêtre de 20 × 8,64 = **172,80 µm**, et une
 amplitude de **0,0194** pour un seuil de 0,02. **C'est un appui au bord, et il est plat.**

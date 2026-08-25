@@ -281,6 +281,77 @@ locale. La première campagne réelle sera la mesure.
 ⚠ **Rien n'est supprimé.** `contenu_en_double.py` mesure et nomme ; un effacement n'est pas
 réversible, et la décision appartient à qui a téléchargé les données.
 
+#### ⭐⭐ Le raccourci de rendu — vérifié adversarialement, et il tient
+
+![La géométrie du raccourci](images/56_sous_fenetre.png)
+
+```bash
+uv run python src/depot/sous_fenetre.py 31 41 81 161   # → 3 rendus évités sur 4
+uv run python src/figures/figure_sous_fenetre.py       # → docs/images/56_sous_fenetre.png
+```
+
+Les 20,85 Gio de fenêtres imbriquées disent une chose simple : **rendre n=161 produit déjà
+n=81, n=41 et n=31.** Et il n'y a **rien à construire** — `depth_profile.py` porte déjà
+`--from-layer`, `--to-layer` et `--traced-layer`. Ce qui manquait n'est pas une capacité, c'est
+l'**arithmétique énoncée une fois** : `src/depot/sous_fenetre.py`.
+
+**Éprouvé par 8 mesures indépendantes et 5 tentatives de réfutation** (13 agents, 2,95 M
+tokens) : **6 sites confirment**, chacun avec **toutes** ses tranches identiques octet pour
+octet et **23 mesures de profil identiques sur 23**, zéro différence. Les 2 restants sont
+IMPOSSIBLE pour des raisons de **données**, pas de méthode — voir plus bas. **Aucun site ne
+réfute.**
+
+##### ⚠⚠ Les quatre bornes, dont trois n'étaient vérifiées par RIEN
+
+| borne | ce qui arrive si elle tombe | où elle est vérifiée |
+|---|---|---|
+| **même parité** de N large et N étroite | les centres sont décalés d'une demi-tranche, le profil dérivé est décalé | `peut_deriver`, refus |
+| **pile contiguë de 0 à N−1** | `--from-layer` désigne des **numéros de fichier**, pas des positions : sur une pile trouée la sous-plage rend un profil **plus court, en silence** | `verifier_pile`, **écrit ce lot** |
+| **même `--layer-step` des deux côtés** | `peak_iqr` est multiplié par le pas | dit, pas encore imposé |
+| **même surface** entre les deux rendus | le recadrage suit le maillage, pas la pile | dit, pas encore imposé |
+
+⭐ Et le réfuteur « arithmétique » a **redérivé indépendamment** la formule : l'instrument
+compare `--traced-layer` au **numéro de fichier** (`depth_profile.py:208`), donc le décalage est
+`N_large // 2 − N_étroite // 2` et **non** `(N_large − N_étroite) / 2`. Les deux coïncident sur
+toute la série du dépôt, qui est impaire ; la seconde n'est même pas entière ailleurs. C'est
+exactement le refus que `peut_deriver` portait déjà — la réfutation a validé le module en
+tombant sur la formulation naïve de sa consigne.
+
+##### ⚠⚠ Un piège de l'instrument, que TROIS vérificateurs ont failli lire comme une réfutation
+
+La **console** réimprime les indices de pic en **ABSOLU** (elle rajoute `layers[0]`) pendant
+que le **JSON** les stocke **RELATIFS** à la fenêtre. Sur la même mesure, la console dit « pic
+médian couche 42 » d'un côté et « couche 17 » de l'autre — un écart de 25, exactement le
+décalage — alors que le JSON porte `17.0` **des deux côtés**. Ce n'est pas un défaut (l'absolu
+est ce qu'un humain veut voir), mais ce n'était **dit nulle part**. La ligne d'en-tête le dit
+désormais, et la docstring l'explique.
+
+##### ⚠ Deux pannes de DONNÉES, trouvées en vérifiant tout autre chose
+
+- **`data/leur_graine/rendu_161`** : les 161 fichiers sont **illisibles** — en-tête `II*\0`
+  correct puis offset d'IFD nul, donc zéro page, pour **1,89 Gio** sur le disque. Vérifié par
+  moi contre deux lecteurs. [`51`](51_une_pente_a_deux_appuis.md) disait « le profil
+  **survivant** » sans nommer ce qui avait tué l'autre ; c'est écrit là-bas maintenant. ⚠ Ce
+  n'est **pas** la panne de [`54`](54_cinq_rendus_vides.md), qui décrit des piles **noires** :
+  celles-là s'ouvrent et ne contiennent rien, celle-ci ne s'ouvre pas.
+- **`data/paris4_candidats/m7_c0/rendu_161`** : pile entièrement noire — c'est l'un des cinq de
+  `54`, et l'« IMPOSSIBLE » rapporté ici est **le correctif qui fonctionne** : l'instrument
+  d'aujourd'hui refuse (`pile_vide`) ce que l'ancien comptait comme « 49 fenêtres avec
+  matière ».
+
+##### ⚠ Ce qui n'est PAS fait
+
+Le raccourci n'est **pas encore câblé** dans `profiler_une_surface.sh`. Il y faudrait garder le
+rendu large vivant pendant toute la boucle des fenêtres, alors que le script le supprime par
+défaut à chaque tour (`garder_rendu || rm -rf "$W/rendu"`, 562 Mo par pile) — c'est un
+changement d'ordonnancement **et** de disposition sur disque dans un script qui produit des
+résultats publiés. L'arithmétique, elle, est livrée et éprouvée.
+
+⚠ **Piège d'outillage rapporté par un agent** : deux vérificateurs concurrents ont écrit leur
+comparateur sous le **même nom** dans le scratchpad partagé, et l'un a écrasé l'autre entre
+deux exécutions — donc deux résultats produits par deux codes différents. L'agent l'a vu et a
+relancé sous un nom qui lui était propre. Un scratchpad partagé n'est pas un espace privé.
+
 ### ⭐⭐ Chantier B — un dossier par ROULEAU, et un manifeste JSON par rouleau
 
 **Le besoin** : que ce qu'on possède d'un rouleau se lise d'un seul endroit, et que la mise à

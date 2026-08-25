@@ -27,6 +27,18 @@ contient-elle.
 ⚠ Mesure sur une **fenetre** et non sur la couche entiere : une couche fait ~500 Mo, la
 pile 13 Go, et un profil de profondeur n'a pas besoin de toute la surface. La fenetre
 est prise au centre de la zone couverte, la ou il y a de la matiere.
+
+⚠⚠ LA CONSOLE ET LE JSON NE COMPTENT PAS LES COUCHES PAREIL, et ça se lit comme une panne.
+L'affichage réimprime les indices de pic en **ABSOLU** (il rajoute `layers[0]`), tandis que le
+JSON les stocke **RELATIFS** à la fenêtre retenue. Sur une même mesure lue par `--from-layer 25
+--to-layer 55`, la console dit « pic médian couche 42 » là où un run sur la pile étroite dit
+« couche 17 » — un écart de 25, qui est exactement le décalage de fenêtre — alors que le JSON
+porte `pic_intensite_median = 17.0` **des deux côtés**.
+
+⭐ Ce n'est pas un défaut : l'absolu est ce qu'un humain veut voir à l'écran, le relatif est ce
+qui rend deux fenêtres comparables. Mais ce n'était **dit nulle part**, et le 2026-08-25 trois
+vérificateurs indépendants ont failli conclure de la console que deux profils identiques
+différaient. La ligne d'en-tête le dit désormais ; ceci l'explique.
 """
 
 from __future__ import annotations
@@ -365,7 +377,7 @@ def main() -> int:
         # voit que le flanc de sa montee.
         edge = peak == 0 or peak == len(contrast) - 1
         print(f"\n=== {folder.name} — {len(contrast)} couches "
-              f"({data['layers'][0]} a {data['layers'][-1]}) ===")
+              f"({data['layers'][0]} a {data['layers'][-1]}) — indices de couche ABSOLUS ===")
         for i, index in enumerate(data["layers"]):
             bar = "#" * int(round(contrast[i] * 40))
             print(f"  couche {index:3d}  contraste {contrast[i]:5.3f} "
