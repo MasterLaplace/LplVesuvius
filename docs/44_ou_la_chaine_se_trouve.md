@@ -514,8 +514,50 @@ d'abord comme ça. Vingt maillons de 95 µm, mode `PROFILS=0` :
   **purement géométrique** ne fera donc jamais le tour d'une feuille — non pas « pas encore »,
   mais par une limite maintenant chiffrée.
 - ⚠ **Ce plancher tient toujours** : ces vingt maillons projettent **purement**, sans
-  réoptimisation sur la matière. Ce qui est éliminé, c'est la chaîne **géométrique**. La chaîne
-  qui recolle sur la donnée à chaque maillon (`--correct`) reste, elle, non tentée.
+  réoptimisation sur la matière. Ce qui est éliminé, c'est la chaîne **géométrique**.
+
+#### ⭐⭐⭐ Et le remède n'est PAS spéculatif : il est mesuré ailleurs, à 2,4 mm
+
+[`41`](41_marcher_le_long_dune_nappe.md) §6 fait exactement le geste qui manque — suivre la
+matière au lieu de la géométrie — et le mesure :
+
+| ce qui guide | jusqu'où | ce qui l'arrête |
+|---|---:|---|
+| **la géométrie seule** (ce document) | **580 µm** | son propre pas s'emballe |
+| **la matière** (`41`, transformée de distance + recentrage sur la crête) | ⭐ **≈ 2,4 mm** | **le bloc se termine** |
+
+> ⭐⭐ **Un facteur quatre, et surtout deux natures d'arrêt différentes.** La chaîne géométrique
+> s'arrête parce qu'elle se détruit ; la marche guidée par la matière s'arrête parce qu'on a
+> cessé de lui en donner. La première a une limite, la seconde a un budget.
+
+⚠⚠ **Le facteur quatre est à lire avec sa réserve, et elle est réelle** : les deux mesures ne
+sont pas prises sur le même rouleau ni à la même échelle — `41` marche `PHerc1447` à
+**8,64 µm** le voxel, cette page projette `PHercParis4` à **2,4 µm**. Ce qui se compare
+proprement, ce sont les **natures d'arrêt** ; le rapport de distances, lui, est une indication
+et pas un résultat. Le mesurer proprement demande de refaire la marche **ici**, ce que la
+suite nomme.
+
+⚠⚠ **Mais ce ne sont pas le même objet, et c'est ce qui reste à faire.** La marche de
+[`41`](41_marcher_le_long_dune_nappe.md) suit **une ligne** — 283 points de passage — pendant
+que la projection déplace une **nappe entière** de 14 280 points. Un chemin n'est pas une
+bande, et un texte se lit sur une bande.
+
+⭐ **La pièce manquante existe déjà et porte un nom** : `analysis/src/suivre_nappe.py` expose
+`champ_de_distance`, `normale_locale` et **`recentrer`** — recaler un point sur l'axe médian de
+sa nappe. L'appliquer à **chaque point** d'une nappe projetée, à chaque maillon, c'est la
+chaîne corrigée. Elle se jugerait avec les instruments de cette page, qui existent maintenant :
+l'horizon du pas (gratuit), la carte du désaccord (gratuite), le profil (un rendu).
+
+⚠ Et la contrainte pratique est nommée plutôt que découverte : `recentrer` a besoin de la
+prédiction **autour de chaque point**, or la boîte de notre nappe fait ~10 milliards de voxels
+au niveau 0. Il faudra donc travailler au **niveau 2** de la pyramide (~156 Mio) — et
+[`54`](54_cinq_rendus_vides.md) a écrit ce que coûte d'oublier à quel niveau on est.
+
+⚠⚠ **Ce que ce n'est PAS** : `--correct` du traceur officiel. Celui-là a été mesuré par
+[`43`](43_la_chaine_des_spires.md) — *« 318 puis 5 695 points ne réorientent pas ce qui a
+poussé, +0,89 au mieux »* — et [`42`](42_la_boucle_tourne_et_ne_suffit_pas.md) porte le
+verdict dans son titre. Corriger une trace **après** qu'elle a poussé et recaler une nappe
+**avant** de la reprojeter sont deux gestes différents ; seul le second reste ouvert.
 
 ⭐ **Le sondage a coûté quelques secondes** — vingt projections et aucun rendu — là où le
 mesurer par des profils aurait demandé vingt rendus dont la moitié irrendables. C'est le mode
