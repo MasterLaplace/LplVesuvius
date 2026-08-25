@@ -7,6 +7,66 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+## ⭐ REPRISE — état au 2026-08-25
+
+### ⭐⭐⭐ Le dernier résultat : enchaîner la projection tangentielle MARCHE, et c'est borné
+
+Trois mesures, dont deux ne coûtent **aucun rendu**. Détail complet :
+[`44`](docs/44_ou_la_chaine_se_trouve.md) §7.
+
+1. **À distance égale, la chaîne bat le bond.** À 478 µm, là où une projection unique
+   **quitte sa feuille** (18,4 % de pic au bord, contre 0 à 6 % partout avant), la chaîne de
+   cinq maillons de 95 µm y est **encore** : **2,0 %** de pic au bord et **+31 %** d'amplitude
+   (0,1491 contre 0,1140).
+2. **Et l'horizon est chiffré : six maillons, 580 µm.** Vingt maillons projetés en quelques
+   secondes : marche droite jusqu'au 6ᵉ, puis emballement — au 20ᵉ il ne reste **615 points
+   valides sur 14 280**. ⚠⚠ Une nappe de `PHercParis4` fait des dizaines de millimètres de
+   tour : **580 µm est le centième d'un tour**, donc une chaîne **purement géométrique** ne
+   fera jamais le tour d'une feuille.
+3. **⚠⚠ CORRECTION d'un verdict antérieur** : « enchaîner est strictement pire qu'un seul
+   bond » appartenait au **PAS** et non à l'enchaînement. À 95 µm par maillon, trois maillons
+   étalent la boîte **×1,01** — exactement comme le bond direct de même longueur.
+
+### ⭐⭐ L'instrument qui a tout permis, et il est gratuit
+
+`--pas` est un pas de **grille**, donc la distance couverte vaut `pas × longueur de tangente` :
+un maillage qui cisaille **couvre de plus en plus de terrain à commande constante**. La chaîne
+de 238 µm a parcouru **2 044 µm et non 1 190**. Ce nombre est déjà écrit dans chaque
+`meta.json` (`pas_voxels`, et désormais le cumul `parcouru_vox`), donc **une chaîne se réfute
+sans rendu** :
+
+```bash
+SOURCE=… PAS=2 MAILLONS=20 PROFILS=0 DEST=… tools/chainer_tangentiel.sh
+```
+
+⚠ Nécessaire, pas suffisant : une chaîne peut garder un pas parfait en marchant droit hors de
+sa feuille. Cette voie ne peut que **réfuter**, et c'est ce qui la rend bon marché.
+
+### ⭐ La marche suivante, nommée avec son grounding
+
+Recoller la nappe sur la **matière** entre les maillons. Ce n'est pas spéculatif :
+[`41`](docs/41_marcher_le_long_dune_nappe.md) §6 fait déjà ce geste (transformée de distance +
+recentrage sur la crête) et atteint **≈ 2,4 mm**, s'arrêtant *parce que le bloc se termine*.
+⚠ Réserve : deux rouleaux, deux échelles — ce qui se compare, ce sont les **natures d'arrêt**.
+La pièce manquante existe : `analysis/src/suivre_nappe.py` expose `champ_de_distance`,
+`normale_locale` et **`recentrer`**. ⚠ Contrainte : la boîte de notre nappe fait ~10 milliards
+de voxels au niveau 0, donc il faut travailler au **niveau 2** de la pyramide (~156 Mio).
+
+⚠⚠ **Ce n'est PAS `--correct` du traceur officiel**, déjà mesuré insuffisant par
+[`43`](docs/43_la_chaine_des_spires.md) (« +0,89 au mieux »). Corriger une trace **après**
+qu'elle a poussé et recaler une nappe **avant** de la reprojeter sont deux gestes différents.
+
+### ⚠⚠ Six batteries n'avaient jamais tourné — le lanceur se vérifie maintenant lui-même
+
+`tools/temoins.sh` tenait ses lignes de lancement **à la main**, donc la liste avait dérivé :
+six fichiers sur quatre-vingt-dix portaient une batterie que personne ne lançait, et quatre
+d'entre elles imprimaient « tous les témoins passent » là où le lanceur cherche `ALL PASS`.
+Un garde-fou neuf (**« batteries non lancées »**) fait échouer le run si un fichier qui *gère*
+`--verifier` n'est lancé par personne. ⚠ Le garde-fou « scripts sans appelant » ne pouvait pas
+l'attraper : **une mention dans un document compte comme un appelant**.
+
+---
+
 ## ⭐ REPRISE — état au 2026-08-23
 
 Ce bloc est en tête pour une raison : c'est ce qu'il faut lire en premier après une coupure.
@@ -59,7 +119,7 @@ quoi que ce soit.
 |---|---|---|
 | le tracé ne suit pas de feuille | ⭐⭐ **la surface est EN TRAVERS de l'empilement, et ça se VOIT** : à étendue égale, une couche publiée montre une feuille de face, les nôtres des spires coupées en travers. Relief 0,79 et 0,87 contre 0,16 et 0,20. ⚠ Sur 27 séries, une seule porte un verdict α ; à 100,8, 384 et 796,8 µm, **100 % des fenêtres ont leur pic sur un bord de pile** | [`54`](docs/54_cinq_rendus_vides.md) §3 quinquies, [`53`](docs/53_le_temoin_positif_du_rendu.md), [`51`](docs/51_une_pente_a_deux_appuis.md) |
 | les patchs publiés ne se recollent pas | un patch PAR feuille, paire la plus proche à 79 µm ≈ 2× le seuil | [`44`](docs/44_ou_la_chaine_se_trouve.md) |
-| l'extension tangentielle est un point fixe | le cycle rogner-étendre converge vers ~6 cm². ⭐⭐ La projection **tangentielle** a **deux seuils** : contraste maximal vers **240 µm**, nappe encore sur sa feuille jusqu'à **~380 µm**. ⚠⚠ Mais **l'enchaîner sans réoptimiser est STRICTEMENT PIRE** qu'un seul bond : cinq maillons étalent la boîte englobante **×2,38** à nombre de points constant, contre **×1,10** pour le bond direct. Il faut recoller sur la matière entre les maillons | [`44`](docs/44_ou_la_chaine_se_trouve.md) §7 |
+| l'extension tangentielle est un point fixe | le cycle rogner-étendre converge vers ~6 cm². ⭐⭐ La projection **tangentielle** a **deux seuils** : contraste maximal vers **240 µm**, nappe encore sur sa feuille jusqu'à **~380 µm**. ⭐⭐⭐ **Enchaîner à PETIT pas est un levier qui MARCHE** : à 478 µm, là où un seul bond quitte sa feuille (**18,4 %** de pic au bord), la chaîne y est encore (**2,0 %**) avec +31 % d'amplitude. ⚠ Mais **borné** — au 6ᵉ maillon le pas s'emballe, l'horizon est **580 µm**, soit **1/100 de tour**. ⚠⚠ Le « strictement pire » mesuré à 238 µm par maillon appartenait au **pas**, pas à l'enchaînement | [`44`](docs/44_ou_la_chaine_se_trouve.md) §7 |
 | la chaîne casse au sixième tour | et la repousse la coupe au troisième | [`43`](docs/43_la_chaine_des_spires.md) |
 
 ### Ce qui vient d'être fermé
