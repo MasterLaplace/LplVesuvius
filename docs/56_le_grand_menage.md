@@ -211,6 +211,76 @@ décide de son ordre.
 dupliquée reste **à mesurer par hachage** — c'est la première tâche du chantier, et elle est
 bon marché. Le cas connu vaut 15 minutes ; il y en a probablement des dizaines.
 
+#### ✅ Chantier A, première moitié — le doublonnage MESURÉ, et ce qu'il révèle
+
+![Le contenu identique de data/, par motif](images/56_doublons.png)
+
+```bash
+uv run python src/depot/contenu_en_double.py data --json docs/contenu_en_double.json
+uv run python src/figures/figure_doublons.py     # → docs/images/56_doublons.png
+```
+
+**35,58 Gio de contenu identique**, mesurés par **hachage** sur 68 540 fichiers. ⚠ Le proxy
+« même nom + même taille » de §1.3 annonçait 17,4 Go et se trompait **dans les deux sens** :
+il comptait des chunks zarr homonymes de contenu différent, et il ratait tout ce qui suit,
+qui ne porte pas le même nom.
+
+⭐ Trois étages, du moins cher au plus cher, sans quoi hacher 177 Gio est absurde : la
+**taille** (une taille unique n'est jamais lue), un **hachage partiel** de 64 Kio qui casse
+les gros groupes, et le **hachage complet** sur ce qui reste — **15 473 seulement**, sur
+68 540 fichiers.
+
+⚠⚠ Le hachage partiel ne conclut **jamais** seul : deux rendus partagent leur en-tête, et
+s'arrêter là déclarerait identiques deux images différentes. C'est sondé en le cassant.
+
+##### ⭐⭐ Et la découverte, qui vaut plus que du disque : **58,6 % sont des fenêtres imbriquées**
+
+| motif | poids | ce que c'est |
+|---|---:|---|
+| **fenêtres imbriquées** | **20,85 Gio** | la tranche `i` de n=31 **EST** la tranche `i+25` de n=81 |
+| autre | 10,51 Gio | — |
+| même fenêtre, deux campagnes | 4,22 Gio | le doublon que le cache par contenu supprime |
+
+Une fenêtre de 31 couches est le **centre** d'une fenêtre de 81 rendue au même endroit : la
+distance au centre est la même, donc c'est **le même fichier, au bit près**. Les paires
+trouvées sont exactement la série de convergence du dépôt — **(31, 81)** sur 2232 groupes et
+**(41, 161)** sur 861.
+
+⭐ **La conséquence n'est donc pas 20 Gio de disque, c'est le temps de rendu de toute campagne
+de convergence** : rendre n=161 produit **déjà** n=81 et n=41. ⚠ Et un cache indexé sur
+(surface, niveau, N) — celui qu'on vient d'écrire — **ne peut pas le voir**, puisque N diffère.
+Seul un cache par **tranche** le verrait. C'est la seconde moitié du chantier A, et elle n'est
+pas faite.
+
+#### ✅ Chantier A, seconde moitié — le cache par CONTENU (livré, non exercé)
+
+`src/depot/empreinte_surface.py` donne la clé : `hash(contenu du tifxyz)` + niveau + couches +
+taille de voxel. `profiler_une_surface.sh` la consulte avant de rendre et y dépose après.
+
+⚠⚠ Ce qui est **délibérément exclu de la clé**, et chacun est une panne évitée : la **date de
+modification** (recopier une surface d'un disque à l'autre la change sans changer un octet, et
+le cache manquerait pour rien), le **chemin absolu** (deux machines ne partageraient jamais un
+cache), et l'**ordre du système de fichiers** (`iterdir` ne promet aucun ordre, donc deux
+exécutions donneraient deux clés — le tri est ce qui fait d'une clé une clé).
+
+⚠ Et ce qui y **entre** : tout réglage qui change le profil. Un réglage absent de la clé fait
+rendre le profil d'un **autre** réglage, ce qui est pire qu'un cache absent — c'est un résultat
+faux qui a l'air d'un résultat. `--scale 1` et `--auto-crop` sont aujourd'hui des constantes ;
+le jour où l'un devient un paramètre, il entre dans la clé.
+
+⚠ **Le repli est bruyant** : `cache_hit=` / `cache_miss=` sont **imprimés**, et une empreinte
+indisponible n'arrête pas le rendu — elle le dit. Un cache est une optimisation ; en faire une
+condition de fonctionnement serait un recul.
+
+⚠⚠ **Non exercé sur un vrai rendu.** La porte de sortie du plan — relancer `chaine_courte`
+après `chaine_tangentielle` et lire `cache_hit=1` — demande quinze minutes de rendu et un
+volume distant. Ce qui est vérifié ici est la **forme** : les compteurs sont imprimés, le dépôt
+suit le profil au lieu de le précéder, et la clé vient de l'instrument et non d'une recette
+locale. La première campagne réelle sera la mesure.
+
+⚠ **Rien n'est supprimé.** `contenu_en_double.py` mesure et nomme ; un effacement n'est pas
+réversible, et la décision appartient à qui a téléchargé les données.
+
 ### ⭐⭐ Chantier B — un dossier par ROULEAU, et un manifeste JSON par rouleau
 
 **Le besoin** : que ce qu'on possède d'un rouleau se lise d'un seul endroit, et que la mise à

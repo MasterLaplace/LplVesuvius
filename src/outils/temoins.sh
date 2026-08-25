@@ -829,6 +829,20 @@ run "recensement des verbes"   uv run --project "$ROOT" python "$ROOT/src/figure
 # recherche porte desormais PLUS LARGE que la reecriture, et un chemin ASSEMBLE a l execution
 # est nomme plutot que tu, parce qu aucune reecriture textuelle ne peut le voir.
 run "deplacement de fichiers"  uv run --project "$ROOT" python "$ROOT/src/depot/deplacer.py" --verifier
+# ⚠⚠ La premiere tache du chantier A : mesurer le doublonnage PAR HACHAGE. Le plan annoncait
+# « 17,4 Go de doublons » sur un proxy nom+taille dont il ecrivait lui-meme qu il surcompte --
+# des chunks zarr nommes `40` dans deux volumes differents, meme nom, meme taille, contenu
+# different. Les trois controles porteurs, chacun sonde en le cassant : le hachage PARTIEL ne
+# conclut jamais seul (deux rendus partagent leur en-tete), deux noms d un meme inode ne sont
+# pas un doublon, et une taille unique n est jamais lue.
+run "contenu en double"        uv run --project "$ROOT" python "$ROOT/src/depot/contenu_en_double.py" --verifier
+# ⚠⚠ La CLE du cache par contenu. Ses controles porteurs, chacun sonde en le cassant : la
+# date de modification n entre PAS dans la cle (recopier une surface la changerait sans
+# changer un octet), le NOM relatif y entre (les memes octets ranges autrement ne sont pas la
+# meme surface), et tout reglage qui change le profil doit changer la cle -- sinon le cache
+# rend le profil d un AUTRE reglage, ce qui est pire qu un cache absent.
+run "empreinte de surface"     uv run --project "$ROOT" python "$ROOT/src/depot/empreinte_surface.py" --verifier
+run "figure des doublons"      uv run --project "$ROOT" python "$ROOT/src/figures/figure_doublons.py" --verifier
 # ⚠⚠ La campagne de portee. Ses sondes portent sur la COLONNE et pas sur le mot : l en-tete a
 # gagne « mediane » pendant que l extraction rendait `bloc_absent`, et un grep du mot restait
 # vert. ⚠ Et dans un `chk` qui est une FONCTION, $1 est l argument de la fonction, pas la

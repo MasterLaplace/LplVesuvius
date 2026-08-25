@@ -7,6 +7,42 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+## ⭐⭐⭐⭐ CHANTIER A — le doublonnage mesuré, et une découverte qui vaut du TEMPS
+
+![Le contenu identique de data/, par motif](docs/images/56_doublons.png)
+
+**35,58 Gio de contenu identique** dans `data/`, mesurés **par hachage** sur 68 540 fichiers.
+⚠ Le proxy « même nom + même taille » du plan annonçait 17,4 Go et se trompait **dans les deux
+sens** : il comptait des chunks zarr homonymes de contenu différent, et il ratait l'essentiel.
+
+⭐⭐ **58,6 % ne sont pas un doublon de campagne, ce sont des FENÊTRES IMBRIQUÉES.** Une fenêtre
+de 31 couches est le **centre** d'une fenêtre de 81 rendue au même endroit : la tranche `i` de
+l'une **est** la tranche `i+25` de l'autre, au bit près. Les paires trouvées sont exactement la
+série de convergence — **(31, 81)** sur 2232 groupes, **(41, 161)** sur 861.
+
+| motif | poids |
+|---|---:|
+| **fenêtres imbriquées** | **20,85 Gio** |
+| autre | 10,51 Gio |
+| même fenêtre, deux campagnes | 4,22 Gio |
+
+⭐ **Le gain n'est donc pas du disque, c'est le temps de rendu de toute campagne de
+convergence** : rendre n=161 produit **déjà** n=81 et n=41. ⚠⚠ Et le cache qu'on vient
+d'écrire, indexé sur (surface, niveau, N), **ne peut pas le voir** — seul un cache par
+**tranche** le verrait. C'est la marche suivante, et elle n'est pas faite.
+
+**Le cache par contenu est livré** (`src/depot/empreinte_surface.py` +
+`src/outils/profiler_une_surface.sh`). ⚠ Exclu de la clé, chacun une panne évitée : la **date**
+(recopier une surface la change sans changer un octet), le **chemin absolu** (deux machines ne
+partageraient jamais un cache), l'**ordre du système de fichiers** (le tri est ce qui fait
+d'une clé une clé). ⚠ **Non exercé sur un vrai rendu** : la porte de sortie du plan demande
+quinze minutes et un volume distant. Ce qui est vérifié est la forme — compteurs imprimés,
+dépôt **après** le profil, clé venant de l'instrument.
+
+⚠ **Rien n'est supprimé** : l'outil mesure et nomme. Un effacement n'est pas réversible.
+
+---
+
 ## ⭐⭐⭐⭐⭐ LE DÉPÔT EST RANGÉ — `src/` en dix familles, 1011 citations réécrites
 
 `analysis/src` (126 fichiers à plat) et `tools/` (73) sont devenus **`src/`**, en dix familles.
@@ -1133,7 +1169,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 115 batteries, 3025 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 118 batteries, 3072 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)

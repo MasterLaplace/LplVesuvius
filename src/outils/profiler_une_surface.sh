@@ -150,6 +150,25 @@ if [ "${1:-}" = "--verifier" ]; then
   rm -rf "$T_REF"
   chk "le cache part dans tous les cas" \
       '[ "$(grep -c '"'"'^    rm -rf "$W/cache"$'"'"' "$ROOT/src/outils/profiler_une_surface.sh")" = 1 ]'
+  # --- le cache par CONTENU (chantier A) ---
+  MOI="$ROOT/src/outils/profiler_une_surface.sh"
+  # ⚠⚠ Un cache dont on ne mesure pas le taux de succes est une devinette avec un dossier :
+  # les deux compteurs doivent etre IMPRIMES, pas seulement tenus.
+  chk "les deux compteurs de cache sont imprimes" \
+      'grep -q "cache_hit=\$CACHE_HIT cache_miss=\$CACHE_MISS" "$MOI"'
+  chk "un succes de cache se dit" 'grep -q "cache_hit (\$CLE)" "$MOI"'
+  # ⚠ Le repli est BRUYANT : un manque se dit, il ne se deduit pas d un temps d execution.
+  chk "un manque de cache se dit aussi" 'grep -q "cache_miss (\$CLE) — rendu" "$MOI"'
+  # ⚠⚠ Le depot vient APRES le profil. Deposer avant ferait relire un profil a moitie ecrit
+  # comme un resultat par toutes les campagnes suivantes -- une panne qui se propage.
+  chk "le depot dans le cache suit le profil, il ne le precede pas" \
+      '[ "$(grep -n "cp \"\$OUT\" \"\$CACHE\"" "$MOI" | cut -d: -f1)" -gt "$(grep -n "depth_profile.py" "$MOI" | head -1 | cut -d: -f1)" ]'
+  # ⚠ Une empreinte indisponible ne doit pas ARRETER le rendu : un cache est une
+  # optimisation, en faire une condition de fonctionnement serait un recul.
+  chk "sans empreinte, on rend quand meme et on le dit" \
+      'grep -q "rendu SANS cache par contenu" "$MOI"'
+  chk "la cle vient de l instrument, pas d une recette locale" \
+      'grep -q "empreinte_surface.py" "$MOI"'
   echo "$([ $ok = 0 ] && echo 'ALL PASS' || echo FAILURES) ($ok failures, $n checks)"
   exit $ok
 fi
@@ -235,14 +254,43 @@ if ! python3 -c "import sys; c=sorted(int(x) for x in sys.argv[1].split()); sys.
   exit 6
 fi
 
+# ⚠⚠ LE CACHE PAR CONTENU (chantier A). L ancien cache etait indexe par REPERTOIRE DE
+# DESTINATION : `[ ! -s "$OUT" ]`. Deux campagnes qui profilent la meme surface la rendaient
+# donc deux fois. Mesure le 2026-08-25 : `morceau_00` rendu dans `chaine_tangentielle` puis
+# dans `chaine_courte`, md5 IDENTIQUE, ~15 minutes payees deux fois.
+#
+# ⚠ L empreinte est calculee UNE SEULE FOIS : la surface ne change pas entre deux fenetres,
+# et la hacher par fenetre paierait 2 s x N pour rien sur une surface de 515 Mio.
+# ⚠ Si l empreinte echoue, on N ABANDONNE PAS -- on rend sans cache et on le DIT. Un cache
+# est une optimisation ; le faire devenir une condition de fonctionnement serait un recul.
+CACHE_RACINE="$ROOT/data/cache/profils"
+EMPREINTE=$(uv run --project "$ROOT" python "$ROOT/src/depot/empreinte_surface.py" "$PLAT" 2>/dev/null || true)
+if [ -z "$EMPREINTE" ]; then
+  echo "   ⚠ empreinte de surface indisponible — rendu SANS cache par contenu" >&2
+fi
+
 PROFILS=""
 DEMANDEES=0; PRODUITES=0
+CACHE_HIT=0; CACHE_MISS=0
 for F in $FENETRES_BASE; do
   DEMANDEES=$((DEMANDEES + 1))
   N=$(tranches_au_niveau "$F" "$NIVEAU")
   W="$DEST/g${NIVEAU}_n${N}"
   OUT="$W/profil.json"
+  CACHE=""
+  if [ -n "$EMPREINTE" ]; then
+    CLE=$(uv run --project "$ROOT" python "$ROOT/src/depot/empreinte_surface.py" "$PLAT" \
+          --niveau "$NIVEAU" --couches "$N" --voxel-um "$UM" 2>/dev/null || true)
+    [ -n "$CLE" ] && CACHE="$CACHE_RACINE/$CLE/profil.json"
+  fi
+  # ⚠ Le repli est BRUYANT : un manque de cache se dit, il ne se deduit pas d un temps.
+  if [ ! -s "$OUT" ] && [ -n "$CACHE" ] && [ -s "$CACHE" ]; then
+    mkdir -p "$W" && cp "$CACHE" "$OUT"
+    CACHE_HIT=$((CACHE_HIT + 1))
+    echo "   n=$N couches — cache_hit ($CLE)"
+  fi
   if [ ! -s "$OUT" ]; then
+    [ -n "$CACHE" ] && { CACHE_MISS=$((CACHE_MISS + 1)); echo "   cache_miss ($CLE) — rendu"; }
     rm -rf "$W"; mkdir -p "$W"
     "$ROOT/src/outils/rendre_surveille.sh" "$W/rendu" "$PATIENCE" -- \
         -v "$W/cache" --remote-url "$B/$VOL" --scale 1 -g "$NIVEAU" -s "$PLAT" \
@@ -260,6 +308,11 @@ for F in $FENETRES_BASE; do
     # campagne de plusieurs fenetres remplirait le disque en silence (562 Mo par pile).
     rm -rf "$W/cache"
     garder_rendu || rm -rf "$W/rendu"
+    # ⚠ On depose APRES le profil, jamais avant : un profil a moitie ecrit depose dans le
+    # cache serait relu comme un resultat par toutes les campagnes suivantes.
+    if [ -n "$CACHE" ] && [ -s "$OUT" ]; then
+      mkdir -p "$(dirname "$CACHE")" && cp "$OUT" "$CACHE"
+    fi
   fi
   echo "   n=$N couches"
   PRODUITES=$((PRODUITES + 1))
@@ -273,6 +326,8 @@ done
 #
 # ⚠ On ECRIT quand meme, et on refuse de se taire : jeter le fichier perdrait la fenetre qui,
 # elle, a bien ete rendue. Ce qui manquait n est pas le refus, c est la MENTION.
+# ⚠⚠ Un cache dont on ne mesure pas le taux de succes est une devinette avec un dossier.
+echo "   cache_hit=$CACHE_HIT cache_miss=$CACHE_MISS"
 if [ "$PRODUITES" -lt "$DEMANDEES" ]; then
   echo "   ⚠⚠ CAMPAGNE TRONQUEE — $PRODUITES fenêtre(s) sur $DEMANDEES demandées." >&2
   echo "      Le verdict qui suit ne porte que sur ce qui a été produit." >&2
