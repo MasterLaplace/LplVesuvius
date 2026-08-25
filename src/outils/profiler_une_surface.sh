@@ -50,6 +50,16 @@ couches_effectives() { python3 -c "print(2 * ($1 // 2) + 1)"; }
 # d ecrire la regle, jamais la regle.
 garder_rendu() { [ "${GARDER_RENDU:-0}" = 1 ]; }
 
+# ⚠⚠ UN SEUL site de depot. Il y en avait deux (la branche derivee et la branche rendue), et
+# deux sites finissent par ne plus poser la meme garde -- celui qu on oublie depose alors un
+# profil a moitie ecrit, que TOUTES les campagnes suivantes reliront comme un resultat.
+# La garde est ici, une fois : on ne depose que ce qui existe et n est pas vide.
+deposer_cache() {   # $1=profil  $2=destination_cache
+  [ -n "${2:-}" ] || return 0
+  [ -s "$1" ] || return 0
+  mkdir -p "$(dirname "$2")" && cp "$1" "$2"
+}
+
 if [ "${1:-}" = "--verifier" ]; then
   ok=0; n=0
   chk() { n=$((n+1)); if eval "$2"; then :; else echo "  FAIL $1"; ok=1; fi; }
@@ -161,8 +171,70 @@ if [ "${1:-}" = "--verifier" ]; then
   chk "un manque de cache se dit aussi" 'grep -q "cache_miss (\$CLE) — rendu" "$MOI"'
   # ⚠⚠ Le depot vient APRES le profil. Deposer avant ferait relire un profil a moitie ecrit
   # comme un resultat par toutes les campagnes suivantes -- une panne qui se propage.
-  chk "le depot dans le cache suit le profil, il ne le precede pas" \
-      '[ "$(grep -n "cp \"\$OUT\" \"\$CACHE\"" "$MOI" | cut -d: -f1)" -gt "$(grep -n "depth_profile.py" "$MOI" | head -1 | cut -d: -f1)" ]'
+  # ⚠ La premiere version de ce controle comparait des NUMEROS DE LIGNE, ce qui est un proxy
+  # de « apres » -- et il a cesse de vouloir dire quoi que ce soit des que l appel au profil
+  # est passe dans une fonction. La propriete reelle est que le depot est GARDE par l existence
+  # d un profil non vide, et elle, elle survit au refactor.
+  # ⚠⚠ Ces controles APPELLENT la fonction au lieu de grepper son texte. Un controle qui
+  # cherche un motif dans le fichier qui le contient SE COMPTE LUI-MEME -- piege paye cinq fois
+  # ici. Et un motif de texte cesse de vouloir dire quoi que ce soit des que le code bouge :
+  # la premiere version comparait des NUMEROS DE LIGNE pour dire « apres », et elle est devenue
+  # muette le jour ou l appel est passe dans une fonction.
+  T_DEP=$(mktemp -d)
+  printf '{"x":1}' > "$T_DEP/plein.json"; : > "$T_DEP/vide.json"
+  deposer_cache "$T_DEP/plein.json" "$T_DEP/c/ok.json"
+  chk "un profil non vide est depose" '[ -s "$T_DEP/c/ok.json" ]'
+  deposer_cache "$T_DEP/vide.json" "$T_DEP/c/vide.json"
+  chk "un profil VIDE n est pas depose" '[ ! -e "$T_DEP/c/vide.json" ]'
+  deposer_cache "$T_DEP/absent.json" "$T_DEP/c/absent.json"
+  chk "un profil ABSENT n est pas depose" '[ ! -e "$T_DEP/c/absent.json" ]'
+  # ⚠⚠ Le code de retour se CAPTURE tout de suite : un `chk '[ $? = 0 ]'` lit le retour de ce
+  # que le harnais vient de faire, pas celui de la fonction -- donc il passe quoi qu il arrive.
+  # Sonde du 2026-08-25 : en retirant la garde, ce controle restait vert.
+  deposer_cache "$T_DEP/plein.json" "" ; RC_DEP=$?
+  chk "sans destination, le depot ne fait rien et REND 0" \
+      '[ "$RC_DEP" = 0 ] && [ -z "$(find "$T_DEP" -name "plein.json" -newer "$T_DEP/vide.json" 2>/dev/null | grep -v "$T_DEP/plein.json")" ]'
+  rm -rf "$T_DEP"
+
+  # --- le raccourci de rendu : ce qui le rend INCAPABLE d empirer les choses ---
+  # ⚠ Motifs ancres en debut de ligne : le texte de ces controles est indente, donc il ne peut
+  # pas se matcher lui-meme.
+  # ⚠⚠ LE CORPS PRIVE DE SON PROPRE TEMOIN. Un controle qui cherche un motif dans le fichier
+  # qui le contient SE COMPTE LUI-MEME, et il passe alors meme si le code a disparu -- piege
+  # paye cinq fois dans ce depot. On retire donc le bloc `--verifier` avant de chercher.
+  # ⚠ Et les motifs sont des VARIABLES en quotes simples : les faire traverser trois couches de
+  # guillemets (chk -> eval -> grep) transforme `${...}` en ancre de fin de ligne, et le
+  # controle ne matche plus rien tout en ayant l air correct.
+  CORPS=$(awk '/^if \[ "\$\{1:-\}" = "--verifier" \]; then$/{d=1} d==0{print} /^fi$/{d=0}' "$MOI")
+  # ⚠⚠ Le motif vise le SITE D APPEL, pas le nom du module : `sous_fenetre.py` apparait
+  # aussi dans le commentaire d en-tete, donc une sonde qui debranchait l appel laissait le
+  # controle vert. `--shell` n existe qu a l endroit qui appelle vraiment.
+  # ⚠ `-e` est obligatoire au grep : un motif commencant par `--` serait pris pour une
+  # option, et le controle dirait que le code a disparu.
+  M_PLAN='--shell'
+  M_REPLI='PLAN=$(for n in $NS'
+  M_DERIVER='DERIVER=${DERIVER:-1}'
+  # ⚠ Meme raison : `verifier_pile` est nomme dans un commentaire. L APPEL, lui, porte ses
+  # parentheses et son argument.
+  M_PILE='verifier_pile(Path('
+  M_LIBERE='for g in $GARDES'
+  chk "le plan de derivation vient de l instrument" 'printf "%s" "$CORPS" | grep -qF -e "$M_PLAN"'
+  chk "un plan indisponible retombe sur TOUT rendre" 'printf "%s" "$CORPS" | grep -qF "$M_REPLI"'
+  chk "... et le repli se DIT" 'printf "%s" "$CORPS" | grep -q "plan de derivation indisponible"'
+  chk "DERIVER=0 desactive le raccourci sans le retirer" \
+      'printf "%s" "$CORPS" | grep -qF "$M_DERIVER"'
+  # ⚠⚠ La sous-plage designe des NUMEROS DE FICHIER : sur une pile trouee elle rendrait un
+  # profil PLUS COURT, en silence. La pile est verifiee avant qu on en derive quoi que ce soit.
+  chk "une pile est verifiee avant d en deriver une fenetre" \
+      'printf "%s" "$CORPS" | grep -qF "$M_PILE"'
+  chk "une derivation qui echoue retombe sur un rendu" \
+      'printf "%s" "$CORPS" | grep -q "derivation n=.* echouee"'
+  chk "une pile gardee pour ses filles est liberee a la fin" \
+      'printf "%s" "$CORPS" | grep -qF "$M_LIBERE"'
+  # ⭐ Et le controle qui rend les sept precedents capables d echouer : le corps prive du
+  # temoin ne doit PAS contenir le texte du temoin lui-meme.
+  chk "le corps examine exclut bien le bloc de temoin" \
+      '! printf "%s" "$CORPS" | grep -q "le corps examine exclut bien"'
   # ⚠ Une empreinte indisponible ne doit pas ARRETER le rendu : un cache est une
   # optimisation, en faire une condition de fonctionnement serait un recul.
   chk "sans empreinte, on rend quand meme et on le dit" \
@@ -269,12 +341,51 @@ if [ -z "$EMPREINTE" ]; then
   echo "   ⚠ empreinte de surface indisponible — rendu SANS cache par contenu" >&2
 fi
 
+# ⚠⚠ LE RACCOURCI DE RENDU (chantier A, seconde moitie). Mesure le 2026-08-25 : 58,6 % du
+# contenu identique de `data/` sont des FENETRES IMBRIQUEES -- la tranche i de n=31 EST la
+# tranche i+25 de n=81, octet pour octet. Un rendu de N couches est une pile CENTREE sur la
+# surface, donc deux fenetres rendues au meme endroit partagent toutes les tranches de la plus
+# etroite. Rendre n=161 produit donc DEJA n=81, n=41 et n=31.
+#
+# ⭐ Il n y avait rien a construire : `depth_profile.py` porte deja --from-layer / --to-layer /
+# --traced-layer. Ce qui manquait est l ARITHMETIQUE, dite une fois dans src/depot/sous_fenetre.py.
+# Eprouve par 8 mesures et 5 tentatives de refutation : 6 sites confirment, 23 mesures de profil
+# identiques sur 23, aucun ne refute.
+#
+# ⚠ Le repli est BRUYANT et il rend le raccourci INCAPABLE d empirer les choses : si le plan
+# n est pas calculable, ou si le rendu large echoue, chaque fenetre est rendue comme avant. On
+# ne peut donc jamais perdre une fenetre a cause du raccourci -- au pire on ne gagne rien.
+# ⚠ DERIVER=0 le desactive entierement, pour qu une campagne puisse le refuser sans le retirer.
+NS=""
+for F in $FENETRES_BASE; do NS="$NS $(tranches_au_niveau "$F" "$NIVEAU")"; done
+DERIVER=${DERIVER:-1}
+PLAN=""
+if [ "$DERIVER" = 1 ]; then
+  PLAN=$(uv run --project "$ROOT" python "$ROOT/src/depot/sous_fenetre.py" $NS --shell 2>/dev/null || true)
+fi
+if [ -z "$PLAN" ]; then
+  [ "$DERIVER" = 1 ] && echo "   ⚠ plan de derivation indisponible — chaque fenetre sera rendue" >&2
+  PLAN=$(for n in $NS; do echo "RENDRE $n"; done)
+fi
+
+# ⚠ Le profil se lance d un seul endroit, avec ou sans bornes de sous-fenetre : deux sites
+# d appel finiraient par ne plus passer les memes options, et l un des deux serait faux sans
+# que rien ne le dise.
+profiler_pile() {   # $1=rendu  $2=sortie  $3=couche_tracee  $4=journal  [$5=from  $6=to]
+  local bornes=""
+  [ -n "${5:-}" ] && bornes="--from-layer $5 --to-layer $6"
+  ( cd "$ROOT/inference_xpu" && uv run python ../src/volume/depth_profile.py \
+      "$1" --grid --step 200 $bornes --traced-layer "$3" --voxel-um "$UM" --out "$2" ) \
+      > "$4" 2>&1
+}
+
 PROFILS=""
 DEMANDEES=0; PRODUITES=0
-CACHE_HIT=0; CACHE_MISS=0
-for F in $FENETRES_BASE; do
+CACHE_HIT=0; CACHE_MISS=0; DERIVEES=0; RENDUS=0
+GARDES=""
+while read -r MOT N PERE DEB FIN TRACEE; do
+  [ -z "${MOT:-}" ] && continue
   DEMANDEES=$((DEMANDEES + 1))
-  N=$(tranches_au_niveau "$F" "$NIVEAU")
   W="$DEST/g${NIVEAU}_n${N}"
   OUT="$W/profil.json"
   CACHE=""
@@ -289,6 +400,30 @@ for F in $FENETRES_BASE; do
     CACHE_HIT=$((CACHE_HIT + 1))
     echo "   n=$N couches — cache_hit ($CLE)"
   fi
+
+  if [ ! -s "$OUT" ] && [ "$MOT" = "DERIVER" ]; then
+    PILE="$DEST/g${NIVEAU}_n${PERE}/rendu"
+    # ⚠⚠ La sous-plage designe des NUMEROS DE FICHIER, pas des positions : sur une pile trouee
+    # elle rendrait un profil PLUS COURT, en silence. Trouve par refutation adversariale, et
+    # c est pour ca que la pile est verifiee avant d en deriver quoi que ce soit.
+    if [ -d "$PILE" ] && uv run --project "$ROOT" python -c "
+import sys; sys.path.insert(0, '$ROOT/src/depot')
+from pathlib import Path
+from sous_fenetre import verifier_pile
+verifier_pile(Path('$PILE'), $PERE)" 2>/dev/null; then
+      mkdir -p "$W"
+      if profiler_pile "$PILE" "$OUT" "$TRACEE" "$W/profil.log" "$DEB" "$FIN"; then
+        DERIVEES=$((DERIVEES + 1))
+        echo "   n=$N couches — DERIVEE de n=$PERE (couches $DEB a $FIN), aucun rendu"
+        deposer_cache "$OUT" "$CACHE"
+      else
+        echo "   ⚠ derivation n=$N depuis n=$PERE echouee — on rend" >&2
+      fi
+    else
+      echo "   ⚠ pile n=$PERE absente ou inexploitable — n=$N sera rendue" >&2
+    fi
+  fi
+
   if [ ! -s "$OUT" ]; then
     [ -n "$CACHE" ] && { CACHE_MISS=$((CACHE_MISS + 1)); echo "   cache_miss ($CLE) — rendu"; }
     rm -rf "$W"; mkdir -p "$W"
@@ -296,28 +431,31 @@ for F in $FENETRES_BASE; do
         -v "$W/cache" --remote-url "$B/$VOL" --scale 1 -g "$NIVEAU" -s "$PLAT" \
         --tif-output "$W/rendu" -n "$N" --slice-step 1 --auto-crop \
         > "$W/rendu.log" 2>&1 || { echo "   ⚠ rendu n=$N abandonné"; continue; }
-    ( cd "$ROOT/inference_xpu" && uv run python ../src/volume/depth_profile.py \
-        "$W/rendu" --grid --step 200 --traced-layer $((N / 2)) --voxel-um "$UM" \
-        --out "$OUT" ) > "$W/profil.log" 2>&1 \
+    RENDUS=$((RENDUS + 1))
+    profiler_pile "$W/rendu" "$OUT" "$((N / 2))" "$W/profil.log" \
       || { echo "   ⚠ profil n=$N échoué"; continue; }
     # ⚠⚠ Le cache part toujours -- c est du volume telecharge, reconstructible et enorme.
-    # La PILE, elle, est le seul artefact qu un second lecteur puisse relire a une AUTRE
-    # geometrie ; la jeter oblige a repayer le rendu pour poser une question differente sur
-    # la meme surface. C est exactement ce qu il a fallu faire pour situer nos traces dans
-    # leur corpus. `GARDER_RENDU=1` la conserve ; le defaut reste de la jeter, parce qu une
-    # campagne de plusieurs fenetres remplirait le disque en silence (562 Mo par pile).
     rm -rf "$W/cache"
-    garder_rendu || rm -rf "$W/rendu"
-    # ⚠ On depose APRES le profil, jamais avant : un profil a moitie ecrit depose dans le
-    # cache serait relu comme un resultat par toutes les campagnes suivantes.
-    if [ -n "$CACHE" ] && [ -s "$OUT" ]; then
-      mkdir -p "$(dirname "$CACHE")" && cp "$OUT" "$CACHE"
+    # ⚠⚠ La pile RESTE tant que des fenetres peuvent en deriver : la jeter maintenant obligerait
+    # a repayer le rendu pour chacune. Elle part a la fin, sauf GARDER_RENDU=1.
+    if printf '%s\n' "$PLAN" | grep -q "^DERIVER [0-9]* $N "; then
+      GARDES="$GARDES $W/rendu"
+    else
+      garder_rendu || rm -rf "$W/rendu"
     fi
+    # ⚠ On depose APRES le profil, jamais avant.
+    deposer_cache "$OUT" "$CACHE"
   fi
+  [ -s "$OUT" ] || continue
   echo "   n=$N couches"
   PRODUITES=$((PRODUITES + 1))
   PROFILS="$PROFILS --profil $OUT"
-done
+done <<FINPLAN
+$PLAN
+FINPLAN
+
+# ⚠ Les piles gardees pour la derivation partent maintenant, une fois leurs filles produites.
+for g in $GARDES; do garder_rendu || rm -rf "$g"; done
 [ -n "$PROFILS" ] || { echo "   ⚠ aucun profil produit"; exit 3; }
 # ⚠⚠ UNE CAMPAGNE TRONQUEE NE DOIT PAS RESSEMBLER A UNE CAMPAGNE COMPLETE. Paye le
 # 2026-08-24 : un run interrompu au second rendu a quand meme ecrit son JSON, avec une serie

@@ -339,9 +339,48 @@ désormais, et la docstring l'explique.
   d'aujourd'hui refuse (`pile_vide`) ce que l'ancien comptait comme « 49 fenêtres avec
   matière ».
 
-##### ⚠ Ce qui n'est PAS fait
+##### ✅ Câblé — et **incapable d'empirer les choses**
 
-Le raccourci n'est **pas encore câblé** dans `profiler_une_surface.sh`. Il y faudrait garder le
+`profiler_une_surface.sh` demande son plan à l'instrument (`--shell`), rend les fenêtres
+`RENDRE` d'abord, **garde leur pile** tant que des filles peuvent en dériver, puis dérive.
+
+⭐ **Trois replis, chacun bruyant, et c'est ce qui rend le raccourci sans risque** : un plan
+incalculable → chaque fenêtre est rendue comme avant ; une pile absente ou **inexploitable**
+(`verifier_pile`) → la fenêtre est rendue ; une dérivation qui échoue → la fenêtre est rendue.
+On ne peut donc jamais **perdre** une fenêtre à cause du raccourci ; au pire on ne gagne rien.
+`DERIVER=0` le désactive entièrement, sans le retirer.
+
+⚠ **Un seul site de dépôt dans le cache**, et il porte sa garde chez lui (`deposer_cache`). Il y
+en avait deux — la branche dérivée et la branche rendue — et deux sites finissent par ne plus
+poser la même garde ; celui qu'on oublie dépose un profil à moitié écrit, que **toutes** les
+campagnes suivantes reliront comme un résultat.
+
+##### ⚠⚠ Quatre contrôles à moi qui ne pouvaient pas échouer, et comment ils sont devenus vrais
+
+Le témoin de ce fichier est passé de 33 à 50 contrôles, et **quatre des premiers étaient
+faux** :
+
+| ce qui n'allait pas | ce qui l'a remplacé |
+|---|---|
+| comparer des **numéros de ligne** pour dire « après » — muet dès que l'appel passe dans une fonction | la propriété : le dépôt est **gardé** par un profil non vide |
+| `chk '[ $? = 0 ]'` — `$?` lit le retour du **harnais**, pas de la fonction | capturer le code **tout de suite** : `deposer_cache … ; RC=$?` |
+| grepper le fichier **qui contient le contrôle** — il se compte lui-même | grepper le corps **privé de son bloc de témoin**, plus un contrôle qui vérifie que l'exclusion marche |
+| des motifs qui matchaient la **prose du commentaire** | des motifs qui visent le **site d'appel** (`--shell`, `verifier_pile(Path(`) |
+
+⚠ Et deux pièges de shell payés au passage : un motif traversant trois couches de guillemets
+(`chk` → `eval` → `grep`) voit son `${…}` devenir une **ancre de fin de ligne** et ne matche
+plus rien tout en ayant l'air correct ; et `grep -qF "--shell"` prend `--shell` pour une
+**option**, donc le contrôle annonce que le code a disparu. `-e` le force à être un motif.
+
+##### ⚠ Ce qui reste
+
+Le raccourci est **câblé et sondé, pas encore exercé sur un vrai rendu** : la première campagne
+de convergence sera la mesure. Ce qui est vérifié ici est la forme et les replis ; ce qui est
+vérifié ailleurs est l'arithmétique (37 contrôles) et la parité des profils (6 sites, 23/23).
+
+##### ⚠ Ce qui n'est PAS fait (historique)
+
+~~Le raccourci n'est **pas encore câblé** dans `profiler_une_surface.sh`.~~ Il y faudrait garder le
 rendu large vivant pendant toute la boucle des fenêtres, alors que le script le supprime par
 défaut à chaque tour (`garder_rendu || rm -rf "$W/rendu"`, 562 Mo par pile) — c'est un
 changement d'ordonnancement **et** de disposition sur disque dans un script qui produit des

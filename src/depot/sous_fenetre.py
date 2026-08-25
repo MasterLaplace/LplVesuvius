@@ -150,6 +150,28 @@ def plan_de_campagne(fenetres: list[int]) -> dict:
     return {"rendues": rendues, "derivees": derivees, "economie": len(derivees)}
 
 
+def en_lignes(plan: dict) -> str:
+    """Le plan sous une forme qu'un shell lit sans analyser de JSON.
+
+    ⭐ Une ligne par fenêtre, un mot-clé en tête, des champs séparés par des espaces :
+    c'est ce qu'un `while read` consomme sans un seul outil de plus. Faire grepper du JSON à
+    un script shell est la façon habituelle de fabriquer une devinette qui rend un nombre
+    plausible (skill `doc-derivee`).
+
+        RENDRE <couches>
+        DERIVER <couches> <depuis> <from_layer> <to_layer> <traced_layer>
+
+    ⚠ Les fenêtres RENDUES viennent en premier, dans l'ordre où il faut les rendre : une
+    dérivée a besoin de son père, donc l'ordre du fichier EST l'ordre d'exécution. Un appelant
+    qui trierait autrement dériverait depuis un rendu qui n'existe pas encore.
+    """
+    lignes = [f"RENDRE {n}" for n in plan["rendues"]]
+    for d in plan["derivees"]:
+        lignes.append(f"DERIVER {d['fenetre']} {d['depuis']} {d['from_layer']} "
+                      f"{d['to_layer']} {d['traced_layer']}")
+    return "\n".join(lignes)
+
+
 def verifier() -> int:
     echecs = controles = 0
 
@@ -272,6 +294,23 @@ def verifier() -> int:
     v("un doublon dans la série ne compte qu'une fois",
       plan_de_campagne([81, 81, 31])["rendues"] == [81])
 
+    # --- la forme machine ---
+    L = en_lignes(plan_de_campagne([31, 41, 81, 161])).splitlines()
+    v("la premiere ligne est ce qu'il faut RENDRE", L[0] == "RENDRE 161")
+    # ⚠⚠ L'ordre du fichier EST l'ordre d'execution : une derivee a besoin de son pere.
+    v("tout ce qui est rendu vient avant tout ce qui est derive",
+      all(x.startswith("RENDRE") for x in L[:1]) and all(x.startswith("DERIVER") for x in L[1:]))
+    v("une ligne DERIVER porte cinq nombres",
+      all(len(x.split()) == 6 for x in L if x.startswith("DERIVER")))
+    v("... et le pere de chaque derivee est deja rendu",
+      all(x.split()[2] in [y.split()[1] for y in L if y.startswith("RENDRE")]
+          for x in L if x.startswith("DERIVER")))
+    v("les nombres de la ligne DERIVER sont ceux de l'arithmetique",
+      "DERIVER 31 161 65 95 80" in L)
+    v("une serie vide rend une chaine vide", en_lignes(plan_de_campagne([])) == "")
+    v("une serie d'une seule fenetre ne derive rien",
+      en_lignes(plan_de_campagne([81])) == "RENDRE 81")
+
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -280,7 +319,9 @@ def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0],
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("fenetres", nargs="*", type=int, help="la série de fenêtres d'une campagne")
-    p.add_argument("--json", action="store_true", help="sortie machine")
+    p.add_argument("--json", action="store_true", help="sortie machine, JSON")
+    p.add_argument("--shell", action="store_true",
+                   help="sortie machine, une ligne par fenêtre : RENDRE n | DERIVER n depuis d f t")
     p.add_argument("--verifier", action="store_true")
     a = p.parse_args()
     if a.verifier:
@@ -288,6 +329,9 @@ def main() -> int:
     if not a.fenetres:
         p.error("au moins une largeur de fenêtre est requise")
     plan = plan_de_campagne(a.fenetres)
+    if a.shell:
+        print(en_lignes(plan))
+        return 0
     if a.json:
         print(json.dumps(plan, indent=1))
         return 0

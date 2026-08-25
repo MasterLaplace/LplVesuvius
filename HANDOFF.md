@@ -7,6 +7,42 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+## ⭐⭐⭐⭐⭐ LE RACCOURCI EST CÂBLÉ — et il est incapable d'empirer les choses
+
+`profiler_une_surface.sh` demande son plan à `sous_fenetre.py --shell`, rend les fenêtres
+`RENDRE` d'abord, **garde leur pile** tant que des filles peuvent en dériver, puis dérive.
+Sur la série du dépôt : **3 rendus évités sur 4**.
+
+⭐ **Trois replis, chacun bruyant** — plan incalculable, pile absente ou inexploitable,
+dérivation échouée — et chacun retombe sur *rendre comme avant*. On ne peut donc jamais
+**perdre** une fenêtre à cause du raccourci ; au pire on ne gagne rien. `DERIVER=0` le
+désactive sans le retirer.
+
+⚠ **Un seul site de dépôt dans le cache**, portant sa garde chez lui (`deposer_cache`). Il y en
+avait deux, et deux sites finissent par ne plus poser la même garde : celui qu'on oublie dépose
+un profil à moitié écrit que **toutes** les campagnes suivantes reliront comme un résultat.
+
+### ⚠⚠ Quatre de mes contrôles ne pouvaient pas échouer
+
+Le témoin est passé de 33 à 50 contrôles, et **quatre des premiers étaient faux** :
+
+- comparer des **numéros de ligne** pour dire « après » — muet dès que l'appel passe dans une
+  fonction → remplacé par la propriété (le dépôt est **gardé** par un profil non vide) ;
+- `chk '[ $? = 0 ]'` — `$?` lit le retour du **harnais**, pas de la fonction → capturé tout de
+  suite ;
+- grepper le fichier **qui contient le contrôle** → grepper le corps **privé de son témoin**,
+  plus un contrôle qui vérifie que l'exclusion marche ;
+- des motifs qui matchaient la **prose du commentaire** → des motifs qui visent le **site
+  d'appel**.
+
+⚠ Deux pièges de shell : un motif traversant `chk` → `eval` → `grep` voit son `${…}` devenir une
+**ancre de fin de ligne** ; et `grep -qF "--shell"` prend `--shell` pour une **option**.
+
+⚠ **Câblé et sondé, pas encore exercé sur un vrai rendu.** La première campagne de convergence
+sera la mesure.
+
+---
+
 ## ⭐⭐⭐⭐⭐ LE RACCOURCI DE RENDU — éprouvé par 13 agents, il tient
 
 ![La géométrie du raccourci](docs/images/56_sous_fenetre.png)
@@ -1213,7 +1249,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 120 batteries, 3110 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 120 batteries, 3128 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)
