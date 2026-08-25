@@ -640,6 +640,37 @@ ferait passer une portée trop courte pour une feuille absente. Les points **hor
 du **dénominateur** — les compter ferait tomber la courbe *parce que* la chaîne sort de la
 boîte, c'est-à-dire fabriquerait le résultat cherché.
 
+#### ⭐⭐⭐ L'emballement vient du PAS, pas de l'enchaînement — et il se supprime
+
+En regardant *pourquoi* le pas dérive, la cause est une **boucle de rétroaction**, et elle se
+lit dans une seule ligne de code. `--pas` est un pas de **grille** : le déplacement vaut
+`pas × longueur moyenne de tangente`. Donc un maillage qui cisaille **allonge ses tangentes**,
+donc le maillon suivant couvre plus de terrain, donc il cisaille davantage.
+
+⭐ Fixer le déplacement **en voxels** coupe la boucle — le déplacement cesse de dépendre du
+maillage. Les mêmes vingt maillons, les deux unités :
+
+| | pas de **grille** | pas **fixe** |
+|---|---:|---:|
+| pas au maillon 20 | ⚠⚠ **256 397 µm** (×2 692) | ⭐ **96,0 µm** (×1,00) |
+| boîte au maillon 20 | ⚠⚠ **×4 976 545** | ⭐ **×1,55** |
+| points valides | ⚠⚠ **615 / 14 280** | ⭐ **14 280 / 14 280** |
+| distance totale | indéterminée | **1 920 µm** |
+
+![L'emballement vient du pas : deux chaînes de vingt maillons, deux unités](images/44_pas_fixe.png)
+
+> ⭐⭐⭐ **Vingt maillons tiennent leur pas au dixième de micromètre et gardent TOUS leurs
+> points.** L'horizon de six maillons n'était pas une propriété de l'enchaînement : c'était
+> une propriété de l'**unité** dans laquelle on lui demandait d'avancer.
+
+⚠ **Ce que le pas fixe ne fait PAS, et c'est écrit là où l'option est définie** : empêcher la
+grille de cisailler. La boîte grossit encore — ×1,55 sur vingt maillons — parce que les
+tangentes voisines divergent toujours. Il **coupe la rétroaction, il ne supprime pas la cause**.
+
+⚠⚠ Et la géométrie ne dit toujours pas si la nappe est restée **sur sa feuille**. Une chaîne
+peut tenir un pas parfait en marchant droit hors du papyrus ; c'est ce que la mesure de matière
+tranche, et elle est au paragraphe suivant.
+
 #### ⭐⭐⭐ Et le remède n'est PAS spéculatif : il est mesuré ailleurs, à 2,4 mm
 
 [`41`](41_marcher_le_long_dune_nappe.md) §6 fait exactement le geste qui manque — suivre la
@@ -1555,6 +1586,16 @@ uv run --project . python analysis/src/figure_portee.py \
   --chaine "data/chaine_courte/profil_maillon_3/g0_n41/profil.json:data/chaine_courte/maillon_3/meta.json" \
            "data/chaine_longue_95/profil_maillon_5/g0_n41/profil.json:data/chaine_longue_95/maillon_5/meta.json" \
   --sortie docs/images/44_portee_tangentielle.png --json docs/portee_profils.json
+
+# LE PAS FIXE : la même chaîne dans une unité qui ne dépend pas du maillage
+SOURCE=$PWD/data/temoin_rendu/morceaux/morceau_00 PAS_VOX=40 MAILLONS=20 PROFILS=0 \
+  DEST=$PWD/data/chaine_pas_fixe JSON=$PWD/docs/chaine_pas_fixe.json \
+  CROISSANCE=$PWD/docs/croissance_chaine_pas_fixe.json tools/chainer_tangentiel.sh
+uv run --project . python analysis/src/figure_emballement.py \
+  docs/croissance_chaine_longue_95.json docs/croissance_chaine_pas_fixe.json --log \
+  --titre "l'emballement vient du PAS, pas de l'enchaînement" \
+  --titres "20 maillons, pas de GRILLE" "20 maillons, pas FIXE en voxels" \
+  --sortie docs/images/44_pas_fixe.png
 
 # La figure de l'horizon — axe LOG, sinon les six maillons qui portent le résultat s'écrasent
 uv run --project . python analysis/src/figure_emballement.py \

@@ -1,0 +1,9 @@
+[
+{"maillage": "morceau_00", "parcouru_um": 0.0, "points": 14280, "recales": 8248, "hors_boite": 0, "sans_matiere": 3009, "borne": 3023, "crete": 2.63, "demande_vox": 7.0, "part_vers_le_plus": 0.59},
+{"maillage": "maillon_3", "parcouru_um": 288.0, "points": 14280, "recales": 8006, "hors_boite": 0, "sans_matiere": 3015, "borne": 3259, "crete": 2.64, "demande_vox": 6.97, "part_vers_le_plus": 0.58},
+{"maillage": "maillon_5", "parcouru_um": 480.0, "points": 14280, "recales": 6424, "hors_boite": 0, "sans_matiere": 4066, "borne": 3790, "crete": 2.65, "demande_vox": 7.19, "part_vers_le_plus": 0.54},
+{"maillage": "maillon_8", "parcouru_um": 768.0, "points": 14280, "recales": 2485, "hors_boite": 0, "sans_matiere": 8609, "borne": 3186, "crete": 2.74, "demande_vox": 8.17, "part_vers_le_plus": 0.5},
+{"maillage": "maillon_10", "parcouru_um": 960.0, "points": 14280, "recales": 2321, "hors_boite": 0, "sans_matiere": 9263, "borne": 2696, "crete": 2.73, "demande_vox": 8.47, "part_vers_le_plus": 0.51},
+{"maillage": "maillon_15", "parcouru_um": 1440.0, "points": 14280, "recales": 2342, "hors_boite": 0, "sans_matiere": 9274, "borne": 2664, "crete": 2.61, "demande_vox": 8.58, "part_vers_le_plus": 0.51},
+{"maillage": "maillon_20", "parcouru_um": 1920.0, "points": 14280, "recales": 2332, "hors_boite": 0, "sans_matiere": 9224, "borne": 2724, "crete": 2.64, "demande_vox": 8.41, "part_vers_le_plus": 0.52},
+{"maillage": "direct", "parcouru_um": 1920.0, "points": 14280, "recales": 3530, "hors_boite": 0, "sans_matiere": 7695, "borne": 3055, "crete": 2.37, "demande_vox": 7.36, "part_vers_le_plus": 0.5}]

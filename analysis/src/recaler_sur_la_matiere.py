@@ -186,6 +186,59 @@ def recaler(plans, racine_zarr: Path, niveau: int, portee: float = 4.0,
     return sortie, comptes
 
 
+def decaler(plans, dz: float, dy: float, dx: float):
+    """La même nappe, translatée en bloc. Sa forme est intacte, sa place ne l'est plus."""
+    out = {c: a.copy() for c, a in plans.items()}
+    bon = ((plans["x"] > INVALIDE) & (plans["y"] > INVALIDE) & (plans["z"] > INVALIDE))
+    for c, d in (("x", dx), ("y", dy), ("z", dz)):
+        out[c][bon] = plans[c][bon] + d
+    return out
+
+
+def plancher_de_hasard(plans, racine_zarr: Path, niveau: int, portee: float,
+                       rayon_vox: float, tirages: int = 3, graine: int = 20260825,
+                       spire_um: float | None = None, voxel_um: float = 2.4) -> dict:
+    """⚠⚠ LE TÉMOIN NÉGATIF, et sans lui aucun « % posé » n'est interprétable.
+
+    Une nappe **posée n'importe où** dans un volume dont un quart des voxels est de la matière
+    trouve forcément quelque chose sous une partie de ses points. Tant qu'on ne sait pas
+    combien, « 35 % posé » peut vouloir dire « à moitié perdue » comme « complètement
+    perdue » — et c'est exactement la différence qui décide si une chaîne a encore un sens à
+    cette distance.
+
+    ⭐ La mesure : la MÊME nappe, translatée en bloc de `rayon_vox` dans une direction tirée
+    au sort, plusieurs fois. Sa forme, sa densité de points et son échantillonnage sont
+    identiques ; seule sa place est fausse. Ce qu'elle lit alors est le plancher.
+
+    ⚠ Plusieurs tirages, pas un : une translation unique peut atterrir sur une feuille par
+    chance, et un plancher mesuré une fois serait un plancher tiré au sort. La graine est
+    fixée pour que le nombre publié se rejoue.
+    """
+    import numpy as np
+
+    rng = np.random.default_rng(graine)
+    parts, details = [], []
+    for i in range(tirages):
+        v = rng.normal(size=3)
+        v = v / (np.linalg.norm(v) or 1.0) * rayon_vox
+        try:
+            _, c = recaler(decaler(plans, float(v[0]), float(v[1]), float(v[2])),
+                           racine_zarr, niveau, portee, spire_um=spire_um, voxel_um=voxel_um)
+        except ValueError:
+            # ⚠ Une translation qui sort du tableau n'est pas un plancher : elle est sautée
+            # et comptée, sinon le plancher serait tiré vers zéro par des tirages hors volume.
+            details.append({"tirage": i, "hors_volume": True})
+            continue
+        interroges = c["points"] - c["hors_boite"]
+        part = (c["recales"] + c["borne_atteinte"]) / interroges if interroges > 0 else 0.0
+        parts.append(part)
+        details.append({"tirage": i, "decalage_vox": [round(float(x), 1) for x in v],
+                        "part_posee": round(part, 4), "hors_boite": c["hors_boite"]})
+    return {"tirages": tirages, "retenus": len(parts), "rayon_vox": rayon_vox,
+            "plancher_median": float(np.median(parts)) if parts else None,
+            "plancher_max": float(max(parts)) if parts else None, "details": details}
+
+
 def verifier() -> int:
     """Les témoins, sur une dalle fabriquée dont on connaît l'axe médian au voxel près."""
     import shutil
@@ -357,6 +410,31 @@ def verifier() -> int:
     m_sans = _pt.ecrire(sortie, m_src, racine / "sortie2", {"recale_de": "src"})
     v("... et sans report il DISPARAÎT", "parcouru_vox" not in m_sans)
 
+    # ⚠⚠ LE TÉMOIN NÉGATIF. Sur une dalle qui traverse tout le volume, une nappe translatée
+    # LATÉRALEMENT reste dessus : le plancher est alors haut, et c'est correct — un plancher
+    # dit ce qu'on lit par hasard DANS CE VOLUME, pas dans un volume idéal.
+    dec = decaler(plans, 0.0, 3.0, 0.0)
+    v("une translation déplace la nappe", abs(float(dec["y"][2, 3] - plans["y"][2, 3]) - 3.0)
+      < 1e-6)
+    v("... sans toucher les autres axes", bool(np.allclose(dec["x"], plans["x"])))
+    pl = plancher_de_hasard(plans, racine, 0, 6.0, rayon_vox=4.0, tirages=3)
+    v("le plancher est mesuré sur plusieurs tirages", pl["tirages"] == 3)
+    v("... et il en retient au moins un", pl["retenus"] >= 1, str(pl["retenus"]))
+    v("... sur une dalle traversante, il est HAUT", pl["plancher_median"] > 0.5,
+      str(pl["plancher_median"]))
+    # ⚠ Sur un volume VIDE le plancher tombe à zéro : c'est le contrôle qui rend le nombre
+    # ci-dessus une mesure et pas une constante.
+    vide_vol = np.zeros((n, n, n), dtype=np.uint8)
+    (d / "0/0/0").write_bytes(vide_vol.tobytes())
+    pv = plancher_de_hasard(plans, racine, 0, 6.0, rayon_vox=4.0, tirages=2)
+    v("dans un volume vide, le plancher est nul", pv["plancher_median"] == 0.0,
+      str(pv["plancher_median"]))
+    (d / "0/0/0").write_bytes(vol.tobytes())
+    # ⚠ La graine est fixée : deux appels rendent le même plancher, donc le nombre publié
+    # se rejoue.
+    pl2 = plancher_de_hasard(plans, racine, 0, 6.0, rayon_vox=4.0, tirages=3)
+    v("le plancher est reproductible", pl2["plancher_median"] == pl["plancher_median"])
+
     r, _ = rl.lire_region(racine, 0, (0, 0, 0), (n, n, n))
     v("la dalle du témoin est bien là", int(r.max()) == 255)
 
@@ -378,6 +456,11 @@ def main() -> int:
                    help="l'écart inter-spires du rouleau — la portée est refusée si elle "
                         "atteint la demi-spire")
     p.add_argument("--voxel-um", type=float, default=2.4)
+    p.add_argument("--plancher", type=float, metavar="RAYON_VOX",
+                   help="mesurer le TÉMOIN NÉGATIF : la même nappe translatée au hasard de "
+                        "RAYON voxels, plusieurs fois — sans lui, aucun « % posé » n'est "
+                        "interprétable")
+    p.add_argument("--tirages", type=int, default=3)
     p.add_argument("--json", type=Path)
     p.add_argument("--verifier", action="store_true")
     a = p.parse_args()
@@ -415,6 +498,20 @@ def main() -> int:
         print(f"  ⭐ déplacement   médian {cpt['deplacement_median_vox']:.2f} vox "
               f"({cpt['deplacement_median_vox'] * a.voxel_um:.1f} µm)   "
               f"p90 {cpt['deplacement_p90_vox']:.2f}   max {cpt['deplacement_max_vox']:.2f}")
+    if a.plancher:
+        pl = plancher_de_hasard(plans, a.zarr, a.niveau, a.portee, a.plancher,
+                                a.tirages, spire_um=a.spire_um, voxel_um=a.voxel_um)
+        cpt["plancher"] = pl
+        if pl["plancher_median"] is not None:
+            interroges = cpt["points"] - cpt["hors_boite"]
+            part = (cpt["recales"] + cpt["borne_atteinte"]) / max(1, interroges)
+            print(f"  ⭐ PLANCHER      {pl['plancher_median'] * 100:.1f} % "
+                  f"(max {pl['plancher_max'] * 100:.1f} %) sur {pl['retenus']} tirages "
+                  f"à {a.plancher:g} voxels")
+            print(f"     cette nappe   {part * 100:.1f} %  →  "
+                  + ("⚠⚠ AU NIVEAU DU HASARD" if part <= pl["plancher_max"]
+                     else f"⭐ {(part - pl['plancher_median']) * 100:.1f} points au-dessus"))
+
     if a.dest:
         # ⚠⚠ `parcouru_vox` DOIT survivre au recalage. `ecrire` reconstruit un meta neuf à
         # partir de `rendu` seul, donc sans cette ligne une nappe recalée **oublie d'où elle

@@ -101,8 +101,11 @@ def lire_chaine(json_croissance: Path) -> dict:
     return {"maillons": maillons, "direct": direct}
 
 
+TITRE_DEFAUT = "une chaîne tangentielle s'emballe, et son pas le dit avant sa boîte"
+
+
 def dessiner(chaines: list[dict], sortie: Path, anglais: bool = False,
-             log: bool = False) -> dict:
+             log: bool = False, titre: str | None = None) -> dict:
     """Un panneau par chaîne, à échelle verticale PARTAGÉE.
 
     ⚠⚠ `log` n'est PAS un réglage de goût. Une chaîne qui survit six maillons puis multiplie
@@ -131,8 +134,10 @@ def dessiner(chaines: list[dict], sortie: Path, anglais: bool = False,
     largeur, hauteur = 720, 392
     im = Image.new("RGB", (largeur, hauteur), FOND)
     d = ImageDraw.Draw(im)
-    d.text((24, 16), T("une chaîne tangentielle s'emballe, et son pas le dit avant sa boîte"),
-           font=g1, fill=ENCRE)
+    # ⚠⚠ Le titre est une AFFIRMATION, et le défaut cesse d'être vrai dès qu'un panneau
+    # montre une chaîne à pas fixe — qui, elle, ne s'emballe pas. Une figure dont le titre est
+    # faux pour la moitié de ce qu'elle montre est pire qu'une figure sans titre.
+    d.text((24, 16), T(titre or TITRE_DEFAUT), font=g1, fill=ENCRE)
 
     # ⚠⚠ UNE SEULE ÉCHELLE VERTICALE pour tous les panneaux. Donner à chaque chaîne la sienne
     # ferait paraître identiques une chaîne plate et une chaîne qui quadruple : c'est le piège
@@ -328,6 +333,16 @@ def _verifier() -> int:
           rlin["y_plancher"] - rlin["y_essai"] < 3,
           f"{rlin['y_essai']} vs {rlin['y_plancher']}")
         v("l'axe log le DIT dans son bandeau", rl["log"] and not rlin["log"])
+        # ⚠⚠ Le titre par défaut AFFIRME un emballement ; il cesse d'être vrai dès qu'un
+        # panneau montre une chaîne à pas fixe. Un titre faux pour la moitié de ce qu'on
+        # montre est pire que pas de titre.
+        px_def = _pixels(Image.open(f).convert("RGB"))
+        rt = dessiner([courte, longue], Path(td) / "titre.png",
+                      titre="un titre entièrement différent")
+        px_t = _pixels(Image.open(Path(td) / "titre.png").convert("RGB"))
+        v("le titre est remplaçable", px_def != px_t)
+        v("... et le défaut reste celui d'origine",
+          TITRE_DEFAUT.startswith("une chaîne tangentielle s'emballe"))
         v("... sans rien faire déborder", rl["depassement"] == 0)
 
         try:
@@ -380,6 +395,8 @@ def main() -> int:
     p.add_argument("--titres", nargs="*", default=[],
                    help="un titre par panneau, dans le même ordre")
     p.add_argument("--sortie", type=Path, default=Path("docs/images/44_emballement.png"))
+    p.add_argument("--titre", help="l'affirmation que porte la figure — le défaut ne vaut "
+                                   "que pour des chaînes à pas de grille")
     p.add_argument("--log", action="store_true",
                    help="axe vertical logarithmique — nécessaire au-delà d'un ordre de grandeur")
     p.add_argument("--anglais", action="store_true")
@@ -396,7 +413,7 @@ def main() -> int:
         c = lire_chaine(j)
         c["titre"] = a.titres[i] if i < len(a.titres) else j.stem
         chaines.append(c)
-    r = dessiner(chaines, a.sortie, anglais=a.anglais, log=a.log)
+    r = dessiner(chaines, a.sortie, anglais=a.anglais, log=a.log, titre=a.titre)
     print(f"écrit : {a.sortie}  ({r['panneaux']} panneaux, axe jusqu'à ×{r['haut_axe']:.2f})")
     for i, e in enumerate(r["emballements"]):
         print(f"  {chaines[i]['titre']} : "
