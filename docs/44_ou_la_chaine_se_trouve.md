@@ -259,6 +259,11 @@ Trois rendus de 41 couches sur le maillage publié, le pas 0 en contrôle.
 
 ![jusqu'où la tangente reste sur la feuille](images/44_portee_tangentielle.png)
 
+⚠ Les **losanges** de cette figure n'appartiennent pas à la campagne décrite ici : ce sont des
+nappes **enchaînées**, ajoutées plus bas ([§ à 478 µm](#-et-il-lest-à-478-µm--le-bond-quitte-sa-feuille-la-chaîne-y-reste))
+et posées aux mêmes abscisses pour être comparables. Les **disques** sont les points de ce
+tableau.
+
 | déplacement | amplitude | pic au bord | fenêtres avec relief |
 |---:|---:|---:|---:|
 | 0 µm (contrôle) | 0,1929 | 6,1 % | 49/49 |
@@ -499,7 +504,35 @@ points voisins de la courbe de portée s'écartent déjà de 0,01 à 0,03. C'est
 la dispersion propre de la courbe expliquerait. Le pic au bord va d'ailleurs dans l'autre sens
 — 4,1 % contre 2,0 % — même si les deux restent sous les 6,1 % de la source. **Ce point seul
 n'est donc pas décisif** ; ce qui le rendrait décisif est la même comparaison là où le bond
-direct est franchement mauvais, et c'est ce que la suite fait à 479 µm.
+direct est franchement mauvais.
+
+#### ⭐⭐⭐ ET IL L'EST, à 478 µm : le bond quitte sa feuille, la chaîne y reste
+
+C'est la mesure pour laquelle toute la campagne a été montée. À 476 µm, la projection unique
+**commence à sortir de sa feuille** — 18,4 % de ses fenêtres ont leur pic au bord de la pile,
+contre 0 à 2 % partout avant. La chaîne de cinq maillons de 95 µm a parcouru **479,5 µm**, la
+même distance à 0,7 % près :
+
+| à ~478 µm de la source | amplitude | pic au bord |
+|---|---:|---:|
+| **bond direct unique** (476,1 µm) | 0,1140 | ⚠⚠ **18,4 %** |
+| **chaîne, 5 × 95 µm** (479,5 µm) | ⭐ **0,1491** | ⭐ **2,0 %** |
+
+> ⭐⭐⭐ **Neuf fois moins de pic au bord, et +31 % d'amplitude.** Là où un seul bond a
+> commencé à quitter sa feuille, **la nappe enchaînée y est encore**. Cet écart-là n'est pas
+> au bord du bruit : sur toute la courbe, le pic au bord vaut 0 à 6 % — 18,4 % est le point où
+> elle décroche, et la chaîne au même endroit lit 2,0 %.
+
+![La courbe de portée, avec les nappes enchaînées superposées aux mêmes distances](images/44_portee_tangentielle.png)
+
+⭐ Sur la figure, les **losanges** sont les nappes enchaînées et le trait vertical relie chaque
+losange au point de la courbe qu'il conteste. À 476 µm, le losange rouge est tout en bas
+pendant que le disque rouge est déjà monté.
+
+> ⭐⭐⭐ **Donc enchaîner à petit pas est un LEVIER QUI MARCHE, et c'est un résultat positif** :
+> il gagne environ **1,5×** de portée (580 µm de pas contrôlé contre ~380 µm pour un seul
+> bond), et sur cette portée gagnée la nappe est **mieux posée** qu'un bond de même longueur.
+> ⚠ Et il reste borné par l'horizon du paragraphe suivant, donc il ne fait pas le tour.
 
 #### ⭐⭐⭐ L'HORIZON d'une chaîne purement géométrique : **six maillons, 580 µm** — mesuré en secondes
 
@@ -1439,6 +1472,12 @@ SOURCE=$PWD/data/temoin_rendu/morceaux/morceau_00 PAS=2 MAILLONS=20 PROFILS=0 \
 for k in 1 2 3 4 5 6 7 8; do uv run --project . python analysis/src/ecart_de_maillages.py \
   data/temoin_rendu/morceaux/morceau_00 data/chaine_longue_95/maillon_$k --voxel-um 2.4 \
   | grep "écart médian"; done
+
+# La courbe de portée AVEC les nappes enchaînées superposées aux mêmes distances
+uv run --project . python analysis/src/figure_portee.py \
+  --chaine "data/chaine_courte/profil_maillon_3/g0_n41/profil.json:data/chaine_courte/maillon_3/meta.json" \
+           "data/chaine_longue_95/profil_maillon_5/g0_n41/profil.json:data/chaine_longue_95/maillon_5/meta.json" \
+  --sortie docs/images/44_portee_tangentielle.png --json docs/portee_profils.json
 
 # La figure de l'horizon — axe LOG, sinon les six maillons qui portent le résultat s'écrasent
 uv run --project . python analysis/src/figure_emballement.py \

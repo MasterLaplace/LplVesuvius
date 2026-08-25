@@ -48,6 +48,7 @@ ANGLAIS = {
     "pic au bord de la pile": "peak at the stack edge",
     "déplacement le long de la tangente": "displacement along the tangent",
     "contrôle": "control",
+    "nappe enchaînée, même distance": "chained sheet, same distance",
 }
 
 
@@ -78,8 +79,18 @@ def monotone(valeurs: list[float], croissant: bool) -> bool:
     return all((b >= a) if croissant else (b <= a) for a, b in paires)
 
 
-def dessiner(points: list[dict], sortie: Path, anglais: bool = False) -> dict:
-    """Amplitude et pic-au-bord contre le déplacement, sur un axe partagé."""
+def dessiner(points: list[dict], sortie: Path, anglais: bool = False,
+             chaine: list[dict] | None = None) -> dict:
+    """Amplitude et pic-au-bord contre le déplacement, sur un axe partagé.
+
+    ⭐ `chaine` superpose des nappes **enchaînées** aux mêmes abscisses : la question que cette
+    figure ne pouvait pas poser jusqu'ici est *« à distance égale, enchaîner vaut-il mieux que
+    sauter ? »*, et elle se lit d'un coup d'œil si les deux vivent sur les mêmes axes.
+
+    ⚠⚠ Les points enchaînés sont des **marqueurs**, jamais une courbe. Les relier suggérerait
+    qu'on peut lire entre eux, alors que chacun est une chaîne DIFFÉRENTE, de longueur de
+    maillon donnée : deux points voisins ne sont pas deux états d'une même expérience.
+    """
     if len(points) < 2:
         raise ValueError("moins de deux points — une tendance a besoin d'au moins deux points")
     g1, g2, g3 = _police()
@@ -202,6 +213,35 @@ def dessiner(points: list[dict], sortie: Path, anglais: bool = False) -> dict:
             pris = tx + w
             etiquettes_v += 1
 
+    # ⚠ Les marqueurs de chaîne sont dessinés APRÈS les courbes, donc au-dessus : un point
+    # qui compte se cache sinon derrière la ligne qu'il conteste.
+    chaine_traces = 0
+    for pt in (chaine or []):
+        if pt["um"] <= 0:
+            continue
+        xp = X(pt["um"])
+        for cle, couleur in (("amplitude", AMPLITUDE), ("au_bord", AU_BORD)):
+            if pt.get(cle) is None:
+                continue
+            yp = Y(pt[cle])
+            # ⭐⭐ LE CONNECTEUR, et c'est lui qui porte la figure : un trait vertical du point
+            # de la courbe (un seul bond) vers le losange (la même distance, enchaînée). Sans
+            # lui il faut chercher lequel des deux marqueurs à cette abscisse est lequel ;
+            # avec lui, l'écart SE VOIT. Deux étiquettes de plus ne le feraient pas — le
+            # premier tirage en avait quatre qui se recouvraient.
+            proche = min(points, key=lambda q: abs(q["um"] - pt["um"]))
+            if proche.get(cle) is not None and abs(proche["um"] - pt["um"]) < pt["um"] * 0.2:
+                d.line([(xp, Y(proche[cle])), (xp, yp)], fill=couleur, width=1)
+            # Un losange : la même couleur que sa grandeur, une forme qui n'est pas un disque.
+            d.polygon([(xp, yp - 6), (xp + 6, yp), (xp, yp + 6), (xp - 6, yp)],
+                      outline=couleur, fill=FOND, width=2)
+            chaine_traces += 1
+    if chaine:
+        d.rectangle([lx, 50, lx + 12, 58], outline=ENCRE, fill=FOND, width=2)
+        te = T("nappe enchaînée, même distance")
+        d.text((lx + 17, 47), te, font=g3, fill=ENCRE)
+        depassement = max(depassement, lx + 17 + int(d.textlength(te, font=g3)) - (largeur - 24))
+
     d.text((X(points[0]["um"]) - 12, gy - 16), T("contrôle"), font=g3, fill=GRIS)
     d.line([(24, hauteur - 30), (largeur - 24, hauteur - 30)], fill=TRAIT, width=1)
     d.text((24, hauteur - 24),
@@ -211,6 +251,7 @@ def dessiner(points: list[dict], sortie: Path, anglais: bool = False) -> dict:
     sortie.parent.mkdir(parents=True, exist_ok=True)
     im.save(sortie)
     return {"points": len(points), "largeur": largeur, "hauteur": hauteur,
+            "chaine_traces": chaine_traces,
             # ⚠⚠ Ce que la sonde peut vraiment vérifier : qu'aucun libellé ne dépasse du
             # canevas. Un texte coupé est invisible pour un test qui ne regarde que les
             # couleurs, et c'est exactement ce qui est passé au premier tirage.
@@ -235,6 +276,29 @@ def points_du_depot(racine: Path, voxel_um: float = 2.4) -> list[dict]:
                     "amplitude": float(prof["amplitude_mediane"]),
                     "au_bord": float(prof["au_bord_intensite"])})
     return out
+
+
+def point_enchaine(profil: Path, meta: Path, voxel_um: float) -> dict:
+    """Un point de nappe enchaînée : son profil, et la distance qu'elle a RÉELLEMENT parcourue.
+
+    ⚠⚠ La distance ne vient PAS du nombre de maillons multiplié par le pas demandé. Un pas est
+    un pas de GRILLE, donc ce qu'un maillon couvre suit la longueur des tangentes et dérive dès
+    que le maillage cisaille : la chaîne à cinq maillons de 238 µm a parcouru 2 044 µm et non
+    1 190. Poser un point de mesure à l'abscisse qu'on a demandée plutôt qu'à celle qu'on a
+    parcourue mettrait la chaîne au mauvais endroit de l'axe — c'est-à-dire tricherait dans le
+    sens qui l'avantage.
+    """
+    m = json.loads(meta.read_text(encoding="utf-8"))
+    d = json.loads(profil.read_text(encoding="utf-8"))[0]
+    # ⚠⚠ AUCUN REPLI sur `pas_voxels`. Pour une chaîne, `pas_voxels` est le DERNIER pas et
+    # non le total : à cinq maillons de 95 µm il vaut 98, donc un repli poserait un point
+    # parcouru de 479 µm à l abscisse 98 — au meilleur endroit possible de l axe, par accident.
+    # Un maillage qui ne sait pas d où il vient n a pas sa place sur cette figure.
+    if "parcouru_vox" not in m:
+        raise ValueError(f"{meta} ne porte pas parcouru_vox — reprojeter la chaîne")
+    um = float(m["parcouru_vox"]) * voxel_um
+    return {"um": um, "amplitude": float(d["amplitude_mediane"]),
+            "au_bord": float(d["au_bord_intensite"])}
 
 
 def _verifier() -> int:
@@ -292,6 +356,42 @@ def _verifier() -> int:
         re_ = dessiner(espace, Path(td) / "espace.png")
         v("des points espacés gardent toutes leurs étiquettes",
           re_["etiquettes_x"] == len(espace), str(re_["etiquettes_x"]))
+        # ⭐ LA SUPERPOSITION : des nappes ENCHAÎNÉES aux mêmes abscisses, pour que « à
+        # distance égale, enchaîner vaut-il mieux que sauter ? » se lise d'un coup d'œil.
+        ch = [{"um": 286.0, "amplitude": 0.215, "au_bord": 0.041},
+              {"um": 479.0, "amplitude": 0.149, "au_bord": 0.020}]
+        rc = dessiner(faux, Path(td) / "ch.png", chaine=ch)
+        v("chaque point enchaîné trace ses DEUX grandeurs", rc["chaine_traces"] == 4,
+          str(rc["chaine_traces"]))
+        v("sans chaîne, aucun marqueur", r["chaine_traces"] == 0)
+        # ⚠ Un point enchaîné à abscisse nulle n'a pas de logarithme : il est SAUTÉ, jamais
+        # rangé au bord comme le contrôle — un contrôle est une mesure, un point de chaîne à
+        # zéro serait une chaîne qui n'a pas bougé.
+        rz = dessiner(faux, Path(td) / "chz.png",
+                      chaine=[{"um": 0.0, "amplitude": 0.2, "au_bord": 0.0}])
+        v("un point enchaîné à zéro est sauté", rz["chaine_traces"] == 0)
+        v("... et la légende de chaîne ne déborde pas", rc["depassement"] == 0,
+          f"{rc['depassement']} px")
+
+        # ⚠⚠ `point_enchaine` REFUSE un meta sans `parcouru_vox`. Pour une chaîne,
+        # `pas_voxels` est le DERNIER pas et non le total : à cinq maillons de 95 µm il vaut
+        # 98, donc un repli poserait un point parcouru de 479 µm à l'abscisse 98 — au meilleur
+        # endroit possible de l'axe, par accident.
+        mj = Path(td) / "m.json"
+        pj = Path(td) / "p.json"
+        pj.write_text(json.dumps([{"amplitude_mediane": 0.15, "au_bord_intensite": 0.02}]))
+        mj.write_text(json.dumps({"pas_voxels": 41.0}))
+        try:
+            point_enchaine(pj, mj, 2.4)
+            v("un meta sans parcouru_vox est refusé", False)
+        except ValueError:
+            v("un meta sans parcouru_vox est refusé", True)
+        mj.write_text(json.dumps({"parcouru_vox": 200.0, "pas_voxels": 41.0}))
+        pt = point_enchaine(pj, mj, 2.4)
+        v("... et le cumul est lu, pas le dernier pas", abs(pt["um"] - 480.0) < 1e-9,
+          str(pt["um"]))
+        v("... avec son profil", abs(pt["amplitude"] - 0.15) < 1e-9)
+
         v("la courbe d'amplitude est tracée", AMPLITUDE in px)
         v("celle du pic au bord aussi", AU_BORD in px)
         try:
@@ -327,6 +427,9 @@ def main() -> int:
     p.add_argument("--voxel-um", type=float, default=2.4)
     p.add_argument("--sortie", type=Path,
                    default=Path("docs/images/44_portee_tangentielle.png"))
+    p.add_argument("--chaine", nargs="*", default=[],
+                   help="des profils de nappes ENCHAÎNÉES à superposer : "
+                        "<profil.json>:<meta.json> par point")
     p.add_argument("--anglais", action="store_true")
     p.add_argument("--json", type=Path)
     p.add_argument("--verifier", action="store_true")
@@ -338,7 +441,9 @@ def main() -> int:
         print(f"refus : {len(pts)} point(s) dans {a.racine} — il en faut au moins deux",
               file=sys.stderr)
         return 3
-    r = dessiner(pts, a.sortie, a.anglais)
+    ch = [point_enchaine(Path(x.split(":")[0]), Path(x.split(":")[1]), a.voxel_um)
+          for x in a.chaine]
+    r = dessiner(pts, a.sortie, a.anglais, chaine=ch or None)
     print(f"écrit : {a.sortie}  ({r['points']} points, "
           f"amplitude {'décroissante' if r['amplitude_decroissante'] else '⚠ NON monotone'}, "
           f"pic au bord {'croissant' if r['au_bord_croissant'] else '⚠ NON monotone'})")

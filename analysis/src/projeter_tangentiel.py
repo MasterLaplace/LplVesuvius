@@ -158,6 +158,16 @@ def projeter(plans, meta, axe: int, pas: float) -> tuple[dict, dict]:
              "points_valides": int(valide(plans).sum()),
              "points_projetes": int(utilisable.sum()),
              "tangente_nulle": int((ok & ~(norme > 1e-9)).sum())}
+    # ⚠⚠ LE CUMUL, et il ne se reconstitue PAS depuis le nombre de maillons. Un pas est un pas
+    # de GRILLE, donc ce qu un maillon couvre suit la longueur des tangentes et derive des que
+    # le maillage cisaille : cinq maillons de « 238 µm » ont parcouru 2 044 µm et non 1 190.
+    # Sans ce champ, poser un point de mesure a l abscisse DEMANDEE plutot qu a celle qui a ete
+    # PARCOURUE mettrait la chaine au mauvais endroit de tout axe -- et dans le sens qui
+    # l avantage, puisqu elle a toujours couvert plus que ce qu on lui demandait.
+    # ⚠ C est une somme de pas, pas une distance a vol d oiseau : les deux coincident tant que
+    # la chaine marche droit (mesure : 481,0 contre 479,5 sur cinq maillons, 0,3 % d ecart) et
+    # divergeraient si elle tournait. `ecart_de_maillages.py` mesure la vraie, quand il faut.
+    rendu["parcouru_vox"] = float(meta.get("parcouru_vox", 0.0)) + pas * moyen
     return out, rendu
 
 
