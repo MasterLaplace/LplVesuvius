@@ -21,6 +21,8 @@ import sys
 from pathlib import Path
 sys.path[:0] = [str(p) for p in Path(__file__).resolve().parents[1].iterdir() if p.is_dir()]
 
+from figure_commune import police  # noqa: E402
+
 from PIL import Image, ImageDraw
 
 FOND = (250, 249, 246)
@@ -54,16 +56,6 @@ def _pixels(im):
     return set(f())
 
 
-def _police():
-    from PIL import ImageFont
-    for c in ("DejaVuSans.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"):
-        try:
-            return ImageFont.truetype(c, 13), ImageFont.truetype(c, 11), \
-                   ImageFont.truetype(c, 15)
-        except Exception:
-            continue
-    f = ImageFont.load_default()
-    return f, f, f
 
 
 def empiler(valeurs: list[float], x_de, largeur_point: int = 7) -> list[tuple[float, int]]:
@@ -88,7 +80,7 @@ def dessiner(relief: list[float], bord: list[float], geo: dict, plancher: float,
              sortie: Path, anglais: bool = False) -> dict:
     if not relief:
         raise ValueError("aucun relief à dessiner")
-    p, pp, pg = _police()
+    p, pp, pg = police(13, 11, 15)
     marge, larg, haut = 92, 600, 300
     # ⚠ La hauteur est CALCULEE depuis la geometrie des rangees, pas posee : la poser
     # faisait chevaucher la seconde rangee et le pied de figure.

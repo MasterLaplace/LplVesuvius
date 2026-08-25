@@ -39,6 +39,10 @@ import json
 import sys
 from pathlib import Path
 
+import sys
+sys.path[:0] = [str(p) for p in Path(__file__).resolve().parents[1].iterdir() if p.is_dir()]
+from figure_commune import police  # noqa: E402
+
 INVALIDE = 0.0
 
 
@@ -53,15 +57,6 @@ def lire(dossier: Path):
     return plans, meta
 
 
-def _police():
-    from PIL import ImageFont
-    for c in ("DejaVuSans.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"):
-        try:
-            return ImageFont.truetype(c, 13), ImageFont.truetype(c, 11)
-        except OSError:
-            continue
-    d = ImageFont.load_default()
-    return d, d
 
 
 def _pixels(im):
@@ -247,7 +242,7 @@ def carte(a_plans, b_plans, sortie: Path, voxel_um: float,
     # ⚠ La police par défaut de PIL n'a ni flèche ni accent correctement espacé : la légende
     # sortait en « 0 ⊐ 0,686 » et « points au-delàd'une ». DejaVu est celle de toutes les
     # autres figures du dépôt, donc la carte se lit comme elles.
-    g_titre, g_corps = _police()
+    g_titre, g_corps = police(13, 11)
 
     champ, bon = champ_ecart(a_plans, b_plans)
     unite = spire_um if spire_um else voxel_um

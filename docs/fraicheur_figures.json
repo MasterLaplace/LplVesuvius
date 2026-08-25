@@ -1,0 +1,195 @@
+{
+ "comptes": {
+  "image_absente": 1,
+  "a_jour": 28,
+  "impossible": 6,
+  "sans_sortie_declaree": 1
+ },
+ "figures": [
+  {
+   "module": "fraicheur_des_figures.py",
+   "verdict": "image_absente",
+   "image": "/home/masterlaplace/LplVesuvius/docs/images/y.png"
+  },
+  {
+   "module": "figure_2x2.py",
+   "verdict": "a_jour",
+   "image": "docs/images/48_2x2.png"
+  },
+  {
+   "module": "figure_appuis.py",
+   "verdict": "a_jour",
+   "image": "docs/images/51_appuis.png"
+  },
+  {
+   "module": "figure_calibration.py",
+   "verdict": "impossible",
+   "image": "/home/masterlaplace/LplVesuvius/docs/images/52_calibration.png",
+   "raison": "donner --csv, le balayage lui-même"
+  },
+  {
+   "module": "figure_candidats.py",
+   "verdict": "a_jour",
+   "image": "docs/images/48_candidats.png"
+  },
+  {
+   "module": "figure_comparaison.py",
+   "verdict": "a_jour",
+   "image": "docs/images/33_comparaison.png"
+  },
+  {
+   "module": "figure_contraste.py",
+   "verdict": "a_jour",
+   "image": "docs/images/51_contraste.png"
+  },
+  {
+   "module": "figure_convergence.py",
+   "verdict": "a_jour",
+   "image": "docs/images/38_convergence.png"
+  },
+  {
+   "module": "figure_derive_profondeur.py",
+   "verdict": "a_jour",
+   "image": "docs/images/47_derive_profondeur.png"
+  },
+  {
+   "module": "figure_deux_axes.py",
+   "verdict": "a_jour",
+   "image": "docs/images/37_deux_axes.png"
+  },
+  {
+   "module": "figure_deux_pannes.py",
+   "verdict": "a_jour",
+   "image": "docs/images/49_deux_pannes.png"
+  },
+  {
+   "module": "figure_deux_surfaces.py",
+   "verdict": "a_jour",
+   "image": "docs/images/50_deux_surfaces.png"
+  },
+  {
+   "module": "figure_doublons.py",
+   "verdict": "a_jour",
+   "image": "docs/images/56_doublons.png"
+  },
+  {
+   "module": "figure_eligibilite.py",
+   "verdict": "a_jour",
+   "image": "docs/images/48_eligibilite.png"
+  },
+  {
+   "module": "figure_emballement.py",
+   "verdict": "impossible",
+   "image": "/home/masterlaplace/LplVesuvius/docs/images/44_emballement.png",
+   "raison": "figure_emballement.py: error: au moins une chaîne est requise"
+  },
+  {
+   "module": "figure_etalon_rendu.py",
+   "verdict": "a_jour",
+   "image": "docs/images/50_etalon_rendu.png"
+  },
+  {
+   "module": "figure_excision.py",
+   "verdict": "a_jour",
+   "image": "docs/images/04_excision.png"
+  },
+  {
+   "module": "figure_fenetre.py",
+   "verdict": "a_jour",
+   "image": "docs/images/51_fenetre.png"
+  },
+  {
+   "module": "figure_feuille_ou_tranche.py",
+   "verdict": "impossible",
+   "image": "/home/masterlaplace/LplVesuvius/docs/images/54_feuille_ou_tranche.png",
+   "raison": "figure_feuille_ou_tranche.py: error: --reference et --publie requis"
+  },
+  {
+   "module": "figure_graine_endroit.py",
+   "verdict": "a_jour",
+   "image": "docs/images/54_graines_endroit.png"
+  },
+  {
+   "module": "figure_graines.py",
+   "verdict": "a_jour",
+   "image": "docs/images/25_campagne_graines.png"
+  },
+  {
+   "module": "figure_incertitude.py",
+   "verdict": "a_jour",
+   "image": "docs/images/33_incertitude.png"
+  },
+  {
+   "module": "figure_matiere_de_la_chaine.py",
+   "verdict": "impossible",
+   "image": "/home/masterlaplace/LplVesuvius/docs/images/44_matiere_de_la_chaine.png",
+   "raison": "figure_matiere_de_la_chaine.py: error: le JSON de campagne est requis"
+  },
+  {
+   "module": "figure_murs.py",
+   "verdict": "a_jour",
+   "image": "docs/images/55_espace_de_causes.png"
+  },
+  {
+   "module": "figure_piles_vides.py",
+   "verdict": "impossible",
+   "image": "/home/masterlaplace/LplVesuvius/docs/images/54_piles_vides.png",
+   "raison": "figure_piles_vides.py: error: --vide, --rebase et --temoin requis"
+  },
+  {
+   "module": "figure_plafond.py",
+   "verdict": "a_jour",
+   "image": "docs/images/35_plafond.png"
+  },
+  {
+   "module": "figure_portee.py",
+   "verdict": "a_jour",
+   "image": "docs/images/44_portee_tangentielle.png"
+  },
+  {
+   "module": "figure_pyramide.py",
+   "verdict": "a_jour",
+   "image": "docs/images/50_pyramide.png"
+  },
+  {
+   "module": "figure_segments.py",
+   "verdict": "a_jour",
+   "image": "docs/images/44_ecarts_segments.png"
+  },
+  {
+   "module": "figure_sensibilite.py",
+   "verdict": "a_jour",
+   "image": "docs/images/34_sensibilite.png"
+  },
+  {
+   "module": "figure_sous_fenetre.py",
+   "verdict": "a_jour",
+   "image": "docs/images/56_sous_fenetre.png"
+  },
+  {
+   "module": "figure_temoin_negatif.py",
+   "verdict": "impossible",
+   "image": "/home/masterlaplace/LplVesuvius/docs/images/46_temoin_negatif.png",
+   "raison": "FileNotFoundError: [Errno 2] No such file or directory: '../data/temoin_negatif/sur_sa_feuille.npy'"
+  },
+  {
+   "module": "figure_tirages.py",
+   "verdict": "a_jour",
+   "image": "docs/images/35_tirages.png"
+  },
+  {
+   "module": "figure_typographie.py",
+   "verdict": "a_jour",
+   "image": "docs/images/45_typographie.png"
+  },
+  {
+   "module": "figure_verbes.py",
+   "verdict": "a_jour",
+   "image": "docs/images/56_verbes.png"
+  },
+  {
+   "module": "assembler_mosaique.py",
+   "verdict": "sans_sortie_declaree"
+  }
+ ]
+}

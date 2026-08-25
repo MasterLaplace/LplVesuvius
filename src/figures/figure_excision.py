@@ -256,8 +256,8 @@ def verifier() -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--tsv", type=Path, default=Path("../docs/excision_samples.tsv"))
-    ap.add_argument("--sortie", type=Path, default=Path("../docs/images/04_excision.png"))
+    ap.add_argument("--tsv", type=Path, default=Path(__file__).resolve().parents[2] / "docs/excision_samples.tsv")
+    ap.add_argument("--sortie", type=Path, default=Path(__file__).resolve().parents[2] / "docs/images/04_excision.png")
     ap.add_argument("--json", type=Path)
     ap.add_argument("--anglais", action="store_true")
     ap.add_argument("--verifier", action="store_true")

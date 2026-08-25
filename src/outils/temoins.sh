@@ -854,6 +854,13 @@ run "figure sous-fenetre"      uv run --project "$ROOT" python "$ROOT/src/figure
 # calcul corrige) de « dans le vide » (rien ne sauve). Le lecteur de blocs est INJECTE, et c est
 # ce qui rend l algorithme verifiable hors ligne, sans reseau et sans S3.
 run "distance a la matiere"    uv run --project "$ROOT" python "$ROOT/src/nappe/distance_a_la_matiere.py" --verifier
+run "appelants d un script"    uv run --project "$ROOT" python "$ROOT/src/depot/appelants.py" --verifier
+run "dessin commun"            uv run --project "$ROOT" python "$ROOT/src/figures/figure_commune.py" --verifier
+# ⚠⚠ `images_des_docs.sh` demande si une image EXISTE et si elle est referencee. Celui-ci
+# demande si elle est CELLE QUE SON PRODUCTEUR REND -- deux questions differentes. Mesure le
+# 2026-08-26 : six images de `docs/` ne correspondaient plus a leurs donnees, et rien ne le
+# disait, parce qu'une figure perimee s affiche exactement comme une figure a jour.
+run "fraicheur des figures"    uv run --project "$ROOT" python "$ROOT/src/depot/fraicheur_des_figures.py" --verifier
 run "graines : l endroit"      "$ROOT/src/campagnes/campagne_graines_endroit.sh" --verifier
 run "figure des graines"       uv run --project "$ROOT" python "$ROOT/src/figures/figure_graine_endroit.py" --verifier
 run "figure des doublons"      uv run --project "$ROOT" python "$ROOT/src/figures/figure_doublons.py" --verifier
@@ -1134,19 +1141,47 @@ else
   printf '❌ %s batterie(s) jamais lancee(s) :%s\n' "$NJAM" "$JAMAIS"; FAIL=$((FAIL + 1))
 fi
 
-printf '  %-30s ' "scripts sans appelant"
-ORPH=""
-for f in "$ROOT"/src/*/*.py "$ROOT"/src/*/*.sh; do
-  b=$(basename "$f")
-  n=$(grep -rl --include='*.sh' --include='*.md' --include='*.py' -- "$b" "$ROOT" 2>/dev/null \
-      | grep -v '/\.git/' | grep -v '/\.lances/' | grep -v -x -- "$f" | wc -l)
-  [ "$n" -eq 0 ] && ORPH="$ORPH $b"
-done
-NORPH=$(printf '%s' "$ORPH" | wc -w)
-if [ "$NORPH" -eq 0 ]; then
-  printf '✅ aucun\n'
+printf '  %-30s ' "dessin en un exemplaire"
+# ⚠⚠ `_police` etait definie QUINZE fois, en QUATRE variantes -- le seul endroit du depot ou
+# des copies ont REELLEMENT diverge. `src/figures/figure_commune.py` les remplace toutes, et
+# ce garde-fou empeche qu elles reviennent : sans lui, la prochaine figure recopiera la
+# fonction du voisin, comme les quatorze precedentes.
+# ⚠ Le motif est ancre en debut de ligne, donc il ne matche ni ce commentaire ni un appel.
+COPIES=$(grep -rlE '^def _police' "$ROOT/src" 2>/dev/null | wc -l)
+if [ "$COPIES" -eq 0 ]; then
+  printf '✅ aucune copie locale de _police\n'
 else
-  printf '⚠ %s orphelin(s) :%s\n' "$NORPH" "$ORPH"
+  printf '❌ %s copie(s) locale(s) de _police\n' "$COPIES"; FAIL=$((FAIL + 1))
+fi
+
+printf '  %-30s ' "scripts sans appelant"
+# ⚠⚠ DEUX DEFAUTS DE L ANCIENNE VERSION, remplaces le 2026-08-26 par `src/depot/appelants.py`.
+#
+# LE COUT : elle lancait un `grep -r` sur tout le depot PAR FICHIER. Mesure : 0,80 s le grep,
+# ~200 fichiers, soit plus de DEUX MINUTES -- le controle le plus lent de la batterie, et le
+# seul dont le cout croissait avec les DONNEES et non avec le code. Un parcours unique qui
+# construit un index le rend en 3 s.
+#
+# ⚠⚠ LE SILENCE : elle comptait comme appelant TOUTE occurrence du nom, prose comprise. Trois
+# orphelins reels ont ete signales puis SILENCIEUX au run suivant parce qu un document venait
+# de les nommer. Une mention n est pas un appelant -- c est meme souvent le contraire : on
+# ecrit le nom d un script parce qu il ne sert plus. Le nouveau ne compte que ce qui EXECUTE.
+#
+# ⚠ Reste un AVERTISSEMENT et non un echec : les 28 orphelins d aujourd hui sont de la dette de
+# documentation (aucun bloc ne dit comment les lancer), pas des defauts. En faire un echec
+# rendrait la batterie rouge en permanence, et une batterie rouge en permanence cesse d etre lue.
+ORPH_JSON=/tmp/appelants.json
+if uv run --project "$ROOT" python "$ROOT/src/depot/appelants.py" --json "$ORPH_JSON" \
+     > /tmp/appelants.log 2>&1; then
+  NORPH=$(python3 -c "import json;print(json.load(open('$ORPH_JSON'))['combien'])" 2>/dev/null || echo '?')
+  SECS=$(python3 -c "import json;print(json.load(open('$ORPH_JSON'))['secondes'])" 2>/dev/null || echo '?')
+  if [ "$NORPH" = "0" ]; then
+    printf '✅ aucun (%s s)\n' "$SECS"
+  else
+    printf '⚠ %s script(s) que RIEN n execute — dette de documentation (%s s)\n' "$NORPH" "$SECS"
+  fi
+else
+  printf '❌ ECHEC\n'; tail -3 /tmp/appelants.log | sed 's/^/       /'; FAIL=$((FAIL + 1))
 fi
 
 # ⚠ Les quatre batteries hors `run` (marche sur nappe, mosaique, chiffres, orphelins) sont

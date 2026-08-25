@@ -566,6 +566,56 @@ propre environnement. Les déplacer est une décision par dossier, pas un coup d
 
 ### ⭐ Chantier D — l'extraction du dessin, et le rangement de `docs/`
 
+#### ✅ Livré le 2026-08-26 — deux des quatre points, et trois trouvailles en chemin
+
+**1. Le garde-fou lent : 160 s → 2,9 s.** Il lançait un `grep -r` sur tout le dépôt **par
+fichier** (0,80 s × ~200). `src/depot/appelants.py` fait **un** parcours, indexe, puis cherche
+dedans. ⚠ Et le coût s'était déplacé à 38 s dans ma première version — 210 scripts × 355 textes
+× 7 motifs — jusqu'à ce qu'un test d'appartenance de chaîne écarte 99 % des paires avant
+qu'une regex ne tourne.
+
+⚠⚠ **Et il ne se tait plus.** L'ancien comptait comme appelant **toute occurrence du nom**,
+prose comprise : trois orphelins réels signalés, puis silencieux au run suivant parce qu'un
+document venait de les nommer. Une mention n'est pas un appelant — c'est même souvent le
+contraire. Le nouveau ne compte que ce qui **exécute**, en sept formes, dont `lplv <verbe>` :
+depuis que le dépôt a un point d'entrée, un script peut n'être lancé que par lui.
+
+⭐ Ce que ça révèle : **27 scripts que rien n'exécute**. Ce ne sont pas des défauts, c'est de la
+**dette de documentation** — aucun bloc ne dit comment les lancer. Signalé, jamais en échec :
+une batterie rouge en permanence cesse d'être lue.
+
+**2. `figure_commune.py` — quinze copies, quatre variantes, zéro image déplacée.** Elles ne
+diffèrent que par les **tailles** demandées ; le mécanisme est identique. Une fonction
+**paramétrée** les remplace toutes sans changer une figure, puisque chaque appelant passe les
+siennes. ⭐ Unifier en imposant des tailles aurait déplacé quinze images pour du rangement,
+c'est-à-dire exactement le refactor qu'on ne fait pas. Un garde-fou empêche le retour : *aucune
+seconde définition de `_police` dans l'arbre*.
+
+##### ⚠⚠ Trois trouvailles que seul le fait de construire les gardes a produites
+
+- **Six images de `docs/` ne correspondaient plus à leurs données**, et rien ne le disait :
+  `51_appuis.png` est commise le 23 août, son entrée bouge le 24, l'image n'est jamais refaite.
+  Une figure périmée s'affiche exactement comme une figure à jour.
+  `src/depot/fraicheur_des_figures.py` régénère dans un dossier temporaire et compare les
+  octets — **4,9 s pour les 36 figures**. ⚠ Il ne touche jamais `docs/images/` : dire qu'une
+  image est périmée et la remplacer sont deux actes.
+- ⚠⚠ **Une régression que J'AVAIS introduite** : six figures écrivaient dans `../docs/images/`,
+  ce qui était juste quand elles tournaient depuis `inference/` et ne l'est plus depuis que je
+  les ai repointées sur la racine. `../docs` n'existe pas. Rien ne l'a vu, parce que leurs
+  batteries n'écrivent pas d'image. Leur racine se dérive désormais du fichier, jamais du
+  répertoire courant — c'est ce qui les rend lançables depuis n'importe où, `lplv` compris.
+- ⚠ **Ma première version du garde de fraîcheur ne reconnaissait qu'une forme de déclaration
+  sur trois** : elle jugeait 11 figures sur 36 tout en annonçant « chacune ». Un libellé qui
+  affirme ce que l'assertion ne vérifie pas.
+
+##### ⚠ Ce qui reste du chantier D
+
+- **`docs/` séparé par nature** : 58 `.md`, 345 `.json`, 72 `.png`, 79 `.log`. ⚠ Les blocs
+  « Reproduire » citent ces chemins — c'est `src/depot/deplacer.py` qui doit le faire, avec son
+  refus de laisser une citation pendante.
+- **`.lances/` se purge** : 197 fichiers, aucune rétention écrite.
+
+
 Deux petites choses, groupées parce qu'elles ne coûtent presque rien.
 
 1. **`analysis/src/figure_commune.py`** : `_police`, `_pixels`, la palette. C'est le seul endroit

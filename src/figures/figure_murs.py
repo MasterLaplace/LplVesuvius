@@ -26,6 +26,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path[:0] = [str(p) for p in Path(__file__).resolve().parents[1].iterdir() if p.is_dir()]
 
+from figure_commune import police  # noqa: E402
+
 from PIL import Image, ImageDraw  # noqa: E402
 
 FOND = (250, 249, 246)
@@ -49,16 +51,6 @@ ANGLAIS = {
 }
 
 
-def _police():
-    from PIL import ImageFont
-    for c in ("DejaVuSans.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"):
-        try:
-            return (ImageFont.truetype(c, 14), ImageFont.truetype(c, 12),
-                    ImageFont.truetype(c, 11))
-        except OSError:
-            continue
-    d = ImageFont.load_default()
-    return d, d, d
 
 
 def _pixels(im):
@@ -72,7 +64,7 @@ def dessiner(rangs: list[dict], sortie: Path, anglais: bool = False) -> dict:
         raise ValueError("aucun mur — une figure vide serait une figure qui ment")
     from murs_et_causes import VERDICTS
 
-    g1, g2, g3 = _police()
+    g1, g2, g3 = police(14, 12, 11)
     intraduits, inchanges = [], []
 
     def T(txt: str) -> str:

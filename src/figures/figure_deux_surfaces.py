@@ -21,6 +21,10 @@ import argparse
 import sys
 from pathlib import Path
 
+import sys
+sys.path[:0] = [str(p) for p in Path(__file__).resolve().parents[1].iterdir() if p.is_dir()]
+from figure_commune import police  # noqa: E402
+
 import numpy as np
 from PIL import Image, ImageDraw
 
@@ -31,16 +35,6 @@ BON = (94, 156, 106)
 MAUVAIS = (196, 72, 60)
 
 
-def _police():
-    from PIL import ImageFont
-    for c in ("DejaVuSans.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"):
-        try:
-            return ImageFont.truetype(c, 15), ImageFont.truetype(c, 12), \
-                   ImageFont.truetype(c, 19)
-        except Exception:
-            continue
-    f = ImageFont.load_default()
-    return f, f, f
 
 
 def vignette(chemin: Path, cote: int) -> Image.Image:
@@ -77,7 +71,7 @@ def vignette(chemin: Path, cote: int) -> Image.Image:
 
 
 def dessiner(gauche: dict, droite: dict, sortie: Path, cote: int = 460) -> dict:
-    p, pp, pg = _police()
+    p, pp, pg = police(15, 12, 19)
     marge, ecart = 30, 34
     L = marge * 2 + cote * 2 + ecart
     H = marge + 62 + cote + 78

@@ -21,6 +21,8 @@ import sys
 from pathlib import Path
 sys.path[:0] = [str(p) for p in Path(__file__).resolve().parents[1].iterdir() if p.is_dir()]
 
+from figure_commune import police  # noqa: E402
+
 from PIL import Image, ImageDraw
 
 FOND = (250, 249, 246)
@@ -58,16 +60,6 @@ def _pixels(im):
     return set(f())
 
 
-def _police():
-    from PIL import ImageFont
-    for c in ("DejaVuSans.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"):
-        try:
-            return ImageFont.truetype(c, 13), ImageFont.truetype(c, 11), \
-                   ImageFont.truetype(c, 15)
-        except Exception:
-            continue
-    f = ImageFont.load_default()
-    return f, f, f
 
 
 def repartir(valeurs: list[float], largeur: int, x_de) -> list[tuple[int, int]]:
@@ -89,7 +81,7 @@ def repartir(valeurs: list[float], largeur: int, x_de) -> list[tuple[int, int]]:
 def dessiner(points: list[dict], sortie: Path, anglais: bool = False) -> dict:
     if not points:
         raise ValueError("aucun point")
-    p, pp, pg = _police()
+    p, pp, pg = police(13, 11, 15)
     conv = [x["amplitude_sur_plancher"] for x in points if x["converge"]]
     cond = [x["amplitude_sur_plancher"] for x in points if not x["converge"]]
     if not conv or not cond:

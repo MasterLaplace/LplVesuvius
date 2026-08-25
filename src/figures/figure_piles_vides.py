@@ -22,6 +22,10 @@ import json
 import sys
 from pathlib import Path
 
+import sys
+sys.path[:0] = [str(p) for p in Path(__file__).resolve().parents[1].iterdir() if p.is_dir()]
+from figure_commune import police  # noqa: E402
+
 from PIL import Image, ImageDraw
 
 FOND = (250, 249, 246)
@@ -47,16 +51,6 @@ ANGLAIS = {
 }
 
 
-def _police():
-    from PIL import ImageFont
-    for c in ("DejaVuSans.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"):
-        try:
-            return (ImageFont.truetype(c, 14), ImageFont.truetype(c, 12),
-                    ImageFont.truetype(c, 11))
-        except OSError:
-            continue
-    d = ImageFont.load_default()
-    return d, d, d
 
 
 def couper(texte: str, police, largeur: int, dessin) -> list[str]:
@@ -119,7 +113,7 @@ def dessiner(panneaux: list[dict], sortie: Path, anglais: bool = False) -> dict:
     """Trois panneaux côte à côte, chacun avec ce que sa propre couche mesure."""
     if not panneaux:
         raise ValueError("aucun panneau — une figure vide serait une figure qui ment")
-    g1, g2, g3 = _police()
+    g1, g2, g3 = police(14, 12, 11)
     intraduits, inchanges = [], []
 
     def T(txt: str) -> str:
@@ -240,7 +234,7 @@ def _verifier() -> int:
         # superposées, donc deux panneaux qui cessent de dire ce qu'ils montrent.
         from PIL import ImageDraw as _ID
         _d = _ID.Draw(Image.new("RGB", (10, 10)))
-        _g = _police()[1]
+        _g = police(14, 12, 11)[1]
         long_titre = "le même maillage, remis dans son repère de niveau zéro"
         v("un titre trop long est replié", len(couper(long_titre, _g, 210, _d)) > 1)
         v("... et chaque ligne tient dans la largeur",

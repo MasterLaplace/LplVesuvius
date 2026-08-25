@@ -109,10 +109,10 @@ def verifier() -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--json", type=Path, default=Path("../docs/derive_profondeur.json"))
-    ap.add_argument("--docs", type=Path, default=Path("../docs"))
+    ap.add_argument("--json", type=Path, default=Path(__file__).resolve().parents[2] / "docs/derive_profondeur.json")
+    ap.add_argument("--docs", type=Path, default=Path(__file__).resolve().parents[2] / "docs")
     ap.add_argument("--sortie", type=Path,
-                    default=Path("../docs/images/47_derive_profondeur.png"))
+                    default=Path(__file__).resolve().parents[2] / "docs/images/47_derive_profondeur.png")
     ap.add_argument("--anglais", action="store_true")
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()

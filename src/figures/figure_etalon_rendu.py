@@ -24,6 +24,8 @@ import sys
 from pathlib import Path
 sys.path[:0] = [str(p) for p in Path(__file__).resolve().parents[1].iterdir() if p.is_dir()]
 
+from figure_commune import police  # noqa: E402
+
 from PIL import Image, ImageDraw
 
 FOND = (250, 249, 246)
@@ -48,16 +50,6 @@ def _pixels(im):
     return set(f())
 
 
-def _police():
-    from PIL import ImageFont
-    for c in ("DejaVuSans.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"):
-        try:
-            return ImageFont.truetype(c, 13), ImageFont.truetype(c, 11), \
-                   ImageFont.truetype(c, 15)
-        except Exception:
-            continue
-    f = ImageFont.load_default()
-    return f, f, f
 
 
 def dessiner(essais: list[dict], sortie: Path, ram_go: float | None = None,
@@ -76,7 +68,7 @@ def dessiner(essais: list[dict], sortie: Path, ram_go: float | None = None,
     ce qu'elle mesure pour montrer ce qu'elle extrapole. Le troisième panneau a son propre
     axe et son propre titre, et dit en clair qu'il n'est pas mesuré.
     """
-    p, pp, pg = _police()
+    p, pp, pg = police(13, 11, 15)
     ok = _grouper(essais)
     if not ok:
         raise ValueError("aucun essai chronométré")

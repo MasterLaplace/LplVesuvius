@@ -233,10 +233,10 @@ def verifier() -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--json", type=Path, default=Path("../docs/temoin_negatif.json"))
+    ap.add_argument("--json", type=Path, default=Path(__file__).resolve().parents[2] / "docs/temoin_negatif.json")
     ap.add_argument("--positif", type=Path, default=Path("../data/temoin_negatif/sur_sa_feuille.npy"))
     ap.add_argument("--negatif", type=Path, default=Path("../data/temoin_negatif/en_travers.npy"))
-    ap.add_argument("--sortie", type=Path, default=Path("../docs/images/46_temoin_negatif.png"))
+    ap.add_argument("--sortie", type=Path, default=Path(__file__).resolve().parents[2] / "docs/images/46_temoin_negatif.png")
     ap.add_argument("--anglais", action="store_true")
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()

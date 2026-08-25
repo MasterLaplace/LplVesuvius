@@ -26,6 +26,8 @@ import sys
 from pathlib import Path
 sys.path[:0] = [str(p) for p in Path(__file__).resolve().parents[1].iterdir() if p.is_dir()]
 
+from figure_commune import police  # noqa: E402
+
 from PIL import Image, ImageDraw
 
 FOND = (250, 249, 246)
@@ -66,16 +68,6 @@ def _pixels(im):
     return set(f())
 
 
-def _police():
-    from PIL import ImageFont
-    for c in ("DejaVuSans.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"):
-        try:
-            return ImageFont.truetype(c, 13), ImageFont.truetype(c, 11), \
-                   ImageFont.truetype(c, 15)
-        except Exception:
-            continue
-    f = ImageFont.load_default()
-    return f, f, f
 
 
 def etendues(lignes: list[dict], clefs: tuple[str, ...]) -> dict[str, tuple[float, float]]:
@@ -118,7 +110,7 @@ def dessiner(lignes: list[dict], sortie: Path, seuil: float = 0.7,
     # colonne suivante et les alpha sortaient du cadre. Une marge estimee a l oeil est une
     # marge fausse des que la police change.
     mesure = ImageDraw.Draw(Image.new("RGB", (1, 1)))
-    p, pp, pg = _police()
+    p, pp, pg = police(13, 11, 15)
     larg_val = max(mesure.textlength(t, font=pp) for t in ("0.000", "27", "1.000"))
     ecart = int(larg_val) + 14
     txt_plat = "profil plat — aucun α mesurable"
