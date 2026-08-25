@@ -668,8 +668,37 @@ grille de cisailler. La boîte grossit encore — ×1,55 sur vingt maillons — 
 tangentes voisines divergent toujours. Il **coupe la rétroaction, il ne supprime pas la cause**.
 
 ⚠⚠ Et la géométrie ne dit toujours pas si la nappe est restée **sur sa feuille**. Une chaîne
-peut tenir un pas parfait en marchant droit hors du papyrus ; c'est ce que la mesure de matière
-tranche, et elle est au paragraphe suivant.
+peut tenir un pas parfait en marchant droit hors du papyrus.
+
+#### ⚠⚠⚠ Et c'est exactement ce qui arrive : le pas fixe répare la GÉOMÉTRIE, pas la MATIÈRE
+
+| parcouru | posé sur la matière |
+|---:|---:|
+| source publiée | 78,9 % |
+| 288 µm | ⭐ 78,9 % |
+| 480 µm | 71,5 % |
+| **768 µm** | ⚠⚠ **39,7 %** |
+| 960 µm | 35,1 % |
+| 1 440 µm | 35,1 % |
+| 1 920 µm | 35,4 % |
+| **bond direct, mêmes 1 920 µm** | ⚠ **46,1 %** |
+
+> ⚠⚠⚠ **L'emballement géométrique et le départ de la feuille sont DEUX pannes différentes**,
+> et réparer la première ne touche pas la seconde. Vingt maillons gardent leurs 14 280 points
+> et un pas au dixième de micromètre — et n'ont plus que 35 % de leurs points sur du papyrus
+> dès 768 µm.
+>
+> ⚠ **Pire pour la chaîne : à 1 920 µm, UN grand bond garde plus de matière que vingt petits**
+> (46,1 % contre 35,4 %) — l'inverse de ce qui se passe à 286 µm, où la chaîne gagne. **Il y a
+> donc un croisement**, et il est ici sur le registre plutôt qu'écarté.
+
+⚠⚠ **Et un chiffre manquait sous tous ces pourcentages.** Une nappe posée **n'importe où** dans
+un volume dont un quart des voxels est de la matière trouve forcément quelque chose sous une
+partie de ses points. Tant qu'on ne sait pas combien, « 35 % posé » peut vouloir dire « à moitié
+perdue » comme « complètement perdue » — et c'est exactement la différence qui décide si une
+chaîne a encore un sens à cette distance. `--plancher` le mesure : la **même** nappe, translatée
+en bloc dans une direction tirée au sort, plusieurs fois. Forme, densité de points et
+échantillonnage identiques ; seule sa place est fausse.
 
 #### ⭐⭐⭐ Et le remède n'est PAS spéculatif : il est mesuré ailleurs, à 2,4 mm
 

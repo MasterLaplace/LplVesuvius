@@ -11,7 +11,7 @@ la fois. Une feuille de route qui liste des tâches laisse croire qu'on avance q
 tourne ; celle-ci liste des causes **éliminées**, et montre l'espace rétrécir. C'est le
 seul progrès mesurable sur un problème que personne n'a résolu.
 
-**27 causes candidates** sur **4 murs** : ❌ **16** éliminées · ✅ **8** confirmées · ⏳ **2** ouvertes · 🔒 **1** bloquée
+**29 causes candidates** sur **4 murs** : ❌ **18** éliminées · ✅ **8** confirmées · ⏳ **2** ouvertes · 🔒 **1** bloquée
 
 | symbole | verdict | ce que ça veut dire |
 |---|---|---|
@@ -57,17 +57,19 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 
 ## 3. L'extension tangentielle est un point fixe
 
-❌ 5 éliminées · ✅ 2 confirmées · ⏳ 1 ouverte
+❌ 7 éliminées · ✅ 2 confirmées · ⏳ 1 ouverte
 
 | cause candidate | | ce qui a été mesuré | où |
 |---|---|---|---|
 | une extension UNIQUE, puis rognage | ✅ | 4,28 → 12,97 cm² à α = +0,000, ramenée à 6,02 cm² propres, soit +41 % de matière validée | [`44`](44_ou_la_chaine_se_trouve.md) |
-| enchaîner la projection à PETIT pas (95 µm/maillon) | ✅ | un LEVIER qui marche mais BORNÉ, confirmé sur TROIS grandeurs indépendantes. À 478 µm, là où un seul bond quitte sa feuille (18,4 % de pic au bord), la chaîne y est encore (2,0 %) avec +31 % d'amplitude ; et le contact avec la matière tient le niveau du segment publié (78,9 %) jusqu'à 383 µm quand le bond est déjà à 75,4 % dès 286. ⚠⚠ La matière s'épuise AVANT la géométrie : horizon utile ~480 µm contre 580 mesurés sur le pas, soit 1/100 de tour | [`44`](44_ou_la_chaine_se_trouve.md) |
+| enchaîner la projection à PETIT pas (95 µm/maillon) | ✅ | un LEVIER qui marche À COURTE DISTANCE, confirmé sur trois grandeurs indépendantes. À 478 µm, là où un seul bond quitte sa feuille (18,4 % de pic au bord), la chaîne y est encore (2,0 %) avec +31 % d'amplitude ; contact matière au niveau du segment publié (78,9 %) jusqu'à 383 µm quand le bond est déjà à 75,4 % dès 286. ⚠⚠ Mais il y a un CROISEMENT : à 1 920 µm un seul bond garde plus de matière que vingt maillons (46,1 % contre 35,4 %) | [`44`](44_ou_la_chaine_se_trouve.md) |
 | augmenter le budget d'un seul coup | ❌ | budget 200 : 28,6 cm² mais 25 036 auto-intersections et α = +1,313, la surface se replie sur elle-même | [`44`](44_ou_la_chaine_se_trouve.md) |
 | enchaîner rogner puis étendre | ❌ | le cycle converge vers un point fixe autour de 6 cm² : chaque tour regagne ce qu'il vient de perdre | [`44`](44_ou_la_chaine_se_trouve.md) |
 | juger une courbe sur trois points | ❌ | trois points donnaient « pente monotone », six « plateau puis falaise », neuf « maximum puis descente douce » — chaque forme plausible, chaque forme fausse | [`44`](44_ou_la_chaine_se_trouve.md) |
 | juger la projection par un sondage de points | ❌ | bloc avec matière et valeur au point rendent le MÊME chiffre de 0 µm à 2,4 mm : un bloc fait 307 µm quand les feuilles sont à 10-20 µm | [`44`](44_ou_la_chaine_se_trouve.md) |
 | enchaîner la projection à GRAND pas (238 µm/maillon) | ❌ | cinq maillons de 238 µm étalent la boîte ×2,38 à nombre de points constant, contre ×1,10 pour le bond direct — et finissent 5,33 SPIRES à côté de lui. ⚠ Le pas réel dérive avant la boîte : 238 → 963 µm par maillon | [`44`](44_ou_la_chaine_se_trouve.md) |
+| l'emballement du pas d'une chaîne | ❌ | ce n'était pas l'enchaînement mais l'UNITÉ : un pas de grille couvre pas × longueur de tangente, donc un maillage qui cisaille s'envoie lui-même plus loin. À pas FIXE en voxels, vingt maillons tiennent 96,0 µm (×1,00), boîte ×1,55, 14 280 points sur 14 280 — contre ×2 692, ×4 976 545 et 615 points au pas de grille | [`44`](44_ou_la_chaine_se_trouve.md) |
+| un pas contrôlé suffit-il à rester sur la feuille ? | ❌ | non, et les deux pannes sont distinctes : à pas fixe la géométrie est saine sur 20 maillons (tous les points, pas au dixième de µm) et le contact matière tombe quand même à 39,7 % dès 768 µm puis plafonne vers 35 % | [`44`](44_ou_la_chaine_se_trouve.md) |
 | la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour | ⏳ | la projection existe et a DEUX seuils : contraste maximal vers 240 µm, et la nappe reste sur sa feuille jusqu'à ~380 µm. Reste à enchaîner et à réoptimiser | [`44`](44_ou_la_chaine_se_trouve.md) |
 
 ## 4. La chaîne casse au sixième tour
