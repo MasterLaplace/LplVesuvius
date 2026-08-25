@@ -312,7 +312,13 @@ savoir où elle change** — ce qui n'est possible qu'en la rendant plus dense.
 quand les points ne le sont pas, et elle imprime « ⚠ NON monotone » depuis le tirage à six
 points. Le contrôle était écrit avant la donnée qui l'a fait parler.
 
-#### ⚠⚠⚠ Et enchaîner est STRICTEMENT PIRE qu'un seul bond — mesuré sans aucun rendu
+#### ~~⚠⚠⚠ Et enchaîner est STRICTEMENT PIRE qu'un seul bond~~ — *(vrai du PAS, pas de l'enchaînement)*
+
+> ⚠⚠ **Section conservée mais DÉPASSÉE.** Le verdict ci-dessous est juste pour un pas de
+> **grille** de 238 µm, et faux comme énoncé sur l'enchaînement : à 95 µm par maillon la chaîne
+> ne coûte rien, et à pas **fixe** elle ne s'emballe pas du tout
+> ([§ l'emballement vient du PAS](#-lemballement-vient-du-pas-pas-de-lenchaînement--et-il-se-supprime)).
+> Elle reste ici parce que c'est elle qui a produit la mesure qui a permis de trouver la cause.
 
 La projection compose : elle lit un `tifxyz` et en écrit un. On peut donc **enchaîner** —
 cinq maillons de 238 µm, chacun partant de la sortie du précédent — et comparer au **témoin**
@@ -534,7 +540,7 @@ pendant que le disque rouge est déjà monté.
 > bond), et sur cette portée gagnée la nappe est **mieux posée** qu'un bond de même longueur.
 > ⚠ Et il reste borné par l'horizon du paragraphe suivant, donc il ne fait pas le tour.
 
-#### ⭐⭐⭐ L'HORIZON d'une chaîne purement géométrique : **six maillons, 580 µm** — mesuré en secondes
+#### ⭐⭐⭐ L'HORIZON d'une chaîne à pas de GRILLE : **six maillons, 580 µm** — mesuré en secondes
 
 Puisque le pas réel refuse une chaîne **sans aucun rendu**, une chaîne longue se sonde
 d'abord comme ça. Vingt maillons de 95 µm, mode `PROFILS=0` :

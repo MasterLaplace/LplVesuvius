@@ -105,6 +105,21 @@ def plancher_de(r: dict) -> float | None:
     return None if v < 0.0 else v
 
 
+def avantage(r: dict) -> float | None:
+    """⭐⭐ CE QUI DOIT ÊTRE PUBLIÉ : la part posée MOINS le plancher du hasard.
+
+    ⚠⚠ Un pourcentage brut ne veut rien dire tout seul, et deux mesures du même dépôt le
+    prouvent : 78,9 % contre un plancher de 48,4 est un résultat, 35,4 % contre un plancher de
+    37,1 est du bruit — et le second est *plus grand* que la moitié du premier. Le nombre qui
+    porte l'énoncé est l'ÉCART au hasard, pas la valeur.
+
+    ⚠ Rend `None` quand aucun plancher n'a été mesuré : un avantage calculé contre un plancher
+    absent serait la part brute, c'est-à-dire exactement la lecture qu'on cherche à empêcher.
+    """
+    pl = plancher_de(r)
+    return None if pl is None else part_posee(r) - pl
+
+
 def dessiner(rangs: list[dict], sortie: Path, anglais: bool = False,
              emballement_um: float | None = None,
              corrigee: list[dict] | None = None) -> dict:
@@ -396,6 +411,19 @@ def _verifier() -> int:
         sans[0]["plancher"] = -1.0
         rs2 = dessiner(sans, Path(td) / "pl2.png")
         v("un rang sans plancher ne casse pas la courbe", rs2["plancher_traces"] == 0)
+        # ⭐⭐ L'AVANTAGE sur le hasard, qui est le nombre à publier. Sondé sur les deux cas
+        # réels du dépôt : le segment publié est loin au-dessus, la chaîne lointaine est
+        # DESSOUS — et 35,4 % est pourtant plus grand que la moitié de 78,9 %.
+        v("un avantage franc est positif",
+          abs(avantage({"points": 100, "recales": 79, "borne": 0, "hors_boite": 0,
+                        "plancher": 0.484}) - 0.306) < 1e-9)
+        v("... et un avantage négatif l'est",
+          avantage({"points": 100, "recales": 35, "borne": 0, "hors_boite": 0,
+                    "plancher": 0.371}) < 0)
+        # ⚠ Sans plancher, AUCUN avantage : le calculer contre un plancher absent rendrait la
+        # part brute, c'est-à-dire exactement la lecture qu'on cherche à empêcher.
+        v("sans plancher, aucun avantage",
+          avantage({"points": 100, "recales": 35, "borne": 0, "hors_boite": 0}) is None)
 
         # ⭐ La SECONDE chaîne, celle qui repose sur la matière. L'axe doit s'étendre pour la
         # contenir, sinon ses points lointains seraient écrasés au bord et la comparaison
@@ -454,6 +482,12 @@ def main() -> int:
     print(f"écrit : {a.sortie}  ({r['maillons']} maillons, {r['bonds']} témoin(s), "
           f"référence {r['repere'] * 100:.0f} %)")
     print("  parts : " + "  ".join(f"{x * 100:.0f} %" for x in r["parts"]))
+    av = [(x["maillage"], avantage(x)) for x in rangs if avantage(x) is not None]
+    if av:
+        print("  ⭐ avantage sur le hasard :")
+        for nom, a_ in av:
+            marque = "⚠⚠ au niveau du hasard" if a_ <= 0.02 else "⭐"
+            print(f"     {nom:<14} {a_ * 100:+6.1f} points   {marque}")
     return 0
 
 
