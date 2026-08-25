@@ -43,6 +43,12 @@ if [ "${1:-}" = "--verifier" ]; then
       '! grep -qE "^[[:space:]]*set -- " "$ROOT/tools/recalage_de_la_chaine.sh"'
   chk "... les champs sont lus par read -r" \
       'grep -q "read -r PARCOURU" "$ROOT/tools/recalage_de_la_chaine.sh"'
+  # ⚠⚠ Le TEMOIN NEGATIF : sans plancher, « 35 % pose » n est pas interpretable. Mesure :
+  # le segment publie lit 30,6 points AU-DESSUS de son plancher, la chaine a 1 920 µm lit SOUS
+  # le sien. Le meme chiffre voulait dire deux choses opposees.
+  chk "le plancher est proposable" 'grep -q "PLANCHER:-" "$ROOT/tools/recalage_de_la_chaine.sh"'
+  chk "... et delegue a l outil" \
+      'grep -q -- "--plancher" "$ROOT/tools/recalage_de_la_chaine.sh"'
   # ⚠⚠ « hors boite » et « sans matiere » sont deux faits OPPOSES. Les confondre ferait lire
   # « je n ai pas telecharge cette region » comme « le rouleau est vide la », et une chaine
   # qui avance sort de la boite PAR CONSTRUCTION. Paye au premier tirage : les maillons
@@ -58,6 +64,16 @@ fi
 ZARR="${ZARR:?ZARR requis — une boite de prediction locale (tools/fetch_zarr_boite.py)}"
 NIVEAU="${NIVEAU:?NIVEAU requis — celui de la boite, jamais defaute}"
 PORTEE="${PORTEE:-4}"
+# ⚠⚠ PLANCHER : le TEMOIN NEGATIF, en rayon de voxels. Sans lui, « 35 % pose » n est pas
+# interpretable -- une nappe posee n importe ou dans un volume dont un quart est de la matiere
+# en trouve sous une partie de ses points. Mesure : le segment publie lit 78,9 % contre un
+# plancher de 48,4 %, la chaine a 1 920 µm lit 35,4 % contre un plancher de 37,1 % -- soit
+# SOUS le hasard. Le meme chiffre voulait dire deux choses opposees.
+# ⚠ Le plancher est mesure PAR MAILLAGE et non une fois pour toutes : il depend de la densite
+# locale de matiere, et les deux mesures ci-dessus en different de onze points.
+# ⚠ Il coute trois recalages de plus par maillage : opt-in.
+PLANCHER="${PLANCHER:-}"
+TIRAGES="${TIRAGES:-3}"
 SPIRE="${SPIRE:-173}"
 JSON="${JSON:-$ROOT/docs/recalage_de_la_chaine.json}"
 [ "$#" -gt 0 ] || { echo "usage : … tools/recalage_de_la_chaine.sh <tifxyz>..." >&2; exit 2; }
@@ -67,8 +83,8 @@ JSON="${JSON:-$ROOT/docs/recalage_de_la_chaine.json}"
 # compteur si on ne les sépare pas -- et une chaîne qui avance SORT de la boîte par
 # construction. Payé au premier tirage : les maillons lointains rapportaient 66 % de points
 # sans matière alors qu ils étaient simplement hors de ce qui avait été récupéré.
-printf '%-26s %9s %8s %8s %8s %8s %7s %8s\n' \
-  "maillage" "parcouru" "recalés" "hors-b" "sans-mat" "borne" "crête" "demande"
+printf '%-26s %9s %8s %8s %8s %8s %7s %8s %9s\n' \
+  "maillage" "parcouru" "recalés" "hors-b" "sans-mat" "borne" "crête" "demande" "plancher"
 TMP=$(mktemp)
 trap 'rm -f "$TMP"' EXIT
 echo "[" > "$TMP"
@@ -76,8 +92,11 @@ PREMIER=1
 for D in "$@"; do
   [ -f "$D/meta.json" ] || { echo "  ⚠ $D : pas de meta.json" >&2; continue; }
   J=$(mktemp)
+  ARG_PL=()
+  [ -n "$PLANCHER" ] && ARG_PL=(--plancher "$PLANCHER" --tirages "$TIRAGES")
   uv run --project "$ROOT" python "$ROOT/analysis/src/recaler_sur_la_matiere.py" "$D" \
       --zarr "$ZARR" --niveau "$NIVEAU" --portee "$PORTEE" --spire-um "$SPIRE" \
+      "${ARG_PL[@]}" \
       --json "$J" > /dev/null 2>&1 || { echo "  ⚠ $D : recalage échoué" >&2; rm -f "$J"; continue; }
   L=$(python3 -c "
 import json, sys
@@ -86,16 +105,18 @@ m = json.load(open(sys.argv[2]))
 print(round(float(m.get('parcouru_vox', 0.0)) * 2.4, 1), c['recales'], c['hors_boite'],
       c['sans_matiere'], c['borne_atteinte'], round(c.get('crete_mediane', 0.0), 2),
       round(c.get('deplacement_median_vox', 0.0), 2), round(c.get('part_vers_le_plus', 0.0), 2),
-      c['points'])
+      c['points'], round((c.get('plancher') or {}).get('plancher_median') or -1.0, 4))
 " "$J" "$D/meta.json")
   # ⚠⚠ Des variables NOMMEES et pas `set -- $L`. Ce depot a deja paye deux fois la meme
   # classe : `$1` desigme les arguments du contexte courant, pas ceux qu on croit -- ici la
   # liste de maillages elle-meme. Sept champs lus dans sept noms, aucune ambiguite possible.
   # ⚠ `points` voyage aussi : sans le TOTAL, aucune part n'est calculable en aval, et une
   # figure qui devrait deviner le dénominateur finirait par le coder en dur.
-  read -r PARCOURU RECALES HORSB SANSMAT BORNE CRETE DEMANDE PART POINTS <<<"$L"
-  printf '%-26s %9s %8s %8s %8s %8s %7s %8s\n' "$(basename "$D")" \
-    "$PARCOURU" "$RECALES" "$HORSB" "$SANSMAT" "$BORNE" "$CRETE" "$DEMANDE"
+  read -r PARCOURU RECALES HORSB SANSMAT BORNE CRETE DEMANDE PART POINTS PLANCHER_M <<<"$L"
+  AFF_PL="—"
+  [ "$PLANCHER_M" != "-1.0" ] && AFF_PL=$(python3 -c "print(f'{$PLANCHER_M*100:.1f} %')")
+  printf '%-26s %9s %8s %8s %8s %8s %7s %8s %9s\n' "$(basename "$D")" \
+    "$PARCOURU" "$RECALES" "$HORSB" "$SANSMAT" "$BORNE" "$CRETE" "$DEMANDE" "$AFF_PL"
   # ⚠ Un maillage majoritairement hors boîte ne rapporte RIEN sur le rouleau : le dire ici
   # plutôt que de laisser lire ses autres colonnes comme des mesures.
   if [ "$HORSB" -gt "$RECALES" ]; then
@@ -103,8 +124,8 @@ print(round(float(m.get('parcouru_vox', 0.0)) * 2.4, 1), c['recales'], c['hors_b
   fi
   [ "$PREMIER" = 1 ] || echo "," >> "$TMP"
   PREMIER=0
-  printf '{"maillage": "%s", "parcouru_um": %s, "points": %s, "recales": %s, "hors_boite": %s, "sans_matiere": %s, "borne": %s, "crete": %s, "demande_vox": %s, "part_vers_le_plus": %s}' \
-    "$(basename "$D")" "$PARCOURU" "$POINTS" "$RECALES" "$HORSB" "$SANSMAT" "$BORNE" "$CRETE" "$DEMANDE" "$PART" >> "$TMP"
+  printf '{"maillage": "%s", "parcouru_um": %s, "points": %s, "recales": %s, "hors_boite": %s, "sans_matiere": %s, "borne": %s, "crete": %s, "demande_vox": %s, "part_vers_le_plus": %s, "plancher": %s}' \
+    "$(basename "$D")" "$PARCOURU" "$POINTS" "$RECALES" "$HORSB" "$SANSMAT" "$BORNE" "$CRETE" "$DEMANDE" "$PART" "$PLANCHER_M" >> "$TMP"
   rm -f "$J"
 done
 echo "]" >> "$TMP"

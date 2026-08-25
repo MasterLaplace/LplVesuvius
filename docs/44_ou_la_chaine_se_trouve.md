@@ -700,6 +700,24 @@ chaîne a encore un sens à cette distance. `--plancher` le mesure : la **même*
 en bloc dans une direction tirée au sort, plusieurs fois. Forme, densité de points et
 échantillonnage identiques ; seule sa place est fausse.
 
+| nappe | posé | **plancher du hasard** | verdict |
+|---|---:|---:|---|
+| **segment publié** | **78,9 %** | 48,4 % (max 55,3) | ⭐ **+30,6 points** |
+| **chaîne à 1 920 µm** | 35,4 % | **37,1 %** (max 37,9) | ⚠⚠ **SOUS le hasard** |
+
+> ⚠⚠⚠ **« 35 % » voulait donc dire COMPLÈTEMENT perdue, pas à moitié.** À 1 920 µm la nappe
+> enchaînée lit **moins** de matière qu'une nappe de même forme jetée au hasard à 300 voxels de
+> là : elle ne porte plus aucune information sur l'endroit où est le papyrus.
+>
+> ⭐ Et le témoin positif tient dans la même mesure : le segment **publié** est à **30,6 points
+> au-dessus** de son propre plancher. L'instrument sait donc distinguer les deux, ce qui est la
+> seule raison de le croire quand il dit « perdue ».
+
+⚠ **Les deux planchers diffèrent de onze points** (48,4 contre 37,1), parce que la densité
+locale de matière n'est pas la même aux deux endroits. C'est pour ça que le plancher se mesure
+**par maillage** et jamais une fois pour toutes : un plancher global aurait déclaré la chaîne
+« au-dessus du hasard » en lui appliquant la densité d'un autre quartier du rouleau.
+
 #### ⭐⭐⭐ Et le remède n'est PAS spéculatif : il est mesuré ailleurs, à 2,4 mm
 
 [`41`](41_marcher_le_long_dune_nappe.md) §6 fait exactement le geste qui manque — suivre la
@@ -1604,6 +1622,12 @@ tools/fetch_zarr_boite.py "$PREDICTION_PS256" data/pred_ps256_niv2 --niveau 2 \
 ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 tools/recalage_de_la_chaine.sh \
   data/temoin_rendu/morceaux/morceau_00 data/chaine_courte/maillon_3 \
   data/chaine_courte/direct data/chaine_longue_95/maillon_{5,6,8}
+
+# LE PLANCHER DU HASARD — sans lui, aucun « % posé » n'est interprétable
+ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 PLANCHER=300 TIRAGES=3 \
+  JSON=$PWD/docs/recalage_avec_plancher.json tools/recalage_de_la_chaine.sh \
+  data/temoin_rendu/morceaux/morceau_00 data/chaine_pas_fixe/maillon_{3,5,8,20} \
+  data/chaine_pas_fixe/direct
 
 # La figure du contact avec la matière (l'horizon géométrique en repère)
 uv run --project . python analysis/src/figure_matiere_de_la_chaine.py \
