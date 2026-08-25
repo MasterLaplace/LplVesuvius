@@ -1,0 +1,5 @@
+[
+{"maillage": "maillon_30", "parcouru_um": 2880.0, "points": 14280, "recales": 5447, "hors_boite": 0, "sans_matiere": 6418, "borne": 2415, "crete": 2.37, "demande_vox": 0.06, "part_vers_le_plus": 0.5, "plancher": 0.4307},
+{"maillage": "maillon_40", "parcouru_um": 3840.0, "points": 14280, "recales": 4589, "hors_boite": 0, "sans_matiere": 7115, "borne": 2576, "crete": 2.33, "demande_vox": 0.06, "part_vers_le_plus": 0.48, "plancher": 0.4104},
+{"maillage": "maillon_50", "parcouru_um": 4800.0, "points": 14280, "recales": 4159, "hors_boite": 0, "sans_matiere": 7574, "borne": 2547, "crete": 2.32, "demande_vox": 0.06, "part_vers_le_plus": 0.5, "plancher": 0.4027},
+{"maillage": "maillon_60", "parcouru_um": 5760.0, "points": 14280, "recales": 4013, "hors_boite": 0, "sans_matiere": 7712, "borne": 2555, "crete": 2.33, "demande_vox": 0.06, "part_vers_le_plus": 0.5, "plancher": 0.3913}]

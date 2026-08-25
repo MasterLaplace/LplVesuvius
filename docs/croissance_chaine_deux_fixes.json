@@ -168,11 +168,331 @@
     "rapport_pas": null
   },
   {
+    "maillage": "maillon_21",
+    "volume_vox": 20026068794.5167,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.9956070605906426,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_22",
+    "volume_vox": 20511119049.09033,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 2.043942543840029,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_23",
+    "volume_vox": 20917153308.223255,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 2.084404046428556,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_24",
+    "volume_vox": 21179631052.888676,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 2.1105600756461147,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_25",
+    "volume_vox": 21594142938.29548,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 2.151866377632007,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_26",
+    "volume_vox": 22173717953.863964,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 2.2096212972359526,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_27",
+    "volume_vox": 22660284019.28826,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 2.2581078317409378,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_28",
+    "volume_vox": 23094254217.27199,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 2.3013531636165268,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_29",
+    "volume_vox": 22890768867.25985,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 2.2810757539372903,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_30",
+    "volume_vox": 22946211576.02498,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 2.286600645627478,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_31",
+    "volume_vox": 23673854136.11723,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 2.359110564843572,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_32",
+    "volume_vox": 24822048508.379467,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 2.473528667553993,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_33",
+    "volume_vox": 25845906521.135765,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 2.5755565942661103,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_34",
+    "volume_vox": 26176459061.456223,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 2.6084963085020014,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_35",
+    "volume_vox": 26741657103.679016,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 2.664818556031714,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_36",
+    "volume_vox": 27522597863.524395,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 2.742639665618493,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_37",
+    "volume_vox": 28717949658.098164,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 2.8617570273741992,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_38",
+    "volume_vox": 29936995693.378017,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 2.9832355312259193,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_39",
+    "volume_vox": 31114888669.749897,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 3.1006131136354766,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_40",
+    "volume_vox": 32625661765.335506,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 3.2511623545991615,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_41",
+    "volume_vox": 34016025568.348816,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 3.389712753609212,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_42",
+    "volume_vox": 35125795037.17823,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 3.5003017968382206,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_43",
+    "volume_vox": 35915046326.96506,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 3.578951054595196,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_44",
+    "volume_vox": 36697172992.827896,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 3.6568903402676525,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_45",
+    "volume_vox": 37193594430.61107,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 3.7063589672075494,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_46",
+    "volume_vox": 37936635958.56156,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 3.7804034007259277,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_47",
+    "volume_vox": 39314966571.2409,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 3.9177546867279136,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_48",
+    "volume_vox": 40719513461.44191,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 4.057718436966464,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_49",
+    "volume_vox": 41812747031.62927,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 4.166659670212301,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_50",
+    "volume_vox": 42875399542.976,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 4.2725534867350206,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_51",
+    "volume_vox": 44259009756.04301,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 4.410430887368832,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_52",
+    "volume_vox": 45642871721.722145,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 4.548333375267419,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_53",
+    "volume_vox": 46949686782.31118,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 4.6785581032735335,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_54",
+    "volume_vox": 48336448306.40502,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 4.816749533515442,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_55",
+    "volume_vox": 49428077940.469696,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 4.925530933781376,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_56",
+    "volume_vox": 50169995049.85232,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 4.999463318466999,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_57",
+    "volume_vox": 50874788211.492065,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 5.069696284510209,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_58",
+    "volume_vox": 51937935676.729485,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 5.175639423418119,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_59",
+    "volume_vox": 52747556975.589294,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 5.256318562044247,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_60",
+    "volume_vox": 53390355003.990456,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 5.320373684253871,
+    "rapport_pas": null
+  },
+  {
     "maillage": "direct",
-    "volume_vox": 12092348364.263868,
+    "volume_vox": 29825676279.027847,
     "points": 14280,
-    "pas_voxels": 800.0,
-    "rapport": 1.2050081332714737,
+    "pas_voxels": 2400.0,
+    "rapport": 2.9721424998607797,
     "rapport_pas": 1.0
   }
 ]
