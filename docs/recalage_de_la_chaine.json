@@ -1,0 +1,8 @@
+[
+{"maillage": "morceau_00", "parcouru_um": 0.0, "recales": 8248, "sans_matiere": 3009, "borne": 3023, "crete": 2.63, "demande_vox": 7.0, "part_vers_le_plus": 0.59},
+{"maillage": "maillon_3", "parcouru_um": 286.3, "recales": 8003, "sans_matiere": 3019, "borne": 3258, "crete": 2.64, "demande_vox": 6.95, "part_vers_le_plus": 0.58},
+{"maillage": "direct", "parcouru_um": 285.7, "recales": 7035, "sans_matiere": 3509, "borne": 3736, "crete": 2.65, "demande_vox": 6.78, "part_vers_le_plus": 0.61},
+{"maillage": "maillon_5", "parcouru_um": 481.1, "recales": 6386, "sans_matiere": 4074, "borne": 3820, "crete": 2.65, "demande_vox": 7.22, "part_vers_le_plus": 0.54},
+{"maillage": "maillon_6", "parcouru_um": 586.8, "recales": 4486, "sans_matiere": 5996, "borne": 3798, "crete": 2.71, "demande_vox": 7.5, "part_vers_le_plus": 0.52},
+{"maillage": "maillon_8", "parcouru_um": 887.3, "recales": 2358, "sans_matiere": 9193, "borne": 2729, "crete": 2.68, "demande_vox": 8.55, "part_vers_le_plus": 0.5},
+{"maillage": "maillon_10", "parcouru_um": 1671.4, "recales": 2276, "sans_matiere": 9398, "borne": 2606, "crete": 2.51, "demande_vox": 8.12, "part_vers_le_plus": 0.51}]

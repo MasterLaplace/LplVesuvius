@@ -43,6 +43,14 @@ if [ "${1:-}" = "--verifier" ]; then
       '! grep -qE "^[[:space:]]*set -- " "$ROOT/tools/recalage_de_la_chaine.sh"'
   chk "... les champs sont lus par read -r" \
       'grep -q "read -r PARCOURU" "$ROOT/tools/recalage_de_la_chaine.sh"'
+  # ⚠⚠ « hors boite » et « sans matiere » sont deux faits OPPOSES. Les confondre ferait lire
+  # « je n ai pas telecharge cette region » comme « le rouleau est vide la », et une chaine
+  # qui avance sort de la boite PAR CONSTRUCTION. Paye au premier tirage : les maillons
+  # lointains rapportaient 66 % de points sans matiere en etant simplement hors boite.
+  chk "hors boite est rapporte a part" \
+      'grep -q "hors_boite" "$ROOT/tools/recalage_de_la_chaine.sh"'
+  chk "... et une boite trop petite est DENONCEE" \
+      'grep -q "HORS BOITE" "$ROOT/tools/recalage_de_la_chaine.sh"'
   echo "$([ $ok = 0 ] && echo 'ALL PASS' || echo FAILURES) ($ok failures, $n checks)"
   exit $ok
 fi
@@ -54,8 +62,13 @@ SPIRE="${SPIRE:-173}"
 JSON="${JSON:-$ROOT/docs/recalage_de_la_chaine.json}"
 [ "$#" -gt 0 ] || { echo "usage : … tools/recalage_de_la_chaine.sh <tifxyz>..." >&2; exit 2; }
 
-printf '%-26s %9s %9s %9s %9s %8s %8s\n' \
-  "maillage" "parcouru" "recalés" "sans-mat" "borne" "crête" "demande"
+# ⚠⚠ `hors boîte` EST UNE COLONNE, pas un détail. « Le rouleau n a pas de matière là » et
+# « je n ai pas téléchargé cette région » sont deux faits opposés qui remplissent le même
+# compteur si on ne les sépare pas -- et une chaîne qui avance SORT de la boîte par
+# construction. Payé au premier tirage : les maillons lointains rapportaient 66 % de points
+# sans matière alors qu ils étaient simplement hors de ce qui avait été récupéré.
+printf '%-26s %9s %8s %8s %8s %8s %7s %8s\n' \
+  "maillage" "parcouru" "recalés" "hors-b" "sans-mat" "borne" "crête" "demande"
 TMP=$(mktemp)
 trap 'rm -f "$TMP"' EXIT
 echo "[" > "$TMP"
@@ -70,20 +83,28 @@ for D in "$@"; do
 import json, sys
 c = json.load(open(sys.argv[1]))
 m = json.load(open(sys.argv[2]))
-print(round(float(m.get('parcouru_vox', 0.0)) * 2.4, 1), c['recales'], c['sans_matiere'],
-      c['borne_atteinte'], round(c.get('crete_mediane', 0.0), 2),
-      round(c.get('deplacement_median_vox', 0.0), 2), round(c.get('part_vers_le_plus', 0.0), 2))
+print(round(float(m.get('parcouru_vox', 0.0)) * 2.4, 1), c['recales'], c['hors_boite'],
+      c['sans_matiere'], c['borne_atteinte'], round(c.get('crete_mediane', 0.0), 2),
+      round(c.get('deplacement_median_vox', 0.0), 2), round(c.get('part_vers_le_plus', 0.0), 2),
+      c['points'])
 " "$J" "$D/meta.json")
   # ⚠⚠ Des variables NOMMEES et pas `set -- $L`. Ce depot a deja paye deux fois la meme
   # classe : `$1` desigme les arguments du contexte courant, pas ceux qu on croit -- ici la
   # liste de maillages elle-meme. Sept champs lus dans sept noms, aucune ambiguite possible.
-  read -r PARCOURU RECALES SANSMAT BORNE CRETE DEMANDE PART <<<"$L"
-  printf '%-26s %9s %9s %9s %9s %8s %8s\n' "$(basename "$D")" \
-    "$PARCOURU" "$RECALES" "$SANSMAT" "$BORNE" "$CRETE" "$DEMANDE"
+  # ⚠ `points` voyage aussi : sans le TOTAL, aucune part n'est calculable en aval, et une
+  # figure qui devrait deviner le dénominateur finirait par le coder en dur.
+  read -r PARCOURU RECALES HORSB SANSMAT BORNE CRETE DEMANDE PART POINTS <<<"$L"
+  printf '%-26s %9s %8s %8s %8s %8s %7s %8s\n' "$(basename "$D")" \
+    "$PARCOURU" "$RECALES" "$HORSB" "$SANSMAT" "$BORNE" "$CRETE" "$DEMANDE"
+  # ⚠ Un maillage majoritairement hors boîte ne rapporte RIEN sur le rouleau : le dire ici
+  # plutôt que de laisser lire ses autres colonnes comme des mesures.
+  if [ "$HORSB" -gt "$RECALES" ]; then
+    echo "   ⚠⚠ $(basename "$D") : plus de points HORS BOITE que recales — élargir la boîte" >&2
+  fi
   [ "$PREMIER" = 1 ] || echo "," >> "$TMP"
   PREMIER=0
-  printf '{"maillage": "%s", "parcouru_um": %s, "recales": %s, "sans_matiere": %s, "borne": %s, "crete": %s, "demande_vox": %s, "part_vers_le_plus": %s}' \
-    "$(basename "$D")" "$PARCOURU" "$RECALES" "$SANSMAT" "$BORNE" "$CRETE" "$DEMANDE" "$PART" >> "$TMP"
+  printf '{"maillage": "%s", "parcouru_um": %s, "points": %s, "recales": %s, "hors_boite": %s, "sans_matiere": %s, "borne": %s, "crete": %s, "demande_vox": %s, "part_vers_le_plus": %s}' \
+    "$(basename "$D")" "$PARCOURU" "$POINTS" "$RECALES" "$HORSB" "$SANSMAT" "$BORNE" "$CRETE" "$DEMANDE" "$PART" >> "$TMP"
   rm -f "$J"
 done
 echo "]" >> "$TMP"

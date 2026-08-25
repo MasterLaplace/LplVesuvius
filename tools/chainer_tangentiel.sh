@@ -56,6 +56,19 @@ if [ "${1:-}" = "--verifier" ]; then
         -lt "$(grep -n "profiler_une_surface.sh" "$ROOT/tools/chainer_tangentiel.sh" | tail -1 | cut -d: -f1)" ]'
   chk "PROFILS=0 permet de s arreter la" \
       'grep -q "PROFILS:-1" "$ROOT/tools/chainer_tangentiel.sh"'
+  # ⚠⚠ La chaine CORRIGEE : projeter puis reposer sur la matiere avant de repartir.
+  # Sans le recalage, la chaine est purement geometrique et son horizon est mesure a 580 µm.
+  chk "RECALER=1 existe" 'grep -q "RECALER:-0" "$ROOT/tools/chainer_tangentiel.sh"'
+  chk "... et delegue le recalage" \
+      'grep -q "recaler_sur_la_matiere.py" "$ROOT/tools/chainer_tangentiel.sh"'
+  # ⚠ Le niveau de pyramide n a PAS de defaut : une coordonnee de niveau 2 lue au niveau 0
+  # designe un point quatre fois plus proche de l origine, dans le vide (`54`).
+  chk "... en exigeant le niveau" 'grep -q "NIVEAU:?" "$ROOT/tools/chainer_tangentiel.sh"'
+  chk "... et la boite" 'grep -q "ZARR:?" "$ROOT/tools/chainer_tangentiel.sh"'
+  # ⚠⚠ Le maillon RECALE est ce qui alimente le suivant, sinon la correction serait
+  # ecrite puis jetee et la chaine resterait geometrique en ayant l air corrigee.
+  chk "... et le maillon recale alimente le suivant" \
+      'grep -q "CIBLE=\"\$DEST/projete_" "$ROOT/tools/chainer_tangentiel.sh"'
   echo "$([ $ok = 0 ] && echo 'ALL PASS' || echo FAILURES) ($ok failures, $n checks)"
   exit $ok
 fi
@@ -72,13 +85,36 @@ DIRECT=$((PAS * MAILLONS))
 mkdir -p "$DEST"
 echo "== chaîne : $MAILLONS maillons de $PAS pas  ·  témoin : un bond direct de $DIRECT pas"
 
+# ⚠⚠ RECALER=1 : la chaine CORRIGEE. Chaque maillon est reprojete puis **repose sur la
+# matiere** avant de servir de source au suivant. C est le geste que `44` nomme comme le seul
+# qui puisse depasser l horizon geometrique de 580 µm, et que `41` §6 mesure deja sur une
+# ligne (2,4 mm, arretee parce que le bloc se termine).
+# ⚠ Le maillon recale REMPLACE le maillon projete dans la chaine, dans son propre DEST : la
+# chaine pure garde le sien, donc les deux restent comparables ligne a ligne. Melanger les deux
+# dans un meme dossier rendrait impossible de dire lequel a produit un chiffre.
+RECALER="${RECALER:-0}"
+if [ "$RECALER" = 1 ]; then
+  : "${ZARR:?RECALER=1 exige ZARR — une boite de prediction locale}"
+  : "${NIVEAU:?RECALER=1 exige NIVEAU — celui de la boite, jamais defaute}"
+fi
+PORTEE="${PORTEE:-4}"
+SPIRE="${SPIRE:-173}"
+
 COURANT="$SOURCE"
 for M in $(seq 1 "$MAILLONS"); do
   D="$DEST/maillon_$M"
   if [ ! -f "$D/meta.json" ]; then
+    CIBLE="$D"
+    [ "$RECALER" = 1 ] && CIBLE="$DEST/projete_$M"
     uv run --project "$ROOT" python "$ROOT/analysis/src/projeter_tangentiel.py" \
-        "$COURANT" --dest "$D" --pas "$PAS" > "$D.log" 2>&1 \
+        "$COURANT" --dest "$CIBLE" --pas "$PAS" > "$D.log" 2>&1 \
       || { echo "   ⚠ maillon $M échoué — la chaîne s arrête là" >&2; break; }
+    if [ "$RECALER" = 1 ]; then
+      uv run --project "$ROOT" python "$ROOT/analysis/src/recaler_sur_la_matiere.py" \
+          "$CIBLE" --zarr "$ZARR" --niveau "$NIVEAU" --portee "$PORTEE" --spire-um "$SPIRE" \
+          --dest "$D" >> "$D.log" 2>&1 \
+        || { echo "   ⚠ recalage du maillon $M échoué — la chaîne s arrête là" >&2; break; }
+    fi
   fi
   # ⚠⚠ LE MAILLON SUIVANT PART D ICI. Repartir de `$SOURCE` a chaque fois donnerait des
   # projections independantes de longueurs croissantes, c est-a-dire l experience deja faite,

@@ -575,6 +575,45 @@ d'abord comme ça. Vingt maillons de 95 µm, mode `PROFILS=0` :
 - ⚠ **Ce plancher tient toujours** : ces vingt maillons projettent **purement**, sans
   réoptimisation sur la matière. Ce qui est éliminé, c'est la chaîne **géométrique**.
 
+#### ⭐⭐⭐ Et la MATIÈRE est d'accord : à distance égale, la chaîne trouve plus de feuille que le bond
+
+Le profil demande un rendu ; la **matière** répond gratuitement. Pour chaque point d'une nappe,
+de combien la prédiction demanderait-elle de le bouger pour le poser sur la crête de sa feuille ?
+Une nappe déjà posée demande peu — et surtout, **elle trouve de la matière sous ses points**.
+
+⚠⚠ Le témoin est la moitié de la mesure : le segment **publié**, qui est sur sa feuille par
+construction. « La chaîne demande 7 voxels » ne veut rien dire tant qu'on ne sait pas que le
+segment publié en demande **7 aussi**.
+
+| maillage | parcouru | recalés | sans matière | crête | demande |
+|---|---:|---:|---:|---:|---:|
+| **source publiée** | 0 µm | 8 248 | 3 009 | 2,63 | 7,00 vox |
+| **chaîne, 3 × 95 µm** | 286 µm | ⭐ **8 003** | ⭐ **3 019** | 2,64 | 6,95 |
+| **bond direct** | 286 µm | 7 035 | **3 509** | 2,65 | 6,78 |
+| chaîne, 5 maillons | 481 µm | 6 386 | 4 074 | 2,65 | 7,22 |
+| chaîne, 6 maillons | 587 µm | 4 486 | ⚠ **5 996** | 2,71 | 7,50 |
+
+> ⭐⭐⭐ **Après trois maillons, la nappe demande presque exactement ce que la source publiée
+> demande** — 8 003 points recalés contre 8 248, crête 2,64 contre 2,63, déplacement 6,95
+> contre 7,00, 58 % vers +normale contre 59 %. Trois projections ne l'ont **pas décollée de la
+> matière**.
+>
+> ⭐⭐ **Et à la même distance, le bond direct en a 968 de moins.** C'est la **troisième**
+> confirmation indépendante du même fait — après l'amplitude et le pic au bord — et celle-ci
+> ne coûte **aucun rendu** et ne porte pas du tout sur la même grandeur.
+
+⚠⚠ **La matière s'épuise AVANT que la géométrie n'explose.** Le pas ne décroche qu'au sixième
+maillon, mais les points sans matière passent de 21 % (à 286 µm) à **29 %** (481) puis **42 %**
+(587). La nappe **quitte sa feuille avant de se détruire** — donc l'horizon utile est plus
+court que l'horizon géométrique.
+
+⚠ **Une réserve de méthode, trouvée en écrivant ceci** : les maillons les plus lointains
+sortent de la boîte de prédiction téléchargée, et « je n'ai pas cette région » remplissait le
+même compteur que « le rouleau est vide ici ». La campagne rapporte désormais **`hors boîte` en
+colonne propre** et refuse de laisser lire les autres colonnes d'un maillage majoritairement
+dehors. Les lignes ci-dessus sont dans la boîte ; celles au-delà de 600 µm attendent une boîte
+plus large.
+
 #### ⭐⭐⭐ Et le remède n'est PAS spéculatif : il est mesuré ailleurs, à 2,4 mm
 
 [`41`](41_marcher_le_long_dune_nappe.md) §6 fait exactement le geste qui manque — suivre la
@@ -1472,6 +1511,13 @@ SOURCE=$PWD/data/temoin_rendu/morceaux/morceau_00 PAS=2 MAILLONS=20 PROFILS=0 \
 for k in 1 2 3 4 5 6 7 8; do uv run --project . python analysis/src/ecart_de_maillages.py \
   data/temoin_rendu/morceaux/morceau_00 data/chaine_longue_95/maillon_$k --voxel-um 2.4 \
   | grep "écart médian"; done
+
+# La MATIÈRE : de combien chaque nappe demanderait-elle à bouger ? (aucun rendu)
+tools/fetch_zarr_boite.py "$PREDICTION_PS256" data/pred_ps256_niv2 --niveau 2 \
+  --boite 3308 4292 5207 6292 17572 18665
+ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 tools/recalage_de_la_chaine.sh \
+  data/temoin_rendu/morceaux/morceau_00 data/chaine_courte/maillon_3 \
+  data/chaine_courte/direct data/chaine_longue_95/maillon_{5,6,8}
 
 # La courbe de portée AVEC les nappes enchaînées superposées aux mêmes distances
 uv run --project . python analysis/src/figure_portee.py \

@@ -339,6 +339,24 @@ def verifier() -> int:
       str(cm["champ_max"]))
     (d / "0/0/0").write_bytes(vol.tobytes())
 
+    # ⚠⚠ LE CUMUL SURVIT AU RECALAGE. Un recalage déplace le long de la NORMALE, donc il ne
+    # fait pas avancer : la distance parcourue est inchangée. Sans ce report, une nappe recalée
+    # oublie d'où elle vient et la chaîne suivante recompte depuis zéro — ce qui poserait tous
+    # ses points de mesure au mauvais endroit de tout axe.
+    import projeter_tangentiel as _pt
+    d_out = racine / "sortie"
+    m_src = {"scale": [0.05, 0.05], "uuid": "src", "parcouru_vox": 123.0}
+    porte = {"recale_de": "src", **cpt}
+    porte["parcouru_vox"] = float(m_src["parcouru_vox"])
+    m_out = _pt.ecrire(sortie, m_src, d_out, porte)
+    v("le cumul survit au recalage", m_out.get("parcouru_vox") == 123.0,
+      str(m_out.get("parcouru_vox")))
+    v("... et la provenance est écrite", m_out.get("recale_de") == "src")
+    # ⚠ Le contrôle négatif : sans le report, le champ disparaît. C'est ce qui rend la ligne
+    # ci-dessus une mesure et pas une tautologie.
+    m_sans = _pt.ecrire(sortie, m_src, racine / "sortie2", {"recale_de": "src"})
+    v("... et sans report il DISPARAÎT", "parcouru_vox" not in m_sans)
+
     r, _ = rl.lire_region(racine, 0, (0, 0, 0), (n, n, n))
     v("la dalle du témoin est bien là", int(r.max()) == 255)
 
@@ -398,7 +416,15 @@ def main() -> int:
               f"({cpt['deplacement_median_vox'] * a.voxel_um:.1f} µm)   "
               f"p90 {cpt['deplacement_p90_vox']:.2f}   max {cpt['deplacement_max_vox']:.2f}")
     if a.dest:
-        pt.ecrire(sortie, meta, a.dest, {"recale_de": a.source.name, **cpt})
+        # ⚠⚠ `parcouru_vox` DOIT survivre au recalage. `ecrire` reconstruit un meta neuf à
+        # partir de `rendu` seul, donc sans cette ligne une nappe recalée **oublie d'où elle
+        # vient** et la chaîne suivante recompte sa distance depuis zéro. Le recalage déplace
+        # le long de la NORMALE : il ne fait pas avancer, donc la distance parcourue est
+        # inchangée — pas remise à zéro, pas augmentée.
+        porte = {"recale_de": a.source.name, **cpt}
+        if "parcouru_vox" in meta:
+            porte["parcouru_vox"] = float(meta["parcouru_vox"])
+        pt.ecrire(sortie, meta, a.dest, porte)
         print(f"écrit : {a.dest}")
     if a.json:
         a.json.write_text(json.dumps(cpt, indent=2, ensure_ascii=False) + "\n",

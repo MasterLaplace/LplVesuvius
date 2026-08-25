@@ -872,6 +872,7 @@ run "figure des appuis"        uv run --project "$ROOT/inference" python "$ROOT/
 # decalerait les deux series d un facteur deux et montrerait un desaccord qui n existe pas.
 run "figure de la pyramide"    uv run --project "$ROOT/inference" python "$ROOT/analysis/src/figure_pyramide.py" --verifier
 run "figure de l emballement"  uv run --project "$ROOT" python "$ROOT/analysis/src/figure_emballement.py" --verifier
+run "figure matiere chaine"    uv run --project "$ROOT" python "$ROOT/analysis/src/figure_matiere_de_la_chaine.py" --verifier
 # ⚠⚠ CES SIX BATTERIES N ONT JAMAIS TOURNE, et le garde-fou de la fin de ce fichier existe
 # pour ca. Quatre d entre elles imprimaient « tous les temoins passent » au lieu de
 # « ALL PASS » : les enregistrer sans corriger leur verdict n aurait rien lance non plus. Un
