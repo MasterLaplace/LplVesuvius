@@ -25,17 +25,53 @@ c'est le plus gros.
 | `tools/` | **73** | 8 359 | 624 K | 624 K |
 | `experiments/` | 16 | 3 464 | 624 K | **351 M** |
 | `tracecheck/` | 4 | 1 310 | 144 K | 144 K |
-| `htr/` | **1** | 185 | 264 K | **5,1 G** |
+| [`htr/`](https://github.com/MasterLaplace/LplVesuvius/tree/3caf6910914eedaca3b3b26a3b2ea206762d6a9f/htr) | **1** | 185 | 264 K | ~~5,1 G~~ **retiré le 2026-08-25** |
 | `inference_xpu/` | **1** | 169 | 128 K | **6,3 G** |
-| `inference/` | **0** | 0 | 256 K | **5,2 G** |
+| `inference/` | **0** | 0 | 256 K | ~~5,2 G~~ **256 K**, venv retiré |
 
-`htr/`, `inference/` et `inference_xpu/` ne portent **aucun code** ou presque : ce sont des
-`.venv`, **16,6 Go de paquets installés**. Ce qui donne l'impression d'une montagne est un
-environnement, pas un programme.
+[`htr/`](https://github.com/MasterLaplace/LplVesuvius/tree/3caf6910914eedaca3b3b26a3b2ea206762d6a9f/htr), `inference/` et `inference_xpu/` ne portent **aucun code** ou presque : ce sont des
+`.venv`. Ce qui donne l'impression d'une montagne est un environnement, pas un programme.
 
-⚠ Et `inference/` **sert** : c'est l'environnement le plus utilisé du dépôt, **25 sites
-d'appel** (`uv run --project inference`). Il porte torch/transformers pour l'inférence d'encre.
-Le supprimer casserait un quart des commandes.
+### ⚠⚠ Deux affirmations de ce paragraphe étaient FAUSSES — corrigées le 2026-08-25
+
+**1. Les « 16,6 Go » n'existent pas.** Le chiffre venait de trois `du -sh` invoqués séparément,
+et `du` ne peut pas voir ce qui se passe ici : `uv` installe ses paquets en **liens durs** vers
+`~/.cache/uv`. Un fichier de venv n'est donc pas une copie, c'est un **nom de plus** sur des
+octets déjà là, et supprimer le nom ne libère rien tant qu'il en reste un autre. Le compte de
+liens est la seule chose qui réponde, et voici sa réponse pour `htr/` + `inference/.venv` :
+
+| nlink | fichiers | octets | ce que ça veut dire |
+|---:|---:|---:|---|
+| 1 | 8 228 | **0,15 Gio** | exclusif → libéré tout de suite |
+| 2 | 42 994 | **4,09 Gio** | cache + ce venv → libéré après `uv cache prune` |
+| ≥ 3 | 9 516 | **3,06 Gio** | tenu par d'autres venvs → jamais libéré |
+
+Soit **4,24 Gio** de récupérable réel là où ce plan annonçait 16,6 : un facteur quatre. Et
+*rien* n'est libéré sans `uv cache prune`, qui touche une ressource **partagée avec le reste de
+la machine** et n'est donc pas une décision de ce dépôt. Calcul dans l'arbre —
+`analysis/src/poids_recuperable.py` (10 contrôles), résultat dans `docs/poids_recuperable.json`.
+
+**2. Les « 25 sites d'appel » n'étaient pas des besoins, c'étaient des EMPRUNTS.** Le motif
+écrit partout — *« le seul environnement du dépôt qui porte Pillow »* — était faux : la racine
+déclare `pillow>=10.0`. Pire, `inference/` **n'a pas `numcodecs`**, et c'est précisément ce trou
+qui a fait rendre vides tous les chunks *blosc* d'une prédiction, donc conclure à tort qu'une
+graine n'était pas couverte par la prédiction publiée (`analysis/src/zarr_depth.py`). Les
+scripts empruntaient un environnement **strictement plus pauvre** que celui d'où ils pouvaient
+tourner. Les 25 sites sont repointés sur la racine, et les **11 batteries** concernées passent
+depuis là — vérifié, pas supposé.
+
+**Ce qui est parti, et ce qui ne l'est pas.** `htr/` : un seul fichier, remplacé par
+`analysis/src/structure.py`, **zéro site d'appel** sous quelque orthographe que ce soit.
+`inference/` **reste** : son README argumente correctement qu'il est le témoin CPU contre lequel
+le ×4,5 iGPU a été validé à sortie identique, et une accélération qu'on ne peut plus vérifier
+n'est pas une accélération, c'est un changement de méthode non mesuré. Seul son venv part ;
+`pyproject.toml` et `uv.lock` restent versionnés, donc le témoin reste rejouable à la commande
+près. `inference_xpu/` reste entier : c'est l'environnement de l'encre, et l'encre est le
+prochain chantier nommé.
+
+⚠⚠ **Et la vraie montagne n'a jamais été là.** Le dépôt pèse **203 Gio**, dont **177 dans
+`data/`**. Les 4,24 Gio de venvs sont **2 %** du problème. Le lever, c'est le chantier A (97 Gio
+de rendus recalculés) et le B, pas celui-ci.
 
 ```bash
 for d in analysis experiments htr inference inference_xpu tools tracecheck; do
@@ -260,6 +296,40 @@ ls analysis/src/*.py tools/*.sh | wc -l   # x ce nombre
 ```
 
 ---
+
+### ⭐ L'outil qui rend les trois autres chantiers possibles — `permalien.py` (livré)
+
+Un ménage se heurte tout de suite à la même question : **un document cite un fichier qu'on
+retire, que devient la citation ?** La réponse évidente — un `sed` vers une URL GitHub —
+produit des liens morts *en silence*, ce que ce dépôt paie en boucle. Ce qui mérite du code
+n'est pas la fabrication de l'URL, qui tient en une ligne, c'est l'**invariant** :
+
+> ⭐ un permalien ne vaut que si son commit est **sur le distant** et que le chemin **existe**
+> à ce commit. Les deux sont vérifiables, donc ils sont vérifiés, jamais espérés.
+
+⚠ Le piège concret, mesuré : `HEAD` était **43 commits en avance** sur `origin/main`. Un lien
+vers `HEAD` aurait rendu 404 pour tout le monde sauf cette machine, et la panne ne se serait vue
+qu'après un `push`, c'est-à-dire trop tard pour la relier à sa cause. L'outil vise donc le
+commit le plus récent qui contient le chemin **et** qui est un ancêtre de la référence distante
+— aucun `push` requis, aucune attente.
+
+Trois refus délibérés, chacun une panne évitée : un chemin jamais poussé n'est **pas** lié et
+est **nommé** ; une mention dans un bloc de code reste intacte (`python htr/src/coherence.py`
+est une commande, pas une référence) ; une mention déjà liée n'est pas ré-enrobée, donc une
+seconde passe est un **no-op** — asserté.
+
+⚠⚠ **Et un fait mesuré qui borne ce que le lien promet : ce dépôt est PRIVÉ.** Sa racine GitHub
+rend 404 sans session, quand la même URL sur un dépôt public du même compte rend 200. Un
+permalien vaut donc pour l'auteur, pas pour un lecteur extérieur — acceptable dans un document
+interne, **piège dans un texte de soumission**, où un 404 est pire qu'un chemin mort : un chemin
+dit honnêtement « ce fichier était là », un lien cassé dit « ce lien est cassé ». La parade est
+dans la forme même de l'URL, qui porte le commit et le chemin **verbatim** : `git show
+<commit>:<chemin>` marche depuis n'importe quel clone, connecté ou non. Un contrôle le garantit.
+
+`analysis/src/permalien.py`, 34 contrôles, deux sondes (ignorer les blocs de code → 4 échecs ;
+laisser un préfixe mordre son voisin, donc confondre `inference` et `inference_xpu` → 1 échec).
+Il resservira aux chantiers **B** et **D**, qui déplacent respectivement des données et des
+documents.
 
 ## 4. ⚠⚠ Ce qu'on décide de NE PAS faire, et pourquoi
 

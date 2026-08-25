@@ -7,6 +7,47 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+## ⭐⭐⭐ MÉNAGE — état au 2026-08-25 (nuit) : `htr/` retiré, les 25 emprunts repointés
+
+Premier morceau du grand ménage ([`56`](docs/56_le_grand_menage.md)). Deux modules neufs, une
+suppression, et **deux chiffres du plan corrigés d'un facteur quatre**.
+
+### Ce qui est parti, et ce qui reste — avec la raison à chaque fois
+
+| | verdict | preuve |
+|---|---|---|
+| `htr/` | **retiré** | un seul fichier, remplacé par `analysis/src/structure.py`, **zéro site d'appel** sous quelque orthographe |
+| `inference/` | **reste**, venv retiré | son README argumente qu'il est le **témoin CPU** du ×4,5 iGPU validé à sortie identique ; `pyproject`+`uv.lock` versionnés → rejouable |
+| `inference_xpu/` | **reste entier** | c'est l'environnement de l'encre, et l'encre est le prochain chantier nommé |
+
+### ⚠⚠ Deux mesures qui contredisent le plan
+
+**`du` ment ici d'un facteur quatre.** `uv` installe en **liens durs** vers `~/.cache/uv`, donc
+un fichier de venv est un *nom de plus* sur des octets déjà là. Retirer `htr/` + `inference/.venv`
+libère **0,15 Gio tout de suite**, 4,09 de plus **seulement après `uv cache prune`** (non lancé :
+c'est une ressource partagée avec la machine, pas une décision du dépôt), et 3,06 **jamais**.
+Soit 4,24 Gio, pas 16,6. Calcul dans l'arbre : `analysis/src/poids_recuperable.py`.
+
+**Les « 25 sites d'appel » d'`inference/` étaient des EMPRUNTS, pas des besoins.** Le motif écrit
+partout — *« le seul environnement porteur de Pillow »* — était faux (la racine déclare
+`pillow>=10.0`) et **nuisible** : `inference/` n'a pas `numcodecs`, le trou exact qui avait fait
+conclure à tort qu'une graine n'était pas couverte. Les 25 sont repointés sur la racine ; les
+**11 batteries** concernées passent depuis là.
+
+### ⭐ `analysis/src/permalien.py` — l'outil que les chantiers B et D réutiliseront
+
+Son invariant : *un permalien ne vaut que si son commit est **sur le distant** et que le chemin
+**existe** à ce commit.* ⚠ `HEAD` était **43 commits en avance** sur `origin/main` — un lien vers
+`HEAD` aurait rendu 404 partout ailleurs qu'ici, et la panne ne se serait vue qu'après un push.
+⚠⚠ Et **ce dépôt est privé** (mesuré : racine 404 sans session, dépôt public du même compte 200),
+donc le lien vaut pour l'auteur et pas pour un lecteur extérieur — d'où le contrôle qu'il porte
+le commit et le chemin **verbatim**, pour que `git show <commit>:<chemin>` s'en déduise hors ligne.
+
+⚠ **La vraie montagne n'est pas là** : 203 Gio de dépôt, dont **177 dans `data/`**. Les venvs
+sont 2 % du problème ; le levier reste le chantier A (97 Gio de rendus recalculés).
+
+---
+
 ## ⭐⭐⭐⭐ REPRISE — état au 2026-08-25 (soir) : LA CHAÎNE TANGENTIELLE MARCHE
 
 Le mur « l'extension tangentielle est un point fixe » a **une** cause qui marche, et elle a
@@ -1008,7 +1049,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./tools/temoins.sh                      # 109 batteries, 2899 contrôles hors ligne, tous verts
+./tools/temoins.sh                      # 111 batteries, 2943 contrôles hors ligne, tous verts
 ./tools/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)

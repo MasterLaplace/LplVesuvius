@@ -21,6 +21,29 @@ Deux copies d'un même script sont deux occasions de diverger, et celle-ci n'ava
 pas de raison d'être : le script gérait déjà les deux appareils. La copie est
 supprimée.
 
+## ⚠ Le venv n'est plus gardé chaud (2026-08-25)
+
+Ce dossier a longtemps été **emprunté** par 25 sites d'appel — figures, mosaïque, batteries —
+au motif écrit partout que c'était *le seul environnement porteur de Pillow*. C'était **faux** :
+la racine déclare `pillow>=10.0`. Et c'était **nuisible**, parce qu'`inference/` n'a pas
+`numcodecs` : c'est exactement ce trou qui a fait rendre vides tous les chunks *blosc* d'une
+prédiction, et conclure — en le mesurant, en l'écrivant — qu'une graine n'était pas couverte
+(cf. la docstring de `analysis/src/zarr_depth.py`). Une panne d'installation avait pris la
+forme d'un fait sur le rouleau.
+
+Les 25 emprunts sont repointés sur la **racine**, qui porte PIL, numcodecs, numpy, scipy et
+tifffile — strictement plus. Le `.venv` d'ici est supprimé : garder chaud 4 Gio de paquets pour
+un rôle de témoin qu'on exerce deux fois par an ne se justifie pas.
+
+⭐ **Le rôle, lui, ne change pas.** `pyproject.toml` et `uv.lock` restent versionnés, donc le
+témoin est **rejouable à la commande près** — c'est ce qui compte, pas la présence du venv sur
+le disque. Un `uv sync` le reconstruit.
+
+⚠ Ce que la suppression libère vraiment : **0,08 Gio tout de suite**, et 4,09 Gio de plus
+seulement après un `uv cache prune`, parce qu'`uv` installe en **liens durs** vers son cache.
+Mesuré par `analysis/src/poids_recuperable.py`, pas estimé par `du`, qui se trompe ici d'un
+facteur quatre.
+
 ## Lancer le chemin CPU
 
 ```bash

@@ -2,7 +2,11 @@
 """Y a-t-il de l'ECRITURE dans cette region, ou seulement du signal ?
 
 Reprise de `htr/src/coherence.py`, qui avait echoue, avec le diagnostic de son
-echec applique. Trois corrections, chacune correspondant a une cause identifiee :
+echec applique. ⚠ `htr/` a ete RETIRE de l'arbre le 2026-08-25 : un seul fichier,
+remplace par celui-ci, zero site d'appel. Il reste lisible sans reseau --
+`git show 3caf6910914e:htr/src/coherence.py`.
+
+Trois corrections, chacune correspondant a une cause identifiee :
 
 1. **L'axe.** Sur ce segment les lignes de texte courent le long des LIGNES du
    tableau, pas des colonnes -- verifie sur la verite terrain tracee a la main

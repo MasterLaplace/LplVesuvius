@@ -136,7 +136,7 @@ détecteur.**
 Idée : ce qui distingue de l'écriture de taches est **structurel** et non
 linguistique — lignes régulièrement espacées, épaisseur de trait constante, hauteur
 de caractère constante. Aucune de ces grandeurs ne demande de savoir lire, donc
-aucune ne peut inventer un sens. Implémenté dans `htr/src/coherence.py`.
+aucune ne peut inventer un sens. Implémenté dans [`htr/src/coherence.py`](https://github.com/MasterLaplace/LplVesuvius/blob/3caf6910914eedaca3b3b26a3b2ea206762d6a9f/htr/src/coherence.py).
 
 Mesuré, et **il ne discrimine pas** :
 
