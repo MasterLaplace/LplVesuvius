@@ -289,7 +289,15 @@ def verifier() -> int:
           commit_publie(racine, "ce/chemin/nexiste/pas.py") is None)
         if c:
             v("le genre d'un fichier est blob", genre_au_commit(racine, c, "README.md") == "blob")
-            v("le genre d'un dossier est tree", genre_au_commit(racine, c, "analysis") == "tree")
+            # ⚠⚠ Le dossier temoin doit exister DANS LE COMMIT VISE, pas seulement
+            # aujourd'hui. La premiere version nommait `analysis`, vrai jusqu'au rangement du
+            # 2026-08-25 et faux dès que `origin/main` l'a rattrapé -- le controle est devenu
+            # rouge sans qu'une ligne de `permalien.py` ait bouge. On vise `docs`, qui est la
+            # depuis le premier commit et que rien ne projette de deplacer ; et on le VERIFIE
+            # au lieu de le supposer, pour que la panne se dise au lieu de se deduire.
+            v("le dossier témoin existe bien dans le commit visé",
+              genre_au_commit(racine, c, "docs") is not None)
+            v("le genre d'un dossier est tree", genre_au_commit(racine, c, "docs") == "tree")
             v("un chemin absent du commit n'a pas de genre",
               genre_au_commit(racine, c, "ce/chemin/nexiste/pas.py") is None)
     except (ValueError, FileNotFoundError) as e:

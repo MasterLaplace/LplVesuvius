@@ -7,6 +7,13 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+> ⚠⚠ **Un test cassé par un `push`, pas par un commit.** `permalien.py` vérifiait le genre
+> d'un dossier au commit publié en nommant `analysis` — vrai jusqu'au rangement, et **faux dès
+> que `origin/main` a rattrapé HEAD**. Le contrôle est passé rouge sans qu'une ligne de
+> `permalien.py` ait bougé. La leçon : une fixture qui nomme un chemin doit viser un chemin
+> **stable dans le commit visé**, et le vérifier au lieu de le supposer — c'est ce que fait
+> désormais le contrôle « le dossier témoin existe bien dans le commit visé », ajouté à côté.
+
 ## ⭐⭐⭐⭐⭐ LE RACCOURCI EST CÂBLÉ — et il est incapable d'empirer les choses
 
 `profiler_une_surface.sh` demande son plan à `sous_fenetre.py --shell`, rend les fenêtres
@@ -1249,7 +1256,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 120 batteries, 3128 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 120 batteries, 3129 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)
