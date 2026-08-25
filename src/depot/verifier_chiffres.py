@@ -31,11 +31,14 @@ import argparse
 import json
 import re
 import sys
+import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path[:0] = [str(p) for p in Path(__file__).resolve().parents[1].iterdir() if p.is_dir()]
 from carte_segments import MEME_FEUILLE_UM, VOISINES_UM  # noqa: E402
+
+RACINE = Path(__file__).resolve().parents[2]
 
 
 # ⚠⚠ **Le document qui PART merite son propre controle.** Les chiffres du dossier sont
@@ -206,6 +209,37 @@ def en(x: float, n: int = 3) -> str:
     return f"{x:.{n}f}"
 
 
+DOSSIER_MESURES = "docs"
+"""⭐ Le SEUL endroit de ce fichier qui dit OÙ vivent les mesures.
+
+⚠⚠ Il était écrit **quarante-quatre fois**, en `_source(racine, "x.json")`. Deux littéraux
+séparés : aucune réécriture textuelle de `docs/x.json` ne peut les voir, donc ranger `docs/`
+aurait fait manquer les quarante-quatre sources **sans un mot** — et chaque lecture est gardée
+par `if p.exists():`, donc le contrôle serait resté vert en ne vérifiant plus rien. C'est la
+« vérification incapable d'échouer » à l'échelle de tous les chiffres publiés du dépôt.
+"""
+
+_SOURCES: list[tuple[str, bool]] = []
+"""Ce que le dernier `collecter()` a CHERCHÉ, et trouvé ou non. ⚠ Une liste écrite ailleurs
+serait une seconde description de ce que ce fichier lit, libre de diverger de la première."""
+
+
+def _source(racine: Path, nom: str) -> Path:
+    """Le chemin d'une mesure, ENREGISTRÉ au passage.
+
+    ⚠ L'enregistrement est le point : un `if p.exists():` qui échoue ne produit aucun symptôme,
+    donc une mesure disparue rend le contrôle plus vert, pas plus rouge.
+    """
+    p = racine / DOSSIER_MESURES / nom
+    _SOURCES.append((nom, p.exists()))
+    return p
+
+
+def sources_manquantes() -> list[str]:
+    """Les mesures que le dernier `collecter()` a cherchées sans les trouver."""
+    return sorted(n for n, vu in _SOURCES if not vu)
+
+
 def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     """(ce que c'est, écritures acceptables, d'où ça vient).
 
@@ -213,6 +247,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     français et `+0.381` en anglais, et que refuser l'une des deux ferait échouer le
     contrôle sur un document parfaitement juste.
     """
+    _SOURCES.clear()
     out = []
 
     def ajoute(nom: str, valeur: float, n: int, source: str, signe: bool = False,
@@ -233,7 +268,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             ecritures += [f"{s}{fr(valeur, n)} {u}", f"{s}{en(valeur, n)} {u}"]
         out.append((nom, ecritures, source))
 
-    p = racine / "docs" / "decision_avec_matiere.json"
+    p = _source(racine, "decision_avec_matiere.json")
     if p.exists():
         d = json.loads(p.read_text())
         vingt = next((x for x in d["decisions"] if abs(x["part_ecartee"] - 0.20) < 1e-9), None)
@@ -245,7 +280,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                     [f"n = {d['n']}", f"{d['n']} segments", f"{d['n']} published"],
                     p.name))
 
-    p = racine / "docs" / "croisement_encre.json"
+    p = _source(racine, "croisement_encre.json")
     if p.exists():
         d = json.loads(p.read_text())
         for c in d.get("correlations", []):
@@ -255,7 +290,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             if c["trace"] == "ecart_a_la_trace" and c["encre"] == "encre_contraste_p90_p50":
                 ajoute("partielle ecart x encre", c["rho_partiel"], 3, p.name, signe=True)
 
-    p = racine / "docs" / "table_champ.json"
+    p = _source(racine, "table_champ.json")
     if p.exists():
         d = json.loads(p.read_text())
         # ⚠ Avec son contexte : « 21,7 » nu est trop court pour etre absent d'un texte.
@@ -265,13 +300,13 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         out.append(("segments du champ",
                     [f"{d['segments']} segments", f"{d['segments']} published"], p.name))
 
-    p = racine / "docs" / "robustesse_material.json"
+    p = _source(racine, "robustesse_material.json")
     if p.exists():
         d = json.loads(p.read_text())
         ajoute("accord des grilles", d["rho"], 3, p.name, signe=True)
         ajoute("temoin p95 des grilles", d["temoin_p95"], 3, p.name)
 
-    p = racine / "docs" / "prediction_50um.json"
+    p = _source(racine, "prediction_50um.json")
     if p.exists():
         d = json.loads(p.read_text())
         ajoute("p du seuil de 50 um", d["p_seuil_propose"], 3, p.name)
@@ -284,7 +319,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                      f"{en(d['encre_au_dessus'],2)} vs {en(d['encre_au_dessous'],2)}"],
                    p.name))
 
-    p = racine / "docs" / "table_graines.json"
+    p = _source(racine, "table_graines.json")
     if p.exists():
         d = json.loads(p.read_text())
         ajoute("p du test des signes sur l'aire", d["signes_aire"]["p_signes"], 4, p.name)
@@ -321,7 +356,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # ⚠ Les chiffres du 2026-08-20. Chacun est ecrit AVEC son contexte : « 72 » ou « 240 »
     # nus se trouvent dans n'importe quel texte, donc `discriminante()` les rapporterait a
     # part au lieu de les verifier -- ce qui est le contraire d'un garde-fou.
-    p = racine / "docs" / "table_tirages.json"
+    p = _source(racine, "table_tirages.json")
     if p.exists():
         d = json.loads(p.read_text())
         out.append(("tirages de la campagne",
@@ -340,7 +375,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                     [f"{fr(d['ic95_bas']*100,1)} % – {fr(d['ic95_haut']*100,1)} %",
                      f"{fr(d['ic95_bas']*100,1)} % - {fr(d['ic95_haut']*100,1)} %"], p.name))
 
-    p = racine / "docs" / "comparaison_cartes.json"
+    p = _source(racine, "comparaison_cartes.json")
     if p.exists():
         d = json.loads(p.read_text())
         ajoute("rho entre les deux campagnes", d["rho"], 3, p.name, signe=True)
@@ -349,7 +384,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                      f"{d['rangs_changes']} of {len(d['lignes'])} scrolls",
                      f"{d['rangs_changes']} rouleaux changent"], p.name))
 
-    p = racine / "docs" / "incertitude_carte.json"
+    p = _source(racine, "incertitude_carte.json")
     if p.exists():
         d = json.loads(p.read_text())
         out.append(("paires separees",
@@ -361,7 +396,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                      f"{fr(d['temoin']['ic95'][1]*100,1)} %",
                      f"jusqu'à {fr(d['temoin']['ic95'][1]*100,1)} %"], p.name))
 
-    p = racine / "docs" / "sensibilite_maillage.json"
+    p = _source(racine, "sensibilite_maillage.json")
     if p.exists():
         d = json.loads(p.read_text())
         brut = [l["brut"]["transverse"] for l in sorted(d["lignes"], key=lambda l: l["facteur"])]
@@ -374,7 +409,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # ⚠⚠ La chaine des spires : le compte de spires qui convergent, l'erosion par tour et
     # l'alpha de la spire qui casse sont TOUTE la revendication de `43`. Si l'un bouge et
     # que le document ne bouge pas, le document annonce une chaine qui n'existe plus.
-    p = racine / "docs" / "chaine_spires.json"
+    p = _source(racine, "chaine_spires.json")
     if p.exists():
         d = json.loads(p.read_text())
         if d:
@@ -402,7 +437,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # ⚠⚠ La chaine a pas 0,25 (`43` §6quinquies) : le compte de convergences et les alphas
     # des spires qui cassent sont la revendication entiere de la section -- « halver le pas
     # repousse la rupture d'un tour » n'a de sens que si ces nombres sont ceux-la.
-    p = racine / "docs" / "chaine_pas025_convergence.json"
+    p = _source(racine, "chaine_pas025_convergence.json")
     if p.exists():
         d = json.loads(p.read_text()).get("series", [])
         if d:
@@ -423,7 +458,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # d'ailleurs trouve deux erreurs a moi : « 13,02 cm2 d'aire utile » melangeait l'aire du
     # meta avec l'aire utile (12,97), et « le rayon devient determine » venait du tirage NON
     # deterministe alors que le run reproductible le laisse indetermine.
-    p = racine / "docs" / "geometrie_extension.json"
+    p = _source(racine, "geometrie_extension.json")
     if p.exists():
         d = json.loads(p.read_text())
         bons = [x for x in d.get("spires", []) if x.get("angle_rad", 0.0) > 0]
@@ -456,7 +491,9 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # et la section 12 de la soumission) et c'est lui qui justifie de ne jamais comparer des
     # comptes de verdicts. Il se recalcule depuis les series, pas depuis un champ stocke : un
     # verdict ecrit hier a ete rendu par les seuils d'hier.
-    verdicts = sorted((racine / "docs").glob("spire_*.json"))
+    # ⚠ Un GLOB ne peut pas être manquant : il rend ce qu il trouve. Il passe donc
+    # par le même dossier, mais il n entre pas au registre des sources.
+    verdicts = sorted((racine / DOSSIER_MESURES).glob("spire_*.json"))
     if verdicts:
         import importlib.util
         spec = importlib.util.spec_from_file_location(
@@ -511,7 +548,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # pas du rayon EST la revendication de la section, et c'est un α, pas un compte. Si l'un
     # de ces nombres bouge sans que la page bouge, la page annonce un optimum qui a change
     # de place.
-    p = racine / "docs" / "comparaison_pas_rayon.json"
+    p = _source(racine, "comparaison_pas_rayon.json")
     if p.exists():
         d = json.loads(p.read_text())
         for c in d.get("campagnes", []):
@@ -541,7 +578,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # utile CORRIGE un chiffre publie dans `43` (4,0 % contre 15,6 %) ; et le nombre de
     # fenetres par tour porte la conclusion structurelle. Si l'un bouge sans que la page
     # bouge, la page annonce une chaine qui n'existe plus.
-    p = racine / "docs" / "geometrie_pas025.json"
+    p = _source(racine, "geometrie_pas025.json")
     if p.exists():
         d = json.loads(p.read_text())
         bons = [x for x in d.get("spires", []) if x.get("angle_rad", 0.0) > 0]
@@ -588,7 +625,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # ⚠⚠ Le CONTROLE de `44` §8 : si le rho de l'indice de spire cesse de battre les
     # candidats, la page dit l'inverse de ce qui est mesure. C'est le seul chiffre de ce
     # depot dont la valeur REFUTE une conclusion plutot que de la porter.
-    p = racine / "docs" / "juge_a_un_rendu.json"
+    p = _source(racine, "juge_a_un_rendu.json")
     if p.exists():
         d = json.loads(p.read_text())
         for clef, j in (d.get("juges") or {}).items():
@@ -606,7 +643,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # ⚠⚠ Le test de convergence : les deux α sont la revendication ENTIERE de la section 11
     # de la soumission. Si l'un bouge et que le texte ne bouge pas, le texte annonce une
     # separation qui n'existe plus — et c'est la seule chose que cette section apporte.
-    p = racine / "docs" / "convergence.json"
+    p = _source(racine, "convergence.json")
     if p.exists():
         d = json.loads(p.read_text())
         for s_ in d.get("series", []):
@@ -622,7 +659,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # ⚠ La mosaique : les trois chiffres qui font sa revendication. « 44 spires sans
     # trou » est ce que l'image PRETEND etre ; si une spire venait a manquer, le document
     # dirait toujours 44 et l'image ressemblerait toujours a un rouleau.
-    p = racine / "docs" / "mosaique_PHerc0172.json"
+    p = _source(racine, "mosaique_PHerc0172.json")
     if p.exists():
         d = json.loads(p.read_text())
         out.append(("spires de la mosaique",
@@ -646,7 +683,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # silencieusement. Le premier jet du document publiait « 49 paires eloignees » la ou
     # 45 avaient ete mesurees — les 4 autres etant hors de portee, donc eloignees pour une
     # raison que le tableau ne disait pas. Personne ne relit une somme de trois nombres.
-    p = racine / "docs" / "segments_PHerc1447.json"
+    p = _source(racine, "segments_PHerc1447.json")
     if p.exists():
         d = json.loads(p.read_text())
         segs, paires = d["segments"], d["paires"]
@@ -692,7 +729,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # ⚠⚠ La mesure de `35` §3bis : la stabilite des rouleaux plafonnes etait-elle une
     # troncature ? Le verdict tient dans deux dispersions medianes, donc dans deux
     # nombres — et un nombre qui porte un verdict est le premier a deriver.
-    p = racine / "docs" / "comparaison_plafond.json"
+    p = _source(racine, "comparaison_plafond.json")
     if p.exists():
         d = json.loads(p.read_text())
         if d.get("dispersion_mediane_avant") is not None:
@@ -710,7 +747,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # ⚠⚠ La typographie (`45`) : son resultat tient dans un tableau d'AUC, donc dans des
     # nombres, et le plus important d'entre eux est celui qui va A CONTRE-SENS. Un chiffre
     # inattendu est le premier qu'on est tente d'arrondir dans le bon sens.
-    p = racine / "docs" / "typographie.json"
+    p = _source(racine, "typographie.json")
     if p.exists():
         d = json.loads(p.read_text())
         cr = d.get("croisement_encre") or {}
@@ -733,7 +770,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # deux JSON les portent en clair. L'inventaire des documents non gardes l'a nomme.
     vus = []
     for prof in (21, 41, 81, 161):
-        q = racine / "docs" / f"second_axe_{prof}.json"
+        q = _source(racine, f"second_axe_{prof}.json")
         if not q.exists():
             continue
         d = json.loads(q.read_text())
@@ -765,7 +802,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                          ("PHerc0139", "croisement_encre_PHerc0139.json"),
                          ("PHerc1667", "croisement_encre_PHerc1667.json"),
                          ("PHerc0172", "croisement_encre_0172.json")):
-        q = racine / "docs" / fichier
+        q = _source(racine, fichier)
         if not q.exists():
             continue
         d = json.loads(q.read_text())
@@ -777,7 +814,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         if c:
             ajoute(f"rho du tri, {nom}", c[0]["rho"], 3, q.name, signe=True)
 
-    p = racine / "docs" / "paris4_2x2.json"
+    p = _source(racine, "paris4_2x2.json")
     if p.exists():
         d = json.loads(p.read_text())
         for t in d.get("cases") or []:
@@ -822,7 +859,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if m:
                     ajoute(f"alpha du budget {m.group(1)} au niveau {m.group(2)}",
                            x["alpha"], 2, f.name, signe=True)
-    pv = racine / "docs" / "plafond_ps256_c2_niv1.json"
+    pv = _source(racine, "plafond_ps256_c2_niv1.json")
     if pv.exists():
         d = json.loads(pv.read_text())
         for cle, nom in (("variation", "variation du plafond"),
@@ -833,7 +870,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # ⚠⚠ Le test du critere relatif. Le nombre qui compte n est pas un beta mais le COMPTE
     # de grandeurs lisibles en absolu : s il montait sans qu on ait ajoute de mesure, c est
     # qu un refus aurait cesse de refuser.
-    p = racine / "docs" / "critere_relatif.json"
+    p = _source(racine, "critere_relatif.json")
     if p.exists():
         d = json.loads(p.read_text())
         lis = [g for g in d.get("grandeurs") or []
@@ -845,7 +882,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 out.append((f"series saturees sur {g['grandeur']}",
                             [str(g["saturees"])], p.name))
 
-    p = racine / "docs" / "appui_de_pente.json"
+    p = _source(racine, "appui_de_pente.json")
     if p.exists():
         d = json.loads(p.read_text())
         out.append(("series jugeables par leurs appuis", [str(d.get("series_jugees"))],
@@ -897,7 +934,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"alpha d identite {x['couches'][0]}c/{x['couches'][1]}c",
                        x["alpha"], 4, p.name)
 
-    p = racine / "docs" / "calibration_scroll1.json"
+    p = _source(racine, "calibration_scroll1.json")
     if p.exists():
         d = json.loads(p.read_text())
         out.append(("segments du balayage", [str(d.get("corpus"))], p.name))
@@ -926,7 +963,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 out.append((f"segments a edge_pinned 90 a {n} couches",
                             [str(g["au_bord_90"])], p.name))
 
-    p = racine / "docs" / "situer_notre_trace.json"
+    p = _source(racine, "situer_notre_trace.json")
     if p.exists():
         d = json.loads(p.read_text())
         ajoute("relief de notre trace a la geometrie du corpus", d["relief"], 4, p.name)
@@ -938,7 +975,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                         [f"×{fr(d['rapport_a_la_mediane'], 2)}",
                          f"x{fr(d['rapport_a_la_mediane'], 2)}"], p.name))
 
-    p = racine / "docs" / "situer_nos_traces.json"
+    p = _source(racine, "situer_nos_traces.json")
     if p.exists():
         d = json.loads(p.read_text())
         for cle, nom in (("n", "candidats situes dans le corpus"),
@@ -955,7 +992,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             ajoute("relief minimal des candidats qui mesurent", min(mesurent), 3, p.name)
             ajoute("relief maximal des candidats qui mesurent", max(mesurent), 4, p.name)
 
-    p = racine / "docs" / "effet_taille_fenetre.json"
+    p = _source(racine, "effet_taille_fenetre.json")
     if p.exists():
         d = json.loads(p.read_text())
         # ⚠⚠ Ces chiffres ont RETIRE un repere du README public. Ils doivent vieillir
@@ -975,7 +1012,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             if m.get("amplitude") is not None:
                 ajoute(f"relief a {m['taille']} px", m["amplitude"], 3, p.name)
 
-    p = racine / "docs" / "fenetre_utilisable.json"
+    p = _source(racine, "fenetre_utilisable.json")
     if p.exists():
         d = json.loads(p.read_text())
         for etat, nom in (("couple confortable disponible", "series a couple confortable"),
@@ -1010,7 +1047,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                         [f"{signe}{fr(abs(pc), 1)} %", f"{signe}{en(abs(pc), 1)} %"],
                         p.name))
 
-    p = racine / "docs" / "etalon_rendu.json"
+    p = _source(racine, "etalon_rendu.json")
     if p.exists():
         d = json.loads(p.read_text())
         r = d.get("resume") or {}
@@ -1037,7 +1074,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             out.append(("cache recommande", [str(r["recommande"])], p.name))
         out.append(("essais d etalonnage", [str(len(d.get("essais") or []))], p.name))
 
-    p = racine / "docs" / "paris4_candidats.json"
+    p = _source(racine, "paris4_candidats.json")
     if p.exists():
         d = json.loads(p.read_text())
         # ⚠ L alpha de chaque candidat, garde individuellement : c est la ligne du tableau
@@ -1074,7 +1111,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             ajoute("etendue relative des aires au plafond",
                    d["etendue_relative_aires"] * 100, 2, p.name)
 
-    p = racine / "docs" / "audit_profils.json"
+    p = _source(racine, "audit_profils.json")
     if p.exists():
         d = json.loads(p.read_text())
         # ⚠⚠ Les deux nombres qui portent la conclusion de `49` sont les BORNES des deux
@@ -1112,7 +1149,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             if d.get(cle) is not None:
                 out.append((nom, [str(len(d[cle]))], p.name))
 
-    p = racine / "docs" / "excision_resume.json"
+    p = _source(racine, "excision_resume.json")
     if p.exists():
         d = json.loads(p.read_text())
         mw = d.get("mann_whitney") or {}
@@ -1144,7 +1181,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             out.append(("niveaux qui different",
                         [f"{d['niveaux_differents']}/{d['niveaux_vus']}"], p.name))
 
-    p = racine / "docs" / "eligibilite_aval.json"
+    p = _source(racine, "eligibilite_aval.json")
     if p.exists():
         d = json.loads(p.read_text())
         out.append(("rouleaux tracables", [f"**{len(d['tracables'])}**",
@@ -1156,7 +1193,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         if d.get("premier_candidat"):
             out.append(("premier candidat", [d["premier_candidat"]], p.name))
 
-    p = racine / "docs" / "derive_profondeur.json"
+    p = _source(racine, "derive_profondeur.json")
     if p.exists():
         d = json.loads(p.read_text())
         # ⚠⚠ Les censures d'abord : c'est le chiffre qui porte la conclusion de `47`, et
@@ -1184,7 +1221,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             for v_ in d.get(cle) or []:
                 ajoute(f"plafond present ({cle})", v_, 2, p.name)
 
-    p = racine / "docs" / "temoin_negatif.json"
+    p = _source(racine, "temoin_negatif.json")
     if p.exists():
         d = json.loads(p.read_text())
         # ⚠⚠ Les chiffres qui portent la conclusion de `46`, et la PORTEE avec eux : sans
@@ -1223,7 +1260,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # ⚠ L'audit du depot entier est garde a part : ses deux comptes (piles vides, piles
     # lues) sont ce qui borne le rayon de souffle, et un rayon de souffle qui derive en
     # silence est pire qu'un rayon de souffle inconnu.
-    f = racine / "docs" / "matiere_des_piles_toutes.json"
+    f = _source(racine, "matiere_des_piles_toutes.json")
     if f.exists():
         d = json.loads(f.read_text())
         piles = d.get("piles", [])
@@ -1235,7 +1272,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                     [f"{len(piles)} piles", f"**{len(piles)} piles**",
                      f"sur {len(piles)}"], f.name))
     for nom in ("matiere_des_piles.json", "matiere_des_piles_croise.json"):
-        f = racine / "docs" / nom
+        f = _source(racine, nom)
         if not f.exists():
             continue
         d = json.loads(f.read_text())
@@ -1253,7 +1290,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                     [f"{vides} rendus", f"**{vides} rendus**",
                      f"{vides} piles", f"**{vides} piles**"], "matiere_des_piles*.json"))
 
-    p = racine / "docs" / "temoins.json"
+    p = _source(racine, "temoins.json")
     if p.exists():
         d = json.loads(p.read_text())
         out.append(("batteries de temoins",
@@ -1265,7 +1302,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                         [f"{d['chiffres_recalcules']} chiffres",
                          f"**{d['chiffres_recalcules']} chiffres**"], p.name))
 
-    p = racine / "docs" / "cout_echelle.json"
+    p = _source(racine, "cout_echelle.json")
     if p.exists():
         d = json.loads(p.read_text())
         for ligne in (d if isinstance(d, list) else d.get("rouleaux", [])):
@@ -1365,6 +1402,23 @@ def verifier() -> int:
     v("sans aucun chiffre attendu, tout document chiffré est listé",
       documents_sans_garde([], trois) == ["garde.md", "nu.md"])
 
+    # ⚠⚠ Le registre des sources : sans lui, une mesure rangée ailleurs rend ce contrôle
+    # PLUS VERT, puisque chaque lecture est gardée par `if p.exists():`. La sonde doit donc
+    # prouver les deux sens — qu'il compte ce qu'il cherche, et qu'il sait dire « absente ».
+    with tempfile.TemporaryDirectory() as d:
+        vide = _P(d)
+        collecter(vide)
+        cherchees, absentes = len(_SOURCES), sources_manquantes()
+    v("collecter enregistre les mesures qu'il cherche", cherchees >= 40, str(cherchees))
+    v("... et sur un arbre vide, il les dit TOUTES absentes",
+      len(absentes) == cherchees, f"{len(absentes)} sur {cherchees}")
+    reel = collecter(RACINE)
+    v("... alors que sur ce dépôt il les trouve", sources_manquantes() == [],
+      ", ".join(sources_manquantes()[:4]))
+    v("... et le registre est remis à zéro entre deux appels", len(_SOURCES) == cherchees,
+      f"{len(_SOURCES)} contre {cherchees}")
+    v("le dépôt fournit bien des chiffres à vérifier", len(reel) > 100, str(len(reel)))
+
     if echecs:
         print(f"\nECHEC ({echecs} failures, {controles} checks)")
         return 1
@@ -1408,6 +1462,17 @@ def main() -> int:
         parser.error("donner au moins un document, ou --verifier")
 
     attendus = collecter(args.racine)
+    # ⚠⚠ Le dire AVANT le reste : une mesure absente ne fait pas échouer ce contrôle, elle
+    # lui retire des chiffres à vérifier. Sans cette ligne, ranger un fichier de mesure rend
+    # la sortie plus verte.
+    absentes = sources_manquantes()
+    if absentes:
+        print(f"⚠ {len(absentes)} mesure(s) cherchée(s) et NON TROUVÉE(S) dans "
+              f"{DOSSIER_MESURES}/ — les chiffres qu'elles portent ne sont vérifiés par "
+              f"personne :")
+        for n in absentes:
+            print(f"    {n}")
+        print()
     # ⚠⚠ LE TROU QU'IL FAUT BOUCHER : si un fichier de résultat manque, `collecter` le
     # saute en silence et le contrôle passe au vert en n'ayant presque rien vérifié.
     # C'est exactement la vérification incapable d'échouer que ce dépôt a déjà payée

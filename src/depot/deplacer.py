@@ -90,17 +90,42 @@ def fichiers_lisibles(racine: Path) -> list[Path]:
     return _marcher(racine, lambda f: f.suffix in LUS)
 
 
+_MOTIFS: dict[str, re.Pattern] = {}
+
+
+def _motif(chemin: str) -> re.Pattern:
+    """Le motif d'un chemin, COMPILÉ UNE FOIS et gardé.
+
+    ⚠ Sans ce cache, ranger `docs/` recompile 464 motifs pour chacun des 355 textes du dépôt,
+    soit 165 000 compilations — le premier essai n'avait pas rendu la main au bout de deux
+    minutes. C'est le même coût, et le même remède, que dans `appelants.py`.
+    """
+    m = _MOTIFS.get(chemin)
+    if m is None:
+        m = _MOTIFS[chemin] = re.compile(
+            r"(?<![\w-])((?:\.\./)*)" + re.escape(chemin) + r"(?![\w])")
+    return m
+
+
 def citations(texte: str, chemin: str) -> int:
-    """Combien de fois ce chemin est cité dans ce texte, toutes formes relatives confondues."""
-    return len(re.findall(r"(?<![\w-])(?:\.\./)*" + re.escape(chemin) + r"(?![\w])", texte))
+    """Combien de fois ce chemin est cité dans ce texte, toutes formes relatives confondues.
+
+    ⚠ Le test d'appartenance de chaîne est une condition NÉCESSAIRE du motif — il ne peut donc
+    pas écarter un texte qui cite — et il élimine la quasi-totalité des paires avant qu'une
+    expression régulière ne tourne.
+    """
+    if chemin not in texte:
+        return 0
+    return len(_motif(chemin).findall(texte))
 
 
 def reecrire(texte: str, deplacements: list[Deplacement]) -> tuple[str, int]:
     """Réécrit toutes les citations, du chemin le plus long au plus court."""
     n = 0
     for d in sorted(deplacements, key=lambda x: -len(x.ancien)):
-        motif = re.compile(r"(?<![\w-])((?:\.\./)*)" + re.escape(d.ancien) + r"(?![\w])")
-        texte, k = motif.subn(lambda m: m.group(1) + d.nouveau, texte)
+        if d.ancien not in texte:
+            continue
+        texte, k = _motif(d.ancien).subn(lambda m: m.group(1) + d.nouveau, texte)
         n += k
     return texte, n
 
