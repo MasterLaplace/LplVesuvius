@@ -28,9 +28,20 @@ Le mur « l'extension tangentielle est un point fixe » a **une** cause qui marc
 |---:|---:|---:|
 | 480 µm | +24,1 | +24,4 |
 | **768 µm** | ⚠⚠ **+1,5** (mort) | ⭐⭐ **+19,0** |
-| **1 920 µm** | ⚠⚠ **−1,7** (mort) | ⭐⭐⭐ **+15,1** |
+| 1 920 µm | ⚠⚠ **−1,7** (mort) | ⭐⭐ **+15,1** |
+| 3 840 µm | — | ⭐⭐ **+9,2** |
+| **5 760 µm** | — | ⭐⭐⭐ **+6,9** |
 
-**Quatre fois plus loin.** Le segment publié, pour référence, est à +30,6.
+**Poussée à SOIXANTE maillons, elle tient 5,76 mm** et ne meurt pas : l'avantage s'affaiblit de
++30 à +7, mais la pente **s'aplatit** sur le dernier millimètre (+6,7 puis +6,9). Plateau bas,
+pas chute. Le segment publié, pour référence, est à +30,6.
+
+⚠ **Coût** : 95 min pour les maillons 31→60, et ça ralentit (33 s au maillon 2, 114 s au 30)
+parce que la boîte englobante grossit — **×5,32** à 60 maillons. Le pas fixe tient la
+**distance**, pas la **forme**.
+
+⚠⚠ **Réserve de portée** : tout part d'un **morceau de segment publié**, pas d'une de nos
+traces. C'est ce qui rend la mesure propre, et c'est aussi un point de départ privilégié.
 
 ### ⚠⚠ Ce qui rend ces nombres lisibles, et sans quoi ils ne le sont pas
 

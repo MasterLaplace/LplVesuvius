@@ -23,6 +23,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import pathlib
 from pathlib import Path
 
 from PIL import Image, ImageDraw
@@ -63,6 +64,28 @@ def _police():
 def _pixels(im):
     f = getattr(im, "get_flattened_data", None) or im.getdata
     return set(f())
+
+
+def fusionner(chemins) -> list[dict]:
+    """Plusieurs JSON de campagne, recollés en une seule série.
+
+    ⚠⚠ Une campagne longue se mesure en plusieurs passes — on ne relance pas cinquante minutes
+    de recalage pour ajouter deux distances. Recoller les fichiers À LA MAIN dans un tube serait
+    perdre le calcul, donc le recollage est ici, testé, et il **dédoublonne** : un même maillage
+    mesuré dans deux passes (la source, typiquement) ne doit pas être tracé deux fois.
+
+    ⚠ La clé de dédoublonnage est le NOM du maillage et non sa distance : deux maillages
+    différents peuvent légitimement être à la même distance — une chaîne et son bond direct le
+    sont toujours.
+    """
+    vus, out = set(), []
+    for c in chemins:
+        for r in json.loads(pathlib.Path(c).read_text(encoding="utf-8")):
+            if r["maillage"] in vus:
+                continue
+            vus.add(r["maillage"])
+            out.append(r)
+    return sorted(out, key=lambda r: float(r["parcouru_um"]))
 
 
 def part_posee(r: dict) -> float:
@@ -465,6 +488,24 @@ def _verifier() -> int:
         pxc = _pixels(Image.open(Path(td) / "deux.png").convert("RGB"))
         v("... dans sa propre couleur", CORRIGEE in pxc)
         v("sans elle, aucune trace corrigée", r["corrigee_traces"] == 0)
+        # ⚠⚠ Le RECOLLAGE de plusieurs passes. Une campagne longue se mesure en plusieurs
+        # fois, et la source apparaît dans chacune : la tracer deux fois mettrait deux points
+        # à l'abscisse zéro.
+        j1, j2 = Path(td) / "p1.json", Path(td) / "p2.json"
+        j1.write_text(json.dumps(faux[:2]), encoding="utf-8")
+        j2.write_text(json.dumps([faux[0], faux[3]]), encoding="utf-8")
+        f2 = fusionner([j1, j2])
+        v("deux passes se recollent", len(f2) == 3, str(len(f2)))
+        v("... la source n'est pas doublée",
+          sum(1 for x in f2 if x["maillage"] == "morceau_00") == 1)
+        v("... et le résultat est trié par distance",
+          [x["parcouru_um"] for x in f2] == sorted(x["parcouru_um"] for x in f2))
+        # ⚠ Deux maillages DIFFÉRENTS à la même distance sont légitimes — une chaîne et son
+        # bond direct le sont toujours — donc la clé est le nom, pas l'abscisse.
+        j3 = Path(td) / "p3.json"
+        j3.write_text(json.dumps([faux[1], faux[2]]), encoding="utf-8")
+        v("deux maillages à la même distance sont gardés tous les deux",
+          len(fusionner([j3])) == 2)
         # ⚠ Le nom de la série porte un NOMBRE : la même figure sert un pas de 95 et un de 96.
         rn = dessiner(faux, Path(td) / "nom.png", nom_chaine="chaîne de 96 µm, pas FIXE")
         v("le nom de la chaîne est remplaçable",
@@ -492,14 +533,15 @@ def _verifier() -> int:
 
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    p.add_argument("campagne", nargs="?", type=Path,
-                   help="le JSON écrit par tools/recalage_de_la_chaine.sh")
+    p.add_argument("campagne", nargs="*",
+                   help="le ou les JSON écrits par tools/recalage_de_la_chaine.sh")
     p.add_argument("--sortie", type=Path,
                    default=Path("docs/images/44_matiere_de_la_chaine.png"))
     p.add_argument("--nom-chaine", help="le nom de la série — il porte un nombre, donc il "
                                         "doit être celui de la chaîne tracée")
-    p.add_argument("--corrigee", type=Path,
-                   help="une seconde campagne : la chaîne qui repose sur la matière")
+    p.add_argument("--corrigee", nargs="*", default=[],
+                   help="une seconde campagne : la chaîne qui repose sur la matière — "
+                        "plusieurs JSON acceptés, recollés et dédoublonnés")
     p.add_argument("--emballement-um", type=float,
                    help="où le pas s'emballe, pour le tracer en repère")
     p.add_argument("--anglais", action="store_true")
@@ -509,8 +551,8 @@ def main() -> int:
         return _verifier()
     if not a.campagne:
         p.error("le JSON de campagne est requis")
-    rangs = json.loads(a.campagne.read_text(encoding="utf-8"))
-    corr = json.loads(a.corrigee.read_text(encoding="utf-8")) if a.corrigee else None
+    rangs = fusionner(a.campagne)
+    corr = fusionner(a.corrigee) if a.corrigee else None
     r = dessiner(rangs, a.sortie, a.anglais, a.emballement_um, corr, a.nom_chaine)
     print(f"écrit : {a.sortie}  ({r['maillons']} maillons, {r['bonds']} témoin(s), "
           f"référence {r['repere'] * 100:.0f} %)")

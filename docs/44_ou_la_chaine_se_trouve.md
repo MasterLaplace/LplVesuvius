@@ -804,10 +804,45 @@ recalage offre :
 > recalé. Et la colonne « demande » prouve que les maillages sont bien différents — 1,6 et
 > 3,4 voxels avant, 0,06 après. **La comparaison avec la chaîne sans recalage est juste.**
 
+##### ⭐⭐⭐ Et poussée à SOIXANTE maillons, elle tient 5,76 mm
+
+Vingt maillons, c'était le nombre que j'avais choisi, pas une limite mesurée. Soixante :
+
+| parcouru | posé | plancher | **avantage** |
+|---:|---:|---:|---:|
+| 288 µm | 75,9 % | 46,9 % | ⭐ **+29,0** |
+| 480 µm | 70,1 % | 45,7 % | ⭐ **+24,4** |
+| 768 µm | 64,6 % | 45,6 % | ⭐ **+19,0** |
+| 1 920 µm | 58,6 % | 43,5 % | ⭐ **+15,1** |
+| 2 880 µm | 55,1 % | 43,1 % | ⭐ **+12,0** |
+| 3 840 µm | 50,2 % | 41,0 % | ⭐ **+9,2** |
+| 4 800 µm | 47,0 % | 40,3 % | ⭐ **+6,7** |
+| **5 760 µm** | 46,0 % | 39,1 % | ⭐ **+6,9** |
+
+> ⭐⭐⭐ **Elle ne meurt pas.** L'avantage s'affaiblit — de +30 au départ à **+7** à 5,8 mm —
+> mais la pente **s'aplatit** sur le dernier millimètre (+6,7 puis +6,9). Ce n'est pas une
+> chute, c'est un **plateau bas**.
+>
+> ⚠ Mon extrapolation précédente annonçait un zéro vers 7,5 mm. Elle était **trop pessimiste** :
+> la courbe ne descend pas linéairement.
+
+⚠ **Coût mesuré** : 95 minutes pour les maillons 31 à 60, et ça ralentit avec la distance — 33 s
+au maillon 2, 62 s au 20, 114 s au 30 — parce que la boîte englobante de la nappe grossit
+(**×5,32** à 60 maillons), donc le bloc de prédiction à lire et sa transformée de distance avec
+elle. Le pas fixe tient la **distance**, il ne tient pas la **forme**.
+
+⚠ **`hors boîte` vaut 0 partout** jusqu'à 5 760 µm : la boîte de prédiction couvrait bien tout
+le trajet, donc la décroissance est réelle et pas un artefact de téléchargement.
+
 ⚠ **Ce que ça ne dit toujours PAS** : que la chaîne suit la **bonne** feuille. Elle est sur *du*
-papyrus, franchement au-dessus du hasard, sur près de deux millimètres. Savoir si c'est la
-feuille qui prolonge le texte demande de l'**encre**, et c'est la tâche ouverte de
+papyrus, franchement au-dessus du hasard, sur **5,76 mm**. Savoir si c'est la feuille qui
+prolonge le texte demande de l'**encre**, et c'est la tâche ouverte de
 [`43`](43_la_chaine_des_spires.md).
+
+⚠⚠ **Et une réserve de portée qu'il faut garder en tête** : tout ceci part d'un **morceau de
+segment publié**, pas d'une de nos traces. C'est ce qui a rendu la mesure propre — on sait que
+le point de départ est sur une feuille — mais c'est aussi un point de départ privilégié. Refaire
+la chaîne depuis une graine à nous reste à faire.
 
 #### ⭐⭐⭐ Et le remède n'est PAS spéculatif : il est mesuré ailleurs, à 2,4 mm
 
@@ -1725,8 +1760,15 @@ ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 PLANCHER=300 JSON=$PWD/docs/recalage_deu
 ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 PLANCHER=300 \
   JSON=$PWD/docs/recalage_avant_recalage.json tools/recalage_de_la_chaine.sh \
   data/chaine_deux_fixes/projete_{8,20}
+# … poussée à 60 maillons, mesurée en deux passes que la figure RECOLLE
+SOURCE=$PWD/data/temoin_rendu/morceaux/morceau_00 PAS_VOX=40 MAILLONS=60 PROFILS=0 RECALER=1 \
+  ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 DEST=$PWD/data/chaine_deux_fixes \
+  JSON=$PWD/docs/chaine_deux_fixes.json tools/chainer_tangentiel.sh
+ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 PLANCHER=300 JSON=$PWD/docs/recalage_60_maillons.json \
+  tools/recalage_de_la_chaine.sh data/chaine_deux_fixes/maillon_{30,40,50,60}
 uv run --project . python analysis/src/figure_matiere_de_la_chaine.py \
-  docs/recalage_avec_plancher.json --corrigee docs/recalage_deux_fixes.json \
+  docs/recalage_avec_plancher.json \
+  --corrigee docs/recalage_deux_fixes.json docs/recalage_60_maillons.json \
   --nom-chaine "pas fixe SEUL" --sortie docs/images/44_deux_corrections.png
 
 # LE PLANCHER DU HASARD — sans lui, aucun « % posé » n'est interprétable
