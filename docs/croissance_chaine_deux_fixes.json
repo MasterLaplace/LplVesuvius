@@ -1,0 +1,178 @@
+[
+  {
+    "maillage": "morceau_00",
+    "volume_vox": 10035076137.979567,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.0,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_1",
+    "volume_vox": 10047652349.397469,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.001253225311396,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_2",
+    "volume_vox": 10083921920.837843,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.0048675049582743,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_3",
+    "volume_vox": 10120359110.751629,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.008498487863913,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_4",
+    "volume_vox": 10205841464.620611,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.0170168441467775,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_5",
+    "volume_vox": 10411014232.654808,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.0374624058159794,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_6",
+    "volume_vox": 10596071439.537176,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.0559034424696012,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_7",
+    "volume_vox": 11074686913.50133,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.1035976968412993,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_8",
+    "volume_vox": 11485875423.15229,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.1445728228888978,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_9",
+    "volume_vox": 12027259190.349861,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.1985219668469198,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_10",
+    "volume_vox": 12651058748.4055,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.2606838826588742,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_11",
+    "volume_vox": 13471032824.418142,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.3423946803387543,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_12",
+    "volume_vox": 14002457990.461859,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.395351445064479,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_13",
+    "volume_vox": 14493531433.78582,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.444287141871542,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_14",
+    "volume_vox": 15066584039.942816,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.5013921003469615,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_15",
+    "volume_vox": 15789548990.82368,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.5734358936316655,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_16",
+    "volume_vox": 16598565291.702332,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.6540547439278561,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_17",
+    "volume_vox": 17151347311.575483,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.709139729061257,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_18",
+    "volume_vox": 17877333194.148994,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.7814845595928248,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_19",
+    "volume_vox": 18609338948.497223,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.854429273143908,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_20",
+    "volume_vox": 19261672935.13359,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.9194346580226027,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "direct",
+    "volume_vox": 12092348364.263868,
+    "points": 14280,
+    "pas_voxels": 800.0,
+    "rapport": 1.2050081332714737,
+    "rapport_pas": 1.0
+  }
+]

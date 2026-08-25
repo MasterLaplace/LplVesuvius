@@ -224,20 +224,31 @@ def dessiner(rangs: list[dict], sortie: Path, anglais: bool = False,
     # dépend de la densité locale de matière, mesurée à onze points d'écart entre deux endroits
     # du même rouleau. Une ligne unique prêterait à un maillage la densité du quartier d'un
     # autre — et c'est précisément l'erreur qui aurait déclaré la chaîne « au-dessus du hasard ».
+    # ⚠⚠ CHAQUE chaîne a SON plancher, et les deux se tracent. Deux chaînes qui n'ont pas
+    # parcouru le même terrain n'ont pas la même densité locale de matière — mesuré à onze
+    # points d'écart le long d'une seule chaîne. N'en tracer qu'un prêterait à la seconde le
+    # quartier de la première, ce qui est l'erreur exacte que le plancher par maillage évite.
     plancher_traces = 0
-    pl_pts = [(X(float(r["parcouru_um"])), Y(plancher_de(r)))
-              for r in sorted(rangs, key=lambda q: float(q["parcouru_um"]))
-              if plancher_de(r) is not None]
-    if len(pl_pts) > 1:
-        d.line(pl_pts, fill=HASARD, width=2)
-    for (x, y) in pl_pts:
-        d.line([(x - 5, y), (x + 5, y)], fill=HASARD, width=2)
-        plancher_traces += 1
-    if pl_pts:
-        t = T("plancher du hasard")
-        x, y = pl_pts[-1]
-        d.text((min(x + 8, gx + gw - d.textlength(t, font=g3)), y + 5), t, font=g3,
-               fill=HASARD)
+
+    def _trace_plancher(source_rangs, etiquette: bool):
+        nonlocal plancher_traces
+        pts_ = [(X(float(q["parcouru_um"])), Y(plancher_de(q)))
+                for q in sorted(source_rangs, key=lambda z: float(z["parcouru_um"]))
+                if plancher_de(q) is not None]
+        if len(pts_) > 1:
+            d.line(pts_, fill=HASARD, width=2)
+        for (x_, y_) in pts_:
+            d.line([(x_ - 5, y_), (x_ + 5, y_)], fill=HASARD, width=2)
+            plancher_traces += 1
+        if pts_ and etiquette:
+            t_ = T("plancher du hasard")
+            x_, y_ = pts_[-1]
+            d.text((min(x_ + 8, gx + gw - d.textlength(t_, font=g3)), y_ + 5), t_,
+                   font=g3, fill=HASARD)
+
+    _trace_plancher(rangs, True)
+    if corrigee:
+        _trace_plancher(corrigee, False)
 
     corr_traces = 0
     if corrigee:
@@ -406,6 +417,15 @@ def _verifier() -> int:
         v("... dans sa propre couleur", HASARD in _pixels(
             Image.open(Path(td) / "pl.png").convert("RGB")))
         v("sans plancher mesuré, aucune trace", r["plancher_traces"] == 0)
+        # ⚠⚠ La SECONDE chaîne a son propre plancher, et il se trace aussi : deux chaînes qui
+        # n'ont pas parcouru le même terrain n'ont pas la même densité locale.
+        corr_pl = [{"maillage": f"maillon_{k}", "parcouru_um": 300.0 * k, "points": 100,
+                    "recales": 70 - 2 * k, "borne": 10, "hors_boite": 0,
+                    "plancher": 0.40 - 0.01 * k} for k in range(1, 5)]
+        rdp = dessiner(avec_pl, Path(td) / "deuxpl.png", corrigee=corr_pl)
+        v("les DEUX planchers sont tracés",
+          rdp["plancher_traces"] == len(avec_pl) + len(corr_pl),
+          str(rdp["plancher_traces"]))
         # ⚠ La campagne écrit -1 quand elle n'a PAS mesuré : un plancher de zéro serait un
         # plancher MESURÉ à zéro, soit l'affirmation la plus flatteuse possible.
         v("un plancher absent est None", plancher_de({"maillage": "m"}) is None)
