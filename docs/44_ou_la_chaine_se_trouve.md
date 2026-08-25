@@ -307,6 +307,48 @@ savoir où elle change** — ce qui n'est possible qu'en la rendant plus dense.
 quand les points ne le sont pas, et elle imprime « ⚠ NON monotone » depuis le tirage à six
 points. Le contrôle était écrit avant la donnée qui l'a fait parler.
 
+#### ⚠⚠⚠ Et enchaîner est STRICTEMENT PIRE qu'un seul bond — mesuré sans aucun rendu
+
+La projection compose : elle lit un `tifxyz` et en écrit un. On peut donc **enchaîner** —
+cinq maillons de 238 µm, chacun partant de la sortie du précédent — et comparer au **témoin**
+qui franchit les mêmes 1,19 mm d'un seul bond. Sans ce témoin, une chaîne qui tient ne
+prouverait rien : elle pourrait tenir parce que la distance est courte.
+
+⭐ Le discriminant ne coûte **aucun rendu** : le **volume de la boîte englobante**, à nombre de
+points constant.
+
+| maillage | volume englobant | ×source | points |
+|---|---:|---:|---:|
+| source | 10,04 Gvox | 1,00 | 14 280 |
+| maillon 1 | 10,12 | 1,01 | 14 280 |
+| maillon 2 | 10,22 | 1,02 | 14 280 |
+| maillon 3 | 10,45 | 1,04 | 14 280 |
+| maillon 4 | 12,21 | **1,22** | 14 280 |
+| **maillon 5** | **23,92** | ⚠⚠ **2,38** | 14 280 |
+| **bond direct, même distance** | 11,01 | ⭐ **1,10** | 14 280 |
+
+> ⚠⚠ **Cinq maillons : ×2,38. Un seul bond de la même longueur : ×1,10.** À nombre de points
+> **constant**, un volume qui double est un maillage qui ne se déplace pas mais **s'étale**.
+>
+> ⭐ Et la croissance est **super-linéaire** — 1,01 · 1,02 · 1,04 · 1,22 · 2,38. Stable sur
+> trois maillons, puis elle explose. C'est une composition d'erreurs, pas une dérive.
+
+**Le mécanisme se dit en une phrase** : chaque projection déplace chaque point le long de sa
+tangente **locale**. Sur une nappe courbe, les tangentes voisines divergent, donc la grille
+**cisaille** un peu à chaque fois. Le bond direct n'utilise les tangentes de la source
+**qu'une fois** — un cisaillement, pas cinq composés.
+
+⚠ Le rendu de ce cinquième maillon l'a confirmé de la pire façon : **2 Kio/s puis abandon**,
+là où les autres tournent à 200-400. Un maillage étalé sur 2,4 fois le volume force le moteur
+à chercher 2,4 fois plus de données pour la même surface. ⭐ La campagne l'a **dit** —
+« ⚠ profil de maillon_5 abandonné » — au lieu de produire un chiffre pour un rendu raté.
+
+> ⭐⭐⭐ **Donc une chaîne tangentielle PUREMENT GÉOMÉTRIQUE ne marche pas**, et ce n'est pas
+> un détail de réglage : elle est strictement moins bonne que la projection unique qu'elle
+> prétend prolonger. Ce qui manque n'est pas un meilleur pas, c'est la **réoptimisation entre
+> les maillons** — recoller la nappe projetée sur la matière, ce que ce document nommait déjà
+> (`--correct`). La chaîne a besoin de la donnée, pas seulement de la géométrie.
+
 ⚠⚠ **Ce que ça ne dit PAS, et c'est ce qui empêche d'en conclure que la chaîne est morte** :
 ces trois points mesurent une projection **pure**, sans réoptimisation. Une vraie chaîne
 recollerait la nappe projetée sur la matière — c'est le rôle de `--correct`, que ce document

@@ -789,6 +789,11 @@ run "figure des piles vides"   uv run --project "$ROOT" python "$ROOT/analysis/s
 # des tangentes locales, qui vaut « points fois pas » dans les deux directions et ne
 # departage rien. Et la difference finie ne doit pas enjamber un trou : elle aurait la bonne
 # forme et le mauvais sens.
+# ⚠⚠ L enchainement de la projection, avec son TEMOIN : le meme deplacement total franchi
+# d un seul bond. Sans lui, une chaine qui tient ne prouverait rien -- elle pourrait tenir
+# parce que la distance est courte. Sonde aussi que chaque maillon part du PRECEDENT, sinon
+# ce sont des projections independantes sous un autre nom.
+run "chaîne tangentielle"      "$ROOT/tools/chainer_tangentiel.sh" --verifier
 run "projection tangentielle"  uv run --project "$ROOT" python "$ROOT/analysis/src/projeter_tangentiel.py" --verifier
 # ⚠⚠ La campagne de portee. Ses sondes portent sur la COLONNE et pas sur le mot : l en-tete a
 # gagne « mediane » pendant que l extraction rendait `bloc_absent`, et un grep du mot restait

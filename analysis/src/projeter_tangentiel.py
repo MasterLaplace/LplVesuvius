@@ -182,6 +182,37 @@ def ecrire(plans, meta, dest: Path, rendu: dict) -> dict:
     return m
 
 
+def volume_englobant(meta: dict) -> float:
+    """Le volume de la boîte englobante, en voxels.
+
+    ⚠⚠ C'est le **discriminant bon marché d'une chaîne**, et il ne coûte aucun rendu. Mesuré
+    le 2026-08-25 : cinq projections enchaînées de 238 µm font passer la boîte de 10,0 à
+    23,9 Gvoxels **à nombre de points constant**, quand un bond direct de la même longueur
+    totale la laisse à 11,0. Le maillage ne se déplace pas, il **s'étale** — et un rendu de
+    cette surface rampe à 2 Kio/s puis abandonne.
+
+    ⚠ À nombre de points constant, un volume qui grossit est un maillage qui se déforme. C'est
+    le seul énoncé que cette grandeur porte : elle ne dit pas *où* ni *comment*.
+    """
+    bas, haut = meta["bbox"]
+    return float((haut[0] - bas[0]) * (haut[1] - bas[1]) * (haut[2] - bas[2]))
+
+
+def croissance(dossiers: list[Path]) -> list[dict]:
+    """Le volume englobant de chaque maillage d'une chaîne, et son rapport au premier."""
+    out = []
+    for d in dossiers:
+        meta = json.loads((d / "meta.json").read_text(encoding="utf-8"))
+        v = volume_englobant(meta)
+        out.append({"maillage": d.name, "volume_vox": v,
+                    "points": int(meta.get("points_projetes", 0)) or None})
+    if out:
+        base = out[0]["volume_vox"] or 1.0
+        for r in out:
+            r["rapport"] = r["volume_vox"] / base
+    return out
+
+
 def verifier() -> int:
     """Les témoins, sur une nappe fabriquée dont on connaît la tangente."""
     import shutil
@@ -280,6 +311,32 @@ def verifier() -> int:
       abs(float(relu[4, 10]) - (gx[4, 10] + 10.0)) < 1e-3)
     shutil.rmtree(racine, ignore_errors=True)
 
+    # ⚠⚠ Le discriminant bon marché : un volume englobant qui grossit à nombre de points
+    # constant est un maillage qui s'étale. Sondé dans les deux sens — un maillage translaté
+    # garde son volume, un maillage étiré le multiplie.
+    v("une boîte cubique de 10 vaut 1000 voxels",
+      abs(volume_englobant({"bbox": [[0, 0, 0], [10, 10, 10]]}) - 1000.0) < 1e-9)
+    v("une translation ne change pas le volume",
+      volume_englobant({"bbox": [[0, 0, 0], [10, 10, 10]]})
+      == volume_englobant({"bbox": [[500, 500, 500], [510, 510, 510]]}))
+    v("doubler un côté double le volume",
+      volume_englobant({"bbox": [[0, 0, 0], [20, 10, 10]]})
+      == 2 * volume_englobant({"bbox": [[0, 0, 0], [10, 10, 10]]}))
+
+    racine2 = Path(tempfile.mkdtemp(prefix="croissance_temoins_"))
+    for i, cote in enumerate((10, 10, 20)):
+        d = racine2 / f"m{i}"
+        d.mkdir()
+        (d / "meta.json").write_text(json.dumps(
+            {"bbox": [[0, 0, 0], [cote, 10, 10]], "points_projetes": 100}), encoding="utf-8")
+    c = croissance([racine2 / f"m{i}" for i in range(3)])
+    v("la chaîne rend un rang par maillage", len(c) == 3)
+    v("le premier rapport vaut 1", abs(c[0]["rapport"] - 1.0) < 1e-9)
+    v("un maillage identique garde son rapport", abs(c[1]["rapport"] - 1.0) < 1e-9)
+    v("un maillage deux fois plus large le double", abs(c[2]["rapport"] - 2.0) < 1e-9)
+    v("le compte de points voyage", c[0]["points"] == 100)
+    shutil.rmtree(racine2, ignore_errors=True)
+
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -292,11 +349,24 @@ def main() -> int:
                    help="0 = lignes, 1 = colonnes ; défaut : l'axe le plus long, MESURÉ")
     p.add_argument("--pas", type=float, default=1.0,
                    help="en pas de grille ; négatif pour projeter de l'autre côté")
+    p.add_argument("--croissance", type=Path, nargs="*",
+                   help="mesurer le volume englobant d'une suite de maillages — le "
+                        "discriminant d'une chaîne, et il ne coûte aucun rendu")
     p.add_argument("--json", type=Path)
     p.add_argument("--verifier", action="store_true")
     a = p.parse_args()
     if a.verifier:
         return verifier()
+    if a.croissance:
+        c = croissance([Path(x) for x in a.croissance])
+        print(f"{'maillage':16s} {'volume (Gvox)':>14s} {'×premier':>10s} {'points':>8s}")
+        for r in c:
+            print(f"{r['maillage']:16s} {r['volume_vox'] / 1e9:14.2f} "
+                  f"{r['rapport']:10.2f} {r['points'] or '—':>8}")
+        if a.json:
+            a.json.parent.mkdir(parents=True, exist_ok=True)
+            a.json.write_text(json.dumps(c, indent=2), encoding="utf-8")
+        return 0
     if not a.source or not a.dest:
         p.error("source et --dest requis")
 

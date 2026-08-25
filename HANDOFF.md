@@ -45,7 +45,7 @@ quoi que ce soit.
 
 > ⭐⭐ **La feuille de route est [`55`](docs/55_les_murs_et_leurs_causes.md)** — un tableau par
 > mur, une ligne par **cause candidate**, avec son verdict et le document qui le porte.
-> **25 causes, 15 éliminées, 7 confirmées, 2 ouvertes, 1 bloquée.** Un mur n'est pas une tâche, c'est un
+> **26 causes, 16 éliminées, 7 confirmées, 2 ouvertes, 1 bloquée.** Un mur n'est pas une tâche, c'est un
 > espace de causes dont on retire une entrée à la fois : lister des tâches laisse croire qu'on
 > avance quand on tourne, lister des éliminations montre l'espace rétrécir.
 >
@@ -59,7 +59,7 @@ quoi que ce soit.
 |---|---|---|
 | le tracé ne suit pas de feuille | ⭐⭐ **la surface est EN TRAVERS de l'empilement, et ça se VOIT** : à étendue égale, une couche publiée montre une feuille de face, les nôtres des spires coupées en travers. Relief 0,79 et 0,87 contre 0,16 et 0,20. ⚠ Sur 27 séries, une seule porte un verdict α ; à 100,8, 384 et 796,8 µm, **100 % des fenêtres ont leur pic sur un bord de pile** | [`54`](docs/54_cinq_rendus_vides.md) §3 quinquies, [`53`](docs/53_le_temoin_positif_du_rendu.md), [`51`](docs/51_une_pente_a_deux_appuis.md) |
 | les patchs publiés ne se recollent pas | un patch PAR feuille, paire la plus proche à 79 µm ≈ 2× le seuil | [`44`](docs/44_ou_la_chaine_se_trouve.md) |
-| l'extension tangentielle est un point fixe | le cycle rogner-étendre converge vers ~6 cm². ⭐⭐ La projection **tangentielle** existe et a **deux seuils** : contraste maximal vers **240 µm**, et la nappe reste sur sa feuille jusqu'à **~380 µm** (pic au bord 0,0 %) avant de sauter à 18 % à 476. ⚠ Projection pure, sans réoptimisation — c'est le plancher | [`44`](docs/44_ou_la_chaine_se_trouve.md) §7 |
+| l'extension tangentielle est un point fixe | le cycle rogner-étendre converge vers ~6 cm². ⭐⭐ La projection **tangentielle** a **deux seuils** : contraste maximal vers **240 µm**, nappe encore sur sa feuille jusqu'à **~380 µm**. ⚠⚠ Mais **l'enchaîner sans réoptimiser est STRICTEMENT PIRE** qu'un seul bond : cinq maillons étalent la boîte englobante **×2,38** à nombre de points constant, contre **×1,10** pour le bond direct. Il faut recoller sur la matière entre les maillons | [`44`](docs/44_ou_la_chaine_se_trouve.md) §7 |
 | la chaîne casse au sixième tour | et la repousse la coupe au troisième | [`43`](docs/43_la_chaine_des_spires.md) |
 
 ### Ce qui vient d'être fermé

@@ -1,0 +1,44 @@
+[
+  {
+    "maillage": "morceau_00",
+    "volume_vox": 10035076137.979567,
+    "points": null,
+    "rapport": 1.0
+  },
+  {
+    "maillage": "maillon_1",
+    "volume_vox": 10123712096.258125,
+    "points": 14280,
+    "rapport": 1.0088326144276176
+  },
+  {
+    "maillage": "maillon_2",
+    "volume_vox": 10221832163.883986,
+    "points": 14280,
+    "rapport": 1.0186103247585343
+  },
+  {
+    "maillage": "maillon_3",
+    "volume_vox": 10454040389.936066,
+    "points": 14280,
+    "rapport": 1.0417499823813845
+  },
+  {
+    "maillage": "maillon_4",
+    "volume_vox": 12214683469.824837,
+    "points": 14280,
+    "rapport": 1.2171988833842675
+  },
+  {
+    "maillage": "maillon_5",
+    "volume_vox": 23921770703.70992,
+    "points": 14280,
+    "rapport": 2.3838155659999067
+  },
+  {
+    "maillage": "direct",
+    "volume_vox": 11014522045.346724,
+    "points": 14280,
+    "rapport": 1.0976022397737737
+  }
+]

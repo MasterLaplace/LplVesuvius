@@ -11,7 +11,7 @@ la fois. Une feuille de route qui liste des tâches laisse croire qu'on avance q
 tourne ; celle-ci liste des causes **éliminées**, et montre l'espace rétrécir. C'est le
 seul progrès mesurable sur un problème que personne n'a résolu.
 
-**25 causes candidates** sur **4 murs** : ❌ **15** éliminées · ✅ **7** confirmées · ⏳ **2** ouvertes · 🔒 **1** bloquée
+**26 causes candidates** sur **4 murs** : ❌ **16** éliminées · ✅ **7** confirmées · ⏳ **2** ouvertes · 🔒 **1** bloquée
 
 | symbole | verdict | ce que ça veut dire |
 |---|---|---|
@@ -57,7 +57,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 
 ## 3. L'extension tangentielle est un point fixe
 
-❌ 4 éliminées · ✅ 1 confirmée · ⏳ 1 ouverte
+❌ 5 éliminées · ✅ 1 confirmée · ⏳ 1 ouverte
 
 | cause candidate | | ce qui a été mesuré | où |
 |---|---|---|---|
@@ -66,6 +66,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | enchaîner rogner puis étendre | ❌ | le cycle converge vers un point fixe autour de 6 cm² : chaque tour regagne ce qu'il vient de perdre | [`44`](44_ou_la_chaine_se_trouve.md) |
 | juger une courbe sur trois points | ❌ | trois points donnaient « pente monotone », six « plateau puis falaise », neuf « maximum puis descente douce » — chaque forme plausible, chaque forme fausse | [`44`](44_ou_la_chaine_se_trouve.md) |
 | juger la projection par un sondage de points | ❌ | bloc avec matière et valeur au point rendent le MÊME chiffre de 0 µm à 2,4 mm : un bloc fait 307 µm quand les feuilles sont à 10-20 µm | [`44`](44_ou_la_chaine_se_trouve.md) |
+| enchaîner la projection sans réoptimiser | ❌ | cinq maillons de 238 µm étalent la boîte englobante ×2,38 à nombre de points constant, quand un bond direct de même longueur la laisse à ×1,10 | [`44`](44_ou_la_chaine_se_trouve.md) |
 | la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour | ⏳ | la projection existe et a DEUX seuils : contraste maximal vers 240 µm, et la nappe reste sur sa feuille jusqu'à ~380 µm. Reste à enchaîner et à réoptimiser | [`44`](44_ou_la_chaine_se_trouve.md) |
 
 ## 4. La chaîne casse au sixième tour
