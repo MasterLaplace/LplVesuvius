@@ -114,7 +114,7 @@ def dessiner(rangs: list[dict], sortie: Path, anglais: bool = False,
     if not chaine:
         raise ValueError("aucun maillon de chaîne — rien à tracer")
 
-    largeur, hauteur = 660, 372
+    largeur, hauteur = 660, 388
     gx, gy = 74, 84
     gw, gh = largeur - gx - 30, hauteur - gy - 82
     im = Image.new("RGB", (largeur, hauteur), FOND)
@@ -141,8 +141,10 @@ def dessiner(rangs: list[dict], sortie: Path, anglais: bool = False,
     if source is not None:
         repere = part_posee(source)
         d.line([(gx, Y(repere)), (gx + gw, Y(repere))], fill=REPERE, width=1)
-        d.text((gx + 4, Y(repere) - 15), T("segment publié — la référence"), font=g3,
-               fill=REPERE)
+        # ⚠ À GAUCHE, ce libellé heurtait le premier point de la courbe et l'étiquette du
+        # bond. À droite la courbe est déjà descendue, donc la place est libre par construction.
+        t = T("segment publié — la référence")
+        d.text((gx + gw - d.textlength(t, font=g3), Y(repere) - 15), t, font=g3, fill=REPERE)
 
     emb_trace = 0
     if emballement_um and 0 < emballement_um <= hi:
@@ -170,8 +172,10 @@ def dessiner(rangs: list[dict], sortie: Path, anglais: bool = False,
         x, y = X(float(r["parcouru_um"])), Y(part_posee(r))
         d.polygon([(x, y - 7), (x + 7, y), (x, y + 7), (x - 7, y)],
                   outline=BOND, fill=FOND, width=2)
+        # ⚠ Au-DESSUS, cette étiquette se superposait à celle du maillon de même distance :
+        # deux nombres différents au même endroit, ce qui est pire que pas de nombre du tout.
         t = f"{part_posee(r) * 100:.0f} %"
-        d.text((x - d.textlength(t, font=g3) / 2, y - 22), t, font=g3, fill=BOND)
+        d.text((x + 12, y + 8), t, font=g3, fill=BOND)
 
     lx = 24
     depassement = 0
@@ -187,10 +191,22 @@ def dessiner(rangs: list[dict], sortie: Path, anglais: bool = False,
         lx += 18 + int(d.textlength(t, font=g3)) + 24
     depassement = max(0, lx - (largeur - 24))
 
-    for r in chaine + bonds:
-        x = X(float(r["parcouru_um"]))
+    # ⚠⚠ Les graduations PORTENT leur valeur. Le premier tirage dessinait les traits et pas
+    # les nombres : un axe dont on ne peut pas lire les abscisses transforme un résultat
+    # quantitatif en impression. Éclaircies quand elles se touchent, comme ailleurs.
+    etiquettes_x = 0
+    dernier = -1e9
+    for r in sorted(chaine + bonds, key=lambda q: float(q["parcouru_um"])):
+        um = float(r["parcouru_um"])
+        x = X(um)
         d.line([(x, gy + gh), (x, gy + gh + 5)], fill=GRIS, width=1)
-    d.text((gx, gy + gh + 10), T("distance parcourue le long de la tangente") + " (µm)",
+        t = f"{um:.0f}"
+        w = d.textlength(t, font=g3)
+        if x - w / 2 >= dernier + 6:
+            d.text((x - w / 2, gy + gh + 8), t, font=g3, fill=GRIS)
+            dernier = x + w / 2
+            etiquettes_x += 1
+    d.text((gx, gy + gh + 26), T("distance parcourue le long de la tangente") + " (µm)",
            font=g3, fill=GRIS)
     d.line([(24, hauteur - 34), (largeur - 24, hauteur - 34)], fill=TRAIT, width=1)
     d.text((24, hauteur - 28),
@@ -200,6 +216,7 @@ def dessiner(rangs: list[dict], sortie: Path, anglais: bool = False,
     sortie.parent.mkdir(parents=True, exist_ok=True)
     im.save(sortie)
     return {"maillons": len(chaine), "bonds": len(bonds), "repere": repere,
+            "etiquettes_x": etiquettes_x,
             "largeur": largeur, "hauteur": hauteur, "depassement": int(depassement),
             "emballement_trace": emb_trace,
             "parts": [part_posee(r) for r in chaine],
@@ -264,6 +281,16 @@ def _verifier() -> int:
         r2 = dessiner(faux, Path(td) / "b.png", emballement_um=99999.0)
         v("un horizon hors domaine est sauté", r2["emballement_trace"] == 0)
         v("aucun libellé ne déborde", r["depassement"] == 0, f"{r['depassement']} px")
+        # ⚠ Un axe dont on ne lit pas les abscisses transforme un résultat en impression.
+        v("les abscisses portent leur valeur", r["etiquettes_x"] >= 2,
+          str(r["etiquettes_x"]))
+        # ⚠⚠ … et l'éclaircissage doit ÉCLAIRCIR : deux maillons à la même distance ne
+        # peuvent pas écrire deux nombres au même endroit.
+        serre = [dict(x) for x in faux]
+        serre[2]["parcouru_um"] = 287.0
+        rs = dessiner(serre, Path(td) / "serre.png")
+        v("des abscisses confondues n'écrivent qu'une étiquette",
+          rs["etiquettes_x"] < 3, str(rs["etiquettes_x"]))
         try:
             dessiner(faux[:1], Path(td) / "c.png")
             v("un seul maillage est refusé", False)

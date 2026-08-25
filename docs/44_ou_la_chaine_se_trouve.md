@@ -607,12 +607,38 @@ maillon, mais les points sans matière passent de 21 % (à 286 µm) à **29 %** 
 (587). La nappe **quitte sa feuille avant de se détruire** — donc l'horizon utile est plus
 court que l'horizon géométrique.
 
-⚠ **Une réserve de méthode, trouvée en écrivant ceci** : les maillons les plus lointains
-sortent de la boîte de prédiction téléchargée, et « je n'ai pas cette région » remplissait le
-même compteur que « le rouleau est vide ici ». La campagne rapporte désormais **`hors boîte` en
-colonne propre** et refuse de laisser lire les autres colonnes d'un maillage majoritairement
-dehors. Les lignes ci-dessus sont dans la boîte ; celles au-delà de 600 µm attendent une boîte
-plus large.
+⚠ **Une réserve de méthode, trouvée en écrivant ceci, puis levée par la mesure** : les
+maillons lointains sortaient de la boîte de prédiction téléchargée, et « je n'ai pas cette
+région » remplissait le même compteur que « le rouleau est vide ici ». La campagne rapporte
+désormais **`hors boîte` en colonne propre** et dénonce un maillage majoritairement dehors.
+Boîte élargie à 117 chunks, re-mesuré : **`hors boîte` vaut 0 partout jusqu'à 887 µm**. La
+chute est donc réelle et non un artefact de téléchargement.
+
+![La part des points posés sur la matière, contre la distance parcourue](images/44_matiere_de_la_chaine.png)
+
+| parcouru | posé sur la matière |
+|---:|---:|
+| **source publiée** | **78,9 %** |
+| chaîne, 286 µm | ⭐ **78,9 %** |
+| **bond direct, 286 µm** | 75,4 % |
+| chaîne, 383 µm | 77,2 % |
+| chaîne, 481 µm | 71,5 % |
+| chaîne, 587 µm | ⚠ 58,0 % |
+| chaîne, 713 µm | ⚠⚠ 41,8 % |
+| chaîne, 887 µm | ⚠⚠ 35,6 % |
+
+> ⭐⭐⭐ **La chaîne tient EXACTEMENT le niveau du segment publié jusqu'à 383 µm** — 78,9 puis
+> 77,2 % contre 78,9 % — pendant que le bond direct est déjà 3,5 points en dessous à 286 µm.
+>
+> ⚠⚠ **Et la matière s'épuise AVANT que la géométrie n'explose** : sur la figure, la ligne
+> rouge de l'emballement du pas arrive **après** que la courbe a commencé à tomber. L'horizon
+> **utile** est donc plus court que l'horizon **géométrique** — ~480 µm plutôt que 580.
+
+⚠ Ce qui est compté « posé » n'est pas `recalés` : un point qui **bute sur la borne** de
+recherche *a trouvé de la matière*, il n'a pas prouvé qu'il en tenait le sommet, et l'exclure
+ferait passer une portée trop courte pour une feuille absente. Les points **hors boîte** sortent
+du **dénominateur** — les compter ferait tomber la courbe *parce que* la chaîne sort de la
+boîte, c'est-à-dire fabriquerait le résultat cherché.
 
 #### ⭐⭐⭐ Et le remède n'est PAS spéculatif : il est mesuré ailleurs, à 2,4 mm
 
@@ -1518,6 +1544,11 @@ tools/fetch_zarr_boite.py "$PREDICTION_PS256" data/pred_ps256_niv2 --niveau 2 \
 ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 tools/recalage_de_la_chaine.sh \
   data/temoin_rendu/morceaux/morceau_00 data/chaine_courte/maillon_3 \
   data/chaine_courte/direct data/chaine_longue_95/maillon_{5,6,8}
+
+# La figure du contact avec la matière (l'horizon géométrique en repère)
+uv run --project . python analysis/src/figure_matiere_de_la_chaine.py \
+  docs/recalage_de_la_chaine.json --emballement-um 580 \
+  --sortie docs/images/44_matiere_de_la_chaine.png
 
 # La courbe de portée AVEC les nappes enchaînées superposées aux mêmes distances
 uv run --project . python analysis/src/figure_portee.py \
