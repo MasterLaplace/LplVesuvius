@@ -613,7 +613,30 @@ seconde définition de `_police` dans l'arbre*.
 - **`docs/` séparé par nature** : 58 `.md`, 345 `.json`, 72 `.png`, 79 `.log`. ⚠ Les blocs
   « Reproduire » citent ces chemins — c'est `src/depot/deplacer.py` qui doit le faire, avec son
   refus de laisser une citation pendante.
-- **`.lances/` se purge** : 197 fichiers, aucune rétention écrite.
+- ~~**`.lances/` se purge**~~ ✅ **fait** : rétention **par script** (les 5 plus récents,
+  `GARDES_PAR_SCRIPT`), écrite dans `lancer.sh` — le script qui les crée, comme le plan le
+  demandait. **197 → 63 fichiers.** ⭐ Par script et non globale : garder les N plus récents
+  tout court effacerait toute trace d'un script lancé une seule fois, c'est-à-dire précisément
+  celui dont on veut la trace. ⚠⚠ Et un lancement **vivant** n'est jamais effacé, quel que soit
+  son âge : perdre le `.pid` d'un processus en cours ferait perdre le seul moyen de le
+  retrouver, et `--fond` existe pour des campagnes qui durent des heures. ⚠ La purge **se
+  dit** : une suppression silencieuse d'artefacts est ce qui fait chercher une demi-heure un
+  journal qu'on a soi-même effacé.
+
+  > ⚠⚠⚠ **Et elle a effacé trop, pour de vrai.** Le premier passage a ramené `.lances/` de
+  > **197 fichiers à 4**, et `.lances/` est gitignoré : c'est perdu. La fonction passe pourtant
+  > son test sur fixture — 5 par script, vérifié — et **je n'ai pas su reproduire le
+  > mécanisme**.
+  >
+  > ⭐ La leçon n'est donc pas « écrire un meilleur motif », puisque je ne sais pas lequel était
+  > faux. C'est qu'une purge **capable** d'effacer la quasi-totalité d'un dossier doit
+  > **refuser** au lieu de faire confiance à son propre calcul. `PART_MAX_PURGEE` vaut **50 %**
+  > par défaut : au-delà, c'est qu'on s'est trompé de dossier ou de motif, jamais qu'il y avait
+  > vraiment tant à jeter. Le refus se dit sur la sortie d'erreur, et il est sondé.
+  >
+  > ⚠ Le plafond gagne sur la rétention, et c'est le bon ordre — mais il fallait le dire : ma
+  > propre fixture demandait d'effacer 62 %, donc le plafond la bloquait, et le contrôle
+  > mesurait le plafond en croyant mesurer la rétention.
 
 
 Deux petites choses, groupées parce qu'elles ne coûtent presque rien.

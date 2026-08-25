@@ -76,6 +76,60 @@ if [ -z "$APRES" ] && [ "${LANCER_FORCE:-0}" != "1" ] \
   done
 fi
 
+# ⚠⚠ LA RETENTION. `.lances/` ne se vidait jamais : 197 fichiers le 2026-08-26, et le compte ne
+# fait que monter. Ce n est pas le poids (1,4 Mo) qui gene, c est qu on ne retrouve plus le
+# lancement qu on cherche.
+#
+# ⭐ La retention est PAR SCRIPT et non globale : garder les vingt plus recents tout court
+# effacerait toute trace d un script lance une seule fois, c est-a-dire exactement celui dont on
+# aura besoin de la trace.
+#
+# ⚠⚠ Un lancement VIVANT n est jamais touche, quel que soit son age. Effacer le `.pid` d un
+# processus en cours ferait perdre le seul moyen de le retrouver -- et `lancer.sh --fond`
+# existe precisement pour des campagnes qui durent des heures.
+#
+# ⚠ La purge se DIT. Une suppression silencieuse d artefacts est ce qui fait chercher pendant
+# une demi-heure un journal qu on a soi-meme efface.
+GARDES_PAR_SCRIPT="${GARDES_PAR_SCRIPT:-5}"
+# ⚠⚠⚠ LE PLAFOND DE DESTRUCTION, et il vient d une perte reelle. Le 2026-08-26 cette purge a
+# ramene `.lances/` de 197 fichiers a 4 -- et `.lances/` est gitignore, donc c est perdu. La
+# fonction passe pourtant son test sur fixture (5 par script, verifie), et je n ai PAS su
+# reproduire le mecanisme. C est precisement pour ca que le plafond existe : la lecon n est pas
+# « ecrire un meilleur motif », c est qu une purge capable d effacer la quasi-totalite d un
+# dossier en un appel doit REFUSER et le dire, au lieu de faire confiance a son propre calcul.
+# ⚠ Le plafond se regle (`PART_MAX_PURGEE`), mais son defaut est la MOITIE : au-dela, c est
+# qu on s est trompe de dossier ou de motif, jamais qu il y avait vraiment tant a jeter.
+PART_MAX_PURGEE="${PART_MAX_PURGEE:-50}"
+
+purger_lances() {
+  local dossier=$1 garde=$2 efface=0 vivants=0
+  [ -d "$dossier" ] || return 0
+  local total plafond
+  total=$(find "$dossier" -maxdepth 1 -type f 2>/dev/null | wc -l)
+  plafond=$(( total * PART_MAX_PURGEE / 100 ))
+  # Les prefixes de script presents, sans leur horodatage ni leur extension.
+  for base in $(ls "$dossier" 2>/dev/null | sed 's/-[0-9]\{8\}-[0-9]\{6\}.*$//' | sort -u); do
+    local n=0
+    # ⚠ `ls -t` trie du plus recent au plus ancien : on saute les `garde` premiers.
+    for f in $(ls -t "$dossier" 2>/dev/null | grep "^${base}-[0-9]"); do
+      n=$((n + 1))
+      [ "$n" -le "$garde" ] && continue
+      local pid=""
+      case "$f" in *.pid) pid=$(cat "$dossier/$f" 2>/dev/null);; esac
+      if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then vivants=$((vivants + 1)); continue; fi
+      if [ "$efface" -ge "$plafond" ]; then
+        echo "purge : REFUS — elle voulait effacer plus de $PART_MAX_PURGEE % de $dossier" \
+             "($total fichiers). Rien de plus n a ete retire." >&2
+        return 0
+      fi
+      rm -f "$dossier/$f"; efface=$((efface + 1))
+    done
+  done
+  [ "$efface" -gt 0 ] && echo "purge : $efface fichier(s) de .lances/ retires (les $garde plus recents par script sont gardes)"
+  [ "$vivants" -gt 0 ] && echo "purge : $vivants lancement(s) encore en vie, gardes malgre leur age"
+  return 0
+}
+
 if [ "${1:-}" = "--verifier" ] || [ "$SCRIPT" = "--verifier" ]; then
   # ⭐ Deux proprietes, et la seconde est la raison d'etre du fichier.
   #
@@ -154,6 +208,48 @@ p = pathlib.Path(sys.argv[1]); p.write_text('# ligne inseree pendant que ca tour
   for _ in $(seq 1 100); do kill -0 "$PID2" 2>/dev/null || break; sleep 0.2; done
   ok "--apres démarre une fois le pid parti" "$(grep -c 'phase2=original' "$T/apres" 2>/dev/null)" "1"
 
+  # --- la retention de .lances/ ---
+  # ⚠⚠ Les controles portent sur le COMPORTEMENT : on fabrique un dossier, on purge, on compte.
+  # Un motif cherche dans ce fichier se compterait lui-meme -- piege paye trois fois ce jour-la.
+  L=$(mktemp -d)
+  # ⚠ La fixture est dimensionnee pour que la retention tienne SOUS le plafond : 12 fichiers,
+  # on en garde 4 par script, donc on en efface 4 sur 12 (33 %). Une fixture qui demanderait
+  # d en effacer 62 % ferait gagner le plafond, et le controle mesurerait le plafond en croyant
+  # mesurer la retention -- ce qui est arrive en l ecrivant.
+  for i in 1 2 3 4 5 6; do
+    : > "$L/alpha-2026081$i-120000.log"; : > "$L/beta-2026081$i-120000.log"
+  done
+  purger_lances "$L" 4 > /dev/null
+  ok "la retention garde N fichiers par script" "$(ls "$L" | grep -c '^alpha-')" "4"
+  # ⭐ PAR SCRIPT et non globale : garder les N plus recents tout court effacerait toute trace
+  # d un script lance une seule fois -- c est-a-dire celui dont on veut justement la trace.
+  ok "... pour CHAQUE script, pas les N globaux" "$(ls "$L" | grep -c '^beta-')" "4"
+  ok "... donc huit fichiers restent" "$(ls "$L" | wc -l)" "8"
+  # ⚠⚠ Un lancement VIVANT n est jamais efface, quel que soit son age : perdre le `.pid` d un
+  # processus en cours ferait perdre le seul moyen de le retrouver, et `--fond` existe pour des
+  # campagnes qui durent des heures.
+  rm -f "$L"/*
+  for i in 1 2 3 4 5; do : > "$L/gamma-2026081$i-120000.pid"; done
+  echo $$ > "$L/gamma-20260811-120000.pid"
+  purger_lances "$L" 2 > /dev/null
+  ok "un lancement VIVANT survit a la purge" "$(ls "$L" | grep -c 'gamma-20260811')" "1"
+  ok "... et les autres anciens partent quand meme" "$(ls "$L" | wc -l)" "3"
+  # ⚠⚠⚠ LE PLAFOND. Une purge capable d effacer la quasi-totalite d un dossier doit REFUSER :
+  # elle l a fait pour de vrai le 2026-08-26, ramenant `.lances/` de 197 fichiers a 4, et le
+  # mecanisme n a pas su etre reproduit. Un garde-fou qui ne depend pas de comprendre la panne.
+  rm -f "$L"/*
+  for i in 1 2 3 4 5 6 7 8 9; do : > "$L/delta-2026080$i-120000.log"; done
+  purger_lances "$L" 1 > /dev/null 2>&1
+  ok "une purge ne descend jamais sous la moitie du dossier" "$(ls "$L" | wc -l)" "5"
+  rm -f "$L"/*
+  for i in 1 2 3 4 5 6 7 8 9; do : > "$L/eps-2026080$i-120000.log"; done
+  ok "... et le refus se DIT sur la sortie d erreur" \
+     "$(purger_lances "$L" 1 2>&1 >/dev/null | grep -c 'REFUS')" "1"
+
+  purger_lances "$L/nexiste_pas" 3 > /dev/null
+  ok "un dossier absent ne fait pas planter" "$?" "0"
+  rm -rf "$L"
+
   rm -f "$CIBLE" "$RACINE"/.lances/.temoin_lancer-*; rm -rf "$T"
   if [ "$E" -gt 0 ]; then echo "ECHEC ($E failures, $N checks)"; exit 1; fi
   echo "ALL PASS ($E failures, $N checks)"; exit 0
@@ -168,6 +264,7 @@ mkdir -p "$LANCES/gel"
 cp "$SCRIPT" "$GEL"
 chmod +x "$GEL"
 echo "figé : $GEL"
+purger_lances "$LANCES" "$GARDES_PAR_SCRIPT"
 
 if [ -n "$APRES" ]; then
   # Le gel est deja pris : editer le script pendant l'attente reste sans effet, ce qui est
