@@ -28,5 +28,18 @@
   "en_travers_p90_spires": 0.14710608830830918,
   "a": "maillon_3",
   "b": "direct",
-  "depuis": "morceau_00"
+  "depuis": "morceau_00",
+  "carte": "docs/images/44_ecart_chaine_courte.png",
+  "points_absents": 0,
+  "points_au_dela_demi_spire": 42,
+  "concentration": {
+    "total": 69615.06011996997,
+    "part_examinee": 0.1,
+    "lignes": 0.1315059875257325,
+    "lignes_comptees": 12,
+    "lignes_total": 120,
+    "colonnes": 0.242648453458396,
+    "colonnes_comptees": 12,
+    "colonnes_total": 119
+  }
 }

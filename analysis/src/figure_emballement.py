@@ -52,6 +52,7 @@ ANGLAIS = {
     "bond direct": "direct jump",
     "maillon": "link",
     "un pas tenu": "a step held",
+    "échelle verticale logarithmique": "logarithmic vertical scale",
 }
 
 
@@ -100,8 +101,16 @@ def lire_chaine(json_croissance: Path) -> dict:
     return {"maillons": maillons, "direct": direct}
 
 
-def dessiner(chaines: list[dict], sortie: Path, anglais: bool = False) -> dict:
-    """Un panneau par chaîne, à échelle verticale PARTAGÉE."""
+def dessiner(chaines: list[dict], sortie: Path, anglais: bool = False,
+             log: bool = False) -> dict:
+    """Un panneau par chaîne, à échelle verticale PARTAGÉE.
+
+    ⚠⚠ `log` n'est PAS un réglage de goût. Une chaîne qui survit six maillons puis multiplie
+    son pas par deux mille ne tient pas sur un axe linéaire : les six maillons qui portent le
+    résultat s'écrasent sur la ligne du bas et la figure ne montre plus que l'explosion, qu'on
+    connaît déjà. L'axe est **étiqueté** en conséquence, sinon un lecteur lirait des écarts
+    verticaux comme des différences additives.
+    """
     if len(chaines) < 1:
         raise ValueError("aucune chaîne — il faut au moins un panneau")
     g1, g2, g3 = _police()
@@ -131,6 +140,8 @@ def dessiner(chaines: list[dict], sortie: Path, anglais: bool = False) -> dict:
     toutes = [v for c in chaines for m in c["maillons"]
               for v in (m.get("rapport_pas") or 1.0, m.get("rapport") or 1.0)]
     haut = max(1.15, max(toutes) * 1.06)
+    import math
+    lhaut = math.log10(haut)
 
     gy, gh = 92, hauteur - 92 - 94
     marge, entre = 62, 40
@@ -157,13 +168,21 @@ def dessiner(chaines: list[dict], sortie: Path, anglais: bool = False) -> dict:
             y = gy + gh * k / 4
             d.line([(gx, y), (gx + pw, y)], fill=TRAIT, width=1)
             if pi == 0:
-                val = haut - (haut - 1.0 + 0.0) * 0.0
-                val = 1.0 + (haut - 1.0) * (1.0 - k / 4)
-                d.text((gx - 42, y - 7), f"×{val:.2f}".replace(".", ","), font=g3, fill=GRIS)
+                if log:
+                    val = 10.0 ** (lhaut * (1.0 - k / 4))
+                    t = f"×{val:,.0f}".replace(",", " ") if val >= 10 else \
+                        f"×{val:.2f}".replace(".", ",")
+                else:
+                    val = 1.0 + (haut - 1.0) * (1.0 - k / 4)
+                    t = f"×{val:.2f}".replace(".", ",")
+                d.text((gx - 48, y - 7), t, font=g3, fill=GRIS)
         d.line([(gx, gy + gh), (gx + pw, gy + gh)], fill=GRIS, width=1)
 
         def Y(v):
-            return gy + gh * (1.0 - (max(1.0, min(haut, v)) - 1.0) / (haut - 1.0))
+            w = max(1.0, min(haut, v))
+            if log:
+                return gy + gh * (1.0 - (math.log10(w) / lhaut if lhaut > 0 else 0.0))
+            return gy + gh * (1.0 - (w - 1.0) / (haut - 1.0))
 
         def X(i):
             return gx + (pw * (i + 1) / (n + 1) if n > 1 else pw / 2)
@@ -181,7 +200,9 @@ def dessiner(chaines: list[dict], sortie: Path, anglais: bool = False) -> dict:
             for i, (x, y) in enumerate(pts):
                 d.ellipse([x - 4, y - 4, x + 4, y + 4], fill=couleur)
             # La dernière valeur de chaque série, écrite : c'est celle qui porte le verdict.
-            t = f"{maillons[-1].get(cle) or 1.0:.2f}".replace(".", ",")
+            der = maillons[-1].get(cle) or 1.0
+            t = (f"{der:,.0f}".replace(",", " ") if log and der >= 10
+                 else f"{der:.2f}".replace(".", ","))
             w = d.textlength(t, font=g3)
             x, y = pts[-1]
             d.text((min(x + 7, gx + pw - w), y - 15 if cle == "rapport_pas" else y + 5),
@@ -204,14 +225,28 @@ def dessiner(chaines: list[dict], sortie: Path, anglais: bool = False) -> dict:
         emballements.append(emballement([m.get("rapport_pas") or 1.0 for m in maillons]))
 
     d.line([(24, hauteur - 30), (largeur - 24, hauteur - 30)], fill=TRAIT, width=1)
-    d.text((24, hauteur - 24),
-           T("⚠ projection PURE, sans réoptimisation : c'est le plancher d'une chaîne, "
-             "pas son plafond"), font=g3, fill=GRIS)
+    bas = T("⚠ projection PURE, sans réoptimisation : c'est le plancher d'une chaîne, "
+            "pas son plafond")
+    if log:
+        # ⚠ L'axe DIT qu'il est logarithmique. Sans ça, un lecteur lit les écarts verticaux
+        # comme des différences additives, et cette figure couvre trois ordres de grandeur.
+        bas = T("échelle verticale logarithmique") + "   ·   " + bas
+    d.text((24, hauteur - 24), bas, font=g3, fill=GRIS)
 
     sortie.parent.mkdir(parents=True, exist_ok=True)
     im.save(sortie)
+    # ⚠ Deux repères que la sonde peut lire : où tombe le plancher (×1) et où tombe une
+    # valeur d'essai (×5). C'est ce qui rend « le log décolle les petites valeurs » vérifiable
+    # au lieu d'être une affirmation sur une image.
+    def _y(v):
+        w = max(1.0, min(haut, v))
+        if log:
+            return gy + gh * (1.0 - (math.log10(w) / lhaut if lhaut > 0 else 0.0))
+        return gy + gh * (1.0 - (w - 1.0) / (haut - 1.0))
+
     return {"panneaux": len(chaines), "largeur": largeur, "hauteur": hauteur,
-            "haut_axe": haut, "depassement": int(depassement),
+            "haut_axe": haut, "depassement": int(depassement), "log": log,
+            "y_plancher": int(_y(1.0)), "y_essai": int(_y(5.0)),
             "emballements": emballements,
             "intraduits": intraduits, "inchanges": inchanges}
 
@@ -275,6 +310,26 @@ def _verifier() -> int:
         v("une chaîne plate garde un axe utilisable", rp["haut_axe"] > 1.0,
           str(rp["haut_axe"]))
 
+        # ⚠⚠ L'AXE LOG. Une chaîne qui multiplie son pas par 2 692 écrase ses six premiers
+        # maillons sur la ligne du bas en linéaire — donc la figure ne montrerait plus que
+        # l'explosion, qu'on connaît déjà, et pas l'horizon, qui est le résultat.
+        folle = {"titre": "20 maillons", "maillons": [
+            {"maillage": f"maillon_{i}", "rapport": 1.0 + i ** 4, "rapport_pas": 1.0 + i ** 4}
+            for i in range(1, 21)]}
+        rl = dessiner([folle], Path(td) / "log.png", log=True)
+        rlin = dessiner([folle], Path(td) / "lin.png", log=False)
+        v("les deux échelles couvrent la même valeur",
+          abs(rl["haut_axe"] - rlin["haut_axe"]) < 1e-9)
+        # ⭐ Ce qui distingue les deux : en log, un maillon à ×5 est VISIBLEMENT au-dessus du
+        # plancher ; en linéaire il est à moins d'un millième de la hauteur, donc dessus.
+        v("en log, un petit maillon décolle du plancher",
+          rl["y_essai"] < rl["y_plancher"] - 20, f"{rl['y_essai']} vs {rl['y_plancher']}")
+        v("en linéaire, il reste collé au plancher",
+          rlin["y_plancher"] - rlin["y_essai"] < 3,
+          f"{rlin['y_essai']} vs {rlin['y_plancher']}")
+        v("l'axe log le DIT dans son bandeau", rl["log"] and not rlin["log"])
+        v("... sans rien faire déborder", rl["depassement"] == 0)
+
         try:
             dessiner([], Path(td) / "vide.png")
             v("aucune chaîne est refusée", False)
@@ -325,6 +380,8 @@ def main() -> int:
     p.add_argument("--titres", nargs="*", default=[],
                    help="un titre par panneau, dans le même ordre")
     p.add_argument("--sortie", type=Path, default=Path("docs/images/44_emballement.png"))
+    p.add_argument("--log", action="store_true",
+                   help="axe vertical logarithmique — nécessaire au-delà d'un ordre de grandeur")
     p.add_argument("--anglais", action="store_true")
     p.add_argument("--verifier", action="store_true")
     a = p.parse_args()
@@ -339,7 +396,7 @@ def main() -> int:
         c = lire_chaine(j)
         c["titre"] = a.titres[i] if i < len(a.titres) else j.stem
         chaines.append(c)
-    r = dessiner(chaines, a.sortie, anglais=a.anglais)
+    r = dessiner(chaines, a.sortie, anglais=a.anglais, log=a.log)
     print(f"écrit : {a.sortie}  ({r['panneaux']} panneaux, axe jusqu'à ×{r['haut_axe']:.2f})")
     for i, e in enumerate(r["emballements"]):
         print(f"  {chaines[i]['titre']} : "

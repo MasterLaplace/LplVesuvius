@@ -53,6 +53,22 @@ def lire(dossier: Path):
     return plans, meta
 
 
+def _police():
+    from PIL import ImageFont
+    for c in ("DejaVuSans.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"):
+        try:
+            return ImageFont.truetype(c, 13), ImageFont.truetype(c, 11)
+        except OSError:
+            continue
+    d = ImageFont.load_default()
+    return d, d
+
+
+def _pixels(im):
+    f = getattr(im, "get_flattened_data", None) or im.getdata
+    return set(f())
+
+
 def valide(plans):
     return (plans["x"] > INVALIDE) & (plans["y"] > INVALIDE) & (plans["z"] > INVALIDE)
 
@@ -147,6 +163,144 @@ def en_micrometres(r: dict, voxel_um: float, spire_um: float | None = None) -> d
     return out
 
 
+# ⚠⚠ La carte a besoin de l'écart PAR POINT, pas de ses quantiles. `ecart` rend des
+# statistiques parce que c'est ce qu'un verdict demande ; `champ_ecart` rend la grille, parce
+# qu'une moyenne ne dit pas OÙ deux maillages se séparent — et « partout un peu » et « beaucoup
+# le long d'un pli » sont deux mécanismes différents qui donnent la même médiane.
+def champ_ecart(a_plans, b_plans):
+    """La grille des écarts point à point, et le masque des points comparables."""
+    import numpy as np
+
+    formes = {a_plans["x"].shape, b_plans["x"].shape}
+    if len(formes) != 1:
+        raise ValueError(f"grilles de formes différentes : {formes} — non appariables")
+    bon = valide(a_plans) & valide(b_plans)
+    champ = np.zeros(a_plans["x"].shape, dtype=np.float64)
+    if bon.any():
+        d = np.stack([b_plans[c][bon].astype(np.float64) - a_plans[c][bon].astype(np.float64)
+                      for c in ("x", "y", "z")], axis=1)
+        champ[bon] = np.linalg.norm(d, axis=1)
+    return champ, bon
+
+
+def concentration(champ, bon, part: float = 0.10) -> dict:
+    """Le désaccord est-il RÉPARTI ou CONCENTRÉ, et sur quel axe de grille ?
+
+    ⚠⚠ Deux mécanismes rendent la même médiane et demandent deux remèdes opposés. « Partout un
+    peu » est une accumulation : elle se combat en raccourcissant le pas. « Beaucoup le long de
+    quelques lignes » est une poignée de tangentes fausses : elle se combat en les **rejetant**,
+    et raccourcir le pas n'y ferait rien.
+
+    ⭐ Le nombre est directement lisible parce qu'il porte son propre témoin : sur un champ
+    **uniforme**, le pire dixième des lignes porte exactement un dixième du total. Un 0,10 dit
+    donc « réparti » et un 0,60 dit « six fois plus concentré qu'un hasard uniforme », sans
+    qu'aucun seuil n'ait à être choisi.
+
+    ⚠ Les deux axes sont rendus, jamais un seul : *lequel* concentre est le diagnostic. Une
+    concentration le long de l'axe de projection et une concentration en travers de lui ne
+    disent pas la même chose du champ de tangentes.
+    """
+    import numpy as np
+
+    total = float(champ[bon].sum())
+    out = {"total": total, "part_examinee": part}
+    if total <= 0:
+        out["lignes"] = out["colonnes"] = None
+        return out
+    for nom, axe in (("lignes", 1), ("colonnes", 0)):
+        # Somme le long de `axe` : il reste un poids par ligne de l'AUTRE axe.
+        poids = np.where(bon, champ, 0.0).sum(axis=axe)
+        n = max(1, int(round(len(poids) * part)))
+        pires = np.sort(poids)[::-1][:n]
+        out[nom] = float(pires.sum() / total)
+        out[nom + "_comptees"] = n
+        out[nom + "_total"] = int(len(poids))
+    return out
+
+
+# ⚠ Le point où la question bascule : à une DEMI-spire, deux maillages sont plus près de deux
+# feuilles différentes que de la même. C'est la seule graduation qui porte un sens physique,
+# donc c'est celle que la carte trace.
+DEMI_SPIRE = 0.5
+ABSENT = (232, 228, 220)
+FROID = (74, 132, 96)
+CHAUD = (196, 72, 60)
+
+
+def teinte(v: float, haut: float):
+    """Du vert au rouge, saturé à `haut`. Le vert est « même feuille », le rouge « ailleurs »."""
+    t = 0.0 if haut <= 0 else max(0.0, min(1.0, v / haut))
+    return tuple(int(FROID[i] + (CHAUD[i] - FROID[i]) * t) for i in range(3))
+
+
+def carte(a_plans, b_plans, sortie: Path, voxel_um: float,
+          spire_um: float | None = None, zoom: int = 4, titre: str = "") -> dict:
+    """Où, sur la nappe, les deux maillages se séparent.
+
+    ⚠⚠ Un point ABSENT d'un des deux maillages est peint d'une teinte qui n'appartient pas au
+    dégradé. Le peindre en vert le ferait lire comme un accord parfait — c'est-à-dire que les
+    trous ressembleraient au meilleur résultat possible, ce qui est la pire confusion possible
+    sur une carte de désaccord.
+    """
+    from PIL import Image, ImageDraw
+
+    # ⚠ La police par défaut de PIL n'a ni flèche ni accent correctement espacé : la légende
+    # sortait en « 0 ⊐ 0,686 » et « points au-delàd'une ». DejaVu est celle de toutes les
+    # autres figures du dépôt, donc la carte se lit comme elles.
+    g_titre, g_corps = _police()
+
+    champ, bon = champ_ecart(a_plans, b_plans)
+    unite = spire_um if spire_um else voxel_um
+    # En spires si on en a une, sinon en voxels — et l'échelle le DIT dans sa légende.
+    valeurs = champ * voxel_um / spire_um if spire_um else champ
+    haut = max(1e-9, float(valeurs[bon].max()) if bon.any() else 1.0)
+
+    h, w = champ.shape
+    haut_titre = 26 if titre else 0
+    lib = "spires" if spire_um else "voxels"
+    au_dela = int((valeurs[bon] >= DEMI_SPIRE).sum()) if spire_um else 0
+    legende = f"0 à {haut:.3f} {lib}".replace(".", ",")
+    if spire_um:
+        legende += f"   ·   {au_dela} points au-delà d'une demi-spire"
+    # ⚠⚠ Le canevas est dimensionné pour CONTENIR sa légende, mesurée. Un libellé coupé est
+    # invisible pour un contrôle qui ne regarde que des couleurs — et c'est exactement ce qui
+    # est passé au premier tirage, où la carte annonçait « au-delà d'une demi- ».
+    mes = ImageDraw.Draw(Image.new("RGB", (1, 1)))
+    bar_x = 8 + 60 * 3 + 10
+    besoin = bar_x + int(mes.textlength(legende, font=g_corps)) + 8
+    if titre:
+        besoin = max(besoin, 8 + int(mes.textlength(titre, font=g_titre)) + 8)
+    im = Image.new("RGB", (max(w * zoom, besoin), h * zoom + haut_titre + 36),
+                   (250, 249, 246))
+    d = ImageDraw.Draw(im)
+    if titre:
+        d.text((8, 6), titre, font=g_titre, fill=(28, 30, 34))
+    for r in range(h):
+        for c in range(w):
+            if not bon[r, c]:
+                col = ABSENT
+            else:
+                col = teinte(float(valeurs[r, c]), haut)
+            d.rectangle([c * zoom, r * zoom + haut_titre,
+                         c * zoom + zoom - 1, r * zoom + haut_titre + zoom - 1], fill=col)
+    y = h * zoom + haut_titre + 10
+    for k in range(60):
+        d.rectangle([8 + k * 3, y, 8 + k * 3 + 2, y + 10], fill=teinte(haut * k / 59, haut))
+    d.text((bar_x, y - 2), legende, font=g_corps, fill=(90, 92, 96))
+    depassement = max(0, bar_x + int(d.textlength(legende, font=g_corps)) - im.size[0])
+    sortie.parent.mkdir(parents=True, exist_ok=True)
+    im.save(sortie)
+    # ⚠ La GRILLE est rapportée à part du canevas : le titre et la légende sont de la
+    # décoration et peuvent bouger, « une case par point de grille » ne le peut pas. Un
+    # contrôle écrit sur la taille du canevas se casse à chaque retouche de mise en page et
+    # ne dit rien sur ce qui compte.
+    return {"largeur": im.size[0], "hauteur": im.size[1],
+            "grille_largeur": w * zoom, "grille_hauteur": h * zoom, "haut_echelle": haut,
+            "depassement": int(depassement),
+            "unite": lib, "points_absents": int((~bon).sum()),
+            "points_au_dela_demi_spire": au_dela if spire_um else None}
+
+
 def verifier() -> int:
     """Les témoins, sur des maillages fabriqués dont on connaît l'écart exact."""
     import shutil
@@ -154,6 +308,7 @@ def verifier() -> int:
 
     import numpy as np
     import tifffile
+    from PIL import Image
 
     echecs = controles = 0
 
@@ -260,6 +415,94 @@ def verifier() -> int:
     u = en_micrometres({"ecart_median_vox": 4.0}, 2.4, spire_um=0.0)
     v("une spire nulle n'invente pas de division", "ecart_median_spires" not in u)
 
+    # ⚠⚠ LA CARTE. Elle existe parce qu'une médiane ne dit pas OÙ deux maillages se séparent,
+    # et « partout un peu » et « beaucoup le long d'un pli » sont deux mécanismes différents
+    # qui rendent la même médiane.
+    import numpy as _np
+    a2 = decale(30, 0, 0)
+    b2 = {c: arr.copy() for c, arr in decale(30, 0, 0).items()}
+    b2["z"][3, 5] += 100.0          # un seul point qui s'écarte
+    ch, bo = champ_ecart(a2, b2)
+    v("le champ isole le point qui s'écarte", abs(ch[3, 5] - 100.0) < 1e-9, str(ch[3, 5]))
+    v("... et laisse les autres à zéro", float(ch.sum()) == float(ch[3, 5]))
+    v("le masque couvre toute la grille", int(bo.sum()) == lignes * colonnes)
+    for c in ("x", "y", "z"):
+        b2[c][0, 0] = INVALIDE
+    ch, bo = champ_ecart(a2, b2)
+    v("un point invalide sort du masque", not bool(bo[0, 0]))
+    v("... et son écart n'est pas inventé", ch[0, 0] == 0.0)
+    # ⚠ Le dégradé est SATURÉ : au-delà du haut de l'échelle il ne devient pas plus rouge, et
+    # en dessous de zéro pas plus vert. Sondé aux deux bouts.
+    v("le bas du dégradé est le froid", teinte(0.0, 10.0) == FROID)
+    v("le haut du dégradé est le chaud", teinte(10.0, 10.0) == CHAUD)
+    v("au-delà, ça sature", teinte(1000.0, 10.0) == CHAUD)
+    v("une échelle nulle ne divise pas par zéro", teinte(5.0, 0.0) == FROID)
+    # ⚠⚠ La couleur des ABSENTS n'appartient PAS au dégradé. Sinon un trou se lirait comme
+    # l'accord parfait — la pire confusion possible sur une carte de désaccord.
+    degrade = {teinte(k / 40.0, 1.0) for k in range(41)}
+    v("la teinte des absents n'est pas dans le dégradé", ABSENT not in degrade)
+
+    # ⚠⚠ CONCENTRATION : le témoin est dans le nombre lui-même. Un champ uniforme met un
+    # dixième du total dans le pire dixième des lignes, donc 0,10 signifie « réparti » sans
+    # qu'aucun seuil n'ait été choisi. Sondé sur trois champs dont on connaît la réponse.
+    uni = _np.ones((10, 10))
+    tout = _np.ones((10, 10), dtype=bool)
+    c = concentration(uni, tout)
+    v("un champ uniforme concentre un dixième", abs(c["lignes"] - 0.10) < 1e-9,
+      str(c["lignes"]))
+    v("... sur les deux axes", abs(c["colonnes"] - 0.10) < 1e-9)
+    v("... et une ligne est comptée par dixième", c["lignes_comptees"] == 1)
+    raie = _np.zeros((10, 10))
+    raie[:, 3] = 1.0                       # UNE colonne porte tout
+    c = concentration(raie, tout)
+    v("une raie verticale concentre sur les colonnes", abs(c["colonnes"] - 1.0) < 1e-9,
+      str(c["colonnes"]))
+    # ⚠ Et pas sur l'autre axe : chaque ligne en reçoit autant, donc le pire dixième des
+    # lignes n'en porte qu'un dixième. C'est ce qui rend les deux nombres discriminants.
+    v("... et pas sur les lignes", abs(c["lignes"] - 0.10) < 1e-9, str(c["lignes"]))
+    c = concentration(raie.T, tout)
+    v("une raie horizontale concentre sur les lignes", abs(c["lignes"] - 1.0) < 1e-9)
+    # ⚠⚠ Les points hors masque ne comptent pas — sinon un maillage troué paraîtrait réparti.
+    masque = tout.copy()
+    masque[:, 3] = False
+    c = concentration(raie, masque)
+    v("un champ dont tout le poids est masqué a un total nul", c["total"] == 0.0)
+    v("... et n'annonce aucune concentration", c["lignes"] is None)
+
+    racine4 = Path(tempfile.mkdtemp(prefix="carte_temoins_"))
+    f = racine4 / "carte.png"
+    r = carte(a2, b2, f, voxel_um=2.4, spire_um=173.0, zoom=3)
+    v("la carte est écrite", f.is_file() and f.stat().st_size > 0)
+    # ⚠ L'invariant est « une case par point de grille », PAS la taille du canevas : le
+    # titre et la légende sont de la décoration, et un contrôle écrit sur leur hauteur se
+    # casse à chaque retouche sans rien dire de ce qui compte.
+    v("la grille a une case par point de grille",
+      r["grille_largeur"] == colonnes * 3 and r["grille_hauteur"] == lignes * 3,
+      f"{r['grille_largeur']}x{r['grille_hauteur']}")
+    v("... et le canevas la contient entièrement",
+      r["largeur"] >= r["grille_largeur"] and r["hauteur"] > r["grille_hauteur"])
+    v("le trou est compté comme absent", r["points_absents"] == 1)
+    # 100 voxels × 2,4 = 240 µm, soit 1,387 spire : au-delà d'une demi-spire.
+    v("l'unité est la spire quand elle est donnée", r["unite"] == "spires")
+    v("le point qui s'écarte dépasse la demi-spire",
+      r["points_au_dela_demi_spire"] == 1, str(r["points_au_dela_demi_spire"]))
+    px = _pixels(Image.open(f).convert("RGB"))
+    v("la teinte des absents est bien peinte", ABSENT in px)
+    # ⚠⚠ La légende ne doit pas être COUPÉE. Un libellé tronqué est invisible pour un contrôle
+    # qui ne regarde que des couleurs, et le premier tirage annonçait « au-delà d'une demi- ».
+    v("la légende tient dans le canevas", r["depassement"] == 0, f"{r['depassement']} px")
+    long_titre = carte(a2, b2, racine4 / "titre.png", voxel_um=2.4, spire_um=173.0, zoom=1,
+                       titre="un titre volontairement très long pour déborder du canevas")
+    v("... même avec un titre plus large que la grille", long_titre["depassement"] == 0)
+    v("... et le canevas s'élargit alors", long_titre["largeur"] > colonnes)
+    # ⚠ Sans spire, la carte se lit en voxels et n'annonce AUCUN franchissement : « une demi-
+    # spire » n'a pas de sens sans spire, et l'annoncer quand même serait un nombre sans unité.
+    r2 = carte(a2, b2, racine4 / "vox.png", voxel_um=2.4, zoom=2)
+    v("sans spire, la carte se lit en voxels", r2["unite"] == "voxels")
+    v("... et n'annonce aucun franchissement",
+      r2["points_au_dela_demi_spire"] is None)
+    shutil.rmtree(racine4, ignore_errors=True)
+
     # Le tour complet par le disque, sur de vrais fichiers.
     racine = Path(tempfile.mkdtemp(prefix="ecart_temoins_"))
     for nom, plans in (("src", src), ("a", decale(30, 0, 0)), ("b", decale(34, 0, 0))):
@@ -291,6 +534,9 @@ def main() -> int:
     p.add_argument("--spire-um", type=float,
                    help="l'écart inter-spires du rouleau (docs/16) — sans lui, aucune "
                         "lecture en spires n'est annoncée")
+    p.add_argument("--carte", type=Path,
+                   help="une carte du désaccord, un point de grille par case")
+    p.add_argument("--zoom", type=int, default=4, help="cases par point de grille")
     p.add_argument("--json", type=Path)
     p.add_argument("--verifier", action="store_true")
     a = p.parse_args()
@@ -331,6 +577,23 @@ def main() -> int:
               f"(p90 {r['en_travers_p90_um']:.1f} µm)")
     else:
         print("  ⚠ aucun rapport : la source commune n'a pas été donnée (--depuis)")
+
+    if a.carte:
+        c = carte(pa, pb, a.carte, a.voxel_um, a.spire_um, a.zoom,
+                  titre=f"où {a.a.name} et {a.b.name} se séparent")
+        r["carte"] = str(a.carte)
+        r["points_absents"] = c["points_absents"]
+        r["points_au_dela_demi_spire"] = c["points_au_dela_demi_spire"]
+        ch, bo = champ_ecart(pa, pb)
+        co = concentration(ch, bo)
+        r["concentration"] = co
+        if co.get("lignes") is not None:
+            print(f"  ⭐ concentration     le pire dixième des colonnes porte "
+                  f"{co['colonnes'] * 100:.0f} % du désaccord, "
+                  f"des lignes {co['lignes'] * 100:.0f} %   (uniforme = 10 %)")
+        print(f"  carte : {a.carte}  (échelle 0 → {c['haut_echelle']:.3f} {c['unite']}"
+              + (f", {c['points_au_dela_demi_spire']} points au-delà d'une demi-spire"
+                 if c["points_au_dela_demi_spire"] is not None else "") + ")")
 
     if a.json:
         a.json.write_text(json.dumps(r, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

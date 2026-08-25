@@ -47,6 +47,15 @@ if [ "${1:-}" = "--verifier" ]; then
   chk "... le provisoire passe par mktemp" \
       'grep -q "TMP=\$(mktemp)" "$ROOT/tools/chainer_tangentiel.sh"'
   chk "SOURCE est un parametre" 'grep -q "SOURCE:?" "$ROOT/tools/chainer_tangentiel.sh"'
+  # ⚠⚠ La geometrie est mesuree AVANT les profils, et sans eux. Un pas qui derive refute une
+  # chaine pour zero rendu ; payer deux rendus pour l apprendre serait payer pour rien.
+  chk "la geometrie est mesuree sans rendu" \
+      'grep -q -- "--croissance" "$ROOT/tools/chainer_tangentiel.sh"'
+  chk "... et elle precede les profils" \
+      '[ "$(grep -n -- "--croissance" "$ROOT/tools/chainer_tangentiel.sh" | head -1 | cut -d: -f1)" \
+        -lt "$(grep -n "profiler_une_surface.sh" "$ROOT/tools/chainer_tangentiel.sh" | tail -1 | cut -d: -f1)" ]'
+  chk "PROFILS=0 permet de s arreter la" \
+      'grep -q "PROFILS:-1" "$ROOT/tools/chainer_tangentiel.sh"'
   echo "$([ $ok = 0 ] && echo 'ALL PASS' || echo FAILURES) ($ok failures, $n checks)"
   exit $ok
 fi
@@ -82,6 +91,23 @@ if [ ! -f "$DEST/direct/meta.json" ]; then
   uv run --project "$ROOT" python "$ROOT/analysis/src/projeter_tangentiel.py" \
       "$SOURCE" --dest "$DEST/direct" --pas "$DIRECT" > "$DEST/direct.log" 2>&1 \
     || echo "   ⚠ témoin direct échoué" >&2
+fi
+
+# ⚠⚠ PROFILS=0 : enchainer et ne mesurer que la GEOMETRIE. Le pas reellement parcouru et le
+# volume englobant se lisent dans les `meta.json`, donc ils coutent zero rendu -- et un pas qui
+# derive suffit a REFUTER une chaine. Une chaine longue se sonde donc d abord comme ca, et on ne
+# paie les rendus que si la geometrie a tenu.
+# ⚠ Necessaire, pas suffisant : une chaine peut garder un pas parfait en marchant droit hors de
+# sa feuille. Cette voie ne peut que refuter, et c est precisement ce qui la rend bon marche.
+uv run --project "$ROOT" python "$ROOT/analysis/src/projeter_tangentiel.py" --croissance \
+    "$SOURCE" $(for M in $(seq 1 "$MAILLONS"); do
+        [ -f "$DEST/maillon_$M/meta.json" ] && printf '%s ' "$DEST/maillon_$M"; done) \
+    $([ -f "$DEST/direct/meta.json" ] && printf '%s' "$DEST/direct") \
+    --json "${CROISSANCE:-${JSON%.json}_croissance.json}"
+
+if [ "${PROFILS:-1}" = 0 ]; then
+  echo "PROFILS=0 — geometrie seule, aucun rendu"
+  exit 0
 fi
 
 printf '\n%-14s %10s %12s %12s\n' "surface" "µm" "amplitude" "pic au bord"

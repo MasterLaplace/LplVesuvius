@@ -445,6 +445,83 @@ mesure un **accord**, pas une vérité. Deux méthodes qui se trompent de la mê
 s'accordent parfaitement ; c'est le rendu qui tranche, et c'est ce que le paragraphe suivant
 mesure.
 
+#### ⭐⭐ Et en la REGARDANT, les deux échecs n'ont pas la même forme
+
+Une médiane ne dit pas **où** deux maillages se séparent, et « partout un peu » et « beaucoup
+le long de quelques lignes » demandent deux remèdes opposés : le premier se combat en
+raccourcissant le pas, le second en **rejetant** les tangentes fautives — et raccourcir le pas
+n'y ferait rien. La carte coûte, elle aussi, zéro rendu : une case par point de grille.
+
+| ![Le désaccord de la chaîne courte, par point de grille](images/44_ecart_chaine_courte.png) | ![Le désaccord de la chaîne longue](images/44_ecart_chaine_longue.png) |
+|---|---|
+| **3 × 95 µm** — vert presque partout, quelques **traînées verticales** | **5 × 238 µm** — brun uniforme : **14 276 points sur 14 280** au-delà d'une demi-spire |
+
+⚠⚠ **Et la mesure a corrigé ma lecture à l'œil.** Les traînées sont visibles, donc j'allais
+écrire « quelques colonnes portent tout ». Le nombre dit autre chose, et il porte son propre
+témoin — sur un champ **uniforme**, le pire dixième des lignes porte exactement un dixième du
+total :
+
+| chaîne | pire dixième des **colonnes** | des **lignes** | lecture |
+|---|---:|---:|---|
+| 3 × 95 µm | **24 %** | 13 % | 2,4× plus concentré qu'un hasard uniforme |
+| 5 × 238 µm | 13 % | 10 % | ⚠ **réparti** — plus aucune structure |
+
+> ⭐ **Deux échecs de formes différentes.** La chaîne courte a un désaccord **modérément
+> localisé** le long de l'axe de projection — donc au moins en partie attribuable à quelques
+> colonnes de tangentes. La chaîne longue n'a plus de structure du tout : ce n'est plus une
+> dérive localisée, c'est un effondrement global.
+
+⚠ Les **points verts** épars de la carte de droite ne sont pas des survivants : deux surfaces
+très différentes se croisent forcément quelque part, et les points de croisement s'affichent
+comme des accords. Lus comme « les endroits qui ont tenu », ils seraient trompeurs.
+
+#### ⭐⭐⭐ L'HORIZON d'une chaîne purement géométrique : **six maillons, 580 µm** — mesuré en secondes
+
+Puisque le pas réel refuse une chaîne **sans aucun rendu**, une chaîne longue se sonde
+d'abord comme ça. Vingt maillons de 95 µm, mode `PROFILS=0` :
+
+| maillon | parcouru | pas réel | ×pas | boîte | points |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 95 µm | 95,2 µm | 1,00 | 1,00 | 14 280 |
+| 2 | 191 | 95,4 | 1,00 | 1,01 | 14 280 |
+| 3 | 286 | 95,6 | 1,00 | 1,01 | 14 280 |
+| 4 | 382 | 96,3 | 1,01 | 1,01 | 14 280 |
+| 5 | 480 | 98,5 | 1,03 | 1,01 | 14 280 |
+| **6** | **580** | 105,7 | ⚠ **1,11** | 1,02 | 14 280 |
+| 7 | 686 | 125,9 | 1,32 | 1,05 | 14 280 |
+| 8 | 799 | 174,6 | 1,83 | 1,12 | 14 280 |
+| 10 | — | 501,6 | 5,27 | 1,71 | 14 280 |
+| 15 | — | 16 820 | 176,6 | 1 120 | 14 280 |
+| 20 | — | 256 397 | **2 692** | **4 976 545** | ⚠⚠ **615** |
+
+![L'horizon d'une chaîne de 95 µm : six maillons, puis six ordres de grandeur](images/44_horizon_chaine.png)
+
+> ⭐⭐⭐ **La chaîne marche droit jusqu'à ~580 µm, puis explose.** Les distances parcourues —
+> 95, 191, 286, 382, 480, 580 µm — sont exactement la somme des pas : elle **avance**, elle ne
+> tourne pas en rond. Puis le pas décroche au sixième maillon et le maillage se détruit :
+> au vingtième il ne reste que **615 points valides sur 14 280**.
+>
+> ⭐ **Et le pas décroche AVANT la boîte, une seconde fois** : ×1,11 contre ×1,02 au maillon 6.
+> Sur la figure, la courbe rouge est au-dessus de la verte du maillon 6 au maillon 13.
+
+**Ce que ça achète, et ce que ça n'achète pas :**
+
+- ⭐ **La chaîne va PLUS LOIN qu'un seul bond.** La projection unique est morte vers 380 µm
+  (à 476 µm elle lit 18 % de pic au bord) ; la chaîne tient un pas contrôlé jusqu'à **580 µm**.
+  Un facteur **1,5**, réel et mesuré.
+- ⚠⚠ **Et c'est très loin d'un tour.** Une nappe de `PHercParis4` fait des dizaines de
+  millimètres de circonférence. **580 µm, c'est le centième d'un tour.** Une chaîne tangentielle
+  **purement géométrique** ne fera donc jamais le tour d'une feuille — non pas « pas encore »,
+  mais par une limite maintenant chiffrée.
+- ⚠ **Ce plancher tient toujours** : ces vingt maillons projettent **purement**, sans
+  réoptimisation sur la matière. Ce qui est éliminé, c'est la chaîne **géométrique**. La chaîne
+  qui recolle sur la donnée à chaque maillon (`--correct`) reste, elle, non tentée.
+
+⭐ **Le sondage a coûté quelques secondes** — vingt projections et aucun rendu — là où le
+mesurer par des profils aurait demandé vingt rendus dont la moitié irrendables. C'est le mode
+`PROFILS=0` de la campagne, et il ne peut que **réfuter** : un pas stable est nécessaire, pas
+suffisant, puisqu'une chaîne peut garder un pas parfait en marchant droit hors de sa feuille.
+
 ⚠⚠ **Ce que ça ne dit PAS, et c'est ce qui empêche d'en conclure que la chaîne est morte** :
 ces trois points mesurent une projection **pure**, sans réoptimisation. Une vraie chaîne
 recollerait la nappe projetée sur la matière — c'est le rôle de `--correct`, que ce document
@@ -1283,6 +1360,23 @@ uv run --project . python analysis/src/ecart_de_maillages.py \
   data/chaine_courte/maillon_3 data/chaine_courte/direct \
   --depuis data/temoin_rendu/morceaux/morceau_00 --spire-um 173 \
   --json docs/ecart_chaine_courte.json
+
+# L'HORIZON, sans aucun rendu : vingt maillons, géométrie seule (quelques secondes)
+SOURCE=$PWD/data/temoin_rendu/morceaux/morceau_00 PAS=2 MAILLONS=20 PROFILS=0 \
+  DEST=$PWD/data/chaine_longue_95 JSON=$PWD/docs/chaine_longue_95.json \
+  CROISSANCE=$PWD/docs/croissance_chaine_longue_95.json \
+  tools/chainer_tangentiel.sh
+
+# La distance RÉELLEMENT parcourue par chaque maillon (l'écart à la source)
+for k in 1 2 3 4 5 6 7 8; do uv run --project . python analysis/src/ecart_de_maillages.py \
+  data/temoin_rendu/morceaux/morceau_00 data/chaine_longue_95/maillon_$k --voxel-um 2.4 \
+  | grep "écart médian"; done
+
+# La figure de l'horizon — axe LOG, sinon les six maillons qui portent le résultat s'écrasent
+uv run --project . python analysis/src/figure_emballement.py \
+  docs/croissance_chaine_longue_95.json --log \
+  --titres "20 maillons de 95 µm — l'horizon d'une chaîne purement géométrique" \
+  --sortie docs/images/44_horizon_chaine.png
 
 # La figure des deux chaînes, à échelle verticale PARTAGÉE
 uv run --project . python analysis/src/figure_emballement.py \

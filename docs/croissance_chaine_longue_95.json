@@ -1,0 +1,178 @@
+[
+  {
+    "maillage": "morceau_00",
+    "volume_vox": 10035076137.979567,
+    "points": null,
+    "pas_voxels": null,
+    "rapport": 1.0,
+    "rapport_pas": null
+  },
+  {
+    "maillage": "maillon_1",
+    "volume_vox": 10061624717.615154,
+    "points": 14280,
+    "pas_voxels": 39.678715369512176,
+    "rapport": 1.002645578296622,
+    "rapport_pas": 1.0
+  },
+  {
+    "maillage": "maillon_2",
+    "volume_vox": 10096613441.978434,
+    "points": 14280,
+    "pas_voxels": 39.74281034659344,
+    "rapport": 1.0061322209371155,
+    "rapport_pas": 1.0016153490979829
+  },
+  {
+    "maillage": "maillon_3",
+    "volume_vox": 10136702617.969154,
+    "points": 14280,
+    "pas_voxels": 39.853773038634145,
+    "rapport": 1.010127125952235,
+    "rapport_pas": 1.00441187844646
+  },
+  {
+    "maillage": "maillon_4",
+    "volume_vox": 10166302739.184235,
+    "points": 14280,
+    "pas_voxels": 40.13475384782262,
+    "rapport": 1.0130767917851682,
+    "rapport_pas": 1.011493277291453
+  },
+  {
+    "maillage": "maillon_5",
+    "volume_vox": 10160394476.830585,
+    "points": 14280,
+    "pas_voxels": 41.04847420243189,
+    "rapport": 1.0124880306963222,
+    "rapport_pas": 1.0345212494951939
+  },
+  {
+    "maillage": "maillon_6",
+    "volume_vox": 10190323952.38709,
+    "points": 14280,
+    "pas_voxels": 44.0468826299522,
+    "rapport": 1.0154705168424145,
+    "rapport_pas": 1.1100884244805058
+  },
+  {
+    "maillage": "maillon_7",
+    "volume_vox": 10558701886.77309,
+    "points": 14280,
+    "pas_voxels": 52.47679872811765,
+    "rapport": 1.052179549172703,
+    "rapport_pas": 1.3225427849521334
+  },
+  {
+    "maillage": "maillon_8",
+    "volume_vox": 11228557863.669477,
+    "points": 14280,
+    "pas_voxels": 72.74665662940828,
+    "rapport": 1.1189310085224926,
+    "rapport_pas": 1.833392436018844
+  },
+  {
+    "maillage": "maillon_9",
+    "volume_vox": 13076194365.794998,
+    "points": 14280,
+    "pas_voxels": 117.66712970412792,
+    "rapport": 1.303048844473214,
+    "rapport_pas": 2.9654974615065153
+  },
+  {
+    "maillage": "maillon_10",
+    "volume_vox": 17171497296.052732,
+    "points": 14280,
+    "pas_voxels": 209.0168538099384,
+    "rapport": 1.7111476843772102,
+    "rapport_pas": 5.267732381541266
+  },
+  {
+    "maillage": "maillon_11",
+    "volume_vox": 28460155302.640373,
+    "points": 14280,
+    "pas_voxels": 396.04091390250534,
+    "rapport": 2.8360677000673418,
+    "rapport_pas": 9.981192944739592
+  },
+  {
+    "maillage": "maillon_12",
+    "volume_vox": 68879509616.67372,
+    "points": 14280,
+    "pas_voxels": 784.656651115237,
+    "rapport": 6.863875138524033,
+    "rapport_pas": 19.775253402436043
+  },
+  {
+    "maillage": "maillon_13",
+    "volume_vox": 252097478799.50604,
+    "points": 14280,
+    "pas_voxels": 1599.2811547683111,
+    "rapport": 25.12163090077587,
+    "rapport_pas": 40.30576947551952
+  },
+  {
+    "maillage": "maillon_14",
+    "volume_vox": 1369755769112.1318,
+    "points": 14280,
+    "pas_voxels": 3326.382037892977,
+    "rapport": 136.49679885616837,
+    "rapport_pas": 83.8329065574754
+  },
+  {
+    "maillage": "maillon_15",
+    "volume_vox": 11236587017007.623,
+    "points": 14280,
+    "pas_voxels": 7008.356893703851,
+    "rapport": 1119.7311173834269,
+    "rapport_pas": 176.62761579949844
+  },
+  {
+    "maillage": "maillon_16",
+    "volume_vox": 71170399403848.27,
+    "points": 14280,
+    "pas_voxels": 14826.309630448633,
+    "rapport": 7092.163370289835,
+    "rapport_pas": 373.65901321091366
+  },
+  {
+    "maillage": "maillon_17",
+    "volume_vox": 388494364453756.4,
+    "points": 13701,
+    "pas_voxels": 32520.083165680517,
+    "rapport": 38713.64393374445,
+    "rapport_pas": 819.5850813927278
+  },
+  {
+    "maillage": "maillon_18",
+    "volume_vox": 3852563142876131.5,
+    "points": 7281,
+    "pas_voxels": 85999.54245136346,
+    "rapport": 383909.7073011143,
+    "rapport_pas": 2167.397347683355
+  },
+  {
+    "maillage": "maillon_19",
+    "volume_vox": 1.8963070807860136e+16,
+    "points": 1762,
+    "pas_voxels": 116876.6064243112,
+    "rapport": 1889678.817292771,
+    "rapport_pas": 2945.574354811783
+  },
+  {
+    "maillage": "maillon_20",
+    "volume_vox": 4.99400095085769e+16,
+    "points": 615,
+    "pas_voxels": 106831.8833597739,
+    "rapport": 4976545.152414924,
+    "rapport_pas": 2692.4229367027347
+  },
+  {
+    "maillage": "direct",
+    "volume_vox": 12068213313.953388,
+    "points": 14280,
+    "pas_voxels": 793.5743073902436,
+    "rapport": 1.2026030642935577,
+    "rapport_pas": 20.0
+  }
+]
