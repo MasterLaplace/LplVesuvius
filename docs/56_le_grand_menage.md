@@ -247,6 +247,17 @@ Deux petites choses, groupées parce qu'elles ne coûtent presque rien.
    existe déjà pour les images.
 3. **`.lances/` se purge** : 196 fichiers, ~65 lancements. Une rétention (les N derniers, ou
    les 30 derniers jours), écrite dans le script qui les crée.
+4. ⚠ **Le garde-fou « scripts sans appelant » parcourt tout le dépôt, 196 fois.** Mesuré :
+   **0,78 s** pour un `grep -rl` sur l'arbre, et il en fait un **par fichier** — soit ~2,5 min
+   à lui seul, sur les 203 Go (dont `data/` et les trois `.venv`). Le remède est un seul
+   parcours qui construit un index, puis 196 recherches dedans. ⭐ C'est le contrôle le plus
+   lent de la batterie, et le seul dont le coût croît avec les **données** plutôt qu'avec le
+   **code** — donc il empirera à chaque campagne.
+
+```bash
+/usr/bin/time -f "%e s" grep -rl --include='*.py' -- "figure_portee.py" . >/dev/null
+ls analysis/src/*.py tools/*.sh | wc -l   # x ce nombre
+```
 
 ---
 
