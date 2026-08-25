@@ -64,9 +64,9 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | une extension UNIQUE, puis rognage | ✅ | 4,28 → 12,97 cm² à α = +0,000, ramenée à 6,02 cm² propres, soit +41 % de matière validée | [`44`](44_ou_la_chaine_se_trouve.md) |
 | augmenter le budget d'un seul coup | ❌ | budget 200 : 28,6 cm² mais 25 036 auto-intersections et α = +1,313, la surface se replie sur elle-même | [`44`](44_ou_la_chaine_se_trouve.md) |
 | enchaîner rogner puis étendre | ❌ | le cycle converge vers un point fixe autour de 6 cm² : chaque tour regagne ce qu'il vient de perdre | [`44`](44_ou_la_chaine_se_trouve.md) |
-| juger une courbe sur trois points | ❌ | trois points donnaient « pente monotone », six donnent « plateau puis falaise » — une forme fausse et parfaitement plausible | [`44`](44_ou_la_chaine_se_trouve.md) |
+| juger une courbe sur trois points | ❌ | trois points donnaient « pente monotone », six « plateau puis falaise », neuf « maximum puis descente douce » — chaque forme plausible, chaque forme fausse | [`44`](44_ou_la_chaine_se_trouve.md) |
 | juger la projection par un sondage de points | ❌ | bloc avec matière et valeur au point rendent le MÊME chiffre de 0 µm à 2,4 mm : un bloc fait 307 µm quand les feuilles sont à 10-20 µm | [`44`](44_ou_la_chaine_se_trouve.md) |
-| la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour | ⏳ | la projection existe et a un PAS : plateau jusqu'à 238 µm (amplitude 0,216, pic au bord 0,0 %), falaise ensuite. Reste à enchaîner et à réoptimiser | [`44`](44_ou_la_chaine_se_trouve.md) |
+| la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour | ⏳ | la projection existe et a DEUX seuils : contraste maximal vers 240 µm, et la nappe reste sur sa feuille jusqu'à ~380 µm. Reste à enchaîner et à réoptimiser | [`44`](44_ou_la_chaine_se_trouve.md) |
 
 ## 4. La chaîne casse au sixième tour
 
@@ -88,7 +88,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 |---|---|---|
 | le tracé ne suit pas de feuille | **la graine, c'est-à-dire l'endroit** | le 2×2 tenait un NOMBRE constant, pas un endroit ; la première trace m7 à une graine VALIDE donne α = +0,487 sans appui qui porte, et 96 % de pics au bord — soit l'échec commun |
 | le tracé ne suit pas de feuille | **comparer le relief d'une trace L2 à une trace L0** | à aire égale un maillage L2 rend quatre fois moins de pixels de côté, donc les deux ne tiennent jamais dans la même fenêtre d'analyse — le relief ne peut pas les départager |
-| l'extension tangentielle est un point fixe | **la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour** | la projection existe et a un PAS : plateau jusqu'à 238 µm (amplitude 0,216, pic au bord 0,0 %), falaise ensuite. Reste à enchaîner et à réoptimiser |
+| l'extension tangentielle est un point fixe | **la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour** | la projection existe et a DEUX seuils : contraste maximal vers 240 µm, et la nappe reste sur sa feuille jusqu'à ~380 µm. Reste à enchaîner et à réoptimiser |
 
 ⚠ **Une cause éliminée ne se rouvre pas sans une mesure neuve.** Les treize
 éliminations de ce document ont chacune coûté une campagne ; les refaire par doute

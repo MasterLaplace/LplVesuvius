@@ -141,10 +141,24 @@ def dessiner(points: list[dict], sortie: Path, anglais: bool = False) -> dict:
         d.text((gx - 32, y - 7), f"{1.0 - k / 4:.2f}".replace(".", ","), font=g3, fill=GRIS)
     d.line([(gx, gy + gh), (gx + gw, gy + gh)], fill=GRIS, width=1)
 
-    for p in points:
-        d.line([(X(p["um"]), gy + gh), (X(p["um"]), gy + gh + 5)], fill=GRIS, width=1)
+    # ⚠⚠ TOUS les points ont leur trait, mais pas leur étiquette. À neuf points la zone
+    # 238-476 µm en entassait cinq qui se recouvraient jusqu'à l'illisible : la figure cachait
+    # exactement la région qu'elle existe pour montrer. La règle est calculable et donc
+    # sondable — on n'écrit une étiquette que si elle ne touche pas la précédente.
+    etiquettes_x = 0
+    dernier = -1e9
+    for i, p in enumerate(points):
+        xp = X(p["um"])
+        d.line([(xp, gy + gh), (xp, gy + gh + 5)], fill=GRIS, width=1)
         t = f"{p['um']:.0f}"
-        d.text((X(p["um"]) - d.textlength(t, font=g3) / 2, gy + gh + 8), t, font=g3, fill=GRIS)
+        w = d.textlength(t, font=g3)
+        # ⚠ Le dernier point est toujours étiqueté : c'est la borne de l'axe, et un axe dont
+        # on ne lit pas la fin ne se lit pas.
+        force = i == len(points) - 1
+        if xp - w / 2 >= dernier + 6 or force:
+            d.text((xp - w / 2, gy + gh + 8), t, font=g3, fill=GRIS)
+            dernier = xp + w / 2
+            etiquettes_x += 1
     if controle:
         # La rupture d'axe, dessinée : deux barres obliques entre le contrôle et l'échelle.
         xb = gx + saut - 14
@@ -156,6 +170,7 @@ def dessiner(points: list[dict], sortie: Path, anglais: bool = False) -> dict:
     # ⚠⚠ La LÉGENDE est en haut, jamais au bout de la courbe. Premier tirage : les deux noms
     # de série débordaient du canevas et se superposaient à la dernière valeur — un libellé
     # coupé ne dit rien et fait douter du reste. Ici la place est connue d'avance.
+    etiquettes_v = 0
     lx = gx
     for cle, couleur, nom in (("amplitude", AMPLITUDE, "amplitude du profil"),
                               ("au_bord", AU_BORD, "pic au bord de la pile")):
@@ -168,17 +183,24 @@ def dessiner(points: list[dict], sortie: Path, anglais: bool = False) -> dict:
     for cle, couleur in (("amplitude", AMPLITUDE), ("au_bord", AU_BORD)):
         pts = [(X(p["um"]), Y(p[cle])) for p in points]
         d.line(pts, fill=couleur, width=2)
+        # ⚠⚠ Chaque série a SON côté : l'amplitude écrit sous ses points, le pic au bord
+        # écrit au-dessus. Alterner par index mélangeait les deux séries sur la même rangée,
+        # et surtout collait les valeurs proches de zéro du pic au bord sur les graduations de
+        # l'axe — les « 0,000 » se lisaient comme des abscisses. Séparer par SÉRIE range
+        # chaque étiquette du côté où sa courbe laisse de la place.
+        dessous = cle == "amplitude"
+        pris = -1e9
         for i, ((x, y), p) in enumerate(zip(pts, points)):
             d.ellipse([x - 4, y - 4, x + 4, y + 4], fill=couleur)
             t = f"{p[cle]:.3f}".replace(".", ",")
             w = d.textlength(t, font=g3)
             # ⚠ La dernière valeur s'écrit à GAUCHE de son point : à droite elle sortirait.
             tx = x - w - 8 if i == len(pts) - 1 else x + 7
-            # ⚠⚠ Une valeur sur deux passe SOUS son point. Sans ça, six étiquettes serrées
-            # sur un plateau se recouvrent et le plateau devient illisible — c'est-à-dire que
-            # la figure cache précisément ce qu'elle existe pour montrer.
-            ty = y - 6 if i % 2 == 0 else y + 4
-            d.text((tx, ty), t, font=g3, fill=couleur)
+            if tx < pris + 4 and i != len(pts) - 1:
+                continue
+            d.text((tx, y + 4 if dessous else y - 15), t, font=g3, fill=couleur)
+            pris = tx + w
+            etiquettes_v += 1
 
     d.text((X(points[0]["um"]) - 12, gy - 16), T("contrôle"), font=g3, fill=GRIS)
     d.line([(24, hauteur - 30), (largeur - 24, hauteur - 30)], fill=TRAIT, width=1)
@@ -193,6 +215,9 @@ def dessiner(points: list[dict], sortie: Path, anglais: bool = False) -> dict:
             # canevas. Un texte coupé est invisible pour un test qui ne regarde que les
             # couleurs, et c'est exactement ce qui est passé au premier tirage.
             "depassement": int(depassement),
+            # ⚠ Combien d'étiquettes ont réellement été écrites : c'est ce qui permet de
+            # sonder que l'éclaircissage éclaircit vraiment, et qu'il n'écrit pas tout.
+            "etiquettes_x": etiquettes_x, "etiquettes_valeurs": etiquettes_v,
             "amplitude_decroissante": monotone([p["amplitude"] for p in points], False),
             "au_bord_croissant": monotone([p["au_bord"] for p in points], True),
             "intraduits": intraduits, "inchanges": inchanges}
@@ -246,6 +271,27 @@ def _verifier() -> int:
         px = _pixels(Image.open(f).convert("RGB"))
         v("aucun libellé ne déborde du canevas", r["depassement"] == 0,
           f"{r['depassement']} px")
+        # ⚠⚠ L'ÉCLAIRCISSAGE DOIT ÉCLAIRCIR, et il doit s'arrêter d'éclaircir. Sur neuf points
+        # serrés la figure entassait cinq étiquettes qui se recouvraient jusqu'à l'illisible ;
+        # une règle qui les supprimerait TOUTES serait le défaut symétrique. Les deux bornes
+        # sont sondées sur un cas serré et un cas espacé.
+        # ⚠ Sur un axe LOGARITHMIQUE, des points rapprochés ne se serrent que si l'axe est
+        # étiré par un point lointain — ma première fixture allait de 200 à 232 µm et occupait
+        # toute la largeur, donc elle ne serrait rien et le contrôle ne pouvait pas échouer.
+        # C'est la forme des vraies données : une grappe, plus un point très loin.
+        serre = [{"pas": i, "um": 200.0 + 10.0 * i, "amplitude": 0.2 - 0.01 * i,
+                  "au_bord": 0.01 * i} for i in range(8)]
+        serre.append({"pas": 9, "um": 2400.0, "amplitude": 0.04, "au_bord": 0.6})
+        rs = dessiner(serre, Path(td) / "serre.png")
+        v("des points serrés perdent des étiquettes", rs["etiquettes_x"] < len(serre),
+          str(rs["etiquettes_x"]))
+        v("... mais pas toutes", rs["etiquettes_x"] >= 2, str(rs["etiquettes_x"]))
+        v("... et la borne de l'axe est toujours écrite", rs["etiquettes_x"] >= 2)
+        espace = [{"pas": i, "um": 10.0 ** (i + 1), "amplitude": 0.2, "au_bord": 0.1}
+                  for i in range(4)]
+        re_ = dessiner(espace, Path(td) / "espace.png")
+        v("des points espacés gardent toutes leurs étiquettes",
+          re_["etiquettes_x"] == len(espace), str(re_["etiquettes_x"]))
         v("la courbe d'amplitude est tracée", AMPLITUDE in px)
         v("celle du pic au bord aussi", AU_BORD in px)
         try:

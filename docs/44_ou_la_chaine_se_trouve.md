@@ -259,36 +259,52 @@ Trois rendus de 41 couches sur le maillage publié, le pas 0 en contrôle.
 
 ![jusqu'où la tangente reste sur la feuille](images/44_portee_tangentielle.png)
 
-| pas | déplacement | amplitude | pic au bord | fenêtres avec relief |
-|---:|---:|---:|---:|---:|
-| **0** (contrôle) | 0 µm | 0,1929 | 6,1 % | 49/49 |
-| 1 | 48 µm | 0,1977 | 6,1 % | 49/49 |
-| 2 | 95 µm | 0,2075 | 4,1 % | 49/49 |
-| **5** | **238 µm** | ⭐ **0,2162** | ⭐ **0,0 %** | 49/49 |
-| 10 | 476 µm | 0,1140 | 18,4 % | 49/49 |
-| **50** | **2 381 µm** | **0,0390** | **61,2 %** | **45/49** |
+| déplacement | amplitude | pic au bord | fenêtres avec relief |
+|---:|---:|---:|---:|
+| 0 µm (contrôle) | 0,1929 | 6,1 % | 49/49 |
+| 48 µm | 0,1977 | 6,1 % | 49/49 |
+| 95 µm | 0,2075 | 4,1 % | 49/49 |
+| **238 µm** | ⭐ **0,2162** | 0,0 % | 49/49 |
+| 286 µm | 0,1807 | 2,0 % | 49/49 |
+| 333 µm | 0,1456 | 0,0 % | 48/49 |
+| **381 µm** | 0,1322 | ⭐ **0,0 %** | 49/49 |
+| **476 µm** | 0,1140 | ⚠⚠ **18,4 %** | 49/49 |
+| 2 381 µm | 0,0390 | 61,2 % | 45/49 |
 
-> ⭐⭐⭐ **Un PLATEAU jusqu'à 238 µm, puis une falaise.** Sur les cinq premiers points
-> l'amplitude ne baisse pas — elle **monte** de 0,193 à 0,216 — et le pic au bord **tombe à
-> zéro**. Puis tout s'effondre entre 238 et 476 µm : amplitude ÷5, pic au bord ×10, et quatre
-> fenêtres perdent tout relief.
+> ⭐⭐⭐ **Deux grandeurs, deux seuils, et ils ne tombent pas au même endroit.**
 >
-> ⭐ **La chaîne tangentielle a donc un pas** : de l'ordre de **240 µm**, où la nappe projetée
-> est encore sur sa feuille — et même mieux posée que le contrôle.
+> L'**amplitude** — le contraste du profil — **monte** jusqu'à un maximum à **238 µm**
+> (0,2162, au-dessus du contrôle) puis décline **régulièrement** : 0,181, 0,146, 0,132, 0,114.
+> Aucune rupture.
+>
+> Le **pic au bord** — la nappe est-elle encore dans la fenêtre — reste à **0,0 % jusqu'à
+> 381 µm**, puis saute à **18,4 %** à 476 et 61,2 % à 2 381. Là, il y a une rupture.
+>
+> ⭐ Donc la nappe projetée **reste sur sa feuille jusqu'à ~380 µm**, et elle y est **le mieux
+> posée vers 240 µm**. Ce sont deux optima différents et tous deux utiles : 240 pour la
+> qualité, 380 pour la portée.
 
-#### ⚠⚠ CORRECTION — ma conclusion d'il y a une heure était fausse, et par sous-échantillonnage
+⚠ L'amplitude à 238 µm dépasse celle du contrôle (0,216 contre 0,193), et je ne l'explique pas.
+Le plus probable est que le morceau de départ soit lui-même légèrement décentré sur sa feuille
+et que la projection retombe mieux — mais c'est une hypothèse, pas une mesure, et elle est
+écrite comme telle.
 
-Avec **trois** points (0, 476, 2 381 µm) la dégradation paraissait **progressive et monotone**,
-et je l'ai écrit ici : *« c'est une pente, pas un décrochement »*. Avec **six**, c'est
-l'inverse : un plateau, puis une falaise. Trois points bien choisis dessinent une forme fausse
-et parfaitement plausible.
+#### ⚠⚠ TROISIÈME correction de la même courbe, et c'est un fait de méthode
 
-⭐ C'est la leçon de [`43`](43_la_chaine_des_spires.md) §6quater — *« les premiers tours d'une
-chaîne ne discriminent pas »* — sous un autre costume : **une courbe se juge là où elle
-change**, et il faut avoir échantillonné là.
+| points | forme lue | verdict que j'en tirais |
+|---:|---|---|
+| **3** (0, 476, 2381) | pente monotone | « une pente, pas un décrochement » |
+| **6** (+ 48, 95, 238) | plateau puis falaise | « la chaîne a un pas franc de 240 µm » |
+| **9** (+ 286, 333, 381) | **maximum puis descente douce, rupture séparée plus loin** | deux seuils distincts |
 
-⚠ La figure, elle, ne s'est pas trompée : elle **refuse** d'annoncer une dégradation monotone
-quand les points ne le sont pas, et elle a imprimé « ⚠ NON monotone » au premier tirage à six
+**Chaque forme était plausible et chaque forme était fausse.** C'est la leçon de
+[`43`](43_la_chaine_des_spires.md) §6quater — *« les premiers tours d'une chaîne ne
+discriminent pas »* — à sa troisième occurrence, et elle mérite d'être dite en général :
+**une courbe se juge là où elle change, donc il faut échantillonner là, donc il faut d'abord
+savoir où elle change** — ce qui n'est possible qu'en la rendant plus dense.
+
+⭐ La figure, elle, n'a jamais menti : elle **refuse** d'annoncer une dégradation monotone
+quand les points ne le sont pas, et elle imprime « ⚠ NON monotone » depuis le tirage à six
 points. Le contrôle était écrit avant la donnée qui l'a fait parler.
 
 ⚠⚠ **Ce que ça ne dit PAS, et c'est ce qui empêche d'en conclure que la chaîne est morte** :
@@ -297,9 +313,9 @@ recollerait la nappe projetée sur la matière — c'est le rôle de `--correct`
 nommait déjà. Ces chiffres sont donc le **plancher** de ce qu'une chaîne tangentielle peut
 faire, pas son plafond.
 
-⭐ La plage sous 476 µm **a maintenant trois points**, et c'est elle qui porte le résultat.
-⚠ Ce qui reste non échantillonné est la **falaise** elle-même, entre 238 et 476 µm : on sait
-qu'elle tombe, pas où ni à quelle pente.
+⭐ Neuf points couvrent maintenant 0 à 2,4 mm, et la zone qui portait le doute — 238 à 476 µm —
+en a trois. ⚠ Ce qui reste non échantillonné est l'intervalle **381 → 476 µm**, où le pic au
+bord passe de 0 à 18 % : on sait que la nappe quitte sa feuille là, pas exactement où.
 
 ⚠ Deux défauts de l'outillage trouvés en chemin, tous deux de la famille « vérification
 incapable d'échouer ». La campagne a d'abord gagné une colonne « médiane » dans son **en-tête**
