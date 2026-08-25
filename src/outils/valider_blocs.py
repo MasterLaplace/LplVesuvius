@@ -15,7 +15,7 @@ sys.path[:0] = [str(p) for p in Path(__file__).resolve().parents[1].iterdir() if
 
 import numpy as np
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "analysis" / "src"))
+sys.path[:0] = [str(x) for x in Path(__file__).resolve().parents[1].iterdir() if x.is_dir()]
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "experiments" / "src"))
 
 from proximity_vs_ink import tile_proximity  # noqa: E402

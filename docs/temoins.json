@@ -1,5 +1,7 @@
 {
   "batteries_all_pass": 115,
-  "controles": 3024,
-  "echecs": 1
+  "controles": 3025,
+  "echecs": 0,
+  "chiffres_recalcules": 219,
+  "fichiers_de_resultat": 52
 }

@@ -398,7 +398,13 @@ Deux petites choses, groupées parce qu'elles ne coûtent presque rien.
    existe déjà pour les images.
 3. **`.lances/` se purge** : 196 fichiers, ~65 lancements. Une rétention (les N derniers, ou
    les 30 derniers jours), écrite dans le script qui les crée.
-4. ⚠ **Le garde-fou « scripts sans appelant » parcourt tout le dépôt, 196 fois.** Mesuré :
+4. ⚠⚠ **Le garde « scripts sans appelant » se tait dès qu'un document NOMME l'orphelin.**
+   Constaté le 2026-08-25 : trois orphelins réels signalés, puis silencieux au run suivant
+   parce que ce document venait de les citer. Une mention en prose n'est pas un appelant —
+   c'est même souvent le contraire, on écrit le nom d'un script *parce qu'il ne sert plus*.
+   Le remède est de ne compter comme appelant qu'une **exécution** (`bash x.sh`,
+   `python x.py`, une ligne `run`), pas une occurrence du nom.
+5. ⚠ **Le garde-fou « scripts sans appelant » parcourt tout le dépôt, 196 fois.** Mesuré :
    **0,78 s** pour un `grep -rl` sur l'arbre, et il en fait un **par fichier** — soit ~2,5 min
    à lui seul, sur les 203 Go (dont `data/` et les trois `.venv`). Le remède est un seul
    parcours qui construit un index, puis 196 recherches dedans. ⭐ C'est le contrôle le plus

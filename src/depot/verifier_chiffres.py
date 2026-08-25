@@ -460,7 +460,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     if verdicts:
         import importlib.util
         spec = importlib.util.spec_from_file_location(
-            "tc", racine / "analysis" / "src" / "test_convergence.py")
+            "tc", racine / "src" / "commun" / "test_convergence.py")
         tc = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(tc)
         # ⚠⚠ DEDOUBLONNER PAR CONTENU. Deux campagnes peuvent produire des maillages
