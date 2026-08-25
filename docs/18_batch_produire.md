@@ -40,7 +40,7 @@ hasard de même taille**. Sans lui, la vérification ne peut pas échouer.
 
 | # | quoi | état |
 |---|---|---|
-| I1 | outil : `analysis/src/croiser_encre.py` | ✅ écrit |
+| I1 | outil : `src/encre/croiser_encre.py` | ✅ écrit |
 | I2 | corréler 5 grandeurs de trace × 4 grandeurs d'encre, n = 80 | ✅ **`19`** — 5 couples tiennent Bonferroni, `avec_matiere` en tête (+0,539) |
 | I3 | le confond d'emprise mesuré à côté | ✅ dans l'outil |
 | I4 | la décision, contre 2000 permutations | ✅ **+0,381, p = 0,0005** en écartant 20 % |
@@ -68,7 +68,7 @@ cohérence vient de la façon de compter et pas de la géométrie.
 
 | # | quoi | état |
 |---|---|---|
-| J1 | outil : `analysis/src/champ_correction.py` | ✅ écrit |
+| J1 | outil : `src/nappe/champ_correction.py` | ✅ écrit |
 | J2 | ⚠ échantillonnage : **trouver la matière avant de la sonder** (6 fenêtres utiles sur 96 sans ça) | ✅ passe de repérage |
 | J3 | campagne sur les 80 segments de Scroll 1 | ✅ **80/80** battent leur témoin (p = 1,3e-25). `20` |
 | J4 | la même sur Scroll 4 | ✅ **19/19** (p = 7,4e-08). ⚠ Le segment `20231111135340`, celui des 61 % au bord, **n'a pas de volume de surface publié** — mesuré sur les 19 qui en ont un |
@@ -114,7 +114,7 @@ plupart des pas sont nuls **par construction**.
 | N1 | `00` §9.5 périmé | ✅ corrigé — et c'était **le rayon, pas la résolution** |
 | N2 | `13` : voies A, C, G, H à clore | ✅ les **huit** voies closes |
 | N3 | `HANDOFF` refait | ✅ intégralement |
-| N4 | `tools/temoins.sh` | ✅ **13 contrôles de plus, 79 au total**, dont l'ordre du parallélisme et le cas négatif de la décision |
+| N4 | `src/outils/temoins.sh` | ✅ **13 contrôles de plus, 79 au total**, dont l'ordre du parallélisme et le cas négatif de la décision |
 
 
 ---

@@ -62,7 +62,7 @@ termes qui regardent les données sont inactifs** — `SURFACE_SDT` a un poids n
 qu'il ne reste alors *que* de la géométrie serait trop fort — un quatrième terme existe dont
 je n'ai pas su suivre le fil (`41` §6ter) — mais **trois leviers de données sont bien
 éteints chez nous**, et aucun de nos 17 essais ne règle `sdt_weight`.
-⚠ Hypothèse, pas conclusion — `tools/leviers_de_perte.sh` la mesure, à conception appariée.
+⚠ Hypothèse, pas conclusion — `src/outils/leviers_de_perte.sh` la mesure, à conception appariée.
 
 ### ⭐⭐⭐ Et voici notre chaîne, six tours
 
@@ -202,8 +202,8 @@ LplVesuvius/
 ## Reproduire l'environnement
 
 ```bash
-./tools/clone_repos.sh      # tous les depots
-./tools/clone_repos.sh 1    # seulement le coeur + deroulage/segmentation
+./src/outils/clone_repos.sh      # tous les depots
+./src/outils/clone_repos.sh 1    # seulement le coeur + deroulage/segmentation
 ```
 
 Le manifeste `tools/repos.tsv` classe les dépôts par *tier* : `0` officiel,
@@ -301,10 +301,10 @@ priorisee. A lire en premier si vous reprenez ce chantier.
 Tout ce qui est affirme dans `docs/` se regenere. Dans l'ordre :
 
 ```bash
-./tools/temoins.sh                  # ⭐ TOUS les temoins hors ligne, en une commande
-./tools/mirror_site.sh              # miroir + controle de couverture (sort non nul si incomplet)
-./tools/clone_repos.sh              # les 33 depots
-./tools/s3_size.py PHerc0332/ --depth 1   # tailles S3, sans rien telecharger
+./src/outils/temoins.sh                  # ⭐ TOUS les temoins hors ligne, en une commande
+./src/outils/mirror_site.sh              # miroir + controle de couverture (sort non nul si incomplet)
+./src/outils/clone_repos.sh              # les 33 depots
+./src/outils/s3_size.py PHerc0332/ --depth 1   # tailles S3, sans rien telecharger
 
 cd repos/windcheck                  # l'etat de l'art, reproduit
 uv sync && uv pip install awscli
@@ -330,10 +330,10 @@ de listage accepte un prefixe par segment, donc on n'enumere pas tout (piege nº
 `aws s3 cp --include` enumere le prefixe entier avant de filtrer).
 
 ```bash
-./tools/fetch_traces.py repos/windcheck/results/index.json PHerc0139 data/traces/PHerc0139
-./tools/lister_volumes_surface.sh PHercParis4    # qui publie un volume de surface Zarr
-./tools/fetch_cartes_encre.sh PHercParis4        # les cartes d'encre PUBLIEES
-./tools/fetch_layers.sh <url> <dest> <largeur> <de> <a>   # couches, reprenable
+./src/outils/fetch_traces.py repos/windcheck/results/index.json PHerc0139 data/traces/PHerc0139
+./src/outils/lister_volumes_surface.sh PHercParis4    # qui publie un volume de surface Zarr
+./src/outils/fetch_cartes_encre.sh PHercParis4        # les cartes d'encre PUBLIEES
+./src/outils/fetch_layers.sh <url> <dest> <largeur> <de> <a>   # couches, reprenable
 ```
 
 ### Les instruments de qualite de trace
@@ -344,10 +344,10 @@ rend utilisables sur n'importe quel segment publie.
 ```bash
 cd inference_xpu
 # profondeur de surface : ou est la feuille par rapport a la trace
-uv run python ../analysis/src/depth_profile.py <couches...> --grid --from-layer 15 --to-layer 40
-uv run python ../analysis/src/zarr_depth.py <cle S3 du .zarr> --windows 25 --courbe
+uv run python ../src/volume/depth_profile.py <couches...> --grid --from-layer 15 --to-layer 40
+uv run python ../src/commun/zarr_depth.py <cle S3 du .zarr> --windows 25 --courbe
 # direction des fibres : deux fenetres voisines sur la meme feuille doivent s'accorder
-uv run python ../analysis/src/fiber_orientation.py <cle S3 du .zarr> --windows 36
+uv run python ../src/nappe/fiber_orientation.py <cle S3 du .zarr> --windows 36
 ```
 
 ⭐ **Un chunk Zarr = une colonne de profondeur entiere, pour 1,78 Mo et 1,03 s.** C'est
@@ -357,7 +357,7 @@ mega-octets ».
 ### La chaine de production, et les gardes du depot
 
 ```bash
-./tools/temoins.sh                  # 52 batteries, 1469 controles hors ligne, tous verts
+./src/outils/temoins.sh                  # 52 batteries, 1469 controles hors ligne, tous verts
                                     # ⚠ ces deux chiffres sont ECRITS PAR LE SCRIPT dans
                                     # docs/temoins.json et gardes comme tous les autres :
                                     # la version precedente disait 18 et 741, recopies a
@@ -366,32 +366,32 @@ mega-octets ».
 
 # rassembler ce qui PART : le texte, ses figures, le journal des chiffres. La liste des
 # figures est DERIVEE du document, et le script REFUSE un dossier incomplet
-./tools/dossier_soumission.sh
+./src/outils/dossier_soumission.sh
 
 # « consistent with » quantifie : interligne, echelle, couverture, epaisseur de trait,
 # mesures sans lire une lettre (docs/45)
-./tools/lancer.sh --fond tools/campagne_typographie.sh
+./src/outils/lancer.sh --fond src/campagnes/campagne_typographie.sh
 
 # le temoin negatif que le domaine n'a pas : une surface dont la GEOMETRIE prouve qu'aucune
 # feuille n'est a portee (alpha = +1,01), contre le segment officiel du meme rouleau
 # (alpha = +0,00). Meme volume, meme modele, meme region, meme pas (docs/46)
-./tools/lancer.sh --fond tools/campagne_temoin_negatif.sh
+./src/outils/lancer.sh --fond src/campagnes/campagne_temoin_negatif.sh
 
 # un critere mesure a une profondeur juge-t-il une trace rendue a une autre ? (docs/47)
 # la reponse est non : 13 traces sur 16 butent sur le plafond du rendu, donc un seuil
 # absolu compare des reglages et pas des surfaces
-python3 analysis/src/derive_avec_profondeur.py --docs docs --json docs/derive_profondeur.json
+python3 src/graine/derive_avec_profondeur.py --docs docs --json docs/derive_profondeur.json
 
 # ou l'experience « reparer sert-il ? » peut-elle etre montee ? les rouleaux qu'on sait
 # TRACER et ceux dont la sortie publiee porte du TEXTE sont disjoints (docs/48)
-python3 analysis/src/eligibilite_aval.py --docs docs --sonder --json docs/eligibilite_aval.json
+python3 src/graine/eligibilite_aval.py --docs docs --sonder --json docs/eligibilite_aval.json
 
 # α ≈ 1 a DEUX causes : un pic qui recule, et aucun pic du tout. Un profil plat rapporte le
 # bord de la fenetre, donc α = 1 par identite arithmetique (docs/49)
-python3 analysis/src/audit_profils_plats.py --racine . --json docs/audit_profils.json
+python3 src/commun/audit_profils_plats.py --racine . --json docs/audit_profils.json
 
 # la carte des segments publies d'un rouleau : y a-t-il deux patchs d'UNE MEME feuille ?
-uv run python analysis/src/carte_segments.py --rouleau PHerc1447 \
+uv run python src/commun/carte_segments.py --rouleau PHerc1447 \
      --telecharger data/segments_officiels --json docs/segments_PHerc1447.json
 
 # les instruments qui jugent une TRACE, sans verite terrain
@@ -399,12 +399,12 @@ vc_tifxyz_selfcross --surface <mesh.tifxyz> -o rapport.json   # exit 3 si defaut
 uv run python tracecheck/tracecheck.py --seed <zarr> ...      # ou commencer
 
 # les gardes qui empechent une doc de pourrir
-python3 analysis/src/poids_growpatch.py --verifier     # la table des poids vient du SOURCE
-python3 analysis/src/artefacts_orphelins.py --verifier # tout artefact a un producteur
-python3 analysis/src/compter_corpus.py                 # les comptes viennent des artefacts
+python3 src/nappe/poids_growpatch.py --verifier     # la table des poids vient du SOURCE
+python3 src/depot/artefacts_orphelins.py --verifier # tout artefact a un producteur
+python3 src/graine/compter_corpus.py                 # les comptes viennent des artefacts
 python3 tracecheck/mutation.py                         # chaque detecteur est PORTEUR
-python3 analysis/src/lire_selfcross.py --verifier       # un verdict qui n'a rien teste est REFUSE
-uv run python analysis/src/verifier_chiffres.py docs/*.md \
+python3 src/nappe/lire_selfcross.py --verifier       # un verdict qui n'a rien teste est REFUSE
+uv run python src/depot/verifier_chiffres.py docs/*.md \
      --soumission docs/21_texte_de_soumission.md          # 93 chiffres recalcules depuis leur JSON
 ```
 

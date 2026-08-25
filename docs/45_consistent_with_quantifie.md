@@ -19,7 +19,7 @@ outillé. Or les quatre grandeurs sont mesurables **sans jamais lire une lettre*
 
 ![ce qui suit le contraste d'encre, et ce qui va contre](images/45_typographie.png)
 
-Instrument : [`analysis/src/typographie.py`](../analysis/src/typographie.py) (22 témoins
+Instrument : [`src/encre/typographie.py`](../src/encre/typographie.py) (22 témoins
 hors ligne). Corpus : **190 cartes d'encre publiées**, quatre rouleaux.
 
 ---
@@ -172,9 +172,9 @@ que chacun est du genre à ressortir ailleurs.
 ## Reproduire
 
 ```bash
-./tools/lancer.sh --fond tools/campagne_typographie.sh
-uv run python analysis/src/figure_typographie.py
+./src/outils/lancer.sh --fond src/campagnes/campagne_typographie.sh
+uv run python src/figures/figure_typographie.py
 
 # les témoins, hors ligne — sur des pages SYNTHÉTIQUES dont on connaît l'interligne
-uv run python ../analysis/src/typographie.py --verifier
+uv run python ../src/encre/typographie.py --verifier
 ```

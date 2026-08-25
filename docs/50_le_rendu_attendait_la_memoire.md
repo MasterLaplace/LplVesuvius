@@ -88,7 +88,7 @@ correct : c'est la taille de l'objet qui a changé, et rien ne rapportait la tai
 
 ## 5. L'étalonnage, et ce qu'il refuse de faire
 
-`tools/etalonner_rendu.sh` rend **la même surface, la même fenêtre**, en ne changeant que
+`src/outils/etalonner_rendu.sh` rend **la même surface, la même fenêtre**, en ne changeant que
 `--cache-gb`, et relève le temps de mur et le pic de RSS.
 
 ⚠⚠ **Le cache disque est chauffé une fois avant la série.** Sans cela, le premier essai
@@ -97,7 +97,7 @@ mesuré — c'est « comparer une grandeur à elle-même » en costume de banc d
 
 ⚠⚠ **Et la première chose vérifiée n'est pas une performance : c'est que la sortie ne bouge
 pas.** Chaque essai est empreint (`sha256` de la pile de tranches), et
-`analysis/src/effet_du_cache.py` **refuse de parler de vitesse** si les empreintes diffèrent.
+`src/graine/effet_du_cache.py` **refuse de parler de vitesse** si les empreintes diffèrent.
 Un réglage qui change les pixels n'est pas un réglage de performance — ce serait découvrir
 que tous les rendus déjà publiés dépendaient d'une valeur que personne n'avait posée.
 
@@ -106,7 +106,7 @@ meilleur ».** Prendre le plus rapide choisirait presque toujours le plus gros c
 reconduirait exactement le défaut qu'on est en train de corriger.
 
 ⚠⚠ **Et chaque valeur est répétée trois fois** — leçon que ce dépôt avait déjà écrite
-ailleurs (`tools/campagne_thread_limit.sh` : *« une seule exécution par valeur ne
+ailleurs (`src/campagnes/campagne_thread_limit.sh` : *« une seule exécution par valeur ne
 distinguerait pas l'effet du réglage de la variance de run »*). Elle vaut double ici : le
 répertoire passé à `-v` reste **vide**, donc le cache disque n'est jamais matérialisé et
 chaque essai retélécharge — le chronomètre porte autant le réseau que le réglage.
@@ -126,7 +126,7 @@ chaque essai retélécharge — le chronomètre porte autant le réseau que le r
 > ⭐ **`--cache-gb 1`** : le pic le plus bas *et* la médiane la plus basse. Les **quinze
 > sorties sont identiques** au `sha256` — donc plafonner ne déplace aucun résultat déjà
 > publié, et c'est cette vérification-là qui autorise à poser le réglage dans le chemin
-> commun (`tools/rendre_surveille.sh`).
+> commun (`src/outils/rendre_surveille.sh`).
 
 ⚠ **La conclusion sur le temps penche, elle ne tranche pas.** L'écart entre valeurs (70,3 s)
 ne dépasse l'étendue à l'intérieur d'une valeur (61,7 s, à `--cache-gb 2`) que d'un facteur
@@ -210,7 +210,7 @@ de profondeur**. Rendre 41 tranches au niveau 1 couvre **deux fois** la profonde
 de 41 tranches au niveau 0 : on aurait comparé deux **fenêtres** différentes en croyant
 comparer deux **résolutions**. Le nombre de tranches est donc divisé par 2^g et `--voxel-um`
 multiplié — et la conversion vit dans **une seule fonction**
-(`tools/profiler_une_surface.sh`), qu'un témoin empêche les appelants de réapprendre.
+(`src/outils/profiler_une_surface.sh`), qu'un témoin empêche les appelants de réapprendre.
 
 ⭐ **L'arrondi est « au supérieur à la moitié », pas `round()`**, et la vraie raison n'est
 pas que `round(41/2)` vaut 20 en Python : c'est qu'une fenêtre est **centrée** sur sa couche
@@ -229,7 +229,7 @@ il tombe à **0,02**.
 ⚠ Et le niveau devient une **clé** de la mesure, pas un détail de rendu : comparer un budget
 mesuré au niveau 0 à un budget mesuré au niveau 1 confondrait le plafond avec la résolution,
 et l'écart d'α serait crédible sans qu'on sache lequel des deux il décrit.
-`analysis/src/effet_du_plafond.py` **refuse** un lot mélangé.
+`src/graine/effet_du_plafond.py` **refuse** un lot mélangé.
 
 ---
 
@@ -296,7 +296,7 @@ niveaux. La pyramide est validée là où on l'utilise.
    sont mortes après leurs rendus, juste avant de juger. ⭐ Sans conséquence ici, parce que
    les profils étaient écrits : il a suffi de relancer le **jugement**, pas le calcul.
 3. **Le plancher de la pyramide dépend de la surface**, pas de la machine — voir le tableau
-   ci-dessus. `tools/profiler_une_surface.sh` refuse maintenant *avant* de rendre.
+   ci-dessus. `src/outils/profiler_une_surface.sh` refuse maintenant *avant* de rendre.
 
 ---
 
@@ -345,19 +345,19 @@ orphelin qui a tourné 4 h 32 pour rien, et un aperçu qu'on n'a pas pensé à f
 ## Reproduire
 
 ```bash
-tools/etalonner_rendu.sh                       # 5 valeurs × 3 répétitions
-python3 analysis/src/effet_du_cache.py --json docs/etalon_rendu.json
-uv run python analysis/src/figure_etalon_rendu.py \
+src/outils/etalonner_rendu.sh                       # 5 valeurs × 3 répétitions
+python3 src/graine/effet_du_cache.py --json docs/etalon_rendu.json
+uv run python src/figures/figure_etalon_rendu.py \
     --json docs/etalon_rendu.json --sortie docs/images/50_etalon_rendu.png \
     --projection "fenêtre 41 au défaut=25.7" \
     --projection "fenêtre 41 à --cache-gb 1=10.7" \
     --projection "fenêtre 161 à --cache-gb 1=39.2"
-tools/controle_resolution.sh                   # la pyramide préserve-t-elle α ?
+src/outils/controle_resolution.sh                   # la pyramide préserve-t-elle α ?
 
 # les témoins, hors ligne
-tools/etalonner_rendu.sh --verifier
-tools/controle_resolution.sh --verifier
-tools/rendre_surveille.sh --verifier
-python3 analysis/src/effet_du_cache.py --verifier
-uv run python analysis/src/figure_etalon_rendu.py --verifier
+src/outils/etalonner_rendu.sh --verifier
+src/outils/controle_resolution.sh --verifier
+src/outils/rendre_surveille.sh --verifier
+python3 src/graine/effet_du_cache.py --verifier
+uv run python src/figures/figure_etalon_rendu.py --verifier
 ```

@@ -162,7 +162,7 @@ traite pareil, et c'est assumé.
 requêtes/fenêtres, **50** (`sondees` dans `docs/profondeur_corpus_2.4um.json`), et **72**
 (le treillis 6 × 12 de la campagne **fibres**). Ils ne décrivent pas la même chose, et le
 document ne le dit nulle part. ⏳ À démêler en une passe :
-`analysis/src/compter_corpus.py` donne les comptes réels par artefact.
+`src/graine/compter_corpus.py` donne les comptes réels par artefact.
 
 ⚠ **Ce que ça ne fait pas** : ça n'améliore aucune trace, ça n'en déroule aucune. Une
 règle de tri sépare ce qui va rater de ce qui va marcher ; elle ne répare rien. La
@@ -172,7 +172,7 @@ réparation est la voie J du batch (`18`), et son outil existe déjà.
 
 ```bash
 cd inference_xpu
-uv run python ../analysis/src/croiser_encre.py \
+uv run python ../src/encre/croiser_encre.py \
     ../docs/profondeur_corpus_2.4um.json ../data/encre/PHercParis4 \
     --grandeur avec_matiere --sens bas \
     --parts 0.05 0.10 0.15 0.20 0.25 0.30 0.40 0.50 \

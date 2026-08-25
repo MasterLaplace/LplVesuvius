@@ -21,7 +21,7 @@ marquait le manque ⚠⚠ : *« 14 tirages ne font pas une distribution, et le t
 > l'est. Et sur cinq lignes un point est rouge : le même appel qui rend une trace propre
 > cinq fois rend une trace auto-intersectée la sixième.
 
-Figure : `analysis/src/figure_tirages.py`, depuis `docs/table_tirages.json`.
+Figure : `src/figures/figure_tirages.py`, depuis `docs/table_tirages.json`.
 
 ## 1. Ce que la campagne mesure
 
@@ -95,14 +95,14 @@ rouleaux plafonnés contre 1 sur 7** — test exact **p = 0,10**.
 ⚠⚠ **Ce chiffre est recalculé, il ne l'était pas.** La version du 2026-08-20 écrivait
 « un test exact donne p ≈ 0,55 » — un nombre sans producteur dans l'arbre, donc une anecdote
 au sens de la règle de ce dépôt, et périmé dès que le treizième rouleau est arrivé.
-`analysis/src/table_tirages.py` le calcule désormais, avec le plafond **dérivé** de la
+`src/tables/table_tirages.py` le calcule désormais, avec le plafond **dérivé** de la
 campagne (le maximum de générations observé) plutôt qu'écrit en dur : une constante
 deviendrait fausse en silence le jour où le budget du `seed.json` change.
 
 > **Rien n'est encore établi sur la CAUSE.** C'est noté parce qu'une hypothèse écartée avec
 > sa raison vaut mieux qu'une hypothèse oubliée, et parce que la mesure qui trancherait est
 > bon marché : relever le plafond de générations et rejouer. C'est désormais un paramètre —
-> `GENERATIONS=400 ./tools/campagne_tirages.sh data/tirages_plafond 6 <rouleaux>` — et le
+> `GENERATIONS=400 ./src/campagnes/campagne_tirages.sh data/tirages_plafond 6 <rouleaux>` — et le
 > plafond effectif voyage dans chaque résumé, pour que deux campagnes à plafonds différents
 > ne produisent pas des lignes indistinguables.
 
@@ -153,7 +153,7 @@ plafond d'origine. La campagne a donc été **arrêtée** après treize tirages 
 les onze restants auraient coûté ~7 heures pour une valeur marginale, et `PHerc0358` bute déjà
 à **386 générations sur 400**, donc il aurait probablement été écarté comme re-tronqué.
 
-> ⭐ Reproduire : `GENERATIONS=400 ./tools/lancer.sh --fond tools/campagne_tirages.sh
+> ⭐ Reproduire : `GENERATIONS=400 ./src/outils/lancer.sh --fond src/campagnes/campagne_tirages.sh
 > "$PWD/data/tirages_plafond" 6 <rouleaux>`, puis `table_tirages.py` sur les deux dossiers et
 > `comparer_plafond.py` pour les confronter.
 
@@ -187,8 +187,8 @@ teste pas.
   tirages, exactement comme `33` le mesure pour la carte de difficulté.
 - ⚠ **Un rouleau du prix manque, et pas pour la raison qu'on croirait.** La campagne
   couvre 12 des 13 parce que `docs/table_graines.json` en contenait 12 : **`PHerc1203`
-  n'avait jamais eu de graine cherchée**, sur aucune campagne — `tools/campagne_graines.sh`
-  ne le listait pas, alors que `tools/carte_separabilite.sh` le liste. Ce n'était donc pas
+  n'avait jamais eu de graine cherchée**, sur aucune campagne — `src/campagnes/campagne_graines.sh`
+  ne le listait pas, alors que `src/outils/carte_separabilite.sh` le liste. Ce n'était donc pas
   une limite de cette campagne-ci, c'était un trou en amont, et il valait aussi pour `25`.
 
   ✅ **Comblé le 2026-08-22, côté graines** : `PHerc1203` a maintenant ses deux graines,
@@ -213,11 +213,11 @@ teste pas.
 ## Reproduire
 
 ```bash
-./tools/lancer.sh --fond tools/campagne_tirages.sh "$PWD/data/tirages" 6
-(cd experiments && uv run python ../analysis/src/table_tirages.py --json ../docs/table_tirages.json)
-uv run python analysis/src/figure_tirages.py
+./src/outils/lancer.sh --fond src/campagnes/campagne_tirages.sh "$PWD/data/tirages" 6
+(cd experiments && uv run python ../src/tables/table_tirages.py --json ../docs/table_tirages.json)
+uv run python src/figures/figure_tirages.py
 ```
 
-⚠ Passer par `tools/lancer.sh` n'est pas décoratif : la première exécution de cette
+⚠ Passer par `src/outils/lancer.sh` n'est pas décoratif : la première exécution de cette
 campagne a été **tuée par une édition du script pendant qu'il tournait**, et il a fallu la
 reprendre. Le wrapper gèle une copie avant de lancer.

@@ -7,7 +7,7 @@ n'affichait pas. Elle l'annule.
 
 Aucune nouvelle donnée n'a été acquise pour ce résultat : c'est une relecture des
 artefacts versionnés, `docs/carte_separabilite/*.json`, par
-`analysis/src/incertitude_carte.py`.
+`src/commun/incertitude_carte.py`.
 
 ---
 
@@ -19,7 +19,7 @@ artefacts versionnés, `docs/carte_separabilite/*.json`, par
 > compris avec celui du témoin. C'est la raison pour laquelle aucune des 78 paires n'est
 > séparée, et elle se voit sans qu'aucun test soit nécessaire.
 
-Figure : `analysis/src/figure_incertitude.py`, depuis `docs/incertitude_carte.json`.
+Figure : `src/figures/figure_incertitude.py`, depuis `docs/incertitude_carte.json`.
 
 ## 1. Ce que la mesure trouve
 
@@ -100,9 +100,9 @@ la question « ce rouleau tient-il dans la marge ? » n'a de réponse pour aucun
 ## 4bis. ⭐⭐ La prédiction a été testée — le même jour, et elle tient
 
 La §3 disait qu'il faut **50 fenêtres par rouleau**. La campagne dense a tourné
-(`tools/carte_separabilite.sh docs/carte_separabilite_dense 125`, 57 à 115 fenêtres par
+(`src/outils/carte_separabilite.sh docs/carte_separabilite_dense 125`, 57 à 115 fenêtres par
 rouleau), et **le dépouilleur avait été écrit avant qu'elle rende** —
-`analysis/src/comparer_cartes.py`, avec ses seuils d'interprétation posés d'avance : rho
+`src/encre/comparer_cartes.py`, avec ses seuils d'interprétation posés d'avance : rho
 > 0,7 réfute ce document, rho < 0,3 le confirme.
 
 | rouleau | creux | dense | écart |
@@ -126,7 +126,7 @@ rouleau), et **le dépouilleur avait été écrit avant qu'elle rende** —
 
 ![le classement avant et apres un echantillonnage trois fois plus dense](images/33_comparaison.png)
 
-Figure : `analysis/src/figure_comparaison.py`, depuis `docs/comparaison_cartes.json`.
+Figure : `src/figures/figure_comparaison.py`, depuis `docs/comparaison_cartes.json`.
 
 **Et l'inversion est complète sur ce qui décidait** : `PHerc0358`, que `16` désignait comme
 le premier à attaquer, passe de **1ᵉʳ à 6ᵉ** ; `PHerc0800`, que `16` plaçait 10ᵉ sur 13,
@@ -181,13 +181,13 @@ défaut assumé, pas une conclusion.
 ## Reproduire
 
 ```bash
-(cd experiments && uv run python ../analysis/src/incertitude_carte.py --json ../docs/incertitude_carte.json)
-uv run python analysis/src/figure_incertitude.py
+(cd experiments && uv run python ../src/commun/incertitude_carte.py --json ../docs/incertitude_carte.json)
+uv run python src/figures/figure_incertitude.py
 ```
 
 Une campagne dense s'écrit dans **son propre dossier**, pour que les chiffres publiés de
 `16` restent reproductibles à côté :
 
 ```bash
-./tools/carte_separabilite.sh docs/carte_separabilite_dense 125
+./src/outils/carte_separabilite.sh docs/carte_separabilite_dense 125
 ```

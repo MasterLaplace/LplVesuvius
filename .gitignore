@@ -1,4 +1,4 @@
-# Les depots clones sont recuperables depuis tools/repos.tsv : les suivre ici
+# Les depots clones sont recuperables depuis src/outils/repos.tsv : les suivre ici
 # ferait de ce depot un miroir de trente autres.
 /repos/
 
@@ -46,7 +46,7 @@ data/trace/*/cache_vol/
 .lances/
 article/pg-*.png
 
-# le dossier de soumission est DERIVE : tools/dossier_soumission.sh le reconstruit
+# le dossier de soumission est DERIVE : src/outils/dossier_soumission.sh le reconstruit
 # depuis le texte et docs/images/, donc le versionner dupliquerait 8 Mo d'images qui
 # vivent deja dans l'arbre -- et il refuserait de se reconstruire a l'identique le jour ou
 # une figure change, ce qui est justement ce qu'on veut qu'il detecte.

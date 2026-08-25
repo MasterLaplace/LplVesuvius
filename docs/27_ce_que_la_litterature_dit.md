@@ -650,7 +650,7 @@ C'est le jeu de données sur lequel [P2] travaille et la source des scans à 7,9
 ### Pages officielles du concours
 
 Miroir local complet dans `site/scrollprize.org/` (81 pages sur 81), récupéré par
-`tools/mirror_site.sh`.
+`src/outils/mirror_site.sh`.
 
 | page | ce qu'on en tire | dernière mise à jour affichée |
 |---|---|---|
@@ -685,8 +685,8 @@ mort en amont. Les trois qui portent le plus de poids ici :
 ### Ce que nos propres mesures utilisent
 
 Toute affirmation chiffrée de ce dépôt renvoie à un script versionné de
-`analysis/src/` ou `tools/`, ou à un artefact de `docs/` ou `artefacts/`. La règle est
+`src/`, ou à un artefact de `docs/` ou `artefacts/`. La règle est
 énoncée dans `HANDOFF.md` §9 : *un chiffre publié dont le calcul n'est pas dans l'arbre
 n'est pas un résultat, c'est une anecdote.* Les batteries de contrôle sont dans
-`tools/temoins.sh`, et la chaîne complète — tests, builds, boot, parité — dans
+`src/outils/temoins.sh`, et la chaîne complète — tests, builds, boot, parité — dans
 `validate.sh`.

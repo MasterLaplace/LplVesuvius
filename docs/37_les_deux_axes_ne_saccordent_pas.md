@@ -18,7 +18,7 @@ La parade écrite est : **sélectionner sur un axe, valider sur l'autre**. Elle 
 > **S'ils s'accordaient, le point rouge serait le plus à droite** — le pire selon les deux.
 > Il l'est **une fois sur huit**, là où le hasard seul en donnerait quatre.
 
-Figure : `analysis/src/figure_deux_axes.py`, depuis `docs/second_axe_21.json` et
+Figure : `src/figures/figure_deux_axes.py`, depuis `docs/second_axe_21.json` et
 `docs/second_axe_41.json`.
 
 ## 1. Le dispositif
@@ -35,7 +35,7 @@ paramètres, même machine. La question devient exactement :
 > *Le tirage que l'axe 1 condamne est-il aussi le pire selon l'axe 2 ?*
 
 ⚠ Les cibles sont **choisies, pas exhaustives** : un rendu coûte ~10 min mesurées, donc les
-72 tirages de `35` feraient 12 h. `analysis/src/choisir_tirages.py` retient les 4 mauvais,
+72 tirages de `35` feraient 12 h. `src/graine/choisir_tirages.py` retient les 4 mauvais,
 8 propres appariés et 4 témoins — 16 tirages, 2,7 h. ⚠ Les témoins sont les rouleaux stables
 les **plus dispersés** en aire, pas les moins : il faut savoir ce que l'axe 2 fait quand
 l'axe 1 ne signale rien, et un témoin facile ne le dirait pas.
@@ -126,10 +126,10 @@ contrainte à porter dans la conception, pas une note.
 ## Reproduire
 
 ```bash
-cd experiments && uv run python ../analysis/src/choisir_tirages.py --json ../docs/cibles_second_axe.json
-cd .. && ./tools/lancer.sh --fond tools/campagne_second_axe.sh "$PWD/data/second_axe" 21 \
-    $(cd experiments && uv run python ../analysis/src/choisir_tirages.py --chemins)
+cd experiments && uv run python ../src/graine/choisir_tirages.py --json ../docs/cibles_second_axe.json
+cd .. && ./src/outils/lancer.sh --fond src/campagnes/campagne_second_axe.sh "$PWD/data/second_axe" 21 \
+    $(cd experiments && uv run python ../src/graine/choisir_tirages.py --chemins)
 cd experiments
-uv run python ../analysis/src/table_second_axe.py ../data/second_axe    --json ../docs/second_axe_21.json
-uv run python ../analysis/src/table_second_axe.py ../data/second_axe_41 --json ../docs/second_axe_41.json
+uv run python ../src/tables/table_second_axe.py ../data/second_axe    --json ../docs/second_axe_21.json
+uv run python ../src/tables/table_second_axe.py ../data/second_axe_41 --json ../docs/second_axe_41.json
 ```

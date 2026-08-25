@@ -4,4 +4,4 @@
 # ⚠ Volontairement SANS `uv` : `lplv.py` ne demande que la bibliotheque standard, et c'est lui
 # qui lance le verbe par `uv run --project <racine>`. Passer par uv ici ferait DEUX demarrages
 # d'uv par commande pour zero benefice.
-exec python3 "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/analysis/src/lplv.py" "$@"
+exec python3 "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/src/depot/lplv.py" "$@"

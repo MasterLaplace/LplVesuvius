@@ -167,7 +167,7 @@ d'occupation écarte peut-être une graine *risquée* ; il n'explique **pas** le
 
 ![deux traces du meme rouleau](images/25_deux_traces.png)
 
-Figure : `analysis/src/figure_deux_traces.py`.
+Figure : `src/figures/figure_deux_traces.py`.
 
 ⚠⚠ **La figure est à échelle physique commune** — sans quoi une surface deux fois plus
 grande passerait pour identique. À gauche, les deux plaques écartelées de `24` : c'est ce
@@ -191,8 +191,8 @@ PHerc0800 (6), PHerc1203 (1). La campagne, elle, n'en couvrait alors que douze �
 du corpus était juste, c'est sa description qui ne l'était pas.
 
 ⭐ **Corrigé pour de bon le 2026-08-22** : `PHerc1203` y est. Son absence n'était pas une
-décision, c'était un trou — `tools/campagne_graines.sh` ne le listait pas alors que
-`tools/carte_separabilite.sh` le liste, et [`35`](35_le_tirage_sur_douze_rouleaux.md) §5 l'a
+décision, c'était un trou — `src/campagnes/campagne_graines.sh` ne le listait pas alors que
+`src/outils/carte_separabilite.sh` le liste, et [`35`](35_le_tirage_sur_douze_rouleaux.md) §5 l'a
 trouvé en constatant que la campagne des tirages ne couvrait que douze rouleaux sur treize.
 ⚠ Le combler a demandé de réparer autre chose d'abord, et c'est le sujet du bloc ci-dessous.
 
@@ -272,7 +272,7 @@ message. C'est le piège que l'en-tête du script nomme déjà (« emprunter le 
 rouleau voisin ») appliqué à deux scans d'un **même** rouleau.
 
 ⭐ Le remède est dans les noms : une prédiction s'appelle `<scan>-surface-….zarr` et son
-volume `<scan>-<voxel>um-….zarr`. [`analysis/src/apparier_volumes.py`](../analysis/src/apparier_volumes.py)
+volume `<scan>-<voxel>um-….zarr`. [`src/volume/apparier_volumes.py`](../src/volume/apparier_volumes.py)
 apparie sur ce préfixe, et le script de campagne l'appelle.
 
 ⚠ **Mesuré avant de conclure, et le résultat est plus sobre que la crainte** : sur les
@@ -391,7 +391,7 @@ l'échelle sont ancrés sur des images, à surface physique égale :
 
 ![quatre signatures de trace](images/25_signatures.png)
 
-Figure : `analysis/src/figure_signatures.py`.
+Figure : `src/figures/figure_signatures.py`.
 
 | trace | amplitude | ce que la face montre |
 |---|---:|---|
@@ -432,7 +432,7 @@ disposition `<zarr>/{x,y,z}/<niveau>`. C'est une conversion, et c'est la marche 
 ```bash
 cd experiments
 S="PHerc0358/representations/predictions/surfaces/20250821151737-surface-20260413222639-surface-m7-L0-th0.2.zarr"
-uv run python ../analysis/src/trouver_graine.py "$S" \
+uv run python ../src/commun/trouver_graine.py "$S" \
     --level 0 --chunks 25 --bloc 8 --critere planarite --voxel-um 9.362
 
 cd ../data/trace/PHerc0358/essai_b
@@ -446,7 +446,7 @@ vc_render_tifxyz -v cache_vol --remote-url "$V" --scale 1 -g 0 -s flat_b \
     --tif-output render_b61 -n 61 --slice-step 1 --auto-crop
 
 cd ../../../inference_xpu
-uv run python ../analysis/src/depth_profile.py ../data/trace/PHerc0358/essai_b/render_b61 \
+uv run python ../src/volume/depth_profile.py ../data/trace/PHerc0358/essai_b/render_b61 \
     --grid --size 128 --step 128 --traced-layer 30 --voxel-um 9.362
 ```
 
@@ -456,7 +456,7 @@ mesure de profondeur ne peut rien voir — `-n 61` et non `-n 21`.
 
 ## 7. Les témoins
 
-22 contrôles hors ligne (`tools/temoins.sh`, batterie « graine : planarite »), et **chacun
+22 contrôles hors ligne (`src/outils/temoins.sh`, batterie « graine : planarite »), et **chacun
 a été vérifié cassable** : cinq sondes remplacent une garde par sa version fautive et la
 batterie doit tomber.
 
@@ -478,6 +478,6 @@ Refaites, les cinq tombent.
 ## Reproduire
 
 ```bash
-./tools/lancer.sh --fond tools/campagne_graines.sh       # la campagne appariée
-cd experiments && uv run python ../analysis/src/table_graines.py --help   # le dépouillement
+./src/outils/lancer.sh --fond src/campagnes/campagne_graines.sh       # la campagne appariée
+cd experiments && uv run python ../src/tables/table_graines.py --help   # le dépouillement
 ```

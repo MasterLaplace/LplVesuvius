@@ -8,7 +8,7 @@ situation n'est pas uniforme.
 
 ## 1. L'état des treize, compté proprement
 
-`tools/etat_rouleaux_prix.sh`, sorties dans `docs/etat_rouleaux_prix.txt` :
+`src/outils/etat_rouleaux_prix.sh`, sorties dans `docs/etat_rouleaux_prix.txt` :
 
 | rouleau | volumes | surfaces | lasagna | **segments** |
 |---|---:|---:|---:|---:|
@@ -65,7 +65,7 @@ observation, pas un résultat.
 ## 3. Reproduire
 
 ```bash
-./tools/etat_rouleaux_prix.sh                      # l'inventaire des treize
+./src/outils/etat_rouleaux_prix.sh                      # l'inventaire des treize
 
 cd inference_xpu
 uv run python -u ../tracecheck/tracecheck.py PHerc1447 --all \

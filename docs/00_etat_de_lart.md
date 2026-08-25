@@ -216,7 +216,7 @@ C'est aussi exactement le critère des Progress Prizes : « amélioration
 
 ## 6. Les données, mesurées
 
-Détail et méthode dans `02_inventaire_mesure.md` ; outil : `tools/s3_size.py`.
+Détail et méthode dans `02_inventaire_mesure.md` ; outil : `src/outils/s3_size.py`.
 
 - **45 échantillons** publiés (35 rouleaux, 10 fragments), **310 segments**.
   ⚠ **33 sur 45 n'ont aucune surface tracée** ; quatre échantillons concentrent

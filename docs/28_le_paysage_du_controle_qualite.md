@@ -170,7 +170,7 @@ avant toute publication.
    d'échouer » poussée d'un cran : ne pas seulement sonder qu'un contrôle *peut* échouer,
    mais remplacer chaque détecteur par un bouchon et **exiger le rouge**.
 
-   ✅ **Fait le jour même** : `tracecheck/mutation.py`, batterie de `tools/temoins.sh`.
+   ✅ **Fait le jour même** : `tracecheck/mutation.py`, batterie de `src/outils/temoins.sh`.
    Il remplace tour à tour sept fonctions porteuses par un bouchon **dégénéré** — pas
    cassé : lever une exception ferait rougir la suite pour la mauvaise raison, on veut
    prouver qu'une réponse *neutre et plausible* est détectée — et exige le rouge.

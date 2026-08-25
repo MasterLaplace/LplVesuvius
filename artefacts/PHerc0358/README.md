@@ -30,7 +30,7 @@ en fallait plusieurs.
 ```
 -s 1544 1544 7768        # ordre x y z ; ⚠ le zarr est indexe (z,y,x)
 ```
-trouvée par `analysis/src/trouver_graine.py` sur la prédiction de surface publiée, à
+trouvée par `src/commun/trouver_graine.py` sur la prédiction de surface publiée, à
 distance, sans rien télécharger.
 
 ## Reproduire

@@ -7,6 +7,43 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+## ⭐⭐⭐⭐⭐ LE DÉPÔT EST RANGÉ — `src/` en dix familles, 1011 citations réécrites
+
+`analysis/src` (126 fichiers à plat) et `tools/` (73) sont devenus **`src/`**, en dix familles.
+Détail et mesures : [`56`](docs/56_le_grand_menage.md).
+
+![Les 219 greffons du dépôt](docs/images/56_verbes.png)
+
+```
+src/outils/ 61   src/figures/ 37   src/nappe/ 22   src/volume/ 15   src/graine/ 15
+src/encre/  13   src/campagnes/ 12  src/tables/ 10  src/depot/  8   src/commun/  8
+```
+
+⭐ **`src/commun/` est une mesure, pas un fourre-tout** : les modules importés par leurs
+frères. ⚠ Ma première mesure en annonçait 8 et elle était **fausse** — ancrée sur `^import x`,
+donc aveugle à `import x  # commentaire`. Le remède n'a pas été de mieux compter mais de
+**cesser de compter** : chaque module met toutes les familles sur son chemin, donc un
+reclassement futur ne casse aucun import.
+
+⚠⚠ **Mon estimation disait ~490 citations, la mesure en a trouvé 1011.** Deux fois plus. Plus
+62 scripts shell qui remontaient d'un cran vers la racine, 50 `sys.path` qui supposaient un
+dossier plat, et 12 chemins **assemblés** qu'aucune réécriture textuelle ne peut voir —
+`src/depot/deplacer.py` les NOMME au lieu de les taire.
+
+**37 échecs → 0**, et aucun trouvé en relisant : les extraits en ligne de `temoins.sh`
+pointaient chacun vers un dossier ; mon insertion de `sys.path` **ignorait l'indentation** (18
+occurrences indentées → `IndentationError`) ; sept chemins assemblés ; et le témoin de
+`lancer.sh` a attrapé que le **gel** d'un script doit vivre à la profondeur que ce script
+suppose — les scripts remontant de deux crans, `.lances/` devient `.lances/gel/`.
+
+⚠ **N'ont PAS bougé** : `tracecheck/` (le livrable que l'article décrit), `experiments/` et
+`inference_xpu/` (chacun son environnement). Décision par dossier, pas coup de balai.
+
+**Tout passe par `./lplv`** — `./lplv --help`, `./lplv <verbe> --help`, `./lplv --version` —
+donc plus personne n'a besoin de connaître un chemin, et un reclassement futur est invisible.
+
+---
+
 ## ⭐⭐⭐⭐ CHANTIER C LIVRÉ — `lplv`, le point d'entrée que 218 greffons attendaient
 
 Le chantier C de [`56`](docs/56_le_grand_menage.md). **Aucune architecture n'a été créée ici :
@@ -63,7 +100,7 @@ suppression, et **deux chiffres du plan corrigés d'un facteur quatre**.
 
 | | verdict | preuve |
 |---|---|---|
-| `htr/` | **retiré** | un seul fichier, remplacé par `analysis/src/structure.py`, **zéro site d'appel** sous quelque orthographe |
+| `htr/` | **retiré** | un seul fichier, remplacé par `src/encre/structure.py`, **zéro site d'appel** sous quelque orthographe |
 | `inference/` | **reste**, venv retiré | son README argumente qu'il est le **témoin CPU** du ×4,5 iGPU validé à sortie identique ; `pyproject`+`uv.lock` versionnés → rejouable |
 | `inference_xpu/` | **reste entier** | c'est l'environnement de l'encre, et l'encre est le prochain chantier nommé |
 
@@ -73,7 +110,7 @@ suppression, et **deux chiffres du plan corrigés d'un facteur quatre**.
 un fichier de venv est un *nom de plus* sur des octets déjà là. Retirer `htr/` + `inference/.venv`
 libère **0,15 Gio tout de suite**, 4,09 de plus **seulement après `uv cache prune`** (non lancé :
 c'est une ressource partagée avec la machine, pas une décision du dépôt), et 3,06 **jamais**.
-Soit 4,24 Gio, pas 16,6. Calcul dans l'arbre : `analysis/src/poids_recuperable.py`.
+Soit 4,24 Gio, pas 16,6. Calcul dans l'arbre : `src/depot/poids_recuperable.py`.
 
 **Les « 25 sites d'appel » d'`inference/` étaient des EMPRUNTS, pas des besoins.** Le motif écrit
 partout — *« le seul environnement porteur de Pillow »* — était faux (la racine déclare
@@ -81,7 +118,7 @@ partout — *« le seul environnement porteur de Pillow »* — était faux (la 
 conclure à tort qu'une graine n'était pas couverte. Les 25 sont repointés sur la racine ; les
 **11 batteries** concernées passent depuis là.
 
-### ⭐ `analysis/src/permalien.py` — l'outil que les chantiers B et D réutiliseront
+### ⭐ `src/depot/permalien.py` — l'outil que les chantiers B et D réutiliseront
 
 Son invariant : *un permalien ne vaut que si son commit est **sur le distant** et que le chemin
 **existe** à ce commit.* ⚠ `HEAD` était **43 commits en avance** sur `origin/main` — un lien vers
@@ -191,7 +228,7 @@ de 238 µm a parcouru **2 044 µm et non 1 190**. Ce nombre est déjà écrit da
 sans rendu** :
 
 ```bash
-SOURCE=… PAS=2 MAILLONS=20 PROFILS=0 DEST=… tools/chainer_tangentiel.sh
+SOURCE=… PAS=2 MAILLONS=20 PROFILS=0 DEST=… src/outils/chainer_tangentiel.sh
 ```
 
 ⚠ Nécessaire, pas suffisant : une chaîne peut garder un pas parfait en marchant droit hors de
@@ -203,7 +240,7 @@ Recoller la nappe sur la **matière** entre les maillons. Ce n'est pas spéculat
 [`41`](docs/41_marcher_le_long_dune_nappe.md) §6 fait déjà ce geste (transformée de distance +
 recentrage sur la crête) et atteint **≈ 2,4 mm**, s'arrêtant *parce que le bloc se termine*.
 ⚠ Réserve : deux rouleaux, deux échelles — ce qui se compare, ce sont les **natures d'arrêt**.
-La pièce manquante existe : `analysis/src/suivre_nappe.py` expose `champ_de_distance`,
+La pièce manquante existe : `src/commun/suivre_nappe.py` expose `champ_de_distance`,
 `normale_locale` et **`recentrer`**. ⚠ Contrainte : la boîte de notre nappe fait ~10 milliards
 de voxels au niveau 0, donc il faut travailler au **niveau 2** de la pyramide (~156 Mio).
 
@@ -213,7 +250,7 @@ qu'elle a poussé et recaler une nappe **avant** de la reprojeter sont deux gest
 
 ### ⚠⚠ Six batteries n'avaient jamais tourné — le lanceur se vérifie maintenant lui-même
 
-`tools/temoins.sh` tenait ses lignes de lancement **à la main**, donc la liste avait dérivé :
+`src/outils/temoins.sh` tenait ses lignes de lancement **à la main**, donc la liste avait dérivé :
 six fichiers sur quatre-vingt-dix portaient une batterie que personne ne lançait, et quatre
 d'entre elles imprimaient « tous les témoins passent » là où le lanceur cherche `ALL PASS`.
 Un garde-fou neuf (**« batteries non lancées »**) fait échouer le run si un fichier qui *gère*
@@ -246,7 +283,7 @@ et un tag `v0.1.0-progress` portent la vue allégée : 922 fichiers sur 1116, 26
 reconstruit en une commande et **ne se tague que si sa batterie passe** :
 
 ```bash
-tools/faire_la_release.sh v0.1.1-progress
+src/outils/faire_la_release.sh v0.1.1-progress
 git push origin release/progress-prize && git push origin v0.1.1-progress
 ```
 
@@ -281,7 +318,7 @@ quoi que ce soit.
 
 - ⚠⚠ **Une pente a deux appuis, et vingt séries rendaient le même nombre.** Le refus « profil
   plat » de `49` agrège les amplitudes par un **maximum** — juste pour « y a-t-il quelque
-  chose ici », faux pour « quelle est la pente ». `analysis/src/appui_de_pente.py`
+  chose ici », faux pour « quelle est la pente ». `src/graine/appui_de_pente.py`
   (37 témoins) classe chaque appui et transforme un écart au bord en **borne signée** plutôt
   qu'en refus : appui étroit au bord ⇒ α majorant ⇒ une convergence tient ; appui large ⇒
   minorant ⇒ une condamnation tient ; les deux ⇒ rien. Sur 132 séries : 92 exactes,
@@ -298,7 +335,7 @@ quoi que ce soit.
 - **La pyramide préserve α** : 0,02 d'écart entre niveaux 0 et 1 sur la petite surface, 0,06
   entre 1 et 2 sur la grande, pour une résolution de 0,20. Le plancher dépend de la
   **surface** : `depth_profile` refuse une image plus petite que sa fenêtre de 1024 px.
-- **Le critère auto-référentiel a sa définition** : `analysis/src/critere_relatif.py`
+- **Le critère auto-référentiel a sa définition** : `src/graine/critere_relatif.py`
   (23 témoins). Ce n'est pas un critère de plus, c'est **le test qu'un candidat doit
   passer** — β = log(C₁/C₀)/log(n₁/n₀), lu comme α. ⚠ Appliqué au matériel réel : **une
   seule grandeur sur treize se lit en absolu** (`tiers_central`, 11 séries). Le profil
@@ -370,7 +407,7 @@ segments à 109 couches et **un à 6**. Une distribution unique les aurait fondu
 #### ⭐⭐⭐ ET C'EST FAIT : `Scroll 1` EST `PHercParis4`
 
 L'alias de l'outil le dit — le corpus calibré **est** celui du rouleau qui nous résiste. Les
-huit candidats relus **à la géométrie du corpus** (128 px × 109 couches, `tools/situer_nos_traces.sh`) :
+huit candidats relus **à la géométrie du corpus** (128 px × 109 couches, `src/outils/situer_nos_traces.sh`) :
 
 | candidats | relief | ×plancher | rang sur 80 |
 |---|---:|---:|---|
@@ -462,7 +499,7 @@ Le **niveau de la prédiction** n'était propagé nulle part, et trois choses en
 0,317 cm² des deux côtés, n'était pas un contrôle : c'était le même plancher dans deux systèmes.
 
 ⚠ **La comparaison « prédiction contre prédiction, au même endroit » reste donc à faire**, avec
-des aires réellement appariées. Les trois correctifs sont dans `tools/tracer_une_graine.sh`.
+des aires réellement appariées. Les trois correctifs sont dans `src/outils/tracer_une_graine.sh`.
 
 #### ⚠⚠ CORRECTION — c'est la GRAINE, pas le maillage, et une requête HTTP l'aurait dit
 
@@ -484,7 +521,7 @@ matière**. **Le maillage suit le repère de la GRAINE**, pas celui du volume ou
 ⭐⭐⭐ **Et le 2×2 croisé n'était pas en position de conclure** : sa colonne « graine `m7` »
 tenait un **nombre** constant, pas un **endroit**. Préalable qui en sort, et il coûte une
 requête : **sonder la graine dans le volume scanné avant de payer un tracé**
-(`analysis/src/matiere_au_point.py`).
+(`src/nappe/matiere_au_point.py`).
 
 #### ⭐⭐⭐ ET EN REGARDANT : ce ne sont pas des feuilles, ce sont des spires en travers
 
@@ -551,7 +588,7 @@ document ne cite cette dernière. Détail : [`54`](docs/54_cinq_rendus_vides.md)
 - **Éditer un script pendant qu'il tourne le casse** : `bash` lit par offset, une insertion
   décale les octets et il reprend au milieu d'un token.
 - **Un auto-test qui écrit sa fixture à un chemin FIXE ne supporte pas deux exécutions.**
-  `tools/temoins_release.sh` a un verrou ; `tools/temoins.sh` n'en a pas encore.
+  `src/outils/temoins_release.sh` a un verrou ; `src/outils/temoins.sh` n'en a pas encore.
 - **Un échec avec un code de retour zéro n'est pas un échec** : c'est le lecteur qui se
   trompe de convention.
 - **Une sonde qui cite son propre motif se matche elle-même** (septième fois, 2026-08-23 :
@@ -564,14 +601,14 @@ document ne cite cette dernière. Détail : [`54`](docs/54_cinq_rendus_vides.md)
 ### La règle de commit, désormais vérifiée
 
 `type(scope): sujet`, **en anglais**, **zéro tiret cadratin**. Types : `chore clean docs feat
-fix measure mesure perf resultat test`. `tools/format_des_commits.sh` (14 contrôles) le
-vérifie, et la détection du français est déléguée à `analysis/src/langue.py`.
+fix measure mesure perf resultat test`. `src/outils/format_des_commits.sh` (14 contrôles) le
+vérifie, et la détection du français est déléguée à `src/encre/langue.py`.
 
 ### Vérifier que tout va bien, en deux commandes
 
 ```bash
-./tools/temoins.sh            # tout, hors ligne
-./tools/temoins_release.sh    # ce que la release livre, avec son verrou
+./src/outils/temoins.sh            # tout, hors ligne
+./src/outils/temoins_release.sh    # ce que la release livre, avec son verrou
 ```
 
 
@@ -645,7 +682,7 @@ ps -eo pid,etime,args | grep '\.lances/'   # ce qui vit encore
 
 ### Le lot en cours, et pourquoi
 
-⭐ **L'hypothèse qui inverse** (`tools/convergence_des_essais.sh`, en fond) : une coupe
+⭐ **L'hypothèse qui inverse** (`src/outils/convergence_des_essais.sh`, en fond) : une coupe
 radiale **ne peut pas** se croiser elle-même ; une surface qui suit une spire revient près
 d'elle-même à chaque tour. Nous aurions donc jeté les bonnes traces. `essai_ng2`
 (112 139 croisements, poussée **avec** les vraies grilles de normales) est le candidat.
@@ -660,8 +697,8 @@ critère. Détail : [`38`](docs/38_ce_qui_bouge_avec_la_fenetre.md) §« l'hypot
 ### ✅ Fait le 2026-08-20 au soir — la cible existe en image
 
 ⭐⭐⭐ **[`40`](docs/40_le_rouleau_entier.md) : 44 spires consécutives de `PHerc0172`, sans un
-trou**, assemblées depuis les cartes d'encre publiées (`tools/mosaique_rouleau.sh`,
-`analysis/src/assembler_mosaique.py`, 18 témoins). 21 Mo téléchargés, ~3 min, **rien de
+trou**, assemblées depuis les cartes d'encre publiées (`src/outils/mosaique_rouleau.sh`,
+`src/volume/assembler_mosaique.py`, 18 témoins). 21 Mo téléchargés, ~3 min, **rien de
 tracé ni rendu ici**.
 
 ⚠ **Le déroulement est le leur ; l'ordre est le nôtre.** Ce n'est pas un résultat de la
@@ -678,7 +715,7 @@ extrémité**.
 
 ### ✅ Fait dans la foulée — la piste B est construite (pas encore branchée)
 
-⭐⭐⭐ **[`41`](docs/41_marcher_le_long_dune_nappe.md) : `analysis/src/suivre_nappe.py`**,
+⭐⭐⭐ **[`41`](docs/41_marcher_le_long_dune_nappe.md) : `src/commun/suivre_nappe.py`**,
 24 témoins. Marche le long d'une nappe (tenseur de structure → normale, recentrage
 sous-voxel sur la crête, reprojection de la direction à chaque pas) et écrit un
 `PointCollections` que `--correct` sait relire — format **lu dans la source**, ordre des
@@ -730,7 +767,7 @@ rendus ne tiennent donc pas, et le processus qui meurt est **celui qui demande d
 mémoire ensuite**, pas celui qui l'a prise — le 2026-08-21, trois campagnes en parallèle
 ont fait tuer une *trace* à la génération 104, sans erreur lisible, à l'autre bout du
 pipeline. Le symptôme apparaît chez la victime, jamais chez le coupable.
-⭐ Remède structurel plutôt qu'une note : **`tools/lancer.sh` REFUSE** un second exemplaire
+⭐ Remède structurel plutôt qu'une note : **`src/outils/lancer.sh` REFUSE** un second exemplaire
 du même script quand un tourne (`--apres <pid>` pour enchaîner, `LANCER_FORCE=1` pour
 passer outre). Sondé : le refus se déclenche.
 
@@ -756,7 +793,7 @@ passage contre 56 630 points de grille** (0,56 % de la surface) avec un `correct
 qui vaut **1,0 par défaut**, le même ordre que `DIST` qui s'applique partout. Un coup de
 pouce local, pas une réorientation.
 ⭐ Levier suivant, jamais réglé ici : **`correction_weight`** — balayage `POIDS="1 100"`
-ajouté à `tools/boucle_de_correction.sh`, chaîné derrière le run en cours.
+ajouté à `src/outils/boucle_de_correction.sh`, chaîné derrière le run en cours.
 
 ⚠ Et ça retire son dernier appui à **l'hypothèse qui inverse** : une trace passe de 0 à
 11 753 croisements sans que α s'améliore. Beaucoup de croisements n'est ni un symptôme de
@@ -819,7 +856,7 @@ combinaison des deux qui n'ait pas été essayée.
 tire un rayon depuis chaque sommet le long de la normale et s'arrête sur la matière suivante
 — **il construit la spire voisine**. C'est le « wrap by wrap copy tool » du papier, public.
 Et il part d'un segment **officiel qui converge déjà** (α = +0,00), donc il n'a rien à
-redresser. `tools/spire_suivante.sh` demande : **la convergence survit-elle à
+redresser. `src/outils/spire_suivante.sh` demande : **la convergence survit-elle à
 l'enchaînement, et sur combien de spires ?** En file derrière le balayage.
 
 ⚠⚠ **PIÈGE DE DIAGNOSTIC PAYÉ LE 2026-08-21, ET IL FABRIQUE UN FAUX RÉSULTAT.**
@@ -855,7 +892,7 @@ générations, une seule clé change à la fois.
 ⚠ **Reste aussi** : donner les points à `--resume --rewind-gen --correct`, puis juger au
 test de convergence de `38`.
 
-⚠⚠ **Piège payé, et il est générique** : `decode` (`analysis/src/zarr_depth.py`) rendait
+⚠⚠ **Piège payé, et il est générique** : `decode` (`src/commun/zarr_depth.py`) rendait
 `None` aussi bien pour « ce chunk n'existe pas » que pour « je ne sais pas le décompresser »
 — alors que sa propre docstring promettait de les distinguer. `numcodecs` manque dans
 `inference/`, donc tous les chunks blosc sont revenus vides et j'ai **mesuré, puis écrit**,
@@ -882,7 +919,7 @@ chaîne ne se juge qu'au tour où la référence cède. Corollaire : une campagn
 doit aller **jusqu'à la rupture de la référence**, sinon elle mesure le début facile.
 
 **2. ⭐⭐ [`44`](docs/44_ou_la_chaine_se_trouve.md) — où la chaîne se trouve dans le rouleau.**
-Nouvel instrument `analysis/src/geometrie_chaine.py` (39 témoins). Mesure sans connaître l'axe
+Nouvel instrument `src/nappe/geometrie_chaine.py` (39 témoins). Mesure sans connaître l'axe
 du rouleau : une ligne de grille circonférentielle **tourne**, une ligne axiale est **droite**.
 
 | ce qui est mesuré | valeur | portée |
@@ -927,7 +964,7 @@ sonder.
 
 ## 2. ⚠ CE QUI TOURNE (2026-08-19, soirée)
 
-⏳ **`tools/campagne_pas.sh`** — le balayage de `step_size` sur PHerc0358, deux graines
+⏳ **`src/campagnes/campagne_pas.sh`** — le balayage de `step_size` sur PHerc0358, deux graines
 (`pas/` et `pas_mauvaise_graine/`). Reprenable. C'est **T1f**.
 ✅ **Rendu** : sur les deux graines, 4 pas sur 5 donnent **zéro** auto-intersection
 (`26` §9). `pas_5` des deux campagnes tournait encore au moment d'écrire.
@@ -1080,7 +1117,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 | **`15`** | ⭐ **ce qui est soumissionnable**, trié contre les critères écrits du concours |
 | **`19`** | ⭐⭐ **la première règle qui CHANGE une décision** — p = 0,0005 contre 2000 permutations |
 | **`20`** | ⭐⭐ **le champ de correction** : l'erreur d'une trace est structurée, et **translater ne la répare pas** |
-| **`21`** | **le brouillon de la soumission**, résultats négatifs compris. ⚠ Ses chiffres sont gardés par `verifier_chiffres.py`, lancé dans `tools/temoins.sh` |
+| **`21`** | **le brouillon de la soumission**, résultats négatifs compris. ⚠ Ses chiffres sont gardés par `verifier_chiffres.py`, lancé dans `src/outils/temoins.sh` |
 | `22` | le batch « répliquer » — clos, et il a réfuté ce qu'il devait consolider |
 | `23` | ⭐ **l'inventaire des 13 rouleaux du prix** — 10 n'ont AUCUN segment |
 | **`24`** | ⭐⭐ **la première trace d'un rouleau du prix**, condamnée par nos instruments avant le rendu. ⚠ Son §2 est **corrigé** : le verdict tient sur deux instruments, pas trois |
@@ -1096,22 +1133,22 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./tools/temoins.sh                      # 114 batteries, 2999 contrôles hors ligne, tous verts
-./tools/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
+./src/outils/temoins.sh                      # 115 batteries, 3024 contrôles hors ligne, tous verts
+./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)
-./tools/mirror_site.sh                  # miroir + contrôle de couverture
-./tools/fetch_layers.sh <url> <dest> <largeur> <de> <a>   # couches, reprenable
-./tools/ppm_to_tifxyz.py <in.ppm> <out.tifxyz>            # .ppm de VC -> tifxyz
-./tools/survey_fusions.sh <out> <bandes> <par> <pas>      # fusions, niveau 2
-./tools/bandes_niveau0.sh                                 # bandes niveau 0, hors site
-./tools/fetch_traces.py <index.json> <corpus> <dest>      # traces tifxyz, SANS aws
-./tools/lister_volumes_surface.sh <rouleau> <sortie>      # qui publie un volume Zarr
-./tools/fetch_cartes_encre.sh <rouleau> <dest>            # cartes d'encre PUBLIEES
-./tools/reprendre.sh                                      # degeler apres un kill -STOP
-./tools/campagne_champ.sh <rouleau> <motif> <voxel_um>    # champ de correction, REPRENABLE
-./tools/campagne_dense.sh <rouleau> <motif> <dest>        # part de matiere, 392 points
-./tools/etat_rouleaux_prix.sh                             # ⭐ l'inventaire des 13
+./src/outils/mirror_site.sh                  # miroir + contrôle de couverture
+./src/outils/fetch_layers.sh <url> <dest> <largeur> <de> <a>   # couches, reprenable
+./src/outils/ppm_to_tifxyz.py <in.ppm> <out.tifxyz>            # .ppm de VC -> tifxyz
+./src/outils/survey_fusions.sh <out> <bandes> <par> <pas>      # fusions, niveau 2
+./src/outils/bandes_niveau0.sh                                 # bandes niveau 0, hors site
+./src/outils/fetch_traces.py <index.json> <corpus> <dest>      # traces tifxyz, SANS aws
+./src/outils/lister_volumes_surface.sh <rouleau> <sortie>      # qui publie un volume Zarr
+./src/outils/fetch_cartes_encre.sh <rouleau> <dest>            # cartes d'encre PUBLIEES
+./src/outils/reprendre.sh                                      # degeler apres un kill -STOP
+./src/campagnes/campagne_champ.sh <rouleau> <motif> <voxel_um>    # champ de correction, REPRENABLE
+./src/campagnes/campagne_dense.sh <rouleau> <motif> <dest>        # part de matiere, 392 points
+./src/outils/etat_rouleaux_prix.sh                             # ⭐ l'inventaire des 13
 
 cd experiments   # geometrie
 uv run python src/excision/radial.py {centre|compter|profil|deplier|axe} …
@@ -1128,23 +1165,23 @@ uv run python -m excision.proximity <mesh.tifxyz> --json
 cd inference_xpu # encre
 uv run python src/infer_ink.py <layers> --model … --device xpu --out out.npy
 uv run python ../analysis/src/{evaluate_segment,render_segment,structure}.py …
-uv run python ../analysis/src/judge_api.py --list-models
-uv run python ../analysis/src/judge_api.py <pred.npy> --bands-only   # sans cle
-uv run python ../analysis/src/depth_profile.py <couches…> --grid     # qualite de trace
-uv run python ../analysis/src/zarr_depth.py <cle .zarr> --courbe --fils 16   # ⭐ x8,35
-uv run python ../analysis/src/fiber_orientation.py <cle .zarr>       # ⭐ fibres
-uv run python ../analysis/src/croiser_instruments.py <index.json> <mesures.json>
-uv run python ../analysis/src/champ_correction.py <cle .zarr> --voxel-um 2.4  # ⭐⭐ REPARABLE ?
-uv run python ../analysis/src/croiser_encre.py <profondeur.json> <cartes/>    # ⭐⭐ la DECISION
-uv run python ../analysis/src/table_champ.py <champs/> --encre <rapport.json>
-uv run python ../analysis/src/resolution_phase.py <saut_spire/>
-uv run python ../analysis/src/trouver_graine.py <prediction .zarr>    # ⭐ graine A DISTANCE
-uv run python ../analysis/src/regarder_rendu.py <render/> --png-dir …  # apercus + stats
-uv run python ../analysis/src/tester_prediction_50um.py <rapport.json>
-uv run python ../analysis/src/robustesse_material.py <A> <B>
-uv run python ../analysis/src/verifier_chiffres.py <docs…>            # fraicheur
-uv run python ../analysis/src/compare_maps.py <a.npy> <b.npy>
-uv run python ../analysis/src/proximity_vs_ink.py <mesh> <pred> <labels>
+uv run python ../src/encre/judge_api.py --list-models
+uv run python ../src/encre/judge_api.py <pred.npy> --bands-only   # sans cle
+uv run python ../src/volume/depth_profile.py <couches…> --grid     # qualite de trace
+uv run python ../src/commun/zarr_depth.py <cle .zarr> --courbe --fils 16   # ⭐ x8,35
+uv run python ../src/nappe/fiber_orientation.py <cle .zarr>       # ⭐ fibres
+uv run python ../src/commun/croiser_instruments.py <index.json> <mesures.json>
+uv run python ../src/nappe/champ_correction.py <cle .zarr> --voxel-um 2.4  # ⭐⭐ REPARABLE ?
+uv run python ../src/encre/croiser_encre.py <profondeur.json> <cartes/>    # ⭐⭐ la DECISION
+uv run python ../src/tables/table_champ.py <champs/> --encre <rapport.json>
+uv run python ../src/nappe/resolution_phase.py <saut_spire/>
+uv run python ../src/commun/trouver_graine.py <prediction .zarr>    # ⭐ graine A DISTANCE
+uv run python ../src/volume/regarder_rendu.py <render/> --png-dir …  # apercus + stats
+uv run python ../src/encre/tester_prediction_50um.py <rapport.json>
+uv run python ../src/nappe/robustesse_material.py <A> <B>
+uv run python ../src/depot/verifier_chiffres.py <docs…>            # fraicheur
+uv run python ../src/volume/compare_maps.py <a.npy> <b.npy>
+uv run python ../src/encre/proximity_vs_ink.py <mesh> <pred> <labels>
 ```
 
 ### ⭐⭐ VC3D — la chaîne de production, construite le 2026-08-19
@@ -1455,7 +1492,7 @@ cible — le pool ouvert fait **2 140 000 $** et le Grand Prize n'est pas le seu
 | ~~T1e~~ | ~~générer des grilles depuis le volume masqué~~ | ✅ **fait — troisième négatif** (`26` §8). 3,44 Go de volume en boîte à coordonnées absolues, 36 dalles sur 238, 4 608 tranches de grilles : **×17 de ralentissement, trajectoire identique**. Une information qui ne vient PAS de la prédiction ne change pas plus la trajectoire |
 | **T1f** ⭐ | ce qui reste : la trajectoire ne répond qu'à **`step_size`** et à la **prédiction**. Explorer `step_size`, ou attaquer la prédiction elle-même | ⚠ ne PAS re-tenter les champs et les grilles : trois négatifs mesurés, chacun avec son contrôle |
 | — | ⭐⭐ **le bilan qui cadre la suite** (`26` §8) : la trajectoire ne répond qu'à `step_size` et à la prédiction. Ni les champs, ni les grilles, ni les poids ne la déplacent — **la graine reste le seul levier mesuré** |
-| ~~T2~~ | ~~rejouer la boucle sur d'autres rouleaux~~ | ✅ **fait** — `tools/campagne_graines.sh`, 12 rouleaux, appariée, reprenable |
+| ~~T2~~ | ~~rejouer la boucle sur d'autres rouleaux~~ | ✅ **fait** — `src/campagnes/campagne_graines.sh`, 12 rouleaux, appariée, reprenable |
 | **T3** ⭐ | le **titre de Scroll 1** — *« looking somewhere new »* | c'est un problème de **recherche** sur le corpus où tous nos instruments marchent |
 | T4 | finir et envoyer la soumission Progress Prize | ⏳ le texte existe (`21`), les chiffres sont gardés, il reste à publier le dépôt et à joindre les figures |
 | R2 | exporter le champ de correction en coordonnées de fenêtre | — |
@@ -1464,7 +1501,7 @@ cible — le pool ouvert fait **2 140 000 $** et le Grand Prize n'est pas le seu
 
 ## 7bis. ⭐ T1 — ce qui a été fait, et ce qui reste (mis à jour le 2026-08-19)
 
-> ✅ **La moitié « où l'on part » est faite** : `analysis/src/trouver_graine.py` classe sur
+> ✅ **La moitié « où l'on part » est faite** : `src/commun/trouver_graine.py` classe sur
 > la planéité locale, `tracecheck.py --seed` la publie, et la campagne appariée sur
 > 13 rouleaux la valide (`25`). ⚠ **La moitié « comment on avance » ne l'est pas** — voir
 > T1b. ⚠ Ce qui suit est le contexte d'origine. **Il ne reste PAS exact en entier** :
@@ -1494,10 +1531,10 @@ d'orientation**.
 ### Les trois pistes, dans l'ordre du moins cher
 
 1. ⭐ **Une graine choisie sur la PLANÉITÉ locale**, pas sur la valeur de voisinage.
-   `analysis/src/trouver_graine.py` classe aujourd'hui par la moyenne d'un cube 5³ — ce qui
+   `src/commun/trouver_graine.py` classe aujourd'hui par la moyenne d'un cube 5³ — ce qui
    trouve « beaucoup de surface », y compris une **jonction** entre spires. Ce qu'il faut
    est un endroit où la prédiction forme un **plan** : mesurer l'anisotropie locale (le
-   tenseur de structure de `analysis/src/fiber_orientation.py` sait déjà le faire) et
+   tenseur de structure de `src/nappe/fiber_orientation.py` sait déjà le faire) et
    retenir les points les plus plans. **Aucune donnée nouvelle à télécharger.**
 2. **`step_size` réduit** (défaut 20) : moins de liberté par pas, donc moins de chances de
    sauter. Un essai coûte ~15 min.
@@ -1518,9 +1555,9 @@ vc_flatten -i auto_grown_* -o flat
 rm -rf render && vc_render_tifxyz -v cache_vol --remote-url "$V" --scale 1 -g 0 \
     -s flat --tif-output render -n 21 --slice-step 1 --auto-crop
 cd ~/LplVesuvius/inference_xpu
-uv run python ../analysis/src/depth_profile.py ../data/trace/PHerc0358/render \
+uv run python ../src/volume/depth_profile.py ../data/trace/PHerc0358/render \
     --grid --step 400 --traced-layer 10 --voxel-um 9.362
-uv run python ../analysis/src/regarder_rendu.py ../data/trace/PHerc0358/render --png-dir ../data/trace/PHerc0358/png
+uv run python ../src/volume/regarder_rendu.py ../data/trace/PHerc0358/render --png-dir ../data/trace/PHerc0358/png
 ```
 
 ⭐ **Le critère de succès est mesurable avant de regarder** : une bonne trace doit rendre
@@ -1691,7 +1728,7 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     par densité, vérité terrain qui **saute elle-même** d'une spire) dont aucune n'est dans
     l'article. Cloner le dépôt d'une méthode qu'on cite coûte trente secondes.
 38bis. ⚠⚠ **La chaîne magique d'un harnais de test ne doit apparaître QU'à la ligne de
-    verdict.** `tools/temoins.sh` déclarait une batterie verte en cherchant `ALL PASS`
+    verdict.** `src/outils/temoins.sh` déclarait une batterie verte en cherchant `ALL PASS`
     *n'importe où* dans sa sortie, et **perdait le code de sortie dans le tube**. Deux
     batteries écrites le même jour sont passées au vert **en échouant** : l'une imprimait
     `ALL PASS (1 failures, …)` dans son bloc d'échec, l'autre recopiait la ligne de
@@ -1706,7 +1743,7 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     de **11**. Remède : la provenance (résolution, liste, comptes) va dans l'artefact, pas
     dans la phrase qui le cite.
 40. ⚠⚠ **Un artefact versionné sans producteur dans l'arbre est une anecdote.** Six
-    fichiers de mesure l'étaient — `analysis/src/artefacts_orphelins.py` les a trouvés et
+    fichiers de mesure l'étaient — `src/depot/artefacts_orphelins.py` les a trouvés et
     est désormais une batterie de `temoins.sh`. ⚠ Sa première version signalait **389
     orphelins sur 568** parce qu'elle cherchait le nom de fichier seul, alors qu'un
     artefact par segment est nommé d'après le segment : *une alerte qui désigne les deux
@@ -1723,7 +1760,7 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     `--fail-on-crossing` laisserait alors passer n'importe quelle surface, avec le code de
     sortie 0 que le script attend. Six scripts d'ici lisaient ce rapport sans regarder
     `pairs_tested`. Remède : un **seul** lecteur, qui **refuse** au lieu de rendre un zéro
-    assorti d'une réserve (`analysis/src/lire_selfcross.py`, `34`).
+    assorti d'une réserve (`src/nappe/lire_selfcross.py`, `34`).
 43. ⚠⚠ **Un compte n'est pas comparable entre deux résolutions de la chose qui compte.**
     Le même maillage, décimé sans que sa géométrie change, passe de **240** croisements à
     123, 72, 49. « Zéro au pas 40 » vaut donc moins que « zéro au pas 20 », et l'écart est
@@ -1780,7 +1817,7 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
 53. ⚠ **Le piège nº 41 se repaie en le connaissant** : les backticks d'un message de commit
     sont exécutés par le shell, et deux numéros de document ont disparu du message. Toujours
     `git commit -F fichier`, y compris quand le message paraît anodin.
-54. ⭐ **Le remède structurel a fonctionné le jour même.** `tools/lancer.sh` gèle une copie
+54. ⭐ **Le remède structurel a fonctionné le jour même.** `src/outils/lancer.sh` gèle une copie
     avant de lancer ; corriger `campagne_second_axe.sh` **pendant qu'elle tournait** n'a rien
     cassé, là où la même chose avait tué deux campagnes le matin.
 
@@ -1811,7 +1848,7 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
 
 
 60. ⚠⚠ **Un chien de garde peut surveiller la mauvaise chose et tuer ce qui va bien.** Ma
-    première version de `tools/rendre_surveille.sh` abandonnait un rendu dont la **sortie**
+    première version de `src/outils/rendre_surveille.sh` abandonnait un rendu dont la **sortie**
     ne grossissait plus. Or `vc_render_tifxyz` télécharge tout avant d'écrire : mesuré,
     `rchar` passait de 6,56 à 8,21 Mo en douze secondes pendant que `wchar` restait à 500
     octets et la sortie à 328. Le garde aurait tué un rendu sain et on en aurait conclu
@@ -1836,7 +1873,7 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     fixture utilisait la clé supposée. ⭐ Remède : le lecteur **refuse** au lieu de rendre
     vide, et une sonde tourne sur le **vrai fichier de résultat**.
 62 bis. ⚠⚠ **`lancer.sh` gèle le script de campagne, PAS ses helpers.** Une campagne qui
-    appelle `tools/rendre_surveille.sh` par chemin le relit **pendant** qu'on l'édite, et
+    appelle `src/outils/rendre_surveille.sh` par chemin le relit **pendant** qu'on l'édite, et
     bash lit un script *par offset* : le run en cours s'est mis à exécuter des morceaux du
     bloc `--verifier` que je venais d'insérer (`v: command not found`). C'est le piège nº 45
     par une porte que le gel ne ferme pas. La règle pratique reste la même — **ne pas éditer
@@ -1877,7 +1914,7 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     donnée. Or ce plafond de 60 a été fixé le jour où j'estimais le rendu à **57 Kio/s**, une
     extrapolation faite sur *un* échantillon ; la mesure l'a corrigé à **1108–5861 Kio/s**,
     vingt à cent fois plus vite. ⭐ **La leçon n'est pas « 60 était trop petit »** — on ne le
-    sait pas encore, `tools/plafond_generations.sh` le mesure. Elle est plus gênante : un
+    sait pas encore, `src/outils/plafond_generations.sh` le mesure. Elle est plus gênante : un
     réglage pris pour une raison qui a cessé d'être vraie ne se signale jamais tout seul, et
     la **cohérence** des résultats qu'il produit est précisément ce qui le rend invisible.
     Sept traces d'accord à quatre chiffres ressemblent à une mesure robuste. ⚠ Corollaire :
@@ -1915,7 +1952,7 @@ discriminant est la **distance médiane point-à-point** :
 > **La segmentation publiée de ce rouleau est un ensemble d'échantillons UN PATCH PAR
 > FEUILLE, pas le pavage d'une feuille.** Les deux voies vers une bande continue sont donc
 > mesurées et fermées : l'extension tangentielle converge vers un point fixe (~6 cm²), et le
-> raccordement n'a aucun candidat. Outil : `analysis/src/carte_segments.py` — il refait la
+> raccordement n'a aucun candidat. Outil : `src/commun/carte_segments.py` — il refait la
 > carte en une commande le jour où le dépôt public grandit.
 
 **⚠⚠ Un chiffre publié la veille était faux, et c'est la garde qui l'a dit.** Le tableau
@@ -1933,7 +1970,7 @@ prose française (`12,97`) : la recherche « ce chiffre existe quelque part » �
 satisfaite par le document **source**, et une faute de frappe à la recopie passait au vert.
 `verifier_chiffres.py --soumission docs/21…md` exige que les chiffres cités par le corps
 soient trouvés **dans ce document-là**. Sonde faite : transposer `12,97` en `12,79` dans une
-copie fait échouer le contrôle. Câblé dans `tools/temoins.sh`.
+copie fait échouer le contrôle. Câblé dans `src/outils/temoins.sh`.
 
 **Le dossier est à jour** : la section 12 affirmait « aucun mode de l'outil ne fait de chaîne
 tangentielle **aujourd'hui** » — réfuté par nos propres mesures depuis. Elle renvoie
@@ -1944,17 +1981,17 @@ non-déterminisme corrigé, le point fixe du cycle, et la fermeture du raccordem
 résultat faible ; la distribution montre un **trou d'un facteur deux** sous le seuil — la
 paire la plus proche du rouleau est encore à 79 µm.
 
-**Vérifié** : `tools/temoins.sh` — **TOUS LES TEMOINS PASSENT**, `93 chiffres retrouvés`
+**Vérifié** : `src/outils/temoins.sh` — **TOUS LES TEMOINS PASSENT**, `93 chiffres retrouvés`
 (contre 68 en début de session), 0 script sans appelant, 0 artefact sans producteur.
 ⚠ Les deux JSON `docs/cycle2_gen10*.json` étaient orphelins : leur producteur
-`tools/juger_rognages.sh` existait mais l'**étiquette** (`cycle2_`), qui fait partie du nom du
+`src/outils/juger_rognages.sh` existait mais l'**étiquette** (`cycle2_`), qui fait partie du nom du
 résultat, ne vivait que dans un terminal. Les deux invocations réelles sont écrites dans le
 script.
 
 ### ⭐⭐ MATIN DU 2026-08-22 — ce que l'extension tangentielle sait faire, et où elle s'arrête
 
 Suite du bloc ci-dessous. Toutes les mesures sont sous graine et `thread_limit: 1`, donc
-rejouables ; l'outil est `tools/etendre_nappe.sh`.
+rejouables ; l'outil est `src/outils/etendre_nappe.sh`.
 
 | surface | aire utile | croisements | α | **pic au bord** |
 |---|---:|---:|---:|---:|
@@ -2001,7 +2038,7 @@ le pas diminue, il existe une taille de pas qui tient et la bande peut grandir.
 il faut étendre une nappe le long d'elle-même, et aucun mode de l'outil ne le fait
 explicitement. `mode: resume` est le seul candidat.
 
-**Le résultat, reproductible** : `tools/etendre_nappe.sh` étend le segment officiel qui
+**Le résultat, reproductible** : `src/outils/etendre_nappe.sh` étend le segment officiel qui
 converge.
 
 | | aire utile | sommets valides | arc | % d'un tour | α |
@@ -2075,7 +2112,7 @@ verdicts tranchés.
 (0,125 / 0,25 / 0,5 / 1,0), et `neighbor_exit_threshold` (défaut `threshold × 0,5`) n'a jamais
 été touché — la portée optimale peut dépendre de lui.
 
-⚠ `tools/spire_suivante.sh` expose `SORTIE_PAS`, `FENETRE_PIC`, `DEGAGEMENT`, `DISTANCE_MAX`
+⚠ `src/outils/spire_suivante.sh` expose `SORTIE_PAS`, `FENETRE_PIC`, `DEGAGEMENT`, `DISTANCE_MAX`
 et n'écrit un réglage dans le JSON **que s'il est demandé** — c'est ce qui permet à
 `table_chaine.py --comparer` de lire dans le `meta.json` si une campagne est compensée ou non,
 au lieu de le déduire du nom du dossier.
@@ -2146,7 +2183,7 @@ comptes de franchissements de seuil.**
 
 ```bash
 tail -f .lances/tracer_prediction_paris4-20260822-213653.log   # 12 cellules, ~5 min chacune
-python3 analysis/src/comparer_predictions.py --docs docs --json docs/paris4_2x2.json
+python3 src/encre/comparer_predictions.py --docs docs --json docs/paris4_2x2.json
 ```
 
 Le **2×2 répété** : les deux prédictions de `PHercParis4` × les deux graines × **trois
@@ -2215,8 +2252,8 @@ suite utile n'est pas de choisir une prédiction — c'est de chercher une meill
   bord dans le même fichier, donc il peut **refuser**. Le préférer à `--serie`.
 - `verifier_chiffres.py` a enfin **son propre auto-test** (`--verifier`), dit **où** vit une
   valeur périmée, et liste les documents dont **aucun** chiffre n'est gardé (7 sur ~50).
-- `tools/rendre_surveille.sh` abandonne un rendu inactif **en rapportant son débit**.
-- `tools/dossier_soumission.sh` rassemble ce qui part, la liste des figures **dérivée du
+- `src/outils/rendre_surveille.sh` abandonne un rendu inactif **en rapportant son débit**.
+- `src/outils/dossier_soumission.sh` rassemble ce qui part, la liste des figures **dérivée du
   texte**, et refuse un dossier incomplet.
 - L'article fait **17 pages** et se reconstruit par `./article/build.sh`.
 

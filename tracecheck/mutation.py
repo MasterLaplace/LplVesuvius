@@ -34,7 +34,7 @@ def interprete() -> list[str]:
     """L'interpreteur qui a numpy.
 
     ⚠ Ce n'est pas forcement `sys.executable` : le python systeme de cette machine n'a
-    pas numpy, et `tools/temoins.sh` lance ses batteries par `uv run python` DEPUIS
+    pas numpy, et `src/outils/temoins.sh` lance ses batteries par `uv run python` DEPUIS
     `experiments/`, dont l'environnement l'a. Un script qui suppose son propre
     interpreteur declarerait ici « la suite de reference est deja rouge » sur une suite
     parfaitement verte -- ce qui est le pire des diagnostics : faux, et confiant.
@@ -89,7 +89,7 @@ def main() -> int:
         print(ref.stdout[-800:])
         return 1
     # ⚠⚠ NE PAS reimprimer la ligne de reference telle quelle. Elle contient "ALL PASS",
-    # et `tools/temoins.sh` declare une batterie verte en cherchant CETTE chaine dans la
+    # et `src/outils/temoins.sh` declare une batterie verte en cherchant CETTE chaine dans la
     # sortie -- puis affiche le PREMIER match. Une reference recopiee rendait donc la
     # batterie verte meme si la mutation echouait, et lui faisait afficher les 38 checks
     # du selftest au lieu des 7 de la mutation. Deuxieme fois en une heure que ce piege
@@ -110,7 +110,7 @@ def main() -> int:
 
     print()
     if survivants:
-        # ⚠ NE PAS imprimer "ALL PASS" ici : tools/temoins.sh cherche cette chaine pour
+        # ⚠ NE PAS imprimer "ALL PASS" ici : src/outils/temoins.sh cherche cette chaine pour
         # declarer une batterie verte, et l'imprimer en echec rendrait CE controle
         # incapable d'echouer -- exactement le defaut qu'il existe pour attraper.
         print(f"{len(survivants)} detecteur(s) sans assertion : {survivants}")

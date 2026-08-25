@@ -117,7 +117,7 @@ on écrit du calcul lourd ; ce n'était pas le cas ici.
 
 ![les deux distributions se suivent sur les 256 niveaux](images/04_excision.png)
 
-⭐ **Recalculé le 2026-08-22** par [`analysis/src/figure_excision.py`](../analysis/src/figure_excision.py)
+⭐ **Recalculé le 2026-08-22** par [`src/figures/figure_excision.py`](../src/figures/figure_excision.py)
 (19 témoins), depuis `docs/excision_samples.tsv` — les chiffres de tête ci-dessous sortent
 désormais d'un calcul qui est **dans l'arbre**, et non d'une exécution perdue.
 

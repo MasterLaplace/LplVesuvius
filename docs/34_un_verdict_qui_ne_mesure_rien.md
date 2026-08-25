@@ -16,7 +16,7 @@ concours**.
 > filtre par défaut transforme les deux derniers en **zéros muets** : verdict « propre »,
 > zéro paire testée.
 
-Figure : `analysis/src/figure_sensibilite.py`, depuis `docs/sensibilite_maillage.json`.
+Figure : `src/figures/figure_sensibilite.py`, depuis `docs/sensibilite_maillage.json`.
 
 ## 1. Ce que M2 demandait — et la réponse est rassurante
 
@@ -57,7 +57,7 @@ sont tous jetés. Ce qui reste est une surface vide, sur laquelle aucun croiseme
 
 Le cas ci-dessus demande un réglage explicite et absurde. Celui-ci ne demande rien.
 
-`tools/sensibilite_maillage.sh` prend le maillage condamné — une surface **dont on sait
+`src/outils/sensibilite_maillage.sh` prend le maillage condamné — une surface **dont on sait
 qu'elle se croise** — et dégrade sa **description** sans toucher à sa **géométrie** : une
 ligne et une colonne sur *k*. C'est la densité de maillage qu'un pas *k* fois plus grand
 aurait produite, à ceci près que les points sont les mêmes.
@@ -105,7 +105,7 @@ Six scripts de ce dépôt lisaient le rapport avec le même extrait de trois lig
 d = json.load(open(chemin)); sum(c['transverse'] for c in d['census'])
 ```
 
-**Aucun ne regardait `pairs_tested`.** `analysis/src/lire_selfcross.py` est désormais le
+**Aucun ne regardait `pairs_tested`.** `src/nappe/lire_selfcross.py` est désormais le
 seul lecteur, et il **refuse** (code 3) un rapport sans paire testée au lieu de rendre un
 zéro assorti d'une réserve — *une valeur rendue finit dans un tableau, une réserve qui
 voyage à côté d'un nombre finit par ne plus voyager avec lui*.
@@ -131,8 +131,8 @@ lire ce qu'il doit mesurer ne mesure rien.
 ## Reproduire
 
 ```bash
-./tools/balayage_maxedge.sh          # le filtre masque-t-il ? fabrique-t-il ?
-./tools/sensibilite_maillage.sh      # que voit un maillage plus grossier ?
-python3 analysis/src/lire_selfcross.py --verifier
-uv run python analysis/src/figure_sensibilite.py
+./src/outils/balayage_maxedge.sh          # le filtre masque-t-il ? fabrique-t-il ?
+./src/outils/sensibilite_maillage.sh      # que voit un maillage plus grossier ?
+python3 src/nappe/lire_selfcross.py --verifier
+uv run python src/figures/figure_sensibilite.py
 ```

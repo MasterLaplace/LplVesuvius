@@ -46,12 +46,12 @@ soit **32 µm** de la surface tracée. À droite un segment de Scroll 4 : le con
 ⚠ Les deux panneaux lisent la **même fenêtre de couches** (15 à 40) et sont normalisés
 chacun dans sa propre pile : ce qui se compare est la **forme**, pas le niveau.
 
-`analysis/src/figure_profondeur.py` — tracé avec PIL, sans matplotlib (absent ici, et
+`src/figures/figure_profondeur.py` — tracé avec PIL, sans matplotlib (absent ici, et
 l'ajouter pour deux courbes ferait dépendre une figure d'une pile graphique entière).
 
 ## 2. La mesure
 
-`analysis/src/depth_profile.py`. Pour chaque couche, sur une fenêtre : l'**intensité
+`src/volume/depth_profile.py`. Pour chaque couche, sur une fenêtre : l'**intensité
 moyenne** (où est la matière) et le **contraste local**, écart-type d'un passe-haut 3×3
 (où est la *structure*). C'est le second qui localise : il pique là où les fibres et
 l'encre sont nettes, c'est-à-dire à la surface.
@@ -176,7 +176,7 @@ plusieurs fois le pas de PHerc0172. L'égalité que j'annonçais n'existe pas.
 
 ### 🎯 Ce qui se mesure sans rien emprunter
 
-`analysis/src/stack_structure.py`. La question devient : **à quelle distance la couche
+`src/nappe/stack_structure.py`. La question devient : **à quelle distance la couche
 tracée est-elle du sommet de matière le plus proche, dans sa propre pile ?**
 
 ⚠ Un maximum atteint **au bord** n'est pas un sommet — c'est le flanc d'un sommet situé
@@ -265,10 +265,10 @@ en corrigeant la trace. C'est du côté du déroulement, donc de l'objectif.
 ```bash
 cd inference_xpu
 # une fenêtre, profil détaillé
-uv run python ../analysis/src/depth_profile.py ../data/layers/<segment> \
+uv run python ../src/volume/depth_profile.py ../data/layers/<segment> \
     --top 2560 --left 20000 --size 1024
 # le segment entier
-uv run python ../analysis/src/depth_profile.py ../data/layers/<a> ../data/layers/<b> \
+uv run python ../src/volume/depth_profile.py ../data/layers/<a> ../data/layers/<b> \
     --grid --size 512 --step 1024 --from-layer 15 --to-layer 40 \
     --out ../docs/profil_grille.json
 ```
@@ -355,7 +355,7 @@ Trois conséquences, et la troisième est la plus importante :
 3. Ces volumes sont ceux de la campagne **ESRF à 2,4 µm** — donc `06` §3.6 (« effet de
    la campagne de scan ») se mesure par la même occasion, sur les mêmes segments.
 
-`analysis/src/zarr_depth.py`, `tools/lister_volumes_surface.sh`.
+`src/commun/zarr_depth.py`, `src/outils/lister_volumes_surface.sh`.
 
 ### ⚠ La prédiction est REPOSÉE, parce que changer de statistique l'invalide
 
@@ -495,7 +495,7 @@ et elle se vérifie sans rien supposer d'autre :
 | PHerc1667 (18 segments) | 109 | **54** | **55** | 49 – 61 |
 
 ⚠⚠ **Corrigé le 2026-08-19 : le « 72 » venait d'une AUTRE campagne.**
-`analysis/src/compter_corpus.py` mesure les deux artefacts versionnés :
+`src/graine/compter_corpus.py` mesure les deux artefacts versionnés :
 
 | artefact | entrées (= segments) | `sondees` (= fenêtres par segment) |
 |---|---:|---:|
@@ -581,6 +581,6 @@ tombe, et c'est écrit.
 
 ```bash
 cd inference_xpu
-uv run python ../analysis/src/tester_prediction_50um.py \
+uv run python ../src/encre/tester_prediction_50um.py \
     ../docs/croisement_encre.json --out ../docs/prediction_50um.json
 ```

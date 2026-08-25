@@ -2,7 +2,7 @@
 
 > ⚠⚠ **Ce document est RENDU, pas écrit.** Sa source est
 > [`docs/murs_et_causes.tsv`](murs_et_causes.tsv) et son producteur est
-> `analysis/src/murs_et_causes.py --rendre`. L'éditer à la main serait perdre la
+> `src/depot/murs_et_causes.py --rendre`. L'éditer à la main serait perdre la
 > modification au rendu suivant — et surtout perdre la garde : la batterie vérifie que
 > **chaque ligne pointe vers un document qui contient encore son ancre**.
 
@@ -24,7 +24,7 @@ seul progrès mesurable sur un problème que personne n'a résolu.
 
 *Une case par cause, dans l'ordre du vocabulaire — donc ce qui reste à faire tombe
 toujours à droite. Ce n'est **pas** une jauge de progression : rien ne dit que
-l'espace est borné. Produite par `analysis/src/figure_murs.py`, dont les comptes
+l'espace est borné. Produite par `src/figures/figure_murs.py`, dont les comptes
 viennent du même registre et sont vérifiés contre ce tableau.*
 
 ## 1. Le tracé ne suit pas de feuille

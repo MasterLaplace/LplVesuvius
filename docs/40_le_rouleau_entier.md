@@ -1,7 +1,7 @@
 # Le rouleau entier : 44 spires consécutives, en une image
 
-2026-08-20. Reproductible : `tools/mosaique_rouleau.sh PHerc0172`.
-Instrument : `analysis/src/assembler_mosaique.py` (18 témoins, tous sondés).
+2026-08-20. Reproductible : `src/outils/mosaique_rouleau.sh PHerc0172`.
+Instrument : `src/volume/assembler_mosaique.py` (18 témoins, tous sondés).
 
 ---
 
@@ -72,7 +72,7 @@ de la lisibilité : un caractère fait environ six pixels.
 
 ## 5. Où ce matériel existe, et où il n'existe pas
 
-Mesuré par `tools/lister_volumes_surface.sh`, un rouleau par fichier
+Mesuré par `src/outils/lister_volumes_surface.sh`, un rouleau par fichier
 `docs/volumes_surface_*.txt` :
 
 | rouleau | segments publiés | avec carte d'encre | spires consécutives |

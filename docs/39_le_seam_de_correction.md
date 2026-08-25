@@ -62,7 +62,7 @@ et dans les deux sens de normale.
 > « en-dessous » : sa normale reste dans la même matière. **Il n'y a rien vers quoi tirer.**
 
 ⭐ La sortie possible est donc de **corriger depuis la prédiction et non depuis le volume** :
-`analysis/src/sonder_point.py` mesure qu'au point de départ la prédiction publiée a une
+`src/nappe/sonder_point.py` mesure qu'au point de départ la prédiction publiée a une
 planarité de **0,993** — elle sait parfaitement où sont les nappes, là où le volume brut ne
 le dit qu'à qui est déjà proche. C'est le prochain lot, et c'est la première fois de la
 journée qu'un lot est un **constructeur** et non un diagnostic.
@@ -81,7 +81,7 @@ journée qu'un lot est un **constructeur** et non un diagnostic.
 ## La boucle entière, écrite
 
 Le chaînon manquant est construit ([`41`](41_marcher_le_long_dune_nappe.md)) et
-`tools/boucle_de_correction.sh` met les maillons bout à bout pour la première fois :
+`src/outils/boucle_de_correction.sh` met les maillons bout à bout pour la première fois :
 tracer → marcher la prédiction → écrire les points → `--resume --rewind-gen --correct` →
 juger au test de convergence, contre un témoin **apparié** (même graine, même volume,
 mêmes paramètres, seuls les points de passage diffèrent).
@@ -97,7 +97,7 @@ pas comme panne du script — c'est précisément ce qu'il faut savoir.
 ## Reproduire
 
 ```bash
-./tools/lancer.sh --fond tools/boucle_de_correction.sh   # la boucle entière, appariée
+./src/outils/lancer.sh --fond src/outils/boucle_de_correction.sh   # la boucle entière, appariée
 vc_grow_seg_from_seed --help          # les cinq options de reprise
 grep -n "corrections" repos/villa/volume-cartographer/apps/src/vc_grow_seg_from_seed.cpp
 sed -n '560,600p' repos/villa/volume-cartographer/core/src/GrowPatch.cpp   # PointCorrection

@@ -17,7 +17,7 @@ encre. Deux conséquences se déduisent directement :
 
 ## 2. La mesure
 
-`analysis/src/fiber_orientation.py`. Tenseur de structure — la covariance des gradients
+`src/nappe/fiber_orientation.py`. Tenseur de structure — la covariance des gradients
 donne en forme close la direction le long de laquelle l'image varie le moins :
 
 ```
@@ -130,7 +130,7 @@ terrain, ni encre, ni juge.
 C'est la règle nº 7 du dépôt (rapporter la puissance avec un zéro), et elle dit ici quoi
 faire plutôt que quoi conclure : pour qu'un rho de 0,33 soit détectable au même niveau
 il faut **n ≈ 70**. Le corpus en offre **80**, et la campagne complète est lancée
-(`tools/campagne_fibres.sh`, en file derrière celle de la profondeur — les deux lisent
+(`src/campagnes/campagne_fibres.sh`, en file derrière celle de la profondeur — les deux lisent
 le même bucket, se les disputer allongerait les deux).
 
 ⚠ Noter aussi : la **bascule en profondeur** ne corrèle avec rien (−0,189), ce qui est

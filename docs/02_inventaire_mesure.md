@@ -1,7 +1,7 @@
 # Inventaire mesuré : ce qu'il y a, et ce qu'on peut se permettre
 
 2026-08-16. Tous les chiffres de cette page ont été **mesurés**, pas repris d'une
-page de doc. L'outil qui les produit est `tools/s3_size.py` (sortie `--json` pour
+page de doc. L'outil qui les produit est `src/outils/s3_size.py` (sortie `--json` pour
 rejouer). Rien n'a été téléchargé pour les obtenir.
 
 ---

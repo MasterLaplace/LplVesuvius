@@ -107,9 +107,9 @@ rien (marche médiane 12,2 / 255, **0 trace sur 38** à médiane nulle).
 ## Reproduire
 
 ```bash
-./tools/campagne_saut_spire.sh docs/saut_spire
+./src/campagnes/campagne_saut_spire.sh docs/saut_spire
 cd inference_xpu
-uv run python ../analysis/src/table_saut_spire.py ../docs/saut_spire \
+uv run python ../src/tables/table_saut_spire.py ../docs/saut_spire \
     ../repos/windcheck/results/index.json
 ```
 
@@ -189,7 +189,7 @@ par l'éditeur comme un réglage de notre campagne.
 
 La suspicion reste testable **par sa conséquence** : si le partage de voxels écrasait le
 signal, la distribution des marches serait dominée par le zéro. Sur les 38 traces déjà
-calculées (`analysis/src/resolution_phase.py`) :
+calculées (`src/nappe/resolution_phase.py`) :
 
 | grandeur | min | médiane | max |
 |---|---:|---:|---:|

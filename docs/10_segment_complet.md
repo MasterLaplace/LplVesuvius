@@ -161,7 +161,7 @@ l'autre.
 
 ⚠⚠ **PÉRIMÉ — la tâche D a été faite le 2026-08-17, et la réponse est NON.** Le blocage
 noté ici (« le maillage `tifxyz` de `20230909121925` n'est pas dans notre jeu ») a été
-levé par `tools/ppm_to_tifxyz.py` : le `.ppm` publié à côté du segment porte exactement
+levé par `src/outils/ppm_to_tifxyz.py` : le `.ppm` publié à côté du segment porte exactement
 la même information, et la conversion est une lecture d'en-tête et trois écritures.
 C'était une prudence mal placée, pas un fait matériel.
 
@@ -182,15 +182,15 @@ cd inference_xpu && uv run python src/infer_ink.py \
     --out ../data/out/ink_segment_complet.npy
 
 # la mesure (41 s)
-uv run python ../analysis/src/evaluate_segment.py ../data/out/ink_segment_complet.npy \
+uv run python ../src/volume/evaluate_segment.py ../data/out/ink_segment_complet.npy \
     ../repos/Vesuvius-Grandprize-Winner/all_labels/20230909121925_inklabels.png
 
 # les images (⚠ --rotate 270 : sans elle, les lettres sont couchees)
-uv run python ../analysis/src/render_segment.py ../data/out/ink_segment_complet.npy \
+uv run python ../src/volume/render_segment.py ../data/out/ink_segment_complet.npy \
     ../docs/images/10_segment_entier.png --reduce 4 --rotate 270
 
 # la structure (echoue, et c'est le resultat)
-uv run python ../analysis/src/structure.py ../data/out/ink_segment_complet.npy \
+uv run python ../src/encre/structure.py ../data/out/ink_segment_complet.npy \
     --region "A texte:3584:2048" --region "B vide:6144:1024" --region "C doute:8704:1024"
 ```
 

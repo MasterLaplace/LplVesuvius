@@ -82,7 +82,7 @@ Ferme `12` §5 (« trois segments, deux rouleaux, ce n'est pas un corpus »).
 
 Contrainte posée par l'auteur : la solution doit tenir sur les **53 rouleaux publiés** et
 sur les **~800 de la villa**. Chiffrée, pas affirmée
-(`analysis/src/cout_passage_echelle.py`) :
+(`src/volume/cout_passage_echelle.py`) :
 
 | rouleaux | donnée lue | 1 fil | 16 fils | **part du volume** |
 |---:|---:|---:|---:|---:|
@@ -116,7 +116,7 @@ Le tableau des goulots de `2026_open_problems` dit, pour les régions comprimée
 
 | # | quoi | état |
 |---|---|---|
-| H1 | métrique de séparabilité (d′ feuille / interstice) | ✅ `analysis/src/separabilite_scan.py` |
+| H1 | métrique de séparabilité (d′ feuille / interstice) | ✅ `src/encre/separabilite_scan.py` |
 | H2 | ⚠ sa **limite d'échelle**, mesurée | ✅ un d′ **baisse** quand on résout plus de structure : valide à résolution égale seulement |
 | H3 | témoin apparié : même rouleau, deux protocoles | ✅ PHerc0139 en 9,362 **et** 2,399 µm |
 | H4 | carte des 13 rouleaux du prix | ✅ **13 rouleaux mesurés** (`16`). Compression et médiane de qualité **écartées** ; c'est la **queue** qui sépare (témoin 0 %, les treize 4–24 %). ⚠⚠ **`PHerc0358` « désigné » corrigé le 2026-08-20** : `33` mesure 0 des 78 paires séparées et 0 des 13 distinguables du témoin après Holm — le classement n'est pas résolu. Campagne dense lancée le jour même : **les treize changent tous de rang**, `PHerc0800` devient le meilleur, le témoin passe de 0 à 4 % |

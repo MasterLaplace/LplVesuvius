@@ -8,8 +8,8 @@ ce qui est en main**, et il nomme où elle le serait.
 
 ![deux ensembles disjoints](images/48_eligibilite.png)
 
-Instrument : [`analysis/src/eligibilite_aval.py`](../analysis/src/eligibilite_aval.py)
-(23 témoins hors ligne) et [`figure_eligibilite.py`](../analysis/src/figure_eligibilite.py)
+Instrument : [`src/graine/eligibilite_aval.py`](../src/graine/eligibilite_aval.py)
+(23 témoins hors ligne) et [`figure_eligibilite.py`](../src/figures/figure_eligibilite.py)
 (11 témoins). Il ne mesure rien de neuf : il **croise trois mesures déjà faites**.
 
 ---
@@ -96,7 +96,7 @@ alors aucun gradient à suivre.
 
 Le critère du dépôt, lui, tranche — on trace la meilleure graine de chacune avec des
 paramètres identiques et on juge au test de convergence
-(`tools/tracer_prediction_paris4.sh`) :
+(`src/outils/tracer_prediction_paris4.sh`) :
 
 | prédiction | aire | croisements | verdict |
 |---|---:|---:|---|
@@ -118,7 +118,7 @@ troncature est bien levée. Mais le rendu, lui, devient inabordable : mesuré su
 ~2,6 milliards de voxels cela fait **plus de douze heures** pour une seule fenêtre, et
 quatre fois plus pour celle à 161 couches.
 
-⭐ Rien dans la sortie ne le disait. D'où `tools/rendre_surveille.sh` : il surveille
+⭐ Rien dans la sortie ne le disait. D'où `src/outils/rendre_surveille.sh` : il surveille
 l'**activité du processus** plutôt que le temps écoulé — un rendu long n'est pas un rendu
 bloqué — abandonne en le disant, et **rapporte le débit dans les deux cas**, succès compris.
 
@@ -185,7 +185,7 @@ dans la même prédiction avait rendu α = +0,89 puis +1,12. Le 2×2 a donc ét�
 > ⚠⚠⚠ **Corrigé le 2026-08-24 — les huit cellules « indécidables » sont huit rendus VIDES.**
 > L'observation la plus robuste de ce 2×2 (« l'indécidabilité suit la graine à chacune des
 > huit répétitions ») est exacte, et son mécanisme n'est pas celui qu'on lui prêtait. Mesuré
-> sur les seize piles (`analysis/src/matiere_des_piles.py`) :
+> sur les seize piles (`src/nappe/matiere_des_piles.py`) :
 >
 > | | graine `ps256` | graine `m7` |
 > |---|---|---|
@@ -221,8 +221,8 @@ généreuse.
 - l'effet catégorique repose sur **deux endroits**, pas deux cents — huit répétitions
   n'élargissent pas l'échantillon de graines, elles ne font que fiabiliser chaque case.
 
-Instrument : [`analysis/src/comparer_predictions.py`](../analysis/src/comparer_predictions.py)
-(19 témoins) et [`figure_2x2.py`](../analysis/src/figure_2x2.py) (6 témoins). ⭐ Il **refuse** quand l'écart est sous le bruit, et le bruit n'est pas choisi :
+Instrument : [`src/encre/comparer_predictions.py`](../src/encre/comparer_predictions.py)
+(19 témoins) et [`figure_2x2.py`](../src/figures/figure_2x2.py) (6 témoins). ⭐ Il **refuse** quand l'écart est sous le bruit, et le bruit n'est pas choisi :
 c'est le plus grand de la résolution que `test_convergence` déclare et de l'étendue
 intra-cellule mesurée.
 
@@ -301,7 +301,7 @@ Et ce plafond de 60 n'a jamais été un choix. Il a été fixé le jour où j'es
 a été mesuré sous un budget dimensionné pour un coût qui n'existe pas.
 
 > ⭐ **La leçon n'est pas « 60 était trop petit »** — on ne le sait pas encore, et
-> `tools/plafond_generations.sh` le mesure. Elle est plus gênante : un réglage pris pour une
+> `src/outils/plafond_generations.sh` le mesure. Elle est plus gênante : un réglage pris pour une
 > raison qui a cessé d'être vraie ne se signale jamais tout seul, et la **cohérence** des
 > résultats qu'il produit est précisément ce qui le rend invisible.
 
@@ -323,12 +323,12 @@ qui ne dépasse pas ce bruit ne veut rien dire, et le lire comme un effet serait
 ## Reproduire
 
 ```bash
-python3 analysis/src/eligibilite_aval.py --docs docs --json docs/eligibilite_aval.json
-python3 analysis/src/eligibilite_aval.py --docs docs --sonder --json docs/eligibilite_aval.json
-uv run python analysis/src/figure_eligibilite.py \
+python3 src/graine/eligibilite_aval.py --docs docs --json docs/eligibilite_aval.json
+python3 src/graine/eligibilite_aval.py --docs docs --sonder --json docs/eligibilite_aval.json
+uv run python src/figures/figure_eligibilite.py \
     --json docs/eligibilite_aval.json --sortie docs/images/48_eligibilite.png
 
 # les témoins, hors ligne
-python3 analysis/src/eligibilite_aval.py --verifier
-python3 analysis/src/figure_eligibilite.py --verifier
+python3 src/graine/eligibilite_aval.py --verifier
+python3 src/figures/figure_eligibilite.py --verifier
 ```

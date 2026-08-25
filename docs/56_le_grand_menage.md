@@ -49,19 +49,19 @@ liens est la seule chose qui réponde, et voici sa réponse pour `htr/` + `infer
 Soit **4,24 Gio** de récupérable réel là où ce plan annonçait 16,6 : un facteur quatre. Et
 *rien* n'est libéré sans `uv cache prune`, qui touche une ressource **partagée avec le reste de
 la machine** et n'est donc pas une décision de ce dépôt. Calcul dans l'arbre —
-`analysis/src/poids_recuperable.py` (10 contrôles), résultat dans `docs/poids_recuperable.json`.
+`src/depot/poids_recuperable.py` (10 contrôles), résultat dans `docs/poids_recuperable.json`.
 
 **2. Les « 25 sites d'appel » n'étaient pas des besoins, c'étaient des EMPRUNTS.** Le motif
 écrit partout — *« le seul environnement du dépôt qui porte Pillow »* — était faux : la racine
 déclare `pillow>=10.0`. Pire, `inference/` **n'a pas `numcodecs`**, et c'est précisément ce trou
 qui a fait rendre vides tous les chunks *blosc* d'une prédiction, donc conclure à tort qu'une
-graine n'était pas couverte par la prédiction publiée (`analysis/src/zarr_depth.py`). Les
+graine n'était pas couverte par la prédiction publiée (`src/commun/zarr_depth.py`). Les
 scripts empruntaient un environnement **strictement plus pauvre** que celui d'où ils pouvaient
 tourner. Les 25 sites sont repointés sur la racine, et les **11 batteries** concernées passent
 depuis là — vérifié, pas supposé.
 
 **Ce qui est parti, et ce qui ne l'est pas.** `htr/` : un seul fichier, remplacé par
-`analysis/src/structure.py`, **zéro site d'appel** sous quelque orthographe que ce soit.
+`src/encre/structure.py`, **zéro site d'appel** sous quelque orthographe que ce soit.
 ⚠⚠ **`inference/` est parti aussi, et c'est une correction de MA conclusion.** J'avais écrit
 qu'il restait, sur l'argument de son propre README : témoin CPU du ×4,5 iGPU, et *« une
 accélération qu'on ne peut plus vérifier n'est pas une accélération »*. L'auteur a objecté que
@@ -199,7 +199,7 @@ décide de son ordre.
 `data/cache/rendus/<clé>/`, et les campagnes y font un lien plutôt qu'un rendu.
 
 - ⭐ Il y a **déjà** un cache, mais indexé par *destination* : le rendre indexé par *contenu*
-  est un changement local dans `tools/profiler_une_surface.sh` et rien d'autre.
+  est un changement local dans `src/outils/profiler_une_surface.sh` et rien d'autre.
 - ⚠ **Ce qui doit être compté** (skill §8, règle 1) : `cache_hit` / `cache_miss`, écrits dans le
   journal. Un cache dont on ne mesure pas le taux de succès est une devinette avec un dossier.
 - ⚠⚠ **Et le repli est bruyant** : un manque de cache se dit, il ne se déduit pas d'un temps
@@ -276,7 +276,7 @@ personne n'a besoin ici (skill §7, tableau palier/plugin).
 
 | palier | ce qu'il contient | ce qui le prouve |
 |---|---|---|
-| **prod** | ce que la branche de release porte | `tools/faire_la_release.sh` la construit déjà |
+| **prod** | ce que la branche de release porte | `src/outils/faire_la_release.sh` la construit déjà |
 | **dev** | plus l'outillage de campagne | c'est ce qu'on lance tous les jours |
 | **debug** | plus les sondes et les verbes de diagnostic | `--plancher`, les cartes, les sondes |
 
@@ -289,7 +289,7 @@ pourrit**. La release est construite par un script ; le vérifier reste une tâc
 
 ```bash
 ./lplv --verbes --json > docs/verbes.json
-uv run python analysis/src/figure_verbes.py     # → docs/images/56_verbes.png
+uv run python src/figures/figure_verbes.py     # → docs/images/56_verbes.png
 ```
 
 **218 verbes découverts, zéro nom ambigu, 98 qui s'auto-testent, 72 qui rendent du JSON.**
@@ -316,7 +316,7 @@ Trois règles portent le reste, chacune sondée en la cassant :
 y rend **204 verbes au lieu de 218**, sans erreur et sans configuration, parce que
 `experiments/src` et `inference_xpu/src` n'y sont pas. C'est la définition d'un palier
 **additif** — et le piège du skill §7 (« le palier que personne ne construit pourrit ») est
-traité en ajoutant `lplv` aux `GARDES` : sans ça la release aurait porté `analysis/src/lplv.py`
+traité en ajoutant `lplv` aux `GARDES` : sans ça la release aurait porté `src/depot/lplv.py`
 sans la commande qui le lance, soit la moitié d'une surface.
 
 ⚠ `os.execvp` et non `subprocess` : le verbe **remplace** le processus, donc son code de sortie
@@ -326,7 +326,7 @@ Ctrl-C ou un code de retour — et un code de retour avalé est exactement ce qu
 du code de sortie d'un pipeline.
 
 ⚠ **Ce qui n'est PAS fait, et qui appartient au chantier D** : les deux gardes-fous de
-`tools/temoins.sh` (« batteries non lancées », « scripts sans appelant ») redérivent chacun
+`src/outils/temoins.sh` (« batteries non lancées », « scripts sans appelant ») redérivent chacun
 *leur* réponse à « quels sont les modules de ce dépôt », alors que `lplv --verbes --json` la
 donne. Ce sont trois réponses à une question, et c'est le motif que ce dépôt paie en boucle. La
 portée du premier a quand même été élargie ici, parce que la batterie neuve de `infer_ink.py`
@@ -338,17 +338,63 @@ quatorze blocs « Reproduire » font `cd experiments` pour emprunter son venv. M
 **n'a pas PIL**. C'est le même diagnostic, et il n'a pas été appliqué ici pour ne pas mélanger
 deux chantiers dans un diff.
 
+#### ✅ Le rangement en `src/` — livré le 2026-08-25, sur demande de l'auteur
+
+> *« je ne veux plus qu'un dossier `src` à la fin »*, *« voir une centaine de fichiers python
+> tous au même endroit ça donne vraiment mal au crâne »*, *« je veux à minima des
+> plugin/module/famille avec namespace »*.
+
+`analysis/src` (126 fichiers à plat) et `tools/` (73) deviennent **`src/` en dix familles**.
+Les préfixes réels ont fourni trois d'entre elles (`figure_*` 37, `table_*` 10, `campagne_*`
+12) ; les sept autres classent par **objet d'étude**, et c'est le dossier qui porte ce
+jugement — pas une table à tenir à jour.
+
+⭐ **`src/commun/` n'est pas un fourre-tout, c'est une mesure** : exactement les modules
+importés par leurs frères. La première mesure en annonçait 8 ; elle était **fausse**, ancrée
+sur `^import x` et aveugle à `import x  # commentaire`. Le remède n'a pas été de mieux
+compter mais de **cesser de compter** : chaque module met toutes les familles sur son chemin,
+donc un reclassement futur ne casse aucun import.
+
+| ce que le déplacement a cassé | mesuré |
+|---|---:|
+| citations de chemin réécrites | **1011** dans **182** fichiers |
+| scripts shell qui remontaient d'un cran vers la racine | 62 |
+| modules dont le `sys.path` supposait un dossier plat | 50 |
+| chemins **assemblés** que nulle réécriture ne peut voir | 12 |
+
+⚠⚠ **Ce que `du` était à l'espace disque, la relecture l'est aux chemins** : mon estimation de
+départ disait ~490 citations, la mesure en a trouvé **1011**. Deux fois plus.
+
+**La descente des échecs, et aucun trouvé en relisant** : 37 (les extraits en ligne de
+`temoins.sh` pointaient chacun vers un dossier) → 35 → 12 (mon insertion de `sys.path`
+**ignorait l'indentation**, 18 occurrences étaient indentées, donc `IndentationError`) → 3
+(sept chemins assemblés) → 1 → 0.
+
+⭐ **Et le témoin de `lancer.sh` a attrapé une conséquence que personne n'aurait vue** : son
+en-tête dit que le **gel** d'un script doit vivre à la profondeur que ce script suppose pour
+retrouver la racine. Les scripts remontant désormais de deux crans, `.lances/` devient
+`.lances/gel/`. La règle n'a pas changé, seule la profondeur — et c'est un auto-test qui l'a
+dit, pas une relecture.
+
+⚠ **Trois orphelins révélés, qui l'étaient déjà** : `fetch_normal_grids.py`, `telecharger.py`,
+`valider_blocs.py`. Le garde « scripts sans appelant » ne scannait pas `tools/*.py` ; le glob
+`src/*/*` a élargi sa portée sans qu'on le demande, et il les a trouvés.
+
+⚠ **Ce qui n'a PAS bougé, avec la raison** : `tracecheck/` est **le livrable** que l'article
+décrit et que la release identifie ; `experiments/` et `inference_xpu/` portent chacun leur
+propre environnement. Les déplacer est une décision par dossier, pas un coup de balai.
+
 ### ⭐ Chantier D — l'extraction du dessin, et le rangement de `docs/`
 
 Deux petites choses, groupées parce qu'elles ne coûtent presque rien.
 
 1. **`analysis/src/figure_commune.py`** : `_police`, `_pixels`, la palette. C'est le seul endroit
    où des copies ont **réellement divergé** (4 variantes de `_police`). ⚠ Et un garde-fou dans
-   `tools/temoins.sh`, sur le modèle de « batteries non lancées » : *aucune seconde définition
+   `src/outils/temoins.sh`, sur le modèle de « batteries non lancées » : *aucune seconde définition
    de `_police` dans l'arbre*. Sans lui, les copies reviendront.
 2. **`docs/` séparé par nature** : la prose reste, les 341 JSON de résultats et les ~57 logs
    partent dans `docs/resultats/` et `docs/journaux/`. ⚠ **Les blocs « Reproduire » citent ces
-   chemins** — même précaution que le chantier B, et le garde-fou `tools/images_des_docs.sh`
+   chemins** — même précaution que le chantier B, et le garde-fou `src/outils/images_des_docs.sh`
    existe déjà pour les images.
 3. **`.lances/` se purge** : 196 fichiers, ~65 lancements. Une rétention (les N derniers, ou
    les 30 derniers jours), écrite dans le script qui les crée.
@@ -395,7 +441,7 @@ dit honnêtement « ce fichier était là », un lien cassé dit « ce lien est 
 dans la forme même de l'URL, qui porte le commit et le chemin **verbatim** : `git show
 <commit>:<chemin>` marche depuis n'importe quel clone, connecté ou non. Un contrôle le garantit.
 
-`analysis/src/permalien.py`, 34 contrôles, deux sondes (ignorer les blocs de code → 4 échecs ;
+`src/depot/permalien.py`, 34 contrôles, deux sondes (ignorer les blocs de code → 4 échecs ;
 laisser un préfixe mordre son voisin, donc confondre `inference` et `inference_xpu` → 1 échec).
 Il resservira aux chantiers **B** et **D**, qui déplacent respectivement des données et des
 documents.
@@ -426,7 +472,7 @@ C'est la partie que le skill dit qu'on oublie toujours d'écrire.
 4. **B (la réorganisation de `data/`)** en dernier : c'est le seul qui casse des chemins, donc
    le seul qui a besoin que tout le reste soit stable.
 
-⚠ **Et chacun se termine par la même porte** : `./tools/temoins.sh` vert, avec le compte relu et
+⚠ **Et chacun se termine par la même porte** : `./src/outils/temoins.sh` vert, avec le compte relu et
 réécrit dans `docs/31_roadmap.md` et `HANDOFF.md`.
 
 ---

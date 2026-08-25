@@ -11,7 +11,7 @@ par la circonférence entière qu'on ne possède pas.
 
 ![où la chaîne se trouve dans le rouleau](images/44_geometrie_chaine.png)
 
-Instrument : `analysis/src/geometrie_chaine.py` (39 témoins hors ligne).
+Instrument : `src/nappe/geometrie_chaine.py` (39 témoins hors ligne).
 Données : la chaîne à pas de rayon 0,25, neuf nappes, `data/spires_pas025`.
 
 ---
@@ -203,14 +203,14 @@ appel ne donnent pas le même monde — et le prix demande explicitement une pip
 > ne pas faire *croître* une surface, en **projeter** une — mais le long de la **tangente**
 > de la nappe au lieu de sa normale.
 
-⭐ Une pièce existe déjà pour ça : `analysis/src/suivre_nappe.py`
+⭐ Une pièce existe déjà pour ça : `src/commun/suivre_nappe.py`
 ([`41`](41_marcher_le_long_dune_nappe.md)) marche le long d'une nappe et calcule justement la
 tangente latérale par `cross(n, t)` — c'est ainsi qu'il émet ses « côtes ». Ce qu'il produit
 est une liste de points 3D, c'est-à-dire exactement le format que `--correct` consomme.
 
 ### ⚠⚠ La projection tangentielle existe — et DEUX sondes bon marché n'ont pas pu la juger
 
-`analysis/src/projeter_tangentiel.py` fait ce que ce document nommait : il projette une nappe
+`src/nappe/projeter_tangentiel.py` fait ce que ce document nommait : il projette une nappe
 le long de sa **tangente** et non de sa normale. Le fait qui rend ça simple est qu'un `tifxyz`
 **encode déjà ses propres tangentes** — la grille est une paramétrisation de la nappe, donc
 `∂P/∂u` et `∂P/∂v` se lisent par différences finies, sans remarcher le volume.
@@ -224,7 +224,7 @@ des deux côtés et ne départageait rien. Le témoin l'a dit au premier lanceme
 
 #### ⚠⚠ Et les deux mesures bon marché rendent le MÊME chiffre à toutes les distances
 
-`tools/portee_tangentielle.sh` projette le maillage **publié** — une nappe dont on sait qu'elle
+`src/outils/portee_tangentielle.sh` projette le maillage **publié** — une nappe dont on sait qu'elle
 suit une feuille — à 0, 1, 2, 5, 10, 20 et 50 pas de grille, et mesure à chaque fois si les
 points tombent encore sur du papyrus. Le pas 0 est le **contrôle**.
 
@@ -870,7 +870,7 @@ suite nomme.
 que la projection déplace une **nappe entière** de 14 280 points. Un chemin n'est pas une
 bande, et un texte se lit sur une bande.
 
-⭐ **La pièce manquante existe déjà et porte un nom** : `analysis/src/suivre_nappe.py` expose
+⭐ **La pièce manquante existe déjà et porte un nom** : `src/commun/suivre_nappe.py` expose
 `champ_de_distance`, `normale_locale` et **`recentrer`** — recaler un point sur l'axe médian de
 sa nappe. L'appliquer à **chaque point** d'une nappe projetée, à chaque maillon, c'est la
 chaîne corrigée. Elle se jugerait avec les instruments de cette page, qui existent maintenant :
@@ -927,7 +927,7 @@ Mais rien n'est su de ce qui se passe **entre 1 et 20 générations**, et c'est 
 question se joue : s'il existe un régime où la surface gagne de l'aire en restant convergée,
 la chaîne tangentielle est possible.
 
-`tools/etendre_nappe.sh` balaie `resume_generations` sur **la même** surface convergente, à
+`src/outils/etendre_nappe.sh` balaie `resume_generations` sur **la même** surface convergente, à
 conception appariée (même source, même aplatissement, mêmes fenêtres, une seule variable).
 Il **refuse** de partir d'une source dont le verdict écrit n'est pas « converge » — étendre
 une surface posée en travers de l'empilement ne mesure rien — et les trois chemins de refus
@@ -999,7 +999,7 @@ distribution, pas une propriété, et bien plus faible que ce que j'avais écrit
 dérive ». **Le contraste source-officielle contre source-projetée que je venais de publier
 n'est pas établi.**
 
-⭐ La suite est déterminée par ça, et rien d'autre : `tools/etendre_nappe.sh` pose désormais
+⭐ La suite est déterminée par ça, et rien d'autre : `src/outils/etendre_nappe.sh` pose désormais
 `VC_GROWPATCH_RNG_SEED` et `thread_limit: 1`, et sait **répéter un même réglage** — un réglage
 qui apparaît deux fois dans la liste reçoit un dossier suffixé, sinon le second écraserait le
 premier et le test serait impossible à faire. Le premier run est un **test de déterminisme** :
@@ -1300,7 +1300,7 @@ Rogner l'extension 3 dans la bonne plage de générations :
 | cycle 2, rogné à gen ≤ 106 | 7,51 cm² | +0,000 | 2 % |
 
 Les deux verdicts sortent du chemin de jugement partagé, appelé par
-[`tools/juger_rognages.sh`](../tools/juger_rognages.sh) — `tools/juger_rognages.sh
+[`src/outils/juger_rognages.sh`](../src/outils/juger_rognages.sh) — `src/outils/juger_rognages.sh
 data/rogne_cycle2 cycle2_`. ⚠ L'étiquette fait partie du **nom** du résultat, donc elle est
 écrite dans le script : sans elle `docs/cycle2_gen103.json` n'avait aucun producteur dans
 l'arbre, et l'audit des artefacts le signalait — à raison, la commande vivait dans un terminal.
@@ -1354,7 +1354,7 @@ Soit **0 paire sous 40 µm**, **2 paires entre 40 et 250 µm**, et le reste
 trouvé », c'est-à-dire comme un résultat faible. La distribution montre autre chose : il n'y a
 pas *un peu* moins de candidats que prévu, il y a un **trou d'un facteur deux** entre le seuil
 et la paire la plus proche du rouleau. Elle est produite par
-[`analysis/src/figure_segments.py`](../analysis/src/figure_segments.py), dont le témoin vérifie
+[`src/figures/figure_segments.py`](../src/figures/figure_segments.py), dont le témoin vérifie
 que les quatre bandes **totalisent** les paires jugeables — la sonde qui aurait attrapé la
 faute corrigée juste en dessous.
 
@@ -1385,7 +1385,7 @@ faire, or elle converge vers un point fixe. Les deux voies vers une bande contin
 mesurées et fermées, chacune par sa propre raison.
 
 ⚠ Ce qui reste, et que rien de mesuré ici n'exclut : un mécanisme que ce dépôt n'a pas encore —
-ou une segmentation publiée plus dense qu'aujourd'hui. `analysis/src/carte_segments.py` refait
+ou une segmentation publiée plus dense qu'aujourd'hui. `src/commun/carte_segments.py` refait
 la carte en une commande le jour où le dépôt public grandit.
 
 ### ⚠⚠ ~~Mais le cycle ne se referme pas — l'extension est une opération UNIQUE~~ *(réfuté ci-dessus)*
@@ -1519,7 +1519,7 @@ cher que de le refaire.
 | | ce que ça fait | verdict |
 |---|---|---|
 | un seul pas, gros budget | une surface étendue d'un coup | ⚠⚠ **écarté** — mesuré ci-dessus, α = +1,313 dès le double du budget |
-| **enchaîner des petits pas** | chaque pas repart de l'étendue précédente | ⏳ **la seule piste restante** ; risque connu : ça **compose** les erreurs, comme la chaîne radiale qui casse au bout de six à huit tours | `tools/etendre_nappe.sh`
+| **enchaîner des petits pas** | chaque pas repart de l'étendue précédente | ⏳ **la seule piste restante** ; risque connu : ça **compose** les erreurs, comme la chaîne radiale qui casse au bout de six à huit tours | `src/outils/etendre_nappe.sh`
 sait désormais faire les deux, et la distinction est écrite dans son en-tête parce que
 mélanger les deux ferait varier deux choses par pas :
 
@@ -1718,15 +1718,15 @@ rendu par les seuils d'hier ; la série, elle, est une donnée et ne peut pas ê
 # LA CHAÎNE JUSTE : trois maillons de 95 µm contre un bond direct de 286 µm
 SOURCE=$PWD/data/temoin_rendu/morceaux/morceau_00 PAS=2 MAILLONS=3 \
   DEST=$PWD/data/chaine_courte JSON=$PWD/docs/chaine_courte.json \
-  tools/chainer_tangentiel.sh
+  src/outils/chainer_tangentiel.sh
 
 # Les deux discriminants qui ne coûtent AUCUN rendu — boîte englobante et pas réel
-uv run --project . python analysis/src/projeter_tangentiel.py --croissance \
+uv run --project . python src/nappe/projeter_tangentiel.py --croissance \
   data/temoin_rendu/morceaux/morceau_00 data/chaine_courte/maillon_{1,2,3} \
   data/chaine_courte/direct --json docs/croissance_chaine_courte.json
 
 # … et le troisième : les deux maillages atterrissent-ils au même endroit ?
-uv run --project . python analysis/src/ecart_de_maillages.py \
+uv run --project . python src/nappe/ecart_de_maillages.py \
   data/chaine_courte/maillon_3 data/chaine_courte/direct \
   --depuis data/temoin_rendu/morceaux/morceau_00 --spire-um 173 \
   --json docs/ecart_chaine_courte.json
@@ -1735,55 +1735,55 @@ uv run --project . python analysis/src/ecart_de_maillages.py \
 SOURCE=$PWD/data/temoin_rendu/morceaux/morceau_00 PAS=2 MAILLONS=20 PROFILS=0 \
   DEST=$PWD/data/chaine_longue_95 JSON=$PWD/docs/chaine_longue_95.json \
   CROISSANCE=$PWD/docs/croissance_chaine_longue_95.json \
-  tools/chainer_tangentiel.sh
+  src/outils/chainer_tangentiel.sh
 
 # La distance RÉELLEMENT parcourue par chaque maillon (l'écart à la source)
-for k in 1 2 3 4 5 6 7 8; do uv run --project . python analysis/src/ecart_de_maillages.py \
+for k in 1 2 3 4 5 6 7 8; do uv run --project . python src/nappe/ecart_de_maillages.py \
   data/temoin_rendu/morceaux/morceau_00 data/chaine_longue_95/maillon_$k --voxel-um 2.4 \
   | grep "écart médian"; done
 
 # La MATIÈRE : de combien chaque nappe demanderait-elle à bouger ? (aucun rendu)
-tools/fetch_zarr_boite.py "$PREDICTION_PS256" data/pred_ps256_niv2 --niveau 2 \
+src/outils/fetch_zarr_boite.py "$PREDICTION_PS256" data/pred_ps256_niv2 --niveau 2 \
   --boite 3308 4292 5207 6292 17572 18665
-ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 tools/recalage_de_la_chaine.sh \
+ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 src/outils/recalage_de_la_chaine.sh \
   data/temoin_rendu/morceaux/morceau_00 data/chaine_courte/maillon_3 \
   data/chaine_courte/direct data/chaine_longue_95/maillon_{5,6,8}
 
 # LES DEUX CORRECTIONS ENSEMBLE — pas fixe ET recalage sur la matière
 SOURCE=$PWD/data/temoin_rendu/morceaux/morceau_00 PAS_VOX=40 MAILLONS=20 PROFILS=0 RECALER=1 \
   ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 DEST=$PWD/data/chaine_deux_fixes \
-  JSON=$PWD/docs/chaine_deux_fixes.json tools/chainer_tangentiel.sh
+  JSON=$PWD/docs/chaine_deux_fixes.json src/outils/chainer_tangentiel.sh
 ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 PLANCHER=300 JSON=$PWD/docs/recalage_deux_fixes.json \
-  tools/recalage_de_la_chaine.sh data/temoin_rendu/morceaux/morceau_00 \
+  src/outils/recalage_de_la_chaine.sh data/temoin_rendu/morceaux/morceau_00 \
   data/chaine_deux_fixes/maillon_{3,5,8,15,20}
 # … et LE CONTRÔLE du confondant : la projection AVANT son recalage
 ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 PLANCHER=300 \
-  JSON=$PWD/docs/recalage_avant_recalage.json tools/recalage_de_la_chaine.sh \
+  JSON=$PWD/docs/recalage_avant_recalage.json src/outils/recalage_de_la_chaine.sh \
   data/chaine_deux_fixes/projete_{8,20}
 # … poussée à 60 maillons, mesurée en deux passes que la figure RECOLLE
 SOURCE=$PWD/data/temoin_rendu/morceaux/morceau_00 PAS_VOX=40 MAILLONS=60 PROFILS=0 RECALER=1 \
   ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 DEST=$PWD/data/chaine_deux_fixes \
-  JSON=$PWD/docs/chaine_deux_fixes.json tools/chainer_tangentiel.sh
+  JSON=$PWD/docs/chaine_deux_fixes.json src/outils/chainer_tangentiel.sh
 ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 PLANCHER=300 JSON=$PWD/docs/recalage_60_maillons.json \
-  tools/recalage_de_la_chaine.sh data/chaine_deux_fixes/maillon_{30,40,50,60}
-uv run --project . python analysis/src/figure_matiere_de_la_chaine.py \
+  src/outils/recalage_de_la_chaine.sh data/chaine_deux_fixes/maillon_{30,40,50,60}
+uv run --project . python src/figures/figure_matiere_de_la_chaine.py \
   docs/recalage_avec_plancher.json \
   --corrigee docs/recalage_deux_fixes.json docs/recalage_60_maillons.json \
   --nom-chaine "pas fixe SEUL" --sortie docs/images/44_deux_corrections.png
 
 # LE PLANCHER DU HASARD — sans lui, aucun « % posé » n'est interprétable
 ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 PLANCHER=300 TIRAGES=3 \
-  JSON=$PWD/docs/recalage_avec_plancher.json tools/recalage_de_la_chaine.sh \
+  JSON=$PWD/docs/recalage_avec_plancher.json src/outils/recalage_de_la_chaine.sh \
   data/temoin_rendu/morceaux/morceau_00 data/chaine_pas_fixe/maillon_{3,5,8,20} \
   data/chaine_pas_fixe/direct
 
 # La figure du contact avec la matière (l'horizon géométrique en repère)
-uv run --project . python analysis/src/figure_matiere_de_la_chaine.py \
+uv run --project . python src/figures/figure_matiere_de_la_chaine.py \
   docs/recalage_de_la_chaine.json --emballement-um 580 \
   --sortie docs/images/44_matiere_de_la_chaine.png
 
 # La courbe de portée AVEC les nappes enchaînées superposées aux mêmes distances
-uv run --project . python analysis/src/figure_portee.py \
+uv run --project . python src/figures/figure_portee.py \
   --chaine "data/chaine_courte/profil_maillon_3/g0_n41/profil.json:data/chaine_courte/maillon_3/meta.json" \
            "data/chaine_longue_95/profil_maillon_5/g0_n41/profil.json:data/chaine_longue_95/maillon_5/meta.json" \
   --sortie docs/images/44_portee_tangentielle.png --json docs/portee_profils.json
@@ -1791,45 +1791,45 @@ uv run --project . python analysis/src/figure_portee.py \
 # LE PAS FIXE : la même chaîne dans une unité qui ne dépend pas du maillage
 SOURCE=$PWD/data/temoin_rendu/morceaux/morceau_00 PAS_VOX=40 MAILLONS=20 PROFILS=0 \
   DEST=$PWD/data/chaine_pas_fixe JSON=$PWD/docs/chaine_pas_fixe.json \
-  CROISSANCE=$PWD/docs/croissance_chaine_pas_fixe.json tools/chainer_tangentiel.sh
-uv run --project . python analysis/src/figure_emballement.py \
+  CROISSANCE=$PWD/docs/croissance_chaine_pas_fixe.json src/outils/chainer_tangentiel.sh
+uv run --project . python src/figures/figure_emballement.py \
   docs/croissance_chaine_longue_95.json docs/croissance_chaine_pas_fixe.json --log \
   --titre "l'emballement vient du PAS, pas de l'enchaînement" \
   --titres "20 maillons, pas de GRILLE" "20 maillons, pas FIXE en voxels" \
   --sortie docs/images/44_pas_fixe.png
 
 # La figure de l'horizon — axe LOG, sinon les six maillons qui portent le résultat s'écrasent
-uv run --project . python analysis/src/figure_emballement.py \
+uv run --project . python src/figures/figure_emballement.py \
   docs/croissance_chaine_longue_95.json --log \
   --titres "20 maillons de 95 µm — l'horizon d'une chaîne purement géométrique" \
   --sortie docs/images/44_horizon_chaine.png
 
 # La figure des deux chaînes, à échelle verticale PARTAGÉE
-uv run --project . python analysis/src/figure_emballement.py \
+uv run --project . python src/figures/figure_emballement.py \
   docs/croissance_chaine_courte.json docs/croissance_chaine_longue.json \
   --titres "3 maillons de 95 µm" "5 maillons de 238 µm" \
   --sortie docs/images/44_emballement.png
 
 # Les témoins des deux instruments, hors ligne (31 + 26 contrôles)
-uv run --project . python analysis/src/ecart_de_maillages.py --verifier
-uv run --project . python analysis/src/figure_emballement.py --verifier
+uv run --project . python src/nappe/ecart_de_maillages.py --verifier
+uv run --project . python src/figures/figure_emballement.py --verifier
 
 # La géométrie de n'importe quelle campagne d'enchaînement
-uv run python analysis/src/geometrie_chaine.py data/spires_pas025 \
+uv run python src/nappe/geometrie_chaine.py data/spires_pas025 \
   --voxel-um 8.64 --json docs/geometrie_pas025.json \
   --figure docs/images/44_geometrie_chaine.png
 
 # Les témoins de l'instrument, hors ligne (39 contrôles)
-uv run python ../analysis/src/geometrie_chaine.py --verifier
+uv run python ../src/nappe/geometrie_chaine.py --verifier
 
 # Le contrôle par l'indice de spire — celui qui tue l'hypothèse de §8
-uv run python ../analysis/src/juge_a_un_rendu.py --racine ../data \
+uv run python ../src/encre/juge_a_un_rendu.py --racine ../data \
   --json ../docs/juge_a_un_rendu.json
 
 # Le panneau des rendus : une couche par spire, puis la mosaïque
-uv run python ../analysis/src/couche_de_rendu.py ../data/spires_pas025/spire0*/rendu_31 \
+uv run python ../src/volume/couche_de_rendu.py ../data/spires_pas025/spire0*/rendu_31 \
   --dossier-sortie ../data/mosaique/pas025 --index ../data/mosaique/pas025/index.tsv
-uv run python ../analysis/src/assembler_mosaique.py ../data/mosaique/pas025/index.tsv \
+uv run python ../src/volume/assembler_mosaique.py ../data/mosaique/pas025/index.tsv \
   --sortie ../docs/images/43_chaine_pas025_rendus.jpg --colonnes 3 --um-par-px 8.64 \
   --rouleau "PHerc0172 — chaîne à pas de rayon 0,25" \
   --legende "nos surfaces, chaîne gen_neighbor pas 0,25 — couche 15/31"

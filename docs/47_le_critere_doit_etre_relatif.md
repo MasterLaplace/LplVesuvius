@@ -8,8 +8,8 @@ pas**, et la question se dissout au lieu de se résoudre.
 
 ![les traces butent sur le plafond du rendu](images/47_derive_profondeur.png)
 
-Instrument : [`analysis/src/derive_avec_profondeur.py`](../analysis/src/derive_avec_profondeur.py)
-(24 témoins hors ligne) et [`figure_derive_profondeur.py`](../analysis/src/figure_derive_profondeur.py)
+Instrument : [`src/graine/derive_avec_profondeur.py`](../src/graine/derive_avec_profondeur.py)
+(24 témoins hors ligne) et [`figure_derive_profondeur.py`](../src/figures/figure_derive_profondeur.py)
 (6 témoins). Corpus : les **16 traces** rendues aux deux profondeurs, 4 rouleaux.
 
 ---
@@ -107,12 +107,12 @@ profondeurs **sans censure des deux côtés**.
 ## Reproduire
 
 ```bash
-python3 analysis/src/derive_avec_profondeur.py --docs docs --json docs/derive_profondeur.json
-uv run python analysis/src/figure_derive_profondeur.py \
+python3 src/graine/derive_avec_profondeur.py --docs docs --json docs/derive_profondeur.json
+uv run python src/figures/figure_derive_profondeur.py \
     --json docs/derive_profondeur.json --docs ../docs \
     --sortie docs/images/47_derive_profondeur.png
 
 # les témoins, hors ligne
-python3 analysis/src/derive_avec_profondeur.py --verifier
-python3 analysis/src/figure_derive_profondeur.py --verifier
+python3 src/graine/derive_avec_profondeur.py --verifier
+python3 src/figures/figure_derive_profondeur.py --verifier
 ```

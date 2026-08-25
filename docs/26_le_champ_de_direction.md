@@ -176,7 +176,7 @@ ligne à l'autre, et ce tableau les compare.
   un ratio de **71,5×**, contre 2,7 à 2,9 pour les trois autres.
 
 **Le tableau, relu sur la totalité de chaque surface** (`docs/sans_filtre.json`,
-`tools/remesurer_sans_filtre.sh`) :
+`src/outils/remesurer_sans_filtre.sh`) :
 
 | réglage | aire | publié | par cm² | **sans filtre** | **par cm² corrigé** |
 |---|---:|---:|---:|---:|---:|
@@ -226,9 +226,9 @@ poids et en nommait **deux qui n'existent pas**. Vérifié dans
 comme `spaceline_weight` ont **zéro occurrence dans tout le dépôt villa**.
 
 ⭐ **Et cette table n'est plus transcrite : elle est DÉRIVÉE.**
-`analysis/src/poids_growpatch.py` la lit dans le source à chaque exécution — clés,
+`src/nappe/poids_growpatch.py` la lit dans le source à chaque exécution — clés,
 défauts, gardes — et `--verifier` sort en **3** si elle cesse de s'accorder avec ce qui
-est écrit ici. C'est une batterie de `tools/temoins.sh`. La raison est la faute
+est écrit ici. C'est une batterie de `src/outils/temoins.sh`. La raison est la faute
 elle-même : *une table de correspondance recopiée à la main se désaccorde de sa source
 dès que la source bouge, et rien ne le dit.*
 
@@ -531,12 +531,12 @@ et les grilles est réelle.
 
 ```bash
 # le champ, seulement autour de la trace (626 Mo au lieu de plusieurs Go)
-python3 tools/fetch_champ_normal.py \
+python3 src/outils/fetch_champ_normal.py \
   PHerc0358/representations/predictions/lasagna/20250821151737-lasagna-20260419180421 \
   PHerc0358 data/champ_PHerc0358 --niveau 2 --boite 811 2144 837 2175 1595 2295
 
 # l'encodage, mesure et non suppose
-cd experiments && uv run python ../analysis/src/valider_champ_normal.py \
+cd experiments && uv run python ../src/nappe/valider_champ_normal.py \
   "<prediction>.zarr" "<lasagna>" --rouleau PHerc0358 --centre 5842 5839 7386 \
   --balayage-centre 0 64 96 128 160 192 255
 ```
@@ -555,7 +555,7 @@ et dans `seed.json` :
 ## 9. T1f — le balayage complet, deux graines et deux tirages
 
 2026-08-19, nuit. Balayage {5, 10, 15, 20, 30, 40} sur PHerc0358, **deux graines** — celle
-de `25` (planéité) et celle de `24` — dépouillé par `analysis/src/table_pas.py`.
+de `25` (planéité) et celle de `24` — dépouillé par `src/tables/table_pas.py`.
 
 ⚠ **La comparaison n'est pas triviale, et c'est la moitié du travail.** Une surface croît
 par un **front**, donc son aire va comme (k × pas)² : à générations égales, un pas de 5

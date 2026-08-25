@@ -33,7 +33,7 @@ le segment.
 
 ## 2. ⭐⭐ Le contrôle, et il tranche contre l'hypothèse
 
-`tools/origine_de_la_pile.sh` prend **un seul** segment officiel qui publie les deux — son
+`src/outils/origine_de_la_pile.sh` prend **un seul** segment officiel qui publie les deux — son
 `tifxyz` et son volume de surface — et le mesure des deux façons.
 
 | producteur | couches | écart médian | tiers central | au bord |
@@ -159,7 +159,7 @@ Grand Prize 2023, une fenêtre de 1200 × 1200, 26 couches à partir de la 3ᵉ
 son **volume de surface publié** — donc sans que nous ayons tracé, aplati ni rendu quoi que
 ce soit — donne exactement la même constante : `-1,275 / -1,121 / -1,010`, σ **45,0×** plus
 petit que le témoin, contre 45,2× pour notre rendu. **Notre chaîne n'y est pour rien.**
-(`docs/m1ter_volume_publie.json`, pont `analysis/src/zarr_vers_couches.py`.)
+(`docs/m1ter_volume_publie.json`, pont `src/volume/zarr_vers_couches.py`.)
 
 ⚠ Ce que ça n'établit pas : qu'il n'y a pas d'encre là (une fenêtre, un segment), ni
 laquelle des causes restantes joue — la résolution, ce rouleau-ci, ou un papyrus réellement
@@ -201,7 +201,7 @@ dessus **parce que son nom disait « officiel »**, en supposant qu'il s'agissai
 mesuré à α = +0,00. Ce sont deux segments différents. Le nom d'un répertoire n'est pas une
 mesure.
 
-⭐ Remède structurel plutôt qu'une note : `tools/spire_suivante.sh` **refuse de partir d'une
+⭐ Remède structurel plutôt qu'une note : `src/outils/spire_suivante.sh` **refuse de partir d'une
 surface qui ne converge pas** — il juge la spire 0, **lit le verdict dans le JSON** et sort
 en le nommant. Enchaîner depuis une surface posée en travers mesurerait la propagation d'un
 défaut, et le résultat aurait l'air d'un résultat.
@@ -209,12 +209,12 @@ défaut, et le résultat aurait l'air d'un résultat.
 ## Reproduire
 
 ```bash
-./tools/lancer.sh tools/origine_de_la_pile.sh          # le même segment, deux fois
-./tools/lancer.sh --fond tools/leur_graine.sh          # LEUR graine dans NOTRE chaîne
-./tools/lancer.sh --fond tools/leurs_parametres.sh     # EXACTEMENT leurs paramètres
-./tools/lancer.sh --fond tools/petite_trace.sh         # une trace courte converge-t-elle ?
+./src/outils/lancer.sh src/outils/origine_de_la_pile.sh          # le même segment, deux fois
+./src/outils/lancer.sh --fond src/outils/leur_graine.sh          # LEUR graine dans NOTRE chaîne
+./src/outils/lancer.sh --fond src/outils/leurs_parametres.sh     # EXACTEMENT leurs paramètres
+./src/outils/lancer.sh --fond src/outils/petite_trace.sh         # une trace courte converge-t-elle ?
 cd inference_xpu                                        # les quatre segments publiés
 for k in $(cut -f2 ../docs/volumes_surface_PHerc1447.txt); do
-  uv run python ../analysis/src/zarr_depth.py "$k" --windows 25
+  uv run python ../src/commun/zarr_depth.py "$k" --windows 25
 done
 ```

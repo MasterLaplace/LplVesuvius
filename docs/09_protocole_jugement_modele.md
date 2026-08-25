@@ -276,7 +276,7 @@ raison qui n'a rien à voir avec la détection d'encre.
 
 ## 9. ⭐ Le calibrage a été fait, automatiquement — 2026-08-17
 
-`analysis/src/judge_api.py`, modèle **`gemini-3.5-flash`**, 8 appels, température 0.
+`src/encre/judge_api.py`, modèle **`gemini-3.5-flash`**, 8 appels, température 0.
 
 ⚠ **Trois modèles ont été éliminés avant, par mesure et non par supposition** :
 `gemini-2.5-flash`/`-pro` répondent `404` (« no longer available to new users »),
@@ -418,7 +418,7 @@ compterait comme une fabrication.
 donc **les listes reviennent plus courtes que demandé** — ce qui est l'information, pas
 un défaut.
 
-⚠ Deux témoins hors ligne gardent ça (`tools/temoins.sh`, 14 contrôles) : le compteur
+⚠ Deux témoins hors ligne gardent ça (`src/outils/temoins.sh`, 14 contrôles) : le compteur
 du sélecteur doit **retrouver les 3,75 %** mesurés à la main sur (7168, 1024), et
 **relever le plafond à 0,10 doit rendre plus de bandes** — sans ce dernier, « une seule
 bande vierge » serait aussi ce que rendrait un sélecteur cassé.
@@ -430,8 +430,8 @@ vierge met la même image des deux côtés de la barre noire — la condition
 
 ```bash
 cd inference_xpu
-uv run python ../analysis/src/judge_api.py <prediction.npy> --bands-only
-uv run python ../analysis/src/judge_api.py <prediction.npy> --auto-bands \
+uv run python ../src/encre/judge_api.py <prediction.npy> --bands-only
+uv run python ../src/encre/judge_api.py <prediction.npy> --auto-bands \
     --model <modele-disponible> --trials 1   # ⚠ PAS gemini-2.5-flash : le §9 de ce
                                              # document mesure qu'il répond 404
                                              # (« no longer available to new users »)
@@ -543,9 +543,9 @@ uv run python src/infer_ink.py ../data/layers/scroll4_20231111135340 \
     --model ../data/models/timesformer_GP_scroll1 \
     --top 0 --left 17000 --height 6038 --width 8000 --stride 21 --device xpu \
     --out ../data/out/ink_scroll4.npy
-uv run python ../analysis/src/judge_api.py ../data/out/ink_scroll4.npy --bands-only
+uv run python ../src/encre/judge_api.py ../data/out/ink_scroll4.npy --bands-only
 set -a && . ../.env && set +a
-uv run python ../analysis/src/judge_api.py ../data/out/ink_scroll4.npy --auto-bands \
+uv run python ../src/encre/judge_api.py ../data/out/ink_scroll4.npy --auto-bands \
     --blank-ceiling 0.05 --model gemini-3.5-flash --trials 1 --out ../docs/juge_scroll4.json
 ```
 
@@ -554,5 +554,5 @@ uv run python ../analysis/src/judge_api.py ../data/out/ink_scroll4.npy --auto-ba
 ```bash
 # l'image de calibrage à deux panneaux, témoin inclus — c'est ce que le protocole exige
 # de montrer AVANT tout inconnu, et l'ordre est irréversible.
-uv run python analysis/src/make_panel.py <sortie.png> --help
+uv run python src/volume/make_panel.py <sortie.png> --help
 ```

@@ -48,7 +48,7 @@ soit **320 fois** l'aire. On ne peut pas rendre ça, et **on ne le voudrait pas*
 dépend de l'étendue lue (exposant −0,830 dans le plan, [`52`](52_calibrer_sur_son_corpus.md)
 §1), donc le témoin doit avoir la taille de ce qu'il contrôle.
 
-`analysis/src/decouper_tifxyz.py` découpe des morceaux **à la taille lue dans un candidat**
+`src/nappe/decouper_tifxyz.py` découpe des morceaux **à la taille lue dans un candidat**
 (`--comme`), plutôt que retapée. Trois refus, chacun payé ailleurs dans ce dépôt :
 
 1. **La bbox est recalculée**, jamais recopiée. Une bbox de segment entier posée sur un
@@ -150,17 +150,17 @@ for f in meta.json x.tif y.tif z.tif; do
 done
 
 # des morceaux à la taille de nos candidats, sans aucun trou
-uv run --project . python analysis/src/decouper_tifxyz.py \
+uv run --project . python src/nappe/decouper_tifxyz.py \
     data/temoin_rendu/publie_20230702185753 \
     --comme data/paris4_candidats/ps256_c0/plat \
     --dest data/temoin_rendu/morceaux --nombre 4 \
     --json docs/temoin_rendu_morceaux.json
 
 # le témoin : notre chaîne rend une surface publiée, puis on la situe dans son corpus
-CORPUS=docs/balayage_scroll1.csv tools/temoin_du_rendu.sh data/temoin_rendu/morceaux/morceau_0*
+CORPUS=docs/balayage_scroll1.csv src/outils/temoin_du_rendu.sh data/temoin_rendu/morceaux/morceau_0*
 
 # les témoins, hors ligne
-uv run --project . python analysis/src/decouper_tifxyz.py --verifier
-tools/temoin_du_rendu.sh --verifier
-tools/profiler_une_surface.sh --verifier
+uv run --project . python src/nappe/decouper_tifxyz.py --verifier
+src/outils/temoin_du_rendu.sh --verifier
+src/outils/profiler_une_surface.sh --verifier
 ```

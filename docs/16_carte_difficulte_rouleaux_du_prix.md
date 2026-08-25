@@ -35,7 +35,7 @@ su lire, mesuré de la même façon.
 grandeurs sans rapport, et une échelle commune suggérerait une comparaison qui n'a pas de
 sens.
 
-Figure : `analysis/src/figure_difficulte.py`, depuis `docs/carte_separabilite/`.
+Figure : `src/figures/figure_difficulte.py`, depuis `docs/carte_separabilite/`.
 
 ---
 
@@ -47,7 +47,7 @@ Nos autres instruments jugent une trace contre le volume ; sur un rouleau non tr
 n'ont rien à mesurer.
 
 ⚠⚠ **Corrigé le 2026-08-19 : « aucun » est FAUX.** L'inventaire versionné
-`docs/etat_rouleaux_prix.txt` (produit par `tools/etat_rouleaux_prix.sh`, cf `23` §1)
+`docs/etat_rouleaux_prix.txt` (produit par `src/outils/etat_rouleaux_prix.sh`, cf `23` §1)
 recense **trois** rouleaux du prix avec des segments publiés — **PHerc1447 (16)**,
 **PHerc0800 (6)**, **PHerc1203 (1)**. L'affirmation exacte est **dix sur treize** non
 tracés, dont `PHerc0358`, dont le `segments/` est bien vide.
@@ -64,7 +64,7 @@ chiffre : **par lequel commencer ?**
 
 ## 2. La mesure
 
-`analysis/src/espacement_spires.py`. Le long d'une ligne qui traverse les spires, les
+`src/nappe/espacement_spires.py`. Le long d'une ligne qui traverse les spires, les
 surfaces prédites forment des groupes ; l'écart entre groupes successifs **est** l'écart
 inter-spires.
 
@@ -160,16 +160,16 @@ est une explication plausible.
 ## Reproduire
 
 ```bash
-./tools/carte_difficulte.sh docs/carte_difficulte
+./src/outils/carte_difficulte.sh docs/carte_difficulte
 cd inference_xpu
-uv run python ../analysis/src/table_difficulte.py ../docs/carte_difficulte
+uv run python ../src/tables/table_difficulte.py ../docs/carte_difficulte
 ```
 
 ---
 
 ## 6. 🎯 La qualité de scan : mesurée, et elle n'excuse pas non plus
 
-`analysis/src/separabilite_scan.py`. Le tableau des goulots de `2026_open_problems`
+`src/encre/separabilite_scan.py`. Le tableau des goulots de `2026_open_problems`
 nomme littéralement ce qui manque — *« What would help : **scan-quality metrics** »* —
 et définit le défaut dans ses propres mots : *« some regions lose **effective
 separability** between layers »*.
@@ -270,8 +270,8 @@ autres — donc elle **tronque**, et son 18 µm est une borne inférieure.
 ## Reproduire
 
 ```bash
-./tools/carte_separabilite.sh                            # la campagne, témoin PHerc0139 inclus
-cd experiments && uv run python ../analysis/src/table_separabilite.py --help
+./src/outils/carte_separabilite.sh                            # la campagne, témoin PHerc0139 inclus
+cd experiments && uv run python ../src/tables/table_separabilite.py --help
 ```
 
 ⚠ Et la suite de cette carte est [`33`](33_la_carte_nest_pas_resolue.md) : elle **n'est pas

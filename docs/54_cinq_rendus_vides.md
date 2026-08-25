@@ -37,7 +37,7 @@ directe des pixels, une couche sur vingt, sur les huit candidats :
 
 **Les cinq piles `m7` sont entièrement noires.** Aucun pixel allumé, sur aucune couche.
 
-⚠ Le coup d'œil est devenu une mesure : `analysis/src/matiere_des_piles.py`, sortie dans
+⚠ Le coup d'œil est devenu une mesure : `src/nappe/matiere_des_piles.py`, sortie dans
 `docs/matiere_des_piles.json`. La question qu'il pose est **binaire et sans seuil** — le
 maximum de la pile est-il strictement positif — parce qu'un pixel à zéro n'a pas de matière
 par définition du format. La part allumée est **rapportée à côté** : « il y a de la matière »
@@ -55,7 +55,7 @@ ne couvre pas la panne. Ajouté aux dépendances.
 
 ## 2. ⚠⚠ Pourquoi l'instrument a dit « 49 fenêtres avec matière »
 
-`analysis/src/depth_profile.py` écartait les fenêtres sans matière ainsi :
+`src/volume/depth_profile.py` écartait les fenêtres sans matière ainsi :
 
 ```python
 alive = peak_value >= floor * peak_value.max()
@@ -136,7 +136,7 @@ Avant remise à l'échelle, `m7` est à `z ≈ 8 000` quand tout le reste du rou
 `z ≈ 30 000 – 74 000`. Après, il est **dedans**.
 
 ⚠ Le diagnostic porte sur les **huit** candidats et non sur un seul :
-`analysis/src/niveau_du_maillage.py` lit les deux journaux et rend le rapport. **Les cinq
+`src/nappe/niveau_du_maillage.py` lit les deux journaux et rend le rapport. **Les cinq
 `m7` sont au niveau 2, les trois `ps256` au niveau 0.** Les deux familles ont été tracées à
 deux résolutions, et seule l'une des deux a été rendue dans une frame qui lui correspond.
 
@@ -192,7 +192,7 @@ endroit n'a pas de feuille » n'a jamais été mesuré : **on n'a jamais regard�
 ## 3 ter. ⚠⚠ Et la vraie panne du maillage `m7` : il déborde du volume scanné
 
 Remis dans son repère, le maillage `m7` n'est toujours pas lisible partout. Le sondage
-(`analysis/src/matiere_au_point.py`, un bloc zarr par point, sur la **surface** et non au
+(`src/nappe/matiere_au_point.py`, un bloc zarr par point, sur la **surface** et non au
 centre de sa boîte) :
 
 | maillage | niveau | matière | bloc absent du dépôt |
@@ -311,7 +311,7 @@ et produit un maillage à `z ≈ 38 500`, **avec de la matière**.
 ### Une requête HTTP aurait tout arrêté
 
 Les deux graines, sondées dans le volume scanné à pleine résolution — **un bloc zarr chacune**,
-`analysis/src/matiere_au_point.py` :
+`src/nappe/matiere_au_point.py` :
 
 | graine | ce qu'il y a là | ce que le traceur en a fait |
 |---|---|---|
@@ -364,7 +364,7 @@ rendent pas à la même échelle et ne se lisent pas dans la même fenêtre. La 
 « prédiction contre prédiction, au même endroit » **reste donc à faire**, avec des aires
 réellement appariées — et non des aires nominalement égales.
 
-`tools/tracer_une_graine.sh` écrit désormais `voxelsize = UM × 2^niveau`.
+`src/outils/tracer_une_graine.sh` écrit désormais `voxelsize = UM × 2^niveau`.
 
 ## 4. Ce que ça change
 
@@ -445,12 +445,12 @@ alors ni maximum ni part allumée.
 # le diagnostic, sur les huit candidats
 for c in data/paris4_candidats/*/; do
   echo "=== $(basename $c)"
-  uv run --project . python analysis/src/niveau_du_maillage.py \
+  uv run --project . python src/nappe/niveau_du_maillage.py \
       --trace-log $c/trace.log --rendu-log $c/rendu_161.log | tail -1
 done
 
 # la remise a l'echelle d'un maillage de niveau 2 vers le niveau 0
-uv run --project . python analysis/src/niveau_du_maillage.py \
+uv run --project . python src/nappe/niveau_du_maillage.py \
     --trace-log data/paris4_candidats/m7_c0/trace.log \
     --rendu-log data/paris4_candidats/m7_c0/rendu_161.log \
     --maillage data/paris4_candidats/m7_c0/plat \
@@ -458,20 +458,20 @@ uv run --project . python analysis/src/niveau_du_maillage.py \
 
 # l'audit du depot entier : 322 piles, une couche sur quarante
 find data -maxdepth 4 -type d -name "rendu*" | sort > /tmp/piles.txt
-uv run --project . python analysis/src/matiere_des_piles.py $(cat /tmp/piles.txt) \
+uv run --project . python src/nappe/matiere_des_piles.py $(cat /tmp/piles.txt) \
     --pas 40 --json docs/matiere_des_piles_toutes.json
 
 # la figure des trois vignettes
-uv run --project . python analysis/src/figure_piles_vides.py \
+uv run --project . python src/figures/figure_piles_vides.py \
     --vide data/paris4_candidats/m7_c0/rendu_161 \
     --rebase data/temoin_rendu/m7_c0_g2/rendu \
     --temoin data/paris4_candidats/ps256_c0/rendu_161 \
     --sortie docs/images/54_piles_vides.png --json docs/figure_piles_vides.json
 
 # la tuile de reference publiee, puis la figure feuille-ou-tranche
-uv run --project . python analysis/src/tuile_surface_publiee.py \
+uv run --project . python src/volume/tuile_surface_publiee.py \
     --sortie data/temoin_rendu/reference_publiee.tif
-uv run --project . python analysis/src/figure_feuille_ou_tranche.py \
+uv run --project . python src/figures/figure_feuille_ou_tranche.py \
     --reference data/temoin_rendu/reference_publiee.tif \
     --publie data/temoin_rendu/rendus/morceau_00/g0_n161/rendu \
     --nos-traces data/paris4_candidats/ps256_c0/rendu_161 \
@@ -481,11 +481,11 @@ uv run --project . python analysis/src/figure_feuille_ou_tranche.py \
     --json docs/figure_feuille_ou_tranche.json
 
 # les temoins, hors ligne
-uv run --project . python analysis/src/niveau_du_maillage.py --verifier
-uv run --project . python analysis/src/tuile_surface_publiee.py --verifier
-uv run --project . python analysis/src/figure_feuille_ou_tranche.py --verifier
-uv run --project . python analysis/src/depth_profile.py --verifier
-uv run --project . python analysis/src/matiere_des_piles.py --verifier
-uv run --project . python analysis/src/matiere_au_point.py --verifier
-uv run --project . python analysis/src/figure_piles_vides.py --verifier
+uv run --project . python src/nappe/niveau_du_maillage.py --verifier
+uv run --project . python src/volume/tuile_surface_publiee.py --verifier
+uv run --project . python src/figures/figure_feuille_ou_tranche.py --verifier
+uv run --project . python src/volume/depth_profile.py --verifier
+uv run --project . python src/nappe/matiere_des_piles.py --verifier
+uv run --project . python src/nappe/matiere_au_point.py --verifier
+uv run --project . python src/figures/figure_piles_vides.py --verifier
 ```

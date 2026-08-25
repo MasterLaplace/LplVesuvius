@@ -301,7 +301,7 @@ L'index publié couvre **cinq** corpus, avec des populations très différentes 
 
 Les trois corpus jamais utilisés sont **majoritairement mesurables**. C'est là qu'est le
 test, et leurs traces se récupèrent depuis le bucket ouvert
-(`tools/fetch_traces.py`) — `aws` est absent, mais l'API de listage HTTPS accepte un
+(`src/outils/fetch_traces.py`) — `aws` est absent, mais l'API de listage HTTPS accepte un
 préfixe par segment, donc on n'énumère pas tout (piège nº 16).
 
 ⚠ **Une règle d'applicabilité doit être posée dans l'outil**, pas seulement écrite ici :

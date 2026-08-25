@@ -6,8 +6,8 @@ produit. Aucune des trois fois n'a été trouvée en relisant.
 
 ![où se tient un corpus publié](images/52_calibration.png)
 
-Instruments : [`analysis/src/calibration_corpus.py`](../analysis/src/calibration_corpus.py)
-(11 témoins) et [`figure_calibration.py`](../analysis/src/figure_calibration.py)
+Instruments : [`src/graine/calibration_corpus.py`](../src/graine/calibration_corpus.py)
+(11 témoins) et [`figure_calibration.py`](../src/figures/figure_calibration.py)
 (13 témoins). Données : [`docs/balayage_scroll1.csv`](balayage_scroll1.csv), 81 segments.
 
 ---
@@ -128,7 +128,7 @@ paraîtrait parfaitement sensé.
 
 Situer une trace ne prouve rien sur les autres. Les huit candidats de
 [`48`](48_ou_monter_lexperience.md) ont donc été **relus à la géométrie du corpus** —
-`tools/situer_nos_traces.sh`, une pile de 161 couches ramenée à sa sous-fenêtre **centrée**
+`src/outils/situer_nos_traces.sh`, une pile de 161 couches ramenée à sa sous-fenêtre **centrée**
 de 109 :
 
 | candidats | relief | ×plancher | rang sur 80 |
@@ -184,25 +184,25 @@ sans rien signaler.
 uv run python tracecheck/tracecheck.py Scroll1 --all --csv \
     --voxel-um 2.4 --prefer 2.4um > docs/balayage_scroll1.csv
 
-python3 analysis/src/calibration_corpus.py docs/balayage_scroll1.csv \
+python3 src/graine/calibration_corpus.py docs/balayage_scroll1.csv \
     --par-geometrie --json docs/calibration_scroll1.json
 
 # notre trace, relue A LA GEOMETRIE DU CORPUS, puis situee dedans
-cd inference_xpu && uv run python ../analysis/src/depth_profile.py \
+cd inference_xpu && uv run python ../src/volume/depth_profile.py \
     ../data/paris4_candidats/ps256_c0/rendu_161 --grid --size 128 --step 200 \
     --from-layer 26 --to-layer 134 --traced-layer 54 --voxel-um 2.4 --out /tmp/nous_128.json
-python3 analysis/src/calibration_corpus.py docs/balayage_scroll1.csv --layers 109 \
+python3 src/graine/calibration_corpus.py docs/balayage_scroll1.csv --layers 109 \
     --situer /tmp/nous_128.json --json docs/situer_notre_trace.json
 
 # les huit candidats d'un coup
-CORPUS=docs/balayage_scroll1.csv tools/situer_nos_traces.sh \
+CORPUS=docs/balayage_scroll1.csv src/outils/situer_nos_traces.sh \
     data/paris4_candidats/*/rendu_161
 
-uv run python analysis/src/figure_calibration.py \
+uv run python src/figures/figure_calibration.py \
     --csv docs/balayage_scroll1.csv --layers 109 \
     --sortie docs/images/52_calibration.png
 
 # les témoins, hors ligne
-python3 analysis/src/calibration_corpus.py --verifier
-python3 analysis/src/figure_calibration.py --verifier
+python3 src/graine/calibration_corpus.py --verifier
+python3 src/figures/figure_calibration.py --verifier
 ```

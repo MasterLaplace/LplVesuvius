@@ -6,8 +6,8 @@ relire leur tableau.
 
 ![un écart au bord de la fenêtre est une flèche, pas un point](images/51_appuis.png)
 
-Instrument : [`analysis/src/appui_de_pente.py`](../analysis/src/appui_de_pente.py)
-(37 témoins) et [`figure_appuis.py`](../analysis/src/figure_appuis.py) (24 témoins).
+Instrument : [`src/graine/appui_de_pente.py`](../src/graine/appui_de_pente.py)
+(37 témoins) et [`figure_appuis.py`](../src/figures/figure_appuis.py) (24 témoins).
 
 ---
 
@@ -95,7 +95,7 @@ résultats qu'il produit est ce qui le rend invisible.
 
 ⚠⚠ **Ce tableau a d'abord annoncé 132 séries, et il en manquait six.** Deux conventions de
 rangement coexistent : les campagnes anciennes posent `profil_41c.json` et `profil_161c.json`
-côte à côte, `tools/profiler_une_surface.sh` écrit **une fenêtre par sous-dossier**
+côte à côte, `src/outils/profiler_une_surface.sh` écrit **une fenêtre par sous-dossier**
 (`g<niveau>_n<tranches>/profil.json`). Grouper par dossier parent découpait les secondes en
 séries d'un seul profil, donc injugeables — et elles comprennent le contrôle de pyramide et
 la campagne de plafond à 200 générations, parmi les plus importantes du dépôt. La clé de
@@ -185,7 +185,7 @@ sur une condamnation — donc elle **ne tient pas** au sens de ce document.
 
 Si la fenêtre de 41 couches est sous le plancher sur ce rouleau, relancer la même campagne
 avec le même couple redonnera **le même nombre**. D'où
-[`analysis/src/fenetre_utilisable.py`](../analysis/src/fenetre_utilisable.py) (37 témoins),
+[`src/graine/fenetre_utilisable.py`](../src/graine/fenetre_utilisable.py) (37 témoins),
 qui répond en deux temps et dans cet ordre :
 
 1. ⭐ **un fait, sans modèle** — parmi les profondeurs déjà mesurées, y en a-t-il deux qui
@@ -409,7 +409,7 @@ font l'amplitude. Ce qu'il faut en retenir n'est pas « la grandeur est mauvaise
 
 Le repère est **retiré** du README, remplacé par ce tableau et par la seule instruction qui
 tienne : calibrer sur son propre corpus, ce qui est une commande.
-Instrument : [`analysis/src/effet_taille_fenetre.py`](../analysis/src/effet_taille_fenetre.py)
+Instrument : [`src/graine/effet_taille_fenetre.py`](../src/graine/effet_taille_fenetre.py)
 (8 témoins), dont la sonde centrale est le **signe** de l'exposant.
 
 ⭐ Et l'amplitude ne coûte rien de plus à calculer : `tracecheck` lit déjà les colonnes de
@@ -464,31 +464,31 @@ question binaire posée à l'intérieur de chaque fenêtre, quelle que soit sa p
 ## Reproduire
 
 ```bash
-python3 analysis/src/appui_de_pente.py --racine . --json docs/appui_de_pente.json
-python3 analysis/src/fenetre_utilisable.py --racine . \
+python3 src/graine/appui_de_pente.py --racine . --json docs/appui_de_pente.json
+python3 src/graine/fenetre_utilisable.py --racine . \
     --niveaux data/controle_resolution --json docs/fenetre_utilisable.json
-uv run python analysis/src/figure_fenetre.py \
+uv run python src/figures/figure_fenetre.py \
     --json docs/fenetre_utilisable.json --sortie docs/images/51_fenetre.png
-uv run python analysis/src/figure_appuis.py \
+uv run python src/figures/figure_appuis.py \
     --json docs/appui_de_pente.json --sortie docs/images/51_appuis.png
-uv run python analysis/src/figure_contraste.py \
+uv run python src/figures/figure_contraste.py \
     --json docs/appui_de_pente.json --sortie docs/images/51_contraste.png
 
 # le verdict porte désormais son appui
-uv run python analysis/src/test_convergence.py --nom ps256_c0 \
+uv run python src/commun/test_convergence.py --nom ps256_c0 \
     --profil data/paris4_candidats/ps256_c0/profil_41c.json \
     --profil data/paris4_candidats/ps256_c0/profil_161c.json
 
 # les témoins, hors ligne
-python3 analysis/src/appui_de_pente.py --verifier
-python3 analysis/src/fenetre_utilisable.py --verifier
+python3 src/graine/appui_de_pente.py --verifier
+python3 src/graine/fenetre_utilisable.py --verifier
 
 # le couple admissible, sur la grande surface
 PLAT=data/paris4_plafond/ps256_c2_g200/plat NIVEAU=1 FENETRES_BASE="162 326" \
   DEST=data/paris4_plafond/ps256_c2_g200 PATIENCE=5400 \
-  JSON=docs/paire_admissible_g200.json tools/profiler_une_surface.sh
-python3 analysis/src/figure_fenetre.py --verifier
-python3 analysis/src/figure_appuis.py --verifier
-python3 analysis/src/figure_contraste.py --verifier
-python3 analysis/src/test_convergence.py --verifier
+  JSON=docs/paire_admissible_g200.json src/outils/profiler_une_surface.sh
+python3 src/figures/figure_fenetre.py --verifier
+python3 src/figures/figure_appuis.py --verifier
+python3 src/figures/figure_contraste.py --verifier
+python3 src/commun/test_convergence.py --verifier
 ```

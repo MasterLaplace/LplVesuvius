@@ -66,7 +66,7 @@ fenêtres, une attribution au hasard.
 
 ![champ de correction, cas fort](images/20_champ_fort.png)
 
-Figure : `analysis/src/figure_champ.py`.
+Figure : `src/figures/figure_champ.py`.
 
 Le premier bloc est une **plaque** rouge — la trace y est trop profonde de façon
 continue — et le quatrième une plaque bleue. À droite, la même matière est du poivre et
@@ -235,11 +235,11 @@ d'être noté et rien de plus.
 ## 8. Reproduire
 
 ```bash
-./tools/campagne_champ.sh PHercParis4 2.4um  2.4   docs/champ_PHercParis4
-./tools/campagne_champ.sh PHerc1667   2.399um 2.399 docs/champ_PHerc1667
+./src/campagnes/campagne_champ.sh PHercParis4 2.4um  2.4   docs/champ_PHercParis4
+./src/campagnes/campagne_champ.sh PHerc1667   2.399um 2.399 docs/champ_PHerc1667
 
 cd inference_xpu
-uv run python ../analysis/src/table_champ.py ../docs/champ_PHercParis4 \
+uv run python ../src/tables/table_champ.py ../docs/champ_PHercParis4 \
     --pas-um 172.8 --encre ../docs/croisement_encre.json --out ../docs/table_champ.json
 ```
 

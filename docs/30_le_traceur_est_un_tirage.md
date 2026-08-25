@@ -21,7 +21,7 @@ différence entre les deux fichiers de paramètres était `thread_limit` : **0**
 
 ## 2. Le résultat, mesuré
 
-`tools/campagne_thread_limit.sh`, dépouillé par `analysis/src/table_thread_limit.py`.
+`src/campagnes/campagne_thread_limit.sh`, dépouillé par `src/tables/table_thread_limit.py`.
 Quatorze tirages, **paramètres strictement identiques**, même graine.
 
 | `thread_limit` | essai | générations | aire (cm²) | auto-intersections |
@@ -140,8 +140,8 @@ ce que `31` §4 décrit, et ce que nos deux instruments indépendants rendent po
 ## 6. Reproduire
 
 ```bash
-./tools/campagne_thread_limit.sh "$PWD/data/trace/PHerc0358/thread_limit" "1544 1544 7768" 10
-uv run python analysis/src/table_thread_limit.py --json docs/table_thread_limit.json
+./src/campagnes/campagne_thread_limit.sh "$PWD/data/trace/PHerc0358/thread_limit" "1544 1544 7768" 10
+uv run python src/tables/table_thread_limit.py --json docs/table_thread_limit.json
 
 # le contrôle : le maillage archivé remesure-t-il bien 240 ?
 vc_tifxyz_selfcross --surface artefacts/PHerc0358/mesh.tifxyz -o /tmp/recheck.json

@@ -19,7 +19,7 @@ repository builds measurements that a trace can answer **about itself**.
 uv run --project . python tracecheck/selftest.py
 
 # 2. every instrument in the tree, offline, one line per battery
-./tools/temoins.sh
+./src/outils/temoins.sh
 
 # 3. judge a published segment remotely, before downloading 32 GB
 uv run --project . python tracecheck/tracecheck.py Scroll1 20230702185753 --voxel-um 2.4
@@ -45,7 +45,7 @@ one description of every flag in this repository.
 ⚠ A verb that exists in the tree but not in the tier you are running does **not** answer
 "unknown command" — it says so, and names the families this build carries.
 
-`tools/temoins.sh` runs every self-test in the repository and prints one line per battery.
+`src/outils/temoins.sh` runs every self-test in the repository and prints one line per battery.
 It ends with a count, and that count is itself a guarded number: a battery that stops being
 run stops being counted, and the discrepancy shows.
 
@@ -58,13 +58,13 @@ because a list of options copied into a README is stale before it is read.
 
 | claim | evidence |
 |---|---|
-| a trace can be judged **without ground truth**, by reading it at two window depths | `analysis/src/test_convergence.py`, paper section 3 |
+| a trace can be judged **without ground truth**, by reading it at two window depths | `src/commun/test_convergence.py`, paper section 3 |
 | stability across runs can be an artefact of a **shared generation budget**, not of the scroll | paper section 5.2, dispersion 0.55 % to 86 % once the budget is raised |
 | an ink model can return the **same map** on a surface geometrically proven to follow no sheet | paper section 6.4, correlation +0.9979 |
 | a trace's quality can be read **remotely**, from published surface volumes | `tracecheck/`, paper section 4 |
 
 Every number in the paper is recomputed from a result file and searched literally inside the
-text. `analysis/src/verifier_chiffres.py` fails if a published number no longer matches what
+text. `src/depot/verifier_chiffres.py` fails if a published number no longer matches what
 its source produces. This is what makes "reproducible" a check rather than a word.
 
 ---
@@ -75,7 +75,7 @@ its source produces. This is what makes "reproducible" a check rather than a wor
 |---|---|
 | `tracecheck/` | the deliverable: one file, numpy only, 16 offline self-tests |
 | `article/` | the paper, its typst sources, its english figures, `build.sh` |
-| `analysis/src/` | the instruments: one file per measurement, each with `--verifier` |
+| `src/` | the instruments, grouped in families: `figures/`, `tables/`, `nappe/`, `volume/`, `encre/`, `graine/`, `commun/`, `depot/`, `outils/`, `campagnes/` |
 | `tools/` | the campaigns that produce results, and `temoins.sh` that checks everything |
 | `docs/*.json` | the result files every published number is recomputed from |
 | `docs/*.md` | the working notebook, in french: one document per measurement, dated |

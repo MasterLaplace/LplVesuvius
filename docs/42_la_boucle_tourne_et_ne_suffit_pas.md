@@ -1,6 +1,6 @@
 # La boucle de correction tourne — et 318 points ne suffisent pas
 
-2026-08-21. Reproductible : `./tools/lancer.sh --fond tools/boucle_de_correction.sh`.
+2026-08-21. Reproductible : `./src/outils/lancer.sh --fond src/outils/boucle_de_correction.sh`.
 Verdicts : `docs/boucle_temoin.json`, `docs/boucle_corrige_gen5.json`.
 
 ---
@@ -45,7 +45,7 @@ la correction porte sur **0,56 %** de la surface, avec un `correction_weight` qu
 > Une correction de 318 points est un **coup de pouce local**, pas une réorientation.
 
 ⭐ Et ça désigne **deux** leviers sans avoir à deviner, tous deux ajoutés à
-`tools/boucle_de_correction.sh` :
+`src/outils/boucle_de_correction.sh` :
 
 1. **`correction_weight`** (`POIDS`, défaut `1 100`) — une clé JSON que `applyJsonWeights`
    accepte (`GrowPatch.cpp:1311`) et qui n'avait jamais été réglée ici ;
@@ -222,7 +222,7 @@ graal :
 
 > **La convergence survit-elle à l'enchaînement, et sur combien de spires ?**
 
-`tools/spire_suivante.sh` la pose : spire 0 = le segment officiel **rejugé par notre chaîne**
+`src/outils/spire_suivante.sh` la pose : spire 0 = le segment officiel **rejugé par notre chaîne**
 (et non son chiffre repris — sinon un écart entre la spire 0 et la spire 1 mélangerait la
 surface et le chemin de mesure), puis N spires générées, chacune jugée dans les **mêmes
 fenêtres** (31 et 81, celles où l'officiel a été mesuré).
@@ -237,14 +237,14 @@ correction ; ce paragraphe dit ce qui va être tenté et pourquoi, pas ce qui a 
 ## Reproduire
 
 ```bash
-./tools/lancer.sh --fond tools/boucle_de_correction.sh      # la boucle entière, appariée
+./src/outils/lancer.sh --fond src/outils/boucle_de_correction.sh      # la boucle entière, appariée
 
 # la figure, depuis les verdicts eux-mêmes — jamais des nombres recopiés
-(cd experiments && uv run python ../analysis/src/test_convergence.py \
+(cd experiments && uv run python ../src/commun/test_convergence.py \
   --serie "31:17.28,81:17.30" --nom "segment officiel (bonne surface)" \
   --depuis "../docs/boucle_temoin.json=témoin, sans correction" \
   --depuis "../docs/boucle_corrige_gen5.json=corrigé, 318 points de passage" \
   --json ../docs/boucle_convergence.json)
-uv run python analysis/src/figure_convergence.py \
+uv run python src/figures/figure_convergence.py \
   --entree docs/boucle_convergence.json --sortie docs/images/42_boucle_convergence.png
 ```

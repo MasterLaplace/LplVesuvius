@@ -1,8 +1,8 @@
 # Marcher le long d'une nappe — et pourquoi « au plus proche » ne marche pas
 
 2026-08-20, nuit. Le maillon manquant de [`39`](39_le_seam_de_correction.md).
-Instrument : `analysis/src/suivre_nappe.py` (29 témoins, dont un **témoin négatif**).
-Figure : `analysis/src/figure_marche.py`.
+Instrument : `src/commun/suivre_nappe.py` (29 témoins, dont un **témoin négatif**).
+Figure : `src/figures/figure_marche.py`.
 
 ---
 
@@ -200,7 +200,7 @@ aussi le moins radial des essais mesurés (α = +0,65 contre +0,99 et +1,01).
    `vertical` seul ont été testés, jamais la **paire**, alors que c'est la paire qui définit
    les axes u, v de la feuille.
 
-C'est ce que mesure `tools/leviers_de_perte.sh` (conception appariée : même graine, même
+C'est ce que mesure `src/outils/leviers_de_perte.sh` (conception appariée : même graine, même
 volume, même nombre de générations, une seule clé change à la fois).
 
 ### ⚠⚠ Et une SECONDE correction, une heure plus tard : « il ne reste que la géométrie » est trop fort
@@ -251,7 +251,7 @@ de rendre `None`, et le message nomme l'environnement à utiliser.
 
 ### ⚠⚠ Et l'outil qui aurait attrapé ça existait — personne ne le nommait
 
-`tools/verifier_zarr.sh` a été écrit pour exactement cette panne. Son en-tête la décrit mot
+`src/outils/verifier_zarr.sh` a été écrit pour exactement cette panne. Son en-tête la décrit mot
 pour mot :
 
 > *« Un lecteur qui code `/` en dur et ignore le compresseur ne plante pas : il reçoit des
@@ -259,7 +259,7 @@ pour mot :
 > un résultat, faux, sans le moindre signe. »*
 
 Il n'a pas tourné, parce qu'**aucun document ne le nommait** : le garde anti-dérive de
-`tools/temoins.sh` le comptait parmi les huit scripts sans appelant. C'est le coût d'un
+`src/outils/temoins.sh` le comptait parmi les huit scripts sans appelant. C'est le coût d'un
 orphelin, mesuré pour une fois — **une heure, et une mesure publiée fausse**.
 
 Les huit sont désormais nommés par le document qui décrit leur expérience
@@ -288,15 +288,15 @@ la seule chose qui rend la dérive visible avant qu'elle ne coûte.
 ## Reproduire
 
 ```bash
-./tools/verifier_zarr.sh docs/volumes_surface_PHerc1447.txt   # les volumes sont-ils LISIBLES ?
+./src/outils/verifier_zarr.sh docs/volumes_surface_PHerc1447.txt   # les volumes sont-ils LISIBLES ?
 
-uv run python analysis/src/suivre_nappe.py --verifier     # 29 témoins
-uv run python analysis/src/figure_marche.py               # la figure
+uv run python src/commun/suivre_nappe.py --verifier     # 29 témoins
+uv run python src/figures/figure_marche.py               # la figure
 
 # sur la vraie prédiction, depuis experiments/ (⚠ « le seul env qui a numcodecs »
 # était faux : la racine en a aussi, mesuré le 2026-08-25)
 cd experiments
-uv run python ../analysis/src/suivre_nappe.py \
+uv run python ../src/commun/suivre_nappe.py \
   --zarr PHerc1447/representations/predictions/surfaces/20250521151220-surface-20260413222639-surface-m7-L0-th0.2.zarr \
   --xyz 4682 2740 13350 --rayon 128 --n-pas 800 --deux-sens --distance \
   --sortie ../data/nappe/correction_1447.json

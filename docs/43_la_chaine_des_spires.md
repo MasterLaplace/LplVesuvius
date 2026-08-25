@@ -1,7 +1,7 @@
 # La chaîne des spires : six tours tiennent, le septième casse
 
-2026-08-21. Reproductible : `./tools/lancer.sh --fond tools/spire_suivante.sh`.
-Dépouillement : `analysis/src/table_chaine.py` (7 témoins).
+2026-08-21. Reproductible : `./src/outils/lancer.sh --fond src/outils/spire_suivante.sh`.
+Dépouillement : `src/tables/table_chaine.py` (7 témoins).
 Verdicts : `docs/spire_spire0*.json`, table : `docs/chaine_spires.json`.
 
 ---
@@ -215,7 +215,7 @@ propre partie**, et un mauvais tour ne condamnerait pas la suite.
 
 ### ⚠⚠ Alors on l'a mesuré au lieu de le croire
 
-`analysis/src/derive_ou_loterie.py` (11 témoins) teste la corrélation de rang au **décalage
+`src/graine/derive_ou_loterie.py` (11 témoins) teste la corrélation de rang au **décalage
 1** entre α(tour N) et α(tour N+1), sur les **12 paires** des deux chaînes cumulées — sans
 jamais recoller la fin d'une chaîne au début de l'autre.
 
@@ -581,13 +581,13 @@ la moitié de la surface part en quatre tours.
 ## Reproduire
 
 ```bash
-./tools/lancer.sh --fond tools/spire_suivante.sh "$PWD/data/spires" 6
-python3 analysis/src/table_chaine.py data/spires --voxel-um 8.64 --json docs/chaine_spires.json
+./src/outils/lancer.sh --fond src/outils/spire_suivante.sh "$PWD/data/spires" 6
+python3 src/tables/table_chaine.py data/spires --voxel-um 8.64 --json docs/chaine_spires.json
 
-(cd experiments && uv run python ../analysis/src/test_convergence.py \
+(cd experiments && uv run python ../src/commun/test_convergence.py \
   --depuis "../docs/spire_spire00.json=spire 0 (segment officiel)" \
   --depuis "../docs/spire_spire01.json=spire 1" \
   --json ../docs/chaine_convergence.json)    # … une ligne par spire
-uv run python analysis/src/figure_convergence.py \
+uv run python src/figures/figure_convergence.py \
   --entree docs/chaine_convergence.json --sortie docs/images/43_chaine_spires.png
 ```

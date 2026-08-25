@@ -13,7 +13,7 @@ jour**, et c'est la forme de leur échec qui a produit l'instrument.
 > surface posée en travers de l'empilement voit son « pic » s'éloigner avec elle.**
 > α = **+0,00** contre **+1,01**.
 
-Figure : `analysis/src/figure_convergence.py`, depuis `docs/convergence.json`.
+Figure : `src/figures/figure_convergence.py`, depuis `docs/convergence.json`.
 
 ## 1. Les trois hypothèses, et pourquoi elles sont tombées
 
@@ -102,7 +102,7 @@ de *posée en travers*, et rien d'autre — ce qui est déjà ce que rien ne fai
 
 ⚠ **Il faut au moins deux fenêtres dans un rapport d'au moins deux.** Deux mesures trop
 proches rendraient un rapport proche de 1 quelle que soit la surface, c'est-à-dire un test
-incapable d'échouer. `analysis/src/test_convergence.py` **refuse** de rendre un verdict dans
+incapable d'échouer. `src/commun/test_convergence.py` **refuse** de rendre un verdict dans
 ce cas, et son témoin le sonde.
 
 ## 4. Ce que ça change
@@ -137,7 +137,7 @@ d'auto-intersection écarte précisément les bonnes traces — et
 qu'il prétend.
 
 Deux essais du même rouleau, passés au test de convergence
-(`tools/convergence_des_essais.sh`, en fond) :
+(`src/outils/convergence_des_essais.sh`, en fond) :
 
 | essai | auto-intersections | 41 couches | 161 couches | **α** | verdict |
 |---|---:|---:|---:|---:|---|
@@ -176,21 +176,21 @@ Ce qui est vérifié, c'est que **trois leviers de données sont éteints chez n
 et elle est cohérente avec le fait qu'`essai_ng2` — le seul essai poussé avec une grille de
 normales — soit le moins radial (α = +0,65). L'établir demande de relancer les mêmes traces
 avec `sdt_weight` puis avec les fibres, et de voir la convergence changer :
-`tools/leviers_de_perte.sh`.
+`src/outils/leviers_de_perte.sh`.
 
 ## Reproduire
 
 ```bash
 # une trace, plusieurs fenêtres
 for n in 21 41 81 161; do
-  ./tools/lancer.sh tools/campagne_second_axe.sh "$PWD/data/second_axe_$n" $n "$PWD/data/tirages/PHerc1447/r2"
+  ./src/outils/lancer.sh src/campagnes/campagne_second_axe.sh "$PWD/data/second_axe_$n" $n "$PWD/data/tirages/PHerc1447/r2"
 done
 # le segment officiel dans la même fenêtre
-./tools/lancer.sh tools/officiel_fenetre_appariee.sh "$PWD/data/officiel_appariee" 81
+./src/outils/lancer.sh src/outils/officiel_fenetre_appariee.sh "$PWD/data/officiel_appariee" 81
 
-(cd experiments && uv run python ../analysis/src/test_convergence.py \
+(cd experiments && uv run python ../src/commun/test_convergence.py \
   --serie "31:17.28,81:17.30"                      --nom "segment officiel" \
   --serie "21:86.4,41:159.84,81:311.04,161:682.56" --nom "notre trace" \
   --json ../docs/convergence.json)
-uv run python analysis/src/figure_convergence.py
+uv run python src/figures/figure_convergence.py
 ```
