@@ -1,0 +1,24 @@
+{
+  "recales": 8248,
+  "hors_boite": 0,
+  "sans_matiere": 3009,
+  "borne_atteinte": 3023,
+  "sans_normale": 0,
+  "points": 14280,
+  "deplacement_median_vox": 7.002926509620636,
+  "deplacement_p90_vox": 13.415426031984648,
+  "deplacement_max_vox": 15.5,
+  "deplacement_signe_median_vox": 3.0345754390325994,
+  "part_vers_le_plus": 0.5949321047526673,
+  "crete_mediane": 2.6252306525913065,
+  "crete_p10": 2.056033159993896,
+  "champ_max": 44.12482452392578,
+  "niveau": 2,
+  "portee_niveau": 4.0,
+  "bloc": [
+    594,
+    587,
+    486
+  ],
+  "chunks_absents": 0
+}

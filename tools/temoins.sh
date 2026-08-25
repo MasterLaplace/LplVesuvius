@@ -794,8 +794,11 @@ run "figure des piles vides"   uv run --project "$ROOT" python "$ROOT/analysis/s
 # parce que la distance est courte. Sonde aussi que chaque maillon part du PRECEDENT, sinon
 # ce sont des projections independantes sous un autre nom.
 run "chaîne tangentielle"      "$ROOT/tools/chainer_tangentiel.sh" --verifier
+run "recalage de la chaine"   "$ROOT/tools/recalage_de_la_chaine.sh" --verifier
 run "projection tangentielle"  uv run --project "$ROOT" python "$ROOT/analysis/src/projeter_tangentiel.py" --verifier
 run "ecart de maillages"       uv run --project "$ROOT" python "$ROOT/analysis/src/ecart_de_maillages.py" --verifier
+run "region locale"            uv run --project "$ROOT" python "$ROOT/analysis/src/region_locale.py" --verifier
+run "recalage sur matiere"     uv run --project "$ROOT" python "$ROOT/analysis/src/recaler_sur_la_matiere.py" --verifier
 # ⚠⚠ La campagne de portee. Ses sondes portent sur la COLONNE et pas sur le mot : l en-tete a
 # gagne « mediane » pendant que l extraction rendait `bloc_absent`, et un grep du mot restait
 # vert. ⚠ Et dans un `chk` qui est une FONCTION, $1 est l argument de la fonction, pas la
