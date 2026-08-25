@@ -343,6 +343,18 @@ là où les autres tournent à 200-400. Un maillage étalé sur 2,4 fois le volu
 à chercher 2,4 fois plus de données pour la même surface. ⭐ La campagne l'a **dit** —
 « ⚠ profil de maillon_5 abandonné » — au lieu de produire un chiffre pour un rendu raté.
 
+⚠⚠ **La limite de CE plan d'expérience, et elle est réelle** : à 1,19 mm le bond direct est
+lui-même déjà sorti de sa feuille — **amplitude 0,0652, pic au bord 55,1 %**, cohérent avec la
+courbe de portée. La comparaison de **profils** oppose donc « mauvais » à « irrendable », et
+elle n'apprend rien. Ce qui porte le verdict, c'est la **croissance de la boîte**, qui se
+mesure à **chaque maillon** — y compris aux maillons 1 à 3, où le bond équivalent serait
+encore bon.
+
+⭐ **Le plan d'expérience juste reste donc à faire** : enchaîner sur une distance totale où le
+bond direct tient encore — par exemple trois maillons de 95 µm, soit 286 µm, où la projection
+unique lit 0,181 et 2,0 % de pic au bord. Là, « la chaîne tient-elle là où un seul bond
+tient ? » devient une vraie question.
+
 > ⭐⭐⭐ **Donc une chaîne tangentielle PUREMENT GÉOMÉTRIQUE ne marche pas**, et ce n'est pas
 > un détail de réglage : elle est strictement moins bonne que la projection unique qu'elle
 > prétend prolonger. Ce qui manque n'est pas un meilleur pas, c'est la **réoptimisation entre

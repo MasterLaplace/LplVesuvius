@@ -66,7 +66,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | enchaîner rogner puis étendre | ❌ | le cycle converge vers un point fixe autour de 6 cm² : chaque tour regagne ce qu'il vient de perdre | [`44`](44_ou_la_chaine_se_trouve.md) |
 | juger une courbe sur trois points | ❌ | trois points donnaient « pente monotone », six « plateau puis falaise », neuf « maximum puis descente douce » — chaque forme plausible, chaque forme fausse | [`44`](44_ou_la_chaine_se_trouve.md) |
 | juger la projection par un sondage de points | ❌ | bloc avec matière et valeur au point rendent le MÊME chiffre de 0 µm à 2,4 mm : un bloc fait 307 µm quand les feuilles sont à 10-20 µm | [`44`](44_ou_la_chaine_se_trouve.md) |
-| enchaîner la projection sans réoptimiser | ❌ | cinq maillons de 238 µm étalent la boîte englobante ×2,38 à nombre de points constant, quand un bond direct de même longueur la laisse à ×1,10 | [`44`](44_ou_la_chaine_se_trouve.md) |
+| enchaîner la projection sans réoptimiser | ❌ | cinq maillons de 238 µm étalent la boîte ×2,38 à nombre de points constant, contre ×1,10 pour le bond direct. ⚠ Comparaison de profils non concluante : à 1,19 mm les deux sont hors feuille | [`44`](44_ou_la_chaine_se_trouve.md) |
 | la chaîne TANGENTIELLE, qui suivrait une feuille autour du tour | ⏳ | la projection existe et a DEUX seuils : contraste maximal vers 240 µm, et la nappe reste sur sa feuille jusqu'à ~380 µm. Reste à enchaîner et à réoptimiser | [`44`](44_ou_la_chaine_se_trouve.md) |
 
 ## 4. La chaîne casse au sixième tour
