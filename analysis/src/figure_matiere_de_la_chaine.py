@@ -122,7 +122,7 @@ def avantage(r: dict) -> float | None:
 
 def dessiner(rangs: list[dict], sortie: Path, anglais: bool = False,
              emballement_um: float | None = None,
-             corrigee: list[dict] | None = None) -> dict:
+             corrigee: list[dict] | None = None, nom_chaine: str | None = None) -> dict:
     """La part posée contre la distance, la source en repère et le bond en marqueur.
 
     ⭐ `corrigee` superpose une SECONDE chaîne — celle qui repose sa nappe sur la matière entre
@@ -261,7 +261,11 @@ def dessiner(rangs: list[dict], sortie: Path, anglais: bool = False,
 
     lx = 24
     depassement = 0
-    series = [(POSE, "chaîne de 95 µm", True), (BOND, "bond direct, même distance", False)]
+    # ⚠ Le nom de la série PORTE UN NOMBRE, donc il doit être celui de la chaîne tracée : la
+    # même figure sert un pas de grille de 95 µm et un pas fixe de 96, et une légende qui
+    # annonce la mauvaise valeur est une erreur publiée sous couvert de décoration.
+    series = [(POSE, nom_chaine or "chaîne de 95 µm", True),
+              (BOND, "bond direct, même distance", False)]
     if corrigee:
         series.insert(1, (CORRIGEE, "chaîne CORRIGÉE sur la matière", True))
     for couleur, nom, plein in series:
@@ -441,6 +445,13 @@ def _verifier() -> int:
         pxc = _pixels(Image.open(Path(td) / "deux.png").convert("RGB"))
         v("... dans sa propre couleur", CORRIGEE in pxc)
         v("sans elle, aucune trace corrigée", r["corrigee_traces"] == 0)
+        # ⚠ Le nom de la série porte un NOMBRE : la même figure sert un pas de 95 et un de 96.
+        rn = dessiner(faux, Path(td) / "nom.png", nom_chaine="chaîne de 96 µm, pas FIXE")
+        v("le nom de la chaîne est remplaçable",
+          _pixels(Image.open(Path(td) / "nom.png").convert("RGB")) != _pixels(
+              Image.open(f).convert("RGB")))
+        v("... sans faire déborder la légende", rn["depassement"] == 0,
+          f"{rn['depassement']} px")
         v("... et sa légende ne déborde pas", rc["depassement"] == 0,
           f"{rc['depassement']} px")
 
@@ -465,6 +476,8 @@ def main() -> int:
                    help="le JSON écrit par tools/recalage_de_la_chaine.sh")
     p.add_argument("--sortie", type=Path,
                    default=Path("docs/images/44_matiere_de_la_chaine.png"))
+    p.add_argument("--nom-chaine", help="le nom de la série — il porte un nombre, donc il "
+                                        "doit être celui de la chaîne tracée")
     p.add_argument("--corrigee", type=Path,
                    help="une seconde campagne : la chaîne qui repose sur la matière")
     p.add_argument("--emballement-um", type=float,
@@ -478,7 +491,7 @@ def main() -> int:
         p.error("le JSON de campagne est requis")
     rangs = json.loads(a.campagne.read_text(encoding="utf-8"))
     corr = json.loads(a.corrigee.read_text(encoding="utf-8")) if a.corrigee else None
-    r = dessiner(rangs, a.sortie, a.anglais, a.emballement_um, corr)
+    r = dessiner(rangs, a.sortie, a.anglais, a.emballement_um, corr, a.nom_chaine)
     print(f"écrit : {a.sortie}  ({r['maillons']} maillons, {r['bonds']} témoin(s), "
           f"référence {r['repere'] * 100:.0f} %)")
     print("  parts : " + "  ".join(f"{x * 100:.0f} %" for x in r["parts"]))

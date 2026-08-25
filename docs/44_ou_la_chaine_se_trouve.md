@@ -694,9 +694,11 @@ peut tenir un pas parfait en marchant droit hors du papyrus.
 > et un pas au dixième de micromètre — et n'ont plus que 35 % de leurs points sur du papyrus
 > dès 768 µm.
 >
-> ⚠ **Pire pour la chaîne : à 1 920 µm, UN grand bond garde plus de matière que vingt petits**
-> (46,1 % contre 35,4 %) — l'inverse de ce qui se passe à 286 µm, où la chaîne gagne. **Il y a
-> donc un croisement**, et il est ici sur le registre plutôt qu'écarté.
+> ~~⚠ **Pire pour la chaîne : à 1 920 µm, UN grand bond garde plus de matière que vingt
+> petits** (46,1 % contre 35,4 %) — il y a donc un croisement.~~
+> *(⚠⚠ **CORRIGÉ par le plancher, ci-dessous** : les deux sont au niveau du hasard, +1,6 et
+> −1,7 points. Ce n'était pas un croisement, c'était deux mesures mortes comparées sur une
+> échelle brute.)*
 
 ⚠⚠ **Et un chiffre manquait sous tous ces pourcentages.** Une nappe posée **n'importe où** dans
 un volume dont un quart des voxels est de la matière trouve forcément quelque chose sous une
@@ -723,6 +725,36 @@ en bloc dans une direction tirée au sort, plusieurs fois. Forme, densité de po
 locale de matière n'est pas la même aux deux endroits. C'est pour ça que le plancher se mesure
 **par maillage** et jamais une fois pour toutes : un plancher global aurait déclaré la chaîne
 « au-dessus du hasard » en lui appliquant la densité d'un autre quartier du rouleau.
+
+#### ⭐⭐⭐ La campagne complète, et elle CORRIGE une conclusion que je venais de publier
+
+![Le contact avec la matière, avec le plancher du hasard mesuré à chaque distance](images/44_plancher_du_hasard.png)
+
+| parcouru | posé | plancher | **avantage sur le hasard** |
+|---:|---:|---:|---:|
+| source publiée | 78,9 % | 48,4 % | ⭐ **+30,6** |
+| 288 µm | 78,9 % | 48,4 % | ⭐ **+30,5** |
+| 480 µm | 71,5 % | 47,4 % | ⭐ **+24,1** |
+| **768 µm** | 39,7 % | 38,2 % | ⚠⚠ **+1,5** |
+| 1 920 µm | 35,4 % | 37,1 % | ⚠⚠ **−1,7** |
+| **bond direct, 1 920 µm** | 46,1 % | **44,5 %** | ⚠⚠ **+1,6** |
+
+> ⚠⚠⚠ **CORRECTION d'une conclusion publiée une heure plus tôt.** J'avais écrit qu'à 1 920 µm
+> « un seul bond garde plus de matière que vingt maillons » — 46,1 % contre 35,4 % — et j'en
+> avais tiré un **croisement**. Lus contre leurs propres planchers, les deux sont **au niveau
+> du hasard** : **+1,6** et **−1,7** points. Il n'y a pas de croisement, il y a **deux mesures
+> mortes comparées sur une échelle brute**. L'avantage apparent du bond s'explique entièrement
+> par le fait qu'il atterrit dans une région plus dense (plancher 44,5 contre 37,1).
+>
+> ⭐ **C'est exactement ce que le plancher a été construit pour attraper**, et il l'a attrapé
+> sur ma propre conclusion.
+
+⭐ **Où la chaîne meurt, maintenant borné** : franchement vivante à **480 µm** (+24,1 points),
+**au niveau du hasard à 768** (+1,5). La frontière est entre les deux — et sur la figure, la
+courbe verte **rejoint la courbe du plancher** exactement là.
+
+⚠ Le plancher lui-même descend le long de la chaîne (48,4 → 47,4 → 38,2 → 37,1) : elle dérive
+vers une région moins dense. Un plancher unique l'aurait masqué.
 
 #### ⭐⭐⭐ Et le remède n'est PAS spéculatif : il est mesuré ailleurs, à 2,4 mm
 
