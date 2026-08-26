@@ -30,21 +30,21 @@ uv run python src/figures/figure_plafond.py     --anglais --sortie "$FIG/35_plaf
 uv run python src/figures/figure_graines.py     --anglais --sortie "$FIG/25_campagne_graines.png"
 uv run python src/figures/figure_segments.py    --anglais --sortie "$FIG/44_ecarts_segments.png"
 uv run python src/figures/figure_temoin_negatif.py --anglais \
-    --json "$ROOT/docs/temoin_negatif.json" \
+    --json "$ROOT/docs/mesures/temoin_negatif.json" \
     --positif "$ROOT/data/temoin_negatif/sur_sa_feuille.npy" \
     --negatif "$ROOT/data/temoin_negatif/en_travers.npy" \
     --sortie "$FIG/46_temoin_negatif.png"
 uv run python src/figures/figure_candidats.py --anglais \
-    --json "$ROOT/docs/paris4_candidats.json" --sortie "$FIG/48_candidats.png"
+    --json "$ROOT/docs/mesures/paris4_candidats.json" --sortie "$FIG/48_candidats.png"
 uv run python src/figures/figure_deux_pannes.py --anglais \
-    --json "$ROOT/docs/audit_profils.json" --sortie "$FIG/49_deux_pannes.png"
+    --json "$ROOT/docs/mesures/audit_profils.json" --sortie "$FIG/49_deux_pannes.png"
 uv run python src/figures/figure_derive_profondeur.py --anglais \
-    --json "$ROOT/docs/derive_profondeur.json" --docs "$ROOT/docs" \
+    --json "$ROOT/docs/mesures/derive_profondeur.json" --docs "$ROOT/docs/mesures" \
     --sortie "$FIG/47_derive_profondeur.png"
 uv run python src/figures/figure_appuis.py --anglais \
-    --json "$ROOT/docs/appui_de_pente.json" --sortie "$FIG/51_appuis.png"
+    --json "$ROOT/docs/mesures/appui_de_pente.json" --sortie "$FIG/51_appuis.png"
 uv run python src/figures/figure_contraste.py --anglais \
-    --json "$ROOT/docs/appui_de_pente.json" --sortie "$FIG/51_contraste.png"
+    --json "$ROOT/docs/mesures/appui_de_pente.json" --sortie "$FIG/51_contraste.png"
 # ⚠ Celle-ci est DEJA en anglais : elle a ete ecrite pour l'article, donc elle n'a pas de
 # table de traduction — la traduire serait traduire vers sa propre langue.
 uv run python src/figures/figure_typographie.py           --sortie "$FIG/45_typographie.png"

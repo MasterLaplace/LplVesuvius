@@ -62,7 +62,7 @@ def choisir(table: dict, propres: int, temoins: int, racine: Path) -> list[dict]
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--table", type=Path, default=RACINE / "docs/table_tirages.json")
+    ap.add_argument("--table", type=Path, default=RACINE / "docs/mesures/table_tirages.json")
     ap.add_argument("--propres", type=int, default=2,
                     help="tirages propres a rendre par rouleau qui bascule")
     ap.add_argument("--temoins", type=int, default=2,

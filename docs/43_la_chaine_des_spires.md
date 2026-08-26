@@ -2,7 +2,7 @@
 
 2026-08-21. Reproductible : `./src/outils/lancer.sh --fond src/outils/spire_suivante.sh`.
 Dépouillement : `src/tables/table_chaine.py` (7 témoins).
-Verdicts : `docs/spire_spire0*.json`, table : `docs/chaine_spires.json`.
+Verdicts : `docs/spire_spire0*.json`, table : `docs/mesures/chaine_spires.json`.
 
 ---
 
@@ -582,12 +582,12 @@ la moitié de la surface part en quatre tours.
 
 ```bash
 ./src/outils/lancer.sh --fond src/outils/spire_suivante.sh "$PWD/data/spires" 6
-python3 src/tables/table_chaine.py data/spires --voxel-um 8.64 --json docs/chaine_spires.json
+python3 src/tables/table_chaine.py data/spires --voxel-um 8.64 --json docs/mesures/chaine_spires.json
 
 (cd experiments && uv run python ../src/commun/test_convergence.py \
-  --depuis "../docs/spire_spire00.json=spire 0 (segment officiel)" \
-  --depuis "../docs/spire_spire01.json=spire 1" \
-  --json ../docs/chaine_convergence.json)    # … une ligne par spire
+  --depuis "../docs/mesures/spire_spire00.json=spire 0 (segment officiel)" \
+  --depuis "../docs/mesures/spire_spire01.json=spire 1" \
+  --json ../docs/mesures/chaine_convergence.json)    # … une ligne par spire
 uv run python src/figures/figure_convergence.py \
-  --entree docs/chaine_convergence.json --sortie docs/images/43_chaine_spires.png
+  --entree docs/mesures/chaine_convergence.json --sortie docs/images/43_chaine_spires.png
 ```

@@ -24,7 +24,7 @@ seulement comme l'absence de la preuve qu'il y en a un.
 
 Usage :
     uv run python src/encre/comparer_cartes.py \\
-        docs/carte_separabilite docs/carte_separabilite_dense --json docs/comparaison_cartes.json
+        docs/carte_separabilite docs/carte_separabilite_dense --json docs/mesures/comparaison_cartes.json
 """
 from __future__ import annotations
 

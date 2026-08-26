@@ -17,7 +17,7 @@ les deux choses que `deplacer.py` ne peut pas savoir :
 
   ⭐⭐ 2. Qu'aucun ÉCRIVAIN ne vise encore l'ancien endroit. C'est le danger que ce fichier
        existe pour écarter, et il est pire qu'une citation pendante : une citation morte se
-       voit, alors qu'un script qui recrée `docs/x.json` après le rangement produit **deux
+       voit, alors qu'un script qui recrée `docs/<nom>.json` après le rangement produit **deux
        fichiers pour une mesure**, dont un périmé, sans le moindre symptôme. C'est « deux
        réponses à une question », le motif que ce dépôt paie en boucle.
 
@@ -57,13 +57,27 @@ d'une mesure d'usage : `.json` et `.txt` sont cités comme des résultats (81 ci
 `.log` ne l'est jamais (0). Le jour où un `.log` est cité, c'est la classification qui a tort,
 et `journaux_cites()` le dit."""
 
-REGISTRES = ("murs_et_causes.tsv", "verbes.json")
+REGISTRES = ("murs_et_causes.tsv",)
 """Les fichiers de `docs/` qu'un HUMAIN maintient, et qu'aucune campagne ne réécrit.
 
-⚠⚠ Les nommer plutôt que les dériver est un choix, parce qu'ils sont deux : une dérivation
-« ce que personne n'écrit » serait plus de code, plus fragile, et fausse le jour où un tel
-fichier n'est simplement lu par rien encore. Mais le nommage se VÉRIFIE — `verifier()` échoue
-si l'un d'eux devient une cible d'écriture, c'est-à-dire cesse d'être un registre."""
+⚠⚠ Les nommer plutôt que les dériver est un choix : ils sont peu nombreux, et une dérivation
+« ce que personne n'écrit » serait plus de code et fausse le jour où un fichier n'est
+simplement lu par rien encore. Mais le nommage se VÉRIFIE — `registres_ecrits()` cherche les
+formes d'écriture et `verifier()` échoue si l'un d'eux en est la cible, c'est-à-dire a cessé
+d'être un registre.
+
+⚠ Et c'est ce contrôle qui a corrigé ma première liste : j'y avais mis `verbes.json`, qui est
+lu par `lplv` comme une entrée — mais qui est PRODUIT par `./lplv --verbes --json`. Un
+fichier lu comme une entrée n'est pas pour autant maintenu à la main, et le classer en
+registre l'aurait mis hors de portée d'une purge de sorties alors que c'en est une. La
+promesse de vérification était écrite dans cette docstring et le contrôle n'existait pas :
+c'est exactement ce que ce dépôt appelle une vérification qu'on annonce sans l'écrire."""
+
+MESURE_TEMOIN, JOURNAL_TEMOIN = "t.json", "c.log"
+"""⚠ Les noms des fixtures, gardés en constantes pour que le mot « docs/ » ne soit
+jamais suivi d'un nom de fichier en clair dans ce module. Sans ça, ce fichier est sa
+propre première alerte : `mentions_a_lancien_endroit()` trouve ses exemples et les
+rapporte comme des chemins à réparer, ce qui apprend à ne plus lire le rapport."""
 
 DOC_TEMOIN = "31_roadmap.md"
 """⚠ Un nom de document RÉEL, gardé dans une constante pour la même raison que `REGISTRES` :
@@ -122,7 +136,7 @@ def mentions_a_lancien_endroit(racine: Path = RACINE) -> list[tuple[str, str]]:
     dépôt se retrouve avec **deux fichiers pour une mesure**, l'un frais et l'autre mort,
     sans qu'aucune sortie ne change.
 
-    ⚠ Il cherche la FORME textuelle `docs/x.json`. Un chemin assemblé à l'exécution
+    ⚠ Il cherche la FORME textuelle d'un chemin sous `docs/`. Un chemin assemblé à l'exécution
     (`racine / "docs" / nom`) lui échappe par construction — c'est `deplacer.construits()`
     qui nomme cette classe-là, et `verifier_chiffres.DOSSIER_MESURES` qui l'a supprimée là
     où elle comptait le plus.
@@ -141,6 +155,78 @@ def mentions_a_lancien_endroit(racine: Path = RACINE) -> list[tuple[str, str]]:
             ligne = texte[:m.start()].count("\n") + 1
             trouves.append((f"{f.relative_to(racine)}:{ligne}", m.group(1)))
     return trouves
+
+
+def _est_une_redirection(ligne: str, position: int) -> bool:
+    """Ce `>` est-il une redirection shell, ou une citation Markdown ?
+
+    ⚠⚠ Les deux s'écrivent `>` et rien d'autre ne les distingue que ce qui les précède. Une
+    citation commence la ligne — éventuellement après une indentation, et éventuellement
+    après un guillemet, parce que la prose Markdown de ce dépôt vit aussi dans des chaînes
+    Python. Deux faux positifs mesurés avant cette règle, tous deux sur la ligne qui explique
+    justement qu'un document est RENDU.
+    """
+    avant = ligne[:position].lstrip().lstrip("\"'`")
+    return avant.strip() != ""
+
+
+def registres_ecrits(racine: Path = RACINE) -> list[tuple[str, str]]:
+    """Les endroits qui écrivent un fichier nommé dans `REGISTRES` — donc qui le produisent.
+
+    ⚠ Un registre produit n'est pas un registre : il doit redevenir une mesure, sinon une
+    purge des sorties l'épargnera à tort et il vieillira sans que rien ne le dise.
+    """
+    import re
+
+    noms = "|".join(re.escape(n) for n in REGISTRES)
+    par_drapeau = re.compile(rf"(?:--json|--sortie|--out)\s+[\"']?[^\"'\s]*({noms})")
+    par_ecriture = re.compile(rf"write_text\(\s*[\"']?[^\"'\s]*({noms})")
+    par_redirection = re.compile(rf"(>)\s*[\"']?[^\"'\s]*({noms})")
+    trouves = []
+    for f in _textes(racine):
+        try:
+            texte = f.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        for num, ligne in enumerate(texte.splitlines(), 1):
+            for motif in (par_drapeau, par_ecriture):
+                for m in motif.finditer(ligne):
+                    trouves.append((f"{f.relative_to(racine)}:{num}", m.group(1)))
+            for m in par_redirection.finditer(ligne):
+                if _est_une_redirection(ligne, m.start(1)):
+                    trouves.append((f"{f.relative_to(racine)}:{num}", m.group(2)))
+    return trouves
+
+
+def _ignores(racine: Path, chemins: list[str]) -> set[str]:
+    """Ceux de ces chemins que git ignore. ⚠ `check-ignore` juge un CHEMIN, pas un fichier :
+    il répond donc aussi pour une destination qui n'existe pas encore, ce qui est exactement
+    ce qu'il faut pour décider AVANT de déplacer."""
+    import subprocess
+
+    if not chemins:
+        return set()
+    r = subprocess.run(["git", "-C", str(racine), "check-ignore", "--stdin"],
+                       input="\n".join(chemins), capture_output=True, text=True)
+    return set(r.stdout.splitlines())
+
+
+def ignores_rompus(racine: Path = RACINE, plan: dict[str, str] | None = None) -> list[str]:
+    """Les fichiers aujourd'hui IGNORÉS dont la destination ne le serait plus.
+
+    ⚠⚠ C'est la panne silencieuse du rangement, et elle va dans le sens le plus coûteux :
+    `.gitignore` dit `/docs/*.log`, une règle ANCRÉE à la racine de `docs/`. Déplacer les 79
+    journaux vers `docs/journaux/` les fait sortir de la règle, donc **entrer dans le dépôt**
+    — 79 traces de run versionnées sans que personne ne l'ait demandé, et sans le moindre
+    message. Un fichier ignoré avant doit rester ignoré après ; sinon c'est `.gitignore` qu'il
+    faut changer, pas le plan.
+    """
+    plan = carte(racine) if plan is None else plan
+    avant = _ignores(racine, sorted(plan))
+    if not avant:
+        return []
+    apres = _ignores(racine, [f"{plan[a]}/{Path(a).name}" for a in sorted(avant)])
+    return sorted(a for a in avant if f"{plan[a]}/{Path(a).name}" not in apres)
 
 
 def journaux_cites(racine: Path = RACINE) -> list[str]:
@@ -210,7 +296,7 @@ def verifier() -> int:
     # table le classerait en mesure, donc une purge des sorties emporterait un fichier
     # maintenu a la main. C est la seule raison d avoir deux natures produites differemment.
     v("un registre bat son extension", nature("murs_et_causes.tsv") == REGISTRE)
-    v("... et l autre aussi", nature("verbes.json") == REGISTRE)
+    v("... et un fichier PRODUIT n en est pas un", nature("verbes.json") == MESURE)
     v("une extension inconnue n est pas classee", nature("x.bin") is None)
     v("... donc elle ne bouge pas", not a_deplacer(nature("x.bin")))
     v("un document ne bouge pas non plus", not a_deplacer(DOCUMENT))
@@ -227,13 +313,15 @@ def verifier() -> int:
         # `deplacer.py`, qui le reecrirait en rangeant -- et mangerait la fixture de sa
         # propre batterie, ce que ce depot a deja paye une fois.
         registre = REGISTRES[0]
-        for nom in (DOC_TEMOIN, "README.md", "t.json", "c.log", registre, "x.bin"):
+        for nom in (DOC_TEMOIN, "README.md", MESURE_TEMOIN, JOURNAL_TEMOIN, registre,
+                    "x.bin"):
             (r / "docs" / nom).write_text("x", encoding="utf-8")
         (r / "docs" / "champ_PHerc0172").mkdir()
         (r / "docs" / "champ_PHerc0172" / "dedans.json").write_text("x", encoding="utf-8")
         c = carte(r)
-        v("la carte prend la mesure", c.get("docs/t.json") == "docs/mesures", str(c))
-        v("... le journal", c.get("docs/c.log") == "docs/journaux")
+        v("la carte prend la mesure", c.get(f"docs/{MESURE_TEMOIN}") == "docs/mesures",
+          str(c))
+        v("... le journal", c.get(f"docs/{JOURNAL_TEMOIN}") == "docs/journaux")
         v("... le registre", c.get(f"docs/{registre}") == "docs/registres")
         v("... et laisse le document", f"docs/{DOC_TEMOIN}" not in c)
         v("... et le README", "docs/README.md" not in c)
@@ -248,17 +336,75 @@ def verifier() -> int:
 
         # La sonde : un script qui vise encore l ancien endroit doit ressortir. C est le
         # cas le PIRE -- un ecrivain non repare recree le fichier a cote du fichier range.
-        (r / "campagne.sh").write_text("lplv mesurer --sortie docs/t.json\n", encoding="utf-8")
+        (r / "campagne.sh").write_text(f"lplv mesurer --sortie docs/{MESURE_TEMOIN}\n",
+                                      encoding="utf-8")
         e = mentions_a_lancien_endroit(r)
         v("un chemin vers l ancien endroit est nomme", any("campagne.sh" in a for a, _ in e),
           str(e))
-        v("... avec le fichier qu il vise", any(b == "t.json" for _, b in e), str(e))
-        (r / "campagne.sh").write_text("lplv mesurer --sortie docs/mesures/t.json\n",
-                                       encoding="utf-8")
+        v("... avec le fichier qu il vise", any(b == MESURE_TEMOIN for _, b in e), str(e))
+        (r / "campagne.sh").write_text(
+            f"lplv mesurer --sortie {DESTINATIONS[MESURE]}/{MESURE_TEMOIN}\n", encoding="utf-8")
         v("... et repare, il se tait", mentions_a_lancien_endroit(r) == [], str(mentions_a_lancien_endroit(r)))
+        # ⚠⚠ La promesse de la docstring de REGISTRES, EXECUTEE : un registre qu un script
+        # produit a cesse d en etre un. C est ce controle qui a sorti `verbes.json` de la
+        # liste -- il est lu comme une entree et pourtant produit par `lplv --verbes`.
+        (r / "produit.sh").write_text(f"lplv recenser --json docs/{registre}\n",
+                                      encoding="utf-8")
+        v("un registre qu on ECRIT est nomme",
+          any("produit.sh" in a for a, _ in registres_ecrits(r)), str(registres_ecrits(r)))
+        (r / "produit.sh").write_text(f"lplv recenser > docs/{registre}\n", encoding="utf-8")
+        v("... par redirection aussi",
+          any("produit.sh" in a for a, _ in registres_ecrits(r)), str(registres_ecrits(r)))
+        # ⚠ Et la citation Markdown qui s ecrit avec le meme caractere ne compte pas, meme
+        # quand elle vit dans une chaine Python -- c est la forme exacte des deux faux
+        # positifs mesures.
+        (r / "prose.md").write_text(f"> [`docs/{registre}`]({registre}) est la source\n",
+                                    encoding="utf-8")
+        (r / "dans_du_code.py").write_text(f'    "> [`docs/{registre}`]({registre}) rendu",\n',
+                                           encoding="utf-8")
+        v("... mais une citation Markdown n est pas une redirection",
+          not any("prose.md" in a or "dans_du_code.py" in a for a, _ in registres_ecrits(r)),
+          str(registres_ecrits(r)))
+        (r / "prose.md").unlink()
+        (r / "dans_du_code.py").unlink()
+        (r / "produit.sh").write_text(f"lplv lire {registre}\n", encoding="utf-8")
+        v("... et une simple LECTURE ne l est pas", registres_ecrits(r) == [],
+          str(registres_ecrits(r)))
+        (r / "produit.sh").unlink()
+        v("aucun registre de ce depot n est produit par un script",
+          registres_ecrits(RACINE) == [], str(registres_ecrits(RACINE)))
+
+        # ⚠⚠ La regle gitignore ANCREE : c est la panne silencieuse du rangement, et elle
+        # va dans le sens le plus couteux -- des traces de run qui ENTRENT dans le depot.
+        import subprocess as _sp
+        _sp.run(["git", "-C", str(r), "init", "-q"], capture_output=True)
+        (r / ".gitignore").write_text("/docs/*.log\n", encoding="utf-8")
+        v("un ignore que le deplacement romprait est nomme",
+          ignores_rompus(r) == [f"docs/{JOURNAL_TEMOIN}"], str(ignores_rompus(r)))
+        (r / ".gitignore").write_text("/docs/*.log\n/docs/journaux/\n", encoding="utf-8")
+        v("... et la regle reparee, il se tait", ignores_rompus(r) == [],
+          str(ignores_rompus(r)))
+        v("aucun ignore de ce depot ne serait rompu", ignores_rompus(RACINE) == [],
+          str(ignores_rompus(RACINE)[:3]))
+
         # ⚠ Un `.md` n est PAS un ecrivain a reparer : les documents ne demenagent pas.
         (r / "d.md").write_text(f"voir docs/{DOC_TEMOIN}\n", encoding="utf-8")
         v("... et un chemin de document ne compte pas", mentions_a_lancien_endroit(r) == [])
+
+    # ⚠⚠ Les deux controles qui portent sur CE depot, et pas sur une fixture. Le premier
+    # est celui qui empeche le rangement de se defaire : un script qui recrée une mesure a la
+    # racine de `docs/` produit un second fichier a cote du fichier range, l un frais et
+    # l autre mort, sans qu aucune sortie ne change.
+    restes = sorted(f.name for f in (RACINE / "docs").iterdir()
+                    if f.is_file() and a_deplacer(nature(f.name)))
+    v("aucune mesure ni journal ne traine a la racine de docs/", restes == [],
+      ", ".join(restes[:5]))
+    # ⚠ Les traces sont exclues NOMMEMENT : un chemin ecrit dans un resultat ou un journal
+    # enregistre ce qui a tourne ce jour-la, et le reecrire falsifierait la mesure.
+    dus = [(a, b) for a, b in mentions_a_lancien_endroit(RACINE)
+           if not a.startswith((DESTINATIONS[MESURE] + "/", DESTINATIONS[JOURNAL] + "/"))]
+    v("aucun script ne nomme encore l ancien endroit", dus == [],
+      ", ".join(f"{a} ({b})" for a, b in dus[:3]))
 
     if echecs:
         print(f"\nECHEC ({echecs} failures, {controles} checks)")

@@ -32,7 +32,7 @@ sautes : ce sont deux grandeurs differentes, et les confondre serait la faute qu
 depot traque. Le script imprime la confrontation, en disant qu'elle est indicative.
 
 Usage :
-    uv run python src/commun/incertitude_carte.py [--json docs/incertitude_carte.json]
+    uv run python src/commun/incertitude_carte.py [--json docs/mesures/incertitude_carte.json]
 """
 from __future__ import annotations
 

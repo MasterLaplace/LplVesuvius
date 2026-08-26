@@ -159,7 +159,7 @@ traite pareil, et c'est assumé.
 | coût | **36 requêtes** par segment, ~2,6 s à 16 fils, **avant** l'inférence |
 
 ⚠ **Trois nombres circulent dans ce document pour des grandeurs voisines** — **36**
-requêtes/fenêtres, **50** (`sondees` dans `docs/profondeur_corpus_2.4um.json`), et **72**
+requêtes/fenêtres, **50** (`sondees` dans `docs/mesures/profondeur_corpus_2.4um.json`), et **72**
 (le treillis 6 × 12 de la campagne **fibres**). Ils ne décrivent pas la même chose, et le
 document ne le dit nulle part. ⏳ À démêler en une passe :
 `src/graine/compter_corpus.py` donne les comptes réels par artefact.
@@ -173,10 +173,10 @@ réparation est la voie J du batch (`18`), et son outil existe déjà.
 ```bash
 cd inference_xpu
 uv run python ../src/encre/croiser_encre.py \
-    ../docs/profondeur_corpus_2.4um.json ../data/encre/PHercParis4 \
+    ../docs/mesures/profondeur_corpus_2.4um.json ../data/encre/PHercParis4 \
     --grandeur avec_matiere --sens bas \
     --parts 0.05 0.10 0.15 0.20 0.25 0.30 0.40 0.50 \
-    --out ../docs/decision_avec_matiere.json
+    --out ../docs/mesures/decision_avec_matiere.json
 ```
 
 ⚠ `--depuis <rapport.json>` reprend un rapport déjà écrit au lieu de relire les images :

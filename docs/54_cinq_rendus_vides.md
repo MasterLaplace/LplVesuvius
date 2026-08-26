@@ -38,7 +38,7 @@ directe des pixels, une couche sur vingt, sur les huit candidats :
 **Les cinq piles `m7` sont entièrement noires.** Aucun pixel allumé, sur aucune couche.
 
 ⚠ Le coup d'œil est devenu une mesure : `src/nappe/matiere_des_piles.py`, sortie dans
-`docs/matiere_des_piles.json`. La question qu'il pose est **binaire et sans seuil** — le
+`docs/mesures/matiere_des_piles.json`. La question qu'il pose est **binaire et sans seuil** — le
 maximum de la pile est-il strictement positif — parce qu'un pixel à zéro n'a pas de matière
 par définition du format. La part allumée est **rapportée à côté** : « il y a de la matière »
 et « la pile est copieusement remplie » sont deux faits différents.
@@ -339,7 +339,7 @@ avec, maintenant, un préalable écrit : *sonder la graine avant de payer le tra
 ![Où commence la matière sous chaque graine](images/54_graines_endroit.png)
 
 ```bash
-./src/campagnes/campagne_graines_endroit.sh      # → docs/graines_endroit.json
+./src/campagnes/campagne_graines_endroit.sh      # → docs/mesures/graines_endroit.json
 uv run python src/figures/figure_graine_endroit.py
 ```
 
@@ -511,14 +511,14 @@ uv run --project . python src/nappe/niveau_du_maillage.py \
 # l'audit du depot entier : 322 piles, une couche sur quarante
 find data -maxdepth 4 -type d -name "rendu*" | sort > /tmp/piles.txt
 uv run --project . python src/nappe/matiere_des_piles.py $(cat /tmp/piles.txt) \
-    --pas 40 --json docs/matiere_des_piles_toutes.json
+    --pas 40 --json docs/mesures/matiere_des_piles_toutes.json
 
 # la figure des trois vignettes
 uv run --project . python src/figures/figure_piles_vides.py \
     --vide data/paris4_candidats/m7_c0/rendu_161 \
     --rebase data/temoin_rendu/m7_c0_g2/rendu \
     --temoin data/paris4_candidats/ps256_c0/rendu_161 \
-    --sortie docs/images/54_piles_vides.png --json docs/figure_piles_vides.json
+    --sortie docs/images/54_piles_vides.png --json docs/mesures/figure_piles_vides.json
 
 # la tuile de reference publiee, puis la figure feuille-ou-tranche
 uv run --project . python src/volume/tuile_surface_publiee.py \
@@ -530,7 +530,7 @@ uv run --project . python src/figures/figure_feuille_ou_tranche.py \
                  data/temoin_rendu/m7_c0_lisible/rendu \
     --noms ps256_c0 m7_c0 --reliefs 0.7912 0.8726 0.1978 0.1589 \
     --sortie docs/images/54_feuille_ou_tranche.png \
-    --json docs/figure_feuille_ou_tranche.json
+    --json docs/mesures/figure_feuille_ou_tranche.json
 
 # les temoins, hors ligne
 uv run --project . python src/nappe/niveau_du_maillage.py --verifier

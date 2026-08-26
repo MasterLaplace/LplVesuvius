@@ -195,7 +195,7 @@ def aide(verbes: list[Verbe], racine: Path = RACINE) -> str:
     return "\n".join(lignes)
 
 
-RECENSEMENT = RACINE / "docs/verbes.json"
+RECENSEMENT = RACINE / "docs/mesures/verbes.json"
 """Le recensement produit par `lplv --verbes --json`. ⚠ Il n'est PAS la source de vérité des
 verbes -- le système de fichiers l'est -- il sert uniquement à distinguer « inconnu » de
 « absent de ce palier », ce qu'un arbre allégé ne peut pas savoir tout seul."""

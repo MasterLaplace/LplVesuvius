@@ -141,7 +141,7 @@ domaine au moins une fois dans ce dépôt.
 | le « 240 → 0 » de `24` **ne réplique pas** | zéro auto-intersection des deux côtés sur 12 rouleaux | `25` · `21`:204 |
 | la métrique de proximité a un **domaine de définition** | > 1 tour de couverture | `07` §7 · `HANDOFF`:401 |
 | sur Scroll 4, **rien n'est lisible, et la cause est en amont du modèle** | 61 % des pics au bord de la pile | `09` §12 · `12` · `HANDOFF`:237, 257 |
-| l'inventaire des treize : **dix** sans segment, pas treize | `docs/etat_rouleaux_prix.txt` | `23` §1 |
+| l'inventaire des treize : **dix** sans segment, pas treize | `docs/mesures/etat_rouleaux_prix.txt` | `23` §1 |
 | ⭐ **la trajectoire ne répond qu'à `step_size` et à la prédiction** | trois négatifs mesurés, contrôle positif | `26` |
 | ⭐ **`step_size` a un PLANCHER : ≥ 20** | un pas de 5 rend ~800 croisements/cm² **sur les deux graines** ; au-delà de 20 c'est propre sur deux graines **et** deux tirages ; entre les deux (10, 15) le résultat **se contredit avec lui-même** | `26` §9 |
 | ⚠⚠ **un compte de croisements n'est pas comparable entre deux pas** | le même maillage, décimé sans que sa géométrie change, passe de 240 à 123, 72, 49. « Zéro au pas 40 » vaut donc moins que « zéro au pas 20 » | `34` §3 |

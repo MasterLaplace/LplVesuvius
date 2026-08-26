@@ -78,5 +78,5 @@ python3 -c "
 import json
 lignes = json.loads('[' + '''${LIGNES%,}''' + ']')
 json.dump({'maillage': '$MESH', 'step_size': $PAS, 'lignes': lignes},
-          open('$ROOT/docs/sensibilite_maillage.json', 'w'), indent=2)
-print('écrit : docs/sensibilite_maillage.json')"
+          open('$ROOT/docs/mesures/sensibilite_maillage.json', 'w'), indent=2)
+print('écrit : docs/mesures/sensibilite_maillage.json')"

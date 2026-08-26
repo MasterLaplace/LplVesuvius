@@ -22,7 +22,7 @@ chose.
 
 Usage :
     uv run python src/figures/figure_typographie.py \\
-        --entree docs/typographie.json --sortie docs/images/45_typographie.png
+        --entree docs/mesures/typographie.json --sortie docs/images/45_typographie.png
 """
 from __future__ import annotations
 
@@ -114,7 +114,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     racine = Path(__file__).resolve().parents[2]
-    ap.add_argument("--entree", type=Path, default=racine / "docs/typographie.json")
+    ap.add_argument("--entree", type=Path, default=racine / "docs/mesures/typographie.json")
     ap.add_argument("--sortie", type=Path,
                     default=racine / "docs/images/45_typographie.png")
     ap.add_argument("--verifier", action="store_true")

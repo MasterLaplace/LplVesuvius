@@ -546,7 +546,7 @@ uv run python src/infer_ink.py ../data/layers/scroll4_20231111135340 \
 uv run python ../src/encre/judge_api.py ../data/out/ink_scroll4.npy --bands-only
 set -a && . ../.env && set +a
 uv run python ../src/encre/judge_api.py ../data/out/ink_scroll4.npy --auto-bands \
-    --blank-ceiling 0.05 --model gemini-3.5-flash --trials 1 --out ../docs/juge_scroll4.json
+    --blank-ceiling 0.05 --model gemini-3.5-flash --trials 1 --out ../docs/mesures/juge_scroll4.json
 ```
 
 ## Reproduire

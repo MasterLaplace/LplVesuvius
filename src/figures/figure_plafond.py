@@ -24,7 +24,7 @@ croire que seul l'étalement change.
 
 Usage :
     uv run python src/figures/figure_plafond.py \\
-        --origine docs/table_tirages.json --releve docs/table_tirages_plafond.json \\
+        --origine docs/mesures/table_tirages.json --releve docs/mesures/table_tirages_plafond.json \\
         --sortie docs/images/35_plafond.png
 """
 from __future__ import annotations
@@ -165,9 +165,9 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     racine = Path(__file__).resolve().parents[2]
-    ap.add_argument("--origine", type=Path, default=racine / "docs/table_tirages.json")
+    ap.add_argument("--origine", type=Path, default=racine / "docs/mesures/table_tirages.json")
     ap.add_argument("--releve", type=Path,
-                    default=racine / "docs/table_tirages_plafond.json")
+                    default=racine / "docs/mesures/table_tirages_plafond.json")
     ap.add_argument("--sortie", type=Path, default=racine / "docs/images/35_plafond.png")
     ap.add_argument("--verifier", action="store_true")
     ap.add_argument("--anglais", action="store_true",

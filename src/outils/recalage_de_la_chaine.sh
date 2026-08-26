@@ -75,7 +75,7 @@ PORTEE="${PORTEE:-4}"
 PLANCHER="${PLANCHER:-}"
 TIRAGES="${TIRAGES:-3}"
 SPIRE="${SPIRE:-173}"
-JSON="${JSON:-$ROOT/docs/recalage_de_la_chaine.json}"
+JSON="${JSON:-$ROOT/docs/mesures/recalage_de_la_chaine.json}"
 [ "$#" -gt 0 ] || { echo "usage : … src/outils/recalage_de_la_chaine.sh <tifxyz>..." >&2; exit 2; }
 
 # ⚠⚠ `hors boîte` EST UNE COLONNE, pas un détail. « Le rouleau n a pas de matière là » et

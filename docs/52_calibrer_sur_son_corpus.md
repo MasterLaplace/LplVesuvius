@@ -8,7 +8,7 @@ produit. Aucune des trois fois n'a été trouvée en relisant.
 
 Instruments : [`src/graine/calibration_corpus.py`](../src/graine/calibration_corpus.py)
 (11 témoins) et [`figure_calibration.py`](../src/figures/figure_calibration.py)
-(13 témoins). Données : [`docs/balayage_scroll1.csv`](balayage_scroll1.csv), 81 segments.
+(13 témoins). Données : [`docs/mesures/balayage_scroll1.csv`](balayage_scroll1.csv), 81 segments.
 
 ---
 
@@ -182,24 +182,24 @@ sans rien signaler.
 
 ```bash
 uv run python tracecheck/tracecheck.py Scroll1 --all --csv \
-    --voxel-um 2.4 --prefer 2.4um > docs/balayage_scroll1.csv
+    --voxel-um 2.4 --prefer 2.4um > docs/mesures/balayage_scroll1.csv
 
-python3 src/graine/calibration_corpus.py docs/balayage_scroll1.csv \
-    --par-geometrie --json docs/calibration_scroll1.json
+python3 src/graine/calibration_corpus.py docs/mesures/balayage_scroll1.csv \
+    --par-geometrie --json docs/mesures/calibration_scroll1.json
 
 # notre trace, relue A LA GEOMETRIE DU CORPUS, puis situee dedans
 cd inference_xpu && uv run python ../src/volume/depth_profile.py \
     ../data/paris4_candidats/ps256_c0/rendu_161 --grid --size 128 --step 200 \
     --from-layer 26 --to-layer 134 --traced-layer 54 --voxel-um 2.4 --out /tmp/nous_128.json
-python3 src/graine/calibration_corpus.py docs/balayage_scroll1.csv --layers 109 \
-    --situer /tmp/nous_128.json --json docs/situer_notre_trace.json
+python3 src/graine/calibration_corpus.py docs/mesures/balayage_scroll1.csv --layers 109 \
+    --situer /tmp/nous_128.json --json docs/mesures/situer_notre_trace.json
 
 # les huit candidats d'un coup
-CORPUS=docs/balayage_scroll1.csv src/outils/situer_nos_traces.sh \
+CORPUS=docs/mesures/balayage_scroll1.csv src/outils/situer_nos_traces.sh \
     data/paris4_candidats/*/rendu_161
 
 uv run python src/figures/figure_calibration.py \
-    --csv docs/balayage_scroll1.csv --layers 109 \
+    --csv docs/mesures/balayage_scroll1.csv --layers 109 \
     --sortie docs/images/52_calibration.png
 
 # les témoins, hors ligne

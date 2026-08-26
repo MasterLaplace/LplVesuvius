@@ -142,19 +142,48 @@ def tous_les_textes(racine: Path) -> list[Path]:
                     (".png", ".jpg", ".npy", ".zarr", ".tif", ".pdf", ".lock"))
 
 
-def restantes(racine: Path, deplacements: list[Deplacement]) -> list[tuple[str, str]]:
-    """Les citations d'anciens chemins qui subsistent, cherchées PLUS LARGE que la réécriture."""
-    morts = []
+ENREGISTREMENTS = (".json", ".jsonl", ".log", ".csv")
+"""Les fichiers dont le CONTENU est un enregistrement de ce qui a tourné.
+
+⚠⚠ Le chemin qu'un résultat ou un journal contient n'est pas un pointeur à maintenir : c'est
+la trace de la commande lancée ce jour-là. `LUS` les exclut déjà de la réécriture, pour cette
+raison exacte — « réécrire un chemin dans un résultat déjà publié le falsifierait ». Mais
+`restantes()` les comptait comme des citations pendantes, donc l'outil REFUSAIT de laisser
+une citation qu'il avait décidé exprès de ne pas réparer : ses deux moitiés se
+contredisaient, et aucun plan touchant un fichier nommé dans un résultat ne pouvait aboutir.
+Mesuré sur le rangement de `docs/` : 41 fichiers, dont un recensement qui en cite 51.
+
+⚠ L'exclusion ne vide pas le contrôle. Ce qui reste au-delà de `LUS` — `.yaml`, `.tex`,
+`.html`, `.ipynb`, les fichiers sans extension — est toujours PLUS LARGE que ce que la
+réécriture touche, et c'est ce qui empêche `restantes()` d'être vraie par construction.
+"""
+
+
+def _partage(racine: Path, deplacements: list[Deplacement]):
+    """Les citations subsistantes, séparées en (à réparer, traces historiques)."""
+    morts, traces = [], []
     anciens = [d.ancien for d in deplacements]
     for f in tous_les_textes(racine):
         try:
             texte = f.read_text(encoding="utf-8", errors="replace")
         except OSError:
             continue
+        ou = traces if f.suffix in ENREGISTREMENTS else morts
         for a in anciens:
             if citations(texte, a):
-                morts.append((str(f.relative_to(racine)), a))
-    return morts
+                ou.append((str(f.relative_to(racine)), a))
+    return morts, traces
+
+
+def restantes(racine: Path, deplacements: list[Deplacement]) -> list[tuple[str, str]]:
+    """Les citations d'anciens chemins qui subsistent ET qu'il faut réparer, cherchées PLUS
+    LARGE que la réécriture."""
+    return _partage(racine, deplacements)[0]
+
+
+def traces_historiques(racine: Path, deplacements: list[Deplacement]) -> list[tuple[str, str]]:
+    """Les anciens chemins encore nommés dans un résultat ou un journal — à ne PAS réparer."""
+    return _partage(racine, deplacements)[1]
 
 
 def construits(racine: Path, dossiers: set[str]) -> list[tuple[str, str]]:
@@ -211,21 +240,40 @@ def appliquer(racine: Path, deplacements: list[Deplacement], ecrire: bool = Fals
             if ecrire:
                 f.write_text(neuf, encoding="utf-8")
 
-    deplaces = []
+    deplaces, hors_git = [], []
     if ecrire:
+        suivis = set(subprocess.run(["git", "-C", str(racine), "ls-files"],
+                                    capture_output=True, text=True).stdout.splitlines())
         for d in deplacements:
             (racine / d.nouveau).parent.mkdir(parents=True, exist_ok=True)
-            r = subprocess.run(["git", "-C", str(racine), "mv", d.ancien, d.nouveau],
-                               capture_output=True, text=True)
-            if r.returncode != 0:
-                raise RuntimeError(f"git mv {d.ancien} -> {d.nouveau} : {r.stderr.strip()}")
+            if d.ancien in suivis:
+                r = subprocess.run(["git", "-C", str(racine), "mv", d.ancien, d.nouveau],
+                                   capture_output=True, text=True)
+                if r.returncode != 0:
+                    raise RuntimeError(f"git mv {d.ancien} -> {d.nouveau} : {r.stderr.strip()}")
+            else:
+                # ⚠⚠ `git mv` REFUSE un fichier qu'il ne suit pas, et le refus arrive au
+                # milieu du plan : mesuré sur le rangement de `docs/`, 14 fichiers déplacés
+                # puis un arrêt sur le premier `.log`, qui est gitignoré. Un simple `rename`
+                # fait le travail — mais il est COMPTÉ et nommé, parce que « ce fichier n'est
+                # pas versionné » est une information sur le fichier, pas un détail
+                # d'implémentation du déplacement.
+                (racine / d.ancien).rename(racine / d.nouveau)
+                hors_git.append(d.ancien)
             deplaces.append(d.nouveau)
 
     rapport = {"deplacements": len(deplacements), "citations": total,
-               "fichiers_touches": len(touches), "applique": ecrire, "deplaces": len(deplaces)}
+               "fichiers_touches": len(touches), "applique": ecrire, "deplaces": len(deplaces),
+               "hors_git": hors_git}
     if ecrire:
-        morts = restantes(racine, deplacements)
+        morts, traces = _partage(racine, deplacements)
         rapport["citations_pendantes"] = morts
+        # ⚠⚠ Les traces sont dans le RAPPORT, pas dans une exception. Une trace ne peut pas
+        # être réparée par construction — la réécrire falsifierait un résultat publié — donc
+        # en faire un refus produirait un refus que personne ne peut satisfaire, et un plan
+        # légitime deviendrait inapplicable. Mais les taire ferait rendre un rapport serein
+        # à un déplacement incomplet : elles sont donc NOMMÉES, toujours.
+        rapport["traces"] = traces
         if morts:
             raise CitationPendante(
                 f"{len(morts)} citation(s) pendante(s) après application, dont "
@@ -338,13 +386,39 @@ def verifier() -> int:
     subprocess.run(["git", "-C", str(d2), "-c", "user.email=x@y", "-c", "user.name=x",
                     "commit", "-qm", "x"], capture_output=True)
     plan2 = plan_depuis({"analysis/src/c.py": "src/volume"}, d2)
+    # ⚠⚠ Un chemin nomme dans un RESULTAT est une trace de ce qui a tourne, pas un pointeur.
+    # La version d avant en faisait un refus -- donc un refus impossible a satisfaire, puisque
+    # le reparer voudrait dire falsifier un resultat publie. Le rapport le NOMME, et c est ce
+    # qui empeche un deplacement incomplet de rendre un rapport serein.
     try:
-        appliquer(d2, plan2, ecrire=True)
-        v("une citation qu'on ne réécrit PAS fait REFUSER", False)
+        r2 = appliquer(d2, plan2, ecrire=True)
+        v("une citation dans un résultat ne fait PAS refuser", True)
+        v("... mais le rapport la nomme",
+          any("resultat.json" in f for f, _ in r2.get("traces", [])))
+        v("... et elle n'est pas comptée comme pendante", r2["citations_pendantes"] == [])
+    except CitationPendante as e:
+        v("une citation dans un résultat ne fait PAS refuser", False)
+        v("... mais le rapport la nomme", False)
+        v("... et elle n'est pas comptée comme pendante", False)
+    # ⚠ Et une citation dans un fichier qu on NE reecrit pas et qui n est PAS un
+    # enregistrement doit, elle, toujours faire refuser : c est ce qui distingue
+    # « je laisse expres » de « j ai oublie ».
+    d3 = Path(tempfile.mkdtemp())
+    (d3 / "analysis" / "src").mkdir(parents=True)
+    (d3 / "analysis" / "src" / "c.py").write_text("x", encoding="utf-8")
+    (d3 / "config.yaml").write_text("script: analysis/src/c.py\n", encoding="utf-8")
+    subprocess.run(["git", "-C", str(d3), "init", "-q"], capture_output=True)
+    subprocess.run(["git", "-C", str(d3), "add", "-A"], capture_output=True)
+    subprocess.run(["git", "-C", str(d3), "-c", "user.email=x@y", "-c", "user.name=x",
+                    "commit", "-qm", "x"], capture_output=True)
+    try:
+        appliquer(d3, plan_depuis({"analysis/src/c.py": "src/volume"}, d3), ecrire=True)
+        v("une citation dans un fichier non réécrit et non-résultat fait REFUSER", False)
         v("... et le refus la nomme", False)
     except CitationPendante as e:
-        v("une citation qu'on ne réécrit PAS fait REFUSER", True)
-        v("... et le refus la nomme", "docs/resultat.json" in str(e))
+        v("une citation dans un fichier non réécrit et non-résultat fait REFUSER", True)
+        v("... et le refus la nomme", "config.yaml" in str(e))
+    shutil.rmtree(d3, ignore_errors=True)
 
     # ⚠ Un chemin ASSEMBLÉ ne peut pas être réécrit : il est NOMMÉ, jamais tu.
     (d2 / "docs" / "bricole.py").write_text('p = "analysis/src/" + nom + ".py"\n', encoding="utf-8")
@@ -382,6 +456,15 @@ def main() -> int:
         return 3
     print(f"{r['deplacements']} déplacement(s)  ·  {r['citations']} citation(s) dans "
           f"{r['fichiers_touches']} fichier(s)  ·  {avant} fichier(s) citaient un ancien chemin")
+    if r.get("hors_git"):
+        print(f"  ℹ {len(r['hors_git'])} fichier(s) déplacé(s) hors de git — non versionnés, "
+              f"donc `git mv` les refusait")
+    tr = traces_historiques(RACINE, plan)
+    if tr:
+        # ⚠ Le dire, plutôt que de le taire : un chemin laissé en place volontairement et un
+        # chemin oublié se ressemblent exactement dans un `grep`.
+        print(f"  ℹ {len(tr)} chemin(s) laissé(s) tels quels dans un résultat ou un journal — "
+              f"c'est la trace de ce qui a tourné, pas un pointeur à maintenir")
     dossiers = {str(Path(d.ancien).parent) for d in plan}
     for f, dd in construits(RACINE, dossiers):
         print(f"  ⚠ chemin ASSEMBLÉ, non réécrit : {f} ({dd}/…)", file=sys.stderr)

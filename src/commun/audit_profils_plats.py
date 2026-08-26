@@ -29,7 +29,7 @@ n'est **pas soutenu par une mesure** — ce qui est différent, et suffisant pou
 d'un tableau de comptes.
 
 Usage :
-    python3 src/commun/audit_profils_plats.py --racine . --json docs/audit_profils.json
+    python3 src/commun/audit_profils_plats.py --racine . --json docs/mesures/audit_profils.json
     python3 src/commun/audit_profils_plats.py --verifier
 """
 from __future__ import annotations

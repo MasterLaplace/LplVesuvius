@@ -47,7 +47,7 @@ Nos autres instruments jugent une trace contre le volume ; sur un rouleau non tr
 n'ont rien à mesurer.
 
 ⚠⚠ **Corrigé le 2026-08-19 : « aucun » est FAUX.** L'inventaire versionné
-`docs/etat_rouleaux_prix.txt` (produit par `src/outils/etat_rouleaux_prix.sh`, cf `23` §1)
+`docs/mesures/etat_rouleaux_prix.txt` (produit par `src/outils/etat_rouleaux_prix.sh`, cf `23` §1)
 recense **trois** rouleaux du prix avec des segments publiés — **PHerc1447 (16)**,
 **PHerc0800 (6)**, **PHerc1203 (1)**. L'affirmation exacte est **dix sur treize** non
 tracés, dont `PHerc0358`, dont le `segments/` est bien vide.

@@ -55,7 +55,7 @@ Si le producteur n'explique pas les 237,6 µm, alors c'est **le segment**. Et ç
 question que personne n'avait posée : **un segment officiel est-il une référence ?**
 
 Les **quatre** segments de `PHerc1447` qui publient un volume de surface, lus par le même
-instrument (`docs/officiels_PHerc1447.json`) :
+instrument (`docs/mesures/officiels_PHerc1447.json`) :
 
 | segment | fenêtres avec matière | **tiers central** | écart médian |
 |---|---:|---:|---:|
@@ -145,7 +145,7 @@ chaîne**, sur une surface qu'on vient de mesurer à 17 µm de sa feuille :
 `29` marquait M1ter « **avant tout le reste** » : *l'encre est-elle lisible à 9 µm ?* Ce
 rendu permet de le mesurer sur un rouleau du prix, sur une **bonne** surface — le modèle du
 Grand Prize 2023, une fenêtre de 1200 × 1200, 26 couches à partir de la 3ᵉ
-(`docs/m1ter_encre_a_9um.json`) :
+(`docs/mesures/m1ter_encre_a_9um.json`) :
 
 | | étendue de sortie | **σ** |
 |---|---:|---:|
@@ -159,7 +159,7 @@ Grand Prize 2023, une fenêtre de 1200 × 1200, 26 couches à partir de la 3ᵉ
 son **volume de surface publié** — donc sans que nous ayons tracé, aplati ni rendu quoi que
 ce soit — donne exactement la même constante : `-1,275 / -1,121 / -1,010`, σ **45,0×** plus
 petit que le témoin, contre 45,2× pour notre rendu. **Notre chaîne n'y est pour rien.**
-(`docs/m1ter_volume_publie.json`, pont `src/volume/zarr_vers_couches.py`.)
+(`docs/mesures/m1ter_volume_publie.json`, pont `src/volume/zarr_vers_couches.py`.)
 
 ⚠ Ce que ça n'établit pas : qu'il n'y a pas d'encre là (une fenêtre, un segment), ni
 laquelle des causes restantes joue — la résolution, ce rouleau-ci, ou un papyrus réellement
@@ -214,7 +214,7 @@ défaut, et le résultat aurait l'air d'un résultat.
 ./src/outils/lancer.sh --fond src/outils/leurs_parametres.sh     # EXACTEMENT leurs paramètres
 ./src/outils/lancer.sh --fond src/outils/petite_trace.sh         # une trace courte converge-t-elle ?
 cd inference_xpu                                        # les quatre segments publiés
-for k in $(cut -f2 ../docs/volumes_surface_PHerc1447.txt); do
+for k in $(cut -f2 ../docs/mesures/volumes_surface_PHerc1447.txt); do
   uv run python ../src/commun/zarr_depth.py "$k" --windows 25
 done
 ```

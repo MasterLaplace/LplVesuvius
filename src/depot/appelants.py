@@ -129,7 +129,7 @@ def verifier() -> int:
         "src/outils/tiers.sh": "./src/outils/autre.sh --verifier\n",
         "src/outils/temoins.sh": 'run "la mesure"  python3 "$ROOT/src/depot/tiers.py" --verifier\n',
         "docs/07.md": "Le script `src/depot/mort.py` ne sert plus à rien depuis mars.\n",
-        "docs/08.md": "```bash\nlplv horizon --json docs/h.json\n```\n",
+        "docs/08.md": "```bash\nlplv horizon --json docs/mesures/h.json\n```\n",
         "src/depot/mesure.py": "x = 1\n",
         "src/depot/mort.py": "x = 1\n",
         "src/depot/horizon.py": "x = 1\n",

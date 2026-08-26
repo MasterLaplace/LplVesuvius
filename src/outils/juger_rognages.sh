@@ -6,7 +6,7 @@
 # chemin de jugement PARTAGE — aucune logique propre, donc rien qui puisse diverger.
 #
 # Les deux invocations reellement passees, ecrites ici parce que l'etiquette fait partie du
-# NOM du resultat : `docs/cycle2_gen103.json` n'est tracable que si `cycle2` apparait dans
+# NOM du resultat : `docs/mesures/cycle2_gen103.json` n'est tracable que si `cycle2` apparait dans
 # l'arbre. Sans elles, l'audit des artefacts signalait deux JSON sans producteur — et il
 # avait raison, la commande vivait dans un terminal.
 #

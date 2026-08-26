@@ -31,7 +31,7 @@ minorant. Il vaut « rien », et le dire est plus honnête que de lui prêter un
 
 Reproduire :
 
-    python3 src/graine/appui_de_pente.py --racine . --json docs/appui_de_pente.json
+    python3 src/graine/appui_de_pente.py --racine . --json docs/mesures/appui_de_pente.json
     python3 src/graine/appui_de_pente.py --verifier
 """
 from __future__ import annotations

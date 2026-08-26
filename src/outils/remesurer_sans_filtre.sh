@@ -86,5 +86,5 @@ python3 -c "
 import json
 lignes = json.loads('[' + '''${LIGNES%,}''' + ']')
 json.dump({'source': 'data/trace/PHerc0358', 'lignes': lignes},
-          open('$ROOT/docs/sans_filtre.json', 'w'), indent=2)
-print('écrit : docs/sans_filtre.json')"
+          open('$ROOT/docs/mesures/sans_filtre.json', 'w'), indent=2)
+print('écrit : docs/mesures/sans_filtre.json')"

@@ -270,7 +270,7 @@ def _verifier() -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--json", type=Path, default=Path("docs/fenetre_utilisable.json"))
+    ap.add_argument("--json", type=Path, default=Path("docs/mesures/fenetre_utilisable.json"))
     ap.add_argument("--sortie", type=Path, default=Path("docs/images/51_fenetre.png"))
     ap.add_argument("--prefixe", default="data/paris4_candidats/ps256")
     ap.add_argument("--plancher", type=float, default=0.02)

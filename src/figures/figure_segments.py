@@ -25,7 +25,7 @@ paires proches ne sont pas des candidates mais des voisines.
 
 Usage :
     cd experiments && uv run python ../src/figures/figure_segments.py \\
-        --entree ../docs/segments_PHerc1447.json \\
+        --entree ../docs/mesures/segments_PHerc1447.json \\
         --sortie ../docs/images/44_ecarts_segments.png
 """
 from __future__ import annotations
@@ -155,7 +155,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     racine = Path(__file__).resolve().parents[2]
-    ap.add_argument("--entree", type=Path, default=racine / "docs/segments_PHerc1447.json")
+    ap.add_argument("--entree", type=Path, default=racine / "docs/mesures/segments_PHerc1447.json")
     ap.add_argument("--sortie", type=Path,
                     default=racine / "docs/images/44_ecarts_segments.png")
     ap.add_argument("--verifier", action="store_true")

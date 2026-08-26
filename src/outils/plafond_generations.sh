@@ -99,5 +99,5 @@ done
 echo
 echo "== confrontation"
 uv run --project "$ROOT" python "$ROOT/src/graine/effet_du_plafond.py" \
-    --docs "$ROOT/docs" --prediction "$PRED" --candidat "$IDX" --niveau "$NIVEAU" \
+    --docs "$ROOT/docs/mesures" --prediction "$PRED" --candidat "$IDX" --niveau "$NIVEAU" \
     --json "$ROOT/docs/plafond_${PRED}_c${IDX}${SUFFIXE}.json"

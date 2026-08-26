@@ -68,7 +68,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--entree", type=Path,
-                    default=Path(__file__).resolve().parents[2] / "docs/table_tirages.json")
+                    default=Path(__file__).resolve().parents[2] / "docs/mesures/table_tirages.json")
     ap.add_argument("--sortie", type=Path,
                     default=Path(__file__).resolve().parents[2] / "docs/images/35_tirages.png")
     ap.add_argument("--anglais", action="store_true",

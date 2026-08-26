@@ -38,7 +38,7 @@ TRAVAIL="${TRAVAIL:-/tmp/lplvesuvius-release}"
 #   LICENSE           ⚠ absente du depot jusqu ici, et ca compte pour quelque chose qu on
 #                     soumet : sans licence, personne n a le droit de reutiliser l outil.
 #   README.md         le point d entree.
-#   docs/verbes.json  le recensement des verbes de l arbre COMPLET. ⚠ Il ne sert pas a
+#   docs/mesures/verbes.json  le recensement des verbes de l arbre COMPLET. ⚠ Il ne sert pas a
 #                     lister ce qui est la -- le systeme de fichiers le dit -- mais a
 #                     distinguer « verbe inconnu » de « verbe absent de ce palier »,
 #                     ce qu un arbre allege ne peut pas savoir tout seul.
@@ -60,7 +60,7 @@ GARDES=(
   "src"
   "README.md"
   "lplv"
-  "docs/verbes.json"
+  "docs/mesures/verbes.json"
   "LICENSE"
   "docs/21_texte_de_soumission.md"
   "pyproject.toml"

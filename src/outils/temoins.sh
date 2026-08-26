@@ -25,7 +25,7 @@ FAIL=0
 # ⚠⚠ Les totaux sont COMPTES, pas ecrits dans une doc. `README` annoncait « 18 batteries,
 # 741 controles » alors qu'il y en avait 24 et 1092 : un chiffre recopie a la main dans une
 # prose vieillit en silence, et c'est precisement le defaut que ce depot outille ailleurs
-# (`src/depot/verifier_chiffres.py`). Ils sont donc ecrits dans `docs/temoins.json` et
+# (`src/depot/verifier_chiffres.py`). Ils sont donc ecrits dans `docs/mesures/temoins.json` et
 # gardes comme tous les autres chiffres publies.
 BATTERIES=0
 CONTROLES=0
@@ -829,6 +829,8 @@ run "recensement des verbes"   uv run --project "$ROOT" python "$ROOT/src/figure
 # recherche porte desormais PLUS LARGE que la reecriture, et un chemin ASSEMBLE a l execution
 # est nomme plutot que tu, parce qu aucune reecriture textuelle ne peut le voir.
 run "deplacement de fichiers"  uv run --project "$ROOT" python "$ROOT/src/depot/deplacer.py" --verifier
+run "nature des documents"     uv run --project "$ROOT" python "$ROOT/src/depot/nature_des_documents.py" --verifier
+run "donnees sans appelant"    uv run --project "$ROOT" python "$ROOT/src/depot/donnees_sans_appelant.py" --verifier
 # ⚠⚠ La premiere tache du chantier A : mesurer le doublonnage PAR HACHAGE. Le plan annoncait
 # « 17,4 Go de doublons » sur un proxy nom+taille dont il ecrivait lui-meme qu il surcompte --
 # des chunks zarr nommes `40` dans deux volumes differents, meme nom, meme taille, contenu
@@ -1216,7 +1218,7 @@ d = {'batteries_all_pass': $BATTERIES, 'controles': $CONTROLES, 'echecs': $FAIL}
 for cle, val in (('chiffres_recalcules', '$RECALCULES'), ('fichiers_de_resultat', '$SOURCES')):
     if val:
         d[cle] = int(val)
-json.dump(d, open('$ROOT/docs/temoins.json', 'w'), indent=2)
+json.dump(d, open('$ROOT/docs/mesures/temoins.json', 'w'), indent=2)
 print()
 print(f'  {\"batteries\":<30} {$BATTERIES} batteries, {$CONTROLES} controles')
 if '$RECALCULES':

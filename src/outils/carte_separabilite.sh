@@ -19,7 +19,7 @@ OUT=${1:-docs/carte_separabilite}
 # grille (`round(n^(1/3))+1` par axe), sonde ce cube, et jette les fenetres vides. 27
 # donne 4³ = 64 sondes pour 15 a 35 fenetres reellement mesurees.
 #
-# ⚠⚠ Et cet effectif DECIDE de ce que la carte peut affirmer : `docs/incertitude_carte.json`
+# ⚠⚠ Et cet effectif DECIDE de ce que la carte peut affirmer : `docs/mesures/incertitude_carte.json`
 # mesure qu'a 15-35 fenetres AUCUNE des 78 paires de rouleaux n'est separee, et qu'il en
 # faut 50 par rouleau pour separer les deux extremes a 80 % de puissance. D'ou ce
 # parametre, et d'ou le fait qu'une campagne dense s'ecrit dans SON PROPRE dossier : les

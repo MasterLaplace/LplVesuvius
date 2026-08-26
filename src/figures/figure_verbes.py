@@ -18,7 +18,7 @@ deux sont lus dans le fichier, donc le compte suit le code sans que personne l'e
 ⚠ Tracé avec PIL, sans matplotlib (absent de cet environnement).
 
 Usage :
-    ./lplv --verbes --json > docs/verbes.json
+    ./lplv --verbes --json > docs/mesures/verbes.json
     uv run python src/figures/figure_verbes.py
 """
 from __future__ import annotations
@@ -119,7 +119,7 @@ def main() -> int:
     racine = Path(__file__).resolve().parents[2]
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--entree", type=Path, default=racine / "docs/verbes.json")
+    ap.add_argument("--entree", type=Path, default=racine / "docs/mesures/verbes.json")
     ap.add_argument("--sortie", type=Path, default=racine / "docs/images/56_verbes.png")
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()

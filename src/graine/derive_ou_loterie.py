@@ -30,7 +30,7 @@ chaine au debut d'une autre fabriquerait une paire qui n'existe pas.
 
 Usage :
     uv run python src/graine/derive_ou_loterie.py --chaine docs/spire_spire --nom out \\
-        --chaine docs/spire_dedans_spire --nom in --json docs/derive_ou_loterie.json
+        --chaine docs/spire_dedans_spire --nom in --json docs/mesures/derive_ou_loterie.json
 """
 from __future__ import annotations
 

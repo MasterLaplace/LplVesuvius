@@ -18,8 +18,8 @@ grandeurs différentes, et ce fichier publie leur corrélation précisément pou
 transporte pas la dérive de l'un sur l'autre — le raccourci que ce dépôt a failli prendre.
 
 Usage :
-    uv run python src/graine/derive_avec_profondeur.py --docs docs \\
-        --json docs/derive_profondeur.json
+    uv run python src/graine/derive_avec_profondeur.py --docs docs/mesures \\
+        --json docs/mesures/derive_profondeur.json
     python3 src/graine/derive_avec_profondeur.py --verifier
 """
 from __future__ import annotations
@@ -330,7 +330,7 @@ def verifier() -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--docs", type=Path, default=Path("docs"))
+    ap.add_argument("--docs", type=Path, default=Path("docs/mesures"))
     ap.add_argument("--json", type=Path)
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()

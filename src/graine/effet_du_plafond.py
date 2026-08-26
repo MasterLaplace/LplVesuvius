@@ -268,7 +268,7 @@ def _verifier() -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--docs", type=Path, default=Path("docs"))
+    ap.add_argument("--docs", type=Path, default=Path("docs/mesures"))
     ap.add_argument("--prediction", default="ps256")
     ap.add_argument("--candidat", type=int, default=0)
     ap.add_argument("--niveau", type=int,

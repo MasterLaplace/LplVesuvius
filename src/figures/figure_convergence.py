@@ -65,7 +65,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     racine = Path(__file__).resolve().parents[2]
-    ap.add_argument("--entree", type=Path, default=racine / "docs/convergence.json")
+    ap.add_argument("--entree", type=Path, default=racine / "docs/mesures/convergence.json")
     ap.add_argument("--sortie", type=Path, default=racine / "docs/images/38_convergence.png")
     ap.add_argument("--anglais", action="store_true",
                     help="écrire la figure en anglais (pour l'article)")

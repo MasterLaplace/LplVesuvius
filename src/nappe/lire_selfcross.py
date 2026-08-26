@@ -9,7 +9,7 @@ lisaient le meme rapport avec le meme extrait de trois lignes :
 Aucun ne regardait `pairs_tested`. Or l'outil peut rendre
 `clean_of_transverse_self_intersection: true` avec **zero paire testee** : son filtre
 `--maxedge` (60 voxels par defaut) jette les quads dont une arete depasse le seuil, et sur
-un maillage assez grossier il les jette **tous**. Mesure : `docs/sensibilite_maillage.json`
+un maillage assez grossier il les jette **tous**. Mesure : `docs/mesures/sensibilite_maillage.json`
 -- une surface qui porte 72 auto-intersections est declaree propre, `pairs_tested = 0`,
 5202 quads jetes.
 

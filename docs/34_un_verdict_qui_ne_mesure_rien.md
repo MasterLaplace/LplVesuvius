@@ -16,7 +16,7 @@ concours**.
 > filtre par défaut transforme les deux derniers en **zéros muets** : verdict « propre »,
 > zéro paire testée.
 
-Figure : `src/figures/figure_sensibilite.py`, depuis `docs/sensibilite_maillage.json`.
+Figure : `src/figures/figure_sensibilite.py`, depuis `docs/mesures/sensibilite_maillage.json`.
 
 ## 1. Ce que M2 demandait — et la réponse est rassurante
 

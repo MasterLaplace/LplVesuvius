@@ -288,7 +288,7 @@ la seule chose qui rend la dérive visible avant qu'elle ne coûte.
 ## Reproduire
 
 ```bash
-./src/outils/verifier_zarr.sh docs/volumes_surface_PHerc1447.txt   # les volumes sont-ils LISIBLES ?
+./src/outils/verifier_zarr.sh docs/mesures/volumes_surface_PHerc1447.txt   # les volumes sont-ils LISIBLES ?
 
 uv run python src/commun/suivre_nappe.py --verifier     # 29 témoins
 uv run python src/figures/figure_marche.py               # la figure

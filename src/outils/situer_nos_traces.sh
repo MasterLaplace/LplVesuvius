@@ -12,7 +12,7 @@
 # pile de 161 couches lue sur 109 doit etre centree, sinon on compare deux profondeurs en
 # croyant comparer deux surfaces.
 #
-# Usage : CORPUS=docs/balayage_scroll1.csv COUCHES=109 FENETRE=128 src/outils/situer_nos_traces.sh <pile>...
+# Usage : CORPUS=docs/mesures/balayage_scroll1.csv COUCHES=109 FENETRE=128 src/outils/situer_nos_traces.sh <pile>...
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 

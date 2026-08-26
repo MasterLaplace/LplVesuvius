@@ -78,9 +78,9 @@ uv run python "$ROOT/src/encre/temoin_negatif.py" \
   --positif "$DEST/sur_sa_feuille.npy" --negatif "$DEST/en_travers.npy" \
   --entree-positif "$POS_COUCHES" --fenetre-positif "$POS_TOP" "$POS_LEFT" "$POS_DEPART" \
   --entree-negatif "$NEG_COUCHES" --fenetre-negatif "$NEG_TOP" "$NEG_LEFT" "$NEG_DEPART" \
-  --cote "$COTE" --json "$ROOT/docs/temoin_negatif.json" || exit 4
+  --cote "$COTE" --json "$ROOT/docs/mesures/temoin_negatif.json" || exit 4
 
 uv run python "$ROOT/src/figures/figure_temoin_negatif.py" \
-  --json "$ROOT/docs/temoin_negatif.json" \
+  --json "$ROOT/docs/mesures/temoin_negatif.json" \
   --positif "$DEST/sur_sa_feuille.npy" --negatif "$DEST/en_travers.npy" \
   --sortie "$ROOT/docs/images/46_temoin_negatif.png"

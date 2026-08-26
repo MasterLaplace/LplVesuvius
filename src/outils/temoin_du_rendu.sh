@@ -24,7 +24,7 @@
 # le pas, la couche tracee ou la sous-fenetre -- et la comparaison mesurerait la difference
 # des scripts.
 #
-# Usage : CORPUS=docs/balayage_scroll1.csv src/outils/temoin_du_rendu.sh <morceau>...
+# Usage : CORPUS=docs/mesures/balayage_scroll1.csv src/outils/temoin_du_rendu.sh <morceau>...
 set -uo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
@@ -66,7 +66,7 @@ CORPUS="${CORPUS:?CORPUS requis — le balayage du corpus publie}"
 COUCHES="${COUCHES:-109}"
 FENETRE_PILE="${FENETRE_PILE:-161}"
 DEST="${DEST:-$ROOT/data/temoin_rendu/rendus}"
-JSON="${JSON:-$ROOT/docs/temoin_du_rendu.json}"
+JSON="${JSON:-$ROOT/docs/mesures/temoin_du_rendu.json}"
 [ $# -ge 1 ] || { echo "donner au moins un morceau tifxyz" >&2; exit 2; }
 
 PILES=""
@@ -92,5 +92,5 @@ echo "== les morceaux PUBLIES, relus a la geometrie du corpus"
 CORPUS="$CORPUS" COUCHES="$COUCHES" "$ROOT/src/outils/situer_nos_traces.sh" $PILES \
   | tee "$JSON.txt"
 echo
-echo "⚠ a comparer a la distribution du corpus (docs/calibration_scroll1.json) et a nos"
-echo "  candidats (docs/situer_nos_traces.json) — le critere est en tete de ce fichier."
+echo "⚠ a comparer a la distribution du corpus (docs/mesures/calibration_scroll1.json) et a nos"
+echo "  candidats (docs/mesures/situer_nos_traces.json) — le critere est en tete de ce fichier."

@@ -37,7 +37,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--entree", type=Path,
-                    default=Path(__file__).resolve().parents[2] / "docs/comparaison_cartes.json")
+                    default=Path(__file__).resolve().parents[2] / "docs/mesures/comparaison_cartes.json")
     ap.add_argument("--temoin-creux", type=Path,
                     default=Path(__file__).resolve().parents[2]
                     / "docs/carte_separabilite/_TEMOIN_PHerc0139.json")

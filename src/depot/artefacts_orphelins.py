@@ -39,7 +39,7 @@ SUFFIXES = (".json", ".jsonl", ".tsv", ".txt")
 # entrees plutot que des sorties. Les exclure est une DECISION, pas un oubli : chacun est
 # nomme, et la raison avec.
 EXEMPTS = {
-    "docs/excision_samples.tsv": "sortie de l'experience d'excision (experiments/src/excision)",
+    "docs/mesures/excision_samples.tsv": "sortie de l'experience d'excision (experiments/src/excision)",
     "src/outils/repos.tsv": "manifeste ecrit a la main, pas une mesure",
 }
 

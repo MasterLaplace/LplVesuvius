@@ -175,7 +175,7 @@ ligne à l'autre, et ce tableau les compare.
   autres). Filtre désactivé, elle mesure **2 455 822** auto-intersections au lieu de 34 340 —
   un ratio de **71,5×**, contre 2,7 à 2,9 pour les trois autres.
 
-**Le tableau, relu sur la totalité de chaque surface** (`docs/sans_filtre.json`,
+**Le tableau, relu sur la totalité de chaque surface** (`docs/mesures/sans_filtre.json`,
 `src/outils/remesurer_sans_filtre.sh`) :
 
 | réglage | aire | publié | par cm² | **sans filtre** | **par cm² corrigé** |

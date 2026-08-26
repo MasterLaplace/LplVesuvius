@@ -342,7 +342,7 @@ def main() -> int:
                              "CESSE d'etre un temoin (defaut: 0,02 -- la bande "
                              "rejetee a la main en portait 0,0375)")
     parser.add_argument("--candidate-floor", type=float, default=0.08)
-    parser.add_argument("--out", type=Path, default=Path("docs/juge_resultats.json"))
+    parser.add_argument("--out", type=Path, default=Path("docs/mesures/juge_resultats.json"))
     args = parser.parse_args()
 
     # ⚠ Avant la cle : inspecter ce qu'on va soumettre ne doit dependre d'aucun

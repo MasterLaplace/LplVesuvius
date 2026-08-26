@@ -92,7 +92,7 @@ SOURCE="${SOURCE:?SOURCE requis — un tifxyz dont on sait qu il suit une feuill
 PAS="${PAS:-5}"
 MAILLONS="${MAILLONS:-5}"
 DEST="${DEST:-$ROOT/data/chaine_tangentielle}"
-JSON="${JSON:-$ROOT/docs/chaine_tangentielle.json}"
+JSON="${JSON:-$ROOT/docs/mesures/chaine_tangentielle.json}"
 FENETRES="${FENETRES:-41}"
 UM_BASE="${UM_BASE:-2.4}"
 # ⚠⚠ PAS_VOX : un pas FIXE en voxels, qui casse la retroaction d une chaine. Un pas de

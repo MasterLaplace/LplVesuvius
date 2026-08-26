@@ -24,7 +24,7 @@ parametres strictement identiques rendent des verdicts opposes. Il ne demande au
 et aucune verite terrain.
 
 Usage :
-    uv run python src/tables/table_tirages.py [data/tirages] [--json docs/table_tirages.json]
+    uv run python src/tables/table_tirages.py [data/tirages] [--json docs/mesures/table_tirages.json]
 """
 from __future__ import annotations
 

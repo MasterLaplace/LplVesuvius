@@ -18,8 +18,8 @@ La parade écrite est : **sélectionner sur un axe, valider sur l'autre**. Elle 
 > **S'ils s'accordaient, le point rouge serait le plus à droite** — le pire selon les deux.
 > Il l'est **une fois sur huit**, là où le hasard seul en donnerait quatre.
 
-Figure : `src/figures/figure_deux_axes.py`, depuis `docs/second_axe_21.json` et
-`docs/second_axe_41.json`.
+Figure : `src/figures/figure_deux_axes.py`, depuis `docs/mesures/second_axe_21.json` et
+`docs/mesures/second_axe_41.json`.
 
 ## 1. Le dispositif
 
@@ -126,10 +126,10 @@ contrainte à porter dans la conception, pas une note.
 ## Reproduire
 
 ```bash
-cd experiments && uv run python ../src/graine/choisir_tirages.py --json ../docs/cibles_second_axe.json
+cd experiments && uv run python ../src/graine/choisir_tirages.py --json ../docs/mesures/cibles_second_axe.json
 cd .. && ./src/outils/lancer.sh --fond src/campagnes/campagne_second_axe.sh "$PWD/data/second_axe" 21 \
     $(cd experiments && uv run python ../src/graine/choisir_tirages.py --chemins)
 cd experiments
-uv run python ../src/tables/table_second_axe.py ../data/second_axe    --json ../docs/second_axe_21.json
-uv run python ../src/tables/table_second_axe.py ../data/second_axe_41 --json ../docs/second_axe_41.json
+uv run python ../src/tables/table_second_axe.py ../data/second_axe    --json ../docs/mesures/second_axe_21.json
+uv run python ../src/tables/table_second_axe.py ../data/second_axe_41 --json ../docs/mesures/second_axe_41.json
 ```

@@ -21,7 +21,7 @@ La distinction est imprimee.
 
 Usage :
     uv run python src/tables/table_chaine.py data/spires --voxel-um 8.64 \\
-        --json docs/chaine_spires.json
+        --json docs/mesures/chaine_spires.json
     uv run python src/tables/table_chaine.py --verifier
 """
 from __future__ import annotations
@@ -430,7 +430,7 @@ def main() -> int:
                     help="comparer plusieurs campagnes à PROFONDEUR ÉGALE, sur les α et "
                          "les aires — jamais sur des comptes de verdicts")
     ap.add_argument("--voxel-um", type=float, default=8.64)
-    ap.add_argument("--docs", type=Path, default=RACINE / "docs")
+    ap.add_argument("--docs", type=Path, default=RACINE / "docs" / "mesures")
     ap.add_argument("--json")
     ap.add_argument("--figure", type=Path)
     ap.add_argument("--verifier", action="store_true")

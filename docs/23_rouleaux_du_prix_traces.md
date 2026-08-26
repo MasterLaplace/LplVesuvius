@@ -8,7 +8,7 @@ situation n'est pas uniforme.
 
 ## 1. L'état des treize, compté proprement
 
-`src/outils/etat_rouleaux_prix.sh`, sorties dans `docs/etat_rouleaux_prix.txt` :
+`src/outils/etat_rouleaux_prix.sh`, sorties dans `docs/mesures/etat_rouleaux_prix.txt` :
 
 | rouleau | volumes | surfaces | lasagna | **segments** |
 |---|---:|---:|---:|---:|

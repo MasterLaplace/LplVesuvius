@@ -11,9 +11,14 @@
 # sont les notes qu'on en tire, pas les 100+ Mo d'assets.
 /site/
 
-# Logs de recuperation : utiles pendant un run, sans valeur apres.
+# Logs de recuperation : utiles pendant un run, sans valeur apres. Ils vivent dans
+# docs/journaux/ depuis le rangement par nature ; la regle ANCREE /docs/*.log ne les
+# couvrait plus une fois deplaces, et 79 traces de run seraient entrees dans le depot
+# sans le moindre message. Les deux formes sont gardees : l ancienne pour un log ecrit
+# a la racine par erreur, la nouvelle pour l endroit ou ils vivent.
 /docs/*.log
 /docs/*.pid
+/docs/journaux/
 
 __pycache__/
 *.pyc
@@ -26,6 +31,8 @@ __pycache__/
 # Sous-produits du controle de miroir : regeneres a chaque passe.
 /docs/sitemap.xml
 /docs/sitemap_paths.txt
+/docs/mesures/sitemap.xml
+/docs/mesures/sitemap_paths.txt
 
 # Cartes d encre et images produites : regenerables par inference_xpu/src/infer_ink.py
 /data/out/

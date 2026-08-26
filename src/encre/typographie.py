@@ -34,7 +34,7 @@ l'absence d'auto-intersection l'est pour une trace.
 
 Usage :
     uv run python src/encre/typographie.py data/encre \\
-        --json docs/typographie.json
+        --json docs/mesures/typographie.json
     python3 src/encre/typographie.py --verifier
 """
 from __future__ import annotations
@@ -630,7 +630,7 @@ def main() -> int:
                     help="facteur de réduction avant mesure (défaut 4)")
     ap.add_argument("--encre", type=Path,
                     help="croiser avec un fichier de segments portant un contraste "
-                         "d'encre (docs/croisement_encre.json)")
+                         "d'encre (docs/mesures/croisement_encre.json)")
     ap.add_argument("--cle-encre", default="encre_contraste_p90_p50")
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()

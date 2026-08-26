@@ -53,7 +53,7 @@ REPETITIONS="${REPETITIONS:-3}"
 DEST="${DEST:-$ROOT/data/etalon_rendu}"
 B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 VOL="${VOL:-PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr}"
-JSON="${JSON:-$ROOT/docs/etalon_rendu.json}"
+JSON="${JSON:-$ROOT/docs/mesures/etalon_rendu.json}"
 mkdir -p "$DEST"
 
 echo "== surface $(basename "$SRC")  ·  $COUCHES couches  ·  --cache-gb : $VALEURS"

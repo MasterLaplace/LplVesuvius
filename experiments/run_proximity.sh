@@ -5,7 +5,7 @@
 # de windcheck (meme cle `segment`).
 #
 # Usage: ./run_proximity.sh <dossier_corpus> <fichier_sortie>
-#   ex.: ./run_proximity.sh ../repos/windcheck/data/scroll1_tifxyz ../docs/proximity_scroll1.jsonl
+#   ex.: ./run_proximity.sh ../repos/windcheck/data/scroll1_tifxyz ../docs/mesures/proximity_scroll1.jsonl
 set -u
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"

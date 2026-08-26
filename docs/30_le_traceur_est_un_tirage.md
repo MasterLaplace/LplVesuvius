@@ -141,7 +141,7 @@ ce que `31` §4 décrit, et ce que nos deux instruments indépendants rendent po
 
 ```bash
 ./src/campagnes/campagne_thread_limit.sh "$PWD/data/trace/PHerc0358/thread_limit" "1544 1544 7768" 10
-uv run python src/tables/table_thread_limit.py --json docs/table_thread_limit.json
+uv run python src/tables/table_thread_limit.py --json docs/mesures/table_thread_limit.json
 
 # le contrôle : le maillage archivé remesure-t-il bien 240 ?
 vc_tifxyz_selfcross --surface artefacts/PHerc0358/mesh.tifxyz -o /tmp/recheck.json

@@ -12,5 +12,5 @@ ROOT=$PWD
 # des figures, ce qui evite de garder chaud un venv de 2,5 Gio pour du dessin.
 cd "$ROOT" || exit 2
 uv run python src/encre/typographie.py "$ROOT/data/encre" \
-  --json "$ROOT/docs/typographie.json" --reduire "${REDUIRE:-4}" \
-  --encre "$ROOT/docs/croisement_encre.json"
+  --json "$ROOT/docs/mesures/typographie.json" --reduire "${REDUIRE:-4}" \
+  --encre "$ROOT/docs/mesures/croisement_encre.json"

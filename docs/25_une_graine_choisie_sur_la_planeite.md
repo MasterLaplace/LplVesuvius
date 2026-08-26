@@ -186,7 +186,7 @@ publié** (`23`), plus les ⚠ **trois** qui en ont — les seuls où une trace 
 existe pour comparer.
 
 ⚠ Corrigé le 2026-08-19 : ce paragraphe disait « les **deux** qui en ont ». L'inventaire
-versionné `docs/etat_rouleaux_prix.txt` en recense **trois** : PHerc1447 (16 segments),
+versionné `docs/mesures/etat_rouleaux_prix.txt` en recense **trois** : PHerc1447 (16 segments),
 PHerc0800 (6), PHerc1203 (1). La campagne, elle, n'en couvrait alors que douze — le compte
 du corpus était juste, c'est sa description qui ne l'était pas.
 

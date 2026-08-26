@@ -15,7 +15,7 @@ valeur.
 
 Usage :
     uv run python src/figures/figure_2x2.py \\
-        --json docs/paris4_2x2.json --sortie docs/images/48_2x2.png
+        --json docs/mesures/paris4_2x2.json --sortie docs/images/48_2x2.png
 """
 from __future__ import annotations
 
@@ -90,7 +90,7 @@ def verifier() -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--json", type=Path, default=Path(__file__).resolve().parents[2] / "docs/paris4_2x2.json")
+    ap.add_argument("--json", type=Path, default=Path(__file__).resolve().parents[2] / "docs/mesures/paris4_2x2.json")
     ap.add_argument("--sortie", type=Path, default=Path(__file__).resolve().parents[2] / "docs/images/48_2x2.png")
     ap.add_argument("--anglais", action="store_true")
     ap.add_argument("--verifier", action="store_true")

@@ -11,7 +11,7 @@ set -u
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 WINDCHECK="$ROOT/repos/windcheck"
 VOLUME="s3://vesuvius-challenge-open-data/PHerc0172/volumes/20241024131839-7.910um-53keV-masked.zarr"
-OUT="${1:-$ROOT/docs/excision_samples.tsv}"
+OUT="${1:-$ROOT/docs/mesures/excision_samples.tsv}"
 
 # Quatre temoins par cellule excisee, et non seize. Decision de COUT, verifiee
 # avant d'etre prise : sur les segments deja mesures, la taille d'effet vaut

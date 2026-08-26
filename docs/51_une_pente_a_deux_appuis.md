@@ -478,15 +478,15 @@ question binaire posée à l'intérieur de chaque fenêtre, quelle que soit sa p
 ## Reproduire
 
 ```bash
-python3 src/graine/appui_de_pente.py --racine . --json docs/appui_de_pente.json
+python3 src/graine/appui_de_pente.py --racine . --json docs/mesures/appui_de_pente.json
 python3 src/graine/fenetre_utilisable.py --racine . \
-    --niveaux data/controle_resolution --json docs/fenetre_utilisable.json
+    --niveaux data/controle_resolution --json docs/mesures/fenetre_utilisable.json
 uv run python src/figures/figure_fenetre.py \
-    --json docs/fenetre_utilisable.json --sortie docs/images/51_fenetre.png
+    --json docs/mesures/fenetre_utilisable.json --sortie docs/images/51_fenetre.png
 uv run python src/figures/figure_appuis.py \
-    --json docs/appui_de_pente.json --sortie docs/images/51_appuis.png
+    --json docs/mesures/appui_de_pente.json --sortie docs/images/51_appuis.png
 uv run python src/figures/figure_contraste.py \
-    --json docs/appui_de_pente.json --sortie docs/images/51_contraste.png
+    --json docs/mesures/appui_de_pente.json --sortie docs/images/51_contraste.png
 
 # le verdict porte désormais son appui
 uv run python src/commun/test_convergence.py --nom ps256_c0 \
@@ -500,7 +500,7 @@ python3 src/graine/fenetre_utilisable.py --verifier
 # le couple admissible, sur la grande surface
 PLAT=data/paris4_plafond/ps256_c2_g200/plat NIVEAU=1 FENETRES_BASE="162 326" \
   DEST=data/paris4_plafond/ps256_c2_g200 PATIENCE=5400 \
-  JSON=docs/paire_admissible_g200.json src/outils/profiler_une_surface.sh
+  JSON=docs/mesures/paire_admissible_g200.json src/outils/profiler_une_surface.sh
 python3 src/figures/figure_fenetre.py --verifier
 python3 src/figures/figure_appuis.py --verifier
 python3 src/figures/figure_contraste.py --verifier

@@ -49,7 +49,7 @@ liens est la seule chose qui réponde, et voici sa réponse pour `htr/` + `infer
 Soit **4,24 Gio** de récupérable réel là où ce plan annonçait 16,6 : un facteur quatre. Et
 *rien* n'est libéré sans `uv cache prune`, qui touche une ressource **partagée avec le reste de
 la machine** et n'est donc pas une décision de ce dépôt. Calcul dans l'arbre —
-`src/depot/poids_recuperable.py` (10 contrôles), résultat dans `docs/poids_recuperable.json`.
+`src/depot/poids_recuperable.py` (10 contrôles), résultat dans `docs/mesures/poids_recuperable.json`.
 
 **2. Les « 25 sites d'appel » n'étaient pas des besoins, c'étaient des EMPRUNTS.** Le motif
 écrit partout — *« le seul environnement du dépôt qui porte Pillow »* — était faux : la racine
@@ -216,7 +216,7 @@ bon marché. Le cas connu vaut 15 minutes ; il y en a probablement des dizaines.
 ![Le contenu identique de data/, par motif](images/56_doublons.png)
 
 ```bash
-uv run python src/depot/contenu_en_double.py data --json docs/contenu_en_double.json
+uv run python src/depot/contenu_en_double.py data --json docs/mesures/contenu_en_double.json
 uv run python src/figures/figure_doublons.py     # → docs/images/56_doublons.png
 ```
 
@@ -393,6 +393,61 @@ relancé sous un nom qui lui était propre. Un scratchpad partagé n'est pas un 
 
 ### ⭐⭐ Chantier B — un dossier par ROULEAU, et un manifeste JSON par rouleau
 
+#### ⚠⚠ 2026-08-26 — la mesure CONTREDIT ce plan, et c'est le plan qui cède
+
+Quatre mesures prises avant d'y toucher, chacune contre le déplacement :
+
+| ce qu'on croyait | ce qui est mesuré |
+|---|---|
+| ranger `data/` clarifie le dépôt | `data/` est **entièrement gitignoré** : **0 fichier suivi**. Qui clone ne le reçoit pas. |
+| les données se groupent par rouleau | **11 des 81 dossiers** seulement nomment un rouleau ; 86 % sont des *expériences* (`chaine_*`, `spires_*`, `ext_*`) |
+| le rouleau est le niveau haut | `data/trace/` groupe **déjà** par rouleau **à l'intérieur** — le rouleau est une *subdivision* d'une expérience |
+| le coût est celui d'un `mv` | **296 citations** sur 64 chemins distincts, plus **177 Gio** à déplacer, plus la classe de chemins assemblés qui a déjà coûté un audit entier sur `docs/` |
+
+⭐ Forcer 70 dossiers d'expérience sous un nom de rouleau ne les rangerait pas, ça les
+**mentirait** : `chaine_courte` n'appartient à aucun rouleau, elle enchaîne des maillons.
+
+⭐⭐ **Et la question que `data/` pose vraiment, à 177 Gio, n'est pas « où est-ce rangé » mais
+« qu'est-ce que je peux effacer ».** C'est celle que `poids_recuperable.py` sait chiffrer et
+qu'`appelants.py` sait poser pour les scripts — un dossier que plus aucun script ni document
+ne nomme est un candidat, et son poids est le gain. **Ça ne demande aucun déplacement.**
+
+⚠ Ce qui reste vrai du plan, c'est le **manifeste** : « ce qu'on a d'un rouleau, calculé quand,
+par quoi ». Mais il n'a **aucun consommateur** aujourd'hui, donc l'écrire serait un orphelin
+(§0.2). Il arrive avec le premier outil qui a besoin de demander ce qu'on possède.
+
+#### ✅ Ce qui a été fait à la place — `src/depot/donnees_sans_appelant.py`, et 50,6 Gio
+
+| classe | dossiers | poids | ce que ça veut dire |
+|---|---:|---:|---|
+| orphelins | 25 | **44,3 Gio** | aucun script, aucun document ne les nomme |
+| en journal seulement | 3 | **6,3 Gio** | un journal se souvient d'eux ; aucun code vivant |
+| vivants | 52 | — | nommés par un script ou un document |
+
+Les plus lourds sont les campagnes d'extension tangentielle (`ext_*`, huit dossiers, ~24 Gio)
+et les balayages de convergence (`spires_pas*`, `spires_pic*`, `spires_portee*`).
+
+⚠⚠ **NOMMER N'EST PAS EFFACER, et ce script n'efface jamais.** Un dossier que rien ne nomme
+peut être une entrée téléchargée une fois, ou le résultat d'une campagne qu'on n'a pas encore
+écrite. Dire « périmé » et remplacer sont deux actes — la même discipline que
+`fraicheur_des_figures.py`, qui ne touche jamais `docs/images/`.
+
+⭐ **Et la troisième classe est ce qui rend le verdict utilisable.** Un dossier nommé
+*seulement dans un journal* n'est pas nommé par du code vivant : un journal enregistre ce qui
+a tourné ce jour-là, donc il prouve un usage **passé**, pas un besoin **présent**. Les
+confondre ferait effacer ce qui permet de recouper une campagne déjà publiée.
+
+⚠ Le **nom nu ne compte pas**, seul le chemin `data/<nom>` compte. `data/out` et `data/trace`
+portent des mots courants, et chercher « out » les déclarerait vivants depuis n'importe quelle
+prose — c'est le piège `SHA-256` contre `SIM-016` sous un autre costume. Sondé dans les deux
+sens : le mot seul laisse le dossier orphelin, le chemin complet le rend vivant.
+
+⚠ `data/.lances` est **sauté** : la trace des lancements a déjà un propriétaire
+(`lancer.sh` et sa rétention). La classer ici la proposerait à l'effacement à chaque passage.
+
+##### Le plan d'origine, gardé pour ce qu'il vaut
+
+
 **Le besoin** : que ce qu'on possède d'un rouleau se lise d'un seul endroit, et que la mise à
 jour soit une écriture dans **un** objet plutôt que dans quinze fichiers éparpillés.
 
@@ -468,7 +523,7 @@ pourrit**. La release est construite par un script ; le vérifier reste une tâc
 ![Les 218 greffons du dépôt](images/56_verbes.png)
 
 ```bash
-./lplv --verbes --json > docs/verbes.json
+./lplv --verbes --json > docs/mesures/verbes.json
 uv run python src/figures/figure_verbes.py     # → docs/images/56_verbes.png
 ```
 
@@ -608,11 +663,88 @@ seconde définition de `_police` dans l'arbre*.
   sur trois** : elle jugeait 11 figures sur 36 tout en annonçant « chacune ». Un libellé qui
   affirme ce que l'assertion ne vérifie pas.
 
-##### ⚠ Ce qui reste du chantier D
+#### ✅ Livré le 2026-08-26 — `docs/` rangé par nature, et l'audit que ce rangement a forcé
 
-- **`docs/` séparé par nature** : 58 `.md`, 345 `.json`, 72 `.png`, 79 `.log`. ⚠ Les blocs
-  « Reproduire » citent ces chemins — c'est `src/depot/deplacer.py` qui doit le faire, avec son
-  refus de laisser une citation pendante.
+**`docs/` à la racine : 522 fichiers → 58.** Les 58 documents, plus quatre dossiers.
+
+| nature | où | combien | ce qui la définit |
+|---|---|---:|---|
+| document | `docs/` | 58 | c'est ce que « docs » veut dire |
+| mesure | `docs/mesures/` | 384 | produite par un script, **citée 77 fois** comme un résultat |
+| journal | `docs/journaux/` | 79 | trace d'un run, **citée zéro fois** |
+| registre | `docs/registres/` | 1 | maintenu à la **main**, jamais produit |
+
+⭐ **Une nature n'est pas une extension, c'est un usage**, et le partage vient d'une mesure :
+les `.json` sont cités 77 fois par les documents, les `.log` **jamais**. Un journal se consulte
+après une panne, une mesure se cite comme un résultat. Les mélanger empêche de purger l'un
+sans risquer l'autre. Second signal, indépendant et concordant : les `.log` sont **gitignorés**.
+
+⚠⚠ **Et le registre bat son extension.** `murs_et_causes.tsv` est un `.tsv`, donc la table le
+classerait en mesure — et une purge des sorties emporterait un fichier tenu à la main. C'est la
+seule raison d'avoir deux natures qui se produisent différemment.
+
+##### ⚠⚠ Ce que le rangement a forcé à auditer, et qui était déjà cassé
+
+**`verifier_chiffres.py` lisait ses 50 mesures en `racine / "docs" / "x.json"`, écrit
+quarante-quatre fois.** Deux littéraux séparés : **aucune réécriture textuelle de
+`docs/<nom>.json` ne peut les voir**. Et chaque lecture est gardée par `if p.exists():`, donc
+un `docs/` rangé aurait fait sauter jusqu'à cinquante sources **en restant vert**. C'est « une
+vérification incapable d'échouer » appliquée à *tous* les chiffres publiés du dépôt.
+
+⭐ Le remède n'est pas de réparer quarante-quatre sites, c'est de **dire l'endroit une seule
+fois** : `DOSSIER_MESURES`, plus un `_source()` qui **enregistre** ce qu'il a cherché et
+trouvé. Le déplacement est alors une ligne. Mesuré : **50 sources, 0 manquante**, avant comme
+après. Sondé dans les deux sens — couper l'enregistrement fait tomber un contrôle, ne plus
+vider le registre entre deux appels en fait tomber deux.
+
+**81 fichiers seraient entrés dans le dépôt sans un mot.** `.gitignore` dit `/docs/*.log`, une
+règle **ancrée** à la racine de `docs/` : déplacer les journaux les en fait sortir, donc entrer
+dans le suivi. `ignores_rompus()` compare l'état ignoré avant et après **avant** de bouger quoi
+que ce soit — `git check-ignore` juge un chemin, pas un fichier, donc il répond pour une
+destination qui n'existe pas encore.
+
+**`git mv` refuse un fichier qu'il ne suit pas, et refuse au milieu du plan.** Mesuré : 14
+fichiers déplacés, puis un arrêt sur le premier `.log`. Le repli est un `rename` — mais il est
+**compté et nommé**, parce que « ce fichier n'est pas versionné » est une information sur le
+fichier, pas un détail d'implémentation.
+
+##### ⭐ Le danger que ce chantier existait pour écarter, et qu'il a attrapé
+
+Une citation morte se voit. Un **écrivain** non réparé, lui, recrée la mesure à la racine de `docs/`, à côté du
+fichier rangé : **deux fichiers pour une mesure**, l'un frais et l'autre mort, sans qu'aucune
+sortie ne change. `mentions_a_lancien_endroit()` l'a trouvé sur son premier vrai usage —
+**cinq blocs « Reproduire » du document 44** écrivaient `$PWD/docs/chaine_*.json`, des fichiers
+qui *n'existent pas encore*, donc invisibles pour un outil qui ne connaît que ce qui est là.
+
+Au total **19 endroits** réparés à la main, dont sept `--docs` dont le défaut désignait `docs/`
+alors qu'il veut dire « où sont les mesures », et treize blocs de reproduction qui passaient
+`--docs docs`.
+
+##### ⚠ Deux contradictions internes des outils, corrigées
+
+- **`deplacer.py` refusait de laisser une citation qu'il avait décidé exprès de ne pas
+  réparer.** Sa règle dit qu'un chemin écrit dans un résultat publié ne se réécrit pas — le
+  falsifier serait pire — mais son contrôle final le comptait comme pendant. Donc **aucun plan
+  touchant un fichier nommé dans un résultat ne pouvait aboutir** : un refus que personne ne
+  peut satisfaire. Mesuré ici : 125 chemins de cette classe, dont un recensement qui en cite 51
+  à lui seul. Ils sont désormais **nommés dans le rapport**, jamais tus — et une citation dans
+  un fichier qui n'est *pas* un enregistrement fait toujours refuser, ce qu'un contrôle vérifie.
+- **La docstring de `REGISTRES` promettait une vérification qui n'existait pas.** En
+  l'écrivant, elle a immédiatement corrigé sa propre liste : j'y avais mis `verbes.json`, qui
+  est lu comme une entrée par `lplv` — mais **produit** par `./lplv --verbes --json`. Le classer
+  en registre l'aurait mis hors de portée d'une purge de sorties alors que c'en est une.
+
+⚠ Et la règle de détection a dû apprendre qu'un `>` en début de ligne est une **citation
+Markdown**, pas une redirection : deux faux positifs, tous deux sur la ligne qui explique
+justement qu'un document est rendu — et l'un d'eux vivait dans une chaîne Python.
+
+##### ⚠ Performance : deux minutes sans réponse → 21 secondes
+
+`deplacer.py` recompilait 464 motifs pour chacun des 355 textes du dépôt, soit 165 000
+compilations. Motifs mis en cache, et un test d'appartenance de chaîne — condition **nécessaire**
+du motif, donc sans faux négatif possible — écarte la quasi-totalité des paires avant qu'une
+expression régulière ne tourne. Même coût, même remède, que dans `appelants.py`.
+
 - ~~**`.lances/` se purge**~~ ✅ **fait** : rétention **par script** (les 5 plus récents,
   `GARDES_PAR_SCRIPT`), écrite dans `lancer.sh` — le script qui les crée, comme le plan le
   demandait. **197 → 63 fichiers.** ⭐ Par script et non globale : garder les N plus récents

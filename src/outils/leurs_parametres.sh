@@ -85,4 +85,4 @@ rm -rf "$DEST/cache"
 [ -z "$SERIE" ] && { echo "⚠ aucun profil"; exit 3; }
 ( cd "$ROOT/experiments" && uv run python ../src/commun/test_convergence.py \
     --serie "${SERIE%,}" --nom "leurs paramètres exacts (${AIRE:-?} cm²)" \
-    --json "$ROOT/docs/leurs_parametres.json" )
+    --json "$ROOT/docs/mesures/leurs_parametres.json" )

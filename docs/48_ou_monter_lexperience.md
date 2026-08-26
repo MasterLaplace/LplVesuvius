@@ -323,10 +323,10 @@ qui ne dépasse pas ce bruit ne veut rien dire, et le lire comme un effet serait
 ## Reproduire
 
 ```bash
-python3 src/graine/eligibilite_aval.py --docs docs --json docs/eligibilite_aval.json
-python3 src/graine/eligibilite_aval.py --docs docs --sonder --json docs/eligibilite_aval.json
+python3 src/graine/eligibilite_aval.py --docs docs/mesures --json docs/mesures/eligibilite_aval.json
+python3 src/graine/eligibilite_aval.py --docs docs/mesures --sonder --json docs/mesures/eligibilite_aval.json
 uv run python src/figures/figure_eligibilite.py \
-    --json docs/eligibilite_aval.json --sortie docs/images/48_eligibilite.png
+    --json docs/mesures/eligibilite_aval.json --sortie docs/images/48_eligibilite.png
 
 # les témoins, hors ligne
 python3 src/graine/eligibilite_aval.py --verifier

@@ -7,7 +7,7 @@
 décimale. C'est le résultat, et c'est aussi exactement à quoi ressemble **une colonne
 recopiée deux fois**. Un lecteur ne peut pas distinguer les deux, et l'auteur non plus.
 
-⭐ Ce fichier recalcule tout depuis `docs/excision_samples.tsv` et **refuse de dessiner** si
+⭐ Ce fichier recalcule tout depuis `docs/mesures/excision_samples.tsv` et **refuse de dessiner** si
 les deux populations sont le même échantillon — mêmes lignes, ou même multiensemble de
 valeurs. Le résultat n'est croyable qu'une fois cette possibilité écartée par une mesure.
 
@@ -19,8 +19,8 @@ contrepartie matérielle locale — c'est même la lecture que `04` retient.
 
 Usage :
     uv run python src/figures/figure_excision.py \\
-        --tsv docs/excision_samples.tsv --sortie docs/images/04_excision.png \\
-        --json docs/excision_resume.json
+        --tsv docs/mesures/excision_samples.tsv --sortie docs/images/04_excision.png \\
+        --json docs/mesures/excision_resume.json
 """
 from __future__ import annotations
 
@@ -256,7 +256,7 @@ def verifier() -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--tsv", type=Path, default=Path(__file__).resolve().parents[2] / "docs/excision_samples.tsv")
+    ap.add_argument("--tsv", type=Path, default=Path(__file__).resolve().parents[2] / "docs/mesures/excision_samples.tsv")
     ap.add_argument("--sortie", type=Path, default=Path(__file__).resolve().parents[2] / "docs/images/04_excision.png")
     ap.add_argument("--json", type=Path)
     ap.add_argument("--anglais", action="store_true")

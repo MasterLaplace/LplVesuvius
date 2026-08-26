@@ -25,7 +25,7 @@ departager, et un accord mesure sur des ex-aequo artificiels ne veut rien dire. 
 censure decide donc de la lisibilite de tout ce qui suit, et il est dit en premier.
 
 Usage :
-    uv run python src/tables/table_second_axe.py [data/second_axe] [--json docs/second_axe.json]
+    uv run python src/tables/table_second_axe.py [data/second_axe] [--json docs/mesures/second_axe.json]
 """
 from __future__ import annotations
 
@@ -172,7 +172,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("dossier", nargs="?", default=str(RACINE / "data/second_axe"))
-    ap.add_argument("--table", type=Path, default=RACINE / "docs/table_tirages.json")
+    ap.add_argument("--table", type=Path, default=RACINE / "docs/mesures/table_tirages.json")
     ap.add_argument("--json")
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()

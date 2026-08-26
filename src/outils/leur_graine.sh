@@ -87,4 +87,4 @@ rm -rf "$DEST/cache"
 [ -z "$SERIE" ] && { echo "⚠ aucun profil — verdict impossible"; exit 3; }
 ( cd "$ROOT/experiments" && uv run python ../src/commun/test_convergence.py \
     --serie "${SERIE%,}" --nom "leur graine, notre chaîne" \
-    --json "$ROOT/docs/leur_graine.json" )
+    --json "$ROOT/docs/mesures/leur_graine.json" )

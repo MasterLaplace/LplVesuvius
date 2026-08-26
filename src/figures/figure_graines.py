@@ -22,7 +22,7 @@ la difficulté du rouleau.
 
 Usage :
     uv run python src/figures/figure_graines.py \\
-        --entree docs/table_graines.json --sortie docs/images/25_campagne_graines.png
+        --entree docs/mesures/table_graines.json --sortie docs/images/25_campagne_graines.png
 """
 from __future__ import annotations
 
@@ -147,7 +147,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     racine = Path(__file__).resolve().parents[2]
-    ap.add_argument("--entree", type=Path, default=racine / "docs/table_graines.json")
+    ap.add_argument("--entree", type=Path, default=racine / "docs/mesures/table_graines.json")
     ap.add_argument("--sortie", type=Path,
                     default=racine / "docs/images/25_campagne_graines.png")
     ap.add_argument("--verifier", action="store_true")

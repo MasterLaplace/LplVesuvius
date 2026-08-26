@@ -81,7 +81,7 @@ from pathlib import Path
 sys.path[:0] = [str(p) for p in __import__("pathlib").Path("src").glob("*") if p.is_dir()]
 from test_convergence import BRUIT_ALPHA
 lignes = []
-for f in sorted(Path("docs").glob("resolution_g*.json")):
+for f in sorted(Path("docs/mesures").glob("resolution_g*.json")):
     d = json.loads(f.read_text())
     g = int(f.stem.split("g")[-1])
     for x in (d.get("series") or ([d] if "verdict" in d else [])):

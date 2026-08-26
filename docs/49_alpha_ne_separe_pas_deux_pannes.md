@@ -119,7 +119,7 @@ maintenant lui-même ce que le profil dit, et refuse.
 ## Reproduire
 
 ```bash
-python3 src/commun/audit_profils_plats.py --racine . --json docs/audit_profils.json
+python3 src/commun/audit_profils_plats.py --racine . --json docs/mesures/audit_profils.json
 
 uv run python src/commun/test_convergence.py --nom m7 \
     --profil data/prediction_paris4/m7/profil_41c.json \

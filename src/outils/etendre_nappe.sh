@@ -116,7 +116,7 @@ mkdir -p "$DEST"
 # nomme `PHerc1447_officiel` contenait un segment a α = +1,02. On relit donc le verdict
 # ECRIT plutot que de se fier au chemin. Si aucun verdict n'existe, on refuse : etendre une
 # surface posee en travers ne mesure rien du tout.
-VERDICT_SOURCE=${VERDICT_SOURCE:-$ROOT/docs/spire_pas025_spire00.json}
+VERDICT_SOURCE=${VERDICT_SOURCE:-$ROOT/docs/mesures/spire_pas025_spire00.json}
 if [ -s "$VERDICT_SOURCE" ]; then
   V=$(python3 -c "
 import json,sys

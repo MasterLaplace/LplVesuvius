@@ -38,8 +38,8 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     racine = Path(__file__).resolve().parents[2]
-    ap.add_argument("--etroite", type=Path, default=racine / "docs/second_axe_21.json")
-    ap.add_argument("--large", type=Path, default=racine / "docs/second_axe_41.json")
+    ap.add_argument("--etroite", type=Path, default=racine / "docs/mesures/second_axe_21.json")
+    ap.add_argument("--large", type=Path, default=racine / "docs/mesures/second_axe_41.json")
     ap.add_argument("--sortie", type=Path, default=racine / "docs/images/37_deux_axes.png")
     a = ap.parse_args()
 

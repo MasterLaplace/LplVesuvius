@@ -304,7 +304,7 @@ def _verifier() -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--json", type=Path, default=Path("docs/etalon_rendu.json"))
+    ap.add_argument("--json", type=Path, default=Path("docs/mesures/etalon_rendu.json"))
     ap.add_argument("--sortie", type=Path, default=Path("docs/images/50_etalon_rendu.png"))
     ap.add_argument("--ram-go", type=float)
     ap.add_argument("--projection", action="append", default=[],

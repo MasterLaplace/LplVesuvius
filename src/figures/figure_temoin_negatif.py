@@ -19,7 +19,7 @@ qu'auraient **deux cartes étrangères l'une à l'autre**, valeur dérivée et n
 
 Usage :
     uv run python src/figures/figure_temoin_negatif.py \\
-        --json docs/temoin_negatif.json \\
+        --json docs/mesures/temoin_negatif.json \\
         --positif data/temoin_negatif/sur_sa_feuille.npy \\
         --negatif data/temoin_negatif/en_travers.npy \\
         --sortie docs/images/46_temoin_negatif.png
@@ -233,7 +233,7 @@ def verifier() -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--json", type=Path, default=Path(__file__).resolve().parents[2] / "docs/temoin_negatif.json")
+    ap.add_argument("--json", type=Path, default=Path(__file__).resolve().parents[2] / "docs/mesures/temoin_negatif.json")
     ap.add_argument("--positif", type=Path, default=Path("../data/temoin_negatif/sur_sa_feuille.npy"))
     ap.add_argument("--negatif", type=Path, default=Path("../data/temoin_negatif/en_travers.npy"))
     ap.add_argument("--sortie", type=Path, default=Path(__file__).resolve().parents[2] / "docs/images/46_temoin_negatif.png")

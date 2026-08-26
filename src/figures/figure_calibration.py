@@ -255,7 +255,7 @@ def _verifier() -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--json", type=Path, default=Path("docs/calibration_scroll1.json"))
+    ap.add_argument("--json", type=Path, default=Path("docs/mesures/calibration_scroll1.json"))
     ap.add_argument("--csv", type=Path, help="le balayage, pour les points individuels")
     # ⚠⚠ UNE figure, UNE geometrie. Un corpus publie n est pas homogene -- mesure sur
     # `Scroll1` : 80 segments a 109 couches et un a 6 -- et le relief depend de la

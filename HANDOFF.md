@@ -7,6 +7,90 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+## ⭐⭐⭐⭐⭐ `docs/` EST RANGÉ — 522 fichiers à la racine → 58, et l'audit que ça a forcé
+
+`docs/` : **58 documents**, plus `mesures/` (384), `journaux/` (79), `registres/` (1),
+`images/` (77) et les treize dossiers de campagne, déjà rangés par rouleau.
+
+⭐ **Une nature n'est pas une extension, c'est un usage**, et c'est mesuré : les `.json` sont
+cités **77 fois** par les documents, les `.log` **jamais**. Deuxième signal concordant et
+indépendant : les `.log` sont gitignorés. Et un **registre** bat son extension —
+`murs_et_causes.tsv` est tenu à la main, donc une purge des sorties ne doit pas l'emporter.
+
+### ⚠⚠ Ce que le rangement a forcé à auditer, et qui était CASSÉ avant lui
+
+- **Tous les chiffres publiés du dépôt étaient à une réorganisation d'être « vérifiés » par
+  personne.** `verifier_chiffres.py` lisait ses 50 mesures en `racine / "docs" / "x.json"`,
+  écrit **quarante-quatre fois** — deux littéraux séparés, donc invisibles à toute réécriture
+  textuelle — et chaque lecture est gardée par `if p.exists():`. Un `docs/` rangé aurait fait
+  sauter cinquante sources **en restant vert**. Le remède n'est pas quarante-quatre
+  réparations : c'est **dire l'endroit une seule fois** (`DOSSIER_MESURES`) et **enregistrer**
+  ce qu'on a cherché. Mesuré : 50 sources, 0 manquante, avant comme après le déplacement.
+- **81 fichiers seraient entrés dans le dépôt sans un mot.** `.gitignore` dit `/docs/*.log`,
+  une règle **ancrée** : les journaux déplacés en sortent, donc entrent dans le suivi.
+- **`git mv` refuse un fichier qu'il ne suit pas, et refuse au MILIEU du plan** : 14 fichiers
+  déplacés puis un arrêt sec sur le premier `.log`.
+
+### ⭐ Le danger visé, attrapé sur le premier vrai usage
+
+Une citation morte se voit ; un **écrivain** non réparé recrée la mesure à la racine, à côté du
+fichier rangé — **deux fichiers pour une mesure**, l'un frais et l'autre mort, sans qu'aucune
+sortie ne change. `mentions_a_lancien_endroit()` a trouvé **cinq blocs « Reproduire » du
+document 44** qui écrivent `$PWD/docs/chaine_*.json`, des fichiers *qui n'existent pas encore*
+— donc invisibles pour tout outil qui ne connaît que ce qui est là. 19 endroits réparés.
+
+### ⚠ Deux contradictions internes des outils
+
+- `deplacer.py` **refusait de laisser une citation qu'il avait décidé exprès de ne pas
+  réparer** : sa règle dit qu'un chemin écrit dans un résultat publié ne se réécrit pas, et son
+  contrôle final le comptait comme pendant. Aucun plan touchant un fichier nommé dans un
+  résultat ne pouvait aboutir — un refus que personne ne peut satisfaire. 125 chemins de cette
+  classe ici, dont un recensement qui en cite 51. Ils sont **nommés dans le rapport**, et une
+  citation dans un fichier qui n'est PAS un enregistrement fait toujours refuser.
+- La docstring de `REGISTRES` **promettait une vérification qui n'existait pas**. En l'écrivant,
+  elle a corrigé sa propre liste : `verbes.json` est lu comme une entrée par `lplv` mais
+  **produit** par `./lplv --verbes --json`. Le classer en registre l'aurait mis hors de portée
+  d'une purge de sorties alors que c'en est une.
+
+### ⚠⚠ CHANTIER B — la mesure CONTREDIT le plan, et c'est le plan qui cède
+
+Le plan disait « un dossier par ROULEAU ». Mesuré avant d'y toucher :
+
+- `data/` est **entièrement gitignoré** — **0 fichier suivi par git**. Le réorganiser ne change
+  rien pour qui clone le dépôt ; ça ne touche que la machine de l'auteur.
+- **11 des 81 dossiers seulement nomment un rouleau.** Les 86 % restants sont des
+  *expériences* (`chaine_*`, `spires_*`, `ext_*`), et les forcer sous un rouleau serait faux.
+- `data/trace/` groupe **déjà** par rouleau à l'intérieur — le rouleau est une SUBDIVISION
+  d'une expérience, pas l'inverse.
+- Coût : 296 citations sur 64 chemins distincts, plus 177 Gio à déplacer.
+
+⭐ Donc le déplacement est cher, risqué, et n'achète rien de visible. Ce que `data/` appelle
+vraiment, à 177 Gio, c'est **« qu'est-ce que je peux effacer »**.
+
+**`src/depot/donnees_sans_appelant.py` répond, et le chiffre est là : 50,6 Gio.**
+
+| classe | dossiers | poids | ce que ça veut dire |
+|---|---:|---:|---|
+| orphelins | 25 | **44,3 Gio** | aucun script, aucun document ne les nomme |
+| en journal seulement | 3 | **6,3 Gio** | un journal se souvient d'eux ; aucun code vivant |
+| vivants | 52 | — | nommés par un script ou un document |
+
+⚠⚠ **NOMMER N'EST PAS EFFACER, et l'outil n'efface jamais.** Un dossier que rien ne nomme peut
+être une entrée téléchargée une fois, ou le résultat d'une campagne qu'on n'a pas encore
+écrite. Dire « périmé » et remplacer sont deux actes — même discipline que
+`fraicheur_des_figures.py`, qui ne touche jamais `docs/images/`.
+
+⚠ Et la nuance qui rend le verdict utilisable : un dossier nommé **seulement dans un journal**
+n'est pas nommé par du code vivant. Un journal prouve un usage *passé*, pas un besoin
+*présent* — les confondre ferait effacer ce qui permet de recouper une campagne déjà publiée.
+
+⚠ Le nom nu ne compte pas, seul le chemin `data/<nom>` compte : `data/out` et `data/trace`
+portent des mots courants, et chercher « out » les déclarerait vivants depuis n'importe quelle
+prose. Même discipline que le préfixe d'identifiant, qui n'en est un que si un document en
+définit un membre. Sondé dans les deux sens.
+
+---
+
 > ⚠⚠ **Un test cassé par un `push`, pas par un commit.** `permalien.py` vérifiait le genre
 > d'un dossier au commit publié en nommant `analysis` — vrai jusqu'au rangement, et **faux dès
 > que `origin/main` a rattrapé HEAD**. Le contrôle est passé rouge sans qu'une ligne de
@@ -465,7 +549,7 @@ quoi que ce soit.
 > espace de causes dont on retire une entrée à la fois : lister des tâches laisse croire qu'on
 > avance quand on tourne, lister des éliminations montre l'espace rétrécir.
 >
-> ⚠ Le document est **rendu** depuis `docs/murs_et_causes.tsv` et **gardé** : chaque ligne
+> ⚠ Le document est **rendu** depuis `docs/registres/murs_et_causes.tsv` et **gardé** : chaque ligne
 > doit pointer vers un document qui contient encore son ancre, et la batterie compare le rendu
 > au fichier. C'est la panne d'`EXTRACTION.md` — une table tenue à la main qui dérive en
 > silence — rendue impossible.
@@ -819,7 +903,7 @@ davantage **ne sert pas** l'objectif.
 **Deux campagnes tournent en fond** (détachées, elles survivent à la fermeture de la session) :
 
 ```bash
-tail -f docs/convergence_essais.log     # essai_ng2 puis essai_scale1, 4 rendus
+tail -f docs/journaux/convergence_essais.log     # essai_ng2 puis essai_scale1, 4 rendus
 ps -eo pid,etime,args | grep '\.lances/'   # ce qui vit encore
 ```
 
@@ -1297,7 +1381,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 126 batteries, 3207 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 128 batteries, 3256 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)
@@ -1899,7 +1983,7 @@ la part de pics **au bord** BASSE et le pic **centré**. La mauvaise trace de `2
     référence d'une **autre** suite. Fermé structurellement : `run()` exige désormais
     **code de sortie 0 ET** `ALL PASS`, et lit le **dernier** match, pas le premier.
 39. ⚠⚠ **Un artefact de mesure doit porter CE SUR QUOI il a été pris.** Payé **trois
-    fois** le même jour : `docs/sweep_PHerc1667.jsonl` n'enregistre ni le zarr ni la taille
+    fois** le même jour : `docs/mesures/sweep_PHerc1667.jsonl` n'enregistre ni le zarr ni la taille
     de voxel, donc `07` §11 attribue à PHerc1667 une résolution de **7,91 µm** que le
     bucket ne publie pas ; `docs/carte_difficulte/*.json` n'enregistre pas le nombre de
     chunks, donc `16` cite le nombre **nominal** du script ; et l'artefact des fibres
@@ -2347,7 +2431,7 @@ comptes de franchissements de seuil.**
 
 ```bash
 tail -f .lances/tracer_prediction_paris4-20260822-213653.log   # 12 cellules, ~5 min chacune
-python3 src/encre/comparer_predictions.py --docs docs --json docs/paris4_2x2.json
+python3 src/encre/comparer_predictions.py --docs docs --json docs/mesures/paris4_2x2.json
 ```
 
 Le **2×2 répété** : les deux prédictions de `PHercParis4` × les deux graines × **trois

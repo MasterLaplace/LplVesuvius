@@ -23,7 +23,7 @@ segment plutot qu'avec son contenu.
 Usage :
     uv run python src/encre/comparer_encre.py CIBLE.npy --temoin TEMOIN.npy \\
         --nom-cible "PHerc1447 (prix, 8,64 µm)" --nom-temoin "Scroll 1 (AUC 0,925)" \\
-        --json docs/m1ter_encre_a_9um.json
+        --json docs/mesures/m1ter_encre_a_9um.json
 """
 from __future__ import annotations
 

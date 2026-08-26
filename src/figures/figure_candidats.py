@@ -296,7 +296,7 @@ def _verifier() -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--json", type=Path, default=Path("docs/paris4_candidats.json"))
+    ap.add_argument("--json", type=Path, default=Path("docs/mesures/paris4_candidats.json"))
     ap.add_argument("--sortie", type=Path, default=Path("docs/images/48_candidats.png"))
     ap.add_argument("--anglais", action="store_true")
     ap.add_argument("--verifier", action="store_true")

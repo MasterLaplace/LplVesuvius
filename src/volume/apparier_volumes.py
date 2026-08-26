@@ -20,7 +20,7 @@ volume `<scan>-<voxel>um-...zarr`. Le prefixe est l'identite du scan. On apparie
 
 Usage :
     uv run python src/volume/apparier_volumes.py PHerc1203
-    uv run python src/volume/apparier_volumes.py --tous --json docs/appariement.json
+    uv run python src/volume/apparier_volumes.py --tous --json docs/mesures/appariement.json
     python3 src/volume/apparier_volumes.py --verifier
 """
 from __future__ import annotations

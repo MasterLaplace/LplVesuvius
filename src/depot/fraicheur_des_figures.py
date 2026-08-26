@@ -7,7 +7,7 @@ une image peut exister, être référencée, et **ne plus correspondre à ses do
 
 Mesuré le 2026-08-26, en cherchant tout autre chose : **trois images** de `docs/` diffèrent de
 ce que leur producteur rend. `51_appuis.png` a été commise le 23 août ; son entrée
-`docs/appui_de_pente.json` a bougé le 24. L'image n'a jamais été refaite. Rien ne l'a dit, et
+`docs/mesures/appui_de_pente.json` a bougé le 24. L'image n'a jamais été refaite. Rien ne l'a dit, et
 un lecteur ne peut pas le savoir : une figure périmée s'affiche exactement comme une figure à
 jour.
 

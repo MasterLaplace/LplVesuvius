@@ -104,7 +104,7 @@ fi
 
 SOURCE="${SOURCE:?SOURCE requis — un tifxyz dont on sait qu il suit une feuille}"
 DEST="${DEST:-$ROOT/data/portee_tangentielle}"
-JSON="${JSON:-$ROOT/docs/portee_tangentielle.json}"
+JSON="${JSON:-$ROOT/docs/mesures/portee_tangentielle.json}"
 SONDES="${SONDES:-12}"
 PAS_DEFAUT="0 1 2 5 10 20 50"
 PAS="${*:-$PAS_DEFAUT}"

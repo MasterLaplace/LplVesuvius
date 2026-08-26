@@ -209,11 +209,12 @@ def en(x: float, n: int = 3) -> str:
     return f"{x:.{n}f}"
 
 
-DOSSIER_MESURES = "docs"
+DOSSIER_MESURES = "docs/mesures"
 """⭐ Le SEUL endroit de ce fichier qui dit OÙ vivent les mesures.
 
 ⚠⚠ Il était écrit **quarante-quatre fois**, en `_source(racine, "x.json")`. Deux littéraux
-séparés : aucune réécriture textuelle de `docs/x.json` ne peut les voir, donc ranger `docs/`
+séparés : aucune réécriture textuelle de `docs/<nom>.json` ne peut les voir, donc ranger
+`docs/`
 aurait fait manquer les quarante-quatre sources **sans un mot** — et chaque lecture est gardée
 par `if p.exists():`, donc le contrôle serait resté vert en ne vérifiant plus rien. C'est la
 « vérification incapable d'échouer » à l'échelle de tous les chiffres publiés du dépôt.

@@ -22,7 +22,7 @@ le vrai juge **condamne**. Un proxy peut trier correctement les bonnes et rater 
 mauvaises, et le ρ global le cacherait.
 
 Usage :
-    uv run python src/encre/juge_a_un_rendu.py --racine data --json docs/juge_a_un_rendu.json
+    uv run python src/encre/juge_a_un_rendu.py --racine data --json docs/mesures/juge_a_un_rendu.json
 """
 from __future__ import annotations
 
@@ -91,7 +91,7 @@ def recolter(racine: Path, fenetre: int = 31, geo: dict[str, dict] | None = None
     for prof in sorted(glob.glob(str(racine / "spires*" / "spire*" / f"profil_{fenetre}c.json"))):
         p = Path(prof)
         campagne, spire = p.parts[-3], p.parts[-2]
-        verdict = RACINE / "docs" / f"spire_{etiquette_de(campagne)}{spire}.json"
+        verdict = RACINE / "docs" / "mesures" / f"spire_{etiquette_de(campagne)}{spire}.json"
         if not verdict.is_file():
             continue
         d = json.loads(p.read_text(encoding="utf-8"))

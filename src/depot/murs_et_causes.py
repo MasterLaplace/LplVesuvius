@@ -9,7 +9,7 @@ tâches laisse croire qu'on avance quand on tourne ; une feuille de route qui li
 **éliminées** montre l'espace rétrécir, ce qui est le seul progrès mesurable sur un problème
 non résolu.
 
-⭐ Le registre lui-même (`docs/murs_et_causes.tsv`) est tenu **à la main** : ce sont des
+⭐ Le registre lui-même (`docs/registres/murs_et_causes.tsv`) est tenu **à la main** : ce sont des
 jugements, pas des mesures, et les fabriquer automatiquement serait inventer un consensus.
 Ce qui est **vérifié par machine**, ce sont ses **pointeurs** — chaque ligne nomme un document
 et une ancre, et la batterie exige que l'ancre s'y trouve encore.
@@ -26,7 +26,7 @@ import sys
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parents[2]
-REGISTRE = RACINE / "docs" / "murs_et_causes.tsv"
+REGISTRE = RACINE / "docs" / "registres" / "murs_et_causes.tsv"
 
 # ⚠ Vocabulaire FERMÉ. Un verdict libre laisserait écrire « plutôt éliminée », qui ne veut rien
 # dire et qui est exactement ce qu'on écrit quand on n'a pas mesuré.
@@ -86,7 +86,7 @@ def rendre(entrees: list[dict]) -> str:
         "# 55 — Les murs, et l'espace de causes qui rétrécit",
         "",
         "> ⚠⚠ **Ce document est RENDU, pas écrit.** Sa source est",
-        "> [`docs/murs_et_causes.tsv`](murs_et_causes.tsv) et son producteur est",
+        "> [`docs/registres/murs_et_causes.tsv`](murs_et_causes.tsv) et son producteur est",
         "> `src/depot/murs_et_causes.py --rendre`. L'éditer à la main serait perdre la",
         "> modification au rendu suivant — et surtout perdre la garde : la batterie vérifie que",
         "> **chaque ligne pointe vers un document qui contient encore son ancre**.",

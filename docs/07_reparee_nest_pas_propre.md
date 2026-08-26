@@ -241,9 +241,9 @@ uniforme aurait été un décalage d'échelle, sans effet sur un rang de Spearma
 ```bash
 cd experiments
 uv run python src/excision/baseline_sweep.py \
-    ../repos/windcheck/data/scroll1_tifxyz ../docs/baseline_sweep_scroll1.jsonl
+    ../repos/windcheck/data/scroll1_tifxyz ../docs/mesures/baseline_sweep_scroll1.jsonl
 uv run python src/excision/variant_correlate.py \
-    ../docs/baseline_sweep_scroll1.jsonl ../repos/windcheck/results/index.json
+    ../docs/mesures/baseline_sweep_scroll1.jsonl ../repos/windcheck/results/index.json
 ```
 
 ---
@@ -401,7 +401,7 @@ faire échouer**.
 
 ⚠⚠ **Corrigé le 2026-08-19 : PHerc1667 n'a AUCUN volume à 7,91 µm.** Vérifié sur le
 bucket : il n'en publie que deux, **2,399 µm** et **1,129 µm**
-(`docs/volumes_surface_PHerc1667.txt` le dit aussi). Les deux autres lignes du tableau se
+(`docs/mesures/volumes_surface_PHerc1667.txt` le dit aussi). Les deux autres lignes du tableau se
 tiennent — leur rayon physique est d'environ **140 µm** (18 × 7,91 et 15 × 9,362) — mais
 celle-ci ne peut pas être lue :
 
@@ -409,7 +409,7 @@ celle-ci ne peut pas être lue :
 - si **18 voxels** ont été appliqués tels quels, le rayon physique n'était que de **43 µm**,
   soit trois fois moins que sur les deux autres rouleaux — et la comparaison n'est plus appariée.
 
-L'artefact `docs/sweep_PHerc1667.jsonl` **n'enregistre ni le zarr ni la taille de voxel**,
+L'artefact `docs/mesures/sweep_PHerc1667.jsonl` **n'enregistre ni le zarr ni la taille de voxel**,
 donc rien ici ne tranche. ⏳ **À rejouer en enregistrant la résolution**, et c'est aussi
 une leçon d'outillage : *un artefact de mesure doit porter la résolution sur laquelle il a
 été pris.*

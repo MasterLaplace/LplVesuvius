@@ -270,7 +270,7 @@ uv run python ../src/volume/depth_profile.py ../data/layers/<segment> \
 # le segment entier
 uv run python ../src/volume/depth_profile.py ../data/layers/<a> ../data/layers/<b> \
     --grid --size 512 --step 1024 --from-layer 15 --to-layer 40 \
-    --out ../docs/profil_grille.json
+    --out ../docs/mesures/profil_grille.json
 ```
 
 
@@ -499,8 +499,8 @@ et elle se vérifie sans rien supposer d'autre :
 
 | artefact | entrées (= segments) | `sondees` (= fenêtres par segment) |
 |---|---:|---:|
-| `docs/profondeur_corpus_2.4um.json` | **80** | **50** |
-| `docs/fibres_corpus.json` | 80 | **72** |
+| `docs/mesures/profondeur_corpus_2.4um.json` | **80** | **50** |
+| `docs/mesures/fibres_corpus.json` | 80 | **72** |
 
 Le 72 est le nombre de fenêtres de la campagne **fibres** (treillis 6 × 12), et il a
 migré dans une phrase qui parle de **segments de profondeur**. Un compteur *par entrée*
@@ -582,5 +582,5 @@ tombe, et c'est écrit.
 ```bash
 cd inference_xpu
 uv run python ../src/encre/tester_prediction_50um.py \
-    ../docs/croisement_encre.json --out ../docs/prediction_50um.json
+    ../docs/mesures/croisement_encre.json --out ../docs/mesures/prediction_50um.json
 ```

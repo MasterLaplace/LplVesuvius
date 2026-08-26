@@ -13,7 +13,7 @@ jour**, et c'est la forme de leur échec qui a produit l'instrument.
 > surface posée en travers de l'empilement voit son « pic » s'éloigner avec elle.**
 > α = **+0,00** contre **+1,01**.
 
-Figure : `src/figures/figure_convergence.py`, depuis `docs/convergence.json`.
+Figure : `src/figures/figure_convergence.py`, depuis `docs/mesures/convergence.json`.
 
 ## 1. Les trois hypothèses, et pourquoi elles sont tombées
 
@@ -191,6 +191,6 @@ done
 (cd experiments && uv run python ../src/commun/test_convergence.py \
   --serie "31:17.28,81:17.30"                      --nom "segment officiel" \
   --serie "21:86.4,41:159.84,81:311.04,161:682.56" --nom "notre trace" \
-  --json ../docs/convergence.json)
+  --json ../docs/mesures/convergence.json)
 uv run python src/figures/figure_convergence.py
 ```

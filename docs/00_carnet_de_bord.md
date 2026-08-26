@@ -316,7 +316,7 @@ uv run python -m windcheck.fetch --sample PHerc0172 --skip-download --verify
 cd ../../experiments                # notre mesure
 uv sync
 ./run_measure.sh                    # echantillonne le CT aux cellules excisees
-uv run python -m excision.analyse ../docs/excision_samples.tsv
+uv run python -m excision.analyse ../docs/mesures/excision_samples.tsv
 ```
 
 ### Recuperer de la donnee sans `aws`
@@ -359,7 +359,7 @@ mega-octets ».
 ```bash
 ./src/outils/temoins.sh                  # 52 batteries, 1469 controles hors ligne, tous verts
                                     # ⚠ ces deux chiffres sont ECRITS PAR LE SCRIPT dans
-                                    # docs/temoins.json et gardes comme tous les autres :
+                                    # docs/mesures/temoins.json et gardes comme tous les autres :
                                     # la version precedente disait 18 et 741, recopies a
                                     # la main et donc faux depuis longtemps
 ./validate.sh                       # la chaine complete : tests + builds + boot + parite
@@ -380,19 +380,19 @@ mega-octets ».
 # un critere mesure a une profondeur juge-t-il une trace rendue a une autre ? (docs/47)
 # la reponse est non : 13 traces sur 16 butent sur le plafond du rendu, donc un seuil
 # absolu compare des reglages et pas des surfaces
-python3 src/graine/derive_avec_profondeur.py --docs docs --json docs/derive_profondeur.json
+python3 src/graine/derive_avec_profondeur.py --docs docs/mesures --json docs/mesures/derive_profondeur.json
 
 # ou l'experience « reparer sert-il ? » peut-elle etre montee ? les rouleaux qu'on sait
 # TRACER et ceux dont la sortie publiee porte du TEXTE sont disjoints (docs/48)
-python3 src/graine/eligibilite_aval.py --docs docs --sonder --json docs/eligibilite_aval.json
+python3 src/graine/eligibilite_aval.py --docs docs/mesures --sonder --json docs/mesures/eligibilite_aval.json
 
 # α ≈ 1 a DEUX causes : un pic qui recule, et aucun pic du tout. Un profil plat rapporte le
 # bord de la fenetre, donc α = 1 par identite arithmetique (docs/49)
-python3 src/commun/audit_profils_plats.py --racine . --json docs/audit_profils.json
+python3 src/commun/audit_profils_plats.py --racine . --json docs/mesures/audit_profils.json
 
 # la carte des segments publies d'un rouleau : y a-t-il deux patchs d'UNE MEME feuille ?
 uv run python src/commun/carte_segments.py --rouleau PHerc1447 \
-     --telecharger data/segments_officiels --json docs/segments_PHerc1447.json
+     --telecharger data/segments_officiels --json docs/mesures/segments_PHerc1447.json
 
 # les instruments qui jugent une TRACE, sans verite terrain
 vc_tifxyz_selfcross --surface <mesh.tifxyz> -o rapport.json   # exit 3 si defaut
@@ -405,7 +405,7 @@ python3 src/graine/compter_corpus.py                 # les comptes viennent des 
 python3 tracecheck/mutation.py                         # chaque detecteur est PORTEUR
 python3 src/nappe/lire_selfcross.py --verifier       # un verdict qui n'a rien teste est REFUSE
 uv run python src/depot/verifier_chiffres.py docs/*.md \
-     --soumission docs/21_texte_de_soumission.md          # 93 chiffres recalcules depuis leur JSON
+     --soumission docs/21_texte_de_soumission.md          # 215 chiffres recalcules depuis 47 fichiers de resultat
 ```
 
 ⚠⚠ **Les cinq derniers ne mesurent rien du papyrus** — ils mesurent le depot. Ils

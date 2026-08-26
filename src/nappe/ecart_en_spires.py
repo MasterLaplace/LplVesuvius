@@ -25,7 +25,7 @@ Ce qui tranche est une fenetre assez large pour que le plafond vaille DEUX spire
 qui reste a une spire est alors une mesure, pas une borne.
 
 Usage :
-    uv run python src/nappe/ecart_en_spires.py [docs/second_axe_41.json ...] [--json ...]
+    uv run python src/nappe/ecart_en_spires.py [docs/mesures/second_axe_41.json ...] [--json ...]
 """
 from __future__ import annotations
 
@@ -81,7 +81,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("fichiers", nargs="*", type=Path,
-                    default=[RACINE / "docs/second_axe_41.json"])
+                    default=[RACINE / "docs/mesures/second_axe_41.json"])
     ap.add_argument("--json")
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()

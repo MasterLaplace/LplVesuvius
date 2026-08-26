@@ -107,9 +107,9 @@ profondeurs **sans censure des deux côtés**.
 ## Reproduire
 
 ```bash
-python3 src/graine/derive_avec_profondeur.py --docs docs --json docs/derive_profondeur.json
+python3 src/graine/derive_avec_profondeur.py --docs docs/mesures --json docs/mesures/derive_profondeur.json
 uv run python src/figures/figure_derive_profondeur.py \
-    --json docs/derive_profondeur.json --docs ../docs \
+    --json docs/mesures/derive_profondeur.json --docs ../docs/mesures \
     --sortie docs/images/47_derive_profondeur.png
 
 # les témoins, hors ligne

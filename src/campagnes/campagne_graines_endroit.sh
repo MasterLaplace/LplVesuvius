@@ -15,7 +15,7 @@
 # qu on ne sait pas ce qu il vaut au niveau demande (307 µm au niveau 0, 1229 µm au niveau 2).
 #
 # Usage :
-#   ./src/campagnes/campagne_graines_endroit.sh            # ecrit docs/graines_endroit.json
+#   ./src/campagnes/campagne_graines_endroit.sh            # ecrit docs/mesures/graines_endroit.json
 set -u
 cd "$(dirname "$0")/../.." || exit 2
 ROOT=$PWD
@@ -44,7 +44,7 @@ if [ "${1:-}" = "--verifier" ]; then
   exit $ok
 fi
 
-SORTIE="${SORTIE:-$ROOT/docs/graines_endroit.json}"
+SORTIE="${SORTIE:-$ROOT/docs/mesures/graines_endroit.json}"
 RAYON="${RAYON:-8}"
 TMP=$(mktemp -d); trap 'rm -rf "$TMP"' EXIT
 

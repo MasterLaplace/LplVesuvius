@@ -16,12 +16,12 @@ if [ ! -f data/layers/scroll4_20231111135340/64.tif ]; then
   echo "  relance du telechargement 41-64"
   setsid nohup ./src/outils/fetch_layers.sh \
     "https://dl.ash2txt.org/full-scrolls/Scroll4/PHerc1667.volpkg/paths/20231111135340" \
-    data/layers/scroll4_20231111135340 3 41 64 >> docs/fetch_scroll4_haut.log 2>&1 < /dev/null &
+    data/layers/scroll4_20231111135340 3 41 64 >> docs/journaux/fetch_scroll4_haut.log 2>&1 < /dev/null &
 fi
 # ⚠ La bande B a peut-etre ete perdue : `src/outils/bandes_niveau0.sh` saute ce qui est deja
 # fait, donc le relancer est sans risque et sans doublon.
-[ -s docs/bande_niveau0_B.json ] || {
+[ -s docs/mesures/bande_niveau0_B.json ] || {
   echo "  relance de la bande B niveau 0"
-  setsid nohup nice -n 12 ./src/outils/bandes_niveau0.sh >> docs/bandes_niveau0.log 2>&1 < /dev/null &
+  setsid nohup nice -n 12 ./src/outils/bandes_niveau0.sh >> docs/journaux/bandes_niveau0.log 2>&1 < /dev/null &
 }
 echo "termine"

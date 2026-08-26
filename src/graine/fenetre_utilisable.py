@@ -24,7 +24,7 @@ d'un facteur vingt à soixante-dix. L'étiquette n'est pas une politesse.
 
 Reproduire :
 
-    python3 src/graine/fenetre_utilisable.py --racine . --json docs/fenetre_utilisable.json
+    python3 src/graine/fenetre_utilisable.py --racine . --json docs/mesures/fenetre_utilisable.json
     python3 src/graine/fenetre_utilisable.py --verifier
 """
 from __future__ import annotations

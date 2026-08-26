@@ -25,7 +25,7 @@ page écrite **peut** être un artefact périodique. C'est un critère nécessai
 suffisant — exactement comme l'absence d'auto-intersection l'est pour une trace.
 
 Usage :
-    python3 src/graine/eligibilite_aval.py --docs docs --json docs/eligibilite_aval.json
+    python3 src/graine/eligibilite_aval.py --docs docs/mesures --json docs/mesures/eligibilite_aval.json
     python3 src/graine/eligibilite_aval.py --verifier
 """
 from __future__ import annotations
@@ -278,14 +278,14 @@ def verifier() -> int:
     # fichier de résultat est là, on exige que le lecteur en tire quelque chose. Le saut est
     # ANNONCÉ et compté quand il ne l'est pas — un témoin qui se tait ressemble à un témoin
     # qui réussit.
-    reel = Path(__file__).resolve().parents[2] / "docs" / "table_tirages.json"
+    reel = Path(__file__).resolve().parents[2] / "docs" / "mesures" / "table_tirages.json"
     if reel.is_file():
         vrai = tracables(json.loads(reel.read_text(encoding="utf-8")))
         v("le lecteur tire quelque chose du VRAI fichier de résultat",
           len(vrai) >= 10, f"{len(vrai)} rouleau(x)")
         saute = ""
     else:
-        saute = "  ⚠ 1 contrôle SAUTÉ : docs/table_tirages.json est absent"
+        saute = "  ⚠ 1 contrôle SAUTÉ : docs/mesures/table_tirages.json est absent"
 
     if echecs:
         print(f"\nECHEC ({echecs} failures, {controles} checks)")
@@ -297,7 +297,7 @@ def verifier() -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--docs", type=Path, default=Path("docs"))
+    ap.add_argument("--docs", type=Path, default=Path("docs/mesures"))
     ap.add_argument("--json", type=Path)
     ap.add_argument("--sonder", action="store_true",
                     help="interroger S3 : chaque candidat publie-t-il une PRÉDICTION de "

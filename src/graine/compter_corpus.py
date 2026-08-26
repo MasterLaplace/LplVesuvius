@@ -81,7 +81,7 @@ def main() -> int:
     ap.add_argument("--json")
     a = ap.parse_args()
 
-    lignes = [x for x in (examiner(p) for p in sorted((RACINE / "docs").glob("*.json")))
+    lignes = [x for x in (examiner(p) for p in sorted((RACINE / "docs" / "mesures").glob("*.json")))
               if x]
     if not lignes:
         print("aucun artefact de corpus lisible")

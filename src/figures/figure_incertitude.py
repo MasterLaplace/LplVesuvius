@@ -25,7 +25,7 @@ dit.
 
 Usage :
     uv run python src/figures/figure_incertitude.py \\
-        --entree docs/incertitude_carte.json --sortie docs/images/33_incertitude.png
+        --entree docs/mesures/incertitude_carte.json --sortie docs/images/33_incertitude.png
 """
 from __future__ import annotations
 
@@ -47,7 +47,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--entree", type=Path,
-                    default=Path(__file__).resolve().parents[2] / "docs/incertitude_carte.json")
+                    default=Path(__file__).resolve().parents[2] / "docs/mesures/incertitude_carte.json")
     ap.add_argument("--sortie", type=Path,
                     default=Path(__file__).resolve().parents[2] / "docs/images/33_incertitude.png")
     a = ap.parse_args()

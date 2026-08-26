@@ -1,7 +1,7 @@
 # La boucle de correction tourne — et 318 points ne suffisent pas
 
 2026-08-21. Reproductible : `./src/outils/lancer.sh --fond src/outils/boucle_de_correction.sh`.
-Verdicts : `docs/boucle_temoin.json`, `docs/boucle_corrige_gen5.json`.
+Verdicts : `docs/mesures/boucle_temoin.json`, `docs/mesures/boucle_corrige_gen5.json`.
 
 ---
 
@@ -242,9 +242,9 @@ correction ; ce paragraphe dit ce qui va être tenté et pourquoi, pas ce qui a 
 # la figure, depuis les verdicts eux-mêmes — jamais des nombres recopiés
 (cd experiments && uv run python ../src/commun/test_convergence.py \
   --serie "31:17.28,81:17.30" --nom "segment officiel (bonne surface)" \
-  --depuis "../docs/boucle_temoin.json=témoin, sans correction" \
-  --depuis "../docs/boucle_corrige_gen5.json=corrigé, 318 points de passage" \
-  --json ../docs/boucle_convergence.json)
+  --depuis "../docs/mesures/boucle_temoin.json=témoin, sans correction" \
+  --depuis "../docs/mesures/boucle_corrige_gen5.json=corrigé, 318 points de passage" \
+  --json ../docs/mesures/boucle_convergence.json)
 uv run python src/figures/figure_convergence.py \
-  --entree docs/boucle_convergence.json --sortie docs/images/42_boucle_convergence.png
+  --entree docs/mesures/boucle_convergence.json --sortie docs/images/42_boucle_convergence.png
 ```

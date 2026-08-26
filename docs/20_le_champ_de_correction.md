@@ -144,7 +144,7 @@ Scroll 1 et Scroll 4. La conclusion tient donc sur **trois** rouleaux, deux rés
 
 Le seuil qui sépare « la trace ondule dans sa feuille » de « elle a changé de feuille »
 est le **pas inter-feuilles**. Sur Scroll 1 il vaut **172,8 µm**
-(`docs/espacement_PHercParis4_L1.json`).
+(`docs/mesures/espacement_PHercParis4_L1.json`).
 
 | | résiduel médian | en écarts inter-feuilles | segments au-dessus d'un écart |
 |---|---:|---:|---:|
@@ -240,7 +240,7 @@ d'être noté et rien de plus.
 
 cd inference_xpu
 uv run python ../src/tables/table_champ.py ../docs/champ_PHercParis4 \
-    --pas-um 172.8 --encre ../docs/croisement_encre.json --out ../docs/table_champ.json
+    --pas-um 172.8 --encre ../docs/mesures/croisement_encre.json --out ../docs/mesures/table_champ.json
 ```
 
 ⚠ `--pas-um` prend le pas **de ce rouleau-là**. Sans lui, le compte de sauts de feuille

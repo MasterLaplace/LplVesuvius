@@ -154,10 +154,10 @@ uv run --project . python src/nappe/decouper_tifxyz.py \
     data/temoin_rendu/publie_20230702185753 \
     --comme data/paris4_candidats/ps256_c0/plat \
     --dest data/temoin_rendu/morceaux --nombre 4 \
-    --json docs/temoin_rendu_morceaux.json
+    --json docs/mesures/temoin_rendu_morceaux.json
 
 # le témoin : notre chaîne rend une surface publiée, puis on la situe dans son corpus
-CORPUS=docs/balayage_scroll1.csv src/outils/temoin_du_rendu.sh data/temoin_rendu/morceaux/morceau_0*
+CORPUS=docs/mesures/balayage_scroll1.csv src/outils/temoin_du_rendu.sh data/temoin_rendu/morceaux/morceau_0*
 
 # les témoins, hors ligne
 uv run --project . python src/nappe/decouper_tifxyz.py --verifier

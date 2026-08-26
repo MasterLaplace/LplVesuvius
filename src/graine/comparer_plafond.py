@@ -22,8 +22,8 @@ l'inclure ferait baisser l'effet mesure sans qu'aucune ligne ne le signale.
 
 Usage :
     cd experiments && uv run python ../src/graine/comparer_plafond.py \\
-        ../docs/table_tirages.json ../docs/table_tirages_plafond.json \\
-        --json ../docs/comparaison_plafond.json
+        ../docs/mesures/table_tirages.json ../docs/mesures/table_tirages_plafond.json \\
+        --json ../docs/mesures/comparaison_plafond.json
     python3 src/graine/comparer_plafond.py --verifier
 """
 from __future__ import annotations

@@ -15,7 +15,7 @@ diagonale. **Aucun verdict positif n'est concerné**, et ça se lit sans lire un
 
 Usage :
     uv run python src/figures/figure_deux_pannes.py \\
-        --json docs/audit_profils.json --sortie docs/images/49_deux_pannes.png
+        --json docs/mesures/audit_profils.json --sortie docs/images/49_deux_pannes.png
 """
 from __future__ import annotations
 
@@ -96,7 +96,7 @@ def verifier() -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--json", type=Path, default=Path(__file__).resolve().parents[2] / "docs/audit_profils.json")
+    ap.add_argument("--json", type=Path, default=Path(__file__).resolve().parents[2] / "docs/mesures/audit_profils.json")
     ap.add_argument("--sortie", type=Path, default=Path(__file__).resolve().parents[2] / "docs/images/49_deux_pannes.png")
     ap.add_argument("--anglais", action="store_true")
     ap.add_argument("--verifier", action="store_true")

@@ -22,7 +22,7 @@ un FILTRE — il elimine les paires qui ne peuvent pas se raccorder — jamais u
 paire le peut. C'est exactement pour ça qu'il est bon marche.
 
 Usage :
-    uv run python src/commun/carte_segments.py --rouleau PHerc1447 --json docs/segments.json
+    uv run python src/commun/carte_segments.py --rouleau PHerc1447 --json docs/mesures/segments.json
 """
 from __future__ import annotations
 

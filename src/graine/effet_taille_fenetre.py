@@ -21,7 +21,7 @@ font l'amplitude. Ce qu'il faut en retenir n'est pas « la grandeur est mauvaise
 Reproduire :
 
     python3 src/graine/effet_taille_fenetre.py data/paris4_candidats/ps256_c0/rendu_161 \\
-        --tailles 1024 512 256 --couche-tracee 80 --json docs/effet_taille_fenetre.json
+        --tailles 1024 512 256 --couche-tracee 80 --json docs/mesures/effet_taille_fenetre.json
     python3 src/graine/effet_taille_fenetre.py --verifier
 """
 from __future__ import annotations

@@ -194,4 +194,4 @@ uv run python ../src/encre/structure.py ../data/out/ink_segment_complet.npy \
     --region "A texte:3584:2048" --region "B vide:6144:1024" --region "C doute:8704:1024"
 ```
 
-Sortie brute conservée dans `docs/eval_segment_complet.txt`.
+Sortie brute conservée dans `docs/mesures/eval_segment_complet.txt`.

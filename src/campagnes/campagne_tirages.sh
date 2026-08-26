@@ -13,7 +13,7 @@
 # des que le tirage varie, meme quand tous les tirages sont propres. Les deux sont
 # mesurees, et `table_tirages.py` refuse de conclure sur le taux seul.
 #
-# ⚠ Les graines viennent de `docs/table_graines.json` (versionne), critere « planarite »
+# ⚠ Les graines viennent de `docs/mesures/table_graines.json` (versionne), critere « planarite »
 # -- le seul qui ait replique (10 fois sur 12, p = 0,0386). Le volume et la taille de
 # voxel sont RELUS sur S3 et CONFRONTES a la table : un desaccord arrete le rouleau au
 # lieu de tracer a la mauvaise echelle. Sans `voxelsize` juste, l'aire sort nulle et
@@ -47,7 +47,7 @@ if [ "$#" -gt 0 ]; then
 else
   ROULEAUX=$(python3 -c "
 import json
-d = json.load(open('$ROOT/docs/table_graines.json'))
+d = json.load(open('$ROOT/docs/mesures/table_graines.json'))
 print(' '.join(l['rouleau'] for l in d['lignes'] if l.get('planarite')))")
 fi
 
@@ -58,7 +58,7 @@ for R in $ROULEAUX; do
   echo "== $R"
   read -r X Y Z UM_TABLE <<<"$(python3 -c "
 import json, sys
-d = json.load(open('$ROOT/docs/table_graines.json'))
+d = json.load(open('$ROOT/docs/mesures/table_graines.json'))
 for l in d['lignes']:
     if l['rouleau'] == '$R' and l.get('planarite'):
         p = l['planarite']

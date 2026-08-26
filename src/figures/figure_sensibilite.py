@@ -39,7 +39,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--entree", type=Path,
-                    default=Path(__file__).resolve().parents[2] / "docs/sensibilite_maillage.json")
+                    default=Path(__file__).resolve().parents[2] / "docs/mesures/sensibilite_maillage.json")
     ap.add_argument("--sortie", type=Path,
                     default=Path(__file__).resolve().parents[2] / "docs/images/34_sensibilite.png")
     a = ap.parse_args()

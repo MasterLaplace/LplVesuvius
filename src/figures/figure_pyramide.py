@@ -244,7 +244,7 @@ def _verifier() -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--docs", type=Path, default=Path("docs"))
+    ap.add_argument("--docs", type=Path, default=Path("docs/mesures"))
     ap.add_argument("--sortie", type=Path, default=Path("docs/images/50_pyramide.png"))
     ap.add_argument("--voxel-base", type=float, default=2.4)
     ap.add_argument("--anglais", action="store_true")

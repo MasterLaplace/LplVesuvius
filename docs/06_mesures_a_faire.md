@@ -346,7 +346,7 @@ serait détectable à 80 %. Le maillage manquant a été obtenu par `src/outils/
 
 ⚠ **Bloquée sur un fait matériel, constaté le 2026-08-17** : le maillage `tifxyz` de
 `20230909121925` n'est pas dans `repos/windcheck/data/scroll1_tifxyz`, et les 46
-traces de `docs/proximity_scroll1.jsonl` ne l'incluent pas. La première étape est
+traces de `docs/mesures/proximity_scroll1.jsonl` ne l'incluent pas. La première étape est
 donc un téléchargement, pas un calcul. Une fois là, `10` §3bis donne une question
 précise à lui poser : *les bandes 8704–9728, où le modèle produit du signal informe
 que personne n'a annoté, portent-elles une proximité anormale ?* Si oui, ce « signal »

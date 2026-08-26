@@ -129,7 +129,7 @@ def main() -> int:
     racine = Path(__file__).resolve().parents[2]
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--entree", type=Path, default=racine / "docs/graines_endroit.json")
+    ap.add_argument("--entree", type=Path, default=racine / "docs/mesures/graines_endroit.json")
     ap.add_argument("--sortie", type=Path, default=racine / "docs/images/54_graines_endroit.png")
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()

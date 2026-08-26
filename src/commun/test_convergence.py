@@ -36,7 +36,7 @@ peut pas echouer.
 
 Usage :
     uv run python src/commun/test_convergence.py --serie "21:86.4,41:159.84,81:311.04" \\
-        --nom "notre trace" --json docs/convergence.json
+        --nom "notre trace" --json docs/mesures/convergence.json
 """
 from __future__ import annotations
 

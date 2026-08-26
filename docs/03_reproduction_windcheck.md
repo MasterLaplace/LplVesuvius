@@ -83,7 +83,7 @@ La chaîne complète — recenser, réparer, re-recenser indépendamment — **r
 ## 5. Niveau 3 — recensement du corpus Scroll 5, confronté à leur publication
 
 Un segment reproduit peut être un segment bien choisi. J'ai donc recensé **les 53
-segments** de PHerc0172 (`docs/census_scroll5.tsv`, régénérable) et confronté le
+segments** de PHerc0172 (`docs/mesures/census_scroll5.tsv`, régénérable) et confronté le
 résultat à leur `results/index.json`, trace par trace et non en agrégat :
 
 | confrontation | résultat |

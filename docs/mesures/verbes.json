@@ -24,6 +24,14 @@
   "json": true
  },
  {
+  "nom": "appelants",
+  "chemin": "src/depot/appelants.py",
+  "langage": "python",
+  "resume": "Qui LANCE ce script ? — un seul parcours de l'arbre, et une mention n'est pas un appelant.",
+  "verifie": true,
+  "json": true
+ },
+ {
   "nom": "appui_de_pente",
   "chemin": "src/graine/appui_de_pente.py",
   "langage": "python",
@@ -125,6 +133,14 @@
   "langage": "shell",
   "resume": "Le critere de graine tient-il sur les DIX rouleaux du prix que personne n'a traces ?",
   "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "campagne_graines_endroit",
+  "chemin": "src/campagnes/campagne_graines_endroit.sh",
+  "langage": "shell",
+  "resume": "Les deux graines du 2x2, sondees dans le volume SCANNE — six mesures, un JSON.",
+  "verifie": true,
   "json": false
  },
  {
@@ -304,6 +320,14 @@
   "json": true
  },
  {
+  "nom": "contenu_en_double",
+  "chemin": "src/depot/contenu_en_double.py",
+  "langage": "python",
+  "resume": "Combien d'octets de `data/` sont du contenu DÉJÀ présent ailleurs — par hachage, pas par nom.",
+  "verifie": true,
+  "json": true
+ },
+ {
   "nom": "controle_resolution",
   "chemin": "src/outils/controle_resolution.sh",
   "langage": "shell",
@@ -424,6 +448,22 @@
   "json": false
  },
  {
+  "nom": "distance_a_la_matiere",
+  "chemin": "src/nappe/distance_a_la_matiere.py",
+  "langage": "python",
+  "resume": "À quelle distance de ce point commence la matière scannée ? — le préalable, chiffré.",
+  "verifie": true,
+  "json": true
+ },
+ {
+  "nom": "donnees_sans_appelant",
+  "chemin": "src/depot/donnees_sans_appelant.py",
+  "langage": "python",
+  "resume": "Quel dossier de `data/` plus rien ne nomme — et ce qu'il pèse.",
+  "verifie": true,
+  "json": false
+ },
+ {
   "nom": "dossier_soumission",
   "chemin": "src/outils/dossier_soumission.sh",
   "langage": "shell",
@@ -478,6 +518,14 @@
   "resume": "Sur quel rouleau peut-on à la fois TRACER et LIRE ?",
   "verifie": true,
   "json": true
+ },
+ {
+  "nom": "empreinte_surface",
+  "chemin": "src/depot/empreinte_surface.py",
+  "langage": "python",
+  "resume": "L'empreinte d'une surface tifxyz — la clé d'un cache de rendu indexé par CONTENU.",
+  "verifie": true,
+  "json": false
  },
  {
   "nom": "espacement_spires",
@@ -640,6 +688,14 @@
   "json": false
  },
  {
+  "nom": "figure_commune",
+  "chemin": "src/figures/figure_commune.py",
+  "langage": "python",
+  "resume": "Ce que toutes les figures du dépôt refaisaient chacune de leur côté.",
+  "verifie": true,
+  "json": false
+ },
+ {
   "nom": "figure_comparaison",
   "chemin": "src/figures/figure_comparaison.py",
   "langage": "python",
@@ -712,6 +768,14 @@
   "json": false
  },
  {
+  "nom": "figure_doublons",
+  "chemin": "src/figures/figure_doublons.py",
+  "langage": "python",
+  "resume": "Les 35,6 Gio de contenu identique de `data/`, et POURQUOI ils le sont.",
+  "verifie": true,
+  "json": false
+ },
+ {
   "nom": "figure_eligibilite",
   "chemin": "src/figures/figure_eligibilite.py",
   "langage": "python",
@@ -758,6 +822,14 @@
   "resume": "Une feuille aplatie, ou des spires vues de côté ? La question se règle à l'œil.",
   "verifie": true,
   "json": true
+ },
+ {
+  "nom": "figure_graine_endroit",
+  "chemin": "src/figures/figure_graine_endroit.py",
+  "langage": "python",
+  "resume": "Les deux graines du 2×2, sondées dans le volume scanné — et l'écart est de SEPT SPIRES.",
+  "verifie": true,
+  "json": false
  },
  {
   "nom": "figure_graines",
@@ -864,6 +936,14 @@
   "json": false
  },
  {
+  "nom": "figure_sous_fenetre",
+  "chemin": "src/figures/figure_sous_fenetre.py",
+  "langage": "python",
+  "resume": "Pourquoi rendre n=161 donne déjà n=81, n=41 et n=31 — la géométrie du raccourci.",
+  "verifie": true,
+  "json": false
+ },
+ {
   "nom": "figure_temoin_negatif",
   "chemin": "src/figures/figure_temoin_negatif.py",
   "langage": "python",
@@ -902,6 +982,14 @@
   "resume": "Les messages de commit suivent-ils le format du depot ?",
   "verifie": true,
   "json": false
+ },
+ {
+  "nom": "fraicheur_des_figures",
+  "chemin": "src/depot/fraicheur_des_figures.py",
+  "langage": "python",
+  "resume": "Chaque image de `docs/` est-elle celle que son producteur rend AUJOURD'HUI ?",
+  "verifie": true,
+  "json": true
  },
  {
   "nom": "fusion_scan",
@@ -1117,6 +1205,14 @@
   "langage": "python",
   "resume": "Chaque détecteur doit porter du poids : le débrancher doit faire ROUGIR selftest.",
   "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "nature_des_documents",
+  "chemin": "src/depot/nature_des_documents.py",
+  "langage": "python",
+  "resume": "Ranger `docs/` par NATURE — et refuser tant qu'un écrivain vise encore l'ancien endroit.",
+  "verifie": true,
   "json": false
  },
  {
@@ -1445,6 +1541,14 @@
   "langage": "python",
   "resume": "Que voit le traceur A CET ENDROIT ? -- la prediction de surface autour d'un point.",
   "verifie": false,
+  "json": true
+ },
+ {
+  "nom": "sous_fenetre",
+  "chemin": "src/depot/sous_fenetre.py",
+  "langage": "python",
+  "resume": "Rendre la fenêtre LARGE donne la fenêtre ÉTROITE — l'arithmétique, dite une seule fois.",
+  "verifie": true,
   "json": true
  },
  {

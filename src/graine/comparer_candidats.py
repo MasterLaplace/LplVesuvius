@@ -18,7 +18,7 @@ suffirait à changer ce que ce dépôt sait faire. C'est donc le titre du rappor
 corrélations viennent après, avec leur plancher.
 
 Usage :
-    python3 src/graine/comparer_candidats.py --docs docs --graines data/prediction_paris4
+    python3 src/graine/comparer_candidats.py --docs docs/mesures --graines data/prediction_paris4
     python3 src/graine/comparer_candidats.py --verifier
 """
 from __future__ import annotations
@@ -258,7 +258,7 @@ def verifier() -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--docs", type=Path, default=Path("docs"))
+    ap.add_argument("--docs", type=Path, default=Path("docs/mesures"))
     ap.add_argument("--graines", type=Path, default=Path("data/prediction_paris4"))
     ap.add_argument("--travaux", type=Path, default=Path("data/paris4_candidats"),
                     help="dossiers de travail, pour lire les journaux de trace")

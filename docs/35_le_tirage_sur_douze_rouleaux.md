@@ -21,7 +21,7 @@ marquait le manque ⚠⚠ : *« 14 tirages ne font pas une distribution, et le t
 > l'est. Et sur cinq lignes un point est rouge : le même appel qui rend une trace propre
 > cinq fois rend une trace auto-intersectée la sixième.
 
-Figure : `src/figures/figure_tirages.py`, depuis `docs/table_tirages.json`.
+Figure : `src/figures/figure_tirages.py`, depuis `docs/mesures/table_tirages.json`.
 
 ## 1. Ce que la campagne mesure
 
@@ -186,7 +186,7 @@ teste pas.
   **groupé** ; savoir si un rouleau est plus instable qu'un autre demanderait bien plus de
   tirages, exactement comme `33` le mesure pour la carte de difficulté.
 - ⚠ **Un rouleau du prix manque, et pas pour la raison qu'on croirait.** La campagne
-  couvre 12 des 13 parce que `docs/table_graines.json` en contenait 12 : **`PHerc1203`
+  couvre 12 des 13 parce que `docs/mesures/table_graines.json` en contenait 12 : **`PHerc1203`
   n'avait jamais eu de graine cherchée**, sur aucune campagne — `src/campagnes/campagne_graines.sh`
   ne le listait pas, alors que `src/outils/carte_separabilite.sh` le liste. Ce n'était donc pas
   une limite de cette campagne-ci, c'était un trou en amont, et il valait aussi pour `25`.
@@ -214,7 +214,7 @@ teste pas.
 
 ```bash
 ./src/outils/lancer.sh --fond src/campagnes/campagne_tirages.sh "$PWD/data/tirages" 6
-(cd experiments && uv run python ../src/tables/table_tirages.py --json ../docs/table_tirages.json)
+(cd experiments && uv run python ../src/tables/table_tirages.py --json ../docs/mesures/table_tirages.json)
 uv run python src/figures/figure_tirages.py
 ```
 

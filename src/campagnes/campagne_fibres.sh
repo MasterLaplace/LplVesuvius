@@ -14,7 +14,7 @@
 set -u
 cd "$(dirname "$0")/../.." || exit 2
 while pgrep -f "zarr_depth.py" > /dev/null; do sleep 60; done
-grep "2\.4um" docs/volumes_surface_PHercParis4.txt | cut -f2 > /tmp/fib_tous.txt
+grep "2\.4um" docs/mesures/volumes_surface_PHercParis4.txt | cut -f2 > /tmp/fib_tous.txt
 cd inference_xpu || exit 2
 exec nice -n 12 uv run python ../src/nappe/fiber_orientation.py \
-    $(cat /tmp/fib_tous.txt | tr '\n' ' ') --windows 36 --out ../docs/fibres_corpus.json
+    $(cat /tmp/fib_tous.txt | tr '\n' ' ') --windows 36 --out ../docs/mesures/fibres_corpus.json
