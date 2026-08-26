@@ -16,7 +16,11 @@ awk -F'\t' -v m="$MOTIF" '$2 ~ m {print $1"\t"$2}' "docs/mesures/volumes_surface
 | while IFS=$'\t' read -r seg key; do
   out="$DEST/$seg.json"
   [ -s "$out" ] && continue
+  # ⚠ Les DEUX vues sortent du meme passage de requetes : le resume et le champ
+  # fenetre par fenetre. Deux campagnes separees rendraient deux echantillonnages,
+  # donc deux mesures libres de diverger, et rien ne dirait laquelle a ete publiee.
   (uv run python src/nappe/champ_correction.py "$key" \
-      --voxel-um "$VOXEL" --fils "$FILS" --out "../$out") || echo "  $seg ECHEC" >&2
+      --voxel-um "$VOXEL" --fils "$FILS" --out "$out" \
+      --fenetres "$DEST/fenetres") || echo "  $seg ECHEC" >&2
 done
 echo "termine : $(ls "$DEST"/*.json 2>/dev/null | wc -l) segments"

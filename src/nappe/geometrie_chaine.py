@@ -24,7 +24,7 @@ UNE nappe plus loin. Un pas trop grand saute une nappe sans que rien d'autre le 
 surface converge toujours, elle converge juste sur la mauvaise feuille.
 
 Usage :
-    cd experiments && uv run python src/nappe/geometrie_chaine.py \\
+    uv run python src/nappe/geometrie_chaine.py \\
         data/spires_pas025 --voxel-um 8.64 --json docs/mesures/geometrie_pas025.json \\
         --figure docs/images/44_geometrie_chaine.png
 """

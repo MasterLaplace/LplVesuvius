@@ -47,7 +47,7 @@ for s in PHerc0125 PHerc0191 PHerc0211 PHerc0257 PHerc0268 PHerc0358 \
   v=$(grep -oE '[0-9]+\.[0-9]+um' <<<"$k" | head -1 | tr -d 'um')
   echo "=== $s (voxel $v µm) ==="
   ( uv run python src/encre/separabilite_scan.py "${k%/}" \
-      --level 1 --voxel-um "$v" --chunks "$SONDES" --out "../$f" 2>&1 \
+      --level 1 --voxel-um "$v" --chunks "$SONDES" --out "$f" 2>&1 \
       | grep -E "grille|chunks mesures|d′" | sed "s/^/  [$s] /" )
 done
 echo "termine"

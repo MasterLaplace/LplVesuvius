@@ -1642,6 +1642,9 @@ uv run python src/commun/zarr_depth.py <cle .zarr> --courbe --fils 16   # ⭐ x8
 uv run python src/nappe/fiber_orientation.py <cle .zarr>       # ⭐ fibres
 uv run python src/commun/croiser_instruments.py <index.json> <mesures.json>
 uv run python src/nappe/champ_correction.py <cle .zarr> --voxel-um 2.4  # ⭐⭐ REPARABLE ?
+uv run python src/nappe/champ_correction.py <cle .zarr> --voxel-um 2.4 \
+    --fenetres docs/champ_X/fenetres      # ⭐⭐ le champ FENETRE PAR FENETRE (R2)
+uv run python src/depot/chemins_des_scripts.py --verifier  # aucun script n'ecrit dehors
 uv run python src/encre/croiser_encre.py <profondeur.json> <cartes/>    # ⭐⭐ la DECISION
 uv run python src/tables/table_champ.py <champs/> --encre <rapport.json>
 uv run python src/nappe/resolution_phase.py <saut_spire/>

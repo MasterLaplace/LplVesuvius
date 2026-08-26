@@ -300,6 +300,14 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                      f"{en(d['part_rigide_mediane']*100,1)} %"], p.name))
         out.append(("segments du champ",
                     [f"{d['segments']} segments", f"{d['segments']} published"], p.name))
+        # ⚠⚠ Le seul rho ETOILE de `20` §6, et il n'etait garde par rien. C'est le
+        # chiffre sur lequel un lecteur agit — « la seule grandeur qui predit » — donc
+        # c'est celui dont la tracabilite compte. Les trois autres correlations du meme
+        # tableau disent « rien ici » : leur derive ne change aucune decision, et les
+        # enregistrer ferait quatre chiffres a garder pour un seul qui pese.
+        rho_bord = d.get("correlations_encre", {}).get("part_au_bord")
+        if rho_bord:
+            ajoute("rho part_au_bord x encre", rho_bord["rho"], 3, p.name, signe=True)
 
     p = _source(racine, "robustesse_material.json")
     if p.exists():

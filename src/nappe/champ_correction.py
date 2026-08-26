@@ -46,15 +46,34 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path[:0] = [str(p) for p in Path(__file__).resolve().parents[1].iterdir() if p.is_dir()]
-from zarr_depth import BUCKET, array_meta, chunk_profile  # noqa: E402
+from zarr_depth import BUCKET, array_meta, au_bord, chunk_profile  # noqa: E402
+
+
+# ⚠ **Une DECLARATION, pas une mesure.** Le rendu d'un volume de surface empile ses
+# couches a un voxel d'ecart le long de la normale, et c'est ce que ce depot suppose
+# depuis toujours pour convertir un ecart en µm. La constante existe pour que les deux
+# vues -- le resume et l'export fenetre par fenetre -- ne puissent pas diverger sur la
+# conversion, et pour qu'un rendu fait a un autre pas ait de quoi remettre a l'echelle.
+PAS_COUCHE_VOX = 1.0
+
+
+def mesurer(zarr_url: str, level: int, cote: int, blocs: int, timeout: float,
+            threads: int, voxel_um: float) -> tuple[dict, dict]:
+    """Une seule campagne de requêtes, deux vues : le résumé et les fenêtres.
+
+    ⚠ Les deux sortent de la **même** grille. Un second échantillonnage rendrait deux
+    réponses à une seule question, et rien ne dirait laquelle a été publiée.
+    """
+    grille, meta, sondees, coins = grille_ecarts(zarr_url, level, cote, blocs, timeout,
+                                                 threads)
+    resume = _statistiques(grille, 1, meta["chunks"][0], voxel_um, sondees, zarr_url)
+    return resume, fenetres(grille, meta, coins, cote, voxel_um, zarr_url, level)
 
 
 def champ(zarr_url: str, level: int, cote: int, blocs: int, timeout: float,
           threads: int, voxel_um: float) -> dict:
     """Statistiques du champ. La grille brute passe par `grille_ecarts`."""
-    grille, depth, sondees, _ = grille_ecarts(zarr_url, level, cote, blocs, timeout,
-                                              threads)
-    return _statistiques(grille, 1, depth, voxel_um, sondees, zarr_url)
+    return mesurer(zarr_url, level, cote, blocs, timeout, threads, voxel_um)[0]
 
 
 def grille_ecarts(zarr_url: str, level: int, cote: int, blocs: int, timeout: float,
@@ -118,7 +137,101 @@ def grille_ecarts(zarr_url: str, level: int, cote: int, blocs: int, timeout: flo
         mean, _ = got
         grille[cy, cx] = int(np.argmax(mean)) - traced
 
-    return grille, depth, len(picks) + len(reperage), coins
+    return grille, meta, len(picks) + len(reperage), coins
+
+
+def fenetres(grille: np.ndarray, meta: dict, coins, cote: int, voxel_um: float,
+             zarr_url: str, level: int) -> dict:
+    """Le champ **fenêtre par fenêtre**, dans les coordonnées du volume de surface.
+
+    ⚠⚠ **Ce que le résumé ne peut pas livrer.** `champ()` rend une médiane, et une
+    médiane ne dit à personne *où* déplacer quoi : c'est exactement le reproche que
+    ce fichier adresse à `docs/12`, et il vaut aussi pour sa propre sortie. Un tiers
+    qui possède la chaîne maillage → paramétrisation → rendu a besoin de trois
+    choses, et il lui en manquait trois.
+
+    | groupe | ce qu'il répond |
+    |---|---|
+    | `geometrie` | ce qu'un index de fenêtre veut dire : forme, chunks, couche tracée |
+    | `fenetres` | où et de combien, une ligne par fenêtre qui porte de la matière |
+    | `blocs` | jusqu'où l'adjacence est vraie |
+
+    ⚠⚠ **L'écart sort en index de couche, jamais en « µm le long de +n ».** Une
+    normale n'a pas de sens — `valider_champ_normal.py` l'écrit, et le maillage se
+    retourne par `--flip-normals` sans que rien ne change —, donc un champ exprimé
+    le long de la normale demande à son lecteur une convention que personne n'a
+    écrite, et s'en tromper **double** l'erreur au lieu de l'annuler. « La matière
+    est à la couche `couche_pic`, la trace est à `couche_tracee` » n'a, elle, aucune
+    ambiguïté : c'est le rendu lui-même qui a ordonné ces couches. Les µm voyagent
+    à côté, par `PAS_COUCHE_VOX`, pour qui veut une longueur.
+
+    ⚠ **Une fenêtre saturée n'est pas une mesure.** Son pic est à la première ou à la
+    dernière couche de la pile, donc le vrai pic peut être **en dehors** — `12` §9 en
+    a mesuré 61 % sur Scroll 4, et `20` en tire que le volume ne contient pas ce
+    qu'il faudrait atteindre. Le drapeau voyage sur chaque enregistrement plutôt que
+    dans une note de bas de page, parce qu'un lecteur qui applique ces écarts-là
+    déplace son maillage d'une valeur tronquée sans qu'aucun symptôme n'apparaisse.
+
+    ⚠ **Les blocs sortent, et ce n'est pas de la décoration.** L'adjacence n'existe
+    qu'à l'intérieur d'un bloc : deux blocs sont posés loin l'un de l'autre sur le
+    segment. Une liste plate se lirait comme une grille continue, et lisser sur de
+    tels « voisins » mélangerait des endroits distants de milliers de voxels.
+    """
+    depth, hy, hx = meta["chunks"]
+    _, rows, cols = meta["shape"]
+    tracee = depth // 2
+
+    appartenance: dict[tuple[int, int], int] = {}
+    listes = []
+    for indice, (oy, ox) in enumerate(coins):
+        # ⚠ Les cellules sont DEDUPLIQUEES : un bloc pose au bord de la grille voit
+        # plusieurs de ses cases se rabattre sur la meme, et les compter deux fois
+        # gonflerait `avec_matiere` pour les seuls blocs de bord.
+        cellules = sorted({(min(oy + dy, grille.shape[0] - 1),
+                            min(ox + dx, grille.shape[1] - 1))
+                           for dy in range(cote) for dx in range(cote)})
+        for cle in cellules:
+            appartenance.setdefault(cle, indice)
+        listes.append({
+            "bloc": int(indice),
+            "fenetre_y": int(oy), "fenetre_x": int(ox),
+            "ligne0": int(oy * hy), "colonne0": int(ox * hx),
+            "cote_fenetres": int(cote),
+            "fenetres": len(cellules),
+            "avec_matiere": int(sum(1 for c in cellules if np.isfinite(grille[c]))),
+        })
+
+    releves = []
+    for cy, cx in zip(*np.nonzero(np.isfinite(grille))):
+        cy, cx = int(cy), int(cx)
+        ecart = int(grille[cy, cx])
+        pic = ecart + tracee
+        releves.append({
+            "bloc": int(appartenance.get((cy, cx), -1)),
+            "fenetre_y": cy,
+            "fenetre_x": cx,
+            "ligne0": cy * hy, "ligne1": min((cy + 1) * hy, rows),
+            "colonne0": cx * hx, "colonne1": min((cx + 1) * hx, cols),
+            "couche_pic": pic,
+            "ecart_couches": ecart,
+            "ecart_um": ecart * PAS_COUCHE_VOX * voxel_um,
+            "sature": bool(au_bord(pic, depth)),
+        })
+
+    return {
+        "zarr": zarr_url.rsplit("/", 1)[-1],
+        "niveau": int(level),
+        "geometrie": {
+            "forme": [int(v) for v in meta["shape"]],
+            "chunks": [int(v) for v in meta["chunks"]],
+            "grille": [int(grille.shape[0]), int(grille.shape[1])],
+            "couche_tracee": int(tracee),
+            "voxel_um": float(voxel_um),
+            "pas_couche_vox": PAS_COUCHE_VOX,
+        },
+        "blocs": listes,
+        "fenetres": releves,
+    }
 
 
 def _paires_voisines(grille: np.ndarray, pas: int) -> tuple[np.ndarray, np.ndarray]:
@@ -177,10 +290,10 @@ def _statistiques(grille: np.ndarray, pas: int, depth: int, voxel_um: float,
         "sondees": sondees,
         "avec_matiere": int(valeurs.size),
         "decalage_median_vx": decalage,
-        "decalage_median_um": decalage * voxel_um,
-        "residuel_median_um": float(np.median(residuel)) * voxel_um,
-        "residuel_p90_um": float(np.percentile(residuel, 90)) * voxel_um,
-        "part_au_bord": float(np.mean((valeurs <= -(depth // 2)) | (valeurs >= depth // 2 - 1))),
+        "decalage_median_um": decalage * PAS_COUCHE_VOX * voxel_um,
+        "residuel_median_um": float(np.median(residuel)) * PAS_COUCHE_VOX * voxel_um,
+        "residuel_p90_um": float(np.percentile(residuel, 90)) * PAS_COUCHE_VOX * voxel_um,
+        "part_au_bord": float(np.mean(au_bord(valeurs + depth // 2, depth))),
         "paires_voisines": int(a.size),
         "coherence_voisins": coherence,
         "coherence_temoin_melange": coherence_temoin,
@@ -201,7 +314,13 @@ def main() -> int:
     parser.add_argument("--voxel-um", type=float, required=True)
     parser.add_argument("--timeout", type=float, default=120.0)
     parser.add_argument("--fils", type=int, default=16)
-    parser.add_argument("--out", type=Path, default=None)
+    parser.add_argument("--out", type=Path, default=None,
+                        help="le RESUME : une ligne de statistiques par segment")
+    parser.add_argument("--fenetres", type=Path, default=None,
+                        help="repertoire ou ecrire le champ FENETRE PAR FENETRE, un "
+                             "fichier par segment. C'est la forme utilisable par qui "
+                             "possede la chaine maillage -> rendu : le resume ne dit "
+                             "pas OU deplacer quoi")
     args = parser.parse_args()
 
     rapport = []
@@ -209,8 +328,8 @@ def main() -> int:
         url = key if key.startswith("http") else f"{BUCKET}/{key}"
         segment = key.split("/segments/")[1].split("/")[0] if "/segments/" in key else key
         try:
-            data = champ(url, args.level, args.cote, args.blocs, args.timeout,
-                         args.fils, args.voxel_um)
+            data, vues = mesurer(url, args.level, args.cote, args.blocs, args.timeout,
+                                 args.fils, args.voxel_um)
         except RuntimeError as error:
             print(f"{segment} : {error}", file=sys.stderr)
             continue
@@ -221,6 +340,15 @@ def main() -> int:
               f"(melange {data['coherence_temoin_melange']:+.3f})  "
               f"{data['avec_matiere']}/{data['sondees']} fen.", flush=True)
         rapport.append(data)
+
+        if args.fenetres:
+            args.fenetres.mkdir(parents=True, exist_ok=True)
+            vues["segment"] = segment
+            cible = args.fenetres / f"{segment}.json"
+            cible.write_text(json.dumps(vues, indent=2) + "\n")
+            satures = sum(1 for f in vues["fenetres"] if f["sature"])
+            print(f"{'':30} champ : {len(vues['fenetres'])} fenetres "
+                  f"({satures} saturees, a NE PAS appliquer) -> {cible}", flush=True)
 
     if args.out:
         args.out.write_text(json.dumps(rapport, indent=2) + "\n")

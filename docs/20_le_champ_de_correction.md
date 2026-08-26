@@ -232,11 +232,83 @@ du détecteur de phase à n = 8 (+0,52, puis **+0,15** à n = 38). **Ce n'est pa
 c'est une invitation à mesurer.** Les quatre signes sont positifs, ce qui vaut la peine
 d'être noté et rien de plus.
 
-## 8. Reproduire
+## 8. ⭐⭐ Ce qui est livrable : le champ, fenêtre par fenêtre
+
+La fin du §4 ci-dessus écrit que ce qui est livrable, c'est **le champ** — de combien, où, et
+si c'est cohérent — pour qui a la chaîne. Il restait à le livrer. Un résumé rend une
+médiane, et une médiane ne dit à personne *où* déplacer *quoi* : c'est exactement le
+reproche que ce document adresse à `12`, et il valait aussi pour sa propre sortie.
+
+`champ_correction.py --fenetres <dossier>` écrit, par segment, **trois groupes**, et il en
+faut trois parce qu'il manquait trois réponses :
+
+| groupe | la question à laquelle il répond |
+|---|---|
+| `geometrie` | ce qu'un index de fenêtre **veut dire** : forme du volume, taille de chunk, couche tracée |
+| `fenetres` | **où** et **de combien** : une ligne par fenêtre qui porte de la matière, avec son pavé de pixels `[ligne0, ligne1[ × [colonne0, colonne1[` |
+| `blocs` | **jusqu'où l'adjacence est vraie** |
+
+⚠⚠ **L'écart sort en index de couche, jamais en « µm le long de +n ».** Une normale n'a
+pas de sens — `valider_champ_normal.py` l'écrit noir sur blanc, et le maillage se retourne
+par `--flip-normals` sans que rien ne bouge. Un champ exprimé le long de la normale
+demande donc à son lecteur une convention que personne n'a écrite, et s'en tromper
+**double** l'erreur au lieu de l'annuler. « La matière est à la couche `couche_pic`, la
+trace est à `couche_tracee` » n'a, elle, aucune ambiguïté : c'est le rendu lui-même qui a
+ordonné ces couches. Les µm voyagent à côté, avec le pas qui les a produits, pour qui veut
+une longueur.
+
+⚠ **Une fenêtre saturée n'est pas une mesure, c'est une borne.** Son pic est sur la
+première ou la dernière couche, donc le vrai pic peut être **en dehors** — c'est la limite
+que la fin du §4 tire, et les 61 % de Scroll 4. Le drapeau voyage sur **chaque** enregistrement plutôt
+que dans une note de bas de page, parce qu'un lecteur qui applique ces écarts-là déplace
+son maillage d'une valeur tronquée sans qu'aucun symptôme n'apparaisse.
+
+⚠ **Les blocs sortent, et ce n'est pas de la décoration.** L'adjacence n'existe qu'à
+l'intérieur d'un bloc : deux blocs sont posés loin l'un de l'autre sur le segment (§2).
+Une liste plate se lirait comme une grille continue, et lisser sur de tels « voisins »
+mélangerait des endroits distants de milliers de voxels.
+
+⭐ **Le résumé et l'export sortent du même passage de requêtes**, et c'est vérifié
+autrement que par la parole : la batterie **reconstruit** les quatre chiffres publiés
+(médiane, résiduel, p90, part au bord) à partir des seuls enregistrements exportés et
+exige l'égalité exacte. Deux campagnes séparées auraient rendu deux échantillonnages, donc
+deux mesures libres de diverger, et rien n'aurait dit laquelle a été publiée.
+
+### ⚠⚠ Et l'export a trouvé un vrai défaut : deux réponses à « le pic est-il au bord »
+
+Le premier segment exporté a rendu **7** fenêtres saturées là où le résumé en annonçait
+**8**. La cause n'est pas un arrondi :
+
+| | la règle | ce qu'elle marque |
+|---|---|---|
+| `zarr_depth.py` | `pic == 0` ou `pic == depth - 1` | la première et la dernière couche |
+| `champ_correction.py` | `ecart <= -(depth // 2)` ou `ecart >= depth // 2 - 1` | idem **si `depth` est pair** |
+
+Écrite en **écart signé**, la règle devient asymétrique — et cette asymétrie est
+exactement juste pour une pile de profondeur **paire**, parce que la couche tracée
+`depth // 2` n'y est pas au centre. Pour une pile **impaire** elle se trompe d'une couche
+et compte l'**avant-dernière** comme un bord. Or les piles réelles de ce dépôt sont
+impaires : **33** et **109**. Mesuré sur `PHercParis4/20230702185753`, pile de 109
+couches : la fenêtre fautive a son pic à la couche **107**, la dernière étant la 108.
+
+> **La règle est désormais écrite une seule fois**, dans `zarr_depth.au_bord`, sur la
+> couche absolue — la grandeur dont elle parle. `champ_correction` n'a plus sa propre
+> réponse.
+
+⚠ **Et la vérification passait pour la seule raison qui la rendait incapable d'échouer** :
+toutes les fixtures de la batterie avaient une profondeur **paire**, c'est-à-dire la
+parité pour laquelle les deux rédactions coïncident. Le cas impair est maintenant dans la
+batterie, avec la couche `depth - 2` nommée comme piège.
+
+## 9. Reproduire
 
 ```bash
 ./src/campagnes/campagne_champ.sh PHercParis4 2.4um  2.4   docs/champ_PHercParis4
 ./src/campagnes/campagne_champ.sh PHerc1667   2.399um 2.399 docs/champ_PHerc1667
+
+# la campagne ecrit les DEUX vues d'un seul passage :
+#   docs/champ_<rouleau>/<segment>.json           le resume
+#   docs/champ_<rouleau>/fenetres/<segment>.json  le champ, fenetre par fenetre
 
 uv run python src/tables/table_champ.py docs/champ_PHercParis4 \
     --pas-um 172.8 --encre docs/mesures/croisement_encre.json --out docs/mesures/table_champ.json

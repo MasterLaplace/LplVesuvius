@@ -71,7 +71,7 @@ cohérent — pour qui a la chaîne.
 | # | quoi | état |
 |---|---|---|
 | R1 | écrire la limite, à l'endroit où la conclusion est tirée | ✅ `20` §4. ⚠⚠ **Et cette limite est tombée le jour même** : VC3D est construit, la chaîne maillage → rendu **est** ici, et `24` la pilote de bout en bout |
-| R2 | exporter le champ en coordonnées de fenêtre | ⏳ |
+| R2 | exporter le champ en coordonnées de fenêtre | ✅ `--fenetres` : trois groupes par segment (`20` §8). ⚠ L'écart sort en **index de couche**, pas en µm le long de +n — une normale n'a pas de sens, et s'en tromper double l'erreur. ⭐ Et l'export a trouvé une **seconde** réponse a « le pic est-il au bord », fausse sur les piles impaires |
 
 ## Voie S — les bandes niveau 0 (héritée de `18` M2)
 
@@ -87,10 +87,9 @@ cohérent — pour qui a la chaîne.
 
 ⚠ **Trois voies sur quatre sont fermées** *(corrigé le 2026-08-19 : cette ligne disait
 « les quatre »)*. Restent ouverts, dans les tableaux ci-dessus : **Q2** 🔄 — fait sur
-**un seul** rouleau, PHerc1447 —, **Q3** ⏳ *publier la table*, et **R2** ⏳ *exporter le
-champ en coordonnées de fenêtre*. Ce dernier est le lot nº 2 de
-[`29`](29_ce_qui_reste.md). Le lot s'est terminé sur un terrain qu'il n'avait
-pas prévu.
+**un seul** rouleau, PHerc1447 — et **Q3** ⏳ *publier la table*, qui appartient à la
+soumission. **R2 est clos le 2026-08-26** (`20` §8). Le lot s'est terminé sur un terrain
+qu'il n'avait pas prévu.
 
 | voie | verdict |
 |---|---|

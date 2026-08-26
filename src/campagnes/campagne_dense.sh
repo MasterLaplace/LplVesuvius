@@ -21,6 +21,6 @@ awk -F'\t' -v m="$MOTIF" '$2 ~ m {print $1"\t"$2}' "docs/mesures/volumes_surface
   out="$DEST/$seg.json"
   [ -s "$out" ] && continue
   (uv run python src/commun/zarr_depth.py "$key" \
-      --windows 200 --fils "$FILS" --out "../$out") || echo "  $seg ECHEC" >&2
+      --windows 200 --fils "$FILS" --out "$out") || echo "  $seg ECHEC" >&2
 done
 echo "termine : $(ls "$DEST"/*.json 2>/dev/null | wc -l) segments"

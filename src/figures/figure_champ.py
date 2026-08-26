@@ -94,7 +94,7 @@ def main() -> int:
     url = args.zarr if args.zarr.startswith("http") else f"{BUCKET}/{args.zarr}"
     segment = (args.zarr.split("/segments/")[1].split("/")[0]
                if "/segments/" in args.zarr else args.zarr)
-    grille, depth, sondees, coins = grille_ecarts(url, args.level, args.cote, args.blocs,
+    grille, _meta, sondees, coins = grille_ecarts(url, args.level, args.cote, args.blocs,
                                                   args.timeout, args.fils)
 
     # ⚠⚠ On dessine LES BLOCS, pas leur boite englobante. Les blocs sont posés loin les

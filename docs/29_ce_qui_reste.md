@@ -78,8 +78,13 @@ bout en bout »*) · `18` J6 · `22` R2:74 · `27`:204.
 
 - ✅ `20` a mesuré que **l'erreur d'une trace est structurée** et que **translater ne la
   répare pas** — donc le remède est un **gauchissement**, pas un décalage.
-- ⏳ Reste : **exporter le champ en coordonnées de fenêtre** (`22` R2), l'appliquer, et
-  rendre les deux versions.
+- ✅ **Exporté** le 2026-08-26 (`20` §8) : `champ_correction.py --fenetres` rend le pavé
+  de pixels et l'écart de chaque fenêtre, en **index de couche** et non en µm le long
+  d'une normale qui n'a pas de sens. ⭐ L'export a trouvé un défaut réel au passage —
+  deux réponses à « le pic est-il au bord », qui divergent sur une pile de profondeur
+  **impaire**, c'est-à-dire sur toutes les piles réelles de ce dépôt.
+- ⏳ Reste : **l'appliquer** et rendre les deux versions. C'est la tâche « montrer le
+  gain » : il faut une correction qui améliore *quelque chose de mesurable*.
 - ⭐ **L'obstacle écrit est tombé** : `22` disait *« la chaîne maillage → rendu n'est pas
   ici »*. VC3D est construit depuis le 2026-08-19, et `24` a fait tourner la chaîne
   complète.

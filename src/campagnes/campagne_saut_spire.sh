@@ -16,11 +16,11 @@ OUT=${1:-docs/saut_spire}
 mkdir -p "$OUT"
 for d in data/traces/PHerc0139/*/; do
   seg=$(basename "$d")
-  f="../$OUT/$seg.json"
+  f="$OUT/$seg.json"
   [ -s "$f" ] && continue
   M=$(ls -d "$d"mesh/*2.399um.tifxyz 2>/dev/null | head -1)
   [ -z "$M" ] && continue
   uv run python src/nappe/saut_de_spire.py "$M" "$C" \
       --sample 960 --run 48 --label "$seg" --out "$f" 2>&1 | grep -E "marches|erreur"
 done
-echo "termine : $(ls "../$OUT"/*.json 2>/dev/null | wc -l) traces"
+echo "termine : $(ls "$OUT"/*.json 2>/dev/null | wc -l) traces"

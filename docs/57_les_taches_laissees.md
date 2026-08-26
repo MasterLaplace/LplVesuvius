@@ -117,8 +117,8 @@ partie des treize du prix.
 
 | tâche | état | ce qui bloque |
 |---|---|---|
-| **R2** — exporter le champ en coordonnées de fenêtre | **ouverte, instruite** | rien : le plan est établi (trois groupes à sortir, 86 à 96 fenêtres par segment). C'est du code, quelques heures |
-| **montrer le gain** | **ouverte** | il faut une correction qui améliore *quelque chose de mesurable* — §2.1 vient d'établir que l'ancien résultat ne dit pas le contraire |
+| ~~**R2** — exporter le champ en coordonnées de fenêtre~~ | ✅ **fait le 2026-08-26** | `20` §8. Les trois groupes sortent, et l'export a trouvé un vrai défaut au passage : deux réponses à « le pic est-il au bord », qui divergent sur les piles **impaires**, c'est-à-dire sur toutes les piles réelles du dépôt |
+| **appliquer le champ, et montrer le gain** | **ouverte** | il faut une correction qui améliore *quelque chose de mesurable* — §2.1 vient d'établir que l'ancien résultat ne dit pas le contraire. L'export n'était que la moitié amont, et elle est désormais livrée |
 | `16` — régénérer les cartes de difficulté | ⚠ **décision** | le script d'aujourd'hui n'échantillonne plus comme les artefacts publiés (64 → 108 sondes) : régénérer **déplacerait** le tableau §3. Le correctif de code est fait ; l'acte de régénérer appartient à l'auteur |
 | **transport vers une région sans vérité** | ⚠ **impossible sur ce couple** | mesuré : la face n'est périodique qu'à une taille de fenêtre où les enroulements ne rendent **aucune** fenêtre. Il n'existe aucun réglage où les deux côtés en ont |
 | **thèse forte du témoin négatif** | ⚠ **mesurée, et elle refuse** | sur PHercParis4 : ρ(positif, négatif) = **+0,9984**, σ à 2,4 % du modèle qui marche — la garde de `temoin_negatif.py` **refuse**, comme sur `46` |

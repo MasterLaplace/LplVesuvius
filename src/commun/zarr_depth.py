@@ -164,6 +164,26 @@ def chunk_profile(zarr_url: str, level: int, meta: dict, cy: int, cx: int,
     return mean, contrast
 
 
+def au_bord(peaks, depth: int):
+    """Le pic est-il sur la **première ou la dernière** couche de la pile ?
+
+    ⚠⚠ **La règle porte sur la couche ABSOLUE, jamais sur l'écart signé à la trace.**
+    Écrite en écart, elle devient `ecart <= -(depth // 2)` d'un côté et
+    `ecart >= depth // 2 - 1` de l'autre — une asymétrie qui tombe juste pour une pile
+    de profondeur **paire** et se trompe d'une couche pour une **impaire**. Les piles
+    réelles sont impaires (33 et 109 dans ce dépôt), donc la forme en écart comptait
+    l'avant-dernière couche comme un bord. Mesuré le 2026-08-26 sur
+    `PHercParis4/20230702185753` : 8 fenêtres annoncées au bord pour **7** réelles,
+    la fautive étant à la couche 107 d'une pile de 109.
+
+    ⚠ Une fenêtre au bord n'est pas une mesure mais une **borne** : le vrai pic peut
+    être en dehors de la pile. C'est ce que `20` §4 tire comme limite, et c'est
+    pourquoi la question mérite une seule réponse dans tout le dépôt.
+    """
+    peaks = np.asarray(peaks)
+    return (peaks <= 0) | (peaks >= depth - 1)
+
+
 def survey(zarr_url: str, level: int, windows: int, timeout: float, seed: int,
            threads: int = 1) -> dict:
     meta = array_meta(zarr_url, level, timeout)
@@ -237,7 +257,7 @@ def survey(zarr_url: str, level: int, windows: int, timeout: float, seed: int,
         "sondees": len(picks), "avec_matiere": int(peaks.size), "vides": empty,
         "refus": refus,
         "tiers_central": float(((peaks >= low) & (peaks < high)).mean()),
-        "au_bord": float(((peaks == 0) | (peaks == depth - 1)).mean()),
+        "au_bord": float(au_bord(peaks, depth).mean()),
         "pic_median": int(np.median(peaks)),
         "tiers_central_contraste": float(((np.asarray(contrast_peaks) >= low)
                                           & (np.asarray(contrast_peaks) < high)).mean()),

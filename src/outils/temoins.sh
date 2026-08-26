@@ -11,6 +11,14 @@ cd "$(dirname "$0")/../.." || exit 2
 ROOT=$PWD
 FAIL=0
 
+# ⚠⚠ Le harnais ne doit pas verifier du BYTECODE PERIME. Python reutilise un `.pyc`
+# quand la taille et la seconde de mtime du source n ont pas bouge -- ce qui arrive
+# exactement quand on edite un fichier en place sans en changer la longueur. Paye le
+# 2026-08-26 : une sonde qui remplacait `{` par `[` a rendu son verdict sur l ancien
+# code. Le sens dangereux est l autre : une sonde qui repondrait « ALL PASS » en
+# rejouant le code d avant se lirait comme « ce controle ne peut pas echouer ».
+export PYTHONDONTWRITEBYTECODE=1
+
 # ⚠⚠ UN SEUL RUN A LA FOIS, et ce n est pas de la prudence : ce script ECRIT
 # `docs/mesures/temoins.json` a la fin. Deux runs concurrents courent donc dessus, et c est
 # le PLUS LENT qui gagne -- donc un run lance AVANT une correction peut ecraser le resultat
@@ -343,6 +351,113 @@ decale = np.full((6, 6), 7.0)
 sd = C._statistiques(decale, 1, 32, 2.0, 36, "x")
 ck(abs(sd["decalage_median_um"] - 14.0) < 1e-9, "decalage en um")
 ck(sd["residuel_median_um"] == 0.0, "un decalage pur a un residuel NUL")
+
+# =====================================================================
+# R2 -- le champ EXPORTE fenetre par fenetre.
+# =====================================================================
+# ⚠⚠ Le controle qui compte est une RECONSTRUCTION : les quatre chiffres publies
+# doivent se recalculer depuis les seuls enregistrements exportes. Sans lui, le
+# resume et l'export sont deux mesures libres de diverger, et c'est justement ce
+# que ce fichier reproche a une mediane -- dire un chiffre que rien ne relie a ce
+# qui a ete mesure.
+resume, vues = C.mesurer("x", 0, 3, 4, 1.0, 4, 2.4)
+fen = vues["fenetres"]
+geo = vues["geometrie"]
+ck(len(fen) >= 8, "l'export doit porter des fenetres")
+
+ecarts = np.array([f["ecart_couches"] for f in fen], dtype=np.float64)
+med = float(np.median(ecarts))
+res = np.abs(ecarts - med)
+ck(len(fen) == resume["avec_matiere"], "reconstruction : compte de fenetres")
+ck(abs(med * geo["pas_couche_vox"] * geo["voxel_um"]
+       - resume["decalage_median_um"]) < 1e-9, "reconstruction : decalage")
+ck(abs(float(np.median(res)) * geo["pas_couche_vox"] * geo["voxel_um"]
+       - resume["residuel_median_um"]) < 1e-9, "reconstruction : residuel")
+ck(abs(float(np.percentile(res, 90)) * geo["pas_couche_vox"] * geo["voxel_um"]
+       - resume["residuel_p90_um"]) < 1e-9, "reconstruction : residuel p90")
+ck(abs(np.mean([f["sature"] for f in fen]) - resume["part_au_bord"]) < 1e-12,
+   "reconstruction : part au bord")
+
+# --- le pic est la couche ABSOLUE, l'ecart est relatif a la trace. Les confondre
+# donnerait un champ decale de depth//2 sur toute la ligne.
+prof = geo["chunks"][0]
+ck(all(f["couche_pic"] == f["ecart_couches"] + geo["couche_tracee"] for f in fen),
+   "pic = ecart + couche tracee")
+ck(all(0 <= f["couche_pic"] < prof for f in fen), "un pic vit DANS la pile")
+
+# --- la saturation : un pic au bord de la pile n'est pas une mesure, c'est une
+# borne. Le drapeau doit dire exactement ca, et le cas negatif doit exister --
+# sinon « tout est sature » passerait aussi bien que « rien ne l'est ».
+ck(all(f["sature"] == (f["couche_pic"] in (0, prof - 1)) for f in fen),
+   "drapeau de saturation")
+ck(any(not f["sature"] for f in fen), "temoin : au moins une fenetre NON saturee")
+
+# --- une fenetre sans matiere n'a pas d'ecart, et ne doit donc pas sortir. Le
+# controle se fait en creusant un trou dans la grille : le compte doit baisser.
+g = np.full((6, 6), 3.0); g[2, 2] = np.nan
+META6 = {"chunks": [16, 8, 8], "shape": [16, 48, 48], "dtype": "|u1"}
+troue = C.fenetres(g, META6, [(0, 0)], 6, 2.4, "x", 0)
+ck(len(troue["fenetres"]) == 35, "une fenetre sans matiere ne s'exporte pas")
+
+# --- LE PAVAGE. Les fenetres doivent se toucher sans se recouvrir, et la derniere
+# est ROGNEE sur la forme du tableau : une grille de 8 chunks de 8 sur 60 lignes
+# s'arrete a 60, pas a 64. Un export qui annonce des lignes qui n'existent pas
+# envoie corriger du vide.
+PART = {"chunks": [16, 8, 8], "shape": [16, 60, 63], "dtype": "|u1"}
+plein = C.fenetres(np.full((8, 8), 1.0), PART, [(0, 0)], 8, 2.4, "x", 0)
+par_ligne = {}
+for f in plein["fenetres"]:
+    par_ligne.setdefault(f["fenetre_y"], []).append(f)
+ck(max(f["ligne1"] for f in plein["fenetres"]) == 60, "les lignes sont rognees")
+ck(max(f["colonne1"] for f in plein["fenetres"]) == 63, "les colonnes sont rognees")
+rangee = sorted(par_ligne[0], key=lambda f: f["colonne0"])
+ck(all(a["colonne1"] == b["colonne0"] for a, b in zip(rangee, rangee[1:])),
+   "les fenetres se touchent sans trou ni recouvrement")
+ck(all(f["ligne1"] > f["ligne0"] and f["colonne1"] > f["colonne0"]
+       for f in plein["fenetres"]), "aucune fenetre vide")
+
+# --- l'adjacence n'existe QUE dans un bloc : chaque fenetre doit en nommer un.
+ck(all(f["bloc"] >= 0 for f in fen), "toute fenetre appartient a un bloc")
+ck({b["bloc"] for b in vues["blocs"]} >= {f["bloc"] for f in fen},
+   "aucun bloc cite qui n'est pas declare")
+
+# --- un bloc pose au BORD voit ses cases se rabattre : les compter deux fois
+# gonflerait `avec_matiere` pour les seuls blocs de bord.
+bord = C.fenetres(np.full((4, 4), 2.0), META6, [(3, 3)], 3, 2.4, "x", 0)
+ck(bord["blocs"][0]["fenetres"] == 1, "un bloc rabattu ne compte qu'une case")
+ck(bord["blocs"][0]["avec_matiere"] == 1, "et ne compte pas sa matiere deux fois")
+
+# --- LA PILE IMPAIRE, le cas qui manquait et qui cachait un vrai defaut. Toutes les
+# fixtures ci-dessus ont une profondeur PAIRE, et c'est exactement la parite pour
+# laquelle la regle en ecart signe tombe juste. Les piles reelles sont impaires (33 et
+# 109 dans ce depot), donc le controle passait pour la seule raison qui le rendait
+# incapable d'echouer.
+IMP = 9  # couches 0..8, bords = 0 et 8, avant-derniere = 7
+g9 = np.array([[-4.0, 3.0, 4.0],
+               [0.0, 1.0, -1.0],
+               [2.0, -2.0, 0.0]])   # pics 0, 7, 8, 4, 5, 3, 6, 2, 4
+st9 = C._statistiques(g9, 1, IMP, 2.4, 9, "x")
+M9 = {"chunks": [IMP, 8, 8], "shape": [IMP, 24, 24], "dtype": "|u1"}
+v9 = C.fenetres(g9, M9, [(0, 0)], 3, 2.4, "x", 0)
+ck(abs(st9["part_au_bord"] - 2 / 9) < 1e-12,
+   "pile impaire : seules les couches 0 et depth-1 sont un bord")
+ck(sum(f["sature"] for f in v9["fenetres"]) == 2, "deux fenetres saturees, pas trois")
+ck(abs(float(np.mean([f["sature"] for f in v9["fenetres"]])) - st9["part_au_bord"]) < 1e-12,
+   "les deux vues s'accordent sur une pile IMPAIRE")
+piege = [f for f in v9["fenetres"] if f["couche_pic"] == IMP - 2]
+ck(len(piege) == 1 and not piege[0]["sature"],
+   "l'avant-derniere couche n'est PAS un bord")
+
+# --- et la regle n'a qu'une seule redaction dans tout le depot.
+ck(list(Z.au_bord([0, IMP - 2, IMP - 1], IMP)) == [True, False, True],
+   "zarr_depth porte la regle")
+ck(C.au_bord is Z.au_bord, "champ_correction n'a pas sa propre reponse")
+
+# --- deux exports du meme champ doivent etre identiques a l'octet : une campagne
+# qui ne se rejoue pas n'est pas une mesure.
+import json as _j
+ck(_j.dumps(C.fenetres(g, META6, [(0, 0)], 6, 2.4, "x", 0))
+   == _j.dumps(troue), "l'export est deterministe")
 
 print(f"ALL PASS (0 failures, {n} checks)")
 PY
@@ -860,6 +975,7 @@ run "deplacement de fichiers"  uv run --project "$ROOT" python "$ROOT/src/depot/
 run "nature des documents"     uv run --project "$ROOT" python "$ROOT/src/depot/nature_des_documents.py" --verifier
 run "taches ouvertes"          uv run --project "$ROOT" python "$ROOT/src/depot/taches_ouvertes.py" --verifier
 run "donnees sans appelant"    uv run --project "$ROOT" python "$ROOT/src/depot/donnees_sans_appelant.py" --verifier
+run "chemins des scripts"      uv run --project "$ROOT" python "$ROOT/src/depot/chemins_des_scripts.py" --verifier
 # ⚠⚠ La premiere tache du chantier A : mesurer le doublonnage PAR HACHAGE. Le plan annoncait
 # « 17,4 Go de doublons » sur un proxy nom+taille dont il ecrivait lui-meme qu il surcompte --
 # des chunks zarr nommes `40` dans deux volumes differents, meme nom, meme taille, contenu

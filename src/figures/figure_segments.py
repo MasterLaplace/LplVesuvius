@@ -24,7 +24,7 @@ paires proches ne sont pas des candidates mais des voisines.
 ⚠ Tracé avec PIL, sans matplotlib (absent de cet environnement).
 
 Usage :
-    cd experiments && uv run python src/figures/figure_segments.py \\
+    uv run python src/figures/figure_segments.py \\
         --entree docs/mesures/segments_PHerc1447.json \\
         --sortie docs/images/44_ecarts_segments.png
 """
