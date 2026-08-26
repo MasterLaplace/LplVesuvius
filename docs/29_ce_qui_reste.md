@@ -83,8 +83,14 @@ bout en bout »*) · `18` J6 · `22` R2:74 · `27`:204.
   d'une normale qui n'a pas de sens. ⭐ L'export a trouvé un défaut réel au passage —
   deux réponses à « le pic est-il au bord », qui divergent sur une pile de profondeur
   **impaire**, c'est-à-dire sur toutes les piles réelles de ce dépôt.
-- ⏳ Reste : **l'appliquer** et rendre les deux versions. C'est la tâche « montrer le
-  gain » : il faut une correction qui améliore *quelque chose de mesurable*.
+- ✅ **L'outil d'application existe** (`src/nappe/gauchir_nappe.py`, 2026-08-26) : il
+  déplace chaque point le long de **sa propre** normale, et son signe se **mesure** au
+  lieu de s'inventer.
+- ⏳ Reste : **rendre les deux versions**. ⚠ Et le champ dit d'avance ce que ça vaut —
+  sur le segment le plus réparable des 79, l'étendue des écarts est **1,4 pas
+  inter-feuilles** et deux blocs sur six ont un signe opposé, donc aucun déplacement
+  unique ne sert tout le segment (`20` §9). Le gain à montrer est **borné et petit**,
+  et c'est le champ qui le dit, pas un rendu.
 - ⭐ **L'obstacle écrit est tombé** : `22` disait *« la chaîne maillage → rendu n'est pas
   ici »*. VC3D est construit depuis le 2026-08-19, et `24` a fait tourner la chaîne
   complète.

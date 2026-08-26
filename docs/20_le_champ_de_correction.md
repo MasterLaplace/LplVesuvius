@@ -406,7 +406,72 @@ feuille » — mais sur **Scroll 4 il vaut 82,8 µm, soit le double du seuil**.
 jamais *quelles* fenêtres le sont, donc il ne permet pas de recalculer la médiane sans
 elles.
 
-## 9. Reproduire
+## 9. ⭐⭐ Appliquer : l'outil existe, et voici exactement ce qu'il peut gagner
+
+Le §4 écrivait que corriger était hors de portée *« parce que la chaîne maillage → rendu
+n'est pas ici »*. Elle y est depuis le 2026-08-19, et
+[`src/nappe/gauchir_nappe.py`](../src/nappe/gauchir_nappe.py) déplace désormais chaque
+point **le long de sa propre normale** — ce qui n'est déjà pas une translation rigide.
+
+⚠ **Le signe n'est pas connu a priori** et ne s'invente pas : l'ordre des couches est
+celui du rendeur et une normale n'a pas de sens (`valider_champ_normal.py`). Le protocole
+est donc empirique — déplacer, re-rendre, mesurer — et l'outil le dit dans son en-tête.
+
+### Ce que le champ permet de décider AVANT de rendre
+
+⭐ C'est l'usage que l'export du §8 débloque : au lieu de rendre pour voir, on lit le
+champ. Sur `20260701183128-w053-058` — le segment **le plus réparable des 79** (cohérence
++0,405, résiduel 44,4 µm, 6 % au bord) :
+
+| bloc de 4×4 fenêtres | médiane | étendue | écart-type |
+|---|---:|---:|---:|
+| 0 | **−34** | 90 | 26,7 |
+| 1 | +26 | 83 | 18,0 |
+| 2 | +17 | 90 | 24,0 |
+| 3 | +15 | 85 | 26,6 |
+| 4 | +25 | 87 | 22,9 |
+| 5 | **−18** | 84 | 31,4 |
+| **segment (90 fenêtres mesurées)** | **+19** | **101** | **30,4** |
+
+*(en couches ; fenêtres saturées exclues, ce que seul l'export par fenêtre permet)*
+
+> **L'étendue vaut 101 couches, soit 242 µm — c'est 1,4 fois le pas inter-feuilles de ce
+> rouleau (172,8 µm).** La trace ne visite donc pas une feuille avec un décalage : elle en
+> visite **plus d'une** le long du segment. Et deux blocs sur six ont une médiane de signe
+> **opposé** aux quatre autres, donc aucun déplacement unique ne sert tout le segment.
+>
+> ⭐ Retirer la médiane du segment enlève **+19 couches = 46 µm** d'une erreur dont
+> l'étendue est 242 µm. C'est le même verdict que le §4 — une translation n'enlève que
+> **22,1 %** — mais mesuré cette fois **par fenêtre**, ce qui dit *pourquoi* : pas une pose
+> décalée, une trace qui change de feuille en cours de route.
+
+⚠⚠ **Et la censure peut INVERSER un signe.** La médiane du bloc 5 vaut **+22** en comptant
+les fenêtres saturées et **−18** en ne gardant que les mesures. Une borne comptée comme une
+valeur ne fait pas qu'ajouter du bruit : elle peut faire pointer la correction dans la
+mauvaise direction. C'est l'argument le plus concret en faveur du drapeau `sature` du §8.
+
+### ⚠ Pourquoi le gain n'est pas montré sur une image, et ce qu'il faudrait
+
+Deux obstacles, tous deux mesurés plutôt que supposés :
+
+1. **Le maillage publié est trop grand pour être rendu tel quel.** Celui de ce segment fait
+   **3 660 × 9 244** points ; à l'échelle 1 son rendu ferait ~73 000 × 185 000 pixels. Il
+   faut découper d'abord — et c'est encore l'export du §8 qui dit **où** : chaque bloc
+   porte son pavé de pixels.
+2. **Notre propre trace de PHerc0358 ne peut pas servir de sujet.** Sa distribution de pics
+   est **bimodale** — 11 fenêtres à la couche 0, 5 à la couche 20, 16 % seulement dans le
+   tiers central d'une fenêtre d'un pas — donc tout déplacement rapproche un mode et
+   éloigne l'autre. ⚠ Et élargir la fenêtre de profondeur **n'aide pas** : à 9,362 µm, 61
+   couches valent 3 pas inter-feuilles et 121 en valent 6, donc agrandir **ajoute des
+   feuilles** au lieu de trouver la bonne. Vérifié : passer de 61 à 121 couches laisse le
+   pic au bord et fait passer l'écart médian de 262 à 562 µm, c'est-à-dire la demi-fenêtre.
+
+> **La règle qui sort de là** : une fenêtre de profondeur doit rester **sous le pas
+> inter-feuilles**, sinon « où est le pic » n'a pas de réponse. Les volumes de surface
+> publiés de Scroll 1 la respectent (109 × 2,4 = 262 µm pour un pas de 172,8, soit ±0,75
+> pas autour de la trace) ; un rendu maison ne la respecte que si on la lui impose.
+
+## 10. Reproduire
 
 ```bash
 ./src/campagnes/campagne_champ.sh PHercParis4 2.4um  2.4   docs/champ_PHercParis4

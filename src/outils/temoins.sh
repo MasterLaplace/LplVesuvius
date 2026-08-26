@@ -302,6 +302,8 @@ print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
 cd "$ROOT" || exit 2
+run "gauchir une nappe"        uv run --project "$ROOT" python "$ROOT/src/nappe/gauchir_nappe.py" --verifier
+
 run "champ de correction" uv run python - <<'PY'
 import sys, time, random
 from pathlib import Path

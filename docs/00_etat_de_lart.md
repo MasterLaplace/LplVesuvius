@@ -386,7 +386,9 @@ Ce qui manquerait pour y arriver, dans l'ordre du moins cher au plus cher :
      médiane confond — un **décalage rigide**, réparable par une translation, d'une
      **déformation locale**, qui ne l'est pas. Mesuré sur **trois** rouleaux : une
      translation n'enlèverait que **21,7 / 35,3 / 28,6 %** de l'erreur (`20`) ;
-   - ⏳ **appliquer** la correction. ⚠⚠ `20` §4 écrivait que c'était hors de portée « parce
+   - 🔄 **appliquer** la correction : l'outil existe (`gauchir_nappe.py`, `20` §9) et le
+     champ dit d'avance que le gain est **borné** — étendue 1,4 pas inter-feuilles sur le
+     meilleur segment. ⚠⚠ `20` §4 écrivait que c'était hors de portée « parce
      que la chaîne maillage → rendu n'est pas ici ». **C'était faux, et corrigé le jour
      même** : 32 dépôts sont clonés dont le monorepo officiel, VC3D est construit, et
      `24` pilote la chaîne complète de bout en bout.

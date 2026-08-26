@@ -251,6 +251,11 @@ def grid_profiles(folder: Path, size: int, step: int, floor: float,
             "au_bord_intensite": float(((dense_peaks == 0)
                                         | (dense_peaks == len(files) - 1)).mean()),
             "pic_intensite_median": float(np.median(dense_peaks)),
+            # ⚠ La serie ENTIERE, pas seulement sa mediane : la distribution observee est
+            # BIMODALE (les deux bords), et une mediane de distribution bimodale designe
+            # un endroit ou il n'y a personne. Le commentaire ci-dessus le dit ; sans la
+            # serie, personne ne pouvait le verifier.
+            "pics_intensite": [int(v) for v in dense_peaks],
             "ecart_trace_um_median": float(np.median(offsets)),
             "ecart_trace_um_p90": float(np.percentile(offsets, 90)),
             "couche_tracee": int(traced), "voxel_um": float(voxel_um),
@@ -327,11 +332,20 @@ def main() -> int:
             names = data["layers"]
             print(f"\n=== {folder.name} — {data['avec_matiere']} fenetres avec matiere "
                   f"sur {data['windows']} ===")
-            counts = np.bincount(data["peaks"], minlength=len(names))
-            for i, name in enumerate(names):
-                bar = "#" * int(round(counts[i] / max(1, counts.max()) * 40))
-                if counts[i]:
-                    print(f"  pic a la couche {name:3d}  {counts[i]:4d}  {bar}")
+            # ⚠⚠ DEUX histogrammes, et chacun est NOMME. La version precedente n'en
+            # affichait qu'un -- celui du CONTRASTE -- pendant que les deux lignes de
+            # verdict en dessous portent sur l'INTENSITE. On montrait donc une
+            # distribution et on jugeait par une autre, sans etiquette, et un lecteur
+            # lit l'image comme la preuve du verdict. Paye le 2026-08-26 : une heure
+            # passee a conclure d'un histogramme qui n'etait pas celui qu'on croyait.
+            for etiquette, serie in (("contraste", data["peaks"]),
+                                     ("INTENSITE", data["pics_intensite"])):
+                counts = np.bincount(serie, minlength=len(names))
+                print(f"  -- pic du {etiquette} --")
+                for i, name in enumerate(names):
+                    bar = "#" * int(round(counts[i] / max(1, counts.max()) * 40))
+                    if counts[i]:
+                        print(f"  pic a la couche {name:3d}  {counts[i]:4d}  {bar}")
             print(f"  mediane du pic : couche {names[int(data['peak_median'])]} "
                   f"| ecart interquartile : {data['peak_iqr']:.1f} couches "
                   f"(pas {data['layer_step']})")
