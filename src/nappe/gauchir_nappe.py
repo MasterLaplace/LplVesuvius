@@ -123,6 +123,26 @@ def _distorsion(avant, apres) -> dict:
     bon = np.isfinite(a0) & np.isfinite(a1) & (a0 > 1e-12)
     if not bon.any():
         return {}
+
+    # ⚠⚠ LA COUVERTURE, et c'est un aveuglement de ce fichier qu'un lecteur a trouve a
+    # l'oeil avant que la mesure ne le dise. Tout ce qui suit ne porte que sur les mailles
+    # valides DES DEUX COTES : une maille que la transformation fait disparaitre est
+    # exclue **par construction**, donc aucune de ces statistiques ne peut signaler une
+    # perte. Une mesure restreinte aux donnees existantes ne rapporte jamais les donnees
+    # absentes. Paye le 2026-08-27 : un re-aplatissement rendait des chiffres de
+    # distorsion meilleurs que la base tout en perdant 2 % de la surface et en trouant
+    # 6 % de son quadrillage -- ce qui se voit sur l'image et se lisait dans aucun nombre.
+    avant_ok = np.isfinite(a0) & (a0 > 1e-12)
+    apres_ok = np.isfinite(a1) & (a1 > 1e-12)
+    couverture = {
+        "mailles_avant": int(avant_ok.sum()),
+        "mailles_apres": int(apres_ok.sum()),
+        "mailles_perdues": int((avant_ok & ~apres_ok).sum()),
+        "aire_totale_avant": float(a0[avant_ok].sum()),
+        "aire_totale_apres": float(a1[apres_ok].sum()),
+    }
+    couverture["aire_conservee"] = (couverture["aire_totale_apres"]
+                                    / max(couverture["aire_totale_avant"], 1e-12))
     ratio = a1[bon] / a0[bon]
 
     # ⚠⚠ COURBURE ou BRUIT DE NORMALE ? Les deux etirent, et on ne peut pas les
@@ -146,6 +166,7 @@ def _distorsion(avant, apres) -> dict:
             temoin = float(np.corrcoef(h2[p2], b2[p2])[0, 1])
 
     return {
+        **couverture,
         "mailles": int(bon.sum()),
         "etirement_coherence_voisins": coherence,
         "etirement_temoin_melange": temoin,
@@ -240,6 +261,22 @@ def verifier() -> int:
     v("aucun point orientable n'est invalide",
       not bool((~pt.valide(troue) & orient_t).any()))
     v("le compte de valides est celui du masque", c2n["valides"] == h * w - 1, str(c2n))
+
+    # ⚠⚠ LA COUVERTURE : une transformation qui PERD des mailles doit le dire, et c'est
+    # le controle qui manquait. Toutes les statistiques d'etirement ne portent que sur ce
+    # qui existe des deux cotes, donc elles peuvent s'ameliorer pendant que la surface
+    # disparait -- exactement ce qu'un re-aplatissement a fait le 2026-08-27, avec des
+    # chiffres meilleurs que la base et 2 % de surface en moins.
+    v("une transformation sans perte conserve tout",
+      c["mailles_perdues"] == 0 and abs(c["aire_conservee"] - 1.0) < 1e-9, str(c))
+    perce = {c4: a4.copy() for c4, a4 in out.items()}
+    for c4 in ("x", "y", "z"):
+        perce[c4][2:4, 2:4] = INVALIDE
+    cperte = _distorsion(plans, perce)
+    v("... et une perte de mailles est SIGNALEE", cperte["mailles_perdues"] > 0,
+      str(cperte))
+    v("... avec l'aire qu'elle coute", cperte["aire_conservee"] < 0.99,
+      str(cperte["aire_conservee"]))
 
     # ⚠⚠ L'ETIREMENT, contre une reponse ANALYTIQUE. Un plan deplace est congruent a
     # lui-meme : ratio exactement 1. Un cylindre de rayon R deplace de d devient un
@@ -343,6 +380,10 @@ def main() -> int:
     print(f"{comptes['deplaces']} / {comptes['valides']} points deplaces de "
           f"{a.voxels:+.2f} voxels ; {comptes['invalides_faute_de_normale']} invalides "
           f"faute de normale")
+    if comptes.get("mailles_perdues"):
+        print(f"  ⚠⚠ COUVERTURE : {comptes['mailles_perdues']} mailles perdues, "
+              f"aire conservee {100 * comptes['aire_conservee']:.1f} % — les chiffres de "
+              f"distorsion ci-dessous NE LES VOIENT PAS")
     if "aire_ratio_median" in comptes:
         print(f"  etirement : aire mediane x{comptes['aire_ratio_median']:.4f} "
               f"(p01 {comptes['aire_ratio_p01']:.4f}, p99 {comptes['aire_ratio_p99']:.4f}), "

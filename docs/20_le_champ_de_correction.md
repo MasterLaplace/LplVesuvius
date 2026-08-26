@@ -553,6 +553,39 @@ profondeur** :
 > 8 µm) et la part au bord **retombe de 25 % à 15 %**, presque au niveau de la base. Une
 > fenêtre étirée mélange de la surface à des échelles différentes ; une fenêtre bien
 > paramétrée ne le fait pas, et son profil de profondeur est plus propre.
+
+#### ⚠⚠⚠ Mais le ré-aplatissement COÛTE de la surface, et aucune de ces mesures ne le voyait
+
+Un lecteur a regardé l'image et trouvé le panneau ré-aplati **moins lisible en bas** que
+le panneau `+26`, alors que tous les chiffres disaient l'inverse. Il avait raison, et
+c'est un défaut de la mesure, pas de son œil.
+
+| version | trous du quadrillage | valide, moitié basse | aire conservée |
+|---|---:|---:|---:|
+| base (publié) | **0** | 100 % | 100,0 % |
+| +26 voxels | **0** | 100 % | 99,6 % |
+| **+26 ré-aplati** | **1 087** | **92,6 %** | **98,0 %** |
+
+Dans les rendus, la part de pixels **noirs** du cinquième inférieur passe de **7,3 %**
+(`+26`) à **14,5 %** (ré-aplati) — le double, exactement là où le défaut se voyait.
+
+> ⚠⚠ **Pourquoi aucun nombre ne le disait.** Les statistiques d'étirement du §précédent ne
+> portent que sur les mailles **valides des deux côtés** : une maille que la
+> transformation fait disparaître en est exclue **par construction**. Une mesure
+> restreinte aux données existantes ne peut pas rapporter les données absentes — donc
+> elle pouvait s'améliorer pendant que la surface se perdait. C'est la même famille que
+> la vérification incapable d'échouer, et elle a tenu vingt minutes.
+>
+> `gauchir_nappe.py` rapporte désormais `mailles_perdues` et `aire_conservee` **avant** les
+> chiffres de distorsion, avec la phrase qui va avec : *« les chiffres ci-dessous NE LES
+> VOIENT PAS »*.
+
+⭐ **Le verdict honnête est donc à trois faces**, et non « strictement meilleur » comme
+cette section l'a d'abord écrit : le ré-aplatissement **supprime la distorsion** (étendue
+0,479 → 0,085, anisotropie 1,072 → **1,001**, la plus conforme des trois), **améliore la
+profondeur** (60 % au tiers central, 15 % au bord), et **coûte 2 % de la surface** en
+trouant 6 % de son quadrillage. Le choix dépend de ce qu'on optimise ; ce qui ne dépend de
+rien, c'est qu'il faut les **trois** chiffres pour choisir.
 >
 > ⚠ **Les quatre paves ne sont PAS au même endroit**, et il faut le dire : ré-aplatir
 > **re-rastérise** (recadrage `2721×2541` contre `2560×2560`), donc les mêmes coordonnées
