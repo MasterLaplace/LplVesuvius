@@ -7,6 +7,23 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+## ⚠⚠⚠ UN RUN OUBLIÉ A ÉCRASÉ UN RÉSULTAT FRAIS — et `temoins.sh` a maintenant un verrou
+
+`temoins.sh` **écrit** `docs/mesures/temoins.json` à la fin. Deux runs concurrents courent donc
+dessus, et c'est **le plus LENT qui gagne** : un run lancé *avant* une correction peut écraser
+le résultat vert d'un run lancé *après*. Vu en vrai le 2026-08-26 — un run oublié en
+arrière-plan a remis `"echecs": 2` par-dessus un `"echecs": 0` frais, **plusieurs minutes
+après le commit**.
+
+⭐ C'est le cousin du piège déjà consigné ici (« un log périmé lu comme un résultat »), en pire :
+là c'était une *lecture* périmée, ici c'est une **écriture** périmée. Aucune vigilance ne
+protège de ça — seul un verrou le peut. `temoins.sh` refuse désormais de démarrer si un autre
+run vit (verrou par PID, vérifié avec `kill -0`, donc un verrou orphelin ne bloque pas le
+dépôt ; `--sans-verrou` pour le cas où on sait ce qu'on fait). Sondé : le second run refuse et
+le dit, le verrou se libère à la sortie.
+
+---
+
 ## ⭐⭐⭐⭐ `data/` RANGÉ — 43,4 Gio effacés, et la règle qui l'autorise
 
 189 Gio → **146 Gio**, 81 dossiers → **61**. Rien n'a été effacé au jugé : `a_supprimer()`

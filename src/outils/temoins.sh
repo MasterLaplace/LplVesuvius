@@ -11,6 +11,26 @@ cd "$(dirname "$0")/../.." || exit 2
 ROOT=$PWD
 FAIL=0
 
+# ⚠⚠ UN SEUL RUN A LA FOIS, et ce n est pas de la prudence : ce script ECRIT
+# `docs/mesures/temoins.json` a la fin. Deux runs concurrents courent donc dessus, et c est
+# le PLUS LENT qui gagne -- donc un run lance AVANT une correction peut ecraser le resultat
+# vert d un run lance apres. Paye le 2026-08-26 : un run oublie en arriere-plan a remis
+# `echecs: 2` par-dessus un `echecs: 0` frais, plusieurs minutes apres le commit.
+#
+# ⚠ Le verrou porte le PID et se verifie : un verrou orphelin (machine redemarree, run tue)
+# ne doit pas bloquer le depot pour toujours. `--sans-verrou` existe pour le cas ou on sait
+# ce qu on fait.
+VERROU="$ROOT/.temoins.lock"
+if [ "${1:-}" != "--sans-verrou" ]; then
+  if [ -f "$VERROU" ] && kill -0 "$(cat "$VERROU" 2>/dev/null)" 2>/dev/null; then
+    echo "REFUS : un autre run de temoins.sh tourne deja (pid $(cat "$VERROU"))." >&2
+    echo "        Deux runs courent sur docs/mesures/temoins.json et le plus LENT gagne." >&2
+    exit 3
+  fi
+  echo $$ > "$VERROU"
+  trap 'rm -f "$VERROU"' EXIT
+fi
+
 # ⚠⚠ Une batterie est verte si elle satisfait DEUX conditions, pas une. La version
 # precedente ne testait que la presence de "ALL PASS" quelque part dans la sortie, et
 # perdait le code de sortie dans le tube. Deux batteries ecrites le 2026-08-19 sont

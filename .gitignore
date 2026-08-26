@@ -66,3 +66,6 @@ src/apprendre/.venv/
 src/apprendre/media/
 src/apprendre/videos/
 src/apprendre/vignettes/
+
+# Verrou de `src/outils/temoins.sh` : un seul run a la fois (voir son entete).
+/.temoins.lock
