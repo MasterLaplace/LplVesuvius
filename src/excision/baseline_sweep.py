@@ -202,8 +202,22 @@ def main() -> int:
             print(f"  [{order}/{len(traces)}] {name} : trop peu de mesures")
             continue
 
+        # ⚠⚠ L ECHELLE EST ECRITE DANS LE RECORD, et ce n est pas de la decoration. Sans
+        # elle, « 18 voxels » ne se lit pas : 18 voxels valent 142 µm a 7,91 µm/vox et 43 µm
+        # a 2,399. `07` §7 le signale depuis le 2026-08-20 -- le chiffre publie etait
+        # invérifiable, pas faux, ce qui est pire parce que ca ne se voit pas.
+        # ⚠ `racine` et `variante` avec : sur ce corpus un meme segment est trace sur
+        # PLUSIEURS campagnes de scan, donc le nom seul ne dit pas laquelle.
         record = {"label": name, "cells": int(points.shape[0]),
-                  "measured": int((~np.isnan(distances)).sum()), "variants": {}}
+                  "measured": int((~np.isnan(distances)).sum()),
+                  "echelle": {"voxel_um": args.voxel_um,
+                              "sheet_pitch_um": args.sheet_pitch_um,
+                              "search_radius_vox": round(float(args.search_radius), 3),
+                              "search_radius_um": round(float(args.search_radius) * args.voxel_um, 1),
+                              "apart_vox": args.apart,
+                              "racine": str(args.root),
+                              "variante": args.variante or None},
+                  "variants": {}}
         for window in COLUMN_WINDOWS:
             record["variants"][f"colonnes_{window}"] = summarise(
                 distances, local_baseline(cols, sample, distances, window))

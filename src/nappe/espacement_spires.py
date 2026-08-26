@@ -145,8 +145,14 @@ def main() -> int:
     if binaire:
         print(f"  ⚠ prediction BINAIRE (valeurs {echantillon.tolist()}) : "
               f"le seuil est deja applique a la publication, le balayer ne dit rien")
+    # ⚠⚠ LES COMPTES ENTRENT DANS LE RAPPORT, ils n etaient qu IMPRIMES. `16` §6 signale
+    # depuis le 2026-08-18 qu un chiffre de cette carte n est pas relisible sans savoir sur
+    # combien de chunks il porte -- « 3 % de murs » n a pas le meme poids sur 40 chunks et
+    # sur 4 000. Le corriger dans le document aurait recopie un nombre ; le corriger ici le
+    # fait porter par CHAQUE carte produite ensuite.
     report = {"zarr": args.zarr, "level": args.level, "voxel_um": voxel,
-              "binaire": bool(binaire), "seuils": {}, "par_rayon": []}
+              "binaire": bool(binaire), "seuils": {}, "par_rayon": [],
+              "chunks_avec_matiere": len(blocks), "sondes": len(picks)}
 
     # ⚠ Le « rayon » est la distance au centre de la GRILLE de chunks, en chunks. Le
     # volume est masque, donc le rouleau y est grossierement centre -- c'est une

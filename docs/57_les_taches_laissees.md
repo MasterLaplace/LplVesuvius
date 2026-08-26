@@ -1,0 +1,140 @@
+# 57 — Les tâches laissées, instruites une par une
+
+> ⚠⚠ **Ce document répond à une question, pas à une liste.** L'auteur a demandé si des
+> choses avaient été laissées de côté sans que personne ne le remarque. Le dépôt portait
+> **41 sabliers** sur 18 documents et **56 items numérotés** dans trois documents de
+> backlog, et rien ne distinguait une vraie tâche d'un titre de section.
+>
+> L'inventaire est désormais **mécanique** : `src/depot/taches_ouvertes.py` dérive les
+> marqueurs des documents, `docs/registres/taches.tsv` porte le verdict, et les deux se
+> vérifient **dans les deux sens** — un marqueur sans entrée fait échouer le contrôle, une
+> entrée dont l'ancre a disparu aussi. Ce document raconte ce que l'instruction a trouvé.
+
+**Réponse courte : rien n'a été sauté.** Les 41 sabliers précèdent presque tous la session
+de rangement, et ils portent le programme de recherche — la soumission, l'application de la
+correction. Mais **plusieurs mentaient** : ils annonçaient « en cours » des campagnes
+revenues depuis, et deux posaient une question qui avait sa réponse ailleurs.
+
+---
+
+## 1. ⭐⭐⭐ Trois questions fermées PAR LA MESURE
+
+### 1.1 « 18 voxels bruts ou rayon physique ? » — les deux artefacts sont sur la grille 7,91 µm
+
+`07` §7 signalait depuis le 2026-08-19 que `sweep_PHerc1667.jsonl` n'enregistre ni son
+volume ni son voxel, donc que « 18 voxels » pouvait valoir 43 µm ou 142 µm. **Aucune des
+deux branches n'était la bonne**, et la mesure le dit sans ambiguïté :
+
+| artefact | grille | rayon | en µm |
+|---|---|---:|---:|
+| `sweep_PHerc1667.jsonl` | **7,91 µm** | **80 vox** | 632,8 |
+| `sweep_1667_pas.jsonl` | **7,91 µm** | **18 vox** | 142,4 |
+
+⭐ **Et c'est prouvé par reconstruction, pas par lecture** : relancer avec ces paramètres
+rend les **18** et **16** enregistrements **identiques** — `cells` et `measured` au chiffre
+près — le seul changement étant le champ `echelle` que `baseline_sweep.py` écrit désormais.
+
+> ⚠⚠ **Ma première mesure était fausse et le disait pourtant.** J'avais cherché le corpus
+> dans `data/repos/windcheck/data/`, conclu « PHerc1667 n'y est pas », et mesuré sur
+> `scroll1_tifxyz` — un autre corpus. `data/traces/PHerc1667/` existe, avec ses 20 traces et
+> ses quatre grilles. Chercher au mauvais endroit puis conclure sur ce qu'on y trouve est la
+> panne la plus banale de ce dépôt, et elle ne se voit pas : les nombres sortent, ils sont
+> justes, ils parlent d'autre chose.
+
+⭐ **Le remède est dans le code, pas dans le document** : le record porte maintenant son
+`echelle` — voxel, pas inter-feuilles, rayon en voxels **et** en µm, racine, variante. Sans
+lui, « 18 voxels » n'est pas un chiffre, c'est une devinette. Corriger le document aurait
+recopié un nombre ; corriger l'outil le fait porter par chaque campagne suivante.
+
+⚠ Et un piège reste, nommé : sans `--variante`, le script prend la grille **alphabétiquement
+première** — 3,24 µm sur ce corpus, pas 7,91. Un run sans variante mais avec
+`--voxel-um 7.91` écrirait donc un record qui **déclare** 142 µm pour un rayon de 58.
+
+### 1.2 « 36 contre 72 » — un budget nominal contre un compte réalisé
+
+`19` §5 relevait deux comptes contradictoires qu'aucun document ne démêlait.
+
+- **36** est la valeur par défaut de `--windows` (`src/commun/zarr_depth.py`) : un **budget
+  nominal**, jamais un compte. Le code ne sonde pas 36 points, il en sonde
+  `steps × min(2·steps, grid_x)` avec `steps = int(sqrt(windows))`, soit environ le double.
+- **72** est un compte **réalisé** (`sondees`), et il appartient à la campagne fibres :
+  `docs/mesures/fibres_corpus.json`, 80 entrées, `sondees = 72` constant, produit par
+  `fiber_orientation.py --windows 36` (9 amas → 18 ancres × 4 chunks).
+
+⭐ **Compatibles**, et par la même arithmétique : 36 → 72 est ce que font les **deux** outils,
+qui doublent tous deux leur nominal. Il n'y avait pas de contradiction, il y avait deux
+grandeurs qui portaient le même mot.
+
+### 1.3 « Existe-t-il un régime où la nappe gagne de l'aire en RESTANT convergée ? » — oui, et il est borné
+
+`44` posait la question la moins chère de sa famille et ne l'avait jamais tranchée. Balayage
+du budget `generations`, conception appariée, graine posée :
+
+| budget | aire utile | auto-intersections | α | verdict |
+|---:|---:|---:|---:|---|
+| source officielle | 4,28 cm² | — | +0,000 | converge |
+| **100** | **12,968 cm²** | **0** | **+0,000** | ⭐ **×3 d'aire sans quitter la feuille** |
+| 200 | 28,62 cm² | 25 036 | +1,313 | en travers |
+| 400 | 78,30 cm² | 168 104 | — | replié, non jugé |
+
+⚠ Et c'est une **propriété**, pas un tirage : deux exécutions identiques rendent le même
+maillage, écart **0 µm** mesuré par un second instrument.
+
+---
+
+## 2. ⚠⚠ Deux lectures CORRIGÉES — le document disait plus que la mesure
+
+### 2.1 « La correction dégrade α » — non : les deux valeurs sont sous la résolution
+
+`42` a appliqué une correction et rapporté α **+0,98 → +1,03**, lu partout depuis comme une
+dégradation. Ce n'en est pas une : les deux valeurs sont à **0,0375** et **0,0200** de l'α de
+plafond (+1,0135), donc **sous la résolution 0,20** de l'instrument. Elles sortent par
+identité arithmétique — les deux lectures sont le bord de leur fenêtre — et la paire de
+l'ancre a en plus une fenêtre plate.
+
+⭐ La boucle n'a donc mesuré **ni gain ni perte** sur l'axe « suit une feuille ». Elle a redit
+que les deux traces sont condamnées, ce qui était déjà vrai du témoin.
+
+⚠⚠ **Ce qui EST une vraie dégradation**, appariée et valide : **0 → 11 753**
+auto-intersections à `step_size` identique. Le gain reste donc à montrer, mais pas contre le
+résultat qu'on croyait avoir.
+
+### 2.2 M1ter — une des trois causes est déjà close, et `29` ne le savait pas
+
+L'encre n'est pas lisible à 9 µm ; `29` laissait trois causes en lice — la résolution, ce
+rouleau-ci, ou un papyrus vierge. ⭐ `46` §3 a mesuré, sur le même rouleau, que **la sortie
+du modèle ne dépend pas de son entrée** : deux surfaces géométriquement incompatibles,
+entrées distinctes de 11,0 %, rendent la même carte. La cause « papyrus vierge » ne peut donc
+pas être testée par ce modèle-là, quel que soit le papyrus.
+
+⚠ Correction de libellé au passage : le rouleau mesuré n'est **pas** PHerc0172 mais
+**PHerc1447** (`36` §5bis) ; PHerc0172 est un autre rouleau, à 7,91 µm, qui ne fait pas
+partie des treize du prix.
+
+---
+
+## 3. ⚠ Ce qui reste, et ce qui le bloque
+
+| tâche | état | ce qui bloque |
+|---|---|---|
+| **R2** — exporter le champ en coordonnées de fenêtre | **ouverte, instruite** | rien : le plan est établi (trois groupes à sortir, 86 à 96 fenêtres par segment). C'est du code, quelques heures |
+| **montrer le gain** | **ouverte** | il faut une correction qui améliore *quelque chose de mesurable* — §2.1 vient d'établir que l'ancien résultat ne dit pas le contraire |
+| `16` — régénérer les cartes de difficulté | ⚠ **décision** | le script d'aujourd'hui n'échantillonne plus comme les artefacts publiés (64 → 108 sondes) : régénérer **déplacerait** le tableau §3. Le correctif de code est fait ; l'acte de régénérer appartient à l'auteur |
+| **transport vers une région sans vérité** | ⚠ **impossible sur ce couple** | mesuré : la face n'est périodique qu'à une taille de fenêtre où les enroulements ne rendent **aucune** fenêtre. Il n'existe aucun réglage où les deux côtés en ont |
+| **thèse forte du témoin négatif** | ⚠ **mesurée, et elle refuse** | sur PHercParis4 : ρ(positif, négatif) = **+0,9984**, σ à 2,4 % du modèle qui marche — la garde de `temoin_negatif.py` **refuse**, comme sur `46` |
+| **campagnes détachées** | **dépouillée pour la piste C** | 3 verdicts sur 17 essais jugeables ; les leviers de perte n'ont laissé que `temoin/` |
+
+---
+
+## Reproduire
+
+```bash
+lplv taches_ouvertes                      # l'inventaire, dérivé des documents
+lplv taches_ouvertes --verifier           # le registre se garde lui-même, dans les deux sens
+
+# §1.1 — les deux sweeps, régénérés à l'identique avec leur échelle
+uv run python src/excision/baseline_sweep.py data/traces/PHerc1667 \
+    docs/mesures/sweep_PHerc1667.jsonl --variante 7.91um --voxel-um 7.91 --search-radius 80
+uv run python src/excision/baseline_sweep.py data/traces/PHerc1667 \
+    docs/mesures/sweep_1667_pas.jsonl --variante 7.91um --voxel-um 7.91 --search-radius 18
+```
