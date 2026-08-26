@@ -59,9 +59,11 @@ de ces listes ENREGISTRAIT la dispersion.
   (`cbuffer_sizes` a disparu en 0.16) — l'environnement qui marchait portait 0.15.1, la
   racine 0.16.5.
 
-⚠ `data/venvs_perimes/` garde l'environnement de `experiments/`, devenu inutile puisque ses
-dépendances sont dans la racine. **Rien n'a été effacé** ; c'est reconstructible par
-`uv sync`, et le dossier porte un `LISEZMOI` qui le dit.
+⚠ L'environnement de `experiments/` est **supprimé** (350 Mio) : ses dépendances sont dans le
+`pyproject.toml` de la racine, donc `src/excision/` tourne dans l'environnement principal —
+vérifié en important `radial`, `proximity`, `fusions` et `zarr` depuis lui. Les deux
+environnements qui restent le sont parce qu'ils **ne peuvent pas** fusionner : `src/xpu/.venv`
+(torch/XPU, Python 3.13, index maison) et `src/apprendre/.venv` (manim).
 
 ---
 
