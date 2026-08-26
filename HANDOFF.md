@@ -1603,7 +1603,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 132 batteries, 3559 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 133 batteries, 3568 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)
@@ -1658,6 +1658,21 @@ uv run python src/encre/proximity_vs_ink.py <mesh> <pred> <labels>
 ```
 
 ### ⭐⭐ VC3D — la chaîne de production, construite le 2026-08-19
+
+> ⚠⚠ **« VC3D ne se lance plus » est faux, et la façon de s'en apercevoir coûte une
+> demi-heure** *(mesuré le 2026-08-26)*. Deux choses trompent, dans cet ordre :
+>
+> 1. **`VC3D --help` et `VC3D -h` font un SEGFAULT** (code 139) et crachent un « CRASH
+>    REPORT » de trente lignes. C'est le premier réflexe quand quelque chose cloche, donc
+>    c'est ce qu'on voit. `--version` répond normalement, et **lancé sans argument le GUI
+>    démarre** : vérifié, 990 Mo résidents, stable.
+> 2. Au démarrage il écrit `Window state metadata mismatch; skipping restore`. **Ce n'est
+>    pas une panne, c'est le bon comportement** : `~/.VC3D/VC3D.ini` porte
+>    `screen_signature=xcb|1|rdp-0:1920x1200+0+0@1.00`, et VC3D refuse de restaurer une
+>    fenêtre sur un écran qui n'est plus celui-là plutôt que de la poser hors champ.
+>
+> `./src/outils/lancer_vc3d.sh` lance proprement, refuse avant de toucher au binaire quand
+> il n'y a pas d'affichage, et `--repartir-de-zero` efface la géométrie mémorisée.
 
 **44 outils en ligne de commande** *(compté le 2026-08-19 : `ls /usr/local/bin/vc_* | wc -l`)* sous `/usr/local/bin/vc_*`, plus le GUI `VC3D`.
 Construits depuis `data/repos/villa/volume-cartographer/build_from_src_debian.sh`

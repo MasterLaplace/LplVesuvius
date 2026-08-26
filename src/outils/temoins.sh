@@ -911,6 +911,7 @@ run "effet du plafond"         uv run python "$ROOT/src/graine/effet_du_plafond.
 # lirait le mauvais cas. Celle du plafond a son propre motif COUPE EN DEUX, sans quoi la
 # sonde se matcherait elle-meme -- pkill -f sous un nouveau costume.
 run "traceur d une graine"     "$ROOT/src/outils/tracer_une_graine.sh" --verifier
+run "lanceur VC3D"             "$ROOT/src/outils/lancer_vc3d.sh" --verifier
 run "campagne du plafond"      "$ROOT/src/outils/plafond_generations.sh" --verifier
 # ⚠⚠ La figure des candidats. Ses deux sondes de mise en page attrapent deux defauts
 # DIFFERENTS, et le premier controle que j avais ecrit n attrapait que l un des deux :
