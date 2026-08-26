@@ -52,6 +52,37 @@ document 44** qui écrivent `$PWD/docs/chaine_*.json`, des fichiers *qui n'exist
   **produit** par `./lplv --verbes --json`. Le classer en registre l'aurait mis hors de portée
   d'une purge de sorties alors que c'en est une.
 
+### ⭐ « Un seul dossier `src/` » — la question est TRANCHÉE, avec la raison de chacun
+
+Six dossiers versionnés vivent encore à côté de `src/`, `docs/` et `data/`. Trois autres
+(`repos/`, `site/`, `soumission/`) sont **gitignorés** : qui clone ne les reçoit pas, donc ils
+ne sont pas la question.
+
+| dossier | fichiers suivis | pourquoi il reste |
+|---|---:|---|
+| `experiments/` | 17 | **son propre `pyproject.toml`** — l'expérience d'excision a un autre jeu de dépendances |
+| `inference_xpu/` | 3 | **son propre `uv.lock`** — torch/XPU ne doit pas entrer dans l'environnement principal |
+| `tracecheck/` | 5 | **outil public**, avec son README, publié séparément |
+| `apprendre/` | 10 | **son propre environnement manim**, son `rendre.sh`, son README |
+| `article/` | 21 | source **typst**, un livrable, pas du code |
+| `artefacts/` | 14 | ⚠⚠ ce sont des **données versionnées** (le mesh `PHerc0358`) — et `data/` est **gitignoré**, donc les y déplacer les ferait DISPARAÎTRE du dépôt |
+
+⭐ Quatre ont une raison de dépendances, une est un livrable, et la dernière disparaîtrait si
+on la « rangeait ». Aucune n'est du désordre.
+
+### ⚠⚠ Deux réponses à « qu'est-ce qu'un script de ce dépôt », et elles avaient divergé
+
+`lplv.FAMILLES` nomme **cinq** familles (`src/`, `tracecheck/`, `inference_xpu/src/`,
+`experiments/src/`) pendant qu'`appelants.py` jugeait **`src/` seul**, en dur. Donc `lplv`
+savait lancer un verbe dont le garde-fou ne se demandait jamais si quelque chose l'exécutait :
+**un orphelin hors de `src/` était invisible par construction**. Mesuré après unification :
+**214 → 233 scripts jugés**, **27 → 31 orphelins**, les quatre nouveaux tous hors de `src/`.
+
+⚠ Et `FAMILLES` n'est pas « tout le Python du dépôt » : `apprendre/scenes/*.py` en est
+**délibérément** absent. Ce sont des définitions de scènes Manim, exécutées par
+`manim <fichier> <Scene>`, pas des programmes — en faire des verbes créerait des verbes qui
+échouent sur `lplv <verbe> --help`. La raison est écrite là où quelqu'un voudra les ajouter.
+
 ### ⚠⚠ CHANTIER B — la mesure CONTREDIT le plan, et c'est le plan qui cède
 
 Le plan disait « un dossier par ROULEAU ». Mesuré avant d'y toucher :
@@ -1381,7 +1412,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 128 batteries, 3256 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 128 batteries, 3259 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)

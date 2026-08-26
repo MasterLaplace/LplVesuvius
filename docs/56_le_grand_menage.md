@@ -5,6 +5,18 @@
 > chaque chiffre est donnée. Ce qu'il **décide de ne pas faire** est écrit aussi — c'est la
 > partie qu'on oublie et c'est celle qui empêche la question de revenir tous les quinze jours.
 
+> ✅ **2026-08-26 — les quatre chantiers sont clos.** A (cache de rendu par contenu), C (`lplv`)
+> et D (dessin unifié, `docs/` par nature) sont **livrés** ; **B est clos par la mesure**, qui a
+> contredit son propre plan — voir §B. Ce document reste le plan : ce qui a été livré est marqué
+> ✅ à sa place, et ce qui a été écarté garde sa raison à côté.
+>
+> | chantier | état | ce qui compte |
+> |---|---|---|
+> | A — cache par contenu | ✅ livré | le raccourci de rendu, **13 agents**, 0 réfutation |
+> | B — `data/` par rouleau | ✅ **clos par la mesure** | le plan cède : `data/` est gitignoré, 11 dossiers sur 81 nomment un rouleau. **50,6 Gio** de candidats nommés à la place |
+> | C — `lplv` | ✅ livré | un point d'entrée, **233 verbes** découverts |
+> | D — dessin + `docs/` | ✅ livré | 15 copies de `_police` → 1 ; `docs/` **522 → 58** à la racine |
+
 Cadré avec le skill [`concevoir-avant-coder`](../../LplCraftSkills/skills/concevoir-avant-coder/SKILL.md) :
 besoin avant solution, YAGNI sur ses deux axes, ossature en stubs, modules et paliers, pipeline
 adaptatif par modes et compteurs, échelle d'escalade.

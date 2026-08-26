@@ -106,6 +106,27 @@ def appelants(textes: dict[str, str], chemin: str) -> list[str]:
     return sorted(out)
 
 
+def scripts_du_depot(textes: dict[str, str]) -> list[str]:
+    """Les scripts que ce dépôt peut lancer, d'après `lplv.FAMILLES` et rien d'autre.
+
+    ⚠⚠ Cette fonction existe parce qu'il y avait DEUX réponses à « qu'est-ce qu'un script de
+    ce dépôt ». `lplv` en nomme cinq familles — `src/`, mais aussi `tracecheck/`,
+    `inference_xpu/src/` et `experiments/src/` — pendant que ce fichier jugeait `src/` seul.
+    Donc `lplv` savait lancer un verbe dont ce garde-fou ne se demandait jamais si quelque
+    chose l'exécutait : un orphelin hors de `src/` était invisible par construction.
+
+    ⚠ La liste vit dans `lplv` et pas ici : le point d'entrée est ce qui DÉFINIT ce qu'est un
+    greffon, ce fichier ne fait que le vérifier. L'inverse ferait dépendre le point d'entrée
+    de son propre contrôle.
+    """
+    import fnmatch
+
+    from lplv import FAMILLES
+
+    return sorted(f for f in textes
+                  if any(fnmatch.fnmatch(f, motif) for motif, _ in FAMILLES))
+
+
 def orphelins(textes: dict[str, str], scripts: list[str]) -> dict:
     """Les scripts que rien n'exécute, et le compte de ce qui a été regardé."""
     sans = [s for s in scripts if not appelants(textes, s)]
@@ -192,12 +213,27 @@ def verifier() -> int:
     # 2026-08-26, contre 0,80 s x ~200 pour l'ancien garde, soit plus de trois mille fois.
     # ⚠⚠ Ma premiere version annoncait « plus de mille fichiers » et assertait 500 : le
     # libelle et l'assertion disaient deux choses differentes, et aucune des deux n'etait vraie.
+    import fnmatch
+
+    from lplv import FAMILLES
+
     v("l'arbre entier se lit en UN parcours, en moins d'une seconde", duree < 1.0)
     v("... et il couvre les deux langages du depot",
       sum(1 for f in textes if f.endswith(".py")) > 100
       and sum(1 for f in textes if f.endswith(".sh")) > 40)
     v("... et la prose, sans quoi `lplv <verbe>` d'un bloc Reproduire serait invisible",
       sum(1 for f in textes if f.endswith(".md")) > 40)
+
+    # ⚠⚠ Le perimetre du garde-fou doit etre CELUI du point d entree. Il jugeait `src/`
+    # seul pendant que `lplv` sait lancer quatre familles de plus : un orphelin hors de
+    # `src/` etait invisible par construction, et il y en avait quatre.
+    juges = scripts_du_depot(textes)
+    v("le perimetre juge est celui de lplv, pas seulement src/",
+      any(not f.startswith("src/") for f in juges))
+    v("... et il couvre chacune des familles declarees",
+      all(any(fnmatch.fnmatch(f, motif) for f in juges) for motif, _ in FAMILLES))
+    v("... sans rien prendre en dehors",
+      all(any(fnmatch.fnmatch(f, m) for m, _ in FAMILLES) for f in juges))
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
@@ -214,7 +250,7 @@ def main() -> int:
     import time
     t0 = time.time()
     textes = index_des_lignes()
-    scripts = sorted(f for f in textes if f.startswith("src/") and f.endswith((".py", ".sh")))
+    scripts = scripts_du_depot(textes)
     r = orphelins(textes, scripts)
     r["secondes"] = round(time.time() - t0, 2)
     print(f"{r['scripts']} scripts jugés depuis {r['fichiers_lus']} fichiers lus "

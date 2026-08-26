@@ -46,7 +46,17 @@ FAMILLES: tuple[tuple[str, str], ...] = (
     ("experiments/src/*/*.py", "python"),
 )
 """Où vivent les greffons. ⚠ Même liste que `artefacts_orphelins.SOURCES` : deux listes de
-« où est le code de ce dépôt » finiraient par ne pas s'accorder, et c'est déjà arrivé ici."""
+« où est le code de ce dépôt » finiraient par ne pas s'accorder, et c'est déjà arrivé ici.
+`appelants.scripts_du_depot()` la lit désormais aussi — il jugeait `src/` seul, donc un
+orphelin hors de `src/` lui était invisible, et il y en avait quatre.
+
+⚠⚠ Ce n'est PAS « tout le Python du dépôt », c'est **ce que ce point d'entrée sait lancer**.
+`apprendre/scenes/*.py` en est délibérément absent : ce sont des définitions de scènes Manim,
+exécutées par `manim <fichier> <Scene>` depuis `apprendre/rendre.sh`, pas des programmes. Les
+ajouter créerait des verbes qui échouent sur `lplv <verbe> --help`, puisqu'ils n'ont pas de
+ligne de commande — et un verbe qu'on ne peut pas exécuter est pire que pas de verbe. Pour la
+même raison, `appelants.py` ne doit pas les compter comme orphelins : `rendre.sh` les exécute
+bel et bien, et `temoins.sh` lance son `--verifier`."""
 
 
 class VerbeAmbigu(RuntimeError):
