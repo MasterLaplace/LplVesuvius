@@ -879,6 +879,61 @@ chaîne se trouve*. `src/nappe/couverture_publiee.py` le fait en quelques second
 > ⭐ **La dérive DÉCÉLÈRE** : 15,9 µm/mm à 768 µm, 14,6 à 1 920 µm, 12,0 à 5 760 µm. Même forme
 > que le plateau bas de l'avantage sur le hasard, mesuré juste au-dessus.
 
+##### ⭐⭐⭐ Et cette dérive est une LOI : ajustée sur le début, elle prédit la fin
+
+Décrire une dérive et pouvoir la corriger sont deux choses différentes. Corriger suppose
+de **prédire**, donc une loi qui tienne là où on n'a pas mesuré — et ajuster une courbe
+sur dix points la décrit toujours bien. Le test qui décide est **hors échantillon** :
+ajuster sur les cinq premiers maillons (96 à 1 152 µm) et prédire les cinq derniers
+(1 920 à 5 760 µm), qui n'ont pas servi à l'ajustement.
+
+| loi | erreur hors échantillon | erreur enlevée | p |
+|---|---:|---:|---:|
+| **ne rien corriger** (modèle nul) | **49,0 µm** | — | — |
+| **droite par l'origine**, 1 paramètre | **15,5 µm** | **68,3 %** | **0,0015** |
+| logarithme, 2 paramètres | 15,5 µm | 68,3 % | 0,0005 |
+| droite affine, 2 paramètres | 30,3 µm | 38,3 % | 0,034 |
+| puissance, 2 paramètres | 49,0 µm | **0,0 %** | 0,73 |
+
+> ⭐⭐ **Une loi ajustée sur le premier millimètre enlève 68 % de la déviation des quatre
+> suivants.** Le `p` vient d'un **tirage**, pas d'un seuil : les mêmes écarts réattribués
+> au hasard aux mêmes distances refont l'ajustement et la prédiction 2 000 fois.
+>
+> ⚠⚠ **Et le tirage était nécessaire.** Une sonde l'a montré avant les vraies données :
+> sur du **bruit pur**, une droite affine ajustée sur la première moitié enlève encore
+> **1,8 %** de l'erreur de la seconde. Un critère « mieux que ne rien faire » est donc
+> satisfait par le hasard, et aurait déclaré extrapolable une dérive qui n'existe pas.
+>
+> ⭐ **Le logarithme n'est pas une seconde réponse** : son ajustement dégénère en droite
+> (`b` grand, donc `log1p(s/b) ≈ s/b`) et ses résiduels sont **identiques** au chiffre
+> près. Et l'affine, avec un paramètre de plus, fait **deux fois pire** — du surajustement
+> sur cinq points. Sur la plage mesurée, la dérive est **linéaire, à un paramètre**.
+
+**Ce que la correction vaudrait**, maillon par maillon, avec la loi apprise sur le premier
+millimètre seulement :
+
+| maillon | parcouru | mesuré | résiduel après correction |
+|---:|---:|---:|---:|
+| 20 | 1 920 µm | −28,1 µm | **+2,3 µm** |
+| 40 | 3 840 µm | −44,9 µm | +15,7 µm |
+| **60** | **5 760 µm** | **−69,2 µm** | **+21,8 µm** |
+
+> ⭐⭐ **À 5,76 mm, la chaîne repasse de −69,2 µm à +21,8 µm — donc DANS la bande « même
+> feuille » (40 µm) qu'elle avait quittée vers 3,5 mm.** C'est la première fois qu'une
+> correction de ce dépôt est justifiée par une prédiction tenue plutôt que par un
+> ajustement.
+>
+> ⚠ **Elle SUR-corrige**, et il faut le dire : la droite prédit −91 µm là où on mesure
+> −69,2, donc le résiduel change de signe et croît régulièrement (2,3 → 21,8 µm). C'est
+> exactement la décélération notée juste au-dessus, que la droite ne capture pas. Une loi
+> qui la capturerait ferait mieux au bout — mais aucune des trois essayées ne l'a fait, et
+> en inventer une quatrième après avoir vu les résiduels serait de l'ajustement déguisé.
+>
+> ⚠⚠ **Ce que ce test ne prouve PAS.** Il extrapole **à l'intérieur du segment publié**,
+> là où la vérité existe. Il ne montre pas que la loi tient **au-delà** — et c'est
+> précisément là qu'on voudrait corriger. C'est le meilleur substitut disponible : il pose
+> la question en la retardant d'un cran, il ne la résout pas.
+
 ##### ⚠⚠ Deux explications concurrentes, écartées par la mesure et non par l'argument
 
 1. **« Elle sort par le BORD du segment publié. »** C'était la première à écarter, et elle

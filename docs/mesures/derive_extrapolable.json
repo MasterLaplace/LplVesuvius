@@ -1,0 +1,62 @@
+{
+  "maillons": 10,
+  "ajustes_sur": 5,
+  "testes_sur": 5,
+  "parcouru_ajustement_um": [
+    96.0,
+    1152.0
+  ],
+  "parcouru_test_um": [
+    1920.0,
+    5760.0
+  ],
+  "modele_nul_um": 49.046476754903075,
+  "tirages": 2000,
+  "lois": {
+    "droite par l'origine": {
+      "parametres": [
+        -0.015799078455265958
+      ],
+      "erreur_dans_l_ajustement_um": 2.458301472435674,
+      "erreur_hors_echantillon_um": 15.534573810961211,
+      "part_de_l_erreur_enlevee": 0.683268303071163,
+      "p_permutation": 0.0014992503748125937,
+      "bat_le_hasard": true
+    },
+    "droite affine": {
+      "parametres": [
+        -0.020243658881195344,
+        3.5752818009507905
+      ],
+      "erreur_dans_l_ajustement_um": 1.4520701006552832,
+      "erreur_hors_echantillon_um": 30.270444641021587,
+      "part_de_l_erreur_enlevee": 0.38282122093519155,
+      "p_permutation": 0.03398300849575212,
+      "bat_le_hasard": true
+    },
+    "puissance": {
+      "parametres": [
+        0.04475147668703423,
+        -7.916521439821675
+      ],
+      "erreur_dans_l_ajustement_um": 10.855568167131302,
+      "erreur_hors_echantillon_um": 49.046476754903075,
+      "part_de_l_erreur_enlevee": 0.0,
+      "p_permutation": 0.7306346826586707,
+      "bat_le_hasard": false
+    },
+    "logarithme": {
+      "parametres": [
+        -193976348.7046081,
+        12277699804.21701
+      ],
+      "erreur_dans_l_ajustement_um": 2.458301579824816,
+      "erreur_hors_echantillon_um": 15.534563498288035,
+      "part_de_l_erreur_enlevee": 0.683268513334445,
+      "p_permutation": 0.0004997501249375312,
+      "bat_le_hasard": true
+    }
+  },
+  "meilleure_loi": "logarithme",
+  "au_moins_une_bat_le_hasard": true
+}
