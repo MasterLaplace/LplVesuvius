@@ -844,6 +844,83 @@ segment publié**, pas d'une de nos traces. C'est ce qui a rendu la mesure propr
 le point de départ est sur une feuille — mais c'est aussi un point de départ privilégié. Refaire
 la chaîne depuis une graine à nous reste à faire.
 
+#### ⭐⭐⭐⭐ ET SI, ON PEUT RÉPONDRE — sans encre, et sans rendre un seul voxel
+
+La phrase ci-dessus disait « il faut de l'encre ». Elle avait tort sur un point, et c'est la
+mesure qui l'a corrigée : **le point de départ est un morceau d'un segment PUBLIÉ**, donc la
+bonne feuille est connue **sur toute l'emprise de ce segment**, pas seulement sous le morceau.
+Il suffit alors de demander, maillon par maillon, *à quelle distance de cette surface connue la
+chaîne se trouve*. `src/nappe/couverture_publiee.py` le fait en quelques secondes.
+
+| maillon | parcouru | encore SUR la surface | d médiane | **écart signé** | même côté |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 96 µm | **100,0 %** | 2,8 vox | −0,1 vox | 57 % |
+| 3 | 288 µm | 92,3 % | 6,5 | −0,6 | 54 % |
+| 8 | 768 µm | 56,3 % | 16,2 | −5,1 | 63 % |
+| 20 | 1 920 µm | 45,4 % | 24,3 | −11,7 | 72 % |
+| 40 | 3 840 µm | 33,6 % | 36,6 | −18,7 | 72 % |
+| **60** | **5 760 µm** | ⚠ **27,2 %** | 48,0 | ⚠ **−28,8 vox = −69 µm** | **73 %** |
+
+![La chaîne glisse hors de la feuille connue, elle n'y saute pas](images/44_couverture_publiee.png)
+
+> ⭐⭐⭐ **Elle GLISSE, elle ne SAUTE pas.** L'écart croît de façon lisse et **monotone**, et
+> il est **du même côté pour 73 % des points** — ce n'est ni un gauchissement, qui s'écarterait
+> des deux côtés, ni un saut de spire, qui serait une marche brusque d'un écart inter-feuilles.
+> C'est une **dérive systématique**, et les deux pannes n'ont pas le même remède : un saut se
+> répare par un décalage d'une spire le long de la normale, une dérive par une correction de
+> sa pente.
+>
+> ⭐⭐ **Et l'écart se lit contre les seuils du dépôt**, pas contre un nombre choisi :
+> `carte_segments.py` publie **40 µm** (même feuille, raccordable) et **250 µm** (feuilles
+> voisines, à ne surtout pas fusionner). À 5,76 mm la chaîne est à **69 µm** — elle a quitté la
+> bande « même feuille » vers 3,5 mm, et elle est **encore loin** de la bande « feuille
+> voisine ». Elle n'a donc pas changé de feuille ; elle n'est plus raccordable à celle-ci.
+>
+> ⭐ **La dérive DÉCÉLÈRE** : 15,9 µm/mm à 768 µm, 14,6 à 1 920 µm, 12,0 à 5 760 µm. Même forme
+> que le plateau bas de l'avantage sur le hasard, mesuré juste au-dessus.
+
+##### ⚠⚠ Deux explications concurrentes, écartées par la mesure et non par l'argument
+
+1. **« Elle sort par le BORD du segment publié. »** C'était la première à écarter, et elle
+   n'était pas exotique : le morceau de départ est découpé à l'origine `[29, 319]` d'une grille
+   de 2 530 × 1 820, donc à **29 cases du bord**, soit 1,4 mm — pendant que la chaîne en
+   parcourt 5,76. Mesuré : la part des points dont le plus proche voisin est **sur la bordure**
+   du maillage publié vaut **0,0 % jusqu'à 2,9 mm et 0,1 % à 5,76 mm**. La chaîne reste dans
+   l'emprise ; elle s'écarte de la surface, elle ne la quitte pas par le côté.
+
+   > ⚠⚠⚠ **Et ma première version de ce contrôle NE POUVAIT PAS se déclencher.** Elle
+   > définissait le bord par la *forme* de la grille — or le maillage publié laisse une marge
+   > vide de **cinq cases** sur ses quatre côtés, donc aucune case valide n'était à moins d'une
+   > case du bord déclaré, et « 0 % au bord » était vrai **par construction**. C'est une sonde
+   > qui l'a dit, pas une relecture. Le bord est maintenant défini par là où le **valide**
+   > s'arrête — une case valide qui touche une case invalide — ce qui est exact, tient compte
+   > des trous, et n'a **aucune marge à choisir**.
+
+2. **« C'est une distance latérale, pas une profondeur. »** L'écart total et l'écart **projeté
+   sur la normale** du maillage publié sont mesurés séparément : 48,0 vox contre 28,8. La
+   composante normale est donc bien réelle, et c'est elle qui porte le signe.
+
+##### ⚠ Ce que ça ne dit toujours pas
+
+- **Que la feuille voisine soit à 113 µm ici.** Les seuils 40 / 250 µm sont ceux du dépôt,
+  argumentés ailleurs ; l'écart inter-spires de **ce** rouleau à **cet** endroit n'est pas
+  mesuré dans cette passe.
+- **Que le texte suive.** Une surface à 69 µm de la bonne feuille peut encore lire de l'encre —
+  ou en lire d'une autre. Seule l'encre le dira, et l'encre demande un rendu de plusieurs
+  heures, ce que cette mesure permet enfin de **cibler** : la découverte commence là où la
+  couverture s'effondre, c'est-à-dire vers le maillon 8.
+- **Que le maillage publié soit parfait.** Il est la meilleure vérité terrain disponible, pas
+  une vérité.
+
+**Reproduire** (quelques secondes, aucun voxel lu) :
+
+```bash
+uv run python src/nappe/couverture_publiee.py \
+    --maillons 1 3 5 8 12 20 30 40 50 60 \
+    --json docs/mesures/couverture_publiee.json
+uv run python src/figures/figure_couverture.py
+```
+
 #### ⭐⭐⭐ Et le remède n'est PAS spéculatif : il est mesuré ailleurs, à 2,4 mm
 
 [`41`](41_marcher_le_long_dune_nappe.md) §6 fait exactement le geste qui manque — suivre la

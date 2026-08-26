@@ -60,7 +60,12 @@ def sortie_par_defaut(module: Path) -> Path | None:
     # ⚠ Le dépôt déclare sa sortie sous DEUX formes, et une seule regex n'en voyait qu'une —
     # 25 figures sur 36 passaient alors pour « sans sortie déclarée », donc pour non jugeables.
     # ⚠ Et la déclaration peut tenir sur deux lignes : chercher ligne à ligne les raterait.
-    for motif in (r'default=racine\s*/\s*"(docs/images/[^"]+)"',
+    # ⚠⚠ Le premier motif nommait la constante « racine » en MINUSCULES, donc une figure
+    # écrite avec la convention majuscule du dépôt (`RACINE`) passait pour « sans sortie
+    # déclarée », c'est-à-dire pour non jugeable — silencieusement. La couverture d'un
+    # garde-fou ne doit pas dépendre de l'orthographe d'une variable : tout identifiant
+    # suivi d'un chemin `docs/images/` déclare une sortie, quel que soit son nom.
+    for motif in (r'default=\w+\s*/\s*"(docs/images/[^"]+)"',
                   r'default=Path\(\s*"(docs/images/[^"]+)"\s*\)',
                   r'default=Path\(__file__\)[^\n]*?/\s*"(docs/images/[^"]+)"'):
         m = re.search(motif, t, re.S)

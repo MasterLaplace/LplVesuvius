@@ -555,6 +555,14 @@ run "cartes : ordre conservé ?" uv run python "$ROOT/src/encre/comparer_cartes.
 # invérifiable sur cette machine.
 cd "$ROOT" || exit 2
 run "lancer : gel d'un script"  "$ROOT/src/outils/lancer.sh" --verifier
+# ⚠⚠ ICI et pas plus haut : ce fichier CHANGE DE PROJET en changeant de repertoire, donc
+# l endroit ou une batterie est enregistree decide de l ENVIRONNEMENT qu elle recoit.
+# `experiments/` n a pas PIL, et une figure dont la batterie DESSINE vraiment y echoue sur
+# un `ModuleNotFoundError` qui ne dit rien de la figure. Les figures voisines de la region
+# `experiments` s en tirent parce qu elles importent PIL a l interieur d une fonction --
+# donc leur batterie ne dessine pas, ce qui est justement ce qu on ne veut pas ici.
+run "figure : couverture"       uv run python "$ROOT/src/figures/figure_couverture.py" --verifier
+run "couverture publiée"        uv run python "$ROOT/src/nappe/couverture_publiee.py" --verifier
 cd "$ROOT/experiments" || exit 2
 
 # ⚠⚠ Le controle qui compte dans ce temoin est qu'un EX-AEQUO n'est pas un accord : si le

@@ -142,7 +142,7 @@ noyau i686. La machinerie qui rend ça possible est disponible :
 |---|---|---|
 | grille de hachage spatial, octree persistant | broad-phase de collision, **0 allocation par pas** mesurée | adjacence de feuilles, voisinage de spire |
 | `procgen` + **portes de jouabilité** | générer une structure **puis vérifier qu'elle est traversable** (Dijkstra, `evaluateCaveSystem`, `goalReachable`) | tracer une surface **puis vérifier qu'elle est une nappe unique** — *même forme de garantie* |
-| `src/outils/temoins.sh`, 128 batteries, 3259 contrôles | une vérification doit pouvoir échouer, et on le **sonde** | ce qui rend nos résultats opposables |
+| `src/outils/temoins.sh`, 130 batteries, 3286 contrôles | une vérification doit pouvoir échouer, et on le **sonde** | ce qui rend nos résultats opposables |
 | `test-tick-allocations` | prouver **zéro allocation** dans une boucle chaude | l'optimisation extrême, quand elle sera nécessaire |
 
 ## 4. Le livrable — et pourquoi il rend le test trivial pour eux
@@ -174,8 +174,8 @@ la discussion.
 | **choisir où commencer** | ✅ `trouver_graine.py`, critère de planéité, répliqué sur 13 rouleaux (p = 0,0225) | rien de bloquant |
 | **tracer** | ⚠ l'outil officiel marche mais **n'est pas reproductible** (`30`) | soit le rendre déterministe, soit **tirer N fois et sélectionner** |
 | **juger sans vérité terrain** | ✅ deux axes : auto-intersection (`03`) et profondeur (`12`) | ⭐ **leur désaccord** — §6 |
-| **corriger** | ⚠ `20` sait que l'erreur est structurée et que translater ne répare pas | le **gauchissement difféomorphe** — §7 |
-| **couvrir 100 %** | ❌ rien | l'enchaînement spire à spire, borné en mémoire — §8 |
+| **corriger** | ✅ **pas fixe + recalage sur la matière**, mesurés indépendants et composables ([`44`](44_ou_la_chaine_se_trouve.md)) | le **gauchissement difféomorphe** reste pour la correction de forme — §7 |
+| **couvrir 100 %** | ⚠ **la chaîne tient 5,76 mm**, et elle **GLISSE** hors de la feuille connue (−69 µm, 73 % du même côté) sans y **sauter** ([`44`](44_ou_la_chaine_se_trouve.md)) | ⭐ **corriger la dérive** — sa pente est mesurée et elle décélère ; puis l'**encre**, pour savoir si le texte suit |
 | **aplatir** | ✅ `vc_flatten` / SLIM | rien |
 | **rendre** | ✅ `vc_render_tifxyz` | ⚠ la fenêtre de profondeur doit être **centrée sur le pic mesuré**, pas sur la couche tracée (`12`) |
 | **lire** | ❌ **hors périmètre, et c'est délibéré** | eux |

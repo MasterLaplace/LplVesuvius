@@ -7,6 +7,66 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+## ⭐⭐⭐⭐⭐ LA CHAÎNE **GLISSE** HORS DE LA FEUILLE CONNUE — elle n'y SAUTE pas
+
+Et on le sait **sans encre et sans rendre un seul voxel**. Le raisonnement qui manquait tient
+en une phrase : le point de départ est un morceau d'un segment **publié**, donc la bonne
+feuille est connue sur **toute l'emprise de ce segment**, pas seulement sous le morceau. Il
+suffit de demander, maillon par maillon, à quelle distance de cette surface la chaîne est.
+`src/nappe/couverture_publiee.py`, quelques secondes.
+
+| maillon | parcouru | encore SUR la surface | **écart signé** | même côté |
+|---:|---:|---:|---:|---:|
+| 1 | 96 µm | **100,0 %** | −0,1 vox | 57 % |
+| 8 | 768 µm | 56,3 % | −5,1 | 63 % |
+| 20 | 1 920 µm | 45,4 % | −11,7 | 72 % |
+| **60** | **5 760 µm** | ⚠ **27,2 %** | ⚠ **−28,8 vox = −69 µm** | **73 %** |
+
+⭐⭐⭐ **Lisse, monotone, et du même côté pour 73 % des points.** Ce n'est ni un gauchissement
+(qui s'écarterait des deux côtés) ni un saut de spire (qui serait une marche brusque). C'est
+une **dérive systématique**, et les deux pannes n'ont pas le même remède.
+
+⭐⭐ **Contre les seuils du dépôt, pas contre un nombre choisi** : `carte_segments.py` publie
+40 µm (même feuille, raccordable) et 250 µm (feuilles voisines). À 5,76 mm la chaîne est à
+**69 µm** — sortie de la première bande vers 3,5 mm, **encore loin** de la seconde. Elle n'a
+donc **pas changé de feuille** ; elle n'est simplement plus raccordable à celle-ci. Et la
+dérive **décélère** : 15,9 → 14,6 → 12,0 µm par mm parcouru.
+
+### ⚠⚠ Deux explications concurrentes, écartées par la mesure
+
+1. **« Elle sort par le bord du segment publié. »** Pas exotique : le morceau part à
+   **29 cases du bord** (1,4 mm) et la chaîne parcourt 5,76 mm. Mesuré : **0,0 %** des points
+   ont leur plus proche voisin sur la bordure jusqu'à 2,9 mm, **0,1 %** à 5,76 mm.
+2. **« C'est latéral, pas de la profondeur. »** L'écart total (48,0 vox) et l'écart **projeté
+   sur la normale** (28,8) sont mesurés séparément. La composante normale est réelle.
+
+⚠⚠⚠ **Et ma première version du contrôle nº 1 NE POUVAIT PAS se déclencher** : elle
+définissait le bord par la **forme** de la grille, or le maillage publié laisse une marge vide
+de **cinq cases** — donc « 0 % au bord » était vrai **par construction**. C'est une sonde qui
+l'a dit. Le bord est maintenant *là où le valide s'arrête* (une case valide qui touche une case
+invalide) : exact, tient compte des trous, **aucune marge à choisir**.
+
+### ⚠ Ce que ça ne dit toujours pas, et où la découverte commence
+
+L'encre reste nécessaire pour savoir si le **texte** suit — mais cette mesure la **cible** :
+la couverture s'effondre vers le **maillon 8**, donc c'est là qu'un rendu de plusieurs heures
+vaut son prix, et pas au maillon 1 où la surface est encore à 100 % sur du terrain connu.
+
+⚠ Feasibilité du rendu, mesurée : la boîte niveau 0 d'un maillon vaut **643 Gvox** au maillon 1
+et **3 417 Gvox** au 60, et **aucun volume niveau 0 de ce rouleau n'est local**. Le rendu est
+une opération **réseau**, pas de calcul.
+
+⚠⚠ **Piège d'outillage payé en enregistrant la batterie** : `temoins.sh` **change de projet en
+changeant de répertoire** (`cd "$ROOT/experiments"`, `cd "$ROOT/inference_xpu"`), donc
+*l'endroit* où une batterie est enregistrée décide de *l'environnement* qu'elle reçoit.
+`experiments/` n'a pas PIL : une figure dont la batterie **dessine vraiment** y échoue sur un
+`ModuleNotFoundError` qui ne dit rien de la figure. Les figures voisines de cette région s'en
+tirent parce qu'elles importent PIL **à l'intérieur d'une fonction** — donc leur batterie ne
+dessine pas, ce qui est exactement ce qu'on ne veut pas. Les deux nouvelles batteries sont
+enregistrées dans la région `$ROOT`, et la raison est écrite sur place.
+
+---
+
 ## ⭐⭐⭐⭐⭐ `docs/` EST RANGÉ — 522 fichiers à la racine → 58, et l'audit que ça a forcé
 
 `docs/` : **58 documents**, plus `mesures/` (384), `journaux/` (79), `registres/` (1),
@@ -1412,7 +1472,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 128 batteries, 3259 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 130 batteries, 3286 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)
