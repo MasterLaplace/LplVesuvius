@@ -75,6 +75,43 @@ def journaux(racine: Path = RACINE) -> dict[str, str]:
     return out
 
 
+TRACES_DE_PROVENANCE = ("meta.json", "seed.json", "verdict.json", "recette.json",
+                        "manifeste.json", "params.json")
+"""Les fichiers par lesquels un dossier DIT d'où il vient. ⚠ Un `.log` compte aussi : il
+enregistre la commande qui a produit le dossier, ce qui est exactement la question."""
+
+
+def provenance(chemin: Path) -> str:
+    """Sait-on ce qu'est ce dossier, et d'où il vient ?
+
+    ⚠⚠ C'est le critère que l'auteur a donné pour trancher : *si on ne sait plus du tout d'où
+    ça vient ni ce que c'est, on peut le supprimer, parce que de toute façon on ne sait pas.*
+    Un dossier de mesure porte sa propre trace — un `meta.json` qui nomme son parent
+    (`decoupe_de`, `projete_de`), un `seed.json` qui donne sa graine, un `.log` qui garde la
+    commande. Un dossier qui n'en a aucun ne peut être ni rejoué, ni vérifié, ni expliqué.
+
+    Rend `"tracee"`, `"journal"` ou `"muette"`.
+    """
+    pile, journal = [chemin], False
+    while pile:
+        d = pile.pop()
+        try:
+            entrees = list(d.iterdir())
+        except OSError:
+            continue
+        for e in entrees:
+            if e.is_dir():
+                # ⚠ On ne descend que d'un cran ou deux : une provenance qui n'est lisible
+                # qu'au fond de dix niveaux n'en est pas une.
+                if len(e.relative_to(chemin).parts) <= 2:
+                    pile.append(e)
+            elif e.name in TRACES_DE_PROVENANCE:
+                return "tracee"
+            elif e.suffix == ".log":
+                journal = True
+    return "journal" if journal else "muette"
+
+
 def poids(chemin: Path) -> int:
     """Les octets qu'effacer ce dossier libérerait, chaque inode compté UNE fois.
 
@@ -101,6 +138,57 @@ def poids(chemin: Path) -> int:
                 vus.add(st.st_ino)
                 total += st.st_size
     return total
+
+
+def resultat_publie(racine: Path, nom: str) -> list[str]:
+    """Les fichiers de mesure publiés qui portent le nom de ce dossier de données.
+
+    ⚠⚠ C'est ce qui distingue « donnée brute DÉPENSÉE » de « mesure jamais extraite ». Une
+    campagne dont le chiffre vit dans `docs/mesures/` et que `verifier_chiffres.py` recalcule
+    a rendu ce qu'elle avait à rendre : sa donnée brute peut partir. Une campagne dont rien
+    n'est publié emporterait sa mesure avec elle.
+
+    ⚠ La comparaison se fait sur le nom NU du dossier, débarrassé de ses préfixes de famille
+    (`ext_`, `spires_`) : le fichier de résultat s'appelle `spire_pas0125_*.json` là où le
+    dossier s'appelle `spires_pas0125`.
+    """
+    tronc = nom
+    for prefixe in ("ext_", "spires_", "spire_"):
+        if tronc.startswith(prefixe):
+            tronc = tronc[len(prefixe):]
+    d = racine / "docs" / "mesures"
+    if not d.is_dir() or len(tronc) < 4:
+        return []
+    return sorted(f.name for f in d.iterdir() if f.is_file() and tronc in f.name)
+
+
+def a_supprimer(racine: Path = RACINE) -> dict[str, list[str]]:
+    """Les dossiers de `data/` que la règle de l'auteur autorise à effacer.
+
+    ⭐ Deux classes, deux raisons, et **aucune** ne touche un dossier que quelque chose nomme :
+
+      - `muette` : rien ne la nomme ET elle ne dit pas d'où elle vient. *« Si on ne sait plus
+        du tout d'où ça vient ni ce que c'est, on peut le supprimer, parce que de toute façon
+        on ne sait pas. »*
+      - `depensee` : rien ne la nomme, elle dit d'où elle vient, ET son résultat est publié
+        dans `docs/mesures/` — donc son chiffre est gardé par `verifier_chiffres.py` et la
+        donnée brute a rendu ce qu'elle avait à rendre.
+
+    ⚠ Tout le reste est GARDÉ, y compris une campagne tracée dont rien n'est publié : la
+    supprimer emporterait une mesure que personne n'a extraite.
+    """
+    c = classer(racine)
+    out: dict[str, list[str]] = {"muette": [], "depensee": [], "gardee": []}
+    for nom in c["orphelins"] + c["en_journal_seulement"]:
+        chemin = racine / DONNEES / nom
+        prov = provenance(chemin)
+        if prov == "muette" and nom not in c["en_journal_seulement"]:
+            out["muette"].append(nom)
+        elif prov != "muette" and resultat_publie(racine, nom):
+            out["depensee"].append(nom)
+        else:
+            out["gardee"].append(nom)
+    return {k: sorted(v) for k, v in out.items()}
 
 
 def classer(racine: Path = RACINE, textes: dict[str, str] | None = None,
@@ -168,6 +256,41 @@ def verifier() -> int:
         v("... et additionne les inodes distincts", poids(r / DONNEES / "oublie") == 1500,
           str(poids(r / DONNEES / "oublie")))
         v("un dossier vide pèse zéro", poids(r / DONNEES / "vivant") == 0)
+
+        # ⚠⚠ La regle de suppression, dans les DEUX sens. Elle efface, donc elle doit etre
+        # sondee autrement qu en la lisant.
+        (r / DONNEES / "oublie" / "meta.json").write_text("{}", encoding="utf-8")
+        v("un dossier qui porte un meta est TRACE",
+          provenance(r / DONNEES / "oublie") == "tracee")
+        v("... un dossier qui n'a qu'un journal le dit",
+          provenance(r / DONNEES / "souvenu") == "muette")
+        (r / DONNEES / "souvenu" / "run.log").write_text("x", encoding="utf-8")
+        v("... et avec un journal, il est tracé par lui",
+          provenance(r / DONNEES / "souvenu") == "journal")
+
+        (r / "docs" / "mesures").mkdir(parents=True)
+        (r / "docs" / "mesures" / "oublie_resultat.json").write_text("{}", encoding="utf-8")
+        v("un resultat publie se retrouve", resultat_publie(r, "oublie") == ["oublie_resultat.json"])
+        v("... et un nom trop court ne matche rien", resultat_publie(r, "abc") == [])
+
+        # ⚠ Un dossier NEUF, muet et que rien ne nomme : `out` est devenu vivant plus haut
+        # (un document le cite) et `oublie` porte maintenant un meta.
+        (r / DONNEES / "sans_rien").mkdir()
+        (r / DONNEES / "sans_rien" / "x.bin").write_bytes(b"x")
+        s = a_supprimer(r)
+        v("une muette part", "sans_rien" in s["muette"], str(s))
+        # ⚠ `oublie` est TRACE et son resultat est publie : donc depense, donc effacable.
+        v("... une tracee dont le resultat est publie aussi", "oublie" in s["depensee"], str(s))
+        # ⚠⚠ Et le controle qui compte : une tracee SANS resultat publie est GARDEE.
+        # L effacer emporterait une mesure que personne n a extraite.
+        (r / DONNEES / "inedite").mkdir()
+        (r / DONNEES / "inedite" / "meta.json").write_text("{}", encoding="utf-8")
+        s2 = a_supprimer(r)
+        v("une tracée SANS résultat publié est gardée", "inedite" in s2["gardee"], str(s2))
+        v("... et n'est dans aucune classe à effacer",
+          "inedite" not in s2["muette"] + s2["depensee"])
+        v("... et un dossier VIVANT n'est dans aucune classe",
+          "vivant" not in s2["muette"] + s2["depensee"] + s2["gardee"], str(s2))
 
     # ⚠ Sur CE depot : le classement doit couvrir tous les dossiers, sans en perdre ni en
     # inventer. Un classement qui en oublie un le declare implicitement vivant.

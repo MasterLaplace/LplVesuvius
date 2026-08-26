@@ -7,6 +7,67 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+## ⭐⭐⭐⭐ `data/` RANGÉ — 43,4 Gio effacés, et la règle qui l'autorise
+
+189 Gio → **146 Gio**, 81 dossiers → **61**. Rien n'a été effacé au jugé : `a_supprimer()`
+(`src/depot/donnees_sans_appelant.py`) applique deux classes, et **aucune** ne touche un
+dossier que quelque chose nomme.
+
+| classe | dossiers | poids | la raison |
+|---|---:|---:|---|
+| **muette** | 7 | 1,94 Gio | rien ne la nomme **et** elle ne dit pas d'où elle vient |
+| **dépensée** | 16 | 41,4 Gio | rien ne la nomme, elle dit d'où elle vient, **et son résultat est publié** |
+| gardée | 6 | 7,2 Gio | tracée mais rien de publié — l'effacer emporterait une mesure |
+
+⭐ **La première classe est la règle de l'auteur, écrite en code** : *« si on ne sait plus du
+tout d'où ça vient ni ce que c'est, on peut le supprimer, parce que de toute façon on ne
+sait pas »*. Un dossier de mesure porte sa propre trace — un `meta.json` qui nomme son parent
+(`decoupe_de`, `projete_de`), un `seed.json` qui donne sa graine, un `.log` qui garde la
+commande. Aucun des trois ⇒ ni rejouable, ni vérifiable, ni explicable.
+
+⭐⭐ **La seconde est plus intéressante, et c'est elle qui pèse** : une campagne dont le
+chiffre vit dans `docs/mesures/` et que `verifier_chiffres.py` recalcule **a rendu ce qu'elle
+avait à rendre**. Chaque suppression a été vérifiée en nommant le fichier de résultat qui la
+justifie — `ext_budget` → `extension_ext_budget_gen200.json`, `spires_pic025` →
+`spire_pic025_spire00.json`, et ainsi de suite pour les seize.
+
+⚠ Et `data/meshes` est **gardé** alors que rien ne le nomme : `docs/journaux/ppm_convert.log`
+dit ce que c'est (`20230909121925.tifxyz`, le maillage du segment publié) et par quoi il se
+refait (`src/outils/ppm_to_tifxyz.py`). Ce n'est pas « on ne sait pas », c'est « on sait, et
+personne ne s'en sert en ce moment ».
+
+### ⭐ « Fusionner ce qu'on peut » — mesuré, et la réponse n'est pas une suppression
+
+`contenu_en_double.py` sur les 146 Gio : **71 970 fichiers, 3 782 groupes identiques,
+15,56 Gio récupérables**. Le partage est ce qui décide de la suite :
+
+| motif | poids | ce que c'est |
+|---|---:|---|
+| `fenetres_imbriquees` | **8,51 Gio** | `rendu_31/20.tif` **est** `rendu_81/45.tif` — une fenêtre étroite est déjà dans la large |
+| `autre` | 7,05 Gio | des clones tiers (`data/repos/`), un PDF stocké trois fois, des rendus documentés |
+
+⭐⭐ **Et la fusion des 8,51 Gio n'est pas un `rm`, c'est le raccourci de rendu du chantier A**
+(`sous_fenetre.py`, `DERIVER=1`) : une fenêtre étroite se **dérive** de la large, octet pour
+octet. ⚠ Mais il est **câblé et sondé, jamais exercé sur un vrai rendu** — effacer les
+fenêtres étroites en pariant dessus serait faire confiance à une machinerie qu'aucune mesure
+n'a encore fait tourner. Le gain est nommé, chiffré, et attend son premier vrai rendu.
+
+⚠ Les 7,05 Gio restants ne sont pas non plus à effacer : `data/repos/` se reclone
+(`src/outils/clone_repos.sh`), et les rendus qui s'y trouvent — `m7_c0/rendu_161`,
+`leur_graine/rendu_161` — sont l'**objet même** de `54` et `51`. Effacer une preuve pour
+gagner du disque, c'est effacer la mesure.
+
+### ⚠ Ce que je n'ai PAS fait, et pourquoi
+
+**Grouper `data/` en sous-dossiers** (`data/chaine/`, `data/paris4/`, `data/spires/`). Mesuré :
+69 citations à réécrire pour 14 dossiers — mais surtout, **le préfixe EST déjà le groupe** et
+il trie ensemble, et deux noms de la famille sont des frères par conception : `data/spires` et
+`data/spires_dedans` existent tous les deux, `data/second_axe` et `data/second_axe_41` aussi.
+Les imbriquer forcerait à renommer l'aîné. Le rangement se paierait en citations de blocs
+« Reproduire » qui produisent des chiffres publiés, pour un gain d'affichage.
+
+---
+
 ## ⭐⭐⭐⭐⭐ TROIS DOSSIERS — `src/`, `docs/`, `data/`, et rien d'autre
 
 `tracecheck/`, `experiments/`, `inference_xpu/`, `apprendre/`, `article/`, `artefacts/`,
@@ -1525,7 +1586,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 130 batteries, 3300 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 130 batteries, 3310 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)
