@@ -93,7 +93,22 @@ json.dump(p, open('$W/trace/seed.json', 'w'), indent=2)"
   [ -d "$W/plat" ] || vc_flatten -i "$M" -o "$W/plat" > "$W/flatten.log" 2>&1
   [ -d "$W/plat" ] || { echo "== $NOM : ${AIRE:-?} cm², $CROIS croisements — vc_flatten a échoué"; continue; }
   SERIE=""
-  for N in 41 161; do
+  # ⚠⚠ LES FENETRES DOIVENT RESTER SOUS LE PAS INTER-FEUILLES, sinon « ou est le pic »
+  # n'a pas de reponse : au-dela, la fenetre contient PLUSIEURS feuilles et l'argmax
+  # designe celle qui se trouve etre la plus brillante. Regle etablie et publiee le
+  # 2026-08-27 (`20` §9), apres avoir constate qu'elargir une fenetre de 61 a 121 couches
+  # ne fait pas entrer la feuille : ca AJOUTE des feuilles.
+  #
+  # Pas mesure de PHerc0358 : 187,2 µm (`espacement_PHerc0358_L1.json`), voxel 9,362 µm.
+  #
+  #     161 couches = 1507 µm =  8,05 pas   -- la demi-fenetre va a QUATRE feuilles
+  #      41 couches =  384 µm =  2,05 pas   -- la demi-fenetre tombe PILE sur la voisine
+  #      19 couches =  178 µm =  0,95 pas   -- demi-fenetre 0,48 pas : sûr
+  #
+  # ⚠ 41 est CONSERVE, et seulement pour rester comparable au temoin et aux 17 essais
+  # anterieurs, qui ont tous ete mesures ainsi. C'est 19 qui DECIDE ; 41 est un report,
+  # a lire en sachant que son pic peut etre une feuille voisine.
+  for N in 19 41; do
     OUT="$W/profil_${N}c.json"
     if [ ! -s "$OUT" ]; then
       rm -rf "$W/rendu_$N"
