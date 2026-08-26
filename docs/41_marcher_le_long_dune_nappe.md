@@ -295,9 +295,8 @@ uv run python src/figures/figure_marche.py               # la figure
 
 # sur la vraie prédiction, depuis src/excision/ (⚠ « le seul env qui a numcodecs »
 # était faux : la racine en a aussi, mesuré le 2026-08-25)
-cd experiments
-uv run python ../src/commun/suivre_nappe.py \
+uv run python src/commun/suivre_nappe.py \
   --zarr PHerc1447/representations/predictions/surfaces/20250521151220-surface-20260413222639-surface-m7-L0-th0.2.zarr \
   --xyz 4682 2740 13350 --rayon 128 --n-pas 800 --deux-sens --distance \
-  --sortie ../data/nappe/correction_1447.json
+  --sortie data/nappe/correction_1447.json
 ```

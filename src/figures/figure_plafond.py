@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Deux campagnes, deux plafonds : ce que la troncature cachait.
 
-⚠⚠ **Ce que la figure établit.** [`35`](../docs/35_le_tirage_sur_douze_rouleaux.md) mesure
+⚠⚠ **Ce que la figure établit.** [`35`](docs/35_le_tirage_sur_douze_rouleaux.md) mesure
 une dispersion d'aire de 0,5 % chez les rouleaux dont les six tirages butent sur le plafond
 de générations, contre 19,9 % chez les autres. Deux lectures s'opposaient : ces rouleaux
 sont-ils **réellement stables**, ou leur dispersion est-elle **écrasée par une troncature

@@ -37,8 +37,6 @@ __pycache__/
 
 # Cartes d encre et images produites : regenerables par src/xpu/infer_ink.py
 /data/out/
-/inference/.venv/
-/inference/uv.lock
 /src/xpu/.venv/
 
 # Les figures des documents sont suivies : elles portent des resultats mesures.
@@ -51,13 +49,15 @@ __pycache__/
 data/trace/*/render_a/
 data/trace/*/cache_vol/
 .lances/
-article/pg-*.png
+docs/article/pg-*.png
 
 # le dossier de soumission est DERIVE : src/outils/dossier_soumission.sh le reconstruit
 # depuis le texte et docs/images/, donc le versionner dupliquerait 8 Mo d'images qui
 # vivent deja dans l'arbre -- et il refuserait de se reconstruire a l'identique le jour ou
 # une figure change, ce qui est justement ce qu'on veut qu'il detecte.
-soumission/
+# ⚠ `data/soumission/` depuis le repli du 2026-08-26, donc deja couvert par `/data/*` ;
+# la regle est gardee pour le cas ou le script serait relance a l ancien endroit.
+/data/soumission/
 
 # Manim : l'environnement, les rendus intermédiaires et les vidéos assemblées.
 # ⚠ Les SCÈNES sont versionnées (c'est le code) ; les mp4 ne le sont pas — ils se

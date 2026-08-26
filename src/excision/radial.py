@@ -49,7 +49,10 @@ SHEET_UM = 40.0
 """Epaisseur typique d'une feuille de papyrus. Sert a fixer le lissage : on lisse a
 l'echelle d'une feuille pour ne pas compter le grain du materiau comme des murs."""
 
-CACHE = Path(__file__).resolve().parents[3] / "data" / "axes"
+# ⚠ DEUX crans : ce fichier venait de `experiments/src/excision/` (racine a trois) et
+# vit dans `src/excision/` depuis le repli du 2026-08-26. `parents[3]` pointait un cran
+# au-dessus du depot, donc le cache se creait DEHORS -- silencieusement.
+CACHE = Path(__file__).resolve().parents[2] / "data" / "axes"
 """Ou vivent les centres derives. ⚠ PAS /tmp : la version inline y ecrivait, donc la
 mesure devenait irreproductible des que la machine redemarrait."""
 

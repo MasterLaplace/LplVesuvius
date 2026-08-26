@@ -154,12 +154,11 @@ et non 182 Mo, et elles **sont** dans un format que l'outil lit — simplement p
 ## 5. Reproduire
 
 ```bash
-cd inference_xpu
-uv run python ../src/commun/trouver_graine.py \
+uv run python src/commun/trouver_graine.py \
   "PHerc0358/representations/predictions/surfaces/20250821151737-surface-20260413222639-surface-m7-L0-th0.2.zarr" \
   --level 2 --chunks 25
 
-cd ../data/trace/PHerc0358
+cd data/trace/PHerc0358
 S="https://vesuvius-challenge-open-data.s3.amazonaws.com/PHerc0358/representations/predictions/surfaces/20250821151737-surface-20260413222639-surface-m7-L0-th0.2.zarr"
 vc_grow_seg_from_seed -v "$S" -t . -p seed.json -s 1544 1544 7768
 vc_tifxyz_selfcross --surface auto_grown_* -o selfcross_a.json
@@ -169,8 +168,8 @@ vc_render_tifxyz -v cache_vol --remote-url "$V" --scale 1 -g 0 -s flat_a \
     --tif-output render_a -n 21 --slice-step 1 --auto-crop
 
 cd ../../../inference_xpu
-uv run python ../src/volume/regarder_rendu.py ../data/trace/PHerc0358/render_a --png-dir ...
-uv run python ../src/volume/depth_profile.py ../data/trace/PHerc0358/render_a \
+uv run python src/volume/regarder_rendu.py data/trace/PHerc0358/render_a --png-dir ...
+uv run python src/volume/depth_profile.py data/trace/PHerc0358/render_a \
     --grid --step 400 --traced-layer 10 --voxel-um 9.362
 ```
 

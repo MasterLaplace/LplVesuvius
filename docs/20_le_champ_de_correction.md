@@ -238,9 +238,8 @@ d'être noté et rien de plus.
 ./src/campagnes/campagne_champ.sh PHercParis4 2.4um  2.4   docs/champ_PHercParis4
 ./src/campagnes/campagne_champ.sh PHerc1667   2.399um 2.399 docs/champ_PHerc1667
 
-cd inference_xpu
-uv run python ../src/tables/table_champ.py ../docs/champ_PHercParis4 \
-    --pas-um 172.8 --encre ../docs/mesures/croisement_encre.json --out ../docs/mesures/table_champ.json
+uv run python src/tables/table_champ.py docs/champ_PHercParis4 \
+    --pas-um 172.8 --encre docs/mesures/croisement_encre.json --out docs/mesures/table_champ.json
 ```
 
 ⚠ `--pas-um` prend le pas **de ce rouleau-là**. Sans lui, le compte de sauts de feuille

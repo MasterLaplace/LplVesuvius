@@ -8,8 +8,8 @@ ce qui est en main**, et il nomme où elle le serait.
 
 ![deux ensembles disjoints](images/48_eligibilite.png)
 
-Instrument : [`src/graine/eligibilite_aval.py`](../src/graine/eligibilite_aval.py)
-(23 témoins hors ligne) et [`figure_eligibilite.py`](../src/figures/figure_eligibilite.py)
+Instrument : [`src/graine/eligibilite_aval.py`](src/graine/eligibilite_aval.py)
+(23 témoins hors ligne) et [`figure_eligibilite.py`](src/figures/figure_eligibilite.py)
 (11 témoins). Il ne mesure rien de neuf : il **croise trois mesures déjà faites**.
 
 ---
@@ -221,8 +221,8 @@ généreuse.
 - l'effet catégorique repose sur **deux endroits**, pas deux cents — huit répétitions
   n'élargissent pas l'échantillon de graines, elles ne font que fiabiliser chaque case.
 
-Instrument : [`src/encre/comparer_predictions.py`](../src/encre/comparer_predictions.py)
-(19 témoins) et [`figure_2x2.py`](../src/figures/figure_2x2.py) (6 témoins). ⭐ Il **refuse** quand l'écart est sous le bruit, et le bruit n'est pas choisi :
+Instrument : [`src/encre/comparer_predictions.py`](src/encre/comparer_predictions.py)
+(19 témoins) et [`figure_2x2.py`](src/figures/figure_2x2.py) (6 témoins). ⭐ Il **refuse** quand l'écart est sous le bruit, et le bruit n'est pas choisi :
 c'est le plus grand de la résolution que `test_convergence` déclare et de l'étendue
 intra-cellule mesurée.
 

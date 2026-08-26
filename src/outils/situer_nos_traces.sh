@@ -60,7 +60,7 @@ for PILE in "$@"; do
   [ "$N" -gt 0 ] || { echo "  ⚠ $PILE : aucune couche" >&2; continue; }
   read -r DEB FIN CENTRE <<< "$(sous_fenetre "$N" "$COUCHES")"
   OUT=$(mktemp --suffix=.json)
-  ( cd "$ROOT/inference_xpu" && uv run python ../src/volume/depth_profile.py \
+  ( cd "$ROOT" && uv run python src/volume/depth_profile.py \
       "$ROOT/${PILE#"$ROOT/"}" --grid --size "$FENETRE" --step "$PAS" \
       --from-layer "$DEB" --to-layer "$FIN" --traced-layer "$CENTRE" \
       --voxel-um "$VOXEL" --out "$OUT" ) >/dev/null 2>&1 \

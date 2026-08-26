@@ -47,7 +47,7 @@ NEG_TOP=2270 ; NEG_LEFT=2310 ; NEG_DEPART=7
 
 MODELE="$ROOT/data/models/timesformer_GP_scroll1"
 
-cd "$ROOT/inference_xpu" || exit 2
+cd "$ROOT" || exit 2
 
 if [ ! -s "$DEST/sur_sa_feuille.npy" ]; then
   echo "== controle POSITIF — segment officiel, alpha = +0,00"

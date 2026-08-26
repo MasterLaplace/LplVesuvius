@@ -67,7 +67,6 @@ observation, pas un résultat.
 ```bash
 ./src/outils/etat_rouleaux_prix.sh                      # l'inventaire des treize
 
-cd inference_xpu
-uv run python -u ../src/tracecheck/tracecheck.py PHerc1447 --all \
+uv run python -u src/tracecheck/tracecheck.py PHerc1447 --all \
     --voxel-um 8.64 --prefer 8.64um --side 5 --blocks 5
 ```

@@ -34,7 +34,7 @@
   "these_etablie": "la sortie du modèle ne dépend PAS de la présence d'une feuille : sur une surface qui suit une face de papyrus et sur une surface qui coupe l'empilement, il rend la même carte — leur écart vaut 2.9% de ce que chacune varie, contre 95% si elles étaient étrangères l'une à l'autre",
   "these_hors_de_portee": "que le détecteur signale de l'encre là où il n'y a pas de feuille — il n'en signale nulle part sur ce rouleau",
   "entree_positif": {
-    "dossier": "../data/couches/PHerc1447_20250702235910",
+    "dossier": "/home/masterlaplace/LplVesuvius/data/couches/PHerc1447_20250702235910",
     "couches": 26,
     "fenetre": [
       50,
@@ -47,7 +47,7 @@
     "part_non_nulle": 0.9344614748887476
   },
   "entree_negatif": {
-    "dossier": "../data/leur_graine/rendu_41",
+    "dossier": "/home/masterlaplace/LplVesuvius/data/leur_graine/rendu_41",
     "couches": 26,
     "fenetre": [
       2270,

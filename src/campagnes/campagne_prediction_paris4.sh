@@ -90,7 +90,7 @@ for NOM in ps256 m7; do
   OUT="$DEST/graine_$NOM.json"
   if [ -s "$OUT" ]; then echo "== graine $NOM deja cherchee"; continue; fi
   echo "== graine $NOM  (niveau $NIVEAU, $CHUNKS chunks)"
-  ( cd "$ROOT/experiments" && uv run python "$ROOT/src/commun/trouver_graine.py" \
+  ( cd "$ROOT" && uv run python "$ROOT/src/commun/trouver_graine.py" \
       "${PRED[$NOM]}" --level "$NIVEAU" --critere planarite --chunks "$CHUNKS" \
       --voxel-um "$VOXEL" --out "$OUT" ) || echo "  ⚠ echec sur $NOM — rapporte, pas masque"
 done

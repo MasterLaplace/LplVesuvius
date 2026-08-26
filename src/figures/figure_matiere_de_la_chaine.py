@@ -3,7 +3,7 @@
 
 ⚠⚠ CE QUE LA FIGURE DOIT RENDRE ÉVIDENT, et c'est un fait que la géométrie ne pouvait pas
 dire : la nappe **quitte sa feuille AVANT de se détruire**. Le pas d'une chaîne de 95 µm ne
-décroche qu'au sixième maillon ([`44`](../docs/44_ou_la_chaine_se_trouve.md) §7), mais la part
+décroche qu'au sixième maillon ([`44`](docs/44_ou_la_chaine_se_trouve.md) §7), mais la part
 de ses points qui trouvent encore de la matière tombe bien avant. L'horizon **utile** est donc
 plus court que l'horizon **géométrique**, et les deux méritaient d'être vus ensemble.
 

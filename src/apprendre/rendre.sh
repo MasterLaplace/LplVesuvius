@@ -43,7 +43,11 @@ if [ "${1:-}" = "--verifier" ]; then
 fi
 
 FICHIER="${1:?fichier de scenes}"
-[ -f "$FICHIER" ] || FICHIER="$ICI/scenes/$(basename "$FICHIER")"
+# ⚠ Le repli cherche a cote du script, pas dans un sous-dossier `scenes/` : il a ete
+# APLATI au repli du 2026-08-26, donc l ancien repli ne pouvait plus rien trouver et
+# c etait le seul confort de ce script -- `rendre.sh 03_le_mur_invisible.py` depuis
+# la racine tombait sur « scenes introuvables » alors que le fichier est la.
+[ -f "$FICHIER" ] || FICHIER="$ICI/$(basename "$FICHIER")"
 [ -f "$FICHIER" ] || { echo "refus : scenes introuvables — $1" >&2; exit 2; }
 QUALITE="${QUALITE:-${2:-l}}"     # l = 480p rapide, h = 1080p, k = 4K
 BASE=$(basename "$FICHIER" .py)

@@ -832,7 +832,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # si un jour ils s ecartaient de plus de la resolution declaree, la fenetre profonde
     # cesserait d etre mesurable sans que rien d autre ne le dise.
     alphas = {}
-    for f in sorted(racine.glob("docs/resolution_g*.json")):
+    for f in sorted(racine.glob("docs/mesures/resolution_g*.json")):
         try:
             d = json.loads(f.read_text())
         except Exception:

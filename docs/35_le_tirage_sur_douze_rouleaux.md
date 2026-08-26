@@ -214,7 +214,7 @@ teste pas.
 
 ```bash
 ./src/outils/lancer.sh --fond src/campagnes/campagne_tirages.sh "$PWD/data/tirages" 6
-(cd experiments && uv run python ../src/tables/table_tirages.py --json ../docs/mesures/table_tirages.json)
+(uv run python src/tables/table_tirages.py --json docs/mesures/table_tirages.json)
 uv run python src/figures/figure_tirages.py
 ```
 

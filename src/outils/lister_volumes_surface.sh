@@ -8,7 +8,7 @@ set -u
 cd "$(dirname "$0")/../.." || exit 2
 B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 SCROLL=${1:-PHercParis4}
-OUT=${2:-docs/volumes_surface_$SCROLL.txt}
+OUT=${2:-docs/mesures/volumes_surface_$SCROLL.txt}
 
 # ⚠ Un fichier VIDE disait deux choses a la fois : « ce rouleau ne publie aucun volume
 # de surface » et « le listage a echoue ». PHerc0800 et PHerc1203 etaient dans ce cas,

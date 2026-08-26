@@ -9,7 +9,7 @@ set -u
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)" || exit 2
 OUT=$ROOT/data/out
 VOL=s3://vesuvius-challenge-open-data/PHerc0172/volumes/20241024131839-7.910um-53keV-masked.zarr
-cd $ROOT/experiments
+cd $ROOT
 for Z in "$@"; do
   uv run python src/excision/radial.py compter PHerc0172 "$VOL" \
       --slice "$Z" --json "$OUT/z_$Z.json" > /dev/null 2>&1

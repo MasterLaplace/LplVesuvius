@@ -18,11 +18,10 @@ set -u
 cd "$(dirname "$0")/../.." || exit 2
 OUT=${1:-docs/carte_difficulte}
 mkdir -p "$OUT"
-cd inference_xpu || exit 2
 mesure() {  # rouleau  voxel  cle
   local f="../$OUT/$1.json"
   [ -s "$f" ] && { echo "  $1 deja fait"; return; }
-  uv run python ../src/nappe/espacement_spires.py "$3" \
+  uv run python src/nappe/espacement_spires.py "$3" \
       --level 1 --voxel-um "$2" --chunks 27 --out "$f" 2>&1 \
       | grep -E "niveau|chunks avec|0\.50" | sed "s/^/  [$1] /"
 }

@@ -15,7 +15,7 @@ repository builds measurements that a trace can answer **about itself**.
 ## Start in five minutes
 
 ```bash
-# 1. the deliverable answers for itself: 38 offline checks, no network
+# 1. the deliverable answers for itself: 52 offline checks, no network
 uv run --project . python src/tracecheck/selftest.py
 
 # 2. every instrument in the tree, offline, one line per battery

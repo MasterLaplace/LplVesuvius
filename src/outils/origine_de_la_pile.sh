@@ -39,7 +39,7 @@ mkdir -p "$DEST"
 # 1. Le volume de surface PUBLIE -- le producteur que `12` §13 a verifie.
 SV="$ROULEAU/segments/$SEG/surface-volumes/8.64um-1.2m-116keV-volume-20250521151220.zarr"
 if [ ! -s "$DEST/publie.json" ]; then
-  ( cd "$ROOT/inference_xpu" && uv run python ../src/commun/zarr_depth.py "$SV" \
+  ( cd "$ROOT" && uv run python src/commun/zarr_depth.py "$SV" \
       --windows 25 --out "$DEST/publie.json" ) > "$DEST/publie.log" 2>&1 \
     || echo "  ⚠ lecture du volume publié échouée"
 fi
@@ -76,7 +76,7 @@ if [ ! -s "$DEST/rendu.json" ]; then
       > "$DEST/rendu_tif.log" 2>&1 \
     || { echo "  ⚠ vc_render_tifxyz a échoué"; exit 3; }
   MILIEU=$(( COUCHES / 2 ))
-  ( cd "$ROOT/inference_xpu" && uv run python ../src/volume/depth_profile.py \
+  ( cd "$ROOT" && uv run python src/volume/depth_profile.py \
       "$DEST/rendu" --grid --step 400 --traced-layer "$MILIEU" --voxel-um "$UM" \
       --out "$DEST/rendu.json" ) > "$DEST/profil.log" 2>&1 \
     || { echo "  ⚠ depth_profile a échoué"; exit 3; }

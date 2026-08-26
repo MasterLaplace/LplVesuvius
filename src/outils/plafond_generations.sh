@@ -73,7 +73,7 @@ SUFFIXE=""
 echo "== niveau de pyramide $NIVEAU"
 
 for B in "${BUDGETS[@]}"; do
-  J="$ROOT/docs/plafond_${PRED}_c${IDX}_g${B}${SUFFIXE}.json"
+  J="$ROOT/docs/mesures/plafond_${PRED}_c${IDX}_g${B}${SUFFIXE}.json"
   if [ -s "$J" ]; then echo "== g${B} déjà mesuré, sauté"; continue; fi
   echo "== g${B}"
   D="$ROOT/data/paris4_plafond/${PRED}_c${IDX}_g${B}"
@@ -100,4 +100,4 @@ echo
 echo "== confrontation"
 uv run --project "$ROOT" python "$ROOT/src/graine/effet_du_plafond.py" \
     --docs "$ROOT/docs/mesures" --prediction "$PRED" --candidat "$IDX" --niveau "$NIVEAU" \
-    --json "$ROOT/docs/plafond_${PRED}_c${IDX}${SUFFIXE}.json"
+    --json "$ROOT/docs/mesures/plafond_${PRED}_c${IDX}${SUFFIXE}.json"

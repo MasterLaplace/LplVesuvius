@@ -46,7 +46,7 @@ FAIL=0; BATTERIES=0; CONTROLES=0
 #   artefacts_orphelins exige que le producteur de chaque artefact soit dans l arbre
 declare -A DEPEND=(
   [poids_growpatch]="data/repos/villa/volume-cartographer"
-  [artefacts_orphelins]="src/excision/src/excision"
+  [artefacts_orphelins]="src"
 )
 SAUTES=0
 

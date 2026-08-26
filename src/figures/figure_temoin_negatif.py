@@ -3,7 +3,7 @@
 
 ⚠⚠ **Ce que la figure établit, et ce qu'elle n'établit pas.** Elle ne montre PAS que le
 détecteur signale de l'encre là où il n'y en a pas — sur ce rouleau il n'en signale nulle
-part, ce que [`36`](../docs/36_lorigine_de_la_pile.md) §5bis avait déjà mesuré. Elle montre
+part, ce que [`36`](docs/36_lorigine_de_la_pile.md) §5bis avait déjà mesuré. Elle montre
 quelque chose de plus étroit et de vérifiable : **sa sortie ne dépend pas de ce qu'il
 reçoit**.
 
@@ -234,8 +234,8 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--json", type=Path, default=Path(__file__).resolve().parents[2] / "docs/mesures/temoin_negatif.json")
-    ap.add_argument("--positif", type=Path, default=Path("../data/temoin_negatif/sur_sa_feuille.npy"))
-    ap.add_argument("--negatif", type=Path, default=Path("../data/temoin_negatif/en_travers.npy"))
+    ap.add_argument("--positif", type=Path, default=Path("data/temoin_negatif/sur_sa_feuille.npy"))
+    ap.add_argument("--negatif", type=Path, default=Path("data/temoin_negatif/en_travers.npy"))
     ap.add_argument("--sortie", type=Path, default=Path(__file__).resolve().parents[2] / "docs/images/46_temoin_negatif.png")
     ap.add_argument("--anglais", action="store_true")
     ap.add_argument("--verifier", action="store_true")

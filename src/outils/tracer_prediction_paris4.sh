@@ -178,7 +178,7 @@ except Exception: print('$GENERATIONS')" 2>/dev/null)
         continue
       fi
       sed -n '/rendu :/p' "$W/rendu_$N.log"
-      ( cd "$ROOT/inference_xpu" && uv run python ../src/volume/depth_profile.py \
+      ( cd "$ROOT" && uv run python src/volume/depth_profile.py \
           "$W/rendu_$N" --grid --step 200 --traced-layer $((N / 2)) --voxel-um "$UM" \
           --out "$OUT" ) > "$W/profil_$N.log" 2>&1 || { echo "   ⚠ profil $N echoue"; continue; }
     fi
@@ -196,9 +196,9 @@ print(f\"{d['ecart_trace_um_median']:.2f}\")" 2>/dev/null) || continue
     # ecarts a la main, et a rendu un verdict confiant « suit la fenetre » sur un profil
     # dont l'amplitude etait nulle -- voir `49`. Recopier un nombre, c'est perdre ce qui
     # l'accompagne.
-    ( cd "$ROOT/experiments" && uv run python ../src/commun/test_convergence.py \
+    ( cd "$ROOT" && uv run python src/commun/test_convergence.py \
         $PROFILS --nom "$CAS (${AIRE:-?} cm²)" \
-        --json "$ROOT/docs/prediction_paris4_$CAS.json" | tail -4 )
+        --json "$ROOT/docs/mesures/prediction_paris4_$CAS.json" | tail -4 )
   else
     echo "   ⚠ aucune fenetre rendue — pas de verdict de convergence"
   fi

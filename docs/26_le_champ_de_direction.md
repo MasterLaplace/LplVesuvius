@@ -536,7 +536,7 @@ python3 src/outils/fetch_champ_normal.py \
   PHerc0358 data/champ_PHerc0358 --niveau 2 --boite 811 2144 837 2175 1595 2295
 
 # l'encodage, mesure et non suppose
-cd experiments && uv run python ../src/nappe/valider_champ_normal.py \
+uv run python src/nappe/valider_champ_normal.py \
   "<prediction>.zarr" "<lasagna>" --rouleau PHerc0358 --centre 5842 5839 7386 \
   --balayage-centre 0 64 96 128 160 192 255
 ```

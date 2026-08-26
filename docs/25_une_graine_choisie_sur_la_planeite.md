@@ -272,7 +272,7 @@ message. C'est le piège que l'en-tête du script nomme déjà (« emprunter le 
 rouleau voisin ») appliqué à deux scans d'un **même** rouleau.
 
 ⭐ Le remède est dans les noms : une prédiction s'appelle `<scan>-surface-….zarr` et son
-volume `<scan>-<voxel>um-….zarr`. [`src/volume/apparier_volumes.py`](../src/volume/apparier_volumes.py)
+volume `<scan>-<voxel>um-….zarr`. [`src/volume/apparier_volumes.py`](src/volume/apparier_volumes.py)
 apparie sur ce préfixe, et le script de campagne l'appelle.
 
 ⚠ **Mesuré avant de conclure, et le résultat est plus sobre que la crainte** : sur les
@@ -430,12 +430,11 @@ disposition `<zarr>/{x,y,z}/<niveau>`. C'est une conversion, et c'est la marche 
 ## 6. Reproduire
 
 ```bash
-cd experiments
 S="PHerc0358/representations/predictions/surfaces/20250821151737-surface-20260413222639-surface-m7-L0-th0.2.zarr"
-uv run python ../src/commun/trouver_graine.py "$S" \
+uv run python src/commun/trouver_graine.py "$S" \
     --level 0 --chunks 25 --bloc 8 --critere planarite --voxel-um 9.362
 
-cd ../data/trace/PHerc0358/essai_b
+cd data/trace/PHerc0358/essai_b
 B=https://vesuvius-challenge-open-data.s3.amazonaws.com
 vc_grow_seg_from_seed -v "$B/$S" -t . -p seed.json -s 5842 5839 7386
 vc_tifxyz_selfcross --surface auto_grown_* -o selfcross_b.json   # ⚠ JUGER AVANT DE RENDRE
@@ -446,7 +445,7 @@ vc_render_tifxyz -v cache_vol --remote-url "$V" --scale 1 -g 0 -s flat_b \
     --tif-output render_b61 -n 61 --slice-step 1 --auto-crop
 
 cd ../../../inference_xpu
-uv run python ../src/volume/depth_profile.py ../data/trace/PHerc0358/essai_b/render_b61 \
+uv run python src/volume/depth_profile.py data/trace/PHerc0358/essai_b/render_b61 \
     --grid --size 128 --step 128 --traced-layer 30 --voxel-um 9.362
 ```
 
@@ -479,5 +478,5 @@ Refaites, les cinq tombent.
 
 ```bash
 ./src/outils/lancer.sh --fond src/campagnes/campagne_graines.sh       # la campagne appariée
-cd experiments && uv run python ../src/tables/table_graines.py --help   # le dépouillement
+uv run python src/tables/table_graines.py --help   # le dépouillement
 ```

@@ -42,7 +42,7 @@ for SENS in normal inverse; do
   vc_render_tifxyz -v "$DEST/cache" --remote-url "$VOL" --scale 1 -g 0 -s "$PLAT" \
       --tif-output "$DEST/rendu_$SENS" -n "$COUCHES" --slice-step 1 --auto-crop $DRAPEAU \
       > "$DEST/rendu_$SENS.log" 2>&1 || { echo "⚠ rendu $SENS échoué"; continue; }
-  ( cd "$ROOT/inference_xpu" && uv run python ../src/volume/depth_profile.py \
+  ( cd "$ROOT" && uv run python src/volume/depth_profile.py \
       "$DEST/rendu_$SENS" --grid --step 200 --traced-layer $((COUCHES / 2)) \
       --voxel-um "$UM" --out "$OUT" ) > "$DEST/profil_$SENS.log" 2>&1 \
     || echo "⚠ dépouillement $SENS échoué"

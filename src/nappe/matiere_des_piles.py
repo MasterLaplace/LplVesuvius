@@ -2,7 +2,7 @@
 """Y a-t-il quoi que ce soit dans ces piles rendues ?
 
 ⚠⚠ POURQUOI. Cinq piles de 161 couches ont été lues comme « surfaces parfaitement plates »
-alors qu'elles étaient **entièrement noires** — voir [`54`](../docs/54_cinq_rendus_vides.md).
+alors qu'elles étaient **entièrement noires** — voir [`54`](docs/54_cinq_rendus_vides.md).
 Le déclencheur n'a pas été une relecture du code mais une **taille de fichier** : 7,6 Mo
 contre 562 Mo pour des images de mêmes dimensions. Ce fichier fait de ce coup d'œil une
 mesure, avec sa sortie dans l'arbre, parce qu'un chiffre dont le calcul n'est pas versionné

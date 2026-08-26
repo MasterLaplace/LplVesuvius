@@ -26,7 +26,7 @@ Z0=${5:-1336}
 Z1=${6:-12598}
 
 mkdir -p "$OUT"
-cd $ROOT/experiments || exit 2
+cd $ROOT || exit 2
 SPAN=$(( (Z1 - Z0) / BANDS ))
 echo "balayage par bandes : $BANDS bandes de $PER coupes, pas $STEP vx, de $Z0 a $Z1"
 for b in $(seq 0 $((BANDS - 1))); do

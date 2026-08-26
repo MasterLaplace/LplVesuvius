@@ -46,7 +46,7 @@ for E in $ESSAIS; do
       vc_render_tifxyz -v "$W/cache" --remote-url "$VOL" --scale 1 -g 0 -s "$W/plat" \
           --tif-output "$W/rendu_$N" -n "$N" --slice-step 1 --auto-crop \
           > "$W/rendu_$N.log" 2>&1 || continue
-      ( cd "$ROOT/inference_xpu" && uv run python ../src/volume/depth_profile.py \
+      ( cd "$ROOT" && uv run python src/volume/depth_profile.py \
           "$W/rendu_$N" --grid --step 400 --traced-layer $((N / 2)) --voxel-um "$UM" \
           --out "$OUT" ) > "$W/profil_$N.log" 2>&1 || continue
     fi
@@ -58,7 +58,7 @@ print(f\"{d['ecart_trace_um_median']:.2f}\")" 2>/dev/null) || continue
   rm -rf "$W/cache"
   [ -z "$SERIE" ] && { echo "$E : aucun profil"; continue; }
   echo "== $E  ($CROIS auto-intersections)"
-  ( cd "$ROOT/experiments" && uv run python ../src/commun/test_convergence.py \
+  ( cd "$ROOT" && uv run python src/commun/test_convergence.py \
       --serie "${SERIE%,}" --nom "$E ($CROIS croisements)" \
-      --json "$ROOT/docs/convergence_$E.json" | tail -3 )
+      --json "$ROOT/docs/mesures/convergence_$E.json" | tail -3 )
 done

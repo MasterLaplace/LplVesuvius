@@ -14,7 +14,7 @@ B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 SCROLL=${1:-PHercParis4}
 DEST=${2:-data/encre/$SCROLL}
 mkdir -p "$DEST"
-awk -F'\t' '$3>0{print $1}' "docs/volumes_surface_$SCROLL.txt" | sort -u | while read -r seg; do
+awk -F'\t' '$3>0{print $1}' "docs/mesures/volumes_surface_$SCROLL.txt" | sort -u | while read -r seg; do
   [ -s "$DEST/$seg.jpg" ] && continue
   key=$(curl -s --max-time 40 "$B/?list-type=2&prefix=$SCROLL/segments/$seg/ink-detection/downsampled/&max-keys=5" \
         | tr '<' '\n' | grep "^Key>" | sed 's|^Key>||' | grep -i '\.jpg$' | head -1)

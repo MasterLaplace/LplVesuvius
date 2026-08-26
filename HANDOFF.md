@@ -1603,7 +1603,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 130 batteries, 3310 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 130 batteries, 3323 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)
@@ -1635,23 +1635,23 @@ uv run python -m excision.proximity <mesh.tifxyz> --json
 cd inference_xpu # encre
 uv run python src/infer_ink.py <layers> --model … --device xpu --out out.npy
 uv run python ../analysis/src/{evaluate_segment,render_segment,structure}.py …
-uv run python ../src/encre/judge_api.py --list-models
-uv run python ../src/encre/judge_api.py <pred.npy> --bands-only   # sans cle
-uv run python ../src/volume/depth_profile.py <couches…> --grid     # qualite de trace
-uv run python ../src/commun/zarr_depth.py <cle .zarr> --courbe --fils 16   # ⭐ x8,35
-uv run python ../src/nappe/fiber_orientation.py <cle .zarr>       # ⭐ fibres
-uv run python ../src/commun/croiser_instruments.py <index.json> <mesures.json>
-uv run python ../src/nappe/champ_correction.py <cle .zarr> --voxel-um 2.4  # ⭐⭐ REPARABLE ?
-uv run python ../src/encre/croiser_encre.py <profondeur.json> <cartes/>    # ⭐⭐ la DECISION
-uv run python ../src/tables/table_champ.py <champs/> --encre <rapport.json>
-uv run python ../src/nappe/resolution_phase.py <saut_spire/>
-uv run python ../src/commun/trouver_graine.py <prediction .zarr>    # ⭐ graine A DISTANCE
-uv run python ../src/volume/regarder_rendu.py <render/> --png-dir …  # apercus + stats
-uv run python ../src/encre/tester_prediction_50um.py <rapport.json>
-uv run python ../src/nappe/robustesse_material.py <A> <B>
-uv run python ../src/depot/verifier_chiffres.py <docs…>            # fraicheur
-uv run python ../src/volume/compare_maps.py <a.npy> <b.npy>
-uv run python ../src/encre/proximity_vs_ink.py <mesh> <pred> <labels>
+uv run python src/encre/judge_api.py --list-models
+uv run python src/encre/judge_api.py <pred.npy> --bands-only   # sans cle
+uv run python src/volume/depth_profile.py <couches…> --grid     # qualite de trace
+uv run python src/commun/zarr_depth.py <cle .zarr> --courbe --fils 16   # ⭐ x8,35
+uv run python src/nappe/fiber_orientation.py <cle .zarr>       # ⭐ fibres
+uv run python src/commun/croiser_instruments.py <index.json> <mesures.json>
+uv run python src/nappe/champ_correction.py <cle .zarr> --voxel-um 2.4  # ⭐⭐ REPARABLE ?
+uv run python src/encre/croiser_encre.py <profondeur.json> <cartes/>    # ⭐⭐ la DECISION
+uv run python src/tables/table_champ.py <champs/> --encre <rapport.json>
+uv run python src/nappe/resolution_phase.py <saut_spire/>
+uv run python src/commun/trouver_graine.py <prediction .zarr>    # ⭐ graine A DISTANCE
+uv run python src/volume/regarder_rendu.py <render/> --png-dir …  # apercus + stats
+uv run python src/encre/tester_prediction_50um.py <rapport.json>
+uv run python src/nappe/robustesse_material.py <A> <B>
+uv run python src/depot/verifier_chiffres.py <docs…>            # fraicheur
+uv run python src/volume/compare_maps.py <a.npy> <b.npy>
+uv run python src/encre/proximity_vs_ink.py <mesh> <pred> <labels>
 ```
 
 ### ⭐⭐ VC3D — la chaîne de production, construite le 2026-08-19
@@ -2025,9 +2025,9 @@ vc_flatten -i auto_grown_* -o flat
 rm -rf render && vc_render_tifxyz -v cache_vol --remote-url "$V" --scale 1 -g 0 \
     -s flat --tif-output render -n 21 --slice-step 1 --auto-crop
 cd ~/LplVesuvius/inference_xpu
-uv run python ../src/volume/depth_profile.py ../data/trace/PHerc0358/render \
+uv run python src/volume/depth_profile.py data/trace/PHerc0358/render \
     --grid --step 400 --traced-layer 10 --voxel-um 9.362
-uv run python ../src/volume/regarder_rendu.py ../data/trace/PHerc0358/render --png-dir ../data/trace/PHerc0358/png
+uv run python src/volume/regarder_rendu.py data/trace/PHerc0358/render --png-dir data/trace/PHerc0358/png
 ```
 
 ⭐ **Le critère de succès est mesurable avant de regarder** : une bonne trace doit rendre

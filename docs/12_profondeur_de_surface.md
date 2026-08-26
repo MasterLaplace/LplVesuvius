@@ -263,14 +263,13 @@ en corrigeant la trace. C'est du côté du déroulement, donc de l'objectif.
 ## Reproduire
 
 ```bash
-cd inference_xpu
 # une fenêtre, profil détaillé
-uv run python ../src/volume/depth_profile.py ../data/layers/<segment> \
+uv run python src/volume/depth_profile.py data/layers/<segment> \
     --top 2560 --left 20000 --size 1024
 # le segment entier
-uv run python ../src/volume/depth_profile.py ../data/layers/<a> ../data/layers/<b> \
+uv run python src/volume/depth_profile.py data/layers/<a> data/layers/<b> \
     --grid --size 512 --step 1024 --from-layer 15 --to-layer 40 \
-    --out ../docs/mesures/profil_grille.json
+    --out docs/mesures/profil_grille.json
 ```
 
 
@@ -580,7 +579,6 @@ Deux mesures la démentent :
 tombe, et c'est écrit.
 
 ```bash
-cd inference_xpu
-uv run python ../src/encre/tester_prediction_50um.py \
-    ../docs/mesures/croisement_encre.json --out ../docs/mesures/prediction_50um.json
+uv run python src/encre/tester_prediction_50um.py \
+    docs/mesures/croisement_encre.json --out docs/mesures/prediction_50um.json
 ```

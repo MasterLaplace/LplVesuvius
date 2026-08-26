@@ -314,13 +314,13 @@ def verifier() -> int:
     dep = [Deplacement("src/commun/zarr_depth.py", "src/commun/zarr_depth.py"),
            Deplacement("analysis/src/zarr.py", "src/volume/zarr.py")]
     texte = ("uv run python src/commun/zarr_depth.py --json x\n"
-             "cd experiments && uv run python ../src/commun/zarr_depth.py\n"
+             "cd experiments && uv run python src/commun/zarr_depth.py\n"
              '"$ROOT/src/commun/zarr_depth.py" --verifier\n'
              "et le petit frere analysis/src/zarr.py\n"
              "mais PAS zarr_depth.py tout nu, ni analysis/src/zarr_depth.pyc\n")
     neuf, n = reecrire(texte, dep)
     v("la forme nue est réécrite", "python src/commun/zarr_depth.py --json" in neuf)
-    v("la forme relative garde ses ../", "../src/commun/zarr_depth.py" in neuf)
+    v("la forme relative garde ses ../", "src/commun/zarr_depth.py" in neuf)
     v("la forme $ROOT est réécrite", '"$ROOT/src/commun/zarr_depth.py"' in neuf)
     v("un préfixe d'un autre chemin va bien à SA destination",
       "frere src/volume/zarr.py" in neuf and "src/volume/zarr_depth" not in neuf)

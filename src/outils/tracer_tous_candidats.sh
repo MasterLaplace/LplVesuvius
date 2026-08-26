@@ -65,7 +65,7 @@ print(c['x'], c['y'], c['z'], round(c['planarite'],4), round(c['occupation'],4),
     # pourrait rendre deux reponses differentes en cours de campagne.
     PREDICTION="$NOM" DEST="$W" GENERATIONS="$GENERATIONS" FENETRES="$FENETRES" \
       PATIENCE="$PATIENCE" VOL="$VOL" UM="$UM" \
-      ETIQUETTE="$CAS (occ $OCC, ${VOIS}v)" JSON="$ROOT/docs/candidat_paris4_$CAS.json" \
+      ETIQUETTE="$CAS (occ $OCC, ${VOIS}v)" JSON="$ROOT/docs/mesures/candidat_paris4_$CAS.json" \
       "$ROOT/src/outils/tracer_une_graine.sh" "$X" "$Y" "$Z"
   done
 done

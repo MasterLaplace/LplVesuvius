@@ -58,7 +58,7 @@ if [ ! -d "$T/trace" ]; then
   mkdir -p "$T/trace"
   python3 -c "
 import json
-p = json.load(open('$ROOT/artefacts/$ROULEAU/seed.json'))
+p = json.load(open('$ROOT/data/artefacts/$ROULEAU/seed.json'))
 p.update({'generations': $GENERATIONS, 'thread_limit': 1, 'voxelsize': $UM})
 json.dump(p, open('$T/trace/seed.json','w'), indent=2)"
   ( cd "$T/trace" && timeout 7200 vc_grow_seg_from_seed -v "$B/$SURF" -t . -p seed.json \
@@ -78,7 +78,7 @@ for SEM in $SEMIS; do
     *) echo "semis inconnu : $SEM" >&2; exit 3 ;;
   esac
   if [ ! -s "$PTS" ]; then
-    ( cd "$ROOT/experiments" && uv run python ../src/commun/suivre_nappe.py \
+    ( cd "$ROOT" && uv run python src/commun/suivre_nappe.py \
         --zarr "$SURF" --xyz $GX $GY $GZ --rayon "$RAYON" --n-pas 800 --distance \
         $SUP_MARCHE --sortie "$PTS" --json "$DEST/marche_$SEM.json" ) \
         > "$DEST/marche_$SEM.log" 2>&1
@@ -114,7 +114,7 @@ juger() {   # $1 = repertoire de travail, $2 = maillage, $3 = nom
       vc_render_tifxyz -v "$W/cache" --remote-url "$VOL" --scale 1 -g 0 -s "$W/plat" \
           --tif-output "$W/rendu_$N" -n "$N" --slice-step 1 --auto-crop \
           > "$W/rendu_$N.log" 2>&1 || continue
-      ( cd "$ROOT/inference_xpu" && uv run python ../src/volume/depth_profile.py \
+      ( cd "$ROOT" && uv run python src/volume/depth_profile.py \
           "$W/rendu_$N" --grid --step 400 --traced-layer $((N / 2)) --voxel-um "$UM" \
           --out "$OUT" ) > "$W/profil_$N.log" 2>&1 || continue
     fi
@@ -127,9 +127,9 @@ print(f\"{d['ecart_trace_um_median']:.2f}\")" 2>/dev/null) || continue
   rm -rf "$W/cache"
   [ -z "$SERIE" ] && { echo "== $NOM : ${AIRE:-?} cm², $CROIS croisements — aucun profil"; return; }
   echo "== $NOM  (${AIRE:-?} cm², $CROIS auto-intersections)"
-  ( cd "$ROOT/experiments" && uv run python ../src/commun/test_convergence.py \
+  ( cd "$ROOT" && uv run python src/commun/test_convergence.py \
       --serie "${SERIE%,}" --nom "$NOM (${AIRE:-?} cm², $CROIS croisements)" \
-      --json "$ROOT/docs/boucle_$NOM.json" | tail -3 )
+      --json "$ROOT/docs/mesures/boucle_$NOM.json" | tail -3 )
 }
 
 cp -n "$T/trace/trace.log" "$T/trace.log" 2>/dev/null || true

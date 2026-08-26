@@ -31,7 +31,7 @@ Usage :
         --positif data/temoin_negatif/sur_sa_feuille.npy \\
         --negatif data/temoin_negatif/en_travers.npy \\
         --json docs/mesures/temoin_negatif.json
-    python3 ../src/encre/temoin_negatif.py --verifier
+    python3 src/encre/temoin_negatif.py --verifier
 """
 from __future__ import annotations
 

@@ -37,7 +37,7 @@ for transformed in "$WINDCHECK"/out/all/*/*_transformed.tifxyz; do
     # Un segment deja propre n'a aucune cellule excisee : l'outil sort en 2 et le
     # dit. Ce n'est pas un echec de mesure, c'est une population vide, donc on le
     # compte separement plutot que de le confondre avec une erreur.
-    if (cd "$ROOT/experiments" && uv run python -m excision.measure \
+    if (cd "$ROOT" && uv run python -m excision.measure \
             "$original" "$transformed" --volume "$VOLUME" --segment "$name" \
             --controls-per-excised "$CONTROLS" \
             >> "$OUT" 2>/dev/null); then

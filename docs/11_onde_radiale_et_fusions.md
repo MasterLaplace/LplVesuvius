@@ -360,29 +360,28 @@ conclusion — la vraie inclinaison est ≤ 0,65 mm.
 ## Reproduire
 
 ```bash
-cd experiments
 
 # l'axe, DERIVE d'une trace et verifiable (monotonie de la spirale)
 uv run python src/excision/radial.py centre PHerc0172 \
-    ../data/repos/windcheck/data/scroll5_tifxyz/20251115002741-*/mesh
+    data/repos/windcheck/data/scroll5_tifxyz/20251115002741-*/mesh
 
 # l'onde radiale : feuilles, espacement, longueur
 uv run python src/excision/radial.py compter PHerc0172 "$VOL"
 
 # le profil le long de z : 20 tranches uniformes + 6 de raffinement
-uv run python src/excision/radial.py profil PHerc0172 "$VOL" ../docs/mesures/profil_z_0172.json \
+uv run python src/excision/radial.py profil PHerc0172 "$VOL" docs/mesures/profil_z_0172.json \
     --slices 20 --refine 6
 
 # le depliage polaire
 uv run python src/excision/radial.py deplier PHerc0172 "$VOL" \
-    ../data/out/polaire_0172.npy --reach 3000 --png ../data/out/polaire.png
+    data/out/polaire_0172.npy --reach 3000 --png data/out/polaire.png
 
 # les candidats -- ⚠ lancer le temoin AVANT la mesure
 uv run python src/excision/fusions.py ecarts-controle
-uv run python src/excision/fusions.py densite ../data/out/polaire_0172.npy --min-radius 600
+uv run python src/excision/fusions.py densite data/out/polaire_0172.npy --min-radius 600
 
 # tiennent-ils en z ?
-uv run python src/excision/fusion_scan.py PHerc0172 "$VOL" ../docs/mesures/fusions_z_0172.json
+uv run python src/excision/fusion_scan.py PHerc0172 "$VOL" docs/mesures/fusions_z_0172.json
 ```
 
 avec `VOL=s3://vesuvius-challenge-open-data/PHerc0172/volumes/20241024131839-7.910um-53keV-masked.zarr`.
@@ -555,14 +554,13 @@ seuil calé sur un niveau qui ne se transporte pas.
 ### Reproduire
 
 ```bash
-cd experiments
 # le site : prédictif contre fenêtre fixe contre permutation
 uv run python src/excision/track_z.py \
-    ../docs/mesures/fusions_bande_large_0172.json ../docs/mesures/fusions_z_serre_0172.json \
-    --trials 5000 --out ../docs/mesures/pistes_z_0172.json
+    docs/mesures/fusions_bande_large_0172.json docs/mesures/fusions_z_serre_0172.json \
+    --trials 5000 --out docs/mesures/pistes_z_0172.json
 # le balayage — ⚠ --level 2 divise la tolérance angulaire, sans quoi elle fait 21 % du tour
-uv run python src/excision/track_z.py ../docs/survey/bande_0*.json \
-    --level 2 --trials 5000 --out ../docs/mesures/pistes_survey_0172.json
+uv run python src/excision/track_z.py docs/survey/bande_0*.json \
+    --level 2 --trials 5000 --out docs/mesures/pistes_survey_0172.json
 ```
 
 ---
@@ -626,11 +624,10 @@ rayons le compensant) :
 ### Reproduire
 
 ```bash
-cd experiments
 VOL="s3://vesuvius-challenge-open-data/PHerc0172/volumes/20241024131839-7.910um-53keV-masked.zarr"
 uv run python -u src/excision/sensibilite_centre.py PHerc0172 "$VOL" \
     --level 0 --slices 6 --decalages 0 3 6 12 25 50 100 200 400 --step-deg 30 \
-    --out ../docs/mesures/sensibilite_centre_L0_fine.json
+    --out docs/mesures/sensibilite_centre_L0_fine.json
 ```
 
 ⚠ `python -u` : sans lui le log reste vide pendant une heure et ressemble à un job mort.

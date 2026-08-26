@@ -8,8 +8,8 @@ La voici mesurée — et le résultat n'est pas celui qui était visé.
 
 ![deux volumes différents, une seule réponse](images/46_temoin_negatif.png)
 
-Instrument : [`src/encre/temoin_negatif.py`](../src/encre/temoin_negatif.py)
-(33 témoins hors ligne) et [`figure_temoin_negatif.py`](../src/figures/figure_temoin_negatif.py)
+Instrument : [`src/encre/temoin_negatif.py`](src/encre/temoin_negatif.py)
+(33 témoins hors ligne) et [`figure_temoin_negatif.py`](src/figures/figure_temoin_negatif.py)
 (16 témoins).
 
 ---
@@ -166,5 +166,5 @@ inférence sur une fenêtre.
 
 # les témoins, hors ligne
 uv run python src/encre/temoin_negatif.py --verifier
-uv run python ../src/figures/figure_temoin_negatif.py --verifier
+uv run python src/figures/figure_temoin_negatif.py --verifier
 ```

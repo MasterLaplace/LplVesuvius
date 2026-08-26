@@ -72,7 +72,7 @@ for N in 41 161; do
     vc_render_tifxyz -v "$DEST/cache" --remote-url "$VOL" --scale 1 -g 0 -s "$DEST/plat" \
         --tif-output "$DEST/rendu_$N" -n "$N" --slice-step 1 --auto-crop \
         > "$DEST/rendu_$N.log" 2>&1 || continue
-    ( cd "$ROOT/inference_xpu" && uv run python ../src/volume/depth_profile.py \
+    ( cd "$ROOT" && uv run python src/volume/depth_profile.py \
         "$DEST/rendu_$N" --grid --step 200 --traced-layer $((N / 2)) --voxel-um "$UM" \
         --out "$OUT" ) > "$DEST/profil_$N.log" 2>&1 || continue
   fi
@@ -83,6 +83,6 @@ print(f\"{d['ecart_trace_um_median']:.2f}\")" 2>/dev/null) || continue
 done
 rm -rf "$DEST/cache"
 [ -z "$SERIE" ] && { echo "⚠ aucun profil"; exit 3; }
-( cd "$ROOT/experiments" && uv run python ../src/commun/test_convergence.py \
+( cd "$ROOT" && uv run python src/commun/test_convergence.py \
     --serie "${SERIE%,}" --nom "leurs paramètres exacts (${AIRE:-?} cm²)" \
     --json "$ROOT/docs/mesures/leurs_parametres.json" )

@@ -59,6 +59,6 @@ cp "$ROOT/docs/images/38_en_travers.png" "$FIG/"
 cp "$ROOT/docs/images/44_extension.jpg"  "$FIG/"
 
 echo "== PDF"
-cd "$ROOT/article"
+cd "$ROOT/docs/article"
 "$TYPST" compile article.typ article.pdf
 echo "écrit : $ROOT/docs/article/article.pdf"

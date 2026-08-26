@@ -5,7 +5,7 @@
 # de windcheck (meme cle `segment`).
 #
 # Usage: ./run_proximity.sh <dossier_corpus> <fichier_sortie>
-#   ex.: ./run_proximity.sh ../data/repos/windcheck/data/scroll1_tifxyz ../docs/mesures/proximity_scroll1.jsonl
+#   ex.: ./run_proximity.sh data/repos/windcheck/data/scroll1_tifxyz docs/mesures/proximity_scroll1.jsonl
 set -u
 
 # ⚠ DEUX niveaux : ce script vit dans `src/excision/`, pas dans `src/excision/`.
@@ -28,7 +28,7 @@ for seg in "$CORPUS"/*/; do
     # Une trace qui couvre moins d'un tour ne peut PAS, par construction, revenir
     # pres d'elle-meme : l'outil sort en 3 et le dit. Ce n'est pas un echec, c'est
     # une population vide -- compte a part plutot que confondu avec une erreur.
-    if (cd "$ROOT/experiments" && uv run python -m excision.proximity \
+    if (cd "$ROOT" && uv run python -m excision.proximity \
             "$mesh" --label "$name" --json >> "$OUT" 2>/dev/null); then
         done_count=$((done_count + 1))
     else

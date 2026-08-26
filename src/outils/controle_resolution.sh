@@ -69,7 +69,7 @@ for G in "${NIVEAUX[@]}"; do
   # comparerait un jour deux fenetres physiques differentes en les appelant deux resolutions.
   PLAT="$SRC/plat" NIVEAU="$G" FENETRES_BASE="$FENETRES_BASE" UM_BASE="$UM_BASE" \
     CACHE_GB="$CACHE_GB" DEST="$DEST" ETIQUETTE="niveau $G" \
-    JSON="$ROOT/docs/resolution_g${G}.json" \
+    JSON="$ROOT/docs/mesures/resolution_g${G}.json" \
     "$ROOT/src/outils/profiler_une_surface.sh"
 done
 

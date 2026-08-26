@@ -43,7 +43,7 @@ vc_render_tifxyz -v "$DEST/cache" --remote-url "$VOL" --scale 1 -g 0 -s "$PLAT" 
     --tif-output "$DEST/rendu" -n "$COUCHES" --slice-step 1 --auto-crop \
     > "$DEST/rendu.log" 2>&1 || { echo "⚠ rendu échoué"; exit 3; }
 MILIEU=$(( COUCHES / 2 ))
-( cd "$ROOT/inference_xpu" && uv run python ../src/volume/depth_profile.py "$DEST/rendu" \
+( cd "$ROOT" && uv run python src/volume/depth_profile.py "$DEST/rendu" \
     --grid --step 400 --traced-layer "$MILIEU" --voxel-um "$UM" --out "$OUT" ) \
   > "$DEST/profil.log" 2>&1 || { echo "⚠ dépouillement échoué"; exit 3; }
 rm -rf "$DEST/cache"

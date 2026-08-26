@@ -15,7 +15,7 @@ objets.
 ⚠⚠ **Les tuiles doivent avoir la MÊME étendue en voxels**, et le programme refuse si ce
 n'est pas le cas. Comparer une tuile de 512 voxels à une de 2400 ferait passer une
 différence d'échelle pour une différence de surface : c'est exactement la faute que
-[`52`](../docs/52_calibrer_sur_son_corpus.md) existe pour empêcher, transposée aux images.
+[`52`](docs/52_calibrer_sur_son_corpus.md) existe pour empêcher, transposée aux images.
 """
 from __future__ import annotations
 

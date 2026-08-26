@@ -66,7 +66,7 @@ print(1 if a > 0 and c / a > p else 0)" 2>/dev/null || echo 0)
       vc_render_tifxyz -v "$W/cache" --remote-url "$VOL" --scale 1 -g 0 -s "$W/plat" \
           --tif-output "$W/rendu_$N" -n "$N" --slice-step 1 --auto-crop \
           > "$W/rendu_$N.log" 2>&1 || continue
-      ( cd "$R/inference_xpu" && uv run python ../src/volume/depth_profile.py \
+      ( cd "$R" && uv run python src/volume/depth_profile.py \
           "$W/rendu_$N" --grid --step 400 --traced-layer $((N / 2)) --voxel-um "$UM" \
           --out "$OUT" ) > "$W/profil_$N.log" 2>&1 || continue
     fi
@@ -90,10 +90,10 @@ d=json.load(open(sys.argv[1])); d=d[0] if isinstance(d,list) else d
 print(d.get('au_bord_relief',''))" "$W/profil_${N0}c.json" 2>/dev/null || echo "")
 
   echo "== $NOM  ($AIRE cm², $CROIS auto-intersections)"
-  ( cd "$R/experiments" && uv run python ../src/commun/test_convergence.py \
+  ( cd "$R" && uv run python src/commun/test_convergence.py \
       ${BORD:+--au-bord "$BORD"} \
       --serie "${SERIE%,}" --nom "$NOM ($AIRE cm², $CROIS croisements)" \
-      --json "$R/docs/${ETIQ}$NOM.json" | tail -4 )
+      --json "$R/docs/mesures/${ETIQ}$NOM.json" | tail -4 )
 }
 
 # Appel direct : juger une nappe qui ne vient d'aucune campagne.

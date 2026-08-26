@@ -181,7 +181,7 @@ défaut assumé, pas une conclusion.
 ## Reproduire
 
 ```bash
-(cd experiments && uv run python ../src/commun/incertitude_carte.py --json ../docs/mesures/incertitude_carte.json)
+(uv run python src/commun/incertitude_carte.py --json docs/mesures/incertitude_carte.json)
 uv run python src/figures/figure_incertitude.py
 ```
 

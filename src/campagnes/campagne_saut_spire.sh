@@ -14,14 +14,13 @@ cd "$(dirname "$0")/../.." || exit 2
 C="PHerc0139/representations/predictions/lasagna/20260102150214-lasagna-20260419180421-L2/PHerc0139-20260102150214-lasagna-20260724_cos.ome.zarr"
 OUT=${1:-docs/saut_spire}
 mkdir -p "$OUT"
-cd inference_xpu || exit 2
-for d in ../data/traces/PHerc0139/*/; do
+for d in data/traces/PHerc0139/*/; do
   seg=$(basename "$d")
   f="../$OUT/$seg.json"
   [ -s "$f" ] && continue
   M=$(ls -d "$d"mesh/*2.399um.tifxyz 2>/dev/null | head -1)
   [ -z "$M" ] && continue
-  uv run python ../src/nappe/saut_de_spire.py "$M" "$C" \
+  uv run python src/nappe/saut_de_spire.py "$M" "$C" \
       --sample 960 --run 48 --label "$seg" --out "$f" 2>&1 | grep -E "marches|erreur"
 done
 echo "termine : $(ls "../$OUT"/*.json 2>/dev/null | wc -l) traces"

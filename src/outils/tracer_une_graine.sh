@@ -63,7 +63,8 @@ if [ "${1:-}" = "--verifier" ]; then
   chk "... et le refus la nomme" 'printf "%s" "$out" | grep -q inexistante'
   out=$(PREDICTION=ps256 "$ROOT/src/outils/tracer_une_graine.sh" 1 2 3 2>&1); rc=$?
   chk "sans DEST, refus (3)" '[ "$rc" = 3 ]'
-  # ⚠⚠ Un DEST relatif est refuse : depth_profile tourne depuis inference_xpu, donc un
+  # ⚠⚠ Un DEST relatif est refuse : le repertoire courant d un sous-shell n est pas celui
+  # de l appelant, donc un
   # chemin relatif y designerait un AUTRE dossier. Piege deja paye une fois.
   out=$(PREDICTION=ps256 DEST=relatif/ici "$ROOT/src/outils/tracer_une_graine.sh" 1 2 3 2>&1); rc=$?
   chk "un DEST relatif est refuse (3)" '[ "$rc" = 3 ]'
@@ -149,7 +150,7 @@ GENERATIONS="${GENERATIONS:-60}"
 FENETRES="${FENETRES:-41 161}"
 PATIENCE="${PATIENCE:-420}"
 ETIQUETTE="${ETIQUETTE:-$(basename "$DEST")}"
-JSON="${JSON:-$ROOT/docs/trace_${ETIQUETTE}.json}"
+JSON="${JSON:-$ROOT/docs/mesures/trace_${ETIQUETTE}.json}"
 
 if [ -z "${VOL:-}" ] || [ -z "${UM:-}" ]; then
   SCAN=$(basename "${PRED[ps256]}" | cut -d- -f1)
@@ -248,7 +249,7 @@ for F in $FENETRES; do
         -v "$DEST/cache" --remote-url "$B/$VOL" --scale 1 -g "$NIVEAU_RENDU" -s "$PLAT" \
         --tif-output "$DEST/rendu_$F" -n "$F" --slice-step 1 --auto-crop \
         > "$DEST/rendu_$F.log" 2>&1 || { echo "   ⚠ rendu $F abandonné"; continue; }
-    ( cd "$ROOT/inference_xpu" && uv run python ../src/volume/depth_profile.py \
+    ( cd "$ROOT" && uv run python src/volume/depth_profile.py \
         "$DEST/rendu_$F" --grid --step 200 --traced-layer $((F / 2)) \
         --voxel-um "$(python3 -c "print($UM * 2**$NIVEAU_RENDU)")" \
         --out "$OUT" ) > "$DEST/profil_$F.log" 2>&1 || { echo "   ⚠ profil $F échoué"; continue; }
@@ -257,5 +258,5 @@ for F in $FENETRES; do
 done
 rm -rf "$DEST/cache"
 echo "   aire ${AIRE:-?} cm²"
-[ -n "$PROFILS" ] && ( cd "$ROOT/experiments" && uv run python \
-    ../src/commun/test_convergence.py $PROFILS --nom "$ETIQUETTE" --json "$JSON" | tail -4 )
+[ -n "$PROFILS" ] && ( cd "$ROOT" && uv run python \
+    src/commun/test_convergence.py $PROFILS --nom "$ETIQUETTE" --json "$JSON" | tail -4 )

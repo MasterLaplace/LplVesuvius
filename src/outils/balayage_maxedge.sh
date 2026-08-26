@@ -26,7 +26,7 @@ set -u
 cd "$(dirname "$0")/../.." || exit 2
 ROOT=$PWD
 DEST=${1:-$ROOT/data/maxedge}
-CONDAMNE=${2:-$ROOT/artefacts/PHerc0358/mesh.tifxyz}
+CONDAMNE=${2:-$ROOT/data/artefacts/PHerc0358/mesh.tifxyz}
 PROPRE=${3:-}
 mkdir -p "$DEST"
 

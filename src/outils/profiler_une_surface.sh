@@ -248,8 +248,10 @@ fi
 PLAT="${PLAT:-}"
 [ -d "$PLAT" ] || { echo "refus : surface aplatie absente — PLAT=$PLAT" >&2; exit 2; }
 # ⚠⚠ LES CHEMINS SONT RENDUS ABSOLUS ICI, et c est un correctif paye le 2026-08-23. Ce
-# script fait `cd` dans deux sous-projets (`inference_xpu` pour le profil, `experiments`
-# pour le verdict), donc un chemin RELATIF passe par l appelant cesse d exister apres le
+# script tournait dans deux sous-projets (`inference_xpu` pour le profil, `experiments` pour
+# le verdict) avant le repli du 2026-08-26 ; il n y en a plus qu un, la racine. La raison du
+# chemin ABSOLU n a pas change pour autant : un `cd` reste un `cd`, et un chemin RELATIF
+# passe par l appelant cesse d exister apres le
 # premier `cd`. Le symptome ne ressemble pas a la cause : le rendu reussit, puis le profil
 # meurt sur un `FileNotFoundError` nommant un chemin qui existe bel et bien -- depuis le
 # repertoire de l appelant. Resoudre au bord, une fois, est le seul endroit ou ca se fait.
@@ -374,7 +376,7 @@ fi
 profiler_pile() {   # $1=rendu  $2=sortie  $3=couche_tracee  $4=journal  [$5=from  $6=to]
   local bornes=""
   [ -n "${5:-}" ] && bornes="--from-layer $5 --to-layer $6"
-  ( cd "$ROOT/inference_xpu" && uv run python ../src/volume/depth_profile.py \
+  ( cd "$ROOT" && uv run python src/volume/depth_profile.py \
       "$1" --grid --step 200 $bornes --traced-layer "$3" --voxel-um "$UM" --out "$2" ) \
       > "$4" 2>&1
 }
@@ -470,7 +472,7 @@ if [ "$PRODUITES" -lt "$DEMANDEES" ]; then
   echo "   ⚠⚠ CAMPAGNE TRONQUEE — $PRODUITES fenêtre(s) sur $DEMANDEES demandées." >&2
   echo "      Le verdict qui suit ne porte que sur ce qui a été produit." >&2
 fi
-( cd "$ROOT/experiments" && uv run python ../src/commun/test_convergence.py $PROFILS \
+( cd "$ROOT" && uv run python src/commun/test_convergence.py $PROFILS \
     --nom "$ETIQUETTE" --json "$JSON" | tail -4 )
 # ⚠ La mention voyage AVEC le resultat, pas seulement dans le terminal : un JSON relu six
 # mois plus tard n a pas le journal de son run a cote.

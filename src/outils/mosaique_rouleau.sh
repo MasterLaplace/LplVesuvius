@@ -19,7 +19,7 @@ cd "$(dirname "$0")/../.." || exit 2
 B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 ROULEAU=${1:-PHerc0172}
 MODELE=${2:-november}          # sous-chaine qui choisit le modele quand il y en a plusieurs
-LISTE="docs/volumes_surface_$ROULEAU.txt"
+LISTE="docs/mesures/volumes_surface_$ROULEAU.txt"
 DEST="data/mosaique/$ROULEAU"
 INDEX="$DEST/index.tsv"
 
@@ -64,4 +64,4 @@ echo "$n spire(s) recuperee(s), $manques manque(s) — index : $INDEX"
 # porte PIL, numcodecs, numpy, scipy et tifffile -- strictement plus. `inference/` est retire.
 uv run python src/volume/assembler_mosaique.py "$INDEX" \
    --sortie "docs/images/mosaique_$ROULEAU.png" --rouleau "$ROULEAU" \
-   --json "docs/mosaique_$ROULEAU.json"
+   --json "docs/mesures/mosaique_$ROULEAU.json"

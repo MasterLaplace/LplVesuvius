@@ -161,8 +161,7 @@ est une explication plausible.
 
 ```bash
 ./src/outils/carte_difficulte.sh docs/carte_difficulte
-cd inference_xpu
-uv run python ../src/tables/table_difficulte.py ../docs/carte_difficulte
+uv run python src/tables/table_difficulte.py docs/carte_difficulte
 ```
 
 ---
@@ -271,7 +270,7 @@ autres — donc elle **tronque**, et son 18 µm est une borne inférieure.
 
 ```bash
 ./src/outils/carte_separabilite.sh                            # la campagne, témoin PHerc0139 inclus
-cd experiments && uv run python ../src/tables/table_separabilite.py --help
+uv run python src/tables/table_separabilite.py --help
 ```
 
 ⚠ Et la suite de cette carte est [`33`](33_la_carte_nest_pas_resolue.md) : elle **n'est pas

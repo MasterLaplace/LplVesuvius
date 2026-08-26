@@ -9,7 +9,7 @@ regardée plutôt que résumée.
 (0, 476, 2381 µm) la dégradation paraissait progressive et monotone, et je l'ai écrit. Sur
 six, elle ne l'est pas — l'amplitude MONTE jusqu'à 238 µm. Un échantillonnage grossier avait
 rendu une forme fausse et parfaitement plausible. C'est la leçon de
-[`43`](../docs/43_la_chaine_des_spires.md) §6quater sous un autre costume : les premiers
+[`43`](docs/43_la_chaine_des_spires.md) §6quater sous un autre costume : les premiers
 points ne discriminent pas, et une courbe se juge là où elle change.
 
 ⭐ Deux grandeurs sur un seul axe parce qu'elles disent la même chose de deux façons :

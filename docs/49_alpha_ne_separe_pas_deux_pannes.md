@@ -31,7 +31,7 @@ de pic. Il n'y en a nulle part.**
 
 ## 2. Le correctif : l'instrument refuse au lieu de conclure
 
-[`test_convergence.py`](../src/commun/test_convergence.py) accepte désormais l'amplitude
+[`test_convergence.py`](src/commun/test_convergence.py) accepte désormais l'amplitude
 et le seuil de détection, et **refuse** quand la première est sous le second :
 
 ```
@@ -47,7 +47,7 @@ fichier, donc ils ne peuvent plus se contredire.
 
 ## 3. ⭐⭐ L'audit de tout l'arbre, et sa moitié rassurante
 
-[`src/commun/audit_profils_plats.py`](../src/commun/audit_profils_plats.py)
+[`src/commun/audit_profils_plats.py`](src/commun/audit_profils_plats.py)
 (16 témoins) lit les **217 profils** du dépôt et calcule, pour chaque série, l'α mesuré
 **et** l'α qu'on obtiendrait si chaque lecture était le bord de sa fenêtre.
 
@@ -127,5 +127,5 @@ uv run python src/commun/test_convergence.py --nom m7 \
 
 # les témoins, hors ligne
 python3 src/commun/audit_profils_plats.py --verifier
-uv run python ../src/commun/test_convergence.py --verifier
+uv run python src/commun/test_convergence.py --verifier
 ```

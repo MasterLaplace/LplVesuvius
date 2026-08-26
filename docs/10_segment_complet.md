@@ -175,22 +175,22 @@ prédit pas la lisibilité** — elle mesure un défaut de la *trace*, pas du *r
 
 ```bash
 # la passe (38,5 min sur iGPU Arc)
-cd inference_xpu && uv run python src/infer_ink.py \
-    ../data/layers/20230909121925 --model ../data/models/timesformer_GP_scroll1 \
+uv run python src/xpu/infer_ink.py \
+    data/layers/20230909121925 --model data/models/timesformer_GP_scroll1 \
     --top 0 --left 0 --height 11591 --width 3882 \
     --stride 21 --batch-size 64 --device xpu \
-    --out ../data/out/ink_segment_complet.npy
+    --out data/out/ink_segment_complet.npy
 
 # la mesure (41 s)
-uv run python ../src/volume/evaluate_segment.py ../data/out/ink_segment_complet.npy \
-    ../data/repos/Vesuvius-Grandprize-Winner/all_labels/20230909121925_inklabels.png
+uv run python src/volume/evaluate_segment.py data/out/ink_segment_complet.npy \
+    data/repos/Vesuvius-Grandprize-Winner/all_labels/20230909121925_inklabels.png
 
 # les images (⚠ --rotate 270 : sans elle, les lettres sont couchees)
-uv run python ../src/volume/render_segment.py ../data/out/ink_segment_complet.npy \
-    ../docs/images/10_segment_entier.png --reduce 4 --rotate 270
+uv run python src/volume/render_segment.py data/out/ink_segment_complet.npy \
+    docs/images/10_segment_entier.png --reduce 4 --rotate 270
 
 # la structure (echoue, et c'est le resultat)
-uv run python ../src/encre/structure.py ../data/out/ink_segment_complet.npy \
+uv run python src/encre/structure.py data/out/ink_segment_complet.npy \
     --region "A texte:3584:2048" --region "B vide:6144:1024" --region "C doute:8704:1024"
 ```
 

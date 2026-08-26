@@ -72,7 +72,7 @@ for V in "${VARIANTES[@]}"; do
     mkdir -p "$W/trace"
     python3 -c "
 import json
-p = json.load(open('$ROOT/artefacts/$ROULEAU/seed.json'))
+p = json.load(open('$ROOT/data/artefacts/$ROULEAU/seed.json'))
 p.update({'generations': $GENERATIONS, 'thread_limit': 1, 'voxelsize': $UM})
 p.update(json.loads('''$SUP'''))
 json.dump(p, open('$W/trace/seed.json', 'w'), indent=2)"
@@ -100,7 +100,7 @@ json.dump(p, open('$W/trace/seed.json', 'w'), indent=2)"
       vc_render_tifxyz -v "$W/cache" --remote-url "$VOL" --scale 1 -g 0 -s "$W/plat" \
           --tif-output "$W/rendu_$N" -n "$N" --slice-step 1 --auto-crop \
           > "$W/rendu_$N.log" 2>&1 || continue
-      ( cd "$ROOT/inference_xpu" && uv run python ../src/volume/depth_profile.py \
+      ( cd "$ROOT" && uv run python src/volume/depth_profile.py \
           "$W/rendu_$N" --grid --step 400 --traced-layer $((N / 2)) --voxel-um "$UM" \
           --out "$OUT" ) > "$W/profil_$N.log" 2>&1 || continue
     fi
@@ -112,7 +112,7 @@ print(f\"{d['ecart_trace_um_median']:.2f}\")" 2>/dev/null) || continue
   rm -rf "$W/cache"
   [ -z "$SERIE" ] && { echo "== $NOM : ${AIRE:-?} cm², $CROIS croisements — aucun profil"; continue; }
   echo "== $NOM  (${AIRE:-?} cm², $CROIS auto-intersections)"
-  ( cd "$ROOT/experiments" && uv run python ../src/commun/test_convergence.py \
+  ( cd "$ROOT" && uv run python src/commun/test_convergence.py \
       --serie "${SERIE%,}" --nom "$NOM (${AIRE:-?} cm², $CROIS croisements)" \
-      --json "$ROOT/docs/leviers_$NOM.json" | tail -3 )
+      --json "$ROOT/docs/mesures/leviers_$NOM.json" | tail -3 )
 done

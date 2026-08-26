@@ -126,10 +126,9 @@ contrainte à porter dans la conception, pas une note.
 ## Reproduire
 
 ```bash
-cd experiments && uv run python ../src/graine/choisir_tirages.py --json ../docs/mesures/cibles_second_axe.json
+uv run python src/graine/choisir_tirages.py --json docs/mesures/cibles_second_axe.json
 cd .. && ./src/outils/lancer.sh --fond src/campagnes/campagne_second_axe.sh "$PWD/data/second_axe" 21 \
-    $(cd experiments && uv run python ../src/graine/choisir_tirages.py --chemins)
-cd experiments
-uv run python ../src/tables/table_second_axe.py ../data/second_axe    --json ../docs/mesures/second_axe_21.json
-uv run python ../src/tables/table_second_axe.py ../data/second_axe_41 --json ../docs/mesures/second_axe_41.json
+    $(uv run python src/graine/choisir_tirages.py --chemins)
+uv run python src/tables/table_second_axe.py data/second_axe    --json docs/mesures/second_axe_21.json
+uv run python src/tables/table_second_axe.py data/second_axe_41 --json docs/mesures/second_axe_41.json
 ```

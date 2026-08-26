@@ -3,12 +3,12 @@
 
 ⚠⚠ **Pourquoi ce fichier refuse plus souvent qu'il ne conclut.** `PHercParis4` publie deux
 prédictions de surface du même volume, et il faut choisir laquelle tracer
-([`48`](../docs/48_ou_monter_lexperience.md)). Tracer chacune à *sa* meilleure graine
+([`48`](docs/48_ou_monter_lexperience.md)). Tracer chacune à *sa* meilleure graine
 confondrait « quelle prédiction » avec « quel endroit » — les deux graines tombent à des
 kilovoxels l'une de l'autre. D'où le 2×2 : les deux graines dans les deux prédictions.
 
 ⚠⚠ Et un troisième facteur s'y ajoute, que ce dépôt connaît depuis
-[`30`](../docs/30_le_traceur_est_un_tirage.md) : **le traceur est un tirage**. Mesuré le
+[`30`](docs/30_le_traceur_est_un_tirage.md) : **le traceur est un tirage**. Mesuré le
 2026-08-22, la même graine dans la même prédiction a rendu α = +0,89 puis **+1,12**. Un
 écart entre deux cellules plus petit que ça ne dit rien du tout.
 
@@ -85,7 +85,7 @@ def croiser(cellules: list[dict], resolution: float) -> dict:
 
     ⚠⚠ Une cellule **indécidable** n'est pas une cellule à α nul. La faire entrer dans une
     moyenne convertirait « je n'ai rien mesuré » en une valeur, ce qui est exactement le
-    défaut que [`49`](../docs/49_alpha_ne_separe_pas_deux_pannes.md) vient de corriger dans
+    défaut que [`49`](docs/49_alpha_ne_separe_pas_deux_pannes.md) vient de corriger dans
     l'instrument d'en dessous. Elles sont comptées à part.
     """
     cases: dict[tuple[str, str], list[dict]] = {}
@@ -276,7 +276,10 @@ def verifier() -> int:
     # ⚠⚠ LE REFUS SUR UNE LECTURE VIDE, et la sonde sur le VRAI fichier -- une fixture
     # ecrite d'apres le code ne prouve que leur accord, et c'est ainsi que la cle `series`
     # est passee inapercue.
-    reel = Path(__file__).resolve().parents[2] / "docs"
+    # ⚠ `docs/mesures/` : la sonde cherche des `prediction_paris4_*.json` par glob NON
+    # recursif, donc a la racine de `docs/` elle ne trouvait plus rien -- et une sonde qui
+    # ne trouve rien ne teste rien, sans le dire.
+    reel = Path(__file__).resolve().parents[2] / "docs" / "mesures"
     vus = charger(reel) if reel.is_dir() else []
     if vus:
         v("le lecteur tire un verdict des VRAIS fichiers",

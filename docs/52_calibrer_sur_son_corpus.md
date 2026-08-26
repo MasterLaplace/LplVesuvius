@@ -6,8 +6,8 @@ produit. Aucune des trois fois n'a été trouvée en relisant.
 
 ![où se tient un corpus publié](images/52_calibration.png)
 
-Instruments : [`src/graine/calibration_corpus.py`](../src/graine/calibration_corpus.py)
-(11 témoins) et [`figure_calibration.py`](../src/figures/figure_calibration.py)
+Instruments : [`src/graine/calibration_corpus.py`](src/graine/calibration_corpus.py)
+(11 témoins) et [`figure_calibration.py`](src/figures/figure_calibration.py)
 (13 témoins). Données : [`docs/mesures/balayage_scroll1.csv`](balayage_scroll1.csv), 81 segments.
 
 ---
@@ -188,8 +188,8 @@ python3 src/graine/calibration_corpus.py docs/mesures/balayage_scroll1.csv \
     --par-geometrie --json docs/mesures/calibration_scroll1.json
 
 # notre trace, relue A LA GEOMETRIE DU CORPUS, puis situee dedans
-cd inference_xpu && uv run python ../src/volume/depth_profile.py \
-    ../data/paris4_candidats/ps256_c0/rendu_161 --grid --size 128 --step 200 \
+uv run python src/volume/depth_profile.py \
+    data/paris4_candidats/ps256_c0/rendu_161 --grid --size 128 --step 200 \
     --from-layer 26 --to-layer 134 --traced-layer 54 --voxel-um 2.4 --out /tmp/nous_128.json
 python3 src/graine/calibration_corpus.py docs/mesures/balayage_scroll1.csv --layers 109 \
     --situer /tmp/nous_128.json --json docs/mesures/situer_notre_trace.json

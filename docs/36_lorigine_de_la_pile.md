@@ -213,8 +213,7 @@ défaut, et le résultat aurait l'air d'un résultat.
 ./src/outils/lancer.sh --fond src/outils/leur_graine.sh          # LEUR graine dans NOTRE chaîne
 ./src/outils/lancer.sh --fond src/outils/leurs_parametres.sh     # EXACTEMENT leurs paramètres
 ./src/outils/lancer.sh --fond src/outils/petite_trace.sh         # une trace courte converge-t-elle ?
-cd inference_xpu                                        # les quatre segments publiés
-for k in $(cut -f2 ../docs/mesures/volumes_surface_PHerc1447.txt); do
-  uv run python ../src/commun/zarr_depth.py "$k" --windows 25
+for k in $(cut -f2 docs/mesures/volumes_surface_PHerc1447.txt); do
+  uv run python src/commun/zarr_depth.py "$k" --windows 25
 done
 ```

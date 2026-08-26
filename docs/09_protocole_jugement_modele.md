@@ -429,9 +429,8 @@ vierge met la même image des deux côtés de la barre noire — la condition
 `candidat | vierge` n'oppose alors plus rien.
 
 ```bash
-cd inference_xpu
-uv run python ../src/encre/judge_api.py <prediction.npy> --bands-only
-uv run python ../src/encre/judge_api.py <prediction.npy> --auto-bands \
+uv run python src/encre/judge_api.py <prediction.npy> --bands-only
+uv run python src/encre/judge_api.py <prediction.npy> --auto-bands \
     --model <modele-disponible> --trials 1   # ⚠ PAS gemini-2.5-flash : le §9 de ce
                                              # document mesure qu'il répond 404
                                              # (« no longer available to new users »)
@@ -538,15 +537,14 @@ dedans ne peut le contenir. La cause n'est pas le choix des couches — elle est
 ### Reproduire
 
 ```bash
-cd inference_xpu
-uv run python src/infer_ink.py ../data/layers/scroll4_20231111135340 \
-    --model ../data/models/timesformer_GP_scroll1 \
+uv run python src/infer_ink.py data/layers/scroll4_20231111135340 \
+    --model data/models/timesformer_GP_scroll1 \
     --top 0 --left 17000 --height 6038 --width 8000 --stride 21 --device xpu \
-    --out ../data/out/ink_scroll4.npy
-uv run python ../src/encre/judge_api.py ../data/out/ink_scroll4.npy --bands-only
+    --out data/out/ink_scroll4.npy
+uv run python src/encre/judge_api.py data/out/ink_scroll4.npy --bands-only
 set -a && . ../.env && set +a
-uv run python ../src/encre/judge_api.py ../data/out/ink_scroll4.npy --auto-bands \
-    --blank-ceiling 0.05 --model gemini-3.5-flash --trials 1 --out ../docs/mesures/juge_scroll4.json
+uv run python src/encre/judge_api.py data/out/ink_scroll4.npy --auto-bands \
+    --blank-ceiling 0.05 --model gemini-3.5-flash --trials 1 --out docs/mesures/juge_scroll4.json
 ```
 
 ## Reproduire

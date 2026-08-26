@@ -239,11 +239,10 @@ uniforme aurait été un décalage d'échelle, sans effet sur un rang de Spearma
 ### Reproduire
 
 ```bash
-cd experiments
 uv run python src/excision/baseline_sweep.py \
-    ../data/repos/windcheck/data/scroll1_tifxyz ../docs/mesures/baseline_sweep_scroll1.jsonl
+    data/repos/windcheck/data/scroll1_tifxyz docs/mesures/baseline_sweep_scroll1.jsonl
 uv run python src/excision/variant_correlate.py \
-    ../docs/mesures/baseline_sweep_scroll1.jsonl ../data/repos/windcheck/results/index.json
+    docs/mesures/baseline_sweep_scroll1.jsonl data/repos/windcheck/results/index.json
 ```
 
 ---
@@ -433,8 +432,7 @@ rouleau. C'est exactement le régime où la correction compte.
 ### Reproduire
 
 ```bash
-cd experiments
 uv run python src/excision/baseline_sweep.py <traces> <sortie.jsonl> --search-radius 18
 uv run python src/excision/variant_correlate.py <sortie.jsonl> \
-    ../data/repos/windcheck/results/index.json --corpus "Scroll 1"
+    data/repos/windcheck/results/index.json --corpus "Scroll 1"
 ```

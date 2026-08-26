@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Recoller une nappe projetée sur la MATIÈRE, point par point.
 
-⚠⚠ POURQUOI. [`44`](../docs/44_ou_la_chaine_se_trouve.md) §7 mesure qu'une chaîne tangentielle
+⚠⚠ POURQUOI. [`44`](docs/44_ou_la_chaine_se_trouve.md) §7 mesure qu'une chaîne tangentielle
 **purement géométrique** a un horizon : six maillons, ~580 µm, puis son pas s'emballe et le
 maillage se détruit. 580 µm est le centième d'un tour de nappe, donc la géométrie seule ne fera
 jamais le tour d'une feuille. Ce qui manque n'est pas un meilleur pas — c'est de **redemander à
 la donnée où la feuille se trouve** entre deux projections.
 
 ⭐ Et ce geste est déjà mesuré ailleurs, sur un autre objet :
-[`41`](../docs/41_marcher_le_long_dune_nappe.md) §6 marche une nappe par transformée de distance
+[`41`](docs/41_marcher_le_long_dune_nappe.md) §6 marche une nappe par transformée de distance
 et recentrage sur la crête, et va jusqu'à ce que le **bloc se termine**. Ce fichier applique ce
 même geste, non plus à une ligne de 283 points, mais à **chaque point** d'une nappe.
 

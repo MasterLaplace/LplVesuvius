@@ -63,7 +63,7 @@ json.dump(p, open('$W/trace/seed.json','w'), indent=2)"
       vc_render_tifxyz -v "$W/cache" --remote-url "$VOL" --scale 1 -g 0 -s "$W/plat" \
           --tif-output "$W/rendu_$N" -n "$N" --slice-step 1 --auto-crop \
           > "$W/rendu_$N.log" 2>&1 || continue
-      ( cd "$ROOT/inference_xpu" && uv run python ../src/volume/depth_profile.py \
+      ( cd "$ROOT" && uv run python src/volume/depth_profile.py \
           "$W/rendu_$N" --grid --step 200 --traced-layer $((N / 2)) --voxel-um "$UM" \
           --out "$OUT" ) > "$W/profil_$N.log" 2>&1 || continue
     fi
@@ -74,7 +74,7 @@ print(f\"{d['ecart_trace_um_median']:.2f}\")" 2>/dev/null) || continue
   done
   rm -rf "$W/cache"
   printf 'g=%-4s aire %-9s cm²  croisements %-6s  série %s\n' "$G" "${AIRE:-?}" "$CROIS" "${SERIE%,}"
-  [ -n "$SERIE" ] && ( cd "$ROOT/experiments" && uv run python \
-      ../src/commun/test_convergence.py --serie "${SERIE%,}" --nom "g=$G (${AIRE:-?} cm²)" \
-      --json "$ROOT/docs/petite_trace_g$G.json" | tail -3 )
+  [ -n "$SERIE" ] && ( cd "$ROOT" && uv run python \
+      src/commun/test_convergence.py --serie "${SERIE%,}" --nom "g=$G (${AIRE:-?} cm²)" \
+      --json "$ROOT/docs/mesures/petite_trace_g$G.json" | tail -3 )
 done

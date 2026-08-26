@@ -1377,7 +1377,7 @@ Rogner l'extension 3 dans la bonne plage de générations :
 | cycle 2, rogné à gen ≤ 106 | 7,51 cm² | +0,000 | 2 % |
 
 Les deux verdicts sortent du chemin de jugement partagé, appelé par
-[`src/outils/juger_rognages.sh`](../src/outils/juger_rognages.sh) — `src/outils/juger_rognages.sh
+[`src/outils/juger_rognages.sh`](src/outils/juger_rognages.sh) — `src/outils/juger_rognages.sh
 data/rogne_cycle2 cycle2_`. ⚠ L'étiquette fait partie du **nom** du résultat, donc elle est
 écrite dans le script : sans elle `docs/mesures/cycle2_gen103.json` n'avait aucun producteur dans
 l'arbre, et l'audit des artefacts le signalait — à raison, la commande vivait dans un terminal.
@@ -1431,7 +1431,7 @@ Soit **0 paire sous 40 µm**, **2 paires entre 40 et 250 µm**, et le reste
 trouvé », c'est-à-dire comme un résultat faible. La distribution montre autre chose : il n'y a
 pas *un peu* moins de candidats que prévu, il y a un **trou d'un facteur deux** entre le seuil
 et la paire la plus proche du rouleau. Elle est produite par
-[`src/figures/figure_segments.py`](../src/figures/figure_segments.py), dont le témoin vérifie
+[`src/figures/figure_segments.py`](src/figures/figure_segments.py), dont le témoin vérifie
 que les quatre bandes **totalisent** les paires jugeables — la sonde qui aurait attrapé la
 faute corrigée juste en dessous.
 
@@ -1897,17 +1897,17 @@ uv run python src/nappe/geometrie_chaine.py data/spires_pas025 \
   --figure docs/images/44_geometrie_chaine.png
 
 # Les témoins de l'instrument, hors ligne (39 contrôles)
-uv run python ../src/nappe/geometrie_chaine.py --verifier
+uv run python src/nappe/geometrie_chaine.py --verifier
 
 # Le contrôle par l'indice de spire — celui qui tue l'hypothèse de §8
-uv run python ../src/encre/juge_a_un_rendu.py --racine ../data \
-  --json ../docs/mesures/juge_a_un_rendu.json
+uv run python src/encre/juge_a_un_rendu.py --racine ../data \
+  --json docs/mesures/juge_a_un_rendu.json
 
 # Le panneau des rendus : une couche par spire, puis la mosaïque
-uv run python ../src/volume/couche_de_rendu.py ../data/spires_pas025/spire0*/rendu_31 \
-  --dossier-sortie ../data/mosaique/pas025 --index ../data/mosaique/pas025/index.tsv
-uv run python ../src/volume/assembler_mosaique.py ../data/mosaique/pas025/index.tsv \
-  --sortie ../docs/images/43_chaine_pas025_rendus.jpg --colonnes 3 --um-par-px 8.64 \
+uv run python src/volume/couche_de_rendu.py data/spires_pas025/spire0*/rendu_31 \
+  --dossier-sortie data/mosaique/pas025 --index data/mosaique/pas025/index.tsv
+uv run python src/volume/assembler_mosaique.py data/mosaique/pas025/index.tsv \
+  --sortie docs/images/43_chaine_pas025_rendus.jpg --colonnes 3 --um-par-px 8.64 \
   --rouleau "PHerc0172 — chaîne à pas de rayon 0,25" \
   --legende "nos surfaces, chaîne gen_neighbor pas 0,25 — couche 15/31"
 ```

@@ -16,11 +16,11 @@ MOTIF=${2:-2.4um}
 DEST=${3:-docs/dense_PHercParis4}
 FILS=${4:-24}
 mkdir -p "$DEST"
-awk -F'\t' -v m="$MOTIF" '$2 ~ m {print $1"\t"$2}' "docs/volumes_surface_$SCROLL.txt" \
+awk -F'\t' -v m="$MOTIF" '$2 ~ m {print $1"\t"$2}' "docs/mesures/volumes_surface_$SCROLL.txt" \
 | while IFS=$'\t' read -r seg key; do
   out="$DEST/$seg.json"
   [ -s "$out" ] && continue
-  (cd inference_xpu && uv run python ../src/commun/zarr_depth.py "$key" \
+  (uv run python src/commun/zarr_depth.py "$key" \
       --windows 200 --fils "$FILS" --out "../$out") || echo "  $seg ECHEC" >&2
 done
 echo "termine : $(ls "$DEST"/*.json 2>/dev/null | wc -l) segments"

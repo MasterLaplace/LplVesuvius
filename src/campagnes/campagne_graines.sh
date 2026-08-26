@@ -111,7 +111,7 @@ for R in $ROULEAUX; do
     # critere ne dirait rien de ce qui a ete reellement fait.
     if [ "$CRIT" = planarite ]; then NIV=0; BLOC=8; else NIV=2; BLOC=5; fi
     GJ="$DEST/$R.$CRIT.json"
-    ( cd "$ROOT/experiments" && timeout 1800 uv run python -u ../src/commun/trouver_graine.py \
+    ( cd "$ROOT" && timeout 1800 uv run python -u src/commun/trouver_graine.py \
         "$SURF" --level $NIV --chunks 25 --bloc $BLOC --critere "$CRIT" --candidats 1 \
         --voxel-um "$UM" --out "$GJ" ) > "$DEST/$R.$CRIT.log" 2>&1
     if [ ! -s "$GJ" ]; then echo "   ⚠ $CRIT : aucune graine"; continue; fi

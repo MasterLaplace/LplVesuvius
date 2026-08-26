@@ -244,7 +244,7 @@ ck(abs(haut[0][0]-haut[1][0])>=1024+512)                         # ni entre elle
 # ⚠ LE CONTROLE QUI COMPTE, sur la VRAIE carte de Scroll 1 : le choix automatique
 # doit retrouver la bande de texte mesuree a la main, et surtout ne jamais rendre un
 # faux temoin -- la bande (7168,1024) porte 3,75 % d'encre et avait ete retiree.
-carte=pathlib.Path('../data/out/ink_segment_complet.npy')
+carte=pathlib.Path('data/out/ink_segment_complet.npy')
 if carte.is_file():
     v=np.asarray(np.load(carte, mmap_mode='r'))
     for count in (1,2,3,4):
@@ -1101,7 +1101,7 @@ fi
 printf '  %-30s ' "syntaxe des formules"
 DOXY=$(printf '@%s$' f)
 FORM=$(grep -rlnF --include='*.md' --include='*.py' --include='*.sh' -- "$DOXY" \
-       "$ROOT/docs" "$ROOT/src" "$ROOT/apprendre" "$ROOT/README.md" \
+       "$ROOT/docs" "$ROOT/src" "$ROOT/README.md" \
        2>/dev/null | grep -v '/\.git/' | sed "s#$ROOT/##" | tr '\n' ' ')
 if [ -z "$FORM" ]; then
   printf '✅ aucun marqueur Doxygen dans les documents\n'
@@ -1145,8 +1145,11 @@ JAMAIS=""
 # `src/` echappait au controle -- exactement le cas de `src/xpu/infer_ink.py`,
 # le point d entree de l inference. La liste suit desormais celle de `artefacts_orphelins.py`.
 # Mesure du 2026-08-25 : l elargissement ne signale RIEN de neuf, il ferme juste le trou.
-for f in "$ROOT"/src/*/*.py "$ROOT"/inference_xpu/src/*.py "$ROOT"/tracecheck/*.py \
-         "$ROOT"/experiments/src/*/*.py; do
+# ⚠⚠ UN seul glob depuis le repli du 2026-08-26. Il en portait quatre, un par dossier de
+# premier niveau -- et TROIS sont morts au repli, donc ce garde ne jugeait plus qu un quart
+# de l arbre tout en restant vert. Un glob qui ne matche rien rend une liste vide, et une
+# boucle sur une liste vide ne signale jamais rien.
+for f in "$ROOT"/src/*/*.py; do
   grep -q -- 'add_argument("--verifier"' "$f" || continue
   b=$(basename "$f")
   # ⚠ Le motif porte le GUILLEMET FERMANT : une ligne de lancement ecrit

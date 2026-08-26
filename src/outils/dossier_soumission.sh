@@ -23,7 +23,7 @@
 set -u
 cd "$(dirname "$0")/../.." || exit 2
 ROOT=$PWD
-DEST=${1:-$ROOT/soumission}
+DEST=${1:-$ROOT/data/soumission}
 TEXTE=$ROOT/docs/21_texte_de_soumission.md
 MANQUE=0
 

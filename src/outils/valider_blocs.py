@@ -16,7 +16,10 @@ sys.path[:0] = [str(p) for p in Path(__file__).resolve().parents[1].iterdir() if
 import numpy as np
 
 sys.path[:0] = [str(x) for x in Path(__file__).resolve().parents[1].iterdir() if x.is_dir()]
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "experiments" / "src"))
+# ⚠ `src/excision/` depuis le repli du 2026-08-26. L ancienne ligne inserait
+# `src/experiments/src`, un chemin qui n existe pas : le module ne marchait plus que
+# PAR ACCIDENT, parce qu un autre site avait deja mis la famille sur le chemin.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "excision"))
 
 from proximity_vs_ink import tile_proximity  # noqa: E402
 

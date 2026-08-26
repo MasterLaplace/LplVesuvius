@@ -182,7 +182,7 @@ print(1 if a > 0 and c / a > p else 0)" 2>/dev/null || echo 0)
       vc_render_tifxyz -v "$W/cache" --remote-url "$VOL" --scale 1 -g 0 -s "$W/plat" \
           --tif-output "$W/rendu_$N" -n "$N" --slice-step 1 --auto-crop \
           > "$W/rendu_$N.log" 2>&1 || continue
-      ( cd "$ROOT/inference_xpu" && uv run python ../src/volume/depth_profile.py \
+      ( cd "$ROOT" && uv run python src/volume/depth_profile.py \
           "$W/rendu_$N" --grid --step 400 --traced-layer $((N / 2)) --voxel-um "$UM" \
           --out "$OUT" ) > "$W/profil_$N.log" 2>&1 || continue
     fi
@@ -205,10 +205,10 @@ print(f\"{d['ecart_trace_um_median']:.2f}\")" 2>/dev/null) || continue
 import json,sys
 d=json.load(open(sys.argv[1])); d=d[0] if isinstance(d,list) else d
 print(d.get('au_bord_relief',''))" "$W/profil_${N0}c.json" 2>/dev/null || echo "")
-  ( cd "$ROOT/experiments" && uv run python ../src/commun/test_convergence.py \
+  ( cd "$ROOT" && uv run python src/commun/test_convergence.py \
       ${BORD:+--au-bord "$BORD"} \
       --serie "${SERIE%,}" --nom "$NOM ($AIRE cm², $CROIS croisements)" \
-      --json "$ROOT/docs/extension_${ETIQUETTE}_$NOM.json" | tail -4 )
+      --json "$ROOT/docs/mesures/extension_${ETIQUETTE}_$NOM.json" | tail -4 )
 }
 
 # --- le balayage --------------------------------------------------------------------

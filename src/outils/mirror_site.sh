@@ -11,7 +11,7 @@
 set -u
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-SITE="$ROOT/site"
+SITE="$ROOT/data/site"
 DOCS="$ROOT/docs"
 BASE="https://scrollprize.org"
 

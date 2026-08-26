@@ -22,7 +22,7 @@ set -u
 cd "$(dirname "$0")/../.." || exit 2
 ROOT=$PWD
 DEST=${1:-$ROOT/data/sensibilite_maillage}
-MESH=${2:-$ROOT/artefacts/PHerc0358/mesh.tifxyz}
+MESH=${2:-$ROOT/data/artefacts/PHerc0358/mesh.tifxyz}
 shift 2 2>/dev/null || true
 FACTEURS=${*:-"1 2 3 4"}
 mkdir -p "$DEST"
@@ -38,7 +38,7 @@ for K in $FACTEURS; do
   else
     M="$DEST/decime_k$K"
     if [ ! -f "$M/meta.json" ]; then
-      ( cd "$ROOT/experiments" && uv run python ../src/nappe/decimer_tifxyz.py \
+      ( cd "$ROOT" && uv run python src/nappe/decimer_tifxyz.py \
           "$MESH" "$M" --facteur "$K" ) > "$DEST/decime_k$K.log" 2>&1 \
         || { echo "  ⚠ décimation k=$K échouée"; continue; }
     fi

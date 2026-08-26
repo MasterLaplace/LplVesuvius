@@ -190,13 +190,15 @@ puissance de modèle.
 
 ## Arborescence
 
+> ⚠ Ce bloc décrit l'état APRÈS le repli du 2026-08-26 (trois dossiers). Il en annonçait
+> quatre auparavant, dont un `tools/` qui n'existe plus.
+
 ```
 LplVesuvius/
-├── data/site/     miroir local de scrollprize.org (wget, robots.txt respecte)
-├── data/repos/    depots clones (voir tools/repos.tsv)
-├── data/     donnees telechargees (VIDE par defaut, cf. plus bas)
-├── docs/     notes, logs de recuperation
-└── tools/    manifeste + scripts de recuperation
+├── src/      tout ce que le dépôt lance, en familles (outils/, nappe/, encre/, …)
+├── docs/     les documents, plus mesures/ journaux/ registres/ images/ article/
+└── data/     tout ce qui se retélécharge : repos/, site/, volumes, rendus
+             (VIDE par défaut, cf. plus bas ; sauf data/artefacts/, versionné)
 ```
 
 ## Reproduire l'environnement
@@ -206,7 +208,7 @@ LplVesuvius/
 ./src/outils/clone_repos.sh 1    # seulement le coeur + deroulage/segmentation
 ```
 
-Le manifeste `tools/repos.tsv` classe les dépôts par *tier* : `0` officiel,
+Le manifeste `src/outils/repos.tsv` classe les dépôts par *tier* : `0` officiel,
 `1` déroulage/segmentation (notre cible), `2` encre, `3` outillage.
 
 ## Les données
@@ -313,10 +315,10 @@ uv run pytest -q
 uv run python -m windcheck.fetch --sample PHerc0172
 uv run python -m windcheck.fetch --sample PHerc0172 --skip-download --verify
 
-cd ../../experiments                # notre mesure
+cd "$ROOT"                # notre mesure
 uv sync
-./run_measure.sh                    # echantillonne le CT aux cellules excisees
-uv run python -m excision.analyse ../docs/mesures/excision_samples.tsv
+./src/excision/run_measure.sh       # echantillonne le CT aux cellules excisees
+uv run python -m excision.analyse docs/mesures/excision_samples.tsv
 ```
 
 ### Recuperer de la donnee sans `aws`
@@ -342,12 +344,11 @@ Ils ne demandent **ni verite terrain, ni modele d'encre, ni juge** — c'est ce 
 rend utilisables sur n'importe quel segment publie.
 
 ```bash
-cd inference_xpu
 # profondeur de surface : ou est la feuille par rapport a la trace
-uv run python ../src/volume/depth_profile.py <couches...> --grid --from-layer 15 --to-layer 40
-uv run python ../src/commun/zarr_depth.py <cle S3 du .zarr> --windows 25 --courbe
+uv run python src/volume/depth_profile.py <couches...> --grid --from-layer 15 --to-layer 40
+uv run python src/commun/zarr_depth.py <cle S3 du .zarr> --windows 25 --courbe
 # direction des fibres : deux fenetres voisines sur la meme feuille doivent s'accorder
-uv run python ../src/nappe/fiber_orientation.py <cle S3 du .zarr> --windows 36
+uv run python src/nappe/fiber_orientation.py <cle S3 du .zarr> --windows 36
 ```
 
 ⭐ **Un chunk Zarr = une colonne de profondeur entiere, pour 1,78 Mo et 1,03 s.** C'est
@@ -362,7 +363,6 @@ mega-octets ».
                                     # docs/mesures/temoins.json et gardes comme tous les autres :
                                     # la version precedente disait 18 et 741, recopies a
                                     # la main et donc faux depuis longtemps
-./validate.sh                       # la chaine complete : tests + builds + boot + parite
 
 # rassembler ce qui PART : le texte, ses figures, le journal des chiffres. La liste des
 # figures est DERIVEE du document, et le script REFUSE un dossier incomplet
@@ -405,7 +405,7 @@ python3 src/graine/compter_corpus.py                 # les comptes viennent des 
 python3 src/tracecheck/mutation.py                         # chaque detecteur est PORTEUR
 python3 src/nappe/lire_selfcross.py --verifier       # un verdict qui n'a rien teste est REFUSE
 uv run python src/depot/verifier_chiffres.py docs/*.md \
-     --soumission docs/21_texte_de_soumission.md          # 215 chiffres recalcules depuis 47 fichiers de resultat
+     --soumission docs/21_texte_de_soumission.md          # 216 chiffres recalcules depuis 48 fichiers de resultat
 ```
 
 ⚠⚠ **Les cinq derniers ne mesurent rien du papyrus** — ils mesurent le depot. Ils

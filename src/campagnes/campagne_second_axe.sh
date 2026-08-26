@@ -67,7 +67,7 @@ for T in $TIRAGES; do
   # ⚠ La couche « tracee » est celle du MILIEU de la pile rendue, pas 0 : `--slice-step 1`
   # centre la pile sur la surface. La donner fausse decale tout profil d'ecart.
   MILIEU=$(( COUCHES / 2 ))
-  ( cd "$ROOT/inference_xpu" && uv run python ../src/volume/depth_profile.py \
+  ( cd "$ROOT" && uv run python src/volume/depth_profile.py \
       "$W/rendu" --grid --step 400 --traced-layer "$MILIEU" \
       --voxel-um "${UM_DE[$R]}" --out "$OUT" ) > "$W/profil.log" 2>&1 \
     || { echo "== $R/$I : depth_profile a échoué"; continue; }

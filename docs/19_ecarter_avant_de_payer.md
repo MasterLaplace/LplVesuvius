@@ -171,12 +171,11 @@ réparation est la voie J du batch (`18`), et son outil existe déjà.
 ## 8. Reproduire
 
 ```bash
-cd inference_xpu
-uv run python ../src/encre/croiser_encre.py \
-    ../docs/mesures/profondeur_corpus_2.4um.json ../data/encre/PHercParis4 \
+uv run python src/encre/croiser_encre.py \
+    docs/mesures/profondeur_corpus_2.4um.json data/encre/PHercParis4 \
     --grandeur avec_matiere --sens bas \
     --parts 0.05 0.10 0.15 0.20 0.25 0.30 0.40 0.50 \
-    --out ../docs/mesures/decision_avec_matiere.json
+    --out docs/mesures/decision_avec_matiere.json
 ```
 
 ⚠ `--depuis <rapport.json>` reprend un rapport déjà écrit au lieu de relire les images :

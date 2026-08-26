@@ -15,7 +15,7 @@ un seuil absolu posé à une profondeur ne juge pas une trace rendue à une autr
 
 Usage :
     uv run python src/figures/figure_derive_profondeur.py \\
-        --json docs/mesures/derive_profondeur.json --docs ../docs/mesures \\
+        --json docs/mesures/derive_profondeur.json --docs docs/mesures \\
         --sortie docs/images/47_derive_profondeur.png
 """
 from __future__ import annotations
@@ -110,7 +110,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--json", type=Path, default=Path(__file__).resolve().parents[2] / "docs/mesures/derive_profondeur.json")
-    ap.add_argument("--docs", type=Path, default=Path(__file__).resolve().parents[2] / "docs")
+    ap.add_argument("--docs", type=Path, default=Path(__file__).resolve().parents[2] / "docs" / "mesures")
     ap.add_argument("--sortie", type=Path,
                     default=Path(__file__).resolve().parents[2] / "docs/images/47_derive_profondeur.png")
     ap.add_argument("--anglais", action="store_true")
