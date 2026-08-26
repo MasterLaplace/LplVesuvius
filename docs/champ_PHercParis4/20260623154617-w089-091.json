@@ -4,15 +4,15 @@
     "layers": 109,
     "voxel_um": 2.4,
     "sondees": 296,
-    "avec_matiere": 96,
-    "decalage_median_vx": -15.5,
-    "decalage_median_um": -37.199999999999996,
+    "avec_matiere": 78,
+    "decalage_median_vx": -14.5,
+    "decalage_median_um": -34.8,
     "residuel_median_um": 49.199999999999996,
-    "residuel_p90_um": 121.19999999999999,
-    "part_au_bord": 0.07291666666666667,
-    "paires_voisines": 144,
-    "coherence_voisins": 0.10612500217951051,
-    "coherence_temoin_melange": -0.10172269878487313,
+    "residuel_p90_um": 109.2,
+    "part_au_bord": 0.0641025641025641,
+    "paires_voisines": 107,
+    "coherence_voisins": 0.09438796701902365,
+    "coherence_temoin_melange": -0.07397107218257268,
     "segment": "20260623154617-w089-091"
   }
 ]

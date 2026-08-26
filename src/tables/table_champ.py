@@ -46,6 +46,71 @@ def charger(dossier: Path) -> list[dict]:
     return lignes
 
 
+def cout_de_la_censure(dossier: Path) -> dict:
+    """Ce que coûtent les fenêtres SATURÉES — et pourquoi la réponse est un encadrement.
+
+    Une fenêtre dont le pic est sur la première ou la dernière couche de la pile n'est
+    pas une mesure : c'est une **borne**, parce que le vrai pic peut être en dehors
+    (`20` §4, et les 61 % de Scroll 4). Le décalage médian publié les compte pourtant
+    comme des valeurs.
+
+    ⚠⚠ **Et les jeter n'est pas non plus neutre.** Les fenêtres censurées sont
+    exactement celles où la feuille est le plus loin : les retirer tire la médiane vers
+    zéro, autant que les garder la tire vers les bords. Les deux chiffres sont donc
+    faux dans des sens **connus et opposés**, ce qui est précisément ce qui les rend
+    utiles : leur **paire encadre** la vérité. C'est la forme que ce dépôt donne déjà à
+    un seuil qu'il ne peut pas trancher (`prediction_50um`), et écrire un seul des deux
+    reviendrait à choisir un biais sans le dire.
+
+    ⚠ La lecture se fait sur les exports fenêtre par fenêtre, pas sur les résumés : un
+    résumé ne porte que la **part** censurée, jamais quelles fenêtres le sont, donc il
+    ne permet pas de recalculer la médiane sans elles.
+    """
+    par_segment = []
+    for f in sorted(dossier.glob("*.json")):
+        vues = json.loads(f.read_text())
+        fen = vues.get("fenetres")
+        if not fen:
+            continue
+        um = vues["geometrie"]["voxel_um"] * vues["geometrie"]["pas_couche_vox"]
+        tous = np.array([w["ecart_couches"] for w in fen], dtype=float)
+        mesurees = np.array([w["ecart_couches"] for w in fen if not w["sature"]],
+                            dtype=float)
+        ligne = {
+            "segment": vues.get("segment", f.stem),
+            "fenetres": int(tous.size),
+            "saturees": int(tous.size - mesurees.size),
+            "part_applicable": float(mesurees.size / tous.size),
+            "decalage_tous_um": float(np.median(tous)) * um,
+        }
+        # ⚠ Un segment dont TOUTE la matiere est au bord n'a pas de mediane mesuree.
+        # Rendre 0 serait inventer un segment parfaitement pose.
+        if mesurees.size:
+            ligne["decalage_mesurees_um"] = float(np.median(mesurees)) * um
+            ligne["ecart_des_deux_um"] = ligne["decalage_mesurees_um"] - ligne["decalage_tous_um"]
+        par_segment.append(ligne)
+
+    if not par_segment:
+        return {"segments": 0}
+
+    encadres = [l for l in par_segment if "ecart_des_deux_um" in l]
+    parts = np.array([l["part_applicable"] for l in par_segment], dtype=float)
+    return {
+        "segments": len(par_segment),
+        "fenetres": int(sum(l["fenetres"] for l in par_segment)),
+        "saturees": int(sum(l["saturees"] for l in par_segment)),
+        "part_applicable_mediane": float(np.median(parts)),
+        "part_applicable_min": float(parts.min()),
+        "segments_sans_mediane_mesuree": len(par_segment) - len(encadres),
+        "ecart_des_deux_um_median": (float(np.median([abs(l["ecart_des_deux_um"])
+                                                      for l in encadres]))
+                                     if encadres else None),
+        "ecart_des_deux_um_max": (float(max(abs(l["ecart_des_deux_um"])
+                                            for l in encadres)) if encadres else None),
+        "par_segment": par_segment,
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Agreger la campagne de champs de correction et la confronter.")
@@ -63,6 +128,10 @@ def main() -> int:
                              "juger un autre est le piege nº 6 du depot, et il a ete "
                              "commis ici le 2026-08-19 avant d'etre attrape. Sans ce "
                              "parametre, le compte de sauts de feuille n'est pas rendu")
+    parser.add_argument("--fenetres", type=Path, default=None,
+                        help="repertoire des exports fenetre par fenetre (R2). Sans lui, "
+                             "le cout de la censure n'est pas rendu : un resume ne dit "
+                             "pas QUELLES fenetres sont au bord")
     parser.add_argument("--out", type=Path, default=None)
     args = parser.parse_args()
 
@@ -239,6 +308,21 @@ def main() -> int:
                 croix[nom] = {"rho": float(rho), "p": float(p), "n": int(m.sum())}
                 print(f"{nom:>26} {rho:>+18.3f} {p:>9.4f}{' *' if p < 0.05 else ''}")
             rapport["correlations_croisements"] = croix
+
+    if args.fenetres is not None and args.fenetres.exists():
+        cens = cout_de_la_censure(args.fenetres)
+        if cens.get("segments"):
+            rapport["censure"] = cens
+            print(f"\n{cens['segments']} segments exportes fenetre par fenetre — "
+                  f"{cens['saturees']} fenetres saturees sur {cens['fenetres']}")
+            print(f"{'part applicable (mediane)':>34} {cens['part_applicable_mediane']:>8.3f}"
+                  f"   (min {cens['part_applicable_min']:.3f})")
+            if cens["ecart_des_deux_um_median"] is not None:
+                print(f"{'|decalage sans - avec| median':>34} "
+                      f"{cens['ecart_des_deux_um_median']:>8.1f} um"
+                      f"   (max {cens['ecart_des_deux_um_max']:.1f})")
+            print("   ⚠ les deux medianes encadrent : garder les fenetres saturees tire "
+                  "vers les bords, les jeter tire vers zero")
 
     if args.out:
         args.out.write_text(json.dumps(rapport, indent=2) + "\n")

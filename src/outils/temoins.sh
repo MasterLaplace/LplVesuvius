@@ -459,6 +459,84 @@ import json as _j
 ck(_j.dumps(C.fenetres(g, META6, [(0, 0)], 6, 2.4, "x", 0))
    == _j.dumps(troue), "l'export est deterministe")
 
+# =====================================================================
+# Le cout de la CENSURE -- ce que l'export rend calculable et qu'un resume ne peut pas.
+# =====================================================================
+import table_champ as T
+import json as _json, tempfile as _tf
+
+def _ecrire(dossier, nom, ecarts, depth=9, voxel=2.0, pas=1.0):
+    tracee = depth // 2
+    fen = [{"bloc": 0, "fenetre_y": i, "fenetre_x": 0,
+            "ligne0": i * 8, "ligne1": i * 8 + 8, "colonne0": 0, "colonne1": 8,
+            "couche_pic": int(e) + tracee, "ecart_couches": int(e),
+            "ecart_um": int(e) * voxel,
+            "sature": bool(Z.au_bord(int(e) + tracee, depth))}
+           for i, e in enumerate(ecarts)]
+    (dossier / f"{nom}.json").write_text(_json.dumps({
+        "zarr": "x", "niveau": 0, "segment": nom,
+        "geometrie": {"forme": [depth, 64, 8], "chunks": [depth, 8, 8],
+                      "grille": [len(ecarts), 1], "couche_tracee": tracee,
+                      "voxel_um": voxel, "pas_couche_vox": pas},
+        "blocs": [], "fenetres": fen}))
+
+with _tf.TemporaryDirectory() as _d:
+    _r = Path(_d)
+    # aucune fenetre au bord : les deux medianes DOIVENT coincider
+    _ecrire(_r, "propre", [0, 1, 2, 1, 0, -1, 1])
+    # des fenetres au bord d'un seul cote : les jeter tire la mediane vers zero
+    _ecrire(_r, "censure", [4, 4, 4, 3, 2, 1, 0])
+    # tout au bord : il n'y a PAS de mediane mesuree, et rendre 0 serait inventer
+    _ecrire(_r, "tout_au_bord", [4, -4, 4, -4])
+    # ⚠ `pas_couche_vox` est l'echappatoire d'un rendu fait a un autre pas : le format le
+    # porte pour ca. Une fixture qui le laisserait a 1,0 rendrait le facteur INVISIBLE,
+    # donc l'oublier dans le code ne casserait rien -- une verification incapable d'echouer.
+    _ecrire(_r, "autre_pas", [0, 2, 2, 2, 4, 1, 0], pas=0.5)
+    c = T.cout_de_la_censure(_r)
+    par = {l["segment"]: l for l in c["par_segment"]}
+
+    ck(c["segments"] == 4, "les quatre segments sont lus")
+    ck(par["propre"]["saturees"] == 0 and par["propre"]["part_applicable"] == 1.0,
+       "un champ sans bord n'a rien de censure")
+    ck(abs(par["propre"]["ecart_des_deux_um"]) < 1e-12,
+       "... et ses deux medianes coincident")
+    # ⚠⚠ LE controle qui compte : jeter les bornes tire la mediane VERS ZERO. Sans lui,
+    # « l'encadrement » serait une phrase et non une propriete.
+    ck(par["censure"]["saturees"] == 3, "les trois fenetres au bord sont vues")
+    ck(abs(par["censure"]["decalage_mesurees_um"]) < abs(par["censure"]["decalage_tous_um"]),
+       "jeter les bornes tire la mediane vers zero")
+    ck(par["censure"]["decalage_tous_um"] == 6.0, "conversion en um : ecart x voxel x pas")
+    ck(par["autre_pas"]["decalage_tous_um"] == 2.0,
+       "... et un rendu a un AUTRE pas de couche est remis a l'echelle")
+    # ⚠ Un segment entierement au bord ne rend AUCUNE mediane mesuree.
+    ck("decalage_mesurees_um" not in par["tout_au_bord"],
+       "un segment tout au bord n'a pas de mediane mesuree")
+    ck(c["segments_sans_mediane_mesuree"] == 1, "... et il est compte comme tel")
+    ck(par["tout_au_bord"]["part_applicable"] == 0.0, "... sa part applicable est nulle")
+
+with _tf.TemporaryDirectory() as _d:
+    ck(T.cout_de_la_censure(Path(_d))["segments"] == 0,
+       "un repertoire vide ne rend pas un resultat")
+
+# --- un segment qui ECHOUE ne doit laisser AUCUN fichier. Sinon `[ -s "$out" ]`, la garde
+# de reprise des campagnes, prend un `[]` de 2 octets pour un resultat et ne retente
+# JAMAIS le segment : un echec transitoire devient permanent, en silence, et le compte
+# final a l'air complet. Paye le 2026-08-26 sur un volume retire en amont.
+with _tf.TemporaryDirectory() as _d:
+    _o = Path(_d) / "sortie.json"
+    _vrai, _argv = C.mesurer, sys.argv
+    def _echoue(*a, **k):
+        raise RuntimeError("volume retire en amont")
+    C.mesurer = _echoue
+    sys.argv = ["champ_correction.py", "R/segments/S1/x.zarr", "--voxel-um", "2.4",
+                "--out", str(_o)]
+    try:
+        _code = C.main()
+    finally:
+        C.mesurer, sys.argv = _vrai, _argv
+    ck(_code == 1, "un segment qui echoue rend un code non nul")
+    ck(not _o.exists(), "... et n'ecrit AUCUN fichier, pour que la campagne le retente")
+
 print(f"ALL PASS (0 failures, {n} checks)")
 PY
 
@@ -1167,6 +1245,13 @@ fi
 
 # ⚠ Celui-ci n'est pas une batterie d'assertions mais un GARDE-FOU de fraicheur : il
 # recalcule les chiffres publies depuis leurs JSON et les cherche dans les documents.
+# ⚠⚠ ET IL SE DECRIT LUI-MEME, donc il a UN RUN DE RETARD par construction : le compte de
+# batteries et de controles est publie (`31`, `HANDOFF`, `00`) et lu depuis le
+# `temoins.json` du run PRECEDENT, puisque celui-ci n est ecrit qu a la fin. Ajouter un
+# controle ou un chiffre garde perime donc les documents, et la reparation demande DEUX
+# executions : une pour connaitre le compte, une pour le verifier. Ce n est pas un defaut
+# a corriger -- publier ce compte est ce qui rend la couverture opposable -- mais il faut
+# le savoir, sinon on cherche une panne dans le contenu alors qu elle est dans l horloge.
 printf '  %-30s ' "chiffres de la soumission"
 # ⚠⚠ TOUS les documents, pas une liste tenue a la main. La version precedente en nommait
 # neuf, choisis un par un -- donc la couverture du garde-fou dependait de quelqu'un qui se

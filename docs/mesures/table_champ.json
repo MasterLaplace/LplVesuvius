@@ -1,60 +1,783 @@
 {
-  "segments": 80,
-  "part_rigide_mediane": 0.2174242424242424,
+  "segments": 79,
+  "part_rigide_mediane": 0.22058823529411767,
   "pas_inter_feuilles_um": 172.8,
   "residuel_en_ecarts_inter_feuilles": 0.32638888888888884,
   "segments_residuel_p90_sup_un_ecart": 1,
   "signales": [
     "20260701183146-w118-119"
   ],
-  "coherence_mediane": 0.3252898154475079,
-  "temoin_median": -0.008468650920085344,
-  "coherence_bat_temoin": 80,
-  "p_mann_whitney": 1.2854821651911385e-25,
-  "rho_detectable": 0.308846943210609,
+  "coherence_mediane": 0.32511264249702226,
+  "temoin_median": -0.00836625129029436,
+  "coherence_bat_temoin": 79,
+  "p_mann_whitney": 3.641225976015103e-25,
+  "rho_detectable": 0.3107396137488467,
   "par_fenetre": {
     "residuel_median_um": {
-      "rho": 0.21404232755643193,
-      "p": 0.10987114408087724,
-      "n": 57
+      "rho": 0.21342028414731193,
+      "p": 0.11426129991878199,
+      "n": 56
     },
     "residuel_p90_um": {
-      "rho": 0.2827442196505339,
-      "p": 0.0330830143630345,
-      "n": 57
+      "rho": 0.23678808130960083,
+      "p": 0.07890472717895644,
+      "n": 56
     },
     "coherence_voisins": {
-      "rho": 0.2186157676021384,
-      "p": 0.10230595085437412,
-      "n": 57
+      "rho": 0.22459311253715428,
+      "p": 0.09608668117053426,
+      "n": 56
     }
   },
   "correlations_encre": {
     "coherence_voisins": {
-      "rho": -0.022961157089222074,
-      "p": 0.8397875574620309,
-      "n": 80
+      "rho": -0.024757175206342318,
+      "p": 0.8285416076253205,
+      "n": 79
     },
     "residuel_median_um": {
-      "rho": -0.028259791518412406,
-      "p": 0.8034885545914475,
-      "n": 80
+      "rho": -0.012454326892338422,
+      "p": 0.9132530434464228,
+      "n": 79
     },
     "|decalage_median_um|": {
-      "rho": -0.08448098747028694,
-      "p": 0.4562342585384143,
-      "n": 80
+      "rho": -0.06472351993321708,
+      "p": 0.5709176729878304,
+      "n": 79
     },
     "part_au_bord": {
-      "rho": -0.2747627065062093,
-      "p": 0.01364232430925826,
-      "n": 80
+      "rho": -0.2420054356086834,
+      "p": 0.031653684575204,
+      "n": 79
     }
   },
   "apparie_decalage": {
-    "n": 38,
+    "n": 39,
     "encre_coherent": 4.882352941176471,
-    "encre_incoherent": 4.757575757575758,
-    "p": 0.12144576422896408
+    "encre_incoherent": 4.864502164502165,
+    "p": 0.21985491780778538
+  },
+  "censure": {
+    "segments": 79,
+    "fenetres": 7499,
+    "saturees": 630,
+    "part_applicable_mediane": 0.9270833333333334,
+    "part_applicable_min": 0.7368421052631579,
+    "segments_sans_mediane_mesuree": 0,
+    "ecart_des_deux_um_median": 3.599999999999998,
+    "ecart_des_deux_um_max": 30.000000000000007,
+    "par_segment": [
+      {
+        "segment": "20230702185753",
+        "fenetres": 96,
+        "saturees": 7,
+        "part_applicable": 0.9270833333333334,
+        "decalage_tous_um": -13.2,
+        "decalage_mesurees_um": -16.8,
+        "ecart_des_deux_um": -3.6000000000000014
+      },
+      {
+        "segment": "20230929220926",
+        "fenetres": 96,
+        "saturees": 6,
+        "part_applicable": 0.9375,
+        "decalage_tous_um": -32.4,
+        "decalage_mesurees_um": -26.4,
+        "ecart_des_deux_um": 6.0
+      },
+      {
+        "segment": "20231005123336",
+        "fenetres": 96,
+        "saturees": 2,
+        "part_applicable": 0.9791666666666666,
+        "decalage_tous_um": 8.4,
+        "decalage_mesurees_um": 8.4,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20231007101619",
+        "fenetres": 95,
+        "saturees": 3,
+        "part_applicable": 0.968421052631579,
+        "decalage_tous_um": 4.8,
+        "decalage_mesurees_um": 6.0,
+        "ecart_des_deux_um": 1.2000000000000002
+      },
+      {
+        "segment": "20231012184424",
+        "fenetres": 95,
+        "saturees": 14,
+        "part_applicable": 0.8526315789473684,
+        "decalage_tous_um": -7.199999999999999,
+        "decalage_mesurees_um": -12.0,
+        "ecart_des_deux_um": -4.800000000000001
+      },
+      {
+        "segment": "20231016151002",
+        "fenetres": 90,
+        "saturees": 6,
+        "part_applicable": 0.9333333333333333,
+        "decalage_tous_um": -18.0,
+        "decalage_mesurees_um": -13.2,
+        "ecart_des_deux_um": 4.800000000000001
+      },
+      {
+        "segment": "20231022170901",
+        "fenetres": 96,
+        "saturees": 3,
+        "part_applicable": 0.96875,
+        "decalage_tous_um": -20.4,
+        "decalage_mesurees_um": -21.599999999999998,
+        "ecart_des_deux_um": -1.1999999999999993
+      },
+      {
+        "segment": "20231031143852",
+        "fenetres": 96,
+        "saturees": 3,
+        "part_applicable": 0.96875,
+        "decalage_tous_um": -18.0,
+        "decalage_mesurees_um": -21.599999999999998,
+        "ecart_des_deux_um": -3.599999999999998
+      },
+      {
+        "segment": "20231106155351",
+        "fenetres": 96,
+        "saturees": 5,
+        "part_applicable": 0.9479166666666666,
+        "decalage_tous_um": 2.4,
+        "decalage_mesurees_um": 2.4,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20231210121321",
+        "fenetres": 96,
+        "saturees": 6,
+        "part_applicable": 0.9375,
+        "decalage_tous_um": 1.2,
+        "decalage_mesurees_um": 1.2,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20231221180251",
+        "fenetres": 96,
+        "saturees": 0,
+        "part_applicable": 1.0,
+        "decalage_tous_um": 7.199999999999999,
+        "decalage_mesurees_um": 7.199999999999999,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20260602204401-5753_-7",
+        "fenetres": 91,
+        "saturees": 2,
+        "part_applicable": 0.978021978021978,
+        "decalage_tous_um": -19.2,
+        "decalage_mesurees_um": -19.2,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20260602225659-5753_0",
+        "fenetres": 96,
+        "saturees": 5,
+        "part_applicable": 0.9479166666666666,
+        "decalage_tous_um": -34.8,
+        "decalage_mesurees_um": -33.6,
+        "ecart_des_deux_um": 1.1999999999999957
+      },
+      {
+        "segment": "20260602230115-20230702185753_v14",
+        "fenetres": 96,
+        "saturees": 7,
+        "part_applicable": 0.9270833333333334,
+        "decalage_tous_um": 21.599999999999998,
+        "decalage_mesurees_um": 21.599999999999998,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20260603005223-5753_-1",
+        "fenetres": 90,
+        "saturees": 8,
+        "part_applicable": 0.9111111111111111,
+        "decalage_tous_um": -1.2,
+        "decalage_mesurees_um": -1.2,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20260603024952-5753_-2",
+        "fenetres": 93,
+        "saturees": 5,
+        "part_applicable": 0.946236559139785,
+        "decalage_tous_um": -7.199999999999999,
+        "decalage_mesurees_um": -4.8,
+        "ecart_des_deux_um": 2.3999999999999995
+      },
+      {
+        "segment": "20260603042357-5753_-3",
+        "fenetres": 88,
+        "saturees": 8,
+        "part_applicable": 0.9090909090909091,
+        "decalage_tous_um": -1.2,
+        "decalage_mesurees_um": -4.8,
+        "ecart_des_deux_um": -3.5999999999999996
+      },
+      {
+        "segment": "20260603145540-5753_-4",
+        "fenetres": 96,
+        "saturees": 6,
+        "part_applicable": 0.9375,
+        "decalage_tous_um": -14.399999999999999,
+        "decalage_mesurees_um": -9.6,
+        "ecart_des_deux_um": 4.799999999999999
+      },
+      {
+        "segment": "20260603185441-5753_-6",
+        "fenetres": 92,
+        "saturees": 2,
+        "part_applicable": 0.9782608695652174,
+        "decalage_tous_um": 0.0,
+        "decalage_mesurees_um": -1.2,
+        "ecart_des_deux_um": -1.2
+      },
+      {
+        "segment": "20260603190005-5753_-5",
+        "fenetres": 96,
+        "saturees": 3,
+        "part_applicable": 0.96875,
+        "decalage_tous_um": -12.0,
+        "decalage_mesurees_um": -12.0,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20260603193311-5753_-1_copy",
+        "fenetres": 94,
+        "saturees": 2,
+        "part_applicable": 0.9787234042553191,
+        "decalage_tous_um": 4.8,
+        "decalage_mesurees_um": 4.8,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20260603222816-20231005123336_v2_flatboi",
+        "fenetres": 96,
+        "saturees": 20,
+        "part_applicable": 0.7916666666666666,
+        "decalage_tous_um": -6.0,
+        "decalage_mesurees_um": -7.199999999999999,
+        "ecart_des_deux_um": -1.1999999999999993
+      },
+      {
+        "segment": "20260604223808-20231210121321_v8",
+        "fenetres": 91,
+        "saturees": 10,
+        "part_applicable": 0.8901098901098901,
+        "decalage_tous_um": 4.8,
+        "decalage_mesurees_um": 9.6,
+        "ecart_des_deux_um": 4.8
+      },
+      {
+        "segment": "20260623141135-w046-052_jordi",
+        "fenetres": 96,
+        "saturees": 3,
+        "part_applicable": 0.96875,
+        "decalage_tous_um": -56.4,
+        "decalage_mesurees_um": -55.199999999999996,
+        "ecart_des_deux_um": 1.2000000000000028
+      },
+      {
+        "segment": "20260623141649-w053-058_jordi",
+        "fenetres": 96,
+        "saturees": 5,
+        "part_applicable": 0.9479166666666666,
+        "decalage_tous_um": 14.399999999999999,
+        "decalage_mesurees_um": 14.399999999999999,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20260623141924-w010-027",
+        "fenetres": 96,
+        "saturees": 6,
+        "part_applicable": 0.9375,
+        "decalage_tous_um": -7.199999999999999,
+        "decalage_mesurees_um": -15.6,
+        "ecart_des_deux_um": -8.4
+      },
+      {
+        "segment": "20260623142658-w028-037",
+        "fenetres": 96,
+        "saturees": 7,
+        "part_applicable": 0.9270833333333334,
+        "decalage_tous_um": -14.399999999999999,
+        "decalage_mesurees_um": -14.399999999999999,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20260623143441-w038-045",
+        "fenetres": 90,
+        "saturees": 2,
+        "part_applicable": 0.9777777777777777,
+        "decalage_tous_um": 8.4,
+        "decalage_mesurees_um": 8.4,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20260623144224-w046-052",
+        "fenetres": 96,
+        "saturees": 7,
+        "part_applicable": 0.9270833333333334,
+        "decalage_tous_um": 3.5999999999999996,
+        "decalage_mesurees_um": 2.4,
+        "ecart_des_deux_um": -1.1999999999999997
+      },
+      {
+        "segment": "20260623144957-w053-058",
+        "fenetres": 95,
+        "saturees": 4,
+        "part_applicable": 0.9578947368421052,
+        "decalage_tous_um": 31.2,
+        "decalage_mesurees_um": 33.6,
+        "ecart_des_deux_um": 2.400000000000002
+      },
+      {
+        "segment": "20260623150417-w064-068",
+        "fenetres": 96,
+        "saturees": 2,
+        "part_applicable": 0.9791666666666666,
+        "decalage_tous_um": 3.5999999999999996,
+        "decalage_mesurees_um": 3.5999999999999996,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20260623151041-w069-072",
+        "fenetres": 91,
+        "saturees": 9,
+        "part_applicable": 0.9010989010989011,
+        "decalage_tous_um": 31.2,
+        "decalage_mesurees_um": 27.599999999999998,
+        "ecart_des_deux_um": -3.6000000000000014
+      },
+      {
+        "segment": "20260623151729-w073-076",
+        "fenetres": 96,
+        "saturees": 4,
+        "part_applicable": 0.9583333333333334,
+        "decalage_tous_um": 10.799999999999999,
+        "decalage_mesurees_um": 10.799999999999999,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20260623152443-w077-080",
+        "fenetres": 96,
+        "saturees": 9,
+        "part_applicable": 0.90625,
+        "decalage_tous_um": 31.2,
+        "decalage_mesurees_um": 28.799999999999997,
+        "ecart_des_deux_um": -2.400000000000002
+      },
+      {
+        "segment": "20260623153216-w081-084",
+        "fenetres": 96,
+        "saturees": 11,
+        "part_applicable": 0.8854166666666666,
+        "decalage_tous_um": -34.8,
+        "decalage_mesurees_um": -33.6,
+        "ecart_des_deux_um": 1.1999999999999957
+      },
+      {
+        "segment": "20260623154006-w085-088",
+        "fenetres": 96,
+        "saturees": 10,
+        "part_applicable": 0.8958333333333334,
+        "decalage_tous_um": 10.799999999999999,
+        "decalage_mesurees_um": 9.6,
+        "ecart_des_deux_um": -1.1999999999999993
+      },
+      {
+        "segment": "20260623154617-w089-091",
+        "fenetres": 78,
+        "saturees": 5,
+        "part_applicable": 0.9358974358974359,
+        "decalage_tous_um": -34.8,
+        "decalage_mesurees_um": -31.2,
+        "ecart_des_deux_um": 3.599999999999998
+      },
+      {
+        "segment": "20260623155240-w092-094",
+        "fenetres": 96,
+        "saturees": 9,
+        "part_applicable": 0.90625,
+        "decalage_tous_um": 15.6,
+        "decalage_mesurees_um": 9.6,
+        "ecart_des_deux_um": -6.0
+      },
+      {
+        "segment": "20260623155914-w095-097",
+        "fenetres": 96,
+        "saturees": 4,
+        "part_applicable": 0.9583333333333334,
+        "decalage_tous_um": 31.2,
+        "decalage_mesurees_um": 31.2,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20260623160554-w098-100",
+        "fenetres": 96,
+        "saturees": 6,
+        "part_applicable": 0.9375,
+        "decalage_tous_um": -7.199999999999999,
+        "decalage_mesurees_um": -12.0,
+        "ecart_des_deux_um": -4.800000000000001
+      },
+      {
+        "segment": "20260623161233-w101-103",
+        "fenetres": 96,
+        "saturees": 9,
+        "part_applicable": 0.90625,
+        "decalage_tous_um": 38.4,
+        "decalage_mesurees_um": 21.599999999999998,
+        "ecart_des_deux_um": -16.8
+      },
+      {
+        "segment": "20260623162614-w107-109",
+        "fenetres": 96,
+        "saturees": 11,
+        "part_applicable": 0.8854166666666666,
+        "decalage_tous_um": -51.6,
+        "decalage_mesurees_um": -40.8,
+        "ecart_des_deux_um": 10.800000000000004
+      },
+      {
+        "segment": "20260623163339-w110-112",
+        "fenetres": 96,
+        "saturees": 9,
+        "part_applicable": 0.90625,
+        "decalage_tous_um": -19.2,
+        "decalage_mesurees_um": -12.0,
+        "ecart_des_deux_um": 7.199999999999999
+      },
+      {
+        "segment": "20260623164141-w113-115",
+        "fenetres": 96,
+        "saturees": 11,
+        "part_applicable": 0.8854166666666666,
+        "decalage_tous_um": 4.8,
+        "decalage_mesurees_um": 0.0,
+        "ecart_des_deux_um": -4.8
+      },
+      {
+        "segment": "20260623164704-w116-117",
+        "fenetres": 96,
+        "saturees": 5,
+        "part_applicable": 0.9479166666666666,
+        "decalage_tous_um": 7.199999999999999,
+        "decalage_mesurees_um": 7.199999999999999,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20260623165230-w118-119",
+        "fenetres": 96,
+        "saturees": 5,
+        "part_applicable": 0.9479166666666666,
+        "decalage_tous_um": 8.4,
+        "decalage_mesurees_um": 9.6,
+        "ecart_des_deux_um": 1.1999999999999993
+      },
+      {
+        "segment": "20260623165742-w120-121",
+        "fenetres": 96,
+        "saturees": 13,
+        "part_applicable": 0.8645833333333334,
+        "decalage_tous_um": 20.4,
+        "decalage_mesurees_um": 2.4,
+        "ecart_des_deux_um": -18.0
+      },
+      {
+        "segment": "20260623170305-w122-123",
+        "fenetres": 93,
+        "saturees": 13,
+        "part_applicable": 0.8602150537634409,
+        "decalage_tous_um": 40.8,
+        "decalage_mesurees_um": 22.8,
+        "ecart_des_deux_um": -17.999999999999996
+      },
+      {
+        "segment": "20260623170833-w124-125",
+        "fenetres": 96,
+        "saturees": 11,
+        "part_applicable": 0.8854166666666666,
+        "decalage_tous_um": 18.0,
+        "decalage_mesurees_um": 9.6,
+        "ecart_des_deux_um": -8.4
+      },
+      {
+        "segment": "20260623171400-w126-127",
+        "fenetres": 96,
+        "saturees": 14,
+        "part_applicable": 0.8541666666666666,
+        "decalage_tous_um": 62.4,
+        "decalage_mesurees_um": 50.4,
+        "ecart_des_deux_um": -12.0
+      },
+      {
+        "segment": "20260623171929-w128-129",
+        "fenetres": 95,
+        "saturees": 25,
+        "part_applicable": 0.7368421052631579,
+        "decalage_tous_um": 67.2,
+        "decalage_mesurees_um": 37.199999999999996,
+        "ecart_des_deux_um": -30.000000000000007
+      },
+      {
+        "segment": "20260701183124-w010-027",
+        "fenetres": 96,
+        "saturees": 7,
+        "part_applicable": 0.9270833333333334,
+        "decalage_tous_um": -25.2,
+        "decalage_mesurees_um": -28.799999999999997,
+        "ecart_des_deux_um": -3.599999999999998
+      },
+      {
+        "segment": "20260701183125-w028-037",
+        "fenetres": 96,
+        "saturees": 8,
+        "part_applicable": 0.9166666666666666,
+        "decalage_tous_um": 24.0,
+        "decalage_mesurees_um": 24.0,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20260701183126-w038-045",
+        "fenetres": 96,
+        "saturees": 5,
+        "part_applicable": 0.9479166666666666,
+        "decalage_tous_um": -37.199999999999996,
+        "decalage_mesurees_um": -33.6,
+        "ecart_des_deux_um": 3.5999999999999943
+      },
+      {
+        "segment": "20260701183127-w046-052",
+        "fenetres": 96,
+        "saturees": 13,
+        "part_applicable": 0.8645833333333334,
+        "decalage_tous_um": -22.8,
+        "decalage_mesurees_um": -19.2,
+        "ecart_des_deux_um": 3.6000000000000014
+      },
+      {
+        "segment": "20260701183128-w053-058",
+        "fenetres": 96,
+        "saturees": 6,
+        "part_applicable": 0.9375,
+        "decalage_tous_um": 52.8,
+        "decalage_mesurees_um": 45.6,
+        "ecart_des_deux_um": -7.199999999999996
+      },
+      {
+        "segment": "20260701183129-w059-063",
+        "fenetres": 96,
+        "saturees": 2,
+        "part_applicable": 0.9791666666666666,
+        "decalage_tous_um": -1.2,
+        "decalage_mesurees_um": -4.8,
+        "ecart_des_deux_um": -3.5999999999999996
+      },
+      {
+        "segment": "20260701183130-w064-068",
+        "fenetres": 96,
+        "saturees": 8,
+        "part_applicable": 0.9166666666666666,
+        "decalage_tous_um": 1.2,
+        "decalage_mesurees_um": -1.2,
+        "ecart_des_deux_um": -2.4
+      },
+      {
+        "segment": "20260701183131-w069-072",
+        "fenetres": 96,
+        "saturees": 3,
+        "part_applicable": 0.96875,
+        "decalage_tous_um": -4.8,
+        "decalage_mesurees_um": -4.8,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20260701183132-w073-076",
+        "fenetres": 96,
+        "saturees": 5,
+        "part_applicable": 0.9479166666666666,
+        "decalage_tous_um": 4.8,
+        "decalage_mesurees_um": 9.6,
+        "ecart_des_deux_um": 4.8
+      },
+      {
+        "segment": "20260701183133-w077-080",
+        "fenetres": 96,
+        "saturees": 5,
+        "part_applicable": 0.9479166666666666,
+        "decalage_tous_um": 2.4,
+        "decalage_mesurees_um": -2.4,
+        "ecart_des_deux_um": -4.8
+      },
+      {
+        "segment": "20260701183134-w081-084",
+        "fenetres": 96,
+        "saturees": 5,
+        "part_applicable": 0.9479166666666666,
+        "decalage_tous_um": -2.4,
+        "decalage_mesurees_um": 2.4,
+        "ecart_des_deux_um": 4.8
+      },
+      {
+        "segment": "20260701183135-w085-088",
+        "fenetres": 96,
+        "saturees": 12,
+        "part_applicable": 0.875,
+        "decalage_tous_um": 8.4,
+        "decalage_mesurees_um": 13.2,
+        "ecart_des_deux_um": 4.799999999999999
+      },
+      {
+        "segment": "20260701183136-w089-091",
+        "fenetres": 96,
+        "saturees": 3,
+        "part_applicable": 0.96875,
+        "decalage_tous_um": -18.0,
+        "decalage_mesurees_um": -19.2,
+        "ecart_des_deux_um": -1.1999999999999993
+      },
+      {
+        "segment": "20260701183137-w092-094",
+        "fenetres": 96,
+        "saturees": 9,
+        "part_applicable": 0.90625,
+        "decalage_tous_um": 8.4,
+        "decalage_mesurees_um": 7.199999999999999,
+        "ecart_des_deux_um": -1.200000000000001
+      },
+      {
+        "segment": "20260701183138-w095-097",
+        "fenetres": 96,
+        "saturees": 8,
+        "part_applicable": 0.9166666666666666,
+        "decalage_tous_um": -10.799999999999999,
+        "decalage_mesurees_um": -10.799999999999999,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20260701183139-w098-100",
+        "fenetres": 96,
+        "saturees": 9,
+        "part_applicable": 0.90625,
+        "decalage_tous_um": -22.8,
+        "decalage_mesurees_um": -21.599999999999998,
+        "ecart_des_deux_um": 1.2000000000000028
+      },
+      {
+        "segment": "20260701183140-w101-103",
+        "fenetres": 96,
+        "saturees": 21,
+        "part_applicable": 0.78125,
+        "decalage_tous_um": 24.0,
+        "decalage_mesurees_um": 9.6,
+        "ecart_des_deux_um": -14.4
+      },
+      {
+        "segment": "20260701183141-w104-106",
+        "fenetres": 96,
+        "saturees": 12,
+        "part_applicable": 0.875,
+        "decalage_tous_um": -48.0,
+        "decalage_mesurees_um": -36.0,
+        "ecart_des_deux_um": 12.0
+      },
+      {
+        "segment": "20260701183142-w107-109",
+        "fenetres": 96,
+        "saturees": 12,
+        "part_applicable": 0.875,
+        "decalage_tous_um": 51.6,
+        "decalage_mesurees_um": 43.199999999999996,
+        "ecart_des_deux_um": -8.400000000000006
+      },
+      {
+        "segment": "20260701183143-w110-112",
+        "fenetres": 96,
+        "saturees": 15,
+        "part_applicable": 0.84375,
+        "decalage_tous_um": 4.8,
+        "decalage_mesurees_um": 2.4,
+        "ecart_des_deux_um": -2.4
+      },
+      {
+        "segment": "20260701183144-w113-115",
+        "fenetres": 96,
+        "saturees": 11,
+        "part_applicable": 0.8854166666666666,
+        "decalage_tous_um": 34.8,
+        "decalage_mesurees_um": 16.8,
+        "ecart_des_deux_um": -17.999999999999996
+      },
+      {
+        "segment": "20260701183145-w116-117",
+        "fenetres": 96,
+        "saturees": 11,
+        "part_applicable": 0.8854166666666666,
+        "decalage_tous_um": 6.0,
+        "decalage_mesurees_um": -7.199999999999999,
+        "ecart_des_deux_um": -13.2
+      },
+      {
+        "segment": "20260701183146-w118-119",
+        "fenetres": 86,
+        "saturees": 15,
+        "part_applicable": 0.8255813953488372,
+        "decalage_tous_um": 73.2,
+        "decalage_mesurees_um": 67.2,
+        "ecart_des_deux_um": -6.0
+      },
+      {
+        "segment": "20260701183147-w120-121",
+        "fenetres": 96,
+        "saturees": 3,
+        "part_applicable": 0.96875,
+        "decalage_tous_um": 21.599999999999998,
+        "decalage_mesurees_um": 19.2,
+        "ecart_des_deux_um": -2.3999999999999986
+      },
+      {
+        "segment": "20260701183148-w122-123",
+        "fenetres": 96,
+        "saturees": 11,
+        "part_applicable": 0.8854166666666666,
+        "decalage_tous_um": 28.799999999999997,
+        "decalage_mesurees_um": 14.399999999999999,
+        "ecart_des_deux_um": -14.399999999999999
+      },
+      {
+        "segment": "20260701183149-w124-125",
+        "fenetres": 96,
+        "saturees": 13,
+        "part_applicable": 0.8645833333333334,
+        "decalage_tous_um": 2.4,
+        "decalage_mesurees_um": -4.8,
+        "ecart_des_deux_um": -7.199999999999999
+      },
+      {
+        "segment": "20260701183150-w126-127",
+        "fenetres": 96,
+        "saturees": 18,
+        "part_applicable": 0.8125,
+        "decalage_tous_um": 98.39999999999999,
+        "decalage_mesurees_um": 87.6,
+        "ecart_des_deux_um": -10.799999999999997
+      },
+      {
+        "segment": "20260701183151-w128-129",
+        "fenetres": 96,
+        "saturees": 18,
+        "part_applicable": 0.8125,
+        "decalage_tous_um": 103.2,
+        "decalage_mesurees_um": 93.6,
+        "ecart_des_deux_um": -9.600000000000009
+      }
+    ]
   }
 }

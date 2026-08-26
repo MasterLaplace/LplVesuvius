@@ -107,8 +107,8 @@ témoin à côté (`docs/images/20_champ_fort.png`, `20_champ_correction.png`).
 
 | ce qu'on apporte | le chiffre |
 |---|---|
-| l'erreur d'une trace est **structurée**, pas du bruit | **99 segments sur 99**, deux rouleaux, battent leur propre témoin de mélange |
-| **quelle réparation** vaut la peine | une translation n'enlèverait que **21,7 %** de l'erreur → le remède est un **gauchissement** |
+| l'erreur d'une trace est **structurée**, pas du bruit | **98 segments sur 98**, deux rouleaux, battent leur propre témoin de mélange |
+| **quelle réparation** vaut la peine | une translation n'enlèverait que **22,1 %** de l'erreur → le remède est un **gauchissement** |
 | les segments qui **sautent** de feuille sont nommés | 1 sur 80 sur Scroll 1, avec son nom et son résiduel |
 
 ⚠ Et l'honnêteté qui doit accompagner la figure : sur le cas **médian** la différence

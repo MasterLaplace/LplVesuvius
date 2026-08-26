@@ -38,11 +38,11 @@ si la cohérence y survivait, elle viendrait de la façon de compter et non de l
    de la sonder — sans elle, la campagne rapporte « pas assez de matière » sur des segments
    qui en sont pleins.
 
-## 3. ⭐ Le champ est réel — sur deux rouleaux, 99 segments, sans exception
+## 3. ⭐ Le champ est réel — sur deux rouleaux, 98 segments, sans exception
 
 | corpus | segments | cohérence médiane | témoin mélange | segments battant leur témoin |
 |---|---:|---:|---:|---|
-| Scroll 1 (PHercParis4, 2,4 µm) | 80 | **+0,325** | −0,008 | **80 / 80** (p = 1,3e-25) |
+| Scroll 1 (PHercParis4, 2,4 µm) | 79 | **+0,325** | −0,008 | **79 / 79** (p = 3,6e-25) |
 | Scroll 4 (PHerc1667, 2,399 µm) | 19 | **+0,481** | −0,035 | **19 / 19** (p = 7,4e-08) |
 | Scroll 5 (PHerc0172, 7,91 µm) | 53 | +0,183 | −0,030 | **51 / 53** (p = 2,7e-15) |
 
@@ -80,14 +80,14 @@ corpus (**+0,325**) :
 ⚠⚠ **Et c'est là qu'il faut être honnête** : sur le cas médian, la différence entre les
 deux panneaux **se voit mal**. C'est exactement ce qu'un rho de 0,31 veut dire, et
 publier seulement la figure du haut donnerait à croire à un effet qu'on n'a pas mesuré.
-La structure est **réelle et systématique** (99 segments sur 99) ; elle n'est **pas
+La structure est **réelle et systématique** (98 segments sur 98) ; elle n'est **pas
 spectaculaire**.
 
 ## 4. ⭐⭐ Et le chiffre qui décide de la production
 
 | corpus | part de l'erreur qu'une **translation** enlèverait |
 |---|---:|
-| Scroll 1 | **21,7 %** (p90 47,3 %) |
+| Scroll 1 | **22,1 %** (p90 47,8 %) |
 | Scroll 4 | **35,3 %** (p90 62,8 %) |
 | Scroll 5 | **28,6 %** (p90 45,8 %) |
 
@@ -148,7 +148,7 @@ est le **pas inter-feuilles**. Sur Scroll 1 il vaut **172,8 µm**
 
 | | résiduel médian | en écarts inter-feuilles | segments au-dessus d'un écart |
 |---|---:|---:|---:|
-| Scroll 1 (pas 172,8 µm) | 56,4 µm | **0,33** | **1 / 80 (1 %)** — `20260701183146-w118-119`, à 1,02 écart |
+| Scroll 1 (pas 172,8 µm) | 56,4 µm | **0,33** | **1 / 79 (1 %)** — `20260701183146-w118-119`, à 1,02 écart |
 | Scroll 5 (pas **142,8 µm**, mesuré sur lui au `11` §3) | 39,6 µm | **0,28** | **0 / 53 (0 %)** |
 
 ⚠⚠ **Correction d'une mesure faite deux heures plus tôt dans cette même session.** J'avais
@@ -166,18 +166,55 @@ rouleau, donc son pas n'est pas mesurable ici, donc on ne le juge pas.
 
 ## 6. ❌ Mais le champ ne prédit PAS le résultat
 
-Contre les 80 cartes d'encre publiées, à n = 80 où **rho 0,31 est détectable** :
+Contre les cartes d'encre publiées, à n = 79 où **rho 0,311 est détectable**
+*(re-mesuré le 2026-08-26 — l'encadré ci-dessous dit ce qui a bougé et pourquoi)* :
 
 | grandeur du champ | rho ~ contraste d'encre | p |
 |---|---:|---:|
-| `coherence_voisins` | −0,023 | 0,84 |
-| `residuel_median_um` | −0,028 | 0,80 |
-| `\|decalage_median_um\|` | −0,084 | 0,46 |
-| **`part_au_bord`** | **−0,275** | **0,014** * |
+| `coherence_voisins` | −0,025 | 0,83 |
+| `residuel_median_um` | −0,013 | 0,91 |
+| `\|decalage_median_um\|` | −0,065 | 0,57 |
+| **`part_au_bord`** | **−0,242** | **0,032** * |
 
 Et le test apparié — *à décalage comparable, un décalage cohérent rend-il une meilleure
-carte ?* — donne **4,882 contre 4,758, p = 0,12** sur les 38 segments les plus décalés.
+carte ?* — donne **4,882 contre 4,865, p = 0,22** sur les 39 segments les plus décalés.
 Non significatif.
+
+> ### ⚠⚠ Ce tableau a bougé, et il y a TROIS causes qu'il ne faut pas confondre
+>
+> La version publiée disait **−0,275** à n = 80, et le test apparié **4,758 / p = 0,12**.
+> Trois choses ont changé entre le 2026-08-19 et le 2026-08-26, et **une seule est un
+> correctif de notre part** :
+>
+> 1. **Un segment a été retiré en amont.** `20260623145652-w059-063` n'a plus de
+>    `.zarray` au niveau 0 : il n'est plus mesurable. n passe de 80 à 79.
+> 2. ⚠⚠ **Trois volumes de surface ont CHANGÉ en amont** — et c'est le fait le plus
+>    important de cette re-mesure, parce qu'il porte sur tout ce que ce dépôt mesure
+>    contre des artefacts distants :
+>
+>    | segment | fenêtres avec matière | décalage médian |
+>    |---|---:|---:|
+>    | `20260623144957-w053-058` | 96 → 95 | +30,0 → +31,2 µm |
+>    | `20260623151041-w069-072` | 96 → 91 | +14,4 → **+31,2 µm** |
+>    | `20260623154617-w089-091` | 96 → **78** | −37,2 → −34,8 µm |
+>
+>    **Un volume de surface publié n'est pas un artefact figé.** Une mesure prise contre
+>    lui porte donc une date, et deux campagnes séparées de huit jours ne sont pas
+>    strictement comparables. Les trois appartiennent au même lot `20260623`, ce qui
+>    ressemble à un ré-rendu de ce lot-là.
+> 3. **La règle « au bord » a été corrigée** (§8) : elle reclasse **75 fenêtres sur
+>    7 499**, réparties sur **48 des 79 segments**.
+>
+> ⚠ **Je ne décompose donc PAS le déplacement du rho entre ces causes.** Sur les mêmes 79
+> segments, l'ancienne règle appliquée aux anciens fichiers donne −0,264 — mais ces
+> fichiers portent les valeurs d'AVANT la dérive amont, donc l'écart avec −0,242 mélange
+> la règle et la dérive. Attribuer −0,022 à la seule correction serait une précision que
+> la mesure ne porte pas.
+>
+> ⭐ **Ce qui survit, et ce qui s'affaiblit.** `part_au_bord` reste la seule grandeur sous
+> p = 0,05, donc la conclusion du paragraphe suivant tient. Mais **0,242 est désormais
+> sous le 0,311 que n = 79 rend détectable** : la réserve que ce document portait déjà se
+> resserre au lieu de se lever.
 
 ⚠ **La seule grandeur qui prédit est celle qui demande s'il y a de la matière**, pas où
 elle est : `part_au_bord` ici, `avec_matiere` dans `19` (+0,539). Ce qui compte pour le
@@ -300,6 +337,38 @@ toutes les fixtures de la batterie avaient une profondeur **paire**, c'est-à-di
 parité pour laquelle les deux rédactions coïncident. Le cas impair est maintenant dans la
 batterie, avec la couche `depth - 2` nommée comme piège.
 
+Sur les 79 segments de PHercParis4, la correction reclasse **75 fenêtres sur 7 499**,
+réparties sur **48 segments** — jamais plus de trois par segment. Elle ne déplace donc
+aucun verdict individuel ; ce qu'elle déplace est la corrélation de corpus du §6.
+
+### ⭐ Ce que la censure coûte, et pourquoi la réponse est un ENCADREMENT
+
+Une fenêtre saturée n'est pas une mesure, c'est une **borne**. Le décalage médian publié
+les compte pourtant comme des valeurs — et les jeter n'est pas neutre non plus, puisque ce
+sont exactement les fenêtres où la feuille est le plus loin. Les deux chiffres sont donc
+faux dans des sens **connus et opposés**, ce qui est précisément ce qui les rend utiles :
+leur **paire encadre** la vérité. Même forme que le seuil que `prediction_50um` ne peut pas
+trancher, et écrire un seul des deux reviendrait à choisir un biais sans le dire.
+
+| sur les 79 segments | |
+|---|---:|
+| fenêtres exportées | **7 499** |
+| dont saturées | **630** |
+| part applicable, médiane | **0,927** |
+| part applicable, **pire segment** | **0,737** |
+| largeur de l'encadrement, médiane | **3,6 µm** |
+| largeur de l'encadrement, **maximum** | **30,0 µm** |
+
+⚠ **Et l'encadrement se lit contre les seuils du dépôt, pas contre un nombre choisi** :
+`carte_segments.py` publie **40 µm** (même feuille, raccordable) et **250 µm** (feuilles
+voisines). Le pire encadrement vaut 30 µm, donc il reste **sous** la bande « même
+feuille » : la censure ne déplace aucune décision de raccordement. C'est un biais réel,
+borné, et sans conséquence pratique — trois choses qu'il faut dire ensemble.
+
+⚠ Ce calcul n'est possible **que** grâce à l'export : un résumé porte la *part* censurée,
+jamais *quelles* fenêtres le sont, donc il ne permet pas de recalculer la médiane sans
+elles.
+
 ## 9. Reproduire
 
 ```bash
@@ -311,7 +380,8 @@ batterie, avec la couche `depth - 2` nommée comme piège.
 #   docs/champ_<rouleau>/fenetres/<segment>.json  le champ, fenetre par fenetre
 
 uv run python src/tables/table_champ.py docs/champ_PHercParis4 \
-    --pas-um 172.8 --encre docs/mesures/croisement_encre.json --out docs/mesures/table_champ.json
+    --pas-um 172.8 --encre docs/mesures/croisement_encre.json \
+    --fenetres docs/champ_PHercParis4/fenetres --out docs/mesures/table_champ.json
 ```
 
 ⚠ `--pas-um` prend le pas **de ce rouleau-là**. Sans lui, le compte de sauts de feuille

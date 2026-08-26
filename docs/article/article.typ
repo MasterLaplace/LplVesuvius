@@ -527,7 +527,7 @@ objects, so reads parallelise with no coordination. A whole segment is judged fr
     [`offset`], [median distance from the traced layer to the material peak],
       [$rho = +0.388$],
     [`residual`], [what remains after the best rigid shift], [$rho = +0.428$],
-    [`rigid_share`], [share of the error a mesh translation would remove], [21.7 %],
+    [`rigid_share`], [share of the error a mesh translation would remove], [22.1 %],
     [`coherence`], [does a window's error predict its neighbour's], [150/152],
   ),
   caption: [

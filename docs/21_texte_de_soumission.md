@@ -50,7 +50,7 @@ encore.
 > | `edge_pinned` | peak sits at a stack edge — the sheet is *outside* the volume | rho −0.275 (p = 0.014) |
 > | `offset` | median distance from traced layer to material peak | rho +0.388 vs published self-crossings (n = 54, p = 0.004) |
 > | `residual` | what remains **after** the best rigid shift | **rho +0.428** vs the same crossings (p = 0.0012) |
-> | `rigid_share` | share of error a mesh translation would remove | **21.7 %** median over 80 segments |
+> | `rigid_share` | share of error a mesh translation would remove | **22.1 %** median over 79 segments |
 > | `coherence` | does a window's error predict its neighbour's | **150/152** segments over three scrolls beat their own shuffle control (80/80, 19/19, 51/53) |
 >
 > #### 3. The failure case we detected on real scroll data
@@ -142,7 +142,7 @@ fautes en une : le mauvais critère, et une réserve omise que la source porte.
 > measured, no. The plainest form of the number depends on no normalisation at all: on
 > Scroll 1 the median shift is **14.4 µm** and the median residual is **56.4 µm** — what a
 > translation could remove is **four times smaller** than what it would leave. As a share:
-> **21.7 %** (Scroll 1, 80 segments), **35.3 %** (Scroll 4, 19), **28.6 %** (Scroll 5, 53).
+> **22.1 %** (Scroll 1, 79 segments), **35.3 %** (Scroll 4, 19), **28.6 %** (Scroll 5, 53).
 > The
 > error is a smooth local deformation inside the sheet, not a mispose. **On these two
 > scrolls the useful repair is a warp, not a shift** — worth knowing before anyone builds
@@ -502,7 +502,7 @@ nuancer.
 | # | quoi |
 |---|---|
 | 1 | publier le dépôt (`src/tracecheck/` au minimum) et mettre l'adresse dans le texte |
-| 2 | ~~revérifier chaque chiffre contre son fichier de sortie~~ ✅ **c'est une commande maintenant** — `src/depot/verifier_chiffres.py` recalcule **220 chiffres** depuis leurs JSON et les cherche littéralement dans les documents. Sort **1** si l'un manque, **2** si un fichier de résultat est absent (sinon il passerait au vert en ne vérifiant rien) |
+| 2 | ~~revérifier chaque chiffre contre son fichier de sortie~~ ✅ **c'est une commande maintenant** — `src/depot/verifier_chiffres.py` recalcule **217 chiffres** depuis leurs JSON et les cherche littéralement dans les documents. Sort **1** si l'un manque, **2** si un fichier de résultat est absent (sinon il passerait au vert en ne vérifiant rien) |
 | 2 bis | ~~relire la transcription anglaise du corps~~ ✅ **`--soumission docs/21…md`** — les chiffres que le corps cite doivent être trouvés **dans ce document-là**, pas seulement quelque part dans le dépôt. ⚠ Sans ça, la recherche globale était satisfaite par la prose française source et une faute de frappe à la recopie passait : la sonde `12,97 → 12,79` le montre |
 | 3 | ~~joindre les figures~~ ✅ **c'est une commande maintenant** — `src/outils/dossier_soumission.sh` rassemble le texte, ses figures et le journal des chiffres. ⭐⭐ La liste des figures est **dérivée du document** : toute image nommée entre backticks ci-dessous est copiée, donc en ajouter une au texte l'ajoute au dossier. ⚠ Et le script **refuse** de produire un dossier incomplet — un dossier auquel il manque une pièce ressemble à un dossier complet. Sonde faite : retirer `38_convergence.png` fait sortir en 1 |
 | 3 ter | ⭐⭐ joindre `43_optimum_du_pas.png` (la courbe en U du pas du rayon) et `44_geometrie_chaine.png` (où la chaîne se trouve dans le rouleau) — la sous-section « one tunable that decides everything » ne se lit pas sans la première, et la seconde est ce qui rend honnête la limite « une colonne, pas une bande » |

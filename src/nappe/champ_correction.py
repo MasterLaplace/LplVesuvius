@@ -350,6 +350,17 @@ def main() -> int:
             print(f"{'':30} champ : {len(vues['fenetres'])} fenetres "
                   f"({satures} saturees, a NE PAS appliquer) -> {cible}", flush=True)
 
+    # ⚠⚠ **Ne RIEN ecrire quand rien n'a ete mesure.** Un `[]` fait 2 octets, donc
+    # `[ -s "$out" ]` -- la garde de reprise des campagnes -- le prend pour un resultat et
+    # le segment n'est PLUS JAMAIS retente. Un echec transitoire (volume retire, reseau)
+    # devient alors permanent, en silence, et le compte final a l'air complet. Mesure le
+    # 2026-08-26 sur `20260623145652-w059-063`, dont le .zarr n'a plus de `.zarray` : la
+    # campagne a rendu 80 resumes pour 79 mesures.
+    if not rapport:
+        print("aucun segment mesure : rien n'est ecrit, pour que la campagne le retente",
+              file=sys.stderr)
+        return 1
+
     if args.out:
         args.out.write_text(json.dumps(rapport, indent=2) + "\n")
         print(f"\necrit : {args.out}")
