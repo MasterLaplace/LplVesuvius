@@ -1,9 +1,19 @@
 #!/bin/bash
 # Relancer TOUS les temoins du depot d'un coup.
 #
-# ⚠ Un depot dont on ne rejoue jamais les controles ne sait plus s'ils passent. Ceux-ci
-# tournent tous HORS LIGNE -- ni reseau, ni volume distant, ni cle d'API -- justement
-# pour qu'aucune raison exterieure ne puisse les empecher de tourner.
+# ⚠ Un depot dont on ne rejoue jamais les controles ne sait plus s'ils passent. Ils
+# tournent HORS LIGNE -- ni reseau, ni volume distant, ni cle d'API -- justement pour
+# qu'aucune raison exterieure ne puisse les empecher de tourner.
+#
+# ⚠⚠ AVEC UNE EXCEPTION, et il faut la nommer parce que la phrase ci-dessus etait
+# simplement FAUSSE avant le 2026-08-26 : « traceur d une graine » sonde un VRAI volume
+# sur S3. Elle le fait pour une raison qui tient -- prouver qu'une graine valide PASSE
+# demande de la vraie matiere, et une fixture ne prouverait que la fixture --, donc elle
+# peut rougir pour une coupure ou une bande passante saturee. Quand elle rouge, lire le
+# code que la sonde rend : 5 = la graine est refusee (un vrai defaut), 6 = la lecture a
+# echoue (l'environnement, pas le code). Paye ce jour-la : une campagne concurrente a
+# fait echouer cette batterie, et la meme sonde relancee seule a rendu « valeur au
+# point 34 ».
 #
 # Sort non nul si un seul echoue.
 set -u

@@ -93,6 +93,19 @@ if [ "${1:-}" = "--verifier" ]; then
   out=$(PREDICTION=ps256 DEST="$T_OK" TRACEUR=true \
         VOL="PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr" UM=2.4 \
         timeout 300 "$ROOT/src/outils/tracer_une_graine.sh" 10752 10616 38740 2>&1); rc=$?
+  # ⚠⚠ Les TROIS issues doivent être des codes DISTINCTS, et ce contrôle-ci est
+  # structurel donc hors ligne : « la graine est mauvaise » (5), « je n'ai pas pu lire »
+  # (6) et « ça va » ne peuvent pas partager un code, sinon le diagnostic désigne la
+  # mauvaise chose -- ce qui est arrivé le 2026-08-26, où une saturation de bande
+  # passante a été rapportée comme « cette graine ne désigne aucune matière ».
+  chk "refus de graine et échec de lecture ont des codes distincts" \
+      'grep -q "^    exit 5$" "$ROOT/src/outils/tracer_une_graine.sh" \
+       && grep -q "^    exit 6$" "$ROOT/src/outils/tracer_une_graine.sh"'
+  # ⚠ Les deux suivants, eux, TAPENT LE RÉSEAU -- c'est la seule batterie qui le fait, et
+  # l'en-tête de `temoins.sh` le dit. Les affaiblir pour qu'elles survivent à une coupure
+  # les rendrait vraies quoi qu'il arrive : un réseau mort ferait alors passer un garde
+  # qui n'a rien exercé. On préfère un rouge lisible, dont la cause est nommée par le
+  # code 6 que la sonde rend désormais.
   chk "une graine VALIDE passe la sonde" '[ "$rc" != 5 ]'
   chk "... et la sonde a bien trouvé de la matière" \
       'printf "%s" "$out" | grep -q "valeur au point"'
@@ -172,11 +185,48 @@ if [ "${SANS_SONDE:-0}" != 1 ]; then
   F=$((1 << NIV))
   SX=$((X * F)); SY=$((Y * F)); SZ=$((Z * F))
   echo "== sonde de graine : prédiction $NOM (niveau $NIV) → scan ($SZ, $SY, $SX)"
-  if ! uv run --project "$ROOT" python "$ROOT/src/nappe/matiere_au_point.py" \
-       --point "$SZ" "$SY" "$SX" --niveau 0 --volume "$VOL" 2>&1 | tee /dev/stderr \
-       | grep -q "valeur au point"; then
+  # ⚠⚠ Le code de sortie de la sonde est LU, et non celui d un tuyau. La version
+  # precedente faisait `… | tee | grep -q "valeur au point"`, donc c est le grep qui
+  # decidait -- et deux faits tres differents tombaient du meme cote :
+  #
+  #   * le volume n a pas repondu (reseau, chunk absent) : la sonde n imprime rien,
+  #     le grep echoue, et le refus AFFIRMAIT « cette graine ne designe aucune matiere ».
+  #     C est un enonce sur la GRAINE tire d une panne du RESEAU. Paye le 2026-08-26 :
+  #     la batterie a rougi pendant qu une campagne saturait la bande passante, et la
+  #     meme sonde relancee seule a rendu « valeur au point 34 ».
+  #   * le bloc est ENTIEREMENT VIDE : la sonde imprime « valeur au point 0 », donc le
+  #     grep REUSSIT et la graine passait -- c est-a-dire exactement le cas que le
+  #     message ci-dessous decrit et que ce garde n a jamais su attraper.
+  SONDE=$(uv run --project "$ROOT" python "$ROOT/src/nappe/matiere_au_point.py" \
+          --point "$SZ" "$SY" "$SX" --niveau 0 --volume "$VOL" 2>&1); RC_SONDE=$?
+  printf '%s\n' "$SONDE" >&2
+  # Une coordonnee hors du scan EST un jugement sur la graine, et la sonde le dit en clair.
+  if printf '%s' "$SONDE" | grep -q "HORS DU VOLUME"; then
+    echo "   ⚠⚠ refus : cette graine est en DEHORS du volume scanné." >&2
+    exit 5
+  fi
+  # ⚠⚠ Le VOLUME n'a pas repondu du tout : la sonde n'a pas pu lire la metadonnee du
+  # tableau, donc elle ne sait rien de cette coordonnee. Sur un volume qui existe, c'est
+  # du transport -- et ce n'est PAS un jugement sur la graine. C'est la panne payee le
+  # 2026-08-26, ou une campagne concurrente a fait rougir cette batterie et ou la meme
+  # sonde relancee seule a rendu « valeur au point 34 ».
+  if printf '%s' "$SONDE" | grep -qE "no \.zarray|Traceback"; then
+    echo "   ⚠⚠ le volume n'a pas répondu (code $RC_SONDE). Ce n'est PAS un jugement sur la" >&2
+    echo "      graine : la sonde n'a pas pu lire le tableau, donc elle ne sait rien de" >&2
+    echo "      cette coordonnée. Relancer, ou passer outre avec SANS_SONDE=1." >&2
+    exit 6
+  fi
+  # ⚠ Les deux refus qui portent bien sur la GRAINE : hors du scan, ou rien de scanne ici.
+  # « bloc absent du depot » veut dire que le chunk n'est pas stocke -- c'est-a-dire que
+  # rien n'a ete scanne la, ce que ce garde existe pour refuser. ⚠⚠ Il reste une ambiguite
+  # RESIDUELLE et il faut la nommer : `tracecheck.get` rend `None` pour un 404 comme pour
+  # une erreur de transport, donc un incident reseau sur le chunk se lirait ici comme une
+  # graine dans le vide. Le vrai correctif est dans `tracecheck.get`, qui devrait
+  # distinguer les deux ; en attendant, le message le dit plutot que de le taire.
+  if [ "$RC_SONDE" != 0 ] || printf '%s' "$SONDE" | grep -q "le bloc entier est VIDE"; then
     echo "   ⚠⚠ refus : cette graine ne désigne aucune matière scannée. Tracer ici produirait" >&2
     echo "      une surface dans le vide, et son rendu serait entièrement noir." >&2
+    echo "      (⚠ un incident réseau sur ce bloc se lirait pareil — relancer si c'est plausible.)" >&2
     echo "      Pour passer outre (hors ligne, ou graine volontairement dans le vide) :" >&2
     echo "      SANS_SONDE=1" >&2
     exit 5

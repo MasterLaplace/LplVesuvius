@@ -70,7 +70,7 @@ cohérence vient de la façon de compter et pas de la géométrie.
 |---|---|---|
 | J1 | outil : `src/nappe/champ_correction.py` | ✅ écrit |
 | J2 | ⚠ échantillonnage : **trouver la matière avant de la sonder** (6 fenêtres utiles sur 96 sans ça) | ✅ passe de repérage |
-| J3 | campagne sur les 80 segments de Scroll 1 | ✅ **80/80** battent leur témoin (p = 1,3e-25). `20` |
+| J3 | campagne sur les 80 segments de Scroll 1 | ✅ **80/80** battent leur témoin (p = 1,3e-25). `20` — *re-mesuré le 2026-08-26 : **79/79**, un segment ayant été retiré en amont (`20` §6)* |
 | J4 | la même sur Scroll 4 | ✅ **19/19** (p = 7,4e-08). ⚠ Le segment `20231111135340`, celui des 61 % au bord, **n'a pas de volume de surface publié** — mesuré sur les 19 qui en ont un |
 | J5 | corréler `residuel` et `coherence` aux croisements publiés | ✅ **résiduel +0,428** (p = 0,0012) contre les croisements, **−0,028** contre l'encre. Un défaut de la TRACE, pas du RÉSULTAT |
 | J6 | **appliquer** la translation et re-mesurer | ❌ **écarté avec la raison** : la mesure dit qu'une translation n'enlèverait que **21,7 %** de l'erreur (35,3 % sur Scroll 4) — *re-mesuré à **22,1 %** le 2026-08-26, sur 79 segments : un a été retiré en amont, trois ont changé (`20` §6)*. Le bon remède est un **gauchissement**, pas une translation — l'implémenter aurait été construire le mauvais outil |

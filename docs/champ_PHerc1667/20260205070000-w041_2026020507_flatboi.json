@@ -9,7 +9,7 @@
     "decalage_median_um": 55.177,
     "residuel_median_um": 65.9725,
     "residuel_p90_um": 91.64179999999998,
-    "part_au_bord": 0.3068181818181818,
+    "part_au_bord": 0.26136363636363635,
     "paires_voisines": 128,
     "coherence_voisins": 0.6197881256107975,
     "coherence_temoin_melange": -0.023899901392839994,

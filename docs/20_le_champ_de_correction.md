@@ -44,10 +44,12 @@ si la cohérence y survivait, elle viendrait de la façon de compter et non de l
 |---|---:|---:|---:|---|
 | Scroll 1 (PHercParis4, 2,4 µm) | 79 | **+0,325** | −0,008 | **79 / 79** (p = 3,6e-25) |
 | Scroll 4 (PHerc1667, 2,399 µm) | 19 | **+0,481** | −0,035 | **19 / 19** (p = 7,4e-08) |
-| Scroll 5 (PHerc0172, 7,91 µm) | 53 | +0,183 | −0,030 | **51 / 53** (p = 2,7e-15) |
+| Scroll 5 (PHerc0172, 7,91 µm) | 53 | +0,183 | −0,030 | **50 / 53** (p = 1,3e-14) |
 
-⚠ Scroll 5 est le seul où **deux segments** ne battent pas leur témoin, et sa cohérence
-médiane est la plus basse (+0,183). Son voxel fait **7,91 µm** contre 2,4 : à trois fois
+⚠ Scroll 5 est le seul où des segments ne battent pas leur témoin — **trois** depuis la
+re-mesure du 2026-08-26, contre deux auparavant : le troisième est
+`20251115002742-auto_grown_…_flatboi`, dont le volume amont a changé lui aussi (96 → 91
+fenêtres avec matière). Sa cohérence médiane est la plus basse (+0,183). Son voxel fait **7,91 µm** contre 2,4 : à trois fois
 moins de résolution, une déformation douce se lit sur trois fois moins de pas. À rapporter
 tel quel plutôt qu'à moyenner avec les deux autres.
 
@@ -337,9 +339,36 @@ toutes les fixtures de la batterie avaient une profondeur **paire**, c'est-à-di
 parité pour laquelle les deux rédactions coïncident. Le cas impair est maintenant dans la
 batterie, avec la couche `depth - 2` nommée comme piège.
 
-Sur les 79 segments de PHercParis4, la correction reclasse **75 fenêtres sur 7 499**,
-réparties sur **48 segments** — jamais plus de trois par segment. Elle ne déplace donc
-aucun verdict individuel ; ce qu'elle déplace est la corrélation de corpus du §6.
+### ⚠⚠ Ce que la correction déplace — et une prédiction faite avant la mesure, qui échoue
+
+La règle fausse comptait l'**avant-dernière** couche comme un bord, donc son effet est
+l'occupation de **cette couche-là**. Sur deux rouleaux à pile de 109 le taux mesuré est
+tombé sur le taux **uniforme** (1/109 = 0,92 %), ce qui suggérait une loi. Prédiction
+écrite avant de mesurer le troisième : une pile de **33** couches devrait donner **3,03 %**.
+
+| rouleau | pile | reclassées | segments | taux | uniforme 1/pile |
+|---|---:|---:|---:|---:|---:|
+| Scroll 1 (PHercParis4) | 109 | 75 / 7 499 | 48 / 79 | **1,00 %** | 0,92 % |
+| Scroll 4 (PHerc1667) | 109 | 17 / 1 741 | 8 / 19 | **0,98 %** | 0,92 % |
+| Scroll 5 (PHerc0172) | 33 | 108 / 4 987 | 45 / 53 | **2,17 %** | **3,03 %** |
+
+❌ **La prédiction échoue** : 2,17 % contre 3,03 % attendus, soit 28 % en dessous. La
+direction est bonne — une pile grossière est bien plus touchée — mais pas la loi.
+
+⚠ **Et le mécanisme évident est éliminé par la mesure, pas par l'argument.** J'ai supposé
+que la censure dépeuplait la couche voisine du bord : si les pics s'entassent à la borne,
+celle d'à côté serait creusée. **Scroll 4 le réfute** — c'est lui qui a la plus forte
+saturation (**15,4 %** contre 8,4 et 11,4) et c'est lui qui tombe exactement sur le taux
+uniforme. Une saturation deux fois plus forte ne creuse rien.
+
+> **Ce que le troisième rouleau apprend, c'est que les deux premiers s'accordaient pour
+> rien.** Deux mesures à 0,92 % attendu et 1,00 / 0,98 % obtenus ressemblaient à une loi ;
+> le cas à pile courte montre qu'il n'y en a pas. L'effet est l'occupation d'**une** couche
+> près du bord, et elle dépend de la distribution des pics à cet endroit — pas de 1/pile.
+> Avec les seules piles de 109, j'aurais publié « le taux est uniforme » comme un résultat.
+
+Elle ne déplace en revanche **aucun verdict individuel** — jamais plus de trois fenêtres
+par segment sur Scroll 1 ; ce qu'elle déplace est la corrélation de corpus du §6.
 
 ### ⭐ Ce que la censure coûte, et pourquoi la réponse est un ENCADREMENT
 
@@ -350,20 +379,28 @@ faux dans des sens **connus et opposés**, ce qui est précisément ce qui les r
 leur **paire encadre** la vérité. Même forme que le seuil que `prediction_50um` ne peut pas
 trancher, et écrire un seul des deux reviendrait à choisir un biais sans le dire.
 
-| sur les 79 segments | |
-|---|---:|
-| fenêtres exportées | **7 499** |
-| dont saturées | **630** |
-| part applicable, médiane | **0,927** |
-| part applicable, **pire segment** | **0,737** |
-| largeur de l'encadrement, médiane | **3,6 µm** |
-| largeur de l'encadrement, **maximum** | **30,0 µm** |
+| rouleau | fenêtres | saturées | part applicable (méd. / pire) | encadrement (méd. / max) |
+|---|---:|---:|---:|---:|
+| Scroll 1 (PHercParis4, pile 109) | 7 499 | 630 | 0,927 / 0,737 | 3,6 / **30,0 µm** |
+| Scroll 4 (PHerc1667, pile 109) | 1 741 | **268** | 0,860 / **0,615** | 9,6 / **82,8 µm** |
+| Scroll 5 (PHerc0172, pile 33) | 4 987 | 569 | 0,890 / 0,771 | **0,0** / 7,9 µm |
 
-⚠ **Et l'encadrement se lit contre les seuils du dépôt, pas contre un nombre choisi** :
+⚠⚠ **Et l'encadrement se lit contre les seuils du dépôt, pas contre un nombre choisi** :
 `carte_segments.py` publie **40 µm** (même feuille, raccordable) et **250 µm** (feuilles
-voisines). Le pire encadrement vaut 30 µm, donc il reste **sous** la bande « même
-feuille » : la censure ne déplace aucune décision de raccordement. C'est un biais réel,
-borné, et sans conséquence pratique — trois choses qu'il faut dire ensemble.
+voisines). Sur Scroll 1 le pire encadrement vaut 30 µm, donc **sous** la bande « même
+feuille » — mais sur **Scroll 4 il vaut 82,8 µm, soit le double du seuil**.
+
+> **Correction d'une affirmation que ce document portait depuis deux commits.** J'avais
+> écrit, sur les seuls chiffres de Scroll 1, que « la censure ne déplace aucune décision de
+> raccordement ». C'est vrai de Scroll 1 et **faux de Scroll 4**, où le pire segment n'a que
+> **61,5 %** de fenêtres applicables. Une propriété mesurée sur un rouleau et énoncée comme
+> générale : c'est exactement ce que ce dépôt reproche ailleurs à un chiffre emprunté, et
+> ce sont les deux campagnes suivantes qui l'ont attrapé.
+>
+> ⚠ Scroll 5 est le cas inverse et il mérite d'être dit : son encadrement médian vaut
+> **zéro**. Sa pile de 33 couches est trop grossière pour que retirer les bornes déplace
+> une médiane d'un cran — l'absence de biais y est un artefact de résolution, pas une
+> qualité de la trace.
 
 ⚠ Ce calcul n'est possible **que** grâce à l'export : un résumé porte la *part* censurée,
 jamais *quelles* fenêtres le sont, donc il ne permet pas de recalculer la médiane sans

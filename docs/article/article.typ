@@ -528,7 +528,7 @@ objects, so reads parallelise with no coordination. A whole segment is judged fr
       [$rho = +0.388$],
     [`residual`], [what remains after the best rigid shift], [$rho = +0.428$],
     [`rigid_share`], [share of the error a mesh translation would remove], [22.1 %],
-    [`coherence`], [does a window's error predict its neighbour's], [150/152],
+    [`coherence`], [does a window's error predict its neighbour's], [148/151],
   ),
   caption: [
     Fields measured remotely, and their correlation with an independent target: the

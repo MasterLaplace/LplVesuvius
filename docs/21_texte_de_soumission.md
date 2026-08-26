@@ -51,7 +51,7 @@ encore.
 > | `offset` | median distance from traced layer to material peak | rho +0.388 vs published self-crossings (n = 54, p = 0.004) |
 > | `residual` | what remains **after** the best rigid shift | **rho +0.428** vs the same crossings (p = 0.0012) |
 > | `rigid_share` | share of error a mesh translation would remove | **22.1 %** median over 79 segments |
-> | `coherence` | does a window's error predict its neighbour's | **150/152** segments over three scrolls beat their own shuffle control (80/80, 19/19, 51/53) |
+> | `coherence` | does a window's error predict its neighbour's | **148/151** segments over three scrolls beat their own shuffle control (79/79, 19/19, 50/53) |
 >
 > #### 3. The failure case we detected on real scroll data
 >

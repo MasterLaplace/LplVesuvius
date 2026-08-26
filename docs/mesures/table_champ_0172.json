@@ -7,8 +7,8 @@
   "signales": [],
   "coherence_mediane": 0.18288610750449047,
   "temoin_median": -0.030397105412273126,
-  "coherence_bat_temoin": 51,
-  "p_mann_whitney": 2.723298426534433e-15,
+  "coherence_bat_temoin": 50,
+  "p_mann_whitney": 1.3292380377216855e-14,
   "rho_detectable": 0.37669626558347646,
   "par_fenetre": {
     "residuel_median_um": {
@@ -26,5 +26,494 @@
       "p": 0.9413679285489941,
       "n": 44
     }
+  },
+  "censure": {
+    "segments": 53,
+    "fenetres": 4987,
+    "saturees": 569,
+    "part_applicable_mediane": 0.8901098901098901,
+    "part_applicable_min": 0.7708333333333334,
+    "segments_sans_mediane_mesuree": 0,
+    "ecart_des_deux_um_median": 0.0,
+    "ecart_des_deux_um_max": 7.91,
+    "par_segment": [
+      {
+        "segment": "20250917143559-w062_20250917143559205_flatboi",
+        "fenetres": 91,
+        "saturees": 10,
+        "part_applicable": 0.8901098901098901,
+        "decalage_tous_um": -15.82,
+        "decalage_mesurees_um": -15.82,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20250926112011-w078_20250926112011918_flatboi",
+        "fenetres": 88,
+        "saturees": 6,
+        "part_applicable": 0.9318181818181818,
+        "decalage_tous_um": -7.91,
+        "decalage_mesurees_um": -7.91,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20250926113336-w079_20250926113336891_flatboi",
+        "fenetres": 96,
+        "saturees": 9,
+        "part_applicable": 0.90625,
+        "decalage_tous_um": 0.0,
+        "decalage_mesurees_um": 0.0,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20250926114310-w080_20250926114310705_flatboi",
+        "fenetres": 92,
+        "saturees": 11,
+        "part_applicable": 0.8804347826086957,
+        "decalage_tous_um": -7.91,
+        "decalage_mesurees_um": -7.91,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20250926122938-w082_20250926122938619_flatboi",
+        "fenetres": 86,
+        "saturees": 7,
+        "part_applicable": 0.9186046511627907,
+        "decalage_tous_um": -15.82,
+        "decalage_mesurees_um": -15.82,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20250926132117-w083_20250926132117595_flatboi",
+        "fenetres": 94,
+        "saturees": 10,
+        "part_applicable": 0.8936170212765957,
+        "decalage_tous_um": -7.91,
+        "decalage_mesurees_um": -3.955,
+        "ecart_des_deux_um": 3.955
+      },
+      {
+        "segment": "20250926145427-w084_20250926145427439_flatboi",
+        "fenetres": 96,
+        "saturees": 17,
+        "part_applicable": 0.8229166666666666,
+        "decalage_tous_um": -7.91,
+        "decalage_mesurees_um": -7.91,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20250926150345-w086_20250926150345176_flatboi",
+        "fenetres": 96,
+        "saturees": 14,
+        "part_applicable": 0.8541666666666666,
+        "decalage_tous_um": -15.82,
+        "decalage_mesurees_um": -15.82,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20250926153406-w088_20250926153406704_flatboi",
+        "fenetres": 91,
+        "saturees": 10,
+        "part_applicable": 0.8901098901098901,
+        "decalage_tous_um": -7.91,
+        "decalage_mesurees_um": -7.91,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251106133152-w077_20251106133152767_flatboi",
+        "fenetres": 96,
+        "saturees": 22,
+        "part_applicable": 0.7708333333333334,
+        "decalage_tous_um": 0.0,
+        "decalage_mesurees_um": -7.91,
+        "ecart_des_deux_um": -7.91
+      },
+      {
+        "segment": "20251106170358-w076_20251106170358232_flatboi",
+        "fenetres": 96,
+        "saturees": 11,
+        "part_applicable": 0.8854166666666666,
+        "decalage_tous_um": 7.91,
+        "decalage_mesurees_um": 0.0,
+        "ecart_des_deux_um": -7.91
+      },
+      {
+        "segment": "20251107063327-w063_20251107063327215_flatboi",
+        "fenetres": 92,
+        "saturees": 7,
+        "part_applicable": 0.9239130434782609,
+        "decalage_tous_um": -19.775,
+        "decalage_mesurees_um": -15.82,
+        "ecart_des_deux_um": 3.9549999999999983
+      },
+      {
+        "segment": "20251107110950-w064_20251107110950052_flatboi",
+        "fenetres": 92,
+        "saturees": 12,
+        "part_applicable": 0.8695652173913043,
+        "decalage_tous_um": -15.82,
+        "decalage_mesurees_um": -15.82,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251107175958-w061_20251107175958270_flatboi",
+        "fenetres": 93,
+        "saturees": 14,
+        "part_applicable": 0.8494623655913979,
+        "decalage_tous_um": -15.82,
+        "decalage_mesurees_um": -15.82,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251109232817-w065_20251109232817724_flatboi",
+        "fenetres": 93,
+        "saturees": 12,
+        "part_applicable": 0.8709677419354839,
+        "decalage_tous_um": -23.73,
+        "decalage_mesurees_um": -31.64,
+        "ecart_des_deux_um": -7.91
+      },
+      {
+        "segment": "20251110110112-w066_20251110110112608_flatboi",
+        "fenetres": 94,
+        "saturees": 11,
+        "part_applicable": 0.8829787234042553,
+        "decalage_tous_um": -19.775,
+        "decalage_mesurees_um": -15.82,
+        "ecart_des_deux_um": 3.9549999999999983
+      },
+      {
+        "segment": "20251110135146-w085_20251110135146457_flatboi",
+        "fenetres": 95,
+        "saturees": 4,
+        "part_applicable": 0.9578947368421052,
+        "decalage_tous_um": -15.82,
+        "decalage_mesurees_um": -15.82,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251110135803-w067_20251110135803677_flatboi",
+        "fenetres": 93,
+        "saturees": 10,
+        "part_applicable": 0.8924731182795699,
+        "decalage_tous_um": -15.82,
+        "decalage_mesurees_um": -15.82,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251111010954-w068_20251111010954408_flatboi",
+        "fenetres": 90,
+        "saturees": 11,
+        "part_applicable": 0.8777777777777778,
+        "decalage_tous_um": -27.685000000000002,
+        "decalage_mesurees_um": -23.73,
+        "ecart_des_deux_um": 3.955000000000002
+      },
+      {
+        "segment": "20251111151836-w069_20251111151836406_flatboi",
+        "fenetres": 95,
+        "saturees": 8,
+        "part_applicable": 0.9157894736842105,
+        "decalage_tous_um": -7.91,
+        "decalage_mesurees_um": -7.91,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251111210734-w070_20251111210734722_flatboi",
+        "fenetres": 96,
+        "saturees": 11,
+        "part_applicable": 0.8854166666666666,
+        "decalage_tous_um": -7.91,
+        "decalage_mesurees_um": -7.91,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251112000002-w087_20251112000002214_flatboi",
+        "fenetres": 96,
+        "saturees": 12,
+        "part_applicable": 0.875,
+        "decalage_tous_um": -15.82,
+        "decalage_mesurees_um": -15.82,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251112163527-w071_20251112163527854_flatboi",
+        "fenetres": 92,
+        "saturees": 14,
+        "part_applicable": 0.8478260869565217,
+        "decalage_tous_um": -11.865,
+        "decalage_mesurees_um": -7.91,
+        "ecart_des_deux_um": 3.955
+      },
+      {
+        "segment": "20251113021010-w072_20251113021010674_flatboi",
+        "fenetres": 92,
+        "saturees": 10,
+        "part_applicable": 0.8913043478260869,
+        "decalage_tous_um": -7.91,
+        "decalage_mesurees_um": -7.91,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251113130119-w073_20251113130119516_flatboi",
+        "fenetres": 96,
+        "saturees": 18,
+        "part_applicable": 0.8125,
+        "decalage_tous_um": -7.91,
+        "decalage_mesurees_um": -7.91,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251113152136-w074_20251113152136889_flatboi",
+        "fenetres": 91,
+        "saturees": 10,
+        "part_applicable": 0.8901098901098901,
+        "decalage_tous_um": -7.91,
+        "decalage_mesurees_um": -15.82,
+        "ecart_des_deux_um": -7.91
+      },
+      {
+        "segment": "20251113204233-w075_20251113204233755_flatboi",
+        "fenetres": 96,
+        "saturees": 20,
+        "part_applicable": 0.7916666666666666,
+        "decalage_tous_um": -3.955,
+        "decalage_mesurees_um": 0.0,
+        "ecart_des_deux_um": 3.955
+      },
+      {
+        "segment": "20251114202035-w081_20251114202035261_flatboi",
+        "fenetres": 96,
+        "saturees": 13,
+        "part_applicable": 0.8645833333333334,
+        "decalage_tous_um": -23.73,
+        "decalage_mesurees_um": -23.73,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251115002740-auto_grown_20251115002740308_0_flatboi",
+        "fenetres": 96,
+        "saturees": 10,
+        "part_applicable": 0.8958333333333334,
+        "decalage_tous_um": -39.55,
+        "decalage_mesurees_um": -39.55,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251115002741-auto_grown_20251115002740308_1_flatboi",
+        "fenetres": 96,
+        "saturees": 5,
+        "part_applicable": 0.9479166666666666,
+        "decalage_tous_um": -31.64,
+        "decalage_mesurees_um": -31.64,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251115002742-auto_grown_20251115002740308_2_flatboi",
+        "fenetres": 91,
+        "saturees": 8,
+        "part_applicable": 0.9120879120879121,
+        "decalage_tous_um": -15.82,
+        "decalage_mesurees_um": -23.73,
+        "ecart_des_deux_um": -7.91
+      },
+      {
+        "segment": "20251115002743-auto_grown_20251115002740308_3_flatboi",
+        "fenetres": 96,
+        "saturees": 11,
+        "part_applicable": 0.8854166666666666,
+        "decalage_tous_um": -27.685000000000002,
+        "decalage_mesurees_um": -31.64,
+        "ecart_des_deux_um": -3.9549999999999983
+      },
+      {
+        "segment": "20251115002744-auto_grown_20251115002740308_4_flatboi",
+        "fenetres": 96,
+        "saturees": 8,
+        "part_applicable": 0.9166666666666666,
+        "decalage_tous_um": -23.73,
+        "decalage_mesurees_um": -23.73,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251115002745-auto_grown_20251115002740308_5_flatboi",
+        "fenetres": 96,
+        "saturees": 11,
+        "part_applicable": 0.8854166666666666,
+        "decalage_tous_um": -23.73,
+        "decalage_mesurees_um": -15.82,
+        "ecart_des_deux_um": 7.91
+      },
+      {
+        "segment": "20251115002746-auto_grown_20251115002740308_6_flatboi",
+        "fenetres": 96,
+        "saturees": 10,
+        "part_applicable": 0.8958333333333334,
+        "decalage_tous_um": -23.73,
+        "decalage_mesurees_um": -23.73,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251115002747-auto_grown_20251115002740308_7_flatboi",
+        "fenetres": 96,
+        "saturees": 10,
+        "part_applicable": 0.8958333333333334,
+        "decalage_tous_um": -15.82,
+        "decalage_mesurees_um": -15.82,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251115002748-auto_grown_20251115002740308_8_flatboi",
+        "fenetres": 96,
+        "saturees": 9,
+        "part_applicable": 0.90625,
+        "decalage_tous_um": -7.91,
+        "decalage_mesurees_um": -15.82,
+        "ecart_des_deux_um": -7.91
+      },
+      {
+        "segment": "20251203230500-w089_20251203230500465_flatboi",
+        "fenetres": 94,
+        "saturees": 21,
+        "part_applicable": 0.776595744680851,
+        "decalage_tous_um": 15.82,
+        "decalage_mesurees_um": 7.91,
+        "ecart_des_deux_um": -7.91
+      },
+      {
+        "segment": "20251204060522-w090_20251204060522416_flatboi",
+        "fenetres": 94,
+        "saturees": 11,
+        "part_applicable": 0.8829787234042553,
+        "decalage_tous_um": -23.73,
+        "decalage_mesurees_um": -23.73,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251204071911-w091_20251204071911070_flatboi",
+        "fenetres": 96,
+        "saturees": 12,
+        "part_applicable": 0.875,
+        "decalage_tous_um": 3.955,
+        "decalage_mesurees_um": 11.865,
+        "ecart_des_deux_um": 7.91
+      },
+      {
+        "segment": "20251204101314-w092_20251204101314959_flatboi",
+        "fenetres": 96,
+        "saturees": 8,
+        "part_applicable": 0.9166666666666666,
+        "decalage_tous_um": -15.82,
+        "decalage_mesurees_um": -15.82,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251204192708-w093_20251204192708445_flatboi",
+        "fenetres": 96,
+        "saturees": 18,
+        "part_applicable": 0.8125,
+        "decalage_tous_um": 11.865,
+        "decalage_mesurees_um": 11.865,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251205115859-w094_20251205115859448_flatboi",
+        "fenetres": 94,
+        "saturees": 7,
+        "part_applicable": 0.925531914893617,
+        "decalage_tous_um": 23.73,
+        "decalage_mesurees_um": 15.82,
+        "ecart_des_deux_um": -7.91
+      },
+      {
+        "segment": "20251206184729-w095_20251206184729906_flatboi",
+        "fenetres": 91,
+        "saturees": 10,
+        "part_applicable": 0.8901098901098901,
+        "decalage_tous_um": -7.91,
+        "decalage_mesurees_um": -7.91,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251207123912-w060_20251207123912611_flatboi",
+        "fenetres": 93,
+        "saturees": 15,
+        "part_applicable": 0.8387096774193549,
+        "decalage_tous_um": -7.91,
+        "decalage_mesurees_um": -7.91,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251210142414-w059_20251210142414060_flatboi",
+        "fenetres": 96,
+        "saturees": 4,
+        "part_applicable": 0.9583333333333334,
+        "decalage_tous_um": 0.0,
+        "decalage_mesurees_um": 0.0,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251210153304-w058_20251210153304503_flatboi",
+        "fenetres": 94,
+        "saturees": 5,
+        "part_applicable": 0.9468085106382979,
+        "decalage_tous_um": -15.82,
+        "decalage_mesurees_um": -15.82,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251210160810-w057_20251210160810301_flatboi",
+        "fenetres": 94,
+        "saturees": 6,
+        "part_applicable": 0.9361702127659575,
+        "decalage_tous_um": -23.73,
+        "decalage_mesurees_um": -23.73,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251211095724-w056_20251211095724922_flatboi",
+        "fenetres": 96,
+        "saturees": 10,
+        "part_applicable": 0.8958333333333334,
+        "decalage_tous_um": -23.73,
+        "decalage_mesurees_um": -23.73,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251211111451-w055_20251211111451620_flatboi",
+        "fenetres": 96,
+        "saturees": 13,
+        "part_applicable": 0.8645833333333334,
+        "decalage_tous_um": -23.73,
+        "decalage_mesurees_um": -23.73,
+        "ecart_des_deux_um": 0.0
+      },
+      {
+        "segment": "20251211135303-w054_20251211135303394_flatboi",
+        "fenetres": 94,
+        "saturees": 7,
+        "part_applicable": 0.925531914893617,
+        "decalage_tous_um": -7.91,
+        "decalage_mesurees_um": -15.82,
+        "ecart_des_deux_um": -7.91
+      },
+      {
+        "segment": "20251211152543-w053_20251211152543204_flatboi",
+        "fenetres": 94,
+        "saturees": 9,
+        "part_applicable": 0.9042553191489362,
+        "decalage_tous_um": -23.73,
+        "decalage_mesurees_um": -15.82,
+        "ecart_des_deux_um": 7.91
+      },
+      {
+        "segment": "20251212105627-w052_20251212105627148_flatboi",
+        "fenetres": 96,
+        "saturees": 7,
+        "part_applicable": 0.9270833333333334,
+        "decalage_tous_um": -23.73,
+        "decalage_mesurees_um": -23.73,
+        "ecart_des_deux_um": 0.0
+      }
+    ]
   }
 }
