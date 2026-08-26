@@ -2,7 +2,7 @@
 # Les temoins de la BRANCHE DE RELEASE : exactement ce qui est livre, et rien d autre.
 #
 # ⚠⚠ Pourquoi une seconde batterie plutot que la premiere. `temoins.sh` appelle
-# `experiments/`, `inference/`, `inference_xpu/` et `repos/`, que la release ne porte pas --
+# `src/excision/`, `inference/`, `src/xpu/` et `data/repos/`, que la release ne porte pas --
 # elle echouerait donc pour la seule raison qu il s agit d une release. Un controle qui ne
 # peut pas passer cesse d etre lu, et une release qu on ne verifie pas n en est pas une.
 #
@@ -34,7 +34,7 @@ trap 'rm -f "$VERROU"' EXIT INT TERM
 FAIL=0; BATTERIES=0; CONTROLES=0
 
 # ⚠⚠ Certains controles dependent d une entree qui n est PAS livree : le depot amont clone
-# dans `repos/`, ou le code d une experience que la release ne porte pas. Sur l arbre
+# dans `data/repos/`, ou le code d une experience que la release ne porte pas. Sur l arbre
 # complet ils tournent ; sur l arbre allege ils echoueraient pour la seule raison que leur
 # entree est ailleurs.
 #
@@ -45,8 +45,8 @@ FAIL=0; BATTERIES=0; CONTROLES=0
 #   poids_growpatch     lit GrowPatch.cpp du depot amont volume-cartographer
 #   artefacts_orphelins exige que le producteur de chaque artefact soit dans l arbre
 declare -A DEPEND=(
-  [poids_growpatch]="repos/villa/volume-cartographer"
-  [artefacts_orphelins]="experiments/src/excision"
+  [poids_growpatch]="data/repos/villa/volume-cartographer"
+  [artefacts_orphelins]="src/excision/src/excision"
 )
 SAUTES=0
 
@@ -86,8 +86,8 @@ echo "TEMOINS DE LA RELEASE — tout hors ligne"
 echo
 
 # ── Le livrable ────────────────────────────────────────────────────────────────
-run "tracecheck"               uv run --project "$ROOT" python "$ROOT/tracecheck/selftest.py"
-run "tracecheck : mutation"    uv run --project "$ROOT" python "$ROOT/tracecheck/mutation.py"
+run "tracecheck"               uv run --project "$ROOT" python "$ROOT/src/tracecheck/selftest.py"
+run "tracecheck : mutation"    uv run --project "$ROOT" python "$ROOT/src/tracecheck/mutation.py"
 
 # ── Les instruments livres, decouverts et non listes ───────────────────────────
 # ⚠⚠ La liste est DERIVEE de l arbre, pas ecrite a la main : un instrument ajoute demain
@@ -116,8 +116,8 @@ done
 # restent DURES -- c est precisement la que « chaque nombre est verifiable » doit tenir.
 printf '  %-36s ' "chiffres de l'article"
 if uv run --project "$ROOT" python "$ROOT/src/depot/verifier_chiffres.py" \
-     "$ROOT/article/article.typ" "$ROOT"/docs/*.md \
-     --article "$ROOT/article/article.typ" \
+     "$ROOT/docs/article/article.typ" "$ROOT"/docs/*.md \
+     --article "$ROOT/docs/article/article.typ" \
      --soumission "$ROOT/docs/21_texte_de_soumission.md" \
      --hors-perimetre > /tmp/release_chiffres.log 2>&1; then
   printf '✅ %s\n' "$(grep -c '✅' /tmp/release_chiffres.log) chiffres retrouves"

@@ -29,6 +29,7 @@ si ça change : départager, c'est choisir à la place de l'auteur sans le lui d
 from __future__ import annotations
 
 import argparse
+import ast
 import json
 import os
 import subprocess
@@ -41,18 +42,20 @@ RACINE = Path(__file__).resolve().parents[2]
 FAMILLES: tuple[tuple[str, str], ...] = (
     ("src/*/*.py", "python"),
     ("src/*/*.sh", "shell"),
-    ("tracecheck/*.py", "python"),
-    ("inference_xpu/src/*.py", "python"),
-    ("experiments/src/*/*.py", "python"),
 )
-"""Où vivent les greffons. ⚠ Même liste que `artefacts_orphelins.SOURCES` : deux listes de
+"""Où vivent les greffons — **deux motifs**, depuis que `tracecheck/`, `experiments/` et
+`inference_xpu/` sont repliés dans `src/` (2026-08-26). La liste en portait cinq, un par
+dossier de premier niveau : elle ENREGISTRAIT la dispersion. Qu'elle se réduise à
+« tout ce qui est dans une famille de `src/` » est le signe que la disposition est juste.
+
+⚠ Même liste que `artefacts_orphelins.SOURCES` : deux listes de
 « où est le code de ce dépôt » finiraient par ne pas s'accorder, et c'est déjà arrivé ici.
 `appelants.scripts_du_depot()` la lit désormais aussi — il jugeait `src/` seul, donc un
 orphelin hors de `src/` lui était invisible, et il y en avait quatre.
 
 ⚠⚠ Ce n'est PAS « tout le Python du dépôt », c'est **ce que ce point d'entrée sait lancer**.
-`apprendre/scenes/*.py` en est délibérément absent : ce sont des définitions de scènes Manim,
-exécutées par `manim <fichier> <Scene>` depuis `apprendre/rendre.sh`, pas des programmes. Les
+`src/apprendre/*.py` en est délibérément absent : ce sont des définitions de scènes Manim,
+exécutées par `manim <fichier> <Scene>` depuis `src/apprendre/rendre.sh`, pas des programmes. Les
 ajouter créerait des verbes qui échouent sur `lplv <verbe> --help`, puisqu'ils n'ont pas de
 ligne de commande — et un verbe qu'on ne peut pas exécuter est pire que pas de verbe. Pour la
 même raison, `appelants.py` ne doit pas les compter comme orphelins : `rendre.sh` les exécute
@@ -126,6 +129,52 @@ def expose(chemin: Path, option: str) -> bool:
     return f'= "{option}" ]' in texte or f"{option})" in texte
 
 
+NEUTRES_AU_MODULE = (ast.Import, ast.ImportFrom, ast.FunctionDef, ast.AsyncFunctionDef,
+                     ast.ClassDef, ast.Assign, ast.AnnAssign, ast.Try, ast.Pass)
+"""Ce qu'un module peut porter sans rien LANCER : des imports, des définitions, des
+constantes. Tout le reste travaille au chargement, donc se lance."""
+
+
+def est_un_programme(chemin: Path) -> bool:
+    """Ce fichier se LANCE-t-il, ou ne fait-il que définir ?
+
+    ⚠⚠ POURQUOI CETTE QUESTION EXISTE. Replier `src/apprendre/` dans `src/` a fait entrer huit
+    **scènes Manim** dans le glob des verbes — or une scène n'a pas de ligne de commande :
+    elle est une classe que `manim <fichier> <Scene>` instancie. `lplv 01_suivre_une_feuille
+    --help` échouait donc sur `ModuleNotFoundError: manim`, et **un verbe qu'on ne peut pas
+    exécuter est pire que pas de verbe**.
+
+    ⭐ La règle est DÉRIVÉE, pas une liste d'exceptions : un programme a une garde
+    `__main__`, ou bien du travail au niveau du module. Mesurée sur l'arbre, elle écarte
+    exactement neuf fichiers — les huit scènes, plus `telecharger.py`, qui est une
+    bibliothèque extraite pour un second appelant et n'a jamais été un verbe non plus.
+    Une liste de dossiers exclus aurait raté ce neuvième.
+
+    ⚠ Et `sys.path.insert(...)` au niveau du module ne compte pas comme du travail : c'est
+    la plomberie d'import que ce dépôt écrit partout. La compter ferait de chaque
+    bibliothèque un programme, donc annulerait la règle.
+    """
+    if chemin.suffix != ".py":
+        return True   # ⚠ Un `.sh` sans point d entree n existe pas : un script shell se lance.
+    try:
+        arbre = ast.parse(chemin.read_text(encoding="utf-8", errors="replace"))
+    except (OSError, SyntaxError):
+        return True   # ⚠ Illisible : on ne RETIRE pas un verbe sur un doute.
+    for n in arbre.body:
+        if isinstance(n, ast.If):
+            return True
+        if isinstance(n, NEUTRES_AU_MODULE):
+            continue
+        if isinstance(n, ast.Expr):
+            if isinstance(n.value, ast.Constant) and isinstance(n.value.value, str):
+                continue
+            if ast.unparse(n.value).startswith(("sys.path", "warnings.")):
+                continue
+            return True
+        return True
+    return False
+
+
 def decouvrir(racine: Path = RACINE) -> list[Verbe]:
     """Tous les verbes, triés par nom. Lève `VerbeAmbigu` si deux fichiers se disputent un nom."""
     par_nom: dict[str, Verbe] = {}
@@ -140,6 +189,9 @@ def decouvrir(racine: Path = RACINE) -> list[Verbe]:
             # SEUL fichier de l'arbre dans ce cas, et le seul sans résumé -- les deux
             # symptômes désignent la même chose.
             if nom.startswith("_"):
+                continue
+            # ⚠ Une DÉFINITION n'est pas un verbe : voir `est_un_programme`.
+            if not est_un_programme(f):
                 continue
             v = Verbe(nom=nom, chemin=f, langage=langage, resume=resume_de(f),
                       verifie=expose(f, "--verifier"), donne_json=expose(f, "--json"))
@@ -259,8 +311,18 @@ def verifier() -> int:
     sh = d / "src" / "outils" / "lancer_un_truc.sh"
     sh.write_text('#!/usr/bin/env bash\n# Lancer un truc, en une phrase.\n# Et le detail apres.\nset -u\n'
                   'if [ "${1:-}" = "--json" ]; then echo x; fi\n', encoding="utf-8")
+    # ⚠ Le fichier muet doit rester un PROGRAMME, sinon il est ecarte comme definition et
+    # ne teste plus ce pour quoi il existe : « pas de docstring » et « pas un verbe » sont
+    # deux choses. Sa garde `__main__` suffit.
     muet = d / "src" / "mesures" / "sans_docstring.py"
-    muet.write_text("#!/usr/bin/env python3\nimport sys\n", encoding="utf-8")
+    muet.write_text('#!/usr/bin/env python3\nimport sys\n'
+                    'if __name__ == "__main__":\n    sys.exit(0)\n', encoding="utf-8")
+    # ⚠⚠ Et une DEFINITION -- ici une classe, comme une scene Manim -- ne doit PAS devenir
+    # un verbe : `lplv <elle> --help` echouerait, et un verbe qu on ne peut pas executer est
+    # pire que pas de verbe.
+    scene = d / "src" / "mesures" / "une_scene.py"
+    scene.write_text('"""Une scene, pas un programme."""\nimport sys\n\n\n'
+                     'class Scene:\n    pass\n', encoding="utf-8")
     prive = d / "src" / "mesures" / "__init__.py"
     prive.write_text('"""paquet"""\n', encoding="utf-8")
 
@@ -285,10 +347,30 @@ def verifier() -> int:
       trouver(verbes, "lancer_un_truc").langage == "shell"
       and trouver(verbes, "mesurer_un_truc").langage == "python")
     v("la liste est triee", noms == sorted(noms))
+    # ⚠⚠ La regle programme/definition, dans les DEUX sens. Replier `src/apprendre/` dans `src/`
+    # avait fait entrer huit scenes Manim dans le glob : `lplv <scene> --help` echouait sur
+    # un import manquant, et un verbe qu on ne peut pas executer est pire que pas de verbe.
+    v("une definition n'est pas un verbe", "une_scene" not in noms)
+    v("... et un programme sans docstring en est un", "sans_docstring" in noms)
+    v("la regle est derivee du fichier, pas d'une liste", not est_un_programme(scene))
+    v("... et une garde __main__ suffit a faire un programme", est_un_programme(muet))
+    v("... comme du travail au niveau du module", est_un_programme(py))
+    # ⚠ Un `.sh` n a pas de garde : un script shell se lance, point.
+    v("... et un script shell se lance toujours", est_un_programme(sh))
+    # ⚠ Sur CE depot : la regle doit ecarter les scenes et RIEN de ce qui se lance.
+    reels = [x.nom for x in decouvrir(RACINE)]
+    v("aucune scene pedagogique n'est un verbe de ce depot",
+      not any(n[:2].isdigit() and n[2] == "_" for n in reels))
+    v("... et les verbes du depot restent nombreux", len(reels) > 200)
 
     # ⚠⚠ Le controle central : deux fichiers qui revendiquent un nom sont une ambiguite
     # SILENCIEUSE -- `lplv x` lancerait celui que le systeme de fichiers a mis devant. Refuse.
-    (d / "src" / "outils" / "mesurer_un_truc.py").write_text('"""Un homonyme."""\n', encoding="utf-8")
+    # ⚠ L homonyme doit etre un PROGRAMME, sinon il est ecarte comme definition et
+    # l ambiguite qu il doit provoquer n arrive jamais -- le controle passerait pour la
+    # mauvaise raison.
+    (d / "src" / "outils" / "mesurer_un_truc.py").write_text(
+        '"""Un homonyme."""\nimport sys\nif __name__ == "__main__":\n    sys.exit(0)\n',
+        encoding="utf-8")
     try:
         decouvrir(d)
         v("un nom revendique deux fois est REFUSE", False)
@@ -334,10 +416,10 @@ def verifier() -> int:
     recensement = d / "recensement.json"
     recensement.write_text(json.dumps([
         {"nom": "mesurer_un_truc", "chemin": "src/mesures/mesurer_un_truc.py"},
-        {"nom": "parti_ailleurs", "chemin": "experiments/src/excision/parti_ailleurs.py"},
+        {"nom": "parti_ailleurs", "chemin": "src/excision/src/excision/parti_ailleurs.py"},
     ]), encoding="utf-8")
     v("un verbe du recensement absent d'ici est LOCALISÉ",
-      connu_ailleurs("parti_ailleurs", recensement) == "experiments/src/excision")
+      connu_ailleurs("parti_ailleurs", recensement) == "src/excision/src/excision")
     v("un nom qui n'a jamais existé rend None",
       connu_ailleurs("jamais_vu", recensement) is None)
     v("sans recensement, on ne prétend rien savoir",

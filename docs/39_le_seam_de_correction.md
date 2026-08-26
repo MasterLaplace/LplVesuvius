@@ -99,6 +99,6 @@ pas comme panne du script — c'est précisément ce qu'il faut savoir.
 ```bash
 ./src/outils/lancer.sh --fond src/outils/boucle_de_correction.sh   # la boucle entière, appariée
 vc_grow_seg_from_seed --help          # les cinq options de reprise
-grep -n "corrections" repos/villa/volume-cartographer/apps/src/vc_grow_seg_from_seed.cpp
-sed -n '560,600p' repos/villa/volume-cartographer/core/src/GrowPatch.cpp   # PointCorrection
+grep -n "corrections" data/repos/villa/volume-cartographer/apps/src/vc_grow_seg_from_seed.cpp
+sed -n '560,600p' data/repos/villa/volume-cartographer/core/src/GrowPatch.cpp   # PointCorrection
 ```

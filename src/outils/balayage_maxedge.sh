@@ -37,7 +37,7 @@ if [ -z "$PROPRE" ]; then
   PROPRE=$(python3 -c "
 import json, glob, os, sys
 ref = None
-m = '$ROOT/artefacts/PHerc0358/mesh.tifxyz/meta.json'
+m = '$ROOT/data/artefacts/PHerc0358/mesh.tifxyz/meta.json'
 if os.path.exists(m): ref = json.load(open(m)).get('area_cm2')
 best, ecart = None, None
 for f in glob.glob('$ROOT/data/trace/PHerc0358/thread_limit/*/resume.json'):

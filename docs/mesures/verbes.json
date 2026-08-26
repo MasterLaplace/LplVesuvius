@@ -1,7 +1,7 @@
 [
  {
   "nom": "analyse",
-  "chemin": "experiments/src/excision/analyse.py",
+  "chemin": "src/excision/analyse.py",
   "langage": "python",
   "resume": "Compare la distribution d'intensite CT des cellules excisees et des temoins.",
   "verifie": false,
@@ -81,7 +81,7 @@
  },
  {
   "nom": "baseline_sweep",
-  "chemin": "experiments/src/excision/baseline_sweep.py",
+  "chemin": "src/excision/baseline_sweep.py",
   "langage": "python",
   "resume": "La ligne de base « locale » de `proximity.py` n'est pas locale. Balayer les remedes.",
   "verifie": false,
@@ -345,7 +345,7 @@
  },
  {
   "nom": "correlate",
-  "chemin": "experiments/src/excision/correlate.py",
+  "chemin": "src/excision/correlate.py",
   "langage": "python",
   "resume": "Joint les mesures de proximite a l'index publie de `windcheck`.",
   "verifie": false,
@@ -366,6 +366,14 @@
   "resume": "Combien coûte notre mesure sur 53 rouleaux, et sur les 800 de la villa ?",
   "verifie": false,
   "json": false
+ },
+ {
+  "nom": "couverture_publiee",
+  "chemin": "src/nappe/couverture_publiee.py",
+  "langage": "python",
+  "resume": "Jusqu'où la chaîne reste-t-elle DANS le segment publié — donc en territoire connu ?",
+  "verifie": true,
+  "json": true
  },
  {
   "nom": "critere_relatif",
@@ -720,6 +728,14 @@
   "json": false
  },
  {
+  "nom": "figure_couverture",
+  "chemin": "src/figures/figure_couverture.py",
+  "langage": "python",
+  "resume": "La chaîne GLISSE hors de la feuille connue — elle n'y saute pas.",
+  "verifie": true,
+  "json": false
+ },
+ {
   "nom": "figure_derive_profondeur",
   "chemin": "src/figures/figure_derive_profondeur.py",
   "langage": "python",
@@ -993,7 +1009,7 @@
  },
  {
   "nom": "fusion_scan",
-  "chemin": "experiments/src/excision/fusion_scan.py",
+  "chemin": "src/excision/fusion_scan.py",
   "langage": "python",
   "resume": "Les sites suspects persistent-ils le long de z, ou sont-ils du bruit de coupe ?",
   "verifie": false,
@@ -1001,7 +1017,7 @@
  },
  {
   "nom": "fusions",
-  "chemin": "experiments/src/excision/fusions.py",
+  "chemin": "src/excision/fusions.py",
   "langage": "python",
   "resume": "Localiser les fusions de feuilles en SUIVANT les spires, pas en les recomptant.",
   "verifie": false,
@@ -1041,7 +1057,7 @@
  },
  {
   "nom": "infer_ink",
-  "chemin": "inference_xpu/src/infer_ink.py",
+  "chemin": "src/xpu/infer_ink.py",
   "langage": "python",
   "resume": "Detection d'encre par fenetre glissante, a partir des couches publiees.",
   "verifie": true,
@@ -1169,7 +1185,7 @@
  },
  {
   "nom": "measure",
-  "chemin": "experiments/src/excision/measure.py",
+  "chemin": "src/excision/measure.py",
   "langage": "python",
   "resume": "Mesure ce que les cellules excisees par `windcheck` echantillonnaient dans le CT.",
   "verifie": false,
@@ -1201,7 +1217,7 @@
  },
  {
   "nom": "mutation",
-  "chemin": "tracecheck/mutation.py",
+  "chemin": "src/tracecheck/mutation.py",
   "langage": "python",
   "resume": "Chaque détecteur doit porter du poids : le débrancher doit faire ROUGIR selftest.",
   "verifie": false,
@@ -1313,7 +1329,7 @@
  },
  {
   "nom": "proximity",
-  "chemin": "experiments/src/excision/proximity.py",
+  "chemin": "src/excision/proximity.py",
   "langage": "python",
   "resume": "Mesure la proximite anormale entre regions NON ADJACENTES d'une trace aplatie.",
   "verifie": false,
@@ -1329,7 +1345,7 @@
  },
  {
   "nom": "pyramid",
-  "chemin": "experiments/src/excision/pyramid.py",
+  "chemin": "src/excision/pyramid.py",
   "langage": "python",
   "resume": "Jusqu'a quelle resolution les spires restent-elles separables ?",
   "verifie": false,
@@ -1337,7 +1353,7 @@
  },
  {
   "nom": "radial",
-  "chemin": "experiments/src/excision/radial.py",
+  "chemin": "src/excision/radial.py",
   "langage": "python",
   "resume": "L'onde radiale : compter les feuilles depuis l'axe, et deplier la coupe.",
   "verifie": false,
@@ -1400,6 +1416,14 @@
   "json": false
  },
  {
+  "nom": "rendre",
+  "chemin": "src/apprendre/rendre.sh",
+  "langage": "shell",
+  "resume": "Rendre une video pedagogique, l assembler, et en EXTRAIRE des vignettes.",
+  "verifie": true,
+  "json": false
+ },
+ {
   "nom": "rendre_surveille",
   "chemin": "src/outils/rendre_surveille.sh",
   "langage": "shell",
@@ -1425,7 +1449,7 @@
  },
  {
   "nom": "repro_empty_verdict",
-  "chemin": "tracecheck/repro_empty_verdict.py",
+  "chemin": "src/tracecheck/repro_empty_verdict.py",
   "langage": "python",
   "resume": "Minimal reproducer: `vc_tifxyz_selfcross` can report `clean` having tested nothing.",
   "verifie": false,
@@ -1456,6 +1480,22 @@
   "json": false
  },
  {
+  "nom": "run_measure",
+  "chemin": "src/excision/run_measure.sh",
+  "langage": "shell",
+  "resume": "Echantillonne le CT aux cellules excisees, pour tous les segments deja reparis.",
+  "verifie": false,
+  "json": false
+ },
+ {
+  "nom": "run_proximity",
+  "chemin": "src/excision/run_proximity.sh",
+  "langage": "shell",
+  "resume": "Passe la metrique de proximite sur tous les segments d'un corpus local.",
+  "verifie": false,
+  "json": false
+ },
+ {
   "nom": "s3_size",
   "chemin": "src/outils/s3_size.py",
   "langage": "python",
@@ -1481,7 +1521,7 @@
  },
  {
   "nom": "selftest",
-  "chemin": "tracecheck/selftest.py",
+  "chemin": "src/tracecheck/selftest.py",
   "langage": "python",
   "resume": "Offline controls for tracecheck — no network, no bucket, no credentials.",
   "verifie": false,
@@ -1497,7 +1537,7 @@
  },
  {
   "nom": "sensibilite_centre",
-  "chemin": "experiments/src/excision/sensibilite_centre.py",
+  "chemin": "src/excision/sensibilite_centre.py",
   "langage": "python",
   "resume": "L'invariant rayon/feuilles survit-il à un centre faux ? — la question de `06` §2.3.",
   "verifie": false,
@@ -1521,7 +1561,7 @@
  },
  {
   "nom": "shape",
-  "chemin": "experiments/src/excision/shape.py",
+  "chemin": "src/excision/shape.py",
   "langage": "python",
   "resume": "Deux questions de FORME sur une coupe : le dommage, et l'ecrasement.",
   "verifie": false,
@@ -1672,14 +1712,6 @@
   "json": true
  },
  {
-  "nom": "telecharger",
-  "chemin": "src/outils/telecharger.py",
-  "langage": "python",
-  "resume": "Un pool de connexions HTTPS persistantes, une par fil.",
-  "verifie": false,
-  "json": false
- },
- {
   "nom": "temoin_du_rendu",
   "chemin": "src/outils/temoin_du_rendu.sh",
   "langage": "shell",
@@ -1737,7 +1769,7 @@
  },
  {
   "nom": "tracecheck",
-  "chemin": "tracecheck/tracecheck.py",
+  "chemin": "src/tracecheck/tracecheck.py",
   "langage": "python",
   "resume": "tracecheck — judge a segment's trace before you spend anything on it.",
   "verifie": false,
@@ -1769,7 +1801,7 @@
  },
  {
   "nom": "track_z",
-  "chemin": "experiments/src/excision/track_z.py",
+  "chemin": "src/excision/track_z.py",
   "langage": "python",
   "resume": "Un site suspect fait-il UN millimetre de haut, ou DERIVE-t-il sur plusieurs ?",
   "verifie": false,
@@ -1817,7 +1849,7 @@
  },
  {
   "nom": "variant_correlate",
-  "chemin": "experiments/src/excision/variant_correlate.py",
+  "chemin": "src/excision/variant_correlate.py",
   "langage": "python",
   "resume": "Chaque definition de reference locale corrige-t-elle quelque chose ?",
   "verifie": false,

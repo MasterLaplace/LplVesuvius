@@ -159,19 +159,34 @@ réécriture touche, et c'est ce qui empêche `restantes()` d'être vraie par co
 """
 
 
+def _sans_le_neuf(texte: str, nouveau: str) -> str:
+    """Le texte, ses occurrences du chemin NEUF masquées.
+
+    ⚠⚠ Replier un dossier DANS un sous-dossier produit un chemin neuf qui CONTIENT l'ancien :
+    `x/build.sh` rangé sous `docs/` devient `docs/x/build.sh`. Chercher l'ancien dans le texte
+    réécrit le retrouve donc **à l'intérieur du neuf**, et l'outil refuse son propre travail
+    correct. Mesuré : 40 fausses citations pendantes en rangeant `docs/article/` dans `docs/`.
+
+    ⭐ Le masquage se fait ICI et pas dans le motif de `citations()`, parce que c'est ici
+    qu'on connaît les DEUX chemins. Une règle dans le motif devrait deviner, et ma première
+    tentative — refuser un `/` précédé d'un mot — cassait `"$ROOT/analysis/src/x.py"`, qui
+    est une citation parfaitement légitime. Deux contrôles l'ont dit tout de suite.
+    """
+    return texte.replace(nouveau, "\x00" * len(nouveau))
+
+
 def _partage(racine: Path, deplacements: list[Deplacement]):
     """Les citations subsistantes, séparées en (à réparer, traces historiques)."""
     morts, traces = [], []
-    anciens = [d.ancien for d in deplacements]
     for f in tous_les_textes(racine):
         try:
             texte = f.read_text(encoding="utf-8", errors="replace")
         except OSError:
             continue
         ou = traces if f.suffix in ENREGISTREMENTS else morts
-        for a in anciens:
-            if citations(texte, a):
-                ou.append((str(f.relative_to(racine)), a))
+        for d in deplacements:
+            if citations(_sans_le_neuf(texte, d.nouveau), d.ancien):
+                ou.append((str(f.relative_to(racine)), d.ancien))
     return morts, traces
 
 
@@ -419,6 +434,22 @@ def verifier() -> int:
         v("une citation dans un fichier non réécrit et non-résultat fait REFUSER", True)
         v("... et le refus la nomme", "config.yaml" in str(e))
     shutil.rmtree(d3, ignore_errors=True)
+
+    # ⚠⚠ Replier un dossier DANS un sous-dossier produit un chemin neuf qui CONTIENT
+    # l ancien. Sans le second regard en arriere, chaque citation correctement reecrite
+    # etait recomptee comme pendante et l outil refusait son propre travail -- mesure :
+    # 40 fausses pendantes en rangeant `docs/article/` dans `docs/article/`.
+    # ⚠ La fixture ne nomme AUCUN chemin reel de l arbre : sinon l outil, applique a lui-meme,
+    # reecrirait sa propre batterie. `vieux/outil.sh` n existe pas et n existera pas.
+    v("une citation deja reecrite dans un sous-dossier ne compte plus",
+      citations(_sans_le_neuf("voir neuf/vieux/outil.sh", "neuf/vieux/outil.sh"),
+                "vieux/outil.sh") == 0)
+    v("... mais la citation nue compte, elle",
+      citations(_sans_le_neuf("voir vieux/outil.sh", "neuf/vieux/outil.sh"),
+                "vieux/outil.sh") == 1)
+    v("... et une citation de VARIABLE reste une citation",
+      citations(_sans_le_neuf('voir "$ROOT/vieux/outil.sh"', "neuf/vieux/outil.sh"),
+                "vieux/outil.sh") == 1)
 
     # ⚠ Un chemin ASSEMBLÉ ne peut pas être réécrit : il est NOMMÉ, jamais tu.
     (d2 / "docs" / "bricole.py").write_text('p = "analysis/src/" + nom + ".py"\n', encoding="utf-8")

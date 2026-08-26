@@ -28,28 +28,49 @@ import sys
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parents[2]
-# ⚠ `experiments/src` en fait partie : `docs/11` nomme
-# `experiments/src/excision/sensibilite_centre.py`, et l'omettre faisait signaler comme
+# ⚠ `src/excision` en fait partie : `docs/11` nomme
+# `src/excision/sensibilite_centre.py`, et l'omettre faisait signaler comme
 # orphelin un artefact parfaitement produit. Une liste de sources trop etroite fabrique
 # des faux positifs, et un audit qui en fabrique cesse d'etre lu.
-SOURCES = ("src", "tracecheck", "experiments/src", "inference_xpu/src")
+SOURCES = ("src",)
+"""⚠ UN seul dossier depuis le repli du 2026-08-26 : `tracecheck/`, `experiments/` et
+`inference_xpu/` sont des familles de `src/`. La liste en portait quatre, une par dossier de
+premier niveau — qu'elle se reduise a une est le signe que la disposition est juste."""
 SUFFIXES = (".json", ".jsonl", ".tsv", ".txt")
 
 # ⚠ Ces artefacts sont produits par une chaine externe (VC3D, un outil `vc_*`) ou sont des
 # entrees plutot que des sorties. Les exclure est une DECISION, pas un oubli : chacun est
 # nomme, et la raison avec.
 EXEMPTS = {
-    "docs/mesures/excision_samples.tsv": "sortie de l'experience d'excision (experiments/src/excision)",
+    "docs/mesures/excision_samples.tsv": "sortie de l'experience d'excision (src/excision)",
     "src/outils/repos.tsv": "manifeste ecrit a la main, pas une mesure",
 }
+
+
+ELAGUES = (".venv", "__pycache__", ".git", "node_modules")
+"""⚠⚠ Ce qu il ne faut PAS traverser. `rglob("*")` descend dans un dossier avant de le
+jeter : depuis que les environnements virtuels vivent avec leur code (`src/xpu/.venv`,
+6,3 Gio), un parcours non elague lit des dizaines de milliers de fichiers de
+`site-packages`. Mesure : ce controle est passe de 90 secondes a **plus de 47 minutes**
+sans rien produire de plus. Troisieme fois que ce depot paie `rglob` non elague."""
 
 
 def corpus_scripts() -> str:
     parts = []
     for d in SOURCES:
-        for f in (RACINE / d).rglob("*"):
-            if f.suffix in (".py", ".sh") and "__pycache__" not in str(f):
-                parts.append(f.read_text(encoding="utf-8", errors="replace"))
+        pile = [RACINE / d]
+        while pile:
+            dossier = pile.pop()
+            try:
+                entrees = list(dossier.iterdir())
+            except OSError:
+                continue
+            for f in entrees:
+                if f.is_dir():
+                    if f.name not in ELAGUES:
+                        pile.append(f)
+                elif f.suffix in (".py", ".sh"):
+                    parts.append(f.read_text(encoding="utf-8", errors="replace"))
     return "\n".join(parts)
 
 

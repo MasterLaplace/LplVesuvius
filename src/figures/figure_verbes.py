@@ -7,7 +7,7 @@ pas en bâtir une avant le deuxième implémenteur réel ; il y en a deux cent d
 uniforme, et il leur manquait seulement un registre.
 
 ⭐ Les deux colonnes disent la propriété des paliers : le **palier de release** ne porte ni
-`experiments/src` ni `inference_xpu/src`, et `lplv` y rend **203 verbes au lieu de 217, sans
+`src/xpu` ni `src/excision`, et `lplv` y rend **moins de verbes que sur l'arbre complet, sans
 erreur ni configuration**. Un palier est ADDITIF, pas divergent — une famille absente
 contribue zéro.
 
@@ -98,13 +98,20 @@ def verifier() -> int:
     v("deux familles restent deux familles", set(r) == {"a", "b"})
 
     gardes = familles_de_la_release()
-    v("les gardes de la release se lisent dans le script", "src" in gardes)
+    # ⚠ La liste blanche ne contient plus `src` en bloc mais des FAMILLES : verifier
+    # « `src` en fait partie » testerait exactement ce que le repli a supprime.
+    v("les gardes de la release se lisent dans le script",
+      any(g.startswith("src/") for g in gardes))
     v("... et la release porte bien src/", porte("src/figures", gardes))
     v("... et src/outils", porte("src/outils", gardes))
     # ⭐ Le contrôle qui donne son sens à la figure : sans famille absente, les deux colonnes
     # seraient identiques et la propriété des paliers ne se verrait pas.
-    v("... et PAS experiments/src", not porte("experiments/src/excision", gardes))
-    v("... ni inference_xpu/src", not porte("inference_xpu/src", gardes))
+    # ⭐ Ce sont maintenant des FAMILLES de `src/` (repli du 2026-08-26), et la liste
+    # blanche de la release les nomme une par une pour cette raison exacte : garder
+    # `src` en bloc les embarquerait.
+    v("... et PAS src/xpu", not porte("src/xpu", gardes))
+    v("... ni src/excision", not porte("src/excision", gardes))
+    v("... ni src/apprendre", not porte("src/apprendre", gardes))
     v("un script de release absent ne fait pas planter", familles_de_la_release(Path("/nexiste/pas")) == set())
     # ⭐ La hauteur DOIT suivre le nombre de familles : une hauteur fixe a coupe la
     # legende le jour ou le depot est passe de 5 a 13 familles.

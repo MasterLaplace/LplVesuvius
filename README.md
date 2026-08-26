@@ -16,17 +16,17 @@ repository builds measurements that a trace can answer **about itself**.
 
 ```bash
 # 1. the deliverable answers for itself: 38 offline checks, no network
-uv run --project . python tracecheck/selftest.py
+uv run --project . python src/tracecheck/selftest.py
 
 # 2. every instrument in the tree, offline, one line per battery
 ./src/outils/temoins.sh
 
 # 3. judge a published segment remotely, before downloading 32 GB
-uv run --project . python tracecheck/tracecheck.py Scroll1 20230702185753 --voxel-um 2.4
+uv run --project . python src/tracecheck/tracecheck.py Scroll1 20230702185753 --voxel-um 2.4
 ```
 
 Dependencies are declared at the root, so the tool runs from a fresh clone with no
-sub-project to set up. Rebuilding the paper is `./article/build.sh`.
+sub-project to set up. Rebuilding the paper is `./docs/article/build.sh`.
 
 ## Every instrument, from one entry point
 
@@ -61,7 +61,7 @@ because a list of options copied into a README is stale before it is read.
 | a trace can be judged **without ground truth**, by reading it at two window depths | `src/commun/test_convergence.py`, paper section 3 |
 | stability across runs can be an artefact of a **shared generation budget**, not of the scroll | paper section 5.2, dispersion 0.55 % to 86 % once the budget is raised |
 | an ink model can return the **same map** on a surface geometrically proven to follow no sheet | paper section 6.4, correlation +0.9979 |
-| a trace's quality can be read **remotely**, from published surface volumes | `tracecheck/`, paper section 4 |
+| a trace's quality can be read **remotely**, from published surface volumes | `src/tracecheck/`, paper section 4 |
 
 Every number in the paper is recomputed from a result file and searched literally inside the
 text. `src/depot/verifier_chiffres.py` fails if a published number no longer matches what
@@ -73,12 +73,14 @@ its source produces. This is what makes "reproducible" a check rather than a wor
 
 | path | what it holds |
 |---|---|
-| `tracecheck/` | the deliverable: one file, numpy only, 16 offline self-tests |
-| `article/` | the paper, its typst sources, its english figures, `build.sh` |
-| `src/` | the instruments, grouped in families: `figures/`, `tables/`, `nappe/`, `volume/`, `encre/`, `graine/`, `commun/`, `depot/`, `outils/`, `campagnes/` |
-| `tools/` | the campaigns that produce results, and `temoins.sh` that checks everything |
-| `docs/*.json` | the result files every published number is recomputed from |
+| `src/tracecheck/` | the deliverable: one file, numpy only, 16 offline self-tests |
+| `docs/article/` | the paper, its typst sources, its english figures, `build.sh` |
+| `src/` | **everything the repository runs**, in fourteen families: `figures/`, `tables/`, `nappe/`, `volume/`, `encre/`, `graine/`, `commun/`, `depot/`, `outils/`, `campagnes/`, `excision/`, `xpu/`, `apprendre/`, `tracecheck/` |
+| `src/campagnes/`, `src/outils/` | the campaigns that produce results, and `temoins.sh` that checks everything |
+| `docs/mesures/*.json` | the result files every published number is recomputed from |
 | `docs/*.md` | the working notebook, in french: one document per measurement, dated |
+| `docs/journaux/`, `docs/registres/`, `docs/images/` | run traces, hand-kept tables, figures |
+| `data/` | everything re-downloadable, and `data/artefacts/` which is versioned on purpose |
 
 ⚠ The working documents are in french and stay that way. They are the audit trail, not the
 publication; the paper is the publication and it stands alone.
@@ -111,7 +113,7 @@ This section is the one worth reading twice.
 ## Reproducing a specific number
 
 Each working document ends with a `Reproduire` block holding the exact commands. The result
-files in `docs/*.json` are the inputs to `verifier_chiffres.py`, which is what the battery
+files in `docs/mesures/*.json` are the inputs to `verifier_chiffres.py`, which is what the battery
 runs. If a document and its result file disagree, the battery fails and names both.
 
 ---

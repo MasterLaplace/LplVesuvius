@@ -123,7 +123,7 @@ print(c[0]['x'], c[0]['y'], c[0]['z']) if c else sys.exit(1)")" || { echo "== gr
   # d'en ecrire un neuf garde tous les autres parametres identiques entre les deux
   # predictions -- c'est ce qui fait de la comparaison une comparaison.
   if [ ! -s "$W/seed.json" ]; then
-    python3 - "$ROOT/artefacts/PHerc0358/seed.json" "$W/seed.json" "$UM" "$GENERATIONS" <<'PY'
+    python3 - "$ROOT/data/artefacts/PHerc0358/seed.json" "$W/seed.json" "$UM" "$GENERATIONS" <<'PY'
 import json, sys
 src, dst, um, gen = sys.argv[1], sys.argv[2], float(sys.argv[3]), int(sys.argv[4])
 d = json.load(open(src))

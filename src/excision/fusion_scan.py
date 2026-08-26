@@ -56,8 +56,8 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from excision.fusions import doubling_density, gap_map  # noqa: E402
-from excision.radial import (  # noqa: E402
+from fusions import doubling_density, gap_map  # noqa: E402
+from radial import (  # noqa: E402
     VOXEL_UM,
     load_centre,
     open_volume,

@@ -1,7 +1,7 @@
 # La réparation ne déplace pas le défaut : une mesure qui le montre
 
 2026-08-17. Résultat sur PHercParis4 (Scroll 1), 46 traces mesurées.
-Rejouable : `experiments/src/excision/{proximity,correlate}.py`.
+Rejouable : `src/excision/src/excision/{proximity,correlate}.py`.
 
 > **En une phrase** : la réparation d'auto-intersection ramène les contacts à zéro
 > et **ne change pas** la proximité anormale entre régions non adjacentes. La mesure
@@ -241,9 +241,9 @@ uniforme aurait été un décalage d'échelle, sans effet sur un rang de Spearma
 ```bash
 cd experiments
 uv run python src/excision/baseline_sweep.py \
-    ../repos/windcheck/data/scroll1_tifxyz ../docs/mesures/baseline_sweep_scroll1.jsonl
+    ../data/repos/windcheck/data/scroll1_tifxyz ../docs/mesures/baseline_sweep_scroll1.jsonl
 uv run python src/excision/variant_correlate.py \
-    ../docs/mesures/baseline_sweep_scroll1.jsonl ../repos/windcheck/results/index.json
+    ../docs/mesures/baseline_sweep_scroll1.jsonl ../data/repos/windcheck/results/index.json
 ```
 
 ---
@@ -436,5 +436,5 @@ rouleau. C'est exactement le régime où la correction compte.
 cd experiments
 uv run python src/excision/baseline_sweep.py <traces> <sortie.jsonl> --search-radius 18
 uv run python src/excision/variant_correlate.py <sortie.jsonl> \
-    ../repos/windcheck/results/index.json --corpus "Scroll 1"
+    ../data/repos/windcheck/results/index.json --corpus "Scroll 1"
 ```

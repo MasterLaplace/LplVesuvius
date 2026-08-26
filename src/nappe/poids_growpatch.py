@@ -21,7 +21,7 @@ exactement ce qui a produit l'erreur : la ligne affiche SURFACE_SDT, la cle est
 ni effet -- donc une faute de nom est invisible a l'execution.
 
 Usage :
-    python3 src/nappe/poids_growpatch.py [--source repos/villa] [--json sortie.json]
+    python3 src/nappe/poids_growpatch.py [--source data/repos/villa] [--json sortie.json]
     python3 src/nappe/poids_growpatch.py --verifier   # sort 3 si la doc et le source
                                                           # ne s'accordent pas
 """
@@ -159,7 +159,7 @@ JAMAIS = {"surface_sdt_weight", "spaceline_weight"}
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--source", default=str(RACINE / "repos" / "villa"),
+    ap.add_argument("--source", default=str(RACINE / "data" / "repos" / "villa"),
                     help="racine du depot villa clone")
     ap.add_argument("--json", help="ecrire la table en JSON")
     ap.add_argument("--verifier", action="store_true",

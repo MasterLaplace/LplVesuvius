@@ -1,7 +1,7 @@
 # Première passe complète : des couches au texte lisible
 
 2026-08-17. Premier bout-en-bout du pipeline, avec vérité terrain publiée.
-Rejouable : `inference_xpu/src/infer_ink.py`.
+Rejouable : `src/xpu/infer_ink.py`.
 
 ---
 

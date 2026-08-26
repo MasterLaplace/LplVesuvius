@@ -7,6 +7,64 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+## ⭐⭐⭐⭐⭐ TROIS DOSSIERS — `src/`, `docs/`, `data/`, et rien d'autre
+
+`tracecheck/`, `experiments/`, `inference_xpu/`, `apprendre/`, `article/`, `artefacts/`,
+`repos/`, `site/` et `soumission/` sont **repliés**. La racine ne porte plus que trois
+dossiers et les fichiers qui doivent y être (`README`, `LICENSE`, `pyproject.toml`, `lplv`).
+
+| ce qui était à la racine | où c'est | pourquoi là |
+|---|---|---|
+| `tracecheck/` | `src/tracecheck/` | c'est du code de ce dépôt |
+| `experiments/src/excision/` | `src/excision/` | idem, et son `pyproject` est replié dans celui de la racine |
+| `inference_xpu/` | `src/xpu/` | son `pyproject` **reste avec son code** : torch/XPU épingle Python 3.13 et un index maison |
+| `apprendre/` | `src/apprendre/` | à plat, comme toutes les familles |
+| `article/` | `docs/article/` | c'est un document |
+| `artefacts/` | `data/artefacts/` | ce sont des données |
+| `repos/`, `site/`, `soumission/` | `data/` | tout ça se retélécharge |
+
+⭐ **Le signe que la disposition est juste, c'est que trois listes se sont RÉDUITES.**
+`lplv.FAMILLES` passe de cinq motifs à **deux** (`src/*/*.py`, `src/*/*.sh`),
+`artefacts_orphelins.SOURCES` de quatre entrées à **une**, et `temoins.sh` perd ses **six**
+changements de projet — il n'y a plus qu'un environnement à part, celui de `src/xpu`. Chacune
+de ces listes ENREGISTRAIT la dispersion.
+
+### ⚠⚠ Ce que le repli a cassé, et qu'il a fallu réparer
+
+- **La liste blanche de la release se serait élargie toute seule.** Elle gardait `src` en
+  bloc et laissait dehors `experiments/` et `inference_xpu/`, qui étaient des dossiers de
+  premier niveau. Devenus des familles de `src/`, ils y seraient entrés — **6,3 Gio
+  d'environnement torch dans la release, sans qu'une ligne ne change**. Les familles sont
+  désormais listées **une par une**, et un contrôle échoue si `src` réapparaît en bloc.
+- ⚠⚠⚠ **Un contrôle est passé de 90 secondes à plus de 47 MINUTES** — et il n'a jamais rendu
+  la main. `artefacts_orphelins` faisait `rglob("*")` sur `src/`, qui contient maintenant
+  `src/xpu/.venv` : 8 885 fichiers de `site-packages` lus, puis cherchés dans un corpus de
+  centaines de mégaoctets. Élagué à la traversée. **Troisième fois que ce dépôt paie un
+  `rglob` non élagué**, et la règle est maintenant écrite dans les deux walkers concernés.
+- **Huit verbes qu'on ne pouvait pas exécuter.** Replier `apprendre/` a fait entrer huit
+  **scènes Manim** dans le glob des verbes — or une scène n'a pas de ligne de commande, donc
+  `lplv <scène> --help` échouait. ⭐ La règle qui les écarte est **dérivée, pas une liste
+  d'exceptions** : un programme a une garde `__main__` ou du travail au niveau du module.
+  Mesurée sur l'arbre, elle écarte exactement neuf fichiers — les huit scènes **plus**
+  `telecharger.py`, une bibliothèque qu'une liste de dossiers aurait ratée.
+- **`deplacer.py` refusait son propre travail correct.** Ranger `article/` sous `docs/`
+  produit un chemin neuf qui **contient** l'ancien, donc chaque citation déjà réécrite était
+  recomptée comme pendante : **40 fausses pendantes**. ⚠ Et ma première correction — refuser
+  un `/` précédé d'un mot — cassait `"$ROOT/analysis/src/x.py"`, une citation parfaitement
+  légitime ; deux contrôles l'ont dit tout de suite. Le masquage se fait donc là où l'outil
+  connaît les **deux** chemins, pas dans le motif qui n'en connaît qu'un.
+- **Un manque de dépendance rendu visible.** `src/volume/region_locale.py` importe `zarr`, et
+  la racine ne le déclarait pas : il ne marchait **que lancé depuis `experiments/`**,
+  c'est-à-dire par accident de répertoire courant. ⚠ Et `zarr` 2.x exige `numcodecs < 0.16`
+  (`cbuffer_sizes` a disparu en 0.16) — l'environnement qui marchait portait 0.15.1, la
+  racine 0.16.5.
+
+⚠ `data/venvs_perimes/` garde l'environnement de `experiments/`, devenu inutile puisque ses
+dépendances sont dans la racine. **Rien n'a été effacé** ; c'est reconstructible par
+`uv sync`, et le dossier porte un `LISEZMOI` qui le dit.
+
+---
+
 ## ⭐⭐⭐⭐⭐ LA CHAÎNE **GLISSE** HORS DE LA FEUILLE CONNUE — elle n'y SAUTE pas
 
 Et on le sait **sans encre et sans rendre un seul voxel**. Le raisonnement qui manquait tient
@@ -59,7 +117,7 @@ une opération **réseau**, pas de calcul.
 ⚠⚠ **Piège d'outillage payé en enregistrant la batterie** : `temoins.sh` **change de projet en
 changeant de répertoire** (`cd "$ROOT/experiments"`, `cd "$ROOT/inference_xpu"`), donc
 *l'endroit* où une batterie est enregistrée décide de *l'environnement* qu'elle reçoit.
-`experiments/` n'a pas PIL : une figure dont la batterie **dessine vraiment** y échoue sur un
+`src/excision/` n'a pas PIL : une figure dont la batterie **dessine vraiment** y échoue sur un
 `ModuleNotFoundError` qui ne dit rien de la figure. Les figures voisines de cette région s'en
 tirent parce qu'elles importent PIL **à l'intérieur d'une fonction** — donc leur batterie ne
 dessine pas, ce qui est exactement ce qu'on ne veut pas. Les deux nouvelles batteries sont
@@ -112,33 +170,26 @@ document 44** qui écrivent `$PWD/docs/chaine_*.json`, des fichiers *qui n'exist
   **produit** par `./lplv --verbes --json`. Le classer en registre l'aurait mis hors de portée
   d'une purge de sorties alors que c'en est une.
 
-### ⭐ « Un seul dossier `src/` » — la question est TRANCHÉE, avec la raison de chacun
+### ⚠⚠ CORRECTION — ma section d'hier disait l'inverse, et c'est l'auteur qui a tranché
 
-Six dossiers versionnés vivent encore à côté de `src/`, `docs/` et `data/`. Trois autres
-(`repos/`, `site/`, `soumission/`) sont **gitignorés** : qui clone ne les reçoit pas, donc ils
-ne sont pas la question.
-
-| dossier | fichiers suivis | pourquoi il reste |
-|---|---:|---|
-| `experiments/` | 17 | **son propre `pyproject.toml`** — l'expérience d'excision a un autre jeu de dépendances |
-| `inference_xpu/` | 3 | **son propre `uv.lock`** — torch/XPU ne doit pas entrer dans l'environnement principal |
-| `tracecheck/` | 5 | **outil public**, avec son README, publié séparément |
-| `apprendre/` | 10 | **son propre environnement manim**, son `rendre.sh`, son README |
-| `article/` | 21 | source **typst**, un livrable, pas du code |
-| `artefacts/` | 14 | ⚠⚠ ce sont des **données versionnées** (le mesh `PHerc0358`) — et `data/` est **gitignoré**, donc les y déplacer les ferait DISPARAÎTRE du dépôt |
-
-⭐ Quatre ont une raison de dépendances, une est un livrable, et la dernière disparaîtrait si
-on la « rangeait ». Aucune n'est du désordre.
+J'avais écrit que les six dossiers restants avaient chacun « une raison » de rester : un
+environnement de dépendances, un livrable, des données versionnées. **L'auteur a redemandé le
+repli deux fois**, et il avait raison sur le fond : une raison de rester n'est pas la même
+chose qu'une raison d'être à la RACINE. Un environnement de dépendances peut vivre **avec son
+code** (`src/xpu/pyproject.toml`), un livrable est un document (`docs/article/`), et des
+données versionnées sont des données (`data/artefacts/`, avec l'exception `.gitignore` qui
+va avec). Les trois « raisons » étaient des raisons de ne pas fusionner les
+environnements — pas de garder neuf dossiers de premier niveau.
 
 ### ⚠⚠ Deux réponses à « qu'est-ce qu'un script de ce dépôt », et elles avaient divergé
 
-`lplv.FAMILLES` nomme **cinq** familles (`src/`, `tracecheck/`, `inference_xpu/src/`,
-`experiments/src/`) pendant qu'`appelants.py` jugeait **`src/` seul**, en dur. Donc `lplv`
+`lplv.FAMILLES` nomme **cinq** familles (`src/`, `src/tracecheck/`, `src/xpu/`,
+`src/excision/src/`) pendant qu'`appelants.py` jugeait **`src/` seul**, en dur. Donc `lplv`
 savait lancer un verbe dont le garde-fou ne se demandait jamais si quelque chose l'exécutait :
 **un orphelin hors de `src/` était invisible par construction**. Mesuré après unification :
 **214 → 233 scripts jugés**, **27 → 31 orphelins**, les quatre nouveaux tous hors de `src/`.
 
-⚠ Et `FAMILLES` n'est pas « tout le Python du dépôt » : `apprendre/scenes/*.py` en est
+⚠ Et `FAMILLES` n'est pas « tout le Python du dépôt » : `src/apprendre/*.py` en est
 **délibérément** absent. Ce sont des définitions de scènes Manim, exécutées par
 `manim <fichier> <Scene>`, pas des programmes — en faire des verbes créerait des verbes qui
 échouent sur `lplv <verbe> --help`. La raison est écrite là où quelqu'un voudra les ajouter.
@@ -375,8 +426,8 @@ occurrences indentées → `IndentationError`) ; sept chemins assemblés ; et le
 `lancer.sh` a attrapé que le **gel** d'un script doit vivre à la profondeur que ce script
 suppose — les scripts remontant de deux crans, `.lances/` devient `.lances/gel/`.
 
-⚠ **N'ont PAS bougé** : `tracecheck/` (le livrable que l'article décrit), `experiments/` et
-`inference_xpu/` (chacun son environnement). Décision par dossier, pas coup de balai.
+⚠ **N'ont PAS bougé** : `src/tracecheck/` (le livrable que l'article décrit), `src/excision/` et
+`src/xpu/` (chacun son environnement). Décision par dossier, pas coup de balai.
 
 **Tout passe par `./lplv`** — `./lplv --help`, `./lplv <verbe> --help`, `./lplv --version` —
 donc plus personne n'a besoin de connaître un chemin, et un reclassement futur est invisible.
@@ -441,7 +492,7 @@ suppression, et **deux chiffres du plan corrigés d'un facteur quatre**.
 |---|---|---|
 | `htr/` | **retiré** | un seul fichier, remplacé par `src/encre/structure.py`, **zéro site d'appel** sous quelque orthographe |
 | `inference/` | **reste**, venv retiré | son README argumente qu'il est le **témoin CPU** du ×4,5 iGPU validé à sortie identique ; `pyproject`+`uv.lock` versionnés → rejouable |
-| `inference_xpu/` | **reste entier** | c'est l'environnement de l'encre, et l'encre est le prochain chantier nommé |
+| `src/xpu/` | **reste entier** | c'est l'environnement de l'encre, et l'encre est le prochain chantier nommé |
 
 ### ⚠⚠ Deux mesures qui contredisent le plan
 
@@ -1236,7 +1287,7 @@ test de convergence de `38`.
 — alors que sa propre docstring promettait de les distinguer. `numcodecs` manque dans
 `inference/`, donc tous les chunks blosc sont revenus vides et j'ai **mesuré, puis écrit**,
 que la graine n'était pas couverte par la prédiction publiée. Elle l'était. Corrigé : ça
-**lève** `CodecIndisponible`. ⚠ Les lectures zarr se font depuis **`experiments/`**.
+**lève** `CodecIndisponible`. ⚠ Les lectures zarr se font depuis **`src/excision/`**.
 
 ### ⭐⭐ SUITE DU 2026-08-21 — le pas du rayon, puis OÙ la chaîne se trouve
 
@@ -1472,7 +1523,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 130 batteries, 3286 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 130 batteries, 3300 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)
@@ -1526,7 +1577,7 @@ uv run python ../src/encre/proximity_vs_ink.py <mesh> <pred> <labels>
 ### ⭐⭐ VC3D — la chaîne de production, construite le 2026-08-19
 
 **44 outils en ligne de commande** *(compté le 2026-08-19 : `ls /usr/local/bin/vc_* | wc -l`)* sous `/usr/local/bin/vc_*`, plus le GUI `VC3D`.
-Construits depuis `repos/villa/volume-cartographer/build_from_src_debian.sh`
+Construits depuis `data/repos/villa/volume-cartographer/build_from_src_debian.sh`
 (⚠ demande `sudo`, **31 paquets** dans sa liste principale — mesuré le 2026-08-19 sur `volume-cartographer/build_from_src_debian.sh`, qui fait par ailleurs **trois** appels `apt` distincts ; « 17 » était faux).
 
 ```bash
@@ -1851,7 +1902,7 @@ cible — le pool ouvert fait **2 140 000 $** et le Grand Prize n'est pas le seu
 ### Le contexte d'origine
 
 **L'état exact** : la chaîne tourne de bout en bout (`docs/24`), les artefacts sont dans
-[`artefacts/PHerc0358/`](artefacts/PHerc0358/) (2,2 Mo, dont le maillage et les paramètres
+[`data/artefacts/PHerc0358/`](data/artefacts/PHerc0358/) (2,2 Mo, dont le maillage et les paramètres
 qui marchent), et **le seul défaut connu est que le traceur n'a aucune information
 d'orientation**.
 
@@ -1862,7 +1913,7 @@ d'orientation**.
 | VC3D et ses 44 outils CLI sont installés sous `/usr/local/bin/` | §4 |
 | `vc_grow_seg_from_seed -v` accepte `https://` — le volume n'est jamais téléchargé | `24` §1 |
 | `seed.json` **doit** porter `"voxelsize"`, sinon tout est rejeté à 0 cm² | `24` §1 |
-| la graine `1544 1544 7768` (ordre **x y z**) donne 8,48 cm² en 13,9 s | `artefacts/PHerc0358/` |
+| la graine `1544 1544 7768` (ordre **x y z**) donne 8,48 cm² en 13,9 s | `data/artefacts/PHerc0358/` |
 | la trace obtenue **coupe les spires** — 240 auto-intersections, 64 % de pics au bord | `24` §2 |
 | `PHerc0358` est le rouleau **le moins difficile** des treize | `16` |
 | **dix** rouleaux sur treize n'ont aucun segment | `23` |
@@ -2594,7 +2645,7 @@ suite utile n'est pas de choisir une prédiction — c'est de chercher une meill
 - `src/outils/rendre_surveille.sh` abandonne un rendu inactif **en rapportant son débit**.
 - `src/outils/dossier_soumission.sh` rassemble ce qui part, la liste des figures **dérivée du
   texte**, et refuse un dossier incomplet.
-- L'article fait **17 pages** et se reconstruit par `./article/build.sh`.
+- L'article fait **17 pages** et se reconstruit par `./docs/article/build.sh`.
 
 ## 9. Règles de mesure tenues ici
 

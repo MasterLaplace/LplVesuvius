@@ -43,7 +43,7 @@ Quatorze tirages, **paramètres strictement identiques**, même graine.
 
 ### ⚠ Le contrôle qui rend le résultat lisible
 
-Le maillage de `24` est **archivé** (`artefacts/PHerc0358/mesh.tifxyz`). Remesuré
+Le maillage de `24` est **archivé** (`data/artefacts/PHerc0358/mesh.tifxyz`). Remesuré
 aujourd'hui : **240 auto-intersections**, exactement. Le maillage original de la journée
 (`data/trace/PHerc0358/auto_grown_20260819113515563`) aussi. **La mesure est fidèle.**
 
@@ -144,5 +144,5 @@ ce que `31` §4 décrit, et ce que nos deux instruments indépendants rendent po
 uv run python src/tables/table_thread_limit.py --json docs/mesures/table_thread_limit.json
 
 # le contrôle : le maillage archivé remesure-t-il bien 240 ?
-vc_tifxyz_selfcross --surface artefacts/PHerc0358/mesh.tifxyz -o /tmp/recheck.json
+vc_tifxyz_selfcross --surface data/artefacts/PHerc0358/mesh.tifxyz -o /tmp/recheck.json
 ```

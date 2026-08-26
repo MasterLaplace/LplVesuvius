@@ -345,7 +345,7 @@ serait détectable à 80 %. Le maillage manquant a été obtenu par `src/outils/
 #### Le texte d'origine
 
 ⚠ **Bloquée sur un fait matériel, constaté le 2026-08-17** : le maillage `tifxyz` de
-`20230909121925` n'est pas dans `repos/windcheck/data/scroll1_tifxyz`, et les 46
+`20230909121925` n'est pas dans `data/repos/windcheck/data/scroll1_tifxyz`, et les 46
 traces de `docs/mesures/proximity_scroll1.jsonl` ne l'incluent pas. La première étape est
 donc un téléchargement, pas un calcul. Une fois là, `10` §3bis donne une question
 précise à lui poser : *les bandes 8704–9728, où le modèle produit du signal informe
@@ -426,7 +426,7 @@ commande**, plus une décision.
 ⚠⚠ **Le code de cette section a failli etre perdu.** Il avait ete ecrit en
 `python -c` inline : les resultats sont partis dans ce document et **le calcul
 n'etait dans aucun fichier**. Recupere du transcript de session le 2026-08-17 et
-installe dans **`experiments/src/excision/radial.py`** (sous-commandes `centre`,
+installe dans **`src/excision/radial.py`** (sous-commandes `centre`,
 `compter`, `deplier`).
 
 **Controle de la recuperation** : le fichier reproduit exactement les chiffres
@@ -624,7 +624,7 @@ les regarder — c'est ce que la piste C4 du vivier proposait (revoir les sites 
 à 2,4 µm à l'ESRF), et c'est maintenant une liste de **quatre** endroits précis au lieu
 d'un rouleau entier.
 
-**Fichiers** : `experiments/src/excision/radial.py` (dépliage) et `fusions.py`
+**Fichiers** : `src/excision/radial.py` (dépliage) et `fusions.py`
 (`controle`, `chercher`, `ecarts`, `ecarts-controle`, `densite`). Tout est en fichiers
 versionnés, pas en `python -c` — cf. §5.6.
 

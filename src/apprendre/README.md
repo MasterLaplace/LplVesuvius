@@ -1,4 +1,4 @@
-# `apprendre/` — comprendre ce projet, en vidéo
+# `src/apprendre/` — comprendre ce projet, en vidéo
 
 Des animations construites avec [Manim](https://www.manim.community/), **pour l'auteur
 d'abord** : publier un travail qu'on ne comprend pas est le seul résultat inacceptable de
@@ -41,9 +41,9 @@ traces à zéro, trois dernières de leur propre rouleau.
 ## Fabriquer
 
 ```bash
-apprendre/rendre.sh apprendre/scenes/01_suivre_une_feuille.py       # 480p, rapide
-QUALITE=h apprendre/rendre.sh apprendre/scenes/02_comment_savoir.py  # 1080p
-apprendre/rendre.sh --verifier                                       # les témoins
+src/apprendre/rendre.sh src/apprendre/01_suivre_une_feuille.py       # 480p, rapide
+QUALITE=h src/apprendre/rendre.sh src/apprendre/02_comment_savoir.py  # 1080p
+src/apprendre/rendre.sh --verifier                                       # les témoins
 ```
 
 ⚠⚠ `rendre.sh` extrait des **vignettes** après l'assemblage, et ce n'est pas un confort :

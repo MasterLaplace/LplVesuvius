@@ -38,7 +38,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from excision.proximity import (  # noqa: E402
+from proximity import (  # noqa: E402
     ProximityError,
     load_trace,
     local_baseline,

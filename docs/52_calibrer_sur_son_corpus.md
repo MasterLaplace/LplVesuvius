@@ -181,7 +181,7 @@ sans rien signaler.
 ## Reproduire
 
 ```bash
-uv run python tracecheck/tracecheck.py Scroll1 --all --csv \
+uv run python src/tracecheck/tracecheck.py Scroll1 --all --csv \
     --voxel-um 2.4 --prefer 2.4um > docs/mesures/balayage_scroll1.csv
 
 python3 src/graine/calibration_corpus.py docs/mesures/balayage_scroll1.csv \

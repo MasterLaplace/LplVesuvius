@@ -242,7 +242,7 @@ def verifier() -> int:
 
     # ⚠ Le préfixe ne doit pas mordre sur un voisin qui commence pareil : `inference` ne
     # doit PAS attraper `inference_xpu`, sans quoi on supprimerait le mauvais dossier.
-    voisins = references("`inference/x.py` et `inference_xpu/y.py`", ("inference",))
+    voisins = references("`inference/x.py` et `src/xpu/y.py`", ("inference",))
     v("« inference » n'attrape pas « inference_xpu »",
       [r["chemin"] for r in voisins] == ["inference/x.py"])
 

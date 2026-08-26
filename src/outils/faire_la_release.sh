@@ -24,10 +24,10 @@ TRAVAIL="${TRAVAIL:-/tmp/lplvesuvius-release}"
 #
 # Ce qui est garde, et pourquoi chaque ligne :
 #
-#   article/          l article, ses sources typst, ses figures ANGLAISES et son build.
+#   docs/article/          l article, ses sources typst, ses figures ANGLAISES et son build.
 #                     C est l enonce complet des affirmations. ⚠ Mesure : il ne renvoie a
 #                     AUCUN document de travail francais, donc il se lit seul.
-#   tracecheck/       LE livrable. Un seul fichier, numpy et rien d autre, 16 auto-tests
+#   src/tracecheck/       LE livrable. Un seul fichier, numpy et rien d autre, 16 auto-tests
 #                     hors ligne. C est ce qu un lecteur va utiliser ; l article le decrit.
 #   src/              tout le code, range en familles depuis le 2026-08-25. Il produit les
 #                     figures et recalcule les chiffres. Sans lui,
@@ -53,11 +53,26 @@ TRAVAIL="${TRAVAIL:-/tmp/lplvesuvius-release}"
 #
 # ⚠ Ce qui part et qu on pourrait croire necessaire : `docs/images/` (31 Mo). Ce sont les
 # figures FRANCAISES, celles des 51 documents de travail. L article utilise ses propres
-# figures anglaises, regenerees par article/build.sh avec --anglais. Verifie, pas suppose.
+# figures anglaises, regenerees par docs/article/build.sh avec --anglais. Verifie, pas suppose.
+# ⚠⚠ Les familles sont listees UNE PAR UNE, et surtout pas `src` en bloc. Avant le repli du
+# 2026-08-26 la release gardait `src` entier et laissait dehors `experiments/` et
+# `inference_xpu/`, qui etaient des dossiers de premier niveau. Depuis qu ils sont des
+# familles de `src/`, garder `src` les embarquerait — donc la release grossirait de 6,3 Gio
+# d environnement torch SANS QU AUCUNE LIGNE NE CHANGE. Une liste blanche qui s elargit toute
+# seule n est plus une liste blanche.
 GARDES=(
-  "article"
-  "tracecheck"
-  "src"
+  "docs/article"
+  "src/commun"
+  "src/campagnes"
+  "src/depot"
+  "src/encre"
+  "src/figures"
+  "src/graine"
+  "src/nappe"
+  "src/outils"
+  "src/tables"
+  "src/tracecheck"
+  "src/volume"
   "README.md"
   "lplv"
   "docs/mesures/verbes.json"
@@ -84,8 +99,13 @@ if [ "${1:-}" = "--verifier" ]; then
   # ⚠⚠ Une liste d INCLUSIONS, pas d exclusions : rien de nouveau dans main ne peut
   # atterrir dans la release par oubli -- il faudrait l avoir ajoute ici.
   chk "la release est definie par ce qu elle garde" '[ "${#GARDES[@]}" -ge 5 ]'
-  chk "le livrable en fait partie" 'printf "%s\n" "${GARDES[@]}" | grep -qx tracecheck'
-  chk "l article aussi" 'printf "%s\n" "${GARDES[@]}" | grep -qx article'
+  chk "le livrable en fait partie" 'printf "%s\n" "${GARDES[@]}" | grep -qx src/tracecheck'
+  chk "l article aussi" 'printf "%s\n" "${GARDES[@]}" | grep -qx docs/article'
+  # ⚠⚠ Le controle qui garde la propriete du palier : les familles LOURDES restent
+  # dehors. Sans lui, ajouter `src` a la liste passerait inapercu et la release
+  # embarquerait 6,3 Gio d environnement torch sans qu une ligne ne change.
+  chk "les familles lourdes restent dehors" \
+      '! printf "%s\n" "${GARDES[@]}" | grep -qxE "src|src/xpu|src/excision|src/apprendre"'
   chk "et une licence" 'printf "%s\n" "${GARDES[@]}" | grep -qx LICENSE'
   echo "$([ $ok = 0 ] && echo 'ALL PASS' || echo FAILURES) ($ok failures, $n checks)"
   exit $ok
@@ -116,7 +136,7 @@ for f in "${TOUT[@]}"; do
   done
   # ⚠ Les fichiers de resultat sont gardes par MOTIF et pas un par un : il y en a 297 et
   # ils naissent au rythme des mesures.
-  case "$f" in docs/*.json) garde=1;; esac
+  case "$f" in docs/mesures/*.json) garde=1;; esac
   [ "$garde" = 0 ] && A_RETIRER+=("$f")
 done
 
@@ -137,8 +157,8 @@ casserait la vérification — ce qui est précisément pourquoi la batterie tou
 avant que le tag soit posé." 2>/dev/null || echo "   (rien à commiter)"
 
 echo
-# ⚠⚠ La batterie de RELEASE, pas la generale : celle-ci appelle experiments/, inference/ et
-# repos/, que l arbre allege ne porte pas -- elle echouerait pour la seule raison qu il
+# ⚠⚠ La batterie de RELEASE, pas la generale : celle-ci appelle src/excision/, inference/ et
+# data/repos/, que l arbre allege ne porte pas -- elle echouerait pour la seule raison qu il
 # s agit d une release, et un controle qui ne peut pas passer cesse d etre lu.
 echo "== la batterie de release, SUR la branche nettoyée"
 if ! ./src/outils/temoins_release.sh > /tmp/release_temoins.log 2>&1; then

@@ -29,7 +29,7 @@ for TL in 0 1; do
     rm -rf "$D"; mkdir -p "$D"
     python3 -c "
 import json
-p = json.load(open('$ROOT/artefacts/PHerc0358/seed.json'))
+p = json.load(open('$ROOT/data/artefacts/PHerc0358/seed.json'))
 p['thread_limit'] = $TL
 json.dump(p, open('$D/seed.json','w'), indent=2)"
     ( cd "$D" && timeout 900 vc_grow_seg_from_seed -v "$S" -t . -p seed.json -s $GRAINE > trace.log 2>&1 )

@@ -18,7 +18,7 @@ bouchon dégénéré et exige que `selftest.py` échoue. Un bouchon qui laisse l
 vert désigne une fonction dont **aucune assertion ne dépend** — donc une fonction qu'on
 pourrait supprimer sans que rien ne le dise.
 
-    python3 tracecheck/mutation.py
+    python3 src/tracecheck/mutation.py
 """
 from __future__ import annotations
 
@@ -27,23 +27,26 @@ import sys
 from pathlib import Path
 
 ICI = Path(__file__).resolve().parent
-RACINE = ICI.parent
+# ⚠ DEUX niveaux : ce fichier vit dans `src/tracecheck/` depuis le repli du
+# 2026-08-26. Un seul `.parent` rendrait `src/`.
+RACINE = ICI.parents[1]
 
 
 def interprete() -> list[str]:
     """L'interpreteur qui a numpy.
 
     ⚠ Ce n'est pas forcement `sys.executable` : le python systeme de cette machine n'a
-    pas numpy, et `src/outils/temoins.sh` lance ses batteries par `uv run python` DEPUIS
-    `experiments/`, dont l'environnement l'a. Un script qui suppose son propre
-    interpreteur declarerait ici « la suite de reference est deja rouge » sur une suite
-    parfaitement verte -- ce qui est le pire des diagnostics : faux, et confiant.
+    pas numpy. Un script qui suppose son propre interpreteur declarerait ici « la suite de
+    reference est deja rouge » sur une suite parfaitement verte -- ce qui est le pire des
+    diagnostics : faux, et confiant.
+
+    ⭐ La liste des candidats est passee de trois a UN au repli du 2026-08-26 : il n y a
+    plus qu un environnement, celui de la racine. Elle en portait un par sous-projet.
     """
     import subprocess as sp
     essais = [
         ([sys.executable], None),
-        (["uv", "run", "python"], RACINE / "experiments"),
-        (["uv", "run", "python"], RACINE / "inference_xpu"),
+        (["uv", "run", "python"], RACINE),
     ]
     for cmd, cwd in essais:
         try:

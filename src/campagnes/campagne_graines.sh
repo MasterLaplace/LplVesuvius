@@ -102,7 +102,7 @@ for R in $ROULEAUX; do
 
   WORK="$DEST/$R.trace"; rm -rf "$WORK"; mkdir -p "$WORK"
   sed "s/\"voxelsize\": [0-9.]*/\"voxelsize\": $UM/" \
-      "$ROOT/artefacts/PHerc0358/seed.json" > "$WORK/seed.json"
+      "$ROOT/data/artefacts/PHerc0358/seed.json" > "$WORK/seed.json"
 
   LIGNES=""
   for CRIT in planarite voisinage; do

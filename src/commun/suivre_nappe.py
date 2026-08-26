@@ -106,7 +106,7 @@ def _edt_1d(f: np.ndarray) -> np.ndarray:
     """Transformee de distance EUCLIDIENNE CARREE d'une ligne, algorithme de Felzenszwalb.
 
     ⚠ Ecrite ici plutot qu'importee de scipy pour une raison bete et bloquante : les
-    environnements de ce depot sont separes, `scipy` vit dans `experiments/` et `Pillow`
+    environnements de ce depot sont separes, `scipy` vit dans `src/excision/` et `Pillow`
     dans `inference/`, donc aucune figure ne pourrait a la fois lire un bloc et le
     dessiner. Une fonction de vingt lignes vaut mieux qu'un troisieme environnement.
 
@@ -670,7 +670,7 @@ def verifier() -> int:
         from scipy import ndimage as _nd
     except ImportError:
         print("  ⓘ scipy absent ici — la comparaison de l'EDT à la référence est SAUTÉE "
-              "(elle tourne depuis experiments/)")
+              "(elle tourne depuis src/excision/)")
     else:
         rng2 = np.random.default_rng(11)
         pires = []

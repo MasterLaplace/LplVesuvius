@@ -5,10 +5,13 @@
 # de windcheck (meme cle `segment`).
 #
 # Usage: ./run_proximity.sh <dossier_corpus> <fichier_sortie>
-#   ex.: ./run_proximity.sh ../repos/windcheck/data/scroll1_tifxyz ../docs/mesures/proximity_scroll1.jsonl
+#   ex.: ./run_proximity.sh ../data/repos/windcheck/data/scroll1_tifxyz ../docs/mesures/proximity_scroll1.jsonl
 set -u
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# ⚠ DEUX niveaux : ce script vit dans `src/excision/`, pas dans `src/excision/`.
+# Un seul `..` rendrait `src/` et chaque chemin construit dessous serait faux d un
+# cran -- sans erreur, juste des fichiers introuvables.
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 CORPUS="${1:?dossier corpus attendu}"
 OUT="${2:?fichier de sortie attendu}"
 

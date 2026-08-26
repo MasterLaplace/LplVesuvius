@@ -192,8 +192,8 @@ puissance de modèle.
 
 ```
 LplVesuvius/
-├── site/     miroir local de scrollprize.org (wget, robots.txt respecte)
-├── repos/    depots clones (voir tools/repos.tsv)
+├── data/site/     miroir local de scrollprize.org (wget, robots.txt respecte)
+├── data/repos/    depots clones (voir tools/repos.tsv)
 ├── data/     donnees telechargees (VIDE par defaut, cf. plus bas)
 ├── docs/     notes, logs de recuperation
 └── tools/    manifeste + scripts de recuperation
@@ -306,7 +306,7 @@ Tout ce qui est affirme dans `docs/` se regenere. Dans l'ordre :
 ./src/outils/clone_repos.sh              # les 33 depots
 ./src/outils/s3_size.py PHerc0332/ --depth 1   # tailles S3, sans rien telecharger
 
-cd repos/windcheck                  # l'etat de l'art, reproduit
+cd data/repos/windcheck                  # l'etat de l'art, reproduit
 uv sync && uv pip install awscli
 clang++ -O3 -std=c++17 -pthread -o engines/selfcross engines/selfcross.cpp
 uv run pytest -q
@@ -330,7 +330,7 @@ de listage accepte un prefixe par segment, donc on n'enumere pas tout (piege nº
 `aws s3 cp --include` enumere le prefixe entier avant de filtrer).
 
 ```bash
-./src/outils/fetch_traces.py repos/windcheck/results/index.json PHerc0139 data/traces/PHerc0139
+./src/outils/fetch_traces.py data/repos/windcheck/results/index.json PHerc0139 data/traces/PHerc0139
 ./src/outils/lister_volumes_surface.sh PHercParis4    # qui publie un volume de surface Zarr
 ./src/outils/fetch_cartes_encre.sh PHercParis4        # les cartes d'encre PUBLIEES
 ./src/outils/fetch_layers.sh <url> <dest> <largeur> <de> <a>   # couches, reprenable
@@ -396,13 +396,13 @@ uv run python src/commun/carte_segments.py --rouleau PHerc1447 \
 
 # les instruments qui jugent une TRACE, sans verite terrain
 vc_tifxyz_selfcross --surface <mesh.tifxyz> -o rapport.json   # exit 3 si defaut
-uv run python tracecheck/tracecheck.py --seed <zarr> ...      # ou commencer
+uv run python src/tracecheck/tracecheck.py --seed <zarr> ...      # ou commencer
 
 # les gardes qui empechent une doc de pourrir
 python3 src/nappe/poids_growpatch.py --verifier     # la table des poids vient du SOURCE
 python3 src/depot/artefacts_orphelins.py --verifier # tout artefact a un producteur
 python3 src/graine/compter_corpus.py                 # les comptes viennent des artefacts
-python3 tracecheck/mutation.py                         # chaque detecteur est PORTEUR
+python3 src/tracecheck/mutation.py                         # chaque detecteur est PORTEUR
 python3 src/nappe/lire_selfcross.py --verifier       # un verdict qui n'a rien teste est REFUSE
 uv run python src/depot/verifier_chiffres.py docs/*.md \
      --soumission docs/21_texte_de_soumission.md          # 215 chiffres recalcules depuis 47 fichiers de resultat
@@ -436,7 +436,7 @@ imprimaient `ALL PASS` **en echouant**, et un outil officiel qui declare une sur
 > ~8 Go d'expériences closes de `26` (`data/ngrid_*`, `data/volume_PHerc0358`), qui sont
 > reproductibles par téléchargement.
 
-Note : `repos/villa/scrollprize.org/docs/` contient le **source markdown du site**
+Note : `data/repos/villa/scrollprize.org/docs/` contient le **source markdown du site**
 (34 fichiers). Pour lire, c'est superieur au miroir HTML ; le miroir sert a figer
 un etat date et a travailler hors ligne.
 

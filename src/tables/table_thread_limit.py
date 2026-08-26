@@ -15,7 +15,7 @@ d'aire, et l'ecart au maillage de reference s'il est fourni.
 
 Usage :
     python3 src/tables/table_thread_limit.py [data/trace/PHerc0358/thread_limit] \\
-        [--reference artefacts/PHerc0358/mesh.tifxyz/meta.json] [--json sortie.json]
+        [--reference data/artefacts/PHerc0358/mesh.tifxyz/meta.json] [--json sortie.json]
 """
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ def main() -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("dossier", nargs="?",
                     default=str(RACINE / "data/trace/PHerc0358/thread_limit"))
-    ap.add_argument("--reference", default=str(RACINE / "artefacts/PHerc0358/mesh.tifxyz/meta.json"))
+    ap.add_argument("--reference", default=str(RACINE / "data/artefacts/PHerc0358/mesh.tifxyz/meta.json"))
     ap.add_argument("--reference-croisements", type=int, default=240)
     ap.add_argument("--json")
     a = ap.parse_args()

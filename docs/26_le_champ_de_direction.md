@@ -221,7 +221,7 @@ ne change pas la croissance, donc l'absence du champ ne peut pas expliquer la tr
 
 ⚠⚠ **Corrigé le 2026-08-19, contre le code source.** Cette section annonçait **dix**
 poids et en nommait **deux qui n'existent pas**. Vérifié dans
-`repos/villa/volume-cartographer/core/src/GrowPatch.cpp` :
+`data/repos/villa/volume-cartographer/core/src/GrowPatch.cpp` :
 `applyJsonWeights()`, lignes 1304–1315, lit **douze** clés, et `surface_sdt_weight`
 comme `spaceline_weight` ont **zéro occurrence dans tout le dépôt villa**.
 

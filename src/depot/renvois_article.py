@@ -16,7 +16,7 @@ et de comparer. La numérotation est une fonction du document, donc elle se dér
 
 Reproduire :
 
-    python3 src/depot/renvois_article.py article/article.typ
+    python3 src/depot/renvois_article.py docs/article/article.typ
     python3 src/depot/renvois_article.py --verifier
 """
 from __future__ import annotations
@@ -171,9 +171,9 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("document", type=Path, nargs="?",
-                    default=Path("article/article.typ"))
+                    default=Path("docs/article/article.typ"))
     # ⚠ Le compte de pages annonce en prose vieillit en silence : mesure le 2026-08-23,
-    # `article/README.md` disait 18 pages pour un PDF qui en fait 21.
+    # `docs/article/README.md` disait 18 pages pour un PDF qui en fait 21.
     ap.add_argument("--pdf", type=Path, help="le PDF, pour vérifier le compte de pages")
     ap.add_argument("--readme", type=Path, help="le document qui annonce ce compte")
     ap.add_argument("--verifier", action="store_true")

@@ -15,7 +15,7 @@ télécharger, rien à rendre.
 sont là où le maillage s'arrête, donc là où l'image est la moins représentative de ce que le
 travail produit.
 
-⭐ Le lecteur de blocs est celui de `tracecheck/`, importé et jamais recopié : deux lecteurs
+⭐ Le lecteur de blocs est celui de `src/tracecheck/`, importé et jamais recopié : deux lecteurs
 de zarr finiraient par ne pas s'accorder sur le séparateur de clé, et le mode d'échec des
 deux est de rendre une image noire plutôt qu'une erreur.
 """
@@ -25,7 +25,7 @@ import argparse
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tracecheck"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tracecheck"))
 
 BUCKET = "https://vesuvius-challenge-open-data.s3.amazonaws.com"
 

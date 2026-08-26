@@ -11,7 +11,7 @@
 # geante : une scene qui casse ne doit pas emporter les autres, et on veut pouvoir en
 # rejouer une seule.
 #
-# Usage : apprendre/rendre.sh <fichier_de_scenes.py> [qualite]
+# Usage : src/apprendre/rendre.sh <fichier_de_scenes.py> [qualite]
 set -uo pipefail
 ICI="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PY="$ICI/.venv/bin/python"
@@ -22,7 +22,11 @@ if [ "${1:-}" = "--verifier" ]; then
   chk "l environnement manim existe" '[ -x "$PY" ]'
   chk "manim est importable" '"$PY" -c "import manim" 2>/dev/null'
   chk "ffmpeg est la" 'command -v ffmpeg >/dev/null'
-  chk "au moins un fichier de scenes" 'ls "$ICI"/scenes/*.py >/dev/null 2>&1'
+  # ⚠ Les scenes sont A PLAT dans `src/apprendre/` depuis le repli du 2026-08-26 :
+# chaque famille de `src/` est plate, et un sous-dossier ici aurait ete la seule
+# exception. Elles se reconnaissent a leur numero d ordre, qui est aussi celui
+# dans lequel les videos se regardent.
+  chk "au moins un fichier de scenes" 'ls "$ICI"/0*.py >/dev/null 2>&1'
   # ⚠⚠ Toute legende doit passer par `legende()`, qui l ancre en bas. Un `to_edge(DOWN)`
   # ecrit a la main est un endroit de plus ou l oubli est possible -- et l oubli ne se voit
   # qu au rendu. Le motif est coupe en deux : une sonde qui scanne des fichiers ne doit pas
@@ -32,7 +36,7 @@ if [ "${1:-}" = "--verifier" ]; then
   # une premiere version de cette sonde l attrapait -- elle signalait donc l endroit meme
   # ou la regle est appliquee. Une sonde doit viser l usage, pas la definition.
   chk "aucune scene ne pose de legende a la main" \
-      '! grep -rnE "phrase\\(\"[^\"]*\".*\\.to_""edge\\(DOWN" "$ICI"/scenes/*.py'
+      '! grep -rnE "phrase\\(\"[^\"]*\".*\\.to_""edge\\(DOWN" "$ICI"/0*.py'
   chk "les vignettes sont extraites" 'grep -q "vignettes" "$ICI/rendre.sh"'
   echo "$([ $ok = 0 ] && echo 'ALL PASS' || echo FAILURES) ($ok failures, $n checks)"
   exit $ok

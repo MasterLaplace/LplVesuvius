@@ -16,6 +16,16 @@
 > | B — `data/` par rouleau | ✅ **clos par la mesure** | le plan cède : `data/` est gitignoré, 11 dossiers sur 81 nomment un rouleau. **50,6 Gio** de candidats nommés à la place |
 > | C — `lplv` | ✅ livré | un point d'entrée, **233 verbes** découverts |
 > | D — dessin + `docs/` | ✅ livré | 15 copies de `_police` → 1 ; `docs/` **522 → 58** à la racine |
+>
+> ⭐⭐ **Et le 2026-08-26, le repli final** : `tracecheck/`, `experiments/`, `inference_xpu/`,
+> `apprendre/`, `article/`, `artefacts/`, `repos/`, `site/` et `soumission/` rejoignent
+> `src/`, `docs/` ou `data/`. **La racine ne porte plus que trois dossiers.** Détail complet
+> et ce que ça a cassé : `HANDOFF.md`, section « TROIS DOSSIERS ».
+>
+> ⚠ Ce que ça corrige de ce plan : le §1.1 comptait « sept dossiers de scripts » et concluait
+> qu'ils étaient « DEUX dossiers et cinq environnements ». C'était juste comme diagnostic et
+> faux comme conclusion — **un environnement n'a pas besoin d'être à la racine, il a besoin
+> d'être avec son code**. `src/xpu/pyproject.toml` le prouve.
 
 Cadré avec le skill [`concevoir-avant-coder`](../../LplCraftSkills/skills/concevoir-avant-coder/SKILL.md) :
 besoin avant solution, YAGNI sur ses deux axes, ossature en stubs, modules et paliers, pipeline
@@ -35,13 +45,13 @@ c'est le plus gros.
 |---|---:|---:|---:|---:|
 | `analysis/` | **123** | 35 561 | 3,2 M | 3,2 M |
 | `tools/` | **73** | 8 359 | 624 K | 624 K |
-| `experiments/` | 16 | 3 464 | 624 K | **351 M** |
-| `tracecheck/` | 4 | 1 310 | 144 K | 144 K |
+| `src/excision/` | 16 | 3 464 | 624 K | **351 M** |
+| `src/tracecheck/` | 4 | 1 310 | 144 K | 144 K |
 | [`htr/`](https://github.com/MasterLaplace/LplVesuvius/tree/3caf6910914eedaca3b3b26a3b2ea206762d6a9f/htr) | **1** | 185 | 264 K | ~~5,1 G~~ **retiré le 2026-08-25** |
-| `inference_xpu/` | **1** | 169 | 128 K | **6,3 G** |
+| `src/xpu/` | **1** | 169 | 128 K | **6,3 G** |
 | `inference/` | **0** | 0 | 256 K | ~~5,2 G~~ **retiré le 2026-08-25** |
 
-[`htr/`](https://github.com/MasterLaplace/LplVesuvius/tree/3caf6910914eedaca3b3b26a3b2ea206762d6a9f/htr), `inference/` et `inference_xpu/` ne portent **aucun code** ou presque : ce sont des
+[`htr/`](https://github.com/MasterLaplace/LplVesuvius/tree/3caf6910914eedaca3b3b26a3b2ea206762d6a9f/htr), `inference/` et `src/xpu/` ne portent **aucun code** ou presque : ce sont des
 `.venv`. Ce qui donne l'impression d'une montagne est un environnement, pas un programme.
 
 ### ⚠⚠ Deux affirmations de ce paragraphe étaient FAUSSES — corrigées le 2026-08-25
@@ -84,7 +94,7 @@ d'un côté, `2.9.1+xpu` de l'autre), donc la comparaison mélangeait l'appareil
 témoin en mode change **une** variable, ce qu'un témoin doit faire. Vérifié le 2026-08-25 : la
 build `+xpu` exécute le chemin CPU sans rien de particulier.
 
-`inference_xpu/src/infer_ink.py` prenait déjà `--device {cpu,xpu}` ; il prend désormais
+`src/xpu/infer_ink.py` prenait déjà `--device {cpu,xpu}` ; il prend désormais
 **`--device auto` par défaut**, et la règle qui le gouverne est la seule chose qui distingue un
 pipeline adaptatif d'un pipeline silencieux : **« auto » retombe, « xpu » REFUSE.** Demander
 explicitement le GPU et obtenir le CPU sans le savoir ferait publier un temps mesuré sur l'autre
@@ -92,7 +102,7 @@ appareil — la panne exacte que le repli est censé éviter, déplacée d'un cr
 **fonction pure** qui prend la disponibilité en argument, donc il s'auto-teste sans GPU, sans
 torch, et sans modèle : 10 contrôles hors ligne, deux sondes.
 
-`inference_xpu/` reste entier : c'est l'environnement de l'encre, et l'encre est le prochain
+`src/xpu/` reste entier : c'est l'environnement de l'encre, et l'encre est le prochain
 chantier nommé.
 
 ⚠⚠ **Et la vraie montagne n'a jamais été là.** Le dépôt pèse **203 Gio**, dont **177 dans
@@ -561,7 +571,7 @@ Trois règles portent le reste, chacune sondée en la cassant :
 **Et les paliers tombent tout seuls, mesuré plutôt qu'affirmé.** L'arbre allégé de la release a
 été construit dans un dossier temporaire à partir de la seule liste `GARDES` : `./lplv --help`
 y rend **204 verbes au lieu de 218**, sans erreur et sans configuration, parce que
-`experiments/src` et `inference_xpu/src` n'y sont pas. C'est la définition d'un palier
+`src/excision/src` et `src/xpu/src` n'y sont pas. C'est la définition d'un palier
 **additif** — et le piège du skill §7 (« le palier que personne ne construit pourrit ») est
 traité en ajoutant `lplv` aux `GARDES` : sans ça la release aurait porté `src/depot/lplv.py`
 sans la commande qui le lance, soit la moitié d'une surface.
@@ -581,7 +591,7 @@ en dépendait — mesuré : l'élargissement ne signale rien de neuf, il ferme u
 
 ⚠ **Et un emprunt d'environnement du même genre que celui d'`inference/` reste ouvert** :
 quatorze blocs « Reproduire » font `cd experiments` pour emprunter son venv. Mesuré le
-2026-08-25 : la racine porte numcodecs, PIL, numpy, scipy et tifffile ; `experiments/.venv`
+2026-08-25 : la racine porte numcodecs, PIL, numpy, scipy et tifffile ; `src/excision/.venv`
 **n'a pas PIL**. C'est le même diagnostic, et il n'a pas été appliqué ici pour ne pas mélanger
 deux chantiers dans un diff.
 
@@ -627,8 +637,8 @@ dit, pas une relecture.
 `valider_blocs.py`. Le garde « scripts sans appelant » ne scannait pas `tools/*.py` ; le glob
 `src/*/*` a élargi sa portée sans qu'on le demande, et il les a trouvés.
 
-⚠ **Ce qui n'a PAS bougé, avec la raison** : `tracecheck/` est **le livrable** que l'article
-décrit et que la release identifie ; `experiments/` et `inference_xpu/` portent chacun leur
+⚠ **Ce qui n'a PAS bougé, avec la raison** : `src/tracecheck/` est **le livrable** que l'article
+décrit et que la release identifie ; `src/excision/` et `src/xpu/` portent chacun leur
 propre environnement. Les déplacer est une décision par dossier, pas un coup de balai.
 
 ### ⭐ Chantier D — l'extraction du dessin, et le rangement de `docs/`
@@ -860,7 +870,7 @@ C'est la partie que le skill dit qu'on oublie toujours d'écrire.
 | **Fusionner `analysis/` et `tools/`** | frontière réelle et à sens unique : `tools/*.sh` orchestre, `analysis/src/*.py` mesure. Aucune mesure n'appelle un outil. C'est déjà la bonne direction (skill §7) |
 | **Un registre de plugins à l'exécution** | même dépôt, même build : la découverte par le système de fichiers suffit. Le liage tardif n'a aucun demandeur |
 | **Effacer les 17,4 Go de « doublons »** | le proxy *même nom + même taille* **surcompte** sur les chunks zarr. À hacher avant d'effacer — et un effacement n'est pas réversible |
-| ~~**Toucher aux `.venv`**~~ **partiellement fait** | les « 16,6 Go » n'existaient pas (liens durs, §1.1). `htr/` et `inference/` sont partis avec leur code ; `experiments/` et `inference_xpu/` gardent le leur, ils portent de vraies sources |
+| ~~**Toucher aux `.venv`**~~ **partiellement fait** | les « 16,6 Go » n'existaient pas (liens durs, §1.1). `htr/` et `inference/` sont partis avec leur code ; `src/excision/` et `src/xpu/` gardent le leur, ils portent de vraies sources |
 | **Réécrire les 57 documents** | ils portent des mesures datées. Les chemins qu'ils citent se réparent par des liens, pas par une réécriture |
 
 ---

@@ -50,12 +50,12 @@ run() {
 echo "TEMOINS DU DEPOT — tous hors ligne"
 echo
 
-cd "$ROOT/experiments" || exit 2
+cd "$ROOT" || exit 2
 run "fusions : pistes"        uv run python src/excision/fusions.py controle
 run "fusions : ecarts"        uv run python src/excision/fusions.py ecarts-controle
 run "fusion_scan : colocation" uv run python - <<'PY'
 import sys; import pathlib as _p; sys.path[:0]=[str(x) for _b in ('src','../src') for x in _p.Path(_b).glob('*') if x.is_dir()]
-from excision.fusion_scan import colocation, null_model
+from fusion_scan import colocation, null_model
 n=0
 same=[[{'radius_mm':17.1,'column':16000}],[{'radius_mm':17.3,'column':16200}]]
 far =[[{'radius_mm':17.1,'column':16000}],[{'radius_mm': 5.0,'column':  200}]]
@@ -70,7 +70,7 @@ PY
 
 run "track_z : suiveur predictif" uv run python - <<'PY'
 import sys; import pathlib as _p; sys.path[:0]=[str(x) for _b in ('src','../src') for x in _p.Path(_b).glob('*') if x.is_dir()]
-from excision.track_z import track, straightness, summarise, permute
+from track_z import track, straightness, summarise, permute
 import numpy as np
 n=0
 def ck(c):
@@ -107,8 +107,8 @@ PY
 run "reference : boule vs bande" uv run python - <<'PY'
 import sys; import pathlib as _p; sys.path[:0]=[str(x) for _b in ('src','../src') for x in _p.Path(_b).glob('*') if x.is_dir()]
 import numpy as np
-from excision.proximity import local_baseline
-from excision.baseline_sweep import ball_baseline, contamination
+from proximity import local_baseline
+from baseline_sweep import ball_baseline, contamination
 n=0
 def ck(c):
     global n
@@ -137,7 +137,7 @@ ck(c['shrink_aux_signalees'] < c['shrink_partout'])   # et c'est SPECIFIQUE
 print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
-cd "$ROOT/inference_xpu" || exit 2
+cd "$ROOT" || exit 2
 run "pile : sommet ou borne"   uv run python - <<'PY'
 import sys, numpy as np; import pathlib as _p; sys.path[:0]=[str(x) for _b in ('src','../src') for x in _p.Path(_b).glob('*') if x.is_dir()]
 from stack_structure import describe
@@ -263,7 +263,7 @@ ck(not f['gauche']['refused'] and f['gauche']['glyphs']==3)   # fabrication dete
 print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
-cd "$ROOT/inference_xpu" || exit 2
+cd "$ROOT" || exit 2
 run "champ de correction" uv run python - <<'PY'
 import sys, time, random
 from pathlib import Path
@@ -358,13 +358,13 @@ ck(d["segments_gardes"] == 30, "effectif garde")
 print(f"ALL PASS (0 failures, {n} checks)")
 PY
 
-cd "$ROOT/inference_xpu" || exit 2
-run "tracecheck (outil public)" uv run python "$ROOT/tracecheck/selftest.py"
+cd "$ROOT" || exit 2
+run "tracecheck (outil public)" uv run python "$ROOT/src/tracecheck/selftest.py"
 # ⚠ Un cran au-dessus du selftest : celui-ci verifie que chaque detecteur est PORTEUR.
 # Un controle par injection attrape un detecteur aveugle, pas un detecteur absent -- une
 # suite qui n'assertit jamais sur une sortie ne distingue pas "n'a rien trouve" de "n'a
 # jamais ete consulte". Cf docs/28 §7.
-run "tracecheck : mutation"     python3 "$ROOT/tracecheck/mutation.py"
+run "tracecheck : mutation"     python3 "$ROOT/src/tracecheck/mutation.py"
 
 run "robustesse : deux mesures  " uv run python - <<'PY'
 import sys
@@ -514,7 +514,7 @@ PY
 # conditionnee plutot que rendue optionnelle : un temoin qui passe au vert quand il ne
 # peut rien verifier est precisement ce que ce fichier existe pour interdire, donc
 # l'absence du clone est DITE, pas avalee.
-if [ -f "$ROOT/repos/villa/volume-cartographer/core/src/GrowPatch.cpp" ]; then
+if [ -f "$ROOT/data/repos/villa/volume-cartographer/core/src/GrowPatch.cpp" ]; then
   run "poids GrowPatch vs source" python3 "$ROOT/src/nappe/poids_growpatch.py" --verifier
 else
   printf '  ⚠ %-28s villa non clone (src/outils/clone_repos.sh) — NON VERIFIE\n' "poids GrowPatch vs source"
@@ -531,7 +531,7 @@ run "artefacts : un producteur" python3 "$ROOT/src/depot/artefacts_orphelins.py"
 # entierement plausible. La sonde qui compte dans le premier temoin est celle qui verifie
 # que la puissance tombe au niveau du test SOUS L'HYPOTHESE NULLE ; dans le second, que le
 # basculement d'un verdict ne se lit pas comme une simple dispersion d'aire.
-cd "$ROOT/experiments" || exit 2
+cd "$ROOT" || exit 2
 run "carte : incertitude"     uv run python "$ROOT/src/commun/incertitude_carte.py" --verifier
 run "tirages : dépouillement" uv run python "$ROOT/src/tables/table_tirages.py" --verifier
 
@@ -557,13 +557,13 @@ cd "$ROOT" || exit 2
 run "lancer : gel d'un script"  "$ROOT/src/outils/lancer.sh" --verifier
 # ⚠⚠ ICI et pas plus haut : ce fichier CHANGE DE PROJET en changeant de repertoire, donc
 # l endroit ou une batterie est enregistree decide de l ENVIRONNEMENT qu elle recoit.
-# `experiments/` n a pas PIL, et une figure dont la batterie DESSINE vraiment y echoue sur
+# `src/excision/` n a pas PIL, et une figure dont la batterie DESSINE vraiment y echoue sur
 # un `ModuleNotFoundError` qui ne dit rien de la figure. Les figures voisines de la region
 # `experiments` s en tirent parce qu elles importent PIL a l interieur d une fonction --
 # donc leur batterie ne dessine pas, ce qui est justement ce qu on ne veut pas ici.
 run "figure : couverture"       uv run python "$ROOT/src/figures/figure_couverture.py" --verifier
 run "couverture publiée"        uv run python "$ROOT/src/nappe/couverture_publiee.py" --verifier
-cd "$ROOT/experiments" || exit 2
+cd "$ROOT" || exit 2
 
 # ⚠⚠ Le controle qui compte dans ce temoin est qu'un EX-AEQUO n'est pas un accord : si le
 # mauvais tirage et le meilleur propre butent tous deux sur le plafond de la fenetre
@@ -731,7 +731,7 @@ run "critere relatif"          uv run --project "$ROOT" python "$ROOT/src/graine
 # ⚠⚠ Les scenes pedagogiques. Cette batterie n etait PAS lancee, et elle avait quelque chose
 # a dire : une legende posee a la main dans la video 2. Une sonde qu on n execute jamais est
 # une sonde qui n existe pas.
-run "scenes pedagogiques"      "$ROOT/apprendre/rendre.sh" --verifier
+run "scenes pedagogiques"      "$ROOT/src/apprendre/rendre.sh" --verifier
 # ⚠⚠ Situer nos traces a la geometrie d un corpus. Ses sondes centrales portent sur la
 # SOUS-FENETRE : elle doit etre centree (161 couches lues sur 109 laissent 26 de chaque
 # cote) et la couche tracee doit etre le milieu de la SOUS-fenetre, pas de la pile -- la
@@ -821,7 +821,7 @@ run "poids recuperable"        uv run --project "$ROOT" python "$ROOT/src/depot/
 # permis de supprimer `inference/` : le temoin CPU est devenu un MODE (`--device cpu`) au lieu
 # d'un second environnement, et la regle qui le gouverne -- « auto » retombe, « xpu » REFUSE --
 # est une fonction pure qui prend la disponibilite en argument, donc elle se verifie ici.
-run "appareil d'inference"     uv run --project "$ROOT" python "$ROOT/inference_xpu/src/infer_ink.py" --verifier
+run "appareil d'inference"     uv run --project "$ROOT" python "$ROOT/src/xpu/infer_ink.py" --verifier
 # ⚠⚠ Le point d entree du depot. Ce qu il garantit tient en une phrase : `lplv <verbe> --help`
 # EXECUTE le module avec `--help` au lieu de re-decrire son argparse, donc l aide ne peut pas
 # perimer. Ses trois controles porteurs : un nom revendique deux fois est REFUSE (une ambiguite
@@ -1010,7 +1010,7 @@ print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
 # ⚠ Ces deux-la tournaient depuis `inference/` jusqu'au 2026-08-25, au motif que c'etait le
-# seul environnement porteur de Pillow -- `temoins.sh` s'execute depuis `experiments/` pour le
+# seul environnement porteur de Pillow -- `temoins.sh` s'execute depuis `src/excision/` pour le
 # reste. Le motif etait FAUX (la racine declare pillow>=10.0) et NUISIBLE : `inference/`
 # n'avait pas `numcodecs`. Ils tournent depuis la RACINE, qui porte PIL, numcodecs, numpy,
 # scipy et tifffile -- strictement plus que ce que `inference/` portait.
@@ -1043,14 +1043,14 @@ printf '  %-30s ' "chiffres de la soumission"
 # chiffre existe quelque part » est satisfait par le document SOURCE et une faute de frappe
 # dans le dossier passe. Sonde faite : transposer 12,97 en 12,79 dans une copie fait
 # echouer le controle, ce qu'il ne faisait pas avant.
-# ⚠ `--article` fait la meme chose pour `article/article.typ`, qui recopie lui aussi ses
+# ⚠ `--article` fait la meme chose pour `docs/article/article.typ`, qui recopie lui aussi ses
 # chiffres a l'anglaise et part vers un lectorat qui ne peut pas les recouper. Sa section
 # « Reproducibility » AFFIRME que chaque nombre est cherche litteralement dans sa source :
 # sans ce controle, l'affirmation serait flatteuse au lieu d'etre vraie.
 if uv run python "$ROOT/src/depot/verifier_chiffres.py" "$ROOT"/docs/*.md \
-     "$ROOT/article/article.typ" \
+     "$ROOT/docs/article/article.typ" \
      --soumission "$ROOT/docs/21_texte_de_soumission.md" \
-     --article "$ROOT/article/article.typ" >/tmp/chiffres.log 2>&1; then
+     --article "$ROOT/docs/article/article.typ" >/tmp/chiffres.log 2>&1; then
   printf '✅ %s\n' "$(grep -c '✅' /tmp/chiffres.log) chiffres retrouves"
 else
   printf '❌ ECHEC\n'; sed 's/^/       /' /tmp/chiffres.log | tail -6; FAIL=$((FAIL + 1))
@@ -1061,8 +1061,8 @@ fi
 # batterie verte voudrait dire « le compteur de sections fonctionne » et rien de plus.
 printf '  %-30s ' "renvois de l'article"
 if uv run --project "$ROOT" python "$ROOT/src/depot/renvois_article.py" \
-     "$ROOT/article/article.typ" --pdf "$ROOT/article/article.pdf" \
-     --readme "$ROOT/article/README.md" > /tmp/renvois.log 2>&1; then
+     "$ROOT/docs/article/article.typ" --pdf "$ROOT/docs/article/article.pdf" \
+     --readme "$ROOT/docs/article/README.md" > /tmp/renvois.log 2>&1; then
   printf '✅ %s\n' "$(grep -o '[0-9]* renvoi(s) de section' /tmp/renvois.log | head -1)"
 else
   printf '❌ ECHEC\n'; sed 's/^/       /' /tmp/renvois.log | tail -8; FAIL=$((FAIL + 1))
@@ -1122,7 +1122,7 @@ rm -f "$T55"
 printf '  %-30s ' "batteries non lancees"
 JAMAIS=""
 # ⚠⚠ La PORTEE du garde etait une paire de globs ecrite a la main, donc un module hors de
-# `src/` echappait au controle -- exactement le cas de `inference_xpu/src/infer_ink.py`,
+# `src/` echappait au controle -- exactement le cas de `src/xpu/infer_ink.py`,
 # le point d entree de l inference. La liste suit desormais celle de `artefacts_orphelins.py`.
 # Mesure du 2026-08-25 : l elargissement ne signale RIEN de neuf, il ferme juste le trou.
 for f in "$ROOT"/src/*/*.py "$ROOT"/inference_xpu/src/*.py "$ROOT"/tracecheck/*.py \

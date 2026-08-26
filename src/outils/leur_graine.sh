@@ -50,7 +50,7 @@ if [ ! -d "$DEST/trace" ]; then
   # Leurs parametres, pas les notres : 200 generations et thread_limit 1.
   python3 -c "
 import json
-p = json.load(open('$ROOT/artefacts/PHerc0358/seed.json'))
+p = json.load(open('$ROOT/data/artefacts/PHerc0358/seed.json'))
 p.update({'generations': 200, 'thread_limit': 1, 'voxelsize': $UM})
 json.dump(p, open('$DEST/trace/seed.json', 'w'), indent=2)"
   ( cd "$DEST/trace" && timeout 3600 vc_grow_seg_from_seed -v "$B/$SURF" -t . -p seed.json \

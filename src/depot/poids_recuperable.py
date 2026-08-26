@@ -2,7 +2,7 @@
 """Ce qu'un dossier libère VRAIMENT quand on le supprime — `du` ne sait pas répondre.
 
 ⚠⚠ POURQUOI CE FICHIER EXISTE. `du -sh` a compté 16,6 Go dans `htr/`, `inference/` et
-`inference_xpu/`, et le plan de ménage (`56`) a publié ce chiffre. Il est **faux d'un facteur
+`src/xpu/`, et le plan de ménage (`56`) a publié ce chiffre. Il est **faux d'un facteur
 quatre**, pour une raison que `du` ne peut pas voir : `uv` installe ses paquets en **liens
 durs** vers `~/.cache/uv`. Un fichier de venv n'est donc pas une copie, c'est un nom de plus
 sur des octets déjà là. Supprimer le nom ne libère rien tant qu'il en reste un autre.

@@ -114,7 +114,7 @@ def decode(raw: bytes, meta: dict, expected: int) -> bytes | None:
     except ImportError as e:
         raise CodecIndisponible(
             f"codec « {codec} » déclaré mais sa bibliothèque manque ici ({e}) — "
-            f"lancer depuis un environnement qui a numcodecs (experiments/)") from e
+            f"lancer depuis un environnement qui a numcodecs (src/excision/)") from e
     except Exception:
         return None
     return out if len(out) == expected else None

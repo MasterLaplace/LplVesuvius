@@ -175,7 +175,7 @@ def main() -> int:
     args = parser.parse_args()
 
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-    from excision.radial import load_centre
+    from radial import load_centre
 
     data = load_centre(args.centre)
     zs = [int(v) for v in args.slices.split(",")]

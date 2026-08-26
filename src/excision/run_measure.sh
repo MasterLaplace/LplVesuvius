@@ -8,8 +8,11 @@
 # Usage: ./run_measure.sh [fichier_de_sortie]
 set -u
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-WINDCHECK="$ROOT/repos/windcheck"
+# ⚠ DEUX niveaux : ce script vit dans `src/excision/`, pas dans `src/excision/`.
+# Un seul `..` rendrait `src/` et chaque chemin construit dessous serait faux d un
+# cran -- sans erreur, juste des fichiers introuvables.
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+WINDCHECK="$ROOT/data/repos/windcheck"
 VOLUME="s3://vesuvius-challenge-open-data/PHerc0172/volumes/20241024131839-7.910um-53keV-masked.zarr"
 OUT="${1:-$ROOT/docs/mesures/excision_samples.tsv}"
 

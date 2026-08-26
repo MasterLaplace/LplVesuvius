@@ -56,7 +56,7 @@ echo "== chiffres du document qui part"
 # des figures, ce qui evite de garder chaud un venv de 2,5 Gio pour du dessin.
 cd "$ROOT" || exit 2
 if uv run python "$ROOT/src/depot/verifier_chiffres.py" "$ROOT"/docs/*.md \
-     "$ROOT/article/article.typ" --soumission "$TEXTE" --article "$ROOT/article/article.typ" \
+     "$ROOT/docs/article/article.typ" --soumission "$TEXTE" --article "$ROOT/docs/article/article.typ" \
      > "$DEST/chiffres.log" 2>&1; then
   printf '  ✅ %s chiffres retrouvés (journal joint)\n' "$(grep -c '✅' "$DEST/chiffres.log")"
 else

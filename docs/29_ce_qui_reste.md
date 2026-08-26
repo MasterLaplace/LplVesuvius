@@ -119,7 +119,7 @@ Trois entrées neuves, chacune née d'une mesure de la journée.
 
 | quoi | où | état |
 |---|---|---|
-| publier le dépôt (`tracecheck/` au minimum) et mettre son adresse dans le texte | `21`:270 | ⏳ **l'adresse n'existe pas encore** |
+| publier le dépôt (`src/tracecheck/` au minimum) et mettre son adresse dans le texte | `21`:270 | ⏳ **l'adresse n'existe pas encore** |
 | revérifier chaque chiffre contre son fichier de sortie **le jour de l'envoi** | `21`:16 | ⏳ règle posée, à exécuter |
 | envoyer la soumission Progress Prize | `HANDOFF` T4, `15` | ⏳ le texte existe, les figures sont à joindre |
 

@@ -1,15 +1,18 @@
-# Les depots clones sont recuperables depuis src/outils/repos.tsv : les suivre ici
-# ferait de ce depot un miroir de trente autres.
-/repos/
-
 # Les donnees se comptent en dizaines a centaines de gigaoctets (77 Go pour la
 # seule region grand-prize en Zarr, 390 Go en pile TIFF). Elles se retelechargent
-# par fenetre, pour une question precise.
-/data/
-
-# Le miroir du site est reproductible par wget ; ce qui merite d'etre suivi, ce
-# sont les notes qu'on en tire, pas les 100+ Mo d'assets.
-/site/
+# par fenetre, pour une question precise. Depuis le repli du 2026-08-26 elles
+# accueillent aussi ce qui vivait a la racine et se retelecharge : les depots
+# clones (recuperables depuis src/outils/repos.tsv, sinon ce depot serait un
+# miroir de trente autres), le miroir du site (reproductible par wget), et la
+# soumission.
+#
+# ⚠⚠ La forme est `/data/*` et NON `/data/`, et la difference n est pas de style :
+# git ne descend pas dans un dossier exclu, donc une exception `!/data/artefacts/`
+# serait sans effet sous `/data/`. Or `data/artefacts/` porte des maillages
+# VERSIONNES qui servent de reference -- les perdre au repli aurait ete la seule
+# facon de faire disparaitre des donnees en les rangeant.
+/data/*
+!/data/artefacts/
 
 # Logs de recuperation : utiles pendant un run, sans valeur apres. Ils vivent dans
 # docs/journaux/ depuis le rangement par nature ; la regle ANCREE /docs/*.log ne les
@@ -25,8 +28,6 @@ __pycache__/
 .venv/
 
 # Environnement de l'experience : reconstructible par `uv sync`.
-/experiments/.venv/
-/experiments/uv.lock
 
 # Sous-produits du controle de miroir : regeneres a chaque passe.
 /docs/sitemap.xml
@@ -34,12 +35,11 @@ __pycache__/
 /docs/mesures/sitemap.xml
 /docs/mesures/sitemap_paths.txt
 
-# Cartes d encre et images produites : regenerables par inference_xpu/src/infer_ink.py
+# Cartes d encre et images produites : regenerables par src/xpu/infer_ink.py
 /data/out/
 /inference/.venv/
 /inference/uv.lock
-/inference_xpu/.venv/
-/inference_xpu/uv.lock
+/src/xpu/.venv/
 
 # Les figures des documents sont suivies : elles portent des resultats mesures.
 !/docs/images/
@@ -61,8 +61,8 @@ soumission/
 
 # Manim : l'environnement, les rendus intermédiaires et les vidéos assemblées.
 # ⚠ Les SCÈNES sont versionnées (c'est le code) ; les mp4 ne le sont pas — ils se
-# régénèrent par `apprendre/rendre.sh` et pèsent des mégaoctets à chaque itération.
-apprendre/.venv/
-apprendre/media/
-apprendre/videos/
-apprendre/vignettes/
+# régénèrent par `src/apprendre/rendre.sh` et pèsent des mégaoctets à chaque itération.
+src/apprendre/.venv/
+src/apprendre/media/
+src/apprendre/videos/
+src/apprendre/vignettes/

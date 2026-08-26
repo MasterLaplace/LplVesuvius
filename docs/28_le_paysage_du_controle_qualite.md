@@ -5,9 +5,9 @@ d'écrire un septième vérificateur (`00` §4) ; encore faut-il tenir la liste 
 elle a beaucoup bougé — **la quasi-totalité de cet écosystème a été créée entre le
 1er juin et le 3 août 2026**.
 
-⚠ **Ce qui est vérifié ici de mes yeux** : le contenu du clone `repos/villa` (les douze
+⚠ **Ce qui est vérifié ici de mes yeux** : le contenu du clone `data/repos/villa` (les douze
 poids de perte, leurs gardes, l'existence et les options de `vc_tifxyz_selfcross`), et le
-clone `repos/tifxyz-surgeon` (ses quatre détecteurs, leurs docstrings, sa suite de tests).
+clone `data/repos/tifxyz-surgeon` (ses quatre détecteurs, leurs docstrings, sa suite de tests).
 **Ce qui vient d'une recherche sur l'API GitHub et de lectures de README** : le reste du
 tableau du §3, les numéros de PR, et les chiffres que leurs auteurs publient. C'est dit
 ici plutôt que laissé à deviner.
@@ -170,7 +170,7 @@ avant toute publication.
    d'échouer » poussée d'un cran : ne pas seulement sonder qu'un contrôle *peut* échouer,
    mais remplacer chaque détecteur par un bouchon et **exiger le rouge**.
 
-   ✅ **Fait le jour même** : `tracecheck/mutation.py`, batterie de `src/outils/temoins.sh`.
+   ✅ **Fait le jour même** : `src/tracecheck/mutation.py`, batterie de `src/outils/temoins.sh`.
    Il remplace tour à tour sept fonctions porteuses par un bouchon **dégénéré** — pas
    cassé : lever une exception ferait rougir la suite pour la mauvaise raison, on veut
    prouver qu'une réponse *neutre et plausible* est détectée — et exige le rouge.
@@ -181,7 +181,7 @@ avant toute publication.
    **trois de ses quatre détecteurs** pouvaient disparaître sans qu'un test le remarque.
 
    > ⚠ Piège payé en l'écrivant : le python système de cette machine **n'a pas numpy**,
-   > et `temoins.sh` lance ses batteries par `uv run python` **depuis `experiments/`**.
+   > et `temoins.sh` lance ses batteries par `uv run python` **depuis `src/excision/`**.
    > Un script qui suppose son propre interpréteur annonçait « la suite de référence est
    > déjà rouge » sur une suite parfaitement verte — le pire des diagnostics : faux, et
    > confiant. Le script cherche donc un interpréteur qui a numpy, et le **dit**.

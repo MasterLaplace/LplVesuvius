@@ -11,11 +11,13 @@
 # un libelle ajoute sans sa traduction fait echouer ce script au lieu de produire un PDF
 # franglais.
 #
-#   ./article/build.sh
+#   ./docs/article/build.sh
 set -eu
-cd "$(dirname "$0")/.." || exit 2
+# ⚠ TROIS niveaux depuis `docs/article/` : ce script vivait a la racine dans
+# `docs/article/`, il en est a deux crans maintenant.
+cd "$(dirname "$0")/../.." || exit 2
 ROOT=$PWD
-FIG="$ROOT/article/figures"
+FIG="$ROOT/docs/article/figures"
 TYPST=${TYPST:-$HOME/.local/bin/typst}
 
 echo "== figures (anglais)"
@@ -59,4 +61,4 @@ cp "$ROOT/docs/images/44_extension.jpg"  "$FIG/"
 echo "== PDF"
 cd "$ROOT/article"
 "$TYPST" compile article.typ article.pdf
-echo "écrit : $ROOT/article/article.pdf"
+echo "écrit : $ROOT/docs/article/article.pdf"

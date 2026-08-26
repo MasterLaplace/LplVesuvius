@@ -205,7 +205,7 @@ volume, même nombre de générations, une seule clé change à la fois).
 
 ### ⚠⚠ Et une SECONDE correction, une heure plus tard : « il ne reste que la géométrie » est trop fort
 
-La doc officielle du traceur (`repos/villa/volume-cartographer/docs/tracing.md`) décrit le
+La doc officielle du traceur (`data/repos/villa/volume-cartographer/docs/tracing.md`) décrit le
 processus général comme *« optimize a surface from a thresholded surface prediction (using
 `CachedChunked3dInterpolator<uint8_t, thresholdedDistance>`) »*. Et `thresholdedDistance`
 (`GrowPatch.cpp:3078`) **est** une transformée de distance : au-dessus du seuil 170 la
@@ -293,7 +293,7 @@ la seule chose qui rend la dérive visible avant qu'elle ne coûte.
 uv run python src/commun/suivre_nappe.py --verifier     # 29 témoins
 uv run python src/figures/figure_marche.py               # la figure
 
-# sur la vraie prédiction, depuis experiments/ (⚠ « le seul env qui a numcodecs »
+# sur la vraie prédiction, depuis src/excision/ (⚠ « le seul env qui a numcodecs »
 # était faux : la racine en a aussi, mesuré le 2026-08-25)
 cd experiments
 uv run python ../src/commun/suivre_nappe.py \

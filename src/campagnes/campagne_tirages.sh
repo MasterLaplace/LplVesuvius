@@ -102,7 +102,7 @@ sys.exit(0 if abs(float('$UM') - float('$UM_TABLE')) < 1e-6 else 1)"; then
     if [ -s "$D/resume.json" ]; then echo "   -- r$I deja fait"; continue; fi
     rm -rf "$D"; mkdir -p "$D"
     sed "s/\"voxelsize\": [0-9.]*/\"voxelsize\": $UM/" \
-        "$ROOT/artefacts/PHerc0358/seed.json" > "$D/seed.json"
+        "$ROOT/data/artefacts/PHerc0358/seed.json" > "$D/seed.json"
     if [ -n "$GENERATIONS" ]; then
       sed -i "s/\"generations\": [0-9]*/\"generations\": $GENERATIONS/" "$D/seed.json"
     fi

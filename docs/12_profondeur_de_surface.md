@@ -14,7 +14,7 @@ et devenu autre chose que ce qu'il cherchait.
 Le détecteur GP-2023 lit **26 couches** d'une pile — ici les couches 15 à 40.
 
 ⚠ **La convention est vérifiée à la source, pas supposée.** Le tutoriel officiel
-(miroir local, `site/scrollprize.org/tutorial_VC.html`) donne la commande qui les
+(miroir local, `data/site/scrollprize.org/tutorial_VC.html`) donne la commande qui les
 engendre :
 
 ```

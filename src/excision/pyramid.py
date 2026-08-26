@@ -94,7 +94,7 @@ def main() -> int:
     import zarr
 
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-    from excision.radial import load_centre
+    from radial import load_centre
 
     centre_data = load_centre(args.centre)
     centre = (centre_data["cx"], centre_data["cy"])

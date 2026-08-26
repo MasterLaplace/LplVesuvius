@@ -35,7 +35,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from excision.correlate import load_published, spearman  # noqa: E402
+from correlate import load_published, spearman  # noqa: E402
 
 
 def main() -> int:

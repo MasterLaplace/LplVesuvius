@@ -4,7 +4,7 @@
 dépôt et se lit sans le connaître.
 
 ```bash
-./article/build.sh          # figures EN ANGLAIS + PDF
+./docs/article/build.sh          # figures EN ANGLAIS + PDF
 ```
 
 ⚠ Le script **régénère** les figures au lieu de les copier. Une copie fige une traduction à

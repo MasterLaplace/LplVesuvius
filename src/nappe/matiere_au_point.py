@@ -15,7 +15,7 @@ que supposé : le volume de `PHercParis4` à 2,4 µm fait `[75784, 32693, 32693]
 premier axe peut porter un z de 73 919. Un ordre supposé lirait un autre endroit du rouleau
 et rendrait « pas de matière » avec le même aplomb.
 
-Le lecteur de blocs est celui de `tracecheck/` — importé, jamais recopié. Deux lecteurs de
+Le lecteur de blocs est celui de `src/tracecheck/` — importé, jamais recopié. Deux lecteurs de
 zarr finiraient par ne pas s'accorder sur le séparateur de clé ou sur le codec, et le mode
 d'échec des deux est de rendre « bloc vide » au lieu d'une erreur.
 """
@@ -26,7 +26,7 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tracecheck"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tracecheck"))
 
 BUCKET = "https://vesuvius-challenge-open-data.s3.amazonaws.com"
 

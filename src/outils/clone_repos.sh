@@ -9,7 +9,9 @@ set -u
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 MANIFEST="$ROOT/src/outils/repos.tsv"
-DEST="$ROOT/repos"
+# ⚠ `data/` depuis le repli du 2026-08-26 : un depot clone est une donnee
+# retelechargeable, pas du code de ce depot.
+DEST="$ROOT/data/repos"
 LOG="$ROOT/docs/journaux/clone.log"
 MAX_TIER="${1:-9}"
 JOBS=6

@@ -50,7 +50,7 @@ except Exception: print('')" 2>/dev/null)" = "ok" ]; then
   GEN_CIBLE=$(python3 -c "print(max(20, round(120 * 20 / $PAS)))")
   python3 -c "
 import json
-p = json.load(open('$ROOT/artefacts/PHerc0358/seed.json'))
+p = json.load(open('$ROOT/data/artefacts/PHerc0358/seed.json'))
 p['thread_limit'] = 1
 p['step_size'] = float($PAS)
 p['generations'] = $GEN_CIBLE

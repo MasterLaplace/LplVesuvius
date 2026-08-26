@@ -162,7 +162,7 @@ def main() -> int:
     if not a.point:
         p.error("--point Z Y X est requis")
 
-    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tracecheck"))
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tracecheck"))
     import tracecheck as tc
     url = f"{BUCKET}/{a.volume}"
     meta = tc.array_meta(url, a.niveau, 30.0)

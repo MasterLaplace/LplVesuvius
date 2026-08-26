@@ -3,7 +3,7 @@
 2026-08-17. L'idée de l'auteur — *« envoyer une onde traversant toutes les couches
 depuis le centre »* — menée jusqu'à une liste d'endroits précis à examiner.
 
-**Fichiers** : `experiments/src/excision/{radial,fusions,fusion_scan}.py`.
+**Fichiers** : `src/excision/src/excision/{radial,fusions,fusion_scan}.py`.
 Aucune mesure de ce document n'est en `python -c` (règle `06` §5.6, payée le jour même).
 
 ---
@@ -364,7 +364,7 @@ cd experiments
 
 # l'axe, DERIVE d'une trace et verifiable (monotonie de la spirale)
 uv run python src/excision/radial.py centre PHerc0172 \
-    ../repos/windcheck/data/scroll5_tifxyz/20251115002741-*/mesh
+    ../data/repos/windcheck/data/scroll5_tifxyz/20251115002741-*/mesh
 
 # l'onde radiale : feuilles, espacement, longueur
 uv run python src/excision/radial.py compter PHerc0172 "$VOL"
@@ -469,7 +469,7 @@ au même rayon. C'est un appariement *prédictif* entre coupes, cousin de celui 
 
 ## 11. ✅ Les deux lectures sont départagées : le défaut **dérive**
 
-`experiments/src/excision/track_z.py`. Ce qui manquait au §10 n'était pas une donnée
+`src/excision/track_z.py`. Ce qui manquait au §10 n'était pas une donnée
 mais un **appariement prédictif** : suivre un site en autorisant sa dérive au lieu
 d'exiger qu'il reste au même rayon.
 
@@ -585,7 +585,7 @@ faux pour que l'invariant bouge ?**
 
 ### La mesure
 
-`experiments/src/excision/sensibilite_centre.py`, niveau 0, 6 tranches, décalage appliqué
+`src/excision/sensibilite_centre.py`, niveau 0, 6 tranches, décalage appliqué
 **en diagonale** (déplacer selon un seul axe est le cas le plus favorable, la moitié des
 rayons le compensant) :
 

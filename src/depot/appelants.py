@@ -110,8 +110,9 @@ def scripts_du_depot(textes: dict[str, str]) -> list[str]:
     """Les scripts que ce dépôt peut lancer, d'après `lplv.FAMILLES` et rien d'autre.
 
     ⚠⚠ Cette fonction existe parce qu'il y avait DEUX réponses à « qu'est-ce qu'un script de
-    ce dépôt ». `lplv` en nomme cinq familles — `src/`, mais aussi `tracecheck/`,
-    `inference_xpu/src/` et `experiments/src/` — pendant que ce fichier jugeait `src/` seul.
+    ce dépôt ». `lplv` en nommait cinq familles — `src/`, mais aussi `tracecheck/`,
+    `inference_xpu/src/` et `experiments/src/` — pendant que ce fichier jugeait `src/`
+    seul.
     Donc `lplv` savait lancer un verbe dont ce garde-fou ne se demandait jamais si quelque
     chose l'exécutait : un orphelin hors de `src/` était invisible par construction.
 
@@ -228,8 +229,21 @@ def verifier() -> int:
     # seul pendant que `lplv` sait lancer quatre familles de plus : un orphelin hors de
     # `src/` etait invisible par construction, et il y en avait quatre.
     juges = scripts_du_depot(textes)
-    v("le perimetre juge est celui de lplv, pas seulement src/",
-      any(not f.startswith("src/") for f in juges))
+    # ⚠⚠ Ce controle disait « au moins un script juge est HORS de `src/` ». Le repli du
+    # 2026-08-26 l a rendu VACUEUX : tout est dans `src/` desormais, donc il ne pouvait plus
+    # que rougir. Ce qui compte n a pas change — le perimetre doit etre DERIVE de
+    # `lplv.FAMILLES` et non ecrit en dur — mais ca ne se prouve qu en changeant FAMILLES et
+    # en verifiant que le perimetre suit.
+    import lplv as _lplv
+    familles_reelles = _lplv.FAMILLES
+    try:
+        _lplv.FAMILLES = (("src/depot/*.py", "python"),)
+        restreint = scripts_du_depot(textes)
+    finally:
+        _lplv.FAMILLES = familles_reelles
+    v("le perimetre SUIT lplv.FAMILLES au lieu d'etre ecrit en dur",
+      restreint and all(f.startswith("src/depot/") for f in restreint)
+      and len(restreint) < len(juges))
     v("... et il couvre chacune des familles declarees",
       all(any(fnmatch.fnmatch(f, motif) for f in juges) for motif, _ in FAMILLES))
     v("... sans rien prendre en dehors",

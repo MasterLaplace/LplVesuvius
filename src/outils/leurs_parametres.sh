@@ -11,7 +11,7 @@
 # ⭐ Reste une difference de PARAMETRES, et elle est lisible dans leur metadonnee. Leur
 # `vc_gsfs_params` ne contient QUE :
 #     generations 200, min_area_cm 0.3, mode random_seed, thread_limit 1, cache_root
-# Le notre en contient deux de plus, hérités de `artefacts/PHerc0358/seed.json` :
+# Le notre en contient deux de plus, hérités de `data/artefacts/PHerc0358/seed.json` :
 #     search_effort 10, step_size 20.0
 # Ne pas enregistrer un parametre veut dire l'avoir laisse au DEFAUT. Ce script part donc
 # d'un fichier de parametres MINIMAL au lieu d'en retirer des cles d'un fichier existant --

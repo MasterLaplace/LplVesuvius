@@ -20,7 +20,7 @@ sur la page `Prizes` du miroir**, pas contre une impression.
 >   CROSS-SECTION** »*
 
 ⚠⚠ **Corrigé le 2026-08-19 : les deux derniers mots manquaient**, sous un titre qui
-annonce « mot pour mot ». Vérifié dans le miroir (`site/scrollprize.org/prizes.html`).
+annonce « mot pour mot ». Vérifié dans le miroir (`data/site/scrollprize.org/prizes.html`).
 
 ⭐ Et ils ne sont pas décoratifs : *« in cross-section »* dit **comment** la démonstration
 doit être faite — le maillage montré **contre les coupes du volume**, pas seulement le
@@ -152,7 +152,7 @@ destiné à être *utilisé par d'autres* est un cas différent d'un document qu
 1. ✅ **La généralité** — *fait* : **71 traces** sur PHerc0139 / PHerc1667 / PHerc0814
    (`07` §9), **80 segments** de profondeur, **99 champs de correction** sur deux
    rouleaux.
-2. ✅ **Un paquet autonome** — *fait* : `tracecheck/`, un fichier, `numpy` seul,
+2. ✅ **Un paquet autonome** — *fait* : `src/tracecheck/`, un fichier, `numpy` seul,
    16 contrôles hors ligne.
 3. ✅ **Une image** — *fait* : `profondeur_deux_cas.png` (segment sain / hors feuille) et
    les deux figures de champ avec leur témoin.

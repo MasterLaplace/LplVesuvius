@@ -196,7 +196,7 @@ mkdir -p "$DEST"
 # prediction de ce depot est donc fausse d un facteur 16 -- y compris le tableau de `48` qui
 # annonce « 0,317 cm² » des deux cotes et ressemblait a une comparaison controlee.
 UM_PRED=$(python3 -c "print($UM * 2**$NIV)")
-[ -s "$DEST/seed.json" ] || python3 - "$ROOT/artefacts/PHerc0358/seed.json" "$DEST/seed.json" \
+[ -s "$DEST/seed.json" ] || python3 - "$ROOT/data/artefacts/PHerc0358/seed.json" "$DEST/seed.json" \
     "$UM_PRED" "$GENERATIONS" <<'PY'
 import json, sys
 src, dst, um, gen = sys.argv[1], sys.argv[2], float(sys.argv[3]), int(sys.argv[4])

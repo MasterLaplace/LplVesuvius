@@ -183,7 +183,7 @@ cd inference_xpu && uv run python src/infer_ink.py \
 
 # la mesure (41 s)
 uv run python ../src/volume/evaluate_segment.py ../data/out/ink_segment_complet.npy \
-    ../repos/Vesuvius-Grandprize-Winner/all_labels/20230909121925_inklabels.png
+    ../data/repos/Vesuvius-Grandprize-Winner/all_labels/20230909121925_inklabels.png
 
 # les images (⚠ --rotate 270 : sans elle, les lettres sont couchees)
 uv run python ../src/volume/render_segment.py ../data/out/ink_segment_complet.npy \

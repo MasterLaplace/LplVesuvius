@@ -110,7 +110,7 @@ rien (marche médiane 12,2 / 255, **0 trace sur 38** à médiane nulle).
 ./src/campagnes/campagne_saut_spire.sh docs/saut_spire
 cd inference_xpu
 uv run python ../src/tables/table_saut_spire.py ../docs/saut_spire \
-    ../repos/windcheck/results/index.json
+    ../data/repos/windcheck/results/index.json
 ```
 
 

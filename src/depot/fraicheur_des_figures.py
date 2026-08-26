@@ -41,8 +41,12 @@ RACINE = Path(__file__).resolve().parents[2]
 def figures(racine: Path = RACINE) -> list[Path]:
     """Les modules qui savent écrire une image, c'est-à-dire ceux qui déclarent `--sortie`."""
     out = []
+    # ⚠⚠ `.venv` est ELAGUE : depuis que les environnements vivent avec leur code
+    # (`src/xpu/.venv`), un parcours de `src/` traverse 8 885 fichiers de `site-packages`.
+    # Le coût n'est pas le pire : un module de bibliothèque qui contiendrait `"--sortie"` et
+    # `images/` serait pris pour une figure de ce dépôt.
     for f in sorted((racine / "src").rglob("*.py")):
-        if "__pycache__" in f.parts:
+        if "__pycache__" in f.parts or ".venv" in f.parts:
             continue
         try:
             t = f.read_text(encoding="utf-8", errors="replace")
