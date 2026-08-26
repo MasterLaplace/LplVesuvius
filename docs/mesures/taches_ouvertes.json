@@ -1,0 +1,117 @@
+{
+ "sabliers": 41,
+ "par_etat": {
+  "ouverte": 20,
+  "faite": 14,
+  "recit": 6,
+  "legende": 1
+ },
+ "non_classes": [],
+ "ouvertes": [
+  {
+   "doc": "docs/00_etat_de_lart.md",
+   "ligne": 383,
+   "raison": "Le gain n'a jamais été montré : `42` (2026-08-21) a appliqué une correction en conception appariée et mesuré l'INVERSE d'un gain — « α reste à 1 » (témoin +0,98 → corrigé +1,03) avec les auto-intersections passant de 0 à 11 753 — et `31` §5 nomme toujours le reste (« le gauchissement difféomorphe reste pour la correction de forme ») pendant que son §9 dit que « corriger sert-il à quelque chose » n"
+  },
+  {
+   "doc": "docs/00_etat_de_lart.md",
+   "ligne": 389,
+   "raison": "réfuté — Verdict refute : le marqueur reste OUVERT. Trois refutations independantes, toutes verifiees dans les fichiers."
+  },
+  {
+   "doc": "docs/07_reparee_nest_pas_propre.md",
+   "ligne": 412,
+   "raison": "Rien n'a été rejoué : `src/excision/baseline_sweep.py` construit `record = {label, cells, measured, variants}` puis `contamination`, sans jamais le zarr ni `voxel_um`, et `docs/mesures/sweep_PHerc1667.jsonl` porte encore exactement ces clés — l'alternative « 18 voxels bruts (43 µm) ou rayon physique (58 vx à 2,399 µm) » reste donc entière, et le +0,579 non vérifiable continue d'être cité tel quel "
+  },
+  {
+   "doc": "docs/16_carte_difficulte_rouleaux_du_prix.md",
+   "ligne": 148,
+   "raison": "Le script n'a pas été corrigé : `src/nappe/espacement_spires.py` ne construit toujours que `report = {zarr, level, voxel_um, binaire, seuils, par_rayon}` et n'imprime `len(blocks)` / `len(picks)` qu'à l'écran (ligne 135), tandis que `docs/carte_difficulte/*.json` porte encore exactement `['binaire','level','seuils','voxel_um','zarr']` — sans même `par_rayon`, donc jamais regénéré depuis ; et `33` "
+  },
+  {
+   "doc": "docs/19_ecarter_avant_de_payer.md",
+   "ligne": 164,
+   "raison": "Le commit a6867ca (2026-08-20 01:31) a AJOUTE ce signalement sans le resoudre (« Signale, avec l'outil qui donne les comptes reels par artefact ») ; doc 12 §13 ne demele que 50 contre 72, jamais le 36, qui subsiste tel quel aux lignes 13, 22 et 159 face au 72 des lignes 202 et 281, et les seuls commits ulterieurs sur ce fichier (31bea1f, 79fba93, a5901be) ne font que reecrire des chemins."
+  },
+  {
+   "doc": "docs/22_batch_repliquer.md",
+   "ligne": 57,
+   "raison": "Aucune table n'a ete publiee : doc 27 §4 la liste encore comme reste nº3 (« publier la table de qualite de trace, et le depot | `22` Q3, `15` §5, `21` »), la soumission n'est pas envoyee (HANDOFF.md:1967 « T4 | finir et envoyer la soumission Progress Prize | ⏳ »), et le seul balayage `--all --csv` du depot (docs/mesures/balayage_scroll1.csv) sert la calibration de doc 52, pas une publication."
+  },
+  {
+   "doc": "docs/22_batch_repliquer.md",
+   "ligne": 74,
+   "raison": "Toujours ouverte dans deux documents posterieurs et dans l'outil : doc 29 §2 « ⏳ Reste : exporter le champ en coordonnees de fenetre (`22` R2) », doc 27 §4 reste nº1, HANDOFF.md:1968 porte R2 avec une colonne de blocage vide, et src/nappe/champ_correction.py n'expose aucune option d'export en coordonnees de fenetre."
+  },
+  {
+   "doc": "docs/29_ce_qui_reste.md",
+   "ligne": 81,
+   "raison": "R2 est toujours marqué ⏳ dans son propre document (`22`:74 « exporter le champ en coordonnées de fenêtre | ⏳ ») et reste listé sans état dans `HANDOFF` §7:1968 ; `42` a bien appliqué une correction et rendu les deux versions, mais par une autre voie (points de nappe de `suivre_nappe.py`, pas le champ de `20`), et le gain n'est pas montré — « aucune variante ne s'approche de +0,00 »."
+  },
+  {
+   "doc": "docs/29_ce_qui_reste.md",
+   "ligne": 122,
+   "raison": "Toujours vrai, et re-mesuré depuis : `56` §« permalien.py » écrit « ⚠⚠ Et un fait mesuré qui borne ce que le lien promet : ce dépôt est PRIVÉ. Sa racine GitHub rend 404 sans session » (2026-08-25, repris dans `src/depot/permalien.py`), et la ligne 1 du tableau « Ce qu'il reste à faire avant d'envoyer » de `21`:504 n'est pas barrée."
+  },
+  {
+   "doc": "docs/29_ce_qui_reste.md",
+   "ligne": 123,
+   "raison": "La règle est devenue une commande (`21` ligne 2 barrée : « ✅ c'est une commande maintenant — `src/depot/verifier_chiffres.py` recalcule 220 chiffres »), mais l'acte qu'elle nomme — revérifier **le jour de l'envoi** — n'a pas eu lieu puisque la soumission n'est pas partie."
+  },
+  {
+   "doc": "docs/29_ce_qui_reste.md",
+   "ligne": 124,
+   "raison": "La soumission n'a pas été envoyée ; `HANDOFF` T4 la porte encore en ⏳ (« finir et envoyer la soumission Progress Prize ») et `21`:504 garde ouvertes la publication du dépôt et la décision de forme, l'échéance du 31 août 2026 n'étant pas passée."
+  },
+  {
+   "doc": "docs/29_ce_qui_reste.md",
+   "ligne": 163,
+   "raison": "Aucune mesure postérieure n'isole la cause, et `46` §7 (2026-08-22) la redit telle quelle : « Laquelle des causes joue — la résolution, ce rouleau-ci, ou un papyrus réellement muet — reste ouverte, comme `36` le disait déjà »."
+  },
+  {
+   "doc": "docs/29_ce_qui_reste.md",
+   "ligne": 166,
+   "raison": "`45` §6 « Ce qui reste ouvert » le porte encore explicitement : « ⏳ Le transport vers une région sans vérité n'est pas encore fait […] demande les deux régions d'un **même** objet », et aucun document postérieur (46 à 56) ne le reprend."
+  },
+  {
+   "doc": "docs/29_ce_qui_reste.md",
+   "ligne": 167,
+   "raison": "`46` §7 le laisse ouvert (« pas de trace à α élevé sur Scroll 1, où il marche. Ce n'est pas un obstacle de méthode, c'est un rendu à produire ») ; le seul témoin négatif mesuré reste `docs/mesures/temoin_negatif.json` du 2026-08-22 sur PHerc1447, et si `51` §5 fournit depuis une trace à α = +1,12 sur PHercParis4, aucune campagne de témoin négatif n'y a été relancée."
+  },
+  {
+   "doc": "docs/44_ou_la_chaine_se_trouve.md",
+   "ligne": 990,
+   "raison": "réfuté — Réfuté. La preuve invoquée s'appuie d'abord sur les trois points du balayage (1 → 12,96 / 3 → 13,01 / 10 → 12,98), or le document les disqualifie lui-même deux fois : la table les publie sous l'en-tête « réglage (ignoré)"
+  },
+  {
+   "doc": "docs/45_consistent_with_quantifie.md",
+   "ligne": 160,
+   "raison": "Aucune preuve de réalisation trouvée, et le registre confirme que c'est toujours dû : docs/29_ce_qui_reste.md ligne 166 (item M7) porte le résidu identique — « ⏳ Reste : le transport vers une région sans vérité du **même** objet » — alors même que M7 est par ailleurs coché ✅ fait le 2026-08-22 → 45. Rien dans les documents postérieurs (46 à 56) ne mesure sur la surface d'un fragment ouvert puis re"
+  },
+  {
+   "doc": "docs/46_le_temoin_negatif.md",
+   "ligne": 159,
+   "raison": "L'instrument existe mais n'a jamais été réappliqué à un second couple de cartes — aucune preuve de réutilisation trouvée. Le seul consommateur aval, src/graine/eligibilite_aval.py, n'importe que deux CONSTANTES (« from temoin_negatif import PART_MINIMALE_DU_POSITIF, SIGMA_MODELE_QUI_MARCHE ») et relit le JSON déjà produit ; sa propre docstring le dit : « ⚠⚠ Ce que ce fichier NE fait pas : il ne me"
+  },
+  {
+   "doc": "HANDOFF.md",
+   "ligne": 1353,
+   "raison": "Aucune des deux campagnes n'a livré ce qu'elle annonçait : `data/leviers/` ne contient que `temoin/` (pas de cellule sdt1/sdt10/sdt10_fibres_hv) et `docs/00_carnet_de_bord.md` écrit toujours « ⚠ Hypothèse, pas conclusion — src/outils/leviers_de_perte.sh la mesure » ; côté piste C seuls 3 des 17 essais ont un verdict (`docs/mesures/convergence_essai_{b,ng2,scale1}.json`), et la table « Les deux pis"
+  },
+  {
+   "doc": "HANDOFF.md",
+   "ligne": 1967,
+   "raison": "Rien ne prouve l'envoi et tout prouve le contraire : HANDOFF §« Où en est le dépôt » décrit encore `MasterLaplace/LplVesuvius`, **privé**, `git tag -l` ne rend que `v0.1.0-progress` alors que la commande de publication vise `v0.1.1-progress`, donc « publier le dépôt et joindre les figures » reste à faire."
+  },
+  {
+   "doc": "HANDOFF.md",
+   "ligne": 2501,
+   "raison": "réfuté — La preuve ne tient pas, sur deux points que j'ai vérifiés moi-même."
+  }
+ ],
+ "items": {
+  "total": 56,
+  "ouverts": 3,
+  "indecidables": 2
+ }
+}
