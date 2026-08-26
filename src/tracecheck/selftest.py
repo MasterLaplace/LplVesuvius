@@ -253,4 +253,50 @@ idx = int(np.argmax(np.where(kept, mean + 1e-6 * count.ravel(), -np.inf)))
 ck(np.unravel_index(idx, shape)[2] < (C // 2) // K, "the seed must not land on the fleck")
 ck(not bool(kept.reshape(shape)[2, 2, 4]), "and the fleck must not even be eligible")
 
+# --- a missing object and a failing network are DIFFERENT FACTS. Collapsing them makes a
+# --- diagnosis point at the wrong thing: a probe that cannot reach the bucket then reports
+# --- "there is nothing at this coordinate", which is a claim about the DATA drawn from a
+# --- claim about the WIRE. Paid on 2026-08-26, when a saturated link made a seed guard
+# --- announce that a perfectly good seed designated no scanned matter.
+import io
+import urllib.error
+
+
+def _raising(failure):
+    def fake(url, timeout=None):
+        raise failure
+    return fake
+
+
+_real_urlopen = T.urllib.request.urlopen
+try:
+    T.urllib.request.urlopen = _raising(
+        urllib.error.HTTPError("u", 404, "Not Found", {}, None))
+    ck(T.get_with_reason("u", 1) == (None, "absent"), "404 means the object is not served")
+    T.urllib.request.urlopen = _raising(
+        urllib.error.HTTPError("u", 403, "Forbidden", {}, None))
+    ck(T.get_with_reason("u", 1) == (None, "absent"), "403 means the same to a prober")
+    # ⚠ THE CHECK THAT MATTERS: a 5xx, a timeout and a broken socket must NOT be
+    # reported as absence. Without these three the distinction would be a comment.
+    T.urllib.request.urlopen = _raising(
+        urllib.error.HTTPError("u", 503, "Slow Down", {}, None))
+    ck(T.get_with_reason("u", 1)[1] == "http 503", "a 5xx is the service failing")
+    T.urllib.request.urlopen = _raising(TimeoutError())
+    ck(T.get_with_reason("u", 1)[1] == "delai depasse", "a timeout is not an absence")
+    T.urllib.request.urlopen = _raising(urllib.error.URLError("no route"))
+    ck(str(T.get_with_reason("u", 1)[1]).startswith("transport"),
+       "a dead link is not an absence")
+    # ... and none of those may look like absence to a caller that only tests presence.
+    for failure in (urllib.error.HTTPError("u", 503, "x", {}, None), TimeoutError(),
+                    urllib.error.URLError("no route")):
+        T.urllib.request.urlopen = _raising(failure)
+        ck(T.get_with_reason("u", 1)[1] != "absent",
+           "a transport failure never reports as absence")
+    # the success path still returns bytes and no reason
+    T.urllib.request.urlopen = lambda url, timeout=None: io.BytesIO(b"ok")
+    ck(T.get_with_reason("u", 1) == (b"ok", None), "a hit carries no reason")
+    ck(T.get("u", 1) == b"ok", "and the presence-only form is unchanged")
+finally:
+    T.urllib.request.urlopen = _real_urlopen
+
 print(f"ALL PASS (0 failures, {n} checks)")

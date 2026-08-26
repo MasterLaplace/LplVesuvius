@@ -65,12 +65,37 @@ SCROLL_ALIASES = {
 }
 
 
-def get(url: str, timeout: float) -> bytes | None:
+def get_with_reason(url: str, timeout: float) -> tuple[bytes | None, str | None]:
+    """Fetch `url`, and on failure say WHICH failure it was.
+
+    A missing object and a failing network are different facts, and collapsing them
+    makes a diagnosis point at the wrong thing: a probe that cannot reach the bucket
+    then reports "there is nothing at this coordinate", which is a statement about the
+    DATA drawn from a statement about the WIRE. That conflation was paid on
+    2026-08-26, when a saturated link made a seed guard announce that a perfectly good
+    seed designated no scanned matter.
+
+    S3 answers 404 for a missing object on a public bucket, and 403 when listing is
+    denied for one that may or may not exist -- both mean "not served here", which is
+    what a caller probing for presence needs. Every other outcome is the service or
+    the link failing, and the caller deserves to know.
+    """
     try:
         with urllib.request.urlopen(url, timeout=timeout) as answer:
-            return answer.read()
-    except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError):
-        return None
+            return answer.read(), None
+    except urllib.error.HTTPError as failure:          # subclass of URLError: catch first
+        if failure.code in (403, 404):
+            return None, "absent"
+        return None, f"http {failure.code}"
+    except TimeoutError:
+        return None, "delai depasse"
+    except (urllib.error.URLError, OSError) as failure:
+        return None, f"transport : {failure}"
+
+
+def get(url: str, timeout: float) -> bytes | None:
+    """Presence-only fetch. Use `get_with_reason` when the failure has to be told apart."""
+    return get_with_reason(url, timeout)[0]
 
 
 def list_prefix(prefix: str, timeout: float, delimiter: str = "/") -> list[str]:

@@ -67,8 +67,15 @@ def lire_bloc(zarr_url: str, niveau: int, z: int, y: int, x: int, timeout: float
         if bloc is None:
             return None, "bloc absent du dépôt", cle
     else:
-        brut = tc.get(f"{zarr_url}/{cle}", timeout)
+        brut, raison = tc.get_with_reason(f"{zarr_url}/{cle}", timeout)
         if brut is None:
+            # ⚠⚠ « absent du dépôt » et « le réseau n'a pas répondu » sont deux faits
+            # différents, et les confondre fait dire à ce refus quelque chose sur la
+            # MATIÈRE alors qu'il ne sait rien d'elle. Un garde en aval refusait ainsi
+            # une graine parfaitement valide pendant qu'une campagne saturait le lien.
+            # Seul un 404/403 autorise à dire que rien n'est stocké là.
+            if raison != "absent":
+                return None, f"lecture impossible ({raison}) — rien n'est dit du contenu", cle
             if cache is not None:
                 cache[cle] = None
             return None, "bloc absent du dépôt", cle

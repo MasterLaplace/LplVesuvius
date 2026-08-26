@@ -210,23 +210,19 @@ if [ "${SANS_SONDE:-0}" != 1 ]; then
   # du transport -- et ce n'est PAS un jugement sur la graine. C'est la panne payee le
   # 2026-08-26, ou une campagne concurrente a fait rougir cette batterie et ou la meme
   # sonde relancee seule a rendu « valeur au point 34 ».
-  if printf '%s' "$SONDE" | grep -qE "no \.zarray|Traceback"; then
+  if printf '%s' "$SONDE" | grep -qE "no \.zarray|Traceback|lecture impossible"; then
     echo "   ⚠⚠ le volume n'a pas répondu (code $RC_SONDE). Ce n'est PAS un jugement sur la" >&2
     echo "      graine : la sonde n'a pas pu lire le tableau, donc elle ne sait rien de" >&2
     echo "      cette coordonnée. Relancer, ou passer outre avec SANS_SONDE=1." >&2
     exit 6
   fi
   # ⚠ Les deux refus qui portent bien sur la GRAINE : hors du scan, ou rien de scanne ici.
-  # « bloc absent du depot » veut dire que le chunk n'est pas stocke -- c'est-a-dire que
-  # rien n'a ete scanne la, ce que ce garde existe pour refuser. ⚠⚠ Il reste une ambiguite
-  # RESIDUELLE et il faut la nommer : `tracecheck.get` rend `None` pour un 404 comme pour
-  # une erreur de transport, donc un incident reseau sur le chunk se lirait ici comme une
-  # graine dans le vide. Le vrai correctif est dans `tracecheck.get`, qui devrait
-  # distinguer les deux ; en attendant, le message le dit plutot que de le taire.
+  # « bloc absent du depot » veut desormais dire ce qu'il dit : `tracecheck.get_with_reason`
+  # ne rend « absent » que sur un 404/403, et tout echec de transport passe par la branche
+  # ci-dessus. L'ambiguite residuelle notee ici le 2026-08-26 est levee a sa racine.
   if [ "$RC_SONDE" != 0 ] || printf '%s' "$SONDE" | grep -q "le bloc entier est VIDE"; then
     echo "   ⚠⚠ refus : cette graine ne désigne aucune matière scannée. Tracer ici produirait" >&2
     echo "      une surface dans le vide, et son rendu serait entièrement noir." >&2
-    echo "      (⚠ un incident réseau sur ce bloc se lirait pareil — relancer si c'est plausible.)" >&2
     echo "      Pour passer outre (hors ligne, ou graine volontairement dans le vide) :" >&2
     echo "      SANS_SONDE=1" >&2
     exit 5
