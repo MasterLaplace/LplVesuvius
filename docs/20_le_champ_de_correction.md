@@ -518,7 +518,49 @@ sur une réponse **analytique** — un cylindre de rayon `R` déplacé de `d` de
 cylindre de rayon `R ± d`, donc ses aires sont multipliées par `(R ± d)/R`, un nombre
 qu'on connaît sans passer par le code testé.
 
-> ⚠ Une limite de cet indicateur, trouvée en le sondant : sur une courbure **constante**
+> ### ⭐⭐⭐ Et la distorsion se supprime : il manquait une étape au protocole
+
+La question *« pourquoi la base n'est-elle pas distordue ? »* a une réponse qui répare le
+protocole au lieu de l'expliquer. **La base EST la surface pour laquelle la
+paramétrisation a été calculée** : le maillage publié a été aplati (`vc_flatten` / ABF++)
+sur elle, donc ses mailles sont quasi uniformes. Déplacé, la **même grille** échantillonne
+une **autre** surface, et l'aplatissement cesse d'y être valable.
+
+| version | étendue relative des aires |
+|---|---:|
+| base (publié) | **0,095** |
+| +26 voxels | **0,479** |
+| **+26 puis ré-aplati** | **0,085** |
+
+> ⭐ Ré-aplatir ramène la distorsion **sous celle de la base**. Elle n'était donc pas une
+> fatalité géométrique du déplacement : c'était une paramétrisation devenue fausse pour
+> une surface sur laquelle elle n'avait pas été calculée. **Le bon enchaînement est
+> déplacer → ré-aplatir → rendre**, et la première version s'arrêtait à la deuxième flèche.
+
+⭐⭐ **Et le ré-aplatissement ne fait pas que retirer la distorsion — il améliore la
+profondeur** :
+
+| version | tiers central | au bord | écart médian |
+|---|---:|---:|---:|
+| base (maillage publié) | 31 % | 12 % | 58 µm |
+| +26 voxels | 56 % | **25 %** | 8 µm |
+| **+26 puis ré-aplati** | **60 %** | **15 %** | **8 µm** |
+| témoin (−26) | 0 % | 25 % | 41 µm |
+
+![les quatre états, dont le maillage ré-aplati](images/20_correction_reaplatie.png)
+
+> Le gain de profondeur est **entièrement conservé** (pic sur la couche tracée, écart
+> 8 µm) et la part au bord **retombe de 25 % à 15 %**, presque au niveau de la base. Une
+> fenêtre étirée mélange de la surface à des échelles différentes ; une fenêtre bien
+> paramétrée ne le fait pas, et son profil de profondeur est plus propre.
+>
+> ⚠ **Les quatre paves ne sont PAS au même endroit**, et il faut le dire : ré-aplatir
+> **re-rastérise** (recadrage `2721×2541` contre `2560×2560`), donc les mêmes coordonnées
+> ne désignent plus le même morceau de papyrus. Un pavé par panneau est légitime pour
+> juger une **texture**, jamais une **position** — ce sont les nombres qui portent le
+> résultat, l'image l'illustre.
+
+⚠ Une limite de cet indicateur, trouvée en le sondant : sur une courbure **constante**
 > l'étirement est constant, donc sa cohérence sort à **zéro** — il n'y a rien à corréler.
 > Ce que la cohérence sépare, c'est une courbure qui **varie** d'un bruit de normale, pas
 > une surface courbe d'une surface plate. C'est l'amplitude qui dit la seconde chose.

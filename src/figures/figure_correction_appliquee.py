@@ -157,6 +157,28 @@ def verifier() -> int:
         p2 = img[MARGE + TITRE + 20, MARGE + cote + ENTRE + 20]
         v("le panneau sombre reste SOMBRE a cote du clair", int(p2) < int(p1) - 60,
           f"{int(p1)} vs {int(p2)}")
+
+        # ⚠ La figure accepte N panneaux, pas trois : la comparaison a gagne un quatrieme
+        # etat (le maillage RE-APLATI) et un nombre fige aurait force soit a jeter un
+        # etat, soit a ecrire une seconde figure qui aurait derive de la premiere.
+        for combien in (2, 4, 5):
+            s2 = r / f"f{combien}.png"
+            dessiner([clair] * combien, [str(i) for i in range(combien)],
+                     [""] * combien, s2, borne)
+            larg = np.asarray(Image.open(s2)).shape[1]
+            attendu = MARGE * 2 + cote * combien + ENTRE * (combien - 1)
+            v(f"une figure a {combien} panneaux a la bonne largeur", larg == attendu,
+              f"{larg} au lieu de {attendu}")
+
+        # ⚠⚠ Le pave COMMUN est le bon choix par defaut -- il compare le meme endroit --
+        # et il devient FAUX quand deux rendus n'ont pas la meme rasterisation. Le controle
+        # porte sur la difference : deux images dont la matiere est a des endroits opposes
+        # doivent donner deux paves DIFFERENTS quand on les choisit par panneau.
+        g1 = np.zeros((60, 60), np.uint8); g1[0:24, 0:24] = 255
+        g2 = np.zeros((60, 60), np.uint8); g2[36:60, 36:60] = 255
+        v("un pave par panneau suit la matiere de CHAQUE image",
+          meilleur_pave(g1, 24) == (0, 0) and meilleur_pave(g2, 24) == (36, 36),
+          f"{meilleur_pave(g1, 24)} / {meilleur_pave(g2, 24)}")
         # ... et le cas negatif : normalise chacun sur soi, les deux seraient egaux.
         v("... alors qu'une normalisation par panneau les egaliserait",
           abs(int(clair.max()) - int(sombre.max())) > 0)
@@ -169,34 +191,52 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Trois fois la meme couche tracee : base, corrigee, temoin de signe oppose.")
     parser.add_argument("--verifier", action="store_true")
-    parser.add_argument("base", type=Path, nargs="?")
-    parser.add_argument("corrige", type=Path, nargs="?")
-    parser.add_argument("temoin", type=Path, nargs="?")
-    parser.add_argument("sortie", type=Path, nargs="?")
+    parser.add_argument("rendus", type=Path, nargs="*",
+                        help="les dossiers de rendu, dans l'ordre des panneaux")
+    parser.add_argument("--sortie", type=Path, default=None)
+    parser.add_argument("--titres", nargs="*", default=None)
     parser.add_argument("--couche", type=int, default=None, help="index de la couche tracee")
+    parser.add_argument("--pave-par-panneau", action="store_true",
+                        help="choisir le pave dans CHAQUE panneau. ⚠ A n'utiliser que si "
+                             "les rendus n'ont PAS le meme rasterisation -- un ré-aplatissement "
+                             "recadre, donc les memes coordonnees ne designent plus le meme "
+                             "endroit. Sinon le pave commun est le bon choix, parce qu'il "
+                             "compare le MEME endroit")
     parser.add_argument("--cote", type=int, default=560)
-    parser.add_argument("--legendes", nargs=3, default=None,
+    parser.add_argument("--legendes", nargs="*", default=None,
                         help="les trois sous-titres, mesures a l'appui")
     a = parser.parse_args()
 
     if a.verifier:
         return verifier()
-    if None in (a.base, a.corrige, a.temoin, a.sortie, a.couche):
-        parser.error("les trois rendus, la sortie et --couche sont requis")
+    if len(a.rendus) < 2 or a.sortie is None or a.couche is None:
+        parser.error("au moins deux rendus, --sortie et --couche sont requis")
 
     import numpy as np
 
-    images = [couche(d, a.couche) for d in (a.base, a.corrige, a.temoin)]
-    y, x = meilleur_pave(images[0], a.cote)
-    cote = min(a.cote, *images[0].shape)
-    paves = [im[y:y + cote, x:x + cote] for im in images]
+    images = [couche(d, a.couche) for d in a.rendus]
+    cote = min(a.cote, *[min(im.shape) for im in images])
+    if a.pave_par_panneau:
+        # ⚠⚠ Un pave par panneau ne compare plus le MEME endroit : il ne vaut que pour
+        # juger une TEXTURE (est-elle localement etiree ?), jamais une position. Le dire
+        # ici, parce qu'un lecteur suppose par defaut que quatre vignettes cote a cote
+        # montrent le meme morceau de papyrus.
+        paves = [im[y0:y0 + cote, x0:x0 + cote]
+                 for im in images
+                 for (y0, x0) in (meilleur_pave(im, cote),)]
+        ou = "un pave par panneau (rasterisations differentes)"
+    else:
+        y, x = meilleur_pave(images[0], cote)
+        paves = [im[y:y + cote, x:x + cote] for im in images]
+        ou = f"pave commun ({y}, {x})"
     borne = float(max(p.max() for p in paves))
 
-    legendes = a.legendes or ["", "", ""]
-    dessiner(paves, ["base (maillage publié)", "corrigé (+26 voxels)",
-                     "témoin (−26 voxels)"], legendes, a.sortie, borne)
-    print(f"pave ({y}, {x}) de {cote} px, borne de gris commune {borne:.0f}")
-    for t, p in zip(("base", "corrige", "temoin"), paves):
+    titres = a.titres or [d.name for d in a.rendus]
+    legendes = (a.legendes or [""] * len(paves))[:len(paves)]
+    legendes += [""] * (len(paves) - len(legendes))
+    dessiner(paves, titres, legendes, a.sortie, borne)
+    print(f"{ou} de {cote} px, borne de gris commune {borne:.0f}")
+    for t, p in zip(titres, paves):
         print(f"  {t:<8} matiere {100 * float((p > 0).mean()):5.1f} %   "
               f"moyenne {float(p.mean()):6.1f}")
     print(f"ecrit : {a.sortie}")
