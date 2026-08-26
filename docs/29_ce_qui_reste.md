@@ -86,11 +86,11 @@ bout en bout »*) · `18` J6 · `22` R2:74 · `27`:204.
 - ✅ **L'outil d'application existe** (`src/nappe/gauchir_nappe.py`, 2026-08-26) : il
   déplace chaque point le long de **sa propre** normale, et son signe se **mesure** au
   lieu de s'inventer.
-- ⏳ Reste : **rendre les deux versions**. ⚠ Et le champ dit d'avance ce que ça vaut —
-  sur le segment le plus réparable des 79, l'étendue des écarts est **1,4 pas
-  inter-feuilles** et deux blocs sur six ont un signe opposé, donc aucun déplacement
-  unique ne sert tout le segment (`20` §9). Le gain à montrer est **borné et petit**,
-  et c'est le champ qui le dit, pas un rendu.
+- ✅ **Les deux versions sont rendues, et le gain est montré** (`20` §9, figure
+  `20_correction_appliquee.png`) : le pic médian passe de la couche 6 à la couche **30**
+  — exactement la trace —, l'écart de **58 à 8 µm**, et le témoin de signe opposé
+  **dégrade**. ⚠ Ce qui ne bouge pas était prévu par le champ : le p90 passe de 68 à
+  72 µm, un déplacement unique centrant la médiane sans réduire la dispersion.
 - ⭐ **L'obstacle écrit est tombé** : `22` disait *« la chaîne maillage → rendu n'est pas
   ici »*. VC3D est construit depuis le 2026-08-19, et `24` a fait tourner la chaîne
   complète.

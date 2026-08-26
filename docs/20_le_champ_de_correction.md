@@ -450,14 +450,85 @@ les fenêtres saturées et **−18** en ne gardant que les mesures. Une borne co
 valeur ne fait pas qu'ajouter du bruit : elle peut faire pointer la correction dans la
 mauvaise direction. C'est l'argument le plus concret en faveur du drapeau `sature` du §8.
 
-### ⚠ Pourquoi le gain n'est pas montré sur une image, et ce qu'il faudrait
+### ⭐⭐⭐ Et le gain EST montré : trois fois la même couche
 
-Deux obstacles, tous deux mesurés plutôt que supposés :
+Prédit ci-dessus depuis le seul champ, puis rendu. Le bloc 1 (médiane +26, écart-type
+18,0, **zéro fenêtre saturée**) découpé à 128 × 128 cellules, rendu en **61 couches**
+— 146 µm, sous le pas inter-feuilles de 172,8 µm, comme la règle ci-dessous l'exige —
+dans les trois états, **au même recadrage** `2560×2560 from (0,0)` :
+
+| version | pic médian | écart à la trace | tiers central | au bord |
+|---|---:|---:|---:|---:|
+| base (maillage publié) | couche 6 | **58 µm** | 31 % | 12 % |
+| **corrigé, +26 voxels** | **couche 30** | **8 µm** | **56 %** | 25 % |
+| témoin, −26 voxels | couche 15 | 41 µm | **0 %** | 25 % |
+
+![la correction appliquée, et son témoin de signe opposé](images/20_correction_appliquee.png)
+
+> ⭐⭐ **Le pic médian atterrit exactement sur la couche tracée**, et l'écart tombe d'un
+> facteur **7**. Le témoin de signe opposé **dégrade** — 0 % au tiers central — donc ce
+> qui agit est bien le déplacement et pas un effet de bord du rendu. Et ça se voit : les
+> fibres et le tissage sont nets au centre, plats à gauche, noyés à droite. C'est ce que
+> la page `Prizes` demande de montrer, *« papyrus fibers are visible on your output
+> surface »*.
+>
+> ⚠ **Ce qui ne s'améliore PAS, et c'était prévu** : le p90 passe de 68 à 72 µm, et la
+> part au bord monte de 12 à 25 %. Un déplacement unique ne sert pas les seize fenêtres :
+> il centre la médiane et laisse la dispersion intacte. C'est exactement ce que le tableau
+> par bloc annonçait — écart-type 18 couches — et c'est la mesure qui le confirme, pas
+> l'argument.
+>
+> ⚠ **Le signe a été mesuré, pas déduit.** Les deux ont été rendus. Aucune convention
+> n'était écrite qui aurait permis de le savoir d'avance.
+
+### ⚠⚠ La distorsion visible sur les deux images corrigées : ce n'est pas un repli
+
+Les deux panneaux déplacés portent, par endroits, une déformation que la base n'a pas.
+Deux causes étaient candidates, et **les deux ont été mesurées plutôt qu'argumentées** :
+
+1. ❌ **Un repli de la nappe.** Écarté par l'instrument du dépôt : `vc_tifxyz_selfcross`
+   rend **zéro auto-intersection transversale** sur les trois maillages.
+2. ❌ **Un bruit des normales**, qu'un déplacement amplifierait d'autant. Écarté par la
+   forme du champ : l'étirement a une **cohérence entre voisines de +0,764**, contre un
+   témoin de mélange à **+0,000**. Un bruit de normale donnerait du sel-et-poivre, donc
+   une cohérence nulle.
+3. ✅ **La courbure.** Un déplacement le long de la normale **n'est pas une isométrie** :
+   l'aire d'une maille décalée de `d` vaut `(1 − 2Hd + Kd²)` fois la sienne. La nappe
+   s'étire là où elle est convexe et se comprime là où elle est concave.
+
+| déplacement | aire médiane | p01 | p99 | aire totale |
+|---:|---:|---:|---:|---:|
+| ±5 voxels | ≈ 1,000 | 0,952 | 1,048 | 0,999 / 1,001 |
+| **±26 voxels** | ≈ 1,000 | **0,765** | **1,255** | 0,996 / 1,004 |
+| ±60 voxels | ≈ 0,997 | **0,476** | **1,608** | 0,990 / 1,010 |
+
+> ⭐ **La médiane ne bouge presque pas, les extrêmes oui**, et l'effet est **linéaire en
+> `d`** : ±5 % d'aire à 5 voxels, ±25 % à 26, ±55 % à 60. C'est pourquoi les deux images
+> sont distordues **en sens opposés** — l'aire totale vaut 0,996 pour +26 et 1,004 pour
+> −26, la signature de la courbure moyenne.
+>
+> ⚠⚠ **La conséquence pratique : une correction ne peut pas être arbitrairement grande.**
+> La distorsion est son prix, et il croît proportionnellement au déplacement. Un
+> gauchissement par fenêtre, lui, déplacerait peu partout au lieu de beaucoup en bloc —
+> c'est l'argument géométrique en faveur du champ du §8, indépendamment de son gain.
+
+⚠ `gauchir_nappe.py` **rapporte ces chiffres à chaque exécution**, témoin de mélange
+compris : un outil qui déforme une surface doit dire de combien. Et son contrôle porte
+sur une réponse **analytique** — un cylindre de rayon `R` déplacé de `d` devient un
+cylindre de rayon `R ± d`, donc ses aires sont multipliées par `(R ± d)/R`, un nombre
+qu'on connaît sans passer par le code testé.
+
+> ⚠ Une limite de cet indicateur, trouvée en le sondant : sur une courbure **constante**
+> l'étirement est constant, donc sa cohérence sort à **zéro** — il n'y a rien à corréler.
+> Ce que la cohérence sépare, c'est une courbure qui **varie** d'un bruit de normale, pas
+> une surface courbe d'une surface plate. C'est l'amplitude qui dit la seconde chose.
+
+### ⚠ Ce qui a rendu ça possible, et ce qui reste hors de portée
 
 1. **Le maillage publié est trop grand pour être rendu tel quel.** Celui de ce segment fait
    **3 660 × 9 244** points ; à l'échelle 1 son rendu ferait ~73 000 × 185 000 pixels. Il
    faut découper d'abord — et c'est encore l'export du §8 qui dit **où** : chaque bloc
-   porte son pavé de pixels.
+   porte son pavé de pixels. C'est ce qui a été fait ici.
 2. **Notre propre trace de PHerc0358 ne peut pas servir de sujet.** Sa distribution de pics
    est **bimodale** — 11 fenêtres à la couche 0, 5 à la couche 20, 16 % seulement dans le
    tiers central d'une fenêtre d'un pas — donc tout déplacement rapproche un mode et

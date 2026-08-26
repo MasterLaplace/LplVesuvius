@@ -80,11 +80,79 @@ def deplacer(plans: dict, voxels: float) -> tuple[dict, dict]:
         sortie[c][perdus] = INVALIDE
 
     return sortie, {
+        **_distorsion(plans, sortie),
         "points": int(bon.size),
         "valides": int(bon.sum()),
         "deplaces": int(a_deplacer.sum()),
         "invalides_faute_de_normale": int(perdus.sum()),
         "voxels": float(voxels),
+    }
+
+
+def _aires(plans):
+    """L'aire de chaque maille du quadrillage, ou `nan` si un de ses coins manque."""
+    import numpy as np
+    import projeter_tangentiel as pt
+
+    P = np.stack([plans[n] for n in ("x", "y", "z")], axis=-1).astype(np.float64)
+    bon = pt.valide(plans)
+    du = P[1:, :-1] - P[:-1, :-1]
+    dv = P[:-1, 1:] - P[:-1, :-1]
+    aire = np.linalg.norm(np.cross(du, dv), axis=2)
+    entier = bon[:-1, :-1] & bon[1:, :-1] & bon[:-1, 1:]
+    return np.where(entier, aire, np.nan)
+
+
+def _distorsion(avant, apres) -> dict:
+    """De combien la surface s'est ÉTIRÉE — la déformation qu'un déplacement normal cause.
+
+    ⚠⚠ **Un déplacement le long de la normale n'est pas une isométrie.** Sur une surface
+    courbe, l'aire d'une maille décalée de `d` vaut `(1 − 2Hd + Kd²)` fois la sienne, où
+    `H` et `K` sont les courbures moyenne et de Gauss. Donc la nappe s'ÉTIRE là où elle
+    est convexe et se COMPRIME là où elle est concave — et les deux signes de `d`
+    déforment en sens **opposés**. C'est visible à l'œil sur un rendu, et c'est ce qui
+    fait qu'une correction ne peut pas être arbitrairement grande.
+
+    ⚠ Ce n'est PAS un repli : un repli se mesure par `vc_tifxyz_selfcross`, et sur le cas
+    livré (±26 voxels) il rend **zéro** auto-intersection transversale sur les trois
+    versions. L'étirement existe sans que la nappe se croise.
+    """
+    import numpy as np
+
+    a0, a1 = _aires(avant), _aires(apres)
+    bon = np.isfinite(a0) & np.isfinite(a1) & (a0 > 1e-12)
+    if not bon.any():
+        return {}
+    ratio = a1[bon] / a0[bon]
+
+    # ⚠⚠ COURBURE ou BRUIT DE NORMALE ? Les deux etirent, et on ne peut pas les
+    # distinguer sur une amplitude. Ce qui les separe est la FORME du champ : une
+    # courbure est lisse, donc correlee entre mailles voisines ; un bruit de normale est
+    # du sel-et-poivre. Le temoin est le MELANGE des memes valeurs -- sans lui, une
+    # correlation elevee pourrait n'etre qu'un artefact du calcul.
+    champ = np.where(bon, a1 / np.where(a0 > 1e-12, a0, np.nan), np.nan)
+    haut, bas = champ[:-1, :], champ[1:, :]
+    paire = np.isfinite(haut) & np.isfinite(bas)
+    coherence = temoin = float("nan")
+    if paire.sum() >= 8 and haut[paire].std() > 0 and bas[paire].std() > 0:
+        coherence = float(np.corrcoef(haut[paire], bas[paire])[0, 1])
+        melange = champ.copy()
+        valeurs = melange[bon].copy()
+        np.random.default_rng(0).shuffle(valeurs)
+        melange[bon] = valeurs
+        h2, b2 = melange[:-1, :], melange[1:, :]
+        p2 = np.isfinite(h2) & np.isfinite(b2)
+        if p2.sum() >= 8 and h2[p2].std() > 0 and b2[p2].std() > 0:
+            temoin = float(np.corrcoef(h2[p2], b2[p2])[0, 1])
+
+    return {
+        "mailles": int(bon.sum()),
+        "etirement_coherence_voisins": coherence,
+        "etirement_temoin_melange": temoin,
+        "aire_ratio_median": float(np.median(ratio)),
+        "aire_ratio_p01": float(np.percentile(ratio, 1)),
+        "aire_ratio_p99": float(np.percentile(ratio, 99)),
+        "aire_totale_ratio": float(a1[bon].sum() / a0[bon].sum()),
     }
 
 
@@ -173,6 +241,59 @@ def verifier() -> int:
       not bool((~pt.valide(troue) & orient_t).any()))
     v("le compte de valides est celui du masque", c2n["valides"] == h * w - 1, str(c2n))
 
+    # ⚠⚠ L'ETIREMENT, contre une reponse ANALYTIQUE. Un plan deplace est congruent a
+    # lui-meme : ratio exactement 1. Un cylindre de rayon R deplace de d devient un
+    # cylindre de rayon R±d, donc ses aires sont multipliees par (R±d)/R -- un nombre
+    # qu'on connait sans passer par le code teste. Sans ce cas courbe, un calcul de
+    # distorsion qui rendrait toujours 1 passerait.
+    v("un plan deplace ne s'etire pas", abs(c["aire_ratio_median"] - 1.0) < 1e-9,
+      str(c.get("aire_ratio_median")))
+    # ⚠⚠ Une maille dont un coin manque n'a pas d'aire. L'inclure calculerait une surface
+    # a partir de la valeur SENTINELLE (-1), c'est-a-dire un nombre invente -- et il
+    # polluerait justement les percentiles, la ou la distorsion se lit. Un trou d'un point
+    # retire les TROIS mailles qui le touchent (celle qui l'a pour coin, et les deux dont
+    # il est le voisin en ligne ou en colonne).
+    _, ct = deplacer(troue, 3.0)
+    v("une maille qui touche un trou n'a pas d'aire",
+      ct["mailles"] == (h - 1) * (w - 1) - 3,
+      f"{ct['mailles']} au lieu de {(h - 1) * (w - 1) - 3}")
+
+    R, d = 100.0, 10.0
+    theta = np.linspace(0.0, 0.8, 40)
+    vlong = np.linspace(0.0, 30.0, 24)
+    TH, VV = np.meshgrid(theta, vlong, indexing="ij")
+    cyl = {"x": (R * np.cos(TH)).astype(np.float32) + 500.0,
+           "y": (R * np.sin(TH)).astype(np.float32) + 500.0,
+           "z": VV.astype(np.float32) + 500.0}
+    _, cp = deplacer(cyl, d)
+    _, cm = deplacer(cyl, -d)
+    attendus = sorted(((R + d) / R, (R - d) / R))
+    obtenus = sorted((cp["aire_ratio_median"], cm["aire_ratio_median"]))
+    v("un cylindre s'etire de (R±d)/R, la valeur analytique",
+      all(abs(o - a2) < 2e-3 for o, a2 in zip(obtenus, attendus)),
+      f"{obtenus} contre {attendus}")
+    # ⚠ Les deux signes deforment en sens OPPOSES : c'est la signature de la courbure
+    # moyenne, et c'est pourquoi les deux rendus de `20` §9 sont distordus differemment.
+    v("... et les deux signes en sens opposes",
+      (cp["aire_ratio_median"] - 1.0) * (cm["aire_ratio_median"] - 1.0) < 0,
+      f"{cp['aire_ratio_median']} / {cm['aire_ratio_median']}")
+    # ⚠⚠ Un cylindre PARFAIT a une courbure CONSTANTE, donc un etirement constant : il n'y
+    # a rien a correler et la coherence sort a zero. Ma premiere fixture etait celle-la, et
+    # le controle a eu raison d'echouer. Ce que la coherence separe, c'est une courbure qui
+    # VARIE d'un bruit de normale -- il faut donc une surface ondulee.
+    v("un cylindre parfait n'a pas de structure d'etirement a lire",
+      abs(cp["etirement_coherence_voisins"]) < 0.3,
+      str(cp["etirement_coherence_voisins"]))
+    U, W = np.meshgrid(np.linspace(0, 60, 44), np.linspace(0, 60, 44), indexing="ij")
+    onde = {"x": (U + 500.0).astype(np.float32),
+            "y": (W + 500.0).astype(np.float32),
+            "z": (500.0 + 6.0 * np.sin(U / 7.0) * np.cos(W / 9.0)).astype(np.float32)}
+    _, co = deplacer(onde, 4.0)
+    v("une courbure qui VARIE donne un etirement structure",
+      co["etirement_coherence_voisins"] > 0.5, str(co["etirement_coherence_voisins"]))
+    v("... et son melange l'effondre",
+      abs(co["etirement_temoin_melange"]) < 0.3, str(co["etirement_temoin_melange"]))
+
     # L'ecriture : la bbox suit les points, elle ne recopie pas l'ancienne.
     with tempfile.TemporaryDirectory() as d:
         cible = Path(d) / "sortie.tifxyz"
@@ -222,6 +343,16 @@ def main() -> int:
     print(f"{comptes['deplaces']} / {comptes['valides']} points deplaces de "
           f"{a.voxels:+.2f} voxels ; {comptes['invalides_faute_de_normale']} invalides "
           f"faute de normale")
+    if "aire_ratio_median" in comptes:
+        print(f"  etirement : aire mediane x{comptes['aire_ratio_median']:.4f} "
+              f"(p01 {comptes['aire_ratio_p01']:.4f}, p99 {comptes['aire_ratio_p99']:.4f}), "
+              f"aire totale x{comptes['aire_totale_ratio']:.4f}")
+        print(f"  etirement structure : coherence voisins "
+              f"{comptes['etirement_coherence_voisins']:+.3f} "
+              f"(temoin melange {comptes['etirement_temoin_melange']:+.3f})")
+        print("  ⚠ un deplacement normal n'est pas une isometrie : la nappe s'etire ou se "
+              "comprime selon sa COURBURE -- une coherence elevee le prouve, un champ "
+              "mouchete accuserait le bruit de normale")
     print(f"ecrit : {a.sortie}")
     return 0
 

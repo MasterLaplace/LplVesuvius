@@ -303,6 +303,7 @@ PY
 
 cd "$ROOT" || exit 2
 run "gauchir une nappe"        uv run --project "$ROOT" python "$ROOT/src/nappe/gauchir_nappe.py" --verifier
+run "figure de la correction"  uv run --project "$ROOT" python "$ROOT/src/figures/figure_correction_appliquee.py" --verifier
 
 run "champ de correction" uv run python - <<'PY'
 import sys, time, random
