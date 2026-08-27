@@ -142,8 +142,20 @@ partout ailleurs, et qui a été enfreinte ici une fois.
 ⭐ `src/depot/chiffres_sans_record.py`. Le cadrage a été **mesuré avant** d'écrire la règle,
 parce qu'une garde qui désigne tout ne désigne rien : sur les documents du dépôt, **1154**
 écritures à trois décimales ou plus, dont **1060 déjà adossées** à un fichier de
-`docs/mesures/`. Le résidu est de **56 chiffres dans 19 documents** — un inventaire
+`docs/mesures/`. Le résidu est de **51 chiffres dans 17 documents** — un inventaire
 relisible, pas une alerte de masse.
+
+⚠ **Chaque orphelin porte SA LIGNE et son contexte**, et ce n'est pas un confort : sans la
+localisation, le triage commence par retrouver cinquante et un nombres dans dix-sept
+documents, c'est-à-dire par refaire la recherche que la garde vient de faire. Un inventaire
+qui ne dit pas où regarder produit une tâche qu'on repousse.
+
+⭐ Et la localisation a **immédiatement** montré un faux positif que la liste nue cachait :
+`3686,1946` n'est pas un décimal, c'est la forme de tableau `[3686,1946,1946,]` — dans du
+code, la virgule est un séparateur. Les spans et blocs de code sont donc effacés avant la
+recherche, ce qui a retiré **cinq** faux positifs (56 → 51). Les spans, pas la ligne entière :
+une ligne de tableau peut porter un `thread_limit: 0` entre accents graves **et** une vraie
+mesure à côté.
 
 ⚠ Trois décimales et pas deux : la prose est pleine de pourcentages et de tailles à une ou
 deux décimales qui ne sont pas des mesures. Les identifiants (DOI, arXiv, Zenodo) sont écartés
@@ -169,9 +181,16 @@ candidat.** La garde a un sens et un seul, et son pouvoir croît avec le nombre 
 publiées. La levée complète demanderait de rapprocher chaque chiffre du record que son
 **propre document nomme** — un travail à part, pas un réglage de seuil.
 
-⚠ La suite ne lance que `--verifier` : le balayage nu sort en **1** sur les 56 entrées
+⚠ La suite ne lance que `--verifier` : le balayage nu sort en **1** sur les 51 entrées
 existantes, et brancher un échec connu dans la suite la rendrait rouge en permanence, donc
-ignorée. Le triage des 56 est désormais une tâche **dimensionnée** au lieu d'un manque vague.
+ignorée. Le triage des 51 est désormais une tâche **dimensionnée** et **localisée** au lieu
+d'un manque vague.
+
+⚠ Vérifié sur cinq d'entre eux (`19,834872`, `20,747079`, `1,5036`, `0,825755`, `22,431`) :
+**aucun fichier de l'arbre entier** ne les porte, pas seulement aucun fichier de
+`docs/mesures/`. Ce sont donc de vraies aires et de vrais σ publiés depuis une sortie de
+terminal. Les rétablir demande de **rejouer** les mesures, pas d'écrire un JSON après coup —
+fabriquer le record depuis le document serait précisément l'adossement circulaire ci-dessus.
 
 ---
 

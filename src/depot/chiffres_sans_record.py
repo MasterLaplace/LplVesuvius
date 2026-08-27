@@ -60,10 +60,19 @@ MESURES = "docs/mesures"
 21 `.jsonl`, 3 `.tsv` et un `.csv` portent de vraies mesures, et les ignorer ferait signaler
 des chiffres parfaitement adossés."""
 
-REGISTRES_DERIVES = ("taches_ouvertes.json", "temoins.json")
+SORTIE = "chiffres_sans_record.json"
+"""Le nom de l'inventaire que ce fichier écrit lui-même."""
+
+REGISTRES_DERIVES = ("taches_ouvertes.json", "temoins.json", SORTIE)
 """⚠⚠ Fichiers de `docs/mesures/` qui sont DÉRIVÉS des documents, donc incapables d'adosser
 quoi que ce soit : ils contiennent le chiffre parce que le document le contient. Les compter
-crée un adossement circulaire, et c'est exactement ce qui masquait `+0,9984`."""
+crée un adossement circulaire, et c'est exactement ce qui masquait `+0,9984`.
+
+⚠⚠⚠ `SORTIE` est le cas le plus vicieux, et je l'ai créé avant de le voir : l'inventaire des
+orphelins, écrit dans `docs/mesures/`, ADOSSE les orphelins qu'il vient de lister. Le compte
+est tombé de 51 à 45 à l'exécution suivante, sans qu'aucune ligne de document ne change. Une
+garde dont la sortie nourrit son entrée finit par se déclarer verte toute seule, et c'est le
+même défaut que ce fichier documente un paragraphe plus haut, deux heures après l'avoir écrit."""
 
 DECIMALES_MINIMALES = 3
 """Sous ce seuil, un nombre en prose n'est pas distinguable d'un compte ou d'un pourcentage."""
@@ -74,6 +83,14 @@ un numéro arXiv et `2304,02084` serait une mesure parfaitement plausible. Juger
 chiffres seuls confondrait les deux."""
 
 ECRITURE = re.compile(r"[-+−]?\d+[.,]\d{" + str(DECIMALES_MINIMALES) + r",}")
+
+SPAN_CODE = re.compile(r"`[^`]*`")
+"""⚠⚠ Dans du code, une virgule est un SÉPARATEUR et pas une marque décimale. La forme de
+tableau `[3686,1946,1946,]` se lit sinon comme le décimal `3686,1946`, et l'inventaire
+localisé l'a montré du premier coup — la liste nue le cachait. On efface donc les spans de
+code avant de chercher, et on saute les blocs clôturés entièrement."""
+
+CLOTURE = "```"
 
 
 def valeur_cherchee(ecriture: str) -> str:
@@ -102,18 +119,38 @@ def records(racine: Path) -> str:
 
 def orphelins_de(texte: str, corpus: str) -> list[str]:
     """Les écritures d'un document qu'aucun fichier de résultat ne porte."""
-    trouves: list[str] = []
-    for ligne in texte.splitlines():
-        if CONTEXTE_IDENTIFIANT.search(ligne):
+    return [o["ecriture"] for o in orphelins_situes(texte, corpus)]
+
+
+def orphelins_situes(texte: str, corpus: str) -> list[dict]:
+    """Les mêmes, avec la ligne où chacun se lit.
+
+    ⚠⚠ Sans la ligne, l'inventaire est une liste de nombres : le triage commence par
+    RETROUVER chacun dans dix-neuf documents, ce qui est exactement le travail que la garde
+    devrait épargner. Un inventaire qui ne dit pas où regarder produit un travail de
+    recherche, pas un travail de lecture — et c'est la différence entre une tâche qu'on fait
+    et une tâche qu'on repousse.
+    """
+    trouves: list[dict] = []
+    vus: set[str] = set()
+    dans_un_bloc = False
+    for numero, ligne in enumerate(texte.splitlines(), 1):
+        if ligne.lstrip().startswith(CLOTURE):
+            dans_un_bloc = not dans_un_bloc
             continue
-        for e in ECRITURE.findall(ligne):
-            if fraction_nulle(e):
+        if dans_un_bloc or CONTEXTE_IDENTIFIANT.search(ligne):
+            continue
+        # ⚠ Les spans de code sont effacés, pas la ligne entière : une ligne de tableau peut
+        # porter un `thread_limit: 0` entre accents graves ET une vraie mesure à côté.
+        for e in ECRITURE.findall(SPAN_CODE.sub(" ", ligne)):
+            if fraction_nulle(e) or e in vus:
                 continue
             v = valeur_cherchee(e)
             if v in corpus or v.lstrip("-") in corpus:
                 continue
-            if e not in trouves:
-                trouves.append(e)
+            vus.add(e)
+            trouves.append({"ecriture": e, "ligne": numero,
+                            "contexte": ligne.strip()[:160]})
     return trouves
 
 
@@ -122,7 +159,8 @@ def inventaire(racine: Path) -> dict:
     corpus = records(racine)
     par_document = {}
     for d in sorted(racine.glob("docs/*.md")):
-        manquants = orphelins_de(d.read_text(encoding="utf-8", errors="replace"), corpus)
+        manquants = orphelins_situes(d.read_text(encoding="utf-8", errors="replace"),
+                                     corpus)
         if manquants:
             par_document[d.name] = manquants
     return {
@@ -159,6 +197,14 @@ def verifier() -> int:
     # --- LES IDENTIFIANTS, juges sur leur CONTEXTE et pas sur leurs chiffres ------------
     v("un numero arXiv sur sa ligne n'est pas une mesure",
       orphelins_de("voir arXiv:2304.02084 pour la methode", "") == [])
+    # --- LE CODE, ou la virgule n'est pas une marque decimale --------------------------
+    v("une forme de tableau dans un span de code n'est pas un decimal",
+      orphelins_de("la forme `[3686,1946,1946,]` du jeu", "") == [])
+    v("... et un bloc cloture entier est saute",
+      orphelins_de("```\nshape [3686,1946,1946]\n```", "") == [])
+    # ⚠ Mais une mesure a COTE d'un span de code reste vue : on efface le span, pas la ligne.
+    v("une mesure voisine d'un span de code reste vue",
+      orphelins_de("avec `dir: normal` l'aire vaut 20,747079 cm2", "") == ["20,747079"])
     v("un DOI non plus", orphelins_de("doi 10.1038/s41586.02084", "") == [])
     # ⚠⚠ Le controle qui montre POURQUOI c'est le contexte qui juge : les memes chiffres,
     # sans le mot, sont une mesure parfaitement plausible.
@@ -177,6 +223,16 @@ def verifier() -> int:
     # cette exclusion, la garde declare adosse le seul defaut qu'on sache reel.
     v("les registres derives sont nommes et ecartes",
       "taches_ouvertes.json" in REGISTRES_DERIVES)
+    # ⚠⚠⚠ La sortie de cette garde EST un registre derive : sans cette ligne, elle adosse
+    # les orphelins qu'elle vient de lister et son compte decroit toute seule.
+    v("... la propre sortie de la garde en fait partie", SORTIE in REGISTRES_DERIVES)
+    v("... et le corpus des records ne la contient donc pas",
+      not any(p.name == SORTIE
+              for p in (RACINE / MESURES).rglob("*")
+              if p.is_file() and p.name not in REGISTRES_DERIVES))
+    # Un compte stable d'une execution a l'autre est ce que cette exclusion achete.
+    v("le compte ne bouge pas d'une execution a l'autre",
+      inventaire(RACINE)["total"] == inventaire(RACINE)["total"])
     corpus_reel = records(RACINE)
     derive = RACINE / MESURES / "taches_ouvertes.json"
     if derive.exists():
@@ -194,6 +250,17 @@ def verifier() -> int:
     inv = inventaire(RACINE)
     v("l'inventaire compte ce qu'il liste",
       inv["total"] == sum(len(x) for x in inv["documents"].values()))
+    # ⚠⚠ Chaque entree porte SA LIGNE : un inventaire sans localisation fait recommencer
+    # la recherche que la garde vient de faire.
+    v("chaque orphelin porte la ligne ou il se lit",
+      all(o["ligne"] > 0 and o["contexte"]
+          for lot in inv["documents"].values() for o in lot))
+    v("... et l'ecriture signalee est bien dans le contexte rendu",
+      all(o["ecriture"] in o["contexte"]
+          for lot in inv["documents"].values() for o in lot))
+    v("les deux formes de la recherche s'accordent",
+      orphelins_de("rho vaut 0,9984", "") ==
+      [o["ecriture"] for o in orphelins_situes("rho vaut 0,9984", "")])
     v("le residu reste relisible plutot que massif", inv["total"] < 200)
     # ⚠⚠⚠ LA LIMITE, assertee plutot que contournee. Le defaut connu du depot — le
     # `+0,9984` de `57` — n'est PAS signale, parce qu'il coincide avec `0.9984133775266987`,
@@ -206,7 +273,8 @@ def verifier() -> int:
     v("la limite est reelle : un chiffre a 4 decimales collisionne dans le corpus",
       bool(collision))
     v("... et le defaut connu de `57` echappe donc a cette garde",
-      "+0,9984" not in inv["documents"].get("57_les_taches_laissees.md", []))
+      "+0,9984" not in [o["ecriture"]
+                        for o in inv["documents"].get("57_les_taches_laissees.md", [])])
 
     print(f"\n{'ALL PASS' if not echecs else 'ECHEC'} "
           f"({echecs} failures, {controles} checks)")
@@ -224,7 +292,9 @@ def main() -> int:
 
     inv = inventaire(RACINE)
     for doc, chiffres in sorted(inv["documents"].items(), key=lambda kv: -len(kv[1])):
-        print(f"  {doc:52s} {len(chiffres):3d}  {' '.join(chiffres[:7])}")
+        print(f"  {doc}  ({len(chiffres)})")
+        for o in chiffres:
+            print(f"      L{o['ligne']:<5d} {o['ecriture']:<12s} {o['contexte'][:96]}")
     print(f"\n{inv['total']} chiffre(s) publie(s) sans record, "
           f"dans {len(inv['documents'])} document(s)")
     if a.json:

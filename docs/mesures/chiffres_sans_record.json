@@ -2,103 +2,299 @@
   "decimales_minimales": 3,
   "registres_derives_ecartes": [
     "taches_ouvertes.json",
-    "temoins.json"
+    "temoins.json",
+    "chiffres_sans_record.json"
   ],
   "documents": {
     "03_reproduction_windcheck.md": [
-      "99,9989"
+      {
+        "ecriture": "99,9989",
+        "ligne": 63,
+        "contexte": "**Réparation** (`windcheck transform`) : 6 quads retirés, **99,9989 % de surface"
+      }
     ],
     "12_profondeur_de_surface.md": [
-      "4,927"
+      {
+        "ecriture": "4,927",
+        "ligne": 544,
+        "contexte": "Le seuil **sépare** : au-delà, contraste d'encre médian **4,927** ; en deçà, **5,911**."
+      }
     ],
     "19_ecarter_avant_de_payer.md": [
-      "5,061",
-      "5,361",
-      "5,260",
-      "5,456"
+      {
+        "ecriture": "5,061",
+        "ligne": 108,
+        "contexte": "| 5 % | 76 | 5,061 | 5,178 | +0,117 | 5,178 | 0,054 |"
+      },
+      {
+        "ecriture": "5,361",
+        "ligne": 110,
+        "contexte": "| **15 %** | 68 | 5,061 | 5,361 | +0,300 | 5,260 | **0,0010** ✅ |"
+      },
+      {
+        "ecriture": "5,260",
+        "ligne": 110,
+        "contexte": "| **15 %** | 68 | 5,061 | 5,361 | +0,300 | 5,260 | **0,0010** ✅ |"
+      },
+      {
+        "ecriture": "5,456",
+        "ligne": 115,
+        "contexte": "| 50 % | 40 | 5,061 | 5,456 | +0,395 | 5,402 | 0,0250 |"
+      }
     ],
     "20_le_champ_de_correction.md": [
-      "4,865",
-      "1,255",
-      "1,608"
+      {
+        "ecriture": "4,865",
+        "ligne": 182,
+        "contexte": "carte ?* — donne **4,882 contre 4,865, p = 0,22** sur les 39 segments les plus décalés."
+      },
+      {
+        "ecriture": "1,255",
+        "ligne": 502,
+        "contexte": "| **±26 voxels** | ≈ 1,000 | **0,765** | **1,255** | 0,996 / 1,004 |"
+      },
+      {
+        "ecriture": "1,608",
+        "ligne": 503,
+        "contexte": "| ±60 voxels | ≈ 0,997 | **0,476** | **1,608** | 0,990 / 1,010 |"
+      }
     ],
     "21_texte_de_soumission.md": [
-      "19.8219",
-      "19.8387",
-      "20.7471",
-      "+0.8729"
+      {
+        "ecriture": "19.8219",
+        "ligne": 260,
+        "contexte": ">   1985.73 mm². The **saved** surfaces then span 19.8219–19.8387 cm² (and 20.7471 with the"
+      },
+      {
+        "ecriture": "19.8387",
+        "ligne": 260,
+        "contexte": ">   1985.73 mm². The **saved** surfaces then span 19.8219–19.8387 cm² (and 20.7471 with the"
+      },
+      {
+        "ecriture": "20.7471",
+        "ligne": 260,
+        "contexte": ">   1985.73 mm². The **saved** surfaces then span 19.8219–19.8387 cm² (and 20.7471 with the"
+      },
+      {
+        "ecriture": "+0.8729",
+        "ligne": 376,
+        "contexte": "> +0.8729. The positive results below are therefore untouched."
+      }
     ],
     "24_premiere_trace_rouleau_du_prix.md": [
-      "8,476817"
+      {
+        "ecriture": "8,476817",
+        "ligne": 121,
+        "contexte": "rend **8,477096 cm²** contre **8,476817** pour le maillage archivé ici — **0,003 %"
+      }
     ],
     "25_une_graine_choisie_sur_la_planeite.md": [
-      "19,821",
-      "19,834872",
-      "19,821850",
-      "19,838660",
-      "19,823302",
-      "20,747079"
+      {
+        "ecriture": "19,821",
+        "ligne": 120,
+        "contexte": "**19,821 592** et **19,823 246 cm²** : deux rouleaux différents, deux graines différentes,"
+      },
+      {
+        "ecriture": "19,834872",
+        "ligne": 297,
+        "contexte": "| `thread_limit: 0`, essai 1 | 19,834872 cm² | **0** |"
+      },
+      {
+        "ecriture": "19,821850",
+        "ligne": 298,
+        "contexte": "| `thread_limit: 0`, essai 2 | 19,821850 cm² | **0** |"
+      },
+      {
+        "ecriture": "19,838660",
+        "ligne": 299,
+        "contexte": "| `thread_limit: 1`, essai 1 | 19,838660 cm² | **0** |"
+      },
+      {
+        "ecriture": "19,823302",
+        "ligne": 300,
+        "contexte": "| `thread_limit: 1`, essai 2 | 19,823302 cm² | **0** |"
+      },
+      {
+        "ecriture": "20,747079",
+        "ligne": 315,
+        "contexte": "| `thread_limit: 1` + champ de direction | **identique** | 20,747079 cm² |"
+      }
     ],
     "26_le_champ_de_direction.md": [
-      "3686,1946",
-      "19,834872",
-      "19,821850",
-      "19,838660",
-      "19,823302",
-      "20,747079",
-      "21,561857",
-      "19,782036",
-      "19,773946",
-      "19,773791",
-      "22,431",
-      "22,836"
+      {
+        "ecriture": "19,834872",
+        "ligne": 110,
+        "contexte": "| sans champ, `thread_limit: 0` ×2 | **identique** | 19,834872 / 19,821850 | 0 / 0 |"
+      },
+      {
+        "ecriture": "19,821850",
+        "ligne": 110,
+        "contexte": "| sans champ, `thread_limit: 0` ×2 | **identique** | 19,834872 / 19,821850 | 0 / 0 |"
+      },
+      {
+        "ecriture": "19,838660",
+        "ligne": 111,
+        "contexte": "| sans champ, `thread_limit: 1` ×2 | **identique** | 19,838660 / 19,823302 | 0 / 0 |"
+      },
+      {
+        "ecriture": "19,823302",
+        "ligne": 111,
+        "contexte": "| sans champ, `thread_limit: 1` ×2 | **identique** | 19,838660 / 19,823302 | 0 / 0 |"
+      },
+      {
+        "ecriture": "20,747079",
+        "ligne": 112,
+        "contexte": "| **avec champ**, `dir: normal` | **identique** | **20,747079** | **1176** |"
+      },
+      {
+        "ecriture": "21,561857",
+        "ligne": 113,
+        "contexte": "| **avec champ, axes x/y PERMUTÉS** | **identique** | 21,561857 | **8282** |"
+      },
+      {
+        "ecriture": "19,782036",
+        "ligne": 341,
+        "contexte": "| 1,0 | 19,782036 | **0** |"
+      },
+      {
+        "ecriture": "19,773946",
+        "ligne": 343,
+        "contexte": "| 3,0 | 19,773946 | **0** |"
+      },
+      {
+        "ecriture": "19,773791",
+        "ligne": 344,
+        "contexte": "| 4,0 | 19,773791 | **0** |"
+      },
+      {
+        "ecriture": "22,431",
+        "ligne": 547,
+        "contexte": "| fibres h+v | 22,431 | **8 926** | 9 % | 53 % | 1,038 |"
+      },
+      {
+        "ecriture": "22,836",
+        "ligne": 548,
+        "contexte": "| `sdt` 10 + fibres h+v | 22,836 | **8 538** | 6 % | 59 % | 1,038 |"
+      }
     ],
     "27_ce_que_la_litterature_dit.md": [
-      "1,239"
+      {
+        "ecriture": "1,239",
+        "ligne": 238,
+        "contexte": "| Str — étirement dans la feuille | 1,239 |"
+      }
     ],
     "30_le_traceur_est_un_tirage.md": [
-      "10,341790",
-      "8,699",
-      "8,476817"
-    ],
-    "38_ce_qui_bouge_avec_la_fenetre.md": [
-      "04,161"
-    ],
-    "39_le_seam_de_correction.md": [
-      "560,600"
+      {
+        "ecriture": "10,341790",
+        "ligne": 34,
+        "contexte": "| 0 | 6 | 86 | 10,341790 | 0 |"
+      },
+      {
+        "ecriture": "8,699",
+        "ligne": 39,
+        "contexte": "| 1 | 1–4 | 78–79 | 8,477–8,699 | 0 |"
+      },
+      {
+        "ecriture": "8,476817",
+        "ligne": 52,
+        "contexte": "| maillage de `24`, archivé | **8,476817** cm² | **240** |"
+      }
     ],
     "44_ou_la_chaine_se_trouve.md": [
-      "13,024947"
+      {
+        "ecriture": "13,024947",
+        "ligne": 1144,
+        "contexte": "produit un maillage **identique octet pour octet** — 13,024947 cm² d'aire de méta des deux côtés (à ne pas confondre avec l'aire UTILE, 12,97 cm²), à la"
+      }
     ],
     "48_ou_monter_lexperience.md": [
-      "3,655542"
+      {
+        "ecriture": "3,655542",
+        "ligne": 114,
+        "contexte": "À 200 générations la trace passe de 0,317 à **3,655542 cm²** — onze fois plus, donc la"
+      }
     ],
     "49_alpha_ne_separe_pas_deux_pannes.md": [
-      "+0,8729"
+      {
+        "ecriture": "+0,8729",
+        "ligne": 71,
+        "contexte": "> petit α non discriminant vaut **+0,8729**, le plus grand α convergent **+0,4222**, et"
+      }
     ],
     "51_une_pente_a_deux_appuis.md": [
-      "+0,8919"
+      {
+        "ecriture": "+0,8919",
+        "ligne": 174,
+        "contexte": "| `controle_resolution#g1` | +0,8919 | plat / mesure | ⚠ aucune |"
+      }
     ],
     "54_cinq_rendus_vides.md": [
-      "3,9996",
-      "5,079"
+      {
+        "ecriture": "5,079",
+        "ligne": 409,
+        "contexte": "| `m7` (L2) | **192 µm** | 0,317 cm² | ⚠⚠ **5,079 cm²** — aire REELLE |"
+      }
     ],
     "58_resolution_ou_rouleau.md": [
-      "1,5036",
-      "1,5202",
-      "1,4352",
-      "0,9200",
-      "1,5195",
-      "1,5176",
-      "0,825755",
-      "0,488698",
-      "−1,813",
-      "−1,805"
+      {
+        "ecriture": "1,5036",
+        "ligne": 85,
+        "contexte": "1008 × 1008 où elle varie le plus (σ = 1,5036, `top=10080 left=2520`). Le choix ne favorise"
+      },
+      {
+        "ecriture": "1,5202",
+        "ligne": 87,
+        "contexte": "perdre. C'est aussi pourquoi le σ natif d'ici (**1,5202**) vaut le double du σ publié sur le"
+      },
+      {
+        "ecriture": "1,4352",
+        "ligne": 98,
+        "contexte": "| 15,82 µm | 1 012 µm | 504 px | 1,4352 | 1,5194 | **0,945** |"
+      },
+      {
+        "ecriture": "0,9200",
+        "ligne": 99,
+        "contexte": "| 23,73 µm | 1 519 µm | 336 px | 0,9200 | 1,5195 | **0,605** |"
+      },
+      {
+        "ecriture": "1,5195",
+        "ligne": 99,
+        "contexte": "| 23,73 µm | 1 519 µm | 336 px | 0,9200 | 1,5195 | **0,605** |"
+      },
+      {
+        "ecriture": "1,5176",
+        "ligne": 100,
+        "contexte": "| 31,64 µm | 2 025 µm | 252 px | 0,4118 | 1,5176 | **0,271** |"
+      },
+      {
+        "ecriture": "0,825755",
+        "ligne": 198,
+        "contexte": "| échelle profondeur, pas 1 | 0,825755 |"
+      },
+      {
+        "ecriture": "0,488698",
+        "ligne": 200,
+        "contexte": "| échelle profondeur, pas 2 | 0,488698 |"
+      },
+      {
+        "ecriture": "−1,813",
+        "ligne": 270,
+        "contexte": "(−1,813 à +1,257 contre −1,805 à −1,153). Une échelle posée sur une fenêtre sans encre"
+      },
+      {
+        "ecriture": "−1,805",
+        "ligne": 270,
+        "contexte": "(−1,813 à +1,257 contre −1,805 à −1,153). Une échelle posée sur une fenêtre sans encre"
+      }
     ],
     "60_la_constante_qui_rendait_le_modele_muet.md": [
-      "4,278",
-      "+1,691"
+      {
+        "ecriture": "4,278",
+        "ligne": 60,
+        "contexte": "| … la même remise à l'échelle à la main | −1,815 | −0,526 | +2,463 | **4,278** |"
+      }
     ]
   },
-  "total": 56
+  "total": 51
 }
