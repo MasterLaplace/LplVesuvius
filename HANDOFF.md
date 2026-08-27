@@ -1367,8 +1367,14 @@ nombres censurés**, les quatre variantes ayant leur pic médian au bord de la f
 Conception appariée : même graine (5842 5839 7386), même volume, mêmes générations, une
 seule clé change à la fois — c'est elle qui rend le témoin lisible.
 
-⚠ **Reste aussi** : donner les points à `--resume --rewind-gen --correct`, puis juger au
-test de convergence de `38`.
+✅ **Fait** : les points ont été donnés à `--resume --rewind-gen --correct`, jugés, et
+**relus à travers une fenêtre valide** le 2026-08-27 → [`42`](docs/42_la_boucle_tourne_et_ne_suffit_pas.md) §7.
+Le témoin bat toutes les corrections à tous les poids (**22 %** de fenêtres au tiers
+central contre 8 à 18 %), et `correction_weight` — que `42` §3 désignait comme « le levier
+suivant, jamais réglé » — donne le **même** résultat à 1 et à 100.
+⚠⚠ Les α de `42` avaient été mesurés sur des fenêtres de 41 et 161 couches, soit **2,05 et
+8,05 pas inter-feuilles** : ils n'étaient pas interprétables. La conclusion survit, sa
+preuve a dû être refaite.
 
 ⚠⚠ **Piège payé, et il est générique** : `decode` (`src/commun/zarr_depth.py`) rendait
 `None` aussi bien pour « ce chunk n'existe pas » que pour « je ne sais pas le décompresser »

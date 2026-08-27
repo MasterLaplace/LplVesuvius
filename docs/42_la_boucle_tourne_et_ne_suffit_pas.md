@@ -234,6 +234,43 @@ s'arrête là en le disant.
 ⚠ **Rien de tout ça n'est encore mesuré.** La campagne est en file derrière le balayage de
 correction ; ce paragraphe dit ce qui va être tenté et pourquoi, pas ce qui a marché.
 
+## 7. ⭐⭐ Relu à travers une fenêtre VALIDE — la conclusion tient, sa preuve ne tenait pas
+
+Tout ce qui précède a été mesuré sur des fenêtres de profondeur de **41 et 161 couches**.
+Pour PHerc0358, dont le pas inter-feuilles vaut **187,2 µm** à 9,362 µm par voxel, cela
+fait **2,05** et **8,05 pas** — et au-delà d'un pas, la fenêtre contient plusieurs feuilles,
+donc l'argmax désigne celle qui se trouve être la plus brillante (`20` §9). **Aucun des α
+de ce document n'était interprétable.**
+
+⭐ Le relire ne coûte rien : `depth_profile --from-layer/--to-layer` restreint un rendu
+**déjà sur disque**. Les 19 couches centrales du rendu de 41 font 0,95 pas — deux minutes
+de calcul contre plusieurs heures de re-rendu, au même niveau de preuve.
+
+| variante | pic médian | **tiers central** | au bord |
+|---|---:|---:|---:|
+| **témoin** | 15 | **22 %** | **43 %** |
+| corrigé, gen 5 | 17 | 8 % | 76 % |
+| corrigé, gen 40 | 13 | 18 % | 49 % |
+| corrigé, gen 5, **poids 100** | 19 | 8 % | 55 % |
+| corrigé sur nappe, gen 1, poids 100 | ⚠ **rendu 7061 × 261** — une lanière de 13 cellules, trop étroite pour une fenêtre | | |
+
+> ⭐⭐ **Le témoin bat toutes les corrections, à tous les poids.** La conclusion du §3 —
+> *« la correction change la trace et pas sa nature »* — **survit à une mesure valide**,
+> ce qui n'allait pas de soi : elle reposait jusqu'ici sur des chiffres qu'on ne pouvait
+> pas lire.
+>
+> ⭐ **Et `correction_weight` est réglé** : le §3 le désignait comme « le levier suivant,
+> jamais réglé ». Poids 1 et poids 100 donnent le **même** 8 % au tiers central. Il ne
+> manquait donc pas un réglage.
+
+⚠⚠ **Une fausse piste, notée parce qu'elle est instructive.** À 41 couches, le témoin
+rapporte **187,24 µm**, soit **exactement 20 couches = la demi-fenêtre** — donc une valeur
+**censurée** — pendant que les corrigés rendent 154 et 168, qui sont *dedans*. On y lit
+volontiers que la correction a ramené le pic à l'intérieur et que le verdict « suit la
+fenêtre » l'a masqué. **La mesure le réfute** : dans une fenêtre valide, c'est le témoin
+qui a le plus de fenêtres au tiers central. La saturation du témoin à 41 couches tombait
+sur une **feuille voisine**, ce qui ne dit rien du mérite de personne.
+
 ## Reproduire
 
 ```bash
