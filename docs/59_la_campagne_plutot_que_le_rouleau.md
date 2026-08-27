@@ -1,9 +1,11 @@
-# 59 — « Ce rouleau-ci » est un mot ; la campagne de scan est une propriété
+# 59 — La campagne de scan : une piste qui s'est effondrée en deux temps
 
-> ⚠⚠ **Suite directe de [`58`](58_resolution_ou_rouleau.md).** La résolution éliminée, il ne
-> restait qu'une cause à l'inertie du modèle d'encre : *ce rouleau-ci*. C'est un mot qui ne
-> nomme rien, ne se teste pas, et ne s'achète pas. Ce document le remplace par une propriété
-> qui a les trois qualités inverses.
+> ⚠⚠ **Suite directe de [`58`](58_resolution_ou_rouleau.md), et RÉFUTATION de sa propre
+> première version.** La résolution éliminée, il ne restait qu'une cause à l'inertie du
+> modèle d'encre : *ce rouleau-ci*. Ce document a d'abord cru la remplacer par la **campagne
+> de scan** — et deux corrections plus tard, la piste ne tient pas. Ce qui reste vaut quand
+> même la lecture : ce sont **deux façons de mesurer le mauvais objet**, la seconde n'ayant
+> été trouvée que parce que l'auteur a demandé ce qu'il y avait dans `data/encre/`.
 
 ## 1. Ce que les noms de volumes portaient sans que personne les lise ensemble
 
@@ -47,20 +49,40 @@ et la réponse coûte une requête chacun. C'est donc une **borne inférieure** 
 positif, et le compte sondé est rendu à côté du compte trouvé — zéro sur cinq et zéro sur
 cinquante ne disent pas la même chose.
 
-## 3. ⭐⭐ Le partage, sur les 45 rouleaux du dépôt
+## 3. Le partage à deux groupes — et pourquoi il ne veut rien dire
 
 | | rouleaux | avec un scan fin à courte propagation | énergies | volumes (médiane) |
 |---|---:|---:|---|---:|
-| **le dépôt publie une détection d'encre** | 7 | **6 (86 %)** | 53–111 keV | **3** |
-| **il n'en publie pas** | 38 | **11 (29 %)** | 59–116 keV | **1** |
+| le dépôt publie une détection d'encre | 7 | 6 (86 %) | 53–111 keV | 3 |
+| il n'en publie pas | 38 | 11 (29 %) | 59–116 keV | 1 |
 
-⭐⭐ **Fisher exact unilatéral sur `[6, 1, 11, 27]` : p = 0,0081.** La direction était
-déclarée avant de regarder — un scan fin devrait *aider* — donc le test est unilatéral ; un
-test bilatéral aurait aussi salué l'effet inverse, ce qui reviendrait à n'avoir eu aucune
-hypothèse.
+Fisher exact unilatéral sur `[6, 1, 11, 27]` : **p = 0,0081**. Écrit tel quel, ça se lit
+comme un résultat.
 
-⚠ Et la médiane de volumes, 3 contre 1, dit la même chose plus crûment : **un rouleau dont
-on lit l'encre est un rouleau qu'on a scanné plusieurs fois.**
+## 3 bis. ⚠⚠ Il y a TROIS états, pas deux, et le troisième mange le résultat
+
+**« Le dépôt ne publie pas d'encre pour ce rouleau » recouvre deux faits sans rapport** :
+un rouleau qu'on a tracé sans y lire d'encre, et un rouleau que **personne n'a jamais
+tracé**. Le second ne dit rien sur son encre — il dit que la question n'a pas été posée.
+
+| état | rouleaux | avec un scan fin |
+|---|---:|---:|
+| **aucun segment publié** — personne n'a tracé | **31** | 6 (19 %) |
+| tracé, sans encre publiée | 7 | 5 (**71 %**) |
+| encre publiée | 7 | 6 (**86 %**) |
+
+⭐⭐ **Trente-et-un des trente-huit du groupe « pas d'encre » n'ont jamais été tracés.** Le
+scan fin ne suit donc pas la lisibilité : il suit **l'attention** que la communauté a portée
+à un rouleau, ce qui est exactement ce qu'on attend — on rescanne finement ce sur quoi on
+travaille.
+
+⭐⭐⭐ **La comparaison qui vaut** est restreinte aux rouleaux qu'on a **tentés** :
+7 avec encre contre 7 tracés sans encre, `[6, 1, 5, 2]`, **86 % contre 71 %** —
+**p = 0,5000**. Il n'y a **aucune séparation**.
+
+> ⚠⚠ **La campagne de scan n'est donc pas établie comme le discriminant.** La première
+> version de ce document l'annonçait ; elle mesurait « sur quoi la communauté a travaillé »
+> en croyant mesurer « où l'encre se lit ».
 
 ## 4. Ce que ça n'établit pas, et il faut le dire à chaque usage
 
@@ -70,22 +92,34 @@ on lit l'encre est un rouleau qu'on a scanné plusieurs fois.**
    propagation et à basse énergie. Aucune des trois n'est isolée par cette mesure — c'est le
    même défaut que `58` §1 a corrigé sur la résolution, et il faudra le même genre de
    dégradation contrôlée pour les séparer.
-3. ⚠⚠ **L'ordre de causalité n'est pas donné, et il pourrait être inverse.** Un rouleau peut
-   n'avoir qu'un scan de repérage **parce que** personne n'y a encore lu de texte, plutôt que
-   l'inverse. Un test qui trancherait : prendre un rouleau rescanné et lui redemander son
+3. ⚠⚠ **L'ordre de causalité n'est pas donné, et le §3 bis montre qu'il est probablement
+   inverse.** C'était la troisième mise en garde de la première version, écrite et **laissée
+   à côté du chiffre au lieu d'être retirée du chiffre** : la mesure la contenait, et il a
+   fallu séparer les trois états pour qu'elle cesse d'être une note et devienne le résultat.
+   Un test qui trancherait vraiment : prendre un rouleau rescanné et lui redemander son
    ancien scan de repérage seul. C'est exactement la forme de `58` — rendre l'objet qui
    marche semblable à celui qui ne marche pas, une propriété à la fois.
 
-## 5. Ce que ça change quand même
+## 5. Ce qui survit
 
-« Ce rouleau-ci » ne se teste pas et ne s'achète pas : un rouleau ne change pas. **Une
-campagne de scan, si.** Le résultat déplace la question de l'objet vers le protocole, et il
-dit ce qu'il faudrait obtenir pour la trancher : un second scan de `PHerc1447`, fin et à
-courte propagation, ou le scan de repérage seul d'un rouleau qu'on sait lire.
+**La piste de la campagne ne survit pas** : à corpus restreint aux rouleaux tentés, p = 0,50.
+« Ce rouleau-ci » n'est donc **pas** remplacé, et reste la seule cause en lice.
 
-⚠ ⏳ Reste à séparer les trois grandeurs de la campagne — pas, distance, énergie — entre
-elles. Aucun rouleau du corpus ne les fait varier indépendamment, donc c'est encore une
-donnée à obtenir, pas un réglage à trouver.
+Ce qui survit, et qui n'est pas rien :
+
+1. ⭐ **Trente-et-un rouleaux sur quarante-cinq n'ont aucun segment publié.** La prémisse du
+   prix, chiffrée : le corpus n'est pas *difficile*, il est en grande partie **non tenté**.
+2. ⭐⭐ **Aucun des treize rouleaux du prix ne publie de détection d'encre** — et dix des
+   treize n'ont **aucun segment publié du tout**. Trois seulement ont été tracés
+   (`PHerc0800`, `PHerc1203`, `PHerc1447`) et aucun n'a rendu d'encre.
+3. ⭐ **Le cadre à trois états**, et la preuve qu'un cadre à deux est un piège : le même
+   corpus rend p = 0,0081 ou p = 0,50 selon qu'on range « jamais tracé » avec « pas d'encre »
+   ou à part.
+
+⚠ Et un test resterait valable si on obtenait la donnée : un second scan de `PHerc1447`, fin
+et à courte propagation, ou le scan de repérage seul d'un rouleau qu'on sait lire. ⏳ Il
+faudrait de toute façon séparer les trois grandeurs de la campagne — pas, distance, énergie —
+qu'aucun rouleau du corpus ne fait varier indépendamment.
 
 ## Reproduire
 

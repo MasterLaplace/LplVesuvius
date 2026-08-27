@@ -5,32 +5,39 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
-## ⭐⭐⭐⭐ LA CAMPAGNE DE SCAN, PAS LE ROULEAU — et deux tâches fermées avec
+## ⚠⚠⚠ LA CAMPAGNE DE SCAN : UNE PISTE OUVERTE ET REFERMÉE LE MÊME JOUR
 
 [`59`](docs/59_la_campagne_plutot_que_le_rouleau.md), 2026-08-27. `58` avait éliminé la
-résolution et laissé « ce rouleau-ci », un mot qui ne se teste pas et ne s'achète pas.
+résolution et laissé « ce rouleau-ci ». J'ai cru le remplacer par la **campagne de scan** —
+et la piste s'est effondrée en deux temps, chacun trouvé par une question de l'auteur.
 
-Les noms de volumes du dépôt public portent trois grandeurs — pas, distance de propagation,
-énergie — et personne ne les avait lues ensemble. Sur les **45 rouleaux**, en demandant au
-dépôt (et non à notre dossier de téléchargements) s'il publie une détection d'encre :
+**Premier effondrement.** La mesure portait sur `data/encre/`, c'est-à-dire sur ce que
+`fetch_cartes_encre.sh` a **téléchargé sur demande**. Un fait sur nous, pas sur le corpus.
+Corrigé en interrogeant le dépôt : publie-t-il une détection d'encre pour ce rouleau ?
 
-| | rouleaux | avec un scan fin à courte propagation |
+**Second effondrement, et c'est celui qui compte.** Il y a **TROIS états**, pas deux :
+
+| état | rouleaux | avec un scan fin |
 |---|---:|---:|
-| le dépôt publie de l'encre | 7 | **6 (86 %)** |
-| il n'en publie pas | 38 | **11 (29 %)** |
+| **aucun segment publié** — personne n'a tracé | **31** | 6 (19 %) |
+| tracé, sans encre publiée | 7 | 5 (71 %) |
+| encre publiée | 7 | 6 (86 %) |
 
-**Fisher unilatéral sur `[6, 1, 11, 27]` : p = 0,0081.** Médiane de volumes : **3 contre 1**.
-Un rouleau dont on lit l'encre est un rouleau qu'on a scanné plusieurs fois.
+⭐⭐⭐ Trente-et-un des trente-huit du groupe « pas d'encre » **n'ont jamais été tracés**.
+Restreint aux rouleaux qu'on a **tentés** — `[6, 1, 5, 2]`, 86 % contre 71 % — le p passe de
+**0,0081 à 0,5000**. Aucune séparation. Le scan fin suit **l'attention** portée à un rouleau,
+pas sa lisibilité.
 
-⚠⚠ La première version de la mesure était un fait sur NOUS : `data/encre/` contient ce que
-`fetch_cartes_encre.sh` a téléchargé sur demande, donc un rouleau absent peut n'avoir jamais
-été demandé. Les deux critères sont gardés côte à côte et le champ `critere` dit lequel a
-décidé.
+⚠⚠ La mise en garde qui aurait dû tuer le chiffre était **écrite à côté de lui** dès la
+première version (« l'ordre causal pourrait être inverse ») : la laisser en note au lieu de
+la retirer du chiffre, c'est publier le chiffre quand même.
 
-⚠ Ce que ça n'établit pas, dit à chaque usage : publier une carte n'est pas « le modèle de
-2023 répond » ; les trois grandeurs co-varient par campagne donc aucune n'est isolée ; et
-l'ordre causal pourrait être inverse — un rouleau peut n'avoir qu'un scan de repérage parce
-que personne n'y a encore lu de texte.
+**Ce qui survit** : le corpus n'est pas *difficile*, il est largement **non tenté** (31 sur
+45) ; **aucun des treize rouleaux du prix ne publie de détection d'encre**, dix n'ont aucun
+segment du tout, trois ont été tracés sans rien rendre ; et le cadre à trois états, dont le
+même corpus prouve qu'un cadre à deux est un piège.
+
+⚠ **« Ce rouleau-ci » reste donc la seule cause en lice.** Il n'y a pas encore de discriminant.
 
 ### Les deux décisions que l'auteur a débloquées, faites
 
@@ -1737,7 +1744,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 138 batteries, 3705 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 138 batteries, 3712 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)

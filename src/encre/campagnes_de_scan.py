@@ -43,6 +43,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "volume"))
 
 import apparier_volumes as av  # noqa: E402  -- un seul lecteur de nom de volume
 
+PRIX = tuple(r for r in av.ROULEAUX if r != "PHerc0139")
+"""Les treize eligibles au Grand Prize. `PHerc0139` est le TEMOIN, jamais du classement."""
+
 RACINE_ENCRE = Path("data/encre")
 """Ou vivent les cartes d'encre PUBLIEES que ce depot a recuperees (`fetch_cartes_encre.sh`)."""
 
@@ -132,6 +135,13 @@ def croiser(descriptions: list[dict], cartes: dict[str, int]) -> dict:
         # rapport le dit par le champ `critere`.
         d["encre_publiee"] = (d.get("avec_encre_publiee", 0) > 0
                               if d.get("segments_sondes") else None)
+        # ⚠⚠ TROIS etats, pas deux, et la distinction est celle qui decide. « Aucun segment
+        # publie » veut dire que PERSONNE N'A TRACE ce rouleau -- ce n'est pas un verdict sur
+        # son encre. Les melanger fait mesurer « sur quoi la communaute a travaille » en
+        # croyant mesurer « ou l'encre se lit », et c'est ce que la premiere version de cette
+        # mesure faisait.
+        d["etat"] = ("aucun_segment" if not d.get("segments_sondes")
+                     else "encre_publiee" if d["encre_publiee"] else "segments_sans_encre")
 
     def groupe(pred):
         g = [d for d in descriptions if pred(d)]
@@ -152,6 +162,9 @@ def croiser(descriptions: list[dict], cartes: dict[str, int]) -> dict:
     critere = (lambda d: d["encre_publiee"]) if sonde else (lambda d: d["connu_lisible"])
     a = groupe(lambda d: bool(critere(d)))
     b = groupe(lambda d: not bool(critere(d)))
+    par_etat = {e: groupe(lambda d, e=e: d["etat"] == e)
+                for e in ("aucun_segment", "segments_sans_encre", "encre_publiee")}
+    enc, sans = par_etat["encre_publiee"], par_etat["segments_sans_encre"]
     return {
         "critere": "le dépôt publie une détection d'encre" if sonde
                    else "ce dépôt tient des cartes d'encre",
@@ -162,6 +175,25 @@ def croiser(descriptions: list[dict], cartes: dict[str, int]) -> dict:
         # que l'hypothese a un sens : un scan fin devrait AIDER, pas nuire.
         "fisher": fisher_unilateral(a["avec_scan_fin"], a["n"] - a["avec_scan_fin"],
                                     b["avec_scan_fin"], b["n"] - b["avec_scan_fin"]),
+        "par_etat": par_etat,
+        # ⭐ Les treize du prix, a part : c'est la question que tout ce depot poursuit, et
+        # elle a une reponse chiffree ici. ⚠ « aucun segment » et « trace sans encre » ne
+        # disent pas la meme chose sur un rouleau du prix non plus.
+        "rouleaux_du_prix": {
+            "n": sum(1 for d in descriptions if d["rouleau"] in PRIX),
+            "encre_publiee": [d["rouleau"] for d in descriptions
+                              if d["rouleau"] in PRIX and d["etat"] == "encre_publiee"],
+            "traces_sans_encre": [d["rouleau"] for d in descriptions
+                                  if d["rouleau"] in PRIX and d["etat"] == "segments_sans_encre"],
+            "jamais_traces": [d["rouleau"] for d in descriptions
+                              if d["rouleau"] in PRIX and d["etat"] == "aucun_segment"],
+        },
+        # ⭐⭐ LA comparaison qui vaut : parmi les rouleaux QU'ON A TRACES, un scan fin
+        # separe-t-il ceux dont l'encre est publiee des autres ? Le groupe « aucun segment »
+        # est exclu parce qu'il ne dit rien sur l'encre -- il dit que personne n'a essaye.
+        "fisher_traces": fisher_unilateral(
+            enc["avec_scan_fin"], enc["n"] - enc["avec_scan_fin"],
+            sans["avec_scan_fin"], sans["n"] - sans["avec_scan_fin"]),
     }
 
 
@@ -267,6 +299,35 @@ def verifier() -> int:
     v("le tableau est rendu avec le p, pour qu'on puisse le refaire",
       fisher_unilateral(6, 1, 11, 27)["table"] == [6, 1, 11, 27])
 
+    # --- LES TROIS ETATS, et le piege que la premiere version de ce fichier a paye -------
+    def r(nom, vols, sondes=0, encre=0):
+        x = decrire(nom, vols)
+        if sondes:
+            x.update({"segments_sondes": sondes, "avec_encre_publiee": encre})
+        return x
+
+    trois = croiser([r("A", [fin, reperage], 5, 1),      # trace, encre publiee, scan fin
+                     r("B", [reperage], 5, 0),           # trace, pas d'encre, pas de scan fin
+                     r("C", [fin, reperage])], {})       # JAMAIS TRACE, et il a un scan fin
+    pe = trois["par_etat"]
+    v("un rouleau jamais trace a son propre etat",
+      pe["aucun_segment"]["rouleaux"] == ["C"])
+    v("... distinct de « trace, sans encre »",
+      pe["segments_sans_encre"]["rouleaux"] == ["B"])
+    v("... et de « encre publiee »", pe["encre_publiee"]["rouleaux"] == ["A"])
+    # ⚠⚠ Le controle qui EXISTE parce que la premiere version s'est trompee : le test qui
+    # compte compare l'encre aux rouleaux TRACES SANS encre, jamais a tout le reste. Un
+    # rouleau que personne n'a tente ne dit rien sur son encre, et l'inclure fait mesurer
+    # « sur quoi la communaute a travaille » en croyant mesurer « ou l'encre se lit ».
+    v("le test restreint exclut ceux que personne n'a tentes",
+      trois["fisher_traces"]["table"] == [1, 0, 0, 1])
+    v("... alors que le test large les inclut, et n'est donc pas le bon",
+      trois["fisher"]["table"] == [1, 0, 1, 1])
+    v("les deux tests ne rendent pas le meme p sur ce corpus",
+      trois["fisher_traces"]["p"] != trois["fisher"]["p"])
+
+    v("les treize du prix excluent le temoin", "PHerc0139" not in PRIX and len(PRIX) == 13)
+
     # --- le sondage lui-meme, avec un listeur de fixture ---------------------------------
     faux = {"R/segments/": ["s1", "s2", "s3"],
             "R/segments/s1/": ["mesh", "ink-detection"],
@@ -337,11 +398,24 @@ def main() -> int:
     }
 
     print(f"\ncritère : {groupes['critere']}")
+    for e, g in (groupes.get("par_etat") or {}).items():
+        if g["n"]:
+            print(f"  {e:22} {g['n']:>2} rouleaux, {g['avec_scan_fin']} avec un scan fin "
+                  f"({g['part_scan_fin']:.0%})")
     f = groupes.get("fisher") or {}
     if f.get("p") is not None:
-        print(f"Fisher unilatéral sur {f['table']} : p = {f['p']:.4f}")
+        print(f"Fisher, encre contre TOUT le reste       {f['table']} : p = {f['p']:.4f}")
+    ft = groupes.get("fisher_traces") or {}
+    if ft.get("p") is not None:
+        print(f"Fisher, encre contre les TRACÉS SANS encre {ft['table']} : p = {ft['p']:.4f}"
+              "   ⭐ c'est celui-ci qui vaut")
+    pr = groupes.get("rouleaux_du_prix") or {}
+    if pr:
+        print(f"\nles {pr['n']} rouleaux du prix : {len(pr['encre_publiee'])} avec encre publiée, "
+              f"{len(pr['traces_sans_encre'])} tracés sans encre, "
+              f"{len(pr['jamais_traces'])} jamais tracés")
     for nom, g in groupes.items():
-        if nom in ("critere", "fisher"):
+        if nom in ("critere", "fisher", "fisher_traces", "par_etat", "rouleaux_du_prix"):
             continue
         print(f"\n{nom} : {g['n']} rouleaux, {g['avec_scan_fin']} avec un scan fin à courte "
               f"propagation ({g['part_scan_fin']:.0%}), énergie "

@@ -34,7 +34,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": false
+      "encre_publiee": false,
+      "etat": "segments_sans_encre"
     },
     {
       "rouleau": "PHerc0125",
@@ -57,7 +58,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc0139",
@@ -116,7 +118,8 @@
       "avec_encre_publiee": 5,
       "cartes_publiees": 38,
       "connu_lisible": true,
-      "encre_publiee": true
+      "encre_publiee": true,
+      "etat": "encre_publiee"
     },
     {
       "rouleau": "PHerc0172",
@@ -145,7 +148,8 @@
       "avec_encre_publiee": 5,
       "cartes_publiees": 53,
       "connu_lisible": true,
-      "encre_publiee": true
+      "encre_publiee": true,
+      "etat": "encre_publiee"
     },
     {
       "rouleau": "PHerc0175A",
@@ -168,7 +172,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc0175B",
@@ -191,7 +196,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc0191",
@@ -214,7 +220,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc0211",
@@ -237,7 +244,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc0257",
@@ -260,7 +268,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc0268",
@@ -283,7 +292,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc0306B",
@@ -306,7 +316,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc0332",
@@ -329,7 +340,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": false
+      "encre_publiee": false,
+      "etat": "segments_sans_encre"
     },
     {
       "rouleau": "PHerc0343",
@@ -352,7 +364,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc0343P",
@@ -381,7 +394,8 @@
       "avec_encre_publiee": 5,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": true
+      "encre_publiee": true,
+      "etat": "encre_publiee"
     },
     {
       "rouleau": "PHerc0358",
@@ -404,7 +418,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc0483A",
@@ -427,7 +442,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc0483B",
@@ -450,7 +466,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc0490A",
@@ -473,7 +490,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc0490B",
@@ -496,7 +514,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc0500P2",
@@ -543,7 +562,8 @@
       "avec_encre_publiee": 5,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": true
+      "encre_publiee": true,
+      "etat": "encre_publiee"
     },
     {
       "rouleau": "PHerc0800",
@@ -566,7 +586,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": false
+      "encre_publiee": false,
+      "etat": "segments_sans_encre"
     },
     {
       "rouleau": "PHerc0813",
@@ -589,7 +610,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc0814",
@@ -624,7 +646,8 @@
       "avec_encre_publiee": 5,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": true
+      "encre_publiee": true,
+      "etat": "encre_publiee"
     },
     {
       "rouleau": "PHerc0826",
@@ -647,7 +670,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc0841",
@@ -676,7 +700,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc0846A",
@@ -705,7 +730,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc0846B",
@@ -728,7 +754,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc1203",
@@ -757,7 +784,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": false
+      "encre_publiee": false,
+      "etat": "segments_sans_encre"
     },
     {
       "rouleau": "PHerc1218",
@@ -780,7 +808,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc1299",
@@ -803,7 +832,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc1447",
@@ -826,7 +856,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": false
+      "encre_publiee": false,
+      "etat": "segments_sans_encre"
     },
     {
       "rouleau": "PHerc1451",
@@ -855,7 +886,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": false
+      "encre_publiee": false,
+      "etat": "segments_sans_encre"
     },
     {
       "rouleau": "PHerc1545",
@@ -878,7 +910,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc1667",
@@ -907,7 +940,8 @@
       "avec_encre_publiee": 5,
       "cartes_publiees": 19,
       "connu_lisible": true,
-      "encre_publiee": true
+      "encre_publiee": true,
+      "etat": "encre_publiee"
     },
     {
       "rouleau": "PHerc1667Cr1Fr3",
@@ -923,7 +957,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHerc51Cr4Fr8",
@@ -939,7 +974,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHercMAN5",
@@ -962,7 +998,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHercMANB",
@@ -985,7 +1022,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHercMANBp",
@@ -1014,7 +1052,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": false
+      "encre_publiee": false,
+      "etat": "segments_sans_encre"
     },
     {
       "rouleau": "PHercParis1Fr34",
@@ -1030,7 +1069,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHercParis1Fr39",
@@ -1046,7 +1086,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHercParis2Fr143",
@@ -1062,7 +1103,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHercParis2Fr47",
@@ -1078,7 +1120,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHercParis3",
@@ -1101,7 +1144,8 @@
       "avec_encre_publiee": 0,
       "cartes_publiees": 0,
       "connu_lisible": false,
-      "encre_publiee": null
+      "encre_publiee": null,
+      "etat": "aucun_segment"
     },
     {
       "rouleau": "PHercParis4",
@@ -1148,7 +1192,8 @@
       "avec_encre_publiee": 5,
       "cartes_publiees": 80,
       "connu_lisible": true,
-      "encre_publiee": true
+      "encre_publiee": true,
+      "etat": "encre_publiee"
     }
   ],
   "cartes_publiees_tenues": {
@@ -1232,6 +1277,113 @@
         27
       ],
       "p": 0.008064765637085546
+    },
+    "par_etat": {
+      "aucun_segment": {
+        "rouleaux": [
+          "PHerc0125",
+          "PHerc0175A",
+          "PHerc0175B",
+          "PHerc0191",
+          "PHerc0211",
+          "PHerc0257",
+          "PHerc0268",
+          "PHerc0306B",
+          "PHerc0343",
+          "PHerc0358",
+          "PHerc0483A",
+          "PHerc0483B",
+          "PHerc0490A",
+          "PHerc0490B",
+          "PHerc0813",
+          "PHerc0826",
+          "PHerc0841",
+          "PHerc0846A",
+          "PHerc0846B",
+          "PHerc1218",
+          "PHerc1299",
+          "PHerc1545",
+          "PHerc1667Cr1Fr3",
+          "PHerc51Cr4Fr8",
+          "PHercMAN5",
+          "PHercMANB",
+          "PHercParis1Fr34",
+          "PHercParis1Fr39",
+          "PHercParis2Fr143",
+          "PHercParis2Fr47",
+          "PHercParis3"
+        ],
+        "n": 31,
+        "avec_scan_fin": 6,
+        "energie_min_kev": 77,
+        "energie_max_kev": 116,
+        "volumes_median": 1,
+        "part_scan_fin": 0.194
+      },
+      "segments_sans_encre": {
+        "rouleaux": [
+          "PHerc0009B",
+          "PHerc0332",
+          "PHerc0800",
+          "PHerc1203",
+          "PHerc1447",
+          "PHerc1451",
+          "PHercMANBp"
+        ],
+        "n": 7,
+        "avec_scan_fin": 5,
+        "energie_min_kev": 59,
+        "energie_max_kev": 116,
+        "volumes_median": 2,
+        "part_scan_fin": 0.714
+      },
+      "encre_publiee": {
+        "rouleaux": [
+          "PHerc0139",
+          "PHerc0172",
+          "PHerc0343P",
+          "PHerc0500P2",
+          "PHerc0814",
+          "PHerc1667",
+          "PHercParis4"
+        ],
+        "n": 7,
+        "avec_scan_fin": 6,
+        "energie_min_kev": 53,
+        "energie_max_kev": 111,
+        "volumes_median": 3,
+        "part_scan_fin": 0.857
+      }
+    },
+    "rouleaux_du_prix": {
+      "n": 13,
+      "encre_publiee": [],
+      "traces_sans_encre": [
+        "PHerc0800",
+        "PHerc1203",
+        "PHerc1447"
+      ],
+      "jamais_traces": [
+        "PHerc0125",
+        "PHerc0191",
+        "PHerc0211",
+        "PHerc0257",
+        "PHerc0268",
+        "PHerc0358",
+        "PHerc0813",
+        "PHerc0826",
+        "PHerc1218",
+        "PHerc1545"
+      ]
+    },
+    "fisher_traces": {
+      "table": [
+        6,
+        1,
+        5,
+        2
+      ],
+      "p": 0.5
     }
   }
 }

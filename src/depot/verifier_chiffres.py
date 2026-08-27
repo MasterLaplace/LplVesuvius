@@ -1383,6 +1383,31 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         ajoute("ce que la resolution doit expliquer, en facteur de sigma",
                1.0 / d["rapport_sigma"], 3, neuf.name)
 
+    # ⚠⚠ La campagne de scan — et surtout le chiffre qui la REFUTE. Le meme corpus rend
+    # p = 0,0081 ou p = 0,50 selon qu'on range « jamais trace » avec « pas d'encre » ou a
+    # part, donc les deux p sont gardes : publier le premier sans le second serait publier
+    # exactement l'erreur que ce document raconte.
+    camp = _source(racine, "campagnes_de_scan.json")
+    if camp.exists():
+        d = json.loads(camp.read_text())
+        g = d["groupes"]
+        for etat, libelle in (("aucun_segment", "rouleaux jamais traces"),
+                              ("segments_sans_encre", "rouleaux traces sans encre"),
+                              ("encre_publiee", "rouleaux dont l'encre est publiee")):
+            e = g["par_etat"][etat]
+            out.append((libelle, [f"| **{e['n']}** |", f"| {e['n']} |",
+                                  f"{e['n']} rouleaux", f"**{e['n']}** rouleaux"], camp.name))
+            out.append((f"... part avec un scan fin ({etat})",
+                        [f"{e['part_scan_fin']*100:.0f} %", f"**{e['part_scan_fin']*100:.0f} %**",
+                         f"({e['part_scan_fin']*100:.0f} %)"], camp.name))
+        ajoute("p du partage a deux groupes", g["fisher"]["p"], 4, camp.name)
+        ajoute("p du partage restreint aux rouleaux tentes", g["fisher_traces"]["p"], 4, camp.name)
+        pr = g["rouleaux_du_prix"]
+        out.append(("rouleaux du prix jamais traces",
+                    [f"{len(pr['jamais_traces'])} des treize",
+                     f"**{len(pr['jamais_traces'])}** des treize",
+                     f"dix des treize"], camp.name))
+
     p = _source(racine, "cout_echelle.json")
     if p.exists():
         d = json.loads(p.read_text())

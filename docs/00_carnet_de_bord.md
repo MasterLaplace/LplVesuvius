@@ -51,7 +51,8 @@ nôtres (α = +1,01) — à quatre spires de portée, le pic n'a toujours rien t
 | ⭐⭐ **un rendu peut être limité par une ressource que personne ne mesure** : 28,2 Go de RSS sur 32, 3,4 Go en swap, **23,7 % d'un cœur sur 22** — le cache de chunks vaut 16 Go par défaut et aucun des 28 appels du dépôt ne le réglait ([`50`](docs/50_le_rendu_attendait_la_memoire.md)) | — |
 | ⭐⭐⭐ **le plafond de générations ne fabriquait PAS le résultat négatif** : à budget ×3,3 l'aire est ×11,5 mais α passe de **+0,89 à +0,95**, sous le bruit du tireur (0,16) ([`50`](docs/50_le_rendu_attendait_la_memoire.md) §8) | ⚠ un seul tirage par budget : on ne peut pas AFFIRMER que le budget est sans effet, seulement qu'on ne le voit pas |
 | ⭐⭐⭐ **la RÉSOLUTION n'explique pas l'inertie du modèle d'encre** : le témoin où il atteint AUC 0,925 est à **9 %** des conditions de `PHerc1447` sur les deux axes (506,2 contre 553,0 µm par tuile, 205,7 contre 224,6 µm de profondeur), et dix fois cet écart ne rend qu'un facteur **2,1** sur les **45** à expliquer ([`58`](docs/58_resolution_ou_rouleau.md)) | ⚠ le chiffre qui portait la question était faux — `36` §5bis disait 2,4 µm là où le volume déclare **7,91** |
-| ⭐⭐ **et ce qui reste se lit comme une CAMPAGNE de scan, pas comme un rouleau** : les rouleaux dont le dépôt publie une détection d'encre ont **86 %** de chances d'avoir un scan fin à courte propagation, contre **29 %** (Fisher unilatéral, p = 0,0081, médiane 3 volumes contre 1) ([`59`](docs/59_la_campagne_plutot_que_le_rouleau.md)) | ⚠ pas, distance et énergie **co-varient** par campagne : aucune n'est isolée, et l'ordre causal pourrait être inverse |
+| ⭐⭐ **qu'un corpus se range en TROIS états et pas deux** : sur 45 rouleaux, **31 n'ont aucun segment publié** — personne ne les a tentés. Ranger ceux-là avec « pas d'encre » fait rendre p = 0,0081 à un partage qui, restreint aux rouleaux **tentés**, rend **p = 0,50** ([`59`](docs/59_la_campagne_plutot_que_le_rouleau.md)) | ⚠⚠ la piste « la campagne de scan explique l'inertie » **ne tient pas** : le scan fin suit l'attention portée à un rouleau, pas sa lisibilité. « Ce rouleau-ci » reste la seule cause en lice |
+| ⭐⭐ **et aucun des treize rouleaux du prix ne publie de détection d'encre** — dix des treize n'ont **aucun segment publié**, trois ont été tracés sans rendre d'encre ([`59`](docs/59_la_campagne_plutot_que_le_rouleau.md) §5) | — |
 
 ⭐ **L'objectif est donc nommable** : pas « réduire l'écart », mais **faire converger la
 mesure**. Une trace qui converge suit une feuille, quelle que soit sa valeur.
@@ -407,7 +408,7 @@ python3 src/graine/compter_corpus.py                 # les comptes viennent des 
 python3 src/tracecheck/mutation.py                         # chaque detecteur est PORTEUR
 python3 src/nappe/lire_selfcross.py --verifier       # un verdict qui n'a rien teste est REFUSE
 uv run python src/depot/verifier_chiffres.py docs/*.md \
-     --soumission docs/21_texte_de_soumission.md          # 235 chiffres recalcules depuis 52 fichiers de resultat
+     --soumission docs/21_texte_de_soumission.md          # 244 chiffres recalcules depuis 53 fichiers de resultat
 ```
 
 ⚠⚠ **Les cinq derniers ne mesurent rien du papyrus** — ils mesurent le depot. Ils

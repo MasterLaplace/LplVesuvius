@@ -169,12 +169,16 @@ Ce qui reste comme causes candidates, non départagées ici : la **qualité du s
 qualité de la **prédiction** sur ces volumes-là, ou simplement que **personne n'a
 essayé** — 33 échantillons sur 45 n'ont aucune surface tracée (`00` §6).
 
-⭐ **La première de ces trois a avancé depuis** :
-[`59`](59_la_campagne_plutot_que_le_rouleau.md) mesure sur les 45 rouleaux que ceux dont le
-dépôt publie une détection d'encre ont **86 %** de chances d'avoir un scan fin à courte
-propagation, contre **29 %** pour les autres (Fisher unilatéral, p = 0,0081). La différence
-d'énergie que ce paragraphe nommait sans la quantifier fait partie d'un écart de campagne
-plus large, et c'est cette campagne, pas le rouleau, qui se teste et qui s'achète.
+⭐⭐ **C'est la TROISIÈME qui a avancé, et elle est chiffrée** :
+[`59`](59_la_campagne_plutot_que_le_rouleau.md) mesure que **31 rouleaux sur 45 n'ont aucun
+segment publié** — personne ne les a tracés — et qu'**aucun des treize du prix ne publie de
+détection d'encre**, dix n'ayant aucun segment du tout. « Personne n'a essayé » n'est donc
+pas une hypothèse parmi trois : c'est l'état de la majorité du corpus.
+
+⚠⚠ **Et la première — la qualité du scan — a été testée puis REJETÉE.** Le partage naïf
+donnait 86 % contre 29 % de scans fins (p = 0,0081), mais 31 des 38 du groupe négatif
+n'avaient jamais été tracés : restreint aux rouleaux qu'on a **tentés**, c'est 86 % contre
+71 %, **p = 0,50**. Le scan fin suit l'attention portée à un rouleau, pas sa lisibilité.
 
 **🎯 Et la réponse actionnable :** **`PHerc0257`, `PHerc0800` et `PHerc0268`** sont les plus
 lâches — **0 %** de zones sous 150 µm tous les trois, contre **14 %** pour le témoin. Ce
