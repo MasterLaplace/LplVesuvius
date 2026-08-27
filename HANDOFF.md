@@ -1350,14 +1350,22 @@ chaque étape. Même famille que `pkill -f` qui matche sa propre ligne de comman
 Une décision humaine d'abandon s'écrit dans un fichier que le script LIT
 (`<cellule>/ABANDONNE`), jamais déduite d'une absence.
 
-⏳ **CAMPAGNES** (détachées) :
-```bash
-tail -f .lances/convergence_des_essais-20260820-*.log   # les 17 essais de 26, rejugés
-tail -f .lances/leviers_de_perte-20260820-*.log         # sdt_weight et les fibres h+v
-```
-La première est la **piste C** (relire `26` au test de convergence), la seconde teste les
-deux leviers. Conception appariée : même graine (5842 5839 7386), même volume, mêmes
-générations, une seule clé change à la fois.
+✅ **CAMPAGNES** — les deux sont dépouillées.
+
+La **piste C** (relire `26` au test de convergence) : 3 verdicts sur 17 essais jugeables.
+
+Les **leviers de perte** : campagne relancée et finie le 2026-08-27 → [`26`](docs/26_le_champ_de_direction.md) §9bis.
+⭐⭐ **Les deux leviers jamais essayés DÉGRADENT la trace**, d'un facteur 3 à 5 sur la part
+des fenêtres dont le pic tombe au tiers central (témoin **32 %**, les quatre variantes 6 à
+9 %). `sdt_weight` **ne mord pas** — poids 1 et poids 10 rendent le même écart au
+centième, et l'aire ne bouge pas d'une cinquième décimale. La paire de fibres **casse le
+maillage** : 8 926 auto-intersections contre **zéro** au témoin, et son gain d'aire de
+13 % est le repli lui-même.
+⚠⚠ L'α de convergence disait l'inverse (1,332 → 0,901) : c'est un **rapport de deux
+nombres censurés**, les quatre variantes ayant leur pic médian au bord de la fenêtre.
+
+Conception appariée : même graine (5842 5839 7386), même volume, mêmes générations, une
+seule clé change à la fois — c'est elle qui rend le témoin lisible.
 
 ⚠ **Reste aussi** : donner les points à `--resume --rewind-gen --correct`, puis juger au
 test de convergence de `38`.
@@ -1603,7 +1611,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 136 batteries, 3616 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 136 batteries, 3617 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)

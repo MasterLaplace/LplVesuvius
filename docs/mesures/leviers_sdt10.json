@@ -1,0 +1,24 @@
+{
+  "series": [
+    {
+      "verdict": "suit la fenêtre",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement",
+      "serie": [
+        [
+          19,
+          84.26
+        ],
+        [
+          41,
+          177.88
+        ]
+      ],
+      "croissance": 2.1110847377165913,
+      "elargissement": 2.1578947368421053,
+      "alpha": 0.9714858471159421,
+      "marge_au_seuil": 0.27148584711594215,
+      "fragile": false,
+      "nom": "sdt10 (19.824007 cm², 0 croisements)"
+    }
+  ]
+}

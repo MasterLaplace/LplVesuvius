@@ -1,0 +1,24 @@
+{
+  "series": [
+    {
+      "verdict": "suit la fenêtre",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement",
+      "serie": [
+        [
+          19,
+          84.26
+        ],
+        [
+          41,
+          187.24
+        ]
+      ],
+      "croissance": 2.222169475433183,
+      "elargissement": 2.1578947368421053,
+      "alpha": 1.038160979963935,
+      "marge_au_seuil": 0.3381609799639351,
+      "fragile": false,
+      "nom": "sdt10_fibres_hv (22.835682 cm², 8538 croisements)"
+    }
+  ]
+}

@@ -527,6 +527,58 @@ et les grilles est réelle.
 > seul levier qui ait changé quelque chose (`25`) : elle décide *où* la prédiction est lue,
 > et c'est la prédiction qui décide de tout le reste.
 
+## 9bis. ⭐⭐⭐ Les deux leviers jamais essayés, essayés — les deux DÉGRADENT
+
+La lecture de la source établissait que deux termes de perte n'avaient jamais été activés
+dans ce dépôt : **`sdt_weight`**, que le traceur calcule pourtant (`get_or_compute_sdt_chunk`)
+mais dont le poids vaut **zéro** par défaut, et les fibres **horizontales et verticales
+ensemble** — les 17 essais ont testé `normal` seul, `horizontal` seul, `vertical` seul,
+jamais la **paire**, alors que `FiberDirectionLoss` demande précisément que l'axe *u* suive
+les horizontales et l'axe *v* les verticales.
+
+Campagne appariée — même graine, même rouleau, même volume, mêmes 120 générations, **une
+seule clé change à la fois** :
+
+| variante | aire cm² | auto-intersections | **tiers central** | au bord | α |
+|---|---:|---:|---:|---:|---:|
+| **témoin** | 19,825 | **0** | **32 %** | **39 %** | 1,332 |
+| `sdt_weight` 1 | 19,824 | 0 | 9 % | 66 % | 0,901 |
+| `sdt_weight` 10 | 19,824 | 0 | 6 % | 58 % | 0,971 |
+| fibres h+v | 22,431 | **8 926** | 9 % | 53 % | 1,038 |
+| `sdt` 10 + fibres h+v | 22,836 | **8 538** | 6 % | 59 % | 1,038 |
+
+> ❌ **Les quatre dégradent la trace d'un facteur 3 à 5** sur la part des fenêtres dont le
+> pic tombe dans le tiers central. Le témoin est le meilleur des cinq.
+
+**`sdt_weight` ne mord pas.** Son aire est identique au témoin à la cinquième décimale
+(−0,00 %), ses auto-intersections restent à zéro, et — le fait qui tranche — **le poids 1
+et le poids 10 rendent exactement le même écart** (84,26 µm). Multiplier un poids par dix
+sans rien déplacer veut dire que le terme ne tire sur rien.
+
+**La paire de fibres CASSE le maillage** : 8 926 auto-intersections là où le témoin en a
+**zéro**. Son gain d'aire (+13 %) est un artefact de ce repli — la surface se recouvre
+elle-même, ce que confirme son compte de fenêtres avec matière, **128 contre 66** pour
+13 % d'aire en plus.
+
+### ⚠⚠ Et α disait l'inverse, parce que c'est un rapport de nombres CENSURÉS
+
+L'α de convergence descend de 1,332 (témoin) à 0,901 (`sdt1`), ce qui se lit comme une
+amélioration. C'est faux, et la raison est arithmétique : l'écart médian des **quatre**
+variantes vaut **84,26 µm = exactement 9,00 couches**, soit la demi-fenêtre de 19. Leur pic
+médian est donc **au bord**, et 84,26 µm n'est pas une mesure mais la **borne** de ce que
+la fenêtre peut rapporter. α est le rapport de deux telles bornes.
+
+> **Le témoin est le seul dont le pic médian tombe DANS la fenêtre** (couche 8 sur 19).
+> C'est ce qui rend son 65,5 µm comparable à rien d'autre du tableau — et c'est pourquoi la
+> colonne qui décide est le **tiers central**, qui compte des fenêtres et non une médiane.
+
+⚠ **Fenêtres de 19 et 41 couches, et c'est une contrainte, pas un réglage.** Le pas
+inter-feuilles de PHerc0358 vaut **187,2 µm** à 9,362 µm par voxel : 19 couches font
+0,95 pas, 41 en font **2,05**, et les 161 de la version initiale de cette campagne en
+faisaient **8,05**. Au-delà d'un pas, la fenêtre contient plusieurs feuilles et l'argmax
+désigne celle qui se trouve être la plus brillante (`20` §9). La campagne a été **arrêtée
+et relancée** pour cette raison.
+
 ## 10. Reproduire
 
 ```bash

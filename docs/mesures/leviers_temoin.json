@@ -1,0 +1,24 @@
+{
+  "series": [
+    {
+      "verdict": "suit la fenêtre",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement",
+      "serie": [
+        [
+          19,
+          65.53
+        ],
+        [
+          41,
+          182.56
+        ]
+      ],
+      "croissance": 2.7858995879749733,
+      "elargissement": 2.1578947368421053,
+      "alpha": 1.332111242726788,
+      "marge_au_seuil": 0.6321112427267881,
+      "fragile": false,
+      "nom": "temoin (19.824818 cm², 0 croisements)"
+    }
+  ]
+}
