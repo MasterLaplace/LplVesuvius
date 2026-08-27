@@ -620,6 +620,34 @@ def croiser_encre(cartes: list[dict], segments: list[dict], cle: str) -> dict:
     return out
 
 
+def carte_npy_en_gris(chemin, reduire: int = 1):
+    """Une de NOS cartes de prédiction (`.npy` de logits) en niveaux de gris comparables.
+
+    ⚠⚠ Les 190 cartes publiées sont des JPEG uint8 ; les nôtres sont des logits flottants.
+    Pour que la signature typographique soit comparable, il faut la MÊME transformation que
+    celle qui sert à les regarder — un étirement sur les percentiles 2 et 98 — et non un
+    étirement sur min/max, qu'un seul pixel aberrant écraserait.
+
+    ⚠ Les pixels non couverts sortent à zéro, comme un bord de segment sur une carte
+    publiée : ils ne sont pas de l'encre absente, ils sont hors surface, et
+    `masque_papyrus` les écarte de la même façon dans les deux cas.
+    """
+    np = _np()
+    from PIL import Image
+
+    a = np.load(chemin)
+    m = np.isfinite(a) & (a > -9e9)
+    if not m.any():
+        raise ValueError(f"{chemin} : aucun pixel couvert")
+    lo, hi = np.percentile(a[m], [2, 98])
+    img = np.clip((a - lo) / max(hi - lo, 1e-9), 0.0, 1.0)
+    img[~m] = 0.0
+    im = Image.fromarray((img * 255).astype(np.uint8), "L")
+    if reduire > 1:
+        im = im.reduce(reduire)
+    return np.asarray(im, dtype=np.uint8)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -632,12 +660,65 @@ def main() -> int:
                     help="croiser avec un fichier de segments portant un contraste "
                          "d'encre (docs/mesures/croisement_encre.json)")
     ap.add_argument("--cle-encre", default="encre_contraste_p90_p50")
+    ap.add_argument("--taille-fenetre", type=int, default=512,
+                    help="côté de la fenêtre d'analyse, en pixels APRÈS réduction. ⚠ Il "
+                         "borne la plus petite carte mesurable : à réduction 8 sur un scan "
+                         "à 8 µm, 512 px valent 35 mm de papyrus")
+    ap.add_argument("--controle-melange", action="store_true",
+                    help="mesurer AUSSI la même carte pixels mélangés : même distribution, "
+                         "aucune structure. Sans ce contrôle, « 2 fenêtres sur 2 » n'a pas "
+                         "d'échelle — c'est un tirage à pile ou face")
+    ap.add_argument("--graine", type=int, default=0)
+    ap.add_argument("--npy", type=Path, nargs="*",
+                    help="mesurer NOS cartes de prédiction (.npy) au lieu d'un dossier "
+                         "d'images publiées — même signature, même réduction")
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()
     if a.verifier:
         return verifier()
+    if a.npy:
+        import json as _json
+
+        import numpy as np
+        lignes = []
+        for c in a.npy:
+            gris = carte_npy_en_gris(c, a.reduire)
+            s = signature(gris, a.taille_fenetre)
+            s.update({"rouleau": "nos_cartes", "carte": c.stem, "reduction": a.reduire,
+                      "taille_fenetre": a.taille_fenetre})
+            lignes.append(s)
+            def dire(etiquette, d):
+                print(f"  {etiquette:44} surface {d['surface_px']:>9}  "
+                      f"couverture {d['couverture']:.3f}  "
+                      f"périodiques {d['fenetres_periodiques']}/{d['fenetres']} "
+                      f"({d['part_periodique']:.0%})  "
+                      f"période {d['periode_px']}  netteté {d['nettete_mediane']:.3f}")
+
+            dire(c.stem, s)
+            if a.controle_melange:
+                # ⚠⚠ Le mélange garde la DISTRIBUTION et détruit la STRUCTURE. C'est le seul
+                # contrôle qui donne une échelle à « n fenêtres sur n » quand n est petit :
+                # si la carte mélangée est périodique elle aussi, le compte ne dit rien.
+                # ⚠ Le mélange ne touche QUE les pixels de surface : mélanger le fond
+                # déplacerait la forme du segment, donc changerait `masque_papyrus`, et on
+                # comparerait deux surfaces au lieu de deux structures.
+                melange = gris.copy()
+                dedans = melange > 0
+                valeurs = melange[dedans]
+                np.random.default_rng(a.graine).shuffle(valeurs)
+                melange[dedans] = valeurs
+                t = signature(melange, a.taille_fenetre)
+                t.update({"rouleau": "controle_melange", "carte": c.stem,
+                          "reduction": a.reduire, "taille_fenetre": a.taille_fenetre})
+                lignes.append(t)
+                dire(f"  ↳ contrôle, pixels mélangés", t)
+        if a.json:
+            a.json.parent.mkdir(parents=True, exist_ok=True)
+            a.json.write_text(_json.dumps({"cartes": lignes}, indent=2, ensure_ascii=False) + "\n")
+            print(f"  écrit : {a.json}")
+        return 0
     if not a.dossier:
-        ap.error("nommer le dossier des cartes, ou --verifier")
+        ap.error("nommer le dossier des cartes, --npy, ou --verifier")
 
     import numpy as np
     from PIL import Image

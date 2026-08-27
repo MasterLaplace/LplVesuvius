@@ -1433,6 +1433,29 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                     [f"{fr(d['rapport_sigma'], 1)}×", f"**{fr(d['rapport_sigma'], 1)}×**"],
                     ent.name))
 
+    typo = _source(racine, "typographie_de_nos_cartes.json")
+    if typo.exists():
+        d = json.loads(typo.read_text())
+        par = {(l["rouleau"], l["carte"]): l for l in d.get("cartes", [])}
+        for cle, libelle in ((("nos_cartes", "ink_segment_complet"), "Scroll 1"),
+                             (("nos_cartes", "ink_PHerc1447_complet"), "PHerc1447")):
+            l = par.get(cle)
+            if not l or not l.get("fenetres"):
+                continue
+            out.append((f"fenetres periodiques, {libelle}",
+                        [f"{l['fenetres_periodiques']}/{l['fenetres']}"], typo.name))
+            if l.get("periode_px"):
+                out.append((f"periode typographique, {libelle}",
+                            [f"{l['periode_px']} px"], typo.name))
+        # ⚠ Le controle par melange est ce qui donne une echelle au compte : sans lui,
+        # « 2 fenetres sur 2 » n'est pas distinguable d'un tirage.
+        for cle, libelle in ((("controle_melange", "ink_segment_complet"), "Scroll 1"),
+                             (("controle_melange", "ink_PHerc1447_complet"), "PHerc1447")):
+            l = par.get(cle)
+            if l:
+                out.append((f"controle melange, {libelle}",
+                            [f"{l['fenetres_periodiques']}/{l['fenetres']}"], typo.name))
+
     gen = _source(racine, "generalisation_PHerc0172.json")
     if gen.exists():
         d = json.loads(gen.read_text())

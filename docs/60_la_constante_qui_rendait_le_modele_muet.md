@@ -110,6 +110,43 @@ moucheture pleine échelle en a autant qu'un texte. Ce qui trancherait est le ju
 n'est couvert qu'à **52,5 %**. Une moucheture sur une surface qui n'est pas posée sur la
 feuille est le résultat attendu, et le bug d'échelle n'a jamais touché ce fait-là.
 
+## 4 ter. ⚠⚠ Et l'instrument typographique, LUI, y trouve de la périodicité
+
+L'œil dit moucheture, mais l'œil regarde une image réduite. `src/encre/typographie.py`
+mesure les quatre grandeurs de [`45`](45_consistent_with_quantifie.md) — couverture,
+épaisseur de trait, **périodicité des lignes**, netteté du pic — et il sait travailler sur
+nos cartes de prédiction depuis ce jour (`--npy`).
+
+⚠⚠ **Il a d'abord fallu le calibrer, et son réglage par défaut ne peut RIEN conclure.** À la
+réduction 4, la carte de Scroll 1 — celle où les lettres se lisent à l'œil — rend **0 %** de
+fenêtres périodiques. Un instrument qui répond « pas de texte » sur du texte n'est pas un
+instrument. Le balayage donne le réglage utile :
+
+| réduction | fenêtre | Scroll 1, texte connu |
+|---:|---:|---|
+| 4 | 512 | 0/12 — **incapable de conclure** |
+| 8 | 512 | 2/3 |
+| **8** | **256** | **8/12 (67 %), période 38 px = 2,4 mm** |
+
+Au réglage calibré, avec le contrôle qui donne une échelle au compte :
+
+| | fenêtres périodiques | période | netteté |
+|---|---:|---:|---:|
+| Scroll 1 — texte connu | **8/12 (67 %)** | 38 px → **2,4 mm** | 0,751 |
+| … ses pixels **mélangés** | **0/12** | — | — |
+| **`PHerc1447`, surface entière** | **2/2 (100 %)** | 48 px → **3,3 mm** | 0,672 |
+| … ses pixels **mélangés** | **0/2** | — | — |
+
+⭐⭐ **Le mélange garde la distribution et détruit la structure** : la périodicité de
+`PHerc1447` ne vient donc pas de sa statistique de gris, elle vient de son agencement. Et
+l'interligne trouvé, **3,3 mm**, est du même ordre que les 2,4 mm de Scroll 1.
+
+⚠⚠⚠ **Et n vaut DEUX.** Deux fenêtres, c'est un tirage à pile ou face — [`33`](33_la_carte_nest_pas_resolue.md)
+est un document entier sur le fait qu'on ne conclut pas à quinze fenêtres. **Ceci est une
+piste, pas une lecture.** Le seul moyen d'augmenter n est de rendre plus de surface :
+`PHerc1447` en publie **quatre**, une seule était rendue, et
+`src/campagnes/campagne_encre_1447.sh` rend les trois autres.
+
 ## 5. Ce qui est annulé, et ce qui tient
 
 | document | ce qu'il disait | état |
