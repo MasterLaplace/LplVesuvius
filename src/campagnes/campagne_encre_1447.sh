@@ -21,6 +21,13 @@ cd "$(dirname "$0")/../.." || exit 2
 ROOT=$PWD
 LISTE=${1:-docs/mesures/volumes_surface_PHerc1447.txt}
 COUCHE_DEPART=${COUCHE_DEPART:-3}
+# ⚠⚠ LE NOMBRE DE FILS EST UN PARAMETRE, et il faut le dire : `infer_ink` en prend **16**
+# par defaut, ce qui est juste pour un seul rendu et desastreux pour deux. Mesure du
+# 2026-08-27 : deux campagnes lancees ensemble sur une machine a 22 coeurs ont demande 32
+# fils, et ont consomme 26 h et 19 h de CPU pour 2 h de temps reel chacune -- l'essentiel
+# parti en contention. Deux rendus lances en meme temps finissent PLUS TARD que les memes
+# lances l'un apres l'autre. Poser `FILS` quand une autre campagne tourne.
+FILS=${FILS:-16}
 MODELE="$ROOT/data/models/timesformer_GP_scroll1"
 
 [ -s "$LISTE" ] || { echo "liste absente : $LISTE" >&2; exit 2; }
@@ -47,7 +54,8 @@ while IFS=$'\t' read -r seg cle _; do
         --top 0 --left 0 --hauteur "$2" --largeur "$3" || { echo "  pont echoue" >&2; continue; }
   fi
   uv run python src/xpu/infer_ink.py "$couches" --model "$MODELE" \
-      --start-layer "$COUCHE_DEPART" --top 0 --left 0 --height "$2" --width "$3" \
+      --start-layer "$COUCHE_DEPART" --threads "$FILS" \
+      --top 0 --left 0 --height "$2" --width "$3" \
       --out "$out" 2>&1 | grep -E "encre  min|fenetres|erreur" | sed 's/^/  /'
 done < "$LISTE"
 
