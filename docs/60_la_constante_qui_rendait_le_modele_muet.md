@@ -117,10 +117,20 @@ mesure les quatre grandeurs de [`45`](45_consistent_with_quantifie.md) — couve
 épaisseur de trait, **périodicité des lignes**, netteté du pic — et il sait travailler sur
 nos cartes de prédiction depuis ce jour (`--npy`).
 
-⚠⚠ **Il a d'abord fallu le calibrer, et son réglage par défaut ne peut RIEN conclure.** À la
-réduction 4, la carte de Scroll 1 — celle où les lettres se lisent à l'œil — rend **0 %** de
-fenêtres périodiques. Un instrument qui répond « pas de texte » sur du texte n'est pas un
-instrument. Le balayage donne le réglage utile :
+⚠⚠ **Il a d'abord fallu le calibrer**, et son réglage par défaut ne peut rien conclure
+**sur nos cartes** : à la réduction 4, celle de Scroll 1 — où les lettres se lisent à l'œil —
+rend **0 %** de fenêtres périodiques. Un instrument qui répond « pas de texte » sur du texte
+ne conclut rien.
+
+⭐ **Et ce n'est pas un défaut du réglage : c'est une différence d'échelle**, que la docstring
+de l'outil annonce (*« le facteur est un PARAMÈTRE parce qu'il dépend de la résolution du
+scan »*). Vérifié plutôt que supposé : sur les **190 cartes publiées**, mesurées à la
+réduction 4, **156 ont au moins une fenêtre périodique** et la part médiane de `PHerc0172`
+vaut 1,0. Les cartes publiées sont des JPEG déjà réduits ×8 par leur pipeline ; les nôtres
+sont en pleine résolution. Il leur faut donc **ce ×8 en plus**, et le réglage calibré
+ci-dessous n'est rien d'autre.
+
+Le balayage donne le réglage utile :
 
 | réduction | fenêtre | Scroll 1, texte connu |
 |---:|---:|---|

@@ -1433,6 +1433,19 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                     [f"{fr(d['rapport_sigma'], 1)}×", f"**{fr(d['rapport_sigma'], 1)}×**"],
                     ent.name))
 
+    # ⚠ Le contre-controle du reglage : les 190 cartes PUBLIEES, mesurees a la reduction 4,
+    # rendent bien de la periodicite. C'est ce qui distingue « le defaut est casse » de
+    # « nos cartes vivent a une autre echelle », et la difference change la lecture de `60`.
+    corpus = _source(racine, "typographie.json")
+    if corpus.exists():
+        d = json.loads(corpus.read_text())
+        cartes = d.get("cartes", [])
+        avec = sum(1 for x in cartes if x.get("fenetres_periodiques"))
+        if cartes:
+            out.append(("cartes publiees avec au moins une fenetre periodique",
+                        [f"**{avec}** ont au moins une fenêtre périodique",
+                         f"{avec} ont au moins une fenêtre périodique"], corpus.name))
+
     typo = _source(racine, "typographie_de_nos_cartes.json")
     if typo.exists():
         d = json.loads(typo.read_text())
