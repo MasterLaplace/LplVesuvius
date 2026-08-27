@@ -246,6 +246,17 @@ def ligne_de_progression(faites: int, total: int, secondes: float) -> str:
             f"écoulé {duree(secondes)}  reste ~{duree(reste)}")
 
 
+def fenetres_avec_matiere(stack: np.ndarray, positions: list[tuple[int, int]]):
+    """Les fenêtres qui portent au moins un voxel non nul.
+
+    ⚠ Le critère est « au moins un voxel », pas « une part de la fenêtre » : un seuil de
+    remplissage serait un nombre choisi pour que le segment du jour passe, et il jetterait
+    le bord d'une feuille — précisément là où une trace se perd.
+    """
+    return [(y, x) for y, x in positions
+            if stack[:, y : y + TILE, x : x + TILE].any()]
+
+
 def infer(
     stack: np.ndarray,
     model,
@@ -273,11 +284,26 @@ def infer(
     prediction = np.zeros((height, width), dtype=np.float32)
     overlap = np.zeros((height, width), dtype=np.float32)
 
-    positions = [
+    toutes = [
         (y, x)
         for y in range(0, height - TILE + 1, stride)
         for x in range(0, width - TILE + 1, stride)
     ]
+    # ⚠⚠ Une fenêtre SANS MATIÈRE est sautée, et ce n'est pas qu'une économie. Un volume de
+    # surface publié n'est pas plein : celui de `PHerc1447` n'est couvert qu'à **48,8 %**, et
+    # sa boîte englobante contient donc de larges régions vides. Faire tourner le modèle
+    # dessus lui demande ce qu'il voit dans du noir — et sa réponse au noir est exactement la
+    # constante qui a fondé le faux négatif de `36` §5bis. La garder diluerait σ et poserait
+    # une plage plate sur la carte, à un endroit où il n'y a pas de papyrus.
+    #
+    # ⚠ Les pixels d'une fenêtre sautée restent NON COUVERTS (le compteur de recouvrement y
+    # reste nul, donc la sortie y vaut NaN), ce que `comparer_encre.statistiques` écarte
+    # déjà. « Pas de papyrus » et « pas d'encre » cessent d'être la même valeur.
+    positions = fenetres_avec_matiere(stack, toutes)
+    sautees = len(toutes) - len(positions)
+    if sautees:
+        print(f"fenetres sans matiere : {sautees} sur {len(toutes)} "
+              f"({sautees / len(toutes):.0%}) sautees", file=sys.stderr, flush=True)
 
     if device == "xpu":
         torch.xpu.synchronize()
@@ -405,6 +431,23 @@ def verifier() -> int:
     # une commande dont tous les arguments sont valides, sans toucher aux couches.
     v("le module expose le refus a main(), pas seulement a l'appelant",
       "exiger_les_modules" in main.__code__.co_names)
+
+    # --- LES FENETRES SANS MATIERE, sautees plutot que rendues -------------------------
+    pile = np.zeros((FRAMES, 200, 200), dtype=np.float32)
+    pile[:, 100:164, 100:164] = 0.5      # un seul carre de matiere
+    toutes = [(y, x) for y in (0, 100) for x in (0, 100)]
+    gardees = fenetres_avec_matiere(pile, toutes)
+    v("une fenetre sur du vide est sautee", (0, 0) not in gardees)
+    v("... et celle qui porte de la matiere est gardee", (100, 100) in gardees)
+    v("... trois des quatre sont donc sautees", len(gardees) == 1)
+    # ⚠⚠ Le critere est « au moins un voxel », pas une part de remplissage : un seuil
+    # jetterait le BORD d'une feuille, exactement la ou une trace se perd.
+    presque_vide = np.zeros((FRAMES, 200, 200), dtype=np.float32)
+    presque_vide[0, 100, 100] = 1e-6
+    v("un seul voxel non nul suffit a garder la fenetre",
+      fenetres_avec_matiere(presque_vide, [(100, 100)]) == [(100, 100)])
+    v("une pile entierement vide ne garde rien",
+      fenetres_avec_matiere(np.zeros((FRAMES, 200, 200), dtype=np.float32), toutes) == [])
 
     # --- LA PROGRESSION, parce qu'un rendu muet ne se suit pas --------------------------
     v("une ligne de progression dit ou on en est",
