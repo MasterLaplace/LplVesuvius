@@ -28,6 +28,11 @@ COUCHE_DEPART=${COUCHE_DEPART:-3}
 # parti en contention. Deux rendus lances en meme temps finissent PLUS TARD que les memes
 # lances l'un apres l'autre. Poser `FILS` quand une autre campagne tourne.
 FILS=${FILS:-16}
+# ⚠⚠ ET LA CONCLUSION, chiffree le 2026-08-27 par `src/encre/cout_du_rendu.py` : le debit
+# tombe de 0,655 a 0,192 fenetre par fil-seconde quand deux rendus se partagent la machine,
+# soit un facteur **3,42**. Les quatre surfaces publiees de ce rouleau coutent **2,24 h**
+# lancees SEULES, contre plus de six heures menees en parallele d'autre chose. Lancer une
+# seule campagne a la fois n'est pas une politesse, c'est le chemin le plus court.
 MODELE="$ROOT/data/models/timesformer_GP_scroll1"
 
 [ -s "$LISTE" ] || { echo "liste absente : $LISTE" >&2; exit 2; }

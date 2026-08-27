@@ -1083,6 +1083,11 @@ run "batteries qui peuvent échouer" uv run python "$ROOT/src/depot/batteries_in
 # Un lien cassé s'affiche normalement jusqu'à ce qu'on clique, donc rien ne le signalait.
 run "liens des documents"      uv run python "$ROOT/src/depot/liens_casses.py" --verifier
 
+# ⚠ Ce que coûte un rendu d'encre, en fenêtres par FIL-SECONDE — la seule forme du débit qui
+# se transporte d'une machine à l'autre. La batterie garde aussi le contrôle qui rattache le
+# chiffre au réel : la surface entière de PHerc1447 doit retomber sur sa durée mesurée.
+run "coût d'un rendu"          uv run python "$ROOT/src/encre/cout_du_rendu.py" --verifier
+
 # ⚠⚠ La figure du bug d'échelle a un contrôle, et il porte sur ce qui la rend HONNÊTE : les
 # deux panneaux partagent leur étirement. Étirer chacun sur sa propre plage rendrait une
 # sortie constante aussi contrastée qu'une vraie carte — l'inverse de ce que la figure montre.

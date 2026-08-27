@@ -1,0 +1,48 @@
+{
+  "lignes": [
+    {
+      "quoi": "Scroll 1, 1024 px, machine libre",
+      "fenetres": 2116,
+      "secondes": 199.7,
+      "fils": 16,
+      "partagee": false,
+      "debit_fenetres_par_fil_seconde": 0.6622
+    },
+    {
+      "quoi": "PHerc1447, 1024 px, machine libre",
+      "fenetres": 2116,
+      "secondes": 198.1,
+      "fils": 16,
+      "partagee": false,
+      "debit_fenetres_par_fil_seconde": 0.6676
+    },
+    {
+      "quoi": "PHerc1447, surface entière, machine libre",
+      "fenetres": 21128,
+      "secondes": 2079.5,
+      "fils": 16,
+      "partagee": false,
+      "debit_fenetres_par_fil_seconde": 0.635
+    },
+    {
+      "quoi": "PHerc0172, 1024 px, machine partagée",
+      "fenetres": 2116,
+      "secondes": 509.3,
+      "fils": 16,
+      "partagee": true,
+      "debit_fenetres_par_fil_seconde": 0.2597
+    },
+    {
+      "quoi": "témoin négatif, 1100 px pas 8, machine partagée",
+      "fenetres": 1488,
+      "secondes": 2006.0,
+      "fils": 6,
+      "partagee": true,
+      "debit_fenetres_par_fil_seconde": 0.1236
+    }
+  ],
+  "debit_machine_libre": 0.6549,
+  "debit_machine_partagee": 0.1916,
+  "facteur_de_contention": 3.42,
+  "fenetres_par_mm2": 29.314
+}
