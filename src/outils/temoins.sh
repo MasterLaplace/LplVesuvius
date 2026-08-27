@@ -810,6 +810,13 @@ run "écart en spires"         uv run python "$ROOT/src/nappe/ecart_en_spires.py
 # tomber n'importe ou. Le temoin le sonde sur deux tableaux de MEME mediane.
 run "encre : σ contre témoin"  uv run python "$ROOT/src/encre/comparer_encre.py" --verifier
 
+# ⚠⚠ Le mot « résolution » cachait DEUX grandeurs — l'échantillonnage en plan et l'épaisseur
+# de la fenêtre de profondeur —, et M1ter les laissait confondues. Cette batterie garde la
+# règle qui rend l'échelle lisible : un grossissement est une MOYENNE de bloc et non une
+# décimation, il ne touche jamais l'axe de profondeur, et le barreau natif est obligatoire
+# parce que sans lui une échelle plate de bout en bout ressemble à un harnais cassé.
+run "résolution ou rouleau"    uv run python "$ROOT/src/encre/resolution_ou_rouleau.py" --verifier
+
 # ⭐⭐ Le seul juge de trace de ce depot qui n'ait NI seuil, NI verite terrain, NI echelle :
 # on rend la meme surface dans des fenetres de plus en plus profondes et on regarde si la
 # distance mesuree bouge. Ses TROIS REFUS sont ce que le temoin verifie -- une seule

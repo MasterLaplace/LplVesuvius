@@ -117,17 +117,37 @@ def choisir_appareil(demande: str, xpu_disponible: bool) -> tuple[str, str]:
     return "cpu", "repli, aucun XPU detecte"
 
 
-def load_layer_stack(layers_dir: Path, start: int, crop: tuple[int, int, int, int]) -> np.ndarray:
-    """Charge FRAMES couches consecutives sur une fenetre, en (frames, h, w).
+def indices_des_couches(start: int, pas: int = 1) -> list[int]:
+    """Les indices que la pile lira -- une seule reponse a « quelle couche ».
+
+    ⚠ Elle est SEPAREE de la lecture parce qu'une sonde qui passe par le disque s'arrete a
+    la premiere couche absente : elle ne verrait donc jamais la deuxieme, c'est-a-dire
+    justement celle ou un pas se distingue d'un autre. Un controle qui ne peut pas
+    distinguer pas=1 de pas=2 est un controle qui ne controle rien.
+    """
+    if pas < 1:
+        raise InferenceError(f"pas de couches {pas} : un pas est un entier positif")
+    return [start + index * pas for index in range(FRAMES)]
+
+
+def load_layer_stack(layers_dir: Path, start: int, crop: tuple[int, int, int, int],
+                     pas: int = 1) -> np.ndarray:
+    """Charge FRAMES couches sur une fenetre, en (frames, h, w).
 
     Les couches sont lues par fenetre et non en entier : une couche fait 6655 x
     35653 en uint16, soit 474 Mo, donc les 26 tiendraient 12 Go pour une region
     qui en demande quelques dizaines de mebioctets.
+
+    ⚠⚠ `pas` prend une couche sur `pas`, donc EPAISSIT la fenetre de profondeur sans
+    changer le nombre d'images que le modele mange. C'est la seule facon de faire varier la
+    grandeur que `36` §5bis a laissee confondue avec la resolution en plan : a 8,64 µm,
+    26 couches couvrent 225 µm la ou l'entrainement en voyait 62. Le defaut est 1, donc
+    aucun appel existant ne bouge.
     """
     top, left, height, width = crop
     stack = np.zeros((FRAMES, height, width), dtype=np.float32)
-    for index in range(FRAMES):
-        path = layers_dir / f"{start + index:02d}.tif"
+    for index, couche in enumerate(indices_des_couches(start, pas)):
+        path = layers_dir / f"{couche:02d}.tif"
         if not path.is_file():
             raise InferenceError(f"couche absente : {path}")
         with tifffile.TiffFile(path) as handle:
@@ -289,6 +309,23 @@ def verifier() -> int:
     # une commande dont tous les arguments sont valides, sans toucher aux couches.
     v("le module expose le refus a main(), pas seulement a l'appelant",
       "exiger_les_modules" in main.__code__.co_names)
+
+    # --- le pas de profondeur ---------------------------------------------------------
+    v("sans pas, les couches sont consecutives",
+      indices_des_couches(15, 1) == list(range(15, 15 + FRAMES)))
+    v("un pas de 2 saute une couche sur deux",
+      indices_des_couches(15, 2) == [15 + 2 * i for i in range(FRAMES)])
+    v("... et un pas de 2 lit donc DEUX FOIS plus loin qu'un pas de 1",
+      indices_des_couches(0, 2)[-1] == 2 * indices_des_couches(0, 1)[-1])
+    v("la premiere couche reste celle qu'on a demandee, quel que soit le pas",
+      {indices_des_couches(15, p)[0] for p in (1, 2, 3)} == {15})
+    v("le modele mange toujours le meme nombre d'images",
+      all(len(indices_des_couches(0, p)) == FRAMES for p in (1, 2, 3)))
+    try:
+        indices_des_couches(15, 0)
+        v("un pas nul est refuse", False)
+    except InferenceError:
+        v("un pas nul est refuse", True)
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0

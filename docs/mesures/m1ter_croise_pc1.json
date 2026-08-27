@@ -1,0 +1,55 @@
+{
+  "question": "M1ter — l'echantillonnage en plan suffit-il a rendre le modele inerte ?",
+  "axe": "plan",
+  "segment": "scroll4_20231111135340",
+  "voxel_um": 2.4,
+  "cible_um": 8.64,
+  "fenetre": {
+    "top": 2500,
+    "left": 8000,
+    "cote": 504,
+    "sigma_carte_publiee": null
+  },
+  "couche_depart": 15,
+  "couches": 26,
+  "ancres": {
+    "modele_marche": {
+      "nom": "Scroll 1 entier (AUC 0,925, 2,4 µm)",
+      "sigma": 0.7711818814277649
+    },
+    "modele_inerte": {
+      "nom": "PHerc1447 (prix, 8,64 µm)",
+      "sigma": 0.017066892236471176
+    }
+  },
+  "barreaux": [
+    {
+      "facteur": 1,
+      "echantillonnage_um": 2.4,
+      "profondeur_um": 62.4,
+      "entree_px": 504,
+      "fenetres": 441,
+      "secondes": 45.9,
+      "sigma": 0.8257792592048645,
+      "sigma_attendu_par_moyennage": 0.8257792592048645,
+      "rapport_mesure_sur_attendu": 1.0,
+      "etendue": 3.7000579833984375,
+      "median": -1.1996369361877441,
+      "n_pixels_couverts": 234256
+    },
+    {
+      "facteur": 2,
+      "echantillonnage_um": 4.8,
+      "profondeur_um": 62.4,
+      "entree_px": 252,
+      "fenetres": 81,
+      "secondes": 8.6,
+      "sigma": 0.8231610655784607,
+      "sigma_attendu_par_moyennage": 0.824743926525116,
+      "rapport_mesure_sur_attendu": 0.9980807849615525,
+      "etendue": 3.4478890895843506,
+      "median": -0.7731441855430603,
+      "n_pixels_couverts": 53824
+    }
+  ]
+}

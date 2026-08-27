@@ -1311,6 +1311,48 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                         [f"{d['chiffres_recalcules']} chiffres",
                          f"**{d['chiffres_recalcules']} chiffres**"], p.name))
 
+    # ⚠⚠ M1ter — les deux moities de « resolution ». Chaque chiffre du document 58 est
+    # RECALCULE ici depuis les quatre rapports, jamais recopie : ce sont des rapports entre
+    # barreaux, donc exactement le genre de nombre qu'on croit se rappeler et qu'on ecrit a
+    # l'envers. Le rapport a l'ancre inerte est le pivot de la conclusion du §3.
+    plan = _source(racine, "m1ter_resolution_en_plan.json")
+    if plan.exists():
+        d = json.loads(plan.read_text())
+        natif = d["barreaux"][0]["sigma"]
+        gros = d["barreaux"][-1]
+        inerte = d["ancres"]["modele_inerte"]["sigma"]
+        marche = d["ancres"]["modele_marche"]["sigma"]
+        ajoute("sigma a 9,60 µm sur Scroll 1", gros["sigma"], 4, plan.name)
+        out.append(("Scroll 1 grossi contre l'ancre inerte",
+                    [f"{fr(gros['sigma'] / inerte, 1)} fois", f"{en(gros['sigma'] / inerte, 1)} fois"],
+                    plan.name))
+        out.append(("... le meme ecart, rapporte a chaque natif",
+                    [f"{fr((gros['sigma'] / natif) / (inerte / marche), 1)} fois",
+                     f"{en((gros['sigma'] / natif) / (inerte / marche), 1)} fois"], plan.name))
+        out.append(("part de sigma perdue a 9,60 µm",
+                    [f"{fr((1 - gros['sigma'] / natif) * 100, 1)} %",
+                     f"{en((1 - gros['sigma'] / natif) * 100, 1)} %"], plan.name))
+
+    pc1 = _source(racine, "m1ter_croise_pc1.json")
+    pc2 = _source(racine, "m1ter_croise_pc2.json")
+    if pc1.exists() and pc2.exists():
+        a = json.loads(pc1.read_text())["barreaux"]
+        b = json.loads(pc2.read_text())["barreaux"]
+        base = a[0]["sigma"]
+        r_plan, r_prof, r_croise = a[1]["sigma"] / base, b[0]["sigma"] / base, b[1]["sigma"] / base
+        out.append(("perte du doublement en profondeur",
+                    [f"{fr((1 - r_prof) * 100, 1)} %", f"{en((1 - r_prof) * 100, 1)} %"], pc2.name))
+        out.append(("perte du doublement en plan, fenetre juste",
+                    [f"{fr((1 - r_plan) * 100, 2)} %", f"{en((1 - r_plan) * 100, 2)} %"], pc1.name))
+        out.append(("... le meme doublement sur une fenetre deja doublee",
+                    [f"{fr((1 - b[1]['sigma'] / b[0]['sigma']) * 100, 1)} %",
+                     f"{en((1 - b[1]['sigma'] / b[0]['sigma']) * 100, 1)} %"], pc2.name))
+        ajoute("prediction d'independance des deux axes", r_plan * r_prof, 3, pc2.name)
+        ajoute("le croise reellement mesure", r_croise, 3, pc2.name)
+        out.append(("de combien le croise est pire que l'independance",
+                    [f"{fr(r_plan * r_prof / r_croise, 3)} fois",
+                     f"{en(r_plan * r_prof / r_croise, 3)} fois"], pc2.name))
+
     p = _source(racine, "cout_echelle.json")
     if p.exists():
         d = json.loads(p.read_text())

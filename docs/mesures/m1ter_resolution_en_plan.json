@@ -1,0 +1,72 @@
+{
+  "question": "M1ter — l'echantillonnage en plan suffit-il a rendre le modele inerte ?",
+  "source": "data/controle_resolution/plan",
+  "ancres": {
+    "modele_marche": {
+      "nom": "Scroll 1 entier (AUC 0,925, 2,4 µm)",
+      "sigma": 0.7711818814277649
+    },
+    "modele_inerte": {
+      "nom": "PHerc1447 (prix, 8,64 µm)",
+      "sigma": 0.017066892236471176
+    }
+  },
+  "barreaux": [
+    {
+      "facteur": 1,
+      "echantillonnage_um": 2.4,
+      "profondeur_um": 62.4,
+      "entree_px": 1008,
+      "fenetres": null,
+      "secondes": null,
+      "sigma": 1.5201722383499146,
+      "sigma_attendu_par_moyennage": 1.5201722383499146,
+      "rapport_mesure_sur_attendu": 1.0,
+      "etendue": 4.396426200866699,
+      "median": -1.2514688968658447,
+      "n_pixels_couverts": 976144
+    },
+    {
+      "facteur": 2,
+      "echantillonnage_um": 4.8,
+      "profondeur_um": 62.4,
+      "entree_px": 504,
+      "fenetres": null,
+      "secondes": null,
+      "sigma": 1.4351571798324585,
+      "sigma_attendu_par_moyennage": 1.519399642944336,
+      "rapport_mesure_sur_attendu": 0.9445554278605529,
+      "etendue": 4.418660640716553,
+      "median": -0.3288586139678955,
+      "n_pixels_couverts": 234256
+    },
+    {
+      "facteur": 3,
+      "echantillonnage_um": 7.2,
+      "profondeur_um": 62.4,
+      "entree_px": 336,
+      "fenetres": null,
+      "secondes": null,
+      "sigma": 0.9199617505073547,
+      "sigma_attendu_par_moyennage": 1.5194628238677979,
+      "rapport_mesure_sur_attendu": 0.6054519637180651,
+      "etendue": 3.6837573051452637,
+      "median": 0.8803697824478149,
+      "n_pixels_couverts": 99856
+    },
+    {
+      "facteur": 4,
+      "echantillonnage_um": 9.6,
+      "profondeur_um": 62.4,
+      "entree_px": 252,
+      "fenetres": null,
+      "secondes": null,
+      "sigma": 0.41184648871421814,
+      "sigma_attendu_par_moyennage": 1.5175881385803223,
+      "rapport_mesure_sur_attendu": 0.2713822533559688,
+      "etendue": 2.0440897941589355,
+      "median": 1.537916660308838,
+      "n_pixels_couverts": 53824
+    }
+  ]
+}

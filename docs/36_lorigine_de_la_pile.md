@@ -163,11 +163,17 @@ petit que le témoin, contre 45,2× pour notre rendu. **Notre chaîne n'y est po
 
 ⚠ Ce que ça n'établit pas : qu'il n'y a pas d'encre là (une fenêtre, un segment), ni
 laquelle des causes restantes joue — la résolution, ce rouleau-ci, ou un papyrus réellement
-vierge à cet endroit. ⚠⚠ Mais ça contredit une prémisse que [`31`](31_roadmap.md) §2 tient du papier
+vierge à cet endroit. ⭐ **Les deux premières ont été instruites depuis** :
+[`46`](46_le_temoin_negatif.md) §3 ferme « papyrus vierge », et
+[`58`](58_resolution_ou_rouleau.md) coupe « résolution » en deux — l'échantillonnage en plan
+ne suffit pas (à 9,60 µm, plus grossier qu'ici, Scroll 1 rend encore **24,1 fois** ce σ) et
+l'épaisseur de la fenêtre de profondeur coûte **huit fois plus** à facteur égal. ⚠⚠ Mais ça contredit une prémisse que [`31`](31_roadmap.md) §2 tient du papier
 de juin 2026 : *« le modèle de 2023 généralise en zero-shot »*. À 8,64 µm, 26 couches
 couvrent **225 µm** de profondeur là où l'entraînement en voyait **62** — quatre fois plus
 d'épaisseur pour la même fenêtre. Ce n'est peut-être pas gratuit, et c'est à mesurer avant
-de bâtir dessus.
+de bâtir dessus. ⭐ **Mesuré le 2026-08-27** ([`58`](58_resolution_ou_rouleau.md) §4) : ce
+n'est pas gratuit du tout — doubler cette épaisseur coûte **40,8 %** de la réponse du modèle,
+quand doubler l'échantillonnage en plan n'en coûte que **0,3 %**.
 
 ## 6. ⚠ Ce que ce document ne dit pas
 

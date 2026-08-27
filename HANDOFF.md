@@ -5,6 +5,59 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+## ⭐⭐⭐⭐⭐ M1ter INSTRUIT — « résolution » cachait DEUX grandeurs, et elles s'aggravent
+
+[`58`](docs/58_resolution_ou_rouleau.md), 2026-08-27. La cause de l'inertie du modèle
+d'encre sur `PHerc1447` n'était pas isolée : trois candidats, dont un déjà fermé par
+[`46`](docs/46_le_temoin_negatif.md) §3. Le mot « résolution » en cachait **deux** — ce
+qu'une tuile de 64 px couvre (154 µm contre 553 µm) et ce que 26 couches couvrent en
+profondeur (62 µm contre 225 µm) —, et les deux valent **×3,6** parce qu'il n'y a qu'un
+réglage derrière : la taille du voxel. C'est pour ça que personne ne les avait vus comme deux.
+
+La méthode : on ne peut pas rendre `PHerc1447` plus fin, on peut rendre **Scroll 1 plus
+grossier**, une grandeur à la fois.
+
+| | résultat |
+|---|---|
+| en plan seul, jusqu'à 9,60 µm | **72,9 %** de σ perdu, et le moyennage n'explique que **0,17 %** de la chute |
+| … mais suffisant ? | **non** : à 9,60 µm, plus grossier que là-bas, Scroll 1 rend encore **24,1 fois** le σ de `PHerc1447` (12,2 fois rapporté à chaque natif) |
+| en profondeur, ×2 | **40,8 %** de perte — **huit fois** le coût d'un doublement en plan (0,32 %) |
+| les deux ×2 ensemble | **0,494**, contre **0,590** que prédit l'indépendance : **1,195 fois pire** |
+
+⭐⭐ **La phrase à retenir** : doubler l'échantillonnage en plan coûte **0,32 %** quand la
+fenêtre de profondeur est juste et **16,6 %** quand elle est déjà doublée — **cinquante fois
+plus**. Les deux causes ne sont pas seulement liées par un réglage commun, elles
+**interagissent**, et aucune lecture d'un σ isolé ne pouvait le montrer.
+
+⚠ **Ce qui reste** — les deux sabliers sont portés par `58` §6 et inscrits au registre, pas
+ici : ce rouleau-ci, et le ×3,6 sur les deux axes. Ce dernier n'est pas un réglage à trouver
+mais **une donnée à obtenir** — il faudrait ~94 couches à ~2,4 µm sur un
+objet où le modèle répond, et les trois piles du dépôt en publient 26, 31 et 65.
+
+### ⚠⚠ Le détour : l'outil d'inférence ne tournait plus du tout
+
+`src/xpu/infer_ink.py` portait ses poids, validait ses arguments, puis mourait sur un
+`ModuleNotFoundError` **nu** — `torch`, `transformers` et `timesformer_pytorch` n'étaient
+dans **aucun** groupe de dépendances. Il refuse désormais **avant** de lire une couche, nomme
+chaque module absent et la commande qui répare, et sort en **3**. Trois faits ne sont
+apparus qu'en exécutant : `timesformer_pytorch` est demandé par le code du modèle via
+`trust_remote_code` (donc invisible dans nos imports) ; `transformers` doit être **borné sous
+5** (la 5.16 exige `all_tied_weights_keys`, absent de ce modèle écrit pour 4.46.3) ; et
+l'index de roues par défaut tire **2,7 Gio de CUDA** inutile ici (4,9 Gio → **1,2 Gio** avec
+l'index CPU).
+
+⚠⚠ Et `uv sync` a **désinstallé 19 paquets** — `zarr`, `fsspec`, `s3fs` — que quatre outils
+de `src/excision/` importent *dans leurs fonctions* et qu'aucun fichier ne déclarait. Ils
+étaient là parce que quelqu'un les y avait posés à la main. **Un environnement reproductible
+qui ne survit pas à sa propre commande de synchronisation ne l'est pas**, et la panne ne se
+voit que le jour où on relit un volume. Les deux groupes sont déclarés, optionnels.
+
+```bash
+uv sync --extra encre --extra volume
+```
+
+---
+
 ---
 
 ## ⚠⚠⚠ UN RUN OUBLIÉ A ÉCRASÉ UN RÉSULTAT FRAIS — et `temoins.sh` a maintenant un verrou
@@ -1617,7 +1670,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 136 batteries, 3622 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 137 batteries, 3664 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)
