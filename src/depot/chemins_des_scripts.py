@@ -154,6 +154,66 @@ def cd_vers_le_vide(textes: dict[str, str],
     return trouvailles
 
 
+_SCRIPT_LANCE = re.compile(
+    r"(?:uv run |python3?|bash|sh|\./)\s+(?<![\w/$.-])((?:src|tools|scripts)/[\w./-]+\.(?:py|sh))")
+"""Un chemin de script **qu'on lance**, cité en clair, sans variable ni joker.
+
+⚠⚠ La première version cherchait le chemin SEUL et rendait **76** trouvailles pour **4**
+vraies : les batteries de ce dépôt fabriquent des fixtures qui s'appellent
+`src/depot/mort.py`, `src/campagnes/a.sh`, `src/figures/dessin.py`… Une alerte qui désigne
+soixante-seize lignes ne désigne rien — c'est le reproche que `artefacts_orphelins` s'adresse
+à lui-même dans son propre en-tête. Exiger un VERBE de lancement devant sépare la commande
+qu'un lecteur copie-colle du nom qu'une fixture invente.
+
+⚠ Le regard arrière refuse `$`, `/`, `.` et `-` juste avant : `$ROOT/src/x.py` et
+`../src/x.py` sont assemblés à l'exécution, donc leur existence se juge autrement."""
+
+
+FIXTURES = {
+    ("src/depot/appelants.py", "src/outils/lance.sh"): "fixture de la batterie des appelants",
+    ("src/depot/appelants.py", "src/depot/seul.py"): "fixture de la batterie des appelants",
+    ("src/depot/appelants.py", "src/depot/mesure_longue.py"): "fixture de la batterie des appelants",
+    ("src/outils/lancer.sh", "src/campagnes/campagne_x.sh"): "exemple d'usage dans l'aide de lancer.sh",
+    ("src/outils/lancer.sh", "src/outils/.temoin_lancer.sh"): "script temporaire que la batterie ECRIT puis efface",
+    ("src/outils/readme_apparie.sh", "src/mesures/inexistant_xyz.py"): "fixture : un chemin qui doit manquer",
+}
+"""Les couples (fichier, cible) qu'on accepte de voir absents, avec la RAISON.
+
+⚠⚠ Un nom inventé par une batterie n'est pas un chemin mort — c'est un cas de test, et
+plusieurs le sont *exprès* (`inexistant_xyz.py` existe pour ne pas exister). Les exempter
+nommément, plutôt que d'assouplir la règle, garde l'alerte utile : elle désignait 76 lignes
+au premier jet, 8 au second, et **2** ici — les deux vraies."""
+
+
+def scripts_qui_nexistent_plus(textes: dict[str, str],
+                               racine: Path = RACINE) -> list[tuple[str, int, str]]:
+    """Les commandes qui nomment un script que le dépôt n'a plus.
+
+    ⚠⚠ Cette question s'ajoute aux deux autres parce qu'elle s'est posée TROIS FOIS dans la
+    même journée : `carte_difficulte.sh` lisait `/tmp/pred_prix.txt`, que rien ne produit ;
+    `campagne_temoin_negatif.sh` appelait `src/infer_ink.py`, déménagé dans `src/xpu/` au
+    rangement en dix familles ; et `09` publie encore la même commande morte. Chaque fois la
+    panne se lit comme « la commande de reproduction ne marche pas », c'est-à-dire comme un
+    résultat qu'on ne peut plus refaire.
+
+    ⚠ Les documents comptent autant que les scripts : une commande publiée dans un `.md` est
+    une promesse, et une promesse qu'on ne peut pas tenir vaut moins que pas de promesse.
+    """
+    trouvailles = []
+    for relatif, texte in sorted(textes.items()):
+        if not relatif.endswith((".sh", ".py", ".md")):
+            continue
+        for numero, ligne in enumerate(texte.splitlines(), 1):
+            for cible in _SCRIPT_LANCE.findall(ligne):
+                if any(c in cible for c in "*?<>{}"):
+                    continue
+                if (relatif, cible) in FIXTURES:
+                    continue
+                if not (racine / cible).exists():
+                    trouvailles.append((relatif, numero, cible))
+    return trouvailles
+
+
 def verifier() -> int:
     """Le contrôle se garde lui-même : chaque règle a son cas négatif.
 
@@ -234,6 +294,37 @@ def verifier() -> int:
     v("aucune instruction ne mene dans le vide", not cd_vers_le_vide(reels),
       str(cd_vers_le_vide(reels)[:3]))
 
+    # --- LA TROISIEME QUESTION : un script nomme mais absent ---------------------------
+    # ⚠⚠ Elle s'est posee TROIS FOIS le 2026-08-27, et chaque fois la panne se lisait comme
+    # « la commande de reproduction publiee ne marche pas ».
+    faux = {
+        "docs/x.md": "uv run python src/xpu/infer_ink.py --verifier\n",
+        "docs/y.md": "uv run python src/parti/ailleurs.py --verifier\n",
+        "docs/z.md": "uv run python $ROOT/src/parti/ailleurs.py\n",
+        "docs/w.md": 'CIBLES = {"src/depot/mort.py": "fixture"}\n',
+        "src/outils/readme_apparie.sh": "python3 src/mesures/inexistant_xyz.py\n",
+    }
+    trouve = {(f, c) for f, _, c in scripts_qui_nexistent_plus(faux)}
+    v("un script qui existe n'est pas signale",
+      ("docs/x.md", "src/xpu/infer_ink.py") not in trouve)
+    v("un script LANCE et absent est signale",
+      ("docs/y.md", "src/parti/ailleurs.py") in trouve)
+    # ⚠ Un chemin assemble a l'execution ne se juge pas ici : c'est l'affaire de
+    # `sorties_hors_depot`, et le confondre rendrait deux alertes pour un seul defaut.
+    v("un chemin construit avec une variable n'est pas juge",
+      ("docs/z.md", "src/parti/ailleurs.py") not in trouve)
+    # ⚠⚠ LE controle qui a fait retomber l'alerte de 76 a 8 : un nom de fixture, cite sans
+    # verbe de lancement, n'est pas une commande.
+    v("un nom cite sans verbe de lancement n'est pas une commande",
+      ("docs/w.md", "src/depot/mort.py") not in trouve)
+    # ⚠ Et celui qui rend les exemptions auditables : elles portent le COUPLE, pas le nom,
+    # donc exempter une fixture n'aveugle pas le meme nom ailleurs.
+    v("une fixture exemptee nommement est tue",
+      ("src/outils/readme_apparie.sh", "src/mesures/inexistant_xyz.py") not in trouve)
+    v("... et la meme cible ailleurs serait signalee",
+      ("docs/y.md", "src/parti/ailleurs.py") in trouve)
+    v("chaque exemption porte sa raison", all(FIXTURES.values()))
+
     print(f"ALL PASS (0 failures, {controles} checks)" if not echecs
           else f"ECHEC : {echecs} sur {controles}")
     return 0 if not echecs else 1
@@ -252,14 +343,18 @@ def main() -> int:
     textes = index_des_lignes()
     sortants = sorties_hors_depot(textes)
     perdus = cd_vers_le_vide(textes)
+    absents = scripts_qui_nexistent_plus(textes)
 
     for fichier, numero, litteral in sortants:
         print(f"HORS DEPOT  {fichier}:{numero}  {litteral}")
     for fichier, numero, cible in perdus:
         print(f"CD VERS RIEN {fichier}:{numero}  cd {cible}")
+    for fichier, numero, cible in absents:
+        print(f"SCRIPT ABSENT {fichier}:{numero}  {cible}")
 
-    print(f"\n{len(sortants)} ecriture(s) hors depot, {len(perdus)} cd vers un dossier absent")
-    return 0
+    print(f"\n{len(sortants)} ecriture(s) hors depot, {len(perdus)} cd vers un dossier absent, "
+          f"{len(absents)} script(s) nomme(s) mais absent(s)")
+    return 1 if absents else 0
 
 
 if __name__ == "__main__":

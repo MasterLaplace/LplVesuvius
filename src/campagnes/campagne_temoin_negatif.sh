@@ -29,6 +29,12 @@ cd "$(dirname "$0")/../.." || exit 2
 ROOT=$PWD
 DEST=${1:-$ROOT/data/temoin_negatif}
 STRIDE=${STRIDE:-8}
+# ⚠⚠ L'appareil etait `xpu` EN DUR, et `choisir_appareil` refuse plutot que de retomber —
+# donc cette campagne ne pouvait plus tourner du tout sur une machine sans iGPU Arc. C'est
+# la deuxieme fois de la journee qu'un chemin de reproduction publie s'avere mort ; ici il y
+# en avait meme deux, le second etant `src/infer_ink.py`, qui a demenage dans `src/xpu/` au
+# rangement en dix familles. `auto` retombe sur le CPU et DIT pourquoi.
+APPAREIL=${APPAREIL:-auto}
 COTE=${COTE:-1100}
 mkdir -p "$DEST"
 
@@ -51,20 +57,20 @@ cd "$ROOT" || exit 2
 
 if [ ! -s "$DEST/sur_sa_feuille.npy" ]; then
   echo "== controle POSITIF — segment officiel, alpha = +0,00"
-  uv run python src/infer_ink.py "$POS_COUCHES" \
+  uv run python src/xpu/infer_ink.py "$POS_COUCHES" \
     --model "$MODELE" --start-layer "$POS_DEPART" \
     --top "$POS_TOP" --left "$POS_LEFT" --height "$COTE" --width "$COTE" \
-    --stride "$STRIDE" --device xpu --out "$DEST/sur_sa_feuille.npy" || exit 3
+    --stride "$STRIDE" --device "$APPAREIL" --out "$DEST/sur_sa_feuille.npy" || exit 3
 else
   echo "== controle POSITIF deja fait"
 fi
 
 if [ ! -s "$DEST/en_travers.npy" ]; then
   echo "== controle NEGATIF — notre trace, alpha = +1,01, aucune feuille a portee"
-  uv run python src/infer_ink.py "$NEG_COUCHES" \
+  uv run python src/xpu/infer_ink.py "$NEG_COUCHES" \
     --model "$MODELE" --start-layer "$NEG_DEPART" \
     --top "$NEG_TOP" --left "$NEG_LEFT" --height "$COTE" --width "$COTE" \
-    --stride "$STRIDE" --device xpu --out "$DEST/en_travers.npy" || exit 3
+    --stride "$STRIDE" --device "$APPAREIL" --out "$DEST/en_travers.npy" || exit 3
 else
   echo "== controle NEGATIF deja fait"
 fi

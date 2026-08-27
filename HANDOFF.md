@@ -1790,7 +1790,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 140 batteries, 3748 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 140 batteries, 3756 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)
@@ -1820,7 +1820,7 @@ uv run python src/excision/shape.py {degradation|ellipticite} <volume>
 uv run python -m excision.proximity <mesh.tifxyz> --json
 
 cd inference_xpu # encre
-uv run python src/infer_ink.py <layers> --model … --device xpu --out out.npy
+uv run python src/xpu/infer_ink.py <layers> --model … --device xpu --out out.npy
 uv run python ../analysis/src/{evaluate_segment,render_segment,structure}.py …
 uv run python src/encre/judge_api.py --list-models
 uv run python src/encre/judge_api.py <pred.npy> --bands-only   # sans cle

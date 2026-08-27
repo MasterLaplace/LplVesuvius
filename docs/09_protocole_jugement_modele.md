@@ -537,7 +537,7 @@ dedans ne peut le contenir. La cause n'est pas le choix des couches — elle est
 ### Reproduire
 
 ```bash
-uv run python src/infer_ink.py data/layers/scroll4_20231111135340 \
+uv run python src/xpu/infer_ink.py data/layers/scroll4_20231111135340 \
     --model data/models/timesformer_GP_scroll1 \
     --top 0 --left 17000 --height 6038 --width 8000 --stride 21 --device xpu \
     --out data/out/ink_scroll4.npy
