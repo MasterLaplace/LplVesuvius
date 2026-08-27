@@ -11,7 +11,7 @@
     "couche_depart": 3
   },
   "temoin_positif": {
-    "nom": "Scroll 1 (AUC 0,925, 2,4 µm)",
+    "nom": "Scroll 1 (AUC 0,925, 7,91 µm)",
     "fichier": "ink_segment_complet.npy",
     "n": 44725780,
     "min": -1.8620885610580444,

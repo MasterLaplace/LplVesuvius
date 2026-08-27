@@ -149,7 +149,7 @@ Grand Prize 2023, une fenêtre de 1200 × 1200, 26 couches à partir de la 3ᵉ
 
 | | étendue de sortie | **σ** |
 |---|---:|---:|
-| Scroll 1, `20230909121925` — où le modèle marche (AUC 0,925), 2,4 µm | 4,453 | **0,7712** |
+| Scroll 1, `20230909121925` — où le modèle marche (AUC 0,925), **7,91 µm** | 4,453 | **0,7712** |
 | `PHerc1447`, segment officiel, 8,64 µm | 0,264 | **0,0171** |
 
 > **Le modèle sort une constante — σ 45 fois plus petit.** Ce n'est pas « peu d'encre »,
@@ -161,19 +161,28 @@ ce soit — donne exactement la même constante : `-1,275 / -1,121 / -1,010`, σ
 petit que le témoin, contre 45,2× pour notre rendu. **Notre chaîne n'y est pour rien.**
 (`docs/mesures/m1ter_volume_publie.json`, pont `src/volume/zarr_vers_couches.py`.)
 
+⚠⚠ **La ligne « 2,4 µm » ci-dessus était FAUSSE et a été corrigée le 2026-08-27 en 7,91 µm**
+— reprise de la campagne ESRF, qui produit des *volumes de surface* à 2,4 µm, alors que cette
+pile de couches est rendue depuis le volume `20230205180739`, dont le `meta.json` déclare
+`voxelsize: 7.91`. `12` §, table des sommets de matière, disait déjà « 6 voxels (47 µm) »
+pour ce segment, soit 7,83 µm par couche : deux documents du même dépôt portaient deux pas
+différents pour la même pile.
+
 ⚠ Ce que ça n'établit pas : qu'il n'y a pas d'encre là (une fenêtre, un segment), ni
-laquelle des causes restantes joue — la résolution, ce rouleau-ci, ou un papyrus réellement
-vierge à cet endroit. ⭐ **Les deux premières ont été instruites depuis** :
+laquelle des causes restantes joue. ⭐⭐ **Deux des trois sont fermées depuis** :
 [`46`](46_le_temoin_negatif.md) §3 ferme « papyrus vierge », et
-[`58`](58_resolution_ou_rouleau.md) coupe « résolution » en deux — l'échantillonnage en plan
-ne suffit pas (à 9,60 µm, plus grossier qu'ici, Scroll 1 rend encore **24,1 fois** ce σ) et
-l'épaisseur de la fenêtre de profondeur coûte **huit fois plus** à facteur égal. ⚠⚠ Mais ça contredit une prémisse que [`31`](31_roadmap.md) §2 tient du papier
+[`58`](58_resolution_ou_rouleau.md) **élimine « résolution »** — une fois le pas corrigé, ce
+témoin est à **9 %** des conditions de `PHerc1447` sur les deux axes (506,2 µm contre 553,0 µm
+par tuile, 205,7 µm contre 224,6 µm de profondeur), donc le modèle atteint AUC 0,925 dans
+ces conditions-là. Reste **ce rouleau-ci**. ⚠⚠ Mais ça contredit une prémisse que [`31`](31_roadmap.md) §2 tient du papier
 de juin 2026 : *« le modèle de 2023 généralise en zero-shot »*. À 8,64 µm, 26 couches
 couvrent **225 µm** de profondeur là où l'entraînement en voyait **62** — quatre fois plus
 d'épaisseur pour la même fenêtre. Ce n'est peut-être pas gratuit, et c'est à mesurer avant
-de bâtir dessus. ⭐ **Mesuré le 2026-08-27** ([`58`](58_resolution_ou_rouleau.md) §4) : ce
-n'est pas gratuit du tout — doubler cette épaisseur coûte **40,8 %** de la réponse du modèle,
-quand doubler l'échantillonnage en plan n'en coûte que **0,3 %**.
+de bâtir dessus. ⚠⚠ **La prémisse de ce paragraphe tombe avec le pas corrigé** : à 7,91 µm,
+26 couches couvrent **205,7 µm** et non 62, donc l'entraînement voyait déjà cette épaisseur
+et le facteur n'est pas quatre mais **1,09**. ⭐ Ce que `58` §5 a mesuré au passage reste
+vrai et vaut d'être su : doubler l'épaisseur coûte **40,8 %** de la réponse du modèle, quand
+doubler l'échantillonnage en plan n'en coûte que **0,3 %**.
 
 ## 6. ⚠ Ce que ce document ne dit pas
 

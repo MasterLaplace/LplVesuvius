@@ -122,7 +122,7 @@ partie des treize du prix.
 | `16` — régénérer les cartes de difficulté | ⚠ **décision** | le script d'aujourd'hui n'échantillonne plus comme les artefacts publiés (64 → 108 sondes) : régénérer **déplacerait** le tableau §3. Le correctif de code est fait ; l'acte de régénérer appartient à l'auteur |
 | **transport vers une région sans vérité** | ⚠ **impossible sur ce couple** | mesuré : la face n'est périodique qu'à une taille de fenêtre où les enroulements ne rendent **aucune** fenêtre. Il n'existe aucun réglage où les deux côtés en ont |
 | **thèse forte du témoin négatif** | ⚠ **mesurée, et elle refuse** | sur PHercParis4 : ρ(positif, négatif) = **+0,9984**, σ à 2,4 % du modèle qui marche — la garde de `temoin_negatif.py` **refuse**, comme sur `46` |
-| **M1ter — isoler la cause** | ⭐ **instruite le 2026-08-27** | → [`58`](58_resolution_ou_rouleau.md) : « résolution » cachait DEUX grandeurs. En plan seul, contributif mais insuffisant — il reste 12 à 24 fois trop de réponse. En profondeur, huit fois plus coûteux à facteur égal, et les deux **s'aggravent** au lieu de s'additionner. Reste ce rouleau-ci, et le ×3,6 qui demande une donnée que le dépôt n'a pas |
+| **M1ter — isoler la cause** | ⭐⭐ **résolution ÉLIMINÉE le 2026-08-27** | → [`58`](58_resolution_ou_rouleau.md) : le pas du témoin où le modèle marche était noté 2,4 µm et vaut **7,91 µm** — il est donc déjà à **9 %** des conditions de `PHerc1447` sur les deux axes. Créditer la résolution de **dix fois** cet écart ne rend qu'un facteur **2,0** sur les **45** à expliquer. Reste **ce rouleau-ci**, seul |
 | **campagnes détachées** | **dépouillée pour la piste C** | 3 verdicts sur 17 essais jugeables ; les leviers de perte n'ont laissé que `temoin/` |
 
 ---

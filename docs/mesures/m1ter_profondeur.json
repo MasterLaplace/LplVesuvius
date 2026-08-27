@@ -1,20 +1,20 @@
 {
   "question": "M1ter — l'echantillonnage en plan suffit-il a rendre le modele inerte ?",
   "axe": "profondeur",
-  "segment": "scroll4_20231111135340",
-  "voxel_um": 2.4,
-  "cible_um": 8.64,
-  "fenetre": {
-    "top": 2500,
-    "left": 8000,
-    "cote": 504,
-    "sigma_carte_publiee": null
+  "source": "data/controle_resolution/profondeur",
+  "voxel_um": 3.24,
+  "comparaison_a_la_cible": {
+    "cible_um": 8.64,
+    "tuile_um": 207.4,
+    "cible_tuile_um": 553.0,
+    "rapport_tuile": 2.667,
+    "profondeur_um": 84.2,
+    "cible_profondeur_um": 224.6,
+    "rapport_profondeur": 2.667
   },
-  "couche_depart": 15,
-  "couches": 26,
   "ancres": {
     "modele_marche": {
-      "nom": "Scroll 1 entier (AUC 0,925, 2,4 µm)",
+      "nom": "Scroll 1 entier (AUC 0,925, 7,91 µm)",
       "sigma": 0.7711818814277649
     },
     "modele_inerte": {
@@ -25,11 +25,11 @@
   "barreaux": [
     {
       "facteur": 1,
-      "echantillonnage_um": 2.4,
-      "profondeur_um": 62.4,
+      "echantillonnage_um": 3.24,
+      "profondeur_um": 84.2,
       "entree_px": 504,
-      "fenetres": 441,
-      "secondes": 48.6,
+      "fenetres": null,
+      "secondes": null,
       "sigma": 0.8257792592048645,
       "sigma_attendu_par_moyennage": 0.8257792592048645,
       "rapport_mesure_sur_attendu": 1.0,
@@ -39,11 +39,11 @@
     },
     {
       "facteur": 2,
-      "echantillonnage_um": 4.8,
-      "profondeur_um": 124.8,
+      "echantillonnage_um": 3.24,
+      "profondeur_um": 168.5,
       "entree_px": 504,
-      "fenetres": 441,
-      "secondes": 46.3,
+      "fenetres": null,
+      "secondes": null,
       "sigma": 0.4887361228466034,
       "sigma_attendu_par_moyennage": 0.8257792592048645,
       "rapport_mesure_sur_attendu": 0.5918483873247229,

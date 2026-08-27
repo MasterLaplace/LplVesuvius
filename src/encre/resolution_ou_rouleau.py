@@ -50,17 +50,23 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "xpu"))
 import comparer_encre  # noqa: E402  -- une seule definition de sigma dans le depot
 import infer_ink  # noqa: E402  -- une seule lecture de pile, et un seul choix d'appareil
 
-VOXEL_UM = 2.4
-"""Pas des couches de Scroll 1 (campagne ESRF), en micrometres."""
-
 CIBLE_UM = 8.64
-"""Pas de `PHerc1447`, le rouleau ou le modele est inerte. Encadre par les barreaux 3 et 4."""
+"""Pas de `PHerc1447`, le rouleau ou le modele est inerte (le nom de son volume le porte).
+
+⚠⚠ Il n'y a PLUS de constante pour le pas des couches de la pile qu'on mesure, et c'est une
+correction : ce fichier en portait une, a 2,4 µm, reprise d'une etiquette de `36` §5bis qui
+etait FAUSSE. Mesure du 2026-08-27 contre le depot public : `20230909121925` est rendu depuis
+le volume `20230205180739`, **voxelsize 7,91 µm**, et `scroll4_20231111135340` depuis
+`20231107190228`, **3,24 µm**. Une echelle est une propriete de la DONNEE, donc elle
+s'annonce a l'appel et se retrouve dans le record -- exactement le remede que `57` §1.1
+prescrit apres le meme piege (« 18 voxels » qui pouvaient valoir 43 ou 142 µm).
+"""
 
 QUESTION = "M1ter — l'echantillonnage en plan suffit-il a rendre le modele inerte ?"
 """Dite une seule fois : le rapport et l'aide en portaient deux copies libres de diverger."""
 
 ANCRES = {
-    "modele_marche": {"nom": "Scroll 1 entier (AUC 0,925, 2,4 µm)", "sigma": 0.7711818814277649},
+    "modele_marche": {"nom": "Scroll 1 entier (AUC 0,925, 7,91 µm)", "sigma": 0.7711818814277649},
     "modele_inerte": {"nom": "PHerc1447 (prix, 8,64 µm)", "sigma": 0.017066892236471176},
 }
 """Les deux sigma publies (`docs/mesures/m1ter_encre_a_9um.json`), pour situer un barreau.
@@ -195,8 +201,30 @@ def fenetre_la_plus_encree(carte: np.ndarray, cote: int, pas: int) -> tuple[int,
     return meilleur
 
 
+def comparaison_a_la_cible(voxel_um: float, pas_couches: int = 1) -> dict:
+    """De combien CETTE pile differe des conditions de `PHerc1447`, sur les deux axes.
+
+    ⚠⚠ C'est le chiffre qui decide, et il vaut d'etre calcule plutot que rappele : tant que le
+    pas de cette pile etait cru a 2,4 µm, l'ecart paraissait de 3,6 et « la resolution » etait
+    une cause plausible. Mesure, il vaut 1,09 -- et un ecart de 9 % ne produit pas un facteur 45.
+    """
+    tuile = voxel_um * infer_ink.TILE
+    profondeur = voxel_um * pas_couches * infer_ink.FRAMES
+    cible_tuile = CIBLE_UM * infer_ink.TILE
+    cible_profondeur = CIBLE_UM * infer_ink.FRAMES
+    return {
+        "cible_um": CIBLE_UM,
+        "tuile_um": round(tuile, 1),
+        "cible_tuile_um": round(cible_tuile, 1),
+        "rapport_tuile": round(cible_tuile / tuile, 3),
+        "profondeur_um": round(profondeur, 1),
+        "cible_profondeur_um": round(cible_profondeur, 1),
+        "rapport_profondeur": round(cible_profondeur / profondeur, 3),
+    }
+
+
 def barreau(f: int, prediction: np.ndarray, carte_native: np.ndarray, chemin: Path,
-            fenetres: int | None = None, secondes: float | None = None,
+            voxel_um: float, fenetres: int | None = None, secondes: float | None = None,
             facteur_attendu: int | None = None, pas_couches: int = 1,
             facteur_plan: int | None = None) -> dict:
     """Une marche de l'echelle, lue de la MEME facon qu'elle vienne du modele ou du disque.
@@ -209,8 +237,8 @@ def barreau(f: int, prediction: np.ndarray, carte_native: np.ndarray, chemin: Pa
     attendu = sigma_attendu_par_moyennage(carte_native, f if facteur_attendu is None else facteur_attendu)
     return {
         "facteur": f,
-        "echantillonnage_um": round(VOXEL_UM * (f if facteur_plan is None else facteur_plan), 3),
-        "profondeur_um": round(VOXEL_UM * pas_couches * infer_ink.FRAMES, 1),
+        "echantillonnage_um": round(voxel_um * (f if facteur_plan is None else facteur_plan), 3),
+        "profondeur_um": round(voxel_um * pas_couches * infer_ink.FRAMES, 1),
         "entree_px": int(prediction.shape[-1]),
         "fenetres": fenetres,
         "secondes": None if secondes is None else round(secondes, 1),
@@ -307,6 +335,16 @@ def verifier() -> int:
         except RefusMesure:
             v(nom, True)
 
+    # --- l'ecart aux conditions de la cible ------------------------------------------
+    c = comparaison_a_la_cible(7.91)
+    v("a 7,91 µm, la tuile est a 9 % de celle de la cible", abs(c["rapport_tuile"] - 1.092) < 0.01)
+    v("... et la profondeur exactement autant, puisque c'est le meme voxel",
+      abs(c["rapport_tuile"] - c["rapport_profondeur"]) < 1e-9)
+    # ⚠⚠ Le controle qui dit pourquoi ce bloc existe : avec l'ancienne constante de 2,4 µm,
+    # le meme calcul rendait 3,6 -- donc « la resolution » paraissait une cause plausible.
+    v("... alors qu'a 2,4 µm le meme calcul rendait 3,6, d'ou la fausse piste",
+      abs(comparaison_a_la_cible(2.4)["rapport_tuile"] - 3.6) < 0.01)
+
     # --- les refus de l'axe profondeur ------------------------------------------------
     import tempfile
     with tempfile.TemporaryDirectory() as d:
@@ -366,6 +404,9 @@ def main() -> int:
     p.add_argument("--start-layer", type=int, default=15)
     p.add_argument("--cote", type=int, default=1008,
                    help="cote de la fenetre NATIVE, identique pour tous les barreaux")
+    p.add_argument("--voxel-um", type=float,
+                   help="pas des couches de CETTE pile, en µm. Obligatoire : une echelle est "
+                        "une propriete de la donnee, et ce fichier a deja porte une constante fausse")
     p.add_argument("--axe", default="plan", choices=("plan", "profondeur"),
                    help="quelle des deux grandeurs que le mot « resolution » confondait")
     p.add_argument("--facteurs", default="1,2,3,4",
@@ -389,6 +430,14 @@ def main() -> int:
     args = p.parse_args()
     if args.verifier:
         return verifier()
+    # ⚠ Exige apres `--verifier` et non dans argparse : l'auto-test tourne hors ligne, sans
+    # donnee, donc sans echelle a declarer. Le rendre obligatoire au niveau du drapeau
+    # rendait la batterie inexecutable -- et une batterie qu'on ne peut plus lancer est
+    # pire qu'une constante fausse.
+    if args.voxel_um is None:
+        p.error("manquant : --voxel-um. Une echelle est une propriete de la donnee "
+                "(7.91 pour 20230909121925, 3.24 pour scroll4_20231111135340) ; "
+                "ce fichier a deja porte une constante fausse a sa place")
 
     # ⭐ Refaire le rapport a partir des SEULS enregistrements, sans modele ni couche. Une
     # mesure qu'on ne peut relire qu'en la refaisant n'est pas verifiable, et ce depot a deja
@@ -408,12 +457,14 @@ def main() -> int:
         barreaux = []
         for q in cartes:
             f = int(q.stem.split("x")[-1])
-            barreaux.append(barreau(f, np.load(q), carte_native, q,
+            barreaux.append(barreau(f, np.load(q), carte_native, q, args.voxel_um,
                                     facteur_attendu=1 if args.axe == "profondeur" else f,
                                     pas_couches=f if args.axe == "profondeur" else args.pas_couches,
                                     facteur_plan=1 if args.axe == "profondeur" else f))
             dire(barreaux[-1])
         rapport = {"question": QUESTION, "axe": args.axe, "source": str(args.depuis),
+                   "voxel_um": args.voxel_um,
+                   "comparaison_a_la_cible": comparaison_a_la_cible(args.voxel_um, args.pas_couches),
                    "ancres": ANCRES, "barreaux": barreaux}
         if args.json:
             args.json.parent.mkdir(parents=True, exist_ok=True)
@@ -499,7 +550,8 @@ def main() -> int:
         # aucun moyennage a corriger : l'attendu est le sigma natif lui-meme, et le rapport
         # se lit directement comme « ce qui reste de la reponse ». Passer le facteur ici
         # aurait corrige une reduction de variance qui n'a pas lieu.
-        barreaux.append(barreau(f, prediction, carte_native, chemin, fenetres, secondes,
+        barreaux.append(barreau(f, prediction, carte_native, chemin, args.voxel_um,
+                                fenetres, secondes,
                                 facteur_attendu=1 if args.axe == "profondeur" else f,
                                 pas_couches=f if args.axe == "profondeur" else args.pas_couches,
                                 facteur_plan=1 if args.axe == "profondeur" else f))
@@ -509,8 +561,8 @@ def main() -> int:
         "question": QUESTION,
         "axe": args.axe,
         "segment": args.layers.name,
-        "voxel_um": VOXEL_UM,
-        "cible_um": CIBLE_UM,
+        "voxel_um": args.voxel_um,
+        "comparaison_a_la_cible": comparaison_a_la_cible(args.voxel_um, args.pas_couches),
         "fenetre": {"top": top, "left": left, "cote": args.cote,
                     "sigma_carte_publiee": sigma_fenetre},
         "couche_depart": args.start_layer,

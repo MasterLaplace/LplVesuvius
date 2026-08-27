@@ -1,9 +1,20 @@
 {
   "question": "M1ter — l'echantillonnage en plan suffit-il a rendre le modele inerte ?",
+  "axe": "plan",
   "source": "data/controle_resolution/plan",
+  "voxel_um": 7.91,
+  "comparaison_a_la_cible": {
+    "cible_um": 8.64,
+    "tuile_um": 506.2,
+    "cible_tuile_um": 553.0,
+    "rapport_tuile": 1.092,
+    "profondeur_um": 205.7,
+    "cible_profondeur_um": 224.6,
+    "rapport_profondeur": 1.092
+  },
   "ancres": {
     "modele_marche": {
-      "nom": "Scroll 1 entier (AUC 0,925, 2,4 µm)",
+      "nom": "Scroll 1 entier (AUC 0,925, 7,91 µm)",
       "sigma": 0.7711818814277649
     },
     "modele_inerte": {
@@ -14,8 +25,8 @@
   "barreaux": [
     {
       "facteur": 1,
-      "echantillonnage_um": 2.4,
-      "profondeur_um": 62.4,
+      "echantillonnage_um": 7.91,
+      "profondeur_um": 205.7,
       "entree_px": 1008,
       "fenetres": null,
       "secondes": null,
@@ -28,8 +39,8 @@
     },
     {
       "facteur": 2,
-      "echantillonnage_um": 4.8,
-      "profondeur_um": 62.4,
+      "echantillonnage_um": 15.82,
+      "profondeur_um": 205.7,
       "entree_px": 504,
       "fenetres": null,
       "secondes": null,
@@ -42,8 +53,8 @@
     },
     {
       "facteur": 3,
-      "echantillonnage_um": 7.2,
-      "profondeur_um": 62.4,
+      "echantillonnage_um": 23.73,
+      "profondeur_um": 205.7,
       "entree_px": 336,
       "fenetres": null,
       "secondes": null,
@@ -56,8 +67,8 @@
     },
     {
       "facteur": 4,
-      "echantillonnage_um": 9.6,
-      "profondeur_um": 62.4,
+      "echantillonnage_um": 31.64,
+      "profondeur_um": 205.7,
       "entree_px": 252,
       "fenetres": null,
       "secondes": null,

@@ -1311,27 +1311,34 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                         [f"{d['chiffres_recalcules']} chiffres",
                          f"**{d['chiffres_recalcules']} chiffres**"], p.name))
 
-    # ⚠⚠ M1ter — les deux moities de « resolution ». Chaque chiffre du document 58 est
-    # RECALCULE ici depuis les quatre rapports, jamais recopie : ce sont des rapports entre
-    # barreaux, donc exactement le genre de nombre qu'on croit se rappeler et qu'on ecrit a
-    # l'envers. Le rapport a l'ancre inerte est le pivot de la conclusion du §3.
+    # ⚠⚠ M1ter — l'ecart aux conditions de la cible, et ce que la resolution peut couter.
+    # Chaque chiffre du document 58 est RECALCULE ici depuis les quatre rapports, jamais
+    # recopie : ce sont des rapports entre barreaux, donc exactement le genre de nombre
+    # qu'on croit se rappeler et qu'on ecrit a l'envers. Et le pivot du document est le
+    # rapport 1,092 -- tant qu'il etait cru a 3,6, « la resolution » etait une cause plausible.
     plan = _source(racine, "m1ter_resolution_en_plan.json")
     if plan.exists():
         d = json.loads(plan.read_text())
         natif = d["barreaux"][0]["sigma"]
         gros = d["barreaux"][-1]
-        inerte = d["ancres"]["modele_inerte"]["sigma"]
-        marche = d["ancres"]["modele_marche"]["sigma"]
-        ajoute("sigma a 9,60 µm sur Scroll 1", gros["sigma"], 4, plan.name)
-        out.append(("Scroll 1 grossi contre l'ancre inerte",
-                    [f"{fr(gros['sigma'] / inerte, 1)} fois", f"{en(gros['sigma'] / inerte, 1)} fois"],
-                    plan.name))
-        out.append(("... le meme ecart, rapporte a chaque natif",
-                    [f"{fr((gros['sigma'] / natif) / (inerte / marche), 1)} fois",
-                     f"{en((gros['sigma'] / natif) / (inerte / marche), 1)} fois"], plan.name))
-        out.append(("part de sigma perdue a 9,60 µm",
+        c = d["comparaison_a_la_cible"]
+        ajoute("sigma au barreau le plus grossier de Scroll 1", gros["sigma"], 4, plan.name)
+        ajoute("ecart aux conditions de la cible", c["rapport_tuile"], 3, plan.name)
+        out.append(("ce qu'une tuile couvre a 7,91 µm",
+                    [f"{fr(c['tuile_um'], 1)} µm", f"{en(c['tuile_um'], 1)} µm"], plan.name))
+        out.append(("... et ce qu'elle couvre sur la cible",
+                    [f"{fr(c['cible_tuile_um'], 1)} µm", f"{en(c['cible_tuile_um'], 1)} µm"], plan.name))
+        out.append(("profondeur de 26 couches a 7,91 µm",
+                    [f"{fr(c['profondeur_um'], 1)} µm", f"{en(c['profondeur_um'], 1)} µm"], plan.name))
+        out.append(("... et sur la cible",
+                    [f"{fr(c['cible_profondeur_um'], 1)} µm",
+                     f"{en(c['cible_profondeur_um'], 1)} µm"], plan.name))
+        out.append(("part de sigma perdue au barreau le plus grossier",
                     [f"{fr((1 - gros['sigma'] / natif) * 100, 1)} %",
                      f"{en((1 - gros['sigma'] / natif) * 100, 1)} %"], plan.name))
+        out.append(("cout d'un doublement en plan sur Scroll 1",
+                    [f"{fr((1 - d['barreaux'][1]['sigma'] / natif) * 100, 1)} %",
+                     f"{en((1 - d['barreaux'][1]['sigma'] / natif) * 100, 1)} %"], plan.name))
 
     pc1 = _source(racine, "m1ter_croise_pc1.json")
     pc2 = _source(racine, "m1ter_croise_pc2.json")
@@ -1352,6 +1359,29 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         out.append(("de combien le croise est pire que l'independance",
                     [f"{fr(r_plan * r_prof / r_croise, 3)} fois",
                      f"{en(r_plan * r_prof / r_croise, 3)} fois"], pc2.name))
+
+        # ⭐ Le compte le plus GENEREUX qu'on puisse faire pour l'hypothese qu'on ecarte :
+        # la perte la plus forte mesuree sur chaque axe, plus la penalite d'interaction. Il
+        # croise deux objets, ce qui est dit dans `58` §7 -- et c'est ce qui le rend
+        # indiscutable, puisqu'il favorise la these qu'il refute.
+        pl = json.loads(plan.read_text())["barreaux"] if plan.exists() else None
+        if pl:
+            r_plan_s1 = pl[1]["sigma"] / pl[0]["sigma"]
+            ajoute("le compte le plus genereux pour la resolution",
+                   r_plan_s1 * r_prof / (r_plan * r_prof / r_croise), 3, pc2.name)
+            out.append(("... en facteur, contre les 45 a expliquer",
+                        [f"{fr(1.0 / (r_plan_s1 * r_prof / (r_plan * r_prof / r_croise)), 1)}",
+                         f"**{fr(1.0 / (r_plan_s1 * r_prof / (r_plan * r_prof / r_croise)), 1)}**"],
+                        pc2.name))
+
+    neuf = _source(racine, "m1ter_encre_a_9um.json")
+    if neuf.exists():
+        d = json.loads(neuf.read_text())
+        out.append(("facteur de sigma qu'il faut expliquer",
+                    [f"{fr(d['rapport_sigma'], 1)}", f"{en(d['rapport_sigma'], 1)}",
+                     f"**{fr(d['rapport_sigma'], 1)}**"], neuf.name))
+        ajoute("ce que la resolution doit expliquer, en facteur de sigma",
+               1.0 / d["rapport_sigma"], 3, neuf.name)
 
     p = _source(racine, "cout_echelle.json")
     if p.exists():

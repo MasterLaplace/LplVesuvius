@@ -1,34 +1,61 @@
-# 58 — Résolution ou rouleau : le mot en cachait deux, et elles ne s'additionnent pas
+# 58 — Résolution ou rouleau : ce n'est pas la résolution
 
-> ⚠⚠ **Ce document ferme une moitié de M1ter et nomme précisément l'autre.**
+> ⚠⚠ **Ce document ferme une des deux causes qui restaient à M1ter, et il commence par
+> corriger le chiffre sur lequel la question reposait.**
 > [`36`](36_lorigine_de_la_pile.md) §5bis a répondu « non » à *l'encre est-elle lisible à
 > 9 µm ?* — sur `PHerc1447` le modèle du Grand Prize 2023 sort une constante, σ **45 fois**
-> plus petit que là où il marche. Mais la mesure laissait **trois causes** en lice, et
-> [`29`](29_ce_qui_reste.md) les porte encore : la résolution, ce rouleau-ci, ou un papyrus
-> vierge. [`46`](46_le_temoin_negatif.md) §3 a fermé la troisième. Celui-ci attaque la
-> première, sur le rouleau où le modèle **marche**.
+> plus petit que là où il marche. Trois causes restaient : la résolution, ce rouleau-ci, ou
+> un papyrus vierge. [`46`](46_le_temoin_negatif.md) §3 a fermé la troisième. Celle-ci tombe
+> parce que **le témoin où le modèle marche est déjà à la résolution de `PHerc1447`**.
 
-## 1. ⚠⚠ Le mot « résolution » cachait DEUX grandeurs
+## 1. ⚠⚠ Le chiffre qui portait la question était faux
 
-C'est la moitié du travail que de les séparer, et la comparaison publiée les faisait varier
-**ensemble** — donc elle ne pouvait pas dire laquelle joue :
+`36` §5bis oppose « Scroll 1, `20230909121925`, **2,4 µm** » à « `PHerc1447`, **8,64 µm** ».
+La seconde valeur est le nom même du volume publié
+(`20250521151220-8.640um-1.2m-116keV-masked.zarr`). La première ne vient de nulle part : elle
+a été reprise de la campagne ESRF, qui produit bien des **volumes de surface** à 2,4 µm, mais
+qui n'est pas ce que cette pile de couches est.
 
-| | Scroll 1, 2,4 µm | `PHerc1447`, 8,64 µm | rapport |
+Mesuré le 2026-08-27, contre le dépôt public, en suivant la chaîne que le format impose —
+un segment déclare son volume, un volume déclare son pas :
+
+| | segment | volume déclaré | `voxelsize` |
+|---|---|---|---:|
+| Scroll 1 | `20230909121925` | `20230205180739` | **7,91 µm** |
+| Scroll 4 | `20231111135340` | `20231107190228` | **3,24 µm** |
+
+⭐ **Et le dépôt le savait déjà, ailleurs.** [`12`](12_profondeur_de_surface.md) §, table des
+sommets de matière, écrit « **6 voxels (47 µm)** » pour ce même segment — soit 7,83 µm par
+couche — et « ≥ 32 voxels (253 µm) » pour la pile de Scroll 4. Deux documents du même dépôt
+disaient deux pas différents pour la même pile, et personne ne les avait mis côte à côte.
+
+⚠⚠ C'est le piège que [`57`](57_les_taches_laissees.md) §1.1 a déjà payé — « 18 voxels »
+qui pouvaient valoir 43 µm ou 142 µm — et son remède s'applique ici mot pour mot : **le
+remède est dans le code, pas dans le document.** `src/encre/resolution_ou_rouleau.py` n'a
+plus de constante de pas ; il **exige** `--voxel-um` et l'inscrit dans chaque rapport. Une
+échelle est une propriété de la donnée, pas une valeur qu'un fichier se rappelle.
+
+## 2. ⭐⭐⭐ Ce que ça change : les deux objets sont à la même résolution
+
+Le mot « résolution » couvre deux grandeurs que la taille du voxel bouge **ensemble** — ce
+qu'une tuile de 64 px couvre, et ce que 26 couches couvrent en profondeur. Avec le bon pas,
+les deux sont à **9 %** l'une de l'autre :
+
+| | Scroll 1, 7,91 µm | `PHerc1447`, 8,64 µm | rapport |
 |---|---:|---:|---:|
-| ce qu'une tuile de 64 px couvre | 154 µm | 553 µm | **3,6** |
-| ce que 26 couches couvrent en profondeur | 62 µm | 225 µm | **3,6** |
+| ce qu'une tuile de 64 px couvre | 506,2 µm | 553,0 µm | **1,092** |
+| ce que 26 couches couvrent | 205,7 µm | 224,6 µm | **1,092** |
+| **σ de la sortie du modèle** | **0,7712** | **0,0171** | **45,2** |
 
-Le rapport est le même parce qu'il n'y a qu'un seul réglage derrière : **la taille du
-voxel**. Un scan plus grossier bouge les deux boutons d'un coup, et c'est exactement
-pourquoi personne ne les avait vus comme deux.
+⭐⭐⭐ **Le modèle atteint AUC 0,925 dans les conditions de `PHerc1447`.** Ce n'est donc pas
+la résolution qui l'éteint là-bas — il faudrait qu'un écart de 9 % produise un facteur 45.
 
-⚠ La dernière ligne du §5bis de `36` le disait déjà — *« quatre fois plus d'épaisseur pour
-la même fenêtre. Ce n'est peut-être pas gratuit, et c'est à mesurer avant de bâtir
-dessus »* — et personne ne l'avait mesuré.
+Le reste de ce document mesure **combien** la résolution peut coûter, pour que la phrase
+ci-dessus soit une quantité et non une intuition.
 
-## 2. La méthode : redonner à un rouleau qui marche les conditions d'un rouleau qui ne marche pas
+## 3. La méthode : dégrader ce qui marche, une grandeur à la fois
 
-On ne peut pas rendre `PHerc1447` plus fin. On peut rendre Scroll 1 plus grossier.
+On ne peut pas rendre `PHerc1447` plus fin. On peut rendre **Scroll 1 plus grossier**.
 
 ⭐ **Le grossissement est une MOYENNE de bloc, jamais une décimation.** Un détecteur plus
 grossier intègre sur sa cellule ; prendre un pixel sur *f* en jetant les autres ajoute un
@@ -51,40 +78,33 @@ l'encre »* de *« les pixels sont plus gros »*.
 aucun barreau — tous lisent la même — il garantit seulement que l'échelle a quelque chose à
 perdre. C'est aussi pourquoi le σ natif d'ici (**1,5202**) vaut le double du σ publié sur le
 segment entier (0,7712) : une fenêtre choisie pour son encre varie plus que la moyenne d'un
-segment.
+segment. Les rapports entre barreaux, eux, ne dépendent pas de ce choix.
 
-## 3. ⭐ Axe « en plan » : contributif, et très loin de suffire
+## 4. ⭐ Ce que coûte l'échantillonnage en plan
 
-Scroll 1, segment `20230909121925`, profondeur maintenue à 62,4 µm à chaque barreau.
+Scroll 1, segment `20230909121925`, profondeur maintenue à 205,7 µm à chaque barreau.
 
 | | tuile de 64 px | entrée | **σ** | σ attendu | mesuré / attendu |
 |---|---:|---:|---:|---:|---:|
-| 2,40 µm (natif) | 154 µm | 1008 px | 1,5202 | 1,5202 | 1,000 |
-| 4,80 µm | 307 µm | 504 px | 1,4352 | 1,5194 | **0,945** |
-| 7,20 µm | 461 µm | 336 px | 0,9200 | 1,5195 | **0,605** |
-| 9,60 µm | 614 µm | 252 px | 0,4118 | 1,5176 | **0,271** |
+| 7,91 µm (natif) | 506 µm | 1008 px | 1,5202 | 1,5202 | 1,000 |
+| 15,82 µm | 1 012 µm | 504 px | 1,4352 | 1,5194 | **0,945** |
+| 23,73 µm | 1 519 µm | 336 px | 0,9200 | 1,5195 | **0,605** |
+| 31,64 µm | 2 025 µm | 252 px | 0,4118 | 1,5176 | **0,271** |
 
 ⭐ **Le moyennage n'explique rien.** Le σ attendu passe de 1,5202 à 1,5176 — **0,17 %** —
 parce qu'une carte d'encre est lisse à l'échelle du pixel (la sortie 4 × 4 du modèle est
-remontée en 64 × 64 par interpolation, puis cumulée). La chute mesurée est de **72,9 %**.
-Ce n'est donc pas un artefact de pooling : le modèle perd réellement l'encre.
+remontée en 64 × 64 par interpolation, puis cumulée). La chute mesurée à 31,64 µm est de
+**72,9 %**. Quand le modèle perd l'encre, il la perd vraiment ; c'est le contrôle qui rend
+la ligne suivante lisible.
 
-⭐⭐ **Et pourtant l'échantillonnage en plan ne suffit pas.** À **9,60 µm**, soit *plus
-grossier* que les 8,64 µm de `PHerc1447`, Scroll 1 rend encore σ = **0,4118**, c'est-à-dire
-**24,1 fois** le σ mesuré là-bas (0,0171). Rapporté à ce que chaque mesure a de natif —
-0,271 ici contre 0,0221 pour `PHerc1447` face à son propre témoin — l'écart reste de
-**12,2 fois**.
+⭐⭐ **Doubler l'échantillonnage coûte 5,6 %.** Or l'écart réel entre Scroll 1 et
+`PHerc1447` est de 9 %, soit **un neuvième d'un doublement**.
 
-⚠ La falaise est entre **4,80 et 7,20 µm** : le premier doublement coûte 5,5 %, le suivant
-39,5 %, le troisième 72,9 %. Les rouleaux du prix sont à **7,91 et 8,64 µm**, donc déjà
-dessus.
+## 5. ⭐⭐ Ce que coûte l'épaisseur de la fenêtre — huit fois plus
 
-## 4. ⭐⭐ Axe « profondeur » : huit fois plus coûteux, à facteur égal
-
-⚠ Il faut un autre objet : atteindre 225 µm sur Scroll 1 demanderait **94 couches** à
-2,4 µm, et ce segment n'en publie que 26. `scroll4_20231111135340` en publie **65** à
-2,399 µm, ce qui permet un pas de couches de 1 ou de 2 — 62,4 µm contre 124,8 µm. Le modèle
-y répond (σ = 0,8258, du même ordre que le témoin publié).
+⚠ Il faut un autre objet : Scroll 1 ne publie que 26 couches, donc son épaisseur ne peut pas
+varier. `scroll4_20231111135340` en publie **65** à 3,24 µm, ce qui permet un pas de couches
+de 1 ou de 2 — 84,2 µm contre 168,5 µm. Le modèle y répond (σ = 0,8258).
 
 ⭐ **Chaque barreau est CENTRÉ sur la même couche**, jamais aligné sur son bord : à départ
 fixe, deux pas partagent leur bord proche et le barreau épais irait chercher sa matière
@@ -96,50 +116,87 @@ Les quatre combinaisons, même fenêtre, même centre, même segment :
 
 | en plan | en profondeur | **σ** | rapport au natif |
 |---:|---:|---:|---:|
-| 2,40 µm | 62,4 µm | 0,8258 | 1,000 |
-| 4,80 µm | 62,4 µm | 0,8232 | **0,997** |
-| 2,40 µm | 124,8 µm | 0,4887 | **0,592** |
-| 4,80 µm | 124,8 µm | 0,4078 | **0,494** |
+| 3,24 µm | 84,2 µm | 0,8258 | 1,000 |
+| 6,48 µm | 84,2 µm | 0,8232 | **0,997** |
+| 3,24 µm | 168,5 µm | 0,4887 | **0,592** |
+| 6,48 µm | 168,5 µm | 0,4078 | **0,494** |
 
 ⭐ **À facteur égal, doubler la profondeur coûte 40,8 % et doubler le plan coûte 0,3 %.**
-La grandeur que personne n'avait isolée est de loin la plus destructrice des deux.
+C'est la grandeur que personne n'avait isolée qui est de loin la plus destructrice.
 
-## 5. ⭐⭐ Et elles ne s'additionnent pas : elles s'aggravent
+## 6. ⭐⭐ Et elles ne s'additionnent pas : elles s'aggravent
 
 La prédiction d'indépendance était écrite avant de lancer le quatrième barreau :
 0,997 × 0,592 = **0,590**. Le mesuré est **0,494**, soit **1,195 fois pire** que ce que
 l'indépendance annonce.
 
 ⭐⭐ **Dit autrement : doubler l'échantillonnage en plan coûte 0,32 % quand la fenêtre de
-profondeur est juste, et 16,6 % quand elle est déjà doublée — cinquante fois plus.** Un
+profondeur est juste et 16,6 % quand elle est déjà doublée — cinquante fois plus.** Un
 grossissement en plan est presque gratuit tant que le modèle voit la bonne épaisseur, et
-devient cher dès qu'il ne la voit plus.
+devient cher dès qu'il ne la voit plus. C'est aussi pourquoi les deux moitiés de
+« résolution » ne se lisent pas séparément dans un σ isolé.
 
-⚠ C'est la raison structurelle pour laquelle les deux causes n'étaient pas séparables par
-l'observation : elles ne viennent pas seulement du même réglage, elles **interagissent**.
-Aucune lecture d'un σ isolé ne pouvait le montrer.
+## 7. ⭐⭐⭐ Le compte, et il n'est pas serré
 
-## 6. Ce que ça ferme, et ce que ça laisse ouvert
+Créditons la résolution du coût **entier d'un doublement sur les deux axes** — c'est-à-dire
+environ **dix fois** l'écart réel de 9 % — en prenant sur chaque axe la perte la **plus
+forte** qu'on ait mesurée, fût-ce sur deux objets, et en leur appliquant en plus la pénalité
+d'interaction du §6 :
+
+| | facteur de σ |
+|---|---:|
+| un doublement en plan (Scroll 1, le plus coûteux des deux objets) | 0,944 |
+| un doublement en profondeur (Scroll 4) | 0,592 |
+| … et leur interaction, qui aggrave d'un facteur 1,195 | |
+| **le compte le plus généreux qu'on puisse faire** | **0,468** |
+| **ce qu'il faudrait expliquer** | **0,022** (= 1 / 45,2) |
+
+⭐⭐⭐ Même en lui offrant dix fois l'écart qu'elle a, sur les deux axes, avec la pénalité
+d'interaction par-dessus, la résolution rend un facteur **2,1** là où il en faut **45**.
+**Elle est éliminée**, et pas de justesse.
+
+⚠ La ligne « plan » et la ligne « profondeur » viennent de deux objets différents, et c'est
+délibéré : on prend sur chaque axe le coût le plus élevé qu'on ait su mesurer, ce qui rend le
+compte **favorable à l'hypothèse qu'on écarte**. Un compte défavorable qui conclut est un
+compte qu'on n'a pas besoin de discuter.
+
+## 8. Ce que ça ferme, et ce qui reste
 
 | | verdict |
 |---|---|
-| papyrus vierge | ✅ fermé avant ce document, par [`46`](46_le_temoin_negatif.md) §3 |
-| échantillonnage **en plan** seul | ✅ **contributif, insuffisant** — 72,9 % de σ perdu à 9,60 µm, et il reste 12 à 24 fois trop de réponse pour ressembler à `PHerc1447` |
-| épaisseur de la **fenêtre de profondeur** | ⭐ **mesurée à ×2** : 40,8 % de perte, huit fois le coût du plan, et elle **aggrave** l'autre |
-| les deux à ×3,6, comme sur `PHerc1447` | ⏳ **non mesurable ici** : il faudrait un segment publiant ~94 couches à ~2,4 µm sur un objet où le modèle répond, et aucun des trois du dépôt ne le fait |
-| **ce rouleau-ci** | ⏳ toujours en lice, et c'est ce qui reste après les deux lignes ci-dessus |
+| papyrus vierge | ✅ fermé par [`46`](46_le_temoin_negatif.md) §3 |
+| **résolution**, ses deux moitiés | ✅ **éliminée** : les deux objets sont à 9 % l'un de l'autre sur les deux axes, et dix fois cet écart ne rend qu'un facteur 2,0 sur 45 |
+| **ce rouleau-ci** | ⏳ **c'est ce qui reste** — et c'est désormais la seule cause en lice, non plus une parmi trois |
 
-⚠ **Ce que ce document n'établit pas**, quel que soit le résultat : qu'il y ait ou non de
-l'encre sur `PHerc1447`. Il dit ce que l'instrument perd quand on lui donne les conditions
-de là-bas, pas ce qu'il y a à voir.
+⚠ **Ce que ce document n'établit pas** : qu'il y ait ou non de l'encre sur `PHerc1447`. Il
+dit que l'instrument ne perd pas sa réponse pour une raison d'échelle. Ce que « le rouleau »
+recouvre — l'état de conservation, la chimie de l'encre, l'énergie du faisceau, la surface
+tracée — reste à découper, et ce découpage-ci est le patron à suivre : rendre l'objet qui
+marche semblable à celui qui ne marche pas, une propriété à la fois.
 
-⚠ Et une borne sur l'émulation elle-même : elle **conserve le détail en profondeur** qu'un
-vrai scan à 9,60 µm n'aurait pas, puisqu'un voxel plus large intègre aussi dans cette
-direction. Les σ du §3 sont donc un **majorant** de ce qu'un vrai scan grossier rendrait —
-ce qui est précisément pourquoi la conclusion du §3 est énoncée sur l'axe en plan **seul**,
-et pourquoi le §5 existe.
+⚠ Et une borne sur l'émulation : elle **conserve le détail en profondeur** qu'un vrai scan
+plus grossier n'aurait pas, puisqu'un voxel plus large intègre aussi dans cette direction.
+Les σ du §4 sont donc un **majorant** de ce qu'un vrai scan grossier rendrait — ce qui va
+dans le sens de la conclusion, puisque le §7 crédite déjà la résolution du coût plein d'un
+doublement sur les **deux** axes, mesuré séparément.
 
-## 7. ⚠⚠ Le détour qui a rendu tout ça possible : l'outil ne tournait plus
+## 9. ⭐ Deux contrôles de reproductibilité, gratuits et exacts
+
+Les trois campagnes se recouvrent par construction, et les recouvrements doivent coïncider
+**au bit près** — ce sont les mêmes couches, la même fenêtre, le même centre :
+
+| | σ |
+|---|---:|
+| échelle profondeur, pas 1 | 0,825755 |
+| échelle croisée `--pas-couches 1`, plan ×1 | 0,825755 |
+| échelle profondeur, pas 2 | 0,488698 |
+| échelle croisée `--pas-couches 2`, plan ×1 | 0,488698 |
+
+⚠ Ce n'est pas une élégance : deux chemins de code atteignent ces piles — l'un passe par
+l'axe profondeur, l'autre par l'option `--pas-couches` de l'axe plan — et un désaccord au
+dernier chiffre aurait dit que l'un des deux ne lit pas les couches qu'il annonce.
+
+## 10. ⚠⚠ Le détour : l'outil ne tournait plus du tout
 
 Cette mesure a commencé par ne pas pouvoir démarrer. `src/xpu/infer_ink.py` porte les poids
 dans `data/models/`, valide ses arguments, puis mourait sur un `ModuleNotFoundError` nu :
@@ -164,50 +221,40 @@ fichier ne déclarait. Ils étaient là parce que quelqu'un les y avait posés �
 environnement reproductible qui ne survit pas à sa propre commande de synchronisation n'est
 pas reproductible, et la panne ne se voit que le jour où on relit un volume.
 
-## 8. ⭐ Deux contrôles de reproductibilité, gratuits et exacts
-
-Les trois campagnes se recouvrent par construction, et les recouvrements doivent coïncider
-**au bit près** — ce sont les mêmes couches, la même fenêtre, le même centre :
-
-| | σ |
-|---|---:|
-| échelle profondeur, pas 1 | 0,825755 |
-| échelle croisée `--pas-couches 1`, plan ×1 | 0,825755 |
-| échelle profondeur, pas 2 | 0,488698 |
-| échelle croisée `--pas-couches 2`, plan ×1 | 0,488698 |
-
-⚠ Ce n'est pas une élégance : deux chemins de code atteignent ces piles — l'un passe par
-l'axe profondeur, l'autre par l'option `--pas-couches` de l'axe plan — et un désaccord au
-dernier chiffre aurait dit que l'un des deux ne lit pas les couches qu'il annonce.
-
 ## Reproduire
 
 ```bash
 uv sync --extra encre --extra volume      # sans ça, l'outil REFUSE en nommant ce qui manque
 
-# §3 — l'axe en plan, sur le rouleau où le modèle marche
+# §1 — le pas des couches, lu chez celui qui le déclare
+curl -s https://dl.ash2txt.org/full-scrolls/Scroll1/PHercParis4.volpkg/paths/20230909121925/meta.json
+curl -s https://dl.ash2txt.org/full-scrolls/Scroll1/PHercParis4.volpkg/volumes/20230205180739/meta.json
+
+# §4 — l'axe en plan, sur le rouleau où le modèle marche
 uv run python src/encre/resolution_ou_rouleau.py data/layers/20230909121925 \
-    --model data/models/timesformer_GP_scroll1 \
+    --model data/models/timesformer_GP_scroll1 --voxel-um 7.91 \
     --carte-publiee data/out/ink_segment_complet.npy \
     --sorties data/controle_resolution/plan \
     --json docs/mesures/m1ter_resolution_en_plan.json
 
-# §4 et §5 — la profondeur, puis les deux croisées, sur les 65 couches de Scroll 4
+# §5 et §6 — la profondeur, puis les deux croisées, sur les 65 couches de Scroll 4
 uv run python src/encre/resolution_ou_rouleau.py data/layers/scroll4_20231111135340 \
-    --model data/models/timesformer_GP_scroll1 --axe profondeur --facteurs 1,2 \
+    --model data/models/timesformer_GP_scroll1 --voxel-um 3.24 --axe profondeur --facteurs 1,2 \
     --centre-couche 32 --cote 504 --top 2500 --left 8000 \
     --sorties data/controle_resolution/profondeur \
     --json docs/mesures/m1ter_profondeur.json
 for PC in 1 2; do
   uv run python src/encre/resolution_ou_rouleau.py data/layers/scroll4_20231111135340 \
-      --model data/models/timesformer_GP_scroll1 --axe plan --facteurs 1,2 --pas-couches $PC \
+      --model data/models/timesformer_GP_scroll1 --voxel-um 3.24 \
+      --axe plan --facteurs 1,2 --pas-couches $PC \
       --centre-couche 32 --cote 504 --top 2500 --left 8000 \
       --sorties data/controle_resolution/croise_pc$PC \
       --json docs/mesures/m1ter_croise_pc$PC.json
 done
 
-# Refaire le rapport a partir des seules cartes deja rendues, sans modele ni couche
-uv run python src/encre/resolution_ou_rouleau.py --depuis data/controle_resolution/plan
+# Refaire un rapport a partir des seules cartes deja rendues, sans modele ni couche
+uv run python src/encre/resolution_ou_rouleau.py --depuis data/controle_resolution/plan \
+    --voxel-um 7.91
 ```
 
 ⚠ La fenêtre de Scroll 4 (`top=2500 left=8000`) a été trouvée en sondant trois candidats à

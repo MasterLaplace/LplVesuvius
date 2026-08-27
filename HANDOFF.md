@@ -5,34 +5,44 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
-## ⭐⭐⭐⭐⭐ M1ter INSTRUIT — « résolution » cachait DEUX grandeurs, et elles s'aggravent
+## ⭐⭐⭐⭐⭐ M1ter — LA RÉSOLUTION EST ÉLIMINÉE, et le chiffre qui portait la question était faux
 
-[`58`](docs/58_resolution_ou_rouleau.md), 2026-08-27. La cause de l'inertie du modèle
-d'encre sur `PHerc1447` n'était pas isolée : trois candidats, dont un déjà fermé par
-[`46`](docs/46_le_temoin_negatif.md) §3. Le mot « résolution » en cachait **deux** — ce
-qu'une tuile de 64 px couvre (154 µm contre 553 µm) et ce que 26 couches couvrent en
-profondeur (62 µm contre 225 µm) —, et les deux valent **×3,6** parce qu'il n'y a qu'un
-réglage derrière : la taille du voxel. C'est pour ça que personne ne les avait vus comme deux.
+[`58`](docs/58_resolution_ou_rouleau.md), 2026-08-27. Trois causes restaient à l'inertie du
+modèle d'encre sur `PHerc1447` ; [`46`](docs/46_le_temoin_negatif.md) §3 en avait fermé une.
+Celle-ci tombe **en vérifiant un nombre au lieu de le citer**.
 
-La méthode : on ne peut pas rendre `PHerc1447` plus fin, on peut rendre **Scroll 1 plus
-grossier**, une grandeur à la fois.
+⚠⚠ `36` §5bis opposait « Scroll 1 `20230909121925`, **2,4 µm** » à « `PHerc1447`, 8,64 µm ».
+La première valeur ne vient de nulle part : le segment déclare son volume, le volume déclare
+`voxelsize: 7.91`. Et le dépôt le savait déjà ailleurs — `12` écrit « 6 voxels (47 µm) »
+pour cette même pile, soit 7,83 µm par couche. **Deux documents du même dépôt portaient deux
+pas différents pour la même pile**, et personne ne les avait mis côte à côte.
 
-| | résultat |
-|---|---|
-| en plan seul, jusqu'à 9,60 µm | **72,9 %** de σ perdu, et le moyennage n'explique que **0,17 %** de la chute |
-| … mais suffisant ? | **non** : à 9,60 µm, plus grossier que là-bas, Scroll 1 rend encore **24,1 fois** le σ de `PHerc1447` (12,2 fois rapporté à chaque natif) |
-| en profondeur, ×2 | **40,8 %** de perte — **huit fois** le coût d'un doublement en plan (0,32 %) |
-| les deux ×2 ensemble | **0,494**, contre **0,590** que prédit l'indépendance : **1,195 fois pire** |
+| | Scroll 1, 7,91 µm | `PHerc1447`, 8,64 µm | rapport |
+|---|---:|---:|---:|
+| ce qu'une tuile de 64 px couvre | 506,2 µm | 553,0 µm | **1,092** |
+| ce que 26 couches couvrent | 205,7 µm | 224,6 µm | **1,092** |
+| **σ de la sortie du modèle** | **0,7712** | **0,0171** | **45,2** |
 
-⭐⭐ **La phrase à retenir** : doubler l'échantillonnage en plan coûte **0,32 %** quand la
-fenêtre de profondeur est juste et **16,6 %** quand elle est déjà doublée — **cinquante fois
-plus**. Les deux causes ne sont pas seulement liées par un réglage commun, elles
-**interagissent**, et aucune lecture d'un σ isolé ne pouvait le montrer.
+⭐⭐⭐ **Le modèle atteint AUC 0,925 dans les conditions de `PHerc1447`.** Il faudrait qu'un
+écart de 9 % produise un facteur 45.
 
-⚠ **Ce qui reste** — les deux sabliers sont portés par `58` §6 et inscrits au registre, pas
-ici : ce rouleau-ci, et le ×3,6 sur les deux axes. Ce dernier n'est pas un réglage à trouver
-mais **une donnée à obtenir** — il faudrait ~94 couches à ~2,4 µm sur un
-objet où le modèle répond, et les trois piles du dépôt en publient 26, 31 et 65.
+Et le compte est chiffré, pas invoqué. En dégradant Scroll 1 par moyennage de bloc, un
+**doublement** en plan coûte **5,6 %** ; sur les 65 couches de Scroll 4, un doublement en
+**profondeur** coûte **40,8 %**, soit huit fois plus ; et les deux **s'aggravent** au lieu de
+s'additionner — le croisé mesure **0,494** contre **0,590** que prédit l'indépendance, donc
+un doublement en plan coûte 0,32 % sur une fenêtre juste et **16,6 %** sur une fenêtre déjà
+doublée, cinquante fois plus. En créditant la résolution de tout ça — dix fois l'écart
+qu'elle a, sur les deux axes, pénalité d'interaction comprise — elle rend **0,468**, soit un
+facteur **2,1** là où il en faut **45**.
+
+⚠ **Il ne reste que ce rouleau-ci**, seul — le sablier est porté par `58` §8 et inscrit au
+registre, pas ici. Ce que le mot recouvre — conservation, chimie de
+l'encre, énergie du faisceau, surface tracée — reste à découper, et `58` §8 donne le patron :
+rendre l'objet qui marche semblable à celui qui ne marche pas, une propriété à la fois.
+
+⭐ Le remède au piège est dans le code : `src/encre/resolution_ou_rouleau.py` n'a **plus de
+constante de pas**, il exige `--voxel-um` et l'inscrit dans chaque rapport. C'est le même
+remède que `57` §1.1 après « 18 voxels » qui pouvaient valoir 43 ou 142 µm.
 
 ### ⚠⚠ Le détour : l'outil d'inférence ne tournait plus du tout
 
@@ -1670,7 +1680,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 137 batteries, 3664 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 137 batteries, 3671 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)
