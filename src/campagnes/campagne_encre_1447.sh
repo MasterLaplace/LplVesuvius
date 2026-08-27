@@ -28,6 +28,12 @@ COUCHE_DEPART=${COUCHE_DEPART:-3}
 # parti en contention. Deux rendus lances en meme temps finissent PLUS TARD que les memes
 # lances l'un apres l'autre. Poser `FILS` quand une autre campagne tourne.
 FILS=${FILS:-16}
+# ⚠⚠ `--line-buffered` ET `sed -u` NE SONT PAS COSMETIQUES : sans eux, grep et sed
+# tamponnent par blocs des qu'ils n'ecrivent pas sur un terminal, donc les lignes de
+# progression n'apparaissent qu'a la FIN du rendu -- c'est-a-dire jamais quand on en a
+# besoin. Une progression qu'un tuyau tamponne est une progression qui n'existe pas.
+# Paye le 2026-08-27, une heure apres avoir ecrit la progression elle-meme.
+#
 # ⚠⚠ ET LA CONCLUSION, chiffree le 2026-08-27 par `src/encre/cout_du_rendu.py` : le debit
 # tombe de 0,655 a 0,192 fenetre par fil-seconde quand deux rendus se partagent la machine,
 # soit un facteur **3,42**. Les quatre surfaces publiees de ce rouleau coutent **2,24 h**
@@ -61,7 +67,8 @@ while IFS=$'\t' read -r seg cle _; do
   uv run python src/xpu/infer_ink.py "$couches" --model "$MODELE" \
       --start-layer "$COUCHE_DEPART" --threads "$FILS" \
       --top 0 --left 0 --height "$2" --width "$3" \
-      --out "$out" 2>&1 | grep -E "encre  min|fenetres|erreur" | sed 's/^/  /'
+      --out "$out" 2>&1 \
+      | grep --line-buffered -E "encre  min|fenetres|fenêtres|erreur" | sed -u 's/^/  /'
 done < "$LISTE"
 
 # ⚠⚠ La signature typographique est mesuree au reglage CALIBRE sur une carte dont on SAIT
