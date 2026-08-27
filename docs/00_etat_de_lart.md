@@ -380,8 +380,10 @@ Ce qui manquerait pour y arriver, dans l'ordre du moins cher au plus cher :
    écarter les 20 % de segments dont le volume de surface porte le moins de matière fait
    monter le contraste d'encre médian de **+0,381**, p = **0,0005** contre 2000
    permutations de même effectif, et le seuil est défendu par un **plateau** (15–25 %) ;
-3. ⏳ **corriger une trace** et montrer le gain — le vrai « produire ». Deux moitiés,
-   et la première est tombée le 2026-08-19 :
+3. ✅ **corriger une trace** et montrer le gain — le vrai « produire ». **Les deux moitiés
+   sont tombées** : la première le 2026-08-19, la seconde le 2026-08-27 (`20` §9, figure
+   `20_correction_appliquee.png`). ⚠ Le gain est réel et **borné** : il centre la médiane
+   et laisse la dispersion, ce que le champ annonçait avant tout rendu.
    - ✅ **savoir quelle réparation vaut la peine** : `champ_correction.py` sépare ce qu'une
      médiane confond — un **décalage rigide**, réparable par une translation, d'une
      **déformation locale**, qui ne l'est pas. Mesuré sur **trois** rouleaux : une
