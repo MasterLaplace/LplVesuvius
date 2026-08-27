@@ -1425,6 +1425,14 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                     [f"{fr(d['rapport_sigma'], 1)}×", f"**{fr(d['rapport_sigma'], 1)}×**"],
                     corr.name))
 
+    ent = _source(racine, "PHerc1447_surface_entiere.json")
+    if ent.exists():
+        d = json.loads(ent.read_text())
+        ajoute("sigma sur la surface entiere de PHerc1447", d["cible"]["sigma"], 4, ent.name)
+        out.append(("la surface entiere contre le temoin",
+                    [f"{fr(d['rapport_sigma'], 1)}×", f"**{fr(d['rapport_sigma'], 1)}×**"],
+                    ent.name))
+
     gen = _source(racine, "generalisation_PHerc0172.json")
     if gen.exists():
         d = json.loads(gen.read_text())

@@ -1,0 +1,37 @@
+{
+  "question": "le modele produit-il du TEXTE sur PHerc1447, ou seulement de la structure ?",
+  "contexte": {
+    "fenetre_px": [
+      2980,
+      3240
+    ],
+    "mm": [
+      25.7,
+      28.0
+    ],
+    "couverture_source": 0.525,
+    "couche_depart": 3,
+    "lecture_a_l_oeil": "moucheture, pas de lettres ni de lignes"
+  },
+  "temoin_positif": {
+    "nom": "Scroll 1 (AUC 0,925)",
+    "fichier": "ink_segment_complet.npy",
+    "n": 44725780,
+    "min": -1.8620885610580444,
+    "median": -1.1304415464401245,
+    "max": 2.590935707092285,
+    "etendue": 4.453024387359619,
+    "sigma": 0.7711818814277649
+  },
+  "cible": {
+    "nom": "PHerc1447, surface publiee ENTIERE, echelle corrigee",
+    "fichier": "ink_PHerc1447_complet.npy",
+    "n": 9582070,
+    "min": -1.7809596061706543,
+    "median": -1.141430377960205,
+    "max": 2.4847662448883057,
+    "etendue": 4.265726089477539,
+    "sigma": 0.48382407426834106
+  },
+  "rapport_sigma": 1.5939303611420708
+}

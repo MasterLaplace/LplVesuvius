@@ -344,6 +344,40 @@ def marcher(bloc: np.ndarray, depart, direction, pas: float = PAS,
             "valeur_mediane": float(np.median(vals)) if vals else 0.0}
 
 
+def ramener_dans_zero_un(bloc: np.ndarray, dtype_source) -> np.ndarray:
+    """Ramène un bloc dans [0, 1] par le plafond de SON type, jamais par une constante.
+
+    ⚠⚠ Cette fonction existe parce que ce dépôt a payé la version constante dans un autre
+    fichier : `infer_ink` divisait par `65535` en dur, ce qui est juste pour du uint16 et
+    faux d'un facteur 257 pour du uint8 — et le modèle recevait du noir sans que rien ne le
+    dise (voir `60`). Ici la faute serait symétrique : diviser un bloc uint16 par 255 rend
+    des valeurs jusqu'à 257, donc hors du domaine où `valeur_min` a un sens.
+
+    ⚠ Un bloc déjà dans [0, 1] est rendu tel quel : c'est le cas d'un `.npy` déjà normalisé,
+    et le re-diviser l'écraserait.
+    """
+    maximum = float(bloc.max()) if bloc.size else 0.0
+    if maximum <= 1.5:
+        return bloc
+    plafond = None
+    try:
+        plafond = float(np.iinfo(np.dtype(dtype_source)).max)
+    except (TypeError, ValueError):
+        plafond = None
+    if plafond is None:
+        # ⚠ Un bloc flottant hors de [0, 1] n'a pas de plafond de type : on le dit plutôt que
+        # d'inventer une échelle, parce qu'inventer ici fausse `valeur_min` en silence.
+        raise ValueError(
+            f"bloc {dtype_source} dont le maximum vaut {maximum:.3f} : aucun plafond de type "
+            "ne s'applique, donnez un bloc entier ou déjà normalisé")
+    ramene = bloc / plafond
+    if float(ramene.max()) > 1.0 + 1e-6:
+        raise ValueError(
+            f"bloc {dtype_source} ramené par {plafond:.0f} : le maximum reste "
+            f"{float(ramene.max()):.3f}, donc le type lu n'est pas celui des données")
+    return ramene
+
+
 def marcher_nappe(bloc: np.ndarray, depart, direction=(0.0, 1.0, 0.0),
                   pas: float = PAS, n_pas: int = 200, ecart_cotes: float = 4.0,
                   n_cotes: int = 12, **kw) -> dict:
@@ -749,6 +783,29 @@ def verifier() -> int:
         ok(info["points"] == 2 and info["collections"] == 1,
            "le compte rendu dit ce qui a été écrit")
 
+    # --- LE PLAFOND EST CELUI DU TYPE, jamais une constante ---------------------------
+    # ⚠⚠ Ces contrôles existent parce que ce dépôt a payé la version constante ailleurs :
+    # `infer_ink` divisait par 65535 en dur et rendait le modèle muet sur 211 piles (`60`).
+    # Ici la faute serait symétrique — diviser un bloc uint16 par 255.
+    huit = np.linspace(0, 255, 64).reshape(4, 4, 4).astype(np.float32)
+    seize = huit * 257.0
+    ok(abs(float(ramener_dans_zero_un(huit, "uint8").max()) - 1.0) < 1e-6, "un bloc uint8 arrive dans [0, 1]")
+    ok(abs(float(ramener_dans_zero_un(seize, "uint16").max()) - 1.0) < 1e-6, "un bloc uint16 aussi, et par un AUTRE plafond")
+    ok(bool(np.allclose(ramener_dans_zero_un(huit, "uint8"),
+                       ramener_dans_zero_un(seize, "uint16"), atol=1e-6)), "... les deux donnent la MÊME chose, ce que la constante ne faisait pas")
+    ok(float(ramener_dans_zero_un(huit / 255.0, "float32").max()) <= 1.0, "un bloc déjà normalisé n'est pas re-divisé")
+    try:
+        ramener_dans_zero_un(huit, "float32")
+        ok(False, "un bloc flottant hors de [0, 1] est refusé")
+    except ValueError:
+        ok(True, "un bloc flottant hors de [0, 1] est refusé")
+    try:
+        ramener_dans_zero_un(seize, "uint8")
+        ok(False, "un type déclaré trop petit est refusé")
+    except ValueError as e:
+        ok(True, "un type déclaré trop petit est refusé")
+        ok("type lu" in str(e), "... et le refus dit que le type lu n'est pas celui des données")
+
     print(f"\n{'tous les témoins passent' if not echecs else f'{echecs} échec(s)'}")
     return 1 if echecs else 0
 
@@ -809,6 +866,7 @@ def main() -> int:
             a.garder_bloc.parent.mkdir(parents=True, exist_ok=True)
             np.save(a.garder_bloc, cube)
         a.bloc = None
+        dtype_source = cube.dtype
         bloc = cube.astype(np.float32)
         a.origine = origine
         if a.depart is None:
@@ -816,11 +874,17 @@ def main() -> int:
     elif not a.bloc or not a.depart:
         ap.error("donner --bloc et --depart, ou --zarr et --xyz, ou --verifier")
     else:
-        bloc = np.load(a.bloc).astype(np.float32)
-    if bloc.max() > 1.5:
-        # ⚠ Une prédiction publiée est en uint8 ; la ramener dans [0,1] rend `valeur_min`
-        # comparable d'un volume à l'autre au lieu de dépendre du dtype.
-        bloc = bloc / 255.0
+        brut = np.load(a.bloc)
+        dtype_source = brut.dtype
+        bloc = brut.astype(np.float32)
+    # ⚠ Une prédiction publiée est en uint8 ; la ramener dans [0,1] rend `valeur_min`
+    # comparable d'un volume à l'autre au lieu de dépendre du dtype. Le plafond est celui du
+    # TYPE et non la constante 255 : un bloc uint16 divisé par 255 monterait à 257.
+    try:
+        bloc = ramener_dans_zero_un(bloc, dtype_source)
+    except ValueError as erreur:
+        print(f"erreur : {erreur}", file=sys.stderr)
+        return 2
     # ⚠⚠ Un masque binaire n'a pas de crête : marcher dessus rendrait un chemin collé au
     # bord des nappes, et un chemin rendu ressemble à un succès. On refuse, en nommant le
     # remède, plutôt que de convertir en douce — convertir sans le dire ferait croire que

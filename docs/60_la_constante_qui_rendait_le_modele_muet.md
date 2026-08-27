@@ -81,10 +81,34 @@ chiffre près. Aucun résultat publié sur les piles publiées ne bouge.
 de `comparer_encre.py`, qui ne sait rien de cette histoire, est *« la cible a une dynamique
 comparable au témoin »*.
 
-⚠ **Répondre n'est pas lire.** σ dit que le modèle produit de la structure ; que cette
-structure soit des lettres demande une fenêtre bien plus large qu'un carré de 1024 px — à
-8,64 µm, ça fait 8,8 mm, soit quatre lettres de large — et le juge calibré de `09`. C'est la
-mesure suivante, pas celle-ci.
+## 4 bis. ⚠⚠ Répondre n'est pas lire — et la surface entière le montre
+
+σ dit que le modèle produit de la structure, pas qu'il produit du texte. La fenêtre de
+1024 px du §4 ne pouvait pas trancher : à 8,64 µm elle fait 8,8 mm, **quatre lettres de
+large**. La surface **publiée entière** de `PHerc1447` a donc été rendue — 2980 × 3240, soit
+**25,7 × 28,0 mm**, de quoi porter une dizaine de lignes.
+
+![carte d encre sur la surface publiee entiere de PHerc1447](images/60_PHerc1447_surface_entiere.png)
+
+> σ = **0,4838** sur 9,58 M pixels, étendue **4,266**, soit **1,6×** sous le témoin — et
+> `comparer_encre` rend son verdict habituel, *« la cible a une dynamique comparable au
+> témoin »*.
+>
+> ⚠⚠ **Et à l'œil, c'est de la moucheture.** Pas de lettres, pas de lignes, pas de colonnes.
+> Les zones claires suivent la forme du segment et ses trous, pas une écriture.
+
+⭐⭐ **Donc M1ter est ROUVERT, pas répondu par l'affirmative.** La réponse négative reposait
+sur un artefact ; la réponse positive n'est pas établie pour autant.
+
+⚠⚠ **Et c'est une limite de l'instrument qu'il faut écrire** : le même σ qui a fondé le
+résultat négatif ne peut pas fonder le résultat positif. Il mesure une **dispersion**, et une
+moucheture pleine échelle en a autant qu'un texte. Ce qui trancherait est le juge calibré de
+[`09`](09_protocole_jugement_modele.md), qui sépare vierge **0–1** de texte **3–6**.
+
+⚠ Ce que ça n'accuse pas : ce segment est celui dont `36` dit que la surface tracée est à
+**17 µm** de sa feuille avec **2 %** de fenêtres au tiers central, et son volume de surface
+n'est couvert qu'à **52,5 %**. Une moucheture sur une surface qui n'est pas posée sur la
+feuille est le résultat attendu, et le bug d'échelle n'a jamais touché ce fait-là.
 
 ## 5. Ce qui est annulé, et ce qui tient
 
