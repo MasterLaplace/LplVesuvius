@@ -28,6 +28,7 @@ change UNE variable, et c'est ce qu'un temoin doit faire. Mesure du 2026-08-25 :
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import sys
 import time
 from pathlib import Path
@@ -44,6 +45,49 @@ FRAMES = 26
 
 class InferenceError(RuntimeError):
     """Leve quand une precondition n'est pas tenue."""
+
+
+MODULES_DU_MODELE = ("torch", "transformers", "timesformer_pytorch")
+"""Ce qu'il faut pour CHARGER le modele, et que les dependances de base ne portent pas.
+
+⚠⚠ Ces modules ne sont pas dans `[project.dependencies]` et c'est deliberate : la racine
+annonce « numpy et pas grand-chose », et torch seul installe ~700 Mio -- mesure du 2026-08-27,
+contre 3,8 Gio si on le prend sur l'index par defaut, qui ajoute 2,7 Gio de runtime CUDA
+qu'aucun peripherique d'ici ne peut executer. Mais
+tant que rien ne le DISAIT, l'outil promettait de tourner et rendait un `ModuleNotFoundError`
+nu -- mesure du 2026-08-27 : arguments valides, modele present dans `data/models/`, et une
+trace de pile pour toute explication. Une promesse d'outil autonome qu'on ne peut pas
+executer est une promesse fausse, et ce depot l'a deja paye a la racine du `pyproject`.
+
+⚠ Le troisieme n'apparait dans AUCUN import de ce fichier : `timesformer_pytorch` est
+importe par le code du modele lui-meme, charge par `trust_remote_code`. Lister les seuls
+imports visibles ici aurait donc rendu un refus complet suivi, une fois repare, d'une
+seconde trace de pile -- un remede qui ne repare pas du premier coup.
+"""
+
+
+def modules_manquants(present) -> list[str]:
+    """Ceux des modules du modele que cet environnement n'a pas, dans l'ordre declare.
+
+    ⚠ La disponibilite est un ARGUMENT et non une interrogation, pour la meme raison que
+    dans `choisir_appareil` : c'est ce qui rend le refus testable dans un environnement qui,
+    justement, ne les a pas.
+    """
+    return [nom for nom in MODULES_DU_MODELE if not present(nom)]
+
+
+def exiger_les_modules(manquants: list[str]) -> None:
+    """Refuse en NOMMANT ce qui manque et la commande qui le repare.
+
+    Un refus muet envoie deviner, et deviner est ce que ce depot paie en boucle.
+    """
+    if not manquants:
+        return
+    raise InferenceError(
+        "module(s) absent(s) pour charger le modele : " + ", ".join(manquants)
+        + " -- ils ne sont pas dans les dependances de base (torch installe ~700 Mio) ;"
+        + " remede : uv sync --extra encre"
+    )
 
 
 def choisir_appareil(demande: str, xpu_disponible: bool) -> tuple[str, str]:
@@ -212,6 +256,40 @@ def verifier() -> int:
             ok = False
     v("... et chacun est traite sans lever quand l'appareil est la", ok)
 
+    # --- Le refus quand l'environnement n'a pas de quoi charger le modele -------------
+    # ⚠ Ces controles portent sur le COMPORTEMENT et non sur le texte du fichier : une
+    # sonde qui grep une chaine contenue dans le script qui la contient ne peut pas
+    # echouer, et ce depot vient de payer ce piege sur le lanceur de VC3D.
+    v("rien ne manque quand les deux modules sont la",
+      modules_manquants(lambda _: True) == [])
+    v("les deux sont nommes quand aucun n'est la",
+      modules_manquants(lambda _: False) == list(MODULES_DU_MODELE))
+    v("un seul absent n'en nomme qu'un",
+      modules_manquants(lambda nom: nom != "torch") == ["torch"])
+    v("l'ordre est celui de la declaration, pas celui du hasard",
+      modules_manquants(lambda _: False) == [m for m in MODULES_DU_MODELE])
+
+    ok = True
+    try:
+        exiger_les_modules([])
+    except InferenceError:
+        ok = False
+    v("un environnement complet ne leve pas", ok)
+
+    try:
+        exiger_les_modules(["torch"])
+        v("un environnement incomplet REFUSE", False)
+    except InferenceError as e:
+        v("un environnement incomplet REFUSE", True)
+        v("... et le refus nomme le module manquant", "torch" in str(e))
+        v("... et il nomme la commande qui repare", "uv sync --extra encre" in str(e))
+
+    # ⚠⚠ Le controle qui donne son sens aux precedents : le refus doit tomber AVANT que
+    # quoi que ce soit ne soit lu. Mesure : `main()` refuse dans un environnement nu, sur
+    # une commande dont tous les arguments sont valides, sans toucher aux couches.
+    v("le module expose le refus a main(), pas seulement a l'appelant",
+      "exiger_les_modules" in main.__code__.co_names)
+
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -241,6 +319,12 @@ def main() -> int:
                  if getattr(args, n) is None]
     if manquants:
         parser.error("manquant(s) : " + ", ".join(manquants))
+
+    try:
+        exiger_les_modules(modules_manquants(lambda nom: importlib.util.find_spec(nom) is not None))
+    except InferenceError as error:
+        print(f"erreur : {error}", file=sys.stderr)
+        return 3
 
     from transformers import AutoModel
 

@@ -33,5 +33,55 @@ dependencies = [
     "numcodecs>=0.12",
 ]
 
+# ⚠⚠ DEUX groupes OPTIONNELS, declares parce qu'ils ne l'etaient pas. Mesure du
+# 2026-08-27 : `uv sync` a RETIRE 19 paquets -- zarr, fsspec, s3fs et leur suite -- que
+# quatre outils de `src/excision/` importent, et qu'aucun fichier du depot ne declarait. Ils
+# etaient dans l'environnement parce que quelqu'un les y avait poses a la main. Un
+# environnement reproductible qui ne survit pas a sa propre commande de synchronisation
+# n'est pas reproductible, et la panne ne se voit que le jour ou on relit un volume.
+#
+# ⚠ Aucun des deux ne va dans les dependances de BASE : la racine annonce « numpy et pas
+# grand-chose », et c'est vrai de tout ce qui n'ouvre ni un volume distant ni un modele.
+[project.optional-dependencies]
+# Ce qu'il faut pour CHARGER le modele d'encre (`src/xpu/infer_ink.py`). Les poids sont dans
+# `data/models/`, les arguments etaient valides, et l'outil mourait sur un
+# `ModuleNotFoundError` nu. Il NOMME desormais cette commande.
+#
+# ⚠ `timesformer_pytorch` n'est importe par aucun de nos fichiers : c'est le code du modele
+# lui-meme, charge par `trust_remote_code`, qui le demande. L'omettre rendait un remede qui
+# ne repare qu'a moitie.
+#
+# ⚠⚠ Et l'index CPU n'est pas une preference : mesure du meme jour, la roue par defaut tire
+# 2,7 Gio de runtime CUDA pour 1,1 Gio de torch, sur une machine qui n'a pas de peripherique
+# CUDA -- `--device auto` y vise un iGPU Intel, pas une carte NVIDIA. Trois virgule huit
+# gibioctets dont les deux tiers ne peuvent rien executer ici.
+encre = [
+    "torch>=2.0",
+    # ⚠⚠ La BORNE HAUTE n'est pas de la prudence, elle est mesuree. Sans elle uv prend
+    # transformers 5.16, qui exige de tout `PreTrainedModel` un attribut
+    # `all_tied_weights_keys` que le code du modele -- ecrit pour 4.46.3, comme son
+    # `config.json` le declare -- n'a pas : le chargement meurt sur un `AttributeError`.
+    # Un remede qui installe tout et ne fait toujours pas tourner l'outil ne repare rien.
+    "transformers>=4.46,<5",
+    "timesformer-pytorch>=0.4",
+]
+# Ce qu'il faut pour ouvrir un volume, en local ou sur S3 : `src/excision/{measure,pyramid,
+# radial,shape}.py` importent `fsspec` et `zarr` A L'INTERIEUR de leurs fonctions, donc leur
+# absence ne se voit ni a l'import du module ni dans leur auto-test -- seulement au moment
+# ou on leur demande une vraie mesure.
+volume = [
+    "zarr>=2.18,<3",
+    "fsspec>=2024.1",
+    "s3fs>=2024.1",
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
 [tool.uv]
 package = false
