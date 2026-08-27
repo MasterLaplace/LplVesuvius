@@ -60,6 +60,39 @@ exécuter.
 toujours un helper `v(...)` qui rend `None` ; le compter ferait signaler tout le dépôt, et
 une alerte qui désigne tout ne désigne rien.
 
+## 3 bis. Le cas symétrique, trouvé le lendemain : un verdict que le lanceur ne LIT pas
+
+⚠⚠ Une batterie verte peut aussi être comptée **ÉCHEC**, et la cause est au même endroit.
+Le critère de `temoins.sh` est double :
+
+```bash
+if [ "$rc" -eq 0 ] && grep -q "ALL PASS" <<<"$sortie"; then
+```
+
+Deux nouvelles batteries écrites le 2026-08-28 imprimaient `TOUS LES TEMOINS PASSENT` et
+rendaient 0. Elles passaient, le lanceur les aurait comptées rouges, et leurs contrôles
+auraient disparu du total — **132 fichiers sur 135 emploient la formule attendue**, donc la
+divergence était invisible à la relecture.
+
+⭐ La règle est désormais dans le même garde-fou, parce que c'est la même panne vue de
+l'autre côté : `verdicts_illisibles` lit les lignes du **lanceur** pour savoir ce qui est
+réellement exécuté, puis vérifie que chaque module en question **imprime** une ligne
+reconnaissable.
+
+⚠⚠ Et il a fallu s'y reprendre à deux fois, pour la raison exacte que ce document décrit.
+La première version cherchait la chaîne `ALL PASS` dans le **texte du fichier** — donc elle
+était satisfaite par le commentaire qui explique la règle, et par la docstring qui la cite.
+La sonde n'a pas tiré : casser volontairement un verdict n'a rien signalé. Une garde contre
+les vérifications incapables d'échouer qui en était une.
+
+La version juste passe par l'**arbre syntaxique** et ne regarde que les littéraux à
+l'intérieur des appels à `print`, f-strings comprises. Quatre contrôles négatifs la tiennent,
+dont celui qui manquait : *une simple mention hors d'un `print` ne suffit pas*.
+
+ⓘ Note de cohérence assumée : `_est_le_verdict`, elle, accepte « témoins passent » comme
+verdict. Ce n'est pas une contradiction — elle cherche **où** est le verdict dans l'arbre,
+pas **si le lanceur sait le lire**. Deux questions, deux critères, chacun chez lui.
+
 ## 4. Portée, dite plutôt que sous-entendue
 
 ⚠ **Les batteries en shell ne sont pas jugées.** Elles se testent autrement, et prétendre le

@@ -39,6 +39,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import re
 import sys
 from pathlib import Path
 
@@ -145,6 +146,82 @@ def batteries(racine: Path) -> list[tuple[str, bool, str]]:
     return out
 
 
+SUITE = "src/outils/temoins.sh"
+"""Le lanceur dont le critère décide si une batterie compte comme verte."""
+
+VERDICT_ATTENDU = "ALL PASS"
+"""⚠⚠ La formule que `temoins.sh` exige, en plus d'un code de retour nul :
+
+    if [ "$rc" -eq 0 ] && grep -q "ALL PASS" <<<"$sortie"; then
+
+Une batterie qui invente sa propre phrase est comptée **ECHEC** alors qu'elle passe, et son
+compte de contrôles est perdu. C'est le SYMÉTRIQUE de la panne qui a fait naître ce fichier :
+là une batterie rouge passait pour verte, ici une batterie verte passe pour rouge — même
+cause, un verdict que le lanceur ne peut pas lire.
+
+⚠ `_est_le_verdict` accepte au contraire « témoins passent », et c'est juste : elle cherche
+**où** est le verdict dans un arbre syntaxique, pas **si le lanceur sait le lire**. Deux
+questions différentes, deux critères, chacun chez lui.
+"""
+
+
+def modules_lances_par(suite: str) -> list[str]:
+    """Les modules Python que le lanceur exécute en mode `--verifier`.
+
+    ⚠ On lit les lignes du LANCEUR plutôt que de deviner depuis l'arborescence : ce qui
+    compte ici n'est pas qu'une batterie existe, c'est qu'elle soit lancée.
+    """
+    trouves = []
+    for ligne in suite.splitlines():
+        if "--verifier" not in ligne or not ligne.strip().startswith("run "):
+            continue
+        trouves.extend(re.findall(r'(?:\$ROOT/)?(src/[\w/]+\.py)', ligne))
+    return trouves
+
+
+def imprime_le_verdict(source: str) -> bool:
+    """La batterie IMPRIME-t-elle une ligne que le lanceur saura reconnaître ?
+
+    ⚠⚠ La question porte sur ce qui sort sur la sortie standard, PAS sur ce que le fichier
+    contient. Une première version cherchait la chaîne dans le texte du fichier ; elle était
+    satisfaite par le commentaire qui explique la règle, donc c'était une garde contre les
+    vérifications incapables d'échouer qui en était une. La sonde ne tirait pas, et c'est
+    elle qui l'a dit.
+
+    On regarde donc les littéraux à l'intérieur des appels à `print`, f-strings comprises.
+    """
+    try:
+        arbre = ast.parse(source)
+    except SyntaxError:
+        return True          # source illisible : jugée ailleurs, pas condamnée ici
+    for noeud in ast.walk(arbre):
+        if not (isinstance(noeud, ast.Call) and isinstance(noeud.func, ast.Name)
+                and noeud.func.id == "print"):
+            continue
+        for morceau in ast.walk(noeud):
+            if isinstance(morceau, ast.Constant) and isinstance(morceau.value, str) \
+                    and VERDICT_ATTENDU in morceau.value:
+                return True
+    return False
+
+
+def verdicts_illisibles(racine: Path) -> list[tuple[str, str]]:
+    """Les batteries lancées par la suite dont elle ne saura pas lire le verdict."""
+    chemin = racine / SUITE
+    if not chemin.exists():
+        return []
+    suite = chemin.read_text(encoding="utf-8", errors="replace")
+    mauvais = []
+    for module in modules_lances_par(suite):
+        f = racine / module
+        if not f.exists():
+            mauvais.append((module, "lancé par la suite mais absent de l'arbre"))
+        elif not imprime_le_verdict(f.read_text(encoding="utf-8", errors="replace")):
+            mauvais.append((module, f"n'imprime jamais « {VERDICT_ATTENDU} » : la suite "
+                                    "la comptera ECHEC malgré un code de retour nul"))
+    return mauvais
+
+
 def verifier() -> int:
     """Auto-test HORS LIGNE, sur des sources fabriquées."""
     echecs = controles = 0
@@ -202,6 +279,36 @@ def verifier() -> int:
     v("une source illisible est signalee comme telle",
       "illisible" in peut_echouer("def (\n")[1])
 
+    # --- LE VERDICT QUE LE LANCEUR SAIT LIRE -------------------------------------------
+    suite = ('run "a"  uv run python "$ROOT/src/x/a.py" --verifier\n'
+             'run "b"  uv run python "$ROOT/src/x/b.py" --verifier\n'
+             'echo src/x/pas_une_batterie.py --verifier\n')
+    v("les modules lances par la suite sont retrouves",
+      modules_lances_par(suite) == ["src/x/a.py", "src/x/b.py"])
+    # ⚠ Une ligne qui n'est pas un `run` ne lance rien, meme si elle nomme un module.
+    v("... et une ligne qui n'est pas un run est ignoree",
+      "pas_une_batterie" not in "".join(modules_lances_par(suite)))
+    v("une ligne sans --verifier n'est pas prise pour une batterie",
+      modules_lances_par('run "c"  uv run python src/x/c.py --json out\n') == [])
+    v("aucune batterie lancee par la suite n'a de verdict illisible",
+      not verdicts_illisibles(RACINE))
+    # ⚠⚠ Les controles NEGATIFS : sans eux, la ligne precedente est satisfaite par une
+    # fonction qui repondrait « rien a signaler » a tout.
+    v("... et le critere refuse une batterie qui invente sa phrase",
+      not imprime_le_verdict("def verifier():\n    print('TOUS LES TEMOINS PASSENT')\n"))
+    v("... et accepte celle qui imprime la bonne",
+      imprime_le_verdict("def verifier():\n    print('ALL PASS (0 failures)')\n"))
+    v("... y compris dans une f-string composee",
+      imprime_le_verdict("def verifier():\n"
+                         "    print(f\"{'ALL PASS' if not e else 'ECHEC'} ({e})\")\n"))
+    # ⚠⚠ LE controle qui a manque : mentionner la phrase dans un commentaire ou une
+    # docstring ne doit PAS suffire. Ma premiere version grepait le fichier entier et
+    # etait donc satisfaite par le commentaire qui explique la regle.
+    v("... et une simple MENTION hors d'un print ne suffit pas",
+      not imprime_le_verdict("# le lanceur exige ALL PASS\n"
+                             "\"\"\"docstring qui parle de ALL PASS\"\"\"\n"
+                             "def verifier():\n    print('TOUS LES TEMOINS PASSENT')\n"))
+
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -218,8 +325,12 @@ def main() -> int:
     aveugles = [(f, r) for f, ok, r in lignes if not ok]
     for f, r in aveugles:
         print(f"  ⚠⚠ {f} — {r}")
-    print(f"{len(lignes)} batteries Python, **{len(aveugles)} incapables d'échouer**")
-    return 1 if aveugles else 0
+    illisibles = verdicts_illisibles(RACINE)
+    for f, r in illisibles:
+        print(f"  ⚠⚠ {f} — {r}")
+    print(f"{len(lignes)} batteries Python, **{len(aveugles)} incapables d'échouer**, "
+          f"**{len(illisibles)} au verdict illisible**")
+    return 1 if (aveugles or illisibles) else 0
 
 
 if __name__ == "__main__":

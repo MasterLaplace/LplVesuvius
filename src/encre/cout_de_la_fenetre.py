@@ -310,8 +310,11 @@ def verifier() -> int:
     v("la fenetre soumise au modele est invariante en taille de segment",
       (FRAMES, TILE, TILE) == (FRAMES, TILE, TILE) and TILE * TILE * FRAMES == 106496)
 
-    print(f"\n{'TOUS LES TEMOINS PASSENT' if not echecs else f'{echecs} ECHECS'}"
-          f"  ({controles} controles)")
+    # ⚠⚠ La formule du verdict N'EST PAS libre : `temoins.sh` exige `ALL PASS` ET un
+    # code de retour nul, et compte ses controles en lisant « N checks » sur cette ligne.
+    # Une batterie qui invente sa propre phrase est comptee ECHEC alors qu'elle passe.
+    print(f"\n{'ALL PASS' if not echecs else 'ECHEC'} "
+          f"({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
 
