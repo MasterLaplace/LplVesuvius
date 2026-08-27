@@ -817,6 +817,12 @@ run "encre : σ contre témoin"  uv run python "$ROOT/src/encre/comparer_encre.p
 # parce que sans lui une échelle plate de bout en bout ressemble à un harnais cassé.
 run "résolution ou rouleau"    uv run python "$ROOT/src/encre/resolution_ou_rouleau.py" --verifier
 
+# ⚠⚠ Le partage entre « le rouleau » et « sa campagne de scan » repose sur DEUX questions
+# qu'il ne faut jamais confondre : ce que CE dépôt a téléchargé, et ce que le dépôt public
+# PUBLIE. La première est un fait sur nous. La batterie garde la bascule : dès qu'un
+# sondage a eu lieu, c'est lui qui décide.
+run "campagnes de scan"        uv run python "$ROOT/src/encre/campagnes_de_scan.py" --verifier
+
 # ⭐⭐ Le seul juge de trace de ce depot qui n'ait NI seuil, NI verite terrain, NI echelle :
 # on rend la meme surface dans des fenetres de plus en plus profondes et on regarde si la
 # distance mesuree bouge. Ses TROIS REFUS sont ce que le temoin verifie -- une seule

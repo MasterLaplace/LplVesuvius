@@ -1,0 +1,1237 @@
+{
+  "question": "l'inertie du modèle suit-elle le ROULEAU ou sa CAMPAGNE de scan ?",
+  "rouleaux": [
+    {
+      "rouleau": "PHerc0009B",
+      "volumes": [
+        {
+          "volume": "20250521125136-8.640um-1.2m-116keV-masked.zarr",
+          "voxel_um": 8.64,
+          "distance_m": 1.2,
+          "energie_kev": 116
+        },
+        {
+          "volume": "20250820154339-2.401um-0.3m-77keV-masked.zarr",
+          "voxel_um": 2.401,
+          "distance_m": 0.3,
+          "energie_kev": 77
+        },
+        {
+          "volume": "20260319104112-2.401um-0.3m-77keV-masked.zarr",
+          "voxel_um": 2.401,
+          "distance_m": 0.3,
+          "energie_kev": 77
+        }
+      ],
+      "n_volumes": 3,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 77,
+      "energie_max_kev": 116,
+      "voxel_min_um": 2.401,
+      "distance_min_m": 0.3,
+      "a_un_scan_fin": true,
+      "segments_sondes": 5,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": false
+    },
+    {
+      "rouleau": "PHerc0125",
+      "volumes": [
+        {
+          "volume": "20250821151825-9.362um-1.2m-113keV-masked.zarr",
+          "voxel_um": 9.362,
+          "distance_m": 1.2,
+          "energie_kev": 113
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 113,
+      "energie_max_kev": 113,
+      "voxel_min_um": 9.362,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc0139",
+      "volumes": [
+        {
+          "volume": "20250728140407-9.362um-1.2m-113keV-masked.zarr",
+          "voxel_um": 9.362,
+          "distance_m": 1.2,
+          "energie_kev": 113
+        },
+        {
+          "volume": "20250820105138-2.403um-0.2m-77keV-masked.zarr",
+          "voxel_um": 2.403,
+          "distance_m": 0.2,
+          "energie_kev": 77
+        },
+        {
+          "volume": "20250822062710-2.403um-0.2m-77keV-masked.zarr",
+          "voxel_um": 2.403,
+          "distance_m": 0.2,
+          "energie_kev": 77
+        },
+        {
+          "volume": "20260102150214-2.399um-0.2m-78keV-masked.zarr",
+          "voxel_um": 2.399,
+          "distance_m": 0.2,
+          "energie_kev": 78
+        },
+        {
+          "volume": "20260319133050-2.403um-0.2m-77keV-masked.zarr",
+          "voxel_um": 2.403,
+          "distance_m": 0.2,
+          "energie_kev": 77
+        },
+        {
+          "volume": "20260319133554-2.403um-0.2m-77keV-masked.zarr",
+          "voxel_um": 2.403,
+          "distance_m": 0.2,
+          "energie_kev": 77
+        },
+        {
+          "volume": "20260413113053-1.129um-0.2m-59keV-masked.zarr",
+          "voxel_um": 1.129,
+          "distance_m": 0.2,
+          "energie_kev": 59
+        }
+      ],
+      "n_volumes": 7,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 59,
+      "energie_max_kev": 113,
+      "voxel_min_um": 1.129,
+      "distance_min_m": 0.2,
+      "a_un_scan_fin": true,
+      "segments_sondes": 5,
+      "avec_encre_publiee": 5,
+      "cartes_publiees": 38,
+      "connu_lisible": true,
+      "encre_publiee": true
+    },
+    {
+      "rouleau": "PHerc0172",
+      "volumes": [
+        {
+          "volume": "20241024131838-7.910um-53keV-masked.zarr",
+          "voxel_um": 7.91,
+          "distance_m": null,
+          "energie_kev": 53
+        },
+        {
+          "volume": "20241024131839-7.910um-53keV-masked.zarr",
+          "voxel_um": 7.91,
+          "distance_m": null,
+          "energie_kev": 53
+        }
+      ],
+      "n_volumes": 2,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 53,
+      "energie_max_kev": 53,
+      "voxel_min_um": 7.91,
+      "distance_min_m": null,
+      "a_un_scan_fin": false,
+      "segments_sondes": 5,
+      "avec_encre_publiee": 5,
+      "cartes_publiees": 53,
+      "connu_lisible": true,
+      "encre_publiee": true
+    },
+    {
+      "rouleau": "PHerc0175A",
+      "volumes": [
+        {
+          "volume": "20250521115057-8.640um-1.2m-116keV-masked.zarr",
+          "voxel_um": 8.64,
+          "distance_m": 1.2,
+          "energie_kev": 116
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 116,
+      "energie_max_kev": 116,
+      "voxel_min_um": 8.64,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc0175B",
+      "volumes": [
+        {
+          "volume": "20250521125822-8.640um-1.2m-116keV-masked.zarr",
+          "voxel_um": 8.64,
+          "distance_m": 1.2,
+          "energie_kev": 116
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 116,
+      "energie_max_kev": 116,
+      "voxel_min_um": 8.64,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc0191",
+      "volumes": [
+        {
+          "volume": "20250821151635-9.362um-1.2m-113keV-masked.zarr",
+          "voxel_um": 9.362,
+          "distance_m": 1.2,
+          "energie_kev": 113
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 113,
+      "energie_max_kev": 113,
+      "voxel_min_um": 9.362,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc0211",
+      "volumes": [
+        {
+          "volume": "20250821151803-9.362um-1.2m-113keV-masked.zarr",
+          "voxel_um": 9.362,
+          "distance_m": 1.2,
+          "energie_kev": 113
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 113,
+      "energie_max_kev": 113,
+      "voxel_min_um": 9.362,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc0257",
+      "volumes": [
+        {
+          "volume": "20250821151750-9.362um-1.2m-113keV-masked.zarr",
+          "voxel_um": 9.362,
+          "distance_m": 1.2,
+          "energie_kev": 113
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 113,
+      "energie_max_kev": 113,
+      "voxel_min_um": 9.362,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc0268",
+      "volumes": [
+        {
+          "volume": "20251110183117-8.640um-1.2m-116keV-masked.zarr",
+          "voxel_um": 8.64,
+          "distance_m": 1.2,
+          "energie_kev": 116
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 116,
+      "energie_max_kev": 116,
+      "voxel_min_um": 8.64,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc0306B",
+      "volumes": [
+        {
+          "volume": "20250521133212-8.640um-1.2m-116keV-masked.zarr",
+          "voxel_um": 8.64,
+          "distance_m": 1.2,
+          "energie_kev": 116
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 116,
+      "energie_max_kev": 116,
+      "voxel_min_um": 8.64,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc0332",
+      "volumes": [
+        {
+          "volume": "20251211183505-2.399um-0.2m-78keV-masked.zarr",
+          "voxel_um": 2.399,
+          "distance_m": 0.2,
+          "energie_kev": 78
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 78,
+      "energie_max_kev": 78,
+      "voxel_min_um": 2.399,
+      "distance_min_m": 0.2,
+      "a_un_scan_fin": true,
+      "segments_sondes": 2,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": false
+    },
+    {
+      "rouleau": "PHerc0343",
+      "volumes": [
+        {
+          "volume": "20250521140437-8.640um-1.2m-116keV-masked.zarr",
+          "voxel_um": 8.64,
+          "distance_m": 1.2,
+          "energie_kev": 116
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 116,
+      "energie_max_kev": 116,
+      "voxel_min_um": 8.64,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc0343P",
+      "volumes": [
+        {
+          "volume": "20250521134555-8.640um-1.2m-116keV-masked.zarr",
+          "voxel_um": 8.64,
+          "distance_m": 1.2,
+          "energie_kev": 116
+        },
+        {
+          "volume": "20260304131111-2.215um-0.4m-111keV-masked.zarr",
+          "voxel_um": 2.215,
+          "distance_m": 0.4,
+          "energie_kev": 111
+        }
+      ],
+      "n_volumes": 2,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 111,
+      "energie_max_kev": 116,
+      "voxel_min_um": 2.215,
+      "distance_min_m": 0.4,
+      "a_un_scan_fin": true,
+      "segments_sondes": 5,
+      "avec_encre_publiee": 5,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": true
+    },
+    {
+      "rouleau": "PHerc0358",
+      "volumes": [
+        {
+          "volume": "20250821151737-9.362um-1.2m-113keV-masked.zarr",
+          "voxel_um": 9.362,
+          "distance_m": 1.2,
+          "energie_kev": 113
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 113,
+      "energie_max_kev": 113,
+      "voxel_min_um": 9.362,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc0483A",
+      "volumes": [
+        {
+          "volume": "20250521140913-8.640um-1.2m-116keV-masked.zarr",
+          "voxel_um": 8.64,
+          "distance_m": 1.2,
+          "energie_kev": 116
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 116,
+      "energie_max_kev": 116,
+      "voxel_min_um": 8.64,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc0483B",
+      "volumes": [
+        {
+          "volume": "20251124083638-8.640um-1.2m-116keV-masked.zarr",
+          "voxel_um": 8.64,
+          "distance_m": 1.2,
+          "energie_kev": 116
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 116,
+      "energie_max_kev": 116,
+      "voxel_min_um": 8.64,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc0490A",
+      "volumes": [
+        {
+          "volume": "20250521151210-8.640um-1.2m-116keV-masked.zarr",
+          "voxel_um": 8.64,
+          "distance_m": 1.2,
+          "energie_kev": 116
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 116,
+      "energie_max_kev": 116,
+      "voxel_min_um": 8.64,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc0490B",
+      "volumes": [
+        {
+          "volume": "20250521151215-8.640um-1.2m-116keV-masked.zarr",
+          "voxel_um": 8.64,
+          "distance_m": 1.2,
+          "energie_kev": 116
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 116,
+      "energie_max_kev": 116,
+      "voxel_min_um": 8.64,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc0500P2",
+      "volumes": [
+        {
+          "volume": "20250526151718-2.215um-0.4m-111keV-masked.zarr",
+          "voxel_um": 2.215,
+          "distance_m": 0.4,
+          "energie_kev": 111
+        },
+        {
+          "volume": "20250528085330-4.317um-1.2m-111keV-masked.zarr",
+          "voxel_um": 4.317,
+          "distance_m": 1.2,
+          "energie_kev": 111
+        },
+        {
+          "volume": "20250820143440-9.362um-1.2m-113keV-masked.zarr",
+          "voxel_um": 9.362,
+          "distance_m": 1.2,
+          "energie_kev": 113
+        },
+        {
+          "volume": "20250821110041-0.500um-masked.zarr",
+          "voxel_um": 0.5,
+          "distance_m": null,
+          "energie_kev": null
+        },
+        {
+          "volume": "20250821110041-0.550um-0.1m-65keV-masked.zarr",
+          "voxel_um": 0.55,
+          "distance_m": 0.1,
+          "energie_kev": 65
+        }
+      ],
+      "n_volumes": 5,
+      "noms_muets_energie": 1,
+      "energie_min_kev": 65,
+      "energie_max_kev": 113,
+      "voxel_min_um": 0.5,
+      "distance_min_m": 0.1,
+      "a_un_scan_fin": true,
+      "segments_sondes": 5,
+      "avec_encre_publiee": 5,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": true
+    },
+    {
+      "rouleau": "PHerc0800",
+      "volumes": [
+        {
+          "volume": "20250521135224-8.640um-1.2m-116keV-masked.zarr",
+          "voxel_um": 8.64,
+          "distance_m": 1.2,
+          "energie_kev": 116
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 116,
+      "energie_max_kev": 116,
+      "voxel_min_um": 8.64,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 5,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": false
+    },
+    {
+      "rouleau": "PHerc0813",
+      "volumes": [
+        {
+          "volume": "20250821151723-9.362um-1.2m-113keV-masked.zarr",
+          "voxel_um": 9.362,
+          "distance_m": 1.2,
+          "energie_kev": 113
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 113,
+      "energie_max_kev": 113,
+      "voxel_min_um": 9.362,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc0814",
+      "volumes": [
+        {
+          "volume": "20250804134230-9.362um-1.2m-113keV-masked.zarr",
+          "voxel_um": 9.362,
+          "distance_m": 1.2,
+          "energie_kev": 113
+        },
+        {
+          "volume": "20260309142202-2.399um-0.2m-78keV-masked.zarr",
+          "voxel_um": 2.399,
+          "distance_m": 0.2,
+          "energie_kev": 78
+        },
+        {
+          "volume": "20260521123630-1.129um-0.2m-59keV-masked.zarr",
+          "voxel_um": 1.129,
+          "distance_m": 0.2,
+          "energie_kev": 59
+        }
+      ],
+      "n_volumes": 3,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 59,
+      "energie_max_kev": 113,
+      "voxel_min_um": 1.129,
+      "distance_min_m": 0.2,
+      "a_un_scan_fin": true,
+      "segments_sondes": 5,
+      "avec_encre_publiee": 5,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": true
+    },
+    {
+      "rouleau": "PHerc0826",
+      "volumes": [
+        {
+          "volume": "20250821151701-9.362um-1.2m-113keV-masked.zarr",
+          "voxel_um": 9.362,
+          "distance_m": 1.2,
+          "energie_kev": 113
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 113,
+      "energie_max_kev": 113,
+      "voxel_min_um": 9.362,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc0841",
+      "volumes": [
+        {
+          "volume": "20250821151531-9.366um-1.2m-113keV-masked.zarr",
+          "voxel_um": 9.366,
+          "distance_m": 1.2,
+          "energie_kev": 113
+        },
+        {
+          "volume": "20260319124803-2.403um-0.2m-77keV-masked.zarr",
+          "voxel_um": 2.403,
+          "distance_m": 0.2,
+          "energie_kev": 77
+        }
+      ],
+      "n_volumes": 2,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 77,
+      "energie_max_kev": 113,
+      "voxel_min_um": 2.403,
+      "distance_min_m": 0.2,
+      "a_un_scan_fin": true,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc0846A",
+      "volumes": [
+        {
+          "volume": "20250728152254-9.362um-1.2m-113keV-masked.zarr",
+          "voxel_um": 9.362,
+          "distance_m": 1.2,
+          "energie_kev": 113
+        },
+        {
+          "volume": "20260319102732-2.403um-0.2m-77keV-masked.zarr",
+          "voxel_um": 2.403,
+          "distance_m": 0.2,
+          "energie_kev": 77
+        }
+      ],
+      "n_volumes": 2,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 77,
+      "energie_max_kev": 113,
+      "voxel_min_um": 2.403,
+      "distance_min_m": 0.2,
+      "a_un_scan_fin": true,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc0846B",
+      "volumes": [
+        {
+          "volume": "20250804142305-9.362um-1.2m-113keV-masked.zarr",
+          "voxel_um": 9.362,
+          "distance_m": 1.2,
+          "energie_kev": 113
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 113,
+      "energie_max_kev": 113,
+      "voxel_min_um": 9.362,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc1203",
+      "volumes": [
+        {
+          "volume": "20250820131727-9.362um-1.2m-113keV-masked.zarr",
+          "voxel_um": 9.362,
+          "distance_m": 1.2,
+          "energie_kev": 113
+        },
+        {
+          "volume": "20260319130212-2.403um-0.2m-77keV-masked.zarr",
+          "voxel_um": 2.403,
+          "distance_m": 0.2,
+          "energie_kev": 77
+        }
+      ],
+      "n_volumes": 2,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 77,
+      "energie_max_kev": 113,
+      "voxel_min_um": 2.403,
+      "distance_min_m": 0.2,
+      "a_un_scan_fin": true,
+      "segments_sondes": 1,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": false
+    },
+    {
+      "rouleau": "PHerc1218",
+      "volumes": [
+        {
+          "volume": "20250521120456-8.640um-1.2m-116keV-masked.zarr",
+          "voxel_um": 8.64,
+          "distance_m": 1.2,
+          "energie_kev": 116
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 116,
+      "energie_max_kev": 116,
+      "voxel_min_um": 8.64,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc1299",
+      "volumes": [
+        {
+          "volume": "20260309130042-2.399um-0.2m-78keV-masked.zarr",
+          "voxel_um": 2.399,
+          "distance_m": 0.2,
+          "energie_kev": 78
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 78,
+      "energie_max_kev": 78,
+      "voxel_min_um": 2.399,
+      "distance_min_m": 0.2,
+      "a_un_scan_fin": true,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc1447",
+      "volumes": [
+        {
+          "volume": "20250521151220-8.640um-1.2m-116keV-masked.zarr",
+          "voxel_um": 8.64,
+          "distance_m": 1.2,
+          "energie_kev": 116
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 116,
+      "energie_max_kev": 116,
+      "voxel_min_um": 8.64,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 5,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": false
+    },
+    {
+      "rouleau": "PHerc1451",
+      "volumes": [
+        {
+          "volume": "20250521151225-8.640um-1.2m-116keV-masked.zarr",
+          "voxel_um": 8.64,
+          "distance_m": 1.2,
+          "energie_kev": 116
+        },
+        {
+          "volume": "20260319101107-2.399um-0.2m-78keV-masked.zarr",
+          "voxel_um": 2.399,
+          "distance_m": 0.2,
+          "energie_kev": 78
+        }
+      ],
+      "n_volumes": 2,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 78,
+      "energie_max_kev": 116,
+      "voxel_min_um": 2.399,
+      "distance_min_m": 0.2,
+      "a_un_scan_fin": true,
+      "segments_sondes": 1,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": false
+    },
+    {
+      "rouleau": "PHerc1545",
+      "volumes": [
+        {
+          "volume": "20250821151648-9.362um-1.2m-113keV-masked.zarr",
+          "voxel_um": 9.362,
+          "distance_m": 1.2,
+          "energie_kev": 113
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 113,
+      "energie_max_kev": 113,
+      "voxel_min_um": 9.362,
+      "distance_min_m": 1.2,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc1667",
+      "volumes": [
+        {
+          "volume": "20251217075048-2.399um-0.2m-78keV-masked.zarr",
+          "voxel_um": 2.399,
+          "distance_m": 0.2,
+          "energie_kev": 78
+        },
+        {
+          "volume": "20260323082859-1.129um-0.2m-59keV-masked.zarr",
+          "voxel_um": 1.129,
+          "distance_m": 0.2,
+          "energie_kev": 59
+        }
+      ],
+      "n_volumes": 2,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 59,
+      "energie_max_kev": 78,
+      "voxel_min_um": 1.129,
+      "distance_min_m": 0.2,
+      "a_un_scan_fin": true,
+      "segments_sondes": 5,
+      "avec_encre_publiee": 5,
+      "cartes_publiees": 19,
+      "connu_lisible": true,
+      "encre_publiee": true
+    },
+    {
+      "rouleau": "PHerc1667Cr1Fr3",
+      "volumes": [],
+      "n_volumes": 0,
+      "noms_muets_energie": 0,
+      "energie_min_kev": null,
+      "energie_max_kev": null,
+      "voxel_min_um": null,
+      "distance_min_m": null,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHerc51Cr4Fr8",
+      "volumes": [],
+      "n_volumes": 0,
+      "noms_muets_energie": 0,
+      "energie_min_kev": null,
+      "energie_max_kev": null,
+      "voxel_min_um": null,
+      "distance_min_m": null,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHercMAN5",
+      "volumes": [
+        {
+          "volume": "20260311104824-2.399um-0.2m-78keV-masked.zarr",
+          "voxel_um": 2.399,
+          "distance_m": 0.2,
+          "energie_kev": 78
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 78,
+      "energie_max_kev": 78,
+      "voxel_min_um": 2.399,
+      "distance_min_m": 0.2,
+      "a_un_scan_fin": true,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHercMANB",
+      "volumes": [
+        {
+          "volume": "20260323091048-2.399um-0.2m-78keV-masked.zarr",
+          "voxel_um": 2.399,
+          "distance_m": 0.2,
+          "energie_kev": 78
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 78,
+      "energie_max_kev": 78,
+      "voxel_min_um": 2.399,
+      "distance_min_m": 0.2,
+      "a_un_scan_fin": true,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHercMANBp",
+      "volumes": [
+        {
+          "volume": "20251216152116-2.399um-0.2m-78keV-masked.zarr",
+          "voxel_um": 2.399,
+          "distance_m": 0.2,
+          "energie_kev": 78
+        },
+        {
+          "volume": "20260427100434-1.129um-0.2m-59keV-masked.zarr",
+          "voxel_um": 1.129,
+          "distance_m": 0.2,
+          "energie_kev": 59
+        }
+      ],
+      "n_volumes": 2,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 59,
+      "energie_max_kev": 78,
+      "voxel_min_um": 1.129,
+      "distance_min_m": 0.2,
+      "a_un_scan_fin": true,
+      "segments_sondes": 5,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": false
+    },
+    {
+      "rouleau": "PHercParis1Fr34",
+      "volumes": [],
+      "n_volumes": 0,
+      "noms_muets_energie": 0,
+      "energie_min_kev": null,
+      "energie_max_kev": null,
+      "voxel_min_um": null,
+      "distance_min_m": null,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHercParis1Fr39",
+      "volumes": [],
+      "n_volumes": 0,
+      "noms_muets_energie": 0,
+      "energie_min_kev": null,
+      "energie_max_kev": null,
+      "voxel_min_um": null,
+      "distance_min_m": null,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHercParis2Fr143",
+      "volumes": [],
+      "n_volumes": 0,
+      "noms_muets_energie": 0,
+      "energie_min_kev": null,
+      "energie_max_kev": null,
+      "voxel_min_um": null,
+      "distance_min_m": null,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHercParis2Fr47",
+      "volumes": [],
+      "n_volumes": 0,
+      "noms_muets_energie": 0,
+      "energie_min_kev": null,
+      "energie_max_kev": null,
+      "voxel_min_um": null,
+      "distance_min_m": null,
+      "a_un_scan_fin": false,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHercParis3",
+      "volumes": [
+        {
+          "volume": "20260427095331-2.400um-0.2m-78keV-masked.zarr",
+          "voxel_um": 2.4,
+          "distance_m": 0.2,
+          "energie_kev": 78
+        }
+      ],
+      "n_volumes": 1,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 78,
+      "energie_max_kev": 78,
+      "voxel_min_um": 2.4,
+      "distance_min_m": 0.2,
+      "a_un_scan_fin": true,
+      "segments_sondes": 0,
+      "avec_encre_publiee": 0,
+      "cartes_publiees": 0,
+      "connu_lisible": false,
+      "encre_publiee": null
+    },
+    {
+      "rouleau": "PHercParis4",
+      "volumes": [
+        {
+          "volume": "20260310170716-45.532um-11.0m-74keV-masked.zarr",
+          "voxel_um": 45.532,
+          "distance_m": 11.0,
+          "energie_kev": 74
+        },
+        {
+          "volume": "20260310173927-45.532um-11.0m-110keV-masked.zarr",
+          "voxel_um": 45.532,
+          "distance_m": 11.0,
+          "energie_kev": 110
+        },
+        {
+          "volume": "20260323153942-2.400um-0.2m-137keV-masked.zarr",
+          "voxel_um": 2.4,
+          "distance_m": 0.2,
+          "energie_kev": 137
+        },
+        {
+          "volume": "20260411134726-2.400um-0.2m-78keV-masked.zarr",
+          "voxel_um": 2.4,
+          "distance_m": 0.2,
+          "energie_kev": 78
+        },
+        {
+          "volume": "20260608103018-1.129um-0.2m-78keV-masked.zarr",
+          "voxel_um": 1.129,
+          "distance_m": 0.2,
+          "energie_kev": 78
+        }
+      ],
+      "n_volumes": 5,
+      "noms_muets_energie": 0,
+      "energie_min_kev": 74,
+      "energie_max_kev": 137,
+      "voxel_min_um": 1.129,
+      "distance_min_m": 0.2,
+      "a_un_scan_fin": true,
+      "segments_sondes": 5,
+      "avec_encre_publiee": 5,
+      "cartes_publiees": 80,
+      "connu_lisible": true,
+      "encre_publiee": true
+    }
+  ],
+  "cartes_publiees_tenues": {
+    "PHerc0139": 38,
+    "PHerc0172": 53,
+    "PHerc1667": 19,
+    "PHercParis4": 80
+  },
+  "groupes": {
+    "critere": "le dépôt publie une détection d'encre",
+    "encre_publiee": {
+      "rouleaux": [
+        "PHerc0139",
+        "PHerc0172",
+        "PHerc0343P",
+        "PHerc0500P2",
+        "PHerc0814",
+        "PHerc1667",
+        "PHercParis4"
+      ],
+      "n": 7,
+      "avec_scan_fin": 6,
+      "energie_min_kev": 53,
+      "energie_max_kev": 111,
+      "volumes_median": 3,
+      "part_scan_fin": 0.857
+    },
+    "sans_encre_publiee": {
+      "rouleaux": [
+        "PHerc0009B",
+        "PHerc0125",
+        "PHerc0175A",
+        "PHerc0175B",
+        "PHerc0191",
+        "PHerc0211",
+        "PHerc0257",
+        "PHerc0268",
+        "PHerc0306B",
+        "PHerc0332",
+        "PHerc0343",
+        "PHerc0358",
+        "PHerc0483A",
+        "PHerc0483B",
+        "PHerc0490A",
+        "PHerc0490B",
+        "PHerc0800",
+        "PHerc0813",
+        "PHerc0826",
+        "PHerc0841",
+        "PHerc0846A",
+        "PHerc0846B",
+        "PHerc1203",
+        "PHerc1218",
+        "PHerc1299",
+        "PHerc1447",
+        "PHerc1451",
+        "PHerc1545",
+        "PHerc1667Cr1Fr3",
+        "PHerc51Cr4Fr8",
+        "PHercMAN5",
+        "PHercMANB",
+        "PHercMANBp",
+        "PHercParis1Fr34",
+        "PHercParis1Fr39",
+        "PHercParis2Fr143",
+        "PHercParis2Fr47",
+        "PHercParis3"
+      ],
+      "n": 38,
+      "avec_scan_fin": 11,
+      "energie_min_kev": 59,
+      "energie_max_kev": 116,
+      "volumes_median": 1,
+      "part_scan_fin": 0.289
+    },
+    "fisher": {
+      "table": [
+        6,
+        1,
+        11,
+        27
+      ],
+      "p": 0.008064765637085546
+    }
+  }
+}

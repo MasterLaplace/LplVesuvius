@@ -40,6 +40,8 @@ ROULEAUX = ("PHerc0125", "PHerc0139", "PHerc0191", "PHerc0211", "PHerc0257", "PH
 
 SCAN = re.compile(r"^(\d{14})-")
 VOXEL = re.compile(r"-(\d+\.\d+)um-")
+ENERGIE = re.compile(r"-(\d+)keV")
+DISTANCE = re.compile(r"-(\d+\.\d+)m-")
 
 
 def scan_de(nom: str) -> str | None:
@@ -51,6 +53,29 @@ def scan_de(nom: str) -> str | None:
 def voxel_de(nom: str) -> float | None:
     """La taille de voxel, LUE dans le nom du volume et jamais supposee."""
     m = VOXEL.search(nom)
+    return float(m.group(1)) if m else None
+
+
+def energie_de(nom: str) -> int | None:
+    """L'energie du faisceau en keV, LUE dans le nom du volume et jamais supposee.
+
+    ⚠⚠ Elle est ici et non dans un second fichier pour la raison qui a fait naitre
+    celui-ci : le nom d'un volume est la seule source de ces trois grandeurs, donc il ne
+    doit avoir qu'un lecteur. Deux lecteurs finiraient par ne pas s'accorder sur un nom
+    inhabituel, et la panne serait silencieuse -- on comparerait deux campagnes en croyant
+    comparer deux rouleaux.
+
+    ⚠ Tous les noms ne la portent pas : `PHerc0172` publie
+    `20241024131839-7.910um-53keV-masked.zarr` (pas de distance) et d'autres n'ont ni l'une
+    ni l'autre. Un nom muet rend `None`, jamais une valeur par defaut.
+    """
+    m = ENERGIE.search(nom)
+    return int(m.group(1)) if m else None
+
+
+def distance_de(nom: str) -> float | None:
+    """La distance de propagation en metres, lue dans le nom. `None` si le nom se tait."""
+    m = DISTANCE.search(nom)
     return float(m.group(1)) if m else None
 
 
@@ -164,6 +189,26 @@ def verifier() -> int:
       voxel_de("20250820131727-9.362um-1.2m-113keV-masked.zarr") == 9.362)
     v("... et absente quand le nom ne la porte pas",
       voxel_de("20250820131727-surface-m7-L0-th0.2.zarr") is None)
+
+    # --- l'energie et la distance, memes regles que le voxel -------------------------
+    v("l'energie est lue dans le nom",
+      energie_de("20250521151220-8.640um-1.2m-116keV-masked.zarr") == 116)
+    v("... y compris quand le nom ne porte pas de distance",
+      energie_de("20241024131839-7.910um-53keV-masked.zarr") == 53)
+    v("... et absente quand le nom se tait", energie_de("20230205180739-surface.zarr") is None)
+    # ⚠ Le motif exige `keV` COLLE au nombre : sans ça « 1.2m » se lirait comme une energie
+    # sur un nom mal forme, et on comparerait une distance a des kiloelectronvolts.
+    v("un nombre sans keV n'est pas une energie",
+      energie_de("20250821151737-9.362um-1.2m-masked.zarr") is None)
+    v("la distance est lue dans le nom",
+      abs((distance_de("20250521151220-8.640um-1.2m-116keV-masked.zarr") or 0) - 1.2) < 1e-9)
+    v("... et absente quand le nom ne la porte pas",
+      distance_de("20241024131839-7.910um-53keV-masked.zarr") is None)
+    # ⚠⚠ Le controle qui separe les trois : un meme nom porte les trois grandeurs, et
+    # chacune doit lire la SIENNE. Un motif trop lache prendrait 9.362 pour une distance.
+    n = "20250821151737-9.362um-1.2m-113keV-masked.zarr"
+    v("les trois grandeurs d'un meme nom ne se confondent pas",
+      (voxel_de(n), distance_de(n), energie_de(n)) == (9.362, 1.2, 113))
 
     # ⭐ Un seul scan : position et identite disent la meme chose, et c'est pourquoi le
     # defaut a survecu -- douze rouleaux sur treize sont dans ce cas.

@@ -25,15 +25,26 @@ mesure() {  # rouleau  voxel  cle
       --level 1 --voxel-um "$2" --chunks 27 --out "$f" 2>&1 \
       | grep -E "niveau|chunks avec|0\.50" | sed "s/^/  [$1] /"
 }
-while read -r k; do
-  s=$(cut -d/ -f1 <<<"$k")
-  case "$s" in
-    PHerc0268|PHerc0800|PHerc1218|PHerc1447) v=8.640 ;;
-    *) v=9.362 ;;
-  esac
+# ⚠⚠ La liste des cles ETAIT lue dans `/tmp/pred_prix.txt`, un fichier que rien de ce depot
+# ne produit et qui n'existe plus. La commande « Reproduire » de `16` etait donc MORTE :
+# elle sortait sur « No such file » avant la premiere mesure. Meme classe de panne que
+# l'outil d'inference du 2026-08-27 -- un chemin publie qu'on ne peut plus emprunter.
+#
+# ⭐ La cle et la taille de voxel se DERIVENT desormais, par `apparier_volumes.py
+# --pour-campagne`, qui apparie surface et volume par identite de scan et lit le voxel dans
+# le nom du volume. Plus de table de voxels tenue a la main -- elle etait juste, et elle
+# etait une seconde source de verite.
+for s in $(uv run python -c "
+import sys; sys.path.insert(0, 'src/volume')
+import apparier_volumes as av
+print(' '.join(r for r in av.ROULEAUX if r != 'PHerc0139'))"); do
+  ligne=$(uv run python src/volume/apparier_volumes.py --pour-campagne "$s" 2>/dev/null) || {
+    echo "=== $s : appariement non determine, saute ==="; continue; }
+  k=$(cut -d' ' -f1 <<<"$ligne")
+  v=$(cut -d' ' -f3 <<<"$ligne")
   echo "=== $s (voxel $v µm) ==="
   mesure "$s" "$v" "$k"
-done < /tmp/pred_prix.txt
+done
 echo "=== TEMOIN : PHercParis4, deroule et LU ==="
 mesure PHercParis4 9.600 \
   "PHercParis4/representations/predictions/surfaces/20260411134726-surface-20260413222639-surface-m7-L2-th0.2.zarr"

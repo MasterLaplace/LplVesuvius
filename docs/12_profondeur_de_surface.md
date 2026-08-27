@@ -260,6 +260,15 @@ central ne donnera pas d'encre lisible.*
 retrouvé en engendrant un volume de surface plus épais (`vc_layers_from_ppm -r 64`) ou
 en corrigeant la trace. C'est du côté du déroulement, donc de l'objectif.
 
+⚠⚠ **La première des deux branches est FERMÉE depuis le 2026-08-27, et par la mesure.**
+Un volume plus épais n'y fait pas entrer la feuille : [`20`](20_le_champ_de_correction.md)
+§9 le vérifie de 61 à 121 couches sur `PHerc0358` — le pic reste au bord et l'écart médian
+suit la demi-fenêtre, 262 → 562 µm. Une fenêtre de profondeur doit rester **sous** le pas
+inter-feuilles, sinon « où est le pic » n'a plus de réponse. Et
+[`58`](58_resolution_ou_rouleau.md) §5 mesure ce que ça coûte en aval : doubler l'épaisseur
+retire **40,8 %** de la réponse du modèle d'encre. ⭐ **La seconde branche — corriger la
+trace — est celle qui a survécu**, et c'est tout l'objet de `20`.
+
 ## Reproduire
 
 ```bash
