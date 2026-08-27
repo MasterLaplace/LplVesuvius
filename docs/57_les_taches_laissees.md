@@ -137,6 +137,42 @@ centaines de nombres qui ne sont pas des mesures. Ce qui l'est, en revanche, c'e
 publier un chiffre qu'en écrivant d'abord son JSON** — la règle que ce dépôt s'applique
 partout ailleurs, et qui a été enfreinte ici une fois.
 
+### La moitié qui EST mécanisable, mesurée puis écrite le 2026-08-28
+
+⭐ `src/depot/chiffres_sans_record.py`. Le cadrage a été **mesuré avant** d'écrire la règle,
+parce qu'une garde qui désigne tout ne désigne rien : sur les documents du dépôt, **1154**
+écritures à trois décimales ou plus, dont **1060 déjà adossées** à un fichier de
+`docs/mesures/`. Le résidu est de **56 chiffres dans 19 documents** — un inventaire
+relisible, pas une alerte de masse.
+
+⚠ Trois décimales et pas deux : la prose est pleine de pourcentages et de tailles à une ou
+deux décimales qui ne sont pas des mesures. Les identifiants (DOI, arXiv, Zenodo) sont écartés
+sur leur **contexte de ligne** et non sur leurs chiffres — `2304.02084` est un numéro d'article
+et `2304,02084 cm²` serait une mesure parfaitement plausible.
+
+⚠⚠ **Le piège de l'adossement circulaire**, trouvé en regardant le défaut connu *disparaître*.
+Compter `docs/mesures/taches_ouvertes.json` comme record fait passer `+0,9984` pour adossé — or
+ce fichier est **dérivé des documents**, donc il adosse le chiffre à sa propre copie. Un
+registre qui enregistre une plainte n'est pas un enregistrement de mesure. Les registres
+dérivés sont nommés et exclus.
+
+⚠⚠⚠ **Et la limite, assertée plutôt que contournée.** Même registres dérivés exclus,
+`+0,9984` **échappe** à cette garde : il coïncide avec `0.9984133775266987`, un ratio médian
+de `proximity_scroll1.jsonl`, c'est-à-dire d'un tout autre rouleau. À quatre décimales, sur
+un corpus de plusieurs centaines de milliers de nombres, la collision est **attendue**. Régler
+le seuil jusqu'à ce que ce cas passe serait choisir un nombre pour que le cas du jour sorte,
+ce que ce dépôt refuse partout ailleurs — deux contrôles assertent donc la collision, pour
+qu'elle ne soit pas oubliée.
+
+⭐ Ce qui reste vrai et utile : **un orphelin est un vrai orphelin, un adossé n'est qu'un
+candidat.** La garde a un sens et un seul, et son pouvoir croît avec le nombre de décimales
+publiées. La levée complète demanderait de rapprocher chaque chiffre du record que son
+**propre document nomme** — un travail à part, pas un réglage de seuil.
+
+⚠ La suite ne lance que `--verifier` : le balayage nu sort en **1** sur les 56 entrées
+existantes, et brancher un échec connu dans la suite la rendrait rouge en permanence, donc
+ignorée. Le triage des 56 est désormais une tâche **dimensionnée** au lieu d'un manque vague.
+
 ---
 
 ## Reproduire

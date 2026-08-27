@@ -1,0 +1,104 @@
+{
+  "decimales_minimales": 3,
+  "registres_derives_ecartes": [
+    "taches_ouvertes.json",
+    "temoins.json"
+  ],
+  "documents": {
+    "03_reproduction_windcheck.md": [
+      "99,9989"
+    ],
+    "12_profondeur_de_surface.md": [
+      "4,927"
+    ],
+    "19_ecarter_avant_de_payer.md": [
+      "5,061",
+      "5,361",
+      "5,260",
+      "5,456"
+    ],
+    "20_le_champ_de_correction.md": [
+      "4,865",
+      "1,255",
+      "1,608"
+    ],
+    "21_texte_de_soumission.md": [
+      "19.8219",
+      "19.8387",
+      "20.7471",
+      "+0.8729"
+    ],
+    "24_premiere_trace_rouleau_du_prix.md": [
+      "8,476817"
+    ],
+    "25_une_graine_choisie_sur_la_planeite.md": [
+      "19,821",
+      "19,834872",
+      "19,821850",
+      "19,838660",
+      "19,823302",
+      "20,747079"
+    ],
+    "26_le_champ_de_direction.md": [
+      "3686,1946",
+      "19,834872",
+      "19,821850",
+      "19,838660",
+      "19,823302",
+      "20,747079",
+      "21,561857",
+      "19,782036",
+      "19,773946",
+      "19,773791",
+      "22,431",
+      "22,836"
+    ],
+    "27_ce_que_la_litterature_dit.md": [
+      "1,239"
+    ],
+    "30_le_traceur_est_un_tirage.md": [
+      "10,341790",
+      "8,699",
+      "8,476817"
+    ],
+    "38_ce_qui_bouge_avec_la_fenetre.md": [
+      "04,161"
+    ],
+    "39_le_seam_de_correction.md": [
+      "560,600"
+    ],
+    "44_ou_la_chaine_se_trouve.md": [
+      "13,024947"
+    ],
+    "48_ou_monter_lexperience.md": [
+      "3,655542"
+    ],
+    "49_alpha_ne_separe_pas_deux_pannes.md": [
+      "+0,8729"
+    ],
+    "51_une_pente_a_deux_appuis.md": [
+      "+0,8919"
+    ],
+    "54_cinq_rendus_vides.md": [
+      "3,9996",
+      "5,079"
+    ],
+    "58_resolution_ou_rouleau.md": [
+      "1,5036",
+      "1,5202",
+      "1,4352",
+      "0,9200",
+      "1,5195",
+      "1,5176",
+      "0,825755",
+      "0,488698",
+      "−1,813",
+      "−1,805"
+    ],
+    "60_la_constante_qui_rendait_le_modele_muet.md": [
+      "4,278",
+      "+1,691"
+    ]
+  },
+  "total": 56
+}
