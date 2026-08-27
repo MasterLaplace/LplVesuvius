@@ -157,6 +157,28 @@ piste, pas une lecture.** Le seul moyen d'augmenter n est de rendre plus de surf
 `PHerc1447` en publie **quatre**, une seule était rendue, et
 `src/campagnes/campagne_encre_1447.sh` rend les trois autres.
 
+### ⭐⭐ Le critère, écrit AVANT que la campagne ne rende
+
+> Ce paragraphe est commité pendant que les trois rendus tournent, pour la raison que
+> [`53`](53_le_temoin_positif_du_rendu.md) écrit en tête : *un témoin dont on n'a pas dit
+> d'avance ce qu'il condamnerait ne condamne jamais rien — il s'explique après coup.*
+
+Ce qui sera comparé n'est **pas** une part de fenêtres périodiques contre un seuil : un
+seuil serait un nombre choisi pour que le tirage du jour passe. C'est la part observée
+contre celle de la **même carte aux pixels mélangés**, à n identique, par un **Fisher exact
+unilatéral** — la direction est déclarée ici, une carte réelle devrait être *plus* périodique
+que son mélange, jamais moins.
+
+| issue | ce qu'on en conclura |
+|---|---|
+| p < 0,05 | la périodicité de `PHerc1447` n'est pas un tirage. ⚠ Ça ne dira toujours pas que c'est du **texte** — seulement que la carte est structurée là où son mélange ne l'est pas |
+| p ≥ 0,05 | on ne conclut rien, et les deux fenêtres du §4 ter restent une curiosité |
+| moins de 8 fenêtres au total | **on ne teste pas** : sous cette taille le test n'a pas la puissance de distinguer, et le lancer quand même serait fabriquer un p |
+
+⚠ Et l'issue la plus probable est la troisième : la première surface a rendu **2** fenêtres,
+la deuxième en rendra de l'ordre de **4** au vu de son étendue. Il faudra peut-être les
+quatre surfaces pour atteindre huit.
+
 ## 5. Ce qui est annulé, et ce qui tient
 
 | document | ce qu'il disait | état |

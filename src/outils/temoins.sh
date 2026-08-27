@@ -1070,6 +1070,13 @@ run "appareil d'inference"     uv run --project "$ROOT" python "$ROOT/src/xpu/in
 # le plancher partage avec `infer_ink`, pour que la copie ne derive pas.
 run "échelle des piles"        uv run python "$ROOT/src/depot/echelle_des_piles.py" --verifier
 
+# ⚠⚠⚠ LE CONTROLE DES CONTROLES. `typographie.py` imprimait « ALL PASS » et rendait 0
+# INCONDITIONNELLEMENT : elle etait verte quoi que disent ses controles, et ce lanceur la
+# comptait verte depuis toujours. Le balayage a trouve **39 batteries sur 105** dans ce cas.
+# Aucune ne cachait d'echec reel -- le defaut n'avait pas encore coute un faux vert --, mais
+# une verification qui ne peut pas echouer occupe la place d'une vraie.
+run "batteries qui peuvent échouer" uv run python "$ROOT/src/depot/batteries_incapables_dechouer.py" --verifier
+
 # ⚠⚠ La figure du bug d'échelle a un contrôle, et il porte sur ce qui la rend HONNÊTE : les
 # deux panneaux partagent leur étirement. Étirer chacun sur sa propre plage rendrait une
 # sortie constante aussi contrastée qu'une vraie carte — l'inverse de ce que la figure montre.

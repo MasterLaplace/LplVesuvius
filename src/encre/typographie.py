@@ -520,8 +520,36 @@ def verifier() -> int:
     if echecs:
         print(f"\nECHEC ({echecs} failures, {controles} checks)")
         return 1
-    print(f"ALL PASS ({echecs} failures, {controles} checks)")
-    return 0
+    # --- LE TEST DECLARE AVANT LA CAMPAGNE, et son refus ------------------------------
+    # ⚠⚠ Ces controles portent sur la borne autant que sur le calcul : avec 2 fenetres
+    # contre 2, le plus petit p atteignable vaut 1/6, donc un test lance la rendrait un
+    # nombre qui ne pouvait PAS etre significatif. Refuser est le seul comportement honnete.
+    petit = fisher_periodicite({"fenetres_periodiques": 2, "fenetres": 2},
+                               {"fenetres_periodiques": 0, "fenetres": 2})
+    v("sous huit fenetres, le test REFUSE au lieu de rendre un p", petit["p"] is None)
+    v("... et il dit pourquoi", "puissance" in (petit.get("raison") or ""))
+    v("... en rendant quand meme le tableau, pour qu'on puisse le refaire",
+      petit["table"] == [2, 0, 0, 2])
+
+    net = fisher_periodicite({"fenetres_periodiques": 10, "fenetres": 10},
+                             {"fenetres_periodiques": 0, "fenetres": 10})
+    v("une separation franche a n suffisant rend un p petit", net["p"] is not None and net["p"] < 0.01)
+    nul = fisher_periodicite({"fenetres_periodiques": 5, "fenetres": 10},
+                             {"fenetres_periodiques": 5, "fenetres": 10})
+    v("... et l'absence d'effet un p grand", nul["p"] is not None and nul["p"] > 0.4)
+    # ⚠⚠ Le controle qui verifie que le test est bien UNILATERAL dans la direction declaree :
+    # une carte MOINS periodique que son melange ne doit pas ressortir significative.
+    envers = fisher_periodicite({"fenetres_periodiques": 0, "fenetres": 10},
+                                {"fenetres_periodiques": 10, "fenetres": 10})
+    v("l'effet inverse n'est pas declare significatif", envers["p"] is not None and envers["p"] > 0.99)
+
+    # ⚠⚠⚠ Cette ligne imprimait « ALL PASS » et rendait 0 **inconditionnellement** : la
+    # batterie ne pouvait pas échouer, quoi que disent ses contrôles, et `temoins.sh` la
+    # comptait verte depuis toujours. Trouvé le 2026-08-27 en sondant un tout autre
+    # correctif — la sonde a rendu « ALL PASS (2 failures, 28 checks) », une phrase qui se
+    # contredit elle-même.
+    print(f"{'ALL PASS' if not echecs else 'FAILURES'} ({echecs} failures, {controles} checks)")
+    return 1 if echecs else 0
 
 
 def croiser_encre(cartes: list[dict], segments: list[dict], cle: str) -> dict:
@@ -648,6 +676,46 @@ def carte_npy_en_gris(chemin, reduire: int = 1):
     return np.asarray(im, dtype=np.uint8)
 
 
+N_MINIMAL_POUR_TESTER = 8
+"""Sous ce nombre de fenêtres, on NE TESTE PAS.
+
+⚠⚠ Ce n'est pas une prudence de style : avec 2 fenêtres contre 2, le p le plus petit
+qu'un Fisher unilatéral puisse rendre vaut 1/6, donc le test ne peut PAS descendre sous
+0,05 même si la séparation est parfaite. Lancer le test quand même produirait un nombre
+qui ressemble à un résultat et qui ne pouvait pas en être un. La borne est déclarée dans
+`60` avant que la campagne ne rende.
+"""
+
+
+def fisher_periodicite(reel: dict, melange: dict) -> dict:
+    """La part périodique observée est-elle distinguable de celle du mélange ?
+
+    ⚠ Unilatéral, et la direction est déclarée d'avance : une carte réelle devrait être
+    **plus** périodique que ses propres pixels mélangés, jamais moins. Un test bilatéral
+    saluerait aussi l'effet inverse, ce qui reviendrait à n'avoir pas eu d'hypothèse.
+
+    ⚠⚠ Et il REFUSE sous `N_MINIMAL_POUR_TESTER`, en disant pourquoi, plutôt que de rendre
+    un p que la taille de l'échantillon rendait inatteignable.
+    """
+    from math import comb
+
+    a, na = reel["fenetres_periodiques"], reel["fenetres"]
+    c, nc = melange["fenetres_periodiques"], melange["fenetres"]
+    if na + nc < N_MINIMAL_POUR_TESTER:
+        return {"p": None, "table": [a, na - a, c, nc - c],
+                "raison": f"{na + nc} fenêtres en tout, moins que {N_MINIMAL_POUR_TESTER} : "
+                          "le test n'a pas la puissance de descendre sous 0,05"}
+    b, d = na - a, nc - c
+    n = a + b + c + d
+    lignes, colonnes = a + b, a + c
+    total = comb(n, colonnes)
+    if total == 0:
+        return {"p": None, "table": [a, b, c, d], "raison": "tableau vide"}
+    p = sum(comb(lignes, k) * comb(n - lignes, colonnes - k) / total
+            for k in range(a, min(lignes, colonnes) + 1))
+    return {"p": p, "table": [a, b, c, d]}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -712,9 +780,23 @@ def main() -> int:
                           "reduction": a.reduire, "taille_fenetre": a.taille_fenetre})
                 lignes.append(t)
                 dire(f"  ↳ contrôle, pixels mélangés", t)
+        tests = {}
+        if a.controle_melange:
+            reels = {l["carte"]: l for l in lignes if l["rouleau"] == "nos_cartes"}
+            melanges = {l["carte"]: l for l in lignes if l["rouleau"] == "controle_melange"}
+            for nom in sorted(reels):
+                if nom not in melanges:
+                    continue
+                t = fisher_periodicite(reels[nom], melanges[nom])
+                tests[nom] = t
+                if t["p"] is None:
+                    print(f"  {nom:44} pas de test — {t['raison']}")
+                else:
+                    print(f"  {nom:44} Fisher unilatéral {t['table']} : p = {t['p']:.4f}")
         if a.json:
             a.json.parent.mkdir(parents=True, exist_ok=True)
-            a.json.write_text(_json.dumps({"cartes": lignes}, indent=2, ensure_ascii=False) + "\n")
+            a.json.write_text(_json.dumps({"cartes": lignes, "tests": tests},
+                                          indent=2, ensure_ascii=False) + "\n")
             print(f"  écrit : {a.json}")
         return 0
     if not a.dossier:

@@ -139,8 +139,11 @@ def verifier() -> int:
     if echecs:
         print(f"\nECHEC ({echecs} failures, {controles} checks)")
         return 1
-    print(f"ALL PASS ({echecs} failures, {controles} checks)")
-    return 0
+    # ⚠⚠⚠ Le verdict imprimait « ALL PASS » et rendait 0 INCONDITIONNELLEMENT :
+    # cette batterie était verte quoi que disent ses contrôles. Trente-neuf
+    # fichiers du dépôt portaient le même défaut, corrigé le 2026-08-27.
+    print(f"{'ALL PASS' if not echecs else 'FAILURES'} ({echecs} failures, {controles} checks)")
+    return 1 if echecs else 0
 
 
 def main() -> int:
