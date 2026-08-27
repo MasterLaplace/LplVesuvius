@@ -121,9 +121,21 @@ partie des treize du prix.
 | **appliquer le champ, et montrer le gain** | **ouverte** | il faut une correction qui améliore *quelque chose de mesurable* — §2.1 vient d'établir que l'ancien résultat ne dit pas le contraire. L'export n'était que la moitié amont, et elle est désormais livrée |
 | `16` — régénérer les cartes de difficulté | ⚠ **décision** | le script d'aujourd'hui n'échantillonne plus comme les artefacts publiés (64 → 108 sondes) : régénérer **déplacerait** le tableau §3. Le correctif de code est fait ; l'acte de régénérer appartient à l'auteur |
 | **transport vers une région sans vérité** | ⚠ **impossible sur ce couple** | mesuré : la face n'est périodique qu'à une taille de fenêtre où les enroulements ne rendent **aucune** fenêtre. Il n'existe aucun réglage où les deux côtés en ont |
-| **thèse forte du témoin négatif** | ⚠ **mesurée, et elle refuse** | sur PHercParis4 : ρ(positif, négatif) = **+0,9984**, σ à 2,4 % du modèle qui marche — la garde de `temoin_negatif.py` **refuse**, comme sur `46` |
-| **M1ter — isoler la cause** | ⭐⭐ **résolution ÉLIMINÉE le 2026-08-27** | → [`58`](58_resolution_ou_rouleau.md) : le pas du témoin où le modèle marche était noté 2,4 µm et vaut **7,91 µm** — il est donc déjà à **9 %** des conditions de `PHerc1447` sur les deux axes. Créditer la résolution de **dix fois** cet écart ne rend qu'un facteur **2,0** sur les **45** à expliquer. Reste **ce rouleau-ci**, seul |
+| **thèse forte du témoin négatif** | ⚠⚠ **CHIFFRE SANS RECORD** | la ligne disait « sur PHercParis4 : ρ = +0,9984, σ à 2,4 % du modèle qui marche ». Vérifié le 2026-08-27 : **aucun fichier de résultat du dépôt ne porte ce nombre** — `temoin_negatif.json` est celui de `46`, sur `PHerc1447`, et rend 0,99792. Ni les deux cartes, ni leur JSON. Elles ont probablement disparu au rangement de `data/`. Tant que la mesure n'est pas relancée, ce chiffre est une anecdote et non un résultat |
+| **M1ter — isoler la cause** | ⭐⭐ **résolution ÉLIMINÉE le 2026-08-27** | → [`58`](58_resolution_ou_rouleau.md) : le pas du témoin où le modèle marche était noté 2,4 µm et vaut **7,91 µm** — il est donc déjà à **9 %** des conditions de `PHerc1447` sur les deux axes. Créditer la résolution de **dix fois** cet écart, sur les deux axes, pénalité d'interaction comprise, ne rend qu'un facteur **2,1** sur les **45** à expliquer. Reste **ce rouleau-ci**, seul |
 | **campagnes détachées** | **dépouillée pour la piste C** | 3 verdicts sur 17 essais jugeables ; les leviers de perte n'ont laissé que `temoin/` |
+
+### ⚠⚠ Et une limite du garde-fou des chiffres, que cette ligne vient de révéler
+
+`src/depot/verifier_chiffres.py` vérifie que **chaque chiffre recalculé depuis un fichier de
+résultat apparaît dans un document**. Il ne vérifie pas — et ne peut pas vérifier — la
+réciproque : qu'un chiffre écrit dans un document ait un fichier de résultat derrière lui. Un
+nombre publié sans record est donc **invisible pour lui**, quel que soit son nombre d'étoiles.
+
+⚠ La réciproque n'est pas mécanisable telle quelle : un document en prose contient des
+centaines de nombres qui ne sont pas des mesures. Ce qui l'est, en revanche, c'est de **ne
+publier un chiffre qu'en écrivant d'abord son JSON** — la règle que ce dépôt s'applique
+partout ailleurs, et qui a été enfreinte ici une fois.
 
 ---
 

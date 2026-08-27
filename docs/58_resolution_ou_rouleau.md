@@ -165,7 +165,7 @@ compte qu'on n'a pas besoin de discuter.
 | | verdict |
 |---|---|
 | papyrus vierge | ✅ fermé par [`46`](46_le_temoin_negatif.md) §3 |
-| **résolution**, ses deux moitiés | ✅ **éliminée** : les deux objets sont à 9 % l'un de l'autre sur les deux axes, et dix fois cet écart ne rend qu'un facteur 2,0 sur 45 |
+| **résolution**, ses deux moitiés | ✅ **éliminée** : les deux objets sont à 9 % l'un de l'autre sur les deux axes, et dix fois cet écart ne rend qu'un facteur 2,1 sur 45 |
 | **ce rouleau-ci** | ⏳ **c'est ce qui reste** — et c'est désormais la seule cause en lice, non plus une parmi trois |
 
 ⚠ **Ce que ce document n'établit pas** : qu'il y ait ou non de l'encre sur `PHerc1447`. Il
