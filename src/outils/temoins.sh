@@ -1087,6 +1087,7 @@ run "liens des documents"      uv run python "$ROOT/src/depot/liens_casses.py" -
 # se transporte d'une machine à l'autre. La batterie garde aussi le contrôle qui rattache le
 # chiffre au réel : la surface entière de PHerc1447 doit retomber sur sa durée mesurée.
 run "coût d'un rendu"          uv run python "$ROOT/src/encre/cout_du_rendu.py" --verifier
+run "coût d'une fenêtre"       uv run python "$ROOT/src/encre/cout_de_la_fenetre.py" --verifier
 
 # ⚠⚠ La figure du bug d'échelle a un contrôle, et il porte sur ce qui la rend HONNÊTE : les
 # deux panneaux partagent leur étirement. Étirer chacun sur sa propre plage rendrait une
