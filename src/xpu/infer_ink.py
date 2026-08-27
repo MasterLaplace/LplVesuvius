@@ -212,6 +212,40 @@ def exiger_une_pile_exploitable(maximum: float, dtype: str) -> None:
         "ou elle a ete normalisee par le mauvais plafond")
 
 
+PERIODE_PROGRESSION = 30.0
+"""Secondes entre deux lignes de progression.
+
+⚠ La cadence est en TEMPS et non en fenêtres : ce qu'un humain veut savoir, c'est « où en
+est-on maintenant », pas « toutes les mille fenêtres » — un rendu dense et un rendu clairsemé
+n'ont pas le même nombre de fenêtres et donneraient deux cadences différentes."""
+
+
+def ligne_de_progression(faites: int, total: int, secondes: float) -> str:
+    """Où en est un rendu, et dans combien de temps il finit.
+
+    ⚠⚠ Cette fonction existe parce que l'auteur a demandé si un rendu tournait vraiment, et
+    que je ne pouvais pas répondre : `infer_ink` n'imprimait RIEN avant d'avoir fini. Un
+    rendu de deux heures et demie muet est un rendu qu'on ne peut ni suivre, ni décider
+    d'abandonner — et « il tourne » se déduisait alors du CPU, pas de l'outil.
+
+    ⚠ Le reste à faire est extrapolé du débit OBSERVÉ depuis le début, pas d'un débit
+    supposé : sur une machine partagée, le débit change en cours de route, et une estimation
+    figée mentirait exactement quand elle sert.
+    """
+    part = faites / total if total else 1.0
+    debit = faites / secondes if secondes > 0 else 0.0
+    reste = (total - faites) / debit if debit > 0 else float("inf")
+
+    def duree(s: float) -> str:
+        if s == float("inf"):
+            return "?"
+        s = int(s)
+        return f"{s // 3600}h{(s % 3600) // 60:02d}" if s >= 3600 else f"{s // 60}m{s % 60:02d}"
+
+    return (f"  {faites}/{total} fenêtres ({part:.0%})  "
+            f"écoulé {duree(secondes)}  reste ~{duree(reste)}")
+
+
 def infer(
     stack: np.ndarray,
     model,
@@ -219,6 +253,7 @@ def infer(
     batch_size: int,
     threads: int,
     device: str = "cpu",
+    progression: bool = True,
 ) -> tuple[np.ndarray, int, float]:
     """Balaie la fenetre et rend (carte d'encre, nombre de fenetres, secondes).
 
@@ -247,8 +282,17 @@ def infer(
     if device == "xpu":
         torch.xpu.synchronize()
     started = time.perf_counter()
+    dernier_rapport = started
     with torch.no_grad():
         for begin in range(0, len(positions), batch_size):
+            # ⚠ Le test de cadence est fait une fois par LOT, pas par fenêtre : un appel
+            # d'horloge par fenêtre serait du bruit dans la boucle chaude, et un lot dure
+            # de toute façon quelques centaines de millisecondes.
+            maintenant = time.perf_counter()
+            if progression and maintenant - dernier_rapport >= PERIODE_PROGRESSION:
+                dernier_rapport = maintenant
+                print(ligne_de_progression(begin, len(positions), maintenant - started),
+                      file=sys.stderr, flush=True)
             chunk = positions[begin : begin + batch_size]
             batch = np.stack([stack[:, y : y + TILE, x : x + TILE] for y, x in chunk])
             tensor = torch.from_numpy(batch).unsqueeze(1).to(device)
@@ -361,6 +405,23 @@ def verifier() -> int:
     # une commande dont tous les arguments sont valides, sans toucher aux couches.
     v("le module expose le refus a main(), pas seulement a l'appelant",
       "exiger_les_modules" in main.__code__.co_names)
+
+    # --- LA PROGRESSION, parce qu'un rendu muet ne se suit pas --------------------------
+    v("une ligne de progression dit ou on en est",
+      "50/100" in ligne_de_progression(50, 100, 10.0))
+    v("... en part aussi, pour ne pas avoir a diviser de tete",
+      "50%" in ligne_de_progression(50, 100, 10.0))
+    # ⚠⚠ Le reste est extrapole du debit OBSERVE : a moitie faite en 10 s, il reste ~10 s.
+    v("le reste est extrapole du debit observe",
+      "reste ~0m10" in ligne_de_progression(50, 100, 10.0))
+    v("... et il suit le debit, pas une constante",
+      "reste ~0m20" in ligne_de_progression(50, 100, 20.0))
+    # ⚠ Au tout debut aucun debit n'est observable : on le DIT au lieu de diviser par zero.
+    v("sans debit observable, le reste est inconnu et le dit",
+      "reste ~?" in ligne_de_progression(0, 100, 0.0))
+    v("une duree longue passe en heures", "1h00" in ligne_de_progression(1, 3601, 3600.0))
+    v("une echelle vide ne divise pas par zero",
+      "0/0" in ligne_de_progression(0, 0, 1.0))
 
     # --- LA NORMALISATION, et le bug qu'elle a coute -------------------------------------
     # ⚠⚠⚠ Ce bloc existe parce qu'une constante `65535` a rendu le modele muet sur 211 piles
@@ -482,6 +543,8 @@ def main() -> int:
     parser.add_argument("--threads", type=int, default=16)
     parser.add_argument("--device", default="auto", choices=("auto", "cpu", "xpu"),
                         help="auto retombe sur le CPU si aucun XPU ; xpu REFUSE plutot que de retomber")
+    parser.add_argument("--sans-progression", action="store_true",
+                        help="taire les lignes de progression (elles vont sur stderr)")
     parser.add_argument("--verifier", action="store_true", help="auto-test hors ligne")
     parser.add_argument("--out", type=Path, help="sortie .npy")
     args = parser.parse_args()
@@ -521,7 +584,8 @@ def main() -> int:
     model = AutoModel.from_pretrained(str(args.model), trust_remote_code=True).eval()
     model = model.to(appareil)
     prediction, windows, elapsed = infer(
-        stack, model, args.stride, args.batch_size, args.threads, appareil
+        stack, model, args.stride, args.batch_size, args.threads, appareil,
+        progression=not args.sans_progression,
     )
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
