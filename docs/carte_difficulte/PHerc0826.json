@@ -5,11 +5,45 @@
   "binaire": true,
   "seuils": {
     "0.5": {
-      "chunks": 27,
-      "median_um": 187.24,
-      "p10_um": 149.792,
+      "chunks": 19,
+      "median_um": 224.688,
+      "p10_um": 138.5576,
       "min_um": 131.068,
-      "part_sous_150um": 0.18518518518518517
+      "part_sous_150um": 0.21052631578947367
     }
-  }
+  },
+  "par_rayon": [
+    {
+      "rayon_chunks": 2,
+      "chunks": 3,
+      "median_um": 224.688
+    },
+    {
+      "rayon_chunks": 3,
+      "chunks": 4,
+      "median_um": 252.774
+    },
+    {
+      "rayon_chunks": 4,
+      "chunks": 2,
+      "median_um": 1825.59
+    },
+    {
+      "rayon_chunks": 6,
+      "chunks": 5,
+      "median_um": 243.412
+    },
+    {
+      "rayon_chunks": 7,
+      "chunks": 4,
+      "median_um": 224.688
+    },
+    {
+      "rayon_chunks": 9,
+      "chunks": 1,
+      "median_um": 140.43
+    }
+  ],
+  "chunks_avec_matiere": 25,
+  "sondes": 108
 }

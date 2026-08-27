@@ -100,6 +100,43 @@ témoin l'a aussi.
 Témoin : **`PHercParis4`**, un rouleau qu'on a su **dérouler ET lire**, même prédiction,
 pas physique quasi identique (19,2 µm contre 17,3–18,7).
 
+Refait le **2026-08-27** sur l'étendue entière (108 sondes par rouleau au lieu de 64 sur la
+moitié centrale) :
+
+| rouleau | écart médian | p10 | min | **< 150 µm** | fenêtres |
+|---|---:|---:|---:|---:|---:|
+| **PHerc1218** | **147 µm** | 121 | 121 | **50 %** | 16 |
+| **PHerc0125** | 150 µm | 135 | 131 | **52 %** | 23 |
+| **PHerc1447** | 156 µm | 138 | 121 | **38 %** | 21 |
+| **⭐ PHercParis4 — LU** | **173 µm** | **134** | **134** | **14 %** | **28** |
+| PHerc0211 | 178 µm | 150 | 131 | 25 % | 20 |
+| PHerc0257 | 187 µm | 169 | 169 | 0 % | 21 |
+| PHerc0813 | 187 µm | 150 | 131 | 14 % | 28 |
+| PHerc1203 | 187 µm | 150 | 131 | 21 % | 33 |
+| PHerc0800 | 190 µm | 156 | 156 | 0 % | 26 |
+| PHerc0191 | 206 µm | 150 | 131 | 13 % | 30 |
+| PHerc0358 | 206 µm | 150 | 131 | 15 % | 27 |
+| PHerc1545 | 206 µm | 146 | 131 | 21 % | 19 |
+| PHerc0268 | 207 µm | 173 | 156 | 0 % | 38 |
+| **PHerc0826** | **225 µm** | 139 | 131 | 21 % | 19 |
+
+⭐⭐ **Le corpus est PLUS DUR qu'on ne l'avait mesuré, et c'est le sens attendu.** Cinq
+rouleaux voient leur écart médian se desserrer (`PHerc0191`, `PHerc0257`, `PHerc0358`,
+`PHerc0826`, `PHerc1545`, de 169–187 à 187–225 µm) contre trois qui se resserrent
+(`PHerc0211`, `PHerc1218`, `PHerc1447`). Le témoin ne bouge pas d'un micromètre en médiane
+— 173 µm dans les deux — et perd 4 points de queue.
+
+⚠⚠ **Et le prix de la correction est une PERTE de puissance**, qu'il faut dire :
+l'échantillonnage complet touche beaucoup de vide, donc **chaque rouleau rend moins de
+fenêtres exploitables qu'avant** — 16 à 38 contre 27 à 62. Plus de sondes, moins de mesures.
+La limite que [`33`](33_la_carte_nest_pas_resolue.md) pose sur le classement n'est donc pas
+levée par cette correction : elle est **resserrée**.
+
+⚠ Le classement fin reste sans objet pour la même raison qu'au point 1 : cinq rouleaux
+partagent 187 µm et trois partagent 206 µm.
+
+<details><summary>L'ancien tableau, 64 sondes sur la moitié centrale (2026-08-18 → 2026-08-27)</summary>
+
 | rouleau | écart médian | p10 | min | **< 150 µm** |
 |---|---:|---:|---:|---:|
 | **PHerc0125** | **150 µm** | 132 | 131 | **59 %** |
@@ -117,10 +154,13 @@ pas physique quasi identique (19,2 µm contre 17,3–18,7).
 | **PHerc0800** | 190 µm | 173 | 138 | **2 %** |
 | **PHerc0268** | **225 µm** | 173 | 156 | **0 %** |
 
+</details>
+
 ## 4. Ce que ça dit
 
-**⚠⚠ Neuf des treize sont aussi lâches ou plus que le rouleau déjà lu.** La compression
-n'est donc **pas** ce qui les a empêchés d'être tracés — pas pour ceux-là.
+**⚠⚠ Dix des treize sont aussi lâches ou plus que le rouleau déjà lu** (neuf avant la
+correction du 2026-08-27). La compression n'est donc **pas** ce qui les a empêchés d'être
+tracés — pas pour ceux-là.
 
 > Un rouleau plus lâche que celui qu'on a su lire n'a pas d'excuse géométrique.
 
@@ -129,27 +169,35 @@ Ce qui reste comme causes candidates, non départagées ici : la **qualité du s
 qualité de la **prédiction** sur ces volumes-là, ou simplement que **personne n'a
 essayé** — 33 échantillons sur 45 n'ont aucune surface tracée (`00` §6).
 
-**🎯 Et la réponse actionnable :** **`PHerc0268` et `PHerc0800`** sont les plus lâches —
-**0 % et 2 %** de zones sous 150 µm, contre 18 % pour le témoin. Ce sont eux qu'on
-attaquerait en premier si la géométrie était le seul critère.
+⭐ **La première de ces trois a avancé depuis** :
+[`59`](59_la_campagne_plutot_que_le_rouleau.md) mesure sur les 45 rouleaux que ceux dont le
+dépôt publie une détection d'encre ont **86 %** de chances d'avoir un scan fin à courte
+propagation, contre **29 %** pour les autres (Fisher unilatéral, p = 0,0081). La différence
+d'énergie que ce paragraphe nommait sans la quantifier fait partie d'un écart de campagne
+plus large, et c'est cette campagne, pas le rouleau, qui se teste et qui s'achète.
 
-⚠ À l'autre bout, **`PHerc0125`** a **59 %** de ses zones sous 150 µm : c'est le seul du
-lot nettement plus comprimé que le témoin, et le seul pour lequel « c'est trop serré »
-est une explication plausible.
+**🎯 Et la réponse actionnable :** **`PHerc0257`, `PHerc0800` et `PHerc0268`** sont les plus
+lâches — **0 %** de zones sous 150 µm tous les trois, contre **14 %** pour le témoin. Ce
+sont eux qu'on attaquerait en premier si la géométrie était le seul critère. ⚠ Avant la
+correction, la paire nommée ici était `PHerc0268` et `PHerc0800` (0 % et 2 %) ; `PHerc0257`
+les rejoint en passant de 21 % à 0 %, ce qui est le plus gros déplacement du tableau.
+
+⚠ À l'autre bout, **`PHerc0125`** (52 %) et **`PHerc1218`** (50 %) sont les deux nettement
+plus comprimés que le témoin — avant la correction, `PHerc0125` était seul à 59 %. Ce sont
+les deux pour lesquels « c'est trop serré » est une explication plausible.
 
 ## 5. ⚠ Ce que la mesure ne dit PAS
 
 1. **Elle est quantifiée** : au niveau 1 les valeurs tombent sur 121 / 131 / 138 / 150 /
    156 / 169 / 173 / 187 / 190 / 225 µm, c'est-à-dire 7 à 12 voxels. Le **classement
    fin** entre deux rouleaux à 187 µm n'a pas de sens ; les **extrêmes** en ont un.
-2. ⚠ **27 chunks par rouleau** — *nombre **nominal**, celui que le script demande ;
-   l'échantillonnage réel varie d'un rouleau à l'autre, et **les artefacts ne
-   l'enregistrent pas** (`docs/carte_difficulte/*.json` ne porte que `zarr`, `level`,
-   `voxel_um`, `binaire`, `seuils`). ⏳ À corriger dans le script plutôt qu'ici : un
-   artefact de mesure doit porter le nombre de chunks réellement sondés* —, pris dans le
-   tiers central en z et la moitié centrale en
-   x/y. C'est un sondage, pas une carte complète — les bords et le cœur ne sont pas
-   couverts, et c'est justement au cœur qu'un rouleau s'effondre.
+2. ✅ **Corrigé le 2026-08-27, dans le script puis dans les artefacts.** La limite disait
+   *« 27 chunks par rouleau — nombre **nominal** ; l'échantillonnage réel varie et les
+   artefacts ne l'enregistrent pas »*. Chaque JSON porte désormais `sondes` (108) et
+   `chunks_avec_matiere` (16 à 38 selon le rouleau), et le balayage couvre **toute**
+   l'étendue en x/y au lieu de sa moitié centrale. Le tableau du §3 a été refait dessus ;
+   l'ancien est conservé juste en dessous, parce que l'écart entre les deux **est** le
+   résultat de la correction.
 3. ⚠ **La médiane et la queue ne classent pas pareil** : `PHerc1545` et `PHerc0257` ont
    la même médiane (169 µm) et **42 % contre 21 %** de zones serrées. La colonne
    « < 150 µm » porte plus d'information que la médiane, et il faut lire les deux.

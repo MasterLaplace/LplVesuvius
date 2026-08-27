@@ -5,6 +5,63 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+## ⭐⭐⭐⭐ LA CAMPAGNE DE SCAN, PAS LE ROULEAU — et deux tâches fermées avec
+
+[`59`](docs/59_la_campagne_plutot_que_le_rouleau.md), 2026-08-27. `58` avait éliminé la
+résolution et laissé « ce rouleau-ci », un mot qui ne se teste pas et ne s'achète pas.
+
+Les noms de volumes du dépôt public portent trois grandeurs — pas, distance de propagation,
+énergie — et personne ne les avait lues ensemble. Sur les **45 rouleaux**, en demandant au
+dépôt (et non à notre dossier de téléchargements) s'il publie une détection d'encre :
+
+| | rouleaux | avec un scan fin à courte propagation |
+|---|---:|---:|
+| le dépôt publie de l'encre | 7 | **6 (86 %)** |
+| il n'en publie pas | 38 | **11 (29 %)** |
+
+**Fisher unilatéral sur `[6, 1, 11, 27]` : p = 0,0081.** Médiane de volumes : **3 contre 1**.
+Un rouleau dont on lit l'encre est un rouleau qu'on a scanné plusieurs fois.
+
+⚠⚠ La première version de la mesure était un fait sur NOUS : `data/encre/` contient ce que
+`fetch_cartes_encre.sh` a téléchargé sur demande, donc un rouleau absent peut n'avoir jamais
+été demandé. Les deux critères sont gardés côte à côte et le champ `critere` dit lequel a
+décidé.
+
+⚠ Ce que ça n'établit pas, dit à chaque usage : publier une carte n'est pas « le modèle de
+2023 répond » ; les trois grandeurs co-varient par campagne donc aucune n'est isolée ; et
+l'ordre causal pourrait être inverse — un rouleau peut n'avoir qu'un scan de repérage parce
+que personne n'y a encore lu de texte.
+
+### Les deux décisions que l'auteur a débloquées, faites
+
+**M4 — fermée sur sa branche réfutée.** `12`:259 en proposait deux dès l'origine, « un volume
+plus épais **ou** en corrigeant la trace ». La première est réfutée deux fois : `20` §9
+(élargir ajoute des feuilles) et `58` §5 (doubler l'épaisseur coûte **40,8 %** de la réponse
+du modèle d'encre). Plus profond n'est pas inutile, c'est **nuisible au seul consommateur en
+aval**. La seconde branche, corriger la trace, est le fil vivant.
+
+**`16` — les 14 cartes régénérées, et le tableau §3 a bougé.** Le balayage couvre désormais
+**toute** l'étendue en x/y (108 sondes) au lieu de sa moitié centrale (64), et chaque
+artefact porte `sondes` et `chunks_avec_matiere`. Cinq rouleaux se desserrent, trois se
+resserrent, le témoin ne bouge pas d'un micromètre en médiane (173 µm). **Dix des treize**
+sont désormais aussi lâches ou plus que le rouleau déjà lu, contre neuf. `PHerc0257` passe de
+21 % à **0 %** de zones sous 150 µm et rejoint `PHerc0268` et `PHerc0800` en tête des plus
+lâches. L'ancien tableau est conservé dans un repli, parce que l'écart entre les deux **est**
+le résultat de la correction.
+
+⚠⚠ **Et le prix de la correction est une PERTE de puissance** : l'échantillonnage complet
+touche beaucoup de vide, donc chaque rouleau rend **moins** de fenêtres exploitables — 16 à
+38 contre 27 à 62. Plus de sondes, moins de mesures. La limite de `33` sur le classement
+n'est pas levée, elle est resserrée.
+
+⚠ Et `carte_difficulte.sh` lisait sa liste de clés dans `/tmp/pred_prix.txt`, un fichier que
+rien ne produit et qui n'existe plus : la commande « Reproduire » de `16` était **morte**.
+Elle dérive désormais clés et voxels par `apparier_volumes.py --pour-campagne`, et **sort non
+nul** si elle produit moins d'artefacts que la cohorte plus son témoin — le premier run en a
+sauté un, `PHerc1203`, en silence, avec un « termine » à la fin.
+
+---
+
 ## ⭐⭐⭐⭐⭐ M1ter — LA RÉSOLUTION EST ÉLIMINÉE, et le chiffre qui portait la question était faux
 
 [`58`](docs/58_resolution_ou_rouleau.md), 2026-08-27. Trois causes restaient à l'inertie du
@@ -1680,7 +1737,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 138 batteries, 3704 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 138 batteries, 3705 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)

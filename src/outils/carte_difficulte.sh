@@ -18,6 +18,7 @@ set -u
 cd "$(dirname "$0")/../.." || exit 2
 OUT=${1:-docs/carte_difficulte}
 mkdir -p "$OUT"
+MANQUANTS=""
 mesure() {  # rouleau  voxel  cle
   local f="$OUT/$1.json"
   [ -s "$f" ] && { echo "  $1 deja fait"; return; }
@@ -38,8 +39,13 @@ for s in $(uv run python -c "
 import sys; sys.path.insert(0, 'src/volume')
 import apparier_volumes as av
 print(' '.join(r for r in av.ROULEAUX if r != 'PHerc0139'))"); do
-  ligne=$(uv run python src/volume/apparier_volumes.py --pour-campagne "$s" 2>/dev/null) || {
-    echo "=== $s : appariement non determine, saute ==="; continue; }
+  # ⚠⚠ `--voxel-um 9.0` (tolerance 1,0) demande le scan de la COHORTE : les treize sont a
+  # 8,640 ou 9,362 µm, et `PHerc1203` publie EN PLUS un scan a 2,403 µm. Sans ce choix il
+  # est refuse comme ambigu et disparait du tableau -- ce qui est arrive au premier run, en
+  # silence, avec un « termine » a la fin. La raison est celle qu'ecrit `choisir` : un
+  # treizieme rouleau pris a une autre resolution n'est plus comparable aux douze autres.
+  ligne=$(uv run python src/volume/apparier_volumes.py --pour-campagne "$s" --voxel-um 9.0 2>/dev/null) || {
+    echo "=== $s : appariement non determine, saute ==="; MANQUANTS="$MANQUANTS $s"; continue; }
   k=$(cut -d' ' -f1 <<<"$ligne")
   v=$(cut -d' ' -f3 <<<"$ligne")
   echo "=== $s (voxel $v µm) ==="
@@ -48,4 +54,16 @@ done
 echo "=== TEMOIN : PHercParis4, deroule et LU ==="
 mesure PHercParis4 9.600 \
   "PHercParis4/representations/predictions/surfaces/20260411134726-surface-20260413222639-surface-m7-L2-th0.2.zarr"
-echo "termine"
+# ⚠⚠ Une campagne qui saute un rouleau et imprime « termine » se lit comme une campagne
+# complete. Le compte attendu est celui de la cohorte plus son temoin ; en dessous, on SORT
+# non nul et on nomme ce qui manque.
+N=$(ls "$OUT"/*.json 2>/dev/null | wc -l)
+ATTENDU=$(uv run python -c "
+import sys; sys.path.insert(0, 'src/volume')
+import apparier_volumes as av
+print(len([r for r in av.ROULEAUX if r != 'PHerc0139']) + 1)")
+if [ "$N" -lt "$ATTENDU" ]; then
+  echo "INCOMPLET : $N artefacts sur $ATTENDU attendus —$MANQUANTS" >&2
+  exit 1
+fi
+echo "termine : $N artefacts sur $ATTENDU"
