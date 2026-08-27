@@ -1063,6 +1063,17 @@ run "poids recuperable"        uv run --project "$ROOT" python "$ROOT/src/depot/
 # d'un second environnement, et la regle qui le gouverne -- « auto » retombe, « xpu » REFUSE --
 # est une fonction pure qui prend la disponibilite en argument, donc elle se verifie ici.
 run "appareil d'inference"     uv run --project "$ROOT" python "$ROOT/src/xpu/infer_ink.py" --verifier
+
+# ⚠⚠ L ECHELLE DES PILES. Une constante `65535` a rendu le modele muet sur 211 piles uint8
+# de ce depot, et la panne etait silencieuse : une constante en sortie se lit comme « il n y
+# a pas d encre ici ». Cette batterie garde la regle -- le plafond est celui du TYPE -- et
+# le plancher partage avec `infer_ink`, pour que la copie ne derive pas.
+run "échelle des piles"        uv run python "$ROOT/src/depot/echelle_des_piles.py" --verifier
+
+# ⚠⚠ La figure du bug d'échelle a un contrôle, et il porte sur ce qui la rend HONNÊTE : les
+# deux panneaux partagent leur étirement. Étirer chacun sur sa propre plage rendrait une
+# sortie constante aussi contrastée qu'une vraie carte — l'inverse de ce que la figure montre.
+run "figure de l'échelle"      uv run python "$ROOT/src/figures/figure_echelle.py" --verifier
 # ⚠⚠ Le point d entree du depot. Ce qu il garantit tient en une phrase : `lplv <verbe> --help`
 # EXECUTE le module avec `--help` au lieu de re-decrire son argparse, donc l aide ne peut pas
 # perimer. Ses trois controles porteurs : un nom revendique deux fois est REFUSE (une ambiguite

@@ -53,7 +53,16 @@ témoin trompe le détecteur, c'est qu'il est éteint des deux côtés. Deux car
 donnent un rapport de dispersions proche de 1, exactement comme deux cartes riches
 équivalentes.
 
-## 3. ⭐⭐ Une thèse plus étroite, elle, est établie
+> ⚠⚠⚠ **À REFAIRE — le contrôle positif de cette expérience était plat pour une raison
+> instrumentale.** Les deux piles qu'elle compare (`data/couches/PHerc1447_20250702235910`
+> et `data/leur_graine/rendu_41`) sont **uint8**, et le lecteur les divisait par 65535 :
+> le modèle recevait du noir dans les deux cas. Un détecteur muet rend évidemment « la même
+> carte » sur deux entrées quelconques, donc **ρ = +0,9979 ne dit rien sur la géométrie** —
+> il dit que les deux entrées étaient également noires. Voir
+> [`60`](60_la_constante_qui_rendait_le_modele_muet.md). Le texte ci-dessous est conservé tel
+> qu'il a été publié.
+
+## 3. ⭐⭐ Une thèse plus étroite, elle, est établie — *(à refaire)*
 
 Le rapport des dispersions ne peut pas faire la différence entre *deux cartes de même
 amplitude* et *la même carte*. C'est pourtant là qu'est la question restante : un détecteur

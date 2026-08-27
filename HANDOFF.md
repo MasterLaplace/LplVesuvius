@@ -5,6 +5,52 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+## ⚠⚠⚠⚠ UNE CONSTANTE RENDAIT LE MODÈLE MUET — et elle a fondé un résultat négatif publié
+
+[`60`](docs/60_la_constante_qui_rendait_le_modele_muet.md), 2026-08-27. **Le plus gros
+résultat de la journée, et il annule une conclusion de ce dépôt.**
+
+`src/xpu/infer_ink.py` normalisait par la constante `65535` — juste pour du **uint16**, et
+fausse d'un facteur **257** pour du **uint8**. Or l'arbre contient **3 piles uint16** (les
+stacks *publiés* de `data/layers/`) et **211 uint8** (tout ce que `vc_render_tifxyz` rend,
+tout ce que `zarr_vers_couches.py` écrit). ⭐⭐⭐ **Le partage « le modèle répond / le modèle
+est inerte » suivait EXACTEMENT ce partage-là.**
+
+Un modèle à qui l'on donne du noir rend une constante, et une constante se lit comme « il n'y
+a pas d'encre ici ». La panne ne ressemblait pas à une panne, elle ressemblait à un résultat.
+
+| | avant | après | contre le témoin |
+|---|---:|---:|---:|
+| **`PHerc1447` — un rouleau du prix** | σ **0,0171** | σ **0,6558** | **1,2×** |
+| `PHerc0172` — 53 keV, hors des treize | étendue 0,207 | σ **1,0217** | **0,8×** |
+| Scroll 1 — le témoin | σ 0,7712 | σ 0,7712 (inchangé) | 1,0× |
+
+⭐ Le correctif est vérifié dans les deux sens : sur uint8 il rend **exactement** ce que la
+remise à l'échelle manuelle rend, et sur uint16 il ne bouge **rien** (`−1,778 / −1,559 /
++1,691` avant et après, au chiffre près).
+
+**Ce que ça renverse** : `36` §5bis (M1ter, réponse négative) est **ANNULÉ** ; `46` (témoin
+négatif) est **à refaire**, son contrôle positif était noir ; `54` (cinq rendus vides) est
+**à relire**. ⭐ `58` **tient** — son échelle de dégradation tourne sur les piles uint16
+publiées, donc hors du bug ; ce qui tombe est sa prémisse d'entrée, il n'y a plus de facteur
+45 à expliquer.
+
+⚠ **Répondre n'est pas lire.** σ dit que le modèle produit de la structure ; que ce soit des
+lettres demande une fenêtre bien plus large — à 8,64 µm, 1024 px font 8,8 mm, quatre lettres
+— et le juge calibré de `09`. **C'est la mesure suivante.**
+
+⚠⚠ Et le premier jet de contrôles était **incapable d'attraper le bug** : il portait sur la
+règle (« 255, 65535, rapport 257 ») sans traverser `load_layer_stack`, et il est resté vert
+quand j'ai remis la constante pour le sonder. Le contrôle qui manquait écrit **deux vraies
+piles**, une par type, et exige que le modèle reçoive les mêmes valeurs. Plus deux refus :
+une pile dont le maximum normalisé est sous 1/64 de la pleine échelle, et une pile dont les
+couches changent de type.
+
+⭐ Nouvel outil : `src/depot/echelle_des_piles.py` — le coup d'œil qui a trouvé le bug, devenu
+une batterie. Nouvelle figure : `src/figures/figure_echelle.py`.
+
+---
+
 ## ⚠⚠⚠ LA CAMPAGNE DE SCAN : UNE PISTE OUVERTE ET REFERMÉE LE MÊME JOUR
 
 [`59`](docs/59_la_campagne_plutot_que_le_rouleau.md), 2026-08-27. `58` avait éliminé la
@@ -1744,7 +1790,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 138 batteries, 3712 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 140 batteries, 3744 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)

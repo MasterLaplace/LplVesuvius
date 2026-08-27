@@ -146,6 +146,7 @@ def load_layer_stack(layers_dir: Path, start: int, crop: tuple[int, int, int, in
     """
     top, left, height, width = crop
     stack = np.zeros((FRAMES, height, width), dtype=np.float32)
+    stack_dtype = None
     for index, couche in enumerate(indices_des_couches(start, pas)):
         path = layers_dir / f"{couche:02d}.tif"
         if not path.is_file():
@@ -153,11 +154,62 @@ def load_layer_stack(layers_dir: Path, start: int, crop: tuple[int, int, int, in
         with tifffile.TiffFile(path) as handle:
             page = handle.pages[0]
             full = page.asarray()
+            # ⚠ Le type est relu a CHAQUE couche et doit etre le meme : une pile dont une
+            # couche est uint8 et une autre uint16 serait normalisee de deux facons, et la
+            # panne se lirait comme une bande sombre dans la carte d'encre.
+            if stack_dtype is not None and full.dtype != stack_dtype:
+                raise InferenceError(
+                    f"couche {couche} en {full.dtype} alors que la pile est en {stack_dtype}")
+            stack_dtype = full.dtype
             stack[index] = full[top : top + height, left : left + width].astype(np.float32)
             del full
-    # Le modele a ete entraine sur des entrees normalisees a [0, 1] depuis du
-    # uint16 ; garder l'echelle brute donnerait des activations hors domaine.
-    return stack / 65535.0
+    # ⚠⚠ La normalisation est celle du TYPE de la pile, jamais une constante. Elle valait
+    # `/ 65535.0` en dur, ce qui est juste pour du uint16 et divise une pile **uint8 par
+    # 257 de trop** : le modele recevait alors des valeurs autour de 0,002 au lieu de 0,6,
+    # c'est-a-dire du noir, et rendait une constante.
+    #
+    # ⚠⚠⚠ Mesure du 2026-08-27, et elle renverse plusieurs resultats de ce depot : les
+    # seules piles uint16 de l'arbre sont les TROIS stacks publies de `data/layers/`, et les
+    # **211** autres -- tout ce que `vc_render_tifxyz` rend et tout ce que
+    # `zarr_vers_couches.py` ecrit -- sont uint8. Le partage « le modele repond / le modele
+    # est inerte » suivait EXACTEMENT ce partage-la. Meme fenetre, meme code, seule
+    # l'echelle changeant : etendue de sortie **0,207 → 4,278**.
+    #
+    # ⭐ Pour du uint16 la valeur est identique a l'ancienne, donc aucun resultat publie sur
+    # les piles publiees ne bouge. C'est ce qui rend le correctif verifiable : il doit
+    # changer les uint8 et ne rien changer d'autre.
+    plafond = float(np.iinfo(stack_dtype).max) if stack_dtype is not None else 65535.0
+    normalisee = stack / plafond
+    exiger_une_pile_exploitable(float(normalisee.max()), str(stack_dtype))
+    return normalisee
+
+
+PLEINE_ECHELLE_MINIMALE = 1.0 / 64.0
+"""En dessous, une pile n'utilise pas sa propre plage et le modele voit du noir.
+
+⚠⚠ Ce n'est pas un seuil regle sur les donnees du jour, et c'est ce qui le rend defendable :
+une pile mal mise a l'echelle d'un facteur 257 a un maximum de 255/65535 = 0,0039, donc
+**deux fois moins que la borne la plus lache qu'on puisse ecrire**. Toute erreur d'echelle
+d'un facteur 64 ou plus tombe dessous ; aucun scan reel n'y tombe -- les trois piles uint16
+de l'arbre montent a 1,00 et les piles uint8 aussi.
+"""
+
+
+def exiger_une_pile_exploitable(maximum: float, dtype: str) -> None:
+    """Refuse une pile que le modele ne pourrait lire que comme du noir.
+
+    ⚠⚠ Ce refus existe parce que la panne qu'il attrape a ete SILENCIEUSE : le modele rendait
+    une constante, et une constante se lit comme « il n'y a pas d'encre ici ». Elle a tenu
+    dans ce depot le temps de fonder un resultat negatif publie (`36` §5bis). Un refus qui
+    nomme le type et le maximum observe rend la meme panne evidente en une ligne.
+    """
+    if maximum >= PLEINE_ECHELLE_MINIMALE:
+        return
+    raise InferenceError(
+        f"pile inexploitable : apres normalisation son maximum vaut {maximum:.5f}, "
+        f"soit moins de 1/64 de la pleine echelle (type lu : {dtype}). "
+        "Deux causes possibles, et les deux se voient ici : la pile est vide, "
+        "ou elle a ete normalisee par le mauvais plafond")
 
 
 def infer(
@@ -309,6 +361,89 @@ def verifier() -> int:
     # une commande dont tous les arguments sont valides, sans toucher aux couches.
     v("le module expose le refus a main(), pas seulement a l'appelant",
       "exiger_les_modules" in main.__code__.co_names)
+
+    # --- LA NORMALISATION, et le bug qu'elle a coute -------------------------------------
+    # ⚠⚠⚠ Ce bloc existe parce qu'une constante `65535` a rendu le modele muet sur 211 piles
+    # de ce depot pendant des semaines. Les controles portent sur la REGLE, pas sur une
+    # valeur : ce qui doit tenir est « le plafond est celui du type », et il se verifie sur
+    # les deux types que l'arbre contient.
+    import numpy as _np
+    v("le plafond d'un uint16 est 65535", float(_np.iinfo(_np.uint16).max) == 65535.0)
+    v("... et celui d'un uint8 est 255", float(_np.iinfo(_np.uint8).max) == 255.0)
+    # ⚠⚠ Le rapport est 257, et c'est le facteur exact dont une pile uint8 etait assombrie.
+    v("les deux plafonds different d'un facteur 257",
+      float(_np.iinfo(_np.uint16).max) / float(_np.iinfo(_np.uint8).max) == 257.0)
+
+    # Le controle qui compte : une meme image, ecrite dans les deux types, doit arriver au
+    # modele avec la MEME valeur. C'est ce que la constante ne faisait pas.
+    huit = _np.array([[0, 128, 255]], dtype=_np.uint8)
+    seize = (huit.astype(_np.uint16) * 257)
+    n8 = huit / float(_np.iinfo(huit.dtype).max)
+    n16 = seize / float(_np.iinfo(seize.dtype).max)
+    v("la meme image en uint8 et en uint16 arrive normalisee pareil",
+      bool(_np.allclose(n8, n16, atol=1e-6)))
+    v("... alors qu'avec la constante l'ecart etait d'un facteur 257",
+      abs(float((huit / 65535.0).max()) * 257 - float(n8.max())) < 1e-6)
+    # ⚠ Et la borne haute reste 1 : une normalisation qui deborderait mettrait le modele
+    # hors de son domaine d'entrainement, l'autre facon de se tromper.
+    v("une pile pleine echelle arrive a 1, jamais au-dela", float(n8.max()) == 1.0)
+
+    # ⚠⚠ ET LE CONTROLE QUI PORTE SUR LE CHEMIN REEL. Les trois ci-dessus portent sur la
+    # REGLE et sont tous restes verts quand j'ai remis la constante `65535` pour les sonder :
+    # une batterie qui ne traverse pas `load_layer_stack` ne peut pas attraper le bug pour
+    # lequel elle est ecrite. Celui-ci ecrit deux vraies piles, une par type, et exige que le
+    # modele recoive les MEMES valeurs.
+    import tempfile as _tf
+    import tifffile as _tif
+    motif = _np.tile(_np.linspace(0, 255, 64, dtype=_np.uint8), (64, 1))
+    with _tf.TemporaryDirectory() as d8, _tf.TemporaryDirectory() as d16:
+        for i in range(FRAMES):
+            _tif.imwrite(Path(d8) / f"{i:02d}.tif", motif)
+            _tif.imwrite(Path(d16) / f"{i:02d}.tif", motif.astype(_np.uint16) * 257)
+        a8 = load_layer_stack(Path(d8), 0, (0, 0, 64, 64))
+        a16 = load_layer_stack(Path(d16), 0, (0, 0, 64, 64))
+        v("une pile uint8 et la MEME en uint16 arrivent identiques au modele",
+          bool(_np.allclose(a8, a16, atol=1e-6)))
+        v("... et toutes deux montent bien a la pleine echelle",
+          abs(float(a8.max()) - 1.0) < 1e-6 and abs(float(a16.max()) - 1.0) < 1e-6)
+
+        # ⚠ Une pile dont les couches changent de type en cours de route est refusee : elle
+        # serait normalisee de deux facons et la panne se lirait comme une bande sombre.
+        _tif.imwrite(Path(d8) / "05.tif", motif.astype(_np.uint16) * 257)
+        try:
+            load_layer_stack(Path(d8), 0, (0, 0, 64, 64))
+            v("une pile de types melanges est refusee", False)
+        except InferenceError as e:
+            v("une pile de types melanges est refusee", True)
+            v("... et le refus nomme la couche fautive", "5" in str(e))
+
+    # --- le refus d'une pile que le modele lirait comme du noir --------------------------
+    ok = True
+    try:
+        exiger_une_pile_exploitable(1.0, "uint16")
+    except InferenceError:
+        ok = False
+    v("une pile qui atteint la pleine echelle passe", ok)
+    ok = True
+    try:
+        exiger_une_pile_exploitable(0.02, "uint8")
+    except InferenceError:
+        ok = False
+    v("... et une pile sombre mais exploitable aussi", ok)
+    try:
+        # 255 / 65535 : exactement ce qu'une pile uint8 divisee par 65535 rend.
+        exiger_une_pile_exploitable(255.0 / 65535.0, "uint8")
+        v("une pile assombrie d'un facteur 257 est REFUSEE", False)
+    except InferenceError as e:
+        v("une pile assombrie d'un facteur 257 est REFUSEE", True)
+        v("... et le refus nomme le type lu", "uint8" in str(e))
+        v("... et il nomme les DEUX causes possibles",
+          "vide" in str(e) and "plafond" in str(e))
+    try:
+        exiger_une_pile_exploitable(0.0, "uint16")
+        v("une pile entierement vide est refusee", False)
+    except InferenceError:
+        v("une pile entierement vide est refusee", True)
 
     # --- le pas de profondeur ---------------------------------------------------------
     v("sans pas, les couches sont consecutives",

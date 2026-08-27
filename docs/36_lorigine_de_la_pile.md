@@ -140,7 +140,16 @@ chaîne**, sur une surface qu'on vient de mesurer à 17 µm de sa feuille :
 > plus contrastée). Le treillis de fibres croisées, les trous, les bords déchirés. **La
 > chaîne déroule et aplatit ; ce n'est pas le maillon qui manque.**
 
-### ⚠⚠ M1ter, répondu, et la réponse est négative
+### ⚠⚠⚠ M1ter — CETTE SECTION EST ANNULÉE, voir [`60`](60_la_constante_qui_rendait_le_modele_muet.md)
+
+> **Le σ de 0,0171 ci-dessous mesurait une erreur d'échelle de notre côté, pas le rouleau.**
+> `infer_ink.load_layer_stack` normalisait par la constante `65535`, juste pour du uint16 —
+> or cette pile est **uint8**, donc elle arrivait au modèle **257 fois trop sombre**. La même
+> pile, la même fenêtre, le même modèle, à l'échelle corrigée : **σ = 0,6558**, soit **1,2
+> fois** le témoin. Le reste de la section est conservé tel quel, parce que c'est ce qui a
+> été publié et que l'écart entre les deux est le résultat.
+
+### ⚠⚠ M1ter, répondu, et la réponse est négative — *(texte du 2026-08-20, annulé)*
 
 `29` marquait M1ter « **avant tout le reste** » : *l'encre est-elle lisible à 9 µm ?* Ce
 rendu permet de le mesurer sur un rouleau du prix, sur une **bonne** surface — le modèle du

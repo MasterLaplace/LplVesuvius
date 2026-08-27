@@ -1408,6 +1408,31 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                      f"**{len(pr['jamais_traces'])}** des treize",
                      f"dix des treize"], camp.name))
 
+    # ⚠⚠⚠ La correction d'echelle, et les DEUX chiffres qu'il faut garder ensemble : celui
+    # qui a ete publie (0,0171) et celui que la meme pile rend une fois lue correctement.
+    # Publier le second sans le premier effacerait la trace de l'erreur.
+    corr = _source(racine, "m1ter_apres_correction_echelle.json")
+    if corr.exists():
+        d = json.loads(corr.read_text())
+        ajoute("sigma de PHerc1447 apres correction d'echelle", d["cible"]["sigma"], 4, corr.name)
+        av = (d.get("contexte") or {}).get("avant") or {}
+        if av.get("sigma"):
+            ajoute("sigma de PHerc1447 tel qu'il avait ete publie", av["sigma"], 4, corr.name)
+        # ⚠ Le rapport est celui que `comparer_encre` ECRIT (temoin / cible), jamais un
+        # rapport recalcule ici : deux definitions du meme rapport finiraient par s'inverser,
+        # et c'est exactement ce qui vient d'arriver.
+        out.append(("PHerc1447 contre le temoin, apres correction",
+                    [f"{fr(d['rapport_sigma'], 1)}×", f"**{fr(d['rapport_sigma'], 1)}×**"],
+                    corr.name))
+
+    gen = _source(racine, "generalisation_PHerc0172.json")
+    if gen.exists():
+        d = json.loads(gen.read_text())
+        ajoute("sigma de PHerc0172, echelle corrigee", d["cible"]["sigma"], 4, gen.name)
+        out.append(("PHerc0172 contre le temoin",
+                    [f"{fr(d['rapport_sigma'], 1)}×", f"**{fr(d['rapport_sigma'], 1)}×**"],
+                    gen.name))
+
     p = _source(racine, "cout_echelle.json")
     if p.exists():
         d = json.loads(p.read_text())

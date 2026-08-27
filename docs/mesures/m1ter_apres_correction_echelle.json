@@ -1,0 +1,38 @@
+{
+  "question": "M1ter — l'encre est-elle lisible a 9 um ? (reprise apres le bug d'echelle)",
+  "contexte": {
+    "bug": "load_layer_stack normalisait par la constante 65535 ; la pile est uint8, donc 257 fois trop sombre",
+    "avant": {
+      "sigma": 0.017066892236471176,
+      "etendue": 0.26383793354034424,
+      "source": "docs/mesures/m1ter_encre_a_9um.json"
+    },
+    "fenetre_px": [
+      1024,
+      1024
+    ],
+    "couche_depart": 3,
+    "couches": 26
+  },
+  "temoin_positif": {
+    "nom": "Scroll 1 (AUC 0,925, 7,91 um)",
+    "fichier": "ink_segment_complet.npy",
+    "n": 44725780,
+    "min": -1.8620885610580444,
+    "median": -1.1304415464401245,
+    "max": 2.590935707092285,
+    "etendue": 4.453024387359619,
+    "sigma": 0.7711818814277649
+  },
+  "cible": {
+    "nom": "PHerc1447, MEME pile, apres correction de l'echelle",
+    "fichier": "ink_PHerc1447_corrige.npy",
+    "n": 1018081,
+    "min": -1.8252731561660767,
+    "median": -1.4221372604370117,
+    "max": 2.457029104232788,
+    "etendue": 4.282302379608154,
+    "sigma": 0.6557546257972717
+  },
+  "rapport_sigma": 1.176022022704233
+}

@@ -1,0 +1,39 @@
+{
+  "question": "le modele de 2023 repond-il hors de Scroll 1 ?",
+  "contexte": {
+    "segment": "20250917143559-w062",
+    "fenetre_px": [
+      1024,
+      1024
+    ],
+    "couche_depart": 4,
+    "couches": 26,
+    "avant_correction": {
+      "min": -1.215,
+      "med": -1.121,
+      "max": -1.008,
+      "etendue": 0.207
+    }
+  },
+  "temoin_positif": {
+    "nom": "Scroll 1 (AUC 0,925, 7,91 um)",
+    "fichier": "ink_segment_complet.npy",
+    "n": 44725780,
+    "min": -1.8620885610580444,
+    "median": -1.1304415464401245,
+    "max": 2.590935707092285,
+    "etendue": 4.453024387359619,
+    "sigma": 0.7711818814277649
+  },
+  "cible": {
+    "nom": "PHerc0172 (53 keV, 7,91 um), echelle corrigee",
+    "fichier": "ink_PHerc0172_w062_u16.npy",
+    "n": 1018081,
+    "min": -1.8025014400482178,
+    "median": -0.7734780311584473,
+    "max": 2.4783170223236084,
+    "etendue": 4.280818462371826,
+    "sigma": 1.0217205286026
+  },
+  "rapport_sigma": 0.754787497988814
+}

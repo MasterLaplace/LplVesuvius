@@ -1,5 +1,11 @@
 # 54 — Cinq rendus vides, lus comme cinq surfaces plates
 
+> ⚠⚠⚠ **À RELIRE à la lumière de [`60`](60_la_constante_qui_rendait_le_modele_muet.md).** Les
+> rendus dont il est question ici sont des piles **uint8**, et le lecteur d'encre les divisait
+> par 65535 — donc le modèle en recevait du noir. « Vide » peut vouloir dire « le rendu n'a
+> rien produit » ou « on l'a montré au modèle 257 fois trop sombre », et ce document ne
+> distingue pas les deux.
+
 > ⚠⚠ **Correction d'un résultat publié.** [`52`](52_calibrer_sur_son_corpus.md) §6 affirme
 > que « les cinq `m7` lisent zéro à toutes les géométries essayées : leur platitude est
 > réelle, pas un artefact de fenêtre ». **C'est faux.** Leur platitude n'est pas une propriété

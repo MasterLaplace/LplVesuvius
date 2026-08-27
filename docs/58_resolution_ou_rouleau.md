@@ -8,6 +8,14 @@
 > un papyrus vierge. [`46`](46_le_temoin_negatif.md) §3 a fermé la troisième. Celle-ci tombe
 > parce que **le témoin où le modèle marche est déjà à la résolution de `PHerc1447`**.
 
+> ⚠⚠ **Sa prémisse d'entrée est tombée depuis, et son résultat tient quand même.** Le
+> « facteur 45 à expliquer » venait d'un σ de 0,0171 qui mesurait une erreur d'échelle
+> ([`60`](60_la_constante_qui_rendait_le_modele_muet.md)) : à l'échelle corrigée `PHerc1447`
+> rend σ = 0,6558, et il n'y a plus de facteur 45. ⭐ **Ce que ce document mesure, lui, est
+> intact** : son échelle de dégradation tourne sur les piles **uint16 publiées**, donc hors
+> du bug, et ce qu'elle dit — ce que coûtent un doublement en plan et un doublement en
+> profondeur, et le fait qu'ils s'aggravent — reste vrai et reste utile.
+
 ## 1. ⚠⚠ Le chiffre qui portait la question était faux
 
 `36` §5bis oppose « Scroll 1, `20230909121925`, **2,4 µm** » à « `PHerc1447`, **8,64 µm** ».
