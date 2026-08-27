@@ -1432,7 +1432,7 @@ Rogner l'extension 3 dans la bonne plage de générations :
 | cycle 2, rogné à gen ≤ 106 | 7,51 cm² | +0,000 | 2 % |
 
 Les deux verdicts sortent du chemin de jugement partagé, appelé par
-[`src/outils/juger_rognages.sh`](src/outils/juger_rognages.sh) — `src/outils/juger_rognages.sh
+[`src/outils/juger_rognages.sh`](../src/outils/juger_rognages.sh) — `src/outils/juger_rognages.sh
 data/rogne_cycle2 cycle2_`. ⚠ L'étiquette fait partie du **nom** du résultat, donc elle est
 écrite dans le script : sans elle `docs/mesures/cycle2_gen103.json` n'avait aucun producteur dans
 l'arbre, et l'audit des artefacts le signalait — à raison, la commande vivait dans un terminal.
@@ -1486,7 +1486,7 @@ Soit **0 paire sous 40 µm**, **2 paires entre 40 et 250 µm**, et le reste
 trouvé », c'est-à-dire comme un résultat faible. La distribution montre autre chose : il n'y a
 pas *un peu* moins de candidats que prévu, il y a un **trou d'un facteur deux** entre le seuil
 et la paire la plus proche du rouleau. Elle est produite par
-[`src/figures/figure_segments.py`](src/figures/figure_segments.py), dont le témoin vérifie
+[`src/figures/figure_segments.py`](../src/figures/figure_segments.py), dont le témoin vérifie
 que les quatre bandes **totalisent** les paires jugeables — la sonde qui aurait attrapé la
 faute corrigée juste en dessous.
 

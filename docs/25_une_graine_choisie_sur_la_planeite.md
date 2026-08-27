@@ -272,7 +272,7 @@ message. C'est le piège que l'en-tête du script nomme déjà (« emprunter le 
 rouleau voisin ») appliqué à deux scans d'un **même** rouleau.
 
 ⭐ Le remède est dans les noms : une prédiction s'appelle `<scan>-surface-….zarr` et son
-volume `<scan>-<voxel>um-….zarr`. [`src/volume/apparier_volumes.py`](src/volume/apparier_volumes.py)
+volume `<scan>-<voxel>um-….zarr`. [`src/volume/apparier_volumes.py`](../src/volume/apparier_volumes.py)
 apparie sur ce préfixe, et le script de campagne l'appelle.
 
 ⚠ **Mesuré avant de conclure, et le résultat est plus sobre que la crainte** : sur les

@@ -1077,6 +1077,12 @@ run "échelle des piles"        uv run python "$ROOT/src/depot/echelle_des_piles
 # une verification qui ne peut pas echouer occupe la place d'une vraie.
 run "batteries qui peuvent échouer" uv run python "$ROOT/src/depot/batteries_incapables_dechouer.py" --verifier
 
+# ⚠⚠ Les liens d'un document mènent-ils quelque part ? `00` écrivait ses 87 liens en
+# `docs/x` alors qu'il vit DANS `docs/`, donc un lecteur les résolvait en `docs/docs/x` :
+# aucun ne menait nulle part, images comprises. Signalé par l'auteur en ouvrant le fichier.
+# Un lien cassé s'affiche normalement jusqu'à ce qu'on clique, donc rien ne le signalait.
+run "liens des documents"      uv run python "$ROOT/src/depot/liens_casses.py" --verifier
+
 # ⚠⚠ La figure du bug d'échelle a un contrôle, et il porte sur ce qui la rend HONNÊTE : les
 # deux panneaux partagent leur étirement. Étirer chacun sur sa propre plage rendrait une
 # sortie constante aussi contrastée qu'une vraie carte — l'inverse de ce que la figure montre.

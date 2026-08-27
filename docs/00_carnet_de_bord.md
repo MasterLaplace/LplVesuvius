@@ -26,39 +26,39 @@ que `LplKnowledge` peut ingérer.
 rouleau du Grand Prize que personne n'avait touché (`24`), et sur un segment officiel d'un
 autre (`36`). Elle produit du papyrus : treillis de fibres croisées, trous, bords déchirés.
 
-![papyrus de PHerc1447 deroule et aplati par notre chaine](docs/images/36_papyrus_PHerc1447.png)
+![papyrus de PHerc1447 deroule et aplati par notre chaine](images/36_papyrus_PHerc1447.png)
 
 ⚠⚠ **Mais nos propres traces ne suivent aucune feuille**, et c'est maintenant mesuré sans
 seuil ni vérité terrain. En élargissant la fenêtre de rendu, la distance à la matière la plus
 proche **reste identique** sur une bonne surface (α = +0,00) et **suit la fenêtre** sur les
 nôtres (α = +1,01) — à quatre spires de portée, le pic n'a toujours rien trouvé
-([`38`](docs/38_ce_qui_bouge_avec_la_fenetre.md)).
+([`38`](38_ce_qui_bouge_avec_la_fenetre.md)).
 
 | ce qui marche | ce qui ne marche pas encore |
 |---|---|
-| dérouler, aplatir, rendre — de bout en bout | poser la surface **sur** une feuille **en partant d'une graine** — dix-sept essais, tous à α ≈ 1 ([`42`](docs/42_la_boucle_tourne_et_ne_suffit_pas.md)) |
-| juger une trace sans vérité terrain (3 instruments) | l'encre : le modèle de 2023 sort une **constante** à 8,6 µm ([`36`](docs/36_lorigine_de_la_pile.md) §5bis) |
-| ⭐⭐⭐ **savoir ce qui décide où la surface se pose** : la **portée physique** du test de sortie, à tenir entre **0,25 et 0,5 voxel** — le pas peut être affiné librement si `exit_count` suit ([`43`](docs/43_la_chaine_des_spires.md) §6quinquies) | distinguer À L'INTÉRIEUR du bassin : quatre campagnes y tiennent dans une largeur de résolution, donc il faudrait plus de deux fenêtres par verdict |
-| ⭐⭐⭐ **enchaîner spire après spire** — 9 tours, **6 convergent** au pas de rayon 0,25 ([`43`](docs/43_la_chaine_des_spires.md)) | savoir POURQUOI une spire casse : l'érosion est **réfutée**, le meilleur prédicteur est le simple **numéro** de la spire ([`44`](docs/44_ou_la_chaine_se_trouve.md) §8) |
-| ⭐⭐ **savoir où la chaîne est dans le rouleau** : écart entre nappes **113 µm**, donc elle avance bien d'**une feuille à la fois** ([`44`](docs/44_ou_la_chaine_se_trouve.md)) | enchaîner l'extension tangentielle : un seul pas est mesuré, et une chaîne demande que le pas suivant parte de l'étendue |
-| ⭐⭐⭐ **ÉTENDRE une nappe le long d'elle-même** : la surface utile passe de **4,28 à 12,97 cm²** et l'arc de 21,9 à **37,2 mm**, à **α = +0,000** — la première fois qu'une surface que nous produisons **gagne** de la surface ([`44`](docs/44_ou_la_chaine_se_trouve.md)) | — |
-| ⭐⭐ **rendre le traçage par croissance REPRODUCTIBLE** : `VC_GROWPATCH_RNG_SEED` + `thread_limit: 1` → maillages identiques octet pour octet ([`44`](docs/44_ou_la_chaine_se_trouve.md)) | savoir si la repousse d'une surface *projetée* dérive vraiment : son unique point est un tirage d'avant le correctif |
-| ⭐⭐ **quantifier le « consistent with »** du papier fondateur : épaisseur de trait **AUC 0,857**, netteté du pic **0,753** suivent le contraste d'encre publié — et la **séparation des lignes va contre** (0,319) ([`45`](docs/45_consistent_with_quantifie.md)) | le transport vers une région **sans** vérité du même objet, qui est le geste que le papier revendique |
-| ⭐⭐ **un contrôle négatif par construction** : une trace à α ≈ 1 prouve géométriquement qu'aucune feuille n'est à portée, et le détecteur y rend **la même carte** que sur une vraie feuille (ρ = +0,9979) ([`46`](docs/46_le_temoin_negatif.md)) | la thèse forte — qu'il *signale* de l'encre là où il n'y en a pas : sur ce rouleau il n'en signale nulle part |
-| ⭐⭐ **savoir qu'un seuil absolu compare des réglages** : 13 traces sur 16 butent sur le plafond du rendu, qui double avec la profondeur ([`47`](docs/47_le_critere_doit_etre_relatif.md)) | construire le critère **auto-référentiel** qui remplacerait ce seuil — il faut des traces non censurées aux deux profondeurs, et le dépôt en a deux |
-| ⭐⭐⭐ **α ≈ 1 a DEUX causes** — un pic qui recule, et aucun pic du tout — et l'audit des **217 profils** dit lesquelles : 20 séries sur 107, **0 verdict positif touché** ([`49`](docs/49_alpha_ne_separe_pas_deux_pannes.md)) | — |
-| ⭐ **savoir où monter l'expérience « réparer sert-il ? »** : traçables et lisibles sont **disjoints** (13 contre 3), donc c'est `PHercParis4` ([`48`](docs/48_ou_monter_lexperience.md)) | la monter : il faut une trace fautive, sa réparation, et un aval qui **réponde** — la condition se vérifie en une inférence |
-| ⭐⭐ **un rendu peut être limité par une ressource que personne ne mesure** : 28,2 Go de RSS sur 32, 3,4 Go en swap, **23,7 % d'un cœur sur 22** — le cache de chunks vaut 16 Go par défaut et aucun des 28 appels du dépôt ne le réglait ([`50`](docs/50_le_rendu_attendait_la_memoire.md)) | — |
-| ⭐⭐⭐ **le plafond de générations ne fabriquait PAS le résultat négatif** : à budget ×3,3 l'aire est ×11,5 mais α passe de **+0,89 à +0,95**, sous le bruit du tireur (0,16) ([`50`](docs/50_le_rendu_attendait_la_memoire.md) §8) | ⚠ un seul tirage par budget : on ne peut pas AFFIRMER que le budget est sans effet, seulement qu'on ne le voit pas |
-| ⭐⭐ **une pente à deux appuis** : vingt runs indépendants, graines séparées par des kilovoxels et deux prédictions, et l'appui du bas a une RAISON et non un simple constat ([`51`](docs/51_une_pente_a_deux_appuis.md)) | — |
-| ⭐⭐ **un relief se lit sur une moyenne de patch, donc il dépend de la FENÊTRE** : notre trace lue à 1024 px paraissait plate et ne l'est pas — un seuil calibré sur un instrument ne veut rien dire sur un autre ([`52`](docs/52_calibrer_sur_son_corpus.md)) | ⚠ la conséquence porte au-delà : toute grandeur de contraste se compare **à l'intérieur** d'un instrument, jamais entre deux |
-| ⭐⭐ **notre chaîne de rendu n'écrase pas le relief** : un morceau de segment PUBLIÉ, passé par elle, revient au-dessus de la médiane de son propre corpus ([`53`](docs/53_le_temoin_positif_du_rendu.md)) | ⭐ le critère avait été écrit **avant** la mesure, et l'ordre est visible dans l'historique du dépôt |
-| ⭐⭐⭐ **le vide suit la GRAINE, pas la prédiction** — et `m7` et `ps256` sont au même endroit, donc ce ne sont pas deux qualités d'un objet mais deux objets ([`54`](docs/54_cinq_rendus_vides.md)) | ⚠⚠ à relire depuis [`60`](docs/60_la_constante_qui_rendait_le_modele_muet.md) : ces rendus sont des piles uint8, montrées au modèle 257 fois trop sombres |
-| ⚠⚠⚠ **trente-neuf batteries sur cent cinq ne pouvaient pas ÉCHOUER** : le verdict imprimait « ALL PASS » et rendait 0 inconditionnellement, donc le compte d'échecs était tenu, imprimé et jeté ([`61`](docs/61_les_batteries_qui_ne_pouvaient_pas_echouer.md)) | ⭐ aucune ne cachait d'échec réel — le défaut n'avait pas encore coûté un faux vert. ⚠ Les batteries en **shell** restent à instruire |
-| ⚠⚠⚠ **une CONSTANTE rendait le modèle muet, et elle a fondé un résultat négatif publié** : `load_layer_stack` normalisait par `65535`, juste pour du uint16, alors que **211 des 214 piles de l'arbre sont uint8** — elles arrivaient au modèle 257 fois trop sombres. `PHerc1447` passe de σ **0,0171** à **0,6558**, soit **1,2×** le témoin ([`60`](docs/60_la_constante_qui_rendait_le_modele_muet.md)) | ⚠⚠ M1ter est ROUVERT, `46` est à refaire, `54` est à relire. ⭐ Répondre n'est pas lire : la fenêtre suivante doit être assez large pour porter des lettres |
-| ⭐⭐⭐ **la RÉSOLUTION n'explique pas l'inertie du modèle d'encre** : le témoin où il atteint AUC 0,925 est à **9 %** des conditions de `PHerc1447` sur les deux axes (506,2 contre 553,0 µm par tuile, 205,7 contre 224,6 µm de profondeur), et dix fois cet écart ne rend qu'un facteur **2,1** sur les **45** à expliquer ([`58`](docs/58_resolution_ou_rouleau.md)) | ⚠ le chiffre qui portait la question était faux — `36` §5bis disait 2,4 µm là où le volume déclare **7,91** |
-| ⭐⭐ **qu'un corpus se range en TROIS états et pas deux** : sur 45 rouleaux, **31 n'ont aucun segment publié** — personne ne les a tentés. Ranger ceux-là avec « pas d'encre » fait rendre p = 0,0081 à un partage qui, restreint aux rouleaux **tentés**, rend **p = 0,50** ([`59`](docs/59_la_campagne_plutot_que_le_rouleau.md)) | ⚠⚠ la piste « la campagne de scan explique l'inertie » **ne tient pas** : le scan fin suit l'attention portée à un rouleau, pas sa lisibilité. « Ce rouleau-ci » reste la seule cause en lice |
-| ⭐⭐ **et aucun des treize rouleaux du prix ne publie de détection d'encre** — dix des treize n'ont **aucun segment publié**, trois ont été tracés sans rendre d'encre ([`59`](docs/59_la_campagne_plutot_que_le_rouleau.md) §5) | — |
+| dérouler, aplatir, rendre — de bout en bout | poser la surface **sur** une feuille **en partant d'une graine** — dix-sept essais, tous à α ≈ 1 ([`42`](42_la_boucle_tourne_et_ne_suffit_pas.md)) |
+| juger une trace sans vérité terrain (3 instruments) | l'encre : le modèle de 2023 sort une **constante** à 8,6 µm ([`36`](36_lorigine_de_la_pile.md) §5bis) |
+| ⭐⭐⭐ **savoir ce qui décide où la surface se pose** : la **portée physique** du test de sortie, à tenir entre **0,25 et 0,5 voxel** — le pas peut être affiné librement si `exit_count` suit ([`43`](43_la_chaine_des_spires.md) §6quinquies) | distinguer À L'INTÉRIEUR du bassin : quatre campagnes y tiennent dans une largeur de résolution, donc il faudrait plus de deux fenêtres par verdict |
+| ⭐⭐⭐ **enchaîner spire après spire** — 9 tours, **6 convergent** au pas de rayon 0,25 ([`43`](43_la_chaine_des_spires.md)) | savoir POURQUOI une spire casse : l'érosion est **réfutée**, le meilleur prédicteur est le simple **numéro** de la spire ([`44`](44_ou_la_chaine_se_trouve.md) §8) |
+| ⭐⭐ **savoir où la chaîne est dans le rouleau** : écart entre nappes **113 µm**, donc elle avance bien d'**une feuille à la fois** ([`44`](44_ou_la_chaine_se_trouve.md)) | enchaîner l'extension tangentielle : un seul pas est mesuré, et une chaîne demande que le pas suivant parte de l'étendue |
+| ⭐⭐⭐ **ÉTENDRE une nappe le long d'elle-même** : la surface utile passe de **4,28 à 12,97 cm²** et l'arc de 21,9 à **37,2 mm**, à **α = +0,000** — la première fois qu'une surface que nous produisons **gagne** de la surface ([`44`](44_ou_la_chaine_se_trouve.md)) | — |
+| ⭐⭐ **rendre le traçage par croissance REPRODUCTIBLE** : `VC_GROWPATCH_RNG_SEED` + `thread_limit: 1` → maillages identiques octet pour octet ([`44`](44_ou_la_chaine_se_trouve.md)) | savoir si la repousse d'une surface *projetée* dérive vraiment : son unique point est un tirage d'avant le correctif |
+| ⭐⭐ **quantifier le « consistent with »** du papier fondateur : épaisseur de trait **AUC 0,857**, netteté du pic **0,753** suivent le contraste d'encre publié — et la **séparation des lignes va contre** (0,319) ([`45`](45_consistent_with_quantifie.md)) | le transport vers une région **sans** vérité du même objet, qui est le geste que le papier revendique |
+| ⭐⭐ **un contrôle négatif par construction** : une trace à α ≈ 1 prouve géométriquement qu'aucune feuille n'est à portée, et le détecteur y rend **la même carte** que sur une vraie feuille (ρ = +0,9979) ([`46`](46_le_temoin_negatif.md)) | la thèse forte — qu'il *signale* de l'encre là où il n'y en a pas : sur ce rouleau il n'en signale nulle part |
+| ⭐⭐ **savoir qu'un seuil absolu compare des réglages** : 13 traces sur 16 butent sur le plafond du rendu, qui double avec la profondeur ([`47`](47_le_critere_doit_etre_relatif.md)) | construire le critère **auto-référentiel** qui remplacerait ce seuil — il faut des traces non censurées aux deux profondeurs, et le dépôt en a deux |
+| ⭐⭐⭐ **α ≈ 1 a DEUX causes** — un pic qui recule, et aucun pic du tout — et l'audit des **217 profils** dit lesquelles : 20 séries sur 107, **0 verdict positif touché** ([`49`](49_alpha_ne_separe_pas_deux_pannes.md)) | — |
+| ⭐ **savoir où monter l'expérience « réparer sert-il ? »** : traçables et lisibles sont **disjoints** (13 contre 3), donc c'est `PHercParis4` ([`48`](48_ou_monter_lexperience.md)) | la monter : il faut une trace fautive, sa réparation, et un aval qui **réponde** — la condition se vérifie en une inférence |
+| ⭐⭐ **un rendu peut être limité par une ressource que personne ne mesure** : 28,2 Go de RSS sur 32, 3,4 Go en swap, **23,7 % d'un cœur sur 22** — le cache de chunks vaut 16 Go par défaut et aucun des 28 appels du dépôt ne le réglait ([`50`](50_le_rendu_attendait_la_memoire.md)) | — |
+| ⭐⭐⭐ **le plafond de générations ne fabriquait PAS le résultat négatif** : à budget ×3,3 l'aire est ×11,5 mais α passe de **+0,89 à +0,95**, sous le bruit du tireur (0,16) ([`50`](50_le_rendu_attendait_la_memoire.md) §8) | ⚠ un seul tirage par budget : on ne peut pas AFFIRMER que le budget est sans effet, seulement qu'on ne le voit pas |
+| ⭐⭐ **une pente à deux appuis** : vingt runs indépendants, graines séparées par des kilovoxels et deux prédictions, et l'appui du bas a une RAISON et non un simple constat ([`51`](51_une_pente_a_deux_appuis.md)) | — |
+| ⭐⭐ **un relief se lit sur une moyenne de patch, donc il dépend de la FENÊTRE** : notre trace lue à 1024 px paraissait plate et ne l'est pas — un seuil calibré sur un instrument ne veut rien dire sur un autre ([`52`](52_calibrer_sur_son_corpus.md)) | ⚠ la conséquence porte au-delà : toute grandeur de contraste se compare **à l'intérieur** d'un instrument, jamais entre deux |
+| ⭐⭐ **notre chaîne de rendu n'écrase pas le relief** : un morceau de segment PUBLIÉ, passé par elle, revient au-dessus de la médiane de son propre corpus ([`53`](53_le_temoin_positif_du_rendu.md)) | ⭐ le critère avait été écrit **avant** la mesure, et l'ordre est visible dans l'historique du dépôt |
+| ⭐⭐⭐ **le vide suit la GRAINE, pas la prédiction** — et `m7` et `ps256` sont au même endroit, donc ce ne sont pas deux qualités d'un objet mais deux objets ([`54`](54_cinq_rendus_vides.md)) | ⚠⚠ à relire depuis [`60`](60_la_constante_qui_rendait_le_modele_muet.md) : ces rendus sont des piles uint8, montrées au modèle 257 fois trop sombres |
+| ⚠⚠⚠ **trente-neuf batteries sur cent cinq ne pouvaient pas ÉCHOUER** : le verdict imprimait « ALL PASS » et rendait 0 inconditionnellement, donc le compte d'échecs était tenu, imprimé et jeté ([`61`](61_les_batteries_qui_ne_pouvaient_pas_echouer.md)) | ⭐ aucune ne cachait d'échec réel — le défaut n'avait pas encore coûté un faux vert. ⚠ Les batteries en **shell** restent à instruire |
+| ⚠⚠⚠ **une CONSTANTE rendait le modèle muet, et elle a fondé un résultat négatif publié** : `load_layer_stack` normalisait par `65535`, juste pour du uint16, alors que **211 des 214 piles de l'arbre sont uint8** — elles arrivaient au modèle 257 fois trop sombres. `PHerc1447` passe de σ **0,0171** à **0,6558**, soit **1,2×** le témoin ([`60`](60_la_constante_qui_rendait_le_modele_muet.md)) | ⚠⚠ M1ter est ROUVERT, `46` est à refaire, `54` est à relire. ⭐ Répondre n'est pas lire : la fenêtre suivante doit être assez large pour porter des lettres |
+| ⭐⭐⭐ **la RÉSOLUTION n'explique pas l'inertie du modèle d'encre** : le témoin où il atteint AUC 0,925 est à **9 %** des conditions de `PHerc1447` sur les deux axes (506,2 contre 553,0 µm par tuile, 205,7 contre 224,6 µm de profondeur), et dix fois cet écart ne rend qu'un facteur **2,1** sur les **45** à expliquer ([`58`](58_resolution_ou_rouleau.md)) | ⚠ le chiffre qui portait la question était faux — `36` §5bis disait 2,4 µm là où le volume déclare **7,91** |
+| ⭐⭐ **qu'un corpus se range en TROIS états et pas deux** : sur 45 rouleaux, **31 n'ont aucun segment publié** — personne ne les a tentés. Ranger ceux-là avec « pas d'encre » fait rendre p = 0,0081 à un partage qui, restreint aux rouleaux **tentés**, rend **p = 0,50** ([`59`](59_la_campagne_plutot_que_le_rouleau.md)) | ⚠⚠ la piste « la campagne de scan explique l'inertie » **ne tient pas** : le scan fin suit l'attention portée à un rouleau, pas sa lisibilité. « Ce rouleau-ci » reste la seule cause en lice |
+| ⭐⭐ **et aucun des treize rouleaux du prix ne publie de détection d'encre** — dix des treize n'ont **aucun segment publié**, trois ont été tracés sans rendre d'encre ([`59`](59_la_campagne_plutot_que_le_rouleau.md) §5) | — |
 
 ⚠ **Trois documents manquent à cette table, et c'est délibéré** : `55` est *rendu* depuis le
 registre des murs, `56` est un plan, `57` répond à une question sur les tâches. Aucun ne
@@ -69,7 +69,7 @@ pour un résultat.
 mesure**. Une trace qui converge suit une feuille, quelle que soit sa valeur.
 
 ⭐⭐ **Et une cause candidate est apparue, lue dans la source du traceur**
-([`41`](docs/41_marcher_le_long_dune_nappe.md) §6ter) : `vc_grow_seg_from_seed` est un
+([`41`](41_marcher_le_long_dune_nappe.md) §6ter) : `vc_grow_seg_from_seed` est un
 moindres carrés à **douze familles de résidus**, et dans nos runs de base **trois des quatre
 termes qui regardent les données sont inactifs** — `SURFACE_SDT` a un poids nul par défaut,
 `NORMAL`/`SNAP` exigent une grille de normales, `DIRECTION` des champs de direction. ⚠ Dire
@@ -80,7 +80,7 @@ je n'ai pas su suivre le fil (`41` §6ter) — mais **trois leviers de données 
 
 ### ⭐⭐⭐ Et voici notre chaîne, six tours
 
-![les sept spires rendues](docs/images/43_chaine_rendus.jpg)
+![les sept spires rendues](images/43_chaine_rendus.jpg)
 
 Sept bandes : un segment officiel qui converge, puis **six spires que nous avons générées**
 (`mode: gen_neighbor`), chacune source de la suivante. **4 sur 7 convergent**, la 7ᵉ casse
@@ -94,7 +94,7 @@ portée 0,25 donnent le même α (+0,102 et +0,130), et **à pas égal, changer 
 fait passer l'α de +0,327 à +0,130**. Le mécanisme est lu dans la source — `exit_count` compte
 des *pas* et non une distance :
 
-![le pas du rayon a un optimum](docs/images/43_optimum_du_pas.png)
+![le pas du rayon a un optimum](images/43_optimum_du_pas.png)
 
 ### ⭐⭐⭐ Et une nappe qui GRANDIT au lieu de s'éroder
 
@@ -108,7 +108,7 @@ nappe le long d'elle-même fait l'inverse, et sans quitter sa feuille :
 
 Elle ne fait pas qu'ajouter de la grille : elle **rebouche ses trous** (59 → 96 % de sommets
 valides), et son arc grandit de 70 % — c'est-à-dire qu'elle couvre plus d'un **tour**, la
-grandeur qui bloquait le déroulement. Détail : [`44`](docs/44_ou_la_chaine_se_trouve.md).
+grandeur qui bloquait le déroulement. Détail : [`44`](44_ou_la_chaine_se_trouve.md).
 
 ⚠ Obtenu après avoir trouvé que `mode: resume` **n'était pas déterministe** (générateur
 `thread_local` semé par `std::random_device`, 22 threads OpenMP). Avec
@@ -117,22 +117,22 @@ identiques **octet pour octet** — et le résultat tient.
 
 Les neuf nappes de la campagne radiale optimale, rendues :
 
-![la chaine a pas de rayon 0,25, neuf nappes](docs/images/43_chaine_pas025_rendus.jpg)
+![la chaine a pas de rayon 0,25, neuf nappes](images/43_chaine_pas025_rendus.jpg)
 
 ⚠ Ce que ces neuf bandes **sont** est maintenant mesuré, et ce n'est pas un morceau de rouleau
 déroulé : c'est une **colonne** de neuf feuilles dans une même fenêtre angulaire, à 113 µm
 l'une de l'autre, chacune couvrant **10 % d'un tour**. Il en faudrait au moins huit côte à côte
 pour fermer un seul tour.
 
-![ou la chaine se trouve dans le rouleau](docs/images/44_geometrie_chaine.png)
+![ou la chaine se trouve dans le rouleau](images/44_geometrie_chaine.png)
 
-Détail : [`43`](docs/43_la_chaine_des_spires.md) et [`44`](docs/44_ou_la_chaine_se_trouve.md).
+Détail : [`43`](43_la_chaine_des_spires.md) et [`44`](44_ou_la_chaine_se_trouve.md).
 
 ### Et voici la cible, assemblée
 
-![44 spires consecutives de PHerc0172](docs/images/mosaique_PHerc0172.jpg)
+![44 spires consecutives de PHerc0172](images/mosaique_PHerc0172.jpg)
 
-**44 spires consécutives d'un rouleau, sans un trou** ([`40`](docs/40_le_rouleau_entier.md)).
+**44 spires consécutives d'un rouleau, sans un trou** ([`40`](40_le_rouleau_entier.md)).
 ⚠ Chaque bande est déroulée et lue **par l'équipe du concours** ; ce dépôt n'ajoute que
 l'ordre. C'est la référence contre laquelle mesurer une chaîne automatique — jusqu'ici,
 « ça marche » n'avait rien à quoi se comparer.
@@ -165,7 +165,7 @@ compriment et se déchirent.
 >
 > Le chiffre qui réconcilie les deux est enfoui dans « Statistics and reproducibility » :
 > ***~25 heures d'annotation manuelle par spire***, soit **~775 h** pour ce rouleau. Le
-> Grand Prize 2027 en tolère **huit**. Détail : [`docs/27`](docs/27_ce_que_la_litterature_dit.md).
+> Grand Prize 2027 en tolère **huit**. Détail : [`docs/27`](27_ce_que_la_litterature_dit.md).
 
 ⚠ **Et « l'encre est résolue » est faux**, contrairement à ce que ce paragraphe disait
 avant le 2026-08-19 : *« Ink segmentation remains **weak**, varies across ink recipes and
@@ -262,55 +262,55 @@ ce que `SourceV1` existe pour porter.
 
 ## Reprise de session
 
-**[`HANDOFF.md`](HANDOFF.md)** — etat complet, processus en cours, pieges, et la suite
+**[`HANDOFF.md`](../HANDOFF.md)** — etat complet, processus en cours, pieges, et la suite
 priorisee. A lire en premier si vous reprenez ce chantier.
 
 ## Par ou commencer
 
 | document | ce qu'il contient |
 |---|---|
-| **[`docs/00_etat_de_lart.md`](docs/00_etat_de_lart.md)** | **le point d'entree** : la chaine, les acteurs, ce qui est prouve, les prix |
-| [`docs/01_goulot_deroulage.md`](docs/01_goulot_deroulage.md) | le goulot, les pistes, et pourquoi la premiere a ete abandonnee |
-| [`docs/02_inventaire_mesure.md`](docs/02_inventaire_mesure.md) | ce qui existe et ce qu'on peut se permettre, chiffres mesures |
-| [`docs/03_reproduction_windcheck.md`](docs/03_reproduction_windcheck.md) | l'etat de l'art **reproduit**, pas seulement lu |
-| [`docs/04_experience_excision.md`](docs/04_experience_excision.md) | l'experience et son resultat : H0 non rejetee, 75 810 cellules |
-| [`docs/05_le_predicat_est_trop_etroit.md`](docs/05_le_predicat_est_trop_etroit.md) | **le resultat qui ouvre la suite** : la reparation laisse le defaut en place |
-| [`docs/06_mesures_a_faire.md`](docs/06_mesures_a_faire.md) | **le carnet de mesures** : faites, en attente, ecartees, avec les regles apprises |
-| [`docs/08_premiere_passe_complete.md`](docs/08_premiere_passe_complete.md) | ⭐ **la passe complete** : des couches aux lettres grecques, AUC 0,92 hors entrainement |
-| [`docs/07_reparee_nest_pas_propre.md`](docs/07_reparee_nest_pas_propre.md) | ⭐ **le resultat** : une trace reparee passe le recensement sans etre saine — et §7 : la metrique est **inapplicable** sous un tour de couverture |
-| [`docs/09_protocole_jugement_modele.md`](docs/09_protocole_jugement_modele.md) | juger un rendu par un modele de langue : 3 juges mecaniques en echec, 1 calibre qui marche |
-| [`docs/10_segment_complet.md`](docs/10_segment_complet.md) | la passe sur un segment entier : **AUC 0,925** sur 44,7 M de pixels |
-| [`docs/11_onde_radiale_et_fusions.md`](docs/11_onde_radiale_et_fusions.md) | ⭐ onde radiale, depliage polaire, fusions localisees en 3D, et le defaut qui **derive** |
-| **[`docs/12_profondeur_de_surface.md`](docs/12_profondeur_de_surface.md)** | ⭐⭐ **un instrument de qualite de trace sans verite terrain, sans modele et sans juge** — lire le §10 en premier |
-| **[`docs/13_batch_epuisement.md`](docs/13_batch_epuisement.md)** | la liste de ce qui reste ouvert, et elle se coche la |
-| [`docs/14_direction_des_fibres.md`](docs/14_direction_des_fibres.md) | ⭐ probleme ouvert nº 5 : l'orientation des fibres comme separateur de feuilles |
-| [`docs/15_soumission_progress_prize.md`](docs/15_soumission_progress_prize.md) | ce qui est soumissionnable, trie contre les criteres. ⚠ **se declare perime sur deux points** |
-| [`docs/16_carte_difficulte_rouleaux_du_prix.md`](docs/16_carte_difficulte_rouleaux_du_prix.md) | quel rouleau du prix attaquer, mesure sur le volume brut |
-| [`docs/17_saut_de_spire_par_la_phase.md`](docs/17_saut_de_spire_par_la_phase.md) | ❌ le saut de spire par la phase — **echec definitif**, et pourquoi |
-| [`docs/18_batch_produire.md`](docs/18_batch_produire.md) · [`19`](docs/19_ecarter_avant_de_payer.md) · [`22`](docs/22_batch_repliquer.md) | trois batchs clos : produire, ecarter avant de payer, repliquer |
-| [`docs/20_le_champ_de_correction.md`](docs/20_le_champ_de_correction.md) | ⭐ l'erreur d'une trace est **structuree**, et translater ne la repare pas |
-| [`docs/21_texte_de_soumission.md`](docs/21_texte_de_soumission.md) | le brouillon de soumission, resultats negatifs compris |
-| [`docs/23_rouleaux_du_prix_traces.md`](docs/23_rouleaux_du_prix_traces.md) | l'inventaire des 13 : **dix** n'ont aucun segment publie |
-| **[`docs/24_premiere_trace_rouleau_du_prix.md`](docs/24_premiere_trace_rouleau_du_prix.md)** | ⭐⭐ **la premiere trace d'un rouleau du prix**, condamnee par nos instruments avant le rendu |
-| **[`docs/25_une_graine_choisie_sur_la_planeite.md`](docs/25_une_graine_choisie_sur_la_planeite.md)** | ⭐⭐ **ou commencer une trace** — critere de planeite, replique sur 12 rouleaux |
-| **[`docs/26_le_champ_de_direction.md`](docs/26_le_champ_de_direction.md)** | ⭐⭐ **ce qui gouverne la trajectoire du traceur**, et les trois mecanismes qui ne la gouvernent pas |
-| **[`docs/27_ce_que_la_litterature_dit.md`](docs/27_ce_que_la_litterature_dit.md)** | ⭐⭐ **les trois articles primaires, lus en entier** — et [`32`](docs/32_educelab_le_papier_fondateur.md) pour le quatrieme |
-| **[`docs/28_le_paysage_du_controle_qualite.md`](docs/28_le_paysage_du_controle_qualite.md)** | ⭐⭐ **ce qui existe deja**, ce qui a ete refuse, et la limite **mesuree** de la geometrie seule |
-| **[`docs/29_ce_qui_reste.md`](docs/29_ce_qui_reste.md)** | ⭐ **le registre consolide** — 525 enonces replies, sources en `fichier:ligne`. Par ou choisir un lot |
-| **[`docs/30_le_traceur_est_un_tirage.md`](docs/30_le_traceur_est_un_tirage.md)** | ⚠⚠ **13 traces propres sur 14** a parametres identiques — un seul trace n'est pas une mesure |
-| **[`docs/31_roadmap.md`](docs/31_roadmap.md)** | ⭐⭐ **la roadmap** : le Grand Prize est un prix d'**algorithmique de geometrie**, et son critere d'acceptation est une image Docker qu'ils lancent |
-| **[`docs/33_la_carte_nest_pas_resolue.md`](docs/33_la_carte_nest_pas_resolue.md)** | ⚠⚠ le classement des 13 rouleaux de [`16`](docs/16_carte_difficulte_rouleaux_du_prix.md) **ne separe aucune des 78 paires** — et ce qu'il faudrait pour trancher : 50 fenetres |
-| **[`docs/34_un_verdict_qui_ne_mesure_rien.md`](docs/34_un_verdict_qui_ne_mesure_rien.md)** | ⚠⚠ `vc_tifxyz_selfcross` peut declarer une surface **propre en n'ayant teste aucune paire** — et la perte de sensibilite mesuree quand un maillage grossit |
-| **[`docs/35_le_tirage_sur_douze_rouleaux.md`](docs/35_le_tirage_sur_douze_rouleaux.md)** | ⭐⭐ **78 tirages, 13 rouleaux, parametres identiques** : 5 rouleaux ou le VERDICT bascule, 0 reproductible, et l'aire ne signale pas le mauvais tirage |
-| **[`docs/36_lorigine_de_la_pile.md`](docs/36_lorigine_de_la_pile.md)** | ⭐⭐ **une hypothese testee et REFUTEE** — et ce qu'elle a trouve a la place : « officiel » n'est pas synonyme de « bon », un rouleau publie des segments de 18 % a 68 % |
-| **[`docs/37_les_deux_axes_ne_saccordent_pas.md`](docs/37_les_deux_axes_ne_saccordent_pas.md)** | ⭐⭐ **selectionner sur un axe et valider sur l'autre** : teste, et les deux juges ne se recoupent pas — 1 accord sur 8 |
-| **[`docs/38_ce_qui_bouge_avec_la_fenetre.md`](docs/38_ce_qui_bouge_avec_la_fenetre.md)** | ⭐⭐⭐ **un test de trace sans seuil, sans verite terrain et sans echelle** — ne de trois hypotheses refutees : une bonne surface garde sa distance quand la fenetre s'elargit, la notre la suit (α = +0,00 contre +1,01) |
-| **[`docs/39_le_seam_de_correction.md`](docs/39_le_seam_de_correction.md)** | ⭐⭐ **ou l'humain se branche** : `--resume --rewind-gen --correct` prend une liste de POINTS 3D. Le trou restant est etroit et nomme — dire ou la surface aurait du passer |
-| **[`docs/40_le_rouleau_entier.md`](docs/40_le_rouleau_entier.md)** | ⭐⭐⭐ **la cible, en une image** : 44 spires consecutives d'un rouleau, sans un trou, assemblees depuis les cartes d'encre publiees. Le deroulement est le leur, l'ordre est le notre — et c'est la reference que notre chaine doit egaler |
-| **[`docs/41_marcher_le_long_dune_nappe.md`](docs/41_marcher_le_long_dune_nappe.md)** | ⭐⭐⭐ **le maillon manquant de `39`, construit** : suivre une nappe par tenseur de structure + recentrage sur la crete, et ecrire les points de passage que `--correct` sait relire. Temoin negatif : « au plus proche » quitte sa spire de 5,9 voxels la ou la marche reste a 0,67 |
-| **[`docs/42_la_boucle_tourne_et_ne_suffit_pas.md`](docs/42_la_boucle_tourne_et_ne_suffit_pas.md)** | ⭐⭐⭐ **la boucle de correction entiere, exercee pour la premiere fois** : le seam fonctionne, la trace change (0 → 11 753 croisements) et son α NE change pas (+0,98 → +1,03). 318 points contre 56 630 : un coup de pouce local, pas une reorientation |
-| **[`docs/43_la_chaine_des_spires.md`](docs/43_la_chaine_des_spires.md)** | ⭐⭐⭐ **la chaine tient plusieurs tours, puis casse** : un segment officiel qui converge, puis jusqu'a huit spires generees par `mode: gen_neighbor`. Au pas de rayon 0,25, **6 sur 9 convergent** et la rupture tombe au tour 07 (α = +0,702 puis +1,321) au lieu du tour 06. Premiere fois qu'une surface que NOUS produisons converge — et la lecon de methode : **les premiers tours d'une chaine ne discriminent pas** |
-| **[`docs/44_ou_la_chaine_se_trouve.md`](docs/44_ou_la_chaine_se_trouve.md)** | ⭐⭐ **ou la chaine est dans le rouleau**, mesure sans connaitre l'axe : ecart entre nappes **113 µm** (elle avance d'une feuille a la fois), erosion de l'aire UTILE **15,6 % par tour** (et non 4,0 %, qui portait sur la grille), chaque fenetre couvre **10 % d'un tour**. Deux resultats negatifs qui comptent : le **rayon** d'une nappe est refuse (deux estimateurs en desaccord d'un facteur deux) et l'hypothese « la rupture est une erosion » est **refutee** par le simple numero de spire |
+| **[`docs/00_etat_de_lart.md`](00_etat_de_lart.md)** | **le point d'entree** : la chaine, les acteurs, ce qui est prouve, les prix |
+| [`docs/01_goulot_deroulage.md`](01_goulot_deroulage.md) | le goulot, les pistes, et pourquoi la premiere a ete abandonnee |
+| [`docs/02_inventaire_mesure.md`](02_inventaire_mesure.md) | ce qui existe et ce qu'on peut se permettre, chiffres mesures |
+| [`docs/03_reproduction_windcheck.md`](03_reproduction_windcheck.md) | l'etat de l'art **reproduit**, pas seulement lu |
+| [`docs/04_experience_excision.md`](04_experience_excision.md) | l'experience et son resultat : H0 non rejetee, 75 810 cellules |
+| [`docs/05_le_predicat_est_trop_etroit.md`](05_le_predicat_est_trop_etroit.md) | **le resultat qui ouvre la suite** : la reparation laisse le defaut en place |
+| [`docs/06_mesures_a_faire.md`](06_mesures_a_faire.md) | **le carnet de mesures** : faites, en attente, ecartees, avec les regles apprises |
+| [`docs/08_premiere_passe_complete.md`](08_premiere_passe_complete.md) | ⭐ **la passe complete** : des couches aux lettres grecques, AUC 0,92 hors entrainement |
+| [`docs/07_reparee_nest_pas_propre.md`](07_reparee_nest_pas_propre.md) | ⭐ **le resultat** : une trace reparee passe le recensement sans etre saine — et §7 : la metrique est **inapplicable** sous un tour de couverture |
+| [`docs/09_protocole_jugement_modele.md`](09_protocole_jugement_modele.md) | juger un rendu par un modele de langue : 3 juges mecaniques en echec, 1 calibre qui marche |
+| [`docs/10_segment_complet.md`](10_segment_complet.md) | la passe sur un segment entier : **AUC 0,925** sur 44,7 M de pixels |
+| [`docs/11_onde_radiale_et_fusions.md`](11_onde_radiale_et_fusions.md) | ⭐ onde radiale, depliage polaire, fusions localisees en 3D, et le defaut qui **derive** |
+| **[`docs/12_profondeur_de_surface.md`](12_profondeur_de_surface.md)** | ⭐⭐ **un instrument de qualite de trace sans verite terrain, sans modele et sans juge** — lire le §10 en premier |
+| **[`docs/13_batch_epuisement.md`](13_batch_epuisement.md)** | la liste de ce qui reste ouvert, et elle se coche la |
+| [`docs/14_direction_des_fibres.md`](14_direction_des_fibres.md) | ⭐ probleme ouvert nº 5 : l'orientation des fibres comme separateur de feuilles |
+| [`docs/15_soumission_progress_prize.md`](15_soumission_progress_prize.md) | ce qui est soumissionnable, trie contre les criteres. ⚠ **se declare perime sur deux points** |
+| [`docs/16_carte_difficulte_rouleaux_du_prix.md`](16_carte_difficulte_rouleaux_du_prix.md) | quel rouleau du prix attaquer, mesure sur le volume brut |
+| [`docs/17_saut_de_spire_par_la_phase.md`](17_saut_de_spire_par_la_phase.md) | ❌ le saut de spire par la phase — **echec definitif**, et pourquoi |
+| [`docs/18_batch_produire.md`](18_batch_produire.md) · [`19`](19_ecarter_avant_de_payer.md) · [`22`](22_batch_repliquer.md) | trois batchs clos : produire, ecarter avant de payer, repliquer |
+| [`docs/20_le_champ_de_correction.md`](20_le_champ_de_correction.md) | ⭐ l'erreur d'une trace est **structuree**, et translater ne la repare pas |
+| [`docs/21_texte_de_soumission.md`](21_texte_de_soumission.md) | le brouillon de soumission, resultats negatifs compris |
+| [`docs/23_rouleaux_du_prix_traces.md`](23_rouleaux_du_prix_traces.md) | l'inventaire des 13 : **dix** n'ont aucun segment publie |
+| **[`docs/24_premiere_trace_rouleau_du_prix.md`](24_premiere_trace_rouleau_du_prix.md)** | ⭐⭐ **la premiere trace d'un rouleau du prix**, condamnee par nos instruments avant le rendu |
+| **[`docs/25_une_graine_choisie_sur_la_planeite.md`](25_une_graine_choisie_sur_la_planeite.md)** | ⭐⭐ **ou commencer une trace** — critere de planeite, replique sur 12 rouleaux |
+| **[`docs/26_le_champ_de_direction.md`](26_le_champ_de_direction.md)** | ⭐⭐ **ce qui gouverne la trajectoire du traceur**, et les trois mecanismes qui ne la gouvernent pas |
+| **[`docs/27_ce_que_la_litterature_dit.md`](27_ce_que_la_litterature_dit.md)** | ⭐⭐ **les trois articles primaires, lus en entier** — et [`32`](32_educelab_le_papier_fondateur.md) pour le quatrieme |
+| **[`docs/28_le_paysage_du_controle_qualite.md`](28_le_paysage_du_controle_qualite.md)** | ⭐⭐ **ce qui existe deja**, ce qui a ete refuse, et la limite **mesuree** de la geometrie seule |
+| **[`docs/29_ce_qui_reste.md`](29_ce_qui_reste.md)** | ⭐ **le registre consolide** — 525 enonces replies, sources en `fichier:ligne`. Par ou choisir un lot |
+| **[`docs/30_le_traceur_est_un_tirage.md`](30_le_traceur_est_un_tirage.md)** | ⚠⚠ **13 traces propres sur 14** a parametres identiques — un seul trace n'est pas une mesure |
+| **[`docs/31_roadmap.md`](31_roadmap.md)** | ⭐⭐ **la roadmap** : le Grand Prize est un prix d'**algorithmique de geometrie**, et son critere d'acceptation est une image Docker qu'ils lancent |
+| **[`docs/33_la_carte_nest_pas_resolue.md`](33_la_carte_nest_pas_resolue.md)** | ⚠⚠ le classement des 13 rouleaux de [`16`](16_carte_difficulte_rouleaux_du_prix.md) **ne separe aucune des 78 paires** — et ce qu'il faudrait pour trancher : 50 fenetres |
+| **[`docs/34_un_verdict_qui_ne_mesure_rien.md`](34_un_verdict_qui_ne_mesure_rien.md)** | ⚠⚠ `vc_tifxyz_selfcross` peut declarer une surface **propre en n'ayant teste aucune paire** — et la perte de sensibilite mesuree quand un maillage grossit |
+| **[`docs/35_le_tirage_sur_douze_rouleaux.md`](35_le_tirage_sur_douze_rouleaux.md)** | ⭐⭐ **78 tirages, 13 rouleaux, parametres identiques** : 5 rouleaux ou le VERDICT bascule, 0 reproductible, et l'aire ne signale pas le mauvais tirage |
+| **[`docs/36_lorigine_de_la_pile.md`](36_lorigine_de_la_pile.md)** | ⭐⭐ **une hypothese testee et REFUTEE** — et ce qu'elle a trouve a la place : « officiel » n'est pas synonyme de « bon », un rouleau publie des segments de 18 % a 68 % |
+| **[`docs/37_les_deux_axes_ne_saccordent_pas.md`](37_les_deux_axes_ne_saccordent_pas.md)** | ⭐⭐ **selectionner sur un axe et valider sur l'autre** : teste, et les deux juges ne se recoupent pas — 1 accord sur 8 |
+| **[`docs/38_ce_qui_bouge_avec_la_fenetre.md`](38_ce_qui_bouge_avec_la_fenetre.md)** | ⭐⭐⭐ **un test de trace sans seuil, sans verite terrain et sans echelle** — ne de trois hypotheses refutees : une bonne surface garde sa distance quand la fenetre s'elargit, la notre la suit (α = +0,00 contre +1,01) |
+| **[`docs/39_le_seam_de_correction.md`](39_le_seam_de_correction.md)** | ⭐⭐ **ou l'humain se branche** : `--resume --rewind-gen --correct` prend une liste de POINTS 3D. Le trou restant est etroit et nomme — dire ou la surface aurait du passer |
+| **[`docs/40_le_rouleau_entier.md`](40_le_rouleau_entier.md)** | ⭐⭐⭐ **la cible, en une image** : 44 spires consecutives d'un rouleau, sans un trou, assemblees depuis les cartes d'encre publiees. Le deroulement est le leur, l'ordre est le notre — et c'est la reference que notre chaine doit egaler |
+| **[`docs/41_marcher_le_long_dune_nappe.md`](41_marcher_le_long_dune_nappe.md)** | ⭐⭐⭐ **le maillon manquant de `39`, construit** : suivre une nappe par tenseur de structure + recentrage sur la crete, et ecrire les points de passage que `--correct` sait relire. Temoin negatif : « au plus proche » quitte sa spire de 5,9 voxels la ou la marche reste a 0,67 |
+| **[`docs/42_la_boucle_tourne_et_ne_suffit_pas.md`](42_la_boucle_tourne_et_ne_suffit_pas.md)** | ⭐⭐⭐ **la boucle de correction entiere, exercee pour la premiere fois** : le seam fonctionne, la trace change (0 → 11 753 croisements) et son α NE change pas (+0,98 → +1,03). 318 points contre 56 630 : un coup de pouce local, pas une reorientation |
+| **[`docs/43_la_chaine_des_spires.md`](43_la_chaine_des_spires.md)** | ⭐⭐⭐ **la chaine tient plusieurs tours, puis casse** : un segment officiel qui converge, puis jusqu'a huit spires generees par `mode: gen_neighbor`. Au pas de rayon 0,25, **6 sur 9 convergent** et la rupture tombe au tour 07 (α = +0,702 puis +1,321) au lieu du tour 06. Premiere fois qu'une surface que NOUS produisons converge — et la lecon de methode : **les premiers tours d'une chaine ne discriminent pas** |
+| **[`docs/44_ou_la_chaine_se_trouve.md`](44_ou_la_chaine_se_trouve.md)** | ⭐⭐ **ou la chaine est dans le rouleau**, mesure sans connaitre l'axe : ecart entre nappes **113 µm** (elle avance d'une feuille a la fois), erosion de l'aire UTILE **15,6 % par tour** (et non 4,0 %, qui portait sur la grille), chaque fenetre couvre **10 % d'un tour**. Deux resultats negatifs qui comptent : le **rayon** d'une nappe est refuse (deux estimateurs en desaccord d'un facteur deux) et l'hypothese « la rupture est une erosion » est **refutee** par le simple numero de spire |
 
 ## Rejouer
 
@@ -427,7 +427,7 @@ existent parce que chacun a attrape une faute reelle : une table de poids recopi
 main et fausse, six artefacts dont le script etait reste dans un terminal, un compteur
 « par fenetre » migre dans une phrase qui parlait de « segments », deux batteries qui
 imprimaient `ALL PASS` **en echouant**, et un outil officiel qui declare une surface
-`clean` avec `pairs_tested: 0` ([`34`](docs/34_un_verdict_qui_ne_mesure_rien.md)).
+`clean` avec `pairs_tested: 0` ([`34`](34_un_verdict_qui_ne_mesure_rien.md)).
 
 ## Etat de la recuperation (2026-08-19)
 
@@ -454,4 +454,4 @@ Note : `data/repos/villa/scrollprize.org/docs/` contient le **source markdown du
 (34 fichiers). Pour lire, c'est superieur au miroir HTML ; le miroir sert a figer
 un etat date et a travailler hors ligne.
 
-Lire ensuite : [`docs/01_goulot_deroulage.md`](docs/01_goulot_deroulage.md).
+Lire ensuite : [`docs/01_goulot_deroulage.md`](01_goulot_deroulage.md).

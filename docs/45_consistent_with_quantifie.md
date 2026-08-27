@@ -19,7 +19,7 @@ outillé. Or les quatre grandeurs sont mesurables **sans jamais lire une lettre*
 
 ![ce qui suit le contraste d'encre, et ce qui va contre](images/45_typographie.png)
 
-Instrument : [`src/encre/typographie.py`](src/encre/typographie.py) (22 témoins
+Instrument : [`src/encre/typographie.py`](../src/encre/typographie.py) (22 témoins
 hors ligne). Corpus : **190 cartes d'encre publiées**, quatre rouleaux.
 
 ---

@@ -118,7 +118,7 @@ Il en lisait 159,84 à 41 couches. **Toutes les valeurs d'écart de ce dépôt s
 sous-estimations**, y compris les 94 µm de [`24`](24_premiere_trace_rouleau_du_prix.md) et
 les 146–187 µm de [`37`](37_les_deux_axes_ne_saccordent_pas.md) : leurs fenêtres ne
 pouvaient pas montrer plus. Le facteur réel contre le segment officiel est **≥ 18**, pas
-9,2. Voir [`38`](38_pas_une_spire.md).
+9,2. Voir [`38`](38_ce_qui_bouge_avec_la_fenetre.md).
 
 ⭐ Cette comparaison-ci ne souffre d'aucun des confonds précédents : même rouleau, même
 taille de voxel, même `vc_flatten`, même `vc_render_tifxyz`, même instrument de dépouillement.

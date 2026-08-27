@@ -6,8 +6,8 @@ relire leur tableau.
 
 ![un écart au bord de la fenêtre est une flèche, pas un point](images/51_appuis.png)
 
-Instrument : [`src/graine/appui_de_pente.py`](src/graine/appui_de_pente.py)
-(37 témoins) et [`figure_appuis.py`](src/figures/figure_appuis.py) (24 témoins).
+Instrument : [`src/graine/appui_de_pente.py`](../src/graine/appui_de_pente.py)
+(37 témoins) et [`figure_appuis.py`](../src/figures/figure_appuis.py) (24 témoins).
 
 ---
 
@@ -199,7 +199,7 @@ sur une condamnation — donc elle **ne tient pas** au sens de ce document.
 
 Si la fenêtre de 41 couches est sous le plancher sur ce rouleau, relancer la même campagne
 avec le même couple redonnera **le même nombre**. D'où
-[`src/graine/fenetre_utilisable.py`](src/graine/fenetre_utilisable.py) (37 témoins),
+[`src/graine/fenetre_utilisable.py`](../src/graine/fenetre_utilisable.py) (37 témoins),
 qui répond en deux temps et dans cet ordre :
 
 1. ⭐ **un fait, sans modèle** — parmi les profondeurs déjà mesurées, y en a-t-il deux qui
@@ -423,7 +423,7 @@ font l'amplitude. Ce qu'il faut en retenir n'est pas « la grandeur est mauvaise
 
 Le repère est **retiré** du README, remplacé par ce tableau et par la seule instruction qui
 tienne : calibrer sur son propre corpus, ce qui est une commande.
-Instrument : [`src/graine/effet_taille_fenetre.py`](src/graine/effet_taille_fenetre.py)
+Instrument : [`src/graine/effet_taille_fenetre.py`](../src/graine/effet_taille_fenetre.py)
 (8 témoins), dont la sonde centrale est le **signe** de l'exposant.
 
 ⭐ Et l'amplitude ne coûte rien de plus à calculer : `tracecheck` lit déjà les colonnes de

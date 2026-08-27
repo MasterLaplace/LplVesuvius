@@ -8,8 +8,8 @@ pas**, et la question se dissout au lieu de se résoudre.
 
 ![les traces butent sur le plafond du rendu](images/47_derive_profondeur.png)
 
-Instrument : [`src/graine/derive_avec_profondeur.py`](src/graine/derive_avec_profondeur.py)
-(24 témoins hors ligne) et [`figure_derive_profondeur.py`](src/figures/figure_derive_profondeur.py)
+Instrument : [`src/graine/derive_avec_profondeur.py`](../src/graine/derive_avec_profondeur.py)
+(24 témoins hors ligne) et [`figure_derive_profondeur.py`](../src/figures/figure_derive_profondeur.py)
 (6 témoins). Corpus : les **16 traces** rendues aux deux profondeurs, 4 rouleaux.
 
 ---

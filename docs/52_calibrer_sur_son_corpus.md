@@ -6,9 +6,9 @@ produit. Aucune des trois fois n'a été trouvée en relisant.
 
 ![où se tient un corpus publié](images/52_calibration.png)
 
-Instruments : [`src/graine/calibration_corpus.py`](src/graine/calibration_corpus.py)
-(11 témoins) et [`figure_calibration.py`](src/figures/figure_calibration.py)
-(13 témoins). Données : [`docs/mesures/balayage_scroll1.csv`](balayage_scroll1.csv), 81 segments.
+Instruments : [`src/graine/calibration_corpus.py`](../src/graine/calibration_corpus.py)
+(11 témoins) et [`figure_calibration.py`](../src/figures/figure_calibration.py)
+(13 témoins). Données : [`docs/mesures/balayage_scroll1.csv`](mesures/balayage_scroll1.csv), 81 segments.
 
 ---
 
