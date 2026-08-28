@@ -1547,6 +1547,22 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             ajoute(f"ecart du second temoin a {couches} couches", ecart, 1, t2.name,
                    unites=("µm",))
 
+    # ⚠⚠ Les correlations du transport (residu M7). Le p BRUT et le p de HOLM sont gardes
+    # tous les deux, exprès : publier le brut seul est precisement la faute que la correction
+    # existe pour empecher, et un lecteur doit pouvoir verifier les deux.
+    tdc = _source(racine, "transport_de_calibration.json")
+    if tdc.exists():
+        d = json.loads(tdc.read_text())
+        for nom, c in d.get("correlations", {}).items():
+            if not c.get("exploitable"):
+                continue
+            ajoute(f"rho du transport, {nom}", c["rho"], 3, tdc.name, signe=True)
+        for nom, pr in d.get("permutation", {}).items():
+            if pr.get("exploitable"):
+                ajoute(f"p de permutation, {nom}", pr["p"], 4, tdc.name)
+        for nom, h in d.get("holm", {}).items():
+            ajoute(f"p de Holm, {nom}", h, 3, tdc.name)
+
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():
         d = json.loads(bdf.read_text())

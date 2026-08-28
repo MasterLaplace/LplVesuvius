@@ -166,6 +166,46 @@ que chacun est du genre à ressortir ailleurs.
   ceux du concours de détection d'encre — *et* leurs volumes complets, donc leurs couches
   cachées. `57` §3 avait mesuré le transport impossible **sur le couple essayé** ; il ne
   l'est pas sur ceux-ci. Relevé : [`docs/mesures/paires_denergie.json`](mesures/paires_denergie.json).
+
+## 7. ⭐⭐⭐ Le transport, VALIDÉ avant d'être appliqué — et il ne tranche pas
+
+Ajouté le 2026-08-28. Le résidu ci-dessus demandait d'**appliquer** le transport là où la
+vérité manque. L'étape qu'il sautait est celle-ci : le **valider** là où la vérité existe
+encore. Appliquer un prédicteur non validé dans une région où plus personne ne peut le
+contredire produit un chiffre auquel on ne peut pas répondre.
+
+Les fragments donnent exactement ce cadre. Sur les **23 tuiles** de 256 px dont
+[`64`](64_la_dispersion_netait_pas_un_effet.md) a mesuré l'AUC contre les étiquettes, les
+grandeurs typographiques sont recalculées **sans jamais regarder les étiquettes** — la
+signature de la fonction qui les calcule ne reçoit que la prédiction, et un contrôle l'asserte.
+
+| grandeur | ρ de rang | IC 95 % | p permutation | **p Holm** |
+|---|---:|---:|---:|---:|
+| aire médiane des taches | **−0,448** | [−0,70 ; −0,07] | **0,0312** | 0,156 |
+| hauteur médiane | −0,319 | [−0,69 ; +0,11] | 0,1258 | 0,503 |
+| composantes | +0,284 | [−0,11 ; +0,61] | 0,1848 | 0,554 |
+| **épaisseur de trait** | −0,108 | [−0,54 ; +0,32] | 0,6279 | 1,000 |
+| couverture | −0,097 | [−0,50 ; +0,31] | 0,6529 | 1,000 |
+
+⚠⚠⚠ **Une grandeur sur cinq passe sous 0,05 brut, et ça ne veut rien dire.** Cinq tests ont
+été faits : sous l'hypothèse nulle, le hasard en met au moins une sous 0,05 dans **23 %** des
+cas. Après correction de Holm, **aucune ne survit**. Le transport n'est donc **ni établi ni
+réfuté** — et publier « aire médiane, ρ = −0,45, p = 0,03 » aurait été rapporter un tirage.
+
+⭐ Ce que le tableau dit quand même, et qui n'était pas prévu : **l'épaisseur de trait est la
+PIRE des cinq ici** (ρ = −0,108) alors que c'est la meilleure du § 4 (AUC 0,857 sur 190 cartes
+publiées). Les deux mesures ne posent pas la même question — l'une classe des **cartes
+entières** par contraste d'encre publié, l'autre prédit l'AUC d'une **tuile** contre des
+étiquettes — et le résidu demandait justement de passer de la première à la seconde. La
+réponse mesurée est que ça ne passe pas tout seul.
+
+⚠ Et la limite est chiffrée, pas devinée : la grandeur à prédire est elle-même bruitée
+(écart-type **0,2243** d'une tuile à l'autre, [`64`](64_la_dispersion_netait_pas_un_effet.md)),
+donc toute corrélation mesurée ici est **atténuée**. 23 tuiles ne suffisent pas ; c'est le même
+sous-dimensionnement que `63`, mesuré cette fois avant de conclure plutôt qu'après.
+
+**Instrument** : [`src/encre/transport_de_calibration.py`](../src/encre/transport_de_calibration.py)
+(36 contrôles). **Mesure** : [`transport_de_calibration.json`](mesures/transport_de_calibration.json).
 - ⚠ **Le contraste d'encre n'est pas une vérité terrain non plus** : c'est une autre sortie
   du même pipeline. L'accord de deux mesures indépendantes du même objet est plus faible
   qu'une vérification, et plus fort que rien. Le dire fait partie du résultat.

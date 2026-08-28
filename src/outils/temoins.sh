@@ -1101,6 +1101,10 @@ run "dispersion des fragments" uv run python "$ROOT/src/encre/dispersion_des_fra
 # effet, ou le bruit d'une fenetre unique ? Quatre sondes tenues sur cette batterie, dont
 # celle de l'ICC naif -- qui passait au vert avant d'etre ecrite.
 run "bruit d'une fenetre"     uv run python "$ROOT/src/encre/bruit_dune_fenetre.py" --verifier
+# ⚠⚠ La validation du transport de calibration (residu M7 de `45`). Sa sonde la plus utile
+# est celle de Holm : un p brut de 0,0312 sur CINQ tests ne survit pas, et sans la correction
+# ce fichier aurait publie un tirage comme un resultat.
+run "transport de calibration" uv run python "$ROOT/src/encre/transport_de_calibration.py" --verifier
 run "allure d'un rendu"        uv run python "$ROOT/src/encre/allure_du_rendu.py" --verifier
 run "figure hypothèse réfutée" uv run python "$ROOT/src/figures/figure_hypothese_refutee.py" --verifier
 run "figure bruit d'une fenetre" uv run python "$ROOT/src/figures/figure_bruit_dune_fenetre.py" --verifier
