@@ -61,6 +61,33 @@ un **autre objet**, contre de **vrais labels**, et la conclusion converge.
 souvent**. Le rappel monte de 0,609 à 0,864 pendant que la précision tombe de 0,552 à 0,408.
 Le modèle devient plus bavard et moins juste, ce qui est cohérent avec un signal dilué.
 
+## 2 bis. ⚠⚠ La réplication NE CONFIRME PAS — et c'est le résultat le plus utile du lot
+
+`Frag2` (`PHercParis2Fr143`) porte les mêmes étiquettes, et la campagne est la même à un
+paramètre près. Fenêtre choisie sur le masque seul, à (7824, 4032).
+
+| fragment | encre de la fenêtre | **AUC** | précision | rappel | gain sur le hasard |
+|---|---:|---:|---:|---:|---:|
+| `Frag1` | 31,8 % | **0,746** | 0,552 | 0,609 | **1,7×** |
+| `Frag2` | 20,6 % | **0,600** | 0,257 | 0,345 | **1,3×** |
+
+⚠⚠⚠ **0,746 n'est pas reproductible sur un second objet.** L'écart est de **0,146 d'AUC**,
+et il ne s'explique **pas** par la densité d'encre : l'aire sous la courbe ROC est
+indépendante de la prévalence par construction — c'est une mesure de **rang**, pas de taux.
+Deux fenêtres choisies par la même règle, sur deux fragments du même corpus, au même
+réglage, donnent deux réponses éloignées.
+
+⭐ Ce qu'il faut en retenir, et c'est plus honnête que le premier chiffre : **notre chaîne,
+contre vérité terrain, se situe entre 0,60 et 0,75 selon le fragment**. Citer « 0,746 » seul
+serait publier le meilleur des deux tirages.
+
+⚠ Le contrôle par mélange rend **0,500** dans les deux cas, donc les deux portent un signal
+réel — le désaccord porte sur *combien*, pas sur *s'il y en a*.
+
+⚠ Un troisième point est en cours (`Frag3`, 7,9 % d'encre sur l'ensemble du fragment, le plus
+maigre des trois) : il dira lequel de 0,60 ou 0,75 est l'exception, ou qu'il n'y a pas
+d'exception mais une dispersion.
+
 ## 3. Ce que ce document N'établit pas
 
 1. ⚠⚠ **Si `Frag1` était dans l'entraînement du modèle.** `timesformer_GP_scroll1` vient des
@@ -75,8 +102,9 @@ Le modèle devient plus bavard et moins juste, ce qui est cohérent avec un sign
 3. ⚠ **Un fragment n'est pas un rouleau.** Sa surface est ouverte, plate, et n'a pas traversé
    un déroulage virtuel. Ce qui est mesuré ici est ce que le modèle fait d'un papyrus dont la
    géométrie est facile ; un rouleau y ajoute tout le reste.
-4. ⚠ **Une seule fenêtre, un seul fragment.** `Frag2` à `Frag6` existent et portent les mêmes
-   étiquettes ; la réplication est le lot suivant, et elle est bon marché.
+4. ⚠⚠ ~~**Une seule fenêtre, un seul fragment.**~~ **La réplication est faite** (§2 bis) et
+   elle **ne confirme pas** : 0,600 sur `Frag2` contre 0,746 sur `Frag1`. Ce qui reste ouvert
+   n'est plus « répliquer » mais **expliquer la dispersion**.
 
 ---
 
