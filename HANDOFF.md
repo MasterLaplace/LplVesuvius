@@ -54,7 +54,7 @@ aveugle, aucune réparation ne peut y montrer de gain » : **c'est faux, le lot 
 | | état |
 |---|---|
 | ~~**expliquer la dispersion** 0,52–0,75 entre fragments~~ | ✅ **fait le 2026-08-28** → [`64`](docs/64_la_dispersion_netait_pas_un_effet.md), et **il n'y avait pas de cause** : la dispersion tuile à tuile **dans** un fragment vaut 0,2243 contre 0,0391 **entre** fragments, soit **5,7×**, l'ICC vaut **0,030**, et il aurait fallu **27 tuiles par fragment** là où on en avait 10, 11 et 2. ⚠ Conséquence à tenir : **les trois AUC ne se comparent pas entre elles** |
-| le **juge** de [`09`](docs/09_protocole_jugement_modele.md) | ⏳ le jeu est **bâti** (18 tuiles, 3 familles, clé à part) mais la session qui a vu les cartes est **disqualifiée** par le protocole. Il faut un papyrologue ou un fil neuf |
+| le **juge** de [`09`](docs/09_protocole_jugement_modele.md) | ❌ **bloqué sur une personne, plus sur du travail.** Le jeu est bâti (18 tuiles), la **consigne est dans le dossier** depuis le 2026-08-28, la clé est à côté (`docs/mesures/jeu_du_juge_cle.json`), le dépouilleur existe. La session qui a vu les cartes est **disqualifiée** par `09` §2 bis. ⭐ Le protocole nomme deux juges admissibles : **un papyrologue, ou un fil neuf** qui n'a rien vu de ce dépôt |
 | contrôle **typographique** du témoin négatif | ⏳ a manqué d'**une** fenêtre (5 rendues, 6 nécessaires). Il faut une **seconde** trace à α ≈ +1 ; `data/leur_graine/` n'en a pas |
 | **énergie** isolée contre étiquettes | ❌ **impossible en l'état** : `Frag1`–`Frag3` ont les labels sans recalage, `Frag5`/`Frag6` le recalage sans labels, et les volumes d'une paire n'ont pas la même forme |
 | la **soumission** | hors périmètre, sur demande de l'auteur |

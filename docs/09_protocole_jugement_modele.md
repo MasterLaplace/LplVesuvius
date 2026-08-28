@@ -82,6 +82,27 @@ les cartes de `PHerc1447` les a **regardées** — figures comprises. Elle est d
 comme juge par la règle même de ce document, et bâtir le jeu est tout ce qu'elle peut faire
 honnêtement. Le juge doit être un papyrologue, ou un fil neuf qui n'a rien vu de ce dépôt.
 
+> ⭐⭐ **ET LE JEU EST DÉSORMAIS TRANSMISSIBLE EN UN GESTE — 2026-08-28.** Il manquait la
+> moitié qui rend un jeu utilisable par quelqu'un d'autre : `data/jeu_du_juge/` ne contenait
+> que **18 images sans consigne**, donc le transmettre revenait à transmettre un dossier
+> d'images muettes. Le générateur écrit maintenant `CONSIGNE.md` **dans** le dossier — le
+> prompt du § 3, reformulé pour un lecteur humain — et la clé reste **à côté**, dans
+> `docs/mesures/jeu_du_juge_cle.json`.
+>
+> ⚠⚠⚠ **La consigne ne nomme ni les familles, ni leur compte, et un contrôle l'asserte.** Un
+> juge qui saurait « six positives, six négatives, six inconnues » pourrait **répartir ses
+> réponses par comptage** au lieu de lire, et le jeu cesserait d'être aveugle sans que
+> personne ne s'en aperçoive. Sonde tenue : écrire cette phrase dans la consigne fait tomber
+> **six** contrôles.
+>
+> ⚠ Le total, lui, y figure — un juge le compte de toute façon en ouvrant le dossier.
+>
+> ⭐ Les tuiles se regénèrent **octet pour octet identiques** à graine égale (vérifié : même
+> empreinte avant et après), donc la consigne a pu être ajoutée sans rebâtir le jeu.
+>
+> **Ce qui reste est un acte humain, pas une tâche de code.** Tout est prêt : un dossier, une
+> consigne, une clé tenue à part, et un dépouilleur.
+
 ## 3. Le prompt
 
 Le prompt ci-dessous est conçu pour **rendre le refus facile et la fabrication

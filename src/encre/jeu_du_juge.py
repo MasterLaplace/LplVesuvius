@@ -158,6 +158,16 @@ def batir(familles: dict, sortie: Path, cote: int, graine: int,
             "cle": cle}
 
 
+def _mots_qui_trahissent() -> tuple[str, ...]:
+    """Les mots qu'une consigne aveugle ne doit pas contenir.
+
+    ⚠ Écrits ici plutôt qu'en ligne dans le contrôle : la liste EST la définition de « ne pas
+    trahir », et une définition enfouie dans une assertion ne se relit pas.
+    """
+    return ("positif", "négatif", "negatif", "inconnu", "témoin", "temoin",
+            "famille", "calibrage", "Scroll", "PHerc")
+
+
 def verifier() -> int:
     """Auto-test HORS LIGNE : le découpage, l'étirement commun, l'aveugle."""
     echecs = controles = 0
@@ -224,9 +234,77 @@ def verifier() -> int:
     v("... et il melange vraiment", melanger(20, 4) != list(range(20)))
     v("le melange est une permutation", sorted(melanger(20, 4)) == list(range(20)))
 
+    # ⚠⚠⚠ LE CONTROLE QUI GARDE L'AVEUGLEMENT : la consigne ne doit nommer ni les familles,
+    # ni leur compte. Un juge qui sait « six de chaque » repartit ses reponses au lieu de lire,
+    # et le jeu cesse d'etre aveugle sans que personne ne s'en apercoive.
+    c = consigne_pour(18)
+    bas = c.lower()
+    for mot in _mots_qui_trahissent():
+        v(f"la consigne ne dit pas « {mot} »", mot.lower() not in bas)
+    v("... et elle ne donne aucun compte par famille", "6" not in c and "six" not in bas)
+    v("... mais elle dit bien le total", "18 images" in c)
+    v("... et le refus y est une reponse nommee", "AUCUNE LETTRE VISIBLE" in c)
+    v("... et le format de reponse y est", "LISIBILITE:" in c and "L<n>_CONFIANCE:" in c)
+    v("... et l'interdiction de reconstituer aussi", "Ne complétez JAMAIS" in c)
+
     print(f"\n{'ALL PASS' if not echecs else 'ECHEC'} "
           f"({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
+
+
+CONSIGNE = """# Relevé de ce qui est visible — consigne
+
+Vous allez regarder {n} images. Chacune est produite par un pipeline de détection d'encre
+appliqué à un papyrus carbonisé. Les zones sombres sont les endroits où le modèle estime
+qu'il y a de l'encre. Le fond clair est le support. Le gris uni, s'il y en a, est une zone
+non analysée.
+
+⚠ Les images ne sont **pas** toutes du même genre, et on ne vous dit pas lesquelles sont
+lesquelles. C'est voulu : un relevé qui sait d'avance ce qu'il doit trouver ne mesure rien.
+
+Votre tâche est de **RELEVER ce qui est visible, pas de reconstituer un texte**.
+
+Règles, dans l'ordre de priorité :
+
+1. Ne transcrivez QUE ce que vous voyez. N'utilisez aucune connaissance de la langue, d'un
+   auteur ou d'un corpus pour compléter, corriger ou deviner un caractère.
+2. Un caractère que vous ne pouvez pas identifier avec certitude s'écrit « · ».
+   Écrire « · » est une bonne réponse. Ce n'est pas un échec.
+3. Ne complétez JAMAIS une lacune, même si la restitution vous paraît évidente.
+4. Si l'image ne contient aucune forme de lettre, répondez exactement :
+   AUCUNE LETTRE VISIBLE
+   et rien d'autre.
+
+Format de réponse, pour **chaque** image, strictement :
+
+IMAGE: <nom du fichier>
+LIGNES: <nombre de lignes de texte que vous distinguez, ou 0>
+Puis, pour chaque ligne, dans l'ordre de haut en bas :
+L<n>: <suite de caractères grecs et de « · », sans espaces inventés>
+L<n>_CONFIANCE: <un chiffre de 0 à 9 par caractère de la ligne, dans le même ordre>
+
+Enfin :
+LISIBILITE: <0 à 10 — 0 = aucune lettre identifiable, 10 = texte suivi lisible>
+JUSTIFICATION: <une phrase décrivant ce qui, dans l'image, soutient votre note>
+
+Ne produisez rien d'autre que ce format.
+"""
+"""La consigne qui accompagne le jeu, reprise mot pour mot de `09` §3.
+
+⚠⚠⚠ CE QU'ELLE NE DIT PAS, ET C'EST TOUT LE POINT : ni combien d'images il y a de chaque
+famille, ni qu'il y a trois familles, ni laquelle est laquelle. Un juge qui saurait « six
+positives, six négatives, six inconnues » pourrait **répartir ses réponses par comptage** au
+lieu de lire, et le jeu cesserait d'être aveugle sans que personne ne s'en aperçoive. Le
+contrôle `la consigne ne trahit pas la composition` l'asserte.
+
+⚠ Le nombre TOTAL d'images y figure, lui, et c'est sans risque : un juge le compte de toute
+façon en ouvrant le dossier.
+"""
+
+
+def consigne_pour(total: int) -> str:
+    """La consigne, avec le seul chiffre qu'elle a le droit de porter."""
+    return CONSIGNE.format(n=total)
 
 
 def main() -> int:
@@ -261,6 +339,11 @@ def main() -> int:
     print(f"  jeu   : {a.sortie}  ({sum(releve['compte'].values())} tuiles de {a.cote} px)")
     for r, n in releve["compte"].items():
         print(f"    {r:9s} {n}")
+    # ⚠⚠ La consigne va DANS le dossier, la clé À CÔTÉ. C'est ce qui rend le jeu
+    # transmissible en un seul geste : un dossier, une consigne, aucune réponse dedans.
+    total = sum(releve["compte"].values())
+    (a.sortie / "CONSIGNE.md").write_text(consigne_pour(total), encoding="utf-8")
+    print(f"  consigne : {a.sortie / 'CONSIGNE.md'}  (a transmettre AVEC le jeu)")
     print(f"  clé   : {cle}  ⚠ à ne PAS transmettre avec le jeu")
     print(f"  plage commune : {releve['etendue_commune'][0]:.3f} … "
           f"{releve['etendue_commune'][1]:.3f}")
