@@ -55,7 +55,8 @@ aveugle, aucune réparation ne peut y montrer de gain » : **c'est faux, le lot 
 |---|---|
 | ~~**expliquer la dispersion** 0,52–0,75 entre fragments~~ | ✅ **fait le 2026-08-28** → [`64`](docs/64_la_dispersion_netait_pas_un_effet.md), et **il n'y avait pas de cause** : la dispersion tuile à tuile **dans** un fragment vaut 0,2243 contre 0,0391 **entre** fragments, soit **5,7×**, l'ICC vaut **0,030**, et il aurait fallu **27 tuiles par fragment** là où on en avait 10, 11 et 2. ⚠ Conséquence à tenir : **les trois AUC ne se comparent pas entre elles** |
 | le **juge** de [`09`](docs/09_protocole_jugement_modele.md) | ❌ **bloqué sur une personne, plus sur du travail.** Le jeu est bâti (18 tuiles), la **consigne est dans le dossier** depuis le 2026-08-28, la clé est à côté (`docs/mesures/jeu_du_juge_cle.json`), le dépouilleur existe. La session qui a vu les cartes est **disqualifiée** par `09` §2 bis. ⭐ Le protocole nomme deux juges admissibles : **un papyrologue, ou un fil neuf** qui n'a rien vu de ce dépôt |
-| contrôle **typographique** du témoin négatif | ⏳ a manqué d'**une** fenêtre (5 rendues, 6 nécessaires). Il faut une **seconde** trace à α ≈ +1 ; `data/leur_graine/` n'en a pas |
+| contrôle **typographique** du témoin négatif | ⏳ **le second témoin existe** (α = +0,99, 13,89 cm², graine tirée par l'outil) et son rendu tourne. 5 fenêtres candidates sur le premier, 4 sur le second, pour 6 nécessaires — le groupement est déjà implémenté |
+| ~~« il ne reste que **ce rouleau-ci** » (`M1ter`, `58`, `59`)~~ | ⚠ **NON TESTABLE avec le corpus publié, 2026-08-28** : `ou_la_verite_existe.py` compte **zéro rouleau mesurable** sur cinq — quatre sans aucune étiquette d'encre, `Scroll1` avec des étiquettes qui sont son jeu d'**entraînement**. ⭐ La condition qui rouvrirait : des étiquettes publiées sur un rouleau que le modèle n'a pas vu, et une commande le re-vérifie |
 | **énergie** isolée contre étiquettes | ❌ **impossible en l'état** : `Frag1`–`Frag3` ont les labels sans recalage, `Frag5`/`Frag6` le recalage sans labels, et les volumes d'une paire n'ont pas la même forme |
 | la **soumission** | hors périmètre, sur demande de l'auteur |
 
@@ -106,7 +107,23 @@ donnent au hasard une fois sur quatre. ⭐ L'épaisseur de trait, meilleure des 
 publiées, est ici la **pire** — classer des cartes entières et prédire l'AUC d'une tuile ne
 sont pas la même question.
 
-**Tâches ouvertes : 14 → 11**, dont 5 sont la soumission (hors périmètre).
+**σ ne prédit pas la qualité mesurée, et 9,72 µm n'est pas établi lisible** →
+[`65`](docs/65_ce_que_sigma_ne_dit_pas.md). Deux inférences que le dépôt faisait depuis des
+semaines, testées pour la première fois sur les 23 tuiles étiquetées. σ arrive **quatrième
+sur six** grandeurs (p de Holm 0,739) ; à 9,72 µm l'intervalle [0,455 ; 0,745] contient 0,5,
+et un balayage de maille montre que **cette carte ne peut pas trancher** — il faut plus de
+surface rendue. ⭐ Au natif (3,24 µm), la lisibilité **est** établie, et c'est une première
+contre de vraies étiquettes.
+
+**Aucun rouleau n'est mesurable** → [`59`](docs/59_la_campagne_plutot_que_le_rouleau.md) et
+`ou_la_verite_existe.py` : **0 sur 5**. Quatre ne publient aucune étiquette d'encre, `Scroll1`
+en a mais c'est son jeu d'entraînement. Seuls **4 fragments** le sont. Chercher un discriminant
+entre rouleaux suppose de mesurer la lecture des deux côtés, et elle ne l'est d'aucun côté
+rouleau. ⚠ Ce n'est pas « le modèle ne lit pas sur un rouleau » — c'est qu'on ne peut pas le
+mesurer.
+
+**Tâches ouvertes : 14 → 8**, dont **5 sont la soumission** (hors périmètre) et **3 sont le
+contrôle typographique en cours de rendu**.
 
 ### ⚠ Les pièges payés aujourd'hui, à ne pas repayer
 
