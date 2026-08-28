@@ -127,6 +127,23 @@ mesurer.
 **Tâches ouvertes : 14 → 8**, dont **5 sont la soumission** (hors périmètre) et **3 sont le
 contrôle typographique en cours de rendu**.
 
+### ⭐⭐ La convention du sablier a changé — 2026-08-29
+
+**Un ⏳ veut dire OUVERT, point.** Le registre acceptait un état `faite` : un sablier posé sur
+une ligne dont le travail est fini, donc un caractère qui **ment** à qui lit le document sans
+ouvrir le registre. Il y en avait **dix-neuf**.
+
+- les dix-neuf sont devenus `✅`, et les six lignes dont la prose affirmait encore quelque
+  chose de faux (« la seule piste restante », « M8 reste ouvert », « balayage en cours ») sont
+  **barrées avec le pointeur vers leur réponse** ;
+- `faite` et `perimee` **ne sont plus des états valides** : classer un sablier ainsi est une
+  **contradiction** que `taches_ouvertes.py` refuse, avec le message « remplacer ⏳ par ✅ » ;
+- **31 sabliers dans 16 documents → 12 dans 6**, registre **32 → 13 lignes**.
+
+⚠ Conséquence pratique : « reste-t-il du travail ? » se lit désormais **sur le document**, sans
+croiser un registre. Les trois états qui restent sont `ouverte`, `recit` (un titre de section
+daté) et `legende` (le caractère expliqué dans la légende de `55`).
+
 ### ⚠ Les pièges payés aujourd'hui, à ne pas repayer
 
 - **219 agents lancés d'un coup** ont épuisé la limite mensuelle de l'org : un vérificateur
