@@ -26,6 +26,18 @@ la campagne de reperage (8,6 a 9,4 µm, 1,2 m, 113 a 116 keV).
 **de la campagne de scan**, qui se teste et qui s'achete. Un rouleau ne change pas ; un scan,
 si.
 
+⚠⚠⚠ LIMITE DE L'INSTRUMENT, mesuree le 2026-08-28. Ce fichier n'interroge qu'UN des deux
+layouts du depot public : le bucket open-data (`*-masked.zarr`, acquisitions 2025 et 2026).
+Les rouleaux scannes AVANT ont des volumes dans `full-scrolls/<Scroll>/<nom>.volpkg/volumes/`
+qu'il ne compte pas, donc son `n_volumes` est un **minorant** pour eux.
+
+Ce n'est pas un detail : le volume ou le modele atteint AUC 0,925 -- `20230205180739`, un scan
+de 2023 a 7,91 µm et **54 keV** -- est precisement dans ce layout-la, donc INVISIBLE ici. Les
+cinq volumes que ce fichier trouve pour `PHercParis4` sont tous posterieurs et aucun n'est
+celui du resultat de reference. Une inference du genre « les rouleaux lisibles ont ete
+rescannes fin » se lit donc sur une liste qui ne contient pas le scan ayant produit la
+lecture. Detaille dans `59`.
+
 Usage :
     uv run python src/encre/campagnes_de_scan.py --lister --json docs/mesures/campagnes.json
     uv run python src/encre/campagnes_de_scan.py --depuis docs/mesures/campagnes.json

@@ -23,13 +23,45 @@ Ce que ça donne sur les six rouleaux qui ont motivé la mesure :
 | `PHerc0172` | 2 | 53, 53 | encre publiée |
 | `PHerc1667` | 2 | 59, 78 | encre publiée |
 | `PHerc0139` | 7 | 59, 77×4, 78, 113 | encre publiée |
-| `PHerc1447` | **1** | **116** | **inerte** (σ = 0,0171) |
+| `PHerc1447` | **1** | **116** | ~~**inerte** (σ = 0,0171)~~ ⚠ **σ = 0,6558**, cf. ci-dessous |
 | `PHerc0358` | **1** | **113** | — |
 
 ⭐ Ce n'est pas d'abord une histoire d'énergie : c'est le **nombre de campagnes**. Les
 rouleaux dont l'encre se lit ont tous été rescannés **fin et en propagation courte**
 (1,1 à 2,4 µm, 0,2 m) ; les deux où le modèle est inerte n'ont que le scan de **repérage**
 (8,6 à 9,4 µm, 1,2 m, 113 à 116 keV).
+
+### ⚠⚠⚠ Deux corrections du 2026-08-28, et la seconde touche l'inférence ci-dessus
+
+**1. `PHerc1447` n'est plus « inerte ».**
+[`60`](60_la_constante_qui_rendait_le_modele_muet.md) a montré que le σ de 0,0171 mesurait une
+constante de normalisation de notre côté, pas le rouleau. À l'échelle corrigée il vaut
+**0,6558**, soit **1,2×** le témoin — le même régime. La colonne « verdict du modèle » de ce
+tableau portait donc, pour l'un de ses six rouleaux, un fait sur **nous**.
+
+**2. ⚠⚠ Le relevé n'énumère pas le volume où le modèle marche.**
+`campagnes_de_scan.py` interroge le bucket **open-data** (`*-masked.zarr`, acquisitions 2025
+et 2026). Pour `PHercParis4` il trouve bien cinq volumes — 45,5 µm à 74 et 110 keV, puis
+2,4 et 1,1 µm à 137 et 78 keV. **Aucun n'est celui du résultat de référence.** Le segment où
+le modèle atteint AUC 0,925 est `20230909121925`, dans le volume **`20230205180739`** :
+un scan **de 2023**, **7,91 µm**, **54 keV**, qui vit dans l'ancien layout
+`full-scrolls/Scroll1/PHercParis4.volpkg/` — lequel ne contient que **deux** volumes, les
+deux moitiés recousues du même scan à 54 keV (vérifié à la source le 2026-08-28).
+
+⚠⚠⚠ **Conséquence sur l'inférence.** La phrase ci-dessus dit que les rouleaux lisibles ont
+été « rescannés fin et en propagation courte », et invite à y voir la cause. Or **la lecture
+de référence n'a pas été faite sur un rescan fin** : elle a été faite sur un scan grossier de
+7,91 µm, c'est-à-dire à **9 %** du pas de `PHerc1447` ([`58`](58_resolution_ou_rouleau.md) §7).
+Le rescan fin existe sur ce rouleau, mais il n'est pas ce qui a produit le résultat qu'on
+cherche à expliquer.
+
+⭐ Ce document avait déjà rétrogradé sa propre conclusion le jour même (p = 0,50 sur les
+rouleaux réellement tentés). Cette correction-ci retire ce qui en restait comme intuition :
+*le rescan fin n'explique pas la lisibilité, puisque la lisibilité a été obtenue sans lui.*
+
+⚠ Et une limite de l'instrument, à connaître : `campagnes_de_scan.py` ne voit qu'un des deux
+layouts du dépôt public. Les rouleaux scannés avant la campagne open-data ont des volumes
+qu'il ne compte pas, donc son `n_volumes` est un **minorant** pour eux.
 
 ## 2. ⚠⚠ La première version de cette mesure était un fait sur NOUS
 
