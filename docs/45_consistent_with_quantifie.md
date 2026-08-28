@@ -157,7 +157,12 @@ que chacun est du genre à ressortir ailleurs.
 
 ## 6. Ce qui reste ouvert
 
-- ⏳ **Le transport vers une région sans vérité n'est pas encore fait.** Ce document montre
+- ⚠ ~~**Le transport vers une région sans vérité n'est pas encore fait.**~~ **RÉPONDU le
+  2026-08-28, négativement, au § 7** : l'étape que ce résidu sautait — *valider* le prédicteur
+  là où la vérité existe encore — a été faite sur les 23 tuiles étiquetées, et **aucune** des
+  cinq grandeurs ne survit à la correction de multiplicité. Appliquer le transport là où plus
+  personne ne peut le contredire serait donc appliquer un prédicteur qu'on sait non validé.
+  *Le texte d'origine, conservé :* Ce document montre
   que les grandeurs se comportent comme il faut là où une mesure indépendante existe ; le
   geste du papier — mesurer sur la surface d'un fragment ouvert, puis retrouver les mêmes
   valeurs sur une couche cachée — demande les deux régions d'un **même** objet.
