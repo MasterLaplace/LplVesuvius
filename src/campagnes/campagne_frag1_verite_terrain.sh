@@ -32,7 +32,10 @@ MODELE=${MODELE:-$ROOT/data/models/timesformer_GP_scroll1}
 COTE=${COTE:-1024}
 PAS=${PAS:-21}
 FILS=${FILS:-16}
-DEPART=${DEPART:-0}
+DEPART=${DEPART:-20}
+# ⚠ Les couches de surface de Frag1 sont numerotees 00 a 64 et nous avons pris 20 a 45,
+# soit les 26 du MILIEU de la pile : les couches de bord sont a moitie hors du papyrus, et
+# le modele en recevrait du vide sur une part de sa fenetre de profondeur.
 SORTIE=$ROOT/data/out/ink_frag1_54keV.npy
 
 [ -d "$COUCHES" ] || { echo "couches absentes : $COUCHES" >&2; exit 2; }
