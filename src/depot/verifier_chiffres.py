@@ -253,6 +253,13 @@ CARTES_ATTENDUES = (
 ⚠⚠ La liste est écrite plutôt que déduite du fichier, et c'est tout l'intérêt : un garde-fou
 qui garde « ce qu'il trouve » ne peut pas remarquer qu'il ne trouve plus rien. Une carte
 renommée ou disparue doit faire ÉCHOUER, pas réduire le compte en silence.
+
+⚠⚠⚠ CONSÉQUENCE À CONNAÎTRE : le compte de chiffres gardés est **auto-référent**. Il est
+écrit dans `docs/mesures/temoins.json`, cité dans les documents, et ce garde-fou vérifie la
+citation. Allonger cette liste change donc le compte, ce qui périme la citation — et il faut
+**deux exécutions** pour que l'ensemble se stabilise : la première écrit le nouveau compte,
+la seconde le vérifie. Ce n'est pas un clignotement, c'est un point fixe, et le savoir évite
+de croire à une régression.
 """
 
 
