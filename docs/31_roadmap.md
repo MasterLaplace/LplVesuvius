@@ -250,6 +250,33 @@ ne la fabrique. Le prix tolère *« less than 10 % »* de patches déconnectés 
 la marge dans laquelle ce problème doit tenir, et **le mesurer par rouleau est une des
 premières choses à faire**, parce que ça dit sur quel rouleau le prix est jouable.
 
+## 8 bis. ⭐⭐⭐ Ce que « échouer » voudrait dire ici — cadrage de l'auteur, 2026-08-29
+
+> *« Si on arrive au stade où on se demande s'il y a des lettres, c'est qu'on a déjà un bon
+> résultat pour faire des maillages — ou du moins qu'on arrive à créer des résultats cohérents
+> visuellement ou par les chiffres. Donc ça reste une bonne avancée même si le résultat s'avère
+> faux à la fin. »*
+
+⭐ C'est juste, et ça corrige une façon de lire tout ce dépôt. La chaîne a **deux étages**, et
+ils ne réussissent ni n'échouent ensemble :
+
+| étage | ce qu'il produit | comment il se juge |
+|---|---|---|
+| **géométrie** — tracer, aplatir, rendre | une nappe et une image | des mesures : α, auto-intersections, aire, convergence, reproductibilité |
+| **lecture** — détecter l'encre | une carte de scores | une vérité terrain, ou un juge |
+
+⚠⚠ Poser la question « y a-t-il des lettres ? » **suppose déjà l'étage du bas franchi** : il
+faut une surface tracée sans auto-intersection, aplatie, rendue à la bonne échelle, et une
+carte assez propre pour qu'un œil ou un modèle ait quelque chose à regarder. Ce dépôt a
+**quatre-vingts documents** sur cet étage-là, et ses résultats ne dépendent pas de la réponse
+donnée en haut.
+
+⭐⭐ Conséquence sur la façon de rapporter : un « non, pas de lettres » **n'invalide pas** les
+mesures de géométrie, il les laisse exactement où elles sont. Ce qu'il invaliderait, c'est une
+affirmation sur le contenu — et ce dépôt n'en a jamais publié. C'est aussi pourquoi le
+[`46`](46_le_temoin_negatif.md) §3 tient : il ne dit pas « il y a du texte », il dit « cette
+périodicité n'est pas ce qu'une surface sans feuille produit ».
+
 ## 9. ⭐⭐ La question qui commande tout, et qui n'est toujours pas tranchée
 
 > *« Une surface propre donne un meilleur texte » est une affirmation **sur le pipeline**,
