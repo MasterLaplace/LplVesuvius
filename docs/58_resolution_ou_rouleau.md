@@ -275,6 +275,36 @@ Instrument : [`src/encre/contraste_des_objets.py`](../src/encre/contraste_des_ob
 (15 contrôles), mesure :
 [`docs/mesures/contraste_des_objets.json`](mesures/contraste_des_objets.json).
 
+## 8 quater. ⭐⭐⭐ Le plan d'expérience existe déjà, et il n'y a rien à émuler
+
+Trouvé le 2026-08-28, en corrigeant l'angle mort de
+[`59`](59_la_campagne_plutot_que_le_rouleau.md). Le §8 pose le patron — *rendre l'objet qui
+marche semblable à celui qui ne marche pas, une propriété à la fois* — et le §8 ter conclut
+qu'isoler l'énergie demanderait d'**émuler** un contraste, faute de mieux.
+
+**Faute de mieux était faux.** Les six fragments du dépôt public, dans le layout
+`fragments/` que `campagnes_de_scan.py` n'interroge pas, sont un plan d'expérience contrôlé
+déjà scanné :
+
+| fragment | volumes | ce que la paire isole |
+|---|---|---|
+| `Frag1` à `Frag4` | 54 et 88 keV, **tous deux à 3,24 µm** | **l'énergie**, la résolution tenue |
+| `Frag5` | 70 keV, **3,24 et 7,91 µm** | la résolution, l'énergie tenue |
+| `Frag6` | 53, 70 et 88 keV à 3,24 µm **+** 53 keV à 7,91 µm | **trois** paires d'énergie et une de résolution |
+
+**7 paires isolent l'énergie, 2 la résolution.** Instrument :
+[`src/encre/paires_denergie.py`](../src/encre/paires_denergie.py) (18 contrôles), relevé :
+[`docs/mesures/paires_denergie.json`](mesures/paires_denergie.json).
+
+⭐⭐ **Le même objet, scanné aux deux énergies, au même pas.** Il n'y a donc rien à émuler :
+là où le §7 a dû **décimer** pour la résolution, l'énergie se lit sur deux scans réels du
+même fragment. Et ces fragments portent une **vérité terrain d'encre** — leur surface ouverte
+est publiée (`working/54keV_exposed_surface/`), ce sont ceux du concours de détection.
+
+⚠ Ce que ça ne fait pas encore : rendre et comparer. Ce lot demande de télécharger des
+volumes que ce dépôt n'a pas, et c'est le pas suivant. Ce §8 quater établit que le pas est
+**possible**, ce qui n'était pas acquis il y a une heure.
+
 ## 9. ⭐ Deux contrôles de reproductibilité, gratuits et exacts
 
 Les trois campagnes se recouvrent par construction, et les recouvrements doivent coïncider

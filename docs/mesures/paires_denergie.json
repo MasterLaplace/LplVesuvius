@@ -1,0 +1,386 @@
+{
+  "base": "https://dl.ash2txt.org/fragments",
+  "fragments": [
+    {
+      "fragment": "Frag1",
+      "volpkg": "PHercParis2Fr47.volpkg",
+      "volumes": [
+        {
+          "volume": "20230205142449",
+          "voxel_um": 3.24,
+          "energie_kev": 54,
+          "nom": "PHercParis2Fr47 54keV merged, cropped 7198x1399x7219+534+4555+1331"
+        },
+        {
+          "volume": "20230213100222",
+          "voxel_um": 3.24,
+          "energie_kev": 88,
+          "nom": "PHercParis2Fr47 88keV merged, cropped 7332x1608x7229+552+4596+1331"
+        }
+      ],
+      "paires": [
+        {
+          "isole": "energie",
+          "a": "20230205142449",
+          "b": "20230213100222",
+          "voxel_um": [
+            3.24,
+            3.24
+          ],
+          "energie_kev": [
+            54,
+            88
+          ]
+        }
+      ]
+    },
+    {
+      "fragment": "Frag2",
+      "volpkg": "PHercParis2Fr143.volpkg",
+      "volumes": [
+        {
+          "volume": "20230216174557",
+          "voxel_um": 3.24,
+          "energie_kev": 54,
+          "nom": "PHercParis2Fr143 54keV merged, cropped 9984x2288x14111+464+5792+280"
+        },
+        {
+          "volume": "20230226143835",
+          "voxel_um": 3.24,
+          "energie_kev": 88,
+          "nom": "PHercParis2Fr143 88keV merged volume, cropped 10035x2112x14144+432+5746+1801"
+        }
+      ],
+      "paires": [
+        {
+          "isole": "energie",
+          "a": "20230216174557",
+          "b": "20230226143835",
+          "voxel_um": [
+            3.24,
+            3.24
+          ],
+          "energie_kev": [
+            54,
+            88
+          ]
+        }
+      ]
+    },
+    {
+      "fragment": "Frag3",
+      "volpkg": "PHercParis1Fr34.volpkg",
+      "volumes": [
+        {
+          "volume": "20230212182547",
+          "voxel_um": 3.24,
+          "energie_kev": 88,
+          "nom": "PHercParis1Fr34 88keV merged, cropped 6108x1644+2004+4092"
+        },
+        {
+          "volume": "20230215142309",
+          "voxel_um": 3.24,
+          "energie_kev": 54,
+          "nom": "PHercParis1Fr34 54keV merged, cropped 6312x1440x6656+1872+4284+1045"
+        }
+      ],
+      "paires": [
+        {
+          "isole": "energie",
+          "a": "20230212182547",
+          "b": "20230215142309",
+          "voxel_um": [
+            3.24,
+            3.24
+          ],
+          "energie_kev": [
+            88,
+            54
+          ]
+        }
+      ]
+    },
+    {
+      "fragment": "Frag4",
+      "volpkg": "PHercParis1Fr39.volpkg",
+      "volumes": [
+        {
+          "volume": "20230215185642",
+          "voxel_um": 3.24,
+          "energie_kev": 54,
+          "nom": "PHercParis1Fr39 54keV merged, cropped 5808x1968x9231+996+4584+500"
+        },
+        {
+          "volume": "20230222173037",
+          "voxel_um": 3.24,
+          "energie_kev": 88,
+          "nom": "PHercParis1Fr39 88keV merged volume, cropped 5957x1969x9209+901+4528+511"
+        }
+      ],
+      "paires": [
+        {
+          "isole": "energie",
+          "a": "20230215185642",
+          "b": "20230222173037",
+          "voxel_um": [
+            3.24,
+            3.24
+          ],
+          "energie_kev": [
+            54,
+            88
+          ]
+        }
+      ]
+    },
+    {
+      "fragment": "Frag5",
+      "volpkg": "PHerc1667Cr1Fr3.volpkg",
+      "volumes": [
+        {
+          "volume": "20231121133215",
+          "voxel_um": 3.24,
+          "energie_kev": 70,
+          "nom": "PHerc1667Cr1Fr3, 70 keV, 3.24 um, merged"
+        },
+        {
+          "volume": "20231130111236",
+          "voxel_um": 7.91,
+          "energie_kev": 70,
+          "nom": "PHerc1667Cr1Fr3, 70 keV, 7.91 um, merged"
+        }
+      ],
+      "paires": [
+        {
+          "isole": "resolution",
+          "a": "20231121133215",
+          "b": "20231130111236",
+          "voxel_um": [
+            3.24,
+            7.91
+          ],
+          "energie_kev": [
+            70,
+            70
+          ]
+        }
+      ]
+    },
+    {
+      "fragment": "Frag6",
+      "volpkg": "PHerc51Cr4Fr8.volpkg",
+      "volumes": [
+        {
+          "volume": "20231121152933",
+          "voxel_um": 3.24,
+          "energie_kev": 53,
+          "nom": "PHerc51Cr4Fr8, 53 keV, 3.24 um, merged"
+        },
+        {
+          "volume": "20231130112027",
+          "voxel_um": 7.91,
+          "energie_kev": 53,
+          "nom": "PHerc51Cr4Fr8, 53 keV, 7.91 um, merged"
+        },
+        {
+          "volume": "20231201112849",
+          "voxel_um": 3.24,
+          "energie_kev": 88,
+          "nom": "PHerc51Cr4Fr8, 88 keV, 3.24 um, merged"
+        },
+        {
+          "volume": "20231201120546",
+          "voxel_um": 3.24,
+          "energie_kev": 70,
+          "nom": "PHerc51Cr4Fr8, 70 keV, 3.24 um, merged"
+        }
+      ],
+      "paires": [
+        {
+          "isole": "resolution",
+          "a": "20231121152933",
+          "b": "20231130112027",
+          "voxel_um": [
+            3.24,
+            7.91
+          ],
+          "energie_kev": [
+            53,
+            53
+          ]
+        },
+        {
+          "isole": "energie",
+          "a": "20231121152933",
+          "b": "20231201112849",
+          "voxel_um": [
+            3.24,
+            3.24
+          ],
+          "energie_kev": [
+            53,
+            88
+          ]
+        },
+        {
+          "isole": "energie",
+          "a": "20231121152933",
+          "b": "20231201120546",
+          "voxel_um": [
+            3.24,
+            3.24
+          ],
+          "energie_kev": [
+            53,
+            70
+          ]
+        },
+        {
+          "isole": "energie",
+          "a": "20231201112849",
+          "b": "20231201120546",
+          "voxel_um": [
+            3.24,
+            3.24
+          ],
+          "energie_kev": [
+            88,
+            70
+          ]
+        }
+      ]
+    }
+  ],
+  "paires": [
+    {
+      "isole": "energie",
+      "a": "20230205142449",
+      "b": "20230213100222",
+      "voxel_um": [
+        3.24,
+        3.24
+      ],
+      "energie_kev": [
+        54,
+        88
+      ],
+      "fragment": "Frag1"
+    },
+    {
+      "isole": "energie",
+      "a": "20230216174557",
+      "b": "20230226143835",
+      "voxel_um": [
+        3.24,
+        3.24
+      ],
+      "energie_kev": [
+        54,
+        88
+      ],
+      "fragment": "Frag2"
+    },
+    {
+      "isole": "energie",
+      "a": "20230212182547",
+      "b": "20230215142309",
+      "voxel_um": [
+        3.24,
+        3.24
+      ],
+      "energie_kev": [
+        88,
+        54
+      ],
+      "fragment": "Frag3"
+    },
+    {
+      "isole": "energie",
+      "a": "20230215185642",
+      "b": "20230222173037",
+      "voxel_um": [
+        3.24,
+        3.24
+      ],
+      "energie_kev": [
+        54,
+        88
+      ],
+      "fragment": "Frag4"
+    },
+    {
+      "isole": "resolution",
+      "a": "20231121133215",
+      "b": "20231130111236",
+      "voxel_um": [
+        3.24,
+        7.91
+      ],
+      "energie_kev": [
+        70,
+        70
+      ],
+      "fragment": "Frag5"
+    },
+    {
+      "isole": "resolution",
+      "a": "20231121152933",
+      "b": "20231130112027",
+      "voxel_um": [
+        3.24,
+        7.91
+      ],
+      "energie_kev": [
+        53,
+        53
+      ],
+      "fragment": "Frag6"
+    },
+    {
+      "isole": "energie",
+      "a": "20231121152933",
+      "b": "20231201112849",
+      "voxel_um": [
+        3.24,
+        3.24
+      ],
+      "energie_kev": [
+        53,
+        88
+      ],
+      "fragment": "Frag6"
+    },
+    {
+      "isole": "energie",
+      "a": "20231121152933",
+      "b": "20231201120546",
+      "voxel_um": [
+        3.24,
+        3.24
+      ],
+      "energie_kev": [
+        53,
+        70
+      ],
+      "fragment": "Frag6"
+    },
+    {
+      "isole": "energie",
+      "a": "20231201112849",
+      "b": "20231201120546",
+      "voxel_um": [
+        3.24,
+        3.24
+      ],
+      "energie_kev": [
+        88,
+        70
+      ],
+      "fragment": "Frag6"
+    }
+  ],
+  "compte": {
+    "energie": 7,
+    "resolution": 2
+  }
+}

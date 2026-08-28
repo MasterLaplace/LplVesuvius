@@ -161,6 +161,11 @@ que chacun est du genre à ressortir ailleurs.
   que les grandeurs se comportent comme il faut là où une mesure indépendante existe ; le
   geste du papier — mesurer sur la surface d'un fragment ouvert, puis retrouver les mêmes
   valeurs sur une couche cachée — demande les deux régions d'un **même** objet.
+  ⭐⭐ **Et cet objet existe, trouvé le 2026-08-28** : les six fragments du layout
+  `fragments/` publient leur **surface ouverte** (`working/54keV_exposed_surface/`) — ce sont
+  ceux du concours de détection d'encre — *et* leurs volumes complets, donc leurs couches
+  cachées. `57` §3 avait mesuré le transport impossible **sur le couple essayé** ; il ne
+  l'est pas sur ceux-ci. Relevé : [`docs/mesures/paires_denergie.json`](mesures/paires_denergie.json).
 - ⚠ **Le contraste d'encre n'est pas une vérité terrain non plus** : c'est une autre sortie
   du même pipeline. L'accord de deux mesures indépendantes du même objet est plus faible
   qu'une vérification, et plus fort que rien. Le dire fait partie du résultat.
