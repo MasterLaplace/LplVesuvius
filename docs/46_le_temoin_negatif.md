@@ -203,10 +203,31 @@ rendre, et elle est dans la batterie.
 
 ### ⭐ Ce qui reste à faire, et c'est cheap
 
-Agrandir la région ne sert à rien : les couches font 5641 × 5721, et à 5641 le compte de
-candidates reste **9**. Ce qu'il faut est un **second** témoin — une autre région dense, ou
-une autre trace à α ≈ +1 — et le **groupement** déjà implémenté et déclaré : 5 + 5 = 10
-fenêtres suffisent largement.
+⚠ **Agrandir ne sert à rien** : les couches font 5641 × 5721, et à 5641 le compte de
+candidates reste **9**.
+
+⚠⚠ **Déplacer non plus, et c'est mesuré et non supposé.** `ab_segments --densite 5128` dit
+que la région rendue est **déjà la plus dense possible** :
+
+```
+  rendu_41  couche (5641, 5721)
+    coin (0,0)       59,1 % de matière
+    meilleure        59,1 % en (0,0)  gain +0,00 point
+```
+
+La matière forme une **bande centrale** — pleine au milieu, vide aux quatre coins — donc les
+neuf fenêtres candidates tombent 5 fois sur du papyrus et 4 fois sur du vide, exactement ce
+que le masque a retenu. **Cette trace ne peut pas porter plus de cinq fenêtres à ce réglage**,
+où qu'on la regarde.
+
+⭐ Ce qu'il faut est donc un **second** témoin indépendant — une autre trace à α ≈ +1, assez
+grande — et le **groupement** déjà implémenté et déclaré : 5 + 5 = 10 fenêtres suffisent
+largement, et 6 auraient suffi.
+
+⚠⚠ **Et il n'y en a pas localement.** `data/leur_graine/` ne contient que `rendu_41`
+(5641 × 5721, celui-ci), `rendu_161` (dont les TIFF sont vides, forme `(0,)`) et `plat`
+(284 × 288). Produire ou récupérer une seconde trace est donc une tâche à part, pas une
+relance.
 
 ⚠ Tant que cette mesure n'est pas faite, le p = 0,0007 de `60` reste ce qu'il dit —
 *structuré là où son propre mélange ne l'est pas* — et rien de plus.

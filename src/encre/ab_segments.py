@@ -80,6 +80,29 @@ def crop_avec_matiere(couche: np.ndarray, cote: int) -> tuple[int, int]:
     return (i // blocs.shape[1]) * cote, (i % blocs.shape[1]) * cote
 
 
+def meilleure_region(couche, cote: int, pas: int = 64) -> tuple[float, int, int]:
+    """La densité de matière de la meilleure région carrée de `cote`, et son origine.
+
+    ⚠⚠ Le critère est la MATIÈRE, jamais la sortie du modèle. Choisir une région sur ce que
+    le modèle y répond serait choisir celle qui donne le résultat qu'on veut ; la densité se
+    mesure sur une couche, avant tout rendu, et se déclare donc à l'avance.
+
+    Rend `(densité, top, left)`. Sert à répondre « cette trace peut-elle porter plus de
+    fenêtres ailleurs ? » sans dépenser une heure de rendu pour le découvrir.
+    """
+    plein = couche > 0
+    h, w = plein.shape
+    if h < cote or w < cote:
+        raise ValueError(f"une région de {cote} ne tient pas dans {couche.shape}")
+    best = None
+    for top in range(0, h - cote + 1, pas):
+        for left in range(0, w - cote + 1, pas):
+            d = float(plein[top:top + cote, left:left + cote].mean())
+            if best is None or d > best[0]:
+                best = (d, top, left)
+    return best
+
+
 def rendre(couches: Path, modele: Path, top: int, left: int, cote: int,
            fils: int, sortie: Path) -> dict:
     """Lance le VRAI rendu sur le crop et lit sa durée. Aucun modèle n'est réécrit ici.
@@ -124,6 +147,15 @@ def comparer(a: Path, b: Path, modele: Path, cote: int, fils: int) -> dict:
     return {"cote": cote, "fils": fils, "lignes": lignes, "rapport_des_debits": rapport}
 
 
+def _refuse(appel) -> bool:
+    """L'appel lève-t-il `ValueError` ? Écrit une fois plutôt que trois try/except."""
+    try:
+        appel()
+    except ValueError:
+        return True
+    return False
+
+
 def verifier() -> int:
     """Auto-test HORS LIGNE : la recherche de crop, sans modèle ni rendu."""
     echecs = controles = 0
@@ -162,6 +194,20 @@ def verifier() -> int:
         v("un crop impossible est refuse plutot que devine", False)
     except ValueError:
         v("un crop impossible est refuse plutot que devine", True)
+
+    # --- LA MEILLEURE REGION, pour savoir si un rendu ailleurs vaut la peine -----------
+    carte = np.zeros((40, 40), dtype=np.uint8)
+    carte[10:30, 10:30] = 1
+    d, top, left = meilleure_region(carte, 20, pas=10)
+    v("la meilleure region trouve le bloc plein", (top, left) == (10, 10))
+    v("... et rend sa densite", abs(d - 1.0) < 1e-9)
+    v("une region plus grande que la couche est refusee",
+      _refuse(lambda: meilleure_region(carte, 100)))
+    # ⚠ Sur une couche uniforme, TOUTE region se vaut : la premiere est rendue, et c'est
+    # correct — il n'y a rien a gagner a se deplacer.
+    d2, t2, l2 = meilleure_region(np.ones((40, 40), dtype=np.uint8), 20, pas=10)
+    v("sur une couche uniforme la premiere region est rendue",
+      (t2, l2) == (0, 0) and abs(d2 - 1.0) < 1e-9)
     # Une couche entierement vide rend quand meme un coin : c'est a l'appelant de voir le
     # remplissage nul, et la garde de pile d'`infer_ink` refusera le rendu en le disant.
     v("une couche vide rend un coin plutot que de lever",
@@ -191,10 +237,25 @@ def main() -> int:
     ap.add_argument("--cote", type=int, default=640)
     ap.add_argument("--fils", type=int, default=4)
     ap.add_argument("--json", type=Path)
+    ap.add_argument("--densite", type=int, metavar="COTE",
+                    help="ne rien rendre : dire quelle région carrée de COTE porte le plus "
+                         "de matière, et si elle vaut mieux que le coin")
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()
     if a.verifier:
         return verifier()
+    if a.densite:
+        import tifffile
+        for couches in a.segments:
+            tif = couches / f"{COUCHE_SONDEE:02d}.tif"
+            image = tifffile.imread(tif)
+            d, top, left = meilleure_region(image, a.densite)
+            coin = float((image[: a.densite, : a.densite] > 0).mean())
+            print(f"  {couches.name}  couche {image.shape}")
+            print(f"    coin (0,0)      {100 * coin:5.1f} % de matière")
+            print(f"    meilleure       {100 * d:5.1f} % en ({top},{left})  "
+                  f"gain {100 * (d - coin):+.2f} point(s)")
+        return 0
     if len(a.segments) != 2:
         ap.error("donner exactement deux dossiers de couches, ou --verifier")
 
