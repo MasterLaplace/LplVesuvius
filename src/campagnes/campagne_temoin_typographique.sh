@@ -72,3 +72,21 @@ echo "== le temoin negatif contre son propre melange, reglage calibre"
 uv run python "$ROOT/src/encre/typographie.py" --npy "$SORTIE" \
     --reduire 8 --taille-fenetre 256 --controle-melange \
     --json "$RECORD"
+
+# ⭐⭐⭐ LE TEST GROUPE, quand les DEUX temoins sont rendus. C'est l'experience qui avait
+# manque d'UNE fenetre : `fenetres_par_region.py` en demande 6, le premier temoin ne peut
+# pas en porter plus de 5 ou qu'on le regarde, et le second en porte 4.
+#
+# ⚠⚠ Le groupement est LEGITIME ici, et la docstring de `fisher_periodicite_groupee` dit
+# exactement pourquoi : il suppose des observations DISTINCTES, et ce serait faux pour deux
+# rendus d'une meme surface. Nos deux temoins viennent de deux graines differentes, donc de
+# deux traces differentes -- verifiable, `data/leur_graine/trace/` et `data/temoin_2/trace/`
+# portent chacun leur `seed.json`.
+AUTRE=${AUTRE:-}
+if [ -n "$AUTRE" ] && [ -s "$AUTRE" ] && [ -s "$SORTIE" ]; then
+  echo
+  echo "== les DEUX temoins negatifs, groupes"
+  uv run python "$ROOT/src/encre/typographie.py" --npy "$SORTIE" "$AUTRE" \
+      --reduire 8 --taille-fenetre 256 --controle-melange \
+      --json "${RECORD_GROUPE:-$ROOT/docs/mesures/typographie_temoins_groupes.json}"
+fi
