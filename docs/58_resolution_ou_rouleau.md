@@ -182,6 +182,18 @@ recouvre — l'état de conservation, la chimie de l'encre, l'énergie du faisce
 tracée — reste à découper, et ce découpage-ci est le patron à suivre : rendre l'objet qui
 marche semblable à celui qui ne marche pas, une propriété à la fois.
 
+> ⚠⚠⚠ **ET UNE CONDITION PRÉALABLE, chiffrée le 2026-08-28** →
+> [`64`](64_la_dispersion_netait_pas_un_effet.md). « Une propriété à la fois » suppose qu'on
+> puisse voir l'effet d'une propriété, et la mesure dit de combien : l'AUC d'une tuile de
+> 256 px varie d'un écart-type de **0,2243** d'une tuile à l'autre du **même** objet, au
+> **même** réglage. Un écart de 0,10 demande donc **79 tuiles par condition**, un écart de
+> 0,05 en demande **316** — et ce sont des minorants, la formule supposant des tuiles
+> indépendantes. ⚠⚠ Le premier essai de ce patron (`63`, trois fragments) avait **10, 11 et
+> 2** tuiles : il était de deux à treize fois trop petit, et l'écart qu'il rapportait n'était
+> pas établi. Toute application future du patron se dimensionne **avant**, et se fait
+> **appariée** — les deux conditions sur les **mêmes** tuiles — parce que c'est le seul moyen
+> de retirer la variance qui domine tout le reste.
+
 ⚠ Et une borne sur l'émulation : elle **conserve le détail en profondeur** qu'un vrai scan
 plus grossier n'aurait pas, puisqu'un voxel plus large intègre aussi dans cette direction.
 Les σ du §4 sont donc un **majorant** de ce qu'un vrai scan grossier rendrait — ce qui va

@@ -53,11 +53,37 @@ aveugle, aucune réparation ne peut y montrer de gain » : **c'est faux, le lot 
 
 | | état |
 |---|---|
-| **expliquer la dispersion** 0,52–0,75 entre fragments | ⏳ **le lot suivant**, et rien ne peut être cité avant |
+| ~~**expliquer la dispersion** 0,52–0,75 entre fragments~~ | ✅ **fait le 2026-08-28** → [`64`](docs/64_la_dispersion_netait_pas_un_effet.md), et **il n'y avait pas de cause** : la dispersion tuile à tuile **dans** un fragment vaut 0,2243 contre 0,0391 **entre** fragments, soit **5,7×**, l'ICC vaut **0,030**, et il aurait fallu **27 tuiles par fragment** là où on en avait 10, 11 et 2. ⚠ Conséquence à tenir : **les trois AUC ne se comparent pas entre elles** |
 | le **juge** de [`09`](docs/09_protocole_jugement_modele.md) | ⏳ le jeu est **bâti** (18 tuiles, 3 familles, clé à part) mais la session qui a vu les cartes est **disqualifiée** par le protocole. Il faut un papyrologue ou un fil neuf |
 | contrôle **typographique** du témoin négatif | ⏳ a manqué d'**une** fenêtre (5 rendues, 6 nécessaires). Il faut une **seconde** trace à α ≈ +1 ; `data/leur_graine/` n'en a pas |
 | **énergie** isolée contre étiquettes | ❌ **impossible en l'état** : `Frag1`–`Frag3` ont les labels sans recalage, `Frag5`/`Frag6` le recalage sans labels, et les volumes d'une paire n'ont pas la même forme |
 | la **soumission** | hors périmètre, sur demande de l'auteur |
+
+### ⭐⭐⭐ Ce que le 28 août au soir a ajouté, et qui commande la suite
+
+**Il n'y avait pas de dispersion à expliquer** → [`64`](docs/64_la_dispersion_netait_pas_un_effet.md).
+L'AUC d'une tuile de 256 px varie d'un écart-type de **0,2243** d'une tuile à l'autre du
+**même** fragment ; entre fragments, l'écart-type vaut **0,0391**. Savoir de quel fragment
+vient une tuile explique **3 %** de la dispersion, et 2 paires sur 3 ont des intervalles qui
+se recouvrent.
+
+**La conséquence est une règle, pas une note** : toute comparaison future — deux réglages,
+deux énergies, une nappe gauchie contre une nappe brute — doit se dimensionner **avant** et
+se faire **appariée**, sur les mêmes tuiles.
+
+| écart d'AUC à établir | tuiles par condition |
+|---|---:|
+| 0,10 | **79** |
+| 0,05 | **316** |
+
+⚠ Ce sont des **minorants** : la formule suppose des tuiles indépendantes, et deux tuiles
+voisines ne le sont pas. La précondition est écrite là où le patron d'expérience vit
+([`58`](docs/58_resolution_ou_rouleau.md) §8) et là où l'expérience qui commande tout est
+décrite ([`31`](docs/31_roadmap.md) §9), pas seulement ici.
+
+⚠⚠ **Et un fait que les trois AUC publiées ne laissent pas voir** : **5 tuiles sur 23** sont
+**sous** le hasard, la plus basse à **0,158**. Sur celles-là le modèle range l'encre *sous* le
+papyrus vierge — du signal réel, à l'envers, qu'une moyenne noie.
 
 ### ⚠ Les pièges payés aujourd'hui, à ne pas repayer
 
@@ -72,6 +98,18 @@ aveugle, aucune réparation ne peut y montrer de gain » : **c'est faux, le lot 
   d'intensité, pas une transformation spatiale.
 - **`round(49.5) == 50`** en Python : arrondi au pair.
 - Le code de sortie d'une **chaîne** est celui de sa dernière commande — quatre fois.
+- ⚠⚠ **`argsort` range les `NaN` EN TÊTE.** Une carte d'encre porte des pixels non couverts,
+  et les oublier les classe comme les **mieux notés** du fragment. Payé le 28 au soir : ma
+  première mesure rendait 0,731 là où le dépôt publie 0,746 — deux réponses à « quelle est
+  l'AUC de ce fragment », attrapées parce que le nombre existait déjà. Passer par
+  `np.isfinite`, comme `evaluate_segment` le fait.
+- ⚠⚠ **Un chiffre dérivé se recalcule, il ne se transpose pas.** J'ai publié « 63 tuiles »
+  dans `31` §9 : c'était juste pour un écart-type de 0,2 et faux pour le nôtre, qui vaut
+  0,2243 — la vraie réponse est **79**. Corrigé en calculant plutôt qu'en raisonnant, et les
+  deux comptes de référence sont désormais **dans le record**, donc gardés.
+- ⚠ **Un `{:.1f}` sur des graduations décalées d'un demi-dixième** affiche deux fois le même
+  libellé. La première figure de `64` portait « 0.8 » deux fois avec « 0.4 » manquant, et
+  quatre tuiles **hors du cadre**. Une figure se **regarde** avant d'être publiée.
 
 ### Trente-six marqueurs périmés fermés
 
@@ -1867,7 +1905,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
 ## 4. L'outillage, et comment le relancer
 
 ```bash
-./src/outils/temoins.sh                      # 156 batteries, 4051 contrôles hors ligne, tous verts
+./src/outils/temoins.sh                      # 158 batteries, 4137 contrôles hors ligne, tous verts
 ./src/outils/dossier_soumission.sh           # le dossier qui PART : texte + figures + journal
                                         # ⚠ la liste des figures est DÉRIVÉE du texte, et le
                                         # script refuse un dossier incomplet (sonde faite)

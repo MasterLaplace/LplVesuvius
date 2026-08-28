@@ -1516,6 +1516,56 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             if ligne.get("rouleaux") == 800:
                 ajoute("heures pour 800 rouleaux, 16 fils",
                        ligne["heures_1_fil"] / 8.35, 1, p.name)
+
+    # ⚠⚠ LES PREMIERES AUC CONTRE DE VRAIES ETIQUETTES de ce depot, et elles n'etaient
+    # gardees par rien : `63` les cite, `64` les compare, et un rendu refait aurait pu les
+    # deplacer sans qu'aucun controle ne bronche. Le domaine est dans le nom parce que les
+    # trois domaines d'un meme fragment donnent trois nombres differents -- c'est meme le
+    # sujet de `63` §2 ter.
+    for frag in ("frag1", "frag2", "frag3"):
+        vt = _source(racine, f"{frag}_verite_terrain.json")
+        if not vt.exists():
+            continue
+        d = json.loads(vt.read_text())
+        for dom in d.get("domaines", []):
+            nom = dom.get("domaine", "")
+            if nom.startswith("CONTROLE"):
+                continue
+            ajoute(f"AUC {frag}, {nom}", dom["auc"], 3, vt.name)
+
+    bdf = _source(racine, "bruit_dune_fenetre.json")
+    if bdf.exists():
+        d = json.loads(bdf.read_text())
+        v = d.get("variance", {})
+        if v.get("exploitable"):
+            ajoute("dispersion des AUC DANS un fragment", v["ecart_type_intra"], 4, bdf.name)
+            ajoute("dispersion des AUC ENTRE fragments", v["ecart_type_inter"], 4, bdf.name)
+            ajoute("part attribuable au fragment", v["icc"], 3, bdf.name)
+        # ⚠ Ce compte est le seul de ce fichier qui soit ACTIONNABLE : il dit combien de
+        # tuiles une campagne future doit rendre. Le perdre reviendrait a relancer la meme
+        # experience sous-dimensionnee.
+        if d.get("tuiles_pour_distinguer"):
+            out.append(("tuiles necessaires par fragment",
+                        [f"**{d['tuiles_pour_distinguer']} tuiles par fragment**",
+                         f"{d['tuiles_pour_distinguer']} tuiles par fragment"], bdf.name))
+        # ⚠⚠ Ces deux-la sont ce qu'une campagne FUTURE lira avant de se dimensionner, et
+        # ils sont gardes parce que j'ai deja publie l'un des deux faux : « 63 » etait juste
+        # pour un ecart-type de 0,2 et faux pour le notre, qui vaut 0,2243.
+        for cle, ecart in (("tuiles_pour_un_ecart_de_0_05", "0,05"),
+                           ("tuiles_pour_un_ecart_de_0_10", "0,10")):
+            if d.get(cle):
+                out.append((f"tuiles pour un ecart de {ecart}",
+                            [f"{d[cle]} par condition", f"en demande {d[cle]}"], bdf.name))
+        out.append(("tuiles sous le hasard",
+                    [f"**{d['tuiles_sous_le_hasard']} tuiles sur {d['tuiles_totales']}**",
+                     f"{d['tuiles_sous_le_hasard']} tuiles sur {d['tuiles_totales']}",
+                     f"{d['tuiles_sous_le_hasard']} sur {d['tuiles_totales']}"], bdf.name))
+        ajoute("AUC de la tuile la plus basse", d["auc_de_tuile_minimale"], 3, bdf.name)
+        for frag, f in d.get("fragments", {}).items():
+            st = f.get("destriage", {})
+            if st.get("exploitable"):
+                ajoute(f"cout de l'alignement des niveaux, {frag}", st["gain"], 3, bdf.name,
+                       signe=True)
     return out
 
 

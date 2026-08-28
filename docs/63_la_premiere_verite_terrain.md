@@ -115,6 +115,16 @@ domaine**, avec une étendue de 0,12 même sur le domaine le plus resserré.
 tout écart qu'on chercherait à mesurer entre deux réglages, et elle n'est pas expliquée. C'est
 la première chose à comprendre avant de citer un seul de ces chiffres.
 
+> ⭐⭐⭐ **RÉPONDU le 2026-08-28, et la réponse n'est pas une cause** →
+> [`64`](64_la_dispersion_netait_pas_un_effet.md). La dispersion **dans** un fragment, de
+> tuile à tuile, vaut **0,2243** ; celle **entre** fragments vaut **0,0391**, soit **5,7 fois
+> moins**. Savoir de quel fragment vient une tuile explique **3 %** de l'écart, et **2 paires
+> sur 3** ont des intervalles de confiance qui se recouvrent. Il n'y avait pas de cause à
+> chercher : chaque fragment n'avait été mesuré que par **une** fenêtre, et il en aurait fallu
+> **27 tuiles par fragment** pour établir l'écart de 0,171 — on en avait 10, 11 et 2.
+> ⚠ Ce qui reste vrai, et le § ci-dessus ne le disait pas assez fort : **les trois chiffres ne
+> doivent pas être comparés entre eux**, ni servir de référence pour juger un réglage.
+
 ⚠ Ce que la moyenne cacherait : `0,64` se lit comme une performance alors que la dispersion
 **est** ce qu'on a mesuré. Le contrôle de l'instrument l'asserte — deux jeux de même moyenne
 peuvent avoir des étendues cinq fois différentes.
@@ -134,8 +144,16 @@ peuvent avoir des étendues cinq fois différentes.
    un déroulage virtuel. Ce qui est mesuré ici est ce que le modèle fait d'un papyrus dont la
    géométrie est facile ; un rouleau y ajoute tout le reste.
 4. ⚠⚠ ~~**Une seule fenêtre, un seul fragment.**~~ **La réplication est faite** (§2 bis) et
-   elle **ne confirme pas** : 0,600 sur `Frag2` contre 0,746 sur `Frag1`. Ce qui reste ouvert
-   n'est plus « répliquer » mais **expliquer la dispersion**.
+   elle **ne confirme pas** : 0,600 sur `Frag2` contre 0,746 sur `Frag1`.
+   ~~Ce qui reste ouvert n'est plus « répliquer » mais **expliquer la dispersion**.~~
+   ⭐⭐ **Fait le 2026-08-28** → [`64`](64_la_dispersion_netait_pas_un_effet.md) : il n'y avait
+   rien à expliquer. La dispersion tuile à tuile **dans** un fragment est **5,7 fois** celle
+   entre fragments, l'ICC vaut **0,030**, et l'expérience était de deux à treize fois trop
+   petite pour établir l'écart qu'elle rapportait.
+5. ⚠⚠ **Une tuile sur cinq est SOUS le hasard** (5 sur 23, la plus basse à **0,158**), ce que
+   la moyenne noie complètement → [`64`](64_la_dispersion_netait_pas_un_effet.md) §4. Sur ces
+   tuiles-là le modèle range l'encre **sous** le papyrus vierge : c'est du signal réel, à
+   l'envers, et aucune des trois AUC publiées ne le laisse voir.
 
 ---
 

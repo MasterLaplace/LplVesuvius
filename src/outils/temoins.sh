@@ -1097,8 +1097,13 @@ run "paires contrôlées"        uv run python "$ROOT/src/encre/paires_denergie.
 run "fenêtre sur le masque"    uv run python "$ROOT/src/encre/fenetre_sur_masque.py" --verifier
 run "décimer une pile"         uv run python "$ROOT/src/encre/decimer_couches.py" --verifier
 run "dispersion des fragments" uv run python "$ROOT/src/encre/dispersion_des_fragments.py" --verifier
+# ⚠⚠ La suite du precedent, et celle qui REPOND : la dispersion entre fragments est-elle un
+# effet, ou le bruit d'une fenetre unique ? Quatre sondes tenues sur cette batterie, dont
+# celle de l'ICC naif -- qui passait au vert avant d'etre ecrite.
+run "bruit d'une fenetre"     uv run python "$ROOT/src/encre/bruit_dune_fenetre.py" --verifier
 run "allure d'un rendu"        uv run python "$ROOT/src/encre/allure_du_rendu.py" --verifier
 run "figure hypothèse réfutée" uv run python "$ROOT/src/figures/figure_hypothese_refutee.py" --verifier
+run "figure bruit d'une fenetre" uv run python "$ROOT/src/figures/figure_bruit_dune_fenetre.py" --verifier
 
 # ⚠⚠ La figure du bug d'échelle a un contrôle, et il porte sur ce qui la rend HONNÊTE : les
 # deux panneaux partagent leur étirement. Étirer chacun sur sa propre plage rendrait une

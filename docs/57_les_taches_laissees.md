@@ -142,12 +142,18 @@ partout ailleurs, et qui a été enfreinte ici une fois.
 ⭐ `src/depot/chiffres_sans_record.py`. Le cadrage a été **mesuré avant** d'écrire la règle,
 parce qu'une garde qui désigne tout ne désigne rien : sur les documents du dépôt, **1154**
 écritures à trois décimales ou plus, dont **1060 déjà adossées** à un fichier de
-`docs/mesures/`. Le résidu est de **51 chiffres dans 17 documents** — un inventaire
+`docs/mesures/`. Le résidu était alors de **51 chiffres dans 17 documents** — un inventaire
 relisible, pas une alerte de masse.
 
+⚠ **Ce résidu BOUGE, et c'est normal** : il est dérivé, donc il grandit à chaque document
+publié et rétrécit à chaque chiffre adossé à un record. Mesuré le 2026-08-28 au soir :
+**53 chiffres dans 19 documents**. Le nombre à ne pas citer figé est celui-là ; ce qui doit
+rester vrai est qu'il tienne dans un écran, et la batterie l'asserte (`< 200`) plutôt que de
+graver un compte qui périmerait le lendemain.
+
 ⚠ **Chaque orphelin porte SA LIGNE et son contexte**, et ce n'est pas un confort : sans la
-localisation, le triage commence par retrouver cinquante et un nombres dans dix-sept
-documents, c'est-à-dire par refaire la recherche que la garde vient de faire. Un inventaire
+localisation, le triage commence par retrouver une cinquantaine de nombres dans une
+vingtaine de documents, c'est-à-dire par refaire la recherche que la garde vient de faire. Un inventaire
 qui ne dit pas où regarder produit une tâche qu'on repousse.
 
 ⭐ Et la localisation a **immédiatement** montré un faux positif que la liste nue cachait :

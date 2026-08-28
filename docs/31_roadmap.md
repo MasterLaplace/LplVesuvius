@@ -142,7 +142,7 @@ noyau i686. La machinerie qui rend ça possible est disponible :
 |---|---|---|
 | grille de hachage spatial, octree persistant | broad-phase de collision, **0 allocation par pas** mesurée | adjacence de feuilles, voisinage de spire |
 | `procgen` + **portes de jouabilité** | générer une structure **puis vérifier qu'elle est traversable** (Dijkstra, `evaluateCaveSystem`, `goalReachable`) | tracer une surface **puis vérifier qu'elle est une nappe unique** — *même forme de garantie* |
-| `src/outils/temoins.sh`, 156 batteries, 4051 contrôles | une vérification doit pouvoir échouer, et on le **sonde** | ce qui rend nos résultats opposables |
+| `src/outils/temoins.sh`, 158 batteries, 4137 contrôles | une vérification doit pouvoir échouer, et on le **sonde** | ce qui rend nos résultats opposables |
 | `test-tick-allocations` | prouver **zéro allocation** dans une boucle chaude | l'optimisation extrême, quand elle sera nécessaire |
 
 ## 4. Le livrable — et pourquoi il rend le test trivial pour eux
@@ -267,6 +267,16 @@ gauchissement **nul** et un **aléatoire de même amplitude** comme contrôles.
 ⚠ Et EduceLab (`32`) montre qu'il faut aller plus loin que ce que le domaine fait :
 mesurer aussi sur un **substrat connu sans encre**, parce qu'un détecteur qui ne se tait
 jamais ne détecte rien.
+
+> ⭐⭐⭐ **Et depuis le 2026-08-28, cette expérience a un plancher de bruit chiffré**, ce
+> qu'elle n'avait pas → [`64`](64_la_dispersion_netait_pas_un_effet.md). L'AUC d'une tuile
+> de 256 px varie d'un écart-type de **0,2243** d'une tuile à l'autre du **même** objet, au
+> **même** réglage. Donc « le gauchissement change l'AUC de tant » ne veut rien dire tant
+> qu'on ne dit pas sur combien de tuiles : établir un écart de 0,05 en demande **au moins**
+> 316 par condition, un écart de 0,10 en demande 79. ⚠ Ce sont des **minorants** — la
+> formule suppose des tuiles indépendantes, et deux tuiles voisines ne le sont pas.
+> ⚠⚠ C'est aussi ce qui rend le dessin apparié **indispensable plutôt qu'élégant** : mesurer
+> les deux versions sur les **mêmes** tuiles retire la variance qui domine tout le reste.
 
 ## 10. Le calendrier
 

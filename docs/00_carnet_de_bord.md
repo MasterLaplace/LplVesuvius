@@ -374,7 +374,7 @@ mega-octets ».
 ### La chaine de production, et les gardes du depot
 
 ```bash
-./src/outils/temoins.sh                  # 156 batteries, 4051 controles hors ligne, tous verts
+./src/outils/temoins.sh                  # 158 batteries, 4137 controles hors ligne, tous verts
                                     # ⚠ ces deux chiffres sont ECRITS PAR LE SCRIPT dans
                                     # docs/mesures/temoins.json et gardes comme tous les autres :
                                     # la version precedente disait 18 et 741, recopies a
@@ -421,7 +421,7 @@ python3 src/graine/compter_corpus.py                 # les comptes viennent des 
 python3 src/tracecheck/mutation.py                         # chaque detecteur est PORTEUR
 python3 src/nappe/lire_selfcross.py --verifier       # un verdict qui n'a rien teste est REFUSE
 uv run python src/depot/verifier_chiffres.py docs/*.md \
-     --soumission docs/21_texte_de_soumission.md          # 257 chiffres recalcules depuis 57 fichiers de resultat
+     --soumission docs/21_texte_de_soumission.md          # 277 chiffres recalcules depuis 61 fichiers de resultat
 ```
 
 ⚠⚠ **Les cinq derniers ne mesurent rien du papyrus** — ils mesurent le depot. Ils
