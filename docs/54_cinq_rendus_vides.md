@@ -1,10 +1,15 @@
 # 54 — Cinq rendus vides, lus comme cinq surfaces plates
 
-> ⚠⚠⚠ **À RELIRE à la lumière de [`60`](60_la_constante_qui_rendait_le_modele_muet.md).** Les
-> rendus dont il est question ici sont des piles **uint8**, et le lecteur d'encre les divisait
-> par 65535 — donc le modèle en recevait du noir. « Vide » peut vouloir dire « le rendu n'a
-> rien produit » ou « on l'a montré au modèle 257 fois trop sombre », et ce document ne
-> distingue pas les deux.
+> ⭐ **RELU LE 2026-08-28, ET IL TIENT.** La question posée était juste : « vide » pouvait
+> vouloir dire « le rendu n'a rien produit » ou « on l'a montré au modèle 257 fois trop
+> sombre ». La mesure tranche, et elle ne passe pas par le modèle du tout —
+> `src/nappe/matiere_des_piles.py` définit `vide` comme **`pic == 0`**, le maximum de pixel
+> lu directement dans les TIFF de la pile. C'est une propriété du **rendu**, pas de la
+> normalisation appliquée après. Les cinq piles `m7` sont donc réellement noires, et le
+> constat de ce document ne dépend d'aucune constante.
+>
+> ⚠ Ce qui reste vrai de l'avertissement : ce document ne dit rien de ce que le modèle
+> AURAIT rendu sur une pile non vide mal mise à l'échelle. Il ne le prétendait pas.
 
 > ⚠⚠ **Correction d'un résultat publié.** [`52`](52_calibrer_sur_son_corpus.md) §6 affirme
 > que « les cinq `m7` lisent zéro à toutes les géométries essayées : leur platitude est

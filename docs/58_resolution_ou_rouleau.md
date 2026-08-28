@@ -188,6 +188,42 @@ Les σ du §4 sont donc un **majorant** de ce qu'un vrai scan grossier rendrait 
 dans le sens de la conclusion, puisque le §7 crédite déjà la résolution du coût plein d'un
 doublement sur les **deux** axes, mesuré séparément.
 
+## 8 bis. ⚠⚠⚠ L'axe que ce document n'avait pas nommé : l'énergie du faisceau
+
+Ajouté le 2026-08-28. Ce document compare les deux objets sur la **résolution**, l'axe qu'il
+élimine, et ne dit nulle part ce qu'ils valent sur les deux autres grandeurs que leur scan
+porte. Le dépôt public les déclare, et l'écart n'est pas du même ordre :
+
+| grandeur | témoin qui **marche** | objet qui **échoue** | écart |
+|---|---:|---:|---:|
+| pas de voxel | 7,91 µm | 8,64 µm | **9,2 %** |
+| **énergie du faisceau** | **54 keV** | **116 keV** | **114,8 %** |
+
+Le témoin est `PHercParis4 54keV stitched_part_1` (`meta.json` du volume `20230205180739`,
+qui déclare `voxelsize 7.91`) ; l'objet est
+`8.64um-1.2m-116keV-volume-20250521151220`. Instrument :
+[`src/encre/deux_objets.py`](../src/encre/deux_objets.py) (11 contrôles),
+mesure : [`docs/mesures/deux_objets.json`](mesures/deux_objets.json).
+
+⭐⭐ **Neuf pour cent d'un côté, cent quinze de l'autre.** « Ce rouleau-ci » n'est donc pas
+le seul suspect qui reste : la **campagne de scan** en est un, et elle a une propriété que le
+rouleau n'a pas — elle **s'achète**. Un rouleau ne change pas ; un scan, si.
+
+⚠⚠⚠ **Ce que ça n'établit PAS, et il faut le répéter à chaque usage.**
+[`59`](59_la_campagne_plutot_que_le_rouleau.md) a déjà mesuré que les trois grandeurs
+**co-varient par campagne** — un scan fin est aussi à courte propagation et à basse énergie —
+et que restreinte aux rouleaux réellement tentés, la séparation par campagne tombe à
+**p = 0,50**. Ce tableau **ne sépare rien** : il chiffre l'écart sur chaque axe pour la paire
+que M1ter oppose, ce que personne n'avait fait, et il déplace un suspect de « innommé » à
+« nommé et mesuré ».
+
+⚠ Isoler l'énergie demande de suivre le patron du §8 — rendre l'objet qui marche semblable à
+celui qui ne marche pas, une propriété à la fois. Et l'émulation d'énergie **n'est pas une
+décimation** : une énergie plus haute ne floute pas, elle change les coefficients
+d'atténuation différemment selon le matériau, donc le contraste encre/papyrus. Ce qui est
+émulable honnêtement est donc le **contraste mesuré**, pas « l'énergie » — et il faut le dire
+ainsi, sinon on croirait avoir simulé un faisceau.
+
 ## 9. ⭐ Deux contrôles de reproductibilité, gratuits et exacts
 
 Les trois campagnes se recouvrent par construction, et les recouvrements doivent coïncider

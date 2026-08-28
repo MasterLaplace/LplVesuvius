@@ -324,8 +324,8 @@ disparaître.
 | document | ce qu'il disait | état |
 |---|---|---|
 | `36` §5bis | M1ter répondu **négativement** : l'encre n'est pas lisible à 9 µm | ⚠⚠ **ANNULÉ** — le σ mesurait notre échelle |
-| `46` §3–4 | le témoin négatif, dont le contrôle **positif** était plat (σ 0,0129) | ⚠⚠ **à refaire** — sa pile `data/couches/…` est uint8 |
-| `54` | cinq rendus **vides** | ⚠ **à relire** — les rendus sont uint8 |
+| `46` §3–4 | le témoin négatif, dont le contrôle **positif** était plat (σ 0,0129) | ⭐ **REFAIT le 2026-08-28**, et sa conclusion a **changé de signe** : ρ de +0,9979 à **−0,0100**, σ du positif de 2,4 % à **76,4 %**. Le détecteur répond, et il répond **plus fort** sur la surface sans feuille |
+| `54` | cinq rendus **vides** | ⭐ **RELU le 2026-08-28 — TIENT** : `vide` est `pic == 0` lu dans les TIFF, donc une propriété du rendu et non de la normalisation |
 | `58` | la résolution éliminée | ⭐ **TIENT** — son échelle de dégradation est mesurée sur les piles **uint16** publiées, donc hors du bug. Ce qui tombe est sa prémisse d'entrée (« un facteur 45 à expliquer ») : il n'y a plus de facteur 45 |
 | `59` | la campagne de scan | ⚠ déjà réfutée le même jour, et la question qu'elle poursuivait n'existe plus sous cette forme |
 

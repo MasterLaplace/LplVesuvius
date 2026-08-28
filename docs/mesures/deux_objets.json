@@ -1,0 +1,31 @@
+{
+  "temoin": {
+    "voxel_um": 7.91,
+    "energie_keV": 54,
+    "source": "https://dl.ash2txt.org/full-scrolls/Scroll1/PHercParis4.volpkg/volumes/20230205180739/meta.json",
+    "nom": "PHercParis4 54keV stitched_part_1, cropped 8096x7888+1184+1040"
+  },
+  "echoue": {
+    "voxel_um": 8.64,
+    "distance_m": 1.2,
+    "energie_keV": 116,
+    "source": "8.64um-1.2m-116keV-volume-20250521151220"
+  },
+  "grandeurs": [
+    {
+      "grandeur": "voxel_um",
+      "unite": "µm",
+      "temoin": 7.91,
+      "echoue": 8.64,
+      "ecart_relatif": 0.0923
+    },
+    {
+      "grandeur": "energie_keV",
+      "unite": "keV",
+      "temoin": 54,
+      "echoue": 116,
+      "ecart_relatif": 1.1481
+    }
+  ],
+  "axe_le_plus_ecarte": "energie_keV"
+}
