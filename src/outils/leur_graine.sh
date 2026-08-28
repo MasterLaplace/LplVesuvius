@@ -28,13 +28,34 @@
 # ⚠ Le verdict est rendu par le test de convergence, donc DEUX rendus. Un seul rendrait un
 # nombre dont `38` vient de montrer qu'il ne veut rien dire tout seul.
 #
+# ⭐⭐ AJOUT DU 2026-08-28 : LA GRAINE EST UN PARAMETRE. Cette chaine a produit le seul
+# temoin negatif du depot (α = +1,01), et `46` §3 constate qu'il en faut un SECOND -- le
+# controle typographique a manque d'UNE fenetre, et cette trace-ci ne peut pas en porter
+# plus de cinq, ou qu'on la regarde. Or il n'y avait rien a ecrire : la chaine entiere est
+# ici, l'outillage est installe, et seule la graine etait figee dans le fichier.
+#
+#   GRAINE=""  -> mode `random_seed`, l'outil choisit lui-meme
+#
+# ⚠⚠ Laisser l'outil choisir n'est pas de la paresse, c'est ce qui rend le second temoin
+# INDEPENDANT : une graine que je choisirais porterait mon idee de « loin d'une feuille »,
+# c'est-a-dire exactement la conclusion que le temoin doit etablir. C'est aussi le mode que
+# l'equipe d'origine a employe (`vc_gsfs_params ... mode random_seed`).
+#
+# ⚠ Et α ≈ +1 N'EST PAS garanti : une graine tiree au hasard peut tomber sur une vraie
+# feuille, auquel cas la trace converge et ce n'est pas un temoin negatif. La chaine MESURE
+# α, donc l'issue est informative dans les deux cas -- mais il faut s'attendre a plusieurs
+# tentatives, et ne surtout pas retenir celle qui arrange.
+#
 #   ./src/outils/lancer.sh --fond src/outils/leur_graine.sh [dest]
+#   GRAINE= DEST=data/temoin_2 ./src/outils/leur_graine.sh data/temoin_2
 set -u
 cd "$(dirname "$0")/../.." || exit 2
 ROOT=$PWD
 DEST=${1:-$ROOT/data/leur_graine}
 ROULEAU=PHerc1447
-GRAINE="4682 2740 13350"
+# ⚠ La graine d'origine, celle du segment officiel, reste le DEFAUT : relancer le script
+# sans rien preciser doit refaire la meme experience, pas une autre.
+GRAINE=${GRAINE-4682 2740 13350}
 UM=8.64
 B="https://vesuvius-challenge-open-data.s3.amazonaws.com"
 VOL="$B/$ROULEAU/volumes/20250521151220-8.640um-1.2m-116keV-masked.zarr"
@@ -48,13 +69,22 @@ if [ ! -d "$DEST/trace" ]; then
   [ -z "$SURF" ] && { echo "⚠ pas de prédiction publiée"; exit 3; }
   mkdir -p "$DEST/trace"
   # Leurs parametres, pas les notres : 200 generations et thread_limit 1.
+  # ⚠ `mode` bascule avec la graine : sans graine, c'est l'outil qui tire, et le fichier de
+  # parametres doit le DIRE -- sinon il resterait ecrit « seed » dans un run qui n'en a pas
+  # eu, et le dossier mentirait sur la facon dont il a ete produit.
+  MODE=seed; [ -z "$GRAINE" ] && MODE=random_seed
   python3 -c "
 import json
 p = json.load(open('$ROOT/data/artefacts/PHerc0358/seed.json'))
-p.update({'generations': 200, 'thread_limit': 1, 'voxelsize': $UM})
+p.update({'generations': 200, 'thread_limit': 1, 'voxelsize': $UM, 'mode': '$MODE'})
 json.dump(p, open('$DEST/trace/seed.json', 'w'), indent=2)"
-  ( cd "$DEST/trace" && timeout 3600 vc_grow_seg_from_seed -v "$B/$SURF" -t . -p seed.json \
-      -s $GRAINE > trace.log 2>&1 )
+  if [ -n "$GRAINE" ]; then
+    ( cd "$DEST/trace" && timeout 3600 vc_grow_seg_from_seed -v "$B/$SURF" -t . -p seed.json \
+        -s $GRAINE > trace.log 2>&1 )
+  else
+    ( cd "$DEST/trace" && timeout 3600 vc_grow_seg_from_seed -v "$B/$SURF" -t . -p seed.json \
+        > trace.log 2>&1 )
+  fi
 fi
 M=$(ls -d "$DEST/trace"/auto_grown_* 2>/dev/null | head -1)
 [ -z "$M" ] && { echo "⚠ aucun maillage produit — l'expérience ne dit RIEN sur la graine"; exit 3; }
@@ -86,5 +116,5 @@ done
 rm -rf "$DEST/cache"
 [ -z "$SERIE" ] && { echo "⚠ aucun profil — verdict impossible"; exit 3; }
 ( cd "$ROOT" && uv run python src/commun/test_convergence.py \
-    --serie "${SERIE%,}" --nom "leur graine, notre chaîne" \
-    --json "$ROOT/docs/mesures/leur_graine.json" )
+    --serie "${SERIE%,}" --nom "${NOM:-leur graine, notre chaîne}" \
+    --json "${RECORD:-$ROOT/docs/mesures/leur_graine.json}" )

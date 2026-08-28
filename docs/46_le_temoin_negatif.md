@@ -225,9 +225,25 @@ grande — et le **groupement** déjà implémenté et déclaré : 5 + 5 = 10 fe
 largement, et 6 auraient suffi.
 
 ⚠⚠ **Et il n'y en a pas localement.** `data/leur_graine/` ne contient que `rendu_41`
-(5641 × 5721, celui-ci), `rendu_161` (dont les TIFF sont vides, forme `(0,)`) et `plat`
-(284 × 288). Produire ou récupérer une seconde trace est donc une tâche à part, pas une
-relance.
+(5641 × 5721, celui-ci), `rendu_161` et `plat` (284 × 288). Produire ou récupérer une seconde
+trace est donc une tâche à part, pas une relance.
+
+> ⚠⚠⚠ **CORRECTION du 2026-08-28, et elle change ce qu'un lecteur doit faire.** Ce paragraphe
+> disait de `rendu_161` que « les TIFF sont vides, forme `(0,)` ». **C'est faux sur les deux
+> points, et le dépôt savait déjà pourquoi** : `src/volume/dimensions_tiff.py` écrit, depuis
+> qu'il existe, qu'« un offset d'IFD à zéro ne veut pas dire *corrompu* : il veut dire que
+> l'index n'a jamais été écrit, donc que le rendu a été interrompu ». C'est exactement le cas
+> — **161 fichiers portant 2,0 Go de pixels**, tous avec un offset d'index nul, et
+> `rendu_161.log` s'arrête à la **bande 31 sur 45**. Le rendu a été tué à 68 %, il n'est pas
+> vide. ⚠ Le tour de `dimensions_tiff` sur ce dossier rend « aucune tranche lisible », pas
+> « pas un TIFF » : *illisible* et *inachevé* sont deux états différents, et les confondre
+> fait perdre l'information qu'on cherchait.
+>
+> ⭐⭐ **Mais la conclusion tient, et pour une raison plus forte que celle qui était écrite** :
+> `data/leur_graine/trace/` ne contient **qu'une seule** trace (`auto_grown_20260820173048117`)
+> et **un seul** `seed.json`. `rendu_41` et `rendu_161` sont donc la **même surface** rendue à
+> 41 et à 161 couches — pas deux traces. Le réparer, ou le relancer, ne donnerait jamais le
+> second témoin, et personne ne doit y passer du temps en croyant le contraire.
 
 ⚠ Tant que cette mesure n'est pas faite, le p = 0,0007 de `60` reste ce qu'il dit —
 *structuré là où son propre mélange ne l'est pas* — et rien de plus.
