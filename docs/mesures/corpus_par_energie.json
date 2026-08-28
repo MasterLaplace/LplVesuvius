@@ -1,0 +1,705 @@
+{
+  "index": "https://vesuvius-challenge-open-data.s3.amazonaws.com/metadata.min.json",
+  "seuil_keV": 100.0,
+  "echantillons": [
+    {
+      "echantillon": "PHercParis4",
+      "genre": "scroll",
+      "energies_keV": [
+        54.0,
+        74.0,
+        78.0,
+        110.0,
+        137.0
+      ],
+      "resolutions_um": [
+        1.129,
+        2.4,
+        7.91,
+        45.532
+      ],
+      "segments": 81,
+      "cartes_encre": 80,
+      "basse_disponible": true,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHerc0172",
+      "genre": "scroll",
+      "energies_keV": [
+        53.0
+      ],
+      "resolutions_um": [
+        7.91
+      ],
+      "segments": 53,
+      "cartes_encre": 53,
+      "basse_disponible": true,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHerc0139",
+      "genre": "scroll",
+      "energies_keV": [
+        59.0,
+        77.0,
+        78.0,
+        113.0
+      ],
+      "resolutions_um": [
+        1.129,
+        2.399,
+        2.403,
+        9.362
+      ],
+      "segments": 38,
+      "cartes_encre": 38,
+      "basse_disponible": true,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHerc0500P2",
+      "genre": "fragment",
+      "energies_keV": [
+        65.35,
+        111.0,
+        113.0
+      ],
+      "resolutions_um": [
+        0.55,
+        2.215,
+        9.362
+      ],
+      "segments": 39,
+      "cartes_encre": 38,
+      "basse_disponible": true,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHerc0814",
+      "genre": null,
+      "energies_keV": [
+        59.0,
+        78.0,
+        113.0
+      ],
+      "resolutions_um": [
+        1.129,
+        2.399,
+        9.362
+      ],
+      "segments": 19,
+      "cartes_encre": 19,
+      "basse_disponible": true,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHerc1667",
+      "genre": "scroll",
+      "energies_keV": [
+        53.0,
+        59.0,
+        78.0,
+        88.0
+      ],
+      "resolutions_um": [
+        1.129,
+        2.399,
+        3.24,
+        7.91
+      ],
+      "segments": 20,
+      "cartes_encre": 19,
+      "basse_disponible": true,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHerc0343P",
+      "genre": "fragment",
+      "energies_keV": [
+        111.0,
+        116.0
+      ],
+      "resolutions_um": [
+        2.215,
+        8.64
+      ],
+      "segments": 8,
+      "cartes_encre": 8,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc0009B",
+      "genre": "fragment",
+      "energies_keV": [
+        77.0,
+        116.0
+      ],
+      "resolutions_um": [
+        2.401,
+        8.64
+      ],
+      "segments": 19,
+      "cartes_encre": 0,
+      "basse_disponible": true,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHerc0125",
+      "genre": "scroll",
+      "energies_keV": [
+        113.0
+      ],
+      "resolutions_um": [
+        9.362
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc0175A",
+      "genre": "scroll",
+      "energies_keV": [
+        116.0
+      ],
+      "resolutions_um": [
+        8.64
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc0175B",
+      "genre": "scroll",
+      "energies_keV": [
+        116.0
+      ],
+      "resolutions_um": [
+        8.64
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc0191",
+      "genre": "scroll",
+      "energies_keV": [
+        113.0
+      ],
+      "resolutions_um": [
+        9.362
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc0211",
+      "genre": "scroll",
+      "energies_keV": [
+        113.0
+      ],
+      "resolutions_um": [
+        9.362
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc0257",
+      "genre": "scroll",
+      "energies_keV": [
+        113.0
+      ],
+      "resolutions_um": [
+        9.362
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc0268",
+      "genre": null,
+      "energies_keV": [
+        116.0
+      ],
+      "resolutions_um": [
+        8.64
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc0306B",
+      "genre": "scroll",
+      "energies_keV": [
+        116.0
+      ],
+      "resolutions_um": [
+        8.64
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc0332",
+      "genre": "scroll",
+      "energies_keV": [
+        53.0,
+        70.0,
+        78.0
+      ],
+      "resolutions_um": [
+        2.399,
+        3.24,
+        7.91
+      ],
+      "segments": 2,
+      "cartes_encre": 0,
+      "basse_disponible": true,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHerc0343",
+      "genre": "scroll",
+      "energies_keV": [
+        116.0
+      ],
+      "resolutions_um": [
+        8.64
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc0358",
+      "genre": "scroll",
+      "energies_keV": [
+        113.0
+      ],
+      "resolutions_um": [
+        9.362
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc0483A",
+      "genre": "scroll",
+      "energies_keV": [
+        116.0
+      ],
+      "resolutions_um": [
+        8.64
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc0483B",
+      "genre": "scroll",
+      "energies_keV": [
+        116.0
+      ],
+      "resolutions_um": [
+        8.64
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc0490A",
+      "genre": "scroll",
+      "energies_keV": [
+        116.0
+      ],
+      "resolutions_um": [
+        8.64
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc0490B",
+      "genre": "scroll",
+      "energies_keV": [
+        116.0
+      ],
+      "resolutions_um": [
+        8.64
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc0800",
+      "genre": "scroll",
+      "energies_keV": [
+        116.0
+      ],
+      "resolutions_um": [
+        8.64
+      ],
+      "segments": 6,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc0813",
+      "genre": "scroll",
+      "energies_keV": [
+        113.0
+      ],
+      "resolutions_um": [
+        9.362
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc0826",
+      "genre": "scroll",
+      "energies_keV": [
+        113.0
+      ],
+      "resolutions_um": [
+        9.362
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc0841",
+      "genre": null,
+      "energies_keV": [
+        77.0,
+        113.0
+      ],
+      "resolutions_um": [
+        2.403,
+        9.366
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": true,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHerc0846A",
+      "genre": null,
+      "energies_keV": [
+        77.0,
+        113.0
+      ],
+      "resolutions_um": [
+        2.403,
+        9.362
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": true,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHerc0846B",
+      "genre": null,
+      "energies_keV": [
+        113.0
+      ],
+      "resolutions_um": [
+        9.362
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc1203",
+      "genre": "scroll",
+      "energies_keV": [
+        77.0,
+        113.0
+      ],
+      "resolutions_um": [
+        2.403,
+        9.362
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": true,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHerc1218",
+      "genre": "scroll",
+      "energies_keV": [
+        116.0
+      ],
+      "resolutions_um": [
+        8.64
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc1299",
+      "genre": null,
+      "energies_keV": [
+        78.0
+      ],
+      "resolutions_um": [
+        2.399
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": true,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHerc1447",
+      "genre": "scroll",
+      "energies_keV": [
+        116.0
+      ],
+      "resolutions_um": [
+        8.64
+      ],
+      "segments": 15,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc1451",
+      "genre": "scroll",
+      "energies_keV": [
+        78.0,
+        116.0
+      ],
+      "resolutions_um": [
+        2.399,
+        8.64
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": true,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHerc1545",
+      "genre": "scroll",
+      "energies_keV": [
+        113.0
+      ],
+      "resolutions_um": [
+        9.362
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": true
+    },
+    {
+      "echantillon": "PHerc1667Cr1Fr3",
+      "genre": "fragment",
+      "energies_keV": [],
+      "resolutions_um": [],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHerc51Cr4Fr8",
+      "genre": "fragment",
+      "energies_keV": [],
+      "resolutions_um": [],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHercMAN5",
+      "genre": null,
+      "energies_keV": [
+        78.0
+      ],
+      "resolutions_um": [
+        2.399
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": true,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHercMANB",
+      "genre": null,
+      "energies_keV": [
+        78.0
+      ],
+      "resolutions_um": [
+        2.399
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": true,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHercMANBp",
+      "genre": "fragment",
+      "energies_keV": [
+        59.0,
+        78.0
+      ],
+      "resolutions_um": [
+        1.129,
+        2.399
+      ],
+      "segments": 11,
+      "cartes_encre": 0,
+      "basse_disponible": true,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHercParis1Fr34",
+      "genre": "fragment",
+      "energies_keV": [],
+      "resolutions_um": [],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHercParis1Fr39",
+      "genre": "fragment",
+      "energies_keV": [],
+      "resolutions_um": [],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHercParis2Fr143",
+      "genre": "fragment",
+      "energies_keV": [],
+      "resolutions_um": [],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHercParis2Fr47",
+      "genre": "fragment",
+      "energies_keV": [],
+      "resolutions_um": [],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": false,
+      "haute_seulement": false
+    },
+    {
+      "echantillon": "PHercParis3",
+      "genre": null,
+      "energies_keV": [
+        78.0
+      ],
+      "resolutions_um": [
+        2.4
+      ],
+      "segments": 0,
+      "cartes_encre": 0,
+      "basse_disponible": true,
+      "haute_seulement": false
+    }
+  ],
+  "trou_du_seuil": [],
+  "tests": [
+    {
+      "genre": "tous",
+      "tentes": 12,
+      "basse_avec_encre": 6,
+      "basse_sans_encre": 3,
+      "haute_avec_encre": 1,
+      "haute_sans_encre": 2,
+      "table": [
+        6,
+        3,
+        1,
+        2
+      ],
+      "p": 0.36363636363636365
+    },
+    {
+      "genre": "scroll",
+      "tentes": 7,
+      "basse_avec_encre": 4,
+      "basse_sans_encre": 1,
+      "haute_avec_encre": 0,
+      "haute_sans_encre": 2,
+      "table": [
+        4,
+        1,
+        0,
+        2
+      ],
+      "p": 0.14285714285714285
+    },
+    {
+      "genre": "fragment",
+      "tentes": 4,
+      "basse_avec_encre": 1,
+      "basse_sans_encre": 2,
+      "haute_avec_encre": 1,
+      "haute_sans_encre": 0,
+      "table": [
+        1,
+        2,
+        1,
+        0
+      ],
+      "p": 1.0
+    }
+  ]
+}

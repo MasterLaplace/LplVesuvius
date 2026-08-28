@@ -46,11 +46,23 @@ SEAU = "https://vesuvius-challenge-open-data.s3.amazonaws.com"
 FRAGMENTS = "https://dl.ash2txt.org/fragments"
 
 ROULEAUX = ("PHerc1447", "PHerc0172", "PHerc1667", "PHerc0051", "Scroll1")
-"""Les rouleaux interrogés, écrits plutôt que découverts.
+"""Les rouleaux interrogés par force brute.
 
-⚠ Un rouleau absent de cette liste n'apparaîtra pas dans l'inventaire, donc en ajouter un est
-un acte visible. Découvrir la liste depuis le dépôt aurait l'air plus malin et rendrait
-l'inventaire silencieusement dépendant de ce que le dépôt réorganise."""
+⚠⚠⚠ **CETTE LISTE EST UN ANGLE MORT, constaté le 2026-08-29 sur une remarque de l'auteur**
+(« il y a 53 rouleaux scannés disponibles, non ? »). Elle en nomme **cinq** ; le dépôt en
+publie **45**. J'ai écrit une liste à la main, l'ai interrogée par force brute, et l'ai
+appelée « inventaire » — exactement la faute que `59` a déjà payée avec
+`campagnes_de_scan.py`, qui n'interrogeait qu'un des deux layouts. **Troisième occurrence.**
+
+⭐ Le remède existait et se lit en une requête :
+[`corpus_par_energie.py`](corpus_par_energie.py) lit `metadata.min.json`, l'index que le dépôt
+publie — 45 échantillons, 67 scans, chacun avec son énergie, sa résolution et la liste de ce
+qui existe par segment. Le catalogue n'était pas à construire, il était à lire.
+
+⚠ Cette liste-ci est **conservée** parce que ce fichier pose une question différente (où
+existe une vérité terrain) et que sa conclusion — zéro rouleau mesurable — a été **confirmée
+sur les 45** par l'index : aucun type d'artefact du dépôt n'est une étiquette d'encre. Mais
+elle doit passer par l'index le jour où on l'étend."""
 
 LOTS_DE_FRAGMENTS = ("Frag1", "Frag2", "Frag3", "Frag4", "Frag5", "Frag6")
 

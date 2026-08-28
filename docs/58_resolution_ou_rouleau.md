@@ -236,6 +236,29 @@ Ajouté le 2026-08-28. Ce document compare les deux objets sur la **résolution*
 élimine, et ne dit nulle part ce qu'ils valent sur les deux autres grandeurs que leur scan
 porte. Le dépôt public les déclare, et l'écart n'est pas du même ordre :
 
+> ⚠⚠⚠ **CORRECTION DU 2026-08-29 : « l'énergie » N'EST PAS UN AXE ISOLÉ, et ce tableau le
+> laisse croire.** L'index du dépôt (`metadata.min.json`) porte la **distance de propagation**
+> dans l'identifiant long de chaque scan, et je ne l'avais jamais lue. Les deux objets ne
+> diffèrent pas d'une grandeur mais de **trois qui bougent ensemble** :
+>
+> | | témoin qui marche | objet qui échoue |
+> |---|---|---|
+> | identifiant | `20230205180739-7.910um-54keV` | `20250509011039-8.640um-1.2m-116keV` |
+> | distance de propagation | **absente de l'identifiant** (ESRF 2023) | **1,2 m** |
+>
+> ⚠⚠ Et ce n'est pas une coïncidence de ces deux-là : dans tout le corpus, **les 31 scans à
+> 1,2 m** sont ceux de la campagne 8,64/9,36 µm à 113–116 keV. Énergie, distance et taille de
+> voxel **ne varient pas indépendamment** — c'est une **campagne de scan**, pas un réglage.
+>
+> ⭐ Le site du prix le dit dans ses termes, page *2026 open problems* : « **Three coupled
+> scan parameters** » — taille de voxel, distance de propagation, énergie — et « *enough X-ray
+> energy to penetrate the object and separate layers; not so much that useful absorption
+> contrast disappears* ». La formulation de [`59`](59_la_campagne_plutot_que_le_rouleau.md),
+> « la campagne plutôt que le rouleau », visait donc juste dans sa **forme** ; ce qui lui
+> manquait était un moyen de l'établir, pas l'idée.
+>
+> Relevé : [`corpus_par_energie.json`](mesures/corpus_par_energie.json).
+
 | grandeur | témoin qui **marche** | objet qui **échoue** | écart |
 |---|---:|---:|---:|
 | pas de voxel | 7,91 µm | 8,64 µm | **9,2 %** |

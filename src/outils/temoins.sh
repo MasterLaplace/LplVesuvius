@@ -1157,6 +1157,10 @@ run "lisible a neuf microns"  uv run python "$ROOT/src/encre/lisible_a_neuf_micr
 # (`ink-detection/…timesformer…`) ne doit jamais compter comme verite terrain, sinon on
 # mesurerait un modele contre un autre modele.
 run "ou la verite existe"     uv run python "$ROOT/src/encre/ou_la_verite_existe.py" --verifier
+# ⚠⚠ L'inventaire par l'INDEX du depot (45 echantillons) plutot que par une liste ecrite a la
+# main (5). Sa sonde la plus utile est celle de `59` rejouee : un echantillon SANS segment
+# n'a jamais ete tente, et l'inclure ferait tout le resultat.
+run "corpus par energie"      uv run python "$ROOT/src/encre/corpus_par_energie.py" --verifier
 run "figure sigma"            uv run python "$ROOT/src/figures/figure_ce_que_sigma_ne_dit_pas.py" --verifier
 # ⚠⚠⚠ LE CONTROLE DUR de `09` §2, celui pour lequel la campagne a deux temoins existait.
 # Sa sonde la plus utile est celle du SENS : un temoin PLUS periodique que le sujet ne doit
