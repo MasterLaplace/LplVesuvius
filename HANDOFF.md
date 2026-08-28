@@ -85,6 +85,29 @@ décrite ([`31`](docs/31_roadmap.md) §9), pas seulement ici.
 **sous** le hasard, la plus basse à **0,158**. Sur celles-là le modèle range l'encre *sous* le
 papyrus vierge — du signal réel, à l'envers, qu'une moyenne noie.
 
+### ⭐⭐ Le 28 au soir, deuxième moitié : deux blocages levés, un troisième en cours
+
+**Le second témoin négatif existe** → [`46`](docs/46_le_temoin_negatif.md) §3. Ce n'était pas
+« une tâche à part » : toute la chaîne est dans `src/outils/leur_graine.sh`, l'outillage `vc_`
+est installé, et la seule chose figée était **la graine**. `GRAINE=""` bascule le traceur en
+`random_seed` — le mode de l'équipe d'origine — donc le témoin est indépendant **par
+construction** plutôt que par mon jugement. Mesuré : graine `[2078, 5227, 5113]`, **13,89 cm²**
+(contre 3,95 chez eux), 0 auto-intersection, **α = +0,99**, marge 0,29.
+
+⏳ **Le contrôle typographique groupé tourne** (rendu 4321², pas 21, ~2 h). C'est l'expérience
+qui avait manqué d'**une** fenêtre : 5 candidates sur le premier témoin, 4 sur le second, pour
+6 nécessaires.
+
+**Le transport de calibration (résidu M7) est répondu, négativement** →
+[`45`](docs/45_consistent_with_quantifie.md) §7. L'étape que le résidu sautait était de
+**valider** le prédicteur là où la vérité existe encore. Fait sur les 23 tuiles étiquetées :
+une grandeur sur cinq passe le seuil brut, **aucune** ne survit à Holm, et cinq tests le
+donnent au hasard une fois sur quatre. ⭐ L'épaisseur de trait, meilleure des 190 cartes
+publiées, est ici la **pire** — classer des cartes entières et prédire l'AUC d'une tuile ne
+sont pas la même question.
+
+**Tâches ouvertes : 14 → 11**, dont 5 sont la soumission (hors périmètre).
+
 ### ⚠ Les pièges payés aujourd'hui, à ne pas repayer
 
 - **219 agents lancés d'un coup** ont épuisé la limite mensuelle de l'org : un vérificateur
@@ -107,6 +130,12 @@ papyrus vierge — du signal réel, à l'envers, qu'une moyenne noie.
   dans `31` §9 : c'était juste pour un écart-type de 0,2 et faux pour le nôtre, qui vaut
   0,2243 — la vraie réponse est **79**. Corrigé en calculant plutôt qu'en raisonnant, et les
   deux comptes de référence sont désormais **dans le record**, donc gardés.
+- ⚠⚠ **Un témoin à UN SEUL tirage n'est pas un témoin**, c'est un tirage de la loi nulle. Mon
+  contrôle par mélange du transport a rendu −0,40 et −0,36 — autant que les vraies
+  corrélations — et les deux lectures possibles (« le mélange corrèle donc rien ne vaut » /
+  « hasard malheureux ») étaient également infondées. Ce qui répond est la **distribution** :
+  une valeur p par permutation, puis **Holm**, parce que cinq tests mettent au hasard une
+  grandeur sous 0,05 une fois sur quatre.
 - ⚠ **Un `{:.1f}` sur des graduations décalées d'un demi-dixième** affiche deux fois le même
   libellé. La première figure de `64` portait « 0.8 » deux fois avec « 0.4 » manquant, et
   quatre tuiles **hors du cadre**. Une figure se **regarde** avant d'être publiée.
