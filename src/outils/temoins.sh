@@ -244,6 +244,51 @@ except CodecIndisponible:
 print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
+# ⚠⚠ LA CLE DU JUGE : le module ne lisait QUE `os.environ`, alors que le depot porte un
+# `.env` rempli. Il repondait donc « aucune cle », et j'en ai deduit dans `HANDOFF` que le
+# juge attendait « un papyrologue ». Un composant qui refuse pour une raison de plomberie
+# produit un message qu'on lit comme une raison de fond. Ce controle ne fait AUCUN appel
+# reseau et n'imprime JAMAIS la cle.
+run "juge : lecture de la cle" uv run python - <<'PYCLE'
+import sys, pathlib as _p, tempfile, os
+sys.path[:0]=[str(x) for _b in ('src','../src') for x in _p.Path(_b).glob('*') if x.is_dir()]
+from judge_api import cle_du_fichier_env, api_key, JudgeError, NOMS_DE_CLE
+n=0
+def ck(c):
+    global n
+    assert c; n+=1
+with tempfile.TemporaryDirectory() as d:
+    r=_p.Path(d)
+    (r/".env").write_text('# un commentaire\nAUTRE=x\nGEMINI_API_KEY="abc123"\n')
+    ck(cle_du_fichier_env(r/".env")=="abc123")
+    (r/".env").write_text("GEMINI_API_KEY=nu\n")
+    ck(cle_du_fichier_env(r/".env")=="nu")
+    (r/".env").write_text("RIEN=1\n")
+    ck(cle_du_fichier_env(r/".env")=="")
+    ck(cle_du_fichier_env(r/"absent.env")=="")
+    garde={k:os.environ.get(k) for k in NOMS_DE_CLE}
+    try:
+        os.environ["GEMINI_API_KEY"]="depuis-l-environnement"
+        (r/".env").write_text("GEMINI_API_KEY=depuis-le-fichier\n")
+        ck(api_key(r)=="depuis-l-environnement")
+        for k in NOMS_DE_CLE: os.environ.pop(k, None)
+        ck(api_key(r)=="depuis-le-fichier")
+        (r/".env").write_text("RIEN=1\n")
+        try:
+            api_key(r); raise AssertionError("sans cle, api_key doit LEVER")
+        except JudgeError as e:
+            ck("depuis-le-fichier" not in str(e) and "aistudio" in str(e))
+    finally:
+        for k,v in garde.items():
+            if v is None: os.environ.pop(k, None)
+            else: os.environ[k]=v
+try:
+    ck(len(api_key())>16)
+except JudgeError:
+    ck(True)
+print(f'ALL PASS (0 failures, {n} checks)')
+PYCLE
+
 run "juge : choix des bandes" uv run python - <<'PY'
 import sys, pathlib, numpy as np; import pathlib as _p; sys.path[:0]=[str(x) for _b in ('src','../src') for x in _p.Path(_b).glob('*') if x.is_dir()]
 from judge_api import choose_bands, TEXT_BANDS

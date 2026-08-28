@@ -55,6 +55,13 @@ import numpy as np
 
 ENDPOINT = "https://generativelanguage.googleapis.com/v1beta"
 
+RACINE = Path(__file__).resolve().parents[2]
+"""La racine du depot, pour y trouver le `.env`.
+
+⚠ Calculee depuis ce fichier et non depuis le repertoire courant : une mesure lancee depuis
+un autre dossier doit trouver la meme cle, sinon le juge repondrait « aucune cle » selon
+l'endroit d'ou on l'appelle."""
+
 TEXT_BANDS = [(3584, 1024), (4352, 1024), (1024, 1024), (10112, 1024)]
 """Regions PORTANT du texte, mesurees : 10,9 a 15,5 % d'encre predite."""
 
@@ -203,13 +210,59 @@ class JudgeError(RuntimeError):
     """Leve quand l'appel ou la configuration ne permet pas la mesure."""
 
 
-def api_key() -> str:
-    for name in ("GEMINI_API_KEY", "GOOGLE_API_KEY"):
+NOMS_DE_CLE = ("GEMINI_API_KEY", "GOOGLE_API_KEY")
+
+
+def cle_du_fichier_env(chemin: Path) -> str:
+    """La cle lue dans un `.env`, sans dependance et sans jamais la journaliser.
+
+    ⚠⚠ POURQUOI CETTE FONCTION EXISTE, et c'est un defaut qui a coute une semaine de
+    mauvaise conclusion. `api_key` ne lisait que `os.environ`. Le depot porte un `.env`
+    REMPLI depuis le debut, mais rien ne le chargeait -- donc le juge repondait « aucune
+    cle », et j'en ai deduit dans `HANDOFF` qu'il fallait « un papyrologue ». La capacite
+    existait, la cle existait, et il manquait la ligne qui les joint.
+
+    ⭐ La lecon est celle que ce depot recense ailleurs sous un autre costume : un composant
+    qui refuse pour une raison de plomberie produit un message qu'on lit comme une raison
+    de fond.
+
+    ⚠ Analyse volontairement minimale -- `NOM=valeur`, guillemets retires, `#` ignore. Un
+    parseur complet de `.env` serait une dependance pour un fichier de trois lignes, et ce
+    fichier ne doit dependre de rien (c'est ecrit dans son en-tete).
+    """
+    try:
+        texte = chemin.read_text(encoding="utf-8")
+    except OSError:
+        return ""
+    for ligne in texte.splitlines():
+        ligne = ligne.strip()
+        if not ligne or ligne.startswith("#") or "=" not in ligne:
+            continue
+        nom, _, valeur = ligne.partition("=")
+        if nom.strip() in NOMS_DE_CLE:
+            return valeur.strip().strip('"').strip("'")
+    return ""
+
+
+def api_key(racine: Path | None = None) -> str:
+    """La cle, depuis l'environnement d'abord, puis le `.env` du depot.
+
+    ⚠ L'environnement passe AVANT le fichier : c'est ce qui permet de lancer une mesure avec
+    une autre cle sans toucher au depot, et l'inverse rendrait le `.env` impossible a
+    contourner.
+
+    ⚠⚠ La cle n'est **jamais** ecrite dans un fichier de resultat ni dans un message
+    d'erreur -- promesse de l'en-tete de ce module, et un controle l'asserte.
+    """
+    for name in NOMS_DE_CLE:
         value = os.environ.get(name, "").strip()
         if value:
             return value
+    depuis_fichier = cle_du_fichier_env((racine or RACINE) / ".env")
+    if depuis_fichier:
+        return depuis_fichier
     raise JudgeError(
-        "aucune cle. Poser GEMINI_API_KEY dans l'environnement "
+        "aucune cle. Poser GEMINI_API_KEY dans l'environnement ou dans le `.env` du depot "
         "(une cle gratuite se cree sur https://aistudio.google.com/apikey)"
     )
 
