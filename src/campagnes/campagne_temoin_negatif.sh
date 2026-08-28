@@ -35,6 +35,16 @@ STRIDE=${STRIDE:-8}
 # en avait meme deux, le second etant `src/infer_ink.py`, qui a demenage dans `src/xpu/` au
 # rangement en dix familles. `auto` retombe sur le CPU et DIT pourquoi.
 APPAREIL=${APPAREIL:-auto}
+# ⚠⚠⚠ LA GARDE DE REPRISE NE SAIT PAS AVEC QUEL MODELE UN RENDU A ETE FAIT. Les deux `.npy`
+# presents le 2026-08-28 dataient du 22 aout, soit CINQ JOURS AVANT le correctif d'echelle
+# (`60`) : la campagne les aurait repris tels quels et aurait ecrit un record depuis le
+# modele casse, c'est-a-dire precisement ce que « refaire `46` » doit eviter. Ils sont
+# ranges dans `avant_correctif_echelle_20260822/` plutot que supprimes -- ce sont les
+# artefacts de l'ancien resultat, et les jeter effacerait la preuve de ce qu'on corrige.
+#
+# ⚠ Regle : apres tout changement du chemin de rendu, DEPLACER les sorties avant de relancer.
+# Une garde de reprise economise du temps ; elle ne dit pas que ce qu'elle reprend est encore
+# valable.
 COTE=${COTE:-1100}
 mkdir -p "$DEST"
 
