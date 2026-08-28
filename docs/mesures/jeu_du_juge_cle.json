@@ -1,0 +1,142 @@
+{
+  "graine": 20260828,
+  "cote": 512,
+  "etendue_commune": [
+    -1.7755450010299683,
+    1.334046459198003
+  ],
+  "par_famille": 6,
+  "compte": {
+    "positif": 6,
+    "negatif": 6,
+    "inconnu": 6
+  },
+  "cle": [
+    {
+      "nom": "tuile_e4cd69f967",
+      "role": "positif",
+      "carte": 0,
+      "y": 0,
+      "x": 2048
+    },
+    {
+      "nom": "tuile_657086374f",
+      "role": "inconnu",
+      "carte": 0,
+      "y": 0,
+      "x": 2560
+    },
+    {
+      "nom": "tuile_88e5303272",
+      "role": "negatif",
+      "carte": 0,
+      "y": 0,
+      "x": 3584
+    },
+    {
+      "nom": "tuile_25c0fcafca",
+      "role": "inconnu",
+      "carte": 0,
+      "y": 0,
+      "x": 0
+    },
+    {
+      "nom": "tuile_98dfc2728d",
+      "role": "inconnu",
+      "carte": 0,
+      "y": 0,
+      "x": 2048
+    },
+    {
+      "nom": "tuile_cae7b9f15d",
+      "role": "positif",
+      "carte": 0,
+      "y": 0,
+      "x": 512
+    },
+    {
+      "nom": "tuile_ca42df6432",
+      "role": "positif",
+      "carte": 0,
+      "y": 0,
+      "x": 0
+    },
+    {
+      "nom": "tuile_d562a21478",
+      "role": "inconnu",
+      "carte": 0,
+      "y": 0,
+      "x": 1024
+    },
+    {
+      "nom": "tuile_63831d3a97",
+      "role": "positif",
+      "carte": 0,
+      "y": 0,
+      "x": 2560
+    },
+    {
+      "nom": "tuile_b55aa96c73",
+      "role": "inconnu",
+      "carte": 0,
+      "y": 0,
+      "x": 512
+    },
+    {
+      "nom": "tuile_75ed3ea1e7",
+      "role": "negatif",
+      "carte": 0,
+      "y": 0,
+      "x": 1536
+    },
+    {
+      "nom": "tuile_0f15bf0a63",
+      "role": "negatif",
+      "carte": 0,
+      "y": 0,
+      "x": 2560
+    },
+    {
+      "nom": "tuile_6878452a8a",
+      "role": "negatif",
+      "carte": 0,
+      "y": 0,
+      "x": 1024
+    },
+    {
+      "nom": "tuile_d4a60b8c83",
+      "role": "negatif",
+      "carte": 0,
+      "y": 0,
+      "x": 2048
+    },
+    {
+      "nom": "tuile_dbf445fc08",
+      "role": "negatif",
+      "carte": 0,
+      "y": 0,
+      "x": 3072
+    },
+    {
+      "nom": "tuile_09f0347521",
+      "role": "inconnu",
+      "carte": 0,
+      "y": 0,
+      "x": 1536
+    },
+    {
+      "nom": "tuile_52ce2383d8",
+      "role": "positif",
+      "carte": 0,
+      "y": 0,
+      "x": 1024
+    },
+    {
+      "nom": "tuile_0d2a00d48b",
+      "role": "positif",
+      "carte": 0,
+      "y": 0,
+      "x": 1536
+    }
+  ]
+}

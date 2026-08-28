@@ -43,6 +43,45 @@ puisse l'établir.
 Un modèle qui échoue en 2 est disqualifié pour l'inconnu, quel que soit son score
 en 1.
 
+## 2 bis. ⭐⭐ Le jeu est bâti — 2026-08-28
+
+Ce protocole n'était **pas exécutable** jusqu'à ce matin, et il manquait précisément la
+famille que le §2 appelle « la plus importante » : un témoin négatif. Il est arrivé le
+2026-08-28 — 5128 × 5128 rendus sur une trace à α = +1,01, dont
+[`38`](38_ce_qui_bouge_avec_la_fenetre.md) prouve **géométriquement** qu'aucune feuille n'est
+à portée. Les trois familles existent donc enfin ensemble :
+
+| famille | source | tuiles |
+|---|---|---:|
+| **positif** | `ink_segment_complet.npy` — Scroll 1, texte publié et lu | 6 |
+| **négatif** | `en_travers_grand.npy` — α = +1,01, aucune feuille à portée | 6 |
+| **inconnu** | les quatre cartes de `PHerc1447` du 2026-08-28 | 6 |
+
+Instrument : [`src/encre/jeu_du_juge.py`](../src/encre/jeu_du_juge.py) (18 contrôles).
+Jeu : `data/jeu_du_juge/` (18 PNG de 512 px, noms opaques).
+Clé : [`docs/mesures/jeu_du_juge_cle.json`](mesures/jeu_du_juge_cle.json) — **à ne pas
+transmettre avec le jeu**.
+
+⚠⚠ **L'étirement est COMMUN aux dix-huit tuiles**, percentiles 2 et 98 de toutes les cartes
+ensemble (−1,776 … 1,334). Étirer chaque tuile sur sa propre plage rendrait une tuile sans
+encre aussi contrastée qu'une tuile de texte : le juge trancherait alors sur une
+normalisation, et le protocole s'effondrerait sans que rien ne le signale. Le contrôle
+négatif de la batterie l'asserte — étirée seule, la tuile faible devient effectivement aussi
+contrastée que la forte.
+
+⚠ **Les noms sont opaques et l'ordre est mélangé**, avec une graine pour que le jeu se
+rejoue. La propriété vérifiée n'est pas « le nom est joli » mais **trier les fichiers ne rend
+pas l'ordre de génération** — un compteur nu le rendrait, donc les familles, puisqu'elles
+sont produites l'une après l'autre.
+
+### ⚠⚠⚠ Et qui ne peut PAS être le juge
+
+Le §2 pose une règle irréversible : *« une fois qu'un modèle a vu une image non calibrée dans
+un fil, on ne peut plus mesurer son taux d'invention sans biais »*. La session qui a rendu
+les cartes de `PHerc1447` les a **regardées** — figures comprises. Elle est donc disqualifiée
+comme juge par la règle même de ce document, et bâtir le jeu est tout ce qu'elle peut faire
+honnêtement. Le juge doit être un papyrologue, ou un fil neuf qui n'a rien vu de ce dépôt.
+
 ## 3. Le prompt
 
 Le prompt ci-dessous est conçu pour **rendre le refus facile et la fabrication
