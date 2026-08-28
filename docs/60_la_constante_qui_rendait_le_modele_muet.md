@@ -191,9 +191,36 @@ seules dimensions du segment, **sans rien mesurer** :
 | `20251105093211` | 8220 × 13640 | 1027 × 1705 | **24** |
 
 ⭐ Trois cartes sur quatre **ne peuvent pas** franchir le seuil de huit à elles seules, et la
-quatrième le franchit largement. C'est structurel, et c'est ce qui justifie ses quatre heures
-de rendu : elle est la seule à porter un test par carte, et elle apporte l'essentiel des
-fenêtres du test groupé.
+quatrième le franchirait largement **si sa surface était pleine**.
+
+⚠⚠⚠ **CORRECTION, une demi-heure plus tard, et elle porte sur la ligne ci-dessus.** Ce tableau
+est calculé depuis les **dimensions** du segment, ce qui était dit — et la variable que je
+n'avais pas est la **couverture**. Le pont zarr a rendu son compte au moment de construire la
+pile :
+
+| segment | chunks lus | absents | couverture |
+|---|---|---|---|
+| `20250702235910` | 392 | 232 | **52,5 %** |
+| `20250703034159` | 742 | 447 | **50,5 %** |
+| `20251105093211` | 744 | **6211** | **8,5 %** |
+
+Le quatrième segment est **presque absent du serveur** : six mille deux cent onze chunks
+manquants contre sept cent quarante-quatre lus. Sa boîte englobante est dix fois celle des
+autres et sa matière n'est pas dix fois plus grande — elle est **plus petite**. Le rendu l'a
+confirmé immédiatement : **226 925 fenêtres sur 251 683, soit 90 %, sont vides et sautées**,
+là où les autres segments en sautaient 40 à 43 %.
+
+⚠⚠ Donc le nombre de fenêtres **mesurables** de cette carte n'est pas 24 : `masque_papyrus`
+n'en gardera qu'une fraction, et il se peut qu'aucune carte ne porte un test par elle-même.
+
+⭐⭐ **Et c'est ce qui donne toute sa valeur au test groupé** — déclaré dans ce document avant
+la campagne, implémenté pendant que cette quatrième pile se téléchargeait, donc **avant que
+cette couverture de 8,5 % ne soit connaissable**. S'il avait fallu l'ajouter maintenant, en
+constatant qu'aucune carte ne se teste seule, il aurait été impossible de distinguer un
+protocole tenu d'un protocole ajusté aux données. Il est daté, et c'est ce qui le sauve.
+
+⚠ Le rendu de cette carte ne coûtera d'ailleurs pas quatre heures mais **environ quarante
+minutes**, pour la même raison : il n'y a presque rien à rendre.
 
 ⚠⚠ **Le test groupé, annoncé ci-dessus, est implémenté** (`fisher_periodicite_groupee`), et
 la date compte : écrit pendant que la quatrième surface se **téléchargeait**, donc avant tout
