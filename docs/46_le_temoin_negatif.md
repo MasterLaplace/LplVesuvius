@@ -132,8 +132,37 @@ officiel sur une vraie feuille — rend **0 fenêtre périodique sur 1**, ce qui
 n'est pas périodique mais que la question n'est pas posable sur une région aussi petite.
 
 ⭐ **L'expérience requise est donc nommée** : rendre un témoin négatif sur une région assez
-grande pour porter au moins huit fenêtres au réglage calibré, soit **au moins ~2100 × 2100**
-pixels de carte. Tant qu'elle n'est pas faite, le p = 0,0007 de `60` reste ce qu'il dit —
+grande pour porter au moins huit fenêtres au réglage calibré.
+
+⚠⚠ **Et j'ai d'abord écrit « ~2100 × 2100 », ce qui est FAUX.** `par_fenetres` balaye
+`range(0, dim - taille//2, taille)`, donc elle accepte une dernière fenêtre qui dépasse à
+moitié — le compte n'est pas `dim/2048`. Vérifié contre une carte réelle
+(`20250703034159`, 3620 × 5220 → 2 × 3 = 6 candidates, 4 retenues, ce que la mesure dit) :
+
+| côté natif | réduit (8) | positions/côté | fenêtres |
+|---:|---:|---:|---:|
+| 1100 | 137 | 1 | **1** |
+| 2100 | 262 | 1 | **1** |
+| 3620 | 452 | 2 | 4 |
+| **5200** | 650 | **3** | **9** |
+
+Le seuil exact est **5128 × 5128** pixels de carte, pas 2100 (`src/encre/fenetres_par_region.py`, 11 contrôles). Se tromper de formule ici,
+c'est dimensionner l'expérience décisive sur un nombre faux.
+
+⭐ **Et elle est faisable** : les couches du témoin négatif font **5641 × 5721** (41 couches),
+donc une région de 5200 y tient. Celles du contrôle positif ne font que **1200 × 1200**, mais
+le positif n'est pas nécessaire à cette question-ci — ce qu'on demande est *le témoin négatif
+est-il périodique*, contre son propre mélange, au réglage calibré et sans rien y changer.
+
+⚠⚠ **Protocole déclaré avant de lancer, le 2026-08-28 à 05h55 :**
+
+| issue | ce qu'on en conclura |
+|---|---|
+| le témoin négatif rend **0 fenêtre périodique** sur ≥ 8 | la périodicité de nos cartes n'est pas ce que ce détecteur produit sur n'importe quelle surface — le p = 0,0007 de `60` gagne un contrôle bien plus dur que le mélange |
+| il en rend **autant que nos cartes** (~2/3) | la périodicité **n'est pas** une signature d'encre : elle apparaît là où la géométrie interdit une feuille, et le résultat de `60` doit être relu comme tel |
+| entre les deux | on rapporte le taux et on ne conclut pas ; c'est un troisième chiffre, pas un demi-verdict |
+
+⚠ Tant que cette mesure n'est pas faite, le p = 0,0007 de `60` reste ce qu'il dit —
 *structuré là où son propre mélange ne l'est pas* — et rien de plus.
 
 ### ⭐ La référence « 95,4 % » est dérivée, pas choisie

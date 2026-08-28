@@ -289,7 +289,8 @@ propre mélange ne l'est pas.
    sans feuille ne l'est pas ?* Mesuré le 2026-08-28 : **on ne peut pas encore la poser**,
    les deux témoins de 1100 × 1100 ne rendant qu'une fenêtre chacun au réglage calibré.
    L'expérience requise est nommée dans [`46`](46_le_temoin_negatif.md) §3 bis — un témoin
-   négatif d'au moins ~2100 × 2100 pixels de carte. Tant qu'elle n'est pas faite, `p = 0,0007`
+   négatif d'au moins ~5200 × 5200 pixels de carte (et non 2100, cf. la correction sur
+   place). Tant qu'elle n'est pas faite, `p = 0,0007`
    dit ce qu'il dit et rien de plus.
 
 ⓘ **La table groupée est identique à celle du témoin** — `[8, 4, 0, 12]` des deux côtés. C'est
