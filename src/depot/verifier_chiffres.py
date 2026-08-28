@@ -241,6 +241,21 @@ def sources_manquantes() -> list[str]:
     return sorted(n for n, vu in _SOURCES if not vu)
 
 
+CARTES_ATTENDUES = (
+    ("ink_segment_complet", "Scroll 1"),
+    ("ink_20250702235910", "PHerc1447 s1"),
+    ("ink_20250703025628", "PHerc1447 s2"),
+    ("ink_20250703034159", "PHerc1447 s3"),
+    ("ink_20251105093211", "PHerc1447 s4"),
+)
+"""Les cartes que `typographie_de_nos_cartes.json` DOIT contenir.
+
+⚠⚠ La liste est écrite plutôt que déduite du fichier, et c'est tout l'intérêt : un garde-fou
+qui garde « ce qu'il trouve » ne peut pas remarquer qu'il ne trouve plus rien. Une carte
+renommée ou disparue doit faire ÉCHOUER, pas réduire le compte en silence.
+"""
+
+
 def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     """(ce que c'est, écritures acceptables, d'où ça vient).
 
@@ -1450,10 +1465,21 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     if typo.exists():
         d = json.loads(typo.read_text())
         par = {(l["rouleau"], l["carte"]): l for l in d.get("cartes", [])}
-        for cle, libelle in ((("nos_cartes", "ink_segment_complet"), "Scroll 1"),
-                             (("nos_cartes", "ink_PHerc1447_complet"), "PHerc1447")):
-            l = par.get(cle)
+        # ⚠⚠⚠ CES NOMS SONT ATTENDUS, pas cherchés au hasard, et l'absence de l'un est un
+        # DÉFAUT. Le 2026-08-28 le garde-fou cherchait `ink_PHerc1447_complet`, que la
+        # campagne avait renommé en quatre segments : il a cessé de garder ses chiffres sur
+        # un `continue` silencieux, le compte est passé de 254 à 253, et **rien n'a
+        # échoué**. Un garde-fou qui cesse de garder sans le dire est pire qu'un garde-fou
+        # absent, parce qu'on continue de lui faire confiance.
+        for carte, libelle in CARTES_ATTENDUES:
+            l = par.get(("nos_cartes", carte))
             if not l or not l.get("fenetres"):
+                # ⚠ L'ecriture cherchee est une phrase qu'aucun document ne contiendra,
+                # donc le controle echoue toujours — et elle est LISIBLE, contrairement a
+                # une sentinelle a octet nul, que `grep` ne rend pas : l'echec doit NOMMER
+                # la carte manquante, sinon il envoie deviner.
+                out.append((f"carte attendue absente de {typo.name}",
+                            [f"CARTE ATTENDUE ABSENTE DU RESULTAT : {carte}"], typo.name))
                 continue
             out.append((f"fenetres periodiques, {libelle}",
                         [f"{l['fenetres_periodiques']}/{l['fenetres']}"], typo.name))
@@ -1462,9 +1488,8 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                             [f"{l['periode_px']} px"], typo.name))
         # ⚠ Le controle par melange est ce qui donne une echelle au compte : sans lui,
         # « 2 fenetres sur 2 » n'est pas distinguable d'un tirage.
-        for cle, libelle in ((("controle_melange", "ink_segment_complet"), "Scroll 1"),
-                             (("controle_melange", "ink_PHerc1447_complet"), "PHerc1447")):
-            l = par.get(cle)
+        for carte, libelle in CARTES_ATTENDUES:
+            l = par.get(("controle_melange", carte))
             if l:
                 out.append((f"controle melange, {libelle}",
                             [f"{l['fenetres_periodiques']}/{l['fenetres']}"], typo.name))
