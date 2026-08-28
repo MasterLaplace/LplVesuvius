@@ -1563,6 +1563,25 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         for nom, h in d.get("holm", {}).items():
             ajoute(f"p de Holm, {nom}", h, 3, tdc.name)
 
+    # ⚠⚠ La lisibilite par echelle. L'INTERVALLE est garde autant que la moyenne : c'est lui
+    # qui distingue « 0,686 » de « lisible », et publier la moyenne seule est exactement la
+    # faute que `65` corrige.
+    lnm = _source(racine, "lisible_a_neuf_microns.json")
+    if lnm.exists():
+        d = json.loads(lnm.read_text())
+        for e in d.get("echelles", []):
+            um = f"{e['voxel_um']:.2f}".replace(".", ",")
+            ajoute(f"AUC groupee a {um} um", e["auc_groupee"], 3, lnm.name)
+            ic = e.get("intervalle", {})
+            if ic.get("exploitable"):
+                ajoute(f"moyenne des tuiles a {um} um", ic["moyenne"], 3, lnm.name)
+                ajoute(f"borne basse de l'IC a {um} um", ic["ic_bas"], 3, lnm.name)
+                ajoute(f"borne haute de l'IC a {um} um", ic["ic_haut"], 3, lnm.name)
+            for b in e.get("balayage_de_maille", []):
+                if b.get("largeur") is not None:
+                    ajoute(f"largeur de l'IC a {um} um, maille {b['cotes']}x{b['cotes']}",
+                           b["largeur"], 3, lnm.name)
+
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():
         d = json.loads(bdf.read_text())

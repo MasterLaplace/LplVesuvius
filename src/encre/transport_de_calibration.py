@@ -50,11 +50,20 @@ from encre.typographie import (binariser_encre, composantes, couverture,  # noqa
 from volume.evaluate_segment import load_pair  # noqa: E402
 
 GRANDEURS = ("epaisseur_trait_px", "couverture", "aire_mediane_px", "hauteur_mediane_px",
-             "composantes")
+             "composantes", "sigma")
 """Ce qu'on mesure sur la carte, sans jamais toucher aux étiquettes.
 
 ⚠ `interligne` en est absent volontairement — voir l'en-tête. Une grandeur qu'on ne peut
 pas mesurer proprement à cette échelle doit être **nommée absente**, pas approchée.
+
+⭐⭐⭐ **`sigma` n'appartient pas à `45`, et c'est exprès qu'il est ici.** C'est la grandeur
+sur laquelle [`60`](../../docs/60_la_constante_qui_rendait_le_modele_muet.md) fait reposer
+« le modèle n'est pas inerte sur `PHerc1447` » (σ = 0,6558, soit 1,2× le témoin), et sur
+laquelle [`58`](../../docs/58_resolution_ou_rouleau.md) fait reposer l'élimination de la
+résolution. **Rien n'avait jamais vérifié qu'un σ élevé veut dire que le modèle LIT.** Ces
+23 tuiles sont le premier endroit où la question peut être posée : chacune a un σ et une AUC
+contre de vraies étiquettes. Si σ ne prédit pas l'AUC, alors « σ est élevé donc il y a du
+signal » est une inférence que ce dépôt fait depuis deux documents sans l'avoir mesurée.
 """
 
 
@@ -89,7 +98,14 @@ def grandeurs_de_tuile(tuile: np.ndarray) -> dict:
     masque = masque_papyrus(gris)
     binaire = binariser_encre(gris, masque)
     comp = composantes(binaire)
+    # ⚠⚠ σ est mesuré sur les LOGITS BRUTS, pas sur le gris : l'étirement par percentiles
+    # normalise justement la dispersion, donc le calculer après l'aurait rendu presque
+    # constant d'une tuile à l'autre — et une grandeur presque constante ne peut rien
+    # prédire, ce qui aurait fait passer une erreur de mesure pour un résultat.
+    couvert = np.isfinite(tuile)
+    sigma = float(np.std(tuile[couvert])) if couvert.any() else None
     return {
+        "sigma": sigma,
         "epaisseur_trait_px": epaisseur_trait(binaire),
         "couverture": couverture(binaire, masque),
         "aire_mediane_px": comp["aire_mediane_px"],
@@ -422,6 +438,24 @@ def verifier() -> int:
       grandeurs_de_tuile(np.zeros((64, 64), dtype=np.float32))["epaisseur_trait_px"] is None)
     # ⚠ La garantie ecrite dans la docstring : la fonction ne prend QUE la prediction.
     import inspect
+    # -- sigma : mesure sur les logits bruts, donc insensible a l'etirement mais PAS a une
+    #    remise a l'echelle du signal lui-meme. Les deux sens.
+    plat = np.full((64, 64), 2.0, dtype=np.float32)
+    v("une tuile constante a un sigma nul", grandeurs_de_tuile(plat)["sigma"] == 0.0)
+    bruite = rng.normal(0, 3.0, (64, 64)).astype(np.float32)
+    v("une tuile dispersee a un sigma proche de sa dispersion",
+      2.5 < grandeurs_de_tuile(bruite)["sigma"] < 3.5,
+      str(grandeurs_de_tuile(bruite)["sigma"]))
+    # ⚠⚠ LA SONDE QUI COMPTE : si sigma etait mesure APRES l'etirement par percentiles, il
+    # serait quasi identique sur ces deux tuiles, donc incapable de rien predire.
+    v("... et il distingue deux tuiles de dispersions differentes",
+      grandeurs_de_tuile(bruite)["sigma"] > 5 * grandeurs_de_tuile(
+          (bruite / 10.0).astype(np.float32))["sigma"],
+      f"{grandeurs_de_tuile(bruite)['sigma']:.3f} vs "
+      f"{grandeurs_de_tuile((bruite / 10.0).astype(np.float32))['sigma']:.3f}")
+    v("une tuile entierement non couverte n'a pas de sigma",
+      grandeurs_de_tuile(np.full((8, 8), np.nan, dtype=np.float32))["sigma"] is None)
+
     v("la fonction ne peut pas voir les etiquettes",
       list(inspect.signature(grandeurs_de_tuile).parameters) == ["tuile"],
       str(list(inspect.signature(grandeurs_de_tuile).parameters)))

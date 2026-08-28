@@ -1105,6 +1105,9 @@ run "bruit d'une fenetre"     uv run python "$ROOT/src/encre/bruit_dune_fenetre.
 # est celle de Holm : un p brut de 0,0312 sur CINQ tests ne survit pas, et sans la correction
 # ce fichier aurait publie un tirage comme un resultat.
 run "transport de calibration" uv run python "$ROOT/src/encre/transport_de_calibration.py" --verifier
+# ⚠⚠ La question litterale de `M1ter`. Sa sonde la plus utile est celle du melange : le
+# temoin doit ramener l'AUC au hasard, sinon « au-dessus du hasard » ne veut rien dire.
+run "lisible a neuf microns"  uv run python "$ROOT/src/encre/lisible_a_neuf_microns.py" --verifier
 run "allure d'un rendu"        uv run python "$ROOT/src/encre/allure_du_rendu.py" --verifier
 run "figure hypothèse réfutée" uv run python "$ROOT/src/figures/figure_hypothese_refutee.py" --verifier
 run "figure bruit d'une fenetre" uv run python "$ROOT/src/figures/figure_bruit_dune_fenetre.py" --verifier

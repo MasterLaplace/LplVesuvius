@@ -176,6 +176,18 @@ compte qu'on n'a pas besoin de discuter.
 | **résolution**, ses deux moitiés | ✅ **éliminée** : les deux objets sont à 9 % l'un de l'autre sur les deux axes, et dix fois cet écart ne rend qu'un facteur 2,1 sur 45 |
 | **ce rouleau-ci** | ⏳ **c'est ce qui reste** — et c'est désormais la seule cause en lice, non plus une parmi trois |
 
+> ⚠⚠⚠ **DEUX RÉSERVES AJOUTÉES LE 2026-08-28** → [`65`](65_ce_que_sigma_ne_dit_pas.md).
+> **(1)** L'élimination ci-dessus est menée sur des **rapports de σ**, et rien n'avait vérifié
+> qu'un σ élevé veut dire que le modèle lit. Testé une fois, contre de vraies étiquettes : σ
+> arrive quatrième sur six grandeurs et ne tranche pas (p de Holm = 0,739).
+> **(2)** Le chiffre de `63` — 0,686 d'AUC à 9,72 µm — ne peut **pas** être cité comme preuve
+> que la résolution ne coûte rien : avec son intervalle, la lisibilité à 9,72 µm n'est **pas
+> établie** ([0,455 ; 0,745], qui contient 0,5), et un balayage de maille montre que cette
+> carte ne peut pas trancher.
+> ⚠ Ni l'une ni l'autre ne **renverse** ce tableau : `58` compare deux objets réels à 9 % l'un
+> de l'autre, `65` décime un seul objet d'un facteur 3. Ce sont deux questions. Mais l'argument
+> ne peut plus être avancé sans ces deux lignes.
+
 ⚠ **Ce que ce document n'établit pas** : qu'il y ait ou non de l'encre sur `PHerc1447`. Il
 dit que l'instrument ne perd pas sa réponse pour une raison d'échelle. Ce que « le rouleau »
 recouvre — l'état de conservation, la chimie de l'encre, l'énergie du faisceau, la surface

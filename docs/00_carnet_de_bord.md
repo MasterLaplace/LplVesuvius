@@ -421,7 +421,7 @@ python3 src/graine/compter_corpus.py                 # les comptes viennent des 
 python3 src/tracecheck/mutation.py                         # chaque detecteur est PORTEUR
 python3 src/nappe/lire_selfcross.py --verifier       # un verdict qui n'a rien teste est REFUSE
 uv run python src/depot/verifier_chiffres.py docs/*.md \
-     --soumission docs/21_texte_de_soumission.md          # 295 chiffres recalcules depuis 63 fichiers de resultat
+     --soumission docs/21_texte_de_soumission.md          # 325 chiffres recalcules depuis 64 fichiers de resultat
 ```
 
 ⚠⚠ **Les cinq derniers ne mesurent rien du papyrus** — ils mesurent le depot. Ils

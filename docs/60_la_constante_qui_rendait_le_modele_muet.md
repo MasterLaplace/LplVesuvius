@@ -1,5 +1,15 @@
 # 60 — Une constante rendait le modèle muet, et elle a fondé un résultat négatif
 
+> ⚠⚠⚠ **RÉSERVE AJOUTÉE LE 2026-08-28** → [`65`](65_ce_que_sigma_ne_dit_pas.md) §1. Tout ce
+> document raisonne sur σ, et **rien n'avait jamais vérifié qu'un σ élevé veut dire que le
+> modèle LIT**. Testé pour la première fois sur les 23 tuiles étiquetées de
+> [`63`](63_la_premiere_verite_terrain.md) : σ arrive **quatrième sur six** grandeurs et ne
+> tranche pas (ρ = +0,263, p de Holm = 0,739). ⚠ Ça ne réfute pas σ — à cette taille
+> d'échantillon rien ne peut l'être — mais ça change le **statut** de l'inférence : « σ est
+> élevé donc il y a du signal » était traité comme un fait, et c'est une hypothèse qui a
+> maintenant été testée une fois sans succès.
+
+
 > ⚠⚠⚠ **Ce document annule une conclusion publiée de ce dépôt.** `36` §5bis répondait « non »
 > à *l'encre est-elle lisible à 9 µm ?*, sur la foi d'un σ **45 fois** plus petit que là où le
 > modèle marche. Ce σ mesurait une erreur d'échelle de notre côté. **La même pile, la même
