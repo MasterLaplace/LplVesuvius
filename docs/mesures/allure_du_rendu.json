@@ -1,0 +1,33 @@
+{
+  "fils": 16,
+  "rendus": [
+    {
+      "points": 330,
+      "mesurable": true,
+      "fenetres": 22016,
+      "secondes": 10440,
+      "cumul_fen_par_s": 2.109,
+      "cumul_par_fil_seconde": 0.1318,
+      "minimum_fen_par_s": 0.267,
+      "median_fen_par_s": 1.2,
+      "maximum_fen_par_s": 11.429,
+      "queue_fen_par_s": 2.68,
+      "queue_par_fil_seconde": 0.1675,
+      "amplitude": 42.86
+    },
+    {
+      "points": 44,
+      "mesurable": true,
+      "fenetres": 10216,
+      "secondes": 1331,
+      "cumul_fen_par_s": 7.675,
+      "cumul_par_fil_seconde": 0.4797,
+      "minimum_fen_par_s": 3.2,
+      "median_fen_par_s": 7.355,
+      "maximum_fen_par_s": 12.267,
+      "queue_fen_par_s": 11.627,
+      "queue_par_fil_seconde": 0.7267,
+      "amplitude": 3.83
+    }
+  ]
+}

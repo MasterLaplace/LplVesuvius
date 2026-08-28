@@ -1,0 +1,35 @@
+{
+  "cote": 640,
+  "fils": 4,
+  "lignes": [
+    {
+      "segment": "1447_20250703025628",
+      "forme": [
+        4100,
+        4260
+      ],
+      "top": 640,
+      "left": 2560,
+      "remplissage": 1.0,
+      "secondes": 338.8,
+      "fenetres": 784,
+      "ms_par_fenetre": 432.1,
+      "debit_par_fil_seconde": 0.5785
+    },
+    {
+      "segment": "1447_20250703034159",
+      "forme": [
+        3620,
+        5220
+      ],
+      "top": 1920,
+      "left": 1280,
+      "remplissage": 1.0,
+      "secondes": 230.1,
+      "fenetres": 784,
+      "ms_par_fenetre": 293.5,
+      "debit_par_fil_seconde": 0.8518
+    }
+  ],
+  "rapport_des_debits": 1.47
+}

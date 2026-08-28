@@ -4,6 +4,12 @@
 > élégante, sa frontière tombait exactement entre les deux cas observés, et elle est
 > **fausse**. Ce que la réfutation laisse derrière elle vaut mieux que ce que l'hypothèse
 > aurait donné si elle avait été juste : elle ferme une **classe** de causes, pas un cas.
+>
+> ⚠⚠⚠ **Et le lendemain, la question elle-même s'est dissoute** : il n'y avait pas d'écart
+> à expliquer. Le §7 le mesure et corrige le §1, qui affirmait à tort avoir écarté la
+> contention. Le document est conservé dans cet ordre — l'hypothèse, sa réfutation, puis la
+> dissolution de sa prémisse — parce que c'est l'ordre dans lequel on a appris, et qu'une
+> version réécrite depuis la fin ferait passer trois erreurs pour un raisonnement droit.
 
 ## 1. La question
 
@@ -18,8 +24,11 @@ de fils, sur la même machine libre, ne coûtent pas le même prix :
 Un facteur **4,6** pour une surface 1,8 fois plus large. Écartés d'emblée, **par mesure et non
 par raisonnement** :
 
-- la **contention** — `ps` donne 1586 % de CPU et `/proc/loadavg` vaut les seize fils demandés,
-  donc le processus a bien la machine ;
+- ⚠⚠⚠ ~~la **contention** — `ps` donne 1586 % de CPU et `/proc/loadavg` vaut les seize fils
+  demandés, donc le processus a bien la machine~~ **FAUX, et c'est l'erreur qui a tout
+  déclenché** : 1586 % sur une machine qui en offre **2200** veut dire que **six cœurs
+  faisaient autre chose**, c'est-à-dire exactement la contention que je déclarais écartée.
+  Le chiffre était juste, la lecture était fausse. Voir le §7 ;
 - la **mémoire** — 33 Gio libres, zéro swap, 2,4 Gio de RSS ;
 - le **type de données et la profondeur** — les deux piles sont en `uint8`, 31 couches, lues
   avec `tifffile` ;
@@ -136,7 +145,75 @@ refusé en nommant ses deux causes possibles — pile vide, ou mauvais plafond d
 au lieu de rendre du bruit. C'est [`60`](60_la_constante_qui_rendait_le_modele_muet.md) qui
 travaille.
 
+## 7. ⚠⚠⚠ La question s'est dissoute : il n'y avait pas d'écart
+
+Mesuré le 2026-08-28, et c'est une correction de ce document par lui-même.
+
+### 7.1 L'A/B que la section 4 réclamait
+
+`src/encre/ab_segments.py` prend le **même crop**, cherché sur la couche médiane comme le bloc
+le **plus plein** de chaque segment, et le rend avec les mêmes fils, à la suite, dans les
+mêmes conditions :
+
+| segment | crop | remplissage | ms/fenêtre | fen/fil-s |
+|---|---|---|---|---|
+| `20250703025628` | (640, 2560) | 100 % | 432,1 | **0,5785** |
+| `20250703034159` | (1920, 1280) | 100 % | 293,5 | **0,8518** |
+
+⭐ Le rapport tombe à **×1,47**, et le chiffre qui compte est ailleurs : le crop du segment
+« lent » rend à **0,5785** quand son run complet donnait **0,132**. **Le même segment, le
+même code, 4,4 fois plus vite.** Ce n'est donc ni sa taille ni son contenu.
+
+### 7.2 Ce qu'une moyenne cumulée cachait
+
+`src/encre/allure_du_rendu.py` lit les lignes de progression déjà écrites et rend l'allure
+**instantanée** au lieu du cumul :
+
+| rendu | cumul | min / médiane / **max** | amplitude |
+|---|---|---|---|
+| `20250703025628` | 2,109 fen/s | 0,267 / 1,200 / **11,429** | **×42,9** |
+| `20250703034159` | 7,675 fen/s | 3,200 / 7,355 / **12,267** | ×3,8 |
+
+⭐⭐ **Les deux rendus atteignent le même pic** — 11,4 contre 12,3 fenêtres par seconde. Le
+segment 2 n'était pas lent : il a passé la plus grande partie de son run **contendu**, avec
+une médiane de 1,2 contre 7,4. Sa vitesse a varié d'un facteur **43 sur elle-même**, et une
+moyenne prise sur un intervalle où les conditions changent n'est la vitesse de rien.
+
+### 7.3 Et c'est moi qui prenais la machine
+
+Pendant les trois heures du segment 2 : la suite de témoins, le balayage de largeurs de la
+section 3, deux rendus de figure, deux sondes A/B, et les gardes du dépôt. Pendant le segment
+3 : presque rien. Le « segment lent » et le « segment rapide » sont le même moteur sur deux
+machines différentes, et c'est moi qui faisais la différence.
+
+### 7.4 Ce qui survit, et ce qui tombe
+
+| | |
+|---|---|
+| ✅ **la réfutation de la section 3** | intacte : le rassemblement coûte 0,167 ms, et cela reste vrai qu'il y ait un écart à expliquer ou non |
+| ✅ **l'argument de la section 4** | intact, et confirmé par un troisième point : le segment 3 est **plus grand** (3620 × 5220 contre 4100 × 4260) et rend plus vite |
+| ❌ **le « facteur 4,6 » de la section 1** | c'est un artefact de contention, pas une propriété d'un segment |
+| ❌ **« la contention est écartée par mesure »** | la mesure disait l'inverse et je l'ai mal lue |
+
+⚠⚠ **La leçon transportable, et elle vaut plus que le diagnostic** : un débit ne se publie pas
+depuis un **cumul**. Il se publie depuis un intervalle dont on peut dire ce qui tournait à
+côté — ou depuis un intervalle où rien ne tournait. `cout_du_rendu.py` publie des cumuls ; ses
+cinq observations sont donc à relire avec cette réserve, et la colonne « machine partagée »
+qu'il porte déjà est exactement la bonne distinction, mais elle est **binaire** là où la
+contention est continue.
+
+⚠ Et un piège de mesure trouvé en écrivant l'instrument : la ligne de progression change de
+grammaire au-delà de l'heure. `35m04` veut dire « 35 min 4 s » et `2h54` veut dire « 2 h
+54 min ». Un motif qui lirait les deux comme « premier, second » compterait `2h54` pour
+2 min 54 — soit une allure **soixante fois trop grande** sur toute la fin d'un long run, sans
+que rien dans le résultat n'ait l'air faux. Attrapé par la batterie, qui exige les deux formes.
+
 ## 6. Ce qui reste ouvert
+
+⚠⚠ **Section écrite avant le §7, et conservée pour ce qu'elle dit de la méthode.** L'écart de
+×4,6 n'est plus « inexpliqué » : il n'existe pas. Ce qui suit reste juste sur le fond — chaque
+ligne écarte une cause qui est effectivement écartée — mais la dernière était la bonne piste et
+je l'avais rangée en dernier.
 
 L'écart de ×4,6 **n'est pas expliqué**, et il est important de le dire ainsi plutôt que de
 laisser une hypothèse morte tenir lieu de réponse. Ce qui est acquis :
@@ -156,8 +233,11 @@ C'est une dette de compréhension, pas une dette de résultat, et elle est noté
 
 **Instruments** : [`src/encre/cout_de_la_fenetre.py`](../src/encre/cout_de_la_fenetre.py)
 (27 contrôles), [`src/figures/figure_hypothese_refutee.py`](../src/figures/figure_hypothese_refutee.py)
-(13 contrôles).
-**Mesure** : [`docs/mesures/cout_de_la_fenetre.json`](mesures/cout_de_la_fenetre.json).
+(13 contrôles), [`src/encre/ab_segments.py`](../src/encre/ab_segments.py) (12 contrôles),
+[`src/encre/allure_du_rendu.py`](../src/encre/allure_du_rendu.py) (21 contrôles).
+**Mesures** : [`cout_de_la_fenetre.json`](mesures/cout_de_la_fenetre.json),
+[`ab_segments.json`](mesures/ab_segments.json),
+[`allure_du_rendu.json`](mesures/allure_du_rendu.json).
 **Voir aussi** : [`59`](59_la_campagne_plutot_que_le_rouleau.md) pour le coût d'un rendu,
 [`60`](60_la_constante_qui_rendait_le_modele_muet.md) pour la garde de pile,
 [`61`](61_les_batteries_qui_ne_pouvaient_pas_echouer.md) pour les vérifications incapables

@@ -88,8 +88,9 @@ def libelles(mesure: dict) -> list[str]:
         "aucun coude : 6000 colonnes coûtent moins que 4260",
         "ce que la cause devrait peser", "échelle logarithmique, ms par fenêtre",
         "rassemblement, le plus cher mesuré",
-        "écart à expliquer entre les deux rendus",
-        "rapport mesuré : ×2142",
+        "rapport mesuré : ×2142", "écart APPARENT entre les deux rendus",
+        "l'écart lui-même s'est révélé être de la contention (62 §7) :",
+        "les deux rendus atteignent le même pic, 11,4 contre 12,3 fen/s.",
         "une cause deux mille fois trop petite reste trop petite,",
         "quelle que soit la forme de la courbe.",
     ]
@@ -107,7 +108,7 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
     obs = mesure["observations_de_rendu"]
     rapport = rapport_des_causes(mesure)
 
-    L, H = 1180, 520
+    L, H = 1180, 560
     toile = Image.new("RGB", (L, H), FOND)
     d = ImageDraw.Draw(toile)
 
@@ -155,8 +156,12 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
     pire = max(ys)
     ecart = max(o["ms_par_fenetre"] for o in obs) - min(o["ms_par_fenetre"] for o in obs)
     blo, bhi = 0.05, 1000.0
+    # ⚠⚠ « APPARENT » n'est pas une nuance de style : la mesure du 2026-08-28 a montré que
+    # cet écart est un artefact de contention, pas une propriété d'un segment. La figure
+    # garde la barre — c'est bien l'écart qu'on cherchait à expliquer ce jour-là — mais elle
+    # ne doit pas le présenter comme un fait sur le moteur. Voir `62` §7.
     barres = [("rassemblement, le plus cher mesuré", pire, GRIS),
-              ("écart à expliquer entre les deux rendus", ecart, AMBRE)]
+              ("écart APPARENT entre les deux rendus", ecart, AMBRE)]
     for i, (nom, valeur, couleur) in enumerate(barres):
         yy = by + 60 + i * 110
         largeur = echelle_log(valeur, blo, bhi, bw)
@@ -167,6 +172,12 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
     d.text((bx, by + 316),
            "une cause deux mille fois trop petite reste trop petite,", fill=TEXTE, font=moyen)
     d.text((bx, by + 336), "quelle que soit la forme de la courbe.", fill=TEXTE,
+           font=moyen)
+    d.text((bx, by + 366),
+           "l'écart lui-même s'est révélé être de la contention (62 §7) :", fill=DISCRET,
+           font=moyen)
+    d.text((bx, by + 386),
+           "les deux rendus atteignent le même pic, 11,4 contre 12,3 fen/s.", fill=DISCRET,
            font=moyen)
 
     sortie.parent.mkdir(parents=True, exist_ok=True)
