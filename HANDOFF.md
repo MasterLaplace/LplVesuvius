@@ -5,6 +5,83 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+## ⭐⭐⭐⭐ REPRISE — 2026-08-28, fin d'après-midi
+
+**Trente-six commits depuis la nuit du 27.** L'arbre est propre, la suite est verte. Ce bloc
+remplace le précédent comme état courant ; tout ce qui suit est l'historique.
+
+### Les trois résultats du jour
+
+**1. ⭐⭐⭐ La première vérité terrain de ce dépôt** →
+[`63`](docs/63_la_premiere_verite_terrain.md). Les fragments publient `inklabels.png` aligné
+sur leurs couches de surface — le jeu du concours de détection d'encre. Tous les contrôles
+positifs d'ici étaient jusque-là des **rendus publiés**, pas des vérités.
+
+| fragment | encre fenêtre | tout le segment | lignes | **tuiles annotées** |
+|---|---:|---:|---:|---:|
+| `Frag1` | 31,8 % | 0,746 | 0,701 | 0,677 |
+| `Frag2` | 20,6 % | 0,600 | 0,594 | 0,581 |
+| `Frag3` | 1,55 % | 0,575 | 0,523 | **0,704** |
+| | *étendue* | 0,171 | 0,178 | **0,122** |
+
+⚠⚠⚠ **La réplication ne confirme pas, et le DOMAINE décide qui est l'exception** : `Frag1`
+se détache sur « tout le segment », `Frag2` sur les tuiles. Notre chaîne rend **entre 0,52 et
+0,75 selon le fragment ET le domaine**, et **aucun domaine ne les fait s'accorder**. La
+dispersion est plus grande que tout écart qu'on chercherait entre deux réglages. Le contrôle
+par mélange rend `0,500` partout, donc le signal est réel — le désaccord porte sur *combien*.
+
+⚠ La fenêtre est choisie sur le **masque seul**, jamais sur l'encre, et la part d'encre est
+rapportée. ⚠ On ne peut pas vérifier d'ici si les fragments étaient dans l'entraînement.
+
+**2. ⭐⭐⭐ La résolution éliminée une seconde fois, contre de vrais labels.** `Frag1` est à
+3,24 µm, le modèle entraîné à 7,91 — 144 % d'écart. Ramener le fragment au pas
+d'entraînement **dégrade** l'AUC : `0,746` → `0,693` (×2, 6,48 µm) → `0,686` (×3, 9,72 µm),
+de façon monotone. Le document 58 l'avait éliminée par émulation sur Scroll 1 ; ici c'est un
+autre objet, contre des étiquettes, et les deux convergent.
+
+**3. ⭐⭐ Le témoin négatif refait, et sa conclusion a changé de signe** →
+[`46`](docs/46_le_temoin_negatif.md). ρ passe de **+0,9979 à −0,0100** (les deux cartes sont
+étrangères, donc le modèle répond) et σ du positif de **2,4 % à 76,4 %** du modèle qui marche
+— mais **σ du négatif vaut 0,7111 contre 0,5894**, donc il répond **plus fort** sur une
+surface dont `38` prouve géométriquement qu'aucune feuille n'est à portée. **La thèse forte
+est établie**, et elle est plus dure que celle publiée : un modèle bloqué se repère, un modèle
+qui hallucine une structure *différente et convaincante* sur chaque entrée ne se repère par
+aucune inspection de sa sortie. ⭐ Deux documents (`29`, `48`) concluaient « l'aval est
+aveugle, aucune réparation ne peut y montrer de gain » : **c'est faux, le lot rouvre**.
+
+### ⚠⚠ Ce qui est ouvert, et pourquoi
+
+| | état |
+|---|---|
+| **expliquer la dispersion** 0,52–0,75 entre fragments | ⏳ **le lot suivant**, et rien ne peut être cité avant |
+| le **juge** de [`09`](docs/09_protocole_jugement_modele.md) | ⏳ le jeu est **bâti** (18 tuiles, 3 familles, clé à part) mais la session qui a vu les cartes est **disqualifiée** par le protocole. Il faut un papyrologue ou un fil neuf |
+| contrôle **typographique** du témoin négatif | ⏳ a manqué d'**une** fenêtre (5 rendues, 6 nécessaires). Il faut une **seconde** trace à α ≈ +1 ; `data/leur_graine/` n'en a pas |
+| **énergie** isolée contre étiquettes | ❌ **impossible en l'état** : `Frag1`–`Frag3` ont les labels sans recalage, `Frag5`/`Frag6` le recalage sans labels, et les volumes d'une paire n'ont pas la même forme |
+| la **soumission** | hors périmètre, sur demande de l'auteur |
+
+### ⚠ Les pièges payés aujourd'hui, à ne pas repayer
+
+- **219 agents lancés d'un coup** ont épuisé la limite mensuelle de l'org : un vérificateur
+  par candidat, 208 pour 11 lecteurs, sans plafond. Échantillonner aurait donné le même
+  signal. Les 489 items extraits ont été récupérés du **journal** de la campagne.
+- **`campagnes_de_scan.py` ne voit qu'UN des deux layouts** du dépôt public. Son `n_volumes`
+  est un **minorant**, et cet angle mort a fait argumenter `59` depuis une liste qui ne
+  contient pas le volume où le modèle marche — puis déclarer impossible un test que l'autre
+  layout rend possible.
+- **`volumes_standardized/` ne recale rien** : même forme, `uint8`. C'est une normalisation
+  d'intensité, pas une transformation spatiale.
+- **`round(49.5) == 50`** en Python : arrondi au pair.
+- Le code de sortie d'une **chaîne** est celui de sa dernière commande — quatre fois.
+
+### Trente-six marqueurs périmés fermés
+
+Le motif se répète : la réponse est presque toujours dans le **même document**, parfois quatre
+lignes plus bas, et personne n'est revenu barrer la question. Un triage sur les 64 documents
+a extrait **489 items** ; ⚠ sa vérification adversariale a été coupée, donc les classements
+restent **non vérifiés** et je les reprends un par un.
+
+---
+
 ## ⚠⚠⚠⚠ UNE CONSTANTE RENDAIT LE MODÈLE MUET — et elle a fondé un résultat négatif publié
 
 [`60`](docs/60_la_constante_qui_rendait_le_modele_muet.md), 2026-08-27. **Le plus gros
