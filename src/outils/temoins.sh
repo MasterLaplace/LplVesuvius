@@ -1095,6 +1095,7 @@ run "contraste des deux objets" uv run python "$ROOT/src/encre/contraste_des_obj
 run "jeu du juge, en aveugle"  uv run python "$ROOT/src/encre/jeu_du_juge.py" --verifier
 run "paires contrôlées"        uv run python "$ROOT/src/encre/paires_denergie.py" --verifier
 run "fenêtre sur le masque"    uv run python "$ROOT/src/encre/fenetre_sur_masque.py" --verifier
+run "décimer une pile"         uv run python "$ROOT/src/encre/decimer_couches.py" --verifier
 run "allure d'un rendu"        uv run python "$ROOT/src/encre/allure_du_rendu.py" --verifier
 run "figure hypothèse réfutée" uv run python "$ROOT/src/figures/figure_hypothese_refutee.py" --verifier
 

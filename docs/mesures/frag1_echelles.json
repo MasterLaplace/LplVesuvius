@@ -1,0 +1,109 @@
+{
+  "objet": "PHercParis2Fr47 (Frag1), surface exposee 54 keV, fenetre 1024 en (3440,2336)",
+  "modele": "timesformer_GP_scroll1, entraine a 7.91 um sur Scroll 1",
+  "verite_terrain": "inklabels.png du concours de detection d'encre, alignee sur la surface",
+  "controle_melange_auc": 0.5,
+  "echelles": [
+    {
+      "facteur": 1,
+      "voxel_um": 3.24,
+      "domaines": [
+        {
+          "domaine": "tout le segment",
+          "pixels": 1018081,
+          "encre_pct": 31.85,
+          "auc": 0.746,
+          "precision": 0.552,
+          "rappel": 0.609,
+          "f1": 0.579
+        },
+        {
+          "domaine": "lignes annotees",
+          "pixels": 748678,
+          "encre_pct": 43.32,
+          "auc": 0.701,
+          "precision": 0.609,
+          "rappel": 0.609,
+          "f1": 0.609
+        },
+        {
+          "domaine": "tuiles annotees (256px)",
+          "pixels": 628705,
+          "encre_pct": 51.57,
+          "auc": 0.677,
+          "precision": 0.654,
+          "rappel": 0.609,
+          "f1": 0.631
+        }
+      ]
+    },
+    {
+      "facteur": 2,
+      "voxel_um": 6.48,
+      "domaines": [
+        {
+          "domaine": "tout le segment",
+          "pixels": 255025,
+          "encre_pct": 31.97,
+          "auc": 0.693,
+          "precision": 0.429,
+          "rappel": 0.821,
+          "f1": 0.563
+        },
+        {
+          "domaine": "lignes annotees",
+          "pixels": 187860,
+          "encre_pct": 43.41,
+          "auc": 0.639,
+          "precision": 0.505,
+          "rappel": 0.821,
+          "f1": 0.625
+        },
+        {
+          "domaine": "tuiles annotees (256px)",
+          "pixels": 189489,
+          "encre_pct": 43.03,
+          "auc": 0.654,
+          "precision": 0.513,
+          "rappel": 0.821,
+          "f1": 0.632
+        }
+      ]
+    },
+    {
+      "facteur": 3,
+      "voxel_um": 9.72,
+      "domaines": [
+        {
+          "domaine": "tout le segment",
+          "pixels": 113569,
+          "encre_pct": 31.85,
+          "auc": 0.686,
+          "precision": 0.408,
+          "rappel": 0.864,
+          "f1": 0.554
+        },
+        {
+          "domaine": "lignes annotees",
+          "pixels": 83576,
+          "encre_pct": 43.28,
+          "auc": 0.665,
+          "precision": 0.514,
+          "rappel": 0.864,
+          "f1": 0.645
+        },
+        {
+          "domaine": "tuiles annotees (256px)",
+          "pixels": 113569,
+          "encre_pct": 31.85,
+          "auc": 0.686,
+          "precision": 0.408,
+          "rappel": 0.864,
+          "f1": 0.554
+        }
+      ]
+    }
+  ],
+  "lecture": "Ramener le fragment au pas d'entrainement N'AMELIORE PAS l'AUC : elle tombe de 0.746 a 0.693 puis 0.686. La resolution n'explique donc pas l'ecart aux 0.925 cites comme reference, et elle est eliminee une seconde fois, sur un autre objet et contre de vrais labels.",
+  "reserve": "Une decimation conserve le detail en PROFONDEUR qu'un vrai scan grossier n'aurait pas (58 §8), donc ces AUC decimees sont un MAJORANT."
+}
