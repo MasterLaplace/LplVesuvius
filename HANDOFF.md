@@ -1784,7 +1784,7 @@ sonder.
 
 ## 2. ⚠ CE QUI TOURNE (2026-08-19, soirée)
 
-⏳ **`src/campagnes/campagne_pas.sh`** — le balayage de `step_size` sur PHerc0358, deux graines
+✅ **`src/campagnes/campagne_pas.sh`** — le balayage de `step_size` sur PHerc0358, deux graines
 (`pas/` et `pas_mauvaise_graine/`). Reprenable. C'est **T1f**.
 ✅ **Rendu** : sur les deux graines, 4 pas sur 5 donnent **zéro** auto-intersection
 (`26` §9). `pas_5` des deux campagnes tournait encore au moment d'écrire.
@@ -2866,7 +2866,7 @@ dépôt hérite de cette limite ; désormais il la porte.
 périmètre/aire — mais la source, qui est la plus petite, est à 0 %, donc la taille n'explique
 pas tout. À ne pas comparer entre surfaces de tailles très différentes sans y penser.
 
-**⏳ En cours** : chaîne à pas de 50 (quatre pas cumulatifs). Si l'amélioration continue quand
+**✅ ~~En cours~~ RENDU, négativement** (`44`:1535 : « 100 | en deux fois 50 | 20,06 cm² | 0 | +1,806 (pire) ») : chaîne à pas de 50 (quatre pas cumulatifs). Le texte d'origine : si l'amélioration continue quand
 le pas diminue, il existe une taille de pas qui tient et la bande peut grandir.
 
 ### ⭐⭐⭐ NUIT DU 2026-08-22 — la chaîne TANGENTIELLE, et un non-déterminisme trouvé
@@ -3017,7 +3017,7 @@ comptes de franchissements de seuil.**
 
 ## ⭐⭐⭐ 2026-08-22, soirée — le registre est vide, et α a perdu une certitude
 
-### ⏳ CE QUI TOURNE, et quoi en faire
+### ✅ CE QUI TOURNAIT, et ce qui en est sorti
 
 ```bash
 tail -f .lances/tracer_prediction_paris4-20260822-213653.log   # 12 cellules, ~5 min chacune

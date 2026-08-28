@@ -15,7 +15,7 @@ figure, pas sa decoration.
 Usage :
     uv run python src/figures/figure_echelle.py \\
         --avant data/out/ink_PHerc1447_avant.npy --apres data/out/ink_PHerc1447_corrige.npy \\
-        --sortie docs/images/60_echelle.png
+        --sortie docs/images/60_echelle_uint8.png
 """
 
 from __future__ import annotations
@@ -92,7 +92,7 @@ def main() -> int:
     ap.add_argument("--apres", type=Path)
     ap.add_argument("--titre-avant", default="normalisée par 65535 (la constante)")
     ap.add_argument("--titre-apres", default="normalisée par le plafond du type")
-    ap.add_argument("--sortie", type=Path, default=RACINE / "docs/images/60_echelle.png")
+    ap.add_argument("--sortie", type=Path, default=RACINE / "docs/images/60_echelle_uint8.png")
     ap.add_argument("--verifier", action="store_true")
     a = ap.parse_args()
     if a.verifier:

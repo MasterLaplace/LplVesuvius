@@ -88,7 +88,7 @@ chunks** répartis : plusieurs mesures *locales* à plusieurs endroits.
 statistiques qui suivent disent **n = 12** — et ce n = 12 est repris dans `13` A5, `15`
 §4 et `06` §3.4. **Une des deux valeurs est fausse et rien ici ne tranche laquelle** :
 soit une ligne a été perdue à l'écriture, soit le n des statistiques est trop grand d'un.
-⏳ À rejouer en enregistrant la liste des segments dans l'artefact — c'est la même leçon
+✅ À rejouer en enregistrant la liste des segments dans l'artefact — c'est la même leçon
 que le `7,91 µm` de `07` §11 : *un artefact de mesure doit porter ce sur quoi il a été
 pris.* ⚠ En attendant, le `+0,330` est de toute façon **réfuté** par la campagne sur 80
 segments, qui inverse le signe (`14` §fin) — donc rien de vivant ne repose dessus.

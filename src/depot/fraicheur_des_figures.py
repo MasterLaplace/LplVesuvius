@@ -45,8 +45,15 @@ def figures(racine: Path = RACINE) -> list[Path]:
     # (`src/xpu/.venv`), un parcours de `src/` traverse 8 885 fichiers de `site-packages`.
     # Le coût n'est pas le pire : un module de bibliothèque qui contiendrait `"--sortie"` et
     # `images/` serait pris pour une figure de ce dépôt.
+    # ⚠⚠⚠ `src/depot/` est ÉLAGUÉ AUSSI, et pour une raison différente de `.venv` : une
+    # batterie d'hygiène porte des **fixtures** — des chemins d'image écrits pour être
+    # inexistants, parce que c'est ce que le contrôle négatif exige. Ce fichier-ci se
+    # signalait ainsi lui-même comme « image absente : docs/images/y.png », soit un défaut
+    # permanent, impossible à corriger et impossible à distinguer d'un vrai. C'est le piège
+    # « une sonde qui scanne son propre fichier se matche elle-même », que ce dépôt a déjà
+    # payé six fois — le remède est d'exclure la classe, pas de nommer ce fichier.
     for f in sorted((racine / "src").rglob("*.py")):
-        if "__pycache__" in f.parts or ".venv" in f.parts:
+        if "__pycache__" in f.parts or ".venv" in f.parts or "depot" in f.parts:
             continue
         try:
             t = f.read_text(encoding="utf-8", errors="replace")
@@ -69,12 +76,19 @@ def sortie_par_defaut(module: Path) -> Path | None:
     # déclarée », c'est-à-dire pour non jugeable — silencieusement. La couverture d'un
     # garde-fou ne doit pas dépendre de l'orthographe d'une variable : tout identifiant
     # suivi d'un chemin `docs/images/` déclare une sortie, quel que soit son nom.
+    # ⚠⚠ Et une TROISIEME orthographe, payee le 2026-08-29 : un chemin construit SEGMENT
+    # par segment (`RACINE / "docs" / "images" / "x.png"`). La figure passait pour « sans
+    # sortie declaree », donc pour non jugeable, exactement comme la casse de `racine`
+    # l'avait fait avant. Meme lecon, troisieme costume : ce qu'on cherche est un chemin
+    # d'image, pas une facon de l'ecrire.
     for motif in (r'default=\w+\s*/\s*"(docs/images/[^"]+)"',
                   r'default=Path\(\s*"(docs/images/[^"]+)"\s*\)',
-                  r'default=Path\(__file__\)[^\n]*?/\s*"(docs/images/[^"]+)"'):
+                  r'default=Path\(__file__\)[^\n]*?/\s*"(docs/images/[^"]+)"',
+                  r'default=\w+\s*/\s*"docs"\s*/\s*"images"\s*/\s*"([^"]+)"'):
         m = re.search(motif, t, re.S)
         if m:
-            return RACINE / m.group(1)
+            g = m.group(1)
+            return RACINE / (g if g.startswith("docs/") else f"docs/images/{g}")
     return None
 
 

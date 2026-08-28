@@ -214,7 +214,7 @@ sous-dimensionnement que `63`, mesuré cette fois avant de conclure plutôt qu'a
 - ⚠ **Le contraste d'encre n'est pas une vérité terrain non plus** : c'est une autre sortie
   du même pipeline. L'accord de deux mesures indépendantes du même objet est plus faible
   qu'une vérification, et plus fort que rien. Le dire fait partie du résultat.
-- ⏳ **M8 reste ouvert** : le témoin négatif jeté par le pipeline — chez EduceLab, la feuille
+- ✅ ~~**M8 reste ouvert**~~ **clos le jour même** par le commit suivant (`83fa630`, 2026-08-22) → [`46`](46_le_temoin_negatif.md) : le témoin négatif jeté par le pipeline — chez EduceLab, la feuille
   de support en papier, imagée dans la même session, au même voxel, et supprimée au
   nettoyage manuel. C'est la forme la plus économique d'un contrôle négatif, et cet
   instrument est ce qui le rendrait lisible.

@@ -275,8 +275,11 @@ def main() -> int:
     p.add_argument("--verifier", action="store_true")
     p.add_argument("--mesure", type=Path,
                    default=RACINE / "docs" / "mesures" / "bruit_dune_fenetre.json")
+    # ⚠ Chemin en UNE chaine, comme le reste du depot : `fraicheur_des_figures` lit la
+    # declaration par expression reguliere, et la forme segmentee lui echappait -- la figure
+    # passait alors pour « sans sortie declaree », donc pour non jugeable, en silence.
     p.add_argument("--sortie", type=Path,
-                   default=RACINE / "docs" / "images" / "64_bruit_dune_fenetre.png")
+                   default=RACINE / "docs/images/64_bruit_dune_fenetre.png")
     a = p.parse_args()
     if a.verifier:
         return verifier()

@@ -27,15 +27,33 @@ RACINE = Path(__file__).resolve().parents[2]
 REGISTRE = RACINE / "docs" / "registres" / "taches.tsv"
 SABLIER = "⏳"
 
-ETATS = ("ouverte", "faite", "perimee", "recit", "legende")
-"""Ce qu'un sablier peut être.
+ETATS = ("ouverte", "recit", "legende")
+"""Ce qu'un sablier a le droit d'être.
 
 - `ouverte`  : du travail qui reste, et personne ne l'a fait
-- `faite`    : le travail a été fait ; le sablier n'a pas suivi
-- `perimee`  : la question a cessé de se poser (une mesure l'a dépassée)
 - `recit`    : un titre de section ou une phrase d'un récit daté, jamais une tâche
 - `legende`  : le caractère lui-même, expliqué dans la légende d'un registre
+
+⚠⚠⚠ **`faite` ET `perimee` ONT ÉTÉ RETIRÉS le 2026-08-29, sur une remarque de l'auteur**, et
+c'est la correction la plus utile qu'ait reçue ce fichier. Ils décrivaient un sablier posé sur
+une ligne dont le travail est **fini** — donc un caractère qui MENT à quiconque lit le document
+sans ouvrir le registre. Le dépôt en portait **dix-neuf**, et un lecteur y voyait « ⏳ *en
+cours* » sur une ligne close depuis une semaine.
+
+⭐ La règle est désormais celle que le caractère devrait toujours avoir eue : **un ⏳ veut dire
+ouvert, point.** Un travail fini porte `✅` et, si sa phrase affirme encore quelque chose de
+faux, la clause est barrée avec le pointeur vers sa réponse. Classer un sablier `faite` est
+maintenant une **contradiction**, et `verifier` la refuse.
+
+⚠ Ce que ça change en pratique : le registre a fondu de 32 à 13 lignes, et la question
+« reste-t-il du travail ? » se lit sur le document lui-même au lieu de demander un croisement.
 """
+
+ETATS_INTERDITS = ("faite", "perimee")
+"""Les deux états qu'une entrée ne peut plus porter, et le message que ça doit produire.
+
+⚠ Ils sont nommés plutôt que simplement absents d'`ETATS` : une entrée écrite par quelqu'un
+qui connaissait l'ancienne convention doit recevoir une **raison**, pas un refus muet."""
 
 COLONNES = ("doc", "ancre", "etat", "raison")
 
@@ -151,7 +169,13 @@ def apparier(marques, entrees) -> dict:
             restants.remove(trouve)
     for e in restants:
         perimees.append(e)
-    return {"classes": classes, "non_classes": non_classes, "perimees": perimees}
+    # ⚠⚠ Un sablier classé « fait » est une contradiction dans les termes : si le travail est
+    # fini, le caractère doit avoir été remplacé par `✅`. On le remonte à part pour que le
+    # message le dise, plutôt que de le laisser passer pour un classement valide.
+    contradictions = [(d, n, t, e) for d, n, t, e in classes
+                      if e.get("etat") in ETATS_INTERDITS]
+    return {"classes": classes, "non_classes": non_classes, "perimees": perimees,
+            "contradictions": contradictions}
 
 
 def resume(appariement: dict) -> dict[str, int]:
@@ -196,6 +220,21 @@ def verifier() -> int:
         v("un marqueur classe est apparie", len(a["classes"]) == 1, str(a["classes"]))
         # ⚠⚠ LE controle qui compte : un sablier sans entree ne doit pas passer inapercu,
         # sinon la question « reste-t-il du travail ? » redevient une relecture a la main.
+        # ⚠⚠⚠ LE CONTROLE QUI PORTE LA NOUVELLE REGLE : une entree « faite » est refusee.
+        # Sans lui, retirer `faite` d'`ETATS` serait decoratif -- rien ne lirait le champ.
+        reg_faite = r / "docs" / "registres" / "faite.tsv"
+        reg_faite.write_text("doc\tancre\tetat\traison\n"
+                             "docs/01_x.md\tune tache qui reste\tfaite\tdeja fait\n",
+                             encoding="utf-8")
+        af = apparier(m, lire_registre(reg_faite))
+        v("un sablier classe « faite » est une contradiction",
+          len(af["contradictions"]) == 1, str(af["contradictions"]))
+        v("... et « perimee » aussi", "perimee" in ETATS_INTERDITS)
+        v("... alors qu'un sablier ouvert n'en est pas une",
+          len(apparier(m, lire_registre(reg))["contradictions"]) == 0)
+        v("... et les deux etats interdits ne sont plus des etats valides",
+          all(x not in ETATS for x in ETATS_INTERDITS), str(ETATS))
+
         v("... et un marqueur SANS entree est signale non classe",
           len(a["non_classes"]) == 1 and a["non_classes"][0][0] == "HANDOFF.md",
           str(a["non_classes"]))
@@ -247,6 +286,11 @@ def verifier() -> int:
       "; ".join(f"{d}:{n}" for d, n, _ in a["non_classes"][:4]))
     v("aucune entree de registre n'est perimee", not a["perimees"],
       "; ".join(f"{e.get('doc')}:{e.get('ancre','')[:30]}" for e in a["perimees"][:4]))
+    # ⚠⚠⚠ ET LE CONTROLE SUR L'ARBRE REEL, pas seulement sur des fixtures : un sablier
+    # classe « faite » veut dire qu'un document affiche ⏳ sur un travail fini. Le message
+    # dit quoi faire, parce qu'un refus qui envoie deviner est un refus qui sera contourne.
+    v("aucun sablier ne survit a son propre travail", not a["contradictions"],
+      "; ".join(f"{d}:{n} — remplacer ⏳ par ✅" for d, n, _, _ in a["contradictions"][:4]))
     for e in lire_registre():
         if e.get("etat") not in ETATS:
             v(f"etat inconnu dans le registre : {e.get('etat')}", False)

@@ -392,7 +392,7 @@ inférence sur une fenêtre.
 - ⚠ **Ce document n'établit pas qu'il n'y a pas d'encre là.** Il établit que ce modèle, sur
   ce rouleau, ne répond pas à ce qu'on lui donne. Laquelle des causes joue — la résolution,
   ce rouleau-ci, ou un papyrus réellement muet — reste ouverte, comme `36` le disait déjà.
-- ⏳ L'instrument est réutilisable tel quel : deux cartes du même modèle, deux fenêtres
+- ✅ L'instrument est réutilisable tel quel : deux cartes du même modèle, deux fenêtres
   d'entrée, et il dit à quelle portée la comparaison conclut.
 
 ## Reproduire

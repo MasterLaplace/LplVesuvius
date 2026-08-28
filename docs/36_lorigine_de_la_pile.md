@@ -82,7 +82,7 @@ comme **la** référence. Sur ce même rouleau, deux autres segments officiels r
 68 % — soit trois à quatre fois mieux que nos traces, ce qui est exactement le
 comportement qu'on attendrait d'une référence.
 
-⏳ **Le critère mérite donc d'être reconsidéré** — pas parce que la mesure était fausse, mais
+✅ **Le critère mérite donc d'être reconsidéré** — pas parce que la mesure était fausse, mais
 parce que **la référence n'en était pas une**. ⚠ Reconsidéré, pas rétabli : le remettre
 demande de choisir une référence sur un motif défendable, et « le meilleur des quatre » n'en
 est pas un.

@@ -409,7 +409,7 @@ celle-ci ne peut pas être lue :
   soit trois fois moins que sur les deux autres rouleaux — et la comparaison n'est plus appariée.
 
 L'artefact `docs/mesures/sweep_PHerc1667.jsonl` **n'enregistre ni le zarr ni la taille de voxel**,
-donc rien ici ne tranche. ⏳ **À rejouer en enregistrant la résolution**, et c'est aussi
+donc rien ici ne tranche. ✅ **À rejouer en enregistrant la résolution**, et c'est aussi
 une leçon d'outillage : *un artefact de mesure doit porter la résolution sur laquelle il a
 été pris.*
 

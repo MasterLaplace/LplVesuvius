@@ -1042,7 +1042,7 @@ compare désormais la **colonne** à la donnée, sur une fixture. Et dans un `ch
 **fonction**, `$1` désigne l'argument de la fonction et non la colonne : le symptôme
 (`$3: unbound variable`) ne ressemblait pas du tout à la cause.
 
-### ⏳ Et la question la moins chère n'avait jamais été posée
+### ✅ Et la question la moins chère n'avait jamais été posée
 
 Avant d'écrire un mécanisme, il fallait vérifier ce que `resume` fait déjà — c'est le seul des
 trois modes qui étende une surface le long d'elle-même. La campagne `spires_repousse` de
@@ -1175,7 +1175,7 @@ la source), d'où les maillages identiques au bit entre campagnes constatés plu
 non-déterminisme est propre au chemin de croissance, et c'est pourquoi il n'avait jamais été
 remarqué.
 
-### ⏳ Le budget d'extension scale, et l'outil sait maintenant enchaîner
+### ✅ Le budget d'extension scale, et l'outil sait maintenant enchaîner
 
 Le vrai bouton est `generations` (§suivant), et son effet est déjà lisible dans le journal du
 traceur avant même le jugement : **`generations = 100` produit 13,0 cm², `generations = 200`
@@ -1338,7 +1338,7 @@ contre 30 %). Juger sur α seul aurait donc conclu « la chaîne est meilleure �
 dit que sa part mauvaise a presque doublé. Une médiane peut s'améliorer pendant qu'une
 minorité empire.
 
-⏳ La question qui reste est celle du **pas** : 100 par séance était encore trop gros à ce
+✅ ~~La question qui reste est celle du **pas**~~ **répondue, négativement** — `44`:1537 : « découper 100 en deux nuit gravement ». Le texte d'origine : 100 par séance était encore trop gros à ce
 stade. Chaîne à pas de 50 lancée — si l'amélioration continue quand le pas diminue, il existe
 une taille de pas qui tient, et la bande peut grandir indéfiniment.
 
@@ -1567,13 +1567,13 @@ comme la toute première extension. Les deux sont donc enfin appariées sur ce q
 |---|---|---:|---:|
 | 1 | segment officiel, 4,28 cm² | 0 % | ⭐ +0,000 |
 | 2 | rognée à gen ≤ 25, 6,93 cm² | 2 % | +0,422 |
-| **3** | **rognée à gen ≤ 10, 6,02 cm²** | **0 %** | ⏳ *en cours* |
+| **3** | **rognée à gen ≤ 10, 6,02 cm²** | **0 %** | ✅ *rendu* — la même ligne complétée est **176 lignes plus haut**, § « ⭐⭐⭐ LE CYCLE SE REFERME » |
 
 Si la troisième rend +0,000, le cycle existe : chaque tour gagne ~41 % et revient à une
 périphérie propre, et le seul coût est le rognage. Si elle rend +0,4 comme la deuxième, alors
 ce n'est pas la propreté du bord qui commande, et l'extension est bien une opération unique.
 
-⏳ ~~Le seul essai qui reste à faire de cette famille : **un rognage plus profond**.~~ Si retirer
+✅ ~~Le seul essai qui reste à faire de cette famille : **un rognage plus profond**.~~ Si retirer
 plus (gen ≤ 10, soit 54 % des sommets, 6,02 cm² — encore 41 % de plus que la source) restaure
 α = +0,000 à l'extension suivante, alors le cycle existe et c'est la profondeur du rognage qui
 le commande. Sinon, l'opération est unique et il faudra chercher ailleurs. Jugement lancé.
@@ -1651,7 +1651,7 @@ cher que de le refaire.
 | | ce que ça fait | verdict |
 |---|---|---|
 | un seul pas, gros budget | une surface étendue d'un coup | ⚠⚠ **écarté** — mesuré ci-dessus, α = +1,313 dès le double du budget |
-| **enchaîner des petits pas** | chaque pas repart de l'étendue précédente | ⏳ **la seule piste restante** ; risque connu : ça **compose** les erreurs, comme la chaîne radiale qui casse au bout de six à huit tours | `src/outils/etendre_nappe.sh`
+| **enchaîner des petits pas** | chaque pas repart de l'étendue précédente | ✅ ~~la seule piste restante~~ **implémentée puis mesurée deux fois** (`ENCHAINER=N` d'`etendre_nappe.sh`, § « ⚠⚠ Enchaîner AIDE beaucoup ») ; risque connu : ça **compose** les erreurs, comme la chaîne radiale qui casse au bout de six à huit tours | `src/outils/etendre_nappe.sh`
 sait désormais faire les deux, et la distinction est écrite dans son en-tête parce que
 mélanger les deux ferait varier deux choses par pas :
 

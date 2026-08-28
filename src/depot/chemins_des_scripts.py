@@ -176,6 +176,12 @@ FIXTURES = {
     ("src/outils/lancer.sh", "src/campagnes/campagne_x.sh"): "exemple d'usage dans l'aide de lancer.sh",
     ("src/outils/lancer.sh", "src/outils/.temoin_lancer.sh"): "script temporaire que la batterie ECRIT puis efface",
     ("src/outils/readme_apparie.sh", "src/mesures/inexistant_xyz.py"): "fixture : un chemin qui doit manquer",
+    # ⚠ Ajoutees le 2026-08-29 : trois fixtures de batteries que l'alerte designait en
+    # permanence. Un defaut qu'on ne peut pas corriger apprend a ignorer l'alerte, ce qui
+    # coute plus cher que le defaut.
+    ("src/depot/batteries_incapables_dechouer.py", "src/x/c.py"): "fixture de la batterie des batteries",
+    ("src/depot/chemins_des_scripts.py", "src/parti/ailleurs.py"): "fixture de cette batterie meme",
+    ("src/depot/chemins_des_scripts.py", "src/mesures/inexistant_xyz.py"): "fixture de cette batterie meme",
 }
 """Les couples (fichier, cible) qu'on accepte de voir absents, avec la RAISON.
 

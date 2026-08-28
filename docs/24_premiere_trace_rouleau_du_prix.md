@@ -148,7 +148,7 @@ et non 182 Mo, et elles **sont** dans un format que l'outil lit — simplement p
 |---|---|
 | donner des `direction_fields` au traceur | ❌ **négatif mesuré** (`26` §3) |
 | choisir une graine **sur** une feuille et non à une jonction | ✅ **c'est le seul levier qui a marché** ([`25`](25_une_graine_choisie_sur_la_planeite.md)) — et le vrai coupable était une occupation de **1,000**, un bloc entièrement plein, donc de tenseur nul |
-| réduire `step_size` | ⏳ le seul paramètre dont on ait mesuré qu'il déplace la trajectoire ; balayage en cours (`src/campagnes/campagne_pas.sh`) |
+| réduire `step_size` | ✅ le seul paramètre dont on ait mesuré qu'il déplace la trajectoire ; ~~balayage en cours~~ **rendu** → [`26`](26_le_champ_de_direction.md) §9, {5, 10, 15, 20, 30, 40} sur deux graines (`src/campagnes/campagne_pas.sh`) |
 | réduire `step_size` | moins de liberté à chaque pas, donc moins de chances de sauter |
 
 ## 5. Reproduire
