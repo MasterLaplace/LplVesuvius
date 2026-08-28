@@ -174,7 +174,7 @@ compte qu'on n'a pas besoin de discuter.
 |---|---|
 | papyrus vierge | ✅ fermé par [`46`](46_le_temoin_negatif.md) §3 |
 | **résolution**, ses deux moitiés | ✅ **éliminée** : les deux objets sont à 9 % l'un de l'autre sur les deux axes, et dix fois cet écart ne rend qu'un facteur 2,1 sur 45 |
-| **ce rouleau-ci** | ⏳ **c'est ce qui reste** — et c'est désormais la seule cause en lice, non plus une parmi trois |
+| **ce rouleau-ci** | ⚠ **seule cause en lice — et NON TESTABLE** avec le corpus publié : zéro rouleau porte une vérité terrain exploitable (voir juste dessous) |
 
 > ⚠⚠⚠ **DEUX RÉSERVES AJOUTÉES LE 2026-08-28** → [`65`](65_ce_que_sigma_ne_dit_pas.md).
 > **(1)** L'élimination ci-dessus est menée sur des **rapports de σ**, et rien n'avait vérifié
@@ -187,6 +187,24 @@ compte qu'on n'a pas besoin de discuter.
 > ⚠ Ni l'une ni l'autre ne **renverse** ce tableau : `58` compare deux objets réels à 9 % l'un
 > de l'autre, `65` décime un seul objet d'un facteur 3. Ce sont deux questions. Mais l'argument
 > ne peut plus être avancé sans ces deux lignes.
+
+> ⚠⚠⚠ **ET CETTE CAUSE N'EST PAS TESTABLE AVEC LE CORPUS PUBLIÉ — établi par énumération le
+> 2026-08-28** → [`59`](59_la_campagne_plutot_que_le_rouleau.md), relevé
+> [`ou_la_verite_existe.json`](mesures/ou_la_verite_existe.json). Éprouver « c'est ce
+> rouleau-ci » demande de **mesurer la lecture sur un rouleau**, et
+> [`src/encre/ou_la_verite_existe.py`](../src/encre/ou_la_verite_existe.py) compte **zéro
+> rouleau mesurable** sur cinq interrogés : quatre ne publient **aucune** étiquette d'encre,
+> et `Scroll1` en a mais c'est le **jeu d'entraînement** du modèle, donc y mesurer une AUC ne
+> dit rien. Seuls **4 fragments** sont mesurables.
+>
+> ⭐ **La condition qui rouvrirait la question est nommée, et se re-vérifie en une commande** :
+> des étiquettes d'encre publiées sur un rouleau que `timesformer_GP_scroll1` n'a pas vu. Le
+> jour où quelqu'un les publie, `ou_la_verite_existe.py` le dira.
+>
+> ⚠ Et ce n'est pas « le modèle ne lit pas sur un rouleau ». C'est qu'on ne peut pas le
+> mesurer — deux énoncés différents, et les confondre serait la conclusion que ce dépôt refuse.
+> ⚠⚠ À quoi s'ajoute [`65`](65_ce_que_sigma_ne_dit_pas.md) : le substitut employé jusqu'ici,
+> σ, **ne prédit pas** la qualité mesurée (quatrième sur six grandeurs, p de Holm 0,739).
 
 ⚠ **Ce que ce document n'établit pas** : qu'il y ait ou non de l'encre sur `PHerc1447`. Il
 dit que l'instrument ne perd pas sa réponse pour une raison d'échelle. Ce que « le rouleau »

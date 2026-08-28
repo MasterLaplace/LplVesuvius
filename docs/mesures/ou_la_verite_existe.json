@@ -1,0 +1,122 @@
+{
+  "seau": "https://vesuvius-challenge-open-data.s3.amazonaws.com",
+  "fragments": "https://dl.ash2txt.org/fragments",
+  "objets": [
+    {
+      "objet": "PHerc1447",
+      "genre": "rouleau",
+      "cles_vues": 1000,
+      "verites": 0,
+      "exemples": [],
+      "entraine_dessus": false,
+      "statut": "sans_verite"
+    },
+    {
+      "objet": "PHerc0172",
+      "genre": "rouleau",
+      "cles_vues": 1000,
+      "verites": 0,
+      "exemples": [],
+      "entraine_dessus": false,
+      "statut": "sans_verite"
+    },
+    {
+      "objet": "PHerc1667",
+      "genre": "rouleau",
+      "cles_vues": 1000,
+      "verites": 0,
+      "exemples": [],
+      "entraine_dessus": false,
+      "statut": "sans_verite"
+    },
+    {
+      "objet": "PHerc0051",
+      "genre": "rouleau",
+      "cles_vues": 0,
+      "verites": 0,
+      "exemples": [],
+      "entraine_dessus": false,
+      "statut": "sans_verite"
+    },
+    {
+      "objet": "Scroll1",
+      "genre": "rouleau",
+      "cles_vues": 0,
+      "verites": 0,
+      "exemples": [],
+      "entraine_dessus": true,
+      "statut": "entraine_dessus"
+    },
+    {
+      "objet": "Frag1",
+      "genre": "fragment",
+      "cles_vues": 1,
+      "verites": 1,
+      "exemples": [
+        "54keV_exposed_surface"
+      ],
+      "entraine_dessus": false,
+      "statut": "mesurable"
+    },
+    {
+      "objet": "Frag2",
+      "genre": "fragment",
+      "cles_vues": 1,
+      "verites": 1,
+      "exemples": [
+        "54keV_exposed_surface"
+      ],
+      "entraine_dessus": false,
+      "statut": "mesurable"
+    },
+    {
+      "objet": "Frag3",
+      "genre": "fragment",
+      "cles_vues": 1,
+      "verites": 1,
+      "exemples": [
+        "54keV_exposed_surface"
+      ],
+      "entraine_dessus": false,
+      "statut": "mesurable"
+    },
+    {
+      "objet": "Frag4",
+      "genre": "fragment",
+      "cles_vues": 1,
+      "verites": 1,
+      "exemples": [
+        "54keV_exposed_surface"
+      ],
+      "entraine_dessus": false,
+      "statut": "mesurable"
+    },
+    {
+      "objet": "Frag5",
+      "genre": "fragment",
+      "cles_vues": 0,
+      "verites": 0,
+      "exemples": [],
+      "entraine_dessus": false,
+      "statut": "sans_verite"
+    },
+    {
+      "objet": "Frag6",
+      "genre": "fragment",
+      "cles_vues": 0,
+      "verites": 0,
+      "exemples": [],
+      "entraine_dessus": false,
+      "statut": "sans_verite"
+    }
+  ],
+  "compte": {
+    "par_statut": {
+      "sans_verite": 6,
+      "entraine_dessus": 1,
+      "mesurable": 4
+    },
+    "rouleaux_mesurables": 0,
+    "fragments_mesurables": 4
+  }
+}

@@ -1108,6 +1108,10 @@ run "transport de calibration" uv run python "$ROOT/src/encre/transport_de_calib
 # ⚠⚠ La question litterale de `M1ter`. Sa sonde la plus utile est celle du melange : le
 # temoin doit ramener l'AUC au hasard, sinon « au-dessus du hasard » ne veut rien dire.
 run "lisible a neuf microns"  uv run python "$ROOT/src/encre/lisible_a_neuf_microns.py" --verifier
+# ⚠⚠ L'inventaire de ce qui est MESURABLE. Sa sonde la plus utile : une sortie de modele
+# (`ink-detection/…timesformer…`) ne doit jamais compter comme verite terrain, sinon on
+# mesurerait un modele contre un autre modele.
+run "ou la verite existe"     uv run python "$ROOT/src/encre/ou_la_verite_existe.py" --verifier
 run "allure d'un rendu"        uv run python "$ROOT/src/encre/allure_du_rendu.py" --verifier
 run "figure hypothèse réfutée" uv run python "$ROOT/src/figures/figure_hypothese_refutee.py" --verifier
 run "figure bruit d'une fenetre" uv run python "$ROOT/src/figures/figure_bruit_dune_fenetre.py" --verifier

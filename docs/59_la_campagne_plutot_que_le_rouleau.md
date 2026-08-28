@@ -149,9 +149,38 @@ Ce qui survit, et qui n'est pas rien :
    ou à part.
 
 ⚠ Et un test resterait valable si on obtenait la donnée : un second scan de `PHerc1447`, fin
-et à courte propagation, ou le scan de repérage seul d'un rouleau qu'on sait lire. ~~⏳ Il
+et à courte propagation, ou le scan de repérage seul d'un rouleau qu'on sait lire. ~~Il
 faudrait de toute façon séparer les trois grandeurs de la campagne — pas, distance, énergie —
 qu'aucun rouleau du corpus ne fait varier indépendamment.~~
+
+> ⚠⚠⚠ **ET LE DISCRIMINANT QUE CE DOCUMENT RÉCLAME N'EST PAS CHERCHABLE ICI — établi par
+> énumération le 2026-08-28**, pas par un échec à le trouver.
+> [`src/encre/ou_la_verite_existe.py`](../src/encre/ou_la_verite_existe.py) relit les deux
+> dépôts et range chaque objet en trois états :
+>
+> | statut | ce que ça veut dire | combien |
+> |---|---|---:|
+> | `mesurable` | étiquettes publiées, modèle **pas** entraîné dessus | **4 fragments** |
+> | `entraine_dessus` | étiquettes, mais c'est le jeu d'entraînement → mesurer n'y prouve rien | 1 (`Scroll1`) |
+> | `sans_verite` | **aucune étiquette publiée** | 4 rouleaux, 2 fragments |
+>
+> ⭐⭐⭐ **Zéro rouleau mesurable.** Chercher « ce qui sépare un rouleau où le modèle lit d'un
+> rouleau où il ne lit pas » suppose de mesurer la lecture **des deux côtés** — et elle n'est
+> mesurable d'**aucun** côté rouleau. Ce n'est pas une recherche qui a échoué, c'est une
+> propriété du corpus publié.
+>
+> ⚠⚠ Trois états et non deux, et c'est ce qui empêche une fausse issue : `Scroll1` **a** des
+> étiquettes, et publier des étiquettes de plus dessus ne débloquerait rien, puisque c'est
+> précisément ce sur quoi le modèle a été entraîné. Fondre `entraine_dessus` dans
+> `sans_verite` ferait croire le contraire.
+>
+> ⚠ Et le motif de recherche **exclut les sorties de modèle** : `PHerc0172` publie quatre
+> fichiers `ink-detection/…timesformer_scroll5….tif`, qui sont des **prédictions**. Les
+> compter comme vérité ferait mesurer un modèle contre un autre modèle — un chiffre élevé et
+> vide de sens. Asséré dans les deux sens.
+>
+> **Ce que ça N'établit PAS** : que le modèle ne lise pas sur un rouleau. Seulement qu'on ne
+> peut pas le mesurer. Relevé : [`ou_la_verite_existe.json`](mesures/ou_la_verite_existe.json).
 
 > ⭐⭐⭐ **LA DERNIÈRE PHRASE EST FAUSSE, mesuré le 2026-08-28.** « Aucun rouleau du corpus »
 > était vrai des rouleaux et **faux du corpus** : les six **fragments** du layout

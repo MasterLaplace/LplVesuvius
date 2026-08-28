@@ -1582,6 +1582,21 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                     ajoute(f"largeur de l'IC a {um} um, maille {b['cotes']}x{b['cotes']}",
                            b["largeur"], 3, lnm.name)
 
+    # ⚠⚠ Le compte qui porte la conclusion structurelle de `59` : ZERO rouleau mesurable. Un
+    # jour ou quelqu'un publierait des etiquettes sur un rouleau, ce chiffre bougerait et le
+    # garde-fou signalerait le document devenu perime -- ce qui est exactement le service
+    # attendu.
+    ove = _source(racine, "ou_la_verite_existe.json")
+    if ove.exists():
+        d = json.loads(ove.read_text())
+        c = d.get("compte", {})
+        out.append(("rouleaux mesurables",
+                    [f"**{c.get('rouleaux_mesurables', 0)}** rouleau",
+                     f"{c.get('rouleaux_mesurables', 0)} rouleau"], ove.name))
+        out.append(("fragments mesurables",
+                    [f"**{c.get('fragments_mesurables', 0)} fragments**",
+                     f"{c.get('fragments_mesurables', 0)} fragments"], ove.name))
+
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():
         d = json.loads(bdf.read_text())
