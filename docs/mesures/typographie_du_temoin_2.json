@@ -1,0 +1,64 @@
+{
+  "cartes": [
+    {
+      "surface_px": 136456,
+      "couverture": 0.1572521545406578,
+      "epaisseur_trait_px": 6.0,
+      "composantes": 94,
+      "aire_mediane_px": 63.5,
+      "hauteur_mediane_px": 8.0,
+      "fenetres": 2,
+      "fenetres_periodiques": 0,
+      "part_periodique": 0.0,
+      "periode_px": null,
+      "periode_ecart_px": null,
+      "nettete_mediane": 0.0,
+      "rouleau": "nos_cartes",
+      "carte": "en_travers_2",
+      "reduction": 8,
+      "taille_fenetre": 256
+    },
+    {
+      "surface_px": 136456,
+      "couverture": 0.1572521545406578,
+      "epaisseur_trait_px": 2.0,
+      "composantes": 626,
+      "aire_mediane_px": 4.0,
+      "hauteur_mediane_px": 3.0,
+      "fenetres": 2,
+      "fenetres_periodiques": 0,
+      "part_periodique": 0.0,
+      "periode_px": null,
+      "periode_ecart_px": null,
+      "nettete_mediane": 0.0,
+      "rouleau": "controle_melange",
+      "carte": "en_travers_2",
+      "reduction": 8,
+      "taille_fenetre": 256
+    }
+  ],
+  "tests": {
+    "en_travers_2": {
+      "p": null,
+      "table": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "raison": "4 fenêtres en tout, moins que 8 : le test n'a pas la puissance de descendre sous 0,05"
+    },
+    "_groupe": {
+      "p": null,
+      "table": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "raison": "4 fenêtres en tout, moins que 8 : le test n'a pas la puissance de descendre sous 0,05",
+      "cartes": 1,
+      "temoins_ecartes": []
+    }
+  }
+}

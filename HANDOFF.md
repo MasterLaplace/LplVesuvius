@@ -55,7 +55,7 @@ aveugle, aucune réparation ne peut y montrer de gain » : **c'est faux, le lot 
 |---|---|
 | ~~**expliquer la dispersion** 0,52–0,75 entre fragments~~ | ✅ **fait le 2026-08-28** → [`64`](docs/64_la_dispersion_netait_pas_un_effet.md), et **il n'y avait pas de cause** : la dispersion tuile à tuile **dans** un fragment vaut 0,2243 contre 0,0391 **entre** fragments, soit **5,7×**, l'ICC vaut **0,030**, et il aurait fallu **27 tuiles par fragment** là où on en avait 10, 11 et 2. ⚠ Conséquence à tenir : **les trois AUC ne se comparent pas entre elles** |
 | le **juge** de [`09`](docs/09_protocole_jugement_modele.md) | ❌ **bloqué sur une personne, plus sur du travail.** Le jeu est bâti (18 tuiles), la **consigne est dans le dossier** depuis le 2026-08-28, la clé est à côté (`docs/mesures/jeu_du_juge_cle.json`), le dépouilleur existe. La session qui a vu les cartes est **disqualifiée** par `09` §2 bis. ⭐ Le protocole nomme deux juges admissibles : **un papyrologue, ou un fil neuf** qui n'a rien vu de ce dépôt |
-| contrôle **typographique** du témoin négatif | ⏳ **le second témoin existe** (α = +0,99, 13,89 cm², graine tirée par l'outil) et son rendu tourne. 5 fenêtres candidates sur le premier, 4 sur le second, pour 6 nécessaires — le groupement est déjà implémenté |
+| ~~contrôle **typographique** du témoin négatif~~ | ⭐⭐⭐ **FAIT le 2026-08-28** → [`46`](docs/46_le_temoin_negatif.md) §3. Le contrôle dur **passe** : `PHerc1447` **8/12** périodiques contre **1/7** pour les deux témoins sans feuille, `[8, 4, 1, 6]`, **p = 0,0399**. ⚠⚠ **Une seule fenêtre suffirait à le renverser** (0,1299 / 0,0799) — la fragilité se lit avec le p. Un troisième témoin le consoliderait : `GRAINE="" ./src/outils/leur_graine.sh <dest>` |
 | ~~« il ne reste que **ce rouleau-ci** » (`M1ter`, `58`, `59`)~~ | ⚠ **NON TESTABLE avec le corpus publié, 2026-08-28** : `ou_la_verite_existe.py` compte **zéro rouleau mesurable** sur cinq — quatre sans aucune étiquette d'encre, `Scroll1` avec des étiquettes qui sont son jeu d'**entraînement**. ⭐ La condition qui rouvrirait : des étiquettes publiées sur un rouleau que le modèle n'a pas vu, et une commande le re-vérifie |
 | **énergie** isolée contre étiquettes | ❌ **impossible en l'état** : `Frag1`–`Frag3` ont les labels sans recalage, `Frag5`/`Frag6` le recalage sans labels, et les volumes d'une paire n'ont pas la même forme |
 | la **soumission** | hors périmètre, sur demande de l'auteur |
@@ -95,9 +95,11 @@ est installé, et la seule chose figée était **la graine**. `GRAINE=""` bascul
 construction** plutôt que par mon jugement. Mesuré : graine `[2078, 5227, 5113]`, **13,89 cm²**
 (contre 3,95 chez eux), 0 auto-intersection, **α = +0,99**, marge 0,29.
 
-⏳ **Le contrôle typographique groupé tourne** (rendu 4321², pas 21, ~2 h). C'est l'expérience
-qui avait manqué d'**une** fenêtre : 5 candidates sur le premier témoin, 4 sur le second, pour
-6 nécessaires.
+⭐⭐⭐ **Le contrôle typographique groupé est FAIT, et il passe.** C'est l'expérience qui avait
+manqué d'une fenêtre. Résultat : `PHerc1447` rend **8/12** fenêtres périodiques, les deux
+témoins sans feuille **1/7**, Fisher `[8, 4, 1, 6]`, **p = 0,0399**. ⚠⚠ **Une seule fenêtre
+suffirait à le renverser** — la fragilité est publiée avec le p, parce que sept fenêtres de
+témoin c'est peu et qu'un 0,04 se lirait sinon comme le 0,0007 du contrôle par mélange.
 
 **Le transport de calibration (résidu M7) est répondu, négativement** →
 [`45`](docs/45_consistent_with_quantifie.md) §7. L'étape que le résidu sautait était de

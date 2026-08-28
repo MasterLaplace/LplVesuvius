@@ -1597,6 +1597,23 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                     [f"**{c.get('fragments_mesurables', 0)} fragments**",
                      f"{c.get('fragments_mesurables', 0)} fragments"], ove.name))
 
+    # ⚠⚠ LE CONTROLE DUR, et sa FRAGILITE gardee avec lui. Publier le p sans les deux p de
+    # bascule le ferait lire comme un resultat solide, alors qu'une seule fenetre le renverse.
+    tcc = _source(racine, "temoin_contre_nos_cartes.json")
+    if tcc.exists():
+        d = json.loads(tcc.read_text())
+        if d.get("p") is not None:
+            ajoute("p du controle dur", d["p"], 4, tcc.name)
+        for nom, val in (d.get("fragilite") or {}).items():
+            ajoute(f"p si {nom.replace('_', ' ')}", val, 4, tcc.name)
+        out.append(("fenetres periodiques du rouleau",
+                    [f"**{d['rouleau']['periodiques']} / {d['rouleau']['fenetres']}**",
+                     f"{d['rouleau']['periodiques']}/{d['rouleau']['fenetres']}"], tcc.name))
+        out.append(("fenetres periodiques du temoin",
+                    [f"**{d['temoin_negatif']['periodiques']} / {d['temoin_negatif']['fenetres']}**",
+                     f"{d['temoin_negatif']['periodiques']}/{d['temoin_negatif']['fenetres']}"],
+                   tcc.name))
+
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():
         d = json.loads(bdf.read_text())

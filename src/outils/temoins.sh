@@ -1113,6 +1113,10 @@ run "lisible a neuf microns"  uv run python "$ROOT/src/encre/lisible_a_neuf_micr
 # mesurerait un modele contre un autre modele.
 run "ou la verite existe"     uv run python "$ROOT/src/encre/ou_la_verite_existe.py" --verifier
 run "figure sigma"            uv run python "$ROOT/src/figures/figure_ce_que_sigma_ne_dit_pas.py" --verifier
+# ⚠⚠⚠ LE CONTROLE DUR de `09` §2, celui pour lequel la campagne a deux temoins existait.
+# Sa sonde la plus utile est celle du SENS : un temoin PLUS periodique que le sujet ne doit
+# pas passer pour un succes.
+run "temoin contre nos cartes" uv run python "$ROOT/src/encre/temoin_contre_nos_cartes.py" --verifier
 run "allure d'un rendu"        uv run python "$ROOT/src/encre/allure_du_rendu.py" --verifier
 run "figure hypothèse réfutée" uv run python "$ROOT/src/figures/figure_hypothese_refutee.py" --verifier
 run "figure bruit d'une fenetre" uv run python "$ROOT/src/figures/figure_bruit_dune_fenetre.py" --verifier

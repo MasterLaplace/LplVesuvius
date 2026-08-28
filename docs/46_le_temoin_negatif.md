@@ -268,8 +268,46 @@ trace est donc une tâche à part, pas une relance.
 > 41 et à 161 couches — pas deux traces. Le réparer, ou le relancer, ne donnerait jamais le
 > second témoin, et personne ne doit y passer du temps en croyant le contraire.
 
-⚠ Tant que cette mesure n'est pas faite, le p = 0,0007 de `60` reste ce qu'il dit —
-*structuré là où son propre mélange ne l'est pas* — et rien de plus.
+⚠ ~~Tant que cette mesure n'est pas faite, le p = 0,0007 de `60` reste ce qu'il dit —
+*structuré là où son propre mélange ne l'est pas* — et rien de plus.~~
+
+> ⭐⭐⭐ **LA MESURE EST FAITE — 2026-08-28 au soir. Le contrôle dur PASSE.**
+>
+> | | fenêtres périodiques |
+> |---|---:|
+> | `PHerc1447`, 4 surfaces publiées | **8 / 12** — 67 % |
+> | témoins **négatifs**, 2 traces à α ≈ +1 | **1 / 7** — 14 % |
+> | Fisher unilatéral `[8, 4, 1, 6]` | **p = 0,0399** |
+>
+> **La périodicité de nos cartes n'est pas ce qu'une surface sans feuille produit.** C'est le
+> contrôle que [`09`](09_protocole_jugement_modele.md) §2 appelle « le plus important », et
+> celui pour lequel toute la campagne à deux témoins existait.
+>
+> ⚠⚠⚠ **ET SA FRAGILITÉ SE LIT AVEC LE p, pas après.** Sept fenêtres de témoin, c'est peu :
+>
+> | déplacement d'**une** fenêtre | p |
+> |---|---:|
+> | le témoin en aurait une périodique **de plus** | 0,1299 ⚠ **renverse** |
+> | le témoin en aurait une **de moins** | 0,0065 |
+> | le rouleau en aurait une **de moins** | 0,0799 ⚠ **renverse** |
+>
+> **Une seule fenêtre suffirait à renverser le résultat.** Publier « p = 0,0399 » sans cette
+> ligne le ferait lire comme le p = 0,0007 du contrôle par mélange, qui repose sur douze
+> fenêtres contre zéro. Ce n'est pas le même ordre de solidité, et un troisième témoin —
+> `leur_graine.sh` avec `GRAINE=""` — est ce qui le consoliderait.
+>
+> ⚠ Ce que ça n'établit pas : que nos cartes portent du grec. Seulement que leur périodicité
+> n'est pas reproduite par une surface dont on prouve géométriquement qu'aucune feuille n'est
+> à portée. Lire les lettres reste l'affaire du juge de `09`, et cette session en est
+> disqualifiée.
+>
+> ⚠ Le groupement des deux témoins est légitime — deux **graines différentes**, donc deux
+> traces distinctes, ce que `fisher_periodicite_groupee` exige explicitement et qui serait
+> faux pour deux rendus d'une même surface.
+>
+> Instrument : [`src/encre/temoin_contre_nos_cartes.py`](../src/encre/temoin_contre_nos_cartes.py)
+> (16 contrôles). Relevés : [`temoin_contre_nos_cartes.json`](mesures/temoin_contre_nos_cartes.json),
+> [`typographie_temoins_groupes.json`](mesures/typographie_temoins_groupes.json).
 
 ### ⭐ La référence « 95,4 % » est dérivée, pas choisie
 

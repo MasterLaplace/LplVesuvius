@@ -1,0 +1,27 @@
+{
+  "rouleau": {
+    "periodiques": 8,
+    "fenetres": 12,
+    "part": 0.6666666666666666
+  },
+  "temoin_negatif": {
+    "periodiques": 1,
+    "fenetres": 7,
+    "part": 0.14285714285714285
+  },
+  "table": [
+    8,
+    4,
+    1,
+    6
+  ],
+  "p": 0.03989045010716837,
+  "fragilite": {
+    "si_le_temoin_avait_une_periodique_de_plus": 0.1299118837818528,
+    "si_le_temoin_en_avait_une_de_moins": 0.006549178375803763,
+    "si_le_rouleau_en_avait_une_de_moins": 0.0798999761848059
+  },
+  "resiste_a_une_fenetre": false,
+  "fenetres_du_temoin": 7,
+  "assez_de_fenetres": true
+}
