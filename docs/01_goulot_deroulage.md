@@ -119,7 +119,7 @@ Trois choses, et aucune n'est « un meilleur modèle » :
 
 ## 5. Pistes, par rapport coût/valeur
 
-Aucune n'est engagée — c'est une liste à trancher, pas un plan.
+Aucune n'est engagée — c'est une liste à trancher, pas un plan. ⭐ **TRANCHÉE depuis** : la « Recommandation révisée » du §ci-dessous (l. 185) choisit **A′**.
 
 | # | piste | pourquoi elle tient | risque principal |
 |---|---|---|---|
@@ -197,7 +197,7 @@ Trois propriétés en font la bonne cible :
    falsifiant sa propre hypothèse, et ce travail est reconnu.
 3. **Elle est soumissionnable mensuellement**, pas dans dix mois.
 
-⚠ **Rien de tout ça n'est acquis tant qu'on n'a pas mesuré.** La première tâche
+⚠ **Rien de tout ça n'est acquis tant qu'on n'a pas mesuré.** La première tâche ⭐ **FAITE depuis** → [`03`](03_reproduction_windcheck.md) : `windcheck` reproduit, niveaux 1 à 3, et les verdicts comptés.
 n'est pas d'écrire du code mais de descendre une fenêtre de données réelle et de
 reproduire un défaut connu. Tant que ce n'est pas fait, la formulation ci-dessus
 reste une hypothèse — et ce dépôt a déjà consigné assez d'hypothèses raisonnées et
@@ -210,7 +210,7 @@ déjà, avec moins de moyens.
 
 ## 6. Ce qui n'est pas tranché, et doit l'être avant d'écrire du code
 
-- **Quelle échelle de données** on se donne. Une fenêtre de quelques cm² suffit
+- **Quelle échelle de données** on se donne. Une fenêtre de quelques cm² suffit ⭐ **TRANCHÉE** → [`02`](02_inventaire_mesure.md) §1 : on travaille sur les **surfaces**, pas sur le volume entier.
   pour A ; B demande un rouleau entier, donc des dizaines de gigaoctets.
 - **CC-BY-NC 4.0** : usage non commercial, attribution obligatoire. La contrainte
   se propage à tout ce que le corpus Laplace en dérive.

@@ -123,7 +123,7 @@ C'est exactement ce que le balayage de l'auteur devait apporter — et il a appo
 l'inverse de ce qu'on en attendait : la moyenne n'était pas le but, c'est le
 **maximum** qui informe, parce que le biais est à sens unique.
 
-⚠ **Ce que le U ne dit pas encore** : pourquoi le rayon varie si le nombre de spires
+⚠ **Ce que le U ne dit pas encore** : pourquoi le rayon varie si le nombre de spires ⭐ **MESURÉ depuis** → [`06`](06_mesures_a_faire.md) §2.4bis, via `src/excision/shape.py ellipticite`.
 est fixe. Deux lectures, non départagées ici — le rouleau est **écrasé** au milieu
 (section elliptique, donc un rayon médian sur 36 rayons lit plus petit), ou il y a
 **perte de matière** en surface au milieu. Les distinguer demande de mesurer
@@ -237,7 +237,7 @@ plus abîmées.
 ⚠ **Ce qui n'est PAS établi** : que ce soient des soudures. Ce sont des endroits où
 l'écart double trois fois plus souvent qu'ailleurs — compatible avec une soudure, une
 déchirure ou un vide. Mais c'est désormais **quatre endroits précis** au lieu d'un
-rouleau entier, ce qui est exactement ce que la piste « revoir les sites suspects à
+rouleau entier, ce qui est exactement ce que la piste « revoir les sites suspects à ⚠⚠ **Cette piste est IMPOSSIBLE, pas en attente** → [`18`](18_batch_produire.md) M3 : les 4 sites sont sur `PHerc0172`, qui ne publie que du 7,91 µm.
 2,4 µm (ESRF) » attendait.
 
 ## 8. ✅ *(répondu au §13)* — tiennent-ils le long de z ?
@@ -459,7 +459,7 @@ d'appariement (1 mm radial) au bout d'une seule coupe. Il ne PEUT donc pas coïn
 longue distance, par construction de la mesure. Ce qu'on observe — une **chaîne de
 liens adjacents** — est exactement la signature attendue.
 
-**Les deux lectures ne sont pas départagées ici**, et les départager demande de suivre
+**Les deux lectures ne sont pas départagées ici**, et les départager demande de suivre ✅ **DÉPARTAGÉES au §11 juste en dessous** : le défaut **dérive**.
 un site de proche en proche en autorisant sa dérive, plutôt que d'exiger qu'il reste
 au même rayon. C'est un appariement *prédictif* entre coupes, cousin de celui déjà
 écrit pour les colonnes dans `fusions.py track`.

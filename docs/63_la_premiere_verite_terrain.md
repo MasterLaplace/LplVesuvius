@@ -82,7 +82,7 @@ Le modèle devient plus bavard et moins juste, ce qui est cohérent avec un sign
 
 **Instruments** : [`src/encre/fenetre_sur_masque.py`](../src/encre/fenetre_sur_masque.py)
 (12 contrôles), [`src/encre/decimer_couches.py`](../src/encre/decimer_couches.py)
-(14 contrôles), [`src/campagnes/campagne_frag1_verite_terrain.sh`](../src/campagnes/campagne_frag1_verite_terrain.sh),
+(14 contrôles), [`src/campagnes/campagne_fragment_verite_terrain.sh`](../src/campagnes/campagne_fragment_verite_terrain.sh),
 et [`src/volume/evaluate_segment.py`](../src/volume/evaluate_segment.py), qui existait déjà.
 **Mesures** : [`frag1_verite_terrain.json`](mesures/frag1_verite_terrain.json),
 [`frag1_echelles.json`](mesures/frag1_echelles.json).

@@ -26,8 +26,12 @@
 set -u
 cd "$(dirname "$0")/../.." || exit 2
 ROOT=$PWD
-COUCHES=${COUCHES:-$ROOT/data/couches/frag1_54keV}
-LABELS=${LABELS:-$ROOT/data/frag1/labels}
+# ⚠ Le fragment est un PARAMETRE, pas une constante : `Frag1` a servi de premier cas, mais
+# `Frag2` et `Frag3` portent les memes etiquettes et la replication est le controle qui
+# manque a une mesure faite sur une seule fenetre d'un seul objet.
+FRAG=${FRAG:-frag1}
+COUCHES=${COUCHES:-$ROOT/data/couches/${FRAG}_54keV}
+LABELS=${LABELS:-$ROOT/data/$FRAG/labels}
 MODELE=${MODELE:-$ROOT/data/models/timesformer_GP_scroll1}
 COTE=${COTE:-1024}
 PAS=${PAS:-21}
@@ -36,7 +40,7 @@ DEPART=${DEPART:-20}
 # ⚠ Les couches de surface de Frag1 sont numerotees 00 a 64 et nous avons pris 20 a 45,
 # soit les 26 du MILIEU de la pile : les couches de bord sont a moitie hors du papyrus, et
 # le modele en recevrait du vide sur une part de sa fenetre de profondeur.
-SORTIE=$ROOT/data/out/ink_frag1_54keV.npy
+SORTIE=$ROOT/data/out/ink_${FRAG}_54keV.npy
 
 [ -d "$COUCHES" ] || { echo "couches absentes : $COUCHES" >&2; exit 2; }
 [ -s "$LABELS/inklabels.png" ] || { echo "labels absents : $LABELS" >&2; exit 2; }
@@ -49,7 +53,7 @@ TOP=$(echo "$LIGNE" | grep -oP 'top=\K[0-9]+')
 LEFT=$(echo "$LIGNE" | grep -oP 'left=\K[0-9]+')
 
 if [ ! -s "$SORTIE" ]; then
-  echo "== rendu de Frag1, 54 keV, ${COTE}x${COTE} en ($TOP,$LEFT)"
+  echo "== rendu de $FRAG, 54 keV, ${COTE}x${COTE} en ($TOP,$LEFT)"
   uv run python "$ROOT/src/xpu/infer_ink.py" "$COUCHES" \
     --model "$MODELE" --start-layer "$DEPART" --threads "$FILS" \
     --top "$TOP" --left "$LEFT" --height "$COTE" --width "$COTE" \
@@ -64,13 +68,13 @@ fi
 # en (0,0), et lui donner l'image entiere le ferait refuser -- correctement.
 uv run python "$ROOT/src/encre/fenetre_sur_masque.py" \
   --masque "$LABELS/mask.png" --labels "$LABELS/inklabels.png" --cote "$COTE" \
-  --recadrer "$ROOT/data/frag1/labels_fenetre.png" >/dev/null || exit 5
+  --recadrer "$ROOT/data/$FRAG/labels_fenetre.png" >/dev/null || exit 5
 
 echo
 echo "== AUC contre la verite terrain"
 uv run python "$ROOT/src/volume/evaluate_segment.py" \
-  "$SORTIE" "$ROOT/data/frag1/labels_fenetre.png" --json \
-  > "$ROOT/docs/mesures/frag1_verite_terrain.json" || exit 6
+  "$SORTIE" "$ROOT/data/$FRAG/labels_fenetre.png" --json \
+  > "$ROOT/docs/mesures/${FRAG}_verite_terrain.json" || exit 6
 uv run python "$ROOT/src/volume/evaluate_segment.py" \
-  "$SORTIE" "$ROOT/data/frag1/labels_fenetre.png"
-echo "→ docs/mesures/frag1_verite_terrain.json"
+  "$SORTIE" "$ROOT/data/$FRAG/labels_fenetre.png"
+echo "→ docs/mesures/${FRAG}_verite_terrain.json"

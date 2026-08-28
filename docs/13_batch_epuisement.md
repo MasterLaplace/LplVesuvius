@@ -62,9 +62,9 @@ Ferme `12` §5 (« trois segments, deux rouleaux, ce n'est pas un corpus »).
 
 | # | quoi | état |
 |---|---|---|
-| E1 | vrai **ombilic** (`06` §2.3) — ⚠ 404 à l'adresse notée, chemin à retrouver | ➡️ `18` M1 |
-| E2 | plus de bandes **niveau 0** : 2 faites, une migre et une non | ➡️ `18` M2 |
-| E3 | **ESRF 2,4 µm** sur les 4 sites (`06` §3.6) | ➡️ `18` M3 |
+| E1 | vrai **ombilic** (`06` §2.3) — ⚠ 404 à l'adresse notée, chemin à retrouver | ➡️ `18` M1 | ✅ **CLOS SANS LUI** → [`11`](11_onde_radiale_et_fusions.md) §12 et [`18`](18_batch_produire.md) M1 : le fichier n'existe sur aucun des quatre corpus.
+| E2 | plus de bandes **niveau 0** : 2 faites, une migre et une non | ➡️ `18` M2 | ✅ **FAIT** → [`11`](11_onde_radiale_et_fusions.md) §13 et [`18`](18_batch_produire.md) M2 : **6 bandes**, la migration est l'exception (2 sur 6).
+| E3 | **ESRF 2,4 µm** sur les 4 sites (`06` §3.6) | ➡️ `18` M3 | ❌ **IMPOSSIBLE, pas en attente** → [`18`](18_batch_produire.md) M3 : le scan fin n'existe pas sur `PHerc0172`.
 
 ## Voie F — cohérence de la doc, sans machine
 
