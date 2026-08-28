@@ -116,7 +116,7 @@ ne s'est pas trompé sur l'encre de Scroll 4, **il a regardé à côté**.
 
 ## 5. ⚠ Ce que ça ne dit PAS
 
-1. **Trois segments, deux rouleaux.** Ce n'est pas un corpus. La grandeur est plausible
+1. **Trois segments, deux rouleaux.** Ce n'est pas un corpus. La grandeur est plausible ⭐ **→ §11 et §12, faits depuis** : l'instrument a été validé contre un recensement indépendant (80 segments de Scroll 1) puis répliqué sur `PHerc1667`. Ce n'est plus « trois segments, deux rouleaux ».
    et mesurée ; elle n'est pas validée sur une population.
 2. **Elle ne classe pas la qualité de détection d'encre.** `20230909121925` est celui
    qui donne l'AUC 0,925, et il est **moins bon** ici que `20231022170901` (50 % contre
@@ -251,12 +251,12 @@ panneaux**, y compris la bande à 18,32 % d'encre — lisibilité **1 ou refus**
 ⚠ Mais §7 explique pourquoi ce test ne pouvait pas trancher : le cœur de matière est
 hors de la pile pour 61 % du segment.
 
-⭐ **Valider l'instrument sur un corpus.** Les couches sont publiées pour tout segment :
+⭐ **Valider l'instrument sur un corpus.** Les couches sont publiées pour tout segment : ✅ **FAIT** → §11 (80 segments, 54 communs) et [`13`](13_batch_epuisement.md) B3.
 c'est un téléchargement, pas une décision. La prédiction à faire d'avance, pour qu'elle
-puisse échouer : *un segment dont moins de ~20 % des fenêtres ont leur pic dans le tiers
+puisse échouer : *un segment dont moins de ~20 % des fenêtres ont leur pic dans le tiers ⚠⚠ **Cette prédiction est REPOSÉE au §10** — changer de statistique l'invalide — puis **TESTÉE au §14** : le sens tient, le seuil non, et la forme forte est réfutée.
 central ne donnera pas d'encre lisible.*
 
-⭐ **Chercher la vraie feuille.** Le cœur de matière est hors des 65 couches ; il serait
+⭐ **Chercher la vraie feuille.** Le cœur de matière est hors des 65 couches ; il serait ✅ **Branche « plus épais » FERMÉE le 2026-08-27** → [`20`](20_le_champ_de_correction.md) §9 : de 61 à 121 couches le pic ne bouge pas. Reste la seconde branche que [`12`](12_profondeur_de_surface.md):259 proposait déjà — corriger la trace.
 retrouvé en engendrant un volume de surface plus épais (`vc_layers_from_ppm -r 64`) ou
 en corrigeant la trace. C'est du côté du déroulement, donc de l'objectif.
 
@@ -445,7 +445,7 @@ transporte pas aux volumes de surface à 2,4 µm.
 
 Ce qui reste vrai est l'**ordre**, pas la coupure : l'écart corrèle avec les
 croisements. L'instrument est **ordinal**, comme le veut la règle nº 1 du dépôt — et
-tout seuil devra être calibré sur une population, pas sur trois segments.
+tout seuil devra être calibré sur une population, pas sur trois segments. ⚠⚠ **→ §14** : le balayage de seuils sur les 80 segments (40 à 100 µm) conclut qu'**aucun** point de coupure n'existe.
 
 
 ---

@@ -48,7 +48,7 @@ la correction porte sur **0,56 %** de la surface, avec un `correction_weight` qu
 `src/outils/boucle_de_correction.sh` :
 
 1. **`correction_weight`** (`POIDS`, défaut `1 100`) — une clé JSON que `applyJsonWeights`
-   accepte (`GrowPatch.cpp:1311`) et qui n'avait jamais été réglée ici ;
+   accepte (`GrowPatch.cpp:1311`) et qui n'avait jamais été réglée ici — ⭐ **elle l'est depuis** : le §3bis la balaye (poids 1 et poids 100) et le §7 conclut qu'elle est réglée ;
 2. ⭐⭐ **plus de points** (`SEMIS`, défaut `ligne nappe`). `suivre_nappe.py` gagne un mode
    `--nappe` : une **échine et ses côtes**, chaque côte marchant dans la direction tangente
    perpendiculaire (le produit vectoriel de la normale locale et de la direction d'échine,
@@ -198,8 +198,8 @@ une tendance.
 
   ⚠ α passe de 0,98 à 0,89 et l'écart à 161 couches baisse de **27 %** — le plus grand
   mouvement qu'un levier ait produit ici. Mais deux fenêtres et 0,09 d'écart en α, ça ne
-  fait pas une tendance : à confirmer par le balayage, pas à annoncer.
-- **Que la cause soit trouvée.** Trois leviers de données restent éteints chez nous
+  fait pas une tendance : à confirmer par le balayage, pas à annoncer. ⚠⚠ **Confirmé par la négative** → [`49`](49_alpha_ne_separe_pas_deux_pannes.md) : les quatre séries sont indiscernables de leur propre plafond, donc aucune tendance ne peut y être lue.
+- **Que la cause soit trouvée.** ⭐ **Les trois leviers ont été allumés et mesurés** → [`26`](26_le_champ_de_direction.md) §9bis (`sdt_weight` 1 et 10, fibres h+v, sdt+fibres). ~~Trois leviers de données restent éteints chez nous~~
   (`41` §6ter), et un quatrième existe dont je ne sais pas dire s'il tire.
 
 ---
@@ -231,7 +231,7 @@ fenêtres** (31 et 81, celles où l'officiel a été mesuré).
 du script : on ne peut pas générer la voisine d'une surface qui n'existe pas, donc la boucle
 s'arrête là en le disant.
 
-⚠ **Rien de tout ça n'est encore mesuré.** La campagne est en file derrière le balayage de
+⚠ ~~**Rien de tout ça n'est encore mesuré.**~~ ⭐ **Mesuré depuis** → [`43`](43_la_chaine_des_spires.md) : la campagne `spire_suivante.sh` a tourné. La campagne était en file derrière le balayage de
 correction ; ce paragraphe dit ce qui va être tenté et pourquoi, pas ce qui a marché.
 
 ## 7. ⭐⭐ Relu à travers une fenêtre VALIDE — la conclusion tient, sa preuve ne tenait pas
