@@ -239,6 +239,72 @@ font 4 contre 4, soit **exactement** huit — et à cette taille le plus petit p
 unilatéral puisse rendre vaut `1/C(8,4) = 0,0143`, donc sous 0,05. Le seuil est franchi au
 sens où il a été posé, pas contourné.
 
+## 4 quinquies. LE RÉSULTAT, mesuré le 2026-08-28 à 04h28
+
+La campagne a rendu les quatre surfaces publiées de `PHerc1447` et l'analyse a tourné au
+réglage calibré sur Scroll 1 (réduction 8, fenêtre 256).
+
+| carte | fenêtres | périodiques | période | netteté | mélange |
+|---|---|---|---|---|---|
+| `ink_segment_complet` *(témoin Scroll 1)* | 12 | **8** (67 %) | 38 | 0,751 | **0/12** |
+| `20250702235910` | 2 | 2 (100 %) | 48 | 0,672 | 0/2 |
+| `20250703025628` | 3 | 2 (67 %) | 37 | 0,759 | 0/3 |
+| `20250703034159` | 4 | 2 (50 %) | 30 | 0,710 | 0/4 |
+| `20251105093211` | 3 | 2 (67 %) | 43 | 0,492 | 0/3 |
+
+**Tests, dans l'ordre déclaré au §4 :**
+
+| test | table | p |
+|---|---|---|
+| par carte, `20250703034159` (seule à atteindre 8) | `[2, 2, 0, 4]` | **0,2143** |
+| témoin Scroll 1 | `[8, 4, 0, 12]` | **0,0007** |
+| **groupé sur nos quatre surfaces** | `[8, 4, 0, 12]` | **0,0007** |
+
+⭐ Le seuil déclaré est franchi par le test groupé. Selon le tableau du §4, écrit avant la
+campagne, cela veut dire : **la périodicité de `PHerc1447` n'est pas un tirage**. Et cela ne
+dit toujours **pas** que c'est du texte — seulement que la carte est structurée là où son
+propre mélange ne l'est pas.
+
+### ⚠⚠⚠ Ce que ce résultat NE dit pas, et quatre réserves qui comptent
+
+1. **Les périodes ne s'accordent pas.** 30, 37, 43 et 48 px sur quatre surfaces du **même
+   rouleau** — une étendue de 18 px, un rapport de **1,6**. Or `par_fenetres` écrit
+   elle-même qu'« une page écrite a un interligne CONSTANT » et que des périodes éparpillées
+   sont « chacune un pic différent, c'est-à-dire du bruit ». Un rouleau dont l'interligne
+   varierait de moitié d'une surface à l'autre n'est pas un rouleau écrit à la main par un
+   scribe, c'est un ensemble de mesures qui trouvent chacune leur pic.
+2. **Chaque carte rend exactement DEUX fenêtres périodiques.** 2/2, 2/3, 2/4, 2/3. Un nombre
+   aussi constant sur des surfaces de tailles très différentes est un motif, pas un hasard,
+   et il n'est pas expliqué. À regarder avant d'en tirer quoi que ce soit.
+3. **Le contrôle par mélange rend zéro à CHAQUE fois.** 0/12, 0/2, 0/3, 0/4, 0/3 : il n'a
+   jamais, pas une seule fois, produit une fenêtre périodique. Cela rend le test très
+   sensible — donc il mesure « y a-t-il une structure spatiale », ce qui est plus faible que
+   « y a-t-il de l'écriture ».
+4. **La quatrième carte est nettement moins nette** (0,492 contre 0,67 à 0,76), et c'est
+   celle dont le volume n'est couvert qu'à 8,5 %.
+
+ⓘ **La table groupée est identique à celle du témoin** — `[8, 4, 0, 12]` des deux côtés. C'est
+frappant et ce n'est **pas une preuve** : sur des effectifs aussi petits, deux tables
+coïncident sans que cela dise quoi que ce soit de plus que les deux p qu'elles portent.
+
+⚠ **Et une prédiction posée avant lecture, pour tenir les comptes** : j'attendais 1 à 2
+fenêtres mesurables pour la quatrième carte (contre les 24 que ses dimensions annonçaient).
+Elle en a rendu **3**. Bonne direction, un de trop.
+
+### ⚠⚠⚠ Le défaut qui a failli être publié : le groupement avait avalé son témoin
+
+La première exécution a sorti `GROUPÉ … [16, 8, 0, 24] sur 5 cartes : p = 0,0000`. **Cinq**
+cartes : nos quatre surfaces **plus le témoin Scroll 1**, dont on sait déjà qu'il porte du
+texte. La moitié du signal groupé venait de lui.
+
+⚠⚠ La docstring de `fisher_periodicite_groupee` disait « du même rouleau » et **rien ne le
+vérifiait**. Une précondition écrite est une précondition que quelqu'un violera — et le
+premier à la violer a été l'appelant que j'avais écrit moi-même une heure plus tôt. C'est
+maintenant l'appelant qui **nomme** ses témoins (`--temoin`), parce que lui seul sait lequel
+en est un, et quatre contrôles gardent la règle, dont celui qui vérifie que le groupe **sans**
+témoin reste significatif : exclure le témoin doit rendre le résultat honnête, pas le faire
+disparaître.
+
 ## 5. Ce qui est annulé, et ce qui tient
 
 | document | ce qu'il disait | état |

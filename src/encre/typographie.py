@@ -604,6 +604,25 @@ def verifier() -> int:
     seule = fisher_periodicite_groupee([grandes_r[1]], [grandes_m[1]])
     v("groupe sur une seule carte, il rend le test de cette carte",
       seule["table"] == fisher_periodicite(grandes_r[1], grandes_m[1])["table"])
+    # --- LE GROUPEMENT NE DOIT PAS AVALER SON TEMOIN -----------------------------------
+    # ⚠⚠⚠ Panne reelle du 2026-08-28 : la campagne a groupe nos quatre surfaces AVEC le
+    # temoin Scroll 1, et la moitie du signal groupe venait de lui.
+    sujet = {"fenetres_periodiques": 2, "fenetres": 3}
+    temoin = {"fenetres_periodiques": 8, "fenetres": 12}
+    vide = {"fenetres_periodiques": 0, "fenetres": 3}
+    vide_t = {"fenetres_periodiques": 0, "fenetres": 12}
+    avec = fisher_periodicite_groupee([sujet] * 4 + [temoin], [vide] * 4 + [vide_t])
+    sans = fisher_periodicite_groupee([sujet] * 4, [vide] * 4)
+    v("grouper le temoin change la table", avec["table"] != sans["table"])
+    v("... et le temoin apporte la moitie du signal",
+      avec["table"][0] == 2 * sans["table"][0])
+    v("le groupement des seuls sujets tient debout",
+      sans["p"] is not None and sans["table"] == [8, 4, 0, 12])
+    # ⚠ Et il faut que le groupe SANS temoin soit encore significatif : sinon exclure le
+    # temoin reviendrait a perdre le resultat, ce qui n'est pas la meme chose que le
+    # rendre honnete.
+    v("... et reste sous 0,05 une fois le temoin retire", sans["p"] < 0.05)
+
 
 
     print(f"{'ALL PASS' if not echecs else 'FAILURES'} ({echecs} failures, {controles} checks)")
@@ -841,6 +860,11 @@ def main() -> int:
                          "aucune structure. Sans ce contrôle, « 2 fenêtres sur 2 » n'a pas "
                          "d'échelle — c'est un tirage à pile ou face")
     ap.add_argument("--graine", type=int, default=0)
+    ap.add_argument("--temoin", type=Path, nargs="*", default=[],
+                    help="cartes mesurées et testées INDIVIDUELLEMENT mais EXCLUES du "
+                         "groupement : un témoin d'un autre rouleau, dont on sait déjà "
+                         "qu'il porte du texte, gonflerait le test groupé de son propre "
+                         "signal")
     ap.add_argument("--npy", type=Path, nargs="*",
                     help="mesurer NOS cartes de prédiction (.npy) au lieu d'un dossier "
                          "d'images publiées — même signature, même réduction")
@@ -918,9 +942,23 @@ def main() -> int:
                     print(f"  {nom:44} Fisher unilatéral {t['table']} : p = {t['p']:.4f}")
             # ⚠⚠ Le test GROUPÉ est déclaré avant la quatrième carte, et il est SECONDAIRE :
             # le test par carte reste le principal. Voir `fisher_periodicite_groupee`.
-            groupe = fisher_periodicite_groupee(
-                [reels[n] for n in sorted(reels) if n in melanges],
-                [melanges[n] for n in sorted(reels) if n in melanges])
+            #
+            # ⚠⚠⚠ ET IL EXCLUT LES TÉMOINS, faute de quoi il se trompe de sujet. Le
+            # 2026-08-28 la campagne a groupé nos quatre surfaces de `PHerc1447` AVEC le
+            # témoin Scroll 1 — dont on sait déjà qu'il porte du texte — et a sorti
+            # `[16, 8, 0, 24]`, dont la MOITIÉ du signal venait du témoin. La docstring de
+            # `fisher_periodicite_groupee` disait « du même rouleau » et rien ne le
+            # vérifiait : une précondition écrite est une précondition que quelqu'un
+            # violera. C'est l'appelant qui sait lequel est un témoin, donc c'est lui qui
+            # le nomme.
+            temoins = {t.stem for t in a.temoin}
+            sujets = [n for n in sorted(reels) if n in melanges and n not in temoins]
+            ecartes = [n for n in sorted(reels) if n in temoins]
+            for n in ecartes:
+                print(f"  {'':44} ↳ {n} écarté du groupement (témoin)")
+            groupe = fisher_periodicite_groupee([reels[n] for n in sujets],
+                                                [melanges[n] for n in sujets])
+            groupe["temoins_ecartes"] = ecartes
             tests["_groupe"] = groupe
             if groupe["p"] is None:
                 print(f"  {'GROUPÉ (secondaire)':44} pas de test — {groupe['raison']}")

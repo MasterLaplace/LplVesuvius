@@ -78,6 +78,12 @@ done < "$LISTE"
 echo
 echo "== signature typographique, reglage calibre sur Scroll 1 =="
 # shellcheck disable=SC2086
+# ⚠⚠⚠ `--temoin` N'EST PAS DECORATIF. Sans lui, le test GROUPE avale le temoin Scroll 1 --
+# dont on sait deja qu'il porte du texte -- et sort `[16, 8, 0, 24]` dont la MOITIE du signal
+# vient de lui. Mesure du 2026-08-28 : nos quatre surfaces seules donnent `[8, 4, 0, 12]`,
+# p = 0,0007, ce qui est un resultat ; le groupe pollue donnait p = 0,0000, ce qui n'en est
+# pas un puisqu'il ne parle pas du bon rouleau.
 uv run python src/encre/typographie.py --npy $ROOT/data/out/ink_segment_complet.npy $CARTES \
+    --temoin $ROOT/data/out/ink_segment_complet.npy \
     --reduire 8 --taille-fenetre 256 --controle-melange \
     --json docs/mesures/typographie_de_nos_cartes.json
