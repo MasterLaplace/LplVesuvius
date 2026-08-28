@@ -301,9 +301,42 @@ là où le §7 a dû **décimer** pour la résolution, l'énergie se lit sur deu
 même fragment. Et ces fragments portent une **vérité terrain d'encre** — leur surface ouverte
 est publiée (`working/54keV_exposed_surface/`), ce sont ceux du concours de détection.
 
+### ⚠⚠⚠ CORRECTION du même jour : les paires existent, mais pas *utilisables ensemble*
+
+Écrit ci-dessus, puis vérifié fragment par fragment. Le corpus se sépare en **deux moitiés
+disjointes**, et aucune ne suffit seule :
+
+| fragment | étiquettes d'encre | transformation de recalage | paires |
+|---|:--:|:--:|---|
+| `Frag1` | ✅ `inklabels.png` | ❌ `transforms/` vide | 54 / 88 keV |
+| `Frag2` | ✅ | ❌ vide | 54 / 88 keV |
+| `Frag3` | ✅ | ❌ vide | 88 / 54 keV |
+| `Frag4` | ❌ | ❌ vide | 54 / 88 keV |
+| `Frag5` | ❌ | ✅ **1 transformation** | 3,24 / 7,91 µm |
+| `Frag6` | ❌ | ✅ **3 transformations** | 53 / 70 / 88 keV **+** 3,24 / 7,91 µm |
+
+⚠⚠ **Les fragments qui ont la vérité terrain n'ont pas de recalage, et celui qui a le
+recalage complet n'a pas de vérité terrain.** Or les deux volumes d'une paire n'ont pas la
+même forme — `Frag1` fait 7219 × 1399 × 7198 à 54 keV et 7229 × 1608 × 7332 à 88 — donc les
+coordonnées de surface de l'un **n'indexent pas** l'autre. ⚠ Et `volumes_standardized/` ne
+recale rien : c'est la même forme en `uint8`, une normalisation d'intensité, pas une
+transformation spatiale.
+
+⭐ Ce qui reste vrai du §8 quater : les paires **existent** et une comparaison de statistiques
+par énergie est faisable sur `Frag6` (trois énergies recalées, sans labels), tandis qu'une
+mesure **contre étiquettes** est faisable à une seule énergie sur `Frag1` à `Frag3` — ce qui
+est exactement ce que [`63`](63_la_premiere_verite_terrain.md) a fait.
+
+⚠ Ce qui tombe : « il n'y a rien à émuler ». Pour comparer **la même surface** aux deux
+énergies avec des étiquettes, il faut un recalage que personne ne publie pour les fragments
+étiquetés. Le produire est un lot à soi — un recalage rigide 3D sur des volumes de sept mille
+voxels de côté — et il introduirait sa propre source d'erreur dans une mesure censée en
+isoler une seule.
+
 ⚠ Ce que ça ne fait pas encore : rendre et comparer. Ce lot demande de télécharger des
 volumes que ce dépôt n'a pas, et c'est le pas suivant. Ce §8 quater établit que le pas est
-**possible**, ce qui n'était pas acquis il y a une heure.
+**possible sur `Frag6`, sans étiquettes**, ce qui n'était pas acquis il y a une heure — et la
+correction ci-dessus dit pourquoi il ne l'est pas avec elles.
 
 ## 9. ⭐ Deux contrôles de reproductibilité, gratuits et exacts
 

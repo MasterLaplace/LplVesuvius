@@ -382,5 +382,35 @@
   "compte": {
     "energie": 7,
     "resolution": 2
+  },
+  "utilisabilite": {
+    "note": "Verifie fragment par fragment le 2026-08-28. Une paire n'est utilisable que si les deux volumes sont RECALES : ils n'ont pas la meme forme, donc les coordonnees de surface de l'un n'indexent pas l'autre. Et `volumes_standardized/` ne recale rien -- c'est la meme forme en uint8, une normalisation d'intensite.",
+    "par_fragment": {
+      "Frag1": {
+        "etiquettes": true,
+        "transformations": 0
+      },
+      "Frag2": {
+        "etiquettes": true,
+        "transformations": 0
+      },
+      "Frag3": {
+        "etiquettes": true,
+        "transformations": 0
+      },
+      "Frag4": {
+        "etiquettes": false,
+        "transformations": 0
+      },
+      "Frag5": {
+        "etiquettes": false,
+        "transformations": 1
+      },
+      "Frag6": {
+        "etiquettes": false,
+        "transformations": 3
+      }
+    },
+    "consequence": "Les fragments qui ont la verite terrain n'ont pas de recalage, et celui qui a le recalage complet n'a pas de verite terrain. Une comparaison par energie CONTRE ETIQUETTES demande donc un recalage que personne ne publie."
   }
 }
