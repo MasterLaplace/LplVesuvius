@@ -5,6 +5,8 @@
 > l'encre y est lisible**. Les 23 tuiles étiquetées de [`63`](63_la_premiere_verite_terrain.md)
 > permettent de tester les deux. Aucune des deux ne survit telle quelle.
 
+![Deux intervalles qui contiennent leur point nul](images/65_ce_que_sigma_ne_dit_pas.png)
+
 ## 1. σ ne prédit pas la qualité mesurée
 
 [`60`](60_la_constante_qui_rendait_le_modele_muet.md) fait reposer « le modèle n'est pas inerte
@@ -111,7 +113,8 @@ qui ne l'établit pas ne répond rien — et c'est le cas.
 
 **Instruments** : [`src/encre/lisible_a_neuf_microns.py`](../src/encre/lisible_a_neuf_microns.py)
 (25 contrôles), [`src/encre/transport_de_calibration.py`](../src/encre/transport_de_calibration.py)
-(40 contrôles).
+(40 contrôles), [`src/figures/figure_ce_que_sigma_ne_dit_pas.py`](../src/figures/figure_ce_que_sigma_ne_dit_pas.py)
+(14 contrôles).
 **Mesures** : [`lisible_a_neuf_microns.json`](mesures/lisible_a_neuf_microns.json),
 [`transport_de_calibration.json`](mesures/transport_de_calibration.json).
 **Voir aussi** : [`64`](64_la_dispersion_netait_pas_un_effet.md) pour le plancher de bruit qui

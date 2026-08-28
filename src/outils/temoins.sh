@@ -1112,6 +1112,7 @@ run "lisible a neuf microns"  uv run python "$ROOT/src/encre/lisible_a_neuf_micr
 # (`ink-detection/…timesformer…`) ne doit jamais compter comme verite terrain, sinon on
 # mesurerait un modele contre un autre modele.
 run "ou la verite existe"     uv run python "$ROOT/src/encre/ou_la_verite_existe.py" --verifier
+run "figure sigma"            uv run python "$ROOT/src/figures/figure_ce_que_sigma_ne_dit_pas.py" --verifier
 run "allure d'un rendu"        uv run python "$ROOT/src/encre/allure_du_rendu.py" --verifier
 run "figure hypothèse réfutée" uv run python "$ROOT/src/figures/figure_hypothese_refutee.py" --verifier
 run "figure bruit d'une fenetre" uv run python "$ROOT/src/figures/figure_bruit_dune_fenetre.py" --verifier
