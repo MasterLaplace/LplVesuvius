@@ -179,9 +179,19 @@ def load_layer_stack(layers_dir: Path, start: int, crop: tuple[int, int, int, in
     # les piles publiees ne bouge. C'est ce qui rend le correctif verifiable : il doit
     # changer les uint8 et ne rien changer d'autre.
     plafond = float(np.iinfo(stack_dtype).max) if stack_dtype is not None else 65535.0
-    normalisee = stack / plafond
-    exiger_une_pile_exploitable(float(normalisee.max()), str(stack_dtype))
-    return normalisee
+    # ⚠⚠ DIVISION EN PLACE, et ce n'est pas une micro-optimisation. `stack / plafond` alloue
+    # une SECONDE pile de la meme taille, donc le pic double. Sur le segment
+    # `20251105093211` de `PHerc1447`, qui fait 13640 x 8220, une pile de 26 couches en
+    # `float32` pese **11,7 Gio** : le pic passerait a **23,3 Gio** sur une machine qui en
+    # offre 35 de disponibles, apres un telechargement de 3,5 Gio et trois heures de
+    # campagne. Une allocation qui tue un run a ce moment-la coute la journee.
+    #
+    # ⭐ Le resultat est IDENTIQUE AU BIT : `stack` est deja en `float32` (elle est allouee
+    # ainsi ci-dessus), et diviser en place par un flottant Python fait exactement la meme
+    # operation que la division qui recopie. La batterie l'asserte plutot que de l'affirmer.
+    stack /= plafond
+    exiger_une_pile_exploitable(float(stack.max()), str(stack_dtype))
+    return stack
 
 
 PLEINE_ECHELLE_MINIMALE = 1.0 / 64.0
@@ -488,6 +498,25 @@ def verifier() -> int:
       bool(_np.allclose(n8, n16, atol=1e-6)))
     v("... alors qu'avec la constante l'ecart etait d'un facteur 257",
       abs(float((huit / 65535.0).max()) * 257 - float(n8.max())) < 1e-6)
+
+    # ⚠⚠ LA DIVISION EN PLACE REND LE MEME BIT. `load_layer_stack` divise `stack /= plafond`
+    # au lieu de `stack / plafond` pour ne pas doubler le pic memoire sur un segment de
+    # onze gibioctets, et ce controle est ce qui autorise le changement : sur une pile deja
+    # en `float32`, les deux operations sont la meme, et il faut le montrer plutot que le
+    # dire. Comparaison EXACTE, pas approchee : « identique au bit » ne se teste pas avec
+    # une tolerance.
+    brut = _np.linspace(0.0, 255.0, 4096, dtype=_np.float32).reshape(1, 64, 64)
+    recopie = brut / 255.0
+    en_place = brut.copy()
+    en_place /= 255.0
+    v("la division en place rend exactement les memes bits",
+      bool((recopie == en_place).all()))
+    v("... y compris sur le plafond uint16",
+      bool((_np.float32(65535.0) / 65535.0) == _np.float32(1.0)))
+    # ⚠ Et le point qui compte pour la memoire : la division en place ne cree pas de tableau.
+    v("la division en place ecrit dans le meme tableau",
+      en_place.__array_interface__["data"][0]
+      == (lambda a: (a.__itruediv__(1.0), a)[1])(en_place).__array_interface__["data"][0])
     # ⚠ Et la borne haute reste 1 : une normalisation qui deborderait mettrait le modele
     # hors de son domaine d'entrainement, l'autre facon de se tromper.
     v("une pile pleine echelle arrive a 1, jamais au-dela", float(n8.max()) == 1.0)

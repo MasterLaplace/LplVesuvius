@@ -31,5 +31,19 @@
       "debit_par_fil_seconde": 0.8518
     }
   ],
-  "rapport_des_debits": 1.47
+  "rapport_des_debits": 1.47,
+  "contre_point_machine_libre": {
+    "quoi": "le meme crop du meme segment, rejoue une fois la campagne en telechargement",
+    "segment": "1447_20250703025628",
+    "top": 640,
+    "left": 2560,
+    "cote": 640,
+    "fils": 4,
+    "fenetres": 784,
+    "secondes": 134.1,
+    "ms_par_fenetre": 171.0,
+    "debit_par_fil_seconde": 1.4616,
+    "rapport_a_la_mesure_contendue": 2.53,
+    "note": "⚠⚠ Le meme travail, le meme code, deux fois et demie plus vite une fois la machine libre. Et le debit obtenu depasse la reference dite « machine libre » de cout_du_rendu.py (0,635) : cette reference etait elle-meme contendue."
+  }
 }

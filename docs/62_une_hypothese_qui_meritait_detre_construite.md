@@ -179,6 +179,24 @@ segment 2 n'était pas lent : il a passé la plus grande partie de son run **con
 une médiane de 1,2 contre 7,4. Sa vitesse a varié d'un facteur **43 sur elle-même**, et une
 moyenne prise sur un intervalle où les conditions changent n'est la vitesse de rien.
 
+### 7.2 bis Le contre-point, mesuré le lendemain sur une machine libre
+
+Le **même crop du même segment**, rejoué pendant que la campagne téléchargeait au lieu de
+rendre :
+
+| conditions | secondes | ms/fenêtre | fen/fil-s |
+|---|---|---|---|
+| pendant que le segment 3 rendait | 338,8 | 432,1 | 0,5785 |
+| **machine libre** | **134,1** | **171,0** | **1,4616** |
+
+⭐⭐ **×2,5 pour le même travail, le même code, le même crop.** Et le débit obtenu **dépasse**
+la référence de `cout_du_rendu.py` étiquetée « machine libre » (0,635) — donc cette référence
+était elle-même contendue, et la colonne binaire du tableau ne pouvait pas le dire.
+
+⚠ La carte rendue est **identique au bit** entre les deux exécutions (écart maximal 0,0, mêmes
+pixels non couverts). C'est ce qui permet d'attribuer l'écart au temps et à rien d'autre :
+sans cette égalité, « deux fois et demie plus vite » pourrait vouloir dire « en faisant moins ».
+
 ### 7.3 Et c'est moi qui prenais la machine
 
 Pendant les trois heures du segment 2 : la suite de témoins, le balayage de largeurs de la
