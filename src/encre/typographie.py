@@ -548,6 +548,19 @@ def verifier() -> int:
     # comptait verte depuis toujours. Trouvé le 2026-08-27 en sondant un tout autre
     # correctif — la sonde a rendu « ALL PASS (2 failures, 28 checks) », une phrase qui se
     # contredit elle-même.
+    # --- LES CARTES ABSENTES, nommees plutot que fatales -------------------------------
+    # ⚠⚠ La campagne accumule les quatre chemins AVANT de savoir si chaque rendu a abouti :
+    # une carte manquante tuait l'analyse finale apres trois heures de rendu.
+    from pathlib import Path as _P
+    ici, la = cartes_presentes([_P(__file__), _P("/tmp/absente_xyz_123.npy")])
+    v("une carte presente est gardee", ici == [_P(__file__)])
+    v("... et l'absente est nommee a part", la == [_P("/tmp/absente_xyz_123.npy")])
+    v("l'ordre recu est conserve",
+      cartes_presentes([_P(__file__), _P(__file__)])[0] == [_P(__file__)] * 2)
+    # ⚠ Et l'ensemble vide doit rester DISTINGUABLE : analyser rien ne doit pas ressembler
+    # a analyser tout. C'est `main` qui refuse, sur ce predicat.
+    v("aucune carte presente se voit", cartes_presentes([_P("/tmp/x_absent.npy")])[0] == [])
+
     print(f"{'ALL PASS' if not echecs else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -676,6 +689,16 @@ def carte_npy_en_gris(chemin, reduire: int = 1):
     return np.asarray(im, dtype=np.uint8)
 
 
+def cartes_presentes(chemins):
+    """Sépare les cartes qui existent de celles qui manquent, dans l'ordre reçu.
+
+    ⚠ Extrait de `main` pour être sondable : un tri qui décide si une analyse tourne ou
+    refuse, et qui n'est atteignable que par la ligne de commande, ne peut pas être vérifié.
+    """
+    return ([c for c in chemins if c.exists()],
+            [c for c in chemins if not c.exists()])
+
+
 N_MINIMAL_POUR_TESTER = 8
 """Sous ce nombre de fenêtres, on NE TESTE PAS.
 
@@ -749,7 +772,26 @@ def main() -> int:
 
         import numpy as np
         lignes = []
-        for c in a.npy:
+        # ⚠⚠ UNE CARTE ABSENTE NE DOIT PAS TUER L'ANALYSE. La campagne qui appelle cet
+        # outil accumule les quatre chemins AVANT de savoir si chaque rendu a abouti : un
+        # pont zarr qui échoue sur le dernier segment faisait donc mourir l'analyse finale
+        # après trois heures de rendu, et le run entier ne rendait rien. Mesuré le
+        # 2026-08-28 : `FileNotFoundError`, code 1, aucun résultat écrit.
+        #
+        # ⚠ Sauter n'est PAS silencieux : chaque absente est nommée et comptée. Une carte
+        # manquante est un livrable manquant, et un saut discret la ferait passer pour une
+        # analyse complète.
+        presentes, absentes = cartes_presentes(a.npy)
+        for c in absentes:
+            print(f"  ⚠ carte absente, écartée : {c}")
+        # ⚠⚠ Et si AUCUNE n'existe, on refuse : analyser l'ensemble vide sortirait en zéro
+        # avec un JSON bien formé, c'est-à-dire qu'un run qui n'a rien mesuré ressemblerait
+        # à un run réussi.
+        if not presentes:
+            print(f"erreur : aucune des {len(a.npy)} cartes nommées n'existe",
+                  file=sys.stderr)
+            return 2
+        for c in presentes:
             gris = carte_npy_en_gris(c, a.reduire)
             s = signature(gris, a.taille_fenetre)
             s.update({"rouleau": "nos_cartes", "carte": c.stem, "reduction": a.reduire,

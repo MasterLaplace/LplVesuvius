@@ -1088,6 +1088,7 @@ run "liens des documents"      uv run python "$ROOT/src/depot/liens_casses.py" -
 # chiffre au réel : la surface entière de PHerc1447 doit retomber sur sa durée mesurée.
 run "coût d'un rendu"          uv run python "$ROOT/src/encre/cout_du_rendu.py" --verifier
 run "coût d'une fenêtre"       uv run python "$ROOT/src/encre/cout_de_la_fenetre.py" --verifier
+run "A/B de deux segments"     uv run python "$ROOT/src/encre/ab_segments.py" --verifier
 run "figure hypothèse réfutée" uv run python "$ROOT/src/figures/figure_hypothese_refutee.py" --verifier
 
 # ⚠⚠ La figure du bug d'échelle a un contrôle, et il porte sur ce qui la rend HONNÊTE : les
