@@ -1,0 +1,72 @@
+{
+  "prediction": "/home/masterlaplace/LplVesuvius/data/out/ink_frag3_54keV.npy",
+  "forme": [
+    1024,
+    1024
+  ],
+  "couverture_%": 97.09177017211914,
+  "seuil": 0.0,
+  "tuiles_annotees_%": 18.75,
+  "domaines": [
+    {
+      "domaine": "tout le segment",
+      "pixels": 1018081,
+      "encre_%": 1.550957143881479,
+      "auc": 0.5749012162281242,
+      "threshold": 0.0,
+      "precision": 0.01725619413891616,
+      "recall": 0.44642178594046866,
+      "f1": 0.03322797862737196
+    },
+    {
+      "domaine": "lignes annotees",
+      "pixels": 113008,
+      "encre_%": 13.972462126575111,
+      "auc": 0.5231828245839795,
+      "threshold": 0.0,
+      "precision": 0.13506418854186625,
+      "recall": 0.44642178594046866,
+      "f1": 0.20738452486025302
+    },
+    {
+      "domaine": "tuiles annotees (256px)",
+      "pixels": 185313,
+      "encre_%": 8.520718999746375,
+      "auc": 0.7038231011615772,
+      "threshold": 0.0,
+      "precision": 0.1435641547861507,
+      "recall": 0.44642178594046866,
+      "f1": 0.21725997842502692
+    },
+    {
+      "domaine": "CONTROLE melange / tout le segment",
+      "pixels": 1018081,
+      "encre_%": 1.550957143881479,
+      "auc": 0.5007556235845438,
+      "threshold": 0.0,
+      "precision": 0.015589082746009092,
+      "recall": 0.4032932235592147,
+      "f1": 0.03001784194908563
+    },
+    {
+      "domaine": "CONTROLE melange / lignes annotees",
+      "pixels": 113008,
+      "encre_%": 13.972462126575111,
+      "auc": 0.5004759652285284,
+      "threshold": 0.0,
+      "precision": 0.14043135006395271,
+      "recall": 0.4032932235592147,
+      "f1": 0.2083224286835907
+    },
+    {
+      "domaine": "CONTROLE melange / tuiles annotees (256px)",
+      "pixels": 185313,
+      "encre_%": 8.520718999746375,
+      "auc": 0.5004168188760254,
+      "threshold": 0.0,
+      "precision": 0.08559024744291072,
+      "recall": 0.4032932235592147,
+      "f1": 0.1412114290782894
+    }
+  ]
+}

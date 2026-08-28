@@ -77,16 +77,47 @@ indépendante de la prévalence par construction — c'est une mesure de **rang*
 Deux fenêtres choisies par la même règle, sur deux fragments du même corpus, au même
 réglage, donnent deux réponses éloignées.
 
-⭐ Ce qu'il faut en retenir, et c'est plus honnête que le premier chiffre : **notre chaîne,
-contre vérité terrain, se situe entre 0,60 et 0,75 selon le fragment**. Citer « 0,746 » seul
-serait publier le meilleur des deux tirages.
-
 ⚠ Le contrôle par mélange rend **0,500** dans les deux cas, donc les deux portent un signal
 réel — le désaccord porte sur *combien*, pas sur *s'il y en a*.
 
-⚠ Un troisième point est en cours (`Frag3`, 7,9 % d'encre sur l'ensemble du fragment, le plus
-maigre des trois) : il dira lequel de 0,60 ou 0,75 est l'exception, ou qu'il n'y a pas
-d'exception mais une dispersion.
+## 2 ter. ⚠⚠⚠ Le troisième point corrige la lecture du second : le DOMAINE décide
+
+`Frag3` (`PHercParis1Fr34`), fenêtre à (3424, 2352), et la règle déclarée lui a donné une
+fenêtre à **1,55 % d'encre** — le centre de son masque est presque vierge. ⚠ La règle n'a pas
+été changée pour obtenir mieux : elle choisit sur le **masque**, et ce qu'elle rend fait
+partie du résultat.
+
+| fragment | encre fenêtre | tout le segment | lignes annotées | **tuiles annotées** |
+|---|---:|---:|---:|---:|
+| `Frag1` | 31,8 % | **0,746** | 0,701 | 0,677 |
+| `Frag2` | 20,6 % | **0,600** | 0,594 | 0,581 |
+| `Frag3` | **1,55 %** | **0,575** | 0,523 | **0,704** |
+| | | étendue **0,171** | **0,178** | **0,122** |
+| | | *exception* `Frag1` | `Frag1` | ***`Frag2`*** |
+
+⚠⚠⚠ **L'exception CHANGE selon le domaine rapporté.** Sur « tout le segment », c'est `Frag1`
+qui se détache par le haut ; sur les **tuiles annotées** — celles qui portent réellement de
+l'encre — c'est `Frag2` qui se détache par le bas, et `Frag3` remonte de 0,575 à **0,704**,
+au-dessus de `Frag1`.
+
+⭐ Donc « l'exception » n'est pas une propriété du fragment mais **du domaine qu'on choisit de
+publier**, et publier un seul domaine sans le dire reviendrait à choisir. Les trois sont
+rapportés ensemble ici, et **l'écart entre eux est le résultat**.
+
+⚠⚠ **Correction de ce que le §2 bis publiait il y a une heure.** « Entre 0,60 et 0,75 selon le
+fragment » a été écrit sur deux points lus sur « tout le segment ». Ce domaine est
+**contaminé** : il compte tout le papyrus vierge que la fenêtre contient par hasard, et une
+fenêtre à 1,5 % d'encre y est tirée vers le bas sans que le modèle y soit pour rien. La
+formulation juste est : **notre chaîne rend entre 0,52 et 0,75 selon le fragment ET le
+domaine**, avec une étendue de 0,12 même sur le domaine le plus resserré.
+
+ⓘ Et aucun domaine ne les fait s'accorder. La dispersion est réelle, elle est plus grande que
+tout écart qu'on chercherait à mesurer entre deux réglages, et elle n'est pas expliquée. C'est
+la première chose à comprendre avant de citer un seul de ces chiffres.
+
+⚠ Ce que la moyenne cacherait : `0,64` se lit comme une performance alors que la dispersion
+**est** ce qu'on a mesuré. Le contrôle de l'instrument l'asserte — deux jeux de même moyenne
+peuvent avoir des étendues cinq fois différentes.
 
 ## 3. Ce que ce document N'établit pas
 
@@ -108,12 +139,16 @@ d'exception mais une dispersion.
 
 ---
 
-**Instruments** : [`src/encre/fenetre_sur_masque.py`](../src/encre/fenetre_sur_masque.py)
+**Instruments** : [`src/encre/dispersion_des_fragments.py`](../src/encre/dispersion_des_fragments.py)
+(8 contrôles), [`src/encre/fenetre_sur_masque.py`](../src/encre/fenetre_sur_masque.py)
 (12 contrôles), [`src/encre/decimer_couches.py`](../src/encre/decimer_couches.py)
 (14 contrôles), [`src/campagnes/campagne_fragment_verite_terrain.sh`](../src/campagnes/campagne_fragment_verite_terrain.sh),
 et [`src/volume/evaluate_segment.py`](../src/volume/evaluate_segment.py), qui existait déjà.
 **Mesures** : [`frag1_verite_terrain.json`](mesures/frag1_verite_terrain.json),
-[`frag1_echelles.json`](mesures/frag1_echelles.json).
+[`frag1_echelles.json`](mesures/frag1_echelles.json),
+[`frag2_verite_terrain.json`](mesures/frag2_verite_terrain.json),
+[`frag3_verite_terrain.json`](mesures/frag3_verite_terrain.json),
+[`dispersion_fragments.json`](mesures/dispersion_fragments.json).
 **Voir aussi** : [`58`](58_resolution_ou_rouleau.md) §8 bis et §8 quater,
 [`59`](59_la_campagne_plutot_que_le_rouleau.md) §1 pour l'angle mort qui a rendu tout ceci
 visible, [`09`](09_protocole_jugement_modele.md) §2 bis pour le jeu du juge.
