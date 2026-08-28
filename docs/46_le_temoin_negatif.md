@@ -1,4 +1,16 @@
-# 46 — Le témoin négatif : le modèle reçoit deux volumes différents et rend la même carte
+# 46 — Le témoin négatif : deux cartes étrangères, une confiance égale
+
+> ⚠⚠⚠ **REFAIT LE 2026-08-28, ET LA CONCLUSION A CHANGÉ DE NATURE.** La mesure du
+> 2026-08-22 a été faite avec la constante de normalisation que [`60`](60_la_constante_qui_rendait_le_modele_muet.md)
+> a corrigée : les piles `uint8` arrivaient au modèle **257 fois trop sombres**, donc les deux
+> cartes étaient quasi **constantes** — et deux constantes corrèlent parfaitement. Le
+> `ρ = +0,9979` publié alors n'était pas un fait sur le modèle, c'était **la signature du
+> bug**. Le titre disait « rend la même carte » ; ce n'est pas vrai.
+>
+> ⭐ Le résultat refait est **différent, et plus dur pour le domaine** : les deux cartes sont
+> étrangères l'une à l'autre — donc le détecteur répond bel et bien à ses entrées — et il
+> répond avec **autant de confiance, davantage même**, sur la surface dont on a la preuve
+> géométrique qu'elle ne porte pas de feuille.
 
 2026-08-22. [`32`](32_educelab_le_papier_fondateur.md) §4.3 relève que le papier fondateur
 n'a **aucun contrôle négatif au sens fort** : il rapporte un taux de faux positifs, mais sur
@@ -62,25 +74,67 @@ donnent un rapport de dispersions proche de 1, exactement comme deux cartes rich
 > [`60`](60_la_constante_qui_rendait_le_modele_muet.md). Le texte ci-dessous est conservé tel
 > qu'il a été publié.
 
-## 3. ⭐⭐ Une thèse plus étroite, elle, est établie — *(à refaire)*
+## 3. ⭐⭐ La thèse refaite, avec le modèle réparé
 
 Le rapport des dispersions ne peut pas faire la différence entre *deux cartes de même
-amplitude* et *la même carte*. C'est pourtant là qu'est la question restante : un détecteur
-qui rend deux cartes **différentes** répond à ses entrées, même faiblement ; un détecteur qui
-rend **deux fois la même carte** sur deux surfaces géométriquement incompatibles ne répond
-pas du tout.
+amplitude* et *la même carte*. C'est là qu'était la question restante : un détecteur qui rend
+deux cartes **différentes** répond à ses entrées, même faiblement ; un détecteur qui rend
+**deux fois la même carte** sur deux surfaces géométriquement incompatibles ne répond pas du
+tout.
 
-| | valeur |
-|---|---:|
-| corrélation pixel à pixel des deux prédictions | **ρ = +0,9979** |
-| écart médian entre les deux cartes | 0,00038 |
-| … rapporté à ce que **chaque carte varie** | **2,9 %** |
-| … ce que donneraient deux cartes **étrangères l'une à l'autre** | **95,4 %** |
+| | 2026-08-22 *(constante cassée)* | **2026-08-28 (refait)** |
+|---|---:|---:|
+| σ du positif, sur sa feuille | — | **0,5894** |
+| σ du négatif, en travers | — | **0,7111** |
+| rapport des dispersions | — | **×0,83** |
+| σ du positif rapporté au modèle qui marche (0,7712) | 2,4 % | **76,4 %** |
+| corrélation pixel à pixel | ~~+0,9979~~ | **−0,0100** |
+| écart médian entre les deux cartes | ~~0,00038~~ | **0,4342** |
+| … rapporté à ce que chaque carte varie | ~~2,9 %~~ | **66,8 %** |
+| … ce que donneraient deux cartes **étrangères** | 95,4 % | 95,4 % |
 
-> ⭐⭐ **La sortie du modèle ne dépend pas de la présence d'une feuille.** Une face de
-> papyrus et une coupe en travers de l'empilement ne se ressemblent pas dans la direction
-> que ce modèle mange — c'est visible à l'œil sur la bande du haut de la figure. Rendre la
-> même carte sur les deux, ce n'est pas répondre faiblement : c'est ne pas répondre.
+⭐⭐ **Trois lectures, et il faut les tenir ensemble :**
+
+1. **Le modèle répond.** ρ passe de +0,9979 à **−0,0100** : les deux cartes n'ont plus rien à
+   voir l'une avec l'autre. L'ancienne thèse « il rend la même carte quoi qu'on lui donne »
+   est **morte**, et c'est bien le bug qui la fabriquait.
+2. ⚠⚠⚠ **Mais il répond avec la même assurance sur du vide.** Le négatif — une surface dont
+   `38` prouve géométriquement qu'aucune feuille n'est à portée — est **plus dispersé** que
+   le positif (0,7111 contre 0,5894) et **plus contrasté** (1,869 contre 1,471). Ce que le
+   détecteur rapporte là est un faux positif **par construction**, et **rien dans la sortie
+   ne le distingue** d'une vraie détection.
+3. ⚠ **Les deux cartes ne sont pas non plus complètement indépendantes** : 66,8 % de variation
+   partagée là où deux cartes sans rapport en donneraient 95,4 %. Il reste donc un signal
+   commun aux deux volumes — la texture du bloc, probablement — que ce témoin ne sépare pas.
+
+> ⚠⚠⚠ **La conclusion pour le domaine est plus dure que celle de 2026-08-22**, et non plus
+> douce. Un modèle bloqué se repère : il rend deux fois la même chose. Un modèle qui
+> **hallucine une structure différente et convaincante sur chaque entrée**, y compris sur des
+> entrées qui ne peuvent pas porter d'encre, ne se repère par aucune inspection de sa sortie.
+> C'est exactement ce que le papier fondateur ne mesure jamais, et c'est ce que `32` §4.3
+> reprochait.
+
+## 3 bis. ⚠⚠⚠ Ce témoin ne peut PAS encore répondre à la question typographique
+
+Le résultat du 2026-08-28 sur `PHerc1447` ([`60`](60_la_constante_qui_rendait_le_modele_muet.md)
+§4 quinquies) tient sur un contrôle par **mélange de pixels** : nos cartes portent des
+fenêtres périodiques là où leurs propres pixels mélangés n'en portent aucune, p = 0,0007.
+
+⚠ Le mélange est un contrôle **faible** : il détruit toute structure spatiale. Un témoin
+négatif *réel* — une surface qui n'est pas une feuille mais qui garde la texture du volume —
+pose une question bien plus dure : *nos cartes sont-elles périodiques là où une surface sans
+feuille ne l'est pas ?*
+
+**Mesuré, et la réponse est qu'on ne peut pas encore la poser :** au réglage calibré
+(réduction 8, fenêtre 256), les deux témoins de 1100 × 1100 ne rendent qu'**une seule
+fenêtre** chacun, et le test refuse à juste titre sous huit. Le positif lui-même — un segment
+officiel sur une vraie feuille — rend **0 fenêtre périodique sur 1**, ce qui ne dit pas qu'il
+n'est pas périodique mais que la question n'est pas posable sur une région aussi petite.
+
+⭐ **L'expérience requise est donc nommée** : rendre un témoin négatif sur une région assez
+grande pour porter au moins huit fenêtres au réglage calibré, soit **au moins ~2100 × 2100**
+pixels de carte. Tant qu'elle n'est pas faite, le p = 0,0007 de `60` reste ce qu'il dit —
+*structuré là où son propre mélange ne l'est pas* — et rien de plus.
 
 ### ⭐ La référence « 95,4 % » est dérivée, pas choisie
 
@@ -145,7 +199,7 @@ une trace sert-il à quelque chose ?* — et nomme ce qu'il faudrait pour y rép
 trace fautive, sa version réparée, et le MÊME aval appliqué aux deux**.
 
 > ⚠⚠ **Sur `PHerc1447`, cet aval est aveugle, et c'est maintenant mesuré.** Le détecteur
-> rend la même carte à ρ = 0,9979 sur une face de papyrus et sur une surface qui coupe
+> rend deux cartes étrangères (ρ = −0,010) mais également assurées sur une face de papyrus et sur une surface qui coupe
 > l'empilement. Une différence de surface bien plus grande que celle entre une trace
 > fautive et sa réparation ne le fait pas bouger — donc **aucune réparation ne peut
 > montrer de gain à travers lui ici**, quelle qu'elle soit.

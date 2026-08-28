@@ -49,11 +49,17 @@ concurrent. **Personne n'a mesuré ce que coûte un défaut de trace.**
 **Ce qu'il faudrait** : un cas où l'on tient les deux bouts — une trace fautive, sa
 version réparée, et le **même** aval appliqué aux deux. C'est exactement le lot nº 2.
 
-> ⚠⚠ **Et une condition préalable est désormais mesurée** ([`46`](46_le_temoin_negatif.md)
-> §6) : sur `PHerc1447`, l'aval est **aveugle**. Le détecteur rend la même carte à
-> ρ = 0,9979 sur une face de papyrus et sur une surface qui coupe l'empilement — une
-> différence bien plus grande que celle entre une trace fautive et sa réparation. **Aucune
-> réparation ne peut donc montrer de gain à travers lui sur ce rouleau.**
+> ⚠⚠⚠ **CONDITION LEVÉE LE 2026-08-28.** Ce paragraphe disait que l'aval était **aveugle**
+> sur `PHerc1447` et qu'aucune réparation ne pouvait y montrer de gain. Il reposait sur la
+> mesure du 2026-08-22, faite avec la constante corrigée par
+> [`60`](60_la_constante_qui_rendait_le_modele_muet.md). Refaite, elle dit l'inverse : le
+> détecteur **répond** (σ du positif = **76,4 %** du modèle qui marche, contre 2,4 %
+> annoncés) et rend **deux cartes étrangères** (ρ = **−0,0100**, contre +0,9979). **Le lot
+> est rouvert.**
+>
+> ⚠ Et il l'est avec une exigence de plus : le détecteur rapporte **plus** de dispersion sur
+> une surface qui ne peut pas porter d'encre (0,7111 contre 0,5894), donc tout gain mesuré à
+> travers lui devra être défendu contre ce faux positif de fond.
 >
 > ⭐ Ça ne ferme pas le lot, ça lui donne une **condition d'entrée vérifiable avant de
 > dépenser** : σ de la sortie du modèle sur le rouleau visé, rapporté aux **0,7712** qu'il

@@ -1117,27 +1117,51 @@ is whether there is a sheet under the surface.
 ) <fig:negctrl>
 
 #caveat[
-  *The intended claim is out of reach, and that comes first.* On this scroll the detector
-  returns a constant: $sigma = 0.0129$, which is 1.7 % of the 0.7712 it returns where it
-  reaches an AUC of 0.925. There is no working detector to control, so "it reports ink
-  where there is no sheet" cannot be tested here --- it reports none anywhere. Our
-  instrument refuses to print a verdict below a tenth of the working dispersion, because
-  two flat maps otherwise give a dispersion ratio near 1, which would read as "the control
-  fools the detector" when it means "the detector is off on both sides".
+  *This section was rewritten on 2026-08-28, and its conclusion changed sign.* The
+  measurement first published here was taken with a normalisation constant that divided
+  `uint8` stacks by 65535 instead of 255, so the model was shown near-black and returned
+  near-constants --- and two near-constants correlate perfectly. The $rho = +0.9979$ we
+  reported was not a fact about the detector, it was the signature of that bug. With the
+  constant fixed, the intended claim is *in* reach, and it is established.
 ]
 
-A narrower claim is established. A ratio of dispersions cannot separate *two maps of equal
-amplitude* from *the same map*, and that distinction is the one left: a detector returning
-two different maps is responding to its inputs, however weakly. Pixel to pixel, the two
-predictions correlate at $rho = +0.9979$, and their median difference is 2.9 % of what each
-map itself varies by --- against 95.4 % for two unrelated maps of the same dispersion, a
-value derived rather than chosen.#footnote[For two independent maps of dispersion $sigma$,
-the difference has dispersion $sigma sqrt(2)$, so the median of its absolute value is
-$0.6745 sigma sqrt(2) = 0.9539 sigma$.]
+The detector now responds. On the positive control --- an official segment of the same
+scroll, on a real sheet --- it returns $sigma = 0.5894$, which is 76.4 % of the 0.7712 it
+returns where it reaches an AUC of 0.925. There is a working detector to control.
+
+#emph[And it reports as much structure where no sheet can be.] On the negative control, a
+surface whose geometry rules out any papyrus face within reach, it returns
+$sigma = 0.7111$ --- *more* dispersion than on the real sheet, a ratio of 0.83, and a
+larger contrast as well (1.869 against 1.471).
+
+The two maps are not the same map. Pixel to pixel they correlate at $rho = -0.0100$, and
+their median difference is 66.8 % of what each map itself varies by --- against 95.4 % for
+two fully unrelated maps of the same dispersion, a value derived rather than
+chosen.#footnote[For two independent maps of dispersion $sigma$, the difference has
+dispersion $sigma sqrt(2)$, so the median of its absolute value is
+$0.6745 sigma sqrt(2) = 0.9539 sigma$.] So the model does respond to its inputs, and the
+residual 66.8 % against 95.4 % says the two outputs still share something --- the texture
+of the block, most plausibly --- that this control does not separate.
+
+#emph[The conclusion is harder than the one we first published, not softer.] A stuck model
+is easy to catch: it returns the same thing twice. A model that hallucinates a *different*
+and convincing structure on every input, including inputs that cannot carry ink, is caught
+by no inspection of its output. That is precisely what the founding paper never measures.
 
 The boring explanation is excluded by measurement rather than by argument: both input
 windows are full and different --- 93.4 % and 100 % non-zero, dispersions 39.26 against
-34.95. The model receives two clearly distinct volumes and returns the same map.
+34.95.
+
+#caveat[
+  *What this control cannot yet answer.* The periodicity result of Section 5 rests on a
+  pixel-shuffle control, which destroys all spatial structure. A real negative control ---
+  a surface that is not a sheet but keeps the texture of the block --- asks a harder
+  question: are our maps periodic where a sheetless surface is not? At the calibrated
+  setting these two 1100 #sym.times 1100 controls yield *one* window each, so the test
+  correctly refuses. Answering it requires a negative control of at least about
+  2100 #sym.times 2100 map pixels, and until that render exists the periodicity claim says
+  what it says and no more.
+]
 
 The generalisable part is the design. A negative control for an ink detector does not
 require a special acquisition or a substrate known to be blank. It requires a surface whose
@@ -1209,11 +1233,12 @@ Three properties recur in the instruments above and are worth naming.
   converging verdict is affected, but 24 of 111 series in our tree cannot be said to be
   *across the stack* rather than *unmeasured*.
 
-+ *The negative control establishes the narrow claim only* (#link(<sec:negctrl>)[Section 6.4]).
++ *The negative control establishes the strong claim* (#link(<sec:negctrl>)[Section 6.4]).
   On the one scroll where we have both a sheet-following and a stack-crossing surface, the
-  ink model returns a constant, so "it reports ink where there is no sheet" is untested.
-  What is established --- that its output does not depend on a sheet being present --- rests
-  on one scroll and one model.
+  ink model reports *more* dispersion on the surface that cannot carry ink (0.7111 against
+  0.5894), while returning two unrelated maps ($rho = -0.0100$). It reports ink where there
+  is no sheet, and nothing in its output distinguishes that from a real detection. This
+  rests on one scroll and one model.
 
 + *A render's cost is dominated by a setting nobody had set, and by a wall nobody had
   measured.* Our renderer's Zarr chunk cache defaults to 16 GB; none of the 28 call sites

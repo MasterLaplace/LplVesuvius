@@ -14,14 +14,22 @@ Instrument : [`src/graine/eligibilite_aval.py`](../src/graine/eligibilite_aval.p
 
 ---
 
-## 1. ⚠⚠ L'aval doit répondre, et sur un rouleau du prix il ne répond pas
+## 1. ⚠⚠ L'aval doit répondre — ~~et sur un rouleau du prix il ne répond pas~~
 
-[`46`](46_le_temoin_negatif.md) mesure que sur `PHerc1447` le détecteur rend la **même
+> ⚠⚠⚠ **RENVERSÉ LE 2026-08-28.** Ce qui suit a été écrit depuis la mesure du 2026-08-22,
+> faite avec la constante de normalisation que [`60`](60_la_constante_qui_rendait_le_modele_muet.md)
+> a corrigée. Le détecteur **répond** : σ du contrôle positif = **76,4 %** de ce qu'il rend
+> là où il atteint AUC 0,925, et les deux cartes sont **étrangères** (ρ = **−0,0100**), pas
+> identiques. **La condition d'entrée de ce lot est donc levée** : une réparation peut
+> montrer un gain à travers lui sur `PHerc1447`.
+>
+> ⚠ Ce qui reste vrai, et qui est même plus dur : le détecteur rapporte **plus** de
+> dispersion sur la surface qui ne peut pas porter d'encre (0,7111 contre 0,5894). Un gain
+> mesuré à travers lui devra donc être défendu contre ce faux positif de fond.
+
+~~[`46`](46_le_temoin_negatif.md) mesure que sur `PHerc1447` le détecteur rend la **même
 carte** (ρ = 0,9979) sur une face de papyrus et sur une surface qui coupe l'empilement.
-Sa dispersion vaut **1,7 %** de ce que le modèle rend là où il atteint AUC 0,925.
-
-> Une différence de surface **bien plus grande** que celle entre une trace fautive et sa
-> réparation ne le fait pas bouger. Aucune réparation ne peut donc y montrer de gain.
+Sa dispersion vaut **1,7 %** de ce que le modèle rend là où il atteint AUC 0,925.~~
 
 ⭐ Ça donne une **condition d'entrée vérifiable avant de dépenser** : σ de la sortie du
 modèle sur le rouleau visé, rapporté aux **0,7712** de référence. Une inférence sur une
