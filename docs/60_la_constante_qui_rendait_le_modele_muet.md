@@ -179,6 +179,39 @@ que son mélange, jamais moins.
 la deuxième en rendra de l'ordre de **4** au vu de son étendue. Il faudra peut-être les
 quatre surfaces pour atteindre huit.
 
+### 4 quater. Les comptes, calculés le 2026-08-28 avant que la quatrième carte n'existe
+
+Au réglage calibré (réduction 8, fenêtre 256), le nombre de fenêtres se calcule depuis les
+seules dimensions du segment, **sans rien mesurer** :
+
+| segment | carte | réduite | fenêtres |
+|---|---|---|---|
+| `20250703025628` | 4100 × 4260 | 512 × 532 | **4** |
+| `20250703034159` | 3620 × 5220 | 452 × 652 | **2** |
+| `20251105093211` | 8220 × 13640 | 1027 × 1705 | **24** |
+
+⭐ Trois cartes sur quatre **ne peuvent pas** franchir le seuil de huit à elles seules, et la
+quatrième le franchit largement. C'est structurel, et c'est ce qui justifie ses quatre heures
+de rendu : elle est la seule à porter un test par carte, et elle apporte l'essentiel des
+fenêtres du test groupé.
+
+⚠⚠ **Le test groupé, annoncé ci-dessus, est implémenté** (`fisher_periodicite_groupee`), et
+la date compte : écrit pendant que la quatrième surface se **téléchargeait**, donc avant tout
+résultat. Ajouter un groupement après avoir constaté que trois cartes restent muettes serait
+ajuster l'analyse aux données ; l'implémenter en exécutant une phrase écrite avant la
+campagne ne l'est pas.
+
+⚠ **Le test par carte reste le PRINCIPAL**, le groupé est secondaire et sorti sous l'étiquette
+`_groupe`. Les deux ne répondent pas à la même question : « peut-on dire quelque chose de
+**cette surface** » et « **ce rouleau** porte-t-il une structure périodique ». Le groupement
+suppose des surfaces distinctes et non recouvrantes — vrai ici, faux si l'on groupait deux
+rendus d'une même surface, qui ne compteraient alors qu'une fois.
+
+ⓘ Et une conséquence arithmétique du seuil, assertée : deux cartes de deux fenêtres groupées
+font 4 contre 4, soit **exactement** huit — et à cette taille le plus petit p qu'un Fisher
+unilatéral puisse rendre vaut `1/C(8,4) = 0,0143`, donc sous 0,05. Le seuil est franchi au
+sens où il a été posé, pas contourné.
+
 ## 5. Ce qui est annulé, et ce qui tient
 
 | document | ce qu'il disait | état |

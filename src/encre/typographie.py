@@ -560,6 +560,51 @@ def verifier() -> int:
     # ⚠ Et l'ensemble vide doit rester DISTINGUABLE : analyser rien ne doit pas ressembler
     # a analyser tout. C'est `main` qui refuse, sur ce predicat.
     v("aucune carte presente se voit", cartes_presentes([_P("/tmp/x_absent.npy")])[0] == [])
+    # --- LE TEST GROUPE, declare avant la quatrieme carte ------------------------------
+    # ⚠⚠⚠ Declare le 2026-08-28 AVANT tout resultat : trois des quatre surfaces ne peuvent
+    # pas atteindre le seuil de 8, et cela se calcule depuis leurs dimensions seules.
+    # ⚠⚠ Une carte de deux fenetres ne peut pas etre testee seule (2 + 2 = 4 < 8), et
+    # DEUX telles cartes groupees font 4 + 4 = 8, soit exactement le seuil. Ce n'est pas
+    # une faille : a 4 contre 4, le plus petit p qu'un Fisher unilateral puisse rendre vaut
+    # 1/C(8,4) = 0,0143, donc sous 0,05 — la raison meme pour laquelle le seuil vaut 8.
+    une_petite = {"fenetres_periodiques": 2, "fenetres": 2}
+    v("une carte de deux fenetres ne se teste pas seule",
+      fisher_periodicite(une_petite, {"fenetres_periodiques": 0, "fenetres": 2})["p"]
+      is None)
+    petites_r = [une_petite, {"fenetres_periodiques": 1, "fenetres": 2}]
+    petites_m = [{"fenetres_periodiques": 0, "fenetres": 2},
+                 {"fenetres_periodiques": 0, "fenetres": 2}]
+    groupees = fisher_periodicite_groupee(petites_r, petites_m)
+    v("... mais deux d'entre elles groupees atteignent exactement le seuil",
+      groupees["p"] is not None and sum(groupees["table"]) == 8)
+    # ⚠ Et le seuil garde son sens : a cette taille, un p sous 0,05 reste ATTEIGNABLE.
+    v("... et a cette taille un p sous 0,05 reste atteignable",
+      fisher_periodicite_groupee(
+          [une_petite, une_petite],
+          [{"fenetres_periodiques": 0, "fenetres": 2}] * 2)["p"] < 0.05)
+    v("une seule carte trop petite le reste une fois « groupee »",
+      fisher_periodicite_groupee([une_petite],
+                                 [{"fenetres_periodiques": 0, "fenetres": 2}])["p"]
+      is None)
+    grandes_r = [{"fenetres_periodiques": 2, "fenetres": 2},
+                 {"fenetres_periodiques": 20, "fenetres": 24}]
+    grandes_m = [{"fenetres_periodiques": 0, "fenetres": 2},
+                 {"fenetres_periodiques": 1, "fenetres": 24}]
+    g = fisher_periodicite_groupee(grandes_r, grandes_m)
+    v("le groupement somme les fenetres des cartes", g["table"] == [22, 4, 1, 25])
+    v("... et dit combien de cartes il a groupees", g["cartes"] == 2)
+    v("un groupement franchissant le seuil rend un p", g["p"] is not None)
+    # ⚠ Le groupement ne doit pas RENVERSER le sens : plus periodique en reel reste plus
+    # periodique une fois somme.
+    v("le p groupe est petit quand la separation est nette", g["p"] < 0.001)
+    v("aucune carte a grouper le dit plutot que de lever",
+      fisher_periodicite_groupee([], [])["p"] is None)
+    # ⚠⚠ Et le controle qui empeche de le prendre pour le test principal : groupe une
+    # SEULE carte, il doit rendre exactement le test de cette carte.
+    seule = fisher_periodicite_groupee([grandes_r[1]], [grandes_m[1]])
+    v("groupe sur une seule carte, il rend le test de cette carte",
+      seule["table"] == fisher_periodicite(grandes_r[1], grandes_m[1])["table"])
+
 
     print(f"{'ALL PASS' if not echecs else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
@@ -739,6 +784,42 @@ def fisher_periodicite(reel: dict, melange: dict) -> dict:
     return {"p": p, "table": [a, b, c, d]}
 
 
+def fisher_periodicite_groupee(reels: list[dict], melanges: list[dict]) -> dict:
+    """Le même test, sur la SOMME des fenêtres de plusieurs cartes du même rouleau.
+
+    ⚠⚠⚠ DÉCLARÉ LE 2026-08-28, AVANT que la quatrième carte n'existe et donc avant tout
+    résultat. Ce n'est pas une précaution de style : au réglage calibré (réduction 8, fenêtre
+    256) les quatre surfaces publiées de `PHerc1447` donnent **4, 2 et 24 fenêtres** — trois
+    d'entre elles ne peuvent PAS atteindre le seuil de 8 déclaré, et cela se calcule depuis
+    leurs seules dimensions, sans rien mesurer. Ajouter ce test après avoir vu que trois
+    cartes sur quatre restent muettes serait ajuster l'analyse aux données ; l'ajouter pendant
+    que la quatrième se télécharge ne l'est pas.
+
+    ⭐ Ce que le groupement change, et il faut le dire : il répond à « **ce rouleau** porte-t-il
+    une structure périodique » là où le test par carte répond à « peut-on dire quelque chose de
+    **cette surface** ». Les deux questions sont légitimes et ne sont pas la même. **Le test par
+    carte reste le principal** ; celui-ci est secondaire et déclaré comme tel.
+
+    ⚠ Le groupement suppose que les surfaces sont des observations distinctes du même rouleau.
+    C'est vrai ici — quatre segments différents, non recouvrants — et ce serait FAUX si l'on
+    groupait deux rendus de la même surface, qui ne compteraient alors qu'une fois.
+    """
+    if not reels or not melanges:
+        return {"p": None, "table": [0, 0, 0, 0], "cartes": 0,
+                "raison": "aucune carte à grouper"}
+    somme_reel = {
+        "fenetres_periodiques": sum(l["fenetres_periodiques"] for l in reels),
+        "fenetres": sum(l["fenetres"] for l in reels),
+    }
+    somme_melange = {
+        "fenetres_periodiques": sum(l["fenetres_periodiques"] for l in melanges),
+        "fenetres": sum(l["fenetres"] for l in melanges),
+    }
+    resultat = fisher_periodicite(somme_reel, somme_melange)
+    resultat["cartes"] = len(reels)
+    return resultat
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -835,6 +916,17 @@ def main() -> int:
                     print(f"  {nom:44} pas de test — {t['raison']}")
                 else:
                     print(f"  {nom:44} Fisher unilatéral {t['table']} : p = {t['p']:.4f}")
+            # ⚠⚠ Le test GROUPÉ est déclaré avant la quatrième carte, et il est SECONDAIRE :
+            # le test par carte reste le principal. Voir `fisher_periodicite_groupee`.
+            groupe = fisher_periodicite_groupee(
+                [reels[n] for n in sorted(reels) if n in melanges],
+                [melanges[n] for n in sorted(reels) if n in melanges])
+            tests["_groupe"] = groupe
+            if groupe["p"] is None:
+                print(f"  {'GROUPÉ (secondaire)':44} pas de test — {groupe['raison']}")
+            else:
+                print(f"  {'GROUPÉ (secondaire)':44} Fisher unilatéral {groupe['table']} "
+                      f"sur {groupe['cartes']} cartes : p = {groupe['p']:.4f}")
         if a.json:
             a.json.parent.mkdir(parents=True, exist_ok=True)
             a.json.write_text(_json.dumps({"cartes": lignes, "tests": tests},
