@@ -136,7 +136,7 @@ ne sont mesurés. Or les trois sont mesurables **sans jamais connaître le conte
 | taux de couverture | fraction de surface prédite « encre », qui doit rester dans la plage des surfaces à vérité terrain |
 | épaisseur de trait | distribution des distances au squelette |
 
-> ⭐⭐ **C'est un instrument à construire, et il est dans notre domaine exact** : la version
+> ⭐⭐ **C'est un instrument à construire, et il est dans notre domaine exact** : la version ✅ **CONSTRUIT** — la ligne 143 juste en dessous le dit : → [`45`](45_consistent_with_quantifie.md), 2026-08-22.
 > **quantifiée** de « consistent with ». Le papier a nommé le contrôle et ne l'a pas
 > outillé — trois ans plus tard, personne ne l'a fait.
 
@@ -167,7 +167,7 @@ Les autres contrôles absents, tous constructibles :
 
 | contrôle | ce qu'il testerait |
 |---|---|
-| **papyrus vierge** | un détecteur qui ne se tait jamais ne détecte rien |
+| **papyrus vierge** | un détecteur qui ne se tait jamais ne détecte rien | ✅ **FAIT** → [`46`](46_le_temoin_negatif.md), et **refait le 2026-08-28** après la correction d'échelle : le détecteur répond **plus fort** sur la surface sans feuille.
 | **étiquettes permutées** | si la performance ne s'effondre pas, le modèle apprend le **substrat**, pas l'encre |
 | ⭐ **volume désaligné** | décaler le recalage de N pixels et mesurer la dégradation donne **la sensibilité au désalignement**, donc la borne indirecte que §4.1 ne fournit pas |
 | **second annotateur** | la **variance de la vérité terrain**, qui borne toute performance atteignable |
@@ -215,6 +215,6 @@ Deux mesures nommées, toutes deux dans notre domaine et sans vérité terrain r
 - **M7 — quantifier « consistent with »** : construire l'instrument de §4.2, celui que le
   papier nomme et n'outille pas. Interligne, échelle, couverture, épaisseur de trait,
   mesurés dans une région vérifiable puis **transportés** vers une région qui ne l'est pas.
-- **M8 — le témoin jeté** : chercher, dans nos propres corpus, le substrat **connu sans
+- **M8 — le témoin jeté** : chercher, dans nos propres corpus, le substrat **connu sans ✅ **M8 FAIT** → [`46`](46_le_temoin_negatif.md). Notre témoin est meilleur que celui d'EduceLab : α ≈ 1 est une **preuve géométrique**, là où « feuille de support » est une supposition sur un substrat.
   encre** que le pipeline élimine. C'est la forme la plus économique d'un contrôle négatif
   — il est déjà acquis, dans les mêmes conditions.

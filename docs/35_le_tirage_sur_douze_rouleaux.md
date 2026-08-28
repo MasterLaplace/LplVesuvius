@@ -99,7 +99,7 @@ au sens de la règle de ce dépôt, et périmé dès que le treizième rouleau e
 campagne (le maximum de générations observé) plutôt qu'écrit en dur : une constante
 deviendrait fausse en silence le jour où le budget du `seed.json` change.
 
-> **Rien n'est encore établi sur la CAUSE.** C'est noté parce qu'une hypothèse écartée avec
+> **Rien n'est encore établi sur la CAUSE.** C'est noté parce qu'une hypothèse écartée avec ⭐⭐ **LA MESURE A ÉTÉ FAITE** → §3bis du même document : la stabilité **était** une troncature, et l'hypothèse est confirmée.
 > sa raison vaut mieux qu'une hypothèse oubliée, et parce que la mesure qui trancherait est
 > bon marché : relever le plafond de générations et rejouer. C'est désormais un paramètre —
 > `GENERATIONS=400 ./src/campagnes/campagne_tirages.sh data/tirages_plafond 6 <rouleaux>` — et le
@@ -170,7 +170,7 @@ n'est pas reproductible »*, et proposait deux issues : rendre le traceur déter
 | notre juge coûte **0,05 s**, sans vérité terrain | on peut tous les juger |
 | ⭐ **l'aire ne prédit pas le verdict** | on **ne peut pas** faire l'économie du juge |
 
-⚠⚠ **Et le piège de conception reste entier** : prendre le minimum de N tirages avec un juge
+⚠⚠ **Et le piège de conception reste entier** : prendre le minimum de N tirages avec un juge ⚠⚠ **Le protocole a été TESTÉ** → [`37`](37_les_deux_axes_ne_saccordent_pas.md), et le résultat est **négatif** : sélectionner sur un axe ne valide pas sur l'autre.
 bruité fait remonter la **chance** autant que la qualité. Le protocole honnête reste celui
 de `31` §4 — **sélectionner sur un axe, valider sur l'autre** — et cette campagne ne le
 teste pas.
@@ -185,7 +185,7 @@ teste pas.
 - **Six tirages par rouleau ne mesurent pas un taux PAR rouleau.** Le 5,6 % est un taux
   **groupé** ; savoir si un rouleau est plus instable qu'un autre demanderait bien plus de
   tirages, exactement comme `33` le mesure pour la carte de difficulté.
-- ⚠ **Un rouleau du prix manque, et pas pour la raison qu'on croirait.** La campagne
+- ⚠ **Un rouleau du prix manque, et pas pour la raison qu'on croirait.** La campagne ✅ **COMBLÉ le 2026-08-22**, aux deux endroits — cf. les deux ✅ qui suivent.
   couvre 12 des 13 parce que `docs/mesures/table_graines.json` en contenait 12 : **`PHerc1203`
   n'avait jamais eu de graine cherchée**, sur aucune campagne — `src/campagnes/campagne_graines.sh`
   ne le listait pas, alors que `src/outils/carte_separabilite.sh` le liste. Ce n'était donc pas

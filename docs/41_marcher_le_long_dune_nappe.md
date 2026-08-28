@@ -193,7 +193,7 @@ une grille plate est une **coupe radiale**.
 ⭐ Voilà pourquoi `essai_ng2` — le seul essai poussé **avec** une grille de normales — est
 aussi le moins radial des essais mesurés (α = +0,65 contre +0,99 et +1,01).
 
-⚠ **Deux leviers n'ont JAMAIS été essayés dans ce dépôt**, vérifié sur les 17 fichiers
+⚠ **Deux leviers n'ont JAMAIS été essayés dans ce dépôt**, vérifié sur les 17 fichiers ⭐⭐ **LES DEUX LEVIERS ONT ÉTÉ ESSAYÉS** → [`26`](26_le_champ_de_direction.md) §9bis (2026-08-27), en campagne appariée.
 `seed.json` de `data/trace/PHerc0358/essai_*` :
 1. **`sdt_weight`** — le terme de distance à la surface, jamais réglé, donc jamais actif ;
 2. **les fibres horizontales ET verticales ensemble** — `normal` seul, `horizontal` seul et
@@ -269,13 +269,13 @@ la seule chose qui rend la dérive visible avant qu'elle ne coûte.
 
 ## 7. ⚠ Ce que ce lot ne fait pas
 
-- **Il n'a rien tracé.** La marche produit des points de passage ; les donner à
+- **Il n'a rien tracé.** La marche produit des points de passage ; les donner à ✅ **FAIT** → [`42`](42_la_boucle_tourne_et_ne_suffit_pas.md) : la boucle a tourné, appariée et jugée.
   `--resume --rewind-gen --correct` et juger le résultat au test de convergence reste à faire.
 - **Il ne dit pas quelle nappe suivre.** Il suit celle sur laquelle on le pose. Choisir est
   le travail de la graine ([`25`](25_une_graine_choisie_sur_la_planeite.md)), vérifier que la
   trace obtenue suit bien une feuille est celui du test de convergence
   ([`38`](38_ce_qui_bouge_avec_la_fenetre.md)).
-- **Il produit des chemins 1D, pas une surface.** Une nappe est 2D. La suite naturelle n'est
+- **Il produit des chemins 1D, pas une surface.** Une nappe est 2D. La suite naturelle n'est ⭐ **FAIT** → [`42`](42_la_boucle_tourne_et_ne_suffit_pas.md) §3 : `suivre_nappe.py` a gagné le mode `--nappe`, une **échine et ses côtes**.
   *pas* d'empiler des marches parallèles à la main : c'est de laisser le solveur faire la
   grille, en lui donnant assez de points de passage pour qu'il ne parte pas en travers.
 - ⚠ **Il ne résout pas le numéro de spire.** Savoir *sur quel tour* on est est un problème
