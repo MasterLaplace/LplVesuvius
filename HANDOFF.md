@@ -127,6 +127,32 @@ mesurer.
 **Tâches ouvertes : 14 → 8**, dont **5 sont la soumission** (hors périmètre) et **3 sont le
 contrôle typographique en cours de rendu**.
 
+### ⚠⚠⚠ L'audit d'antériorité — 2026-08-29, et il faut le lire avant tout le reste
+
+**14 résultats, 6 déjà publiés, 8 à moitié, 0 nouveau** → [`66`](docs/66_audit_danteriorite.md).
+Six sont réfutés par des fichiers **de notre propre disque** : le miroir du site et le monorepo
+`villa`. ⚠ Ce n'est pas un problème de veille, c'est un problème de **grounding avant
+écriture** — la règle « chercher le concept, pas le nom » n'avait jamais été appliquée à la
+bibliographie.
+
+**Deux choses pires qu'une antériorité, à traiter en premier :**
+
+1. ⚠⚠⚠ **La piste du fold de validation peut être FAUSSE.** Le checkpoint que trois projets
+   nomment est `timesformer_wild15_**20230702185753**_…`, donc fold = `20230702185753`, pas
+   `20231210121321`. Et **on ne peut pas trancher depuis ici** : notre copie HuggingFace a
+   perdu la provenance (`model.safetensors` ne porte que `{'format': 'pt'}`, vérifié).
+   ⭐ Le test qui tranche ne demande aucune métadonnée : **mesurer sur les deux segments**,
+   celui où le modèle score le moins bien est celui qu'il n'a pas vu.
+2. ⚠⚠⚠ **L'axe énergie est contredit**, pas seulement précédé : 116 keV est **dans** l'optimum
+   publié pour 8 µm, et notre 114,8 % tenait au choix d'un témoin de 2023 que le pipeline
+   n'utilise plus.
+
+**À faire, dans cet ordre** : lire le PDF *OverthINKingSegmenter* ; décoder le checkpoint par la
+mesure ; cloner `vesuvius-repro` (TAUIL) ; vérifier Obuchowski 1997 sur les ROC **groupées** ;
+et **citer `vesuvius-automesh`, `windcheck`, `winding-sync`, `tifxyz-doctor`, `winding-ruler`
+comme antériorité dans nos documents** — ils sont sur le disque, une revue les trouvera à notre
+place.
+
 ### ⭐⭐ La convention du sablier a changé — 2026-08-29
 
 **Un ⏳ veut dire OUVERT, point.** Le registre acceptait un état `faite` : un sablier posé sur

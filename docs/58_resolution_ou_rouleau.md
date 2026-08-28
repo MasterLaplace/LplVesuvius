@@ -258,6 +258,23 @@ porte. Le dépôt public les déclare, et l'écart n'est pas du même ordre :
 > manquait était un moyen de l'établir, pas l'idée.
 >
 > Relevé : [`corpus_par_energie.json`](mesures/corpus_par_energie.json).
+>
+> ⚠⚠⚠ **ET LE 2026-08-29, PLUS GRAVE : cet axe est CONTREDIT par une ablation contrôlée
+> publiée** → [`66`](66_audit_danteriorite.md) §3. Le papier de référence du prix
+> (`data/site/scrollprize.org/pdf/main.pdf`, Angelotti et al., Extended Data Fig. 2) publie un
+> balayage 4 × 4 énergie × distance et conclut : « *for a pixel size of about 8 µm the empiric
+> **sweet spot** for the energy is between **100 and 120 keV*** ». Les **116 keV** de
+> `PHerc1447` sont donc **dans** la fenêtre optimale publiée pour sa résolution.
+>
+> ⚠⚠ **Et le 114,8 % tenait au choix du témoin.** Le seul volume de `PHercParis4` portant une
+> prédiction d'encre publiée est à **2,4 µm / 78 keV**, pas 7,91 µm / 54 keV — contre lui,
+> l'écart en énergie tombe à ~48 % et celui en résolution monte à ~260 %, ce qui **inverse le
+> classement des axes**. Ce tableau compare donc `PHerc1447` à un scan de 2023 que le pipeline
+> actuel n'utilise plus.
+>
+> ⭐ La leçon générale : un **écart relatif** large sur un paramètre ne prouve pas qu'il est le
+> facteur limitant. Il faut la **sensibilité**, pas la distance — et la sensibilité mesurée sur
+> l'axe énergie est faible (« *the contrast drop is visible but gentle* »).
 
 | grandeur | témoin qui **marche** | objet qui **échoue** | écart |
 |---|---:|---:|---:|
