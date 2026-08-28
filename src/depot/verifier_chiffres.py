@@ -1533,6 +1533,20 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 continue
             ajoute(f"AUC {frag}, {nom}", dom["auc"], 3, vt.name)
 
+    # ⚠⚠ LE SECOND TEMOIN NEGATIF, produit le 2026-08-28. Son alpha est ce qui en fait un
+    # temoin plutot qu'une surface quelconque : si un rendu futur le deplacait sous le seuil,
+    # tout ce qui s'appuie dessus tomberait, et rien ne le dirait.
+    t2 = _source(racine, "temoin_2.json")
+    if t2.exists():
+        d = json.loads(t2.read_text())
+        serie = (d.get("series") or [{}])[0]
+        if serie.get("alpha") is not None:
+            ajoute("alpha du second temoin", serie["alpha"], 2, t2.name, signe=True)
+            ajoute("marge du second temoin au seuil", serie["marge_au_seuil"], 2, t2.name)
+        for couches, ecart in serie.get("serie", []):
+            ajoute(f"ecart du second temoin a {couches} couches", ecart, 1, t2.name,
+                   unites=("µm",))
+
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():
         d = json.loads(bdf.read_text())

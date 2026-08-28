@@ -1,0 +1,24 @@
+{
+  "series": [
+    {
+      "verdict": "suit la fenêtre",
+      "sens": "le « pic » s'éloigne avec la fenêtre — il n'y a aucune feuille à portée, la surface est posée en travers de l'empilement",
+      "serie": [
+        [
+          41,
+          172.8
+        ],
+        [
+          161,
+          669.6
+        ]
+      ],
+      "croissance": 3.875,
+      "elargissement": 3.926829268292683,
+      "alpha": 0.9902863563818819,
+      "marge_au_seuil": 0.29028635638188194,
+      "fragile": false,
+      "nom": "second témoin, graine tirée par l'outil"
+    }
+  ]
+}

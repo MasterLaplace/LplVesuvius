@@ -224,6 +224,29 @@ où qu'on la regarde.
 grande — et le **groupement** déjà implémenté et déclaré : 5 + 5 = 10 fenêtres suffisent
 largement, et 6 auraient suffi.
 
+> ⭐⭐⭐ **IL EXISTE, produit le 2026-08-28.** Et ce n'était pas « une tâche à part » : la
+> chaîne entière est dans `src/outils/leur_graine.sh`, l'outillage `vc_` est installé, et la
+> seule chose figée dans le fichier était **la graine**. Elle est devenue un paramètre, et
+> `GRAINE=""` bascule `vc_grow_seg_from_seed` en mode `random_seed` — celui-là même que
+> l'équipe d'origine a employé.
+>
+> ⚠⚠ **Laisser l'outil choisir n'est pas de la paresse, c'est ce qui rend le témoin
+> indépendant** : une graine que j'aurais choisie porterait mon idée de « loin d'une
+> feuille », c'est-à-dire exactement la conclusion que le témoin doit établir.
+>
+> | | premier témoin | **second témoin** |
+> |---|---|---|
+> | graine | `[4682, 2740, 13350]`, celle du segment officiel | `[2078, 5227, 5113]`, **tirée par l'outil** |
+> | aire tracée | 3,95 cm² chez eux | **13,89 cm²** |
+> | auto-intersections | — | **0** |
+> | écart à 41 / 161 couches | — | 172,8 → 669,6 µm |
+> | **α** | +1,01 | **+0,99**, marge 0,29 au-dessus du seuil |
+>
+> ⚠ Ses couches font **4321 × 4341**, contre 5641 × 5721 pour le premier : il porte 2 × 2
+> fenêtres au réglage calibré là où le premier en porte 3 × 3. C'est le **groupement** qui
+> rend le test possible, pas la taille de l'un des deux.
+> Relevé : [`temoin_2.json`](mesures/temoin_2.json).
+
 ⚠⚠ **Et il n'y en a pas localement.** `data/leur_graine/` ne contient que `rendu_41`
 (5641 × 5721, celui-ci), `rendu_161` et `plat` (284 × 288). Produire ou récupérer une seconde
 trace est donc une tâche à part, pas une relance.
