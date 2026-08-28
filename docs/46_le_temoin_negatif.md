@@ -162,6 +162,52 @@ est-il périodique*, contre son propre mélange, au réglage calibré et sans ri
 | il en rend **autant que nos cartes** (~2/3) | la périodicité **n'est pas** une signature d'encre : elle apparaît là où la géométrie interdit une feuille, et le résultat de `60` doit être relu comme tel |
 | entre les deux | on rapporte le taux et on ne conclut pas ; c'est un troisième chiffre, pas un demi-verdict |
 
+## 3 ter. ⚠⚠⚠ L'expérience a été faite, et elle a manqué d'UNE fenêtre
+
+Rendue le 2026-08-28 (`src/campagnes/campagne_temoin_typographique.sh`) : 5128 × 5128, pas 21,
+36 471 fenêtres rendues sur 58 564 (38 % vides sautées), 52 minutes.
+
+| sujet | fenêtres | périodiques | période | contre son mélange | p |
+|---|---:|---:|---:|---:|---:|
+| nos quatre cartes `PHerc1447` | 12 | **8** (67 %) | 30 à 48 px | 0/12 | **0,0007** |
+| **témoin négatif**, sans feuille | 5 | **1** (20 %) | 20 px | 0/5 | **0,5000** |
+
+⭐ Le témoin passe le même test, avec le même contrôle, au même réglage — et **il ne le
+franchit pas**. Sa période, 20 px, tombe d'ailleurs hors de la plage de nos cartes.
+
+### ⚠⚠⚠ Mais l'expérience ne pouvait PAS trancher, et c'est un défaut de dimensionnement
+
+Le protocole déclaré prévoyait trois issues et le résultat tombe dans la troisième — *entre
+les deux, on rapporte le taux et on ne conclut pas*. Il faut aller plus loin que ça, parce
+qu'il y a une raison **calculable** de ne pas conclure :
+
+| fenêtres du sujet | p qu'un sujet à **67 %** rendrait |
+|---:|---:|
+| 4 | 0,0714 |
+| **5** *(ce que le témoin a rendu)* | **0,0833** |
+| **6** *(ce qu'il fallait)* | **0,0303** |
+| 7 | 0,0105 |
+
+⚠⚠ **À cinq fenêtres, un témoin se comportant EXACTEMENT comme nos cartes ne serait pas
+significatif non plus.** Sa non-significativité n'établit donc pas qu'il diffère d'elles :
+le test n'avait pas la puissance de faire la différence entre « comme nos cartes » et « pas
+périodique ». Il a manqué d'**une seule fenêtre**.
+
+⚠ L'erreur est à moi, et elle est la deuxième sur le même dimensionnement. J'ai calculé
+5128 px pour porter **huit fenêtres candidates** — et
+`src/encre/fenetres_par_region.py` avertit dans sa propre docstring que le masque de papyrus
+n'en retient qu'une part, donc que le compte « borne par le haut ». Il en a retenu **5 sur 9**.
+J'ai écrit l'avertissement puis dimensionné sans le suivre. La fonction
+`fenetres_pour_discriminer` répond désormais à la question qu'il fallait poser **avant** de
+rendre, et elle est dans la batterie.
+
+### ⭐ Ce qui reste à faire, et c'est cheap
+
+Agrandir la région ne sert à rien : les couches font 5641 × 5721, et à 5641 le compte de
+candidates reste **9**. Ce qu'il faut est un **second** témoin — une autre région dense, ou
+une autre trace à α ≈ +1 — et le **groupement** déjà implémenté et déclaré : 5 + 5 = 10
+fenêtres suffisent largement.
+
 ⚠ Tant que cette mesure n'est pas faite, le p = 0,0007 de `60` reste ce qu'il dit —
 *structuré là où son propre mélange ne l'est pas* — et rien de plus.
 

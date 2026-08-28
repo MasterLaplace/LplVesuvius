@@ -288,9 +288,13 @@ propre mélange ne l'est pas.
    volume — poserait la question dure : *nos cartes sont-elles périodiques là où une surface
    sans feuille ne l'est pas ?* Mesuré le 2026-08-28 : **on ne peut pas encore la poser**,
    les deux témoins de 1100 × 1100 ne rendant qu'une fenêtre chacun au réglage calibré.
-   L'expérience requise est nommée dans [`46`](46_le_temoin_negatif.md) §3 bis — un témoin
-   négatif d'au moins ~5200 × 5200 pixels de carte (et non 2100, cf. la correction sur
-   place). Tant qu'elle n'est pas faite, `p = 0,0007`
+   **L'expérience a été faite le 2026-08-28** ([`46`](46_le_temoin_negatif.md) §3 ter) : le
+   témoin négatif rend **1 fenêtre périodique sur 5** (20 %) contre nos **8 sur 12** (67 %),
+   et son propre test donne **p = 0,50** — il ne franchit pas la barre que nos cartes
+   franchissent. ⚠⚠ Mais **il ne pouvait pas la franchir** : à cinq fenêtres, un sujet au
+   taux exact de nos cartes rendrait p = 0,083. Le test manquait d'**une** fenêtre pour
+   discriminer, donc cette mesure **n'établit rien**, ni pour ni contre. Il faut un second
+   témoin et le groupement. Tant qu'elle n'est pas faite, `p = 0,0007`
    dit ce qu'il dit et rien de plus.
 
 ⓘ **La table groupée est identique à celle du témoin** — `[8, 4, 0, 12]` des deux côtés. C'est

@@ -52,6 +52,43 @@ def cote_minimal(fenetres_voulues: int, reduction: int = REDUCTION,
     return cote
 
 
+def fisher_unilateral(a: int, b: int, c: int, d: int) -> float:
+    """Fisher unilatéral sur un tableau 2×2, dans la direction déclarée.
+
+    ⚠ Recopié de `typographie.fisher_periodicite` sans son refus sous huit fenêtres : ici on
+    veut justement savoir ce que le test rendrait AVANT d'avoir les fenêtres, donc la borne
+    de puissance ne doit pas court-circuiter le calcul. Une batterie vérifie que les deux
+    s'accordent là où les deux répondent.
+    """
+    from math import comb
+    n, lignes, colonnes = a + b + c + d, a + b, a + c
+    total = comb(n, colonnes)
+    if total == 0:
+        return 1.0
+    return sum(comb(lignes, k) * comb(n - lignes, colonnes - k) / total
+               for k in range(a, min(lignes, colonnes) + 1))
+
+
+def fenetres_pour_discriminer(part: float, seuil: float = 0.05,
+                              plafond: int = 64) -> int:
+    """Combien de fenêtres il faut pour qu'un sujet à `part` périodique soit significatif.
+
+    ⚠⚠ C'est la question qu'on doit poser AVANT de rendre, et que je n'ai pas posée. Le
+    témoin négatif du 2026-08-28 a rendu **5** fenêtres ; il en fallait **6** pour que le
+    test puisse seulement tirer sur un sujet au taux de nos propres cartes. L'expérience a
+    donc manqué d'UNE fenêtre, et sa non-significativité n'établit rien.
+
+    ⚠ Le contrôle du mélange est supposé rendre zéro périodique, ce qu'il a fait sur les six
+    cartes mesurées à ce jour. Si un jour il n'en rendait plus zéro, ce calcul serait
+    optimiste et il faudrait le refaire avec le taux observé.
+    """
+    for k in range(2, plafond + 1):
+        a = round(part * k)
+        if fisher_unilateral(a, k - a, 0, k) < seuil:
+            return k
+    return 0
+
+
 def verifier() -> int:
     """Auto-test HORS LIGNE : la formule contre un compte réellement mesuré."""
     echecs = controles = 0
@@ -87,6 +124,27 @@ def verifier() -> int:
       fenetres_candidates(8 * 100) == 0)
     v("le seuil croit avec le nombre de fenetres voulues",
       cote_minimal(16) > cote_minimal(8) > cote_minimal(1))
+
+    # --- LA PUISSANCE, la question qu'il fallait poser AVANT de rendre -----------------
+    # ⭐ Les deux valeurs mesurees le 2026-08-28, qui donnent son sens au reste.
+    v("nos quatre cartes, 8 sur 12 contre 0 sur 12, sont significatives",
+      abs(fisher_unilateral(8, 4, 0, 12) - 0.000673) < 1e-5)
+    v("le temoin negatif, 1 sur 5 contre 0 sur 5, ne l'est pas",
+      abs(fisher_unilateral(1, 4, 0, 5) - 0.5) < 1e-9)
+    # ⚠⚠⚠ ET LE FAIT QUI DESARME LA CONCLUSION : a cinq fenetres, un temoin se comportant
+    # EXACTEMENT comme nos cartes ne serait pas significatif non plus.
+    v("a 5 fenetres, un sujet au taux de nos cartes rend p > 0,05",
+      fisher_unilateral(3, 2, 0, 5) > 0.05)
+    v("... et il en fallait SIX", fenetres_pour_discriminer(0.67) == 6)
+    v("le temoin en a rendu cinq, donc une de moins qu'il n'en fallait",
+      fenetres_pour_discriminer(0.67) == 6 and 5 < 6)
+    # ⚠ Un sujet plus tranche demande moins de fenetres ; un sujet plus tiede en demande plus.
+    v("un sujet a 100% demande moins de fenetres qu'un sujet a 67%",
+      fenetres_pour_discriminer(1.0) <= fenetres_pour_discriminer(0.67))
+    v("un sujet a 30% en demande davantage",
+      fenetres_pour_discriminer(0.30) > fenetres_pour_discriminer(0.67))
+    v("un sujet a 0% n'est jamais significatif dans cette direction",
+      fenetres_pour_discriminer(0.0) == 0)
 
     print(f"\n{'ALL PASS' if not echecs else 'ECHEC'} "
           f"({echecs} failures, {controles} checks)")
