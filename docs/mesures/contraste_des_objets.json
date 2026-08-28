@@ -1,0 +1,37 @@
+{
+  "temoin": {
+    "pile": "data/layers/20230909121925",
+    "couches_lues": 8,
+    "couches_totales": 26,
+    "dtype": "uint16",
+    "cote": 1024,
+    "part_papyrus": 1.0,
+    "n": 8388608,
+    "sigma": 0.16762271523475647,
+    "interquartile": 0.2742351293563843,
+    "p95_moins_p50": 0.22642862796783447,
+    "mediane": 0.5573052763938904,
+    "p05": 0.26050201058387756,
+    "p95": 0.7837339043617249
+  },
+  "echoue": {
+    "pile": "data/couches/PHerc1447_complet",
+    "couches_lues": 8,
+    "couches_totales": 31,
+    "dtype": "uint8",
+    "cote": 1024,
+    "part_papyrus": 0.8819864988327026,
+    "n": 7398639,
+    "sigma": 0.13489031791687012,
+    "interquartile": 0.2235293984413147,
+    "p95_moins_p50": 0.17647060751914978,
+    "mediane": 0.38823530077934265,
+    "p05": 0.15294118225574493,
+    "p95": 0.5647059082984924
+  },
+  "rapports_temoin_sur_echoue": {
+    "sigma": 1.243,
+    "interquartile": 1.227,
+    "p95_moins_p50": 1.283
+  }
+}

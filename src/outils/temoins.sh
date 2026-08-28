@@ -1091,6 +1091,7 @@ run "coût d'une fenêtre"       uv run python "$ROOT/src/encre/cout_de_la_fenet
 run "A/B de deux segments"     uv run python "$ROOT/src/encre/ab_segments.py" --verifier
 run "fenêtres par région"      uv run python "$ROOT/src/encre/fenetres_par_region.py" --verifier
 run "les deux objets de M1ter" uv run python "$ROOT/src/encre/deux_objets.py" --verifier
+run "contraste des deux objets" uv run python "$ROOT/src/encre/contraste_des_objets.py" --verifier
 run "allure d'un rendu"        uv run python "$ROOT/src/encre/allure_du_rendu.py" --verifier
 run "figure hypothèse réfutée" uv run python "$ROOT/src/figures/figure_hypothese_refutee.py" --verifier
 

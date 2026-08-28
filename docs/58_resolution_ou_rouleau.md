@@ -224,6 +224,57 @@ d'atténuation différemment selon le matériau, donc le contraste encre/papyrus
 émulable honnêtement est donc le **contraste mesuré**, pas « l'énergie » — et il faut le dire
 ainsi, sinon on croirait avoir simulé un faisceau.
 
+## 8 ter. ⭐⭐⭐ Ce que l'écart d'énergie fait au SIGNAL : 24 %, et ça referme la branche
+
+Mesuré le 2026-08-28, dans la foulée du §8 bis. Chiffrer l'écart des campagnes ne dit rien
+tant qu'on ne sait pas ce qu'il fait à ce que le modèle **reçoit**. Contraste dans le
+papyrus, chaque pile normalisée par le plafond de **son** type — la règle de
+[`60`](60_la_constante_qui_rendait_le_modele_muet.md), sans laquelle on comparerait deux
+formats :
+
+| | type | papyrus | σ | interquartile | p95 − p50 |
+|---|---|---:|---:|---:|---:|
+| témoin, **54 keV** | `uint16` | 100 % | 0,1676 | 0,2742 | 0,2264 |
+| objet, **116 keV** | `uint8` | 88 % | 0,1349 | 0,2235 | 0,1765 |
+| **rapport** | | | **1,243** | **1,227** | **1,283** |
+
+⭐ Les trois mesures s'accordent : **115 % d'écart d'énergie ne produit que 24 % d'écart de
+contraste**. C'est la même forme d'argument que le §7 employait pour la résolution, et elle
+conclut dans le même sens.
+
+### ⭐⭐⭐ Et la coïncidence qui referme la branche
+
+| | rapport |
+|---|---:|
+| **contraste reçu** par le modèle (mesuré ici) | **1,243** |
+| **σ rendu** par le modèle (0,7712 / 0,6558, cf. `60`) | **1,176** |
+| écart entre les deux | **5,4 %** |
+
+⚠⚠ **La réponse du modèle suit le contraste qu'il reçoit, presque un pour un.** Il n'y a donc
+pas de résidu à expliquer sur cet axe : le 1,2× de sortie que `60` mesure est *exactement* ce
+qu'on attend d'un objet dont le contraste d'entrée est 1,24 fois plus faible. La campagne de
+scan est chiffrée, son effet sur le signal est chiffré, et les deux se referment l'un sur
+l'autre.
+
+### ⚠ Ce que ça ne dit pas, et ce qu'il faut avoir en tête
+
+1. C'est le contraste de **tout le papyrus**, pas celui de l'**encre** — on ne sait pas où
+   elle est sur `PHerc1447`, c'est la question même. Un contraste global effondré rendrait un
+   contraste d'encre effondré probable ; l'inverse ne suit pas.
+2. **Il n'y a plus de facteur 45 à expliquer.** `60` l'a annulé, et ce document l'écrit dans
+   sa propre table de conséquences. Ce §8 ter ne comble donc pas un trou béant : il ferme
+   proprement une branche qui aurait pu rester ouverte par inertie, et il le fait par une
+   mesure au lieu d'un argument.
+3. Les deux piles ne viennent pas du même endroit — un rendu `tifxyz` `uint16` d'un côté, le
+   volume de surface **publié** en `uint8` de l'autre. ⚠ Vérifié à la source : le `.zarray`
+   du dépôt déclare `|u1`, donc les huit bits sont ceux de la campagne et **non de notre
+   pont**, qui écrit les couches telles quelles. C'est une différence entre les deux objets,
+   pas un artefact de notre chaîne.
+
+Instrument : [`src/encre/contraste_des_objets.py`](../src/encre/contraste_des_objets.py)
+(15 contrôles), mesure :
+[`docs/mesures/contraste_des_objets.json`](mesures/contraste_des_objets.json).
+
 ## 9. ⭐ Deux contrôles de reproductibilité, gratuits et exacts
 
 Les trois campagnes se recouvrent par construction, et les recouvrements doivent coïncider
