@@ -11,6 +11,19 @@ machine et où l'auteur a demandé, à juste titre, si quelque chose tournait en
 qui se transporte d'une machine à l'autre, là où « 94 ms par fenêtre » ne vaut que pour le
 nombre de cœurs du jour.
 
+⚠⚠⚠ **RÉSERVE AJOUTÉE LE 2026-08-28, et elle porte sur toutes les lignes ci-dessous.** Chaque
+observation est un **CUMUL** : fenêtres totales divisées par durée totale. Or
+`src/encre/allure_du_rendu.py` a mesuré qu'un rendu de trois heures a varié d'un facteur **43
+sur lui-même** (0,267 / 1,200 / 11,429 fenêtre par seconde), et que deux rendus déclarés « l'un
+libre, l'autre partagé » atteignent en fait **le même pic**. Un cumul pris sur un intervalle où
+les conditions changent n'est la vitesse de rien.
+
+La colonne « machine partagée » de ce fichier est donc la bonne distinction posée de la
+mauvaise façon : elle est **binaire** là où la contention est continue. Ce qui reste utilisable
+ici, c'est l'ordre de grandeur d'un rendu et le fait qu'une campagne à la fois finit plus tôt ;
+ce qui ne l'est pas, c'est de comparer deux lignes entre elles pour en tirer une propriété d'un
+segment. Détail et mesure : `62` §7.
+
 ⚠⚠ Et la mesure a un second usage, moins attendu : elle chiffre la **contention**. Deux
 rendus lancés ensemble sur vingt-deux cœurs ont demandé trente-deux fils, et le débit par
 fil-seconde a été divisé par cinq. Deux rendus simultanés finissent plus tard que les mêmes
