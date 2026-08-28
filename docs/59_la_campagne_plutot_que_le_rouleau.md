@@ -149,9 +149,33 @@ Ce qui survit, et qui n'est pas rien :
    ou à part.
 
 ⚠ Et un test resterait valable si on obtenait la donnée : un second scan de `PHerc1447`, fin
-et à courte propagation, ou le scan de repérage seul d'un rouleau qu'on sait lire. ⏳ Il
+et à courte propagation, ou le scan de repérage seul d'un rouleau qu'on sait lire. ~~⏳ Il
 faudrait de toute façon séparer les trois grandeurs de la campagne — pas, distance, énergie —
-qu'aucun rouleau du corpus ne fait varier indépendamment.
+qu'aucun rouleau du corpus ne fait varier indépendamment.~~
+
+> ⭐⭐⭐ **LA DERNIÈRE PHRASE EST FAUSSE, mesuré le 2026-08-28.** « Aucun rouleau du corpus »
+> était vrai des rouleaux et **faux du corpus** : les six **fragments** du layout
+> `fragments/` — celui-là même que le relevé de ce document n'interroge pas — font varier les
+> grandeurs **indépendamment**, et il y en a neuf paires.
+>
+> | | volumes | ce que la paire isole |
+> |---|---|---|
+> | `Frag1` à `Frag4` | 54 et 88 keV, **tous deux à 3,24 µm** | **l'énergie**, résolution tenue |
+> | `Frag5` | 70 keV, **3,24 et 7,91 µm** | la résolution, énergie tenue |
+> | `Frag6` | 53, 70, 88 keV à 3,24 µm **+** 53 keV à 7,91 µm | **trois** paires d'énergie, une de résolution |
+>
+> **7 paires isolent l'énergie, 2 la résolution**, et ces fragments portent en prime une
+> **vérité terrain d'encre** publiée. Le test que cette phrase déclarait hors de portée est
+> donc à portée, et il ne demande aucune donnée nouvelle du côté de l'acquisition — seulement
+> de télécharger ce qui est déjà en ligne. Détail :
+> [`58`](58_resolution_ou_rouleau.md) §8 quater, relevé
+> [`docs/mesures/paires_denergie.json`](mesures/paires_denergie.json).
+>
+> ⚠ C'est le **deuxième** effet de l'angle mort de `campagnes_de_scan.py` sur ce document : le
+> premier lui faisait argumenter depuis une liste sans le volume qui marche (§1), le second
+> lui faisait déclarer impossible un test que l'autre layout rend possible. Une mesure qui ne
+> voit qu'une moitié du dépôt produit des conclusions justes **sur cette moitié**, et il faut
+> le dire à chaque fois qu'on s'en sert.
 
 ## Reproduire
 
