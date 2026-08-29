@@ -1200,6 +1200,10 @@ run "chiffres sans record"     uv run python "$ROOT/src/depot/chiffres_sans_reco
 # different. Les trois controles porteurs, chacun sonde en le cassant : le hachage PARTIEL ne
 # conclut jamais seul (deux rendus partagent leur en-tete), deux noms d un meme inode ne sont
 # pas un doublon, et une taille unique n est jamais lue.
+# ⚠⚠ Le garde-fou contre le RADOTAGE : une idee deja ecrite ailleurs, sans se citer. Ses deux
+# sondes utiles sont les exemptions -- une ligne qui pointe ailleurs, et une commande republiee
+# dans le carnet -- sans lesquelles l'alerte designait 172 paires de bruit.
+run "deja dit"                uv run python "$ROOT/src/depot/deja_dit.py" --verifier
 run "contenu en double"        uv run --project "$ROOT" python "$ROOT/src/depot/contenu_en_double.py" --verifier
 # ⚠⚠ La CLE du cache par contenu. Ses controles porteurs, chacun sonde en le cassant : la
 # date de modification n entre PAS dans la cle (recopier une surface la changerait sans

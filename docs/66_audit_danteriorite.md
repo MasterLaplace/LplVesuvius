@@ -113,10 +113,34 @@ Une absence de trouvaille n'est pas une preuve de nouveauté, et cinq angles mor
 ⚠⚠ Sur quatre de nos sept fragments résistants, l'antériorité **hors domaine** est probable à
 très probable.
 
-## 6. ⭐ Ce qui reste défendable, et comment le formuler
+## 6. ⚠⚠⚠ Ce que l'audit a « conclu » était DÉJÀ la thèse de l'article
+
+**Correction du 2026-08-29, sur une remarque de l'auteur** : *« ton truc du "on a rien découvert,
+on a juste fait des outils de mesure", ça fait déjà plusieurs fois que tu me le dis. »* Vérifié,
+et c'est exact. `docs/article/article.typ` l'écrit depuis longtemps, en toutes lettres :
+
+> *« This paper is about the **judging** step. »*
+> *« It does not propose a better segmentation algorithm, and it does not read any text.
+> **It measures.** »*
+
+Et il revendique déjà le témoin négatif comme *« **the control the foundational paper lacks** »*
+— en **citant** `@angelotti2026complete`, c'est-à-dire le papier même que l'audit a exhumé.
+
+⭐ Donc la « conclusion » de l'audit n'est pas une conclusion : c'est le **résumé de l'article**,
+redécouvert par quinze agents. Ce qui change vraiment après l'audit est plus étroit et plus
+utile : ce n'est pas le cadrage qui manquait, ce sont **six résultats qu'il faut retirer ou
+refonder**, et **cinq dépôts à citer**.
+
+⚠⚠ Et la leçon dépasse cet audit. Trois fois dans la même session j'ai présenté ce cadrage comme
+une trouvaille. Rien dans ce dépôt ne détecte qu'un raisonnement a déjà été écrit : les chiffres
+sont gardés (`verifier_chiffres`, 333), les tâches aussi (`taches_ouvertes`), **les idées ne le
+sont pas**. C'est le même trou que l'antériorité externe, tourné vers l'intérieur.
+
+## 6 bis. ⭐ Comment formuler, alors
 
 Pas « nous avons découvert que X », mais **« nous avons rendu mesurable et rejouable une limite
-que le prix énonce en prose »**. Le domaine écrit, en 2026, qu'il ne sait toujours pas
+que le prix énonce en prose »** — formulation **déjà retenue** par l'article, à ne pas
+re-annoncer. Le domaine écrit, en 2026, qu'il ne sait toujours pas
 distinguer *no ink* de *no ink recovered yet*, et qu'il lui manque « stronger diagnostics » et
 « scan-quality metrics ».
 
@@ -124,10 +148,21 @@ L'apport réel est un **harnais** : tuiles étiquetées, contrôle par mélange,
 géométriquement prouvé, panel d'indicateurs sans étiquettes, correction de multiplicité,
 dimensionnement **préalable**. Le harnais vaut plus que les verdicts qu'il rend aujourd'hui.
 
-⚠⚠ Et une chose à faire avant tout le reste, qui n'est pas une question d'antériorité :
-**citer `vesuvius-automesh`, `windcheck`, `winding-sync`, `tifxyz-doctor` et `winding-ruler`
-comme antériorité dans nos propres documents.** Ils sont sur le disque. Une revue les trouvera
-à notre place, et il vaut infiniment mieux les avoir nommés soi-même.
+⚠⚠⚠ **ET LA RECOMMANDATION PHARE DE L'AUDIT ÉTAIT DÉJÀ FAITE.** Il conseillait de « citer
+`vesuvius-automesh`, `windcheck`, `winding-sync`, `tifxyz-doctor` et `winding-ruler` comme
+antériorité ». Vérifié le jour même : **les cinq sont cités**, et
+[`00`](00_etat_de_lart.md) est un état de l'art entier bâti dessus. `windcheck` seul apparaît
+dans **vingt documents**.
+
+⚠ C'est un défaut de **ma conception du workflow**, pas des agents : je leur ai demandé de
+chercher l'antériorité **dehors**, sans jamais leur demander de vérifier si nous l'avions déjà
+citée **dedans**. Un audit qui recommande ce qui est fait use la confiance qu'on lui accorde.
+
+⭐ Troisième occurrence du même motif dans la même session — le cadrage « instrument », les
+cinq dépôts, et la piste du fold. Le remède est écrit et outillé :
+[`src/depot/deja_dit.py`](../src/depot/deja_dit.py), qui compare les documents entre eux et
+signale ce qui est redit sans se citer (**164 paires** au premier passage, dont
+`00_etat_de_lart.md` et `01_goulot_deroulage.md` qui portent le **même** état de l'art).
 
 ---
 
