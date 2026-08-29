@@ -201,10 +201,22 @@ and 11.8 % of one revolution.
 
 == Segmentation and its tools
 
-The reference tool of the public pipeline grows a surface from a *seed* point. Given a
+The reference tool of the public pipeline @villa grows a surface from a *seed* point. Given a
 seed and a parameter file, it expands a quad mesh outward, generation by generation,
 stopping when it can no longer grow or when a *generation budget* is exhausted. The
 budget matters a great deal, and #link(<sec:ceiling>)[Section 5.2] is about that.
+
+Other tools attack the same step differently: `ThaumatoAnakalyptor` @thaumato segments
+automatically from instance predictions rather than from a seed, `khartes` @khartes lets a
+human annotate a surface interactively, and `tifxyz-surgeon` @tifxyzsurgeon repairs an
+existing surface for self-consistency --- while stating plainly what that cannot settle:
+"nothing here reads the volume [...] whether the surface is on papyrus at all is a different
+question". That different question is the one #link(<sec:conv>)[Section 3] answers.
+
+The published corpus itself is scriptable: `vesuvius-catalog` @vesuviuscatalog exposes the
+bucket's own `metadata.min.json` --- 45 samples, their scans, their energies and voxel sizes,
+and which of them carry segments or ink outputs --- which is the index we use in
+#link(<sec:triage>)[Section 4] to choose what to measure.
 
 The tool also offers a *neighbour* mode that projects an existing surface along its own
 vertex normals to the next sheet, and a *resume* mode that lets an existing surface keep
@@ -226,8 +238,66 @@ Three kinds of signal are in use, and each has a documented limit.
   cost quoted above. It is the only signal that currently catches a wrong-sheet error, and
   it does not scale.
 
-What is missing is a signal that is *automatic* and *semantic* --- one that answers "is
-this surface on a sheet?" rather than "is this surface a valid mesh?".
+== The community toolchain <sec:community>
+
+Alongside the published papers, an independent toolchain has grown around the challenge, and
+it carries quality signals that the three categories above do not cover. We read the following
+at pinned commits from local clones; where we attribute a claim, it is in their code or their
+own documentation, not inferred.
+
+/ Render-quality gates: `vesuvius-automesh` @automesh scores a rendered patch before ink is
+  attempted --- band contrast, sub-voxel re-centering statistics, merge fraction --- and its
+  thresholds are *calibrated against a control*, with the calibration log kept in the source.
+  It reports a found-fraction of 0.97--1.00 on true pages against 0.36--0.54 on traces lying
+  across the stack, which is the same separation our #link(<sec:conv>)[convergence test]
+  targets, obtained differently.
+
+/ Winding structure across a corpus: `winding-ruler` @windingruler publishes a winding-pitch
+  atlas over 36 scrolls, and states the principle we also rely on --- "it is the variance, not
+  the mean, that decides usability". `winding-sync` @windingsync validates relative winding
+  structure while declaring absolute counts unvalidated.
+
+/ Patch-level auditing with clustered uncertainty: `tifxyz-doctor` @tifxyzdoctor bootstraps
+  *by cluster* rather than by patch, on the stated ground that "patches are not independent
+  draws". `windcheck` @windcheck sweeps its own detector's parameters and reports a curve
+  rather than a single number, "because a single number from the easiest setting would
+  overstate it".
+
+/ Testing the tests: `spiralcheck` @spiralcheck mutates a checker to verify it can fail ---
+  "this is the test of the tests" --- and names the failure mode we also guard against,
+  "comparing a tool to itself is a check that cannot fail".
+
+/ Support in the volume: `herculaneum-scroll-tools` @scrolltools streams the masked CT
+  alongside a surface prediction and finds that roughly 70 % of positive voxels in the
+  published predictions are phantoms, sitting where the CT reads exactly zero.
+
+#caveat[
+  *Two of these tools measure what we measure.* We record it here rather than in a footnote.
+  `winding-ruler` @windingruler had already published a winding-pitch atlas covering the
+  scrolls we surveyed, and had already found that reading it at pyramid level 2 merges
+  adjacent sheets --- an overestimate of 10.3 % on 36 of 36 scrolls. And the official monorepo
+  @villa measures line spacing on ink maps by sliding windows at the same width we chose. A
+  prior-art audit of our own instruments (2026-08-29) found 22 of 98 already present in this
+  toolchain. The failure was one of vocabulary: none of these carries our names for these
+  quantities.
+]
+
+What is nonetheless missing across this toolchain, and what this paper adds, is narrower than
+"an automatic semantic signal" and can be stated exactly:
+
++ *A verdict that needs no threshold on a physical quantity.* Every signal above compares a
+  measurement to a calibrated cut-off. #link(<sec:conv>)[Section 3] compares a measurement to
+  *itself* under a change of a rendering parameter, so it transports between instruments and
+  scales.
+
++ *Uncertainty on the verdicts themselves.* Across the toolchain we read --- and across
+  `ink-id`, `villa` and the Grand Prize model @gpwinner --- there is no permutation test, no
+  power analysis, and no confidence interval on an ink-detection score. Numbers are published
+  as point estimates. #link(<sec:disc>)[Section 6] shows what that costs on a quantity whose
+  tile-to-tile standard deviation is 0.22.
+
++ *A judge with a control condition.* The published judging protocol is human and shows no
+  blank image, so a judge's fabrication rate is never measured.
 
 = A convergence test for a traced surface <sec:conv>
 
