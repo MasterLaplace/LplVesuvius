@@ -127,7 +127,38 @@ mesurer.
 **Tâches ouvertes : 14 → 8**, dont **5 sont la soumission** (hors périmètre) et **3 sont le
 contrôle typographique en cours de rendu**.
 
-### ⚠⚠⚠ L'audit d'antériorité — 2026-08-29, et il faut le lire avant tout le reste
+### ⚠⚠⚠ Les DEUX audits du 2026-08-29 — à lire avant tout le reste
+
+**Antériorité des RÉSULTATS** → [`66`](docs/66_audit_danteriorite.md) : 14 résultats,
+**6 déjà publiés, 8 à moitié, 0 nouveau**.
+**Antériorité des OUTILS** → [`67`](docs/67_audit_des_outils.md) : 98 instruments,
+**22 existaient déjà, 50 partiellement, 27 sans équivalent**, et **23 verdicts de temps
+réellement perdu** — de l'ordre de la semaine.
+
+⚠⚠ **Le mode de défaillance est le même dans les deux, et il est nommable** : un échec de
+**vocabulaire**. Aucun équivalent ne porte notre nom — « écart entre spires » s'appelle
+*winding pitch*, « planéité » *linearity*, « champ de correction » *subvoxel re-centering*.
+Un grep sur nos concepts français ne rend rien, un grep sur leurs noms anglais rend tout. Et
+les dépôts étaient **déjà clonés sur ce disque** avant que la plupart de nos scripts soient
+écrits : le coût n'était pas de les chercher, il était de **les ouvrir**.
+
+⭐ **Ce qui n'a aucun équivalent, et qui situe l'apport** : la **statistique** (zéro
+`binomtest`, zéro permutation, zéro analyse de puissance dans les 35 dépôts), le **juge
+automatique en aveugle** (aucun appel à une API de modèle, et le protocole publié n'a pas de
+condition de contrôle), le **test de convergence**, l'**étage polaire**, et douze outils
+d'hygiène de dépôt.
+
+⚠⚠⚠ **Trois choses plus graves que la comptabilité, actionnables tout de suite :**
+1. `winding-ruler/atlas/build_atlas_v2.py` **contredit** `pyramid.py` — le niveau 2 fusionne
+   les feuilles voisines (pas surestimé de **10,3 %**, 36/36) — et `espacement_spires.py`
+   tourne **encore au niveau 2**, donc le biais se propage dans `ecart_de_maillages`.
+2. `sensibilite_centre.py` existe à cause d'une **prémisse fausse** : l'ombilic **est** publié,
+   sur `dl.ash2txt.org` — on avait vérifié sur le bucket S3 seulement.
+3. La **posture méthodologique n'est pas distinctive** : trois dépôts concurrents écrivent nos
+   propres règles dans nos propres mots (« *a number TRUE OF A SUBSET, narrated as true of the
+   whole* », « *comparing a tool to itself is a check that cannot fail* »).
+
+### ⚠⚠ Le détail de l'audit d'antériorité des résultats
 
 **14 résultats, 6 déjà publiés, 8 à moitié, 0 nouveau** → [`66`](docs/66_audit_danteriorite.md).
 Six sont réfutés par des fichiers **de notre propre disque** : le miroir du site et le monorepo
