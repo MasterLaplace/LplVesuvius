@@ -1254,6 +1254,42 @@ repair cannot be measured, but because the scrolls where it could be read are no
 that have been traced. Naming that before running the experiment is cheaper than discovering
 it after.
 
+== Where a measurement like this plugs in <sec:plug>
+
+A quality signal is only useful if something consumes it. The pipeline that produced the
+complete unwrapping @angelotti2026complete consumes exactly one, and it is painted by hand.
+
+Its published code#footnote[`github.com/ScrollPrize/villa`, commit
+`e583fb67468f483fadd73d52e06f0ab0fe5ba813`, cited as the reproduction commit of
+@angelotti2026complete.] carries a tool named `ApprovalMaskBrushTool`: a brush, with
+`Approve` and `Unapprove` modes, strokes and an undo stack. It is how an annotator marks
+the regions the paper describes as "judged geometrically consistent with a single sheet",
+and it is where the reported cost is spent --- roughly 25 hours per wrap, about 775 hours
+for one scroll.
+
+Two things follow. The first is that the predicate is *the same one $alpha$ estimates*: a
+region is approved when a human believes the surface there follows one sheet, which is the
+question a convergence test answers by changing the render depth and reading the response.
+The manual gesture and the measurement are not adjacent, they are the same judgement made
+two ways.
+
+The second is that the interface is a file. A surface is stored as a `tifxyz` directory
+holding `x.tif`, `y.tif` and `z.tif`; the loader adopts *any* other `.tif` in that
+directory as a named channel, and the channel called `approval` is what gates the
+subsequent mesh re-optimisation.#footnote[`core/src/QuadSurface.cpp` (channel discovery)
+and `core/src/GrowPatch.cpp` (`make_approved_mask`), at the commit above.] Writing
+`approval.tif` beside the coordinates is the whole of the integration --- no fork, no
+patched call site.
+
+#caveat[
+  *We have not done this, and the gap is worth stating precisely.* We have not rendered an
+  approval mask from $alpha$, and we have not compared one to a human-painted mask, because
+  we have found none published. What the paragraph above establishes is that the output has
+  a named destination and that the destination costs nothing to reach; whether a computed
+  mask is *good enough to replace a brush* is an open question, and the honest first step is
+  to obtain one human mask to score against.
+]
+
 == What a good measurement looked like here
 
 Three properties recur in the instruments above and are worth naming.
@@ -1342,7 +1378,10 @@ ceiling of the same kind, and that the published segmentation of a prize scroll 
 sheets rather than tiling one. Each of the four was found by repeating a measurement that
 the field currently performs once. The same construction that judges a surface also
 supplies what the field's reading step lacks: a surface whose geometry rules out a papyrus
-face is a negative control that costs one extra render.
+face is a negative control that costs one extra render. And the judgement it automates is
+the one the field currently pays for by hand: the predicate behind an approval mask, whose
+integration point is a single `.tif` written beside a surface's coordinates
+(#link(<sec:plug>)[Section 6.5]).
 
 #v(0.6em)
 #block(inset: (left: 0.8em, y: 0.5em), stroke: (left: 1.6pt + rgb("#404040")))[
