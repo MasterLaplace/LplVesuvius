@@ -162,8 +162,13 @@ démontre rien.
 Ce qui est raisonnable, dans l'ordre :
 
 1. auditer les trois résultats de tête pour antériorité ;
-2. écrire l'**arc excision/réparation** (`03` `04` `05` `07`) — quatre documents, un fil, une
-   conclusion négative propre. C'est le seul manque qui ait la taille d'une section ;
+2. ~~écrire l'**arc excision/réparation**~~ ⚠⚠ **RETIRÉ le 2026-09-03.** En voulant rendre
+   son chiffre-clé recalculable — la règle de l'article l'exigeait — la réparation a été
+   rejouée et **le résultat ne tient pas** : sur les deux traces mesurables de Scroll 5 la
+   proximité **baisse de 22 à 50 %**, là où `07` publie qu'elle ne bouge pas. Écrire la
+   section aurait publié un résultat déstabilisé le jour même. L'arc reste le plus gros
+   manque de l'article, et il demande d'abord d'être **refondé** →
+   [`07`](07_reparee_nest_pas_propre.md), en-tête ;
 3. ajouter `33` à §6.1, qui est **l'exemple le plus court** de la thèse de l'article : une barre
    d'erreur annule un classement publié, ici le nôtre ;
 4. le second papier côté encre, quand la case vide du `68` §4 sera remplie.

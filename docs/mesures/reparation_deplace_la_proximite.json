@@ -1,0 +1,48 @@
+{
+  "question": "la reparation d'auto-intersection deplace-t-elle la proximite anormale ?",
+  "date": "2026-09-03",
+  "instrument": "src/excision/proximity.py (rayon derive de la physique, 142,8 um)",
+  "reparation": "windcheck transform, politique d'ordonnancement gelee",
+  "corpus": "PHerc0172 (Scroll 5), traces auto_grown -- les seules de ce rouleau dont la couverture depasse un tour",
+  "paires": [
+    {
+      "trace": "20251115002741-auto_grown_20251115002740308_1_flatboi",
+      "contacts_avant": 27416,
+      "contacts_apres": 0,
+      "quads_retires": 9812,
+      "aire_gardee_pct": 99.3875,
+      "cellules_avant": 1592534,
+      "cellules_apres": 1589316,
+      "fbt_avant": 0.014637904468412942,
+      "fbt_apres": 0.007350096711798839,
+      "part_cellules_retirees_pct": 0.202,
+      "variation_fbt_pct": -49.8
+    },
+    {
+      "trace": "20251115002747-auto_grown_20251115002740308_7_flatboi",
+      "contacts_avant": null,
+      "contacts_apres": 0,
+      "quads_retires": null,
+      "aire_gardee_pct": null,
+      "cellules_avant": 1518450,
+      "cellules_apres": 1508314,
+      "fbt_avant": 0.03483265182492806,
+      "fbt_apres": 0.027068359076311364,
+      "part_cellules_retirees_pct": 0.668,
+      "variation_fbt_pct": -22.3
+    }
+  ],
+  "reference_doc07": {
+    "trace": "w038-045 (Scroll 1)",
+    "croisements": 408,
+    "quads_retires": 3689,
+    "part_aire_retiree_pct": 0.12,
+    "fbt_avant": 0.0037,
+    "fbt_apres": 0.0038,
+    "conclusion_publiee": "la metrique ne bouge pas",
+    "variation_fbt_pct": 2.7
+  },
+  "ce_qui_nest_pas_montable": "le cas discriminant -- une trace PEU atteinte -- parce que la metrique exige plus d'un tour de couverture (doc 07 §7 : 44 traces sur 53 rendent zero cellule) et que sur ce rouleau toutes les traces longues sont les auto_grown, qui sont les plus atteintes",
+  "lecture": "La reparation DEPLACE la proximite anormale sur les deux traces mesurables, vers le bas, de 22 a 50 %. Elle ne le fait PAS proportionnellement a ce qu'elle retire : la trace qui perd le MOINS de cellules (0,20 %) perd le PLUS d'anomalie (-49,8 %). Donc ni « la reparation ne deplace rien » (doc 07, une trace d'un autre rouleau) ni « elle en retire d'autant qu'elle coupe » ne tiennent. ⚠ Ce que ces deux paires etablissent est negatif et borne : la conclusion publiee du doc 07 ne se generalise pas.",
+  "note_aire_vs_cellules": "Le certificat de la premiere paire annonce 99,3875 % d'AIRE gardee, soit 0,61 % retiree, quand le compte de CELLULES en donne 0,20 %. Les deux ne mesurent pas la meme chose -- les cellules retirees ne sont pas de taille moyenne. Les colonnes du tableau utilisent le compte de cellules, calcule de la meme facon pour les deux paires."
+}

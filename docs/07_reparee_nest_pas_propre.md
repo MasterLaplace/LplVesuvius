@@ -1,5 +1,33 @@
 # La réparation ne déplace pas le défaut : une mesure qui le montre
 
+> ⚠⚠⚠ **CONCLUSION CENTRALE DÉSTABILISÉE LE 2026-09-03, et pas par une relecture.**
+> Ce document publie que la réparation « ne déplace pas » la proximité anormale — **0,37 →
+> 0,38 %**, mesuré sur **une** trace de Scroll 1 dont la réparation retirait **0,12 %** de
+> l'aire. En voulant garder ce chiffre pour l'article, il a fallu le rendre recalculable :
+> réparer une trace et remesurer. **Il ne se généralise pas.**
+>
+> Mesuré sur les deux traces de Scroll 5 dont la couverture dépasse un tour — les seules où
+> la métrique s'applique, cf. §7 — la réparation **fait baisser** la proximité :
+>
+> | trace | cellules retirées | `fbt` avant → après | variation |
+> |---|---:|---|---:|
+> | `auto_grown_…_1` (27 416 contacts) | 0,20 % | 1,464 → 0,735 % | **−49,8 %** |
+> | `auto_grown_…_7` | 0,67 % | 3,483 → 2,707 % | **−22,3 %** |
+> | `w038-045` (ce document) | 0,12 % | 0,370 → 0,380 % | +2,7 % |
+>
+> ⚠ Et ce n'est **pas proportionnel à ce qui est retiré** : la trace qui perd le **moins** de
+> cellules perd le **plus** d'anomalie. Les deux explications simples tombent donc ensemble.
+>
+> ⚠⚠ **Le cas discriminant n'est pas montable sur ce corpus** : il faudrait une trace **peu**
+> atteinte, or §7 établit que la métrique exige plus d'un tour de couverture et que sur ce
+> rouleau **toutes** les traces longues sont les `auto_grown`, qui sont les plus atteintes.
+> C'est le confond de §7, qui mord ici une seconde fois.
+>
+> ⭐ Ce qui reste établi de ce document : la **corrélation** (ρ = +0,769 sur 46 traces, à
+> longueur contrôlée) et le **rayon dérivé de la physique**. Ce qui tombe : la phrase
+> « réparée n'est pas propre » au sens où ce titre la porte.
+> Mesure : [`mesures/reparation_deplace_la_proximite.json`](mesures/reparation_deplace_la_proximite.json).
+
 2026-08-17. Résultat sur PHercParis4 (Scroll 1), 46 traces mesurées.
 Rejouable : `src/excision/src/excision/{proximity,correlate}.py`.
 
