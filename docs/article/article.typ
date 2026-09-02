@@ -321,6 +321,12 @@ widens.
 The test is therefore not a measurement of $d$ at all. It is a measurement of how $d$
 responds to $n$.
 
+The distinction the test rests on is not ours. `windcheck` @windcheck states it in its own
+source, as an engineering decision rather than a result: "no surface within the search
+radius" is a different statement from "the nearest surface is exactly this far". What we add
+is a way to tell the two apart *without choosing a radius*, by reading the response to $n$
+instead of a distance against a cut-off.
+
 == Definition
 
 Render the same surface at two depths $n_0 < n_1$ and record the two distances $d_0, d_1$.
@@ -998,7 +1004,11 @@ valid vertices falls from 58 % to 23 % along nine wraps.
 == Growing sideways, and a fixed point <sec:chain>
 
 The natural response is a *tangential* extension: let a published segment keep growing
-along itself. It works, once.
+along itself. The gesture is the documented one --- the official workflow @villa instructs an
+operator to "grow this segmentation some small-ish number of generations at a time, between
+10-30 [...] repeat until you feel like stopping", and the control is called `steps` there as
+here. What is measured below is not the gesture but where repeating it stops paying. It works,
+once.
 
 #figure(
   table(
