@@ -28,6 +28,24 @@ uv run --project . python src/tracecheck/tracecheck.py Scroll1 20230702185753 --
 Dependencies are declared at the root, so the tool runs from a fresh clone with no
 sub-project to set up. Rebuilding the paper is `./docs/article/build.sh`.
 
+## Walking inside a real scroll
+
+Since 2026-08-31 this repository can render a Herculaneum scroll volumetrically, at micron
+scale, and move through it. Not a visualisation --- an inspection instrument.
+
+```bash
+xmake && ./build/.../lpl-scrollwalk --help   # pose in, image out
+```
+
+`lpl::voxel` and `lpl::zarr` live in LplPlugin (a raymarcher and a chunked-array reader, both
+generic); `lpl::scroll`, `lpl-scrollwalk` and `lpl-scrollfly` live here. 162 offline checks.
+
+⚠ One measured fact constrains every surface-based approach: **no threshold separates the
+sheets.** On a real level-0 chunk, sheets are bright ribbons of 3--5 voxels (24--40 µm) spaced
+30--40 voxels apart (240--320 µm), in a medium whose trough reads 115--130, not zero. Sweeping
+the threshold from 130 to 198 never separates them without destroying half. An isosurface would
+assert a boundary the scan never resolved.
+
 ## Every instrument, from one entry point
 
 ```bash

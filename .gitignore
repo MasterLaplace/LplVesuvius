@@ -26,6 +26,8 @@
 __pycache__/
 *.pyc
 .venv/
+build/
+.xmake/
 
 # Environnement de l'experience : reconstructible par `uv sync`.
 

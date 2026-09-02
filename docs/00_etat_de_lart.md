@@ -425,3 +425,57 @@ cv 1,8 %**, `11` §3) :
 ⭐ **Le gain est le plus grand exactement là où le prix se joue** : les 13 rouleaux
 éligibles sont tous scannés à 8,640–9,362 µm. ⚠ PHerc1667 **baisse**, et c'est le plus
 petit corpus — deux sur trois s'améliorent, à rapporter tel quel plutôt qu'à moyenner.
+
+---
+
+## 10. ⚠⚠⚠ Ce que cet état de l'art avait manqué — audits du 2026-08-29
+
+**Ce document date du 2026-08-17 et il a été insuffisant, de façon nommable.** Deux audits
+adversariaux l'ont mesuré, sur le miroir du site et les 35 dépôts **déjà clonés ici** :
+
+| audit | mesure |
+|---|---|
+| **nos résultats** → [`66`](66_audit_danteriorite.md) | 14 examinés : **6 déjà publiés, 8 à moitié, 0 nouveau** |
+| **nos outils** → [`67`](67_audit_des_outils.md) | 98 examinés : **22 existaient déjà, 50 partiellement, 27 sans équivalent** |
+
+⚠⚠ **Le §4 disait « six vérificateurs, et c'est saturé », et le §9.3 « ce qui n'existait dans
+aucun des six ».** Les deux étaient justes sur les **conclusions** de ces outils et faux sur
+leur **contenu** : quatre équivalents de nos instruments dormaient dans leur code. L'état de
+l'art a lu ce que les outils **annoncent**, pas ce qu'ils **contiennent**.
+
+⭐ **Le mode de défaillance est le vocabulaire**, et c'est réparable en une ligne par outil :
+« écart entre spires » = *winding pitch*, « planéité » = *linearity*, « champ de correction »
+= *subvoxel re-centering*, « distance à la matière » = *CT support*, « saut de spire » =
+*sheet consistency*. Un grep sur nos mots français ne rend rien.
+
+### 10.1 Ce qui reste vraiment libre, mesuré sur les 35 dépôts
+
+- **la statistique** — zéro `binomtest`, zéro test de permutation, zéro analyse de puissance,
+  **aucun intervalle de confiance sur un score d'encre**, `ink-id`, `villa` et le modèle du
+  Grand Prize compris ;
+- **un juge automatique en aveugle** — aucun appel à une API de modèle, et le protocole publié
+  n'a **aucune condition de contrôle** ;
+- **le test de convergence** — recherche négative documentée ;
+- **l'étage polaire** — zéro dépliage polaire d'une coupe CT dans le corpus.
+
+### 10.2 ⚠⚠ Et le chiffre qui recadre tout le reste
+
+Relevé le 2026-08-29 depuis `metadata.min.json` ([`corpus_par_energie.json`](mesures/corpus_par_energie.json)) :
+sur les **13 rouleaux du Grand Prize**, le monde entier publie **21 segments et 0 carte
+d'encre**, et **11 sur 13 n'ont aucun segment publié**.
+
+⭐ Le goulot n'est donc pas le raffinement de la détection d'encre. C'est que **la
+segmentation de ces rouleaux-là n'a pratiquement pas commencé** — et le critère demande
+**100 % du recto**.
+
+### 10.3 La capacité neuve de ce dépôt, non couverte ci-dessus
+
+Livré le 2026-08-31 : un **raymarcher volumique** qui rend un vrai rouleau au micron et permet
+de s'y déplacer (`lpl::voxel`, `lpl::zarr` dans LplPlugin ; `lpl::scroll`, `lpl-scrollwalk`,
+`lpl-scrollfly` ici ; **162 contrôles verts**).
+
+⚠⚠ Et un fait mesuré qui contraint toute approche par surface : **aucun seuil ne sépare les
+feuilles**. Balayage de 130 à 198 sur un vrai chunk niveau 0 — les feuilles sont des rubans de
+**3 à 5 voxels** espacés de **30 à 40**, dans un milieu dont le creux vaut **115 à 130, pas
+zéro**. Une isosurface affirmerait une frontière que le scan n'a jamais résolue. Détail :
+`~/LplKnowledge/store/LplKernel/PLAN_papyrus_marchable.md`.
