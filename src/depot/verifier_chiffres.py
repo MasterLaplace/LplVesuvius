@@ -90,6 +90,25 @@ CITES_PAR_L_ARTICLE = (
     # deviendrait indiscernable de son plafond.
     "plus petit alpha indiscernable",
     "plus grand alpha convergent",
+    # ⚠⚠ Ajoutes le 2026-09-03 avec la section 6.2. Elle est ce qui tient la promesse que
+    # la section 2.4 faisait deja -- « Section 6.2 shows what that costs » -- et qui restait
+    # en l'air : l'article ARGUMENTAIT pour des barres d'erreur sans en montrer une seule.
+    "AUC groupee du fragment, frag1",
+    "AUC groupee du fragment, frag2",
+    "AUC groupee du fragment, frag3",
+    "erreur type par tuiles, frag1",
+    "erreur type par tuiles, frag2",
+    "erreur type par tuiles, frag3",
+    "facteur contre Hanley-McNeil, frag1",
+    "facteur contre Hanley-McNeil, frag2",
+    "facteur contre Hanley-McNeil, frag3",
+    "dispersion des AUC DANS un fragment",
+    "dispersion des AUC ENTRE fragments",
+    "part attribuable au fragment",
+    "tuiles necessaires par fragment",
+    "rho du transport, aire_mediane_px",
+    "p de Holm, aire_mediane_px",
+    "p de Holm, sigma",
     # ⚠ Et ceux du temoin negatif, meme raison : ils portent la these etroite de `46`.
     "accord pixel des deux cartes",
     "sigma du controle positif",
@@ -1628,7 +1647,8 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         if d.get("tuiles_pour_distinguer"):
             out.append(("tuiles necessaires par fragment",
                         [f"**{d['tuiles_pour_distinguer']} tuiles par fragment**",
-                         f"{d['tuiles_pour_distinguer']} tuiles par fragment"], bdf.name))
+                         f"{d['tuiles_pour_distinguer']} tuiles par fragment",
+                         f"{d['tuiles_pour_distinguer']} tiles per fragment"], bdf.name))
         # ⚠⚠ Ces deux-la sont ce qu'une campagne FUTURE lira avant de se dimensionner, et
         # ils sont gardes parce que j'ai deja publie l'un des deux faux : « 63 » etait juste
         # pour un ecart-type de 0,2 et faux pour le notre, qui vaut 0,2243.
@@ -1642,6 +1662,21 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                      f"{d['tuiles_sous_le_hasard']} tuiles sur {d['tuiles_totales']}",
                      f"{d['tuiles_sous_le_hasard']} sur {d['tuiles_totales']}"], bdf.name))
         ajoute("AUC de la tuile la plus basse", d["auc_de_tuile_minimale"], 3, bdf.name)
+        # ⚠⚠ Ajoutes le 2026-09-03 avec la section 6.2 de l'article. Elle publie l'AUC de
+        # chaque fragment, son erreur-type par tuiles, et le FACTEUR entre celle-ci et
+        # Hanley-McNeil -- et c'est le facteur qui porte l'argument, pas les deux erreurs
+        # prises separement. Il est recalcule ici plutot que lu : un rapport publie sans son
+        # calcul est exactement ce que la section reproche a la litterature.
+        for frag, f in d.get("fragments", {}).items():
+            ajoute(f"AUC groupee du fragment, {frag}", f["auc_groupee"], 3, bdf.name)
+            b = f.get("bootstrap", {})
+            hm = f.get("se_hanley_mcneil")
+            if b.get("exploitable") and hm:
+                ajoute(f"erreur type par tuiles, {frag}", b["erreur_type"], 3, bdf.name)
+                fact = round(b["erreur_type"] / hm)
+                out.append((f"facteur contre Hanley-McNeil, {frag}",
+                            [f"{fact} times", f"{fact} fois", f"{fact}$times$",
+                             f"{fact}×"], bdf.name))
         for frag, f in d.get("fragments", {}).items():
             st = f.get("destriage", {})
             if st.get("exploitable"):

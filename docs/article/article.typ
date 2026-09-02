@@ -106,8 +106,12 @@
   than 79 #um, twice the same-sheet threshold. We also show that a surface with
   $alpha approx 1$ is a *negative control by construction* for an ink detector, since its
   geometry rules out a papyrus face being within reach --- the control the foundational
-  work lacks. We argue that repetition and error bars, absent from the primary literature,
-  are the cheapest available improvement to the field's evidentiary standard.
+  work lacks. We then show what a point estimate costs on the one
+  quantity in this field that has a ground truth: the usual standard error of an AUC is
+  $109 times$ too narrow on an ink map, and the fragment effect it certifies does not
+  survive a variance decomposition. We argue that repetition and error bars, absent from
+  the primary literature, are the cheapest available improvement to the field's
+  evidentiary standard.
 ]
 
 #v(0.8em)
@@ -156,7 +160,7 @@ This paper is about the judging step. We contribute:
   settings rather than surfaces on 14 of 16 traces; and published segments do not tile a
   sheet.
 
-+ *A negative control that costs nothing extra* (#link(<sec:negctrl>)[Section 6.4]). A
++ *A negative control that costs nothing extra* (#link(<sec:negctrl>)[Section 6.5]). A
   surface whose convergence exponent is near 1 carries a geometric proof that no papyrus
   face is within reach, so any ink reported on it is a false positive by construction. This
   is the control the foundational paper lacks, and any pipeline that traces surfaces can
@@ -293,8 +297,9 @@ What is nonetheless missing across this toolchain, and what this paper adds, is 
 + *Uncertainty on the verdicts themselves.* Across the toolchain we read --- and across
   `ink-id`, `villa` and the Grand Prize model @gpwinner --- there is no permutation test, no
   power analysis, and no confidence interval on an ink-detection score. Numbers are published
-  as point estimates. #link(<sec:disc>)[Section 6] shows what that costs on a quantity whose
-  tile-to-tile standard deviation is 0.22.
+  as point estimates. #link(<sec:interval>)[Section 6.2] shows what that costs on a quantity whose
+  tile-to-tile standard deviation is 0.22: the usual standard error is a hundred times
+  too narrow, and the effect it certifies does not survive a variance decomposition.
 
 + *A judge with a control condition.* The published judging protocol is human and shows no
   blank image, so a judge's fabrication rate is never measured.
@@ -1101,6 +1106,41 @@ step. Given a tool that returns a different surface on every call, a single repo
 surface is a sample from a distribution whose width is not reported --- and we measure that
 width to be, in the extreme, 115 % of the mean.
 
+== What a point estimate costs <sec:interval>
+
+#link(<sec:community>)[Section 2.4] says that no interval is published anywhere in the
+toolchain we read. This section is what one costs to compute, and what it changes, on the
+only quantity in this field for which a ground truth exists.
+
+Detached fragments publish `inklabels.png` aligned to their surface layers, so an ink map can
+be scored against labels rather than against another rendering. On three of them our chain
+returns AUC $0.746$, $0.600$ and $0.575$ --- a spread of $0.171$ that reads as a fragment
+effect, and that we initially treated as one.
+
+*The usual standard error says the spread is certain, and it is the wrong formula.*
+Hanley--McNeil gives $0.00055$, $0.00072$ and $0.0024$ on these maps, which would make the
+observed gap a hundred standard errors wide. That formula assumes independent draws. An ink
+map is not: neighbouring pixels carry almost the same value and almost always the same label,
+so a million pixels are not a million observations. Resampling instead *by tile* --- the scale
+at which the spatial structure exists --- gives $0.060$, $0.071$ and $0.082$ ---
+wider by $109 times$, $99 times$ and $34 times$.
+
+*And a variance decomposition removes the effect entirely.* Tile-to-tile dispersion *within* a
+fragment is $sigma = 0.2243$; dispersion *between* fragments is $0.0391$. The within term is
+$5.7 times$ the between term, the intraclass correlation is $0.030$, and separating the
+observed gap would take *27 tiles per fragment* where we had 10, 11 and 2. The three numbers
+do not compare. What looked like a property of three objects is the noise of a single window.
+
+#caveat[
+  *The same point estimate hid a second thing: how many questions we had asked.* We tested six
+  measurable quantities against the same AUC over 23 tiles, looking for one that predicts it.
+  The strongest is median component area at $rho = -0.448$; after a permutation test with 5000
+  draws and a Holm correction, *none survives* --- the best reaches $p = 0.187$. Among them is
+  $sigma$, the output dispersion this repository had been reading for weeks as evidence that a
+  model is reading rather than idling. It ranks *fourth of six*, at $p = 0.739$. We retracted
+  the inference rather than the correction.
+]
+
 == The truncation artefact generalises beyond this pipeline
 
 The mechanism is not specific to one tool. Any iterative fitting procedure with a budget
@@ -1248,7 +1288,7 @@ dispersion to what the model returns where it is known to work.
 
 Applied across the prize set, that condition is restrictive. Crossing the scrolls we can
 trace with those whose published ink maps carry the typographic statistics of a written page
-(#link(<sec:downstream>)[Section 6.3]) gives an *empty* intersection: 13 against 3, disjoint.
+(#link(<sec:downstream>)[Section 6.4]) gives an *empty* intersection: 13 against 3, disjoint.
 The experiment is therefore not mountable on the prize set as it stands --- not because
 repair cannot be measured, but because the scrolls where it could be read are not the ones
 that have been traced. Naming that before running the experiment is cheaper than discovering
@@ -1339,7 +1379,7 @@ Three properties recur in the instruments above and are worth naming.
   converging verdict is affected, but 24 of 111 series in our tree cannot be said to be
   *across the stack* rather than *unmeasured*.
 
-+ *The negative control establishes the strong claim* (#link(<sec:negctrl>)[Section 6.4]).
++ *The negative control establishes the strong claim* (#link(<sec:negctrl>)[Section 6.5]).
   On the one scroll where we have both a sheet-following and a stack-crossing surface, the
   ink model reports *more* dispersion on the surface that cannot carry ink (0.7111 against
   0.5894), while returning two unrelated maps ($rho = -0.0100$). It reports ink where there
@@ -1381,13 +1421,16 @@ supplies what the field's reading step lacks: a surface whose geometry rules out
 face is a negative control that costs one extra render. And the judgement it automates is
 the one the field currently pays for by hand: the predicate behind an approval mask, whose
 integration point is a single `.tif` written beside a surface's coordinates
-(#link(<sec:plug>)[Section 6.5]).
+(#link(<sec:plug>)[Section 6.6]).
 
 #v(0.6em)
 #block(inset: (left: 0.8em, y: 0.5em), stroke: (left: 1.6pt + rgb("#404040")))[
   *Reproducibility.* Every figure in this paper is produced by a script from a versioned
   result file, and every number quoted in the text is recomputed from that file and
-  searched literally in the source of the paper by an automated guard. The rule the guard
+  searched literally in the source of the paper by an automated guard. We audited that
+  discipline against itself: of 105 verification batteries in our tree, *39 printed a
+  pass unconditionally* and could not fail, a defect found by accident while probing
+  something else. The rule the guard
   enforces is the one we would offer as the paper's methodological summary: *a published
   number whose computation is not in the tree is not a result, it is an anecdote.*
 ]
