@@ -4,9 +4,20 @@
 `06` §2.3 voulait revérifier l'onde radiale avec le **vrai ombilic**, en soupçonnant le
 centre dérivé d'être biaisé. Deux faits l'ont remplacée :
 
-1. ⚠ **`umbilicus.txt` n'existe pas.** Vérifié sur le bucket ouvert, préfixe par
-   préfixe : zéro occurrence du mot pour PHercParis4, PHerc0139, PHerc1667 et Scroll1.
-   Le fichier noté dans `06` n'est pas à une autre adresse — il n'est pas publié.
+1. ⚠⚠⚠ **CE POINT ÉTAIT FAUX, corrigé le 2026-09-03** → `laxe_nest_pas_une_ligne.py`.
+   Il disait : *« `umbilicus.txt` n'existe pas. Vérifié sur le bucket ouvert, préfixe par
+   préfixe […] il n'est pas publié. »* La vérification portait sur le bucket S3 ; l'ombilic
+   vit sur **`dl.ash2txt.org`**, l'autre serveur du concours, et son adresse est en
+   commentaire dans `spiral-fitting/scroll1_umbilicus.py` depuis toujours. **HTTP 200,
+   241 points.** Même angle mort que `59` — un seul des deux serveurs interrogé.
+   ⚠ Il n'est publié que pour **Scroll 1**, et notre centre dérivé est celui de `PHerc0172`
+   (Scroll 5), qui n'en a pas : la comparaison directe reste non montable, et l'analyse de
+   sensibilité ci-dessous garde donc sa raison d'être.
+   ⭐ Ce que le fichier récupéré apprend : **un axe de rouleau n'est pas une droite** — il
+   erre de 21,6 mm sur 108 mm de hauteur, et le remplacer par un centre unique coûte 5,80 mm
+   en médiane. Le balayage ci-dessous, qui monte à 6328 µm, **encadre** cette médiane, et
+   l'invariant n'y bouge que de 1,85 % : la conclusion tient, mais désormais sur une mesure
+   plutôt que sur un fichier qu'on croyait absent.
 2. ⭐ **Le centre n'est pas un barycentre**, contrairement à ce que `06` §2.3 dit. Il est
    ajusté sur la condition qu'une trace de rouleau est une **spirale** : le seul centre
    admissible est celui qui rend l'angle monotone le long de la trace, et la mesure

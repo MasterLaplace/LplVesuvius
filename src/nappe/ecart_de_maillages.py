@@ -135,6 +135,13 @@ def ecart(a_plans, b_plans, source_plans=None) -> dict:
 def en_micrometres(r: dict, voxel_um: float, spire_um: float | None = None) -> dict:
     """⚠ Un nombre appartient à sa géométrie de lecture. Les unités voyagent ensemble.
 
+    ⚠⚠ D'OÙ `spire_um` DOIT VENIR, et c'est une correction du 2026-09-03. Un écart exprimé en
+    spires est une DIVISION par ce nombre : un pas surestimé de 10 % fait lire 0,9 spire là où
+    il y en a une. `espacement_spires.py` le mesurait par défaut au **niveau 2** de pyramide,
+    qui fusionne des feuilles voisines et surestime donc le pas — le défaut est mesuré 36 fois
+    sur 36 par `winding-ruler`. Son défaut est passé au niveau 1 ; un relevé antérieur se
+    reconnaît à son champ `"level": 2` et **ne doit pas être passé ici tel quel**.
+
     ⭐ Et `spire_um` ajoute la seule unité qui rende un écart LISIBLE : la **spire**. « 8 µm »
     ne dit pas si deux maillages sont sur la même feuille ; « 0,05 spire » le dit. L'écart
     inter-spires est mesuré par `src/nappe/espacement_spires.py` et publié rouleau par

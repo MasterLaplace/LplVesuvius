@@ -1,0 +1,23 @@
+{
+  "source": "https://dl.ash2txt.org/full-scrolls/Scroll1/PHercParis4.volpkg/umbilici/umbilicus-scroll1a_zyx.txt",
+  "points": 241,
+  "hauteur_vx": 13675.0,
+  "hauteur_mm": 108.16925,
+  "errance_x_vx": 1260.0,
+  "errance_x_mm": 9.9666,
+  "errance_y_vx": 2733.0,
+  "errance_y_mm": 21.618029999999997,
+  "centre_unique": {
+    "cx": 3679.705394190871,
+    "cy": 2881.410788381743
+  },
+  "ecart_median_mm": 5.797771778108203,
+  "ecart_p90_mm": 10.415005106845545,
+  "ecart_max_mm": 16.750393098757627,
+  "ecart_max_en_feuilles": 148.23356724564272,
+  "balayage": {
+    "rouleau": "PHerc0172",
+    "decalage_max_um": 6328.0,
+    "ecart_max_pct": 1.8455423055082412
+  }
+}

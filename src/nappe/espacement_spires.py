@@ -19,9 +19,33 @@ petit** des deux — c'est celui dont la direction est la plus proche de la norm
 feuilles. Ça évite d'avoir à connaître l'axe d'enroulement, que `06` §2.3 n'a toujours
 pas établi.
 
-⚠ **Au niveau 2 de la pyramide**, pour la raison mesurée en `06` §3.5 : il conserve 89 %
-des murs pour 1/64 de la donnée. Un chunk y pèse **1,2 Mo compressé** au lieu de 7 Mo,
-et une carte de rouleau devient une affaire de minutes.
+⚠⚠⚠ **CORRIGÉ LE 2026-09-03 : LE NIVEAU PAR DÉFAUT PASSE DE 2 À 1**, et la raison est que
+notre propre chiffre disait déjà le contraire de ce qu'on en tirait.
+
+Ce fichier justifiait le niveau 2 par `06` §3.5 : *« il conserve 89 % des murs pour 1/64 de
+la donnée »*. **Les 11 % de murs perdus ne sont pas une perte acceptable, ce sont des
+feuilles voisines FUSIONNÉES** — et deux feuilles comptées pour une donnent un écart
+mesuré trop GRAND. On avait mesuré le défaut et on l'avait lu comme une vertu.
+
+`winding-ruler` l'a mesuré de son côté, sur un corpus plus large, et a tout recalculé
+(`data/repos/winding-ruler/atlas/build_atlas_v2.py`, l. 7-15) :
+
+    « Rerunning all 36 scrolls at level 1 lowers the measured pitch by 10.3% on
+      average (36/36 negative, sd 2.6). The wrap count rises at the same time, and
+      span is preserved, so the level-2 grid was merging adjacent sheets rather than
+      mis-measuring the gap between them. »
+
+**36 sur 36 dans le même sens**, ce qui exclut le hasard d'échantillonnage.
+
+⚠ Ce que la correction coûte : un chunk pèse **7 Mo** au lieu de 1,2, donc une carte de
+rouleau redevient une affaire de dizaines de minutes. `--level 2` reste accessible et reste
+utilisable pour une reconnaissance — mais un écart qui en sort est **surestimé d'environ
+10 %**, et tout ce qui le divise (cf. `ecart_de_maillages.en_micrometres`) sous-estime
+d'autant.
+
+⚠⚠ Ce que la correction ne fait PAS : re-mesurer nos cartes. Les relevés de
+`docs/mesures/` produits avant cette date portent `"level": 2` dans leur JSON — c'est ce qui
+permet de les reconnaître — et ils n'ont pas été refaits.
 
 ⚠ La prédiction est une **probabilité de surface**, pas la surface : un seuil est
 inévitable. Il est **balayé** et le résultat rapporté pour plusieurs valeurs, parce
@@ -81,7 +105,9 @@ def main() -> int:
         epilog="Sur un rouleau NON trace, c'est la seule chose qui se mesure.",
     )
     parser.add_argument("zarr", help="cle S3 du .zarr de predictions de surface")
-    parser.add_argument("--level", type=int, default=2)
+    parser.add_argument("--level", type=int, default=1,
+                        help="niveau de pyramide ; 2 fusionne des feuilles voisines "
+                             "et surestime l'écart d'environ 10 %% (cf. docstring)")
     parser.add_argument("--voxel-um", type=float, default=9.362,
                         help="voxel du NIVEAU 0 ; le niveau lu le multiplie par 2^level")
     parser.add_argument("--chunks", type=int, default=24, help="chunks sondes")
