@@ -5,10 +5,24 @@
 > chiffres, ses rétractations internes, et **deux citations verbatim numérotées** — une
 > après 60 % du fichier, une dans les 15 dernières lignes.
 >
-> ⚠⚠ Les citations sont la garde : sans elles, « j'ai tout lu » est une promesse. Les 88
-> citations ont été cherchées dans les fichiers cités et **88 ont été retrouvées**
-> (`verifier_citations.py`, fenêtre de ±4 lignes pour tolérer un décalage d'index sans
+> ⚠⚠ Les citations sont la garde : sans elles, « j'ai tout lu » est une promesse. Les **140
+> citations** ont été cherchées dans les fichiers cités et **140 ont été retrouvées à leur
+> ligne** (`verifier_citations.py`, fenêtre de ±4 lignes pour tolérer un décalage d'index sans
 > tolérer une citation absente).
+>
+> ⚠⚠⚠ **Ce compte a d'abord été publié à 88, et c'était faux.** Le motif de la garde ne
+> connaissait qu'une écriture (« ligne 104 ») ; les fiches en portent deux autres
+> (« l. 271 », « lignes 89–90 »), et **44 citations sur 132 n'étaient donc jamais
+> vérifiées** — un tiers. La garde ne mentait pas sur ses 88, son **dénominateur** était le
+> sous-ensemble qu'elle savait lire. C'est le péché capital de ce dépôt dans un costume neuf.
+> Corrigé le 2026-09-03 : les trois écritures sont reconnues, et surtout la garde **compte les
+> lignes de preuve qu'elle n'a pas su lire et échoue dessus**, donc une quatrième écriture
+> fera échouer au lieu de disparaître.
+>
+> ⚠ Elle signale aussi la **dérive** : une citation retrouvée ailleurs que sa ligne annoncée
+> veut dire que le document a été édité depuis la fiche. C'est arrivé le jour même — le `07`
+> a reçu 28 lignes en tête, ses deux citations ont dérivé de +28, et **la garde d'alors ne
+> l'a pas vu** puisqu'elle ne lisait pas ce format.
 >
 > ⚠ `docs/69` est hors périmètre sur consigne de l'auteur et n'a pas été lu.
 
@@ -353,7 +367,7 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
 ---
 
 ### docs/07_reparee_nest_pas_propre.md
-- **lignes** : 438
+- **lignes** : 466 ⚠ (438 quand la fiche a été écrite ; un bloc de 28 lignes a été ajouté en tête le 2026-09-03)
 - **nature** : RESULTAT
 - **résumé** : Le résultat central du dépôt sur la métrique de proximité : la réparation d'auto-intersection ramène les contacts à zéro et **ne déplace pas** la proximité anormale (0,37 → 0,38 %). Le document se corrige ensuite trois fois — il retire l'affirmation que la métrique **sépare** saines et réparées, il montre que le remède de principe pour la référence locale (une boule 3D) rend la mesure pire, et il découvre que la métrique est **inapplicable** sous un tour de couverture (44 traces de Scroll 5 sur 53 rendent zéro cellule). Le §9 remplace enfin le rayon de recherche par une constante physique. ⚠ Le fichier contient deux sections numérotées « ## 6 ».
 - **conclusions extractibles** :
@@ -376,6 +390,13 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
   - Sur Scroll 1, le rayon issu de la physique (**+0,840**) bat le meilleur rayon du balayage (**+0,829** à 16 voxels).
   - Les **13 rouleaux éligibles au Grand Prize 2027 sont tous scannés à 8,640–9,362 µm**, et le règlement interdit d'utiliser des scans plus fins du même rouleau.
 - **rétractations / corrections internes** :
+  - ⚠⚠⚠ **2026-09-03, en-tête, RÉTRACTATION DE LA CONCLUSION-TITRE** — postérieure à cette
+    fiche. Le chiffre central (0,37 → 0,38 %, « la réparation ne déplace pas ») a été rendu
+    recalculable pour l'article : réparer une trace, remesurer. **Il ne se généralise pas.**
+    Sur les deux traces de Scroll 5 où la métrique s'applique, la proximité **baisse** —
+    1,464 → 0,735 % et 3,483 → 2,707 %, soit −49,8 % et −22,3 % — et **pas proportionnellement
+    à ce qui est retiré**. Ce qui reste établi : la corrélation (ρ = +0,769) et le rayon dérivé
+    de la physique. Mesure : `docs/mesures/reparation_deplace_la_proximite.json`.
   - §3 : « ### ⚠⚠ Correction : "quatre fois au-dessus d'une trace saine" était faux » — c'était une comparaison à un seul témoin, qui se trouvait être bas. **L'énoncé qui tombe** : que la mesure sépare proprement « réparée » de « saine ». « Elle ne le fait pas — c'est un indicateur continu corrélé, pas un classifieur. »
   - §6 (« La référence locale ») : « **Le remède de principe rend la métrique nettement pire** » ; et « un gain de +0,036 en passant de 150 à 50 ne vaut pas qu'on retienne 50 ». Réserve explicite : que la chute de rho de 0,805 à 0,560 soit **entièrement** expliquée par l'effondrement de référence « n'est pas établi par cette mesure seule ».
   - §7 : « la métrique n'est pas *moins bonne*, elle est **inapplicable** » sous un tour de couverture — « Elle ne rend pas un mauvais chiffre — elle ne rend **rien**. » Et : « ⚠ La corrélation observée sur ces 9 morceaux (**rho +0,433, p = 0,244**) **ne doit pas être citée** : n = 1 observation indépendante ».
@@ -387,8 +408,8 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
   - §6 (« Ce que ça vaut pour le concours ») : « ⚠ En l'état ce n'est pas encore soumissionnable ».
   - §8 : « ⚠ Ce qui **reste** vrai du §5 : le seuil sélectionne une queue dont on ne sait toujours pas ce qu'elle contient sur une trace sans croisement… Le plateau justifie le *choix* du seuil, pas l'interprétation de ce qu'il attrape. »
 - **preuve de lecture intégrale** :
-  - l. 271 : `Une trace qui ne fait pas un tour **ne peut pas se recouvrir** : il n'existe alors`
-  - l. 430 : `rouleau. C'est exactement le régime où la correction compte.`
+  - l. 299 : `Une trace qui ne fait pas un tour **ne peut pas se recouvrir** : il n'existe alors`
+  - l. 458 : `rouleau. C'est exactement le régime où la correction compte.`
 
 
 

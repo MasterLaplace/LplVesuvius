@@ -16,8 +16,11 @@ citations verbatim numérotées**, une après 60 % du fichier et une dans les qu
 lignes. Les fiches sont conservées : [`registres/fiches_de_lecture.md`](registres/fiches_de_lecture.md).
 
 ⚠⚠ **La garde est la citation, pas la promesse.** Un agent qui n'aurait lu que l'en-tête ne
-peut pas citer la ligne 147 d'un fichier de 148. Les **88 citations** ont été recherchées dans
-les fichiers cités par `verifier_citations.py` : **88 retrouvées, 0 introuvable**. L'article a
+peut pas citer la ligne 147 d'un fichier de 148. Les **140 citations** ont été recherchées dans
+les fichiers cités par `verifier_citations.py` : **140 retrouvées à leur ligne, 0 introuvable**.
+⚠⚠ Ce compte a d'abord été publié à **88**, parce que la garde ne reconnaissait qu'une des trois
+écritures de numéro de ligne et **sautait 44 citations en silence**. Elle compte désormais les
+lignes de preuve qu'elle ne sait pas lire, et échoue dessus. L'article a
 été lu séparément et en entier — ses 1479 lignes — parce que le croisement ne se délègue pas.
 
 ⚠ **Et le croisement ne se fait PAS par les chiffres.** Il a été essayé : il rend « partiel »
@@ -175,6 +178,6 @@ Ce qui est raisonnable, dans l'ordre :
 
 ---
 
-**Instruments** : `verifier_citations.py` (88/88), `croiser.py` (essayé, insuffisant, et c'est
+**Instruments** : `verifier_citations.py` (140/140), `croiser.py` (essayé, insuffisant, et c'est
 pourquoi le croisement final a été fait à la main). Fiches :
 [`registres/fiches_de_lecture.md`](registres/fiches_de_lecture.md).
