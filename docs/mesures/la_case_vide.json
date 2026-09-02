@@ -1,0 +1,5006 @@
+{
+  "n_objets_recales": 6,
+  "n_de_supervision": 3,
+  "distances_publiees": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    1.2,
+    11.0
+  ],
+  "vide_du_seuil": {
+    "sous": 0.4,
+    "sur": 1.2
+  },
+  "tuile_a_9362nm": 66,
+  "tuile_heritee": 256,
+  "largeur_tuile_heritee_a_9362nm_um": 2396.672,
+  "largeur_tuile_du_papier_um": 614.4,
+  "n_cases_vides": 221,
+  "n_cases_vides_du_prix": 103,
+  "cases_vides_du_prix_par_objet": {
+    "PHerc0139": 38,
+    "PHerc0500P2": 38,
+    "PHerc0814": 19,
+    "PHerc0343P": 8
+  },
+  "cases_vides": [
+    {
+      "objet": "PHerc0139",
+      "segment": "20260325000000-w046_20260325",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260210000000-w058_2026021020",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260115000001-w056_2026011514",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260227000000-w052_2026022705",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260303000000-w034_2026030317",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260311000000-w023_202603112281",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260108000000-w041_2026010816",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20250108000002-w027_2025010845",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20250223000000-w059_2025022312",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260310000000-w037_2026031015",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260206000001-w047_2026020613",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260127000000-w057_2026012713",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20250831000000-w040_2025083102",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260422000000-title_2026042222_zmid_flatboi",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20250108000005-w030_2025010818",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260306000000-w038_2026030608",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260126000000-w045_2026012619",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260316000000-w036_2026031607",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260219000000-w033_2026021913",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20250108000003-w028_2025010836",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260306000001-w051_2026030600",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260302000001-w050_2026030220",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260220000000-w053_2026022021",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20250108000001-w026_2025010854",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20251226000000-w055_2025122611",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20250108000004-w029_2025010827",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260130000000-w031_2026013019",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260317000000-w035_2026031718",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260206000002-w054_2026020617",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260115000000-w044_2026011522",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260203000000-w032_2026020303",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20250108000000-w025_2025010863",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260215000000-w024_2026021572",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260206000000-w042_2026020613",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260318000000-w049_20260318",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260112000000-w043_2026011217",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260219000001-w048_2026021912",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "segment": "20260302000000-w039_2026030210",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0343P",
+      "segment": "20250511003658-tifxyz",
+      "couches": "8.64um-1.2m-116keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0343P",
+      "segment": "20250902170435--5_b2",
+      "couches": "8.64um-1.2m-116keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0343P",
+      "segment": "20250902170441--4_b2",
+      "couches": "8.64um-1.2m-116keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0343P",
+      "segment": "20250902171204--1_b2",
+      "couches": "8.64um-1.2m-116keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0343P",
+      "segment": "20250902171202--2_b2",
+      "couches": "8.64um-1.2m-116keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0343P",
+      "segment": "20250904233748-0_b2",
+      "couches": "8.64um-1.2m-116keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0343P",
+      "segment": "20250902170447--3_b2",
+      "couches": "8.64um-1.2m-116keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0343P",
+      "segment": "20250905172054-1_b2",
+      "couches": "8.64um-1.2m-116keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611171745-z_dbg_gen_00225_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611171745-z_dbg_gen_00225_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250716055234-z_dbg_gen_00709_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250716055234-z_dbg_gen_00709_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250628074500-500P2_front",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250628074500-500P2_front",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250919184428-0500P2-wrap01_0919",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250919184428-0500P2-wrap01_0919",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250919184436-0500P2-wrap09_0919",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250919184436-0500P2-wrap09_0919",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250919184434-0500P2-wrap07_0919",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250919184434-0500P2-wrap07_0919",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250920020222-0500P2-wrap10_0919",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250920020222-0500P2-wrap10_0919",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611133823-z_dbg_gen_00130_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611133823-z_dbg_gen_00130_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250716055228-z_dbg_gen_00333_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250716055228-z_dbg_gen_00333_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250919184433-0500P2-wrap06_0919",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250919184433-0500P2-wrap06_0919",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250919184431-0500P2-wrap04_0919",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250919184431-0500P2-wrap04_0919",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611161415-z_dbg_gen_00411_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611161415-z_dbg_gen_00411_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611173014-z_dbg_gen_00506_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611173014-z_dbg_gen_00506_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611134135-z_dbg_gen_00331_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611134135-z_dbg_gen_00331_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250920020224-0500P2-wrap13_0919",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250920020224-0500P2-wrap13_0919",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250716055233-z_dbg_gen_00565_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250716055233-z_dbg_gen_00565_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611153346-z_dbg_gen_00286_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611153346-z_dbg_gen_00286_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611161023-z_dbg_gen_00205_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611161023-z_dbg_gen_00205_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250716055231-z_dbg_gen_00473_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250716055231-z_dbg_gen_00473_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250919184432-0500P2-wrap05_0919",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250919184432-0500P2-wrap05_0919",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250919184429-0500P2-wrap02_0919",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250919184429-0500P2-wrap02_0919",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250716055227-z_dbg_gen_00260_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250716055227-z_dbg_gen_00260_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250919184430-0500P2-wrap03_0919",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250919184430-0500P2-wrap03_0919",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611153340-z_dbg_gen_00275",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611153340-z_dbg_gen_00275",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250716055229-z_dbg_gen_00371_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250716055229-z_dbg_gen_00371_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611170257-z_dbg_gen_00308_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611170257-z_dbg_gen_00308_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250922024644-0500P2-wrap11_0919",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250922024644-0500P2-wrap11_0919",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611132918-z_dbg_gen_00302_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611132918-z_dbg_gen_00302_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611153347-z_dbg_gen_00105_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611153347-z_dbg_gen_00105_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250920020223-0500P2-wrap12_0919",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250920020223-0500P2-wrap12_0919",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611154256-z_dbg_gen_00354_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611154256-z_dbg_gen_00354_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611171318-z_dbg_gen_00440_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611171318-z_dbg_gen_00440_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250919184435-0500P2-wrap08_0919",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250919184435-0500P2-wrap08_0919",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611172135-z_dbg_gen_00346_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250611172135-z_dbg_gen_00346_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250609204953-z_dbg_gen_00612",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250609204953-z_dbg_gen_00612",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250716055230-z_dbg_gen_00377_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250716055230-z_dbg_gen_00377_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250716055232-z_dbg_gen_00505_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250716055232-z_dbg_gen_00505_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250716055235-z_dbg_gen_00779_inp_hr",
+      "couches": "4.317um-1.2m-111keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "segment": "20250716055235-z_dbg_gen_00779_inp_hr",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "2.215um-0.4m-111keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20260226000000-46527_2um_try2",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20250926203608-auto_grown_20250926203608932",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20250925212701-auto_grown_20250925212701145",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20250925222237-auto_grown_20250925222237459",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20260226113324-auto_grown_20260226113324624_abf",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20250925182632-auto_grown_20250925182632715",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20250930083742-auto_grown_20250930083742882",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20251001060526-auto_grown_20251001060526760",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20260226110425-auto_grown_20260226110425097_abf",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20250928235954-auto_grown_20250928235953722_copy",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20250925161630-auto_grown_20250925161630635",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20260226123353-auto_grown_20260226123353106",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20250929040153-auto_grown_20250929040153260",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20250926165636-auto_trace_20250926165636789",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20250928235953-auto_grown_20250928235953722",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20250925204843-auto_grown_20250925204843950",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20250926051122-auto_grown_20250926051122829",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20260225160055-auto_grown_20260225160055913",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "segment": "20260226121302-auto_grown_20260226121302716_abf",
+      "couches": "9.362um-1.2m-113keV",
+      "encre_publiee": [
+        "1.129um-0.22m-59keV",
+        "2.399um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": true
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20231106155351",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623170305-w122-123",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623170833-w124-125",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260603005223-5753_-1",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623145652-w059-063",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183147-w120-121",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20231016151002",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183136-w089-091",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623164141-w113-115",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623142658-w028-037",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623150417-w064-068",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183135-w085-088",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623153216-w081-084",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260602225659-5753_0",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623163339-w110-112",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623160554-w098-100",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183128-w053-058",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183127-w046-052",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183148-w122-123",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20231210121321",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623171400-w126-127",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183141-w104-106",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183150-w126-127",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623171929-w128-129",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260603222816-20231005123336_v2_flatboi",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20231031143852",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183126-w038-045",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183142-w107-109",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20231012184424",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183130-w064-068",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183129-w059-063",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20230702185753",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183133-w077-080",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623162614-w107-109",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183146-w118-119",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183140-w101-103",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623151041-w069-072",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623152443-w077-080",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623144224-w046-052",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183125-w028-037",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20230929220926",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183131-w069-072",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623143441-w038-045",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183138-w095-097",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260603042357-5753_-3",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183144-w113-115",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623155914-w095-097",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260603024952-5753_-2",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623144957-w053-058",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183143-w110-112",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260603145540-5753_-4",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20231007101619",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623141649-w053-058_jordi",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260603185441-5753_-6",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623154006-w085-088",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260604223808-20231210121321_v8",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183134-w081-084",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183124-w010-027",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260602230115-20230702185753_v14",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20231022170901",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183139-w098-100",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623165742-w120-121",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623155240-w092-094",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183145-w116-117",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183149-w124-125",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623141135-w046-052_jordi",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623141924-w010-027",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20231221180251",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260603190005-5753_-5",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183151-w128-129",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260602204401-5753_-7",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20231005123336",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623165230-w118-119",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623151729-w073-076",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623164704-w116-117",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623154617-w089-091",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260623161233-w101-103",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183132-w073-076",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260701183137-w092-094",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "segment": "20260603193311-5753_-1_copy",
+      "couches": "45.532um-11.0m-74keV",
+      "encre_publiee": [
+        "1.129um-0.23m-78keV",
+        "2.4um-0.22m-78keV"
+      ],
+      "du_regime_du_prix": false
+    }
+  ],
+  "objets": [
+    {
+      "objet": "PHerc0009B",
+      "type": "fragment",
+      "de_supervision": true,
+      "volumes": [
+        {
+          "volume": "20250521125136",
+          "pas_um": 8.64,
+          "distance_m": 1.2,
+          "energie_kev": 116.0,
+          "fresnel": 0.4145062141344445,
+          "regime": "reperage"
+        },
+        {
+          "volume": "20260319104112",
+          "pas_um": 2.401,
+          "distance_m": 0.3,
+          "energie_kev": 77.0,
+          "fresnel": 0.9153902123823469,
+          "regime": "production"
+        },
+        {
+          "volume": "20250820154339",
+          "pas_um": 2.401,
+          "distance_m": 0.3,
+          "energie_kev": 77.0,
+          "fresnel": 0.9153902123823469,
+          "regime": "production"
+        }
+      ],
+      "n_paires_franchissantes": 1,
+      "segments_a_deux_regimes": []
+    },
+    {
+      "objet": "PHerc0139",
+      "type": "scroll",
+      "de_supervision": false,
+      "volumes": [
+        {
+          "volume": "20250728140407",
+          "pas_um": 9.362,
+          "distance_m": 1.2,
+          "energie_kev": 113.0,
+          "fresnel": 0.3875840747973999,
+          "regime": "reperage"
+        },
+        {
+          "volume": "20260102150214",
+          "pas_um": 2.399,
+          "distance_m": 0.2,
+          "energie_kev": 78.0,
+          "fresnel": 0.7432255110725556,
+          "regime": "production"
+        },
+        {
+          "volume": "20260319133050",
+          "pas_um": 2.403,
+          "distance_m": 0.2,
+          "energie_kev": 77.0,
+          "fresnel": 0.7467909120592441,
+          "regime": "production"
+        },
+        {
+          "volume": "20260319133554",
+          "pas_um": 2.403,
+          "distance_m": 0.2,
+          "energie_kev": 77.0,
+          "fresnel": 0.7467909120592441,
+          "regime": "production"
+        },
+        {
+          "volume": "20250820105138",
+          "pas_um": 2.403,
+          "distance_m": 0.2,
+          "energie_kev": 77.0,
+          "fresnel": 0.7467909120592441,
+          "regime": "production"
+        },
+        {
+          "volume": "20250822062710",
+          "pas_um": 2.403,
+          "distance_m": 0.2,
+          "energie_kev": 77.0,
+          "fresnel": 0.7467909120592441,
+          "regime": "production"
+        },
+        {
+          "volume": "20260413113053",
+          "pas_um": 1.129,
+          "distance_m": 0.2,
+          "energie_kev": 59.0,
+          "fresnel": 1.815842639189757,
+          "regime": "production"
+        }
+      ],
+      "n_paires_franchissantes": 6,
+      "segments_a_deux_regimes": [
+        {
+          "segment": "20260325000000-w046_20260325",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260210000000-w058_2026021020",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260115000001-w056_2026011514",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260227000000-w052_2026022705",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260303000000-w034_2026030317",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260311000000-w023_202603112281",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260108000000-w041_2026010816",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250108000002-w027_2025010845",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250223000000-w059_2025022312",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260310000000-w037_2026031015",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260206000001-w047_2026020613",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260127000000-w057_2026012713",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250831000000-w040_2025083102",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260422000000-title_2026042222_zmid_flatboi",
+          "couches": [
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250108000005-w030_2025010818",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260306000000-w038_2026030608",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260126000000-w045_2026012619",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260316000000-w036_2026031607",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260219000000-w033_2026021913",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250108000003-w028_2025010836",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260306000001-w051_2026030600",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260302000001-w050_2026030220",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260220000000-w053_2026022021",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250108000001-w026_2025010854",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20251226000000-w055_2025122611",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250108000004-w029_2025010827",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260130000000-w031_2026013019",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260317000000-w035_2026031718",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260206000002-w054_2026020617",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260115000000-w044_2026011522",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260203000000-w032_2026020303",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250108000000-w025_2025010863",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260215000000-w024_2026021572",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260206000000-w042_2026020613",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260318000000-w049_20260318",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260112000000-w043_2026011217",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260219000001-w048_2026021912",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260302000000-w039_2026030210",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        }
+      ]
+    },
+    {
+      "objet": "PHerc0343P",
+      "type": "fragment",
+      "de_supervision": true,
+      "volumes": [
+        {
+          "volume": "20250521134555",
+          "pas_um": 8.64,
+          "distance_m": 1.2,
+          "energie_kev": 116.0,
+          "fresnel": 0.4145062141344445,
+          "regime": "reperage"
+        },
+        {
+          "volume": "20260304131111",
+          "pas_um": 2.215,
+          "distance_m": 0.4,
+          "energie_kev": 111.0,
+          "fresnel": 0.9542846442933286,
+          "regime": "production"
+        }
+      ],
+      "n_paires_franchissantes": 1,
+      "segments_a_deux_regimes": [
+        {
+          "segment": "20250511003658-tifxyz",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "8.64um-1.2m-116keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "8.64um-1.2m-116keV"
+          ]
+        },
+        {
+          "segment": "20250902170435--5_b2",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "8.64um-1.2m-116keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "8.64um-1.2m-116keV"
+          ]
+        },
+        {
+          "segment": "20250902170441--4_b2",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "8.64um-1.2m-116keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "8.64um-1.2m-116keV"
+          ]
+        },
+        {
+          "segment": "20250902171204--1_b2",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "8.64um-1.2m-116keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "8.64um-1.2m-116keV"
+          ]
+        },
+        {
+          "segment": "20250902171202--2_b2",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "8.64um-1.2m-116keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "8.64um-1.2m-116keV"
+          ]
+        },
+        {
+          "segment": "20250904233748-0_b2",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "8.64um-1.2m-116keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "8.64um-1.2m-116keV"
+          ]
+        },
+        {
+          "segment": "20250902170447--3_b2",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "8.64um-1.2m-116keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "8.64um-1.2m-116keV"
+          ]
+        },
+        {
+          "segment": "20250905172054-1_b2",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "8.64um-1.2m-116keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "8.64um-1.2m-116keV"
+          ]
+        }
+      ]
+    },
+    {
+      "objet": "PHerc0500P2",
+      "type": "fragment",
+      "de_supervision": true,
+      "volumes": [
+        {
+          "volume": "20250820143440",
+          "pas_um": 9.362,
+          "distance_m": 1.2,
+          "energie_kev": 113.0,
+          "fresnel": 0.3875840747973999,
+          "regime": "reperage"
+        },
+        {
+          "volume": "20250528085330",
+          "pas_um": 4.317,
+          "distance_m": 1.2,
+          "energie_kev": 111.0,
+          "fresnel": 0.8480671572132099,
+          "regime": "reperage"
+        },
+        {
+          "volume": "20250526151718",
+          "pas_um": 2.215,
+          "distance_m": 0.4,
+          "energie_kev": 111.0,
+          "fresnel": 0.9542846442933286,
+          "regime": "production"
+        },
+        {
+          "volume": "20250821110041",
+          "pas_um": 0.55,
+          "distance_m": 0.1,
+          "energie_kev": 65.0,
+          "fresnel": 2.5110987507048543,
+          "regime": "production"
+        }
+      ],
+      "n_paires_franchissantes": 4,
+      "segments_a_deux_regimes": [
+        {
+          "segment": "20250611171745-z_dbg_gen_00225_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250716055234-z_dbg_gen_00709_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250628074500-500P2_front",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250919184428-0500P2-wrap01_0919",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250919184436-0500P2-wrap09_0919",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250919184434-0500P2-wrap07_0919",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250920020222-0500P2-wrap10_0919",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250611133823-z_dbg_gen_00130_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250716055228-z_dbg_gen_00333_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250919184433-0500P2-wrap06_0919",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250919184431-0500P2-wrap04_0919",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250611161415-z_dbg_gen_00411_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250611173014-z_dbg_gen_00506_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250611134135-z_dbg_gen_00331_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250920020224-0500P2-wrap13_0919",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250716055233-z_dbg_gen_00565_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250611153346-z_dbg_gen_00286_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250611161023-z_dbg_gen_00205_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250716055231-z_dbg_gen_00473_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250919184432-0500P2-wrap05_0919",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250919184429-0500P2-wrap02_0919",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250716055227-z_dbg_gen_00260_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250919184430-0500P2-wrap03_0919",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250611153340-z_dbg_gen_00275",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250716055229-z_dbg_gen_00371_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250611170257-z_dbg_gen_00308_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250922024644-0500P2-wrap11_0919",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250611132918-z_dbg_gen_00302_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250611153347-z_dbg_gen_00105_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250920020223-0500P2-wrap12_0919",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250611154256-z_dbg_gen_00354_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250611171318-z_dbg_gen_00440_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250919184435-0500P2-wrap08_0919",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250611172135-z_dbg_gen_00346_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250609204953-z_dbg_gen_00612",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250716055230-z_dbg_gen_00377_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250716055232-z_dbg_gen_00505_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250716055235-z_dbg_gen_00779_inp_hr",
+          "couches": [
+            "2.215um-0.4m-111keV",
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "2.215um-0.4m-111keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "4.317um-1.2m-111keV",
+            "9.362um-1.2m-113keV"
+          ]
+        }
+      ]
+    },
+    {
+      "objet": "PHerc0814",
+      "type": null,
+      "de_supervision": false,
+      "volumes": [
+        {
+          "volume": "20250804134230",
+          "pas_um": 9.362,
+          "distance_m": 1.2,
+          "energie_kev": 113.0,
+          "fresnel": 0.3875840747973999,
+          "regime": "reperage"
+        },
+        {
+          "volume": "20260309142202",
+          "pas_um": 2.399,
+          "distance_m": 0.2,
+          "energie_kev": 78.0,
+          "fresnel": 0.7432255110725556,
+          "regime": "production"
+        },
+        {
+          "volume": "20260521123630",
+          "pas_um": 1.129,
+          "distance_m": 0.2,
+          "energie_kev": 59.0,
+          "fresnel": 1.815842639189757,
+          "regime": "production"
+        }
+      ],
+      "n_paires_franchissantes": 2,
+      "segments_a_deux_regimes": [
+        {
+          "segment": "20260226000000-46527_2um_try2",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250926203608-auto_grown_20250926203608932",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250925212701-auto_grown_20250925212701145",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250925222237-auto_grown_20250925222237459",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260226113324-auto_grown_20260226113324624_abf",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250925182632-auto_grown_20250925182632715",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250930083742-auto_grown_20250930083742882",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20251001060526-auto_grown_20251001060526760",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260226110425-auto_grown_20260226110425097_abf",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250928235954-auto_grown_20250928235953722_copy",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250925161630-auto_grown_20250925161630635",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260226123353-auto_grown_20260226123353106",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250929040153-auto_grown_20250929040153260",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250926165636-auto_trace_20250926165636789",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250928235953-auto_grown_20250928235953722",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250925204843-auto_grown_20250925204843950",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20250926051122-auto_grown_20250926051122829",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260225160055-auto_grown_20260225160055913",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        },
+        {
+          "segment": "20260226121302-auto_grown_20260226121302716_abf",
+          "couches": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV",
+            "9.362um-1.2m-113keV"
+          ],
+          "encre": [
+            "1.129um-0.22m-59keV",
+            "2.399um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "9.362um-1.2m-113keV"
+          ]
+        }
+      ]
+    },
+    {
+      "objet": "PHercParis4",
+      "type": "scroll",
+      "de_supervision": false,
+      "volumes": [
+        {
+          "volume": "20260310173927",
+          "pas_um": 45.532,
+          "distance_m": 11.0,
+          "energie_kev": 110.0,
+          "fresnel": 0.24454930483587725,
+          "regime": "reperage"
+        },
+        {
+          "volume": "20260310170716",
+          "pas_um": 45.532,
+          "distance_m": 11.0,
+          "energie_kev": 74.0,
+          "fresnel": 0.2981583080895338,
+          "regime": "reperage"
+        },
+        {
+          "volume": "20260323153942",
+          "pas_um": 2.4,
+          "distance_m": 0.2,
+          "energie_kev": 137.0,
+          "fresnel": 0.5605658442991417,
+          "regime": "production"
+        },
+        {
+          "volume": "20260411134726",
+          "pas_um": 2.4,
+          "distance_m": 0.2,
+          "energie_kev": 78.0,
+          "fresnel": 0.7429158337762755,
+          "regime": "production"
+        },
+        {
+          "volume": "20260608103018",
+          "pas_um": 1.129,
+          "distance_m": 0.2,
+          "energie_kev": 78.0,
+          "fresnel": 1.579271922996511,
+          "regime": "production"
+        }
+      ],
+      "n_paires_franchissantes": 3,
+      "segments_a_deux_regimes": [
+        {
+          "segment": "20231106155351",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623170305-w122-123",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623170833-w124-125",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260603005223-5753_-1",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623145652-w059-063",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183147-w120-121",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20231016151002",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183136-w089-091",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623164141-w113-115",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623142658-w028-037",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623150417-w064-068",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183135-w085-088",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623153216-w081-084",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260602225659-5753_0",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623163339-w110-112",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623160554-w098-100",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183128-w053-058",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183127-w046-052",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183148-w122-123",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20231210121321",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623171400-w126-127",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183141-w104-106",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183150-w126-127",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623171929-w128-129",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260603222816-20231005123336_v2_flatboi",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20231031143852",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183126-w038-045",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183142-w107-109",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20231012184424",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183130-w064-068",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183129-w059-063",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20230702185753",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183133-w077-080",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623162614-w107-109",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183146-w118-119",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183140-w101-103",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623151041-w069-072",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623152443-w077-080",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623144224-w046-052",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183125-w028-037",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20230929220926",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183131-w069-072",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623143441-w038-045",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183138-w095-097",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260603042357-5753_-3",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183144-w113-115",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623155914-w095-097",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260603024952-5753_-2",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623144957-w053-058",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183143-w110-112",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260603145540-5753_-4",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20231007101619",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623141649-w053-058_jordi",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260603185441-5753_-6",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623154006-w085-088",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260604223808-20231210121321_v8",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183134-w081-084",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183124-w010-027",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260602230115-20230702185753_v14",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20231022170901",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183139-w098-100",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623165742-w120-121",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623155240-w092-094",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183145-w116-117",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183149-w124-125",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623141135-w046-052_jordi",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623141924-w010-027",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20231221180251",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260603190005-5753_-5",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183151-w128-129",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260602204401-5753_-7",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20231005123336",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623165230-w118-119",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623151729-w073-076",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623164704-w116-117",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623154617-w089-091",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260623161233-w101-103",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183132-w073-076",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260701183137-w092-094",
+          "couches": [
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        },
+        {
+          "segment": "20260603193311-5753_-1_copy",
+          "couches": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV",
+            "45.532um-11.0m-74keV"
+          ],
+          "encre": [
+            "1.129um-0.23m-78keV",
+            "2.4um-0.22m-78keV"
+          ],
+          "couches_sans_encre_en_reperage": [
+            "45.532um-11.0m-74keV"
+          ]
+        }
+      ]
+    }
+  ]
+}

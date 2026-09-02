@@ -26,6 +26,13 @@ un jour des étiquettes sur un rouleau, cette commande le dira.
 ne peut pas le mesurer. Les deux sont différents, et les confondre serait exactement le genre
 de conclusion que ce dépôt refuse.
 
+⚠⚠⚠ PORTÉE, ET ELLE A ÉTÉ PRISE POUR UNE CONCLUSION (corrigé le 2026-09-02). Ce fichier
+interroge **cinq rouleaux nommés**, et son « zéro mesurable » vaut de ces cinq — pas du corpus.
+`68` §4 montre que `PHerc0139`, qui n'en est pas, publie le régime du prix ET le régime de
+production **recalés l'un sur l'autre**, sur un rouleau dont le titre est transcrit et publié ;
+et que les trois fragments de supervision du papier font de même avec une vérité terrain
+infrarouge. Le relevé est dans `la_case_vide.py`. **À relancer sur le corpus entier.**
+
 Usage :
     uv run python src/encre/ou_la_verite_existe.py --verifier
     uv run python src/encre/ou_la_verite_existe.py --json docs/mesures/ou_la_verite_existe.json

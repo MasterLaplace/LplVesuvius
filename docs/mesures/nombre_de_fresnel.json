@@ -1,0 +1,788 @@
+{
+  "n_scans": 59,
+  "n_ecartes": 8,
+  "f_production": 0.7334930395177008,
+  "f_du_prix": [
+    0.388,
+    0.415,
+    0.747
+  ],
+  "n_scans_du_prix_en_reperage": 13,
+  "n_rouleaux_du_prix": 13,
+  "ratio_prix_sur_production": 0.5289757081473119,
+  "distance_requise_a_9362nm_m": 4.297752398804043,
+  "distance_du_seuil_de_decoherence_m": 1.2,
+  "regimes": [
+    {
+      "fresnel": 0.245,
+      "n_scans": 1,
+      "n_objets": 1,
+      "configurations": [
+        "45.532µm/11m/110keV"
+      ],
+      "n_du_prix": 0
+    },
+    {
+      "fresnel": 0.298,
+      "n_scans": 1,
+      "n_objets": 1,
+      "configurations": [
+        "45.532µm/11m/74keV"
+      ],
+      "n_du_prix": 0
+    },
+    {
+      "fresnel": 0.387,
+      "n_scans": 1,
+      "n_objets": 1,
+      "configurations": [
+        "9.366µm/1.2m/113keV"
+      ],
+      "n_du_prix": 0
+    },
+    {
+      "fresnel": 0.388,
+      "n_scans": 14,
+      "n_objets": 14,
+      "configurations": [
+        "9.362µm/1.2m/113keV"
+      ],
+      "n_du_prix": 9
+    },
+    {
+      "fresnel": 0.415,
+      "n_scans": 15,
+      "n_objets": 15,
+      "configurations": [
+        "8.64µm/1.2m/116keV"
+      ],
+      "n_du_prix": 4
+    },
+    {
+      "fresnel": 0.561,
+      "n_scans": 1,
+      "n_objets": 1,
+      "configurations": [
+        "2.4µm/0.2m/137keV"
+      ],
+      "n_du_prix": 0
+    },
+    {
+      "fresnel": 0.743,
+      "n_scans": 11,
+      "n_objets": 11,
+      "configurations": [
+        "2.399µm/0.2m/78keV",
+        "2.4µm/0.2m/78keV"
+      ],
+      "n_du_prix": 0
+    },
+    {
+      "fresnel": 0.747,
+      "n_scans": 5,
+      "n_objets": 4,
+      "configurations": [
+        "2.403µm/0.2m/77keV"
+      ],
+      "n_du_prix": 1
+    },
+    {
+      "fresnel": 0.848,
+      "n_scans": 1,
+      "n_objets": 1,
+      "configurations": [
+        "4.317µm/1.2m/111keV"
+      ],
+      "n_du_prix": 0
+    },
+    {
+      "fresnel": 0.915,
+      "n_scans": 1,
+      "n_objets": 1,
+      "configurations": [
+        "2.401µm/0.3m/77keV"
+      ],
+      "n_du_prix": 0
+    },
+    {
+      "fresnel": 0.954,
+      "n_scans": 2,
+      "n_objets": 2,
+      "configurations": [
+        "2.215µm/0.4m/111keV"
+      ],
+      "n_du_prix": 0
+    },
+    {
+      "fresnel": 1.579,
+      "n_scans": 1,
+      "n_objets": 1,
+      "configurations": [
+        "1.129µm/0.2m/78keV"
+      ],
+      "n_du_prix": 0
+    },
+    {
+      "fresnel": 1.816,
+      "n_scans": 4,
+      "n_objets": 4,
+      "configurations": [
+        "1.129µm/0.2m/59keV"
+      ],
+      "n_du_prix": 0
+    },
+    {
+      "fresnel": 2.511,
+      "n_scans": 1,
+      "n_objets": 1,
+      "configurations": [
+        "0.55µm/0.1m/65keV"
+      ],
+      "n_du_prix": 0
+    }
+  ],
+  "verdicts_du_papier": [
+    {
+      "objet": "PHerc0500P2",
+      "verdict": "fibres résolues",
+      "rang": 3,
+      "citation": "At 0.55 µm individual papyrus fibers are resolved",
+      "pas_um": 0.55,
+      "distance_m": 0.07,
+      "energie_kev": 65.0,
+      "fresnel": 2.1009359473944076
+    },
+    {
+      "objet": "PHerc1667",
+      "verdict": "frange trop large",
+      "rang": 2,
+      "citation": "fine delaminations begin to blur due to a too long propagation distance for a so small pixel size",
+      "pas_um": 1.129,
+      "distance_m": 0.22,
+      "energie_kev": 59.0,
+      "fresnel": 1.904471826866857
+    },
+    {
+      "objet": "PHerc1667",
+      "verdict": "production",
+      "rang": 0,
+      "citation": "the 2.4 µm appears as the best possible resolution on a setup compatible with large scrolls complete imaging",
+      "pas_um": 2.399,
+      "distance_m": 0.22,
+      "energie_kev": 78.0,
+      "fresnel": 0.7795014921986794
+    },
+    {
+      "objet": "PHerc0500P2",
+      "verdict": "voilé",
+      "rang": 1,
+      "citation": "the 4.317 µm panel is haze-limited",
+      "pas_um": 4.317,
+      "distance_m": 1.2,
+      "energie_kev": 111.0,
+      "fresnel": 0.8480671572132099
+    },
+    {
+      "objet": "PHerc0500P2",
+      "verdict": "limité par le pixel",
+      "rang": 1,
+      "citation": "the 9.362 µm panel is pixel-limited, the inset shows the bare voxel grid",
+      "pas_um": 9.362,
+      "distance_m": 1.2,
+      "energie_kev": 113.0,
+      "fresnel": 0.3875840747973999
+    }
+  ],
+  "scans": [
+    {
+      "objet": "PHercParis4",
+      "scan": "20260310160232",
+      "nom": "20260310160232-45.532um-11.0m-110keV",
+      "pas_um": 45.532,
+      "distance_m": 11.0,
+      "energie_kev": 110.0,
+      "fresnel": 0.24454930483587725,
+      "du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "scan": "20260310152857",
+      "nom": "20260310152857-45.532um-11.0m-74keV",
+      "pas_um": 45.532,
+      "distance_m": 11.0,
+      "energie_kev": 74.0,
+      "fresnel": 0.2981583080895338,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0841",
+      "scan": "20250719115350",
+      "nom": "20250719115350-9.366um-1.2m-113keV",
+      "pas_um": 9.366,
+      "distance_m": 1.2,
+      "energie_kev": 113.0,
+      "fresnel": 0.3874185466851653,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0125",
+      "scan": "20250720091415",
+      "nom": "20250720091415-9.362um-1.2m-113keV",
+      "pas_um": 9.362,
+      "distance_m": 1.2,
+      "energie_kev": 113.0,
+      "fresnel": 0.3875840747973999,
+      "du_prix": true
+    },
+    {
+      "objet": "PHerc0139",
+      "scan": "20250720065842",
+      "nom": "20250720065842-9.362um-1.2m-113keV",
+      "pas_um": 9.362,
+      "distance_m": 1.2,
+      "energie_kev": 113.0,
+      "fresnel": 0.3875840747973999,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0191",
+      "scan": "20250720024445",
+      "nom": "20250720024445-9.362um-1.2m-113keV",
+      "pas_um": 9.362,
+      "distance_m": 1.2,
+      "energie_kev": 113.0,
+      "fresnel": 0.3875840747973999,
+      "du_prix": true
+    },
+    {
+      "objet": "PHerc0211",
+      "scan": "20250720140115",
+      "nom": "20250720140115-9.362um-1.2m-113keV",
+      "pas_um": 9.362,
+      "distance_m": 1.2,
+      "energie_kev": 113.0,
+      "fresnel": 0.3875840747973999,
+      "du_prix": true
+    },
+    {
+      "objet": "PHerc0257",
+      "scan": "20250720113058",
+      "nom": "20250720113058-9.362um-1.2m-113keV",
+      "pas_um": 9.362,
+      "distance_m": 1.2,
+      "energie_kev": 113.0,
+      "fresnel": 0.3875840747973999,
+      "du_prix": true
+    },
+    {
+      "objet": "PHerc0358",
+      "scan": "20250719150703",
+      "nom": "20250719150703-9.362um-1.2m-113keV",
+      "pas_um": 9.362,
+      "distance_m": 1.2,
+      "energie_kev": 113.0,
+      "fresnel": 0.3875840747973999,
+      "du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "scan": "20250720125517",
+      "nom": "20250720125517-9.362um-1.2m-113keV",
+      "pas_um": 9.362,
+      "distance_m": 1.2,
+      "energie_kev": 113.0,
+      "fresnel": 0.3875840747973999,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0813",
+      "scan": "20250720160015",
+      "nom": "20250720160015-9.362um-1.2m-113keV",
+      "pas_um": 9.362,
+      "distance_m": 1.2,
+      "energie_kev": 113.0,
+      "fresnel": 0.3875840747973999,
+      "du_prix": true
+    },
+    {
+      "objet": "PHerc0814",
+      "scan": "20250719170512",
+      "nom": "20250719170512-9.362um-1.2m-113keV",
+      "pas_um": 9.362,
+      "distance_m": 1.2,
+      "energie_kev": 113.0,
+      "fresnel": 0.3875840747973999,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0826",
+      "scan": "20250720174915",
+      "nom": "20250720174915-9.362um-1.2m-113keV",
+      "pas_um": 9.362,
+      "distance_m": 1.2,
+      "energie_kev": 113.0,
+      "fresnel": 0.3875840747973999,
+      "du_prix": true
+    },
+    {
+      "objet": "PHerc0846A",
+      "scan": "20250719225346",
+      "nom": "20250719225346-9.362um-1.2m-113keV",
+      "pas_um": 9.362,
+      "distance_m": 1.2,
+      "energie_kev": 113.0,
+      "fresnel": 0.3875840747973999,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0846B",
+      "scan": "20250719185515",
+      "nom": "20250719185515-9.362um-1.2m-113keV",
+      "pas_um": 9.362,
+      "distance_m": 1.2,
+      "energie_kev": 113.0,
+      "fresnel": 0.3875840747973999,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc1203",
+      "scan": "20250720004030",
+      "nom": "20250720004030-9.362um-1.2m-113keV",
+      "pas_um": 9.362,
+      "distance_m": 1.2,
+      "energie_kev": 113.0,
+      "fresnel": 0.3875840747973999,
+      "du_prix": true
+    },
+    {
+      "objet": "PHerc1545",
+      "scan": "20250720045926",
+      "nom": "20250720045926-9.362um-1.2m-113keV",
+      "pas_um": 9.362,
+      "distance_m": 1.2,
+      "energie_kev": 113.0,
+      "fresnel": 0.3875840747973999,
+      "du_prix": true
+    },
+    {
+      "objet": "PHerc0009B",
+      "scan": "20250509053741",
+      "nom": "20250509053741-8.640um-1.2m-116keV",
+      "pas_um": 8.64,
+      "distance_m": 1.2,
+      "energie_kev": 116.0,
+      "fresnel": 0.4145062141344445,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0175A",
+      "scan": "20250511125731",
+      "nom": "20250511125731-8.640um-1.2m-116keV",
+      "pas_um": 8.64,
+      "distance_m": 1.2,
+      "energie_kev": 116.0,
+      "fresnel": 0.4145062141344445,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0175B",
+      "scan": "20250510115222",
+      "nom": "20250510115222-8.640um-1.2m-116keV",
+      "pas_um": 8.64,
+      "distance_m": 1.2,
+      "energie_kev": 116.0,
+      "fresnel": 0.4145062141344445,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0268",
+      "scan": "20250511054932",
+      "nom": "20250511054932-8.640um-1.2m-116keV",
+      "pas_um": 8.64,
+      "distance_m": 1.2,
+      "energie_kev": 116.0,
+      "fresnel": 0.4145062141344445,
+      "du_prix": true
+    },
+    {
+      "objet": "PHerc0306B",
+      "scan": "20250510062844",
+      "nom": "20250510062844-8.640um-1.2m-116keV",
+      "pas_um": 8.64,
+      "distance_m": 1.2,
+      "energie_kev": 116.0,
+      "fresnel": 0.4145062141344445,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0343",
+      "scan": "20250509220833",
+      "nom": "20250509220833-8.640um-1.2m-116keV",
+      "pas_um": 8.64,
+      "distance_m": 1.2,
+      "energie_kev": 116.0,
+      "fresnel": 0.4145062141344445,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0343P",
+      "scan": "20250510090703",
+      "nom": "20250510090703-8.640um-1.2m-116keV",
+      "pas_um": 8.64,
+      "distance_m": 1.2,
+      "energie_kev": 116.0,
+      "fresnel": 0.4145062141344445,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0483A",
+      "scan": "20250510022723",
+      "nom": "20250510022723-8.640um-1.2m-116keV",
+      "pas_um": 8.64,
+      "distance_m": 1.2,
+      "energie_kev": 116.0,
+      "fresnel": 0.4145062141344445,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0483B",
+      "scan": "20250509113134",
+      "nom": "20250509113134-8.640um-1.2m-116keV",
+      "pas_um": 8.64,
+      "distance_m": 1.2,
+      "energie_kev": 116.0,
+      "fresnel": 0.4145062141344445,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0490A",
+      "scan": "20250509181146",
+      "nom": "20250509181146-8.640um-1.2m-116keV",
+      "pas_um": 8.64,
+      "distance_m": 1.2,
+      "energie_kev": 116.0,
+      "fresnel": 0.4145062141344445,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0490B",
+      "scan": "20250509082300",
+      "nom": "20250509082300-8.640um-1.2m-116keV",
+      "pas_um": 8.64,
+      "distance_m": 1.2,
+      "energie_kev": 116.0,
+      "fresnel": 0.4145062141344445,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0800",
+      "scan": "20250510225703",
+      "nom": "20250510225703-8.640um-1.2m-116keV",
+      "pas_um": 8.64,
+      "distance_m": 1.2,
+      "energie_kev": 116.0,
+      "fresnel": 0.4145062141344445,
+      "du_prix": true
+    },
+    {
+      "objet": "PHerc1218",
+      "scan": "20250510170249",
+      "nom": "20250510170249-8.640um-1.2m-116keV",
+      "pas_um": 8.64,
+      "distance_m": 1.2,
+      "energie_kev": 116.0,
+      "fresnel": 0.4145062141344445,
+      "du_prix": true
+    },
+    {
+      "objet": "PHerc1447",
+      "scan": "20250509011039",
+      "nom": "20250509011039-8.640um-1.2m-116keV",
+      "pas_um": 8.64,
+      "distance_m": 1.2,
+      "energie_kev": 116.0,
+      "fresnel": 0.4145062141344445,
+      "du_prix": true
+    },
+    {
+      "objet": "PHerc1451",
+      "scan": "20250509145349",
+      "nom": "20250509145349-8.640um-1.2m-116keV",
+      "pas_um": 8.64,
+      "distance_m": 1.2,
+      "energie_kev": 116.0,
+      "fresnel": 0.4145062141344445,
+      "du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "scan": "20260315072529",
+      "nom": "20260315072529-2.400um-0.2m-137keV",
+      "pas_um": 2.4,
+      "distance_m": 0.2,
+      "energie_kev": 137.0,
+      "fresnel": 0.5605658442991417,
+      "du_prix": false
+    },
+    {
+      "objet": "PHercParis3",
+      "scan": "20260313010827",
+      "nom": "20260313010827-2.400um-0.2m-78keV",
+      "pas_um": 2.4,
+      "distance_m": 0.2,
+      "energie_kev": 78.0,
+      "fresnel": 0.7429158337762755,
+      "du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "scan": "20260311024914",
+      "nom": "20260311024914-2.400um-0.2m-78keV",
+      "pas_um": 2.4,
+      "distance_m": 0.2,
+      "energie_kev": 78.0,
+      "fresnel": 0.7429158337762755,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0139",
+      "scan": "20251205005141",
+      "nom": "20251205005141-2.399um-0.2m-78keV",
+      "pas_um": 2.399,
+      "distance_m": 0.2,
+      "energie_kev": 78.0,
+      "fresnel": 0.7432255110725556,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0332",
+      "scan": "20251205210228",
+      "nom": "20251205210228-2.399um-0.2m-78keV",
+      "pas_um": 2.399,
+      "distance_m": 0.2,
+      "energie_kev": 78.0,
+      "fresnel": 0.7432255110725556,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0814",
+      "scan": "20251206184543",
+      "nom": "20251206184543-2.399um-0.2m-78keV",
+      "pas_um": 2.399,
+      "distance_m": 0.2,
+      "energie_kev": 78.0,
+      "fresnel": 0.7432255110725556,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc1299",
+      "scan": "20251207084608",
+      "nom": "20251207084608-2.399um-0.2m-78keV",
+      "pas_um": 2.399,
+      "distance_m": 0.2,
+      "energie_kev": 78.0,
+      "fresnel": 0.7432255110725556,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc1451",
+      "scan": "20251206024238",
+      "nom": "20251206024238-2.399um-0.2m-78keV",
+      "pas_um": 2.399,
+      "distance_m": 0.2,
+      "energie_kev": 78.0,
+      "fresnel": 0.7432255110725556,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc1667",
+      "scan": "20251204164204",
+      "nom": "20251204164204-2.399um-0.2m-78keV",
+      "pas_um": 2.399,
+      "distance_m": 0.2,
+      "energie_kev": 78.0,
+      "fresnel": 0.7432255110725556,
+      "du_prix": false
+    },
+    {
+      "objet": "PHercMAN5",
+      "scan": "20251204111131",
+      "nom": "20251204111131-2.399um-0.2m-78keV",
+      "pas_um": 2.399,
+      "distance_m": 0.2,
+      "energie_kev": 78.0,
+      "fresnel": 0.7432255110725556,
+      "du_prix": false
+    },
+    {
+      "objet": "PHercMANB",
+      "scan": "20251203155939",
+      "nom": "20251203155939-2.399um-0.2m-78keV",
+      "pas_um": 2.399,
+      "distance_m": 0.2,
+      "energie_kev": 78.0,
+      "fresnel": 0.7432255110725556,
+      "du_prix": false
+    },
+    {
+      "objet": "PHercMANBp",
+      "scan": "20251203091858",
+      "nom": "20251203091858-2.399um-0.2m-78keV",
+      "pas_um": 2.399,
+      "distance_m": 0.2,
+      "energie_kev": 78.0,
+      "fresnel": 0.7432255110725556,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0139",
+      "scan": "20250720235903",
+      "nom": "20250720235903-2.403um-0.2m-77keV",
+      "pas_um": 2.403,
+      "distance_m": 0.2,
+      "energie_kev": 77.0,
+      "fresnel": 0.7467909120592441,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0139",
+      "scan": "20250722040659",
+      "nom": "20250722040659-2.403um-0.2m-77keV",
+      "pas_um": 2.403,
+      "distance_m": 0.2,
+      "energie_kev": 77.0,
+      "fresnel": 0.7467909120592441,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0841",
+      "scan": "20250721195912",
+      "nom": "20250721195912-2.403um-0.2m-77keV",
+      "pas_um": 2.403,
+      "distance_m": 0.2,
+      "energie_kev": 77.0,
+      "fresnel": 0.7467909120592441,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0846A",
+      "scan": "20250721134414",
+      "nom": "20250721134414-2.403um-0.2m-77keV",
+      "pas_um": 2.403,
+      "distance_m": 0.2,
+      "energie_kev": 77.0,
+      "fresnel": 0.7467909120592441,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc1203",
+      "scan": "20250721080303",
+      "nom": "20250721080303-2.403um-0.2m-77keV",
+      "pas_um": 2.403,
+      "distance_m": 0.2,
+      "energie_kev": 77.0,
+      "fresnel": 0.7467909120592441,
+      "du_prix": true
+    },
+    {
+      "objet": "PHerc0500P2",
+      "scan": "20250507210011",
+      "nom": "20250507210011-4.317um-1.2m-111keV",
+      "pas_um": 4.317,
+      "distance_m": 1.2,
+      "energie_kev": 111.0,
+      "fresnel": 0.8480671572132099,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0009B",
+      "scan": "20250718080859",
+      "nom": "20250718080859-2.401um-0.3m-77keV",
+      "pas_um": 2.401,
+      "distance_m": 0.3,
+      "energie_kev": 77.0,
+      "fresnel": 0.9153902123823469,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0343P",
+      "scan": "20250512023932",
+      "nom": "20250512023932-2.215um-0.4m-111keV",
+      "pas_um": 2.215,
+      "distance_m": 0.4,
+      "energie_kev": 111.0,
+      "fresnel": 0.9542846442933286,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "scan": "20250508033249",
+      "nom": "20250508033249-2.215um-0.4m-111keV",
+      "pas_um": 2.215,
+      "distance_m": 0.4,
+      "energie_kev": 111.0,
+      "fresnel": 0.9542846442933286,
+      "du_prix": false
+    },
+    {
+      "objet": "PHercParis4",
+      "scan": "20260315102010",
+      "nom": "20260315102010-1.129um-0.2m-78keV",
+      "pas_um": 1.129,
+      "distance_m": 0.2,
+      "energie_kev": 78.0,
+      "fresnel": 1.579271922996511,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0139",
+      "scan": "20251202104544",
+      "nom": "20251202104544-1.129um-0.2m-59keV",
+      "pas_um": 1.129,
+      "distance_m": 0.2,
+      "energie_kev": 59.0,
+      "fresnel": 1.815842639189757,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0814",
+      "scan": "20251202233003",
+      "nom": "20251202233003-1.129um-0.2m-59keV",
+      "pas_um": 1.129,
+      "distance_m": 0.2,
+      "energie_kev": 59.0,
+      "fresnel": 1.815842639189757,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc1667",
+      "scan": "20251208002146",
+      "nom": "20251208002146-1.129um-0.2m-59keV",
+      "pas_um": 1.129,
+      "distance_m": 0.2,
+      "energie_kev": 59.0,
+      "fresnel": 1.815842639189757,
+      "du_prix": false
+    },
+    {
+      "objet": "PHercMANBp",
+      "scan": "20251207170127",
+      "nom": "20251207170127-1.129um-0.2m-59keV",
+      "pas_um": 1.129,
+      "distance_m": 0.2,
+      "energie_kev": 59.0,
+      "fresnel": 1.815842639189757,
+      "du_prix": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "scan": "20250721125050",
+      "nom": "20250721125050-0.550um-0.1m-65keV",
+      "pas_um": 0.55,
+      "distance_m": 0.1,
+      "energie_kev": 65.0,
+      "fresnel": 2.5110987507048543,
+      "du_prix": false
+    }
+  ]
+}

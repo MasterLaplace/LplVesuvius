@@ -104,6 +104,91 @@ et 80 cartes d'encre, `PHerc0172` 53 et 53. Ces deux-là ont des scans à 53–5
 
 ---
 
+## 2 bis. ⭐⭐⭐ Deux résultats du 2026-09-02, tirés d'une relecture intégrale du papier de référence
+
+Le papier `data/site/scrollprize.org/pdf/main.pdf` (Angelotti *et al.*, arXiv 2606.29085,
+46 p.) avait été lu ici pour **auditer sa nouveauté**. Relu pour **refaire sa méthode**, il a
+rendu deux choses que la première lecture ne pouvait pas voir. Détail complet : `docs/68`.
+
+### A. Les « trois paramètres couplés » n'en font qu'**un**, et il se calcule sans rien télécharger
+
+Le contraste ne vient pas de l'absorption (*« very low for carbon-based material in hard
+X-rays »*, p. 14) : il vient des franges de Fresnel. Ce qui décide de leur visibilité est la
+largeur de frange **rapportée au pas d'échantillonnage** :
+
+$$ F = \frac{\sqrt{\lambda D}}{p}, \qquad \lambda = \frac{hc}{E} $$
+
+Mesuré sur les **59 scans publiés** (`src/encre/nombre_de_fresnel.py`, 13 contrôles), $F$
+**ordonne les verdicts que les auteurs écrivent sous leurs propres panneaux** :
+
+| $F$ | ce que c'est | ce que le papier en dit |
+|---:|---|---|
+| **0,39–0,42** | **les 13 rouleaux du prix** | *« pixel-limited […] the bare voxel grid »* |
+| **0,73–0,75** | le régime de **production** (2,4 µm / 0,2 m) | *« the best possible resolution on a setup compatible with large scrolls »* |
+| **1,82** | 1,129 µm / 0,2 m | *« too long propagation distance for a so small pixel size »* — c'est la **définition** de $F > 1$, écrite en mots |
+
+**Les 13 rouleaux du prix sont à 53 % du régime de production.** Et ils sont du mauvais côté
+d'un **second** critère, indépendant : $D = 1{,}2$ m est la distance à laquelle le papier
+mesure l'apparition de la **décohérence** — sur `PHerc0268`, qui est **l'un des treize**
+(Ext. Data Fig. 2c). Les deux contraintes sont **incompatibles à ce pas** : atteindre le $F$ de
+production à 9,362 µm demanderait $D = 4{,}3$ m.
+
+⚠ Ce que $F$ **n'explique pas** : la décohérence elle-même, qui dépend de $D$ en absolu. Deux
+scans à $F$ voisin (0,85 et 0,95) ont des verdicts opposés, et la seule chose qui change est
+$D$. Le modèle a deux termes, et le fichier contrôle les deux.
+
+⭐ Ce que ça t'offre : une grandeur **prédictive et réfutable** pour juger n'importe quel scan
+existant ou futur, sans en ouvrir un seul.
+
+### B. Le plan d'expérience du régime du prix est **publié**, et il lui manque exactement une case
+
+`data/metadata.min.json` porte un champ que rien ne lisait ici : **`volume_transforms`**, des
+matrices de recalage entre volumes d'un même objet. **Six objets** relient le régime du prix
+(1,2 m) au régime de production (≤ 0,4 m) — dont **les trois fragments dont le papier tire
+toute sa supervision d'encre** (`9B`, `343P`, `500P2`), qui portent une **vérité terrain
+infrarouge**.
+
+Sur `PHerc0500P2`, segment `20250628074500-500P2_front` — celui que l'Ext. Data Fig. 5 montre
+avec sa photographie IR recalée :
+
+| | 2,215 µm / 0,4 m | 4,317 µm / 1,2 m | **9,362 µm / 1,2 m** |
+|---|:---:|:---:|:---:|
+| surface transformée | ✅ | ✅ | ✅ |
+| pile de couches rendue | ✅ | ✅ | ✅ |
+| **carte d'encre** | ✅ ×2 | — | ❌ **vide** |
+
+**103 cases vides du régime du prix**, toutes avec un témoin positif sur le même segment :
+`PHerc0139` **38** (⭐ le rouleau **dont le titre est transcrit et publié**), `PHerc0500P2` 38,
+`PHerc0814` 19, `PHerc0343P` 8. Relevé : `src/encre/la_case_vide.py`, 8 contrôles.
+
+⭐⭐ **C'est la mesure qui décide de la stratégie du prix** — *que reste-t-il de l'encre à
+$F = 0{,}39$ ?* — sur des objets dont la réponse est connue. Elle ne demande **ni faisceau, ni
+annotation manuelle, ni rescan** : les couches sont déjà rendues.
+
+⚠⚠ **Et un piège à ne pas hériter.** La défense anti-hallucination du papier n'est pas
+« 256 pixels », c'est *« smaller than all letters detected »* — 256 px valent **614 µm** à
+2,4 µm. À 9,362 µm la même tuile couvre **2 397 µm**, soit bien plus qu'une lettre : **la
+garantie ne se transporte pas.** Pour la conserver il faut une tuile d'environ **66 px**.
+
+### C. Le geste qui coûte 775 heures est un **pinceau**, et son interface est un fichier
+
+Le papier chiffre son coût : *« ~25 hours per wrap of manual annotation »* × 31 spires. Le
+commit épinglé qu'il publie (`ScrollPrize/villa@e583fb6`, récupéré ici) montre à quoi elles se
+dépensent : `ApprovalMaskBrushTool.cpp` — un **pinceau** avec lequel un humain peint
+région par région *« regions judged geometrically consistent with a single sheet »*.
+
+Et `QuadSurface::channel()` charge **tout `.tif` du dossier du segment** dont le nom n'est ni
+`x`, ni `y`, ni `z`. Le masque est lu sous le nom `"approval"` et gouverne la ré-optimisation
+du maillage.
+
+> **Écrire `approval.tif` à côté de `x.tif`/`y.tif`/`z.tif` EST l'intégration entière.** Pas
+> d'API, pas de fork. Un fichier.
+
+⭐ C'est le point de branchement de tout ce que ce dépôt sait faire — mesurer la qualité d'une
+surface **sans vérité terrain**, ce que le pinceau demande à un humain de juger à l'œil.
+
+---
+
 ## 3. Ce qui est ÉLIMINÉ — ne le repropose pas sans argument neuf
 
 Chacun de ces points est **mesuré** dans ce dépôt, avec son relevé JSON et son instrument.
@@ -112,9 +197,9 @@ Chacun de ces points est **mesuré** dans ce dépôt, avec son relevé JSON et s
 |---|---|---|
 | « c'est une question de **résolution** » | **éliminée deux fois**, par deux voies indépendantes. Ramener un fragment au pas d'entraînement du modèle **dégrade** l'AUC : 0,746 → 0,693 → 0,686 | `docs/58`, `docs/63` |
 | « σ élevé ⇒ le modèle lit » | **non validé** : σ arrive quatrième sur six grandeurs, p de Holm 0,739 | `docs/65` §1 |
-| « l'**énergie** explique l'échec » | **contredit** par une ablation contrôlée publiée : à ~8 µm, l'optimum empirique annoncé est **100–120 keV**, donc les 116 keV sont *dedans* | `docs/66` §3 |
+| « l'**énergie** explique l'échec » | **contredit** par une ablation contrôlée publiée : à ~8 µm, l'optimum empirique annoncé est **100–120 keV**, donc les 116 keV sont *dedans*. ⚠ **Mais l'énergie seule était la mauvaise question** — voir §2 bis, les trois paramètres n'en font qu'un | `docs/66` §3, `docs/68` §3 |
 | « la **campagne de scan** sépare les rouleaux lisibles » | **rétrogradé** : restreint aux rouleaux réellement tentés, p passe de 0,0081 à **0,50** | `docs/59` |
-| « on peut mesurer si le modèle lit **sur un rouleau** » | **impossible avec les données publiques** : zéro rouleau porte une vérité terrain d'encre exploitable ; `Scroll1` en a mais c'est le jeu d'**entraînement** du modèle | `docs/59`, `src/encre/ou_la_verite_existe.py` |
+| ~~« on peut mesurer si le modèle lit **sur un rouleau** »~~ | ⭐⭐⭐ **RÉOUVERT le 2026-09-02.** L'ancienne réponse valait des **cinq** rouleaux interrogés, pas du corpus. Voir §2 bis : `PHerc0139` porte les deux régimes **recalés**, et son titre est transcrit et publié | `docs/68` §4, `src/encre/la_case_vide.py` |
 | « papyrus vierge » | fermé | `docs/46` §3 |
 
 ⚠ Et une limite de méthode qui vaut pour toi aussi : **un écart relatif large sur un paramètre
@@ -315,5 +400,9 @@ Tout ce qui précède est vérifiable dans le dépôt :
 | l'audit d'antériorité des résultats | `docs/66`, `docs/mesures/audit_anteriorite.json` |
 | l'audit d'antériorité des outils | `docs/67`, `docs/mesures/audit_outils.json` |
 | le marcheur volumique et ses mesures | `~/LplKnowledge/store/LplKernel/PLAN_papyrus_marchable.md` |
+| le nombre de Fresnel des 59 scans | `docs/68` §3, `src/encre/nombre_de_fresnel.py`, `docs/mesures/nombre_de_fresnel.json` |
+| les 103 cases vides du régime du prix | `docs/68` §4, `src/encre/la_case_vide.py`, `docs/mesures/la_case_vide.json` |
+| le pinceau d'approbation et son format | `data/repos/villa` au commit `e583fb6` (`volume-cartographer/apps/VC3D/segmentation/tools/ApprovalMaskBrushTool.cpp`, `core/src/QuadSurface.cpp:1861`, `core/src/GrowPatch.cpp:133`) |
+| la méthode du papier, étape par étape | `docs/68` §2 (17 étapes, 4 humaines) |
 | l'état de l'art du domaine | `docs/00_etat_de_lart.md` |
 | l'article en cours | `docs/article/article.typ` (25 p., 17 références) |
