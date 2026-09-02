@@ -1304,6 +1304,33 @@ repair cannot be measured, but because the scrolls where it could be read are no
 that have been traced. Naming that before running the experiment is cheaper than discovering
 it after.
 
+== A judge that is allowed to say nothing <sec:judge>
+
+The third gap named in #link(<sec:community>)[Section 2.4] is a judging protocol with a
+control condition. The published protocol is human and shows only material believed to carry
+text, so a judge's fabrication rate is never measured --- and a model asked to read degraded
+Greek will produce plausible Greek, because it knows Philodemus and it knows the koine. Its
+output would then be indistinguishable from a reading.
+
+We calibrated one against blanks. 16 panels drawn from our own renderings, in four
+conditions --- text against blank, blank against text, *blank against blank*, and text
+against text --- were shown to a vision-language model under a prompt written to make refusal
+cheap and invention expensive. Blanks were agreed as blank by a human before the run.
+
+The result is the separation, not the accuracy. Across the eight blank panels there is
+*zero fabrication*: not one letter was reported where none exists. The decisive condition is
+the one no published protocol contains --- shown two blanks and told nothing, the judge never
+invented a line. The legibility scale it returned does not overlap either: the highest score
+it gave was 1 on a blank, and the lowest it gave to real text was 3 on a text panel.
+
+#caveat[
+  *This measures the judge, not the readings.* One model, sixteen panels, one session, and
+  the panels come from our own chain rather than from an external corpus. What it licenses is
+  narrow and worth stating exactly: when this judge reports letters, that report is not
+  explained by its willingness to report letters. It does not license reading its
+  transcriptions as text, which remains a papyrologist's work.
+]
+
 == Where a measurement like this plugs in <sec:plug>
 
 A quality signal is only useful if something consumes it. The pipeline that produced the
@@ -1431,7 +1458,7 @@ supplies what the field's reading step lacks: a surface whose geometry rules out
 face is a negative control that costs one extra render. And the judgement it automates is
 the one the field currently pays for by hand: the predicate behind an approval mask, whose
 integration point is a single `.tif` written beside a surface's coordinates
-(#link(<sec:plug>)[Section 6.6]).
+(#link(<sec:plug>)[Section 6.7]).
 
 #v(0.6em)
 #block(inset: (left: 0.8em, y: 0.5em), stroke: (left: 1.6pt + rgb("#404040")))[

@@ -109,6 +109,13 @@ CITES_PAR_L_ARTICLE = (
     "rho du transport, aire_mediane_px",
     "p de Holm, aire_mediane_px",
     "p de Holm, sigma",
+    # ⚠⚠ Ajoutes le 2026-09-03 avec la section 6.6. Elle tient la troisieme promesse de
+    # la section 2.4 -- « a judge with a control condition » -- qui etait annoncee comme un
+    # apport du papier et n'avait aucune section derriere elle.
+    "panneaux montres au juge",
+    "fabrications du juge",
+    "lisibilite maximale d'un panneau vierge",
+    "lisibilite minimale d'un panneau de texte",
     # ⚠ Et ceux du temoin negatif, meme raison : ils portent la these etroite de `46`.
     "accord pixel des deux cartes",
     "sigma du controle positif",
@@ -675,6 +682,39 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # ⚠⚠ Le CONTROLE de `44` §8 : si le rho de l'indice de spire cesse de battre les
     # candidats, la page dit l'inverse de ce qui est mesure. C'est le seul chiffre de ce
     # depot dont la valeur REFUTE une conclusion plutot que de la porter.
+    # ⚠⚠ Le juge, ajoute le 2026-09-03 avec la section 6.6 de l'article. Les chiffres sont
+    # RECALCULES depuis les reponses brutes plutot que recopies du document, et le critere
+    # est ecrit ici parce que j'en ai d'abord pris un faux : une FABRICATION est un panneau
+    # vierge ou le juge rapporte des LETTRES, pas un panneau ou il omet de refuser en mots.
+    # Avec le mauvais critere le fichier rendait « 2 fabrications » sur un juge qui n'en a
+    # commis aucune -- une accusation publiee aurait ete indefendable.
+    jr = _source(racine, "juge_resultats.json")
+    if jr.exists():
+        d = json.loads(jr.read_text())
+        vierges, textes, fabrications, panneaux = [], [], 0, 0
+        for r in d.get("records", []):
+            for cote in ("gauche", "droite"):
+                panneaux += 1
+                verite, rep = r["truth"][cote], r["parsed"][cote]
+                if verite == "vierge":
+                    if rep.get("glyphs", 0) > 0:
+                        fabrications += 1
+                    vierges.append(rep.get("legibility") or 0)
+                else:
+                    textes.append(rep.get("legibility") or 0)
+        out.append(("panneaux montres au juge",
+                    [f"{panneaux} panels", f"{panneaux} panneaux"], jr.name))
+        out.append(("fabrications du juge",
+                    [f"{fabrications} fabrications", f"zero fabrication",
+                     f"no fabrication"], jr.name))
+        if vierges and textes:
+            out.append(("lisibilite maximale d'un panneau vierge",
+                        [f"{max(vierges)} on a blank", f"{max(vierges)} sur un vierge"],
+                        jr.name))
+            out.append(("lisibilite minimale d'un panneau de texte",
+                        [f"{min(textes)} on a text panel", f"{min(textes)} sur un texte"],
+                        jr.name))
+
     p = _source(racine, "juge_a_un_rendu.json")
     if p.exists():
         d = json.loads(p.read_text())
