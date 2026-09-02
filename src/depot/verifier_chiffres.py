@@ -112,6 +112,14 @@ CITES_PAR_L_ARTICLE = (
     # ⚠⚠ Ajoutes le 2026-09-03 avec la section 6.6. Elle tient la troisieme promesse de
     # la section 2.4 -- « a judge with a control condition » -- qui etait annoncee comme un
     # apport du papier et n'avait aucune section derriere elle.
+    # ⚠ Ajoutes le 2026-09-03 avec le caveat de la section 6.1.
+    "paires de rouleaux separees",
+    "rouleaux distinguables apres Holm",
+    "puissance a 25 fenetres",
+    "puissance a 50 fenetres",
+    "rho entre carte creuse et carte dense",
+    "rouleaux qui changent de rang",
+    "estimations denses dans l'intervalle creux",
     "panneaux montres au juge",
     "fabrications du juge",
     "lisibilite maximale d'un panneau vierge",
@@ -688,6 +696,36 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # vierge ou le juge rapporte des LETTRES, pas un panneau ou il omet de refuser en mots.
     # Avec le mauvais critere le fichier rendait « 2 fabrications » sur un juge qui n'en a
     # commis aucune -- une accusation publiee aurait ete indefendable.
+    # ⚠⚠ La carte de difficulte, ajoutee le 2026-09-03 avec le caveat de la section 6.1.
+    # C'est la demonstration la moins chere de la these de l'article -- une barre d'erreur
+    # annule un classement -- et elle porte sur NOTRE propre conclusion publiee, donc ses
+    # chiffres doivent etre gardes comme les autres.
+    ic = _source(racine, "incertitude_carte.json")
+    if ic.exists():
+        d = json.loads(ic.read_text())
+        out.append(("paires de rouleaux separees",
+                    [f"{d['paires_separees']} of {d['paires']} pairs",
+                     f"{d['paires_separees']} sur {d['paires']} paires"], ic.name))
+        out.append(("rouleaux distinguables apres Holm",
+                    [f"{len(d['distinguables_holm'])} of {len(d['lignes'])}",
+                     f"{len(d['distinguables_holm'])} sur {len(d['lignes'])}"], ic.name))
+        for e in d.get("puissance", []):
+            out.append((f"puissance a {e['n']} fenetres",
+                        [f"{e['puissance'] * 100:.0f} % power",
+                         f"{e['puissance'] * 100:.0f} % de puissance"], ic.name))
+    cc = _source(racine, "comparaison_cartes.json")
+    if cc.exists():
+        d = json.loads(cc.read_text())
+        ajoute("rho entre carte creuse et carte dense", d["rho"], 3, cc.name, signe=True)
+        out.append(("rouleaux qui changent de rang",
+                    [f"{d['rangs_changes']} of {len(d['lignes'])} scrolls change rank",
+                     f"{d['rangs_changes']}/{len(d['lignes'])} rouleaux changent de rang"],
+                   cc.name))
+        dans = sum(1 for l in d["lignes"] if l["dense_dans_ic_creux"])
+        out.append(("estimations denses dans l'intervalle creux",
+                    [f"{dans} of the {len(d['lignes'])}", f"{dans} des {len(d['lignes'])}"],
+                    cc.name))
+
     jr = _source(racine, "juge_resultats.json")
     if jr.exists():
         d = json.loads(jr.read_text())

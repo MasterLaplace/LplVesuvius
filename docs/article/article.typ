@@ -710,9 +710,20 @@ once that it needs re-validating on their corpus, instead of discovering it afte
 
 == The tracer is a draw, not a function <sec:draw>
 
-The public tracer is multi-threaded and draws from an unseeded generator. Running it twice
-with *strictly identical* parameters, seed and input does not return the same surface. This
-is not documented, and no repetition or error bar appears in the primary literature.
+The public tracer is multi-threaded and draws from a generator that is unseeded *by
+default*: its entry point calls `srand(clock())`, and its growth core builds a
+`std::mt19937` from `std::random_device` unless an environment variable supplies a
+seed.#footnote[`apps/src/vc_grow_seg_from_seed.cpp:357` and `core/src/GrowPatch.cpp:99-108`
+in @villa. The escape hatch, `VC_GROWPATCH_RNG_SEED`, exists --- so the behaviour is known
+to its authors --- but it is named once in the monorepo and the default path does not use
+it.] Running the tool twice with *strictly identical* parameters, seed and input does not
+return the same surface, and no repetition or error bar appears in the primary literature.
+
+The observable we use is stronger than a distance because the *instrument* is guaranteed
+where the tracer is not. The official checker's documentation states that "two runs on the
+same surface produce identical reports regardless of thread count" @villa, and `windcheck`
+re-measures that invariance across nine configurations @windcheck. A flip of its verdict
+therefore cannot come from the checker: it is evidence that the surface itself changed.
 
 We measured it as a paired campaign: 13 prize scrolls, six runs each, 78 runs, every
 parameter fixed.
@@ -795,7 +806,22 @@ by construction. It was not a property of the scroll; it was the budget cutting 
 
 *The cleanliness was a truncation too.* Self-intersecting runs go from 1/12 to 9/12.
 `PHerc0191` did not flip at all at the original budget --- zero dirty runs out of six ---
-and flips 4 times out of 6 once released. *The traces were clean because they were short.*
+and flips 4 times out of 6 once released. The traces were clean because they were short.
+
+#caveat[
+  *That half is a confirmation, not a discovery, and the source says it better than we did.*
+  `windcheck` @windcheck publishes the same law across a 278-trace corpus: "a larger surface
+  has more opportunities to fold through itself; a small trace is clean substantially because
+  it is small \[...\] the 86% figure published for the original five samples is not a
+  property of those samples --- it is what happens when you trace large surfaces."
+  #linebreak()
+  What our design adds is the direction of the inference. That law is transversal, measured
+  across realised sizes; here the budget is changed *on the same scroll with everything else
+  held fixed*, so size stops being a property of the instance and becomes a knob. The half of
+  this section that has no precedent we could find is the other one --- the *dispersion*
+  collapsing under a shared truncation --- because nobody in this ecosystem runs the tracer
+  repeatedly at one configuration to measure its spread.
+]
 
 #caveat[
   *Scope, and cost.* Two scrolls entered the verdict, not thirteen. A third, `PHerc0358`,
@@ -1064,8 +1090,16 @@ reader would extrapolate from, and it does not.
 
 == Published segments do not tile a sheet <sec:merge>
 
-The remaining route to a continuous strip is to stitch published segments together. The
-tool exists and needs surfaces that *overlap*.
+The remaining route to a continuous strip is to stitch published segments together. Neither
+the difficulty nor the discriminant below is ours: the official tutorial opens by stating
+that the tools produce "a big pile of small pieces \[...\] gluing the pieces together
+directly is hard, especially where there are gaps between them", and its footnote on the
+surface tracer says it "requires the patches to physically overlap or touch" @villa. The
+reference implementation already treats a bounding box as a cheap reject and decides on a
+point-to-surface distance of two voxels.#footnote[`core/src/QuadSurface.cpp`, `overlap()`:
+the bounding-box test returns early, then `pointTo(..., 2.0, ...)` decides.] What follows is
+therefore not a method but a *census*: the same discriminant applied exhaustively to one
+scroll's published corpus, which we could find nowhere in the toolchain.
 
 `PHerc1447` publishes 15 segments. Of their 105 pairs, 51 overlap by bounding box, many by
 90--100 %. But a box overlap cannot tell "two patches of one sheet" from "two adjacent
@@ -1098,7 +1132,9 @@ point-to-point gap.
 ) <tab:segments>
 
 The published segmentation of this scroll is a set of samples --- *one patch per sheet* ---
-not a tiling of one sheet. There is nothing to stitch. Combined with the fixed point of
+not a tiling of one sheet. There is nothing to stitch. The corpus we read describes its own
+output as "sparse", "scattered", "pieces with gaps"; *one patch per sheet* is a stronger and
+more falsifiable statement, and it is what 105 pairs support. Combined with the fixed point of
 #link(<sec:chain>)[Section 5.6], both named routes to a continuous strip are measured and
 closed, each for its own reason.
 
@@ -1115,6 +1151,26 @@ The primary literature publishes neither repetitions nor error bars for the segm
 step. Given a tool that returns a different surface on every call, a single reported
 surface is a sample from a distribution whose width is not reported --- and we measure that
 width to be, in the extreme, 115 % of the mean.
+
+#caveat[
+  *The cheapest demonstration is one we ran on ourselves.* We had published a difficulty map
+  of the 13 prize scrolls and named one of them as the place to start. Re-reading the same
+  artefacts with an interval rather than a point --- no new data, no new run ---
+  *0 of 78 pairs* are separated and *0 of 13* scrolls differ from the control once
+  Holm-corrected. The
+  five that clear the nominal threshold sit between $p = 0.014$ and $p = 0.028$, which is the
+  band thirteen trials produce on their own. The instrument also said what the map would cost
+  to settle: 25 windows per scroll give 39 % power, *50 give 80 %*.
+  #linebreak()
+  We then ran it. Denser sampling reorders the map: Spearman $rho = -0.297$ against the sparse
+  ranking and *13 of 13 scrolls change rank*. The scroll we had named first, at 3.6 %, measures
+  12.8 % and lands sixth; the scroll ranked tenth at 20.0 % measures 2.6 % and lands first. The
+  control that read *0 %*, and whose zero was the reason it was a control, reads *4 %*.
+  #linebreak()
+  And the honest half: *12 of the 13* dense estimates fall inside the sparse interval. The
+  sparse map was not biased, it was noisy --- which is exactly what an interval says and a
+  ranking cannot.
+]
 
 == What a point estimate costs <sec:interval>
 

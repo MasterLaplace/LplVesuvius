@@ -1,0 +1,38 @@
+{
+  "corpus": "Scroll 1",
+  "grandeur": "fraction_below_third",
+  "traces_publiees": 55,
+  "traces_mesurees": 46,
+  "traces_communes": 46,
+  "rho_croisements": 0.7689327755181317,
+  "p_croisements": 4.3395292606150655e-10,
+  "rho_longueur": -0.23231575701510943,
+  "p_longueur": 0.1202747786234535,
+  "rho_longueur_croisements": 0.050112864106814904,
+  "terciles": [
+    {
+      "tercile": 1,
+      "n": 16,
+      "couverture_min": 0.257,
+      "couverture_max": 2.026,
+      "rho": 0.8198938259738533,
+      "p": 0.00010091186376838783
+    },
+    {
+      "tercile": 2,
+      "n": 15,
+      "couverture_min": 2.029,
+      "couverture_max": 3.97,
+      "rho": 0.9437001087321427,
+      "p": 1.2962331011509143e-07
+    },
+    {
+      "tercile": 3,
+      "n": 15,
+      "couverture_min": 3.977,
+      "couverture_max": 18.033,
+      "rho": 0.7388205024002956,
+      "p": 0.0016525318344922288
+    }
+  ]
+}

@@ -66,6 +66,11 @@ def main() -> int:
         "--field", default="fraction_below_third",
         help="grandeur de proximite a correler (defaut: fraction_below_third)",
     )
+    # ⚠⚠ Ajoute le 2026-09-03 : sans sortie machine, les chiffres de ce fichier ne peuvent
+    # pas etre gardes par `verifier_chiffres`, donc l'article ne pouvait pas les citer sans
+    # rompre sa propre regle -- « un chiffre publie dont le calcul n'est pas dans l'arbre
+    # n'est pas un resultat, c'est une anecdote ». Il l'etait ; il ne l'est plus.
+    parser.add_argument("--json", type=Path, help="ecrit la mesure complete dans ce fichier")
     args = parser.parse_args()
 
     published = load_published(args.published, args.corpus)
@@ -103,16 +108,34 @@ def main() -> int:
     # sans hypothese de linearite, et elle montre OU l'effet tient.
     order = np.argsort(span)
     bins = np.array_split(order, 3)
+    terciles = []
     print("a longueur comparable (tercile de couverture) :")
     for index, group in enumerate(bins, start=1):
         if group.size < 5:
             print(f"  tercile {index} : {group.size} traces, trop peu")
             continue
         rho, p = spearman(proximity[group], events[group])
+        terciles.append(dict(tercile=index, n=int(group.size),
+                             couverture_min=float(span[group].min()),
+                             couverture_max=float(span[group].max()),
+                             rho=float(rho), p=float(p)))
         print(
             f"  tercile {index} : n={group.size:2d}  couverture {span[group].min():.2f}"
             f"-{span[group].max():.2f} tours   rho = {rho:+.3f}  (p = {p:.3g})"
         )
+
+    if args.json:
+        args.json.parent.mkdir(parents=True, exist_ok=True)
+        args.json.write_text(json.dumps(dict(
+            corpus=args.corpus, grandeur=args.field,
+            traces_publiees=len(published), traces_mesurees=len(measured),
+            traces_communes=len(common),
+            rho_croisements=float(rho_events), p_croisements=float(p_events),
+            rho_longueur=float(rho_span), p_longueur=float(p_span),
+            rho_longueur_croisements=float(rho_span_events),
+            terciles=terciles,
+        ), indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"\necrit : {args.json}")
     return 0
 
 
