@@ -46,3 +46,28 @@ if __name__ == "__main__":
           (1.2 / 113**2) / (0.22 / 78**2))
     for nom, spires in (("PHerc0826", 60), ("PHerc0125", 82), ("PHerc0800", 103), ("PHerc0268", 129)):
         print(f"{nom}: {spires} spires -> {spires * 25} h a 8 cm, {spires * 25 * 20 / 8:.0f} h a 20 cm")
+
+
+# ── ajouté pour docs/73 ─────────────────────────────────────────────────────────
+def tuiles_pour_separer(delta: float, sigma: float = 0.2243, deux_conditions: bool = True,
+                        z_alpha: float = 1.96, z_beta: float = 0.84) -> float:
+    """Tuiles PAR CONDITION pour séparer un écart d'AUC `delta` au seuil usuel, 80 % de puissance.
+
+    σ = 0,2243 est l'écart-type de tuile à tuile mesuré dans `64` (minorant : les tuiles
+    voisines ne sont pas indépendantes). Deux conditions comparées → formule à deux
+    échantillons (2σ²) ; une condition contre une valeur fixe (0,5) → un échantillon (σ²).
+    Contrôle : δ = 0,171 à deux conditions rend 27, le chiffre de `64`.
+    """
+    k = 2.0 if deux_conditions else 1.0
+    return k * (z_alpha + z_beta) ** 2 * sigma ** 2 / delta ** 2
+
+
+if __name__ == "__main__":
+    print("--- docs/73 ---")
+    c = tuiles_pour_separer(0.171)
+    assert abs(c - 27) < 1, c
+    print("tuiles pour separer 0,171 entre deux fragments (controle de 64) :", round(c, 1))
+    print("tuiles pour separer AUC(9,72um)=0,599 de 0,5, une condition :", round(tuiles_pour_separer(0.099, deux_conditions=False), 1))
+    print("tuiles PAR CONDITION pour separer 3,24um (0,674) de 9,72um (0,599) :", round(tuiles_pour_separer(0.075), 1))
+    for ep in (24, 40, 60):
+        print(f"113 um face-a-face + epaisseur {ep} um = {113 + ep} um centre-a-centre (atlas 1447 : 172,8 ; docs/16 : 156)")
