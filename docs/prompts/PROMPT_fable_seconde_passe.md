@@ -9,6 +9,56 @@
 
 ---
 
+## 0. ⚠⚠⚠ LE CADRAGE — il manquait au premier prompt, et c'est la faute la plus chère
+
+Il est dans ce dépôt depuis le 2026-08-17, l'auteur l'a redonné plusieurs fois, et **aucun des
+deux prompts ne te l'avait transmis**. Le voici verbatim (`HANDOFF.md` §0 et §1) :
+
+> **Le but est le DÉROULEMENT, pas la lecture.** Traduire n'est pas notre métier. Repérer
+> quelques lettres sert à **s'assurer que le rouleau assemblé et déroulé fait du sens** —
+> **l'encre est la règle graduée, pas l'ouvrage.**
+>
+> ⚠ **Pousser l'AUC plus haut, chercher un meilleur détecteur d'encre ou faire transcrire
+> davantage NE SERT PAS l'objectif.**
+>
+> Le projet vise à **fermer la chaîne géométrique** : une pipeline assez intelligente pour
+> cartographier un papyrus cabossé et carbonisé, **automatiquement**, puis **la leur donner à
+> lancer**. Les **775 heures d'annotation** de l'état de l'art ne sont pas une barrière à
+> l'entrée — **elles sont la cible à supprimer**.
+
+Et c'est ce que le prix demande mot pour mot : *« The unrolling pipeline should be **fully
+automated** »*, *« consider a **Docker image that we can easily run** »*.
+
+### ⚠⚠ Ce que ça dit de ton rapport, mesuré
+
+| | |
+|---|---:|
+| tes hypothèses portant sur la règle graduée | **3 clairement** (H1, H2, H7) **+ 1 discutable** (H3) |
+| mois de ton plan consacrés à l'encre (mois 1, puis 6–8) | **4 sur 10** |
+| titre de ton mois 1 | *« trancher la physique avant la géométrie »* |
+
+⚠ H3 est comptée à part exprès, parce que le compte doit survivre à ton examen : son gain
+déclaré est une *« scan-quality metric »*, donc côté règle, mais elle promet aussi une carte
+co-localisée avec les régions où le **traçage** échoue — et ça, c'est le cœur du sujet. **Si tu
+la réorientes vers ce second usage, elle change de camp**, et c'est peut-être le meilleur
+arbitrage de tout ton rapport.
+
+**Ton mois 1 titre l'inversion exacte du cadrage**, et tu ne pouvais pas le savoir. Ton §1.3
+est pourtant juste et central — *« le goulot est géométrique, et il est dix fois plus large que
+dans le papier »*, 2 à 4 années-personne par rouleau — mais ton plan ne le suit pas.
+
+⚠ **Ce n'est pas un ordre de tout jeter.** Ton argument « mesurer la règle avant d'investir »
+est légitime : si le régime du prix ne peut porter aucune encre, dérouler ces rouleaux-là ne
+sert à rien. **Ce qu'on te demande, c'est de le défendre ou de le changer**, en sachant que le
+critère du prix est *« 100 % du recto, colonnes visibles partout »* — donc une surface, pas une
+lisibilité.
+
+⚠ Et le biais vient de nous : le premier prompt mettait en tête le **nombre de Fresnel** et les
+**103 cases vides**, deux résultats sur *si l'encre est lisible*, jamais sur *comment dérouler*.
+Tu as suivi ce qu'on t'a montré.
+
+---
+
 ## 0. Le constat qui justifie cette seconde passe
 
 Mesuré sur ton propre document :
@@ -137,9 +187,18 @@ en faudrait 27 par fragment pour séparer un écart de 0,171 ; on en avait 10, 1
    mesures contredisent ? Une limite qu'on ne déclare pas ? ⚠ Nous avons déjà trouvé qu'il
    promettait trois choses et en livrait une, et qu'il s'appuyait en silence sur deux mécanismes
    publiés par d'autres. **Trouve ce qu'on n'a pas trouvé.**
-3. **Ton plan du §6, révisé.** Il propose dix mois. Sachant maintenant ce qu'on a déjà, ce qui
-   est mort, et ce que l'antériorité coûte : quel est le **premier mois**, et **qu'est-ce que tu
-   retires** de ton propre plan ?
+3. ⭐⭐ **Ton plan du §6, RÉPONDÉRÉ contre le cadrage du §0.** Quatre de tes dix mois et quatre
+   de tes sept hypothèses portent sur la règle graduée. Deux réponses acceptables, et une seule
+   inacceptable :
+   - **tu défends la répartition** — dis pourquoi mesurer la règle d'abord est le chemin le plus
+     court vers le déroulage, et **combien de temps** ça mérite vraiment (une semaine ? un
+     mois ?) ;
+   - **tu la changes** — et alors dis ce que devient le mois 1, et quelles hypothèses tu
+     remplaces par des hypothèses **sur le traçage, l'approbation et l'aplatissement** ;
+   - ⚠ ce qui n'est pas acceptable, c'est de laisser la répartition telle quelle sans la traiter.
+
+   Et la question qui vaut le prix, posée franchement : **qu'est-ce qui remplace le pinceau ?**
+   Ton H4 et ton A5 y touchent ; c'est là qu'on attend ton meilleur travail, pas sur l'AUC.
 4. **Une chose qu'on n'a pas vue.** Une seule, la plus forte. Tu as un avantage qu'on n'a pas :
    tu lis notre travail **sans l'avoir fait**, donc sans le défendre.
 

@@ -9,6 +9,16 @@
 
 ---
 
+> ⚠⚠⚠ **RÉSERVE AJOUTÉE LE 2026-09-03, et elle vaut pour tout ce document.** Ce papier porte
+> sur le **régime d'imagerie** — donc sur ce que `HANDOFF` §1 appelle la **règle graduée**, pas
+> l'ouvrage. Le cadrage de l'auteur est explicite : *« le but est le DÉROULEMENT, pas la
+> lecture »*, et *« pousser l'AUC plus haut […] ne sert pas l'objectif »*.
+>
+> ⭐ Ce document décrit donc une **occasion de publication**, pas un **progrès vers le prix**.
+> Les deux sont légitimes et ce ne sont pas les mêmes : le prix se gagne sur la chaîne
+> géométrique automatique, et rien ici n'y contribue directement. À arbitrer comme tel, et non
+> à traiter comme la suite naturelle du travail.
+
 ## 1. La thèse, en une phrase
 
 **Les treize rouleaux du Grand Prize n'ont pas un mauvais scan : ils ont un scan de
