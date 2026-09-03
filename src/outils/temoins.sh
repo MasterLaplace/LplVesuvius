@@ -1168,6 +1168,11 @@ run "la case vide"             uv run python "$ROOT/src/encre/la_case_vide.py" -
 # ⭐ L'axe d'un rouleau n'est pas une droite -- et son contre-controle, qui est ce qui evite
 # que ce fichier soit alarmiste : l'invariant survit a la derive mesuree.
 run "l'axe n'est pas droit"    uv run python "$ROOT/src/excision/laxe_nest_pas_une_ligne.py" --verifier
+# ⭐⭐⭐ Le referent d'IDENTITE que `73` a trouve et sous-compte d'un facteur ~3 : les segments
+# publies portent leur numero de spire. Son controle le plus utile est celui que j'ai d'abord
+# ecrit FAUX -- j'affirmais que referent d'identite et carte dense sont disjoints, il a echoue,
+# et `PHerc0139` porte les deux. La mesure a corrige la conclusion, pas une relecture.
+run "les indices de spire"     uv run python "$ROOT/src/excision/les_indices_de_spire.py" --verifier
 # ⭐⭐ Le garde-fou de l'angle mort qui a mordu TROIS fois : interroger une vue du corpus et
 # conclure sur le corpus. Sa sonde la plus utile reduit la comparaison a une seule vue --
 # la faute exacte du `07` -- et fait tomber trois controles.

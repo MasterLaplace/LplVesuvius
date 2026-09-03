@@ -1,0 +1,326 @@
+{
+  "source": "data/metadata.min.json",
+  "rouleaux_avec_segments": 12,
+  "rouleaux_indexes": [
+    "PHerc0139",
+    "PHerc0172",
+    "PHerc1667"
+  ],
+  "total_segments_indexes": 101,
+  "total_spires_distinctes": 100,
+  "courses_sans_trou": [
+    "PHerc0139",
+    "PHerc0172"
+  ],
+  "total_spires_sans_trou": 81,
+  "annonce_73": {
+    "segments": 57,
+    "rouleaux": [
+      "PHerc0139",
+      "PHerc1667"
+    ],
+    "spires": 56
+  },
+  "croisement": [
+    {
+      "rouleau": "PHerc0009B",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": null
+    },
+    {
+      "rouleau": "PHerc0125",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": 0.13846153846153847
+    },
+    {
+      "rouleau": "PHerc0139",
+      "spires_indexees": 37,
+      "course_sans_trou": true,
+      "part_sous_1": 0.04395604395604396
+    },
+    {
+      "rouleau": "PHerc0172",
+      "spires_indexees": 44,
+      "course_sans_trou": true,
+      "part_sous_1": null
+    },
+    {
+      "rouleau": "PHerc0191",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": 0.12643678160919541
+    },
+    {
+      "rouleau": "PHerc0211",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": 0.18032786885245902
+    },
+    {
+      "rouleau": "PHerc0257",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": 0.16393442622950818
+    },
+    {
+      "rouleau": "PHerc0268",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": 0.13043478260869565
+    },
+    {
+      "rouleau": "PHerc0332",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": null
+    },
+    {
+      "rouleau": "PHerc0343P",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": null
+    },
+    {
+      "rouleau": "PHerc0358",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": 0.12790697674418605
+    },
+    {
+      "rouleau": "PHerc0500P2",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": null
+    },
+    {
+      "rouleau": "PHerc0800",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": 0.02631578947368421
+    },
+    {
+      "rouleau": "PHerc0813",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": 0.15584415584415584
+    },
+    {
+      "rouleau": "PHerc0814",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": null
+    },
+    {
+      "rouleau": "PHerc0826",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": 0.22807017543859648
+    },
+    {
+      "rouleau": "PHerc1203",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": 0.09090909090909091
+    },
+    {
+      "rouleau": "PHerc1218",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": 0.08771929824561403
+    },
+    {
+      "rouleau": "PHerc1447",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": 0.07017543859649122
+    },
+    {
+      "rouleau": "PHerc1545",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": 0.15873015873015872
+    },
+    {
+      "rouleau": "PHerc1667",
+      "spires_indexees": 19,
+      "course_sans_trou": false,
+      "part_sous_1": null
+    },
+    {
+      "rouleau": "PHercMANBp",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": null
+    },
+    {
+      "rouleau": "PHercParis4",
+      "spires_indexees": 0,
+      "course_sans_trou": false,
+      "part_sous_1": null
+    }
+  ],
+  "rouleaux_avec_referent_et_carte": [
+    "PHerc0139"
+  ],
+  "inventaire": {
+    "PHerc0800": {
+      "segments": 6,
+      "indexes_uniques": 0,
+      "spires_distinctes": 0,
+      "premiere": null,
+      "derniere": null,
+      "trous": [],
+      "course_sans_trou": false,
+      "segments_de_plage": 0,
+      "spires_couvertes_par_plages": 0,
+      "auto_grown": 6
+    },
+    "PHerc1667": {
+      "segments": 20,
+      "indexes_uniques": 20,
+      "spires_distinctes": 19,
+      "premiere": 11,
+      "derniere": 41,
+      "trous": [
+        [
+          13,
+          18
+        ],
+        [
+          18,
+          23
+        ],
+        [
+          23,
+          28
+        ]
+      ],
+      "course_sans_trou": false,
+      "segments_de_plage": 0,
+      "spires_couvertes_par_plages": 0,
+      "auto_grown": 0
+    },
+    "PHerc0343P": {
+      "segments": 8,
+      "indexes_uniques": 0,
+      "spires_distinctes": 0,
+      "premiere": null,
+      "derniere": null,
+      "trous": [],
+      "course_sans_trou": false,
+      "segments_de_plage": 0,
+      "spires_couvertes_par_plages": 0,
+      "auto_grown": 0
+    },
+    "PHercParis4": {
+      "segments": 81,
+      "indexes_uniques": 0,
+      "spires_distinctes": 0,
+      "premiere": null,
+      "derniere": null,
+      "trous": [],
+      "course_sans_trou": false,
+      "segments_de_plage": 58,
+      "spires_couvertes_par_plages": 120,
+      "auto_grown": 0
+    },
+    "PHerc0500P2": {
+      "segments": 39,
+      "indexes_uniques": 0,
+      "spires_distinctes": 0,
+      "premiere": null,
+      "derniere": null,
+      "trous": [],
+      "course_sans_trou": false,
+      "segments_de_plage": 0,
+      "spires_couvertes_par_plages": 0,
+      "auto_grown": 0
+    },
+    "PHerc0332": {
+      "segments": 2,
+      "indexes_uniques": 0,
+      "spires_distinctes": 0,
+      "premiere": null,
+      "derniere": null,
+      "trous": [],
+      "course_sans_trou": false,
+      "segments_de_plage": 0,
+      "spires_couvertes_par_plages": 0,
+      "auto_grown": 0
+    },
+    "PHerc0814": {
+      "segments": 19,
+      "indexes_uniques": 0,
+      "spires_distinctes": 0,
+      "premiere": null,
+      "derniere": null,
+      "trous": [],
+      "course_sans_trou": false,
+      "segments_de_plage": 0,
+      "spires_couvertes_par_plages": 0,
+      "auto_grown": 17
+    },
+    "PHercMANBp": {
+      "segments": 11,
+      "indexes_uniques": 0,
+      "spires_distinctes": 0,
+      "premiere": null,
+      "derniere": null,
+      "trous": [],
+      "course_sans_trou": false,
+      "segments_de_plage": 0,
+      "spires_couvertes_par_plages": 0,
+      "auto_grown": 0
+    },
+    "PHerc0009B": {
+      "segments": 19,
+      "indexes_uniques": 0,
+      "spires_distinctes": 0,
+      "premiere": null,
+      "derniere": null,
+      "trous": [],
+      "course_sans_trou": false,
+      "segments_de_plage": 0,
+      "spires_couvertes_par_plages": 0,
+      "auto_grown": 15
+    },
+    "PHerc1447": {
+      "segments": 15,
+      "indexes_uniques": 0,
+      "spires_distinctes": 0,
+      "premiere": null,
+      "derniere": null,
+      "trous": [],
+      "course_sans_trou": false,
+      "segments_de_plage": 0,
+      "spires_couvertes_par_plages": 0,
+      "auto_grown": 14
+    },
+    "PHerc0139": {
+      "segments": 38,
+      "indexes_uniques": 37,
+      "spires_distinctes": 37,
+      "premiere": 23,
+      "derniere": 59,
+      "trous": [],
+      "course_sans_trou": true,
+      "segments_de_plage": 0,
+      "spires_couvertes_par_plages": 0,
+      "auto_grown": 0
+    },
+    "PHerc0172": {
+      "segments": 53,
+      "indexes_uniques": 44,
+      "spires_distinctes": 44,
+      "premiere": 52,
+      "derniere": 95,
+      "trous": [],
+      "course_sans_trou": true,
+      "segments_de_plage": 0,
+      "spires_couvertes_par_plages": 0,
+      "auto_grown": 9
+    }
+  }
+}

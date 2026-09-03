@@ -1725,6 +1725,30 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                      f"{d['temoin_negatif']['periodiques']}/{d['temoin_negatif']['fenetres']}"],
                    tcc.name))
 
+    # ⭐⭐⭐ Le referent d'IDENTITE, releve par `73` §4 et recompte par `74` §3. Garde parce que
+    # le compte publie par `73` -- 57 segments, deux rouleaux -- est faux d'un facteur ~1,8, et
+    # qu'un compte faux qui circule dans un plan choisit le mauvais rouleau (cf. `74` §4).
+    lis = _source(racine, "les_indices_de_spire.json")
+    if lis.exists():
+        d = json.loads(lis.read_text())
+        out.append(("segments portant un indice de spire",
+                    [f"**{d['total_segments_indexes']} segments indexes**",
+                     f"{d['total_segments_indexes']} segments indexés sur "
+                     f"{len(d['rouleaux_indexes'])} rouleaux",
+                     f"{d['total_segments_indexes']} segments, pas "
+                     f"{d['annonce_73']['segments']}"], lis.name))
+        # ⚠ Ce compte-la est celui qui rend H1' testable : « consecutif entre deux spires
+        # consecutives » n'est une question que la ou deux spires consecutives sont publiees.
+        out.append(("spires consecutives sans trou",
+                    [f"**{d['total_spires_sans_trou']} spires consécutives**",
+                     f"{d['total_spires_sans_trou']} spires consécutives"], lis.name))
+        inv = d["inventaire"]
+        for rouleau in ("PHerc0139", "PHerc0172"):
+            v = inv.get(rouleau, {})
+            if v.get("indexes_uniques"):
+                out.append((f"course indexee de {rouleau}",
+                            [f"`w{v['premiere']:03d}`–`w{v['derniere']:03d}`",
+                             f"w{v['premiere']:03d}`–`w{v['derniere']:03d}"], lis.name))
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():
         d = json.loads(bdf.read_text())
