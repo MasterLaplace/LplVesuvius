@@ -157,7 +157,8 @@ This paper is about the judging step. We contribute:
   to 13 prize scrolls: the tracer is non-deterministic in a way that changes verdicts; the
   stability and cleanliness of a trace are artefacts of its generation budget; the render
   window imposes a second ceiling, so that an absolute threshold on a distance compares
-  settings rather than surfaces on 14 of 16 traces; and published segments do not tile a
+  settings rather than surfaces on 14 of 16 traces (13 at the shallow depth, 14 at one
+  depth or the other); and published segments do not tile a
   sheet.
 
 + *A negative control that costs nothing extra* (#link(<sec:negctrl>)[Section 6.5]). A
@@ -198,9 +199,12 @@ few tens of microns off the sheet does not merely blur the signal; it samples a 
 material.
 
 Two geometric facts matter throughout. The sheets are thin and close: on `PHerc1447` we
-measure a median centre-to-centre spacing of 113 #um between neighbouring sheets
-(#link(<sec:geom>)[Section 5.5]), which is about 13 voxels at 8.64 #um. And a
-segment is small relative to a turn: each of ours spans 8 to 22 mm of arc, between 7.7 %
+measure a median gap of 113 #um between consecutive surfaces of a radial chain
+(#link(<sec:geom>)[Section 5.5]), about 13 voxels at 8.64 #um. That gap is a
+nearest-neighbour distance between surfaces, not a centre-to-centre sheet spacing, and it
+depends on the tracer's `neighbor_step`: halving that step three times moves it from 116 to
+102 #um. Independent measurements of sheet spacing on the same scroll give 156 #um median.
+And a segment is small relative to a turn: each of ours spans 8 to 22 mm of arc, between 7.7 %
 and 11.8 % of one revolution.
 
 == Segmentation and its tools
@@ -957,8 +961,9 @@ paired them by identity rather than by list position.
 ) <tab:depth>
 
 Two things follow. First, a threshold on the distance compares *settings* rather than
-surfaces on 14 of 16 traces --- the same failure as the generation budget, in a different
-part of the pipeline. Second, a criterion that *cannot* be truncated drifts anyway: a
+surfaces on 14 of 16 traces --- 13 are censored at the shallow depth and 14 at one depth or
+the other --- the same failure as the generation budget, in a different part of the
+pipeline. Second, a criterion that *cannot* be truncated drifts anyway: a
 median 0.075 on a quantity whose typical value is 0.5, and a maximum of 0.450, which is
 almost the full range of the criterion, produced by changing nothing but the render depth.
 
@@ -1007,12 +1012,22 @@ determined.
   caption: [
     Nine consecutive surfaces of a radial chain, located inside the scroll without knowing
     its axis. Each covers between 7.7 % and 11.8 % of one revolution, and consecutive
-    surfaces sit a median 113 #um apart --- one sheet.
+    surfaces sit a median 113 #um apart: a nearest-neighbour distance between surfaces,
+    which we read as one sheet.
   ],
 ) <fig:geom>
 
 The measurement gives the median gap between consecutive surfaces as 113 #um
-(range 100--138), which is one sheet: the chain advances one sheet at a time, as designed.
+(range 100--138). We read that as one sheet, and the reading is an inference rather than a
+direct measurement of sheet spacing: the gap is a nearest-neighbour distance between
+surfaces, and where each surface lands depends on the tracer. `gen_neighbor` must first
+*leave* the starting sheet before it can stop, and at a fine `neighbor_step` a single
+sub-voxel sample below half-threshold suffices to declare it has left --- so the ray can
+re-enter the same sheet and settle on the near face of its own surface. Measured, the median
+gap falls 116 #sym.arrow.r 109 #sym.arrow.r 107 #sym.arrow.r 102 #um as that step is halved
+three times. Independent spacing measurements on this scroll give a 156 #um median (p10 138),
+so 113 #um is short of one sheet by about the thickness of one. The chain advances one sheet
+at a time, as designed; what varies with the setting is where on the sheet it lands.
 But each surface covers only about a tenth of a turn, and consecutive surfaces occupy *the
 same angular window*. Along the papyrus they are separated by a full circumference that we
 do not possess.
@@ -1101,7 +1116,9 @@ the bounding-box test returns early, then `pointTo(..., 2.0, ...)` decides.] Wha
 therefore not a method but a *census*: the same discriminant applied exhaustively to one
 scroll's published corpus, which we could find nowhere in the toolchain.
 
-`PHerc1447` publishes 15 segments. Of their 105 pairs, 51 overlap by bounding box, many by
+`PHerc1447` publishes 15 segments. Their names say what they are: fourteen
+`auto_grown_<timestamp>` and one `z_dbg_gen_00320` --- outputs of a seeded automatic
+tracer, not a curated segmentation effort. Of their 105 pairs, 51 overlap by bounding box, many by
 90--100 %. But a box overlap cannot tell "two patches of one sheet" from "two adjacent
 sheets", which in a scroll occupy nearly the same volume. The discriminant is the median
 point-to-point gap.
