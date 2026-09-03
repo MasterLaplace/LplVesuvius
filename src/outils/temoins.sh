@@ -1150,6 +1150,28 @@ run "bruit d'une fenetre"     uv run python "$ROOT/src/encre/bruit_dune_fenetre.
 # est celle de Holm : un p brut de 0,0312 sur CINQ tests ne survit pas, et sans la correction
 # ce fichier aurait publie un tirage comme un resultat.
 run "transport de calibration" uv run python "$ROOT/src/encre/transport_de_calibration.py" --verifier
+
+# ⚠⚠ Les cinq batteries du 2026-09-02/03, ajoutees ici parce que la batterie
+# « batteries non lancees » les a nommees : ecrites, vertes, et jamais lancees par personne.
+# C'est exactement la dette qu'elle existe pour attraper, et elle l'a attrapee sur son
+# premier vrai lot.
+# ⭐ La garde des citations : sans elle, « les 70 documents ont ete lus en entier » est une
+# promesse. Elle a compte 88 sur 140 pendant une journee parce qu'elle ne lisait qu'une des
+# trois ecritures de numero de ligne -- corrigee, elle echoue desormais sur ce qu'elle ne
+# sait pas lire au lieu de le retirer de son denominateur.
+run "citations des fiches"     uv run python "$ROOT/src/depot/verifier_citations.py" --verifier
+# ⭐ Le nombre de Fresnel : les « trois parametres couples » n'en font qu'un, et il ordonne
+# les verdicts que le papier de reference ecrit sous ses propres panneaux.
+run "nombre de Fresnel"        uv run python "$ROOT/src/encre/nombre_de_fresnel.py" --verifier
+# ⭐ Les 103 cases vides du regime du prix, chacune avec son temoin positif.
+run "la case vide"             uv run python "$ROOT/src/encre/la_case_vide.py" --verifier
+# ⭐ L'axe d'un rouleau n'est pas une droite -- et son contre-controle, qui est ce qui evite
+# que ce fichier soit alarmiste : l'invariant survit a la derive mesuree.
+run "l'axe n'est pas droit"    uv run python "$ROOT/src/excision/laxe_nest_pas_une_ligne.py" --verifier
+# ⭐⭐ Le garde-fou de l'angle mort qui a mordu TROIS fois : interroger une vue du corpus et
+# conclure sur le corpus. Sa sonde la plus utile reduit la comparaison a une seule vue --
+# la faute exacte du `07` -- et fait tomber trois controles.
+run "ou vit ce rouleau"        uv run python "$ROOT/src/volume/ou_vit_ce_rouleau.py" --verifier
 # ⚠⚠ La question litterale de `M1ter`. Sa sonde la plus utile est celle du melange : le
 # temoin doit ramener l'AUC au hasard, sinon « au-dessus du hasard » ne veut rien dire.
 run "lisible a neuf microns"  uv run python "$ROOT/src/encre/lisible_a_neuf_microns.py" --verifier

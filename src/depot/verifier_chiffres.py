@@ -709,7 +709,13 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         out.append(("rouleaux distinguables apres Holm",
                     [f"{len(d['distinguables_holm'])} of {len(d['lignes'])}",
                      f"{len(d['distinguables_holm'])} sur {len(d['lignes'])}"], ic.name))
+        # ⚠ Seules les deux valeurs que l'article CITE sont enregistrees. Collecter les
+        # quatre faisait rapporter « 99 % » et « 100 % » comme perimes a chaque execution :
+        # un chiffre que personne ne cite est un chiffre que le garde-fou signale pour
+        # toujours, et un signal permanent cesse d'etre lu.
         for e in d.get("puissance", []):
+            if e["n"] not in (25, 50):
+                continue
             out.append((f"puissance a {e['n']} fenetres",
                         [f"{e['puissance'] * 100:.0f} % power",
                          f"{e['puissance'] * 100:.0f} % de puissance"], ic.name))
@@ -1418,17 +1424,25 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                     [f"{vides} rendus", f"**{vides} rendus**",
                      f"{vides} piles", f"**{vides} piles**"], "matiere_des_piles*.json"))
 
-    p = _source(racine, "temoins.json")
-    if p.exists():
-        d = json.loads(p.read_text())
-        out.append(("batteries de temoins",
-                    [f"{d['batteries_all_pass']} batteries, {d['controles']} controles",
-                     f"{d['batteries_all_pass']} batteries, {d['controles']} contrôles"],
-                    p.name))
-        if d.get("chiffres_recalcules"):
-            out.append(("chiffres recalcules par le garde-fou",
-                        [f"{d['chiffres_recalcules']} chiffres",
-                         f"**{d['chiffres_recalcules']} chiffres**"], p.name))
+    # ⚠⚠⚠ LES COMPTES DE LA SUITE NE SONT PLUS GARDES ICI — retires le 2026-09-03, et la
+    # raison vaut d'etre ecrite parce qu'elle contredit la regle par defaut de ce fichier.
+    #
+    # `temoins.json` porte « N batteries, M controles » et « K chiffres recalcules ». Ce
+    # sont des proprietes de la SUITE, pas des resultats sur le monde : elles changent a
+    # chaque batterie ajoutee. Les garder revenait a exiger qu'un humain recopie trois
+    # nombres dans quatre documents chaque fois qu'il ecrit un controle -- et l'obligation
+    # s'est declenchee le jour meme, sur cinq batteries ajoutees.
+    #
+    # ⚠ Le mode de panne est celui que le docstring de CARTES_ATTENDUES nomme deja :
+    # « le compte de chiffres gardes est AUTO-REFERENT ». Un garde-fou qui se compte
+    # lui-meme perime sa propre citation en grandissant, donc il finit par crier a chaque
+    # execution -- et un signal permanent cesse d'etre lu, ce qui est pire que pas de
+    # signal du tout.
+    #
+    # ⭐ Le remede n'est pas de mieux recopier : c'est que la prose PONTE vers le fichier
+    # au lieu de le citer. Les quatre sites concernes disent desormais ou lire le compte,
+    # et `temoins.sh` l'imprime a chaque execution. Les RESULTATS, eux, restent gardes :
+    # ce sont eux qui ne doivent pas deriver en silence.
 
     # ⚠⚠ M1ter — l'ecart aux conditions de la cible, et ce que la resolution peut couter.
     # Chaque chiffre du document 58 est RECALCULE ici depuis les quatre rapports, jamais
