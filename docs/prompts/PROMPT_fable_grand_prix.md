@@ -1,5 +1,19 @@
 # Prompt — Fable 5.1 : trouver ce qui débloque le Grand Prix Vesuvius
 
+> ⚠⚠⚠ **CE PROMPT A DEUX DÉFAUTS CONNUS, corrigés dans `PROMPT_fable_seconde_passe.md`.**
+> Gardé tel quel comme trace de ce qui a réellement été demandé.
+>
+> 1. **Il n'énonce nulle part le cadrage de l'auteur** — *« le but est le DÉROULEMENT, pas la
+>    lecture ; l'encre est la règle graduée »* (`HANDOFF.md` §0 et §1) — et il met en tête deux
+>    résultats sur la **lisibilité** : le nombre de Fresnel et les 103 cases vides. Le rapport
+>    qui en est sorti ([`69`](../69_reponse_dun_chercheur_exterieur.md)) consacre en conséquence
+>    **4 mois sur 10** à la règle graduée et titre son mois 1 *« trancher la physique avant la
+>    géométrie »*, l'inversion exacte du cadrage.
+> 2. **Il ne demande pas de juger notre travail.** Il donne nos résultats comme une liste
+>    d'hypothèses éliminées — des contraintes sur la recherche, pas du travail à arbitrer.
+>    Mesuré sur `69` : **6 de nos 74 documents cités**, l'article **zéro fois**, et aucun de nos
+>    quatre résultats de tête nommé.
+
 > ⚠ **À lire par le modèle invité, pas par nous.** Ce fichier est versionné pour que la
 > question posée soit reproductible, et pour qu'on puisse comparer deux réponses.
 > Généré le 2026-08-31 depuis l'état mesuré du dépôt.
