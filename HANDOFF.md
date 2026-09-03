@@ -5,7 +5,87 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
-## ⭐⭐⭐⭐ REPRISE — 2026-08-28, fin d'après-midi
+## ⭐⭐⭐⭐ REPRISE — 2026-09-03
+
+**Douze commits depuis le 2 septembre.** L'arbre est propre, les sept gardes sont vertes,
+l'article fait **27 pages**. Ce bloc remplace le précédent comme état courant ; tout ce qui
+suit est l'historique, y compris l'ancienne REPRISE du 28 août.
+
+### Ce qui a été tranché, et l'ordre importe
+
+**1. ⭐⭐⭐ Le papier de référence lu EN ENTIER**, figures et Supplementary comprises →
+[`68`](docs/68_lire_le_papier_en_entier.md). Le [`27`](docs/27_ce_que_la_litterature_dit.md)
+l'avait lu pour *auditer sa nouveauté* ; relu pour *refaire sa méthode*, il rend quatre
+choses que la première lecture ne pouvait pas voir. Les 775 heures humaines tiennent à **une
+étape sur dix-sept**, un **pinceau** (`ApprovalMaskBrushTool`), et son interface est un
+fichier : écrire `approval.tif` à côté de `x/y/z.tif` **est** l'intégration entière.
+Les « trois paramètres couplés » n'en font **qu'un**, $F = \sqrt{\lambda D}/p$, qui ordonne
+les verdicts publiés. Et **103 cases vides** du régime du prix sont publiées en couches
+rendues, sans carte d'encre, **avec un témoin positif sur le même segment**.
+
+**2. ⭐⭐⭐ Les 70 documents lus INTÉGRALEMENT** → [`70`](docs/70_ce_que_larticle_condense.md)
+et [`registres/fiches_de_lecture.md`](docs/registres/fiches_de_lecture.md). Le compte :
+**22 procédé, 21 dans l'article, 27 dehors**. Non, 27 pages ne contiennent pas tout — mais un
+tiers du corpus est le *procédé*, qu'aucun article ne contient.
+
+**3. ⭐⭐ Les trois résultats de tête audités** → [`71`](docs/71_les_trois_resultats_de_tete_audites.md).
+**PARTIELLEMENT** tous les trois. Le mécanisme du tirage était **dans le code publié**
+(`srand(clock())`) ; la moitié « propreté » du budget est **déjà publiée sur 278 traces** ;
+le discriminant du pavage est **celui du code de référence**. Et un argument **récupéré** :
+le vérificateur est garanti déterministe, donc une bascule de verdict **prouve que la surface
+a changé**. L'article porte les trois corrections.
+
+**4. L'article a gagné trois sections** — §6.2 (ce que coûte un point estimé), §6.6 (le juge),
+§6.7 (où ça se branche) — parce que sa §2.4 annonçait trois apports et n'en livrait qu'un.
+Plus le caveat du `33` en §6.1. **44 chiffres gardés**, tous recalculés depuis leur fichier.
+
+### ⚠⚠ Ce qui a été DÉTRUIT, et c'est le plus important à savoir
+
+**La conclusion-titre du [`07`](docs/07_reparee_nest_pas_propre.md) ne tient pas.** En voulant
+rendre son chiffre recalculable pour l'article — réparer une trace, remesurer — la proximité
+**baisse de 22 à 50 %** là où le document publie qu'elle ne bouge pas, et **pas
+proportionnellement à ce qui est retiré**. La section que le `70` recommandait n'est donc
+**pas écrite**. ⚠ Le cas discriminant (une trace peu atteinte) **n'est pas montable** : la
+métrique exige plus d'un tour et sur ce rouleau toutes les traces longues sont les plus
+atteintes.
+
+**Et une correction du `07` §9 était elle-même fausse** : `PHerc1667` publie bien un scan à
+7,91 µm. **Troisième occurrence du même angle mort** — interroger une vue du corpus et
+conclure sur le corpus — après `59` et `67` §4.2. D'où un garde-fou plutôt qu'une troisième
+correction : `src/volume/ou_vit_ce_rouleau.py`.
+
+### ⚠⚠⚠ Deux gardes qui ne pouvaient pas voir ce qu'elles gardaient
+
+- **`verifier_citations` comptait 88 sur 140.** Son motif ne connaissait qu'une des trois
+  écritures de numéro de ligne, donc **44 citations sur 132 n'étaient jamais vérifiées**. Elle
+  ne mentait pas sur ses 88 : son **dénominateur** était le sous-ensemble qu'elle savait lire.
+  Corrigée, et surtout : elle **compte les lignes de preuve illisibles et échoue dessus**, et
+  signale la **dérive** d'une citation dont le document a bougé. Elle a servi dès son premier
+  usage réel.
+- **`espacement_spires` tournait au niveau 2** de pyramide, qui fusionne les feuilles
+  voisines — mesuré 36/36 par `winding-ruler`. Notre propre chiffre (« 89 % des murs
+  conservés ») **était** le défaut, lu comme une vertu. Défaut passé à 1.
+
+### ⭐ Un résultat neuf, tombé d'une prémisse fausse
+
+**Un axe de rouleau n'est pas une droite** → `src/excision/laxe_nest_pas_une_ligne.py`.
+L'ombilic **est** publié (241 points), et il erre de **21,6 mm sur 108 mm** de hauteur : le
+remplacer par un centre unique coûte **16,75 mm au pire, soit 148 écarts inter-feuilles**.
+⭐ Avec le contre-contrôle : le balayage de sensibilité **encadrait** cette dérive et
+l'invariant n'y bouge que de **1,85 %** — la conclusion tient, sur une mesure cette fois.
+
+### Ce qui reste, dans l'ordre
+
+| | |
+|---|---|
+| **refonder l'arc excision** (`03` `04` `05` `07`) | le plus gros manque de l'article, et sa conclusion vient d'être déstabilisée |
+| **le second papier, côté encre** | `58` `59` `63`, `68` §3-4, et la **case vide** à remplir |
+| **`docs/69`** | écrit par Fable, **non lu** sur consigne de l'auteur |
+| le contrôle P1 bis du `71` | ×15,9 exigé contre ×3,8 observé, à faire tourner |
+
+---
+
+## REPRISE (historique) — 2026-08-28, fin d'après-midi
 
 **Trente-six commits depuis la nuit du 27.** L'arbre est propre, la suite est verte. Ce bloc
 remplace le précédent comme état courant ; tout ce qui suit est l'historique.
