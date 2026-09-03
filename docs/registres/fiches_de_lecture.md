@@ -367,7 +367,7 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
 ---
 
 ### docs/07_reparee_nest_pas_propre.md
-- **lignes** : 466 ⚠ (438 quand la fiche a été écrite ; un bloc de 28 lignes a été ajouté en tête le 2026-09-03)
+- **lignes** : 482 ⚠ (438 quand la fiche a été écrite ; le document a reçu deux blocs de correction le 2026-09-03)
 - **nature** : RESULTAT
 - **résumé** : Le résultat central du dépôt sur la métrique de proximité : la réparation d'auto-intersection ramène les contacts à zéro et **ne déplace pas** la proximité anormale (0,37 → 0,38 %). Le document se corrige ensuite trois fois — il retire l'affirmation que la métrique **sépare** saines et réparées, il montre que le remède de principe pour la référence locale (une boule 3D) rend la mesure pire, et il découvre que la métrique est **inapplicable** sous un tour de couverture (44 traces de Scroll 5 sur 53 rendent zéro cellule). Le §9 remplace enfin le rayon de recherche par une constante physique. ⚠ Le fichier contient deux sections numérotées « ## 6 ».
 - **conclusions extractibles** :
@@ -397,6 +397,12 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
     1,464 → 0,735 % et 3,483 → 2,707 %, soit −49,8 % et −22,3 % — et **pas proportionnellement
     à ce qui est retiré**. Ce qui reste établi : la corrélation (ρ = +0,769) et le rayon dérivé
     de la physique. Mesure : `docs/mesures/reparation_deplace_la_proximite.json`.
+  - ⚠⚠⚠ **2026-09-03, §9, UNE CORRECTION QUI ÉTAIT ELLE-MÊME FAUSSE** — postérieure à cette
+    fiche. Le §9 annulait sa ligne `PHerc1667` en affirmant que ce rouleau « n'a AUCUN volume
+    à 7,91 µm ». Il en publie un (`20231117161658-7.910um-53keV`), et le maillage lu par le
+    balayage le nomme. La vue interrogée listait des **volumes de surface**, pas des scans.
+    **Troisième occurrence du même angle mort** (après `59` et `67` §4.2), d'où un garde-fou
+    plutôt qu'une troisième correction : `src/volume/ou_vit_ce_rouleau.py`.
   - §3 : « ### ⚠⚠ Correction : "quatre fois au-dessus d'une trace saine" était faux » — c'était une comparaison à un seul témoin, qui se trouvait être bas. **L'énoncé qui tombe** : que la mesure sépare proprement « réparée » de « saine ». « Elle ne le fait pas — c'est un indicateur continu corrélé, pas un classifieur. »
   - §6 (« La référence locale ») : « **Le remède de principe rend la métrique nettement pire** » ; et « un gain de +0,036 en passant de 150 à 50 ne vaut pas qu'on retienne 50 ». Réserve explicite : que la chute de rho de 0,805 à 0,560 soit **entièrement** expliquée par l'effondrement de référence « n'est pas établi par cette mesure seule ».
   - §7 : « la métrique n'est pas *moins bonne*, elle est **inapplicable** » sous un tour de couverture — « Elle ne rend pas un mauvais chiffre — elle ne rend **rien**. » Et : « ⚠ La corrélation observée sur ces 9 morceaux (**rho +0,433, p = 0,244**) **ne doit pas être citée** : n = 1 observation indépendante ».
@@ -409,7 +415,7 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
   - §8 : « ⚠ Ce qui **reste** vrai du §5 : le seuil sélectionne une queue dont on ne sait toujours pas ce qu'elle contient sur une trace sans croisement… Le plateau justifie le *choix* du seuil, pas l'interprétation de ce qu'il attrape. »
 - **preuve de lecture intégrale** :
   - l. 299 : `Une trace qui ne fait pas un tour **ne peut pas se recouvrir** : il n'existe alors`
-  - l. 458 : `rouleau. C'est exactement le régime où la correction compte.`
+  - l. 474 : `rouleau. C'est exactement le régime où la correction compte.`
 
 
 

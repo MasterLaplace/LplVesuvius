@@ -1,0 +1,72 @@
+{
+  "rouleau": "PHerc1667",
+  "sources": {
+    "scans publiés (metadata.min.json)": {
+      "est": "ce que le concours déclare avoir SCANNÉ",
+      "um": [
+        "1.129",
+        "2.399",
+        "3.240",
+        "7.910"
+      ]
+    },
+    "volumes reconstruits (metadata.min.json)": {
+      "est": "ce qui est reconstruit et téléchargeable",
+      "um": [
+        "1.129",
+        "2.399",
+        "3.240",
+        "7.910"
+      ]
+    },
+    "volumes de surface (relevé local)": {
+      "est": "le tomogramme rééchantillonné sur les couches d'un SEGMENT — sous-ensemble",
+      "um": [
+        "1.129",
+        "2.399"
+      ],
+      "absent": false
+    },
+    "maillages sur disque (data/traces)": {
+      "est": "ce qu'une campagne d'ici a réellement lu",
+      "um": [
+        "1.129",
+        "2.399",
+        "3.240",
+        "7.910"
+      ],
+      "absent": false
+    }
+  },
+  "union": [
+    "1.129",
+    "2.399",
+    "3.240",
+    "7.910"
+  ],
+  "n_sources_peuplees": 4,
+  "desaccords": [
+    {
+      "um": "3.240",
+      "vue_par": [
+        "maillages sur disque (data/traces)",
+        "scans publiés (metadata.min.json)",
+        "volumes reconstruits (metadata.min.json)"
+      ],
+      "absente_de": [
+        "volumes de surface (relevé local)"
+      ]
+    },
+    {
+      "um": "7.910",
+      "vue_par": [
+        "maillages sur disque (data/traces)",
+        "scans publiés (metadata.min.json)",
+        "volumes reconstruits (metadata.min.json)"
+      ],
+      "absente_de": [
+        "volumes de surface (relevé local)"
+      ]
+    }
+  ]
+}

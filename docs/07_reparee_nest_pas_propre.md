@@ -426,9 +426,25 @@ faire échouer**.
 | **PHerc0139** (9,362 µm → 15 vx) | +0,284 | **+0,666**  (p = 2,3e-05) |
 | ⚠ PHerc1667 (**résolution à vérifier**) | +0,700 | +0,579  (p = 0,019) |
 
-⚠⚠ **Corrigé le 2026-08-19 : PHerc1667 n'a AUCUN volume à 7,91 µm.** Vérifié sur le
-bucket : il n'en publie que deux, **2,399 µm** et **1,129 µm**
-(`docs/mesures/volumes_surface_PHerc1667.txt` le dit aussi). Les deux autres lignes du tableau se
+⚠⚠⚠ **LA CORRECTION CI-DESSOUS ÉTAIT ELLE-MÊME FAUSSE — annulée le 2026-09-03.**
+Elle disait : *« PHerc1667 n'a AUCUN volume à 7,91 µm. Vérifié sur le bucket : il n'en publie
+que deux, 2,399 µm et 1,129 µm (`docs/mesures/volumes_surface_PHerc1667.txt` le dit aussi). »*
+
+`PHerc1667` publie **quatre** scans, dont `20231117161658-**7.910um**-53keV`, et le maillage
+que ce balayage a lu s'appelle `20240304141531-on-**20231117161658-7.91um**.tifxyz`. **La
+ligne PHerc1667 de ce tableau est donc lisible**, et l'annulation qui suivait tombe avec sa
+prémisse.
+
+⚠ La cause : `volumes_surface_PHerc1667.txt` liste des **volumes de surface** — le tomogramme
+rééchantillonné sur les couches d'un *segment* — pas des **scans**. Un rouleau peut avoir un
+scan sans qu'aucun segment n'y soit rendu, et c'est exactement le cas ici. Conclure sur le
+corpus depuis cette vue-là était une erreur de catégorie.
+
+⭐ **Troisième occurrence du même angle mort** — après `59` (un seul layout du bucket) et
+`67` §4.2 (un seul des deux serveurs). Trois fois, c'est une famille, donc un garde-fou
+plutôt qu'une troisième correction : `src/volume/ou_vit_ce_rouleau.py` juxtapose les quatre
+sources et **nomme les désaccords**. Sur `PHerc1667` il rapporte que 7,91 µm est vue par
+trois sources et absente d'une seule — celle qui a trompé ce paragraphe. Les deux autres lignes du tableau se
 tiennent — leur rayon physique est d'environ **140 µm** (18 × 7,91 et 15 × 9,362) — mais
 celle-ci ne peut pas être lue :
 
