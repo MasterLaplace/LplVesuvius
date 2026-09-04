@@ -898,6 +898,27 @@ entre « 1/3, 1/2, p5, déficit » dessinerait une tendance que personne n'a mes
 > voisine — et toute variation de normalisation ou de seuil ne changeait que la **part de cette
 > erreur qui fuyait**. Corrigé, il n'y a plus rien à laisser fuir.
 
+### Et le mécanisme se dessine, à l'échelle mesurée
+
+Un fichier de mesure dit lui-même jusqu'où son rayon portait : une distance rendue par
+`proximity.py` est **plafonnée par le rayon**, donc la plus grande médiane du fichier en est un
+**minorant**. Aucune date, aucun journal.
+
+| | minorant du rayon | en pas de feuille |
+|---|---:|---:|
+| `proximity_scroll1.jsonl` *(celui du §8)* | **≥ 382,6 µm** | **2,7 pas** |
+| au rayon corrigé | 125,8 µm | **0,88 pas** |
+
+![Ce qu'un rayon de recherche trouve, selon sa taille](images/07_le_rayon_trouve_la_voisine.png)
+
+*Coupe à l'échelle, pas de feuille **142,8 µm** mesuré ailleurs et avant (`11` §3, cv 1,8 %) — ce
+qui est précisément ce qui rend le rayon corrigé non ajustable, puisqu'il ne vient pas de la
+corrélation qu'il améliore. À gauche le cercle engloutit plusieurs feuilles : ce qu'il trouve de
+plus proche est la **spire voisine**, géométrie parfaitement normale. À droite il n'atteint même
+pas la feuille suivante, donc la seule chose qu'il peut trouver est l'anomalie. ⚠ Le cercle de
+gauche est un **minorant** — la flèche le dit — et l'anomalie de ~50 µm est une illustration,
+pas une mesure.*
+
 ### ⚠⚠ Et les fichiers se datent EUX-MÊMES : trois autres portent l'ancien rayon
 
 Un fichier de mesure ne porte pas son instrument, et aucune date n'est fiable — un fichier se

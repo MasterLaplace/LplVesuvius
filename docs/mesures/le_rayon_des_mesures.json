@@ -1,0 +1,174 @@
+{
+  "reference": "proximity_scroll1_rayon_corrige.jsonl",
+  "traces_reference": 44,
+  "fichiers": [
+    {
+      "fichier": "baseline_sweep_scroll1.jsonl",
+      "traces": 46,
+      "communes": 44,
+      "identiques": 0,
+      "rapport_median": 2.10031512605042,
+      "verdict": "AUTRE rayon"
+    },
+    {
+      "fichier": "baseline_sweep_scroll1_rayon_corrige.jsonl",
+      "traces": 44,
+      "communes": 44,
+      "identiques": 44,
+      "rapport_median": 1.0,
+      "verdict": "même rayon"
+    },
+    {
+      "fichier": "baseline_sweep_scroll5.jsonl",
+      "traces": 9,
+      "communes": 0,
+      "identiques": 0,
+      "verdict": "sans trace commune"
+    },
+    {
+      "fichier": "contamination_scroll1.jsonl",
+      "traces": 11,
+      "communes": 9,
+      "identiques": 0,
+      "rapport_median": 2.480511420059583,
+      "verdict": "AUTRE rayon"
+    },
+    {
+      "fichier": "proximity_scroll1.jsonl",
+      "traces": 46,
+      "communes": 44,
+      "identiques": 0,
+      "rapport_median": 2.10031512605042,
+      "verdict": "AUTRE rayon"
+    },
+    {
+      "fichier": "sweep_0139_pas.jsonl",
+      "traces": 33,
+      "communes": 0,
+      "identiques": 0,
+      "verdict": "sans trace commune"
+    },
+    {
+      "fichier": "sweep_0139_r10.jsonl",
+      "traces": 18,
+      "communes": 0,
+      "identiques": 0,
+      "verdict": "sans trace commune"
+    },
+    {
+      "fichier": "sweep_0139_r160.jsonl",
+      "traces": 36,
+      "communes": 0,
+      "identiques": 0,
+      "verdict": "sans trace commune"
+    },
+    {
+      "fichier": "sweep_0139_r20.jsonl",
+      "traces": 34,
+      "communes": 0,
+      "identiques": 0,
+      "verdict": "sans trace commune"
+    },
+    {
+      "fichier": "sweep_0139_r40.jsonl",
+      "traces": 35,
+      "communes": 0,
+      "identiques": 0,
+      "verdict": "sans trace commune"
+    },
+    {
+      "fichier": "sweep_0139_r80.jsonl",
+      "traces": 36,
+      "communes": 0,
+      "identiques": 0,
+      "verdict": "sans trace commune"
+    },
+    {
+      "fichier": "sweep_1667_pas.jsonl",
+      "traces": 16,
+      "communes": 0,
+      "identiques": 0,
+      "verdict": "sans trace commune"
+    },
+    {
+      "fichier": "sweep_PHerc0139.jsonl",
+      "traces": 36,
+      "communes": 0,
+      "identiques": 0,
+      "verdict": "sans trace commune"
+    },
+    {
+      "fichier": "sweep_PHerc0139_2.4um.jsonl",
+      "traces": 36,
+      "communes": 0,
+      "identiques": 0,
+      "verdict": "sans trace commune"
+    },
+    {
+      "fichier": "sweep_PHerc0139_2.4um_brut.jsonl",
+      "traces": 35,
+      "communes": 0,
+      "identiques": 0,
+      "verdict": "sans trace commune"
+    },
+    {
+      "fichier": "sweep_PHerc0814.jsonl",
+      "traces": 12,
+      "communes": 0,
+      "identiques": 0,
+      "verdict": "sans trace commune"
+    },
+    {
+      "fichier": "sweep_PHerc1667.jsonl",
+      "traces": 18,
+      "communes": 0,
+      "identiques": 0,
+      "verdict": "sans trace commune"
+    },
+    {
+      "fichier": "sweep_s1_pas.jsonl",
+      "traces": 44,
+      "communes": 44,
+      "identiques": 0,
+      "rapport_median": 0.9931644551668677,
+      "verdict": "AUTRE rayon"
+    },
+    {
+      "fichier": "sweep_s1_r16.jsonl",
+      "traces": 44,
+      "communes": 44,
+      "identiques": 0,
+      "rapport_median": 0.6986248305248887,
+      "verdict": "AUTRE rayon"
+    },
+    {
+      "fichier": "sweep_s1_r24.jsonl",
+      "traces": 46,
+      "communes": 44,
+      "identiques": 0,
+      "rapport_median": 1.6570638885936004,
+      "verdict": "AUTRE rayon"
+    },
+    {
+      "fichier": "sweep_s1_r32.jsonl",
+      "traces": 46,
+      "communes": 44,
+      "identiques": 0,
+      "rapport_median": 1.988235294117647,
+      "verdict": "AUTRE rayon"
+    },
+    {
+      "fichier": "sweep_s1_r48.jsonl",
+      "traces": 46,
+      "communes": 44,
+      "identiques": 0,
+      "rapport_median": 2.0892857142857144,
+      "verdict": "AUTRE rayon"
+    }
+  ],
+  "pas_entre_feuilles_um": 142.8,
+  "borne_du_rayon": {
+    "proximity_scroll1.jsonl": 382.62229164123534,
+    "proximity_scroll1_rayon_corrige.jsonl": 125.76941187858581
+  }
+}

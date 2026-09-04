@@ -65,6 +65,41 @@ def compte_mesure(chemin: Path) -> dict[str, int]:
     return out
 
 
+PAS_ENTRE_FEUILLES_UM = 142.8
+"""Le pas inter-feuilles, **mesuré ailleurs et avant** (`11` §3, cv 1,8 %). C'est lui qui fixe le
+rayon corrigé, et c'est ce qui rend ce choix non ajustable — il ne vient pas de la corrélation
+qu'il améliore."""
+
+
+def borne_du_rayon(chemin: Path) -> float | None:
+    """
+    @brief La borne INFÉRIEURE du rayon qui a produit un fichier, lue dans ses propres distances.
+
+    ⚠⚠ Une distance rendue par `proximity.py` est **plafonnée par le rayon de recherche** : au
+    delà, rien n'est trouvé et la cellule n'est pas mesurée. Donc la plus grande distance médiane
+    du fichier est un **minorant** du rayon employé, sans qu'aucune date, aucun nom de fichier ni
+    aucun journal soit nécessaire.
+
+    ⚠ C'est un minorant et pas le rayon : une médiane est en deçà du maximum, et aucune trace
+    n'oblige la mesure à atteindre le bord. Le dire évite de publier « le rayon valait X » depuis
+    une grandeur qui ne peut établir que « au moins X ».
+    """
+    valeurs = []
+    if not chemin.is_file():
+        return None
+    for ligne in chemin.read_text(errors="replace").splitlines():
+        ligne = ligne.strip()
+        if not ligne.startswith("{"):
+            continue
+        try:
+            r = json.loads(ligne)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(r.get("spacing_um_median"), (int, float)):
+            valeurs.append(float(r["spacing_um_median"]))
+    return max(valeurs) if valeurs else None
+
+
 def comparer(reference: Path = REFERENCE, dossier: Path = MESURES) -> dict:
     """
     @brief Chaque fichier de mesure, comparé à la référence sur les traces qu'ils partagent.
@@ -99,7 +134,10 @@ def comparer(reference: Path = REFERENCE, dossier: Path = MESURES) -> dict:
                      else "AUTRE rayon" if identiques == 0
                      else "mélangé"),
         ))
-    return dict(reference=reference.name, traces_reference=len(ref), fichiers=lignes)
+    return dict(reference=reference.name, traces_reference=len(ref), fichiers=lignes,
+                pas_entre_feuilles_um=PAS_ENTRE_FEUILLES_UM,
+                borne_du_rayon={f.name: borne_du_rayon(f)
+                                for f in sorted(dossier.glob("proximity_*.jsonl"))})
 
 
 def _verifier(r: dict | None = None) -> int:
@@ -156,6 +194,20 @@ def _verifier(r: dict | None = None) -> int:
           p is not None and p["verdict"] == "AUTRE rayon",
           f"{p['identiques']}/{p['communes']} traces au même compte · "
           f"rapport médian {p['rapport_median']:.2f}" if p else "absent")
+        # ⚠⚠⚠ ET LE FICHIER DIT LUI-MEME JUSQU'OU SON RAYON PORTAIT. Une distance est plafonnee
+        # par le rayon, donc la plus grande mediane du fichier en est un minorant. Exprime en
+        # PAS INTER-FEUILLES, ca dit directement ce que `07` §9 diagnostique : l'ancien rayon
+        # atteignait la spire VOISINE, qui est de la geometrie normale.
+        bornes = r.get("borne_du_rayon") or {}
+        pas = r.get("pas_entre_feuilles_um") or PAS_ENTRE_FEUILLES_UM
+        ba = bornes.get("proximity_scroll1.jsonl")
+        bc = bornes.get("proximity_scroll1_rayon_corrige.jsonl")
+        if ba and bc:
+            v("l'ancien fichier atteignait AU MOINS deux pas de feuille",
+              ba / pas >= 2.0,
+              f"{ba:.1f} µm, soit {ba / pas:.1f} pas de {pas:.1f} µm")
+            v("... et le corrigé ne dépasse pas un seul pas",
+              bc / pas <= 1.0, f"{bc:.1f} µm, soit {bc / pas:.2f} pas")
         autres = [x["fichier"] for x in r["fichiers"] if x["verdict"] == "AUTRE rayon"]
         v("... et il n'est pas le seul", len(autres) >= 2,
           ", ".join(autres[:6]) + (" …" if len(autres) > 6 else ""))

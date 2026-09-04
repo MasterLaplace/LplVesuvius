@@ -367,7 +367,7 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
 ---
 
 ### docs/07_reparee_nest_pas_propre.md
-- **lignes** : 944 ⚠ (438 quand la fiche a été écrite, 482 le 2026-09-03 ; deux sections neuves le 2026-09-04, §10 et §11, qui **périment le §8**)
+- **lignes** : 965 ⚠ (438 quand la fiche a été écrite, 482 le 2026-09-03 ; deux sections neuves le 2026-09-04, §10 et §11, qui **périment le §8**)
 - **nature** : RESULTAT
 - **résumé** : Le résultat central du dépôt sur la métrique de proximité : la réparation d'auto-intersection ramène les contacts à zéro et **ne déplace pas** la proximité anormale (0,37 → 0,38 %). Le document se corrige ensuite trois fois — il retire l'affirmation que la métrique **sépare** saines et réparées, il montre que le remède de principe pour la référence locale (une boule 3D) rend la mesure pire, et il découvre que la métrique est **inapplicable** sous un tour de couverture (44 traces de Scroll 5 sur 53 rendent zéro cellule). Le §9 remplace enfin le rayon de recherche par une constante physique. ⚠ Le fichier contient deux sections numérotées « ## 6 ».
 - **conclusions extractibles** :
@@ -402,6 +402,16 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
     déplace **rien de mesurable** : 0 paire sur 10 au-delà du bruit, signe mélangé. **La
     conclusion-titre d'origine est restaurée**, pour une bien meilleure raison qu'elle ne
     donnait. Mesures : `le_bruit_de_lechantillon.py`, `reparation_et_proximite.py`.
+  - ⭐⭐⭐ **2026-09-04, §11, LA CAUSE COMMUNE** — postérieure à cette fiche. **Trois**
+    familles de paramètres cessent de compter ensemble au rayon corrigé : le seuil (chute
+    **0,477 → 0,025**), la grandeur (écart `fbt` / `shortfall` **0,429 → 0,054**) et la référence
+    locale (écart bande/boule **0,209 → 0,036**). Aucun des trois n'était mal choisi : un rayon
+    4× trop grand injecte une erreur structurée — la **spire voisine** — et toute variation ne
+    changeait que la part qui en fuyait. Les fichiers le disent eux-mêmes : une distance est
+    plafonnée par le rayon, donc l'ancien fichier impose **≥ 382,6 µm**, soit **2,7 pas de
+    feuille**, contre **0,88** au corrigé. ⚠ Ce qui RESTE une vraie différence est la
+    **couverture** : la boule de rayon 100 ne mesure que **20,7 %** des cellules.
+    Outils : `le_seuil_au_bon_rayon.py`, `le_rayon_des_mesures.py`.
   - ⚠⚠⚠ **2026-09-04, §11, LE §8 EST PÉRIMÉ** — postérieure à cette fiche. Le §9 a corrigé le
     rayon de recherche (4× trop grand) et n'a re-mesuré **qu'une colonne** ; le §8, qui compare
     les grandeurs entre elles, porte encore l'ancien rayon. Au bon rayon l'écart
