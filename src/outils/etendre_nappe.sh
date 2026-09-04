@@ -147,69 +147,10 @@ fi
 # croisements est une propriete de l'ECHANTILLONNAGE autant que de la surface (le meme
 # maillage decime passe de 240 a 49). Ce plafond ne sert donc qu'a une chose : ne pas bruler
 # vingt minutes de rendu sur une surface qui s'est manifestement repliee sur elle-meme. Une
-# surface sous le plafond n'est pas declaree bonne pour autant -- elle est jugee normalement.
-PLAFOND_CROISEMENTS_PAR_CM2=${PLAFOND_CROISEMENTS_PAR_CM2:-100}
-
-juger() {
-  local W=$1 M=$2 NOM=$3
-  [ -s "$W/selfcross.json" ] || vc_tifxyz_selfcross --surface "$M" -o "$W/selfcross.json" > /dev/null 2>&1
-  local CROIS SERIE AIRE
-  CROIS=$(python3 "$ROOT/src/nappe/lire_selfcross.py" "$W/selfcross.json" 2>/dev/null || echo "?")
-  AIRE=$(python3 -c "
-import json;print(f\"{json.load(open('$M/meta.json'))['area_cm2']:.2f}\")" 2>/dev/null || echo "?")
-  # ⭐ La porte, avant les rendus.
-  if [ "$CROIS" != "?" ] && [ "$AIRE" != "?" ]; then
-    local TROP
-    TROP=$(python3 -c "
-c, a, p = $CROIS, $AIRE, $PLAFOND_CROISEMENTS_PAR_CM2
-print(1 if a > 0 and c / a > p else 0)" 2>/dev/null || echo 0)
-    if [ "$TROP" = "1" ]; then
-      echo "== $NOM  ($AIRE cm², $CROIS auto-intersections)"
-      echo "   ⚠⚠ REPLIEE : $(python3 -c "print(f'{$CROIS/$AIRE:.0f}')") croisements/cm², " \
-           "au-dessus du plafond de $PLAFOND_CROISEMENTS_PAR_CM2 — rendus NON payés."
-      echo "   (mesuré : 0/cm² sur la surface qui converge, 875/cm² sur la première qui casse)"
-      touch "$W/ABANDONNE"
-      return 1
-    fi
-  fi
-  [ -d "$W/plat" ] || vc_flatten -i "$M" -o "$W/plat" > "$W/flatten.log" 2>&1
-  [ -d "$W/plat" ] || { echo "== $NOM : $AIRE cm², $CROIS croisements — vc_flatten a échoué"; return 1; }
-  SERIE=""
-  for N in $FENETRES; do
-    local OUT="$W/profil_${N}c.json"
-    if [ ! -s "$OUT" ]; then
-      rm -rf "$W/rendu_$N"
-      vc_render_tifxyz -v "$W/cache" --remote-url "$VOL" --scale 1 -g 0 -s "$W/plat" \
-          --tif-output "$W/rendu_$N" -n "$N" --slice-step 1 --auto-crop \
-          > "$W/rendu_$N.log" 2>&1 || continue
-      ( cd "$ROOT" && uv run python src/volume/depth_profile.py \
-          "$W/rendu_$N" --grid --step 400 --traced-layer $((N / 2)) --voxel-um "$UM" \
-          --out "$OUT" ) > "$W/profil_$N.log" 2>&1 || continue
-    fi
-    local E_UM
-    E_UM=$(python3 -c "
-import json; d=json.load(open('$OUT')); d=d[0] if isinstance(d,list) else d
-print(f\"{d['ecart_trace_um_median']:.2f}\")" 2>/dev/null) || continue
-    SERIE="$SERIE$N:$E_UM,"
-  done
-  rm -rf "$W/cache"
-  [ -z "$SERIE" ] && { echo "== $NOM : $AIRE cm², $CROIS croisements — aucun profil"; return 1; }
-  echo "== $NOM  ($AIRE cm², $CROIS auto-intersections)"
-  # ⚠ Le complement d'α, lu dans le profil de la fenetre la plus ETROITE — c'est la que
-  # « le pic tombe au bord » a un sens, une fenetre large finissant par contenir quelque
-  # chose. α est une mediane et ne montre pas cette part ; sans elle un verdict se lit trop
-  # bien (mesure : une extension a α = +0,000 dont 9,1 % des fenetres sont au bord).
-  local N0 BORD
-  N0=$(echo "$FENETRES" | awk '{print $1}')
-  BORD=$(python3 -c "
-import json,sys
-d=json.load(open(sys.argv[1])); d=d[0] if isinstance(d,list) else d
-print(d.get('au_bord_relief',''))" "$W/profil_${N0}c.json" 2>/dev/null || echo "")
-  ( cd "$ROOT" && uv run python src/commun/test_convergence.py \
-      ${BORD:+--au-bord "$BORD"} \
-      --serie "${SERIE%,}" --nom "$NOM ($AIRE cm², $CROIS croisements)" \
-      --json "$ROOT/docs/mesures/extension_${ETIQUETTE}_$NOM.json" | tail -4 )
-}
+# ⚠⚠⚠ LA FONCTION DE JUGEMENT EST ADOPTEE, PLUS RECOPIEE (cf. `juger_nappe.sh`). Ce fichier
+# en portait une copie verbatim ; le plafond de croisements est GARDE ici, il y etait deja.
+. "$(dirname "${BASH_SOURCE[0]}")/juger_nappe.sh"
+juger() { juger_nappe "$1" "$2" "$3" "extension_${ETIQUETTE}_"; }
 
 # --- le balayage --------------------------------------------------------------------
 # ⚠ Un reglage peut apparaitre DEUX FOIS dans la liste : c'est ainsi qu'on teste le

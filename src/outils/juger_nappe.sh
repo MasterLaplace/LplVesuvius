@@ -31,7 +31,13 @@ VOL=${VOL:-$B/$ROULEAU/volumes/20250521151220-8.640um-1.2m-116keV-masked.zarr}
 # croisement a rendu α = +1,806, la pire de sa campagne. Se replier sur soi-meme et etre mal
 # posee sont DEUX DEFAUTS DIFFERENTS ; ce plafond attrape le premier et ignore le second. Il
 # ne sert qu'a ne pas bruler vingt minutes de rendu sur une surface manifestement repliee.
-PLAFOND_CROISEMENTS_PAR_CM2=${PLAFOND_CROISEMENTS_PAR_CM2:-100}
+#
+# ⚠⚠⚠ ET IL EST DESACTIVABLE, par une chaine VIDE. Ce n'est pas un confort : `spire_suivante.sh`
+# portait une copie de cette fonction QUI N'AVAIT PAS ce plafond, et l'adopter telle quelle
+# aurait ajoute une garde a une campagne qui a produit des resultats publies. Un refactor ne
+# change pas le comportement ; il rend le choix explicite. `PLAFOND_CROISEMENTS_PAR_CM2=""`
+# reproduit donc exactement l'ancien `spire_suivante`.
+PLAFOND_CROISEMENTS_PAR_CM2=${PLAFOND_CROISEMENTS_PAR_CM2-100}
 
 juger_nappe() {
   local W=$1 M=$2 NOM=$3 ETIQ=${4:-}
@@ -43,7 +49,7 @@ juger_nappe() {
   AIRE=$(python3 -c "
 import json;print(f\"{json.load(open('$M/meta.json'))['area_cm2']:.2f}\")" 2>/dev/null || echo "?")
 
-  if [ "$CROIS" != "?" ] && [ "$AIRE" != "?" ]; then
+  if [ -n "$PLAFOND_CROISEMENTS_PAR_CM2" ] && [ "$CROIS" != "?" ] && [ "$AIRE" != "?" ]; then
     local TROP
     TROP=$(python3 -c "
 c, a, p = $CROIS, $AIRE, $PLAFOND_CROISEMENTS_PAR_CM2
@@ -51,6 +57,7 @@ print(1 if a > 0 and c / a > p else 0)" 2>/dev/null || echo 0)
     if [ "$TROP" = "1" ]; then
       echo "== $NOM  ($AIRE cm², $CROIS auto-intersections)"
       echo "   ⚠⚠ REPLIEE : $(python3 -c "print(f'{$CROIS/$AIRE:.0f}')") croisements/cm², au-dessus du plafond de $PLAFOND_CROISEMENTS_PAR_CM2 — rendus NON payés."
+      echo "   (mesuré : 0/cm² sur la surface qui converge, 875/cm² sur la première qui casse)"
       touch "$W/ABANDONNE"
       return 1
     fi
@@ -93,7 +100,7 @@ print(d.get('au_bord_relief',''))" "$W/profil_${N0}c.json" 2>/dev/null || echo "
   ( cd "$R" && uv run python src/commun/test_convergence.py \
       ${BORD:+--au-bord "$BORD"} \
       --serie "${SERIE%,}" --nom "$NOM ($AIRE cm², $CROIS croisements)" \
-      --json "$R/docs/mesures/${ETIQ}$NOM.json" | tail -4 )
+      --json "$R/docs/mesures/${ETIQ}$NOM.json" | tail -${LIGNES_VERDICT:-4} )
 }
 
 # Appel direct : juger une nappe qui ne vient d'aucune campagne.

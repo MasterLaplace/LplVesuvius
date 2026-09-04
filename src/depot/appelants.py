@@ -57,6 +57,16 @@ def formes_dexecution(nom: str) -> list[re.Pattern]:
         # ⭐ La presence d'un argument DANS les backticks est ce qui separe les deux : une
         # simple citation s'ecrit `x.sh` et se ferme aussitot.
         re.compile(r"`\S*" + n + r"\s+\S[^`]*`"),
+        # ⚠⚠ SOURCER une bibliotheque shell, c'est l'EXECUTER : son code de premier niveau
+        # tourne et ses fonctions deviennent disponibles. Sans cette forme, toute bibliotheque
+        # shell du depot passe pour orpheline -- ce qui est arrive a `juger_nappe.sh`, ecrit
+        # pour dedupliquer une fonction de jugement et signale comme execute par personne.
+        #
+        # ⚠ Ancre en DEBUT DE LIGNE (espaces permis) : c'est ce qui separe une execution d'une
+        # mention. Un document qui cite `juger_nappe.sh` au fil d'une phrase ne commence pas sa
+        # ligne par `.` ou `source`. Le chemin peut etre calcule -- `. "$(dirname ...)/x.sh"` --
+        # d'ou le `[^\n]*?` plutot qu'un `\S*`.
+        re.compile(r"^[ \t]*(?:\.|source)\s+[^\n]*?" + n + r"\b", re.M),
     ]
 
 

@@ -106,61 +106,26 @@ SURF=$(curl -s --max-time 60 "$B/?list-type=2&prefix=$ROULEAU/representations/pr
 # lit ces fichiers : relancer le depouillement de la campagne A aurait rendu les chiffres de
 # la campagne B, sans que rien n'ait l'air faux.
 #
-# L'etiquette vient du nom du repertoire quand il ne s'appelle pas simplement « spires ».
-BASE_DEST=$(basename "$DEST")
-if [ "$BASE_DEST" = "spires" ]; then ETIQUETTE=""; else ETIQUETTE="${BASE_DEST#spires_}_"; fi
-mkdir -p "$DEST"
-[ -n "$ETIQUETTE" ] && echo "etiquette des verdicts : spire_${ETIQUETTE}<spire>.json"
-echo "depart : $SOURCE"
-echo "prediction : $SURF   sens : $SENS   pas du rayon : $PAS_RAYON   fenetres : $FENETRES"
-echo "compensation : exit_count=${SORTIE_PAS:-defaut} spike_window=${FENETRE_PIC:-defaut} \
-degagement=${DEGAGEMENT:-defaut} distance_max=$DISTANCE_MAX"
-
-juger() {   # $1 = repertoire, $2 = maillage, $3 = nom
-  local W=$1 M=$2 NOM=$3
-  [ -s "$W/selfcross.json" ] || vc_tifxyz_selfcross --surface "$M" -o "$W/selfcross.json" > /dev/null 2>&1
-  local CROIS SERIE AIRE
-  CROIS=$(python3 "$ROOT/src/nappe/lire_selfcross.py" "$W/selfcross.json" 2>/dev/null || echo "?")
-  AIRE=$(python3 -c "
-import json;print(f\"{json.load(open('$M/meta.json'))['area_cm2']:.2f}\")" 2>/dev/null || echo "?")
-  [ -d "$W/plat" ] || vc_flatten -i "$M" -o "$W/plat" > "$W/flatten.log" 2>&1
-  [ -d "$W/plat" ] || { echo "== $NOM : $AIRE cm², $CROIS croisements — vc_flatten a échoué"; return 1; }
-  SERIE=""
-  for N in $FENETRES; do
-    local OUT="$W/profil_${N}c.json"
-    if [ ! -s "$OUT" ]; then
-      rm -rf "$W/rendu_$N"
-      vc_render_tifxyz -v "$W/cache" --remote-url "$VOL" --scale 1 -g 0 -s "$W/plat" \
-          --tif-output "$W/rendu_$N" -n "$N" --slice-step 1 --auto-crop \
-          > "$W/rendu_$N.log" 2>&1 || continue
-      ( cd "$ROOT" && uv run python src/volume/depth_profile.py \
-          "$W/rendu_$N" --grid --step 400 --traced-layer $((N / 2)) --voxel-um "$UM" \
-          --out "$OUT" ) > "$W/profil_$N.log" 2>&1 || continue
-    fi
-    local E_UM
-    E_UM=$(python3 -c "
-import json; d=json.load(open('$OUT')); d=d[0] if isinstance(d,list) else d
-print(f\"{d['ecart_trace_um_median']:.2f}\")" 2>/dev/null) || continue
-    SERIE="$SERIE$N:$E_UM,"
-  done
-  rm -rf "$W/cache"
-  [ -z "$SERIE" ] && { echo "== $NOM : $AIRE cm², $CROIS croisements — aucun profil"; return 1; }
-  echo "== $NOM  ($AIRE cm², $CROIS auto-intersections)"
-  # ⚠ Le complement d'α, lu dans le profil de la fenetre la plus ETROITE — c'est la que
-  # « le pic tombe au bord » a un sens, une fenetre large finissant par contenir quelque
-  # chose. α est une mediane et ne montre pas cette part ; sans elle un verdict se lit trop
-  # bien (mesure : une extension a α = +0,000 dont 9,1 % des fenetres sont au bord).
-  local N0 BORD
-  N0=$(echo "$FENETRES" | awk '{print $1}')
-  BORD=$(python3 -c "
-import json,sys
-d=json.load(open(sys.argv[1])); d=d[0] if isinstance(d,list) else d
-print(d.get('au_bord_relief',''))" "$W/profil_${N0}c.json" 2>/dev/null || echo "")
-  ( cd "$ROOT" && uv run python src/commun/test_convergence.py \
-      ${BORD:+--au-bord "$BORD"} \
-      --serie "${SERIE%,}" --nom "$NOM ($AIRE cm², $CROIS croisements)" \
-      --json "$ROOT/docs/mesures/spire_${ETIQUETTE}$NOM.json" | tail -3 )
-}
+# ⚠⚠⚠ LA FONCTION DE JUGEMENT EST ADOPTEE, PLUS RECOPIEE. Ce fichier en portait une copie
+# verbatim, `etendre_nappe.sh` une autre, et les deux avaient DEJA diverge : la reserve
+# `--au-bord` avait ete cablee dans l'une avant l'autre. `juger_nappe.sh` avait ete ecrit pour
+# les remplacer et n'avait jamais ete adopte -- il y avait donc TROIS exemplaires.
+#
+# ⚠⚠ LE PLAFOND DE CROISEMENTS EST DESACTIVE ICI, et c'est deliberе : la copie que portait ce
+# fichier ne l'avait pas, et un refactor ne change pas le comportement d'une campagne qui a
+# produit des resultats publies. L'activer est une decision a prendre a part.
+#
+# ⭐ Equivalence PROUVEE avant l'adoption : le chemin effectif de `juger_nappe` avec le
+# plafond vide fait 41 lignes contre 41 pour l'ancien `juger()` de ce fichier, et la seule
+# difference est la POSITION d'un `echo` -- le calcul qui les separe est capture par `$(...)`
+# et n'affiche rien, donc rien d'observable ne change.
+# ⚠ Sur leurs PROPRES lignes, pas en prefixe de `.` : une affectation en prefixe d'un builtin
+# special a une semantique subtile, et un test l'a montre -- `PLAFOND` prenait, `LIGNES_VERDICT`
+# non. Deux lignes ne laissent aucun doute.
+PLAFOND_CROISEMENTS_PAR_CM2=""
+LIGNES_VERDICT=3
+. "$(dirname "${BASH_SOURCE[0]}")/juger_nappe.sh"
+juger() { juger_nappe "$1" "$2" "$3" "spire_${ETIQUETTE}"; }
 
 # --- spire 0 : la surface de depart, jugee par NOTRE chaine ---------------------
 # ⚠ On la rejuge ici plutot que de reprendre le chiffre de `38` : la comparaison doit

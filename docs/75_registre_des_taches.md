@@ -308,7 +308,7 @@ instruments existants.
 | **C** | les trois tâches de la règle graduée | non commencées — bornées à trois semaines par conception |
 | **D1** | l'arc d'excision (`03`–`07`) à re-fonder | la conclusion de tête de `07` est démentie par notre propre mesure |
 | **D2** | le contrôle P1 bis de `71` | ×15,9 requis contre ×3,8 observé |
-| **D3** | ~~41~~ → **33** scripts sans appelant | ⚠ **entamé** : deux figures dont l'image est **utilisée** dans un doc ne portaient pas leur commande de régénération — c'est la règle du dépôt, et c'est réparé (vérifié : les deux se régénèrent à l'identique). Le reste est classé ci-dessous |
+| **D3** | ~~41~~ → **32** scripts sans appelant | ⚠ **entamé** : deux figures dont l'image est **utilisée** dans un doc ne portaient pas leur commande de régénération — c'est la règle du dépôt, et c'est réparé (vérifié : les deux se régénèrent à l'identique). Le reste est classé ci-dessous |
 
 ---
 
@@ -491,8 +491,46 @@ chaque copie** — les trois passent maintenant `--au-bord`. Donc :
   deux occasions de ne pas s'accorder* — vaut à trois.
 
 > ⭐ **Le remède n'est pas de le déclarer mort**, c'est de l'**adopter** dans les deux appelants.
-> ⚠ C'est un refactor de scripts de campagne, donc à faire délibérément : il change ce qui a
-> produit des résultats publiés. Noté ici plutôt que fait à la volée.
+
+#### ✅ **Fait le 2026-09-04, et l'équivalence est PROUVÉE avant l'adoption**
+
+⚠⚠⚠ **Les trois copies n'étaient pas équivalentes** : `spire_suivante` **n'avait pas la garde
+`REPLIEE`** — le plafond de croisements par cm² vérifié *avant de payer les rendus*. Il payait
+donc des rendus sur des surfaces manifestement repliées que les deux autres abandonnaient.
+
+**Un refactor ne change pas le comportement.** Le plafond est donc devenu **désactivable** par
+une chaîne vide, et `spire_suivante` le désactive — l'activer est une décision à prendre à part,
+puisqu'il a produit des résultats publiés.
+
+**La preuve, statique et insensible à l'ordre** (un jugement complet paie un rendu, donc une
+preuve par exécution coûterait vingt minutes par cas) :
+
+| appelant | chemin adopté | ancienne fonction | différences |
+|---|---:|---:|---|
+| `spire_suivante` | 41 lignes | 41 lignes | **0** |
+| `etendre_nappe` | 54 | 55 | **5, toutes expliquées** |
+
+Les cinq d'`etendre_nappe` : le `if` gagne un test `-n "$PLAFOND"` qui est **vrai** chez lui, et
+l'`echo` passe de deux arguments à un. ⚠ **Ce dernier change la sortie d'un espace** — l'ancien
+écrivait `cm²,␣␣au-dessus` (espace final + espace de jointure), le nouveau `cm²,␣au-dessus`.
+Cosmétique, et dit plutôt que passé sous silence.
+
+⚠ Un piège payé en chemin : `VAR=x . fichier` a une sémantique subtile — un test a montré que
+`PLAFOND` prenait et `LIGNES_VERDICT` non. Les deux sont sur leurs **propres lignes**.
+
+#### ⭐⭐ Et le détecteur ne voyait pas le sourcing — un vrai manque, pas un cas à contourner
+
+`appelants.py` ne reconnaissait aucune forme `. fichier` / `source fichier`. Or **sourcer une
+bibliothèque shell, c'est l'exécuter** : son code de premier niveau tourne et ses fonctions
+deviennent disponibles. Toute bibliothèque shell du dépôt passait donc pour orpheline — ce qui
+est exactement arrivé à `juger_nappe.sh`, écrit pour dédupliquer et signalé comme exécuté par
+personne.
+
+La forme est **ancrée en début de ligne**, ce qui sépare une exécution d'une mention. ⚠ Sonde :
+un document qui cite le fichier au fil d'une phrase rend `[]`, un `.` à chemin calculé et un
+`source` littéral sont détectés. Les 21 contrôles du détecteur restent verts.
+
+**32 orphelins** (41 au départ).
 
 ⚠ Une fausse alerte à moi : j'ai cru `proximity_scroll1.json` manquant, il existe en `.jsonl`.
 Mon motif cherchait la mauvaise extension.
