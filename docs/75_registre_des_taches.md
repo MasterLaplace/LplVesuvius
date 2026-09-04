@@ -384,6 +384,24 @@ demande 40 tuiles à une condition ; séparer 3,24 µm de 9,72 µm en demande **
 condition**. On en avait 10, 11 et 2. Ce sont des **minorants** — les tuiles voisines ne sont
 pas indépendantes.
 
+⚠⚠ **Et « 256 px » ne veut PAS dire la même chose ici que chez les auteurs**, ce que
+[`68`](68_lire_le_papier_en_entier.md) §4 mesure (`la_case_vide.py`, 8 contrôles, revérifiés le
+2026-09-04) : une tuile de 256 px au pas du prix couvre **2 397 µm** — près de quatre lettres —
+là où les 256 px des auteurs à 2,4 µm en couvrent **614**, soit une. La tuile équivalente à une
+lettre au pas du prix ferait **66 px**.
+
+⭐ Les deux ne se contredisent pas, et les confondre serait l'erreur : les 40 tuiles de 256 px
+sont l'unité de **notation** (ce qui donne l'intervalle) ; le 66 px est ce que devient la
+**fenêtre du modèle** si l'on veut transporter la garantie anti-hallucination. C1 doit choisir
+les deux séparément et le dire.
+
+⭐⭐ **Et C1 est plus petit qu'annoncé** : `68` §4 établit que pour `PHerc0500P2`, segment
+`20250628074500-500P2_front`, la **surface transformée** et la **pile de couches** sont déjà
+publiées au régime du prix (9,362 µm / 1,2 m) — **seule la carte d'encre manque**, et le même
+segment en porte deux dans l'autre régime, avec une vérité terrain infrarouge. Il n'y a donc
+**aucune campagne de rendu à monter**, contrairement à ce que « les couches natives » laisse
+croire : elles existent.
+
 ⚠ Et `65` est une **décimation**, qui garde un détail en profondeur qu'un vrai scan n'a pas :
 c'est un **majorant**. Seul le natif répond.
 

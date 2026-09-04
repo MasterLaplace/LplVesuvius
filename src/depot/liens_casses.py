@@ -50,6 +50,23 @@ ELAGUES = (".venv", "node_modules", ".git", "repos", "site", "store", "__pycache
 Les traverser ferait signaler des liens qui ne sont pas les nôtres."""
 
 
+LIGNE_DE_PREUVE = re.compile(r"^[ \t]*-\s+(?:lignes?|l\.)\s+\d+", re.M)
+"""Une ligne de **preuve de lecture** d'une fiche : « - l. 285 : … », « - ligne 579 : … ».
+
+⚠⚠⚠ POURQUOI CETTE SECONDE FORME. La règle des guillemets ne voyait qu'une écriture des
+citations, et les fiches en portent **deux** : `« … »` et les backticks. Cinq liens transcrits
+restaient donc signalés comme cassés. C'est mot pour mot la leçon que `verifier_citations.py`
+a déjà consignée sur lui-même — *« ce motif ne connaissait que "ligne 104" […] 44 citations sur
+132 n'étaient donc jamais vérifiées »* — et la répéter une fois est une occurrence, deux est un
+motif.
+
+⚠⚠ ET LE DISCRIMINANT N'EST PAS « ENTRE BACKTICKS ». Les backticks servent partout dans ces
+documents à écrire du code en ligne, y compris autour de liens parfaitement vivants ; les
+traiter comme des citations cacherait de vrais liens cassés. Ce qui identifie une transcription,
+c'est la **ligne de preuve** — le même ancrage que `verifier_citations.py` emploie pour trouver
+ces citations. Un lien y est du texte recopié, quel que soit son délimiteur.
+"""
+
 CITATION = re.compile(r"«[^»]*»")
 """Une citation verbatim, en guillemets français.
 
@@ -68,9 +85,17 @@ précisément ce qui enterre les rares liens réellement cassés.
 
 def positions_citees(texte: str) -> list[tuple[int, int]]:
     """
-    @brief Les intervalles de caractères couverts par une citation verbatim.
+    @brief Les intervalles de caractères couverts par une transcription verbatim.
+
+    ⚠ Deux formes, parce que les fiches en emploient deux : les guillemets français, et la
+    **ligne de preuve de lecture** entière, dont le contenu est recopié quel que soit son
+    délimiteur.
     """
-    return [(m.start(), m.end()) for m in CITATION.finditer(texte)]
+    spans = [(m.start(), m.end()) for m in CITATION.finditer(texte)]
+    for m in LIGNE_DE_PREUVE.finditer(texte):
+        fin = texte.find("\n", m.end())
+        spans.append((m.start(), fin if fin >= 0 else len(texte)))
+    return spans
 
 
 def est_cite(position: int, intervalles: list[tuple[int, int]]) -> bool:
@@ -236,6 +261,18 @@ def verifier() -> int:
           not est_cite(0, positions_citees("abc \u00ab def \u00bb ghi")))
         v("... et une position dedans est lue citee",
           est_cite(6, positions_citees("abc \u00ab def \u00bb ghi")))
+        # ⚠⚠ LA SECONDE FORME, testee DANS LES DEUX SENS : un lien sur une ligne de preuve est
+        # du texte recopie meme sans guillemets, et un lien en prose ordinaire -- meme entre
+        # backticks -- reste un lien de ce document.
+        preuve = "  - l. 285 : `voir [x](y.md) pour la suite`\n"
+        v("un lien sur une LIGNE DE PREUVE est lu comme transcrit",
+          est_cite(preuve.index("[x]"), positions_citees(preuve)))
+        prose_ = "Voir [x](y.md), et `du code` au passage.\n"
+        v("... alors qu'un lien en prose ne l'est pas, meme pres de backticks",
+          not est_cite(prose_.index("[x]"), positions_citees(prose_)))
+        v("... et la ligne de preuve s'arrete a sa fin de ligne",
+          not est_cite(len(preuve) + 3,
+                       positions_citees(preuve + "Puis [z](w.md) en prose.\n")))
         # ⚠⚠ LA PROPRIETE QUI COMPTE : `appliquer` ne doit pas toucher au texte cite. Mes deux
         # premieres redactions de ce controle etaient incapables d'echouer (un `or True`, puis
         # un generateur vide) -- dans le lot qui corrige exactement ce peche. La forme qui teste
