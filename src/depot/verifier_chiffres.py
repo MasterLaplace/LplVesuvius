@@ -2034,6 +2034,19 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                      f"{min(bruts):.3f} à {max(bruts):.3f}".replace(".", ","),
                      f"de {min(bruts):.3f} à {max(bruts):.3f}"], sef.name))
 
+    # ⚠⚠ Le NEGATIF de B2 : α ne se calcule pas sur un volume de surface. Garde parce qu'un
+    # futur lecteur relira « on pourrait tester le placement sans rien rendre » et doit trouver
+    # tout de suite pourquoi non, avec le compte qui le dit.
+    aep = _source(racine, "alpha_et_le_placement.json")
+    if aep.exists():
+        d = json.loads(aep.read_text())
+        m = d.get("mesures") or []
+        refuses = sum(1 for x in m if x.get("alpha") is None)
+        if m:
+            out.append(("cas indecidables de alpha sur volume de surface",
+                        [f"**{refuses} refusés sur {len(m)}**",
+                         f"{refuses} refusés sur {len(m)}",
+                         f"{refuses} sur {len(m)}"], aep.name))
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():
         d = json.loads(bdf.read_text())

@@ -1233,6 +1233,14 @@ run "extraire la suivante"     uv run python "$ROOT/src/excision/extraire_la_spi
 # machine de l'auteur : `_charger` faisait stack + astype sans regarder la taille, et une pile
 # de 12,9 Gio en demandait une trentaine.
 run "la surface et la feuille" uv run python "$ROOT/src/excision/la_surface_et_la_feuille.py" --verifier
+# ⭐⭐⭐ Un RESULTAT NEGATIF qui ferme proprement une tache : α ne se calcule PAS sur un volume
+# de surface, la dalle etant trop mince pour emboiter deux fenetres autour d'un pic. Le controle
+# porteur est ecrit dans le sens « ca ne se mesure PAS ici » : si une dalle plus epaisse rendait
+# la majorite mesurable, il tomberait, et B2 deviendrait tranchable.
+# ⚠ Ma premiere version passait l'amplitude a `analyser` SANS le seuil, donc la branche de refus
+# etait inatteignable et les trois positions rendaient des chiffres identiques -- que j'ai lus
+# comme une reponse. La garde de `49` §2, desarmee par un argument manquant.
+run "alpha et le placement"    uv run python "$ROOT/src/excision/alpha_et_le_placement.py" --verifier
 # ⭐⭐⭐ CINQ rouleaux publient leur axe, pas un -- correction de `laxe_nest_pas_une_ligne.py`,
 # qui avait interroge UN serveur et conclu sur le corpus (angle mort de `59`, troisieme fois).
 # Le controle qui porte le fichier vient en PAIRE : les deux axes different de 27 ecarts

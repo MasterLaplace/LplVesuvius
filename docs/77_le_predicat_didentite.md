@@ -577,3 +577,49 @@ et j'ai remplacé l'assertion par celle qui est maintenant vraie.
    reconstructible.
 3. **Qu'un traceur recalé sur cette bande ferait mieux.** Il faudrait le mesurer contre autre
    chose que la spire publiée, et il n'y a rien d'autre.
+
+---
+
+## 11. ⚠⚠⚠ α ne se calcule PAS sur un volume de surface — et B2 reste ouverte pour une raison mesurée
+
+> Mesure : `src/excision/alpha_et_le_placement.py` (5 contrôles).
+
+Le registre portait **B2** avec la note *« à mesurer avant d'écrire »* : `73` §2.2 attaque la
+phrase *« no threshold on a physical quantity »*, vraie de α et **fausse du placement**, puisque
+distinguer une surface *sur* sa feuille d'une surface à un demi-pas se ferait par `d` contre la
+demi-épaisseur — un seuil en micromètres. La mesure semblait exiger de **re-rendre** une surface
+décalée.
+
+⭐ **L'idée qui la rendait montable était bonne** : une pile de couches échantillonne déjà le
+long de la normale, donc **translater d'un demi-pas, c'est prendre la fenêtre centrée ailleurs
+dans la même pile**. Positif et négatif dans le même fichier, appariés par construction, sans
+rendu ni traceur.
+
+### ⚠⚠ Et ça ne marche pas — pour une raison qui se mesure
+
+α demande **deux fenêtres de profondeur emboîtées**, toutes deux contenant le pic, la plus large
+n'ajoutant que du fond. Une dalle de volume de surface fait **±0,9 écart inter-feuilles** : une
+fois réservée la marge du décalage d'un demi-pas, il ne reste pas de quoi emboîter.
+
+Mesuré sur 12 piles × 3 positions : **25 refusés sur 36** par la garde d'amplitude de
+l'instrument (`amplitude_min = 0,02`, reprise de `depth_profile.py`), et les 11 cas mesurables
+rendent des α de **+0,000 à +1,771** sur des positions voisines — du bruit.
+
+> ⭐ **Ce qui est établi** : B2 reste ouverte, et sa voie est **nommée** — il faut un rendu
+> depuis le **volume du rouleau**, avec une fenêtre de profondeur assez large pour emboîter, pas
+> un volume de surface. Une tâche qu'on croyait à portée ne l'est pas, et on sait pourquoi.
+
+### ⚠⚠⚠ Et j'ai d'abord lu un résultat là où il n'y en avait pas
+
+Ma première version passait l'amplitude à `analyser` **sans passer le seuil**, donc la branche de
+refus — *« un profil PLAT n'est pas une mesure : l'écart rapporté est le bord de la fenêtre, et
+α ≈ 1 par identité »* — était **inatteignable**. Les trois positions rendaient alors des chiffres
+identiques au millième, que j'ai pris pour une réponse.
+
+C'est la garde de `49` §2, **désarmée par un argument manquant**. Le fichier la nomme désormais
+en constante, avec la raison.
+
+⚠ Et un second contrôle à moi était mal écrit : *« les trois positions sont mesurées sur les
+mêmes spires »* échouait parce que les refus font varier les comptes — c'est-à-dire qu'il
+échouait pour **la chose même que le fichier établit**. Il asserte maintenant ce qui est
+**tenté**, pas ce qui est mesurable.
