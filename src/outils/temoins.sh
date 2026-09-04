@@ -1228,6 +1228,10 @@ run "extraire la suivante"     uv run python "$ROOT/src/excision/extraire_la_spi
 # du fond (sinon « mal placee » et « pas de signal » seraient confondus), et le lissage doit
 # diviser la dispersion par plus de deux (0,49 -> 0,21 feuille) -- c'est le FILTRE qui localise
 # la feuille, pas la valeur d'un voxel.
+# ⚠⚠ Cette batterie charge DIX piles de couches. Le garde memoire est DANS l'outil
+# (`budget_memoire_mo`, derive de la RAM disponible) parce que son absence a fait tomber la
+# machine de l'auteur : `_charger` faisait stack + astype sans regarder la taille, et une pile
+# de 12,9 Gio en demandait une trentaine.
 run "la surface et la feuille" uv run python "$ROOT/src/excision/la_surface_et_la_feuille.py" --verifier
 # ⭐⭐⭐ CINQ rouleaux publient leur axe, pas un -- correction de `laxe_nest_pas_une_ligne.py`,
 # qui avait interroge UN serveur et conclu sur le corpus (angle mort de `59`, troisieme fois).

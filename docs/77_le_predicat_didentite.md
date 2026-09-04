@@ -489,7 +489,7 @@ pas ; il existe désormais, et la sonde qui rejoue l'erreur le fait tomber.
 
 ### ⚠⚠⚠ L'estimateur est le point — et j'avais publié la mauvaise raison
 
-Le pic **brut** par colonne (`argmax`) donne **0,486 à 0,538** feuille de dispersion sur
+Le pic **brut** par colonne (`argmax`) donne **0,486 à 0,873** feuille de dispersion sur
 les six spires — rien d'exploitable, et j'ai failli conclure que le signal n'y était pas. Le
 **centre de masse** en profondeur donne **0,19**.
 
@@ -519,12 +519,61 @@ font 261 µm, soit 1,8 écart. Faux — la dalle fait **±0,9 écart autour** de
 voisines sont à ±1,0, donc **juste dehors**. Vérifié : l'autocorrélation en profondeur décroît
 et reste plate, sans aucun revival à 19 couches.
 
+### ⭐⭐⭐ TROIS rouleaux — et c'est en unités de FEUILLE que le fait apparaît
+
+> ⚠⚠⚠ Ce paragraphe existe grâce à deux questions de l'auteur. J'avais écrit que la mesure
+> était impossible sur le rouleau de `44`, faute de volume publié. Il a demandé **« tu ne peux
+> pas générer ce qu'il te manque ? »** puis **« t'es vraiment sûr que c'est pas stocké quelque
+> part ? »**. **C'était stocké** — sur `dl.ash2txt.org`, l'autre serveur. **Quatrième fois**
+> que ce dépôt paie l'angle mort d'un seul serveur, et la première où c'est l'auteur qui le voit.
+
+| rouleau | piles | voxel | écart-type | **en feuilles** |
+|---|---:|---:|---:|---:|
+| `PHerc0172` | 6 | 7,91 µm | 23,3 – 27,7 µm | **0,158 – 0,188** |
+| `PHerc1447` | 4 | 8,64 µm | 21,1 – 27,8 µm | **0,186 – 0,246** |
+| **`PHercParis4`** | 1 | 7,91 µm | **37,7 µm** | **0,218** |
+
+⭐⭐ **En micromètres les trois ont l'air de se contredire (22 à 38) ; en feuilles ils disent la
+même chose (0,16 à 0,25).** C'est la forme sous laquelle le fait voyage — et le contrôle qui
+comparait les micromètres a dûment échoué, ce qui est ce qui l'a fait changer.
+
+### ⭐⭐ Comment on lit un TIFF de 30 Go sans le télécharger
+
+`src/volume/couches_distantes.py`. Les couches de Scroll 1 font **469 Mo chacune, 65 couches,
+30,5 Go** — mais elles sont des TIFF **non compressés à une seule bande**, donc l'octet d'une
+ligne se calcule et une fenêtre de lignes est une **plage contiguë**. Une requête `Range` par
+couche, **1,35 Gio** pour une fenêtre de 640 lignes au lieu de 30 Go.
+
+⚠ Le coût est **annoncé avant d'être payé** (`--estimer`) : sans ça, `--hauteur 4096` télécharge
+silencieusement 18 Gio.
+
+### ⚠⚠⚠ Et pourtant on ne compose PAS les micromètres avec ceux de `44`
+
+`couverture_publiee.py` pose `UM_PAR_VOXEL = 2.4` en le justifiant par *« la convention de
+`chainer_tangentiel.sh` »* et par une cohérence **interne** — jamais contre le voxel déclaré
+d'un volume. Or son répertoire de référence porte le nom d'un segment de `PHercParis4`, dont
+les **deux** volumes publiés sont à **7,91 µm** (lu dans leurs `meta.json`), et son propre
+`meta.json` est dépouillé (`uuid: out`).
+
+**Tous les micromètres du tableau de couverture de `44` reposent donc sur une constante que
+rien ne relie à un volume.** Le code le **dit** (`provenance_du_voxel_reconstructible: false`)
+au lieu de composer avec — et le contrôle tombera le jour où `44` nommera son volume.
+
+⭐ Ce qui voyage quand même : le référent en **feuilles**, 0,16 à 0,25 sur trois rouleaux.
+
+### ⭐ Un contrôle qui a fait exactement ce pour quoi il a été écrit
+
+Il disait *« le référent n'est PAS mesuré sur ce rouleau, donc c'est une conjecture »*, avec la
+note qu'il tomberait le jour où un volume deviendrait disponible. **Il est tombé le même jour**,
+et j'ai remplacé l'assertion par celle qui est maintenant vraie.
+
 ### ⚠ Ce que ça n'établit pas
 
 1. **Que la matière suivie soit la BONNE feuille.** Le centre de masse suit la bande la plus
    forte de la dalle ; c'est ce qu'un prédicat d'**identité** doit trancher — les deux ne se
    remplacent pas.
-2. **Que ça vaille sur un autre rouleau.** Six spires de `PHerc0172`, celles dont le volume de
-   surface se rapatrie sans chercher où est la matière (piège nº 27).
+2. **Que la correction de budget en MICROMÈTRES soit calculable.** Le référent est mesuré sur
+   les trois rouleaux ; ce qui bloque est le voxel de `44`, dont la provenance n'est pas
+   reconstructible.
 3. **Qu'un traceur recalé sur cette bande ferait mieux.** Il faudrait le mesurer contre autre
    chose que la spire publiée, et il n'y a rien d'autre.

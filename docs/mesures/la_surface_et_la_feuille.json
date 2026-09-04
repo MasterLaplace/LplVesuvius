@@ -5,6 +5,9 @@
   "spires": [
     {
       "nom": "PHerc0172_w060",
+      "rouleau": "PHerc0172",
+      "voxel_um": 7.91,
+      "ecart_um": 147.4,
       "couches": 33,
       "par_echelle": {
         "1": 27.28156190392422,
@@ -24,6 +27,9 @@
     },
     {
       "nom": "PHerc0172_w061",
+      "rouleau": "PHerc0172",
+      "voxel_um": 7.91,
+      "ecart_um": 147.4,
       "couches": 33,
       "par_echelle": {
         "1": 26.068272947657235,
@@ -43,6 +49,9 @@
     },
     {
       "nom": "PHerc0172_w062",
+      "rouleau": "PHerc0172",
+      "voxel_um": 7.91,
+      "ecart_um": 147.4,
       "couches": 33,
       "par_echelle": {
         "1": 27.73279015319956,
@@ -62,6 +71,9 @@
     },
     {
       "nom": "PHerc0172_w063",
+      "rouleau": "PHerc0172",
+      "voxel_um": 7.91,
+      "ecart_um": 147.4,
       "couches": 33,
       "par_echelle": {
         "1": 23.269019613232363,
@@ -81,6 +93,9 @@
     },
     {
       "nom": "PHerc0172_w064",
+      "rouleau": "PHerc0172",
+      "voxel_um": 7.91,
+      "ecart_um": 147.4,
       "couches": 33,
       "par_echelle": {
         "1": 25.069156867896933,
@@ -100,6 +115,9 @@
     },
     {
       "nom": "PHerc0172_w078",
+      "rouleau": "PHerc0172",
+      "voxel_um": 7.91,
+      "ecart_um": 147.4,
       "couches": 33,
       "par_echelle": {
         "1": 27.00451420525864,
@@ -116,14 +134,147 @@
       "brut_ecart_type_feuilles": 0.5021733420092208,
       "intensite_bande": 161.0,
       "fond": 130.0
+    },
+    {
+      "nom": "1447_20250702235910",
+      "rouleau": "PHerc1447",
+      "voxel_um": 8.64,
+      "ecart_um": 113.0,
+      "couches": 31,
+      "par_echelle": {
+        "1": 22.54062790144434,
+        "4": 21.650337275329886,
+        "20": 18.297550142178807,
+        "51": 14.847491616227497
+      },
+      "part_de_matiere": 0.5253956417267379,
+      "centre_median": 14.914593229178392,
+      "ecart_type_um": 22.54062790144434,
+      "ecart_type_feuilles": 0.19947458319862246,
+      "amplitude_um": 77.04089539763777,
+      "amplitude_feuilles": 0.6817778353773254,
+      "brut_ecart_type_feuilles": 0.6506940418917493,
+      "intensite_bande": 110.0,
+      "fond": 59.0
+    },
+    {
+      "nom": "1447_20250703025628",
+      "rouleau": "PHerc1447",
+      "voxel_um": 8.64,
+      "ecart_um": 113.0,
+      "couches": 31,
+      "par_echelle": {
+        "1": 22.152673693396856,
+        "4": 20.679519827404974,
+        "20": 16.460924951217642,
+        "51": 13.853608778853545
+      },
+      "part_de_matiere": 0.4878277796862476,
+      "centre_median": 14.765423242467719,
+      "ecart_type_um": 22.152673693396856,
+      "ecart_type_feuilles": 0.19604136011855625,
+      "amplitude_um": 73.60807106132233,
+      "amplitude_feuilles": 0.6513988589497551,
+      "brut_ecart_type_feuilles": 0.6773626710248035,
+      "intensite_bande": 118.0,
+      "fond": 74.0
+    },
+    {
+      "nom": "1447_20250703034159",
+      "rouleau": "PHerc1447",
+      "voxel_um": 8.64,
+      "ecart_um": 113.0,
+      "couches": 31,
+      "par_echelle": {
+        "1": 27.801713736082228,
+        "4": 27.2064603573762,
+        "20": 24.981719695107575,
+        "51": 22.67648792930029
+      },
+      "part_de_matiere": 0.5045817721894117,
+      "centre_median": 15.09963861641714,
+      "ecart_type_um": 27.801713736082228,
+      "ecart_type_feuilles": 0.24603286492108167,
+      "amplitude_um": 94.40242622542404,
+      "amplitude_feuilles": 0.8354197011099472,
+      "brut_ecart_type_feuilles": 0.7058624990390291,
+      "intensite_bande": 112.0,
+      "fond": 60.0
+    },
+    {
+      "nom": "PHerc1447_20250702235910",
+      "rouleau": "PHerc1447",
+      "voxel_um": 8.64,
+      "ecart_um": 113.0,
+      "couches": 31,
+      "par_echelle": {
+        "1": 21.07099380865977,
+        "4": 20.186794108977775,
+        "20": 16.51888291168688,
+        "51": 12.682977577625458
+      },
+      "part_de_matiere": 0.9202777777777778,
+      "centre_median": 14.818928230439157,
+      "ecart_type_um": 21.07099380865977,
+      "ecart_type_feuilles": 0.18646897175805108,
+      "amplitude_um": 70.28638647941628,
+      "amplitude_feuilles": 0.6220034201718255,
+      "brut_ecart_type_feuilles": 0.6459767086414526,
+      "intensite_bande": 111.0,
+      "fond": 60.0
+    },
+    {
+      "nom": "PHercParis4_w010-027",
+      "rouleau": "PHercParis4",
+      "voxel_um": 7.91,
+      "ecart_um": 173.0,
+      "couches": 65,
+      "par_echelle": {
+        "1": 37.73368434556196,
+        "4": 34.28037453392464,
+        "20": 25.197155418168588,
+        "51": 18.01735213470438
+      },
+      "part_de_matiere": 1.0,
+      "centre_median": 31.720866932991143,
+      "ecart_type_um": 37.73368434556196,
+      "ecart_type_feuilles": 0.2181137823442888,
+      "amplitude_um": 120.17044676665256,
+      "amplitude_feuilles": 0.6946268599228471,
+      "brut_ecart_type_feuilles": 0.8733841342493295,
+      "intensite_bande": 32130.0,
+      "fond": 18344.0
     }
   ],
-  "ecart_type_median_um": 26.53639357645794,
-  "ecart_type_median_feuilles": 0.18002980716728587,
+  "ecart_type_median_um": 26.068272947657235,
+  "ecart_type_median_feuilles": 0.17685395486877364,
+  "correction_du_budget": {
+    "rouleau_de_la_chaine": "PHercParis4",
+    "voxel_um": 2.4,
+    "provenance_du_voxel_reconstructible": false,
+    "referent_en_feuilles": 0.18646897175805108,
+    "referent_en_feuilles_min": 0.1578630909988627,
+    "referent_en_feuilles_max": 0.24603286492108167,
+    "rouleaux_mesures": [
+      "PHerc0172",
+      "PHerc1447",
+      "PHercParis4"
+    ],
+    "parcouru_um": 5760.0,
+    "ecart_mesure_um": 69.17466298376647,
+    "referent_mesure_sur_ce_rouleau": true,
+    "referents_par_rouleau": {
+      "PHerc0172": 26.53639357645794,
+      "PHerc1447": 22.346650797420597,
+      "PHercParis4": 37.73368434556196
+    },
+    "referent_conjecture_um": 26.53639357645794,
+    "ecart_corrige_conjecture_um": 63.88234352990654
+  },
   "erreur_du_champ_um": 49.022208599709224,
   "rouleau": "PHerc0172",
   "rouleau_du_champ": "PHerc0172",
-  "ecart_a_l_echelle_du_champ_um": 20.832502820121377,
+  "ecart_a_l_echelle_du_champ_um": 19.889832470301766,
   "voisines": {
     "paires": [
       {
@@ -145,7 +296,7 @@
     "correlation_max": 0.07749333155442335
   },
   "echelle_du_champ_px": 20,
-  "erreur_propre_si_independantes_um": 44.375486050780786,
-  "borne_basse_um": 28.189705779587847,
+  "erreur_propre_si_independantes_um": 44.80593153028664,
+  "borne_basse_um": 29.132376129407458,
   "borne_haute_um": 49.022208599709224
 }

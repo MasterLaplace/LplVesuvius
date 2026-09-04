@@ -1979,22 +1979,60 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     sef = _source(racine, "la_surface_et_la_feuille.json")
     if sef.exists():
         d = json.loads(sef.read_text())
+        # ⭐⭐ La correction de budget apportee a la chaine de `44`, avec son statut. Gardee
+        # parce que le couple (valeur, « conjecture ») ne vaut que s'il reste lie : publier
+        # 64,7 sans « conjecture » en ferait une mesure.
+        # ⚠⚠ Les micrometres de la derive de `44` NE SONT PLUS gardes : `77` §10 etablit que
+        # son voxel n'a pas de provenance reconstructible, donc composer ses micrometres avec
+        # les notres serait exactement ce que le fichier refuse de faire. Ce qui est garde a la
+        # place est le referent en FEUILLES, qui lui voyage.
+        cb = d.get("correction_du_budget") or {}
+        if cb.get("referent_en_feuilles_min"):
+            out.append(("referent en feuilles, etendue sur les rouleaux",
+                        [f"**{cb['referent_en_feuilles_min']:.3f}** à "
+                         f"**{cb['referent_en_feuilles_max']:.3f}**",
+                         f"{cb['referent_en_feuilles_min']:.3f} à "
+                         f"{cb['referent_en_feuilles_max']:.3f}",
+                         f"0,16 à 0,25"], sef.name))
+            out.append(("rouleau de la chaine de 44",
+                        [f"**{cb['rouleau_de_la_chaine']}**",
+                         f"`{cb['rouleau_de_la_chaine']}`"], sef.name))
         # ⚠ L'ETENDUE de la dispersion brute, pas six valeurs : c'est ce que la prose dit, et
+        # garder six chiffres obligerait a les ecrire tous les six pour rien.
+        bruts = [sp["brut_ecart_type_feuilles"] for sp in d["spires"]]
+
+        # ⚠⚠ Des PLAGES PAR ROULEAU, pas une valeur par pile : le document dit « 23,3 a
+        # 27,7 um sur PHerc0172 », et garder onze valeurs individuelles obligerait a les
+        # ecrire toutes les onze pour rien -- puis a les reecrire a chaque pile ajoutee.
+        par_rouleau: dict[str, list[dict]] = {}
+        for sp in d["spires"]:
+            par_rouleau.setdefault(sp["rouleau"], []).append(sp)
+        for rouleau, lot in sorted(par_rouleau.items()):
+            um = [x["ecart_type_um"] for x in lot]
+            fe = [x["ecart_type_feuilles"] for x in lot]
+            if len(lot) == 1:
+                out.append((f"ecart a la feuille, {rouleau}",
+                            [f"**{um[0]:.1f} µm**", f"{um[0]:.1f} µm",
+                             f"**{um[0]:.1f} µm**".replace(".", ",")], sef.name))
+                out.append((f"ecart en feuilles, {rouleau}",
+                            [f"**{fe[0]:.3f}**", f"{fe[0]:.3f}",
+                             f"**{fe[0]:.3f}**".replace(".", ",")], sef.name))
+            else:
+                plage_um = f"{min(um):.1f} – {max(um):.1f} µm"
+                plage_fe = f"{min(fe):.3f} – {max(fe):.3f}"
+                out.append((f"ecart a la feuille, {rouleau}",
+                            [plage_um, plage_um.replace(".", ","),
+                             plage_um.replace(" – ", " - ")], sef.name))
+                out.append((f"ecart en feuilles, {rouleau}",
+                            [f"**{plage_fe}**", plage_fe,
+                             f"**{plage_fe.replace('.', ',')}**"], sef.name))
+    # ⚠ L'ETENDUE de la dispersion brute, pas six valeurs : c'est ce que la prose dit, et
         # garder six chiffres obligerait a les ecrire tous les six pour rien.
         bruts = [sp["brut_ecart_type_feuilles"] for sp in d["spires"]]
         out.append(("dispersion brute, etendue",
                     [f"**{min(bruts):.3f}** à **{max(bruts):.3f}**",
                      f"{min(bruts):.3f} à {max(bruts):.3f}".replace(".", ","),
                      f"de {min(bruts):.3f} à {max(bruts):.3f}"], sef.name))
-        for sp in d["spires"]:
-            court = sp["nom"].split("_")[-1]
-            out.append((f"ecart de {court} a la feuille",
-                        [f"**{sp['ecart_type_um']:.1f} µm**",
-                         f"{sp['ecart_type_um']:.1f} µm",
-                         f"{sp['ecart_type_um']:.1f}".replace(".", ",")], sef.name))
-            out.append((f"amplitude de {court}",
-                        [f"**{sp['amplitude_um']:.0f} µm**",
-                         f"{sp['amplitude_um']:.0f} µm"], sef.name))
 
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():

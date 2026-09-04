@@ -227,10 +227,28 @@ gonflé** :
 | en retirant le référent en quadrature | ≈ **64 µm** |
 | franchissement des 40 µm « même feuille » | mesuré à **3,5 mm** — donc **plus tard** en réalité |
 
-⚠ Et l'ordre de grandeur compte : à 3,5 mm l'écart mesuré vaut 40 µm dont **27 µm** sont ceux
-du référent. **La chaîne reste raccordable plus longtemps que la mesure ne le dit.** C'est une
-correction du budget, pas une réfutation — et c'est un chiffre à refaire proprement, parce que
-`44` mesure sur `PHerc1447` et `77` §10 sur `PHerc0172`.
+⚠⚠ **Correction : `44` mesure sur `PHercParis4`, pas sur `PHerc1447`** — son `um_par_voxel` de
+2,4 le dit, et je m'étais trompé de rouleau ici même.
+
+⭐⭐⭐ **Et le référent Y EST MAINTENANT MESURÉ** (`77` §10) : `dl.ash2txt.org` publie les
+65 couches de son segment de référence, que j'avais déclarées absentes après n'avoir interrogé
+**qu'un seul serveur** — quatrième fois pour cet angle mort, et c'est l'auteur qui l'a vue.
+Lues par fenêtre (`src/volume/couches_distantes.py`, 1,35 Gio au lieu de 30,5 Go).
+
+| rouleau | en feuilles |
+|---|---:|
+| `PHerc0172` | 0,158 – 0,188 |
+| `PHerc1447` | 0,186 – 0,246 |
+| **`PHercParis4`** *(celui de `44`)* | **0,218** |
+
+⚠⚠⚠ **Mais on ne compose PAS les micromètres.** `couverture_publiee.py` pose
+`UM_PAR_VOXEL = 2.4` justifié par cohérence **interne**, jamais contre un volume déclaré — et
+les deux volumes publiés de `PHercParis4` sont à **7,91 µm**. Tous les micromètres du tableau
+de couverture de `44` reposent donc sur une constante que rien ne relie à un volume.
+
+> **Ce qui reste à faire, et c'est petit** : que `44` nomme son volume. Le contrôle
+> `provenance_du_voxel_reconstructible` tombera ce jour-là, et la correction passera de
+> transportable-en-feuilles à calculable-en-micromètres.
 
 > ⚠ **Le seul contrôle qui vaudrait d'être monté** : refaire `couverture_publiee.py` contre la
 > surface **recalée sur la bande** plutôt que contre la surface publiée. Si l'écart tombe, le
@@ -279,7 +297,7 @@ instruments existants.
 | **A5** | ⭐⭐ le **plancher** : une spire publiée est à **20,8 µm** de la matière *à l'échelle où le champ travaille* (`77` §10), donc l'erreur propre du champ est entre **28 et 49 µm**, **44** si indépendantes — et l'indépendance est **vérifiée** (corrélation ≤ 0,08 entre voisines) | mesuré en coupe sur **six** spires, dont cinq consécutives ; resserrer demanderait une règle autre que la spire publiée |
 | **A5** | l'extraction porte **une feuille** (47 µm), pas deux | mesuré : réinjecter une spire prédite ne change **rien** — le champ est un juge, pas un générateur |
 | **A5** | ⚠ la structure angulaire de l'écart (**71 µm**, 45 % de la médiane) **n'améliore pas** l'extrapolation | mesuré : un pas par cellule mis en commun donne 52 µm à une feuille contre 47 pour le pas global. Meilleur à longue portée (1,71 contre 1,90 feuille à huit), inutile là où ça compte |
-| **A5 bis** | ⚠ ~~juger la chaîne par l'identité~~ — **déjà fait** (`44`) : elle **glisse**, elle ne saute pas. Ce qui reste est de refaire la mesure contre une surface **recalée**, son budget étant gonflé de ~27 µm | corrigé par la lecture des fiches ; le contrôle demande de recaler puis de rejouer `couverture_publiee.py` |
+| **A5 bis** | ⚠ ~~juger la chaîne par l'identité~~ — **déjà fait** (`44`) : elle **glisse**, elle ne saute pas. Ce qui reste est de refaire la mesure contre une surface **recalée**, son budget étant gonflé (**69,2 → 64,7 µm**, conjecture) | corrigé par la lecture des fiches ; mesuré sur 2 rouleaux, **pas** sur `PHercParis4` où `44` a mesuré |
 | **A6** | la ROC de α n'est pas faite | demande de **rendre** 101 surfaces à deux profondeurs — le seul poste de ce registre qui exige le volume |
 | **B2** | « no threshold » pas encore rétréci dans l'abstract | ⚠ **à mesurer avant d'écrire** : α sur une surface translatée d'un demi-pas. Le champ la refuse (2,1 %), mais ce n'est pas α |
 | **C** | les trois tâches de la règle graduée | non commencées — bornées à trois semaines par conception |
