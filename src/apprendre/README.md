@@ -46,6 +46,21 @@ QUALITE=h src/apprendre/rendre.sh src/apprendre/02_comment_savoir.py  # 1080p
 src/apprendre/rendre.sh --verifier                                       # les témoins
 ```
 
+⚠ **Les huit, un par un.** Cette section n'en montrait que deux, et les six autres n'étaient
+alors fabricables qu'en devinant le motif — ce qui est aussi pourquoi `appelants.py` les
+comptait comme des scripts que rien n'exécute. Les voici en entier :
+
+```bash
+src/apprendre/rendre.sh src/apprendre/01_suivre_une_feuille.py
+src/apprendre/rendre.sh src/apprendre/02_comment_savoir.py
+src/apprendre/rendre.sh src/apprendre/03_le_mur_invisible.py
+src/apprendre/rendre.sh src/apprendre/04_pas_une_fonction.py
+src/apprendre/rendre.sh src/apprendre/05_le_temoin_negatif.py
+src/apprendre/rendre.sh src/apprendre/06_deux_causes.py
+src/apprendre/rendre.sh src/apprendre/07_ce_que_mesurer_coute.py
+src/apprendre/rendre.sh src/apprendre/08_la_fenetre_qui_mesure.py
+```
+
 ⚠⚠ `rendre.sh` extrait des **vignettes** après l'assemblage, et ce n'est pas un confort :
 une vidéo qu'on ne regarde pas est une vidéo qu'on ne peut pas contrôler. Une légende posée
 par-dessus une figure ne se voit jamais à la relecture du code — elle saute aux yeux sur une
