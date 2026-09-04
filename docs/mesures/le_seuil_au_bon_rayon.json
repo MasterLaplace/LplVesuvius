@@ -178,5 +178,91 @@
         "rho_longueur": -0.048343904157857644
       }
     }
+  },
+  "reference_locale": {
+    "ancien": {
+      "boule_100": {
+        "rho": 0.20624854190839806,
+        "couverture": 0.23998419058641182,
+        "traces": 46
+      },
+      "boule_200": {
+        "rho": 0.4740021955158781,
+        "couverture": 0.9424867916653036,
+        "traces": 46
+      },
+      "boule_400": {
+        "rho": 0.5597069335135997,
+        "couverture": 0.9999978162049755,
+        "traces": 46
+      },
+      "colonnes_10": {
+        "rho": 0.7548443254363143,
+        "couverture": 0.9999836722647756,
+        "traces": 46
+      },
+      "colonnes_100": {
+        "rho": 0.7925371085499482,
+        "couverture": 1.0,
+        "traces": 46
+      },
+      "colonnes_150": {
+        "rho": 0.7689327755181317,
+        "couverture": 1.0,
+        "traces": 46
+      },
+      "colonnes_20": {
+        "rho": 0.7654106629976771,
+        "couverture": 0.9999989085138106,
+        "traces": 46
+      },
+      "colonnes_50": {
+        "rho": 0.8047718151999473,
+        "couverture": 1.0,
+        "traces": 46
+      }
+    },
+    "corrige": {
+      "boule_100": {
+        "rho": 0.5548404852183524,
+        "couverture": 0.20710596674638482,
+        "traces": 28
+      },
+      "boule_200": {
+        "rho": 0.7378297377844624,
+        "couverture": 0.7609966581690913,
+        "traces": 44
+      },
+      "boule_400": {
+        "rho": 0.8033046638988073,
+        "couverture": 0.9851884455904635,
+        "traces": 44
+      },
+      "colonnes_10": {
+        "rho": 0.8339811269609284,
+        "couverture": 0.997534445621434,
+        "traces": 44
+      },
+      "colonnes_100": {
+        "rho": 0.8433858564974825,
+        "couverture": 0.9998263698504953,
+        "traces": 44
+      },
+      "colonnes_150": {
+        "rho": 0.8397157393764424,
+        "couverture": 0.9999086157107869,
+        "traces": 44
+      },
+      "colonnes_20": {
+        "rho": 0.8336987804092701,
+        "couverture": 0.9988944681222705,
+        "traces": 44
+      },
+      "colonnes_50": {
+        "rho": 0.8377928054083166,
+        "couverture": 0.999571392271741,
+        "traces": 44
+      }
+    }
   }
 }

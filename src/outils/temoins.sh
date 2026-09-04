@@ -1285,6 +1285,7 @@ run "allure d'un rendu"        uv run python "$ROOT/src/encre/allure_du_rendu.py
 run "figure hypothèse réfutée" uv run python "$ROOT/src/figures/figure_hypothese_refutee.py" --verifier
 run "figure bruit d'une fenetre" uv run python "$ROOT/src/figures/figure_bruit_dune_fenetre.py" --verifier
 run "figure bruit de l'echantillon" uv run python "$ROOT/src/figures/figure_bruit_de_lechantillon.py" --verifier
+run "figure le bon rayon"     uv run python "$ROOT/src/figures/figure_le_bon_rayon.py" --verifier
 
 # ⚠⚠ La figure du bug d'échelle a un contrôle, et il porte sur ce qui la rend HONNÊTE : les
 # deux panneaux partagent leur étirement. Étirer chacun sur sa propre plage rendrait une

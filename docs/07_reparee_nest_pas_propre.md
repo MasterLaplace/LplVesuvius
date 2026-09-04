@@ -860,6 +860,44 @@ rayon contre **44** au corrigé. Un rayon plus grand trouve un vis-à-vis pour p
 deux traces sortent du domaine quand il rétrécit. C'est une conséquence de la correction, pas un
 biais du comparatif — mais le comparatif n'est pas parfaitement apparié, et ça se dit.
 
+### ⭐⭐⭐ Le même effondrement sur un TROISIÈME paramètre : la référence locale
+
+`06` §3.2 conclut que le remède de principe — une référence en **boule 3D**, locale en rayon par
+construction — rend la métrique *« nettement PIRE »*. Ce verdict est mesuré sur
+`baseline_sweep_scroll1.jsonl`, que la section suivante classe **AUTRE rayon**. Rejoué :
+
+| variante | ancien rayon | **rayon corrigé** | couverture |
+|---|---:|---:|---:|
+| `colonnes_150` | +0,769 | **+0,840** | 100 % |
+| `colonnes_50` | +0,805 | +0,838 | 100 % |
+| `colonnes_10` | +0,755 | +0,834 | 99,8 % |
+| `boule_400` | **+0,560** | **+0,803** | 98,5 % |
+| `boule_200` | **+0,474** | **+0,738** | 76,1 % |
+| `boule_100` | +0,206 | +0,555 | **20,7 %** |
+
+**Le verdict survit, la marge s'effondre.** La bande reste devant la boule, mais l'écart
+`colonnes_150` − `boule_400` passe de **0,209 à 0,036** — sous le bruit du rho (0,125). Et la
+**largeur** de la bande cesse elle aussi de compter : l'étendue des variantes en colonnes passe
+de 0,050 à **0,010**.
+
+⚠ La différence qui **reste** n'est pas le rho, c'est la **couverture** : une boule étroite ne
+mesure qu'un cinquième des cellules, et aucune correction de rayon ne répare ça. Conclure « les
+deux se valent » depuis une égalité de rho serait faux.
+
+![Trois paramètres qui cessent de compter ensemble](images/07_le_bon_rayon.png)
+
+*Les six panneaux partagent le même axe, et la bande claire est le bruit du rho d'une graine à
+l'autre. À gauche, chaque famille s'étale de 0,43 à 0,60 ; à droite, de 0,05 à 0,29 — et
+l'essentiel de ce qui reste à droite est la boule de rayon 100, qui ne mesure qu'un cinquième des
+cellules. ⚠ Seul le balayage de seuil est **ordonné**, donc seul lui est relié : tracer une ligne
+entre « 1/3, 1/2, p5, déficit » dessinerait une tendance que personne n'a mesurée.*
+
+> ⭐ **Trois paramètres cessent de compter en même temps** — le seuil, la grandeur, la référence
+> locale. Ce n'est donc aucun des trois qui était mal choisi : c'est le **rayon** qui les faisait
+> paraître importants. Un rayon quatre fois trop grand injecte une erreur structurée — la spire
+> voisine — et toute variation de normalisation ou de seuil ne changeait que la **part de cette
+> erreur qui fuyait**. Corrigé, il n'y a plus rien à laisser fuir.
+
 ### ⚠⚠ Et les fichiers se datent EUX-MÊMES : trois autres portent l'ancien rayon
 
 Un fichier de mesure ne porte pas son instrument, et aucune date n'est fiable — un fichier se

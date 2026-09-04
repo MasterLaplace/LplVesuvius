@@ -60,6 +60,43 @@ SEUILS = ("below_015", "below_020", "below_025", "below_030", "below_033",
 d'accord : si les deux colonnes divergeaient, l'une des deux lectures serait fausse."""
 
 
+VARIANT_CORRELATE = RACINE / "src" / "excision" / "variant_correlate.py"
+ANCIEN_BASELINE = RACINE / "docs" / "mesures" / "baseline_sweep_scroll1.jsonl"
+CORRIGE_BASELINE = (RACINE / "docs" / "mesures"
+                    / "baseline_sweep_scroll1_rayon_corrige.jsonl")
+
+
+def famille_de_reference(jsonl: Path) -> dict | None:
+    """
+    @brief Le rho de chaque variante de référence LOCALE — bande de colonnes, boule 3D.
+
+    ⚠⚠ C'EST LA MEME QUESTION QUE LE SEUIL, POSEE SUR UN AUTRE PARAMETRE. `06` §3.2 conclut que
+    le remède de principe — une référence en **boule 3D**, locale en rayon par construction —
+    rend la métrique *« nettement PIRE »* (+0,474 et +0,560 contre +0,769). Ce verdict est
+    mesuré sur `baseline_sweep_scroll1.jsonl`, que `le_rayon_des_mesures.py` classe **AUTRE
+    rayon**. Si l'écart s'effondre au rayon corrigé comme celui du seuil, alors ce n'est pas
+    « le seuil » ni « la référence » qui étaient mal choisis : c'est le **rayon** qui faisait
+    paraître important tout le reste.
+
+    ⭐ La corrélation est calculée par `variant_correlate.py`, jamais réécrite ici — c'est lui
+    qui porte la jointure, le rang de Spearman et surtout la **couverture**, qui est la vraie
+    différence entre une boule étroite et une bande.
+    """
+    if not jsonl.is_file():
+        return None
+    with tempfile.TemporaryDirectory() as tmp:
+        sortie = Path(tmp) / "v.json"
+        pr = subprocess.run(
+            ["uv", "run", "python", str(VARIANT_CORRELATE), str(jsonl), str(INDEX),
+             "--out", str(sortie)],
+            capture_output=True, text=True, cwd=RACINE, timeout=900)
+        if pr.returncode != 0 or not sortie.is_file():
+            return None
+        lignes = json.loads(sortie.read_text())
+    return {x["variant"]: dict(rho=x["rho_events"], couverture=x["coverage"],
+                               traces=x["traces"]) for x in lignes}
+
+
 def rho(jsonl: Path, champ: str) -> dict | None:
     """
     @brief Le rho de rangs contre les croisements publiés, pour une grandeur.
@@ -96,6 +133,8 @@ def mesurer() -> dict:
         out["grandeurs"][champ] = {"ancien": rho(ANCIEN, champ), "corrige": rho(CORRIGE, champ)}
     for champ in SEUILS:
         out["seuils"][champ] = {"ancien": rho(ANCIEN, champ), "corrige": rho(CORRIGE, champ)}
+    out["reference_locale"] = {"ancien": famille_de_reference(ANCIEN_BASELINE),
+                               "corrige": famille_de_reference(CORRIGE_BASELINE)}
     return out
 
 
@@ -196,6 +235,42 @@ def _verifier(r: dict | None = None) -> int:
       ecart < ETENDUE_DE_GRAINE,
       f"de {min(corriges):.3f} à {max(corriges):.3f} — écart {ecart:.3f} "
       f"contre une étendue de graine de {ETENDUE_DE_GRAINE:.3f}")
+
+    fam = r.get("reference_locale") or {}
+    if fam.get("ancien") and fam.get("corrige"):
+        print("\nla référence locale : le même effondrement, sur un AUTRE paramètre")
+        av, ap = fam["ancien"], fam["corrige"]
+        # ⚠⚠⚠ `06` §3.2 conclut que la boule 3D rend la metrique « NETTEMENT pire ». Le verdict
+        # SURVIT au rayon corrige -- la bande reste devant -- mais la MARGE s'effondre, et c'est
+        # elle qui portait le mot « nettement ». Les deux assertions disent exactement ca.
+        ecart_av = av["colonnes_150"]["rho"] - av["boule_400"]["rho"]
+        ecart_ap = ap["colonnes_150"]["rho"] - ap["boule_400"]["rho"]
+        v("à l'ancien rayon, la boule 3D était loin derrière la bande",
+          ecart_av > 0.15, f"écart {ecart_av:.3f}")
+        v("... et au rayon corrigé l'écart tombe sous le bruit du rho",
+          0 < ecart_ap < ETENDUE_DE_GRAINE,
+          f"écart {ecart_ap:.3f} contre un bruit de {ETENDUE_DE_GRAINE:.3f} — "
+          f"boule_400 {ap['boule_400']['rho']:+.3f} contre "
+          f"colonnes_150 {ap['colonnes_150']['rho']:+.3f}")
+        # ⚠⚠ ET LA GENERALISATION, ecrite comme un controle : au bon rayon, la LARGEUR de la
+        # bande cesse aussi de compter. `06` §3.2 relevait un plateau de +0,755 a +0,805 ; il
+        # devient +0,834 a +0,843. Trois parametres qui semblaient importants cessent de l'etre
+        # ensemble, ce qui designe la cause commune : le rayon injectait une erreur structuree,
+        # et toute variation changeait la part qui en fuyait.
+        colonnes_av = [x["rho"] for k, x in av.items() if k.startswith("colonnes_")]
+        colonnes_ap = [x["rho"] for k, x in ap.items() if k.startswith("colonnes_")]
+        etendue_av = max(colonnes_av) - min(colonnes_av)
+        etendue_ap = max(colonnes_ap) - min(colonnes_ap)
+        v("... et la largeur de la bande cesse elle aussi de compter",
+          etendue_ap < etendue_av / 3,
+          f"étendue des colonnes {etendue_av:.3f} → {etendue_ap:.3f}")
+        # ⚠ La vraie difference qui RESTE n'est pas le rho, c'est la COUVERTURE : une boule
+        # etroite ne mesure qu'un cinquieme des cellules, et ca, aucune correction de rayon ne
+        # le repare. Le dire evite de conclure « les deux se valent » d'une egalite de rho.
+        v("... mais la boule étroite reste incapable de mesurer la plupart des cellules",
+          ap["boule_100"]["couverture"] < 0.5,
+          f"couverture boule_100 {100 * ap['boule_100']['couverture']:.1f} % contre "
+          f"{100 * ap['colonnes_150']['couverture']:.1f} % pour la bande")
 
     print()
     if echecs:
