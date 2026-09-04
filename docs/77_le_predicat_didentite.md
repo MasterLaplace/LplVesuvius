@@ -542,6 +542,16 @@ couche, **1,35 Gio** pour une fenêtre de 640 lignes au lieu de 30 Go.
 ⚠ Le coût est **annoncé avant d'être payé** (`--estimer`) : sans ça, `--hauteur 4096` télécharge
 silencieusement 18 Gio.
 
+*La fenêtre de ce document, reproductible — la position vient du masque publié, qui est minuscule
+et dit où est la matière :*
+
+```bash
+uv run python src/volume/couches_distantes.py \
+    "https://dl.ash2txt.org/full-scrolls/Scroll1/PHercParis4.volpkg/paths/20230702185753/layers/" \
+    --sortie data/couches/PHercParis4_w010-027 \
+    --haut 7680 --gauche 926 --hauteur 640 --largeur 640
+```
+
 ### ⚠⚠⚠ Et pourtant on ne compose PAS les micromètres avec ceux de `44`
 
 `couverture_publiee.py` pose `UM_PAR_VOXEL = 2.4` en le justifiant par *« la convention de

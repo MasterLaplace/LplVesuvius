@@ -15,6 +15,8 @@ La parade écrite est : **sélectionner sur un axe, valider sur l'autre**. Elle 
 
 ![le tirage condamne par la geometrie, juge par la profondeur](images/37_deux_axes.png)
 
+*Régénérer : `uv run python src/figures/figure_deux_axes.py`*
+
 > **S'ils s'accordaient, le point rouge serait le plus à droite** — le pire selon les deux.
 > Il l'est **une fois sur huit**, là où le hasard seul en donnerait quatre.
 

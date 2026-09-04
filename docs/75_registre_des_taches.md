@@ -308,7 +308,7 @@ instruments existants.
 | **C** | les trois tâches de la règle graduée | non commencées — bornées à trois semaines par conception |
 | **D1** | l'arc d'excision (`03`–`07`) à re-fonder | la conclusion de tête de `07` est démentie par notre propre mesure |
 | **D2** | le contrôle P1 bis de `71` | ×15,9 requis contre ×3,8 observé |
-| **D3** | 41 scripts sans appelant | dette de documentation, signalée par le témoin |
+| **D3** | ~~41~~ → **39** scripts sans appelant | ⚠ **entamé** : deux figures dont l'image est **utilisée** dans un doc ne portaient pas leur commande de régénération — c'est la règle du dépôt, et c'est réparé (vérifié : les deux se régénèrent à l'identique). Le reste est classé ci-dessous |
 
 ---
 

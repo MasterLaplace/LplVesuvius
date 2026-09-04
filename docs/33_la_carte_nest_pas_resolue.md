@@ -126,6 +126,8 @@ rouleau), et **le dépouilleur avait été écrit avant qu'elle rende** —
 
 ![le classement avant et apres un echantillonnage trois fois plus dense](images/33_comparaison.png)
 
+*Régénérer : `uv run python src/figures/figure_comparaison.py`*
+
 Figure : `src/figures/figure_comparaison.py`, depuis `docs/mesures/comparaison_cartes.json`.
 
 **Et l'inversion est complète sur ce qui décidait** : `PHerc0358`, que `16` désignait comme
