@@ -16,8 +16,8 @@
 
 | | tâches | ce que ça fait avancer |
 |---|---:|---|
-| **A — remplacer le pinceau** | 6 (dont **1 faite**) | le prix. Un prédicat d'identité, son témoin, son déploiement |
-| **B — l'article** | 5 | une publication, et la crédibilité des mesures qui la portent |
+| **A — remplacer le pinceau** | 7 (dont **2 faites**) | le prix. Un prédicat d'identité, son témoin, son déploiement |
+| **B — l'article** | 5 (dont **4 faites**) | une publication, et la crédibilité des mesures qui la portent |
 | **C — la règle graduée** | 3 | savoir si une carte d'encre peut **valider** un déroulage. Borné à trois semaines |
 | **D — dette** | 3 | ce qui pourrit si on n'y touche pas |
 
@@ -62,7 +62,31 @@ qu'un rouleau écrasé n'a pas de rayon absolu et que son axe erre de 2,6 mm sur
 `mesh/*-on-*.tifxyz` et non `tifxyz_original`. Bon marché, et c'est la seule façon de savoir si
 le sens est une convention du rouleau ou du projet.
 
-### A2 ⭐⭐⭐ — le test d'identité (ex-H5 de `69`, révisée par `73` §1)
+### ~~A2~~ ✅ — le prédicat d'identité — **FAIT le 2026-09-04** (`77`), par une autre voie
+
+⭐⭐⭐ **Un prédicat d'identité existe**, adossé au référent plutôt qu'au champ d'orientation :
+un **champ d'enroulement** interpolé entre les 37 spires approuvées de `PHerc0139`, et la
+grandeur qui décide est l'**avance d'indice sur un tour**.
+
+| surface | avance par tour | p10 | p90 |
+|---|---:|---:|---:|
+| vraie spire | **−0,005** | −0,170 | **+0,230** |
+| saut d'**1** feuille | **1,103** | **0,753** | 1,479 |
+| saut de 2 | 1,962 | 1,369 | 2,517 |
+| saut de 3 | 2,851 | 2,314 | 3,300 |
+
+**Les deux populations ne se recouvrent pas** (+0,230 contre 0,753) et l'avance **compte** les
+feuilles. Validation à spire exclue ; témoins **construits** à chaque position.
+
+⭐⭐⭐ **Validation croisée** : les deux seules positions qui n'avancent pas sont **exactement**
+les deux défauts que `76` avait trouvés par une méthode qui ne partage rien avec celle-ci.
+
+⚠ **Ce qui reste de A2, et c'est ce qui déploie** : ce prédicat a besoin du référent. Le champ
+dérivé du **volume** (résidus d'orientation sur `normal-grids` + `m7`, `69` A2) répondrait
+**sans** référent — c'est lui qui sortirait de la bande publiée. Les trois raisons de `73` §1
+qui rouvraient la question restent valides et non testées.
+
+### A2 bis ⭐⭐ — le test d'identité SANS référent (ex-H5 de `69`, révisée par `73` §1)
 
 *Le champ déplié assigne-t-il un entier constant le long de chaque spire publiée, et des
 entiers consécutifs à deux spires consécutives ?*
@@ -140,15 +164,19 @@ instruments existants.
 > `73` §2.9 : *« la thèse tient, étroitement »*, et il **vaut d'être publié** à trois
 > conditions. Les voici, plus deux que l'audit a ajoutées.
 
-### B1 ⚠⚠⚠ — rétrécir §6.7 : présence ≠ identité
+### ~~B1~~ ✅ — rétrécir §6.7 : présence ≠ identité — **FAIT le 2026-09-04**
 
 La phrase *« the predicate is the same one α estimates »* sur-affirme. α répond à la
 **présence** ; le pinceau peint l'**identité**. Remplacer par : *α automates the presence half
 of the approval predicate; the identity half is open, and the referent to test it against is
 published.* Et **verser `17` dans cette section** comme le résultat négatif qu'il est.
 
-⭐ Avec le compte corrigé : *the wrap index in the names of **101** human-approved segments,
-including two gapless runs of 37 and 44 consecutive wraps.*
+⭐ **Écrit**, et avec les chiffres mesurés plutôt qu'annoncés : α automatise la **moitié
+présence** ; l'identité est ouverte et son référent est publié — 101 segments approuvés portant
+leur numéro de spire, deux courses sans trou (`w023`–`w059`, `w052`–`w095`), l'indice comptant
+vers l'extérieur à 95,0 % et 95,1 %, et un pas d'indice valant 154,1 et 147,4 µm. Plus un
+encadré qui déclare les **trois défauts du référent** : un test noté contre lui doit les
+exclure, sinon un bon prédicteur se lit comme un prédicteur à 94 %.
 
 ### B2 ⚠⚠ — rétrécir *no threshold* dans l'abstract et en §3
 
@@ -159,7 +187,7 @@ l'interstice se fait par $d$ contre la demi-épaisseur — un seuil en micromèt
 demi-pas et mesurer α. Prédiction : α ≈ 0 avec $d$ ≈ 80–90 µm. Si α ≈ 1, la revendication tient
 et B2 tombe.
 
-### B3 ⚠⚠ — le 113 µm, et il faut plus que relabelliser
+### ~~B3~~ ✅ — le 113 µm — **FAIT le 2026-09-03/04**
 
 `74` §2. La conclusion de `73` est juste — ce n'est pas un écart centre à centre — mais son
 mécanisme cite une phrase de `43` §6quater que `43` **corrige plus loin dans le même
@@ -173,13 +201,18 @@ Donc : ligne 201 (relabelliser **et** nommer le réglage), ligne 352 (l'exemple 
 ⚠ Et **ne pas s'appuyer sur la médiane de l'atlas** (172,8 µm) : c'est 10,0 voxels **entiers**
 de niveau 1, quantifiés à 17,28 µm, d'IQR 121–250,6. L'appui solide est `16`.
 
-### B4 ⚠ — nommer les quinze segments de §5.7
+### ~~B4~~ ✅ — nommer les quinze segments de §5.7 — **FAIT, et le résultat a grandi**
 
 14 `auto_grown_<horodatage>` + 1 `z_dbg_gen_00320` (confirmé). *« The published segmentation of
-a prize scroll »* laisse croire à un effort curaté. Le nommer rend le résultat plus petit et
-inattaquable.
+a prize scroll »* laissait croire à un effort curaté.
 
-### B5 ⚠ — les deux comptes, 13 et 14
+⭐⭐ **Et nommer les segments a fait grandir le résultat au lieu de le rétrécir** (`76` §7) : les
+spires curatées **pavent** (37/37 et 44/44 ont une voisine à une feuille) là où l'automatique
+échantillonne (4/14). Le titre de §5.7 devient *« Automatic tracing samples, curated
+segmentation tiles »*, et un encadré porte le piège — la médiane sur toutes les paires rend
+2202 contre 1901 µm, **indiscernable**.
+
+### ~~B5~~ ✅ — les deux comptes, 13 et 14 — **FAIT le 2026-09-03**
 
 Les deux sont dans `derive_profondeur.json` avec des définitions différentes (`74` §1).
 Dire lequel est lequel, en une incise.

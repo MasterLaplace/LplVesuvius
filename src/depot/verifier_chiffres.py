@@ -1798,6 +1798,31 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         for pas in d["par_pas"]:
             out.append((f"ecart pour un saut de {pas['saut']}",
                         _deux(pas["median_vx"] * d["voxel_um"], 1, " µm"), sdi.name))
+    # ⭐⭐⭐ Le PREDICAT D'IDENTITE (`77`) : la moitie que le pinceau peint. Garde parce que la
+    # non-recouvrance des deux populations est ce qui en fait un predicat plutot qu'une
+    # tendance -- et qu'une prose qui deriverait de la mesure transformerait un predicat en
+    # opinion sans que rien ne l'attrape.
+    cde = _source(racine, "le_champ_denroulement.json")
+    if cde.exists():
+        d = json.loads(cde.read_text())
+
+        def _deux2(v: float, n: int, suffixe: str = "", signe: bool = False) -> list[str]:
+            s_ = "+" if (signe and v >= 0) else ""
+            point = f"{s_}{v:.{n}f}{suffixe}"
+            return [f"**{point}**", point, f"**{point.replace('.', ',')}**",
+                    point.replace(".", ",")]
+
+        out.append(("avance par tour d'une vraie spire",
+                    _deux2(d["avance_par_tour_mediane"], 3, "", signe=True), cde.name))
+        out.append(("borne haute d'une vraie spire",
+                    _deux2(d["avance_p90"], 3, "", signe=True), cde.name))
+        for saut, t in sorted(d["temoins_en_travers"].items()):
+            out.append((f"avance d'un saut fabrique de {saut}",
+                        _deux2(t["median"], 3), cde.name))
+            if saut == "1":
+                out.append(("borne basse d'un saut d'une feuille",
+                            _deux2(t["p10"], 3), cde.name))
+        ajoute("erreur d'indice a spire exclue", d["erreur_mediane"], 4, cde.name)
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():
         d = json.loads(bdf.read_text())

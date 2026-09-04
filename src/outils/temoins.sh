@@ -1190,6 +1190,14 @@ run "sens des indices : 0172"  uv run python "$ROOT/src/excision/le_sens_des_ind
 # fichier est celui du PIEGE : la comparaison spontanee (mediane de toutes les paires) rend
 # 2202 contre 1901 um, soit deux corpus indiscernables -- alors que l'un pave et l'autre non.
 run "paver ou echantillonner"  uv run python "$ROOT/src/excision/paver_ou_echantillonner.py" --verifier
+# ⭐⭐⭐ LE PREDICAT D'IDENTITE -- la moitie que le pinceau peint et que le depot n'avait pas.
+# Deux controles portent le fichier : les deux populations ne se RECOUVRENT pas (une vraie
+# spire avance de +0,230 au plus, un saut d'une feuille de 0,753 au moins), et la validation
+# croisee -- les deux seules positions qui n'avancent pas sont EXACTEMENT les deux defauts que
+# `76` avait trouves par une methode entierement differente. Deux sondes mordent : ne pas
+# exclure la spire jugee rend une erreur exactement nulle (le champ la LIT), et laisser les
+# spires bornes dans le champ qui juge le temoin fait perdre un des deux defauts.
+run "le champ d'enroulement"   uv run python "$ROOT/src/excision/le_champ_denroulement.py" --verifier
 # ⭐⭐ Le garde-fou de l'angle mort qui a mordu TROIS fois : interroger une vue du corpus et
 # conclure sur le corpus. Sa sonde la plus utile reduit la comparaison a une seule vue --
 # la faute exacte du `07` -- et fait tomber trois controles.

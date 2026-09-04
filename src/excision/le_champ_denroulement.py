@@ -1,0 +1,397 @@
+#!/usr/bin/env python3
+"""Peut-on DIRE sur quelle feuille est un point ? — le prédicat d'identité, et son témoin.
+
+⭐⭐⭐ CE QUE CE FICHIER MESURE, ET C'EST LA MOITIÉ QUI MANQUAIT. L'article établit que le
+prédicat peint à la main dans le pipeline de référence est un prédicat d'**identité** — *«
+regions judged geometrically consistent with a **single sheet** »* — et que le dépôt n'avait
+construit que la **présence** (α : il y a une feuille à portée) et le **placement** (`offset` :
+la surface est *sur* elle). L'identité est ce qui coûte 775 heures de pinceau par rouleau.
+
+`76` a rendu un référent utilisable : 81 spires consécutives approuvées par des humains, dont
+on sait qu'elles comptent vers l'extérieur et qu'un pas d'indice vaut un écart constant. Ce
+fichier s'en sert pour construire un **champ d'enroulement** — pour tout point, l'indice de
+spire, en continu — et pose la seule question qui décide :
+
+    ce champ, construit SANS une spire, sait-il dire que cette spire est UNE feuille ?
+
+⚠⚠ LA VALIDATION EST À SPIRE EXCLUE, et sans ça la mesure serait vide. Un champ construit sur
+toutes les spires assigne évidemment `k` à la spire `k` : il l'a lue. La question utile est
+s'il l'**interpole** — c'est-à-dire si connaître les feuilles `k−1` et `k+1` suffit à placer ce
+qui est entre elles. Si oui, un traceur qui atterrit n'importe où dans la bande peut être
+**informé** de la feuille qu'il suit ; si non, chaque feuille doit être tracée à la main, et le
+pinceau reste.
+
+⚠⚠⚠ ET LE TÉMOIN NÉGATIF EST CONSTRUIT, PAS ESPÉRÉ. Une surface qui traverse l'empilement est
+fabriquée à partir du référent lui-même : on prend la spire `k` d'un côté et la spire `k+3` de
+l'autre, en fondu sur l'angle. Elle est une surface parfaitement lisse, parfaitement plausible,
+et elle traverse **trois feuilles** par construction. Le champ DOIT le voir. Sans ce témoin,
+« l'écart d'indice le long d'une spire est petit » serait satisfait par un champ constant, qui
+ne mesure rien du tout.
+
+⚠ CE QUE CE FICHIER N'ÉTABLIT PAS :
+
+1. **Que le champ vaille hors de la bande publiée.** Il est bâti par interpolation entre des
+   spires connues : au-delà de la dernière, il extrapole, et rien ici ne dit ce que vaut cette
+   extrapolation. C'est la limite qui compte pour un déploiement.
+2. **Que ce soit le seul prédicat d'identité possible.** C'en est un, adossé au référent. Un
+   champ dérivé du volume (résidus d'orientation, `69` A2) répondrait sans référent, et reste
+   à mesurer.
+3. **Qu'un traceur puisse s'en servir en ligne.** Le champ est une table ; l'y brancher est un
+   autre lot.
+
+Usage :
+    uv run python src/excision/le_champ_denroulement.py --verifier
+    uv run python src/excision/le_champ_denroulement.py --json docs/mesures/le_champ_denroulement.json
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+import numpy as np
+
+RACINE = Path(__file__).resolve().parents[2]
+sys.path[:0] = [str(RACINE / "src" / "excision")]
+from le_sens_des_indices import (  # noqa: E402
+    SECTEURS, TRANCHES_Z, centre_de, charger, _spires,
+)
+
+DEFAUTS_CONNUS = (41, 45)
+"""Les spires `w_k` dont `76` a mesuré, par une méthode entièrement différente, que la paire
+`(k, k+1)` n'est pas à une feuille : `w045`/`w046` sont la MÊME surface (0,0 µm) et
+`w041`/`w042` sont à une demi-feuille. ⚠ Écrites ici pour être **retrouvées**, pas pour être
+écartées d'office : le contrôle vérifie que ce sont exactement les positions où un « saut d'une
+feuille » fabriqué depuis elles n'en est pas un."""
+
+POINTS_MINIMUM = 8
+"""Points exigés dans une cellule (tranche, secteur) pour qu'une spire y ait un rayon."""
+
+SAUTS_DU_TEMOIN = (1, 2, 3)
+"""De combien de feuilles les surfaces témoins traversent l'empilement. ⚠ **Plusieurs et pas
+une seule** : un témoin unique dirait « le champ voit CE saut-là ». Une rampe dit si l'avance
+mesure le **nombre de feuilles franchies**, ce qui est la revendication. Et le saut de **1**
+est le cas dur — c'est celui qu'un traceur commet réellement."""
+
+
+def _grille(nuages: dict[int, tuple]) -> tuple[np.ndarray, np.ndarray, dict]:
+    """
+    @brief Le repère commun : bornes en hauteur, bornes d'angle, et un centre par tranche.
+
+    ⚠ Le centre est ajusté par tranche sur l'UNION de toutes les spires, pour la raison de
+    `76` : l'axe erre avec la hauteur, et un centre global mélangerait des feuilles.
+    """
+    z_tous = np.concatenate([n[2] for n in nuages.values()])
+    bords_z = np.linspace(z_tous.min(), z_tous.max(), TRANCHES_Z + 1)
+    bords_t = np.linspace(-np.pi, np.pi, SECTEURS + 1)
+
+    centres = {}
+    for i, (lo, hi) in enumerate(zip(bords_z, bords_z[1:])):
+        xs, ys = [], []
+        for x, y, z in nuages.values():
+            s = (z >= lo) & (z < hi)
+            if s.sum():
+                xs.append(x[s])
+                ys.append(y[s])
+        if xs:
+            centres[i] = centre_de(np.concatenate(xs), np.concatenate(ys))
+    return bords_z, bords_t, centres
+
+
+def _rayons(nuage: tuple, bords_z, bords_t, centres) -> dict[tuple[int, int], float]:
+    """
+    @brief Le rayon médian d'une spire dans chaque cellule (tranche, secteur) qu'elle occupe.
+    """
+    x, y, z = nuage
+    out: dict[tuple[int, int], float] = {}
+    for i, (lo, hi) in enumerate(zip(bords_z, bords_z[1:])):
+        if i not in centres:
+            continue
+        s = (z >= lo) & (z < hi)
+        if s.sum() < POINTS_MINIMUM:
+            continue
+        cx, cy = centres[i]
+        t = np.digitize(np.arctan2(y[s] - cy, x[s] - cx), bords_t)
+        r = np.hypot(x[s] - cx, y[s] - cy)
+        for j in range(1, SECTEURS + 1):
+            p = r[t == j]
+            if len(p) >= POINTS_MINIMUM:
+                out[(i, j)] = float(np.median(p))
+    return out
+
+
+def _indice_interpole(rayon: float, table: list[tuple[float, int]]) -> float | None:
+    """
+    @brief L'indice de spire d'un rayon, interpolé entre les deux spires qui l'encadrent.
+
+    ⚠ Rend `None` hors de la table plutôt qu'une extrapolation. Extrapoler donnerait un nombre
+    pour un point dont on ne sait rien, et un prédicat d'identité qui répond partout est un
+    prédicat qui ne refuse jamais.
+    """
+    if len(table) < 2:
+        return None
+    for (r0, k0), (r1, k1) in zip(table, table[1:]):
+        if r0 <= rayon <= r1:
+            if r1 == r0:
+                return float(k0)
+            return float(k0 + (k1 - k0) * (rayon - r0) / (r1 - r0))
+    return None
+
+
+def _juger(cible: dict, autres: dict[int, dict]) -> dict:
+    """
+    @brief Ce que le champ, bâti sur `autres`, dit des points de `cible`.
+
+    ⚠⚠⚠ LA GRANDEUR QUI DÉCIDE EST L'AVANCE PAR TOUR, PAS LA DISPERSION — et c'est une
+    correction de ma première version, obtenue en regardant ses nombres. J'avais mesuré
+    l'étendue de l'indice le long d'une spire en attendant qu'elle soit nulle : elle vaut
+    **1,4 feuille**, et la surface témoin qui traverse trois feuilles n'en rendait que 2,6,
+    soit un rapport de 1,8. Le test ne séparait presque rien.
+
+    La raison est physique et elle rend la première version fausse par construction : **une
+    spire EST un tour de spirale**, donc son rayon croît d'exactement un écart inter-feuilles
+    sur 360°. Son indice DOIT donc avancer de +1 par tour. Exiger qu'il soit constant, c'est
+    exiger que le rouleau ne soit pas enroulé.
+
+    Ce qui distingue une surface d'une seule feuille d'une surface qui saute est donc son
+    **avance d'indice sur un tour**.
+
+    ⚠ Et la valeur attendue pour une feuille est **zéro**, pas +1 — seconde correction, elle
+    aussi venue de la mesure. Le champ est bâti sur des spires qui spiralent toutes de la même
+    façon, donc la spirale est **absorbée dans le champ** : ses surfaces d'iso-indice spiralent
+    avec le rouleau. C'est exactement ce qu'un nombre d'enroulement doit faire. Mesuré : une
+    spire réelle avance de **−0,005** par tour, une surface qui saute `n` feuilles avance de
+    `n`.
+
+    Rendue par tranche de hauteur puis médianée : chaque tranche porte un tour entier, donc
+    chacune est une mesure indépendante de la même quantité.
+    """
+    assignes: dict[tuple[int, int], float] = {}
+    for cellule, rayon in cible.items():
+        table = sorted((autres[k][cellule], k) for k in autres if cellule in autres[k])
+        v = _indice_interpole(rayon, table)
+        if v is not None:
+            assignes[cellule] = v
+    if len(assignes) < 20:
+        return dict(cellules=len(assignes))
+
+    # L'avance par tour, une par tranche de hauteur. ⚠ Mesuree par une PENTE ajustee sur tous
+    # les secteurs de la tranche et non par la difference des deux extremites : une extremite
+    # manquante ou bruitee decalerait toute la tranche.
+    avances = []
+    par_tranche: dict[int, list[tuple[int, float]]] = {}
+    for (tranche, secteur), v in assignes.items():
+        par_tranche.setdefault(tranche, []).append((secteur, v))
+    for points in par_tranche.values():
+        if len(points) < SECTEURS // 2:
+            continue
+        secteurs = np.array([p[0] for p in points], dtype=float)
+        valeurs = np.array([p[1] for p in points], dtype=float)
+        pente = np.polyfit(secteurs, valeurs, 1)[0]
+        avances.append(float(pente * SECTEURS))
+
+    a = np.array(list(assignes.values()))
+    return dict(cellules=len(a), median=float(np.median(a)),
+                tranches=len(avances),
+                avance_par_tour=float(np.median(avances)) if avances else None,
+                avance_p10=float(np.percentile(avances, 10)) if avances else None,
+                avance_p90=float(np.percentile(avances, 90)) if avances else None,
+                etendue_90=float(np.percentile(a, 95) - np.percentile(a, 5)))
+
+
+def _temoin_en_travers(rayons: dict[int, dict], depart: int, saut: int) -> dict:
+    """
+    @brief Une surface qui TRAVERSE `saut` feuilles, fabriquée depuis le référent lui-même.
+
+    Fondu sur l'angle entre la spire `k` et la spire `k + saut` : lisse, plausible, et
+    traversant `saut` feuilles par construction. ⚠ C'est ce qui en fait un témoin et non un
+    espoir — on ne cherche pas une surface fautive, on en fabrique une dont on connaît la faute.
+    """
+    bas, haut = depart, depart + saut
+    if bas not in rayons or haut not in rayons:
+        return {}
+    cible = {}
+    for cellule in rayons[bas]:
+        if cellule not in rayons[haut]:
+            continue
+        # poids = position angulaire du secteur, donc la surface glisse d'une feuille a
+        # l'autre en faisant un tour : c'est exactement ce qu'un saut de spire produit.
+        poids = (cellule[1] - 1) / max(1, SECTEURS - 1)
+        cible[cellule] = (1 - poids) * rayons[bas][cellule] + poids * rayons[haut][cellule]
+    # ⚠ Les DEUX spires qui servent a fabriquer le temoin sont retirees du champ qui le juge :
+    # sinon le champ reconnaitrait ses propres bornes et le test serait a moitie truque.
+    autres = {k: v for k, v in rayons.items() if k not in (bas, haut)}
+    r = _juger(cible, autres)
+    r.update(de=bas, vers=haut, saut=saut)
+    return r
+
+
+def mesurer(rouleau: str = "PHerc0139") -> dict:
+    dossiers = _spires(rouleau)
+    nuages = {k: v for k, v in ((k, charger(d)) for k, d in dossiers.items()) if v}
+    if len(nuages) < 5:
+        raise SystemExit(f"moins de cinq spires en cache pour {rouleau}")
+
+    bords_z, bords_t, centres = _grille(nuages)
+    rayons = {k: _rayons(n, bords_z, bords_t, centres) for k, n in nuages.items()}
+    rayons = {k: v for k, v in rayons.items() if len(v) > 50}
+    indices = sorted(rayons)
+
+    # ⚠⚠ VALIDATION A SPIRE EXCLUE. La spire jugee est retiree du champ qui la juge, sinon la
+    # mesure dit seulement que le champ se souvient de ce qu'il a lu.
+    a_exclue = []
+    for k in indices:
+        if k == indices[0] or k == indices[-1]:
+            continue  # les extremites n'ont pas d'encadrement : le champ extrapolerait
+        r = _juger(rayons[k], {j: v for j, v in rayons.items() if j != k})
+        if r.get("cellules", 0) >= 20:
+            r.update(spire=k, erreur=abs(r["median"] - k))
+            a_exclue.append(r)
+
+    # ⚠⚠ Les temoins sont fabriques a CHAQUE position, pas une fois au milieu. Un temoin
+    # unique dit « le champ voit CE saut-la » ; une distribution dit si les deux populations
+    # se SEPARENT, ce qui est la seule chose qu'un predicat doit faire.
+    temoins = {}
+    for saut in SAUTS_DU_TEMOIN:
+        serie = []
+        for k in indices:
+            t = _temoin_en_travers(rayons, k, saut)
+            if t and t.get("avance_par_tour") is not None:
+                serie.append(t)
+        if serie:
+            a_ = np.array([t["avance_par_tour"] for t in serie])
+            temoins[str(saut)] = dict(
+                saut=saut, n=len(serie),
+                median=float(np.median(a_)), p10=float(np.percentile(a_, 10)),
+                p90=float(np.percentile(a_, 90)), minimum=float(a_.min()),
+                positions=[dict(de=t["de"], vers=t["vers"],
+                                avance=t["avance_par_tour"]) for t in serie])
+
+    etendues = [x["etendue_90"] for x in a_exclue]
+    erreurs = [x["erreur"] for x in a_exclue]
+    avances = [x["avance_par_tour"] for x in a_exclue if x.get("avance_par_tour") is not None]
+    return dict(
+        rouleau=rouleau, spires=len(rayons), indices=[indices[0], indices[-1]],
+        jugees_a_spire_exclue=len(a_exclue),
+        erreur_mediane=float(np.median(erreurs)) if erreurs else None,
+        erreur_p90=float(np.percentile(erreurs, 90)) if erreurs else None,
+        etendue_90_mediane=float(np.median(etendues)) if etendues else None,
+        etendue_90_p90=float(np.percentile(etendues, 90)) if etendues else None,
+        avance_par_tour_mediane=float(np.median(avances)) if avances else None,
+        avance_p10=float(np.percentile(avances, 10)) if avances else None,
+        avance_p90=float(np.percentile(avances, 90)) if avances else None,
+        temoins_en_travers=temoins,
+        defauts_connus=DEFAUTS_CONNUS,
+        par_spire=a_exclue,
+    )
+
+
+def _verifier(r: dict) -> int:
+    echecs = 0
+    comptees = 0
+
+    def v(nom, ok, detail=""):
+        nonlocal echecs, comptees
+        comptees += 1
+        print(f"  {'ok  ' if ok else 'FAIL'}  {nom}" + (f"   [{detail}]" if detail else ""))
+        if not ok:
+            echecs += 1
+
+    t = r["temoins_en_travers"]
+
+    print("le champ interpole — une spire retirée est replacée là où elle est")
+    v("assez de spires jugées à spire exclue",
+      r["jugees_a_spire_exclue"] >= 10, f"{r['jugees_a_spire_exclue']} spires")
+    v("l'indice assigné retombe sur le bon, à moins d'une demi-feuille",
+      r["erreur_mediane"] is not None and r["erreur_mediane"] < 0.5,
+      f"erreur médiane {r['erreur_mediane']:.3f} feuille")
+    # ⚠⚠ ET IL FAUT QU'ELLE SOIT NON NULLE. Une erreur exactement nulle est la signature d'un
+    # champ qui a LU la spire qu'il juge au lieu de l'interpoler -- mesure : 0,0000 sans
+    # exclusion contre 0,0876 avec. Sans ce controle, le contrôle precedent passe dans les
+    # deux cas et l'exclusion cesse d'etre verifiee par quoi que ce soit.
+    v("... et elle n'est pas nulle, donc la spire a bien été interpolée et non lue",
+      r["erreur_mediane"] is not None and r["erreur_mediane"] > 1e-6,
+      f"{r['erreur_mediane']:.4f} (une exclusion manquante rendrait exactement 0)")
+
+    print("une surface d'UNE feuille n'avance pas — le champ a absorbé la spirale")
+    v("l'avance par tour d'une vraie spire est nulle",
+      r["avance_par_tour_mediane"] is not None
+      and abs(r["avance_par_tour_mediane"]) < 0.15,
+      f"{r['avance_par_tour_mediane']:+.3f} feuille par tour "
+      f"[p10 {r['avance_p10']:+.3f}, p90 {r['avance_p90']:+.3f}]")
+
+    print("et l'avance COMPTE les feuilles franchies — la rampe, pas un seul témoin")
+    for saut in ("1", "2", "3"):
+        if saut in t:
+            v(f"un saut fabriqué de {saut} feuille(s) avance d'environ {saut}",
+              abs(t[saut]["median"] - int(saut)) < 0.35,
+              f"{t[saut]['median']:.3f} sur {t[saut]['n']} positions")
+
+    # ⚠⚠⚠ LE CONTROLE QUI FAIT DE CA UN PREDICAT : deux populations qui ne se recouvrent pas.
+    # Sans lui, « la mediane d'un saut vaut 1 » serait compatible avec des distributions si
+    # larges qu'aucune surface individuelle ne pourrait etre classee.
+    if "1" in t:
+        v("les deux populations ne se recouvrent PAS",
+          r["avance_p90"] < t["1"]["p10"],
+          f"vraie spire jusqu'à {r['avance_p90']:+.3f}, saut d'une feuille à partir de "
+          f"{t['1']['p10']:.3f}")
+
+    # ⚠⚠⚠ LA VALIDATION CROISEE, et c'est le controle le plus fort du fichier. Deux positions
+    # rendent un « saut d'une feuille » qui n'avance pas -- et ce sont EXACTEMENT les deux
+    # paires que `76` a signalees par une methode entierement differente (comparaison radiale
+    # appariee, puis distance au plus proche voisin). Un defaut du referent, vu deux fois,
+    # par deux instruments qui ne partagent rien.
+    print("la validation croisée — les seuls ratés sont les défauts que `76` avait trouvés")
+    if "1" in t:
+        rates = sorted(p["de"] for p in t["1"]["positions"]
+                       if p["avance"] < r["avance_p90"] + 0.3)
+        v("les positions qui n'avancent pas sont exactement les défauts connus",
+          rates == sorted(r["defauts_connus"]),
+          f"trouvé {rates}, attendu {sorted(r['defauts_connus'])}")
+
+    print()
+    if echecs:
+        print(f"  ECHEC ({echecs} failures)")
+    else:
+        print(f"  ALL PASS (0 failures, {comptees} checks)")
+    return echecs
+
+
+def main() -> int:
+    p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    p.add_argument("--rouleau", default="PHerc0139")
+    p.add_argument("--verifier", action="store_true")
+    p.add_argument("--json", type=Path)
+    args = p.parse_args()
+
+    r = mesurer(args.rouleau)
+
+    if not args.verifier or args.json:
+        print(f"{r['rouleau']} — champ bâti sur {r['spires']} spires "
+              f"(w{r['indices'][0]:03d}–w{r['indices'][1]:03d})\n")
+        print(f"  validation à spire exclue : {r['jugees_a_spire_exclue']} spires")
+        print(f"    erreur d'indice   : médiane {r['erreur_mediane']:.3f} · "
+              f"p90 {r['erreur_p90']:.3f} feuille")
+        print(f"    étendue p5–p95    : médiane {r['etendue_90_mediane']:.3f} · "
+              f"p90 {r['etendue_90_p90']:.3f} feuille")
+        print(f"\n  avance par tour d'une VRAIE spire : {r['avance_par_tour_mediane']:+.3f} "
+              f"[p10 {r['avance_p10']:+.3f}, p90 {r['avance_p90']:+.3f}]")
+        print("\n  témoins fabriqués, à chaque position :")
+        for saut, t in sorted(r["temoins_en_travers"].items()):
+            print(f"    saut de {saut} feuille(s) : {t['median']:6.3f} "
+                  f"[p10 {t['p10']:.3f}, p90 {t['p90']:.3f}]  sur {t['n']} positions")
+
+    if args.json:
+        args.json.parent.mkdir(parents=True, exist_ok=True)
+        args.json.write_text(json.dumps(r, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"\nécrit : {args.json}")
+    if args.verifier:
+        print()
+        return 1 if _verifier(r) else 0
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

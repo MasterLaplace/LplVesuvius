@@ -101,9 +101,11 @@
   86.00 %, and the share of self-intersecting runs from 1/12 to 9/12. Third, the render
   window imposes a second ceiling of the same kind: 13 of 16 traces sit exactly on it, so
   an absolute threshold on a distance compares settings rather than surfaces. Fourth, the
-  published segmentation of a prize scroll is a set of samples --- *one patch per sheet*
-  --- not a tiling of one sheet: of 105 pairs among 15 published segments, none is closer
-  than 79 #um, twice the same-sheet threshold. We also show that a surface with
+  automatically traced segmentation of a prize scroll is a set of samples --- *one patch per
+  sheet* --- not a tiling: of 105 pairs among 15 published `auto_grown` segments, none is
+  closer than 79 #um, twice the same-sheet threshold, and only 4 of 14 have any neighbour
+  within one sheet. A *curated* segmentation does tile --- 37 of 37 and 44 of 44 on two other
+  scrolls --- so what samples the scroll is the automatic tracer, not publication. We also show that a surface with
   $alpha approx 1$ is a *negative control by construction* for an ink detector, since its
   geometry rules out a papyrus face being within reach --- the control the foundational
   work lacks. We then show what a point estimate costs on the one
@@ -158,8 +160,8 @@ This paper is about the judging step. We contribute:
   stability and cleanliness of a trace are artefacts of its generation budget; the render
   window imposes a second ceiling, so that an absolute threshold on a distance compares
   settings rather than surfaces on 14 of 16 traces (13 at the shallow depth, 14 at one
-  depth or the other); and published segments do not tile a
-  sheet.
+  depth or the other); and an automatically traced segmentation samples the scroll where a
+  curated one tiles it.
 
 + *A negative control that costs nothing extra* (#link(<sec:negctrl>)[Section 6.5]). A
   surface whose convergence exponent is near 1 carries a geometric proof that no papyrus
@@ -1103,7 +1105,7 @@ material than the published segment, at $alpha = +0.000$.
 We report this because a cycle that appears to work for one iteration is exactly what a
 reader would extrapolate from, and it does not.
 
-== Published segments do not tile a sheet <sec:merge>
+== Automatic tracing samples, curated segmentation tiles <sec:merge>
 
 The remaining route to a continuous strip is to stitch published segments together. Neither
 the difficulty nor the discriminant below is ours: the official tutorial opens by stating
@@ -1147,6 +1149,22 @@ point-to-point gap.
     of download and a few seconds.
   ],
 ) <tab:segments>
+
+These fifteen are `auto_grown_<timestamp>` outputs of a seeded tracer, and the contrast with a
+curated segmentation is the result, not the count. Asking of each segment whether it has *any*
+neighbour within one sheet --- the question of whether a corpus could be chained --- gives 4 of
+14 here, against 37 of 37 on `PHerc0139` and 44 of 44 on `PHerc0172`, whose published wraps
+carry their wrap number in their names. Automatic tracing samples the scroll; a curated
+segmentation tiles it.
+
+#caveat[
+  *The comparison that does not discriminate.* Comparing the two corpora by the median gap
+  over *all* pairs gives 2202 #um for the automatic one and 1901 #um for the curated one --- a
+  ratio of 0.86, indistinguishable. A corpus of consecutive wraps has distant pairs too, and
+  they drag its median to exactly where the sampled corpus sits. The question that separates
+  them is one of *coverage*, not of average: how many segments have a neighbour one sheet
+  away.
+]
 
 The published segmentation of this scroll is a set of samples --- *one patch per sheet* ---
 not a tiling of one sheet. There is nothing to stitch. The corpus we read describes its own
@@ -1417,11 +1435,29 @@ the regions the paper describes as "judged geometrically consistent with a singl
 and it is where the reported cost is spent --- roughly 25 hours per wrap, about 775 hours
 for one scroll.
 
-Two things follow. The first is that the predicate is *the same one $alpha$ estimates*: a
-region is approved when a human believes the surface there follows one sheet, which is the
-question a convergence test answers by changing the render depth and reading the response.
-The manual gesture and the measurement are not adjacent, they are the same judgement made
-two ways.
+Two things follow. The first is that $alpha$ automates *half* of that predicate. "Geometrically
+consistent with a single sheet" is a statement of *identity* --- the surface is still on sheet
+$k$ --- and a convergence test answers a question of *presence*: there is a sheet within reach.
+The two are not the same judgement, and the introduction already says why: a guarantee about
+topology "is not a guarantee about which sheet one is on", and $alpha$ is weaker than a
+topological guarantee. Between them sits *placement* --- the surface is on the sheet
+rather than beside it --- which the offset $d$ measures.
+
+The identity half is open, and the referent to test it against is published. Fifty-seven, then
+one hundred and one, human-approved segments carry their *wrap number* in their names, and two
+of those runs are gapless: `PHerc0139` publishes `w023` to `w059` and `PHerc0172` `w052` to
+`w095`, 81 consecutive wraps between them. We measure that the index counts outward, in 95.0 %
+and 95.1 % of paired (height, angle) cells on the two scrolls, and that one index step is a
+constant radial unit --- 154.1 #um and 147.4 #um respectively, with gaps growing as
+$times 2.00$, $times 2.98$ and $times 5.08$ for steps of 2, 3 and 5.
+
+#caveat[
+  *A human-approved referent is not a perfect referent.* Three of those 79 consecutive pairs
+  are not one sheet apart: on `PHerc0139`, `w045` and `w046` are the *same surface* --- 0.0
+  #um by two independent measurements --- and `w041` and `w042` sit half a sheet apart; on
+  `PHerc0172`, `w075` and `w076`. Any identity test scored against this referent must exclude
+  them, or a good predictor reads as a 94 % one.
+]
 
 The second is that the interface is a file. A surface is stored as a `tifxyz` directory
 holding `x.tif`, `y.tif` and `z.tif`; the loader adopts *any* other `.tif` in that
