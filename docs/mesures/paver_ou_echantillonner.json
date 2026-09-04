@@ -1,0 +1,42 @@
+{
+  "automatique": {
+    "segments": 14,
+    "avec_un_voisin": 4,
+    "part_avec_un_voisin": 0.2857142857142857,
+    "ecart_median_au_voisin": 83.7714840367106,
+    "rouleau": "PHerc1447",
+    "genre": "auto_grown",
+    "segments_publies": 15,
+    "segments_mesures": 14,
+    "paires_mesurees": 47
+  },
+  "curatees": [
+    {
+      "segments": 37,
+      "avec_un_voisin": 37,
+      "part_avec_un_voisin": 1.0,
+      "ecart_median_au_voisin": 146.10341567982707,
+      "rouleau": "PHerc0139",
+      "genre": "spires curatées",
+      "segments_publies": 37,
+      "segments_mesures": 37,
+      "paires_mesurees": 36
+    },
+    {
+      "segments": 44,
+      "avec_un_voisin": 44,
+      "part_avec_un_voisin": 1.0,
+      "ecart_median_au_voisin": 138.48708798574665,
+      "rouleau": "PHerc0172",
+      "genre": "spires curatées",
+      "segments_publies": 44,
+      "segments_mesures": 44,
+      "paires_mesurees": 43
+    }
+  ],
+  "seuil_voisines_um": 250.0,
+  "le_piege": {
+    "automatique_um": 2202.284600651238,
+    "curatee_um": 1900.5064052874977
+  }
+}

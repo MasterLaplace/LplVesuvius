@@ -193,6 +193,98 @@ def comparer(a: tuple, b: tuple) -> dict:
                 p25_vx=float(np.percentile(e, 25)), p75_vx=float(np.percentile(e, 75)))
 
 
+BASE_S3 = "https://vesuvius-challenge-open-data.s3.amazonaws.com"
+
+CHEMINS_REFUSES = ("tifxyz_flattened", "tifxyz_normalized")
+"""⚠⚠⚠ Ces deux-là existent à côté du bon et **doivent être refusés**, pas essayés en dernier.
+Un maillage *aplati* est la mise à plat 2D de la spire : il se charge sans erreur, il a la même
+forme, et un rayon calculé dessus est un nombre parfaitement plausible qui ne veut **rien**
+dire. Un repli silencieux dessus produirait une mesure fausse et verte."""
+
+
+def _chemin_du_maillage(rouleau: str, segment: str, delai: int = 30) -> str | None:
+    """
+    @brief Où vit le maillage EN COORDONNÉES DE SCAN de ce segment, ou None.
+
+    ⚠ Les rouleaux ne publient pas au même endroit : `PHerc0139` sous
+    `mesh/intermediate/tifxyz_original/`, `PHerc0172` et `PHerc1667` sous
+    `mesh/<horodatage>-on-<volume>-<pas>um.tifxyz/`. Le chemin se **découvre** dans le listing
+    plutôt que se deviner, sinon un rouleau muet ressemble à un rouleau sans segments.
+    """
+    import subprocess
+
+    url = (f"{BASE_S3}/?list-type=2&prefix={rouleau}/segments/{segment}/mesh/"
+           f"&max-keys=200")
+    r = subprocess.run(["curl", "-s", "--max-time", str(delai), url],
+                       capture_output=True, text=True)
+    clefs = re.findall(r"<Key>([^<]+)</Key>", r.stdout)
+    candidats = sorted({k.rsplit("/", 1)[0] for k in clefs if k.endswith("/meta.json")})
+    candidats = [c for c in candidats if not any(x in c for x in CHEMINS_REFUSES)]
+    # `tifxyz_original` d'abord quand il existe : c'est celui que `PHerc0139` publie et sur
+    # lequel la mesure de `76` a été faite. Sinon le maillage `-on-` de plus fine résolution.
+    for c in candidats:
+        if c.endswith("tifxyz_original"):
+            return c
+    onglets = [c for c in candidats if "-on-" in c]
+    return onglets[0] if onglets else None
+
+
+def rapatrier(rouleau: str, delai: int = 180) -> int:
+    """
+    @brief Rapatrier les spires indexées d'un rouleau — x, y, z et meta, rien d'autre.
+
+    ⚠ On ne prend QUE les quatre fichiers utiles : le reste d'un segment publié (rendus,
+    cartes d'encre, volumes de surface) pèse des ordres de grandeur de plus et ne sert pas à
+    mesurer un rayon.
+    """
+    import concurrent.futures as cf
+    import subprocess
+
+    sys.path[:0] = [str(RACINE / "src")]
+    from commun.carte_segments import lister  # noqa: PLC0415
+
+    base = CACHE / rouleau
+    base.mkdir(parents=True, exist_ok=True)
+    segments = [(n, re.search(r"-w(\d{3})(?![\d-])", n)) for n in lister(rouleau)]
+    segments = [(n, m.group(1)) for n, m in segments if m]
+    if not segments:
+        print(f"{rouleau} : aucun segment portant un indice de spire simple")
+        return 0
+
+    def un(couple: tuple[str, str]) -> bool:
+        nom, indice = couple
+        dossier = base / f"w{indice}"
+        dossier.mkdir(exist_ok=True)
+        complet = all((dossier / f).is_file()
+                      for f in ("x.tif", "y.tif", "z.tif", "meta.json"))
+        # ⚠ La provenance est reclamee MEME quand le maillage est deja la : un cache rapatrie
+        # avant que `source.txt` n'existe serait complet et muet sur sa grille, ce qui est la
+        # seule facon d'avoir des voxels et pas de moyen de les lire.
+        if complet and (dossier / "source.txt").is_file():
+            return True
+        chemin = _chemin_du_maillage(rouleau, nom)
+        if not chemin:
+            return False
+        # ⚠ La provenance est ECRITE a cote du maillage : sans elle, un cache rapatrie ne sait
+        # plus de quel repertoire il vient, donc plus de quelle grille -- et un tifxyz nu ne
+        # porte pas sa resolution.
+        (dossier / "source.txt").write_text(chemin + "\n", encoding="utf-8")
+        for fichier in ("x.tif", "y.tif", "z.tif", "meta.json"):
+            cible = dossier / fichier
+            if cible.is_file() and cible.stat().st_size:
+                continue
+            r = subprocess.run(["curl", "-s", "-f", "--max-time", str(delai), "-o", str(cible),
+                                f"{BASE_S3}/{chemin}/{fichier}"], capture_output=True)
+            if r.returncode != 0:
+                return False
+        return True
+
+    with cf.ThreadPoolExecutor(6) as ex:
+        reussis = sum(1 for ok in ex.map(un, segments) if ok)
+    print(f"{rouleau} : {reussis}/{len(segments)} spires rapatriées dans {base}")
+    return reussis
+
+
 def _spires(rouleau: str) -> dict[int, Path]:
     base = CACHE / rouleau
     if not base.is_dir():
@@ -210,7 +302,8 @@ def mesurer(rouleau: str = "PHerc0139") -> dict:
     if len(dossiers) < 2:
         raise SystemExit(
             f"moins de deux spires en cache pour {rouleau} sous {CACHE}\n"
-            f"  les rapatrier :  uv run python src/excision/le_sens_des_indices.py --rapatrier {rouleau}")
+            f"  les rapatrier :  uv run python src/excision/le_sens_des_indices.py "
+            f"--rouleau {rouleau} --rapatrier")
 
     metas = {k: json.loads((d / "meta.json").read_text()) for k, d in dossiers.items()
              if (d / "meta.json").is_file()}
@@ -226,6 +319,12 @@ def mesurer(rouleau: str = "PHerc0139") -> dict:
     # differe doivent etre COMPTES a part, pas dilues dans une moyenne qui rendrait une
     # valeur qu'aucun segment ne porte.
     voxel_um, accord = _voxel_dominant(voxels)
+    # ⚠ Repli EXPLICITE et valide, jamais silencieux : la ou le meta est depouille (PHerc0172
+    # ne publie ni `area_cm2` ni `volume`), le voxel se lit dans le chemin du maillage et n'est
+    # accepte que s'il tombe sur une resolution que le rouleau publie.
+    voxel_depuis_le_chemin = voxel_du_chemin(rouleau, dossiers) if voxel_um is None else None
+    if voxel_um is None:
+        voxel_um = voxel_depuis_le_chemin
 
     nuages = {k: charger(d) for k, d in dossiers.items()}
     nuages = {k: v for k, v in nuages.items() if v}
@@ -297,6 +396,7 @@ def mesurer(rouleau: str = "PHerc0139") -> dict:
         indices=[indices[0], indices[-1]],
         voxel_um=voxel_um,
         segments_d_accord_sur_le_voxel=accord,
+        voxel_depuis_le_chemin=voxel_depuis_le_chemin,
         segments_avec_une_aire=len(voxels),
         boites_qui_s_emboitent=emboitees,
         noms_de_volume=_noms_de_volume(metas),
@@ -331,11 +431,39 @@ POINT_FIXE_CM2 = 6.02
 parce qu'elle est la SEULE raison pour laquelle l'aire d'une spire publiée est intéressante :
 sans point de comparaison, « 38 cm² » n'est qu'un nombre."""
 
-SCANS_PUBLIES_UM = (9.362, 4.681, 2.403, 2.399, 1.129)
-"""Les résolutions de scan que `PHerc0139` publie (`data/metadata.min.json`), plus la 4,681 que
-son nom de volume revendique. ⚠ Écrites ici pour que le décodage soit VALIDÉ contre une liste
-extérieure : un voxel décodé qui ne tombe sur aucun régime réel est un décodage à jeter, pas un
-nombre à publier."""
+SCANS_PUBLIES_UM = {
+    "PHerc0139": (9.362, 4.681, 2.403, 2.399, 1.129),
+    "PHerc0172": (7.91,),
+    "PHerc1667": (7.91, 3.24, 2.399, 1.129),
+}
+"""Les résolutions de scan que chaque rouleau publie (`data/metadata.min.json`), plus la 4,681
+que le nom de volume de `PHerc0139` revendique. ⚠ Écrites ici pour que tout décodage soit
+VALIDÉ contre une liste extérieure : un voxel décodé qui ne tombe sur aucun régime réel est un
+décodage à jeter, pas un nombre à publier."""
+
+
+def voxel_du_chemin(rouleau: str, dossiers: dict) -> float | None:
+    """
+    @brief Le voxel lu dans le NOM DU RÉPERTOIRE de maillage, et validé contre les scans publiés.
+
+    ⚠⚠ C'est un **second choix**, employé uniquement là où le meta est dépouillé — `PHerc0172`
+    ne publie ni `area_cm2` ni `volume`, donc le décodage par l'aire est impossible et refuser
+    de mesurer serait pire que de lire un nom qu'on peut vérifier.
+
+    ⚠ Et il est d'une autre espèce que le nom de VOLUME dont ce fichier se méfie : celui-là
+    porte une résolution d'avant binning et varie d'un segment à l'autre, celui-ci est la
+    convention de chemin `<seg>-on-<volume>-<pas>um.tifxyz`. Ce qui le rend utilisable n'est
+    pas sa forme mais sa **validation** : il est refusé s'il ne tombe pas sur une résolution
+    que le rouleau publie. Pour `PHerc0172` il n'y en a qu'une, 7,91 µm, donc rien à choisir.
+    """
+    publies = SCANS_PUBLIES_UM.get(rouleau, ())
+    for dossier in dossiers.values():
+        trouve = re.search(r"-([\d.]+)um", (dossier / "source.txt").read_text().strip()
+                           if (dossier / "source.txt").is_file() else "")
+        if trouve:
+            valeur = float(trouve.group(1))
+            return valeur if any(abs(valeur - p) < 0.001 for p in publies) else None
+    return None
 
 
 def _voxel_dominant(voxels: list[float]) -> tuple[float | None, int]:
@@ -363,23 +491,45 @@ def _noms_de_volume(metas: dict) -> dict[str, int]:
     return dict(sorted(compte.items(), key=lambda kv: -kv[1]))
 
 
+def _aires_absentes(r: dict) -> None:
+    """
+    @brief Rappeler ce qu'un rouleau au meta dépouillé ne permet PAS de conclure.
+    """
+    print("  --    (et donc rien à dire ici sur les défauts du référent non plus)")
+    for d in r["defauts_du_referent"]:
+        print(f"        ⚠ noté quand même : w{d['de']:03d}/w{d['vers']:03d} "
+              f"à {d['ecart_um']:.0f} µm")
+
+
 def _verifier(r: dict) -> int:
     echecs = 0
 
+    _comptees = 0
+
     def v(nom, ok, detail=""):
-        nonlocal echecs
+        # ⚠ Le compte est TENU, pas ecrit a la main en bas : deux rouleaux n'executent pas le
+        # meme nombre de controles (un meta depouille en saute trois), donc un nombre fige
+        # mentirait sur l'un des deux.
+        nonlocal echecs, _comptees
+        _comptees += 1
         print(f"  {'ok  ' if ok else 'FAIL'}  {nom}" + (f"   [{detail}]" if detail else ""))
         if not ok:
             echecs += 1
 
     print("le voxel se décode de l'aire, et se valide contre les scans publiés")
+    publies = SCANS_PUBLIES_UM.get(r["rouleau"], ())
     v("le voxel décodé tombe exactement sur un régime de scan publié",
-      r["voxel_um"] is not None
-      and any(abs(r["voxel_um"] - s) < 0.001 for s in SCANS_PUBLIES_UM),
-      f"{r['voxel_um']:.4f} µm")
-    v("une majorité nette de segments décode la même valeur",
-      r["segments_d_accord_sur_le_voxel"] >= 0.7 * r["segments_avec_une_aire"],
-      f"{r['segments_d_accord_sur_le_voxel']}/{r['segments_avec_une_aire']} segments")
+      r["voxel_um"] is not None and any(abs(r["voxel_um"] - p) < 0.001 for p in publies),
+      f"{r['voxel_um']:.4f} µm"
+      + (" (lu dans le chemin, meta dépouillé)" if r.get("voxel_depuis_le_chemin") else ""))
+    # ⚠ Sauté quand le meta est dépouillé : un contrôle qui n'a rien à vérifier doit le DIRE,
+    # pas passer au vert sur zéro segment.
+    if r["segments_avec_une_aire"]:
+        v("une majorité nette de segments décode la même valeur",
+          r["segments_d_accord_sur_le_voxel"] >= 0.7 * r["segments_avec_une_aire"],
+          f"{r['segments_d_accord_sur_le_voxel']}/{r['segments_avec_une_aire']} segments")
+    else:
+        print("  --    (aucun segment ne publie son aire — décodage par l'aire impossible)")
     # ⚠⚠ LE CONTROLE QUI REND LA COMPARAISON LEGITIME, et il ne porte pas sur le voxel.
     # Sept segments decodent une valeur un peu differente. La question qui decide n'est pas
     # « laquelle est la bonne » mais « sont-ils dans la MEME grille de coordonnees » : deux
@@ -392,12 +542,17 @@ def _verifier(r: dict) -> int:
     # ⚠⚠ Le controle qui justifie tout le decodage : si le nom du volume donnait la meme
     # chose, ce fichier n'aurait aucune raison d'exister. Il faut donc montrer qu'il ne la
     # donne PAS -- et qu'il ne donne meme pas une reponse unique.
-    v("... alors que le nom de volume n'est pas unique sur un même rouleau",
-      len(r["noms_de_volume"]) >= 2,
-      " · ".join(f"{n}×{k[:28]}" for k, n in r["noms_de_volume"].items()))
-    v("... et qu'aucun de ces noms ne porte la bonne valeur",
-      all(not re.match(rf"{r['voxel_um']:.3f}", k) for k in r["noms_de_volume"]),
-      "aucun nom ne commence par le voxel réel")
+    # ⚠ Sauté quand aucun segment ne déclare de volume : `PHerc0172` a un meta dépouillé, et
+    # asserter « les noms sont plusieurs » sur zéro nom serait vert sans rien vérifier.
+    noms = {k: n for k, n in r["noms_de_volume"].items() if k not in ("None", "")}
+    if noms:
+        v("... alors que le nom de volume n'est pas unique sur un même rouleau",
+          len(noms) >= 2, " · ".join(f"{n}×{k[:28]}" for k, n in noms.items()))
+        v("... et qu'aucun de ces noms ne porte la bonne valeur",
+          all(not re.match(rf"{r['voxel_um']:.3f}", k) for k in noms),
+          "aucun nom ne commence par le voxel réel")
+    else:
+        print("  --    (aucun segment ne déclare de volume — rien à contredire ici)")
 
     print("le sens des indices — la question que `73` §4 déclarait ouverte")
     v("assez de cellules comparables pour que ça veuille dire quelque chose",
@@ -428,6 +583,18 @@ def _verifier(r: dict) -> int:
 
     print("l'aire d'une spire publiée, contre le point fixe de l'extension")
     aire = r["aire_par_spire_cm2"]
+    # ⚠ Sauté quand le meta est dépouillé, et DIT plutôt que passé en silence : un contrôle
+    # qui n'a rien à vérifier et qui rend « ok » est un contrôle incapable d'échouer.
+    # ⚠⚠ PAS de `return` ici. Une batterie qui n'imprime pas sa ligne « ALL PASS » est comptee
+    # comme un ECHEC par `temoins.sh` : sortir tot d'une verification qui n'a rien a verifier
+    # ferait donc echouer le depot pour un meta depouille.
+    if aire["median"] is None:
+        print("  --    (aucune aire publiée sur ce rouleau — étalon indisponible)")
+        _aires_absentes(r)
+        print()
+        print(f"  ECHEC ({echecs} failures)" if echecs
+              else f"  ALL PASS (0 failures, {_comptees} checks)")
+        return echecs
     v("une spire approuvée dépasse largement le point fixe de 6,02 cm²",
       r["facteur_sur_le_point_fixe"] is not None and r["facteur_sur_le_point_fixe"] > 4.0,
       f"médiane {aire['median']:.1f} cm² soit ×{r['facteur_sur_le_point_fixe']:.1f}")
@@ -454,16 +621,21 @@ def _verifier(r: dict) -> int:
     if echecs:
         print(f"  ECHEC ({echecs} failures)")
     else:
-        print("  ALL PASS (0 failures, 15 checks)")
+        print(f"  ALL PASS (0 failures, {_comptees} checks)")
     return echecs
 
 
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--rouleau", default="PHerc0139")
+    p.add_argument("--rapatrier", action="store_true",
+                   help="télécharger les spires indexées du rouleau avant de mesurer")
     p.add_argument("--verifier", action="store_true")
     p.add_argument("--json", type=Path)
     args = p.parse_args()
+
+    if args.rapatrier:
+        rapatrier(args.rouleau)
 
     r = mesurer(args.rouleau)
 
@@ -485,10 +657,14 @@ def main() -> int:
             for d in r["defauts_du_referent"]:
                 print(f"      w{d['de']:03d} -> w{d['vers']:03d} : {d['ecart_um']:6.1f} µm "
                       f"({d['part_vers_l_exterieur'] * 100:.0f} % vers l'extérieur)")
-        print(f"\n  aire d'une spire publiée : {r['aire_par_spire_cm2']['median']:.1f} cm² "
-              f"médian ({r['aire_par_spire_cm2']['min']:.1f} à "
-              f"{r['aire_par_spire_cm2']['max']:.1f}), soit "
-              f"×{r['facteur_sur_le_point_fixe']:.1f} le point fixe de {POINT_FIXE_CM2} cm²")
+        aire = r["aire_par_spire_cm2"]
+        if aire["median"] is not None:
+            print(f"\n  aire d'une spire publiée : {aire['median']:.1f} cm² "
+                  f"médian ({aire['min']:.1f} à {aire['max']:.1f}), soit "
+                  f"×{r['facteur_sur_le_point_fixe']:.1f} le point fixe "
+                  f"de {POINT_FIXE_CM2} cm²")
+        else:
+            print("\n  ⚠ aucune spire ne publie son aire — étalon indisponible sur ce rouleau")
         print("\n  écart contre saut d'indice :")
         for pp in r["par_pas"]:
             print(f"    Δw = {pp['saut']}  ->  {pp['median_vx'] * r['voxel_um']:7.1f} µm "

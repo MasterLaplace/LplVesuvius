@@ -1180,6 +1180,16 @@ run "les indices de spire"     uv run python "$ROOT/src/excision/les_indices_de_
 # 87 % ; casser le temoin de la spire contre elle-meme). Une quatrieme ne mord PAS et c'est
 # ecrit dans le fichier : le filtre des points invalides est juste, pas porteur.
 run "le sens des indices"      uv run python "$ROOT/src/excision/le_sens_des_indices.py" --verifier
+# ⭐⭐ Le MEME sens sur un SECOND rouleau, et c'est ce qui fait la difference entre une
+# convention de projet et une bizarrerie de rouleau. `PHerc0172` a un meta depouille (ni aire
+# ni volume), donc trois controles y sont SAUTES et le disent -- un controle qui n'a rien a
+# verifier ne doit pas rendre « ok ».
+run "sens des indices : 0172"  uv run python "$ROOT/src/excision/le_sens_des_indices.py" --rouleau PHerc0172 --verifier
+# ⭐⭐⭐ Paver ou echantillonner : l'article §5.7 mesure que les segments publies ne pavent pas,
+# sur QUINZE `auto_grown`. Les spires curatees, elles, pavent a 100 %. Le controle qui porte le
+# fichier est celui du PIEGE : la comparaison spontanee (mediane de toutes les paires) rend
+# 2202 contre 1901 um, soit deux corpus indiscernables -- alors que l'un pave et l'autre non.
+run "paver ou echantillonner"  uv run python "$ROOT/src/excision/paver_ou_echantillonner.py" --verifier
 # ⭐⭐ Le garde-fou de l'angle mort qui a mordu TROIS fois : interroger une vue du corpus et
 # conclure sur le corpus. Sa sonde la plus utile reduit la comparaison a une seule vue --
 # la faute exacte du `07` -- et fait tomber trois controles.

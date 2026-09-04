@@ -18,8 +18,21 @@ Tant qu'on l'ignore, « consécutif » est une propriété des **noms**, pas de 
 test d'identité bâti dessus pourrait tourner à l'envers sans que rien ne le dise — et un
 prédicat d'identité qui se trompe de sens ne rate pas la moitié des cas, il les rate tous.
 
-**Réponse : depuis le centre vers l'extérieur.** Sur `PHerc0139`, `w_{k+1}` est plus loin de
-l'axe que `w_k` dans **95,0 %** de **57 510** cellules (hauteur, angle).
+**Réponse : depuis le centre vers l'extérieur**, et **sur les deux rouleaux mesurés** — donc
+c'est une convention du projet, pas une bizarrerie d'un rouleau :
+
+| rouleau | spires | course | voxel | vers l'extérieur | écart par pas | cellules | défauts |
+|---|---:|---|---:|---:|---:|---:|---:|
+| **PHerc0139** | 37 | `w023`–`w059` | 9,362 µm | **95,0 %** | **154,1 µm** | 57 510 | 2 |
+| **PHerc0172** | 44 | `w052`–`w095` | 7,910 µm | **95,1 %** | **147,4 µm** | 54 449 | 1 |
+
+⚠ Les deux rouleaux ne partagent **ni le régime de scan, ni la disposition de publication, ni
+même le contenu de leurs metas** — et ils s'accordent au dixième de point sur le sens. Un seul
+rouleau aurait laissé ouverte la possibilité que `w` soit numéroté par la personne qui a tracé
+ce rouleau-là.
+
+⚠ Les écarts, eux, **diffèrent** (154,1 contre 147,4 µm) et c'est attendu : `16` mesure des
+écarts inter-feuilles de 156 à 225 µm selon le rouleau. Un écart est une propriété du rouleau.
 
 ![Le sens des indices, et l'unité d'un pas](article/figures/sens_des_indices.png)
 
@@ -138,6 +151,9 @@ prédicteur pour un prédicteur à 94 %.
 savoir est de **le mesurer contre lui-même** — ce que personne n'avait fait parce que personne
 ne lisait ces indices.
 
+⚠ `PHerc0172` en a **un** de son côté (`w075`/`w076`, à −10 µm, 42 % vers l'extérieur), donc le
+taux de défaut est du même ordre sur les deux rouleaux : **3 paires sur 79**, soit ~4 %.
+
 Le contrôle est écrit dans le sens « **il y en a** », pas « il n'y en a pas » : un référent
 sans défaut serait une bonne nouvelle, un référent dont on n'a pas cherché les défauts est une
 hypothèse.
@@ -146,10 +162,16 @@ hypothèse.
 
 ## 5. Ce que ce document N'établit PAS
 
-1. **Que le sens soit le même sur les quatre rouleaux indexés.** Mesuré sur `PHerc0139`.
-   `PHerc0172` publie ses maillages sous un autre chemin (`mesh/*-on-*.tifxyz`, pas
-   `tifxyz_original`) et n'est pas rapatrié ici. ⚠ C'est la première extension à faire, et elle
-   est bon marché.
+1. **Que le sens soit le même sur les QUATRE rouleaux indexés.** Mesuré sur deux
+   (`PHerc0139`, `PHerc0172`). `PHerc1667` est lacunaire (19 spires distinctes, trois trous) et
+   `PHercParis4` publie des **plages** et non des spires simples — ni l'un ni l'autre ne se
+   mesure de cette façon sans une adaptation.
+
+   ⚠ **Et `PHerc0172` a un meta dépouillé** : ni `area_cm2`, ni `volume`. Son voxel est donc lu
+   dans le **chemin** du maillage (`…-on-…-7.91um.tifxyz`) et **validé** contre la liste des
+   scans publiés — `PHerc0172` n'en publie qu'un, 7,91 µm, donc il n'y a rien à choisir. Trois
+   contrôles sont **sautés** sur ce rouleau, et ils le disent : un contrôle qui n'a rien à
+   vérifier ne doit pas rendre « ok ».
 2. **Que l'écart de 154 µm vaille pour un autre rouleau.** `16` mesure 156 à 225 µm selon le
    rouleau : c'est une propriété du rouleau, pas une constante.
 3. **Qu'aucune feuille n'ait été sautée ailleurs dans la numérotation.** La linéarité rend
@@ -178,3 +200,59 @@ hypothèse.
   ⚠ Ma première rédaction annonçait « 21 à 39 cm² » — un chiffre lu à l'œil sur une liste
   tronquée, et faux dans le sens qui minimise le résultat. Il est désormais **calculé dans le
   script**, pas dans un terminal.
+
+---
+
+## 7. ⭐⭐⭐ Suite immédiate : paver ou échantillonner, et l'article §5.7 se précise
+
+> Mesure : `src/excision/paver_ou_echantillonner.py` (6 contrôles).
+
+L'article §5.7 mesure que **les segments publiés ne pavent pas une feuille**, sur les 15
+segments de `PHerc1447`. C'est juste, et `73` §2.6 a corrigé la formulation : ces quinze-là
+sont des `auto_grown_<horodatage>`, les sorties d'un traceur à graine aléatoire. Le résultat
+portait donc sur le **traçage automatique**, pas sur « ce que le concours publie ».
+
+Or les spires indexées, elles, pavent. Mesuré, avec le seuil que l'article emploie déjà
+(≤ 250 µm = feuilles adjacentes, `carte_segments.py`) :
+
+| corpus | genre | segments | avec une voisine à une feuille | écart médian |
+|---|---|---:|---:|---:|
+| `PHerc1447` | `auto_grown` | 14 | **4 — 29 %** | 84 µm |
+| `PHerc0139` | spires curatées | 37 | **37 — 100 %** | 146 µm |
+| `PHerc0172` | spires curatées | 44 | **44 — 100 %** | 138 µm |
+
+**La bonne formulation n'est donc pas « les segments publiés ne pavent pas » mais : le traçage
+automatique ÉCHANTILLONNE le rouleau ; une segmentation curatée le PAVE.**
+
+### ⚠⚠⚠ Et le piège, qui est mesuré et non argumenté
+
+La comparaison qu'on fait spontanément — l'écart médian sur **toutes** les paires — ne
+discrimine **pas** :
+
+| corpus | médiane sur toutes les paires |
+|---|---:|
+| `PHerc1447`, `auto_grown` | **2202 µm** |
+| `PHerc0139`, curaté | **1901 µm** |
+
+**Rapport 0,86 : indiscernables.** Parce que `PHerc0139` publie 37 spires consécutives, ses
+paires lointaines (`w023` contre `w059`) sont à 36 feuilles et tirent sa médiane exactement là
+où est celle de `PHerc1447`. Deux corpus dont l'un pave et l'autre non se ressemblent
+parfaitement sous cette mesure.
+
+⭐ C'est pour ça que la question posée est une question de **couverture** — *combien de
+segments ont une voisine à une feuille, c'est-à-dire de quoi former une chaîne ?* — et pas une
+question de moyenne. Le contrôle est écrit dans le sens « **les deux se ressemblent** », donc
+il peut échouer : sans lui, l'avertissement ci-dessus serait une opinion.
+
+### ⚠ Ce que ça n'établit pas
+
+1. **Que `PHerc0139` soit pavé en entier.** 37 spires sur ~110 : la bande publiée est
+   **contiguë**, elle n'est pas complète.
+2. **Que la différence vienne de la curation et non du rouleau.** Les deux corpus sont sur deux
+   rouleaux différents, donc « curaté / automatique » est confondu avec « rouleau ». Ce qui
+   l'appuie quand même : `PHerc0172` publie **les deux** — 44 spires indexées et 9
+   `auto_grown` — et seules les premières sont indexées.
+3. ⚠ **Deux sondes de conception ne mordent pas**, et le dire vaut mieux que le laisser croire :
+   prendre le voisin le plus **lointain** au lieu du plus proche, et compter les segments non
+   mesurés comme sans voisin (29 % → 27 %), laissent tous les contrôles verts. Le contraste est
+   assez grand pour survivre à ces deux choix ; il ne survit pas au troisième, celui du piège.
