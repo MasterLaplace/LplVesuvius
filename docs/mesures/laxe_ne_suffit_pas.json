@@ -1,0 +1,15 @@
+{
+  "rouleau": "PHerc0139",
+  "pas_um": 154.1,
+  "voxel_um": 9.362,
+  "echantillons": 788,
+  "dispersion_intra_spire_feuilles": 44.46605734197648,
+  "archimede": {
+    "sens": -1,
+    "r0_vx": 392.0121620806993,
+    "erreur_mediane": 11.362935289877438,
+    "erreur_p90": 15.861373436983234
+  },
+  "erreur_du_champ": 0.0876084107003976,
+  "facteur_de_la_forme": 129.70142020651755
+}

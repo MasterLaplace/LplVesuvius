@@ -108,3 +108,46 @@ l'orientation des fibres** (`representations/predictions/fibers/`, publié pour 
    `volume` du meta et **validé** contre les résolutions de scan publiées. Deux des cinq axes
    sont en 2,399 µm et trois en 9,362 µm ; les mélanger sans conversion donnerait un axe faux
    d'un facteur 3,9.
+
+---
+
+## 4. ⚠⚠⚠ Et l'axe ne suffit pas — le résultat négatif qui fixe le cahier des charges d'A2 bis
+
+> Mesure : `src/excision/laxe_ne_suffit_pas.py` (4 contrôles).
+
+L'espoir était raisonnable : un nombre d'enroulement se construit **en principe** depuis l'axe
+et le pas seuls — le modèle d'Archimède, $w = (r - r_0)/\lambda + \theta/2\pi$ — et un tel
+champ répondrait **partout**.
+
+**Mesuré : ça ne marche pas, et de très loin.**
+
+| | erreur d'indice |
+|---|---:|
+| dispersion radiale d'**une seule** spire, autour de l'axe publié | **44,5 feuilles** |
+| modèle d'**Archimède** (axe + pas) | **11,36 feuilles** |
+| champ bâti sur les spires (`77`) | **0,088 feuille** |
+
+⭐⭐ La forme des spires vaut donc un facteur **130** — deux ordres de grandeur. C'est le vrai
+contenu de cette mesure : elle chiffre ce qu'un champ dérivé du volume devra **retrouver**.
+
+**La cause est mesurée, pas supposée** : un rouleau d'Herculanum est **écrasé**. Le rayon d'une
+seule spire varie de 44 feuilles autour de l'axe, donc aucun modèle en $(r, \theta)$ à section
+circulaire ne peut séparer des feuilles distantes d'une seule.
+
+⚠ Le modèle n'est pas inutile pour autant : il fait **mieux** que la dispersion brute (11,4
+contre 44,5), donc il capte bien la spirale. Il est **quatre fois trop grossier** pour une
+question qui se joue à une feuille près.
+
+⚠⚠ **Ça ne condamne pas A2 bis, ça en fixe le cahier des charges.** Un champ dérivé du volume
+n'a pas à supposer une section circulaire : il peut suivre les feuilles là où elles sont. Ce
+qui est établi ici, c'est qu'il devra fournir **la forme** — donc que l'axe publié, à lui seul,
+ne débloque rien.
+
+⚠ **Le contrôle est écrit dans le sens « ça échoue ».** Si un jour le modèle passait sous une
+feuille, il tomberait — et ce serait une excellente nouvelle à lire immédiatement, parce
+qu'A2 bis serait résolu par trois lignes de trigonométrie.
+
+⚠ Une nuance de mesure à ne pas confondre : les 44,5 feuilles sont prises autour de l'**axe
+publié** ; autour du centre **ajusté par tranche** la dispersion vaut ~17 feuilles. Ce n'est
+pas une contradiction — l'ajustement minimise cette dispersion **par construction**. Les deux
+axes restent équivalents pour la mesure **appariée** du §1, qui ne lit jamais un rayon absolu.

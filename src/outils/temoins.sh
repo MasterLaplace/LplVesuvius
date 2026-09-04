@@ -1209,6 +1209,11 @@ run "le masque d'approbation"  uv run python "$ROOT/src/excision/le_masque_dappr
 # inter-feuilles, ET la mesure appariee n'en bouge pas (94,8 % contre 94,8 %). Sans le premier,
 # le second serait vrai pour la mauvaise raison.
 run "l'ombilic publie"         uv run python "$ROOT/src/excision/lombilic_publie.py" --verifier
+# ⭐⭐⭐ Un RESULTAT NEGATIF, et le controle qui compte est ecrit dans le sens « ca ECHOUE » :
+# le modele d'Archimede (axe + pas) se trompe de 11,4 feuilles. Si un jour il passait sous une
+# feuille, ce controle tomberait -- et ce serait une excellente nouvelle a lire tout de suite,
+# parce que A2 bis serait resolu par trois lignes de trigonometrie.
+run "l'axe ne suffit pas"      uv run python "$ROOT/src/excision/laxe_ne_suffit_pas.py" --verifier
 # ⭐⭐ Le garde-fou de l'angle mort qui a mordu TROIS fois : interroger une vue du corpus et
 # conclure sur le corpus. Sa sonde la plus utile reduit la comparaison a une seule vue --
 # la faute exacte du `07` -- et fait tomber trois controles.

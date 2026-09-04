@@ -1868,6 +1868,21 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 um = f"{x['ecart_um']:.1f} µm"
                 out.append((f"{nom} : ecart", [f"**{um}**", um, um.replace(".", ",")],
                             omb.name))
+    # ⭐⭐⭐ Le resultat NEGATIF de `78` §2 : l'axe et le pas ne suffisent pas. Garde parce que
+    # ce fichier chiffre ce qu'un champ derive du volume devra RETROUVER -- un plan futur qui
+    # citerait un mauvais facteur se dimensionnerait sur un mauvais objectif.
+    ans = _source(racine, "laxe_ne_suffit_pas.json")
+    if ans.exists():
+        d = json.loads(ans.read_text())
+        ajoute("dispersion radiale d'une seule spire, en feuilles",
+               d["dispersion_intra_spire_feuilles"], 1, ans.name, unites=(" feuilles",))
+        ajoute("erreur du modele d'Archimede, en feuilles",
+               d["archimede"]["erreur_mediane"], 2, ans.name, unites=(" feuilles",))
+        if d.get("facteur_de_la_forme"):
+            out.append(("ce que la forme des spires vaut",
+                        [f"**×{d['facteur_de_la_forme']:.0f}**",
+                         f"facteur **{d['facteur_de_la_forme']:.0f}**",
+                         f"vaut : ×{d['facteur_de_la_forme']:.0f}"], ans.name))
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():
         d = json.loads(bdf.read_text())

@@ -86,7 +86,17 @@ dérivé du **volume** (résidus d'orientation sur `normal-grids` + `m7`, `69` A
 **sans** référent — c'est lui qui sortirait de la bande publiée. Les trois raisons de `73` §1
 qui rouvraient la question restent valides et non testées.
 
-### A2 bis ⭐⭐ — le test d'identité SANS référent (ex-H5 de `69`, révisée par `73` §1)
+### A2 bis ⭐⭐⭐ — le champ d'identité SANS référent — **débloqué le 2026-09-04** (`78`)
+
+⭐ **Cinq rouleaux publient leur axe** (`78`), dont `PHerc0139`. Un nombre d'enroulement se
+construit à partir de **l'axe et du pas**, pas de spires déjà tracées — donc il répondrait
+**partout**, ce qui est précisément la limite dure du champ de `77`.
+
+⚠ Ce que le dépôt sait déjà et qui borne l'espoir (`26` §7) : les `.normal-grids` publiées sont
+**dérivées de la prédiction** que le traceur suit déjà. Un champ bâti dessus hériterait de la
+prédiction, pas d'une information neuve.
+
+### A2 ter — le test d'identité par les résidus (ex-H5 de `69`, révisée par `73` §1)
 
 *Le champ déplié assigne-t-il un entier constant le long de chaque spire publiée, et des
 entiers consécutifs à deux spires consécutives ?*
