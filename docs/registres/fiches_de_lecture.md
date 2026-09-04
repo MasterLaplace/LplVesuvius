@@ -1773,7 +1773,7 @@ caractère, couverture vérifiée par `wc -l` avant lecture.
 ---
 
 ### docs/26_le_champ_de_direction.md
-- **lignes** : 701
+- **lignes** : 710 ⚠ (701 quand la fiche a été écrite ; la mesure du tableau « sans filtre » a été **perdue puis restaurée** le 2026-09-04)
 - **nature** : RESULTAT
   (série de mesures avec contrôle positif ; le §10 « Reproduire » et la seconde §9 « T1f »
   sont eux-mêmes des campagnes mesurées.)
@@ -1904,11 +1904,18 @@ caractère, couverture vérifiée par `wc -l` avant lecture.
     été posé pour réduire la variance, or `30` a mesuré que ça ne la réduit pas. Il reste le
     bon réglage, mais pour une raison de **débit** et non de déterminisme.
 - **preuve de lecture intégrale** :
-  - l. 429 : « ⚠⚠ **Un facteur 29 de ralentissement pour zéro déplacement, sur la course entière.** La »
-  - l. 700 : « machine a un iGPU **Intel Arc**. Il n'y a pas de GPU à saturer ici. »
+  - l. 437 : « ⚠⚠ **Un facteur 29 de ralentissement pour zéro déplacement, sur la course entière.** La »
+  - l. 709 : « machine a un iGPU **Intel Arc**. Il n'y a pas de GPU à saturer ici. »
 
 ---
 
+- ⚠⚠⚠ **2026-09-04, alerte de conservation** : `docs/mesures/sans_filtre.json`, la donnée du
+  tableau « sans filtre », avait été **écrasée par un fichier vide** par le commit de rangement
+  `a5901be` — le même qui a vidé la mesure de `34`. Restaurée depuis `79fba93` et vérifiée : les
+  quatre lignes du fichier sont exactement les quatre du tableau publié. ⭐ Garde posée :
+  `src/depot/mesures_videes.py` détecte la **régression** (une mesure vue pleine dans
+  l'historique et vide maintenant), pas le vide — cinq mesures du dépôt sont vides depuis
+  toujours et leur vide **est** le résultat.
 ### docs/27_ce_que_la_litterature_dit.md
 - **lignes** : 692
 - **nature** : PROCEDE

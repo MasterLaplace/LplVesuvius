@@ -178,6 +178,15 @@ ligne à l'autre, et ce tableau les compare.
 **Le tableau, relu sur la totalité de chaque surface** (`docs/mesures/sans_filtre.json`,
 `src/outils/remesurer_sans_filtre.sh`) :
 
+> ⚠⚠⚠ **2026-09-04 — cette mesure a été perdue puis restaurée**, comme celle de
+> [`34`](34_un_verdict_qui_ne_mesure_rien.md) et par **le même commit de rangement**
+> (`a5901be`, 2026-08-26) : `"lignes": []` écrit par-dessus les quatre lignes du tableau
+> ci-dessous. Restaurée depuis `79fba93` et vérifiée — les quatre lignes du fichier sont
+> exactement les quatre du tableau (81 464 / 222 272, 69 580 / 199 833, 66 243 / 184 587,
+> 34 340 / 2 455 822). ⭐ `src/depot/mesures_videes.py` garde désormais contre la **régression**
+> — une mesure que l'historique a vue pleine et qui est vide — et non contre le vide, parce que
+> cinq mesures de ce dépôt sont vides **depuis toujours** et que leur vide **est** le résultat.
+
 | réglage | aire | publié | par cm² | **sans filtre** | **par cm² corrigé** |
 |---|---:|---:|---:|---:|---:|
 | entrée `weight: 10` | 26,84 | 81 464 | 3 035 | 222 272 | **8 281** |
