@@ -40,27 +40,33 @@ une surface lisse, plausible, et posée là où il n'y a pas de papyrus.
 2. **Qu'il vaille hors de la bande publiée.** Le champ interpole entre spires connues et
    **refuse** au-delà. Un point sans encadrement n'est pas approuvé — c'est voulu, et c'est la
    limite dure pour un déploiement.
-3. ⚠⚠⚠ **Que le canal soit ÉCRIT.** Cette ligne disait *« le canal est écrit au bon nom et au
-   bon format ; rien ici ne fait tourner `villa` »*, et **c'était faux** : vérifié le
-   2026-09-04, ce fichier ne contient **aucun `imwrite`**, son parseur n'a **pas** le drapeau
-   `--ecrire` que la ligne d'usage ci-dessous documente, et aucun `approval.tif` n'existe sur
-   disque. Le blocage n'est donc pas en aval mais **ici** : le verdict est calculé et jamais
-   écrit.
+3. ✅ **Que le canal soit écrit, et que `villa` l'accepte.** Cette ligne a longtemps dit
+   *« le canal est écrit au bon nom et au bon format ; rien ici ne fait tourner `villa` »*, et
+   **c'était faux** : jusqu'au 2026-09-05 ce fichier ne contenait **aucun `imwrite`**, son
+   parseur n'avait **pas** le drapeau `--ecrire` que sa ligne d'usage documentait, et aucun
+   `approval.tif` n'existait sur disque.
 
-   ⭐ Le contrat d'acceptation est lisible et bon marché :
-   `data/repos/villa/lasagna/approval_inpaint.py` exige
-   `["x.tif", "y.tif", "z.tif", "meta.json", "approval.tif"]`, une forme égale à celle de la
-   grille, et approuve *« any nonzero sample »*. Ses deux fonctions n'importent que `numpy` et
-   `tifffile`, donc elles se lancent sur un masque écrit **sans faire tourner l'optimiseur**.
+   ⭐ **Fait** : `--ecrire` porte le verdict du champ **(z, θ)** sur la grille **tifxyz** d'une
+   trace et écrit `approval.tif` à côté de `x/y/z.tif`. Puis il le passe aux deux fonctions
+   d'acceptation de `data/repos/villa/lasagna/approval_inpaint.py` — **importées, jamais
+   recopiées** : le contrat est le leur, et une seconde version ici finirait par ne plus l'être.
+   Mesuré sur `PHerc0139 / w040`, grille 615×431 : **`villa` accepte**.
 
-   ⚠ Ce qui manque pour écrire : projeter le verdict par cellule du champ **(z, θ)** sur la
-   **grille tifxyz** d'une trace réelle. Ce n'est pas une ligne — c'est la raison pour laquelle
-   la ligne d'usage a pu rester fausse sans que personne ne s'en aperçoive.
+   ⚠ Le bras négatif est là aussi, sans quoi le contrôle ne pourrait pas échouer : une forme
+   fausse et un dossier incomplet doivent être **refusés**, et ils le sont (`ValueError`).
+   « `villa` accepte notre masque » est satisfait par un lecteur qui accepte tout.
+
+   ⚠ Reste hors de portée : que la **ré-optimisation** en tire quelque chose. Le contrat de
+   fichier est honoré ; ce que `lasagna` fait ensuite du masque n'est pas exercé ici.
+
+4. **Que le masque vaille un masque humain** — voir 1. Aucun `approval.tif` peint n'est publié,
+   donc la comparaison reste non montable quoi qu'on écrive.
 
 Usage :
     uv run python src/excision/le_masque_dapprobation.py --verifier
     uv run python src/excision/le_masque_dapprobation.py --json docs/mesures/le_masque_dapprobation.json
-    ⚠ PAS de `--ecrire` : ce drapeau était documenté ici et n'a jamais existé (cf. ci-dessus).
+    uv run python src/excision/le_masque_dapprobation.py --ecrire /tmp/masque \\
+        --json docs/mesures/le_masque_dapprobation_ecrit.json
 """
 
 from __future__ import annotations
@@ -127,19 +133,139 @@ def _verdict(assignes: dict[tuple[int, int], float]) -> dict:
         w = np.array([p[1] for p in points], dtype=float)
         avance_de[tranche] = float(np.polyfit(s, w, 1)[0] * champ.SECTEURS)
 
-    approuvees, placement_ok, identite_ok = 0, 0, 0
-    for (tranche, _), v in assignes.items():
+    # ⚠⚠ L'ENSEMBLE D'ABORD, LES COMPTES ENSUITE. Écrire un `approval.tif` demande de savoir
+    # QUELLES cellules sont approuvées, pas seulement combien ; recopier la règle dans une
+    # seconde fonction en donnerait deux versions, libres de diverger — la duplication que ce
+    # dépôt punit. Une règle, deux consommateurs.
+    approuvees_set, placement_ok, identite_ok = set(), 0, 0
+    for (tranche, secteur), v in assignes.items():
         p = abs(v - round(v)) <= TOLERANCE_PLACEMENT
         i = abs(avance_de.get(tranche, 9.0)) <= TOLERANCE_IDENTITE
         placement_ok += p
         identite_ok += i
-        approuvees += p and i
+        if p and i:
+            approuvees_set.add((tranche, secteur))
+    approuvees = len(approuvees_set)
     n = len(assignes)
     return dict(cellules=n, approuvees=approuvees, part_approuvee=approuvees / n,
+                cellules_approuvees=approuvees_set,
                 part_placement=placement_ok / n, part_identite=identite_ok / n,
                 tranches_jugees=len(avance_de),
                 fraction_mediane=float(np.median([abs(v - round(v))
                                                   for v in assignes.values()])))
+
+
+VILLA = RACINE / "data" / "repos" / "villa" / "lasagna" if False else None
+
+
+def _villa():
+    """
+    @brief Les deux fonctions d'acceptation de `villa`, importées depuis le dépôt cloné.
+
+    ⚠⚠ IMPORTÉES, PAS RECOPIÉES. Le contrat est le leur — `required = ["x.tif", "y.tif",
+    "z.tif", "meta.json", "approval.tif"]`, forme égale à la grille, *« any nonzero sample is
+    approved »* — et une seconde version de ce contrat ici finirait par ne plus être le sien.
+    Elles n'importent que `numpy` et `tifffile`, donc elles se chargent sans tirer l'optimiseur.
+    """
+    import importlib.util
+    chemin = (Path(__file__).resolve().parents[2] / "data" / "repos" / "villa"
+              / "lasagna" / "approval_inpaint.py")
+    if not chemin.is_file():
+        return None
+    spec = importlib.util.spec_from_file_location("villa_approval", chemin)
+    mod = importlib.util.module_from_spec(spec)
+    # ⚠ Le module doit etre dans `sys.modules` AVANT d'etre execute : `approval_inpaint`
+    # declare un `@dataclass`, et `dataclasses` remonte a `sys.modules[cls.__module__]` pour
+    # resoudre ses annotations. Sans cette ligne, l'import echoue sur un `AttributeError` de
+    # `NoneType` qui ne nomme ni le module ni la cause.
+    sys.modules[spec.name] = mod
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def ecrire_masque(trace: Path, sortie: Path, rouleau: str = "PHerc0139") -> dict:
+    """
+    @brief Écrire `approval.tif` à côté d'une copie de `x/y/z.tif`, et le faire accepter.
+
+    ⚠⚠⚠ CE QUI MANQUAIT, ET POURQUOI ÇA N'ÉTAIT PAS UNE LIGNE. Le verdict vit sur la grille du
+    **champ** — des cellules (tranche de hauteur, secteur d'angle) — et un `approval.tif` vit
+    sur la grille **tifxyz** de la trace. Il faut donc porter chaque sommet de la trace dans le
+    repère du champ, ce qui demande le même centre par tranche que `_grille` calcule sur
+    l'union des spires publiées : un centre global mélangerait des feuilles (`76`).
+
+    ⚠ La forme du masque est celle de la grille ENTIÈRE, pas celle des sommets valides : c'est
+    ce que `villa` exige, et un masque de la taille des seuls valides passerait sa vérification
+    de forme pour un tout autre objet.
+
+    ⚠ Les cellules sans verdict — hors du champ, ou trop peu peuplées — sont **refusées**, pas
+    approuvées par défaut. C'est la limite dure énoncée en tête de ce fichier : un point sans
+    encadrement n'est pas approuvé.
+    """
+    import shutil
+
+    import tifffile
+
+    dossiers = _spires(rouleau)
+    nuages = {k: v for k, v in ((k, charger(d)) for k, d in dossiers.items()) if v}
+    if not nuages:
+        raise SystemExit(f"aucune spire chargeable pour {rouleau}")
+    bords_z, bords_t, centres = champ._grille(nuages)
+    rayons = {k: champ._rayons(n, bords_z, bords_t, centres) for k, n in nuages.items()}
+    rayons = {k: v for k, v in rayons.items() if len(v) > 50}
+
+    grilles = {c: tifffile.imread(trace / f"{c}.tif").astype(np.float64) for c in "xyz"}
+    x, y, z = grilles["x"], grilles["y"], grilles["z"]
+    if not (x.shape == y.shape == z.shape):
+        raise SystemExit(f"grilles de formes différentes dans {trace}")
+    valide = (x > -0.5) & (y > -0.5) & np.isfinite(x) & np.isfinite(y) & np.isfinite(z)
+    if valide.sum() < 1000:
+        raise SystemExit(f"trop peu de sommets valides dans {trace}")
+
+    # La trace jugée est retirée du champ si elle en fait partie : sinon il la lit.
+    autres = {k: v for k, v in rayons.items() if dossiers.get(k) != trace}
+    cible = champ._rayons((x[valide], y[valide], z[valide]), bords_z, bords_t, centres)
+    assignes = _juger_cellules(cible, autres)
+    verdict = _verdict(assignes)
+    approuvees = verdict.get("cellules_approuvees") or set()
+
+    # Chaque sommet valide -> sa cellule (tranche, secteur), avec le centre de SA tranche.
+    masque = np.zeros(x.shape, dtype=np.uint8)
+    lignes, colonnes = np.nonzero(valide)
+    tranche = np.digitize(z[valide], bords_z) - 1
+    cx = np.array([centres.get(int(t), (np.nan, np.nan))[0] for t in tranche])
+    cy = np.array([centres.get(int(t), (np.nan, np.nan))[1] for t in tranche])
+    secteur = np.digitize(np.arctan2(y[valide] - cy, x[valide] - cx), bords_t)
+    for li, co, t, sec in zip(lignes, colonnes, tranche, secteur):
+        if (int(t), int(sec)) in approuvees:
+            masque[li, co] = 1
+
+    sortie.mkdir(parents=True, exist_ok=True)
+    for nom in ("x.tif", "y.tif", "z.tif", "meta.json"):
+        src = trace / nom
+        if src.is_file():
+            shutil.copy2(src, sortie / nom)
+    tifffile.imwrite(sortie / "approval.tif", masque)
+
+    # ⚠⚠⚠ ET ON LE FAIT ACCEPTER PAR `villa`, SUR-LE-CHAMP. Ecrire « au bon nom et au bon
+    # format » est precisement l'affirmation que ce fichier a portee a tort pendant des mois ;
+    # elle ne se re-ecrit pas, elle se verifie contre le lecteur qui la consomme.
+    v = _villa()
+    accepte, refus = None, None
+    if v is not None:
+        try:
+            m = v.load_approval_mask(sortie / "approval.tif", expected_shape=x.shape)
+            v._load_tifxyz_arrays(sortie)
+            accepte = bool(m.shape == x.shape)
+        except Exception as e:  # noqa: BLE001 — on RAPPORTE le refus, on ne le masque pas
+            accepte, refus = False, f"{type(e).__name__}: {e}"
+    return dict(trace=str(trace), sortie=str(sortie), forme=list(x.shape),
+                sommets_valides=int(valide.sum()),
+                cellules_jugees=verdict.get("cellules", 0),
+                cellules_approuvees=len(approuvees),
+                part_approuvee=verdict.get("part_approuvee"),
+                sommets_approuves=int(masque.sum()),
+                part_sommets=float(masque.sum() / max(1, valide.sum())),
+                villa_accepte=accepte, villa_refus=refus)
 
 
 def _melange(a: dict, b: dict, poids) -> dict:
@@ -206,6 +332,50 @@ def mesurer(rouleau: str = "PHerc0139") -> dict:
                 bras=resume, defauts_ecartes=list(champ.DEFAUTS_CONNUS))
 
 
+def _verifier_contrat_villa(v) -> list[tuple[str, bool, str]]:
+    """
+    @brief Le contrat d'acceptation de `villa`, exercé dans LES DEUX SENS, hors ligne.
+
+    ⚠⚠⚠ SANS LE BRAS NÉGATIF, LE CONTRÔLE NE PEUT PAS ÉCHOUER. « `villa` accepte notre masque »
+    est satisfait par un lecteur qui accepte tout ; ce qui établit qu'il vérifie quelque chose,
+    c'est qu'il **refuse** un masque de mauvaise forme et un dossier auquel il manque un fichier.
+    C'est le même bras que la copie translatée d'un demi-pas joue pour le masque lui-même.
+    """
+    import tempfile
+
+    import numpy as _np
+    import tifffile as _tf
+
+    out = []
+    with tempfile.TemporaryDirectory() as d:
+        t = Path(d)
+        forme = (7, 11)
+        _tf.imwrite(t / "approval.tif", _np.ones(forme, dtype=_np.uint8))
+        for nom in ("x.tif", "y.tif", "z.tif"):
+            _tf.imwrite(t / nom, _np.zeros(forme, dtype=_np.float32))
+        (t / "meta.json").write_text("{}")
+        try:
+            m = v.load_approval_mask(t / "approval.tif", expected_shape=forme)
+            out.append(("un masque à la bonne forme est accepté", m.shape == forme, str(m.shape)))
+        except Exception as e:  # noqa: BLE001
+            out.append(("un masque à la bonne forme est accepté", False, str(e)[:80]))
+        # ⚠ Bras negatif 1 : la FORME. Un masque de la taille des seuls sommets valides
+        # passerait pour un objet valide s'il n'etait pas refuse ici.
+        try:
+            v.load_approval_mask(t / "approval.tif", expected_shape=(3, 3))
+            out.append(("... et une forme fausse est REFUSÉE", False, "accepté à tort"))
+        except Exception as e:  # noqa: BLE001
+            out.append(("... et une forme fausse est REFUSÉE", True, type(e).__name__))
+        # ⚠ Bras negatif 2 : le dossier INCOMPLET. C'est l'autre moitie du contrat.
+        (t / "z.tif").unlink()
+        try:
+            v._load_tifxyz_arrays(t)
+            out.append(("... et un dossier incomplet est REFUSÉ", False, "accepté à tort"))
+        except Exception as e:  # noqa: BLE001
+            out.append(("... et un dossier incomplet est REFUSÉ", True, type(e).__name__))
+    return out
+
+
 def _verifier(r: dict) -> int:
     echecs = 0
     comptees = 0
@@ -268,6 +438,38 @@ def _verifier(r: dict) -> int:
           f"demi-pas p90 {b['demi-pas']['p90'] * 100:.1f} %")
 
     print()
+    v_mod = _villa()
+    if v_mod is None:
+        print("  (`villa` absent — le contrat d'acceptation n'est pas exercé)")
+    else:
+        print("le contrat d'acceptation de `villa`, dans les deux sens")
+        for nom, ok, detail in _verifier_contrat_villa(v_mod):
+            comptees += 1
+            print(f"  {'ok  ' if ok else 'FAIL'}  {nom}" + (f"   [{detail}]" if detail else ""))
+            if not ok:
+                echecs += 1
+
+    # ⚠⚠ ET LE MASQUE REELLEMENT ECRIT, s'il l'a ete. `--ecrire` coute une lecture de toutes
+    # les spires publiees, donc la batterie RELIT son resultat au lieu de le refaire -- une
+    # batterie qui remesurerait est une batterie que personne ne lance.
+    cache = RACINE / "docs" / "mesures" / "le_masque_dapprobation_ecrit.json"
+    if cache.is_file():
+        m = json.loads(cache.read_text())
+        print("et le masque écrit")
+        for nom, ok, detail in (
+            ("`villa` accepte le masque que nous écrivons", bool(m.get("villa_accepte")),
+             m.get("villa_refus") or "load_approval_mask + _load_tifxyz_arrays"),
+            # ⚠ Un masque qui approuve TOUT passerait le bras precedent : la part doit etre
+            # strictement entre 0 et 1, sinon le canal ne porte aucune information.
+            ("... et il n'approuve ni rien ni tout",
+             0.05 < (m.get("part_sommets") or 0) < 0.98,
+             f"{100 * (m.get('part_sommets') or 0):.1f} % des sommets valides"),
+        ):
+            comptees += 1
+            print(f"  {'ok  ' if ok else 'FAIL'}  {nom}" + (f"   [{detail}]" if detail else ""))
+            if not ok:
+                echecs += 1
+
     if echecs:
         print(f"  ECHEC ({echecs} failures)")
     else:
@@ -280,7 +482,42 @@ def main() -> int:
     p.add_argument("--rouleau", default="PHerc0139")
     p.add_argument("--verifier", action="store_true")
     p.add_argument("--json", type=Path)
+    p.add_argument("--ecrire", type=Path, metavar="SORTIE",
+                   help="écrire approval.tif dans ce dossier, depuis --trace")
+    p.add_argument("--trace", type=Path,
+                   help="le tifxyz à juger (défaut : la première spire jugeable)")
     args = p.parse_args()
+
+    if args.ecrire:
+        trace = args.trace
+        if trace is None:
+            # ⚠ Le defaut est une spire PUBLIEE : c'est la seule surface dont on connaisse la
+            # bonne reponse -- elle doit etre largement approuvee -- donc la seule sur laquelle
+            # une premiere ecriture se relise.
+            dossiers = _spires(args.rouleau)
+            jugeables = [k for k in sorted(dossiers) if k not in champ.DEFAUTS_CONNUS]
+            if not jugeables:
+                raise SystemExit(f"aucune spire jugeable pour {args.rouleau}")
+            trace = dossiers[jugeables[len(jugeables) // 2]]
+        m = ecrire_masque(Path(trace), args.ecrire, args.rouleau)
+        print(f"  trace   {m['trace']}")
+        print(f"  grille  {m['forme'][0]}x{m['forme'][1]}  ·  "
+              f"{m['sommets_valides']} sommets valides")
+        print(f"  verdict {m['cellules_approuvees']}/{m['cellules_jugees']} cellules "
+              f"approuvées ({100 * (m['part_approuvee'] or 0):.1f} %)")
+        print(f"  masque  {m['sommets_approuves']} sommets à 1 "
+              f"({100 * m['part_sommets']:.1f} %)  ->  {m['sortie']}/approval.tif")
+        if m["villa_accepte"] is None:
+            print("  villa   absent — le contrat n'a pas pu être vérifié")
+        elif m["villa_accepte"]:
+            print("  villa   ACCEPTE (load_approval_mask + _load_tifxyz_arrays)")
+        else:
+            print(f"  villa   REFUSE — {m['villa_refus']}")
+        if args.json:
+            args.json.parent.mkdir(parents=True, exist_ok=True)
+            args.json.write_text(json.dumps(m, indent=2, ensure_ascii=False), encoding="utf-8")
+            print(f"  écrit : {args.json}")
+        return 0 if m["villa_accepte"] else 1
 
     r = mesurer(args.rouleau)
     if not args.verifier or args.json:

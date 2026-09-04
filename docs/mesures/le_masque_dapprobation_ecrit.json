@@ -1,0 +1,16 @@
+{
+  "trace": "/home/masterlaplace/LplVesuvius/data/indices_de_spire/PHerc0139/w040",
+  "sortie": "/tmp/masque_test",
+  "forme": [
+    615,
+    431
+  ],
+  "sommets_valides": 106579,
+  "cellules_jugees": 1359,
+  "cellules_approuvees": 749,
+  "part_approuvee": 0.551140544518028,
+  "sommets_approuves": 59565,
+  "part_sommets": 0.5588812054907627,
+  "villa_accepte": true,
+  "villa_refus": null
+}
