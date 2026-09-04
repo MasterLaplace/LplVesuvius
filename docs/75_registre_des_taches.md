@@ -154,9 +154,33 @@ exactement au milieu de l'intervalle que son retrait vient de créer.
 détruit l'information qui détecte un interstice. Un demi-pas passait de **2,1 % à 37,6 %**.
 La sonde fait tomber 4 contrôles.
 
-⚠ **Restant sur A3** : rien ne fait tourner `villa`. Le canal est écrit au bon nom et au bon
-format ; que la ré-optimisation l'accepte n'est pas vérifié. Et **aucun `approval.tif` peint
-n'est publié**, donc la comparaison « le calculé vaut-il l'humain » reste non montable.
+⚠⚠⚠ **Restant sur A3, et c'est PLUS GRAVE que ce qui était écrit ici.** La phrase précédente
+disait *« le canal est écrit au bon nom et au bon format ; rien ne fait tourner `villa` »*.
+Vérifié le 2026-09-04 : **rien n'écrit le canal du tout.**
+
+- `le_masque_dapprobation.py` ne contient **aucun `imwrite`**, et son parseur n'a **pas** le
+  drapeau `--ecrire` que sa propre ligne d'usage documente — la commande écrite dans le fichier
+  échoue sur `unrecognized arguments`.
+- **Aucun `approval.tif` n'existe sur disque**, ni dans `data/`, ni dans `docs/`.
+- Le blocage n'est donc pas en aval (`villa`) mais en amont : le fichier dont tout dépend n'est
+  jamais produit.
+
+⭐ **Et le contrat d'acceptation, lui, est lisible et bon marché à honorer.**
+`data/repos/villa/lasagna/approval_inpaint.py` le dit en trois lignes :
+`required = ["x.tif", "y.tif", "z.tif", "meta.json", "approval.tif"]`, la forme du masque doit
+égaler celle de la grille, et *« any nonzero sample is approved »* — donc n'importe quel dtype.
+Ses deux fonctions d'acceptation n'importent que `numpy` et `tifffile` : **elles se lancent sur
+notre masque sans faire tourner l'optimiseur**, et c'est exactement ce que « l'accepte » veut
+dire au niveau du fichier.
+
+**Ce qu'il reste à faire, dans l'ordre** : (1) un `--ecrire` qui projette le verdict par cellule
+du champ (z, θ) sur la **grille tifxyz** d'une trace réelle et écrit `approval.tif` à côté de
+`x/y/z.tif` ; (2) le passer à `load_approval_mask` et `_load_tifxyz_arrays` de `villa`, avec un
+bras négatif — un masque de mauvaise forme doit être **refusé**, sinon le contrôle ne peut pas
+échouer.
+
+⚠ Et **aucun `approval.tif` peint n'est publié** (vérifié au listing S3, `73` §0), donc la
+comparaison « le calculé vaut-il l'humain » reste non montable, quoi qu'on écrive.
 
 ### A3 bis — l'ancienne formulation, gardée pour mémoire
 
@@ -296,7 +320,7 @@ instruments existants.
 | **A1** | — | ✅ rien : `PHerc0172` mesuré le même jour |
 | **A2** | le champ a besoin du **référent** | c'est **A2 bis** / **A2 ter**, une tâche à part |
 | **A2** | la cause du trou de `PHerc0172` : déchirure, perte, collage ? | la densité dit qu'il n'y a **pas de matière**, pas pourquoi. ⚠ Demanderait un autre visuel — une coupe longitudinale, ou le volume |
-| **A3** | ⚠⚠ **rien ne fait tourner `villa`** | le canal `approval.tif` est écrit au bon nom et au bon format ; **que la ré-optimisation l'accepte n'est pas vérifié** |
+| **A3** | ⚠⚠⚠ **rien n'écrit le canal** | corrigé le 2026-09-04 : `le_masque_dapprobation.py` n'a **aucun `imwrite`**, son `--ecrire` documenté **n'existe pas** dans le parseur, et aucun `approval.tif` n'est sur disque. Le blocage est en amont de `villa`, pas en aval |
 | **A3** | ⚠⚠ **aucun `approval.tif` peint n'est publié** | donc « le calculé vaut-il l'humain » reste **non montable**. Vérifié au listing S3 (`73` §0) |
 | **A3** | le masque n'a été mesuré que sur `PHerc0139` | `PHerc0172` ne sépare qu'après exclusion du trou |
 | **A5** | ⭐⭐ le **plancher** : une spire publiée est à **20,8 µm** de la matière *à l'échelle où le champ travaille* (`77` §10), donc l'erreur propre du champ est entre **28 et 49 µm**, **44** si indépendantes — et l'indépendance est **vérifiée** (corrélation ≤ 0,08 entre voisines) | mesuré en coupe sur **six** spires, dont cinq consécutives ; resserrer demanderait une règle autre que la spire publiée |

@@ -40,13 +40,27 @@ une surface lisse, plausible, et posée là où il n'y a pas de papyrus.
 2. **Qu'il vaille hors de la bande publiée.** Le champ interpole entre spires connues et
    **refuse** au-delà. Un point sans encadrement n'est pas approuvé — c'est voulu, et c'est la
    limite dure pour un déploiement.
-3. **Que la ré-optimisation en aval l'accepte.** Le canal est écrit au bon nom et au bon format ;
-   rien ici ne fait tourner `villa`.
+3. ⚠⚠⚠ **Que le canal soit ÉCRIT.** Cette ligne disait *« le canal est écrit au bon nom et au
+   bon format ; rien ici ne fait tourner `villa` »*, et **c'était faux** : vérifié le
+   2026-09-04, ce fichier ne contient **aucun `imwrite`**, son parseur n'a **pas** le drapeau
+   `--ecrire` que la ligne d'usage ci-dessous documente, et aucun `approval.tif` n'existe sur
+   disque. Le blocage n'est donc pas en aval mais **ici** : le verdict est calculé et jamais
+   écrit.
+
+   ⭐ Le contrat d'acceptation est lisible et bon marché :
+   `data/repos/villa/lasagna/approval_inpaint.py` exige
+   `["x.tif", "y.tif", "z.tif", "meta.json", "approval.tif"]`, une forme égale à celle de la
+   grille, et approuve *« any nonzero sample »*. Ses deux fonctions n'importent que `numpy` et
+   `tifffile`, donc elles se lancent sur un masque écrit **sans faire tourner l'optimiseur**.
+
+   ⚠ Ce qui manque pour écrire : projeter le verdict par cellule du champ **(z, θ)** sur la
+   **grille tifxyz** d'une trace réelle. Ce n'est pas une ligne — c'est la raison pour laquelle
+   la ligne d'usage a pu rester fausse sans que personne ne s'en aperçoive.
 
 Usage :
     uv run python src/excision/le_masque_dapprobation.py --verifier
     uv run python src/excision/le_masque_dapprobation.py --json docs/mesures/le_masque_dapprobation.json
-    uv run python src/excision/le_masque_dapprobation.py --ecrire data/masques/w030
+    ⚠ PAS de `--ecrire` : ce drapeau était documenté ici et n'a jamais existé (cf. ci-dessus).
 """
 
 from __future__ import annotations
