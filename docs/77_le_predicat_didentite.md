@@ -604,6 +604,41 @@ rendent des α de **+0,000 à +1,771** sur des positions voisines — du bruit.
 > depuis le **volume du rouleau**, avec une fenêtre de profondeur assez large pour emboîter, pas
 > un volume de surface. Une tâche qu'on croyait à portée ne l'est pas, et on sait pourquoi.
 
+### ⚠⚠⚠ Et avec une dalle assez profonde, ça ne marche toujours pas — troisième raison
+
+Les couches de segment de Scroll 1 font **65 couches = 3,0 écarts**, donc la place d'emboîter y
+est. Deux tentatives de plus, et chacune bute sur un obstacle **différent** :
+
+**1. Centrer sur le lobe est CIRCULAIRE.** Trouver la feuille par `argmax` du profil puis
+centrer la fenêtre dessus donne `d = 0,0 / 0,0` — convergence parfaite **par construction**,
+puisque l'argmax d'une fenêtre centrée sur l'argmax est au centre. J'ai failli publier ça comme
+« α = 0 sur la feuille, +1,10 dans l'interstice, donc α sépare le placement ». Ça n'aurait rien
+prouvé.
+
+⚠ Au passage, `analyser` **ne sait pas exprimer une convergence parfaite** : `e0 = 0` la fait
+rendre `indécidable` (« écart nul dans la fenêtre étroite »), parce que α = log(e₁/e₀) n'est pas
+défini. C'est une limite de l'instrument, notée ici plutôt que contournée — et je ne l'ai **pas**
+modifié, d'autres batteries en dépendent.
+
+**2. Transporter la profondeur d'une fenêtre à l'autre est CONFONDU par le serpentage.**
+Chercher la feuille dans une fenêtre latérale et tester la convergence dans une **autre** lève
+la circularité. Mesuré sur 12 paires croisées :
+
+| position | α médian | étendue |
+|---|---:|---|
+| sur la feuille | **+0,680** | [+0,000 ; +1,612] |
+| dans le creux | **+1,100** | [+0,000 ; +1,100] |
+
+Les médianes diffèrent, **les distributions se recouvrent**. Et la cause est mesurée ailleurs :
+`77` §10 établit que la bande **serpente de 0,13 écart** latéralement, soit ~2,8 couches — du
+même ordre que la fenêtre étroite (±3). **Une profondeur mesurée dans une fenêtre ne vaut pas
+dans la suivante.**
+
+> ⭐ **Ce qu'il faudrait pour trancher B2** : un positif qui ne soit ni **circulaire** (centré
+> sur son propre argmax) ni **transporté** (d'une autre fenêtre) — c'est-à-dire une
+> détermination **indépendante** de où est la feuille. Une carte d'encre ou une annotation
+> humaine en donnerait une ; aucune n'est disponible à cette échelle.
+
 ### ⚠⚠⚠ Et j'ai d'abord lu un résultat là où il n'y en avait pas
 
 Ma première version passait l'amplitude à `analyser` **sans passer le seuil**, donc la branche de
