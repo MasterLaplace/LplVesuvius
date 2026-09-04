@@ -307,7 +307,7 @@ instruments existants.
 | **B2** | « no threshold » pas encore rétréci dans l'abstract | ⚠⚠ **testé et NON tranchable ainsi** (`77` §11) : translater = décentrer la fenêtre dans la même pile, l'idée est bonne mais une dalle de volume de surface fait ±0,9 écart et ne permet pas d'emboîter deux fenêtres. **25 refusés sur 36**. Retenté sur une dalle de 3,0 écarts : le positif centré sur le lobe est **circulaire**, et le transport d'une fenêtre à l'autre est **confondu par le serpentage** (0,13 écart ≈ la fenêtre étroite). Il faudrait un positif **indépendant** — carte d'encre ou annotation |
 | **C** | les trois tâches de la règle graduée | non commencées — bornées à trois semaines par conception |
 | **D1** | ✅✅ l'arc d'excision (`03`–`07`) — **FERMÉ : la conclusion de tête de `07` est CONFIRMÉE** | ce qui la démentait était une mesure sans producteur, prise sur une colonne dominée par son bruit d'échantillonnage. Sur `shortfall` (sans seuil, bruit < 5 %) : **0 paire sur 10** au-delà du bruit, signe mélangé. Ce qui est établi est une **borne**, pas une absence |
-| **D2** | le contrôle P1 bis de `71` | ×15,9 requis contre ×3,8 observé |
+| **D2** | ⛔ le contrôle P1 bis de `71` | **bloqué** : le rapport « budget » n'est ni dans `docs/`, ni dans `src/`, ni dans `store/` — `71` et `72` le citent tous deux **sans le définir**, donc la tâche ne peut ni être faite ni être refusée |
 | **D3** | ~~41~~ → ~~32~~ → **30** scripts sans appelant | ⚠ **entamé** : deux figures dont l'image est **utilisée** dans un doc ne portaient pas leur commande de régénération — c'est la règle du dépôt, et c'est réparé (vérifié : les deux se régénèrent à l'identique). Le reste est classé ci-dessous |
 
 ---
@@ -539,9 +539,26 @@ faudrait les régénérer, ce qui les fera déclarer. Et le compte de quads de `
 **toujours pas reproductible** : 3 696 ou 3 698 selon l'exécution, quatre observations, deux
 valeurs seulement.
 
-### D2 ⚠ — le contrôle P1 bis de `71`
+### D2 ⛔ — le contrôle P1 bis de `71` : **bloqué sur une source absente de l'arbre**
 
-×15,9 requis contre ×3,8 observé. Ouvert.
+×15,9 requis contre ×3,8 observé. ⚠⚠ **Cherché le 2026-09-04, et le rapport « budget » n'est
+nulle part** : ni dans `docs/`, ni dans `src/`, ni dans `~/LplKnowledge/store/`. Les deux nombres
+n'apparaissent que dans `71` §4 et `72` §4, **qui le citent tous les deux sans le définir** —
+aucun des deux ne dit ce que le budget compte, sur quoi il est mesuré, ni comment ×15,9 est
+dérivé.
+
+> ⭐ C'est la dette `D3` déplacée d'un cran encore : on savait qu'une **mesure** sans producteur
+> ne se relance pas et qu'un **contrôle** sans producteur ne s'audite pas. Celle-ci ajoute qu'une
+> **tâche** dont la spécification vit hors de l'arbre ne peut ni être faite ni être refusée — elle
+> se contente de traîner, ce que `72` §4 constate en toutes lettres (« qui traîne »).
+
+**Ce qu'il faudrait pour la débloquer, dans l'ordre** : retrouver le rapport source (probablement
+une session de recherche non versée dans `store/`), ou bien **redériver ×15,9 depuis nos propres
+grilles** — auquel cas ce n'est plus un contrôle d'antériorité mais une mesure neuve, et elle
+mérite son propre énoncé plutôt que d'hériter d'un chiffre qu'on ne peut pas vérifier.
+
+⚠ Écrire le contrôle en devinant ce que P1 bis mesure produirait un résultat qui **répond à une
+question qu'on aurait inventée**, et le comparer à ×15,9 lui donnerait l'air d'une réfutation.
 
 ### D3 ⚠ — 41 → **33** scripts sans appelant, et aucune des huit réparations n'était une formalité
 
