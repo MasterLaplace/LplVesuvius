@@ -458,9 +458,41 @@ REPRODUCTIBLE**, ce qui est pire, parce que ça ne se voit pas.
 | catégorie | n | constat |
 |---|---:|---|
 | **cités dans un doc, sans leur commande** | **9** | même défaut que les huit ci-dessus — à traiter pareil |
-| cités nulle part, aucune sortie JSON | 4 | `campagne_prediction_paris4`, `juger_nappe`, `sens_de_la_normale`, `tracer_tous_candidats` — **candidats à déclarer morts**, à lire avant : un script de 122 lignes peut porter un savoir |
+| cités nulle part, aucune sortie JSON | 4 | ⭐ **LUS — aucun n'est mort**, voir ci-dessous |
 | figures sans sortie par défaut | 5 | l'image est passée en argument, donc rien ne dit laquelle |
 | reste | 15 | non classé |
+
+#### ⭐⭐ Les quatre « candidats à déclarer morts », lus — et aucun ne l'est
+
+La règle disait *« à lire avant : un script de 122 lignes peut porter un savoir »*. Elle a payé :
+les quatre portent une **question ouverte**, et ils sont orphelins parce que leur **résultat**
+n'a jamais été publié, pas parce qu'ils ne valent rien.
+
+| script | ce qu'il demande |
+|---|---|
+| `campagne_prediction_paris4` | **laquelle des deux prédictions de surface** de `PHercParis4` vaut-il mieux tracer ? (`48` monte l'expérience là ; ce rouleau en publie **deux**) |
+| `sens_de_la_normale` | la pile est-elle rendue **du bon côté** de la surface ? (`38` mesure que le pic est au bord **à toutes les fenêtres**, même sur une trace posée sur la graine d'un segment officiel) |
+| `tracer_tous_candidats` | et si la graine choisie était la **moins bien soutenue** de celles qu'on avait ? (`trouver_graine` classe sur la planéité **seule**) |
+| `juger_nappe` | ⚠⚠⚠ cas à part — voir ci-dessous |
+
+#### ⚠⚠⚠ `juger_nappe.sh` : une déduplication écrite, jamais adoptée, et devenue une 3ᵉ copie
+
+Son en-tête dit pourquoi il existe : `spire_suivante.sh` et `etendre_nappe.sh` portaient chacun
+une copie **verbatim** de la fonction de jugement, et les deux **avaient déjà divergé** — la
+réserve `--au-bord` câblée dans l'une avant l'autre, si bien qu'*« un verdict de campagne portait
+le complément et l'autre non »*.
+
+**Vérifié aujourd'hui** : ni l'un ni l'autre ne l'appelle. La divergence a été réparée **dans
+chaque copie** — les trois passent maintenant `--au-bord`. Donc :
+
+- ✅ la divergence de l'époque est **corrigée** ;
+- ⚠⚠ mais la déduplication n'a **pas** été adoptée, et il y a désormais **trois** exemplaires de
+  la même logique de jugement. L'argument de son propre en-tête — *deux chemins de jugement sont
+  deux occasions de ne pas s'accorder* — vaut à trois.
+
+> ⭐ **Le remède n'est pas de le déclarer mort**, c'est de l'**adopter** dans les deux appelants.
+> ⚠ C'est un refactor de scripts de campagne, donc à faire délibérément : il change ce qui a
+> produit des résultats publiés. Noté ici plutôt que fait à la volée.
 
 ⚠ Une fausse alerte à moi : j'ai cru `proximity_scroll1.json` manquant, il existe en `.jsonl`.
 Mon motif cherchait la mauvaise extension.
