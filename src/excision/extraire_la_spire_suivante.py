@@ -92,13 +92,73 @@ CELLULES_MINIMUM = 20
 """En dessous, une médiane d'erreur est le bruit d'une poignée de cellules."""
 
 
-MODELES = ("global", "2", "4", "8")
+MODELES = ("global", "commun", "2", "4", "8")
 """Les modèles d'extrapolation comparés. ⚠⚠ Comparés et non choisis d'avance, parce que mon
 raisonnement s'est trompé : j'avais argumenté qu'un pas **par cellule** était nécessaire — « le
 pas varie avec le rayon et l'angle, un rouleau est écrasé » — et le pas **global** fait mieux
 partout (45 µm contre 58 à une feuille). L'argument était juste sur la physique et faux sur la
 statistique : un pas estimé sur deux rayons bruités est plus bruité que le pas moyen du
 rouleau, et ce bruit-là domine la variation qu'il prétend capter."""
+
+
+def structure_de_lecart(connu: dict[int, dict], voxel_um: float) -> dict:
+    """
+    @brief L'écart inter-feuilles local dépend-il de l'angle, de la hauteur, du rayon ?
+
+    ⚠⚠ Existe parce que la réponse est OUI pour l'angle et que ça ne sert **pas** à
+    extrapoler — les deux moitiés doivent être publiées ensemble. Mesuré sur `PHerc0139` :
+    l'écart varie de **71 µm avec l'angle** (45 % de sa médiane), de 31 µm avec la hauteur, et
+    à peine avec le rayon. C'est la signature de l'**écrasement** : là où la section est
+    aplatie, les feuilles se serrent ou s'écartent, et ce motif est fixe dans le repère du
+    rouleau.
+    """
+    ecarts: dict[tuple, list[float]] = {}
+    indices = sorted(connu)
+    for a_, b_ in zip(indices, indices[1:]):
+        if b_ - a_ != 1:
+            continue
+        for c in connu[a_]:
+            if c in connu[b_]:
+                ecarts.setdefault(c, []).append(connu[b_][c] - connu[a_][c])
+    local = {c: float(np.median(v)) for c, v in ecarts.items()}
+    if len(local) < 50:
+        return {}
+
+    def amplitude(cle) -> float:
+        groupes: dict = {}
+        for c, v in local.items():
+            groupes.setdefault(cle(c), []).append(v)
+        medians = [float(np.median(v)) for v in groupes.values() if len(v) >= 3]
+        return (max(medians) - min(medians)) * voxel_um if medians else 0.0
+
+    valeurs = np.array(list(local.values())) * voxel_um
+    return dict(
+        cellules=len(local),
+        median_um=float(np.median(valeurs)),
+        coefficient_de_variation=float(valeurs.std() / max(np.median(valeurs), 1e-9)),
+        amplitude_angle_um=amplitude(lambda c: c[1]),
+        amplitude_hauteur_um=amplitude(lambda c: c[0]),
+    )
+
+
+def _pas_commun(connu: dict[int, dict]) -> dict:
+    """
+    @brief Le pas médian de CHAQUE cellule, mis en commun sur toutes les spires connues.
+
+    ⚠ À ne pas confondre avec le modèle `"2"`, qui estime le pas d'une cellule sur ses **deux
+    dernières** spires : celui-là est bruité, celui-ci moyenne sur toute la course connue. Il
+    capte donc la structure angulaire réelle sans son bruit — et il ne sert quand même pas à
+    une feuille (52 µm contre 47), ce qui est le résultat.
+    """
+    acc: dict[tuple, list[float]] = {}
+    indices = sorted(connu)
+    for a_, b_ in zip(indices, indices[1:]):
+        if b_ - a_ != 1:
+            continue
+        for c in connu[a_]:
+            if c in connu[b_]:
+                acc.setdefault(c, []).append(connu[b_][c] - connu[a_][c])
+    return {c: float(np.median(v)) for c, v in acc.items() if len(v) >= 3}
 
 
 def _pas_global(connu: dict[int, dict]) -> float:
@@ -129,7 +189,8 @@ def _predire(connu: dict[int, dict], cellules, k: int, modele: str) -> dict:
     """
     predit = {}
     pas_commun = _pas_global(connu) if modele == "global" else None
-    fenetre = None if modele == "global" else int(modele)
+    par_cellule = _pas_commun(connu) if modele == "commun" else None
+    fenetre = None if modele in ("global", "commun") else int(modele)
     for c in cellules:
         dispo = sorted(x for x in connu if c in connu[x])
         if not dispo:
@@ -137,6 +198,10 @@ def _predire(connu: dict[int, dict], cellules, k: int, modele: str) -> dict:
         dernier = dispo[-1]
         if pas_commun is not None:
             pas = pas_commun
+        elif par_cellule is not None:
+            if c not in par_cellule:
+                continue
+            pas = par_cellule[c]
         else:
             if len(dispo) < fenetre:
                 continue
@@ -193,8 +258,10 @@ def mesurer(rouleau: str = "PHerc0139", retirees: int = RETIREES) -> dict:
                   and all(abs(x["erreur_vx"] - y["erreur_vx"]) < 1e-9 for x, y in zip(a, b)))
 
     portee = [x["au_dela"] for x in a if x["erreur_feuilles"] < 0.5]
+    connu_final = {k: v for k, v in rayons.items() if k <= bord}
     return dict(
         rouleau=rouleau, spires=len(rayons), bord_du_champ=bord, retirees=retirees,
+        structure=structure_de_lecart(connu_final, VOXEL_UM.get(rouleau, 9.362)),
         ecart_inter_feuilles_vx=voxel,
         portee_en_feuilles=max(portee) if portee else 0,
         modele=meilleur,
@@ -246,6 +313,26 @@ def _verifier(r: dict) -> int:
     v("réinjecter la spire prédite ne change rien, au chiffre près",
       r["reinjection_sans_effet"],
       "les deux séries sont identiques terme à terme")
+
+    st = r.get("structure") or {}
+    if st:
+        print("⚠ l'écart a une STRUCTURE angulaire réelle — et elle ne sert pas ici")
+        # ⚠⚠ Les deux moities ensemble, jamais l'une sans l'autre : « l'ecart varie de 71 µm
+        # avec l'angle » invite a croire qu'on peut l'exploiter, et la mesure dit non.
+        v("l'écart varie fortement avec l'angle",
+          st["amplitude_angle_um"] > 0.3 * st["median_um"],
+          f"{st['amplitude_angle_um']:.0f} µm d'amplitude sur une médiane de "
+          f"{st['median_um']:.0f}")
+        v("... et bien moins avec la hauteur",
+          st["amplitude_hauteur_um"] < st["amplitude_angle_um"],
+          f"{st['amplitude_hauteur_um']:.0f} µm contre {st['amplitude_angle_um']:.0f}")
+        commun = r["par_modele"].get("commun")
+        global_ = r["par_modele"].get("global")
+        if commun and global_:
+            v("... et l'exploiter n'améliore PAS la première feuille",
+              commun[0]["erreur_vx"] >= global_[0]["erreur_vx"],
+              f"pas mis en commun {commun[0]['erreur_feuilles']:.2f} contre "
+              f"pas global {global_[0]['erreur_feuilles']:.2f} feuille")
 
     print()
     if echecs:

@@ -1954,6 +1954,25 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                         [f"**{sp['correlation_avec_lindice']:.3f}**",
                          f"{sp['correlation_avec_lindice']:.3f}".replace(".", ",")],
                        cou.name))
+    # ⭐⭐ La PORTEE du champ (`77` §9) et la structure angulaire de l'ecart. Gardees ensemble
+    # parce que « l'ecart varie de 74 um avec l'angle » invite a croire qu'on peut l'exploiter,
+    # et la mesure dit non : publier la premiere sans la seconde serait une invitation fausse.
+    ext = _source(racine, "extraire_la_spire_suivante.json")
+    if ext.exists():
+        d = json.loads(ext.read_text())
+        vox = 9.362
+        for x in d["series"]["sans_reinjection"][:3]:
+            um = f"{x['erreur_vx'] * vox:.0f} µm"
+            out.append((f"portee du champ, {x['au_dela']} feuille(s)",
+                        [f"**{um}**", um, f"{x['erreur_feuilles']:.2f} feuille".replace(".", ",")],
+                        ext.name))
+        st = d.get("structure") or {}
+        if st:
+            out.append(("amplitude angulaire de l'ecart",
+                        [f"**{st['amplitude_angle_um']:.0f} µm**",
+                         f"{st['amplitude_angle_um']:.0f} µm d'amplitude"], ext.name))
+        out.append(("modele retenu pour l'extrapolation",
+                    [f"`{d['modele']}`", f"pas {d['modele']}"], ext.name))
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():
         d = json.loads(bdf.read_text())

@@ -373,3 +373,64 @@ croît (ρ = 0,567).
   `PHerc0139` n'a pas de trou détectable et sépare sans rien écarter.
 - ⚠ Le champ **nomme** les secteurs suspects et ne les exclut pas de lui-même : l'exclure ferait
   de lui le juge et la partie.
+
+---
+
+## 9. ⭐⭐ Jusqu'où le champ porte, et une structure réelle qui ne sert pas
+
+> Mesure : `src/excision/extraire_la_spire_suivante.py` (8 contrôles).
+
+`77` §5 nommait la limite dure — le champ « refuse au-delà » de la bande publiée — sans la
+chiffrer. **Une feuille.**
+
+| au-delà du bord | erreur | en feuilles |
+|---:|---:|---:|
+| **1** | **47 µm** | **0,31** |
+| 2 | 79 µm | 0,51 |
+| 3 | 125 µm | 0,81 |
+| 8 | 293 µm | 1,90 |
+
+⭐ **Ce qui est utilisable est la première ligne** : le champ place la feuille suivante à 47 µm,
+moins d'un tiers d'un écart. Un traceur amorcé là-dessus part au bon endroit — un a priori
+**principé** pour la graine, là où `25` avait réglé « où l'on part » sur la planéité locale.
+
+### ⚠⚠⚠ Le champ est un JUGE, pas un générateur
+
+**Réinjecter la spire prédite ne change rien, au chiffre près, à toutes les distances.** Ce
+n'est pas une déception, c'est une tautologie qu'il fallait mesurer pour la nommer : une spire
+prédite **ne porte aucune information neuve**. Pour dépasser une feuille, elle doit être
+**corrigée contre le volume** — le travail d'un traceur, et précisément ce que le champ ne
+remplace pas.
+
+### ⚠ Une structure angulaire réelle, et elle ne sert pas
+
+En changeant de filtre — regarder l'écart **local** au lieu de la position — une structure
+apparaît : l'écart inter-feuilles varie de **74 µm** avec l'angle (45 % de sa médiane), de 47 µm
+avec la hauteur, et à peine avec le rayon. C'est la signature de l'**écrasement** : là où la
+section est aplatie, les feuilles se serrent, et ce motif est fixe dans le repère du rouleau.
+
+⚠⚠ **Et l'exploiter n'améliore pas la première feuille** : un pas mis en commun par cellule
+donne **0,33** contre **0,31** pour un pas global. Meilleur à longue portée (1,71 contre 1,90 à
+huit feuilles), inutile là où ça compte.
+
+**Les deux moitiés se publient ensemble** : « l'écart varie de 74 µm avec l'angle » invite à
+croire qu'on peut s'en servir, et la mesure dit non.
+
+### ⚠ Et le modèle a été choisi par la mesure après que mon raisonnement se soit trompé
+
+J'avais argumenté qu'un pas estimé **par cellule** était nécessaire, le pas variant avec le
+rayon et l'angle. Comparé à quatre modèles, ce pas-là est le **pire partout** :
+
+| au-delà de | 1 | 2 | 3 | 8 |
+|---|---:|---:|---:|---:|
+| **pas global** | **0,31** | **0,51** | 0,81 | 1,90 |
+| par cellule mis en commun | 0,33 | 0,54 | 0,79 | **1,71** |
+| 2 dernières *(mon modèle)* | 0,37 | 0,74 | 1,22 | 3,23 |
+| 8 dernières | 0,35 | 0,58 | 0,82 | 1,64 |
+
+L'argument était juste sur la **physique** et faux sur la **statistique** : un pas estimé sur
+deux rayons bruités est plus bruité que le pas moyen, et ce bruit domine la variation qu'il
+prétend capter.
+
+⚠ Le pas global est mesuré **sur les spires connues seulement** — reprendre les 154,1 µm de
+`76` serait une fuite, ils ont été mesurés sur les spires qu'on retire ici pour les prédire.

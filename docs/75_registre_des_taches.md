@@ -17,6 +17,7 @@
 | | tâches | ce que ça fait avancer |
 |---|---:|---|
 | **A — remplacer le pinceau** | 8 (dont **3 faites**) | le prix. Un prédicat d'identité, son témoin, son déploiement |
+| **A′ — ce qui reste sous les ✅** | 13 lignes | ⚠ la section qu'un ✅ fait sauter |
 | **B — l'article** | 5 (dont **4 faites**) | une publication, et la crédibilité des mesures qui la portent |
 | **C — la règle graduée** | 3 | savoir si une carte d'encre peut **valider** un déroulage. Borné à trois semaines |
 | **D — dette** | 3 | ce qui pourrit si on n'y touche pas |
@@ -58,9 +59,9 @@ qu'un rouleau écrasé n'a pas de rayon absolu et que son axe erre de 2,6 mm sur
    36** — de quoi faire passer un bon prédicteur pour un prédicteur à 94 % si on les compte
    comme des échecs du prédicteur.
 
-⚠ **Restant sur A1** : `PHerc0172` (44 spires) n'est pas mesuré — il publie ses maillages sous
-`mesh/*-on-*.tifxyz` et non `tifxyz_original`. Bon marché, et c'est la seule façon de savoir si
-le sens est une convention du rouleau ou du projet.
+~~⚠ Restant sur A1 : `PHerc0172` n'est pas mesuré.~~ ✅ **Fait le même jour** — 95,1 % contre
+95,0 %, donc le sens est une convention du **projet** et pas du rouleau. Son meta étant
+dépouillé, son voxel est lu dans le chemin du maillage et validé contre les scans publiés.
 
 ### ~~A2~~ ✅ — le prédicat d'identité — **FAIT le 2026-09-04** (`77`), par une autre voie
 
@@ -207,6 +208,36 @@ de **toutes** les spires depuis un champ global.
 traces condamnées. Avec le compte corrigé, ce sont **101 positifs** (et non 57) et leurs
 101 copies translatées d'un demi-pas comme négatifs. Ferme §2.2 et §2.8 d'un coup, avec les
 instruments existants.
+
+---
+
+## A' — ⚠⚠⚠ CE QUI RESTE SOUS LES ✅
+
+> Remarque de l'auteur, et elle vise un défaut réel de ce fichier : *« c'est typiquement le cas
+> où tu vois le logo vert de A3, tu vois le A3 bis, mais tu ne lis pas entre, et tu loupes les
+> tâches que tu laisses comme ça. »*
+>
+> ⚠ Un ✅ fait arrêter de lire. Tout « ⚠ Restant sur X » enfoui sous un titre coché est donc
+> **recopié ici**, et cette section est la seule qu'il faut lire pour savoir ce qui traîne.
+> **Règle** : marquer une tâche ✅ oblige à ajouter sa ligne ici, ou à écrire qu'il n'en reste
+> rien.
+
+| d'où | ce qui reste | pourquoi ça n'a pas été fait |
+|---|---|---|
+| **A1** | — | ✅ rien : `PHerc0172` mesuré le même jour |
+| **A2** | le champ a besoin du **référent** | c'est **A2 bis** / **A2 ter**, une tâche à part |
+| **A2** | la cause du trou de `PHerc0172` : déchirure, perte, collage ? | la densité dit qu'il n'y a **pas de matière**, pas pourquoi. ⚠ Demanderait un autre visuel — une coupe longitudinale, ou le volume |
+| **A3** | ⚠⚠ **rien ne fait tourner `villa`** | le canal `approval.tif` est écrit au bon nom et au bon format ; **que la ré-optimisation l'accepte n'est pas vérifié** |
+| **A3** | ⚠⚠ **aucun `approval.tif` peint n'est publié** | donc « le calculé vaut-il l'humain » reste **non montable**. Vérifié au listing S3 (`73` §0) |
+| **A3** | le masque n'a été mesuré que sur `PHerc0139` | `PHerc0172` ne sépare qu'après exclusion du trou |
+| **A5** | l'extraction porte **une feuille** (47 µm), pas deux | mesuré : réinjecter une spire prédite ne change **rien** — le champ est un juge, pas un générateur |
+| **A5** | ⚠ la structure angulaire de l'écart (**71 µm**, 45 % de la médiane) **n'améliore pas** l'extrapolation | mesuré : un pas par cellule mis en commun donne 52 µm à une feuille contre 47 pour le pas global. Meilleur à longue portée (1,71 contre 1,90 feuille à huit), inutile là où ça compte |
+| **A6** | la ROC de α n'est pas faite | demande de **rendre** 101 surfaces à deux profondeurs — le seul poste de ce registre qui exige le volume |
+| **B2** | « no threshold » pas encore rétréci dans l'abstract | ⚠ **à mesurer avant d'écrire** : α sur une surface translatée d'un demi-pas. Le champ la refuse (2,1 %), mais ce n'est pas α |
+| **C** | les trois tâches de la règle graduée | non commencées — bornées à trois semaines par conception |
+| **D1** | l'arc d'excision (`03`–`07`) à re-fonder | la conclusion de tête de `07` est démentie par notre propre mesure |
+| **D2** | le contrôle P1 bis de `71` | ×15,9 requis contre ×3,8 observé |
+| **D3** | 41 scripts sans appelant | dette de documentation, signalée par le témoin |
 
 ---
 

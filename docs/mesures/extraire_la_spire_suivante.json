@@ -3,6 +3,13 @@
   "spires": 37,
   "bord_du_champ": 51,
   "retirees": 8,
+  "structure": {
+    "cellules": 1660,
+    "median_um": 162.80367743376357,
+    "coefficient_de_variation": 0.29567544735253454,
+    "amplitude_angle_um": 73.58730897517897,
+    "amplitude_hauteur_um": 46.57296380879979
+  },
   "ecart_inter_feuilles_vx": 16.460158085879083,
   "portee_en_feuilles": 1,
   "modele": "global",
@@ -47,6 +54,48 @@
         "au_dela": 8,
         "erreur_vx": 31.26565068617947,
         "erreur_feuilles": 1.8994745082674382
+      }
+    ],
+    "commun": [
+      {
+        "au_dela": 1,
+        "erreur_vx": 5.489927548621267,
+        "erreur_feuilles": 0.3335282395210403
+      },
+      {
+        "au_dela": 2,
+        "erreur_vx": 8.957967278674005,
+        "erreur_feuilles": 0.5442212177997796
+      },
+      {
+        "au_dela": 3,
+        "erreur_vx": 13.005400505891657,
+        "erreur_feuilles": 0.7901139489692259
+      },
+      {
+        "au_dela": 4,
+        "erreur_vx": 15.580892560758457,
+        "erreur_feuilles": 0.946582194379109
+      },
+      {
+        "au_dela": 5,
+        "erreur_vx": 17.68845977771838,
+        "erreur_feuilles": 1.074622715373131
+      },
+      {
+        "au_dela": 6,
+        "erreur_vx": 21.44709058303812,
+        "erreur_feuilles": 1.3029699029098176
+      },
+      {
+        "au_dela": 7,
+        "erreur_vx": 23.70972469227536,
+        "erreur_feuilles": 1.4404311652763266
+      },
+      {
+        "au_dela": 8,
+        "erreur_vx": 28.33857241957503,
+        "erreur_feuilles": 1.7216464308375177
       }
     ],
     "2": [
