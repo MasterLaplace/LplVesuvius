@@ -1204,11 +1204,25 @@ run "le champ d'enroulement"   uv run python "$ROOT/src/excision/le_champ_denrou
 # cessait de separer que si `PHerc0172` se mettait a le faire -- et le second serait une
 # excellente nouvelle.
 run "champ d'enroulement: 0172" uv run python "$ROOT/src/excision/le_champ_denroulement.py" --rouleau PHerc0172 --verifier
+# ⭐⭐⭐ LE TROU ANGULAIRE -- la cause trouvee EN REGARDANT, apres QUATRE hypotheses mesurees et
+# rejetees. La mesure qui l'avait ecartee comparait le taux MOYEN de violation (5,2 % contre
+# 5,6 %, « indiscernable ») ; c'est la CONCENTRATION qui differe (x1,42 contre x5,18). Deux
+# controles portent le fichier : la DENSITE (3 points/cellule contre 286 -- donc de la matiere
+# ABSENTE, pas mal ordonnee, ce qui a refute mon explication par une « couture »), et le temoin
+# A COMPTE EGAL -- ecarter six secteurs SAINS ne restaure rien, ce qui a fait echouer ma
+# premiere version, ou j'en ecartais quinze.
+run "le trou angulaire"        uv run python "$ROOT/src/excision/le_trou_angulaire.py" --verifier
+run "le trou angulaire : 0139" uv run python "$ROOT/src/excision/le_trou_angulaire.py" --rouleau PHerc0139 --verifier
 # ⭐⭐⭐ `approval.tif` CALCULE -- ce que le pinceau peint, aux quatre bras de controle. Les deux
 # sondes mordent fort (4 echecs chacune) : un masque qui approuve tout, et le bug que j'avais
 # ecrit -- retirer du champ la spire qui BORNE la surface jugee detruit l'information qui
 # detecte un interstice, et fait passer un demi-pas de 2,1 % a 37,6 % d'approbation.
 run "le masque d'approbation"  uv run python "$ROOT/src/excision/le_masque_dapprobation.py" --verifier
+# ⭐⭐⭐ Jusqu'ou le champ porte AU-DELA de ce qu'il connait : UNE feuille (47 um), et pas deux
+# (79 um). Le controle qui porte le fichier est ecrit dans le sens « ca ne change RIEN » :
+# reinjecter la spire predite laisse la serie identique au chiffre pres -- donc le champ est un
+# JUGE et pas un generateur. Si la reinjection ameliorait un jour quoi que ce soit, il tomberait.
+run "extraire la suivante"     uv run python "$ROOT/src/excision/extraire_la_spire_suivante.py" --verifier
 # ⭐⭐⭐ CINQ rouleaux publient leur axe, pas un -- correction de `laxe_nest_pas_une_ligne.py`,
 # qui avait interroge UN serveur et conclu sur le corpus (angle mort de `59`, troisieme fois).
 # Le controle qui porte le fichier vient en PAIRE : les deux axes different de 27 ecarts

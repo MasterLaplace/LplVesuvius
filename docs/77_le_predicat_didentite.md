@@ -277,3 +277,99 @@ indépendante** du même défaut.
 
 **La cause reste inconnue**, et c'est dit plutôt que comblé par une hypothèse. Ce qui est
 établi est le fait, et le fait est que le prédicat doit être **étalonné par rouleau**.
+
+---
+
+## 8. ⭐⭐⭐ Un TROU angulaire — trouvé en regardant, et mon explication réfutée en chemin
+
+> Mesure : `src/excision/le_trou_angulaire.py` (8 contrôles sur `PHerc0172`, 3 sur
+> `PHerc0139`), figure `src/figures/figure_les_spires_vues_a_plat.py`.
+>
+> ⚠ Consigne de l'auteur, appliquée telle quelle : *« si les hypothèses de mesure ne mènent à
+> rien de concluant et que tu es à court d'hypothèse, la solution sera forcément visible
+> visuellement, il faut juste trouver le bon angle de caméra, le bon filtre, et la bonne
+> compréhension de ce que tu recherches. »*
+
+Le §7 laissait la cause inconnue après quatre candidats testés. Le bon angle de caméra est celui
+dans lequel le champ **travaille** : pour une tranche de hauteur, le rayon de chaque spire en
+fonction de l'angle.
+
+![Une tranche dépliée, les deux rouleaux](article/figures/spires_a_plat.png)
+
+*Régénérer : `uv run python src/figures/figure_les_spires_vues_a_plat.py`*
+
+`PHerc0139` (à gauche) : 37 courbes emboîtées, nettes, jamais croisées. `PHerc0172` (à droite) :
+la même chose **plus un faisceau de spires extérieures qui se croisent entre 330° et 360°**.
+Visible en un coup d'œil.
+
+### ⚠⚠ Pourquoi ma mesure du §7 ne le voyait pas : la mauvaise statistique
+
+Le §7 comparait le taux **moyen** de violation d'ordre et concluait « indiscernable ». Il l'est.
+Ce qui diffère est la **concentration** :
+
+| | violation moyenne | pire secteur | part portée par les 6 pires |
+|---|---:|---:|---:|
+| `PHerc0139` | 5,2 % | **×1,42** de la médiane | **11,1 %** |
+| `PHerc0172` | 5,6 % | **×5,18** | **24,3 %** |
+
+(6 secteurs sur 72 en porteraient 8,3 % si la violation était uniforme.)
+
+### ⚠⚠⚠ Et j'ai donné la mauvaise explication avant de la mesurer
+
+J'avais écrit que c'était la **couture** de la spirale — l'angle où une spire finit et où la
+suivante commence, où `w_k` et `w_{k+1}` sont au même rayon par continuité du papyrus. C'était
+une histoire cohérente et **fausse**. Deux mesures la réfutent, et je ne les ai faites que
+parce que l'auteur a écrit : *« ça peut être des déchirures ou bien de la perte ou du collage,
+bref plein de raisons différentes »*.
+
+| ce qui distingue | `PHerc0172` (avec trou) | `PHerc0139` (contrôle) |
+|---|---|---|
+| **densité** — matière mal ordonnée (collage, couture) ou **absente** (déchirure, perte) ? | **3 points par cellule contre 286** · 49 % de cellules vides contre 22 % | **65 points par cellule contre 73** — pas de trou |
+| **quelles spires** — une couture les touche **toutes** au même angle | **7 spires sur 43** à exactement 0 % · corrélation de rang **0,567** | **1 spires sur 37** · corrélation **0,344** |
+
+⭐ La colonne de droite est le contrôle qui rend la gauche lisible : sur `PHerc0139`, les six
+« pires » secteurs ont une densité **normale** (65 contre 73), donc il n'y a rien à y trouver —
+et c'est exactement le rouleau qui sépare sans qu'on écarte quoi que ce soit.
+
+⭐ **Donc : un trou.** De la matière **absente** dans ce que les spires publiées couvrent, dans
+la partie **extérieure** du rouleau — là où un rouleau carbonisé est déchiré, perdu ou écrasé.
+
+⚠ **Laquelle de ces causes n'est pas décidable d'ici**, et le fichier ne tranche pas. La
+densité dit qu'il n'y a pas de matière ; elle ne dit pas pourquoi.
+
+### ⚠⚠ Et le remède n'est pas celui qu'on croit
+
+Exiger plus de points par cellule (8 → 100) aide de façon **monotone et ne suffit jamais** :
++1,195 → +0,959, encore loin de la séparation. Ce qui biaise n'est pas le bruit des cellules
+survivantes, c'est **le trou lui-même** — une pente ajustée sur un tour à travers un trou
+angulaire est biaisée quelle que soit la propreté du reste.
+
+| `PHerc0172` | séparé ? |
+|---|:---:|
+| tout gardé | ❌ |
+| **sans les 6 secteurs du trou** (330–360°) | ✅ **à 16 tranches** |
+| **témoin : sans 6 secteurs SAINS** | ❌ |
+
+### ⚠⚠⚠ Ma première exclusion était fausse aussi — le témoin l'a attrapée
+
+J'avais **étendu l'arc par contiguïté**, ce qui donnait 15 secteurs, et leur exclusion
+restaurait la séparation. Le **témoin négatif à compte égal** a mordu : écarter **autant** de
+secteurs **sains** la restaure aussi.
+
+La raison : retirer un cinquième de la circonférence fait tomber les tranches mal couvertes
+sous le seuil de `_separation` et ne laisse que les bonnes. **L'effet mesuré était celui du
+filtre de couverture, pas celui du trou.** À **six** secteurs, la distinction tient — et c'est
+la seule version publiée.
+
+⚠ Une troisième correction du même genre : mon assertion « le trou touche les spires
+extérieures » comparait les deux moitiés et rendait ×1,96 contre un seuil de 2. **J'ai changé
+l'assertion, pas le seuil** — les faits robustes sont que 7 spires sont à zéro et que le taux
+croît (ρ = 0,567).
+
+### Ce que ça coûte, et ce que ça n'établit pas
+
+- ⚠ **8 % de la circonférence** perdue pour le prédicat, là où un traceur passera quand même.
+- ⚠ **Ce n'est pas forcément la seule cause.** C'en est une, suffisante sur ce rouleau.
+  `PHerc0139` n'a pas de trou détectable et sépare sans rien écarter.
+- ⚠ Le champ **nomme** les secteurs suspects et ne les exclut pas de lui-même : l'exclure ferait
+  de lui le juge et la partie.

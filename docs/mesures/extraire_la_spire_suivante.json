@@ -1,0 +1,298 @@
+{
+  "rouleau": "PHerc0139",
+  "spires": 37,
+  "bord_du_champ": 51,
+  "retirees": 8,
+  "ecart_inter_feuilles_vx": 16.460158085879083,
+  "portee_en_feuilles": 1,
+  "modele": "global",
+  "par_modele": {
+    "global": [
+      {
+        "au_dela": 1,
+        "erreur_vx": 5.0268804272504894,
+        "erreur_feuilles": 0.30539684983724263
+      },
+      {
+        "au_dela": 2,
+        "erreur_vx": 8.44622322728219,
+        "erreur_feuilles": 0.5131313553135358
+      },
+      {
+        "au_dela": 3,
+        "erreur_vx": 13.347311407217376,
+        "erreur_feuilles": 0.8108859791977229
+      },
+      {
+        "au_dela": 4,
+        "erreur_vx": 16.861923523752466,
+        "erreur_feuilles": 1.0244083583995498
+      },
+      {
+        "au_dela": 5,
+        "erreur_vx": 18.97085304516372,
+        "erreur_feuilles": 1.152531643146157
+      },
+      {
+        "au_dela": 6,
+        "erreur_vx": 21.986771412645794,
+        "erreur_feuilles": 1.3357570017208953
+      },
+      {
+        "au_dela": 7,
+        "erreur_vx": 25.862712684940334,
+        "erreur_feuilles": 1.571231123662631
+      },
+      {
+        "au_dela": 8,
+        "erreur_vx": 31.26565068617947,
+        "erreur_feuilles": 1.8994745082674382
+      }
+    ],
+    "2": [
+      {
+        "au_dela": 1,
+        "erreur_vx": 6.171582867014649,
+        "erreur_feuilles": 0.3749406800843034
+      },
+      {
+        "au_dela": 2,
+        "erreur_vx": 12.209787654538104,
+        "erreur_feuilles": 0.7417782739895247
+      },
+      {
+        "au_dela": 3,
+        "erreur_vx": 20.109458341143863,
+        "erreur_feuilles": 1.2217050550927246
+      },
+      {
+        "au_dela": 4,
+        "erreur_vx": 27.58693411275317,
+        "erreur_feuilles": 1.6759823307176847
+      },
+      {
+        "au_dela": 5,
+        "erreur_vx": 32.33739282137958,
+        "erreur_feuilles": 1.9645857987914062
+      },
+      {
+        "au_dela": 6,
+        "erreur_vx": 38.81693976710096,
+        "erreur_feuilles": 2.3582361460064845
+      },
+      {
+        "au_dela": 7,
+        "erreur_vx": 44.834457155203836,
+        "erreur_feuilles": 2.723816923342105
+      },
+      {
+        "au_dela": 8,
+        "erreur_vx": 53.14684292351308,
+        "erreur_feuilles": 3.2288172839060967
+      }
+    ],
+    "4": [
+      {
+        "au_dela": 1,
+        "erreur_vx": 5.411167610751818,
+        "erreur_feuilles": 0.3287433560795492
+      },
+      {
+        "au_dela": 2,
+        "erreur_vx": 9.008175096224477,
+        "erreur_feuilles": 0.5472714811865903
+      },
+      {
+        "au_dela": 3,
+        "erreur_vx": 13.373440219785266,
+        "erreur_feuilles": 0.8124733766231647
+      },
+      {
+        "au_dela": 4,
+        "erreur_vx": 17.41255521924336,
+        "erreur_feuilles": 1.0578607525149666
+      },
+      {
+        "au_dela": 5,
+        "erreur_vx": 20.8006127686308,
+        "erreur_feuilles": 1.2636945927314833
+      },
+      {
+        "au_dela": 6,
+        "erreur_vx": 25.42109574011738,
+        "erreur_feuilles": 1.544401676307456
+      },
+      {
+        "au_dela": 7,
+        "erreur_vx": 27.854564021328542,
+        "erreur_feuilles": 1.69224158577338
+      },
+      {
+        "au_dela": 8,
+        "erreur_vx": 32.767556271465764,
+        "erreur_feuilles": 1.9907194147531637
+      }
+    ],
+    "8": [
+      {
+        "au_dela": 1,
+        "erreur_vx": 5.79618529780123,
+        "erreur_feuilles": 0.3521342424270936
+      },
+      {
+        "au_dela": 2,
+        "erreur_vx": 9.555309038394853,
+        "erreur_feuilles": 0.5805113771411592
+      },
+      {
+        "au_dela": 3,
+        "erreur_vx": 13.4186315132539,
+        "erreur_feuilles": 0.8152188723366841
+      },
+      {
+        "au_dela": 4,
+        "erreur_vx": 16.294317467954215,
+        "erreur_feuilles": 0.9899247250810344
+      },
+      {
+        "au_dela": 5,
+        "erreur_vx": 18.08082376411471,
+        "erreur_feuilles": 1.0984599096667227
+      },
+      {
+        "au_dela": 6,
+        "erreur_vx": 21.42527823791761,
+        "erreur_feuilles": 1.3016447427864029
+      },
+      {
+        "au_dela": 7,
+        "erreur_vx": 24.153686323791362,
+        "erreur_feuilles": 1.4674030588146318
+      },
+      {
+        "au_dela": 8,
+        "erreur_vx": 27.03032343691848,
+        "erreur_feuilles": 1.642166697056657
+      }
+    ]
+  },
+  "reinjection_sans_effet": true,
+  "series": {
+    "sans_reinjection": [
+      {
+        "spire": 52,
+        "au_dela": 1,
+        "cellules": 1647,
+        "erreur_vx": 5.0268804272504894,
+        "erreur_feuilles": 0.30539684983724263
+      },
+      {
+        "spire": 53,
+        "au_dela": 2,
+        "cellules": 1585,
+        "erreur_vx": 8.44622322728219,
+        "erreur_feuilles": 0.5131313553135358
+      },
+      {
+        "spire": 54,
+        "au_dela": 3,
+        "cellules": 1605,
+        "erreur_vx": 13.347311407217376,
+        "erreur_feuilles": 0.8108859791977229
+      },
+      {
+        "spire": 55,
+        "au_dela": 4,
+        "cellules": 1603,
+        "erreur_vx": 16.861923523752466,
+        "erreur_feuilles": 1.0244083583995498
+      },
+      {
+        "spire": 56,
+        "au_dela": 5,
+        "cellules": 1535,
+        "erreur_vx": 18.97085304516372,
+        "erreur_feuilles": 1.152531643146157
+      },
+      {
+        "spire": 57,
+        "au_dela": 6,
+        "cellules": 1591,
+        "erreur_vx": 21.986771412645794,
+        "erreur_feuilles": 1.3357570017208953
+      },
+      {
+        "spire": 58,
+        "au_dela": 7,
+        "cellules": 1583,
+        "erreur_vx": 25.862712684940334,
+        "erreur_feuilles": 1.571231123662631
+      },
+      {
+        "spire": 59,
+        "au_dela": 8,
+        "cellules": 1546,
+        "erreur_vx": 31.26565068617947,
+        "erreur_feuilles": 1.8994745082674382
+      }
+    ],
+    "avec_reinjection": [
+      {
+        "spire": 52,
+        "au_dela": 1,
+        "cellules": 1647,
+        "erreur_vx": 5.0268804272504894,
+        "erreur_feuilles": 0.30539684983724263
+      },
+      {
+        "spire": 53,
+        "au_dela": 2,
+        "cellules": 1585,
+        "erreur_vx": 8.44622322728219,
+        "erreur_feuilles": 0.5131313553135358
+      },
+      {
+        "spire": 54,
+        "au_dela": 3,
+        "cellules": 1605,
+        "erreur_vx": 13.347311407217376,
+        "erreur_feuilles": 0.8108859791977229
+      },
+      {
+        "spire": 55,
+        "au_dela": 4,
+        "cellules": 1603,
+        "erreur_vx": 16.861923523752694,
+        "erreur_feuilles": 1.0244083583995636
+      },
+      {
+        "spire": 56,
+        "au_dela": 5,
+        "cellules": 1535,
+        "erreur_vx": 18.97085304516395,
+        "erreur_feuilles": 1.1525316431461707
+      },
+      {
+        "spire": 57,
+        "au_dela": 6,
+        "cellules": 1591,
+        "erreur_vx": 21.98677141264602,
+        "erreur_feuilles": 1.335757001720909
+      },
+      {
+        "spire": 58,
+        "au_dela": 7,
+        "cellules": 1583,
+        "erreur_vx": 25.86271268494056,
+        "erreur_feuilles": 1.5712311236626448
+      },
+      {
+        "spire": 59,
+        "au_dela": 8,
+        "cellules": 1546,
+        "erreur_vx": 31.26565068617947,
+        "erreur_feuilles": 1.8994745082674382
+      }
+    ]
+  }
+}

@@ -85,9 +85,17 @@ asserté dans les **deux** sens.
 
 ⚠⚠ **Et une tranche isolée ne suffit JAMAIS**, sur aucun des deux rouleaux. La séparation du
 §2 est celle de la spire entière. C'est la mesure de ce que `42` disait qualitativement — *des
-régions, pas des points* — et elle en donne la taille : **2 tranches** sur `PHerc0139`, aucune
-taille suffisante sur `PHerc0172`. **La cause reste inconnue** (couverture angulaire, spires
-par cellule et monotonie écartées par la mesure).
+régions, pas des points* — et elle en donne la taille : **2 tranches** sur `PHerc0139`.
+
+⭐⭐⭐ **La cause est TROUVÉE, en regardant** (`77` §8, consigne de l'auteur) : un **trou
+angulaire** entre 330° et 360° dans les spires extérieures de `PHerc0172` — densité **3 points
+par cellule contre 286**, donc de la matière **absente**. L'écarter restaure la séparation
+(16 tranches) ; écarter autant de secteurs **sains** ne restaure rien. Coût : **8 % de la
+circonférence**.
+
+⚠⚠ **Et mes deux premières explications étaient fausses**, toutes deux attrapées par une
+mesure ou un témoin : « couture » (réfutée par la densité et par le fait que 7 spires sont
+intactes) et « étendre l'arc par contiguïté » (le témoin à compte égal a mordu).
 
 ⭐⭐⭐ **Validation croisée** : les deux seules positions qui n'avancent pas sont **exactement**
 les deux défauts que `76` avait trouvés par une méthode qui ne partage rien avec celle-ci.

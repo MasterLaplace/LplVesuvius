@@ -1917,6 +1917,43 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             out.append((f"balayage TRANCHES_Z={pal['tranches_z']} : vraie p90",
                         [f"**{pal['vraie_p90']:+.3f}**", f"{pal['vraie_p90']:+.3f}",
                          f"{pal['vraie_p90']:+.3f}".replace(".", ",")], bal.name))
+    # ⭐⭐⭐ LE TROU ANGULAIRE (`77` §8) : la cause trouvee en regardant. Gardee parce que le couple
+    # (concentration, temoin a compte egal) est ce qui distingue « ecarter la couture » de
+    # « ecarter six secteurs », et que j'ai deja publie la mauvaise version.
+    for nom, fic in (("0172", "le_trou_angulaire.json"),
+                     ("0139", "le_trou_angulaire_PHerc0139.json")):
+        cou = _source(racine, fic)
+        if not cou.exists():
+            continue
+        d = json.loads(cou.read_text())
+        out.append((f"concentration de la violation, {nom}",
+                    [f"**×{d['concentration']:.2f}**", f"×{d['concentration']:.2f}",
+                     f"×{d['concentration']:.2f}".replace(".", ",")], cou.name))
+        out.append((f"part portee par les pires secteurs, {nom}",
+                    [f"**{d['part_des_pires'] * 100:.1f} %**",
+                     f"{d['part_des_pires'] * 100:.1f} %",
+                     f"{d['part_des_pires'] * 100:.1f} %".replace(".", ",")], cou.name))
+        # ⚠⚠ Les DEUX chiffres qui ont refute mon explication par une « couture ». Gardes parce
+        # qu'une prose qui les perdrait pourrait reraconter l'histoire refutee sans que rien ne
+        # l'attrape -- et elle est plausible, c'est bien le probleme.
+        dn = d.get("densite") or {}
+        if dn:
+            out.append((f"densite dans le trou, {nom}",
+                        [f"**{dn['median_dedans']:.0f} points/cellule contre "
+                         f"{dn['median_dehors']:.0f}**",
+                         f"{dn['median_dedans']:.0f} points par cellule contre "
+                         f"{dn['median_dehors']:.0f}"], cou.name))
+        sp = d.get("par_spire") or {}
+        if sp:
+            out.append((f"spires intactes dans le trou, {nom}",
+                        [f"**{sp['spires_intactes']} spires sur "
+                         f"{sp['spires_mesurees']}**",
+                         f"{sp['spires_intactes']} spires sur {sp['spires_mesurees']}"],
+                       cou.name))
+            out.append((f"correlation du trou avec l'indice, {nom}",
+                        [f"**{sp['correlation_avec_lindice']:.3f}**",
+                         f"{sp['correlation_avec_lindice']:.3f}".replace(".", ",")],
+                       cou.name))
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():
         d = json.loads(bdf.read_text())

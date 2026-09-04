@@ -71,7 +71,9 @@ SEPARATION_ATTENDUE = {"PHerc0139": 2, "PHerc0172": None}
 ⚠⚠⚠ Écrit ici parce que c'est un FAIT MESURÉ sur chaque rouleau, pas un réglage. `77` a
 d'abord conclu « les deux populations ne se recouvrent pas » — c'était vrai de `PHerc0139` et
 **faux** de `PHerc0172`, où elles se recouvrent à tout niveau d'agrégation testé. Un prédicat
-qui marche ici et pas là doit dire lequel.
+qui marche ici et pas là doit dire lequel. ⚠ La CAUSE est trouvée et mesurée ailleurs
+(`la_couture.py`, `77` §8) : une couture angulaire. La retirer restaure la séparation, mais
+au prix de 8 % de la circonférence.
 
 ⚠ Et sur les DEUX rouleaux, une tranche isolée ne suffit jamais. C'est la mesure de ce que
 `42` disait qualitativement — *le prédicat doit désigner des régions, pas des points* — et elle
@@ -247,6 +249,59 @@ def _temoin_en_travers(rayons: dict[int, dict], depart: int, saut: int) -> dict:
     return r
 
 
+FACTEUR_SECTEUR_DOUTEUX = 3.0
+"""Un secteur angulaire est écarté quand son taux de violation d'ordre dépasse ce multiple de
+la médiane des secteurs. ⚠ Le multiple est posé **entre les deux profils mesurés** et non
+réglé : sur `PHerc0139` le pire secteur est à ×1,40 de la moyenne (profil plat, rien à
+écarter), sur `PHerc0172` à ×4,64 (défaut localisé). Tout seuil entre 2 et 4 donne le même
+partage, ce qui est la propriété qu'on veut."""
+
+
+def secteurs_douteux(rayons: dict[int, dict]) -> list[int]:
+    """
+    @brief Les secteurs angulaires où l'ordre des spires est violé bien plus qu'ailleurs.
+
+    ⚠⚠⚠ CE FILTRE VIENT D'UNE IMAGE, PAS D'UNE MESURE. `77` §7 avait testé quatre causes
+    candidates au fait que `PHerc0172` ne sépare pas, dont « la monotonie des rayons », écartée
+    parce que le taux MOYEN de violation est le même sur les deux rouleaux (5,2 % contre
+    5,6 %). La moyenne était la mauvaise statistique : ce qui diffère est la **concentration**.
+    Dépliée en (angle, rayon), une tranche de `PHerc0172` montre un faisceau de spires
+    extérieures qui se croisent entre 330° et 360° — visible en un coup d'œil, invisible à
+    toute moyenne.
+
+    ⭐ Le champ suppose que le rayon croît avec l'indice à angle fixe. C'est faux près de la
+    **couture** de la spirale, là où une spire finit et où la suivante commence : à cet
+    angle-là, `w_k` et `w_{k+1}` sont au même rayon **par définition**, puisque la spirale est
+    continue. Un secteur de couture n'est donc pas un défaut de traçage, c'est un endroit où le
+    modèle du champ ne s'applique pas.
+    """
+    violations: dict[int, list[float]] = {}
+    for cellule in {c for v in rayons.values() for c in v}:
+        presentes = sorted(k for k in rayons if cellule in rayons[k])
+        if len(presentes) < 3:
+            continue
+        suite = [rayons[k][cellule] for k in presentes]
+        inversions = sum(1 for i in range(len(suite) - 1) if suite[i + 1] <= suite[i])
+        violations.setdefault(cellule[1], []).append(inversions / (len(suite) - 1))
+    if not violations:
+        return []
+    taux = {s: float(np.mean(v)) for s, v in violations.items()}
+    mediane = float(np.median(list(taux.values())))
+    if mediane <= 0:
+        return []
+    # ⚠⚠⚠ ON RAPPORTE, ON N'EXCLUT PAS. J'avais d'abord etendu l'arc par contiguite et
+    # exclu les 15 secteurs obtenus, ce qui restaurait la separation sur `PHerc0172`. Le
+    # temoin negatif a mordu : ecarter AUTANT de secteurs SAINS la restaure aussi, parce que
+    # retirer un cinquieme de la circonference fait tomber les tranches mal couvertes sous le
+    # seuil de `_separation` et ne laisse que les bonnes. L'effet mesure etait celui du filtre
+    # de couverture, pas celui de la couture.
+    #
+    # A six secteurs, en revanche, la distinction TIENT (`la_couture.py`). Ce fichier se
+    # contente donc de NOMMER les secteurs suspects ; ce qu'ils coutent est mesure ailleurs,
+    # avec son temoin a compte egal.
+    return sorted(s for s, t in taux.items() if t > FACTEUR_SECTEUR_DOUTEUX * mediane)
+
+
 def _avances_par_tranche(cible: dict, autres: dict[int, dict]) -> dict[int, float]:
     """
     @brief L'avance d'indice, tranche de hauteur par tranche de hauteur.
@@ -323,6 +378,10 @@ def mesurer(rouleau: str = "PHerc0139") -> dict:
     bords_z, bords_t, centres = _grille(nuages)
     rayons = {k: _rayons(n, bords_z, bords_t, centres) for k, n in nuages.items()}
     rayons = {k: v for k, v in rayons.items() if len(v) > 50}
+
+    # ⚠ Les secteurs suspects sont NOMMES et pas exclus — voir `secteurs_douteux`. Les
+    # exclure ici ferait de ce fichier le juge et la partie.
+    ecartes = secteurs_douteux(rayons)
     indices = sorted(rayons)
 
     # ⚠⚠ VALIDATION A SPIRE EXCLUE. La spire jugee est retiree du champ qui la juge, sinon la
@@ -368,10 +427,10 @@ def mesurer(rouleau: str = "PHerc0139") -> dict:
     separation = _separation(rayons, indices)
 
     # ⚠ Un diagnostic, pas une gate : de combien l'axe se deplace d'une tranche a la suivante,
-    # en feuilles. C'est la difference la plus nette entre les deux rouleaux mesures (2,0
-    # contre 3,5 feuilles en mediane, 13,6 contre 106,6 au pire) -- et pourtant affiner les
-    # tranches ne restaure PAS la separation sur `PHerc0172`. Garde parce qu'un futur lecteur
-    # refera ce raisonnement, et doit trouver la piste ET son refus.
+    # en feuilles. C'est le plus gros ecart entre les deux rouleaux mesures (2,0 contre 3,5
+    # feuilles en mediane, 13,6 contre 106,6 au pire) -- et pourtant affiner les tranches ne
+    # restaure PAS la separation (`--balayer-tranches`). Garde parce qu'un futur lecteur refera
+    # ce raisonnement, et doit trouver la piste ET son refus.
     ordonnes = [centres[i] for i in sorted(centres)]
     pas_axe = [float(np.hypot(b_[0] - a_[0], b_[1] - a_[1]))
                for a_, b_ in zip(ordonnes, ordonnes[1:])]
@@ -398,6 +457,7 @@ def mesurer(rouleau: str = "PHerc0139") -> dict:
         avance_par_tour_mediane=float(np.median(avances)) if avances else None,
         avance_p10=float(np.percentile(avances, 10)) if avances else None,
         avance_p90=float(np.percentile(avances, 90)) if avances else None,
+        secteurs_ecartes=ecartes,
         separation=separation,
         derive_de_l_axe=derive,
         temoins_en_travers=temoins,
@@ -509,6 +569,12 @@ def _verifier(r: dict) -> int:
     # sur aucun des deux rouleaux ; la taille de region necessaire, elle, depend du rouleau et
     # peut ne pas exister. Ces trois controles echouent si un rouleau change de comportement,
     # ce qui est exactement ce qu'on veut savoir.
+    print("la couture, trouvée EN REGARDANT après quatre hypothèses mesurées et rejetées")
+    ec = r["secteurs_ecartes"]
+    v("le rouleau au profil plat n'a rien à écarter, celui à défaut localisé en a",
+      (r["rouleau"] == "PHerc0139" and not ec) or (r["rouleau"] != "PHerc0139" and ec)
+      if r["rouleau"] in SEPARATION_ATTENDUE else True,
+      f"{len(ec)} secteur(s) écarté(s)" + (f" : {ec[0]}–{ec[-1]}" if ec else ""))
     print("le prédicat déclare son échelle — une tranche isolée ne suffit jamais")
     sep = r["separation"]
     attendu = SEPARATION_ATTENDUE.get(r["rouleau"], "?")
