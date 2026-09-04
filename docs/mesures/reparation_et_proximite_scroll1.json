@@ -1,0 +1,32 @@
+{
+  "corpus": "Scroll 1 (PHercParis4)",
+  "eligibles": 34,
+  "span_minimum": 1.0,
+  "paires": [
+    {
+      "trace": "20260623141924-w010-027",
+      "corpus": "Scroll 1 (PHercParis4)",
+      "span_tours": 18.033,
+      "statut": "clean",
+      "quads_retires": 528,
+      "aire_gardee_pct": 99.97097880056849,
+      "aire_excisee_fraction": 0.00029021199431504113,
+      "fbt_avant": 0.0004037141703673799,
+      "fbt_apres": 0.002011263073209976,
+      "variation_pct": 398.18986323411104
+    },
+    {
+      "trace": "20260623142658-w028-037",
+      "corpus": "Scroll 1 (PHercParis4)",
+      "span_tours": 9.756,
+      "statut": "clean",
+      "quads_retires": 269,
+      "aire_gardee_pct": 99.98583812858686,
+      "aire_excisee_fraction": 0.00014161871413143198,
+      "fbt_avant": 0.0006378228978420325,
+      "fbt_apres": 0.0005287648054145516,
+      "variation_pct": -17.098491257755217
+    }
+  ],
+  "sautes": []
+}

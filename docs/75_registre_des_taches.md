@@ -411,12 +411,26 @@ conclusion sur la **méthode de validation**, pas sur le prix.
 
 ## D. Dette
 
-### D1 ⚠⚠ — re-fonder l'arc d'excision (`03`, `04`, `05`, `07`)
+### D1 ⚠⚠ — re-fonder l'arc d'excision (`03`, `04`, `05`, `07`) — **débloqué**
 
 La conclusion de tête de `07` est **détruite par notre propre mesure** : la réparation fait
 passer la proximité de 1,464 → 0,735 % et 3,483 → 2,707 % (−50 % et −22 %), contre son
-« 0,37 → 0,38 %, ça ne bouge pas ». Et ce n'est **pas proportionnel** à ce qui est retiré.
-Tant que ce n'est pas re-fondé, l'arc ne peut pas devenir une section d'article.
+« 0,37 → 0,38 %, ça ne bouge pas ».
+
+⭐⭐⭐ **Débloqué le 2026-09-04** (`07` §8), et par deux trouvailles :
+
+1. ⚠⚠⚠ **La mesure qui a renversé `07` n'avait AUCUN producteur** dans l'arbre — faite au
+   terminal. Le pire cas de `D3` : une mesure qui renverse une conclusion et qu'on ne peut pas
+   relancer. `src/excision/reparation_et_proximite.py` existe désormais.
+2. ⭐⭐ **Le blocage venait d'une généralisation depuis le mauvais rouleau.** `07` §7 conclut que
+   le cas discriminant n'est pas montable ; c'est vrai de `PHerc0172` (10 traces éligibles) et
+   **faux de Scroll 1**, qui en a **34**, curatées, span médian 2,70 tours.
+
+**Et à provenance égale, le SIGNE change** : `w010-027` **+398 %**, `w028-037` **−17 %**. Ce
+n'est donc pas la proportionnalité qui manque — c'est le signe.
+
+⚠ **n = 2** sur 34 possibles. La suite est de faire tourner l'outil sur le reste ; le contrôle
+est écrit pour **tomber** si elles allaient toutes dans le même sens.
 
 ### D2 ⚠ — le contrôle P1 bis de `71`
 

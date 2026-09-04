@@ -480,3 +480,68 @@ uv run python src/excision/baseline_sweep.py <traces> <sortie.jsonl> --search-ra
 uv run python src/excision/variant_correlate.py <sortie.jsonl> \
     data/repos/windcheck/results/index.json --corpus "Scroll 1"
 ```
+
+---
+
+## 8. ⭐⭐⭐ La population « non montable » existe — et le SIGNE n'est pas stable
+
+> 2026-09-04. Mesure : `src/excision/reparation_et_proximite.py` (6 contrôles),
+> `docs/mesures/reparation_et_proximite_scroll1.json`.
+
+### ⚠⚠⚠ D'abord : la mesure qui a déstabilisé ce document n'avait AUCUN producteur
+
+`reparation_deplace_la_proximite.json` porte le résultat qui a renversé la conclusion centrale
+de ce document, et **rien dans `src/` ne le produisait** — il a été fait au terminal. Une mesure
+qui renverse une conclusion et qu'on ne peut pas relancer est le pire cas de la dette `D3`,
+parce qu'elle a l'air solide. Le script existe désormais, et c'est lui qui a permis la suite.
+
+### ⭐⭐ Le blocage venait d'une généralisation depuis le mauvais rouleau
+
+Le §7 conclut que le cas discriminant *« n'est pas montable sur ce corpus »* : il faudrait une
+trace **peu atteinte** ET dépassant un tour, or sur `PHerc0172` toutes les traces longues sont
+les `auto_grown`. **C'est vrai de `PHerc0172`.** Le recensement de `windcheck` dit autre chose
+des autres :
+
+| corpus | traces | sales | span médian |
+|---|---:|---:|---:|
+| **Scroll 1 (PHercParis4)** | 55 | **48** | **2,70 tours** |
+| `PHerc0814` | 13 | 11 | **3,10 tours** |
+| `PHerc0172` *(celui du §7)* | 53 | 52 | 0,92 tour |
+
+**34 traces de Scroll 1 sont éligibles** (sales **et** au-dessus de la coupure d'un tour), contre
+10 sur le rouleau du §7. La population déclarée absente existe, curatée, et elle est **locale**.
+
+### ⚠⚠ Et le confond de l'en-tête est plus large qu'il ne le dit
+
+Sa table compare deux `auto_grown` de `PHerc0172` (qui chutent) à une trace **curatée de
+`PHercParis4`** (qui ne bouge pas) — donc à travers **deux rouleaux ET deux provenances**.
+
+### ⭐⭐⭐ Mesuré à provenance égale : le signe change
+
+| trace | tours | quads retirés | avant | après | Δ |
+|---|---:|---:|---:|---:|---:|
+| `w010-027` | 18,03 | 528 | 0,040 % | 0,201 % | **+398,2 %** |
+| `w028-037` | 9,76 | 269 | 0,064 % | 0,053 % | **−17,1 %** |
+
+Même rouleau, même provenance, même réparation, et **l'une monte d'un facteur quatre pendant
+que l'autre baisse**. Ce n'est donc pas la *proportionnalité* qui manque, comme l'en-tête le
+conclut — **c'est le signe lui-même qui n'est pas stable**.
+
+⚠ **n = 2.** Le contrôle est écrit pour **tomber** si un run futur les voyait toutes aller dans
+le même sens : ce serait le résultat, et l'outil existe pour l'obtenir sur les 34.
+
+### ⚠⚠ Deux défauts à moi, attrapés en chemin
+
+1. **Le maillage n'est pas à la racine d'une trace** mais sous `<trace>/mesh/<…>.tifxyz/` — la
+   **même** disposition que les segments publiés de `PHerc0172`, résolue ici pour la troisième
+   fois. Mon premier appel passait la racine, `proximity.py` répondait « plan absent », et le
+   résultat était une paire manquante **en silence**. Chaque saut est désormais **rapporté**.
+2. ⚠⚠⚠ **Deux noms de clef faux dans le certificat** : j'avais écrit `removed_quads` et
+   `retained_area_pct`, il porte `n_removed_quads` et `retained_area_fraction`. Un `.get()` sur
+   une clef absente rend `None`, que l'affichage montrait comme **0 quad retiré** — donc « la
+   réparation n'a rien fait » alors qu'elle avait retiré 528 quads. Les clefs sont maintenant
+   **vérifiées**, et leur absence est une erreur.
+
+⚠ Et un contrôle que j'ai fait avant de conclure : `proximity.py` prend un `--sample` et un
+`--seed`, donc l'instabilité pouvait être du bruit d'échantillonnage. **Trois runs sur le même
+maillage rendent `0,000638` à l'identique** — il est déterministe, et les écarts sont réels.

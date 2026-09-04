@@ -1252,6 +1252,12 @@ run "l'ombilic publie"         uv run python "$ROOT/src/excision/lombilic_publie
 # feuille, ce controle tomberait -- et ce serait une excellente nouvelle a lire tout de suite,
 # parce que A2 bis serait resolu par trois lignes de trigonometrie.
 run "l'axe ne suffit pas"      uv run python "$ROOT/src/excision/laxe_ne_suffit_pas.py" --verifier
+# ⭐⭐⭐ La mesure qui a deja destabilise `07` -- et qui n'avait AUCUN producteur dans l'arbre.
+# Elle relit son JSON (une paire coute plusieurs minutes ; la refaire demande `--json`). Deux
+# controles portent le fichier : la population que `07` declarait absente existe sur Scroll 1
+# (34 traces contre 10), et le SIGNE de la variation n'est pas stable a provenance egale --
+# ce dernier ecrit pour TOMBER si un run futur les voyait toutes aller dans le meme sens.
+run "reparation et proximite"  uv run python "$ROOT/src/excision/reparation_et_proximite.py" --verifier
 # ⭐⭐ Le garde-fou de l'angle mort qui a mordu TROIS fois : interroger une vue du corpus et
 # conclure sur le corpus. Sa sonde la plus utile reduit la comparaison a une seule vue --
 # la faute exacte du `07` -- et fait tomber trois controles.

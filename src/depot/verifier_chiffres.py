@@ -2047,6 +2047,22 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                         [f"**{refuses} refusés sur {len(m)}**",
                          f"{refuses} refusés sur {len(m)}",
                          f"{refuses} sur {len(m)}"], aep.name))
+    # ⭐⭐⭐ La reparation contre la proximite, sur la population que `07` croyait absente.
+    # Garde parce que le SIGNE est le resultat : publier « +398 % » sans « -17 % » ferait de
+    # l'instabilite une tendance.
+    rep = _source(racine, "reparation_et_proximite_scroll1.json")
+    if rep.exists():
+        d = json.loads(rep.read_text())
+        out.append(("traces eligibles de Scroll 1",
+                    [f"**{d['eligibles']} traces**", f"{d['eligibles']} traces"], rep.name))
+        for x in d.get("paires", []):
+            if x.get("variation_pct") is None:
+                continue
+            court = x["trace"].split("-", 1)[-1]
+            out.append((f"variation de proximite, {court}",
+                        [f"**{x['variation_pct']:+.1f} %**",
+                         f"{x['variation_pct']:+.1f} %",
+                         f"{x['variation_pct']:+.1f} %".replace(".", ",")], rep.name))
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():
         d = json.loads(bdf.read_text())
