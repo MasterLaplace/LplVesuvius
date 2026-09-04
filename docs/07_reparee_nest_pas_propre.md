@@ -460,10 +460,31 @@ celle-ci ne peut pas être lue :
 - si **18 voxels** ont été appliqués tels quels, le rayon physique n'était que de **43 µm**,
   soit trois fois moins que sur les deux autres rouleaux — et la comparaison n'est plus appariée.
 
-L'artefact `docs/mesures/sweep_PHerc1667.jsonl` **n'enregistre ni le zarr ni la taille de voxel**,
-donc rien ici ne tranche. ✅ **À rejouer en enregistrant la résolution**, et c'est aussi
-une leçon d'outillage : *un artefact de mesure doit porter la résolution sur laquelle il a
+~~L'artefact `docs/mesures/sweep_PHerc1667.jsonl` **n'enregistre ni le zarr ni la taille de
+voxel**, donc rien ici ne tranche. ✅ **À rejouer en enregistrant la résolution**~~ — et c'est
+aussi une leçon d'outillage : *un artefact de mesure doit porter la résolution sur laquelle il a
 été pris.*
+
+> ⚠⚠⚠ **2026-09-04 — L'ARTEFACT L'ENREGISTRAIT DÉJÀ, et il tranche.** Le fichier date du
+> **2026-08-26**, ce paragraphe du **2026-09-03**, et il déclare son échelle :
+> `voxel_um 7,91 · search_radius_vox 80 · search_radius_um 632,8 · variante "7.91um"`. Son
+> jumeau `sweep_1667_pas.jsonl` déclare `18 vox = 142,4 µm`. **Les deux branches ci-dessus
+> supposent 2,399 µm par voxel, donc les deux tombent** : à 7,91 µm, 18 voxels font **142,4 µm**,
+> apparié aux **142,8** de Scroll 1 (18,05 × 7,91) et aux **~140** de PHerc0139 (15 × 9,362) —
+> les trois à moins de 2 µm l'un de l'autre. **La ligne `PHerc1667` du tableau est lisible**, et
+> sa conclusion tient : deux rouleaux sur trois s'améliorent, le troisième se dégrade.
+>
+> ⚠ Ce qui reste vrai de la phrase barrée, c'est la moitié « ni le zarr » — l'artefact écrit une
+> **racine de traces** (`data/traces/PHerc1667`), pas un chemin de volume. Mais c'est la taille
+> de voxel qui manquait pour trancher, et elle est là. Vérifié par
+> `src/excision/le_rayon_des_mesures.py`, qui **assure** que le rayon fin y vaut bien un pas de
+> feuille — le contrôle tomberait si une régénération perdait la déclaration.
+>
+> ⭐ **Et la leçon d'outillage, elle, n'avait jamais été appliquée à `proximity.py`.**
+> `baseline_sweep.py` écrit son bloc `echelle` depuis août ; `proximity.py` n'écrivait rien, et
+> c'est exactement ce qui a coûté toute l'archéologie du §11 — il a fallu **retrouver** le rayon
+> dans les distances au lieu de le lire. Les deux écrivent désormais le **même** bloc, sous le
+> même nom et avec les mêmes clefs communes.
 
 > **Sur Scroll 1, le rayon issu de la physique (+0,840) bat le meilleur rayon du
 > balayage (+0,829 à 16 voxels).** Un paramètre choisi sans regarder la réponse fait

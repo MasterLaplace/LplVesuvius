@@ -52,6 +52,7 @@ def compte_mesure(chemin: Path) -> dict[str, int]:
     out: dict[str, int] = {}
     if not chemin.is_file():
         return out
+    vus: set[str] = set()
     for ligne in chemin.read_text(errors="replace").splitlines():
         ligne = ligne.strip()
         if not ligne.startswith("{"):
@@ -61,6 +62,17 @@ def compte_mesure(chemin: Path) -> dict[str, int]:
         except json.JSONDecodeError:
             continue
         if "label" in r and isinstance(r.get("measured"), int):
+            # ⚠⚠⚠ UN LABEL EN DOUBLE EST UNE CORRUPTION SILENCIEUSE. Ce lecteur indexe par nom
+            # de trace, donc un doublon s'ecrase sans bruit et le dernier gagne. Le cas est
+            # arrive le 2026-09-04 : deux regenerations lancees sans attendre la premiere ont
+            # ecrit dans le meme fichier, qui portait 49 enregistrements pour 44 traces. Le
+            # compte etait faux et rien ne le disait -- le piege des ecrivains concurrents, deja
+            # au registre de ce depot pour `validate.sh`.
+            if r["label"] in vus:
+                raise SystemExit(
+                    f"label en double dans {chemin.name} : {r['label']}\n"
+                    "  deux écritures ont été mêlées — régénérer le fichier, une seule fois.")
+            vus.add(r["label"])
             out[r["label"]] = r["measured"]
     return out
 
@@ -69,6 +81,43 @@ PAS_ENTRE_FEUILLES_UM = 142.8
 """Le pas inter-feuilles, **mesuré ailleurs et avant** (`11` §3, cv 1,8 %). C'est lui qui fixe le
 rayon corrigé, et c'est ce qui rend ce choix non ajustable — il ne vient pas de la corrélation
 qu'il améliore."""
+
+
+def rayon_declare(chemin: Path) -> float | None:
+    """
+    @brief Le rayon que le fichier DÉCLARE, en micromètres, ou None s'il n'en déclare aucun.
+
+    ⚠⚠ `baseline_sweep.py` écrit son bloc `echelle` depuis août ; `proximity.py` ne le faisait
+    **pas**, et c'est ce qui a coûté toute l'archéologie du 2026-09-04. Depuis, les deux écrivent
+    le **même** bloc, sous le même nom et avec les mêmes clefs communes. Un fichier qui le déclare
+    n'a plus besoin d'être daté par comparaison : il **le dit**. La comparaison reste pour tous
+    ceux d'avant, qui sont la majorité.
+
+    ⚠ `instrument` est accepté en second : c'est le nom que j'avais donné au bloc pendant une
+    heure, et un fichier écrit dans cet intervalle ne doit pas devenir illisible.
+
+    ⚠ Les micromètres, pas les voxels : 80 voxels valent 749 µm à 9,362 µm et 192 µm à 2,403, et
+    c'est exactement la confusion qui a rendu la ligne `PHerc1667` de `07` §9 illisible.
+
+    ⚠ Un fichier dont les enregistrements ne s'accordent pas sur leur rayon rend None plutôt que
+    le premier trouvé : ce serait un fichier mélangé, et le déclarer d'un seul rayon serait pire
+    que de ne rien déclarer.
+    """
+    if not chemin.is_file():
+        return None
+    vus = set()
+    for ligne in chemin.read_text(errors="replace").splitlines():
+        ligne = ligne.strip()
+        if not ligne.startswith("{"):
+            continue
+        try:
+            r = json.loads(ligne)
+        except json.JSONDecodeError:
+            continue
+        inst = r.get("echelle") or r.get("instrument") or {}
+        if isinstance(inst.get("search_radius_um"), (int, float)):
+            vus.add(round(float(inst["search_radius_um"]), 6))
+    return vus.pop() if len(vus) == 1 else None
 
 
 def borne_du_rayon(chemin: Path) -> float | None:
@@ -137,7 +186,9 @@ def comparer(reference: Path = REFERENCE, dossier: Path = MESURES) -> dict:
     return dict(reference=reference.name, traces_reference=len(ref), fichiers=lignes,
                 pas_entre_feuilles_um=PAS_ENTRE_FEUILLES_UM,
                 borne_du_rayon={f.name: borne_du_rayon(f)
-                                for f in sorted(dossier.glob("proximity_*.jsonl"))})
+                                for f in sorted(dossier.glob("proximity_*.jsonl"))},
+                rayon_declare={f.name: rayon_declare(f)
+                               for f in sorted(dossier.glob("*.jsonl"))})
 
 
 def _verifier(r: dict | None = None) -> int:
@@ -208,6 +259,40 @@ def _verifier(r: dict | None = None) -> int:
               f"{ba:.1f} µm, soit {ba / pas:.1f} pas de {pas:.1f} µm")
             v("... et le corrigé ne dépasse pas un seul pas",
               bc / pas <= 1.0, f"{bc:.1f} µm, soit {bc / pas:.2f} pas")
+        # ⚠⚠ ET LA SORTIE DE CETTE DETTE : un fichier neuf DECLARE son instrument, donc n'a plus
+        # besoin d'etre date par comparaison. Le controle mesure combien le declarent -- il
+        # commence a un et doit monter a mesure que les fichiers sont regeneres. S'il retombait
+        # a zero, c'est que `proximity.py` a cesse d'ecrire son instrument.
+        declares = {k: v for k, v in (r.get("rayon_declare") or {}).items() if v}
+        v("au moins un fichier DÉCLARE son rayon au lieu de le laisser deviner",
+          bool(declares),
+          ", ".join(f"{k} : {v:.1f} µm" for k, v in sorted(declares.items())) or "aucun")
+        # ⚠ Et quand les deux existent, ils doivent s'accorder : le minorant lu dans les
+        # distances ne peut pas depasser le rayon declare, sinon l'un des deux est faux.
+        for nom, decl in declares.items():
+            borne = (r.get("borne_du_rayon") or {}).get(nom)
+            if borne:
+                v(f"... et le minorant lu dans {nom} ne dépasse pas ce rayon",
+                  borne <= decl + 1e-6, f"minorant {borne:.1f} µm, déclaré {decl:.1f} µm")
+        # ⚠⚠⚠ LA QUESTION QUE `07` §9 DECLARE INSOLUBLE, ET QUE L'ARTEFACT TRANCHE. Le §9 écrit
+        # que `sweep_PHerc1667.jsonl` « n'enregistre ni le zarr ni la taille de voxel, donc rien
+        # ici ne tranche », et laisse sa ligne du tableau illisible. Le fichier date du
+        # 2026-08-26, le §9 du 2026-09-03, et il DECLARE sa taille de voxel : 7,91 µm. Les deux
+        # branches du §9 supposent 2,399 µm/voxel, donc les deux tombent. A 7,91, 18 voxels font
+        # 142,4 µm -- apparie aux 142,8 de Scroll 1 et aux ~140 de PHerc0139 -- et la ligne est
+        # lisible. Ecrit comme un controle pour qu'une regeneration qui perdrait la declaration
+        # le fasse tomber.
+        bal = (r.get("rayon_declare") or {})
+        gros_1667 = bal.get("sweep_PHerc1667.jsonl")
+        fin_1667 = bal.get("sweep_1667_pas.jsonl")
+        if gros_1667 and fin_1667:
+            v("les deux balayages de PHerc1667 déclarent leur résolution",
+              True, f"{gros_1667:.1f} µm et {fin_1667:.1f} µm")
+            # ⚠ Le rayon FIN de 1667 doit tomber sur le pas de feuille, sinon la comparaison de
+            # `07` §9 n'etait pas appariee et sa ligne PHerc1667 reste illisible.
+            v("... et le rayon fin y vaut bien un pas de feuille, donc la comparaison est appariée",
+              abs(fin_1667 - pas) < 2.0,
+              f"{fin_1667:.1f} µm contre un pas de {pas:.1f} µm")
         autres = [x["fichier"] for x in r["fichiers"] if x["verdict"] == "AUTRE rayon"]
         v("... et il n'est pas le seul", len(autres) >= 2,
           ", ".join(autres[:6]) + (" …" if len(autres) > 6 else ""))

@@ -170,5 +170,30 @@
   "borne_du_rayon": {
     "proximity_scroll1.jsonl": 382.62229164123534,
     "proximity_scroll1_rayon_corrige.jsonl": 125.76941187858581
+  },
+  "rayon_declare": {
+    "baseline_sweep_scroll1.jsonl": null,
+    "baseline_sweep_scroll1_rayon_corrige.jsonl": 142.8,
+    "baseline_sweep_scroll5.jsonl": null,
+    "contamination_scroll1.jsonl": null,
+    "proximity_scroll1.jsonl": null,
+    "proximity_scroll1_rayon_corrige.jsonl": 142.8,
+    "sweep_0139_pas.jsonl": null,
+    "sweep_0139_r10.jsonl": null,
+    "sweep_0139_r160.jsonl": null,
+    "sweep_0139_r20.jsonl": null,
+    "sweep_0139_r40.jsonl": null,
+    "sweep_0139_r80.jsonl": null,
+    "sweep_1667_pas.jsonl": 142.4,
+    "sweep_PHerc0139.jsonl": null,
+    "sweep_PHerc0139_2.4um.jsonl": null,
+    "sweep_PHerc0139_2.4um_brut.jsonl": null,
+    "sweep_PHerc0814.jsonl": null,
+    "sweep_PHerc1667.jsonl": 632.8,
+    "sweep_s1_pas.jsonl": null,
+    "sweep_s1_r16.jsonl": null,
+    "sweep_s1_r24.jsonl": null,
+    "sweep_s1_r32.jsonl": null,
+    "sweep_s1_r48.jsonl": null
   }
 }

@@ -367,7 +367,7 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
 ---
 
 ### docs/07_reparee_nest_pas_propre.md
-- **lignes** : 992 ⚠ (438 quand la fiche a été écrite, 482 le 2026-09-03 ; deux sections neuves le 2026-09-04, §10 et §11, qui **périment le §8**)
+- **lignes** : 1013 ⚠ (438 quand la fiche a été écrite, 482 le 2026-09-03 ; deux sections neuves le 2026-09-04, §10 et §11, qui **périment le §8**)
 - **nature** : RESULTAT
 - **résumé** : Le résultat central du dépôt sur la métrique de proximité : la réparation d'auto-intersection ramène les contacts à zéro et **ne déplace pas** la proximité anormale (0,37 → 0,38 %). Le document se corrige ensuite trois fois — il retire l'affirmation que la métrique **sépare** saines et réparées, il montre que le remède de principe pour la référence locale (une boule 3D) rend la mesure pire, et il découvre que la métrique est **inapplicable** sous un tour de couverture (44 traces de Scroll 5 sur 53 rendent zéro cellule). Le §9 remplace enfin le rayon de recherche par une constante physique. ⚠ Le fichier contient deux sections numérotées « ## 6 ».
 - **conclusions extractibles** :
@@ -402,6 +402,16 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
     déplace **rien de mesurable** : 0 paire sur 10 au-delà du bruit, signe mélangé. **La
     conclusion-titre d'origine est restaurée**, pour une bien meilleure raison qu'elle ne
     donnait. Mesures : `le_bruit_de_lechantillon.py`, `reparation_et_proximite.py`.
+  - ✅ **2026-09-04, §9, LA QUESTION LAISSÉE OUVERTE EST TRANCHÉE PAR L'ARTEFACT LUI-MÊME.**
+    Le §9 écrit que `sweep_PHerc1667.jsonl` « n'enregistre ni le zarr ni la taille de voxel, donc
+    rien ici ne tranche ». Le fichier date du 2026-08-26, le paragraphe du 2026-09-03, et il
+    déclare `voxel_um 7,91`. Les deux branches du §9 supposaient **2,399 µm par voxel** : à 7,91,
+    18 voxels font **142,4 µm**, apparié aux 142,8 de Scroll 1 et aux ~140 de PHerc0139. **La
+    ligne PHerc1667 est lisible** et sa conclusion tient. ⚠ Reste vraie la moitié « ni le zarr ».
+    ⭐ Et la leçon d'outillage du §9 — *« un artefact de mesure doit porter la résolution sur
+    laquelle il a été pris »* — n'avait **jamais** été appliquée à `proximity.py`, ce qui est
+    exactement ce qui a coûté l'archéologie du §11. Les deux producteurs écrivent désormais le
+    même bloc `echelle`.
   - ⭐⭐⭐ **2026-09-04, §11, LA CAUSE COMMUNE** — postérieure à cette fiche. **Trois**
     familles de paramètres cessent de compter ensemble au rayon corrigé : le seuil (chute
     **0,477 → 0,025**), la grandeur (écart `fbt` / `shortfall` **0,429 → 0,054**) et la référence
@@ -457,7 +467,7 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
   - §8 : « ⚠ Ce qui **reste** vrai du §5 : le seuil sélectionne une queue dont on ne sait toujours pas ce qu'elle contient sur une trace sans croisement… Le plateau justifie le *choix* du seuil, pas l'interprétation de ce qu'il attrape. »
 - **preuve de lecture intégrale** :
   - l. 299 : `Une trace qui ne fait pas un tour **ne peut pas se recouvrir** : il n'existe alors`
-  - l. 482 : `rouleau. C'est exactement le régime où la correction compte.`
+  - l. 503 : `rouleau. C'est exactement le régime où la correction compte.`
 
 
 

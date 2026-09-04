@@ -211,6 +211,33 @@ def main() -> int:
 
     report = {
         "label": args.label or args.mesh.parent.parent.name,
+        # ⚠⚠⚠ L'INSTRUMENT VOYAGE AVEC LA MESURE. `07` §9 avait tire la lecon en toutes lettres
+        # -- « un artefact de mesure doit porter la resolution sur laquelle il a ete pris » --
+        # et personne ne l'avait appliquee ici. Le prix a ete paye le 2026-09-04 : le rayon a
+        # ete divise par quatre le 2026-08-18, aucun fichier ne le disait, et `07` §8, `06` §3.2
+        # et l'explication du §6 ont continue de conclure depuis des mesures a l'ancien rayon.
+        # Il a fallu RETROUVER le rayon dans les donnees (une distance est plafonnee par lui,
+        # donc la plus grande mediane en est un minorant) au lieu de le lire.
+        #
+        # ⚠ Le rayon est ecrit dans LES DEUX unites : en voxels parce que c'est ce que le code
+        # manipule, en micrometres parce que c'est la seule qui se compare entre rouleaux -- 80
+        # voxels valent 749 µm a 9,362 µm et 192 µm a 2,403, et c'est exactement la confusion
+        # qui a rendu la ligne `PHerc1667` du §9 illisible.
+        # ⚠⚠ LE MEME NOM DE BLOC ET LES MEMES CLEFS QUE `baseline_sweep.py`, qui ecrit son
+        # `echelle` depuis aout : deux orthographes d'un meme concept finiraient par diverger,
+        # et un lecteur devrait alors connaitre les deux. Les clefs supplementaires (graine,
+        # tirage, fenetre) sont propres a cet outil et s'y ajoutent sans renommer les communes.
+        "echelle": {
+            "voxel_um": float(args.voxel_um),
+            "sheet_pitch_um": float(args.sheet_pitch_um),
+            "search_radius_vox": round(float(args.search_radius), 3),
+            "search_radius_um": round(float(args.search_radius * args.voxel_um), 3),
+            "apart_vox": int(args.apart),
+            "window_cols": int(args.window),
+            "sample": int(args.sample),
+            "seed": int(args.seed),
+            "decimate": int(args.decimate),
+        },
         "cells": int(points.shape[0]),
         "sampled": int(take),
         "measured": int(measured.sum()),
