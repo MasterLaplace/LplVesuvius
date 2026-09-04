@@ -200,7 +200,15 @@ def main() -> int:
               "d_prime_median": float(np.median(values)),
               "d_prime_p10": float(np.percentile(values, 10)),
               "d_prime_min": float(values.min()),
-              "part_sous_1": float((values < 1.0).mean())}
+              "part_sous_1": float((values < 1.0).mean()),
+              # ⚠⚠ LES VALEURS PAR FENETRE, et pas seulement leur resume. `64` §1 etablit
+              # qu'un resume sans sa dispersion ne peut pas ETABLIR une difference : il y
+              # faut 27 tuiles par fragment pour l'ecart observe, et on en avait 10. Sans
+              # cette liste, comparer deux medianes de d′ -- ce que H2 fait entre deux
+              # echantillonnages -- serait publier un ecart sans intervalle.
+              # ⚠ Ajout ADDITIF : les lecteurs existants de `carte_separabilite/` lisent des
+              # clefs nommees et ignorent celle-ci.
+              "valeurs": [float(x) for x in values]}
     print(f"  d′ median {report['d_prime_median']:.2f}   "
           f"p10 {report['d_prime_p10']:.2f}   min {report['d_prime_min']:.2f}   "
           f"part sous 1,0 : {report['part_sous_1'] * 100:.0f} %")

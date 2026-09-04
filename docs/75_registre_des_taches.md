@@ -467,6 +467,49 @@ feuille fait 8 à 10 voxels au lieu de 4 à 5, donc `d′` monterait pour les tr
 > réfute la prédiction. Envoyer une demande de 160 To sur un argument que la physique de ce
 > dépôt prédit faux coûterait un contact, pas rien.
 
+### ✅✅ H2 est MESURÉ, et la condition du courriel n'est PAS remplie
+
+> 2026-09-04. Mesure : `src/encre/le_debinage_rend_il_quelque_chose.py` (8 contrôles),
+> `docs/mesures/le_debinage.json`. Figure : `src/figures/figure_le_debinage.py` (14 contrôles).
+
+Le même objet, `PHerc0500P2`, aux deux échantillonnages natifs, même bras de 1,2 m :
+
+| volume | `d′` médian | IC 95 % | fenêtres |
+|---|---:|---|---:|
+| natif **fin**, 4,317 µm, 111 keV | **1,44** | [1,25 ; 1,71] | 36 / 700 |
+| natif **grossier**, 9,362 µm, 113 keV | **1,43** | [1,32 ; 1,67] | 51 / 700 |
+| *fin biné ×2, 8,634 µm (contrôle)* | *1,25* | *[1,18 ; 1,40]* | *39 / 700* |
+
+**Rapport = 1,01**, là où `69` prédisait au plus 1,3–1,5×. Et **les intervalles des deux natifs
+se recouvrent largement** — [1,25 ; 1,71] contre [1,32 ; 1,67] — donc rien ne les sépare.
+
+![Le débinage rend-il quelque chose ?](images/75_le_debinage.png)
+
+*Une fenêtre = un point. La bande claire est l'IC 95 % de la médiane, par bootstrap sur les
+fenêtres — `64` §1 établit qu'un résumé sans sa dispersion **ne peut pas établir** une
+différence, donc trois traits seuls auraient refait cette faute en image.*
+
+> ⭐⭐⭐ **La physique de `69` tient, l'argument géométrique de `73` ne se vérifie pas**, et la
+> condition que `69` posait — *« si elle est fausse »* — **n'est pas remplie**. Le courriel à
+> l'ESRF n'est donc pas justifié par cette voie.
+
+⚠ **Trois réserves, dites plutôt que tues.**
+
+1. **Ce ne sont pas une acquisition binée deux fois** mais deux acquisitions (mai / 111 keV,
+   août / 113 keV). Le bras est le même et 2 keV sur 112 font 1,8 %, dans la plage où `66` §3
+   mesure une sensibilité *douce* — le confond est petit et nommé, pas absent.
+2. **Le contrôle du binage logiciel donne 1,25**, plus bas que les deux natifs. Son intervalle
+   [1,18 ; 1,40] touche celui du grossier, donc il n'est pas non plus séparé — mais il n'appuie
+   pas l'idée que biner *n'enlève rien*.
+3. **`d′` n'est pas l'AUC d'encre.** C'est la grandeur que l'argument de `73` invoque, et elle
+   est sans dimension donc comparable entre campagnes ; une AUC répondrait à une question plus
+   large, et c'est `C1`.
+
+⚠ **Ma propre lecture intermédiaire était fausse**, et c'est la leçon de méthode : à 5 et
+7 fenêtres j'avais lu 1,18 contre 1,64 et conclu *« le scan fin est pire »*. À 36 et 51, c'est
+1,44 contre 1,43. Le piège nº27 du dépôt — **un volume est surtout du remplissage**, 93 % des
+sondes tombent dans le vide — et `33` §3–4 bis qui exige 50 à 100 fenêtres.
+
 ⚠ **Et l'envoi appartient à l'auteur.** Un courriel à un tiers est un acte vers l'extérieur ;
 ce registre peut en préparer la matière, pas le poster.
 

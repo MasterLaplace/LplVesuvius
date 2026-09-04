@@ -1354,6 +1354,8 @@ run "donnees sans appelant"    uv run --project "$ROOT" python "$ROOT/src/depot/
 run "chemins des scripts"      uv run --project "$ROOT" python "$ROOT/src/depot/chemins_des_scripts.py" --verifier
 run "chiffres sans record"     uv run python "$ROOT/src/depot/chiffres_sans_record.py" --verifier
 run "mesures videes"          uv run python "$ROOT/src/depot/mesures_videes.py" --verifier
+run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
+run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 # ⚠⚠ La premiere tache du chantier A : mesurer le doublonnage PAR HACHAGE. Le plan annoncait
 # « 17,4 Go de doublons » sur un proxy nom+taille dont il ecrivait lui-meme qu il surcompte --
 # des chunks zarr nommes `40` dans deux volumes differents, meme nom, meme taille, contenu
