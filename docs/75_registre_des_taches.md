@@ -539,10 +539,16 @@ adjacentes**, qui est une autre propriété du même maillage.
 ⚠ **Restant** : les `sweep_PHerc*.jsonl` des **autres rouleaux** sans déclaration
 (`sweep_PHerc0139`, `sweep_0139_*`, `sweep_s1_pas`) n'ont aucune trace commune avec Scroll 1, donc
 `le_rayon_des_mesures.py` ne peut ni les dater par comparaison ni lire leur déclaration — il
-faudrait les régénérer, ce qui les fera déclarer. Et le compte de quads de `w038-045` (0701) n'est
-**pas reproductible** : six réparations rendent 3 691, 3 696 et 3 698. ⚠ Ça ne touche pas le
-résultat du §12 — chaque paire fait une seule réparation — mais ça borne le sens du mot « la »
-réparation : il y en a une famille, et le Δ mesuré est celui d'un tirage dedans.
+faudrait les régénérer, ce qui les fera déclarer. ✅ **Et la non-reproductibilité de la réparation est ÉLUCIDÉE** (`07` §10) : ce n'est
+pas un défaut mais une propriété déclarée. L'excision est une optimisation résolue composante par
+composante sous un **budget d'horloge par segment** (`improvement_budget_s_per_segment: 120.0`,
+*« never a per-component budget »*), donc combien de composantes atteignent le solveur exact
+dépend de la vitesse de la machine. Corrélation mesurée : `(163 exact, 18 glouton) → 3 696`,
+`(164, 17) → 3 691`. La `failure_rule` de `windcheck` dit qu'un dépassement *« costs an
+optimality claim, never an artifact »* — la sortie est toujours **valide**. ⚠ Le remède de `44`
+(graine + un fil) a été **testé et réfuté**. Aucun drapeau utilisateur ne peut rendre la
+réparation bit-reproductible ; il faut **réparer une fois et garder la sortie**, ce que fait déjà
+chaque paire du §12.
 
 ### D2 ⛔ — le contrôle P1 bis de `71` : **bloqué sur une source absente de l'arbre**
 

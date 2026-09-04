@@ -367,7 +367,7 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
 ---
 
 ### docs/07_reparee_nest_pas_propre.md
-- **lignes** : 1127 ⚠ (438 quand la fiche a été écrite, 482 le 2026-09-03 ; deux sections neuves le 2026-09-04, §10 et §11, qui **périment le §8**)
+- **lignes** : 1179 ⚠ (438 quand la fiche a été écrite, 482 le 2026-09-03 ; deux sections neuves le 2026-09-04, §10 et §11, qui **périment le §8**)
 - **nature** : RESULTAT
 - **résumé** : Le résultat central du dépôt sur la métrique de proximité : la réparation d'auto-intersection ramène les contacts à zéro et **ne déplace pas** la proximité anormale (0,37 → 0,38 %). Le document se corrige ensuite trois fois — il retire l'affirmation que la métrique **sépare** saines et réparées, il montre que le remède de principe pour la référence locale (une boule 3D) rend la mesure pire, et il découvre que la métrique est **inapplicable** sous un tour de couverture (44 traces de Scroll 5 sur 53 rendent zéro cellule). Le §9 remplace enfin le rayon de recherche par une constante physique. ⚠ Le fichier contient deux sections numérotées « ## 6 ».
 - **conclusions extractibles** :
@@ -448,17 +448,20 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
     pas supprimable »* sont faux sur l'instrument corrigé : **le seuil ne sélectionne aucun
     régime**. ⚠ Et personne ne l'avait rejoué parce que le producteur `run_proximity.sh` ne
     tournait plus — il avalait son erreur et un run qui ne mesurait rien sortait en 0.
-  - ⚠⚠⚠ **2026-09-04, §10, TROIS PASSAGES SUR LA MÊME PHRASE, tranchés par la mesure à chaque
-    fois.** (1) Deux passages du lot rendent 3 696 puis 3 698 quads : j'écris que
-    `windcheck transform` n'est pas déterministe, **depuis deux sorties de terminal**. (2) Le mode
-    `--determinisme` à trois répétitions rend trois certificats identiques : je rétracte. (3) À
-    **six** répétitions — 3698, 3696, 3696, 3696, **3691**, 3696 — **trois certificats
-    distincts**. La première affirmation était juste et la rétractation était fausse, **par
-    chance**. ⭐ Son propre commentaire disait pourtant que trois répétitions sont une preuve
-    faible ; une réserve écrite ne dispense pas de la mesure qu'elle appelle. ⚠ Le 3691 corrige un
-    second point : ce n'est pas une bascule entre deux valeurs. Variation bornée à **0,19 %** des
-    quads retirés, cause inconnue. ⭐ Forme déjà rencontrée dans `44` (rng semé par l'horloge,
-    22 fils) — remède connu.
+  - ✅ **2026-09-04, §10, LA CAUSE EST NOMMÉE PAR L'OUTIL LUI-MÊME.** Le remède de `44`
+    (graine + un seul fil) était la première hypothèse : **testée et réfutée** — à `--threads 1`,
+    huit réparations rendent encore trois géométries. Le certificat, lui, déclare
+    `selection_status: mixed`, `method_mix: 163 exact / 18 glouton`,
+    `minimum_area_claim_admissible: False`, et la politique gelée de `windcheck` porte
+    `improvement_budget_s_per_segment: 120.0` — *« SEGMENT-WIDE wall-clock budget shared by all
+    components »*. Combien de composantes atteignent le solveur exact dépend de la vitesse de la
+    machine. **Corrélation mesurée** : `(163 exact, 18 glouton) → 3 696` cinq fois,
+    `(164, 17) → 3 691` une fois — une composante de plus à l'optimum, cinq quads de moins.
+    ⭐ Ce n'est donc **pas un défaut** : la `failure_rule` dit qu'un dépassement de budget
+    *« NEVER removes the feasible incumbent; it costs an optimality claim, never an artifact »*.
+    La sortie est toujours valide, seule son optimalité varie. ⚠ Aucun drapeau utilisateur ne
+    peut la rendre bit-reproductible ; le remède est de réparer **une fois** et garder la sortie.
+
   - ⚠⚠⚠ **2026-09-03, en-tête, RÉTRACTATION DE LA CONCLUSION-TITRE** — postérieure à cette
     fiche. Le chiffre central (0,37 → 0,38 %, « la réparation ne déplace pas ») a été rendu
     recalculable pour l'article : réparer une trace, remesurer. **Il ne se généralise pas.**

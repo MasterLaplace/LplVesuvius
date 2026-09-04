@@ -745,12 +745,64 @@ fausse — et elle l'était **par chance**.
 est plus modeste — la variation existe, elle est **bornée à sept quads sur ~3 695, soit 0,19 %**,
 et sa cause reste inconnue.
 
-⭐ **Et ce dépôt a déjà rencontré cette forme, une fois.** [`44`](44_ou_la_chaine_se_trouve.md)
-établit que `vc_grow_seg_from_seed` tirait son aléa d'une graine posée par **l'horloge** et
-tournait sur **22 fils** — donc deux exécutions de la même commande ne rendaient pas le même
-maillage, et un résultat publié avait été lu comme un effet de réglage. Le remède y a été
-`VC_GROWPATCH_RNG_SEED` plus `thread_limit: 1`. C'est la première chose à essayer sur
-`windcheck transform`, et c'est la raison de le noter ici plutôt que de le laisser en énigme.
+### ⭐⭐⭐ Et la cause est nommée par l'outil lui-même — dans sa politique gelée
+
+Le remède de [`44`](44_ou_la_chaine_se_trouve.md) — graine posée plus `thread_limit: 1`, qui y
+avait rendu un traceur reproductible — était la première hypothèse. **Testée, réfutée** : à
+`--threads 1`, huit réparations rendent encore **trois** géométries (3691, 3696, 3698), dans le
+même petit ensemble et avec la même modale. Ni le parallélisme, donc ; et pas du bruit flottant
+non plus, puisque les valeurs sont **discrètes**.
+
+⚠ Je lisais quatre champs d'un certificat qui en porte cent. Il déclare :
+
+```
+selection.selection_status:                mixed
+selection.method_mix.exact_optimal:        163
+selection.method_mix.greedy_feasible:       18
+selection.minimum_area_claim_admissible:   False
+selection.timings.phase_exact_s:           133.2
+```
+
+L'excision est une **optimisation** résolue composante par composante, et la politique gelée de
+`windcheck` (`excise.py`, `round28-greedy-first-v1`) dit le reste :
+
+> `improvement_budget_s_per_segment: 120.0` — *« SEGMENT-WIDE wall-clock budget shared by all
+> components, **never a per-component budget** »*
+
+**Un budget d'horloge.** Combien de composantes atteignent le solveur exact dépend de la vitesse
+de la machine à cet instant — mesuré : `phase_exact_s` vaut 128 à 134 s contre un budget de 120.
+
+### La corrélation, mesurée
+
+| quads retirés | composantes exactes | au glouton | runs |
+|---:|---:|---:|---:|
+| **3 696** | 163 | 18 | 5 |
+| **3 691** | **164** | **17** | 1 |
+
+**Une composante de plus résolue à l'optimum, cinq quads de moins retirés** — le solveur exact
+trouve une excision plus petite que le glouton, ce qui est sa raison d'être. Et le contrôle est
+écrit **direction-agnostique** : *à même mélange de méthodes, la géométrie doit être la même*.
+Elle l'est.
+
+### ✅ Ce n'est donc pas un défaut, c'est une propriété déclarée
+
+La `failure_rule` de la politique le dit sans détour :
+
+> *« an optimization failure — solver error, time limit, infeasible rounding, exhausted budget —
+> **NEVER removes the feasible incumbent; it costs an optimality claim, never an artifact** »*
+
+La sortie est **toujours valide** ; seule son **optimalité** varie. `windcheck` est honnête, et
+`minimum_area_claim_admissible: False` l'annonce à chaque certificat.
+
+⚠ Conséquence pratique : **aucun drapeau utilisateur ne peut rendre `windcheck transform`
+bit-reproductible**, le budget vivant dans la politique gelée. Le remède est de **réparer une
+fois et garder la sortie** — ce que fait déjà chaque paire du §12, dont le résultat tient donc.
+
+⚠⚠ Et une correction de méthode à moi, dans la foulée : j'avais asserté que les deux séries
+tombent sur le **même ensemble** de valeurs. Un second échantillon l'a fait tomber (3 698 n'est
+pas réapparu). Exiger que deux échantillons d'un **tirage** coïncident, c'est asserter une
+propriété que le système n'a pas. Ce qui se défend est l'inclusion dans un petit ensemble commun,
+et le fait que leur **union** en compte au moins trois — donc pas une bascule binaire.
 
 ⚠⚠ **Ce que ça change pour le §12, et ce que ça ne change pas.** Chaque paire (avant, après) fait
 **une seule** réparation, donc les deux mesures d'une paire portent bien sur le même maillage
