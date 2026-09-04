@@ -1749,6 +1749,55 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 out.append((f"course indexee de {rouleau}",
                             [f"`w{v['premiere']:03d}`–`w{v['derniere']:03d}`",
                              f"w{v['premiere']:03d}`–`w{v['derniere']:03d}"], lis.name))
+    # ⭐⭐⭐ Le SENS des indices de spire (`76`), et l'ecart inter-feuilles qu'il rend au
+    # passage. Garde parce que c'est le premier ecart inter-feuilles du depot qui ne depende
+    # d'AUCUN parametre de traceur -- l'article a deja publie 113 um, qui bouge avec
+    # `neighbor_step`, et une prose qui derive de sa mesure recommencerait la meme erreur.
+    sdi = _source(racine, "le_sens_des_indices.json")
+    if sdi.exists():
+        d = json.loads(sdi.read_text())
+        ajoute("voxel decode de l'aire", d["voxel_um"], 4, sdi.name)
+        # ⚠ Les deux ecritures decimales : la prose du depot est en francais (virgule), le
+        # JSON et l'article en anglais (point). Un garde-fou qui n'accepte qu'une des deux
+        # signale « ABSENT » sur un chiffre parfaitement cite.
+        def _deux(v: float, n: int, suffixe: str = "") -> list[str]:
+            point = f"{v:.{n}f}{suffixe}"
+            return [f"**{point}**", point, f"**{point.replace('.', ',')}**",
+                    point.replace(".", ",")]
+
+        out.append(("sens des indices de spire",
+                    _deux(d["part_vers_l_exterieur"] * 100, 1, " %"), sdi.name))
+        out.append(("ecart inter-feuilles sans traceur",
+                    _deux(d["ecart_median_um"], 1, " µm"), sdi.name))
+        out.append(("cellules comparees",
+                    [f"**{d['cellules_comparees']:,}**".replace(",", "\u202f"),
+                     f"{d['cellules_comparees']}",
+                     f"{d['cellules_comparees']:,}".replace(",", " ")], sdi.name))
+        # ⚠ Les DEFAUTS du referent sont gardes comme les autres chiffres : ils sont ce qui
+        # empeche un test d'identite de compter un defaut de referent comme un echec de
+        # predicteur, donc les perdre couterait plus cher que de perdre une mediane.
+        for x in d["defauts_du_referent"]:
+            out.append((f"defaut du referent w{x['de']:03d}/w{x['vers']:03d}",
+                        [f"w{x['de']:03d} → w{x['vers']:03d}",
+                         f"w{x['de']:03d}/w{x['vers']:03d}"], sdi.name))
+        a = d["aire_par_spire_cm2"]
+        # ⚠ `unites` est OBLIGATOIRE ici : ces trois chiffres font moins de cinq caracteres,
+        # donc `discriminante` les ecarterait -- « 6,4 » nu se trouve dans n'importe quel
+        # document. Ecrits avec leur unite, ils redeviennent cherchables.
+        ajoute("aire mediane d'une spire publiee", a["median"], 1, sdi.name,
+               unites=(" cm²",))
+        ajoute("aire de la plus petite spire publiee", a["min"], 1, sdi.name,
+               unites=(" cm²",))
+        # ⚠ Ecrit AVEC son contexte, pas nu : « ×6,4 » fait quatre caracteres et serait
+        # ecarte par `discriminante`, exactement le cas que sa docstring decrit.
+        out.append(("facteur sur le point fixe de l'extension",
+                    [f"**×{d['facteur_sur_le_point_fixe']:.1f}**".replace(".", ","),
+                     f"×{d['facteur_sur_le_point_fixe']:.1f} le point fixe".replace(".", ","),
+                     f"soit ×{d['facteur_sur_le_point_fixe']:.1f}".replace(".", ",")],
+                   sdi.name))
+        for pas in d["par_pas"]:
+            out.append((f"ecart pour un saut de {pas['saut']}",
+                        _deux(pas["median_vx"] * d["voxel_um"], 1, " µm"), sdi.name))
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():
         d = json.loads(bdf.read_text())

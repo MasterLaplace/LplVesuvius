@@ -16,7 +16,7 @@
 
 | | tâches | ce que ça fait avancer |
 |---|---:|---|
-| **A — remplacer le pinceau** | 6 | le prix. Un prédicat d'identité, son témoin, son déploiement |
+| **A — remplacer le pinceau** | 6 (dont **1 faite**) | le prix. Un prédicat d'identité, son témoin, son déploiement |
 | **B — l'article** | 5 | une publication, et la crédibilité des mesures qui la portent |
 | **C — la règle graduée** | 3 | savoir si une carte d'encre peut **valider** un déroulage. Borné à trois semaines |
 | **D — dette** | 3 | ce qui pourrit si on n'y touche pas |
@@ -36,17 +36,31 @@ une fois, et il s'arrête.
 > a construit la **présence** (α, relief en fenêtre étroite) et le **placement** (`offset`).
 > **L'identité manque, et c'est là que se gagne le prix.**
 
-### A1 ⭐⭐⭐ — lire les indices de spire publiés
+### ~~A1~~ ✅ — lire les indices de spire publiés — **FAIT le 2026-09-04** (`76`)
 
-**État : le référent est inventorié** (`src/excision/les_indices_de_spire.py`, `74` §3).
-101 segments indexés sur 3 rouleaux, dont **81 spires consécutives sans aucun trou**
-(`PHerc0139` `w023`–`w059`, `PHerc0172` `w052`–`w095`).
+**Le référent est inventorié** (`les_indices_de_spire.py`, `74` §3) : 101 segments indexés sur
+3 rouleaux, dont **81 spires consécutives sans aucun trou**.
 
-**Ce qui reste, et c'est la première ligne du lecteur** : vérifier que `w` compte dans le même
-sens partout, en mesurant le **rayon médian de `w_k` contre `w_{k+1}`** sur les `tifxyz`
-transformés. Tant que ce n'est pas fait, « consécutif » est une propriété des **noms**.
+**Et son sens est mesuré** (`le_sens_des_indices.py`, `76`) : `w` compte **du centre vers
+l'extérieur**, dans **95,0 %** de 57 510 cellules (hauteur, angle) de `PHerc0139`. La
+comparaison est **appariée** — même hauteur, même angle, centre ajusté sur l'union — parce
+qu'un rouleau écrasé n'a pas de rayon absolu et que son axe erre de 2,6 mm sur 30 mm.
 
-⚠ Sans A1, A2 n'a pas de vérité terrain et A3 n'a rien à valider.
+⭐⭐ **Trois choses tombées avec, qu'on ne cherchait pas :**
+
+1. un **écart inter-feuilles qui ne dépend d'aucun paramètre de traceur** : **154,1 µm**, à
+   comparer aux 113 µm de l'article qui bougent avec `neighbor_step` (→ **B3**) ;
+2. l'**étalon d'aire** que A5 réclamait, et il était publié : une spire approuvée fait
+   **38,4 cm²** médian, soit **×6,4** le point fixe de 6,02 cm², et **même la plus petite le
+   dépasse** ;
+3. ⚠⚠ **le référent a des défauts** : `w045`/`w046` sont **la même surface** (0,0 µm, confirmé
+   par deux méthodes indépendantes) et `w041`/`w042` sont à une demi-feuille. **2 paires sur
+   36** — de quoi faire passer un bon prédicteur pour un prédicteur à 94 % si on les compte
+   comme des échecs du prédicteur.
+
+⚠ **Restant sur A1** : `PHerc0172` (44 spires) n'est pas mesuré — il publie ses maillages sous
+`mesh/*-on-*.tifxyz` et non `tifxyz_original`. Bon marché, et c'est la seule façon de savoir si
+le sens est une convention du rouleau ou du projet.
 
 ### A2 ⭐⭐⭐ — le test d'identité (ex-H5 de `69`, révisée par `73` §1)
 

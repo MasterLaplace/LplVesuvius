@@ -1173,6 +1173,13 @@ run "l'axe n'est pas droit"    uv run python "$ROOT/src/excision/laxe_nest_pas_u
 # ecrit FAUX -- j'affirmais que referent d'identite et carte dense sont disjoints, il a echoue,
 # et `PHerc0139` porte les deux. La mesure a corrige la conclusion, pas une relecture.
 run "les indices de spire"     uv run python "$ROOT/src/excision/les_indices_de_spire.py" --verifier
+# ⭐⭐⭐ Le SENS de ces indices, la question que `73` §4 declarait ouverte, et l'ecart
+# inter-feuilles qu'elle rend au passage -- mesure sur des surfaces approuvees par des humains,
+# sans aucun parametre de traceur. Trois sondes mordent (lire le voxel dans le NOM du volume
+# donne 32,9 um au lieu de 154 ; un centre par spire au lieu de l'union fait tomber le sens a
+# 87 % ; casser le temoin de la spire contre elle-meme). Une quatrieme ne mord PAS et c'est
+# ecrit dans le fichier : le filtre des points invalides est juste, pas porteur.
+run "le sens des indices"      uv run python "$ROOT/src/excision/le_sens_des_indices.py" --verifier
 # ⭐⭐ Le garde-fou de l'angle mort qui a mordu TROIS fois : interroger une vue du corpus et
 # conclure sur le corpus. Sa sonde la plus utile reduit la comparaison a une seule vue --
 # la faute exacte du `07` -- et fait tomber trois controles.
