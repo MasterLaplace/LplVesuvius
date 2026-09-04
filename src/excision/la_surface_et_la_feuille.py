@@ -148,6 +148,7 @@ def mesurer() -> dict:
         brut = np.argmax(pile, axis=0)[valide].astype(float)
         spires.append(dict(
             nom=nom, couches=int(pile.shape[0]),
+            par_echelle=ecart_par_echelle(pile),
             part_de_matiere=float(valide.mean()),
             centre_median=float(np.median(c)),
             ecart_type_um=float(c.std() * VOXEL_UM),
@@ -167,6 +168,12 @@ def mesurer() -> dict:
 
     ecarts = [s["ecart_type_um"] for s in spires]
     erreur_champ, rouleau_champ = _erreur_du_champ(ROULEAU)
+    # ⚠⚠ C'est CET ecart-la qui plafonne le champ, pas celui au pixel : le champ agrege sur
+    # une cellule du maillage, soit 20 pixels de la dalle.
+    echelle_cellule = "20"
+    a_l_echelle = [s["par_echelle"][echelle_cellule] for s in spires
+                   if echelle_cellule in s.get("par_echelle", {})]
+    ecart_cellule = float(np.median(a_l_echelle)) if a_l_echelle else None
     return dict(
         voxel_um=VOXEL_UM, ecart_inter_feuilles_um=ECART_UM, lissage=LISSAGE,
         spires=spires,
@@ -179,10 +186,13 @@ def mesurer() -> dict:
         # ⚠⚠ La decomposition, avec son hypothese ECRITE. Si les deux erreurs sont
         # independantes, celle du champ seul vaut la racine de la difference des carres. Elles
         # ne le sont peut-etre pas -- d'ou les DEUX bornes, qui encadrent sans supposer.
+        ecart_a_l_echelle_du_champ_um=ecart_cellule,
+        voisines=correlation_entre_voisines(),
+        echelle_du_champ_px=int(echelle_cellule),
         erreur_propre_si_independantes_um=(
-            float(np.sqrt(max(0.0, erreur_champ ** 2 - float(np.median(ecarts)) ** 2)))
+            float(np.sqrt(max(0.0, erreur_champ ** 2 - (ecart_cellule or 0.0) ** 2)))
             if erreur_champ else None),
-        borne_basse_um=(float(max(0.0, erreur_champ - float(np.median(ecarts))))
+        borne_basse_um=(float(max(0.0, erreur_champ - (ecart_cellule or 0.0)))
                         if erreur_champ else None),
         borne_haute_um=erreur_champ,
     )
@@ -195,6 +205,106 @@ rouleaux différents**, à deux tailles de voxel différentes. Le contrôle qui 
 n'existait pas ; il existe maintenant."""
 
 VOXEL_PAR_ROULEAU = {"PHerc0139": 9.362, "PHerc0172": 7.91}
+
+
+BLOCS = (1, 4, 20, 51)
+"""Les échelles d'agrégation auxquelles l'écart est mesuré, en pixels. ⚠⚠ Une échelle, ce n'est
+pas un détail : le champ d'enroulement travaille sur des **médianes de cellule**, pas sur des
+pixels, donc c'est l'écart **à cette échelle-là** qui plafonne son erreur. 20 correspond au pas
+du maillage `tifxyz` (`scale` 0,05), c'est-à-dire à une cellule du champ."""
+
+
+def ecart_par_echelle(pile: np.ndarray) -> dict:
+    """
+    @brief L'écart de la surface à la feuille, mesuré à plusieurs échelles d'agrégation.
+
+    ⚠⚠⚠ Existe parce que ma décomposition était trop optimiste. J'avais opposé les 49 µm du
+    champ aux 27 µm du référent **mesurés au pixel**, alors que le champ agrège sur une cellule
+    entière. À l'échelle de la cellule, l'écart du référent tombe — donc **une plus petite part**
+    des 49 µm lui revient, et l'erreur propre du champ est plus grande que je ne l'avais écrit.
+    """
+    centre, valide, _ = _suivre(pile)
+    out = {}
+    for b in BLOCS:
+        if b == 1:
+            v = centre[valide]
+        else:
+            h = (centre.shape[0] // b) * b
+            w = (centre.shape[1] // b) * b
+            moy = centre[:h, :w].reshape(h // b, b, w // b, b).mean(axis=(1, 3))
+            couv = valide[:h, :w].reshape(h // b, b, w // b, b).mean(axis=(1, 3))
+            # ⚠ Un bloc n'est retenu que s'il est PLEIN de matiere : un bloc a moitie dans le
+            # remplissage aurait une moyenne tiree vers le centre de la dalle, ce qui ferait
+            # baisser l'ecart pour une raison qui n'a rien a voir avec l'echelle.
+            v = moy[couv > 0.9]
+        if v.size >= 20:
+            out[str(b)] = float(v.std() * VOXEL_UM)
+    return out
+
+
+def correlation_entre_voisines(paires=((61, 62), (62, 63), (63, 64))) -> dict:
+    """
+    @brief L'écart de la surface à la feuille est-il corrélé d'une spire à sa voisine ?
+
+    ⚠⚠⚠ C'EST CE QUI VALIDE — OU NON — LA DÉCOMPOSITION. L'erreur propre du champ se déduit de
+    la sienne et de celle du référent **en supposant qu'elles sont indépendantes**. Si l'écart
+    du référent était systématique d'une spire à l'autre, il s'annulerait dans les différences
+    que le champ manipule, et la décomposition serait fausse.
+
+    ⚠ Les spires sont appariées par **position dans le monde**, jamais par indice de grille :
+    chaque maillage a sa propre origine de paramétrage, et les mêmes (ligne, colonne) tombent à
+    des endroits complètement différents — vérifié, `w060` et `w061` diffèrent de 3400 voxels
+    en y pour les mêmes indices.
+    """
+    import glob as _glob
+
+    import tifffile
+    from scipy.spatial import cKDTree
+
+    sys.path[:0] = [str(RACINE / "src" / "excision")]
+    from le_sens_des_indices import _spires  # noqa: PLC0415
+
+    dossiers = _spires(ROULEAU)
+    patches = {}
+    for k in sorted({x for paire in paires for x in paire}):
+        if k not in dossiers:
+            continue
+        pile = _charger(f"{ROULEAU}_w{k:03d}")
+        if pile is None:
+            continue
+        centre, valide, _ = _suivre(pile)
+        n = pile.shape[0]
+        # ⚠ Blocs de 20 : c'est le pas du maillage, donc la grille des `tifxyz` s'y aligne
+        # exactement. Un autre facteur demanderait une interpolation, donc une hypothese.
+        h = (centre.shape[0] // 20) * 20
+        bloc = centre[:h, :h].reshape(h // 20, 20, h // 20, 20).mean(axis=(1, 3))
+        couv = valide[:h, :h].reshape(h // 20, 20, h // 20, 20).mean(axis=(1, 3))
+        cote = h // 20
+        d = dossiers[k]
+        coords = []
+        for canal in "xyz":
+            coords.append(tifffile.imread(d / f"{canal}.tif").astype(np.float64)
+                          [45:45 + cote, 45:45 + cote])
+        masque = (coords[0] > 0) & (coords[1] > 0) & (couv > 0.9)
+        if masque.sum() < 100:
+            continue
+        patches[k] = (np.c_[coords[0][masque], coords[1][masque], coords[2][masque]],
+                      (bloc[masque] - (n - 1) / 2.0) * VOXEL_UM)
+
+    sorties = []
+    for a_, b_ in paires:
+        if a_ not in patches or b_ not in patches:
+            continue
+        (pa, sa), (pb, sb) = patches[a_], patches[b_]
+        distance, index = cKDTree(pb).query(pa)
+        proches = distance < 40
+        if proches.sum() < 50:
+            continue
+        sorties.append(dict(paire=f"w{a_:03d}-w{b_:03d}", appariements=int(proches.sum()),
+                            correlation=float(np.corrcoef(sa[proches],
+                                                          sb[index[proches]])[0, 1])))
+    return dict(paires=sorties,
+                correlation_max=max((abs(x["correlation"]) for x in sorties), default=None))
 
 
 def _erreur_du_champ(rouleau: str) -> tuple[float, str] | tuple[None, None]:
@@ -268,6 +378,20 @@ def _verifier(r: dict) -> int:
           r["erreur_du_champ_um"] < 3 * r["ecart_type_median_um"],
           f"champ {r['erreur_du_champ_um']:.0f} µm contre référent "
           f"{r['ecart_type_median_um']:.0f} µm")
+        # ⚠⚠ L'ECHELLE, et elle change la reponse : le champ agrege sur une cellule, donc
+        # c'est l'ecart a CETTE echelle qui le plafonne. Au pixel il vaut 27 µm, a la cellule
+        # 21 -- donc une plus petite part des 49 lui revient que je ne l'avais ecrit.
+        v("l'écart décroît avec l'échelle d'agrégation",
+          r["ecart_a_l_echelle_du_champ_um"] < r["ecart_type_median_um"],
+          f"{r['ecart_a_l_echelle_du_champ_um']:.1f} µm à {r['echelle_du_champ_px']} px "
+          f"contre {r['ecart_type_median_um']:.1f} au pixel")
+        # ⚠⚠⚠ CE QUI VALIDE LA DECOMPOSITION : sans ca, « independantes » serait une hypothese
+        # de confort. Un ecart systematique s'annulerait dans les differences du champ.
+        vo = r.get("voisines") or {}
+        if vo.get("correlation_max") is not None:
+            v("... et l'écart du référent n'est PAS corrélé entre spires voisines",
+              vo["correlation_max"] < 0.2,
+              " · ".join(f"{x['paire']} {x['correlation']:+.3f}" for x in vo["paires"]))
         v("... donc l'erreur propre du champ est bornée, sans qu'on puisse la mesurer",
           r["borne_basse_um"] < r["erreur_propre_si_independantes_um"] < r["borne_haute_um"],
           f"entre {r['borne_basse_um']:.0f} et {r['borne_haute_um']:.0f} µm, "
