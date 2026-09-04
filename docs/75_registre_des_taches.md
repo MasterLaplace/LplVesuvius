@@ -190,45 +190,51 @@ qu'un à 22,8 % (`55` : le mur 1 vient de la graine, pas du scan). `0139` ne se 
 sa queue — il se choisit parce que c'est le **seul endroit où l'on peut mesurer si le prédicat
 marche**.
 
-### A5 bis ⭐⭐⭐ — juger la CHAÎNE DE SPIRES par l'identité (l'expérience qui n'était pas montable)
+### A5 bis ⭐⭐ — la chaîne GLISSE et ne saute pas — et son budget d'écart est gonflé
 
-> Trouvé le 2026-09-04 en cherchant les docs qui avaient déjà étudié `suivre_nappe.py`, sur la
-> remarque de l'auteur : *« s'il existe c'est qu'il y a des docs qui ont étudié le sujet ? »*.
-> Oui — et ça a **remplacé** le plan que j'allais suivre.
+> ⚠⚠⚠ **Corrigé le 2026-09-04, deux fois de suite, par la lecture.** L'auteur a demandé si des
+> docs avaient étudié `suivre_nappe`, puis m'a renvoyé à `registres/fiches_de_lecture.md`, *« le
+> doc qui servait à noter les conclusions de chaque doc »*. Les deux ont **remplacé** ce que
+> j'allais faire, et la seconde a annulé ce que la première venait de me faire écrire.
 
-**Ce qui est déjà fait et qu'il ne faut pas refaire :**
+**Ce qui est déjà fait, et qu'il ne faut pas refaire :**
 
-- **la boucle de correction tourne, et c'est un cul-de-sac mesuré** (`42`) : trace → marcher la
-  prédiction → points de passage → `--resume --rewind-gen --correct` → juger. Le **témoin bat
-  toutes les corrections, à tous les poids**, en fenêtre valide. 318 points, c'est 0,56 % de la
-  surface — un coup de pouce local, pas une réorientation. Et le mode `--nappe` (5695 points,
-  10,1 %) ne renverse pas le verdict ;
-- **la chaîne de spires tourne aussi** (`43`) : `gen_neighbor` est l'outil « wrap by wrap » du
-  papier de juin 2026, public, et il construit la spire voisine depuis un segment officiel. Sept
-  spires enchaînées, α mesuré à chaque tour.
+- **la boucle de correction est un cul-de-sac mesuré** (`42`) : le témoin bat toutes les
+  corrections, à tous les poids, en fenêtre valide. 318 points = 0,56 % de la surface, et le
+  mode `--nappe` (10,1 %) ne renverse pas le verdict ;
+- **la chaîne de spires tourne** (`43`) : `gen_neighbor`, l'outil « wrap by wrap » public.
+  4 spires sur 7 convergent à pas 1,0, **6 sur 7 à pas 0,5**, et le levier est la **portée du
+  test de sortie** du rayon, pas le pas ;
+- ⭐⭐⭐ **et l'identité a DÉJÀ été jugée** (`44`, `src/nappe/couverture_publiee.py`) : le point
+  de départ étant un morceau de segment **publié**, la bonne feuille est connue sur toute son
+  emprise. Verdict : **la chaîne GLISSE, elle ne SAUTE pas** — écart lisse, monotone, du même
+  côté pour **73 %** des points, **69 µm à 5,76 mm**. Elle quitte la bande « même feuille »
+  (40 µm) vers 3,5 mm et reste loin de « feuille voisine » (250 µm). Et la dérive est une
+  **loi** qui prédit hors échantillon.
 
-⭐⭐⭐ **Et voici le trou, écrit par `43` lui-même** : *« α mesure s'il y a une feuille à portée,
-pas si c'est la bonne. »* La réponse donnée était les **113 µm** de `44` — *« donc la chaîne sait
-de quelle spire elle parle »*.
+⚠⚠ **Donc l'expérience que j'allais proposer était déjà faite**, et mon prédicat d'identité y
+confirmerait ce qu'on sait. Je l'avais écrite ici comme « l'expérience que personne ne pouvait
+poser ». C'était faux.
 
-⚠⚠ **`77` §10 fragilise cette réponse** : les 113 µm sont une distance au plus proche voisin
-entre **surfaces**, dépendante d'un réglage (116 → 102 µm quand `neighbor_step` est halvé), et
-les surfaces publiées sont elles-mêmes à **27 µm** de la matière. La chaîne n'a donc jamais été
-jugée sur l'**identité**, faute de référent.
+⭐⭐ **Ce que cette session ajoute vraiment, et c'est plus petit et plus juste** : `77` §10
+mesure que la surface publiée est elle-même à **27 µm** de la matière (20,8 à l'échelle d'une
+cellule). L'écart de la chaîne est mesuré **contre cette surface**, donc **son budget est
+gonflé** :
 
-**Le référent existe depuis cette session** : 37 spires consécutives approuvées sur
-`PHerc0139`, et c'est le seul rouleau qui a **tout** — référent d'identité, ombilic publié,
-prédicat qui sépare (2 tranches), **et une prédiction de surface `m7` publiée** (`PHerc0172`
-n'en publie aucune).
+| | |
+|---|---|
+| écart mesuré à 5,76 mm | **69 µm** |
+| en retirant le référent en quadrature | ≈ **64 µm** |
+| franchissement des 40 µm « même feuille » | mesuré à **3,5 mm** — donc **plus tard** en réalité |
 
-> **L'expérience** : enchaîner `gen_neighbor` sur `PHerc0139` depuis une spire publiée, et
-> juger chaque spire générée par le **prédicat d'identité** contre les 37 publiées. La question
-> devient « la chaîne saute-t-elle de feuille, et au bout de combien de tours ? » — celle que
-> le prix pose, et que personne ne pouvait poser.
+⚠ Et l'ordre de grandeur compte : à 3,5 mm l'écart mesuré vaut 40 µm dont **27 µm** sont ceux
+du référent. **La chaîne reste raccordable plus longtemps que la mesure ne le dit.** C'est une
+correction du budget, pas une réfutation — et c'est un chiffre à refaire proprement, parce que
+`44` mesure sur `PHerc1447` et `77` §10 sur `PHerc0172`.
 
-⚠ Ce qu'il faut savoir avant de la monter : l'érosion borne la chaîne à **15,6 % par tour**
-(`44` §5), et l'article mesure un **point fixe à 6,02 cm²**. Un échec au tour *k* est un
-**résultat**, pas une panne.
+> ⚠ **Le seul contrôle qui vaudrait d'être monté** : refaire `couverture_publiee.py` contre la
+> surface **recalée sur la bande** plutôt que contre la surface publiée. Si l'écart tombe, le
+> budget est bien gonflé ; sinon, mon §10 ne s'applique pas à cette échelle-là.
 
 ### A5 ⭐ — extraire, pas faire pousser
 
@@ -273,7 +279,7 @@ instruments existants.
 | **A5** | ⭐⭐ le **plancher** : une spire publiée est à **20,8 µm** de la matière *à l'échelle où le champ travaille* (`77` §10), donc l'erreur propre du champ est entre **28 et 49 µm**, **44** si indépendantes — et l'indépendance est **vérifiée** (corrélation ≤ 0,08 entre voisines) | mesuré en coupe sur **six** spires, dont cinq consécutives ; resserrer demanderait une règle autre que la spire publiée |
 | **A5** | l'extraction porte **une feuille** (47 µm), pas deux | mesuré : réinjecter une spire prédite ne change **rien** — le champ est un juge, pas un générateur |
 | **A5** | ⚠ la structure angulaire de l'écart (**71 µm**, 45 % de la médiane) **n'améliore pas** l'extrapolation | mesuré : un pas par cellule mis en commun donne 52 µm à une feuille contre 47 pour le pas global. Meilleur à longue portée (1,71 contre 1,90 feuille à huit), inutile là où ça compte |
-| **A5 bis** | ⭐⭐⭐ juger la chaîne `gen_neighbor` par l'**identité** — l'expérience que personne ne pouvait poser | montable : `PHerc0139` a le référent, l'ombilic, le prédicat **et** la prédiction `m7` publiée |
+| **A5 bis** | ⚠ ~~juger la chaîne par l'identité~~ — **déjà fait** (`44`) : elle **glisse**, elle ne saute pas. Ce qui reste est de refaire la mesure contre une surface **recalée**, son budget étant gonflé de ~27 µm | corrigé par la lecture des fiches ; le contrôle demande de recaler puis de rejouer `couverture_publiee.py` |
 | **A6** | la ROC de α n'est pas faite | demande de **rendre** 101 surfaces à deux profondeurs — le seul poste de ce registre qui exige le volume |
 | **B2** | « no threshold » pas encore rétréci dans l'abstract | ⚠ **à mesurer avant d'écrire** : α sur une surface translatée d'un demi-pas. Le champ la refuse (2,1 %), mais ce n'est pas α |
 | **C** | les trois tâches de la règle graduée | non commencées — bornées à trois semaines par conception |
