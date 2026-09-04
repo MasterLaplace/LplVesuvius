@@ -59,6 +59,20 @@ from le_sens_des_indices import (  # noqa: E402
     SECTEURS, TRANCHES_Z, centre_de, charger, _spires,
 )
 
+SEPARATION_ATTENDUE = {"PHerc0139": 2, "PHerc0172": None}
+"""Combien de tranches il faut agréger pour que les deux populations cessent de se recouvrir,
+**par rouleau**, et `None` quand elles ne cessent jamais.
+
+⚠⚠⚠ Écrit ici parce que c'est un FAIT MESURÉ sur chaque rouleau, pas un réglage. `77` a
+d'abord conclu « les deux populations ne se recouvrent pas » — c'était vrai de `PHerc0139` et
+**faux** de `PHerc0172`, où elles se recouvrent à tout niveau d'agrégation testé. Un prédicat
+qui marche ici et pas là doit dire lequel.
+
+⚠ Et sur les DEUX rouleaux, une tranche isolée ne suffit jamais. C'est la mesure de ce que
+`42` disait qualitativement — *le prédicat doit désigner des régions, pas des points* — et elle
+en donne la taille : deux tranches de hauteur sur `PHerc0139`, aucune taille suffisante sur
+`PHerc0172`."""
+
 DEFAUTS_CONNUS = (41, 45)
 """Les spires `w_k` dont `76` a mesuré, par une méthode entièrement différente, que la paire
 `(k, k+1)` n'est pas à une feuille : `w045`/`w046` sont la MÊME surface (0,0 µm) et
@@ -228,6 +242,73 @@ def _temoin_en_travers(rayons: dict[int, dict], depart: int, saut: int) -> dict:
     return r
 
 
+def _avances_par_tranche(cible: dict, autres: dict[int, dict]) -> dict[int, float]:
+    """
+    @brief L'avance d'indice, tranche de hauteur par tranche de hauteur.
+    """
+    assignes = {}
+    for cellule, rayon in cible.items():
+        table = sorted((autres[k][cellule], k) for k in autres if cellule in autres[k])
+        v = _indice_interpole(rayon, table)
+        if v is not None:
+            assignes[cellule] = v
+    par: dict[int, list] = {}
+    for (tranche, secteur), v in assignes.items():
+        par.setdefault(tranche, []).append((secteur, v))
+    out = {}
+    for tranche, points in par.items():
+        if len(points) < SECTEURS // 2:
+            continue
+        s = np.array([p[0] for p in points], dtype=float)
+        w = np.array([p[1] for p in points], dtype=float)
+        out[tranche] = float(np.polyfit(s, w, 1)[0] * SECTEURS)
+    return out
+
+
+def _separation(rayons: dict[int, dict], indices: list[int]) -> dict:
+    """
+    @brief À quelle taille de région les deux populations cessent-elles de se recouvrir ?
+
+    Rend, pour plusieurs nombres de tranches agrégées, le 9ᵉ décile des vraies spires et le
+    1ᵉʳ décile des sauts d'une feuille. La séparation est acquise quand le premier passe sous
+    le second — et **elle peut ne jamais l'être**, ce qui est un résultat et non une panne.
+    """
+    vraies, sauts = [], []
+    for k in indices[1:-1]:
+        vraies.append(_avances_par_tranche(rayons[k],
+                                           {j: v for j, v in rayons.items() if j != k}))
+    for k in indices[:-1]:
+        if k + 1 not in rayons:
+            continue
+        cible = {}
+        for c in rayons[k]:
+            if c in rayons[k + 1]:
+                w = (c[1] - 1) / max(1, SECTEURS - 1)
+                cible[c] = (1 - w) * rayons[k][c] + w * rayons[k + 1][c]
+        sauts.append(_avances_par_tranche(
+            cible, {j: v for j, v in rayons.items() if j not in (k, k + 1)}))
+
+    def agreger(serie: list[dict], m: int) -> np.ndarray:
+        out = []
+        for d in serie:
+            t = sorted(d)
+            for i in range(0, len(t) - m + 1, m):
+                out.append(float(np.median([d[x] for x in t[i:i + m]])))
+        return np.array(out)
+
+    paliers = []
+    for m in (1, 2, 4, 8, 16):
+        v, s = agreger(vraies, m), agreger(sauts, m)
+        if len(v) < 5 or len(s) < 5:
+            continue
+        vp90, sp10 = float(np.percentile(v, 90)), float(np.percentile(s, 10))
+        paliers.append(dict(tranches=m, n_vraies=len(v), n_sauts=len(s),
+                            vraie_p90=vp90, saut_p10=sp10, separe=bool(vp90 < sp10)))
+    acquises = [p["tranches"] for p in paliers if p["separe"]]
+    return dict(paliers=paliers, separe=bool(acquises),
+                tranches_necessaires=min(acquises) if acquises else None)
+
+
 def mesurer(rouleau: str = "PHerc0139") -> dict:
     dossiers = _spires(rouleau)
     nuages = {k: v for k, v in ((k, charger(d)) for k, d in dossiers.items()) if v}
@@ -269,6 +350,18 @@ def mesurer(rouleau: str = "PHerc0139") -> dict:
                 positions=[dict(de=t["de"], vers=t["vers"],
                                 avance=t["avance_par_tour"]) for t in serie])
 
+    # ⭐⭐⭐ LA SEPARATION SE MESURE, ELLE NE SE SUPPOSE PAS -- et elle depend du rouleau.
+    # `77` a d'abord conclu « les deux populations ne se recouvrent pas » sur `PHerc0139`.
+    # Mesure sur `PHerc0172` : elles se recouvrent, a tout niveau d'agregation teste. Un
+    # predicat qui marche ici et pas la doit DIRE lequel, sinon il ment sur le second rouleau
+    # avec les mots du premier.
+    #
+    # ⚠ Et la separation se joue a l'echelle de la REGION, pas de la tranche : par tranche
+    # isolee les deux populations se recouvrent meme sur `PHerc0139`. C'est la mesure de ce
+    # que `42` disait deja qualitativement -- « le predicat doit designer des regions, pas des
+    # points » -- et elle en donne la taille.
+    separation = _separation(rayons, indices)
+
     etendues = [x["etendue_90"] for x in a_exclue]
     erreurs = [x["erreur"] for x in a_exclue]
     avances = [x["avance_par_tour"] for x in a_exclue if x.get("avance_par_tour") is not None]
@@ -282,6 +375,7 @@ def mesurer(rouleau: str = "PHerc0139") -> dict:
         avance_par_tour_mediane=float(np.median(avances)) if avances else None,
         avance_p10=float(np.percentile(avances, 10)) if avances else None,
         avance_p90=float(np.percentile(avances, 90)) if avances else None,
+        separation=separation,
         temoins_en_travers=temoins,
         defauts_connus=DEFAUTS_CONNUS,
         par_spire=a_exclue,
@@ -332,11 +426,39 @@ def _verifier(r: dict) -> int:
     # ⚠⚠⚠ LE CONTROLE QUI FAIT DE CA UN PREDICAT : deux populations qui ne se recouvrent pas.
     # Sans lui, « la mediane d'un saut vaut 1 » serait compatible avec des distributions si
     # larges qu'aucune surface individuelle ne pourrait etre classee.
+    # ⚠⚠ Asserte dans les DEUX SENS : le rouleau doit se comporter comme il a ete mesure. Si
+    # `PHerc0139` cessait de separer, ou si `PHerc0172` se mettait a separer, ce controle
+    # tomberait -- et le second serait une excellente nouvelle. Un controle ecrit seulement
+    # dans le sens « ca separe » aurait force a ne pas enregistrer le second rouleau, donc a
+    # ne jamais voir qu'il ne separe pas.
     if "1" in t:
-        v("les deux populations ne se recouvrent PAS",
-          r["avance_p90"] < t["1"]["p10"],
+        separe = r["avance_p90"] < t["1"]["p10"]
+        attendu_sep = SEPARATION_ATTENDUE.get(r["rouleau"], True) is not None
+        v(("les deux populations ne se recouvrent PAS, à l'échelle de la spire entière"
+           if attendu_sep else
+           "les deux populations SE RECOUVRENT sur ce rouleau — mesuré, et dit"),
+          separe == attendu_sep,
           f"vraie spire jusqu'à {r['avance_p90']:+.3f}, saut d'une feuille à partir de "
           f"{t['1']['p10']:.3f}")
+
+    # ⚠⚠ ET LE PREDICAT DIT LUI-MEME OU IL S'APPLIQUE. Une tranche isolee ne suffit jamais,
+    # sur aucun des deux rouleaux ; la taille de region necessaire, elle, depend du rouleau et
+    # peut ne pas exister. Ces trois controles echouent si un rouleau change de comportement,
+    # ce qui est exactement ce qu'on veut savoir.
+    print("le prédicat déclare son échelle — une tranche isolée ne suffit jamais")
+    sep = r["separation"]
+    attendu = SEPARATION_ATTENDUE.get(r["rouleau"], "?")
+    un = next((p for p in sep["paliers"] if p["tranches"] == 1), None)
+    v("une tranche de hauteur isolée ne sépare pas",
+      un is not None and not un["separe"],
+      f"vraie p90 {un['vraie_p90']:+.3f} contre saut p10 {un['saut_p10']:+.3f}"
+      if un else "palier absent")
+    v(f"le rouleau se comporte comme mesuré ({attendu} tranches)",
+      attendu == "?" or sep["tranches_necessaires"] == attendu,
+      f"il faut {sep['tranches_necessaires']} tranche(s), attendu {attendu}")
+    v("... et le fichier le RAPPORTE au lieu de le supposer",
+      isinstance(sep.get("separe"), bool) and len(sep["paliers"]) >= 3,
+      f"séparé={sep['separe']} sur {len(sep['paliers'])} paliers")
 
     # ⚠⚠⚠ LA VALIDATION CROISEE, et c'est le controle le plus fort du fichier. Deux positions
     # rendent un « saut d'une feuille » qui n'avance pas -- et ce sont EXACTEMENT les deux
@@ -344,7 +466,7 @@ def _verifier(r: dict) -> int:
     # appariee, puis distance au plus proche voisin). Un defaut du referent, vu deux fois,
     # par deux instruments qui ne partagent rien.
     print("la validation croisée — les seuls ratés sont les défauts que `76` avait trouvés")
-    if "1" in t:
+    if "1" in t and r["separation"]["separe"]:
         rates = sorted(p["de"] for p in t["1"]["positions"]
                        if p["avance"] < r["avance_p90"] + 0.3)
         v("les positions qui n'avancent pas sont exactement les défauts connus",

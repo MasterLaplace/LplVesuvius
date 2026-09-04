@@ -1823,6 +1823,20 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 out.append(("borne basse d'un saut d'une feuille",
                             _deux2(t["p10"], 3), cde.name))
         ajoute("erreur d'indice a spire exclue", d["erreur_mediane"], 4, cde.name)
+        # ⚠⚠ L'ECHELLE du predicat : `42` disait « des regions, pas des points » ; ce chiffre
+        # en donne la taille. Garde parce qu'une prose qui l'oublierait redonnerait au
+        # predicat une resolution qu'il n'a pas.
+        sep = d.get("separation", {})
+        if sep.get("tranches_necessaires"):
+            out.append(("tranches a agreger pour separer",
+                        [f"**{sep['tranches_necessaires']}** tranches",
+                         f"{sep['tranches_necessaires']} tranches de hauteur"], cde.name))
+        for pal in sep.get("paliers", []):
+            if pal["tranches"] in (1, 2, 16):
+                out.append((f"palier {pal['tranches']} tranche(s) : vraie p90",
+                            _deux2(pal["vraie_p90"], 3, "", signe=True), cde.name))
+                out.append((f"palier {pal['tranches']} tranche(s) : saut p10",
+                            _deux2(pal["saut_p10"], 3, "", signe=True), cde.name))
     # ⭐⭐⭐ Le MASQUE D'APPROBATION (`77` §6). Garde parce que le bras qui mord est le
     # demi-pas : c'est LUI qui separe un masque utile d'un masque qui approuve tout, et une
     # prose qui deriverait de sa mesure ne serait plus verifiable par personne.

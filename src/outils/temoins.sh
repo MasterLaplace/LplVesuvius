@@ -1198,6 +1198,12 @@ run "paver ou echantillonner"  uv run python "$ROOT/src/excision/paver_ou_echant
 # exclure la spire jugee rend une erreur exactement nulle (le champ la LIT), et laisser les
 # spires bornes dans le champ qui juge le temoin fait perdre un des deux defauts.
 run "le champ d'enroulement"   uv run python "$ROOT/src/excision/le_champ_denroulement.py" --verifier
+# ⭐⭐⭐ LE MEME predicat sur un SECOND rouleau -- et il n'y separe PAS. C'est pour ca que cette
+# batterie existe : un predicat qui marche ici et pas la doit DIRE lequel. Le controle est
+# asserte dans les deux sens (`SEPARATION_ATTENDUE`), donc il tombe aussi bien si `PHerc0139`
+# cessait de separer que si `PHerc0172` se mettait a le faire -- et le second serait une
+# excellente nouvelle.
+run "champ d'enroulement: 0172" uv run python "$ROOT/src/excision/le_champ_denroulement.py" --rouleau PHerc0172 --verifier
 # ⭐⭐⭐ `approval.tif` CALCULE -- ce que le pinceau peint, aux quatre bras de controle. Les deux
 # sondes mordent fort (4 echecs chacune) : un masque qui approuve tout, et le bug que j'avais
 # ecrit -- retirer du champ la spire qui BORNE la surface jugee detruit l'information qui

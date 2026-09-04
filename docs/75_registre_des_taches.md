@@ -78,6 +78,17 @@ grandeur qui décide est l'**avance d'indice sur un tour**.
 **Les deux populations ne se recouvrent pas** (+0,230 contre 0,753) et l'avance **compte** les
 feuilles. Validation à spire exclue ; témoins **construits** à chaque position.
 
+⚠⚠⚠ **Mais c'est vrai de `PHerc0139` et FAUX de `PHerc0172`** (`77` §7) : la rampe se reproduit
+(0,02 → 1,07 → 2,00 → 2,98) mais les populations s'y **recouvrent**, à tout niveau d'agrégation
+testé. Le prédicat **mesure et rapporte** désormais sa propre applicabilité, et le contrôle est
+asserté dans les **deux** sens.
+
+⚠⚠ **Et une tranche isolée ne suffit JAMAIS**, sur aucun des deux rouleaux. La séparation du
+§2 est celle de la spire entière. C'est la mesure de ce que `42` disait qualitativement — *des
+régions, pas des points* — et elle en donne la taille : **2 tranches** sur `PHerc0139`, aucune
+taille suffisante sur `PHerc0172`. **La cause reste inconnue** (couverture angulaire, spires
+par cellule et monotonie écartées par la mesure).
+
 ⭐⭐⭐ **Validation croisée** : les deux seules positions qui n'avancent pas sont **exactement**
 les deux défauts que `76` avait trouvés par une méthode qui ne partage rien avec celle-ci.
 

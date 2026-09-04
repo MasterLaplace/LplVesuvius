@@ -13,6 +13,52 @@
   "avance_par_tour_mediane": -0.005389676193628076,
   "avance_p10": -0.17018474181057366,
   "avance_p90": 0.22975600704282476,
+  "separation": {
+    "paliers": [
+      {
+        "tranches": 1,
+        "n_vraies": 698,
+        "n_sauts": 649,
+        "vraie_p90": 0.4851985003261411,
+        "saut_p10": 0.3276449844794457,
+        "separe": false
+      },
+      {
+        "tranches": 2,
+        "n_vraies": 340,
+        "n_sauts": 316,
+        "vraie_p90": 0.41873634842138924,
+        "saut_p10": 0.4342400056302961,
+        "separe": true
+      },
+      {
+        "tranches": 4,
+        "n_vraies": 155,
+        "n_sauts": 145,
+        "vraie_p90": 0.3766012201614286,
+        "saut_p10": 0.596204415664796,
+        "separe": true
+      },
+      {
+        "tranches": 8,
+        "n_vraies": 68,
+        "n_sauts": 64,
+        "vraie_p90": 0.35059975457734865,
+        "saut_p10": 0.6097120986107758,
+        "separe": true
+      },
+      {
+        "tranches": 16,
+        "n_vraies": 34,
+        "n_sauts": 32,
+        "vraie_p90": 0.26271138488887963,
+        "saut_p10": 0.7469822549505383,
+        "separe": true
+      }
+    ],
+    "separe": true,
+    "tranches_necessaires": 2
+  },
   "temoins_en_travers": {
     "1": {
       "saut": 1,

@@ -59,6 +59,10 @@ retirée du champ qui la juge.
 un saut d'une feuille commence à **0,753**. C'est ce qui fait un prédicat plutôt qu'une
 tendance.
 
+⚠⚠⚠ **Mais cette phrase est vraie de `PHerc0139` et FAUSSE de `PHerc0172`** — voir §7, écrit
+après avoir fait tourner le même code sur le second rouleau. Elle est laissée ici telle qu'elle
+a été mesurée, avec son renvoi : c'est le cas particulier, pas la règle.
+
 ⭐ Et l'avance **compte** : 0 → 1,10 → 1,96 → 2,85 pour 0, 1, 2, 3 feuilles franchies.
 
 ### ⚠⚠ Le témoin est CONSTRUIT, pas espéré
@@ -199,3 +203,66 @@ contrôles**.
 
 ⚠ Et le réglage juste est aussi le plus **réaliste** : à l'usage, le champ est tout ce qui est
 publié, et la surface jugée est une trace neuve, absente du champ.
+
+---
+
+## 7. ⚠⚠⚠ Le second rouleau : le prédicat ne sépare PAS partout, et il le dit maintenant
+
+> Ajouté le 2026-09-04, après avoir fait tourner le **même code** sur `PHerc0172` (44 spires).
+
+Le §2 concluait « les deux populations ne se recouvrent pas ». **C'était vrai du rouleau
+mesuré, et je l'ai écrit comme une propriété du prédicat.** Sur `PHerc0172`, elles se
+recouvrent.
+
+| | avance d'une vraie spire | saut d'une feuille | séparé ? |
+|---|---:|---:|:---:|
+| `PHerc0139` | −0,005 [−0,170 ; **+0,230**] | 1,103 [**0,753** ; 1,479] | ✅ |
+| `PHerc0172` | +0,022 [−0,554 ; **+0,634**] | 1,073 [**−0,067** ; 1,820] | ❌ |
+
+⭐ **La rampe, elle, se reproduit parfaitement** : 0,02 → 1,07 → 2,00 → 2,98 sur `PHerc0172`,
+contre 0,00 → 1,10 → 1,96 → 2,85 sur `PHerc0139`. Le champ **compte** les feuilles sur les deux
+rouleaux ; ce qui diffère est la **dispersion**, donc la capacité à classer une surface prise
+isolément.
+
+### ⚠⚠ Et une découverte qui scope tout le reste : une tranche isolée ne suffit JAMAIS
+
+En cherchant à quelle échelle la séparation apparaît, j'ai mesuré qu'elle n'existe **sur aucun
+des deux rouleaux** au niveau d'une tranche de hauteur isolée — y compris sur `PHerc0139`, où
+le §2 la donnait pour acquise. La séparation du §2 est celle de la **spire entière**,
+c'est-à-dire d'une médiane sur ~24 tranches.
+
+| tranches agrégées | `PHerc0139` | `PHerc0172` |
+|---:|:---:|:---:|
+| 1 | ❌ (+0,485 contre +0,328) | ❌ |
+| **2** | ✅ (+0,419 contre **+0,434**) | ❌ |
+| 4 | ✅ | ❌ |
+| 8 | ✅ | ❌ |
+| 16 | ✅ (+0,263 contre +0,747) | ❌ (+0,753 contre +0,221) |
+
+⭐⭐ **C'est la mesure de ce que `42` disait qualitativement** — *le prédicat doit désigner des
+régions, pas des points* — et elle en donne la **taille** : **2 tranches de hauteur** sur
+`PHerc0139`, **aucune taille suffisante** sur `PHerc0172`.
+
+### Ce que ça change dans le code
+
+Le prédicat **mesure et rapporte sa propre applicabilité** (`separation` dans le JSON), au lieu
+de la supposer. Et le contrôle est asserté **dans les deux sens** via `SEPARATION_ATTENDUE` :
+il tombe aussi bien si `PHerc0139` cessait de séparer que si `PHerc0172` s'y mettait — et le
+second serait une excellente nouvelle.
+
+⚠ Un contrôle écrit seulement dans le sens « ça sépare » aurait forcé à **ne pas enregistrer**
+le second rouleau, donc à ne jamais voir qu'il ne sépare pas. C'est la façon dont une
+limitation reste invisible.
+
+### ⚠ Ce que la cause n'est PAS
+
+Cherché et écarté par la mesure :
+
+- **la couverture angulaire** — `PHerc0172` couvre 83 % d'un tour en médiane contre 100 % pour
+  `PHerc0139`, ce qui est une piste réelle ; mais exiger ≥ 90 % de couverture **ne restaure pas**
+  la séparation (p90 +0,577 contre p10 +0,174) ;
+- **le nombre de spires par cellule** — 27 contre 36 en médiane, du même ordre ;
+- **la monotonie des rayons** — 5,6 % de paires non monotones contre 5,2 %, indiscernable.
+
+**La cause reste inconnue**, et c'est dit plutôt que comblé par une hypothèse. Ce qui est
+établi est le fait, et le fait est que le prédicat doit être **étalonné par rouleau**.
