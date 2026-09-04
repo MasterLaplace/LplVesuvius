@@ -502,10 +502,27 @@ deux qui puisse répondre.
 10. ⚠ **Ce qui reste une vraie différence après correction est la COUVERTURE**, pas le rho : la
     boule de rayon 100 ne mesure que **20,7 %** des cellules, et aucun rayon ne répare ça.
 
-⚠ **Restant sur D1** : un tirage **apparié** (mesuré sur les cellules qui survivent à la
-réparation, des deux côtés) serrerait la borne de 5 %. Et les `sweep_PHerc*.jsonl` des **autres
-rouleaux** n'ont aucune trace commune avec Scroll 1, donc `le_rayon_des_mesures.py` ne peut pas
-les dater — il faudrait une référence corrigée par rouleau.
+11. ✅ **Et la leçon d'outillage du §9 est enfin appliquée** : `proximity.py` n'écrivait pas son
+    instrument, `baseline_sweep.py` l'écrivait depuis août sous le nom `echelle`. Les deux
+    écrivent désormais le **même** bloc. Conséquence immédiate : la question que `07` §9 déclarait
+    insoluble est **tranchée par l'artefact** — `sweep_PHerc1667.jsonl` déclare
+    `voxel_um 7,91`, donc 18 voxels y font **142,4 µm** et la ligne PHerc1667 était bien appariée.
+
+⭐⭐ **La marche suivante est identifiée ET rendue possible par une mesure.** La borne de 5 % vient
+du tirage **non apparié** : `proximity.py` tire dans l'index des cellules *valides*, dont le nombre
+change avec la réparation. Or **la grille de paramétrisation, elle, ne change pas** — mesuré sur
+`w064-068` : `756 × 2940` des deux côtés, 1 999 850 → 1 999 708 cellules valides, soit **142
+perdues sur deux millions**. Donc la cellule (i, j) d'avant EST celle d'après, et un tirage par
+**position de grille** (plutôt que par index de cellule valide) serait apparié par construction —
+le bruit d'échantillonnage disparaîtrait du comparatif au lieu d'être borné.
+
+⚠ Ce doit être un mode **opt-in** (`--tirage-par-position`) : changer le tirage par défaut
+déplacerait toute mesure déjà publiée.
+
+⚠ **Restant sur D1** : ce tirage apparié. Et les `sweep_PHerc*.jsonl` des **autres rouleaux** sans
+déclaration (`sweep_PHerc0139`, `sweep_0139_*`, `sweep_s1_pas`) n'ont aucune trace commune avec
+Scroll 1, donc `le_rayon_des_mesures.py` ne peut ni les dater par comparaison ni lire leur
+déclaration — il faudrait les régénérer, ce qui les fera déclarer.
 
 ### D2 ⚠ — le contrôle P1 bis de `71`
 
