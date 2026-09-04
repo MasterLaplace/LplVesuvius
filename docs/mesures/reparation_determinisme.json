@@ -1,0 +1,31 @@
+{
+  "trace": "20260701183126-w038-045",
+  "repetitions": 3,
+  "certificats": [
+    {
+      "status": "clean",
+      "n_removed_quads": 3698,
+      "retained_area_fraction": 0.9987927668066449,
+      "excised_area_fraction": 0.001207233193355198
+    },
+    {
+      "status": "clean",
+      "n_removed_quads": 3698,
+      "retained_area_fraction": 0.9987927668066449,
+      "excised_area_fraction": 0.001207233193355198
+    },
+    {
+      "status": "clean",
+      "n_removed_quads": 3698,
+      "retained_area_fraction": 0.9987927668066449,
+      "excised_area_fraction": 0.001207233193355198
+    }
+  ],
+  "distincts": 1,
+  "quads": [
+    3698,
+    3698,
+    3698
+  ],
+  "deterministe": true
+}

@@ -405,6 +405,32 @@ def _verifier(r: dict | None = None) -> int:
       f"{min(rangs_stables(gros)):.3f} sans les comptes à un chiffre "
       f"({len(gros)} traces) — la population de `07` se mesure avec --population")
 
+    # ⚠⚠⚠ ET SUR LA POPULATION ENTIERE, LE RHO LUI-MEME EST UN TIRAGE. `07` §8 publie
+    # « +0,769 » et `07` §9 « +0,840 » comme si c'etaient des nombres ; balayes sur cinq
+    # graines, au rayon corrige, ils s'etalent de +0,724 a +0,849. Ce n'est pas une critique du
+    # rho : c'est ce qu'on doit savoir avant de comparer deux rho a la troisieme decimale.
+    pop = RACINE / "docs" / "mesures" / "le_bruit_population.json"
+    if pop.is_file():
+        print("\net sur la POPULATION entiere, le rho lui-meme est un tirage")
+        d = json.loads(pop.read_text())
+        series = {c: [x["rho"] for x in v] for c, v in d["rho"].items() if v}
+        if "fraction_below_third" in series and "shortfall" in series:
+            f, sh = series["fraction_below_third"], series["shortfall"]
+            etf, ets = max(f) - min(f), max(sh) - min(sh)
+            v("le rho de `fraction_below_third` s'étale d'une graine à l'autre",
+              etf > 0.05,
+              f"{min(f):+.3f} à {max(f):+.3f} — étendue {etf:.3f} sur {len(f)} graines")
+            # ⚠⚠ LA MOITIE CONSTRUCTIVE, sur la population cette fois : la colonne sans seuil
+            # ordonne AUSSI BIEN et bien plus stablement. Ecrit pour tomber si l'un des deux
+            # cessait d'etre vrai.
+            v("... alors que celui de `shortfall` tient",
+              ets < etf / 2,
+              f"{min(sh):+.3f} à {max(sh):+.3f} — étendue {ets:.3f}, "
+              f"{etf / ets:.1f} fois plus serrée")
+            v("... et les deux ordonnent aussi bien, à moins de 0,10 près",
+              abs(statistics.median(f) - statistics.median(sh)) < 0.10,
+              f"médianes {statistics.median(f):+.3f} contre {statistics.median(sh):+.3f}")
+
     print("\net la colonne SANS SEUIL, elle, tient")
     # ⚠⚠ LA MOITIE CONSTRUCTIVE. Demolir la colonne lue ne dit pas quoi lire. `shortfall`
     # moyenne toute la queue basse sur des milliers de cellules, donc une cellule qui entre ou

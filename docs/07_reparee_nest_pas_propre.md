@@ -338,7 +338,15 @@ une trace sous un tour de couverture doit être **refusée avec sa raison**, pas
 
 ---
 
-## 8. ✅ Le seuil d'un tiers : ni arbitraire, ni supprimable
+## 8. ~~✅ Le seuil d'un tiers : ni arbitraire, ni supprimable~~ — ⚠⚠⚠ **PÉRIMÉ, voir §11**
+
+> ⚠⚠⚠ **Tout ce qui suit est mesuré à l'ANCIEN rayon de recherche**, celui que le §9 établit
+> quatre fois trop grand. Les nombres sont exacts et reproductibles sur leur fichier — c'est
+> vérifié — mais ils portent sur un instrument que ce document a corrigé **plus bas**, et
+> personne ne les a rejoués. Au bon rayon, **les deux moitiés de l'argument tombent** : l'écart
+> entre `fraction_below_third` et `shortfall` passe de 0,429 à 0,054, et le « plateau puis
+> effondrement » devient un plateau **sur toute la plage**. Le seuil ne sélectionne aucun régime.
+> Gardé tel quel pour comparaison, comme toute figure datée de ce dépôt. → [§11](#11--le-9-a-corrigé-linstrument-et-na-re-mesuré-quune-colonne)
 
 `06` §3.7 l'avait entamé, le §5 ci-dessus le réclamait encore. Tranché.
 
@@ -685,33 +693,36 @@ dispersion d'un tirage de 20 000 cellules. Le distinguer demanderait un tirage p
 tirage **apparié** — c'est-à-dire mesuré sur les cellules qui survivent à la réparation, des deux
 côtés.
 
-### ⚠⚠⚠ La réparation elle-même n'est pas déterministe
+### ⚠⚠⚠ « La réparation n'est pas déterministe » — affirmé, puis RÉFUTÉ par son propre producteur
 
-Trouvé en relançant le lot pour ajouter la colonne `shortfall` : **le même appel `windcheck
-transform`, sur la même trace, a retiré 3 696 quads au premier run et 3 698 au second**
-(`w038-045`, 0701), et l'aire gardée bouge en conséquence.
+En relançant le lot pour ajouter la colonne `shortfall`, le même appel `windcheck transform` sur
+la même trace a rendu **3 696** quads retirés puis **3 698** (`w038-045`, 0701) — et le Δ de
+cette trace est passé de **−3,5 %** à **+21,2 %** entre les deux exécutions. J'ai lu ça comme une
+non-reproductibilité de la réparation, et c'était le plus solide de mes arguments.
 
-⚠ Ces deux comptes venaient de deux sorties de terminal — c'est-à-dire de la dette `D3` que ce
-document dénonce — et le garde `chiffres_sans_record` les a signalés comme publiés sans record.
-Le mode `--determinisme` de `reparation_et_proximite.py` les produit désormais dans l'arbre :
-il rejoue la réparation N fois sur une même trace et compare les certificats.
+⚠ Il reposait sur **deux sorties de terminal**, c'est-à-dire sur la dette `D3` que cette section
+dénonce. Le mode `--determinisme` a été écrit pour le mettre dans l'arbre — et il l'a **réfuté
+dans l'heure** :
 
-Et la conséquence sur la lecture est directe : **le Δ de cette trace passe de −3,5 % à +21,2 %
-entre deux exécutions du même pipeline.** Un signe qui s'inverse quand rien n'a changé est la
-démonstration la plus courte que la table du §8 ne portait pas d'information.
+| réparation | 1 | 2 | 3 |
+|---|---:|---:|---:|
+| quads retirés | 3 698 | 3 698 | 3 698 |
 
-⚠ Ce fait est **rapporté et non expliqué** : il faudrait rejouer la réparation seule, plusieurs
-fois, pour dire si la variabilité vient d'un ordre de parcours, d'un parallélisme ou d'un seuil.
-Il suffit ici à établir que « avant » et « après » ne sont pas deux mesures d'un même objet.
+**Trois réparations consécutives rendent un certificat identique** — statut, quads retirés et
+aire gardée compris, comparés champ à champ et non seulement sur le compte. Ce qui reste établi est donc
+plus étroit et plus honnête : l'écart 3 696 / 3 698 a bien été observé, il n'est **pas
+reproductible à conditions égales**, et sa cause est inconnue.
 
-⭐ **Et ce dépôt a déjà rencontré exactement cette forme, une fois, chez le voisin.**
-[`44`](44_ou_la_chaine_se_trouve.md) établit que `vc_grow_seg_from_seed` tirait son aléa d'une
-graine posée par **l'horloge** et tournait sur **22 fils** — donc deux exécutions de la même
-commande ne rendaient pas le même maillage, et un résultat publié avait été lu comme un effet de
-réglage. Le remède y a été `VC_GROWPATCH_RNG_SEED` plus `thread_limit: 1`, après quoi deux
-exécutions rendent un maillage **identique octet pour octet**. C'est la première chose à essayer
-sur `windcheck transform`, et c'est la raison de le noter ici plutôt que de le laisser en
-énigme : la forme du remède est connue.
+⚠ Et trois répétitions sont une preuve **faible** de déterminisme : elles excluent « différent à
+chaque fois », pas « différent de temps en temps ». Le contrôle tombera le jour où une répétition
+divergera, ce qui serait précisément le résultat qu'il faut.
+
+> ⭐ C'est exactement ce à quoi sert un producteur. La même heure a vu naître une affirmation
+> confortable et l'instrument qui l'a démentie — et si elle était restée dans un log de `/tmp`,
+> elle serait aujourd'hui dans ce document, fausse et invérifiable.
+
+⚠ Rien de tout cela ne change la conclusion : la table du §8 est déjà sans information par
+l'argument du bruit de graine seul, qui, lui, est mesuré.
 
 ### ⚠⚠ Deux hypothèses mortes, écrites pour qu'on ne les refasse pas
 
@@ -760,4 +771,110 @@ uv run python src/excision/le_bruit_de_lechantillon.py --graines 12 \
 uv run python src/excision/le_bruit_de_lechantillon.py --verifier
 uv run python src/figures/figure_bruit_de_lechantillon.py \
     --sortie docs/images/07_bruit_de_lechantillon.png
+```
+
+---
+
+## 11. ⭐⭐⭐ Le §9 a corrigé l'instrument, et n'a re-mesuré qu'une colonne
+
+> 2026-09-04. Mesure : `src/excision/le_seuil_au_bon_rayon.py` (12 contrôles),
+> `docs/mesures/le_seuil_au_bon_rayon.json`, sur `docs/mesures/proximity_scroll1_rayon_corrige.jsonl`.
+
+Le §9 établit que le rayon de recherche était **4× trop grand** — il trouvait la spire
+**voisine**, qui est de la géométrie parfaitement normale, et noyait l'anomalie dedans — puis
+publie le gain pour `fraction_below_third` seule : +0,769 → **+0,840** sur Scroll 1. Le §8, qui
+est *au-dessus* dans ce document et compare les **grandeurs entre elles**, n'a jamais été rejoué.
+
+Son fichier de mesure porte donc encore l'ancien rayon, et ça se voit sur une seule trace :
+
+| `w010-027` | `proximity_scroll1.jsonl` | instrument corrigé |
+|---|---:|---:|
+| cellules mesurées | **19 702** | **2 487** |
+| espacement médian | **260,8 µm** | **117,9 µm** |
+
+### ⚠⚠⚠ Et personne ne l'a rejoué parce que le producteur NE TOURNAIT PLUS
+
+`src/excision/run_proximity.sh` est le producteur de `proximity_scroll1.jsonl`, donc de tout
+l'arc d'excision. Il appelait `python -m excision.proximity`, qui ne résout plus
+(`No module named 'excision'`) — et il redirigeait l'erreur vers `/dev/null` en comptant l'échec
+comme *« trop courte, ou maillage absent »*. Un run qui ne mesurait **rien** rendait donc
+`0 mesurées, 55 sans mesure` **et sortait en 0**.
+
+> C'est le mode d'échec que ce dépôt connaît par cœur : **une panne totale qui ressemble à une
+> population vide.** Et sa conséquence est celle-ci — le fichier n'a pas été régénéré après la
+> correction de rayon, parce que la commande écrite dans `06` pour le régénérer ne marchait pas.
+
+Corrigé : appel par chemin, le code 3 (moins d'un tour, hors domaine) compté **à part** des vraies
+pannes qui sont désormais **rapportées avec leur sortie d'erreur**, et **un run qui ne mesure rien
+ne sort plus en 0**. Résultat sur le corpus : `44 mesurées · 11 hors domaine · 0 en panne`.
+
+### Le contrôle qui valide l'outil avant ses résultats
+
+Le producteur retrouve **les quatre nombres du §8** en lisant *son* fichier : +0,7689, +0,6589,
+−0,5123, +0,3400. S'il ne les retrouvait pas, aucune de ses autres colonnes ne vaudrait rien.
+
+### ⭐⭐⭐ Au bon rayon, la conclusion du §8 s'inverse
+
+| grandeur | seuil ? | ancien rayon | **rayon corrigé** |
+|---|---|---:|---:|
+| `fraction_below_third` | oui, 1/3 | +0,769 | **+0,840** |
+| `fraction_below_half` | oui, 1/2 | +0,659 | **+0,877** |
+| `ratio_p5` | non (un centile) | −0,512 | **−0,851** |
+| `shortfall` | **non, aucune coupure** | **+0,340** | **+0,785** |
+| `shortfall_worst_decile` | non | +0,567 | **+0,860** |
+
+Le §8 conclut *« aucune grandeur sans seuil ne l'égale »* et en tire que le seuil **n'est pas
+supprimable**. Au rayon corrigé, l'écart entre `fraction_below_third` et `shortfall` tombe de
+**0,429 à 0,054**, et c'est bien la grandeur **moyennée** qui gagne le plus à la correction
+(+0,445 contre +0,071) — ce qui est exactement le mécanisme que le §9 décrit : une dilution frappe
+une moyenne sur toute la queue bien plus fort qu'un compte dans la queue extrême.
+
+### Et le « plateau puis effondrement » disparaît
+
+| seuil | 0,15 | 0,20 | 0,25 | 0,30 | 1/3 | 0,40 | 0,50 | 0,60 | 0,70 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| ancien rayon | 0,759 | 0,773 | 0,770 | 0,779 | 0,769 | 0,774 | 0,659 | 0,488 | **0,282** |
+| **rayon corrigé** | 0,854 | 0,850 | 0,874 | 0,838 | 0,840 | 0,864 | 0,877 | 0,867 | **0,829** |
+
+L'argument du §8 est *un plateau suivi d'un effondrement*, donc 1/3 serait « le bord d'un
+régime ». **La chute vaut 0,477 à l'ancien rayon et 0,025 au bon.** Il n'y a plus de bord : rho
+reste plat sur toute la plage testée.
+
+> ⭐ Le seuil ne sélectionne aucun régime — **il ne fait rien**. L'effondrement était l'artefact
+> du rayon trop grand : à 749 µm un seuil lâche admettait la spire voisine, qui est de la
+> géométrie normale ; à 142,8 µm il n'y a plus de spire voisine dans le rayon à admettre.
+
+### ⚠⚠ Et la garde contre la sur-lecture, qui est indispensable ici
+
+Les valeurs corrigées s'étalent de **0,785 à 0,877**, soit **0,092** — or chaque rho est lui-même
+un tirage d'étendue **0,125** (§10, cinq graines). **Aucun classement entre ces grandeurs n'est
+lisible** : ni « le demi bat le tiers », ni l'inverse. Ce qui se lit, c'est qu'elles sont
+**équivalentes**, ce qui est précisément l'inverse de la conclusion du §8.
+
+⚠ **Ce que ça ne dit pas** : quel rayon est le bon. Le §9 l'a tranché ailleurs et avant, par la
+physique (pas inter-feuilles 142,8 µm, cv 1,8 %, `11` §3), ce qui est ce qui rend ce choix non
+ajustable. Cette section prend l'instrument tel que le §9 l'a laissé.
+
+⚠ Les deux colonnes ne portent pas sur exactement la même population : **46 traces** à l'ancien
+rayon contre **44** au corrigé. Un rayon plus grand trouve un vis-à-vis pour plus de traces, donc
+deux traces sortent du domaine quand il rétrécit. C'est une conséquence de la correction, pas un
+biais du comparatif — mais le comparatif n'est pas parfaitement apparié, et ça se dit.
+
+### ⭐ La conséquence pratique, pour tout ce qui vient après
+
+**`shortfall` devient la colonne de référence.** Elle ordonne aussi bien
+(médiane +0,765 contre +0,780 sur cinq graines), et son bruit d'échantillonnage est **4,5 fois
+plus serré** (étendue de rho 0,028 contre 0,125 ; étendue par trace < 5 % contre 35 à 229 %).
+Pour toute question de **différence** — « ce traitement a-t-il amélioré cette surface ? », qui est
+la question que la chaîne de déroulage pose en boucle — c'est la seule des deux qui puisse
+répondre.
+
+### Reproduire
+
+```bash
+# ⚠ Le fichier de mesure au bon rayon est REGENERABLE : son producteur ne tournait plus.
+./src/excision/run_proximity.sh data/repos/windcheck/data/scroll1_tifxyz \
+    docs/mesures/proximity_scroll1_rayon_corrige.jsonl
+uv run python src/excision/le_seuil_au_bon_rayon.py --json docs/mesures/le_seuil_au_bon_rayon.json
+uv run python src/excision/le_seuil_au_bon_rayon.py --verifier
 ```

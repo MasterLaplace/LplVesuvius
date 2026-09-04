@@ -387,18 +387,24 @@ def _verifier(r: dict | None = None) -> int:
                       len(dehors) < confrontes / 2,
                       f"{len(dehors)}/{confrontes} dehors : "
                       + (", ".join(x[-8:] for x in dehors) or "aucune"))
-        # ⚠⚠⚠ LA REPARATION ELLE-MEME N'EST PAS DETERMINISTE, et ce fait est lu dans une mesure
-        # versionnee plutot que dans un log de terminal -- sans quoi il serait exactement la
-        # dette `D3` que ce fichier existe pour rembourser. Assertion ecrite pour TOMBER si une
-        # version future de `windcheck` devenait deterministe : ce serait un signal a suivre,
-        # pas un detail.
+        # ⚠⚠⚠ J'ALLAIS PUBLIER « LA REPARATION N'EST PAS DETERMINISTE », ET LE PRODUCTEUR L'A
+        # REFUTE DANS L'HEURE. Deux passages du lot avaient rendu 3 696 puis 3 698 quads retires
+        # sur la meme trace, et j'en avais conclu la non-determinisme -- depuis deux sorties de
+        # terminal, c'est-a-dire depuis la dette `D3` que ce fichier existe pour rembourser.
+        # Trois reparations consecutives rendent un certificat IDENTIQUE. L'ecart observe est
+        # donc reel mais NON REPRODUCTIBLE a conditions egales, et sa cause reste inconnue.
+        #
+        # ⚠ Trois repetitions sont une preuve faible de determinisme : elles excluent « different
+        # a chaque fois », pas « different de temps en temps ». L'assertion dit ce qui est
+        # mesure, et elle tombera le jour ou une repetition divergera -- ce qui serait
+        # precisement le resultat qu'il faut.
         det = RACINE / "docs" / "mesures" / "reparation_determinisme.json"
         if det.is_file():
             d = json.loads(det.read_text())
-            v("la réparation rend des certificats DIFFÉRENTS d'un run à l'autre",
-              not d["deterministe"],
-              f"{d['distincts']} certificats distincts en {d['repetitions']} réparations · "
-              f"quads {' vs '.join(str(x) for x in d['quads'])}")
+            v("la réparation rend le MÊME certificat sur des runs consécutifs",
+              d["deterministe"],
+              f"{d['distincts']} certificat(s) distinct(s) en {d['repetitions']} réparations · "
+              f"quads {' · '.join(str(x) for x in d['quads'])}")
         v("... et chaque paire a bien retiré quelque chose",
           all(p["quads_retires"] > 0 for p in r["paires"] if p["statut"] != "already_clean"),
           " · ".join(f"{p['quads_retires']} quads" for p in r["paires"]))

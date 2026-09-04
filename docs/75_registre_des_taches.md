@@ -459,8 +459,36 @@ mesuré sur les cellules qui survivent à la réparation, des deux côtés.
    ⭐ Le dépôt a déjà rencontré cette forme (`44` : rng semé par l'horloge + 22 fils), et son
    remède est connu — une graine posée et `thread_limit: 1`.
 
-⚠ **Restant sur D1** : le balayage `--population` doit dire si le rho de +0,769 du premier §8 de
-`07` dépend lui aussi de la graine. Et un tirage **apparié** serrerait la borne de 5 %.
+5. ⭐⭐⭐ **Et le balayage `--population` a trouvé bien plus que ça : le premier §8 de `07` est
+   PÉRIMÉ.** Le §9 a corrigé le rayon de recherche (4× trop grand, il trouvait la spire voisine
+   et noyait l'anomalie dedans) et n'a re-mesuré **qu'une colonne**. Le §8, qui compare les
+   grandeurs entre elles et conclut que le seuil *« n'est ni arbitraire ni supprimable »*, porte
+   encore l'ancien rayon. Au bon rayon : l'écart entre `fraction_below_third` et `shortfall`
+   tombe de **0,429 à 0,054**, et le « plateau puis effondrement » qui justifiait le seuil devient
+   un plateau **sur toute la plage** (chute 0,477 → **0,025**). **Le seuil ne sélectionne aucun
+   régime.**
+
+6. ⚠⚠⚠ **Et personne ne l'avait rejoué parce que le producteur ne tournait plus.**
+   `run_proximity.sh` appelait `python -m excision.proximity`, qui ne résout plus, et avalait
+   l'erreur : un run qui ne mesurait **rien** rendait « 0 mesurées, 55 sans mesure » **et sortait
+   en 0**. La panne totale ressemblait à une population vide. Corrigé, et un run qui ne mesure
+   rien ne sort plus en 0.
+
+7. ⚠⚠ **Une affirmation à moi, réfutée par son propre producteur dans l'heure.** J'avais écrit
+   que `windcheck transform` n'est pas déterministe (3 696 puis 3 698 quads entre deux passages).
+   Trois réparations consécutives rendent un certificat **identique** : l'écart est réel, **non
+   reproductible à conditions égales**, cause inconnue. Sans le mode `--determinisme`, cette
+   phrase serait dans le document, fausse et invérifiable.
+
+⭐ **Conséquence pratique** : `shortfall` devient la colonne de référence de l'arc. Elle ordonne
+aussi bien (médiane +0,765 contre +0,780) et son bruit est **4,5 fois plus serré**. Pour toute
+question de **différence** — celle que la chaîne de déroulage pose en boucle — c'est la seule des
+deux qui puisse répondre.
+
+⚠ **Restant sur D1** : un tirage **apparié** (mesuré sur les cellules qui survivent à la
+réparation, des deux côtés) serrerait la borne de 5 %. Et les autres fichiers de mesure de l'arc
+(`sweep_*.jsonl`, `baseline_sweep_*.jsonl`, `contamination_*.jsonl`) sont **à dater** : ceux qui
+précèdent le 2026-08-18 portent l'ancien rayon.
 
 ### D2 ⚠ — le contrôle P1 bis de `71`
 
