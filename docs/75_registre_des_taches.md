@@ -485,10 +485,27 @@ aussi bien (médiane +0,765 contre +0,780) et son bruit est **4,5 fois plus serr
 question de **différence** — celle que la chaîne de déroulage pose en boucle — c'est la seule des
 deux qui puisse répondre.
 
+8. ⭐⭐⭐ **Et la cause est COMMUNE aux trois familles.** Rejoué au bon rayon, `06` §3.2 aussi :
+   boule 400 **+0,560 → +0,803**, boule 200 **+0,474 → +0,738**. Le verdict survit (la bande
+   reste devant) mais l'écart tombe de **0,209 à 0,036**, sous le bruit du rho, et la **largeur**
+   de la bande cesse aussi de compter (étendue 0,050 → **0,010**). Donc **trois** paramètres
+   cessent de compter ensemble : aucun n'était mal choisi, c'est le **rayon** qui les faisait
+   paraître importants. Les fichiers le disent eux-mêmes — une distance est plafonnée par le
+   rayon, donc l'ancien impose **≥ 382,6 µm = 2,7 pas de feuille**, contre **0,88** au corrigé.
+
+9. ✅ **Mais l'explication du §6 de `07` SURVIT, plus forte.** Le mécanisme (« l'anomalie
+   normalise sa propre référence ») tient au rayon corrigé sur **34 traces sur 34** au lieu de
+   43 sur 45, Wilcoxon **1,2e-10**. Ce n'était donc pas un artefact du rayon ; c'est sa
+   **conséquence** sur la corrélation qui a disparu. ⚠ Cette mesure n'avait **aucun
+   consommateur** : le lecteur existe et retrouve **exactement** les quatre nombres publiés.
+
+10. ⚠ **Ce qui reste une vraie différence après correction est la COUVERTURE**, pas le rho : la
+    boule de rayon 100 ne mesure que **20,7 %** des cellules, et aucun rayon ne répare ça.
+
 ⚠ **Restant sur D1** : un tirage **apparié** (mesuré sur les cellules qui survivent à la
-réparation, des deux côtés) serrerait la borne de 5 %. Et les autres fichiers de mesure de l'arc
-(`sweep_*.jsonl`, `baseline_sweep_*.jsonl`, `contamination_*.jsonl`) sont **à dater** : ceux qui
-précèdent le 2026-08-18 portent l'ancien rayon.
+réparation, des deux côtés) serrerait la borne de 5 %. Et les `sweep_PHerc*.jsonl` des **autres
+rouleaux** n'ont aucune trace commune avec Scroll 1, donc `le_rayon_des_mesures.py` ne peut pas
+les dater — il faudrait une référence corrigée par rouleau.
 
 ### D2 ⚠ — le contrôle P1 bis de `71`
 
