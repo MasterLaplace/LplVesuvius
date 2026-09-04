@@ -264,5 +264,21 @@
         "traces": 44
       }
     }
+  },
+  "contamination": {
+    "ancien": {
+      "traces": 45,
+      "shrink_partout": 1.0014647318800298,
+      "shrink_aux_signalees": 0.7664971816969257,
+      "traces_plus_basses": 43,
+      "p_wilcoxon": 1.4014744920132216e-09
+    },
+    "corrige": {
+      "traces": 34,
+      "shrink_partout": 0.9938518771041134,
+      "shrink_aux_signalees": 0.7497892456095203,
+      "traces_plus_basses": 34,
+      "p_wilcoxon": 1.1641532182693481e-10
+    }
   }
 }

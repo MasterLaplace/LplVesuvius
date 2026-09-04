@@ -33,6 +33,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import statistics
 import subprocess
 import sys
 import tempfile
@@ -97,6 +98,56 @@ def famille_de_reference(jsonl: Path) -> dict | None:
                                traces=x["traces"]) for x in lignes}
 
 
+def contamination(jsonl: Path) -> dict | None:
+    """
+    @brief L'anomalie mange-t-elle sa propre référence quand celle-ci est une boule 3D ?
+
+    ⚠⚠⚠ CETTE MESURE N'AVAIT AUCUN CONSOMMATEUR. `baseline_sweep.py` écrit un bloc
+    `contamination` par trace depuis toujours, et **rien dans `src/` ne le relisait** : les
+    nombres du §6 de `07` — boule/bande **1,001** partout contre **0,766** aux cellules
+    signalées, sur **43 traces sur 45**, Wilcoxon apparié **p = 1,4e-09** — ont été calculés au
+    terminal. C'est la dette `D3` sur l'explication centrale du §6, et elle a l'air solide.
+
+    ⭐ Le test que `baseline_sweep.py` écrit dans sa propre docstring : la boule doit s'effondrer
+    **spécifiquement** aux cellules que la bande signale. *« Si elle baisse autant partout,
+    l'explication est fausse et il faut en chercher une autre. »* C'est donc le rapport entre les
+    deux chiffres qui décide, jamais l'un d'eux seul.
+
+    ⚠ Wilcoxon **apparié** : chaque trace fournit ses deux valeurs, et c'est la même trace qu'on
+    compare à elle-même. Un test non apparié mélangerait l'écart entre traces à l'effet cherché.
+    """
+    if not jsonl.is_file():
+        return None
+    partout, signalees = [], []
+    for ligne in jsonl.read_text(errors="replace").splitlines():
+        ligne = ligne.strip()
+        if not ligne.startswith("{"):
+            continue
+        try:
+            r = json.loads(ligne)
+        except json.JSONDecodeError:
+            continue
+        c = r.get("contamination") or {}
+        if "shrink_partout" in c and "shrink_aux_signalees" in c:
+            partout.append(float(c["shrink_partout"]))
+            signalees.append(float(c["shrink_aux_signalees"]))
+    if len(partout) < 5:
+        return None
+    plus_bas = sum(1 for a, b in zip(signalees, partout) if a < b)
+    p_value = None
+    try:
+        from scipy.stats import wilcoxon
+        p_value = float(wilcoxon(signalees, partout).pvalue)
+    except Exception:
+        # ⚠ Une p absente n'est PAS une p egale a 1 : elle est rendue nulle et le lecteur voit
+        # qu'elle manque, au lieu de lire un test qui n'a pas tourne.
+        p_value = None
+    return dict(traces=len(partout),
+                shrink_partout=statistics.median(partout),
+                shrink_aux_signalees=statistics.median(signalees),
+                traces_plus_basses=plus_bas, p_wilcoxon=p_value)
+
+
 def rho(jsonl: Path, champ: str) -> dict | None:
     """
     @brief Le rho de rangs contre les croisements publiés, pour une grandeur.
@@ -135,6 +186,8 @@ def mesurer() -> dict:
         out["seuils"][champ] = {"ancien": rho(ANCIEN, champ), "corrige": rho(CORRIGE, champ)}
     out["reference_locale"] = {"ancien": famille_de_reference(ANCIEN_BASELINE),
                                "corrige": famille_de_reference(CORRIGE_BASELINE)}
+    out["contamination"] = {"ancien": contamination(ANCIEN_BASELINE),
+                            "corrige": contamination(CORRIGE_BASELINE)}
     return out
 
 
@@ -271,6 +324,36 @@ def _verifier(r: dict | None = None) -> int:
           ap["boule_100"]["couverture"] < 0.5,
           f"couverture boule_100 {100 * ap['boule_100']['couverture']:.1f} % contre "
           f"{100 * ap['colonnes_150']['couverture']:.1f} % pour la bande")
+
+    cont = r.get("contamination") or {}
+    if cont.get("ancien") and cont.get("corrige"):
+        print("\nl'explication du §6 : le mécanisme SURVIT, son effet sur le rho a disparu")
+        ca, cc = cont["ancien"], cont["corrige"]
+        # ⚠⚠⚠ LE CONTROLE QUI VALIDE LE CONSOMMATEUR AVANT SES RESULTATS. `07` §6 publie quatre
+        # nombres calcules au terminal ; ce lecteur doit les retrouver sur LEUR fichier, sinon
+        # rien de ce qu'il dira du fichier corrige ne vaut. A trois decimales, comme le document.
+        v("le consommateur retrouve le 1,001 publié par `07` §6",
+          abs(ca["shrink_partout"] - 1.001) < 0.001, f"{ca['shrink_partout']:.4f}")
+        v("... et le 0,766 aux cellules signalées",
+          abs(ca["shrink_aux_signalees"] - 0.766) < 0.001, f"{ca['shrink_aux_signalees']:.4f}")
+        v("... et le 43 traces sur 45",
+          (ca["traces_plus_basses"], ca["traces"]) == (43, 45),
+          f"{ca['traces_plus_basses']}/{ca['traces']}")
+        v("... et le p = 1,4e-09",
+          ca["p_wilcoxon"] is not None and abs(ca["p_wilcoxon"] - 1.4e-09) < 5e-11,
+          f"{ca['p_wilcoxon']:.3g}" if ca["p_wilcoxon"] else "absent")
+        # ⚠⚠⚠ ET LE FAIT NUANCE QUI COMPTE. Le mecanisme du §6 -- l'anomalie normalise sa propre
+        # reference -- n'est PAS un artefact du rayon : au rayon corrige il tient, et meme mieux
+        # (toutes les traces au lieu de 43 sur 45). Ce qui a disparu, c'est sa CONSEQUENCE sur la
+        # correlation, parce qu'il reste bien moins d'erreur totale a degrader. Les deux
+        # assertions disent exactement ca, et la seconde tomberait si le mecanisme s'effondrait.
+        v("au rayon corrigé, la boule s'effondre TOUJOURS aux cellules signalées",
+          cc["shrink_aux_signalees"] < cc["shrink_partout"] - 0.15,
+          f"{cc['shrink_aux_signalees']:.3f} contre {cc['shrink_partout']:.3f} partout")
+        v("... et sur une part de traces au moins aussi grande qu'avant",
+          cc["traces_plus_basses"] / cc["traces"] >= ca["traces_plus_basses"] / ca["traces"],
+          f"{cc['traces_plus_basses']}/{cc['traces']} contre "
+          f"{ca['traces_plus_basses']}/{ca['traces']}")
 
     print()
     if echecs:

@@ -367,7 +367,7 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
 ---
 
 ### docs/07_reparee_nest_pas_propre.md
-- **lignes** : 965 ⚠ (438 quand la fiche a été écrite, 482 le 2026-09-03 ; deux sections neuves le 2026-09-04, §10 et §11, qui **périment le §8**)
+- **lignes** : 992 ⚠ (438 quand la fiche a été écrite, 482 le 2026-09-03 ; deux sections neuves le 2026-09-04, §10 et §11, qui **périment le §8**)
 - **nature** : RESULTAT
 - **résumé** : Le résultat central du dépôt sur la métrique de proximité : la réparation d'auto-intersection ramène les contacts à zéro et **ne déplace pas** la proximité anormale (0,37 → 0,38 %). Le document se corrige ensuite trois fois — il retire l'affirmation que la métrique **sépare** saines et réparées, il montre que le remède de principe pour la référence locale (une boule 3D) rend la mesure pire, et il découvre que la métrique est **inapplicable** sous un tour de couverture (44 traces de Scroll 5 sur 53 rendent zéro cellule). Le §9 remplace enfin le rayon de recherche par une constante physique. ⚠ Le fichier contient deux sections numérotées « ## 6 ».
 - **conclusions extractibles** :
@@ -412,6 +412,13 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
     feuille**, contre **0,88** au corrigé. ⚠ Ce qui RESTE une vraie différence est la
     **couverture** : la boule de rayon 100 ne mesure que **20,7 %** des cellules.
     Outils : `le_seuil_au_bon_rayon.py`, `le_rayon_des_mesures.py`.
+  - ✅ **2026-09-04, §11, MAIS L'EXPLICATION DU §6 SURVIT — plus forte.** Le mécanisme
+    (« l'anomalie normalise sa propre référence » : une boule centrée sur un site de croisement
+    est pleine d'autres cellules du même site) tient au rayon corrigé, et sur **34 traces sur
+    34** au lieu de 43 sur 45, Wilcoxon **1,2e-10**. Ce qui a disparu est sa **conséquence** sur
+    la corrélation. ⚠ Cette mesure n'avait **aucun consommateur** — le bloc `contamination` est
+    écrit par `baseline_sweep.py` depuis toujours et rien ne le relisait ; le lecteur existe
+    désormais et **retrouve exactement** les quatre nombres publiés.
   - ⚠⚠⚠ **2026-09-04, §11, LE §8 EST PÉRIMÉ** — postérieure à cette fiche. Le §9 a corrigé le
     rayon de recherche (4× trop grand) et n'a re-mesuré **qu'une colonne** ; le §8, qui compare
     les grandeurs entre elles, porte encore l'ancien rayon. Au bon rayon l'écart

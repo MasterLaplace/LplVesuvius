@@ -898,6 +898,33 @@ entre « 1/3, 1/2, p5, déficit » dessinerait une tendance que personne n'a mes
 > voisine — et toute variation de normalisation ou de seuil ne changeait que la **part de cette
 > erreur qui fuyait**. Corrigé, il n'y a plus rien à laisser fuir.
 
+### ✅ Et l'explication du §6, elle, SURVIT — plus forte
+
+Le §6 explique *pourquoi* la boule est en retard : un site de croisement est une région 3D
+compacte, donc une boule centrée dessus est pleine d'autres cellules du même site — **l'anomalie
+normalise sa propre référence**. `baseline_sweep.py` écrit ce test dans sa propre docstring :
+*« si elle baisse autant partout, l'explication est fausse »*.
+
+⚠⚠ Cette mesure **n'avait aucun consommateur** : le bloc `contamination` est écrit par
+`baseline_sweep.py` depuis toujours et rien dans `src/` ne le relisait. Les quatre nombres du §6
+venaient du terminal. Le lecteur existe désormais, et il les **retrouve exactement** sur leur
+fichier — c'est ce qui valide tout ce qu'il dit du fichier corrigé.
+
+| | ancien rayon | **rayon corrigé** |
+|---|---:|---:|
+| boule / bande, **partout** | 1,001 | 0,994 |
+| boule / bande, **aux cellules signalées** | **0,766** | **0,750** |
+| traces où la boule s'effondre spécifiquement | 43 / 45 | **34 / 34** |
+| Wilcoxon apparié | 1,4e-09 | **1,2e-10** |
+
+> ⭐ **Le mécanisme n'était pas un artefact du rayon.** Il tient au rayon corrigé, et même mieux —
+> **toutes** les traces au lieu de 43 sur 45. Ce qui a disparu est sa **conséquence** sur la
+> corrélation : il reste bien moins d'erreur totale à dégrader, donc une référence légèrement
+> contaminée arrive quand même près du plafond.
+
+⚠ Les deux faits doivent être tenus ensemble, et c'est ce qui fait la nuance : *le §6 avait
+raison sur la cause, et « nettement pire » n'était vrai que de l'ancien instrument.*
+
 ### Et le mécanisme se dessine, à l'échelle mesurée
 
 Un fichier de mesure dit lui-même jusqu'où son rayon portait : une distance rendue par
