@@ -689,7 +689,12 @@ côtés.
 
 Trouvé en relançant le lot pour ajouter la colonne `shortfall` : **le même appel `windcheck
 transform`, sur la même trace, a retiré 3 696 quads au premier run et 3 698 au second**
-(`w038-045`, 0701). L'aire gardée bouge en conséquence (99,87934 % → 99,87928 %).
+(`w038-045`, 0701), et l'aire gardée bouge en conséquence.
+
+⚠ Ces deux comptes venaient de deux sorties de terminal — c'est-à-dire de la dette `D3` que ce
+document dénonce — et le garde `chiffres_sans_record` les a signalés comme publiés sans record.
+Le mode `--determinisme` de `reparation_et_proximite.py` les produit désormais dans l'arbre :
+il rejoue la réparation N fois sur une même trace et compare les certificats.
 
 Et la conséquence sur la lecture est directe : **le Δ de cette trace passe de −3,5 % à +21,2 %
 entre deux exécutions du même pipeline.** Un signe qui s'inverse quand rien n'a changé est la

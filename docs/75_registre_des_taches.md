@@ -306,9 +306,9 @@ instruments existants.
 | **A6** | la ROC de α n'est pas faite | demande de **rendre** 101 surfaces à deux profondeurs — le seul poste de ce registre qui exige le volume |
 | **B2** | « no threshold » pas encore rétréci dans l'abstract | ⚠⚠ **testé et NON tranchable ainsi** (`77` §11) : translater = décentrer la fenêtre dans la même pile, l'idée est bonne mais une dalle de volume de surface fait ±0,9 écart et ne permet pas d'emboîter deux fenêtres. **25 refusés sur 36**. Retenté sur une dalle de 3,0 écarts : le positif centré sur le lobe est **circulaire**, et le transport d'une fenêtre à l'autre est **confondu par le serpentage** (0,13 écart ≈ la fenêtre étroite). Il faudrait un positif **indépendant** — carte d'encre ou annotation |
 | **C** | les trois tâches de la règle graduée | non commencées — bornées à trois semaines par conception |
-| **D1** | l'arc d'excision (`03`–`07`) à re-fonder | la conclusion de tête de `07` est démentie par notre propre mesure |
+| **D1** | ⭐⭐⭐ l'arc d'excision (`03`–`07`) — **la conclusion de tête de `07` est RESTAURÉE** | ce qui la démentait était une mesure sans producteur, prise sur une colonne dominée par son bruit d'échantillonnage. Sur `shortfall` (sans seuil, bruit < 5 %) : **0 paire sur 10** au-delà du bruit, signe mélangé. Ce qui est établi est une **borne**, pas une absence |
 | **D2** | le contrôle P1 bis de `71` | ×15,9 requis contre ×3,8 observé |
-| **D3** | ~~41~~ → **32** scripts sans appelant | ⚠ **entamé** : deux figures dont l'image est **utilisée** dans un doc ne portaient pas leur commande de régénération — c'est la règle du dépôt, et c'est réparé (vérifié : les deux se régénèrent à l'identique). Le reste est classé ci-dessous |
+| **D3** | ~~41~~ → ~~32~~ → **30** scripts sans appelant | ⚠ **entamé** : deux figures dont l'image est **utilisée** dans un doc ne portaient pas leur commande de régénération — c'est la règle du dépôt, et c'est réparé (vérifié : les deux se régénèrent à l'identique). Le reste est classé ci-dessous |
 
 ---
 
@@ -444,8 +444,23 @@ ce classement tient. Ce qui tombe est son transport vers une **différence appar
 médian (35 %) est plus petit que le bruit. Et `proximity.py` publie déjà la colonne qu'il fallait
 lire — `shortfall`, sans seuil, dont l'étendue de graine reste **sous 5 %**.
 
-⚠ La question de `07` se rejoue donc sur `shortfall`, et le balayage `--population` dit si le rho
-du premier §8 dépend lui aussi de la graine.
+⭐⭐⭐ **Rejouée sur `shortfall`, la réparation ne déplace RIEN de mesurable** : zéro paire sur
+dix au-delà du bruit de graine (±5 %), signe mélangé (3 en hausse, 7 en baisse), et face au bruit
+de sa *propre* trace la majorité reste dedans. **Le titre d'origine de `07` est donc restauré**,
+pour une bien meilleure raison que celle qu'il donnait. ⚠ *Ne déplace rien de mesurable* n'est pas
+*ne fait rien* : ce qui est établi est une **borne** — un effet inférieur à ~5 %, la dispersion
+d'un tirage de 20 000 cellules. Le distinguer demanderait un tirage **apparié**, c'est-à-dire
+mesuré sur les cellules qui survivent à la réparation, des deux côtés.
+
+4. ⚠⚠⚠ **Et la réparation elle-même n'est pas déterministe.** Le même `windcheck transform`, sur
+   la même trace, a retiré **3 696** quads puis **3 698** — donc le Δ de cette trace passe de
+   −3,5 % à **+21,2 %** entre deux exécutions du même pipeline. Un signe qui s'inverse quand rien
+   n'a changé est la démonstration la plus courte que la table du §8 ne portait pas d'information.
+   ⭐ Le dépôt a déjà rencontré cette forme (`44` : rng semé par l'horloge + 22 fils), et son
+   remède est connu — une graine posée et `thread_limit: 1`.
+
+⚠ **Restant sur D1** : le balayage `--population` doit dire si le rho de +0,769 du premier §8 de
+`07` dépend lui aussi de la graine. Et un tirage **apparié** serrerait la borne de 5 %.
 
 ### D2 ⚠ — le contrôle P1 bis de `71`
 
