@@ -355,7 +355,18 @@ src/excision/run_proximity.sh data/repos/windcheck/data/scroll1_tifxyz \
 
 ⚠ La commande est écrite ici parce qu'elle ne l'était **nulle part** : `proximity_scroll1.jsonl`
 était cité dans deux documents sans que rien ne dise comment le refaire, donc la mesure de tout
-l'arc d'excision n'était pas reproductible. La première étape est
+l'arc d'excision n'était pas reproductible.
+
+> ⚠⚠⚠ **2026-09-04 — CETTE COMMANDE N'ÉCRIT PLUS LE MÊME FICHIER, et elle ne le dit pas.**
+> Deux choses ont changé depuis. (1) `run_proximity.sh` **ne tournait plus** : il appelait
+> `python -m excision.proximity`, qui ne résout plus, et avalait l'erreur — un run qui ne mesurait
+> rien rendait « 0 mesurées, 55 sans mesure » **et sortait en 0**. (2) `07` §9 a corrigé le rayon
+> de recherche le 2026-08-18, et `proximity.py` le dérive désormais de la physique. Donc la
+> commande, lancée aujourd'hui, écrirait sous le **même nom** un fichier mesuré à un **autre
+> rayon** que celui qui est là — l'ancien mesure **2,10 fois plus** de cellules par trace.
+> Le fichier au bon rayon est écrit à part, sous
+> `docs/mesures/proximity_scroll1_rayon_corrige.jsonl` ; `src/excision/le_rayon_des_mesures.py`
+> dit lequel est lequel, depuis la donnée et non depuis les dates. Détail : `07` §11. La première étape est
 donc un téléchargement, pas un calcul. Une fois là, `10` §3bis donne une question
 précise à lui poser : *les bandes 8704–9728, où le modèle produit du signal informe
 que personne n'a annoté, portent-elles une proximité anormale ?* Si oui, ce « signal »

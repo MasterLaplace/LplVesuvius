@@ -299,7 +299,7 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
 ---
 
 ### docs/06_mesures_a_faire.md
-- **lignes** : 652 ⚠ (643 quand la fiche a été écrite ; le document a reçu les commandes de régénération de `33` et `37` le 2026-09-04)
+- **lignes** : 663 ⚠ (643 quand la fiche a été écrite ; commandes de régénération de `33` et `37`, puis l'avertissement que la commande de `proximity_scroll1.jsonl` n'écrit plus le même fichier, le 2026-09-04)
 - **nature** : MIXTE
 - **résumé** : Carnet de mesures — registre des mesures faites, à faire, écartées, chacune avec son critère de réfutation. C'est structurellement un PROCÉDÉ (liste de tâches et règles de méthode), mais plusieurs entrées portent leur résultat en entier : la théorie du dommage par tranche de rayon (§2.4), l'ellipticité (§2.4bis), la table des mesures 3.x, et surtout le §7 « onde radiale » qui est un compte rendu complet de quatre formulations successives dont trois ont échoué. Le document se termine sur une section « ce qui ne marche pas ».
 - **conclusions extractibles** :
@@ -361,8 +361,8 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
   - §7 : « ⚠⚠ **Le code de cette section a failli etre perdu.** » — écrit en `python -c`, récupéré du transcript de session ; d'où la règle §5.6.
   - §7 : « ⚠ **Ce qui n'est PAS établi** : que ces quatre cellules soient des soudures. »
 - **preuve de lecture intégrale** :
-  - l. 409 : `   2026-08-19 : cette ligne annonçait « un facteur **trois** », et les deux chiffres que`
-  - l. 652 : `rayon). Il faut la suivre, pas la recompter.`
+  - l. 420 : `   2026-08-19 : cette ligne annonçait « un facteur **trois** », et les deux chiffres que`
+  - l. 663 : `rayon). Il faut la suivre, pas la recompter.`
 
 ---
 
