@@ -428,6 +428,22 @@ feuille fait 8 à 10 voxels au lieu de 4 à 5, donc `d′` monterait pour les tr
 ⚠ **Et l'envoi appartient à l'auteur.** Un courriel à un tiers est un acte vers l'extérieur ;
 ce registre peut en préparer la matière, pas le poster.
 
+⚠⚠ **Et un outil disait que le test était impossible.** `corpus_par_energie.py` collectait les
+résolutions en filtrant sur `scans[*].properties.pixel_size_um` — or **un seul scan de tout le
+corpus** n'a pas cette propriété, et c'est `PHerc0500P2 / 20250507210011-4.317um-1.2m-111keV`,
+celui dont H2 a besoin. Il disparaissait donc en silence, et le relevé publiait **trois**
+résolutions pour ce rouleau au lieu de quatre. Corrigé (repli sur le `long_id`, en réutilisant
+l'analyseur de `ou_vit_ce_rouleau`) : le fichier publie désormais `[0.55, 2.215, 4.317, 9.362]`.
+
+**Première mesure de H2, la moins chère et la plus directe** : `src/encre/separabilite_scan.py`
+rend un `d′` **sans dimension, donc comparable entre campagnes** — c'est exactement la grandeur
+que l'argument de `73` invoque. Le lancer sur les deux volumes de `PHerc0500P2`, **même région
+physique**, décide.
+
+⚠ Deux précautions pour que la comparaison soit appariée : la même région physique n'est pas le
+même index de morceau (les voxels n'ont pas la même taille), et `--level` doit être choisi pour
+comparer **le natif au natif**, pas un niveau de pyramide d'un volume à un autre.
+
 **Sortie de C** : deux nombres avec leur intervalle. Si l'AUC native à 9,362 µm ne se sépare
 pas de 0,5 avec 40 tuiles, la règle ne lit pas à ce régime, et « colonnes visibles partout »
 devra être jugé par la typographie (`45`) et le juge à condition vierge (`09`). C'est une
