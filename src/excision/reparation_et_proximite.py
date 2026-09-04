@@ -45,6 +45,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import statistics
 import subprocess
 import sys
 import tempfile
@@ -118,13 +119,19 @@ def maillage_de(trace: Path) -> Path | None:
     return None
 
 
-def _proximite(maillage: Path, etiquette: str) -> dict | None:
+def _proximite(maillage: Path, etiquette: str, apparie: bool = False) -> dict | None:
     """
     @brief La proximité anormale d'un maillage, par l'instrument de `07`.
+
+    ⚠⚠ `apparie` demande le tirage par POSITION DE GRILLE. Le tirage par défaut indexe les
+    cellules **valides**, dont le nombre change avec la réparation, donc « avant » et « après »
+    ne portent pas sur les mêmes cellules — c'est ce que `07` §10 mesure. La grille, elle, ne
+    change pas, donc un tirage par position est apparié par construction.
     """
-    r = subprocess.run(
-        ["uv", "run", "python", str(PROXIMITY), str(maillage), "--json", "--label", etiquette],
-        capture_output=True, text=True, cwd=RACINE, timeout=1800)
+    argv = ["uv", "run", "python", str(PROXIMITY), str(maillage), "--json", "--label", etiquette]
+    if apparie:
+        argv.append("--tirage-par-position")
+    r = subprocess.run(argv, capture_output=True, text=True, cwd=RACINE, timeout=1800)
     if r.returncode != 0:
         return None
     for ligne in reversed(r.stdout.splitlines()):
@@ -163,7 +170,7 @@ def _reparer(trace: Path, sortie: Path) -> dict | None:
     return d
 
 
-def mesurer(corpus: str = "scroll1", limite: int = 0) -> dict:
+def mesurer(corpus: str = "scroll1", limite: int = 0, apparie: bool = False) -> dict:
     dossier, nom_long = CORPUS[corpus]
     base = WINDCHECK / dossier
     lot = eligibles(corpus)
@@ -184,7 +191,7 @@ def mesurer(corpus: str = "scroll1", limite: int = 0) -> dict:
         if maille is None:
             sautes.append((nom, "maillage introuvable"))
             continue
-        avant = _proximite(maille, f"{nom}:avant")
+        avant = _proximite(maille, f"{nom}:avant", apparie)
         if not avant:
             sautes.append((nom, "proximité avant a échoué"))
             continue
@@ -192,7 +199,7 @@ def mesurer(corpus: str = "scroll1", limite: int = 0) -> dict:
             cert = _reparer(trace, Path(tmp))
             repare = next(Path(tmp).glob("*_transformed.tifxyz"), None)
             repare = maillage_de(repare) if repare else None
-            apres = _proximite(repare, f"{nom}:apres") if repare else None
+            apres = _proximite(repare, f"{nom}:apres", apparie) if repare else None
             if cert is None:
                 sautes.append((nom, "réparation a échoué"))
             elif apres is None:
@@ -228,7 +235,8 @@ def mesurer(corpus: str = "scroll1", limite: int = 0) -> dict:
             variation_shortfall_pct=(100.0 * (sp - sa) / sa) if sa else None,
         ))
     return dict(corpus=nom_long, eligibles=len(eligibles(corpus)),
-                span_minimum=SPAN_MINIMUM, paires=paires,
+                span_minimum=SPAN_MINIMUM,
+                tirage="position" if apparie else "index", paires=paires,
                 sautes=[{"trace": t, "raison": r} for t, r in sautes])
 
 
@@ -405,6 +413,40 @@ def _verifier(r: dict | None = None) -> int:
               d["deterministe"],
               f"{d['distincts']} certificat(s) distinct(s) en {d['repetitions']} réparations · "
               f"quads {' · '.join(str(x) for x in d['quads'])}")
+        # ⚠⚠⚠ LE TIRAGE APPARIE, ET C'EST LUI QUI TRANCHE. Tout ce qui precede est borne par le
+        # bruit d'echantillonnage ; ce mode le supprime au lieu de le borner, parce que la
+        # GRILLE de parametrisation ne change pas quand la reparation retire des quads (mesure :
+        # 756x2940 des deux cotes, 142 cellules perdues sur deux millions). Tirer des POSITIONS
+        # rend donc le meme echantillon des deux cotes.
+        app = RACINE / "docs" / "mesures" / "reparation_et_proximite_scroll1_apparie.json"
+        if app.is_file():
+            d = json.loads(app.read_text())
+            pa = [x for x in d.get("paires", []) if x.get("usable_avant")]
+            v("le lot apparié déclare bien son mode de tirage",
+              d.get("tirage") == "position", str(d.get("tirage")))
+            if pa:
+                # ⚠ La preuve que l'appariement a PRIS : l'echantillon utile ne doit plus
+                # bouger que d'une poignee de cellules, la ou le tirage par index en deplacait
+                # des dizaines. Ecrit comme une part, parce que les traces n'ont pas la meme
+                # taille d'echantillon.
+                ecarts = [abs(x["usable_apres"] - x["usable_avant"]) / x["usable_avant"]
+                          for x in pa]
+                v("... et l'échantillon utile ne bouge presque plus entre avant et après",
+                  max(ecarts) < 0.005,
+                  f"écart max {100 * max(ecarts):.3f} % sur {len(pa)} paires")
+                # ⚠⚠ LE RESULTAT. Avec le bruit retire, l'effet de la reparation sur
+                # `shortfall` doit devenir bien plus petit -- ou se reveler, si le bruit le
+                # masquait. Les deux sont publiables ; le controle dit lequel on a.
+                vs_app = [abs(x["variation_shortfall_pct"]) for x in pa
+                          if x.get("variation_shortfall_pct") is not None]
+                vs_ind = [abs(x["variation_shortfall_pct"]) for x in r["paires"]
+                          if x.get("variation_shortfall_pct") is not None]
+                if vs_app and vs_ind:
+                    v("... et l'effet mesuré sur `shortfall` devient PLUS PETIT qu'au tirage "
+                      "non apparié",
+                      statistics.median(vs_app) < statistics.median(vs_ind),
+                      f"médiane {statistics.median(vs_app):.2f} % contre "
+                      f"{statistics.median(vs_ind):.2f} %")
         v("... et chaque paire a bien retiré quelque chose",
           all(p["quads_retires"] > 0 for p in r["paires"] if p["statut"] != "already_clean"),
           " · ".join(f"{p['quads_retires']} quads" for p in r["paires"]))
@@ -425,6 +467,8 @@ def main() -> int:
     p.add_argument("--determinisme", metavar="TRACE",
                    help="réparer N fois la MEME trace et comparer les certificats")
     p.add_argument("--repetitions", type=int, default=3)
+    p.add_argument("--apparie", action="store_true",
+                   help="tirer par POSITION de grille — même échantillon avant et après")
     p.add_argument("--verifier", action="store_true")
     p.add_argument("--json", type=Path)
     a = p.parse_args()
@@ -455,7 +499,7 @@ def main() -> int:
         garde = json.loads(cache.read_text()) if cache.is_file() else None
         return 1 if _verifier(garde) else 0
 
-    r = mesurer(a.corpus, a.limite)
+    r = mesurer(a.corpus, a.limite, a.apparie)
     print(f"{r['corpus']} — {r['eligibles']} traces éligibles "
           f"(sales et > {r['span_minimum']} tour)\n")
     if r["paires"]:

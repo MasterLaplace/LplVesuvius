@@ -59,7 +59,44 @@ def load_trace(mesh_dir: Path, decimate: int = 1):
     if not valid.any():
         raise ProximityError(f"aucune cellule valide dans {mesh_dir}")
     rows, cols = np.nonzero(valid)
-    return np.column_stack([x[valid], y[valid], z[valid]]), rows, cols
+    # ⚠ La FORME de la grille voyage avec les cellules : le tirage par position en a besoin, et
+    # la deduire ailleurs depuis `rows.max()` serait faux dès qu'une derniere ligne est vide.
+    return np.column_stack([x[valid], y[valid], z[valid]]), rows, cols, valid.shape
+
+
+def tirer_par_position(rows: np.ndarray, cols: np.ndarray, forme: tuple[int, int],
+                       take: int, seed: int) -> np.ndarray:
+    """Les cellules à mesurer, tirées par POSITION DANS LA GRILLE et non par index de validité.
+
+    ⚠⚠⚠ POURQUOI CE MODE EXISTE. Le tirage par défaut fait
+    `choice(points.shape[0], take)` — il indexe les cellules **valides**, dont le nombre change
+    dès qu'une réparation retire des quads. « Avant » et « après » portent donc sur deux
+    sous-ensembles différents, et `07` §10 mesure ce que ça coûte : à maillage identique, la
+    seule graine déplace `fraction_below_third` de 35 à 229 %, soit plus que la réparation.
+
+    ⭐ LA GRILLE DE PARAMETRISATION, ELLE, NE CHANGE PAS — mesuré sur `w064-068` : `756 × 2940`
+    des deux côtés, 1 999 850 cellules valides devenant 1 999 708, soit **142 perdues sur deux
+    millions**. Tirer des POSITIONS plutôt que des index rend donc le même échantillon des deux
+    côtés **par construction**, et le bruit disparaît du comparatif au lieu d'être borné.
+
+    ⚠ Il ne disparaît pas tout à fait : les quelques cellules qui deviennent invalides sortent
+    d'un côté seulement. C'est un écart de l'ordre de 0,01 % de l'échantillon, quatre ordres de
+    grandeur sous le bruit qu'il remplace, et il est **dit** plutôt que tu.
+
+    ⚠⚠ AUCUNE TRONCATURE. Garder « les `take` premières valides » réintroduirait exactement le
+    défaut : une cellule qui disparaît décale toutes les suivantes. Le tirage est un ensemble de
+    positions, chaque côté garde celles qui sont valides chez lui, et le compte retenu est
+    rapporté au lieu d'être forcé.
+    """
+    hauteur, largeur = forme
+    generator = np.random.default_rng(seed)
+    combien = min(take, hauteur * largeur)
+    positions = generator.choice(hauteur * largeur, combien, replace=False)
+    # Table de correspondance position -> index parmi les cellules valides ; -1 si invalide.
+    index = np.full(hauteur * largeur, -1, dtype=np.int64)
+    index[rows.astype(np.int64) * largeur + cols.astype(np.int64)] = np.arange(rows.size)
+    choisis = index[positions]
+    return choisis[choisis >= 0]
 
 
 def nearest_non_adjacent(
@@ -156,12 +193,16 @@ def main() -> int:
     )
     parser.add_argument("--voxel-um", type=float, default=7.91, help="taille du voxel en um")
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--tirage-par-position", action="store_true",
+                        dest="tirage_par_position",
+                        help="tirer des POSITIONS de grille au lieu d'index de cellules valides "
+                             "— rend un échantillon apparié entre deux maillages de même grille")
     parser.add_argument("--label", default="", help="etiquette portee par la sortie")
     parser.add_argument("--json", action="store_true", dest="as_json")
     args = parser.parse_args()
 
     try:
-        points, _, cols = load_trace(args.mesh, args.decimate)
+        points, rows, cols, forme = load_trace(args.mesh, args.decimate)
     except ProximityError as error:
         print(f"erreur : {error}", file=sys.stderr)
         return 2
@@ -178,9 +219,19 @@ def main() -> int:
         print(f"rayon derive : {args.sheet_pitch_um:.1f} µm / {args.voxel_um:.3f} µm "
               f"= {args.search_radius:.1f} voxels", file=sys.stderr)
 
-    generator = np.random.default_rng(args.seed)
-    take = min(args.sample, points.shape[0])
-    sample = generator.choice(points.shape[0], take, replace=False)
+    # ⚠⚠ OPT-IN, et ce n'est pas de la prudence : changer le tirage par defaut deplacerait
+    # TOUTE mesure deja publiee de ce depot, y compris celles qui portent des conclusions.
+    if args.tirage_par_position:
+        sample = tirer_par_position(rows, cols, forme, args.sample, args.seed)
+        take = int(sample.size)
+        if take < 100:
+            print(f"erreur : {take} positions valides tirees sur {args.sample}",
+                  file=sys.stderr)
+            return 2
+    else:
+        generator = np.random.default_rng(args.seed)
+        take = min(args.sample, points.shape[0])
+        sample = generator.choice(points.shape[0], take, replace=False)
 
     distances = nearest_non_adjacent(points, cols, sample, args.apart, args.search_radius)
     measured = ~np.isnan(distances)
@@ -237,6 +288,9 @@ def main() -> int:
             "sample": int(args.sample),
             "seed": int(args.seed),
             "decimate": int(args.decimate),
+            # ⚠ Le MODE de tirage voyage avec la mesure, au meme titre que le rayon : deux
+            # fichiers tires differemment ne se comparent pas, et rien d'autre ne le dirait.
+            "tirage": "position" if args.tirage_par_position else "index",
         },
         "cells": int(points.shape[0]),
         "sampled": int(take),

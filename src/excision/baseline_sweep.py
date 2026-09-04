@@ -188,7 +188,11 @@ def main() -> int:
     handle = args.out.open("w")
     for order, (name, mesh) in enumerate(traces, 1):
         try:
-            points, _, cols = load_trace(mesh)
+            # ⚠ `load_trace` rend la FORME de la grille depuis le 2026-09-04 (le tirage par
+            # position en a besoin). Elle n'est pas utilisee ici, mais l'ignorer
+            # explicitement vaut mieux qu'un deballage a trois valeurs qui casse au
+            # prochain champ ajoute.
+            points, _, cols, _forme = load_trace(mesh)
         except ProximityError as error:
             print(f"  [{order}/{len(traces)}] {name} : {error}")
             continue

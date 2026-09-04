@@ -142,6 +142,46 @@ ck([len(s['cells']) for s in q]==[len(s['cells']) for s in derive])
 print(f'ALL PASS (0 failures, {n} checks)')
 PY
 
+run "tirage apparie par position" uv run python - <<'PY'
+import sys; import pathlib as _p; sys.path[:0]=[str(x) for _b in ('src','../src') for x in _p.Path(_b).glob('*') if x.is_dir()]
+import numpy as np
+from proximity import tirer_par_position
+n=0
+def ck(c):
+    global n
+    assert c; n+=1
+H,W=40,50
+plein=np.ones((H,W),bool)
+r0,c0=np.nonzero(plein)
+# « Apres reparation » : sept cellules deviennent invalides, comme un `windcheck transform`
+# qui retire des quads. La GRILLE, elle, ne bouge pas -- c'est la mesure de `07` §11.
+troue=plein.copy()
+perdues={(3,7),(11,22),(19,4),(25,40),(31,15),(35,48),(39,0)}
+for (a,b) in perdues: troue[a,b]=False
+r1,c1=np.nonzero(troue)
+av=tirer_par_position(r0,c0,(H,W),500,42)
+ap=tirer_par_position(r1,c1,(H,W),500,42)
+pav={(int(r0[i]),int(c0[i])) for i in av}
+pap={(int(r1[i]),int(c1[i])) for i in ap}
+# ⚠⚠ LA PROPRIETE QUI FAIT TOUT : le meme ensemble de positions des deux cotes, a ceci pres
+# que celles devenues invalides sortent d'un seul cote. Rien d'autre ne doit differer.
+ck(pav-pap <= perdues)
+ck(pap-pav == set())
+ck(len(pav)>=400)
+# ⚠ Et le CONTROLE NEGATIF : le tirage par INDEX, lui, renvoie un ensemble tres different
+# des que le nombre de cellules valides change. Sans lui, « les deux se ressemblent » ne
+# distinguerait pas le nouveau mode de l'ancien.
+iav={(int(r0[i]),int(c0[i])) for i in np.random.default_rng(42).choice(r0.size,500,replace=False)}
+iap={(int(r1[i]),int(c1[i])) for i in np.random.default_rng(42).choice(r1.size,500,replace=False)}
+ck(len(iav^iap) > 20*len(pav^pap))
+# ⚠ Un tirage plus grand que la grille ne leve pas : il prend tout ce qu'il y a.
+ck(tirer_par_position(r0,c0,(H,W),10**6,1).size == r0.size)
+# ⚠ Et la graine compte : deux graines ne doivent pas rendre le meme echantillon, sinon
+# le mode serait deterministe pour la mauvaise raison.
+ck(set(tirer_par_position(r0,c0,(H,W),500,1).tolist()) != set(av.tolist()))
+print(f'ALL PASS (0 failures, {n} checks)')
+PY
+
 run "reference : boule vs bande" uv run python - <<'PY'
 import sys; import pathlib as _p; sys.path[:0]=[str(x) for _b in ('src','../src') for x in _p.Path(_b).glob('*') if x.is_dir()]
 import numpy as np
@@ -1287,6 +1327,7 @@ run "figure bruit d'une fenetre" uv run python "$ROOT/src/figures/figure_bruit_d
 run "figure bruit de l'echantillon" uv run python "$ROOT/src/figures/figure_bruit_de_lechantillon.py" --verifier
 run "figure le bon rayon"     uv run python "$ROOT/src/figures/figure_le_bon_rayon.py" --verifier
 run "figure rayon et voisine" uv run python "$ROOT/src/figures/figure_le_rayon_trouve_la_voisine.py" --verifier
+run "figure tirage apparie"   uv run python "$ROOT/src/figures/figure_tirage_apparie.py" --verifier
 
 # ⚠⚠ La figure du bug d'échelle a un contrôle, et il porte sur ce qui la rend HONNÊTE : les
 # deux panneaux partagent leur étirement. Étirer chacun sur sa propre plage rendrait une
