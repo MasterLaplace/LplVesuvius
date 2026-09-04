@@ -90,9 +90,35 @@ def resumer(index: dict) -> list[dict]:
         energies = sorted({s.get("properties", {}).get("energy_keV")
                            for s in scans.values()
                            if s.get("properties", {}).get("energy_keV")})
-        resolutions = sorted({s.get("properties", {}).get("pixel_size_um")
-                              for s in scans.values()
-                              if s.get("properties", {}).get("pixel_size_um")})
+        # ⚠⚠⚠ LE `long_id` EN REPLI, PARCE QU'UNE PROPRIETE PEUT MANQUER. Mesuré le
+        # 2026-09-04 : **un seul** scan de tout le corpus n'a ni `pixel_size_um` ni
+        # `energy_keV` dans ses proprietes — `PHerc0500P2 / 20250507210011-4.317um-1.2m-111keV`
+        # — et c'est précisément celui dont la tâche `C3` a besoin. Filtrer sur la propriété
+        # seule le faisait disparaître en silence, donc `PHerc0500P2` était publié ici avec
+        # trois résolutions au lieu de quatre, alors que son **volume** à 4,317 µm est
+        # reconstruit et téléchargeable.
+        #
+        # ⭐ Le repli n'est pas réécrit : `ou_vit_ce_rouleau._um` fait déjà exactement ça, avec
+        # sa normalisation à trois décimales (le corpus écrit « 7.910um » et « 7.91um » pour le
+        # même scan). Deux analyseurs d'un même nom finiraient par ne pas s'accorder.
+        import sys as _sys
+        _sys.path.insert(0, str(RACINE / "src" / "volume"))
+        from ou_vit_ce_rouleau import _um as _um_du_nom
+        vues = set()
+        for sc in scans.values():
+            px = (sc.get("properties") or {}).get("pixel_size_um")
+            if px:
+                vues.add(round(float(px), 3))
+            else:
+                vues |= {round(float(v), 3) for v in _um_du_nom(str(sc.get("long_id", "")))}
+        resolutions = sorted(vues)
+        # ⚠ L'ENERGIE DU MEME SCAN MANQUE AUSSI (`111keV` dans son `long_id`), et elle n'est
+        # DELIBEREMENT pas récupérée : 111 keV est déjà présent pour `PHerc0500P2` via son scan
+        # à 2,215 µm, donc rien de ce que ce fichier publie n'en dépend — ni `energies_keV`, ni
+        # `basse_disponible`, ni `haute_seulement`. Écrire un second analyseur de nom pour un
+        # cas où rien ne change serait la fonctionnalité sans consommateur que ce dépôt refuse.
+        # ⚠ Le jour où un scan porte une énergie que lui seul a, ce repli-là deviendra
+        # nécessaire, et ce commentaire dit où le mettre.
         segments = e.get("segments") or {}
         cartes = sum(1 for s in segments.values()
                      if any(a.get("type") == "ink-detection" for a in (s.get("data") or [])))
@@ -201,6 +227,23 @@ def verifier() -> int:
     lignes = resumer(faux)
     par = {l["echantillon"]: l for l in lignes}
     v("les energies sont relevees", par["A"]["energies_keV"] == [54.0], str(par["A"]))
+    # ⚠⚠ LE REPLI SUR LE `long_id`, teste DANS LES DEUX SENS. Un seul scan de tout le corpus
+    # n'a pas de `pixel_size_um` dans ses proprietes -- celui dont `C3` a besoin -- et le
+    # filtrer le faisait disparaitre en silence. La forme trop large prendrait le nom AU LIEU
+    # de la propriete, ce qui ferait diverger ce fichier de la source des qu'un nom ment.
+    faux_trou = {"samples": {"T": {"scans": {
+        "a": {"long_id": "20250101-4.317um-1.2m-111keV", "properties": {}},
+        "b": {"long_id": "20250102-9.362um-1.2m-113keV",
+              "properties": {"pixel_size_um": 9.362, "energy_keV": 113.0}}}}}}
+    r_trou = resumer(faux_trou)[0]
+    v("une resolution sans propriete est reprise du long_id",
+      r_trou["resolutions_um"] == [4.317, 9.362], str(r_trou["resolutions_um"]))
+    faux_menteur = {"samples": {"T": {"scans": {
+        "a": {"long_id": "20250101-1.000um-1.2m-111keV",
+              "properties": {"pixel_size_um": 9.362}}}}}}
+    v("... mais la PROPRIETE prime sur le nom quand elle existe",
+      resumer(faux_menteur)[0]["resolutions_um"] == [9.362],
+      str(resumer(faux_menteur)[0]["resolutions_um"]))
     v("les cartes d'encre sont comptees, pas les segments",
       par["A"]["cartes_encre"] == 1 and par["A"]["segments"] == 2, str(par["A"]))
     v("... et un segment sans carte ne compte pas", par["B"]["cartes_encre"] == 0)
