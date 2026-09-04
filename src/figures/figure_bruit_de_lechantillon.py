@@ -42,7 +42,9 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from figure_commune import police, prose_tracable  # noqa: E402
+from figure_commune import (etiquette_de_trace as etiquette,  # noqa: E402
+                            etiquettes_de_traces as etiquettes,
+                            police, prose_tracable)
 
 RACINE = Path(__file__).resolve().parents[2]
 
@@ -119,34 +121,6 @@ def rangs(bruit: dict, paire: dict) -> list[dict]:
             sortie.append(dict(trace=ligne["trace"], colonnes=colonnes,
                                cellules=(ligne["cellules_min"], ligne["cellules_max"])))
     return sortie
-
-
-def etiquette(trace: str) -> str:
-    """
-    @brief Le nom court d'une trace : ses indices de spire, jamais une troncature aveugle.
-
-    ⚠ Une coupe à douze caractères rendait `924-w010-027` et `46-052_jordi` — le premier garde
-    trois chiffres d'horodatage, le second perd son `w`. Les indices de spire sont **le référent
-    d'identité** d'une trace ; c'est eux qu'il faut lire, et rien d'autre ne distingue deux
-    traces du même jour.
-    """
-    i = trace.find("-w")
-    return trace[i + 1:] if i >= 0 else trace[-12:]
-
-
-def etiquettes(traces: list[str]) -> list[str]:
-    """
-    @brief Les noms courts d'un lot, désambiguïsés SEULEMENT s'ils se répètent.
-
-    ⚠⚠ Deux traces peuvent porter les **mêmes** indices de spire — ce sont deux tentatives sur
-    la même feuille, ce qui est une information et non un doublon. Mais deux lignes portant le
-    même libellé rendent la figure inutilisable : le lecteur ne peut plus la rapprocher de la
-    table. La date ne s'ajoute donc **qu'en cas de collision**, sinon elle encombrerait les
-    huit autres lignes pour rien.
-    """
-    courts = [etiquette(t) for t in traces]
-    doublons = {c for c in courts if courts.count(c) > 1}
-    return [f"{c} ({t[4:8]})" if c in doublons else c for c, t in zip(courts, traces)]
 
 
 def dedans(colonne: dict) -> bool:

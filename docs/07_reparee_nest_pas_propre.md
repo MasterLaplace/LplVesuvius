@@ -1011,3 +1011,96 @@ répondre.
 uv run python src/excision/le_seuil_au_bon_rayon.py --json docs/mesures/le_seuil_au_bon_rayon.json
 uv run python src/excision/le_seuil_au_bon_rayon.py --verifier
 ```
+
+---
+
+## 12. ⭐⭐⭐ Le bruit RETIRÉ au lieu d'être borné — et la réponse devient nette
+
+> 2026-09-04. Mesure : `src/excision/reparation_et_proximite.py --apparie` (14 contrôles),
+> `docs/mesures/reparation_et_proximite_scroll1_apparie.json`. Figure :
+> `src/figures/figure_tirage_apparie.py` (9 contrôles).
+
+Le §10 rend une **borne** — si la réparation déplace la proximité, c'est de moins que la
+dispersion d'un tirage. Une borne est un aveu d'instrument, pas un résultat. Le §11 dit pourquoi
+l'instrument était faible ; celui-ci retire la cause.
+
+### La grille ne change pas, et ça se mesure
+
+Le tirage par défaut fait `choice(points.shape[0], take)` : il indexe les cellules **valides**,
+dont le nombre change dès qu'une réparation retire des quads. Mais la **grille de
+paramétrisation**, elle, est intacte — mesuré sur `w064-068` :
+
+| | avant | après |
+|---|---:|---:|
+| grille | **756 × 2940** | **756 × 2940** |
+| cellules valides | 1 999 850 | 1 999 708 |
+
+**142 cellules perdues sur deux millions.** Donc la cellule (i, j) d'avant *est* celle d'après, et
+tirer des **positions** plutôt que des index rend le même échantillon des deux côtés **par
+construction**.
+
+⚠ Le bruit ne disparaît pas tout à fait : les quelques cellules devenues invalides sortent d'un
+seul côté. C'est de l'ordre du centième de pour cent de l'échantillon, **quatre ordres de grandeur
+sous le bruit qu'il remplace**, et c'est dit plutôt que tu.
+
+⚠⚠ **Aucune troncature.** Garder « les N premières valides » réintroduirait exactement le défaut :
+une cellule qui disparaît décale toutes les suivantes. Le tirage est un **ensemble de positions**,
+chaque côté garde celles qui sont valides chez lui, et le compte retenu est rapporté.
+
+⚠ Le mode est **opt-in** (`--tirage-par-position`), et pas par prudence : changer le tirage par
+défaut déplacerait **toute** mesure publiée de ce dépôt. Le mode voyage dans le bloc `echelle`
+avec le rayon — deux fichiers tirés différemment ne se comparent pas, et rien d'autre ne le dirait.
+
+### ⭐⭐⭐ Le résultat : l'effet s'effondre d'un facteur 22
+
+| trace | cellules avant→après | Δ `shortfall` (index) | **Δ `shortfall` (position)** |
+|---|---:|---:|---:|
+| `w010-027` | **4 → 4** | −4,64 % | **+0,18 %** |
+| `w028-037` | **2 → 2** | +1,73 % | **−0,08 %** |
+| `w038-045` *(0701)* | 42 → 39 | +2,73 % | **−0,59 %** |
+| `w038-045` *(0623)* | **9 → 9** | −1,53 % | **−0,03 %** |
+| `w046-052_jordi` | **25 → 25** | −0,42 % | **−0,01 %** |
+| `w046-052` | **66 → 66** | +0,42 % | **−0,06 %** |
+| `w053-058` | **12 → 12** | −1,53 % | **−0,06 %** |
+| `w053-058_jordi` | **16 → 16** | −1,62 % | **−0,06 %** |
+| `w064-068` | 5 → 4 | −1,05 % | **−0,09 %** |
+| `w059-063` | 15 → 13 | −1,96 % | **−0,24 %** |
+
+**Effet médian : 1,58 % → 0,07 %.** Et **10 traces sur 10** tombent alors sous leur *propre* bruit
+de graine, là où 4 sur 10 en sortaient.
+
+> ⭐⭐ Et le plus parlant n'est pas le pourcentage : c'est la colonne des **comptes**. À échantillon
+> égal, **7 traces sur 10 comptent exactement les mêmes cellules sous le tiers avant et après**.
+> Les trois autres bougent de 1 à 3 cellules. La réparation retire des centaines à des milliers de
+> quads et **ne déplace aucune des cellules que la métrique signale**.
+
+![L'effet de la réparation, bruit retiré au lieu d'être borné](images/07_tirage_apparie.png)
+
+*Deux barres par trace, même axe. Le trait vertical est le bruit de graine **propre à chaque
+trace** — un plafond commun serait généreux pour les traces calmes et sévère pour les agitées. En
+rouge le tirage par index, où avant et après ne portent pas sur les mêmes cellules ; en ambre le
+tirage par position, où c'est le même échantillon.*
+
+### Ce que ça établit, et ce que ça n'établit pas
+
+✅ **La conclusion-titre de ce document est confirmée**, cette fois avec un instrument capable de
+la contredire : *la réparation ne déplace pas le défaut*. La borne passe de **~5 %** à **0,6 %**
+au pire et **0,07 %** en médiane.
+
+⚠ Ce n'est toujours pas *« ne fait rien »* : c'est *« ne déplace pas CETTE grandeur »*. La
+réparation supprime bien les contacts d'auto-intersection — le §3 le mesure, 11 673 → 0 — et
+retire de 269 à 3 698 quads. Ce qu'elle ne change pas, c'est la **proximité anormale entre
+régions non adjacentes**, qui est une autre propriété du même maillage.
+
+⚠ Et une trace mérite d'être regardée : `w038-045` (0701) est la seule dont l'effet dépasse
+0,3 %, et c'est aussi celle dont le compte de quads retirés **n'est pas reproductible** (3 696 ou
+3 698 selon l'exécution). Une part de son Δ pourrait n'être que cette différence.
+
+### Reproduire
+
+```bash
+uv run python src/excision/reparation_et_proximite.py --corpus scroll1 --limite 10 --apparie \
+    --json docs/mesures/reparation_et_proximite_scroll1_apparie.json
+uv run python src/excision/reparation_et_proximite.py --verifier
+uv run python src/figures/figure_tirage_apparie.py --sortie docs/images/07_tirage_apparie.png
+```

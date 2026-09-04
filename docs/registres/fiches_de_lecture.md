@@ -367,7 +367,7 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
 ---
 
 ### docs/07_reparee_nest_pas_propre.md
-- **lignes** : 1013 ⚠ (438 quand la fiche a été écrite, 482 le 2026-09-03 ; deux sections neuves le 2026-09-04, §10 et §11, qui **périment le §8**)
+- **lignes** : 1106 ⚠ (438 quand la fiche a été écrite, 482 le 2026-09-03 ; deux sections neuves le 2026-09-04, §10 et §11, qui **périment le §8**)
 - **nature** : RESULTAT
 - **résumé** : Le résultat central du dépôt sur la métrique de proximité : la réparation d'auto-intersection ramène les contacts à zéro et **ne déplace pas** la proximité anormale (0,37 → 0,38 %). Le document se corrige ensuite trois fois — il retire l'affirmation que la métrique **sépare** saines et réparées, il montre que le remède de principe pour la référence locale (une boule 3D) rend la mesure pire, et il découvre que la métrique est **inapplicable** sous un tour de couverture (44 traces de Scroll 5 sur 53 rendent zéro cellule). Le §9 remplace enfin le rayon de recherche par une constante physique. ⚠ Le fichier contient deux sections numérotées « ## 6 ».
 - **conclusions extractibles** :
@@ -390,6 +390,16 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
   - Sur Scroll 1, le rayon issu de la physique (**+0,840**) bat le meilleur rayon du balayage (**+0,829** à 16 voxels).
   - Les **13 rouleaux éligibles au Grand Prize 2027 sont tous scannés à 8,640–9,362 µm**, et le règlement interdit d'utiliser des scans plus fins du même rouleau.
 - **rétractations / corrections internes** :
+  - ✅✅ **2026-09-04, §12, LA CONCLUSION-TITRE EST CONFIRMÉE — cette fois avec un instrument
+    capable de la contredire.** Le bruit d'échantillonnage a été **retiré** au lieu d'être borné :
+    la grille de paramétrisation ne change pas quand la réparation retire des quads (756 x 2940
+    des deux côtés, 142 cellules perdues sur deux millions), donc un tirage par **position de
+    grille** rend le même échantillon des deux côtés. Effet médian sur `shortfall` :
+    **1,58 % → 0,07 %**, facteur 22, et **10 traces sur 10** sous leur propre bruit de graine
+    contre 4 sur 10 qui en sortaient. ⭐ Le plus parlant est le compte : **7 traces sur 10 comptent
+    exactement les mêmes cellules sous le tiers avant et après**. La borne passe de ~5 % à
+    **0,6 %** au pire. ⚠ Ce n'est pas « ne fait rien » : la réparation supprime bien les contacts
+    (11 673 → 0) ; ce qu'elle ne déplace pas, c'est la proximité entre régions non adjacentes.
   - ⚠⚠⚠ **2026-09-04, §10, LA RÉTRACTATION CI-DESSOUS EST ELLE-MÊME ANNULÉE** — postérieure à
     cette fiche. La mesure qui renversait la conclusion-titre portait sur
     `fraction_below_third`, dont le bruit d'échantillonnage **domine l'effet mesuré** : à

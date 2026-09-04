@@ -306,7 +306,7 @@ instruments existants.
 | **A6** | la ROC de α n'est pas faite | demande de **rendre** 101 surfaces à deux profondeurs — le seul poste de ce registre qui exige le volume |
 | **B2** | « no threshold » pas encore rétréci dans l'abstract | ⚠⚠ **testé et NON tranchable ainsi** (`77` §11) : translater = décentrer la fenêtre dans la même pile, l'idée est bonne mais une dalle de volume de surface fait ±0,9 écart et ne permet pas d'emboîter deux fenêtres. **25 refusés sur 36**. Retenté sur une dalle de 3,0 écarts : le positif centré sur le lobe est **circulaire**, et le transport d'une fenêtre à l'autre est **confondu par le serpentage** (0,13 écart ≈ la fenêtre étroite). Il faudrait un positif **indépendant** — carte d'encre ou annotation |
 | **C** | les trois tâches de la règle graduée | non commencées — bornées à trois semaines par conception |
-| **D1** | ⭐⭐⭐ l'arc d'excision (`03`–`07`) — **la conclusion de tête de `07` est RESTAURÉE** | ce qui la démentait était une mesure sans producteur, prise sur une colonne dominée par son bruit d'échantillonnage. Sur `shortfall` (sans seuil, bruit < 5 %) : **0 paire sur 10** au-delà du bruit, signe mélangé. Ce qui est établi est une **borne**, pas une absence |
+| **D1** | ✅✅ l'arc d'excision (`03`–`07`) — **FERMÉ : la conclusion de tête de `07` est CONFIRMÉE** | ce qui la démentait était une mesure sans producteur, prise sur une colonne dominée par son bruit d'échantillonnage. Sur `shortfall` (sans seuil, bruit < 5 %) : **0 paire sur 10** au-delà du bruit, signe mélangé. Ce qui est établi est une **borne**, pas une absence |
 | **D2** | le contrôle P1 bis de `71` | ×15,9 requis contre ×3,8 observé |
 | **D3** | ~~41~~ → ~~32~~ → **30** scripts sans appelant | ⚠ **entamé** : deux figures dont l'image est **utilisée** dans un doc ne portaient pas leur commande de régénération — c'est la règle du dépôt, et c'est réparé (vérifié : les deux se régénèrent à l'identique). Le reste est classé ci-dessous |
 
@@ -519,10 +519,25 @@ le bruit d'échantillonnage disparaîtrait du comparatif au lieu d'être borné.
 ⚠ Ce doit être un mode **opt-in** (`--tirage-par-position`) : changer le tirage par défaut
 déplacerait toute mesure déjà publiée.
 
-⚠ **Restant sur D1** : ce tirage apparié. Et les `sweep_PHerc*.jsonl` des **autres rouleaux** sans
-déclaration (`sweep_PHerc0139`, `sweep_0139_*`, `sweep_s1_pas`) n'ont aucune trace commune avec
-Scroll 1, donc `le_rayon_des_mesures.py` ne peut ni les dater par comparaison ni lire leur
-déclaration — il faudrait les régénérer, ce qui les fera déclarer.
+12. ✅✅ **D1 EST FERMÉ — la conclusion-titre de `07` est confirmée par un instrument capable de
+    la contredire.** Le tirage apparié est écrit et mesuré (`07` §12) : effet médian sur
+    `shortfall` **1,58 % → 0,07 %**, facteur **22**, et **10 traces sur 10** sous leur propre
+    bruit de graine contre 4 qui en sortaient. ⭐ Le plus parlant n'est pas le pourcentage mais
+    le **compte** : à échantillon égal, **7 traces sur 10 comptent exactement les mêmes cellules
+    sous le tiers avant et après**. La réparation retire des centaines à des milliers de quads et
+    ne déplace **aucune** des cellules que la métrique signale. La borne passe de ~5 % à
+    **0,6 %** au pire.
+
+⚠ Ce n'est pas « la réparation ne fait rien » : elle supprime bien les contacts d'auto-intersection
+(`07` §3, 11 673 → 0). Ce qu'elle ne déplace pas, c'est la **proximité anormale entre régions non
+adjacentes**, qui est une autre propriété du même maillage.
+
+⚠ **Restant** : les `sweep_PHerc*.jsonl` des **autres rouleaux** sans déclaration
+(`sweep_PHerc0139`, `sweep_0139_*`, `sweep_s1_pas`) n'ont aucune trace commune avec Scroll 1, donc
+`le_rayon_des_mesures.py` ne peut ni les dater par comparaison ni lire leur déclaration — il
+faudrait les régénérer, ce qui les fera déclarer. Et le compte de quads de `w038-045` (0701) n'est
+**toujours pas reproductible** : 3 696 ou 3 698 selon l'exécution, quatre observations, deux
+valeurs seulement.
 
 ### D2 ⚠ — le contrôle P1 bis de `71`
 

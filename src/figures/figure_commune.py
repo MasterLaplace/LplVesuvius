@@ -53,6 +53,35 @@ def police(*tailles: int):
     return defaut if len(tailles) == 1 else tuple(defaut for _ in tailles)
 
 
+def etiquette_de_trace(trace: str) -> str:
+    """Le nom court d'une trace : ses indices de spire, jamais une troncature aveugle.
+
+    ⚠⚠ Une coupe à douze caractères rendait « 924-w010-027 » et « 46-052_jordi » — le premier
+    garde trois chiffres d'horodatage, le second perd son `w`. Les indices de spire sont **le
+    référent d'identité** d'une trace (`77`) ; c'est eux qu'il faut lire, et rien d'autre ne
+    distingue deux traces du même jour.
+
+    ⚠ Promue ici parce qu'elle était écrite **deux fois**, dans deux figures du même lot. C'est
+    exactement la façon dont `police` avait fini en quinze copies et quatre variantes.
+    """
+    i = trace.find("-w")
+    return trace[i + 1:] if i >= 0 else trace[-12:]
+
+
+def etiquettes_de_traces(traces) -> list:
+    """Les noms courts d'un lot, désambiguïsés SEULEMENT s'ils se répètent.
+
+    ⚠⚠ Deux traces peuvent porter les **mêmes** indices de spire — ce sont deux tentatives sur la
+    même feuille, ce qui est une information et non un doublon. Mais deux lignes portant le même
+    libellé rendent une figure inutilisable : le lecteur ne peut plus la rapprocher de la table.
+    La date ne s'ajoute donc **qu'en cas de collision**.
+    """
+    traces = list(traces)
+    courts = [etiquette_de_trace(t) for t in traces]
+    doublons = {c for c in courts if courts.count(c) > 1}
+    return [f"{c} ({t[4:8]})" if c in doublons else c for c, t in zip(courts, traces)]
+
+
 def prose_tracable(lignes) -> bool:
     """Aucune de ces lignes ne porte un caractère que la police ne sait pas rendre."""
     return not any(g in "".join(lignes) for g in GLYPHES_ABSENTS)
@@ -100,6 +129,20 @@ def verifier() -> int:
       not prose_tracable(["⭐ le résultat"]))
     v("le fichier n'écrit pas lui-même le glyphe qu'il refuse",
       all(g not in "".join(CHEMINS) for g in GLYPHES_ABSENTS))
+
+    # ⚠⚠ LES ETIQUETTES, testees LA OU ELLES VIVENT. Promues ici parce qu'elles etaient ecrites
+    # deux fois ; les laisser sans controle dans le module commun serait echanger une
+    # duplication contre un angle mort.
+    v("l'etiquette garde les indices de spire",
+      etiquette_de_trace("20260623141924-w010-027") == "w010-027")
+    v("... y compris avec un suffixe d'auteur",
+      etiquette_de_trace("20260623141135-w046-052_jordi") == "w046-052_jordi")
+    v("... et un nom sans indice ne leve pas",
+      etiquette_de_trace("sans_indice") == "sans_indice"[-12:])
+    _lot = etiquettes_de_traces(["20260701183126-w038-045", "20260623143441-w038-045",
+                                 "20260623150417-w064-068"])
+    v("deux traces aux memes indices sont distinguees", _lot[0] != _lot[1])
+    v("... et une trace unique n'est pas encombree pour autant", _lot[2] == "w064-068")
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0

@@ -32,7 +32,9 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from figure_commune import police, prose_tracable  # noqa: E402
+from figure_commune import (etiquette_de_trace as etiquette,  # noqa: E402
+                            etiquettes_de_traces as etiquettes,
+                            police, prose_tracable)
 
 RACINE = Path(__file__).resolve().parents[2]
 MESURES = RACINE / "docs" / "mesures"
@@ -43,14 +45,6 @@ DISCRET = (140, 136, 128)
 AMBRE = (214, 143, 42)
 GRIS = (120, 128, 140)
 ROUGE = (188, 68, 52)
-
-
-def etiquette(trace: str) -> str:
-    """
-    @brief Le nom court d'une trace : ses indices de spire, jamais une troncature aveugle.
-    """
-    i = trace.find("-w")
-    return trace[i + 1:] if i >= 0 else trace[-12:]
 
 
 def rangees(index: dict, position: dict, bruit: dict) -> list[dict]:
@@ -124,9 +118,10 @@ def dessiner(index: dict, position: dict, bruit: dict, sortie: Path) -> dict:
         d.line([xx, y0 - 8, xx, y0 + pas_ligne * len(lignes)], fill=(36, 36, 36))
         d.text((xx - 6, y0 - 24), f"{v} %", fill=DISCRET, font=petit)
 
+    noms = etiquettes([x["trace"] for x in lignes])
     for i, x in enumerate(lignes):
         yy = y0 + pas_ligne * i
-        d.text((44, yy + 6), etiquette(x["trace"]), fill=TEXTE, font=petit)
+        d.text((44, yy + 6), noms[i], fill=TEXTE, font=petit)
         for k, (cle, couleur) in enumerate((("index", ROUGE), ("position", AMBRE))):
             l_barre = max(2, int(x[cle] / haut * larg_barre))
             yb = yy + 2 + k * 11
