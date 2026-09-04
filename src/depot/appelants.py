@@ -70,6 +70,35 @@ def formes_dexecution(nom: str) -> list[re.Pattern]:
     ]
 
 
+SOUS_PROCESSUS = re.compile(r"\bsubprocess\.(?:run|Popen|check_output|call)\b|\bos\.system\b")
+"""Ce qui lance un programme depuis Python."""
+
+
+def execute_par_sous_processus(texte: str, nom: str) -> bool:
+    """
+    @brief Ce fichier lance-t-il `nom` par un sous-processus, chemin construit compris ?
+
+    ⚠⚠⚠ POURQUOI CETTE FORME EXISTE. `src/excision/proximity.py` est l'instrument central de
+    tout l'arc d'excision, appelé par `reparation_et_proximite.py` et `le_bruit_de_lechantillon.py`
+    — et il était signalé **exécuté par personne**. La raison : ces deux-là construisent son
+    chemin par segments (`RACINE / "src" / "excision" / "proximity.py"`) puis le passent à
+    `subprocess.run`, donc aucune ligne du fichier ne ressemble à une commande. Un détecteur qui
+    ne voit pas un appelant fait passer un script vivant pour mort, ce qui invite à le
+    supprimer : c'est le mode d'échec le plus coûteux qu'il puisse avoir.
+
+    ⭐ Ce n'est PAS un motif de plus dans la liste : c'est une **conjonction**, et c'est elle qui
+    évite les faux positifs. Il faut à la fois que le fichier lance un sous-processus **et** que
+    le nom apparaisse comme **dernier segment d'un chemin** — construit avec `/` ou écrit en
+    chaîne barrée. Une mention en prose (`voir proximity.py`) ne remplit ni l'une ni l'autre.
+    """
+    if not SOUS_PROCESSUS.search(texte):
+        return False
+    n = re.escape(nom)
+    # Soit `… / "nom"` (construction par segments), soit `"…/nom"` (chemin ecrit d'un bloc).
+    return bool(re.search(r"/\s*[\"']" + n + r"[\"']", texte)
+                or re.search(r"[\"'][^\"']*/" + n + r"[\"']", texte))
+
+
 def index_des_lignes(racine: Path = RACINE) -> dict[str, str]:
     """Le texte de chaque fichier lisible, en UN seul parcours de l'arbre.
 
@@ -111,7 +140,7 @@ def appelants(textes: dict[str, str], chemin: str) -> list[str]:
         # ecarte 99 % des paires avant qu'une seule regex ne tourne.
         if nom not in t and verbe_nu not in t:
             continue
-        if any(m.search(t) for m in motifs):
+        if any(m.search(t) for m in motifs) or execute_par_sous_processus(t, nom):
             out.append(f)
     return sorted(out)
 
@@ -258,6 +287,24 @@ def verifier() -> int:
       all(any(fnmatch.fnmatch(f, motif) for f in juges) for motif, _ in FAMILLES))
     v("... sans rien prendre en dehors",
       all(any(fnmatch.fnmatch(f, m) for m, _ in FAMILLES) for f in juges))
+
+    # ⚠⚠ LE SOUS-PROCESSUS A CHEMIN CONSTRUIT, teste dans LES DEUX SENS. La forme trop large
+    # avalerait toute mention dans un fichier qui lance quoi que ce soit ; la forme inerte
+    # laisserait `proximity.py` -- l'instrument central de l'arc d'excision -- passer pour mort.
+    v("un chemin construit par segments et lance en sous-processus est un appel",
+      execute_par_sous_processus(
+          'P = RACINE / "src" / "excision" / "proximity.py"\nsubprocess.run([str(P)])',
+          "proximity.py"))
+    v("... et un chemin ecrit d'un bloc aussi",
+      execute_par_sous_processus('x = "src/excision/proximity.py"\nsubprocess.run([x])',
+                                 "proximity.py"))
+    v("une mention en prose ne compte pas, meme dans un fichier qui lance",
+      not execute_par_sous_processus('# voir proximity.py\nsubprocess.run(["ls"])',
+                                     "proximity.py"))
+    v("... et un chemin qu'on LIT sans le lancer non plus",
+      not execute_par_sous_processus(
+          'P = RACINE / "src" / "excision" / "proximity.py"\nprint(P.read_text())',
+          "proximity.py"))
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
