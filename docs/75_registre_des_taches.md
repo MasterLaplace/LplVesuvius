@@ -426,11 +426,26 @@ passer la proximité de 1,464 → 0,735 % et 3,483 → 2,707 % (−50 % et −22
    le cas discriminant n'est pas montable ; c'est vrai de `PHerc0172` (10 traces éligibles) et
    **faux de Scroll 1**, qui en a **34**, curatées, span médian 2,70 tours.
 
-**Et à provenance égale, le SIGNE change** : `w010-027` **+398 %**, `w028-037` **−17 %**. Ce
-n'est donc pas la proportionnalité qui manque — c'est le signe.
+**Et à provenance égale, le SIGNE change** : `w010-027` **+398 %**, `w028-037` **−17 %**.
 
-⚠ **n = 2** sur 34 possibles. La suite est de faire tourner l'outil sur le reste ; le contrôle
-est écrit pour **tomber** si elles allaient toutes dans le même sens.
+3. ⚠⚠⚠ **Puis la mesure passée à n = 10 a détruit ce résultat-là aussi, et le contrôle que
+   j'avais écrit pour l'en protéger ne pouvait pas échouer** (`07` §10). J'avais vérifié que
+   trois runs de la *même* commande rendent le *même* nombre — c'est-à-dire la
+   **reproductibilité** — et j'en avais conclu la **stabilité sous ré-échantillonnage**, qui est
+   une autre propriété. Or `proximity.py` tire `choice(points.shape[0], …)` : la réparation
+   change le nombre de points, donc le tirage, donc « avant » et « après » ne portent pas sur les
+   mêmes cellules. Balayage de 12 graines sur le **même fichier** : `fraction_below_third` bouge
+   de **35 à 229 %**, soit plus que la réparation sur **9 traces sur 10**. Et son numérateur
+   tient sur un chiffre — les +398 % sont **une cellule qui en devient cinq**.
+
+⭐⭐ **Ce que ça laisse debout, et c'est plus que ça n'en a l'air.** Le premier §8 de `07` valide
+cette colonne par un rho de +0,769 **entre traces**, où le signal (403 %) écrase le bruit (82 %) :
+ce classement tient. Ce qui tombe est son transport vers une **différence appariée**, où l'effet
+médian (35 %) est plus petit que le bruit. Et `proximity.py` publie déjà la colonne qu'il fallait
+lire — `shortfall`, sans seuil, dont l'étendue de graine reste **sous 5 %**.
+
+⚠ La question de `07` se rejoue donc sur `shortfall`, et le balayage `--population` dit si le rho
+du premier §8 dépend lui aussi de la graine.
 
 ### D2 ⚠ — le contrôle P1 bis de `71`
 

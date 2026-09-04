@@ -1258,6 +1258,7 @@ run "l'axe ne suffit pas"      uv run python "$ROOT/src/excision/laxe_ne_suffit_
 # (34 traces contre 10), et le SIGNE de la variation n'est pas stable a provenance egale --
 # ce dernier ecrit pour TOMBER si un run futur les voyait toutes aller dans le meme sens.
 run "reparation et proximite"  uv run python "$ROOT/src/excision/reparation_et_proximite.py" --verifier
+run "bruit de l'echantillon"  uv run python "$ROOT/src/excision/le_bruit_de_lechantillon.py" --verifier
 # ⭐⭐ Le garde-fou de l'angle mort qui a mordu TROIS fois : interroger une vue du corpus et
 # conclure sur le corpus. Sa sonde la plus utile reduit la comparaison a une seule vue --
 # la faute exacte du `07` -- et fait tomber trois controles.
@@ -1281,6 +1282,7 @@ run "temoin contre nos cartes" uv run python "$ROOT/src/encre/temoin_contre_nos_
 run "allure d'un rendu"        uv run python "$ROOT/src/encre/allure_du_rendu.py" --verifier
 run "figure hypothèse réfutée" uv run python "$ROOT/src/figures/figure_hypothese_refutee.py" --verifier
 run "figure bruit d'une fenetre" uv run python "$ROOT/src/figures/figure_bruit_dune_fenetre.py" --verifier
+run "figure bruit de l'echantillon" uv run python "$ROOT/src/figures/figure_bruit_de_lechantillon.py" --verifier
 
 # ⚠⚠ La figure du bug d'échelle a un contrôle, et il porte sur ce qui la rend HONNÊTE : les
 # deux panneaux partagent leur étirement. Étirer chacun sur sa propre plage rendrait une

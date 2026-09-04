@@ -201,6 +201,17 @@ def mesurer(corpus: str = "scroll1", limite: int = 0) -> dict:
             continue
         fa = avant.get("fraction_below_third")
         fp = apres.get("fraction_below_third")
+        # ⚠⚠⚠ LA COLONNE QUI TIENT EST GARDEE A COTE DE CELLE QUI NE TIENT PAS.
+        # `le_bruit_de_lechantillon.py` mesure qu'a maillage IDENTIQUE, changer la seule graine
+        # du tirage deplace `fraction_below_third` de 35 a 229 % -- donc plus que la variation
+        # (avant, apres) sur 9 des 10 traces de cette table. La cause est arithmetique : `fbt`
+        # compte les cellules sous un tiers de leur voisinage, et ce compte vaut entre 0 et 7
+        # cellules sur les traces maigres. `shortfall` moyenne TOUTE la queue basse sur des
+        # milliers de cellules, et son etendue de graine reste sous 5 %. Les deux sont ecrites
+        # cote a cote plutot que l'une remplacee par l'autre : la premiere est le chiffre que
+        # `07` a publie, et l'effacer rendrait sa correction invisible.
+        sa = avant.get("shortfall")
+        sp = apres.get("shortfall")
         paires.append(dict(
             trace=nom, corpus=nom_long,
             span_tours=entree.get("covering_span_rev"),
@@ -208,12 +219,59 @@ def mesurer(corpus: str = "scroll1", limite: int = 0) -> dict:
             quads_retires=cert["n_removed_quads"],
             aire_gardee_pct=100.0 * cert["retained_area_fraction"],
             aire_excisee_fraction=cert.get("excised_area_fraction"),
+            usable_avant=avant.get("usable"), usable_apres=apres.get("usable"),
+            cellules_avant=round(fa * avant["usable"]) if fa is not None else None,
+            cellules_apres=round(fp * apres["usable"]) if fp is not None else None,
             fbt_avant=fa, fbt_apres=fp,
             variation_pct=(100.0 * (fp - fa) / fa) if fa else None,
+            shortfall_avant=sa, shortfall_apres=sp,
+            variation_shortfall_pct=(100.0 * (sp - sa) / sa) if sa else None,
         ))
     return dict(corpus=nom_long, eligibles=len(eligibles(corpus)),
                 span_minimum=SPAN_MINIMUM, paires=paires,
                 sautes=[{"trace": t, "raison": r} for t, r in sautes])
+
+
+def mesurer_determinisme(trace: str, repetitions: int = 3,
+                         corpus: str = "scroll1") -> dict:
+    """
+    @brief La même réparation, sur la même trace, plusieurs fois — rend-elle le même certificat ?
+
+    ⚠⚠⚠ CE MODE EXISTE PARCE QUE J'ALLAIS PUBLIER LE CONTRAIRE DEPUIS UN LOG DE `/tmp`. En
+    relançant le lot pour ajouter la colonne `shortfall`, `windcheck transform` a rendu **3 698**
+    quads retirés là où le run précédent en donnait **3 696** — donc la réparation n'est pas
+    déterministe. Écrire ce fait en s'appuyant sur deux sorties de terminal aurait été
+    exactement la dette `D3` que ce document dénonce : une affirmation qu'on ne peut pas
+    relancer. Ce mode la rend reproductible.
+
+    ⚠ Il ne mesure QUE le certificat (statut, quads retirés, aire gardée), pas la proximité :
+    une géométrie de sortie identique suffit à rendre la mesure d'après identique, et une
+    géométrie différente suffit à expliquer qu'elle ne le soit pas. Ajouter la proximité ici
+    mélangerait deux sources de variation dont ce mode existe pour séparer la première.
+    """
+    base = WINDCHECK / CORPUS[corpus][0]
+    dossier = base / trace
+    if not dossier.is_dir():
+        raise SystemExit(f"trace absente : {dossier}")
+    certificats = []
+    for _ in range(repetitions):
+        with tempfile.TemporaryDirectory() as tmp:
+            cert = _reparer(dossier, Path(tmp))
+            if cert is None:
+                certificats.append(None)
+                continue
+            certificats.append({k: cert.get(k) for k in
+                                ("status", "n_removed_quads", "retained_area_fraction",
+                                 "excised_area_fraction")})
+    valides = [c for c in certificats if c]
+    distincts = []
+    for c in valides:
+        if c not in distincts:
+            distincts.append(c)
+    return dict(trace=trace, repetitions=repetitions, certificats=certificats,
+                distincts=len(distincts),
+                quads=[c["n_removed_quads"] for c in valides],
+                deterministe=len(distincts) <= 1)
 
 
 def _verifier(r: dict | None = None) -> int:
@@ -255,17 +313,92 @@ def _verifier(r: dict | None = None) -> int:
         v("... et les traces déjà propres sont gardées et marquées",
           all(p.get("statut") for p in r["paires"]),
           ", ".join(sorted({str(p["statut"]) for p in r["paires"]})))
-        # ⚠⚠⚠ LE RESULTAT, ET IL VA PLUS LOIN QUE `07`. Ce document conclut que la variation
-        # « n'est pas proportionnelle a ce qui est retire ». Sur deux traces de la MEME
-        # provenance et du MEME rouleau, ce n'est pas la proportionnalite qui manque : le
-        # SIGNE lui-meme change. Ecrit comme un controle pour qu'un run futur qui les
-        # verrait toutes aller dans le meme sens le FASSE TOMBER -- ce serait le resultat.
+        # ⚠⚠⚠ CE QUE CETTE COLONNE MESURE VRAIMENT -- ET CE N'EST PAS CE QUE J'AI CRU.
+        # J'avais lu l'instabilite du SIGNE comme un resultat sur la reparation. Elle n'en est
+        # pas un : `le_bruit_de_lechantillon.py` mesure qu'a maillage IDENTIQUE, en ne
+        # changeant QUE la graine du tirage, `fraction_below_third` bouge de 35 a 229 % -- donc
+        # plus que la variation (avant, apres) sur 9 de ces 10 traces. La cause est
+        # arithmetique : `fbt` compte les cellules sous un tiers de leur voisinage, ce compte
+        # vaut 0 a 7 cellules sur les traces maigres, et le tirage n'est PAS apparie (la
+        # reparation change `points.shape[0]`, donc `choice` rend un autre sous-ensemble).
+        # Le controle est garde parce qu'il documente la colonne que `07` a publiee ; ce qu'il
+        # etablit desormais, c'est que cette colonne ne peut pas porter d'enonce sur le signe.
         variations = [p["variation_pct"] for p in r["paires"]
                       if p.get("variation_pct") is not None and p["quads_retires"]]
         if len(variations) >= 2:
-            v("le signe de la variation n'est pas stable, même à provenance égale",
+            v("le signe de `fraction_below_third` n'est pas stable — mais son bruit de graine "
+              "non plus (cf. `le_bruit_de_lechantillon`)",
               min(variations) < 0 < max(variations),
               " · ".join(f"{x:+.1f} %" for x in variations))
+        # ⚠ Le compte, a cote de la fraction : c'est lui qui montre qu'une variation de +398 %
+        # est un passage de une cellule a cinq.
+        maigres = [p for p in r["paires"] if (p.get("cellules_avant") or 0) < 10]
+        if maigres:
+            v("... et au moins une paire compare des comptes à un chiffre",
+              True,
+              " · ".join(f"{p['trace'][-8:]}:{p['cellules_avant']}→{p['cellules_apres']}"
+                         for p in maigres))
+
+        # ⭐⭐⭐ LA QUESTION DE `07`, REJOUEE SUR LA COLONNE QUI TIENT. `shortfall` moyenne toute
+        # la queue basse sur des milliers de cellules et ne choisit aucun seuil ; son etendue de
+        # graine reste sous 5 %. Une variation qui la depasse est donc attribuable a la
+        # reparation, ce qui n'etait pas le cas de `fbt`. Le controle est ecrit pour tomber si
+        # les variations restaient dans le bruit -- ce serait alors « la reparation ne deplace
+        # rien de mesurable », qui est un resultat different et tout aussi publiable.
+        # ⚠⚠⚠ LE RESULTAT, ET C'EST CELUI DES DEUX QUE LE CONTROLE PRE-ENREGISTRAIT COMME
+        # « different et tout aussi publiable » : `shortfall` NE bouge PAS au-dela de son bruit
+        # d'echantillonnage. Zero paire sur dix depasse +/-5 %, et le signe est melange (3 en
+        # hausse, 7 en baisse). Donc, sur la colonne qu'on peut lire, la reparation ne deplace
+        # rien de mesurable -- ce qui RESTAURE le titre d'origine de `07`, pour une bien
+        # meilleure raison que celle qu'il donnait. Les assertions disent desormais ce qui est
+        # mesure ; elles restent falsifiables, un run futur qui verrait un effet les ferait
+        # tomber, et ce serait le resultat inverse.
+        BRUIT_DE_GRAINE_PCT = 5.0
+        vs = [p["variation_shortfall_pct"] for p in r["paires"]
+              if p.get("variation_shortfall_pct") is not None and p["quads_retires"]]
+        if len(vs) >= 2:
+            hors = [x for x in vs if abs(x) > BRUIT_DE_GRAINE_PCT]
+            v("`shortfall` ne bouge JAMAIS au-delà de son bruit de graine",
+              not hors,
+              f"{len(hors)}/{len(vs)} au-delà de ±{BRUIT_DE_GRAINE_PCT:.0f} % · "
+              + " · ".join(f"{x:+.1f} %" for x in vs))
+            v("... et son signe n'est pas plus stable que celui de l'autre colonne",
+              not (min(vs) > 0 or max(vs) < 0),
+              f"{sum(1 for x in vs if x > 0)} en hausse, {sum(1 for x in vs if x < 0)} en baisse")
+            # ⚠⚠ LA COMPARAISON RIGOUREUSE, quand le balayage de graines est disponible :
+            # chaque effet est confronte au bruit de SA PROPRE trace, et non a un plafond
+            # commun. Un plafond commun est genereux pour les traces calmes et severe pour les
+            # agitees ; l'appariement par trace supprime ce biais.
+            bruit = RACINE / "docs" / "mesures" / "le_bruit_de_lechantillon.json"
+            if bruit.is_file():
+                par_trace = {x["trace"]: x for x in json.loads(bruit.read_text())["lignes"]}
+                confrontes, dehors = 0, []
+                for p in r["paires"]:
+                    b = par_trace.get(p["trace"])
+                    if not b or p.get("variation_shortfall_pct") is None:
+                        continue
+                    confrontes += 1
+                    # ⚠ La demi-etendue, parce que l'effet se compte depuis la valeur mediane
+                    # tandis que l'etendue couvre les deux cotes.
+                    if abs(p["variation_shortfall_pct"]) > b["shortfall_etendue_pct"] / 2:
+                        dehors.append(p["trace"])
+                if confrontes >= 5:
+                    v("... et face au bruit de SA PROPRE trace, la majorité reste dedans",
+                      len(dehors) < confrontes / 2,
+                      f"{len(dehors)}/{confrontes} dehors : "
+                      + (", ".join(x[-8:] for x in dehors) or "aucune"))
+        # ⚠⚠⚠ LA REPARATION ELLE-MEME N'EST PAS DETERMINISTE, et ce fait est lu dans une mesure
+        # versionnee plutot que dans un log de terminal -- sans quoi il serait exactement la
+        # dette `D3` que ce fichier existe pour rembourser. Assertion ecrite pour TOMBER si une
+        # version future de `windcheck` devenait deterministe : ce serait un signal a suivre,
+        # pas un detail.
+        det = RACINE / "docs" / "mesures" / "reparation_determinisme.json"
+        if det.is_file():
+            d = json.loads(det.read_text())
+            v("la réparation rend des certificats DIFFÉRENTS d'un run à l'autre",
+              not d["deterministe"],
+              f"{d['distincts']} certificats distincts en {d['repetitions']} réparations · "
+              f"quads {' vs '.join(str(x) for x in d['quads'])}")
         v("... et chaque paire a bien retiré quelque chose",
           all(p["quads_retires"] > 0 for p in r["paires"] if p["statut"] != "already_clean"),
           " · ".join(f"{p['quads_retires']} quads" for p in r["paires"]))
@@ -283,9 +416,29 @@ def main() -> int:
     p.add_argument("--corpus", choices=sorted(CORPUS), default="scroll1")
     p.add_argument("--limite", type=int, default=0,
                    help="ne mesurer que les N traces les plus couvrantes")
+    p.add_argument("--determinisme", metavar="TRACE",
+                   help="réparer N fois la MEME trace et comparer les certificats")
+    p.add_argument("--repetitions", type=int, default=3)
     p.add_argument("--verifier", action="store_true")
     p.add_argument("--json", type=Path)
     a = p.parse_args()
+
+    if a.determinisme:
+        d = mesurer_determinisme(a.determinisme, a.repetitions, a.corpus)
+        print(f"{d['trace']} — {d['repetitions']} réparations")
+        for i, c in enumerate(d["certificats"], 1):
+            if c is None:
+                print(f"  {i}. échec")
+                continue
+            print(f"  {i}. {c['n_removed_quads']:6d} quads retirés · "
+                  f"aire gardée {100 * c['retained_area_fraction']:.6f} % · {c['status']}")
+        print(f"\n  certificats distincts : {d['distincts']} — "
+              + ("DETERMINISTE" if d["deterministe"] else "NON DETERMINISTE"))
+        if a.json:
+            a.json.parent.mkdir(parents=True, exist_ok=True)
+            a.json.write_text(json.dumps(d, indent=2, ensure_ascii=False), encoding="utf-8")
+            print(f"écrit : {a.json}")
+        return 0
 
     # ⚠⚠ `--verifier` seul RELIT la mesure au lieu de la refaire : une paire coute plusieurs
     # minutes (une reparation plus deux proximites sur des maillages de 1,8 M de cellules),
@@ -300,12 +453,19 @@ def main() -> int:
     print(f"{r['corpus']} — {r['eligibles']} traces éligibles "
           f"(sales et > {r['span_minimum']} tour)\n")
     if r["paires"]:
-        print(f"  {'trace':46s} {'tours':>6s} {'retiré':>8s} {'avant':>8s} {'après':>8s} {'Δ':>8s}")
+        # ⚠ `cellules` est imprime A COTE de `fbt` exprès : une fraction dont le numerateur
+        # tient sur un chiffre n'est pas une fraction, et seul le compte le montre.
+        print(f"  {'trace':46s} {'tours':>6s} {'retiré':>8s} {'cell.':>9s} "
+              f"{'Δ fbt':>9s} {'shortfall':>17s} {'Δ short':>8s}")
         for x in r["paires"]:
             var = f"{x['variation_pct']:+.1f} %" if x["variation_pct"] is not None else "   —  "
+            vsh = (f"{x['variation_shortfall_pct']:+.1f} %"
+                   if x.get("variation_shortfall_pct") is not None else "   —  ")
+            cell = f"{x['cellules_avant']}→{x['cellules_apres']}"
+            short = (f"{x['shortfall_avant']:.4f}→{x['shortfall_apres']:.4f}"
+                     if x.get("shortfall_avant") is not None else "—")
             print(f"  {x['trace']:46s} {x['span_tours']:6.2f} "
-                  f"{x['quads_retires']:8d} {x['fbt_avant'] * 100:7.3f}% "
-                  f"{x['fbt_apres'] * 100:7.3f}% {var:>8s}")
+                  f"{x['quads_retires']:8d} {cell:>9s} {var:>9s} {short:>17s} {vsh:>8s}")
     for x in r.get("sautes", []):
         print(f"  ⚠ {x['trace']:46s} sautée — {x['raison']}", file=sys.stderr)
     if a.json:

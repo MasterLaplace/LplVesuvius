@@ -1,0 +1,1167 @@
+{
+  "graine_publiee": 42,
+  "n_graines": 12,
+  "lignes": [
+    {
+      "trace": "20260623141924-w010-027",
+      "graines": 12,
+      "fbt_publie": 0.0004037141703673799,
+      "variation_publiee_pct": 398.18986323411104,
+      "cellules_min": 1,
+      "cellules_max": 5,
+      "usable_median": 2418.0,
+      "sampled": 20000,
+      "fbt_min": 0.0004037141703673799,
+      "fbt_max": 0.0021222410865874364,
+      "fbt_median": 0.0012310225771662235,
+      "fbt_etendue_pct": 139.6015758034311,
+      "shortfall_min": 0.07214281340091501,
+      "shortfall_max": 0.07510257539864082,
+      "shortfall_median": 0.0734506081223437,
+      "shortfall_etendue_pct": 4.029594952836679,
+      "serie": [
+        {
+          "graine": 42,
+          "usable": 2477,
+          "measured": 2487,
+          "sampled": 20000,
+          "fbt": 0.0004037141703673799,
+          "shortfall": 0.07291450972405586
+        },
+        {
+          "graine": 1,
+          "usable": 2370,
+          "measured": 2388,
+          "sampled": 20000,
+          "fbt": 0.0012658227848101266,
+          "shortfall": 0.07374004992768125
+        },
+        {
+          "graine": 2,
+          "usable": 2351,
+          "measured": 2359,
+          "sampled": 20000,
+          "fbt": 0.0012760527435133986,
+          "shortfall": 0.07222752874098384
+        },
+        {
+          "graine": 3,
+          "usable": 2439,
+          "measured": 2445,
+          "sampled": 20000,
+          "fbt": 0.0012300123001230013,
+          "shortfall": 0.07299549700265948
+        },
+        {
+          "graine": 4,
+          "usable": 2435,
+          "measured": 2450,
+          "sampled": 20000,
+          "fbt": 0.0012320328542094457,
+          "shortfall": 0.07483397200744273
+        },
+        {
+          "graine": 5,
+          "usable": 2460,
+          "measured": 2473,
+          "sampled": 20000,
+          "fbt": 0.0016260162601626016,
+          "shortfall": 0.07289300013119542
+        },
+        {
+          "graine": 6,
+          "usable": 2385,
+          "measured": 2399,
+          "sampled": 20000,
+          "fbt": 0.0004192872117400419,
+          "shortfall": 0.07335579274547685
+        },
+        {
+          "graine": 7,
+          "usable": 2463,
+          "measured": 2476,
+          "sampled": 20000,
+          "fbt": 0.0004060089321965083,
+          "shortfall": 0.07354542349921056
+        },
+        {
+          "graine": 8,
+          "usable": 2356,
+          "measured": 2371,
+          "sampled": 20000,
+          "fbt": 0.0021222410865874364,
+          "shortfall": 0.07214281340091501
+        },
+        {
+          "graine": 9,
+          "usable": 2477,
+          "measured": 2484,
+          "sampled": 20000,
+          "fbt": 0.0016148566814695195,
+          "shortfall": 0.07452678371562428
+        },
+        {
+          "graine": 10,
+          "usable": 2385,
+          "measured": 2394,
+          "sampled": 20000,
+          "fbt": 0.0008385744234800838,
+          "shortfall": 0.07510257539864082
+        },
+        {
+          "graine": 11,
+          "usable": 2401,
+          "measured": 2412,
+          "sampled": 20000,
+          "fbt": 0.0008329862557267805,
+          "shortfall": 0.07487244284798834
+        }
+      ]
+    },
+    {
+      "trace": "20260623142658-w028-037",
+      "graines": 12,
+      "fbt_publie": 0.0006378228978420325,
+      "variation_publiee_pct": -17.098491257755217,
+      "cellules_min": 0,
+      "cellules_max": 7,
+      "usable_median": 9405.5,
+      "sampled": 20000,
+      "fbt_min": 0.0,
+      "fbt_max": 0.0007367645510998843,
+      "fbt_median": 0.000321671398585784,
+      "fbt_etendue_pct": 229.0426050743216,
+      "shortfall_min": 0.06916249503166481,
+      "shortfall_max": 0.07137289570305085,
+      "shortfall_median": 0.0698784130380021,
+      "shortfall_etendue_pct": 3.1632096026335703,
+      "serie": [
+        {
+          "graine": 42,
+          "usable": 9407,
+          "measured": 9407,
+          "sampled": 20000,
+          "fbt": 0.0006378228978420325,
+          "shortfall": 0.06983609950874613
+        },
+        {
+          "graine": 1,
+          "usable": 9627,
+          "measured": 9627,
+          "sampled": 20000,
+          "fbt": 0.0005193725979017347,
+          "shortfall": 0.0703850584609397
+        },
+        {
+          "graine": 2,
+          "usable": 9486,
+          "measured": 9486,
+          "sampled": 20000,
+          "fbt": 0.00031625553447185326,
+          "shortfall": 0.07004821777658739
+        },
+        {
+          "graine": 3,
+          "usable": 9501,
+          "measured": 9501,
+          "sampled": 20000,
+          "fbt": 0.0007367645510998843,
+          "shortfall": 0.07137289570305085
+        },
+        {
+          "graine": 4,
+          "usable": 9269,
+          "measured": 9269,
+          "sampled": 20000,
+          "fbt": 0.00043154601359369945,
+          "shortfall": 0.07030826774571292
+        },
+        {
+          "graine": 5,
+          "usable": 9420,
+          "measured": 9420,
+          "sampled": 20000,
+          "fbt": 0.00021231422505307856,
+          "shortfall": 0.06916249503166481
+        },
+        {
+          "graine": 6,
+          "usable": 9371,
+          "measured": 9371,
+          "sampled": 20000,
+          "fbt": 0.0003201365916124213,
+          "shortfall": 0.06977906825792068
+        },
+        {
+          "graine": 7,
+          "usable": 9282,
+          "measured": 9282,
+          "sampled": 20000,
+          "fbt": 0.0003232062055591467,
+          "shortfall": 0.06938961946740921
+        },
+        {
+          "graine": 8,
+          "usable": 9404,
+          "measured": 9404,
+          "sampled": 20000,
+          "fbt": 0.00010633772862611655,
+          "shortfall": 0.06947041326436522
+        },
+        {
+          "graine": 9,
+          "usable": 9477,
+          "measured": 9477,
+          "sampled": 20000,
+          "fbt": 0.00021103724807428512,
+          "shortfall": 0.0701906238646105
+        },
+        {
+          "graine": 10,
+          "usable": 9384,
+          "measured": 9384,
+          "sampled": 20000,
+          "fbt": 0.0,
+          "shortfall": 0.06992072656725808
+        },
+        {
+          "graine": 11,
+          "usable": 9324,
+          "measured": 9324,
+          "sampled": 20000,
+          "fbt": 0.0006435006435006435,
+          "shortfall": 0.06930970681768667
+        }
+      ]
+    },
+    {
+      "trace": "20260701183126-w038-045",
+      "graines": 12,
+      "fbt_publie": 0.0033250207813798837,
+      "variation_publiee_pct": -3.4997249724972472,
+      "cellules_min": 29,
+      "cellules_max": 47,
+      "usable_median": 10800.5,
+      "sampled": 20000,
+      "fbt_min": 0.0027148474068526495,
+      "fbt_max": 0.004299304793267472,
+      "fbt_median": 0.0036158740596050824,
+      "fbt_etendue_pct": 43.81948486855965,
+      "shortfall_min": 0.08543484647164416,
+      "shortfall_max": 0.08883620000908699,
+      "shortfall_median": 0.08696587318744933,
+      "shortfall_etendue_pct": 3.9111359580227796,
+      "serie": [
+        {
+          "graine": 42,
+          "usable": 10827,
+          "measured": 10827,
+          "sampled": 20000,
+          "fbt": 0.0033250207813798837,
+          "shortfall": 0.08543484647164416
+        },
+        {
+          "graine": 1,
+          "usable": 10851,
+          "measured": 10851,
+          "sampled": 20000,
+          "fbt": 0.0036862961938991796,
+          "shortfall": 0.08706710125306591
+        },
+        {
+          "graine": 2,
+          "usable": 10875,
+          "measured": 10875,
+          "sampled": 20000,
+          "fbt": 0.003586206896551724,
+          "shortfall": 0.08643923655651606
+        },
+        {
+          "graine": 3,
+          "usable": 10798,
+          "measured": 10798,
+          "sampled": 20000,
+          "fbt": 0.003704389701796629,
+          "shortfall": 0.0861456962351849
+        },
+        {
+          "graine": 4,
+          "usable": 10720,
+          "measured": 10720,
+          "sampled": 20000,
+          "fbt": 0.0033582089552238806,
+          "shortfall": 0.08818855176181428
+        },
+        {
+          "graine": 5,
+          "usable": 10829,
+          "measured": 10829,
+          "sampled": 20000,
+          "fbt": 0.003970819096869517,
+          "shortfall": 0.08686464512183276
+        },
+        {
+          "graine": 6,
+          "usable": 10698,
+          "measured": 10698,
+          "sampled": 20000,
+          "fbt": 0.0036455412226584407,
+          "shortfall": 0.08677859280315943
+        },
+        {
+          "graine": 7,
+          "usable": 10682,
+          "measured": 10682,
+          "sampled": 20000,
+          "fbt": 0.0027148474068526495,
+          "shortfall": 0.08610208713840571
+        },
+        {
+          "graine": 8,
+          "usable": 10932,
+          "measured": 10932,
+          "sampled": 20000,
+          "fbt": 0.004299304793267472,
+          "shortfall": 0.08711926969013406
+        },
+        {
+          "graine": 9,
+          "usable": 10767,
+          "measured": 10767,
+          "sampled": 20000,
+          "fbt": 0.002972044209157611,
+          "shortfall": 0.08883620000908699
+        },
+        {
+          "graine": 10,
+          "usable": 10726,
+          "measured": 10726,
+          "sampled": 20000,
+          "fbt": 0.003729256013425322,
+          "shortfall": 0.087360411068325
+        },
+        {
+          "graine": 11,
+          "usable": 10803,
+          "measured": 10803,
+          "sampled": 20000,
+          "fbt": 0.0033324076645376284,
+          "shortfall": 0.0873542579035813
+        }
+      ]
+    },
+    {
+      "trace": "20260623143441-w038-045",
+      "graines": 12,
+      "fbt_publie": 0.0014418917619917332,
+      "variation_publiee_pct": -46.610212984346944,
+      "cellules_min": 10,
+      "cellules_max": 20,
+      "usable_median": 10320.5,
+      "sampled": 20000,
+      "fbt_min": 0.0009589566551591868,
+      "fbt_max": 0.001951219512195122,
+      "fbt_median": 0.0013170552644236856,
+      "fbt_etendue_pct": 75.33950046280917,
+      "shortfall_min": 0.08045987381558153,
+      "shortfall_max": 0.08302843994051291,
+      "shortfall_median": 0.08129104903649079,
+      "shortfall_etendue_pct": 3.1597158055844177,
+      "serie": [
+        {
+          "graine": 42,
+          "usable": 10403,
+          "measured": 10403,
+          "sampled": 20000,
+          "fbt": 0.0014418917619917332,
+          "shortfall": 0.08108744925138563
+        },
+        {
+          "graine": 1,
+          "usable": 10291,
+          "measured": 10291,
+          "sampled": 20000,
+          "fbt": 0.0010688951511029054,
+          "shortfall": 0.08152668025616558
+        },
+        {
+          "graine": 2,
+          "usable": 10250,
+          "measured": 10250,
+          "sampled": 20000,
+          "fbt": 0.001951219512195122,
+          "shortfall": 0.08045987381558153
+        },
+        {
+          "graine": 3,
+          "usable": 10363,
+          "measured": 10363,
+          "sampled": 20000,
+          "fbt": 0.001640451606677603,
+          "shortfall": 0.08167047736645627
+        },
+        {
+          "graine": 4,
+          "usable": 10301,
+          "measured": 10301,
+          "sampled": 20000,
+          "fbt": 0.0017474031647412873,
+          "shortfall": 0.08081025745621667
+        },
+        {
+          "graine": 5,
+          "usable": 10283,
+          "measured": 10283,
+          "sampled": 20000,
+          "fbt": 0.0010697267334435477,
+          "shortfall": 0.08092341273591416
+        },
+        {
+          "graine": 6,
+          "usable": 10260,
+          "measured": 10260,
+          "sampled": 20000,
+          "fbt": 0.001267056530214425,
+          "shortfall": 0.08154858486852497
+        },
+        {
+          "graine": 7,
+          "usable": 10428,
+          "measured": 10428,
+          "sampled": 20000,
+          "fbt": 0.0009589566551591868,
+          "shortfall": 0.08167074930578301
+        },
+        {
+          "graine": 8,
+          "usable": 10418,
+          "measured": 10418,
+          "sampled": 20000,
+          "fbt": 0.0010558648492992896,
+          "shortfall": 0.08131012139332341
+        },
+        {
+          "graine": 9,
+          "usable": 10363,
+          "measured": 10363,
+          "sampled": 20000,
+          "fbt": 0.0015439544533436265,
+          "shortfall": 0.08127197667965814
+        },
+        {
+          "graine": 10,
+          "usable": 10241,
+          "measured": 10241,
+          "sampled": 20000,
+          "fbt": 0.001367053998632946,
+          "shortfall": 0.08067765591899566
+        },
+        {
+          "graine": 11,
+          "usable": 10340,
+          "measured": 10340,
+          "sampled": 20000,
+          "fbt": 0.0010638297872340426,
+          "shortfall": 0.08302843994051291
+        }
+      ]
+    },
+    {
+      "trace": "20260623141135-w046-052_jordi",
+      "graines": 12,
+      "fbt_publie": 0.0018851508120649651,
+      "variation_publiee_pct": -11.06126706068388,
+      "cellules_min": 21,
+      "cellules_max": 39,
+      "usable_median": 13732.5,
+      "sampled": 20000,
+      "fbt_min": 0.0015161360190599957,
+      "fbt_max": 0.002839047827036471,
+      "fbt_median": 0.0020848645518137046,
+      "fbt_etendue_pct": 63.45312969255594,
+      "shortfall_min": 0.09032852488989343,
+      "shortfall_max": 0.0930632292337494,
+      "shortfall_median": 0.09136674622111257,
+      "shortfall_etendue_pct": 2.993106854476179,
+      "serie": [
+        {
+          "graine": 42,
+          "usable": 13792,
+          "measured": 13792,
+          "sampled": 20000,
+          "fbt": 0.0018851508120649651,
+          "shortfall": 0.0913494427662207
+        },
+        {
+          "graine": 1,
+          "usable": 13709,
+          "measured": 13709,
+          "sampled": 20000,
+          "fbt": 0.0019695090816252096,
+          "shortfall": 0.09150353461363275
+        },
+        {
+          "graine": 2,
+          "usable": 13781,
+          "measured": 13781,
+          "sampled": 20000,
+          "fbt": 0.0018866555402365576,
+          "shortfall": 0.0911063909939546
+        },
+        {
+          "graine": 3,
+          "usable": 13737,
+          "measured": 13737,
+          "sampled": 20000,
+          "fbt": 0.002839047827036471,
+          "shortfall": 0.09085563360616382
+        },
+        {
+          "graine": 4,
+          "usable": 13638,
+          "measured": 13638,
+          "sampled": 20000,
+          "fbt": 0.002346385100454612,
+          "shortfall": 0.09260126420002483
+        },
+        {
+          "graine": 5,
+          "usable": 13728,
+          "measured": 13728,
+          "sampled": 20000,
+          "fbt": 0.002331002331002331,
+          "shortfall": 0.0914632041159554
+        },
+        {
+          "graine": 6,
+          "usable": 13851,
+          "measured": 13851,
+          "sampled": 20000,
+          "fbt": 0.0015161360190599957,
+          "shortfall": 0.09032852488989343
+        },
+        {
+          "graine": 7,
+          "usable": 13665,
+          "measured": 13665,
+          "sampled": 20000,
+          "fbt": 0.002414928649835346,
+          "shortfall": 0.09078160846943104
+        },
+        {
+          "graine": 8,
+          "usable": 13864,
+          "measured": 13864,
+          "sampled": 20000,
+          "fbt": 0.0016589728793998846,
+          "shortfall": 0.09138404967600444
+        },
+        {
+          "graine": 9,
+          "usable": 13635,
+          "measured": 13635,
+          "sampled": 20000,
+          "fbt": 0.0022002200220022,
+          "shortfall": 0.0923377808108638
+        },
+        {
+          "graine": 10,
+          "usable": 13632,
+          "measured": 13632,
+          "sampled": 20000,
+          "fbt": 0.0022740610328638496,
+          "shortfall": 0.0930632292337494
+        },
+        {
+          "graine": 11,
+          "usable": 13780,
+          "measured": 13780,
+          "sampled": 20000,
+          "fbt": 0.0017416545718432512,
+          "shortfall": 0.0908395507008415
+        }
+      ]
+    },
+    {
+      "trace": "20260623144224-w046-052",
+      "graines": 12,
+      "fbt_publie": 0.00510204081632653,
+      "variation_publiee_pct": -8.850668044585515,
+      "cellules_min": 63,
+      "cellules_max": 88,
+      "usable_median": 13516.5,
+      "sampled": 20000,
+      "fbt_min": 0.004626229989719489,
+      "fbt_max": 0.006541778174249183,
+      "fbt_median": 0.0054500451747475365,
+      "fbt_etendue_pct": 35.14738177593965,
+      "shortfall_min": 0.09369739508263478,
+      "shortfall_max": 0.09827155810256617,
+      "shortfall_median": 0.09554056410753942,
+      "shortfall_etendue_pct": 4.787665912023262,
+      "serie": [
+        {
+          "graine": 42,
+          "usable": 13524,
+          "measured": 13524,
+          "sampled": 20000,
+          "fbt": 0.00510204081632653,
+          "shortfall": 0.09542814612286137
+        },
+        {
+          "graine": 1,
+          "usable": 13477,
+          "measured": 13477,
+          "sampled": 20000,
+          "fbt": 0.005045633301179788,
+          "shortfall": 0.09546114379474219
+        },
+        {
+          "graine": 2,
+          "usable": 13521,
+          "measured": 13521,
+          "sampled": 20000,
+          "fbt": 0.005546927002440648,
+          "shortfall": 0.0959409123474735
+        },
+        {
+          "graine": 3,
+          "usable": 13492,
+          "measured": 13492,
+          "sampled": 20000,
+          "fbt": 0.005410613697005633,
+          "shortfall": 0.09600618101551497
+        },
+        {
+          "graine": 4,
+          "usable": 13512,
+          "measured": 13512,
+          "sampled": 20000,
+          "fbt": 0.005476613380698638,
+          "shortfall": 0.0955841659758358
+        },
+        {
+          "graine": 5,
+          "usable": 13599,
+          "measured": 13599,
+          "sampled": 20000,
+          "fbt": 0.005294506949040371,
+          "shortfall": 0.09493275433217903
+        },
+        {
+          "graine": 6,
+          "usable": 13460,
+          "measured": 13460,
+          "sampled": 20000,
+          "fbt": 0.005423476968796434,
+          "shortfall": 0.09827155810256617
+        },
+        {
+          "graine": 7,
+          "usable": 13452,
+          "measured": 13452,
+          "sampled": 20000,
+          "fbt": 0.006541778174249183,
+          "shortfall": 0.09641951279382503
+        },
+        {
+          "graine": 8,
+          "usable": 13618,
+          "measured": 13618,
+          "sampled": 20000,
+          "fbt": 0.004626229989719489,
+          "shortfall": 0.09549696223924303
+        },
+        {
+          "graine": 9,
+          "usable": 13444,
+          "measured": 13444,
+          "sampled": 20000,
+          "fbt": 0.005876227313299613,
+          "shortfall": 0.09369739508263478
+        },
+        {
+          "graine": 10,
+          "usable": 13542,
+          "measured": 13542,
+          "sampled": 20000,
+          "fbt": 0.0057598582188746125,
+          "shortfall": 0.09522076025632935
+        },
+        {
+          "graine": 11,
+          "usable": 13599,
+          "measured": 13599,
+          "sampled": 20000,
+          "fbt": 0.006323994411353776,
+          "shortfall": 0.09589777389127943
+        }
+      ]
+    },
+    {
+      "trace": "20260623144957-w053-058",
+      "graines": 12,
+      "fbt_publie": 0.0018123079347569144,
+      "variation_publiee_pct": -69.8761639302015,
+      "cellules_min": 10,
+      "cellules_max": 24,
+      "usable_median": 12739.5,
+      "sampled": 20000,
+      "fbt_min": 0.0007864108210128972,
+      "fbt_max": 0.0018829436686019143,
+      "fbt_median": 0.0011429654314100163,
+      "fbt_etendue_pct": 95.93753384442101,
+      "shortfall_min": 0.0842659801623652,
+      "shortfall_max": 0.08609508560586561,
+      "shortfall_median": 0.08519537033935486,
+      "shortfall_etendue_pct": 2.1469540377776655,
+      "serie": [
+        {
+          "graine": 42,
+          "usable": 12691,
+          "measured": 12691,
+          "sampled": 20000,
+          "fbt": 0.0018123079347569144,
+          "shortfall": 0.08567760495684094
+        },
+        {
+          "graine": 1,
+          "usable": 12784,
+          "measured": 12784,
+          "sampled": 20000,
+          "fbt": 0.001095118898623279,
+          "shortfall": 0.08492921611487761
+        },
+        {
+          "graine": 2,
+          "usable": 12624,
+          "measured": 12624,
+          "sampled": 20000,
+          "fbt": 0.001108998732572877,
+          "shortfall": 0.08463873747010951
+        },
+        {
+          "graine": 3,
+          "usable": 12702,
+          "measured": 12702,
+          "sampled": 20000,
+          "fbt": 0.0017320107069752795,
+          "shortfall": 0.08516002118725174
+        },
+        {
+          "graine": 4,
+          "usable": 12669,
+          "measured": 12669,
+          "sampled": 20000,
+          "fbt": 0.0014997237351014286,
+          "shortfall": 0.08466568191419047
+        },
+        {
+          "graine": 5,
+          "usable": 12716,
+          "measured": 12716,
+          "sampled": 20000,
+          "fbt": 0.0007864108210128972,
+          "shortfall": 0.08453377181011867
+        },
+        {
+          "graine": 6,
+          "usable": 12738,
+          "measured": 12738,
+          "sampled": 20000,
+          "fbt": 0.0010990736379337415,
+          "shortfall": 0.0859335663959523
+        },
+        {
+          "graine": 7,
+          "usable": 12746,
+          "measured": 12746,
+          "sampled": 20000,
+          "fbt": 0.0018829436686019143,
+          "shortfall": 0.08559381506283928
+        },
+        {
+          "graine": 8,
+          "usable": 12741,
+          "measured": 12741,
+          "sampled": 20000,
+          "fbt": 0.0010203280747194097,
+          "shortfall": 0.0842659801623652
+        },
+        {
+          "graine": 9,
+          "usable": 12745,
+          "measured": 12745,
+          "sampled": 20000,
+          "fbt": 0.0011769321302471558,
+          "shortfall": 0.08523071949145797
+        },
+        {
+          "graine": 10,
+          "usable": 12741,
+          "measured": 12741,
+          "sampled": 20000,
+          "fbt": 0.0016482222745467388,
+          "shortfall": 0.08609508560586561
+        },
+        {
+          "graine": 11,
+          "usable": 12748,
+          "measured": 12748,
+          "sampled": 20000,
+          "fbt": 0.0010982114841543772,
+          "shortfall": 0.08535924240543509
+        }
+      ]
+    },
+    {
+      "trace": "20260623141649-w053-058_jordi",
+      "graines": 12,
+      "fbt_publie": 0.0013182950051267028,
+      "variation_publiee_pct": -22.398408638817852,
+      "cellules_min": 7,
+      "cellules_max": 18,
+      "usable_median": 13653.5,
+      "sampled": 20000,
+      "fbt_min": 0.0005078351712130006,
+      "fbt_max": 0.0013197448493291297,
+      "fbt_median": 0.0009188287292150166,
+      "fbt_etendue_pct": 88.36354940814358,
+      "shortfall_min": 0.0861629975137293,
+      "shortfall_max": 0.0895991867275509,
+      "shortfall_median": 0.08755933806139597,
+      "shortfall_etendue_pct": 3.924412050045621,
+      "serie": [
+        {
+          "graine": 42,
+          "usable": 13654,
+          "measured": 13654,
+          "sampled": 20000,
+          "fbt": 0.0013182950051267028,
+          "shortfall": 0.08803071923803078
+        },
+        {
+          "graine": 1,
+          "usable": 13636,
+          "measured": 13636,
+          "sampled": 20000,
+          "fbt": 0.0008066881783514227,
+          "shortfall": 0.08753003791872598
+        },
+        {
+          "graine": 2,
+          "usable": 13748,
+          "measured": 13748,
+          "sampled": 20000,
+          "fbt": 0.0010910677916787896,
+          "shortfall": 0.08725345687828277
+        },
+        {
+          "graine": 3,
+          "usable": 13685,
+          "measured": 13685,
+          "sampled": 20000,
+          "fbt": 0.000803799780781878,
+          "shortfall": 0.0895991867275509
+        },
+        {
+          "graine": 4,
+          "usable": 13653,
+          "measured": 13653,
+          "sampled": 20000,
+          "fbt": 0.0008056837325130008,
+          "shortfall": 0.08729070873972987
+        },
+        {
+          "graine": 5,
+          "usable": 13611,
+          "measured": 13611,
+          "sampled": 20000,
+          "fbt": 0.0009551098376313276,
+          "shortfall": 0.08806360269389787
+        },
+        {
+          "graine": 6,
+          "usable": 13639,
+          "measured": 13639,
+          "sampled": 20000,
+          "fbt": 0.0013197448493291297,
+          "shortfall": 0.08822863725714508
+        },
+        {
+          "graine": 7,
+          "usable": 13784,
+          "measured": 13784,
+          "sampled": 20000,
+          "fbt": 0.0005078351712130006,
+          "shortfall": 0.0867369437527568
+        },
+        {
+          "graine": 8,
+          "usable": 13671,
+          "measured": 13671,
+          "sampled": 20000,
+          "fbt": 0.0008046229244385927,
+          "shortfall": 0.08827180573237113
+        },
+        {
+          "graine": 9,
+          "usable": 13604,
+          "measured": 13604,
+          "sampled": 20000,
+          "fbt": 0.0010291090855630697,
+          "shortfall": 0.08758863820406597
+        },
+        {
+          "graine": 10,
+          "usable": 13597,
+          "measured": 13597,
+          "sampled": 20000,
+          "fbt": 0.0008825476207987056,
+          "shortfall": 0.0861629975137293
+        },
+        {
+          "graine": 11,
+          "usable": 13694,
+          "measured": 13694,
+          "sampled": 20000,
+          "fbt": 0.0013144442821673725,
+          "shortfall": 0.08629288777041023
+        }
+      ]
+    },
+    {
+      "trace": "20260623150417-w064-068",
+      "graines": 12,
+      "fbt_publie": 0.00031821797931583137,
+      "variation_publiee_pct": 101.08782594784833,
+      "cellules_min": 4,
+      "cellules_max": 11,
+      "usable_median": 12582.5,
+      "sampled": 20000,
+      "fbt_min": 0.0003158310303987367,
+      "fbt_max": 0.0008737786956867106,
+      "fbt_median": 0.0005166366733752446,
+      "fbt_etendue_pct": 107.99614004225445,
+      "shortfall_min": 0.075690583279962,
+      "shortfall_max": 0.07750706329660095,
+      "shortfall_median": 0.0762623516829514,
+      "shortfall_etendue_pct": 2.3818830347517688,
+      "serie": [
+        {
+          "graine": 42,
+          "usable": 12570,
+          "measured": 12570,
+          "sampled": 20000,
+          "fbt": 0.00031821797931583137,
+          "shortfall": 0.07627120251909413
+        },
+        {
+          "graine": 1,
+          "usable": 12588,
+          "measured": 12588,
+          "sampled": 20000,
+          "fbt": 0.0007149666348903718,
+          "shortfall": 0.07632733242252042
+        },
+        {
+          "graine": 2,
+          "usable": 12665,
+          "measured": 12665,
+          "sampled": 20000,
+          "fbt": 0.0003158310303987367,
+          "shortfall": 0.07625350084680867
+        },
+        {
+          "graine": 3,
+          "usable": 12589,
+          "measured": 12589,
+          "sampled": 20000,
+          "fbt": 0.0008737786956867106,
+          "shortfall": 0.07750706329660095
+        },
+        {
+          "graine": 4,
+          "usable": 12577,
+          "measured": 12577,
+          "sampled": 20000,
+          "fbt": 0.0003180408682515703,
+          "shortfall": 0.07585889664986077
+        },
+        {
+          "graine": 5,
+          "usable": 12551,
+          "measured": 12551,
+          "sampled": 20000,
+          "fbt": 0.0005577244841048522,
+          "shortfall": 0.07577878599959521
+        },
+        {
+          "graine": 6,
+          "usable": 12548,
+          "measured": 12548,
+          "sampled": 20000,
+          "fbt": 0.000637551801083838,
+          "shortfall": 0.07666611829336051
+        },
+        {
+          "graine": 7,
+          "usable": 12540,
+          "measured": 12540,
+          "sampled": 20000,
+          "fbt": 0.0006379585326953748,
+          "shortfall": 0.07656195388627683
+        },
+        {
+          "graine": 8,
+          "usable": 12617,
+          "measured": 12617,
+          "sampled": 20000,
+          "fbt": 0.000396290718871364,
+          "shortfall": 0.075690583279962
+        },
+        {
+          "graine": 9,
+          "usable": 12548,
+          "measured": 12548,
+          "sampled": 20000,
+          "fbt": 0.0005578578259483584,
+          "shortfall": 0.0760454081661108
+        },
+        {
+          "graine": 10,
+          "usable": 12645,
+          "measured": 12645,
+          "sampled": 20000,
+          "fbt": 0.00039541320680110717,
+          "shortfall": 0.0772619519265708
+        },
+        {
+          "graine": 11,
+          "usable": 12617,
+          "measured": 12617,
+          "sampled": 20000,
+          "fbt": 0.00047554886264563684,
+          "shortfall": 0.07623645421590021
+        }
+      ]
+    },
+    {
+      "trace": "20260623145652-w059-063",
+      "graines": 12,
+      "fbt_publie": 0.0018730283911671925,
+      "variation_publiee_pct": -46.81793636396999,
+      "cellules_min": 9,
+      "cellules_max": 21,
+      "usable_median": 10146.0,
+      "sampled": 20000,
+      "fbt_min": 0.0008804539229113677,
+      "fbt_max": 0.0020626657499263333,
+      "fbt_median": 0.0017735737683272786,
+      "fbt_etendue_pct": 66.65704286605187,
+      "shortfall_min": 0.07696431049880977,
+      "shortfall_max": 0.08085586866065254,
+      "shortfall_median": 0.07913405138002419,
+      "shortfall_etendue_pct": 4.917678412740947,
+      "serie": [
+        {
+          "graine": 42,
+          "usable": 10144,
+          "measured": 10144,
+          "sampled": 20000,
+          "fbt": 0.0018730283911671925,
+          "shortfall": 0.0796946368094762
+        },
+        {
+          "graine": 1,
+          "usable": 10143,
+          "measured": 10143,
+          "sampled": 20000,
+          "fbt": 0.001577442571231391,
+          "shortfall": 0.07901101259475013
+        },
+        {
+          "graine": 2,
+          "usable": 10059,
+          "measured": 10059,
+          "sampled": 20000,
+          "fbt": 0.0011929615269907546,
+          "shortfall": 0.07992152155374012
+        },
+        {
+          "graine": 3,
+          "usable": 10088,
+          "measured": 10088,
+          "sampled": 20000,
+          "fbt": 0.0019825535289452814,
+          "shortfall": 0.077183526687642
+        },
+        {
+          "graine": 4,
+          "usable": 10159,
+          "measured": 10159,
+          "sampled": 20000,
+          "fbt": 0.0017718279358204547,
+          "shortfall": 0.0789061754809351
+        },
+        {
+          "graine": 5,
+          "usable": 10150,
+          "measured": 10150,
+          "sampled": 20000,
+          "fbt": 0.0017733990147783252,
+          "shortfall": 0.07810628490082143
+        },
+        {
+          "graine": 6,
+          "usable": 10148,
+          "measured": 10148,
+          "sampled": 20000,
+          "fbt": 0.0017737485218762318,
+          "shortfall": 0.0795324366052354
+        },
+        {
+          "graine": 7,
+          "usable": 10139,
+          "measured": 10139,
+          "sampled": 20000,
+          "fbt": 0.0018739520662787257,
+          "shortfall": 0.07989097483844618
+        },
+        {
+          "graine": 8,
+          "usable": 10181,
+          "measured": 10181,
+          "sampled": 20000,
+          "fbt": 0.0020626657499263333,
+          "shortfall": 0.08085586866065254
+        },
+        {
+          "graine": 9,
+          "usable": 9981,
+          "measured": 9981,
+          "sampled": 20000,
+          "fbt": 0.0019036168720569081,
+          "shortfall": 0.07925709016529826
+        },
+        {
+          "graine": 10,
+          "usable": 10151,
+          "measured": 10151,
+          "sampled": 20000,
+          "fbt": 0.0015761993892227366,
+          "shortfall": 0.07696431049880977
+        },
+        {
+          "graine": 11,
+          "usable": 10222,
+          "measured": 10222,
+          "sampled": 20000,
+          "fbt": 0.0008804539229113677,
+          "shortfall": 0.07736380940280645
+        }
+      ]
+    }
+  ],
+  "sautes": []
+}

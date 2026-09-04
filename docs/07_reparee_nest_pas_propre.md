@@ -545,3 +545,205 @@ le même sens : ce serait le résultat, et l'outil existe pour l'obtenir sur les
 ⚠ Et un contrôle que j'ai fait avant de conclure : `proximity.py` prend un `--sample` et un
 `--seed`, donc l'instabilité pouvait être du bruit d'échantillonnage. **Trois runs sur le même
 maillage rendent `0,000638` à l'identique** — il est déterministe, et les écarts sont réels.
+
+---
+
+## 10. ⚠⚠⚠ Le contrôle du §8 était satisfait par la panne qu'il devait attraper
+
+> 2026-09-04. Mesures : `src/excision/le_bruit_de_lechantillon.py` (10 contrôles),
+> `docs/mesures/le_bruit_de_lechantillon.json`. Figure :
+> `src/figures/figure_bruit_de_lechantillon.py` (14 contrôles).
+
+Le §8 ci-dessus se termine par ceci, que j'ai écrit **avant de conclure**, et qui a l'air d'une
+précaution :
+
+> ⚠ Et un contrôle que j'ai fait avant de conclure : `proximity.py` prend un `--sample` et un
+> `--seed`, donc l'instabilité pouvait être du bruit d'échantillonnage. **Trois runs sur le même
+> maillage rendent `0,000638` à l'identique** — il est déterministe, et les écarts sont réels.
+
+**Ce contrôle ne pouvait rendre qu'un seul résultat.** Trois exécutions de la *même* commande, sur
+le *même* maillage, avec la *même* graine : `proximity.py` est déterministe, donc il rend
+évidemment trois fois le même nombre. J'ai vérifié la **reproductibilité** et j'en ai conclu la
+**stabilité sous ré-échantillonnage**, qui est une autre propriété. C'est le péché capital de ce
+dépôt — *une vérification satisfaite par la panne qu'elle devait attraper* — commis dans le
+paragraphe même qui se donnait pour une précaution.
+
+### ⚠⚠ Le tirage n'est pas apparié, alors que la mesure se dit appariée
+
+`proximity.py` tire son échantillon ainsi :
+
+```python
+sample = generator.choice(points.shape[0], take, replace=False)
+```
+
+La graine est fixe, donc le tirage est reproductible **à maillage égal**. Or la réparation
+**retire des quads** : `points.shape[0]` change, donc `choice` rend un **autre sous-ensemble**.
+« Avant » et « après » ne sont pas mesurés sur les mêmes cellules. Ce sont deux
+sous-échantillons différents d'un phénomène **spatialement groupé** — un pli est une région, pas
+un point — et c'est exactement la condition dans laquelle une régression vers la moyenne fabrique
+des changements de signe.
+
+### ⭐⭐⭐ Le bon contrôle : ne changer QUE la graine
+
+Douze graines, **le même fichier**, aucune réparation. Toute variation observée est celle du
+tirage, par construction : il n'existe aucune autre cause possible.
+
+| trace | cellules sous le tiers | étendue de `fbt` | Δ publiée (avant→après) | étendue de `shortfall` |
+|---|---:|---:|---:|---:|
+| `w010-027` | **1 – 5** | **140 %** | +398 % | 4,0 % |
+| `w028-037` | **0 – 7** | **229 %** | −17 % | 3,2 % |
+| `w038-045` *(0701)* | 29 – 47 | 44 % | −3 % | 3,9 % |
+| `w038-045` *(0623)* | 10 – 20 | 75 % | −47 % | 3,2 % |
+| `w046-052_jordi` | 21 – 39 | 63 % | −11 % | 3,0 % |
+| `w046-052` | 63 – 88 | 35 % | −9 % | 4,8 % |
+| `w053-058` | 10 – 24 | 96 % | −70 % | 2,1 % |
+| `w053-058_jordi` | 7 – 18 | 88 % | −22 % | 3,9 % |
+| `w064-068` | 4 – 11 | 108 % | +101 % | 2,4 % |
+| `w059-063` | 9 – 21 | 67 % | −47 % | 4,9 % |
+
+> **Sur 9 traces sur 10, changer la seule graine déplace `fraction_below_third` d'au moins autant
+> que la réparation.** La table (avant, après) du §8 ne peut donc pas porter d'énoncé sur le signe.
+
+### ⚠⚠ Une fraction dont le numérateur tient sur un chiffre n'est pas une fraction
+
+`fbt_avant = 0,0004037` et `1 / 0,0004037 = 2477`, qui est exactement le nombre de cellules
+`usable` de ce maillage : **une cellule**. La variation la plus spectaculaire de la table — les
++398 % — est le passage d'un compte à un chiffre à un autre compte à un chiffre.
+
+⚠ Et l'échantillon **effectif** n'est pas celui qu'on demande : sur 20 000 cellules tirées, seules
+celles qui ont un vis-à-vis non adjacent dans le rayon sont mesurables — de **2 418 à 13 732**
+selon la trace, soit un **facteur 5,7**. Le dénominateur n'est donc pas une constante : « 0,04 % »
+sur deux traces ne désigne pas le même compte. Et la variation publiée la plus forte tombe
+justement sur l'échantillon le plus maigre — ce n'est pas une coïncidence, c'est le même fait.
+
+### ⭐⭐ La réconciliation avec le §8 *(le premier, l. 341)* : c'est la TÂCHE qui a changé
+
+Le premier §8 valide `fraction_below_third` par un rho de **+0,769** sur 46 traces et montre
+qu'aucune grandeur sans seuil ne l'égale (`shortfall` n'y fait que +0,340). **Ce document a
+raison.** Ce qui est mesuré ici est une autre propriété. Les deux ne se contredisent pas — ce sont
+les deux moitiés du même fait : `fbt` a un **gros signal ET un gros bruit**.
+
+| | grandeur | mesuré |
+|---|---|---:|
+| signal, **entre** traces | écart des valeurs d'une trace à l'autre | **403 %** |
+| bruit de graine | étendue à maillage identique | **82 %** |
+| signal, **avant/après** | effet médian de la réparation | **35 %** |
+
+Entre traces le signal écrase le bruit, donc le classement tient. Avant/après, le signal est
+**plus petit** que le bruit, donc rien ne se lit. La réparation retire environ **0,03 % de
+l'aire** : attendre d'un tel geste qu'il déplace une statistique de plus que sa propre dispersion
+d'échantillonnage était optimiste.
+
+> ⭐ L'erreur n'était pas de choisir cette colonne. C'était de transporter une grandeur validée
+> pour **ORDONNER** vers une tâche de **DIFFÉRENCE**.
+
+### ✅ La colonne qui tient, et elle est déjà publiée par l'outil
+
+`proximity.py` rend `shortfall` — le déficit moyen sous 1 — dont sa propre docstring dit qu'il
+*« utilise TOUTE la queue basse et pondère chaque cellule par son écart : il n'y a aucune coupure
+à choisir »*. Une moyenne sur des milliers de cellules ne peut pas sauter d'un facteur parce
+qu'une cellule est entrée ou sortie du tirage, et la mesure le confirme : **son étendue de graine
+reste sous 5 % partout** (pire cas 4,9 %), contre 35 à 229 % pour `fbt`.
+
+![L'effet de la réparation tient-il dans le bruit du tirage ?](images/07_bruit_de_lechantillon.png)
+
+*Douze graines sur le maillage **avant**, inchangé — puis la valeur **après** réparation. À
+gauche les nuages sont larges et la flèche tombe dedans **8 fois sur 10** ; à droite le même axe
+fait s'effondrer le nuage en un trait. Les deux panneaux partagent l'échelle exprès : en donner
+une propre à chacun ferait paraître `shortfall` aussi dispersé que l'autre colonne, ce qui est la
+façon la plus courante de faire mentir un graphique sans écrire un seul chiffre faux.*
+
+### ⭐⭐⭐ Et sur la colonne qui tient, la réparation ne déplace RIEN de mesurable
+
+La question du §8 rejouée sur `shortfall`, mêmes dix paires, même réparation :
+
+| trace | Δ `fbt` | Δ `shortfall` |
+|---|---:|---:|
+| `w010-027` | +398,2 % | **−4,6 %** |
+| `w028-037` | −17,1 % | +1,7 % |
+| `w038-045` *(0701)* | +21,2 % | +2,7 % |
+| `w038-045` *(0623)* | −46,6 % | −1,5 % |
+| `w046-052_jordi` | −11,1 % | −0,4 % |
+| `w046-052` | −8,9 % | +0,4 % |
+| `w053-058` | −69,9 % | −1,5 % |
+| `w053-058_jordi` | −22,4 % | −1,6 % |
+| `w064-068` | +101,1 % | −1,1 % |
+| `w059-063` | −46,8 % | −2,0 % |
+
+**Zéro paire sur dix dépasse le bruit de graine** (±5 %), et le signe est mélangé — 3 en hausse,
+7 en baisse. Confrontée au bruit de **sa propre** trace plutôt qu'à un plafond commun, la
+majorité reste dedans (4 sur 10 en sortent, dans les deux sens).
+
+> ⭐ **Le titre d'origine de ce document est donc restauré** — *« la réparation ne déplace pas le
+> défaut »* — mais pour une raison bien meilleure que celle qu'il donnait. Ce qui l'avait
+> « renversé » était une mesure sans producteur, prise sur une colonne dominée par son propre
+> bruit d'échantillonnage.
+
+⚠ *Ne déplace rien de mesurable* n'est pas *ne fait rien*. Ce qui est établi est une **borne** :
+si la réparation a un effet sur cette grandeur, il est inférieur à environ 5 %, c'est-à-dire à la
+dispersion d'un tirage de 20 000 cellules. Le distinguer demanderait un tirage plus grand, ou un
+tirage **apparié** — c'est-à-dire mesuré sur les cellules qui survivent à la réparation, des deux
+côtés.
+
+### ⚠⚠⚠ La réparation elle-même n'est pas déterministe
+
+Trouvé en relançant le lot pour ajouter la colonne `shortfall` : **le même appel `windcheck
+transform`, sur la même trace, a retiré 3 696 quads au premier run et 3 698 au second**
+(`w038-045`, 0701). L'aire gardée bouge en conséquence (99,87934 % → 99,87928 %).
+
+Et la conséquence sur la lecture est directe : **le Δ de cette trace passe de −3,5 % à +21,2 %
+entre deux exécutions du même pipeline.** Un signe qui s'inverse quand rien n'a changé est la
+démonstration la plus courte que la table du §8 ne portait pas d'information.
+
+⚠ Ce fait est **rapporté et non expliqué** : il faudrait rejouer la réparation seule, plusieurs
+fois, pour dire si la variabilité vient d'un ordre de parcours, d'un parallélisme ou d'un seuil.
+Il suffit ici à établir que « avant » et « après » ne sont pas deux mesures d'un même objet.
+
+### ⚠⚠ Deux hypothèses mortes, écrites pour qu'on ne les refasse pas
+
+En cherchant si le défaut **se généralise** aux deux autres consommateurs de cette colonne
+(`correlate.py`, `baseline_sweep.py`, qui font tous deux un travail *entre* traces) :
+
+1. *« changer la graine ne réordonne pas les traces »* — **faux** sur ces dix traces : rho de
+   rangs 0,697 au pire, 0,879 en médiane sur 11 graines ;
+2. *« le désordre vient des traces dont le compte est à un chiffre »* — **faux aussi** : les
+   retirer donne 0,700 contre 0,697, soit rien.
+
+⚠ Mais ces dix traces sont choisies par leur **couverture**, donc resserrées, et un classement se
+dégrade d'autant plus vite que les valeurs sont proches : elles ne disent rien de la population du
+premier §8, qui en compte 46 et s'étale bien plus large. Conclure d'ici sur là-bas serait le piège
+que ce dépôt a déjà payé. À la troisième tentative on prend un **instrument** plutôt qu'une
+troisième hypothèse : `--population` rappelle `correlate.py` à plusieurs graines sur les 46.
+
+### ⚠⚠⚠ Et le garde qui existe pour ce péché ne pouvait pas le voir
+
+`src/depot/batteries_incapables_dechouer.py` est écrit **exactement** pour attraper une
+vérification qui ne peut rendre qu'un résultat, et il rend `147 batteries Python, 0 incapables
+d'échouer` — y compris sur ce lot. Il n'a rien manqué : le contrôle fautif n'était **pas une
+batterie**. C'était trois commandes tapées au terminal, dont seule la *conclusion* a été écrite
+dans ce document.
+
+> C'est la leçon de `D3` déplacée d'un cran. On savait qu'une **mesure** sans producteur ne peut
+> pas être relancée ; celle-ci ajoute qu'un **contrôle** sans producteur ne peut pas être audité.
+> Un garde ne voit que ce qui est dans l'arbre.
+
+Le contrôle correct est désormais un mode d'un fichier versionné, et il tourne dans `temoins.sh`.
+
+### ⚠ Un risque latent, vérifié et non réalisé
+
+`run_proximity.sh` choisit le maillage d'une trace par `ls -d "$seg"mesh/*.tifxyz | head -1`,
+**sans écarter** les variantes `tifxyz_flattened` / `tifxyz_normalized` — une proximité calculée
+sur des coordonnées dépliées serait parfaitement plausible et fausse. Vérifié sur le corpus
+publié : **aucune des traces de Scroll 1 ne porte plus d'un maillage**, donc `head -1` y est sans
+ambiguïté et `proximity_scroll1.jsonl` est sain. Le risque est latent, pas réalisé — la règle est
+écrite dans `maillage_de` côté Python, où les deux mesures de ce lot la partagent.
+
+### Reproduire
+
+```bash
+uv run python src/excision/le_bruit_de_lechantillon.py --graines 12 \
+    --json docs/mesures/le_bruit_de_lechantillon.json
+uv run python src/excision/le_bruit_de_lechantillon.py --verifier
+uv run python src/figures/figure_bruit_de_lechantillon.py \
+    --sortie docs/images/07_bruit_de_lechantillon.png
+```
