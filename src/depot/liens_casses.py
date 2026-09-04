@@ -50,6 +50,36 @@ ELAGUES = (".venv", "node_modules", ".git", "repos", "site", "store", "__pycache
 Les traverser ferait signaler des liens qui ne sont pas les nôtres."""
 
 
+CITATION = re.compile(r"«[^»]*»")
+"""Une citation verbatim, en guillemets français.
+
+⚠⚠⚠ POURQUOI CETTE REGLE EXISTE. `docs/registres/fiches_de_lecture.md` **transcrit** des lignes
+d'autres documents, guillemets compris, et sa garde `verifier_citations.py` retrouve chacune à sa
+ligne d'origine. Les liens relatifs qu'elles contiennent sont valides **depuis `docs/`**, pas
+depuis `docs/registres/` — donc ce contrôle les signalait, et il avait tort deux fois : ce ne
+sont pas les liens de ce document, et les « corriger » réécrirait un texte cité, ce qui
+falsifierait la citation **et** casserait sa garde.
+
+⭐ La réponse du dépôt à ce genre de cas est toujours la même : **distinguer plutôt que
+confondre**. Un lien cité est compté et affiché à part, jamais effacé — confondre les deux est
+précisément ce qui enterre les rares liens réellement cassés.
+"""
+
+
+def positions_citees(texte: str) -> list[tuple[int, int]]:
+    """
+    @brief Les intervalles de caractères couverts par une citation verbatim.
+    """
+    return [(m.start(), m.end()) for m in CITATION.finditer(texte)]
+
+
+def est_cite(position: int, intervalles: list[tuple[int, int]]) -> bool:
+    """
+    @brief Ce lien tombe-t-il à l'intérieur d'une citation ?
+    """
+    return any(a <= position < b for a, b in intervalles)
+
+
 def est_externe(cible: str) -> bool:
     """Un lien qu'on ne peut pas résoudre sur le disque n'est pas jugé."""
     return cible.startswith(("http://", "https://", "mailto:", "#", "/"))
@@ -73,16 +103,31 @@ def corrections(fichier: Path, cible: str, racine: Path) -> list[str]:
     return [e for e in essais if (fichier.parent / e).exists()]
 
 
-def liens_casses(racine: Path) -> list[tuple[Path, str, list[str]]]:
-    """(fichier, cible cassée, corrections possibles) pour chaque lien qui ne mène nulle part."""
+def liens_casses(racine: Path, cites: list | None = None
+                 ) -> list[tuple[Path, str, list[str]]]:
+    """(fichier, cible cassée, corrections possibles) pour chaque lien qui ne mène nulle part.
+
+    ⚠ `cites` recueille, s'il est fourni, les liens qui tombent DANS une citation verbatim :
+    ils sont rapportés à part et ne comptent pas comme cassés. Sans lui ils sont simplement
+    ignorés — un appelant qui ne veut que les liens du document n'a rien à passer.
+    """
     out = []
+    cites = cites if cites is not None else []
     for f in sorted(racine.rglob("*.md")):
         if any(p in f.parts for p in ELAGUES):
             continue
-        for cible in LIEN.findall(f.read_text(encoding="utf-8", errors="replace")):
+        texte = f.read_text(encoding="utf-8", errors="replace")
+        citees = positions_citees(texte)
+        for m in LIEN.finditer(texte):
+            cible = m.group(1)
             if est_externe(cible):
                 continue
             if (f.parent / cible.split("#")[0]).exists():
+                continue
+            # ⚠ Un lien cite n'est PAS propose a la correction : `appliquer` reecrirait le
+            # texte transcrit. La liste vide de remedes est donc obligatoire ici.
+            if est_cite(m.start(), citees):
+                cites.append((f, cible))
                 continue
             out.append((f, cible, corrections(f, cible, racine)))
     return out
@@ -170,6 +215,36 @@ def verifier() -> int:
         v("plus aucun lien réparable n'est cassé",
           [c for _, c, p in liens_casses(r) if p] == [])
 
+    # ⚠⚠ LE CAS DE LA CITATION, dans SON PROPRE arbre. Le mettre dans celui d'au-dessus
+    # appliquait les corrections trop tot et cassait les controles suivants -- defaut paye une
+    # fois, d'ou l'isolement.
+    with tempfile.TemporaryDirectory() as d2:
+        r2 = Path(d2)
+        (r2 / "docs" / "registres").mkdir(parents=True)
+        fiches = r2 / "docs" / "registres" / "fiches.md"
+        # ⚠⚠⚠ LA MEME CIBLE, une fois CITEE et une fois NUE. Si la regle etait trop large elle
+        # avalerait les deux ; inerte, elle n'en attraperait aucune. Une seule doit passer.
+        fiches.write_text(
+            "  - ligne 82 : \u00ab voir [`38`](docs/jamais_ecrit.md) pour la suite \u00bb\n"
+            "et hors citation : [`38`](docs/jamais_ecrit.md)\n"
+        )
+        cites2: list = []
+        casses2 = liens_casses(r2, cites2)
+        v("un lien DANS une citation verbatim n'est pas compte comme casse", len(cites2) == 1)
+        v("... et le MEME lien hors citation l'est toujours", len(casses2) == 1)
+        v("une position hors de toute citation est lue non citee",
+          not est_cite(0, positions_citees("abc \u00ab def \u00bb ghi")))
+        v("... et une position dedans est lue citee",
+          est_cite(6, positions_citees("abc \u00ab def \u00bb ghi")))
+        # ⚠⚠ LA PROPRIETE QUI COMPTE : `appliquer` ne doit pas toucher au texte cite. Mes deux
+        # premieres redactions de ce controle etaient incapables d'echouer (un `or True`, puis
+        # un generateur vide) -- dans le lot qui corrige exactement ce peche. La forme qui teste
+        # ne raisonne pas sur des listes : elle APPLIQUE, puis compare la ligne octet pour octet.
+        avant_c = fiches.read_text().splitlines()[0]
+        appliquer(casses2)
+        v("... et `appliquer` laisse la ligne citee intacte, octet pour octet",
+          fiches.read_text().splitlines()[0] == avant_c)
+
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -183,11 +258,13 @@ def main() -> int:
     if a.verifier:
         return verifier()
 
-    casses = liens_casses(RACINE)
+    cites: list = []
+    casses = liens_casses(RACINE, cites)
     if a.corriger:
         corriges, laisses = appliquer(casses)
         print(f"{corriges} lien(s) corrigé(s), {laisses} laissé(s) faute de cible sûre")
-        casses = liens_casses(RACINE)
+        cites = []
+        casses = liens_casses(RACINE, cites)
 
     par_fichier: dict[str, int] = {}
     sans_remede = []
@@ -200,7 +277,16 @@ def main() -> int:
         print(f"  {n:>3}  {rel}")
     for rel, cible in sans_remede:
         print(f"  ⚠ sans remède : {rel} → {cible}")
-    print(f"{len(casses)} lien(s) relatif(s) cassé(s) dans {len(par_fichier)} fichier(s)")
+    if cites:
+        par_cite: dict[str, int] = {}
+        for f, _ in cites:
+            rel = str(f.relative_to(RACINE))
+            par_cite[rel] = par_cite.get(rel, 0) + 1
+        for rel, n in sorted(par_cite.items(), key=lambda kv: -kv[1]):
+            print(f"  {n:>3}  {rel}  (liens DANS une citation verbatim — texte transcrit, "
+                  "pas un lien de ce document)")
+    print(f"{len(casses)} lien(s) relatif(s) cassé(s) dans {len(par_fichier)} fichier(s)"
+          + (f", plus {len(cites)} lien(s) cité(s) verbatim" if cites else ""))
     return 1 if casses else 0
 
 
