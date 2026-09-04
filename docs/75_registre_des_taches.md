@@ -190,6 +190,46 @@ qu'un à 22,8 % (`55` : le mur 1 vient de la graine, pas du scan). `0139` ne se 
 sa queue — il se choisit parce que c'est le **seul endroit où l'on peut mesurer si le prédicat
 marche**.
 
+### A5 bis ⭐⭐⭐ — juger la CHAÎNE DE SPIRES par l'identité (l'expérience qui n'était pas montable)
+
+> Trouvé le 2026-09-04 en cherchant les docs qui avaient déjà étudié `suivre_nappe.py`, sur la
+> remarque de l'auteur : *« s'il existe c'est qu'il y a des docs qui ont étudié le sujet ? »*.
+> Oui — et ça a **remplacé** le plan que j'allais suivre.
+
+**Ce qui est déjà fait et qu'il ne faut pas refaire :**
+
+- **la boucle de correction tourne, et c'est un cul-de-sac mesuré** (`42`) : trace → marcher la
+  prédiction → points de passage → `--resume --rewind-gen --correct` → juger. Le **témoin bat
+  toutes les corrections, à tous les poids**, en fenêtre valide. 318 points, c'est 0,56 % de la
+  surface — un coup de pouce local, pas une réorientation. Et le mode `--nappe` (5695 points,
+  10,1 %) ne renverse pas le verdict ;
+- **la chaîne de spires tourne aussi** (`43`) : `gen_neighbor` est l'outil « wrap by wrap » du
+  papier de juin 2026, public, et il construit la spire voisine depuis un segment officiel. Sept
+  spires enchaînées, α mesuré à chaque tour.
+
+⭐⭐⭐ **Et voici le trou, écrit par `43` lui-même** : *« α mesure s'il y a une feuille à portée,
+pas si c'est la bonne. »* La réponse donnée était les **113 µm** de `44` — *« donc la chaîne sait
+de quelle spire elle parle »*.
+
+⚠⚠ **`77` §10 fragilise cette réponse** : les 113 µm sont une distance au plus proche voisin
+entre **surfaces**, dépendante d'un réglage (116 → 102 µm quand `neighbor_step` est halvé), et
+les surfaces publiées sont elles-mêmes à **27 µm** de la matière. La chaîne n'a donc jamais été
+jugée sur l'**identité**, faute de référent.
+
+**Le référent existe depuis cette session** : 37 spires consécutives approuvées sur
+`PHerc0139`, et c'est le seul rouleau qui a **tout** — référent d'identité, ombilic publié,
+prédicat qui sépare (2 tranches), **et une prédiction de surface `m7` publiée** (`PHerc0172`
+n'en publie aucune).
+
+> **L'expérience** : enchaîner `gen_neighbor` sur `PHerc0139` depuis une spire publiée, et
+> juger chaque spire générée par le **prédicat d'identité** contre les 37 publiées. La question
+> devient « la chaîne saute-t-elle de feuille, et au bout de combien de tours ? » — celle que
+> le prix pose, et que personne ne pouvait poser.
+
+⚠ Ce qu'il faut savoir avant de la monter : l'érosion borne la chaîne à **15,6 % par tour**
+(`44` §5), et l'article mesure un **point fixe à 6,02 cm²**. Un échec au tour *k* est un
+**résultat**, pas une panne.
+
 ### A5 ⭐ — extraire, pas faire pousser
 
 L'article a fermé les deux voies ascendantes **par la mesure** : l'extension converge vers un
@@ -233,6 +273,7 @@ instruments existants.
 | **A5** | ⭐⭐ le **plancher** : une spire publiée est à **20,8 µm** de la matière *à l'échelle où le champ travaille* (`77` §10), donc l'erreur propre du champ est entre **28 et 49 µm**, **44** si indépendantes — et l'indépendance est **vérifiée** (corrélation ≤ 0,08 entre voisines) | mesuré en coupe sur **six** spires, dont cinq consécutives ; resserrer demanderait une règle autre que la spire publiée |
 | **A5** | l'extraction porte **une feuille** (47 µm), pas deux | mesuré : réinjecter une spire prédite ne change **rien** — le champ est un juge, pas un générateur |
 | **A5** | ⚠ la structure angulaire de l'écart (**71 µm**, 45 % de la médiane) **n'améliore pas** l'extrapolation | mesuré : un pas par cellule mis en commun donne 52 µm à une feuille contre 47 pour le pas global. Meilleur à longue portée (1,71 contre 1,90 feuille à huit), inutile là où ça compte |
+| **A5 bis** | ⭐⭐⭐ juger la chaîne `gen_neighbor` par l'**identité** — l'expérience que personne ne pouvait poser | montable : `PHerc0139` a le référent, l'ombilic, le prédicat **et** la prédiction `m7` publiée |
 | **A6** | la ROC de α n'est pas faite | demande de **rendre** 101 surfaces à deux profondeurs — le seul poste de ce registre qui exige le volume |
 | **B2** | « no threshold » pas encore rétréci dans l'abstract | ⚠ **à mesurer avant d'écrire** : α sur une surface translatée d'un demi-pas. Le champ la refuse (2,1 %), mais ce n'est pas α |
 | **C** | les trois tâches de la règle graduée | non commencées — bornées à trois semaines par conception |
