@@ -74,11 +74,28 @@ semaines, dans le budget du §3 — et pas un mois.
 
 **Inchangée** : aucun document ne compare 4,317 µm / 1,2 m à 9,362 µm / 1,2 m sur le même
 objet, et la case du `68` §4 reste vide. **Déclassée** : côté règle. Ce qui reste est un
-**courriel** à l'ESRF, dont le coût est nul, avec un argument que `69` n'avait pas donné et qui
-est géométrique : à 4,7 µm une feuille fait 8 à 10 voxels au lieu de 4 à 5, donc la
+**courriel** à l'ESRF, ~~dont le coût est nul~~, avec un argument que `69` n'avait pas donné et
+qui est géométrique : à 4,7 µm une feuille fait 8 à 10 voxels au lieu de 4 à 5, donc la
 séparabilité `d′` de `16` monterait pour les treize — au prix de ×8 en volume (20 To → 160 To),
-que le lecteur à distance de `volume/` absorbe par fenêtres. Aucune expérience à monter avant
-la réponse.
+que le lecteur à distance de `volume/` absorbe par fenêtres. ~~Aucune expérience à monter avant
+la réponse.~~
+
+> ⚠⚠⚠ **2026-09-04 — CE PARAGRAPHE SUR-AFFIRME, et `69` porte déjà le contre-argument.** Son
+> §1.2 est marqué `[établi]` : à 1,2 m le papier rend deux verdicts pour la **même acquisition**
+> — 4,317 µm *haze-limited*, 9,362 µm *pixel-limited* — donc la résolution physique y est bornée
+> par la **décohérence** entre 4,3 et 9,4 µm. **Plus de voxels échantillonnant un signal déjà
+> flou ne relèvent pas `d′`** : l'argument géométrique ci-dessus ne suit pas de cette physique,
+> et `69` chiffre l'attente inverse — au plus **1,3–1,5×** de résolution effective.
+>
+> Et `69` écrit sa condition en toutes lettres : *« Cette prédiction est testable sur des données
+> publiques (H2), et **si elle est fausse**, la donnée manquante la plus précieuse du prix est
+> une demande à l'ESRF. »* Le courriel est donc **conditionnel**, et « aucune expérience à monter
+> avant la réponse » est faux — l'expérience est justement ce qui décide s'il faut écrire.
+>
+> ⭐ Elle est faisable : `src/volume/ou_vit_ce_rouleau.py PHerc0500P2` rend
+> `volumes reconstruits → 0.550, 2.215, 4.317, 9.362`. **Le même objet est publié et
+> téléchargeable aux deux échantillonnages**, et le lecteur par fenêtres l'absorbe sans
+> rapatrier 20 To. Détail et ordre corrigé : [`75`](75_registre_des_taches.md) §C3.
 
 ### H3 — *la décohérence est un flou mesurable, local, et il prédit où le traçage échoue*
 

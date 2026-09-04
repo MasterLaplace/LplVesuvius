@@ -305,7 +305,7 @@ instruments existants.
 | **A5 bis** | ⚠ ~~juger la chaîne par l'identité~~ — **déjà fait** (`44`) : elle **glisse**, elle ne saute pas. Ce qui reste est de refaire la mesure contre une surface **recalée**, son budget étant gonflé (**69,2 → 64,7 µm**, conjecture) | corrigé par la lecture des fiches ; mesuré sur 2 rouleaux, **pas** sur `PHercParis4` où `44` a mesuré |
 | **A6** | la ROC de α n'est pas faite | demande de **rendre** 101 surfaces à deux profondeurs — le seul poste de ce registre qui exige le volume |
 | **B2** | « no threshold » pas encore rétréci dans l'abstract | ⚠⚠ **testé et NON tranchable ainsi** (`77` §11) : translater = décentrer la fenêtre dans la même pile, l'idée est bonne mais une dalle de volume de surface fait ±0,9 écart et ne permet pas d'emboîter deux fenêtres. **25 refusés sur 36**. Retenté sur une dalle de 3,0 écarts : le positif centré sur le lobe est **circulaire**, et le transport d'une fenêtre à l'autre est **confondu par le serpentage** (0,13 écart ≈ la fenêtre étroite). Il faudrait un positif **indépendant** — carte d'encre ou annotation |
-| **C** | les trois tâches de la règle graduée | non commencées — bornées à trois semaines par conception |
+| **C** | les trois tâches de la règle graduée | non commencées. ⚠⚠ **C3 corrigé le 2026-09-04** : il n'est ni inconditionnel ni premier — `69` §1.2 le gate sur H2, et H2 est testable sur données publiques (`PHerc0500P2` est publié à 4,317 **et** 9,362 µm) |
 | **D1** | ✅✅ l'arc d'excision (`03`–`07`) — **FERMÉ : la conclusion de tête de `07` est CONFIRMÉE** | ce qui la démentait était une mesure sans producteur, prise sur une colonne dominée par son bruit d'échantillonnage. Sur `shortfall` (sans seuil, bruit < 5 %) : **0 paire sur 10** au-delà du bruit, signe mélangé. Ce qui est établi est une **borne**, pas une absence |
 | **D2** | ⛔ le contrôle P1 bis de `71` | **bloqué** : le rapport « budget » n'est ni dans `docs/`, ni dans `src/`, ni dans `store/` — `71` et `72` le citent tous deux **sans le définir**, donc la tâche ne peut ni être faite ni être refusée |
 | **D3** | ~~41~~ → ~~32~~ → **30** scripts sans appelant | ⚠ **entamé** : deux figures dont l'image est **utilisée** dans un doc ne portaient pas leur commande de régénération — c'est la règle du dépôt, et c'est réparé (vérifié : les deux se régénèrent à l'identique). Le reste est classé ci-dessous |
@@ -396,11 +396,37 @@ le nul **propre** — parallèle à une face, sans arête de feuille — que `46
 surface sans face que sur une face. Tant qu'on ne sait pas ce qu'il rend sur une face
 **vierge**, « l'encre valide le déroulage » n'est pas utilisable.
 
-### C3 — le courriel à l'ESRF (ex-H2)
+### C3 ⚠⚠⚠ — le courriel à l'ESRF (ex-H2) : **conditionnel, et sa condition est testable**
 
-Coût nul, aucune expérience à monter avant la réponse. Argument géométrique : à 4,7 µm une
+~~Coût nul, aucune expérience à monter avant la réponse.~~ Argument géométrique : à 4,7 µm une
 feuille fait 8 à 10 voxels au lieu de 4 à 5, donc `d′` monterait pour les treize — au prix de
 ×8 en volume (20 → 160 To), que le lecteur par fenêtres absorbe.
+
+> ⚠⚠⚠ **2026-09-04 — DEUX DOCUMENTS DE CE DÉPÔT SE CONTREDISENT ICI, et c'est `73` qui a
+> sur-affirmé.** Sa formulation — « coût nul, aucune expérience à monter avant la réponse » —
+> tient un argument **géométrique** (plus de voxels par feuille). Or [`69`](69_reponse_dun_chercheur_exterieur.md)
+> §1.2 donne l'argument **physique** contraire, et il est marqué `[établi]` : à 1,2 m le papier
+> rend deux verdicts pour la **même acquisition** — 4,317 µm *haze-limited*, 9,362 µm
+> *pixel-limited* — donc la résolution physique y est bornée par la **décohérence** entre 4,3 et
+> 9,4 µm, et le binning ×2 a coûté peu. Prédiction chiffrée : le débinage rendrait **au plus
+> 1,3–1,5×** de résolution effective.
+>
+> **Plus de voxels échantillonnant un signal déjà flou ne relèvent pas `d′`.** L'argument
+> géométrique de `73` ne suit donc pas de la physique de `69`, et `69` écrit sa condition en
+> toutes lettres : *« Cette prédiction est testable sur des données publiques (H2), et **si elle
+> est fausse**, la donnée manquante la plus précieuse du prix est une demande à l'ESRF. »*
+>
+> ⭐⭐ **Et la condition est testable aujourd'hui.** `src/volume/ou_vit_ce_rouleau.py PHerc0500P2`
+> rend `scans publiés → 0.550, 2.215, 4.317, 9.362` et **`volumes reconstruits → les mêmes`** :
+> le même objet est publié et téléchargeable aux **deux** échantillonnages, et le lecteur par
+> fenêtres (`src/volume/couches_distantes.py`) l'absorbe sans rapatrier 20 To.
+>
+> **Ordre corrigé** : H2 d'abord, sur données publiques, puis le courriel **seulement si** H2
+> réfute la prédiction. Envoyer une demande de 160 To sur un argument que la physique de ce
+> dépôt prédit faux coûterait un contact, pas rien.
+
+⚠ **Et l'envoi appartient à l'auteur.** Un courriel à un tiers est un acte vers l'extérieur ;
+ce registre peut en préparer la matière, pas le poster.
 
 **Sortie de C** : deux nombres avec leur intervalle. Si l'AUC native à 9,362 µm ne se sépare
 pas de 0,5 avec 40 tuiles, la règle ne lit pas à ce régime, et « colonnes visibles partout »
