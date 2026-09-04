@@ -1061,6 +1061,16 @@ la chaîne tangentielle est possible.
 
 `src/outils/etendre_nappe.sh` balaie `resume_generations` sur **la même** surface convergente, à
 conception appariée (même source, même aplatissement, mêmes fenêtres, une seule variable).
+
+```bash
+# ⚠ Le balayage est LONG (un rendu par génération) : il passe par le lanceur de fond.
+GENERATIONS="1 3 10" ./src/outils/lancer.sh --fond src/outils/etendre_nappe.sh "$PWD/data/ext"
+```
+
+⚠ La commande est écrite **ici** parce qu'elle ne l'était nulle part : ce document citait
+l'outil par son chemin sans jamais dire comment le lancer, donc `appelants.py` le comptait
+parmi les scripts que rien n'exécute — et un script qu'on croit mort est un script qu'on
+supprime.
 Il **refuse** de partir d'une source dont le verdict écrit n'est pas « converge » — étendre
 une surface posée en travers de l'empilement ne mesure rien — et les trois chemins de refus
 sont testés. Campagne lancée sur 1, 3 et 10 générations ; le point à 20 n'est pas refait,

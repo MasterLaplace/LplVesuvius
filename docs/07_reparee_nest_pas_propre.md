@@ -699,6 +699,15 @@ démonstration la plus courte que la table du §8 ne portait pas d'information.
 fois, pour dire si la variabilité vient d'un ordre de parcours, d'un parallélisme ou d'un seuil.
 Il suffit ici à établir que « avant » et « après » ne sont pas deux mesures d'un même objet.
 
+⭐ **Et ce dépôt a déjà rencontré exactement cette forme, une fois, chez le voisin.**
+[`44`](44_ou_la_chaine_se_trouve.md) établit que `vc_grow_seg_from_seed` tirait son aléa d'une
+graine posée par **l'horloge** et tournait sur **22 fils** — donc deux exécutions de la même
+commande ne rendaient pas le même maillage, et un résultat publié avait été lu comme un effet de
+réglage. Le remède y a été `VC_GROWPATCH_RNG_SEED` plus `thread_limit: 1`, après quoi deux
+exécutions rendent un maillage **identique octet pour octet**. C'est la première chose à essayer
+sur `windcheck transform`, et c'est la raison de le noter ici plutôt que de le laisser en
+énigme : la forme du remède est connue.
+
 ### ⚠⚠ Deux hypothèses mortes, écrites pour qu'on ne les refasse pas
 
 En cherchant si le défaut **se généralise** aux deux autres consommateurs de cette colonne
