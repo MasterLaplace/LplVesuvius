@@ -860,6 +860,32 @@ rayon contre **44** au corrigé. Un rayon plus grand trouve un vis-à-vis pour p
 deux traces sortent du domaine quand il rétrécit. C'est une conséquence de la correction, pas un
 biais du comparatif — mais le comparatif n'est pas parfaitement apparié, et ça se dit.
 
+### ⚠⚠ Et les fichiers se datent EUX-MÊMES : trois autres portent l'ancien rayon
+
+Un fichier de mesure ne porte pas son instrument, et aucune date n'est fiable — un fichier se
+copie, se déplace, se régénère sans que son horodatage le dise. Mais la réponse est **dans la
+donnée** : `measured`, le nombre de cellules qui ont trouvé un vis-à-vis **dans le rayon**, est
+une fonction du rayon à maillage fixé. Deux fichiers qui portent le même `measured` pour une même
+trace ont été mesurés au même rayon, quel qu'il soit.
+
+`src/excision/le_rayon_des_mesures.py` compare tous les `docs/mesures/*.jsonl` à la référence
+corrigée. Sur les traces partagées, l'ancien rayon mesure **2,10 fois plus** de cellules, et
+**aucune** trace ne coïncide :
+
+| fichier | traces communes | au même compte | verdict |
+|---|---:|---:|---|
+| `proximity_scroll1.jsonl` *(celui du §8)* | 44 | **0** | **AUTRE rayon** |
+| `baseline_sweep_scroll1.jsonl` | 44 | **0** | **AUTRE rayon** |
+| `contamination_scroll1.jsonl` | 9 | **0** | **AUTRE rayon** |
+| `sweep_s1_r*.jsonl` | 44 | 0 | autre rayon — **c'est leur sujet** |
+| `sweep_PHerc*.jsonl`, `baseline_sweep_scroll5` | 0 | — | autre rouleau, pas un désaccord |
+
+⚠ Les `sweep_*_rNN` **balaient** le rayon exprès et leur nom le dit : un rayon différent y est le
+sujet de la mesure, pas un défaut. L'outil **rapporte**, il ne juge pas — c'est un lecteur qui
+décide si un fichier est périmé pour ce qu'il en fait. Ce qui est neuf, c'est que
+`baseline_sweep_scroll1` et `contamination_scroll1` sont dans le même cas que le §8 : **à
+rejouer avant d'en citer un chiffre**.
+
 ### ⭐ La conséquence pratique, pour tout ce qui vient après
 
 **`shortfall` devient la colonne de référence.** Elle ordonne aussi bien

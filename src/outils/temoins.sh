@@ -1260,6 +1260,7 @@ run "l'axe ne suffit pas"      uv run python "$ROOT/src/excision/laxe_ne_suffit_
 run "reparation et proximite"  uv run python "$ROOT/src/excision/reparation_et_proximite.py" --verifier
 run "bruit de l'echantillon"  uv run python "$ROOT/src/excision/le_bruit_de_lechantillon.py" --verifier
 run "seuil au bon rayon"      uv run python "$ROOT/src/excision/le_seuil_au_bon_rayon.py" --verifier
+run "rayon des mesures"       uv run python "$ROOT/src/excision/le_rayon_des_mesures.py" --verifier
 # ⭐⭐ Le garde-fou de l'angle mort qui a mordu TROIS fois : interroger une vue du corpus et
 # conclure sur le corpus. Sa sonde la plus utile reduit la comparaison a une seule vue --
 # la faute exacte du `07` -- et fait tomber trois controles.

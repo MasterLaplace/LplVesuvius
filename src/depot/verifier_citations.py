@@ -9,6 +9,12 @@ signe qu'on ne peut pas se fier a la fiche.
 autour du numero annonce, parce qu'un agent peut compter les lignes a une ou deux pres sans
 avoir invente quoi que ce soit. Ce qu'on veut attraper est la citation ABSENTE du fichier,
 pas le decalage d'index.
+
+⭐ `--corriger` reecrit les numeros DERIVES, jamais le texte. Sonde passee dans les deux sens
+avant de le livrer : (1) une derive fabriquee de +71 est signalee, corrigee, et le fichier
+revient OCTET POUR OCTET a son etat d'origine ; (2) une citation dont le texte est remplace par
+une phrase absente du depot est signalee INTROUVABLE et **n'est pas deplacee** -- `--corriger`
+la laisse en echec, ce qui est tout l'interet de cette garde.
 """
 import argparse, re, sys, unicodedata
 from pathlib import Path
@@ -45,8 +51,20 @@ LIGNE_DE_PREUVE = re.compile(r"^\s+- .+$", re.M)
 
 _p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
 _p.add_argument("--verifier", action="store_true", help="lance le contrôle")
-_p.parse_args()
+_p.add_argument("--corriger", action="store_true",
+                help="réécrire les numéros de ligne DÉRIVÉS (jamais le texte cité)")
+_args = _p.parse_args()
 
+# ⚠⚠⚠ POURQUOI `--corriger` EXISTE. Un numero de ligne derive des qu'un document grossit, et
+# ce depot en fait grossir a chaque lot : trois documents ont derive dans la seule journee du
+# 2026-09-04, et les corriger a la main est une corvee qui se paiera a chaque fois. Ce qui
+# derive est le LOCALISATEUR ; la preuve, elle, est le TEXTE, et il est retrouve intact --
+# c'est exactement la condition sous laquelle une reecriture est legitime.
+#
+# ⚠⚠ CE MODE NE TOUCHE JAMAIS AU TEXTE CITE. Il ne reecrit un numero que lorsque la citation a
+# ete RETROUVEE ailleurs dans le meme fichier ; une citation introuvable n'est pas deplacee,
+# elle est signalee, et le rester est tout l'interet de cette garde.
+corrections = []
 total = ok = introuvable = illisible = derive = 0
 for rapport in sorted([RAPPORTS / "fiches_de_lecture.md"]):
     txt = rapport.read_text()
@@ -90,12 +108,30 @@ for rapport in sorted([RAPPORTS / "fiches_de_lecture.md"]):
                     derive += 1
                     print(f"  ~ {doc}: citation donnee ligne {n}, trouvee ligne "
                           f"{pos[0]} (derive de {pos[0] - n:+d})")
+                    # ⚠ La puce entiere est la clef de remplacement, pas le seul nombre : deux
+                    # documents peuvent citer la meme ligne, et remplacer « 474 » globalement
+                    # deplacerait la citation d'un autre. La puce porte son texte cite, donc
+                    # elle est unique.
+                    puce = m.group(0)
+                    corrections.append((rapport, puce,
+                                        puce.replace(str(n), str(pos[0]), 1)))
                 elif frag in norm(" ".join(lignes)):
                     ok += 1
                     print(f"  ~ {doc}:{n} trouvee AILLEURS (sur plusieurs lignes)")
                 else:
                     introuvable += 1
                     print(f"  ✗ {doc}:{n} INTROUVABLE — « {cit[:70]} »")
+if _args.corriger and corrections:
+    for chemin in {c[0] for c in corrections}:
+        texte = chemin.read_text()
+        for _, vieux, neuf in corrections:
+            if vieux in texte:
+                texte = texte.replace(vieux, neuf, 1)
+        chemin.write_text(texte)
+    print(f"\n  {len(corrections)} numero(s) de ligne corrige(s) — le texte cite est intact.")
+    print("  ⚠ Relancer sans --corriger pour verifier.")
+    sys.exit(0)
+
 print(f"\n{total} citations verifiees · {ok} a leur ligne · {derive} derivees · "
       f"{introuvable} introuvables · {illisible} lignes de preuve illisibles")
 echecs = introuvable + illisible + derive

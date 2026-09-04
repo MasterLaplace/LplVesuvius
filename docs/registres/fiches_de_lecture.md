@@ -299,7 +299,7 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
 ---
 
 ### docs/06_mesures_a_faire.md
-- **lignes** : 643
+- **lignes** : 652 ⚠ (643 quand la fiche a été écrite ; le document a reçu les commandes de régénération de `33` et `37` le 2026-09-04)
 - **nature** : MIXTE
 - **résumé** : Carnet de mesures — registre des mesures faites, à faire, écartées, chacune avec son critère de réfutation. C'est structurellement un PROCÉDÉ (liste de tâches et règles de méthode), mais plusieurs entrées portent leur résultat en entier : la théorie du dommage par tranche de rayon (§2.4), l'ellipticité (§2.4bis), la table des mesures 3.x, et surtout le §7 « onde radiale » qui est un compte rendu complet de quatre formulations successives dont trois ont échoué. Le document se termine sur une section « ce qui ne marche pas ».
 - **conclusions extractibles** :
@@ -361,13 +361,13 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
   - §7 : « ⚠⚠ **Le code de cette section a failli etre perdu.** » — écrit en `python -c`, récupéré du transcript de session ; d'où la règle §5.6.
   - §7 : « ⚠ **Ce qui n'est PAS établi** : que ces quatre cellules soient des soudures. »
 - **preuve de lecture intégrale** :
-  - l. 400 : `   2026-08-19 : cette ligne annonçait « un facteur **trois** », et les deux chiffres que`
-  - l. 643 : `rayon). Il faut la suivre, pas la recompter.`
+  - l. 409 : `   2026-08-19 : cette ligne annonçait « un facteur **trois** », et les deux chiffres que`
+  - l. 652 : `rayon). Il faut la suivre, pas la recompter.`
 
 ---
 
 ### docs/07_reparee_nest_pas_propre.md
-- **lignes** : 482 ⚠ (438 quand la fiche a été écrite ; le document a reçu deux blocs de correction le 2026-09-03)
+- **lignes** : 906 ⚠ (438 quand la fiche a été écrite, 482 le 2026-09-03 ; deux sections neuves le 2026-09-04, §10 et §11, qui **périment le §8**)
 - **nature** : RESULTAT
 - **résumé** : Le résultat central du dépôt sur la métrique de proximité : la réparation d'auto-intersection ramène les contacts à zéro et **ne déplace pas** la proximité anormale (0,37 → 0,38 %). Le document se corrige ensuite trois fois — il retire l'affirmation que la métrique **sépare** saines et réparées, il montre que le remède de principe pour la référence locale (une boule 3D) rend la mesure pire, et il découvre que la métrique est **inapplicable** sous un tour de couverture (44 traces de Scroll 5 sur 53 rendent zéro cellule). Le §9 remplace enfin le rayon de recherche par une constante physique. ⚠ Le fichier contient deux sections numérotées « ## 6 ».
 - **conclusions extractibles** :
@@ -383,13 +383,38 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
   - Rapport boule/bande : sur les cellules ordinaires **1,001** en médiane sur 45 traces, p10–p90 **[0,995 ; 1,015]** ; aux cellules signalées **0,766**, p10–p90 **[0,454 ; 0,945]**, effondrement spécifique sur **43 traces sur 45** (Wilcoxon apparié **p = 1,4e-09**). Ampleur : **23 %** de baisse aux cellules signalées contre **0,1 %** partout ailleurs ; **2 traces sur 45** vont dans l'autre sens.
   - §7 : sur les 53 traces de Scroll 5, **9 seulement** rendent une mesure, **44 rendent zéro cellule** ; les 9 mesurées couvrent **2,99 à 9,07 tours**, les 44 écartées **0,50 à 1,00**. Les 9 sont `auto_grown_20251115002740308_{0..8}`, neuf morceaux du même segment — **n = 1**.
   - Populations par corpus : PHerc0814 13 traces, médiane **3,10** tours, **12** > 1 tour ; PHerc1667 20 / **1,29** / 17 ; PHerc0139 38 / **1,11** / 35 ; Scroll 1 55 / **2,70** / 37 ; Scroll 5 53 / **0,92** / 10.
-  - §8 : `fraction_below_third` **+0,769** ; `fraction_below_half` **+0,659** ; `ratio_p5` **−0,512** ; `shortfall` **+0,340**. Balayage du seuil : 0,15 → **0,759** ; 0,20 → 0,773 ; 0,25 → 0,770 ; 0,30 → **0,779** ; 1/3 → 0,769 ; 0,40 → 0,774 ; 0,50 → **0,659** ; 0,60 → 0,488 ; 0,70 → 0,282. Un facteur **2,7** sur le seuil sans que le rho bouge, puis effondrement.
+  - §8 ⚠ **ANCIEN RAYON, périmé par le §11** : `fraction_below_third` **+0,769** ; `fraction_below_half` **+0,659** ; `ratio_p5` **−0,512** ; `shortfall` **+0,340**. Au rayon corrigé : **+0,840**, **+0,877**, **−0,851**, **+0,785**. Balayage du seuil : 0,15 → **0,759** ; 0,20 → 0,773 ; 0,25 → 0,770 ; 0,30 → **0,779** ; 1/3 → 0,769 ; 0,40 → 0,774 ; 0,50 → **0,659** ; 0,60 → 0,488 ; 0,70 → 0,282. Un facteur **2,7** sur le seuil sans que le rho bouge, puis effondrement.
   - §9 : balayage du rayon sur la donnée grossière — 10 vx (**94 µm**) **+0,446** (p = 0,064, 18 traces) ; **20 vx (187 µm) +0,609** (p = 1,3e-04, 34) ; 40 vx (374 µm) **+0,459** (p = 0,0056, 35) ; 80 vx (749 µm, valeur en vigueur) **+0,284** (p = 0,093, 36) ; 160 vx (1498 µm) **−0,143** (p = 0,407, 36). Au-delà, la corrélation **s'inverse**.
   - Le pas inter-feuilles a été mesuré ailleurs et avant : **142,8 µm, cv 1,8 %**.
   - Avec le rayon issu de la physique : Scroll 1 **+0,769 → +0,840** (p = 1,1e-12) ; PHerc0139 **+0,284 → +0,666** (p = 2,3e-05) ; PHerc1667 **+0,700 → +0,579** (p = 0,019).
   - Sur Scroll 1, le rayon issu de la physique (**+0,840**) bat le meilleur rayon du balayage (**+0,829** à 16 voxels).
   - Les **13 rouleaux éligibles au Grand Prize 2027 sont tous scannés à 8,640–9,362 µm**, et le règlement interdit d'utiliser des scans plus fins du même rouleau.
 - **rétractations / corrections internes** :
+  - ⚠⚠⚠ **2026-09-04, §10, LA RÉTRACTATION CI-DESSOUS EST ELLE-MÊME ANNULÉE** — postérieure à
+    cette fiche. La mesure qui renversait la conclusion-titre portait sur
+    `fraction_below_third`, dont le bruit d'échantillonnage **domine l'effet mesuré** : à
+    maillage identique, changer la seule graine du tirage la déplace de **35 à 229 %**, soit plus
+    que la réparation sur **9 traces sur 10**, et son numérateur tient sur un chiffre (les
+    +398 % sont **une cellule qui en devient cinq**). Le contrôle que j'avais écrit pour m'en
+    protéger — « trois runs rendent le même nombre » — ne pouvait rendre qu'un seul résultat :
+    il vérifiait la **reproductibilité** et j'en tirais la **stabilité sous
+    ré-échantillonnage**. Rejouée sur `shortfall` (sans seuil, bruit < 5 %), la réparation ne
+    déplace **rien de mesurable** : 0 paire sur 10 au-delà du bruit, signe mélangé. **La
+    conclusion-titre d'origine est restaurée**, pour une bien meilleure raison qu'elle ne
+    donnait. Mesures : `le_bruit_de_lechantillon.py`, `reparation_et_proximite.py`.
+  - ⚠⚠⚠ **2026-09-04, §11, LE §8 EST PÉRIMÉ** — postérieure à cette fiche. Le §9 a corrigé le
+    rayon de recherche (4× trop grand) et n'a re-mesuré **qu'une colonne** ; le §8, qui compare
+    les grandeurs entre elles, porte encore l'ancien rayon. Au bon rayon l'écart
+    `fraction_below_third` / `shortfall` tombe de **0,429 à 0,054**, et le « plateau puis
+    effondrement » qui justifiait le seuil devient un plateau **sur toute la plage** (chute
+    **0,477 → 0,025**). Donc *« aucune grandeur sans seuil ne l'égale »* et *« le seuil n'est
+    pas supprimable »* sont faux sur l'instrument corrigé : **le seuil ne sélectionne aucun
+    régime**. ⚠ Et personne ne l'avait rejoué parce que le producteur `run_proximity.sh` ne
+    tournait plus — il avalait son erreur et un run qui ne mesurait rien sortait en 0.
+  - ⚠⚠ **2026-09-04, §10, UNE AFFIRMATION RÉFUTÉE PAR SON PROPRE PRODUCTEUR.** J'avais écrit que
+    `windcheck transform` n'est pas déterministe (3 696 puis 3 698 quads). Trois réparations
+    consécutives rendent un certificat **identique** : l'écart est réel, **non reproductible à
+    conditions égales**, cause inconnue.
   - ⚠⚠⚠ **2026-09-03, en-tête, RÉTRACTATION DE LA CONCLUSION-TITRE** — postérieure à cette
     fiche. Le chiffre central (0,37 → 0,38 %, « la réparation ne déplace pas ») a été rendu
     recalculable pour l'article : réparer une trace, remesurer. **Il ne se généralise pas.**
@@ -415,7 +440,7 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
   - §8 : « ⚠ Ce qui **reste** vrai du §5 : le seuil sélectionne une queue dont on ne sait toujours pas ce qu'elle contient sur une trace sans croisement… Le plateau justifie le *choix* du seuil, pas l'interprétation de ce qu'il attrape. »
 - **preuve de lecture intégrale** :
   - l. 299 : `Une trace qui ne fait pas un tour **ne peut pas se recouvrir** : il n'existe alors`
-  - l. 474 : `rouleau. C'est exactement le régime où la correction compte.`
+  - l. 482 : `rouleau. C'est exactement le régime où la correction compte.`
 
 
 
@@ -2688,7 +2713,7 @@ dernier caractère. Lignes mesurées par `wc -l`.
 
 ### docs/44_ou_la_chaine_se_trouve.md
 
-- **lignes** : 1968
+- **lignes** : 1978 ⚠ (1968 quand la fiche a été écrite ; `etendre_nappe.sh` a reçu sa commande de lancement le 2026-09-04 — elle n'était écrite nulle part, donc l'outil passait pour exécuté par personne)
 - **nature** : MIXTE
 - **résumé** : Le document mesure d'abord *où* la chaîne radiale de `43` se trouve dans le
   rouleau, et établit que la tâche « recoller les spires » était mal posée : une chaîne radiale
@@ -2933,8 +2958,8 @@ dernier caractère. Lignes mesurées par `wc -l`.
     verte parce qu'elle cherchait le *mot* ; et `$1` dans une fonction `chk` désignant
     l'argument de la fonction et non la colonne.
 - **preuve de lecture intégrale** :
-  - ligne 1445 (73 % du fichier) : `> **Le cycle rogner-étendre ne diverge pas : il converge vers un point fixe autour de 6 cm² de`
-  - ligne 1955 (12ᵉ ligne non vide avant la fin) : `uv run python src/nappe/geometrie_chaine.py --verifier`
+  - ligne 1455 (73 % du fichier) : `> **Le cycle rogner-étendre ne diverge pas : il converge vers un point fixe autour de 6 cm² de`
+  - ligne 1965 (12ᵉ ligne non vide avant la fin) : `uv run python src/nappe/geometrie_chaine.py --verifier`
 
 ---
 
