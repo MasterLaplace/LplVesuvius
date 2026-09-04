@@ -52,6 +52,17 @@ def main() -> int:
         return 1
     d = json.loads(a.entree.read_text())
     lignes = sorted(d["lignes"], key=lambda l: l["facteur"])
+    # ⚠⚠ UNE MESURE VIDE N'EST PAS UNE PANNE DE CETTE FIGURE, et le dire vaut mieux qu'un
+    # `ValueError: max() iterable argument is empty`. Le cas est arrive : un commit de rangement
+    # a ecrase `sensibilite_maillage.json` par un `"lignes": []` le 2026-08-26, et le garde de
+    # fraicheur des figures a range celle-ci parmi les « impossible » -- avec six autres qui, en
+    # verite, exigent seulement des arguments. Un traceback ne distingue pas les deux cas.
+    if not lignes:
+        print(f"mesure vide : {a.entree} ne porte aucune ligne.\n"
+              "  la refaire : ./src/outils/sensibilite_maillage.sh\n"
+              "  ⚠ le maillage source `artefacts/PHerc0358/mesh.tifxyz` n'existe plus, donc la\n"
+              "    seule copie de cette mesure est dans l'historique git.", file=sys.stderr)
+        return 1
     pic = max(max(l["defaut"]["transverse"], l["brut"]["transverse"]) for l in lignes) or 1
 
     hauteur = MARGE_H + len(lignes) * LIGNE + 104

@@ -18,6 +18,22 @@ concours**.
 
 Figure : `src/figures/figure_sensibilite.py`, depuis `docs/mesures/sensibilite_maillage.json`.
 
+> ⚠⚠⚠ **2026-09-04 — cette mesure a été perdue puis restaurée.** Le commit de rangement
+> `a5901be` (2026-08-26) a écrit `"lignes": []` **par-dessus** elle : le maillage source
+> `artefacts/PHerc0358/mesh.tifxyz` avait disparu, chaque facteur échouait, la boucle sortait à
+> zéro ligne, et `sensibilite_maillage.sh` écrivait le fichier **quand même**. La donnée d'une
+> figure publiée et citée devenait ainsi irrécupérable autrement que par l'historique.
+>
+> Restaurée depuis `79fba93`, et **vérifiée de la meilleure façon possible** : régénérée depuis
+> le fichier restauré, l'image est **identique octet pour octet** à celle qui est publiée
+> ci-dessus. C'est donc bien la donnée qui l'a produite.
+>
+> ⭐ Deux gardes posées pour que ça ne se reproduise pas. `sensibilite_maillage.sh` **refuse
+> d'écrire** — maillage absent, ou zéro ligne produite — au lieu de remplacer une mesure par un
+> fichier vide qui lui ressemble ; et `figure_sensibilite.py` **dit** que la mesure est vide au
+> lieu de lever `ValueError: max() iterable argument is empty`. ⚠ Le maillage n'existant plus,
+> cette mesure ne peut **pas** être refaite : la copie dans `docs/mesures/` est la seule.
+
 ## 1. Ce que M2 demandait — et la réponse est rassurante
 
 Le maillage condamné de `24` est archivé dans l'arbre. Relu à neuf réglages :

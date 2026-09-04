@@ -27,6 +27,17 @@ shift 2 2>/dev/null || true
 FACTEURS=${*:-"1 2 3 4"}
 mkdir -p "$DEST"
 
+# ⚠⚠⚠ REFUSER D'EMBLEE PLUTOT QUE D'ECRIRE UN RESULTAT VIDE. Ce script a ecrase la mesure de
+# `34` par un `"lignes": []` le 2026-08-26, pendant un commit de rangement : le maillage source
+# avait disparu, chaque facteur echouait, la boucle sortait a zero ligne, et le fichier etait
+# ecrit quand meme -- par-dessus la seule copie de la donnee d'une figure PUBLIEE et CITEE. Le
+# maillage n'existant plus, elle etait irrecuperable autrement que par git.
+if [ ! -f "$MESH/meta.json" ]; then
+    echo "ECHEC : maillage absent — $MESH" >&2
+    echo "  aucun fichier de mesure n'est ecrit : un resultat vide ecraserait le precedent." >&2
+    exit 1
+fi
+
 PAS=$(python3 -c "
 import json; print(json.load(open('$MESH/meta.json'))['vc_gsfs_params']['step_size'])" 2>/dev/null || echo 20)
 echo "maillage : $MESH  (step_size $PAS)"
@@ -74,9 +85,19 @@ print(json.dumps({'facteur': $K, 'pas_equivalent': $PAS * $K,
     "$(python3 -c "import json;print(json.loads('''$L''')['brut']['transverse'])")" \
     "$(python3 -c "import json;print(json.loads('''$L''')['brut']['paires'])")"
 done
+# ⚠⚠ LA SECONDE MOITIE DE LA MEME GARDE : le maillage peut etre la et chaque facteur echouer
+# quand meme (decimation, verificateur absent). Un fichier de mesure a zero ligne ressemble a une
+# mesure et n'en est pas -- c'est le mode d'echec que ce depot connait par coeur.
+if [ -z "${LIGNES%,}" ]; then
+    echo "ECHEC : aucun facteur n'a produit de ligne" >&2
+    echo "  aucun fichier de mesure n'est ecrit ; voir les journaux dans $DEST." >&2
+    exit 1
+fi
 python3 -c "
 import json
 lignes = json.loads('[' + '''${LIGNES%,}''' + ']')
+if not lignes:
+    raise SystemExit('ECHEC : zero ligne, rien n\'est ecrit')
 json.dump({'maillage': '$MESH', 'step_size': $PAS, 'lignes': lignes},
           open('$ROOT/docs/mesures/sensibilite_maillage.json', 'w'), indent=2)
 print('écrit : docs/mesures/sensibilite_maillage.json')"

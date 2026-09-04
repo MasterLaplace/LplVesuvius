@@ -2360,7 +2360,7 @@ Dépôt : `/home/masterlaplace/LplVesuvius`. Sept fichiers lus du premier au der
 ---
 
 ### docs/34_un_verdict_qui_ne_mesure_rien.md
-- **lignes** : 138 (mesuré)
+- **lignes** : 154 ⚠ (138 quand la fiche a été écrite ; la mesure de la figure a été **perdue puis restaurée** le 2026-09-04, et le document le dit)
 - **nature** : RESULTAT
 - **résumé** : Réponse à la mesure M2 de `29` — relire les 240 auto-intersections de `24` sous un autre `--maxedge`. La réponse directe est rassurante (les 240 survivent à la désactivation complète du filtre, donc ni masqués ni fabriqués), mais le balayage trouve davantage : un mode de panne silencieux de `vc_tifxyz_selfcross`, où « propre » et « rien mesuré » sortent par le même champ JSON. Le document mesure ensuite, par décimation d'une géométrie inchangée, ce que perd un maillage plus grossier, et impose un lecteur unique qui refuse un rapport sans paire testée.
 - **conclusions extractibles** :
@@ -2375,13 +2375,19 @@ Dépôt : `/home/masterlaplace/LplVesuvius`. Sept fichiers lus du premier au der
   - La règle de `26` §9 (`step_size ≥ 20`) tient : l'audit des rapports bruts montre `quads_dropped = 0` à tous ses pas et `pairs_tested` non nul partout (**36 149** au pas 40) ; aucun de ses zéros n'est un zéro muet.
   - Mais ses zéros ne se valent pas : sur une surface qui porte 240 croisements, un maillage au pas 40 n'en retrouve que **123, soit 51 %**.
   - Six scripts du dépôt lisaient le rapport sans jamais regarder `pairs_tested` ; `src/nappe/lire_selfcross.py` est désormais le seul lecteur et refuse (code 3) un rapport sans paire testée.
+- ⚠⚠⚠ **2026-09-04, alerte de conservation** : la mesure de la figure
+  (`docs/mesures/sensibilite_maillage.json`) a été **écrasée par un fichier vide** lors d'un
+  commit de rangement, et le maillage source `artefacts/PHerc0358/mesh.tifxyz` **n'existe
+  plus** — donc elle n'est pas refaisable. Restaurée depuis l'historique et vérifiée : l'image
+  régénérée est **identique octet pour octet** à celle qui est publiée. Deux gardes posées
+  (le script refuse d'écrire un résultat vide ; la figure le dit au lieu de lever).
 - **rétractations / corrections internes** :
   - §1 : la réponse à M2 est explicitement rassurante — le verdict de `24` n'est ni masqué ni fabriqué par un réglage. Aucune rétractation d'un résultat antérieur.
   - §4 : nuance apportée à `26` §9 — la règle tient mais « zéro croisement au pas 40 » est une affirmation plus faible que « zéro au pas 20 », et l'écart est mesuré, pas supposé. La décimation est un **modèle** de la perte, pas la campagne elle-même.
   - §6 : le document n'accuse pas l'outil d'être faux ; il ne mesure pas la fréquence du cas en pratique (un seul réglage volontairement absurde l'a produit, plus les décimations construites pour ça, et aucun résultat publié n'en dépend) ; et il ne dit pas quel pas choisir.
 - **preuve de lecture intégrale** :
   - ligne 84 (61 % du fichier) : `` `26` §9 conclut que **`step_size ≥ 20`** rend une trace propre, sur la foi de comptes nuls ``
-  - ligne 136 (dans les 15 dernières lignes non vides) : `python3 src/nappe/lire_selfcross.py --verifier`
+  - ligne 152 (dans les 15 dernières lignes non vides) : `python3 src/nappe/lire_selfcross.py --verifier`
 
 ---
 

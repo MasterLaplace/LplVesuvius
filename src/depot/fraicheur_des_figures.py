@@ -204,6 +204,17 @@ def main() -> int:
     print(f"{len(resultats)} figure(s) — " + "  ".join(f"{v} {k}" for k, v in sorted(comptes.items())))
     for r in perimees:
         print(f"  ⚠ PÉRIMÉE : {r['image']}  (rendue par {r['module']})")
+    # ⚠⚠ NOMMER CE QU'ON COMPTE. Ce contrôle affichait « 7 impossible  1 sans_sortie_declaree »
+    # et s'arrêtait là : un compte sans identité ne se répare pas, il se contemple. C'est la
+    # même forme que `liens_casses.py`, qui liste ses « sans remède » plutôt que de les compter.
+    # Le verdict global ne bouge pas — ces deux états n'ont jamais fait échouer — seule leur
+    # lisibilité change.
+    for etat, symbole in (("impossible", "⛔"), ("sans_sortie_declaree", "⚠"),
+                          ("image_absente", "⚠")):
+        for r in (x for x in resultats if x["verdict"] == etat):
+            detail = r.get("raison") or r.get("image") or ""
+            print(f"  {symbole} {etat} : {r['module']}"
+                  + (f"  — {detail}" if detail else ""))
     if a.json:
         a.json.write_text(json.dumps({"comptes": comptes, "figures": resultats},
                                      indent=1, ensure_ascii=False), encoding="utf-8")
