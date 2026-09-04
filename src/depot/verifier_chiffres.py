@@ -1979,6 +1979,13 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     sef = _source(racine, "la_surface_et_la_feuille.json")
     if sef.exists():
         d = json.loads(sef.read_text())
+        # ⚠ L'ETENDUE de la dispersion brute, pas six valeurs : c'est ce que la prose dit, et
+        # garder six chiffres obligerait a les ecrire tous les six pour rien.
+        bruts = [sp["brut_ecart_type_feuilles"] for sp in d["spires"]]
+        out.append(("dispersion brute, etendue",
+                    [f"**{min(bruts):.3f}** à **{max(bruts):.3f}**",
+                     f"{min(bruts):.3f} à {max(bruts):.3f}".replace(".", ","),
+                     f"de {min(bruts):.3f} à {max(bruts):.3f}"], sef.name))
         for sp in d["spires"]:
             court = sp["nom"].split("_")[-1]
             out.append((f"ecart de {court} a la feuille",
@@ -1988,9 +1995,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             out.append((f"amplitude de {court}",
                         [f"**{sp['amplitude_um']:.0f} µm**",
                          f"{sp['amplitude_um']:.0f} µm"], sef.name))
-            out.append((f"dispersion brute de {court}",
-                        [f"**{sp['brut_ecart_type_feuilles']:.3f}**",
-                         f"{sp['brut_ecart_type_feuilles']:.3f}".replace(".", ",")], sef.name))
+
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():
         d = json.loads(bdf.read_text())

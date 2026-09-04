@@ -439,12 +439,12 @@ prétend capter.
 
 ## 10. ⭐⭐⭐ La surface publiée n'est pas sur la feuille — et ça plafonne tout le reste
 
-> Mesure : `src/excision/la_surface_et_la_feuille.py` (8 contrôles), figure
+> Mesure : `src/excision/la_surface_et_la_feuille.py` (22 contrôles), figure
 > `src/figures/figure_la_bande_serpente.py`. Trouvé **en coupe**, encore une fois.
 
-Le §9 mesure que le champ place la feuille suivante à **47 µm** et appelle ça son erreur.
-Restait à savoir **contre quoi** elle se mesure. On rend une spire publiée en coupe profondeur ×
-largeur et on regarde.
+Le §9 mesure que le champ place la feuille suivante à ~50 µm et appelle ça son erreur. Restait
+à savoir **contre quoi** elle se mesure. On rend une spire publiée en coupe profondeur × largeur
+et on regarde.
 
 ![La bande de matière serpente sous la surface publiée](article/figures/bande_serpente.png)
 
@@ -455,57 +455,76 @@ orange est la bande de matière, suivie. **Ils ne coïncident pas.**
 
 | spire | écart-type | amplitude p5–p95 |
 |---|---:|---:|
-| `w062` | **30,8 µm** (0,209 feuille) | **102 µm** (0,690) |
-| `w078` | **29,4 µm** (0,199) | **97 µm** (0,657) |
+| `w060` | **27.3 µm** (0.185 feuille) | **91 µm** (0.619) |
+| `w061` | **26.1 µm** (0.177 feuille) | **87 µm** (0.591) |
+| `w062` | **27.7 µm** (0.188 feuille) | **91 µm** (0.619) |
+| `w063` | **23.3 µm** (0.158 feuille) | **77 µm** (0.523) |
+| `w064` | **25.1 µm** (0.170 feuille) | **83 µm** (0.566) |
+| `w078` | **27.0 µm** (0.183 feuille) | **90 µm** (0.608) |
 
-Les deux s'accordent, donc c'est **systématique** et pas une spire mal tracée.
+Six spires, dont **cinq consécutives** — donc ce n'est ni une spire mal tracée, ni un accident
+d'un endroit du rouleau.
 
 ### ⭐⭐ Ce que ça plafonne
 
-Les 47 µm du §9 sont un écart **à la spire publiée**, et la spire publiée est elle-même à ~30 µm
-de la matière. **Une part de ce que j'appelais mon erreur de prédiction est l'erreur du
-référent**, et rien dans ce dépôt ne peut les séparer tant que la règle est la spire publiée.
+Sur **le même rouleau**, le champ prédit à **49 µm** et le référent
+est lui-même à **27 µm** de la matière. Une part de ce que
+j'appelais mon erreur de prédiction est l'erreur du **référent**.
 
-⚠ Le champ pourrait donc être **meilleur** que 47 µm sans qu'on puisse le montrer.
+| | |
+|---|---:|
+| si le référent était parfait | 49 µm |
+| si les deux erreurs sont **indépendantes** | **41 µm** |
+| si elles étaient parfaitement corrélées | 22 µm |
 
-### ⚠ Le filtre est le point, et c'est lui qui change tout
+⚠ L'hypothèse d'indépendance n'est **pas** vérifiable ici, d'où les deux bornes plutôt qu'un
+chiffre. Ce qui est établi : **le champ est meilleur que ce qu'on peut mesurer**, tant que la
+règle est la spire publiée.
 
-Le pic **brut** par colonne (`argmax` sur l'intensité) donne **0,486** feuille de dispersion sur
-`w062` et **0,502** sur `w078` — rien d'exploitable, et j'ai failli conclure que le signal n'y
-était pas. Une feuille est
-**cohérente dans le plan** : lisser 9 × 9 avant de chercher le centre de masse fait tomber la
-dispersion à **0,21**.
+### ⚠⚠⚠ Et j'ai comparé deux rouleaux différents, sans que rien ne le signale
 
-**Ce n'est pas le signal qui manquait, c'est le filtre qui le cherchait au mauvais endroit.**
+Ma première version opposait les **47 µm** du champ de `PHerc0139` aux **28 µm** du référent de
+`PHerc0172` — deux rouleaux, deux tailles de voxel. Le contrôle qui l'aurait attrapé n'existait
+pas ; il existe désormais, et la sonde qui rejoue l'erreur le fait tomber.
 
-⚠ Et le contrôle qui sépare deux lectures très différentes : la bande **ressort du fond**
-(163 contre 130). Sans lui, « la surface est mal placée » et « la dalle est du bruit » seraient
-la même observation — l'un est corrigeable, l'autre non.
+### ⚠⚠⚠ L'estimateur est le point — et j'avais publié la mauvaise raison
 
-### ⚠⚠⚠ Et j'ai repayé le piège nº 27 dans la FIGURE après l'avoir évité dans la mesure
+Le pic **brut** par colonne (`argmax`) donne **0,486 à 0,538** feuille de dispersion sur
+les six spires — rien d'exploitable, et j'ai failli conclure que le signal n'y était pas. Le
+**centre de masse** en profondeur donne **0,19**.
 
-`zarr_vers_couches.py` avertit qu'un volume de surface est **majoritairement du remplissage**.
-La mesure calcule son seuil de fond **sur la matière seulement** ; ma première figure le
-calculait sur toute la dalle. Sur `w078`, 41 % de zéros mettent le percentile 20 à **0,0**, la
-bande suivie s'aplatit, et **σ tombe à 0,55 couche au lieu de 3,72** : la figure montrait une
-surface parfaitement placée sur un rouleau où elle ne l'est pas.
+J'avais attribué ce gain à un **lissage 9 × 9** dans le plan — « une feuille est cohérente dans
+le plan, et c'est cette cohérence qui la localise ». Une sonde qui ne mordait pas m'a fait le
+mesurer séparément :
 
-⭐ Le remède n'est pas de recalculer le seuil correctement dans la figure, c'est de **ne pas
-réimplémenter** : la figure importe désormais la fonction de la mesure. Deux implémentations
-d'un même suivi sont deux occasions de ne pas s'accorder, et celle-ci s'est présentée
-immédiatement.
+| lissage | argmax | centre de masse |
+|---:|---:|---:|
+| **1** *(aucun)* | 0,486 | **0,188** |
+| 3 | 0,488 | 0,198 |
+| 9 | 0,490 | 0,209 |
+| 17 | 0,488 | 0,215 |
 
-⚠ Et la ligne tracée n'est plus fixée à 512 : sur les deux spires, elle est **en dessous** de la
-dispersion médiane (2,96 contre 3,32 · 2,16 contre 2,57), donc elle montrait le fait plus petit
-qu'il n'est. La figure prend la ligne la plus proche de la médiane — le cas typique, pas le cas
-commode.
+**Le lissage ne fait rien à l'argmax et rend le centre de masse légèrement pire.** Tout le gain
+vient de l'estimateur : un centre de masse **intègre** la profondeur là où un argmax choisit un
+voxel.
+
+⭐ La leçon n'est pas « le lissage est inutile », c'est que **je ne savais pas laquelle des deux
+choses faisait le travail et j'avais publié la mauvaise**. La sonde qui ne mordait pas était le
+signal.
+
+### ⚠ Une idée que la mesure a fermée
+
+J'ai cru pouvoir mesurer l'écart inter-feuilles **dans une seule dalle** : 33 couches à 7,91 µm
+font 261 µm, soit 1,8 écart. Faux — la dalle fait **±0,9 écart autour** de la surface, et les
+voisines sont à ±1,0, donc **juste dehors**. Vérifié : l'autocorrélation en profondeur décroît
+et reste plate, sans aucun revival à 19 couches.
 
 ### ⚠ Ce que ça n'établit pas
 
 1. **Que la matière suivie soit la BONNE feuille.** Le centre de masse suit la bande la plus
-   forte d'une dalle de 1,8 écart inter-feuilles ; une voisine peut dominer localement. C'est
-   ce qu'un prédicat d'**identité** doit trancher — les deux ne se remplacent pas.
-2. **Que ça vaille ailleurs.** Deux spires d'un seul rouleau, celles dont le volume de surface
-   se rapatrie sans chercher où est la matière.
+   forte de la dalle ; c'est ce qu'un prédicat d'**identité** doit trancher — les deux ne se
+   remplacent pas.
+2. **Que ça vaille sur un autre rouleau.** Six spires de `PHerc0172`, celles dont le volume de
+   surface se rapatrie sans chercher où est la matière (piège nº 27).
 3. **Qu'un traceur recalé sur cette bande ferait mieux.** Il faudrait le mesurer contre autre
    chose que la spire publiée, et il n'y a rien d'autre.

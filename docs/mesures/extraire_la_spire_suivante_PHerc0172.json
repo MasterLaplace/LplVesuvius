@@ -1,0 +1,347 @@
+{
+  "rouleau": "PHerc0172",
+  "spires": 44,
+  "bord_du_champ": 87,
+  "retirees": 8,
+  "structure": {
+    "cellules": 1565,
+    "median_um": 151.77741174059392,
+    "coefficient_de_variation": 0.24620180070304135,
+    "amplitude_angle_um": 123.86271009637171,
+    "amplitude_hauteur_um": 50.63662090265466
+  },
+  "ecart_inter_feuilles_vx": 18.6346396965866,
+  "portee_en_feuilles": 2,
+  "modele": "commun",
+  "par_modele": {
+    "global": [
+      {
+        "au_dela": 1,
+        "erreur_vx": 6.7145341602524695,
+        "erreur_feuilles": 0.3603254084640233
+      },
+      {
+        "au_dela": 2,
+        "erreur_vx": 10.50565186810286,
+        "erreur_feuilles": 0.5637700561512456
+      },
+      {
+        "au_dela": 3,
+        "erreur_vx": 14.109906298514034,
+        "erreur_feuilles": 0.7571869662228359
+      },
+      {
+        "au_dela": 4,
+        "erreur_vx": 16.13058611550514,
+        "erreur_feuilles": 0.8656237189528199
+      },
+      {
+        "au_dela": 5,
+        "erreur_vx": 20.107360060785822,
+        "erreur_feuilles": 1.0790313302633368
+      },
+      {
+        "au_dela": 6,
+        "erreur_vx": 24.21863558186851,
+        "erreur_feuilles": 1.2996567669781542
+      },
+      {
+        "au_dela": 7,
+        "erreur_vx": 25.643258777904748,
+        "erreur_feuilles": 1.3761070348251463
+      },
+      {
+        "au_dela": 8,
+        "erreur_vx": 29.544825203180608,
+        "erreur_feuilles": 1.5854787473348615
+      }
+    ],
+    "commun": [
+      {
+        "au_dela": 1,
+        "erreur_vx": 6.197497926638334,
+        "erreur_feuilles": 0.3325794341907003
+      },
+      {
+        "au_dela": 2,
+        "erreur_vx": 9.092138641977499,
+        "erreur_feuilles": 0.48791598818210324
+      },
+      {
+        "au_dela": 3,
+        "erreur_vx": 12.352504567061942,
+        "erreur_feuilles": 0.6628786372147893
+      },
+      {
+        "au_dela": 4,
+        "erreur_vx": 14.368341857159976,
+        "erreur_feuilles": 0.7710555229995618
+      },
+      {
+        "au_dela": 5,
+        "erreur_vx": 15.59031168285901,
+        "erreur_feuilles": 0.8366307015699781
+      },
+      {
+        "au_dela": 6,
+        "erreur_vx": 18.953108925288234,
+        "erreur_feuilles": 1.017090173670488
+      },
+      {
+        "au_dela": 7,
+        "erreur_vx": 18.916347676849682,
+        "erreur_feuilles": 1.015117436389966
+      },
+      {
+        "au_dela": 8,
+        "erreur_vx": 21.353953630806245,
+        "erreur_feuilles": 1.1459279051538493
+      }
+    ],
+    "2": [
+      {
+        "au_dela": 1,
+        "erreur_vx": 8.392655432338188,
+        "erreur_feuilles": 0.45037927048707643
+      },
+      {
+        "au_dela": 2,
+        "erreur_vx": 13.24624189297083,
+        "erreur_feuilles": 0.7108397108100356
+      },
+      {
+        "au_dela": 3,
+        "erreur_vx": 16.548922936333838,
+        "erreur_feuilles": 0.8880731372211713
+      },
+      {
+        "au_dela": 4,
+        "erreur_vx": 20.679149246746647,
+        "erreur_feuilles": 1.1097155396320622
+      },
+      {
+        "au_dela": 5,
+        "erreur_vx": 27.03135773435247,
+        "erreur_feuilles": 1.450597284116201
+      },
+      {
+        "au_dela": 6,
+        "erreur_vx": 31.869833985524565,
+        "erreur_feuilles": 1.710246857703523
+      },
+      {
+        "au_dela": 7,
+        "erreur_vx": 33.18226670694594,
+        "erreur_feuilles": 1.7806765919399075
+      },
+      {
+        "au_dela": 8,
+        "erreur_vx": 41.37636138405696,
+        "erreur_feuilles": 2.220400397204142
+      }
+    ],
+    "4": [
+      {
+        "au_dela": 1,
+        "erreur_vx": 7.242627168087665,
+        "erreur_feuilles": 0.38866472794825935
+      },
+      {
+        "au_dela": 2,
+        "erreur_vx": 10.599489131102473,
+        "erreur_feuilles": 0.5688056921778871
+      },
+      {
+        "au_dela": 3,
+        "erreur_vx": 13.963548168527723,
+        "erreur_feuilles": 0.7493328766150222
+      },
+      {
+        "au_dela": 4,
+        "erreur_vx": 18.196908781481852,
+        "erreur_feuilles": 0.9765098267403083
+      },
+      {
+        "au_dela": 5,
+        "erreur_vx": 24.723707331177366,
+        "erreur_feuilles": 1.3267606851398437
+      },
+      {
+        "au_dela": 6,
+        "erreur_vx": 30.671743863016673,
+        "erreur_feuilles": 1.6459531476015052
+      },
+      {
+        "au_dela": 7,
+        "erreur_vx": 31.703677385462697,
+        "erreur_feuilles": 1.701330312883378
+      },
+      {
+        "au_dela": 8,
+        "erreur_vx": 39.18552157023532,
+        "erreur_feuilles": 2.1028322633688017
+      }
+    ],
+    "8": [
+      {
+        "au_dela": 1,
+        "erreur_vx": 6.517896401648159,
+        "erreur_feuilles": 0.3497731379717567
+      },
+      {
+        "au_dela": 2,
+        "erreur_vx": 8.861632302820453,
+        "erreur_feuilles": 0.4755462110943676
+      },
+      {
+        "au_dela": 3,
+        "erreur_vx": 11.090004886968472,
+        "erreur_feuilles": 0.5951284847755808
+      },
+      {
+        "au_dela": 4,
+        "erreur_vx": 14.570914329965944,
+        "erreur_feuilles": 0.7819262710314153
+      },
+      {
+        "au_dela": 5,
+        "erreur_vx": 18.995881317409385,
+        "erreur_feuilles": 1.0193854899640993
+      },
+      {
+        "au_dela": 6,
+        "erreur_vx": 21.60253134442928,
+        "erreur_feuilles": 1.1592674554575007
+      },
+      {
+        "au_dela": 7,
+        "erreur_vx": 21.212885530398353,
+        "erreur_feuilles": 1.138357697051906
+      },
+      {
+        "au_dela": 8,
+        "erreur_vx": 28.568525964770743,
+        "erreur_feuilles": 1.533087112492107
+      }
+    ]
+  },
+  "reinjection_sans_effet": true,
+  "series": {
+    "sans_reinjection": [
+      {
+        "spire": 88,
+        "au_dela": 1,
+        "cellules": 820,
+        "erreur_vx": 6.197497926638334,
+        "erreur_feuilles": 0.3325794341907003
+      },
+      {
+        "spire": 89,
+        "au_dela": 2,
+        "cellules": 818,
+        "erreur_vx": 9.092138641977499,
+        "erreur_feuilles": 0.48791598818210324
+      },
+      {
+        "spire": 90,
+        "au_dela": 3,
+        "cellules": 814,
+        "erreur_vx": 12.352504567061942,
+        "erreur_feuilles": 0.6628786372147893
+      },
+      {
+        "spire": 91,
+        "au_dela": 4,
+        "cellules": 808,
+        "erreur_vx": 14.368341857159976,
+        "erreur_feuilles": 0.7710555229995618
+      },
+      {
+        "spire": 92,
+        "au_dela": 5,
+        "cellules": 807,
+        "erreur_vx": 15.59031168285901,
+        "erreur_feuilles": 0.8366307015699781
+      },
+      {
+        "spire": 93,
+        "au_dela": 6,
+        "cellules": 817,
+        "erreur_vx": 18.953108925288234,
+        "erreur_feuilles": 1.017090173670488
+      },
+      {
+        "spire": 94,
+        "au_dela": 7,
+        "cellules": 620,
+        "erreur_vx": 18.916347676849682,
+        "erreur_feuilles": 1.015117436389966
+      },
+      {
+        "spire": 95,
+        "au_dela": 8,
+        "cellules": 627,
+        "erreur_vx": 21.353953630806245,
+        "erreur_feuilles": 1.1459279051538493
+      }
+    ],
+    "avec_reinjection": [
+      {
+        "spire": 88,
+        "au_dela": 1,
+        "cellules": 820,
+        "erreur_vx": 6.197497926638334,
+        "erreur_feuilles": 0.3325794341907003
+      },
+      {
+        "spire": 89,
+        "au_dela": 2,
+        "cellules": 818,
+        "erreur_vx": 9.092138641977499,
+        "erreur_feuilles": 0.48791598818210324
+      },
+      {
+        "spire": 90,
+        "au_dela": 3,
+        "cellules": 814,
+        "erreur_vx": 12.352504567061487,
+        "erreur_feuilles": 0.662878637214765
+      },
+      {
+        "spire": 91,
+        "au_dela": 4,
+        "cellules": 808,
+        "erreur_vx": 14.368341857159521,
+        "erreur_feuilles": 0.7710555229995374
+      },
+      {
+        "spire": 92,
+        "au_dela": 5,
+        "cellules": 807,
+        "erreur_vx": 15.59031168285901,
+        "erreur_feuilles": 0.8366307015699781
+      },
+      {
+        "spire": 93,
+        "au_dela": 6,
+        "cellules": 817,
+        "erreur_vx": 18.953108925288234,
+        "erreur_feuilles": 1.017090173670488
+      },
+      {
+        "spire": 94,
+        "au_dela": 7,
+        "cellules": 620,
+        "erreur_vx": 18.916347676849682,
+        "erreur_feuilles": 1.015117436389966
+      },
+      {
+        "spire": 95,
+        "au_dela": 8,
+        "cellules": 627,
+        "erreur_vx": 21.353953630806245,
+        "erreur_feuilles": 1.1459279051538493
+      }
+    ]
+  }
+}

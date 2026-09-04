@@ -21,11 +21,13 @@ dans ce dépôt ne peut les séparer tant que la règle est la spire publiée.
 elle vaut 163 contre 133 de fond — c'est ce qui distingue « la surface est mal placée » de « il
 n'y a pas de signal ». Le premier est corrigeable, le second ne l'est pas.
 
-⚠⚠ LE FILTRE COMPTE, ET C'EST LE POINT. Le pic brut par colonne (`argmax` sur l'intensité)
-donne **0,49 feuille** de dispersion, c'est-à-dire rien d'exploitable. Une feuille est
-**cohérente dans le plan** : lisser 9 × 9 avant de chercher le centre de masse fait tomber la
-dispersion à **0,21**. Ce n'est pas le signal qui manquait, c'est le filtre qui le cherchait au
-mauvais endroit.
+⚠⚠ L'ESTIMATEUR COMPTE, ET C'EST LE POINT. Le pic brut par colonne (`argmax` sur l'intensité)
+donne **0,49 feuille** de dispersion, c'est-à-dire rien d'exploitable ; le **centre de masse**
+en profondeur donne **0,19**. Ce n'est pas le signal qui manquait, c'est l'estimateur qui
+choisissait un voxel là où il fallait intégrer une bande.
+
+⚠ Voir `LISSAGE` : j'ai d'abord attribué ce gain à un lissage dans le plan, et la mesure dit
+que le lissage ne fait rien à l'argmax et **dégrade** le centre de masse.
 
 ⚠ CE QUE CE FICHIER N'ÉTABLIT PAS :
 
@@ -56,18 +58,45 @@ import numpy as np
 RACINE = Path(__file__).resolve().parents[2]
 COUCHES = RACINE / "data" / "couches"
 
-SPIRES = ("PHerc0172_w062", "PHerc0172_w078")
-"""Les spires dont les couches sont rapatriées. ⚠ Deux, et c'est peu — mais deux suffisent à
-dire que ce n'est pas un artefact d'une seule, et c'est ce que la conclusion demande."""
+SPIRES = ("PHerc0172_w060", "PHerc0172_w061", "PHerc0172_w062",
+          "PHerc0172_w063", "PHerc0172_w064", "PHerc0172_w078")
+"""Les spires dont les couches sont rapatriées : une course **consécutive** de cinq, plus une
+lointaine. ⚠ La course consécutive dit si l'écart varie d'une spire à sa voisine ; la lointaine
+dit s'il varie sur le rouleau. Deux questions différentes, et une seule liste ne répondrait
+qu'à l'une."""
+
+DALLE_UM = 33 * 7.91
+"""L'épaisseur de la dalle rendue. ⚠⚠ Écrite parce qu'elle a réfuté une idée que j'ai eue :
+« la dalle fait 1,8 écart inter-feuilles, donc la feuille voisine y est visible ». Faux — elle
+fait ±0,9 écart **autour** de la surface, et les voisines sont à ±1,0, donc **juste dehors**.
+Vérifié : l'autocorrélation en profondeur décroît et reste plate, sans aucun revival à 19
+couches. On ne peut pas mesurer l'écart inter-feuilles dans une seule dalle."""
 
 VOXEL_UM = 7.91
 ECART_UM = 147.4
 """Le voxel et l'écart inter-feuilles de `PHerc0172`, mesurés par `76`."""
 
-LISSAGE = 9
-"""Fenêtre de lissage dans le plan, en pixels. ⚠ Une feuille est **cohérente dans le plan** ;
-c'est cette cohérence-là, et pas la valeur d'un voxel, qui la localise. Sans lissage la
-dispersion vaut 0,49 feuille, avec 0,21."""
+LISSAGE = 1
+"""Fenêtre de lissage dans le plan, en pixels — **1, c'est-à-dire aucun**.
+
+⚠⚠⚠ ET C'EST UNE CORRECTION DE CE QUE J'AVAIS ÉCRIT. J'ai d'abord lissé 9 × 9 et affirmé que
+c'était le lissage qui faisait tomber la dispersion de 0,49 à 0,21 feuille — « une feuille est
+cohérente dans le plan, et c'est cette cohérence qui la localise ». Une sonde a montré que le
+lissage n'était pas porteur, alors je l'ai mesuré séparément :
+
+    lissage    argmax    centre de masse
+        1       0,486         0,188
+        3       0,488         0,198
+        9       0,490         0,209
+       17       0,488         0,215
+
+**Le lissage ne fait rien pour l'argmax et rend le centre de masse LÉGÈREMENT PIRE.** Tout le
+gain vient de l'**estimateur** : un centre de masse intègre déjà la profondeur, là où un argmax
+choisit un voxel. Lisser dans le plan ne fait qu'effacer de la variation réelle.
+
+⭐ La leçon n'est pas « le lissage est inutile » mais « je ne savais pas laquelle des deux
+choses faisait le travail, et j'avais publié la mauvaise ». La sonde qui ne mordait pas était
+le signal."""
 
 FOND_PERCENTILE = 20
 """Le niveau considéré comme fond. ⚠ Un percentile et non une valeur : les deux spires n'ont
@@ -137,27 +166,56 @@ def mesurer() -> dict:
             "--sortie data/couches/<nom> --top 900 --left 900 --hauteur 1024 --largeur 1024")
 
     ecarts = [s["ecart_type_um"] for s in spires]
+    erreur_champ, rouleau_champ = _erreur_du_champ(ROULEAU)
     return dict(
         voxel_um=VOXEL_UM, ecart_inter_feuilles_um=ECART_UM, lissage=LISSAGE,
         spires=spires,
         ecart_type_median_um=float(np.median(ecarts)),
         ecart_type_median_feuilles=float(np.median(ecarts) / ECART_UM),
         # ⚠ Le chiffre auquel ce plancher se compare, relu de SA mesure plutot que recopie.
-        erreur_du_champ_um=_erreur_du_champ(),
+        erreur_du_champ_um=erreur_champ,
+        rouleau=ROULEAU,
+        rouleau_du_champ=rouleau_champ,
+        # ⚠⚠ La decomposition, avec son hypothese ECRITE. Si les deux erreurs sont
+        # independantes, celle du champ seul vaut la racine de la difference des carres. Elles
+        # ne le sont peut-etre pas -- d'ou les DEUX bornes, qui encadrent sans supposer.
+        erreur_propre_si_independantes_um=(
+            float(np.sqrt(max(0.0, erreur_champ ** 2 - float(np.median(ecarts)) ** 2)))
+            if erreur_champ else None),
+        borne_basse_um=(float(max(0.0, erreur_champ - float(np.median(ecarts))))
+                        if erreur_champ else None),
+        borne_haute_um=erreur_champ,
     )
 
 
-def _erreur_du_champ() -> float | None:
+ROULEAU = "PHerc0172"
+"""Le rouleau dont les couches sont ici. ⚠⚠ Nommé parce que j'ai comparé, dans une première
+version, les 47 µm du champ de `PHerc0139` aux 28 µm du référent de `PHerc0172` — **deux
+rouleaux différents**, à deux tailles de voxel différentes. Le contrôle qui l'aurait attrapé
+n'existait pas ; il existe maintenant."""
+
+VOXEL_PAR_ROULEAU = {"PHerc0139": 9.362, "PHerc0172": 7.91}
+
+
+def _erreur_du_champ(rouleau: str) -> tuple[float, str] | tuple[None, None]:
     """
-    @brief L'erreur de prédiction du champ à une feuille (`77` §9), relue de son JSON.
+    @brief L'erreur de prédiction du champ à une feuille (`77` §9), pour CE rouleau.
+
+    ⚠ Le nom du rouleau est un argument et non un défaut : c'est la seule façon d'empêcher la
+    comparaison inter-rouleaux que j'ai faite une fois.
     """
-    fichier = RACINE / "docs" / "mesures" / "extraire_la_spire_suivante.json"
+    suffixe = "" if rouleau == "PHerc0139" else f"_{rouleau}"
+    fichier = RACINE / "docs" / "mesures" / f"extraire_la_spire_suivante{suffixe}.json"
     if not fichier.is_file():
-        return None
+        return None, None
     d = json.loads(fichier.read_text())
+    if d.get("rouleau") != rouleau:
+        return None, None
     serie = d.get("series", {}).get("sans_reinjection") or []
     premier = next((x for x in serie if x["au_dela"] == 1), None)
-    return float(premier["erreur_vx"] * 9.362) if premier else None
+    if not premier:
+        return None, None
+    return float(premier["erreur_vx"] * VOXEL_PAR_ROULEAU[rouleau]), rouleau
 
 
 def _verifier(r: dict) -> int:
@@ -179,12 +237,12 @@ def _verifier(r: dict) -> int:
           s["intensite_bande"] > s["fond"] * 1.1,
           f"{s['intensite_bande']:.0f} contre {s['fond']:.0f} de fond")
 
-    print("le FILTRE est le point — la cohérence dans le plan, pas la valeur d'un voxel")
+    print("l'ESTIMATEUR est le point — intégrer la bande, pas choisir un voxel")
     for s in r["spires"]:
-        v(f"{s['nom']} : lisser divise la dispersion par plus de deux",
+        v(f"{s['nom']} : le centre de masse divise la dispersion par plus de deux",
           s["brut_ecart_type_feuilles"] > 2 * s["ecart_type_feuilles"],
-          f"{s['brut_ecart_type_feuilles']:.3f} brut contre "
-          f"{s['ecart_type_feuilles']:.3f} lissé (feuilles)")
+          f"argmax {s['brut_ecart_type_feuilles']:.3f} contre centre de masse "
+          f"{s['ecart_type_feuilles']:.3f} (feuilles)")
 
     print("⭐ et la spire publiée n'est PAS sur la feuille")
     for s in r["spires"]:
@@ -199,11 +257,21 @@ def _verifier(r: dict) -> int:
           abs(a - b) < 0.25 * max(a, b), f"{a:.1f} µm contre {b:.1f}")
 
     print("⭐⭐ ce qui plafonne toute erreur mesurée contre ces spires")
+    # ⚠⚠⚠ LE CONTROLE QUI AURAIT ATTRAPE MON ERREUR : les deux chiffres qu'on compose doivent
+    # venir du MEME rouleau. J'ai compare une fois 47 µm de `PHerc0139` a 28 µm de
+    # `PHerc0172`, a deux tailles de voxel differentes, et rien ne l'a signale.
+    v("les deux erreurs comparées viennent du même rouleau",
+      r.get("rouleau_du_champ") == r.get("rouleau"),
+      f"référent {r.get('rouleau')} · champ {r.get('rouleau_du_champ')}")
     if r["erreur_du_champ_um"]:
         v("l'erreur du champ est du même ordre que celle du référent lui-même",
           r["erreur_du_champ_um"] < 3 * r["ecart_type_median_um"],
           f"champ {r['erreur_du_champ_um']:.0f} µm contre référent "
           f"{r['ecart_type_median_um']:.0f} µm")
+        v("... donc l'erreur propre du champ est bornée, sans qu'on puisse la mesurer",
+          r["borne_basse_um"] < r["erreur_propre_si_independantes_um"] < r["borne_haute_um"],
+          f"entre {r['borne_basse_um']:.0f} et {r['borne_haute_um']:.0f} µm, "
+          f"{r['erreur_propre_si_independantes_um']:.0f} si indépendantes")
 
     print()
     if echecs:
@@ -228,11 +296,16 @@ def main() -> int:
                   f"σ {s['ecart_type_um']:5.1f} µm ({s['ecart_type_feuilles']:.3f} feuille) · "
                   f"amplitude {s['amplitude_um']:5.1f} µm "
                   f"({s['amplitude_feuilles']:.3f})")
-            print(f"  {'':18s} pic brut σ {s['brut_ecart_type_feuilles']:.3f} feuille — "
-                  f"le filtre divise par {s['brut_ecart_type_feuilles'] / s['ecart_type_feuilles']:.1f}")
+            print(f"  {'':18s} argmax σ {s['brut_ecart_type_feuilles']:.3f} feuille — "
+                  f"l'estimateur divise par "
+                  f"{s['brut_ecart_type_feuilles'] / s['ecart_type_feuilles']:.1f}")
         if r["erreur_du_champ_um"]:
-            print(f"\n  ⭐ le champ prédit à {r['erreur_du_champ_um']:.0f} µm, contre un "
-                  f"référent lui-même à {r['ecart_type_median_um']:.0f} µm de la matière")
+            print(f"\n  ⭐ sur {r['rouleau']} : le champ prédit à "
+                  f"{r['erreur_du_champ_um']:.0f} µm, contre un référent lui-même à "
+                  f"{r['ecart_type_median_um']:.0f} µm de la matière")
+            print(f"     erreur propre du champ : entre {r['borne_basse_um']:.0f} et "
+                  f"{r['borne_haute_um']:.0f} µm · "
+                  f"{r['erreur_propre_si_independantes_um']:.0f} si indépendantes")
 
     if args.json:
         args.json.parent.mkdir(parents=True, exist_ok=True)
