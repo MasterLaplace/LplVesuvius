@@ -143,12 +143,21 @@ def _proximite(maillage: Path, etiquette: str, apparie: bool = False) -> dict | 
     return None
 
 
-def _reparer(trace: Path, sortie: Path) -> dict | None:
+def _reparer(trace: Path, sortie: Path, threads: int | None = None) -> dict | None:
     """
     @brief La réparation de `windcheck`, et son certificat.
+
+    ⚠⚠ `threads` existe pour une raison mesurée : six réparations de la même trace rendent
+    **trois** certificats distincts (3691, 3696, 3698). L'aide de `windcheck transform` revendique
+    pourtant une *« frozen scheduling policy »*, et son défaut est `0 = all cores`. Ce dépôt a
+    déjà rencontré cette forme — `44` : un traceur dont l'aléa venait de l'horloge sur 22 fils,
+    rendu reproductible par une graine posée et `thread_limit: 1`. Forcer un seul fil est donc la
+    première hypothèse à tester, et elle se teste au lieu de se supposer.
     """
-    r = subprocess.run(["uv", "run", "windcheck", "transform", str(trace), "--out", str(sortie)],
-                       capture_output=True, text=True, cwd=WINDCHECK, timeout=3600)
+    argv = ["uv", "run", "windcheck", "transform", str(trace), "--out", str(sortie)]
+    if threads is not None:
+        argv += ["--threads", str(threads)]
+    r = subprocess.run(argv, capture_output=True, text=True, cwd=WINDCHECK, timeout=7200)
     if r.returncode != 0:
         return None
     cert = next(sortie.glob("*_transform_certificate.json"), None)
@@ -241,7 +250,7 @@ def mesurer(corpus: str = "scroll1", limite: int = 0, apparie: bool = False) -> 
 
 
 def mesurer_determinisme(trace: str, repetitions: int = 3,
-                         corpus: str = "scroll1") -> dict:
+                         corpus: str = "scroll1", threads: int | None = None) -> dict:
     """
     @brief La même réparation, sur la même trace, plusieurs fois — rend-elle le même certificat ?
 
@@ -264,7 +273,7 @@ def mesurer_determinisme(trace: str, repetitions: int = 3,
     certificats = []
     for _ in range(repetitions):
         with tempfile.TemporaryDirectory() as tmp:
-            cert = _reparer(dossier, Path(tmp))
+            cert = _reparer(dossier, Path(tmp), threads)
             if cert is None:
                 certificats.append(None)
                 continue
@@ -276,7 +285,8 @@ def mesurer_determinisme(trace: str, repetitions: int = 3,
     for c in valides:
         if c not in distincts:
             distincts.append(c)
-    return dict(trace=trace, repetitions=repetitions, certificats=certificats,
+    return dict(trace=trace, repetitions=repetitions, threads=threads,
+                certificats=certificats,
                 distincts=len(distincts),
                 quads=[c["n_removed_quads"] for c in valides],
                 deterministe=len(distincts) <= 1)
@@ -429,6 +439,27 @@ def _verifier(r: dict | None = None) -> int:
                   f"{100 * (max(q) - min(q)) / max(q):.2f} %")
                 v("... et elle ne bascule pas entre deux valeurs seulement",
                   len(set(q)) >= 3, f"{sorted(set(q))}")
+        # ⚠⚠⚠ L'HYPOTHESE DU PARALLELISME, TESTEE CONTRE SON PROPRE CONTROLE. L'aide de
+        # `windcheck transform` revendique une « frozen scheduling policy » et defaute a tous
+        # les coeurs. `44` a deja vu cette forme et l'a reglee par un fil unique. Le controle
+        # compare les DEUX series : si un seul fil suffit a stabiliser, la cause est le
+        # parallelisme et la recette de reparation reproductible est connue ; sinon elle est
+        # ailleurs, et c'est un resultat different et tout aussi utile.
+        det1 = RACINE / "docs" / "mesures" / "reparation_determinisme_1fil.json"
+        if det1.is_file() and det.is_file():
+            d1 = json.loads(det1.read_text())
+            q1 = d1.get("quads") or []
+            v("un seul fil est bien ce qui a été demandé", d1.get("threads") == 1,
+              str(d1.get("threads")))
+            if len(q1) >= 6:
+                v("... et à un seul fil, la réparation devient reproductible",
+                  len(set(q1)) == 1,
+                  f"{len(set(q1))} valeur(s) en {len(q1)} réparations : {sorted(set(q1))}")
+                # ⚠ Le controle qui donne son sens au precedent : la serie multi-fils, elle,
+                # varie. Sans lui, « une seule valeur » pourrait venir d'une trace qui ne varie
+                # jamais, et ne dirait rien des fils.
+                v("... alors que la série multi-fils du même trace varie",
+                  len(set(q)) >= 2, f"{sorted(set(q))} contre {sorted(set(q1))}")
         # ⚠⚠⚠ LE TIRAGE APPARIE, ET C'EST LUI QUI TRANCHE. Tout ce qui precede est borne par le
         # bruit d'echantillonnage ; ce mode le supprime au lieu de le borner, parce que la
         # GRILLE de parametrisation ne change pas quand la reparation retire des quads (mesure :
@@ -483,6 +514,8 @@ def main() -> int:
     p.add_argument("--determinisme", metavar="TRACE",
                    help="réparer N fois la MEME trace et comparer les certificats")
     p.add_argument("--repetitions", type=int, default=3)
+    p.add_argument("--threads", type=int, default=None,
+                   help="forcer le nombre de fils de `windcheck transform` (0 = tous)")
     p.add_argument("--apparie", action="store_true",
                    help="tirer par POSITION de grille — même échantillon avant et après")
     p.add_argument("--verifier", action="store_true")
@@ -490,8 +523,9 @@ def main() -> int:
     a = p.parse_args()
 
     if a.determinisme:
-        d = mesurer_determinisme(a.determinisme, a.repetitions, a.corpus)
-        print(f"{d['trace']} — {d['repetitions']} réparations")
+        d = mesurer_determinisme(a.determinisme, a.repetitions, a.corpus, a.threads)
+        print(f"{d['trace']} — {d['repetitions']} réparations"
+              + (f", --threads {d['threads']}" if d.get("threads") is not None else ""))
         for i, c in enumerate(d["certificats"], 1):
             if c is None:
                 print(f"  {i}. échec")
