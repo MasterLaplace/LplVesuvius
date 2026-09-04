@@ -308,7 +308,7 @@ instruments existants.
 | **C** | les trois tâches de la règle graduée | non commencées — bornées à trois semaines par conception |
 | **D1** | l'arc d'excision (`03`–`07`) à re-fonder | la conclusion de tête de `07` est démentie par notre propre mesure |
 | **D2** | le contrôle P1 bis de `71` | ×15,9 requis contre ×3,8 observé |
-| **D3** | ~~41~~ → **39** scripts sans appelant | ⚠ **entamé** : deux figures dont l'image est **utilisée** dans un doc ne portaient pas leur commande de régénération — c'est la règle du dépôt, et c'est réparé (vérifié : les deux se régénèrent à l'identique). Le reste est classé ci-dessous |
+| **D3** | ~~41~~ → **33** scripts sans appelant | ⚠ **entamé** : deux figures dont l'image est **utilisée** dans un doc ne portaient pas leur commande de régénération — c'est la règle du dépôt, et c'est réparé (vérifié : les deux se régénèrent à l'identique). Le reste est classé ci-dessous |
 
 ---
 
@@ -422,11 +422,38 @@ Tant que ce n'est pas re-fondé, l'arc ne peut pas devenir une section d'article
 
 ×15,9 requis contre ×3,8 observé. Ouvert.
 
-### D3 — 41 scripts sans appelant
+### D3 ⚠ — 41 → **33** scripts sans appelant, et aucune des huit réparations n'était une formalité
 
-Le témoin les signale (`⚠ 41 script(s) que RIEN n'exécute`). Dette de documentation, pas de
-correction : chacun doit être **rattaché à un appelant ou déclaré mort**, jamais laissé dans
-l'entre-deux.
+> Entamé le 2026-09-04. `src/depot/appelants.py` juge **307 scripts**. La méthode : demander
+> pour chaque orphelin *« son résultat est-il publié quelque part ? »*.
+
+⭐⭐ **Un script cité sans commande n'est pas du code mort — c'est une mesure NON
+REPRODUCTIBLE**, ce qui est pire, parce que ça ne se voit pas.
+
+**Les huit réparées, et ce qu'elles cachaient :**
+
+| quoi | ce qui n'était pas refaisable |
+|---|---|
+| `figure_comparaison`, `figure_deux_axes` | deux images **affichées dans un doc** sans leur commande de régénération — la règle du dépôt. ⚠ Vérifié qu'elles régénèrent **à l'identique** |
+| `couches_distantes` | la fenêtre de Scroll 1 du `77` §10, mentionnée sans sa commande |
+| `apprendre/04` à `08` | le README documente **8 épisodes** et n'en montrait que **2** à fabriquer |
+| **`run_proximity.sh`** | ⚠⚠ produit `proximity_scroll1.jsonl`, la mesure de **tout l'arc d'excision** (D1), citée dans deux documents — **sa commande n'était nulle part** |
+
+**Ce qui reste, mesuré plutôt que supposé :**
+
+| catégorie | n | constat |
+|---|---:|---|
+| **cités dans un doc, sans leur commande** | **9** | même défaut que les huit ci-dessus — à traiter pareil |
+| cités nulle part, aucune sortie JSON | 4 | `campagne_prediction_paris4`, `juger_nappe`, `sens_de_la_normale`, `tracer_tous_candidats` — **candidats à déclarer morts**, à lire avant : un script de 122 lignes peut porter un savoir |
+| figures sans sortie par défaut | 5 | l'image est passée en argument, donc rien ne dit laquelle |
+| reste | 15 | non classé |
+
+⚠ Une fausse alerte à moi : j'ai cru `proximity_scroll1.json` manquant, il existe en `.jsonl`.
+Mon motif cherchait la mauvaise extension.
+
+⚠⚠ La règle reste celle du registre : **rattaché à un appelant ou déclaré mort**, jamais laissé
+dans l'entre-deux — un script gardé « au cas où » est un script que personne ne relancera et qui
+pourrira sans que rien ne le dise.
 
 ---
 
