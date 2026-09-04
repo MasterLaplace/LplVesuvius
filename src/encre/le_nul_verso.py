@@ -25,8 +25,16 @@ la carte est trop petite pour porter une **typographie**. On compare le **niveau
 **dispersion** de la prédiction, jamais son interligne. Prétendre le contraire serait mesurer
 du bruit.
 
-⚠ Et il ne dit rien de la spire voisine : la fenêtre nulle la frôle par le bas de la pile
-(contraste 0,096 à la couche 108). C'est rapporté, pas caché.
+⚠⚠⚠ ET IL NE PEUT PAS ÉCARTER LA SPIRE VOISINE, pour une raison **structurelle** et non par
+négligence. Le creux mesuré s'étend de la couche ~88 à ~107, soit **une vingtaine de couches**,
+et le détecteur en lit **26** : aucune fenêtre de sa taille ne tient entièrement dans le vide.
+La fenêtre nulle frôle donc nécessairement la remontée de contraste du voisin (0,096 à la
+couche 108). Une troisième fenêtre ne trancherait pas — elle n'existe pas.
+
+⚠ Ce que la corrélation entre les deux cartes établit, et rien de plus : à **+0,001**, la carte
+du vide n'est **pas un décalque** de celle de la face, donc ce n'est pas une transparence de la
+même colonne. Elle ne dit **rien** de la spire voisine, dont l'encre n'a aucune raison de tomber
+là où celle de cette face-ci tombe. J'ai failli écrire l'inverse.
 
 Usage :
     uv run python src/encre/le_nul_verso.py --segment 20260325000000-w046_20260325 \\
@@ -148,6 +156,35 @@ def _inference(couches: Path, debut: int, taille: int, sortie: Path) -> dict | N
                 total=int(c.group(2)) if c else None, sortie=str(sortie))
 
 
+CARTES = RACINE / "docs" / "mesures" / "nul_verso_cartes"
+
+
+def deriver_des_cartes(segment: str) -> dict:
+    """
+    @brief Ce que les deux cartes disent l'une de l'autre — sans refaire l'inférence.
+
+    ⚠⚠ SÉPARÉ DE `mesurer` PARCE QUE L'INFÉRENCE COÛTE HUIT MINUTES. Les cartes sont gardées et
+    déterministes, donc tout ce qui s'en dérive doit pouvoir être recalculé sans les refaire ;
+    sinon la moindre grandeur ajoutée coûte une campagne, et on finit par les calculer au
+    terminal — la dette que ce dépôt rembourse en boucle.
+    """
+    try:
+        fa = np.load(CARTES / f"{segment}_face.npy")
+        nu = np.load(CARTES / f"{segment}_nul.npy")
+    except OSError:
+        return {}
+    bons = np.isfinite(fa) & np.isfinite(nu)
+    if bons.sum() < 1000:
+        return {}
+    a1, b1 = fa[bons].ravel(), nu[bons].ravel()
+    return dict(
+        correlation_face_nul=float(np.corrcoef(a1, b1)[0, 1]),
+        # ⚠ « Combien du vide se lit comme de l'encre » : la part du nul au-dessus de la MÉDIANE
+        # de la face. Le seuil vient de la face et non du nul, sinon il suivrait ce qu'on mesure.
+        part_nul_au_dessus_mediane_face=float((b1 > float(np.median(a1))).mean()),
+        pixels_compares=int(bons.sum()))
+
+
 def mesurer(segment: str, zarr: str, top: int, left: int, taille: int = 512) -> dict:
     with tempfile.TemporaryDirectory() as tmp:
         couches = Path(tmp) / "couches"
@@ -163,11 +200,28 @@ def mesurer(segment: str, zarr: str, top: int, left: int, taille: int = 512) -> 
         f = fenetres(profil)
         if not f:
             raise SystemExit("pile trop courte pour deux fenêtres disjointes")
-        face = _inference(couches, f["debut_face"], taille, Path(tmp) / "face.png")
-        nul = _inference(couches, f["debut_nul"], taille, Path(tmp) / "nul.png")
+        # ⚠⚠ LES CARTES SONT GARDÉES, et c'est `--out` qui écrit un `.npy` : les valeurs
+        # BRUTES, pas une image déjà normalisée. Une figure qui rendrait chaque carte à sa
+        # propre échelle ferait passer le bruit du nul pour de l'encre — c'est précisément la
+        # panne que ce contrôle existe pour montrer, donc l'échelle doit être commune, donc il
+        # faut les valeurs.
+        CARTES.mkdir(parents=True, exist_ok=True)
+        face = _inference(couches, f["debut_face"], taille, CARTES / f"{segment}_face.npy")
+        nul = _inference(couches, f["debut_nul"], taille, CARTES / f"{segment}_nul.npy")
     out = dict(segment=segment, zarr=zarr, top=top, left=left, taille=taille,
                profil=profil, **f, face=face, nul=nul)
+    # ⚠⚠⚠ LA FIGURE MONTRE CE QUE LES RESUMES NE DISENT PAS : le vide est sombre DANS
+    # L'ENSEMBLE mais porte des taches vives, indiscernables d'encre a l'oeil. C'est ce qui
+    # explique une etendue qui ne s'effondre pas, et ca ouvre une question que les mediane et
+    # etendue ne peuvent pas trancher.
+    #
+    # ⭐⭐ DEUX LECTURES POSSIBLES, ET ELLES SE SEPARENT PAR UNE CORRELATION. Soit ce sont des
+    # FAUX POSITIFS -- le detecteur invente de la structure dans du vide -- soit c'est la
+    # SPIRE VOISINE vue au travers, la fenetre nulle la frolant par le bas de la pile. Si les
+    # taches du vide tombent la ou la face en a, la seconde lecture est la bonne et le
+    # detecteur voit a travers ; si elles sont ailleurs, ce sont des faux positifs.
     if face and nul and not face.get("echec") and not nul.get("echec"):
+        out.update(deriver_des_cartes(segment))
         # ⚠⚠ L'ÉTENDUE, PAS LA MÉDIANE. `46` compare le **niveau** ET la **dispersion** ; une
         # médiane seule est satisfaite par un détecteur qui rend la même valeur partout, ce qui
         # est exactement la panne qu'on cherche.
@@ -233,10 +287,44 @@ def _verifier(r: dict | None = None) -> int:
             # dispersion que la face, « l'encre valide le déroulage » n'est pas utilisable ;
             # s'il en rend nettement moins, le détecteur distingue une face vierge d'une face
             # écrite, et c'est ce qu'il fallait établir. Les deux sont publiables.
-            v("le détecteur rend MOINS de dispersion sur la face vierge",
-              r["rapport_etendue"] < 0.8,
+            # ⚠⚠⚠ MESURÉ, ET C'EST LA BRANCHE ALARMANTE. Le contrôle demandait si la
+            # dispersion s'effondre sur une face vierge. Elle ne s'effondre PAS : rapport 0,94
+            # sur une fenêtre dont le contraste local est QUATORZE fois plus bas. Donc « il y a
+            # de la structure ici » ne discrimine pas, et `46` avait raison de s'en inquiéter.
+            v("la dispersion NE s'effondre PAS sur la face vierge",
+              r["rapport_etendue"] > 0.8,
               f"étendue nulle {r['etendue_nul']:.3f} contre face {r['etendue_face']:.3f} "
-              f"— rapport {r['rapport_etendue']:.2f}")
+              f"— rapport {r['rapport_etendue']:.2f}, contraste local "
+              f"{r['contraste_face']:.3f} contre {r['contraste_nul']:.3f}")
+            # ⚠⚠ ET L'AUTRE MOITIÉ, QUI SAUVE LE DÉTECTEUR SUR UN AUTRE CANAL. Le NIVEAU, lui,
+            # se déplace franchement : la médiane passe de -0,272 à -1,502. Une lecture par
+            # SEUIL distingue donc les deux, là où une lecture par structure ne le peut pas.
+            # Les deux assertions ensemble sont le résultat ; l'une sans l'autre le déforme.
+            saut = f_["mediane"] - n_["mediane"]
+            v("... mais le NIVEAU, lui, se déplace franchement",
+              saut > 0.5,
+              f"médiane face {f_['mediane']:+.3f} contre nulle {n_['mediane']:+.3f} "
+              f"— écart {saut:+.3f}")
+            # ⚠⚠⚠ CE QUE LA CORRELATION ETABLIT, ET CE QU'ELLE N'ETABLIT PAS. Elle repond a
+            # une seule question : la carte du vide est-elle un DECALQUE de celle de la face --
+            # le detecteur voyant a travers la meme colonne ? A +0,001, non.
+            #
+            # ⚠⚠ Elle ne dit RIEN de la spire VOISINE, et j'ai failli l'ecrire. L'encre de la
+            # spire d'a cote n'a aucune raison de tomber la ou celle de cette face-ci tombe,
+            # donc une correlation nulle est parfaitement compatible avec « le vide montre
+            # l'encre du voisin ». Ce qui trancherait est une TROISIEME fenetre, arretee au
+            # minimum de contraste et n'atteignant jamais le voisin.
+            if r.get("correlation_face_nul") is not None:
+                c = r["correlation_face_nul"]
+                v("la carte du vide n'est PAS un décalque de celle de la face",
+                  abs(c) < 0.2,
+                  f"corrélation face/vide {c:+.3f} — donc pas une transparence de la même "
+                  "colonne ; ⚠ ne dit rien de la spire voisine")
+            if r.get("part_nul_au_dessus_mediane_face") is not None:
+                v("... et une part non négligeable du vide se lit comme de l'encre",
+                  r["part_nul_au_dessus_mediane_face"] > 0.01,
+                  f"{100 * r['part_nul_au_dessus_mediane_face']:.1f} % du vide dépasse "
+                  "la médiane de la face")
             v("... et les deux cartes couvrent la même surface",
               f_.get("couverts") == n_.get("couverts"),
               f"{f_.get('couverts')} contre {n_.get('couverts')}")
@@ -257,9 +345,22 @@ def main() -> int:
     p.add_argument("--top", type=int, default=11000)
     p.add_argument("--left", type=int, default=15000)
     p.add_argument("--taille", type=int, default=512)
+    p.add_argument("--rederiver", action="store_true",
+                   help="recalculer ce qui se déduit des cartes gardées, sans refaire l'inférence")
     p.add_argument("--verifier", action="store_true")
     p.add_argument("--json", type=Path)
     a = p.parse_args()
+
+    if a.rederiver:
+        cible = a.json or DEFAUT_JSON
+        d = json.loads(cible.read_text())
+        d.update(deriver_des_cartes(d["segment"]))
+        cible.write_text(json.dumps(d, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"corrélation face/vide : {d.get('correlation_face_nul'):+.3f}")
+        print(f"part du vide au-dessus de la médiane de la face : "
+              f"{100 * d.get('part_nul_au_dessus_mediane_face', 0):.1f} %")
+        print(f"écrit : {cible}")
+        return 0
 
     if a.verifier and not a.json:
         garde = json.loads(DEFAUT_JSON.read_text()) if DEFAUT_JSON.is_file() else None

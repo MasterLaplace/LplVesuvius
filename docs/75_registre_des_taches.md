@@ -344,7 +344,7 @@ instruments existants.
 | **A5 bis** | ⚠ ~~juger la chaîne par l'identité~~ — **déjà fait** (`44`) : elle **glisse**, elle ne saute pas. Ce qui reste est de refaire la mesure contre une surface **recalée**, son budget étant gonflé (**69,2 → 64,7 µm**, conjecture) | corrigé par la lecture des fiches ; mesuré sur 2 rouleaux, **pas** sur `PHercParis4` où `44` a mesuré |
 | **A6** | la ROC de α n'est pas faite | demande de **rendre** 101 surfaces à deux profondeurs — le seul poste de ce registre qui exige le volume |
 | **B2** | « no threshold » pas encore rétréci dans l'abstract | ⚠⚠ **testé et NON tranchable ainsi** (`77` §11) : translater = décentrer la fenêtre dans la même pile, l'idée est bonne mais une dalle de volume de surface fait ±0,9 écart et ne permet pas d'emboîter deux fenêtres. **25 refusés sur 36**. Retenté sur une dalle de 3,0 écarts : le positif centré sur le lobe est **circulaire**, et le transport d'une fenêtre à l'autre est **confondu par le serpentage** (0,13 écart ≈ la fenêtre étroite). Il faudrait un positif **indépendant** — carte d'encre ou annotation |
-| **C** | la règle graduée | ✅✅ **C3 RÉPONDU le 2026-09-04** : H2 mesuré sur données publiques — `d′` 1,44 (4,317 µm) contre 1,43 (9,362 µm), rapport **1,01**, intervalles recouvrants. La condition que `69` posait n'est **pas** remplie, donc le courriel à l'ESRF n'est pas justifié par cette voie. C1 et C2 restent, et C1 est plus petit qu'annoncé (les couches du régime du prix sont **déjà rendues**) |
+| **C** | la règle graduée | ✅✅ **C2 et C3 mesurés les 2026-09-04/05.** C3 : le débinage ne rend rien (rapport 1,01), donc le courriel à l'ESRF n'est pas justifié. C2 : sur une face **vierge**, la dispersion du détecteur ne tombe que de **6 %** alors que le contraste local est **14× plus bas** — « il y a de la structure ici » ne discrimine pas ; le **niveau**, lui, se déplace (−0,27 contre −1,50). ⚠ Reste C1, plus petit qu'annoncé |
 | **D1** | ✅✅ l'arc d'excision (`03`–`07`) — **FERMÉ : la conclusion de tête de `07` est CONFIRMÉE** | ce qui la démentait était une mesure sans producteur, prise sur une colonne dominée par son bruit d'échantillonnage. Sur `shortfall` (sans seuil, bruit < 5 %) : **0 paire sur 10** au-delà du bruit, signe mélangé. Ce qui est établi est une **borne**, pas une absence |
 | **D2** | ⛔ le contrôle P1 bis de `71` | **bloqué** : le rapport « budget » n'est ni dans `docs/`, ni dans `src/`, ni dans `store/` — `71` et `72` le citent tous deux **sans le définir**, donc la tâche ne peut ni être faite ni être refusée |
 | **D3** | ~~41~~ → ~~32~~ → **30** scripts sans appelant | ⚠ **entamé** : deux figures dont l'image est **utilisée** dans un doc ne portaient pas leur commande de régénération — c'est la règle du dépôt, et c'est réparé (vérifié : les deux se régénèrent à l'identique). Le reste est classé ci-dessous |
@@ -452,6 +452,65 @@ le nul **propre** — parallèle à une face, sans arête de feuille — que `46
 ⚠ **Plus urgent depuis `46`, pas moins** : le détecteur y rend *plus* de dispersion sur la
 surface sans face que sur une face. Tant qu'on ne sait pas ce qu'il rend sur une face
 **vierge**, « l'encre valide le déroulage » n'est pas utilisable.
+
+### ✅✅ C2 — le nul verso : MESURÉ le 2026-09-05, et le contrôle est TOMBÉ
+
+> Mesure : `src/encre/le_nul_verso.py` (13 contrôles), `docs/mesures/le_nul_verso.json`.
+> Figure : `src/figures/figure_le_nul_verso.py` (10 contrôles).
+
+⭐⭐⭐ **Aucun rendu n'était nécessaire.** Les `layers-zarr` publiés de `PHerc0139` font
+**109 couches** (`shape [109, 23280, 32160]`, chunks `[109, 128, 128]` — un morceau est une
+colonne pleine profondeur) là où le détecteur n'en lit que **26**. Décaler `--start-layer`
+donne donc le nul dans **la même pile** : même volume, même segment, même région, même modèle,
+même pas — un seul paramètre bouge, ce qui est la conception appariée que `46` réclame.
+
+⭐⭐ **Et le décalage est mesuré, pas choisi.** `depth_profile` rend le contraste par couche : pic
+normalisé à **1,000 à la couche 56**, chute monotone à **0,000 à la 100**. La fenêtre nulle est
+prise au **minimum mesuré** — un demi-pas nominal peut tomber sur la spire voisine, un minimum
+mesuré ne le peut pas.
+
+| fenêtre | contraste local | encre méd. | étendue |
+|---|---:|---:|---:|
+| face écrite, couches 39–65 | **0,877** | **−0,272** | 3,994 |
+| **vide entre feuilles**, 83–109 | **0,063** | **−1,502** | **3,767** |
+
+> ⚠⚠⚠ Le contraste local est **quatorze fois plus bas** dans le vide, et la dispersion du
+> détecteur ne tombe que de **6 %**. Donc *« il y a de la structure ici »* **ne discrimine
+> pas**, et l'inquiétude de `46` est confirmée sur une face **vierge**, pas seulement sur une
+> surface posée en travers.
+
+⭐ **Mais l'autre moitié sauve le détecteur sur un autre canal** : le **niveau** se déplace
+franchement, médiane **−0,27** contre **−1,50**. Une lecture par **seuil** distingue les deux ;
+une lecture par **structure** ne le peut pas. Les deux assertions sont dans la batterie — l'une
+sans l'autre déforme le résultat.
+
+![Une face écrite et un vide, vus par le même détecteur](images/75_le_nul_verso.png)
+
+*Même échelle de gris, prise sur les percentiles 1 et 99 des **deux** cartes : rendre chacune à
+sa propre plage ferait paraître le vide aussi structuré que la face, c'est-à-dire illustrerait la
+panne au lieu de la montrer. Un pixel non mesuré sort en bleu sombre, jamais en noir.*
+
+⚠⚠ **Ce que la figure montre et que les résumés taisent** : le vide est sombre *dans
+l'ensemble* mais porte des **taches vives** indiscernables d'encre. Mesuré : **15,1 %** du vide
+dépasse la **médiane de la face**, et la corrélation entre les deux cartes vaut **+0,001** —
+donc la carte du vide n'est **pas un décalque** de celle de la face, pas une transparence de la
+même colonne.
+
+⚠⚠⚠ **Ce qui reste indécidable, et pour une raison structurelle.** La corrélation ne dit **rien**
+de la spire **voisine** : son encre n'a aucune raison de tomber là où celle de cette face-ci
+tombe. Et aucune troisième fenêtre ne trancherait — le creux mesuré fait **une vingtaine de
+couches** et le détecteur en lit **26**, donc **aucune fenêtre de sa taille ne tient entièrement
+dans le vide**. La fenêtre nulle frôle nécessairement la remontée du voisin (0,096 à la
+couche 108).
+
+⚠ Et la limite que `46` énonce déjà tient ici : à ce pas de balayage la carte est trop petite
+pour porter une **typographie**. On compare niveau et dispersion, jamais l'interligne.
+
+**Restant sur C2** : refaire la mesure sur **deux autres segments `w`** de `0139` — la
+conception et le coût sont établis (extraction + profil + deux inférences ≈ 9 min par segment),
+il ne reste qu'à choisir des fenêtres portant de la matière.
+
+---
 
 ### C3 ⚠⚠⚠ — le courriel à l'ESRF (ex-H2) : **conditionnel, et sa condition est testable**
 
