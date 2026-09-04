@@ -1,6 +1,6 @@
 {
   "trace": "20260701183126-w038-045",
-  "repetitions": 3,
+  "repetitions": 6,
   "certificats": [
     {
       "status": "clean",
@@ -10,22 +10,43 @@
     },
     {
       "status": "clean",
-      "n_removed_quads": 3698,
-      "retained_area_fraction": 0.9987927668066449,
-      "excised_area_fraction": 0.001207233193355198
+      "n_removed_quads": 3696,
+      "retained_area_fraction": 0.9987933997615617,
+      "excised_area_fraction": 0.0012066002384382712
     },
     {
       "status": "clean",
-      "n_removed_quads": 3698,
-      "retained_area_fraction": 0.9987927668066449,
-      "excised_area_fraction": 0.001207233193355198
+      "n_removed_quads": 3696,
+      "retained_area_fraction": 0.9987933997615617,
+      "excised_area_fraction": 0.0012066002384382712
+    },
+    {
+      "status": "clean",
+      "n_removed_quads": 3696,
+      "retained_area_fraction": 0.9987933997615617,
+      "excised_area_fraction": 0.0012066002384382712
+    },
+    {
+      "status": "clean",
+      "n_removed_quads": 3691,
+      "retained_area_fraction": 0.998795023034367,
+      "excised_area_fraction": 0.0012049769656330808
+    },
+    {
+      "status": "clean",
+      "n_removed_quads": 3696,
+      "retained_area_fraction": 0.9987933997615617,
+      "excised_area_fraction": 0.0012066002384382712
     }
   ],
-  "distincts": 1,
+  "distincts": 3,
   "quads": [
     3698,
-    3698,
-    3698
+    3696,
+    3696,
+    3696,
+    3691,
+    3696
   ],
-  "deterministe": true
+  "deterministe": false
 }

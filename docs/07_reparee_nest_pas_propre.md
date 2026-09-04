@@ -714,36 +714,51 @@ dispersion d'un tirage de 20 000 cellules. Le distinguer demanderait un tirage p
 tirage **apparié** — c'est-à-dire mesuré sur les cellules qui survivent à la réparation, des deux
 côtés.
 
-### ⚠⚠⚠ « La réparation n'est pas déterministe » — affirmé, puis RÉFUTÉ par son propre producteur
+### ⚠⚠⚠ « La réparation n'est pas déterministe » — affirmé, rétracté, puis RÉTABLI par la mesure
 
-En relançant le lot pour ajouter la colonne `shortfall`, le même appel `windcheck transform` sur
-la même trace a rendu **3 696** quads retirés puis **3 698** (`w038-045`, 0701) — et le Δ de
-cette trace est passé de **−3,5 %** à **+21,2 %** entre les deux exécutions. J'ai lu ça comme une
-non-reproductibilité de la réparation, et c'était le plus solide de mes arguments.
+Trois passages sur la même phrase, et c'est la mesure qui a tranché à chaque fois.
 
-⚠ Il reposait sur **deux sorties de terminal**, c'est-à-dire sur la dette `D3` que cette section
-dénonce. Le mode `--determinisme` a été écrit pour le mettre dans l'arbre — et il l'a **réfuté
-dans l'heure** :
+**1.** En relançant le lot pour ajouter `shortfall`, le même appel `windcheck transform` sur la
+même trace rend **3 696** quads retirés puis **3 698** (`w038-045`, 0701). J'écris que la
+réparation n'est pas déterministe — depuis **deux sorties de terminal**, c'est-à-dire depuis la
+dette `D3` que cette section dénonce.
 
-| réparation | 1 | 2 | 3 |
-|---|---:|---:|---:|
-| quads retirés | 3 698 | 3 698 | 3 698 |
+**2.** Le mode `--determinisme` est écrit pour mettre ça dans l'arbre. À **trois** répétitions il
+rend trois certificats **identiques**, et je rétracte.
 
-**Trois réparations consécutives rendent un certificat identique** — statut, quads retirés et
-aire gardée compris, comparés champ à champ et non seulement sur le compte. Ce qui reste établi est donc
-plus étroit et plus honnête : l'écart 3 696 / 3 698 a bien été observé, il n'est **pas
-reproductible à conditions égales**, et sa cause est inconnue.
+**3.** À **six** répétitions :
 
-⚠ Et trois répétitions sont une preuve **faible** de déterminisme : elles excluent « différent à
-chaque fois », pas « différent de temps en temps ». Le contrôle tombera le jour où une répétition
-divergera, ce qui serait précisément le résultat qu'il faut.
+| réparation | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---:|---:|---:|---:|---:|---:|
+| quads retirés | 3 698 | 3 696 | 3 696 | 3 696 | **3 691** | 3 696 |
 
-> ⭐ C'est exactement ce à quoi sert un producteur. La même heure a vu naître une affirmation
-> confortable et l'instrument qui l'a démentie — et si elle était restée dans un log de `/tmp`,
-> elle serait aujourd'hui dans ce document, fausse et invérifiable.
+**Trois certificats distincts.** La première affirmation était juste, la rétractation était
+fausse — et elle l'était **par chance**.
 
-⚠ Rien de tout cela ne change la conclusion : la table du §8 est déjà sans information par
-l'argument du bruit de graine seul, qui, lui, est mesuré.
+> ⭐ Le commentaire de la rétractation disait pourtant, en toutes lettres : *« trois répétitions
+> sont une preuve faible de déterminisme : elles excluent "différent à chaque fois", pas
+> "différent de temps en temps" »*. Il avait raison, et j'ai quand même laissé ce document s'y
+> appuyer. **Une réserve écrite ne dispense pas de la mesure qu'elle appelle.**
+
+⚠ Et le **3 691** corrige un second point que j'avais avancé : ce n'est pas une bascule entre
+**deux** valeurs, donc pas une égalité tranchée par un ordre de parcours. Ce que la mesure établit
+est plus modeste — la variation existe, elle est **bornée à sept quads sur ~3 695, soit 0,19 %**,
+et sa cause reste inconnue.
+
+⭐ **Et ce dépôt a déjà rencontré cette forme, une fois.** [`44`](44_ou_la_chaine_se_trouve.md)
+établit que `vc_grow_seg_from_seed` tirait son aléa d'une graine posée par **l'horloge** et
+tournait sur **22 fils** — donc deux exécutions de la même commande ne rendaient pas le même
+maillage, et un résultat publié avait été lu comme un effet de réglage. Le remède y a été
+`VC_GROWPATCH_RNG_SEED` plus `thread_limit: 1`. C'est la première chose à essayer sur
+`windcheck transform`, et c'est la raison de le noter ici plutôt que de le laisser en énigme.
+
+⚠⚠ **Ce que ça change pour le §12, et ce que ça ne change pas.** Chaque paire (avant, après) fait
+**une seule** réparation, donc les deux mesures d'une paire portent bien sur le même maillage
+réparé : le résultat tient. Ce que la non-reproductibilité borne, c'est le **sens du mot « la »
+réparation** — il n'y en a pas une, il y en a une famille, et le Δ mesuré est celui d'un tirage
+dans cette famille. C'est cohérent avec le fait que `w038-045` (0701) soit la seule trace dont
+l'effet dépasse 0,3 % : c'est aussi la seule dont le compte de quads bouge d'une exécution à
+l'autre.
 
 ### ⚠⚠ Deux hypothèses mortes, écrites pour qu'on ne les refasse pas
 
@@ -1093,8 +1108,14 @@ retire de 269 à 3 698 quads. Ce qu'elle ne change pas, c'est la **proximité an
 régions non adjacentes**, qui est une autre propriété du même maillage.
 
 ⚠ Et une trace mérite d'être regardée : `w038-045` (0701) est la seule dont l'effet dépasse
-0,3 %, et c'est aussi celle dont le compte de quads retirés **n'est pas reproductible** (3 696 ou
-3 698 selon l'exécution). Une part de son Δ pourrait n'être que cette différence.
+0,3 %, et c'est aussi celle dont le compte de quads retirés **n'est pas reproductible** — six
+réparations rendent 3 691, 3 696 et 3 698 (§10). Une part de son Δ pourrait n'être que cette
+différence.
+
+⚠⚠ Ce que la non-reproductibilité borne, ce n'est **pas** ce résultat : chaque paire fait **une
+seule** réparation, donc ses deux mesures portent bien sur le même maillage réparé. Ce qu'elle
+borne est le sens du mot « la » réparation — il n'y en a pas une, il y en a une famille, et ce
+qui est mesuré ici est le Δ d'un **tirage** dans cette famille.
 
 ### Reproduire
 

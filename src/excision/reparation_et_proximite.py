@@ -395,24 +395,40 @@ def _verifier(r: dict | None = None) -> int:
                       len(dehors) < confrontes / 2,
                       f"{len(dehors)}/{confrontes} dehors : "
                       + (", ".join(x[-8:] for x in dehors) or "aucune"))
-        # ⚠⚠⚠ J'ALLAIS PUBLIER « LA REPARATION N'EST PAS DETERMINISTE », ET LE PRODUCTEUR L'A
-        # REFUTE DANS L'HEURE. Deux passages du lot avaient rendu 3 696 puis 3 698 quads retires
-        # sur la meme trace, et j'en avais conclu la non-determinisme -- depuis deux sorties de
-        # terminal, c'est-a-dire depuis la dette `D3` que ce fichier existe pour rembourser.
-        # Trois reparations consecutives rendent un certificat IDENTIQUE. L'ecart observe est
-        # donc reel mais NON REPRODUCTIBLE a conditions egales, et sa cause reste inconnue.
+        # ⚠⚠⚠ TROIS PASSAGES SUR CETTE MEME ASSERTION, ET C'EST LA MESURE QUI A TRANCHE A CHAQUE
+        # FOIS. (1) Deux passages du lot rendent 3 696 puis 3 698 quads : j'ecris « la reparation
+        # n'est pas deterministe » -- depuis deux sorties de terminal, c'est-a-dire depuis la
+        # dette `D3` que ce fichier existe pour rembourser. (2) Le mode `--determinisme` a trois
+        # repetitions rend trois certificats IDENTIQUES : je retracte. (3) A SIX repetitions :
+        # 3698, 3696, 3696, 3696, **3691**, 3696 -- TROIS certificats distincts. La premiere
+        # affirmation etait juste, la retractation etait fausse, et elle l'etait PAR CHANCE.
         #
-        # ⚠ Trois repetitions sont une preuve faible de determinisme : elles excluent « different
-        # a chaque fois », pas « different de temps en temps ». L'assertion dit ce qui est
-        # mesure, et elle tombera le jour ou une repetition divergera -- ce qui serait
-        # precisement le resultat qu'il faut.
+        # ⭐ Le commentaire de la retractation disait pourtant « trois repetitions sont une preuve
+        # faible de determinisme : elles excluent "different a chaque fois", pas "different de
+        # temps en temps" ». Il avait raison et j'ai quand meme laisse le document s'y appuyer.
+        # Une reserve ecrite ne dispense pas de la mesure qu'elle appelle.
+        #
+        # ⚠ Et le 3691 corrige un second point : ce n'est pas une bascule entre DEUX valeurs,
+        # donc pas une egalite tranchee par un ordre de parcours. L'etendue mesuree est de sept
+        # quads sur ~3 695, soit 0,19 %.
         det = RACINE / "docs" / "mesures" / "reparation_determinisme.json"
         if det.is_file():
             d = json.loads(det.read_text())
-            v("la réparation rend le MÊME certificat sur des runs consécutifs",
-              d["deterministe"],
+            v("la réparation N'EST PAS déterministe",
+              not d["deterministe"],
               f"{d['distincts']} certificat(s) distinct(s) en {d['repetitions']} réparations · "
               f"quads {' · '.join(str(x) for x in d['quads'])}")
+            q = d.get("quads") or []
+            if len(q) >= 3:
+                # ⚠ La variation est BORNEE, et c'est ce qui la rend supportable : elle porte sur
+                # deux dixiemes de pour cent des quads retires. Assertion ecrite pour tomber si
+                # elle s'elargissait -- ce serait un tout autre probleme.
+                v("... mais sa variation reste sous un demi pour cent des quads retirés",
+                  (max(q) - min(q)) / max(q) < 0.005,
+                  f"étendue {max(q) - min(q)} quads sur {max(q)} — "
+                  f"{100 * (max(q) - min(q)) / max(q):.2f} %")
+                v("... et elle ne bascule pas entre deux valeurs seulement",
+                  len(set(q)) >= 3, f"{sorted(set(q))}")
         # ⚠⚠⚠ LE TIRAGE APPARIE, ET C'EST LUI QUI TRANCHE. Tout ce qui precede est borne par le
         # bruit d'echantillonnage ; ce mode le supprime au lieu de le borner, parce que la
         # GRILLE de parametrisation ne change pas quand la reparation retire des quads (mesure :

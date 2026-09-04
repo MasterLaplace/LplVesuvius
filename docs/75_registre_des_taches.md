@@ -474,11 +474,15 @@ mesuré sur les cellules qui survivent à la réparation, des deux côtés.
    en 0**. La panne totale ressemblait à une population vide. Corrigé, et un run qui ne mesure
    rien ne sort plus en 0.
 
-7. ⚠⚠ **Une affirmation à moi, réfutée par son propre producteur dans l'heure.** J'avais écrit
-   que `windcheck transform` n'est pas déterministe (3 696 puis 3 698 quads entre deux passages).
-   Trois réparations consécutives rendent un certificat **identique** : l'écart est réel, **non
-   reproductible à conditions égales**, cause inconnue. Sans le mode `--determinisme`, cette
-   phrase serait dans le document, fausse et invérifiable.
+7. ⚠⚠⚠ **Trois passages sur la même affirmation, tranchés par la mesure à chaque fois.**
+   (1) J'écris que `windcheck transform` n'est pas déterministe, depuis **deux sorties de
+   terminal** (3 696 puis 3 698 quads). (2) Le mode `--determinisme` à trois répétitions rend
+   trois certificats **identiques** : je rétracte. (3) À **six** répétitions — 3698, 3696, 3696,
+   3696, **3691**, 3696 — **trois certificats distincts**. La première affirmation était juste,
+   la rétractation était fausse, et elle l'était **par chance**. ⭐ Son propre commentaire disait
+   pourtant que trois répétitions sont une preuve faible de déterminisme : **une réserve écrite
+   ne dispense pas de la mesure qu'elle appelle**. Variation bornée à **0,19 %** des quads
+   retirés, cause inconnue, forme déjà rencontrée dans `44` (rng semé par l'horloge, 22 fils).
 
 ⭐ **Conséquence pratique** : `shortfall` devient la colonne de référence de l'arc. Elle ordonne
 aussi bien (médiane +0,765 contre +0,780) et son bruit est **4,5 fois plus serré**. Pour toute
@@ -536,8 +540,9 @@ adjacentes**, qui est une autre propriété du même maillage.
 (`sweep_PHerc0139`, `sweep_0139_*`, `sweep_s1_pas`) n'ont aucune trace commune avec Scroll 1, donc
 `le_rayon_des_mesures.py` ne peut ni les dater par comparaison ni lire leur déclaration — il
 faudrait les régénérer, ce qui les fera déclarer. Et le compte de quads de `w038-045` (0701) n'est
-**toujours pas reproductible** : 3 696 ou 3 698 selon l'exécution, quatre observations, deux
-valeurs seulement.
+**pas reproductible** : six réparations rendent 3 691, 3 696 et 3 698. ⚠ Ça ne touche pas le
+résultat du §12 — chaque paire fait une seule réparation — mais ça borne le sens du mot « la »
+réparation : il y en a une famille, et le Δ mesuré est celui d'un tirage dedans.
 
 ### D2 ⛔ — le contrôle P1 bis de `71` : **bloqué sur une source absente de l'arbre**
 
