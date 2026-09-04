@@ -1823,6 +1823,25 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 out.append(("borne basse d'un saut d'une feuille",
                             _deux2(t["p10"], 3), cde.name))
         ajoute("erreur d'indice a spire exclue", d["erreur_mediane"], 4, cde.name)
+    # ⭐⭐⭐ Le MASQUE D'APPROBATION (`77` §6). Garde parce que le bras qui mord est le
+    # demi-pas : c'est LUI qui separe un masque utile d'un masque qui approuve tout, et une
+    # prose qui deriverait de sa mesure ne serait plus verifiable par personne.
+    mda = _source(racine, "le_masque_dapprobation.json")
+    if mda.exists():
+        d = json.loads(mda.read_text())
+
+        def _pc(v: float) -> list[str]:
+            point = f"{v * 100:.1f} %"
+            return [f"**{point}**", point, f"**{point.replace('.', ',')}**",
+                    point.replace(".", ",")]
+
+        for nom, clef in (("spire lue par son propre champ", "spire, champ complet"),
+                          ("quart de pas approuve", "quart de pas"),
+                          ("spire a spire exclue", "spire, à spire exclue"),
+                          ("demi-pas approuve", "demi-pas"),
+                          ("saut d'une feuille approuve", "saut d'une feuille")):
+            if clef in d["bras"]:
+                out.append((nom, _pc(d["bras"][clef]["part_mediane"]), mda.name))
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():
         d = json.loads(bdf.read_text())

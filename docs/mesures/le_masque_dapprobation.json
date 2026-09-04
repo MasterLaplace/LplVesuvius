@@ -1,0 +1,43 @@
+{
+  "rouleau": "PHerc0139",
+  "spires": 37,
+  "jugeables": 32,
+  "tolerance_placement": 0.3,
+  "tolerance_identite": 0.45,
+  "bras": {
+    "spire, champ complet": {
+      "n": 32,
+      "part_mediane": 0.9870201616998941,
+      "p10": 0.9691744409605286,
+      "p90": 1.0
+    },
+    "spire, à spire exclue": {
+      "n": 32,
+      "part_mediane": 0.5385831320263135,
+      "p10": 0.3663994605137863,
+      "p90": 0.6831772925270125
+    },
+    "quart de pas": {
+      "n": 32,
+      "part_mediane": 0.9267346688279807,
+      "p10": 0.6453857499128476,
+      "p90": 0.961067592953603
+    },
+    "demi-pas": {
+      "n": 32,
+      "part_mediane": 0.02136759304295322,
+      "p10": 0.008812357991484708,
+      "p90": 0.0613273719660899
+    },
+    "saut d'une feuille": {
+      "n": 32,
+      "part_mediane": 0.0,
+      "p10": 0.0,
+      "p90": 0.0
+    }
+  },
+  "defauts_ecartes": [
+    41,
+    45
+  ]
+}

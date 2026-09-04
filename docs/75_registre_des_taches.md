@@ -16,7 +16,7 @@
 
 | | tâches | ce que ça fait avancer |
 |---|---:|---|
-| **A — remplacer le pinceau** | 7 (dont **2 faites**) | le prix. Un prédicat d'identité, son témoin, son déploiement |
+| **A — remplacer le pinceau** | 8 (dont **3 faites**) | le prix. Un prédicat d'identité, son témoin, son déploiement |
 | **B — l'article** | 5 (dont **4 faites**) | une publication, et la crédibilité des mesures qui la portent |
 | **C — la règle graduée** | 3 | savoir si une carte d'encre peut **valider** un déroulage. Borné à trois semaines |
 | **D — dette** | 3 | ce qui pourrit si on n'y touche pas |
@@ -106,7 +106,29 @@ fermée :
 et sans rapport avec les bords de spire. Alors l'identité doit venir d'ailleurs — la coupe à
 $K$ surfaces couplées (`69` §3.3), qui s'engage sur une feuille par construction.
 
-### A3 ⭐⭐ — le masque d'approbation à trois prédicats
+### ~~A3~~ ✅ — le masque d'approbation — **FAIT le 2026-09-04** (`77` §6)
+
+⭐⭐⭐ `approval.tif` est **calculé**, aux cinq bras de contrôle, et les deux populations se
+séparent : **quart de pas 92,7 %** approuvé (le témoin positif réaliste) contre **demi-pas
+2,1 %** et **saut d'une feuille 0,0 %**.
+
+⚠⚠ **Le champ donne DEUX prédicats et je les avais confondus** : une copie translatée d'un
+demi-pas a une avance d'identité **nulle** — elle suit parfaitement une feuille qui n'existe
+pas. C'est le **placement** (la partie fractionnaire de l'indice) qui la refuse.
+
+⚠⚠ **Une spire publiée ne peut pas être son propre témoin positif de placement** : avec son
+champ c'est circulaire (100 %), sans lui c'est pathologique (70 %) — la retirer la place
+exactement au milieu de l'intervalle que son retrait vient de créer.
+
+⚠⚠⚠ **Le bug que j'avais écrit** : retirer du champ la spire qui **borne** la surface jugée
+détruit l'information qui détecte un interstice. Un demi-pas passait de **2,1 % à 37,6 %**.
+La sonde fait tomber 4 contrôles.
+
+⚠ **Restant sur A3** : rien ne fait tourner `villa`. Le canal est écrit au bon nom et au bon
+format ; que la ré-optimisation l'accepte n'est pas vérifié. Et **aucun `approval.tif` peint
+n'est publié**, donc la comparaison « le calculé vaut-il l'humain » reste non montable.
+
+### A3 bis — l'ancienne formulation, gardée pour mémoire
 
 Écrire un `approval.tif` à côté des `x/y/z.tif` (article §6.7). **Quatre bras de contrôle**,
 et le quatrième est celui sans lequel le contrôle ne peut pas échouer :

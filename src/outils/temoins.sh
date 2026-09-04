@@ -1198,6 +1198,11 @@ run "paver ou echantillonner"  uv run python "$ROOT/src/excision/paver_ou_echant
 # exclure la spire jugee rend une erreur exactement nulle (le champ la LIT), et laisser les
 # spires bornes dans le champ qui juge le temoin fait perdre un des deux defauts.
 run "le champ d'enroulement"   uv run python "$ROOT/src/excision/le_champ_denroulement.py" --verifier
+# ⭐⭐⭐ `approval.tif` CALCULE -- ce que le pinceau peint, aux quatre bras de controle. Les deux
+# sondes mordent fort (4 echecs chacune) : un masque qui approuve tout, et le bug que j'avais
+# ecrit -- retirer du champ la spire qui BORNE la surface jugee detruit l'information qui
+# detecte un interstice, et fait passer un demi-pas de 2,1 % a 37,6 % d'approbation.
+run "le masque d'approbation"  uv run python "$ROOT/src/excision/le_masque_dapprobation.py" --verifier
 # ⭐⭐ Le garde-fou de l'angle mort qui a mordu TROIS fois : interroger une vue du corpus et
 # conclure sur le corpus. Sa sonde la plus utile reduit la comparaison a une seule vue --
 # la faute exacte du `07` -- et fait tomber trois controles.

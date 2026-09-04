@@ -132,3 +132,70 @@ d'identité que l'article déclare ouverte, et le prédicat existe désormais.
    référent, et reste à mesurer. C'est celui-là qui déploierait.
 3. **Qu'un traceur puisse s'en servir en ligne.** Le champ est une table ; l'y brancher est un
    autre lot — c'est la tâche **A3** du registre.
+
+---
+
+## 6. ⭐⭐⭐ Suite immédiate : `approval.tif` calculé, aux quatre bras de contrôle
+
+> Mesure : `src/excision/le_masque_dapprobation.py` (7 contrôles, 2 sondes qui mordent fort).
+
+L'article §6.7 établit que l'intégration tient en **un fichier** : le chargeur du pipeline de
+référence adopte tout `.tif` posé à côté de `x/y/z.tif` comme canal nommé, et `approval` est
+celui qui autorise la ré-optimisation. Écrire `approval.tif` **est** l'intégration.
+
+### ⚠⚠ Le champ donne DEUX prédicats, et je les avais confondus
+
+| prédicat | grandeur | sur une feuille | dans l'interstice |
+|---|---|---:|---:|
+| **placement** | partie **fractionnaire** de l'indice | **0,001** | **0,502** |
+| **identité** | **avance** de l'indice sur un tour | −0,005 | 0 *(!)* |
+
+⚠ Une copie translatée d'un demi-pas a une avance **nulle** — elle suit parfaitement une
+feuille qui n'existe pas. C'est le **placement** qui la refuse, jamais l'identité. Un masque
+qui n'aurait que l'identité approuverait une surface posée dans le vide.
+
+Les seuils sont posés **entre les deux populations mesurées**, pas réglés : placement 0,30
+(la feuille monte à 0,204, le demi-pas descend à 0,435) et identité 0,45 (+0,230 contre 0,753).
+Les populations ne se recouvrant pas, tout seuil de ces intervalles donne le même verdict.
+
+### Les cinq bras
+
+| bras | approuvé | p10 | p90 | ce que ça vaut |
+|---|---:|---:|---:|---|
+| spire lue par son propre champ | **98,7 %** | — | — | ⚠ circulaire — prouve seulement que le masque approuve **quelque chose** |
+| **quart de pas** | **92,7 %** | 64,5 % | 96,1 % | ⭐ le **témoin positif réaliste** |
+| spire à spire exclue | 53,9 % | 36,6 % | 68,3 % | ⚠⚠ **pathologique**, voir ci-dessous |
+| **demi-pas** | **2,1 %** | 0,9 % | 6,1 % | ⭐ le bras qui mord |
+| **saut d'une feuille** | **0,0 %** | 0,0 % | 0,0 % | refusé |
+
+⚠⚠⚠ **Le quatrième bras est celui sans lequel le contrôle ne peut pas échouer.** Approuver une
+spire, refuser un masque vide, refuser un masque plein : les trois se satisfont d'un masque qui
+approuve tout. C'est la **copie translatée d'un demi-pas** qui mord — une surface lisse,
+plausible, et posée là où il n'y a pas de papyrus.
+
+### ⚠⚠ Une spire publiée ne peut pas être son propre témoin positif de placement
+
+Ni avec son champ, ni sans :
+
+- **champ complet** → **100 %**, mais le champ contient la spire qu'il juge : circulaire ;
+- **à spire exclue** → **70 %**, parce que la retirer place la spire **exactement au milieu de
+  l'intervalle que son retrait vient de créer**. Le champ la voit dans un interstice, **par
+  construction**.
+
+C'est pourquoi le témoin positif est le **quart de pas** : une surface près d'une feuille que
+le champ connaît, et qui n'est pas un membre du champ — ce qui est exactement la situation
+d'une trace neuve à l'usage.
+
+### ⚠⚠⚠ Le bug que j'avais écrit, et ce qu'il coûtait
+
+Ma première version retirait du champ la spire qui **borne** la surface jugée, en croyant
+éviter une fuite. Ça **détruisait l'information qui détecte un interstice** : sans la borne
+haute, le vide entre deux feuilles n'est plus un vide, c'est le milieu d'un intervalle de trois
+feuilles.
+
+**Un demi-pas passait de 2,1 % à 37,6 % d'approbation** — d'un refus net à une approbation
+nette, sans qu'aucun nombre n'ait l'air faux. La sonde qui le rejoue fait tomber **4
+contrôles**.
+
+⚠ Et le réglage juste est aussi le plus **réaliste** : à l'usage, le champ est tout ce qui est
+publié, et la surface jugée est une trace neuve, absente du champ.
