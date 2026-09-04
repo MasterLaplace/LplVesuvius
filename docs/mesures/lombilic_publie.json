@@ -1,0 +1,52 @@
+{
+  "axes_publies": {
+    "PHerc0125": {
+      "points": 83,
+      "voxel_um": 9.362,
+      "annotateur": null
+    },
+    "PHerc0139": {
+      "points": 391,
+      "voxel_um": 2.399,
+      "annotateur": "David Josey"
+    },
+    "PHerc0211": {
+      "points": 87,
+      "voxel_um": 9.362,
+      "annotateur": null
+    },
+    "PHerc0332": {
+      "points": 169,
+      "voxel_um": 2.399,
+      "annotateur": "David Josey"
+    },
+    "PHerc0826": {
+      "points": 49,
+      "voxel_um": 9.362,
+      "annotateur": null
+    }
+  },
+  "bucket": "vesuvius-challenge-open-data",
+  "chemin": "<rouleau>/representations/umbilicus/",
+  "comparaison": {
+    "rouleau": "PHerc0139",
+    "voxel_um": 9.362,
+    "facteur_de_conversion": 0.2562486648152104,
+    "points_de_controle": 391,
+    "tranches": 24,
+    "biais_median_vx": 321.0323110688064,
+    "biais_median_um": 3005.5044962261654,
+    "biais_max_vx": 445.4955802767958,
+    "biais_max_en_feuilles": 27.065085156076332,
+    "axe_ajuste": {
+      "part_vers_l_exterieur": 0.9475385311034431,
+      "ecart_um": 155.7588991195972,
+      "paires": 36
+    },
+    "axe_publie": {
+      "part_vers_l_exterieur": 0.9482635916014241,
+      "ecart_um": 156.77670980465325,
+      "paires": 36
+    }
+  }
+}

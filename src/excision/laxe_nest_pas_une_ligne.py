@@ -34,10 +34,20 @@ fichier qu'on croyait absent.
 
 ⚠⚠ CE QUE CE FICHIER N'ÉTABLIT PAS, et il faut le dire à chaque usage :
 
-1. La dérive mesurée est celle de **Scroll 1**. C'est le **seul** rouleau qui publie un
-   ombilic — vérifié le même jour sur les cinq répertoires `umbilici/` de `dl.ash2txt.org` :
-   Scroll 1 en a un, Scroll 2, 3, 4 et 5 n'en ont pas. Rien ici ne dit que les autres errent
-   autant, ni aussi peu.
+1. La dérive mesurée est celle de **Scroll 1**. Rien ici ne dit que les autres errent autant,
+   ni aussi peu.
+
+   ⚠⚠⚠ **CORRIGÉ le 2026-09-04 : ce n'est PAS le seul rouleau à publier un ombilic.** Cette
+   ligne affirmait « le **seul** rouleau qui publie un ombilic — vérifié le même jour sur les
+   cinq répertoires `umbilici/` de `dl.ash2txt.org` ». La vérification était juste et sa
+   conclusion fausse : elle portait sur **un** serveur et **une** convention de chemin. Sur le
+   bucket ouvert, l'axe vit sous `<rouleau>/representations/umbilicus/`, et **cinq** rouleaux
+   en publient un (`PHerc0125`, `PHerc0139`, `PHerc0211`, `PHerc0332`, `PHerc0826`) — balayés
+   sur les 46 préfixes de premier niveau par `lombilic_publie.py`, pas sur une liste écrite à
+   la main.
+
+   C'est l'angle mort de `59` — interroger une vue du corpus et conclure sur le corpus —
+   commis ici pour la troisième fois, et sur le **même objet** que la deuxième.
 2. Le balayage de `sensibilite_centre.py` déplace le centre d'un **offset constant**, alors
    que l'axe réel **dérive avec z**. Un offset constant translate la géométrie ; une dérive la
    cisaille. Les deux perturbations ne sont pas la même, et la robustesse mesurée sur la

@@ -1842,6 +1842,32 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                           ("saut d'une feuille approuve", "saut d'une feuille")):
             if clef in d["bras"]:
                 out.append((nom, _pc(d["bras"][clef]["part_mediane"]), mda.name))
+    # ⭐⭐⭐ L'OMBILIC PUBLIE (`78`) : la correction de « un seul rouleau », et surtout la
+    # validation croisee de tout `76`/`77` contre un axe independant. Garde parce que le
+    # couple (biais reel, verdict inchange) ne vaut QUE si les deux chiffres restent lies :
+    # publier le second sans le premier serait publier une immunite sans sa mise a l'epreuve.
+    omb = _source(racine, "lombilic_publie.json")
+    if omb.exists():
+        d = json.loads(omb.read_text())
+        out.append(("rouleaux publiant un ombilic",
+                    [f"**{len(d['axes_publies'])}** rouleaux",
+                     f"{len(d['axes_publies'])} rouleaux en publient un",
+                     f"et **{len(d['axes_publies'])}** rouleaux"], omb.name))
+        c = d.get("comparaison")
+        if c:
+            ajoute("biais median entre les deux axes, en mm",
+                   c["biais_median_um"] / 1000.0, 2, omb.name, unites=(" mm",))
+            out.append(("biais maximal en feuilles",
+                        [f"**{c['biais_max_en_feuilles']:.0f}** écarts",
+                         f"{c['biais_max_en_feuilles']:.0f} écarts inter-feuilles",
+                         f"{c['biais_max_en_feuilles']:.0f} feuilles"], omb.name))
+            for nom, x in (("axe ajuste", c["axe_ajuste"]), ("axe publie", c["axe_publie"])):
+                pc = f"{x['part_vers_l_exterieur'] * 100:.1f} %"
+                out.append((f"{nom} : sens", [f"**{pc}**", pc, pc.replace(".", ",")],
+                            omb.name))
+                um = f"{x['ecart_um']:.1f} µm"
+                out.append((f"{nom} : ecart", [f"**{um}**", um, um.replace(".", ",")],
+                            omb.name))
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():
         d = json.loads(bdf.read_text())

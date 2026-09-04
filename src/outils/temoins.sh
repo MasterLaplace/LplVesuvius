@@ -1203,6 +1203,12 @@ run "le champ d'enroulement"   uv run python "$ROOT/src/excision/le_champ_denrou
 # ecrit -- retirer du champ la spire qui BORNE la surface jugee detruit l'information qui
 # detecte un interstice, et fait passer un demi-pas de 2,1 % a 37,6 % d'approbation.
 run "le masque d'approbation"  uv run python "$ROOT/src/excision/le_masque_dapprobation.py" --verifier
+# ⭐⭐⭐ CINQ rouleaux publient leur axe, pas un -- correction de `laxe_nest_pas_une_ligne.py`,
+# qui avait interroge UN serveur et conclu sur le corpus (angle mort de `59`, troisieme fois).
+# Le controle qui porte le fichier vient en PAIRE : les deux axes different de 27 ecarts
+# inter-feuilles, ET la mesure appariee n'en bouge pas (94,8 % contre 94,8 %). Sans le premier,
+# le second serait vrai pour la mauvaise raison.
+run "l'ombilic publie"         uv run python "$ROOT/src/excision/lombilic_publie.py" --verifier
 # ⭐⭐ Le garde-fou de l'angle mort qui a mordu TROIS fois : interroger une vue du corpus et
 # conclure sur le corpus. Sa sonde la plus utile reduit la comparaison a une seule vue --
 # la faute exacte du `07` -- et fait tomber trois controles.
