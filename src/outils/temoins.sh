@@ -1223,6 +1223,12 @@ run "le masque d'approbation"  uv run python "$ROOT/src/excision/le_masque_dappr
 # reinjecter la spire predite laisse la serie identique au chiffre pres -- donc le champ est un
 # JUGE et pas un generateur. Si la reinjection ameliorait un jour quoi que ce soit, il tomberait.
 run "extraire la suivante"     uv run python "$ROOT/src/excision/extraire_la_spire_suivante.py" --verifier
+# ⭐⭐⭐ De combien une spire PUBLIEE s'ecarte de la feuille qu'elle suit : ~30 um (sigma), ~100
+# um crete a crete. Trouve EN COUPE. Deux controles portent le fichier : la bande doit ressortir
+# du fond (sinon « mal placee » et « pas de signal » seraient confondus), et le lissage doit
+# diviser la dispersion par plus de deux (0,49 -> 0,21 feuille) -- c'est le FILTRE qui localise
+# la feuille, pas la valeur d'un voxel.
+run "la surface et la feuille" uv run python "$ROOT/src/excision/la_surface_et_la_feuille.py" --verifier
 # ⭐⭐⭐ CINQ rouleaux publient leur axe, pas un -- correction de `laxe_nest_pas_une_ligne.py`,
 # qui avait interroge UN serveur et conclu sur le corpus (angle mort de `59`, troisieme fois).
 # Le controle qui porte le fichier vient en PAIRE : les deux axes different de 27 ecarts

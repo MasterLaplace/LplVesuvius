@@ -1973,6 +1973,24 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                          f"{st['amplitude_angle_um']:.0f} µm d'amplitude"], ext.name))
         out.append(("modele retenu pour l'extrapolation",
                     [f"`{d['modele']}`", f"pas {d['modele']}"], ext.name))
+    # ⭐⭐⭐ L'ecart de la spire PUBLIEE a la feuille (`77` §10). Garde parce que c'est un
+    # PLANCHER sur toute erreur mesuree contre ces spires -- y compris les 47 um du champ.
+    # Publier l'un sans l'autre ferait passer l'erreur du referent pour la mienne.
+    sef = _source(racine, "la_surface_et_la_feuille.json")
+    if sef.exists():
+        d = json.loads(sef.read_text())
+        for sp in d["spires"]:
+            court = sp["nom"].split("_")[-1]
+            out.append((f"ecart de {court} a la feuille",
+                        [f"**{sp['ecart_type_um']:.1f} µm**",
+                         f"{sp['ecart_type_um']:.1f} µm",
+                         f"{sp['ecart_type_um']:.1f}".replace(".", ",")], sef.name))
+            out.append((f"amplitude de {court}",
+                        [f"**{sp['amplitude_um']:.0f} µm**",
+                         f"{sp['amplitude_um']:.0f} µm"], sef.name))
+            out.append((f"dispersion brute de {court}",
+                        [f"**{sp['brut_ecart_type_feuilles']:.3f}**",
+                         f"{sp['brut_ecart_type_feuilles']:.3f}".replace(".", ",")], sef.name))
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():
         d = json.loads(bdf.read_text())

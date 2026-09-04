@@ -1,0 +1,36 @@
+{
+  "voxel_um": 7.91,
+  "ecart_inter_feuilles_um": 147.4,
+  "lissage": 9,
+  "spires": [
+    {
+      "nom": "PHerc0172_w062",
+      "couches": 33,
+      "part_de_matiere": 1.0,
+      "centre_median": 14.955838629370271,
+      "ecart_type_um": 30.75539944725769,
+      "ecart_type_feuilles": 0.20865264211165327,
+      "amplitude_um": 101.65614101548678,
+      "amplitude_feuilles": 0.6896617436600189,
+      "brut_ecart_type_feuilles": 0.48615548693654853,
+      "intensite_bande": 163.20986938476562,
+      "fond": 130.0
+    },
+    {
+      "nom": "PHerc0172_w078",
+      "couches": 33,
+      "part_de_matiere": 0.5876379013061523,
+      "centre_median": 15.53860137377824,
+      "ecart_type_um": 29.392661212652325,
+      "ecart_type_feuilles": 0.19940747091351643,
+      "amplitude_um": 96.76928216008372,
+      "amplitude_feuilles": 0.6565080200819791,
+      "brut_ecart_type_feuilles": 0.5021733420092208,
+      "intensite_bande": 161.34568786621094,
+      "fond": 130.0
+    }
+  ],
+  "ecart_type_median_um": 30.074030329955008,
+  "ecart_type_median_feuilles": 0.20403005651258485,
+  "erreur_du_champ_um": 47.061654559919084
+}

@@ -434,3 +434,78 @@ prétend capter.
 
 ⚠ Le pas global est mesuré **sur les spires connues seulement** — reprendre les 154,1 µm de
 `76` serait une fuite, ils ont été mesurés sur les spires qu'on retire ici pour les prédire.
+
+---
+
+## 10. ⭐⭐⭐ La surface publiée n'est pas sur la feuille — et ça plafonne tout le reste
+
+> Mesure : `src/excision/la_surface_et_la_feuille.py` (8 contrôles), figure
+> `src/figures/figure_la_bande_serpente.py`. Trouvé **en coupe**, encore une fois.
+
+Le §9 mesure que le champ place la feuille suivante à **47 µm** et appelle ça son erreur.
+Restait à savoir **contre quoi** elle se mesure. On rend une spire publiée en coupe profondeur ×
+largeur et on regarde.
+
+![La bande de matière serpente sous la surface publiée](article/figures/bande_serpente.png)
+
+*Régénérer : `uv run python src/figures/figure_la_bande_serpente.py`*
+
+Le trait bleu est le milieu de la dalle — **là où la surface publiée prétend être**. Le trait
+orange est la bande de matière, suivie. **Ils ne coïncident pas.**
+
+| spire | écart-type | amplitude p5–p95 |
+|---|---:|---:|
+| `w062` | **30,8 µm** (0,209 feuille) | **102 µm** (0,690) |
+| `w078` | **29,4 µm** (0,199) | **97 µm** (0,657) |
+
+Les deux s'accordent, donc c'est **systématique** et pas une spire mal tracée.
+
+### ⭐⭐ Ce que ça plafonne
+
+Les 47 µm du §9 sont un écart **à la spire publiée**, et la spire publiée est elle-même à ~30 µm
+de la matière. **Une part de ce que j'appelais mon erreur de prédiction est l'erreur du
+référent**, et rien dans ce dépôt ne peut les séparer tant que la règle est la spire publiée.
+
+⚠ Le champ pourrait donc être **meilleur** que 47 µm sans qu'on puisse le montrer.
+
+### ⚠ Le filtre est le point, et c'est lui qui change tout
+
+Le pic **brut** par colonne (`argmax` sur l'intensité) donne **0,486** feuille de dispersion sur
+`w062` et **0,502** sur `w078` — rien d'exploitable, et j'ai failli conclure que le signal n'y
+était pas. Une feuille est
+**cohérente dans le plan** : lisser 9 × 9 avant de chercher le centre de masse fait tomber la
+dispersion à **0,21**.
+
+**Ce n'est pas le signal qui manquait, c'est le filtre qui le cherchait au mauvais endroit.**
+
+⚠ Et le contrôle qui sépare deux lectures très différentes : la bande **ressort du fond**
+(163 contre 130). Sans lui, « la surface est mal placée » et « la dalle est du bruit » seraient
+la même observation — l'un est corrigeable, l'autre non.
+
+### ⚠⚠⚠ Et j'ai repayé le piège nº 27 dans la FIGURE après l'avoir évité dans la mesure
+
+`zarr_vers_couches.py` avertit qu'un volume de surface est **majoritairement du remplissage**.
+La mesure calcule son seuil de fond **sur la matière seulement** ; ma première figure le
+calculait sur toute la dalle. Sur `w078`, 41 % de zéros mettent le percentile 20 à **0,0**, la
+bande suivie s'aplatit, et **σ tombe à 0,55 couche au lieu de 3,72** : la figure montrait une
+surface parfaitement placée sur un rouleau où elle ne l'est pas.
+
+⭐ Le remède n'est pas de recalculer le seuil correctement dans la figure, c'est de **ne pas
+réimplémenter** : la figure importe désormais la fonction de la mesure. Deux implémentations
+d'un même suivi sont deux occasions de ne pas s'accorder, et celle-ci s'est présentée
+immédiatement.
+
+⚠ Et la ligne tracée n'est plus fixée à 512 : sur les deux spires, elle est **en dessous** de la
+dispersion médiane (2,96 contre 3,32 · 2,16 contre 2,57), donc elle montrait le fait plus petit
+qu'il n'est. La figure prend la ligne la plus proche de la médiane — le cas typique, pas le cas
+commode.
+
+### ⚠ Ce que ça n'établit pas
+
+1. **Que la matière suivie soit la BONNE feuille.** Le centre de masse suit la bande la plus
+   forte d'une dalle de 1,8 écart inter-feuilles ; une voisine peut dominer localement. C'est
+   ce qu'un prédicat d'**identité** doit trancher — les deux ne se remplacent pas.
+2. **Que ça vaille ailleurs.** Deux spires d'un seul rouleau, celles dont le volume de surface
+   se rapatrie sans chercher où est la matière.
+3. **Qu'un traceur recalé sur cette bande ferait mieux.** Il faudrait le mesurer contre autre
+   chose que la spire publiée, et il n'y a rien d'autre.

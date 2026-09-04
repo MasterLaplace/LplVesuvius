@@ -230,6 +230,7 @@ instruments existants.
 | **A3** | ⚠⚠ **rien ne fait tourner `villa`** | le canal `approval.tif` est écrit au bon nom et au bon format ; **que la ré-optimisation l'accepte n'est pas vérifié** |
 | **A3** | ⚠⚠ **aucun `approval.tif` peint n'est publié** | donc « le calculé vaut-il l'humain » reste **non montable**. Vérifié au listing S3 (`73` §0) |
 | **A3** | le masque n'a été mesuré que sur `PHerc0139` | `PHerc0172` ne sépare qu'après exclusion du trou |
+| **A5** | ⭐⭐ le **plancher** : une spire publiée est elle-même à **30 µm** de la matière (`77` §10), donc une part des 47 µm est l'erreur du **référent** et rien ici ne peut les séparer | mesuré en coupe sur deux spires ; il faudrait une règle autre que la spire publiée |
 | **A5** | l'extraction porte **une feuille** (47 µm), pas deux | mesuré : réinjecter une spire prédite ne change **rien** — le champ est un juge, pas un générateur |
 | **A5** | ⚠ la structure angulaire de l'écart (**71 µm**, 45 % de la médiane) **n'améliore pas** l'extrapolation | mesuré : un pas par cellule mis en commun donne 52 µm à une feuille contre 47 pour le pas global. Meilleur à longue portée (1,71 contre 1,90 feuille à huit), inutile là où ça compte |
 | **A6** | la ROC de α n'est pas faite | demande de **rendre** 101 surfaces à deux profondeurs — le seul poste de ce registre qui exige le volume |
