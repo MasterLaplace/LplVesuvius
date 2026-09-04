@@ -1831,6 +1831,16 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             out.append(("tranches a agreger pour separer",
                         [f"**{sep['tranches_necessaires']}** tranches",
                          f"{sep['tranches_necessaires']} tranches de hauteur"], cde.name))
+        # ⚠ La derive de l'axe : la piste la plus seduisante, et sa refutation. Gardee pour
+        # que la prose ne puisse pas la presenter comme la cause -- ce qu'elle n'est pas.
+        der = d.get("derive_de_l_axe", {})
+        if der.get("median_feuilles"):
+            ajoute("derive de l'axe par tranche, en feuilles",
+                   der["median_feuilles"], 2, cde.name, unites=(" feuilles",))
+            out.append(("derive maximale de l'axe",
+                        [f"**{der['max_feuilles']:.1f}**",
+                         f"{der['max_feuilles']:.1f} feuilles",
+                         f"{der['max_feuilles']:.1f}".replace(".", ",")], cde.name))
         for pal in sep.get("paliers", []):
             if pal["tranches"] in (1, 2, 16):
                 out.append((f"palier {pal['tranches']} tranche(s) : vraie p90",
@@ -1897,6 +1907,16 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                         [f"**×{d['facteur_de_la_forme']:.0f}**",
                          f"facteur **{d['facteur_de_la_forme']:.0f}**",
                          f"vaut : ×{d['facteur_de_la_forme']:.0f}"], ans.name))
+    # ⚠⚠ Le balayage des tranches (`77` §7) : la refutation de la piste « derive de l'axe ».
+    # Garde parce que ces trois chiffres ont d'abord ete publies depuis un TERMINAL, et que
+    # `chiffres_sans_record` les a attrapes -- exactement ce pour quoi il existe.
+    bal = _source(racine, "balayage_tranches_PHerc0172.json")
+    if bal.exists():
+        d = json.loads(bal.read_text())
+        for pal in d["paliers"]:
+            out.append((f"balayage TRANCHES_Z={pal['tranches_z']} : vraie p90",
+                        [f"**{pal['vraie_p90']:+.3f}**", f"{pal['vraie_p90']:+.3f}",
+                         f"{pal['vraie_p90']:+.3f}".replace(".", ",")], bal.name))
     bdf = _source(racine, "bruit_dune_fenetre.json")
     if bdf.exists():
         d = json.loads(bdf.read_text())

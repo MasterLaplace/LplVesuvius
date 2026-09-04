@@ -59,6 +59,11 @@ from le_sens_des_indices import (  # noqa: E402
     SECTEURS, TRANCHES_Z, centre_de, charger, _spires,
 )
 
+ECART_INTER_FEUILLES_VX = {"PHerc0139": 154.1 / 9.362, "PHerc0172": 147.4 / 7.91}
+"""L'écart inter-feuilles de chaque rouleau, en voxels de SON régime (`76`). Sert à exprimer la
+dérive de l'axe dans l'unité qui la rend lisible : « 65 voxels » ne dit rien, « 3,5 feuilles »
+dit que l'axe traverse plusieurs feuilles entre deux tranches."""
+
 SEPARATION_ATTENDUE = {"PHerc0139": 2, "PHerc0172": None}
 """Combien de tranches il faut agréger pour que les deux populations cessent de se recouvrir,
 **par rouleau**, et `None` quand elles ne cessent jamais.
@@ -362,6 +367,24 @@ def mesurer(rouleau: str = "PHerc0139") -> dict:
     # points » -- et elle en donne la taille.
     separation = _separation(rayons, indices)
 
+    # ⚠ Un diagnostic, pas une gate : de combien l'axe se deplace d'une tranche a la suivante,
+    # en feuilles. C'est la difference la plus nette entre les deux rouleaux mesures (2,0
+    # contre 3,5 feuilles en mediane, 13,6 contre 106,6 au pire) -- et pourtant affiner les
+    # tranches ne restaure PAS la separation sur `PHerc0172`. Garde parce qu'un futur lecteur
+    # refera ce raisonnement, et doit trouver la piste ET son refus.
+    ordonnes = [centres[i] for i in sorted(centres)]
+    pas_axe = [float(np.hypot(b_[0] - a_[0], b_[1] - a_[1]))
+               for a_, b_ in zip(ordonnes, ordonnes[1:])]
+    feuille_vx = ECART_INTER_FEUILLES_VX.get(rouleau)
+    derive = dict(
+        tranches=len(ordonnes),
+        median_vx=float(np.median(pas_axe)) if pas_axe else None,
+        max_vx=float(max(pas_axe)) if pas_axe else None,
+        median_feuilles=float(np.median(pas_axe) / feuille_vx)
+        if pas_axe and feuille_vx else None,
+        max_feuilles=float(max(pas_axe) / feuille_vx) if pas_axe and feuille_vx else None,
+    )
+
     etendues = [x["etendue_90"] for x in a_exclue]
     erreurs = [x["erreur"] for x in a_exclue]
     avances = [x["avance_par_tour"] for x in a_exclue if x.get("avance_par_tour") is not None]
@@ -376,10 +399,51 @@ def mesurer(rouleau: str = "PHerc0139") -> dict:
         avance_p10=float(np.percentile(avances, 10)) if avances else None,
         avance_p90=float(np.percentile(avances, 90)) if avances else None,
         separation=separation,
+        derive_de_l_axe=derive,
         temoins_en_travers=temoins,
         defauts_connus=DEFAUTS_CONNUS,
         par_spire=a_exclue,
     )
+
+
+def balayer_tranches(rouleau: str, comptes=(24, 48, 96)) -> dict:
+    """
+    @brief La séparation reste-t-elle absente quand on affine les tranches de hauteur ?
+
+    ⚠⚠ Existe parce que la **dérive de l'axe** est la piste la plus séduisante pour expliquer
+    que `PHerc0172` ne sépare pas — son axe traverse jusqu'à 106 feuilles entre deux tranches
+    consécutives, ce qui devrait rendre les rayons d'une tranche incomparables. Affiner les
+    tranches est le remède évident, et **il ne marche pas** : c'est ce que ce balayage mesure.
+
+    ⚠ Séparé du chemin principal parce qu'il refait tout le champ à chaque compte de tranches,
+    donc il coûte trois fois une mesure ordinaire. La batterie du dépôt ne l'appelle pas ; il
+    est appelé une fois, son résultat est écrit, et la prose cite ce fichier.
+    """
+    global TRANCHES_Z
+    import le_sens_des_indices as sens  # noqa: PLC0415
+
+    dossiers = _spires(rouleau)
+    nuages = {k: v for k, v in ((k, charger(d)) for k, d in dossiers.items()) if v}
+    ancien = TRANCHES_Z
+    paliers = []
+    try:
+        for compte in comptes:
+            TRANCHES_Z = compte
+            sens.TRANCHES_Z = compte
+            bords_z, bords_t, centres = _grille(nuages)
+            rayons = {k: _rayons(n, bords_z, bords_t, centres) for k, n in nuages.items()}
+            rayons = {k: v for k, v in rayons.items() if len(v) > 50}
+            sep = _separation(rayons, sorted(rayons))
+            un = next((p for p in sep["paliers"] if p["tranches"] == 1), None)
+            paliers.append(dict(tranches_z=compte, separe=sep["separe"],
+                                tranches_necessaires=sep["tranches_necessaires"],
+                                vraie_p90=un["vraie_p90"] if un else None,
+                                saut_p10=un["saut_p10"] if un else None))
+    finally:
+        TRANCHES_Z = ancien
+        sens.TRANCHES_Z = ancien
+    return dict(rouleau=rouleau, paliers=paliers,
+                affiner_resout=any(p["separe"] for p in paliers))
 
 
 def _verifier(r: dict) -> int:
@@ -484,9 +548,23 @@ def _verifier(r: dict) -> int:
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--rouleau", default="PHerc0139")
+    p.add_argument("--balayer-tranches", type=Path,
+                   help="mesurer si affiner les tranches restaure la séparation, et l'écrire")
     p.add_argument("--verifier", action="store_true")
     p.add_argument("--json", type=Path)
     args = p.parse_args()
+
+    if args.balayer_tranches:
+        b = balayer_tranches(args.rouleau)
+        args.balayer_tranches.parent.mkdir(parents=True, exist_ok=True)
+        args.balayer_tranches.write_text(json.dumps(b, indent=2, ensure_ascii=False),
+                                         encoding="utf-8")
+        for pal in b["paliers"]:
+            print(f"  TRANCHES_Z={pal['tranches_z']:3d} : séparé={pal['separe']} · "
+                  f"vraie p90 {pal['vraie_p90']:+.3f} · saut p10 {pal['saut_p10']:+.3f}")
+        print(f"\naffiner résout : {b['affiner_resout']}")
+        print(f"écrit : {args.balayer_tranches}")
+        return 0
 
     r = mesurer(args.rouleau)
 

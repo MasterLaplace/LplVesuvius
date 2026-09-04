@@ -59,6 +59,13 @@
     "separe": false,
     "tranches_necessaires": null
   },
+  "derive_de_l_axe": {
+    "tranches": 24,
+    "median_vx": 65.03764322161373,
+    "max_vx": 1986.7183358561788,
+    "median_feuilles": 3.4901476111463,
+    "max_feuilles": 106.61426076405952
+  },
   "temoins_en_travers": {
     "1": {
       "saut": 1,

@@ -254,15 +254,26 @@ second serait une excellente nouvelle.
 le second rouleau, donc à ne jamais voir qu'il ne sépare pas. C'est la façon dont une
 limitation reste invisible.
 
-### ⚠ Ce que la cause n'est PAS
+### ⚠ Quatre causes candidates, testées — et aucune n'explique
 
-Cherché et écarté par la mesure :
+| candidat | `PHerc0139` | `PHerc0172` | verdict |
+|---|---:|---:|---|
+| couverture angulaire (médiane) | 100 % | 83 % | ⚠ **écart réel**, mais exiger ≥ 90 % ne restaure pas la séparation (+0,577 contre +0,174) |
+| **dérive de l'axe par tranche** | **2,04 feuilles** (max **13,6**) | **3,49** (max **106,6**) | ⚠⚠ **le plus gros écart** — et pourtant doubler puis quadrupler le nombre de tranches ne restaure pas (**+1,195** → **+1,133** →
+**+1,066**, `--balayer-tranches`) |
+| spires par cellule (médiane) | 36 | 27 | même ordre |
+| rayons non monotones en `k` | 5,2 % | 5,6 % | indiscernable |
+| défaut concentré sur quelques spires | — | **76 %** des spires dévient de > 0,3 | ❌ pas concentré |
 
-- **la couverture angulaire** — `PHerc0172` couvre 83 % d'un tour en médiane contre 100 % pour
-  `PHerc0139`, ce qui est une piste réelle ; mais exiger ≥ 90 % de couverture **ne restaure pas**
-  la séparation (p90 +0,577 contre p10 +0,174) ;
-- **le nombre de spires par cellule** — 27 contre 36 en médiane, du même ordre ;
-- **la monotonie des rayons** — 5,6 % de paires non monotones contre 5,2 %, indiscernable.
+⚠⚠ **La dérive de l'axe est la piste la plus séduisante et elle ne tient pas.** Sur
+`PHerc0172` l'axe traverse jusqu'à **106 feuilles** entre deux tranches consécutives, ce qui
+devrait rendre les rayons d'une tranche incomparables — mais affiner les tranches d'un facteur
+quatre ne rachète presque rien. Le diagnostic est **gardé dans le code** (`derive_de_l_axe`),
+piste **et** réfutation, parce qu'un futur lecteur refera ce raisonnement.
+
+⭐ Une seule chose ressort du classement par spire : **`w075` et `w076` sont les deux pires**,
+et c'est le défaut de référent que `76` avait trouvé sur ce rouleau. **Troisième confirmation
+indépendante** du même défaut.
 
 **La cause reste inconnue**, et c'est dit plutôt que comblé par une hypothèse. Ce qui est
 établi est le fait, et le fait est que le prédicat doit être **étalonné par rouleau**.

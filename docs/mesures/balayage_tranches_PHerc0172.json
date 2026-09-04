@@ -1,0 +1,27 @@
+{
+  "rouleau": "PHerc0172",
+  "paliers": [
+    {
+      "tranches_z": 24,
+      "separe": false,
+      "tranches_necessaires": null,
+      "vraie_p90": 1.1954262271652545,
+      "saut_p10": -0.5146285150807168
+    },
+    {
+      "tranches_z": 48,
+      "separe": false,
+      "tranches_necessaires": null,
+      "vraie_p90": 1.1331362539914687,
+      "saut_p10": -0.2862417207779769
+    },
+    {
+      "tranches_z": 96,
+      "separe": false,
+      "tranches_necessaires": null,
+      "vraie_p90": 1.0661305470986298,
+      "saut_p10": -0.17899386255321834
+    }
+  ],
+  "affiner_resout": false
+}
