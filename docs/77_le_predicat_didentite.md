@@ -453,16 +453,11 @@ et on regarde.
 Le trait bleu est le milieu de la dalle — **là où la surface publiée prétend être**. Le trait
 orange est la bande de matière, suivie. **Ils ne coïncident pas.**
 
-| spire | écart-type | amplitude p5–p95 |
-|---|---:|---:|
-| `w060` | **27.3 µm** (0.185 feuille) | **91 µm** (0.619) |
-| `w061` | **26.1 µm** (0.177 feuille) | **87 µm** (0.591) |
-| `w062` | **27.7 µm** (0.188 feuille) | **91 µm** (0.619) |
-| `w063` | **23.3 µm** (0.158 feuille) | **77 µm** (0.523) |
-| `w064` | **25.1 µm** (0.170 feuille) | **83 µm** (0.566) |
-| `w078` | **27.0 µm** (0.183 feuille) | **90 µm** (0.608) |
+⚠⚠⚠ **Les chiffres publiés ici étaient GONFLÉS de 25 à 37 %** — voir plus bas, « un
+estimateur qui enjambait deux feuilles ». Les valeurs corrigées sont dans la table des trois
+rouleaux.
 
-Six spires, dont **cinq consécutives** — donc ce n'est ni une spire mal tracée, ni un accident
+Douze piles, dont cinq consécutives — donc ce n'est ni une spire mal tracée, ni un accident
 d'un endroit du rouleau.
 
 ### ⭐⭐ Ce que ça plafonne
@@ -529,12 +524,12 @@ et reste plate, sans aucun revival à 19 couches.
 
 | rouleau | piles | voxel | écart-type | **en feuilles** |
 |---|---:|---:|---:|---:|
-| `PHerc0172` | 6 | 7,91 µm | 23,3 – 27,7 µm | **0,158 – 0,188** |
-| `PHerc1447` | 4 | 8,64 µm | 21,1 – 27,8 µm | **0,186 – 0,246** |
-| **`PHercParis4`** | 1 | 7,91 µm | **37,7 µm** | **0,218** |
+| `PHerc0172` | 6 | 7.91 µm | 17.8 – 20.1 µm | **0.121 – 0.136** |
+| `PHerc1447` | 4 | 8.64 µm | 13.8 – 16.5 µm | **0.122 – 0.146** |
+| **`PHercParis4`** | 1 | 7.91 µm | **23.8 µm** | **0.138** |
 
-⭐⭐ **En micromètres les trois ont l'air de se contredire (22 à 38) ; en feuilles ils disent la
-même chose (0,16 à 0,25).** C'est la forme sous laquelle le fait voyage — et le contrôle qui
+⭐⭐ **En micromètres les trois ont l'air de se contredire (14 à 24) ; en feuilles ils disent la
+même chose (**0,121 – 0,146**).** C'est la forme sous laquelle le fait voyage — et le contrôle qui
 comparait les micromètres a dûment échoué, ce qui est ce qui l'a fait changer.
 
 ### ⭐⭐ Comment on lit un TIFF de 30 Go sans le télécharger
@@ -623,3 +618,49 @@ en constante, avec la raison.
 mêmes spires »* échouait parce que les refus font varier les comptes — c'est-à-dire qu'il
 échouait pour **la chose même que le fichier établit**. Il asserte maintenant ce qui est
 **tenté**, pas ce qui est mesurable.
+
+---
+
+## 12. ⚠⚠⚠ Un estimateur qui enjambait deux feuilles — et le §10 était gonflé de 25 à 37 %
+
+> Trouvé en essayant de calculer α (§11) : le profil de `PHercParis4` montre **deux lobes**, et
+> le centre nominal de la dalle tombe **dans le creux entre eux**.
+
+Le §10 prend le centre de masse **sur toute la dalle**. Or ces dalles couvrent **1,8 à 3,0
+écarts inter-feuilles** — donc **9 des 12 contiennent deux à quatre feuilles**, compté en
+dénombrant les lobes du profil :
+
+| pile | portée | lobes |
+|---|---:|---:|
+| `PHerc0172_*` | 1,8 écart | 1 à 2 |
+| `PHerc1447_*` | 2,4 écarts | 2 à 3 |
+| `PHercParis4_w010-027` | **3,0 écarts** | **4** |
+
+**Un centre de masse pris sur plusieurs lobes atterrit dans le creux entre eux**, c'est-à-dire
+dans l'interstice — ce qui gonfle l'écart mesuré.
+
+### La correction, mesurée
+
+Borner la recherche à **±0,5 écart** — la plus grande fenêtre qui ne peut pas contenir deux
+feuilles, donc pas un réglage :
+
+| rouleau | avant | après | |
+|---|---:|---:|---:|
+| `PHerc0172` | 23,3 – 27,7 µm | **17,8 – 20,1** | −27 % |
+| `PHerc1447` | 21,1 – 27,8 µm | **13,8 – 16,5** | −37 % |
+| `PHercParis4` | 37,7 µm | **23,8** | −37 % |
+
+⭐⭐ **Et `PHercParis4` n'était pas un rouleau à part** : son 37,7 aberrant était mon estimateur
+qui enjambait **deux feuilles de plus** que les autres, sa dalle étant la plus profonde. En
+feuilles les trois passent de 0,158 – 0,246 à **0,121 – 0,146** — beaucoup plus serré.
+
+### ⭐ Et un contrôle a changé de sens, ce qui RENFORCE le résultat
+
+Un contrôle d'une passe précédente assertait que *l'écart **décroît** avec l'agrégation
+spatiale*, donc qu'une part était du bruit de pixel (27 µm au pixel, 21 à la cellule). Une fois
+l'estimateur borné, **il ne décroît plus** : 19,2 au pixel contre 19,9 à 20 px.
+
+**Ce qui décroissait était le biais d'enjambement**, qui se moyennait sur une cellule. Ce qui
+reste est un déplacement **réel et spatialement cohérent** de la surface — exactement ce qu'un
+traceur pourrait corriger, et exactement ce que du bruit ne serait pas.
+

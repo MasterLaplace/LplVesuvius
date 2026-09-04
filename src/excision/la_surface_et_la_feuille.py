@@ -248,29 +248,49 @@ def _charger(nom: str, budget_mo: float | None = None,
     return pile
 
 
-def _suivre(pile: np.ndarray, lissage: int = LISSAGE) -> tuple[np.ndarray, np.ndarray, float]:
+def _suivre(pile: np.ndarray, lissage: int = LISSAGE,
+            demi_fenetre: int | None = None) -> tuple[np.ndarray, np.ndarray, float]:
     """
     @brief Le centre de masse en profondeur de la bande de matière, colonne par colonne.
+
+    ⚠⚠⚠ `demi_fenetre` BORNE LA RECHERCHE À UNE SEULE FEUILLE, ET SON ABSENCE A GONFLÉ UN
+    CHIFFRE PUBLIÉ. Les dalles rendues ici couvrent **1,8 à 3,0 écarts inter-feuilles**, donc
+    9 des 12 contiennent **deux à quatre** feuilles — vérifié en comptant les lobes du profil.
+    Un centre de masse pris sur toute la dalle enjambe alors plusieurs lobes et atterrit **dans
+    le creux entre eux**, c'est-à-dire dans l'interstice, ce qui gonfle l'écart mesuré.
+
+    Mesuré : la borne à ±0,5 écart fait tomber l'écart de **25 à 37 %** sur les douze piles, et
+    ramène `PHercParis4` de 37,7 à 23,8 µm — il n'était pas un rouleau à part, c'était mon
+    estimateur qui enjambait deux feuilles de plus que les autres.
+
+    ⚠ La borne est un **demi-écart**, pas un réglage : c'est la plus grande fenêtre qui ne peut
+    pas contenir deux feuilles. La choisir plus petite améliorerait le chiffre sans raison.
 
     Rend le centre de masse, le masque des colonnes qui portent de la matière, et l'intensité
     médiane lue au centre de masse.
     """
     from scipy.ndimage import uniform_filter
 
-    n = pile.shape[0]
+    n_total = pile.shape[0]
     # ⚠ « Il y a de la matiere ici » se lit sur la VARIATION en profondeur autant que sur le
     # niveau : une colonne de remplissage est plate, pas forcement nulle (piege nº 27).
     valide = (pile.max(0) > 0) & (pile.std(0) > 2)
+    decalage = 0
+    if demi_fenetre is not None:
+        centre = n_total // 2
+        a_, b_ = max(0, centre - demi_fenetre), min(n_total, centre + demi_fenetre + 1)
+        pile, decalage = pile[a_:b_], a_
+    n = pile.shape[0]
     # ⚠ `uniform_filter` de taille 1 est l'identite, mais il COPIE quand meme -- un doublement
     # de la pointe memoire pour rien. Avec `LISSAGE = 1` (le defaut mesure), on ne l'appelle pas.
     lisse = (pile if lissage <= 1
              else uniform_filter(pile, size=(1, lissage, lissage)))
     seuil = float(np.percentile(lisse[:, valide], FOND_PERCENTILE)) if valide.any() else 0.0
     poids = np.clip(lisse - seuil, 0, None)
-    z = np.arange(n)[:, None, None]
+    z = np.arange(n)[:, None, None] + decalage
     centre = (poids * z).sum(0) / np.clip(poids.sum(0), 1e-9, None)
-    lu = np.take_along_axis(lisse, np.clip(np.round(centre)[None].astype(int), 0, n - 1),
-                            axis=0)[0]
+    lu = np.take_along_axis(
+        lisse, np.clip(np.round(centre)[None].astype(int) - decalage, 0, n - 1), axis=0)[0]
     return centre, valide, float(np.median(lu[valide])) if valide.any() else 0.0
 
 
@@ -287,9 +307,11 @@ def mesurer() -> dict:
             vues[empreinte] = nom
         voxel, ecart = _regime(nom)
         pile = _charger(nom)
+        # ⚠ La borne vaut UN DEMI-ECART, exprimee en couches du regime de CE rouleau.
+        demi_fenetre = int(round(ecart / voxel / 2))
         if pile is None:
             continue
-        centre, valide, intensite = _suivre(pile)
+        centre, valide, intensite = _suivre(pile, demi_fenetre=demi_fenetre)
         c = centre[valide]
         if c.size < 1000:
             continue
@@ -613,13 +635,21 @@ def _verifier(r: dict) -> int:
           r["erreur_du_champ_um"] < 3 * r["ecart_type_median_um"],
           f"champ {r['erreur_du_champ_um']:.0f} µm contre référent "
           f"{r['ecart_type_median_um']:.0f} µm")
-        # ⚠⚠ L'ECHELLE, et elle change la reponse : le champ agrege sur une cellule, donc
-        # c'est l'ecart a CETTE echelle qui le plafonne. Au pixel il vaut 27 µm, a la cellule
-        # 21 -- donc une plus petite part des 49 lui revient que je ne l'avais ecrit.
-        v("l'écart décroît avec l'échelle d'agrégation",
-          r["ecart_a_l_echelle_du_champ_um"] < r["ecart_type_median_um"],
+        # ⚠⚠⚠ ET CE CONTROLE A CHANGE DE SENS QUAND L'ESTIMATEUR A ETE BORNE A UNE FEUILLE.
+        # Il disait « l'ecart DECROIT avec l'agregation », donc qu'une part etait du bruit de
+        # pixel : au pixel 27 µm, a la cellule 21. Une fois le centre de masse empeche
+        # d'enjamber deux feuilles, il ne decroit plus (19,2 au pixel contre 19,9 a 20 px).
+        #
+        # ⭐ Ce n'est pas une regression, c'est un renforcement : ce qui decroissait etait le
+        # BIAIS d'enjambement, qui se moyennait sur une cellule. Ce qui reste est un
+        # deplacement REEL et spatialement COHERENT de la surface -- exactement ce qu'un
+        # traceur pourrait corriger, et exactement ce que du bruit ne serait pas.
+        ecart_relatif = abs(r["ecart_a_l_echelle_du_champ_um"]
+                            - r["ecart_type_median_um"]) / r["ecart_type_median_um"]
+        v("l'écart ne décroît PAS avec l'agrégation — il est spatialement cohérent",
+          ecart_relatif < 0.15,
           f"{r['ecart_a_l_echelle_du_champ_um']:.1f} µm à {r['echelle_du_champ_px']} px "
-          f"contre {r['ecart_type_median_um']:.1f} au pixel")
+          f"contre {r['ecart_type_median_um']:.1f} au pixel, soit {ecart_relatif * 100:.0f} % d'écart")
         # ⚠⚠⚠ CE QUI VALIDE LA DECOMPOSITION : sans ca, « independantes » serait une hypothese
         # de confort. Un ecart systematique s'annulerait dans les differences du champ.
         vo = r.get("voisines") or {}

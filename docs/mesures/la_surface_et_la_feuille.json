@@ -16,13 +16,13 @@
         "51": 17.7236314082993
       },
       "part_de_matiere": 1.0,
-      "centre_median": 16.2,
-      "ecart_type_um": 27.28156190392422,
-      "ecart_type_feuilles": 0.1850852232287939,
-      "amplitude_um": 91.1690352745762,
-      "amplitude_feuilles": 0.6185144862589973,
+      "centre_median": 15.491228070175438,
+      "ecart_type_um": 20.109184482882974,
+      "ecart_type_feuilles": 0.13642594628821555,
+      "amplitude_um": 66.28940115067122,
+      "amplitude_feuilles": 0.44972456682951983,
       "brut_ecart_type_feuilles": 0.5108907805833278,
-      "intensite_bande": 155.0,
+      "intensite_bande": 161.0,
       "fond": 129.0
     },
     {
@@ -38,13 +38,13 @@
         "51": 15.794952540725172
       },
       "part_de_matiere": 1.0,
-      "centre_median": 15.934793030138813,
-      "ecart_type_um": 26.068272947657235,
-      "ecart_type_feuilles": 0.17685395486877364,
-      "amplitude_um": 87.10643326070965,
-      "amplitude_feuilles": 0.59095273582571,
+      "centre_median": 15.807560137457045,
+      "ecart_type_um": 19.65834983752132,
+      "ecart_type_feuilles": 0.13336736660462226,
+      "amplitude_um": 66.22674761399787,
+      "amplitude_feuilles": 0.4492995089145039,
       "brut_ecart_type_feuilles": 0.5069572806390624,
-      "intensite_bande": 159.0,
+      "intensite_bande": 163.0,
       "fond": 131.0
     },
     {
@@ -60,13 +60,13 @@
         "51": 18.982303730994886
       },
       "part_de_matiere": 1.0,
-      "centre_median": 15.015593528751424,
-      "ecart_type_um": 27.73279015319956,
-      "ecart_type_feuilles": 0.1881464732238776,
-      "amplitude_um": 91.29824833166381,
-      "amplitude_feuilles": 0.6193911013002972,
+      "centre_median": 15.065625,
+      "ecart_type_um": 19.188787501679762,
+      "ecart_type_feuilles": 0.13018173338995767,
+      "amplitude_um": 62.69641754073143,
+      "amplitude_feuilles": 0.4253488299913937,
       "brut_ecart_type_feuilles": 0.48615548693654853,
-      "intensite_bande": 163.0,
+      "intensite_bande": 166.0,
       "fond": 130.0
     },
     {
@@ -82,13 +82,13 @@
         "51": 10.642558841236632
       },
       "part_de_matiere": 1.0,
-      "centre_median": 16.658404641751382,
-      "ecart_type_um": 23.269019613232363,
-      "ecart_type_feuilles": 0.1578630909988627,
-      "amplitude_um": 77.1364500110724,
-      "amplitude_feuilles": 0.5233137721239647,
+      "centre_median": 16.075819672131146,
+      "ecart_type_um": 17.79436109578819,
+      "ecart_type_feuilles": 0.12072158138255216,
+      "amplitude_um": 58.76762880946878,
+      "amplitude_feuilles": 0.39869490372773936,
       "brut_ecart_type_feuilles": 0.5332655599668827,
-      "intensite_bande": 157.0,
+      "intensite_bande": 161.0,
       "fond": 133.0
     },
     {
@@ -104,13 +104,13 @@
         "51": 14.245535951275997
       },
       "part_de_matiere": 1.0,
-      "centre_median": 15.985294117647058,
-      "ecart_type_um": 25.069156867896933,
-      "ecart_type_feuilles": 0.17007569109835097,
-      "amplitude_um": 83.45820725476344,
-      "amplitude_feuilles": 0.5662022201815701,
+      "centre_median": 15.705630754222303,
+      "ecart_type_um": 19.335535251014008,
+      "ecart_type_feuilles": 0.13117730835151972,
+      "amplitude_um": 64.81365691541941,
+      "amplitude_feuilles": 0.439712733483171,
       "brut_ecart_type_feuilles": 0.5377599968607581,
-      "intensite_bande": 156.0,
+      "intensite_bande": 161.0,
       "fond": 133.0
     },
     {
@@ -126,13 +126,13 @@
         "51": 17.304247641420314
       },
       "part_de_matiere": 0.5876379013061523,
-      "centre_median": 15.648111332007952,
-      "ecart_type_um": 27.00451420525864,
-      "ecart_type_feuilles": 0.1832056594657981,
-      "amplitude_um": 89.66964651247386,
-      "amplitude_feuilles": 0.6083422422827263,
+      "centre_median": 15.537753222836097,
+      "ecart_type_um": 19.76521749187808,
+      "ecart_type_feuilles": 0.13409238461247,
+      "amplitude_um": 65.42959972645652,
+      "amplitude_feuilles": 0.4438914499759601,
       "brut_ecart_type_feuilles": 0.5021733420092208,
-      "intensite_bande": 161.0,
+      "intensite_bande": 166.0,
       "fond": 130.0
     },
     {
@@ -148,13 +148,13 @@
         "51": 14.847491616227497
       },
       "part_de_matiere": 0.5253956417267379,
-      "centre_median": 14.914593229178392,
-      "ecart_type_um": 22.54062790144434,
-      "ecart_type_feuilles": 0.19947458319862246,
-      "amplitude_um": 77.04089539763777,
-      "amplitude_feuilles": 0.6817778353773254,
+      "centre_median": 14.361386138613861,
+      "ecart_type_um": 14.610362237705232,
+      "ecart_type_feuilles": 0.12929524104163923,
+      "amplitude_um": 48.54562719916858,
+      "amplitude_feuilles": 0.4296073203466246,
       "brut_ecart_type_feuilles": 0.6506940418917493,
-      "intensite_bande": 110.0,
+      "intensite_bande": 118.0,
       "fond": 59.0
     },
     {
@@ -170,13 +170,13 @@
         "51": 13.853608778853545
       },
       "part_de_matiere": 0.4878277796862476,
-      "centre_median": 14.765423242467719,
-      "ecart_type_um": 22.152673693396856,
-      "ecart_type_feuilles": 0.19604136011855625,
-      "amplitude_um": 73.60807106132233,
-      "amplitude_feuilles": 0.6513988589497551,
+      "centre_median": 14.076682316118935,
+      "ecart_type_um": 13.800576845846027,
+      "ecart_type_feuilles": 0.12212899863580555,
+      "amplitude_um": 43.510622009569374,
+      "amplitude_feuilles": 0.3850497522970741,
       "brut_ecart_type_feuilles": 0.6773626710248035,
-      "intensite_bande": 118.0,
+      "intensite_bande": 125.0,
       "fond": 74.0
     },
     {
@@ -192,13 +192,13 @@
         "51": 22.67648792930029
       },
       "part_de_matiere": 0.5045817721894117,
-      "centre_median": 15.09963861641714,
-      "ecart_type_um": 27.801713736082228,
-      "ecart_type_feuilles": 0.24603286492108167,
-      "amplitude_um": 94.40242622542404,
-      "amplitude_feuilles": 0.8354197011099472,
+      "centre_median": 13.997916666666667,
+      "ecart_type_um": 16.526974277757443,
+      "ecart_type_feuilles": 0.1462564095376765,
+      "amplitude_um": 50.14113066655206,
+      "amplitude_feuilles": 0.4437268200579828,
       "brut_ecart_type_feuilles": 0.7058624990390291,
-      "intensite_bande": 112.0,
+      "intensite_bande": 118.0,
       "fond": 60.0
     },
     {
@@ -214,13 +214,13 @@
         "51": 12.682977577625458
       },
       "part_de_matiere": 0.9202777777777778,
-      "centre_median": 14.818928230439157,
-      "ecart_type_um": 21.07099380865977,
-      "ecart_type_feuilles": 0.18646897175805108,
-      "amplitude_um": 70.28638647941628,
-      "amplitude_feuilles": 0.6220034201718255,
+      "centre_median": 14.483094421527877,
+      "ecart_type_um": 14.283385474882905,
+      "ecart_type_feuilles": 0.1264016413706452,
+      "amplitude_um": 47.953732679107034,
+      "amplitude_feuilles": 0.42436931574431,
       "brut_ecart_type_feuilles": 0.6459767086414526,
-      "intensite_bande": 111.0,
+      "intensite_bande": 118.0,
       "fond": 60.0
     },
     {
@@ -236,25 +236,25 @@
         "51": 18.01735213470438
       },
       "part_de_matiere": 1.0,
-      "centre_median": 31.720866932991143,
-      "ecart_type_um": 37.73368434556196,
-      "ecart_type_feuilles": 0.2181137823442888,
-      "amplitude_um": 120.17044676665256,
-      "amplitude_feuilles": 0.6946268599228471,
+      "centre_median": 31.03817285327257,
+      "ecart_type_um": 23.828398850414487,
+      "ecart_type_feuilles": 0.13773640953996813,
+      "amplitude_um": 73.08520637534642,
+      "amplitude_feuilles": 0.4224578403199215,
       "brut_ecart_type_feuilles": 0.8733841342493295,
-      "intensite_bande": 32130.0,
+      "intensite_bande": 41668.0,
       "fond": 18344.0
     }
   ],
-  "ecart_type_median_um": 26.068272947657235,
-  "ecart_type_median_feuilles": 0.17685395486877364,
+  "ecart_type_median_um": 19.188787501679762,
+  "ecart_type_median_feuilles": 0.13018173338995767,
   "correction_du_budget": {
     "rouleau_de_la_chaine": "PHercParis4",
     "voxel_um": 2.4,
     "provenance_du_voxel_reconstructible": false,
-    "referent_en_feuilles": 0.18646897175805108,
-    "referent_en_feuilles_min": 0.1578630909988627,
-    "referent_en_feuilles_max": 0.24603286492108167,
+    "referent_en_feuilles": 0.13117730835151972,
+    "referent_en_feuilles_min": 0.12072158138255216,
+    "referent_en_feuilles_max": 0.1462564095376765,
     "rouleaux_mesures": [
       "PHerc0172",
       "PHerc1447",
@@ -264,12 +264,12 @@
     "ecart_mesure_um": 69.17466298376647,
     "referent_mesure_sur_ce_rouleau": true,
     "referents_par_rouleau": {
-      "PHerc0172": 26.53639357645794,
-      "PHerc1447": 22.346650797420597,
-      "PHercParis4": 37.73368434556196
+      "PHerc0172": 19.496942544267664,
+      "PHerc1447": 14.446873856294069,
+      "PHercParis4": 23.828398850414487
     },
-    "referent_conjecture_um": 26.53639357645794,
-    "ecart_corrige_conjecture_um": 63.88234352990654
+    "referent_conjecture_um": 19.496942544267664,
+    "ecart_corrige_conjecture_um": 66.37019835998079
   },
   "erreur_du_champ_um": 49.022208599709224,
   "rouleau": "PHerc0172",

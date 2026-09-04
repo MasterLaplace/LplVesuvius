@@ -237,9 +237,14 @@ Lues par fenêtre (`src/volume/couches_distantes.py`, 1,35 Gio au lieu de 30,5 G
 
 | rouleau | en feuilles |
 |---|---:|
-| `PHerc0172` | 0,158 – 0,188 |
-| `PHerc1447` | 0,186 – 0,246 |
-| **`PHercParis4`** *(celui de `44`)* | **0,218** |
+| `PHerc0172` | **0,121 – 0,136** |
+| `PHerc1447` | **0,122 – 0,146** |
+| **`PHercParis4`** *(celui de `44`)* | **0,138** |
+
+⚠⚠ **Chiffres corrigés le 2026-09-04** (`77` §12) : les premiers étaient **gonflés de 25 à
+37 %** par un centre de masse qui **enjambait deux feuilles** — les dalles couvrent 1,8 à 3,0
+écarts, donc 9 sur 12 en contiennent plusieurs. Borné à ±0,5 écart, `PHercParis4` cesse d'être
+aberrant (37,7 → 23,8 µm) : ce n'était pas un rouleau à part, c'était l'estimateur.
 
 ⚠⚠⚠ **Mais on ne compose PAS les micromètres.** `couverture_publiee.py` pose
 `UM_PAR_VOXEL = 2.4` justifié par cohérence **interne**, jamais contre un volume déclaré — et
