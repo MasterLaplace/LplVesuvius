@@ -2526,7 +2526,7 @@ Dépôt : `/home/masterlaplace/LplVesuvius`. Sept documents lus du premier au de
 ---
 
 ### docs/38_ce_qui_bouge_avec_la_fenetre.md
-- **lignes** : 203
+- **lignes** : 274
 - **nature** : RESULTAT
 - **résumé** : Trois hypothèses réfutées le même jour (la trace est à une spire de sa feuille, puis à deux, puis c'est une question de forme) ont un motif commun — la mesure suit le **réglage** au lieu de suivre le papyrus — et ce motif devient l'instrument central du dépôt : le test de convergence, noté α. Le document établit qu'un segment officiel converge (α = +0,00) tandis que notre trace suit la fenêtre (α = +1,01), c'est-à-dire qu'il n'y a **aucune feuille à portée** même à quatre spires, et il valide ce verdict à l'œil (une face de feuille contre des tranches d'empilement). Il en tire une reformulation de l'objectif (faire converger la mesure, pas réduire l'écart) et une cause candidate ajoutée le lendemain, dont une première version accusant à tort le masque binaire est corrigée.
 - **conclusions extractibles — définition de l'instrument α** :
@@ -2563,6 +2563,19 @@ Dépôt : `/home/masterlaplace/LplVesuvius`. Sept documents lus du premier au de
 
   - Reproduction : `bash src/outils/convergence_des_essais.sh` → `docs/mesures/convergence_<essai>.json`,
     `essai_ng2` et `essai_scale1` par défaut, c'est-à-dire les deux lignes du tableau.
+  - ⚠⚠⚠ Le sens de la normale, cause candidate ÉLIMINÉE — et l'expérience qui l'a testée ne
+    pouvait pas trancher : le dépouillement compare l'écart au pic depuis la couche tracée,
+    prise au MILIEU de la pile (20 de 41), et renverser l'ordre envoie p sur n−1−p, donc
+    |n−1−p − m| = |p − m| quand m = (n−1)/2. L'écart est identique **par construction**, deux
+    des trois verdicts du script sont inatteignables, et la mesure tenait sur UNE fenêtre.
+  - La réponse de fond, lue dans les rendus déjà sur disque : `--flip-normals` **renumérote**
+    la pile — **41/41** couches identiques après renversement, **1/41** à l'endroit (le milieu).
+    Donc la fenêtre est centrée sur la surface et il n'existe pas de « mauvais côté » :
+    l'hypothèse n'est pas infirmée, elle est **inexprimable** avec ce drapeau.
+    ⚠ Les DEUX comptes sont requis — une pile constante satisferait le premier seul.
+  - Reproduction : `uv run python src/rendu/le_drapeau_de_normale.py data/sens_normale/rendu_normal
+    data/sens_normale/rendu_inverse --json docs/mesures/le_drapeau_de_normale.json`, puis
+    `figure_drapeau_de_normale.py` (12 + 4 contrôles).
 ### docs/39_le_seam_de_correction.md
 - **lignes** : 104
 - **nature** : PROCEDE
@@ -3657,7 +3670,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/55_les_murs_et_leurs_causes.md
-- **lignes** : 103
+- **lignes** : 104
 - **nature** : PROCEDE
 - **résumé** : Document **rendu** depuis `docs/registres/murs_et_causes.tsv` par `uv run python src/depot/murs_et_causes.py --rendre`, et non écrit à la main ; sa batterie vérifie que chaque ligne pointe vers un document contenant encore son ancre. Il recense **30 causes candidates sur 4 murs** : 19 éliminées, 10 confirmées, 1 bloquée, chacune avec la mesure qui l'a tranchée et le document d'origine. Sa thèse de forme est qu'un mur est un espace de causes dont on retire une entrée à la fois, et que la liste des causes éliminées — non celle des tâches — est le seul progrès mesurable. Une seule cause reste non tranchée, et elle est bloquée. (⚠ Note de lecture : l'en-tête compte 19 éliminations quand le §final écrit « les treize éliminations de ce document » ; le document ne signale pas l'écart. De même, il ne contient aucune cause ⏳ *ouverte* alors que son propre tableau de symboles définit ce statut.)
 - **conclusions extractibles** : *(les murs recensés, avec pour chacun les causes éliminées et celles qui restent ouvertes)*

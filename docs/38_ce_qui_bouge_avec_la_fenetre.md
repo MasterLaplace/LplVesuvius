@@ -185,6 +185,77 @@ normales — soit le moins radial (α = +0,65). L'établir demande de relancer l
 avec `sdt_weight` puis avec les fibres, et de voir la convergence changer :
 `src/outils/leviers_de_perte.sh`.
 
+## ⚠⚠⚠ Le sens de la normale : une cause candidate que l'expérience ne pouvait pas trancher
+
+Ce document mesure que le pic de matière est **au bord** de la pile rendue, à toutes les
+fenêtres. Une explication évidente restait : et si nos maillages avaient leurs normales dans
+l'autre sens, de sorte que la pile parte du **mauvais côté** de la surface ? `vc_render_tifxyz`
+porte un drapeau `--flip-normals`, donc la question paraissait testable — rendre la même
+surface deux fois, avec et sans, et comparer.
+
+`src/outils/sens_de_la_normale.sh` monte exactement ça, et il a tourné. Verdict imprimé :
+*« les deux sens se valent »*. ⚠⚠ **Et ce verdict est le seul que l'expérience savait rendre.**
+
+```
+bash src/outils/sens_de_la_normale.sh    # → data/sens_normale/comparaison.json
+```
+
+⚠ Reprenable et donc bon marché aujourd'hui : les deux profils étant sur disque, la commande
+saute les rendus et ne refait que le dépouillement. Corrigé le 2026-09-05, elle n'imprime plus
+un verdict mais **la raison pour laquelle elle n'en a pas** — laisser une tautologie s'afficher
+comme une mesure était le vrai défaut.
+
+Le dépouillement compare l'écart entre le pic et la **couche tracée**, et cette couche est
+prise au milieu de la pile (`--traced-layer $((COUCHES / 2))`, soit **20 de 41**). Renverser
+l'ordre envoie la couche $p$ sur $n-1-p$, donc
+
+$$|(n-1-p) - m| = |p - m| \quad \text{lorsque } m = \frac{n-1}{2}$$
+
+**l'écart est identique par construction, quel que soit le volume.** Des trois verdicts que le
+script sait imprimer — « inverser divise l'écart », « le sens actuel est le bon », « les deux se
+valent » — deux sont **inatteignables**. Et la mesure tenait de toute façon sur **une seule
+fenêtre** (`windows: 1`), le dépouillement à `--step 200` n'en trouvant qu'une sur une trace de
+0,98 cm².
+
+> ⭐ C'est le péché cardinal du dépôt sous un costume de plus : non pas une vérification
+> incapable d'échouer, mais une **expérience dont l'arithmétique fixe la réponse avant qu'elle
+> ne tourne**.
+
+### ⭐⭐⭐ Et la question de fond a une réponse, plus forte que celle qui était visée
+
+Elle se lit dans les rendus déjà sur disque, sans rien relancer : les deux piles portent-elles
+les mêmes images ?
+
+![ce que --flip-normals fait vraiment](images/38_drapeau_de_normale.png)
+
+Figure : `src/figures/figure_drapeau_de_normale.py`, depuis
+`docs/mesures/le_drapeau_de_normale.json`.
+
+```
+uv run python src/rendu/le_drapeau_de_normale.py \
+    data/sens_normale/rendu_normal data/sens_normale/rendu_inverse \
+    --json docs/mesures/le_drapeau_de_normale.json
+uv run python src/figures/figure_drapeau_de_normale.py
+```
+
+| appariement | couches identiques |
+|---|---:|
+| `A[k]` contre `B[n−1−k]` — la pile renversée | **41 / 41**, octet pour octet |
+| `A[k]` contre `B[k]` — la pile telle quelle | **1 / 41** — le milieu, que le renversement laisse en place |
+
+⚠ Les **deux** comptes sont nécessaires. « Renversé, tout coïncide » serait aussi vrai d'une
+pile constante ; c'est le second qui écarte ce faux positif.
+
+⭐⭐⭐ **`--flip-normals` renumérote la pile, il ne la déplace pas.** La fenêtre est donc
+**centrée sur la surface** dans les deux cas, et il n'existe aucun « mauvais côté » où elle
+aurait pu être. L'hypothèse n'est pas *non confirmée* : elle est **inexprimable** avec ce
+drapeau. La cause est ailleurs, et [`25`](25_une_graine_choisie_sur_la_planeite.md) dit où —
+la surface est posée **en travers** de l'empilement, ce qu'aucun sens de normale ne répare.
+
+⚠ Ce qui reste ouvert, et qui n'est pas ce qu'on croyait tester : savoir si nos maillages ont
+la même **convention** d'orientation que ceux du concours reste une question légitime — elle
+demande simplement un autre instrument que ce drapeau, qui n'y touche pas.
+
 ## Reproduire
 
 ```bash

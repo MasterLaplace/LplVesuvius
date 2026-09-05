@@ -2,8 +2,8 @@
 
 > ⚠⚠ **Ce document est RENDU, pas écrit.** Sa source est
 > [`docs/registres/murs_et_causes.tsv`](registres/murs_et_causes.tsv) et son producteur est
-> `uv run python src/depot/murs_et_causes.py --rendre`. L'éditer à la main serait perdre la
-> modification au rendu suivant — et surtout perdre la garde : la batterie vérifie que
+> `uv run python src/depot/murs_et_causes.py --rendre`. L'éditer à la main serait perdre
+> la modification au rendu suivant — et surtout perdre la garde : la batterie vérifie que
 > **chaque ligne pointe vers un document qui contient encore son ancre**.
 
 Un mur n'est pas une tâche, c'est un **espace de causes** dont on retire une entrée à
@@ -11,7 +11,7 @@ la fois. Une feuille de route qui liste des tâches laisse croire qu'on avance q
 tourne ; celle-ci liste des causes **éliminées**, et montre l'espace rétrécir. C'est le
 seul progrès mesurable sur un problème que personne n'a résolu.
 
-**30 causes candidates** sur **4 murs** : ❌ **19** éliminées · ✅ **10** confirmées · 🔒 **1** bloquée
+**31 causes candidates** sur **4 murs** : ❌ **20** éliminées · ✅ **10** confirmées · 🔒 **1** bloquée
 
 | symbole | verdict | ce que ça veut dire |
 |---|---|---|
@@ -29,7 +29,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 
 ## 1. Le tracé ne suit pas de feuille
 
-❌ 6 éliminées · ✅ 5 confirmées · 🔒 1 bloquée
+❌ 7 éliminées · ✅ 5 confirmées · 🔒 1 bloquée
 
 | cause candidate | | ce qui a été mesuré | où |
 |---|---|---|---|
@@ -44,6 +44,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | le plafond de générations | ❌ | budget ×3,3 : aire ×11,5, α +0,89 → +0,95, sous le bruit du tireur (0,16) | [`50`](50_le_rendu_attendait_la_memoire.md) |
 | le niveau de pyramide | ❌ | 0,02 d'écart entre niveaux 0 et 1, pour une résolution de 0,20 | [`50`](50_le_rendu_attendait_la_memoire.md) |
 | la prédiction de surface (ps256 contre m7) | ❌ | lues correctement, les deux familles sont indiscernables : 0,159 contre 0,164 – 0,198 | [`54`](54_cinq_rendus_vides.md) |
+| le sens de la normale du rendu (--flip-normals) | ❌ | le drapeau RENUMÉROTE la pile : 41/41 couches identiques après renversement, 1/41 à l'endroit — la fenêtre est centrée sur la surface, il n'y a pas de « mauvais côté » | [`38`](38_ce_qui_bouge_avec_la_fenetre.md) |
 | comparer le relief d'une trace L2 à une trace L0 | 🔒 | à aire égale un maillage L2 rend quatre fois moins de pixels de côté, donc les deux ne tiennent jamais dans la même fenêtre d'analyse — le relief ne peut pas les départager | [`54`](54_cinq_rendus_vides.md) |
 
 ## 2. Les patchs publiés ne se recollent pas

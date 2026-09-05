@@ -19,6 +19,20 @@
 # ⚠ On rend la MEME surface deux fois, avec et sans le drapeau, dans la MEME fenetre. Une
 # comparaison a fenetre differente ne dirait rien, `38` l'a etabli.
 #
+# ⚠⚠⚠ CE QUE CE SCRIPT NE PEUT PAS TRANCHER, et il faut le lire avant ses chiffres. Le
+# depouillement compare l'ecart entre le pic et la COUCHE TRACEE, prise au milieu de la pile
+# (`--traced-layer $((COUCHES / 2))`, 20 de 41). Renverser l'ordre envoie la couche p sur
+# n-1-p, donc |n-1-p - m| = |p - m| lorsque m = (n-1)/2 : l'ecart est identique PAR
+# CONSTRUCTION, quel que soit le volume. Les trois verdicts ci-dessous existent, un seul est
+# atteignable, et c'est celui qui s'imprime. Voir `38` § « Le sens de la normale ».
+#
+# ⭐⭐ La question de fond se tranche autrement, et elle EST tranchee : les deux rendus portent
+# les memes images en ordre inverse (41/41 identiques apres renversement, 1/41 a l'endroit),
+# donc le drapeau RENUMEROTE la pile sans la deplacer. La fenetre est centree sur la surface
+# et il n'existe pas de « mauvais cote ». C'est ce que mesure, sur les rendus produits ici :
+#     uv run python src/rendu/le_drapeau_de_normale.py \
+#         data/sens_normale/rendu_normal data/sens_normale/rendu_inverse
+#
 #   ./src/outils/lancer.sh --fond src/outils/sens_de_la_normale.sh [dest] [plat] [couches]
 set -u
 cd "$(dirname "$0")/../.." || exit 2
@@ -87,8 +101,15 @@ if len(res) == 2:
     elif n < i / 2:
         print("\n  ✅ Le sens actuel est le bon — inverser aggrave. La cause est ailleurs.")
     else:
-        print("\n  ⚠ Les deux sens se valent. Le pic est au bord dans les DEUX directions,")
-        print("     donc il n'y a pas de feuille de part ni d'autre : la surface est bien")
-        print("     posée en travers, et la normale n'y est pour rien.")
+        # ⚠⚠ C'est la SEULE branche atteignable : la couche tracée étant au milieu, le
+        # renversement préserve l'écart pour tout pic. Ce « les deux se valent » n'est donc
+        # pas une mesure, c'est une identité — et l'afficher comme un verdict a fait passer
+        # une tautologie pour un résultat pendant tout un lot.
+        print("\n  ⚠⚠ Les deux écarts sont égaux PAR CONSTRUCTION : la couche tracée est au")
+        print("     milieu de la pile, donc renverser l'ordre préserve |pic − tracée|. Cette")
+        print("     comparaison ne peut pas trancher le sens de la normale, quelle que soit")
+        print("     la surface. Ce qui tranche est l'identité des deux piles :")
+        print("       uv run python src/rendu/le_drapeau_de_normale.py \\")
+        print(f"           {dest}/rendu_normal {dest}/rendu_inverse")
     print(f"  écrit : {dest}/comparaison.json")
 PY
