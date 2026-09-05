@@ -121,6 +121,36 @@ on écrit du calcul lourd ; ce n'était pas le cas ici.
 (19 témoins), depuis `docs/mesures/excision_samples.tsv` — les chiffres de tête ci-dessous sortent
 désormais d'un calcul qui est **dans l'arbre**, et non d'une exécution perdue.
 
+### Les deux commandes, ajoutées le 2026-09-05
+
+⚠⚠ **Elles n'étaient écrites nulle part**, alors que les deux outils existent depuis le début de
+cet arc : `src/excision/measure.py` échantillonne, `src/excision/analyse.py` tranche. Un résultat
+publié dont le producteur n'a de commande dans aucun document est une mesure que personne ne peut
+refaire — et c'est ce que la tâche `D3` de [`75`](75_registre_des_taches.md) traque.
+
+**Le test, reproductible hors ligne** (l'échantillon est dans l'arbre) :
+
+```
+uv run python src/excision/analyse.py docs/mesures/excision_samples.tsv
+```
+
+> ⭐ Vérifié le 2026-09-05 : rend **exactement** les chiffres du tableau ci-dessus — 52 segments,
+> 75 810 contre 303 235, médianes 65 et 65, **p = 0,859**, delta de Cliff **−0,000**, `H0 NON
+> REJETEE`.
+
+**L'échantillonnage**, qui demande le volume et ne se refait donc pas hors ligne :
+
+```
+uv run python src/excision/measure.py <original.tifxyz> <repare.tifxyz> \
+    --volume s3://<volume OME-Zarr de PHerc0172> --segment <etiquette> \
+    --seed 42 >> docs/mesures/excision_samples.tsv
+```
+
+⚠ La graine **42** est le défaut de l'outil et c'est celle du fichier publié. ⚠⚠ Et le tirage
+est **apparié par construction** — un témoin par cellule excisée, tiré dans la même trace — ce
+qui est la seule raison pour laquelle les deux colonnes du tableau se comparent : deux tirages
+indépendants auraient comparé deux traces, pas deux populations.
+
 
 Mesuré sur **52 segments** de PHerc0172 (le 53ᵉ était déjà propre, donc sans
 cellule excisée), **75 810 cellules excisées** contre **303 235 témoins appariés**.

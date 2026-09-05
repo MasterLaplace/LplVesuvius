@@ -244,10 +244,11 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
 ---
 
 ### docs/04_experience_excision.md
-- **lignes** : 231
+- **lignes** : 261
 - **nature** : MIXTE
 - **résumé** : Conception d'expérience écrite avant le code (§1–5 : question, protocole, hypothèse nulle, contrôles anti-bug, menaces, note de perf) suivie du résultat mesuré (§6) et de sa portée (§7). La question est de savoir si les cellules que `windcheck` excise échantillonnaient autre chose que du papyrus. Réponse : non, H₀ n'est pas rejetée, et un recalcul du 2026-08-22 renforce le résultat en retirant le niveau de gris 0 tout en signalant qu'un chiffre du document reste irreproductible.
 - **conclusions extractibles** :
+  - §6, **ajouté le 2026-09-05** : les deux commandes de l'arc — `analyse.py` sur `docs/mesures/excision_samples.tsv` (hors ligne, rend exactement p = **0,859**, δ **−0,000**, 52 segments, 75 810 contre 303 235) et `measure.py` pour l'échantillonnage, qui demande le volume. Aucune des deux n'était écrite dans un document, donc le résultat publié n'avait pas de producteur joignable.
   - Le certificat `windcheck` porte `displacement/applied = False` ; l'excision est portée par le masque (`mask = 0` **et** `x = y = z = -1`) ; *« Every RETAINED coordinate is bit-identical to the input »*.
   - Sur le segment témoin : **6 quads sur 416 398 triangles**, **896,8 unités d'aire sur 83 256 262**, soit **0,0011 %**.
   - Le volume utilisé est `20241024131839` à **7,910 µm** ; une feuille y fait **~5 voxels**.
@@ -881,7 +882,7 @@ dernier caractère ; les nombres de lignes sont mesurés par `wc -l`.
 ---
 
 ### docs/16_carte_difficulte_rouleaux_du_prix.md
-- **lignes** : 329
+- **lignes** : 339
 - **nature** : RESULTAT
   (première mesure du dépôt portant sur les rouleaux du prix eux-mêmes : écart inter-spires
   et séparabilité d′, avec témoins appariés. Comporte une recommandation actionnable, mais
@@ -894,6 +895,7 @@ dernier caractère ; les nombres de lignes sont mesurés par `wc -l`.
   datés du 2026-08-20, la conclusion qui désignait `PHerc0358` comme premier rouleau à
   attaquer.
 - **conclusions extractibles** :
+  - **Ajouté le 2026-09-05** : la commande de la figure, vérifiée **octet pour octet** (`figure_difficulte.py docs/carte_separabilite docs/images/16_carte_difficulte.png`, md5 `a163cd185ca73bcbf855c6bfee281f32`).
   - Séparabilité **médiane** : les quatorze rouleaux tiennent entre **1,37 et 1,62**, et
     **six des treize** font aussi bien ou mieux que le témoin.
   - Le témoin est à **0 %** de fenêtres indissociables ; les treize s'étalent de **4 %** à

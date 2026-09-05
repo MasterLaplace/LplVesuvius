@@ -37,6 +37,16 @@ sens.
 
 Figure : `src/figures/figure_difficulte.py`, depuis `docs/carte_separabilite/`.
 
+```
+uv run python src/figures/figure_difficulte.py \
+    docs/carte_separabilite docs/images/16_carte_difficulte.png
+```
+
+⚠ Vérifié le 2026-09-05 : la commande régénère l'image **octet pour octet**
+(`a163cd185ca73bcbf855c6bfee281f32`). Une commande qui rendrait une image *ressemblante* ne
+vaudrait rien ici — c'est justement ce qui laisse une figure dériver de ses données sans que
+personne ne le voie.
+
 ---
 
 ## 1. La question, et pourquoi elle était sans réponse

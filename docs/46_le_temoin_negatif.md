@@ -164,8 +164,20 @@ est-il périodique*, contre son propre mélange, au réglage calibré et sans ri
 
 ## 3 ter. ⚠⚠⚠ L'expérience a été faite, et elle a manqué d'UNE fenêtre
 
-Rendue le 2026-08-28 (`src/campagnes/campagne_temoin_typographique.sh`) : 5128 × 5128, pas 21,
-36 471 fenêtres rendues sur 58 564 (38 % vides sautées), 52 minutes.
+Rendue le 2026-08-28 : 5128 × 5128, pas 21, 36 471 fenêtres rendues sur 58 564 (38 % vides
+sautées), **52 minutes**.
+
+```
+bash src/campagnes/campagne_temoin_typographique.sh
+```
+
+⚠ Tous les réglages sont des variables d'environnement avec un défaut — `COUCHES`, `MODELE`,
+`DEPART=7`, `COTE=5128`, `PAS=21`, `SORTIE` — donc la commande nue reproduit **exactement** la
+campagne publiée. ⚠⚠ `COTE` et `PAS` ne sont pas des choix : la taille vient de
+`src/encre/fenetres_par_region.py` (il faut 5128 px pour porter huit fenêtres au réglage
+calibré) et le pas est **celui des cartes auxquelles on compare** — comparer un pas 8 à des
+cartes au pas 21 ferait varier le lissage, donc la périodicité, pour une raison étrangère au
+papyrus.
 
 | sujet | fenêtres | périodiques | période | contre son mélange | p |
 |---|---:|---:|---:|---:|---:|
