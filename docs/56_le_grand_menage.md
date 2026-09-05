@@ -637,6 +637,31 @@ dit, pas une relecture.
 `valider_blocs.py`. Le garde « scripts sans appelant » ne scannait pas `tools/*.py` ; le glob
 `src/*/*` a élargi sa portée sans qu'on le demande, et il les a trouvés.
 
+#### ⚠⚠ `valider_blocs.py` : ce n'est pas un appelant qui lui manque, c'est sa RÉFÉRENCE
+
+Repris le 2026-09-05. Le script demande *« le découpage en blocs 3D donne-t-il la même chose
+que l'arbre global ? »* et prend la réponse de l'arbre global **en argument**. Il tourne :
+
+```
+uv run python src/outils/valider_blocs.py data/meshes/20230909121925.tifxyz
+#   blocs 3D utilises : 63   cellules mesurees : 19976
+#   below_030 (blocs) : 0.00025                                  (9 min, hors ligne)
+```
+
+⚠⚠ **Mais le second argument — la valeur de l'arbre global sur ce maillage — n'existe nulle
+part dans l'arbre**, et il ne peut pas y exister : ce maillage fait **45 M de cellules**, et
+c'est précisément celui dont `proximity_vs_ink.py` écrit qu'un `cKDTree` global *« a fait tomber
+la machine trois fois »*. Sans référence, le script imprime un nombre et **ne rend aucun
+verdict** — les trois quarts de son code, la comparaison et sa tolérance de 10 %, sont
+inatteignables.
+
+⭐ Donc le lot qui le rend utile n'est pas « lui trouver un appelant » mais **lui trouver un
+maillage assez petit pour que les deux passent**, ce que son propre en-tête réclame en toutes
+lettres : *« le seul endroit où la comparaison est possible, et donc le seul endroit où elle a
+de la valeur »*. Tant qu'il n'y en a pas, le 0,00025 ci-dessus est une **valeur de bloc**, pas
+une validation — et le 0,00030 que cite `proximity_vs_ink.py` ne peut pas lui servir de
+référence, puisqu'il ne vient pas d'un arbre global sur ce maillage-là.
+
 ⚠ **Ce qui n'a PAS bougé, avec la raison** : `src/tracecheck/` est **le livrable** que l'article
 décrit et que la release identifie ; `src/excision/` et `src/xpu/` portent chacun leur
 propre environnement. Les déplacer est une décision par dossier, pas un coup de balai.

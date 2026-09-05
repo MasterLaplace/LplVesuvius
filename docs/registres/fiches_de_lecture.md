@@ -3739,7 +3739,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/56_le_grand_menage.md
-- **lignes** : 904
+- **lignes** : 929
 - **nature** : MIXTE
 - **résumé** : Document qui se déclare lui-même « un PLAN, pas un résultat », écrit pour être repris par une session neuve, mais dont chaque chiffre est mesuré et dont les quatre chantiers sont ensuite marqués comme clos au fil du texte. Il commence par corriger l'impression de départ (« sept dossiers blindés de scripts, une montagne de doublons ») : trois points sur quatre sont vrais, la vraie montagne est `data/` (177 Gio sur 203) et non les venvs (4,24 Gio récupérables, pas 16,6). Les quatre chantiers sont A (cache de rendu par contenu, livré, avec la découverte que 58,6 % du contenu dupliqué est constitué de fenêtres imbriquées), B (réorganisation de `data/`, **clos par la mesure qui contredit son propre plan**), C (`lplv`, livré) et D (dessin unifié et `docs/` rangé par nature, livré). Une section entière énumère ce qu'on décide de **ne pas** faire, avec sa raison mesurée.
 - **conclusions extractibles** :
@@ -3784,6 +3784,13 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
   - `permalien.py` : `HEAD` était 43 commits en avance sur `origin/main` — un lien vers `HEAD` aurait rendu 404 pour tout le monde sauf cette machine. 34 contrôles, deux sondes.
   - Le dépôt est **privé** : sa racine GitHub rend 404 sans session quand la même URL sur un dépôt public du même compte rend 200 ; un permalien vaut donc pour l'auteur, pas pour un lecteur extérieur, mais `git show <commit>:<chemin>` marche depuis n'importe quel clone.
   - Après le repli final du 2026-08-26, la racine ne porte plus que trois dossiers.
+  - ⚠⚠ `valider_blocs.py` (2026-09-05) : ce n'est pas un appelant qui lui manque, c'est sa
+    RÉFÉRENCE. Il tourne — 63 blocs, 19 976 cellules, `below_030` **0,00025** en 9 min hors
+    ligne — mais la valeur de l'arbre global sur ce maillage n'existe nulle part et ne peut
+    pas exister : 45 M de cellules, celui-là même dont `proximity_vs_ink` écrit qu'un cKDTree
+    global « a fait tomber la machine trois fois ». Sans elle, la comparaison et sa tolérance
+    de 10 % sont inatteignables. Le lot qui le rend utile est de lui trouver un maillage assez
+    petit pour que les DEUX passent, ce que son propre en-tête réclame.
 - **rétractations / corrections internes** :
   - En-tête, note du 2026-08-26 : le §1.1 comptait « sept dossiers de scripts » et concluait qu'ils étaient « DEUX dossiers et cinq environnements » — juste comme diagnostic, faux comme conclusion, car un environnement n'a pas besoin d'être à la racine, il a besoin d'être avec son code.
   - §1.1, « ⚠⚠ Deux affirmations de ce paragraphe étaient FAUSSES — corrigées le 2026-08-25 » : (1) les « 16,6 Go » n'existent pas (liens durs `uv`, 4,24 Gio réels) ; (2) les « 25 sites d'appel » étaient des emprunts à un environnement strictement plus pauvre que la racine.
@@ -3799,7 +3806,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
   - §4 : deux lignes du tableau « ce qu'on décide de ne pas faire » sont barrées comme faites — « Supprimer `inference/` » (FAIT le 2026-08-25) et « Toucher aux `.venv` » (partiellement fait).
 - **preuve de lecture intégrale** :
   - ligne 552 : « **218 verbes découverts, zéro nom ambigu, 98 qui s'auto-testent, 72 qui rendent du JSON.** »
-  - ligne 902 : « 4. **les points d'extension justifiés par un deuxième cas RÉEL** — le registre l'est par 123 ; »
+  - ligne 927 : « 4. **les points d'extension justifiés par un deuxième cas RÉEL** — le registre l'est par 123 ; »
 
 
 
