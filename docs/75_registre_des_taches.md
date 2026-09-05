@@ -205,11 +205,30 @@ pour un signal lisse est toujours son plus petit décalage — les trois fenêtr
 tout** sur les feuilles. Corrigé en cherchant le premier maximum **local après le passage sous
 zéro**, qui est la définition d'un retour.
 
+### ⚠ Et la porte de sortie évidente est fermée, par deux raisons indépendantes
+
+`PHerc0139` publie un **second** champ d'orientation, sous `representations/predictions/lasagna/`,
+avec deux canaux que `fibers/` n'a pas : **`cos`** et **`grad_mag`**. Le nom `cos` suggère
+exactement la composante manquante — donc il a été testé par **identité** et non par son nom : si
+`(n_x, n_y, \cos)` est un vecteur unitaire, la somme de leurs carrés vaut un.
+
+| mesuré sur `lasagna`, niveau 4 | valeur |
+|---|---:|
+| $n_x^2+n_y^2$ | 0,520 |
+| $n_x^2+n_y^2+\cos^2$ | **0,853** médiane, p90 **1,356**, **max 1,936** |
+
+**Un vecteur unitaire plafonnerait à l'arrondi près.** `cos` est donc autre chose, et aucun
+raisonnement sur son nom ne le rattrape.
+
+⚠ Et ce préfixe est de toute façon **plus grossier** : ses `nx`/`ny` ne descendent qu'au **niveau
+4**, soit **3,9 cellules par pas** contre 7,8 pour `fibers`.
+
 > **Conséquence pour `A2 bis`** : l'entrée que `78` §2 désignait ne peut pas, **telle qu'elle est
 > publiée**, porter un nombre d'enroulement. Ce n'est pas le `nz` manquant qui bloque — il se
-> récupère en module — c'est que le champ ne distingue pas deux feuilles voisines. Ce qui reste
-> possible : demander le **niveau 0** de ce champ (il existe chez son producteur, `output_channels
-> = 7` le dit), ou construire l'enroulement sur autre chose que ce champ.
+> récupère en module — c'est que le champ **ne distingue pas deux feuilles voisines**, et l'autre
+> produit publié est encore plus grossier. Ce qui reste possible : demander le **niveau 0** à son
+> producteur (il existe chez lui — `output_channels = 7` le dit), ou construire l'enroulement sur
+> autre chose que ces champs.
 
 ### A2 ter — le test d'identité par les résidus (ex-H5 de `69`, révisée par `73` §1)
 

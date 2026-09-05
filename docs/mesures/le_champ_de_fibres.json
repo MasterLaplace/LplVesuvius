@@ -5,6 +5,30 @@
     "ny",
     "presence"
   ],
+  "lasagna": {
+    "prefixe": "PHerc0139/representations/predictions/lasagna/20260102150214-lasagna-20260419180421-L2",
+    "canaux": [
+      "nx",
+      "ny",
+      "cos",
+      "grad_mag"
+    ],
+    "complement": {
+      "niveau": 4,
+      "cz": 141,
+      "cy": 32,
+      "cx": 35,
+      "cellules": 29113,
+      "part_pleine": 0.888458251953125,
+      "resolution_um": 38.384,
+      "cellules_par_pas": 3.9078782826177574,
+      "somme_deux_mediane": 0.5200769305229187,
+      "somme_trois_mediane": 0.8526412844657898,
+      "somme_trois_p10": 0.4957570433616638,
+      "somme_trois_p90": 1.3557093143463135,
+      "somme_trois_max": 1.9356714487075806
+    }
+  },
   "canal_nz_publie": false,
   "groupes_du_manifeste": [
     "nx",

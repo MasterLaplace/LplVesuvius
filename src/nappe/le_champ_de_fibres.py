@@ -220,6 +220,86 @@ def norme_du_champ(niveau: int, cz: int, cy: int, cx: int, seuil: int = 32) -> d
                 nz_median=float(math.sqrt(max(0.0, 1.0 - float(np.median(somme))))))
 
 
+LASAGNA = ("PHerc0139/representations/predictions/lasagna/"
+           "20260102150214-lasagna-20260419180421-L2")
+LASAGNA_BASE = "PHerc0139-20260102150214-lasagna-20260724"
+CANAUX_LASAGNA = ("nx", "ny", "cos", "grad_mag")
+"""Ce que le préfixe `lasagna/` publie, et que `fibers/` n'a pas.
+
+⚠⚠ `cos` et `grad_mag` n'existent QUE là. Si `cos` est la troisième composante du même vecteur,
+alors le corpus publie bien une orientation complète — pour un autre produit et à une résolution
+plus grossière. Le dire suppose de le mesurer : deux champs qui portent des noms compatibles ne
+sont pas pour autant deux moitiés d'un même vecteur."""
+
+
+def url_lasagna(canal: str) -> str:
+    from zarr_depth import BUCKET  # noqa: PLC0415
+
+    return f"{BUCKET}/{LASAGNA}/{LASAGNA_BASE}_{canal}.ome.zarr"
+
+
+def lire_bloc_lasagna(canal: str, niveau: int, cz: int, cy: int, cx: int) -> np.ndarray | None:
+    """@brief Un chunk du préfixe `lasagna`, même lecteur que pour `fibers`."""
+    from zarr_depth import array_meta, chunk_key, decode, get  # noqa: PLC0415
+
+    meta = array_meta(url_lasagna(canal), niveau, 30)
+    attendu = int(np.prod(meta["chunks"]))
+    brut = get(f"{url_lasagna(canal)}/{chunk_key(meta, niveau, cy, cx, cz)}", 60)
+    if brut is None:
+        return None
+    octets = decode(brut, meta, attendu)
+    if octets is None:
+        return None
+    return np.frombuffer(octets, dtype=np.uint8).reshape(meta["chunks"])
+
+
+def le_cos_complete_t_il(niveau: int = 4, essais: int = 25, graine: int = 7) -> dict:
+    """
+    @brief Le `cos` de `lasagna` est-il la composante que `fibers` omet ?
+
+    ⚠⚠⚠ LA QUESTION EST POSÉE PAR SOUSTRACTION, JAMAIS PAR LE NOM. « cos » peut désigner à peu
+    près n'importe quel cosinus — celui d'un angle à l'axe, à la verticale, à une normale de
+    référence. Ce qui se teste est une **identité** : si `(nx, ny, cos)` est un vecteur unitaire,
+    alors la somme de leurs carrés vaut un. Si elle vaut autre chose, `cos` est autre chose, et
+    aucun raisonnement sur son nom ne le rattrapera.
+
+    ⚠ Mesuré **là où le champ répond** : `grad_mag` sert de masque, faute d'un canal `presence`
+    sur ce préfixe. Une cellule où le gradient est nul porte une orientation arbitraire, et en
+    inclure beaucoup ferait tendre n'importe quelle somme vers ce que le modèle rend sur du vide.
+    """
+    from zarr_depth import array_meta  # noqa: PLC0415
+
+    meta = array_meta(url_lasagna("grad_mag"), niveau, 30)
+    grille = [max(1, (s + c - 1) // c) for s, c in zip(meta["shape"], meta["chunks"])]
+    rng = np.random.default_rng(graine)
+    for _ in range(essais):
+        cz = int(rng.integers(1, max(2, grille[0] - 1)))
+        cy = int(rng.integers(1, max(2, grille[1] - 1)))
+        cx = int(rng.integers(1, max(2, grille[2] - 1)))
+        g = lire_bloc_lasagna("grad_mag", niveau, cz, cy, cx)
+        if g is None or float((g > 32).mean()) < 0.2:
+            continue
+        nx = lire_bloc_lasagna("nx", niveau, cz, cy, cx)
+        ny = lire_bloc_lasagna("ny", niveau, cz, cy, cx)
+        co = lire_bloc_lasagna("cos", niveau, cz, cy, cx)
+        if nx is None or ny is None or co is None:
+            continue
+        plein = g > 32
+        x, y, c = (_en_unite(v[plein]) for v in (nx, ny, co))
+        deux = x * x + y * y
+        trois = deux + c * c
+        return dict(niveau=niveau, cz=cz, cy=cy, cx=cx,
+                    cellules=int(plein.sum()), part_pleine=float(plein.mean()),
+                    resolution_um=resolution_um(niveau),
+                    cellules_par_pas=cellules_par_pas(niveau),
+                    somme_deux_mediane=float(np.median(deux)),
+                    somme_trois_mediane=float(np.median(trois)),
+                    somme_trois_p10=float(np.percentile(trois, 10)),
+                    somme_trois_p90=float(np.percentile(trois, 90)),
+                    somme_trois_max=float(trois.max()))
+    return {}
+
+
 def axe_a_ce_z(z_niveau: int, niveau: int) -> tuple[float, float] | None:
     """
     @brief Le centre du rouleau à cette tranche, dans les coordonnées du niveau demandé.
@@ -395,6 +475,8 @@ def mesurer(niveau: int | None = None, fenetres: int = 3) -> dict:
     if not lots:
         raise SystemExit("aucun chunk lisible : le balayage n'a rien trouvé")
     return dict(prefixe=PREFIXE, canaux_publies=list(CANAUX),
+                lasagna=dict(prefixe=LASAGNA, canaux=list(CANAUX_LASAGNA),
+                             complement=le_cos_complete_t_il()),
                 canal_nz_publie=False, groupes_du_manifeste=list(CANAUX),
                 niveaux_publies=niveaux, niveau=n,
                 resolution_um=resolution_um(n),
@@ -485,6 +567,29 @@ def _verifier(r: dict | None = None) -> int:
         # touchent. C'est une contrainte sur `A2 bis`, pas un défaut du champ.
         v("... et le champ le plus fin publié voit une feuille en ~8 cellules",
           6.0 < r["cellules_par_pas"] < 10.0, f"{r['cellules_par_pas']:.1f}")
+
+        # ⚠⚠ ET L'AUTRE PRÉFIXE, parce que « il n'y a pas de troisième composante dans le
+        # corpus » et « il n'y en a pas dans CE produit » sont deux énoncés différents.
+        # `lasagna/` publie un canal `cos` que `fibers/` n'a pas, et son nom suggère exactement
+        # la composante manquante. Testé par IDENTITÉ, jamais par le nom : si `(nx, ny, cos)`
+        # est unitaire, la somme des carrés vaut un.
+        las = (r.get("lasagna") or {}).get("complement") or {}
+        if las:
+            print(f"      lasagna niveau {las['niveau']} ({las['resolution_um']:.1f} µm, "
+                  f"{las['cellules_par_pas']:.1f} cell/pas) — nx²+ny² {las['somme_deux_mediane']:.3f}, "
+                  f"+cos² {las['somme_trois_mediane']:.3f} "
+                  f"(p90 {las['somme_trois_p90']:.3f}, max {las['somme_trois_max']:.3f})")
+            v("⚠ le `cos` de lasagna n'est PAS la composante manquante",
+              las["somme_trois_max"] > 1.3,
+              f"nx²+ny²+cos² médiane {las['somme_trois_mediane']:.3f}, max "
+              f"{las['somme_trois_max']:.3f} — un vecteur unitaire plafonnerait à l'arrondi près")
+            # ⚠ Et ce préfixe est de toute façon PLUS grossier : ses `nx`/`ny` ne descendent
+            # qu'au niveau 4. La porte de sortie « prendre l'autre produit » est donc fermée
+            # deux fois, et par deux raisons indépendantes.
+            v("... et son orientation est publiée plus grossièrement encore",
+              las["cellules_par_pas"] < r["cellules_par_pas"],
+              f"{las['cellules_par_pas']:.1f} cellules par pas contre "
+              f"{r['cellules_par_pas']:.1f} pour `fibers`")
 
         # ⚠⚠⚠ ET LA QUESTION QUI DÉCIDE POUR `A2 bis` : ce champ compte-t-il des feuilles ?
         # Un nombre d'enroulement compte des feuilles. Si le champ ne les sépare pas
