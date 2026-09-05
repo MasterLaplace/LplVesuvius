@@ -3706,7 +3706,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/55_les_murs_et_leurs_causes.md
-- **lignes** : 110
+- **lignes** : 111
 - **nature** : PROCEDE
 - **résumé** : Document **rendu** depuis `docs/registres/murs_et_causes.tsv` par `uv run python src/depot/murs_et_causes.py --rendre`, et non écrit à la main ; sa batterie vérifie que chaque ligne pointe vers un document contenant encore son ancre. Il recense **30 causes candidates sur 4 murs** : 19 éliminées, 10 confirmées, 1 bloquée, chacune avec la mesure qui l'a tranchée et le document d'origine. Sa thèse de forme est qu'un mur est un espace de causes dont on retire une entrée à la fois, et que la liste des causes éliminées — non celle des tâches — est le seul progrès mesurable. Une seule cause reste non tranchée, et elle est bloquée. (⚠ Note de lecture : l'en-tête compte 19 éliminations quand le §final écrit « les treize éliminations de ce document » ; le document ne signale pas l'écart. De même, il ne contient aucune cause ⏳ *ouverte* alors que son propre tableau de symboles définit ce statut.)
 - **conclusions extractibles** : *(les murs recensés, avec pour chacun les causes éliminées et celles qui restent ouvertes)*
@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 1886
+- **lignes** : 1961
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5587,8 +5587,27 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     **0,755 à 0,852** en améliorant **116 fenêtres sur 127**, et l'accord publié sur toute
     l'empreinte de **0,756 à 0,857** : *le nombre de référence de tout le lot mesurait aussi un
     défaut de recalage.* Le maximum est **intérieur** au balayage, contrairement au (−104, −120)
-    publié plus haut. ⚠ Elle est **mesurée et pas appliquée** : aucun chemin du dépôt ne la
-    retranche encore, et le faire est la tranche la plus courte qui reste.
+    publié plus haut.
+  - ⭐⭐⭐ **La question suivante n'est pas « laquelle est la meilleure » mais « laquelle a le
+    DROIT d'être appliquée »** (2026-09-05). Appliquer le (−24, 0) trouvé sur l'encre serait
+    circulaire, donc la règle est de **provenance** : seule une translation tirée de la
+    géométrie peut être retranchée, et `applicables()` exclut l'autre **par construction**. La
+    retenue est l'optimum des silhouettes **(−8, −8)**, Dice **0,975255** contre 0,974601, et
+    l'encre le confirme de l'extérieur : **0,7561 → 0,7943**, soit **37,8 %** du plafond que
+    l'encre situe à 0,8571. ⚠ Il reste **17,9 cases, 317 µm**.
+  - ⚠⚠ **La géométrie n'IDENTIFIE pas la translation, elle la borne** : quatre critères sans
+    encre donnent quatre réponses étalées sur **16,9 cases** et atteignant de **13,7 %** à
+    **68,6 %** du plafond. Ce n'est pas un nombre, c'est un intervalle aussi large que la
+    translation elle-même.
+  - ⚠⚠⚠ **Et le critère des silhouettes est CONTRAIRE, pas seulement faible** : les **trois**
+    translations qui font monter l'AUC font toutes **baisser** le Dice, y compris l'optimum de
+    l'encre, dont le Dice (0,97263) est **sous** celui de l'affine non corrigée (0,974601). Une
+    procédure de recalage pilotée par le recouvrement des contours s'éloigne donc de la bonne
+    réponse en croyant s'en approcher — c'est, en une phrase, pourquoi le champ de bord, le
+    modèle lisse et l'agrégation locale ont tous échoué.
+  - ✅ **Le contrôle de signe tombe au dernier chiffre** : corriger l'affine ou décaler la
+    lecture donnent **0,79431 contre 0,79431**, écart 0,0000. Il n'était pas remplaçable par une
+    relecture, une correction à l'envers ne levant rien — elle rend juste un accord plus bas.
   - ⚠⚠⚠ **Le plan des SILHOUETTES explique l'échec des bords** : jugé sur le Dice, le même plan
     de décalages s'étend sur **0,0315** quand celui de l'encre s'étend sur **0,4234** (témoin
     mélangé : **0,0025**), et son sommet est **(−8, −8)**, pas (−24, 0). Les silhouettes
@@ -5630,8 +5649,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 1289 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 1882 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 1368 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 1961 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

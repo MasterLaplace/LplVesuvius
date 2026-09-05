@@ -1216,11 +1216,86 @@ des deux signaux, et **biaisé** d'une quinzaine de cases par rapport à celui q
    travers dans leur aplatissement ou la **carte publiée** dans le sien. Les deux se corrigent
    pareil ici — pas ailleurs.
 
+### ⚠⚠⚠ Et la question suivante n'est pas « laquelle est la meilleure » mais « laquelle a le DROIT d'être appliquée »
+
+> Mesure : `src/encre/la_translation_applicable.py` (15 contrôles) →
+> `docs/mesures/la_translation_applicable.json`. Figure :
+> `src/figures/figure_la_translation_applicable.py` (9 contrôles), le 2026-09-05.
+>
+> ```
+> uv run python src/encre/la_translation_applicable.py --json docs/mesures/la_translation_applicable.json
+> uv run python src/figures/figure_la_translation_applicable.py --sortie docs/images/75_la_translation_applicable.png
+> ```
+
+⚠⚠⚠ **Appliquer le (−24, 0) trouvé sur l'encre serait circulaire.** L'accord de l'encre
+deviendrait élevé **par construction**, et le chiffre cesserait de mesurer quoi que ce soit. La
+règle est donc de **provenance** et non de valeur : une translation tirée de la géométrie —
+silhouettes, carreaux, repères — n'a jamais vu d'encre, donc l'encre reste un arbitre extérieur
+après qu'on l'a appliquée. Une translation tirée de l'encre est un **plafond**. `applicables()`
+exclut la seconde **par construction**, pas par vigilance.
+
+![ce que la géométrie a le droit de corriger](images/75_la_translation_applicable.png)
+
+| candidate | provenance | décalage | Dice | AUC | part du plafond |
+|---|---|---:|---:|---:|---:|
+| aucune correction | géométrie | (0, 0) | 0,974601 | 0,7561 | 0 % |
+| **optimum des silhouettes** ⭐ retenue | géométrie | (−8, −8) | **0,975255** | 0,7943 | **37,8 %** |
+| médiane des carreaux de bord | géométrie | (−13, +2) | 0,973854 | **0,8254** | 68,6 % |
+| médiane des repères intérieurs | géométrie | (−3,2 ; +8,2) | 0,972523 | 0,7700 | 13,7 % |
+| optimum sur l'encre | **encre** | (−24, 0) | 0,97263 | **0,8571** | 100 %, ⛔ non applicable |
+
+⚠ La retenue est celle qui **maximise le Dice** parmi les applicables, et ce critère est déclaré
+**avant** de regarder l'encre — sinon « la meilleure candidate géométrique » serait choisie sur
+l'encre et la règle de provenance ne servirait à rien.
+
+#### ⚠⚠ La géométrie n'IDENTIFIE pas la translation, elle la borne
+
+Quatre critères sans encre donnent quatre réponses étalées sur **16,9 cases**, qui atteignent de
+**13,7 %** à **68,6 %** du plafond. La retenue en atteint **37,8 %**, et il reste **17,9 cases**
+— **317 µm** — entre elle et l'optimum de l'encre. Ce n'est donc pas un nombre que la géométrie
+rend, c'est un **intervalle**, et sa largeur est du même ordre que la translation elle-même.
+
+#### ⚠⚠⚠ Et le fait qui explique tout : le critère des silhouettes est CONTRAIRE
+
+**Les trois translations qui font monter l'AUC font toutes baisser le Dice** — y compris
+l'optimum de l'encre, qui rend le meilleur accord d'encre (0,8571) avec un Dice (0,97263)
+**inférieur** à celui de l'affine non corrigée (0,974601).
+
+> Le recouvrement des silhouettes n'est pas seulement **treize fois moins sensible** que l'encre
+> (`0,0315` d'étendue contre `0,4234`) : dans la plage qui compte, il pointe **dans l'autre
+> sens**. Toute procédure de recalage pilotée par le recouvrement des contours s'éloigne donc de
+> la bonne réponse en croyant s'en approcher — et c'est, en une phrase, pourquoi le champ de
+> bord, le modèle lisse et l'agrégation locale ont tous échoué.
+
+#### ✅ Le contrôle de signe, au dernier chiffre
+
+Corriger l'**affine** et décaler la **lecture** sont deux façons d'appliquer la même translation.
+Elles doivent donner le même accord, et elles le donnent : **0,79431 contre 0,79431, écart
+0,0000**. Une correction appliquée à l'envers ne lève rien — elle rend simplement un accord plus
+bas, ce qui ressemble à une mauvaise candidate et non à un bug — donc ce contrôle n'était pas
+remplaçable par une relecture.
+
+#### Ce que ça change pour C1
+
+1. ⭐ **Une correction géométrique est disponible et légitime** : `corriger(affine, −8, −8)`,
+   Dice **0,975255** contre 0,974601, et l'encre le confirme de l'extérieur (**0,7943** contre
+   0,7561). Elle est publiée dans `la_translation_applicable.json` avec sa provenance.
+2. ⚠⚠ **Elle ne suffit pas, et on sait de combien** : 317 µm de résidu que les silhouettes ne
+   voient pas, soit un demi-caractère.
+3. ⚠⚠⚠ **Et il ne faut PAS chercher mieux du côté des contours.** Le critère y est contraire :
+   ce qui reste ne se gagnera qu'avec de la matière **intérieure**, c'est-à-dire les repères,
+   qui sont le seul champ prédictif mesuré — et qui doivent être densifiés **ailleurs** que dans
+   leur quartier.
+
 ### Ce qui reste de C1, et c'est maintenant précis
 
-1. ✅✅ **Ce n'était pas un champ, c'était une TRANSLATION — et elle est MESURÉE.** ⚠ Mesurée,
-   pas encore **appliquée** : aucun chemin du dépôt ne la retranche aujourd'hui, et la retrancher
-   est ce qui reste à faire de plus court. Le champ à
+1. ✅✅ **Ce n'était pas un champ, c'était une TRANSLATION — et sa part applicable est
+   PUBLIÉE.** ⚠ Ce qu'on a le droit de retrancher est la translation **géométrique**
+   (−8, −8), pas celle de l'encre : `la_translation_applicable.json` la porte avec sa
+   provenance, elle gagne 0,7561 → **0,7943** d'accord publié, soit **37,8 %** du plafond, et il
+   reste **317 µm** que les silhouettes ne voient pas. ⚠⚠⚠ Et il ne faut pas chercher mieux du
+   côté des contours : dans la plage qui compte, leur recouvrement pointe **dans l'autre sens**.
+   Le champ à
    34 carreaux, le modèle lisse et l'agrégation locale ont tous échoué, et la mesure sur
    **127 fenêtres** dit pourquoi : les fenêtres s'accordent toutes sur **(−24, 0)** cases
    (**425 µm**) à 27 cases près, quand les champs candidats déplacent de **40** et **60**. Une

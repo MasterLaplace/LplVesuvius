@@ -1,0 +1,200 @@
+{
+  "carte_publiee": "PHerc0500P2-20250628074500-2.215um-0.4m-111keV-volume-20250526151718-20260417190342-new_canon_autoresearch_recipe-tile256-stride128-ds8.jpg",
+  "cote_de_validation": 1024,
+  "etalement_des_candidates_geometriques": 16.86,
+  "part_du_plafond_min": 0.137,
+  "part_du_plafond_max": 0.6861,
+  "candidates_qui_degradent_le_dice": [
+    "médiane des carreaux de bord",
+    "médiane des repères intérieurs",
+    "optimum sur l'encre"
+  ],
+  "transformation_publiee": {
+    "echelle_lignes": 0.12093023255813953,
+    "echelle_colonnes": 0.1286039751747977,
+    "decalage_lignes": 11.441860465116292,
+    "decalage_colonnes": -45.81946735800142
+  },
+  "candidates": [
+    {
+      "nom": "aucune correction",
+      "provenance": "géométrie",
+      "decalage": [
+        0.0,
+        0.0
+      ],
+      "transformation_corrigee": {
+        "echelle_lignes": 0.12093023255813953,
+        "echelle_colonnes": 0.1286039751747977,
+        "decalage_lignes": 11.441860465116292,
+        "decalage_colonnes": -45.81946735800142
+      },
+      "dice": 0.974601,
+      "auc": 0.75614,
+      "pixels_encre": 256266,
+      "pixels_fond": 3655693,
+      "applicable": true,
+      "part_du_plafond": 0.0,
+      "degrade_le_dice": false
+    },
+    {
+      "nom": "optimum des silhouettes",
+      "provenance": "géométrie",
+      "decalage": [
+        -8.0,
+        -8.0
+      ],
+      "transformation_corrigee": {
+        "echelle_lignes": 0.12093023255813953,
+        "echelle_colonnes": 0.1286039751747977,
+        "decalage_lignes": 19.441860465116292,
+        "decalage_colonnes": -37.81946735800142
+      },
+      "dice": 0.975255,
+      "auc": 0.79431,
+      "pixels_encre": 255847,
+      "pixels_fond": 3656112,
+      "applicable": true,
+      "part_du_plafond": 0.378,
+      "degrade_le_dice": false
+    },
+    {
+      "nom": "médiane des carreaux de bord",
+      "provenance": "géométrie",
+      "decalage": [
+        -13.0,
+        2.0
+      ],
+      "transformation_corrigee": {
+        "echelle_lignes": 0.12093023255813953,
+        "echelle_colonnes": 0.1286039751747977,
+        "decalage_lignes": 24.441860465116292,
+        "decalage_colonnes": -47.81946735800142
+      },
+      "dice": 0.973854,
+      "auc": 0.82543,
+      "pixels_encre": 255342,
+      "pixels_fond": 3656617,
+      "applicable": true,
+      "part_du_plafond": 0.6861,
+      "degrade_le_dice": true
+    },
+    {
+      "nom": "médiane des repères intérieurs",
+      "provenance": "géométrie",
+      "decalage": [
+        -3.21,
+        8.17
+      ],
+      "transformation_corrigee": {
+        "echelle_lignes": 0.12093023255813953,
+        "echelle_colonnes": 0.1286039751747977,
+        "decalage_lignes": 14.651860465116293,
+        "decalage_colonnes": -53.98946735800142
+      },
+      "dice": 0.972523,
+      "auc": 0.76998,
+      "pixels_encre": 255980,
+      "pixels_fond": 3655979,
+      "applicable": true,
+      "part_du_plafond": 0.137,
+      "degrade_le_dice": true
+    },
+    {
+      "nom": "optimum sur l'encre",
+      "provenance": "encre",
+      "decalage": [
+        -24.0,
+        0.0
+      ],
+      "transformation_corrigee": {
+        "echelle_lignes": 0.12093023255813953,
+        "echelle_colonnes": 0.1286039751747977,
+        "decalage_lignes": 35.44186046511629,
+        "decalage_colonnes": -45.81946735800142
+      },
+      "dice": 0.97263,
+      "auc": 0.85713,
+      "pixels_encre": 254386,
+      "pixels_fond": 3657573,
+      "applicable": false,
+      "part_du_plafond": 1.0,
+      "degrade_le_dice": true
+    }
+  ],
+  "retenue": {
+    "nom": "optimum des silhouettes",
+    "provenance": "géométrie",
+    "decalage": [
+      -8.0,
+      -8.0
+    ],
+    "transformation_corrigee": {
+      "echelle_lignes": 0.12093023255813953,
+      "echelle_colonnes": 0.1286039751747977,
+      "decalage_lignes": 19.441860465116292,
+      "decalage_colonnes": -37.81946735800142
+    },
+    "dice": 0.975255,
+    "auc": 0.79431,
+    "pixels_encre": 255847,
+    "pixels_fond": 3656112,
+    "applicable": true,
+    "part_du_plafond": 0.378,
+    "degrade_le_dice": false
+  },
+  "plafond": {
+    "nom": "optimum sur l'encre",
+    "provenance": "encre",
+    "decalage": [
+      -24.0,
+      0.0
+    ],
+    "transformation_corrigee": {
+      "echelle_lignes": 0.12093023255813953,
+      "echelle_colonnes": 0.1286039751747977,
+      "decalage_lignes": 35.44186046511629,
+      "decalage_colonnes": -45.81946735800142
+    },
+    "dice": 0.97263,
+    "auc": 0.85713,
+    "pixels_encre": 254386,
+    "pixels_fond": 3657573,
+    "applicable": false,
+    "part_du_plafond": 1.0,
+    "degrade_le_dice": true
+  },
+  "sans_correction": {
+    "nom": "aucune correction",
+    "provenance": "géométrie",
+    "decalage": [
+      0.0,
+      0.0
+    ],
+    "transformation_corrigee": {
+      "echelle_lignes": 0.12093023255813953,
+      "echelle_colonnes": 0.1286039751747977,
+      "decalage_lignes": 11.441860465116292,
+      "decalage_colonnes": -45.81946735800142
+    },
+    "dice": 0.974601,
+    "auc": 0.75614,
+    "pixels_encre": 256266,
+    "pixels_fond": 3655693,
+    "applicable": true,
+    "part_du_plafond": 0.0,
+    "degrade_le_dice": false
+  },
+  "ecart_geometrie_encre_cases": 17.89,
+  "ecart_geometrie_encre_um": 317.0,
+  "part_du_plafond_atteinte": 0.378,
+  "equivalence": {
+    "decalage": [
+      -8,
+      -8
+    ],
+    "auc_par_lecture": 0.79431,
+    "auc_par_laffine": 0.79431,
+    "ecart": 0.0
+  }
+}

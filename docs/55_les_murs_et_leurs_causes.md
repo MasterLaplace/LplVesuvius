@@ -11,7 +11,7 @@ la fois. Une feuille de route qui liste des tâches laisse croire qu'on avance q
 tourne ; celle-ci liste des causes **éliminées**, et montre l'espace rétrécir. C'est le
 seul progrès mesurable sur un problème que personne n'a résolu.
 
-**36 causes candidates** sur **4 murs** : ❌ **24** éliminées · ✅ **10** confirmées · 🔒 **2** bloquées
+**37 causes candidates** sur **4 murs** : ❌ **25** éliminées · ✅ **10** confirmées · 🔒 **2** bloquées
 
 | symbole | verdict | ce que ça veut dire |
 |---|---|---|
@@ -52,7 +52,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 
 ## 2. Les patchs publiés ne se recollent pas
 
-❌ 3 éliminées · ✅ 1 confirmée
+❌ 4 éliminées · ✅ 1 confirmée
 
 | cause candidate | | ce qui a été mesuré | où |
 |---|---|---|---|
@@ -60,6 +60,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | raccorder deux segments officiels | ❌ | l'outil exige des surfaces qui se recouvrent, et il n'existe AUCUN candidat — mesuré sur 4,5 Mo de catalogue | [`44`](44_ou_la_chaine_se_trouve.md) |
 | recaler les deux aplatissements par un champ ajusté sur leurs BORDS | ❌ | ni un modèle lisse global ni une agrégation locale (rayons 256 à 1536, 2 à 25 voisins) ne battent le champ nul sur la composante normale ; le conditionnement des directions plafonne à 0,60 pour 1 en isotropie | [`75`](75_registre_des_taches.md) |
 | recaler les deux aplatissements par un CHAMP plutôt que par une translation | ❌ | sur 127 fenêtres de l'empreinte les optima se serrent autour de (−24, 0) à 27 cases près, quand les champs candidats déplacent de 60 et 40 ; une constante porte l'AUC médiane de 0,755 à 0,852 en améliorant 116 fenêtres sur 127, et l'accord publié de 0,756 à 0,857 | [`75`](75_registre_des_taches.md) |
+| recaler les deux aplatissements sur le recouvrement de leurs CONTOURS | ❌ | le critère est contraire dans la plage qui compte : les trois translations qui font monter l'AUC de l'encre font toutes baisser le Dice, y compris l'optimum de l'encre dont le Dice (0,97263) est sous celui de l'affine non corrigée (0,974601) | [`75`](75_registre_des_taches.md) |
 
 ## 3. L'extension tangentielle est un point fixe
 
