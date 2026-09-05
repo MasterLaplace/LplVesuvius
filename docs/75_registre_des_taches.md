@@ -1473,6 +1473,58 @@ aplatissement, elle a les siens.
   lieu d'une, donc la garantie anti-hallucination ne se transporte pas. La tuile équivalente à une
   lettre y ferait **66 px**.
 
+### ⭐⭐⭐ Et l'index publiait TREIZE SPIRES de ce fragment, que rien n'avait jamais ouvertes
+
+> Mesure : `src/nappe/les_wraps_publies.py` (10 contrôles) →
+> `docs/mesures/les_wraps_publies.json`. Figure :
+> `src/figures/figure_les_wraps_publies.py` (9 contrôles), le 2026-09-05.
+>
+> ```
+> uv run python src/nappe/les_wraps_publies.py --json docs/mesures/les_wraps_publies.json
+> uv run python src/figures/figure_les_wraps_publies.py --sortie docs/images/75_les_wraps_publies.png
+> ```
+
+⚠⚠⚠ **L'index connaît 39 segments pour `PHerc0500P2`, dont TREIZE nommés `wrap01` à `wrap13`**,
+chacun publiant sa surface en `tifxyz` **sur les trois volumes** (2,215 / 4,317 / 9,362 µm), plus
+sa carte d'encre pleine résolution. **Aucune mesure du dépôt ne les avait jamais ouvertes.** Tout
+le travail sur la chaîne, la spire et l'écart inter-feuilles a été fait en reconstruisant depuis
+le volume brut, alors qu'une **vérité de terrain du déroulement** était publiée à côté.
+
+⭐ **C'est la cinquième fois que cet angle mort coûte quelque chose**, et cette fois c'est l'auteur
+qui l'a rouvert : *« regarde sur les autres serveurs au cas où »*. Le référent avait été déclaré
+absent faute d'avoir interrogé un serveur ; ici c'est un dossier de l'index qu'on n'avait jamais
+énuméré. **Ce qu'on croit absent doit être cherché avant d'être reconstruit.**
+
+![treize spires publiées, et l'écart qui les sépare](images/75_les_wraps_publies.png)
+
+#### Est-ce que ce sont vraiment des spires consécutives ? — oui, et c'est mesuré
+
+| saut de rang | paires | écart médian |
+|---:|---:|---:|
+| **1** (voisines) | 12 | **135,5 µm** |
+| 2 | 11 | 320,7 µm  (×2,37) |
+| 3 | 10 | 454,6 µm  (×3,35) |
+
+⭐⭐⭐ **L'écart croît avec le rang**, donc ce sont bien des tours **empilés** et non treize
+morceaux quelconques. Et l'écart entre voisines, **135,5 µm**, tombe à **8 %** de l'attendu
+**147,4 µm** — mesuré ailleurs dans le dépôt (`la_surface_et_la_feuille`), **sur un autre
+rouleau**. Un accord avec une prédiction extérieure vaut mieux qu'un accord avec soi-même.
+
+⚠ **Quatre paires sur douze s'écartent de moitié ou plus** et elles sont dessinées comme les
+autres, pas gommées : 4→5 à 232 µm, 10→11 à 292, 11→12 à 327, et 12→13 à **65** — plus près
+qu'une feuille. La numérotation n'est donc pas géométriquement parfaite partout, et les p90
+montent jusqu'à 3 mm là où deux spires ne se recouvrent que par un bord.
+
+#### Ce que ça ouvre
+
+1. ⭐⭐⭐ **Une vérité de terrain du DÉROULEMENT, publiée et exacte**, sur laquelle une chaîne
+   reconstruite peut enfin être **notée** au lieu d'être seulement cohérente avec elle-même.
+2. ⭐⭐ **Un repère commun entre les deux régimes, gratuit** : chaque spire publie son `tifxyz`
+   sur le volume de production **et** sur celui du prix. La tâche « une fenêtre choisie dans un
+   repère COMMUN » cesse d'être un problème d'estimation ; c'est une lecture.
+3. ⚠ Et une question à poser avant de s'en servir : les treize spires couvrent-elles la même
+   région que le segment `500P2_front` sur lequel tout C1 a été bâti, ou une autre ?
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est

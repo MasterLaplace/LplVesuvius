@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 2111
+- **lignes** : 2163
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5650,6 +5650,24 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     deux témoins. Mais (−13, +2), la médiane des carreaux, est à **11** cases de l'optimum quand
     celle des repères est à **22** — les repères sont **groupés d'un côté**, les carreaux sont
     **répartis**. **Quand ce qu'on cherche est une constante, la couverture bat la précision.**
+  - ⭐⭐⭐ **ET L'INDEX PUBLIAIT TREIZE SPIRES DE CE FRAGMENT, jamais ouvertes** (2026-09-05, sur
+    l'intuition de l'auteur *« regarde sur les autres serveurs au cas où »*). `PHerc0500P2`
+    compte **39** segments dont **13** nommés `wrap01` à `wrap13`, chacun publiant sa surface en
+    `tifxyz` **sur les trois volumes** et sa carte d'encre pleine résolution. Mesuré : l'écart
+    médian entre spires **consécutives** vaut **135,5 µm**, contre **147,4 µm** mesurés ailleurs
+    dans le dépôt **sur un autre rouleau** — 8 % d'écart avec une prédiction extérieure. Et il
+    **croît avec le rang** : 135,5 puis **320,7** (×2,37) puis **454,6** (×3,35), donc ce sont
+    des tours empilés et pas treize morceaux quelconques.
+  - ⚠ **Quatre paires sur douze s'écartent de moitié ou plus** (4→5 à 232 µm, 10→11 à 292,
+    11→12 à 327, et 12→13 à **65**, plus près qu'une feuille) : la numérotation n'est pas
+    géométriquement parfaite partout. Elles sont dessinées comme les autres.
+  - ⭐⭐ Ce que ça ouvre : une **vérité de terrain du déroulement**, publiée et exacte, contre
+    laquelle une chaîne reconstruite peut être **notée** ; et un **repère commun entre les deux
+    régimes**, chaque spire publiant son `tifxyz` sur le volume de production **et** sur celui
+    du prix — la tâche « une fenêtre dans un repère commun » cesse d'être une estimation.
+  - ⚠⚠⚠ **Cinquième occurrence du même angle mort** : le référent avait été déclaré absent faute
+    d'avoir interrogé un serveur ; ici c'est un dossier de l'index qu'on n'avait jamais énuméré.
+    **Ce qu'on croit absent doit être cherché avant d'être reconstruit.**
 - **rétractations / corrections internes** :
   - ⚠⚠⚠ **« Le résidu est très variable dans l'espace » est ANNULÉ** : il reposait sur un
     optimum à (−104, −120) qui touchait **le bord** de son balayage, donc sur une borne et non
@@ -5680,8 +5698,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 1518 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 2111 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 1570 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 2163 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
