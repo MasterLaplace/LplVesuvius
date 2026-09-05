@@ -453,62 +453,127 @@ le nul **propre** — parallèle à une face, sans arête de feuille — que `46
 surface sans face que sur une face. Tant qu'on ne sait pas ce qu'il rend sur une face
 **vierge**, « l'encre valide le déroulage » n'est pas utilisable.
 
-### ✅✅ C2 — le nul verso : MESURÉ le 2026-09-05, et le contrôle est TOMBÉ
+### ✅✅ C2 — le nul verso : MESURÉ sur TROIS segments le 2026-09-05, et le résultat s'est INVERSÉ en cours de route
 
-> Mesure : `src/encre/le_nul_verso.py` (13 contrôles), `docs/mesures/le_nul_verso.json`.
-> Figure : `src/figures/figure_le_nul_verso.py` (10 contrôles).
+> Mesure : `src/encre/le_nul_verso.py` (20 contrôles par segment + 5 contrôles joints),
+> `docs/mesures/le_nul_verso_*.json`. Figure : `src/figures/figure_le_nul_verso.py` (15 contrôles).
+>
+> ```
+> uv run python src/encre/le_nul_verso.py --tous          # les trois segments, l'un après l'autre
+> uv run python src/encre/le_nul_verso.py --verifier       # la batterie, sur tout ce qui est mesuré
+> uv run python src/figures/figure_le_nul_verso.py --tous --sortie docs/images/75_le_nul_verso.png
+> ```
 
 ⭐⭐⭐ **Aucun rendu n'était nécessaire.** Les `layers-zarr` publiés de `PHerc0139` font
-**109 couches** (`shape [109, 23280, 32160]`, chunks `[109, 128, 128]` — un morceau est une
-colonne pleine profondeur) là où le détecteur n'en lit que **26**. Décaler `--start-layer`
-donne donc le nul dans **la même pile** : même volume, même segment, même région, même modèle,
-même pas — un seul paramètre bouge, ce qui est la conception appariée que `46` réclame.
+**109 couches** (`shape [109, 23280, 32160]`) là où le détecteur n'en lit que **26**. Décaler
+`--start-layer` donne donc le nul dans **la même pile** : même volume, même segment, même région,
+même modèle, même pas — un seul paramètre bouge, ce qui est la conception appariée que `46`
+réclame.
 
-⭐⭐ **Et le décalage est mesuré, pas choisi.** `depth_profile` rend le contraste par couche : pic
-normalisé à **1,000 à la couche 56**, chute monotone à **0,000 à la 100**. La fenêtre nulle est
-prise au **minimum mesuré** — un demi-pas nominal peut tomber sur la spire voisine, un minimum
-mesuré ne le peut pas.
+### ⚠⚠⚠ La première campagne était FAUSSE, et sa cause était écrite dans le module qu'elle appelait
 
-| fenêtre | contraste local | encre méd. | étendue |
-|---|---:|---:|---:|
-| face écrite, couches 39–65 | **0,877** | **−0,272** | 3,994 |
-| **vide entre feuilles**, 83–109 | **0,063** | **−1,502** | **3,767** |
+Elle plaçait sa fenêtre « face » sur le pic de **contraste local**. Or `depth_profile.py` dit
+lui-même que *« sur un volume à 2,4 µm le contraste devient un U — maximal aux DEUX bords,
+minimal dans la feuille — parce qu'il suit les interfaces et le bruit, pas la matière »*, et le
+§10 de [`12`](12_profondeur_de_surface.md) porte cette correction depuis le 2026-08-18.
 
-> ⚠⚠⚠ Le contraste local est **quatorze fois plus bas** dans le vide, et la dispersion du
-> détecteur ne tombe que de **6 %**. Donc *« il y a de la structure ici »* **ne discrimine
-> pas**, et l'inquiétude de `46` est confirmée sur une face **vierge**, pas seulement sur une
-> surface posée en travers.
+Mesuré : sur `w058` et `w056` le contraste pique aux couches **0** et **104** d'une pile de 109,
+**avec son minimum au milieu**. La fenêtre « face » tombait donc sur une **spire voisine** et la
+fenêtre « nulle », choisie au minimum, tombait **dans la feuille**. Le couple était **inversé**,
+et il rendait une AUC de **0,50** que j'ai failli publier comme « le détecteur ne distingue pas
+le papyrus du vide ».
 
-⭐ **Mais l'autre moitié sauve le détecteur sur un autre canal** : le **niveau** se déplace
-franchement, médiane **−0,27** contre **−1,50**. Une lecture par **seuil** distingue les deux ;
-une lecture par **structure** ne le peut pas. Les deux assertions sont dans la batterie — l'une
-sans l'autre déforme le résultat.
+⭐ **Deux gardes plutôt qu'une vigilance** : le choix se fait désormais sur l'**intensité**, et
+un pic hors de la **moitié centrale** de la pile fait **refuser** la mesure — avant de payer deux
+inférences, pas après. Le chercheur de tuiles score sur **le même critère** que la garde :
+chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.
 
-![Une face écrite et un vide, vus par le même détecteur](images/75_le_nul_verso.png)
+### La mesure, sur les trois segments
 
-*Même échelle de gris, prise sur les percentiles 1 et 99 des **deux** cartes : rendre chacune à
-sa propre plage ferait paraître le vide aussi structuré que la face, c'est-à-dire illustrerait la
-panne au lieu de la montrer. Un pixel non mesuré sort en bleu sombre, jamais en noir.*
+![une face et un vide, sur trois segments](images/75_le_nul_verso.png)
 
-⚠⚠ **Ce que la figure montre et que les résumés taisent** : le vide est sombre *dans
-l'ensemble* mais porte des **taches vives** indiscernables d'encre. Mesuré : **15,1 %** du vide
-dépasse la **médiane de la face**, et la corrélation entre les deux cartes vaut **+0,001** —
-donc la carte du vide n'est **pas un décalque** de celle de la face, pas une transparence de la
-même colonne.
+*Même échelle de gris **par segment**, prise sur les percentiles 1 et 99 des deux cartes : rendre
+chacune à sa propre plage ferait paraître le vide aussi structuré que la face, c'est-à-dire
+illustrerait la panne au lieu de la montrer. ⚠ L'échelle n'est pas commune aux trois — deux
+campagnes n'ont pas la même plage de sortie, et une échelle globale comparerait des campagnes au
+lieu de comparer face et vide.*
 
-⚠⚠⚠ **Ce qui reste indécidable, et pour une raison structurelle.** La corrélation ne dit **rien**
-de la spire **voisine** : son encre n'a aucune raison de tomber là où celle de cette face-ci
-tombe. Et aucune troisième fenêtre ne trancherait — le creux mesuré fait **une vingtaine de
-couches** et le détecteur en lit **26**, donc **aucune fenêtre de sa taille ne tient entièrement
-dans le vide**. La fenêtre nulle frôle nécessairement la remontée du voisin (0,096 à la
-couche 108).
+| segment | fenêtres | **AUC face/vide** | médiane face | médiane vide | matière face/vide | contraste face/vide |
+|---|---|---:|---:|---:|---:|---:|
+| `w056` | 39–65 contre 83–109 | **0,519** | −0,839 | −0,869 | **5,9×** | 0,717 / 0,191 |
+| `w058` | 60–86 contre 5–31 | **0,371** | −0,665 | **−0,240** | **2,6×** | 0,187 / **0,639** |
+| `w046` | 35–61 contre 61–87 | **0,382** | −0,812 | **−0,394** | **3,6×** | 0,245 / **0,383** |
 
-⚠ Et la limite que `46` énonce déjà tient ici : à ce pas de balayage la carte est trop petite
-pour porter une **typographie**. On compare niveau et dispersion, jamais l'interligne.
+> ⚠⚠⚠ **Le détecteur ne sépare la feuille du vide sur AUCUN des trois.** Le mieux qu'il fasse est
+> **0,519**, c'est-à-dire le hasard. Et sur deux segments il fait **pire que le hasard** : le vide
+> se lit **plus encré** que la feuille, alors que la face y porte **2,6 à 5,9 fois** plus de
+> matière.
 
-**Restant sur C2** : refaire la mesure sur **deux autres segments `w`** de `0139` — la
-conception et le coût sont établis (extraction + profil + deux inférences ≈ 9 min par segment),
-il ne reste qu'à choisir des fenêtres portant de la matière.
+⭐⭐ **Ce qui prédit la réponse n'est pas la matière, c'est le CONTRASTE.** Le signe de
+`AUC − 0,5` suit celui de `contraste_face − contraste_vide` sur les **trois** segments, tandis que
+le rapport de matière — qui penche partout du côté de la face — ne prédit rien. ⚠ Trois points :
+un accord de signe sur trois vaut une chance sur huit sous une règle tirée au hasard. C'est une
+observation **compatible avec** « le détecteur suit le contraste local et non la feuille », pas
+une preuve — et le contrôle est écrit pour **tomber** si un quatrième segment ne suivait pas.
+
+### ⚠⚠⚠ Et la cause probable est une erreur d'échelle qui touche TOUT le dépôt
+
+Le modèle lit **26 couches**. Ce qui compte n'est pas ce compte mais l'**épaisseur** :
+
+| pile | taille de voxel | 26 couches couvrent |
+|---|---:|---:|
+| Scroll 1 `20230909121925`, où le modèle atteint 0,925 | 7,91 µm | **206 µm** |
+| segments officiels de `PHerc1447` | 8,64 µm | 225 µm |
+| **volumes de surface de `PHerc0139`** | **2,399 µm** | **62 µm** |
+
+**62 µm, c'est moins qu'une épaisseur de feuille** (~100 µm). Sur ces volumes le détecteur ne voit
+donc pas « une feuille et ses voisines » comme à l'entraînement : il voit une tranche **intérieure**
+à une feuille — où il n'y a aucune surface — pendant que la fenêtre « nulle », posée entre deux
+spires, en contient une. **Cela expliquerait exactement le renversement mesuré.**
+
+⚠⚠ `infer_ink.py` portait le contraire, et à l'envers : *« à 8,64 µm, 26 couches couvrent 225 µm là
+où l'entraînement en voyait 62 »*. Or 62 = 26 × 2,4, c'est-à-dire précisément la ligne que
+[`36`](36_lorigine_de_la_pile.md) §5bis **déclare fausse** depuis le 2026-08-27. Corrigé.
+
+⭐⭐⭐ **La prédiction, écrite AVANT la mesure.** `load_layer_stack` prend depuis août un pas de
+profondeur qui épaissit la fenêtre sans changer le nombre d'images — et **aucun drapeau ne
+l'exposait**, donc la seule grandeur capable de corriger la profondeur lue était injoignable
+depuis la ligne de commande. Il l'est désormais (`--pas-couches`). À **pas 3** les 26 couches
+couvrent **187 µm**, soit le régime d'entraînement à 9 % près, et la fenêtre « face » contient
+alors la surface **et** ses voisines.
+
+> **Si la fenêtre trop mince est la cause**, l'écart-type de la sortie doit monter avec le pas et
+> la face doit cesser d'être moins encrée que le vide. **Sinon**, la profondeur est innocentée et
+> cet axe est clos — ce qui vaut d'être écrit aussi.
+>
+> Mesure : `src/encre/la_profondeur_lue.py` (10 contrôles), étalon absolu de `36` §5bis —
+> σ **0,7712** là où le modèle marche, σ **0,0171** là où il rend une constante.
+
+### ⚠⚠ Ce que ce contrôle ne peut pas faire, et ce qu'il ne dit pas
+
+- **Il ne dit pas que la feuille est vierge.** Les fenêtres sont choisies sur la **matière**, pas
+  sur l'encre : rien ici ne sait si ces trois faces portent de l'écriture. « Le détecteur ne les
+  distingue pas d'un vide » est ce qui est mesuré ; « il n'y a rien à lire » ne l'est pas.
+- **Il ne peut pas écarter la spire voisine.** La corrélation entre les deux cartes vaut
+  **−0,102 / +0,105 / −0,009** : la carte du vide n'est donc **pas un décalque** de celle de la
+  face, pas une transparence de la même colonne. Elle ne dit **rien** de la spire d'à côté, dont
+  l'encre n'a aucune raison de tomber là où celle de cette face-ci tombe.
+- **À ce pas de balayage la carte est trop petite pour porter une typographie** (`46` le dit déjà
+  de lui-même). On compare le **niveau**, la **dispersion** et l'**AUC**, jamais l'interligne.
+
+### ⚠ Ce qui est retiré de la version publiée le matin même
+
+La version précédente annonçait que *« le NIVEAU, lui, se déplace franchement (−0,27 contre
+−1,50), donc une lecture par seuil distingue les deux »* — la moitié rassurante du résultat. Sur
+des fenêtres réellement posées sur la feuille, cet écart tombe à **−0,03 / −0,43 / −0,42** : nul,
+puis **négatif** deux fois. Le niveau ne sauve rien, et la batterie l'asserte désormais dans ce
+sens-là.
+
+⚠ Un piège d'outillage payé au passage, pour la troisième fois dans ce dépôt : **deux campagnes ont
+tourné en parallèle** sur les mêmes cartes, parce qu'un `nohup` survivant était invisible à
+`ps -C python` — le processus s'appelle `python3`. Le remède est un **verrou `flock`** dans l'outil,
+pas une vigilance : il est relâché par le noyau quand le processus meurt, quelle que soit la façon
+dont il meurt.
 
 ---
 
@@ -866,7 +931,36 @@ La forme est **ancrée en début de ligne**, ce qui sépare une exécution d'une
 un document qui cite le fichier au fil d'une phrase rend `[]`, un `.` à chemin calculé et un
 `source` littéral sont détectés. Les 21 contrôles du détecteur restent verts.
 
-**32 orphelins** (41 au départ).
+**24 orphelins** (41 au départ). ⭐ Huit de plus rattachés le **2026-09-05**, et aucun n'était
+une formalité :
+
+| quoi | ce qui n'était pas refaisable |
+|---|---|
+| `figure_profondeur` (`12` §1bis) | l'image **ne se régénérait plus depuis les données de l'arbre** : trois nombres du document avaient dérivé, et la version publiée montrait deux panneaux là où les mesures en donnent trois |
+| `figure_difficulte` (`16`) | vérifié **octet pour octet** (md5 `a163cd18…`) |
+| `campagne_temoin_typographique` (`46`) | tous ses réglages sont des variables d'environnement, donc la commande nue reproduit la campagne — encore fallait-il l'écrire |
+| **`excision/measure.py` + `analyse.py`** (`04`) | ⚠⚠ le `p = 0,859` est cité dans **quatre** documents et `analyse.py` n'est nommé dans **aucun**. Vérifié hors ligne : rend le tableau publié à l'identique |
+| `table_pas` (`26` §9) | la colonne « mauvaise graine » n'était atteignable qu'en lisant le code, la bonne étant le défaut de l'outil |
+
+### ⚠⚠⚠ Et le registre de lecture avait un point aveugle de dix documents
+
+`src/depot/fiches_a_jour.py` (17 contrôles) compare chaque fiche au document qu'elle résume —
+rien ne le faisait, donc une fiche pouvait décrire un fichier qui avait bougé de trente-cinq
+lignes. Trois avaient dérivé, et **dix fiches sur soixante-trois portaient une remarque derrière
+leur nombre** (« ⚠ (438 quand la fiche a été écrite…) ») qui les rendait invisibles à ma première
+version du motif — le contrôle était aveugle à la population la plus à risque.
+
+Puis le point aveugle **symétrique**, qui vaut plus cher : **les dix documents les plus récents —
+`69` à `78` — n'ont aucune fiche**. Le registre se lit *à la place* des documents, donc son silence
+sur eux se lisait comme une couverture complète.
+
+> ⚠ **Non fait, et volontairement** : écrire dix fiches demande de lire dix documents pour de bon.
+> Une fiche bâclée est pire que pas de fiche — elle a l'air d'une lecture. C'est une tâche à part ;
+> ce qui est fait, c'est qu'elle ne peut plus être **oubliée en silence**.
+```
+uv run python src/depot/fiches_a_jour.py            # dérives + documents sans fiche
+uv run python src/depot/fiches_a_jour.py --corriger  # les comptes seulement, jamais le résumé
+```
 
 ⚠ Une fausse alerte à moi : j'ai cru `proximity_scroll1.json` manquant, il existe en `.jsonl`.
 Mon motif cherchait la mauvaise extension.

@@ -205,8 +205,22 @@ def panorama(mesures: list[dict], sortie: Path) -> dict:
 
     gros, moyen, petit = police(17, 13, 11)
     cote, marge = 236, 36
-    entete, ligne_h = 78, cote + 52
-    L = 2 * cote + 18 + 2 * marge + 300
+    entete, ligne_h = 78, cote + 34
+
+    # ⚠⚠ LA LARGEUR SE MESURE, ELLE NE SE CHOISIT PAS. Ma première version réservait 300 px à
+    # la colonne de droite : la prose débordait et sortait coupée en plein mot, sur la figure
+    # qui porte le résultat. Un texte tronqué ne se lit pas comme un défaut de mise en page,
+    # il se lit comme une phrase qui s'arrête.
+    def largeur(texte, fonte):
+        boite = ImageDraw.Draw(Image.new("RGB", (1, 1))).textbbox((0, 0), texte, font=fonte)
+        return boite[2] - boite[0]
+
+    colonne = max(
+        [largeur(l, petit) for m in mesures for l in prose(m)[1:]]
+        + [largeur(f"AUC face contre vide  {m.get('auc_face_contre_nul', 0):.3f}", moyen)
+           for m in mesures]
+        + [largeur(m["segment"].split("_")[0], moyen) for m in mesures])
+    L = 2 * cote + 18 + 3 * marge + colonne
     H = entete + ligne_h * len(mesures) + 24
     toile = Image.new("RGB", (L, H), FOND)
     d = ImageDraw.Draw(toile)

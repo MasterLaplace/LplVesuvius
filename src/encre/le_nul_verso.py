@@ -511,16 +511,39 @@ def _verifier_tous(lots: list[dict]) -> int:
                 echecs += 1
 
         rapports = [x["rapport_etendue"] for x in lots if x.get("rapport_etendue")]
-        sauts = [x["face"]["mediane"] - x["nul"]["mediane"] for x in lots
-                 if x.get("face") and x.get("nul") and not x["face"].get("echec")]
+        aucs = [x["auc_face_contre_nul"] for x in lots if x.get("auc_face_contre_nul")]
+        matiere = [x["intensite_face"] / max(1e-9, x["intensite_nul"]) for x in lots
+                   if x.get("intensite_face")]
+        # ⚠ « Le contraste penche-t-il du côté de la face ? » et « l'AUC penche-t-elle du côté
+        # de la face ? » — deux signes, comparés segment par segment.
+        signes = [((x["contraste_face"] - x["contraste_nul"]) > 0)
+                  == ((x["auc_face_contre_nul"] - 0.5) > 0)
+                  for x in lots if x.get("auc_face_contre_nul") and x.get("contraste_face")]
         # ⚠⚠⚠ LE RESULTAT N'EST UNE PROPRIETE DU DETECTEUR QUE S'IL TIENT SUR TOUS. Ecrit pour
         # tomber si un segment se comportait autrement -- ce serait alors une propriete de la
         # FENETRE, et il faudrait chercher laquelle.
         v("la dispersion ne s'effondre sur AUCUN segment",
           all(x > 0.8 for x in rapports),
           " · ".join(f"{x:.2f}" for x in rapports))
-        v("... et le niveau se déplace sur TOUS",
-          all(x > 0.5 for x in sauts), " · ".join(f"{x:+.2f}" for x in sauts))
+        # ⚠⚠⚠ LE RESULTAT PRINCIPAL, ECRIT POUR TOMBER DANS LES DEUX SENS. Si un segment
+        # separait franchement la feuille du vide, ce controle echouerait -- et ce serait la
+        # nouvelle. Mesure : 0,519 / 0,371 / 0,382, donc le MIEUX que le detecteur fasse est le
+        # hasard.
+        v("le détecteur ne sépare la feuille du vide sur AUCUN segment",
+          max(aucs) < 0.60, " · ".join(f"{x:.3f}" for x in aucs))
+        # ⚠⚠ ET LA MATIERE NE PREDIT PAS LA REPONSE : la face porte 3 a 6 fois plus de matiere
+        # que le vide sur les trois, donc un detecteur qui suivrait la feuille rendrait une AUC
+        # au-dessus de 0,5 partout. Deux la rendent EN DESSOUS.
+        v("... alors que la face porte partout au moins deux fois plus de matière",
+          all(x > 2.0 for x in matiere), " · ".join(f"{x:.1f}x" for x in matiere))
+        v("... et sur au moins un segment le VIDE se lit mieux que la feuille",
+          min(aucs) < 0.45, f"{min(aucs):.3f}")
+        # ⚠⚠ TROIS POINTS, ET C'EST DIT. Un accord de signe sur trois segments vaut 1 chance
+        # sur 8 sous une regle tiree au hasard : c'est une observation compatible avec « le
+        # detecteur suit le CONTRASTE local et non la feuille », pas une preuve. Ce qui rend le
+        # controle utile est qu'il TOMBE si un quatrieme segment ne suit pas.
+        v("... et le signe de l'AUC suit celui du contraste sur TOUS",
+          all(signes), " · ".join("oui" if x else "non" for x in signes))
         total += echecs
     print()
     print(f"  {'ECHEC' if total else 'ALL PASS'} ({total} failures, {len(lots)} segment(s))")
@@ -609,20 +632,29 @@ def _verifier(r: dict | None = None) -> int:
             # dispersion s'effondre sur une face vierge. Elle ne s'effondre PAS : rapport 0,94
             # sur une fenêtre dont le contraste local est QUATORZE fois plus bas. Donc « il y a
             # de la structure ici » ne discrimine pas, et `46` avait raison de s'en inquiéter.
-            v("la dispersion NE s'effondre PAS sur la face vierge",
+            v("la dispersion NE s'effondre PAS dans le vide",
               r["rapport_etendue"] > 0.8,
               f"étendue nulle {r['etendue_nul']:.3f} contre face {r['etendue_face']:.3f} "
               f"— rapport {r['rapport_etendue']:.2f}, contraste local "
               f"{r['contraste_face']:.3f} contre {r['contraste_nul']:.3f}")
-            # ⚠⚠ ET L'AUTRE MOITIÉ, QUI SAUVE LE DÉTECTEUR SUR UN AUTRE CANAL. Le NIVEAU, lui,
-            # se déplace franchement : la médiane passe de -0,272 à -1,502. Une lecture par
-            # SEUIL distingue donc les deux, là où une lecture par structure ne le peut pas.
-            # Les deux assertions ensemble sont le résultat ; l'une sans l'autre le déforme.
+            # ⚠⚠⚠ ET LE NIVEAU NE SAUVE RIEN — CORRIGÉ LE 2026-09-05. Sur les fenêtres
+            # choisies au contraste, le niveau semblait distinguer les deux (médiane -0,27
+            # contre -1,50) et cette moitié était présentée comme rassurante. Sur les fenêtres
+            # choisies à l'INTENSITÉ, c'est-à-dire quand la fenêtre « face » est réellement sur
+            # la feuille, l'écart tombe à -0,03 / -0,43 / -0,42 : nul, puis NÉGATIF deux fois.
+            # Le vide se lit plus encré que la feuille.
             saut = f_["mediane"] - n_["mediane"]
-            v("... mais le NIVEAU, lui, se déplace franchement",
-              saut > 0.5,
-              f"médiane face {f_['mediane']:+.3f} contre nulle {n_['mediane']:+.3f} "
-              f"— écart {saut:+.3f}")
+            v("le niveau ne distingue pas la feuille du vide non plus",
+              saut < 0.5,
+              f"médiane face {f_['mediane']:+.3f} contre vide {n_['mediane']:+.3f} "
+              f"— écart {saut:+.3f}"
+              + ("  ⚠ le VIDE se lit plus encré" if saut < 0 else ""))
+            # ⚠⚠ L'AUC DIT LA MÊME CHOSE SANS SEUIL, et c'est elle qu'il faut lire : une
+            # médiane qui se déplace n'est utile que si les distributions se séparent.
+            v("... et l'AUC le confirme sans seuil",
+              r["auc_face_contre_nul"] < 0.60,
+              f"AUC face contre vide {r['auc_face_contre_nul']:.3f} "
+              f"(0,5 = pile ou face)")
             # ⚠⚠⚠ CE QUE LA CORRELATION ETABLIT, ET CE QU'ELLE N'ETABLIT PAS. Elle repond a
             # une seule question : la carte du vide est-elle un DECALQUE de celle de la face --
             # le detecteur voyant a travers la meme colonne ? A +0,001, non.

@@ -77,6 +77,27 @@ def auditer(texte: str, racine: Path) -> list[dict]:
     return out
 
 
+TITRE = re.compile(r"^### (\S+\.md)$", re.M)
+
+
+def sans_fiche(texte: str, racine: Path) -> list[str]:
+    """
+    @brief Les documents de `docs/` que le registre ne résume pas du tout.
+
+    ⚠⚠⚠ LE POINT AVEUGLE SYMÉTRIQUE, et il valait dix documents. Ce fichier comparait chaque
+    fiche à sa source et rapportait « 63 fiches, 0 en dérive » — parfaitement vrai, et
+    parfaitement muet sur le fait que **les dix documents les plus récents n'avaient aucune
+    fiche**. Un registre qu'on lit à la place des documents doit dire ce qu'il ne couvre pas,
+    sinon son silence se lit comme une couverture complète.
+
+    ⚠ `docs/*.md` seulement, sans les sous-dossiers : `registres/` contient le registre
+    lui-même et `Books/` n'est pas de la documentation de travail.
+    """
+    fiches = set(TITRE.findall(texte))
+    return [str(q.relative_to(racine)) for q in sorted((racine / "docs").glob("*.md"))
+            if str(q.relative_to(racine)) not in fiches]
+
+
 def corriger(texte: str, audit: list[dict]) -> tuple[str, int]:
     """
     @brief Réécrit les comptes qui ont dérivé — et **rien d'autre**.
@@ -127,6 +148,20 @@ def _verifier() -> int:
         # confondre ferait corriger un compte vers zéro sur un fichier absent.
         v("... et un document disparu n'est pas une dérive mais une absence",
           [e for e in audit if e["chemin"] == "docs/parti.md"][0]["reel"] is None)
+
+        # ⚠⚠ ET LE POINT AVEUGLE SYMÉTRIQUE : un document sans fiche du tout. Le registre se
+        # lit À LA PLACE des documents, donc son silence sur dix d'entre eux se lisait comme
+        # une couverture complète.
+        (d / "docs" / "jamais_lu.md").write_text("x\n", encoding="utf-8")
+        v("un document sans fiche est nommé",
+          sans_fiche(registre, d) == ["docs/jamais_lu.md"], str(sans_fiche(registre, d)))
+        v("... et un document qui EN a une ne l'est pas",
+          "docs/a.md" not in sans_fiche(registre, d))
+        # ⚠ Un titre suivi d'autre chose que la fin de ligne n'est pas une entrée de registre :
+        # sans l'ancrage, une mention en prose ferait passer un document pour résumé.
+        v("... et une mention en prose ne compte pas comme une fiche",
+          "docs/jamais_lu.md" in sans_fiche(registre + "voir ### docs/jamais_lu.md ici\n", d))
+        (d / "docs" / "jamais_lu.md").unlink()
 
         neuf, n = corriger(registre, audit)
         v("--corriger ne touche que les comptes qui ont dérivé", n == 1, str(n))
@@ -193,6 +228,7 @@ def main() -> int:
 
     texte = REGISTRE.read_text(encoding="utf-8")
     audit = auditer(texte, RACINE)
+    orphelins = sans_fiche(texte, RACINE)
     derives = [e for e in audit if e["ecart"] not in (0, None)]
     absents = [e for e in audit if e["reel"] is None]
     for e in absents:
@@ -200,7 +236,10 @@ def main() -> int:
     for e in sorted(derives, key=lambda x: -abs(x["ecart"])):
         print(f"  {e['chemin']:56s} fiche {e['note']:>5d}  réel {e['reel']:>5d}  "
               f"écart {e['ecart']:+d}")
-    print(f"\n{len(audit)} fiche(s), {len(derives)} en dérive, {len(absents)} absente(s)")
+    for q in orphelins:
+        print(f"  SANS FICHE  {q}")
+    print(f"\n{len(audit)} fiche(s), {len(derives)} en dérive, {len(absents)} absente(s), "
+          f"{len(orphelins)} document(s) sans fiche")
 
     if a.corriger and derives:
         neuf, n = corriger(texte, audit)
@@ -213,7 +252,7 @@ def main() -> int:
         for e in sorted(derives, key=lambda x: -abs(x["ecart"])):
             print(f"      {e['chemin']}   ({e['ecart']:+d} lignes)")
         return 0
-    return 1 if (derives or absents) else 0
+    return 1 if (derives or absents or orphelins) else 0
 
 
 if __name__ == "__main__":
