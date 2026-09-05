@@ -3706,7 +3706,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/55_les_murs_et_leurs_causes.md
-- **lignes** : 112
+- **lignes** : 113
 - **nature** : PROCEDE
 - **résumé** : Document **rendu** depuis `docs/registres/murs_et_causes.tsv` par `uv run python src/depot/murs_et_causes.py --rendre`, et non écrit à la main ; sa batterie vérifie que chaque ligne pointe vers un document contenant encore son ancre. Il recense **30 causes candidates sur 4 murs** : 19 éliminées, 10 confirmées, 1 bloquée, chacune avec la mesure qui l'a tranchée et le document d'origine. Sa thèse de forme est qu'un mur est un espace de causes dont on retire une entrée à la fois, et que la liste des causes éliminées — non celle des tâches — est le seul progrès mesurable. Une seule cause reste non tranchée, et elle est bloquée. (⚠ Note de lecture : l'en-tête compte 19 éliminations quand le §final écrit « les treize éliminations de ce document » ; le document ne signale pas l'écart. De même, il ne contient aucune cause ⏳ *ouverte* alors que son propre tableau de symboles définit ce statut.)
 - **conclusions extractibles** : *(les murs recensés, avec pour chacun les causes éliminées et celles qui restent ouvertes)*
@@ -3760,7 +3760,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 - **rétractations / corrections internes** : aucune rétractation déclarée. Le document précise en revanche deux bornes de portée sur des causes confirmées : « la graine, c'est-à-dire l'endroit » explique la famille m7 **et pas le mur**, et la chaîne tangentielle « ne dit pas que c'est la BONNE feuille (il faut de l'encre), et part d'un segment PUBLIÉ et non d'une de nos traces ». Il retire aussi explicitement une affirmation antérieure : « ⚠⚠ Le “croisement” que j'avais publié à 1 920 µm n'existe pas : chaîne ET bond y sont au niveau du hasard (−1,7 et +1,6) ».
 - **preuve de lecture intégrale** :
   - ligne 76 : « | enchaîner la projection à GRAND pas (238 µm/maillon) | ❌ | cinq maillons de 238 µm étalent la boîte ×2,38 à nombre de points constant, contre ×1,10 pour le bond direct — et finissent 5,33 SPIRES à côté de lui. ⚠ Le pas réel dérive avant la boîte : 238 → 963 µm par maillon | [`44`](44_ou_la_chaine_se_trouve.md) | »
-  - ligne 106 : « cause à laquelle personne n'a pensé. Le tableau borne ce qu'on a testé, jamais ce qui »
+  - ligne 111 : « cause à laquelle personne n'a pensé. Le tableau borne ce qu'on a testé, jamais ce qui »
 
 ---
 
@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 2046
+- **lignes** : 2111
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5584,6 +5584,20 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     cible**, il n'a pas disparu.
   - ⭐ Leçon de méthode : **le fichier par défaut d'un index n'est pas le meilleur fichier de
     l'index**. Cinquante-neuf repères sur soixante étaient perdus par un choix de lecture.
+  - ⛔⛔ **ET L'APPARIEMENT LUI-MÊME EST ENTERRÉ, par un témoin qui ne casse qu'une chose.** Les
+    deux tranches précédentes comparaient à un semis **uniforme**, qui casse la place ET le
+    groupement — or les repères sont groupés, donc un semis uniforme est loin de tout **par
+    construction**. Le témoin juste garde la géométrie du nuage au bit près et ne déplace que sa
+    position : sur **20 poses**, la vraie place fait **796 px** contre **638** pour la meilleure,
+    **1 015** en médiane et **1 411** au pire. **Rang 6 sur 21, p = 0,29** — cinq poses au hasard
+    font mieux. Le « ×8 » puis le « ×7,7 » mesuraient le **groupement**, pas une correspondance.
+  - ⭐ Ce qui reste établi et solide : le support publié **est un masque**, et l'histogramme le
+    dit sans ambiguïté — **37,5 %** de zéros puis un **vide de 27 niveaux** avant la première
+    valeur rendue (28). Un détecteur qui prédit peu occupe 1, 2, 3 ; un pipeline qui masque écrit
+    un zéro franc. C'est donc le masque du **régime du prix**, avec ses 36 vides à lui.
+  - ⚠⚠⚠ **La leçon de méthode qui vaut pour tout le dépôt** : *un témoin doit casser une seule
+    chose*. Celui qui en casse deux ne peut pas dire laquelle comptait, et il rend un rapport
+    flatteur qui ne mesure que le confond oublié.
   - ⚠⚠ **La figure a attrapé une sur-affirmation de ma propre prose** : j'y écrivais les
     repères « répartis à l'intérieur », et le dessin montre qu'ils sont **groupés d'un côté**
     — 12 sur 55 dans la boîte centrale. Ils sont dans l'**aire** du fragment et non sur son
@@ -5666,8 +5680,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 1453 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 2046 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 1518 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 2111 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

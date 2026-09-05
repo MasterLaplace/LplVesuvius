@@ -1024,7 +1024,7 @@ alignée sur le pas, elle rend **1 trou contre 0** selon un décalage de cinq pi
 > une demande, pas un calcul — soit les étiquettes rendues **à ce régime-là**, ce qui est la
 > case vide de `68` §4 par un autre chemin.
 
-### ⚠ Et ils ont un vis-à-vis, mais BIEN PLUS MAIGRE que ce que cette section a d'abord écrit
+### ⛔ Et ils N'ONT PAS de vis-à-vis, contrairement à ce que cette section conclut
 
 > Mesure : `src/encre/les_reperes_apparies.py` (10 contrôles), figure
 > `src/figures/figure_les_reperes_apparies.py` (7 contrôles), le 2026-09-05.
@@ -1036,7 +1036,10 @@ le support natif ×8 par la même règle rend **19** composantes de fond et non 
 « trous » comptés ici sont donc en grande part du **crénelage de compression** — la carte réduite
 est un `.jpg`, et un `.jpg` crénelle les bords à fort contraste, c'est-à-dire le pourtour des
 vrais trous. Ce qui survit : les repères se posent bel et bien **7,7 fois plus près** des vides
-qui existent que le hasard. Voir « le goulot n'était pas le fragment, c'était le fichier ».
+qui existent que le hasard. ⛔⛔ **Et même ce « 7,7 fois » tombe** : contre un témoin qui garde
+la FORME du nuage au lieu de la casser avec sa place, la vraie position est la **6ᵉ sur 21**
+(p = 0,29). Le rapport mesurait le **groupement** des repères, pas une correspondance. Voir
+« le goulot n'était pas le fragment » puis « le témoin JUSTE enterre l'appariement ».
 
 ⚠⚠ **Le paragraphe ci-dessus supposait qu'il n'y avait rien en face. C'est faux, et la mesure
 le dit.** Là où il n'y a **pas de matière**, un détecteur ne peut rien rendre — donc si le
@@ -1336,12 +1339,13 @@ conteste — la règle de réduction est « plein dès qu'il y a de la matière 
 > **36**, quand le masque en a **348**. Le support n'est pas un masque du fragment ; c'est une
 > carte de détecteur qui en montre une poignée.
 
-#### ⭐ Ce qui survit à la correction, et c'est l'essentiel
+#### ⛔ Ce que je croyais survivre, et qui ne survit pas non plus
 
-Les **314** repères se posent tout de même **7,7 fois plus près** de ces 36 vides que le hasard :
-**796 px** de distance médiane contre **6 114 px** pour autant de points tirés dans la même
-empreinte. Les vides qui existent **sont** ceux du fragment — c'est le **compte** qui était faux,
-pas l'appariement.
+J'ai écrit ici que les **314** repères se posent **7,7 fois plus près** de ces 36 vides que le
+hasard — **796 px** contre **6 114 px** — et que « les vides qui existent sont ceux du fragment,
+c'est le compte qui était faux, pas l'appariement ». ⚠⚠⚠ **Faux aussi.** Le témoin uniforme casse
+la place ET le groupement ; le témoin qui ne casse que la place met la vraie position **6ᵉ sur
+21** (p = 0,29). Il n'y a pas d'appariement. Voir la section suivante.
 
 #### ⚠⚠ Et la figure impose une seconde nuance : le gain est de la DENSITÉ, pas de l'étendue
 
@@ -1369,6 +1373,65 @@ avait déjà de la matière ne donne rien à un recalage qui manque de matière 
    que `68` §4 nommait déjà : demander un **masque de surface publié** au régime du prix, ou les
    étiquettes rendues dans son repère.
 
+### ⛔⛔ Et le témoin JUSTE enterre l'appariement : la vraie place des repères n'a rien de particulier
+
+> Mesure : `src/encre/le_temoin_de_meme_forme.py` (14 contrôles) →
+> `docs/mesures/le_temoin_de_meme_forme.json`. Figure :
+> `src/figures/figure_le_temoin_de_meme_forme.py` (8 contrôles), le 2026-09-05.
+>
+> ```
+> uv run python src/encre/le_temoin_de_meme_forme.py --json docs/mesures/le_temoin_de_meme_forme.json
+> uv run python src/figures/figure_le_temoin_de_meme_forme.py --sortie docs/images/75_le_temoin_de_meme_forme.png
+> ```
+
+⚠⚠⚠ **LE TÉMOIN DES DEUX TRANCHES PRÉCÉDENTES ÉTAIT TROP FACILE, ET C'EST MA FAUTE.** Elles
+jugeaient l'appariement contre un semis tiré **uniformément** dans l'empreinte. Or les repères
+sont **groupés** — leur 80 % central tient sur 29 % × 18 % de la carte — et les vides du support
+sont eux aussi peu nombreux et localisés. Un semis uniforme est donc plus loin de tout **par
+construction** : il casse **deux** choses à la fois, la place et le groupement, donc il ne peut
+pas dire laquelle des deux explique un bon score.
+
+⭐⭐⭐ **Le témoin juste garde la forme et ne casse que la place** : le même nuage de 314 repères,
+sa géométrie interne intacte au bit près, posé ailleurs dans l'empreinte, vingt fois.
+
+![la vraie place des repères n'a rien de particulier](images/75_le_temoin_de_meme_forme.png)
+
+| | distance médiane d'appariement |
+|---|---:|
+| **la vraie place** | **796 px** |
+| le témoin de MÊME FORME, meilleure des 20 poses | **638 px** |
+| … sa médiane | 1 015 px |
+| … sa pire pose | 1 411 px |
+| le témoin **uniforme** d'avant | 6 114 px |
+
+> ⛔ **Rang de la vraie place : 6ᵉ sur 21. p = 0,29.** Cinq poses au hasard font mieux qu'elle.
+> Il n'y a **pas de correspondance** entre les trous du masque et les vides du support : le
+> « ×8 » de la première tranche et le « ×7,7 » de la deuxième étaient le **groupement**, pas un
+> appariement.
+
+⚠ Le semis uniforme est à **6 114 px**, c'est-à-dire **hors** de l'étendue des vingt poses
+(576 à 1 473). C'est la mesure de sa facilité : il ne pouvait pas ne pas être battu.
+
+#### ⭐ Ce qui reste établi, et c'est solide
+
+Le support publié **est un masque**, et ça se lit dans l'histogramme sans ambiguïté :
+**37,5 %** des pixels exactement à zéro, puis un **vide de 27 niveaux** avant la première valeur
+rendue (28). Un détecteur qui prédirait peu d'encre occuperait 1, 2, 3 ; un pipeline qui
+**masque** écrit un zéro franc. ⚠ C'est donc bien un masque — celui du **régime du prix** — et
+c'est pour ça qu'il n'a que 36 vides intérieurs : sa segmentation n'a pas les trous de l'autre
+aplatissement, elle a les siens.
+
+#### Ce que ça change pour C1
+
+1. ⛔ **La voie « prendre les cibles dans la carte publiée » est FERMÉE**, et pas faute de
+   résolution : à pleine résolution il y a 314 repères d'un côté et 14 cibles utilisables de
+   l'autre, sans correspondance mesurable.
+2. ⚠⚠⚠ **Et une leçon de méthode qui vaut pour tout le dépôt** : un témoin doit casser **une
+   seule** chose. Celui qui en casse deux ne peut pas dire laquelle comptait, et il rend un
+   rapport flatteur — ici **×7,7** — qui ne mesure que le confond qu'on a oublié de contrôler.
+3. ⭐ Ce qui reste ouvert est ce que `68` §4 nommait déjà, et c'est maintenant la **seule** voie :
+   un **masque de surface publié** au régime du prix, ou les étiquettes rendues dans son repère.
+
 ### Ce qui reste de C1, et c'est maintenant précis
 
 1. ✅✅ **Ce n'était pas un champ, c'était une TRANSLATION — et sa part applicable est
@@ -1390,10 +1453,12 @@ avait déjà de la matière ne donne rien à un recalage qui manque de matière 
    qui en prédise quelque chose — laisser-un-dehors **31,8** contre **40,2** au champ nul et
    **42,8** au meilleur mélange de positions, là où les 34 carreaux échouent aux deux (77,5
    contre 60,5 et 58,8). ⭐ **Et ils sont désormais 314 et non 55** : il suffisait de lire la
-   carte publiée à sa résolution native au lieu de sa réduction ×8. ⚠⚠ Mais le gain est de la
-   **densité** — le 80 % central passe de 24,1 × 16,1 % de la carte à 28,7 × 18,1 % pour cinq
-   fois et demie plus de repères — et le goulot a **déménagé côté cible** : le support ne publie
-   que **36** vides. **Le densifier ailleurs reste à faire, et ça demande un masque publié.**
+   carte publiée à sa résolution native au lieu de sa réduction ×8. ⛔⛔ **Mais ils n'ont PAS de
+   vis-à-vis** : contre un témoin qui garde la forme du nuage, la vraie place est la **6ᵉ sur
+   21** (p = 0,29), donc l'appariement mesuré aux deux tranches précédentes était le
+   **groupement** des repères. Le support publié est bien un **masque** — 37,5 % de zéros puis un
+   vide de 27 niveaux — mais c'est celui du **régime du prix**, avec **36** vides à lui et non les
+   348 de l'autre aplatissement. **La voie est fermée ; il faut un masque de surface publié.**
 2. **Une fenêtre choisie dans un repère COMMUN**, pas dans la grille de chaque régime : les deux
    campagnes ont atterri sur deux régions différentes (27,8 % et 91,1 % d'encre), donc leurs
    nombres ne se comparaient pas même sans le problème de recalage.

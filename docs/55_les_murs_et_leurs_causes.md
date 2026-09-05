@@ -11,7 +11,7 @@ la fois. Une feuille de route qui liste des tâches laisse croire qu'on avance q
 tourne ; celle-ci liste des causes **éliminées**, et montre l'espace rétrécir. C'est le
 seul progrès mesurable sur un problème que personne n'a résolu.
 
-**38 causes candidates** sur **4 murs** : ❌ **26** éliminées · ✅ **10** confirmées · 🔒 **2** bloquées
+**39 causes candidates** sur **4 murs** : ❌ **27** éliminées · ✅ **10** confirmées · 🔒 **2** bloquées
 
 | symbole | verdict | ce que ça veut dire |
 |---|---|---|
@@ -52,7 +52,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 
 ## 2. Les patchs publiés ne se recollent pas
 
-❌ 5 éliminées · ✅ 1 confirmée
+❌ 6 éliminées · ✅ 1 confirmée
 
 | cause candidate | | ce qui a été mesuré | où |
 |---|---|---|---|
@@ -62,6 +62,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | recaler les deux aplatissements par un CHAMP plutôt que par une translation | ❌ | sur 127 fenêtres de l'empreinte les optima se serrent autour de (−24, 0) à 27 cases près, quand les champs candidats déplacent de 60 et 40 ; une constante porte l'AUC médiane de 0,755 à 0,852 en améliorant 116 fenêtres sur 127, et l'accord publié de 0,756 à 0,857 | [`75`](75_registre_des_taches.md) |
 | recaler les deux aplatissements sur le recouvrement de leurs CONTOURS | ❌ | le critère est contraire dans la plage qui compte : les trois translations qui font monter l'AUC de l'encre font toutes baisser le Dice, y compris l'optimum de l'encre dont le Dice (0,97263) est sous celui de l'affine non corrigée (0,974601) | [`75`](75_registre_des_taches.md) |
 | prendre le support de la carte d'encre publiée pour un masque du fragment | ❌ | à pleine résolution le support ne porte que 36 vides intérieurs quand le masque en a 348, et réduire le support natif ×8 par la même règle rend 19 composantes de fond et non 420 : les trous du réduit sont en grande part du crénelage de .jpg | [`75`](75_registre_des_taches.md) |
+| apparier les trous du masque aux vides du support publié | ❌ | contre un témoin qui garde la FORME du nuage et ne casse que sa place, la vraie position est la 6e sur 21 (p = 0,29) : le rapport de 7,7 contre un semis uniforme mesurait le groupement des repères, pas une correspondance | [`75`](75_registre_des_taches.md) |
 
 ## 3. L'extension tangentielle est un point fixe
 
