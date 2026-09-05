@@ -958,6 +958,67 @@ une agrégation locale ne recalent ces masques — parce que le problème n'est 
 modèle mais la **matière** qu'on lui donne : des bords, et rien à l'intérieur. Il faut du
 contenu intérieur, et c'est la seule voie qui reste.
 
+### ⭐⭐ Le contenu intérieur EXISTE — 348 trous, et la moitié qui manque est de l'autre côté
+
+> Mesure : `src/encre/les_reperes_interieurs.py` (15 contrôles, 3 sondes qui mordent), le
+> 2026-09-05. ⚠ Posée **avant** d'écrire un recaleur : c'est une question sur l'**entrée**.
+
+Les deux échecs ci-dessus désignent la même sortie — *« il faut du contenu intérieur »* — sans
+dire s'il en existe. Un **trou** du masque en est un, et il a la propriété qui compte : il est
+**géométrique**, donc s'en servir pour recaler ne rend pas circulaire la mesure d'encre qui
+suit, contrairement à l'optimum de (−104, −120) cellules obtenu **en regardant l'encre**.
+
+| | |
+|---|---:|
+| trous intérieurs d'au moins 64 pixels | **348** |
+| dont le bord couvre assez le plan (conditionnement ≥ 0,25) | **314** |
+| le plus grand | 16 907 px, 137 × 234, conditionnement **0,51** |
+
+⭐ **314 repères intérieurs contre 34 carreaux de bord** — et ils sont *intérieurs*, donc
+répartis sur le fragment au lieu d'être confinés à sa frontière. Chacun est individuellement
+mieux conditionné que le voisinage de bord le plus large (0,60 au meilleur rayon).
+
+```
+uv run python src/encre/les_reperes_interieurs.py \
+    --json docs/mesures/les_reperes_interieurs.json
+```
+
+⚠⚠ **Un trou rond contraint les deux composantes, une fente une seule** — c'est le problème
+d'ouverture un cran plus bas, et c'est pourquoi le conditionnement est mesuré par trou plutôt
+que supposé. Le seuil de 0,25 n'est pas choisi ici : c'est **celui que les carreaux de bord
+atteignent déjà**, donc un repère qui ne ferait pas mieux qu'un bord droit n'apporterait rien.
+
+⚠ Et un « trou » est une composante du complément qui **ne touche pas le bord de l'image** :
+ce qui le touche est l'extérieur du fragment. Les confondre compterait le fond entier comme un
+repère parfaitement isotrope — un faux positif parfait, et la sonde qui retire ce test fait
+tomber **six** contrôles.
+
+### ⚠⚠⚠ Mais la moitié qui manque est de l'AUTRE côté, et elle n'est pas publiée
+
+Un repère ne sert que s'il existe **dans les deux** aplatissements. Or `deux_aplatissements`
+l'écrit déjà : *« le corpus ouvert ne publie pas de masque pour ce segment »*. L'empreinte
+disponible au régime du prix est le **support de la carte d'encre**, c'est-à-dire là où le
+détecteur a rendu quelque chose — une propriété du **détecteur**, pas du fragment.
+
+Et elle n'existe qu'à **1024 de large**. À cette résolution, des 314 repères il en reste **19** :
+
+| | repères utilisables |
+|---|---:|
+| à pleine résolution (27 160 × 14 990) | **314** |
+| à 1024 de large, là où l'autre aplatissement existe | **19** |
+
+⚠ La réduction est faite **par majorité de bloc** et non par échantillonnage — sinon le compte
+de repères dépendrait de l'endroit où la grille tombe. La sonde qui la remplace par un
+échantillonnage au pas fait tomber le contrôle de stabilité : sur une fente de trois pixels
+alignée sur le pas, elle rend **1 trou contre 0** selon un décalage de cinq pixels.
+
+> ⭐⭐⭐ **Ce que ça change pour C1** : la voie n'est pas fermée, et son **prix est nommé**. Il
+> faut soit un **masque de surface publié** pour l'aplatissement du régime du prix — ce qui est
+> une demande, pas un calcul — soit les étiquettes rendues **à ce régime-là**, ce qui est la
+> case vide de `68` §4 par un autre chemin. Dix-neuf repères intérieurs valent mieux que
+> trente-quatre bords à l'ouverture, mais ils n'ont pour l'instant rien contre quoi être
+> appariés.
+
 ### ⚠⚠ Et ça corrige un de mes propres chiffres
 
 J'ai écrit plus haut que le résidu vaut « **1,1 mm en médiane** ». C'est la norme du décalage
@@ -977,7 +1038,11 @@ l'ordre de deux millimètres là où il compte.
    rien**, et l'**agrégation locale** non plus : sur la composante normale, la seule mesurée,
    aucun rayon de 256 à 1536 ne bat le champ nul. Le problème n'est donc pas la **forme** du
    modèle mais la **matière** qu'on lui donne — des bords, et rien à l'intérieur, dont le
-   conditionnement plafonne à 0,60 pour 1 en isotropie. Le résidu est **très variable** :
+   conditionnement plafonne à 0,60 pour 1 en isotropie. ⭐ **Et le contenu intérieur existe** :
+   **348** trous dont **314** utilisables. ⚠⚠ Ce qui manque est de l'**autre côté** — le régime
+   du prix ne publie **aucun masque de surface**, seulement le support de la carte d'encre, à
+   1024 de large, où il ne reste que **19** repères. Le prix de cette voie est donc un masque
+   publié, ou les étiquettes rendues au régime du prix. Le résidu est **très variable** :
    ~0,3 mm en médiane sur sa composante mesurée, mais **~2 mm là où la mesure d'encre échoue**.
    **Tout le reste en dépend.**
 2. **Une fenêtre choisie dans un repère COMMUN**, pas dans la grille de chaque régime : les deux

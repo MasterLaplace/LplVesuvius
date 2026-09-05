@@ -1,0 +1,2013 @@
+{
+  "masque": "500P2_mask.png",
+  "forme": [
+    27160,
+    14990
+  ],
+  "pixels_matiere": 245724839,
+  "aire_minimale": 64,
+  "trous": 348,
+  "utilisables": 314,
+  "detail": [
+    {
+      "aire": 16907,
+      "centre": [
+        20466.695865617792,
+        1579.4666706098067
+      ],
+      "hauteur": 137,
+      "largeur": 234,
+      "conditionnement": 0.5136
+    },
+    {
+      "aire": 6482,
+      "centre": [
+        9238.71783400185,
+        2950.8674791730946
+      ],
+      "hauteur": 95,
+      "largeur": 219,
+      "conditionnement": 0.3037
+    },
+    {
+      "aire": 4188,
+      "centre": [
+        18633.45128939828,
+        956.4400668576886
+      ],
+      "hauteur": 123,
+      "largeur": 86,
+      "conditionnement": 0.4068
+    },
+    {
+      "aire": 3922,
+      "centre": [
+        16658.38704742478,
+        1600.1863844977051
+      ],
+      "hauteur": 59,
+      "largeur": 140,
+      "conditionnement": 0.3745
+    },
+    {
+      "aire": 3618,
+      "centre": [
+        17421.820066334993,
+        1761.1312880044222
+      ],
+      "hauteur": 112,
+      "largeur": 91,
+      "conditionnement": 0.6263
+    },
+    {
+      "aire": 2313,
+      "centre": [
+        17386.056204063985,
+        1514.5322092520537
+      ],
+      "hauteur": 86,
+      "largeur": 100,
+      "conditionnement": 0.3275
+    },
+    {
+      "aire": 2193,
+      "centre": [
+        16582.731874145007,
+        1434.6926584587322
+      ],
+      "hauteur": 72,
+      "largeur": 89,
+      "conditionnement": 0.5477
+    },
+    {
+      "aire": 1471,
+      "centre": [
+        17294.337185588036,
+        1822.9374575118966
+      ],
+      "hauteur": 56,
+      "largeur": 108,
+      "conditionnement": 0.348
+    },
+    {
+      "aire": 1431,
+      "centre": [
+        16719.969252271138,
+        1495.215932914046
+      ],
+      "hauteur": 42,
+      "largeur": 53,
+      "conditionnement": 0.7107
+    },
+    {
+      "aire": 1424,
+      "centre": [
+        17695.475421348314,
+        1399.751404494382
+      ],
+      "hauteur": 82,
+      "largeur": 40,
+      "conditionnement": 0.3836
+    },
+    {
+      "aire": 1332,
+      "centre": [
+        17483.859609609608,
+        1721.0195195195195
+      ],
+      "hauteur": 59,
+      "largeur": 53,
+      "conditionnement": 0.453
+    },
+    {
+      "aire": 1279,
+      "centre": [
+        16286.161845191556,
+        1402.2048475371384
+      ],
+      "hauteur": 65,
+      "largeur": 55,
+      "conditionnement": 0.5329
+    },
+    {
+      "aire": 1247,
+      "centre": [
+        18726.637530072174,
+        833.4691259021652
+      ],
+      "hauteur": 79,
+      "largeur": 43,
+      "conditionnement": 0.3132
+    },
+    {
+      "aire": 1240,
+      "centre": [
+        17361.381451612902,
+        1611.6846774193548
+      ],
+      "hauteur": 43,
+      "largeur": 80,
+      "conditionnement": 0.2175
+    },
+    {
+      "aire": 1065,
+      "centre": [
+        17928.311737089203,
+        1361.0300469483568
+      ],
+      "hauteur": 57,
+      "largeur": 40,
+      "conditionnement": 0.3263
+    },
+    {
+      "aire": 978,
+      "centre": [
+        9191.703476482617,
+        2998.558282208589
+      ],
+      "hauteur": 22,
+      "largeur": 106,
+      "conditionnement": 0.1365
+    },
+    {
+      "aire": 940,
+      "centre": [
+        25189.11489361702,
+        2419.3414893617023
+      ],
+      "hauteur": 52,
+      "largeur": 45,
+      "conditionnement": 0.5873
+    },
+    {
+      "aire": 927,
+      "centre": [
+        19961.967637540452,
+        3593.1499460625673
+      ],
+      "hauteur": 38,
+      "largeur": 58,
+      "conditionnement": 0.4412
+    },
+    {
+      "aire": 894,
+      "centre": [
+        9226.648769574944,
+        3286.503355704698
+      ],
+      "hauteur": 27,
+      "largeur": 74,
+      "conditionnement": 0.1981
+    },
+    {
+      "aire": 880,
+      "centre": [
+        18163.239772727273,
+        1284.384090909091
+      ],
+      "hauteur": 49,
+      "largeur": 40,
+      "conditionnement": 0.6651
+    },
+    {
+      "aire": 833,
+      "centre": [
+        20329.26530612245,
+        14793.345738295318
+      ],
+      "hauteur": 96,
+      "largeur": 28,
+      "conditionnement": 0.1463
+    },
+    {
+      "aire": 818,
+      "centre": [
+        20581.01100244499,
+        1492.5220048899755
+      ],
+      "hauteur": 58,
+      "largeur": 40,
+      "conditionnement": 0.3806
+    },
+    {
+      "aire": 796,
+      "centre": [
+        20556.81030150754,
+        1615.0992462311558
+      ],
+      "hauteur": 31,
+      "largeur": 49,
+      "conditionnement": 0.6213
+    },
+    {
+      "aire": 757,
+      "centre": [
+        8574.746367239102,
+        3189.768824306473
+      ],
+      "hauteur": 38,
+      "largeur": 51,
+      "conditionnement": 0.495
+    },
+    {
+      "aire": 729,
+      "centre": [
+        20474.50205761317,
+        1463.4759945130315
+      ],
+      "hauteur": 46,
+      "largeur": 48,
+      "conditionnement": 0.366
+    },
+    {
+      "aire": 710,
+      "centre": [
+        22403.078873239436,
+        1524.0633802816901
+      ],
+      "hauteur": 36,
+      "largeur": 56,
+      "conditionnement": 0.3744
+    },
+    {
+      "aire": 708,
+      "centre": [
+        22220.72033898305,
+        7374.5847457627115
+      ],
+      "hauteur": 50,
+      "largeur": 31,
+      "conditionnement": 0.3776
+    },
+    {
+      "aire": 690,
+      "centre": [
+        21596.310144927535,
+        8148.447826086956
+      ],
+      "hauteur": 27,
+      "largeur": 63,
+      "conditionnement": 0.3205
+    },
+    {
+      "aire": 680,
+      "centre": [
+        9140.838235294117,
+        3008.1485294117647
+      ],
+      "hauteur": 31,
+      "largeur": 41,
+      "conditionnement": 0.5261
+    },
+    {
+      "aire": 642,
+      "centre": [
+        22740.205607476637,
+        1764.5996884735202
+      ],
+      "hauteur": 62,
+      "largeur": 36,
+      "conditionnement": 0.5664
+    },
+    {
+      "aire": 610,
+      "centre": [
+        9891.726229508196,
+        3253.1901639344264
+      ],
+      "hauteur": 31,
+      "largeur": 42,
+      "conditionnement": 0.6526
+    },
+    {
+      "aire": 536,
+      "centre": [
+        18541.848880597016,
+        772.8694029850747
+      ],
+      "hauteur": 41,
+      "largeur": 24,
+      "conditionnement": 0.3854
+    },
+    {
+      "aire": 524,
+      "centre": [
+        21431.26717557252,
+        1065.0725190839694
+      ],
+      "hauteur": 32,
+      "largeur": 31,
+      "conditionnement": 0.8226
+    },
+    {
+      "aire": 519,
+      "centre": [
+        16949.57225433526,
+        1784.549132947977
+      ],
+      "hauteur": 43,
+      "largeur": 26,
+      "conditionnement": 0.6311
+    },
+    {
+      "aire": 507,
+      "centre": [
+        12519.108481262327,
+        1664.2426035502958
+      ],
+      "hauteur": 41,
+      "largeur": 33,
+      "conditionnement": 0.3894
+    },
+    {
+      "aire": 492,
+      "centre": [
+        19236.595528455284,
+        852.0243902439024
+      ],
+      "hauteur": 31,
+      "largeur": 35,
+      "conditionnement": 0.6911
+    },
+    {
+      "aire": 483,
+      "centre": [
+        21600.5900621118,
+        8199.455486542443
+      ],
+      "hauteur": 35,
+      "largeur": 61,
+      "conditionnement": 0.2169
+    },
+    {
+      "aire": 476,
+      "centre": [
+        15352.142857142857,
+        1298.8361344537816
+      ],
+      "hauteur": 42,
+      "largeur": 21,
+      "conditionnement": 0.4328
+    },
+    {
+      "aire": 442,
+      "centre": [
+        17082.305429864253,
+        1693.8574660633485
+      ],
+      "hauteur": 33,
+      "largeur": 35,
+      "conditionnement": 0.4958
+    },
+    {
+      "aire": 424,
+      "centre": [
+        15408.264150943396,
+        1265.8655660377358
+      ],
+      "hauteur": 20,
+      "largeur": 37,
+      "conditionnement": 0.5124
+    },
+    {
+      "aire": 422,
+      "centre": [
+        15282.59241706161,
+        1198.4857819905212
+      ],
+      "hauteur": 37,
+      "largeur": 26,
+      "conditionnement": 0.2413
+    },
+    {
+      "aire": 399,
+      "centre": [
+        20626.929824561405,
+        2615.65664160401
+      ],
+      "hauteur": 24,
+      "largeur": 45,
+      "conditionnement": 0.4731
+    },
+    {
+      "aire": 399,
+      "centre": [
+        22890.812030075187,
+        3343.2706766917295
+      ],
+      "hauteur": 35,
+      "largeur": 33,
+      "conditionnement": 0.7385
+    },
+    {
+      "aire": 392,
+      "centre": [
+        16656.98469387755,
+        1519.640306122449
+      ],
+      "hauteur": 53,
+      "largeur": 22,
+      "conditionnement": 0.321
+    },
+    {
+      "aire": 361,
+      "centre": [
+        18121.329639889198,
+        1290.7783933518006
+      ],
+      "hauteur": 41,
+      "largeur": 27,
+      "conditionnement": 0.4326
+    },
+    {
+      "aire": 349,
+      "centre": [
+        12484.180515759312,
+        1600.7191977077364
+      ],
+      "hauteur": 19,
+      "largeur": 54,
+      "conditionnement": 0.1117
+    },
+    {
+      "aire": 347,
+      "centre": [
+        22391.92219020173,
+        1833.4553314121038
+      ],
+      "hauteur": 20,
+      "largeur": 45,
+      "conditionnement": 0.1937
+    },
+    {
+      "aire": 341,
+      "centre": [
+        16914.360703812315,
+        1784.2639296187683
+      ],
+      "hauteur": 24,
+      "largeur": 36,
+      "conditionnement": 0.6704
+    },
+    {
+      "aire": 339,
+      "centre": [
+        20574.5191740413,
+        3062.9115044247787
+      ],
+      "hauteur": 31,
+      "largeur": 29,
+      "conditionnement": 0.3912
+    },
+    {
+      "aire": 327,
+      "centre": [
+        16917.68501529052,
+        2025.776758409786
+      ],
+      "hauteur": 36,
+      "largeur": 30,
+      "conditionnement": 0.2631
+    },
+    {
+      "aire": 326,
+      "centre": [
+        22683.944785276075,
+        3448.9325153374234
+      ],
+      "hauteur": 18,
+      "largeur": 37,
+      "conditionnement": 0.3353
+    },
+    {
+      "aire": 321,
+      "centre": [
+        18799.8722741433,
+        773.2461059190031
+      ],
+      "hauteur": 29,
+      "largeur": 24,
+      "conditionnement": 0.5308
+    },
+    {
+      "aire": 314,
+      "centre": [
+        17433.20382165605,
+        1509.9267515923566
+      ],
+      "hauteur": 25,
+      "largeur": 25,
+      "conditionnement": 0.6955
+    },
+    {
+      "aire": 310,
+      "centre": [
+        16314.867741935484,
+        1643.0677419354838
+      ],
+      "hauteur": 26,
+      "largeur": 31,
+      "conditionnement": 0.6268
+    },
+    {
+      "aire": 310,
+      "centre": [
+        20258.7,
+        1825.1806451612904
+      ],
+      "hauteur": 24,
+      "largeur": 24,
+      "conditionnement": 0.6796
+    },
+    {
+      "aire": 308,
+      "centre": [
+        19272.39935064935,
+        4222.266233766234
+      ],
+      "hauteur": 13,
+      "largeur": 63,
+      "conditionnement": 0.0923
+    },
+    {
+      "aire": 307,
+      "centre": [
+        21425.107491856677,
+        8500.107491856677
+      ],
+      "hauteur": 35,
+      "largeur": 21,
+      "conditionnement": 0.3959
+    },
+    {
+      "aire": 305,
+      "centre": [
+        18117.367213114754,
+        1525.049180327869
+      ],
+      "hauteur": 25,
+      "largeur": 23,
+      "conditionnement": 0.7173
+    },
+    {
+      "aire": 301,
+      "centre": [
+        18471.338870431893,
+        622.3820598006645
+      ],
+      "hauteur": 25,
+      "largeur": 44,
+      "conditionnement": 0.2888
+    },
+    {
+      "aire": 296,
+      "centre": [
+        16869.89527027027,
+        1185.7331081081081
+      ],
+      "hauteur": 22,
+      "largeur": 32,
+      "conditionnement": 0.4772
+    },
+    {
+      "aire": 287,
+      "centre": [
+        17963.578397212543,
+        1423.801393728223
+      ],
+      "hauteur": 29,
+      "largeur": 17,
+      "conditionnement": 0.4877
+    },
+    {
+      "aire": 279,
+      "centre": [
+        16611.67383512545,
+        1372.810035842294
+      ],
+      "hauteur": 23,
+      "largeur": 25,
+      "conditionnement": 0.9028
+    },
+    {
+      "aire": 279,
+      "centre": [
+        18508.537634408603,
+        943.1648745519714
+      ],
+      "hauteur": 34,
+      "largeur": 17,
+      "conditionnement": 0.5833
+    },
+    {
+      "aire": 277,
+      "centre": [
+        15729.018050541516,
+        1523.1949458483755
+      ],
+      "hauteur": 32,
+      "largeur": 25,
+      "conditionnement": 0.4923
+    },
+    {
+      "aire": 256,
+      "centre": [
+        21625.66015625,
+        8056.71484375
+      ],
+      "hauteur": 12,
+      "largeur": 36,
+      "conditionnement": 0.2324
+    },
+    {
+      "aire": 255,
+      "centre": [
+        17236.90588235294,
+        1475.1098039215685
+      ],
+      "hauteur": 27,
+      "largeur": 21,
+      "conditionnement": 0.4473
+    },
+    {
+      "aire": 250,
+      "centre": [
+        18088.148,
+        1226.176
+      ],
+      "hauteur": 27,
+      "largeur": 26,
+      "conditionnement": 0.4721
+    },
+    {
+      "aire": 248,
+      "centre": [
+        18280.9314516129,
+        1331.5725806451612
+      ],
+      "hauteur": 25,
+      "largeur": 28,
+      "conditionnement": 0.4928
+    },
+    {
+      "aire": 242,
+      "centre": [
+        18737.02479338843,
+        783.103305785124
+      ],
+      "hauteur": 21,
+      "largeur": 21,
+      "conditionnement": 0.669
+    },
+    {
+      "aire": 240,
+      "centre": [
+        16853.4125,
+        1244.3666666666666
+      ],
+      "hauteur": 31,
+      "largeur": 21,
+      "conditionnement": 0.2787
+    },
+    {
+      "aire": 236,
+      "centre": [
+        16867.98305084746,
+        1527.584745762712
+      ],
+      "hauteur": 21,
+      "largeur": 30,
+      "conditionnement": 0.6513
+    },
+    {
+      "aire": 231,
+      "centre": [
+        17558.25974025974,
+        12931.454545454546
+      ],
+      "hauteur": 39,
+      "largeur": 18,
+      "conditionnement": 0.1163
+    },
+    {
+      "aire": 228,
+      "centre": [
+        18219.40350877193,
+        1280.4956140350878
+      ],
+      "hauteur": 24,
+      "largeur": 26,
+      "conditionnement": 0.4398
+    },
+    {
+      "aire": 227,
+      "centre": [
+        18113.211453744494,
+        1232.079295154185
+      ],
+      "hauteur": 30,
+      "largeur": 33,
+      "conditionnement": 0.6432
+    },
+    {
+      "aire": 227,
+      "centre": [
+        20791.502202643172,
+        1175.4845814977973
+      ],
+      "hauteur": 14,
+      "largeur": 30,
+      "conditionnement": 0.4251
+    },
+    {
+      "aire": 226,
+      "centre": [
+        20521.75221238938,
+        1515.1150442477876
+      ],
+      "hauteur": 18,
+      "largeur": 33,
+      "conditionnement": 0.4002
+    },
+    {
+      "aire": 218,
+      "centre": [
+        20426.270642201835,
+        1674.9587155963302
+      ],
+      "hauteur": 14,
+      "largeur": 31,
+      "conditionnement": 0.5438
+    },
+    {
+      "aire": 217,
+      "centre": [
+        18662.465437788018,
+        915.5668202764977
+      ],
+      "hauteur": 23,
+      "largeur": 29,
+      "conditionnement": 0.5063
+    },
+    {
+      "aire": 214,
+      "centre": [
+        20274.252336448597,
+        2510.0794392523367
+      ],
+      "hauteur": 26,
+      "largeur": 23,
+      "conditionnement": 0.2716
+    },
+    {
+      "aire": 212,
+      "centre": [
+        18509.31603773585,
+        590.0471698113207
+      ],
+      "hauteur": 29,
+      "largeur": 25,
+      "conditionnement": 0.3092
+    },
+    {
+      "aire": 212,
+      "centre": [
+        20666.688679245282,
+        2614.0943396226417
+      ],
+      "hauteur": 25,
+      "largeur": 20,
+      "conditionnement": 0.4316
+    },
+    {
+      "aire": 211,
+      "centre": [
+        17585.402843601896,
+        1421.696682464455
+      ],
+      "hauteur": 19,
+      "largeur": 24,
+      "conditionnement": 0.6268
+    },
+    {
+      "aire": 205,
+      "centre": [
+        21579.795121951218,
+        8354.112195121952
+      ],
+      "hauteur": 25,
+      "largeur": 33,
+      "conditionnement": 0.2872
+    },
+    {
+      "aire": 204,
+      "centre": [
+        20588.539215686276,
+        3160.1911764705883
+      ],
+      "hauteur": 23,
+      "largeur": 23,
+      "conditionnement": 0.3899
+    },
+    {
+      "aire": 200,
+      "centre": [
+        18576.41,
+        763.28
+      ],
+      "hauteur": 25,
+      "largeur": 17,
+      "conditionnement": 0.6791
+    },
+    {
+      "aire": 197,
+      "centre": [
+        19603.862944162436,
+        1765.208121827411
+      ],
+      "hauteur": 17,
+      "largeur": 24,
+      "conditionnement": 0.5265
+    },
+    {
+      "aire": 196,
+      "centre": [
+        17107.04591836735,
+        1613.1479591836735
+      ],
+      "hauteur": 29,
+      "largeur": 16,
+      "conditionnement": 0.2585
+    },
+    {
+      "aire": 195,
+      "centre": [
+        20569.984615384616,
+        1511.820512820513
+      ],
+      "hauteur": 20,
+      "largeur": 19,
+      "conditionnement": 0.6813
+    },
+    {
+      "aire": 191,
+      "centre": [
+        17264.706806282724,
+        1471.4397905759163
+      ],
+      "hauteur": 30,
+      "largeur": 16,
+      "conditionnement": 0.4497
+    },
+    {
+      "aire": 190,
+      "centre": [
+        16974.236842105263,
+        1116.1894736842105
+      ],
+      "hauteur": 20,
+      "largeur": 25,
+      "conditionnement": 0.2864
+    },
+    {
+      "aire": 188,
+      "centre": [
+        18489.531914893618,
+        840.7074468085107
+      ],
+      "hauteur": 17,
+      "largeur": 19,
+      "conditionnement": 0.8208
+    },
+    {
+      "aire": 186,
+      "centre": [
+        24767.198924731183,
+        2248.3602150537636
+      ],
+      "hauteur": 14,
+      "largeur": 35,
+      "conditionnement": 0.1819
+    },
+    {
+      "aire": 185,
+      "centre": [
+        18481.92972972973,
+        577.6162162162162
+      ],
+      "hauteur": 27,
+      "largeur": 21,
+      "conditionnement": 0.4069
+    },
+    {
+      "aire": 185,
+      "centre": [
+        22311.108108108107,
+        2280.891891891892
+      ],
+      "hauteur": 24,
+      "largeur": 20,
+      "conditionnement": 0.4131
+    },
+    {
+      "aire": 184,
+      "centre": [
+        21804.842391304348,
+        8622.29347826087
+      ],
+      "hauteur": 15,
+      "largeur": 23,
+      "conditionnement": 0.6433
+    },
+    {
+      "aire": 183,
+      "centre": [
+        19924.96174863388,
+        3625.72131147541
+      ],
+      "hauteur": 25,
+      "largeur": 20,
+      "conditionnement": 0.6021
+    },
+    {
+      "aire": 181,
+      "centre": [
+        18919.049723756907,
+        1433.524861878453
+      ],
+      "hauteur": 19,
+      "largeur": 14,
+      "conditionnement": 0.7287
+    },
+    {
+      "aire": 175,
+      "centre": [
+        16734.46285714286,
+        1585.9657142857143
+      ],
+      "hauteur": 27,
+      "largeur": 14,
+      "conditionnement": 0.4254
+    },
+    {
+      "aire": 174,
+      "centre": [
+        15183.413793103447,
+        1227.0229885057472
+      ],
+      "hauteur": 19,
+      "largeur": 20,
+      "conditionnement": 0.7808
+    },
+    {
+      "aire": 174,
+      "centre": [
+        17464.091954022988,
+        1465.0172413793102
+      ],
+      "hauteur": 26,
+      "largeur": 15,
+      "conditionnement": 0.3598
+    },
+    {
+      "aire": 172,
+      "centre": [
+        22399.837209302324,
+        1873.0174418604652
+      ],
+      "hauteur": 12,
+      "largeur": 32,
+      "conditionnement": 0.1641
+    },
+    {
+      "aire": 170,
+      "centre": [
+        17081.00588235294,
+        1594.6529411764707
+      ],
+      "hauteur": 26,
+      "largeur": 16,
+      "conditionnement": 0.7034
+    },
+    {
+      "aire": 170,
+      "centre": [
+        17533.029411764706,
+        1568.1235294117646
+      ],
+      "hauteur": 27,
+      "largeur": 18,
+      "conditionnement": 0.3058
+    },
+    {
+      "aire": 167,
+      "centre": [
+        15351.556886227545,
+        1339.622754491018
+      ],
+      "hauteur": 17,
+      "largeur": 16,
+      "conditionnement": 0.9594
+    },
+    {
+      "aire": 166,
+      "centre": [
+        16222.415662650603,
+        1674.1927710843374
+      ],
+      "hauteur": 13,
+      "largeur": 21,
+      "conditionnement": 0.594
+    },
+    {
+      "aire": 166,
+      "centre": [
+        17192.246987951807,
+        1584.1566265060242
+      ],
+      "hauteur": 19,
+      "largeur": 25,
+      "conditionnement": 0.5989
+    },
+    {
+      "aire": 166,
+      "centre": [
+        18469.331325301206,
+        648.8855421686746
+      ],
+      "hauteur": 20,
+      "largeur": 26,
+      "conditionnement": 0.2596
+    },
+    {
+      "aire": 166,
+      "centre": [
+        19393.819277108432,
+        795.3373493975904
+      ],
+      "hauteur": 18,
+      "largeur": 21,
+      "conditionnement": 0.431
+    },
+    {
+      "aire": 164,
+      "centre": [
+        16285.75,
+        1660.7256097560976
+      ],
+      "hauteur": 17,
+      "largeur": 22,
+      "conditionnement": 0.7798
+    },
+    {
+      "aire": 164,
+      "centre": [
+        16352.225609756097,
+        1372.5792682926829
+      ],
+      "hauteur": 19,
+      "largeur": 16,
+      "conditionnement": 0.6013
+    },
+    {
+      "aire": 163,
+      "centre": [
+        18465.981595092024,
+        792.5276073619632
+      ],
+      "hauteur": 16,
+      "largeur": 20,
+      "conditionnement": 0.8998
+    },
+    {
+      "aire": 160,
+      "centre": [
+        18489.375,
+        674.21875
+      ],
+      "hauteur": 13,
+      "largeur": 36,
+      "conditionnement": 0.1786
+    },
+    {
+      "aire": 157,
+      "centre": [
+        19571.057324840764,
+        1703.5732484076434
+      ],
+      "hauteur": 24,
+      "largeur": 14,
+      "conditionnement": 0.5016
+    },
+    {
+      "aire": 154,
+      "centre": [
+        9846.27922077922,
+        3251.753246753247
+      ],
+      "hauteur": 19,
+      "largeur": 16,
+      "conditionnement": 0.7065
+    },
+    {
+      "aire": 152,
+      "centre": [
+        21986.434210526317,
+        8529.427631578947
+      ],
+      "hauteur": 26,
+      "largeur": 10,
+      "conditionnement": 0.2776
+    },
+    {
+      "aire": 150,
+      "centre": [
+        18141.166666666668,
+        1240.1533333333334
+      ],
+      "hauteur": 23,
+      "largeur": 19,
+      "conditionnement": 0.5047
+    },
+    {
+      "aire": 150,
+      "centre": [
+        19330.56,
+        1512.78
+      ],
+      "hauteur": 15,
+      "largeur": 21,
+      "conditionnement": 0.3617
+    },
+    {
+      "aire": 146,
+      "centre": [
+        18562.58219178082,
+        572.2602739726027
+      ],
+      "hauteur": 19,
+      "largeur": 14,
+      "conditionnement": 0.5925
+    },
+    {
+      "aire": 146,
+      "centre": [
+        19117.95890410959,
+        1044.1164383561643
+      ],
+      "hauteur": 15,
+      "largeur": 20,
+      "conditionnement": 0.4048
+    },
+    {
+      "aire": 146,
+      "centre": [
+        19342.77397260274,
+        3618.4931506849316
+      ],
+      "hauteur": 16,
+      "largeur": 30,
+      "conditionnement": 0.4194
+    },
+    {
+      "aire": 146,
+      "centre": [
+        20330.37671232877,
+        1346.890410958904
+      ],
+      "hauteur": 18,
+      "largeur": 16,
+      "conditionnement": 0.7174
+    },
+    {
+      "aire": 145,
+      "centre": [
+        19164.075862068967,
+        1058.8
+      ],
+      "hauteur": 14,
+      "largeur": 16,
+      "conditionnement": 0.6713
+    },
+    {
+      "aire": 143,
+      "centre": [
+        9025.937062937062,
+        3265.4965034965035
+      ],
+      "hauteur": 15,
+      "largeur": 18,
+      "conditionnement": 0.8268
+    },
+    {
+      "aire": 142,
+      "centre": [
+        19306.408450704224,
+        861.8028169014085
+      ],
+      "hauteur": 17,
+      "largeur": 22,
+      "conditionnement": 0.3407
+    },
+    {
+      "aire": 141,
+      "centre": [
+        18664.82978723404,
+        648.531914893617
+      ],
+      "hauteur": 25,
+      "largeur": 17,
+      "conditionnement": 0.2767
+    },
+    {
+      "aire": 140,
+      "centre": [
+        11468.807142857142,
+        2644.6214285714286
+      ],
+      "hauteur": 19,
+      "largeur": 13,
+      "conditionnement": 0.5138
+    },
+    {
+      "aire": 140,
+      "centre": [
+        18278.307142857142,
+        1282.0928571428572
+      ],
+      "hauteur": 19,
+      "largeur": 17,
+      "conditionnement": 0.4873
+    },
+    {
+      "aire": 140,
+      "centre": [
+        20225.535714285714,
+        2493.0785714285716
+      ],
+      "hauteur": 13,
+      "largeur": 24,
+      "conditionnement": 0.4139
+    },
+    {
+      "aire": 140,
+      "centre": [
+        20550.89285714286,
+        3198.3571428571427
+      ],
+      "hauteur": 19,
+      "largeur": 13,
+      "conditionnement": 0.5535
+    },
+    {
+      "aire": 137,
+      "centre": [
+        17596.138686131388,
+        1075.890510948905
+      ],
+      "hauteur": 27,
+      "largeur": 21,
+      "conditionnement": 0.3135
+    },
+    {
+      "aire": 137,
+      "centre": [
+        18295.19708029197,
+        1284.4817518248176
+      ],
+      "hauteur": 17,
+      "largeur": 18,
+      "conditionnement": 0.9499
+    },
+    {
+      "aire": 137,
+      "centre": [
+        19395.868613138686,
+        893.2700729927008
+      ],
+      "hauteur": 14,
+      "largeur": 16,
+      "conditionnement": 0.6915
+    },
+    {
+      "aire": 136,
+      "centre": [
+        15626.323529411764,
+        1493.625
+      ],
+      "hauteur": 29,
+      "largeur": 13,
+      "conditionnement": 0.305
+    },
+    {
+      "aire": 136,
+      "centre": [
+        16537.441176470587,
+        1374.2205882352941
+      ],
+      "hauteur": 24,
+      "largeur": 17,
+      "conditionnement": 0.4535
+    },
+    {
+      "aire": 136,
+      "centre": [
+        17051.720588235294,
+        1808.514705882353
+      ],
+      "hauteur": 16,
+      "largeur": 21,
+      "conditionnement": 0.5753
+    },
+    {
+      "aire": 136,
+      "centre": [
+        17284.04411764706,
+        1708.625
+      ],
+      "hauteur": 15,
+      "largeur": 16,
+      "conditionnement": 0.7069
+    },
+    {
+      "aire": 136,
+      "centre": [
+        20816.75,
+        1202.4558823529412
+      ],
+      "hauteur": 12,
+      "largeur": 19,
+      "conditionnement": 0.4701
+    },
+    {
+      "aire": 135,
+      "centre": [
+        17369.925925925927,
+        1461.637037037037
+      ],
+      "hauteur": 16,
+      "largeur": 17,
+      "conditionnement": 0.7435
+    },
+    {
+      "aire": 133,
+      "centre": [
+        18514.135338345866,
+        725.1428571428571
+      ],
+      "hauteur": 18,
+      "largeur": 16,
+      "conditionnement": 0.6803
+    },
+    {
+      "aire": 133,
+      "centre": [
+        22557.165413533836,
+        1672.8947368421052
+      ],
+      "hauteur": 13,
+      "largeur": 21,
+      "conditionnement": 0.7155
+    },
+    {
+      "aire": 132,
+      "centre": [
+        9879.75,
+        10416.34090909091
+      ],
+      "hauteur": 42,
+      "largeur": 16,
+      "conditionnement": 0.095
+    },
+    {
+      "aire": 131,
+      "centre": [
+        17948.25954198473,
+        1445.3435114503816
+      ],
+      "hauteur": 12,
+      "largeur": 19,
+      "conditionnement": 0.5427
+    },
+    {
+      "aire": 130,
+      "centre": [
+        17318.823076923076,
+        1722.376923076923
+      ],
+      "hauteur": 19,
+      "largeur": 14,
+      "conditionnement": 0.627
+    },
+    {
+      "aire": 130,
+      "centre": [
+        18005.10769230769,
+        1295.3076923076924
+      ],
+      "hauteur": 16,
+      "largeur": 18,
+      "conditionnement": 0.6031
+    },
+    {
+      "aire": 128,
+      "centre": [
+        9888.3125,
+        3218.4609375
+      ],
+      "hauteur": 15,
+      "largeur": 20,
+      "conditionnement": 0.466
+    },
+    {
+      "aire": 128,
+      "centre": [
+        15691.3125,
+        1473.2421875
+      ],
+      "hauteur": 12,
+      "largeur": 20,
+      "conditionnement": 0.4526
+    },
+    {
+      "aire": 127,
+      "centre": [
+        22794.732283464567,
+        1761.023622047244
+      ],
+      "hauteur": 20,
+      "largeur": 14,
+      "conditionnement": 0.3713
+    },
+    {
+      "aire": 125,
+      "centre": [
+        9023.024,
+        2814.16
+      ],
+      "hauteur": 11,
+      "largeur": 25,
+      "conditionnement": 0.3256
+    },
+    {
+      "aire": 124,
+      "centre": [
+        16109.427419354839,
+        1556.2096774193549
+      ],
+      "hauteur": 19,
+      "largeur": 20,
+      "conditionnement": 0.2044
+    },
+    {
+      "aire": 123,
+      "centre": [
+        18918.048780487807,
+        1413.439024390244
+      ],
+      "hauteur": 15,
+      "largeur": 16,
+      "conditionnement": 0.8485
+    },
+    {
+      "aire": 123,
+      "centre": [
+        20307.170731707316,
+        1832.1869918699188
+      ],
+      "hauteur": 9,
+      "largeur": 25,
+      "conditionnement": 0.2402
+    },
+    {
+      "aire": 122,
+      "centre": [
+        17254.852459016394,
+        1316.0983606557377
+      ],
+      "hauteur": 30,
+      "largeur": 17,
+      "conditionnement": 0.2848
+    },
+    {
+      "aire": 122,
+      "centre": [
+        17568.79508196721,
+        1094.7540983606557
+      ],
+      "hauteur": 22,
+      "largeur": 16,
+      "conditionnement": 0.2298
+    },
+    {
+      "aire": 121,
+      "centre": [
+        16430.22314049587,
+        1394.4628099173553
+      ],
+      "hauteur": 13,
+      "largeur": 12,
+      "conditionnement": 0.864
+    },
+    {
+      "aire": 121,
+      "centre": [
+        17297.652892561982,
+        1467.6528925619834
+      ],
+      "hauteur": 18,
+      "largeur": 11,
+      "conditionnement": 0.5983
+    },
+    {
+      "aire": 120,
+      "centre": [
+        19514.866666666665,
+        1607.3916666666667
+      ],
+      "hauteur": 15,
+      "largeur": 16,
+      "conditionnement": 0.5498
+    },
+    {
+      "aire": 119,
+      "centre": [
+        16323.394957983193,
+        1671.0
+      ],
+      "hauteur": 19,
+      "largeur": 16,
+      "conditionnement": 0.3989
+    },
+    {
+      "aire": 119,
+      "centre": [
+        18135.302521008405,
+        1256.5714285714287
+      ],
+      "hauteur": 18,
+      "largeur": 12,
+      "conditionnement": 0.6979
+    },
+    {
+      "aire": 118,
+      "centre": [
+        22548.101694915254,
+        2829.5254237288136
+      ],
+      "hauteur": 14,
+      "largeur": 20,
+      "conditionnement": 0.5344
+    },
+    {
+      "aire": 118,
+      "centre": [
+        25385.889830508473,
+        2873.1610169491523
+      ],
+      "hauteur": 10,
+      "largeur": 19,
+      "conditionnement": 0.4171
+    },
+    {
+      "aire": 117,
+      "centre": [
+        17060.299145299145,
+        1590.2991452991453
+      ],
+      "hauteur": 21,
+      "largeur": 17,
+      "conditionnement": 0.3526
+    },
+    {
+      "aire": 117,
+      "centre": [
+        17120.76923076923,
+        1564.094017094017
+      ],
+      "hauteur": 19,
+      "largeur": 13,
+      "conditionnement": 0.5601
+    },
+    {
+      "aire": 117,
+      "centre": [
+        23623.803418803418,
+        12858.239316239316
+      ],
+      "hauteur": 11,
+      "largeur": 15,
+      "conditionnement": 0.7295
+    },
+    {
+      "aire": 116,
+      "centre": [
+        11458.939655172413,
+        2618.6637931034484
+      ],
+      "hauteur": 22,
+      "largeur": 14,
+      "conditionnement": 0.4172
+    },
+    {
+      "aire": 116,
+      "centre": [
+        17975.258620689656,
+        1622.7672413793102
+      ],
+      "hauteur": 23,
+      "largeur": 15,
+      "conditionnement": 0.6367
+    },
+    {
+      "aire": 116,
+      "centre": [
+        20387.568965517243,
+        1727.7672413793102
+      ],
+      "hauteur": 8,
+      "largeur": 22,
+      "conditionnement": 0.2787
+    },
+    {
+      "aire": 116,
+      "centre": [
+        22888.206896551725,
+        3373.2241379310344
+      ],
+      "hauteur": 26,
+      "largeur": 12,
+      "conditionnement": 0.3057
+    },
+    {
+      "aire": 115,
+      "centre": [
+        18054.347826086956,
+        1220.2695652173913
+      ],
+      "hauteur": 15,
+      "largeur": 14,
+      "conditionnement": 0.7836
+    },
+    {
+      "aire": 114,
+      "centre": [
+        17113.280701754386,
+        1687.017543859649
+      ],
+      "hauteur": 13,
+      "largeur": 17,
+      "conditionnement": 0.6284
+    },
+    {
+      "aire": 114,
+      "centre": [
+        20303.263157894737,
+        1765.657894736842
+      ],
+      "hauteur": 13,
+      "largeur": 16,
+      "conditionnement": 0.5462
+    },
+    {
+      "aire": 113,
+      "centre": [
+        18038.672566371682,
+        1226.9557522123894
+      ],
+      "hauteur": 12,
+      "largeur": 20,
+      "conditionnement": 0.2975
+    },
+    {
+      "aire": 113,
+      "centre": [
+        18651.814159292036,
+        882.5221238938053
+      ],
+      "hauteur": 14,
+      "largeur": 13,
+      "conditionnement": 0.7989
+    },
+    {
+      "aire": 113,
+      "centre": [
+        19838.061946902653,
+        3370.1946902654868
+      ],
+      "hauteur": 11,
+      "largeur": 29,
+      "conditionnement": 0.1874
+    },
+    {
+      "aire": 113,
+      "centre": [
+        20689.513274336285,
+        2587.761061946903
+      ],
+      "hauteur": 18,
+      "largeur": 20,
+      "conditionnement": 0.3447
+    },
+    {
+      "aire": 112,
+      "centre": [
+        9339.401785714286,
+        10268.089285714286
+      ],
+      "hauteur": 39,
+      "largeur": 9,
+      "conditionnement": 0.0635
+    },
+    {
+      "aire": 112,
+      "centre": [
+        16255.169642857143,
+        1665.8035714285713
+      ],
+      "hauteur": 13,
+      "largeur": 21,
+      "conditionnement": 0.3235
+    },
+    {
+      "aire": 112,
+      "centre": [
+        16687.616071428572,
+        1499.2767857142858
+      ],
+      "hauteur": 13,
+      "largeur": 12,
+      "conditionnement": 0.7835
+    },
+    {
+      "aire": 112,
+      "centre": [
+        18058.75,
+        1247.169642857143
+      ],
+      "hauteur": 14,
+      "largeur": 14,
+      "conditionnement": 0.5476
+    },
+    {
+      "aire": 112,
+      "centre": [
+        18248.51785714286,
+        1266.169642857143
+      ],
+      "hauteur": 16,
+      "largeur": 14,
+      "conditionnement": 0.5922
+    },
+    {
+      "aire": 112,
+      "centre": [
+        19591.473214285714,
+        1724.4732142857142
+      ],
+      "hauteur": 15,
+      "largeur": 17,
+      "conditionnement": 0.7953
+    },
+    {
+      "aire": 112,
+      "centre": [
+        20445.553571428572,
+        3190.0178571428573
+      ],
+      "hauteur": 13,
+      "largeur": 15,
+      "conditionnement": 0.855
+    },
+    {
+      "aire": 112,
+      "centre": [
+        22304.375,
+        2336.2053571428573
+      ],
+      "hauteur": 10,
+      "largeur": 20,
+      "conditionnement": 0.3534
+    },
+    {
+      "aire": 112,
+      "centre": [
+        23434.910714285714,
+        13329.99107142857
+      ],
+      "hauteur": 18,
+      "largeur": 17,
+      "conditionnement": 0.296
+    },
+    {
+      "aire": 111,
+      "centre": [
+        16891.567567567567,
+        1256.7207207207207
+      ],
+      "hauteur": 11,
+      "largeur": 22,
+      "conditionnement": 0.3306
+    },
+    {
+      "aire": 111,
+      "centre": [
+        17611.522522522522,
+        1311.963963963964
+      ],
+      "hauteur": 14,
+      "largeur": 19,
+      "conditionnement": 0.3421
+    },
+    {
+      "aire": 111,
+      "centre": [
+        18260.630630630632,
+        1285.855855855856
+      ],
+      "hauteur": 16,
+      "largeur": 12,
+      "conditionnement": 0.7271
+    },
+    {
+      "aire": 110,
+      "centre": [
+        15666.2,
+        1468.4545454545455
+      ],
+      "hauteur": 17,
+      "largeur": 16,
+      "conditionnement": 0.3456
+    },
+    {
+      "aire": 110,
+      "centre": [
+        17069.427272727273,
+        1503.2727272727273
+      ],
+      "hauteur": 24,
+      "largeur": 16,
+      "conditionnement": 0.447
+    },
+    {
+      "aire": 110,
+      "centre": [
+        19287.29090909091,
+        868.0181818181818
+      ],
+      "hauteur": 17,
+      "largeur": 15,
+      "conditionnement": 0.4516
+    },
+    {
+      "aire": 109,
+      "centre": [
+        18004.22018348624,
+        1570.302752293578
+      ],
+      "hauteur": 16,
+      "largeur": 10,
+      "conditionnement": 0.6207
+    },
+    {
+      "aire": 108,
+      "centre": [
+        22440.62962962963,
+        1887.7407407407406
+      ],
+      "hauteur": 17,
+      "largeur": 17,
+      "conditionnement": 0.7333
+    },
+    {
+      "aire": 106,
+      "centre": [
+        16654.688679245282,
+        1504.0377358490566
+      ],
+      "hauteur": 16,
+      "largeur": 11,
+      "conditionnement": 0.3581
+    },
+    {
+      "aire": 106,
+      "centre": [
+        21300.528301886792,
+        1008.122641509434
+      ],
+      "hauteur": 16,
+      "largeur": 20,
+      "conditionnement": 0.2449
+    },
+    {
+      "aire": 105,
+      "centre": [
+        18590.714285714286,
+        724.3619047619047
+      ],
+      "hauteur": 21,
+      "largeur": 13,
+      "conditionnement": 0.5819
+    },
+    {
+      "aire": 104,
+      "centre": [
+        9814.221153846154,
+        10404.788461538461
+      ],
+      "hauteur": 25,
+      "largeur": 12,
+      "conditionnement": 0.357
+    },
+    {
+      "aire": 104,
+      "centre": [
+        17386.471153846152,
+        1809.9903846153845
+      ],
+      "hauteur": 18,
+      "largeur": 11,
+      "conditionnement": 0.3668
+    },
+    {
+      "aire": 103,
+      "centre": [
+        18493.893203883494,
+        615.1844660194175
+      ],
+      "hauteur": 16,
+      "largeur": 14,
+      "conditionnement": 0.5989
+    },
+    {
+      "aire": 103,
+      "centre": [
+        19162.582524271846,
+        1088.5339805825242
+      ],
+      "hauteur": 8,
+      "largeur": 24,
+      "conditionnement": 0.1696
+    },
+    {
+      "aire": 101,
+      "centre": [
+        18633.47524752475,
+        821.2970297029703
+      ],
+      "hauteur": 15,
+      "largeur": 17,
+      "conditionnement": 0.4527
+    },
+    {
+      "aire": 100,
+      "centre": [
+        15531.76,
+        13799.71
+      ],
+      "hauteur": 15,
+      "largeur": 11,
+      "conditionnement": 0.7219
+    }
+  ]
+}

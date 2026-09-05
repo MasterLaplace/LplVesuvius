@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 1632
+- **lignes** : 1697
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5548,6 +5548,19 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     global déguisé, et le conditionnement des directions plafonne à **0,60** pour 1 en
     isotropie : même à seize carreaux, **les bords ne couvrent pas le plan**. Ce qui manque
     n'est pas la forme du modèle mais la **matière** — du contenu intérieur.
+  - ⭐⭐ **C1 : le contenu intérieur EXISTE** (2026-09-05) — **348** trous d'au moins 64 px dans
+    le masque, dont **314** dont le bord couvre assez le plan. Un trou est un repère
+    **géométrique**, donc s'en servir ne rend pas circulaire la mesure d'encre qui suit,
+    contrairement à l'optimum obtenu en regardant l'encre. 314 repères **intérieurs** contre
+    34 carreaux de **bord**, chacun mieux conditionné que le meilleur voisinage de bord (0,60).
+  - ⚠⚠⚠ **Mais la moitié qui manque est de l'AUTRE côté** : le régime du prix ne publie
+    **aucun masque de surface** — l'empreinte disponible est le **support de la carte d'encre**,
+    une propriété du détecteur, et seulement à 1024 de large. Des 314 repères il en reste
+    **19** à cette résolution. Le prix de la voie est donc **un masque publié**, ou les
+    étiquettes rendues au régime du prix — la case vide de `68` §4 par un autre chemin.
+  - ⚠ La réduction est par **majorité de bloc** et non par échantillonnage : sinon le compte de
+    repères dépendrait de l'alignement de la grille. Sur une fente de trois pixels, la sonde
+    qui échantillonne rend **1 trou contre 0** selon un décalage de cinq pixels.
 - **rétractations / corrections internes** :
   - ⚠⚠⚠ A5 bis : « l'expérience que personne ne pouvait poser » était **faux** — elle était
     faite. Et dans la même section, « `44` mesure sur `PHerc1447` » est corrigé en
@@ -5570,8 +5583,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 1039 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 1632 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 1104 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 1697 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
