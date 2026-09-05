@@ -2835,7 +2835,7 @@ dernier caractère. Lignes mesurées par `wc -l`.
 
 ### docs/44_ou_la_chaine_se_trouve.md
 
-- **lignes** : 1979 ⚠ (1968 quand la fiche a été écrite ; `etendre_nappe.sh` a reçu sa commande de lancement le 2026-09-04 — elle n'était écrite nulle part, donc l'outil passait pour exécuté par personne)
+- **lignes** : 2001 ⚠ (1968 quand la fiche a été écrite ; `etendre_nappe.sh` a reçu sa commande de lancement le 2026-09-04 — elle n'était écrite nulle part, donc l'outil passait pour exécuté par personne)
 - **nature** : MIXTE
 - **résumé** : Le document mesure d'abord *où* la chaîne radiale de `43` se trouve dans le
   rouleau, et établit que la tâche « recoller les spires » était mal posée : une chaîne radiale
@@ -3019,6 +3019,13 @@ dernier caractère. Lignes mesurées par `wc -l`.
     détruit. ⚠ Le facteur quatre est une indication et non un résultat : les deux mesures ne
     sont ni sur le même rouleau ni à la même échelle (`PHerc1447` à 8,64 µm contre
     `PHercParis4` à 2,4 µm).
+  - ⭐⭐ **Le 2,4 µm de cette page est RATTACHÉ à un volume publié** (2026-09-05) : il était
+    posé par cohérence interne, jamais contre un volume déclaré. Désigné par une contrainte
+    dure — la boîte englobante du maillage est en voxels du niveau 0, donc **un seul** des
+    cinq volumes de `PHercParis4` a une grille assez grande pour la contenir, et il est à
+    **2,400 µm**. ⚠ Aucun chiffre de la page ne bouge, la constante était juste ; ce qui
+    change est qu'elle est **mesurée**, donc la correction de budget de `77` §10 devient
+    calculable en micromètres (69,2 → 66,4 µm).
 - **rétractations / corrections internes** :
   - §1 : la **première version du discriminant était fausse** — elle ajustait un cercle et
     divisait la longueur d'arc par le rayon ; sur une ligne droite l'ajustement est singulier et
@@ -3080,8 +3087,8 @@ dernier caractère. Lignes mesurées par `wc -l`.
     verte parce qu'elle cherchait le *mot* ; et `$1` dans une fonction `chk` désignant
     l'argument de la fonction et non la colonne.
 - **preuve de lecture intégrale** :
-  - ligne 1455 (73 % du fichier) : `> **Le cycle rogner-étendre ne diverge pas : il converge vers un point fixe autour de 6 cm² de`
-  - ligne 1965 (12ᵉ ligne non vide avant la fin) : `uv run python src/nappe/geometrie_chaine.py --verifier`
+  - ligne 1477 (73 % du fichier) : `> **Le cycle rogner-étendre ne diverge pas : il converge vers un point fixe autour de 6 cm² de`
+  - ligne 1988 (12ᵉ ligne non vide avant la fin) : `uv run python src/nappe/geometrie_chaine.py --verifier`
 
 ---
 

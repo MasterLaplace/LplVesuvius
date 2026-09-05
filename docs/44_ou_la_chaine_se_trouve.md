@@ -992,7 +992,29 @@ matière au lieu de la géométrie — et le mesure :
 
 ⚠⚠ **Le facteur quatre est à lire avec sa réserve, et elle est réelle** : les deux mesures ne
 sont pas prises sur le même rouleau ni à la même échelle — `41` marche `PHerc1447` à
-**8,64 µm** le voxel, cette page projette `PHercParis4` à **2,4 µm**. Ce qui se compare
+**8,64 µm** le voxel, cette page projette `PHercParis4` à **2,4 µm**.
+
+> ⭐⭐ **2026-09-05 — le 2,4 µm de cette page est désormais RATTACHÉ à un volume publié**, et
+> il ne l'était pas : `couverture_publiee.py` le posait par cohérence **interne** (le maillon 20
+> rapporte 800 voxels, le document lit 1 920 µm), jamais contre un volume déclaré, et
+> [`77`](77_le_predicat_didentite.md) §10 en concluait qu'on ne pouvait pas **composer** les
+> micromètres de cette page avec les siens.
+>
+> La désignation se fait par une contrainte **dure** plutôt que par un argument : la boîte
+> englobante du maillage source est en voxels du **niveau 0**, donc un volume dont la grille ne
+> peut pas la contenir n'est pas le sien. Le maillage va jusqu'à `z = 73 635`, et sur les
+> **cinq** volumes publiés de `PHercParis4` **un seul** a une grille assez grande — celui à
+> **2,400 µm**, exactement la constante posée.
+>
+> ```
+> uv run python src/nappe/le_volume_du_maillage.py \
+>     data/temoin_rendu/morceaux/morceau_00 --rouleau PHercParis4 \
+>     --json docs/mesures/le_volume_du_maillage.json
+> ```
+>
+> ⚠ Aucun chiffre de cette page ne bouge — la constante était juste. Ce qui change est qu'elle
+> est **mesurée** au lieu d'être conventionnelle, donc la correction de budget de `77` §10
+> passe de transportable-en-feuilles à **calculable en micromètres** (69,2 → 66,4 µm). Ce qui se compare
 proprement, ce sont les **natures d'arrêt** ; le rapport de distances, lui, est une indication
 et pas un résultat. Le mesurer proprement demande de refaire la marche **ici**, ce que la
 suite nomme.
