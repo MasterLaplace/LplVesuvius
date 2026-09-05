@@ -104,7 +104,7 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
 ---
 
 ### docs/00_etat_de_lart.md
-- **lignes** : 481
+- **lignes** : 487
 - **nature** : MIXTE
 - **résumé** : État de l'art consolidé le 2026-08-17, sourcé sur le miroir du site (81/81 pages), les 33/35 dépôts clonés et des mesures locales. La revue de littérature et l'inventaire des acteurs relèvent du PROCÉDÉ ; les §7 et §9 rapportent des mesures propres au dépôt (reproduction `windcheck`, excision, profondeur de surface, corrélations). Le §10, ajouté le 2026-08-29, est un audit qui déclare le document lui-même insuffisant sur ses conclusions majeures.
 - **conclusions extractibles** :
@@ -4907,6 +4907,68 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
 - **preuve de lecture intégrale** :
   - ligne 128 (après 68 % du fichier) : `jugement **indépendant** du nôtre, ce qu'il fallait pour tester une robustesse.`
   - ligne 177 (dernière ligne non vide) : `axes restent équivalents pour la mesure **appariée** du §1, qui ne lit jamais un rayon absolu.`
+
+### docs/79_aucun_seuil_ne_separe_les_feuilles.md
+- **lignes** : 147
+- **nature** : RESULTAT
+  (balayage de seuil sur deux chunks à pleine résolution, avec une attente dérivée de la
+  géométrie, plus la réfutation d'un profil radial mesuré au niveau 5.)
+- **résumé** : Établit dans l'arbre ce que [`00`](../00_etat_de_lart.md) §10.3 affirmait en
+  renvoyant à un fichier **gitignoré** : aucun seuil d'intensité ne sépare les feuilles. Sur
+  `PHerc0172` à 7,910 µm, au centre et au bord, à six seuils de 100 à 144, le plus gros morceau
+  connexe tient **93,2 à 100 %** de la matière — là où des feuilles séparées en mettraient
+  **14,1 %**. Le document tire en passant une seconde conclusion, contre lui-même : le profil
+  radial spectaculaire du niveau 5 (écart-type qui **quintuple** vers l'extérieur) **ne survit
+  pas** à la pleine résolution, où l'écart-type *diminue* — il mesurait la taille du voxel, pas
+  la compaction du rouleau.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **L'attente est DÉRIVÉE, pas choisie** : un chunk de 128 voxels de 7,910 µm traverse
+    $n = 128 \times 7{,}910 / 142{,}8 = 7{,}09$ feuilles, donc des feuilles séparées mettraient
+    $1/n = 14{,}1$ % dans le plus gros morceau. Juger un seuil par un autre seuil choisi à la
+    main ne dirait rien ; un écart de **facteur sept** n'est rattrapé par aucun réglage.
+    ⚠ Le pas de 142,8 µm est celui de **ce rouleau-là** (`table_champ_0172.json`), pas emprunté.
+  - Balayage, centre (rayon 0,5 mm) puis bord (19,7 mm) : à 100/110/120/128 le plus gros morceau
+    tient **100,0 %** des deux côtés ; à 136, **99,3** et **99,1 %** (13 et 12 morceaux) ; à 144,
+    **97,3** et **93,2 %** (48 et 78 morceaux). Matière restante à 144 : **49,6** et **41,7 %**.
+  - ⚠ La part de matière est publiée **à côté** du poids du plus gros parce que sans elle on
+    croirait que les seuils hauts fabriquent des morceaux en vidant le volume. Les 48 et 78
+    morceaux de 144 sont du poivre au bord des lamelles, pas des feuilles.
+  - ⚠⚠ La connexité est à **6 voisins** : en 26-connexité deux feuilles qui se frôlent par un
+    coin fondraient en une, et le contrôle deviendrait **incapable d'échouer** — tout empilement
+    serait un seul morceau quelle que soit la donnée.
+  - Ce que ça interdit : **une isosurface affirmerait une frontière que le scan n'a jamais
+    résolue**. Une surface maillée sur un seuil ne suit pas une feuille, elle suit le bord d'une
+    motte. C'est une contrainte sur la **méthode**, pas sur ce rouleau.
+  - Coût de maillage mesuré, pas majoré : **0,32 à 0,79 face par voxel**, jusqu'à **1,0 M de
+    faces** par chunk de 128³ — le compte réel des interfaces plein/vide, bords compris.
+  - ⚠⚠⚠ **Le profil radial du niveau 5 est un artefact du niveau 5.** Écart-type 6,1 à
+    r = 40–50 contre **31,9** à r = 100–110 (voxels de 253,1 µm) ; à pleine résolution,
+    **25,1** au centre contre **19,1** à 23,7 mm. Deux causes connues : un voxel de 253 µm
+    moyenne feuilles et interstices d'un pas de 142,8 µm, et près du bord il mélange rouleau et
+    vide du masque. La sonde a servi **en se démentant elle-même**, ce que son propre en-tête
+    réclamait.
+  - Ce que le niveau 5 dit et qui tient : **97,4 %** des 21,3 M de voxels non nuls du rouleau
+    entier tombent entre 128 et 176, moyenne 147,2, écart-type 16,9 — une plage dynamique
+    étroite, cohérente avec le fait qu'aucun seuil ne tranche. ⚠ 3 chunks sur 36 sont **absents
+    du bucket**, comptés et non silencieux.
+  - Déduplication au passage : `composantes` et `faces` étaient écrites **deux fois**
+    (`sonde_maillage.py`, `sonde_exterieur.py`) et les copies avaient **déjà divergé** — arité
+    différente et garde du cas vide dans une seule. Une définition, testée
+    (`src/rendu/topologie_du_volume.py`) ; les deux sondes rendent **exactement** la même sortie
+    qu'avant, ce qui est le contrôle du refactor.
+- **rétractations / corrections internes** :
+  - §7 : le document borne lui-même sa portée — **deux régions d'un rouleau**, pas treize ; et
+    **une seule résolution** (à 2,4 µm le pas ferait 60 voxels au lieu de 18, et rien ici ne dit
+    ce qu'un seuil y ferait).
+  - §7 : la « bimodalité » que `sonde_exterieur.py` rapporte (2 pics au centre, 1 au-delà) sort
+    d'un détecteur de pics grossier sur histogramme lissé ; elle **n'est pas reprise** comme
+    résultat.
+  - §7 : « aucun seuil ne sépare » ne veut pas dire « le scan est mauvais » — la prédiction de
+    surface publiée porte une planarité de **0,993** au même genre d'endroit (`39`).
+- **preuve de lecture intégrale** :
+  - ligne 93 (après 63 % du fichier) : `l'écart-type vaut **25,1** au centre et **19,1** à 23,7 mm — il *diminue* légèrement vers`
+  - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
+
 
 ### docs/71_les_trois_resultats_de_tete_audites.md
 - **lignes** : 108

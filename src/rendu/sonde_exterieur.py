@@ -6,7 +6,15 @@ Centre du rouleau, lu au niveau 5 : (y=100, x=134), rayon max 123 vox de 253,1 u
 En voxels du niveau 0 : centre (3200, 4288), rayon max 3936.
 """
 import subprocess, sys
+from pathlib import Path
+
 import numpy as np
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+# ⚠ `composantes` et `faces` etaient ecrites ICI et dans `sonde_maillage.py`,
+# et les deux copies avaient deja diverge (arite, garde du cas vide). Une seule
+# definition, testee : `topologie_du_volume.py`.
+from topologie_du_volume import composantes, faces  # noqa: E402
 
 B = "https://vesuvius-challenge-open-data.s3.amazonaws.com"
 V = "PHerc0172/volumes/20241024131838-7.910um-53keV-masked.zarr"
@@ -21,36 +29,6 @@ def chunk(level, z, y, x):
     if r.returncode != 0:
         return None
     return np.frombuffer(numcodecs.Blosc().decode(r.stdout), dtype=np.uint8).reshape(CH, CH, CH)
-
-def composantes(solid, mini=64):
-    idx = -np.ones(solid.shape, dtype=np.int32)
-    flat = np.flatnonzero(solid.ravel())
-    if flat.size == 0:
-        return 0, 0
-    idx.ravel()[flat] = np.arange(flat.size, dtype=np.int32)
-    parent = np.arange(flat.size, dtype=np.int32)
-    def find(a):
-        while parent[a] != a:
-            parent[a] = parent[parent[a]]; a = parent[a]
-        return a
-    for ax in range(3):
-        a = np.moveaxis(idx, ax, 0)
-        lo, hi = a[:-1], a[1:]
-        m = (lo >= 0) & (hi >= 0)
-        for u, v in zip(lo[m], hi[m]):
-            ra, rb = find(int(u)), find(int(v))
-            if ra != rb: parent[max(ra, rb)] = min(ra, rb)
-    rac = np.array([find(i) for i in range(flat.size)], dtype=np.int32)
-    _, t = np.unique(rac, return_counts=True)
-    return int((t >= mini).sum()), int(t.max())
-
-def faces(solid):
-    n = 0
-    for ax in range(3):
-        a = np.moveaxis(solid, ax, 0)
-        n += int(np.count_nonzero(a[:-1] != a[1:]))
-        n += int(np.count_nonzero(a[0])) + int(np.count_nonzero(a[-1]))
-    return n
 
 print("rayon parcouru en voxels du niveau 0, plein axe +x depuis le centre\n")
 print(f"{'rayon':>6} {'chunk':>14} {'nonzero':>8} {'moy':>6} {'ecart':>6} "
@@ -84,9 +62,10 @@ rvox, key, a = retenu
 print(f"\n=== region retenue : rayon {rvox} vox, chunk {key} du niveau 0 ===")
 for seuil in (100, 110, 120, 128, 136, 144):
     solid = a > seuil
-    nc, big = composantes(solid)
+    c = composantes(solid)
     print(f"  seuil {seuil:3d} : matiere {solid.mean()*100:5.1f} %  faces {faces(solid):8d}  "
-          f"composantes>=64 {nc:4d}  plus grosse {big/max(solid.sum(),1)*100:5.1f} %")
+          f"composantes>=64 {c['grandes']:4d}  "
+          f"plus grosse {c['part_de_la_plus_grosse']*100:5.1f} %")
 
 for name, sl in (("xy", a[CH // 2]), ("xz", a[:, CH // 2, :])):
     p = f"{sys.argv[1] if len(sys.argv) > 1 else '/tmp'}/exterieur_{name}.pgm"

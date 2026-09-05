@@ -477,5 +477,11 @@ de s'y déplacer (`lpl::voxel`, `lpl::zarr` dans LplPlugin ; `lpl::scroll`, `lpl
 ⚠⚠ Et un fait mesuré qui contraint toute approche par surface : **aucun seuil ne sépare les
 feuilles**. Balayage de 130 à 198 sur un vrai chunk niveau 0 — les feuilles sont des rubans de
 **3 à 5 voxels** espacés de **30 à 40**, dans un milieu dont le creux vaut **115 à 130, pas
-zéro**. Une isosurface affirmerait une frontière que le scan n'a jamais résolue. Détail :
-`~/LplKnowledge/store/LplKernel/PLAN_papyrus_marchable.md`.
+zéro**. Une isosurface affirmerait une frontière que le scan n'a jamais résolue.
+
+⭐ **Refait dans CE dépôt et rejouable** : [`79`](79_aucun_seuil_ne_separe_les_feuilles.md)
+mesure la même chose sur `PHerc0172`, au centre et au bord, à six seuils — le plus gros morceau
+tient **93,2 à 100 %** de la matière là où des feuilles séparées en mettraient **14,1 %**, une
+attente **dérivée** du pas inter-feuilles et non choisie. ⚠ Le détail d'origine vivait dans
+`~/LplKnowledge/store/LplKernel/PLAN_papyrus_marchable.md`, **gitignoré** : un chiffre publié
+dont le calcul n'est pas dans l'arbre n'est pas un résultat.

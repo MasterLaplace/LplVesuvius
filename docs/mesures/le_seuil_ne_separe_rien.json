@@ -1,0 +1,146 @@
+{
+  "volume": "PHerc0172/volumes/20241024131838-7.910um-53keV-masked.zarr",
+  "niveau": 0,
+  "cote": 128,
+  "voxel_um": 7.91,
+  "pas_um": 142.8,
+  "feuilles_traversees": 7.09,
+  "part_attendue_si_separees": 0.141,
+  "regions": [
+    {
+      "chunk": [
+        82,
+        25,
+        33
+      ],
+      "rayon_vox": 64,
+      "moyenne": 149.69768953323364,
+      "ecart_type": 25.059581128903154,
+      "balayage": [
+        {
+          "seuil": 100,
+          "part_matiere": 0.9985814094543457,
+          "faces": 109912,
+          "grandes": 1,
+          "plus_grosse": 2094177,
+          "total": 1,
+          "part_de_la_plus_grosse": 1.0
+        },
+        {
+          "seuil": 110,
+          "part_matiere": 0.984163761138916,
+          "faces": 202560,
+          "grandes": 1,
+          "plus_grosse": 2063940,
+          "total": 2,
+          "part_de_la_plus_grosse": 0.9999995154900261
+        },
+        {
+          "seuil": 120,
+          "part_matiere": 0.9091658592224121,
+          "faces": 519758,
+          "grandes": 1,
+          "plus_grosse": 1906647,
+          "total": 11,
+          "part_de_la_plus_grosse": 0.9999937062683993
+        },
+        {
+          "seuil": 128,
+          "part_matiere": 0.7704668045043945,
+          "faces": 803748,
+          "grandes": 1,
+          "plus_grosse": 1615150,
+          "total": 254,
+          "part_de_la_plus_grosse": 0.9996063835186095
+        },
+        {
+          "seuil": 136,
+          "part_matiere": 0.6078252792358398,
+          "faces": 775902,
+          "grandes": 13,
+          "plus_grosse": 1265924,
+          "total": 1655,
+          "part_de_la_plus_grosse": 0.9931136846102069
+        },
+        {
+          "seuil": 144,
+          "part_matiere": 0.4959993362426758,
+          "faces": 606528,
+          "grandes": 48,
+          "plus_grosse": 1012418,
+          "total": 2747,
+          "part_de_la_plus_grosse": 0.9733047743384357
+        }
+      ],
+      "un_seuil_separe": false
+    },
+    {
+      "chunk": [
+        82,
+        25,
+        53
+      ],
+      "rayon_vox": 2496,
+      "moyenne": 145.2702136039734,
+      "ecart_type": 23.649545831988146,
+      "balayage": [
+        {
+          "seuil": 100,
+          "part_matiere": 0.9973773956298828,
+          "faces": 120314,
+          "grandes": 1,
+          "plus_grosse": 2091652,
+          "total": 1,
+          "part_de_la_plus_grosse": 1.0
+        },
+        {
+          "seuil": 110,
+          "part_matiere": 0.9773192405700684,
+          "faces": 256490,
+          "grandes": 1,
+          "plus_grosse": 2049583,
+          "total": 2,
+          "part_de_la_plus_grosse": 0.9999980483873092
+        },
+        {
+          "seuil": 120,
+          "part_matiere": 0.8856081962585449,
+          "faces": 674784,
+          "grandes": 1,
+          "plus_grosse": 1857221,
+          "total": 25,
+          "part_de_la_plus_grosse": 0.9999816934131285
+        },
+        {
+          "seuil": 128,
+          "part_matiere": 0.7283272743225098,
+          "faces": 1006736,
+          "grandes": 1,
+          "plus_grosse": 1526681,
+          "total": 342,
+          "part_de_la_plus_grosse": 0.9995207583017821
+        },
+        {
+          "seuil": 136,
+          "part_matiere": 0.5479741096496582,
+          "faces": 943978,
+          "grandes": 12,
+          "plus_grosse": 1138750,
+          "total": 2416,
+          "part_de_la_plus_grosse": 0.990919651753199
+        },
+        {
+          "seuil": 144,
+          "part_matiere": 0.41663265228271484,
+          "faces": 695640,
+          "grandes": 78,
+          "plus_grosse": 814707,
+          "total": 4792,
+          "part_de_la_plus_grosse": 0.9324342883826118
+        }
+      ],
+      "un_seuil_separe": false
+    }
+  ],
+  "un_seuil_separe_quelque_part": false
+}
