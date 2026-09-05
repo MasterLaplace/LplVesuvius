@@ -413,36 +413,98 @@ Dire lequel est lequel, en une incise.
 
 ## C. La règle graduée — trois semaines, et on s'arrête
 
-### C1 ⭐⭐ — la case vide, en natif
+### C1 ⭐⭐ — la case vide : **une case est REMPLIE le 2026-09-05**, sur `PHerc0139`
 
-`68` §4. Les couches **natives** à 9,362 µm de `PHerc0500P2` (39 segments publiés), **≥ 40
-tuiles de 256 px**, intervalle par tuiles, témoin par mélange.
+> Mesure : `src/encre/la_case_vide_remplie.py` (19 contrôles),
+> `docs/mesures/la_case_vide_remplie.json`. Figure : `src/figures/figure_case_vide_remplie.py`
+> (7 contrôles).
+>
+> ```
+> uv run python src/encre/la_case_vide_remplie.py --segment 20260325000000-w046_20260325 \
+>     --json docs/mesures/la_case_vide_remplie.json
+> uv run python src/encre/la_case_vide_remplie.py --controle \
+>     --segment 20260325000000-w046_20260325 --json docs/mesures/la_case_vide_remplie.json
+> uv run python src/figures/figure_case_vide_remplie.py --sortie docs/images/75_la_case_vide_remplie.png
+> ```
 
-⚠ **Pourquoi 40 et pas 10** : avec σ = 0,2243 (`64` §1), séparer une AUC de 0,599 de 0,5
-demande 40 tuiles à une condition ; séparer 3,24 µm de 9,72 µm en demande **140 par
-condition**. On en avait 10, 11 et 2. Ce sont des **minorants** — les tuiles voisines ne sont
-pas indépendantes.
+⚠ **Ce n'est PAS la case de `PHerc0500P2`** que `68` §4 désigne comme celle qui décide — celle-là
+porte une vérité terrain infrarouge et reste à faire. C'est une des **38 cases vides de
+`PHerc0139`**, choisie parce que `C2` venait d'y travailler et que sa carte de production existe
+déjà, donc la mesure coûte une inférence au lieu d'une campagne.
 
-⚠⚠ **Et « 256 px » ne veut PAS dire la même chose ici que chez les auteurs**, ce que
-[`68`](68_lire_le_papier_en_entier.md) §4 mesure (`la_case_vide.py`, 8 contrôles, revérifiés le
-2026-09-04) : une tuile de 256 px au pas du prix couvre **2 397 µm** — près de quatre lettres —
-là où les 256 px des auteurs à 2,4 µm en couvrent **614**, soit une. La tuile équivalente à une
-lettre au pas du prix ferait **66 px**.
+### ⭐⭐⭐ Le fait qui rend la mesure simple : un volume de surface est une dalle en MICROMÈTRES
 
-⭐ Les deux ne se contredisent pas, et les confondre serait l'erreur : les 40 tuiles de 256 px
-sont l'unité de **notation** (ce qui donne l'intervalle) ; le 66 px est ce que devient la
-**fenêtre du modèle** si l'on veut transporter la garantie anti-hallucination. C1 doit choisir
-les deux séparément et le dire.
+| régime | taille de voxel | couches | pile | ce que les 26 du modèle couvrent |
+|---|---:|---:|---:|---:|
+| production | 2,399 µm | **109** | 261 µm | **62 µm** |
+| **prix** | 9,362 µm | **28** | 262 µm | **243 µm** |
 
-⭐⭐ **Et C1 est plus petit qu'annoncé** : `68` §4 établit que pour `PHerc0500P2`, segment
-`20250628074500-500P2_front`, la **surface transformée** et la **pile de couches** sont déjà
-publiées au régime du prix (9,362 µm / 1,2 m) — **seule la carte d'encre manque**, et le même
-segment en porte deux dans l'autre régime, avec une vérité terrain infrarouge. Il n'y a donc
-**aucune campagne de rendu à monter**, contrairement à ce que « les couches natives » laisse
-croire : elles existent.
+Les deux volumes couvrent **la même épaisseur physique** ; le nombre de couches n'est que la
+taille de voxel. Deux conséquences, et elles vont dans des sens opposés :
 
-⚠ Et `65` est une **décimation**, qui garde un détail en profondeur qu'un vrai scan n'a pas :
-c'est un **majorant**. Seul le natif répond.
+- au régime du prix la fenêtre du modèle **est** le volume — **aucun choix de profondeur à
+  faire**, donc aucune façon de se tromper de fenêtre ;
+- et c'est le régime **grossier** qui lit les **243 µm** proches des 206 µm de l'entraînement,
+  pendant que le régime **fin** n'en lit que 62. Le scan de repérage est, sur ce point précis,
+  **celui qui ressemble à l'entraînement**.
+
+⚠ C'est aussi pourquoi le nul apparié de `C2` est **structurellement impossible** au régime du
+prix : 28 couches pour une fenêtre de 26 laissent deux couches de marge. `le_nul_verso.py` y
+refuse plutôt que d'inventer une fenêtre.
+
+### La confrontation, et c'est elle qui porte le résultat
+
+« Ce que le détecteur rend à 9,362 µm » est un nombre sans référence. Le même segment publie une
+carte d'encre **à 2,399 µm**, produite par la communauté avec son propre modèle
+(`new_canon_autoresearch_recipe`) : la meilleure réponse disponible à *« y a-t-il de l'encre
+ici ? »*, et elle est **indépendante de nous**.
+
+![l'accord avec la carte publiée, seuil par seuil](images/75_la_case_vide_remplie.png)
+
+| seuil (quantile de la carte publiée) | p50 | p75 | p90 | p95 | **p99** |
+|---|---:|---:|---:|---:|---:|
+| **production** (2,399 µm) | 0,345 | 0,395 | 0,432 | 0,516 | **0,755** |
+| **régime du prix** (9,362 µm) | 0,398 | 0,409 | 0,354 | 0,380 | **0,391** |
+| témoin, nos pixels mélangés | 0,499 | 0,502 | 0,503 | 0,500 | 0,499 |
+
+⭐⭐ **Le résultat est une FORME, pas un nombre** : en production l'accord **monte** avec le seuil
+d'encre — notre carte retrouve l'encre **forte** de la carte publiée — pendant qu'au régime du
+prix il reste **plat**. C'est la différence entre les deux régimes, et c'est ce que `68` §4
+demandait de mesurer.
+
+⭐ **Le témoin par mélange tient 0,500 aux cinq seuils.** C'est lui qui autorise à lire une AUC
+sous 0,5 comme un fait sur les cartes et non comme un biais du montage — sans lui, tout le
+tableau pourrait n'être qu'un défaut de comparaison.
+
+### ⚠⚠ Trois réserves, et la première suffit à interdire une conclusion forte
+
+1. **Le point le plus haut ne porte que 32 pixels.** L'AUC de 0,755 est prise sur le centile
+   supérieur d'une région de 249 × 249 pixels réduits. C'est une **tendance**, pas une mesure.
+2. **Le bas des deux courbes ordonne du bruit de JPEG.** Les trois quarts de la région publiée
+   tiennent entre **30 et 39 sur 255** : au seuil médian on compare deux moitiés de fond
+   compressé. ⚠ C'est une correction de ma propre première version, qui prenait la médiane comme
+   frontière encre/fond et mesurait donc l'ordre relatif du bruit.
+3. **Ce n'est pas une vérité terrain.** Deux modèles peuvent se tromper ensemble, et un désaccord
+   ne dit pas lequel a tort. La vérité terrain infrarouge existe sur `PHerc0500P2`, pas ici.
+
+⚠ **Et l'alignement a été vérifié avant de conclure quoi que ce soit.** Une AUC *fiablement* sous
+0,5 n'est pas un désaccord au hasard — c'est du signal partagé, retourné. Les **huit
+transformations du carré** ont donc été testées : identité **0,398**, miroir de colonnes 0,619,
+rot270 0,543, les autres autour de 0,5. Aucune ne rend un accord franc, donc l'orientation est
+innocentée. Et les deux grilles sont dans le rapport de leurs tailles de voxel (3,893 contre
+3,903 attendu, 0,3 % d'écart), ce que la mesure asserte plutôt que de le supposer.
+
+### Ce qui reste de C1
+
+- ⚠⚠ **La case de `PHerc0500P2`**, celle qui décide, avec sa **vérité terrain infrarouge**. C'est
+  la seule qui répondrait « combien de caractères survivent », parce que c'est la seule où la
+  réponse est connue.
+- **≥ 40 tuiles** au lieu d'une fenêtre : l'intervalle de `64` §1 (σ = 0,2243) demande 40 tuiles
+  pour séparer une AUC de 0,599 de 0,5. Une fenêtre unique ne donne pas d'intervalle.
+- ⚠ **Et l'unité de notation reste à choisir séparément de la fenêtre du modèle** : une tuile de
+  256 px vaut **2 397 µm** au régime du prix contre 614 en production — près de quatre lettres au
+  lieu d'une, donc la garantie anti-hallucination ne se transporte pas. La tuile équivalente à une
+  lettre y ferait **66 px**.
 
 ### C2 ⭐ — le nul verso (H7)
 

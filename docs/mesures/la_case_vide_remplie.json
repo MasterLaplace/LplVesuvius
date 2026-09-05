@@ -1,0 +1,224 @@
+{
+  "segment": "20260325000000-w046_20260325",
+  "regime": "prix",
+  "zarr": "PHerc0139/segments/20260325000000-w046_20260325/surface-volumes/9.362um-1.2m-113keV-volume-20250728140407.zarr",
+  "top": 1024,
+  "left": 6144,
+  "taille": 512,
+  "debut": 1,
+  "couches_disponibles": 28,
+  "fenetre_um": 243.412,
+  "tuile_du_papier_um": 2396.672,
+  "formes": {
+    "production": {
+      "zarr": "PHerc0139/segments/20260325000000-w046_20260325/surface-volumes/2.399um-0.22m-78keV-volume-20260102150214.zarr",
+      "forme": [
+        109,
+        23280,
+        32160
+      ],
+      "pile_um": 261.491,
+      "fenetre_um": 62.374
+    },
+    "prix": {
+      "zarr": "PHerc0139/segments/20260325000000-w046_20260325/surface-volumes/9.362um-1.2m-113keV-volume-20250728140407.zarr",
+      "forme": [
+        28,
+        5980,
+        8260
+      ],
+      "pile_um": 262.136,
+      "fenetre_um": 243.412
+    },
+    "rapport_grilles": [
+      3.8929765886287626,
+      3.8934624697336564
+    ],
+    "rapport_voxels": 3.902459358065861,
+    "grilles_alignees": true
+  },
+  "rendu": {
+    "minimum": -1.696,
+    "mediane": -0.913,
+    "maximum": 2.234,
+    "couverts": 255025,
+    "total": 262144,
+    "sortie": "/home/masterlaplace/LplVesuvius/docs/mesures/case_vide_cartes/20260325000000-w046_20260325_prix.npy"
+  },
+  "auc_contre_publiee": 0.3975206347108488,
+  "pixels_confrontes": 60025,
+  "seuil_publie": 34.0,
+  "part_encre_publiee": 0.4198917117867555,
+  "production_auc_contre_publiee": 0.3452826569165763,
+  "production_pixels_confrontes": 3969,
+  "production_seuil_publie": 34.0,
+  "production_part_encre_publiee": 0.4872763920382968,
+  "production_top": 21504,
+  "production_left": 5120,
+  "orientations": [
+    {
+      "orientation": "identite",
+      "auc": 0.3975206347108488
+    },
+    {
+      "orientation": "rot90",
+      "auc": 0.5206117500615137
+    },
+    {
+      "orientation": "rot180",
+      "auc": 0.5024030588001281
+    },
+    {
+      "orientation": "rot270",
+      "auc": 0.5432975946051881
+    },
+    {
+      "orientation": "miroir_lignes",
+      "auc": 0.48816496770124046
+    },
+    {
+      "orientation": "miroir_colonnes",
+      "auc": 0.6188169858781859
+    },
+    {
+      "orientation": "transposee",
+      "auc": 0.4721212261839031
+    },
+    {
+      "orientation": "antitransposee",
+      "auc": 0.45858218742441886
+    }
+  ],
+  "production_courbe": [
+    {
+      "quantile": 50,
+      "seuil": 34.0,
+      "pixels_encre": 1934,
+      "auc": 0.3452826569165763
+    },
+    {
+      "quantile": 75,
+      "seuil": 66.0,
+      "pixels_encre": 989,
+      "auc": 0.39485854466242765
+    },
+    {
+      "quantile": 90,
+      "seuil": 215.0,
+      "pixels_encre": 390,
+      "auc": 0.4315659008031179
+    },
+    {
+      "quantile": 95,
+      "seuil": 228.0,
+      "pixels_encre": 193,
+      "auc": 0.5157539848072363
+    },
+    {
+      "quantile": 99,
+      "seuil": 238.0,
+      "pixels_encre": 32,
+      "auc": 0.7545481965963932
+    }
+  ],
+  "production_temoin_melange": [
+    {
+      "quantile": 50,
+      "seuil": 34.0,
+      "pixels_encre": 1934,
+      "auc": 0.48989300478442155
+    },
+    {
+      "quantile": 75,
+      "seuil": 66.0,
+      "pixels_encre": 989,
+      "auc": 0.507165396543183
+    },
+    {
+      "quantile": 90,
+      "seuil": 215.0,
+      "pixels_encre": 390,
+      "auc": 0.5037888394552267
+    },
+    {
+      "quantile": 95,
+      "seuil": 228.0,
+      "pixels_encre": 193,
+      "auc": 0.5174815579169229
+    },
+    {
+      "quantile": 99,
+      "seuil": 238.0,
+      "pixels_encre": 32,
+      "auc": 0.5987188849377699
+    }
+  ],
+  "production_auc_queue": 0.7545481965963932,
+  "production_monte_avec_le_seuil": true,
+  "courbe": [
+    {
+      "quantile": 50,
+      "seuil": 34.0,
+      "pixels_encre": 25204,
+      "auc": 0.3975206347108488
+    },
+    {
+      "quantile": 75,
+      "seuil": 39.0,
+      "pixels_encre": 14168,
+      "auc": 0.40869824059146775
+    },
+    {
+      "quantile": 90,
+      "seuil": 67.0,
+      "pixels_encre": 5973,
+      "auc": 0.3540581519747173
+    },
+    {
+      "quantile": 95,
+      "seuil": 154.0,
+      "pixels_encre": 2986,
+      "auc": 0.37967673191772866
+    },
+    {
+      "quantile": 99,
+      "seuil": 228.0,
+      "pixels_encre": 547,
+      "auc": 0.39091938684347854
+    }
+  ],
+  "temoin_melange": [
+    {
+      "quantile": 50,
+      "seuil": 34.0,
+      "pixels_encre": 25204,
+      "auc": 0.49898221569116713
+    },
+    {
+      "quantile": 75,
+      "seuil": 39.0,
+      "pixels_encre": 14168,
+      "auc": 0.501515128530254
+    },
+    {
+      "quantile": 90,
+      "seuil": 67.0,
+      "pixels_encre": 5973,
+      "auc": 0.5026942496692826
+    },
+    {
+      "quantile": 95,
+      "seuil": 154.0,
+      "pixels_encre": 2986,
+      "auc": 0.5000398312680786
+    },
+    {
+      "quantile": 99,
+      "seuil": 228.0,
+      "pixels_encre": 547,
+      "auc": 0.4987208795742952
+    }
+  ],
+  "auc_queue": 0.39091938684347854,
+  "monte_avec_le_seuil": false
+}
