@@ -5387,6 +5387,112 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 128 (après 67 % du fichier) : `première ligne du lecteur, comme `73` §4 le dit.`
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
+### docs/75_registre_des_taches.md
+- **lignes** : 1453
+- **nature** : REGISTRE
+  (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
+  mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
+- **résumé** : Existe parce que quatre documents ont déposé des tâches en même temps et qu'un
+  registre éparpillé dans quatre proses est un registre qu'on ne tient pas. Cinq colonnes —
+  **A** remplacer le pinceau, **A′** ce qui reste sous les ✅, **B** l'article, **C** la règle
+  graduée, **D** la dette — et **une seule compte** : ce qui remplace le pinceau. La règle de
+  tri est le cadrage de `HANDOFF` §0–1 et rien d'autre : *le but est le déroulement, l'encre
+  est la règle graduée, pas l'ouvrage.* ⚠ Ce n'est pas un document de résultats mais il en
+  contient, parce que chaque tâche close y a déposé sa mesure avant de renvoyer au document qui
+  la porte.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **A′ existe à cause d'une remarque de l'auteur, et c'est la meilleure idée de forme du
+    fichier** : *« tu vois le logo vert de A3, tu vois le A3 bis, mais tu ne lis pas entre, et
+    tu loupes les tâches que tu laisses comme ça. »* **Un ✅ fait arrêter de lire.** Tout
+    « ⚠ Restant sur X » enfoui sous un titre coché est donc **recopié** dans une seule section,
+    et la règle est écrite : marquer une tâche ✅ **oblige** à ajouter sa ligne dans A′ ou à
+    écrire qu'il n'en reste rien.
+  - ⚠⚠ **A4 corrige le plan de `73` §3.3** : le rouleau de déploiement est **`PHerc0139`**, ni
+    `0800` ni `1447`. `0800` publie 6 segments tous `auto_grown`, `1447` en publie 15 dont 14
+    — **aucun indice de spire**. `0139` est le seul à porter les deux : 37 spires consécutives,
+    queue à 4,4 %, et **déjà transformé dans le repère du régime du prix**. ⚠ Il ne se choisit
+    **pas** sur sa queue mais parce que c'est le seul endroit où l'on peut **mesurer si le
+    prédicat marche**.
+  - ⚠⚠⚠ **A5 bis : l'expérience que j'allais proposer était déjà faite**, et c'est la lecture
+    des fiches qui l'a dit, deux fois de suite. `44` a **déjà jugé l'identité** : le point de
+    départ étant un morceau de segment publié, la bonne feuille est connue sur toute l'emprise.
+    Verdict — **la chaîne GLISSE, elle ne SAUTE pas** : écart lisse, monotone, du même côté pour
+    **73 %** des points, **69 µm à 5,76 mm**, franchissant les 40 µm « même feuille » vers
+    3,5 mm et restant loin des 250 µm « feuille voisine ».
+  - ⭐⭐ Ce que la session ajoute est **plus petit et plus juste** : la surface publiée étant
+    elle-même à 27 µm de la matière (`77` §10), **le budget d'écart de la chaîne est gonflé** —
+    69 µm mesurés, ≈ **64** en retirant le référent en quadrature, donc le franchissement est
+    **plus tardif** qu'annoncé.
+  - ⚠⚠ **On ne compose PAS les micromètres de `44`** : `couverture_publiee.py` pose
+    `UM_PAR_VOXEL = 2.4` justifié par cohérence **interne**, jamais contre un volume déclaré, et
+    les deux volumes publiés du rouleau nommé sont à **7,91 µm**. Ce qui voyage est le référent
+    **en feuilles** (0,121 – 0,146 sur trois rouleaux). Ce qui reste à faire est petit : que
+    `44` **nomme son volume**.
+  - **A6** : α n'a jamais vu de courbe ROC. Avec le compte corrigé ce sont **101 positifs** (et
+    non 57) plus leurs 101 copies translatées d'un demi-pas — cela fermerait `73` §2.2 et §2.8
+    d'un coup. ⚠ C'est **le seul poste du registre qui exige le volume** (rendre 101 surfaces à
+    deux profondeurs).
+  - **A5** : l'article a fermé les **deux** voies ascendantes par la mesure — l'extension
+    converge vers un point fixe de **6,02 cm²**, les patchs ne pavent pas. Ce qui reste est
+    l'**extraction** depuis un champ global, mesurée contre ce point fixe (une spire entière
+    fait 60 à 300 cm²). ⚠ L'érosion se **mesure**, pas se suppose : une extraction n'érode pas
+    comme une chaîne (15,6 % par tour).
+  - ⚠ **C est borné exprès à trois semaines.** `46` mesure que le détecteur rend **plus** de
+    dispersion sur une surface sans face (0,7111) que sur une face (0,5894) : une règle qui
+    marque autant sur le vide que sur le plein ne valide aucun déroulage. Mais c'est un
+    **étalonnage**, il se fait une fois et il s'arrête.
+  - ⭐⭐ **C2, le nul verso, s'est INVERSÉ en cours de route** : sur une face **vierge** la
+    dispersion du détecteur ne tombe que de **6 %** alors que le contraste local est **14 fois
+    plus bas** — donc « il y a de la structure ici » ne discrimine pas. Le **niveau**, lui, se
+    déplace (−0,27 contre −1,50). ⚠ Et la première campagne était **fausse**, sa cause écrite
+    dans le module qu'elle appelait.
+  - ⭐⭐ **C3 est mesuré et le courriel à l'ESRF n'est PAS justifié** : le débinage ne rend rien
+    (rapport **1,01**). La condition que `69` §1.2 posait en toutes lettres — *« si elle est
+    fausse, la donnée manquante la plus précieuse est une demande à l'ESRF »* — n'est pas
+    remplie.
+  - **D1 est FERMÉ et la conclusion de tête de `07` est CONFIRMÉE** : ce qui la démentait était
+    une mesure **sans producteur**, prise sur une colonne dominée par son bruit
+    d'échantillonnage. Sur `shortfall` (sans seuil, bruit < 5 %) : **0 paire sur 10** au-delà du
+    bruit, signe mélangé. Ce qui est établi est une **borne**, pas une absence.
+  - **D2 tient** : densité **2 812 à 2 857 cellules/cm²** sur 24 tirages (étendue **1,6 %**),
+    donc cellules ∝ aire ; le modèle exige **×15,9** là où l'observé est **×4,0** — le
+    basculement est plus raide que la taille. ⚠ Le « blocage » était une **erreur de recherche**
+    : le rapport était dans l'arbre, cherché par un **nom** au lieu du **concept**.
+  - **E, ce qui est hors registre avec sa raison** : la soumission (hors périmètre décidé par
+    l'auteur) ; le second papier de `72`, qui est ⚠⚠⚠ **une occasion de publication et non un
+    progrès vers le prix** et n'avance qu'avec C ; H3 et H6 de `69`, répondues par le dépôt.
+  - ✅✅ **D3 refermé le 2026-09-05** : `41 → 32 → 30 → 3` scripts sans appelant, et les onze
+    documents sans fiche en ont une, celui-ci compris. ⚠⚠⚠ Le contrôle des fiches avait un
+    **troisième** point aveugle : les fiches 43 à 49 séparent leur titre de leur compte par une
+    LIGNE VIDE et le motif exigeait l'enchaînement immédiat — sept fiches **invisibles**, dont
+    trois dérivaient réellement (`48` annonçait 342 lignes pour 405 pendant que le registre
+    disait « 0 en dérive »).
+- **rétractations / corrections internes** :
+  - ⚠⚠⚠ A5 bis : « l'expérience que personne ne pouvait poser » était **faux** — elle était
+    faite. Et dans la même section, « `44` mesure sur `PHerc1447` » est corrigé en
+    **`PHercParis4`**, son `um_par_voxel` de 2,4 le disant.
+  - ⚠⚠ Le référent avait été déclaré **absent** faute d'avoir interrogé **un seul serveur** —
+    `dl.ash2txt.org` publie les 65 couches. **Quatrième fois** pour cet angle mort, et la
+    première où c'est l'auteur qui le voit.
+  - ⚠⚠ Les chiffres du référent étaient **gonflés de 25 à 37 %** par un centre de masse qui
+    enjambait deux feuilles (`77` §12) ; bornés, `PHercParis4` cesse d'être aberrant — « ce
+    n'était pas un rouleau à part, c'était l'estimateur ».
+  - **B2 est testé et NON tranchable** par la voie qui semblait à portée : une dalle de volume
+    de surface fait ±0,9 écart, donc **25 refus sur 36** ; sur une dalle de 3,0 écarts, le
+    positif centré sur le lobe est **circulaire** et le transport d'une fenêtre à l'autre est
+    **confondu par le serpentage**.
+  - ⚠ Le registre déclare son propre point aveugle et **ne le comble pas tout de suite** : les
+    dix documents les plus récents n'avaient aucune fiche, et « écrire dix fiches demande de
+    lire dix documents pour de bon — **une fiche bâclée est pire que pas de fiche**, elle a
+    l'air d'une lecture ». Ce qui est fait, c'est que la tâche ne peut plus être oubliée en
+    silence.
+  - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
+    `.jsonl` — « mon motif cherchait la mauvaise extension ».
+- **preuve de lecture intégrale** :
+  - ligne 860 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 1453 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+
+
 ### docs/76_le_sens_des_indices.md
 - **lignes** : 258
 - **nature** : RESULTAT

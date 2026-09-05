@@ -461,7 +461,7 @@ instruments existants.
 | **C** | la règle graduée | ✅✅ **C2 et C3 mesurés les 2026-09-04/05.** C3 : le débinage ne rend rien (rapport 1,01), donc le courriel à l'ESRF n'est pas justifié. C2 : sur une face **vierge**, la dispersion du détecteur ne tombe que de **6 %** alors que le contraste local est **14× plus bas** — « il y a de la structure ici » ne discrimine pas ; le **niveau**, lui, se déplace (−0,27 contre −1,50). ⚠ Reste C1, plus petit qu'annoncé |
 | **D1** | ✅✅ l'arc d'excision (`03`–`07`) — **FERMÉ : la conclusion de tête de `07` est CONFIRMÉE** | ce qui la démentait était une mesure sans producteur, prise sur une colonne dominée par son bruit d'échantillonnage. Sur `shortfall` (sans seuil, bruit < 5 %) : **0 paire sur 10** au-delà du bruit, signe mélangé. Ce qui est établi est une **borne**, pas une absence |
 | **D2** | ✅✅ le contrôle P1 bis de `71` — **FAIT le 2026-09-05, l'hypothèse tient** | ⚠ le « blocage » était une erreur de recherche à moi : le rapport est dans l'arbre (`registres/anteriorite_resultats_de_tete.md:593`), j'avais cherché un fichier **nommé** budget au lieu du **concept**. Mesuré : densité **2 812 à 2 857 cellules/cm²** sur 24 tirages (étendue 1,6 %), donc cellules ∝ aire ; le modèle exige **×15,9**, l'observé est **×4,0** — le basculement est plus raide que la taille |
-| **D3** | ~~41~~ → ~~32~~ → **30** scripts sans appelant | ⚠ **entamé** : deux figures dont l'image est **utilisée** dans un doc ne portaient pas leur commande de régénération — c'est la règle du dépôt, et c'est réparé (vérifié : les deux se régénèrent à l'identique). Le reste est classé ci-dessous |
+| **D3** | ~~41~~ → ~~32~~ → ~~30~~ → **3** scripts sans appelant | ⚠ **entamé** : deux figures dont l'image est **utilisée** dans un doc ne portaient pas leur commande de régénération — c'est la règle du dépôt, et c'est réparé (vérifié : les deux se régénèrent à l'identique). Le reste est classé ci-dessous |
 
 ---
 
@@ -1412,9 +1412,23 @@ Puis le point aveugle **symétrique**, qui vaut plus cher : **les dix documents 
 `69` à `78` — n'ont aucune fiche**. Le registre se lit *à la place* des documents, donc son silence
 sur eux se lisait comme une couverture complète.
 
-> ⚠ **Non fait, et volontairement** : écrire dix fiches demande de lire dix documents pour de bon.
-> Une fiche bâclée est pire que pas de fiche — elle a l'air d'une lecture. C'est une tâche à part ;
-> ce qui est fait, c'est qu'elle ne peut plus être **oubliée en silence**.
+> ⚠ **Non fait le 2026-09-04, et volontairement** : écrire dix fiches demande de lire dix
+> documents pour de bon. Une fiche bâclée est pire que pas de fiche — elle a l'air d'une lecture.
+> C'est une tâche à part ; ce qui était fait, c'est qu'elle ne pouvait plus être **oubliée en
+> silence**.
+>
+> ✅✅ **FAIT le 2026-09-05** : les onze documents sans fiche en ont une, celui-ci compris, chacune
+> avec ses deux lignes de preuve de lecture intégrale. **81 fiches, 0 document sans fiche.**
+>
+> ⚠⚠⚠ **Et le contrôle lui-même avait un TROISIÈME point aveugle, plus silencieux que les deux
+> précédents.** Les fiches `43` à `49`, écrites d'un même lot, séparent leur titre de leur compte
+> par une **ligne vide**, et le motif exigeait l'enchaînement immédiat : ces **sept fiches
+> n'étaient pas « en dérive », elles étaient INVISIBLES**. `48` annonçait 342 lignes pour un
+> document qui en faisait 405 pendant que le registre disait « 0 en dérive », et **trois** des
+> sept dérivaient réellement — dont deux documents auxquels la session n'avait pas touché.
+> ⭐ Un garde-fou ne doit pas dépendre d'un blanc : le séparateur est désormais **capturé et
+> recopié** plutôt que normalisé, parce que réécrire sept fiches pour satisfaire une regex serait
+> laisser le contrôle changer les données.
 ```
 uv run python src/depot/fiches_a_jour.py            # dérives + documents sans fiche
 uv run python src/depot/fiches_a_jour.py --corriger  # les comptes seulement, jamais le résumé
