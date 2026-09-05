@@ -3706,7 +3706,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/55_les_murs_et_leurs_causes.md
-- **lignes** : 108
+- **lignes** : 109
 - **nature** : PROCEDE
 - **résumé** : Document **rendu** depuis `docs/registres/murs_et_causes.tsv` par `uv run python src/depot/murs_et_causes.py --rendre`, et non écrit à la main ; sa batterie vérifie que chaque ligne pointe vers un document contenant encore son ancre. Il recense **30 causes candidates sur 4 murs** : 19 éliminées, 10 confirmées, 1 bloquée, chacune avec la mesure qui l'a tranchée et le document d'origine. Sa thèse de forme est qu'un mur est un espace de causes dont on retire une entrée à la fois, et que la liste des causes éliminées — non celle des tâches — est le seul progrès mesurable. Une seule cause reste non tranchée, et elle est bloquée. (⚠ Note de lecture : l'en-tête compte 19 éliminations quand le §final écrit « les treize éliminations de ce document » ; le document ne signale pas l'écart. De même, il ne contient aucune cause ⏳ *ouverte* alors que son propre tableau de symboles définit ce statut.)
 - **conclusions extractibles** : *(les murs recensés, avec pour chacun les causes éliminées et celles qui restent ouvertes)*
@@ -3759,7 +3759,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
   - La figure `55_espace_de_causes.png` n'est pas une jauge de progression : rien ne dit que l'espace est borné.
 - **rétractations / corrections internes** : aucune rétractation déclarée. Le document précise en revanche deux bornes de portée sur des causes confirmées : « la graine, c'est-à-dire l'endroit » explique la famille m7 **et pas le mur**, et la chaîne tangentielle « ne dit pas que c'est la BONNE feuille (il faut de l'encre), et part d'un segment PUBLIÉ et non d'une de nos traces ». Il retire aussi explicitement une affirmation antérieure : « ⚠⚠ Le “croisement” que j'avais publié à 1 920 µm n'existe pas : chaîne ET bond y sont au niveau du hasard (−1,7 et +1,6) ».
 - **preuve de lecture intégrale** :
-  - ligne 71 : « | enchaîner la projection à GRAND pas (238 µm/maillon) | ❌ | cinq maillons de 238 µm étalent la boîte ×2,38 à nombre de points constant, contre ×1,10 pour le bond direct — et finissent 5,33 SPIRES à côté de lui. ⚠ Le pas réel dérive avant la boîte : 238 → 963 µm par maillon | [`44`](44_ou_la_chaine_se_trouve.md) | »
+  - ligne 76 : « | enchaîner la projection à GRAND pas (238 µm/maillon) | ❌ | cinq maillons de 238 µm étalent la boîte ×2,38 à nombre de points constant, contre ×1,10 pour le bond direct — et finissent 5,33 SPIRES à côté de lui. ⚠ Le pas réel dérive avant la boîte : 238 → 963 µm par maillon | [`44`](44_ou_la_chaine_se_trouve.md) | »
   - ligne 106 : « cause à laquelle personne n'a pensé. Le tableau borne ce qu'on a testé, jamais ce qui »
 
 ---
@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 1580
+- **lignes** : 1632
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5532,6 +5532,22 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     borne est conservatrice.
   - ⭐ « Un référent mal placé produit un **décalage** ; la chaîne produit une **rampe**. Ce ne
     sont pas les mêmes objets, et une rampe ne se corrige pas en déplaçant une origine. »
+  - ⚠⚠⚠ **C1 : l'agrégation LOCALE ne recale pas non plus** (2026-09-05, sur les mêmes 34
+    carreaux). Le remède classique de l'ouverture est Lucas–Kanade — agréger un voisinage
+    plutôt qu'imposer une forme globale. Sur la **norme entière** il marche aux grands rayons
+    (47,8 contre 60,4 pour le champ nul, 21 % de mieux), et **j'avais assuré l'inverse** :
+    c'est la mesure qui a corrigé.
+  - ⚠⚠⚠ **Et c'est un MIRAGE** : sur la composante **normale**, la seule que chaque carreau
+    mesure, aucun rayon ne bat le champ nul — de 2 à 25 voisins. Le gain de la norme entière
+    vient **entièrement de la direction non contrainte**, donc d'une grandeur que personne
+    n'a mesurée. ⭐ Péché cardinal sous un costume de plus : **une amélioration sur la
+    composante que la mesure ne contient pas**. Les contrôles qui l'attrapent sont que les
+    deux métriques doivent se **contredire** quelque part et que la composante soit
+    **strictement** plus petite que la norme.
+  - ⚠ Le voisinage reste local (au plus 25 carreaux sur 34), donc ce n'est pas un modèle
+    global déguisé, et le conditionnement des directions plafonne à **0,60** pour 1 en
+    isotropie : même à seize carreaux, **les bords ne couvrent pas le plan**. Ce qui manque
+    n'est pas la forme du modèle mais la **matière** — du contenu intérieur.
 - **rétractations / corrections internes** :
   - ⚠⚠⚠ A5 bis : « l'expérience que personne ne pouvait poser » était **faux** — elle était
     faite. Et dans la même section, « `44` mesure sur `PHerc1447` » est corrigé en
@@ -5554,8 +5570,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 987 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 1580 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 1039 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 1632 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

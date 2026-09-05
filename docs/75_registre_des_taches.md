@@ -908,6 +908,56 @@ tomber l'erreur de 66 à 21 cellules. C'est trois fois mieux, et **toujours pas 
 > Il faut un champ **dense** — flot optique sur les masques, ou des repères intérieurs — et non
 > un modèle paramétrique.
 
+### ⚠⚠⚠ Et l'agrégation LOCALE non plus — avec un mirage en chemin
+
+> Mesure : `src/encre/le_recalage_local.py` (19 contrôles, 4 sondes qui mordent), le
+> 2026-09-05, sur les **mêmes 34 carreaux** — rien n'est recalculé.
+
+Le remède classique de l'ouverture n'est pas un modèle global mais l'**agrégation locale** :
+deux carreaux voisins dont les bords ne sont pas parallèles donnent deux équations
+indépendantes et déterminent ensemble les deux composantes. C'est Lucas–Kanade, et c'est
+exactement ce qu'un polynôme de bas degré **ne fait pas**.
+
+| rayon | voisins (méd.) | conditionnement | erreur **norme entière** | champ nul | erreur **composante normale** | champ nul |
+|---:|---:|---:|---:|---:|---:|---:|
+| 256 | 2 | 0,26 | 125,6 | 66,8 | 30,4 | 14,6 |
+| 384 | 3 | 0,26 | 75,0 | 62,1 | 24,7 | 17,7 |
+| 512 | 4 | 0,34 | 71,2 | 60,5 | 27,8 | 16,1 |
+| 768 | 7 | 0,43 | 65,2 | 60,4 | 20,8 | 17,2 |
+| **1024** | 9 | 0,44 | **53,4** | 60,4 | 21,6 | 17,2 |
+| **1536** | 16 | 0,60 | **47,8** | 60,4 | 18,4 | 17,2 |
+
+⭐ **Sur la norme entière, l'agrégation locale bat le champ nul** aux deux plus grands rayons —
+47,8 contre 60,4, soit 21 % de mieux. J'avais écrit l'assertion dans l'autre sens, en supposant
+qu'elle échouerait comme le polynôme ; **c'est la mesure qui a corrigé**.
+
+⚠⚠⚠ **Et c'est un mirage.** Sur la composante **normale** — la seule que chaque carreau
+mesure réellement — **aucun rayon ne bat le champ nul**, à aucune taille de voisinage, de 2 à
+25 carreaux. Le gain de la norme entière vient donc **entièrement de la direction non
+contrainte**, c'est-à-dire d'une grandeur que personne n'a mesurée.
+
+> ⭐⭐ C'est le péché cardinal du dépôt sous un costume de plus : non pas une vérification
+> incapable d'échouer, mais **une amélioration sur la composante que la mesure ne contient
+> pas**. Le contrôle qui l'attrape est écrit : les deux métriques doivent se **contredire**
+> quelque part, et la composante normale doit être **strictement** plus petite que la norme —
+> sans quoi la remplacer par la norme entière ne ferait rien échouer.
+
+⚠ Le voisinage reste **local** — au plus 25 carreaux sur 34, jamais tout le fragment — donc ce
+n'est pas un modèle global d'ordre zéro déguisé. Et la cause est la même, chiffrée autrement :
+le conditionnement des directions plafonne à **0,60** là où l'isotropie vaudrait 1. Même en
+réunissant seize carreaux, **les bords du fragment ne couvrent pas le plan**.
+
+```
+uv run python src/encre/le_recalage_local.py \
+    --json docs/mesures/le_recalage_local.json
+```
+
+⭐⭐⭐ **Ce que ça règle** : la conclusion de C1 §1 ne dit plus « il faut un champ dense » comme
+une préférence, elle le dit comme un fait mesuré **deux fois**. Ni un modèle lisse global, ni
+une agrégation locale ne recalent ces masques — parce que le problème n'est pas la **forme** du
+modèle mais la **matière** qu'on lui donne : des bords, et rien à l'intérieur. Il faut du
+contenu intérieur, et c'est la seule voie qui reste.
+
 ### ⚠⚠ Et ça corrige un de mes propres chiffres
 
 J'ai écrit plus haut que le résidu vaut « **1,1 mm en médiane** ». C'est la norme du décalage
@@ -922,10 +972,12 @@ l'ordre de deux millimètres là où il compte.
 
 ### Ce qui reste de C1, et c'est maintenant précis
 
-1. ⚠⚠⚠ **Un recalage LOCAL DENSE, et pas paramétrique** — le champ à 34 carreaux ci-dessus est
-   une **preuve de faisabilité**, pas un recalage, et un modèle lisse ajusté dessus **ne prédit
-   rien** (mesuré, ci-dessus). Il faut du **flot optique dense sur les masques** ou des repères
-   **intérieurs** — les bords seuls souffrent de l'ouverture. Le résidu est **très variable** :
+1. ⚠⚠⚠ **Du contenu INTÉRIEUR, et c'est mesuré deux fois** — le champ à 34 carreaux ci-dessus
+   est une **preuve de faisabilité**, pas un recalage. Un modèle lisse ajusté dessus **ne prédit
+   rien**, et l'**agrégation locale** non plus : sur la composante normale, la seule mesurée,
+   aucun rayon de 256 à 1536 ne bat le champ nul. Le problème n'est donc pas la **forme** du
+   modèle mais la **matière** qu'on lui donne — des bords, et rien à l'intérieur, dont le
+   conditionnement plafonne à 0,60 pour 1 en isotropie. Le résidu est **très variable** :
    ~0,3 mm en médiane sur sa composante mesurée, mais **~2 mm là où la mesure d'encre échoue**.
    **Tout le reste en dépend.**
 2. **Une fenêtre choisie dans un repère COMMUN**, pas dans la grille de chaque régime : les deux
