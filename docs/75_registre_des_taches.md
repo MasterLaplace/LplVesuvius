@@ -1015,9 +1015,62 @@ alignée sur le pas, elle rend **1 trou contre 0** selon un décalage de cinq pi
 > ⭐⭐⭐ **Ce que ça change pour C1** : la voie n'est pas fermée, et son **prix est nommé**. Il
 > faut soit un **masque de surface publié** pour l'aplatissement du régime du prix — ce qui est
 > une demande, pas un calcul — soit les étiquettes rendues **à ce régime-là**, ce qui est la
-> case vide de `68` §4 par un autre chemin. Dix-neuf repères intérieurs valent mieux que
-> trente-quatre bords à l'ouverture, mais ils n'ont pour l'instant rien contre quoi être
-> appariés.
+> case vide de `68` §4 par un autre chemin.
+
+### ✅✅ Et ils ONT un vis-à-vis : le support de la carte publiée porte les trous du fragment
+
+> Mesure : `src/encre/les_reperes_apparies.py` (10 contrôles), figure
+> `src/figures/figure_les_reperes_apparies.py` (7 contrôles), le 2026-09-05.
+
+⚠⚠ **Le paragraphe ci-dessus supposait qu'il n'y avait rien en face. C'est faux, et la mesure
+le dit.** Là où il n'y a **pas de matière**, un détecteur ne peut rien rendre — donc si le
+support de la carte publiée porte les mêmes trous que le masque, il est un **masque de fait**,
+et les repères ont un vis-à-vis sans qu'on ait rien à demander à personne.
+
+![les reperes interieurs et leur vis-a-vis](images/75_les_reperes_apparies.png)
+
+Figure : `src/figures/figure_les_reperes_apparies.py`, depuis
+`docs/mesures/les_reperes_apparies.json`.
+
+| | |
+|---|---:|
+| repères du masque, utilisables | 314 |
+| dont transportables à l'échelle de la carte (3305 × 1883) | **55** |
+| trous intérieurs du **support publié** | **71** |
+| distance d'appariement, médiane | **40,3** cellules |
+| ... au 1er décile | 16,1 |
+| **témoin — autant de points tirés au hasard dans la même empreinte** | **319,6** |
+
+⭐⭐⭐ **Huit fois mieux que le hasard.** Le témoin est obligatoire et il est de **même compte** :
+sur une empreinte trouée, n'importe quel semis tombe parfois près d'un trou, donc 40 cellules
+ne veulent rien dire sans les 320 qu'un semis aléatoire obtient sur la **même** empreinte.
+
+```
+uv run python src/encre/les_reperes_apparies.py \
+    --json docs/mesures/les_reperes_apparies.json
+uv run python src/figures/figure_les_reperes_apparies.py
+```
+
+⚠⚠ **Et la figure a attrapé une sur-affirmation de la prose que j'avais écrite** : j'y disais
+les repères « répartis à l'intérieur », et le dessin montre qu'ils sont **groupés d'un côté** —
+**12 sur 55** dans la boîte centrale. Ils sont dans l'**aire** du fragment et non sur son
+contour, ce qui est déjà ce que les 34 carreaux de bord n'étaient pas ; ils ne sont pas
+**étalés** pour autant, et la prose le dit maintenant.
+
+⚠ Le contrôle négatif du module est un **décalage d'une demi-maille** et non « des trous
+ailleurs » : ma première version mettait les repères dans les coins et ils **battaient quand
+même** le témoin, parce que sur une empreinte dont les cibles sont sur une grille, un coin reste
+systématiquement plus proche qu'un point tiré n'importe où. Le négatif juste est la panne
+qu'on veut exclure — un recalage faux d'un demi-pas.
+
+⚠ L'échelle des flèches est prise au **neuvième décile** (91 cellules) et non au maximum : un
+appariement raté à **492** cellules — un repère accroché à un trou lointain — écrasait toutes
+les autres flèches à l'invisible. **Le maximum n'est pas le champ, c'est son échec.**
+
+> ⭐⭐ **Ce que C1 gagne** : 55 repères appariés, dans l'aire du fragment, avec un écart mesuré
+> de 40 cellules en médiane. C'est la matière que ni le modèle lisse ni l'agrégation locale
+> n'avaient — et elle vient d'une géométrie, pas de l'encre, donc la mesure d'encre qui suivra
+> ne sera pas circulaire.
 
 ### ⚠⚠ Et ça corrige un de mes propres chiffres
 
@@ -1040,9 +1093,11 @@ l'ordre de deux millimètres là où il compte.
    modèle mais la **matière** qu'on lui donne — des bords, et rien à l'intérieur, dont le
    conditionnement plafonne à 0,60 pour 1 en isotropie. ⭐ **Et le contenu intérieur existe** :
    **348** trous dont **314** utilisables. ⚠⚠ Ce qui manque est de l'**autre côté** — le régime
-   du prix ne publie **aucun masque de surface**, seulement le support de la carte d'encre, à
-   1024 de large, où il ne reste que **19** repères. Le prix de cette voie est donc un masque
-   publié, ou les étiquettes rendues au régime du prix. Le résidu est **très variable** :
+   du prix ne publie **aucun masque de surface** — mais ✅✅ **le support de la carte publiée
+   porte les trous du fragment**, donc il en est un de fait : **55** repères transportables
+   s'apparient à ses **71** trous à **40,3** cellules en médiane contre **319,6** au hasard,
+   huit fois mieux. La voie est ouverte **sans rien demander**. ⚠ Les repères sont dans l'aire
+   du fragment mais **groupés d'un côté** — 12 sur 55 dans la boîte centrale. Le résidu est **très variable** :
    ~0,3 mm en médiane sur sa composante mesurée, mais **~2 mm là où la mesure d'encre échoue**.
    **Tout le reste en dépend.**
 2. **Une fenêtre choisie dans un repère COMMUN**, pas dans la grille de chaque régime : les deux

@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 1697
+- **lignes** : 1752
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5561,6 +5561,24 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ La réduction est par **majorité de bloc** et non par échantillonnage : sinon le compte de
     repères dépendrait de l'alignement de la grille. Sur une fente de trois pixels, la sonde
     qui échantillonne rend **1 trou contre 0** selon un décalage de cinq pixels.
+  - ✅✅ **Et les repères ONT un vis-à-vis** (2026-09-05) : là où il n'y a pas de matière un
+    détecteur ne peut rien rendre, donc le **support de la carte publiée porte les trous du
+    fragment** — c'est un masque de fait. **55** repères transportables à l'échelle de la
+    carte (3305 × 1883) contre **71** trous du support, appariés à **40,3** cellules en
+    médiane (1er décile 16,1) contre **319,6** pour autant de points tirés au hasard dans la
+    même empreinte : **huit fois mieux**. La voie de C1 est ouverte **sans rien demander**.
+  - ⚠⚠ **La figure a attrapé une sur-affirmation de ma propre prose** : j'y écrivais les
+    repères « répartis à l'intérieur », et le dessin montre qu'ils sont **groupés d'un côté**
+    — 12 sur 55 dans la boîte centrale. Ils sont dans l'**aire** du fragment et non sur son
+    contour, ce que les 34 carreaux de bord n'étaient pas ; ils ne sont pas **étalés** pour
+    autant.
+  - ⚠ Le contrôle négatif est un **décalage d'une demi-maille**, pas « des trous ailleurs » :
+    ma première version mettait les repères dans les coins et ils **battaient quand même** le
+    témoin, un coin restant systématiquement plus proche qu'un point tiré n'importe où sur une
+    empreinte dont les cibles sont sur une grille.
+  - ⚠ L'échelle des flèches est prise au **9e décile** (91 cellules) et non au maximum : un
+    appariement raté à **492** écrasait tout le reste à l'invisible. **Le maximum n'est pas le
+    champ, c'est son échec.**
 - **rétractations / corrections internes** :
   - ⚠⚠⚠ A5 bis : « l'expérience que personne ne pouvait poser » était **faux** — elle était
     faite. Et dans la même section, « `44` mesure sur `PHerc1447` » est corrigé en
@@ -5583,8 +5601,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 1104 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 1697 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 1159 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 1752 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
