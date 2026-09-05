@@ -69,6 +69,25 @@ sont tous jetés. Ce qui reste est une surface vide, sur laquelle aucun croiseme
 > ⭐⭐ Un portail bâti sur `--fail-on-crossing` avec un `--maxedge` sous le pas de la trace
 > **laisse passer n'importe quelle surface**, et sort avec le code 0 que le script attend.
 
+### Le reproducteur minimal, et il tourne hors ligne
+
+```
+uv run python src/tracecheck/repro_empty_verdict.py
+```
+
+⚠ **Il n'était cité dans aucun document** jusqu'au 2026-09-05 : un mode de panne de l'outil
+officiel dont la démonstration existait et que personne ne pouvait lancer. Il fabrique un carré
+plat de 24 × 24 au pas 20, donc **aucune donnée à télécharger**, et rend les deux lignes qui font
+le point :
+
+| `--maxedge` | `clean` | paires testées | quads jetés |
+|---:|---|---:|---:|
+| 60 (le défaut) | `true` | **12 320** | 0 |
+| 19 | `true` | **0** | 1058 |
+
+> ⭐ La seconde ligne rapporte une surface **propre** en ayant comparé **zéro** paire de quads, et
+> `--fail-on-crossing` y sort en **0** — le code qu'un portail lit comme « rien à signaler ».
+
 ## 3. Et ça arrive **au réglage par défaut**, dès que le maillage grossit
 
 Le cas ci-dessus demande un réglage explicite et absurde. Celui-ci ne demande rien.

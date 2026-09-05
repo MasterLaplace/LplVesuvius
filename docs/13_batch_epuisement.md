@@ -84,6 +84,13 @@ Contrainte posée par l'auteur : la solution doit tenir sur les **53 rouleaux pu
 sur les **~800 de la villa**. Chiffrée, pas affirmée
 (`src/volume/cout_passage_echelle.py`) :
 
+```
+uv run python src/volume/cout_passage_echelle.py
+```
+
+⚠ Vérifié le 2026-09-05 : la commande nue rend le tableau ci-dessous — **1,3 / 5,2 / 77,8 Go** et
+**0,00421 %** — sans rien télécharger, les valeurs par défaut étant celles du corpus publié.
+
 | rouleaux | donnée lue | 1 fil | 16 fils | **part du volume** |
 |---:|---:|---:|---:|---:|
 | 13 (le prix) | 1,3 Go | 6 min | < 1 min | **0,0042 %** |

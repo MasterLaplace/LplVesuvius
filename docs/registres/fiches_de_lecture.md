@@ -718,10 +718,11 @@ Sept documents lus intégralement (`wc -l` mesuré avant chaque lecture).
 ---
 
 ### docs/13_batch_epuisement.md
-- **lignes** : 144
+- **lignes** : 151
 - **nature** : MIXTE
 - **résumé** : Registre de clôture : huit voies (A à H) listant tout ce qui restait ouvert dans la documentation et la passation, chaque item devant se fermer soit par une mesure, soit par une raison écrite. La plupart des cases renvoient à des mesures faites ailleurs, mais la voie G porte un chiffrage de passage à l'échelle qui lui est propre. La clôture du 2026-08-19 déclare les huit voies fermées et renvoie trois items de géométrie et la suite « produire » au batch suivant.
 - **conclusions extractibles** :
+  - **Ajouté le 2026-09-05** : la commande de `cout_passage_echelle.py`, vérifiée — elle rend le tableau du document (**1,3 / 5,2 / 77,8 Go**, **0,00421 %**) sans rien télécharger, ses valeurs par défaut étant celles du corpus publié.
   - A1/A2 : sur les 53 traces de Scroll 5, **44 sur 53 rendent ZÉRO cellule** ; la métrique de proximité est **inapplicable** — elle exige une trace qui se recouvre et 44 traces couvrent ≤ 1 tour ; les 9 mesurables sont 9 morceaux du même segment, donc n = 1.
   - A4 : aucune grandeur sans seuil n'égale la métrique à seuil (`shortfall` +0,340, `ratio_p5` −0,512 contre **+0,769**) ; le plateau tient de 0,15 à 0,40, un facteur **2,7** sans que rho bouge.
   - A5 : **71 traces mesurées** sur trois corpus — PHerc0139 (38) **+0,666** (p = 2,3e-05), PHerc1667 (20) +0,579, PHerc0814 (13) +0,141 (n = 12, sous-puissant) ; le gain est le plus grand **à 9,362 µm**.
@@ -748,8 +749,8 @@ Sept documents lus intégralement (`wc -l` mesuré avant chaque lecture).
   - F1 : `10` §5 « bloqué sur le maillage » — « ✅ corrigé — c'était une prudence mal placée, pas un fait matériel ».
   - F2 : « le suivi n'a pas été réparé, il a été **remplacé** ».
 - **preuve de lecture intégrale** :
-  - ligne 93 : `> On lit **quatre millièmes de pour-cent** d'un rouleau pour le juger. C'est ce que`
-  - ligne 144 : `| H — qualité de scan | ✅ métrique, limite d'échelle, témoin apparié, carte des 13 |`
+  - ligne 100 : `> On lit **quatre millièmes de pour-cent** d'un rouleau pour le juger. C'est ce que`
+  - ligne 151 : `| H — qualité de scan | ✅ métrique, limite d'échelle, témoin apparié, carte des 13 |`
 
 ---
 
@@ -2375,10 +2376,11 @@ Dépôt : `/home/masterlaplace/LplVesuvius`. Sept fichiers lus du premier au der
 ---
 
 ### docs/34_un_verdict_qui_ne_mesure_rien.md
-- **lignes** : 154 ⚠ (138 quand la fiche a été écrite ; la mesure de la figure a été **perdue puis restaurée** le 2026-09-04, et le document le dit)
+- **lignes** : 173 ⚠ (138 quand la fiche a été écrite ; la mesure de la figure a été **perdue puis restaurée** le 2026-09-04, et le document le dit)
 - **nature** : RESULTAT
 - **résumé** : Réponse à la mesure M2 de `29` — relire les 240 auto-intersections de `24` sous un autre `--maxedge`. La réponse directe est rassurante (les 240 survivent à la désactivation complète du filtre, donc ni masqués ni fabriqués), mais le balayage trouve davantage : un mode de panne silencieux de `vc_tifxyz_selfcross`, où « propre » et « rien mesuré » sortent par le même champ JSON. Le document mesure ensuite, par décimation d'une géométrie inchangée, ce que perd un maillage plus grossier, et impose un lecteur unique qui refuse un rapport sans paire testée.
 - **conclusions extractibles** :
+  - **Ajouté le 2026-09-05** : le **reproducteur minimal** de ce mode de panne (`src/tracecheck/repro_empty_verdict.py`) n'était cité dans **aucun** document — une démonstration qui existait et que personne ne pouvait lancer. Il tourne **hors ligne** (carré plat 24 × 24 au pas 20, rien à télécharger) : `--maxedge 60` → `clean` sur **12 320** paires testées, `--maxedge 19` → `clean` sur **0** paire, et `--fail-on-crossing` y sort en **0**.
   - Sur le maillage condamné de `24`, avec le filtre désactivé (`--maxedge 0`) : **240** croisements, **751 169** paires testées, **0** quad jeté.
   - À `--maxedge 30 · 40 · 60 · 80 · 120 · 200 · 400` : **240** croisements, **751 169** paires testées, **0** quad jeté — le filtre est inerte sur ce maillage.
   - À `--maxedge 20` : **0** paire testée, **48 040** quads jetés, croisements non mesurés, et le rapport dit `"clean_of_transverse_self_intersection": true`.
@@ -2402,7 +2404,7 @@ Dépôt : `/home/masterlaplace/LplVesuvius`. Sept fichiers lus du premier au der
   - §6 : le document n'accuse pas l'outil d'être faux ; il ne mesure pas la fréquence du cas en pratique (un seul réglage volontairement absurde l'a produit, plus les décimations construites pour ça, et aucun résultat publié n'en dépend) ; et il ne dit pas quel pas choisir.
 - **preuve de lecture intégrale** :
   - ligne 84 (61 % du fichier) : `` `26` §9 conclut que **`step_size ≥ 20`** rend une trace propre, sur la foi de comptes nuls ``
-  - ligne 152 (dans les 15 dernières lignes non vides) : `python3 src/nappe/lire_selfcross.py --verifier`
+  - ligne 171 (dans les 15 dernières lignes non vides) : `python3 src/nappe/lire_selfcross.py --verifier`
 
 ---
 
