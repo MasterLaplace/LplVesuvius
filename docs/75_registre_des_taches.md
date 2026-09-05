@@ -346,7 +346,7 @@ instruments existants.
 | **B2** | « no threshold » pas encore rétréci dans l'abstract | ⚠⚠ **testé et NON tranchable ainsi** (`77` §11) : translater = décentrer la fenêtre dans la même pile, l'idée est bonne mais une dalle de volume de surface fait ±0,9 écart et ne permet pas d'emboîter deux fenêtres. **25 refusés sur 36**. Retenté sur une dalle de 3,0 écarts : le positif centré sur le lobe est **circulaire**, et le transport d'une fenêtre à l'autre est **confondu par le serpentage** (0,13 écart ≈ la fenêtre étroite). Il faudrait un positif **indépendant** — carte d'encre ou annotation |
 | **C** | la règle graduée | ✅✅ **C2 et C3 mesurés les 2026-09-04/05.** C3 : le débinage ne rend rien (rapport 1,01), donc le courriel à l'ESRF n'est pas justifié. C2 : sur une face **vierge**, la dispersion du détecteur ne tombe que de **6 %** alors que le contraste local est **14× plus bas** — « il y a de la structure ici » ne discrimine pas ; le **niveau**, lui, se déplace (−0,27 contre −1,50). ⚠ Reste C1, plus petit qu'annoncé |
 | **D1** | ✅✅ l'arc d'excision (`03`–`07`) — **FERMÉ : la conclusion de tête de `07` est CONFIRMÉE** | ce qui la démentait était une mesure sans producteur, prise sur une colonne dominée par son bruit d'échantillonnage. Sur `shortfall` (sans seuil, bruit < 5 %) : **0 paire sur 10** au-delà du bruit, signe mélangé. Ce qui est établi est une **borne**, pas une absence |
-| **D2** | ⛔ le contrôle P1 bis de `71` | **bloqué** : le rapport « budget » n'est ni dans `docs/`, ni dans `src/`, ni dans `store/` — `71` et `72` le citent tous deux **sans le définir**, donc la tâche ne peut ni être faite ni être refusée |
+| **D2** | ✅✅ le contrôle P1 bis de `71` — **FAIT le 2026-09-05, l'hypothèse tient** | ⚠ le « blocage » était une erreur de recherche à moi : le rapport est dans l'arbre (`registres/anteriorite_resultats_de_tete.md:593`), j'avais cherché un fichier **nommé** budget au lieu du **concept**. Mesuré : densité **2 812 à 2 857 cellules/cm²** sur 24 tirages (étendue 1,6 %), donc cellules ∝ aire ; le modèle exige **×15,9**, l'observé est **×4,0** — le basculement est plus raide que la taille |
 | **D3** | ~~41~~ → ~~32~~ → **30** scripts sans appelant | ⚠ **entamé** : deux figures dont l'image est **utilisée** dans un doc ne portaient pas leur commande de régénération — c'est la règle du dépôt, et c'est réparé (vérifié : les deux se régénèrent à l'identique). Le reste est classé ci-dessous |
 
 ---
@@ -545,9 +545,50 @@ alors la surface **et** ses voisines.
 > **Si la fenêtre trop mince est la cause**, l'écart-type de la sortie doit monter avec le pas et
 > la face doit cesser d'être moins encrée que le vide. **Sinon**, la profondeur est innocentée et
 > cet axe est clos — ce qui vaut d'être écrit aussi.
+
+### ✅ Mesuré le même jour : **la prédiction est RÉFUTÉE, et l'axe est clos**
+
+> Mesure : `src/encre/la_profondeur_lue.py` (15 contrôles), `docs/mesures/la_profondeur_lue.json`.
+> Figure : `src/figures/figure_profondeur_lue.py` (5 contrôles).
 >
-> Mesure : `src/encre/la_profondeur_lue.py` (10 contrôles), étalon absolu de `36` §5bis —
-> σ **0,7712** là où le modèle marche, σ **0,0171** là où il rend une constante.
+> ```
+> uv run python src/encre/la_profondeur_lue.py --segment 20260325000000-w046_20260325 \
+>     --json docs/mesures/la_profondeur_lue.json
+> uv run python src/figures/figure_profondeur_lue.py --sortie docs/images/75_la_profondeur_lue.png
+> ```
+
+![la même fenêtre, lue à trois profondeurs](images/75_la_profondeur_lue.png)
+
+| pas | profondeur lue | couches | **σ** | médiane |
+|---:|---:|---|---:|---:|
+| 1 | **62 µm** (le régime actuel) | 35–60 | **0,718** | −0,812 |
+| 2 | 122 µm | 18–68 | 0,554 | −1,046 |
+| 3 | **182 µm** (le régime d'entraînement) | 1–76 | **0,423** | −1,137 |
+
+⚠⚠⚠ **σ TOMBE, de façon monotone, au lieu de monter.** Ramener la fenêtre au régime
+d'entraînement rend la carte **plus terne**, pas plus riche — c'est visible sur la figure, où
+elle ne devient pas bruitée mais s'éteint.
+
+⭐⭐ **Et à la profondeur actuelle le modèle est VIVANT** : σ = **0,718**, soit l'étalon de `36`
+§5bis là où le modèle atteint 0,925 (**0,771**), et non son étalon muet (**0,017**). L'incapacité
+mesurée en `C2` à séparer la feuille du vide n'est donc **pas** « le détecteur ne répond pas sur
+ce rouleau » — il répond normalement, et sa réponse ne suit simplement pas la feuille.
+
+> **Donc la fenêtre trop mince n'explique pas `C2`, et cet axe est clos.** C'est la **troisième**
+> élimination indépendante de l'échelle comme explication, après `58` (émulation sur Scroll 1) et
+> `63` (contre de vraies étiquettes) — et la première qui porte sur la **profondeur** et non sur
+> le pas en plan.
+
+⚠⚠ **Le confond, nommé plutôt que tu** : épaissir la fenêtre ne change pas que sa profondeur. À
+pas 3 elle couvre les couches **1 à 76** d'une pile de 109, donc elle contient la feuille **et**
+l'interstice que `C2` utilise comme vide. Ce n'est pas un défaut de montage — c'est ce qu'une
+fenêtre de 182 µm contient physiquement à cet endroit — mais ça interdit de lire la baisse comme
+« le modèle aime moins la profondeur » : il voit aussi autre chose.
+
+⭐ Ce qui reste acquis quoi qu'il en soit : `--pas-couches` **existe désormais sur la ligne de
+commande**. Le paramètre était pris par `load_layer_stack` depuis août, testé par sa batterie, et
+joignable par personne — donc la seule grandeur capable de corriger la profondeur lue était hors
+d'atteinte de toute campagne.
 
 ### ⚠⚠ Ce que ce contrôle ne peut pas faire, et ce qu'il ne dit pas
 
@@ -816,26 +857,72 @@ optimality claim, never an artifact »* — la sortie est toujours **valide**. �
 réparation bit-reproductible ; il faut **réparer une fois et garder la sortie**, ce que fait déjà
 chaque paire du §12.
 
-### D2 ⛔ — le contrôle P1 bis de `71` : **bloqué sur une source absente de l'arbre**
+### ✅✅ D2 — le contrôle P1 bis : **FAIT le 2026-09-05, et l'hypothèse TIENT**
 
-×15,9 requis contre ×3,8 observé. ⚠⚠ **Cherché le 2026-09-04, et le rapport « budget » n'est
-nulle part** : ni dans `docs/`, ni dans `src/`, ni dans `~/LplKnowledge/store/`. Les deux nombres
-n'apparaissent que dans `71` §4 et `72` §4, **qui le citent tous les deux sans le définir** —
-aucun des deux ne dit ce que le budget compte, sur quoi il est mesuré, ni comment ×15,9 est
-dérivé.
+> ⚠⚠⚠ **Ce n'était pas bloqué, et le blocage était mon erreur de recherche.** Ce registre
+> annonçait « le rapport *budget* n'est ni dans `docs/`, ni dans `src/`, ni dans `store/` ». Il
+> **est** dans l'arbre, à `docs/registres/anteriorite_resultats_de_tete.md:593`. J'avais cherché
+> un fichier **nommé** « budget » au lieu de chercher le **concept** — la règle que ce dépôt
+> écrit partout, enfreinte par celui qui l'écrit.
 
-> ⭐ C'est la dette `D3` déplacée d'un cran encore : on savait qu'une **mesure** sans producteur
-> ne se relance pas et qu'un **contrôle** sans producteur ne s'audite pas. Celle-ci ajoute qu'une
-> **tâche** dont la spécification vit hors de l'arbre ne peut ni être faite ni être refusée — elle
-> se contente de traîner, ce que `72` §4 constate en toutes lettres (« qui traîne »).
+> Mesure : `src/tracecheck/modele_de_proprete.py` (15 contrôles), `docs/mesures/p1bis.json`.
+>
+> ```
+> uv run python src/tracecheck/modele_de_proprete.py --json docs/mesures/p1bis.json
+> uv run python src/tracecheck/modele_de_proprete.py --verifier
+> ```
 
-**Ce qu'il faudrait pour la débloquer, dans l'ordre** : retrouver le rapport source (probablement
-une session de recherche non versée dans `store/`), ou bien **redériver ×15,9 depuis nos propres
-grilles** — auquel cas ce n'est plus un contrôle d'antériorité mais une mesure neuve, et elle
-mérite son propre énoncé plutôt que d'hériter d'un chiffre qu'on ne peut pas vérifier.
+⚠⚠ **Et le ×15,9 n'avait pas de producteur non plus.** Le rapport annonce *« Vérification
+reproductible : `scratchpad/check_windcheck_model.py` (calcul dans l'arbre, pas en ligne de
+commande) »* — **ce fichier n'existe pas**. Un nombre publié dont le calcul n'est nulle part est
+exactement ce que ce dépôt refuse ailleurs. Il est désormais dans l'arbre, et il reproduit les
+trois nombres du rapport : **12 085 → 192 541 cellules, ×15,93**.
 
-⚠ Écrire le contrôle en devinant ce que P1 bis mesure produirait un résultat qui **répond à une
-question qu'on aurait inventée**, et le comparer à ×15,9 lui donnerait l'air d'une réfutation.
+⭐ Le facteur exigé est **indépendant de `q`** — c'est un rapport de deux logarithmes — donc le
+résultat survit à une révision du modèle publié par `windcheck`.
+
+### Le contrôle lui-même : « cellules ∝ aire » — **oui, à 1,6 % près**
+
+Le rapport laissait l'hypothèse ouverte : *« cellules ∝ aire est une hypothèse que l'article n'a
+pas vérifiée et qu'il peut trancher sur ses propres grilles »*. Les grilles sont sur le disque aux
+**deux** plafonds (`data/tirages/` à 120, `data/tirages_plafond/` à 400).
+
+| rouleau | cellules valides | aire | rapport des deux croissances |
+|---|---:|---:|---:|
+| `PHerc0125` | 56 644 → 202 591 (**×3,58**) | 19,83 → 71,31 cm² (**×3,60**) | **0,99** |
+| `PHerc0191` | 56 644 → 227 528 (**×4,02**) | 19,83 → 80,39 cm² (**×4,05**) | **0,99** |
+
+⭐⭐ **Et la forme forte, qui est celle qui tranche** : sur les **24 tirages** des deux rouleaux et
+des deux plafonds, la densité vaut **2 812 à 2 857 cellules par cm²** — une étendue relative de
+**1,6 %**. « Proportionnel » n'est plus une hypothèse ; un rapport de médianes aurait pu coïncider
+pour deux raisons, une densité constante sur vingt-quatre tirages non.
+
+> **Donc P1 bis tient.** Le modèle publié exige **×15,9** de cellules pour passer de 1 tirage sale
+> sur 12 à 9 sur 12 ; l'observé est **×4,0 au plus**. Le basculement de propreté est **plus raide
+> que la seule arithmétique de taille**, donc le budget fait quelque chose au-delà de grandir la
+> surface — et ça, `windcheck` ne le dit pas.
+
+⚠ **La seconde réserve du rapport reste entière** : 1/12 et 9/12 sur n = 12 portent des intervalles
+larges. Ce qui est levé est l'hypothèse (a), pas (b).
+
+### ⚠⚠⚠ Un fait trouvé en chemin : au plafond d'origine, les DOUZE tirages ont le même compte
+
+**56 644 cellules valides exactement**, pour les six tirages de `PHerc0125` **et** les six de
+`PHerc0191`, sur une grille 242 × 242 remplie à 96,7 %. Les aires, elles, diffèrent légèrement
+(19,823 à 19,981 cm²) : les traces sont bien différentes, mais leur **compte de cellules est fixé
+par le plafond**, pas par la trace. C'est *« la stabilité était une troncature »* (`35` §3bis) vu
+d'un angle plus net — et ça rend le point de départ **dégénéré**, ce que la batterie assère plutôt
+que de le masquer. Le contrôle ne tient donc pas par ce point-là mais par la **densité**, mesurée
+des deux côtés.
+
+⚠ **Deux sondes n'ont rien trouvé, et c'est ce qui a produit le contrôle suivant.** Compter
+**toutes** les cellules de la grille, puis n'en lire qu'**un seul** plan : la batterie est restée
+verte les deux fois. Non par faiblesse — sur ces grilles les trois plans déclarent les mêmes
+absents (`x = y = z = 56 644`) et le remplissage est de 96,7 %, donc les trois comptages
+coïncident. Mais « ils coïncident ici » est une **propriété des données**, et s'y fier sans la
+mesurer est le piège habituel : `concordance_des_plans` la mesure désormais.
+
+---
 
 ### D3 ⚠ — 41 → **33** scripts sans appelant, et aucune des huit réparations n'était une formalité
 

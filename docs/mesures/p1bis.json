@@ -1,0 +1,230 @@
+{
+  "q": 7.2e-06,
+  "densites": [
+    {
+      "rouleau": "PHerc0125",
+      "plafond": 120,
+      "tirage": "r1",
+      "cellules": 56644,
+      "aire_cm2": 19.823416,
+      "par_cm2": 2857.428810453254
+    },
+    {
+      "rouleau": "PHerc0125",
+      "plafond": 120,
+      "tirage": "r2",
+      "cellules": 56644,
+      "aire_cm2": 19.823562,
+      "par_cm2": 2857.4077655670562
+    },
+    {
+      "rouleau": "PHerc0125",
+      "plafond": 120,
+      "tirage": "r3",
+      "cellules": 56644,
+      "aire_cm2": 19.884657,
+      "par_cm2": 2848.6284676673076
+    },
+    {
+      "rouleau": "PHerc0125",
+      "plafond": 120,
+      "tirage": "r4",
+      "cellules": 56644,
+      "aire_cm2": 19.855195,
+      "par_cm2": 2852.855386210007
+    },
+    {
+      "rouleau": "PHerc0125",
+      "plafond": 120,
+      "tirage": "r5",
+      "cellules": 56644,
+      "aire_cm2": 19.823581,
+      "par_cm2": 2857.4050268717847
+    },
+    {
+      "rouleau": "PHerc0125",
+      "plafond": 120,
+      "tirage": "r6",
+      "cellules": 56644,
+      "aire_cm2": 19.82663,
+      "par_cm2": 2856.9656063587204
+    },
+    {
+      "rouleau": "PHerc0125",
+      "plafond": 400,
+      "tirage": "r1",
+      "cellules": 443545,
+      "aire_cm2": 157.71664,
+      "par_cm2": 2812.29044696869
+    },
+    {
+      "rouleau": "PHerc0125",
+      "plafond": 400,
+      "tirage": "r2",
+      "cellules": 211598,
+      "aire_cm2": 74.40968,
+      "par_cm2": 2843.6891544218443
+    },
+    {
+      "rouleau": "PHerc0125",
+      "plafond": 400,
+      "tirage": "r3",
+      "cellules": 186622,
+      "aire_cm2": 65.572818,
+      "par_cm2": 2846.026839962864
+    },
+    {
+      "rouleau": "PHerc0125",
+      "plafond": 400,
+      "tirage": "r4",
+      "cellules": 171392,
+      "aire_cm2": 60.253899,
+      "par_cm2": 2844.4964200573977
+    },
+    {
+      "rouleau": "PHerc0125",
+      "plafond": 400,
+      "tirage": "r5",
+      "cellules": 230387,
+      "aire_cm2": 81.009773,
+      "par_cm2": 2843.9408168690957
+    },
+    {
+      "rouleau": "PHerc0125",
+      "plafond": 400,
+      "tirage": "r6",
+      "cellules": 193584,
+      "aire_cm2": 68.204116,
+      "par_cm2": 2838.3037762706285
+    },
+    {
+      "rouleau": "PHerc0191",
+      "plafond": 120,
+      "tirage": "r1",
+      "cellules": 56644,
+      "aire_cm2": 19.823004,
+      "par_cm2": 2857.488199064077
+    },
+    {
+      "rouleau": "PHerc0191",
+      "plafond": 120,
+      "tirage": "r2",
+      "cellules": 56644,
+      "aire_cm2": 19.853836,
+      "par_cm2": 2853.050664868995
+    },
+    {
+      "rouleau": "PHerc0191",
+      "plafond": 120,
+      "tirage": "r3",
+      "cellules": 56644,
+      "aire_cm2": 19.823029,
+      "par_cm2": 2857.4845953158824
+    },
+    {
+      "rouleau": "PHerc0191",
+      "plafond": 120,
+      "tirage": "r4",
+      "cellules": 56644,
+      "aire_cm2": 19.981209,
+      "par_cm2": 2834.863495997665
+    },
+    {
+      "rouleau": "PHerc0191",
+      "plafond": 120,
+      "tirage": "r5",
+      "cellules": 56644,
+      "aire_cm2": 19.827335,
+      "par_cm2": 2856.8640213119916
+    },
+    {
+      "rouleau": "PHerc0191",
+      "plafond": 120,
+      "tirage": "r6",
+      "cellules": 56644,
+      "aire_cm2": 19.832121,
+      "par_cm2": 2856.174586671794
+    },
+    {
+      "rouleau": "PHerc0191",
+      "plafond": 400,
+      "tirage": "r1",
+      "cellules": 186623,
+      "aire_cm2": 65.608783,
+      "par_cm2": 2844.481965166158
+    },
+    {
+      "rouleau": "PHerc0191",
+      "plafond": 400,
+      "tirage": "r2",
+      "cellules": 285154,
+      "aire_cm2": 100.807234,
+      "par_cm2": 2828.705725622826
+    },
+    {
+      "rouleau": "PHerc0191",
+      "plafond": 400,
+      "tirage": "r3",
+      "cellules": 224664,
+      "aire_cm2": 79.32898,
+      "par_cm2": 2832.05456568331
+    },
+    {
+      "rouleau": "PHerc0191",
+      "plafond": 400,
+      "tirage": "r4",
+      "cellules": 230391,
+      "aire_cm2": 81.449423,
+      "par_cm2": 2828.638822892582
+    },
+    {
+      "rouleau": "PHerc0191",
+      "plafond": 400,
+      "tirage": "r5",
+      "cellules": 320345,
+      "aire_cm2": 113.455263,
+      "par_cm2": 2823.5358283907904
+    },
+    {
+      "rouleau": "PHerc0191",
+      "plafond": 400,
+      "tirage": "r6",
+      "cellules": 186615,
+      "aire_cm2": 65.675072,
+      "par_cm2": 2841.4890812757694
+    }
+  ],
+  "par_cm2_min": 2812.29044696869,
+  "par_cm2_max": 2857.488199064077,
+  "par_cm2_etendue_relative": 0.016071509308046277,
+  "cellules_pour_11_sur_12": 12084.91347078192,
+  "cellules_pour_3_sur_12": 192540.8834888737,
+  "facteur_exige": 15.932334472595597,
+  "lignes": [
+    {
+      "rouleau": "PHerc0125",
+      "tirages_avant": 6,
+      "tirages_apres": 6,
+      "cellules_avant": 56644.0,
+      "cellules_apres": 202591.0,
+      "aire_avant": 19.8251055,
+      "aire_apres": 71.30689799999999,
+      "facteur_cellules": 3.5765659204858413,
+      "facteur_aire": 3.596797908591205,
+      "cellules_toutes_egales_avant": true
+    },
+    {
+      "rouleau": "PHerc0191",
+      "tirages_avant": 6,
+      "tirages_apres": 6,
+      "cellules_avant": 56644.0,
+      "cellules_apres": 227527.5,
+      "aire_avant": 19.829728000000003,
+      "aire_apres": 80.3892015,
+      "facteur_cellules": 4.01679789562884,
+      "facteur_aire": 4.053973987943757,
+      "cellules_toutes_egales_avant": true
+    }
+  ],
+  "rouleau_ecarte": "PHerc0358 (un seul tirage : un nombre ne se disperse pas)"
+}

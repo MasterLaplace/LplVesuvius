@@ -28,6 +28,12 @@ n'y a pas de vérité terrain ici. Un écart-type qui monte dit « le modèle ce
 constante », pas « il lit du texte ». `36` §5bis donne l'étalon absolu : σ **0,7712** sur la
 pile où le modèle marche, σ **0,0171** là où il est muet — un facteur **45**.
 
+⚠⚠⚠ LE CONFOND À NOMMER, ET IL EST STRUCTUREL. Épaissir la fenêtre ne change pas seulement sa
+profondeur : à pas 3 elle couvre les couches **1 à 76** d'une pile de 109, donc elle contient la
+feuille **et** l'interstice que `C2` utilise comme vide. Ce n'est pas un défaut de montage — c'est
+ce qu'une fenêtre de 182 µm contient physiquement à cet endroit-là. Mais ça interdit de lire une
+baisse de σ comme « le modèle aime moins la profondeur » : il voit aussi autre chose.
+
 ⚠ Et la fenêtre est la même à tous les pas, au même début : c'est ce qui en fait une
 comparaison appariée. Un pas plus grand lit plus loin **vers le bas** de la pile, donc la
 fenêtre n'est plus centrée pareil — ce biais est nommé et borné ci-dessous (`debut_pour`),
@@ -236,6 +242,22 @@ def _verifier(r: dict | None = None) -> int:
             v("le détecteur ne rend une CONSTANTE à aucun pas",
               min(sigmas) > SIGMA_MODELE_MUET * 3,
               " · ".join(f"{s:.4f}" for s in sigmas))
+            # ⚠⚠⚠ LA PRÉDICTION ÉTAIT ÉCRITE AVANT LA MESURE, ET ELLE EST RÉFUTÉE. On attendait
+            # que σ MONTE en ramenant la fenêtre au régime d'entraînement. Il TOMBE, et de façon
+            # monotone : 0,718 → 0,554 → 0,423. La fenêtre trop mince n'explique donc pas ce que
+            # `C2` mesure, et cet axe est clos — troisième élimination indépendante de l'échelle
+            # après `58` (émulation) et `63` (vraies étiquettes).
+            v("... et σ TOMBE quand la fenêtre s'épaissit, au lieu de monter",
+              all(a > b for a, b in zip(sigmas, sigmas[1:])),
+              " → ".join(f"{s:.4f}" for s in sigmas))
+            # ⚠⚠ ET LE MODÈLE N'EST PAS MUET ICI, ce qui compte pour lire `C2` : à 62 µm il rend
+            # σ 0,718, soit l'étalon VIVANT de `36` §5bis (0,771) et non son étalon muet
+            # (0,0171). Son incapacité à séparer la feuille du vide n'est donc pas « il ne
+            # répond pas sur ce rouleau ».
+            v("... et à la profondeur actuelle σ est celui d'un modèle VIVANT",
+              sigmas[0] > 0.5 * SIGMA_MODELE_VIVANT,
+              f"{sigmas[0]:.4f} contre {SIGMA_MODELE_VIVANT} vivant et "
+              f"{SIGMA_MODELE_MUET} muet")
             v("... et la fenêtre reste centrée sur la surface à tous les pas",
               all(x["centre_perdu"] <= 1 for x in lots),
               " · ".join(str(x["centre_perdu"]) for x in lots))
