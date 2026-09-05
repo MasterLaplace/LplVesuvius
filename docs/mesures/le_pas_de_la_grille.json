@@ -1,0 +1,40 @@
+[
+  {
+    "rouleau": "PHerc0139",
+    "prefixe": "PHerc0139/representations/predictions/surfaces/20250728140407-surface-20260413222639-surface-m7-L0-th0.2.normal-grids",
+    "voxel_um": 9.362,
+    "pas_inter_feuilles_um": 154.1,
+    "pas_grille_vox": 64,
+    "niveau_entree": 0,
+    "pas_spirale": 20.0,
+    "version_grille": 3,
+    "etendue": [
+      6621,
+      6621
+    ],
+    "pas_grille_um": 599.168,
+    "cellules_par_pas": 3.888,
+    "pas_maximal_utile_vox": 8.23,
+    "trop_grossier_de": 7.78,
+    "resout_le_pas": false
+  },
+  {
+    "rouleau": "PHerc0358",
+    "prefixe": "PHerc0358/representations/predictions/surfaces/20250821151737-surface-20260413222639-surface-m7-L0-th0.2.normal-grids",
+    "voxel_um": 9.362,
+    "pas_inter_feuilles_um": 150.0,
+    "pas_grille_vox": 64,
+    "niveau_entree": 0,
+    "pas_spirale": 20.0,
+    "version_grille": 3,
+    "etendue": [
+      7783,
+      7783
+    ],
+    "pas_grille_um": 599.168,
+    "cellules_par_pas": 3.994,
+    "pas_maximal_utile_vox": 8.01,
+    "trop_grossier_de": 7.99,
+    "resout_le_pas": false
+  }
+]

@@ -250,6 +250,71 @@ fermée :
 et sans rapport avec les bords de spire. Alors l'identité doit venir d'ailleurs — la coupe à
 $K$ surfaces couplées (`69` §3.3), qui s'engage sur une feuille par construction.
 
+### ⚠⚠⚠ A2 ter est BORNÉE par le pas de la grille, et ce n'est pas le bruit de `m7`
+
+> Mesure : `src/nappe/le_pas_de_la_grille.py` (17 contrôles, 4 sondes qui mordent), le
+> 2026-09-05. ⚠ Faite **avant** d'intégrer quoi que ce soit — c'est le piège nº 27 du dépôt
+> appliqué à un autre produit : *trouver la matière avant de sonder.*
+
+`PHerc0139` est le bon endroit pour ce test et le seul : il publie **à la fois** les 37 spires
+indexées qui servent de référent et des `normal-grids`. ⚠ `PHerc0172`, l'autre rouleau à
+indices, **n'en publie aucune**.
+
+Le produit déclare son pas d'échantillonnage, **deux fois et d'accord** — `grid-step: 64` dans
+son `metadata.json`, et `0x40` dans l'en-tête binaire de chaque `.grid` :
+
+| rouleau | pas de grille | en µm | **écarts inter-feuilles par cellule** | pas maximal utile | résout ? |
+|---|---:|---:|---:|---:|:---:|
+| `PHerc0139` | 64 vx | 599 | **3,89** | 8,23 vx | **NON** |
+| `PHerc0358` | 64 vx | 599 | **3,99** | 8,01 vx | **NON** |
+
+![le peigne d'echantillonnage contre le reseau de feuilles](images/75_le_pas_de_la_grille.png)
+
+Figure : `src/figures/figure_le_pas_de_la_grille.py`, depuis
+`docs/mesures/le_pas_de_la_grille.json`.
+
+```
+uv run python src/figures/figure_le_pas_de_la_grille.py
+```
+
+⭐⭐ **La bande du bas est le contrôle, et sans elle la figure ne prouverait rien** : le *même*
+réseau, échantillonné à la demi-période, est traversé par **39** points là où le produit publié
+en pose **6**. Ce n'est donc pas « le réseau est trop fin pour être échantillonné », c'est
+« ce produit-là l'échantillonne trop grossièrement » — deux énoncés que la bande du haut seule
+confond.
+
+⭐⭐⭐ **Une cellule de la grille couvre presque QUATRE feuilles.** Or un résidu est une
+intégrale de boucle **feuille à feuille** : la grandeur intégrée est $\nabla\psi$, dont la
+norme vaut $2\pi/b$ avec $b$ le pas local. Un champ échantillonné à quatre feuilles par cellule
+ne porte pas ce gradient — **il est replié**.
+
+⚠⚠ Et la borne n'est pas un seuil choisi : c'est **Nyquist**, deux échantillons par période,
+donc un pas de grille d'au plus une demi-période. Ici **8,23 voxels** contre les 64 publiés,
+soit **7,8 fois trop grossier**. Prendre un pas plus grand ne dégrade pas la mesure, il
+l'**alias** — et un gradient replié rend un résidu qui n'a aucun rapport avec la feuille.
+
+```
+uv run python src/nappe/le_pas_de_la_grille.py \
+    --json docs/mesures/le_pas_de_la_grille.json
+```
+
+⭐ **C'est la même classe de borne que celle qui a fermé `A2 bis`** — *« ce qui borne vraiment
+A2 bis, c'est la RÉSOLUTION, pas le `nz` manquant »* — sur un **autre produit** et pour une
+autre raison : là c'était le niveau de pyramide d'un champ de fibres, ici c'est le pas
+d'échantillonnage d'un champ de normales. Deux produits d'orientation publiés, deux fois trop
+grossiers pour compter des feuilles.
+
+⚠ **Ce que ça n'établit pas** : que les grilles soient inutiles, ni que le test soit
+impossible. Il dit qu'**il ne se monte pas sur ce produit-là**. La sortie est déjà nommée par
+[`26`](26_le_champ_de_direction.md) §7 : `vc_gen_normalgrids -i <volume.zarr> -o sortie/`
+génère des grilles **depuis un volume** plutôt que depuis une prédiction — et rien n'oblige à
+garder le pas de 64. ⚠⚠ C'est un gros calcul, et il faut le dire : à un pas de 8 voxels le
+produit serait **512 fois plus volumineux** que les 10,4 Go inventoriés par `26`.
+
+⚠ Et la panne annoncée d'avance — *« des résidus distribués comme le bruit de `m7` »* — n'est
+**pas** ce qui bloque, ni écartée pour autant : elle reste à tester le jour où une grille assez
+fine existera. Ce qui est mesuré ici la précède.
+
 ### ~~A3~~ ✅ — le masque d'approbation — **FAIT le 2026-09-04** (`77` §6)
 
 ⭐⭐⭐ `approval.tif` est **calculé**, aux cinq bras de contrôle, et les deux populations se

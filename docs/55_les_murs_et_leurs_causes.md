@@ -11,7 +11,7 @@ la fois. Une feuille de route qui liste des tâches laisse croire qu'on avance q
 tourne ; celle-ci liste des causes **éliminées**, et montre l'espace rétrécir. C'est le
 seul progrès mesurable sur un problème que personne n'a résolu.
 
-**32 causes candidates** sur **4 murs** : ❌ **21** éliminées · ✅ **10** confirmées · 🔒 **1** bloquée
+**33 causes candidates** sur **4 murs** : ❌ **21** éliminées · ✅ **10** confirmées · 🔒 **2** bloquées
 
 | symbole | verdict | ce que ça veut dire |
 |---|---|---|
@@ -29,7 +29,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 
 ## 1. Le tracé ne suit pas de feuille
 
-❌ 8 éliminées · ✅ 5 confirmées · 🔒 1 bloquée
+❌ 8 éliminées · ✅ 5 confirmées · 🔒 2 bloquées
 
 | cause candidate | | ce qui a été mesuré | où |
 |---|---|---|---|
@@ -47,6 +47,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | le sens de la normale du rendu (--flip-normals) | ❌ | le drapeau RENUMÉROTE la pile : 41/41 couches identiques après renversement, 1/41 à l'endroit — la fenêtre est centrée sur la surface, il n'y a pas de « mauvais côté » | [`38`](38_ce_qui_bouge_avec_la_fenetre.md) |
 | le classement de graine désigne le point le moins étayé | ❌ | huit candidats tracés sur PHercParis4, étai de 9 à 27 voisins et occupation 0,02 à 0,75 : ZÉRO convergence, et 7 écarts sur 8 valent exactement le bord de la fenêtre | [`48`](48_ou_monter_lexperience.md) |
 | comparer le relief d'une trace L2 à une trace L0 | 🔒 | à aire égale un maillage L2 rend quatre fois moins de pixels de côté, donc les deux ne tiennent jamais dans la même fenêtre d'analyse — le relief ne peut pas les départager | [`54`](54_cinq_rendus_vides.md) |
+| les résidus du champ d'orientation publié (A2 ter) | 🔒 | le pas de grille publié vaut 64 voxels, soit 3,89 écarts inter-feuilles par cellule contre 0,5 exigés par Nyquist : le champ est REPLIÉ, pas bruité | [`75`](75_registre_des_taches.md) |
 
 ## 2. Les patchs publiés ne se recollent pas
 
@@ -94,6 +95,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | mur | cause | pourquoi elle est encore ouverte |
 |---|---|---|
 | le tracé ne suit pas de feuille | **comparer le relief d'une trace L2 à une trace L0** | à aire égale un maillage L2 rend quatre fois moins de pixels de côté, donc les deux ne tiennent jamais dans la même fenêtre d'analyse — le relief ne peut pas les départager |
+| le tracé ne suit pas de feuille | **les résidus du champ d'orientation publié (A2 ter)** | le pas de grille publié vaut 64 voxels, soit 3,89 écarts inter-feuilles par cellule contre 0,5 exigés par Nyquist : le champ est REPLIÉ, pas bruité |
 
 ⚠ **Une cause éliminée ne se rouvre pas sans une mesure neuve.** Les treize
 éliminations de ce document ont chacune coûté une campagne ; les refaire par doute

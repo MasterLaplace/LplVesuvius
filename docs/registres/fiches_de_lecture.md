@@ -3699,7 +3699,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/55_les_murs_et_leurs_causes.md
-- **lignes** : 105
+- **lignes** : 107
 - **nature** : PROCEDE
 - **résumé** : Document **rendu** depuis `docs/registres/murs_et_causes.tsv` par `uv run python src/depot/murs_et_causes.py --rendre`, et non écrit à la main ; sa batterie vérifie que chaque ligne pointe vers un document contenant encore son ancre. Il recense **30 causes candidates sur 4 murs** : 19 éliminées, 10 confirmées, 1 bloquée, chacune avec la mesure qui l'a tranchée et le document d'origine. Sa thèse de forme est qu'un mur est un espace de causes dont on retire une entrée à la fois, et que la liste des causes éliminées — non celle des tâches — est le seul progrès mesurable. Une seule cause reste non tranchée, et elle est bloquée. (⚠ Note de lecture : l'en-tête compte 19 éliminations quand le §final écrit « les treize éliminations de ce document » ; le document ne signale pas l'écart. De même, il ne contient aucune cause ⏳ *ouverte* alors que son propre tableau de symboles définit ce statut.)
 - **conclusions extractibles** : *(les murs recensés, avec pour chacun les causes éliminées et celles qui restent ouvertes)*
@@ -5412,7 +5412,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 1458
+- **lignes** : 1523
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5497,6 +5497,20 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     `provenance_du_voxel_reconstructible`, écrit dans le sens « ce n'est PAS
     reconstructible » avec la note qu'il tomberait ce jour-là, **est tombé** — c'est
     exactement ce pour quoi il avait été écrit.
+  - ⚠⚠⚠ **A2 ter est BORNÉE par le pas de la grille** (2026-09-05), et la mesure est faite
+    AVANT d'intégrer quoi que ce soit. `PHerc0139` est le seul rouleau qui publie **à la fois**
+    les spires indexées et des `normal-grids` (`PHerc0172` n'en publie aucune). Le produit
+    déclare son pas **deux fois et d'accord** — `grid-step: 64` dans son `metadata.json`, `0x40`
+    dans l'en-tête de chaque `.grid` : **64 voxels = 599 µm = 3,89 écarts inter-feuilles par
+    cellule**.
+  - ⭐⭐⭐ Un résidu est une intégrale de boucle **feuille à feuille** ($|\nabla\psi| = 2\pi/b$),
+    donc il faut **deux échantillons par écart** — **8,23 voxels** au plus. Le produit publié est
+    **7,8 fois trop grossier**. ⚠ Ce n'est pas un seuil choisi, c'est **Nyquist** : un pas plus
+    grand ne dégrade pas la mesure, il la **replie**, et un gradient replié rend un résidu sans
+    rapport avec la feuille. Même classe de borne qu'`A2 bis`, sur un **autre produit** — deux
+    champs d'orientation publiés, deux fois trop grossiers pour compter des feuilles.
+    ⚠ La sortie est nommée (`26` §7, `vc_gen_normalgrids` depuis un **volume**), et son coût
+    aussi : à un pas de 8 voxels le produit serait **512 fois** plus volumineux que 10,4 Go.
 - **rétractations / corrections internes** :
   - ⚠⚠⚠ A5 bis : « l'expérience que personne ne pouvait poser » était **faux** — elle était
     faite. Et dans la même section, « `44` mesure sur `PHerc1447` » est corrigé en
@@ -5519,8 +5533,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 865 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 1458 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 930 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 1523 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
