@@ -268,8 +268,8 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
   - §6 : « ⚠⚠ Ce que la figure montre et que le tableau cachait » — « "Pas de différence en moyenne" n'est pas "pas de différence" ».
   - §6/§7 : portée explicitement bornée (un rouleau, une campagne de scan, un outil de réparation) et interdiction de glisser de « les cellules excisées échantillonnent autre chose » à « réparer améliore le texte ».
 - **preuve de lecture intégrale** :
-  - l. 160 : `> ⭐ **Refait sans le niveau 0 : p = 0,504, δ de Cliff = −0,0016.** La conclusion **survit**,`
-  - l. 231 : `papyrologique ; le premier est de la physique mesurable cet après-midi.`
+  - l. 190 : `> ⭐ **Refait sans le niveau 0 : p = 0,504, δ de Cliff = −0,0016.** La conclusion **survit**,`
+  - l. 261 : `papyrologique ; le premier est de la physique mesurable cet après-midi.`
 
 ---
 
@@ -712,8 +712,8 @@ Sept documents lus intégralement (`wc -l` mesuré avant chaque lecture).
   - §9 : la branche « volume plus épais » est marquée FERMÉE ; le test `--start-layer 0` est « fait, et négatif », et « ⚠ Mais §7 explique pourquoi ce test ne pouvait pas trancher ».
   - Portée ajoutée le 2026-08-20 : l'instrument ne rend une distance que si la surface a une feuille à portée ; sur une surface en travers la valeur suit la fenêtre de rendu (α = +1,01 contre +0,00), donc le seuil de ~50 µm ne s'applique qu'aux surfaces dont la mesure converge.
 - **preuve de lecture intégrale** :
-  - ligne 420 : `> Le passage du contraste à l'intensité n'était pas un ajustement esthétique : il`
-  - ligne 586 : `⭐ C'est la règle nº 1 du dépôt qui gagne : *aucun seuil absolu sur une grandeur physique`
+  - ligne 455 : `> Le passage du contraste à l'intensité n'était pas un ajustement esthétique : il`
+  - ligne 621 : `⭐ C'est la règle nº 1 du dépôt qui gagne : *aucun seuil absolu sur une grandeur physique`
 
 ---
 
@@ -969,8 +969,8 @@ dernier caractère ; les nombres de lignes sont mesurés par `wc -l`.
     **−0,297**), `PHerc0358` passe du 1ᵉʳ au **6ᵉ**, `PHerc0800` devient le meilleur à
     **2,6 %**, et le témoin n'est plus à 0 % mais à **4 %**.
 - **preuve de lecture intégrale** :
-  - ligne 254 (après 60 % du fichier) : `**Six des treize ont une séparabilité médiane égale ou meilleure que le témoin.**`
-  - ligne 329 (dans les 15 dernières lignes non vides) : `résolue** — 0 des 78 paires séparées, 0 des 13 rouleaux distingué du témoin après Holm.`
+  - ligne 264 (après 60 % du fichier) : `**Six des treize ont une séparabilité médiane égale ou meilleure que le témoin.**`
+  - ligne 339 (dans les 15 dernières lignes non vides) : `résolue** — 0 des 78 paires séparées, 0 des 13 rouleaux distingué du témoin après Holm.`
 
 ---
 
@@ -1913,7 +1913,7 @@ caractère, couverture vérifiée par `wc -l` avant lecture.
     bon réglage, mais pour une raison de **débit** et non de déterminisme.
 - **preuve de lecture intégrale** :
   - l. 437 : « ⚠⚠ **Un facteur 29 de ralentissement pour zéro déplacement, sur la course entière.** La »
-  - l. 709 : « machine a un iGPU **Intel Arc**. Il n'y a pas de GPU à saturer ici. »
+  - l. 719 : « machine a un iGPU **Intel Arc**. Il n'y a pas de GPU à saturer ici. »
 
 ---
 
@@ -3202,8 +3202,8 @@ dernier caractère. Lignes mesurées par `wc -l`.
   - §5.4 : « mon premier remède se contredisait lui-même » — le commentaire annonçait une teinte
     « hors de la plage utile » et la valeur choisie, 0,5, tombe au **milieu** de cette plage.
 - **preuve de lecture intégrale** :
-  - ligne 274 (67 % du fichier) : `> ⭐⭐⭐ **LA MESURE EST FAITE — 2026-08-28 au soir. Le contrôle dur PASSE.**`
-  - ligne 404 (3ᵉ ligne non vide avant la fin) : `uv run python src/encre/temoin_negatif.py --verifier`
+  - ligne 286 (67 % du fichier) : `> ⭐⭐⭐ **LA MESURE EST FAITE — 2026-08-28 au soir. Le contrôle dur PASSE.**`
+  - ligne 416 (3ᵉ ligne non vide avant la fin) : `uv run python src/encre/temoin_negatif.py --verifier`
 
 ---
 
@@ -4798,7 +4798,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     les modèles d'encre de la communauté utilisent à 9 µm.
 - **preuve de lecture intégrale** :
   - ligne 194 (après 60 % du fichier) : `Ce n'est pas un cas isolé : **103 cases vides du régime du prix**, toutes avec un témoin positif`
-  - ligne 300 (dans les 15 dernières lignes non vides) : `**Sondes** : les deux batteries ont été cassées exprès et échouent — remplacer $\sqrt{\lambda D}$`
+  - ligne 314 (dans les 15 dernières lignes non vides) : `**Sondes** : les deux batteries ont été cassées exprès et échouent — remplacer $\sqrt{\lambda D}$`
 
 
 ### docs/72_le_second_papier.md
@@ -4820,7 +4820,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - §5 : le document ne dit pas que le papier doit être écrit, ni quand ; il nomme le risque de l'écrire **sans** remplir la case vide — un diagnostic sans coût mesuré, c'est-à-dire ce que le premier papier reproche à la littérature.
 - **preuve de lecture intégrale** :
   - ligne 60 (après 65 % du fichier) : `**Ni faisceau, ni annotation manuelle, ni rescan.** Les couches sont rendues.`
-  - ligne 91 (dernière ligne non vide) : `papier reproche à la littérature.`
+  - ligne 100 (dernière ligne non vide) : `papier reproche à la littérature.`
 
 ### docs/78_lombilic_publie.md
 - **lignes** : 153
