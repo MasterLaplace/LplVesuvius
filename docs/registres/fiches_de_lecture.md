@@ -3706,7 +3706,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/55_les_murs_et_leurs_causes.md
-- **lignes** : 118
+- **lignes** : 119
 - **nature** : PROCEDE
 - **résumé** : Document **rendu** depuis `docs/registres/murs_et_causes.tsv` par `uv run python src/depot/murs_et_causes.py --rendre`, et non écrit à la main ; sa batterie vérifie que chaque ligne pointe vers un document contenant encore son ancre. Il recense **30 causes candidates sur 4 murs** : 19 éliminées, 10 confirmées, 1 bloquée, chacune avec la mesure qui l'a tranchée et le document d'origine. Sa thèse de forme est qu'un mur est un espace de causes dont on retire une entrée à la fois, et que la liste des causes éliminées — non celle des tâches — est le seul progrès mesurable. Une seule cause reste non tranchée, et elle est bloquée. (⚠ Note de lecture : l'en-tête compte 19 éliminations quand le §final écrit « les treize éliminations de ce document » ; le document ne signale pas l'écart. De même, il ne contient aucune cause ⏳ *ouverte* alors que son propre tableau de symboles définit ce statut.)
 - **conclusions extractibles** : *(les murs recensés, avec pour chacun les causes éliminées et celles qui restent ouvertes)*
@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 2426
+- **lignes** : 2521
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5749,6 +5749,42 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠⚠ Défaut de mon propre outil attrapé avant publication : `index_local` ignorait son argument
     et rendait les **311** segments des 45 objets, d'où un faux « 272 à l'index seulement ». Un
     inventaire qui crie faux est un inventaire qu'on cesse d'écouter.
+  - ✅✅✅ **SUR LE VOLUME BRUT, LE RACCROCHAGE PASSE SOUS L'ÉTALON : 33,3 µm** (2026-09-06). Le
+    volume de scan de `PHerc0500P2` est publié (28096 × 18209 × 18209 voxels, blocs de 128³ **non
+    compressés**), et son nom porte l'horodatage du volume *et* sa taille de voxel — tous deux
+    confrontés à ce que les spires déclarent avant qu'un octet ne soit lu. Sur sept paires :
+    **ne pas bouger 93,9 µm**, **pas normal seul 46,7**, **raccroché 33,3**, contre l'étalon de
+    **50,5** que laisse la meilleure longueur constante. Le raccrochage fait donc ce qu'aucun
+    nombre transporté ne peut faire.
+  - ⛔⛔ **Et ce n'est PAS la matière la plus proche qui raccroche, c'est la FORME d'une feuille.**
+    Le **maximum brut** d'intensité rend **46,1 µm**, c'est-à-dire *rien* de plus que le pas seul :
+    la crête est large de trente voxels, un maximum s'y pose n'importe où. Ce qui travaille est la
+    **corrélation normalisée** de la ligne avec le profil de feuille lu **sur la spire de départ**
+    — donc un gabarit qui ne sait **rien** de la cible.
+  - ⭐⭐ **La convention se mesure avant tout raccrochage** : sur **2401 lignes** de sept spires, la
+    crête de matière est à **−6,6 µm** de la surface publiée et le creux d'air à **+33,2 µm**,
+    contraste **40,7**. ⚠⚠ Ma première version a trouvé un « pas de crêtes » de **8,9 µm**, soit
+    quatre voxels — l'ondulation de l'échantillonnage. **Chercher un pic sur un profil non lissé
+    trouve du bruit**, et le rend avec toute la précision d'une mesure. ⚠ Et un créneau seul ne
+    suffit pas : une ride d'un échantillon est **exactement Nyquist**, seul un noyau de longueur
+    paire (le `[1, 2, 1]` ajouté au créneau) l'annule à zéro.
+  - ⭐ **Trois témoins, chacun ne cassant qu'une chose** : gabarit **mélangé** 56,6 µm (le lien
+    décalage↔matière), fenêtre d'une **feuille entière** 76,6 µm (la fenêtre dérivée d'une
+    demi-épaisseur), et **raccrocher sans avoir bougé** ne déplace que de **10,8 µm** — le gabarit
+    retrouve donc sa propre feuille.
+  - ⚠⚠ **Deux paires sur sept empirent, et pour deux causes différentes, toutes deux nommées** :
+    9→10 part déjà à **70,1 µm**, au-delà de la demi-fenêtre de 67,8, donc la bonne feuille n'est
+    **pas à portée** ; 6→7 a un gabarit qui ne retrouve pas sa feuille de départ (30,5 µm sur
+    place). ⚠ Ce déplacement sur place est calculable **sans la réponse** — ce serait le bon signal
+    de confiance — mais il **ne sépare pas** les deux échecs ici. Dit plutôt que vendu.
+  - ⚠ **L'accord des voisins n'ajoute rien, et c'est son témoin qui le dit** : une feuille est
+    lisse, donc la médiane du voisinage 3×3 devrait corriger l'isolé — elle reprend **0,7 µm**
+    quand la médiane de **neuf décalages sans rapport** en reprend déjà 8,6 sur la même queue. Ce
+    qui travaillait était la médiane, pas le voisinage.
+  - ⚠ Une paire n'est retenue que si la spire d'**arrivée** passe dans la boîte, critère
+    **géométrique** : sans lui 10→11 entrait avec mille micromètres d'erreur, non parce que le
+    raccrochage échoue mais parce que la spire 11 ne couvre pas cette région. Écarter sur l'erreur
+    aurait été choisir sur le résultat.
 - **rétractations / corrections internes** :
   - ⚠⚠⚠ **« Le résidu est très variable dans l'espace » est ANNULÉ** : il reposait sur un
     optimum à (−104, −120) qui touchait **le bord** de son balayage, donc sur une borne et non
@@ -5779,8 +5815,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 1833 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 2426 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 1928 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 2521 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

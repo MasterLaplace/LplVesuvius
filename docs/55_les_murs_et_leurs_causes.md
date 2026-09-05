@@ -11,7 +11,7 @@ la fois. Une feuille de route qui liste des tâches laisse croire qu'on avance q
 tourne ; celle-ci liste des causes **éliminées**, et montre l'espace rétrécir. C'est le
 seul progrès mesurable sur un problème que personne n'a résolu.
 
-**43 causes candidates** sur **4 murs** : ❌ **30** éliminées · ✅ **10** confirmées · 🔒 **3** bloquées
+**44 causes candidates** sur **4 murs** : ❌ **31** éliminées · ✅ **10** confirmées · 🔒 **3** bloquées
 
 | symbole | verdict | ce que ça veut dire |
 |---|---|---|
@@ -29,7 +29,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 
 ## 1. Le tracé ne suit pas de feuille
 
-❌ 12 éliminées · ✅ 5 confirmées · 🔒 3 bloquées
+❌ 13 éliminées · ✅ 5 confirmées · 🔒 3 bloquées
 
 | cause candidate | | ce qui a été mesuré | où |
 |---|---|---|---|
@@ -50,6 +50,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | le pas normal d'un écart inter-feuilles ne mènerait pas à la feuille voisine | ❌ | sur 12 paires de spires publiées : ne rien faire 135 um, un écart 60 um, deux écarts 151 um — le pas nul retombe sur l'écart mesuré, le simple le divise par deux et le double dépasse, donc la distance franchie est bien celle d'une feuille ; 11 paires sur 12 | [`75`](75_registre_des_taches.md) |
 | le pas normal itéré suffirait à dérouler sans recalage | ❌ | déroulement aveugle depuis la spire 1 : la feuille est perdue au tour 2 (erreur 102 um contre une demi-épaisseur de 67,75), et la dérive vaut 53 um par tour soit 39 % d'une feuille — alors qu'il bat l'immobilité aux douze tours | [`75`](75_registre_des_taches.md) |
 | la dérive du pas normal viendrait d'une longueur mal estimée | ❌ | longueur ajustée sur six paires et jugée sur six réservées : 108,4 um contre 135,5 nominaux, erreur 54,1 contre 67,6 sur la moitié réservée — le biais est réel mais n'explique que 20 %, et le plancher de la courbe réservée est à 50,5 um | [`75`](75_registre_des_taches.md) |
+| le raccrochage à la matière ne ferait pas mieux qu'une longueur de pas bien choisie | ❌ | sur le volume brut de PHerc0500P2, sept paires de spires : le pas normal seul laisse 46,7 um, le maximum brut d'intensité 46,1 — soit rien — et la corrélation avec le gabarit de feuille lu sur la spire de DÉPART 33,3 um, sous l'étalon de 50,5 que laisse la meilleure longueur constante ; témoins gabarit mélangé 56,6 et fenêtre d'une feuille entière 76,6 | [`75`](75_registre_des_taches.md) |
 | comparer le relief d'une trace L2 à une trace L0 | 🔒 | à aire égale un maillage L2 rend quatre fois moins de pixels de côté, donc les deux ne tiennent jamais dans la même fenêtre d'analyse — le relief ne peut pas les départager | [`54`](54_cinq_rendus_vides.md) |
 | les résidus du champ d'orientation publié (A2 ter) | 🔒 | le pas de grille publié vaut 64 voxels, soit 3,89 écarts inter-feuilles par cellule contre 0,5 exigés par Nyquist : le champ est REPLIÉ, pas bruité | [`75`](75_registre_des_taches.md) |
 | bâtir le raccrochage à la matière sur les piles de surface publiées | 🔒 | la pile porte à 129,6 um autour de la surface, soit 0,956 feuille, quand la voisine est à 135,5 : il manque 5,9 um — mesuré sur 1 459 592 colonnes, avec la convention du centre vérifiée (pic à -1,5 couche) | [`75`](75_registre_des_taches.md) |

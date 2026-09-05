@@ -1788,6 +1788,101 @@ pas pour une mesure.
 ferait dépendre la géométrie d'un contraste local, et une pile un peu plus dense d'un côté
 déplacerait la surface.
 
+#### ✅✅ Sur le VOLUME BRUT, le raccrochage passe sous l'étalon : 33,3 µm
+
+> Mesure : `src/nappe/le_raccrochage_a_la_matiere.py` (42 contrôles) →
+> `docs/mesures/le_raccrochage_a_la_matiere.json`. Figure :
+> `src/figures/figure_le_raccrochage_a_la_matiere.py` (17 contrôles), le 2026-09-06.
+>
+> ```
+> uv run python src/nappe/le_raccrochage_a_la_matiere.py --json docs/mesures/le_raccrochage_a_la_matiere.json
+> uv run python src/figures/figure_le_raccrochage_a_la_matiere.py --sortie docs/images/75_le_raccrochage_a_la_matiere.png
+> ```
+
+Le volume de scan de `PHerc0500P2` est publié : `20250526151718-2.215um-0.4m-111keV-masked.zarr`,
+**28096 × 18209 × 18209 voxels, blocs de 128³ NON compressés**. ⚠⚠ Le nom porte l'horodatage du
+volume *et* sa taille de voxel, et les deux sont **confrontés à ce que les spires déclarent**
+avant qu'un octet ne soit lu — lire les bonnes coordonnées dans le mauvais volume est la panne
+qui a coûté treize rendus noirs (`54`).
+
+![ce n'est pas la matière la plus proche qui raccroche, c'est la forme d'une feuille](images/75_le_raccrochage_a_la_matiere.png)
+
+⭐⭐ **La convention se mesure avant qu'aucun raccrochage n'ait lieu.** Une spire publiée est-elle
+posée sur une **crête** de matière ou dans un **creux** entre deux feuilles ? Rien ne le dit, et se
+tromper enverrait le raccrochage chercher l'air. Sur **2401 lignes** cumulées de sept spires : la
+crête est à **−6,6 µm** de la surface publiée, le creux d'air à **+33,2 µm**, contraste **40,7**.
+
+⚠⚠ **Et ma première version a trouvé un pas de crêtes de 8,9 µm** — quatre voxels, c'est-à-dire
+l'ondulation de l'échantillonnage. Chercher un pic sur un profil **non lissé** trouve du bruit, et
+le rend avec toute la précision d'une mesure. ⚠ Un créneau seul ne suffit pas non plus : une ride
+d'un échantillon est **exactement la fréquence de Nyquist**, et seul un noyau de longueur paire
+— ici le `[1, 2, 1]` ajouté au créneau — l'annule à zéro. C'est la batterie qui l'a dit, pas
+l'usage réel.
+
+| ce qu'on essaie | ce qu'il reste, en médiane |
+|---|---:|
+| ne pas bouger | 93,9 µm |
+| fenêtre d'une **feuille entière** (témoin) | 76,6 µm |
+| **gabarit mélangé** (témoin) | 56,6 µm |
+| le pas normal seul | 46,7 µm |
+| le **maximum brut** d'intensité | 46,1 µm |
+| **le gabarit** | **33,3 µm** |
+| … accordé aux voisins de grille | 32,6 µm |
+
+⛔⛔ **Le maximum brut ne fait RIEN** — 46,1 contre 46,7 pour le pas seul. La crête est large de
+trente voxels ; un maximum d'intensité se pose n'importe où sur ce plateau. Ce qui raccroche n'est
+pas la matière la plus proche, c'est **la forme d'une feuille entière** : la corrélation normalisée
+de la ligne avec le profil lu **sur la spire de départ**.
+
+⚠⚠⚠ **Le gabarit ne sait rien de la cible**, et c'est ce qui rend la mesure honnête : on se tient
+sur la spire `k`, donc son profil est une donnée qu'on a ; celui de la spire `k+1` serait la
+réponse. ⚠ Ce qui reste circulaire est dit : les spires publiées ont elles-mêmes été segmentées
+dans ce volume, donc l'accord n'est pas une découverte indépendante — ce qui est neuf est **la
+part de l'erreur résiduelle qu'un raccrochage local enlève**, le pas géométrique ne lisant, lui,
+aucun voxel.
+
+**Trois témoins, chacun ne cassant qu'une seule chose :**
+
+| témoin | ce qu'il casse | ce qu'il rend |
+|---|---|---:|
+| gabarit **mélangé** | le lien entre le décalage et la matière, rien d'autre | 56,6 µm |
+| fenêtre d'une **feuille entière** | la fenêtre dérivée, la voisine devient atteignable | 76,6 µm |
+| raccrocher **sans avoir bougé** | rien — le gabarit doit retrouver SA propre feuille | déplace de **10,8 µm** |
+
+> ✅✅ **33,3 µm par pas, contre un étalon de 50,5.** L'étalon n'est pas choisi : c'est l'erreur que
+> laisse la **meilleure longueur de pas constante** sur des paires réservées (section précédente).
+> Le raccrochage fait donc ce qu'aucun nombre transporté ne peut faire — parce qu'il redemande à
+> la matière, à chaque pas, où la feuille se trouve.
+
+⚠⚠ **Deux paires sur sept empirent, et elles sont dessinées comme les autres.** Elles n'ont pas la
+même cause, et les deux se nomment : pour 9→10 le pas seul laisse déjà **70,1 µm**, au-delà de la
+demi-fenêtre de 67,8 — la bonne feuille n'est **pas à portée**, et aucun gabarit ne rattrape ça ;
+pour 6→7 le gabarit ne retrouve pas sa propre feuille de départ (30,5 µm de déplacement sur place).
+⚠ Ce déplacement sur place est calculable **sans la réponse**, donc ce serait le bon signal de
+confiance — sauf qu'il **ne sépare pas** les deux échecs ici (12→13 déplace de 37,9 µm et gagne
+quand même). Dit plutôt que vendu.
+
+⚠ **L'accord des voisins n'ajoute rien**, et c'est son témoin qui le dit : une feuille est lisse,
+donc la médiane des décalages du voisinage 3×3 devrait corriger l'isolé — elle reprend **0,7 µm**,
+et son propre témoin (la médiane de **neuf décalages sans rapport**) en reprend déjà 8,6 sur la
+même queue. Ce qui travaillait était la médiane, pas le voisinage. ⚠ La mesure a d'ailleurs exigé
+un **sous-rectangle** de grille et non un tirage aléatoire : un tirage garde la même erreur médiane
+et détruit le voisinage, donc rend l'accord inmesurable.
+
+⚠ **Une paire n'est retenue que si la spire d'arrivée passe dans la boîte**, et le critère est
+**géométrique**. Sans lui, 10→11 entrait avec mille micromètres d'erreur — non parce que le
+raccrochage échoue, mais parce que la spire 11 publiée ne couvre pas cette région. Écarter sur
+l'erreur aurait été choisir sur le résultat.
+
+⚠ Le coût est rendu parce qu'un bloc fait **2 Mio non compressés** : **197 Mio** en cache pour
+toute la boîte, 3 blocs neufs à la dernière exécution. Le cache est sur disque, sinon le chiffre
+publié dépendrait de la patience de qui le rejoue.
+
+> ⭐⭐⭐ **La tranche suivante est le déroulement ITÉRÉ raccroché.** Le dérouleur aveugle perd la
+> feuille au tour 2 avec 53 µm de dérive par tour ; le raccrochage vaut 33,3 µm sur **un** pas.
+> Ce qu'il reste à mesurer est la seule chose qui décide : **est-ce que l'erreur cesse de
+> s'accumuler**, ou est-ce qu'elle s'accumule seulement plus lentement.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est
