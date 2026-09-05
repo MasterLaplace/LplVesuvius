@@ -1,0 +1,400 @@
+{
+  "voxel_um": 2.215,
+  "sens": "+",
+  "ecart_nominal_um": 135.5,
+  "echantillon": 3000,
+  "paires": 12,
+  "paires_ajustement": 6,
+  "paires_reservees": 6,
+  "longueurs_essayees": 25,
+  "balayage_ajustement": [
+    {
+      "longueur_um": 54.2,
+      "erreur_um": 84.5,
+      "paires": 6
+    },
+    {
+      "longueur_um": 61.0,
+      "erreur_um": 78.7,
+      "paires": 6
+    },
+    {
+      "longueur_um": 67.8,
+      "erreur_um": 72.7,
+      "paires": 6
+    },
+    {
+      "longueur_um": 74.5,
+      "erreur_um": 67.0,
+      "paires": 6
+    },
+    {
+      "longueur_um": 81.3,
+      "erreur_um": 62.1,
+      "paires": 6
+    },
+    {
+      "longueur_um": 88.1,
+      "erreur_um": 58.6,
+      "paires": 6
+    },
+    {
+      "longueur_um": 94.9,
+      "erreur_um": 56.2,
+      "paires": 6
+    },
+    {
+      "longueur_um": 101.6,
+      "erreur_um": 54.5,
+      "paires": 6
+    },
+    {
+      "longueur_um": 108.4,
+      "erreur_um": 54.2,
+      "paires": 6
+    },
+    {
+      "longueur_um": 115.2,
+      "erreur_um": 55.5,
+      "paires": 6
+    },
+    {
+      "longueur_um": 122.0,
+      "erreur_um": 56.3,
+      "paires": 6
+    },
+    {
+      "longueur_um": 128.7,
+      "erreur_um": 58.4,
+      "paires": 6
+    },
+    {
+      "longueur_um": 135.5,
+      "erreur_um": 60.2,
+      "paires": 6
+    },
+    {
+      "longueur_um": 142.3,
+      "erreur_um": 62.6,
+      "paires": 6
+    },
+    {
+      "longueur_um": 149.1,
+      "erreur_um": 65.1,
+      "paires": 6
+    },
+    {
+      "longueur_um": 155.8,
+      "erreur_um": 67.8,
+      "paires": 6
+    },
+    {
+      "longueur_um": 162.6,
+      "erreur_um": 71.0,
+      "paires": 6
+    },
+    {
+      "longueur_um": 169.4,
+      "erreur_um": 71.9,
+      "paires": 6
+    },
+    {
+      "longueur_um": 176.2,
+      "erreur_um": 75.3,
+      "paires": 6
+    },
+    {
+      "longueur_um": 182.9,
+      "erreur_um": 79.7,
+      "paires": 6
+    },
+    {
+      "longueur_um": 189.7,
+      "erreur_um": 84.5,
+      "paires": 6
+    },
+    {
+      "longueur_um": 196.5,
+      "erreur_um": 88.8,
+      "paires": 6
+    },
+    {
+      "longueur_um": 203.3,
+      "erreur_um": 92.5,
+      "paires": 6
+    },
+    {
+      "longueur_um": 210.0,
+      "erreur_um": 95.8,
+      "paires": 6
+    },
+    {
+      "longueur_um": 216.8,
+      "erreur_um": 99.9,
+      "paires": 6
+    }
+  ],
+  "balayage_reserve": [
+    {
+      "longueur_um": 54.2,
+      "erreur_um": 79.4,
+      "paires": 6
+    },
+    {
+      "longueur_um": 61.0,
+      "erreur_um": 73.4,
+      "paires": 6
+    },
+    {
+      "longueur_um": 67.8,
+      "erreur_um": 67.4,
+      "paires": 6
+    },
+    {
+      "longueur_um": 74.5,
+      "erreur_um": 61.3,
+      "paires": 6
+    },
+    {
+      "longueur_um": 81.3,
+      "erreur_um": 55.4,
+      "paires": 6
+    },
+    {
+      "longueur_um": 88.1,
+      "erreur_um": 50.5,
+      "paires": 6
+    },
+    {
+      "longueur_um": 94.9,
+      "erreur_um": 50.9,
+      "paires": 6
+    },
+    {
+      "longueur_um": 101.6,
+      "erreur_um": 52.1,
+      "paires": 6
+    },
+    {
+      "longueur_um": 108.4,
+      "erreur_um": 54.1,
+      "paires": 6
+    },
+    {
+      "longueur_um": 115.2,
+      "erreur_um": 57.0,
+      "paires": 6
+    },
+    {
+      "longueur_um": 122.0,
+      "erreur_um": 60.3,
+      "paires": 6
+    },
+    {
+      "longueur_um": 128.7,
+      "erreur_um": 63.6,
+      "paires": 6
+    },
+    {
+      "longueur_um": 135.5,
+      "erreur_um": 67.6,
+      "paires": 6
+    },
+    {
+      "longueur_um": 142.3,
+      "erreur_um": 71.8,
+      "paires": 6
+    },
+    {
+      "longueur_um": 149.1,
+      "erreur_um": 76.5,
+      "paires": 6
+    },
+    {
+      "longueur_um": 155.8,
+      "erreur_um": 81.1,
+      "paires": 6
+    },
+    {
+      "longueur_um": 162.6,
+      "erreur_um": 86.0,
+      "paires": 6
+    },
+    {
+      "longueur_um": 169.4,
+      "erreur_um": 91.4,
+      "paires": 6
+    },
+    {
+      "longueur_um": 176.2,
+      "erreur_um": 96.9,
+      "paires": 6
+    },
+    {
+      "longueur_um": 182.9,
+      "erreur_um": 102.9,
+      "paires": 6
+    },
+    {
+      "longueur_um": 189.7,
+      "erreur_um": 108.8,
+      "paires": 6
+    },
+    {
+      "longueur_um": 196.5,
+      "erreur_um": 114.9,
+      "paires": 6
+    },
+    {
+      "longueur_um": 203.3,
+      "erreur_um": 121.2,
+      "paires": 6
+    },
+    {
+      "longueur_um": 210.0,
+      "erreur_um": 127.5,
+      "paires": 6
+    },
+    {
+      "longueur_um": 216.8,
+      "erreur_um": 133.9,
+      "paires": 6
+    }
+  ],
+  "balayage_tout": [
+    {
+      "longueur_um": 54.2,
+      "erreur_um": 84.1,
+      "paires": 12
+    },
+    {
+      "longueur_um": 61.0,
+      "erreur_um": 78.0,
+      "paires": 12
+    },
+    {
+      "longueur_um": 67.8,
+      "erreur_um": 71.8,
+      "paires": 12
+    },
+    {
+      "longueur_um": 74.5,
+      "erreur_um": 65.6,
+      "paires": 12
+    },
+    {
+      "longueur_um": 81.3,
+      "erreur_um": 59.6,
+      "paires": 12
+    },
+    {
+      "longueur_um": 88.1,
+      "erreur_um": 55.2,
+      "paires": 12
+    },
+    {
+      "longueur_um": 94.9,
+      "erreur_um": 52.7,
+      "paires": 12
+    },
+    {
+      "longueur_um": 101.6,
+      "erreur_um": 52.1,
+      "paires": 12
+    },
+    {
+      "longueur_um": 108.4,
+      "erreur_um": 54.1,
+      "paires": 12
+    },
+    {
+      "longueur_um": 115.2,
+      "erreur_um": 55.6,
+      "paires": 12
+    },
+    {
+      "longueur_um": 122.0,
+      "erreur_um": 57.0,
+      "paires": 12
+    },
+    {
+      "longueur_um": 128.7,
+      "erreur_um": 58.6,
+      "paires": 12
+    },
+    {
+      "longueur_um": 135.5,
+      "erreur_um": 60.4,
+      "paires": 12
+    },
+    {
+      "longueur_um": 142.3,
+      "erreur_um": 62.7,
+      "paires": 12
+    },
+    {
+      "longueur_um": 149.1,
+      "erreur_um": 65.3,
+      "paires": 12
+    },
+    {
+      "longueur_um": 155.8,
+      "erreur_um": 68.0,
+      "paires": 12
+    },
+    {
+      "longueur_um": 162.6,
+      "erreur_um": 71.0,
+      "paires": 12
+    },
+    {
+      "longueur_um": 169.4,
+      "erreur_um": 73.2,
+      "paires": 12
+    },
+    {
+      "longueur_um": 176.2,
+      "erreur_um": 77.2,
+      "paires": 12
+    },
+    {
+      "longueur_um": 182.9,
+      "erreur_um": 81.3,
+      "paires": 12
+    },
+    {
+      "longueur_um": 189.7,
+      "erreur_um": 85.8,
+      "paires": 12
+    },
+    {
+      "longueur_um": 196.5,
+      "erreur_um": 90.7,
+      "paires": 12
+    },
+    {
+      "longueur_um": 203.3,
+      "erreur_um": 96.2,
+      "paires": 12
+    },
+    {
+      "longueur_um": 210.0,
+      "erreur_um": 101.9,
+      "paires": 12
+    },
+    {
+      "longueur_um": 216.8,
+      "erreur_um": 108.0,
+      "paires": 12
+    }
+  ],
+  "longueur_ajustee_um": 108.4,
+  "minimum_au_bord": false,
+  "erreur_sur_la_reserve": {
+    "nominale_um": 67.6,
+    "ajustee_um": 54.1
+  },
+  "ecart_des_deux_longueurs_um": 27.1,
+  "le_biais_explique_la_derive": true,
+  "part_de_la_derive_expliquee": 0.1997
+}

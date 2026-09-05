@@ -3706,7 +3706,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/55_les_murs_et_leurs_causes.md
-- **lignes** : 115
+- **lignes** : 116
 - **nature** : PROCEDE
 - **résumé** : Document **rendu** depuis `docs/registres/murs_et_causes.tsv` par `uv run python src/depot/murs_et_causes.py --rendre`, et non écrit à la main ; sa batterie vérifie que chaque ligne pointe vers un document contenant encore son ancre. Il recense **30 causes candidates sur 4 murs** : 19 éliminées, 10 confirmées, 1 bloquée, chacune avec la mesure qui l'a tranchée et le document d'origine. Sa thèse de forme est qu'un mur est un espace de causes dont on retire une entrée à la fois, et que la liste des causes éliminées — non celle des tâches — est le seul progrès mesurable. Une seule cause reste non tranchée, et elle est bloquée. (⚠ Note de lecture : l'en-tête compte 19 éliminations quand le §final écrit « les treize éliminations de ce document » ; le document ne signale pas l'écart. De même, il ne contient aucune cause ⏳ *ouverte* alors que son propre tableau de symboles définit ce statut.)
 - **conclusions extractibles** : *(les murs recensés, avec pour chacun les causes éliminées et celles qui restent ouvertes)*
@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 2333
+- **lignes** : 2381
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5703,6 +5703,18 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     feuille suivante est toujours dans la bonne direction, elle est juste un peu plus loin ou un
     peu plus près que l'épaisseur nominale, et personne ne recale. C'est exactement ce qu'un
     recalage sur la matière doit tuer à chaque pas.
+  - ⭐⭐ **Et la dérive est à UN CINQUIÈME un biais, le reste une dispersion** (2026-09-06). La
+    question vient avant tout recalage lourd : il serait absurde de lire le volume si les 53 µm
+    par tour venaient d'une longueur de pas mal estimée. Longueur ajustée sur **six** paires et
+    jugée sur les **six réservées** — coupure **sur le rang**, parce que deux spires voisines
+    partagent leur géométrie. Résultat : ajustée **108,4 µm** contre **135,5** nominaux, soit un
+    biais de **27,1 µm** ; sur la moitié réservée **54,1 µm** contre **67,6**. ⭐ Le biais est
+    réel — elle gagne sur ce qu'elle n'a jamais vu — ⚠⚠ mais il n'explique que **20 %**, et le
+    plancher de la courbe réservée est à **50,5 µm**. ⛔ **Un meilleur nombre ne remplacera pas
+    un raccrochage à la matière**, et l'étalon de la tranche suivante est de passer sous 50 µm.
+  - ⚠ La première fixture de cette batterie a échoué pour la bonne raison : elle balayait 20 à
+    40 µm pour une cible à 30 **voxels**, soit 60 µm. C'est le drapeau `au_bord` qui l'a dit — ce
+    dépôt a déjà publié un optimum au bord et l'a payé.
   - ⚠ La grille fond de **1 983 à 536** cellules sur douze tours (une normale demande quatre
     voisins), et le compte est rendu **à côté** de l'erreur : un dérouleur qui « réussirait » en
     ne gardant que trois cellules aurait rétréci, pas déroulé.
@@ -5753,8 +5765,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 1740 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 2333 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 1788 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 2381 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

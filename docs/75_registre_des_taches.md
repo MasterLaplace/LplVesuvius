@@ -1695,6 +1695,54 @@ qui « réussirait » en ne gardant que trois cellules n'aurait pas déroulé, i
 ⚠ Et la marche n'est pas monotone (306 µm au tour 5, 230 au tour 6) : les spires publiées ont
 elles-mêmes leurs irrégularités, déjà signalées.
 
+#### ⭐⭐ Et la dérive est à UN CINQUIÈME un biais, le reste une dispersion
+
+> Mesure : `src/nappe/la_derive_est_elle_un_biais.py` (9 contrôles) →
+> `docs/mesures/la_derive_est_elle_un_biais.json`. Figure :
+> `src/figures/figure_la_derive_est_elle_un_biais.py` (9 contrôles), le 2026-09-06.
+>
+> ```
+> uv run python src/nappe/la_derive_est_elle_un_biais.py --json docs/mesures/la_derive_est_elle_un_biais.json
+> uv run python src/figures/figure_la_derive_est_elle_un_biais.py --sortie docs/images/75_la_derive_est_elle_un_biais.png
+> ```
+
+⚠⚠⚠ **Cette question vient avant tout recalage lourd.** Un raccrochage à la matière demande de
+lire le volume ; il serait absurde de le construire si les 53 µm par tour venaient simplement
+d'une **longueur de pas mal estimée**. Un biais est une constante — il se retranche une fois et
+disparaît. Une dispersion, non.
+
+![la dérive du pas : un cinquième de biais, le reste en dispersion](images/75_la_derive_est_elle_un_biais.png)
+
+⚠ Le piège est évident et il est évité : choisir la longueur qui minimise l'erreur **sur les
+spires qu'on mesure ensuite**, c'est ajuster sur la réponse. Elle est donc ajustée sur **six**
+paires et jugée sur les **six réservées**, qu'elle n'a jamais vues — et la coupure se fait **sur
+le rang**, parce que deux spires voisines partagent leur géométrie et qu'un tirage au hasard
+mettrait la même région des deux côtés.
+
+| | valeur |
+|---|---:|
+| longueur **nominale** (écart médian publié) | 135,5 µm |
+| longueur **ajustée** sur six paires | **108,4 µm** |
+| biais entre les deux | **27,1 µm** |
+| erreur sur la moitié réservée, nominale | 67,6 µm |
+| … **ajustée** | **54,1 µm** |
+| part de l'erreur expliquée par le biais | **20 %** |
+
+⭐ **Le biais est réel** : la longueur ajustée gagne sur des spires qu'elle n'a jamais vues, ce qui
+est le seul sens acceptable de « elle gagne ». ⚠⚠ **Mais elle n'explique qu'un cinquième.** Le
+plancher de la courbe réservée est à **50,5 µm** : aucune longueur constante ne descend en
+dessous.
+
+> ⛔ **Les quatre cinquièmes qui restent sont une dispersion locale**, et c'est la réponse à la
+> question posée : **un meilleur nombre ne remplacera pas un raccrochage à la matière.** La
+> tranche qui suit est donc justifiée, et elle a maintenant son étalon — passer sous **50 µm**
+> par pas.
+
+⚠ Le minimum du balayage est **intérieur** (54 à 217 µm, optimum à 108,4), donc il désigne bien
+une longueur. Et ⚠ la première fixture de la batterie a échoué pour la bonne raison : elle
+balayait 20 à 40 µm pour une cible à 30 **voxels**, soit 60 µm — c'est le drapeau `au_bord` qui
+l'a dit.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est
