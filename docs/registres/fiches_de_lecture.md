@@ -5125,6 +5125,112 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 75 (après 69 % du fichier) : `> physically overlap or touch** »*.`
   - ligne 108 (dernière ligne non vide) : `résiste est la mesure, sa répétition, et son incertitude.**`
 
+### docs/69_reponse_dun_chercheur_exterieur.md
+- **lignes** : 646
+- **nature** : REVUE
+  (réponse à un prompt « chercheur senior » : hypothèses falsifiables, mathématiques,
+  algorithmes décrits pour être implémentés, emprunts hors domaine avec références réelles.
+  ⚠ Aucun code, aucune mesure neuve — le document le dit lui-même.)
+- **résumé** : Diagnostique que **le goulot n'est pas la détection d'encre mais le pinceau
+  d'approbation**, et le chiffre : à la cadence du papier (25 h par spire), les treize rouleaux
+  du prix demandent **1 500 à 8 060 heures chacun**, soit deux à quatre années-personne pour
+  le seul masque. Corrige deux fois le cadrage du prompt sur la physique — les franges de
+  Fresnel ne sont pas ce qu'on regarde (Paganin les supprime), et 9,362 µm est un **choix
+  d'export** (`binmean2` d'une acquisition à 4,681 µm), pas une limite du détecteur. Pose sept
+  hypothèses avec leur mesure et ce qu'elle discrimine, puis sept algorithmes, et sa
+  contribution structurelle est de reformuler le rouleau comme un **champ de phase à vortex**
+  dont les défauts sont des **résidus** — ce qui rend le problème identique à un dépliage InSAR,
+  exact et polynomial.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **Le goulot est géométrique et dix fois plus large que dans le papier** : 775 h pour
+    31 spires sur 8 cm, contre 60 à 129 spires sur 19 à 24 cm pour les rouleaux du prix.
+    PHerc0826 **1 500 h** à 8 cm / **3 750** à 20 cm ; PHerc0268 **3 225** / **8 060**. « Le prix
+    n'est pas gagné en améliorant la détection d'encre : il est gagné ou perdu sur **ce qui
+    remplace le pinceau**. » Les pièces amont sont publiées pour les treize.
+  - ⚠⚠ **$F$ ne mesure pas ce que le prompt croit.** Tous les volumes publiés sont reconstruits
+    après Paganin à δ/β = 1000, qui **supprime** les franges. Ce que $F$ ordonne est
+    $L_P/p$ — combien de pixels fait le noyau de récupération de phase : **3,5 px** au régime du
+    prix contre **7,0** en production. Les deux verdicts du papier (*pixel-limited* contre
+    sur-échantillonné) sont ceux-là.
+  - ⭐⭐ **« 53 % du régime de production » se lit comme une dégradation uniforme et ce n'en est
+    pas une.** Le gain de contraste de phase vaut $2\pi\lambda D f^2$, donc il est **3,8 fois
+    plus élevé** au régime du prix à toute fréquence que la grille résout. Ce qui est perdu est
+    **une bande** — les périodes de 4,8 à 19 µm — plus un flou ∝ D. **Un passe-bas, pas une
+    atténuation.** Si l'encre vit dans un dépôt lisse de dizaines de µm, le régime du prix la
+    porte **mieux** que la production.
+  - **9,362 µm est un export** : `binmean2` d'une acquisition à 4,681 µm, et le papier dit que
+    toutes les reconstructions ont des versions binées ×2 et ×4. Sur le même fragment 500P2 le
+    papier rend **deux verdicts pour un même bras de 1,2 m** (4,317 µm *haze-limited*, 9,362 µm
+    *pixel-limited*), donc la résolution physique y est bornée par la **décohérence** entre 4,3
+    et 9,4 µm. Prédiction : le débinage rendrait **au plus 1,3–1,5×**.
+  - ⭐⭐⭐ **Le rouleau comme champ de phase** (§3.2) : $\psi$ vaut $2\pi k$ sur la $k$-ième
+    spire, l'ensemble $\{\psi \in 2\pi\mathbb{Z}\}$ est **une seule surface connexe**, et
+    $\psi$ a un **vortex** sur l'ombilic. Le recto est le bord $\psi$-décroissant : **son
+    identification est gratuite**. Ce que le spiral fitting n'a pas : un difféomorphisme **ne
+    peut pas représenter une terminaison de feuille**, donc il « erre » là où la vérité a un
+    défaut ; le champ de phase le **représente** comme un résidu et une coupure.
+  - Les **résidus** (Goldstein 1988) sont les charges topologiques ±2π du champ d'orientation
+    mesuré ; les coupures de branche de coût minimal sont un **flot à coût minimal sur le graphe
+    dual** (Costantini 1998), **exact et polynomial**, implémenté publiquement par SNAPHU.
+  - ⭐⭐ **Les spires comme $K$ surfaces couplées** (§3.3, Li *et al.* 2006) : une **seule coupe
+    minimale** globalement optimale, où le prior de pas mesuré (160–210 µm, soit 17–22 voxels)
+    **est** la contrainte de séparation. Ce que ça règle : les pertes L1 de Henderson convergent
+    vers la **médiane** quand deux spires se contredisent, d'où l'errance — une coupe est
+    **discrète**, elle choisit. ⚠ Elle vient **après** le champ de phase, dans une bande étroite,
+    parce qu'un pli où la feuille n'est pas univoque en $\rho$ la fait échouer.
+  - ⭐⭐ **Détection d'encre comme test statistique** (§3.4) : la nulle empirique est le **verso**
+    (H7), les valeurs p passent par Benjamini–Hochberg, et une carte d'encre rend alors **le
+    nombre attendu de fausses lettres**. C'est le *look-elsewhere effect* que l'audit `66` note
+    absent de tout le domaine — « une tuile plus petite qu'une lettre borne ce qu'un modèle peut
+    **inventer**, pas combien de fois il se trompe ».
+  - ⭐ Et pour « des colonnes visibles partout » : le **repliement d'époque** (Leahy 1983) sur la
+    périodicité de l'interligne gagne $\sqrt{n}$ — une colonne de 30 lignes gagne **×5,5** — donc
+    on détecte **qu'il y a du texte et où sont les lignes** bien avant de lire une lettre. ⚠ Le
+    test ne rend pas de lettre, il rend la **grille**.
+  - Les sept hypothèses, chacune avec ce qui la falsifie : **H1** l'AUC survit à la bande perdue
+    (plate jusqu'à 20 µm) ; **H2** le débinage ne rend presque rien (< 0,03 d'AUC) ; **H3** la
+    décohérence est un flou local en $D/E^\alpha$ ⚠ dont **six points ne fixent pas
+    l'exposant** ($\alpha = 1$ classe aussi bien que 2) ; **H4** le coût humain suit les
+    **régions ambiguës** et non l'aire (< 10 % de la surface) ; **H5** les résidus prédisent les
+    sauts de spire (AUC > 0,8, **sans vérité terrain**) ; **H6** le prior d'enroulement est
+    universel ; **H7** le verso est le témoin nul du recto (AUC ≈ 0,5).
+  - ⚠ **Le sens de l'erreur est choisi**, deux fois : le masque automatique doit
+    **sous-approuver** (« mieux vaut laisser au pinceau que figer une erreur »), et si H7 est
+    fausse le test devient **conservateur** — « il manque des lettres, il n'en invente pas ».
+  - ⚠ **Analogies rejetées après réflexion**, pour qu'on ne les repropose pas : les *contact
+    maps* Hi-C (pas de géométrie d'enroulement régulière), la théorie des nœuds (le rouleau
+    n'est pas noué, sa topologie est celle d'un disque), la cristallographie au-delà du §3.5.
+  - **Données manquantes par ordre de valeur** : (1) les volumes non binés à 4,3–4,7 µm des
+    treize, **qui existent** à l'ESRF ; (2) la paire 0,6 m / 1,2 m de PHerc0268 ; (3) les masques
+    d'approbation humains de 1667 ; (4) l'exposition et le nombre de projections (pour
+    $\sigma_I$) ; (5) les étiquettes d'entraînement de `surface-m7`.
+- **rétractations / corrections internes** :
+  - §7 déclare six doutes, dont trois qui portent sur ses propres piliers : le modèle du §3.1
+    **suppose un objet de phase faible et δ/β homogène**, ce qu'un rouleau de 5 cm n'est ni l'un
+    ni l'autre ; les **résidus pourraient mesurer la qualité de `m7`** et non la topologie du
+    rouleau — « sans le contrôle de co-localisation, A2 est un détecteur de bruit avec un beau
+    nom » ; et la coupe à $K$ surfaces **suppose un ordre en $\rho$** qui n'existe peut-être pas
+    là où le papier dépense ses 25 h.
+  - ⚠ « Tout le raisonnement en SNR est suspendu à $\sigma_I$ » — la dose par voxel des scans du
+    prix n'est pas connue, et **une seule mesure de bruit sur une fenêtre vierge par régime
+    tranche**.
+  - ⚠ Le voisin conceptuel non lu est nommé : l'assignation de « winding angle » de
+    ThaumatoAnakalyptor. « Si elle est déjà un dépliage avec résidus sous un autre nom, la
+    contribution du §3.2 se réduit à l'exactitude du flot. La règle du `66` s'applique à moi :
+    chercher le concept, jamais le nom. »
+  - ⚠⚠ Sa recommandation de rouleau (**PHerc0826**, le moins de spires) est **renversée par**
+    [`73`](../73_seconde_passe_ce_que_le_depot_change.md) §1 H6 : par la carte dense c'est le
+    **pire des treize** (22,8 % de fenêtres indissociables contre 2,6 % pour `PHerc0800`).
+    Le document avait posé la réserve — « peu de spires peut vouloir dire un *midollo* abîmé,
+    c'est H6 qui départage » — et H6 a départagé contre lui.
+  - ⚠⚠ Son §1.2 (« le débinage ne rend presque rien ») est le paragraphe que `73` §1 H2 a d'abord
+    contredit puis **rétabli** : `73` a sur-affirmé l'inverse avant de constater que `69`
+    portait déjà le contre-argument, marqué `[établi]`.
+- **preuve de lecture intégrale** :
+  - ligne 403 (après 62 % du fichier) : `Une colonne de 30 lignes gagne un facteur ~5,5 sur une ligne seule : on détecte **qu'il y a du`
+  - ligne 646 (dernière ligne non vide) : `reproduites en clair ci-dessus pour qu'un instrument du dépôt puisse les reprendre.*`
+
+
 ### docs/70_ce_que_larticle_condense.md
 - **lignes** : 183
 - **nature** : AUDIT
