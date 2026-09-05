@@ -166,10 +166,26 @@ n'est pas une distance à une feuille : c'est l'**absence de tout pic**, la pann
 des fenêtres, et α vaut 1 **par identité**, quoi qu'il y ait dans le volume.
 
 ```
+# les candidats eux-memes, une liste par prediction
+bash src/campagnes/campagne_prediction_paris4.sh
+#   → data/prediction_paris4/graine_{ps256,m7}.json
+
 GENERATIONS=60 FENETRES="41 161" bash src/outils/tracer_tous_candidats.sh
 uv run python src/nappe/la_graine_mieux_etayee.py \
     --json docs/mesures/la_graine_mieux_etayee.json
 ```
+
+⚠⚠ La résolution du volume est **dérivée du scan**, jamais écrite : les deux prédictions
+portent le même identifiant en tête de leur nom et le volume qui le porte est unique. La
+première version de la campagne y avait écrit **7,910 µm** — la résolution de `PHerc0172`,
+empruntée au listage voisin, soit le piège nº 6 commis deux lignes sous l'avertissement qui le
+nomme. Il a été attrapé parce qu'une graine sortait à `z = 38740`, impossible à 7,910 µm sur un
+rouleau de dix centimètres et banale à 2,400. **Un chiffre emprunté se lit comme un chiffre
+juste ; c'est sa conséquence qui le trahit.**
+
+⚠ Les deux prédictions n'ont pas la même taille de chunk (256 contre 192), donc la recherche de
+graine ne visite pas les mêmes endroits : on compare **ce que chacune offre de mieux**, pas le
+même point vu deux fois. C'est assumé et dit.
 
 ⚠ La jointure verdict ↔ candidat se fait **par indice**, et elle **refuse** un verdict sans
 candidat : un décalage attribuerait les propriétés du mauvais point, et chaque ligne resterait

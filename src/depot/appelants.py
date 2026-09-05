@@ -99,6 +99,57 @@ def execute_par_sous_processus(texte: str, nom: str) -> bool:
                 or re.search(r"[\"'][^\"']*/" + n + r"[\"']", texte))
 
 
+def formes_dimport(nom: str) -> list:
+    r"""Les motifs qui IMPORTENT un module de ce dépôt.
+
+    ⚠⚠ POURQUOI CETTE FONCTION EXISTE. Ce fichier compte déjà `source x.sh` comme une
+    exécution, avec la bonne raison écrite plus haut : *« sourcer une bibliothèque shell, c'est
+    l'exécuter »*. **L'équivalent Python manquait**, et il a coûté exactement ce que la
+    docstring de `execute_par_sous_processus` annonce : `src/outils/telecharger.py` — un pool de
+    connexions HTTPS **importé par trois modules** — était signalé « exécuté par personne »,
+    donc invité à la suppression.
+
+      ⭐ Une bibliothèque ne se LANCE pas, elle s'UTILISE. Le compter comme un appelant serait
+        mentir sur le verbe ; ne pas le compter du tout fait passer un module vivant pour mort.
+        D'où une catégorie à part, et un orphelin qui reste « rien ne l'exécute **ni ne
+        l'importe** ».
+
+    ⚠ Le dépôt insère ses dossiers frères dans `sys.path`, donc un import se fait sur le
+    **radical** du fichier (`from telecharger import obtenir`), jamais sur son chemin.
+
+    ⚠⚠ Le risque de faux positif est qu'un module du dépôt porte le nom d'un module standard :
+    `import json` compterait alors pour `src/…/json.py`. Mesuré le 2026-09-05 : sur les
+    **263** modules de `src/`, **zéro** masque un nom de la bibliothèque standard. Le contrôle
+    le réasserte, pour que le jour où l'un le ferait, on le sache.
+    """
+    r = re.escape(Path(nom).stem)
+    return [re.compile(r"^\s*from\s+" + r + r"\s+import\b", re.M),
+            re.compile(r"^\s*import\s+" + r + r"\b", re.M)]
+
+
+def importateurs(textes: dict[str, str], chemin: str) -> list[str]:
+    """Les fichiers qui IMPORTENT ce module. ⚠ Le fichier lui-même ne se compte pas."""
+    if not chemin.endswith(".py"):
+        return []
+    radical = Path(chemin).stem
+    motifs = formes_dimport(chemin)
+    return sorted(f for f, t in textes.items()
+                  if f != chemin and f.endswith(".py") and radical in t
+                  and any(m.search(t) for m in motifs))
+
+
+def masques_du_standard(scripts: list[str]) -> list[str]:
+    """Les modules du dépôt dont le radical masque un module de la bibliothèque standard.
+
+    ⚠ Tant que cette liste est vide, `importateurs` ne peut pas confondre `import json` avec
+    un fichier du dépôt. Le jour où elle ne l'est plus, le détecteur d'import devient ambigu
+    pour ce nom-là — et il vaut mieux le savoir que le découvrir dans un verdict.
+    """
+    import sys as _sys
+    standard = set(getattr(_sys, "stdlib_module_names", ()))
+    return sorted({Path(s).stem for s in scripts if s.endswith(".py")} & standard)
+
+
 def index_des_lignes(racine: Path = RACINE) -> dict[str, str]:
     """Le texte de chaque fichier lisible, en UN seul parcours de l'arbre.
 
@@ -208,21 +259,36 @@ def invocations_impossibles(racine: Path = RACINE) -> list[dict]:
 
 
 def orphelins(textes: dict[str, str], scripts: list[str]) -> dict:
-    """Les scripts que rien n'exécute, et le compte de ce qui a été regardé."""
-    sans = [s for s in scripts if not appelants(textes, s)]
+    """Les scripts que rien n'exécute NI n'importe, et le compte de ce qui a été regardé.
+
+    ⚠⚠ Les deux verbes sont rendus SÉPARÉMENT : « rien ne le lance » et « c'est une
+    bibliothèque, et trois modules s'en servent » sont deux faits, et les confondre dans un
+    seul compte ferait disparaître la distinction que ce fichier vient d'ajouter.
+    """
+    sans, bibliotheques = [], []
+    for s in scripts:
+        if appelants(textes, s):
+            continue
+        clients = importateurs(textes, s)
+        (bibliotheques if clients else sans).append(
+            {"script": s, "importe_par": clients} if clients else s)
     return {"scripts": len(scripts), "fichiers_lus": len(textes),
-            "orphelins": sorted(sans), "combien": len(sans)}
+            "orphelins": sorted(sans), "combien": len(sans),
+            "bibliotheques": sorted(bibliotheques, key=lambda b: b["script"]),
+            "combien_bibliotheques": len(bibliotheques)}
 
 
 def verifier() -> int:
     echecs = controles = 0
 
-    def v(nom: str, ok: bool) -> None:
+    def v(nom: str, ok: bool, detail: str = "") -> None:
+        """⚠ Le détail est imprimé même quand le contrôle passe : un vert dont on ne voit pas
+        la grandeur ne dit pas s'il passe pour la bonne raison."""
         nonlocal echecs, controles
         controles += 1
         if not ok:
             echecs += 1
-        print(f"  {'✅' if ok else '❌'} {nom}")
+        print(f"  {'✅' if ok else '❌'} {nom}" + (f"  — {detail}" if detail else ""))
 
     T = {
         "src/outils/lance.sh": 'uv run python "$ROOT/src/depot/mesure.py" --json x\n',
@@ -267,6 +333,42 @@ def verifier() -> int:
     # backticks se ferme aussitot, sans argument, et ce n'est pas un appel.
     v("... mais une citation entre backticks SANS argument n'en est pas un",
       appelants(T4, "src/figures/dessin.py") == [])
+
+    # ⚠⚠ L'IMPORT, et c'est l'exact pendant Python du `source` shell déjà compté plus haut.
+    # Sans lui, `telecharger.py` — un pool de connexions importé par TROIS modules — passait
+    # pour « exécuté par personne », donc pour mort.
+    T5 = {"src/outils/telecharger.py":
+          "def obtenir(u): ...\nif __name__ == '__main__':\n    import telecharger\n",
+          "src/outils/fetch_a.py": "from telecharger import obtenir\n",
+          "src/outils/fetch_b.py": "import telecharger\n",
+          "src/outils/prose.py": "# voir telecharger pour le pool\n",
+          "docs/x.md": "`telecharger.py` garde une connexion ouverte.\n"}
+    v("un `from x import y` compte comme importateur",
+      "src/outils/fetch_a.py" in importateurs(T5, "src/outils/telecharger.py"))
+    v("... et un `import x` aussi",
+      "src/outils/fetch_b.py" in importateurs(T5, "src/outils/telecharger.py"))
+    # ⭐ La garde qui empêche la forme d'avaler la prose : c'est la même règle que pour les
+    # appelants, une mention n'est pas un usage.
+    v("... mais une MENTION en commentaire n'en est pas un",
+      "src/outils/prose.py" not in importateurs(T5, "src/outils/telecharger.py"))
+    v("... ni une mention dans un document",
+      all(f.endswith(".py") for f in importateurs(T5, "src/outils/telecharger.py")))
+    v("un fichier ne s'importe pas lui-même",
+      "src/outils/telecharger.py" not in importateurs(T5, "src/outils/telecharger.py"))
+
+    # ⚠⚠⚠ LA DISTINCTION QUI COMPTE : « rien ne le lance » et « c'est une bibliothèque »
+    # sont deux faits. Les confondre ferait soit disparaître un mort dans les vivants, soit
+    # inviter à supprimer un module dont trois autres dépendent.
+    r5 = orphelins(T5, ["src/outils/telecharger.py", "src/outils/prose.py"])
+    v("une bibliothèque importée n'est PAS un orphelin",
+      "src/outils/telecharger.py" not in r5["orphelins"], str(r5["orphelins"]))
+    v("... elle est rendue à part, avec QUI l'importe",
+      r5["combien_bibliotheques"] == 1
+      and len(r5["bibliotheques"][0]["importe_par"]) == 2, str(r5["bibliotheques"]))
+    # ⚠ Et un module que personne n'importe reste mort : sans ce contrôle, la catégorie
+    # « bibliothèque » deviendrait un endroit où tout module non lancé irait se cacher.
+    v("... alors qu'un module que personne n'importe reste orphelin",
+      "src/outils/prose.py" in r5["orphelins"], str(r5["orphelins"]))
 
     # ⚠ Un fichier ne s'appelle pas lui-meme : sinon rien ne serait jamais orphelin.
     T2 = dict(T, **{"src/depot/seul.py": "python src/depot/seul.py\n"})
@@ -327,6 +429,19 @@ def verifier() -> int:
       all(any(fnmatch.fnmatch(f, motif) for f in juges) for motif, _ in FAMILLES))
     v("... sans rien prendre en dehors",
       all(any(fnmatch.fnmatch(f, m) for m, _ in FAMILLES) for f in juges))
+
+    # ⚠⚠ Le faux positif possible de la détection d'import : un module du dépôt qui porterait
+    # le nom d'un module standard ferait compter `import json` pour `src/…/json.py`. Mesuré :
+    # zéro sur 263. L'assertion existe pour que le jour où ce ne sera plus vrai, on le sache
+    # au lieu de lire un verdict ambigu.
+    masques = masques_du_standard(juges)
+    v(f"aucun module du dépôt ne masque un nom de la bibliothèque standard ({len(masques)})",
+      not masques, ", ".join(masques))
+    # ⭐ Le cas réel qui a motivé la catégorie, gardé contre le VRAI arbre.
+    pool = "src/outils/telecharger.py"
+    v("le pool de connexions est reconnu comme bibliothèque, pas comme orphelin",
+      pool not in textes or len(importateurs(textes, pool)) >= 2,
+      f"{len(importateurs(textes, pool))} importateur(s)")
 
     # ⚠⚠ LE SOUS-PROCESSUS A CHEMIN CONSTRUIT, teste dans LES DEUX SENS. La forme trop large
     # avalerait toute mention dans un fichier qui lance quoi que ce soit ; la forme inerte
@@ -423,6 +538,13 @@ def main() -> int:
             print(f"      {o}")
     else:
         print("  ✅ aucun")
+    # ⚠ Une bibliothèque n'est pas un orphelin, et le dire est le point de cette ligne : elle
+    # n'est lancée par personne PARCE QUE ce n'est pas son métier.
+    if r["bibliotheques"]:
+        print(f"  📚 {r['combien_bibliotheques']} bibliothèque(s) — rien ne les lance, "
+              "des modules les importent :")
+        for b in r["bibliotheques"]:
+            print(f"      {b['script']:44s} ← {', '.join(b['importe_par'])}")
     # ⚠⚠ La question SYMÉTRIQUE, et elle se lit dans le même document qu'un orphelin : une
     # commande écrite pour être lancée telle quelle, sur un fichier qui n'a pas le bit `x`.
     r["invocations_impossibles"] = invocations_impossibles()

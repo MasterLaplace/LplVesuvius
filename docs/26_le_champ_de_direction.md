@@ -411,6 +411,21 @@ des `.normal-grids` de `PHerc0358` :
 se traduit en trois intervalles de tranches. Une boîte de ±700 voxels autour de la graine
 fait **1,1 Go**, récupéré en moins d'une minute avec le pool de connexions persistantes.
 
+```
+uv run python src/outils/fetch_normal_grids.py \
+    PHerc0358/representations/predictions/surfaces/20250821151737-surface-20260413222639-surface-m7-L0-th0.2.normal-grids \
+    data/champ_PHerc0358 --boite 5142 6542 5139 6539 6686 8086
+```
+
+⚠ La boîte est en voxels du **niveau 0** et elle est ±700 autour de la graine `5842 5839 7386`
+(celle de [`25`](25_une_graine_choisie_sur_la_planeite.md)). ⚠⚠ Les trois dossiers `xy`, `xz`,
+`yz` sont indexés chacun par **un seul axe**, donc une boîte devient trois intervalles de
+tranches — c'est ce découpage qui fait passer de 10,40 Go à 1,1, pas une décimation.
+
+⭐ Le pool de connexions persistantes est `src/outils/telecharger.py` : une poignée de main TLS
+par objet coûterait **7 objets/s** sur les 30 310 fichiers du dossier ; une connexion gardée
+ouverte est ce qui rend la minute possible.
+
 ### ⭐ Le chaînon que l'aide de `vc_ngrids` révèle
 
 ```

@@ -637,6 +637,26 @@ dit, pas une relecture.
 `valider_blocs.py`. Le garde « scripts sans appelant » ne scannait pas `tools/*.py` ; le glob
 `src/*/*` a élargi sa portée sans qu'on le demande, et il les a trouvés.
 
+#### ⚠⚠⚠ Et l'un des trois n'en était pas un : `telecharger.py` est une BIBLIOTHÈQUE
+
+Corrigé le 2026-09-05. `src/outils/telecharger.py` — le pool de connexions HTTPS persistantes —
+est **importé par trois modules** (`fetch_champ_normal.py`, `fetch_normal_grids.py`,
+`fetch_zarr_boite.py`). Rien ne le *lance*, et c'est normal : **une bibliothèque ne se lance
+pas, elle s'utilise.**
+
+Le garde comptait déjà `source x.sh` comme une exécution, avec la bonne raison écrite dans son
+propre fichier — *« sourcer une bibliothèque shell, c'est l'exécuter »*. **L'équivalent Python
+manquait**, donc tout module écrit pour être importé était déclaré mort. C'est précisément le
+mode d'échec que `appelants.py` nomme comme le plus coûteux : *un détecteur qui ne voit pas un
+appelant fait passer un script vivant pour mort, ce qui invite à le supprimer.*
+
+⭐ Le remède n'est pas de compter un import comme un appel — ce serait mentir sur le verbe —
+mais d'ouvrir une **catégorie à part** : un module non lancé mais importé est rendu avec **qui
+l'importe**, et un orphelin devient « rien ne l'exécute **ni ne l'importe** ». ⚠ Le faux
+positif possible est qu'un module du dépôt masque un nom de la bibliothèque standard, auquel
+cas `import json` compterait pour `src/…/json.py` ; mesuré, **zéro sur 263**, et le contrôle le
+réasserte pour que le jour où ce ne sera plus vrai on le sache.
+
 #### ⚠⚠ `valider_blocs.py` : ce n'est pas un appelant qui lui manque, c'est sa RÉFÉRENCE
 
 Repris le 2026-09-05. Le script demande *« le découpage en blocs 3D donne-t-il la même chose

@@ -1800,7 +1800,7 @@ caractère, couverture vérifiée par `wc -l` avant lecture.
 ---
 
 ### docs/26_le_champ_de_direction.md
-- **lignes** : 743 ⚠ (701 quand la fiche a été écrite ; la mesure du tableau « sans filtre » a été **perdue puis restaurée** le 2026-09-04)
+- **lignes** : 758 ⚠ (701 quand la fiche a été écrite ; la mesure du tableau « sans filtre » a été **perdue puis restaurée** le 2026-09-04)
 - **nature** : RESULTAT
   (série de mesures avec contrôle positif ; le §10 « Reproduire » et la seconde §9 « T1f »
   sont eux-mêmes des campagnes mesurées.)
@@ -1900,6 +1900,12 @@ caractère, couverture vérifiée par `wc -l` avant lecture.
     LUES dans les traces (`seed location [...]`), pas retapées. Puis `table_pas.py` dépouille.
     La remesure sans filtre : `bash src/outils/remesurer_sans_filtre.sh` →
     `docs/mesures/sans_filtre.json`, onze essais par défaut.
+  - Reproduction de la récupération des grilles :
+    `fetch_normal_grids.py <prefixe .normal-grids> data/champ_PHerc0358 --boite …`,
+    boîte de ±700 voxels du **niveau 0** autour de la graine `5842 5839 7386`.
+    ⚠⚠ Les trois dossiers `xy`/`xz`/`yz` sont indexés chacun par **un seul axe**, donc une
+    boîte devient trois intervalles de tranches — c'est ce découpage qui fait 10,40 Go →
+    **1,1 Go**, pas une décimation.
 - **rétractations / corrections internes** :
   - En-tête : « **douze**, pas dix — deux des noms annoncés ici n'existaient pas, corrigé au
     §4 contre le code source » (`surface_sdt_weight` et `spaceline_weight`, zéro occurrence
@@ -1937,8 +1943,8 @@ caractère, couverture vérifiée par `wc -l` avant lecture.
     été posé pour réduire la variance, or `30` a mesuré que ça ne la réduit pas. Il reste le
     bon réglage, mais pour une raison de **débit** et non de déterminisme.
 - **preuve de lecture intégrale** :
-  - l. 444 : « ⚠⚠ **Un facteur 29 de ralentissement pour zéro déplacement, sur la course entière.** La »
-  - l. 742 : « machine a un iGPU **Intel Arc**. Il n'y a pas de GPU à saturer ici. »
+  - l. 459 : « ⚠⚠ **Un facteur 29 de ralentissement pour zéro déplacement, sur la course entière.** La »
+  - l. 757 : « machine a un iGPU **Intel Arc**. Il n'y a pas de GPU à saturer ici. »
 
 ---
 
@@ -3313,7 +3319,7 @@ dernier caractère. Lignes mesurées par `wc -l`.
 
 ### docs/48_ou_monter_lexperience.md
 
-- **lignes** : 405
+- **lignes** : 421
 - **nature** : MIXTE
 - **résumé** : Le document ne répond pas à la question centrale du dépôt (« réparer une trace
   sert-il à quelque chose ? ») : il mesure **pourquoi elle n'est pas montable sur ce qui est en
@@ -3425,8 +3431,8 @@ dernier caractère. Lignes mesurées par `wc -l`.
   - §4 : « je n'ai **pas** inventé un score composite pour reclasser : choisir la pondération,
     c'est choisir la réponse avant de l'avoir mesurée » — les huit candidats ont été tracés.
 - **preuve de lecture intégrale** :
-  - ligne 330 (78 % du fichier) : `> ⭐⭐ **Zéro convergence sur huit.** L'α le plus bas obtenu est **+1,01**, pour un seuil de`
-  - ligne 403 (3ᵉ ligne non vide avant la fin) : `python3 src/graine/eligibilite_aval.py --verifier`
+  - ligne 346 (78 % du fichier) : `> ⭐⭐ **Zéro convergence sur huit.** L'α le plus bas obtenu est **+1,01**, pour un seuil de`
+  - ligne 419 (3ᵉ ligne non vide avant la fin) : `python3 src/graine/eligibilite_aval.py --verifier`
 
 ---
 
@@ -3752,7 +3758,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/56_le_grand_menage.md
-- **lignes** : 929
+- **lignes** : 949
 - **nature** : MIXTE
 - **résumé** : Document qui se déclare lui-même « un PLAN, pas un résultat », écrit pour être repris par une session neuve, mais dont chaque chiffre est mesuré et dont les quatre chantiers sont ensuite marqués comme clos au fil du texte. Il commence par corriger l'impression de départ (« sept dossiers blindés de scripts, une montagne de doublons ») : trois points sur quatre sont vrais, la vraie montagne est `data/` (177 Gio sur 203) et non les venvs (4,24 Gio récupérables, pas 16,6). Les quatre chantiers sont A (cache de rendu par contenu, livré, avec la découverte que 58,6 % du contenu dupliqué est constitué de fenêtres imbriquées), B (réorganisation de `data/`, **clos par la mesure qui contredit son propre plan**), C (`lplv`, livré) et D (dessin unifié et `docs/` rangé par nature, livré). Une section entière énumère ce qu'on décide de **ne pas** faire, avec sa raison mesurée.
 - **conclusions extractibles** :
@@ -3804,6 +3810,15 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
     global « a fait tomber la machine trois fois ». Sans elle, la comparaison et sa tolérance
     de 10 % sont inatteignables. Le lot qui le rend utile est de lui trouver un maillage assez
     petit pour que les DEUX passent, ce que son propre en-tête réclame.
+  - ⚠⚠⚠ **Un des trois « orphelins » n'en était pas un** (corrigé le 2026-09-05) :
+    `telecharger.py`, le pool de connexions HTTPS, est **importé par trois modules**.
+    Le garde comptait `source x.sh` comme une exécution — *« sourcer une bibliothèque
+    shell, c'est l'exécuter »* — et **l'équivalent Python manquait**, donc tout module
+    écrit pour être importé était déclaré mort. ⭐ Le remède n'est pas de compter un
+    import comme un appel (ce serait mentir sur le verbe) mais d'ouvrir une **catégorie
+    à part**, rendue avec QUI l'importe ; un orphelin devient « rien ne l'exécute ni ne
+    l'importe ». ⚠ Faux positif possible : un module du dépôt masquant un nom standard —
+    mesuré **0 sur 263**, et le contrôle le réasserte.
 - **rétractations / corrections internes** :
   - En-tête, note du 2026-08-26 : le §1.1 comptait « sept dossiers de scripts » et concluait qu'ils étaient « DEUX dossiers et cinq environnements » — juste comme diagnostic, faux comme conclusion, car un environnement n'a pas besoin d'être à la racine, il a besoin d'être avec son code.
   - §1.1, « ⚠⚠ Deux affirmations de ce paragraphe étaient FAUSSES — corrigées le 2026-08-25 » : (1) les « 16,6 Go » n'existent pas (liens durs `uv`, 4,24 Gio réels) ; (2) les « 25 sites d'appel » étaient des emprunts à un environnement strictement plus pauvre que la racine.
@@ -3819,7 +3834,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
   - §4 : deux lignes du tableau « ce qu'on décide de ne pas faire » sont barrées comme faites — « Supprimer `inference/` » (FAIT le 2026-08-25) et « Toucher aux `.venv` » (partiellement fait).
 - **preuve de lecture intégrale** :
   - ligne 552 : « **218 verbes découverts, zéro nom ambigu, 98 qui s'auto-testent, 72 qui rendent du JSON.** »
-  - ligne 927 : « 4. **les points d'extension justifiés par un deuxième cas RÉEL** — le registre l'est par 123 ; »
+  - ligne 947 : « 4. **les points d'extension justifiés par un deuxième cas RÉEL** — le registre l'est par 123 ; »
 
 
 
