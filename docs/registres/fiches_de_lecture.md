@@ -4820,3 +4820,23 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
 - **preuve de lecture intégrale** :
   - ligne 60 (après 65 % du fichier) : `**Ni faisceau, ni annotation manuelle, ni rescan.** Les couches sont rendues.`
   - ligne 91 (dernière ligne non vide) : `papier reproche à la littérature.`
+
+### docs/78_lombilic_publie.md
+- **lignes** : 153
+- **nature** : RESULTAT
+- **résumé** : Écrit en cherchant de quoi construire `A2 bis`, ce document corrige d'abord une affirmation du dépôt — « Scroll 1 est le seul rouleau qui publie un ombilic » — en montrant que **cinq** en publient un sur le bucket ouvert, et que l'erreur est le même angle mort que `59`, commis pour la troisième fois. Il se sert ensuite de l'axe publié de `PHerc0139` (391 points annotés à la main) comme référence **indépendante** pour tester la robustesse de `76` et `77` : le biais de l'axe ajusté est grand, et la mesure appariée n'en bouge pas. Il finit sur un résultat **négatif** qui fixe le cahier des charges d'`A2 bis` : l'axe seul ne débloque rien.
+- **conclusions extractibles** :
+  - **Cinq** rouleaux publient un ombilic sous `<rouleau>/representations/umbilicus/` — `PHerc0125` (83 points, 9,362 µm), **`PHerc0139` (391 points, 2,399 µm, David Josey)**, `PHerc0211` (87), `PHerc0332` (169, 2,399 µm, David Josey), `PHerc0826` (49). Balayage sur les **46 préfixes de premier niveau**, pas sur une liste écrite à la main.
+  - Le biais de l'axe ajusté par cercles sur arcs partiels est **réel et grand** : médiane **3,01 mm**, jusqu'à **27 écarts inter-feuilles**. Les deux axes ont même forme et même sens mais ne se superposent pas.
+  - **Et la mesure appariée n'en bouge pas** : vers l'extérieur **94,8 %** des deux côtés, écart inter-feuilles **155,8 µm** (axe ajusté) contre **156,8** (axe publié). Un axe faux de 4 mm déplace le verdict de zéro point et l'écart d'un micromètre.
+  - ⭐ Une sonde **localise** l'immunité : un centre **global** au lieu d'un centre par tranche ne change rien non plus (94,6 % contre 94,5 %). L'immunité ne vient donc pas de la qualité du centre mais du fait que les deux spires sont comparées **dans la même cellule angulaire autour du même centre, quel qu'il soit**.
+  - `laxe_ne_suffit_pas.py` : erreur d'indice de **44,5 feuilles** pour la dispersion radiale d'une seule spire autour de l'axe publié, **11,36** pour le modèle d'Archimède ($w = (r-r_0)/\lambda + \theta/2\pi$), **0,088** pour le champ bâti sur les spires de `77`. La **forme** des spires vaut donc un facteur **130**.
+  - La cause est mesurée : un rouleau d'Herculanum est **écrasé**, donc aucun modèle en $(r, \theta)$ à section circulaire ne sépare des feuilles distantes d'une seule.
+  - ⚠ Les `.normal-grids` publiées sont **dérivées de la prédiction de surface** que le traceur suit déjà (`26` §7) : les lui redonner est une tautologie mesurée (×29 de ralentissement, trajectoire identique au centième). Ce qui reste ouvert pour `A2 bis` est un champ bâti sur l'axe **et l'orientation des fibres** (`representations/predictions/fibers/`, publié en `nx`/`ny`/`nz`).
+- **rétractations / corrections internes** :
+  - §0 : `laxe_nest_pas_une_ligne.py` affirmait que Scroll 1 était le **seul** à publier un ombilic. La vérification était juste et sa conclusion fausse — elle portait sur **un** serveur et **une** convention de chemin. La correction est écrite dans le fichier fautif, pas seulement ici. ⚠ Le mot faux était « seul », pas la mesure : les deux serveurs se complètent.
+  - §3 : le document n'établit **pas** que l'axe publié soit juste et l'ajusté faux — seulement qu'ils diffèrent et que la conclusion n'en dépend pas ; **pas** que les cinq axes soient de même qualité (49 à 391 points, deux annotateurs nommés) ; **pas** que la conversion de repère soit exacte (facteur d'échelle lu dans le champ `volume` et validé contre les résolutions publiées — mélanger 2,399 et 9,362 µm sans conversion donnerait un axe faux d'un facteur 3,9).
+  - §4 : les **44,5 feuilles** sont prises autour de l'axe **publié** ; autour du centre **ajusté par tranche** la dispersion vaut ~17 feuilles. Ce n'est pas une contradiction — l'ajustement minimise cette dispersion par construction.
+- **preuve de lecture intégrale** :
+  - ligne 104 (après 68 % du fichier) : `jugement **indépendant** du nôtre, ce qu'il fallait pour tester une robustesse.`
+  - ligne 153 (dernière ligne non vide) : `axes restent équivalents pour la mesure **appariée** du §1, qui ne lit jamais un rayon absolu.`
