@@ -164,6 +164,42 @@ Huit cellules par pas suffisent à **voir** une feuille et pas à en **séparer*
 touchent — or c'est exactement là que le déroulage échoue. C'est une contrainte sur ce qu'`A2 bis`
 peut espérer, pas un défaut du champ.
 
+### ⚠⚠⚠ Et la question qui décide : ce champ compte-t-il des feuilles ? **Mesuré : non**
+
+Un nombre d'enroulement **compte des feuilles**. Si le champ ne les sépare pas radialement, il ne
+peut pas les compter, quelle que soit la qualité de son orientation. Le long d'un rayon tiré depuis
+**l'axe publié** (391 points annotés, `78`), avec son **contrôle tangentiel** :
+
+| fenêtre | rayon | période **radiale** | autocorr. radiale | autocorr. **tangentielle** |
+|---|---:|---:|---:|---:|
+| (71, 36, 14) | 936 cellules | **441 µm** | +0,245 | **−0,069** ✅ sépare |
+| (74, 39, 28) | 949 | **422 µm** | +0,302 | **+0,311** ❌ |
+| (35, 24, 35) | 500 | **307 µm** | +0,237 | **+0,397** ❌ |
+
+⚠⚠ **Le contrôle tangentiel est ce qui rend la mesure lisible** : une feuille est une *surface*,
+donc elle se répète **en travers** et pas **le long**. Une périodicité radiale n'est une feuille
+que si la même mesure prise perpendiculairement est plus faible. Elle ne l'est que sur **une
+fenêtre sur trois**.
+
+⚠⚠ **Et là où une période radiale apparaît, elle vaut 307 à 441 µm** — soit **2 à 3 pas de
+feuille** (~150 µm), jamais un. C'est ce qu'on attend d'un champ dont la résolution *effective*
+est plus grossière que sa grille : il voit des **groupes** de feuilles, pas des feuilles.
+
+⚠ **Deux explications alternatives écartées par la mesure, pas par l'argument.** (1) Le moyennage
+en profondeur aurait pu effacer la structure si les feuilles penchent : mesuré sur **1, 8 et 64**
+tranches, l'écart de période est de **0 à 2 cellules** — ce n'est pas le lissage. (2) Le détecteur
+de période lui-même : ma première version prenait le **maximum global** de l'autocorrélation, qui
+pour un signal lisse est toujours son plus petit décalage — les trois fenêtres rendaient
+« 2 cellules » dans les deux directions, c'est-à-dire la largeur de lissage du champ et **rien du
+tout** sur les feuilles. Corrigé en cherchant le premier maximum **local après le passage sous
+zéro**, qui est la définition d'un retour.
+
+> **Conséquence pour `A2 bis`** : l'entrée que `78` §2 désignait ne peut pas, **telle qu'elle est
+> publiée**, porter un nombre d'enroulement. Ce n'est pas le `nz` manquant qui bloque — il se
+> récupère en module — c'est que le champ ne distingue pas deux feuilles voisines. Ce qui reste
+> possible : demander le **niveau 0** de ce champ (il existe chez son producteur, `output_channels
+> = 7` le dit), ou construire l'enroulement sur autre chose que ce champ.
+
 ### A2 ter — le test d'identité par les résidus (ex-H5 de `69`, révisée par `73` §1)
 
 *Le champ déplié assigne-t-il un entier constant le long de chaque spire publiée, et des

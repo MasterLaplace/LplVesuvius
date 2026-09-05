@@ -220,6 +220,149 @@ def norme_du_champ(niveau: int, cz: int, cy: int, cx: int, seuil: int = 32) -> d
                 nz_median=float(math.sqrt(max(0.0, 1.0 - float(np.median(somme))))))
 
 
+def axe_a_ce_z(z_niveau: int, niveau: int) -> tuple[float, float] | None:
+    """
+    @brief Le centre du rouleau à cette tranche, dans les coordonnées du niveau demandé.
+
+    ⚠⚠ L'axe publié est annoté dans le repère **plein** (`PHerc0139_2um_full`), donc en
+    coordonnées de niveau 0 ; le champ, lui, n'est publié qu'aux niveaux 3 et 4. Comparer les
+    deux sans diviser mettrait le centre du rouleau huit fois trop loin, et un rayon tiré depuis
+    là ne traverserait rien — ce qui ressemble à un champ vide.
+
+    ⚠ Les points sont `(x, y, z)` et la forme du volume est `(z, y, x)`. Ce dépôt a déjà payé un
+    axe faux d'un facteur 3,9 pour avoir mélangé deux repères ; ici l'erreur serait un axe
+    transposé, qui rend un rayon parfaitement plausible dans la mauvaise direction.
+    """
+    import sys as _sys  # noqa: PLC0415
+
+    _sys.path.insert(0, str(RACINE / "src" / "excision"))
+    from lombilic_publie import charger_axe  # noqa: PLC0415
+
+    charge = charger_axe("PHerc0139")
+    if charge is None:
+        return None
+    pts = charge[0]
+    facteur = 2 ** niveau
+    z0 = z_niveau * facteur
+    # ⚠ Interpolation entre les deux points de contrôle qui encadrent la tranche : prendre le
+    # plus proche ferait sauter le centre d'un point de contrôle à l'autre, et l'axe dérive de
+    # plusieurs millimètres entre deux annotations (`78` : médiane 3,01 mm entre deux axes).
+    ordre = np.argsort(pts[:, 2])
+    zs, xs, ys = pts[ordre, 2], pts[ordre, 0], pts[ordre, 1]
+    if z0 < zs[0] or z0 > zs[-1]:
+        return None
+    x = float(np.interp(z0, zs, xs)) / facteur
+    y = float(np.interp(z0, zs, ys)) / facteur
+    return x, y
+
+
+def periodicite_radiale(niveau: int, cz: int, cy: int, cx: int,
+                        seuil: int = 32) -> dict:
+    """
+    @brief Le long d'un rayon depuis l'axe, `presence` bat-elle au pas des feuilles ?
+
+    ⚠⚠⚠ C'EST LA QUESTION QUI DÉCIDE SI CE CHAMP PEUT PORTER UN NOMBRE D'ENROULEMENT. Un nombre
+    d'enroulement compte des feuilles ; si le champ ne les distingue pas radialement, il ne peut
+    pas les compter, quelle que soit la qualité de son orientation.
+
+    ⚠⚠ ET LE CONTRÔLE EST TANGENTIEL. Une périodicité radiale seule ne prouve rien : un bloc de
+    volume compressé porte des motifs, et une autocorrélation trouve toujours **un** maximum.
+    Une feuille est une surface, donc elle se répète **en travers** et pas **le long** — le même
+    profil pris perpendiculairement doit être plat. Sans ce contrôle la mesure est satisfaite par
+    n'importe quelle texture.
+
+    ⚠ Le profil est pris au plus proche voisin : interpoler entre deux cellules lisserait
+    justement la structure qu'on cherche à voir, et un lissage rend toute autocorrélation plus
+    lisse — donc plus convaincante.
+    """
+    pr = lire_bloc("presence", niveau, cz, cy, cx)
+    if pr is None:
+        return {}
+    n = pr.shape[0]
+    centre_z = cz * n + n // 2
+    axe = axe_a_ce_z(centre_z, niveau)
+    if axe is None:
+        return {}
+    ax, ay = axe
+    # ⚠ Le centre du bloc dans le repère du niveau, puis la direction radiale DEPUIS l'axe.
+    by, bx = cy * n + n // 2, cx * n + n // 2
+    dy, dx = by - ay, bx - ax
+    rayon = math.hypot(dy, dx)
+    if rayon < 1.0:
+        return {}
+    ur = (dy / rayon, dx / rayon)
+    ut = (-ur[1], ur[0])
+
+    def profil(u, tranches: int) -> np.ndarray:
+        """
+        @brief Une coupe du bloc le long de `u`, moyennée sur `tranches` plans z.
+
+        ⚠⚠⚠ LE NOMBRE DE TRANCHES EST UN PARAMÈTRE PARCE QU'IL PEUT DÉTRUIRE LA MESURE. Un
+        empilement de feuilles n'est parallèle à l'axe du volume que si le rouleau ne penche pas ;
+        s'il penche, moyenner sur soixante-quatre plans mélange plusieurs feuilles dans chaque
+        échantillon et **efface exactement la périodicité qu'on cherche**. Une seule tranche est
+        plus bruitée et ne peut pas mentir dans ce sens-là. Les deux sont mesurées, et leur écart
+        est le diagnostic.
+        """
+        pas = np.arange(-n // 2 + 1, n // 2)
+        z0 = n // 2 - tranches // 2
+        z1 = z0 + max(1, tranches)
+        sortie = []
+        for t in pas:
+            iy = int(round(n // 2 + t * u[0]))
+            ix = int(round(n // 2 + t * u[1]))
+            if 0 <= iy < n and 0 <= ix < n:
+                sortie.append(float(pr[z0:z1, iy, ix].mean()))
+        return np.asarray(sortie, dtype=float)
+
+    def periode(v: np.ndarray) -> tuple[int, float]:
+        """
+        @brief Le premier maximum LOCAL de l'autocorrélation après son passage sous zéro.
+
+        ⚠⚠⚠ PAS LE MAXIMUM GLOBAL, et ma première version faisait cette faute. L'autocorrélation
+        d'un signal lisse **décroît**, donc son plus grand décalage utile est toujours le plus
+        petit : les trois fenêtres ont rendu « période 2 cellules » dans les deux directions,
+        c'est-à-dire la largeur de lissage du champ et rien du tout sur les feuilles. Une mesure
+        qui rend la même réponse quelle que soit la structure ne mesure pas la structure.
+
+        ⚠ Le passage sous zéro est ce qui sépare « le signal se ressemble encore » de « il a
+        changé de phase » : chercher un maximum après lui, c'est chercher un retour, ce qui est
+        exactement la définition d'une période. Sans cette étape on retrouve la pente.
+        """
+        if v.size < 12:
+            return 0, 0.0
+        w = v - v.mean()
+        denom = float((w * w).sum()) or 1.0
+        limite = min(v.size - 4, 4 * int(cellules_par_pas(niveau)) + 6)
+        auto = [float((w[:-k] * w[k:]).sum()) / denom for k in range(1, limite)]
+        premier_negatif = next((i for i, a in enumerate(auto) if a < 0.0), None)
+        if premier_negatif is None:
+            # ⚠ Jamais négative : il n'y a pas de retour dans la fenêtre, donc pas de période
+            # observable. Rendre le dernier décalage serait inventer une réponse.
+            return 0, 0.0
+        reste = auto[premier_negatif:]
+        if not reste:
+            return 0, 0.0
+        i = int(np.argmax(reste))
+        return premier_negatif + i + 1, float(reste[i])
+
+    par_tranches = {}
+    for tranches in (1, 8, n):
+        k_rad, s_rad = periode(profil(ur, tranches))
+        k_tan, s_tan = periode(profil(ut, tranches))
+        par_tranches[str(tranches)] = dict(
+            periode_radiale_cellules=k_rad, autocorrelation_radiale=s_rad,
+            periode_radiale_um=k_rad * resolution_um(niveau),
+            periode_tangentielle_cellules=k_tan, autocorrelation_tangentielle=s_tan)
+    # ⚠ Le relevé principal reste celui d'UNE tranche : c'est le seul qui ne puisse pas avoir
+    # effacé la structure par moyennage. Les autres sont gardés pour que l'écart se lise.
+    un = par_tranches["1"]
+    return dict(cz=cz, cy=cy, cx=cx, rayon_cellules=float(rayon),
+                axe=[ax, ay], part_pleine=float((pr > seuil).mean()),
+                par_tranches=par_tranches, **un,
+                echantillons=int(profil(ur, 1).size))
+
+
 def mesurer(niveau: int | None = None, fenetres: int = 3) -> dict:
     """
     @brief Le relevé, sur PLUSIEURS fenêtres.
@@ -240,7 +383,9 @@ def mesurer(niveau: int | None = None, fenetres: int = 3) -> dict:
             continue
         norme = norme_du_champ(n, trouve["cz"], trouve["cy"], trouve["cx"])
         if norme:
-            lots.append(dict(fenetre=trouve, norme=norme))
+            lots.append(dict(fenetre=trouve, norme=norme,
+                             periodicite=periodicite_radiale(n, trouve["cz"], trouve["cy"],
+                                                             trouve["cx"])))
     if not lots:
         raise SystemExit("aucun chunk lisible : le balayage n'a rien trouvé")
     return dict(prefixe=PREFIXE, canaux_publies=list(CANAUX),
@@ -334,6 +479,45 @@ def _verifier(r: dict | None = None) -> int:
         # touchent. C'est une contrainte sur `A2 bis`, pas un défaut du champ.
         v("... et le champ le plus fin publié voit une feuille en ~8 cellules",
           6.0 < r["cellules_par_pas"] < 10.0, f"{r['cellules_par_pas']:.1f}")
+
+        # ⚠⚠⚠ ET LA QUESTION QUI DÉCIDE POUR `A2 bis` : ce champ compte-t-il des feuilles ?
+        # Un nombre d'enroulement compte des feuilles. Si le champ ne les sépare pas
+        # radialement, il ne peut pas les compter, quelle que soit la qualité de son orientation.
+        perios = [l["periodicite"] for l in lots if l.get("periodicite")]
+        if perios:
+            for q in perios:
+                print(f"      chunk ({q['cz']:3d},{q['cy']:3d},{q['cx']:3d}) rayon "
+                      f"{q['rayon_cellules']:6.0f} · radial "
+                      f"{q['periode_radiale_um']:6.1f} µm (r={q['autocorrelation_radiale']:+.3f}) "
+                      f"· tangentiel r={q['autocorrelation_tangentielle']:+.3f}")
+            # ⚠⚠ LE CONTRÔLE TANGENTIEL EST CE QUI REND LA MESURE LISIBLE. Une feuille est une
+            # surface : elle se répète EN TRAVERS et pas LE LONG. Une périodicité radiale n'est
+            # une feuille que si la même mesure prise perpendiculairement est plus faible.
+            # Mesuré : elle ne l'est pas sur deux fenêtres sur trois.
+            separe = [q for q in perios
+                      if q["autocorrelation_radiale"] > q["autocorrelation_tangentielle"] + 0.1]
+            v("⚠ le radial ne bat pas le contrôle tangentiel sur toutes les fenêtres",
+              len(separe) < len(perios),
+              f"{len(separe)} fenêtre(s) sur {len(perios)} séparent — "
+              + " · ".join(f"{q['autocorrelation_radiale']:+.3f} contre "
+                           f"{q['autocorrelation_tangentielle']:+.3f}" for q in perios))
+            # ⚠⚠ ET LÀ OÙ UNE PÉRIODE RADIALE APPARAÎT, ELLE VAUT DEUX À TROIS PAS DE FEUILLE.
+            # C'est ce qu'on attend d'un champ dont la résolution effective est plus grossière
+            # que sa grille : il voit des GROUPES de feuilles, pas des feuilles.
+            um = [q["periode_radiale_um"] for q in perios if q["periode_radiale_cellules"]]
+            v("... et la période radiale vaut 2 à 3 pas de feuille, jamais un",
+              all(2.0 * PAS_DE_FEUILLE_UM < x < 3.5 * PAS_DE_FEUILLE_UM for x in um),
+              " · ".join(f"{x:.0f} µm" for x in um)
+              + f" contre un pas de {PAS_DE_FEUILLE_UM:.0f} µm")
+            # ⚠ Et le moyennage en z est innocenté plutôt que soupçonné : une seule tranche
+            # rend la même période que soixante-quatre, donc ce n'est pas le lissage qui a
+            # effacé la structure.
+            ecarts = [abs(q["par_tranches"]["1"]["periode_radiale_cellules"]
+                          - q["par_tranches"][str(64)]["periode_radiale_cellules"])
+                      for q in perios if "par_tranches" in q]
+            v("... et le moyennage en z n'y est pour rien",
+              all(e <= 2 for e in ecarts), " · ".join(str(e) for e in ecarts)
+              + " cellules d'écart entre 1 tranche et 64")
 
     print()
     print(f"  {'ECHEC' if echecs else 'ALL PASS'} ({echecs} failures, {comptes} checks)")

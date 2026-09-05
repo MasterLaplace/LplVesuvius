@@ -51,6 +51,46 @@
         "somme_max": 1.0136719942092896,
         "part_au_dessus_de_un": 0.0565161764333308,
         "nz_median": 0.45067334395931924
+      },
+      "periodicite": {
+        "cz": 71,
+        "cy": 36,
+        "cx": 14,
+        "rayon_cellules": 935.590026186567,
+        "axe": [
+          1553.9331210191083,
+          1640.6321656050955
+        ],
+        "part_pleine": 0.6022796630859375,
+        "par_tranches": {
+          "1": {
+            "periode_radiale_cellules": 23,
+            "autocorrelation_radiale": 0.2454077648863695,
+            "periode_radiale_um": 441.416,
+            "periode_tangentielle_cellules": 11,
+            "autocorrelation_tangentielle": -0.06902583774488702
+          },
+          "8": {
+            "periode_radiale_cellules": 23,
+            "autocorrelation_radiale": 0.13717288359813606,
+            "periode_radiale_um": 441.416,
+            "periode_tangentielle_cellules": 21,
+            "autocorrelation_tangentielle": 0.056021061095672224
+          },
+          "64": {
+            "periode_radiale_cellules": 24,
+            "autocorrelation_radiale": 0.24131572001477136,
+            "periode_radiale_um": 460.608,
+            "periode_tangentielle_cellules": 18,
+            "autocorrelation_tangentielle": 0.22555672629575862
+          }
+        },
+        "periode_radiale_cellules": 23,
+        "autocorrelation_radiale": 0.2454077648863695,
+        "periode_radiale_um": 441.416,
+        "periode_tangentielle_cellules": 11,
+        "autocorrelation_tangentielle": -0.06902583774488702,
+        "echantillons": 63
       }
     },
     {
@@ -85,6 +125,46 @@
         "somme_max": 1.0136719942092896,
         "part_au_dessus_de_un": 0.015475873100506531,
         "nz_median": 0.4410150195135348
+      },
+      "periodicite": {
+        "cz": 74,
+        "cy": 39,
+        "cx": 28,
+        "rayon_cellules": 948.7584103886344,
+        "axe": [
+          1360.2983870967741,
+          1700.2782258064517
+        ],
+        "part_pleine": 0.572357177734375,
+        "par_tranches": {
+          "1": {
+            "periode_radiale_cellules": 22,
+            "autocorrelation_radiale": 0.301903311651629,
+            "periode_radiale_um": 422.224,
+            "periode_tangentielle_cellules": 27,
+            "autocorrelation_tangentielle": 0.31102656434914494
+          },
+          "8": {
+            "periode_radiale_cellules": 23,
+            "autocorrelation_radiale": 0.248157177681129,
+            "periode_radiale_um": 441.416,
+            "periode_tangentielle_cellules": 26,
+            "autocorrelation_tangentielle": 0.20553612338237662
+          },
+          "64": {
+            "periode_radiale_cellules": 24,
+            "autocorrelation_radiale": 0.2714687981513324,
+            "periode_radiale_um": 460.608,
+            "periode_tangentielle_cellules": 33,
+            "autocorrelation_tangentielle": 0.12095344108416366
+          }
+        },
+        "periode_radiale_cellules": 22,
+        "autocorrelation_radiale": 0.301903311651629,
+        "periode_radiale_um": 422.224,
+        "periode_tangentielle_cellules": 27,
+        "autocorrelation_tangentielle": 0.31102656434914494,
+        "echantillons": 63
       }
     },
     {
@@ -119,6 +199,46 @@
         "somme_max": 1.0128108263015747,
         "part_au_dessus_de_un": 0.0461029673298572,
         "nz_median": 0.8312893098126611
+      },
+      "periodicite": {
+        "cz": 35,
+        "cy": 24,
+        "cx": 35,
+        "rayon_cellules": 500.1966734376976,
+        "axe": [
+          1772.1337579617834,
+          1586.1783439490446
+        ],
+        "part_pleine": 0.5040702819824219,
+        "par_tranches": {
+          "1": {
+            "periode_radiale_cellules": 16,
+            "autocorrelation_radiale": 0.23650168859408674,
+            "periode_radiale_um": 307.072,
+            "periode_tangentielle_cellules": 22,
+            "autocorrelation_tangentielle": 0.3968133392732679
+          },
+          "8": {
+            "periode_radiale_cellules": 16,
+            "autocorrelation_radiale": 0.26375135650941,
+            "periode_radiale_um": 307.072,
+            "periode_tangentielle_cellules": 22,
+            "autocorrelation_tangentielle": 0.33756546011922584
+          },
+          "64": {
+            "periode_radiale_cellules": 16,
+            "autocorrelation_radiale": 0.15426170584286428,
+            "periode_radiale_um": 307.072,
+            "periode_tangentielle_cellules": 21,
+            "autocorrelation_tangentielle": 0.17209292629568557
+          }
+        },
+        "periode_radiale_cellules": 16,
+        "autocorrelation_radiale": 0.23650168859408674,
+        "periode_radiale_um": 307.072,
+        "periode_tangentielle_cellules": 22,
+        "autocorrelation_tangentielle": 0.3968133392732679,
+        "echantillons": 63
       }
     }
   ],
