@@ -550,12 +550,76 @@ dérive cumulée, soit **~1,9 mm**, donc trois lettres d'un bout à l'autre. Il 
 de masque publié — donc ce n'est pas un masque de surface mais « là où le détecteur a rendu
 quelque chose ». Le recouvrement mesuré est un **minorant**.
 
-### Ce qui reste de C1
+### ⭐⭐ L'affine est construite et VALIDÉE par une référence externe
 
-- ⚠⚠ **La case de `PHerc0500P2`**, celle qui décide : les étiquettes existent, les couches du
-  régime du prix existent, et il manque **l'affine entre les deux aplatissements**. C'est la
-  seule case qui répondrait « combien de caractères survivent », parce que c'est la seule où la
-  réponse est connue.
+> Mesure : `src/encre/le_recalage_des_etiquettes.py` (13 contrôles),
+> `docs/mesures/le_recalage_des_etiquettes.json`.
+>
+> ```
+> uv run python src/encre/le_recalage_des_etiquettes.py --json docs/mesures/le_recalage_des_etiquettes.json
+> uv run python src/encre/le_recalage_des_etiquettes.py --prix --regime prix       --json docs/mesures/le_regime_du_prix_score.json
+> uv run python src/encre/le_recalage_des_etiquettes.py --prix --regime production --json docs/mesures/le_regime_production_score.json
+> uv run python src/encre/le_recalage_des_etiquettes.py --residu --json docs/mesures/le_regime_du_prix_score.json
+> ```
+
+Affine **diagonale** estimée par les deux boîtes occupées — une échelle par axe et une
+translation, ce qu'un écart de rapport d'aspect décrit exactement. Extrémités aux **percentiles
+1 et 99** : un seul pixel isolé fixerait la boîte et décalerait toute la carte.
+
+⭐⭐⭐ **Et le recalage n'est pas jugé par lui-même.** La carte d'encre **publiée par la
+communauté** — celle dont le papier de référence montre qu'elle marche — est scorée contre les
+étiquettes recalées : **AUC 0,756**, témoin par mélange **0,500**, sur **256 266 pixels d'encre
+contre 3,66 millions**. Le Dice passe de 0,973 à **0,975** à 1024 de côté.
+
+### ⚠⚠⚠ MAIS L'AFFINE GLOBALE NE SUFFIT PAS LOCALEMENT, et c'est mesuré
+
+Sur la fenêtre la plus encrée du fragment, la **même carte publiée** tombe à **0,418** —
+*sous le hasard*. Une AUC sous le hasard n'est pas un manque de signal : c'est du signal
+**anti-aligné**, et un texte est fait de traits quasi périodiques, donc un décalage d'une
+demi-largeur de trait suffit à mettre l'encre prédite dans les blancs.
+
+| décalage local appliqué aux étiquettes | AUC de la carte **publiée** |
+|---|---:|
+| aucun | **0,418** |
+| (−104, −120) cellules, soit **2,1 mm** | **0,711** |
+
+⚠ **Et le maximum est encore au bord du balayage**, donc **2,1 mm est un minorant**. Trois
+lettres et demie de résidu local.
+
+> **Conséquence, et elle annule les chiffres suivants plutôt que de les nuancer** : aucun nombre
+> mesuré **par fenêtre** à travers ce recalage n'est interprétable tant qu'il n'est pas local.
+> Les trois AUC obtenues sont enregistrées **comme non interprétables**, avec leur raison :
+>
+> | | fenêtre | AUC | pourquoi elle ne dit rien |
+> |---|---|---:|---|
+> | notre détecteur, régime du **prix** | top 5474, left 637 (27,8 % d'encre) | **0,254** | référence appariée **0,418** sur la même fenêtre — les deux échouent, et le résidu vaut 2,1 mm |
+> | notre détecteur, **production** | top 24320, left 4607 (**91,1 %** d'encre) | 0,529 | **344 pixels de fond** seulement : la fenêtre n'a presque pas de négatifs |
+> | carte publiée, toute l'empreinte | — | 0,756 | moyenne sur des régions aux décalages locaux **différents**, donc un minorant dilué |
+
+⚠⚠ **Une erreur de comparaison payée en chemin, et c'est celle qui a mis le résidu en évidence.**
+J'ai d'abord comparé notre 0,254 (une fenêtre) au 0,756 de la carte publiée (**toute
+l'empreinte**). Sur la même fenêtre, la publiée fait **0,418** : l'écart que j'allais publier
+était celui de deux **régions**, pas de deux **régimes**. Toute AUC est désormais rendue
+**appariée** — notre carte et la carte publiée, sur les mêmes pixels, contre les mêmes
+étiquettes.
+
+⚠ Et une seconde, dans le balayage lui-même : ma première recherche portait sur **±12 cellules**
+(±212 µm, un tiers de lettre) et son maximum tombait **au bord** — ce qui ne dit rien d'autre que
+« la recherche était trop courte ». La portée vient maintenant d'une mesure : les 3,2 % d'écart
+d'aspect impliquent jusqu'à **~90 cellules** de dérive. `maximum_au_bord` est **asserté**, pas
+noté.
+
+### Ce qui reste de C1, et c'est maintenant précis
+
+1. ⚠⚠⚠ **Un recalage LOCAL** — champ de déformation ou grille de contrôle, pas une affine. Le
+   résidu mesuré est de 2,1 mm au moins, soit trois lettres et demie. **Tout le reste en dépend.**
+2. **Une fenêtre choisie dans un repère COMMUN**, pas dans la grille de chaque régime : les deux
+   campagnes ont atterri sur deux régions différentes (27,8 % et 91,1 % d'encre), donc leurs
+   nombres ne se comparaient pas même sans le problème de recalage.
+3. **≥ 40 tuiles** pour un intervalle (`64` §1, σ = 0,2243), au lieu d'une fenêtre.
+4. ⚠ **L'unité de notation reste à choisir séparément de la fenêtre du modèle** : 256 px valent
+   **2 397 µm** au régime du prix contre 614 en production — près de quatre lettres au lieu d'une.
+   La tuile équivalente à une lettre y ferait **66 px**.
 - **≥ 40 tuiles** au lieu d'une fenêtre : l'intervalle de `64` §1 (σ = 0,2243) demande 40 tuiles
   pour séparer une AUC de 0,599 de 0,5. Une fenêtre unique ne donne pas d'intervalle.
 - ⚠ **Et l'unité de notation reste à choisir séparément de la fenêtre du modèle** : une tuile de

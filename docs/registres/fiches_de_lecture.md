@@ -4841,3 +4841,24 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
 - **preuve de lecture intégrale** :
   - ligne 104 (après 68 % du fichier) : `jugement **indépendant** du nôtre, ce qu'il fallait pour tester une robustesse.`
   - ligne 153 (dernière ligne non vide) : `axes restent équivalents pour la mesure **appariée** du §1, qui ne lit jamais un rayon absolu.`
+
+### docs/71_les_trois_resultats_de_tete_audites.md
+- **lignes** : 108
+- **nature** : AUDIT
+- **résumé** : `70` §5 nommait la seule tâche à faire avant tout envoi — trois des quatre résultats de tête de l'article n'avaient jamais été audités pour antériorité, et aucune des 14 clés de `66` ne les couvrait. Trois agents adversariaux, un par résultat, cadrés pour **réfuter** ; rapports intégraux dans `registres/anteriorite_resultats_de_tete.md`. **Les trois rendent partiellement** : aucun n'est un doublon, aucun n'est intact. Le document corrige l'article section par section et finit sur ce qui reste ouvert.
+- **conclusions extractibles** :
+  - §5.1 « le traceur est un tirage » : le mécanisme est **dans le code publié, littéralement** (`vc_grow_seg_from_seed.cpp:357 srand(clock())`, `GrowPatch.cpp:99-108 std::mt19937(std::random_device{}())`) et l'article ne le nommait pas. ⚠ Sa phrase « draws from an **unseeded** generator » était attaquable : `VC_GROWPATCH_RNG_SEED` existe, donc le comportement est connu de ses auteurs — corrigé en « unseeded *by default* ».
+  - ⭐⭐ Et l'audit a trouvé un argument à **récupérer** : la doc officielle publie que le vérificateur est déterministe (*« Two runs on the same surface produce identical reports regardless of thread count »*), et `windcheck` le remesure sur neuf configurations. Donc **une bascule de verdict ne peut pas venir de l'instrument** — c'est une garantie de l'amont qui renforce l'observable.
+  - Ce qui reste sans équivalent en §5.1 : la mesure (78 exécutions, 0/13 rendant deux fois la même aire, 5/13 basculant, **5/78 = 6,4 %**) ; la **bascule de verdict** comme observable ; et le fait que l'aire ne signale pas le mauvais tirage.
+  - ⚠⚠ §5.2 : la moitié « propreté » est **déjà publiée, quantifiée, sur 278 traces**, presque mot pour mot (`windcheck/docs/FULL-CORPUS.md` : *« a small trace is clean substantially because it is small […] the 86% figure […] is not a property of those samples »*). Corrigé en **confirmation intra-instance** d'une loi publiée ; ce que le dessin ajoute est le **sens de l'inférence** — leur loi est transversale sur des tailles réalisées, la nôtre change le budget sur le même rouleau.
+  - ⭐ La moitié « stabilité » ne trouve **rien**, pour une raison structurelle : **personne ne tire le traceur plusieurs fois à configuration identique pour en mesurer l'étalement.** C'est le cœur défendable de la section.
+  - §5.7 : **trois composants sur quatre sont antérieurs** — le tutoriel officiel porte la prémisse (*« you end up with a big pile of small pieces […] gluing the pieces together directly is hard »*) et `QuadSurface::overlap()` porte le discriminant (boîte englobante puis **distance point-à-surface de deux voxels**). Ce qui survit est le **recensement** : les antérieurs mesurent 6 paires, 150 paires échantillonnées, 9 fenêtres — personne n'a fait **les 105 paires d'un rouleau**, et `PHerc1447` n'apparaît pas dans le papier de référence.
+  - La formulation « **une pièce par feuille** » est absente du corpus, qui dit « sparse », « scattered », « pieces with gaps » — la nôtre est plus forte et plus falsifiable.
+  - **Verdict global, à ajouter aux 14 de `66`** : 17 résultats audités, **6 déjà connus, 11 partiellement**, aucun intact et aucun sans valeur. Le motif tient : *le domaine publie les mécanismes et les questions ; ce qui résiste est la mesure, sa répétition, et son incertitude.*
+- **rétractations / corrections internes** :
+  - §4 : la **contre-position du rapport « pavage »** — la doc de `volume-cartographer` affirmerait qu'aucun seuil de distance fixe ne sépare les feuilles, ce qui viserait notre seuil de 40 µm. ⚠ **La citation n'a pas été retrouvée à la source**, donc elle n'est pas reprise dans l'article : *une antériorité qu'on ne peut pas citer ne se cite pas.*
+  - §4 : le **contrôle P1 bis** (×15,9 exigé contre ×3,8 observé) était laissé « à faire tourner sur nos propres grilles ». ✅ **Fait le 2026-09-05** (`src/tracecheck/modele_de_proprete.py`, `75` §D2) : la densité vaut **2 812 à 2 857 cellules par cm²** sur 24 tirages, donc cellules ∝ aire, et l'hypothèse tient.
+  - ⚠ Le document note que les citations portant une correction de l'article ont été **revérifiées à la source ligne par ligne** — « la discipline qui a payé cinq fois cette session ».
+- **preuve de lecture intégrale** :
+  - ligne 75 (après 69 % du fichier) : `> physically overlap or touch** »*.`
+  - ligne 108 (dernière ligne non vide) : `résiste est la mesure, sa répétition, et son incertitude.**`

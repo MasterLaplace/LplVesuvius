@@ -1,0 +1,26 @@
+{
+  "segment": "20250628074500-500P2_front",
+  "regime": "production",
+  "zarr": "PHerc0500P2/segments/20250628074500-500P2_front/surface-volumes/2.215um-0.4m-111keV-volume-20250526151718.zarr",
+  "fenetre": {
+    "top": 24320,
+    "left": 4607,
+    "pixels_encre_ds8": 3730,
+    "pas_ds8": 64,
+    "part_encre": 0.91064453125
+  },
+  "debut": 41,
+  "couches": 118,
+  "taille": 512,
+  "voxel_um": 2.215,
+  "fenetre_um": 57.589999999999996,
+  "encre": {
+    "minimum": -1.71,
+    "mediane": 0.13,
+    "maximum": 2.037
+  },
+  "pixels_encre": 3625,
+  "pixels_fond": 344,
+  "auc_prix": 0.5294378508420209,
+  "auc_temoin_melange": 0.5044723336006416
+}

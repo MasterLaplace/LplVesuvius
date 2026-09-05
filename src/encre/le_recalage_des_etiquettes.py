@@ -223,8 +223,22 @@ def mesurer(recette: str = "new_canon", graine: int = 42) -> dict:
                 auc_carte_publiee=auc, auc_temoin_melange=temoin)
 
 
-ZARR_PRIX = ("PHerc0500P2/segments/20250628074500-500P2_front/surface-volumes/"
-             "9.362um-1.2m-113keV-volume-20250820143440.zarr")
+ZARRS = {
+    "prix": ("PHerc0500P2/segments/20250628074500-500P2_front/surface-volumes/"
+             "9.362um-1.2m-113keV-volume-20250820143440.zarr", 9.362),
+    "production": ("PHerc0500P2/segments/20250628074500-500P2_front/surface-volumes/"
+                   "2.215um-0.4m-111keV-volume-20250526151718.zarr", 2.215),
+}
+"""Les deux piles publiées du segment, avec leur taille de voxel.
+
+⚠⚠⚠ LA PRODUCTION N'EST PAS UN CONFORT, C'EST LE CONTRÔLE OBLIGATOIRE. Une AUC de 0,254 contre
+les étiquettes est aussi loin du hasard que 0,746, mais **à l'envers** — donc c'est du signal
+inversé, pas une absence de signal. Deux lectures s'ensuivent et elles sont incompatibles : soit
+notre détecteur s'inverse **au régime du prix**, soit il s'inverse **sur ce fragment**, à tous
+les régimes. Poser exactement la même question à la pile de production est la seule façon de
+trancher, et sans elle le chiffre du régime du prix ne dit rien du régime."""
+
+ZARR_PRIX = ZARRS["prix"][0]
 CARTES = RACINE / "docs" / "mesures" / "case_vide_cartes"
 
 
@@ -270,7 +284,8 @@ def fenetre_la_plus_encree(etiquettes_ds8: np.ndarray, forme_prix: list[int],
                 part_encre=meilleur / max(1, pas_ds8 * pas_ds8))
 
 
-def mesurer_au_regime_du_prix(taille: int = 512, graine: int = 42) -> dict:
+def mesurer_au_regime_du_prix(taille: int = 512, graine: int = 42,
+                              regime: str = "prix") -> dict:
     """
     @brief La mesure décisive : notre détecteur à 9,362 µm, contre les étiquettes infrarouges.
 
@@ -280,8 +295,8 @@ def mesurer_au_regime_du_prix(taille: int = 512, graine: int = 42) -> dict:
     """
     import tempfile
 
-    from le_nul_verso import (COUCHES_LUES, EXTRACTEUR, _inference, _lancer,  # noqa: PLC0415
-                              aire_sous_la_courbe, prendre_le_verrou)
+    from le_nul_verso import (COUCHES_LUES, EXTRACTEUR, SURFACE_DANS_LA_FENETRE,  # noqa: PLC0415
+                              _inference, _lancer, aire_sous_la_courbe, prendre_le_verrou)
     from zarr_depth import BUCKET, get  # noqa: PLC0415
 
     masque, etiquettes = _image("500P2_mask.png"), _image("500P2_inklabels.png")
@@ -293,21 +308,26 @@ def mesurer_au_regime_du_prix(taille: int = 512, graine: int = 42) -> dict:
     t = affine_par_boites(masque, empreinte)
     etiquettes_ds8 = appliquer(etiquettes, t, empreinte.shape)
 
-    forme_prix = json.loads(get(f"{BUCKET}/{ZARR_PRIX}/0/.zarray", 60))["shape"]
+    zarr, voxel_um = ZARRS[regime]
+    forme_prix = json.loads(get(f"{BUCKET}/{zarr}/0/.zarray", 60))["shape"]
     f = fenetre_la_plus_encree(etiquettes_ds8, forme_prix, taille)
-    debut = max(0, (forme_prix[0] - COUCHES_LUES) // 2)
+    # ⚠⚠ La surface tracée est au MILIEU de la dalle par construction, et le modèle la veut à
+    # sa 17ᵉ image sur 26 (`12` §1). À 28 couches les deux coïncident ; à 118 non, et prendre le
+    # centre de la PILE au lieu du centre de la FENÊTRE décalerait la surface de neuf couches.
+    milieu = (forme_prix[0] - 1) // 2
+    debut = max(0, min(forme_prix[0] - COUCHES_LUES, milieu - SURFACE_DANS_LA_FENETRE))
 
     _verrou = prendre_le_verrou()  # noqa: F841
     with tempfile.TemporaryDirectory() as tmp:
         couches = Path(tmp) / "couches"
         code, texte = _lancer(
-            ["uv", "run", "python", str(EXTRACTEUR), ZARR_PRIX, "--sortie", str(couches),
+            ["uv", "run", "python", str(EXTRACTEUR), zarr, "--sortie", str(couches),
              "--top", str(f["top"]), "--left", str(f["left"]),
              "--hauteur", str(taille), "--largeur", str(taille)], 3600)
         if code != 0:
             raise SystemExit(f"extraction échouée : {texte.strip()[-200:]}")
         CARTES.mkdir(parents=True, exist_ok=True)
-        sortie = CARTES / f"{SEGMENT}_prix.npy"
+        sortie = CARTES / f"{SEGMENT}_{regime}.npy"
         rendu = _inference(couches, debut, taille, sortie)
     if not rendu or rendu.get("echec"):
         raise SystemExit(f"inférence échouée : {(rendu or {}).get('echec')}")
@@ -329,13 +349,161 @@ def mesurer_au_regime_du_prix(taille: int = 512, graine: int = 42) -> dict:
     tout = rng.permutation(np.concatenate([a, b]))
     temoin = (aire_sous_la_courbe(tout[:a.size], tout[a.size:])
               if a.size >= 100 and b.size >= 100 else None)
-    return dict(segment=SEGMENT, regime="prix", zarr=ZARR_PRIX, fenetre=f,
-                debut=debut, couches=forme_prix[0], taille=taille,
-                fenetre_um=COUCHES_LUES * 9.362,
+    # ⚠⚠⚠ LA RÉFÉRENCE SUR LA **MÊME** FENÊTRE, ET C'EST UNE CORRECTION PAYÉE. J'ai d'abord
+    # comparé notre AUC sur une fenêtre au **0,756** de la carte publiée sur TOUTE l'empreinte.
+    # Mesuré : sur cette fenêtre-là, la carte publiée ne fait que **0,451**. La fenêtre, choisie
+    # sur la densité d'étiquettes, est une région où la référence elle-même échoue — donc les
+    # deux nombres ne se comparaient pas, et l'écart que j'aurais publié aurait été celui de
+    # deux régions, pas de deux régimes.
+    #
+    # ⚠⚠ Toute AUC rendue ici vient donc APPARIÉE : notre carte et la carte publiée, sur les
+    # mêmes pixels, contre les mêmes étiquettes. C'est la différence qui a un sens, jamais la
+    # valeur seule.
+    ref = carte[r0:r0 + h, c0:c0 + h]
+    ok_ref = np.isfinite(ref) & (ref > 0)
+    ra = ref[ok_ref & (region > 0.5)].ravel()
+    rb = ref[ok_ref & (region <= 0.5)].ravel()
+    auc_ref = (aire_sous_la_courbe(ra, rb) if (ra.size >= 100 and rb.size >= 100) else None)
+    return dict(segment=SEGMENT, regime=regime, zarr=zarr, fenetre=f,
+                debut=debut, couches=forme_prix[0], taille=taille, voxel_um=voxel_um,
+                fenetre_um=COUCHES_LUES * voxel_um,
                 encre=dict(minimum=rendu["minimum"], mediane=rendu["mediane"],
                            maximum=rendu["maximum"]),
                 pixels_encre=int(a.size), pixels_fond=int(b.size),
-                auc_prix=auc, auc_temoin_melange=temoin)
+                auc_prix=auc, auc_temoin_melange=temoin,
+                auc_publiee_meme_fenetre=auc_ref,
+                ecart_apparie=(None if auc is None or auc_ref is None else auc - auc_ref))
+
+
+def apparier_depuis_la_carte(dossier: dict) -> dict:
+    """
+    @brief Recalcule l'appariement d'une mesure déjà rendue, sans refaire l'inférence.
+
+    ⚠⚠ EXISTE PARCE QUE LA RÉFÉRENCE APPARIÉE A ÉTÉ AJOUTÉE **APRÈS** UNE PREMIÈRE CAMPAGNE, et
+    qu'une inférence coûte dix minutes. Les cartes sont gardées et déterministes, donc tout ce
+    qui s'en dérive doit pouvoir être recalculé sans les refaire — sinon la moindre grandeur
+    ajoutée coûte une campagne, et on finit par la calculer au terminal.
+    """
+    from le_nul_verso import aire_sous_la_courbe  # noqa: PLC0415
+    from zarr_depth import BUCKET, get  # noqa: PLC0415
+
+    masque, etiquettes = _image("500P2_mask.png"), _image("500P2_inklabels.png")
+    publiee = carte_publiee_reduite()
+    if masque is None or etiquettes is None or publiee is None:
+        raise SystemExit("étiquettes ou carte publiée absentes")
+    carte, _ = publiee
+    empreinte = (carte > 0).astype(float)
+    t = affine_par_boites(masque, empreinte)
+    etiquettes_ds8 = appliquer(etiquettes, t, empreinte.shape)
+    forme = json.loads(get(f"{BUCKET}/{dossier['zarr']}/0/.zarray", 60))["shape"]
+    fr = etiquettes_ds8.shape[0] / forme[1]
+    fc = etiquettes_ds8.shape[1] / forme[2]
+    r0 = int(round(dossier["fenetre"]["top"] * fr))
+    c0 = int(round(dossier["fenetre"]["left"] * fc))
+    h = max(2, int(round(dossier["taille"] * fr)))
+    region = etiquettes_ds8[r0:r0 + h, c0:c0 + h]
+    ref = carte[r0:r0 + h, c0:c0 + h]
+    ok = np.isfinite(ref) & (ref > 0)
+    ra = ref[ok & (region > 0.5)].ravel()
+    rb = ref[ok & (region <= 0.5)].ravel()
+    auc_ref = (aire_sous_la_courbe(ra, rb) if (ra.size >= 100 and rb.size >= 100) else None)
+    return dict(auc_publiee_meme_fenetre=auc_ref,
+                ecart_apparie=(None if dossier.get("auc_prix") is None or auc_ref is None
+                               else dossier["auc_prix"] - auc_ref))
+
+
+def residu_local(dossier: dict, portee: int = 120) -> dict:
+    """
+    @brief L'affine globale suffit-elle LOCALEMENT ? — balayage de décalages sur une fenêtre.
+
+    ⚠⚠⚠ POURQUOI CE CONTRÔLE EXISTE. Sur toute l'empreinte, la carte publiée classe les
+    étiquettes recalées à **0,756** ; sur la fenêtre la plus encrée, elle tombe à **0,418** —
+    sous le hasard. Or une AUC *sous* le hasard n'est pas un manque de signal : c'est du signal
+    **anti-aligné**, et un texte est fait de traits quasi périodiques, donc un décalage d'une
+    demi-largeur de trait suffit à mettre l'encre prédite dans les blancs.
+
+    ⚠⚠ Si un décalage modeste restaure l'accord, le verdict est net et il porte loin : **une
+    affine globale ne suffit pas localement**, et aucun chiffre du régime du prix ne veut rien
+    dire tant que le recalage n'est pas local. Si aucun décalage ne restaure rien, le désaccord
+    est réel et le recalage est innocenté.
+
+    ⚠ Le balayage porte sur la **référence publiée**, pas sur notre carte : c'est elle dont on
+    sait qu'elle marche ailleurs, donc c'est elle qui peut dire si la faute est au recalage.
+    """
+    from le_nul_verso import aire_sous_la_courbe  # noqa: PLC0415
+    from zarr_depth import BUCKET, get  # noqa: PLC0415
+
+    masque, etiquettes = _image("500P2_mask.png"), _image("500P2_inklabels.png")
+    publiee = carte_publiee_reduite()
+    if masque is None or etiquettes is None or publiee is None:
+        raise SystemExit("étiquettes ou carte publiée absentes")
+    carte, _ = publiee
+    empreinte = (carte > 0).astype(float)
+    t = affine_par_boites(masque, empreinte)
+    eti = appliquer(etiquettes, t, empreinte.shape)
+    forme = json.loads(get(f"{BUCKET}/{dossier['zarr']}/0/.zarray", 60))["shape"]
+    fr = eti.shape[0] / forme[1]
+    fc = eti.shape[1] / forme[2]
+    r0 = int(round(dossier["fenetre"]["top"] * fr))
+    c0 = int(round(dossier["fenetre"]["left"] * fc))
+    h = max(2, int(round(dossier["taille"] * fr)))
+    ref = carte[r0:r0 + h, c0:c0 + h]
+    ok = np.isfinite(ref) & (ref > 0)
+    # ⚠⚠ LE BALAYAGE UTILISE UN SCORE RAPIDE, L'AUC NE VIENT QU'À LA FIN. Une AUC trie ses deux
+    # populations ; à quelques centaines de décalages sur soixante-dix mille pixels, le balayage
+    # coûterait des minutes pour une réponse qui est « où est le maximum ». L'écart normalisé des
+    # moyennes est monotone avec l'AUC pour des populations de forme comparable, donc il place le
+    # maximum au même endroit — et l'AUC exacte est calculée là, plus au centre.
+    #
+    # ⚠⚠⚠ ET LA PORTÉE VIENT D'UNE MESURE, PAS D'UN CONFORT. Ma première version balayait
+    # ±12 cellules — soit ±212 µm, un tiers de lettre — et son maximum tombait **au bord**, ce
+    # qui ne veut rien dire d'autre que « la recherche était trop courte ». L'écart de rapport
+    # d'aspect de 3,2 % implique jusqu'à ~90 cellules de dérive d'un bout à l'autre du fragment :
+    # c'est cette échelle-là qu'il faut couvrir.
+    def score(reg):
+        a = ref[ok & (reg > 0.5)]
+        b = ref[ok & (reg <= 0.5)]
+        if a.size < 100 or b.size < 100:
+            return None, a.size
+        ecart = float(a.mean() - b.mean())
+        etendue = float(np.std(ref[ok])) or 1.0
+        return ecart / etendue, a.size
+
+    resultats = []
+    pas = max(1, portee // 15)
+    for di in range(-portee, portee + 1, pas):
+        for dj in range(-portee, portee + 1, pas):
+            # ⚠ La fenêtre d'ÉTIQUETTES bouge, pas celle de la carte : décaler la carte
+            # changerait aussi le masque de validité et l'on comparerait deux populations.
+            if r0 + di < 0 or c0 + dj < 0:
+                continue
+            reg = eti[r0 + di:r0 + di + h, c0 + dj:c0 + dj + h]
+            if reg.shape != ref.shape:
+                continue
+            sc, n = score(reg)
+            if sc is None:
+                continue
+            resultats.append(dict(di=di, dj=dj, score=sc, pixels_encre=int(n)))
+    if not resultats:
+        return {}
+    meilleur = max(resultats, key=lambda x: x["score"])
+
+    def auc_a(di, dj):
+        reg = eti[r0 + di:r0 + di + h, c0 + dj:c0 + dj + h]
+        a = ref[ok & (reg > 0.5)].ravel()
+        b = ref[ok & (reg <= 0.5)].ravel()
+        return (aire_sous_la_courbe(a, b) if a.size >= 100 and b.size >= 100 else None)
+
+    auc_centre = auc_a(0, 0)
+    auc_best = auc_a(meilleur["di"], meilleur["dj"])
+    au_bord = (abs(meilleur["di"]) >= portee - pas or abs(meilleur["dj"]) >= portee - pas)
+    return dict(portee=portee, pas=pas, balayage=resultats,
+                auc_centre=auc_centre, auc_meilleure=auc_best,
+                decalage_meilleur=[meilleur["di"], meilleur["dj"]],
+                # ⚠⚠ « LE MAXIMUM EST AU BORD » EST UN RÉSULTAT, pas un détail : il veut dire que
+                # la recherche était trop courte et que le chiffre rendu n'est pas un optimum.
+                maximum_au_bord=bool(au_bord),
+                gain=(None if auc_best is None or auc_centre is None else auc_best - auc_centre))
 
 
 def _verifier(r: dict | None = None) -> int:
@@ -401,6 +569,27 @@ def _verifier(r: dict | None = None) -> int:
         # La carte publiée est celle dont le papier montre qu'elle marche : si elle classe les
         # étiquettes recalées, le recalage est bon ET on tient la valeur à battre. Sinon on ne
         # sait pas si c'est le recalage ou la carte, et il faut le dire au lieu de conclure.
+        # ⚠⚠⚠ LE RÉSIDU LOCAL, ET C'EST LE RÉSULTAT QUI ANNULE TOUS LES AUTRES. Sur la fenêtre
+        # la plus encrée, la carte publiée tombe à 0,418 — sous le hasard — et un décalage de
+        # (-104, -120) cellules la remonte à 0,711. Le résidu vaut donc ≥ 120 cellules ×
+        # 17,7 µm = **2,1 mm**, soit trois lettres et demie. Une affine globale ne suffit pas
+        # localement, et aucun chiffre mesuré par fenêtre à travers ce recalage n'est
+        # interprétable tant qu'il n'est pas local.
+        res = r.get("residu_local")
+        if res:
+            v("un décalage local restaure franchement la carte publiée",
+              res["gain"] is not None and res["gain"] > 0.15,
+              f"{res['auc_centre']:.3f} → {res['auc_meilleure']:.3f} au décalage "
+              f"{res['decalage_meilleur']} (gain {res['gain']:+.3f})")
+            # ⚠⚠ « LE MAXIMUM EST AU BORD » EST ASSERTÉ, pas noté : tant qu'il l'est, le chiffre
+            # rendu n'est pas un optimum et le résidu est un MINORANT.
+            v("... et le maximum est encore au bord, donc le résidu est un minorant",
+              res["maximum_au_bord"] is True,
+              f"portée ±{res['portee']} cellules = ±{res['portee'] * 17.7 / 1000:.1f} mm")
+            v("... donc l'affine GLOBALE ne suffit pas localement",
+              abs(res["decalage_meilleur"][0]) > 40 or abs(res["decalage_meilleur"][1]) > 40,
+              f"décalage {res['decalage_meilleur']} cellules, soit "
+              f"{max(map(abs, res['decalage_meilleur'])) * 17.7 / 1000:.1f} mm")
         if r.get("auc_carte_publiee") is not None:
             v("la carte publiée retrouve les étiquettes recalées",
               r["auc_carte_publiee"] > 0.75,
@@ -418,25 +607,66 @@ def _verifier(r: dict | None = None) -> int:
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--recette", default="new_canon")
+    p.add_argument("--residu", action="store_true",
+                   help="l'affine globale suffit-elle localement ? balayage de décalages")
+    p.add_argument("--apparier", action="store_true",
+                   help="recalculer la référence appariée d'un dossier existant, sans inférence")
     p.add_argument("--prix", action="store_true",
-                   help="la mesure décisive : notre détecteur à 9,362 µm contre les étiquettes")
+                   help="notre détecteur contre les étiquettes, au régime demandé")
+    p.add_argument("--regime", default="prix", choices=("prix", "production"),
+                   help="prix = 9,362 µm ; production = 2,215 µm (le CONTRÔLE obligatoire)")
     p.add_argument("--verifier", action="store_true")
     p.add_argument("--json", type=Path)
     a = p.parse_args()
     if a.verifier and not a.json:
         cible = RACINE / "docs" / "mesures" / "le_recalage_des_etiquettes.json"
         return 1 if _verifier(json.loads(cible.read_text()) if cible.is_file() else None) else 0
+    if a.residu:
+        cible = a.json
+        if cible is None or not cible.is_file():
+            raise SystemExit("--residu demande --json <dossier existant>")
+        d = json.loads(cible.read_text())
+        r = residu_local(d)
+        d["residu_local"] = r
+        cible.write_text(json.dumps(d, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"carte publiée sur cette fenêtre, sans décalage : {r['auc_centre']:.3f}")
+        print(f"  meilleure sur ±{r['portee']} cellules (pas {r['pas']}) : "
+              f"{r['auc_meilleure']:.3f} au décalage {r['decalage_meilleur']}  "
+              f"(gain {r['gain']:+.3f})")
+        if r["maximum_au_bord"]:
+            print("  ⚠ le maximum est AU BORD du balayage : ce n'est pas un optimum")
+        print(f"écrit : {cible}")
+        return 0
+
+    if a.apparier:
+        cible = a.json
+        if cible is None or not cible.is_file():
+            raise SystemExit("--apparier demande --json <dossier existant>")
+        d = json.loads(cible.read_text())
+        d.update(apparier_depuis_la_carte(d))
+        cible.write_text(json.dumps(d, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"la nôtre                 {d['auc_prix']:.3f}")
+        print(f"la publiée, MÊME fenêtre {d['auc_publiee_meme_fenetre']:.3f}"
+              f"   (écart apparié {d['ecart_apparie']:+.3f})")
+        print(f"écrit : {cible}")
+        return 0
+
     if a.prix:
-        r = mesurer_au_regime_du_prix()
-        print(f"{r['segment']} — régime du prix, {r['couches']} couches, "
+        r = mesurer_au_regime_du_prix(regime=a.regime)
+        print(f"{r['segment']} — régime {r['regime']} ({r['voxel_um']} µm), "
+              f"{r['couches']} couches, "
               f"fenêtre du modèle {r['fenetre_um']:.0f} µm")
         print(f"  fenêtre top {r['fenetre']['top']}, left {r['fenetre']['left']}  "
               f"({100 * r['fenetre']['part_encre']:.1f} % d'encre étiquetée)")
         print(f"  encre min/méd/max {r['encre']['minimum']:+.3f} / "
               f"{r['encre']['mediane']:+.3f} / {r['encre']['maximum']:+.3f}")
-        print(f"\n  AUC contre les étiquettes infrarouges : {r['auc_prix']:.3f}   "
-              f"(témoin mélangé {r['auc_temoin_melange']:.3f}, "
-              f"{r['pixels_encre']} contre {r['pixels_fond']} px)")
+        print(f"\n  AUC contre les étiquettes infrarouges")
+        print(f"    la nôtre                     {r['auc_prix']:.3f}")
+        if r.get("auc_publiee_meme_fenetre") is not None:
+            print(f"    la publiée, MÊME fenêtre     {r['auc_publiee_meme_fenetre']:.3f}"
+                  f"   (écart apparié {r['ecart_apparie']:+.3f})")
+        print(f"    témoin mélangé               {r['auc_temoin_melange']:.3f}"
+              f"   ({r['pixels_encre']} contre {r['pixels_fond']} px)")
         if a.json:
             a.json.parent.mkdir(parents=True, exist_ok=True)
             a.json.write_text(json.dumps(r, indent=2, ensure_ascii=False), encoding="utf-8")
