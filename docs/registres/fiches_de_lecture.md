@@ -1780,7 +1780,7 @@ caractère, couverture vérifiée par `wc -l` avant lecture.
 ---
 
 ### docs/26_le_champ_de_direction.md
-- **lignes** : 710 ⚠ (701 quand la fiche a été écrite ; la mesure du tableau « sans filtre » a été **perdue puis restaurée** le 2026-09-04)
+- **lignes** : 720 ⚠ (701 quand la fiche a été écrite ; la mesure du tableau « sans filtre » a été **perdue puis restaurée** le 2026-09-04)
 - **nature** : RESULTAT
   (série de mesures avec contrôle positif ; le §10 « Reproduire » et la seconde §9 « T1f »
   sont eux-mêmes des campagnes mesurées.)
@@ -1795,6 +1795,7 @@ caractère, couverture vérifiée par `wc -l` avant lecture.
   dont une partie n'est pas reproductible. Une conclusion du §3 est explicitement retirée le
   2026-08-20 après un audit de filtre.
 - **conclusions extractibles** :
+  - §9, **ajouté le 2026-09-05** : les deux commandes de `table_pas.py`, vérifiées — la colonne « bonne graine » sort du défaut de l'outil, la « mauvaise graine » de `data/trace/PHerc0358/pas_mauvaise_graine`, et les deux rendent le tableau publié y compris les étendues de 5,5 % et 12,0 %.
   - Contrat dérivé : `"direction_fields": [{"zarr": <base>, "dir": <sens>, "scale":
     <niveau>}]`, l'outil ouvrant `<base>/x/<niveau>`, `/y/`, `/z/` ; sens valides `normal`,
     `horizontal`, `vertical` ; clés facultatives `weight` et `weight_zarr` ; chemin local

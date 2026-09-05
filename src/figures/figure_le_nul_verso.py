@@ -108,13 +108,15 @@ def prose(m: dict) -> list[str]:
         lignes.append(
             f"AUC face contre vide : {auc:.3f} -- la chance de distinguer un pixel de face "
             f"d'un pixel de vide sur sa seule valeur (0,5 = pile ou face).")
+    cf, cn = m["contraste_face"], m["contraste_nul"]
+    rapport = max(cf, cn) / max(1e-9, min(cf, cn))
+    sens = "moins" if cn < cf else "PLUS"
     lignes += [
-        f"contraste local : {m['contraste_face']:.3f} sur la face, "
-        f"{m['contraste_nul']:.3f} dans le vide -- "
-        f"{m['contraste_face'] / max(1e-9, m['contraste_nul']):.0f}x moins.",
-        f"et pourtant la dispersion du detecteur ne tombe que de "
-        f"{100 * (1 - m['rapport_etendue']):.0f} % ({m['etendue_face']:.2f} -> {m['etendue_nul']:.2f}).",
-        f"le NIVEAU, lui, se deplace : mediane {f['mediane']:+.2f} contre {n['mediane']:+.2f}.",
+        f"contraste local : {cf:.3f} sur la face, {cn:.3f} dans le vide -- "
+        f"{rapport:.1f}x {sens} dans le vide.",
+        f"dispersion : {m['etendue_face']:.2f} sur la face, {m['etendue_nul']:.2f} dans le "
+        f"vide (rapport {m['rapport_etendue']:.2f}).",
+        f"niveau : mediane {f['mediane']:+.2f} sur la face, {n['mediane']:+.2f} dans le vide.",
     ]
     return lignes
 
@@ -184,6 +186,71 @@ def dessiner(m: dict, sortie: Path) -> dict:
     return {"plage": [lo, hi], "rapport_etendue": m["rapport_etendue"], "sortie": str(sortie)}
 
 
+def panorama(mesures: list[dict], sortie: Path) -> dict:
+    """
+    @brief Les trois segments l'un sous l'autre — la seule vue qui dise si c'est une propriété.
+
+    ⚠⚠⚠ POURQUOI UNE SECONDE MISE EN PAGE ET PAS UN SECOND FICHIER. Un segment ne peut pas dire
+    si un résultat appartient au **détecteur** ou à **cette fenêtre-là** ; c'est toute la raison
+    pour laquelle `C2` en demande trois. Une figure par segment laisse cette comparaison à la
+    mémoire du lecteur. Les primitives sont partagées (`bornes_communes`, `en_gris`, `prose`) :
+    ce qui change est la disposition, pas ce qu'on montre.
+
+    ⚠⚠ L'ÉCHELLE EST COMMUNE PAR SEGMENT, pas sur les trois. Deux campagnes n'ont pas la même
+    plage de sortie, et une échelle globale écraserait le segment le plus terne vers le gris —
+    on comparerait alors des campagnes au lieu de comparer face et vide. Chaque ligne porte donc
+    sa plage, écrite.
+    """
+    from PIL import Image, ImageDraw
+
+    gros, moyen, petit = police(17, 13, 11)
+    cote, marge = 236, 36
+    entete, ligne_h = 78, cote + 52
+    L = 2 * cote + 18 + 2 * marge + 300
+    H = entete + ligne_h * len(mesures) + 24
+    toile = Image.new("RGB", (L, H), FOND)
+    d = ImageDraw.Draw(toile)
+    d.text((marge, 22), "une face et un vide, sur trois segments de PHerc0139",
+           fill=TEXTE, font=gros)
+    d.text((marge, 48), "meme pile, meme modele, meme pas ; seule la profondeur lue change",
+           fill=DISCRET, font=moyen)
+
+    lignes = []
+    for k, m in enumerate(mesures):
+        y = entete + k * ligne_h
+        a = np.load(CARTES / f"{m['segment']}_face.npy")
+        b = np.load(CARTES / f"{m['segment']}_nul.npy")
+        lo, hi = bornes_communes(a, b)
+        for i, carte in enumerate((a, b)):
+            x = marge + i * (cote + 18)
+            toile.paste(Image.fromarray(en_gris(carte, lo, hi)).resize((cote, cote),
+                                                                      Image.NEAREST), (x, y))
+            d.rectangle([x, y, x + cote, y + cote], outline=(70, 70, 70))
+            d.text((x + 4, y + 4), "face" if i == 0 else "vide",
+                   fill=AMBRE if i == 0 else GRIS, font=petit)
+        tx = marge + 2 * cote + 34
+        auc = m.get("auc_face_contre_nul")
+        d.text((tx, y + 2), m["segment"].split("_")[0], fill=TEXTE, font=moyen)
+        # ⚠⚠ L'AUC EST COLOREE PAR CE QU'ELLE DIT, pas par une preference : sous 0,5 le vide se
+        # lit MIEUX que la face, ce qui est le contraire de ce qu'un detecteur d'encre doit
+        # faire. Une couleur unique laisserait ce renversement passer pour un chiffre parmi
+        # d'autres.
+        if auc is not None:
+            d.text((tx, y + 24), f"AUC face contre vide  {auc:.3f}",
+                   fill=ROUGE if auc < 0.5 else TEXTE, font=moyen)
+        d.text((tx, y + 46), f"couches {m['debut_face']}..{m['debut_face'] + 26} "
+                             f"contre {m['debut_nul']}..{m['debut_nul'] + 26}",
+               fill=DISCRET, font=petit)
+        for j, texte in enumerate(prose(m)[1:]):
+            d.text((tx, y + 68 + j * 17), texte, fill=DISCRET, font=petit)
+        d.text((tx, y + 68 + 3 * 17), f"echelle {lo:+.2f} a {hi:+.2f}", fill=AMBRE, font=petit)
+        lignes.append(dict(segment=m["segment"], auc=auc, plage=[lo, hi]))
+
+    sortie.parent.mkdir(parents=True, exist_ok=True)
+    toile.save(sortie)
+    return {"segments": lignes, "sortie": str(sortie)}
+
+
 def verifier() -> int:
     """Auto-test HORS LIGNE : l'échelle commune, les absents, la prose."""
     echecs = controles = 0
@@ -229,9 +296,16 @@ def verifier() -> int:
     # ⚠⚠ L'AUC EN TETE : c'est la seule des trois grandeurs qui reponde a la question posee, et
     # une figure qui l'enterrerait en quatrieme ligne se lirait comme les deux precedentes.
     v("l'AUC ouvre la prose", lignes[0].startswith("AUC"), str(lignes[0]))
-    v("... et elle dit le rapport de contraste", any("14x moins" in l for l in lignes),
-      str(lignes))
-    v("... et elle nomme le NIVEAU", any("NIVEAU" in l for l in lignes), str(lignes))
+    v("... et elle dit le rapport de contraste, DANS LE BON SENS",
+      any("13.9x moins dans le vide" in l for l in lignes), str(lignes))
+    # ⚠⚠⚠ LA PHRASE DOIT SUIVRE LA MESURE. Elle disait « Nx moins » en dur ; depuis que les
+    # fenetres se choisissent sur l'intensite, le vide tombe souvent sur une INTERFACE et porte
+    # donc PLUS de contraste que la face -- la version en dur imprimait alors « 0x moins »,
+    # c'est-a-dire une phrase fausse dans le sens qui rassure.
+    inverse = dict(faux, contraste_face=0.187, contraste_nul=0.639)
+    v("... et elle dit PLUS quand le vide en a plus",
+      any("3.4x PLUS dans le vide" in l for l in prose(inverse)), str(prose(inverse)[1]))
+    v("... et elle nomme le niveau", any("niveau :" in l for l in lignes), str(lignes))
     # ⚠ Une mesure d'avant l'AUC ne doit pas faire tomber la figure : elle en perd la premiere
     # ligne, pas sa capacite a etre dessinee. Un outil qui refuse les anciens dossiers pousse a
     # les refaire, et refaire une mesure coute huit minutes d'inference.
@@ -257,10 +331,23 @@ def main() -> int:
                    / "le_nul_verso_20260325000000-w046.json")
     p.add_argument("--sortie", type=Path,
                    default=RACINE / "docs" / "images" / "75_le_nul_verso.png")
+    p.add_argument("--tous", action="store_true",
+                   help="les trois segments l'un sous l'autre, depuis docs/mesures/")
     p.add_argument("--verifier", action="store_true")
     a = p.parse_args()
     if a.verifier:
         return verifier()
+    if a.tous:
+        fichiers = sorted((RACINE / "docs" / "mesures").glob("le_nul_verso*.json"))
+        mesures = [json.loads(f.read_text()) for f in fichiers]
+        # ⚠ On ne dessine que ce qui a rendu DEUX cartes : un segment refusé par la garde porte
+        # son profil et sa raison, pas d'image, et l'inventer serait un panneau vide qui
+        # ressemble à une mesure.
+        mesures = [m for m in mesures if m.get("face") and not m["face"].get("echec")]
+        if not mesures:
+            raise SystemExit("aucune mesure complète dans docs/mesures/")
+        print(json.dumps(panorama(mesures, a.sortie), indent=2, ensure_ascii=False))
+        return 0
     if not a.mesure.is_file():
         raise SystemExit(f"mesure absente : {a.mesure}")
     print(json.dumps(dessiner(json.loads(a.mesure.read_text()), a.sortie),

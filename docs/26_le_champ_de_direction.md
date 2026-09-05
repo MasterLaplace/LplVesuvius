@@ -618,6 +618,16 @@ et dans `seed.json` :
 2026-08-19, nuit. Balayage {5, 10, 15, 20, 30, 40} sur PHerc0358, **deux graines** — celle
 de `25` (planéité) et celle de `24` — dépouillé par `src/tables/table_pas.py`.
 
+```
+uv run python src/tables/table_pas.py                                      # bonne graine
+uv run python src/tables/table_pas.py data/trace/PHerc0358/pas_mauvaise_graine
+```
+
+⚠ Vérifié le 2026-09-05 : les deux commandes rendent **exactement** les deux colonnes du tableau
+ci-dessous, y compris les étendues relatives de **5,5 %** et **12,0 %**. La première n'a pas
+d'argument parce que la bonne graine est le défaut de l'outil — ce qui est aussi pourquoi la
+seconde colonne était irreproductible sans lire le code.
+
 ⚠ **La comparaison n'est pas triviale, et c'est la moitié du travail.** Une surface croît
 par un **front**, donc son aire va comme (k × pas)² : à générations égales, un pas de 5
 couvre **seize fois moins** qu'un pas de 20. Comparer des comptes bruts ferait passer la
