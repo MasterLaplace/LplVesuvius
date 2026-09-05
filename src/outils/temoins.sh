@@ -1367,6 +1367,7 @@ run "figure case vide remplie" uv run python "$ROOT/src/figures/figure_case_vide
 run "deux aplatissements"     uv run python "$ROOT/src/encre/deux_aplatissements.py" --verifier
 run "recalage des etiquettes" uv run python "$ROOT/src/encre/le_recalage_des_etiquettes.py" --verifier
 run "le champ de fibres"      uv run python "$ROOT/src/nappe/le_champ_de_fibres.py" --verifier
+run "figure champ de fibres"  uv run python "$ROOT/src/figures/figure_le_champ_de_fibres.py" --verifier
 run "figure champ de recalage" uv run python "$ROOT/src/figures/figure_champ_de_recalage.py" --verifier
 # ⚠⚠ La premiere tache du chantier A : mesurer le doublonnage PAR HACHAGE. Le plan annoncait
 # « 17,4 Go de doublons » sur un proxy nom+taille dont il ecrivait lui-meme qu il surcompte --

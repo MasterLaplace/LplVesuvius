@@ -315,7 +315,9 @@ def periodicite_radiale(niveau: int, cz: int, cy: int, cx: int,
                 sortie.append(float(pr[z0:z1, iy, ix].mean()))
         return np.asarray(sortie, dtype=float)
 
-    def periode(v: np.ndarray) -> tuple[int, float]:
+    courbes: dict[str, list[float]] = {}
+
+    def periode(v: np.ndarray, etiquette: str = "") -> tuple[int, float]:
         """
         @brief Le premier maximum LOCAL de l'autocorrélation après son passage sous zéro.
 
@@ -335,6 +337,8 @@ def periodicite_radiale(niveau: int, cz: int, cy: int, cx: int,
         denom = float((w * w).sum()) or 1.0
         limite = min(v.size - 4, 4 * int(cellules_par_pas(niveau)) + 6)
         auto = [float((w[:-k] * w[k:]).sum()) / denom for k in range(1, limite)]
+        if etiquette:
+            courbes[etiquette] = [round(a, 4) for a in auto]
         premier_negatif = next((i for i, a in enumerate(auto) if a < 0.0), None)
         if premier_negatif is None:
             # ⚠ Jamais négative : il n'y a pas de retour dans la fenêtre, donc pas de période
@@ -348,8 +352,10 @@ def periodicite_radiale(niveau: int, cz: int, cy: int, cx: int,
 
     par_tranches = {}
     for tranches in (1, 8, n):
-        k_rad, s_rad = periode(profil(ur, tranches))
-        k_tan, s_tan = periode(profil(ut, tranches))
+        k_rad, s_rad = periode(profil(ur, tranches),
+                               f"radial_{tranches}" if tranches == 1 else "")
+        k_tan, s_tan = periode(profil(ut, tranches),
+                               f"tangentiel_{tranches}" if tranches == 1 else "")
         par_tranches[str(tranches)] = dict(
             periode_radiale_cellules=k_rad, autocorrelation_radiale=s_rad,
             periode_radiale_um=k_rad * resolution_um(niveau),
@@ -359,7 +365,7 @@ def periodicite_radiale(niveau: int, cz: int, cy: int, cx: int,
     un = par_tranches["1"]
     return dict(cz=cz, cy=cy, cx=cx, rayon_cellules=float(rayon),
                 axe=[ax, ay], part_pleine=float((pr > seuil).mean()),
-                par_tranches=par_tranches, **un,
+                par_tranches=par_tranches, courbes=courbes, **un,
                 echantillons=int(profil(ur, 1).size))
 
 

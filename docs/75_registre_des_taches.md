@@ -170,6 +170,17 @@ Un nombre d'enroulement **compte des feuilles**. Si le champ ne les sépare pas 
 peut pas les compter, quelle que soit la qualité de son orientation. Le long d'un rayon tiré depuis
 **l'axe publié** (391 points annotés, `78`), avec son **contrôle tangentiel** :
 
+![le champ publié compte-t-il des feuilles ?](images/75_le_champ_de_fibres.png)
+
+*Figure : `src/figures/figure_le_champ_de_fibres.py` (9 contrôles).*
+
+```
+uv run python src/figures/figure_le_champ_de_fibres.py --sortie docs/images/75_le_champ_de_fibres.png
+```
+
+*⚠ Le trait vert marque **un pas de feuille**. Chaque pic mesuré est loin à sa droite, et sur deux
+panneaux sur trois c'est la courbe **grise** — le contrôle — qui oscille le plus fort.*
+
 | fenêtre | rayon | période **radiale** | autocorr. radiale | autocorr. **tangentielle** |
 |---|---:|---:|---:|---:|
 | (71, 36, 14) | 936 cellules | **441 µm** | +0,245 | **−0,069** ✅ sépare |
