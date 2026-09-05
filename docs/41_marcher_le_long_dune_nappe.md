@@ -203,6 +203,14 @@ aussi le moins radial des essais mesurés (α = +0,65 contre +0,99 et +1,01).
 C'est ce que mesure `src/outils/leviers_de_perte.sh` (conception appariée : même graine, même
 volume, même nombre de générations, une seule clé change à la fois).
 
+```
+GENERATIONS=120 bash src/outils/leviers_de_perte.sh   # → docs/mesures/leviers_<levier>.json
+```
+
+⚠ La prédiction de surface n'est pas écrite en dur : le script la **liste** sur le bucket et
+prend celle qui est publiée. Un chemin figé ici vieillirait sans bruit le jour où le concours
+en republie une.
+
 ### ⚠⚠ Et une SECONDE correction, une heure plus tard : « il ne reste que la géométrie » est trop fort
 
 La doc officielle du traceur (`data/repos/villa/volume-cartographer/docs/tracing.md`) décrit le

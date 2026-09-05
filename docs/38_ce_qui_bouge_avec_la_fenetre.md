@@ -139,6 +139,13 @@ qu'il prétend.
 Deux essais du même rouleau, passés au test de convergence
 (`src/outils/convergence_des_essais.sh`, en fond) :
 
+```
+bash src/outils/convergence_des_essais.sh   # → docs/mesures/convergence_<essai>.json
+```
+
+⚠ Sans argument il reprend `essai_ng2` et `essai_scale1`, les deux du tableau ci-dessous ;
+les autres s'ajoutent en arguments après le dossier de travail.
+
 | essai | auto-intersections | 41 couches | 161 couches | **α** | verdict |
 |---|---:|---:|---:|---:|---|
 | `essai_scale1` | **0** | 187,2 µm | 730,2 µm | **+0,99** | suit la fenêtre — **en travers** |

@@ -167,6 +167,15 @@ piste, pas une lecture.** Le seul moyen d'augmenter n est de rendre plus de surf
 `PHerc1447` en publie **quatre**, une seule était rendue, et
 `src/campagnes/campagne_encre_1447.sh` rend les trois autres.
 
+```
+FILS=16 bash src/campagnes/campagne_encre_1447.sh   # → docs/mesures/typographie_de_nos_cartes.json
+```
+
+⚠⚠ `FILS` n'est pas un réglage de confort : mesuré le 2026-08-27, deux campagnes lancées
+ensemble sur une machine à 22 cœurs ont demandé 32 fils et brûlé 26 h et 19 h de CPU pour 2 h
+de temps réel chacune, l'essentiel parti en contention. Deux rendus lancés en même temps
+finissent **plus tard** que les mêmes lancés l'un après l'autre.
+
 ### ⭐⭐ Le critère, écrit AVANT que la campagne ne rende
 
 > Ce paragraphe est commité pendant que les trois rendus tournent, pour la raison que

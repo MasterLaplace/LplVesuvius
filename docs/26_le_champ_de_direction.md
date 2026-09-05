@@ -178,6 +178,13 @@ ligne à l'autre, et ce tableau les compare.
 **Le tableau, relu sur la totalité de chaque surface** (`docs/mesures/sans_filtre.json`,
 `src/outils/remesurer_sans_filtre.sh`) :
 
+```
+bash src/outils/remesurer_sans_filtre.sh   # → docs/mesures/sans_filtre.json
+```
+
+⚠ Sans argument il reprend les **onze** essais nommés dans le script lui-même ; un sous-ensemble
+s'écrit `bash src/outils/remesurer_sans_filtre.sh data/sans_filtre essai_ng2 essai_scale1`.
+
 > ⚠⚠⚠ **2026-09-04 — cette mesure a été perdue puis restaurée**, comme celle de
 > [`34`](34_un_verdict_qui_ne_mesure_rien.md) et par **le même commit de rangement**
 > (`a5901be`, 2026-08-26) : `"lignes": []` écrit par-dessus les quatre lignes du tableau
@@ -618,10 +625,26 @@ et dans `seed.json` :
 2026-08-19, nuit. Balayage {5, 10, 15, 20, 30, 40} sur PHerc0358, **deux graines** — celle
 de `25` (planéité) et celle de `24` — dépouillé par `src/tables/table_pas.py`.
 
+Le balayage lui-même, puis son dépouillement :
+
 ```
+bash src/campagnes/campagne_pas.sh                                         # bonne graine
+bash src/campagnes/campagne_pas.sh \
+    data/trace/PHerc0358/pas_mauvaise_graine "1544 1544 7768"              # celle de 24
+
 uv run python src/tables/table_pas.py                                      # bonne graine
 uv run python src/tables/table_pas.py data/trace/PHerc0358/pas_mauvaise_graine
 ```
+
+⚠ Les deux graines sont **lues dans les traces**, pas retapées : `seed location [5842, 5839,
+7386]` d'un côté, `[1544, 1544, 7768]` de l'autre. La première est le défaut du script, ce qui
+est aussi pourquoi la seconde était irreproductible sans lire le code.
+
+⚠⚠ La campagne est **reprenable, et seulement sur un succès** : un pas déjà mesuré est sauté
+uniquement si son résumé porte `statut: ok`. Le 2026-08-19 un `timeout` fixe a tué `pas_5` à la
+génération 406 sur 480 alors qu'il croissait bien — pas de maillage, donc `aire_cm2: 0` et
+`transverse: 0`, c'est-à-dire **exactement le résultat qu'on espère**, pour un run qui n'a rien
+produit. Et la garde de reprise l'aurait sauté pour toujours.
 
 ⚠ Vérifié le 2026-09-05 : les deux commandes rendent **exactement** les deux colonnes du tableau
 ci-dessous, y compris les étendues relatives de **5,5 %** et **12,0 %**. La première n'a pas

@@ -133,6 +133,15 @@ il faut **n ≈ 70**. Le corpus en offre **80**, et la campagne complète est la
 (`src/campagnes/campagne_fibres.sh`, en file derrière celle de la profondeur — les deux lisent
 le même bucket, se les disputer allongerait les deux).
 
+```
+bash src/campagnes/campagne_fibres.sh    # → docs/mesures/fibres_corpus.json
+```
+
+⚠ Aucun argument : la campagne DÉRIVE son corpus de
+`docs/mesures/volumes_surface_PHercParis4.txt` (les segments à 2,4 µm) et attend d'elle-même
+que la campagne de profondeur ait fini. Lui passer une liste à la main serait une seconde
+réponse à « quels segments », libre de diverger de celle que le dépôt recense.
+
 ⚠ Noter aussi : la **bascule en profondeur** ne corrèle avec rien (−0,189), ce qui est
 cohérent avec le §3 — elle ne mesure pas ce qu'elle prétendait.
 

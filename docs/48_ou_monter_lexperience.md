@@ -106,6 +106,14 @@ Le critère du dépôt, lui, tranche — on trace la meilleure graine de chacune
 paramètres identiques et on juge au test de convergence
 (`src/outils/tracer_prediction_paris4.sh`) :
 
+```
+GENERATIONS=60 FENETRES="41 161" bash src/outils/tracer_prediction_paris4.sh
+#   → docs/mesures/prediction_paris4_<cas>.json
+```
+
+⚠⚠ Les deux fenêtres sont ce qui FAIT le test : α se lit sur le rapport entre 41 et 161
+couches, donc une seule fenêtre ne rendrait pas un verdict mais un nombre.
+
 | prédiction | aire | croisements | verdict |
 |---|---:|---:|---|
 | `ps256` | 0,317 cm² | 0 | α = **+0,89**, *suit la fenêtre*, ⚠ fragile, 100 % des fenêtres au bord |

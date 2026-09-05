@@ -755,7 +755,7 @@ Sept documents lus intégralement (`wc -l` mesuré avant chaque lecture).
 ---
 
 ### docs/14_direction_des_fibres.md
-- **lignes** : 205
+- **lignes** : 214
 - **nature** : RESULTAT
 - **résumé** : Mesure de l'orientation des fibres de papyrus par tenseur de structure, sur volumes de surface à 2,4 µm, avec deux hypothèses : la bascule recto/verso en profondeur, et le désaccord d'orientation entre fenêtres voisines comme marqueur de saut de feuille. La première ne se voit pas ; la seconde donne un rho encourageant à n = 12 mais non significatif, avec une analyse de puissance qui dit qu'il faut n ≈ 70. Le §8, ajouté le 2026-08-19 avec la campagne complète sur 80 segments, **inverse le signe** et clôt la voie ; le §7 déclare l'ensemble sans objet et conserve l'archive.
 - **conclusions extractibles** :
@@ -771,6 +771,9 @@ Sept documents lus intégralement (`wc -l` mesuré avant chaque lecture).
   - Campagne complète, 80 segments mesurés, 54 communs : désaccord médian entre voisins **+0,330 (n = 12) → −0,192 (n = 54), p = 0,165** ; part des voisins > 30° +0,118 → −0,268, p = 0,050 ; cohérence médiane +0,354 → −0,246, p = 0,073 ; bascule médiane en profondeur −0,189 → −0,064, p = 0,644. **Rien n'atteint le seuil après correction pour tests multiples.**
   - Une fenêtre de 128×128 voxels à 2,4 µm fait **307 µm de côté**.
   - Le site du Grand Prize 2027 désigne la continuité des fibres comme critère visuel : *« check if you can visually follow horizontal papyrus fibers across the page — this is an indication the segmentation is good (and not jumping between sheets) »*.
+  - Reproduction : `bash src/campagnes/campagne_fibres.sh` → `docs/mesures/fibres_corpus.json`.
+    Sans argument : le corpus est DÉRIVÉ de `volumes_surface_PHercParis4.txt`, une liste passée
+    à la main serait une seconde réponse à « quels segments ».
 - **rétractations / corrections internes** :
   - §4 : « ⚠⚠ **Le tableau ci-dessous n'a que ONZE lignes**, alors que ce titre et toutes les statistiques qui suivent disent **n = 12** […] **Une des deux valeurs est fausse et rien ici ne tranche laquelle** » — n = 12 est repris dans `13` A5, `15` §4 et `06` §3.4.
   - §4 : « ⚠ **Bug attrapé en le mesurant** » — la première version tirait des fenêtres séparées d'une vingtaine de chunks, aucune n'étant voisine d'aucune autre, et la statistique rendait `NaN` sur **0 paire comparée** au lieu de signaler qu'elle n'avait rien mesuré.
@@ -781,7 +784,7 @@ Sept documents lus intégralement (`wc -l` mesuré avant chaque lecture).
   - §3 : la bascule recto/verso reste **non expliquée**, trois explications non départagées.
 - **preuve de lecture intégrale** :
   - ligne 126 : `> ⚠⚠ **À n = 12, la mesure ne détecte qu'un rho ≥ 0,73 à 80 % de puissance.** Le +0,330`
-  - ligne 204 : `**le long d'une ligne de texte**, comme un œil le fait, plutôt que la dispersion entre`
+  - ligne 213 : `**le long d'une ligne de texte**, comme un œil le fait, plutôt que la dispersion entre`
 
 
 
@@ -1794,7 +1797,7 @@ caractère, couverture vérifiée par `wc -l` avant lecture.
 ---
 
 ### docs/26_le_champ_de_direction.md
-- **lignes** : 720 ⚠ (701 quand la fiche a été écrite ; la mesure du tableau « sans filtre » a été **perdue puis restaurée** le 2026-09-04)
+- **lignes** : 743 ⚠ (701 quand la fiche a été écrite ; la mesure du tableau « sans filtre » a été **perdue puis restaurée** le 2026-09-04)
 - **nature** : RESULTAT
   (série de mesures avec contrôle positif ; le §10 « Reproduire » et la seconde §9 « T1f »
   sont eux-mêmes des campagnes mesurées.)
@@ -1889,6 +1892,11 @@ caractère, couverture vérifiée par `wc -l` avant lecture.
     `thread_limit: 0` 21,4 s / 1431 % / 117 Mo / 0,1 Mo. Ce n'est borné ni par le réseau ni
     par la mémoire, mais par le CPU ; à `thread_limit: 0` l'outil n'utilise que 14,3 cœurs
     sur 22 (croissance séquentielle en générations).
+  - Reproduction : `bash src/campagnes/campagne_pas.sh` (bonne graine, `5842 5839 7386`) et
+    `… data/trace/PHerc0358/pas_mauvaise_graine "1544 1544 7768"` — les deux coordonnées sont
+    LUES dans les traces (`seed location [...]`), pas retapées. Puis `table_pas.py` dépouille.
+    La remesure sans filtre : `bash src/outils/remesurer_sans_filtre.sh` →
+    `docs/mesures/sans_filtre.json`, onze essais par défaut.
 - **rétractations / corrections internes** :
   - En-tête : « **douze**, pas dix — deux des noms annoncés ici n'existaient pas, corrigé au
     §4 contre le code source » (`surface_sdt_weight` et `spaceline_weight`, zéro occurrence
@@ -1926,8 +1934,8 @@ caractère, couverture vérifiée par `wc -l` avant lecture.
     été posé pour réduire la variance, or `30` a mesuré que ça ne la réduit pas. Il reste le
     bon réglage, mais pour une raison de **débit** et non de déterminisme.
 - **preuve de lecture intégrale** :
-  - l. 437 : « ⚠⚠ **Un facteur 29 de ralentissement pour zéro déplacement, sur la course entière.** La »
-  - l. 719 : « machine a un iGPU **Intel Arc**. Il n'y a pas de GPU à saturer ici. »
+  - l. 444 : « ⚠⚠ **Un facteur 29 de ralentissement pour zéro déplacement, sur la course entière.** La »
+  - l. 742 : « machine a un iGPU **Intel Arc**. Il n'y a pas de GPU à saturer ici. »
 
 ---
 
@@ -2518,7 +2526,7 @@ Dépôt : `/home/masterlaplace/LplVesuvius`. Sept documents lus du premier au de
 ---
 
 ### docs/38_ce_qui_bouge_avec_la_fenetre.md
-- **lignes** : 196
+- **lignes** : 203
 - **nature** : RESULTAT
 - **résumé** : Trois hypothèses réfutées le même jour (la trace est à une spire de sa feuille, puis à deux, puis c'est une question de forme) ont un motif commun — la mesure suit le **réglage** au lieu de suivre le papyrus — et ce motif devient l'instrument central du dépôt : le test de convergence, noté α. Le document établit qu'un segment officiel converge (α = +0,00) tandis que notre trace suit la fenêtre (α = +1,01), c'est-à-dire qu'il n'y a **aucune feuille à portée** même à quatre spires, et il valide ce verdict à l'œil (une face de feuille contre des tranches d'empilement). Il en tire une reformulation de l'objectif (faire converger la mesure, pas réduire l'écart) et une cause candidate ajoutée le lendemain, dont une première version accusant à tort le masque binaire est corrigée.
 - **conclusions extractibles — définition de l'instrument α** :
@@ -2548,11 +2556,13 @@ Dépôt : `/home/masterlaplace/LplVesuvius`. Sept documents lus du premier au de
   - Même section : « il ne reste que la géométrie » est déclaré **trop fort** — la doc officielle du traceur décrit un terme de données primaire (`thresholdedDistance`) que l'auteur n'a pas su suivre jusqu'aux résidus ; ce qui est vérifié se limite aux trois leviers éteints. La cause candidate est explicitement « une hypothèse, pas la conclusion de ce document ».
   - §1 : les trois hypothèses successives (une spire, deux spires, une question de forme) sont chacune énoncées puis tuées, avec la raison de leur mort.
 - **preuve de lecture intégrale** :
-  - ligne 147 : « ⭐ **Celui qui a zéro croisement est le plus radial des deux.** L'essai catastrophique au »
-  - lignes 178–179 : « avec `sdt_weight` puis avec les fibres, et de voir la convergence changer : / `src/outils/leviers_de_perte.sh`. »
+  - ligne 154 : « ⭐ **Celui qui a zéro croisement est le plus radial des deux.** L'essai catastrophique au »
+  - lignes 185–179 : « avec `sdt_weight` puis avec les fibres, et de voir la convergence changer : / `src/outils/leviers_de_perte.sh`. »
 
 ---
 
+  - Reproduction : `bash src/outils/convergence_des_essais.sh` → `docs/mesures/convergence_<essai>.json`,
+    `essai_ng2` et `essai_scale1` par défaut, c'est-à-dire les deux lignes du tableau.
 ### docs/39_le_seam_de_correction.md
 - **lignes** : 104
 - **nature** : PROCEDE
@@ -2603,7 +2613,7 @@ Dépôt : `/home/masterlaplace/LplVesuvius`. Sept documents lus du premier au de
 ---
 
 ### docs/41_marcher_le_long_dune_nappe.md
-- **lignes** : 302
+- **lignes** : 310
 - **nature** : MIXTE
 - **résumé** : Le document construit le maillon manquant de `39` — un marcheur de nappe qui produit les points de passage — et mesure pourquoi la méthode naïve « au plus proche » échoue : dans un rouleau, le voisin d'à côté est plus loin que le voisin d'en face. Il expose les trois gestes retenus (normale par tenseur de structure, recentrage sous-voxel sur la crête, avance reprojetée) et la garde qui refuse un recentrage de plus de 2 voxels, puis mesure sur la vraie prédiction publiée. Il contient trois corrections internes majeures, dont une (§6ter) qui **annule l'explication du §6** : le masque binaire n'était pas le problème, le traceur calcule déjà un champ de distance signé — ce qui manque est son **poids**. Une seconde correction, une heure plus tard, retire même la conclusion « il ne reste que la géométrie ».
 - **conclusions extractibles** :
@@ -2624,6 +2634,9 @@ Dépôt : `/home/masterlaplace/LplVesuvius`. Sept documents lus du premier au de
   - Panne d'installation qui avait pris la forme d'un fait sur le rouleau : `numcodecs` manquait dans l'environnement `inference/`, donc aucun chunk *blosc* n'était décodable et `lire_chunk` rendait `None` — la même valeur que pour un chunk absent. Le chunk `0/69/14/24` existe bien et porte **19,3 %** de matière. Corrigé : `decode` **lève** `CodecIndisponible`.
   - Coût mesuré d'un orphelin : `src/outils/verifier_zarr.sh` décrivait exactement cette panne dans son en-tête et n'a pas tourné parce qu'aucun document ne le nommait — **une heure, et une mesure publiée fausse**.
   - Ce que le lot ne fait pas : il ne dit pas quelle nappe suivre ; il produit des chemins **1D, pas une surface** ; et il **ne résout pas le numéro de spire**, problème global et non local (`ColPoint` porte `wind_a`, la collection `winding_is_absolute`).
+  - Reproduction : `GENERATIONS=120 bash src/outils/leviers_de_perte.sh` →
+    `docs/mesures/leviers_<levier>.json`. ⚠ La prédiction de surface est LISTÉE sur le bucket
+    et non écrite en dur : un chemin figé vieillirait sans bruit à la prochaine republication.
 - **rétractations / corrections internes** :
   - §6ter (⚠⚠ CORRECTION) : « **Mon explication ci-dessus est fausse telle qu'elle est formulée** » — le traceur calcule bien un champ de distance, et même **signé** (`get_or_compute_sdt_chunk` : `binaire ? -edt_interieur : edt_exterieur`), donc le remède présenté au §6 comme manquant est dans le code depuis toujours. Ce qui manque est le **poids**.
   - §6ter, seconde correction une heure plus tard : « “il ne reste que la géométrie” est trop fort » — la doc officielle décrit un terme de données primaire (`thresholdedDistance`, `GrowPatch.cpp:3078`, une transformée de distance seuillée à 170 et plafonnée à 15) que l'auteur n'a pas su suivre jusqu'aux résidus. « “il ne reste que `DIST` et `STRAIGHT`” n'est pas une mesure, c'est une extrapolation — et c'est la deuxième fois aujourd'hui que je transforme “j'ai trouvé un interrupteur éteint” en “rien n'est allumé”. »
@@ -2634,7 +2647,7 @@ Dépôt : `/home/masterlaplace/LplVesuvius`. Sept documents lus du premier au de
   - §7, note « Reproduire » : « ⚠ “le seul env qui a numcodecs” était faux : la racine en a aussi, mesuré le 2026-08-25 ».
 - **preuve de lecture intégrale** :
   - lignes 190–191 : « optimisée pour ces deux-là seuls est une grille plate et régulière**. Posée dans un rouleau, / une grille plate est une **coupe radiale**. »
-  - lignes 283–284 : « pourquoi `ColPoint` porte un champ `wind_a` et la collection un `winding_is_absolute`. / Aucune marche locale ne peut y répondre. »
+  - lignes 291–284 : « pourquoi `ColPoint` porte un champ `wind_a` et la collection un `winding_is_absolute`. / Aucune marche locale ne peut y répondre. »
 
 ---
 
@@ -3336,6 +3349,9 @@ dernier caractère. Lignes mesurées par `wc -l`.
   - Ce document n'établit pas que la statistique typographique prouve qu'une carte porte du
     texte, ni que le détecteur répond sur les trois rouleaux lisibles (il n'est mesuré
     directement que sur `PHercParis4` et `PHerc1447`), ni que réparer sert à quelque chose.
+  - Reproduction : `GENERATIONS=60 FENETRES="41 161" bash src/outils/tracer_prediction_paris4.sh`
+    → `docs/mesures/prediction_paris4_<cas>.json`. ⚠ Les deux fenêtres FONT le test : α se lit
+    sur leur rapport, donc une seule rendrait un nombre et non un verdict.
 - **rétractations / corrections internes** :
   - §1 : ⚠⚠⚠ **RENVERSÉ LE 2026-08-28.** Le passage écrit depuis la mesure du 2026-08-22 (avec
     la constante corrigée par `60`) est **barré** : « le détecteur rend la même carte
@@ -3373,8 +3389,8 @@ dernier caractère. Lignes mesurées par `wc -l`.
   - §4 : « je n'ai **pas** inventé un score composite pour reclasser : choisir la pondération,
     c'est choisir la réponse avant de l'avoir mesurée » — les huit candidats ont été tracés.
 - **preuve de lecture intégrale** :
-  - ligne 267 (78 % du fichier) : `> ⭐⭐ **Zéro convergence sur huit.** L'α le plus bas obtenu est **+1,01**, pour un seuil de`
-  - ligne 340 (3ᵉ ligne non vide avant la fin) : `python3 src/graine/eligibilite_aval.py --verifier`
+  - ligne 275 (78 % du fichier) : `> ⭐⭐ **Zéro convergence sur huit.** L'α le plus bas obtenu est **+1,01**, pour un seuil de`
+  - ligne 348 (3ᵉ ligne non vide avant la fin) : `python3 src/graine/eligibilite_aval.py --verifier`
 
 ---
 
@@ -4026,7 +4042,7 @@ vérification du dépôt lui-même.
 ---
 
 ### docs/60_la_constante_qui_rendait_le_modele_muet.md
-- **lignes** : 396
+- **lignes** : 405
 - **nature** : MIXTE (dominante RESULTAT)
 - **résumé** : Une constante en dur (`stack / 65535.0`) dans `load_layer_stack` divisait les piles
   **uint8** par le plafond d'un **uint16**, envoyant au modèle des entrées 257 fois trop sombres —
@@ -4098,6 +4114,10 @@ vérification du dépôt lui-même.
   - Nouvelles gardes : une pile dont le maximum normalisé est **sous 1/64 de la pleine échelle**
     est refusée (une pile mal mise à l'échelle d'un facteur 257 plafonne à **0,0039**) ; une pile
     dont les couches changent de type est refusée.
+  - Reproduction : `FILS=16 bash src/campagnes/campagne_encre_1447.sh` →
+    `docs/mesures/typographie_de_nos_cartes.json`. ⚠ `FILS` n'est pas du confort : deux
+    campagnes lancées ensemble sur 22 cœurs ont brûlé 26 h et 19 h de CPU pour 2 h de temps
+    réel chacune, l'essentiel en contention — elles finissent PLUS TARD qu'en série.
 - **rétractations / corrections internes** :
   - En-tête — **réserve ajoutée le 2026-08-28** (`65` §1) qui porte sur tout le document :
     rien n'avait vérifié qu'un σ élevé veut dire que le modèle lit ; σ arrive quatrième sur six,
@@ -4119,8 +4139,8 @@ vérification du dépôt lui-même.
   - §6 — le premier jet de contrôles restait vert **quand la constante était remise**, parce qu'il
     portait sur la règle sans traverser `load_layer_stack`.
 - **preuve de lecture intégrale** :
-  - l. 273 : `⭐ Le seuil déclaré est franchi par le test groupé. Selon le tableau du §4, écrit avant la`
-  - l. 389 : `uv run python src/encre/comparer_encre.py data/out/ink_PHerc1447_corrige.npy \`
+  - l. 282 : `⭐ Le seuil déclaré est franchi par le test groupé. Selon le tableau du §4, écrit avant la`
+  - l. 398 : `uv run python src/encre/comparer_encre.py data/out/ink_PHerc1447_corrige.npy \`
 
 ---
 
