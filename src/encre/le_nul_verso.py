@@ -330,11 +330,20 @@ def chercher_fenetre(zarr: str, taille: int = 512, tuiles: int = 8) -> dict:
                 niveau_cherche=niveau, vue=[int(x) for x in profils.shape[1:]])
 
 
-def _inference(couches: Path, debut: int, taille: int, sortie: Path) -> dict | None:
+def _inference(couches: Path, debut: int, taille: int, sortie: Path,
+               pas: int = 1) -> dict | None:
+    """
+    @brief Une inférence sur une fenêtre, à la profondeur demandée.
+
+    ⚠ `pas` est passé jusqu'au bout : à 2,399 µm les 26 couches du modèle ne couvrent que
+    62 µm là où l'entraînement en voit 206 (`infer_ink.load_layer_stack`). Le défaut reste 1,
+    donc aucune mesure publiée ne bouge.
+    """
     code, texte = _lancer(
         ["uv", "run", "python", str(INFERENCE), str(couches), "--model", str(MODELE),
          "--start-layer", str(debut), "--top", "0", "--left", "0",
          "--height", str(taille), "--width", str(taille), "--stride", "21",
+         "--pas-couches", str(pas),
          "--device", "cpu", "--sans-progression", "--out", str(sortie)], 7200)
     if code != 0:
         return {"echec": texte.strip().splitlines()[-1][:150] if texte.strip() else "?"}

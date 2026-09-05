@@ -140,9 +140,29 @@ def load_layer_stack(layers_dir: Path, start: int, crop: tuple[int, int, int, in
 
     ⚠⚠ `pas` prend une couche sur `pas`, donc EPAISSIT la fenetre de profondeur sans
     changer le nombre d'images que le modele mange. C'est la seule facon de faire varier la
-    grandeur que `36` §5bis a laissee confondue avec la resolution en plan : a 8,64 µm,
-    26 couches couvrent 225 µm la ou l'entrainement en voyait 62. Le defaut est 1, donc
-    aucun appel existant ne bouge.
+    grandeur que `36` §5bis a laissee confondue avec la resolution en plan. Le defaut est 1,
+    donc aucun appel existant ne bouge.
+
+    ⚠⚠⚠ CE COMMENTAIRE PORTAIT L'ERREUR QUE `36` §5bis A CORRIGEE LE 2026-08-27, et il la
+    portait a l'envers. Il disait « a 8,64 µm, 26 couches couvrent 225 µm la ou l'entrainement
+    en voyait 62 » -- or 62 = 26 x 2,4, c'est-a-dire exactement la ligne « 2,4 µm » que `36`
+    declare FAUSSE : la pile de reference de Scroll 1 (`20230909121925`, AUC 0,925) est a
+    **7,91 µm**, donc l'entrainement voit **206 µm**. Les deux nombres sont donc inverses de
+    sens : 225 µm est PROCHE de la cible, et c'est **62 µm** qui est l'anomalie.
+
+    ⚠⚠⚠ Et l'anomalie est chez nous. Les *volumes de surface* de `PHerc0139` sont a
+    **2,399 µm** : 26 couches y couvrent **62,4 µm**, soit **3,3 fois moins** que ce que le
+    modele a appris a lire, et **moins qu'une epaisseur de feuille**. Toute inference de ce
+    depot sur un volume de surface a 2,4 µm a donc lu une tranche trop mince, sans que rien ne
+    le dise. `pas = 3` ramene la fenetre a 187 µm.
+
+    Profondeur physique lue, par pas de voxel (26 couches x pas x taille de voxel) :
+
+    | taille de voxel | pas = 1 | pas = 3 |
+    |---|---:|---:|
+    | 2,399 µm (volumes de surface) | **62 µm** | **187 µm** |
+    | 7,91 µm (entrainement) | **206 µm** | 617 µm |
+    | 8,64 µm | 225 µm | 674 µm |
     """
     top, left, height, width = crop
     stack = np.zeros((FRAMES, height, width), dtype=np.float32)
@@ -589,6 +609,20 @@ def verifier() -> int:
       {indices_des_couches(15, p)[0] for p in (1, 2, 3)} == {15})
     v("le modele mange toujours le meme nombre d'images",
       all(len(indices_des_couches(0, p)) == FRAMES for p in (1, 2, 3)))
+    # ⚠⚠⚠ ET LE PAS EST-IL JOIGNABLE ? Tout ce qui precede testait la FONCTION ; le
+    # parametre a vecu des semaines sans drapeau, donc teste et injoignable. Ces trois
+    # controles interrogent la LIGNE DE COMMANDE, qui est la seule surface que les campagnes
+    # de ce depot utilisent.
+    _p = construire_parseur()
+    v("le pas de couches est joignable depuis la ligne de commande",
+      _p.parse_args(["x", "--pas-couches", "3"]).pas_couches == 3)
+    v("... et il vaut 1 par defaut, donc aucune campagne existante ne bouge",
+      _p.parse_args(["x"]).pas_couches == 1)
+    # ⚠ La profondeur annoncee doit suivre le pas, sinon la ligne de sortie ment sur ce que le
+    # run a lu -- et c'est cette ligne qu'on relira dans six mois, sans la commande.
+    v("... et 26 couches au pas 3 lisent bien 76 couches de source",
+      (FRAMES - 1) * 3 + 1 == 76)
+
     try:
         indices_des_couches(15, 0)
         v("un pas nul est refuse", False)
@@ -599,7 +633,15 @@ def verifier() -> int:
     return 1 if echecs else 0
 
 
-def main() -> int:
+def construire_parseur() -> argparse.ArgumentParser:
+    """
+    @brief Le parseur, sorti de `main` pour qu'une batterie puisse l'INTERROGER.
+
+    ⚠⚠⚠ Ecrit le jour ou l'on a decouvert que `--pas-couches` n'existait pas : le parametre
+    `pas` etait pris par `load_layer_stack`, teste par la batterie, et joignable par PERSONNE.
+    Tester la fonction sans tester la ligne de commande laisse exactement ce trou-la, et la
+    ligne de commande est la facon dont toutes les campagnes de ce depot appellent ce fichier.
+    """
     parser = argparse.ArgumentParser(
         description="Detection d'encre CPU sur une region, a partir des couches rendues.",
     )
@@ -611,6 +653,14 @@ def main() -> int:
     parser.add_argument("--height", type=int)
     parser.add_argument("--width", type=int)
     parser.add_argument("--stride", type=int, default=21, help="pas de balayage (defaut: 21)")
+    # ⚠⚠⚠ CE PARAMETRE EXISTAIT SANS AUCUN CHEMIN POUR L'ATTEINDRE. `load_layer_stack` le
+    # prend depuis le 2026-08, la batterie le teste, et aucun drapeau ne l'exposait -- donc la
+    # seule grandeur capable de corriger la profondeur lue etait injoignable depuis la ligne de
+    # commande, qui est la facon dont TOUTE campagne de ce depot appelle ce fichier.
+    parser.add_argument("--pas-couches", type=int, default=1,
+                        help="prend une couche sur N : epaissit la fenetre de profondeur sans "
+                             "changer le nombre d'images lues (defaut: 1). A 2,399 µm, 3 ramene "
+                             "les 62 µm lus vers les 206 µm de l'entrainement.")
     parser.add_argument("--batch-size", type=int, default=4)
     parser.add_argument("--threads", type=int, default=16)
     parser.add_argument("--device", default="auto", choices=("auto", "cpu", "xpu"),
@@ -619,6 +669,11 @@ def main() -> int:
                         help="taire les lignes de progression (elles vont sur stderr)")
     parser.add_argument("--verifier", action="store_true", help="auto-test hors ligne")
     parser.add_argument("--out", type=Path, help="sortie .npy")
+    return parser
+
+
+def main() -> int:
+    parser = construire_parseur()
     args = parser.parse_args()
     if args.verifier:
         return verifier()
@@ -637,7 +692,8 @@ def main() -> int:
 
     try:
         stack = load_layer_stack(
-            args.layers, args.start_layer, (args.top, args.left, args.height, args.width)
+            args.layers, args.start_layer, (args.top, args.left, args.height, args.width),
+            pas=args.pas_couches
         )
     except InferenceError as error:
         print(f"erreur : {error}", file=sys.stderr)
@@ -664,6 +720,8 @@ def main() -> int:
     np.save(args.out, prediction)
     covered = np.isfinite(prediction)
     print(f"pas de balayage   : {args.stride}")
+    print(f"pas de couches    : {args.pas_couches}  "
+          f"({FRAMES} couches lues sur {(FRAMES - 1) * args.pas_couches + 1})")
     print(f"fenetres          : {windows}")
     print(f"duree             : {elapsed:.1f} s  ({elapsed / max(windows, 1) * 1000:.0f} ms/fenetre)")
     print(f"pixels couverts   : {int(covered.sum())} / {prediction.size}")
