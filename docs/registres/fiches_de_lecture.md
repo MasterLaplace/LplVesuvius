@@ -3706,7 +3706,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/55_les_murs_et_leurs_causes.md
-- **lignes** : 116
+- **lignes** : 118
 - **nature** : PROCEDE
 - **résumé** : Document **rendu** depuis `docs/registres/murs_et_causes.tsv` par `uv run python src/depot/murs_et_causes.py --rendre`, et non écrit à la main ; sa batterie vérifie que chaque ligne pointe vers un document contenant encore son ancre. Il recense **30 causes candidates sur 4 murs** : 19 éliminées, 10 confirmées, 1 bloquée, chacune avec la mesure qui l'a tranchée et le document d'origine. Sa thèse de forme est qu'un mur est un espace de causes dont on retire une entrée à la fois, et que la liste des causes éliminées — non celle des tâches — est le seul progrès mesurable. Une seule cause reste non tranchée, et elle est bloquée. (⚠ Note de lecture : l'en-tête compte 19 éliminations quand le §final écrit « les treize éliminations de ce document » ; le document ne signale pas l'écart. De même, il ne contient aucune cause ⏳ *ouverte* alors que son propre tableau de symboles définit ce statut.)
 - **conclusions extractibles** : *(les murs recensés, avec pour chacun les causes éliminées et celles qui restent ouvertes)*
@@ -3760,7 +3760,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 - **rétractations / corrections internes** : aucune rétractation déclarée. Le document précise en revanche deux bornes de portée sur des causes confirmées : « la graine, c'est-à-dire l'endroit » explique la famille m7 **et pas le mur**, et la chaîne tangentielle « ne dit pas que c'est la BONNE feuille (il faut de l'encre), et part d'un segment PUBLIÉ et non d'une de nos traces ». Il retire aussi explicitement une affirmation antérieure : « ⚠⚠ Le “croisement” que j'avais publié à 1 920 µm n'existe pas : chaîne ET bond y sont au niveau du hasard (−1,7 et +1,6) ».
 - **preuve de lecture intégrale** :
   - ligne 81 : « | enchaîner la projection à GRAND pas (238 µm/maillon) | ❌ | cinq maillons de 238 µm étalent la boîte ×2,38 à nombre de points constant, contre ×1,10 pour le bond direct — et finissent 5,33 SPIRES à côté de lui. ⚠ Le pas réel dérive avant la boîte : 238 → 963 µm par maillon | [`44`](44_ou_la_chaine_se_trouve.md) | »
-  - ligne 111 : « cause à laquelle personne n'a pensé. Le tableau borne ce qu'on a testé, jamais ce qui »
+  - ligne 116 : « cause à laquelle personne n'a pensé. Le tableau borne ce qu'on a testé, jamais ce qui »
 
 ---
 
@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 2381
+- **lignes** : 2426
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5712,6 +5712,20 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     réel — elle gagne sur ce qu'elle n'a jamais vu — ⚠⚠ mais il n'explique que **20 %**, et le
     plancher de la courbe réservée est à **50,5 µm**. ⛔ **Un meilleur nombre ne remplacera pas
     un raccrochage à la matière**, et l'étalon de la tranche suivante est de passer sous 50 µm.
+  - ⛔ **Et le raccrochage ne peut PAS se bâtir sur ce qui est publié** (2026-09-06). Chaque spire
+    publie un `surface-volumes` en **(couche, u, v)**, donc l'indice de couche EST une distance
+    signée le long de la normale — mais les métadonnées ne disent **pas** où est la surface.
+    Mesuré sur **1 459 592 colonnes** de trois spires : le pic tombe à **−1,5 couche** du centre
+    (tolérance une demi-feuille = 30,6 couches), donc **la convention du milieu tient**. La pile
+    porte alors à **129,6 µm**, soit **0,956 feuille**, quand la voisine est à 135,5 : **il manque
+    5,9 µm**. Il faut le **volume brut**. Le savoir coûte une mesure ; l'apprendre après avoir
+    écrit le raccrochage aurait coûté le raccrochage.
+  - ⚠⚠ Le piège du profil : sur trois blocs voisins pris isolément le pic tombait à **66, 78 et
+    85** — un bloc de 128 × 128 colonnes ne voit qu'un morceau de feuille. Le profil n'a de sens
+    que **cumulé**, et le compte de colonnes est rendu pour qu'un profil bâti sur trois d'entre
+    elles ne passe pas pour une mesure.
+  - ⚠ La surface retenue est le **centre**, pas le pic : le pic la confirme, mais la prendre ferait
+    dépendre la géométrie d'un contraste local.
   - ⚠ La première fixture de cette batterie a échoué pour la bonne raison : elle balayait 20 à
     40 µm pour une cible à 30 **voxels**, soit 60 µm. C'est le drapeau `au_bord` qui l'a dit — ce
     dépôt a déjà publié un optimum au bord et l'a payé.
@@ -5765,8 +5779,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 1788 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 2381 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 1833 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 2426 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

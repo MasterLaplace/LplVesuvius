@@ -1743,6 +1743,51 @@ une longueur. Et ⚠ la première fixture de la batterie a échoué pour la bonn
 balayait 20 à 40 µm pour une cible à 30 **voxels**, soit 60 µm — c'est le drapeau `au_bord` qui
 l'a dit.
 
+#### ⛔ Et le raccrochage ne peut PAS se bâtir sur ce qui est publié : il manque 5,9 µm
+
+> Mesure : `src/nappe/la_portee_des_piles_publiees.py` (8 contrôles) →
+> `docs/mesures/la_portee_des_piles_publiees.json`. Figure :
+> `src/figures/figure_la_portee_des_piles.py` (8 contrôles), le 2026-09-06.
+>
+> ```
+> uv run python src/nappe/la_portee_des_piles_publiees.py --json docs/mesures/la_portee_des_piles_publiees.json
+> uv run python src/figures/figure_la_portee_des_piles.py --sortie docs/images/75_la_portee_des_piles.png
+> ```
+
+⚠⚠⚠ **Cette question évite de construire la mauvaise chose.** Un raccrochage lit l'intensité
+**autour de la position prédite**, qui est à une épaisseur de feuille du départ. Chaque spire
+publie un `surface-volumes` en **(couche, u, v)** — donc l'indice de couche **est** une distance
+signée le long de la normale. Reste à savoir si la pile va assez loin.
+
+![la pile publiée s'arrête à six micromètres de la feuille voisine](images/75_la_portee_des_piles.png)
+
+⭐ **Les métadonnées ne disent pas où est la surface** — `num_slices`, `slice_step`, translation
+nulle, rien d'autre. Ça se mesure, et c'est mesuré : sur **1 459 592 colonnes** cumulées de trois
+spires, le pic d'intensité tombe à **−1,5 couche** du centre (tolérance : une demi-feuille, soit
+30,6 couches). **La convention du milieu tient**, donc l'axe des distances est bon.
+
+⚠⚠ Et c'était un piège : sur trois blocs voisins pris isolément, le pic tombait à **66, 78 et
+85**. Un bloc de 128 × 128 colonnes ne voit qu'un morceau de feuille — le profil n'a de sens que
+cumulé, et le compte de colonnes est rendu pour qu'un profil bâti sur trois d'entre elles ne passe
+pas pour une mesure.
+
+| | valeur |
+|---|---:|
+| couches de la pile | 118 à 2,215 µm |
+| portée autour de la surface | **129,6 µm** |
+| … en épaisseurs de feuille | **0,956** |
+| écart inter-feuilles | 135,5 µm |
+| **ce qui manque** | **5,9 µm** |
+
+> ⛔ **La pile publiée s'arrête à quatre pour cent de la feuille voisine.** Le raccrochage à la
+> matière ne peut donc **pas** se bâtir sur ce qui est publié : il faut le **volume brut**. Le
+> savoir maintenant coûte une mesure ; l'apprendre après avoir écrit le raccrochage aurait coûté
+> le raccrochage.
+
+⚠ La surface retenue reste le **centre** et non le pic : le pic la *confirme*, mais la prendre
+ferait dépendre la géométrie d'un contraste local, et une pile un peu plus dense d'un côté
+déplacerait la surface.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est
