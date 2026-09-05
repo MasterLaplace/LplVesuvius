@@ -1644,6 +1644,57 @@ d'elle — 44 % d'un écart. C'est la précision réelle de la primitive, et ell
 ce qu'il faut : ne pas confondre une feuille avec sa voisine. Elle ne suffit pas à se passer d'un
 recalage local ensuite.
 
+#### ⭐⭐⭐ Et le graal, ramené à une mesure : un dérouleur aveugle tient DEUX tours
+
+> Mesure : `src/nappe/derouler_par_le_pas_normal.py` (9 contrôles) →
+> `docs/mesures/derouler_par_le_pas_normal.json`. Figure :
+> `src/figures/figure_derouler_par_le_pas_normal.py` (11 contrôles), le 2026-09-06.
+>
+> ```
+> uv run python src/nappe/derouler_par_le_pas_normal.py --json docs/mesures/derouler_par_le_pas_normal.json
+> uv run python src/figures/figure_derouler_par_le_pas_normal.py --sortie docs/images/75_derouler_par_le_pas_normal.png
+> ```
+
+⚠⚠⚠ **Dérouler, ce n'est pas faire un pas, c'est les enchaîner.** La primitive vaut 60 µm sur un
+pas ; la question qui décide est *au bout de combien de tours l'erreur dépasse une feuille* — car
+à ce moment-là le dérouleur ne sait plus **sur laquelle** il est, et tout ce qu'il écrit ensuite
+est faux.
+
+![combien de tours un dérouleur aveugle survit-il](images/75_derouler_par_le_pas_normal.png)
+
+Le protocole est **aveugle par construction** : la grille est conservée à chaque pas, donc les
+normales du tour suivant se calculent sur la surface **prédite**. ⚠ Un **seul bit de
+supervision**, déclaré et compté : le sens de la normale, fixé au premier pas. Le rechoisir à
+chaque tour en regardant la cible reviendrait à souffler la route.
+
+| tours | erreur | ne pas bouger |
+|---:|---:|---:|
+| 1 | **52 µm** | 129 µm |
+| 2 | **102 µm** | 311 µm |
+| 3 | 135 µm | 418 µm |
+| 6 | 230 µm | 920 µm |
+| 12 | **689 µm** | 1 648 µm |
+
+⛔ **La feuille est perdue au tour 2** : l'erreur dépasse la demi-épaisseur (67,75 µm), donc le
+dérouleur ne peut plus dire sur quelle feuille il se trouve.
+
+⭐⭐ **Et pourtant il déroule.** Il bat l'immobilité à **chacun des douze tours**, deux à trois
+fois — à douze tours il est à 689 µm quand ne rien faire en met 1 648. Ce n'est pas un échec du
+pas normal, c'est la mesure de ce qui lui manque.
+
+⭐⭐⭐ **La dérive vaut 53 µm par tour**, soit **39 % d'une feuille — ajustée par moindres carrés
+sur toute la marche**, pas prise entre deux extrémités. C'est *le* chiffre à battre : **c'est
+exactement ce qu'un recalage sur la matière doit tuer à chaque pas.** La feuille suivante est
+toujours dans la bonne direction ; elle est juste un peu plus loin ou un peu plus près que
+l'épaisseur nominale, et personne ne recale.
+
+⚠ La grille fond de **1 983 à 536** cellules sur douze tours — une normale demande quatre voisins
+valides, donc un anneau part par tour. Le compte est rendu **à côté** de l'erreur : un dérouleur
+qui « réussirait » en ne gardant que trois cellules n'aurait pas déroulé, il aurait rétréci.
+
+⚠ Et la marche n'est pas monotone (306 µm au tour 5, 230 au tour 6) : les spires publiées ont
+elles-mêmes leurs irrégularités, déjà signalées.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est

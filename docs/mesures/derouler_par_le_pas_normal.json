@@ -1,0 +1,110 @@
+{
+  "volume": "20250526151718",
+  "voxel_um": 2.215,
+  "depuis": 1,
+  "ecart_lu_um": 135.5,
+  "pas_en_voxels": 61.17,
+  "demi_epaisseur_um": 67.75,
+  "sens_retenu": "+",
+  "bits_de_supervision": 1,
+  "tours_avant_de_perdre_la_feuille": 2,
+  "tours_mesures": 12,
+  "marche": [
+    {
+      "tours": 1,
+      "cellules": 1983,
+      "juges": 1983,
+      "erreur_um": 52.1,
+      "erreur_p90_um": 206.1,
+      "temoin_sur_place_um": 129.2
+    },
+    {
+      "tours": 2,
+      "cellules": 1821,
+      "juges": 1821,
+      "erreur_um": 101.9,
+      "erreur_p90_um": 254.9,
+      "temoin_sur_place_um": 311.2
+    },
+    {
+      "tours": 3,
+      "cellules": 1665,
+      "juges": 1665,
+      "erreur_um": 135.4,
+      "erreur_p90_um": 235.2,
+      "temoin_sur_place_um": 418.4
+    },
+    {
+      "tours": 4,
+      "cellules": 1515,
+      "juges": 1515,
+      "erreur_um": 239.2,
+      "erreur_p90_um": 620.0,
+      "temoin_sur_place_um": 689.0
+    },
+    {
+      "tours": 5,
+      "cellules": 1370,
+      "juges": 1370,
+      "erreur_um": 306.1,
+      "erreur_p90_um": 743.2,
+      "temoin_sur_place_um": 872.9
+    },
+    {
+      "tours": 6,
+      "cellules": 1231,
+      "juges": 1231,
+      "erreur_um": 230.1,
+      "erreur_p90_um": 683.9,
+      "temoin_sur_place_um": 919.9
+    },
+    {
+      "tours": 7,
+      "cellules": 1098,
+      "juges": 1098,
+      "erreur_um": 300.0,
+      "erreur_p90_um": 890.7,
+      "temoin_sur_place_um": 1085.3
+    },
+    {
+      "tours": 8,
+      "cellules": 971,
+      "juges": 971,
+      "erreur_um": 426.1,
+      "erreur_p90_um": 1086.7,
+      "temoin_sur_place_um": 1285.6
+    },
+    {
+      "tours": 9,
+      "cellules": 851,
+      "juges": 851,
+      "erreur_um": 458.9,
+      "erreur_p90_um": 1209.1,
+      "temoin_sur_place_um": 1340.4
+    },
+    {
+      "tours": 10,
+      "cellules": 738,
+      "juges": 738,
+      "erreur_um": 360.4,
+      "erreur_p90_um": 1115.0,
+      "temoin_sur_place_um": 1308.9
+    },
+    {
+      "tours": 11,
+      "cellules": 634,
+      "juges": 634,
+      "erreur_um": 669.9,
+      "erreur_p90_um": 1562.8,
+      "temoin_sur_place_um": 1566.5
+    },
+    {
+      "tours": 12,
+      "cellules": 536,
+      "juges": 536,
+      "erreur_um": 688.9,
+      "erreur_p90_um": 1708.3,
+      "temoin_sur_place_um": 1647.8
+    }
+  ]
+}

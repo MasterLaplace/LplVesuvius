@@ -11,7 +11,7 @@ la fois. Une feuille de route qui liste des tâches laisse croire qu'on avance q
 tourne ; celle-ci liste des causes **éliminées**, et montre l'espace rétrécir. C'est le
 seul progrès mesurable sur un problème que personne n'a résolu.
 
-**40 causes candidates** sur **4 murs** : ❌ **28** éliminées · ✅ **10** confirmées · 🔒 **2** bloquées
+**41 causes candidates** sur **4 murs** : ❌ **29** éliminées · ✅ **10** confirmées · 🔒 **2** bloquées
 
 | symbole | verdict | ce que ça veut dire |
 |---|---|---|
@@ -29,7 +29,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 
 ## 1. Le tracé ne suit pas de feuille
 
-❌ 10 éliminées · ✅ 5 confirmées · 🔒 2 bloquées
+❌ 11 éliminées · ✅ 5 confirmées · 🔒 2 bloquées
 
 | cause candidate | | ce qui a été mesuré | où |
 |---|---|---|---|
@@ -48,6 +48,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | le classement de graine désigne le point le moins étayé | ❌ | huit candidats tracés sur PHercParis4, étai de 9 à 27 voisins et occupation 0,02 à 0,75 : ZÉRO convergence, et 7 écarts sur 8 valent exactement le bord de la fenêtre | [`48`](48_ou_monter_lexperience.md) |
 | l'écart de la chaîne serait l'erreur du référent | ❌ | un biais est CONSTANT donc il s'annule dans les différences : la chaîne part à 0,3 µm et finit à 69,2, donc un biais explique au plus 0,5 %, et le référent entier au plus 4,5 % en quadrature | [`75`](75_registre_des_taches.md) |
 | le pas normal d'un écart inter-feuilles ne mènerait pas à la feuille voisine | ❌ | sur 12 paires de spires publiées : ne rien faire 135 um, un écart 60 um, deux écarts 151 um — le pas nul retombe sur l'écart mesuré, le simple le divise par deux et le double dépasse, donc la distance franchie est bien celle d'une feuille ; 11 paires sur 12 | [`75`](75_registre_des_taches.md) |
+| le pas normal itéré suffirait à dérouler sans recalage | ❌ | déroulement aveugle depuis la spire 1 : la feuille est perdue au tour 2 (erreur 102 um contre une demi-épaisseur de 67,75), et la dérive vaut 53 um par tour soit 39 % d'une feuille — alors qu'il bat l'immobilité aux douze tours | [`75`](75_registre_des_taches.md) |
 | comparer le relief d'une trace L2 à une trace L0 | 🔒 | à aire égale un maillage L2 rend quatre fois moins de pixels de côté, donc les deux ne tiennent jamais dans la même fenêtre d'analyse — le relief ne peut pas les départager | [`54`](54_cinq_rendus_vides.md) |
 | les résidus du champ d'orientation publié (A2 ter) | 🔒 | le pas de grille publié vaut 64 voxels, soit 3,89 écarts inter-feuilles par cellule contre 0,5 exigés par Nyquist : le champ est REPLIÉ, pas bruité | [`75`](75_registre_des_taches.md) |
 

@@ -3706,7 +3706,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/55_les_murs_et_leurs_causes.md
-- **lignes** : 114
+- **lignes** : 115
 - **nature** : PROCEDE
 - **résumé** : Document **rendu** depuis `docs/registres/murs_et_causes.tsv` par `uv run python src/depot/murs_et_causes.py --rendre`, et non écrit à la main ; sa batterie vérifie que chaque ligne pointe vers un document contenant encore son ancre. Il recense **30 causes candidates sur 4 murs** : 19 éliminées, 10 confirmées, 1 bloquée, chacune avec la mesure qui l'a tranchée et le document d'origine. Sa thèse de forme est qu'un mur est un espace de causes dont on retire une entrée à la fois, et que la liste des causes éliminées — non celle des tâches — est le seul progrès mesurable. Une seule cause reste non tranchée, et elle est bloquée. (⚠ Note de lecture : l'en-tête compte 19 éliminations quand le §final écrit « les treize éliminations de ce document » ; le document ne signale pas l'écart. De même, il ne contient aucune cause ⏳ *ouverte* alors que son propre tableau de symboles définit ce statut.)
 - **conclusions extractibles** : *(les murs recensés, avec pour chacun les causes éliminées et celles qui restent ouvertes)*
@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 2282
+- **lignes** : 2333
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5691,6 +5691,21 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     le **double dépasse**, donc la distance franchie est bien celle d'**une feuille** et non une
     quantité quelconque. **11 paires sur 12**, et le sens retenu est le **même pour les douze** —
     les grilles publiées partagent une orientation, ce qu'aucune mesure n'avait établi.
+  - ⭐⭐⭐ **ET LE GRAAL EST RAMENÉ À UNE MESURE : un dérouleur aveugle tient DEUX tours**
+    (2026-09-06). Le pas normal **itéré**, grille conservée donc normales recalculées sur la
+    surface **prédite**, un seul bit de supervision (le sens, fixé au premier pas). Erreur : 52 µm
+    au tour 1, **102 au tour 2**, 135 au 3, 689 au 12 — contre 129, 311, 418 et 1 648 pour
+    l'immobilité. ⛔ **La feuille est perdue au tour 2**, l'erreur dépassant la demi-épaisseur
+    (67,75 µm). ⭐⭐ **Et pourtant il déroule** : il bat l'immobilité à **chacun des douze tours**,
+    deux à trois fois.
+  - ⭐⭐⭐ **La dérive vaut 53 µm par tour, soit 39 % d'une feuille** — ajustée par moindres carrés
+    sur toute la marche et non prise entre deux extrémités. **C'est le chiffre à battre** : la
+    feuille suivante est toujours dans la bonne direction, elle est juste un peu plus loin ou un
+    peu plus près que l'épaisseur nominale, et personne ne recale. C'est exactement ce qu'un
+    recalage sur la matière doit tuer à chaque pas.
+  - ⚠ La grille fond de **1 983 à 536** cellules sur douze tours (une normale demande quatre
+    voisins), et le compte est rendu **à côté** de l'erreur : un dérouleur qui « réussirait » en
+    ne gardant que trois cellules aurait rétréci, pas déroulé.
   - ⚠ La seule paire qui échoue est **12 → 13**, dont l'écart vaut 63 µm, moins d'une demi-feuille :
     un pas entier y dépasse forcément. C'est la paire anormale déjà signalée.
   - ⚠⚠ Ce que ça ne dit **pas** : le pas tombe **à 60 µm** de la feuille suivante, soit 44 % d'un
@@ -5738,8 +5753,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 1689 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 2282 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 1740 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 2333 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
