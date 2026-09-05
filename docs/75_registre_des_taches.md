@@ -1525,6 +1525,42 @@ montent jusqu'à 3 mm là où deux spires ne se recouvrent que par un bord.
 3. ⚠ Et une question à poser avant de s'en servir : les treize spires couvrent-elles la même
    région que le segment `500P2_front` sur lequel tout C1 a été bâti, ou une autre ?
 
+#### ⭐⭐ Et l'angle mort est désormais outillé, parce qu'il a coûté cinq fois
+
+> Mesure : `src/depot/ce_que_les_serveurs_publient.py` (13 contrôles) →
+> `docs/mesures/ce_que_les_serveurs_publient.json`, le 2026-09-05.
+>
+> ```
+> uv run python src/depot/ce_que_les_serveurs_publient.py --fragment PHerc0500P2
+> ```
+
+L'inventaire compare les deux serveurs à l'index **en cache** du dépôt, et le résultat corrige
+mon hypothèse : **39 segments sur S3, 39 dans l'index, 0 écart**. L'angle mort n'était donc pas
+la péremption du cache — c'était que **personne ne l'avait énuméré**.
+
+⭐⭐⭐ **Et la vraie cause structurelle est là** : les deux serveurs ne publient pas la même chose.
+
+| | S3 | `dl.ash2txt.org` |
+|---|---|---|
+| `segments/` (dont les 13 spires) | **oui** | non |
+| `paths/` (dont les étiquettes et le masque) | non | **oui** |
+| `photos/` | **oui** | non |
+| `cases/`, `multispectral/` | non | **oui** |
+| `representations/`, `volumes/` | oui | oui |
+
+Les étiquettes viennent de `dl`, les segments de `S3`, et **personne n'avait jamais croisé les
+deux listages**. « Regarder sur les autres serveurs » cesse d'être une superstition : c'est une
+règle avec une base mesurée, et elle est maintenant une commande.
+
+⚠ Le refus fait partie de l'outil : un serveur injoignable rend une liste vide, et comparer une
+liste vide à un index plein dirait « l'index a tout inventé ». Un listage vide est **refusé**,
+pas interprété — c'est la panne qui ressemble le plus à un résultat.
+
+⚠⚠ Et un défaut de mon propre outil, attrapé avant publication : `index_local` ignorait son
+argument et rendait les **311** segments des quarante-cinq objets du catalogue, d'où un faux
+« 272 segments à l'index seulement ». Un inventaire qui crie faux est un inventaire qu'on cesse
+d'écouter. Le filtre par objet est désormais **asserté dans les deux sens**.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est

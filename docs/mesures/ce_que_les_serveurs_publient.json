@@ -1,0 +1,97 @@
+{
+  "fragment": "PHerc0500P2",
+  "index": {
+    "fichier": "data/metadata.min.json",
+    "octets": 58020,
+    "segments": 39
+  },
+  "s3": {
+    "racine": [
+      "photos",
+      "representations",
+      "segments",
+      "volumes"
+    ],
+    "segments": 39,
+    "exemples": [
+      "20250609204953-z_dbg_gen_00612",
+      "20250611132918-z_dbg_gen_00302_inp_hr",
+      "20250611133823-z_dbg_gen_00130_inp_hr",
+      "20250611134135-z_dbg_gen_00331_inp_hr",
+      "20250611153340-z_dbg_gen_00275"
+    ]
+  },
+  "dl_ash2txt": {
+    "racine": [
+      "LICENSE.txt",
+      "cases/",
+      "multispectral/",
+      "paths/",
+      "representations/",
+      "volumes/"
+    ],
+    "chemins": [
+      "2um_front_surface/",
+      "front_ray_casting/"
+    ]
+  },
+  "segments": {
+    "sur_le_serveur": 39,
+    "dans_l_index": 39,
+    "aux_deux": [
+      "20250609204953-z_dbg_gen_00612",
+      "20250611132918-z_dbg_gen_00302_inp_hr",
+      "20250611133823-z_dbg_gen_00130_inp_hr",
+      "20250611134135-z_dbg_gen_00331_inp_hr",
+      "20250611153340-z_dbg_gen_00275",
+      "20250611153346-z_dbg_gen_00286_inp_hr",
+      "20250611153347-z_dbg_gen_00105_inp_hr",
+      "20250611154256-z_dbg_gen_00354_inp_hr",
+      "20250611161023-z_dbg_gen_00205_inp_hr",
+      "20250611161415-z_dbg_gen_00411_inp_hr",
+      "20250611170257-z_dbg_gen_00308_inp_hr",
+      "20250611171318-z_dbg_gen_00440_inp_hr",
+      "20250611171745-z_dbg_gen_00225_inp_hr",
+      "20250611172135-z_dbg_gen_00346_inp_hr",
+      "20250611173014-z_dbg_gen_00506_inp_hr",
+      "20250628074500-500P2_front",
+      "20250716055227-z_dbg_gen_00260_inp_hr",
+      "20250716055228-z_dbg_gen_00333_inp_hr",
+      "20250716055229-z_dbg_gen_00371_inp_hr",
+      "20250716055230-z_dbg_gen_00377_inp_hr",
+      "20250716055231-z_dbg_gen_00473_inp_hr",
+      "20250716055232-z_dbg_gen_00505_inp_hr",
+      "20250716055233-z_dbg_gen_00565_inp_hr",
+      "20250716055234-z_dbg_gen_00709_inp_hr",
+      "20250716055235-z_dbg_gen_00779_inp_hr",
+      "20250716055236-z_dbg_gen_00356_inp_hr",
+      "20250919184428-0500P2-wrap01_0919",
+      "20250919184429-0500P2-wrap02_0919",
+      "20250919184430-0500P2-wrap03_0919",
+      "20250919184431-0500P2-wrap04_0919",
+      "20250919184432-0500P2-wrap05_0919",
+      "20250919184433-0500P2-wrap06_0919",
+      "20250919184434-0500P2-wrap07_0919",
+      "20250919184435-0500P2-wrap08_0919",
+      "20250919184436-0500P2-wrap09_0919",
+      "20250920020222-0500P2-wrap10_0919",
+      "20250920020223-0500P2-wrap12_0919",
+      "20250920020224-0500P2-wrap13_0919",
+      "20250922024644-0500P2-wrap11_0919"
+    ],
+    "serveur_seulement": [],
+    "index_seulement": []
+  },
+  "racines": {
+    "sur_s3_seulement": [
+      "photos",
+      "segments"
+    ],
+    "sur_dl_seulement": [
+      "LICENSE.txt",
+      "cases",
+      "multispectral",
+      "paths"
+    ]
+  }
+}

@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 2163
+- **lignes** : 2199
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5668,6 +5668,18 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠⚠⚠ **Cinquième occurrence du même angle mort** : le référent avait été déclaré absent faute
     d'avoir interrogé un serveur ; ici c'est un dossier de l'index qu'on n'avait jamais énuméré.
     **Ce qu'on croit absent doit être cherché avant d'être reconstruit.**
+  - ⭐⭐ **Et l'angle mort est maintenant OUTILLÉ** (`ce_que_les_serveurs_publient`, 13 contrôles).
+    L'inventaire corrige l'hypothèse : **39 segments sur S3, 39 dans l'index, 0 écart** — le cache
+    n'était pas périmé, personne ne l'avait **énuméré**. La vraie cause est structurelle : les deux
+    serveurs ne publient **pas la même chose**. `segments/` (les 13 spires) et `photos/` ne sont
+    que sur **S3** ; `paths/` (les étiquettes et le masque), `cases/` et `multispectral/` que sur
+    **`dl.ash2txt.org`**. Les étiquettes venaient de l'un, les segments de l'autre, et personne
+    n'avait croisé les deux listages.
+  - ⚠ Le **refus** fait partie de l'outil : un listage vide est une coupure, pas un verdict, et le
+    comparer à un index plein dirait « l'index a tout inventé ».
+  - ⚠⚠ Défaut de mon propre outil attrapé avant publication : `index_local` ignorait son argument
+    et rendait les **311** segments des 45 objets, d'où un faux « 272 à l'index seulement ». Un
+    inventaire qui crie faux est un inventaire qu'on cesse d'écouter.
 - **rétractations / corrections internes** :
   - ⚠⚠⚠ **« Le résidu est très variable dans l'espace » est ANNULÉ** : il reposait sur un
     optimum à (−104, −120) qui touchait **le bord** de son balayage, donc sur une borne et non
@@ -5698,8 +5710,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 1570 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 2163 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 1606 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 2199 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
