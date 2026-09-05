@@ -59,6 +59,11 @@ objet, même surface, même aplatissement, réponse connue.
 
 **Ni faisceau, ni annotation manuelle, ni rescan.** Les couches sont rendues.
 
+> ⚠⚠ **Corrigé le 2026-09-05** : il manque le **recalage** entre l'aplatissement des étiquettes
+> et celui du segment publié — deux paramétrisations du même fragment. Mesuré traitable
+> (Dice 0,971) mais **affine** et non similitude (3,2 % d'écart d'aspect). Détail en
+> [`75`](75_registre_des_taches.md) §C1.
+
 ⚠ Et le piège à ne pas hériter en la faisant : la tuile de 256 px, qui vaut **quatre fois** la
 fenêtre des auteurs à ce pas. La rendre avec la tuile héritée produirait un résultat **sans la
 propriété qui rendait l'original crédible**.
@@ -71,8 +76,12 @@ propriété qui rendait l'original crédible**.
    domaine publie les mécanismes, ce qui résiste est la mesure. $F$ est de la physique
    standard en imagerie de phase par propagation — **il faut chercher si quelqu'un l'a déjà
    appliqué à ce corpus**, et l'audit doit porter sur le *concept*, pas sur le nom.
-2. **Le contrôle P1 bis** de [`71`](71_les_trois_resultats_de_tete_audites.md), qui traîne :
-   ×15,9 exigé contre ×3,8 observé.
+2. ~~**Le contrôle P1 bis** de [`71`](71_les_trois_resultats_de_tete_audites.md), qui traîne :
+   ×15,9 exigé contre ×3,8 observé.~~ ✅ **FAIT le 2026-09-05** — l'hypothèse tient : sur les
+   24 tirages des deux rouleaux et des deux plafonds, la densité vaut **2 812 à 2 857 cellules
+   par cm²** (étendue 1,6 %), donc cellules ∝ aire, et le basculement est **plus raide que la
+   seule arithmétique de taille**. Mesure : `src/tracecheck/modele_de_proprete.py`,
+   détail en [`75`](75_registre_des_taches.md) §D2.
 3. ⚠ **Le fold du modèle du Grand Prize** (`66` §3) : indécidable depuis les métadonnées, mais
    **décidable par la mesure** — scorer sur les deux segments, celui où il fait le moins bien
    est celui qu'il n'a pas vu. Tant que ce n'est pas fait, tout résultat d'encre reposant sur

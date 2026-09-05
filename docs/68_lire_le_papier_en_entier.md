@@ -210,6 +210,20 @@ question dont tout le reste dépend — *que reste-t-il de l'encre à $F = 0{,}3
 dont **la réponse est connue et transcrite**. Et ça ne demande **ni faisceau, ni annotation
 manuelle, ni rescan** : les couches sont déjà rendues.
 
+> ⚠⚠⚠ **Corrigé le 2026-09-05 — il manque UNE chose de plus, et ce paragraphe ne la nommait
+> pas.** Remplir la case ne demande effectivement rien de tout ça ; la **scorer** contre la
+> vérité terrain infrarouge demande un **recalage entre deux aplatissements**. Les étiquettes
+> (`500P2_inklabels.png`) vivent sur `dl.ash2txt.org` au chemin `paths/2um_front_surface/`, en
+> **27 160 × 14 990**, et les couches du régime du prix sur le bucket ouvert au chemin
+> `segments/…-500P2_front/`, dont la grille de production fait **26 440 × 15 060**. Même
+> fragment, paramétrisations différentes — et le chemin des étiquettes ne publie **aucun volume
+> à 9,362 µm**.
+>
+> ⭐ C'est traitable et c'est mesuré (`75` §C1, `src/encre/deux_aplatissements.py`) : les deux
+> empreintes se recouvrent à **Dice 0,971**, donc un recalage **affine** est un lot défini. ⚠ Mais
+> l'écart de rapport d'aspect vaut **3,2 %**, soit ~1,9 mm de dérive d'un bout à l'autre — trois
+> lettres — donc une similitude ne suffira pas.
+
 ---
 
 ## 5. ⚠⚠ La garantie anti-hallucination ne se transporte pas au pas du prix

@@ -1,0 +1,22 @@
+{
+  "segment": "20250628074500-500P2_front",
+  "forme_etiquettes": [
+    27160,
+    14990
+  ],
+  "forme_segment_reduit": [
+    3305,
+    1883
+  ],
+  "aspect_etiquettes": 1.8118745830553702,
+  "aspect_segment": 1.7551779075942644,
+  "part_etiquettes": 0.603729248046875,
+  "part_segment": 0.6285247802734375,
+  "cote": 256,
+  "dice_depart": 0.9710118008346026,
+  "dice_meilleur": 0.9717300048293027,
+  "decalage": [
+    0,
+    1
+  ]
+}

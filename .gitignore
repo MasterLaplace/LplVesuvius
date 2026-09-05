@@ -71,3 +71,4 @@ src/apprendre/vignettes/
 
 # Verrou de `src/outils/temoins.sh` : un seul run a la fois (voir son entete).
 /.temoins.lock
+data/0500P2/

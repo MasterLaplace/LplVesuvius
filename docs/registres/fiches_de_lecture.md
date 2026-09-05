@@ -4676,7 +4676,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
 ---
 
 ### docs/68_lire_le_papier_en_entier.md
-- **lignes** : 303
+- **lignes** : 317
 - **nature** : MIXTE (mesures nouvelles — nombre de Fresnel sur 59 scans, 103 cases vides,
   taille de tuile — et reconstitution de méthode / feuille de route)
 - **résumé** : Relecture intégrale du papier de référence (Angelotti et al., arXiv 2606.29085,
@@ -4802,7 +4802,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
 
 
 ### docs/72_le_second_papier.md
-- **lignes** : 91
+- **lignes** : 100
 - **nature** : PLAN
 - **résumé** : Inventaire d'un lot écarté de l'article en cours par `70` §3.1 — non pas parce qu'il ne tient pas, mais parce qu'il relève d'un autre sujet : le premier papier juge une **géométrie**, celui-ci jugerait un **régime d'imagerie**. Le document porte en tête une réserve ajoutée le 2026-09-03 qui vaut pour tout son contenu : c'est une **occasion de publication**, pas un progrès vers le prix, et l'auteur doit l'arbitrer comme tel. Il liste cinq résultats déjà mesurés, nomme la seule mesure qui manque, et énumère trois vérifications à faire avant d'écrire.
 - **conclusions extractibles** :
@@ -4812,8 +4812,9 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - La garantie anti-hallucination ne se transporte pas : 256 px valent 614 µm à 2,4 µm et **2 397 µm** à 9,362 ; il faudrait **66 px**.
   - La résolution est éliminée **deux fois** et par deux voies indépendantes (`58` par émulation, `63` contre de vraies étiquettes) : ramener un fragment au pas d'entraînement **dégrade** l'AUC.
   - La campagne de scan s'effondre comme facteur : p de 0,0081 à **0,50** en séparant « jamais tracé » de « pas d'encre » (`59`).
+  - ⚠⚠ **Corrigé le 2026-09-05** : « une seule mesure » est incomplet — la **scorer** demande un **recalage** entre l'aplatissement des étiquettes (`dl.ash2txt.org`, 27 160 × 14 990) et celui du segment publié (26 440 × 15 060). Mesuré traitable (Dice **0,971**) mais **affine**, pas similitude (3,2 % d'écart d'aspect).
   - Ce qui manque est **une seule mesure** : rendre une carte d'encre depuis la pile **déjà publiée** à 9,362 µm d'un fragment de supervision et la scorer contre les **mêmes étiquettes infrarouges** que le témoin positif à 2,215 µm. Ni faisceau, ni annotation, ni rescan.
-  - Trois vérifications avant d'écrire : l'**antériorité** de $F$ (audit sur le concept, pas le nom) ; le contrôle **P1 bis** de `71` (×15,9 exigé contre ×3,8 observé) ; le **fold du modèle GP** (`66` §3), indécidable depuis les métadonnées mais décidable par la mesure — scorer sur les deux segments, celui où il fait le moins bien est celui qu'il n'a pas vu.
+  - Trois vérifications avant d'écrire : l'**antériorité** de $F$ (audit sur le concept, pas le nom) ; le contrôle **P1 bis** de `71` (×15,9 exigé contre ×3,8 observé) — ✅ **fait le 2026-09-05**, l'hypothèse tient (densité 2 812–2 857 cellules/cm² sur 24 tirages) ; le **fold du modèle GP** (`66` §3), indécidable depuis les métadonnées mais décidable par la mesure — scorer sur les deux segments, celui où il fait le moins bien est celui qu'il n'a pas vu.
 - **rétractations / corrections internes** :
   - Deux résultats annoncés ici (dispersion et Holm, `64` et `65`) sont **partis dans le premier papier** §6.2 et ne sont plus disponibles pour celui-ci — partage assumé : ce sont des résultats de **méthode**, pas d'imagerie.
   - §5 : le document ne dit pas que le papier doit être écrit, ni quand ; il nomme le risque de l'écrire **sans** remplir la case vide — un diagnostic sans coût mesuré, c'est-à-dire ce que le premier papier reproche à la littérature.

@@ -494,10 +494,67 @@ rot270 0,543, les autres autour de 0,5. Aucune ne rend un accord franc, donc l'o
 innocentée. Et les deux grilles sont dans le rapport de leurs tailles de voxel (3,893 contre
 3,903 attendu, 0,3 % d'écart), ce que la mesure asserte plutôt que de le supposer.
 
+### ⚠⚠⚠ La case qui décide demande UNE CHOSE DE PLUS, que ni `68` ni `72` ne nomment
+
+> Mesure : `src/encre/deux_aplatissements.py` (10 contrôles),
+> `docs/mesures/deux_aplatissements.json`.
+>
+> ```
+> uv run python src/encre/deux_aplatissements.py --json docs/mesures/deux_aplatissements.json
+> ```
+
+`68` §4 et `72` §3 disent que remplir la case de `PHerc0500P2` ne demande *« ni faisceau, ni
+annotation manuelle, ni rescan »*. **C'est vrai, et incomplet** : la **scorer** contre la vérité
+terrain infrarouge demande un **recalage entre deux aplatissements**.
+
+⭐⭐ **Vérifié sur les DEUX serveurs**, parce que n'interroger qu'une vue du corpus est l'angle
+mort que `78` §0 recense trois fois — et la première réponse était fausse. L'index ouvert ne
+publie **aucune** étiquette d'encre (0 sur les 14 types de données du corpus) ; `dl.ash2txt.org`,
+lui, en publie :
+
+| | serveur | forme |
+|---|---|---|
+| `500P2_inklabels.png`, `_ir.png`, `_mask.png` | `dl.ash2txt.org/fragments/PHerc0500P2/paths/2um_front_surface/` | **27 160 × 14 990** |
+| couches du chemin des étiquettes | même chemin | 65 couches, **2 µm seulement** |
+| couches du **régime du prix** | bucket ouvert, `segments/…-500P2_front/` | 28 couches, 9,362 µm, **6 280 × 3 580** |
+| couches de production | même segment | 118 couches, 2,215 µm, **26 440 × 15 060** |
+
+⚠⚠ **26 440 × 15 060 contre 27 160 × 14 990** : même fragment, **paramétrisations différentes**.
+Un aplatissement n'est pas unique, donc les étiquettes ne se transportent pas pixel pour pixel.
+Et le chemin des étiquettes ne publie **aucun volume à 9,362 µm** — les deux moitiés de
+l'expérience sont sur deux surfaces.
+
+⚠⚠⚠ **Et le recalage ne peut pas être exact, faute de coordonnées.** Le segment publie son
+`tifxyz-transformed` — une position 3D par cellule — donc apparier deux surfaces par leur
+**géométrie** serait un plus proche voisin, exact et bon marché. Le chemin des étiquettes ne
+publie **que des images** : ni `tifxyz`, ni `obj`. L'appariement doit se faire **par l'image**.
+
+### ⭐⭐ Mais c'est traitable, et c'est mesuré
+
+| | valeur |
+|---|---:|
+| recouvrement des deux empreintes (Dice, grille 256) | **0,971** sans décalage, **0,972** au mieux |
+| écart des rapports d'aspect | **3,2 %** |
+
+**Les deux aplatissements sont presque la même carte.** Un recalage fin est donc un **lot
+défini**, pas un problème de recherche — au-dessous de 0,80 il aurait fallu un champ de
+déformation.
+
+⚠ Deux réserves. À 256 cellules une case vaut ~100 µm : ce qui est établi est l'accord des
+**silhouettes**, et une lettre fait ~600 µm — la registration au niveau de la lettre reste à
+faire. Et les 3,2 % d'écart d'aspect ne sont pas rien : sur 27 160 lignes, c'est ~870 lignes de
+dérive cumulée, soit **~1,9 mm**, donc trois lettres d'un bout à l'autre. Il faudra une **affine**
+(échelle anisotrope), pas une similitude.
+
+⚠ L'empreinte du segment est tirée de la **région non nulle de sa carte d'encre réduite**, faute
+de masque publié — donc ce n'est pas un masque de surface mais « là où le détecteur a rendu
+quelque chose ». Le recouvrement mesuré est un **minorant**.
+
 ### Ce qui reste de C1
 
-- ⚠⚠ **La case de `PHerc0500P2`**, celle qui décide, avec sa **vérité terrain infrarouge**. C'est
-  la seule qui répondrait « combien de caractères survivent », parce que c'est la seule où la
+- ⚠⚠ **La case de `PHerc0500P2`**, celle qui décide : les étiquettes existent, les couches du
+  régime du prix existent, et il manque **l'affine entre les deux aplatissements**. C'est la
+  seule case qui répondrait « combien de caractères survivent », parce que c'est la seule où la
   réponse est connue.
 - **≥ 40 tuiles** au lieu d'une fenêtre : l'intervalle de `64` §1 (σ = 0,2243) demande 40 tuiles
   pour séparer une AUC de 0,599 de 0,5. Une fenêtre unique ne donne pas d'intervalle.

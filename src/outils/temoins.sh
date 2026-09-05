@@ -1364,6 +1364,7 @@ run "figure profondeur lue"   uv run python "$ROOT/src/figures/figure_profondeur
 run "modele de proprete (P1bis)" uv run python "$ROOT/src/tracecheck/modele_de_proprete.py" --verifier
 run "la case vide remplie"    uv run python "$ROOT/src/encre/la_case_vide_remplie.py" --verifier
 run "figure case vide remplie" uv run python "$ROOT/src/figures/figure_case_vide_remplie.py" --verifier
+run "deux aplatissements"     uv run python "$ROOT/src/encre/deux_aplatissements.py" --verifier
 # ⚠⚠ La premiere tache du chantier A : mesurer le doublonnage PAR HACHAGE. Le plan annoncait
 # « 17,4 Go de doublons » sur un proxy nom+taille dont il ecrivait lui-meme qu il surcompte --
 # des chunks zarr nommes `40` dans deux volumes differents, meme nom, meme taille, contenu
