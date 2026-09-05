@@ -36,25 +36,60 @@ est déjà dans les couches qu'on a.
 
 ## 1bis. 🎯 Ce que ça donne, en une image
 
-![Deux profils de profondeur](images/profondeur_deux_cas.png)
+![Trois profils de profondeur](images/12_profils_de_profondeur.png)
 
-À gauche un segment de Scroll 1 : une courbe **unimodale propre**, pic à la couche 28,
-soit **32 µm** de la surface tracée. À droite un segment de Scroll 4 : le contraste est
-**maximal dès la première couche lue** et décline sans jamais remonter — pic au bord,
-**127 µm** d'écart. La feuille n'est pas là où la trace la place.
+```
+uv run python src/figures/figure_profondeur.py \
+    docs/mesures/profil_profondeur.json \
+    docs/mesures/profil_profondeur_scroll4_region.json \
+    docs/images/12_profils_de_profondeur.png
+```
 
-⚠ Les deux panneaux lisent la **même fenêtre de couches** (15 à 40) et sont normalisés
+À gauche un segment de Scroll 1 : une courbe **unimodale propre**, pic à la couche **26**,
+soit **47 µm** de la surface tracée. Les deux panneaux de droite sont **deux fenêtres du
+même segment** de Scroll 4, et c'est ce qui frappe : leurs pics tombent aux **deux bords
+opposés** de la pile — couche **36** dans l'une, couche **16** dans l'autre, soit **32** et
+**127 µm** d'écart à la trace. La feuille n'est pas là où la trace la place, et elle n'y est
+même pas de la même façon d'un bout à l'autre du segment.
+
+⚠ Les trois panneaux lisent la **même fenêtre de couches** (15 à 40) et sont normalisés
 chacun dans sa propre pile : ce qui se compare est la **forme**, pas le niveau.
 
+⚠⚠ **Ce que la figure trace est l'INTENSITÉ moyenne, pas le contraste** — et la légende de ce
+document a longtemps dit l'inverse. C'est corrigé ici plutôt que laissé : voir le §2, où la
+raison est désormais une propriété de la **taille de voxel** et non une préférence.
+
+⚠ **Trois nombres de cette page ont été corrigés le 2026-09-05** : la version publiée annonçait
+« pic à la couche 28, 32 µm » pour Scroll 1 et un seul panneau Scroll 4. Les mesures présentes
+dans l'arbre (`docs/mesures/profil_profondeur.json`,
+`docs/mesures/profil_profondeur_scroll4_region.json`) donnent **26 / 47 µm** et **deux**
+fenêtres. L'image publiée ne se régénérait plus depuis ses propres données — le défaut que la
+tâche `D3` traque : une image affichée sans la commande qui la refait est une mesure que
+personne ne peut refaire, et elle dérive sans que rien ne le dise.
+
 `src/figures/figure_profondeur.py` — tracé avec PIL, sans matplotlib (absent ici, et
-l'ajouter pour deux courbes ferait dépendre une figure d'une pile graphique entière).
+l'ajouter pour trois courbes ferait dépendre une figure d'une pile graphique entière).
 
 ## 2. La mesure
 
 `src/volume/depth_profile.py`. Pour chaque couche, sur une fenêtre : l'**intensité
 moyenne** (où est la matière) et le **contraste local**, écart-type d'un passe-haut 3×3
-(où est la *structure*). C'est le second qui localise : il pique là où les fibres et
-l'encre sont nettes, c'est-à-dire à la surface.
+(où est la *structure*).
+
+⚠⚠⚠ **C'est l'INTENSITÉ qui localise, et le §10 de cette page le corrige déjà** — voir
+« Défaut 1 — le contraste ne localise pas la matière ». À **7,91 µm** les deux piquent au même
+endroit, donc rien ne les distinguait ; à **2,4 µm** le contraste devient un **U** dont les
+maxima sont les **interfaces** de la feuille et le minimum son **intérieur**. La phrase qui
+suivait ici — *« c'est le second qui localise »* — appartient à la version d'avant cette
+correction, et elle est retirée plutôt que laissée à côté du §10 qui la dément.
+
+> ⚠⚠ **Et elle a coûté quelque chose le 2026-09-05**, ce qui est la seule chose neuve à écrire :
+> les deux premières campagnes de `C2` (`75` §C2) ont placé leur fenêtre « face » sur une spire
+> **voisine** en suivant le contraste sur des surface-volumes à 2,399 µm. Le §1 à §9 de cette
+> page sont conservés *et faux par endroits*, l'en-tête le dit — je les ai lus quand même. Le
+> remède est dans l'outil, pas dans la vigilance : `depth_profile.py` rend les deux séries, et
+> `le_nul_verso.py` choisit désormais sur l'intensité, avec une garde qui **refuse** une fenêtre
+> dont le pic n'est pas dans la moitié centrale de sa pile.
 
 ⚠ **Chaque profil est normalisé dans sa propre pile.** Deux campagnes de scan n'ont ni
 la même dynamique ni le même gain ; comparer des niveaux bruts comparerait les

@@ -80,17 +80,43 @@ def en_gris(carte: np.ndarray, lo: float, hi: float) -> np.ndarray:
     return rgb
 
 
+def series_du_panneau(m: dict) -> tuple[list[float], list[float]]:
+    """
+    @brief Les deux courbes du panneau de profondeur : (contraste, intensité).
+
+    ⚠ Le repli existe pour les dossiers d'AVANT la correction du 2026-09-05, qui ne portent que
+    le contraste : ils doivent rester dessinables. Un outil qui refuse les anciennes mesures
+    pousse à les refaire, et refaire une mesure coûte deux inférences.
+    """
+    contraste = m["profil"]
+    return contraste, (m.get("profil_intensite") or contraste)
+
+
 def prose(m: dict) -> list[str]:
-    """Ce que la figure dit en toutes lettres, pour qu'un lecteur pressé ne devine pas."""
+    """Ce que la figure dit en toutes lettres, pour qu'un lecteur pressé ne devine pas.
+
+    ⚠⚠ L'AUC EST EN TÊTE parce que c'est elle qui répond à la question posée : *peut-on, en
+    regardant une valeur, dire si elle vient de la face ou du vide ?* Le niveau et la dispersion
+    sont deux vues partielles de cette même question — une médiane qui se déplace n'est utile
+    que si les distributions se séparent, et deux étendues égales n'interdisent pas une
+    séparation parfaite.
+    """
     f, n = m["face"], m["nul"]
-    return [
+    auc = m.get("auc_face_contre_nul")
+    lignes = []
+    if auc is not None:
+        lignes.append(
+            f"AUC face contre vide : {auc:.3f} -- la chance de distinguer un pixel de face "
+            f"d'un pixel de vide sur sa seule valeur (0,5 = pile ou face).")
+    lignes += [
         f"contraste local : {m['contraste_face']:.3f} sur la face, "
-        f"{m['contraste_nul']:.3f} dans le vide -- {m['contraste_face'] / max(1e-9, m['contraste_nul']):.0f}x moins.",
+        f"{m['contraste_nul']:.3f} dans le vide -- "
+        f"{m['contraste_face'] / max(1e-9, m['contraste_nul']):.0f}x moins.",
         f"et pourtant la dispersion du detecteur ne tombe que de "
         f"{100 * (1 - m['rapport_etendue']):.0f} % ({m['etendue_face']:.2f} -> {m['etendue_nul']:.2f}).",
-        f"ce qui se deplace, c'est le NIVEAU : mediane {f['mediane']:+.2f} contre {n['mediane']:+.2f}.",
-        "donc un seuil distingue les deux ; « il y a de la structure ici » ne le fait pas.",
+        f"le NIVEAU, lui, se deplace : mediane {f['mediane']:+.2f} contre {n['mediane']:+.2f}.",
     ]
+    return lignes
 
 
 def dessiner(m: dict, sortie: Path) -> dict:
@@ -113,19 +139,27 @@ def dessiner(m: dict, sortie: Path) -> dict:
     # ---- le profil de profondeur, et les deux fenetres ---------------------------------
     px, py, pw, ph = 36, 92, L - 72, 130
     d.rectangle([px, py, px + pw, py + ph], outline=(60, 60, 60))
-    profil = m["profil"]
-    n = len(profil)
+    # ⚠⚠⚠ LES DEUX SERIES, ET C'EST LE SUJET DE CE PANNEAU. A 2,4 µm le contraste local
+    # dessine un U -- maximal aux deux interfaces de la feuille, minimal dans son interieur --
+    # donc s'en servir pour placer les fenetres met la face au BORD et le vide DANS le papyrus.
+    # C'est l'inversion qui a ete payee le 2026-09-05. L'intensite, elle, pique sur la matiere.
+    # Les tracer ensemble rend la correction verifiable a l'oeil au lieu d'etre racontee.
+    contraste, intensite = series_du_panneau(m)
+    n = len(intensite)
     for nom, debut, couleur in (("face", m["debut_face"], AMBRE),
                                 ("vide", m["debut_nul"], GRIS)):
         x0 = px + int(pw * debut / n)
         x1 = px + int(pw * (debut + 26) / n)
         d.rectangle([x0, py + 1, x1, py + ph - 1], fill=(38, 32, 22) if nom == "face" else (26, 30, 34))
         d.text((x0 + 4, py + 6), f"fenetre {nom}", fill=couleur, font=petit)
-    pts = [(px + int(pw * i / n), py + ph - int((ph - 8) * v)) for i, v in enumerate(profil)]
-    for u, w in zip(pts, pts[1:]):
-        d.line([u, w], fill=TEXTE, width=1)
-    d.text((px + 4, py + ph - 16), "contraste local par couche (normalise)",
-           fill=DISCRET, font=petit)
+    for serie, couleur, large in ((contraste, ROUGE, 1), (intensite, TEXTE, 2)):
+        pts = [(px + int(pw * i / n), py + ph - int((ph - 8) * v)) for i, v in enumerate(serie)]
+        for u, w in zip(pts, pts[1:]):
+            d.line([u, w], fill=couleur, width=large)
+    d.text((px + 4, py + ph - 30), "intensite moyenne par couche -- c'est ELLE qui place les "
+                                   "fenetres", fill=TEXTE, font=petit)
+    d.text((px + 4, py + ph - 16), "contraste local -- un U a 2,4 µm : ses maxima sont les "
+                                   "interfaces, pas la feuille", fill=ROUGE, font=petit)
 
     # ---- les deux cartes, MEME echelle -------------------------------------------------
     for i, (nom, carte, sous) in enumerate((
@@ -188,13 +222,29 @@ def verifier() -> int:
     faux = {"segment": "s", "profil": [0.5] * 109, "debut_face": 39, "debut_nul": 83,
             "contraste_face": 0.877, "contraste_nul": 0.063,
             "etendue_face": 3.994, "etendue_nul": 3.767, "rapport_etendue": 0.94,
+            "auc_face_contre_nul": 0.819,
             "face": {"mediane": -0.272}, "nul": {"mediane": -1.502}}
     lignes = prose(faux)
     v("la prose est tracable", prose_tracable(lignes), str(lignes))
+    # ⚠⚠ L'AUC EN TETE : c'est la seule des trois grandeurs qui reponde a la question posee, et
+    # une figure qui l'enterrerait en quatrieme ligne se lirait comme les deux precedentes.
+    v("l'AUC ouvre la prose", lignes[0].startswith("AUC"), str(lignes[0]))
     v("... et elle dit le rapport de contraste", any("14x moins" in l for l in lignes),
       str(lignes))
-    v("... et elle nomme le NIVEAU comme ce qui distingue",
-      any("NIVEAU" in l for l in lignes), str(lignes))
+    v("... et elle nomme le NIVEAU", any("NIVEAU" in l for l in lignes), str(lignes))
+    # ⚠ Une mesure d'avant l'AUC ne doit pas faire tomber la figure : elle en perd la premiere
+    # ligne, pas sa capacite a etre dessinee. Un outil qui refuse les anciens dossiers pousse a
+    # les refaire, et refaire une mesure coute huit minutes d'inference.
+    sans = dict(faux); sans.pop("auc_face_contre_nul")
+    v("... et une mesure sans AUC se dessine quand meme", len(prose(sans)) == 3, str(prose(sans)))
+    # ⚠⚠ LE PANNEAU TRACE LES DEUX SERIES, et c'est ce qui rend la correction visible. Ecrit
+    # d'abord comme un test sur la docstring de `dessiner` -- qui n'en a pas, donc le `if`
+    # retombait sur True : une verification incapable d'echouer, dans le fichier d'a cote de
+    # celui ou la meme faute vient d'etre corrigee. Extrait en fonction pure, il compare.
+    c, i = series_du_panneau({"profil": [0.1] * 5, "profil_intensite": [0.9] * 5})
+    v("le panneau prend l'intensite quand elle est la", i[0] == 0.9 and c[0] == 0.1, f"{i[0]}/{c[0]}")
+    c2, i2 = series_du_panneau({"profil": [0.1] * 5})
+    v("... et retombe sur le contraste quand elle manque", i2 == c2 == [0.1] * 5, str(i2))
 
     print(f"  {'ECHEC' if echecs else 'ALL PASS'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
@@ -203,7 +253,8 @@ def verifier() -> int:
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--mesure", type=Path,
-                   default=RACINE / "docs" / "mesures" / "le_nul_verso_w046.json")
+                   default=RACINE / "docs" / "mesures"
+                   / "le_nul_verso_20260325000000-w046.json")
     p.add_argument("--sortie", type=Path,
                    default=RACINE / "docs" / "images" / "75_le_nul_verso.png")
     p.add_argument("--verifier", action="store_true")

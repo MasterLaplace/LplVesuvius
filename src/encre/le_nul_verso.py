@@ -60,6 +60,19 @@ INFERENCE = RACINE / "src" / "xpu" / "infer_ink.py"
 MODELE = RACINE / "data" / "models" / "timesformer_GP_scroll1"
 DEFAUT_JSON = RACINE / "docs" / "mesures" / "le_nul_verso.json"
 
+SEGMENTS = ("20260325000000-w046_20260325",
+            "20260210000000-w058_2026021020",
+            "20260115000001-w056_2026011514")
+"""Les trois segments `w` de `PHerc0139` sur lesquels le contrôle tourne.
+
+⚠⚠ TROIS, ET LA LISTE EST DU CODE PLUTÔT QU'UNE BOUCLE DE TERMINAL. Un seul segment ne peut
+pas dire si un résultat est une propriété du **détecteur** ou un accident de **cette
+fenêtre-là** ; et une liste tapée au terminal se perd, donc personne ne peut refaire la mesure
+sur exactement le même corpus.
+
+⚠ Ils partagent le rouleau, la campagne de scan et la taille de voxel : ce qui varie d'un à
+l'autre est la région, ce qui est précisément la chose qu'on veut faire varier."""
+
 COUCHES_LUES = 26
 """Ce que le détecteur GP-2023 lit d'une pile (`12` §1, `09` §12). ⚠ C'est une propriété du
 modèle, pas un réglage : les deux fenêtres doivent en lire **le même nombre**, sinon on
@@ -73,56 +86,140 @@ surface à la **32** et que le détecteur lit **15 à 40** — donc la surface e
 La reprendre telle quelle est ce qui rend notre fenêtre « sur face » comparable à la leur."""
 
 
+VERROU = RACINE / "docs" / "mesures" / ".le_nul_verso.verrou"
+
+
+def prendre_le_verrou():
+    """
+    @brief Refuse de démarrer si une campagne écrit déjà — et rend le fichier verrou ouvert.
+
+    ⚠⚠⚠ ÉCRIT PARCE QUE ÇA VIENT D'ARRIVER, POUR LA TROISIÈME FOIS DANS CE DÉPÔT. Deux
+    campagnes ont tourné en parallèle sur les mêmes JSON et les mêmes cartes `.npy` : la
+    première avait survécu à un `nohup` que je croyais mort, parce que `ps -C python` ne voit
+    pas un processus nommé `python3` — une vérification incapable de détecter ce qu'elle
+    cherchait. Le résultat aurait été des cartes moitié d'un run, moitié de l'autre, avec des
+    résumés parfaitement plausibles.
+
+    ⚠ Le verrou est tenu par le NOYAU (`flock`), pas par un fichier témoin : un témoin survit à
+    un `kill -9` et bloque alors tout run suivant, ce qui pousse à le supprimer à la main, ce
+    qui le rend inutile. Un verrou `flock` est relâché quand le processus meurt, quelle que soit
+    la façon dont il meurt.
+    """
+    import fcntl
+    import os
+    # ⚠ `--tous` tient déjà le verrou pour toute la campagne et lance ses trois mesures en
+    # sous-processus : sans cette porte, l'enfant se ferait refuser par son propre parent.
+    if os.environ.get("LPL_NUL_VERSO_VERROU") == "1":
+        return None
+    VERROU.parent.mkdir(parents=True, exist_ok=True)
+    fh = VERROU.open("w")
+    try:
+        fcntl.flock(fh.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError:
+        raise SystemExit(
+            f"une autre campagne écrit déjà dans {VERROU.parent} — refusé.\n"
+            "  ⚠ Deux campagnes concurrentes mélangeraient les cartes de deux runs sans que "
+            "rien ne le dise. Attendre, ou tuer l'autre PAR SON PID.") from None
+    fh.write(str(__import__("os").getpid()))
+    fh.flush()
+    return fh
+
+
 def _lancer(argv: list[str], timeout: float = 7200.0) -> tuple[int, str]:
     r = subprocess.run(argv, capture_output=True, text=True, cwd=RACINE, timeout=timeout)
     return r.returncode, (r.stdout or "") + (r.stderr or "")
 
 
-def profil_de_profondeur(couches: Path, taille: int) -> list[float] | None:
+def profil_de_profondeur(couches: Path, taille: int) -> dict | None:
     """
-    @brief Le contraste local par couche, normalisé — d'où sont la face et le vide.
+    @brief Les DEUX profils par couche, normalisés — intensité et contraste local.
 
-    ⚠ Appelé, jamais réécrit : `depth_profile.py` porte déjà les deux profils et la raison de
-    préférer le **contraste** à l'intensité (« le papyrus est épais » — l'intensité voit la
-    matière, le contraste voit la structure, et c'est la structure qui localise la face).
+    ⚠⚠⚠ ET C'EST L'INTENSITÉ QUI LOCALISE ICI, PAS LE CONTRASTE. `depth_profile.py` porte la
+    raison, écrite dans le module que ce fichier appelait déjà : *« sur les piles à 7,91 µm les
+    deux coïncident ; sur un volume à 2,4 µm qui résout les fibres, le contraste devient un U —
+    maximal aux DEUX bords, minimal dans la feuille — parce qu'il suit les interfaces et le
+    bruit, pas la matière »*. Les surface-volumes de `PHerc0139` sont à **2,399 µm**.
+
+    ⚠⚠ Je lisais la mauvaise série, et le prix est mesuré : sur `w058` et `w056` le contraste
+    pique aux couches **0** et **104** d'une pile de 109, avec son minimum au milieu. La fenêtre
+    « face » tombait donc sur une **interface de bord**, et la fenêtre « nulle », choisie au
+    minimum, tombait **dans la feuille**. Le couple était inversé, et il rendait une AUC de 0,50
+    que j'ai failli publier comme « le détecteur ne distingue pas le papyrus du vide ».
+
+    ⚠ Le contraste reste lu et gardé : c'est le diagnostic qui montre le U, donc ce qui rend la
+    correction vérifiable au lieu d'être affirmée.
     """
     code, sortie = _lancer(["uv", "run", "python", str(PROFIL), str(couches),
                             "--top", "0", "--left", "0", "--size", str(taille)], 1800)
     if code != 0:
         return None
-    valeurs: list[tuple[int, float]] = []
+    # ⚠ Motif ANCRÉ sur les deux étiquettes de la même ligne (`couche N contraste C moyenne M`) :
+    # un parseur qui n'en lit qu'une prend la première venue, et c'est exactement ce qui vient
+    # de coûter deux mesures.
+    valeurs: list[tuple[int, float, float]] = []
     for ligne in sortie.splitlines():
         m = ligne.split()
-        if len(m) >= 4 and m[0] == "couche" and m[2] == "contraste":
+        if len(m) >= 6 and m[0] == "couche" and m[2] == "contraste" and m[4] == "moyenne":
             try:
-                valeurs.append((int(m[1]), float(m[3])))
+                valeurs.append((int(m[1]), float(m[3]), float(m[5])))
             except ValueError:
                 continue
     if not valeurs:
         return None
-    return [v for _, v in sorted(valeurs)]
+    valeurs.sort()
+    return dict(contraste=[c for _, c, _ in valeurs], moyenne=[m for _, _, m in valeurs])
 
 
-def fenetres(profil: list[float]) -> dict:
+def pic_sur_la_feuille(pic: int, couches: int) -> bool:
     """
-    @brief Les deux `--start-layer` : sur la face, et dans le vide le plus creux.
+    @brief Le pic de contraste tombe-t-il sur la feuille TRACÉE, ou sur une spire voisine ?
 
-    ⚠⚠ LA FENÊTRE NULLE EST CHOISIE PAR LE MINIMUM DE CONTRASTE MOYEN, pas par un demi-pas
-    nominal. Un demi-pas suppose un empilement régulier ; un minimum mesuré ne suppose rien, et
-    il tombe là où il n'y a effectivement pas de structure.
+    ⚠⚠⚠ LA GARDE QUI MANQUAIT, ET ELLE A REFUSÉ DEUX MESURES DÉJÀ PAYÉES. Un surface-volume est
+    construit AUTOUR de la feuille suivie : elle est au milieu de la pile, et les bords sont à
+    une demi-épaisseur d'écart, donc chez les VOISINES. Sur `w046` le profil pique à la couche
+    56 d'une pile de 109 — au milieu, ce à quoi ressemble une feuille. Sur `w058` et `w056` il
+    pique à **0** et à **104**, avec son MINIMUM au milieu : la feuille tracée y est sans
+    structure et ce qu'on voit est la spire d'à côté.
+
+    ⚠⚠ Conséquence, et c'est pourquoi c'est une garde et pas une note : la fenêtre « face » y
+    tombait sur une voisine et la fenêtre « nulle » sur la feuille elle-même. Le couple
+    face/vide était **inversé**, et l'AUC de 0,50 qu'il rendait n'était pas « le détecteur ne
+    distingue pas le papyrus du vide » mais « deux fenêtres sans structure se ressemblent ».
+    J'ai failli publier la première phrase.
+
+    ⚠ La moitié centrale, pas un voisinage étroit : la feuille n'est pas exactement au milieu
+    (le suivi la décale), mais un pic dans le quart extérieur ne peut pas être elle.
+    """
+    return abs(pic - (couches - 1) / 2.0) < couches / 4.0
+
+
+def fenetres(profil: dict) -> dict:
+    """
+    @brief Les deux `--start-layer` : sur la feuille, et dans le vide le plus creux.
+
+    ⚠⚠⚠ LES DEUX FENÊTRES SE CHOISISSENT SUR L'INTENSITÉ, jamais sur le contraste. Voir
+    `profil_de_profondeur` : à 2,4 µm le contraste est un **U** dont les maxima sont les deux
+    interfaces de la feuille et dont le minimum est son intérieur, donc s'en servir met la face
+    au bord et le vide dans le papyrus. Le contraste reste calculé et gardé pour que ce U soit
+    **visible** dans le dossier plutôt que raconté.
+
+    ⚠⚠ LA FENÊTRE NULLE EST CHOISIE PAR LE MINIMUM DE MATIÈRE, pas par un demi-pas nominal. Un
+    demi-pas suppose un empilement régulier ; un minimum mesuré ne suppose rien, et il tombe là
+    où il n'y a effectivement rien.
 
     ⚠ Les deux fenêtres lisent `COUCHES_LUES` couches et restent dans la pile. Une fenêtre qui
     déborderait lirait des zéros de bord, ce qui ferait passer un artefact de découpe pour une
     absence d'encre.
     """
-    n = len(profil)
+    intensite, contraste = profil["moyenne"], profil["contraste"]
+    n = len(intensite)
     if n < COUCHES_LUES + 4:
         return {}
-    pic = max(range(n), key=lambda i: profil[i])
+    pic = max(range(n), key=lambda i: intensite[i])
     debut_face = max(0, min(n - COUCHES_LUES, pic - SURFACE_DANS_LA_FENETRE))
 
-    def moyenne(d: int) -> float:
-        return float(np.mean(profil[d:d + COUCHES_LUES]))
+    def moyenne(serie: list[float], d: int) -> float:
+        return float(np.mean(serie[d:d + COUCHES_LUES]))
 
     candidats = [d for d in range(0, n - COUCHES_LUES + 1)
                  # ⚠ La fenêtre nulle ne doit pas CHEVAUCHER celle de la face, sinon elle
@@ -130,10 +227,14 @@ def fenetres(profil: list[float]) -> dict:
                  if d >= debut_face + COUCHES_LUES or d + COUCHES_LUES <= debut_face]
     if not candidats:
         return {}
-    debut_nul = min(candidats, key=moyenne)
+    debut_nul = min(candidats, key=lambda d: moyenne(intensite, d))
     return dict(pic=pic, debut_face=debut_face, debut_nul=debut_nul,
-                contraste_face=moyenne(debut_face), contraste_nul=moyenne(debut_nul),
-                couches=n)
+                intensite_face=moyenne(intensite, debut_face),
+                intensite_nul=moyenne(intensite, debut_nul),
+                contraste_face=moyenne(contraste, debut_face),
+                contraste_nul=moyenne(contraste, debut_nul),
+                pic_contraste=max(range(n), key=lambda i: contraste[i]),
+                couches=n, pic_central=pic_sur_la_feuille(pic, n))
 
 
 def niveau_le_plus_grossier(zarr: str, plafond: int = 12) -> tuple[int, list[int]]:
@@ -164,26 +265,33 @@ def niveau_le_plus_grossier(zarr: str, plafond: int = 12) -> tuple[int, list[int
 
 def chercher_fenetre(zarr: str, taille: int = 512, tuiles: int = 8) -> dict:
     """
-    @brief Où poser la fenêtre : la sous-tuile la plus pleine, cherchée sur TOUT le plan.
+    @brief Où poser la fenêtre : la tuile dont la FEUILLE est centrée dans la pile.
 
-    ⚠⚠⚠ LE PIÈGE Nº27 DE CE DÉPÔT — un volume est surtout du remplissage. Sur `w046`, 93 % des
-    sondes d'une autre mesure tombaient dans le vide, donc une fenêtre choisie au jugé a une
-    chance sur quinze de contenir du papyrus.
+    ⚠⚠⚠ LE PIÈGE Nº27 DE CE DÉPÔT, PUIS SA VERSION PROFONDE. Un volume est surtout du
+    remplissage, donc une fenêtre choisie au jugé a une chance sur quinze de contenir du
+    papyrus — c'est le premier piège, et chercher la tuile la plus **pleine** le règle. Mais
+    « pleine » ne veut pas dire « la feuille tracée est là » : un surface-volume est construit
+    autour de la feuille, elle est au milieu de la pile, et une tuile peut être pleine de bout
+    en bout avec son pic de matière à la couche 93 sur 109. Mesuré sur `w046` : la tuile la plus
+    pleine du plan pique à **93**, donc la fenêtre « face » y tombe sur une spire voisine.
 
-    ⚠⚠ ET MA PREMIÈRE VERSION NE CHERCHAIT PAS : elle lisait `taille × tuiles / 8` pixels depuis
-    le coin (0, 0), soit **moins de 2 % de l'aire**, et rendait « 0 % de matière » sur `w058`
-    simplement parce que ce coin-là est vide. Un chercheur qui ne regarde qu'un coin n'est pas
-    un chercheur ; il balaie désormais **tout le plan** du niveau le plus grossier, où cela
-    coûte quelques dizaines de morceaux au lieu de milliers.
+    ⚠⚠ LE SCORE EST DONC LE MÊME CRITÈRE QUE LA GARDE, et c'est délibéré : chercher sur un
+    critère et refuser sur un autre garantit de trouver ce qui sera refusé. On ne retient que
+    les tuiles dont le pic d'intensité tombe dans la moitié centrale, et parmi elles la plus
+    chargée.
 
-    ⚠ La matière se lit sur la couche du MILIEU de la pile, qui est la surface tracée : une
-    couche de bord serait vide même là où il y a du papyrus.
+    ⚠ Une seule couche ne suffit donc plus : le profil est accumulé **couche par couche** au
+    niveau le plus grossier, où le plan tient en quelques mégapixels. Rien n'est gardé en
+    mémoire au-delà de `couches × tuiles` moyennes.
     """
-    import tempfile
-
     import tifffile
 
     niveau, forme = niveau_le_plus_grossier(zarr)
+    facteur = 2 ** niveau
+    # ⚠ La tuile de recherche a la TAILLE DE LA FENÊTRE ramenée à ce niveau : chercher avec une
+    # tuile plus grande trouverait une région globalement pleine dont la fenêtre réelle pourrait
+    # tomber dans un trou.
+    pas = max(2, taille // facteur)
     with tempfile.TemporaryDirectory() as tmp:
         vue = Path(tmp) / "vue"
         code, texte = _lancer(
@@ -192,24 +300,34 @@ def chercher_fenetre(zarr: str, taille: int = 512, tuiles: int = 8) -> dict:
              "--hauteur", str(forme[1]), "--largeur", str(forme[2])], 5400)
         if code != 0:
             raise SystemExit(f"vue d'ensemble échouée : {texte.strip()[-200:]}")
-        fichiers = sorted(vue.glob("*.tif"))
+        fichiers = sorted(vue.glob("*.tif"), key=lambda q: int(q.stem))
         if not fichiers:
             raise SystemExit("vue d'ensemble vide")
-        milieu = tifffile.imread(fichiers[len(fichiers) // 2]).astype(float)
+        profils = None
+        for k, fichier in enumerate(fichiers):
+            plan = tifffile.imread(fichier)
+            lignes, colonnes = plan.shape[0] // pas, plan.shape[1] // pas
+            if lignes == 0 or colonnes == 0:
+                raise SystemExit(f"plan {plan.shape} trop petit pour des tuiles de {pas}")
+            bloc = plan[:lignes * pas, :colonnes * pas].astype(np.float32)
+            moyennes = bloc.reshape(lignes, pas, colonnes, pas).mean(axis=(1, 3))
+            if profils is None:
+                profils = np.zeros((len(fichiers), lignes, colonnes), dtype=np.float32)
+            profils[k] = moyennes
 
-    facteur = 2 ** niveau
-    # ⚠ La tuile de recherche a la TAILLE DE LA FENÊTRE ramenée à ce niveau : chercher avec une
-    # tuile plus grande trouverait une région globalement pleine dont la fenêtre réelle
-    # pourrait tomber dans un trou.
-    pas = max(2, taille // facteur)
-    meilleur, best = (0, 0), -1.0
-    for i in range(0, max(1, milieu.shape[0] - pas + 1), max(1, pas // 2)):
-        for j in range(0, max(1, milieu.shape[1] - pas + 1), max(1, pas // 2)):
-            part = float((milieu[i:i + pas, j:j + pas] > 0).mean())
-            if part > best:
-                best, meilleur = part, (i, j)
-    return dict(top=meilleur[0] * facteur, left=meilleur[1] * facteur,
-                part_matiere=best, niveau_cherche=niveau, vue=list(milieu.shape))
+    n = profils.shape[0]
+    pics = profils.argmax(axis=0)
+    charge = profils.mean(axis=0)
+    central = np.abs(pics - (n - 1) / 2.0) < n / 4.0
+    # ⚠⚠ Aucune tuile centrée est un FAIT sur le segment, pas un défaut du chercheur : la trace
+    # y passe hors du milieu de sa propre pile partout. On le dit, et la garde refusera ensuite.
+    admis = np.where(central, charge, -1.0)
+    i, j = np.unravel_index(int(admis.argmax()), admis.shape)
+    return dict(top=int(i) * pas * facteur, left=int(j) * pas * facteur,
+                part_matiere=float(charge[i, j] / max(1e-9, float(charge.max()))),
+                pic_tuile=int(pics[i, j]), couches_vues=n,
+                tuiles_centrees=int(central.sum()), tuiles=int(central.size),
+                niveau_cherche=niveau, vue=[int(x) for x in profils.shape[1:]])
 
 
 def _inference(couches: Path, debut: int, taille: int, sortie: Path) -> dict | None:
@@ -235,6 +353,45 @@ def _inference(couches: Path, debut: int, taille: int, sortie: Path) -> dict | N
 CARTES = RACINE / "docs" / "mesures" / "nul_verso_cartes"
 
 
+def aire_sous_la_courbe(a: np.ndarray, b: np.ndarray) -> float:
+    """
+    @brief P(une valeur de `a` dépasse une valeur de `b`) — la séparabilité, sans seuil.
+
+    ⚠⚠⚠ POURQUOI CETTE GRANDEUR ET PAS LES DEUX PRÉCÉDENTES. Le contrôle comparait un
+    **niveau** (les médianes) et une **dispersion** (les étendues), donc deux nombres dont
+    aucun ne répond à la question posée : *peut-on, en regardant une valeur, dire si elle
+    vient de la face ou du vide ?* Une médiane qui se déplace n'est utile que si les
+    distributions ne se recouvrent pas, et deux étendues égales n'interdisent pas une
+    séparation parfaite. L'aire sous la courbe répond directement, elle est **sans seuil**, et
+    elle est dans l'unité que le domaine publie déjà pour l'encre — donc comparable.
+
+    ⚠ Rangs MOYENS sur les ex æquo : les sorties du détecteur se répètent, et des rangs
+    arbitraires y feraient dépendre le résultat de l'ordre du tableau.
+
+    ⚠ Écrite ici plutôt qu'importée de `scipy`, comme `rho_de_rangs` de
+    `le_bruit_de_lechantillon.py` et pour la même raison : la mesure publiée doit être lisible
+    dans l'arbre, pas déléguée à une version de bibliothèque que personne ne note.
+    """
+    a = np.asarray(a, dtype=float).ravel()
+    b = np.asarray(b, dtype=float).ravel()
+    na, nb = a.size, b.size
+    if na == 0 or nb == 0:
+        return float("nan")
+    tout = np.concatenate([a, b])
+    ordre = np.argsort(tout, kind="mergesort")
+    trie = tout[ordre]
+    rangs = np.empty(tout.size, dtype=float)
+    i = 0
+    while i < trie.size:
+        j = i
+        while j + 1 < trie.size and trie[j + 1] == trie[i]:
+            j += 1
+        rangs[ordre[i:j + 1]] = 0.5 * (i + j) + 1.0
+        i = j + 1
+    somme_a = float(rangs[:na].sum())
+    return (somme_a - na * (na + 1) / 2.0) / (na * nb)
+
+
 def deriver_des_cartes(segment: str) -> dict:
     """
     @brief Ce que les deux cartes disent l'une de l'autre — sans refaire l'inférence.
@@ -258,6 +415,11 @@ def deriver_des_cartes(segment: str) -> dict:
         # ⚠ « Combien du vide se lit comme de l'encre » : la part du nul au-dessus de la MÉDIANE
         # de la face. Le seuil vient de la face et non du nul, sinon il suivrait ce qu'on mesure.
         part_nul_au_dessus_mediane_face=float((b1 > float(np.median(a1))).mean()),
+        # ⚠ Le MIROIR, et il n'est pas redondant : la première part se lit « le vide déborde-t-il
+        # sur la face », la seconde « la face dépasse-t-elle le vide ». Un détecteur aveugle rend
+        # 50 % aux deux ; un détecteur qui discrimine rend peu à l'une et beaucoup à l'autre.
+        part_face_au_dessus_mediane_nul=float((a1 > float(np.median(b1))).mean()),
+        auc_face_contre_nul=aire_sous_la_courbe(a1, b1),
         pixels_compares=int(bons.sum()))
 
 
@@ -276,6 +438,15 @@ def mesurer(segment: str, zarr: str, top: int, left: int, taille: int = 512) -> 
         f = fenetres(profil)
         if not f:
             raise SystemExit("pile trop courte pour deux fenêtres disjointes")
+        if not f["pic_central"]:
+            # ⚠⚠ REFUSÉ, ET LE REFUS EST ÉCRIT PLUTÔT QUE SILENCIEUX. Deux inférences coûtent
+            # huit minutes ; les dépenser sur une fenêtre hors feuille produirait un couple
+            # face/vide inversé, dont le résultat *ressemble* à une mesure. Le dossier garde le
+            # profil et la raison, donc le prochain lecteur voit pourquoi ce segment manque.
+            return dict(segment=segment, zarr=zarr, top=top, left=left, taille=taille,
+                        profil=profil["contraste"], profil_intensite=profil["moyenne"], **f,
+                        refus="pic de contraste hors de la moitié centrale : la fenêtre ne "
+                              "tombe pas sur la feuille tracée mais sur une spire voisine")
         # ⚠⚠ LES CARTES SONT GARDÉES, et c'est `--out` qui écrit un `.npy` : les valeurs
         # BRUTES, pas une image déjà normalisée. Une figure qui rendrait chaque carte à sa
         # propre échelle ferait passer le bruit du nul pour de l'encre — c'est précisément la
@@ -285,7 +456,8 @@ def mesurer(segment: str, zarr: str, top: int, left: int, taille: int = 512) -> 
         face = _inference(couches, f["debut_face"], taille, CARTES / f"{segment}_face.npy")
         nul = _inference(couches, f["debut_nul"], taille, CARTES / f"{segment}_nul.npy")
     out = dict(segment=segment, zarr=zarr, top=top, left=left, taille=taille,
-               profil=profil, **f, face=face, nul=nul)
+               profil=profil["contraste"], profil_intensite=profil["moyenne"],
+               **f, face=face, nul=nul)
     # ⚠⚠⚠ LA FIGURE MONTRE CE QUE LES RESUMES NE DISENT PAS : le vide est sombre DANS
     # L'ENSEMBLE mais porte des taches vives, indiscernables d'encre a l'oeil. C'est ce qui
     # explique une etendue qui ne s'effondre pas, et ca ouvre une question que les mediane et
@@ -356,40 +528,62 @@ def _verifier(r: dict | None = None) -> int:
         if not ok:
             echecs += 1
 
-    # ⚠⚠ LE CHOIX DES FENÊTRES, testé sur un profil FABRIQUÉ dont on connaît la réponse : une
-    # face nette au milieu, un vide franc plus bas. Sans ce contrôle, « la fenêtre nulle est
-    # dans le vide » serait une intention.
-    faux = [0.2] * 109
-    for i in range(50, 63):
-        faux[i] = 1.0 - abs(i - 56) * 0.07
-    for i in range(88, 109):
-        faux[i] = 0.01
+    # ⚠⚠ LE CHOIX DES FENÊTRES, testé sur un profil FABRIQUÉ dont on connaît la réponse — et
+    # fabriqué ADVERSAIRE : la feuille est au milieu en intensité pendant que le contraste
+    # dessine un U dont les maxima sont aux deux bords. C'est la forme RÉELLE mesurée sur
+    # `w058` et `w056` à 2,4 µm, et c'est elle qui a inversé le couple face/vide. Un profil
+    # gentil (une bosse dans les deux séries) aurait passé la version fausse comme la juste.
+    feuille = [0.02] * 109
+    for i in range(30, 81):
+        feuille[i] = 1.0 - abs(i - 55) * 0.01
+    u = [1.0 - min(i, 108 - i) / 54.0 for i in range(109)]
+    faux = dict(moyenne=feuille, contraste=u)
     f = fenetres(faux)
-    v("la fenêtre sur face est centrée sur le pic de contraste",
-      f["pic"] == 56 and f["debut_face"] == 56 - SURFACE_DANS_LA_FENETRE,
-      f"pic {f['pic']}, début {f['debut_face']}")
-    v("... et la fenêtre nulle tombe dans le creux mesuré",
-      f["debut_nul"] >= 83, f"début {f['debut_nul']}, contraste {f['contraste_nul']:.3f}")
+    v("la fenêtre sur face suit l'INTENSITÉ, pas le U du contraste",
+      f["pic"] == 55 and f["debut_face"] == 55 - SURFACE_DANS_LA_FENETRE,
+      f"pic d'intensité {f['pic']} (contraste {f['pic_contraste']}), début {f['debut_face']}")
+    # ⚠⚠⚠ LE CONTRÔLE QUI AURAIT ATTRAPÉ LA PANNE. Sur ce profil, le maximum de contraste est
+    # au bord ; si le choix le suivait, la fenêtre face commencerait à 0 ou à 83.
+    v("... et le maximum de contraste est bien AU BORD dans ce piège",
+      f["pic_contraste"] in (0, 108), f"pic de contraste {f['pic_contraste']}")
+    v("... et la fenêtre nulle tombe là où il y a le moins de MATIÈRE",
+      f["intensite_nul"] < 0.1 * f["intensite_face"],
+      f"intensité {f['intensite_nul']:.3f} contre {f['intensite_face']:.3f}")
     v("... et elle ne chevauche PAS celle de la face",
       f["debut_nul"] >= f["debut_face"] + COUCHES_LUES
       or f["debut_nul"] + COUCHES_LUES <= f["debut_face"],
       f"{f['debut_face']}..{f['debut_face'] + COUCHES_LUES} contre "
       f"{f['debut_nul']}..{f['debut_nul'] + COUCHES_LUES}")
     v("... et les deux restent dans la pile",
-      f["debut_face"] >= 0 and f["debut_nul"] + COUCHES_LUES <= len(faux),
-      f"pile de {len(faux)}")
-    v("... et la face a bien plus de contraste que le nul",
-      f["contraste_face"] > 2 * f["contraste_nul"],
-      f"{f['contraste_face']:.3f} contre {f['contraste_nul']:.3f}")
+      f["debut_face"] >= 0 and f["debut_nul"] + COUCHES_LUES <= 109, "pile de 109")
+    # ⚠⚠ LA GARDE, testée dans les DEUX sens : elle doit accepter une feuille au milieu et
+    # refuser un pic de bord. Une garde qui n'accepte rien protège autant qu'un mur sans porte.
+    v("la garde accepte une feuille au milieu de la pile", f["pic_central"], f"pic {f['pic']}")
+    bord = dict(moyenne=[1.0 - i / 108.0 for i in range(109)], contraste=[0.5] * 109)
+    v("... et refuse un pic d'intensité au bord (feuille hors fenêtre)",
+      not fenetres(bord)["pic_central"], f"pic {fenetres(bord)['pic']}")
+    v("... et la moitié centrale est bien ce qu'elle nomme",
+      pic_sur_la_feuille(54, 109) and not pic_sur_la_feuille(20, 109)
+      and not pic_sur_la_feuille(90, 109),
+      "54 dedans, 20 et 90 dehors")
     # ⚠⚠ Une pile trop courte pour deux fenêtres disjointes rend {} plutôt qu'un chevauchement.
     # ⚠ Écrit d'abord avec un `or True` qui le rendait incapable d'échouer — le défaut que ce
     # dépôt attrape en boucle, commis ici dans le fichier qui existe pour un contrôle.
+    plat = dict(moyenne=[0.5] * 30, contraste=[0.5] * 30)
     v("une pile trop courte ne rend AUCUNE fenêtre plutôt que deux qui se chevauchent",
-      fenetres([0.5] * 30) == {}, str(fenetres([0.5] * 30)))
-    court = fenetres([0.5] * 40)
+      fenetres(plat) == {}, str(fenetres(plat)))
+    court = fenetres(dict(moyenne=[0.5] * 40, contraste=[0.5] * 40))
     v("... et si elle en rend deux, elles restent disjointes",
       not court or court["debut_nul"] >= court["debut_face"] + COUCHES_LUES
       or court["debut_nul"] + COUCHES_LUES <= court["debut_face"], str(court))
+    # ⚠⚠ L'AUC, testée sur trois cas dont on connaît la réponse exacte. Sans ça « 0,50 » ne
+    # voudrait rien dire : une AUC mal écrite rend elle aussi un nombre entre 0 et 1.
+    v("l'AUC vaut 1 quand les deux populations sont séparées",
+      abs(aire_sous_la_courbe(np.arange(10.0, 20.0), np.arange(10.0)) - 1.0) < 1e-12)
+    v("... 0 quand elles le sont dans l'autre sens",
+      abs(aire_sous_la_courbe(np.arange(10.0), np.arange(10.0, 20.0))) < 1e-12)
+    v("... et exactement 0,5 sur deux populations IDENTIQUES (ex æquo compris)",
+      abs(aire_sous_la_courbe(np.arange(10.0), np.arange(10.0)) - 0.5) < 1e-12)
 
     if r and r.get("face") and r.get("nul"):
         print("\net la mesure")
@@ -464,20 +658,52 @@ def main() -> int:
                    help="chercher la fenêtre la plus pleine au lieu de --top/--left")
     p.add_argument("--rederiver", action="store_true",
                    help="recalculer ce qui se déduit des cartes gardées, sans refaire l'inférence")
+    p.add_argument("--tous", action="store_true",
+                   help="mesurer les trois segments de SEGMENTS, l'un après l'autre")
     p.add_argument("--verifier", action="store_true")
     p.add_argument("--json", type=Path)
     a = p.parse_args()
 
     if a.rederiver:
-        cible = a.json or DEFAUT_JSON
-        d = json.loads(cible.read_text())
-        d.update(deriver_des_cartes(d["segment"]))
-        cible.write_text(json.dumps(d, indent=2, ensure_ascii=False), encoding="utf-8")
-        print(f"corrélation face/vide : {d.get('correlation_face_nul'):+.3f}")
-        print(f"part du vide au-dessus de la médiane de la face : "
-              f"{100 * d.get('part_nul_au_dessus_mediane_face', 0):.1f} %")
-        print(f"écrit : {cible}")
+        # ⚠⚠ SANS `--json`, TOUS LES SEGMENTS. Le défaut visait un fichier qui n'existe plus
+        # (renommé par segment), donc un `--rederiver` nu échouait ; et surtout, n'en toucher
+        # qu'un laisserait les autres porter d'anciennes grandeurs sans que rien ne le dise —
+        # la panne exacte que `--verifier` a été élargi pour éviter.
+        cibles = ([a.json] if a.json
+                  else sorted((RACINE / "docs" / "mesures").glob("le_nul_verso*.json")))
+        for cible in cibles:
+            d = json.loads(cible.read_text())
+            d.update(deriver_des_cartes(d["segment"]))
+            cible.write_text(json.dumps(d, indent=2, ensure_ascii=False), encoding="utf-8")
+            print(f"{d['segment']}")
+            print(f"  corrélation face/vide            {d.get('correlation_face_nul'):+.3f}")
+            print(f"  AUC face contre vide             {d.get('auc_face_contre_nul'):.3f}")
+            print(f"  part du vide au-dessus de la face {100 * d.get('part_nul_au_dessus_mediane_face', 0):5.1f} %")
+            print(f"  part de la face au-dessus du vide {100 * d.get('part_face_au_dessus_mediane_nul', 0):5.1f} %")
+            print(f"  écrit : {cible}")
         return 0
+
+    if a.tous:
+        _verrou = prendre_le_verrou()  # noqa: F841 — relâché à la mort du processus
+        # ⚠ SÉQUENTIEL, pas en parallèle : chaque segment fait deux inférences sur le
+        # processeur, et trois campagnes concurrentes se disputeraient les mêmes cœurs pour
+        # finir plus tard. Ce dépôt a par ailleurs déjà payé deux écrivains simultanés.
+        codes = []
+        for segment in SEGMENTS:
+            court = segment.split("_")[0]
+            cible = RACINE / "docs" / "mesures" / f"le_nul_verso_{court}.json"
+            print(f"\n########## {segment}")
+            enfant = dict(__import__("os").environ, LPL_NUL_VERSO_VERROU="1")
+            codes.append(subprocess.run(
+                ["uv", "run", "python", __file__, "--segment", segment, "--chercher",
+                 "--json", str(cible)], cwd=RACINE, env=enfant).returncode)
+        # ⚠ Un refus (code 3) n'est pas une panne : c'est le contrôle qui fait son travail.
+        # Les confondre ferait échouer la campagne entière sur un segment que le corpus ne
+        # permet pas de mesurer, et pousserait à retirer la garde.
+        pannes = [c for c in codes if c not in (0, 3)]
+        print(f"\ncampagne : {codes.count(0)} mesuré(s), {codes.count(3)} refusé(s), "
+              f"{len(pannes)} en panne")
+        return 1 if pannes else 0
 
     if a.verifier and not a.json:
         # ⚠⚠ TOUS LES SEGMENTS MESURÉS, pas seulement le premier. `C2` demande **trois** segments
@@ -495,12 +721,23 @@ def main() -> int:
         print(f"  fenêtre trouvée : top {top}, left {left} "
               f"({100 * f['part_matiere']:.0f} % de matière, cherchée au niveau "
               f"{f['niveau_cherche']})")
+    _verrou = prendre_le_verrou()  # noqa: F841 — relâché à la mort du processus
     r = mesurer(a.segment, zarr, top, left, a.taille)
     print(f"{r['segment']} — pile de {r['couches']} couches, pic à {r['pic']}")
     print(f"  fenêtre face : {r['debut_face']}..{r['debut_face'] + COUCHES_LUES}"
           f"   contraste moyen {r['contraste_face']:.3f}")
     print(f"  fenêtre nulle: {r['debut_nul']}..{r['debut_nul'] + COUCHES_LUES}"
           f"   contraste moyen {r['contraste_nul']:.3f}")
+    if r.get("refus"):
+        # ⚠⚠ LE REFUS EST UNE SORTIE, PAS UNE EXCEPTION. Il porte le profil et sa raison, donc
+        # le prochain lecteur voit pourquoi ce segment manque au lieu de trouver un trou. Le
+        # code 3 est celui que ce dépôt utilise déjà pour « hors domaine » (`run_proximity.sh`).
+        print(f"  REFUSÉ — {r['refus']}", file=sys.stderr)
+        if a.json:
+            a.json.parent.mkdir(parents=True, exist_ok=True)
+            a.json.write_text(json.dumps(r, indent=2, ensure_ascii=False), encoding="utf-8")
+            print(f"\nécrit : {a.json}")
+        return 3
     for nom in ("face", "nul"):
         d = r[nom]
         if d.get("echec"):

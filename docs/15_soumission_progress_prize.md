@@ -154,7 +154,7 @@ destiné à être *utilisé par d'autres* est un cas différent d'un document qu
    rouleaux.
 2. ✅ **Un paquet autonome** — *fait* : `src/tracecheck/`, un fichier, `numpy` seul,
    16 contrôles hors ligne.
-3. ✅ **Une image** — *fait* : `profondeur_deux_cas.png` (segment sain / hors feuille) et
+3. ✅ **Une image** — *fait* : `12_profils_de_profondeur.png` (segment sain / hors feuille) et
    les deux figures de champ avec leur témoin.
 4. ⚠ La **langue**. L'auteur juge que ce n'est pas un problème ; l'outil public est
    néanmoins en anglais. Noté une fois, et on n'y revient pas.

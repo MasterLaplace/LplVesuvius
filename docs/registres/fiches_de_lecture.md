@@ -36,7 +36,7 @@ Lu le 2026-09-03. Chaque fichier a été lu du premier au dernier caractère ;
 ---
 
 ### docs/00_carnet_de_bord.md
-- **lignes** : 463
+- **lignes** : 464
 - **nature** : MIXTE
 - **résumé** : README/carnet de bord du dépôt. Il tient d'un côté l'appareil de PROCÉDÉ (arborescence, environnement, table de tous les documents `00` à `67`, commandes de rejeu, état de la récupération de données) et de l'autre une très longue table « ce qui marche / ce qui ne marche pas encore » datée du 2026-08-20 qui agrège des résultats mesurés ailleurs, avec leurs chiffres. Une grande partie de cette table est constituée d'annulations et de re-lectures de résultats antérieurs du même dépôt — c'est le document où les rétractations sont recensées.
 - **conclusions extractibles** :
@@ -665,13 +665,15 @@ Sept documents lus intégralement (`wc -l` mesuré avant chaque lecture).
 ---
 
 ### docs/12_profondeur_de_surface.md
-- **lignes** : 593
+- **lignes** : 628
 - **nature** : RESULTAT
 - **résumé** : Né d'une enquête sur l'échec du détecteur d'encre sur Scroll 4, ce document construit un instrument qui mesure, sans vérité terrain ni modèle ni juge, à quelle distance de la surface tracée se trouve réellement la feuille. Il porte en tête un avertissement disant que l'instrument a changé deux fois et qu'il faut lire le §10 en premier ; les §1 à §9 sont conservés bien qu'en partie faux. Les §11 à §14 valident l'instrument contre un recensement indépendant sur 80 segments, le répliquent sur un second rouleau, confirment son point zéro, puis testent la prédiction chiffrée qu'il avait posée — le sens tient, le seuil tombe, la forme forte est réfutée.
 - **conclusions extractibles** :
   - `vc_layers_from_ppm -r 32 -f tif` engendre **65 couches** ; la couche 32 EST la surface tracée, les autres s'en écartant d'un voxel par indice.
   - Le détecteur GP-2023 lit **26 couches**, ici les couches 15 à 40.
   - Balayage contraste, plage commune 15–40 : `20231022170901` (Scroll 1) pic dans le tiers central **63 %**, écart interquartile **4,0** couches, pic au bord 15 % ; `20230909121925` (Scroll 1) 50 %, 11,5, 37 % ; `scroll4_20231111135340` **7 %**, **22,0**, **61 %**.
+  - §1bis, **corrigé le 2026-09-05** : la figure publiée ne se régénérait plus depuis les mesures de l'arbre. Elle en porte désormais la commande et **trois** panneaux — Scroll 1 pic couche **26** (**47 µm** de la trace), et **deux fenêtres du MÊME segment** de Scroll 4 dont les pics tombent aux bords **opposés** : couches **36** et **16**, soit **32** et **127 µm**. La version publiée annonçait « pic 28 / 32 µm » et un seul panneau Scroll 4. ⚠ Ce que la figure trace est l'**intensité**, pas le contraste.
+  - §2, **corrigé le 2026-09-05** : la phrase « c'est le contraste qui localise » est retirée — elle contredisait le §10 de la même page depuis le 2026-08-18, et deux campagnes de `75` §C2 l'ont payée le 2026-09-05 en plaçant leur fenêtre « face » sur une spire voisine d'un volume à 2,399 µm.
   - Le chiffre de `20231022170901` passe de 76 % à **63 %** une fois la plage restreinte à 15–40 (ce segment avait été téléchargé avec 38 couches, les deux autres avec 26).
   - Scroll 4 est **bimodal** : 92 fenêtres piquant à la couche 15 et 49 à la couche 40, milieu presque vide ; l'écart interquartile passe de 4,0 à 22,0.
   - Pile complète 0–40 sur Scroll 4, 230 fenêtres : pic à la **couche 0** pour 100 fenêtres, couches 1 à 39 pour 104 fenêtres, **couche 40** pour 26.
@@ -2336,7 +2338,7 @@ Dépôt : `/home/masterlaplace/LplVesuvius`. Sept fichiers lus du premier au der
 ---
 
 ### docs/33_la_carte_nest_pas_resolue.md
-- **lignes** : 193 (mesuré)
+- **lignes** : 195 (mesuré)
 - **nature** : RESULTAT
 - **résumé** : Relecture des artefacts versionnés `docs/carte_separabilite/*.json` par `src/commun/incertitude_carte.py`, sans acquisition de donnée nouvelle, pour mesurer l'incertitude du classement des treize rouleaux que `16` avait publié sans barre d'erreur. Le résultat annule le classement : aucune des 78 paires n'est séparée, aucun rouleau ne se distingue du témoin après correction de Holm, et le zéro du témoin est compatible avec un taux réel jusqu'à 14,2 %. Le §3 calcule qu'il faut 50 fenêtres par rouleau ; le §4bis rapporte que la campagne dense a effectivement tourné le même jour et confirme la prédiction, avec un rho de Spearman de −0,297 et treize rangs changés.
 - **conclusions extractibles** :
@@ -2473,7 +2475,7 @@ Dépôt : `/home/masterlaplace/LplVesuvius`. Sept documents lus du premier au de
 ---
 
 ### docs/37_les_deux_axes_ne_saccordent_pas.md
-- **lignes** : 134
+- **lignes** : 136
 - **nature** : RESULTAT
 - **résumé** : Le document teste pour la première fois la parade écrite dans `31` §4 contre la malédiction du vainqueur — « sélectionner sur un axe, valider sur l'autre » — en comparant l'axe géométrique (`vc_tifxyz_selfcross`, auto-intersection) et l'axe de profondeur (position de la matière lue dans le volume), en comparaison **intra-rouleau**. Résultat : 1 accord sur 8 comparaisons là où le hasard seul en donnerait ~4 ; sélectionner sur la géométrie n'achète rien sur la profondeur. Le document reconnaît que sa colonne « écart » est largement censurée par la fenêtre de rendu, et un recadrage ultérieur par `38` rend ses distances absolues sans objet, mais sa conclusion (l'ordre relatif intra-rouleau) survit.
 - **conclusions extractibles** :
