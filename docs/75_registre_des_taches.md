@@ -478,9 +478,66 @@ de couverture de `44` reposent donc sur une constante que rien ne relie à un vo
 > **calculable en micromètres** (`69,2 → 66,4 µm`). Mesure :
 > `src/nappe/le_volume_du_maillage.py` (18 contrôles, 3 sondes qui mordent).
 
-> ⚠ **Le seul contrôle qui vaudrait d'être monté** : refaire `couverture_publiee.py` contre la
-> surface **recalée sur la bande** plutôt que contre la surface publiée. Si l'écart tombe, le
-> budget est bien gonflé ; sinon, mon §10 ne s'applique pas à cette échelle-là.
+> ~~⚠ **Le seul contrôle qui vaudrait d'être monté** : refaire `couverture_publiee.py` contre la
+> surface **recalée sur la bande** plutôt que contre la surface publiée.~~ ✅✅ **RÉPONDU le
+> 2026-09-05, et sans recaler quoi que ce soit** — voir ci-dessous.
+
+### ✅✅ A5 bis — la dérive n'est PAS l'erreur du référent, et un biais est CONSTANT
+
+> Mesure : `src/nappe/la_derive_nest_pas_le_referent.py` (16 contrôles, 4 sondes qui mordent).
+
+Le contrôle réclamait un recalage. Il n'en a pas besoin, parce qu'une erreur de référent se
+décompose en **deux parts qui ne se retirent pas de la même façon** :
+
+| part | ce qu'elle fait à l'écart mesuré | comment elle se retire |
+|---|---|---|
+| **biais** — le référent est décalé d'un côté | ajoute la **même** chose à tous les maillons | elle **s'annule dans les différences** |
+| **dispersion** — le référent bruite autour de la matière | ajoute une variance | **en quadrature**, ce que `77` §10 a fait |
+
+![la derive de la chaine contre l'echelle du referent](images/75_la_derive_et_le_referent.png)
+
+Figure : `src/figures/figure_la_derive_et_le_referent.py`, depuis
+`docs/mesures/la_derive_nest_pas_le_referent.json`.
+
+```
+uv run python src/figures/figure_la_derive_et_le_referent.py
+```
+
+⚠⚠ **La bande verte est ancrée sur le PREMIER maillon, pas sur zéro**, et c'est tout l'argument :
+un biais déplace la courbe entière, donc il déplace l'**origine**. La rampe en sort au quatrième
+maillon (1,2 mm) et **n'y revient jamais** — ce que le contrôle asserte, avec son témoin : une
+série qui sortirait puis rentrerait ne serait pas une sortie définitive, et une série plate ne
+sortirait pas du tout.
+
+⭐⭐⭐ **Donc la part de l'écart final qu'aucun biais ne peut expliquer vaut exactement**
+$|e_N - e_1| / |e_N|$ — aucun ajustement, aucun seuil, aucune fenêtre choisie.
+
+| parcouru | 96 µm | 288 | 480 | 768 | 1152 | 1920 | 2880 | 3840 | 4800 | **5760** |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| écart | **−0,3** | −1,5 | −3,8 | −12,2 | −20,5 | −28,1 | −34,8 | −44,9 | −56,8 | **−69,2** |
+
+Le premier maillon est à **0,3 µm** de la surface publiée, le dernier à **69,2**. Un biais
+constant explique donc **au plus 0,5 %** de l'écart final ; avec la dispersion retirée en
+quadrature (19,5 µm), **le référent entier en explique au plus 4,5 %**.
+
+```
+uv run python src/nappe/la_derive_nest_pas_le_referent.py \
+    --json docs/mesures/la_derive_nest_pas_le_referent.json
+```
+
+⚠⚠ **La borne n'est valide qu'à une condition, et elle est vérifiée** : tous les écarts médians
+doivent porter le **même signe**, sinon un biais de signe opposé à la dérive pourrait dépasser
+$|e_1|$. Les dix maillons sont négatifs, et le code **refuse** une série à signes mêlés au lieu
+de rendre une borne qui ne tiendrait pas.
+
+⚠ Et $|e_1|$ **majore** le biais : le premier maillon a déjà parcouru 96 µm, donc il contient le
+biais *plus un peu de dérive*. La borne est conservatrice — elle sous-estime ce que la chaîne
+fait, jamais l'inverse.
+
+⭐⭐ **Ce que ça règle** : la correction de `77` §10 tient (69,2 → 66,4 µm) et elle est **petite**,
+et la question « et si tout l'écart venait du référent ? » est fermée par la **forme** du signal.
+Un référent mal placé produit un décalage ; la chaîne produit une **rampe**. Ce ne sont pas les
+mêmes objets, et une rampe ne se corrige pas en déplaçant une origine.
 
 ### A5 ⭐ — extraire, pas faire pousser
 

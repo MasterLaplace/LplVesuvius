@@ -1,0 +1,38 @@
+{
+  "maillons": 10,
+  "um_par_voxel": 2.4,
+  "parcouru_um": [
+    96.0,
+    288.0,
+    480.0,
+    768.0,
+    1152.0,
+    1920.0,
+    2880.0,
+    3840.0,
+    4800.0,
+    5760.0
+  ],
+  "ecart_um": [
+    -0.35,
+    -1.5,
+    -3.84,
+    -12.25,
+    -20.54,
+    -28.07,
+    -34.83,
+    -44.92,
+    -56.78,
+    -69.17
+  ],
+  "meme_signe": true,
+  "monotone": true,
+  "ecart_final_um": 69.17,
+  "referent_um": 19.496942544267664,
+  "borne_du_biais_um": 0.35,
+  "part_hors_biais": 0.9949,
+  "part_expliquable_par_un_biais": 0.0051,
+  "part_hors_dispersion": 0.9595,
+  "ecart_corrige_um": 66.37,
+  "part_expliquable_par_le_referent": 0.0454
+}
