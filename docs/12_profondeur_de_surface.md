@@ -214,6 +214,18 @@ plusieurs fois le pas de PHerc0172. L'égalité que j'annonçais n'existe pas.
 `src/nappe/stack_structure.py`. La question devient : **à quelle distance la couche
 tracée est-elle du sommet de matière le plus proche, dans sa propre pile ?**
 
+```
+uv run python src/nappe/stack_structure.py \
+    docs/mesures/profil_pile_complete.json docs/mesures/profil_profondeur.json \
+    --out docs/mesures/structure_pile.json
+```
+
+⚠ Vérifié le 2026-09-05 : la commande rend `docs/mesures/structure_pile.json` **à
+l'identique**, sans rien télécharger — les profils sont déjà dans l'arbre. ⚠⚠ Tout est
+normalisé min-max **dans sa propre pile** : comparer des niveaux bruts comparerait les
+scanners, et mélanger les deux normalisations donne deux chiffres pour la même couche
+(0,896 contre 0,233 — payé une fois).
+
 ⚠ Un maximum atteint **au bord** n'est pas un sommet — c'est le flanc d'un sommet situé
 dehors. Il est rapporté comme une **borne inférieure**, jamais comme une distance.
 

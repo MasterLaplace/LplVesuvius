@@ -67,6 +67,29 @@ planarité de **0,993** — elle sait parfaitement où sont les nappes, là où 
 le dit qu'à qui est déjà proche. C'est le prochain lot, et c'est la première fois de la
 journée qu'un lot est un **constructeur** et non un diagnostic.
 
+```
+uv run python src/nappe/sonder_point.py \
+  PHerc1447/representations/predictions/surfaces/20250521151220-surface-20260413222639-surface-m7-L0-th0.2.zarr \
+  --xyz 4682 2740 13350 --level 0 --bloc 8
+```
+
+⚠ Vérifié le 2026-09-05, la commande rend les mêmes chiffres :
+
+| | valeur |
+|---|---:|
+| occupation de la cellule | 0,457 |
+| **planarité de la cellule** | **0,993** |
+| occupation du chunk, médiane | 0,156 — part saturée (> 0,80) **0,0 %** |
+| planarité du chunk, médiane | 0,991 |
+
+⚠⚠ **La planarité seule ne suffirait pas à conclure**, et c'est l'occupation qui le dit : à
+1,000 tout serait « surface », donc il n'y aurait aucun gradient à suivre et un traceur y
+partirait dans n'importe quelle direction. À 0,457 dans la cellule et 0,156 de médiane sur le
+chunk, avec **aucune** fenêtre saturée, la prédiction porte une structure de feuille et non un
+bloc plein. ⚠ Les deux seuils (0,02 et 0,80) sont ceux de `trouver_graine.py`, c'est-à-dire
+ceux qui ont servi à **choisir** nos graines : en prendre d'autres ici introduirait une
+troisième échelle et rendrait la sonde incomparable à la sélection.
+
 ## 4. ⚠ Ce que ce document ne dit pas
 
 - **Il n'a rien fait tourner.** Aucune correction n'a été écrite ni appliquée ; ce document

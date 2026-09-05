@@ -666,7 +666,7 @@ Sept documents lus intégralement (`wc -l` mesuré avant chaque lecture).
 ---
 
 ### docs/12_profondeur_de_surface.md
-- **lignes** : 628
+- **lignes** : 640
 - **nature** : RESULTAT
 - **résumé** : Né d'une enquête sur l'échec du détecteur d'encre sur Scroll 4, ce document construit un instrument qui mesure, sans vérité terrain ni modèle ni juge, à quelle distance de la surface tracée se trouve réellement la feuille. Il porte en tête un avertissement disant que l'instrument a changé deux fois et qu'il faut lire le §10 en premier ; les §1 à §9 sont conservés bien qu'en partie faux. Les §11 à §14 valident l'instrument contre un recensement indépendant sur 80 segments, le répliquent sur un second rouleau, confirment son point zéro, puis testent la prédiction chiffrée qu'il avait posée — le sens tient, le seuil tombe, la forme forte est réfutée.
 - **conclusions extractibles** :
@@ -697,6 +697,9 @@ Sept documents lus intégralement (`wc -l` mesuré avant chaque lecture).
   - Sur les 80 segments l'écart médian s'étale de **24 à 120 µm**.
   - Branche « volume plus épais » fermée le 2026-08-27 : de 61 à 121 couches le pic ne bouge pas sur `PHerc0358`, l'écart médian suivant la demi-fenêtre, **262 → 562 µm** ; doubler l'épaisseur retire **40,8 %** de la réponse du modèle d'encre.
   - Le compte de croisements lui-même ne prédit pas la lisibilité (rho +0,019 à n = 89, rappel de `06` §3.8).
+  - Reproduction, sans rien télécharger : `stack_structure.py docs/mesures/profil_pile_complete.json
+    docs/mesures/profil_profondeur.json --out docs/mesures/structure_pile.json` rend le fichier
+    à l'identique (vérifié le 2026-09-05).
 - **rétractations / corrections internes** :
   - En-tête : « ⚠⚠ **L'instrument a changé deux fois. Lire le §10 en premier** — il donne la version courante et dit ce que les §1 à §9 avaient de faux. »
   - §6 : « ⚠⚠ CORRECTION — la pile complète dément mon arithmétique de ce matin » — le raisonnement importait le pas inter-feuilles de PHerc0172 (142,8 µm) vers PHerc1667 ; « C'est le piège nº 6 du dépôt — un chiffre emprunté n'est pas une mesure — et je l'ai commis. » L'égalité annoncée n'existe pas.
@@ -712,8 +715,8 @@ Sept documents lus intégralement (`wc -l` mesuré avant chaque lecture).
   - §9 : la branche « volume plus épais » est marquée FERMÉE ; le test `--start-layer 0` est « fait, et négatif », et « ⚠ Mais §7 explique pourquoi ce test ne pouvait pas trancher ».
   - Portée ajoutée le 2026-08-20 : l'instrument ne rend une distance que si la surface a une feuille à portée ; sur une surface en travers la valeur suit la fenêtre de rendu (α = +1,01 contre +0,00), donc le seuil de ~50 µm ne s'applique qu'aux surfaces dont la mesure converge.
 - **preuve de lecture intégrale** :
-  - ligne 455 : `> Le passage du contraste à l'intensité n'était pas un ajustement esthétique : il`
-  - ligne 621 : `⭐ C'est la règle nº 1 du dépôt qui gagne : *aucun seuil absolu sur une grandeur physique`
+  - ligne 467 : `> Le passage du contraste à l'intensité n'était pas un ajustement esthétique : il`
+  - ligne 633 : `⭐ C'est la règle nº 1 du dépôt qui gagne : *aucun seuil absolu sur une grandeur physique`
 
 ---
 
@@ -2577,7 +2580,7 @@ Dépôt : `/home/masterlaplace/LplVesuvius`. Sept documents lus du premier au de
     data/sens_normale/rendu_inverse --json docs/mesures/le_drapeau_de_normale.json`, puis
     `figure_drapeau_de_normale.py` (12 + 4 contrôles).
 ### docs/39_le_seam_de_correction.md
-- **lignes** : 104
+- **lignes** : 127
 - **nature** : PROCEDE
 - **résumé** : Le document répond à la question de `31` §8 — « qu'est-ce qui remplace l'humain qui corrige le transfert de spire à spire ? » — en établissant que l'API de correction existe déjà et est publique dans `vc_grow_seg_from_seed` (`--resume`, `--rewind-gen`, `--correct`, `--resume-opt`, `--resume-generations`), et que c'est le *wrap by wrap copy tool* où le papier de juin 2026 dépense ses ~25 heures par spire. Il en déduit la chaîne complète et localise le seul maillon manquant : produire, pour une trace donnée, une liste de points 3D par lesquels elle aurait dû passer. Il ne fait rien tourner, et note pourquoi le maillon ne peut pas être construit depuis le volume ce soir-là.
 - **conclusions extractibles** :
@@ -2590,10 +2593,17 @@ Dépôt : `/home/masterlaplace/LplVesuvius`. Sept documents lus du premier au de
   - Deuxième pièce manquante, plus petite : `--rewind-gen` demande de choisir une génération, donc de savoir *à partir d'où* la trace a divergé, alors que le test de convergence rend un verdict sur une trace entière. Remède retenu : **balayer** quelques valeurs (une trace de ce rouleau coûte une vingtaine de secondes, « le balayage est moins cher que le raisonnement »).
   - Une reprise qui ne produit aucun maillage est rapportée comme **résultat sur le seam**, pas comme panne du script.
   - Ce que le document ne dit pas : il n'a **rien fait tourner** (aucune correction écrite ni appliquée) ; il ne dit pas que les segments officiels sont hand-corrigés — c'est plausible mais leur métadonnée ne l'enregistre pas, et « supposer une provenance est exactement ce que `36` a payé ».
+  - Reproduction de la planarité 0,993, vérifiée le 2026-09-05 : `sonder_point.py` sur la
+    prédiction publiée de `PHerc1447`, `--xyz 4682 2740 13350 --level 0 --bloc 8`. Elle rend
+    aussi ce que la planarité seule ne dit pas — occupation **0,457** dans la cellule,
+    médiane **0,156** sur le chunk, **0,0 %** de fenêtres saturées : la prédiction porte une
+    structure de feuille et non un bloc plein, ce qui est la condition pour qu'un gradient
+    existe. ⚠ Les seuils (0,02 / 0,80) sont ceux de `trouver_graine.py`, donc la sonde reste
+    comparable à la sélection au lieu d'introduire une troisième échelle.
 - **rétractations / corrections internes** : aucune rétractation d'un fait mesuré. Le document est mis à jour a posteriori par la section « La boucle entière, écrite », qui signale que le chaînon manquant a depuis été construit (`41`) et que `src/outils/boucle_de_correction.sh` met les maillons bout à bout — donc le « ❌ le trou » du §2 et le « rien fait tourner » du §4 sont périmés par `41` et `42`.
 - **preuve de lecture intégrale** :
   - ligne 64 : « ⭐ La sortie possible est donc de **corriger depuis la prédiction et non depuis le volume** : »
-  - lignes 89–90 : « ⚠ `--rewind-gen` demande toujours de choisir une génération, et notre juge porte sur une / trace entière. On **balaie** donc quelques valeurs plutôt que d'en deviner une : une trace »
+  - lignes 112–90 : « ⚠ `--rewind-gen` demande toujours de choisir une génération, et notre juge porte sur une / trace entière. On **balaie** donc quelques valeurs plutôt que d'en deviner une : une trace »
 
 ---
 
