@@ -1024,10 +1024,19 @@ alignée sur le pas, elle rend **1 trou contre 0** selon un décalage de cinq pi
 > une demande, pas un calcul — soit les étiquettes rendues **à ce régime-là**, ce qui est la
 > case vide de `68` §4 par un autre chemin.
 
-### ✅✅ Et ils ONT un vis-à-vis : le support de la carte publiée porte les trous du fragment
+### ⚠ Et ils ont un vis-à-vis, mais BIEN PLUS MAIGRE que ce que cette section a d'abord écrit
 
 > Mesure : `src/encre/les_reperes_apparies.py` (10 contrôles), figure
 > `src/figures/figure_les_reperes_apparies.py` (7 contrôles), le 2026-09-05.
+
+⚠⚠⚠ **CETTE SECTION EST CORRIGÉE PAR UNE MESURE DU MÊME JOUR, plus bas.** Elle conclut que « le
+support de la carte publiée porte les trous du fragment, donc il est un masque de fait ». À
+pleine résolution il en porte **36** quand le masque en a **348**, et le témoin est net : réduire
+le support natif ×8 par la même règle rend **19** composantes de fond et non **420**. Les 71
+« trous » comptés ici sont donc en grande part du **crénelage de compression** — la carte réduite
+est un `.jpg`, et un `.jpg` crénelle les bords à fort contraste, c'est-à-dire le pourtour des
+vrais trous. Ce qui survit : les repères se posent bel et bien **7,7 fois plus près** des vides
+qui existent que le hasard. Voir « le goulot n'était pas le fragment, c'était le fichier ».
 
 ⚠⚠ **Le paragraphe ci-dessus supposait qu'il n'y avait rien en face. C'est faux, et la mesure
 le dit.** Là où il n'y a **pas de matière**, un détecteur ne peut rien rendre — donc si le
@@ -1287,6 +1296,79 @@ remplaçable par une relecture.
    qui sont le seul champ prédictif mesuré — et qui doivent être densifiés **ailleurs** que dans
    leur quartier.
 
+### ⚠⚠⚠ Le goulot n'était pas le fragment, c'était le FICHIER — et les 71 trous du support étaient du bruit de compression
+
+> Mesure : `src/encre/les_reperes_a_pleine_resolution.py` (20 contrôles) →
+> `docs/mesures/les_reperes_a_pleine_resolution.json`. Figure :
+> `src/figures/figure_les_reperes_a_pleine_resolution.py` (10 contrôles), le 2026-09-05.
+>
+> ```
+> uv run python src/encre/les_reperes_a_pleine_resolution.py --json docs/mesures/les_reperes_a_pleine_resolution.json
+> uv run python src/figures/figure_les_reperes_a_pleine_resolution.py --sortie docs/images/75_les_reperes_a_pleine_resolution.png
+> ```
+
+⭐⭐⭐ **Le segment publie AUSSI la carte d'encre à sa résolution native** — `ink-detection`,
+**26 440 × 15 060**, un `.tif` de **20,5 Mo** — à côté du `ink-detection-downsampled` réduit ×8
+en `.jpg` que tout ce lot lisait par habitude. L'échelle du transport passe de **0,12** à
+**0,97**, donc un trou de 64 pixels du masque reste un trou de 64 pixels.
+
+![les repères à pleine résolution, et leur couverture](images/75_les_reperes_a_pleine_resolution.png)
+
+**Côté source, le goulot disparaît d'un coup** : les **314** trous utilisables du masque sont
+**tous** transportables, contre **55** au réduit.
+
+#### ⚠⚠⚠ Mais côté cible il s'effondre, et le compte brut dit pourquoi
+
+| support | composantes de fond | intérieures | d'aire ≥ 4 |
+|---|---:|---:|---:|
+| le réduit publié (`.jpg`) | **420** | 419 | **153** |
+| **témoin** : le plein réduit ×8 par la même règle | **19** | 18 | 15 |
+| le plein (`.tif`) | 37 | 36 | 31 |
+
+⚠⚠⚠ **Réduire le support à pleine résolution par la même règle ne rend pas 420 composantes, il
+en rend 19.** Les trous du support réduit ne sont donc pas dans la **matière**, ils sont dans le
+**fichier** : un `.jpg` est compressé avec perte et crénelle les bords à fort contraste,
+c'est-à-dire précisément le pourtour des vrais trous. Le témoin est monté en faveur de ce qu'il
+conteste — la règle de réduction est « plein dès qu'il y a de la matière », la plus généreuse.
+
+> **Ce qui est corrigé, et c'était publié six heures plus tôt** : « le support de la carte
+> publiée porte les trous du fragment, donc il est un masque de fait » est **faux**. Il en porte
+> **36**, quand le masque en a **348**. Le support n'est pas un masque du fragment ; c'est une
+> carte de détecteur qui en montre une poignée.
+
+#### ⭐ Ce qui survit à la correction, et c'est l'essentiel
+
+Les **314** repères se posent tout de même **7,7 fois plus près** de ces 36 vides que le hasard :
+**796 px** de distance médiane contre **6 114 px** pour autant de points tirés dans la même
+empreinte. Les vides qui existent **sont** ceux du fragment — c'est le **compte** qui était faux,
+pas l'appariement.
+
+#### ⚠⚠ Et la figure impose une seconde nuance : le gain est de la DENSITÉ, pas de l'étendue
+
+| | 55 repères (réduit) | 314 repères (plein) |
+|---|---:|---:|
+| couverture à 500 px (1,1 mm) | 4,9 % | **10,5 %** |
+| … à 1 000 px (2,2 mm) | 12,3 % | 23,9 % |
+| … à 2 000 px (4,4 mm) | 27,6 % | 52,1 % |
+| … à 4 000 px (8,9 mm) | 53,5 % | **94,0 %** |
+| **étendue du 80 % central** | 24,1 × 16,1 % de la carte | **28,7 × 18,1 %** |
+
+⚠ **Cinq fois et demie plus de repères pour un cinquième d'étendue en plus.** Le dessin le montre
+sans ambiguïté : les 314 suivent **la même bande** que les 55. Multiplier la densité là où il y
+avait déjà de la matière ne donne rien à un recalage qui manque de matière **ailleurs**.
+
+#### Ce que ça change pour C1
+
+1. ✅ **Le côté source est réglé** : 314 repères au lieu de 55, sans rien demander à personne —
+   il suffisait de lire l'autre fichier. ⚠ Et c'est une leçon de méthode : le fichier par
+   défaut d'un index n'est pas le meilleur fichier de l'index.
+2. ⚠⚠⚠ **Le goulot a DÉMÉNAGÉ, il n'a pas disparu.** Il est maintenant du côté **cible** — 36
+   vides publiés contre 348 dans le masque — et du côté **étendue** : une seule bande du
+   fragment.
+3. ⚠⚠ **Et la voie « le support est un masque de fait » est fermée.** Ce qui reste ouvert est ce
+   que `68` §4 nommait déjà : demander un **masque de surface publié** au régime du prix, ou les
+   étiquettes rendues dans son repère.
+
 ### Ce qui reste de C1, et c'est maintenant précis
 
 1. ✅✅ **Ce n'était pas un champ, c'était une TRANSLATION — et sa part applicable est
@@ -1307,8 +1389,11 @@ remplaçable par une relecture.
    une dispersion de **471 µm**, l'ordre d'une lettre. Les **55 repères** sont le seul matériau
    qui en prédise quelque chose — laisser-un-dehors **31,8** contre **40,2** au champ nul et
    **42,8** au meilleur mélange de positions, là où les 34 carreaux échouent aux deux (77,5
-   contre 60,5 et 58,8) — mais ils sont **groupés d'un côté** (12 sur 55 dans la boîte
-   centrale). **Les densifier ailleurs, pas les remplacer.**
+   contre 60,5 et 58,8). ⭐ **Et ils sont désormais 314 et non 55** : il suffisait de lire la
+   carte publiée à sa résolution native au lieu de sa réduction ×8. ⚠⚠ Mais le gain est de la
+   **densité** — le 80 % central passe de 24,1 × 16,1 % de la carte à 28,7 × 18,1 % pour cinq
+   fois et demie plus de repères — et le goulot a **déménagé côté cible** : le support ne publie
+   que **36** vides. **Le densifier ailleurs reste à faire, et ça demande un masque publié.**
 2. **Une fenêtre choisie dans un repère COMMUN**, pas dans la grille de chaque régime : les deux
    campagnes ont atterri sur deux régions différentes (27,8 % et 91,1 % d'encre), donc leurs
    nombres ne se comparaient pas même sans le problème de recalage.

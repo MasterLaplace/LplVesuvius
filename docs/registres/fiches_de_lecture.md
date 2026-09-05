@@ -3706,7 +3706,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/55_les_murs_et_leurs_causes.md
-- **lignes** : 111
+- **lignes** : 112
 - **nature** : PROCEDE
 - **résumé** : Document **rendu** depuis `docs/registres/murs_et_causes.tsv` par `uv run python src/depot/murs_et_causes.py --rendre`, et non écrit à la main ; sa batterie vérifie que chaque ligne pointe vers un document contenant encore son ancre. Il recense **30 causes candidates sur 4 murs** : 19 éliminées, 10 confirmées, 1 bloquée, chacune avec la mesure qui l'a tranchée et le document d'origine. Sa thèse de forme est qu'un mur est un espace de causes dont on retire une entrée à la fois, et que la liste des causes éliminées — non celle des tâches — est le seul progrès mesurable. Une seule cause reste non tranchée, et elle est bloquée. (⚠ Note de lecture : l'en-tête compte 19 éliminations quand le §final écrit « les treize éliminations de ce document » ; le document ne signale pas l'écart. De même, il ne contient aucune cause ⏳ *ouverte* alors que son propre tableau de symboles définit ce statut.)
 - **conclusions extractibles** : *(les murs recensés, avec pour chacun les causes éliminées et celles qui restent ouvertes)*
@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 1961
+- **lignes** : 2046
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5567,6 +5567,23 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     carte (3305 × 1883) contre **71** trous du support, appariés à **40,3** cellules en
     médiane (1er décile 16,1) contre **319,6** pour autant de points tirés au hasard dans la
     même empreinte : **huit fois mieux**. La voie de C1 est ouverte **sans rien demander**.
+  - ⚠⚠⚠ **ET CE « VIS-À-VIS » EST CORRIGÉ LE JOUR MÊME, par la carte à pleine résolution.** Le
+    segment publie aussi `ink-detection` en `.tif` natif (26 440 × 15 060, 20,5 Mo) à côté du
+    `.jpg` réduit ×8 que tout le lot lisait par habitude. L'échelle du transport passe de 0,12 à
+    0,97, donc les **314** repères utilisables sont **tous** transportables au lieu de 55.
+    ⚠⚠ Mais le support n'y porte que **36** vides intérieurs quand le masque en a **348**, et le
+    témoin tranche : réduire le support natif ×8 par la même règle rend **19** composantes de
+    fond, pas **420**. Les 71 « trous » du réduit sont donc en grande part du **crénelage de
+    `.jpg`**, qui sonne aux bords à fort contraste — le pourtour des vrais trous. « Le support
+    est un masque de fait » est **faux** ; ce qui survit est que les repères se posent **7,7×**
+    plus près des vides qui existent que le hasard (796 px contre 6 114).
+  - ⚠⚠ **Et le gain est de la DENSITÉ, pas de l'étendue** : la couverture de l'empreinte à
+    1,1 mm passe de 4,9 % à 10,5 % et à 8,9 mm de 53,5 % à 94,0 %, mais le 80 % central du semis
+    ne passe que de 24,1 × 16,1 % de la carte à **28,7 × 18,1 %** pour **5,7 fois** plus de
+    repères. C'est le dessin qui l'a imposé, pas les chiffres. **Le goulot a déménagé côté
+    cible**, il n'a pas disparu.
+  - ⭐ Leçon de méthode : **le fichier par défaut d'un index n'est pas le meilleur fichier de
+    l'index**. Cinquante-neuf repères sur soixante étaient perdus par un choix de lecture.
   - ⚠⚠ **La figure a attrapé une sur-affirmation de ma propre prose** : j'y écrivais les
     repères « répartis à l'intérieur », et le dessin montre qu'ils sont **groupés d'un côté**
     — 12 sur 55 dans la boîte centrale. Ils sont dans l'**aire** du fragment et non sur son
@@ -5649,8 +5666,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 1368 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 1961 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 1453 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 2046 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
