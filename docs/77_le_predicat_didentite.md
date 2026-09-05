@@ -564,6 +564,36 @@ les **deux** volumes publiés sont à **7,91 µm** (lu dans leurs `meta.json`), 
 rien ne relie à un volume.** Le code le **dit** (`provenance_du_voxel_reconstructible: false`)
 au lieu de composer avec — et le contrôle tombera le jour où `44` nommera son volume.
 
+> ⚠⚠⚠ **2026-09-05 — LE CONTRÔLE EST TOMBÉ, ET MA PRÉMISSE ÉTAIT FAUSSE.** `PHercParis4` ne
+> publie pas « deux volumes à 7,91 µm » : il en publie **cinq** — deux à 45,532 µm, **deux à
+> 2,400** et un à 1,129 — et **aucun à 7,91**. Ce chiffre est le voxel de `PHerc0172`,
+> emprunté ; `la_surface_et_la_feuille.py` posait d'ailleurs `2.4: "PHercParis4"` dans sa
+> propre table deux cents lignes plus bas, donc le fichier se contredisait lui-même.
+>
+> ⭐⭐ **Et la provenance se reconstruit par une contrainte dure, pas par un argument.** La boîte
+> englobante d'un `tifxyz` est en voxels du **niveau 0** : un volume dont la grille ne peut pas
+> la contenir **n'est pas** le sien. Le maillage de `44` va jusqu'à `z = 73 635`, et sur les
+> cinq volumes **un seul** a une grille assez grande (`[75784, 32693, 32693]`) — celui à
+> **2,400 µm**, exactement la constante que `couverture_publiee.py` posait.
+>
+> ```
+> uv run python src/nappe/le_volume_du_maillage.py \
+>     data/temoin_rendu/morceaux/morceau_00 --rouleau PHercParis4 \
+>     --json docs/mesures/le_volume_du_maillage.json
+> ```
+>
+> ⚠ La désignation **refuse** à zéro contenant **et à deux** : à deux, on nommerait un volume
+> par l'ordre du listage, ce qui n'est pas une propriété des données. ⚠⚠ La taille de voxel est
+> lue dans le **nom du volume de rouleau**, ce qui n'est pas ce que [`76`](76_le_sens_des_indices.md)
+> interdit — sa règle porte sur les **volumes de surface d'un segment**, qui déclarent la
+> résolution *avant* sous-échantillonnage. Le `.zattrs` publié ne porte que les rapports de
+> pyramide, pas de micron.
+>
+> **Conséquence** : la correction de budget de `44` passe de transportable-en-feuilles à
+> **calculable en micromètres**, et le contrôle est réécrit dans les deux sens — il retombe si
+> la désignation disparaît de l'arbre **ou** si le voxel employé cessait d'être celui du volume
+> désigné. Les deux sondes mordent.
+
 ⭐ Ce qui voyage quand même : le référent en **feuilles**, 0,16 à 0,25 sur trois rouleaux.
 
 ### ⭐ Un contrôle qui a fait exactement ce pour quoi il a été écrit

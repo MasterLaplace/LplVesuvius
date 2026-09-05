@@ -83,9 +83,13 @@ c'est le rouleau sur lequel `44` a mesuré la dérive de la chaîne de spires �
 correction de budget du §10 serait transportée d'un rouleau à l'autre sans preuve.
 
 ⚠ Les 173 µm de `PHercParis4` viennent de `16` (médiane mesurée), **pas** d'une estimation :
-ma première version y avait écrit 148, un nombre que je n'avais mesuré nulle part. Et son voxel
-est **7,91 µm**, lu dans le `meta.json` du volume que son `meta.json` de segment déclare —
-ses deux volumes publiés sont à 7,91.
+ma première version y avait écrit 148, un nombre que je n'avais mesuré nulle part.
+
+⚠⚠⚠ **Et son voxel n'est PAS 7,91 µm** — corrigé le 2026-09-05. Ce fichier l'écrivait ici tout
+en posant `2.4: "PHercParis4"` dans sa propre table `VOXEL_DES_ROULEAUX` : il se contredisait
+d'un paragraphe à l'autre, et 7,91 est le voxel de `PHerc0172`, que la même table nomme deux
+lignes plus bas. Mesuré (`src/nappe/le_volume_du_maillage.py`) : `PHercParis4` publie **cinq**
+volumes — deux à 45,532 µm, deux à **2,400** et un à 1,129 — et **aucun à 7,91**.
 
 ⚠⚠ Les 113 µm de `PHerc1447` sont ceux de `44` §4, et `77` §10 montre justement qu'ils sont
 une distance au plus proche voisin **entre surfaces**, pas un écart centre à centre. Ils sont
@@ -508,6 +512,38 @@ VOXEL_DES_ROULEAUX = {2.4: "PHercParis4", 7.91: "PHerc0172", 8.64: "PHerc1447",
 mesure au lieu de le supposer — voir `correction_du_budget`."""
 
 
+def _designation() -> dict:
+    """La désignation du volume de `44`, si elle est dans l'arbre.
+
+    ⚠ LUE et non recalculée : la désignation demande le réseau (les formes des volumes
+    publiés), et une mesure qui exige le réseau dans une batterie hors ligne est une mesure
+    qu'on finit par sauter. Absente, le drapeau reste `False` — l'état d'avant.
+    """
+    f = RACINE / "docs" / "mesures" / "le_volume_du_maillage.json"
+    if not f.is_file():
+        return {}
+    try:
+        return json.loads(f.read_text())
+    except (OSError, ValueError):
+        return {}
+
+
+def _volume_designe() -> str | None:
+    """Le volume publié qui contient le maillage de `44`, ou `None`."""
+    return _designation().get("designe")
+
+
+def _provenance_reconstructible(voxel: float) -> bool:
+    """Le voxel employé est-il celui d'un volume publié DÉSIGNÉ par la géométrie ?
+
+    ⚠⚠ Les deux conditions sont exigées ensemble : qu'un volume soit désigné **et** que son
+    voxel soit celui qu'on emploie. La première seule laisserait composer des micromètres à
+    travers une constante qui, se trouvant, ne serait pas celle du volume désigné.
+    """
+    d = _designation()
+    return bool(d.get("reconstructible")) and d.get("voxel_um") == voxel
+
+
 def correction_du_budget(spires: list[dict] | None = None) -> dict:
     """
     @brief De combien l'écart de la chaîne de spires (`44`) est gonflé par l'erreur du référent.
@@ -531,16 +567,21 @@ def correction_du_budget(spires: list[dict] | None = None) -> dict:
     voxel = float(d.get("um_par_voxel", 0.0))
     rouleau = VOXEL_DES_ROULEAUX.get(voxel)
 
-    # ⚠⚠⚠ LA PROVENANCE DE CE VOXEL N'EST PAS RECONSTRUCTIBLE, et c'est un fait sur `44`, pas
-    # sur ce fichier. `couverture_publiee.py` pose `UM_PAR_VOXEL = 2.4` en le justifiant par
-    # « la convention de `chainer_tangentiel.sh` » et par une cohérence INTERNE (le maillon 20
-    # rapporte 800 voxels et le document lit 1920 µm) — jamais contre le voxel déclaré d'un
-    # volume. Or son répertoire de référence, `publie_20230702185753`, porte le nom d'un
-    # segment de `PHercParis4`, dont les DEUX volumes publiés sont à **7,91 µm** (lu dans leurs
-    # `meta.json`), et son propre `meta.json` est dépouillé (`uuid: out`).
+    # ⚠⚠ LA PROVENANCE DE CE VOXEL, et elle EST reconstructible depuis le 2026-09-05.
+    # `couverture_publiee.py` pose `UM_PAR_VOXEL = 2.4` en le justifiant par « la convention de
+    # `chainer_tangentiel.sh` » et par une cohérence INTERNE (le maillon 20 rapporte 800 voxels
+    # et le document lit 1920 µm) — jamais contre le voxel déclaré d'un volume. J'en avais
+    # conclu qu'on ne pouvait pas composer les micromètres.
     #
-    # Conséquence : tous les micromètres du tableau de couverture de `44` reposent sur une
-    # constante que rien ne relie à un volume. On le DIT au lieu de composer avec.
+    # ⚠⚠⚠ Ma prémisse était fausse : j'écrivais que `PHercParis4` publie « deux volumes, tous
+    # deux à 7,91 µm ». Il en publie **cinq**, et **aucun à 7,91** — ce chiffre est celui de
+    # `PHerc0172`, que la table `VOXEL_DES_ROULEAUX` de ce fichier nomme correctement.
+    #
+    # ⭐⭐ Et la désignation est une contrainte DURE, pas un argument : la boîte englobante du
+    # maillage est en voxels du niveau 0, donc un volume dont la grille ne peut pas la contenir
+    # n'est pas le sien. Mesuré : **un seul** des cinq la contient, et il est à **2,400 µm**.
+    # Le drapeau est LU dans `docs/mesures/le_volume_du_maillage.json` et reste `False` si
+    # cette mesure n'est pas dans l'arbre.
     maillons = d.get("maillons") or []
     if not maillons:
         return {}
@@ -566,7 +607,8 @@ def correction_du_budget(spires: list[dict] | None = None) -> dict:
     en_feuilles = [sp["ecart_type_feuilles"] for sp in mesures]
     return dict(
         rouleau_de_la_chaine=rouleau, voxel_um=voxel,
-        provenance_du_voxel_reconstructible=False,
+        provenance_du_voxel_reconstructible=_provenance_reconstructible(voxel),
+        volume_designe=_volume_designe(),
         referent_en_feuilles=float(np.median(en_feuilles)) if en_feuilles else None,
         referent_en_feuilles_min=float(min(en_feuilles)) if en_feuilles else None,
         referent_en_feuilles_max=float(max(en_feuilles)) if en_feuilles else None,
@@ -695,14 +737,22 @@ def _verifier(r: dict) -> int:
           and cb["referent_en_feuilles_max"] < 2 * cb["referent_en_feuilles_min"],
           " · ".join(f"{x:.1f} µm" for x in cb.get("referents_par_rouleau", {}).values())
           + f" → {cb['referent_en_feuilles_min']:.3f}–{cb['referent_en_feuilles_max']:.3f} feuille")
-        # ⚠⚠⚠ Le controle qui empeche de composer des micrometres a travers un voxel dont on
-        # ne sait pas d'ou il vient. Il est ecrit dans le sens « ce n'est PAS reconstructible » :
-        # le jour ou `44` nommera son volume, il tombera, et il faudra passer la conjecture en
-        # mesure.
-        v("la provenance du voxel de `44` n'est PAS reconstructible — donc on ne compose pas",
-          cb.get("provenance_du_voxel_reconstructible") is False,
-          f"{cb.get('voxel_um')} µm justifié par cohérence interne, "
-          f"pas contre un volume déclaré")
+        # ⚠⚠⚠ Ce controle etait ecrit dans le sens « ce n'est PAS reconstructible », avec la
+        # note qu'il tomberait le jour ou `44` nommerait son volume. **Il est tombe le
+        # 2026-09-05**, et la conjecture est passee en mesure : la boite englobante du maillage
+        # designe UN SEUL des cinq volumes publies, et il est a 2,400 µm — la constante posee.
+        #
+        # ⚠ Le controle est ecrit dans les DEUX sens : il tombe aussi bien si la designation
+        # disparait de l'arbre que si le voxel employe cessait d'etre celui du volume designe.
+        v("la provenance du voxel de `44` EST reconstructible — un seul volume publié "
+          "peut contenir son maillage",
+          cb.get("provenance_du_voxel_reconstructible") is True,
+          f"{cb.get('voxel_um')} µm ← "
+          f"{(cb.get('volume_designe') or 'aucun volume désigné').split('/')[-1]}")
+        v("... et le volume désigné est bien celui dont le voxel est employé",
+          cb.get("volume_designe") is not None
+          and f"{cb.get('voxel_um'):g}" in (cb.get("volume_designe") or ""),
+          str(cb.get("volume_designe")))
         # ⭐ Ce qui VOYAGE quand les micrometres ne le peuvent pas.
         v("... mais le référent est transportable en unités de FEUILLE",
           cb.get("referent_en_feuilles") is not None

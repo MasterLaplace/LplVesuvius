@@ -1,0 +1,53 @@
+{
+  "maillage": "data/temoin_rendu/morceaux/morceau_00",
+  "rouleau": "PHercParis4",
+  "boite": {
+    "x": [
+      14255.8916015625,
+      16142.03125
+    ],
+    "y": [
+      21851.353515625,
+      24142.490234375
+    ],
+    "z": [
+      71312.5234375,
+      73634.703125
+    ],
+    "uuid": "morceau_00"
+  },
+  "volumes": {
+    "PHercParis4/volumes/20260310170716-45.532um-11.0m-74keV-masked.zarr": [
+      4071,
+      2264,
+      2264
+    ],
+    "PHercParis4/volumes/20260310173927-45.532um-11.0m-110keV-masked.zarr": [
+      4066,
+      2264,
+      2264
+    ],
+    "PHercParis4/volumes/20260323153942-2.400um-0.2m-137keV-masked.zarr": [
+      6625,
+      8431,
+      8431
+    ],
+    "PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr": [
+      75784,
+      32693,
+      32693
+    ],
+    "PHercParis4/volumes/20260608103018-1.129um-0.2m-78keV-masked.zarr": [
+      59969,
+      36006,
+      32354
+    ]
+  },
+  "contenants": [
+    "PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr"
+  ],
+  "designe": "PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr",
+  "voxel_um": 2.4,
+  "candidats": 5,
+  "reconstructible": true
+}

@@ -4916,7 +4916,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 100 (dernière ligne non vide) : `papier reproche à la littérature.`
 
 ### docs/77_le_predicat_didentite.md
-- **lignes** : 711
+- **lignes** : 741
 - **nature** : RESULTAT
   (construction et mesure d'un champ d'enroulement, puis quatre lots qui s'enchaînent : le
   masque d'approbation à cinq bras, le second rouleau qui ne sépare pas, le trou angulaire
@@ -5014,6 +5014,15 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     (l'argmax d'une fenêtre centrée sur l'argmax est au centre), et transporter la profondeur
     d'une fenêtre à l'autre est **confondu par le serpentage** (0,13 écart ≈ 2,8 couches, l'ordre
     de la fenêtre étroite).
+  - ⚠⚠⚠ **§10 bis CORRIGÉ le 2026-09-05, la prémisse était fausse** : `PHercParis4` ne
+    publie pas « deux volumes à 7,91 µm » mais **cinq**, dont **aucun à 7,91** — ce
+    chiffre est le voxel de `PHerc0172`, emprunté, et `la_surface_et_la_feuille.py`
+    posait `2.4: "PHercParis4"` dans sa propre table. ⭐⭐ La provenance se reconstruit
+    par une contrainte **dure** : la boîte d'un `tifxyz` est en voxels du niveau 0, donc
+    un volume dont la grille ne peut pas la contenir n'est pas le sien — **un seul** des
+    cinq contient `z = 73 635`, et il est à **2,400 µm**, la constante posée. La
+    correction de budget passe de transportable-en-feuilles à **calculable en
+    micromètres** (69,2 → 66,4 µm).
 - **rétractations / corrections internes** :
   - §12, ⚠⚠⚠ **l'estimateur du §10 enjambait deux feuilles** : le centre de masse pris sur toute
     la dalle atterrit **dans le creux entre deux lobes**, et 9 des 12 piles en contiennent deux à
@@ -5046,7 +5055,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     composer avec.
 - **preuve de lecture intégrale** :
   - ligne 431 (après 61 % du fichier) : `L'argument était juste sur la **physique** et faux sur la **statistique** : un pas estimé sur`
-  - ligne 710 (dernière ligne non vide) : `traceur pourrait corriger, et exactement ce que du bruit ne serait pas.`
+  - ligne 740 (dernière ligne non vide) : `traceur pourrait corriger, et exactement ce que du bruit ne serait pas.`
 
 
 ### docs/78_lombilic_publie.md
@@ -5403,7 +5412,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 1453
+- **lignes** : 1458
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5482,6 +5491,12 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     LIGNE VIDE et le motif exigeait l'enchaînement immédiat — sept fiches **invisibles**, dont
     trois dérivaient réellement (`48` annonçait 342 lignes pour 405 pendant que le registre
     disait « 0 en dérive »).
+  - ✅✅ **A5 bis refermé le 2026-09-05** : `44` nomme son volume, désigné par la
+    géométrie et non par un argument. Un seul des cinq volumes publiés a une grille
+    assez grande pour contenir le maillage, et il est à 2,400 µm. ⚠ Le contrôle
+    `provenance_du_voxel_reconstructible`, écrit dans le sens « ce n'est PAS
+    reconstructible » avec la note qu'il tomberait ce jour-là, **est tombé** — c'est
+    exactement ce pour quoi il avait été écrit.
 - **rétractations / corrections internes** :
   - ⚠⚠⚠ A5 bis : « l'expérience que personne ne pouvait poser » était **faux** — elle était
     faite. Et dans la même section, « `44` mesure sur `PHerc1447` » est corrigé en
@@ -5504,8 +5519,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 860 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 1453 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 865 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 1458 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

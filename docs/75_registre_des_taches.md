@@ -404,9 +404,14 @@ aberrant (37,7 → 23,8 µm) : ce n'était pas un rouleau à part, c'était l'es
 les deux volumes publiés de `PHercParis4` sont à **7,91 µm**. Tous les micromètres du tableau
 de couverture de `44` reposent donc sur une constante que rien ne relie à un volume.
 
-> **Ce qui reste à faire, et c'est petit** : que `44` nomme son volume. Le contrôle
-> `provenance_du_voxel_reconstructible` tombera ce jour-là, et la correction passera de
-> transportable-en-feuilles à calculable-en-micromètres.
+> ~~**Ce qui reste à faire, et c'est petit** : que `44` nomme son volume.~~ ✅✅ **FAIT le
+> 2026-09-05**, et ma prémisse était fausse : `PHercParis4` publie **cinq** volumes, dont
+> **aucun à 7,91 µm** — ce chiffre est celui de `PHerc0172`, emprunté. La boîte englobante du
+> maillage étant en voxels du niveau 0, un volume trop petit pour la contenir **n'est pas** le
+> sien : **un seul** des cinq la contient, et il est à **2,400 µm** — la constante posée.
+> `provenance_du_voxel_reconstructible` est passé à vrai, et la correction est désormais
+> **calculable en micromètres** (`69,2 → 66,4 µm`). Mesure :
+> `src/nappe/le_volume_du_maillage.py` (18 contrôles, 3 sondes qui mordent).
 
 > ⚠ **Le seul contrôle qui vaudrait d'être monté** : refaire `couverture_publiee.py` contre la
 > surface **recalée sur la bande** plutôt que contre la surface publiée. Si l'écart tombe, le
