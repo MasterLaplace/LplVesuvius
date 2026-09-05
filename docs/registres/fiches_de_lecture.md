@@ -4945,6 +4945,104 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 117 (après 64 % du fichier) : `zéros) les comptait comme « 49 fenêtres avec matière ».`
   - ligne 183 (dernière ligne non vide) : `[`registres/fiches_de_lecture.md`](registres/fiches_de_lecture.md).`
 
+### docs/73_seconde_passe_ce_que_le_depot_change.md
+- **lignes** : 426
+- **nature** : REVUE
+  (réponse à un second prompt externe, en quatre livrables : hypothèses révisées contre ce
+  que le dépôt a mesuré, revue adverse de l'article, plan repondéré, et une observation neuve.)
+- **résumé** : Reprend les sept hypothèses de [`69`](../69_reponse_dun_chercheur_exterieur.md)
+  et les confronte à ce que le dépôt a **déjà** mesuré : deux sont mortes comme instruments
+  (H3, H6 — le dépôt porte déjà la carte de séparabilité dense et l'atlas d'enroulement),
+  deux passent au budget « étalonner la règle » (H1, H7), une devient un courriel conditionnel
+  (H2), et deux **deviennent le plan** (H4, H5). Le document prend le cadrage au mot — *l'encre
+  est la règle graduée* — et en tire une conséquence que `69` n'avait pas : une règle a une
+  propriété à établir **avant** de s'en servir, elle lit quelque chose ; d'où trois semaines et
+  non quatre mois. Sa thèse de fond est la séparation de **trois** prédicats — présence,
+  placement, identité — dont le troisième est absent du dépôt et **est celui sur lequel le prix
+  se gagne**.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ Livrable 4 : **les segments publiés portent leur numéro de spire dans leur nom, et
+    aucun instrument du dépôt ne le lit.** `PHerc0139` `w023`–`w059`, `PHerc1667` `w011`–`w041`
+    — **57 segments, 56 spires distinctes**, approuvés par des humains, dont `0139` transformé
+    dans le repère du régime du prix. C'est le référent d'**identité** que le prédicat du
+    pinceau exige (*single sheet*), et celui que `17` n'avait pas : il a tourné sur **ces
+    38 segments-là** contre des auto-intersections.
+  - ⚠⚠ §2.1, la sur-affirmation la plus attaquable de l'article : *« the predicate is the same
+    one α estimates »* est faux, il en manque deux tiers. Le pinceau juge l'**identité** (rester
+    sur la feuille $k$), α juge la **présence** (une feuille est à portée), `offset` juge le
+    **placement**. Remède : retirer *« the same judgement made two ways »* et **verser `17` dans
+    cette section** comme le résultat négatif qu'il est.
+  - ⚠⚠ §2.2 : *« no threshold on a physical quantity »* est vrai de α et faux du **verdict**.
+    Une surface parallèle aux feuilles posée dans l'interstice a $d_0 = d_1$, donc **α = 0** et
+    la convergence tient — l'instrument dirait « la feuille est là ». Ce qui l'en distingue est
+    $d$ contre la demi-épaisseur, **un seuil en micromètres**. Test proposé : translater un
+    segment convergent d'un demi-pas le long de ses normales.
+  - ⚠⚠ §2.3 : les **113 µm** de l'article sont un écart **face à face** et non centre à centre —
+    `gen_neighbor` arrête son rayon au premier échantillon au-dessus du seuil. Corrigé :
+    113 + 24 à 60 d'épaisseur = **137 à 173 µm**, ce qui réconcilie avec les 156 de `16` et les
+    172,8 de l'atlas que l'article cite trois lignes plus loin.
+  - ⚠ §2.4 : le témoin négatif n'est **pas sans encre par construction**. La surface à α ≈ 1
+    traverse des feuilles, donc leurs faces recto, donc l'encre — en rubans de largeur
+    $t/\sin\theta$, **2 à 4 pixels** à 8,64 µm. Ce que la géométrie exclut est une **face** à
+    portée, pas de la matière : la conclusion dure reste que la réponse du détecteur n'est pas
+    spécifique d'une face.
+  - ⚠ §2.5 : la méthode de la flèche suppose un axe droit, or l'axe erre de **21,6 mm sur
+    108 mm** sur Scroll 1. §2.6 : les quinze segments de §5.7 sont des `auto_grown_*`, sorties
+    d'un traceur à graine aléatoire — les nommer rend le résultat plus petit et inattaquable.
+    §2.7 : « 13 » et « 14 traces » sont **deux définitions** (censurées à la profondeur basse,
+    contre à l'une au moins des deux), toutes deux vraies, employées comme une seule.
+  - ⚠⚠ §2.8, la limite non déclarée : **α n'a jamais vu de courbe ROC** — la validation est
+    UN vert contre les traces condamnées du dépôt. Si la majorité des 75 séries convergentes
+    sont des segments publiés, α **re-dérive** une approbation humaine plus qu'il ne la
+    remplace. Les 57 segments indexés donnent 57 positifs, leurs copies translatées d'un
+    demi-pas 57 négatifs : une ROC sur 114 surfaces fermerait §2.2 et §2.8 d'un coup.
+  - ⭐⭐ Les trois prédicats : **présence** construite (`38`, `49`, `51`), **placement**
+    construit (`20`), **identité absente** — `17` a échoué contre le mauvais référent, et le
+    référent existe. « Le pinceau peint le troisième. Les deux premiers l'assistent et ne le
+    remplacent pas. »
+  - Budget de la règle, trois semaines et pas quatre mois : semaines 1–2 la case vide de `68`
+    §4 **native** à 9,362 µm sur `PHerc0500P2` avec ≥ 40 tuiles de 256 px, semaine 3 le nul
+    verso. Sortie : deux nombres avec leur intervalle. Si l'AUC native ne se sépare pas de 0,5,
+    « colonnes visibles partout » devra être jugé par la typographie et par le juge à condition
+    vierge — **une conclusion sur la méthode de validation, pas sur le prix**.
+  - Dimensionnement **[calculé]** avec σ = 0,2243 : séparer l'AUC à 9,72 µm (0,599) de 0,5
+    demande **40 tuiles** par condition, séparer 3,24 de 9,72 µm en demande **140**. On en avait
+    10, 11 et 2. ⚠ Ce sont des **minorants** — les tuiles voisines ne sont pas indépendantes.
+  - Choix de rouleau **révisé contre `69`** : `PHerc0826` était recommandé pour son faible
+    nombre de spires (60) et c'est **le pire des treize** par la carte dense — **22,8 %** de
+    fenêtres indissociables contre **2,6 %** pour `PHerc0800` et **7,0 %** pour `PHerc1447`.
+    « Le compte de spires mesure le coût d'un pinceau ; la queue mesure la chance qu'un traceur
+    suive. » **Jamais `0826`.**
+  - Le contrôle du masque d'approbation prend un **quatrième bras** : la copie translatée d'un
+    demi-pas, que le masque doit **refuser**. Sans lui, un masque qui approuve tout passe le
+    contrôle à trois bras.
+  - Mesure de succès de l'extraction : l'aire utile par spire contre le **point fixe de
+    6,02 cm²** du cycle rogner-étendre ; une spire entière de `0800` fait 60 à 300 cm².
+    ⚠ L'érosion d'une extraction est **à mesurer, pas à supposer** égale aux 15,6 % par tour
+    d'une chaîne.
+  - Trois vérifications faites à la source parce que les livrables en dépendent : les
+    « croisements » de `17` sont des **auto-intersections** (`windcheck`), les segments publiés
+    portent bien leur indice de spire, et **aucun `approval.tif` n'est publié** à côté des
+    `x/y/z.tif` (listage S3).
+- **rétractations / corrections internes** :
+  - §1 H2 : ⚠⚠⚠ « **CE PARAGRAPHE SUR-AFFIRME, et `69` porte déjà le contre-argument** »
+    (2026-09-04). À 1,2 m le papier rend deux verdicts pour la **même acquisition** — 4,317 µm
+    *haze-limited*, 9,362 µm *pixel-limited* — donc la résolution est bornée par la
+    **décohérence** : plus de voxels sur un signal déjà flou ne relèvent pas $d'$. Le courriel à
+    l'ESRF devient **conditionnel**, et « aucune expérience à monter avant la réponse » est
+    barré — l'expérience est justement ce qui décide s'il faut écrire.
+  - §5 déclare quatre doutes, dont deux qui portent sur ses propres attaques : §2.2 repose sur
+    une **lecture** de §3.6 et non sur une mesure, et §2.3 suppose que la source de la chaîne
+    était centrée. « Le fichier tranche, pas moi. »
+  - ⚠ Le `[je ne sais pas]` de §5 sur le **sens** des indices `w` — depuis le centre ou depuis
+    l'extérieur — a été **fermé depuis** par [`76`](../76_le_sens_des_indices.md) : depuis le
+    centre vers l'extérieur, 95,0 % et 95,1 % sur deux rouleaux. Et sa réserve « la numérotation
+    peut être discontinue » s'est avérée : `76` mesure **3 paires sur 79 (~4 %)** où deux indices
+    désignent la même surface publiée.
+- **preuve de lecture intégrale** :
+  - ligne 270 (après 63 % du fichier) : `rivaliser avec la flèche circonférentielle d'une corde de 8 à 22 mm sur un rayon de 2 à 4 cm.`
+  - ligne 426 (dernière ligne non vide) : `premiers rouleaux tracés.`
+
 ### docs/74_le_73_audite.md
 - **lignes** : 190
 - **nature** : AUDIT
