@@ -825,7 +825,9 @@ demi-largeur de trait suffit à mettre l'encre prédite dans les blancs.
 | (−104, −120) cellules, soit **2,1 mm** | **0,711** |
 
 ⚠ **Et le maximum est encore au bord du balayage**, donc **2,1 mm est un minorant**. Trois
-lettres et demie de résidu local.
+lettres et demie de résidu local. ⚠⚠⚠ **Et un maximum au bord ne désigne rien** : le balayage
+refait à ±48 cases sur 127 fenêtres place l'optimum à **(−24, 0)**, *à l'intérieur* — voir plus
+bas, « le résidu est une translation ».
 
 > **Conséquence, et elle annule les chiffres suivants plutôt que de les nuancer** : aucun nombre
 > mesuré **par fenêtre** à travers ce recalage n'est interprétable tant qu'il n'est pas local.
@@ -880,6 +882,11 @@ serait la juger contre une géométrie faite pour quelqu'un d'autre.
 ⭐ **Et il n'atteint pas l'optimum trouvé en regardant l'encre (0,711), ce qui est la bonne
 nouvelle** : un champ indépendant qui l'égalerait serait suspect. L'écart dit ce qu'un champ plus
 dense reste à gagner — le carreau le plus proche de la fenêtre est à **277 cellules**.
+
+⚠⚠⚠ **Ce +0,194 est vrai sur CETTE fenêtre et ne se généralise pas.** Sur les 42 fenêtres où ce
+même champ répond, il gagne **+0,035** en médiane et n'améliore que **25 sur 42** — quand sa
+propre **constante** gagne +0,067 et en améliore **36**. Le champ de bord ne bat donc pas la
+médiane de ses propres carreaux ; voir la section « le résidu est une translation ».
 
 ⚠ Un carreau **plein** ne contraint rien : il se ressemble à lui-même partout, donc son décalage
 optimal est arbitraire. Seuls les carreaux à occupation intermédiaire sont retenus, et leur
@@ -1078,28 +1085,155 @@ J'ai écrit plus haut que le résidu vaut « **1,1 mm en médiane** ». C'est la
 **entier** par carreau — or une bonne moitié de ce décalage est dans la direction **non
 contrainte**. La composante réellement **mesurée** vaut **17 cellules, soit ~0,3 mm** en médiane.
 
-⭐ Ce qui ne bouge pas, parce que ça vient de l'encre et non des masques : près de la fenêtre
-mesurée, le résidu **est** grand — un décalage de (−104, −120) cellules y remonte la carte
-publiée de 0,418 à **0,711**, et le carreau le plus proche du champ y prédit (−142, −30), qui
-remonte à 0,612. Le résidu est donc **très variable dans l'espace** : petit en médiane, de
-l'ordre de deux millimètres là où il compte.
+⚠⚠⚠ **ET LE PARAGRAPHE QUI SUIVAIT EST ANNULÉ PAR LA SECTION SUIVANTE, PAS NUANCÉ.** J'écrivais :
+*« près de la fenêtre mesurée, le résidu est grand — un décalage de (−104, −120) cellules y
+remonte la carte publiée de 0,418 à 0,711 […] le résidu est donc très variable dans l'espace :
+petit en médiane, de l'ordre de deux millimètres là où il compte. »* Les deux affirmations
+tombent : **(−104, −120) était un maximum au BORD de son balayage**, donc une borne et non un
+déplacement ; et sur **127 fenêtres** de l'empreinte les optima se serrent autour de
+**(−24, 0)**, à 27 cases près. Ce qui reste vrai est que la fenêtre du régime du prix est
+**atypique** — pas que le résidu varie.
+
+### ⚠⚠⚠ Posée sur TOUTE l'empreinte, la question se renverse : le résidu est une TRANSLATION
+
+> Mesure : `src/encre/le_residu_est_une_translation.py` (39 contrôles) →
+> `docs/mesures/le_residu_est_une_translation.json`. Figure :
+> `src/figures/figure_le_residu_est_une_translation.py` (16 contrôles), le 2026-09-05.
+>
+> ```
+> uv run python src/encre/le_residu_est_une_translation.py --json docs/mesures/le_residu_est_une_translation.json
+> uv run python src/figures/figure_le_residu_est_une_translation.py --sortie docs/images/75_le_residu_est_une_translation.png
+> ```
+
+⚠⚠⚠ **Tout ce qui précède a été jugé sur UNE fenêtre** — celle du régime du prix, retenue parce
+qu'elle est la plus encrée. Une fenêtre n'est pas une mesure, et la même validation refaite sur
+**127 fenêtres** de l'empreinte ne dit pas la même chose.
+
+![le résidu est une translation, pas un champ](images/75_le_residu_est_une_translation.png)
+
+#### 1. Ce que chaque fenêtre demande, quand on la laisse choisir
+
+| | valeur |
+|---|---:|
+| décalage préféré, **médiane** sur 127 fenêtres | **(−24, 0)** cases, soit **425 µm** |
+| **dispersion** de ces préférences | (16,8 ; 20,6) cases, soit **471 µm** |
+| optima touchant le bord du balayage | 15 sur 127 |
+| amplitude du **champ de bord** (norme médiane) | **60,4** cases |
+| amplitude du **champ des repères** | **40,3** cases |
+
+⭐⭐⭐ **Les fenêtres s'accordent ; les champs bougent plus qu'elles ne le demandent.** Les deux
+champs candidats déplacent de **40** et **60** cases là où les fenêtres ne divergent que de
+**27** — un champ dont l'amplitude dépasse le désaccord qu'il corrige n'en corrige pas un, il en
+**invente** un.
+
+#### 2. Une CONSTANTE bat les deux champs, et de loin
+
+AUC médiane de la carte publiée, sur les **127** fenêtres de l'empreinte :
+
+| décalage constant | AUC médiane | fenêtres améliorées |
+|---|---:|---:|
+| aucun — l'affine publiée | 0,7547 | — |
+| **médiane du champ de bord**, (−13, +2) | **0,8523** | **116 sur 127** |
+| médiane du champ des repères, (−3,2 ; +8,2) | 0,7776 | 81 sur 127 |
+| **optimum balayé sur l'encre**, (−24, 0) | **0,885** | — |
+
+⚠ Ce maximum-là est **intérieur** au balayage (±48 cases), contrairement au (−104, −120) publié
+plus haut qui touchait sa borne. `maximum_au_bord` est **asserté**, pas noté.
+
+Et le champ contre **sa propre constante**, sur les 42 fenêtres où le champ de bord répond :
+
+| | AUC médiane | gain | améliorées |
+|---|---:|---:|---:|
+| champ de bord | 0,6534 | +0,0354 | 25 sur 42 |
+| **sa constante** (−13, +2) | **0,7382** | **+0,0669** | **36 sur 42** |
+
+#### 3. Et ça déplace le 0,756 de référence
+
+L'accord de la carte publiée avec les étiquettes, sur **toute** l'empreinte et non par fenêtre :
+
+| | AUC |
+|---|---:|
+| l'affine publiée | **0,7561** |
+| avec la constante des bords (−13, +2) | 0,8254 |
+| avec l'optimum des fenêtres (−24, 0) | **0,8571** |
+
+⚠⚠ **Le 0,756 qui sert de référence à tout ce lot mesurait donc aussi un défaut de recalage.**
+Translater les étiquettes de 425 µm — un demi-caractère — le porte à **0,857**.
+
+#### 4. Les deux témoins obligatoires
+
+| témoin | ce qu'il donne | ce qu'il exclut |
+|---|---|---|
+| la **carte d'encre mélangée**, même plan | plat : 0,4989 à 0,5014, étendue **0,0025** | que le relief du plan A soit celui de l'**empreinte** et non de l'encre |
+| les **positions des repères mélangées** | 42,8 au mieux de 20 tirages | que le champ des repères soit une **constante déguisée** |
+
+#### 5. Ce que les repères gagnent, et ce que les bords perdent
+
+Laisser-un-dehors à 300 cases, chacun contre **son** champ nul et **ses** positions mélangées :
+
+| | erreur médiane | champ nul | meilleur mélange | verdict |
+|---|---:|---:|---:|---|
+| **champ des repères** (55) | **31,8** | 40,2 | 42,8 | ✅ bat les deux |
+| champ de bord (34 carreaux) | 77,5 | 60,5 | 58,8 | ❌ échoue aux deux |
+
+⭐⭐ **Les repères sont bel et bien prédictifs dans l'espace, les carreaux non** — ce que
+`le_recalage_local` avait établi sur la composante normale, retrouvé ici par un autre chemin.
+
+⚠⚠ **Et pourtant c'est la constante des BORDS qui gagne sur l'encre, pas celle des repères** :
+(−13, +2) est à **11** cases de l'optimum quand (−3,2 ; +8,2) est à **22**. La raison est
+géométrique — les repères sont **groupés d'un côté**, donc leur médiane est le déplacement de
+**leur** quartier ; les 34 carreaux sont mauvais un par un mais **répartis**, donc leur médiane
+échantillonne le fragment. ⭐ **Quand ce qu'on cherche est une constante, la couverture bat la
+précision.**
+
+#### 6. Et le plan des SILHOUETTES dit pourquoi les bords ont échoué
+
+Le même plan de décalages, jugé cette fois sur le Dice du masque recalé contre le support publié :
+
+| plan | étendue | sommet |
+|---|---:|---|
+| **A**, l'**encre** (AUC) | **0,4234** | (−24, 0) |
+| **B**, les **silhouettes** (Dice) | 0,0315 | (−8, −8) |
+| **C**, le **témoin** mélangé (AUC) | 0,0025 | — |
+
+⚠⚠⚠ **Les silhouettes arbitrent — leur étendue vaut douze fois le plancher de bruit — mais
+treize fois moins fort que l'encre, et elles pointent ailleurs.** C'est l'explication de tout le
+programme des bords : un champ ajusté sur les silhouettes est ajusté sur le **moins** informatif
+des deux signaux, et **biaisé** d'une quinzaine de cases par rapport à celui qui compte.
+
+#### 7. Ce que ça change pour C1
+
+1. ⭐ **Le recalage des deux aplatissements se corrige d'abord par une TRANSLATION**, pas par un
+   champ : (−24, 0) cases, **425 µm**, et ça vaut **+0,10 d'AUC** sur toute l'empreinte. ⚠ Elle
+   est **mesurée et pas appliquée** : rien dans le dépôt ne la retranche encore, et c'est la
+   tranche suivante — `affine_par_boites` gagne un terme, ou l'appelle qui la veut la passe.
+2. **Ce qui reste après elle est une dispersion de 471 µm** — l'ordre d'une lettre — et c'est
+   *elle* qu'un champ devrait capturer. Les **55 repères** sont le seul matériau qui en prédise
+   quelque chose, mais ils ne couvrent qu'un quartier : les densifier **ailleurs** est ce qui
+   reste à faire, pas les remplacer.
+3. ⚠ **Ce que ça ne dit PAS** : d'où vient la translation. Le plan B écarte que les silhouettes
+   la voient de la même façon ; il ne dit pas si ce sont les **étiquettes** qui sont posées de
+   travers dans leur aplatissement ou la **carte publiée** dans le sien. Les deux se corrigent
+   pareil ici — pas ailleurs.
 
 ### Ce qui reste de C1, et c'est maintenant précis
 
-1. ⚠⚠⚠ **Du contenu INTÉRIEUR, et c'est mesuré deux fois** — le champ à 34 carreaux ci-dessus
-   est une **preuve de faisabilité**, pas un recalage. Un modèle lisse ajusté dessus **ne prédit
-   rien**, et l'**agrégation locale** non plus : sur la composante normale, la seule mesurée,
-   aucun rayon de 256 à 1536 ne bat le champ nul. Le problème n'est donc pas la **forme** du
-   modèle mais la **matière** qu'on lui donne — des bords, et rien à l'intérieur, dont le
-   conditionnement plafonne à 0,60 pour 1 en isotropie. ⭐ **Et le contenu intérieur existe** :
-   **348** trous dont **314** utilisables. ⚠⚠ Ce qui manque est de l'**autre côté** — le régime
-   du prix ne publie **aucun masque de surface** — mais ✅✅ **le support de la carte publiée
-   porte les trous du fragment**, donc il en est un de fait : **55** repères transportables
-   s'apparient à ses **71** trous à **40,3** cellules en médiane contre **319,6** au hasard,
-   huit fois mieux. La voie est ouverte **sans rien demander**. ⚠ Les repères sont dans l'aire
-   du fragment mais **groupés d'un côté** — 12 sur 55 dans la boîte centrale. Le résidu est **très variable** :
-   ~0,3 mm en médiane sur sa composante mesurée, mais **~2 mm là où la mesure d'encre échoue**.
-   **Tout le reste en dépend.**
+1. ✅✅ **Ce n'était pas un champ, c'était une TRANSLATION — et elle est MESURÉE.** ⚠ Mesurée,
+   pas encore **appliquée** : aucun chemin du dépôt ne la retranche aujourd'hui, et la retrancher
+   est ce qui reste à faire de plus court. Le champ à
+   34 carreaux, le modèle lisse et l'agrégation locale ont tous échoué, et la mesure sur
+   **127 fenêtres** dit pourquoi : les fenêtres s'accordent toutes sur **(−24, 0)** cases
+   (**425 µm**) à 27 cases près, quand les champs candidats déplacent de **40** et **60**. Une
+   simple constante porte l'AUC médiane de **0,755 à 0,852** en améliorant **116 fenêtres sur
+   127**, et l'accord publié sur toute l'empreinte de **0,756 à 0,857**. ⚠⚠ Le plan des
+   **silhouettes** explique l'échec des bords : il arbitre **treize fois moins fort** que celui
+   de l'encre et pointe ailleurs — un champ ajusté dessus l'est sur le mauvais signal.
+   ⭐ **Ce qui reste à faire est plus petit et mieux défini** : après la translation il subsiste
+   une dispersion de **471 µm**, l'ordre d'une lettre. Les **55 repères** sont le seul matériau
+   qui en prédise quelque chose — laisser-un-dehors **31,8** contre **40,2** au champ nul et
+   **42,8** au meilleur mélange de positions, là où les 34 carreaux échouent aux deux (77,5
+   contre 60,5 et 58,8) — mais ils sont **groupés d'un côté** (12 sur 55 dans la boîte
+   centrale). **Les densifier ailleurs, pas les remplacer.**
 2. **Une fenêtre choisie dans un repère COMMUN**, pas dans la grille de chaque régime : les deux
    campagnes ont atterri sur deux régions différentes (27,8 % et 91,1 % d'encre), donc leurs
    nombres ne se comparaient pas même sans le problème de recalage.

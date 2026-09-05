@@ -3706,7 +3706,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/55_les_murs_et_leurs_causes.md
-- **lignes** : 109
+- **lignes** : 110
 - **nature** : PROCEDE
 - **résumé** : Document **rendu** depuis `docs/registres/murs_et_causes.tsv` par `uv run python src/depot/murs_et_causes.py --rendre`, et non écrit à la main ; sa batterie vérifie que chaque ligne pointe vers un document contenant encore son ancre. Il recense **30 causes candidates sur 4 murs** : 19 éliminées, 10 confirmées, 1 bloquée, chacune avec la mesure qui l'a tranchée et le document d'origine. Sa thèse de forme est qu'un mur est un espace de causes dont on retire une entrée à la fois, et que la liste des causes éliminées — non celle des tâches — est le seul progrès mesurable. Une seule cause reste non tranchée, et elle est bloquée. (⚠ Note de lecture : l'en-tête compte 19 éliminations quand le §final écrit « les treize éliminations de ce document » ; le document ne signale pas l'écart. De même, il ne contient aucune cause ⏳ *ouverte* alors que son propre tableau de symboles définit ce statut.)
 - **conclusions extractibles** : *(les murs recensés, avec pour chacun les causes éliminées et celles qui restent ouvertes)*
@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 1752
+- **lignes** : 1886
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5579,7 +5579,36 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ L'échelle des flèches est prise au **9e décile** (91 cellules) et non au maximum : un
     appariement raté à **492** écrasait tout le reste à l'invisible. **Le maximum n'est pas le
     champ, c'est son échec.**
+  - ⭐⭐⭐ **Et le résidu n'était PAS un champ : c'est une TRANSLATION** (2026-09-05). Tout C1
+    avait été jugé sur **une** fenêtre ; refait sur **127**, chaque fenêtre demande à peu près
+    le même décalage — médiane **(−24, 0)** cases, soit **425 µm**, dispersion **471 µm** —
+    quand les deux champs candidats déplacent de **60,4** et **40,3** cases, donc **plus que le
+    désaccord qu'ils prétendent corriger**. Une simple constante porte l'AUC médiane de
+    **0,755 à 0,852** en améliorant **116 fenêtres sur 127**, et l'accord publié sur toute
+    l'empreinte de **0,756 à 0,857** : *le nombre de référence de tout le lot mesurait aussi un
+    défaut de recalage.* Le maximum est **intérieur** au balayage, contrairement au (−104, −120)
+    publié plus haut. ⚠ Elle est **mesurée et pas appliquée** : aucun chemin du dépôt ne la
+    retranche encore, et le faire est la tranche la plus courte qui reste.
+  - ⚠⚠⚠ **Le plan des SILHOUETTES explique l'échec des bords** : jugé sur le Dice, le même plan
+    de décalages s'étend sur **0,0315** quand celui de l'encre s'étend sur **0,4234** (témoin
+    mélangé : **0,0025**), et son sommet est **(−8, −8)**, pas (−24, 0). Les silhouettes
+    arbitrent — douze fois le plancher de bruit — mais **treize fois moins fort que l'encre, et
+    vers un autre point** : un champ ajusté dessus l'est sur le mauvais signal.
+  - ⭐⭐ **Les repères sont prédictifs, les carreaux non, et c'est pourtant la constante des
+    BORDS qui gagne.** Laisser-un-dehors : repères **31,8** contre 40,2 au champ nul et 42,8 au
+    meilleur de 20 mélanges de positions ; carreaux **77,5** contre 60,5 et 58,8, donc échec aux
+    deux témoins. Mais (−13, +2), la médiane des carreaux, est à **11** cases de l'optimum quand
+    celle des repères est à **22** — les repères sont **groupés d'un côté**, les carreaux sont
+    **répartis**. **Quand ce qu'on cherche est une constante, la couverture bat la précision.**
 - **rétractations / corrections internes** :
+  - ⚠⚠⚠ **« Le résidu est très variable dans l'espace » est ANNULÉ** : il reposait sur un
+    optimum à (−104, −120) qui touchait **le bord** de son balayage, donc sur une borne et non
+    sur un déplacement. Sur 127 fenêtres les optima se serrent autour de (−24, 0). Ce qui reste
+    vrai est que la fenêtre du régime du prix est **atypique**.
+  - ⚠⚠ Le recoupement du plan des silhouettes avec le `dice_apres` déjà publié a **échoué deux
+    fois pour deux raisons différentes**, et les deux fois c'était l'assertion qui avait tort :
+    l'ancien mesure sur une **réduction 1024²**, et il **réduit avant de seuiller** — seuiller
+    d'abord donne une réduction par majorité, donc un autre nombre (0,9737 contre 0,9746).
   - ⚠⚠⚠ A5 bis : « l'expérience que personne ne pouvait poser » était **faux** — elle était
     faite. Et dans la même section, « `44` mesure sur `PHerc1447` » est corrigé en
     **`PHercParis4`**, son `um_par_voxel` de 2,4 le disant.
@@ -5601,8 +5630,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 1159 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 1752 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 1289 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 1882 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
