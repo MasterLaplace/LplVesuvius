@@ -568,7 +568,30 @@ def champ_local(pas: int = 128, portee: int = 140, sous_pas: int = 10) -> dict:
                             meilleur, ou = d, (di, dj)
                 if etage == 0 and meilleur <= 0:
                     break
-            carreaux.append(dict(i=i, j=j, di=ou[0], dj=ou[1], dice=meilleur, occupation=part))
+            # ⚠⚠⚠ LA DIRECTION BIEN CONTRAINTE EST MESURÉE AVEC LE DÉCALAGE, pas déduite
+            # après coup. Le plateau des décalages à 95 % du meilleur est allongé 9 fois sur 1
+            # en médiane (mesuré) : un bord droit ne contraint que la perpendiculaire. Garder
+            # les deux composantes à poids égal, c'est traiter du bruit comme une mesure — et
+            # c'est ce qui a fait échouer le premier modèle lisse.
+            proches = []
+            for di in range(ou[0] - sous_pas, ou[0] + sous_pas + 1, 2):
+                for dj in range(ou[1] - sous_pas, ou[1] + sous_pas + 1, 2):
+                    si, sj = i + di, j + dj
+                    if si < 0 or sj < 0 or si + pas > h or sj + pas > w:
+                        continue
+                    if recouvrement(bloc, masque_recale[si:si + pas, sj:sj + pas]) >= 0.95 * meilleur:
+                        proches.append((di, dj))
+            normale, allongement = None, None
+            if len(proches) >= 5:
+                pts = np.array(proches, dtype=float)
+                cov = np.cov((pts - pts.mean(axis=0)).T)
+                vals, vecs = np.linalg.eigh(cov)
+                # ⚠ Le vecteur propre du PLUS PETIT écart est la direction où bouger dégrade
+                # tout de suite : c'est celle qui est mesurée. L'autre est la vallée.
+                normale = [float(vecs[0, 0]), float(vecs[1, 0])]
+                allongement = float(np.sqrt(max(vals) / max(1e-9, min(vals))))
+            carreaux.append(dict(i=i, j=j, di=ou[0], dj=ou[1], dice=meilleur, occupation=part,
+                                 normale=normale, allongement=allongement))
     if not carreaux:
         return {}
     normes = [float(np.hypot(c["di"], c["dj"])) for c in carreaux]
@@ -579,7 +602,195 @@ def champ_local(pas: int = 128, portee: int = 140, sous_pas: int = 10) -> dict:
                 dice_median=float(np.median([c["dice"] for c in carreaux])))
 
 
-def valider_le_champ(dossier: dict, champ: dict) -> dict:
+def anisotropie_des_carreaux(pas: int = 128, portee: int = 140, tolerance: float = 0.95,
+                             maximum: int = 40) -> dict:
+    """
+    @brief Le décalage d'un carreau est-il contraint dans LES DEUX directions ?
+
+    ⚠⚠⚠ POURQUOI CETTE MESURE EXISTE : le modèle lisse a échoué et il fallait savoir pourquoi.
+    Ajusté sur 90 carreaux, un polynôme de degré 2 prédit un carreau omis avec une erreur de
+    **66 cellules** là où prédire **zéro partout** en fait 65 — donc il ne modélise rien. Deux
+    causes possibles et incompatibles : la déformation n'est pas lisse, ou les décalages par
+    carreau sont du bruit.
+
+    ⭐⭐ LA CAUSE SE MESURE, ET C'EST LE PROBLÈME D'OUVERTURE. Un **bord droit** ne contraint que
+    la composante du décalage qui lui est **perpendiculaire** : glisser le long du bord ne change
+    rien au recouvrement. Un carreau qui ne porte qu'un morceau de contour a donc un optimum
+    étalé en une **vallée**, et la direction le long de la vallée est arbitraire.
+
+    ⚠ La mesure : pour chaque carreau, l'ensemble des décalages atteignant `tolerance` fois le
+    meilleur recouvrement. Si cet ensemble est **allongé**, l'ouverture est confirmée ; s'il est
+    compact, les décalages sont bien contraints et c'est la déformation qui n'est pas lisse.
+    Les deux réponses sont publiables et elles n'appellent pas les mêmes suites.
+    """
+    masque = _image("500P2_mask.png")
+    publiee = carte_publiee_reduite()
+    if masque is None or publiee is None:
+        raise SystemExit("masque ou carte publiée absents")
+    carte, _ = publiee
+    empreinte = (carte > 0).astype(float)
+    t = affine_par_boites(masque, empreinte)
+    masque_recale = appliquer(masque, t, empreinte.shape) > 0.5
+    cible = empreinte > 0.5
+    h, w = cible.shape
+
+    def recouvrement(a, b):
+        s_ = a.sum() + b.sum()
+        return float(2.0 * (a & b).sum() / s_) if s_ else 0.0
+
+    resultats = []
+    for i in range(0, h - pas + 1, pas):
+        for j in range(0, w - pas + 1, pas):
+            if len(resultats) >= maximum:
+                break
+            bloc = cible[i:i + pas, j:j + pas]
+            part = float(bloc.mean())
+            if not 0.15 < part < 0.85:
+                continue
+            scores = {}
+            for di in range(-portee, portee + 1, 10):
+                for dj in range(-portee, portee + 1, 10):
+                    si, sj = i + di, j + dj
+                    if si < 0 or sj < 0 or si + pas > h or sj + pas > w:
+                        continue
+                    scores[(di, dj)] = recouvrement(bloc, masque_recale[si:si + pas, sj:sj + pas])
+            if not scores:
+                continue
+            meilleur = max(scores.values())
+            proches = np.array([k for k, v in scores.items() if v >= tolerance * meilleur],
+                               dtype=float)
+            if proches.shape[0] < 5:
+                resultats.append(dict(i=i, j=j, plateau=int(proches.shape[0]),
+                                      allongement=None, degenere=True))
+                continue
+            # ⚠ L'allongement est le rapport des deux écarts-types PRINCIPAUX du plateau, pas
+            # celui de ses côtés en lignes et colonnes : une vallée en diagonale a des côtés
+            # égaux et un allongement élevé, et c'est elle qu'on cherche.
+            centre = proches.mean(axis=0)
+            cov = np.cov((proches - centre).T)
+            vals = np.linalg.eigvalsh(cov) if cov.shape == (2, 2) else np.array([0.0, 0.0])
+            grand, petit = float(max(vals)), float(max(1e-9, min(vals)))
+            resultats.append(dict(i=i, j=j, plateau=int(proches.shape[0]),
+                                  allongement=float(np.sqrt(grand / petit)), degenere=False))
+    if not resultats:
+        return {}
+    allong = [x["allongement"] for x in resultats if not x["degenere"]]
+    degeneres = sum(1 for x in resultats if x["degenere"])
+    return dict(pas=pas, tolerance=tolerance, carreaux=len(resultats),
+                # ⚠⚠ « Plateau trop petit pour avoir une forme » est un RÉSULTAT, pas un rebut :
+                # un optimum net sur trois décalages dit que le carreau est bien contraint, ce
+                # qui est l'inverse du problème d'ouverture. Compté, jamais fondu dans le reste.
+                carreaux_sans_forme=degeneres,
+                allongement_median=(float(np.median(allong)) if allong else None),
+                allongement_p90=(float(np.percentile(allong, 90)) if allong else None),
+                plateau_median=float(np.median([x["plateau"] for x in resultats])),
+                plateau_max=int(max(x["plateau"] for x in resultats)),
+                detail=resultats)
+
+
+def ajuster_un_champ_lisse(carreaux: list[dict], degre: int = 2) -> dict:
+    """
+    @brief Un modèle polynomial du champ, ajusté sur les carreaux contraints.
+
+    ⚠⚠⚠ POURQUOI UN MODÈLE ET PAS UNE INTERPOLATION. Les carreaux contraints sont sur les
+    **bords** du fragment : interpoler entre eux au plus proche voisin laisserait l'intérieur
+    à la merci du bord le plus proche, à des centaines de cellules. Un polynôme de bas degré
+    suppose au contraire que la déformation entre deux aplatissements est **lisse** — ce qui est
+    l'hypothèse naturelle, un aplatissement étant une carte continue — et il répond partout.
+
+    ⚠⚠ ET IL EST VALIDÉ PAR OMISSION, pas par son résidu d'ajustement. Un polynôme à six termes
+    ajusté sur trente-quatre points aura toujours un petit résidu ; la seule question qui compte
+    est *prédit-il un carreau qu'il n'a pas vu ?* — d'où l'erreur en laissant-un-dehors, qui est
+    ce que ce fichier rapporte.
+
+    ⚠ Degré 2 : six termes par axe. Le degré 1 ne peut pas courber, et au-delà de 2 le nombre de
+    termes approche le nombre de carreaux, donc le modèle commence à mémoriser les bords plutôt
+    qu'à décrire une déformation.
+    """
+    if len(carreaux) < 8:
+        return {}
+    i = np.array([c["i"] for c in carreaux], dtype=float)
+    j = np.array([c["j"] for c in carreaux], dtype=float)
+    # ⚠ Coordonnées centrées et réduites : sur des indices de plusieurs milliers, les puissances
+    # font exploser le conditionnement et la résolution rend du bruit.
+    mi, mj = i.mean(), j.mean()
+    ei, ej = max(1.0, i.std()), max(1.0, j.std())
+    u, w = (i - mi) / ei, (j - mj) / ej
+
+    def base(u_, w_):
+        cols = [np.ones_like(u_), u_, w_]
+        if degre >= 2:
+            cols += [u_ * u_, u_ * w_, w_ * w_]
+        return np.stack(cols, axis=1)
+
+    A = base(u, w)
+    m = A.shape[1]
+
+    def resoudre(indices):
+        """
+        @brief Les coefficients des deux axes, ajustés sur la seule composante NORMALE.
+
+        ⚠⚠⚠ UNE ÉQUATION PAR CARREAU, PAS DEUX. Un carreau qui ne porte qu'un bord droit ne
+        mesure que la composante perpendiculaire à ce bord ; l'autre est arbitraire. Écrire deux
+        équations par carreau revient à affirmer une mesure qu'on n'a pas, et c'est exactement ce
+        qui a fait qu'un polynôme ajusté sur 90 carreaux prédisait un carreau omis **aussi mal
+        que zéro**. Le système reste résoluble parce que les bords du fragment n'ont pas tous la
+        même orientation : c'est le flot normal, et c'est le remède standard de l'ouverture.
+        """
+        lignes, valeurs = [], []
+        for k in indices:
+            c = carreaux[k]
+            n = c.get("normale")
+            if n is None:
+                # ⚠ Sans direction mesurée, le carreau garde ses deux équations : son optimum
+                # était NET, donc ses deux composantes sont contraintes.
+                for axe, vecteur in (("di", (1.0, 0.0)), ("dj", (0.0, 1.0))):
+                    lignes.append(np.concatenate([vecteur[0] * A[k], vecteur[1] * A[k]]))
+                    valeurs.append(float(c[axe]))
+                continue
+            lignes.append(np.concatenate([n[0] * A[k], n[1] * A[k]]))
+            valeurs.append(n[0] * c["di"] + n[1] * c["dj"])
+        sol = np.linalg.lstsq(np.array(lignes), np.array(valeurs), rcond=None)[0]
+        return sol[:m], sol[m:]
+
+    ci_, cj_ = resoudre(list(range(len(carreaux))))
+    coefs = {"di": ci_.tolist(), "dj": cj_.tolist()}
+
+    # ⚠⚠⚠ L'ERREUR EN LAISSANT-UN-DEHORS. Écrite ici plutôt que dans un test parce que c'est la
+    # grandeur qui décide si le champ est utilisable, pas une vérification de code.
+    # ⚠⚠ L'ERREUR EST MESURÉE **LE LONG DE LA NORMALE**, parce que c'est la seule composante que
+    # le carreau omis mesure. La juger sur les deux axes comparerait la prédiction à un nombre
+    # arbitraire dans la direction de la vallée, et le verdict porterait sur du bruit.
+    erreurs, normes = [], []
+    for k in range(len(carreaux)):
+        garde = [x for x in range(len(carreaux)) if x != k]
+        ci_k, cj_k = resoudre(garde)
+        pi, pj = float(A[k] @ ci_k), float(A[k] @ cj_k)
+        c = carreaux[k]
+        n = c.get("normale") or [1.0, 0.0]
+        erreurs.append(abs(n[0] * (pi - c["di"]) + n[1] * (pj - c["dj"])))
+        normes.append(abs(n[0] * c["di"] + n[1] * c["dj"]))
+    return dict(degre=degre, coefs=coefs, centre=[mi, mj], echelle=[ei, ej],
+                erreur_omission_mediane=float(np.median(erreurs)),
+                erreur_omission_p90=float(np.percentile(erreurs, 90)),
+                # ⚠⚠ Le point de comparaison est l'erreur du champ NUL : prédire zéro partout.
+                # Un modèle qui ne fait pas mieux que ça ne modélise rien.
+                erreur_du_champ_nul=float(np.median(normes)),
+                contraintes_normales=sum(1 for c in carreaux if c.get("normale") is not None),
+                carreaux=len(carreaux))
+
+
+def evaluer_le_champ(modele: dict, i: float, j: float) -> tuple[float, float]:
+    """@brief Le décalage prédit en un point quelconque."""
+    mi, mj = modele["centre"]
+    ei, ej = modele["echelle"]
+    u, w = (i - mi) / ei, (j - mj) / ej
+    ligne = [1.0, u, w] + ([u * u, u * w, w * w] if modele["degre"] >= 2 else [])
+    return (float(sum(a * b for a, b in zip(ligne, modele["coefs"]["di"]))),
+            float(sum(a * b for a, b in zip(ligne, modele["coefs"]["dj"]))))
+
+
+def valider_le_champ(dossier: dict, champ: dict, modele: dict | None = None) -> dict:
     """
     @brief Le champ tiré des silhouettes restaure-t-il l'accord de l'ENCRE ?
 
@@ -624,11 +835,18 @@ def valider_le_champ(dossier: dict, champ: dict) -> dict:
     proche = min(champ["carreaux"],
                  key=lambda c: (c["i"] + champ["pas"] // 2 - ci) ** 2
                  + (c["j"] + champ["pas"] // 2 - cj) ** 2)
-    return dict(auc_sans_champ=auc(0, 0),
-                auc_avec_champ=auc(proche["di"], proche["dj"]),
-                carreau=proche,
-                distance_au_carreau=float(np.hypot(proche["i"] + champ["pas"] // 2 - ci,
-                                                   proche["j"] + champ["pas"] // 2 - cj)))
+    out = dict(auc_sans_champ=auc(0, 0),
+               auc_avec_champ=auc(proche["di"], proche["dj"]),
+               carreau=proche,
+               distance_au_carreau=float(np.hypot(proche["i"] + champ["pas"] // 2 - ci,
+                                                  proche["j"] + champ["pas"] // 2 - cj)))
+    if modele:
+        # ⚠⚠ LE MODÈLE RÉPOND AU CENTRE DE LA FENÊTRE, pas au carreau le plus proche : c'est
+        # toute la raison d'ajuster un champ lisse plutôt que de recopier un voisin lointain.
+        di, dj = evaluer_le_champ(modele, ci, cj)
+        out["decalage_modele"] = [round(di), round(dj)]
+        out["auc_avec_modele"] = auc(round(di), round(dj))
+    return out
 
 
 def _verifier(r: dict | None = None) -> int:
@@ -733,9 +951,33 @@ def _verifier(r: dict | None = None) -> int:
             v("... et un champ tiré des SILHOUETTES restaure l'accord de l'ENCRE",
               val["auc_avec_champ"] - val["auc_sans_champ"] > 0.10,
               f"{val['auc_sans_champ']:.3f} → {val['auc_avec_champ']:.3f}")
-            # ⚠⚠ ET IL N'ATTEINT PAS L'OPTIMUM TROUVÉ SUR L'ENCRE, ce qui est la BONNE nouvelle :
-            # un champ indépendant qui égalerait un ajustement fait sur la cible serait suspect.
-            # L'écart dit ce qu'il reste à gagner avec un champ plus dense.
+            # ⚠⚠⚠ LE MODÈLE LISSE NE PRÉDIT PAS, ET C'EST ASSERTÉ PLUTÔT QUE PASSÉ SOUS
+            # SILENCE. Ajusté par flot normal — une équation par carreau, la seule composante que
+            # ce carreau mesure — un polynôme de degré 2 prédit un carreau omis avec 21 cellules
+            # d'erreur là où prédire ZÉRO en fait 17. La déformation entre les deux aplatissements
+            # n'est donc pas une carte lisse de bas degré, et un champ dense (flot optique sur les
+            # masques, ou des repères intérieurs) est nécessaire.
+            mod = r.get("modele_lisse")
+            if mod:
+                v("⚠ le modèle lisse ne prédit PAS mieux que le champ nul",
+                  mod["erreur_omission_mediane"] >= mod["erreur_du_champ_nul"],
+                  f"{mod['erreur_omission_mediane']:.0f} contre "
+                  f"{mod['erreur_du_champ_nul']:.0f} cellules en laissant-un-dehors, sur "
+                  f"{mod['carreaux']} carreaux dont {mod['contraintes_normales']} à contrainte "
+                  "normale")
+            # ⚠⚠⚠ ET LE PROBLÈME D'OUVERTURE EST MESURÉ, pas invoqué : le plateau des décalages
+            # à 95 % du meilleur est allongé 9 fois sur 1 en médiane. Un bord droit ne contraint
+            # que sa perpendiculaire, donc une part de chaque décalage est arbitraire.
+            ouv = r.get("ouverture")
+            if ouv and ouv.get("allongement_median") is not None:
+                v("... parce que chaque carreau n'est contraint que dans UNE direction",
+                  ouv["allongement_median"] > 4.0,
+                  f"plateau allongé {ouv['allongement_median']:.1f}:1 en médiane "
+                  f"(p90 {ouv['allongement_p90']:.1f}) sur {ouv['carreaux']} carreaux, "
+                  f"{ouv['carreaux_sans_forme']} à optimum net")
+            # ⚠⚠ ET LE CHAMP N'ATTEINT PAS L'OPTIMUM TROUVÉ SUR L'ENCRE, ce qui est la BONNE
+            # nouvelle : un champ indépendant qui égalerait un ajustement fait sur la cible
+            # serait suspect. L'écart dit ce qu'il reste à gagner avec un champ plus dense.
             res = r.get("residu_local") or {}
             if res.get("auc_meilleure") is not None:
                 v("... sans atteindre l'optimum trouvé EN REGARDANT l'encre, ce qui est normal",
@@ -759,6 +1001,10 @@ def _verifier(r: dict | None = None) -> int:
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--recette", default="new_canon")
+    p.add_argument("--pas-carreau", type=int, default=128,
+                   help="côté d'un carreau du champ, en cellules réduites")
+    p.add_argument("--ouverture", action="store_true",
+                   help="mesurer si les décalages par carreau sont contraints dans les DEUX sens")
     p.add_argument("--champ", action="store_true",
                    help="estimer le champ local sur les EMPREINTES et le valider sur l'encre")
     p.add_argument("--residu", action="store_true",
@@ -775,13 +1021,35 @@ def main() -> int:
     if a.verifier and not a.json:
         cible = RACINE / "docs" / "mesures" / "le_recalage_des_etiquettes.json"
         return 1 if _verifier(json.loads(cible.read_text()) if cible.is_file() else None) else 0
+    if a.ouverture:
+        cible = a.json
+        if cible is None or not cible.is_file():
+            raise SystemExit("--ouverture demande --json <dossier existant>")
+        d = json.loads(cible.read_text())
+        o = anisotropie_des_carreaux(pas=a.pas_carreau)
+        d["ouverture"] = o
+        cible.write_text(json.dumps(d, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"{o['carreaux']} carreaux, plateau médian {o['plateau_median']:.0f} décalages "
+              f"à {100 * o['tolerance']:.0f} % du meilleur")
+        print(f"  {o['carreaux_sans_forme']} carreaux ont un plateau de moins de "
+              "cinq décalages : optimum NET, donc bien contraint")
+        if o["allongement_median"] is not None:
+            print(f"  allongement du plateau (sur les autres) : médiane "
+                  f"{o['allongement_median']:.1f}, p90 {o['allongement_p90']:.1f}")
+        print("  ⚠ un allongement élevé = le décalage n'est contraint que dans UNE direction")
+        print(f"écrit : {cible}")
+        return 0
+
     if a.champ:
         cible = a.json
         if cible is None or not cible.is_file():
             raise SystemExit("--champ demande --json <dossier du régime>")
         d = json.loads(cible.read_text())
-        c = champ_local()
-        val = valider_le_champ(d, c)
+        c = champ_local(pas=a.pas_carreau)
+        modele = ajuster_un_champ_lisse(c["carreaux"])
+        val = valider_le_champ(d, c, modele or None)
+        if modele:
+            d["modele_lisse"] = modele
         d["champ_local"] = {k: v for k, v in c.items() if k != "carreaux"}
         d["champ_local"]["carreaux"] = c["carreaux"]
         d["validation_du_champ"] = val
@@ -791,12 +1059,20 @@ def main() -> int:
         print(f"  norme du décalage : médiane {c['norme_mediane']:.0f}, "
               f"p90 {c['norme_p90']:.0f}, max {c['norme_max']:.0f} cellules "
               f"({c['norme_max'] * 17.7 / 1000:.1f} mm)")
+        if modele:
+            print(f"  modèle lisse degré {modele['degre']} sur {modele['carreaux']} carreaux : "
+                  f"erreur en laissant-un-dehors {modele['erreur_omission_mediane']:.0f} "
+                  f"(p90 {modele['erreur_omission_p90']:.0f}) contre "
+                  f"{modele['erreur_du_champ_nul']:.0f} pour le champ nul")
         if val:
             print(f"\n  validation croisée sur l'encre, fenêtre du dossier :")
             print(f"    sans le champ  {val['auc_sans_champ']:.3f}")
             print(f"    avec le champ  {val['auc_avec_champ']:.3f}   "
                   f"(carreau à {val['distance_au_carreau']:.0f} cellules, "
                   f"décalage {val['carreau']['di']}, {val['carreau']['dj']})")
+            if val.get("auc_avec_modele") is not None:
+                print(f"    avec le modèle {val['auc_avec_modele']:.3f}   "
+                      f"(décalage prédit {val['decalage_modele']})")
         print(f"écrit : {cible}")
         return 0
 

@@ -644,13 +644,49 @@ dense reste à gagner — le carreau le plus proche de la fenêtre est à **277 
 optimal est arbitraire. Seuls les carreaux à occupation intermédiaire sont retenus, et leur
 nombre est rendu — un champ estimé sur trois carreaux n'est pas un champ.
 
+### ⚠⚠⚠ Mais un champ LISSE ne se laisse pas ajuster — le problème d'ouverture, mesuré
+
+J'ai essayé de densifier le champ par un modèle polynomial, puisque les 34 carreaux sont sur les
+bords et que la fenêtre mesurée est à 277 cellules du plus proche. **Ça ne marche pas, et la
+raison est mesurée.**
+
+| | erreur en laissant-un-dehors | le champ **nul** en fait |
+|---|---:|---:|
+| polynôme degré 2, deux équations par carreau (90 carreaux, pas 64) | **66** cellules | 65 |
+| polynôme degré 2, **flot normal** (34 carreaux, pas 128) | **21** cellules | **17** |
+
+⭐⭐ **La cause est le problème d'ouverture, et il est chiffré** : le plateau des décalages
+atteignant 95 % du meilleur recouvrement est **allongé 9 fois sur 1 en médiane** (p90 **15,3**),
+sur **33 carreaux sur 34**. Un bord droit ne contraint que la composante **perpendiculaire** ;
+glisser le long du bord ne change rien au recouvrement.
+
+⚠ Passer au **flot normal** — une seule équation par carreau, celle qu'il mesure vraiment — fait
+tomber l'erreur de 66 à 21 cellules. C'est trois fois mieux, et **toujours pas mieux que zéro**.
+
+> **Donc la déformation entre les deux aplatissements n'est pas une carte lisse de bas degré.**
+> Il faut un champ **dense** — flot optique sur les masques, ou des repères intérieurs — et non
+> un modèle paramétrique.
+
+### ⚠⚠ Et ça corrige un de mes propres chiffres
+
+J'ai écrit plus haut que le résidu vaut « **1,1 mm en médiane** ». C'est la norme du décalage
+**entier** par carreau — or une bonne moitié de ce décalage est dans la direction **non
+contrainte**. La composante réellement **mesurée** vaut **17 cellules, soit ~0,3 mm** en médiane.
+
+⭐ Ce qui ne bouge pas, parce que ça vient de l'encre et non des masques : près de la fenêtre
+mesurée, le résidu **est** grand — un décalage de (−104, −120) cellules y remonte la carte
+publiée de 0,418 à **0,711**, et le carreau le plus proche du champ y prédit (−142, −30), qui
+remonte à 0,612. Le résidu est donc **très variable dans l'espace** : petit en médiane, de
+l'ordre de deux millimètres là où il compte.
+
 ### Ce qui reste de C1, et c'est maintenant précis
 
-1. ⚠⚠⚠ **Un recalage LOCAL DENSE** — le champ à 34 carreaux ci-dessus est une **preuve de
-   faisabilité**, pas un recalage : ses carreaux sont sur les bords et la fenêtre mesurée est à
-   277 cellules du plus proche. Il faut interpoler entre eux (ou densifier par des repères
-   intérieurs). Le résidu à corriger vaut **1,1 mm en médiane, 2,8 mm au pire**. **Tout le reste
-   en dépend.**
+1. ⚠⚠⚠ **Un recalage LOCAL DENSE, et pas paramétrique** — le champ à 34 carreaux ci-dessus est
+   une **preuve de faisabilité**, pas un recalage, et un modèle lisse ajusté dessus **ne prédit
+   rien** (mesuré, ci-dessus). Il faut du **flot optique dense sur les masques** ou des repères
+   **intérieurs** — les bords seuls souffrent de l'ouverture. Le résidu est **très variable** :
+   ~0,3 mm en médiane sur sa composante mesurée, mais **~2 mm là où la mesure d'encre échoue**.
+   **Tout le reste en dépend.**
 2. **Une fenêtre choisie dans un repère COMMUN**, pas dans la grille de chaque régime : les deux
    campagnes ont atterri sur deux régions différentes (27,8 % et 91,1 % d'encre), donc leurs
    nombres ne se comparaient pas même sans le problème de recalage.
