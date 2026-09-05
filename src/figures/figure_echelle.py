@@ -14,7 +14,7 @@ figure, pas sa decoration.
 
 Usage :
     uv run python src/figures/figure_echelle.py \\
-        --avant data/out/ink_PHerc1447_avant.npy --apres data/out/ink_PHerc1447_corrige.npy \\
+        --avant data/out/ink_PHerc0172_w062.npy --apres data/out/ink_PHerc0172_w062_u16.npy \\
         --sortie docs/images/60_echelle_uint8.png
 """
 

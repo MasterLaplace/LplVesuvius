@@ -167,7 +167,22 @@ d'occupation écarte peut-être une graine *risquée* ; il n'explique **pas** le
 
 ![deux traces du meme rouleau](images/25_deux_traces.png)
 
-Figure : `src/figures/figure_deux_traces.py`.
+Figure : `src/figures/figure_deux_traces.py`, depuis les deux piles rendues.
+
+```
+uv run python src/figures/figure_deux_traces.py docs/images/25_deux_traces.png \
+    --trace data/trace/PHerc0358/render_a61 \
+        "A — graine par voisinage (docs/24)" "240 auto-intersections · 8,48 cm²" 9.362 \
+    --trace data/trace/PHerc0358/essai_b/render_b61 \
+        "B — graine par planéité" "0 auto-intersection · 19,82 cm²" 9.362 \
+    --legende "PHerc0358, même volume, mêmes paramètres, même machine — seule la graine change. Échelle physique commune."
+```
+
+⚠ Vérifié le 2026-09-05 : la commande régénère l'image **octet pour octet**
+(`64e766bf227558322c0091915d0d2267`). ⚠⚠ Le `9.362` répété deux fois n'est pas un ornement :
+c'est lui qui rend l'échelle **commune**, et deux valeurs différentes feraient passer une
+surface deux fois plus grande pour une surface identique — exactement ce que cette figure
+existe pour interdire.
 
 ⚠⚠ **La figure est à échelle physique commune** — sans quoi une surface deux fois plus
 grande passerait pour identique. À gauche, les deux plaques écartelées de `24` : c'est ce
@@ -391,7 +406,26 @@ l'échelle sont ancrés sur des images, à surface physique égale :
 
 ![quatre signatures de trace](images/25_signatures.png)
 
-Figure : `src/figures/figure_signatures.py`.
+Figure : `src/figures/figure_signatures.py`, une vignette par trace.
+
+```
+uv run python src/figures/figure_signatures.py docs/images/25_signatures.png \
+    --cas data/layers/20230909121925/32.tif \
+        "Scroll 1 · 20230909121925 — AUC 0,925" "50,1 %" "fibres paralleles : la FACE d'une feuille" 7.91 \
+    --cas data/trace/PHerc1447_officiel/render_off/30.tif \
+        "PHerc1447 · trace OFFICIELLE du concours" "28,8 %" "fibres, sur une bande etroite (17 % couvert)" 8.64 \
+    --cas data/layers/scroll4_20231111135340/32.tif \
+        "Scroll 4 · l'echec connu de 12 §9" "19,3 %" "des fragments dans le VIDE" 7.91 \
+    --cas data/trace/PHerc0358/essai_b/render_b61/30.tif \
+        "PHerc0358 · notre trace B (0 auto-inters.)" "8,7 %" "stratifications : le rouleau en TRANCHE" 9.362 \
+    --legende "L'amplitude est une condition necessaire, pas un score de qualite : Scroll 4 echoue d'une troisieme facon, et son amplitude est plus haute que la notre."
+```
+
+⚠ Vérifié le 2026-09-05 : la commande régénère l'image **octet pour octet**
+(`d127f8216be82aa5d387141ecaecb7ae`), et le « 17 % couvert » de la deuxième légende est
+**imprimé par le script** (17,1 %), pas recopié à la main. ⚠ Les quatre `.tif` sont la couche
+**tracée** de chaque pile — 32 pour les deux références (`docs/mesures/amplitude_reference_1mm.json`),
+30 pour les deux piles de 61. Prendre une autre couche comparerait des profondeurs différentes.
 
 | trace | amplitude | ce que la face montre |
 |---|---:|---|

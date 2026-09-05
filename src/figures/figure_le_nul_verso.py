@@ -20,8 +20,14 @@ donc que le décalage est **mesuré** et non choisi.
 
 Usage :
     uv run python src/figures/figure_le_nul_verso.py --verifier
-    uv run python src/figures/figure_le_nul_verso.py \\
+    uv run python src/figures/figure_le_nul_verso.py --tous \\
         --sortie docs/images/75_le_nul_verso.png
+
+⚠⚠ `--tous` n'est pas une option de confort : c'est la forme **publiée**. Sans lui le module
+dessine UN segment, et `docs/75` en montre trois. Le bloc ci-dessus est lu par
+`src/depot/fraicheur_des_figures.py`, qui rejoue chaque figure pour la comparer à son image —
+une déclaration incomplète y faisait juger l'image publiée contre un dessin que personne ne
+publie, donc la déclarait périmée alors qu'elle était juste.
 """
 
 from __future__ import annotations

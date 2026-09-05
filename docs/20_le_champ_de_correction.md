@@ -68,7 +68,14 @@ fenêtres, une attribution au hasard.
 
 ![champ de correction, cas fort](images/20_champ_fort.png)
 
-Figure : `src/figures/figure_champ.py`.
+Figure : `src/figures/figure_champ.py`, depuis le volume de surface **publié** — la clé
+est celle que `docs/mesures/volumes_surface_PHercParis4.txt` recense, donc rien n'est deviné.
+
+```
+uv run python src/figures/figure_champ.py \
+    PHercParis4/segments/20260623163339-w110-112/surface-volumes/2.4um-0.22m-78keV-volume-20260411134726.zarr \
+    docs/images/20_champ_fort.png --voxel-um 2.4 --pas-um 172.8 --cote 7
+```
 
 Le premier bloc est une **plaque** rouge — la trace y est trop profonde de façon
 continue — et le quatrième une plaque bleue. À droite, la même matière est du poivre et
@@ -78,6 +85,19 @@ sel.
 corpus (**+0,325**) :
 
 ![champ de correction, cas median](images/20_champ_correction.png)
+
+```
+uv run python src/figures/figure_champ.py \
+    PHercParis4/segments/20230702185753/surface-volumes/2.4um-0.22m-78keV-volume-20260411134726.zarr \
+    docs/images/20_champ_correction.png --voxel-um 2.4 --pas-um 172.8 --cote 7
+```
+
+⚠ Vérifié le 2026-09-05 : les deux commandes régénèrent leur image **octet pour octet**
+(`c43b6dab92d1afcc8f49e6fb57944bd0` et `684c7a4c13b9a882e0e9fb189c7b3123`). ⚠⚠ Le `--pas-um`
+n'est pas un réglage d'esthétique : il **borne l'échelle de couleur**, donc « saturé » veut dire
+« une feuille d'écart ». Le changer sans le dire ferait lire deux figures comme comparables
+alors qu'elles ne le seraient plus. 172,8 µm est le pas de ce rouleau, celui que
+`docs/mesures/table_champ.json` publie.
 
 ⚠⚠ **Et c'est là qu'il faut être honnête** : sur le cas médian, la différence entre les
 deux panneaux **se voit mal**. C'est exactement ce qu'un rho de 0,31 veut dire, et

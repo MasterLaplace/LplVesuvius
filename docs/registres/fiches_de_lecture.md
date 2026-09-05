@@ -1191,7 +1191,7 @@ dernier caractère ; les nombres de lignes sont mesurés par `wc -l`.
 ---
 
 ### docs/20_le_champ_de_correction.md
-- **lignes** : 636
+- **lignes** : 656
 - **nature** : RESULTAT
   (mesure du champ d'erreur fenêtre par fenêtre sur trois rouleaux, puis application réelle
   d'une correction avec son témoin de signe opposé et son ré-aplatissement.)
@@ -1289,6 +1289,12 @@ dernier caractère ; les nombres de lignes sont mesurés par `wc -l`.
   - Règle : une fenêtre de profondeur doit rester **sous le pas inter-feuilles** ; les
     volumes publiés de Scroll 1 la respectent (109 × 2,4 = 262 µm pour un pas de 172,8, soit
     ±0,75 pas).
+  - Reproduction des deux figures : `figure_champ.py <clé du volume de surface>
+    <sortie> --voxel-um 2.4 --pas-um 172.8 --cote 7`, sur
+    `20260623163339-w110-112` et `20230702185753`. Vérifié le 2026-09-05, **octet
+    pour octet** (`c43b6dab92d1afcc8f49e6fb57944bd0`, `684c7a4c13b9a882e0e9fb189c7b3123`).
+    ⚠ `--pas-um` borne l'échelle de couleur : le changer sans le dire ferait lire deux
+    figures comme comparables alors qu'elles ne le seraient plus.
 - **rétractations / corrections internes** :
   - §4 (fin) : ⚠⚠ alerte posée puis **levée par la mesure le même jour** — le
     `rigid_share` = 0,67 sur un segment de Scroll 5 avait fait restreindre la conclusion à
@@ -1322,8 +1328,8 @@ dernier caractère ; les nombres de lignes sont mesurés par `wc -l`.
     « strictement meilleur » d'abord écrit devient **un verdict à trois faces**. Défaut
     signalé par un lecteur regardant l'image, contre tous les chiffres.
 - **preuve de lecture intégrale** :
-  - ligne 391 (après 60 % du fichier) : `feuille » — mais sur **Scroll 4 il vaut 82,8 µm, soit le double du seuil**.`
-  - ligne 636 (dans les 15 dernières lignes non vides) : `n'est pas rendu — refuser une réponse vaut mieux qu'en rendre une fausse.`
+  - ligne 411 (après 60 % du fichier) : `feuille » — mais sur **Scroll 4 il vaut 82,8 µm, soit le double du seuil**.`
+  - ligne 656 (dans les 15 dernières lignes non vides) : `n'est pas rendu — refuser une réponse vaut mieux qu'en rendre une fausse.`
 
 ---
 
@@ -1672,7 +1678,7 @@ caractère, couverture vérifiée par `wc -l` avant lecture.
 ---
 
 ### docs/25_une_graine_choisie_sur_la_planeite.md
-- **lignes** : 482
+- **lignes** : 516
 - **nature** : RESULTAT
   (mesures appariées sur treize rouleaux, campagnes, balayages de fenêtre, témoins ; les §6
   et §7 sont des annexes de reproduction et de contrôle.)
@@ -1742,6 +1748,13 @@ caractère, couverture vérifiée par `wc -l` avant lecture.
     trace est dans le vide) pour une amplitude plus haute que la nôtre.
   - Témoins : 22 contrôles hors ligne, cinq sondes qui remplacent une garde par sa version
     fautive, chacune faisant tomber 1 témoin.
+  - Reproduction des deux figures, vérifiée le 2026-09-05 **octet pour octet** :
+    `figure_deux_traces.py` sur `render_a61` et `essai_b/render_b61`
+    (`64e766bf227558322c0091915d0d2267`), `figure_signatures.py` sur les quatre couches
+    tracées — 32 pour les deux références, 30 pour les deux piles de 61 —
+    (`d127f8216be82aa5d387141ecaecb7ae`). ⚠ Le voxel passé à chaque vignette est ce qui
+    rend l'échelle commune ; deux valeurs différentes feraient passer une surface deux
+    fois plus grande pour une surface identique.
 - **rétractations / corrections internes** :
   - §4, correction du 2026-08-19 au soir : l'explication par le bloc plein (occupation
     1,000) « ne survit pas à la répétition » — `30` rejoue la graine de `24` quatorze fois
@@ -1775,8 +1788,8 @@ caractère, couverture vérifiée par `wc -l` avant lecture.
   - §7 : « Trois de ces cinq sondes passaient au vert à la première tentative : mes fixtures
     ne pouvaient pas échouer » — trois raisons données, sondes refaites.
 - **preuve de lecture intégrale** :
-  - l. 289 : « un rouleau à deux scans, il sort en erreur en nommant ce qui existe. »
-  - l. 470 : « ⚠ **Trois de ces cinq sondes passaient au vert à la première tentative** : mes fixtures ne »
+  - l. 304 : « un rouleau à deux scans, il sort en erreur en nommant ce qui existe. »
+  - l. 504 : « ⚠ **Trois de ces cinq sondes passaient au vert à la première tentative** : mes fixtures ne »
 
 ---
 
