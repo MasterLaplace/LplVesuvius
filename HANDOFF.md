@@ -2114,7 +2114,7 @@ n'est **pas lu**. C'est le jeu de données des scans à 7,91 µm et la base de [
                                         # script refuse un dossier incomplet (sonde faite)
 ./src/outils/mirror_site.sh                  # miroir + contrôle de couverture
 ./src/outils/fetch_layers.sh <url> <dest> <largeur> <de> <a>   # couches, reprenable
-./src/outils/ppm_to_tifxyz.py <in.ppm> <out.tifxyz>            # .ppm de VC -> tifxyz
+uv run python src/outils/ppm_to_tifxyz.py <in.ppm> <out.tifxyz>  # .ppm de VC -> tifxyz
 ./src/outils/survey_fusions.sh <out> <bandes> <par> <pas>      # fusions, niveau 2
 ./src/outils/bandes_niveau0.sh                                 # bandes niveau 0, hors site
 ./src/outils/fetch_traces.py <index.json> <corpus> <dest>      # traces tifxyz, SANS aws

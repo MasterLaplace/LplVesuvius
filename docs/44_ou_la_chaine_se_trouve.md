@@ -1885,7 +1885,8 @@ for k in 1 2 3 4 5 6 7 8; do uv run --project . python src/nappe/ecart_de_mailla
   | grep "écart médian"; done
 
 # La MATIÈRE : de combien chaque nappe demanderait-elle à bouger ? (aucun rendu)
-src/outils/fetch_zarr_boite.py "$PREDICTION_PS256" data/pred_ps256_niv2 --niveau 2 \
+uv run python src/outils/fetch_zarr_boite.py "$PREDICTION_PS256" \
+  data/pred_ps256_niv2 --niveau 2 \
   --boite 3308 4292 5207 6292 17572 18665
 ZARR=$PWD/data/pred_ps256_niv2 NIVEAU=2 src/outils/recalage_de_la_chaine.sh \
   data/temoin_rendu/morceaux/morceau_00 data/chaine_courte/maillon_3 \

@@ -276,7 +276,7 @@ d'usage, aucun `approval.tif` sur disque.
 
 ### ✅✅ Fait le 2026-09-05 : le masque est écrit, et `villa` l'accepte
 
-> Mesure : `src/excision/le_masque_dapprobation.py --ecrire` (12 contrôles),
+> Mesure : `uv run python src/excision/le_masque_dapprobation.py --ecrire` (12 contrôles),
 > `docs/mesures/le_masque_dapprobation_ecrit.json`.
 
 `--ecrire` porte le verdict du champ **(z, θ)** sur la grille **tifxyz** d'une trace — ce qui
@@ -1009,7 +1009,7 @@ feuille fait 8 à 10 voxels au lieu de 4 à 5, donc `d′` monterait pour les tr
 > toutes lettres : *« Cette prédiction est testable sur des données publiques (H2), et **si elle
 > est fausse**, la donnée manquante la plus précieuse du prix est une demande à l'ESRF. »*
 >
-> ⭐⭐ **Et la condition est testable aujourd'hui.** `src/volume/ou_vit_ce_rouleau.py PHerc0500P2`
+> ⭐⭐ **Et la condition est testable aujourd'hui.** `uv run python src/volume/ou_vit_ce_rouleau.py PHerc0500P2`
 > rend `scans publiés → 0.550, 2.215, 4.317, 9.362` et **`volumes reconstruits → les mêmes`** :
 > le même objet est publié et téléchargeable aux **deux** échantillonnages, et le lecteur par
 > fenêtres (`src/volume/couches_distantes.py`) l'absorbe sans rapatrier 20 To.

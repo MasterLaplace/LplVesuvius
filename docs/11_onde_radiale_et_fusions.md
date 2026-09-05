@@ -123,7 +123,7 @@ C'est exactement ce que le balayage de l'auteur devait apporter — et il a appo
 l'inverse de ce qu'on en attendait : la moyenne n'était pas le but, c'est le
 **maximum** qui informe, parce que le biais est à sens unique.
 
-⚠ **Ce que le U ne dit pas encore** : pourquoi le rayon varie si le nombre de spires ⭐ **MESURÉ depuis** → [`06`](06_mesures_a_faire.md) §2.4bis, via `src/excision/shape.py ellipticite`.
+⚠ **Ce que le U ne dit pas encore** : pourquoi le rayon varie si le nombre de spires ⭐ **MESURÉ depuis** → [`06`](06_mesures_a_faire.md) §2.4bis, via `uv run python src/excision/shape.py ellipticite`.
 est fixe. Deux lectures, non départagées ici — le rouleau est **écrasé** au milieu
 (section elliptique, donc un rayon médian sur 36 rayons lit plus petit), ou il y a
 **perte de matière** en surface au milieu. Les distinguer demande de mesurer

@@ -92,7 +92,7 @@ la réponse.~~
 > une demande à l'ESRF. »* Le courriel est donc **conditionnel**, et « aucune expérience à monter
 > avant la réponse » est faux — l'expérience est justement ce qui décide s'il faut écrire.
 >
-> ⭐ Elle est faisable : `src/volume/ou_vit_ce_rouleau.py PHerc0500P2` rend
+> ⭐ Elle est faisable : `uv run python src/volume/ou_vit_ce_rouleau.py PHerc0500P2` rend
 > `volumes reconstruits → 0.550, 2.215, 4.317, 9.362`. **Le même objet est publié et
 > téléchargeable aux deux échantillonnages**, et le lecteur par fenêtres l'absorbe sans
 > rapatrier 20 To. Détail et ordre corrigé : [`75`](75_registre_des_taches.md) §C3.

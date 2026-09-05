@@ -167,6 +167,46 @@ def scripts_du_depot(textes: dict[str, str]) -> list[str]:
                   if any(fnmatch.fnmatch(f, motif) for motif, _ in FAMILLES))
 
 
+INVOCATION_NUE = re.compile(
+    r"(?:^|`)\s*(?:[A-Z_][A-Z0-9_]*=\S+\s+)*(\./)?((?:src|tools)/[\w./-]+\.(?:sh|py))\s+\S",
+    re.M)
+r"""Une commande dont le PREMIER mot est un fichier du dépôt — donc qui dépend de son bit `x`.
+
+⚠ Les préfixes `VAR=valeur` sont sautés : `ZARR=… src/outils/x.sh …` lance bien `x.sh`.
+⚠ `\s+\S` à la fin exige un ARGUMENT, exactement comme la forme entre backticks de
+`formes_dexecution` : sans lui, toute citation `\`x.py\`` serait lue comme une commande.
+"""
+
+
+def invocations_impossibles(racine: Path = RACINE) -> list[dict]:
+    """Les commandes écrites dans l'arbre qu'un lecteur ne PEUT PAS lancer telles quelles.
+
+    ⚠⚠ POURQUOI CE CONTRÔLE EXISTE, et c'est une classe que rien ne voyait. Une commande
+    documentée sous la forme `src/volume/x.py PHerc0500P2` s'exécute par le bit `x` du
+    fichier — et sept scripts du dépôt portent un shebang **sans** ce bit. La commande rend
+    donc `Permission denied`, alors qu'elle est écrite, relue, et parfaitement plausible.
+
+      ⭐ C'est la même famille que l'orphelin, prise par l'autre bout : là un script vivant
+        passait pour mort, ici une commande morte passe pour vivante. Les deux se lisent
+        pareil dans un document.
+
+    ⚠ Le remède est d'écrire la forme canonique du dépôt (`uv run python …`), pas de poser
+    le bit `x` : deux de ces sept scripts importent numpy ou PIL, donc un lancement direct
+    démarrerait avec le python du système et échouerait à l'import — une commande qui a
+    l'air de marcher et casse plus loin est pire que celle qui refuse tout de suite.
+    """
+    out = []
+    for f, texte in sorted(index_des_lignes(racine).items()):
+        if not f.endswith(".md"):
+            continue
+        for n, ligne in enumerate(texte.splitlines(), 1):
+            for m in INVOCATION_NUE.finditer(ligne):
+                cible = racine / m.group(2)
+                if cible.is_file() and not (cible.stat().st_mode & 0o111):
+                    out.append({"commande": m.group(2), "ou": f"{f}:{n}"})
+    return out
+
+
 def orphelins(textes: dict[str, str], scripts: list[str]) -> dict:
     """Les scripts que rien n'exécute, et le compte de ce qui a été regardé."""
     sans = [s for s in scripts if not appelants(textes, s)]
@@ -306,6 +346,57 @@ def verifier() -> int:
           'P = RACINE / "src" / "excision" / "proximity.py"\nprint(P.read_text())',
           "proximity.py"))
 
+    # ⚠⚠ LA QUESTION SYMÉTRIQUE : une commande écrite pour être lancée telle quelle, sur un
+    # fichier qui n'a pas le bit `x`. Un orphelin est un script vivant qu'on croit mort ;
+    # celle-ci est une commande morte qu'on croit vivante, et les deux se lisent pareil.
+    import shutil
+    import tempfile
+    d = Path(tempfile.mkdtemp())
+    (d / "docs").mkdir()
+    (d / "src" / "outils").mkdir(parents=True)
+
+    def script(nom: str, executable: bool) -> Path:
+        f = d / "src" / "outils" / nom
+        f.write_text("#!/usr/bin/env python3\n", encoding="utf-8")
+        f.chmod(0o755 if executable else 0o644)
+        return f
+
+    script("muet.py", False)
+    script("pose.sh", True)
+    script("nu.sh", False)
+    (d / "docs" / "a.md").write_text(
+        "Mesure : `src/outils/muet.py --ecrire`.\n"
+        "Reproductible : `src/outils/pose.sh PHerc0172`.\n"
+        "Canonique : `uv run python src/outils/muet.py --ecrire`.\n"
+        "Citation : `src/outils/muet.py` sans argument.\n"
+        "ZARR=x NIVEAU=2 src/outils/nu.sh a b\n", encoding="utf-8")
+    vus = invocations_impossibles(d)
+    cmds = sorted({i["commande"] for i in vus})
+    v("une commande nue sur un fichier sans bit `x` est signalée",
+      "src/outils/muet.py" in cmds)
+    v("... et un fichier exécutable ne l'est pas", "src/outils/pose.sh" not in cmds)
+    # ⚠⚠ LE CONTRÔLE QUI EMPÊCHE LE FAUX POSITIF : `uv run python x.py` ne dépend d'aucun bit
+    # `x`, donc la forme canonique du dépôt ne doit JAMAIS ressortir. Sans lui, le remède
+    # signalerait le remède, et le contrôle deviendrait impossible à mettre au vert.
+    v("... et la forme `uv run python` n'en dépend pas, donc ne compte pas",
+      sum(1 for i in vus if i["commande"] == "src/outils/muet.py") == 1)
+    # ⚠ Une CITATION entre backticks se ferme sans argument : ce n'est pas une commande.
+    # C'est la même garde que la septième forme de `formes_dexecution`, et pour la même raison.
+    v("... et une citation sans argument non plus",
+      sum(1 for i in vus if "a.md:4" in i["ou"]) == 0)
+    # ⚠ `ZARR=… src/outils/nu.sh …` lance bien `nu.sh` : sauter les préfixes d'environnement
+    # est ce qui empêche un `Permission denied` de passer inaperçu derrière une variable.
+    v("un préfixe VAR=valeur ne cache pas la commande", "src/outils/nu.sh" in cmds)
+
+    shutil.rmtree(d, ignore_errors=True)
+
+    # --- contre le VRAI arbre ---
+    # ⚠ Le seuil est ZÉRO, pas un plafond : une commande documentée qui rend « Permission
+    # denied » n'est pas un défaut qu'on tolère, c'est une mesure que personne ne peut
+    # refaire. Mesuré le 2026-09-05 : dix sites, tous réécrits en forme canonique.
+    reelles = invocations_impossibles()
+    v(f"aucune commande documentée n'est inexécutable ({len(reelles)})", not reelles)
+
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -332,6 +423,14 @@ def main() -> int:
             print(f"      {o}")
     else:
         print("  ✅ aucun")
+    # ⚠⚠ La question SYMÉTRIQUE, et elle se lit dans le même document qu'un orphelin : une
+    # commande écrite pour être lancée telle quelle, sur un fichier qui n'a pas le bit `x`.
+    r["invocations_impossibles"] = invocations_impossibles()
+    if r["invocations_impossibles"]:
+        print(f"  ⚠ {len(r['invocations_impossibles'])} commande(s) documentée(s) que le bit "
+              "`x` manquant rend inexécutable(s) :")
+        for i in r["invocations_impossibles"]:
+            print(f"      {i['ou']:52s} {i['commande']}")
     if a.json:
         a.json.write_text(json.dumps(r, indent=1, ensure_ascii=False), encoding="utf-8")
     return 0

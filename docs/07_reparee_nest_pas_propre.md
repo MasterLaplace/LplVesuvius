@@ -1083,7 +1083,7 @@ uv run python src/excision/le_seuil_au_bon_rayon.py --verifier
 
 ## 12. ⭐⭐⭐ Le bruit RETIRÉ au lieu d'être borné — et la réponse devient nette
 
-> 2026-09-04. Mesure : `src/excision/reparation_et_proximite.py --apparie` (14 contrôles),
+> 2026-09-04. Mesure : `uv run python src/excision/reparation_et_proximite.py --apparie` (14 contrôles),
 > `docs/mesures/reparation_et_proximite_scroll1_apparie.json`. Figure :
 > `src/figures/figure_tirage_apparie.py` (9 contrôles).
 

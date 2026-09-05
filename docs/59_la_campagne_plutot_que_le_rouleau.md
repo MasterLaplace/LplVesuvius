@@ -71,7 +71,7 @@ qu'il ne compte pas, donc son `n_volumes` est un **minorant** pour eux.
 à la fois, sur demande. Un rouleau absent peut n'avoir jamais été demandé.
 
 ⭐ La bonne question s'adresse au dépôt : **publie-t-il une détection d'encre pour ce
-rouleau ?** `src/encre/campagnes_de_scan.py --sonder-encre 5` sonde cinq segments par
+rouleau ?** `uv run python src/encre/campagnes_de_scan.py --sonder-encre 5` sonde cinq segments par
 rouleau et regarde si l'un d'eux porte un dossier `ink-detection/`. Les deux critères sont
 gardés côte à côte dans le rapport et **ne sont jamais mélangés** — le champ `critere` dit
 lequel a décidé.

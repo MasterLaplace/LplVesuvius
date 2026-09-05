@@ -2,7 +2,7 @@
 
 > ⚠⚠ **Ce document est RENDU, pas écrit.** Sa source est
 > [`docs/registres/murs_et_causes.tsv`](registres/murs_et_causes.tsv) et son producteur est
-> `src/depot/murs_et_causes.py --rendre`. L'éditer à la main serait perdre la
+> `uv run python src/depot/murs_et_causes.py --rendre`. L'éditer à la main serait perdre la
 > modification au rendu suivant — et surtout perdre la garde : la batterie vérifie que
 > **chaque ligne pointe vers un document qui contient encore son ancre**.
 
