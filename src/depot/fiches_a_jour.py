@@ -46,7 +46,19 @@ REGISTRE = RACINE / "docs" / "registres" / "fiches_de_lecture.md"
 #
 # ⚠ Cette queue est de l'HISTOIRE (ce que valait le compte quand la fiche a été écrite, et ce
 # qui l'a fait bouger). `--corriger` ne réécrit que le nombre et la recopie telle quelle.
-ENTREE = re.compile(r"^### (\S+\.md)\n- \*\*lignes\*\* : (\d+)(.*)$", re.M)
+#
+# ⚠⚠⚠ ET LA LIGNE VIDE ENTRE LES DEUX EST TOLÉRÉE — mesuré le 2026-09-05 : **sept** fiches
+# (43 à 49, écrites d'un même lot) séparent leur titre de leur compte par une ligne vide, et
+# elles étaient donc **invisibles au contrôle**. Pas « en dérive » : invisibles. `48` annonçait
+# 342 lignes pour un document qui en faisait 405 et le registre disait « 0 en dérive ».
+#
+#   ⭐ Un garde-fou ne doit pas dépendre d'un blanc. Le séparateur est CAPTURÉ et recopié tel
+#     quel par `--corriger`, plutôt que normalisé : réécrire la mise en page de sept fiches
+#     pour satisfaire une regex serait faire changer les données par le contrôle.
+#
+# ⚠ Au plus UNE ligne vide : en accepter davantage laisserait un `### …md` cité au fil d'une
+# phrase s'apparier avec le compte d'une fiche située plus bas.
+ENTREE = re.compile(r"^### (\S+\.md)\n(\n?)- \*\*lignes\*\* : (\d+)(.*)$", re.M)
 
 
 def lignes_reelles(chemin: Path) -> int | None:
@@ -70,9 +82,9 @@ def auditer(texte: str, racine: Path) -> list[dict]:
     déjà payé cette confusion (une panne totale qui ressemble à une population vide).
     """
     out = []
-    for chemin, note, queue in ENTREE.findall(texte):
+    for chemin, blanc, note, queue in ENTREE.findall(texte):
         reel = lignes_reelles(racine / chemin)
-        out.append(dict(chemin=chemin, note=int(note), reel=reel, queue=queue,
+        out.append(dict(chemin=chemin, note=int(note), reel=reel, queue=queue, blanc=blanc,
                         ecart=None if reel is None else reel - int(note)))
     return out
 
@@ -110,8 +122,9 @@ def corriger(texte: str, audit: list[dict]) -> tuple[str, int]:
     for e in audit:
         if e["reel"] is None or e["ecart"] == 0:
             continue
-        avant = f"### {e['chemin']}\n- **lignes** : {e['note']}{e['queue']}"
-        apres = f"### {e['chemin']}\n- **lignes** : {e['reel']}{e['queue']}"
+        blanc = e.get("blanc", "")
+        avant = f"### {e['chemin']}\n{blanc}- **lignes** : {e['note']}{e['queue']}"
+        apres = f"### {e['chemin']}\n{blanc}- **lignes** : {e['reel']}{e['queue']}"
         if avant in texte:
             texte = texte.replace(avant, apres, 1)
             corrigees += 1
@@ -162,6 +175,30 @@ def _verifier() -> int:
         v("... et une mention en prose ne compte pas comme une fiche",
           "docs/jamais_lu.md" in sans_fiche(registre + "voir ### docs/jamais_lu.md ici\n", d))
         (d / "docs" / "jamais_lu.md").unlink()
+
+        # ⚠⚠⚠ LA FICHE À LIGNE VIDE, et c'est le point aveugle qui valait sept fiches. Le
+        # registre sépare parfois le titre de son compte par une ligne vide (43 à 49, écrites
+        # d'un même lot) : la version précédente exigeait l'enchaînement immédiat, donc ces
+        # sept-là n'étaient pas « en dérive », elles étaient INVISIBLES — et trois d'entre
+        # elles dérivaient réellement, dont `48` de soixante-trois lignes.
+        aere = ("### docs/a.md\n\n- **lignes** : 3\n- **nature** : X\n\n"
+                "### docs/b.md\n\n- **lignes** : 9\n")
+        audit_aere = auditer(aere, d)
+        v("une fiche dont le compte est séparé par une LIGNE VIDE est vue",
+          len(audit_aere) == 2, str(len(audit_aere)))
+        v("... et sa dérive est mesurée comme les autres",
+          [e for e in audit_aere if e["chemin"] == "docs/b.md"][0]["ecart"] == -8)
+        # ⚠ Le séparateur est RECOPIÉ : sans ça l'ancrage écrit n'existerait pas dans le texte
+        # et `--corriger` ne corrigerait rien, en silence.
+        recolle_aere, n_aere = corriger(aere, audit_aere)
+        v("... et --corriger la répare en gardant sa ligne vide",
+          n_aere == 1 and "### docs/b.md\n\n- **lignes** : 1\n" in recolle_aere,
+          repr(recolle_aere[-40:]))
+        # ⚠⚠ Au plus UNE ligne vide : au-delà, un `### …md` cité en prose pourrait s'apparier
+        # avec le compte d'une fiche située plus bas, et le contrôle attribuerait une dérive
+        # au mauvais document.
+        v("... mais DEUX lignes vides ne s'apparient pas",
+          auditer("### docs/a.md\n\n\n- **lignes** : 3\n", d) == [])
 
         neuf, n = corriger(registre, audit)
         v("--corriger ne touche que les comptes qui ont dérivé", n == 1, str(n))

@@ -125,6 +125,61 @@ couches, donc une seule fenêtre ne rendrait pas un verdict mais un nombre.
 > fenêtre ([`49`](49_alpha_ne_separe_pas_deux_pannes.md)), mais la cause est en amont : il n'y
 > avait rien à profiler. ⭐ Reste vrai pour `ps256` : sa trace ne se pose pas sur une feuille.
 
+### ⭐⭐⭐ Et si la graine choisie était la MOINS bien soutenue ? — huit candidats, zéro convergence
+
+> Mesure : `src/nappe/la_graine_mieux_etayee.py` (13 contrôles, 2 sondes qui mordent), depuis
+> la campagne `src/outils/tracer_tous_candidats.sh` qui avait tourné sans que son résultat soit
+> publié.
+
+`trouver_graine` classe sur la **planarité seule**. Sur ce rouleau ce classement met devant un
+point à planarité **1,0000 sur neuf voisins**, là où les suivants ont **vingt-sept** voisins —
+un bloc 3×3×3 plein — pour des planarités de 0,987 à 0,997.
+
+⭐⭐ **Une planarité de 1,0000 sur neuf voisins n'est pas MEILLEURE que 0,987 sur vingt-sept :
+elle est moins ÉTAYÉE.** Trois dix-millièmes séparent les planarités là où l'occupation varie
+d'un **facteur vingt**. Le classement a donc désigné, à chaque fois, le point le moins soutenu —
+et c'est cette graine-là que toutes les traces ci-dessus ont utilisée.
+
+⚠ La campagne ne **corrige pas** le classement : inventer un score composite serait choisir la
+réponse. Elle trace **tous** les candidats et laisse la mesure dire ce qui prédit la convergence.
+
+| candidat | planarité | occupation | voisins | verdict | écart 41 | écart 161 | = bord ? |
+|---|---:|---:|---:|---|---:|---:|:---:|
+| `m7_c0` | 1,0000 | 0,7500 | 9 | indécidable | 48,0 | 192,0 | **oui** |
+| `m7_c1` | 1,0000 | 0,5000 | 9 | indécidable | 48,0 | 192,0 | **oui** |
+| `m7_c2` | 0,9891 | 0,5020 | **27** | indécidable | 48,0 | 192,0 | **oui** |
+| `m7_c3` | 0,9873 | 0,4492 | **27** | indécidable | 48,0 | 192,0 | **oui** |
+| `m7_c4` | 0,9870 | 0,4141 | **27** | indécidable | 48,0 | 192,0 | **oui** |
+| `ps256_c0` | 0,9977 | 0,0215 | 15 | suit la fenêtre | 48,0 | 192,0 | **oui** |
+| `ps256_c1` | 0,9974 | 0,3555 | 18 | suit la fenêtre | 36,0 | 177,6 | non |
+| `ps256_c2` | 0,9938 | 0,4648 | 25 | suit la fenêtre | 48,0 | 192,0 | **oui** |
+
+**Zéro convergence sur huit.** L'étai va de **9 à 27 voisins** et l'occupation de **0,0215 à
+0,75** — donc on n'a pas essayé que des graines mal soutenues, on a couvert la plage, et les
+trois candidats à bloc plein échouent **exactement comme** les deux moins soutenus.
+
+⭐⭐⭐ **Et l'échec a une signature plus dure que « α ≈ 1 » : pour sept candidats sur huit,
+l'écart rapporté vaut EXACTEMENT la demi-fenêtre**, au voxel près — 48,0 µm à 41 couches
+(20 × 2,4) et 192,0 µm à 161 (80 × 2,4). Un écart qui vaut le bord dans **les deux** fenêtres
+n'est pas une distance à une feuille : c'est l'**absence de tout pic**, la panne que
+[`49`](49_alpha_ne_separe_pas_deux_pannes.md) §2 nomme. La série d'écarts est alors le rapport
+des fenêtres, et α vaut 1 **par identité**, quoi qu'il y ait dans le volume.
+
+```
+GENERATIONS=60 FENETRES="41 161" bash src/outils/tracer_tous_candidats.sh
+uv run python src/nappe/la_graine_mieux_etayee.py \
+    --json docs/mesures/la_graine_mieux_etayee.json
+```
+
+⚠ La jointure verdict ↔ candidat se fait **par indice**, et elle **refuse** un verdict sans
+candidat : un décalage attribuerait les propriétés du mauvais point, et chaque ligne resterait
+plausible. C'est ce que la seconde sonde vérifie.
+
+⚠⚠ **Ce que ça n'établit pas** : que l'étai soit sans effet en général. Sur ce rouleau, rien ne
+converge — donc aucune propriété de graine ne peut prédire une convergence qu'aucune graine
+n'obtient. La conclusion est **négative et bornée** : le classement de `trouver_graine` n'est
+pas ce qui fait échouer les traces de ce document.
+
 ### ⚠⚠ Et relever le plafond bute sur le coût du rendu, mesuré
 
 À 200 générations la trace passe de 0,317 à **3,655542 cm²** — onze fois plus, donc la

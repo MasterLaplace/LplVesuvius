@@ -2829,7 +2829,7 @@ dernier caractère. Lignes mesurées par `wc -l`.
 
 ### docs/44_ou_la_chaine_se_trouve.md
 
-- **lignes** : 1978 ⚠ (1968 quand la fiche a été écrite ; `etendre_nappe.sh` a reçu sa commande de lancement le 2026-09-04 — elle n'était écrite nulle part, donc l'outil passait pour exécuté par personne)
+- **lignes** : 1979 ⚠ (1968 quand la fiche a été écrite ; `etendre_nappe.sh` a reçu sa commande de lancement le 2026-09-04 — elle n'était écrite nulle part, donc l'outil passait pour exécuté par personne)
 - **nature** : MIXTE
 - **résumé** : Le document mesure d'abord *où* la chaîne radiale de `43` se trouve dans le
   rouleau, et établit que la tâche « recoller les spires » était mal posée : une chaîne radiale
@@ -3147,7 +3147,7 @@ dernier caractère. Lignes mesurées par `wc -l`.
 
 ### docs/46_le_temoin_negatif.md
 
-- **lignes** : 406
+- **lignes** : 418
 - **nature** : RESULTAT
 - **résumé** : Le document construit le contrôle négatif au sens fort qui manque au papier
   fondateur d'EduceLab : une surface dont `38` prouve **géométriquement** (α = +1,01) qu'aucune
@@ -3313,7 +3313,7 @@ dernier caractère. Lignes mesurées par `wc -l`.
 
 ### docs/48_ou_monter_lexperience.md
 
-- **lignes** : 342
+- **lignes** : 405
 - **nature** : MIXTE
 - **résumé** : Le document ne répond pas à la question centrale du dépôt (« réparer une trace
   sert-il à quelque chose ? ») : il mesure **pourquoi elle n'est pas montable sur ce qui est en
@@ -3375,6 +3375,19 @@ dernier caractère. Lignes mesurées par `wc -l`.
   - Reproduction : `GENERATIONS=60 FENETRES="41 161" bash src/outils/tracer_prediction_paris4.sh`
     → `docs/mesures/prediction_paris4_<cas>.json`. ⚠ Les deux fenêtres FONT le test : α se lit
     sur leur rapport, donc une seule rendrait un nombre et non un verdict.
+  - ⭐⭐⭐ **Une graine mieux ÉTAYÉE ne trace pas mieux** (2026-09-05, campagne
+    `tracer_tous_candidats.sh` qui avait tourné sans être publiée) : **zéro convergence sur
+    huit** candidats, étai de **9 à 27 voisins** et occupation de **0,0215 à 0,75** — donc la
+    plage est couverte, et les trois candidats à bloc 3×3×3 plein échouent exactement comme
+    les deux moins soutenus. `trouver_graine` classe sur la planarité seule et met devant un
+    point à 1,0000 sur NEUF voisins là où les suivants ont vingt-sept : trois dix-millièmes
+    de planarité contre un facteur vingt d'occupation.
+  - ⭐⭐ Signature plus dure que « α ≈ 1 » : pour **7 candidats sur 8** l'écart rapporté vaut
+    **exactement la demi-fenêtre** (48,0 = 20 × 2,4 à 41 couches, 192,0 = 80 × 2,4 à 161).
+    Un écart égal au bord dans les DEUX fenêtres n'est pas une distance à une feuille, c'est
+    l'absence de tout pic — la panne de `49` §2 — et α vaut 1 par identité.
+    ⚠ Conclusion **négative et bornée** : rien ne convergeant, aucune propriété de graine ne
+    peut prédire une convergence qu'aucune graine n'obtient.
 - **rétractations / corrections internes** :
   - §1 : ⚠⚠⚠ **RENVERSÉ LE 2026-08-28.** Le passage écrit depuis la mesure du 2026-08-22 (avec
     la constante corrigée par `60`) est **barré** : « le détecteur rend la même carte
@@ -3412,8 +3425,8 @@ dernier caractère. Lignes mesurées par `wc -l`.
   - §4 : « je n'ai **pas** inventé un score composite pour reclasser : choisir la pondération,
     c'est choisir la réponse avant de l'avoir mesurée » — les huit candidats ont été tracés.
 - **preuve de lecture intégrale** :
-  - ligne 275 (78 % du fichier) : `> ⭐⭐ **Zéro convergence sur huit.** L'α le plus bas obtenu est **+1,01**, pour un seuil de`
-  - ligne 348 (3ᵉ ligne non vide avant la fin) : `python3 src/graine/eligibilite_aval.py --verifier`
+  - ligne 330 (78 % du fichier) : `> ⭐⭐ **Zéro convergence sur huit.** L'α le plus bas obtenu est **+1,01**, pour un seuil de`
+  - ligne 403 (3ᵉ ligne non vide avant la fin) : `python3 src/graine/eligibilite_aval.py --verifier`
 
 ---
 
@@ -3680,7 +3693,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/55_les_murs_et_leurs_causes.md
-- **lignes** : 104
+- **lignes** : 105
 - **nature** : PROCEDE
 - **résumé** : Document **rendu** depuis `docs/registres/murs_et_causes.tsv` par `uv run python src/depot/murs_et_causes.py --rendre`, et non écrit à la main ; sa batterie vérifie que chaque ligne pointe vers un document contenant encore son ancre. Il recense **30 causes candidates sur 4 murs** : 19 éliminées, 10 confirmées, 1 bloquée, chacune avec la mesure qui l'a tranchée et le document d'origine. Sa thèse de forme est qu'un mur est un espace de causes dont on retire une entrée à la fois, et que la liste des causes éliminées — non celle des tâches — est le seul progrès mesurable. Une seule cause reste non tranchée, et elle est bloquée. (⚠ Note de lecture : l'en-tête compte 19 éliminations quand le §final écrit « les treize éliminations de ce document » ; le document ne signale pas l'écart. De même, il ne contient aucune cause ⏳ *ouverte* alors que son propre tableau de symboles définit ce statut.)
 - **conclusions extractibles** : *(les murs recensés, avec pour chacun les causes éliminées et celles qui restent ouvertes)*
