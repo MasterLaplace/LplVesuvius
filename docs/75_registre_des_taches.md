@@ -1561,6 +1561,48 @@ argument et rendait les **311** segments des quarante-cinq objets du catalogue, 
 « 272 segments à l'index seulement ». Un inventaire qui crie faux est un inventaire qu'on cesse
 d'écouter. Le filtre par objet est désormais **asserté dans les deux sens**.
 
+#### ⛔ Et les treize spires ne sont PAS la région de C1 : elles en sont une seconde
+
+> Mesure : `src/nappe/lemprise_des_spires.py` (15 contrôles) →
+> `docs/mesures/lemprise_des_spires.json`. Figure :
+> `src/figures/figure_lemprise_des_spires.py` (9 contrôles), le 2026-09-05.
+>
+> ```
+> uv run python src/nappe/lemprise_des_spires.py --json docs/mesures/lemprise_des_spires.json
+> uv run python src/figures/figure_lemprise_des_spires.py --sortie docs/images/75_lemprise_des_spires.png
+> ```
+
+![où le segment de C1 tombe parmi les treize spires](images/75_lemprise_des_spires.png)
+
+⚠⚠ **Deux seuils, et aucun n'est choisi.** Le seuil de coïncidence vaut **67,75 µm**, la moitié
+de l'écart mesuré entre spires consécutives : sous une demi-épaisseur, deux surfaces sont la
+**même** feuille. Et la barre du verdict est le **plafond entre spires distinctes** — la part
+maximale d'une spire couverte par une **autre** spire, **56,74 %**, mesurée sur les 156 paires.
+Franchir ce que deux feuilles différentes atteignent au mieux, c'est être la même feuille.
+
+| | valeur |
+|---|---:|
+| part du segment à moins du seuil d'**une** spire | **0,0 %** sur les treize |
+| … de leur **union** | **0,0 %** |
+| barre mesurée (plafond entre spires distinctes) | 56,74 % |
+| **distance minimale** segment → union | **2 134 µm** |
+| … soit, en épaisseurs de feuille | **15,7** |
+| distance médiane | 8 458 µm |
+
+⛔ **Le segment `500P2_front`, sur lequel toute la colonne C est bâtie, est AILLEURS** : il ne
+colle pas mieux aux spires que deux spires distinctes ne collent entre elles, et sa surface la
+plus proche est à **seize épaisseurs**. Les treize spires ne donnent donc **aucun voisinage** à
+C1 — elles sont une **seconde région** du fragment.
+
+⭐⭐ **Ce qui reste, et c'est un gain net** : le corpus double. Treize surfaces de plus, avec une
+géométrie exacte **sur les trois volumes**, là où `500P2_front` n'en couvrait qu'une région — et
+elles portent chacune leur carte d'encre pleine résolution.
+
+⚠ Une nuance que la calibration a rendue visible : **les spires publiées ne sont pas disjointes**.
+La meilleure paire se recouvre à **56,7 %** sous une demi-épaisseur, donc « treize tours
+consécutifs » ne veut pas dire treize feuilles séparées — certaines partagent largement une même
+feuille. Le compte de tours et le compte de feuilles ne sont pas le même nombre.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est

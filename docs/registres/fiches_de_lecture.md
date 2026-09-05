@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 2199
+- **lignes** : 2241
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5675,6 +5675,20 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     que sur **S3** ; `paths/` (les étiquettes et le masque), `cases/` et `multispectral/` que sur
     **`dl.ash2txt.org`**. Les étiquettes venaient de l'un, les segments de l'autre, et personne
     n'avait croisé les deux listages.
+  - ⛔ **Et les treize spires ne sont PAS la région de C1 : elles en sont une SECONDE** (2026-09-05).
+    Deux seuils, aucun choisi : la coïncidence à **67,75 µm** (la moitié de l'écart mesuré entre
+    spires) et la barre du verdict à **56,74 %** (le plafond qu'une spire atteint sur une AUTRE
+    spire, mesuré sur 156 paires). Le segment `500P2_front` couvre **0,0 %** des treize et de leur
+    union, et sa surface la plus proche est à **2 134 µm**, soit **15,7 épaisseurs de feuille**.
+    ⭐⭐ Le corpus **double** — treize surfaces de plus, géométrie exacte sur les trois volumes,
+    chacune avec sa carte d'encre pleine résolution — mais C1 n'y gagne **aucun voisinage**.
+  - ⚠ Nuance rendue visible par la calibration : **les spires publiées ne sont pas disjointes**,
+    la meilleure paire se recouvrant à **56,7 %** sous une demi-épaisseur. « Treize tours
+    consécutifs » ne veut donc pas dire treize feuilles séparées.
+  - ⚠⚠ Deux défauts de méthode de cette tranche, tous deux miens : un `str.replace` **sans
+    assertion** est un no-op silencieux — la calibration annoncée n'avait jamais été appliquée et
+    le verdict tournait encore sur des seuils choisis (0,8 / 0,2) ; et une **part de recouvrement
+    nulle sans son échelle n'est pas une mesure**, le même 0 % valant pour 70 µm et pour 7 mm.
   - ⚠ Le **refus** fait partie de l'outil : un listage vide est une coupure, pas un verdict, et le
     comparer à un index plein dirait « l'index a tout inventé ».
   - ⚠⚠ Défaut de mon propre outil attrapé avant publication : `index_local` ignorait son argument
@@ -5710,8 +5724,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 1606 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 2199 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 1648 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 2241 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
