@@ -92,8 +92,32 @@ tautologie, mesurée (×29 de ralentissement, trajectoire identique au centième
 d'enroulement bâti dessus hériterait donc de la prédiction, pas d'une information neuve.
 
 Ce qui reste ouvert, et c'est A2 bis : **un nombre d'enroulement construit sur l'axe publié et
-l'orientation des fibres** (`representations/predictions/fibers/`, publié pour `PHerc0139` en
-`nx`/`ny`/`nz` OME-Zarr), qui répondrait partout et pas seulement dans la bande.
+l'orientation des fibres** (`representations/predictions/fibers/`), qui répondrait partout et pas
+seulement dans la bande.
+
+> ⚠⚠⚠ **CORRIGÉ le 2026-09-05 — la phrase ci-dessus annonçait `nx`/`ny`/`nz`, et il n'y a PAS de
+> `nz`.** Vérifié à la source (`src/nappe/le_champ_de_fibres.py`, 13 contrôles,
+> `docs/mesures/le_champ_de_fibres.json`) : le préfixe publie **trois** canaux — `nx`, `ny`,
+> `presence` — et le manifeste `.lasagna.json` n'en déclare pas d'autre, alors que
+> `inference.json` annonce `artifact_kind: fiber3d-prediction` et
+> `output_schema.output_channels = 7`. Le modèle prédit en 3D, le corpus publie deux composantes.
+>
+> ⭐⭐ **Mais ce n'est pas le champ 2D que `26` §7 met en garde**, et c'est mesuré plutôt que
+> supposé : sur **trois** fenêtres portant de la matière, $n_x^2 + n_y^2$ vaut **0,797 / 0,806 /
+> 0,309** en médiane — jamais collé à un. Ces deux canaux sont donc la **projection d'un vecteur
+> à trois composantes**, et la troisième se récupère **en module** :
+> $|n_z| = \sqrt{1 - n_x^2 - n_y^2}$, soit **0,451 / 0,441 / 0,831**. ⚠ Le **signe**, lui, est
+> définitivement perdu.
+>
+> ⚠ Et l'encodage n'est pas deviné : la somme des carrés plafonne à **1,013–1,014** sur les trois,
+> ce qui est exactement l'arrondi d'une quantification sur huit bits. Un facteur d'échelle faux
+> l'aurait fait plafonner à 2, à 4 ou à 0,25 — et « le champ n'est pas unitaire » aurait alors été
+> une affirmation sur notre lecture, pas sur le champ.
+>
+> ⚠⚠ **Ce qui borne réellement `A2 bis` n'est pas le `nz` manquant, c'est la RÉSOLUTION** : le
+> niveau 0 n'est **pas publié**. Les seuls niveaux présents sont **3 et 4**, soit **19,2 et
+> 38,4 µm** par cellule — donc un écart inter-feuilles (~150 µm) tient en **7,8 cellules** au plus
+> fin. Assez pour voir une feuille, pas pour en séparer deux qui se touchent.
 
 ---
 

@@ -1,0 +1,157 @@
+{
+  "prefixe": "PHerc0139/representations/predictions/fibers/20260102150214-fibers-20260801084232-L1",
+  "canaux_publies": [
+    "nx",
+    "ny",
+    "presence"
+  ],
+  "canal_nz_publie": false,
+  "groupes_du_manifeste": [
+    "nx",
+    "ny",
+    "presence"
+  ],
+  "niveaux_publies": [
+    3,
+    4
+  ],
+  "niveau": 3,
+  "resolution_um": 19.192,
+  "cellules_par_pas": 7.815756565235515,
+  "lots": [
+    {
+      "fenetre": {
+        "cz": 71,
+        "cy": 36,
+        "cx": 14,
+        "part_presence": 0.6022796630859375,
+        "presence_max": 243,
+        "chunks_lus": 11,
+        "essais": 40,
+        "graine": 42,
+        "grille": [
+          151,
+          52,
+          52
+        ],
+        "forme": [
+          9620,
+          3314,
+          3314
+        ]
+      },
+      "norme": {
+        "cellules": 157884,
+        "cellules_du_bloc": 262144,
+        "part_pleine": 0.6022796630859375,
+        "somme_mediane": 0.7968935370445251,
+        "somme_p10": 0.1813763976097107,
+        "somme_p90": 0.9954637289047241,
+        "somme_p99": 1.0076435804367065,
+        "somme_max": 1.0136719942092896,
+        "part_au_dessus_de_un": 0.0565161764333308,
+        "nz_median": 0.45067334395931924
+      }
+    },
+    {
+      "fenetre": {
+        "cz": 74,
+        "cy": 39,
+        "cx": 28,
+        "part_presence": 0.572357177734375,
+        "presence_max": 241,
+        "chunks_lus": 11,
+        "essais": 40,
+        "graine": 142,
+        "grille": [
+          151,
+          52,
+          52
+        ],
+        "forme": [
+          9620,
+          3314,
+          3314
+        ]
+      },
+      "norme": {
+        "cellules": 150040,
+        "cellules_du_bloc": 262144,
+        "part_pleine": 0.572357177734375,
+        "somme_mediane": 0.8055057525634766,
+        "somme_p10": 0.4063977003097534,
+        "somme_p90": 0.9735639691352844,
+        "somme_p99": 1.0029683113098145,
+        "somme_max": 1.0136719942092896,
+        "part_au_dessus_de_un": 0.015475873100506531,
+        "nz_median": 0.4410150195135348
+      }
+    },
+    {
+      "fenetre": {
+        "cz": 35,
+        "cy": 24,
+        "cx": 35,
+        "part_presence": 0.5040702819824219,
+        "presence_max": 248,
+        "chunks_lus": 11,
+        "essais": 40,
+        "graine": 242,
+        "grille": [
+          151,
+          52,
+          52
+        ],
+        "forme": [
+          9620,
+          3314,
+          3314
+        ]
+      },
+      "norme": {
+        "cellules": 132139,
+        "cellules_du_bloc": 262144,
+        "part_pleine": 0.5040702819824219,
+        "somme_mediane": 0.3089580833911896,
+        "somme_p10": 0.0184851735830307,
+        "somme_p90": 0.9921414852142334,
+        "somme_p99": 1.0044444799423218,
+        "somme_max": 1.0128108263015747,
+        "part_au_dessus_de_un": 0.0461029673298572,
+        "nz_median": 0.8312893098126611
+      }
+    }
+  ],
+  "fenetre": {
+    "cz": 71,
+    "cy": 36,
+    "cx": 14,
+    "part_presence": 0.6022796630859375,
+    "presence_max": 243,
+    "chunks_lus": 11,
+    "essais": 40,
+    "graine": 42,
+    "grille": [
+      151,
+      52,
+      52
+    ],
+    "forme": [
+      9620,
+      3314,
+      3314
+    ]
+  },
+  "norme": {
+    "cellules": 157884,
+    "cellules_du_bloc": 262144,
+    "part_pleine": 0.6022796630859375,
+    "somme_mediane": 0.7968935370445251,
+    "somme_p10": 0.1813763976097107,
+    "somme_p90": 0.9954637289047241,
+    "somme_p99": 1.0076435804367065,
+    "somme_max": 1.0136719942092896,
+    "part_au_dessus_de_un": 0.0565161764333308,
+    "nz_median": 0.45067334395931924
+  }
+}

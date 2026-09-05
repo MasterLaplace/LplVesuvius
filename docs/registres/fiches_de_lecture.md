@@ -4823,10 +4823,11 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 100 (dernière ligne non vide) : `papier reproche à la littérature.`
 
 ### docs/78_lombilic_publie.md
-- **lignes** : 153
+- **lignes** : 177
 - **nature** : RESULTAT
 - **résumé** : Écrit en cherchant de quoi construire `A2 bis`, ce document corrige d'abord une affirmation du dépôt — « Scroll 1 est le seul rouleau qui publie un ombilic » — en montrant que **cinq** en publient un sur le bucket ouvert, et que l'erreur est le même angle mort que `59`, commis pour la troisième fois. Il se sert ensuite de l'axe publié de `PHerc0139` (391 points annotés à la main) comme référence **indépendante** pour tester la robustesse de `76` et `77` : le biais de l'axe ajusté est grand, et la mesure appariée n'en bouge pas. Il finit sur un résultat **négatif** qui fixe le cahier des charges d'`A2 bis` : l'axe seul ne débloque rien.
 - **conclusions extractibles** :
+  - §2, **corrigé le 2026-09-05** : le renvoi vers `representations/predictions/fibers/` annonçait `nx`/`ny`/**`nz`** — **il n'y a pas de `nz`**. Trois canaux publiés (`nx`, `ny`, `presence`), manifeste `.lasagna.json` sans autre groupe, alors qu'`inference.json` déclare `fiber3d-prediction` et `output_channels = 7`. ⭐⭐ Ce n'est pourtant **pas** le champ 2D de `26` §7 : mesuré sur trois fenêtres, $n_x^2+n_y^2$ vaut **0,797 / 0,806 / 0,309** en médiane (max 1,013–1,014, soit l'arrondi sur huit bits, donc l'encodage est confirmé), donc $\lvert n_z\rvert$ est récupérable — **0,451 / 0,441 / 0,831** — et seul le **signe** est perdu. ⚠⚠ Ce qui borne `A2 bis` est la **résolution** : le niveau 0 n'est pas publié, les seuls présents sont 3 et 4 (**19,2** et 38,4 µm/cellule), donc un pas de feuille tient en **7,8** cellules au plus fin — assez pour voir une feuille, pas pour en séparer deux.
   - **Cinq** rouleaux publient un ombilic sous `<rouleau>/representations/umbilicus/` — `PHerc0125` (83 points, 9,362 µm), **`PHerc0139` (391 points, 2,399 µm, David Josey)**, `PHerc0211` (87), `PHerc0332` (169, 2,399 µm, David Josey), `PHerc0826` (49). Balayage sur les **46 préfixes de premier niveau**, pas sur une liste écrite à la main.
   - Le biais de l'axe ajusté par cercles sur arcs partiels est **réel et grand** : médiane **3,01 mm**, jusqu'à **27 écarts inter-feuilles**. Les deux axes ont même forme et même sens mais ne se superposent pas.
   - **Et la mesure appariée n'en bouge pas** : vers l'extérieur **94,8 %** des deux côtés, écart inter-feuilles **155,8 µm** (axe ajusté) contre **156,8** (axe publié). Un axe faux de 4 mm déplace le verdict de zéro point et l'écart d'un micromètre.
@@ -4839,8 +4840,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - §3 : le document n'établit **pas** que l'axe publié soit juste et l'ajusté faux — seulement qu'ils diffèrent et que la conclusion n'en dépend pas ; **pas** que les cinq axes soient de même qualité (49 à 391 points, deux annotateurs nommés) ; **pas** que la conversion de repère soit exacte (facteur d'échelle lu dans le champ `volume` et validé contre les résolutions publiées — mélanger 2,399 et 9,362 µm sans conversion donnerait un axe faux d'un facteur 3,9).
   - §4 : les **44,5 feuilles** sont prises autour de l'axe **publié** ; autour du centre **ajusté par tranche** la dispersion vaut ~17 feuilles. Ce n'est pas une contradiction — l'ajustement minimise cette dispersion par construction.
 - **preuve de lecture intégrale** :
-  - ligne 104 (après 68 % du fichier) : `jugement **indépendant** du nôtre, ce qu'il fallait pour tester une robustesse.`
-  - ligne 153 (dernière ligne non vide) : `axes restent équivalents pour la mesure **appariée** du §1, qui ne lit jamais un rayon absolu.`
+  - ligne 128 (après 68 % du fichier) : `jugement **indépendant** du nôtre, ce qu'il fallait pour tester une robustesse.`
+  - ligne 177 (dernière ligne non vide) : `axes restent équivalents pour la mesure **appariée** du §1, qui ne lit jamais un rayon absolu.`
 
 ### docs/71_les_trois_resultats_de_tete_audites.md
 - **lignes** : 108

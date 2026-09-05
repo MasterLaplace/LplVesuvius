@@ -106,15 +106,63 @@ dérivé du **volume** (résidus d'orientation sur `normal-grids` + `m7`, `69` A
 **sans** référent — c'est lui qui sortirait de la bande publiée. Les trois raisons de `73` §1
 qui rouvraient la question restent valides et non testées.
 
-### A2 bis ⭐⭐⭐ — le champ d'identité SANS référent — **débloqué le 2026-09-04** (`78`)
+### A2 bis ⭐⭐⭐ — le champ d'identité SANS référent — **l'entrée est INVENTORIÉE le 2026-09-05**
 
-⭐ **Cinq rouleaux publient leur axe** (`78`), dont `PHerc0139`. Un nombre d'enroulement se
-construit à partir de **l'axe et du pas**, pas de spires déjà tracées — donc il répondrait
-**partout**, ce qui est précisément la limite dure du champ de `77`.
+> Mesure : `src/nappe/le_champ_de_fibres.py` (13 contrôles),
+> `docs/mesures/le_champ_de_fibres.json`.
+>
+> ```
+> uv run python src/nappe/le_champ_de_fibres.py --json docs/mesures/le_champ_de_fibres.json
+> ```
+
+⭐ **Cinq rouleaux publient leur axe** (`78`), dont `PHerc0139`. Mais `78` §4 mesure aussi que
+**l'axe seul ne débloque rien** : erreur d'indice **44,5 feuilles** pour la dispersion radiale
+d'une spire, **11,36** pour le modèle d'Archimède, contre **0,088** pour le champ bâti sur les
+spires. La forme des spires vaut un facteur **130**, et c'est elle qu'un champ dérivé du volume
+devra retrouver.
 
 ⚠ Ce que le dépôt sait déjà et qui borne l'espoir (`26` §7) : les `.normal-grids` publiées sont
 **dérivées de la prédiction** que le traceur suit déjà. Un champ bâti dessus hériterait de la
 prédiction, pas d'une information neuve.
+
+### ⚠⚠⚠ L'autre entrée, celle que `78` §2 annonçait — vérifiée, et sa description était fausse
+
+`78` §2 renvoyait vers `representations/predictions/fibers/`, *« publié pour `PHerc0139` en
+`nx`/`ny`/`nz` »*. **Il n'y a pas de `nz`** : le préfixe publie **trois** canaux — `nx`, `ny`,
+`presence` — et le manifeste `.lasagna.json` n'en déclare pas d'autre, alors que `inference.json`
+annonce `artifact_kind: fiber3d-prediction` et `output_channels = 7`.
+
+⭐⭐ **Mais ce n'est PAS le champ 2D contre lequel `26` §7 met en garde**, et c'est mesuré sur
+**trois** fenêtres portant de la matière plutôt que supposé :
+
+| fenêtre (chunk) | présence | $n_x^2+n_y^2$ médian | max | $\lvert n_z\rvert$ impliqué |
+|---|---:|---:|---:|---:|
+| (71, 36, 14) | 60,2 % | **0,797** | 1,014 | 0,451 |
+| (74, 39, 28) | 57,2 % | **0,806** | 1,014 | 0,441 |
+| (35, 24, 35) | 50,4 % | **0,309** | 1,013 | 0,831 |
+
+La somme n'est **jamais collée à un**, donc ces deux canaux sont la **projection d'un vecteur à
+trois composantes** ; la troisième se récupère **en module**. ⚠ Le **signe** est définitivement
+perdu — une racine carrée rend un module. Pour un nombre d'enroulement ça peut suffire, une
+normale et son opposée décrivant la même feuille, mais ça se dit plutôt que se découvre.
+
+⚠ **L'encodage n'est pas deviné** : la somme plafonne à **1,013–1,014** partout, soit exactement
+l'arrondi d'une quantification sur huit bits. Un facteur d'échelle faux l'aurait fait plafonner à
+2, à 4 ou à 0,25 — et « le champ n'est pas unitaire » aurait alors porté sur notre lecture.
+
+### ⚠⚠ Ce qui borne vraiment `A2 bis` : la RÉSOLUTION, pas le `nz` manquant
+
+Le **niveau 0 n'est pas publié**. Les seuls présents sont **3 et 4** :
+
+| niveau | µm/cellule | cellules par pas de feuille (~150 µm) |
+|---|---:|---:|
+| 3 (le plus fin publié) | **19,2** | **7,8** |
+| 4 | 38,4 | 3,9 |
+| 6 (pour mémoire) | 153,5 | **0,98** — deux feuilles partagent une cellule |
+
+Huit cellules par pas suffisent à **voir** une feuille et pas à en **séparer** deux qui se
+touchent — or c'est exactement là que le déroulage échoue. C'est une contrainte sur ce qu'`A2 bis`
+peut espérer, pas un défaut du champ.
 
 ### A2 ter — le test d'identité par les résidus (ex-H5 de `69`, révisée par `73` §1)
 
