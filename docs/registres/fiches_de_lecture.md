@@ -3706,7 +3706,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/55_les_murs_et_leurs_causes.md
-- **lignes** : 113
+- **lignes** : 114
 - **nature** : PROCEDE
 - **résumé** : Document **rendu** depuis `docs/registres/murs_et_causes.tsv` par `uv run python src/depot/murs_et_causes.py --rendre`, et non écrit à la main ; sa batterie vérifie que chaque ligne pointe vers un document contenant encore son ancre. Il recense **30 causes candidates sur 4 murs** : 19 éliminées, 10 confirmées, 1 bloquée, chacune avec la mesure qui l'a tranchée et le document d'origine. Sa thèse de forme est qu'un mur est un espace de causes dont on retire une entrée à la fois, et que la liste des causes éliminées — non celle des tâches — est le seul progrès mesurable. Une seule cause reste non tranchée, et elle est bloquée. (⚠ Note de lecture : l'en-tête compte 19 éliminations quand le §final écrit « les treize éliminations de ce document » ; le document ne signale pas l'écart. De même, il ne contient aucune cause ⏳ *ouverte* alors que son propre tableau de symboles définit ce statut.)
 - **conclusions extractibles** : *(les murs recensés, avec pour chacun les causes éliminées et celles qui restent ouvertes)*
@@ -3759,7 +3759,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
   - La figure `55_espace_de_causes.png` n'est pas une jauge de progression : rien ne dit que l'espace est borné.
 - **rétractations / corrections internes** : aucune rétractation déclarée. Le document précise en revanche deux bornes de portée sur des causes confirmées : « la graine, c'est-à-dire l'endroit » explique la famille m7 **et pas le mur**, et la chaîne tangentielle « ne dit pas que c'est la BONNE feuille (il faut de l'encre), et part d'un segment PUBLIÉ et non d'une de nos traces ». Il retire aussi explicitement une affirmation antérieure : « ⚠⚠ Le “croisement” que j'avais publié à 1 920 µm n'existe pas : chaîne ET bond y sont au niveau du hasard (−1,7 et +1,6) ».
 - **preuve de lecture intégrale** :
-  - ligne 76 : « | enchaîner la projection à GRAND pas (238 µm/maillon) | ❌ | cinq maillons de 238 µm étalent la boîte ×2,38 à nombre de points constant, contre ×1,10 pour le bond direct — et finissent 5,33 SPIRES à côté de lui. ⚠ Le pas réel dérive avant la boîte : 238 → 963 µm par maillon | [`44`](44_ou_la_chaine_se_trouve.md) | »
+  - ligne 81 : « | enchaîner la projection à GRAND pas (238 µm/maillon) | ❌ | cinq maillons de 238 µm étalent la boîte ×2,38 à nombre de points constant, contre ×1,10 pour le bond direct — et finissent 5,33 SPIRES à côté de lui. ⚠ Le pas réel dérive avant la boîte : 238 → 963 µm par maillon | [`44`](44_ou_la_chaine_se_trouve.md) | »
   - ligne 111 : « cause à laquelle personne n'a pensé. Le tableau borne ce qu'on a testé, jamais ce qui »
 
 ---
@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 2241
+- **lignes** : 2282
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5682,6 +5682,20 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     union, et sa surface la plus proche est à **2 134 µm**, soit **15,7 épaisseurs de feuille**.
     ⭐⭐ Le corpus **double** — treize surfaces de plus, géométrie exacte sur les trois volumes,
     chacune avec sa carte d'encre pleine résolution — mais C1 n'y gagne **aucun voisinage**.
+  - ⭐⭐⭐ **ET LA PRIMITIVE DU DÉROULEMENT EST VALIDÉE SUR CETTE VÉRITÉ DE TERRAIN** (2026-09-06).
+    Toute la colonne « chaîne » reposait sur une supposition jamais confrontée à autre chose
+    qu'elle-même : *un écart inter-feuilles le long de la normale tombe sur la feuille voisine*.
+    Mesuré sur les douze paires de spires consécutives : **ne rien faire 135 µm**, **un écart
+    60 µm**, **deux écarts 151 µm**. Le V est le résultat — le pas nul retombe sur l'écart mesuré
+    (135 contre 135,5), donc les spires sont voisines ; le simple le divise par plus de deux ; et
+    le **double dépasse**, donc la distance franchie est bien celle d'**une feuille** et non une
+    quantité quelconque. **11 paires sur 12**, et le sens retenu est le **même pour les douze** —
+    les grilles publiées partagent une orientation, ce qu'aucune mesure n'avait établi.
+  - ⚠ La seule paire qui échoue est **12 → 13**, dont l'écart vaut 63 µm, moins d'une demi-feuille :
+    un pas entier y dépasse forcément. C'est la paire anormale déjà signalée.
+  - ⚠⚠ Ce que ça ne dit **pas** : le pas tombe **à 60 µm** de la feuille suivante, soit 44 % d'un
+    écart. C'est la précision réelle de la primitive — assez pour ne pas confondre une feuille
+    avec sa voisine, pas assez pour se passer d'un recalage local ensuite.
   - ⚠ Nuance rendue visible par la calibration : **les spires publiées ne sont pas disjointes**,
     la meilleure paire se recouvrant à **56,7 %** sous une demi-épaisseur. « Treize tours
     consécutifs » ne veut donc pas dire treize feuilles séparées.
@@ -5724,8 +5738,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 1648 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 2241 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 1689 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 2282 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

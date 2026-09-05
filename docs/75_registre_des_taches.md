@@ -1603,6 +1603,47 @@ La meilleure paire se recouvre à **56,7 %** sous une demi-épaisseur, donc « t
 consécutifs » ne veut pas dire treize feuilles séparées — certaines partagent largement une même
 feuille. Le compte de tours et le compte de feuilles ne sont pas le même nombre.
 
+#### ⭐⭐⭐ Et la PRIMITIVE du déroulement est validée sur cette vérité de terrain
+
+> Mesure : `src/nappe/le_pas_normal_atteint_la_spire.py` (11 contrôles) →
+> `docs/mesures/le_pas_normal_atteint_la_spire.json`. Figure :
+> `src/figures/figure_le_pas_normal.py` (9 contrôles), le 2026-09-06.
+>
+> ```
+> uv run python src/nappe/le_pas_normal_atteint_la_spire.py --json docs/mesures/le_pas_normal_atteint_la_spire.json
+> uv run python src/figures/figure_le_pas_normal.py --sortie docs/images/75_le_pas_normal.png
+> ```
+
+⚠⚠⚠ **Toute la colonne « chaîne » repose sur une supposition jamais confrontée à autre chose
+qu'elle-même** : *depuis une feuille, avancer d'un écart inter-feuilles le long de la normale
+tombe sur la feuille voisine*. C'est ce que fait un dérouleur, pas après pas, et si c'est faux
+tout ce qui suit dérive. Les treize spires publiées la rendent **falsifiable**.
+
+![le pas normal contre ses deux témoins](images/75_le_pas_normal.png)
+
+| | distance médiane à la spire suivante |
+|---|---:|
+| **ne rien faire** (pas nul) | **135 µm** |
+| **un** écart le long de la normale | **60 µm** |
+| **deux** écarts | 151 µm |
+
+⭐⭐⭐ **Le V est là, et c'est lui qui prouve quelque chose.** Le pas nul retombe sur l'écart
+inter-feuilles mesuré (135 contre 135,5 µm) — donc les spires sont bien voisines. Le pas simple
+le divise par plus de deux. Et le **double dépasse** : la distance franchie est donc bien celle
+d'**une feuille**, pas une quantité quelconque qui améliorerait tout.
+
+**11 paires sur 12** sont rapprochées, et ⭐ **le sens retenu est le même pour les douze** — les
+grilles publiées partagent une orientation, ce qu'aucune mesure n'avait établi.
+
+⚠ **La seule paire qui échoue est 12 → 13**, dont l'écart vaut **63 µm**, soit moins d'une
+demi-feuille : un pas d'une feuille entière y dépasse forcément. C'est la même paire anormale que
+la tranche précédente avait déjà signalée, et elle échoue pour la raison qu'on lui connaît.
+
+⚠⚠ **Ce que ça ne dit pas** : le pas ne tombe pas *sur* la feuille suivante, il tombe **à 60 µm**
+d'elle — 44 % d'un écart. C'est la précision réelle de la primitive, et elle suffit exactement à
+ce qu'il faut : ne pas confondre une feuille avec sa voisine. Elle ne suffit pas à se passer d'un
+recalage local ensuite.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est

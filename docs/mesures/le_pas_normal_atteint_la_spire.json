@@ -1,0 +1,280 @@
+{
+  "volume": "20250526151718",
+  "voxel_um": 2.215,
+  "ecart_lu_um": 135.5,
+  "pas_en_voxels": 61.17,
+  "echantillon": 4000,
+  "paires": 12,
+  "paires_rapprochees": 11,
+  "gain_median_um": 79.7,
+  "pas_nul_median_um": 134.9,
+  "pas_simple_median_um": 60.2,
+  "pas_double_median_um": 150.9,
+  "le_pas_normal_atteint_la_spire": true,
+  "lignes": [
+    {
+      "de": 1,
+      "vers": 2,
+      "points_juges": 1983,
+      "cellules": 2181,
+      "avec_normale": 1983,
+      "pas_nul_um": 129.2,
+      "pas_simple": {
+        "sens_positif_um": 52.1,
+        "sens_negatif_um": 252.8,
+        "retenu": "+",
+        "atteint_um": 52.1
+      },
+      "pas_double": {
+        "sens_positif_um": 147.3,
+        "sens_negatif_um": 377.7,
+        "retenu": "+",
+        "atteint_um": 147.3
+      },
+      "gain_um": 77.1,
+      "rapproche": true
+    },
+    {
+      "de": 2,
+      "vers": 3,
+      "points_juges": 4000,
+      "cellules": 5715,
+      "avec_normale": 5375,
+      "pas_nul_um": 211.7,
+      "pas_simple": {
+        "sens_positif_um": 91.4,
+        "sens_negatif_um": 332.4,
+        "retenu": "+",
+        "atteint_um": 91.4
+      },
+      "pas_double": {
+        "sens_positif_um": 74.6,
+        "sens_negatif_um": 451.5,
+        "retenu": "+",
+        "atteint_um": 74.6
+      },
+      "gain_um": 120.3,
+      "rapproche": true
+    },
+    {
+      "de": 3,
+      "vers": 4,
+      "points_juges": 4000,
+      "cellules": 9885,
+      "avec_normale": 9388,
+      "pas_nul_um": 137.7,
+      "pas_simple": {
+        "sens_positif_um": 65.4,
+        "sens_negatif_um": 259.1,
+        "retenu": "+",
+        "atteint_um": 65.4
+      },
+      "pas_double": {
+        "sens_positif_um": 130.0,
+        "sens_negatif_um": 382.1,
+        "retenu": "+",
+        "atteint_um": 130.0
+      },
+      "gain_um": 72.3,
+      "rapproche": true
+    },
+    {
+      "de": 4,
+      "vers": 5,
+      "points_juges": 4000,
+      "cellules": 41621,
+      "avec_normale": 40720,
+      "pas_nul_um": 232.1,
+      "pas_simple": {
+        "sens_positif_um": 106.7,
+        "sens_negatif_um": 359.0,
+        "retenu": "+",
+        "atteint_um": 106.7
+      },
+      "pas_double": {
+        "sens_positif_um": 88.6,
+        "sens_negatif_um": 485.7,
+        "retenu": "+",
+        "atteint_um": 88.6
+      },
+      "gain_um": 125.4,
+      "rapproche": true
+    },
+    {
+      "de": 5,
+      "vers": 6,
+      "points_juges": 4000,
+      "cellules": 37848,
+      "avec_normale": 37038,
+      "pas_nul_um": 132.2,
+      "pas_simple": {
+        "sens_positif_um": 50.9,
+        "sens_negatif_um": 261.1,
+        "retenu": "+",
+        "atteint_um": 50.9
+      },
+      "pas_double": {
+        "sens_positif_um": 162.6,
+        "sens_negatif_um": 390.2,
+        "retenu": "+",
+        "atteint_um": 162.6
+      },
+      "gain_um": 81.3,
+      "rapproche": true
+    },
+    {
+      "de": 6,
+      "vers": 7,
+      "points_juges": 4000,
+      "cellules": 30639,
+      "avec_normale": 29892,
+      "pas_nul_um": 114.8,
+      "pas_simple": {
+        "sens_positif_um": 55.1,
+        "sens_negatif_um": 242.0,
+        "retenu": "+",
+        "atteint_um": 55.1
+      },
+      "pas_double": {
+        "sens_positif_um": 154.6,
+        "sens_negatif_um": 370.4,
+        "retenu": "+",
+        "atteint_um": 154.6
+      },
+      "gain_um": 59.7,
+      "rapproche": true
+    },
+    {
+      "de": 7,
+      "vers": 8,
+      "points_juges": 4000,
+      "cellules": 30011,
+      "avec_normale": 29269,
+      "pas_nul_um": 125.3,
+      "pas_simple": {
+        "sens_positif_um": 41.3,
+        "sens_negatif_um": 252.1,
+        "retenu": "+",
+        "atteint_um": 41.3
+      },
+      "pas_double": {
+        "sens_positif_um": 137.3,
+        "sens_negatif_um": 380.3,
+        "retenu": "+",
+        "atteint_um": 137.3
+      },
+      "gain_um": 84.0,
+      "rapproche": true
+    },
+    {
+      "de": 8,
+      "vers": 9,
+      "points_juges": 4000,
+      "cellules": 30606,
+      "avec_normale": 29848,
+      "pas_nul_um": 139.3,
+      "pas_simple": {
+        "sens_positif_um": 54.3,
+        "sens_negatif_um": 267.4,
+        "retenu": "+",
+        "atteint_um": 54.3
+      },
+      "pas_double": {
+        "sens_positif_um": 163.0,
+        "sens_negatif_um": 395.6,
+        "retenu": "+",
+        "atteint_um": 163.0
+      },
+      "gain_um": 85.0,
+      "rapproche": true
+    },
+    {
+      "de": 9,
+      "vers": 10,
+      "points_juges": 4000,
+      "cellules": 23924,
+      "avec_normale": 23255,
+      "pas_nul_um": 102.0,
+      "pas_simple": {
+        "sens_positif_um": 54.4,
+        "sens_negatif_um": 229.8,
+        "retenu": "+",
+        "atteint_um": 54.4
+      },
+      "pas_double": {
+        "sens_positif_um": 165.3,
+        "sens_negatif_um": 359.5,
+        "retenu": "+",
+        "atteint_um": 165.3
+      },
+      "gain_um": 47.6,
+      "rapproche": true
+    },
+    {
+      "de": 10,
+      "vers": 11,
+      "points_juges": 4000,
+      "cellules": 22085,
+      "avec_normale": 21467,
+      "pas_nul_um": 298.2,
+      "pas_simple": {
+        "sens_positif_um": 220.1,
+        "sens_negatif_um": 408.7,
+        "retenu": "+",
+        "atteint_um": 220.1
+      },
+      "pas_double": {
+        "sens_positif_um": 280.8,
+        "sens_negatif_um": 528.6,
+        "retenu": "+",
+        "atteint_um": 280.8
+      },
+      "gain_um": 78.1,
+      "rapproche": true
+    },
+    {
+      "de": 11,
+      "vers": 12,
+      "points_juges": 4000,
+      "cellules": 18676,
+      "avec_normale": 18040,
+      "pas_nul_um": 328.4,
+      "pas_simple": {
+        "sens_positif_um": 218.3,
+        "sens_negatif_um": 445.4,
+        "retenu": "+",
+        "atteint_um": 218.3
+      },
+      "pas_double": {
+        "sens_positif_um": 138.0,
+        "sens_negatif_um": 562.9,
+        "retenu": "+",
+        "atteint_um": 138.0
+      },
+      "gain_um": 110.1,
+      "rapproche": true
+    },
+    {
+      "de": 12,
+      "vers": 13,
+      "points_juges": 4000,
+      "cellules": 23062,
+      "avec_normale": 22427,
+      "pas_nul_um": 62.7,
+      "pas_simple": {
+        "sens_positif_um": 81.7,
+        "sens_negatif_um": 191.2,
+        "retenu": "+",
+        "atteint_um": 81.7
+      },
+      "pas_double": {
+        "sens_positif_um": 208.1,
+        "sens_negatif_um": 322.1,
+        "retenu": "+",
+        "atteint_um": 208.1
+      },
+      "gain_um": -19.0,
+      "rapproche": false
+    }
+  ]
+}
