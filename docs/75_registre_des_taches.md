@@ -609,10 +609,48 @@ l'empreinte**). Sur la même fenêtre, la publiée fait **0,418** : l'écart que
 d'aspect impliquent jusqu'à **~90 cellules** de dérive. `maximum_au_bord` est **asserté**, pas
 noté.
 
+### ⭐⭐⭐ Le résidu est GÉOMÉTRIQUE, et c'est une validation croisée qui le dit
+
+> ```
+> uv run python src/encre/le_recalage_des_etiquettes.py --champ --json docs/mesures/le_regime_du_prix_score.json
+> uv run python src/figures/figure_champ_de_recalage.py --sortie docs/images/75_champ_de_recalage.png
+> ```
+
+![le résidu que l'affine globale ne corrige pas](images/75_champ_de_recalage.png)
+
+⚠⚠⚠ **Le champ est ajusté sur les SILHOUETTES, jamais sur l'encre — et c'est le piège central de
+tout ce lot.** Maximiser l'accord entre la carte d'encre publiée et les étiquettes ferait deux
+choses à la fois : rendre cet accord élevé **par construction**, et tailler la géométrie sur les
+erreurs d'un détecteur qui n'est pas le nôtre. Scorer ensuite notre carte à travers ce champ, ce
+serait la juger contre une géométrie faite pour quelqu'un d'autre.
+
+| | valeur |
+|---|---:|
+| carreaux portant un **bord** (les seuls où le décalage est contraint) | **34** |
+| Dice médian après décalage local | **0,951** |
+| norme du décalage : médiane / p90 / max | **60 / 152 / 160** cellules — **1,1 / 2,7 / 2,8 mm** |
+| accord de l'**encre** sur la fenêtre, **sans** le champ | **0,418** |
+| ... **avec** le champ tiré des silhouettes | **0,612** |
+
+> **Un champ qui n'a jamais vu une étiquette ni une carte d'encre remonte l'accord de l'encre de
+> +0,194.** Le résidu est donc bien géométrique — ce n'est pas le détecteur qui échoue, c'est la
+> géométrie qui est fausse d'un millimètre.
+
+⭐ **Et il n'atteint pas l'optimum trouvé en regardant l'encre (0,711), ce qui est la bonne
+nouvelle** : un champ indépendant qui l'égalerait serait suspect. L'écart dit ce qu'un champ plus
+dense reste à gagner — le carreau le plus proche de la fenêtre est à **277 cellules**.
+
+⚠ Un carreau **plein** ne contraint rien : il se ressemble à lui-même partout, donc son décalage
+optimal est arbitraire. Seuls les carreaux à occupation intermédiaire sont retenus, et leur
+nombre est rendu — un champ estimé sur trois carreaux n'est pas un champ.
+
 ### Ce qui reste de C1, et c'est maintenant précis
 
-1. ⚠⚠⚠ **Un recalage LOCAL** — champ de déformation ou grille de contrôle, pas une affine. Le
-   résidu mesuré est de 2,1 mm au moins, soit trois lettres et demie. **Tout le reste en dépend.**
+1. ⚠⚠⚠ **Un recalage LOCAL DENSE** — le champ à 34 carreaux ci-dessus est une **preuve de
+   faisabilité**, pas un recalage : ses carreaux sont sur les bords et la fenêtre mesurée est à
+   277 cellules du plus proche. Il faut interpoler entre eux (ou densifier par des repères
+   intérieurs). Le résidu à corriger vaut **1,1 mm en médiane, 2,8 mm au pire**. **Tout le reste
+   en dépend.**
 2. **Une fenêtre choisie dans un repère COMMUN**, pas dans la grille de chaque régime : les deux
    campagnes ont atterri sur deux régions différentes (27,8 % et 91,1 % d'encre), donc leurs
    nombres ne se comparaient pas même sans le problème de recalage.

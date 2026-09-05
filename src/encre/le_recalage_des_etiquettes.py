@@ -506,6 +506,131 @@ def residu_local(dossier: dict, portee: int = 120) -> dict:
                 gain=(None if auc_best is None or auc_centre is None else auc_best - auc_centre))
 
 
+def champ_local(pas: int = 128, portee: int = 140, sous_pas: int = 10) -> dict:
+    """
+    @brief Un champ de décalages estimé sur les EMPREINTES, jamais sur l'encre.
+
+    ⚠⚠⚠ POURQUOI L'ENCRE EST INTERDITE ICI, et c'est le piège central de tout ce lot. Ajuster le
+    recalage en maximisant l'accord entre la **carte d'encre publiée** et les **étiquettes**
+    ferait deux choses à la fois : il rendrait cet accord élevé **par construction**, et il
+    ajusterait la géométrie sur les erreurs d'un détecteur qui n'est pas le nôtre. Scorer ensuite
+    notre carte à travers ce champ, ce serait la juger contre une géométrie taillée pour
+    quelqu'un d'autre.
+
+    ⭐⭐ LE CHAMP EST DONC AJUSTÉ SUR LES SILHOUETTES et **validé sur l'encre**. Les deux sont
+    indépendants : une empreinte dit où il y a de la matière, une étiquette dit où il y a de
+    l'encre. Si un champ tiré des premières restaure l'accord des secondes, c'est une validation
+    croisée, pas une tautologie.
+
+    ⚠⚠ ET UNE SILHOUETTE PLEINE NE CONTRAINT RIEN. Un carreau entièrement à l'intérieur du
+    fragment se ressemble à lui-même partout : son décalage optimal est arbitraire. Seuls les
+    carreaux qui portent un **bord** — contour extérieur, trou, déchirure — portent de
+    l'information, et ce sont les seuls retenus. Le compte des carreaux retenus est rendu, parce
+    qu'un champ estimé sur trois carreaux n'est pas un champ.
+
+    ⚠ Recherche à deux étages (grossier `sous_pas`, puis fin autour du meilleur) : un balayage
+    fin sur ±140 cellules coûterait 78 000 évaluations par carreau.
+    """
+    masque, _ = _image("500P2_mask.png"), None
+    publiee = carte_publiee_reduite()
+    if masque is None or publiee is None:
+        raise SystemExit("masque ou carte publiée absents")
+    carte, _ = publiee
+    empreinte = (carte > 0).astype(float)
+    t = affine_par_boites(masque, empreinte)
+    masque_recale = appliquer(masque, t, empreinte.shape) > 0.5
+    cible = empreinte > 0.5
+
+    def recouvrement(a, b):
+        s_ = a.sum() + b.sum()
+        return float(2.0 * (a & b).sum() / s_) if s_ else 0.0
+
+    carreaux = []
+    h, w = cible.shape
+    for i in range(0, h - pas + 1, pas):
+        for j in range(0, w - pas + 1, pas):
+            bloc = cible[i:i + pas, j:j + pas]
+            part = float(bloc.mean())
+            # ⚠⚠ Un carreau plein (ou vide) ne contraint rien : son décalage optimal est
+            # arbitraire. On exige un BORD, donc une occupation strictement intermédiaire.
+            if not 0.15 < part < 0.85:
+                continue
+            meilleur, ou = -1.0, (0, 0)
+            for etage, (rayon, incr) in enumerate(((portee, sous_pas), (sous_pas, 2))):
+                base = ou
+                for di in range(base[0] - rayon, base[0] + rayon + 1, incr):
+                    for dj in range(base[1] - rayon, base[1] + rayon + 1, incr):
+                        si, sj = i + di, j + dj
+                        if si < 0 or sj < 0 or si + pas > h or sj + pas > w:
+                            continue
+                        d = recouvrement(bloc, masque_recale[si:si + pas, sj:sj + pas])
+                        if d > meilleur:
+                            meilleur, ou = d, (di, dj)
+                if etage == 0 and meilleur <= 0:
+                    break
+            carreaux.append(dict(i=i, j=j, di=ou[0], dj=ou[1], dice=meilleur, occupation=part))
+    if not carreaux:
+        return {}
+    normes = [float(np.hypot(c["di"], c["dj"])) for c in carreaux]
+    return dict(pas=pas, portee=portee, carreaux=carreaux, retenus=len(carreaux),
+                norme_mediane=float(np.median(normes)),
+                norme_p90=float(np.percentile(normes, 90)),
+                norme_max=float(max(normes)),
+                dice_median=float(np.median([c["dice"] for c in carreaux])))
+
+
+def valider_le_champ(dossier: dict, champ: dict) -> dict:
+    """
+    @brief Le champ tiré des silhouettes restaure-t-il l'accord de l'ENCRE ?
+
+    ⚠⚠⚠ C'EST LA VALIDATION CROISÉE, et elle est écrite pour tomber. Le champ n'a jamais vu une
+    étiquette ni une carte d'encre : s'il remonte l'AUC de la carte publiée sur la fenêtre où
+    elle échouait, la géométrie était bien la cause. S'il ne la remonte pas, le résidu n'est pas
+    géométrique et il faut chercher ailleurs — les deux réponses valent d'être écrites.
+    """
+    from le_nul_verso import aire_sous_la_courbe  # noqa: PLC0415
+    from zarr_depth import BUCKET, get  # noqa: PLC0415
+
+    masque, etiquettes = _image("500P2_mask.png"), _image("500P2_inklabels.png")
+    publiee = carte_publiee_reduite()
+    if masque is None or etiquettes is None or publiee is None:
+        return {}
+    carte, _ = publiee
+    empreinte = (carte > 0).astype(float)
+    t = affine_par_boites(masque, empreinte)
+    eti = appliquer(etiquettes, t, empreinte.shape)
+    forme = json.loads(get(f"{BUCKET}/{dossier['zarr']}/0/.zarray", 60))["shape"]
+    fr = eti.shape[0] / forme[1]
+    fc = eti.shape[1] / forme[2]
+    r0 = int(round(dossier["fenetre"]["top"] * fr))
+    c0 = int(round(dossier["fenetre"]["left"] * fc))
+    h = max(2, int(round(dossier["taille"] * fr)))
+    ref = carte[r0:r0 + h, c0:c0 + h]
+    ok = np.isfinite(ref) & (ref > 0)
+
+    def auc(di, dj):
+        if r0 + di < 0 or c0 + dj < 0:
+            return None
+        reg = eti[r0 + di:r0 + di + h, c0 + dj:c0 + dj + h]
+        if reg.shape != ref.shape:
+            return None
+        a = ref[ok & (reg > 0.5)].ravel()
+        b = ref[ok & (reg <= 0.5)].ravel()
+        return aire_sous_la_courbe(a, b) if a.size >= 100 and b.size >= 100 else None
+
+    # ⚠ Le carreau du champ le plus proche du centre de la fenêtre : le champ est estimé sur une
+    # grille plus grossière que la fenêtre, donc il faut dire lequel on applique.
+    ci, cj = r0 + h // 2, c0 + h // 2
+    proche = min(champ["carreaux"],
+                 key=lambda c: (c["i"] + champ["pas"] // 2 - ci) ** 2
+                 + (c["j"] + champ["pas"] // 2 - cj) ** 2)
+    return dict(auc_sans_champ=auc(0, 0),
+                auc_avec_champ=auc(proche["di"], proche["dj"]),
+                carreau=proche,
+                distance_au_carreau=float(np.hypot(proche["i"] + champ["pas"] // 2 - ci,
+                                                   proche["j"] + champ["pas"] // 2 - cj)))
+
+
 def _verifier(r: dict | None = None) -> int:
     echecs = comptes = 0
 
@@ -590,6 +715,33 @@ def _verifier(r: dict | None = None) -> int:
               abs(res["decalage_meilleur"][0]) > 40 or abs(res["decalage_meilleur"][1]) > 40,
               f"décalage {res['decalage_meilleur']} cellules, soit "
               f"{max(map(abs, res['decalage_meilleur'])) * 17.7 / 1000:.1f} mm")
+        # ⚠⚠⚠ LA VALIDATION CROISÉE, et c'est elle qui transforme « ça ne marche pas » en « la
+        # cause est géométrique ». Le champ est estimé sur les SILHOUETTES — il n'a jamais vu une
+        # étiquette ni une carte d'encre — et il remonte quand même l'accord de l'encre. Si
+        # l'ajustement avait vu l'encre, l'accord serait élevé par construction et ne prouverait
+        # rien.
+        ch, val = r.get("champ_local"), r.get("validation_du_champ")
+        if ch and val:
+            v("le champ local est estimé sur assez de carreaux pour en être un",
+              ch["retenus"] >= 20,
+              f"{ch['retenus']} carreaux portant un bord, Dice médian {ch['dice_median']:.3f}")
+            v("... et il mesure un décalage de l'ordre du millimètre",
+              ch["norme_mediane"] > 20,
+              f"médiane {ch['norme_mediane']:.0f} cellules "
+              f"({ch['norme_mediane'] * 17.7 / 1000:.1f} mm), max {ch['norme_max']:.0f} "
+              f"({ch['norme_max'] * 17.7 / 1000:.1f} mm)")
+            v("... et un champ tiré des SILHOUETTES restaure l'accord de l'ENCRE",
+              val["auc_avec_champ"] - val["auc_sans_champ"] > 0.10,
+              f"{val['auc_sans_champ']:.3f} → {val['auc_avec_champ']:.3f}")
+            # ⚠⚠ ET IL N'ATTEINT PAS L'OPTIMUM TROUVÉ SUR L'ENCRE, ce qui est la BONNE nouvelle :
+            # un champ indépendant qui égalerait un ajustement fait sur la cible serait suspect.
+            # L'écart dit ce qu'il reste à gagner avec un champ plus dense.
+            res = r.get("residu_local") or {}
+            if res.get("auc_meilleure") is not None:
+                v("... sans atteindre l'optimum trouvé EN REGARDANT l'encre, ce qui est normal",
+                  val["auc_avec_champ"] < res["auc_meilleure"],
+                  f"{val['auc_avec_champ']:.3f} contre {res['auc_meilleure']:.3f} — "
+                  f"le carreau le plus proche est à {val['distance_au_carreau']:.0f} cellules")
         if r.get("auc_carte_publiee") is not None:
             v("la carte publiée retrouve les étiquettes recalées",
               r["auc_carte_publiee"] > 0.75,
@@ -607,6 +759,8 @@ def _verifier(r: dict | None = None) -> int:
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--recette", default="new_canon")
+    p.add_argument("--champ", action="store_true",
+                   help="estimer le champ local sur les EMPREINTES et le valider sur l'encre")
     p.add_argument("--residu", action="store_true",
                    help="l'affine globale suffit-elle localement ? balayage de décalages")
     p.add_argument("--apparier", action="store_true",
@@ -621,6 +775,31 @@ def main() -> int:
     if a.verifier and not a.json:
         cible = RACINE / "docs" / "mesures" / "le_recalage_des_etiquettes.json"
         return 1 if _verifier(json.loads(cible.read_text()) if cible.is_file() else None) else 0
+    if a.champ:
+        cible = a.json
+        if cible is None or not cible.is_file():
+            raise SystemExit("--champ demande --json <dossier du régime>")
+        d = json.loads(cible.read_text())
+        c = champ_local()
+        val = valider_le_champ(d, c)
+        d["champ_local"] = {k: v for k, v in c.items() if k != "carreaux"}
+        d["champ_local"]["carreaux"] = c["carreaux"]
+        d["validation_du_champ"] = val
+        cible.write_text(json.dumps(d, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"champ estimé sur {c['retenus']} carreaux portant un bord "
+              f"(Dice médian {c['dice_median']:.3f})")
+        print(f"  norme du décalage : médiane {c['norme_mediane']:.0f}, "
+              f"p90 {c['norme_p90']:.0f}, max {c['norme_max']:.0f} cellules "
+              f"({c['norme_max'] * 17.7 / 1000:.1f} mm)")
+        if val:
+            print(f"\n  validation croisée sur l'encre, fenêtre du dossier :")
+            print(f"    sans le champ  {val['auc_sans_champ']:.3f}")
+            print(f"    avec le champ  {val['auc_avec_champ']:.3f}   "
+                  f"(carreau à {val['distance_au_carreau']:.0f} cellules, "
+                  f"décalage {val['carreau']['di']}, {val['carreau']['dj']})")
+        print(f"écrit : {cible}")
+        return 0
+
     if a.residu:
         cible = a.json
         if cible is None or not cible.is_file():
