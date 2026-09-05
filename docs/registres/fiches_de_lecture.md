@@ -4887,6 +4887,140 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 60 (après 65 % du fichier) : `**Ni faisceau, ni annotation manuelle, ni rescan.** Les couches sont rendues.`
   - ligne 100 (dernière ligne non vide) : `papier reproche à la littérature.`
 
+### docs/77_le_predicat_didentite.md
+- **lignes** : 711
+- **nature** : RESULTAT
+  (construction et mesure d'un champ d'enroulement, puis quatre lots qui s'enchaînent : le
+  masque d'approbation à cinq bras, le second rouleau qui ne sépare pas, le trou angulaire
+  trouvé en regardant, et la surface publiée confrontée à la matière.)
+- **résumé** : Construit la **moitié manquante** que [`73`](../73_seconde_passe_ce_que_le_depot_change.md)
+  avait nommée. Le dépôt avait la **présence** (α) et le **placement** (`offset`) ;
+  l'**identité** — est-ce la même feuille qu'il y a un tour ? — n'existait pas, et c'est là que
+  partent les 775 heures de pinceau par rouleau. Le champ d'enroulement, bâti sur les spires
+  publiées de [`76`](../76_le_sens_des_indices.md), **compte les feuilles** : avance par tour
+  0,00 → 1,10 → 1,96 → 2,85 pour 0, 1, 2, 3 feuilles franchies. Le document est ensuite une
+  suite de corrections de lui-même, dont trois majeures : le prédicat ne sépare **pas** sur le
+  second rouleau, la cause en est un **trou de matière** trouvé en dessinant, et l'estimateur du
+  §10 **enjambait deux feuilles**, gonflant ses chiffres de 25 à 37 %.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **La grandeur qui décide est l'avance d'indice sur un tour**, et elle a été corrigée
+    **deux fois par la mesure**. L'étendue le long d'une spire ne sépare presque rien (1,44
+    contre 2,57) parce qu'**une spire EST un tour de spirale** : exiger un indice constant, c'est
+    exiger que le rouleau ne soit pas enroulé. Et l'avance prédite « +1 par tour » vaut **0** —
+    la spirale est **absorbée** dans le champ, ce qu'un nombre d'enroulement doit faire.
+  - `PHerc0139`, validation **à spire exclue** : vraie spire **−0,005** [−0,170 ; +0,230],
+    saut d'une feuille **1,103** [0,753 ; 1,479], de deux **1,962**, de trois **2,851**. Les
+    deux populations **ne se recouvrent pas**.
+  - ⚠⚠⚠ **Et cette phrase est fausse de `PHerc0172`** (§7, ajouté après avoir fait tourner le
+    **même code**) : vraie spire +0,022 [−0,554 ; **+0,634**] contre saut à 1,073 [**−0,067** ;
+    1,820]. La **rampe** se reproduit parfaitement (0,02 → 1,07 → 2,00 → 2,98) ; ce qui diffère
+    est la **dispersion**. Le prédicat doit être **étalonné par rouleau**, et le code **mesure
+    et rapporte sa propre applicabilité** au lieu de la supposer.
+  - ⚠⚠ **Une tranche isolée ne suffit JAMAIS**, sur aucun des deux rouleaux — la séparation du
+    §2 est celle de la **spire entière**, une médiane sur ~24 tranches. Taille minimale mesurée :
+    **2 tranches** sur `PHerc0139`, **aucune** sur `PHerc0172`. C'est la version chiffrée de ce
+    que `42` disait qualitativement (« désigner des régions, pas des points »).
+  - ⭐⭐⭐ **Validation croisée** : sur 32 sauts fabriqués, **deux** ne montent pas — `w041`→`w042`
+    (0,169) et `w045`→`w046` (−0,141) — et ce sont **exactement** les deux défauts de référent
+    que `76` avait signalés par une méthode qui ne partage rien avec celle-ci. Le contrôle est
+    écrit « les positions qui n'avancent pas sont **exactement** `[41, 45]` », donc il échoue si
+    le prédicat en rate une **ou** s'il en invente une.
+  - ⭐⭐ **Le champ donne DEUX prédicats et il faut les deux** : le **placement** est la partie
+    fractionnaire (0,001 sur une feuille, 0,502 dans l'interstice), l'**identité** est l'avance.
+    Une copie translatée d'un demi-pas a une avance **nulle** — elle suit parfaitement une
+    feuille qui n'existe pas — donc un masque qui n'aurait que l'identité **approuverait une
+    surface posée dans le vide**.
+  - ⚠⚠⚠ Le masque d'approbation, cinq bras : spire par son propre champ **98,7 %** (circulaire),
+    **quart de pas 92,7 %** (le témoin positif réaliste), spire à spire exclue 53,9 %
+    (pathologique par construction), **demi-pas 2,1 %**, saut d'une feuille **0,0 %**.
+    **Le quatrième bras est celui sans lequel le contrôle ne peut pas échouer** : approuver une
+    spire et refuser un masque vide ou plein se satisfait d'un masque qui approuve tout.
+  - ⚠⚠ **Une spire publiée ne peut pas être son propre témoin positif** : avec son champ 100 %
+    mais circulaire, sans lui 70 % parce que la retirer la place **exactement au milieu de
+    l'intervalle que son retrait vient de créer**.
+  - ⚠⚠⚠ Le bug le plus coûteux du lot : retirer du champ la spire qui **borne** la surface jugée
+    détruit l'information qui détecte un interstice — **un demi-pas passait de 2,1 % à 37,6 %
+    d'approbation**, d'un refus net à une approbation nette, sans qu'aucun nombre n'ait l'air
+    faux. La sonde fait tomber **4 contrôles**.
+  - ⭐⭐⭐ §8, **un TROU angulaire trouvé en dessinant** (consigne de l'auteur : « la solution
+    sera forcément visible visuellement, il faut trouver le bon angle de caméra »). Sur
+    `PHerc0172`, un faisceau de spires extérieures se croise entre **330° et 360°**. La
+    statistique du §7 ne le voyait pas parce qu'elle comparait la violation **moyenne** (5,2
+    contre 5,6 %, indiscernable) là où ce qui diffère est la **concentration** : pire secteur
+    ×1,42 contre **×5,18**, et 24,3 % de la violation portée par 6 secteurs sur 72.
+  - ⚠⚠ **L'explication d'abord donnée — la couture de la spirale — était fausse**, et deux
+    mesures la réfutent : **densité 3 points par cellule contre 286** (donc de la matière
+    **absente**, pas mal ordonnée) et **7 spires sur 43 à exactement 0 %** (donc pas un angle
+    commun à toutes). ⚠ Laquelle des causes — déchirure, perte, écrasement — **n'est pas
+    décidable d'ici**, et le fichier ne tranche pas.
+  - ⚠⚠⚠ **La première exclusion était fausse aussi, et le témoin l'a attrapée** : étendre l'arc
+    par contiguïté donnait 15 secteurs, dont l'exclusion restaure la séparation — mais écarter
+    **autant de secteurs SAINS** la restaure aussi. L'effet mesuré était celui du **filtre de
+    couverture**, pas celui du trou. À **six** secteurs la distinction tient, et c'est la seule
+    version publiée. Coût : **8 % de la circonférence**.
+  - §9, jusqu'où le champ porte : **une feuille**. Au-delà du bord publié, erreur **47 µm**
+    (0,31 feuille) à +1, 79 à +2, 125 à +3, 293 à +8. ⚠⚠ **Le champ est un JUGE, pas un
+    générateur** — réinjecter la spire prédite ne change rien au chiffre près, parce qu'une
+    spire prédite **ne porte aucune information neuve**.
+  - ⚠ Une structure angulaire **réelle et inutile** : l'écart inter-feuilles varie de **74 µm**
+    avec l'angle (45 % de sa médiane), signature de l'écrasement — et l'exploiter donne **0,33**
+    contre 0,31 pour un pas global. Les deux moitiés sont publiées ensemble, parce que la
+    première invite à croire qu'on peut s'en servir.
+  - §10, ⭐⭐ **la surface publiée n'est pas sur la feuille** : sur le même rouleau, le champ
+    prédit à **49 µm** et le référent est lui-même à **27 µm** de la matière — donc une part de
+    l'erreur de prédiction est l'erreur du **référent**. Bornes 41 µm (erreurs indépendantes) à
+    22 µm (parfaitement corrélées) ; l'indépendance n'étant pas vérifiable, **deux bornes plutôt
+    qu'un chiffre**.
+  - ⭐⭐⭐ **Trois rouleaux, et le fait n'apparaît qu'en unités de FEUILLE** : 17,8–20,1 µm
+    (`PHerc0172`), 13,8–16,5 (`PHerc1447`), 23,8 (`PHercParis4`) — qui se contredisent en
+    micromètres et disent la même chose en feuilles, **0,121 – 0,146**. Le contrôle qui
+    comparait les micromètres a dûment échoué, ce qui est ce qui l'a fait changer.
+  - ⭐⭐ Un TIFF de 30 Go lu **sans le télécharger** : les couches de Scroll 1 sont des TIFF non
+    compressés à une bande, donc une fenêtre de lignes est une **plage contiguë** — **1,35 Gio**
+    par requête `Range` au lieu de 30 Go. ⚠ Le coût est **annoncé avant d'être payé**
+    (`--estimer`).
+  - §11, **α ne se calcule PAS sur un volume de surface**, et B2 reste ouverte pour une raison
+    mesurée : α demande deux fenêtres emboîtées et une dalle fait **±0,9 écart** — 25 refus sur
+    36, et les 11 cas mesurables rendent +0,000 à +1,771 sur des positions voisines. Avec une
+    dalle de 3,0 écarts, deux obstacles **différents** : centrer sur le lobe est **circulaire**
+    (l'argmax d'une fenêtre centrée sur l'argmax est au centre), et transporter la profondeur
+    d'une fenêtre à l'autre est **confondu par le serpentage** (0,13 écart ≈ 2,8 couches, l'ordre
+    de la fenêtre étroite).
+- **rétractations / corrections internes** :
+  - §12, ⚠⚠⚠ **l'estimateur du §10 enjambait deux feuilles** : le centre de masse pris sur toute
+    la dalle atterrit **dans le creux entre deux lobes**, et 9 des 12 piles en contiennent deux à
+    quatre. Borner à ±0,5 écart — la plus grande fenêtre qui ne peut pas contenir deux feuilles,
+    donc **pas un réglage** — corrige de **−27 à −37 %**. ⭐ Et `PHercParis4` n'était pas un
+    rouleau à part : son 37,7 µm aberrant était l'estimateur enjambant deux feuilles de plus.
+  - §12 : **un contrôle a changé de sens et ça RENFORCE le résultat**. Il assertait que l'écart
+    décroît avec l'agrégation, donc qu'une part était du bruit de pixel ; une fois l'estimateur
+    borné il ne décroît plus (19,2 au pixel contre 19,9 à 20 px). **Ce qui décroissait était le
+    biais d'enjambement.**
+  - §10 : « j'ai comparé deux rouleaux différents sans que rien ne le signale » — 47 µm de
+    `PHerc0139` contre 28 µm de `PHerc0172`, deux tailles de voxel. Le contrôle qui l'aurait
+    attrapé **n'existait pas** ; il existe, et la sonde qui rejoue l'erreur le fait tomber.
+  - §10 : le gain de l'estimateur avait été attribué à un **lissage 9 × 9** ; mesuré séparément,
+    le lissage ne fait rien à l'argmax et rend le centre de masse **légèrement pire**. Tout le
+    gain vient du **centre de masse**. ⭐ « Je ne savais pas laquelle des deux choses faisait le
+    travail et j'avais publié la mauvaise. La sonde qui ne mordait pas était le signal. »
+  - §9 : le modèle de pas a été **choisi par la mesure contre le raisonnement de l'auteur** — un
+    pas par cellule est le **pire partout** (0,37 contre 0,31). « L'argument était juste sur la
+    physique et faux sur la statistique. »
+  - §11 : ⚠⚠⚠ « j'ai d'abord lu un résultat là où il n'y en avait pas » — l'amplitude était
+    passée **sans son seuil**, donc la branche de refus de `49` §2 était **inatteignable** et les
+    trois positions rendaient des chiffres identiques au millième, pris pour une réponse.
+  - §4 : une sonde ne mordait pas parce que le seuil était trop lâche (`erreur < 0,5` acceptait
+    0,0876 **et** 0,0000) — or **0,0000 est la signature d'un champ qui a LU la spire** au lieu
+    de l'interpoler. Contrôle « … et elle n'est pas nulle » ajouté.
+  - §10 bis : ⚠⚠⚠ les micromètres de `44` **ne se composent pas** — sa constante `UM_PAR_VOXEL
+    = 2.4` n'est reliée à aucun volume alors que les deux volumes du rouleau nommé sont à
+    7,91 µm. Le code le **dit** (`provenance_du_voxel_reconstructible: false`) au lieu de
+    composer avec.
+- **preuve de lecture intégrale** :
+  - ligne 431 (après 61 % du fichier) : `L'argument était juste sur la **physique** et faux sur la **statistique** : un pas estimé sur`
+  - ligne 710 (dernière ligne non vide) : `traceur pourrait corriger, et exactement ce que du bruit ne serait pas.`
+
+
 ### docs/78_lombilic_publie.md
 - **lignes** : 177
 - **nature** : RESULTAT
