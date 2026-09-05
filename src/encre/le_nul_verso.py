@@ -136,6 +136,82 @@ def fenetres(profil: list[float]) -> dict:
                 couches=n)
 
 
+def niveau_le_plus_grossier(zarr: str, plafond: int = 12) -> tuple[int, list[int]]:
+    """
+    @brief Le niveau de pyramide le plus grossier publié, et sa forme.
+
+    ⚠⚠ DÉCOUVERT, PAS FIGÉ. Les volumes de surface n'ont pas tous la même profondeur de
+    pyramide — `w046` s'arrête au niveau 3, `w058` va jusqu'au 5 — donc un niveau écrit en dur
+    chercherait au mauvais endroit sur la moitié des segments, et l'échelle de retour au
+    niveau 0 serait fausse d'un facteur quatre.
+    """
+    import json as _json
+    import sys as _sys
+    _sys.path.insert(0, str(RACINE / "src" / "commun"))
+    from zarr_depth import BUCKET, get  # noqa: PLC0415
+
+    dernier, forme = 0, None
+    for lvl in range(plafond):
+        try:
+            b = _json.loads(get(f"{BUCKET}/{zarr.rstrip('/')}/{lvl}/.zarray", 30))
+        except Exception:  # noqa: BLE001 — l'absence d'un niveau EST la réponse
+            break
+        dernier, forme = lvl, list(b["shape"])
+    if forme is None:
+        raise SystemExit(f"aucun niveau lisible sous {zarr}")
+    return dernier, forme
+
+
+def chercher_fenetre(zarr: str, taille: int = 512, tuiles: int = 8) -> dict:
+    """
+    @brief Où poser la fenêtre : la sous-tuile la plus pleine, cherchée sur TOUT le plan.
+
+    ⚠⚠⚠ LE PIÈGE Nº27 DE CE DÉPÔT — un volume est surtout du remplissage. Sur `w046`, 93 % des
+    sondes d'une autre mesure tombaient dans le vide, donc une fenêtre choisie au jugé a une
+    chance sur quinze de contenir du papyrus.
+
+    ⚠⚠ ET MA PREMIÈRE VERSION NE CHERCHAIT PAS : elle lisait `taille × tuiles / 8` pixels depuis
+    le coin (0, 0), soit **moins de 2 % de l'aire**, et rendait « 0 % de matière » sur `w058`
+    simplement parce que ce coin-là est vide. Un chercheur qui ne regarde qu'un coin n'est pas
+    un chercheur ; il balaie désormais **tout le plan** du niveau le plus grossier, où cela
+    coûte quelques dizaines de morceaux au lieu de milliers.
+
+    ⚠ La matière se lit sur la couche du MILIEU de la pile, qui est la surface tracée : une
+    couche de bord serait vide même là où il y a du papyrus.
+    """
+    import tempfile
+
+    import tifffile
+
+    niveau, forme = niveau_le_plus_grossier(zarr)
+    with tempfile.TemporaryDirectory() as tmp:
+        vue = Path(tmp) / "vue"
+        code, texte = _lancer(
+            ["uv", "run", "python", str(EXTRACTEUR), zarr, "--sortie", str(vue),
+             "--level", str(niveau), "--top", "0", "--left", "0",
+             "--hauteur", str(forme[1]), "--largeur", str(forme[2])], 5400)
+        if code != 0:
+            raise SystemExit(f"vue d'ensemble échouée : {texte.strip()[-200:]}")
+        fichiers = sorted(vue.glob("*.tif"))
+        if not fichiers:
+            raise SystemExit("vue d'ensemble vide")
+        milieu = tifffile.imread(fichiers[len(fichiers) // 2]).astype(float)
+
+    facteur = 2 ** niveau
+    # ⚠ La tuile de recherche a la TAILLE DE LA FENÊTRE ramenée à ce niveau : chercher avec une
+    # tuile plus grande trouverait une région globalement pleine dont la fenêtre réelle
+    # pourrait tomber dans un trou.
+    pas = max(2, taille // facteur)
+    meilleur, best = (0, 0), -1.0
+    for i in range(0, max(1, milieu.shape[0] - pas + 1), max(1, pas // 2)):
+        for j in range(0, max(1, milieu.shape[1] - pas + 1), max(1, pas // 2)):
+            part = float((milieu[i:i + pas, j:j + pas] > 0).mean())
+            if part > best:
+                best, meilleur = part, (i, j)
+    return dict(top=meilleur[0] * facteur, left=meilleur[1] * facteur,
+                part_matiere=best, niveau_cherche=niveau, vue=list(milieu.shape))
+
+
 def _inference(couches: Path, debut: int, taille: int, sortie: Path) -> dict | None:
     code, texte = _lancer(
         ["uv", "run", "python", str(INFERENCE), str(couches), "--model", str(MODELE),
@@ -229,6 +305,45 @@ def mesurer(segment: str, zarr: str, top: int, left: int, taille: int = 512) -> 
         out["etendue_nul"] = nul["maximum"] - nul["minimum"]
         out["rapport_etendue"] = out["etendue_nul"] / max(1e-9, out["etendue_face"])
     return out
+
+
+def _verifier_tous(lots: list[dict]) -> int:
+    """
+    @brief La batterie sur TOUS les segments mesurés, plus ce qui ne se voit qu'en les réunissant.
+
+    ⚠⚠ Un seul segment ne peut pas dire si le résultat est une propriété du détecteur ou un
+    accident de cette fenêtre-là. C'est exactement pourquoi `C2` en demande trois, et pourquoi
+    la batterie doit refuser de conclure sur un.
+    """
+    total = 0
+    for r in lots:
+        print(f"\n=== {r.get('segment')} ===")
+        total += _verifier(r)
+    if len(lots) >= 2:
+        print(f"\net sur les {len(lots)} segments réunis")
+        echecs = 0
+
+        def v(nom, ok, detail=""):
+            nonlocal echecs
+            print(f"  {'ok  ' if ok else 'FAIL'}  {nom}" + (f"   [{detail}]" if detail else ""))
+            if not ok:
+                echecs += 1
+
+        rapports = [x["rapport_etendue"] for x in lots if x.get("rapport_etendue")]
+        sauts = [x["face"]["mediane"] - x["nul"]["mediane"] for x in lots
+                 if x.get("face") and x.get("nul") and not x["face"].get("echec")]
+        # ⚠⚠⚠ LE RESULTAT N'EST UNE PROPRIETE DU DETECTEUR QUE S'IL TIENT SUR TOUS. Ecrit pour
+        # tomber si un segment se comportait autrement -- ce serait alors une propriete de la
+        # FENETRE, et il faudrait chercher laquelle.
+        v("la dispersion ne s'effondre sur AUCUN segment",
+          all(x > 0.8 for x in rapports),
+          " · ".join(f"{x:.2f}" for x in rapports))
+        v("... et le niveau se déplace sur TOUS",
+          all(x > 0.5 for x in sauts), " · ".join(f"{x:+.2f}" for x in sauts))
+        total += echecs
+    print()
+    print(f"  {'ECHEC' if total else 'ALL PASS'} ({total} failures, {len(lots)} segment(s))")
+    return total
 
 
 def _verifier(r: dict | None = None) -> int:
@@ -345,6 +460,8 @@ def main() -> int:
     p.add_argument("--top", type=int, default=11000)
     p.add_argument("--left", type=int, default=15000)
     p.add_argument("--taille", type=int, default=512)
+    p.add_argument("--chercher", action="store_true",
+                   help="chercher la fenêtre la plus pleine au lieu de --top/--left")
     p.add_argument("--rederiver", action="store_true",
                    help="recalculer ce qui se déduit des cartes gardées, sans refaire l'inférence")
     p.add_argument("--verifier", action="store_true")
@@ -363,12 +480,22 @@ def main() -> int:
         return 0
 
     if a.verifier and not a.json:
-        garde = json.loads(DEFAUT_JSON.read_text()) if DEFAUT_JSON.is_file() else None
-        return 1 if _verifier(garde) else 0
+        # ⚠⚠ TOUS LES SEGMENTS MESURÉS, pas seulement le premier. `C2` demande **trois** segments
+        # `w`, et une batterie qui n'en lirait qu'un dirait « le contrôle tient » sur un cas.
+        fichiers = sorted((RACINE / "docs" / "mesures").glob("le_nul_verso*.json"))
+        lots = [json.loads(f.read_text()) for f in fichiers]
+        return 1 if _verifier_tous(lots) else 0
 
     zarr = a.zarr or (f"PHerc0139/segments/{a.segment}/surface-volumes/"
                       "2.399um-0.22m-78keV-volume-20260102150214.zarr")
-    r = mesurer(a.segment, zarr, a.top, a.left, a.taille)
+    top, left = a.top, a.left
+    if a.chercher:
+        f = chercher_fenetre(zarr, a.taille)
+        top, left = f["top"], f["left"]
+        print(f"  fenêtre trouvée : top {top}, left {left} "
+              f"({100 * f['part_matiere']:.0f} % de matière, cherchée au niveau "
+              f"{f['niveau_cherche']})")
+    r = mesurer(a.segment, zarr, top, left, a.taille)
     print(f"{r['segment']} — pile de {r['couches']} couches, pic à {r['pic']}")
     print(f"  fenêtre face : {r['debut_face']}..{r['debut_face'] + COUCHES_LUES}"
           f"   contraste moyen {r['contraste_face']:.3f}")

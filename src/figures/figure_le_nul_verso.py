@@ -203,7 +203,7 @@ def verifier() -> int:
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--mesure", type=Path,
-                   default=RACINE / "docs" / "mesures" / "le_nul_verso.json")
+                   default=RACINE / "docs" / "mesures" / "le_nul_verso_w046.json")
     p.add_argument("--sortie", type=Path,
                    default=RACINE / "docs" / "images" / "75_le_nul_verso.png")
     p.add_argument("--verifier", action="store_true")
