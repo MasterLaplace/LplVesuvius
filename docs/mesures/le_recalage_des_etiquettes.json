@@ -1,0 +1,38 @@
+{
+  "segment": "20250628074500-500P2_front",
+  "recette": "new_canon",
+  "carte_publiee": "PHerc0500P2-20250628074500-2.215um-0.4m-111keV-volume-20250526151718-20260417190342-new_canon_autoresearch_recipe-tile256-stride128-ds8.jpg",
+  "forme_etiquettes": [
+    27160,
+    14990
+  ],
+  "forme_empreinte": [
+    3305,
+    1883
+  ],
+  "transformation": {
+    "echelle_lignes": 0.12093023255813953,
+    "echelle_colonnes": 0.1286039751747977,
+    "decalage_lignes": 11.441860465116292,
+    "decalage_colonnes": -45.81946735800142,
+    "boite_source": [
+      1460,
+      25970,
+      1476,
+      14205
+    ],
+    "boite_cible": [
+      188,
+      3152,
+      144,
+      1781
+    ]
+  },
+  "dice_avant": 0.9728212351765531,
+  "dice_apres": 0.9746014099679134,
+  "part_encre": 0.06550835527672964,
+  "pixels_encre": 256266,
+  "pixels_fond": 3655693,
+  "auc_carte_publiee": 0.7561408082175937,
+  "auc_temoin_melange": 0.49994262089579317
+}
