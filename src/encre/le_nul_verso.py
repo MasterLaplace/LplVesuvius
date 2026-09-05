@@ -73,6 +73,25 @@ sur exactement le même corpus.
 ⚠ Ils partagent le rouleau, la campagne de scan et la taille de voxel : ce qui varie d'un à
 l'autre est la région, ce qui est précisément la chose qu'on veut faire varier."""
 
+REGIMES = {
+    "production": "2.399um-0.22m-78keV-volume-20260102150214.zarr",
+    "prix": "9.362um-1.2m-113keV-volume-20250728140407.zarr",
+}
+"""Les deux piles publiées de chaque segment `w` de `PHerc0139`, par régime d'imagerie.
+
+⚠⚠⚠ CE N'EST PAS UN CONFORT : LES DEUX RÉGIMES NE LISENT PAS LA MÊME PROFONDEUR. Le modèle
+mange **26 couches** quoi qu'il arrive, donc l'épaisseur qu'il voit est le produit du compte par
+la taille de voxel : **62 µm** en production (2,399 µm) contre **243 µm** au régime du prix
+(9,362 µm), là où l'entraînement en voyait **206**. Le régime du prix est donc, sur ce point
+précis, **celui qui ressemble à l'entraînement** — et c'est le contraire de ce qu'on attend d'un
+scan de repérage.
+
+⭐⭐ Et la pile du régime du prix est **publiée sans carte d'encre** sur ces trois segments
+(`68` §4, `la_case_vide.py`) : la mesurer remplit une des 103 cases vides du corpus.
+
+⚠ Les clefs sont les mêmes pour les trois segments (même volume source), vérifié dans
+`data/metadata.min.json` ; un segment dont le volume différerait demanderait `--zarr`."""
+
 COUCHES_LUES = 26
 """Ce que le détecteur GP-2023 lit d'une pile (`12` §1, `09` §12). ⚠ C'est une propriété du
 modèle, pas un réglage : les deux fenêtres doivent en lire **le même nombre**, sinon on
@@ -691,7 +710,9 @@ def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--segment", default="20260325000000-w046_20260325")
     p.add_argument("--zarr", default=None,
-                   help="clef du surface-volume ; déduite du segment par défaut")
+                   help="clef du surface-volume ; déduite du segment et du régime par défaut")
+    p.add_argument("--regime", default="production", choices=sorted(REGIMES),
+                   help="production = 2,399 µm (62 µm lus) ; prix = 9,362 µm (243 µm lus)")
     p.add_argument("--top", type=int, default=11000)
     p.add_argument("--left", type=int, default=15000)
     p.add_argument("--taille", type=int, default=512)
@@ -754,7 +775,7 @@ def main() -> int:
         return 1 if _verifier_tous(lots) else 0
 
     zarr = a.zarr or (f"PHerc0139/segments/{a.segment}/surface-volumes/"
-                      "2.399um-0.22m-78keV-volume-20260102150214.zarr")
+                      f"{REGIMES[a.regime]}")
     top, left = a.top, a.left
     if a.chercher:
         f = chercher_fenetre(zarr, a.taille)
@@ -763,7 +784,13 @@ def main() -> int:
               f"({100 * f['part_matiere']:.0f} % de matière, cherchée au niveau "
               f"{f['niveau_cherche']})")
     _verrou = prendre_le_verrou()  # noqa: F841 — relâché à la mort du processus
-    r = mesurer(a.segment, zarr, top, left, a.taille)
+    # ⚠⚠ L'ÉTIQUETTE DU RÉGIME VOYAGE JUSQU'AUX CARTES. Sans elle, une campagne au régime du
+    # prix écraserait les `.npy` de la campagne en production : deux profondeurs sous un seul
+    # nom, et la figure en mélangerait une de chaque sans que rien ne le dise.
+    etiquette = a.segment if a.regime == "production" else f"{a.segment}-{a.regime}"
+    r = mesurer(etiquette, zarr, top, left, a.taille)
+    r["regime"] = a.regime
+    r["segment_source"] = a.segment
     print(f"{r['segment']} — pile de {r['couches']} couches, pic à {r['pic']}")
     print(f"  fenêtre face : {r['debut_face']}..{r['debut_face'] + COUCHES_LUES}"
           f"   contraste moyen {r['contraste_face']:.3f}")
