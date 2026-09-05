@@ -1883,6 +1883,95 @@ publié dépendrait de la patience de qui le rejoue.
 > Ce qu'il reste à mesurer est la seule chose qui décide : **est-ce que l'erreur cesse de
 > s'accumuler**, ou est-ce qu'elle s'accumule seulement plus lentement.
 
+#### ⭐⭐⭐ Et à l'ITÉRATION, le raccrochage PAR POINT perd — c'est un décalage UNIQUE qui déroule
+
+> Mesure : `src/nappe/derouler_en_raccrochant.py` (39 contrôles) →
+> `docs/mesures/derouler_en_raccrochant.json`. Figure :
+> `src/figures/figure_derouler_en_raccrochant.py` (12 contrôles), le 2026-09-06.
+>
+> ```
+> uv run python src/nappe/derouler_en_raccrochant.py --json docs/mesures/derouler_en_raccrochant.json
+> uv run python src/figures/figure_derouler_en_raccrochant.py --sortie docs/images/75_derouler_en_raccrochant.png
+> ```
+
+⚠⚠⚠ **Les deux nombres précédents ne se composent pas.** Un dérouleur aveugle perd la feuille au
+tour 2 et dérive de 53 µm par tour ; un raccrochage reprend un tiers de l'erreur sur **un** pas.
+Rien ne dit si, enchaîné, il **arrête** la dérive ou la ralentit seulement. Cette tranche enchaîne
+les pas et regarde laquelle des deux choses arrive.
+
+![le raccrochage gagne un pas et perd la marche](images/75_derouler_en_raccrochant.png)
+
+⚠⚠ **Le gabarit vient de la surface COURANTE, pas des spires publiées.** Au tour `k` le dérouleur
+n'a plus la spire `k` sous les pieds : il a sa propre reconstruction. C'est la seule version
+honnête, et c'est aussi celle qui peut échouer d'une façon qu'aucune autre ne peut — **un gabarit
+dit « je suis sur une feuille », jamais « je suis sur la BONNE feuille »**.
+
+| tour | cell. | par point | accordé | fenêtre étroite | **GLOBAL** | aveugle | hasard | rugosité | perdues |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 141 | **28 µm** | 28 | 68 | 78 | 49 | 80 | 5 µm | 0,34 |
+| 2 | 99 | 57 | 52 | 57 | 74 | **28** | 54 | 19 µm | 0,41 |
+| 3 | 62 | 79 | 77 | 73 | **35** | 59 | 105 | 24 µm | 0,61 |
+| 4 | 33 | 113 | 116 | 136 | **26** | 83 | 209 | 25 µm | 0,67 |
+
+⛔⛔ **Le raccrochage par point est le MEILLEUR au premier tour et le PIRE au quatrième.** Sa dérive
+vaut **+27,8 µm par tour** contre 13,3 pour l'aveugle : il dérive **deux fois plus vite** que ne
+rien lire du tout. Et il le fait en ayant l'air de gagner — au tour 1 sa médiane est deux fois
+meilleure, pendant que **34 % de ses cellules sont déjà au-delà d'une demi-feuille**.
+
+⚠⚠⚠ **Deux remèdes essayés, deux réfutés, chacun ne cassant qu'une chose.** L'accord des voisins
+(médiane du voisinage 3×3) : **+28,9 µm par tour**, rien. Une fenêtre deux fois plus étroite, qui
+rend le saut sur la feuille voisine impossible : **+22,0**, et elle sacrifie le premier tour
+(68 µm au lieu de 28). ⚠ Et le groupement des perdues a **inversé mon hypothèse** : celles du
+raccrochage par point sont à peine groupées (rapport 1,94 puis 1,1) quand celles de l'aveugle le
+sont fortement (**7,67**). Le raccrochage échange donc une erreur **cohérente** contre une erreur
+**éparpillée** — et à 34 % puis 67 % de cellules fausses, une médiane de neuf est très au-delà de
+son point de rupture.
+
+> ⭐⭐⭐ **Ce qui déroule est un décalage UNIQUE par tour.** Même gabarit, même fenêtre, même forme
+> cherchée : seul le nombre de décisions change — **une** au lieu de cent quarante et une, en
+> maximisant la corrélation **sommée** sur toute la nappe. Sa dérive est **négative, −19,5 µm par
+> tour** : l'erreur **descend**. Au dernier tour il rend **26,2 µm**, p90 **40,3**, et
+> **0 % de cellules au-delà d'une demi-feuille** — quand l'aveugle en a 82 % et le par-point 67 %.
+> **C'est le seul des six qui tienne encore la feuille à la fin.**
+
+⭐⭐⭐ **Et ce n'est PAS une longueur de pas corrigée déguisée** — le doute est fermé par le signe.
+Un décalage global toujours du même côté ne serait qu'une longueur de pas ajustée, et ce dépôt a
+déjà mesuré ce que celle-là vaut : **54,1 µm** sur des paires réservées. Les décalages signés valent
+**−31,2 · −42,4 · −10,5 · +12,5 µm** : ils **changent de signe**, donc le raccrochage corrige tour
+par tour au lieu d'une fois pour toutes. ⭐ Et leur médiane correspond à un pas de **114,7 µm**, à
+six micromètres de la longueur **ajustée sur les cibles** (108,4 µm) que la tranche précédente avait
+trouvée par un tout autre chemin — un dérouleur qui ne voit jamais sa cible retombe sur le même
+nombre.
+
+⭐⭐ **Et c'est la leçon de C1, rejouée sur un autre objet.** `le_residu_est_une_translation` avait
+montré qu'un « champ » de recalage estimé fenêtre par fenêtre était en réalité **une constante**, et
+que l'estimer par morceaux n'ajoutait que du bruit. Ici la constante est un décalage par tour, et la
+rugosité mesure le bruit qu'on s'ajoutait : le champ par point ride la nappe de **5 à 25 µm**, un
+décalage unique ne la ride pas du tout — zéro par construction.
+
+⚠ **Ce que cette tranche ne dit pas.** Quatre tours seulement, et la grille fond de **191 à 33**
+cellules (une normale demande quatre voisins valides, donc le masque s'érode d'une cellule par tour
+sur tout son pourtour). La marche s'arrête **sous 30 cellules**, sur un critère déclaré d'avance :
+une médiane sur deux cellules n'est pas une mesure. La descente du décalage global porte donc sur
+**quatre points**, et le confirmer demande une boîte plus large — c'est-à-dire du volume à
+télécharger, pas une idée de plus.
+
+⚠ Le pas aveugle de ce fichier **est** celui du dérouleur publié : `raccrocher=False` traverse le
+même code, et la batterie vérifie l'égalité **au bit près** avec `derouler_par_le_pas_normal.un_pas`.
+Deux implémentations d'un même geste finiraient par ne pas s'accorder, et la comparaison porterait
+sur leur désaccord.
+
+⚠ Deux défauts de méthode de cette tranche, tous deux miens : mon premier témoin de rugosité
+**ne pouvait pas échouer** — sur un volume parfaitement uniforme, un gabarit mélangé rend le *même*
+décalage faux partout, donc rugosité nulle des deux côtés ; il a fallu un bruit qui varie **le long
+de la ligne**, parce que la corrélation retire la moyenne de chaque segment et qu'un décalage
+constant par colonne ne la déplace pas. Et le verdict imprimé ne nommait **pas son contendant** : il
+annonçait « la dérive n'est pas arrêtée » au moment même où le décalage global la faisait descendre.
+
+> ⭐⭐⭐ **La tranche qui suit est nommée par ce résultat** : élargir la boîte pour porter la marche
+> au-delà de quatre tours, et voir si le décalage unique tient sur une dizaine. Le coût est connu et
+> il est en mébioctets, pas en idées.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est
