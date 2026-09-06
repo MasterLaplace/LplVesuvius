@@ -2699,7 +2699,12 @@ les sépare en confrontant les deux choix **sur les mêmes cellules** : 7 paires
 reste à zéro. ⚠ Mais **0,076 de corrélation, c'est un demi pour cent de variance** : elle voit
 très peu, et son choix n'est que marginalement plus proche du bon que **ne pas bouger du tout**.
 
-##### ⭐⭐⭐ Et le fait contre-intuitif : son déplacement d'ENSEMBLE nuit
+##### ~~⭐⭐⭐ Et le fait contre-intuitif : son déplacement d'ENSEMBLE nuit~~ — RETRACTÉ
+
+> ⚠⚠⚠ **Ce qui suit est conservé pour la preuve, et le verdict est retiré.** Les nombres de ce
+> tableau sont des **différences de médianes** ; l'écart apparié dit **+1,0 µm avec un intervalle
+> qui enjambe zéro**. Voir [la rétraction](#-retraction-partielle-de-cette-tranche--trois-de-ses-quatre-affirmations-ne-survivent-pas-à-lappariement)
+> plus bas. Ce qui tient : la lecture **par cellule** bat sa propre médiane, apparié compris.
 
 | | erreur médiane |
 |---|---:|
@@ -2710,7 +2715,7 @@ très peu, et son choix n'est que marginalement plus proche du bon que **ne pas 
 | gabarit mélangé | 52,9 |
 | *oracle (même fenêtre)* | *19,8* |
 
-> ⭐⭐⭐ **Le déplacement d'ensemble que le raccrochage trouve est NUISIBLE** : sa médiane
+> ~~⭐⭐⭐ **Le déplacement d'ensemble que le raccrochage trouve est NUISIBLE**~~ ⛔ RETRACTÉ : sa médiane
 > appliquée partout rend **47,5 µm** contre 42,7 en ne bougeant pas, soit **−4,8**. C'est sa
 > lecture **par cellule** qui reprend tout et le fait descendre à 37,1 — elle bat sa propre
 > médiane sur **4 paires sur 7**. Ce n'était pas l'hypothèse : on aurait attendu qu'une
@@ -2723,9 +2728,13 @@ mesurablement meilleure que le bruit dans ce qu'elle **choisit**, pas encore dan
 ##### ⭐⭐ Ce que ça tranche
 
 > ⭐⭐⭐ **La géométrie ne refuse RIEN.** L'oracle prend **22,9 µm** dans la même fenêtre, avec les
-> mêmes points et les mêmes directions. Le raccrochage n'en prend que **24 %**. Ce n'est donc pas
-> la borne qui est illusoire — **c'est la lecture qui est le chantier**, et les trois quarts du
-> poste attendent.
+> mêmes points et les mêmes directions. Ce n'est donc pas la borne qui est illusoire — **c'est la
+> lecture qui est le chantier**.
+>
+> ⭐⭐ **C'est la seule affirmation de cette tranche que l'appariement RENFORCE** : −23,8 µm sur
+> **sept pas sur sept**, intervalle [−25,2 ; −21,1]. Là où tout gain du raccrochage s'évanouit dès
+> qu'on apparie, celui de sa borne ne bouge pas — le chantier n'est pas aux trois quarts ouvert,
+> il l'est **entier**.
 
 ⚠ Un défaut de dessin attrapé par la figure elle-même : une barre **négative** — l'accord du
 mélange, précisément ce qu'on veut montrer — faisait **lever** PIL, qui exige que le coin haut
@@ -2737,8 +2746,11 @@ Son déplacement d'ensemble étant nuisible, le premier geste n'est pas de lire 
 **retirer le biais** : le même raccrochage, sa lecture par cellule intacte, son décalage médian
 soustrait.
 
-> ⭐ **Ça marche : 37,1 → 36,5 µm, sur 5 paires sur 7.** C'est le premier gain que cette campagne
-> obtienne en **changeant** quelque chose plutôt qu'en mesurant une borne.
+> ⭐ **Ça marche, et c'est l'une des deux affirmations qui SURVIVENT à l'appariement** :
+> **−1,5 µm, 5 pas sur 7, intervalle [−6,0 ; −1,1]** entièrement négatif. La différence de
+> médianes annonçait 0,6 µm ; l'écart apparié, qui est le bon instrument ici, en donne 1,5.
+> C'est le premier gain que cette campagne obtienne en **changeant** quelque chose plutôt qu'en
+> mesurant une borne — et il tient.
 
 ⚠⚠ **Mais il vaut 0,6 µm et non les 4,8 que j'avais annoncés**, et la correction est faite avant
 publication parce que la mesure a précédé la phrase. « Sa médiane seule coûte 4,8 µm » et « son
@@ -2748,12 +2760,174 @@ lecture par cellule. Le biais et la lecture ne s'additionnent pas.
 
 > ⭐⭐⭐ **Ce que cette tranche laisse à la suivante.** Pour la première fois la campagne désigne un
 > **chantier** plutôt qu'une porte fermée : améliorer ce que le raccrochage **lit**. Le geste
-> gratuit — retirer son biais — est pris et vaut 0,6 µm ; il reste **16,7 µm** entre le
-> raccrochage centré (36,5) et l'oracle (19,8), dans la même fenêtre et sur les mêmes cellules.
-> Et la mesure dit où chercher : avec ρ = 0,076, ce que la corrélation de gabarit choisit n'a
-> presque rien à voir avec le bon décalage. La question suivante porte donc sur le **gabarit
-> lui-même** — lu sur une seule spire, sur une largeur d'un quart de pas, et jamais comparé à ce
-> qu'un gabarit lu ailleurs, ou plus large, donnerait.
+> gratuit — retirer son biais — est pris ; il reste l'essentiel de l'écart entre le raccrochage et
+> l'oracle, dans la même fenêtre et sur les mêmes cellules. Et la mesure dit où chercher : avec
+> ρ = 0,076, ce que la corrélation de gabarit choisit n'a presque rien à voir avec le bon décalage.
+> La question suivante porte donc sur le **gabarit lui-même** — lu sur une seule spire, sur une
+> largeur d'un quart de pas, et jamais comparé à ce qu'un gabarit lu ailleurs, ou plus large,
+> donnerait.
+
+#### ⚠⚠⚠ RETRACTION PARTIELLE DE CETTE TRANCHE — trois de ses quatre affirmations ne survivent pas à l'appariement
+
+> 2026-09-06, en construisant `le_gabarit_lu_ailleurs`. Instrument :
+> `src/commun/lecart_apparie.py` (9 contrôles). Mesure re-lancée :
+> `src/nappe/le_raccrochage_choisit_il_bien.py` (21 contrôles).
+
+**Le défaut est un choix d'instrument, pas un calcul faux.** Cette tranche comparait des méthodes
+par la **différence de leurs médianes**. Or sur les sept pas de la boîte, **ne rien faire coûte de
+32,2 à 73,9 µm selon le pas** : la dispersion d'un pas à l'autre vaut **quatre fois** l'écart entre
+deux méthodes. Une différence de médianes s'y fait donc décider par le tirage des pas.
+
+Les mêmes six questions, reprises **pas par pas** — chaque écart avec son intervalle quand
+n'importe quel pas sort :
+
+| comparaison | écart apparié | pas améliorés | à un pas de moins | verdict |
+|---|---:|---:|---|---|
+| raccroché contre **ne pas bouger** | **−1,2 µm** | 4/7 | [−5,2 ; +2,5] | ⛔ ne tranche pas |
+| son **biais retiré** contre raccroché | **−1,5 µm** | 5/7 | [−6,0 ; −1,1] | ✅ **tranche** |
+| raccroché contre son **mélange** | +0,1 µm | 3/7 | [−3,2 ; +5,8] | ⛔ ne tranche pas |
+| raccroché contre **sa propre médiane** | **−2,0 µm** | 4/7 | [−4,0 ; −1,0] | ✅ **tranche** |
+| **sa médiane seule** contre ne rien faire | +1,0 µm | 3/7 | [−1,1 ; +5,8] | ⛔ ne tranche pas |
+| ⭐⭐ **l'ORACLE** contre ne pas bouger | **−23,8 µm** | **7/7** | [−25,2 ; −21,1] | ✅✅ **tranche** |
+
+⛔ **Ce qui tombe** : le gain de **5,6 µm** du raccrochage sur l'immobilité — l'écart apparié vaut
+−1,2 µm et son intervalle enjambe zéro ; et la **nuisance de son déplacement d'ensemble**
+(−4,8 µm annoncés), dont l'écart apparié vaut **+1,0 µm** avec un intervalle qui enjambe zéro
+lui aussi. Les deux nombres restent dans le fichier de mesure : **retirer un nombre publié
+effacerait la preuve de sa propre correction.**
+
+✅ **Ce qui tient, et le motif est cohérent** : les deux comparaisons qui survivent sont exactement
+celles qui confrontent le raccrochage à **une variante de lui-même sur les mêmes cellules** — sa
+lecture par cellule bat sa propre médiane (−2,0 µm, intervalle entièrement négatif), et retirer son
+biais améliore (−1,5 µm, idem). Elles sont **appariées par construction** ; les trois qui tombent
+ne l'étaient pas.
+
+> ⭐⭐⭐ **Et la conclusion de la tranche sort RENFORCÉE, pas affaiblie.** « La géométrie ne refuse
+> rien » repose sur l'avance de l'oracle : **−23,8 µm, sept pas sur sept, intervalle entièrement
+> négatif**. C'est le résultat le plus solide de toute la campagne de déroulage. Là où tout gain du
+> raccrochage s'évanouit dès qu'on apparie, celui de sa borne ne bouge pas — **le chantier de la
+> lecture n'est pas seulement ouvert, il est entier**.
+
+⚠⚠ **Et la règle que ce dépôt s'était donnée en prose est devenue un calcul.** « Un verdict qui
+change avec la population n'est pas un verdict » était écrit depuis des semaines ; à sept cas, on
+ne le respecte qu'en le **mesurant**. `lecart_apparie.tranche` exige donc trois choses, dont
+aucune n'est un seuil : l'écart médian négatif, la **majorité** des cas améliorés, et l'intervalle
+à un cas de moins **entièrement** négatif.
+
+#### ⭐⭐⭐ LE GABARIT LUI-MÊME, MIS EN QUESTION — seize formes, et la meilleure vaut 0,9 µm
+
+> Mesure : `src/nappe/le_gabarit_lu_ailleurs.py` (49 contrôles) →
+> `docs/mesures/le_gabarit_lu_ailleurs.json`. Figure :
+> `src/figures/figure_le_gabarit_lu_ailleurs.py` (23 contrôles), le 2026-09-06.
+>
+> ```bash
+> uv run python src/nappe/le_gabarit_lu_ailleurs.py --cote 640 \
+>     --json docs/mesures/le_gabarit_lu_ailleurs.json
+> uv run python src/figures/figure_le_gabarit_lu_ailleurs.py \
+>     --sortie docs/images/75_le_gabarit_lu_ailleurs.png
+> ```
+
+Le raccrochage cherche une **forme**, et cette forme n'avait jamais été mise en question : lue sur
+**une seule spire** — celle du départ — sur une demi-largeur d'**un quart de pas**, et jamais
+comparée à rien. Seize formes sont balayées : **quatre demi-largeurs** (8, 15, 31, 61 voxels,
+dérivées de la demi-feuille de 30,59 et non choisies — la valeur en service est l'un des barreaux)
+× **quatre sources** — la spire de **départ**, la plus **ancienne déjà atteinte**, la **moyenne**
+de toutes celles déjà déroulées, et ⛔ celle d'**arrivée**, qui n'existe pas en production et sert
+de **borne**.
+
+![le gabarit lu ailleurs](images/75_le_gabarit_lu_ailleurs.png)
+
+⚠⚠ **Deux propriétés rendent le balayage honnête, et sans elles il mesurerait autre chose.** La
+**fenêtre de recherche est invariante** : `correler` ne rend que les positions où le gabarit tient
+entier, donc les centres balayés valent toujours ±une demi-feuille quelle que soit la largeur —
+sans quoi une forme large gagnerait en visant des décalages que les autres ne peuvent pas
+atteindre. Et **toutes sont jugées sur les mêmes cellules** : la ligne la plus longue est lue
+**une fois** et chaque largeur en est une tranche centrée, sinon un gabarit large écarterait plus
+de cellules et l'on comparerait des populations.
+
+##### ⚠⚠⚠ Le témoin LIT — et il fait même mieux que la vraie forme
+
+**Neuf des seize gabarits MÉLANGÉS s'accordent positivement avec l'oracle**, et à demi-largeur 31
+le mélange obtient **+0,192 contre +0,175** pour la forme qu'il détruit. Ce n'est pas un défaut :
+une ligne qui traverse des feuilles est **périodique**, donc n'importe quel vecteur fixe y trouve
+ses maxima aux mêmes phases. Comparer les accords **bruts** créditerait donc une forme large pour
+ce que son propre mélange lit aussi bien — ce que la première version de cette mesure a failli
+publier. Chaque forme est désormais jugée sur son accord **net de son propre mélange**.
+
+##### ⭐⭐ La forme en service ne bat pas l'immobilité — et une autre, si
+
+| forme | accord NET | contre ne rien faire | contre le déployé |
+|---|---:|---|---|
+| **en service** — 15 vx / départ | +0,176 | −0,4 µm, 3/6, [−1,1 ; +0,3] ⛔ | 0 |
+| meilleure **lecture** — 8 vx / départ | **+0,196** | −1,1 µm, 3/6, [−3,9 ; +1,7] ⛔ | **+2,8 µm** (pire) |
+| ⭐ meilleure **marche** — 8 vx / **ailleurs** | +0,054 | **−2,2 µm, 4/6, [−2,8 ; −1,7]** ✅ | **−0,9 µm, 4/6, [−1,7 ; −0,1]** ✅ |
+| ⛔ borne — 15 vx / arrivée | +0,057 | −1,4 µm, 3/6, [−3,1 ; +0,3] ⛔ | −0,2 µm, [−1,4 ; +1,1] ⛔ |
+
+> ⭐⭐⭐ **Un gabarit deux fois plus étroit, lu sur une spire ANTÉRIEURE, est la seule des seize à
+> trancher sur les deux comparaisons** : −0,9 µm contre la forme en service et −2,2 µm contre
+> l'immobilité, sur 4 pas sur 6, intervalles entièrement négatifs. C'est petit, et c'est le
+> premier gain de forme que la campagne obtienne qui survive à l'appariement.
+
+⚠⚠ **Et les deux critères se contredisent, ce qui est le second résultat.** La forme qui **lit** le
+mieux (8 vx / départ, net 0,196) **marche** plus mal que celle en service (+2,8 µm). Un accord de
+rang est **invariant d'échelle** : mieux **ordonner** les décalages n'est pas mieux **marcher**.
+Publier un seul des deux critères aurait fait passer ce désaccord pour un accord.
+
+##### ⛔ La famille des gabarits est pauvre, et la borne le prouve
+
+Le gabarit de la spire d'**arrivée** — celui qu'on ne peut pas avoir, puisque l'arrivée est ce que
+la marche calcule — **ne lit pas mieux** (2 pas sur 6) et **ne marche pas mieux de façon
+décidable** (−0,2 µm, intervalle [−1,4 ; +1,1]).
+
+> ⛔ **Même parfaite, la forme ne rend presque rien.** Le meilleur gain de toute la famille vaut
+> **0,9 µm** sur les **30,7** qui séparent le déployé de l'oracle. Ce qui manque à la lecture
+> n'est donc **ni la forme cherchée, ni où on l'apprend**.
+
+##### ⚠⚠ Le remède évident, mesuré puis REFUTÉ
+
+Un accord de rang étant invariant d'échelle, l'explication naturelle du désaccord entre les deux
+critères est l'**amplitude** : une forme qui choisit des décalages mal calibrés garde son rang et
+paie son coût. Mesuré : la forme en service choisit une amplitude **0,856×** celle de l'oracle.
+Recaler par un facteur unique, **ajusté hors échantillon** — chaque pas jugé au facteur que les
+**autres** pas ont préféré —, **coûte 4,0 µm**.
+
+⚠ L'ajustement hors échantillon n'est pas une précaution décorative : soixante-trois facteurs
+essayés sur les pas qui les jugent garantissent qu'un tombe bien. Le contrôle qui l'impose est
+construit pour **discriminer** — un cas dont l'optimum est à l'opposé de celui des autres doit
+recevoir le facteur des autres, pas le sien.
+
+##### ⚠⚠⚠ Et la limite est COMPTÉE plutôt que déplorée
+
+La raison pour laquelle ces écarts sont si petits par rapport à leurs intervalles est mesurée :
+
+| côté de boîte | spires lisibles | pas complets |
+|---:|---:|---:|
+| 640 vx (publié) | 9 | **6** |
+| 960 vx | 10 | **8** |
+| 1280 vx | 10 | 8 |
+| 1920 vx | 10 | 8 |
+
+> ⚠⚠⚠ **Élargir la fenêtre plafonne à huit pas.** Ce qui borne la campagne n'est donc **pas la
+> boîte** mais le **nombre de spires segmentées** dans cette région. À six ou huit pas, un écart
+> de quelques micromètres ne se distingue pas de la dispersion entre pas — et c'est exactement ce
+> que la rétraction ci-dessus a montré. Le prochain gain de résolution de mesure ne vient pas d'un
+> réglage : il vient de **plus de spires**.
+
+⚠ **Un vrai défaut attrapé en relisant les spires lues** : la source « ailleurs » était écrite
+comme « la plus ancienne spire **autre que le départ** », ce qui rendait la spire **5** pour le pas
+4 → 5, c'est-à-dire **exactement la surface que la marche cherche**, dans une variante annoncée
+disponible en production. La règle est désormais la même que pour la moyenne — rien au-delà du
+départ — et le premier pas de la boîte, qui n'a alors aucun candidat, est **écarté entier et
+compté** plutôt que servi par une source qui triche.
+
+> ⭐⭐⭐ **Ce que cette tranche laisse à la suivante.** Le chantier de la lecture reste **entier** —
+> l'oracle prend 23,8 µm sur sept pas sur sept — et trois portes viennent de se fermer dessus : ce
+> n'est ni la **forme** cherchée (16 variantes, la meilleure vaut 0,9 µm), ni **où** on l'apprend
+> (une spire ancienne fait aussi bien qu'une spire parfaite), ni l'**amplitude** de ce qu'elle
+> choisit (le recalage coûte). Ce qui n'a pas été mis en question, c'est le **critère** : une
+> corrélation normalisée d'intensité, cellule par cellule et sans voisinage — alors que
+> `le_raccrochage_a_la_matiere` possède déjà `accorder_les_voisins`, que ces deux tranches
+> **n'utilisent pas**. Et il faudra le juger sur **huit pas**, pas six.
 
 ### C2 ⭐ — le nul verso (H7)
 

@@ -5620,6 +5620,75 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Un défaut de dessin attrapé par la figure : une barre **négative** — l'accord du mélange,
     précisément ce qu'on veut montrer — faisait **lever** PIL, qui exige que le coin haut d'un
     rectangle vienne en premier.
+  - ⚠⚠⚠ **RETRACTION PARTIELLE, le 2026-09-06, par un instrument construit après coup**
+    (`src/commun/lecart_apparie.py`, 9 contrôles ; mesure relancée, 21 contrôles). Cette tranche
+    comparait des méthodes par la **différence de leurs médianes**, alors que sur ces sept pas
+    **ne rien faire coûte de 32,2 à 73,9 µm selon le pas** : la dispersion entre pas vaut
+    **quatre fois** l'écart entre méthodes, donc une différence de médianes s'y fait décider par
+    le tirage des pas. Repris **pas par pas**, avec pour chaque écart l'intervalle obtenu quand
+    n'importe quel pas sort :
+  - ⛔ **Ce qui tombe** : le gain de **5,6 µm** sur l'immobilité (apparié **−1,2 µm**, 4/7,
+    [−5,2 ; +2,5]) ; la **nuisance du déplacement d'ensemble** de −4,8 µm (apparié **+1,0 µm**,
+    3/7, [−1,1 ; +5,8]) ; et l'avance sur le mélange (+0,1 µm, [−3,2 ; +5,8]). Les nombres restent
+    dans le fichier de mesure — **retirer un nombre publié effacerait la preuve de sa propre
+    correction**.
+  - ✅ **Ce qui tient, et le motif est cohérent** : sa lecture **par cellule** bat sa propre
+    médiane (**−2,0 µm**, 4/7, [−4,0 ; −1,0]) et **retirer son biais** améliore (**−1,5 µm**, 5/7,
+    [−6,0 ; −1,1]). Ce sont exactement les deux comparaisons du raccrochage à **une variante de
+    lui-même sur les mêmes cellules** — appariées par construction ; les trois qui tombent ne
+    l'étaient pas.
+  - ⭐⭐⭐ **Et la conclusion sort RENFORCÉE** : « la géométrie ne refuse rien » repose sur l'avance
+    de l'oracle, qui vaut **−23,8 µm sur SEPT pas sur sept**, intervalle [−25,2 ; −21,1]. C'est le
+    résultat le plus solide de toute la campagne de déroulage : le chantier de la lecture n'est
+    pas aux trois quarts ouvert, il l'est **entier**.
+  - ⚠⚠ **La règle du dépôt est devenue un calcul.** « Un verdict qui change avec la population
+    n'est pas un verdict » était écrit en prose depuis des semaines ; à sept cas on ne le respecte
+    qu'en le **mesurant**. `lecart_apparie.tranche` exige trois choses, dont aucune n'est un
+    seuil : écart médian négatif, **majorité** des cas améliorés, et intervalle à un cas de moins
+    **entièrement** négatif.
+  - ⛔ **LE GABARIT LUI-MÊME NE REND PRESQUE RIEN (2026-09-06, `le_gabarit_lu_ailleurs`,
+    49 contrôles, 6 pas, 2400 cellules, 16 formes).** La forme cherchée par le raccrochage n'avait
+    jamais été mise en question : lue sur **une seule spire**, sur **un quart de pas** de
+    demi-largeur, jamais comparée à rien. Seize formes balayées — 4 demi-largeurs (8, 15, 31, 61
+    voxels, **dérivées** de la demi-feuille, la valeur en service étant l'un des barreaux) ×
+    4 sources (départ, la plus **ancienne déjà atteinte**, la **moyenne** des déroulées, et ⛔
+    l'**arrivée**, qui n'existe pas en production et sert de **borne**).
+  - ⚠⚠ **Deux propriétés rendent le balayage honnête** : la **fenêtre de recherche est
+    invariante** avec la largeur (`correler` ne rend que les positions où le gabarit tient
+    entier), et **toutes les formes sont jugées sur les mêmes cellules** — la ligne la plus longue
+    est lue une fois et chaque largeur en est une tranche centrée. Sans elles, le balayage
+    comparerait des fenêtres et des populations.
+  - ⚠⚠⚠ **Le témoin LIT** : **9 des 16 gabarits mélangés** s'accordent positivement avec l'oracle,
+    et à demi-largeur 31 le mélange fait **+0,192 contre +0,175** pour la forme qu'il détruit. Une
+    ligne qui traverse des feuilles est **périodique**, donc tout vecteur fixe y trouve ses maxima
+    aux mêmes phases. Chaque accord est donc publié **net de son propre mélange** — sans quoi une
+    forme large serait couronnée pour ce que son mélange lit aussi bien.
+  - ⭐⭐ **Un gain, petit et réel** : un gabarit **deux fois plus étroit lu sur une spire
+    ANTÉRIEURE** (8 vx / ailleurs) est la seule des seize à trancher sur les deux comparaisons —
+    **−0,9 µm** contre la forme en service et **−2,2 µm** contre l'immobilité, 4 pas sur 6,
+    intervalles entièrement négatifs. ⚠ La forme **en service**, elle, ne tranche **pas** contre
+    l'immobilité (−0,4 µm, [−1,1 ; +0,3]).
+  - ⚠⚠ **Les deux critères se contredisent**, et c'est le second résultat : la forme qui **lit** le
+    mieux (8 vx / départ, net +0,196) **marche** plus mal que celle en service (+2,8 µm). Un accord
+    de rang est **invariant d'échelle** — mieux **ordonner** n'est pas mieux **marcher**.
+  - ⛔ **Et la borne ferme la famille** : le gabarit de la spire d'**arrivée**, celui qu'on ne peut
+    pas avoir, **ne lit pas mieux** (2/6) et **ne marche pas mieux de façon décidable** (−0,2 µm,
+    [−1,4 ; +1,1]). Le meilleur gain de toute la famille vaut **0,9 µm** sur les **30,7** qui
+    séparent le déployé de l'oracle : ce qui manque à la lecture n'est **ni la forme, ni où on
+    l'apprend**.
+  - ⚠⚠ **Le remède évident, mesuré puis REFUTÉ** : la forme en service choisit une amplitude
+    **0,856×** celle de l'oracle ; recaler par un facteur unique **ajusté hors échantillon**
+    **coûte 4,0 µm**. L'ajustement hors échantillon n'est pas décoratif — soixante-trois facteurs
+    essayés sur les pas qui les jugent garantissent qu'un tombe bien.
+  - ⚠⚠⚠ **La limite est COMPTÉE plutôt que déplorée** : 640 vx → **6 pas**, 960 vx → **8**,
+    1280 vx → 8, 1920 vx → 8. **Élargir la fenêtre plafonne à huit pas**, donc ce qui borne la
+    campagne n'est pas la boîte mais le **nombre de spires segmentées**. Le prochain gain de
+    résolution de mesure ne vient pas d'un réglage, il vient de **plus de spires**.
+  - ⚠ **Une fuite attrapée en relisant les spires lues** : la source « ailleurs », écrite comme
+    « la plus ancienne spire **autre que le départ** », rendait la spire 5 pour le pas 4 → 5 —
+    c'est-à-dire **la surface que la marche cherche**, dans une variante annoncée disponible en
+    production. Corrigée (rien au-delà du départ) ; le premier pas de la boîte, sans candidat, est
+    **écarté entier et compté**.
   - ⛔ **L'ÉCART DÉJÀ FRANCHI NE DIT PRESQUE RIEN DU SUIVANT (2026-09-06,
     `lecart_deja_franchi`, 16 contrôles, 5 triplets, 5163 cellules).** Un dérouleur parti d'une
     paire d'ancres connaît en chaque point la distance entre ces deux surfaces : c'était la seule
@@ -6217,8 +6286,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 2800 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 3492 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 2974 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 3666 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

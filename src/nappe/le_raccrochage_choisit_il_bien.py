@@ -48,6 +48,13 @@ for _d in ("commun", "nappe", "encre"):
 # ⚠ Un seul lecteur de corpus pour tous les dérouleurs, et ses deux fixtures hors ligne.
 from le_corpus_des_spires import corpus_fabrique, corpus_publie, volume_fabrique  # noqa: E402
 
+# ⚠⚠⚠ L'INSTRUMENT QUI A CORRIGÉ CE FICHIER. `le_gabarit_lu_ailleurs` a mesuré que sur ces pas
+# la variabilité d'un pas à l'autre — ne rien faire coûte de 32 à 74 µm — vaut QUATRE fois
+# l'écart entre deux méthodes. La différence de médianes publiée ici valait donc 5,6 µm de
+# gain là où l'écart pris SUR LE MÊME PAS vaut −1,2 µm avec un intervalle qui enjambe zéro.
+# Le nombre n'était pas faux : c'était le mauvais nombre pour la question.
+from lecart_apparie import ecart_apparie, tranche  # noqa: E402
+
 
 def decalage_de_loracle(points: np.ndarray, directions: np.ndarray, decalages: np.ndarray,
                         cible: np.ndarray, voxel_um: float) -> tuple[np.ndarray, np.ndarray]:
@@ -267,6 +274,48 @@ def mesurer(echantillon: int = 800, graine: int = 42, minimum: int = 30,
         and r["paires_ou_le_centrage_ameliore"] > len(lignes) / 2)
     r["gain_du_retrait_du_biais_um"] = round(
         r["erreur_raccrochee_mediane_um"] - r["erreur_raccroche_centre_mediane_um"], 1)
+    # ⚠⚠⚠ LES MÊMES TROIS QUESTIONS, REPOSÉES EN APPARIÉ. Chaque écart est pris sur le MÊME
+    # pas, donc la dispersion entre pas — qui domine tout ici — s'annule ; et chacun porte son
+    # intervalle à un pas de moins, parce qu'« un verdict qui change avec la population n'est
+    # pas un verdict » ne se respecte qu'en le calculant.
+    def par_pas(cle):
+        return [e[cle] for e in lignes]
+
+    r["appariés"] = dict(
+        raccrochage_contre_sans_bouger=ecart_apparie(
+            par_pas("erreur_raccrochee_um"), par_pas("erreur_sans_bouger_um")),
+        centre_contre_raccrochage=ecart_apparie(
+            par_pas("erreur_raccroche_centre_um"), par_pas("erreur_raccrochee_um")),
+        raccrochage_contre_melange=ecart_apparie(
+            par_pas("erreur_raccrochee_um"), par_pas("erreur_melangee_um")),
+        raccrochage_contre_sa_mediane=ecart_apparie(
+            par_pas("erreur_raccrochee_um"), par_pas("erreur_raccroche_constant_um")),
+        # ⚠⚠ LA CINQUIÈME, ET C'EST CELLE SUR LAQUELLE LA FIGURE TIENT : son déplacement
+        # d'ensemble, seul, contre l'immobilité. Publier le titre « son déplacement d'ensemble
+        # nuit » sans l'avoir apparié laisserait la dispersion entre pas le décider.
+        sa_mediane_contre_sans_bouger=ecart_apparie(
+            par_pas("erreur_raccroche_constant_um"), par_pas("erreur_sans_bouger_um")),
+        # ⚠⚠⚠ ET CELLE QUI TIENT LE CHANTIER OUVERT. « La géométrie ne refuse rien » repose sur
+        # l'avance de l'oracle, et cette avance doit passer le même instrument que les autres —
+        # sinon la seule affirmation qui survit serait la seule qu'on n'a pas éprouvée.
+        oracle_contre_sans_bouger=ecart_apparie(
+            par_pas("erreur_oracle_um"), par_pas("erreur_sans_bouger_um")))
+    # ⚠⚠ CE SONT CES VERDICTS-LÀ QUI COMPTENT, et ils sont publiés À CÔTÉ des anciens plutôt
+    # qu'à leur place : la différence de médianes reste dans le fichier, parce que retirer un
+    # nombre qu'on a publié efface la preuve de sa propre correction.
+    r["le_gain_du_raccrochage_survit_a_lappariement"] = tranche(
+        r["appariés"]["raccrochage_contre_sans_bouger"])
+    r["le_retrait_du_biais_survit_a_lappariement"] = tranche(
+        r["appariés"]["centre_contre_raccrochage"])
+    r["la_lecture_par_cellule_survit_a_lappariement"] = tranche(
+        r["appariés"]["raccrochage_contre_sa_mediane"])
+    # ⚠ Le déplacement d'ensemble NUIT : l'écart apparié doit être POSITIF et son intervalle
+    # entier au-dessus de zéro. C'est `tranche` lue dans l'autre sens, donc l'écart est retourné
+    # plutôt que la règle réécrite — deux règles de décision finiraient par diverger.
+    r["la_geometrie_ne_refuse_rien_a_lappariement"] = tranche(
+        r["appariés"]["oracle_contre_sans_bouger"])
+    r["son_deplacement_densemble_nuit_a_lappariement"] = tranche(ecart_apparie(
+        par_pas("erreur_sans_bouger_um"), par_pas("erreur_raccroche_constant_um")))
     r["le_raccrochage_bat_son_melange"] = bool(
         r["erreur_raccrochee_mediane_um"] < r["erreur_melangee_mediane_um"]
         and sum(1 for e in lignes
@@ -357,6 +406,28 @@ def verifier() -> int:
     v("... et sa propre médiane est mesurée comme contendant",
       all(e["erreur_raccroche_constant_um"] > 0 for e in fab["lignes"]),
       str([e["erreur_raccroche_constant_um"] for e in fab["lignes"]][:3]))
+    # ⚠⚠⚠ LE CONTRÔLE QUI EXISTE PARCE QU'UNE MESURE A CORRIGÉ CELLE-CI : les quatre questions
+    # sont reposées en apparié, et leurs verdicts passent par l'instrument partagé plutôt que
+    # par une conjonction recopiée. Sans eux, la différence de médianes resterait seule à
+    # décider — ce qu'elle ne peut pas faire quand les pas varient quatre fois plus.
+    v("... les quatre comparaisons sont aussi rendues APPARIÉES, avec leur intervalle",
+      all(k in fab["appariés"] and fab["appariés"][k]["intervalle_um"] is not None
+          for k in ("raccrochage_contre_sans_bouger", "centre_contre_raccrochage",
+                    "raccrochage_contre_melange", "raccrochage_contre_sa_mediane")),
+      str(fab["appariés"]["raccrochage_contre_sans_bouger"]))
+    v("... y compris celle sur laquelle la figure tient : sa médiane seule contre l'immobilité",
+      fab["appariés"]["sa_mediane_contre_sans_bouger"]["intervalle_um"] is not None
+      and isinstance(fab["son_deplacement_densemble_nuit_a_lappariement"], bool),
+      str(fab["appariés"]["sa_mediane_contre_sans_bouger"]))
+    v("... et celle qui tient le chantier ouvert : l'avance de l'oracle sur l'immobilité",
+      "oracle_contre_sans_bouger" in fab["appariés"]
+      and isinstance(fab["la_geometrie_ne_refuse_rien_a_lappariement"], bool),
+      str(fab["appariés"]["oracle_contre_sans_bouger"]))
+    v("... et les verdicts appariés passent par l'instrument partagé, pas par une copie",
+      fab["le_gain_du_raccrochage_survit_a_lappariement"]
+      == tranche(fab["appariés"]["raccrochage_contre_sans_bouger"])
+      and fab["le_retrait_du_biais_survit_a_lappariement"]
+      == tranche(fab["appariés"]["centre_contre_raccrochage"]))
     v("... et les deux accords sont rendus, quel que soit leur signe",
       all(k in fab for k in ("accord_du_raccrochage", "accord_du_melange",
                              "le_raccrochage_lit_quelque_chose")))
@@ -413,6 +484,29 @@ def afficher(r: dict) -> None:
     print(f"gains : raccrochage {r['gain_du_raccrochage_um']} µm · son recentrage seul "
           f"{r['gain_du_recentrage_seul_um']} · oracle {r['gain_de_loracle_um']} µm — il en "
           f"prend {r['part_du_gain_de_loracle_prise']}")
+    ap = r["appariés"]
+    print("\nles mêmes questions, mais APPARIÉES pas par pas — la dispersion entre pas y est "
+          "quatre fois celle entre méthodes, donc une différence de médianes ne tranche rien :")
+    for nom, cle in (("raccroché contre ne pas bouger", "raccrochage_contre_sans_bouger"),
+                     ("biais retiré contre raccroché", "centre_contre_raccrochage"),
+                     ("raccroché contre son mélange", "raccrochage_contre_melange"),
+                     ("raccroché contre sa médiane", "raccrochage_contre_sa_mediane"),
+                     ("sa médiane seule contre rien", "sa_mediane_contre_sans_bouger"),
+                     ("l'ORACLE contre ne pas bouger", "oracle_contre_sans_bouger")):
+        e = ap[cle]
+        print(f"   {nom:<32} {e['ecart_median_um']:+6.1f} µm · "
+              f"{e['pas_ameliores']}/{e['pas']} pas · à un pas de moins {e['intervalle_um']} · "
+              f"{'TRANCHE' if tranche(e) else 'ne tranche pas'}")
+    print(f"→ ⭐ le gain du raccrochage SURVIT-IL à l'appariement : "
+          f"{'OUI' if r['le_gain_du_raccrochage_survit_a_lappariement'] else 'NON'}")
+    print(f"→ ⭐ et le retrait de son biais : "
+          f"{'OUI' if r['le_retrait_du_biais_survit_a_lappariement'] else 'NON'} · sa lecture "
+          f"PAR CELLULE : "
+          f"{'OUI' if r['la_lecture_par_cellule_survit_a_lappariement'] else 'NON'} · son "
+          f"déplacement d'ensemble NUIT : "
+          f"{'OUI' if r['son_deplacement_densemble_nuit_a_lappariement'] else 'NON'}")
+    print(f"→ ⭐⭐ et LA GÉOMÉTRIE NE REFUSE RIEN — l'avance de l'oracle tient-elle l'appariement "
+          f"? {'OUI' if r['la_geometrie_ne_refuse_rien_a_lappariement'] else 'NON'}\n")
     print(f"→ RETIRER son biais d'ensemble améliore : "
           f"{'OUI' if r['retirer_le_biais_ameliore'] else 'NON'} "
           f"({r['gain_du_retrait_du_biais_um']:+.1f} µm, "

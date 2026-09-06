@@ -9,10 +9,17 @@ explications restaient, avec des remèdes opposés : la géométrie refuse, ou l
 **0,076** — minuscule, mais positif, significatif, et le témoin du gabarit mélangé reste à
 **−0,006**. La lecture voit donc quelque chose, très peu.
 
-⭐⭐⭐ Et le panneau A dit ce qui était contre-intuitif : le déplacement d'ENSEMBLE que le
-raccrochage trouve est **nuisible** — sa propre médiane, appliquée partout, rend 47,5 µm contre
-42,7 en ne bougeant pas. C'est sa lecture **par cellule** qui reprend tout et le fait descendre à
-37,1. Elle ne prend qu'un quart de ce que l'oracle prendrait : les trois autres quarts attendent.
+⚠⚠⚠ ET CE FICHIER A ÉTÉ CORRIGÉ PAR UNE MESURE POSTÉRIEURE. `le_gabarit_lu_ailleurs` a établi
+que sur ces pas la dispersion d'un pas à l'autre — ne rien faire coûte de 32 à 74 µm — vaut
+**quatre fois** l'écart entre deux méthodes, donc une différence de médianes s'y fait décider par
+le tirage des pas. Repris en **écart apparié** (`src/commun/lecart_apparie.py`), trois des quatre
+affirmations de cette figure ne tiennent plus : le gain de 5,6 µm sur l'immobilité, la nuisance
+du déplacement d'ensemble, et l'avance sur le mélange. Les nombres n'étaient pas faux — ils
+étaient les mauvais nombres pour la question.
+
+⭐⭐ Ce qui TIENT est ce qui compare le raccrochage à une variante de LUI-MÊME, sur les mêmes
+cellules : sa lecture par cellule bat sa propre médiane et retirer son biais d'ensemble
+améliore. C'est cohérent — ces deux-là sont appariées par construction, les trois autres non.
 
 Usage :
     uv run python src/figures/figure_le_raccrochage_choisit_il_bien.py --verifier
@@ -45,6 +52,8 @@ CADRE = (200, 200, 200)
 
 def prose(m: dict) -> list[str]:
     a_, mm = m["accord_du_raccrochage"], m["accord_du_melange"]
+    ap = {k: (f"{v['ecart_median_um']:+.1f} um, {v['pas_ameliores']}/{v['pas']} pas, "
+              f"intervalle {v['intervalle_um']}") for k, v in m["appariés"].items()}
     return [
         f"{m['paires']} paires, {m['cellules']} cellules. le raccrochage choisit un decalage par "
         "correlation avec un gabarit lu sur la spire de DEPART ; l'oracle choisit celui qui "
@@ -57,20 +66,30 @@ def prose(m: dict) -> list[str]:
         f"{m['erreur_raccrochee_mediane_um']}, sa propre MEDIANE seule "
         f"{m['erreur_raccroche_constant_mediane_um']}, melange "
         f"{m['erreur_melangee_mediane_um']}, oracle {m['erreur_oracle_mediane_um']}.",
-        "et le fait contre-intuitif : le deplacement d'ENSEMBLE qu'il trouve est NUISIBLE — "
-        f"sa mediane appliquee partout rend {m['erreur_raccroche_constant_mediane_um']} um "
-        f"contre {m['erreur_sans_bouger_mediane_um']} en ne bougeant pas, soit "
-        f"{m['gain_du_recentrage_seul_um']} um. c'est sa lecture PAR CELLULE qui reprend tout, "
-        f"et elle bat sa propre mediane sur {m['paires_ou_le_raccrochage_bat_sa_mediane']} "
-        f"paires sur {m['paires']}.",
+        "⚠⚠ CORRIGE PAR UNE MESURE POSTERIEURE. sur ces pas, ne rien faire coute de 32 a 74 um "
+        "selon le pas : la dispersion entre pas vaut QUATRE fois l'ecart entre deux methodes, "
+        "donc une difference de medianes s'y fait decider par le tirage des pas. les memes "
+        "questions, reprises en ecart APPARIE pas par pas, chacune avec son intervalle a un pas "
+        "de moins :",
+        f"  raccroche contre ne pas bouger : {ap['raccrochage_contre_sans_bouger']} — NE "
+        f"TRANCHE PAS, la ou la difference des medianes annoncait {m['gain_du_raccrochage_um']} "
+        f"um de gain. son deplacement d'ensemble contre rien : "
+        f"{ap['sa_mediane_contre_sans_bouger']} — NE TRANCHE PAS non plus, la ou elle annoncait "
+        f"une nuisance de {m['gain_du_recentrage_seul_um']} um.",
+        f"⚠⚠ ce qui TIENT est ce qui le compare a une variante de LUI-MEME, sur les memes "
+        f"cellules : sa lecture par cellule bat sa propre mediane "
+        f"({ap['raccrochage_contre_sa_mediane']}), et retirer son biais ameliore "
+        f"({ap['centre_contre_raccrochage']}). les deux sont appariees par construction ; les "
+        "trois qui tombent ne l'etaient pas.",
         f"⚠ mais son erreur ne bat PAS celle de son gabarit melange "
         f"({m['paires_ou_le_raccrochage_bat_son_melange']} paires sur {m['paires']}) : la "
         "lecture est mesurablement meilleure que le bruit dans ce qu'elle CHOISIT, pas encore "
         "dans ce qu'elle COUTE.",
-        f"ce que ca tranche : la geometrie ne refuse RIEN — l'oracle prend "
-        f"{m['gain_de_loracle_um']} um dans la meme fenetre. le raccrochage n'en prend que "
-        f"{m['part_du_gain_de_loracle_prise']}, donc c'est bien la LECTURE qui est le chantier, "
-        "et les trois quarts du poste attendent.",
+        f"⚠⚠ ce que ca tranche, et c'est la SEULE affirmation que l'appariement renforce : la "
+        f"geometrie ne refuse RIEN. l'avance de l'oracle vaut "
+        f"{ap['oracle_contre_sans_bouger']} — sept pas sur sept, intervalle entierement "
+        f"negatif. la ou tout gain du raccrochage s'evanouit des qu'on apparie, celui de sa "
+        "borne ne bouge pas : c'est bien la LECTURE qui est le chantier, et il est entier.",
     ]
 
 
@@ -95,7 +114,7 @@ def dessiner(m: dict, sortie: Path) -> dict:
     H = 96 + ph + 90 + len(lignes) * 19
     toile = Image.new("RGB", (L, H), FOND)
     art = ImageDraw.Draw(toile)
-    art.text((marge, 18), "Il lit mal, et c'est pourtant sa lecture qui le sauve",
+    art.text((marge, 18), "Il lit mal, et seule sa lecture par cellule tient l'appariement",
              fill=TEXTE, font=gros)
     art.text((marge, 42),
              f"{m['paires']} paires · {m['cellules']} cellules · rho "
@@ -105,7 +124,7 @@ def dessiner(m: dict, sortie: Path) -> dict:
     lg = m["lignes"]
     # ---------- A : les cinq contendants ----------
     ax, ay = marge, 96
-    art.text((ax, ay - 20), "A · son deplacement d'ensemble NUIT, sa lecture par cellule sauve",
+    art.text((ax, ay - 20), "A · seule sa lecture PAR CELLULE tient l'appariement",
              fill=TEXTE, font=moyen)
     art.rectangle([ax, ay, ax + pw, ay + ph], outline=CADRE)
     cles = (("erreur_sans_bouger_um", DISCRET), ("erreur_raccrochee_um", AMBRE),
@@ -195,28 +214,40 @@ def verifier() -> int:
     v("... mais très peu — la corrélation reste sous un dixième",
       abs(m["accord_du_raccrochage"]["rho"]) < 0.1,
       str(m["accord_du_raccrochage"]["rho"]))
-    # ⚠⚠⚠ LE FAIT CONTRE-INTUITIF QUE LA FIGURE PORTE : son déplacement d'ensemble NUIT, et
-    # c'est sa lecture par cellule qui reprend tout. Sans ce contrôle, la prose pourrait cesser
-    # de le dire sans que rien ne le remarque.
-    v("son déplacement d'ensemble est nuisible", m["gain_du_recentrage_seul_um"] < 0,
-      f"{m['gain_du_recentrage_seul_um']} µm")
-    v("... et c'est sa lecture par cellule qui reprend tout",
-      m["la_lecture_par_cellule_sert"]
-      and m["erreur_raccrochee_mediane_um"] < m["erreur_sans_bouger_mediane_um"],
-      f"{m['erreur_raccrochee_mediane_um']} contre "
-      f"{m['erreur_raccroche_constant_mediane_um']} et "
-      f"{m['erreur_sans_bouger_mediane_um']} µm")
-    # ⚠⚠ ET LE NÉGATIF QUI EMPÊCHE DE CONCLURE TROP VITE : son erreur ne bat pas encore celle de
-    # son gabarit mélangé. La lecture est meilleure que le bruit dans ce qu'elle CHOISIT, pas
-    # dans ce qu'elle COÛTE.
-    v("son erreur ne bat pas encore celle de son mélange",
-      not m["le_raccrochage_bat_son_melange"],
-      f"{m['paires_ou_le_raccrochage_bat_son_melange']} paires sur {m['paires']}")
+    # ⚠⚠⚠ LA CORRECTION QUE CETTE FIGURE PORTE DÉSORMAIS, ET LES CONTRÔLES QUI L'EMPÊCHENT DE
+    # SE PERDRE. Trois affirmations de la première version ne survivent pas à l'appariement ;
+    # sans ces contrôles, la prose pourrait recommencer à les faire sans que rien ne le voie.
+    v("le gain sur l'immobilité NE survit PAS à l'appariement",
+      not m["le_gain_du_raccrochage_survit_a_lappariement"],
+      str(m["appariés"]["raccrochage_contre_sans_bouger"]))
+    v("... ni la nuisance de son déplacement d'ensemble",
+      not m["son_deplacement_densemble_nuit_a_lappariement"],
+      str(m["appariés"]["sa_mediane_contre_sans_bouger"]))
+    # ⭐⭐ ET CE QUI TIENT : les deux comparaisons du raccrochage à une variante de LUI-MÊME,
+    # appariées par construction. C'est ce qui garde la tranche debout plutôt qu'une retraite.
+    v("sa lecture PAR CELLULE bat sa propre médiane, appariement compris",
+      m["la_lecture_par_cellule_survit_a_lappariement"],
+      str(m["appariés"]["raccrochage_contre_sa_mediane"]))
+    v("... et retirer son biais d'ensemble améliore, appariement compris",
+      m["le_retrait_du_biais_survit_a_lappariement"],
+      str(m["appariés"]["centre_contre_raccrochage"]))
+    # ⚠⚠ ET LE NÉGATIF QUI EMPÊCHE DE CONCLURE TROP VITE : son erreur ne bat celle de son
+    # gabarit mélangé dans AUCUN des deux instruments.
+    v("son erreur ne bat pas celle de son mélange, dans les deux instruments",
+      not m["le_raccrochage_bat_son_melange"]
+      and m["appariés"]["raccrochage_contre_melange"]["intervalle_um"][1] >= 0,
+      f"{m['paires_ou_le_raccrochage_bat_son_melange']} paires sur {m['paires']} · "
+      f"{m['appariés']['raccrochage_contre_melange']}")
     # ⚠⚠⚠ CE QUE LA MESURE TRANCHE : la géométrie ne refuse rien, l'oracle prend beaucoup dans
     # la même fenêtre. C'est donc la lecture qui est le chantier.
-    v("la géométrie ne refuse rien : l'oracle prend beaucoup dans la même fenêtre",
-      m["gain_de_loracle_um"] > 3 * m["gain_du_raccrochage_um"],
-      f"{m['gain_de_loracle_um']} contre {m['gain_du_raccrochage_um']} µm")
+    # ⭐⭐⭐ LA SEULE AFFIRMATION DE CETTE FIGURE QUI SORT RENFORCÉE DE L'APPARIEMENT, et c'est
+    # celle qui tient le chantier ouvert : l'avance de l'oracle vaut 23,8 µm sur SEPT pas sur
+    # sept, intervalle entièrement négatif. Là où les gains du raccrochage disparaissent dès
+    # qu'on apparie, celui de sa borne ne bouge pas.
+    v("la géométrie ne refuse rien, et c'est vrai sur CHAQUE pas",
+      m["la_geometrie_ne_refuse_rien_a_lappariement"]
+      and m["appariés"]["oracle_contre_sans_bouger"]["pas_ameliores"] == m["paires"],
+      str(m["appariés"]["oracle_contre_sans_bouger"]))
     v("... et le raccrochage n'en prend qu'une petite part",
       m["part_du_gain_de_loracle_prise"] < 0.4,
       str(m["part_du_gain_de_loracle_prise"]))
@@ -248,7 +279,7 @@ def verifier() -> int:
         v("l'image est plus large que haute", img.width > img.height,
           f"{img.width}x{img.height}")
         _, _, pt_ = police(17, 13, 11)
-        for titre in ("A · son deplacement d'ensemble NUIT, sa lecture par cellule sauve",
+        for titre in ("A · seule sa lecture PAR CELLULE tient l'appariement",
                       "B · ce que sa lecture voit, contre ce que le hasard voit"):
             v(f"le titre « {titre[:14]}… » tient dans son panneau",
               pt_.getbbox(titre)[2] < 400, f"{pt_.getbbox(titre)[2]} px pour 400")

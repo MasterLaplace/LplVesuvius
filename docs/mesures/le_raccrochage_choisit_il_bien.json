@@ -271,6 +271,67 @@
   "paires_ou_le_centrage_ameliore": 5,
   "retirer_le_biais_ameliore": true,
   "gain_du_retrait_du_biais_um": 0.6,
+  "appariés": {
+    "raccrochage_contre_sans_bouger": {
+      "ecart_median_um": -1.2,
+      "intervalle_um": [
+        -5.2,
+        2.5
+      ],
+      "pas_ameliores": 4,
+      "pas": 7
+    },
+    "centre_contre_raccrochage": {
+      "ecart_median_um": -1.5,
+      "intervalle_um": [
+        -6.0,
+        -1.1
+      ],
+      "pas_ameliores": 5,
+      "pas": 7
+    },
+    "raccrochage_contre_melange": {
+      "ecart_median_um": 0.1,
+      "intervalle_um": [
+        -3.2,
+        5.8
+      ],
+      "pas_ameliores": 3,
+      "pas": 7
+    },
+    "raccrochage_contre_sa_mediane": {
+      "ecart_median_um": -2.0,
+      "intervalle_um": [
+        -4.0,
+        -1.0
+      ],
+      "pas_ameliores": 4,
+      "pas": 7
+    },
+    "sa_mediane_contre_sans_bouger": {
+      "ecart_median_um": 1.0,
+      "intervalle_um": [
+        -1.1,
+        5.8
+      ],
+      "pas_ameliores": 3,
+      "pas": 7
+    },
+    "oracle_contre_sans_bouger": {
+      "ecart_median_um": -23.8,
+      "intervalle_um": [
+        -25.2,
+        -21.1
+      ],
+      "pas_ameliores": 7,
+      "pas": 7
+    }
+  },
+  "le_gain_du_raccrochage_survit_a_lappariement": false,
+  "le_retrait_du_biais_survit_a_lappariement": true,
+  "la_lecture_par_cellule_survit_a_lappariement": true,
+  "la_geometrie_ne_refuse_rien_a_lappariement": true,
+  "son_deplacement_densemble_nuit_a_lappariement": false,
   "le_raccrochage_bat_son_melange": false,
   "paires_ou_le_raccrochage_bat_son_melange": 3
 }
