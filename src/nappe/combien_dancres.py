@@ -16,14 +16,18 @@ droite des moindres carrés en $s$, évaluée en $s = 0$. À deux ancres de sign
 **exactement** la pondération par les bras déjà mesurée — ce n'est pas une ressemblance, c'est une
 identité algébrique, et elle est vérifiée ici plutôt qu'affirmée.
 
-⚠⚠⚠ ET LA PRÉMISSE, MESURÉE ICI, EST FAUSSE AU-DELÀ DU LOCAL. L'erreur d'une ancre seule vaut
-41,1 / 63,1 / 100,8 / 149,4 µm aux bras 1 à 4 : les incréments valent **22,0 puis 37,7 puis
-48,6** µm par tour, donc la dérive est **sur-linéaire**, pas linéaire. Un estimateur linéaire
-n'en annule que la part linéaire ; ce qui reste est la **courbure**, et le résidu de
-l'encadrement croît lui aussi de plus en plus vite — 4,0 puis 10,6 puis 19,2 µm. C'est le
-mécanisme qui manquait à la tranche précédente, laquelle avait constaté qu'un bras long **nuit**
-sans pouvoir dire si c'était la longueur ou le déséquilibre : c'est la **longueur**, et une
-pondération linéaire ne peut pas la rattraper.
+⚠⚠⚠ CE FICHIER A PUBLIÉ « LA DÉRIVE ACCÉLÈRE », ET `pourquoi_la_derive_accelere` L'A RETIRÉ.
+Le critère employé — « les incréments consécutifs croissent » — **omettait le plus grand
+incrément de tous** : celui du bras zéro, dont l'erreur est nulle par définition, au bras un. La
+suite complète est **41,1 puis 22,0 / 37,7 / 48,6** µm : le premier pas est le plus cher, et il
+n'y a pas de tendance après lui. Le critère basculait en outre sur deux micromètres, et rendait
+deux verdicts opposés sur deux populations qui mesurent la même chose.
+
+⭐⭐ CE QUI EST VRAI ET REPRODUIT SUR LES DEUX POPULATIONS : l'erreur au bras `k` reste **SOUS**
+`k` fois celle du bras un, et le coût par tour est **stable** — 41,1 puis 31,6 / 33,6 / 37,4 µm
+ici. La dérive est donc à peu près **linéaire** avec un premier pas plus cher, ce qui est
+exactement la prémisse dont l'estimateur a besoin, et ce qui explique que la parabole ne trouve
+rien à annuler.
 
 ⚠⚠ LES POIDS NE DÉPENDENT QUE DES BRAS, JAMAIS DES DONNÉES. L'ordonnée à l'origine d'une droite
 des moindres carrés est une combinaison linéaire des $p_i$ dont les coefficients ne contiennent
@@ -61,6 +65,9 @@ for _d in ("commun", "nappe", "encre"):
 
 # ⚠ Un seul lecteur de corpus pour tous les dérouleurs, et sa fixture hors ligne avec lui.
 from le_corpus_des_spires import corpus_fabrique, corpus_publie  # noqa: E402
+# ⚠ Le critère de forme vit chez la tranche qui l'a établi, et il n'est pas recopié : deux
+# implémentations d'une même règle finiraient par rendre deux verdicts.
+from pourquoi_la_derive_accelere import sous_lineaire  # noqa: E402
 
 
 def poids_de_lajustement(bras: np.ndarray, degre: int = 1) -> np.ndarray:
@@ -315,16 +322,21 @@ def mesurer(cote: float | None = None, minimum: int = 30, portee: int = 3, kmax:
     r["lerreur_dune_ancre_croit_avec_son_bras"] = bool(
         len(suite) > 1 and all(x is not None for x in suite)
         and all(b > a_ for a_, b in zip(suite, suite[1:])))
-    r["increments_par_tour_um"] = ([round(b - a_, 1) for a_, b in zip(suite, suite[1:])]
+    # ⚠ Les incréments partent du bras ZÉRO, dont l'erreur est nulle par définition : c'est le
+    # plus grand de tous, et l'omettre faisait lire une accélération là où il y a surtout un
+    # premier pas cher.
+    r["increments_par_tour_um"] = ([round(b - a_, 1) for a_, b in zip([0.0] + suite, suite)]
                                    if all(x is not None for x in suite) else [])
-    # ⚠⚠⚠ ET LA MESURE CONTREDIT LA PRÉMISSE : les incréments ne sont pas constants, ils
-    # CROISSENT. La dérive d'une ancre est donc **sur-linéaire** en son bras, et un estimateur
-    # linéaire n'en annule que la part linéaire. Ce qui reste est la courbure — et c'est elle
-    # qui borne la longueur du bras utilisable. La prémisse n'est vraie que localement, et
-    # l'écrire autrement serait publier une hypothèse comme un fait.
-    inc = r["increments_par_tour_um"]
-    r["la_derive_dune_ancre_est_surlineaire"] = bool(
-        len(inc) > 1 and all(b > a_ for a_, b in zip(inc, inc[1:])))
+    # ⚠⚠⚠ LE CRITÈRE EST CELUI DE `pourquoi_la_derive_accelere`, ET IL EN REMPLACE UN AUTRE,
+    # RETIRÉ. Le précédent — « les incréments consécutifs croissent » — omettait l'incrément du
+    # bras zéro, le plus grand de tous, et basculait sur deux micromètres. Celui-ci est sans
+    # seuil : l'erreur au bras `k` reste-t-elle sous `k` fois celle du bras un ?
+    r["cout_par_tour_um"] = [round(x / (i + 1), 1) for i, x in enumerate(suite)
+                             ] if all(x is not None for x in suite) else []
+    r["la_derive_dune_ancre_est_sous_lineaire"] = sous_lineaire(suite)
+    r["le_premier_pas_coute_le_plus"] = bool(
+        r["cout_par_tour_um"] and all(r["cout_par_tour_um"][0] > x
+                                      for x in r["cout_par_tour_um"][1:]))
 
     ks = sorted(par_k)
     aj = {k: r["par_nombre_dancres"][str(k)]["ajustee_um"] for k in ks}
@@ -394,17 +406,18 @@ def mesurer(cote: float | None = None, minimum: int = 30, portee: int = 3, kmax:
     # ⚠⚠ ET LE PLUS GRAND BRAS QUI TIENT ENCORE, avec son compte de cas ATTACHÉ. Sans le compte,
     # « il tient jusqu'à trois » se lirait comme un résultat alors qu'un seul cas ne tranche
     # rien — ce dépôt a déjà vu un verdict s'inverser quand l'échantillon a grandi.
-    # ⚠⚠ LE RÉSIDU DE L'ENCADREMENT EST SUR-LINÉAIRE LUI AUSSI, et c'est la même courbure vue
-    # de l'autre côté : l'ajustement annule la part linéaire, donc ce qui reste croît comme le
-    # terme suivant. C'est le mécanisme qui manquait à la tranche précédente, laquelle avait
-    # constaté qu'un bras long NUIT sans pouvoir dire si c'était la longueur ou le déséquilibre.
+    # ⚠⚠ LE RÉSIDU DE L'ENCADREMENT SUIT LA MÊME FORME : sous la droite de son premier pas, et
+    # à coût par tour à peu près stable. L'encadrement divise ce coût par deux — 30,0 puis 17,0
+    # / 14,9 / 16,0 µm par tour contre 41,1 puis 31,6 / 33,6 / 37,4 pour une ancre seule — ce
+    # qui est exactement ce qu'annuler une pente linéaire doit donner.
     suite_sym = [d["ajustee_um"] for d in r["encadrements_symetriques_par_bras"].values()]
     r["increments_de_lencadrement_symetrique_um"] = (
-        [round(b - a_, 1) for a_, b in zip(suite_sym, suite_sym[1:])]
+        [round(b - a_, 1) for a_, b in zip([0.0] + suite_sym, suite_sym)]
         if all(x is not None for x in suite_sym) else [])
-    inc_sym = r["increments_de_lencadrement_symetrique_um"]
-    r["le_residu_de_lencadrement_est_surlineaire"] = bool(
-        len(inc_sym) > 1 and all(b > a_ for a_, b in zip(inc_sym, inc_sym[1:])))
+    r["cout_par_tour_de_lencadrement_um"] = (
+        [round(x / (i + 1), 1) for i, x in enumerate(suite_sym)]
+        if all(x is not None for x in suite_sym) else [])
+    r["le_residu_de_lencadrement_est_sous_lineaire"] = sous_lineaire(suite_sym)
     tenus = [(int(b), d) for b, d in r["encadrements_symetriques_par_bras"].items()
              if d["tient_la_feuille"]]
     r["plus_grand_bras_symetrique_qui_tient"] = max(tenus)[0] if tenus else None
@@ -599,20 +612,21 @@ def verifier() -> int:
       fab["erreur_courbe_mediane_um"] is None
       or fab["jeux_a_trois_ancres_ou_plus_qui_encadrent"] > 0,
       f"{fab['jeux_a_trois_ancres_ou_plus_qui_encadrent']} jeux")
-    v("la sur-linéarité de la dérive est calculée et rendue",
-      isinstance(fab["la_derive_dune_ancre_est_surlineaire"], bool)
-      and isinstance(fab["le_residu_de_lencadrement_est_surlineaire"], bool),
-      f"dérive {fab['increments_par_tour_um']} · encadrement "
-      f"{fab['increments_de_lencadrement_symetrique_um']}")
-    # ⚠⚠⚠ ET LE CONTRÔLE QUI PEUT ÉCHOUER : sur des incréments FABRIQUÉS croissants, le verdict
-    # doit être vrai ; sur des incréments décroissants, faux. Sans les deux, « sur-linéaire »
-    # serait un mot qu'aucune donnée ne peut contredire.
-    def surlineaire(suite):
-        d = [b - a_ for a_, b in zip(suite, suite[1:])]
-        return len(d) > 1 and all(y > x for x, y in zip(d, d[1:]))
-
-    v("... et la règle dit OUI d'une suite qui accélère, NON d'une qui ralentit",
-      surlineaire([41.1, 63.1, 100.8, 149.4]) and not surlineaire([41.1, 80.0, 110.0, 130.0]))
+    v("la forme de la courbe est calculée et rendue, quel que soit son signe",
+      isinstance(fab["la_derive_dune_ancre_est_sous_lineaire"], bool)
+      and isinstance(fab["le_residu_de_lencadrement_est_sous_lineaire"], bool),
+      f"dérive {fab['cout_par_tour_um']} · encadrement "
+      f"{fab['cout_par_tour_de_lencadrement_um']}")
+    # ⚠⚠⚠ LE CRITÈRE VIENT DE `pourquoi_la_derive_accelere`, IL N'EST PAS RECOPIÉ : deux
+    # implémentations d'une même règle finiraient par rendre deux verdicts, ce qui est
+    # exactement ce que le critère précédent a fait sur deux populations.
+    v("le critère dit OUI d'une suite sous la droite du premier pas, NON d'une qui la dépasse",
+      sous_lineaire([41.1, 63.1, 100.8, 149.4]) and not sous_lineaire([10.0, 25.0, 40.0]))
+    # ⚠ Et l'incrément du bras zéro n'est jamais omis : c'est lui qui a fait lire une
+    # accélération là où il y a surtout un premier pas cher.
+    v("... et le premier incrément, celui du bras zéro, est compté",
+      len(fab["increments_par_tour_um"]) == len(fab["erreur_dune_ancre_par_bras_um"]),
+      str(fab["increments_par_tour_um"]))
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
@@ -663,9 +677,12 @@ def afficher(r: dict) -> None:
         print(f"  bras {b} · {d['n']:>2} cas · {d['erreur_um']:>6.1f} µm")
     print(f"  → elle croît avec le bras : "
           f"{'OUI' if r['lerreur_dune_ancre_croit_avec_son_bras'] else 'NON'} · "
-          f"incréments {r['increments_par_tour_um']} µm par tour · "
-          f"SUR-LINÉAIRE : "
-          f"{'OUI' if r['la_derive_dune_ancre_est_surlineaire'] else 'NON'}")
+          f"incréments depuis le bras zéro {r['increments_par_tour_um']} µm · "
+          f"coût par tour {r['cout_par_tour_um']} µm")
+    print(f"  → SOUS-linéaire (sous k fois le premier pas) : "
+          f"{'OUI' if r['la_derive_dune_ancre_est_sous_lineaire'] else 'NON'} · "
+          f"le premier pas coûte le plus : "
+          f"{'OUI' if r['le_premier_pas_coute_le_plus'] else 'NON'}")
     print(f"\ngain de la deuxième ancre : {r['gain_de_la_deuxieme_ancre']} µm · "
           f"de la troisième : {r['gain_de_la_troisieme_ancre']} µm")
     print(f"en ne gardant que les jeux qui ENCADRENT — la seule population comparable, "
@@ -681,8 +698,8 @@ def afficher(r: dict) -> None:
         print(f"  bras ±{b} · {d['n']:>2} cas · {d['ajustee_um']:>6.1f} µm · "
               f"{'tient la feuille' if d['tient_la_feuille'] else 'a PERDU la feuille'}")
     print(f"  incréments de l'encadrement : {r['increments_de_lencadrement_symetrique_um']} µm · "
-          f"SUR-LINÉAIRE : "
-          f"{'OUI' if r['le_residu_de_lencadrement_est_surlineaire'] else 'NON'}")
+          f"coût par tour {r['cout_par_tour_de_lencadrement_um']} µm · SOUS-linéaire : "
+          f"{'OUI' if r['le_residu_de_lencadrement_est_sous_lineaire'] else 'NON'}")
     print(f"→ deux ancres à ±{r['plus_grand_bras_symetrique_qui_tient']} tours tiennent encore "
           f"la feuille, sur {r['cas_a_ce_bras']} cas")
 

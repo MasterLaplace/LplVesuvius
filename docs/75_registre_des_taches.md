@@ -2357,25 +2357,33 @@ encadrent passe de **0 à 50, 80 puis 95 %** avec le nombre d'ancres, donc son a
 d'abord ce **changement de composition**. Les deux courbes sont publiées, la seconde est celle qui
 tranche.
 
-##### ⚠⚠⚠ Et le panneau B dit ce que je croyais faux : la dérive ACCÉLÈRE
+##### ⛔ Le panneau B a porté une affirmation RETIRÉE le jour même
 
 | bras | 1 | 2 | 3 | 4 |
 |---|---:|---:|---:|---:|
 | **une** ancre | 41,1 µm | 63,1 | 100,8 | **149,4** |
-| incréments | | +22,0 | +37,7 | **+48,6** |
+| incréments *depuis le bras zéro* | **+41,1** | +22,0 | +37,7 | +48,6 |
+| coût **par tour** | 41,1 | 31,6 | 33,6 | 37,4 |
 | **deux** ancres à ±ce bras | 30,0 µm | 34,0 | 44,6 | **63,8** |
-| incréments | | +4,0 | +10,6 | **+19,2** |
+| coût **par tour** | 30,0 | 17,0 | 14,9 | 16,0 |
 
-> ⚠⚠⚠ **La dérive d'une ancre n'est PAS linéaire, elle accélère** — et la prémisse de
-> l'estimateur, comme celle de la pondération par les bras de la tranche précédente, n'est donc
-> vraie que **localement**. Un estimateur linéaire n'en annule que la part linéaire ; ce qui reste
-> est la **courbure**, et le résidu de l'encadrement accélère lui aussi.
+> ⛔⚠⚠ **J'avais publié « la dérive ACCÉLÈRE », et c'était faux.** Le critère employé — *« les
+> incréments consécutifs croissent »* — **omettait le plus grand incrément de tous** : celui du
+> bras zéro, dont l'erreur est nulle **par définition**, au bras un. La suite complète est
+> **41,1 puis 22,0 / 37,7 / 48,6** : le premier pas est le plus cher, et il n'y a pas de tendance
+> après lui. Retiré par `pourquoi_la_derive_accelere` le même jour, section suivante.
 
-⭐⭐⭐ **C'est le mécanisme qui manquait à la tranche précédente.** Elle avait constaté que `1+4` et
-`2+4` **nuisent** et écrit noir sur blanc : *« ce corpus ne dit PAS si c'est la longueur absolue ou
-le déséquilibre qui casse »*. Il le dit maintenant : c'est la **longueur**. À bras égaux et
-équilibrés — donc sans aucun déséquilibre — l'erreur passe de 30,0 à **63,8 µm** entre ±1 et ±4,
-et son accélération est ce qu'aucune pondération linéaire ne peut rattraper.
+⭐⭐ **Ce qui est vrai et reproduit sur deux populations** : l'erreur au bras `k` reste **SOUS**
+`k` fois celle du bras un, et le **coût par tour est stable** — 31,6 / 33,6 / 37,4 µm ici, 31,4 /
+34,5 / 33,5 sur l'autre population. La dérive est donc à peu près **linéaire** avec un premier pas
+plus cher. C'est exactement la prémisse dont l'estimateur a besoin — et c'est **pourquoi la
+parabole ne trouve rien à annuler**, ce qui rend l'ensemble cohérent au lieu de contradictoire.
+
+⚠ **Et l'explication que j'avais donnée à `1+4` et `2+4` qui nuisent tombe avec elle.** Ce n'est
+pas la courbure. L'encadrement divise le coût par tour par deux (17 contre 33 µm), donc la pente
+est bien annulée ; ce qu'un bras de quatre injecte est la **variance** de sa branche — 149 µm
+d'erreur, même à 20 % de poids, font ±30 µm de bruit. La question *« longueur ou déséquilibre »*
+reste donc **ouverte**, et la retirer d'ici est plus honnête que la laisser répondue à tort.
 
 ##### Ce que ça donne comme consigne
 
@@ -2413,6 +2421,74 @@ fins, ou plus nombreux, poserait la question autrement — et ce n'est pas ce co
 > remède : **la dérive accélère avec le bras**, et deux ancres qui encadrent en annulent la pente.
 > Toute suite qui prétend faire mieux devra s'attaquer à ce qui produit cette accélération, pas à
 > la façon de la combiner après coup.
+
+#### ⭐⭐ L'ITÉRATION NE PAIE QUE DE LA NAPPE — un seul grand pas fait aussi bien
+
+> Mesure : `src/nappe/pourquoi_la_derive_accelere.py` (24 contrôles) →
+> `docs/mesures/pourquoi_la_derive_accelere.json`. Figure :
+> `src/figures/figure_pourquoi_la_derive_accelere.py` (15 contrôles), le 2026-09-06.
+>
+> ```
+> uv run python src/nappe/pourquoi_la_derive_accelere.py --cote 640 --bras-max 4 \
+>     --json docs/mesures/pourquoi_la_derive_accelere.json
+> uv run python src/figures/figure_pourquoi_la_derive_accelere.py \
+>     --sortie docs/images/75_pourquoi_la_derive_accelere.png
+> ```
+
+Cette tranche devait écarter deux artefacts qui auraient pu **fabriquer** l'accélération publiée
+juste avant. Elle en a trouvé un troisième, et il était dans le critère lui-même.
+
+![elle n'accélère pas](images/75_pourquoi_la_derive_accelere.png)
+
+##### Les deux artefacts, écartés
+
+| suspect | mesure | verdict |
+|---|---|---|
+| le **masque** qui rétrécit (996 → 671 cellules) | erreur sur le sous-ensemble commun à tous les bras | ⛔ **il n'y est pour rien** — 1,5 / 2,1 / 2,7 / 0,0 µm d'écart |
+| la **spire de départ**, différente à chaque bras | la forme de la courbe à départ **fixe** | ✅ elle tient — 4 départs sur 6 à trois bras ou plus |
+
+##### ⛔ Le troisième était le critère
+
+> ⛔⚠⚠ **« Les incréments consécutifs croissent » omet le plus grand incrément de tous** : celui
+> du bras **zéro**, dont l'erreur est nulle par définition, au bras un. Et il bascule sur deux
+> micromètres — il rend **OUI** sur une population et **NON** sur l'autre, alors que les deux
+> mesurent la même chose.
+
+Le critère retenu est **sans seuil** et il a un sens : *l'erreur au bras `k` est-elle au-dessus ou
+en dessous de `k` fois celle du bras un ?* Elle est **en dessous partout**, et le coût par tour
+est **stable** : 44,2 puis 31,4 / 34,5 / 33,5 µm. Il vit dans un seul endroit, `sous_lineaire`,
+et `combien_dancres` l'**importe** — deux implémentations d'une même règle finiraient par rendre
+deux verdicts, ce qui est exactement ce que le critère précédent a fait.
+
+##### ⭐⭐ Et le résultat actionnable : l'itération ne sert à rien
+
+La marche libre de `k` pas est comparée à **un seul pas de longueur `k` fois le pas**, pris le
+long des normales de la surface de départ. Les deux vont au même endroit et ne diffèrent que par
+une chose : la seconde ne recalcule **jamais** ses normales, donc elle ne peut pas dégrader sa
+propre surface — ni ronger la grille plus d'une fois.
+
+| bras | marche itérée | un seul grand pas | cellules gardées |
+|---|---:|---:|---:|
+| 1 | 44,2 µm | 44,2 µm | 996 contre 996 |
+| 2 | 62,7 | 62,8 | 996 contre 896 |
+| 3 | 103,5 | **96,6** | 996 contre 698 |
+| 4 | 134,1 | **132,1** | **996 contre 671** |
+
+> ⭐⭐ **À erreur égale, un seul grand pas rend 48 % de nappe en plus au bras 4.** Recalculer les
+> normales à chaque tour n'apporte **rien** — la marche libre n'est meilleure que sur 8 marches
+> sur 24 — et coûte un anneau de cellules par tour. Le dérouleur itéré peut donc être remplacé
+> par un pas unique, plus simple et qui rend plus de surface.
+
+⚠ Ce que ça ne dit **pas** : que la marche soit bonne. **Un seul pas coûte déjà 44,2 µm**, soit
+les deux tiers d'une demi-feuille — et c'est ce premier pas, pas l'accumulation, qui est le vrai
+poste de dépense.
+
+> ⭐⭐⭐ **Ce que cette tranche laisse à la suivante.** Le tableau des pistes est enfin cohérent :
+> la dérive est **linéaire à ~33 µm par tour** avec un **premier pas à 44**, l'estimateur linéaire
+> est donc le bon (d'où l'échec de la parabole), l'encadrement divise ce coût par deux (d'où son
+> gain), et une troisième ancre n'a rien de plus à annuler (d'où son inutilité). Le seul poste qui
+> reste est **le premier pas** : 44 µm pour un tour, là où l'accumulation n'en coûte que 33. C'est
+> lui qu'il faut attaquer, et c'est une question sur **un** pas — donc mesurable sans marcher.
 
 ### C2 ⭐ — le nul verso (H7)
 
@@ -2894,7 +2970,7 @@ mesurer est le piège habituel : `concordance_des_plans` la mesure désormais.
 
 ---
 
-### D4 ⚠⚠⚠ — 67 batteries vertes sur 152 n'atteignent pas le nombre qu'elles publient
+### D4 ⚠⚠⚠ — 67 batteries vertes sur 154 n'atteignent pas le nombre qu'elles publient
 
 Document dédié : [`80`](80_la_batterie_natteint_pas_le_nombre.md). Suite de
 [`61`](61_les_batteries_qui_ne_pouvaient_pas_echouer.md), dont il franchit la limite finale —
@@ -2917,7 +2993,7 @@ sans rien exécuter) :
 
 | | |
 |---|---:|
-| modules qui publient une mesure ou une figure | **152** |
+| modules qui publient une mesure ou une figure | **154** |
 | dont la batterie n'atteint pas ce chemin | **67** (44 %) |
 | fonctions hors de portée | **102** |
 

@@ -4220,7 +4220,7 @@ vérification du dépôt lui-même.
   balayage syntaxique de tout l'arbre montre que ce n'est pas une exception, et le document
   livre le remède sur le module fautif, ses six sondes, puis un second constat trouvé en chemin.
 - **compte exact et cause** :
-  - **67 modules en dette sur 152 qui publient une mesure ou une figure** (44 %), **102
+  - **67 modules en dette sur 154 qui publient une mesure ou une figure** (44 %), **102
     fonctions** hors de portée, relevés par `src/depot/le_chemin_du_nombre_publie.py`, qui ferme
     le graphe d'appels de chaque module et rend `atteintes(main) − atteintes(verifier)`.
   - ⚠⚠ **La portée a été resserrée en cours de route** : la première règle comptait comme
@@ -5518,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 3151
+- **lignes** : 3227
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5591,6 +5591,19 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - **E, ce qui est hors registre avec sa raison** : la soumission (hors périmètre décidé par
     l'auteur) ; le second papier de `72`, qui est ⚠⚠⚠ **une occasion de publication et non un
     progrès vers le prix** et n'avance qu'avec C ; H3 et H6 de `69`, répondues par le dépôt.
+  - ⭐⭐ **L'itération ne paie que de la NAPPE (2026-09-06, `pourquoi_la_derive_accelere`,
+    24 contrôles).** Deux artefacts écartés : le **masque** qui rétrécit (996 → 671 cellules) n'y
+    est pour rien — 1,5 / 2,1 / 2,7 / 0,0 µm d'écart entre le masque propre et le sous-ensemble
+    commun à tous les bras —, et la forme de la courbe tient **à spire de départ fixe** (4 départs
+    sur 6). Le troisième artefact était le **critère** lui-même, retiré ci-dessus ; le nouveau,
+    `sous_lineaire`, vit dans un seul endroit et `combien_dancres` l'**importe**.
+  - ⭐⭐ **Et le résultat actionnable** : la marche libre de `k` pas est comparée à **un seul pas
+    de longueur `k` fois le pas** le long des normales de départ — les deux vont au même endroit,
+    la seconde ne recalcule jamais ses normales donc ne ronge la grille qu'une fois. À erreur
+    égale (134,1 contre 132,1 µm au bras 4, la libre meilleure sur 8 marches sur 24), le grand pas
+    garde **996 cellules contre 671, soit 48 % de nappe en plus**. Le dérouleur itéré peut être
+    remplacé par un pas unique. ⚠ Ce que ça ne dit pas : que la marche soit bonne — **un seul pas
+    coûte déjà 44,2 µm**, les deux tiers d'une demi-feuille, et c'est lui le vrai poste de dépense.
   - ⛔⭐⭐⭐ **La piste des ancres est REFERMÉE le 2026-09-06** (`combien_dancres`, 46 contrôles,
     431 jeux d'ancres sur 9 cibles, même boîte 640 et même portée 4 que l'étude qu'elle
     prolonge). L'estimateur est la **droite des moindres carrés en bras signé, évaluée en zéro** :
@@ -5604,13 +5617,21 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     sur la courbe **agrégée**, qui descend encore — or la part de jeux encadrants passe de 0 à 50,
     80 puis 95 % avec le nombre d'ancres, donc son affaissement mesure d'abord ce **changement de
     composition**. Les deux courbes sont publiées, la seconde tranche.
-  - ⚠⚠⚠ **La prémisse de l'estimateur est FAUSSE au-delà du local, et la mesure le dit** : la
-    dérive d'une ancre vaut 41,1 / 63,1 / 100,8 / **149,4 µm** aux bras 1 à 4, soit des incréments
-    de **22,0 / 37,7 / 48,6** — elle **accélère**. Une droite n'en annule que la pente ; le résidu
-    de l'encadrement accélère lui aussi (**4,0 / 10,6 / 19,2**). ⭐⭐⭐ C'est le **mécanisme qui
-    manquait** à la tranche précédente, laquelle avait constaté que `1+4` et `2+4` nuisent en
-    écrivant *« ce corpus ne dit PAS si c'est la longueur absolue ou le déséquilibre qui casse »* :
-    c'est la **longueur** — à bras équilibrés, l'erreur passe de 30,0 à 63,8 µm entre ±1 et ±4.
+  - ⛔⚠⚠ **UNE AFFIRMATION PUBLIÉE PUIS RETIRÉE LE JOUR MÊME.** J'avais écrit que la dérive
+    **accélère**, sur le critère « les incréments consécutifs croissent » (22,0 / 37,7 / 48,6).
+    Ce critère **omet le plus grand incrément de tous** — celui du bras zéro, dont l'erreur est
+    nulle par définition, au bras un : la suite complète est **41,1 puis 22,0 / 37,7 / 48,6**, le
+    premier pas est le plus cher et il n'y a pas de tendance après lui. Il bascule en outre sur
+    deux micromètres et rend deux verdicts opposés sur deux populations qui mesurent la même
+    chose. Retiré par `pourquoi_la_derive_accelere` (voir plus bas dans cette fiche).
+  - ⭐⭐ **Ce qui est vrai et reproduit** : l'erreur au bras `k` reste **sous** `k` fois celle du
+    bras un, et le **coût par tour est stable** — 41,1 puis 31,6 / 33,6 / 37,4 µm. La dérive est
+    donc à peu près **linéaire avec un premier pas plus cher**, ce qui est exactement la prémisse
+    de l'estimateur et **pourquoi la parabole ne trouve rien à annuler**. L'encadrement divise ce
+    coût par deux (30,0 puis 17,0 / 14,9 / 16,0).
+  - ⚠ Et l'explication donnée à `1+4` et `2+4` qui nuisent **tombe avec elle** : ce n'est pas la
+    courbure. La question *« longueur ou déséquilibre »* redevient **ouverte**, ce qui est plus
+    honnête que de la laisser répondue à tort.
   - ⛔ **Et la parabole ne paie pas non plus, mesurée avant d'être écrite comme une piste.** Un
     ajustement de **degré deux** annulerait la courbure et demanderait trois ancres pour être
     identifié, ce qui redonnerait un rôle à la troisième. Sur les **235 jeux d'au moins trois
@@ -5623,7 +5644,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     même chose : la tranche précédente combinait **dans les deux sens** et mettait les distances en
     commun, celle-ci prend pour référence le nuage de l'ancre la plus basse.
   - ⚠⚠⚠ **D4 ouverte le 2026-09-06** — *le chemin qui produit le nombre publié n'est atteint
-    par aucune batterie* : **67 modules sur 152**, **102 fonctions**, et la branche laissée
+    par aucune batterie* : **67 modules sur 154**, **102 fonctions**, et la branche laissée
     dehors porte toujours le même nom (`mesurer` dans 13, `dessiner` dans 10). **Cinq modules**
     sont réparés et la matière **promue** en un lecteur unique plus deux fixtures qui décrivent
     le même objet (matière injectée par paramètre, découpage laissé dedans, batteries 32 → 46,
@@ -6107,8 +6128,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 2459 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 3151 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 2535 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 3227 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

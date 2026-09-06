@@ -10,12 +10,13 @@ ancre vaut **1,2 µm** et la quatrième **0,2**.
 encadrent **annulent la pente** de la dérive, et une pente annulée l'est d'un coup — il ne reste
 rien à annuler pour la troisième.
 
-⚠⚠⚠ ET LE PANNEAU B DIT AUSSI CE QUE JE CROYAIS FAUX. La dérive d'une ancre n'est **pas**
-linéaire : 41,1 / 63,1 / 100,8 / 149,4 µm aux bras 1 à 4, donc des incréments de **22,0 puis
-37,7 puis 48,6** µm par tour. Elle **accélère**. Un estimateur linéaire n'en annule que la part
-linéaire, et le résidu de l'encadrement accélère lui aussi — 4,0 puis 10,6 puis 19,2 µm. C'est le
-mécanisme qui manquait à la tranche précédente, laquelle avait constaté qu'un bras long **nuit**
-sans pouvoir dire si c'était la longueur ou le déséquilibre : c'est la **longueur**.
+⚠⚠⚠ ET CE PANNEAU A PORTÉ UNE AFFIRMATION RETIRÉE. J'y avais lu une **accélération**, sur le
+critère « les incréments consécutifs croissent » — qui omet le plus grand de tous, celui du bras
+zéro au bras un. La suite complète est **41,1 puis 22,0 / 37,7 / 48,6** µm, et l'erreur au bras
+`k` reste **sous** `k` fois celle du bras un : le coût par tour vaut 41,1 puis 31,6 / 33,6 /
+37,4 µm, il est **stable**. La dérive est donc à peu près linéaire avec un premier pas plus cher
+— ce qui est exactement la prémisse de l'estimateur, et ce qui explique que la parabole ne trouve
+rien à annuler. Détail dans `pourquoi_la_derive_accelere`.
 
 Usage :
     uv run python src/figures/figure_combien_dancres.py --verifier
@@ -63,12 +64,13 @@ def prose(m: dict) -> list[str]:
         "affaissement mesure d'abord ce changement de composition. les deux sont publiees.",
         "le panneau B dit POURQUOI : deux ancres qui encadrent annulent la PENTE de la derive, "
         "et une pente annulee l'est d'un coup — il ne reste rien pour la troisieme.",
-        "⚠⚠ et il dit ce que je croyais faux : la derive n'est PAS lineaire, ses increments "
-        f"valent {m['increments_par_tour_um']} um par tour, donc elle ACCELERE. un estimateur "
-        "lineaire n'en annule que la part lineaire, et le residu de l'encadrement accelere lui "
-        f"aussi ({m['increments_de_lencadrement_symetrique_um']} um). c'est le mecanisme qui "
-        "manquait a la tranche precedente, qui avait vu qu'un bras long NUIT sans pouvoir dire "
-        "si c'etait la longueur ou le desequilibre : c'est la LONGUEUR.",
+        "⚠⚠ RETRACTATION : j'avais lu ici une ACCELERATION, sur le critere « les increments "
+        "consecutifs croissent » — qui omet le plus grand de tous, celui du bras zero au bras "
+        f"un. la suite complete est {m['increments_par_tour_um']} um, et le cout par tour "
+        f"{m['cout_par_tour_um']} um est STABLE : l'erreur au bras k reste SOUS k fois celle du "
+        "bras un. la derive est a peu pres lineaire avec un premier pas plus cher — ce qui est "
+        "la premisse de l'estimateur, et ce qui explique que la parabole ne trouve rien a "
+        "annuler. detail dans pourquoi_la_derive_accelere.",
         # ⚠ Les comptes sont lus dans la mesure et non ecrits ici : une prose qui annoncerait
         # « sur un cas » quand la mesure en a trois se lirait comme une precaution alors qu'elle
         # serait fausse — et c'est arrive dans la premiere version de cette legende.
@@ -235,15 +237,21 @@ def verifier() -> int:
     # d'une ancre croît avec son bras, et par pas à peu près constants.
     v("l'erreur d'une ancre croît avec son bras", m["lerreur_dune_ancre_croit_avec_son_bras"],
       str(m["increments_par_tour_um"]))
-    # ⚠⚠⚠ ET LE FAIT QUI CONTREDIT LA PRÉMISSE DE L'ESTIMATEUR, vérifié plutôt que lissé : les
-    # incréments CROISSENT, donc la dérive accélère. La droite qu'on ajuste n'est pas la bonne
-    # courbe — elle en annule la pente et laisse la courbure, et c'est la courbure qui borne la
-    # longueur du bras. Une figure qui écrirait « linéaire » ici mentirait sur sa propre mesure.
-    v("la dérive d'une ancre ACCÉLÈRE avec le bras, elle n'est pas linéaire",
-      m["la_derive_dune_ancre_est_surlineaire"], str(m["increments_par_tour_um"]))
-    v("... et le résidu de l'encadrement accélère lui aussi, donc c'est bien la courbure",
-      m["le_residu_de_lencadrement_est_surlineaire"],
-      str(m["increments_de_lencadrement_symetrique_um"]))
+    # ⚠⚠⚠ ET LA FORME DE LA COURBE, APRÈS RÉTRACTATION : l'erreur au bras `k` reste SOUS `k`
+    # fois celle du bras un, et le coût par tour est stable. C'est ce qui rend la droite le bon
+    # estimateur — une figure qui écrirait encore « accélère » mentirait sur sa propre mesure.
+    v("la dérive d'une ancre est SOUS-linéaire, pas accélérée",
+      m["la_derive_dune_ancre_est_sous_lineaire"], str(m["cout_par_tour_um"]))
+    v("... le premier pas coûte plus que n'importe quel tour suivant",
+      m["le_premier_pas_coute_le_plus"], str(m["increments_par_tour_um"]))
+    v("... et le résidu de l'encadrement suit la même forme",
+      m["le_residu_de_lencadrement_est_sous_lineaire"],
+      str(m["cout_par_tour_de_lencadrement_um"]))
+    # ⚠⚠ ET CE QUE L'ENCADREMENT ACHÈTE, EN UN CHIFFRE : il divise le coût par tour. Sans ça,
+    # « il aide » resterait une médiane sans mécanisme.
+    v("... et il divise le coût par tour d'une ancre seule",
+      m["cout_par_tour_de_lencadrement_um"][-1] < m["cout_par_tour_um"][-1] / 1.5,
+      f"{m['cout_par_tour_de_lencadrement_um']} contre {m['cout_par_tour_um']}")
     # ⚠⚠⚠ ET LE CONTRÔLE QUI EMPÊCHE DE LIRE LA COURBE AGRÉGÉE COMME UN RÉSULTAT : la part de
     # jeux encadrants change avec k. Si elle ne changeait pas, les deux courbes seraient la
     # même et la précaution du panneau A serait une décoration.

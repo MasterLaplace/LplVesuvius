@@ -13635,11 +13635,19 @@
   },
   "lerreur_dune_ancre_croit_avec_son_bras": true,
   "increments_par_tour_um": [
+    41.1,
     22.0,
     37.7,
     48.6
   ],
-  "la_derive_dune_ancre_est_surlineaire": true,
+  "cout_par_tour_um": [
+    41.1,
+    31.6,
+    33.6,
+    37.4
+  ],
+  "la_derive_dune_ancre_est_sous_lineaire": true,
+  "le_premier_pas_coute_le_plus": true,
   "lerreur_baisse_de_une_a_deux": true,
   "lerreur_baisse_encore_de_deux_a_trois": true,
   "ancres_avant_que_le_gain_cesse": null,
@@ -13679,11 +13687,18 @@
     }
   },
   "increments_de_lencadrement_symetrique_um": [
+    30.0,
     4.0,
     10.6,
     19.2
   ],
-  "le_residu_de_lencadrement_est_surlineaire": true,
+  "cout_par_tour_de_lencadrement_um": [
+    30.0,
+    17.0,
+    14.9,
+    15.9
+  ],
+  "le_residu_de_lencadrement_est_sous_lineaire": true,
   "plus_grand_bras_symetrique_qui_tient": 4,
   "cas_a_ce_bras": 2,
   "jeux_a_trois_ancres_ou_plus_qui_encadrent": 235,
