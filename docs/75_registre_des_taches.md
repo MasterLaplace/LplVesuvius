@@ -2019,20 +2019,66 @@ connaître la réponse.
 toujours pas — ce qui est cohérent avec la mesure du vieillissement, puisqu'il n'y a de gain à
 récupérer qu'au tout premier pas.
 
-> ⭐⭐⭐ **Ce que cette tranche laisse à la suivante.** Le raccrochage sur la matière est **clos
-> comme moteur de déroulement** : il gagne 12,7 µm depuis une spire publiée, plus rien après un
-> tour, et aucune de ses six variantes ne bat le pas aveugle. Ce qui reste ouvert est ce que la
-> chaîne d'élimination a désigné sans jamais l'attaquer : **la dispersion des normales monte de
-> 2,8° à 10,9° même sur la marche aveugle**, et c'est elle qui borne tout le reste. La question
-> suivante ne porte donc plus sur ce qu'on lit dans le volume mais sur **ce qui propage une
-> géométrie** — et elle a déjà son instrument, puisque cette dispersion se calcule sans cible.
+##### ⛔⛔ Et la dispersion des normales est un SYMPTÔME — quatre soupçons, quatre écartés
 
-> ⭐⭐⭐ **Ce que cette tranche laisse à la suivante est plus précis que ce qu'elle a retiré.** La
-> question n'est plus « quel raccrochage » mais **« comment garder une surface assez propre pour
-> qu'un raccrochage y voie encore une feuille »** — puisque le gain existe au tour 0 et a disparu
-> au tour 1. Les deux pistes que la mesure désigne : la surface se dégrade **avant** que le
-> raccrochage n'échoue (donc c'est la propagation des normales qu'il faut tenir), et le lissage
-> compte **d'autant plus que la nappe est grande**, ce que seule la boîte élargie a montré.
+Une normale est une **dérivée**, et une dérivée estimée entre voisins immédiats divise le bruit de
+position par la maille : ici seize voxels, donc une erreur d'un voxel fait déjà quatre degrés.
+Élargir le support de la différence centrée divise ce bruit d'autant — et coûte le bord, une
+cellule de plus de chaque côté **par tour**. Les deux effets sont opposés, donc le support se
+**balaye**.
+
+| support | tours | cellules (1er → fin) | dérive/tour | dispersion finale | écart latéral attendu |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 6 | 795 → 349 | +22,3 µm | **10,9°** | **26 µm** |
+| 2 | 6 | 693 → 41 | +32,7 µm | **1,5°** | 4 µm |
+| 3 | 4 | 597 → 41 | +23,1 µm | 1,4° | 3 µm |
+| 4 | 3 | 509 → 41 | +25,4 µm | 1,4° | 3 µm |
+
+⭐ **Un support de deux divise la dispersion par sept** (10,9° → 1,5°), et l'écart latéral qu'elle
+prédit — un pas de longueur `L` le long d'une normale fausse de θ atterrit à `L·sin θ` de côté —
+passe de **26 µm à 4**. Ce 26 µm est du même ordre que la dérive mesurée, ce qui faisait de la
+dispersion une cause parfaitement plausible.
+
+⚠⚠ **La comparaison des dérives est CONFONDUE par l'érosion** : au sixième tour il reste 349
+cellules à support 1 contre 41 aux autres, donc les marches ne sont plus jugées sur la même
+population. La seule comparaison honnête est celle du **premier tour**, où tous partent de cinq à
+huit cents cellules :
+
+| support | cellules | erreur du pas | dispersion |
+|---:|---:|---:|---:|
+| 1 | 795 | **42,7 µm** | 2,78° |
+| 2 | 693 | 42,2 µm | 2,29° |
+| 3 | 597 | 42,3 µm | 1,93° |
+| 4 | 509 | **41,7 µm** | **1,59°** |
+
+> ⛔⛔ **La dispersion tombe de 43 %, l'erreur du pas ne bouge pas d'un micromètre.** La dispersion
+> angulaire des normales est donc un **symptôme**, pas la cause de la dérive. Quatre soupçons
+> testés, quatre écartés : la fenêtre, les décalages, le gabarit, les normales.
+
+⚠ Le seuil du verdict est un vingtième de l'erreur, soit l'ordre de l'arrondi publié, et non un
+nombre choisi pour que la phrase passe. Et les deux moitiés sont exigées ensemble : « la
+dispersion baisse » seul dirait que ça marche, « l'erreur ne suit pas » seul dirait que ça ne sert
+à rien — c'est leur conjonction qui dit *symptôme*.
+
+⚠ Un contrôle de cette tranche **ne pouvait pas échouer** et a été réécrit : il vérifiait que
+60·sin(10°) vaut 10,42, c'est-à-dire mon arithmétique contre elle-même. Ce qui se teste vraiment
+est que les **deux colonnes publiées s'accordent** — un écart latéral calculé sur une autre
+dispersion que celle rendue à côté serait un chiffre plausible et faux. ⚠ Et sa fixture de bruit
+avait une **période de trois**, que le support trois annulait exactement : le contrôle passait à
+0,00°, vrai pour une raison qui n'était pas celle qu'on teste.
+
+> ⭐⭐⭐ **Ce que cette tranche laisse à la suivante.** Le raccrochage sur la matière est **clos
+> comme moteur de déroulement** — il gagne 12,7 µm depuis une spire publiée, plus rien après un
+> tour, et aucune de ses variantes ne bat le pas aveugle — et **les quatre soupçons sur la
+> mécanique du pas sont tous écartés** : la fenêtre, les décalages, le gabarit, les normales.
+> Ce qui n'a **jamais** été essayé est la seule quantité que toutes ces marches tiennent pour
+> acquise : **la LONGUEUR du pas, une par cellule.** Le corpus dit qu'elle varie d'un facteur
+> cinq d'un endroit à l'autre — les écarts entre spires consécutives vont de 60,5 µm au premier
+> décile à 295,1 au neuvième — et tout ce qui a été mesuré ici avance de la **même** médiane de
+> 135,5 µm partout. `la_derive_est_elle_un_biais` avait ajusté une constante **globale** et n'en
+> avait tiré qu'un cinquième ; une longueur **locale**, lue dans le volume, n'a pas d'équivalent
+> mesuré. Et elle est lisible sans cible : la crête suivante le long de la normale **est** la
+> longueur du pas.
 
 ### C2 ⭐ — le nul verso (H7)
 

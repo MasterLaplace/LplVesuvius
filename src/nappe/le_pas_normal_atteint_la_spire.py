@@ -69,7 +69,7 @@ def grille(wrap: dict, volume: str, voxel_um: float,
     return a, ok
 
 
-def normales(a: np.ndarray, ok: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+def normales(a: np.ndarray, ok: np.ndarray, pas: int = 1) -> tuple[np.ndarray, np.ndarray]:
     """La normale unitaire en chaque cellule, par produit vectoriel des deux tangentes de grille.
 
     ⚠⚠ Les différences sont **centrées** et une cellule n'est retenue que si ses quatre voisins
@@ -79,16 +79,25 @@ def normales(a: np.ndarray, ok: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
     ⚠ Les normales dégénérées — norme nulle, là où la surface se replie sur elle-même dans la
     grille — sont écartées et **comptées**, pas normalisées de force : diviser par zéro rendrait
     une direction arbitraire qui aurait l'air d'une mesure.
+
+    ⚠⚠⚠ `pas` EST LE SUPPORT DE LA DÉRIVÉE, et il vaut UN par défaut pour que rien de publié ne
+    bouge. Une dérivée estimée entre voisins immédiats divise le bruit de position par la
+    distance qui les sépare : sur une grille de seize voxels de maille, une erreur d'un voxel
+    fait déjà quatre degrés de normale. L'élargir divise ce bruit d'autant — et coûte le bord :
+    une cellule a besoin de voisins à ±`pas`, donc le masque perd `pas` cellules de chaque côté
+    au lieu d'une. Les deux effets sont réels et opposés, donc `pas` se **balaye**, il ne se
+    choisit pas.
     """
+    k = max(1, int(pas))
     du = np.zeros_like(a)
     dv = np.zeros_like(a)
-    du[1:-1] = a[2:] - a[:-2]
-    dv[:, 1:-1] = a[:, 2:] - a[:, :-2]
+    du[k:-k] = a[2 * k:] - a[:-2 * k]
+    dv[:, k:-k] = a[:, 2 * k:] - a[:, :-2 * k]
     n = np.cross(du, dv)
     norme = np.linalg.norm(n, axis=-1)
     voisins = np.zeros_like(ok)
-    voisins[1:-1, 1:-1] = (ok[2:, 1:-1] & ok[:-2, 1:-1]
-                           & ok[1:-1, 2:] & ok[1:-1, :-2] & ok[1:-1, 1:-1])
+    voisins[k:-k, k:-k] = (ok[2 * k:, k:-k] & ok[:-2 * k, k:-k]
+                           & ok[k:-k, 2 * k:] & ok[k:-k, :-2 * k] & ok[k:-k, k:-k])
     bon = voisins & (norme > 1e-9)
     unite = np.zeros_like(a)
     unite[bon] = n[bon] / norme[bon][:, None]
@@ -211,6 +220,32 @@ def verifier() -> int:
     troue[5, 5] = False
     v("un voisin absent retire la normale de ses quatre voisins",
       not normales(plan, troue)[1][5, 4] and not normales(plan, troue)[1][4, 5])
+    # ⚠⚠ LE SUPPORT DE LA DÉRIVÉE : un pas plus large donne la MÊME normale sur un plan — sinon
+    # il déplacerait une géométrie qu'il doit seulement lire plus proprement — et il coûte le
+    # bord, ce qui est le prix qu'il faut pouvoir compter.
+    n2, bon2 = normales(plan, ok, pas=2)
+    v("un support élargi rend la même normale sur un plan",
+      bool(np.allclose(np.abs(n2[bon2]), np.array([0.0, 0.0, 1.0]))))
+    v("... et il coûte une cellule de bord de plus de chaque côté",
+      int(bon2.sum()) == (plan.shape[0] - 4) * (plan.shape[1] - 4)
+      and int(normales(plan, ok)[1].sum()) == (plan.shape[0] - 2) * (plan.shape[1] - 2),
+      f"{int(bon2.sum())} contre {int(normales(plan, ok)[1].sum())}")
+    # ⚠⚠⚠ ET IL DOIT RÉELLEMENT DIVISER LE BRUIT, sinon ce n'est qu'un rétrécissement : un plan
+    # bruité doit rendre des normales moins dispersées à support large.
+    # ⚠⚠ LE BRUIT NE DOIT PAS RÉSONNER AVEC LE PAS. Ma première fixture avait une période de
+    # trois, donc une différence centrée de pas trois l'annulait EXACTEMENT et le contrôle
+    # passait à 0,00° — vrai, et vrai pour une raison qui n'est pas celle qu'on teste. Un
+    # tirage pseudo-aléatoire n'a de période avec aucun pas.
+    secousse = plan.copy()
+    secousse[:, :, 2] += np.random.default_rng(17).normal(0.0, 0.5, plan.shape[:2])
+    def _disp(nn, bb):
+        paire = bb[:, :-1] & bb[:, 1:]
+        cos = np.sum(nn[:, :-1][paire] * nn[:, 1:][paire], axis=-1)
+        return float(np.degrees(np.arccos(np.clip(cos, -1.0, 1.0))).mean())
+    d1 = _disp(*normales(secousse, ok, pas=1))
+    d3 = _disp(*normales(secousse, ok, pas=3))
+    v("un support élargi divise la dispersion d'un plan bruité", d3 < d1 / 2.0,
+      f"{d3:.2f}° contre {d1:.2f}°")
 
     # --- le pas, dans les deux sens, sur des plans dont l'écart est connu ---
     depart = plan[1:-1, 1:-1].reshape(-1, 3)

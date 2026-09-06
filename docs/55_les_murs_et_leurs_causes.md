@@ -11,7 +11,7 @@ la fois. Une feuille de route qui liste des tâches laisse croire qu'on avance q
 tourne ; celle-ci liste des causes **éliminées**, et montre l'espace rétrécir. C'est le
 seul progrès mesurable sur un problème que personne n'a résolu.
 
-**49 causes candidates** sur **4 murs** : ❌ **35** éliminées · ✅ **11** confirmées · 🔒 **3** bloquées
+**50 causes candidates** sur **4 murs** : ❌ **36** éliminées · ✅ **11** confirmées · 🔒 **3** bloquées
 
 | symbole | verdict | ce que ça veut dire |
 |---|---|---|
@@ -29,7 +29,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 
 ## 1. Le tracé ne suit pas de feuille
 
-❌ 17 éliminées · ✅ 6 confirmées · 🔒 3 bloquées
+❌ 18 éliminées · ✅ 6 confirmées · 🔒 3 bloquées
 
 | cause candidate | | ce qui a été mesuré | où |
 |---|---|---|---|
@@ -56,6 +56,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | raccrocher par un décalage UNIQUE pour toute la nappe, un par tour | ❌ | RÉTRACTÉE le jour même : à 191 cellules la dérive sortait NÉGATIVE (-19,5 um par tour) et le décalage unique était le seul à tenir la feuille ; à 494 puis 906 cellules, au même endroit et avec le même code, elle vaut +67,3 puis +56,3 — un résultat qui s'inverse quand l'échantillon grandit n'était pas un résultat | [`75`](75_registre_des_taches.md) |
 | le gain d'un pas raccroché survivrait à une surface reconstruite | ❌ | depuis une spire PUBLIÉE le raccrochage gagne +12,7 um sur le pas aveugle ; dès qu'UN seul tour aveugle a été fait il gagne -0,2 um, et sur les quatre âges suivants la médiane vaut -0,2 avec un signe qui change quatre fois — le raccrochage ne raccroche que ce qui est déjà à sa place | [`75`](75_registre_des_taches.md) |
 | ce qui se dégrade sous un dérouleur raccroché est le gabarit qu'il relit | ❌ | geler le gabarit sur la spire de départ donne +54,2 um par tour contre +56,1 sans remède, et son contraste ne s'effondre pas (51, 78, 53, 40, 47, 51 au fil des six tours) : la surface ressemble encore à une feuille, c'est la DIRECTION de recherche qui se perd | [`75`](75_registre_des_taches.md) |
+| la dispersion des normales serait la cause de la dérive | ❌ | élargir le support de la dérivée de 1 à 4 cellules fait tomber la dispersion de 2,78 à 1,59 degré (-43 %) et laisse l'erreur du pas ou elle est : 42,7 puis 41,7 um, au premier tour ou tous les supports partent de 500 a 800 cellules — la dispersion est un SYMPTOME, quatre soupcons testes et quatre ecartes | [`75`](75_registre_des_taches.md) |
 | comparer le relief d'une trace L2 à une trace L0 | 🔒 | à aire égale un maillage L2 rend quatre fois moins de pixels de côté, donc les deux ne tiennent jamais dans la même fenêtre d'analyse — le relief ne peut pas les départager | [`54`](54_cinq_rendus_vides.md) |
 | les résidus du champ d'orientation publié (A2 ter) | 🔒 | le pas de grille publié vaut 64 voxels, soit 3,89 écarts inter-feuilles par cellule contre 0,5 exigés par Nyquist : le champ est REPLIÉ, pas bruité | [`75`](75_registre_des_taches.md) |
 | bâtir le raccrochage à la matière sur les piles de surface publiées | 🔒 | la pile porte à 129,6 um autour de la surface, soit 0,956 feuille, quand la voisine est à 135,5 : il manque 5,9 um — mesuré sur 1 459 592 colonnes, avec la convention du centre vérifiée (pic à -1,5 couche) | [`75`](75_registre_des_taches.md) |

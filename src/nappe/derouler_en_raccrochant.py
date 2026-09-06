@@ -136,7 +136,7 @@ def un_pas_raccroche(a: np.ndarray, ok: np.ndarray, pas_vx: float, sens: float,
                      lignes_gabarit: int = 400, melanger=None,
                      accorder: bool = False, raccrocher: bool = True,
                      global_: bool = False, gabarit_fixe=None,
-                     normales_lissees: bool = False) -> tuple:
+                     normales_lissees: bool = False, pas_de_normale: int = 1) -> tuple:
     """Un pas normal, puis le raccrochage de chaque cellule sur le gabarit de la surface courante.
 
     Rend `(grille avancée, masque, diagnostic)`.
@@ -154,7 +154,7 @@ def un_pas_raccroche(a: np.ndarray, ok: np.ndarray, pas_vx: float, sens: float,
         accorder_les_voisins, correler, decalage_retenu, le_long, profil_autour,
     )
 
-    n, bon = normales(a, ok)
+    n, bon = normales(a, ok, pas=pas_de_normale)
     brute = dispersion_angulaire(n, bon)
     if normales_lissees:
         n = lisser_les_normales(n, bon)
@@ -256,7 +256,8 @@ def derouler(depart: np.ndarray, ok: np.ndarray, cibles: dict[int, np.ndarray],
              demi_vx: float, demi_gab: int, melanger=None, accorder: bool = False,
              minimum: int = 30, demi_feuille_um: float = 67.75,
              raccrocher: bool = True, global_: bool = False,
-             gabarit_fige: bool = False, normales_lissees: bool = False) -> list[dict]:
+             gabarit_fige: bool = False, normales_lissees: bool = False,
+             pas_de_normale: int = 1) -> list[dict]:
     """La marche raccrochée, jugée à chaque tour contre la spire de même rang.
 
     ⚠⚠ Les cellules jugées sont celles **encore vivantes**, et leur compte accompagne chaque
@@ -280,7 +281,8 @@ def derouler(depart: np.ndarray, ok: np.ndarray, cibles: dict[int, np.ndarray],
                                       melanger=melanger, accorder=accorder,
                                       raccrocher=raccrocher, global_=global_,
                                       gabarit_fixe=fige,
-                                      normales_lissees=normales_lissees)
+                                      normales_lissees=normales_lissees,
+                                      pas_de_normale=pas_de_normale)
         # ⚠ Le gabarit figé est celui du PREMIER tour, donc celui de la spire de départ, et
         # il est gelé après coup : le construire avant la boucle demanderait de dupliquer la
         # lecture que le premier pas fait déjà.
@@ -630,6 +632,32 @@ def mesurer(minimum: int = 30, graine: int = 42, cache_actif: bool = True,
         None if not signes else round(ecart_um + float(np.median(signes)), 1))
     # ⚠⚠ LE CONTRASTE DU GABARIT EST LA GRANDEUR QUI DIT SI LA SURFACE RESSEMBLE ENCORE À UNE
     # FEUILLE : lu sur la crête il vaut plusieurs dizaines de niveaux, lu à côté il s'écrase.
+    r["balayage_du_pas_de_normale"] = balayer_le_pas_de_normale(
+        a0, ok0, cibles, pas_vx, VOXEL_UM, sens, vol, demi_vx, demi_gab, minimum=minimum)
+    # ⚠⚠⚠ LA SEULE COMPARAISON NON CONFONDUE EST CELLE DU PREMIER TOUR. Au-delà, un support
+    # large a mangé le bord — 349 cellules contre 41 au sixième tour — donc les marches ne sont
+    # plus jugées sur la même population et leur écart mesure l'érosion autant que la
+    # géométrie. Au premier tour, tous les supports partent de cinq à huit cents cellules.
+    bal_ = r["balayage_du_pas_de_normale"]
+    r["au_premier_tour_par_support"] = [
+        dict(pas_de_normale=e_["pas_de_normale"], cellules=e_["cellules_au_premier_tour"],
+             erreur_um=(e_["erreur_um"][0] if e_["erreur_um"] else None),
+             dispersion_deg=(e_["dispersion_deg"][0] if e_["dispersion_deg"] else None))
+        for e_ in bal_]
+    prem = [e_ for e_ in r["au_premier_tour_par_support"] if e_["erreur_um"] is not None]
+    if len(prem) > 1:
+        d0, dn = prem[0]["dispersion_deg"], prem[-1]["dispersion_deg"]
+        e0, en = prem[0]["erreur_um"], prem[-1]["erreur_um"]
+        r["la_dispersion_baisse_avec_le_support"] = bool(dn < d0 * 0.8)
+        # ⚠⚠ ET L'ERREUR, ELLE, NE SUIT PAS : c'est ce qui fait de la dispersion un SYMPTÔME.
+        # Le seuil est un vingtième, soit l'ordre de l'arrondi publié, pas un nombre choisi
+        # pour que la phrase passe.
+        r["lerreur_suit_la_dispersion"] = bool(abs(en - e0) > 0.05 * e0)
+        r["la_dispersion_est_un_symptome"] = bool(
+            r["la_dispersion_baisse_avec_le_support"] and not r["lerreur_suit_la_dispersion"])
+    r["meilleur_pas_de_normale"] = min(
+        (e_ for e_ in r["balayage_du_pas_de_normale"] if e_["derive_par_tour_um"] is not None),
+        key=lambda e_: e_["derive_par_tour_um"], default={}).get("pas_de_normale")
     r["dispersion_des_normales_deg"] = dict(
         aveugle=[e_["dispersion_normales_deg"] for e_ in aveugle],
         raccroche=[e_["dispersion_normales_deg"] for e_ in raccroche],
@@ -771,6 +799,58 @@ def le_gain_vieillit(depart: np.ndarray, ok: np.ndarray, cibles: dict[int, np.nd
         # ⚠ La trajectoire de référence avance en AVEUGLE : si elle avançait raccrochée, l'âge
         # de la surface dépendrait du geste qu'on est en train de juger.
         a, m = nu, mnu
+    return out
+
+
+def balayer_le_pas_de_normale(depart: np.ndarray, ok: np.ndarray,
+                              cibles: dict[int, np.ndarray], pas_vx: float, voxel_um: float,
+                              sens: float, vol, demi_vx: float, demi_gab: int,
+                              pas: tuple[int, ...] = (1, 2, 3, 4),
+                              minimum: int = 30) -> list[dict]:
+    """La marche AVEUGLE, pour plusieurs supports de dérivée de la normale.
+
+    ⚠⚠⚠ POURQUOI CE BALAYAGE, ET POURQUOI SUR LA MARCHE AVEUGLE. La chaîne d'élimination a
+    désigné les normales sans jamais les attaquer : leur dispersion monte de 2,8° à 10,9° même
+    quand personne ne raccroche, donc elle borne tout le reste. Une normale est une dérivée, et
+    une dérivée estimée entre voisins immédiats divise le bruit de position par la maille — ici
+    seize voxels, donc une erreur d'un voxel fait déjà quatre degrés. Élargir le support divise
+    ce bruit d'autant.
+
+    ⚠⚠ ET ÇA COÛTE LE BORD, ce qui est l'autre moitié de la mesure : une cellule a besoin de
+    voisins à ±`pas`, donc le masque perd `pas` cellules de chaque côté **par tour**. Les deux
+    effets sont opposés et le balayage les rend visibles ensemble — un support qui nettoie la
+    normale en mangeant la nappe n'a rien nettoyé.
+
+    ⚠ Le raccrochage est ÉTEINT ici : on mesure ce que la géométrie fait toute seule. Le
+    mélanger à un raccrochage ferait bouger deux choses et n'en attribuerait aucune.
+    """
+    from le_pas_normal_atteint_la_spire import distance_a  # noqa: PLC0415
+
+    out = []
+    for k in pas:
+        marche = derouler(depart, ok, cibles, pas_vx, voxel_um, sens, vol, demi_vx, demi_gab,
+                          raccrocher=False, minimum=minimum, pas_de_normale=k)
+        if not marche:
+            out.append(dict(pas_de_normale=k, tours=0, cellules_au_premier_tour=0,
+                            derive_par_tour_um=None, dispersion_deg=[], erreur_um=[]))
+            continue
+        d_ = derive_par_tour(marche)
+        out.append(dict(
+            pas_de_normale=k, tours=len(marche),
+            cellules_au_premier_tour=marche[0]["cellules"],
+            cellules_au_dernier_tour=marche[-1]["cellules"],
+            derive_par_tour_um=(None if d_ is None else round(d_, 1)),
+            dispersion_deg=[e_["dispersion_normales_deg"] for e_ in marche],
+            erreur_um=[e_["erreur_um"] for e_ in marche],
+            # ⚠⚠ CE QUE LA DISPERSION EXPLIQUE, calculé et non affirmé : une normale fausse de
+            # θ fait atterrir un pas de longueur L à L·sin(θ) de côté. Si ce nombre est du
+            # même ordre que l'erreur mesurée, la dispersion SUFFIT à l'expliquer ; s'il est
+            # dix fois plus petit, elle est un symptôme et pas la cause.
+            ecart_lateral_attendu_um=[
+                (None if e_["dispersion_normales_deg"] is None else
+                 round(pas_vx * np.sin(np.radians(e_["dispersion_normales_deg"])) * voxel_um, 1))
+                for e_ in marche],
+        ))
     return out
 
 
@@ -1031,6 +1111,41 @@ def verifier() -> int:
     v("la dispersion est rendue à chaque tour",
       all(e["dispersion_normales_deg"] is not None for e in mn))
 
+    # --- le support de la dérivée ---
+    bal = balayer_le_pas_de_normale(plan, ok, cibles, 60.0, 1.0, 1.0, vf, 15.0, 8,
+                                    pas=(1, 2), minimum=1)
+    v("le balayage rend un point par support", len(bal) == 2, str(len(bal)))
+    # ⚠⚠ UN SUPPORT PLUS LARGE COÛTE DES CELLULES, et c'est la moitié de la mesure : un
+    # balayage qui ne rendrait que la dérive laisserait croire qu'élargir est gratuit.
+    v("... et un support plus large part de moins de cellules",
+      bal[1]["cellules_au_premier_tour"] < bal[0]["cellules_au_premier_tour"],
+      f"{bal[1]['cellules_au_premier_tour']} contre {bal[0]['cellules_au_premier_tour']}")
+    # ⚠⚠⚠ L'ÉCART LATÉRAL ATTENDU est calculé, pas affirmé : une normale fausse de θ fait
+    # atterrir un pas de longueur L à L·sin(θ) de côté. Sur un plan parfait il vaut zéro.
+    v("l'écart latéral attendu est nul quand les normales sont parfaites",
+      all(x < 1e-6 for x in bal[0]["ecart_lateral_attendu_um"]),
+      str(bal[0]["ecart_lateral_attendu_um"]))
+    # ⚠⚠ CE CONTRÔLE A ÉTÉ RÉÉCRIT : la première version vérifiait que 60·sin(10°) vaut 10,42,
+    # c'est-à-dire ma propre arithmétique contre elle-même — elle ne pouvait pas échouer. Ce
+    # qui se teste vraiment est que les DEUX colonnes publiées s'accordent : un écart latéral
+    # calculé sur une autre dispersion que celle rendue à côté serait un chiffre plausible et
+    # faux, et c'est exactement la panne qu'aucune relecture n'attrape.
+    bruite_p = plan.copy()
+    bruite_p[:, :, 2] += np.random.default_rng(23).normal(0.0, 0.6, plan.shape[:2])
+    balb = balayer_le_pas_de_normale(bruite_p, ok, cibles, 60.0, 1.0, 1.0, vf, 15.0, 8,
+                                     pas=(1,), minimum=1)
+    # ⚠ La tolérance vient des ARRONDIS des deux colonnes publiées — un dixième de micromètre
+    # sur l'une, un centième de degré sur l'autre — et pas d'un nombre choisi : les comparer au
+    # bit près a fait échouer ce contrôle sur 59,97 contre 60,0, ce qui n'est pas un désaccord.
+    accord = all(
+        abs(lat - 60.0 * np.sin(np.radians(dg))) < 0.06
+        for lat, dg in zip(balb[0]["ecart_lateral_attendu_um"], balb[0]["dispersion_deg"]))
+    v("l'écart latéral publié s'accorde avec la dispersion publiée à côté", accord,
+      f"{balb[0]['ecart_lateral_attendu_um']} pour {balb[0]['dispersion_deg']}")
+    v("... et il n'est pas nul sur une surface bruitée",
+      any(x > 0.5 for x in balb[0]["ecart_lateral_attendu_um"]),
+      str(balb[0]["ecart_lateral_attendu_um"]))
+
     # --- le gabarit figé ---
     # ⚠⚠ SUR UN VOLUME EN PLANS PARFAITS, geler le gabarit ne doit RIEN changer : la forme
     # d'une feuille y est la même partout. Un écart là voudrait dire que le gel modifie autre
@@ -1244,6 +1359,30 @@ def main() -> int:
     print(f"le raccrochage gagne à {r['tours_ou_le_raccrochage_gagne']} tours sur "
           f"{r['tours_mesures']} (accordé : {r['tours_ou_laccord_gagne']}), "
           f"et bat le hasard à {r['tours_ou_il_bat_le_hasard']}")
+    print("\nle support de la dérivée de la normale, sur la marche AVEUGLE :")
+    print(f"  {'pas':>4} {'tours':>6} {'cell. 1er':>10} {'cell. fin':>10} "
+          f"{'dérive/tour':>12} {'dispersion fin':>15} {'écart latéral':>14}")
+    for e_ in r["balayage_du_pas_de_normale"]:
+        d_ = e_["derive_par_tour_um"]
+        disp = e_["dispersion_deg"][-1] if e_["dispersion_deg"] else None
+        lat = e_["ecart_lateral_attendu_um"][-1] if e_.get("ecart_lateral_attendu_um") else None
+        print(f"  {e_['pas_de_normale']:>4} {e_['tours']:>6} "
+              f"{e_['cellules_au_premier_tour']:>10} "
+              f"{e_.get('cellules_au_dernier_tour', 0):>10} "
+              f"{('—' if d_ is None else f'{d_:+.1f}µ'):>12} "
+              f"{('—' if disp is None else f'{disp:.1f}°'):>15} "
+              f"{('—' if lat is None else f'{lat:.0f}µ'):>14}")
+    print(f"  → meilleur support : {r['meilleur_pas_de_normale']}")
+    print("  au PREMIER tour, seule comparaison non confondue par l'érosion :")
+    for e_ in r["au_premier_tour_par_support"]:
+        print(f"     pas {e_['pas_de_normale']} · {e_['cellules']:>4} cellules · "
+              f"erreur {e_['erreur_um']:.1f} µm · dispersion {e_['dispersion_deg']:.2f}°")
+    print(f"  → la dispersion baisse avec le support : "
+          f"{'OUI' if r.get('la_dispersion_baisse_avec_le_support') else 'NON'} · "
+          f"l'erreur suit : {'OUI' if r.get('lerreur_suit_la_dispersion') else 'NON'} · "
+          f"donc symptôme : "
+          f"{'OUI' if r.get('la_dispersion_est_un_symptome') else 'NON'}")
+
     print("\nle gain d'UN pas raccroché, depuis une surface qui vieillit EN AVEUGLE :")
     print(f"  {'âge':>4} {'cell.':>6} {'pas aveugle':>12} {'raccroché':>11} {'gain':>8} "
           f"{'rugosité':>9}")

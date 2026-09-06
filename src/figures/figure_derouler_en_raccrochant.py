@@ -78,7 +78,13 @@ def prose(m: dict) -> list[str]:
         f"spire PUBLIEE et {vi[1]['gain_um']:+.1f} um des qu'UN tour aveugle a ete fait ; "
         f"ensuite la mediane vaut {m['gain_median_apres_le_premier_pas_um']:+.1f} um et le "
         "signe change. le raccrochage ne raccroche que ce qui est deja a sa place.",
-        f"panneau A, LE MECANISME : lisser les NORMALES avant le pas fait tomber la derive "
+        f"panneau B : elargir le support de la derivee fait tomber la dispersion des normales "
+        f"de {m['au_premier_tour_par_support'][0]['dispersion_deg']:.2f}° a "
+        f"{m['au_premier_tour_par_support'][-1]['dispersion_deg']:.2f}° et laisse l'erreur du "
+        f"pas ou elle est ({m['au_premier_tour_par_support'][0]['erreur_um']:.1f} um contre "
+        f"{m['au_premier_tour_par_support'][-1]['erreur_um']:.1f}). la dispersion est donc un "
+        "SYMPTOME, pas la cause : quatre soupcons testes, quatre ecartes.",
+        f"panneau A : lisser les NORMALES avant le pas fait tomber la derive "
         f"du raccrochage de {d['raccroche']:+.1f} a {d['normales']:+.1f} um par tour, et ne "
         f"fait RIEN pour l'aveugle ({d['aveugle']:+.1f} contre {d['aveugle_normales']:+.1f}). "
         "c'est la preuve que le degat etait celui du raccrochage : il ride la nappe, la nappe "
@@ -159,24 +165,36 @@ def dessiner(m: dict, sortie: Path) -> dict:
     for k in tours:
         art.text((axe_x(ax, k) - 4, ay + ph + 3), str(k), fill=DISCRET, font=petit)
 
-    # ---------- B : la legende, et la part perdue ----------
+    # ---------- B : la dispersion tombe, l'erreur ne suit pas ----------
     bx, by = marge + pw + ecart, 96
-    art.text((bx, by - 20), "B · part des cellules au-dela d'une demi-feuille",
+    art.text((bx, by - 20),
+             "B · support elargi : la dispersion tombe, l'erreur non",
              fill=TEXTE, font=moyen)
     _cadre(art, bx, by, pw, ph)
-    for cle, nom, coul, ep in MARCHES:
-        if cle not in ("marche_globale", "marche_aveugle", "marche_raccrochee"):
-            continue
-        pts = [(axe_x(bx, e["tours"]), by + ph - e["part_perdue"] * ph) for e in m[cle]]
-        for a_, b_ in zip(pts, pts[1:]):
-            art.line([a_[0], a_[1], b_[0], b_[1]], fill=coul, width=ep)
-        for x_, y_ in pts:
-            art.ellipse([x_ - ep, y_ - ep, x_ + ep, y_ + ep], fill=coul)
-    for part, lab in ((0.0, "0 %"), (0.5, "50 %"), (1.0, "100 %")):
-        y_ = by + ph - part * ph
-        art.text((bx + pw - 34, y_ - 6), lab, fill=DISCRET, font=petit)
-    for k in tours:
-        art.text((axe_x(bx, k) - 4, by + ph + 3), str(k), fill=DISCRET, font=petit)
+    prem = m["au_premier_tour_par_support"]
+    e_max = max(e["erreur_um"] for e in prem) * 1.35
+    d_max = max(e["dispersion_deg"] for e in prem) * 1.35
+    lgb = pw / (len(prem) * 2 + 1)
+    for k, e_ in enumerate(prem):
+        x_ = bx + lgb * (2 * k + 1)
+        he = e_["erreur_um"] / e_max * (ph - 44)
+        hd = e_["dispersion_deg"] / d_max * (ph - 44)
+        art.rectangle([x_ - lgb * 0.44, by + ph - he, x_ - 2, by + ph], fill=BLEU)
+        art.rectangle([x_ + 2, by + ph - hd, x_ + lgb * 0.44, by + ph], fill=ROUGE)
+        # ⚠ Les deux étiquettes sont décalées VERTICALEMENT : côte à côte, elles se touchaient
+        # dès que les deux barres avaient presque la même hauteur — c'est-à-dire au premier
+        # support, celui qui sert de référence.
+        art.text((x_ - lgb * 0.44, by + ph - he - 28), f"{e_['erreur_um']:.0f}µ",
+                 fill=BLEU, font=petit)
+        art.text((x_ + 2, by + ph - hd - 14), f"{e_['dispersion_deg']:.1f}°",
+                 fill=ROUGE, font=petit)
+        art.text((x_ - 24, by + ph + 3), f"pas {e_['pas_de_normale']}", fill=DISCRET,
+                 font=petit)
+    art.text((bx + 6, by + 6), "bleu : l'erreur du premier pas", fill=BLEU, font=petit)
+    art.text((bx + 6, by + 22), "rouge : la dispersion des normales", fill=ROUGE, font=petit)
+    art.text((bx + 6, by + ph + 17),
+             f"au premier tour seulement : de {prem[0]['cellules']} a "
+             f"{prem[-1]['cellules']} cellules, donc comparable", fill=DISCRET, font=petit)
 
     # ---------- C : le gain qui vieillit ----------
     cx, cy = marge, 96 + ph + 106
@@ -321,6 +339,21 @@ def verifier() -> int:
     b = m.get("_balayage")
     v("le balayage porte au moins deux tailles de boîte", b and len(b["points"]) >= 2,
       str(len(b["points"]) if b else 0))
+    # ⚠⚠⚠ LE FAIT DU PANNEAU B, ET IL FAUT SES DEUX MOITIÉS : la dispersion baisse avec le
+    # support ET l'erreur ne suit pas. La première seule dirait « ça marche », la seconde seule
+    # « ça ne sert à rien » ; ensemble elles disent que la dispersion est un symptôme.
+    v("élargir le support fait tomber la dispersion des normales",
+      m["la_dispersion_baisse_avec_le_support"],
+      str([e["dispersion_deg"] for e in m["au_premier_tour_par_support"]]))
+    v("... et l'erreur du pas ne suit pas", not m["lerreur_suit_la_dispersion"],
+      str([e["erreur_um"] for e in m["au_premier_tour_par_support"]]))
+    v("... donc la dispersion est un symptôme", m["la_dispersion_est_un_symptome"])
+    # ⚠ Et la comparaison n'est valable qu'au PREMIER tour : au-delà, un support large a mangé
+    # le bord et les marches ne sont plus jugées sur la même population.
+    v("les supports comparés partent de populations du même ordre",
+      max(e["cellules"] for e in m["au_premier_tour_par_support"])
+      < 2 * min(e["cellules"] for e in m["au_premier_tour_par_support"]),
+      str([e["cellules"] for e in m["au_premier_tour_par_support"]]))
     v("le raccrochage par point dérive plus que l'aveugle à TOUTES les tailles",
       all(pt["derive_par_tour_um"]["raccroche"] > pt["derive_par_tour_um"]["aveugle"]
           for pt in b["points"]),
