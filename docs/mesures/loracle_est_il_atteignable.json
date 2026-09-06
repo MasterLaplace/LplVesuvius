@@ -1,0 +1,250 @@
+{
+  "fragment": "PHerc0500P2",
+  "volume": "20250526151718",
+  "voxel_um": 2.215,
+  "boite": {
+    "centre": [
+      10615.0,
+      10571.0,
+      19831.0
+    ],
+    "cote_voxels": 960.0
+  },
+  "pas_nominal_um": 135.5,
+  "demi_epaisseur_um": 67.75,
+  "pas_fin_vx": 0.25,
+  "rayon_en_feuilles": 1.5,
+  "demi_fenetre_vx": 30.59,
+  "paires": 8,
+  "paires_ecartees": 1,
+  "cellules": 16537,
+  "lignes": [
+    {
+      "de": 4,
+      "vers": 5,
+      "cellules": 1801,
+      "cellules_lisibles": 1805,
+      "decalages_essayes": {
+        "fenetre": 62,
+        "fine": 245,
+        "rayon": 735
+      },
+      "erreur_ne_rien_faire_um": 44.0,
+      "erreur_deploye_um": 34.2,
+      "erreur_oracle_um": 19.9,
+      "erreur_oracle_fine_um": 19.9,
+      "erreur_rayon_um": 17.4,
+      "erreur_oracle_lisse_um": 20.0,
+      "rugosite_oracle_vx": 0.0,
+      "rugosite_raccrochage_vx": 2.95,
+      "rugosite_melange_vx": 4.13,
+      "bits_de_supervision": 1
+    },
+    {
+      "de": 5,
+      "vers": 6,
+      "cellules": 2532,
+      "cellules_lisibles": 2536,
+      "decalages_essayes": {
+        "fenetre": 62,
+        "fine": 245,
+        "rayon": 735
+      },
+      "erreur_ne_rien_faire_um": 35.8,
+      "erreur_deploye_um": 27.8,
+      "erreur_oracle_um": 20.3,
+      "erreur_oracle_fine_um": 20.3,
+      "erreur_rayon_um": 20.1,
+      "erreur_oracle_lisse_um": 20.4,
+      "rugosite_oracle_vx": 0.0,
+      "rugosite_raccrochage_vx": 3.32,
+      "rugosite_melange_vx": 7.58,
+      "bits_de_supervision": 1
+    },
+    {
+      "de": 6,
+      "vers": 7,
+      "cellules": 2205,
+      "cellules_lisibles": 2208,
+      "decalages_essayes": {
+        "fenetre": 62,
+        "fine": 245,
+        "rayon": 735
+      },
+      "erreur_ne_rien_faire_um": 42.6,
+      "erreur_deploye_um": 40.7,
+      "erreur_oracle_um": 19.4,
+      "erreur_oracle_fine_um": 19.4,
+      "erreur_rayon_um": 17.4,
+      "erreur_oracle_lisse_um": 19.6,
+      "rugosite_oracle_vx": 0.0,
+      "rugosite_raccrochage_vx": 3.38,
+      "rugosite_melange_vx": 7.73,
+      "bits_de_supervision": 1
+    },
+    {
+      "de": 7,
+      "vers": 8,
+      "cellules": 2112,
+      "cellules_lisibles": 2117,
+      "decalages_essayes": {
+        "fenetre": 62,
+        "fine": 245,
+        "rayon": 735
+      },
+      "erreur_ne_rien_faire_um": 32.2,
+      "erreur_deploye_um": 30.0,
+      "erreur_oracle_um": 17.4,
+      "erreur_oracle_fine_um": 17.4,
+      "erreur_rayon_um": 17.0,
+      "erreur_oracle_lisse_um": 17.7,
+      "rugosite_oracle_vx": 0.0,
+      "rugosite_raccrochage_vx": 3.83,
+      "rugosite_melange_vx": 4.68,
+      "bits_de_supervision": 1
+    },
+    {
+      "de": 8,
+      "vers": 9,
+      "cellules": 2444,
+      "cellules_lisibles": 2448,
+      "decalages_essayes": {
+        "fenetre": 62,
+        "fine": 245,
+        "rayon": 735
+      },
+      "erreur_ne_rien_faire_um": 43.3,
+      "erreur_deploye_um": 31.3,
+      "erreur_oracle_um": 19.7,
+      "erreur_oracle_fine_um": 19.7,
+      "erreur_rayon_um": 19.3,
+      "erreur_oracle_lisse_um": 19.9,
+      "rugosite_oracle_vx": 0.0,
+      "rugosite_raccrochage_vx": 2.62,
+      "rugosite_melange_vx": 6.43,
+      "bits_de_supervision": 1
+    },
+    {
+      "de": 9,
+      "vers": 10,
+      "cellules": 1746,
+      "cellules_lisibles": 1750,
+      "decalages_essayes": {
+        "fenetre": 62,
+        "fine": 245,
+        "rayon": 735
+      },
+      "erreur_ne_rien_faire_um": 64.4,
+      "erreur_deploye_um": 63.6,
+      "erreur_oracle_um": 20.2,
+      "erreur_oracle_fine_um": 20.2,
+      "erreur_rayon_um": 17.0,
+      "erreur_oracle_lisse_um": 20.6,
+      "rugosite_oracle_vx": 0.0,
+      "rugosite_raccrochage_vx": 5.5,
+      "rugosite_melange_vx": 7.6,
+      "bits_de_supervision": 1
+    },
+    {
+      "de": 10,
+      "vers": 11,
+      "cellules": 1868,
+      "cellules_lisibles": 1872,
+      "decalages_essayes": {
+        "fenetre": 62,
+        "fine": 245,
+        "rayon": 735
+      },
+      "erreur_ne_rien_faire_um": 942.5,
+      "erreur_deploye_um": 941.9,
+      "erreur_oracle_um": 919.1,
+      "erreur_oracle_fine_um": 919.1,
+      "erreur_rayon_um": 895.0,
+      "erreur_oracle_lisse_um": 919.1,
+      "rugosite_oracle_vx": 0.0,
+      "rugosite_raccrochage_vx": 5.71,
+      "rugosite_melange_vx": 4.69,
+      "bits_de_supervision": 1
+    },
+    {
+      "de": 12,
+      "vers": 13,
+      "cellules": 1829,
+      "cellules_lisibles": 1833,
+      "decalages_essayes": {
+        "fenetre": 62,
+        "fine": 245,
+        "rayon": 735
+      },
+      "erreur_ne_rien_faire_um": 82.6,
+      "erreur_deploye_um": 85.7,
+      "erreur_oracle_um": 26.8,
+      "erreur_oracle_fine_um": 26.8,
+      "erreur_rayon_um": 19.0,
+      "erreur_oracle_lisse_um": 26.8,
+      "rugosite_oracle_vx": 0.0,
+      "rugosite_raccrochage_vx": 3.59,
+      "rugosite_melange_vx": 6.09,
+      "bits_de_supervision": 1
+    }
+  ],
+  "cout": {
+    "blocs_telecharges": 0,
+    "mebioctets": 0.0,
+    "blocs_en_memoire": 427,
+    "voxels_absents": 0,
+    "reprises_reseau": 0
+  },
+  "erreur_ne_rien_faire_mediane_um": 43.6,
+  "erreur_deploye_mediane_um": 37.5,
+  "erreur_oracle_mediane_um": 20.0,
+  "erreur_oracle_fine_mediane_um": 20.0,
+  "erreur_rayon_mediane_um": 18.2,
+  "erreur_oracle_lisse_mediane_um": 20.2,
+  "ce_que_coute_la_grille": {
+    "ecart_median_um": 0.0,
+    "intervalle_um": [
+      0.0,
+      0.0
+    ],
+    "pas_ameliores": 0,
+    "pas": 8
+  },
+  "ce_que_coute_la_fenetre": {
+    "ecart_median_um": -2.2,
+    "intervalle_um": [
+      -2.5,
+      -2.0
+    ],
+    "pas_ameliores": 8,
+    "pas": 8
+  },
+  "ce_qui_reste_au_deploye": {
+    "ecart_median_um": -20.1,
+    "intervalle_um": [
+      -23.3,
+      -16.8
+    ],
+    "pas_ameliores": 8,
+    "pas": 8
+  },
+  "la_grille_coute_quelque_chose": false,
+  "la_fenetre_coute_quelque_chose": true,
+  "ecart_du_deploye_au_rayon_um": 19.3,
+  "part_du_rayon_dans_lerreur_deployee": 0.485,
+  "lisser_loracle_coute": {
+    "ecart_median_um": 0.2,
+    "intervalle_um": [
+      0.1,
+      0.2
+    ],
+    "pas_ameliores": 0,
+    "pas": 8
+  },
+  "rugosite_oracle_mediane_vx": 0.0,
+  "rugosite_raccrochage_mediane_vx": 3.48,
+  "rugosite_melange_mediane_vx": 6.26,
+  "loracle_est_plus_lisse_que_le_raccrochage": true,
+  "part_de_bruit_dans_le_raccrochage": 0.556,
+  "loracle_est_plus_lisse_que_le_bruit": true
+}

@@ -3127,6 +3127,101 @@ lire un verdict là où il n'y en a pas.
 > ressemble à celle de sa voisine. ⚠ Et il faudra le juger avec les mêmes instruments : population
 > unique, écart apparié, témoin mélangé à chaque étage.
 
+#### ⭐⭐⭐ LA MOITIÉ DE L'ERREUR EST UN PLANCHER — et la vérité, elle, est plate
+
+> Mesure : `src/nappe/loracle_est_il_atteignable.py` (17 contrôles) →
+> `docs/mesures/loracle_est_il_atteignable.json`. Figure :
+> `src/figures/figure_loracle_est_il_atteignable.py` (15 contrôles), le 2026-09-07.
+>
+> ```bash
+> uv run python src/nappe/loracle_est_il_atteignable.py --cote 960 \
+>     --json docs/mesures/loracle_est_il_atteignable.json
+> uv run python src/figures/figure_loracle_est_il_atteignable.py \
+>     --sortie docs/images/75_loracle_est_il_atteignable.png
+> ```
+
+⚠⚠⚠ **Cette tranche vient AVANT la cinquième idée de lecture, et c'est délibéré.** Quatre portes
+se sont fermées sur la lecture et l'écart au chemin déployé vaut toujours une quinzaine de
+micromètres. Avant d'en ouvrir une cinquième, il fallait demander si cet écart est **prenable** —
+c'est-à-dire décomposer les 20 µm de la borne elle-même. L'oracle choisit **le long de la
+normale**, **dans une fenêtre**, sur une **grille d'un voxel** : chacune de ces trois contraintes
+a un prix, et le reste est du sol.
+
+![l'oracle est-il atteignable](images/75_loracle_est_il_atteignable.png)
+
+| | erreur médiane |
+|---|---:|
+| ne rien faire | 43,6 µm |
+| chemin **déployé** | 37,5 |
+| oracle, grille d'un voxel | 20,0 |
+| oracle, grille **fine** (¼ de voxel) | 20,0 |
+| ⭐ **le RAYON**, tout décalage confondu | **18,2** |
+
+| terme | écart apparié | verdict |
+|---|---|---|
+| ce que coûte la **grille** d'un voxel | +0,0 µm · 0/8 · [0,0 ; 0,0] | ⛔ **rien** |
+| ce que coûte la **fenêtre** | −2,2 µm · 8/8 · [−2,5 ; −2,0] | ✅ tranche |
+| ce qui reste au chemin **déployé** | −20,1 µm · 8/8 · [−23,3 ; −16,8] | ✅ tranche |
+
+> ⛔ **Affiner le décalage ne rendrait pas un micromètre.** La grille d'un voxel coûte
+> **exactement zéro**, sur zéro pas sur huit : une piste évidente se ferme d'avance.
+
+> ⭐⭐⭐ **Et la moitié de ce que coûte un pas n'est PAS une affaire de lecture.** Le rayon laisse
+> **18,2 µm**, soit **48,5 %** de l'erreur du chemin déployé : c'est la distance à laquelle la
+> normale passe de la feuille visée, et **aucun décalage sur cette normale ne descend en dessous**.
+> Seule une autre **direction** la prendrait. Ce qui reste à la lecture est l'écart apparié
+> **−20,1 µm**, qui tranche sur huit pas sur huit.
+
+⚠ La fenêtre, elle, coûte 2,2 µm — mais **l'élargir n'est pas une méthode** : une fenêtre plus
+large peut se poser sur la feuille **voisine**. C'est un terme de décomposition, pas un remède.
+
+##### ⭐⭐⭐ Et la découverte : le champ que devrait produire une méthode parfaite est PLAT
+
+| champ de décalages | rugosité |
+|---|---:|
+| l'**ORACLE** — ce qu'une méthode parfaite produirait | **0,00 vx** |
+| le **RACCROCHAGE** déployé | **3,48** |
+| *témoin : gabarit mélangé (bruit pur)* | *6,26* |
+
+La rugosité est *de combien un décalage s'écarte de la médiane de ses voisins de grille*. Celle de
+l'oracle vaut **zéro** — son champ est constant par morceaux à l'échelle du voxel — et le lisser ne
+coûte que **0,2 µm** sur 20. Celui du raccrochage est à **0,556** de la rugosité du **bruit pur**.
+
+> ⭐⭐⭐ **Le raccrochage ne produit pas un champ un peu bruité autour du bon : il produit un champ
+> à mi-chemin du hasard, là où la vérité est plate.** Ce qui manque n'est donc pas une meilleure
+> **forme** à chercher — quatre tranches l'ont déjà fermé — mais un champ **lisse par
+> construction**, là où le lissage actuel ne fait que moyenner du bruit après coup.
+
+⚠⚠ **Un verdict que sa propre mesure contredisait, corrigé avant publication.** J'avais tiré « le
+champ de l'oracle est-il lisse ? » d'un `tranche` sur le coût du lissage : celui-ci vaut +0,2 µm
+de façon parfaitement consistante, donc le booléen répondait **NON** pendant que la rugosité du
+même champ valait **zéro**. `tranche` répond « y a-t-il une différence consistante », jamais
+« est-elle grande » : deux nombres publiés côte à côte se contredisaient. Le booléen est supprimé
+au profit d'une **comparaison sans seuil** — la rugosité de l'oracle contre celle du raccrochage
+et celle du bruit — et un contrôle interdit désormais qu'il revienne.
+
+⚠ **Et un chiffre non apparié dans une conclusion**, corrigé de même : « il reste 19,3 µm » était
+une différence de médianes, alors que tout le reste de la famille se juge en **écart apparié**
+(−20,1). Les deux sont publiés, le second nommé comme celui qui décide.
+
+⚠ **Une seconde affirmation à moi corrigée par la mesure** : le contrôle de rugosité exigeait
+qu'un damier dépasse 1,0 ; la mesure a rendu exactement **1,0**, et le seuil aurait été un nombre
+choisi pour que le cas du jour passe. Il est remplacé par un **ordre** — une rampe est plus lisse
+qu'un damier, qui est plus lisse que du bruit — qui ne demande aucun seuil.
+
+> ⭐⭐⭐ **Ce que cette tranche laisse à la suivante, et elle redistribue tout.** Le chantier de la
+> lecture vaut **20,1 µm** appariés et il est réel ; mais **18,2 µm de plus sont hors d'atteinte
+> le long de la normale**, donc la moitié du coût d'un pas relève de la **direction**, pas du
+> volume. Deux chantiers, pas un :
+>
+> 1. ⭐ **Un champ lisse par construction** — la vérité a une rugosité nulle, notre champ est à
+>    mi-chemin du bruit. Le lissage après coup plafonne (tranche précédente) ; ce qu'il faut est
+>    une méthode dont le champ est lisse **avant** d'être corrigé, par exemple un ajustement de
+>    surface sur les décalages plutôt qu'une médiane de voisinage.
+> 2. ⚠ **La direction** — `le_cout_dun_seul_pas` a mesuré que la rotation ne vaut que 3 %, mais
+>    avec l'instrument **non apparié** que la rétraction de ce registre a invalidé, et sur une
+>    autre population. Ce chiffre est à refaire avant d'en conclure quoi que ce soit.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est

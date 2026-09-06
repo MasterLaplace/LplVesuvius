@@ -5762,6 +5762,38 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     n'a jamais été mis en question, c'est ce que le raccrochage **lit** : une **intensité**. Or
     `le_champ_de_fibres` et `fiber_orientation` décrivent la matière par l'**orientation** locale,
     qui n'a pas le défaut mesuré ici — l'intensité d'une feuille ressemble à celle de sa voisine.
+  - ⭐⭐⭐ **LA MOITIÉ DE L'ERREUR EST UN PLANCHER, ET LA VÉRITÉ EST PLATE (2026-09-07,
+    `loracle_est_il_atteignable`, 17 contrôles, 8 pas, 16 537 cellules).** Tranche posée
+    **avant** la cinquième idée de lecture, exprès : quatre portes fermées et l'écart valait
+    toujours une quinzaine de micromètres, donc il fallait demander s'il est **prenable**. Les
+    20 µm de la borne sont décomposés — l'oracle choisit le long de la **normale**, dans une
+    **fenêtre**, sur une **grille d'un voxel**.
+  - ⛔ **Affiner ne rend RIEN** : la grille d'un voxel coûte **+0,0 µm sur 0 pas sur 8**. Une
+    piste évidente se ferme d'avance. La fenêtre, elle, coûte −2,2 µm (8/8) — mais l'élargir
+    n'est **pas une méthode** : une fenêtre plus large peut se poser sur la feuille **voisine**.
+  - ⭐⭐⭐ **Le rayon laisse 18,2 µm, soit 48,5 % de l'erreur du chemin déployé** (37,5). C'est la
+    distance à laquelle la normale passe de la feuille visée : **aucun décalage sur cette normale
+    ne descend en dessous**, et seule une autre **direction** la prendrait. Ce qui reste à la
+    lecture est l'écart apparié **−20,1 µm** (8/8, [−23,3 ; −16,8]).
+  - ⭐⭐⭐ **Et la découverte** : le champ de décalages qu'une méthode parfaite devrait produire est
+    **PLAT** — rugosité **0,00 vx**, et le lisser ne coûte que 0,2 µm sur 20. Celui du raccrochage
+    vaut **3,48**, contre **6,26** pour du bruit pur : il en est à **0,556**. Le raccrochage ne
+    produit donc pas un champ un peu bruité autour du bon, il produit un champ **à mi-chemin du
+    hasard**, là où la vérité est plate. Ce qui manque n'est pas une meilleure **forme** — quatre
+    tranches l'ont fermé — mais un champ **lisse par construction**.
+  - ⚠⚠ **Un verdict que sa propre mesure contredisait, corrigé avant publication** : « le champ de
+    l'oracle est-il lisse ? » était tiré d'un `tranche` sur le coût du lissage (+0,2 µm, parfaitement
+    consistant), donc répondait **NON** pendant que la rugosité du même champ valait **zéro**.
+    `tranche` répond « y a-t-il une différence consistante », jamais « est-elle grande ». Le booléen
+    est supprimé au profit d'une comparaison **sans seuil**, et un contrôle interdit qu'il revienne.
+  - ⚠ **Et un chiffre non apparié dans une conclusion** (« il reste 19,3 µm », une différence de
+    médianes) remplacé par l'écart apparié −20,1 ; plus un seuil de contrôle (« un damier dépasse
+    1,0 ») que la mesure a rendu **exactement 1,0**, remplacé par un **ordre** — rampe < damier <
+    bruit — qui ne demande aucun seuil.
+  - ⭐⭐⭐ **Deux chantiers désormais, pas un** : (1) un champ **lisse par construction**, la vérité
+    ayant une rugosité nulle et le lissage après coup plafonnant ; (2) la **direction**, dont
+    `le_cout_dun_seul_pas` disait 3 % mais avec l'instrument **non apparié** que la rétraction a
+    invalidé — chiffre à refaire avant d'en conclure quoi que ce soit.
   - ⛔ **L'ÉCART DÉJÀ FRANCHI NE DIT PRESQUE RIEN DU SUIVANT (2026-09-06,
     `lecart_deja_franchi`, 16 contrôles, 5 triplets, 5163 cellules).** Un dérouleur parti d'une
     paire d'ancres connaît en chaque point la distance entre ces deux surfaces : c'était la seule
@@ -6359,8 +6391,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 3172 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 3864 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 3267 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 3959 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
