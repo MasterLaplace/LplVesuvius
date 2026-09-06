@@ -5794,6 +5794,39 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     ayant une rugosité nulle et le lissage après coup plafonnant ; (2) la **direction**, dont
     `le_cout_dun_seul_pas` disait 3 % mais avec l'instrument **non apparié** que la rétraction a
     invalidé — chiffre à refaire avant d'en conclure quoi que ce soit.
+  - ⛔ **TOURNER LE PAS NE REND RIEN, ET L'ORACLE N'ÉTAIT PAS UNE BORNE (2026-09-07,
+    `la_direction_du_pas`, 19 contrôles, 8 pas, 16 537 cellules, 289 rotations).** Pas angulaire
+    **dérivé** — 0,9366° est la rotation qui déplace le point d'arrivée d'**un voxel** — et cône
+    **balayé** plutôt que choisi, sur quatre demi-angles emboîtés.
+  - ⛔ **Une rotation d'ENSEMBLE, ajustée hors échantillon, donne au mieux −0,1 µm** et ne prend
+    que **3,4 %** de ce que prend l'oracle par cellule. **Le « 3 % » de `le_cout_dun_seul_pas` est
+    confirmé**, cette fois en apparié et sur huit pas. ⚠ Le « tranche » à 3,75° porte sur un
+    dixième de micromètre : `tranche` dit « consistant », jamais « grand ».
+  - ⚠⚠⚠ **Et le contrôle qui a payé immédiatement : 96,6 % des cellules choisissent le BORD du
+    cône.** Ce que l'oracle de direction rend n'est donc pas une **borne** mais un **plancher du
+    balayage** — publier ses 2,9 µm comme « ce que la direction vaut » aurait présenté la limite
+    d'une **grille** comme une limite de la **matière**, et rien dans les chiffres ne l'aurait dit.
+  - ⛔ **L'élargir ne le sauverait pas** : le point le plus proche du nuage est à **33,5°** de la
+    normale, donc l'optimum non borné est « viser ce qui est le plus près » — or deux surfaces se
+    correspondent par leur **paramétrage**, jamais par leur proximité. L'oracle de direction par
+    cellule est **dégénéré**, et la question n'a pas de réponse par cette voie. C'est dit plutôt
+    que remplacé par un nombre qui aurait l'air d'en être une.
+  - ⭐⭐ **Ce qui reste vrai et pointe ailleurs** : le champ des rotations optimales est **lisse
+    localement** (rugosité 0,0° pour un pas de 0,9366°) et **étendu à travers la feuille**
+    (10,3° / 9,37° d'écart interquartile). C'est pourquoi un biais global n'en prend rien — ce qui
+    aiderait varie **lentement d'un bout de la feuille à l'autre**. ⚠ Lecture **mesurée**, pas
+    supposée : la seule rugosité aurait laissé conclure « le champ est constant », qui est la
+    lecture la plus naturelle et la fausse.
+  - ⚠ **Une promotion avec son contrôle** : `recaler_hors_echantillon` devient
+    `lecart_apparie.choisir_hors_echantillon` — un facteur d'échelle et une rotation d'ensemble
+    sont **le même problème** — et l'image publiée de `le_gabarit_lu_ailleurs` sort **identique**
+    après le déplacement. ⚠ Deux défauts de publication attrapés : un champ `angles_retenus` qui
+    contenait des **indices de grille**, et une phrase affirmant qu'une distance était « ce qu'une
+    direction libre obtiendrait » alors que c'est l'erreur de ne pas bouger.
+  - ⭐⭐⭐ **Il ne reste donc qu'UN chantier** : un champ de décalages **lisse par construction**.
+    Les deux tranches convergent dessus — le champ utile, décalage comme rotation, est **lisse
+    localement et étendu globalement**, ce qu'un **ajustement de surface** produit et qu'une
+    médiane de voisinage ne fait qu'approcher en moyennant du bruit après coup.
   - ⛔ **L'ÉCART DÉJÀ FRANCHI NE DIT PRESQUE RIEN DU SUIVANT (2026-09-06,
     `lecart_deja_franchi`, 16 contrôles, 5 triplets, 5163 cellules).** Un dérouleur parti d'une
     paire d'ancres connaît en chaque point la distance entre ces deux surfaces : c'était la seule
@@ -6391,8 +6424,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 3267 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 3959 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 3348 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 4040 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

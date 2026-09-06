@@ -3222,6 +3222,87 @@ qu'un damier, qui est plus lisse que du bruit — qui ne demande aucun seuil.
 >    avec l'instrument **non apparié** que la rétraction de ce registre a invalidé, et sur une
 >    autre population. Ce chiffre est à refaire avant d'en conclure quoi que ce soit.
 
+#### ⛔ TOURNER LE PAS NE REND RIEN — et l'oracle qui semblait le dire n'était pas une borne
+
+> Mesure : `src/nappe/la_direction_du_pas.py` (19 contrôles) →
+> `docs/mesures/la_direction_du_pas.json`. Figure :
+> `src/figures/figure_la_direction_du_pas.py` (14 contrôles), le 2026-09-07.
+>
+> ```bash
+> uv run python src/nappe/la_direction_du_pas.py --cote 960 \
+>     --json docs/mesures/la_direction_du_pas.json
+> uv run python src/figures/figure_la_direction_du_pas.py \
+>     --sortie docs/images/75_la_direction_du_pas.png
+> ```
+
+Le pas angulaire est **dérivé** — **0,9366°** est la rotation qui déplace le point d'arrivée d'**un
+voxel**, exactement comme la grille des décalages — et le cône n'est pas choisi mais **balayé** :
+quatre demi-angles emboîtés, sur la même population que le plancher.
+
+![la direction du pas](images/75_la_direction_du_pas.png)
+
+| demi-angle | rotations | oracle par cellule | contre sans rotation | ensemble (hors éch.) | contre sans rotation |
+|---:|---:|---:|---|---:|---|
+| 0,94° | 1 | 20,0 µm | +0,0 · 0/8 | 20,0 | +0,0 · 3/8 ⛔ |
+| 1,87° | 13 | 19,3 | −0,7 · 8/8 · [−0,7 ; −0,6] ✅ | 20,1 | +0,0 · 3/8 ⛔ |
+| 3,75° | 49 | 18,4 | −1,4 · 8/8 · [−1,5 ; −1,4] ✅ | 19,9 | −0,1 · 5/8 ✅ |
+| 7,49° | 197 | **16,9** | −2,9 · 8/8 · [−3,0 ; −2,9] ✅ | 20,1 | −0,1 · 4/8 ⛔ |
+
+> ⛔ **Une rotation d'ENSEMBLE ne rend rien.** Ajustée **hors échantillon** — chaque pas jugé à
+> l'angle que les **autres** pas ont préféré —, elle donne au mieux **−0,1 µm**, et ne prend que
+> **3,4 %** de ce que prend l'oracle par cellule. **Le « 3 % » de `le_cout_dun_seul_pas` est
+> confirmé**, cette fois avec l'écart apparié et sur huit pas.
+
+⚠ Le verdict « tranche » à 3,75° porte sur **un dixième de micromètre** : `tranche` répond « y
+a-t-il une différence consistante », jamais « est-elle grande ». C'est exactement la lecture que la
+tranche précédente a dû corriger, et le rapport à l'oracle est publié pour l'empêcher.
+
+##### ⚠⚠⚠ Et le contrôle qui a payé immédiatement : ce n'était pas une borne
+
+> ⚠⚠⚠ **96,6 % des cellules choisissent le BORD du cône.** Ce que l'oracle de direction rend
+> n'est donc pas une **borne** mais un **plancher du balayage**. Publier ses 2,9 µm comme « ce que
+> la direction vaut » aurait présenté la limite d'une **grille** comme une limite de la
+> **matière** — et rien dans les chiffres eux-mêmes ne l'aurait signalé.
+
+Et l'élargir ne le sauverait pas : le **point le plus proche** du nuage se trouve à **33,5°** de
+la normale. L'optimum non borné est donc « viser ce qui est le plus près » — or deux surfaces se
+correspondent par leur **paramétrage**, jamais par leur proximité.
+
+> ⛔ **L'oracle de direction par cellule est DÉGÉNÉRÉ**, et aucun cône ne le rend légitime. La
+> question « de combien une meilleure direction aiderait » n'a donc pas de réponse par cette voie,
+> et c'est dit plutôt que remplacé par un nombre qui aurait l'air d'en être une.
+
+##### ⭐ Ce qui reste vrai, et qui pointe ailleurs
+
+Le champ des rotations optimales est **lisse localement** — rugosité **0,0°** pour un pas de
+0,9366° — et **étendu à travers la feuille** : **10,3° / 9,37°** d'écart interquartile.
+
+> ⭐⭐ **C'est précisément pourquoi un biais global n'en prend rien** : ce qui aiderait varie
+> **lentement d'un bout de la feuille à l'autre**, et un seul angle ne peut pas suivre. Même forme
+> que la découverte de la tranche précédente sur les décalages — le champ utile est lisse et non
+> constant. ⚠ Et cette lecture est **mesurée**, pas supposée : publier la seule rugosité aurait
+> laissé conclure « le champ est constant », qui est la lecture la plus naturelle et la fausse.
+
+⚠ **Une promotion, avec son contrôle** : `recaler_hors_echantillon` devient
+`lecart_apparie.choisir_hors_echantillon`, parce qu'un facteur d'échelle sur des décalages et une
+rotation d'ensemble sont **le même problème** — choisir un réglage sur les autres cas. Le contrôle
+est que l'image publiée de `le_gabarit_lu_ailleurs` sort **identique** après le déplacement.
+⚠ Et un contrôle de plus y est ajouté : le réglage est ajusté sur la **médiane** des coûts et non
+sur leur somme, ce qui se vérifie par un cas où un dossier bruyant essaierait de décider pour tous.
+
+⚠ **Deux défauts de publication attrapés en chemin** : un champ nommé `angles_retenus` qui
+contenait des **indices de grille** — un nombre sans unité qui se lit comme des degrés — et une
+phrase affirmant que la distance publiée était « ce qu'une direction libre obtiendrait », alors
+que c'est la distance du point d'**arrivée** au nuage, c'est-à-dire l'erreur de ne pas bouger.
+
+> ⭐⭐⭐ **Ce que cette tranche laisse à la suivante.** La direction est **fermée par les deux
+> bouts** : un biais global ne rend rien, et l'oracle par cellule n'est pas une question bien
+> posée. Il ne reste donc qu'**un** chantier, celui que la tranche précédente avait nommé en
+> premier — un champ de décalages **lisse par construction**. Les deux tranches convergent
+> dessus : le champ utile, décalage comme rotation, est **lisse localement et étendu
+> globalement**, et c'est exactement ce qu'un **ajustement de surface** produit, là où une médiane
+> de voisinage ne fait que moyenner du bruit après coup.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est

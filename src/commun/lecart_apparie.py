@@ -30,6 +30,47 @@ import sys
 import numpy as np
 
 
+def choisir_hors_echantillon(courbes: list[np.ndarray],
+                             valeurs: np.ndarray) -> tuple[float, list[float], list[float]]:
+    """Choisir UN réglage commun, et le juger sur un cas qui n'a PAS servi à le choisir.
+
+    `courbes[i][j]` est ce que coûte le réglage `valeurs[j]` sur le cas `i`.
+
+    ⚠⚠⚠ POURQUOI HORS ÉCHANTILLON. Un réglage choisi sur les mêmes cas que ceux qui le jugent ne
+    peut que gagner : il suffit d'en essayer soixante pour que l'un tombe bien. Chaque cas est
+    donc jugé au réglage que les **autres** cas ont préféré, ce qui est la seule forme sous
+    laquelle « ce réglage améliore » veut dire quelque chose pour un cas qu'on n'a pas encore vu.
+
+    ⚠⚠ LE CRITÈRE D'AJUSTEMENT EST LA MÉDIANE DES COÛTS PAR CAS, et c'est une correction. La
+    première version prenait la SOMME en la justifiant par « un cas difficile pèse autant qu'un
+    cas facile » — l'arithmétique dit l'inverse : dans une somme, le cas dont le coût varie le
+    plus est celui qui décide. La médiane est aussi la statistique par laquelle le verdict est
+    rendu ; ajuster sur une grandeur et juger sur une autre laisserait un écart qui n'appartient
+    à aucune des deux.
+
+    ⚠ Cette fonction ne sait pas ce qu'est un réglage : un facteur d'échelle sur des décalages
+    (`le_gabarit_lu_ailleurs`) et une rotation d'ensemble (`la_direction_du_pas`) sont le même
+    problème, et deux copies finiraient par ne plus s'accorder sur ce que « hors échantillon »
+    veut dire.
+
+    Rend `(réglage ajusté sur tout, réglage retenu pour chaque cas, coût de chaque cas)`.
+    """
+    if not courbes:
+        return float(valeurs[0]) if len(valeurs) else 0.0, [], []
+    pile = np.stack(courbes)
+    dedans = float(valeurs[int(np.argmin(np.median(pile, axis=0)))])
+    if len(courbes) < 2:
+        # ⚠ Avec un seul cas il n'y a aucun « autre cas » : le réglage n'est pas jugeable, et
+        # rendre celui ajusté sur ce cas-là serait le noter sur sa propre copie.
+        return dedans, [], []
+    pris, couts = [], []
+    for i, c in enumerate(courbes):
+        j = int(np.argmin(np.median(np.delete(pile, i, axis=0), axis=0)))
+        pris.append(float(valeurs[j]))
+        couts.append(float(c[j]))
+    return dedans, pris, couts
+
+
 def ecart_apparie(valeurs: list[float], reference: list[float]) -> dict:
     """L'écart cas par cas entre deux méthodes, et ce qu'il devient si un cas quelconque sort.
 
@@ -123,6 +164,31 @@ def verifier() -> int:
       str(ecart_apparie([1.0], [9.0])))
     v("aucune donnée ne rend aucun écart, plutôt qu'un zéro",
       ecart_apparie([], [])["ecart_median_um"] is None)
+
+    # ⚠⚠⚠ LE CONTRÔLE QUI INTERDIT À UNE MESURE DE SE NOTER SUR SA PROPRE COPIE. Le cas jugé ne
+    # doit pas être parmi ceux qui ont choisi le réglage ; sinon en essayer soixante garantit
+    # qu'un tombe bien, et « ce réglage améliore » serait vrai de n'importe quoi. La fixture est
+    # faite pour DISCRIMINER : le premier cas préfère un réglage que les deux autres détestent,
+    # donc une version en échantillon lui rendrait 0 et la version honnête lui rend le coût de
+    # ce que les autres ont choisi.
+    grille = np.array([0.0, 1.0, 2.0])
+    seul = np.array([9.0, 9.0, 0.0])
+    autres = np.array([0.0, 9.0, 9.0])
+    dedans, pris, val = choisir_hors_echantillon([seul, autres, autres], grille)
+    v("un cas est jugé au réglage que les AUTRES cas ont choisi, jamais au sien",
+      pris[0] == 0.0 and val[0] == 9.0 and dedans == 0.0)
+    v("... et avec un seul cas, le réglage n'est simplement pas jugeable",
+      choisir_hors_echantillon([seul], grille)[2] == [])
+    # ⚠⚠ ET LE CRITÈRE D'AJUSTEMENT EST LA MÉDIANE, PAS LA SOMME : dans une somme, le cas dont
+    # le coût varie le plus décide pour tous. Ici trois cas préfèrent le réglage 1 et un
+    # quatrième, dont les écarts sont dix fois plus grands, préfère le 0.
+    tranquilles = [np.array([2.0, 0.0, 2.0])] * 3
+    bruyant = np.array([0.0, 90.0, 95.0])
+    v("... et le réglage est ajusté sur la MÉDIANE, pas sur la somme des coûts",
+      choisir_hors_echantillon(tranquilles + [bruyant], grille)[0] == 1.0,
+      str(choisir_hors_echantillon(tranquilles + [bruyant], grille)[0]))
+    v("... un réglage sans aucun cas ne lève pas",
+      choisir_hors_echantillon([], grille)[1] == [])
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0

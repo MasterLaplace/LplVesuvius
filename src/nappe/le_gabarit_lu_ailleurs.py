@@ -59,7 +59,7 @@ from le_corpus_des_spires import corpus_fabrique, corpus_publie, volume_fabrique
 # donc une différence de médianes ne décide rien ici. `le_raccrochage_choisit_il_bien` s'en sert
 # aussi, et deux implémentations d'un même verdict finiraient par ne pas s'accorder sur ce que
 # « mieux » veut dire.
-from lecart_apparie import ecart_apparie, tranche  # noqa: E402
+from lecart_apparie import choisir_hors_echantillon, ecart_apparie, tranche  # noqa: E402
 from le_raccrochage_choisit_il_bien import (  # noqa: E402
     accord_des_decalages, decalage_de_loracle,
 )
@@ -189,7 +189,7 @@ def pas_par_cote(corpus: dict, cotes: list[float], minimum: int = 30) -> list[di
 def _recalage(courbes: list[np.ndarray], facteurs: np.ndarray,
               erreurs: list[float]) -> dict:
     """Ce que vaut, pour une variante, un simple facteur d'échelle sur ses décalages."""
-    dedans, pris, valeurs = recaler_hors_echantillon(courbes, facteurs)
+    dedans, pris, valeurs = choisir_hors_echantillon(courbes, facteurs)
     # ⚠⚠⚠ LE POINT DE LA COURBE À FACTEUR UN, PUBLIÉ À CÔTÉ DE L'ERREUR NON RECALÉE. Ce sont
     # deux chemins de calcul pour un même nombre, donc leur égalité est vérifiable — et c'est
     # précisément ce qui attrape une grille qui ne contient pas exactement l'identité.
@@ -233,7 +233,28 @@ def facteurs_dechelle(demi_vx: float) -> np.ndarray:
     return np.round(1.0 + np.arange(-n, n + 1) * pas, 12)
 
 
-def recaler_hors_echantillon(courbes: list[np.ndarray],
+def facteurs_dechelle(demi_vx: float) -> np.ndarray:
+    """La grille des facteurs d'échelle essayés, DÉRIVÉE de la fenêtre et non choisie.
+
+    ⚠ Un pas de la grille déplace d'exactement **un voxel** le décalage le plus grand que la
+    fenêtre autorise : c'est la résolution à laquelle la mesure peut distinguer deux échelles,
+    et en essayer de plus fines rendrait des chiffres que la donnée ne porte pas. Elle va
+    jusqu'à deux parce qu'une forme peut aussi **sous-estimer** son décalage, et s'arrêter à un
+    ne laisserait voir que la moitié du défaut.
+
+    ⚠⚠⚠ ELLE EST ANCRÉE SUR L'IDENTITÉ, ET LA PREMIÈRE VERSION NE L'ÉTAIT PAS. Partir de zéro
+    et avancer par pas de `1/demi-feuille` **rate 1,0** dès que le pas ne divise pas un — donc
+    « recaler améliore » se comparait à un facteur voisin de l'identité plutôt qu'à l'identité,
+    et une part du gain mesuré n'était qu'un décalage de grille. La grille part donc de 1,0 et
+    s'étend d'une unité entière de chaque côté : elle voit une forme qui SUR-estime son décalage
+    comme une qui le SOUS-estime, et son milieu est exactement « ne rien changer ».
+    """
+    pas = 1.0 / demi_vx
+    n = int(np.ceil(1.0 / pas))
+    return np.round(1.0 + np.arange(-n, n + 1) * pas, 12)
+
+
+def choisir_hors_echantillon(courbes: list[np.ndarray],
                              facteurs: np.ndarray) -> tuple[float, list[float], list[float]]:
     """Le meilleur facteur d'échelle, et ce qu'il vaut sur un pas qui n'a PAS servi à le choisir.
 
@@ -768,22 +789,8 @@ def verifier() -> int:
     v("... et elle couvre les DEUX défauts : sur-estimer et sous-estimer le décalage",
       float(f[-1]) >= 2.0 and float(f[0]) <= 0.0, f"[{f[0]:.3f}, {f[-1]:.3f}]")
 
-    # ⚠⚠⚠ LE CONTRÔLE QUI INTERDIT À UNE MESURE DE SE NOTER SUR SA PROPRE COPIE. Le pas jugé ne
-    # doit pas être parmi ceux qui ont choisi le facteur ; sinon essayer soixante-deux facteurs
-    # garantit qu'un tombe bien, et « recaler améliore » serait vrai de n'importe quoi. La
-    # fixture est faite pour que le contrôle DISCRIMINE : le premier pas préfère un facteur que
-    # les deux autres détestent, donc une version en échantillon lui rendrait 0 et la version
-    # honnête lui rend le coût de ce que les autres ont choisi.
-    grille = np.array([0.0, 1.0, 2.0])
-    seul = np.array([9.0, 9.0, 0.0])
-    autres = np.array([0.0, 9.0, 9.0])
-    dedans, pris, val = recaler_hors_echantillon([seul, autres, autres], grille)
-    v("un pas est jugé au facteur que les AUTRES pas ont choisi, jamais au sien",
-      pris[0] == 0.0 and val[0] == 9.0 and dedans == 0.0,
-      f"facteur retenu {pris[0]}, erreur {val[0]} (son propre optimum vaut 0.0)")
-    v("... et avec un seul pas, le recalage n'est simplement pas jugeable",
-      recaler_hors_echantillon([seul], grille)[2] == [],
-      str(recaler_hors_echantillon([seul], grille)))
+    # ⚠ Le choix hors échantillon vit dans `src/commun/lecart_apparie.py` et y est exercé ; ce
+    # qui est vérifié ICI, c'est que ce fichier s'en sert bien pour son facteur d'échelle.
 
     # ⚠⚠⚠ LE CHEMIN QUI PRODUIT LE NOMBRE PUBLIÉ, HORS LIGNE, avec ses DEUX matières.
     from le_corpus_des_spires import geometrie_fabriquee  # noqa: PLC0415
