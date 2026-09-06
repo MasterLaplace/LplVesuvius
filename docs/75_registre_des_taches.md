@@ -2490,6 +2490,89 @@ poste de dépense.
 > reste est **le premier pas** : 44 µm pour un tour, là où l'accumulation n'en coûte que 33. C'est
 > lui qu'il faut attaquer, et c'est une question sur **un** pas — donc mesurable sans marcher.
 
+#### ⭐⭐⭐ LE TIERS DU COÛT D'UN PAS EST UNE LONGUEUR PRISE SUR LA MAUVAISE POPULATION
+
+> Mesure : `src/nappe/le_cout_dun_seul_pas.py` (25 contrôles) →
+> `docs/mesures/le_cout_dun_seul_pas.json`. Figure : `src/figures/figure_le_cout_dun_seul_pas.py`
+> (18 contrôles), le 2026-09-06.
+>
+> ```
+> uv run python src/nappe/le_cout_dun_seul_pas.py --cote 640 \
+>     --json docs/mesures/le_cout_dun_seul_pas.json
+> uv run python src/figures/figure_le_cout_dun_seul_pas.py \
+>     --sortie docs/images/75_le_cout_dun_seul_pas.png
+> ```
+
+La tranche précédente avait laissé **un seul poste** : le premier pas coûte 42,7 µm là où
+l'accumulation n'en coûte que 33 par tour. C'est une question sur **un** pas, donc mesurable sans
+jamais marcher.
+
+![le tiers du coût d'un pas](images/75_le_cout_dun_seul_pas.png)
+
+##### La décomposition est une hiérarchie de LIBERTÉS
+
+Chaque niveau donne à la marche **un paramètre de plus**, et l'écart entre deux niveaux est
+exactement ce qu'une classe de remèdes rapporterait **au mieux**.
+
+| niveau | ce qu'on donne | erreur | ce que l'écart mesure |
+|---|---|---:|---|
+| `E0` | rien — pas nominal, normales calculées | 42,7 µm | *(le départ)* |
+| `E1` | **une** longueur, la meilleure | 28,7 | **14,0 µm — 33 %** |
+| `E2` | plus **une** rotation globale | 27,4 | 1,3 µm — 3 % |
+| `E3` | une longueur **par point**, le long de sa normale | 19,1 | 8,3 µm — 19 % |
+| — | *le plancher, que rien ne prend* | **19,1** | 45 % |
+
+> ⚠⚠⚠ **CE NE SONT PAS DES MÉTHODES, CE SONT DES BORNES.** `E1`, `E2` et `E3` sont choisis **en
+> regardant la cible** : aucun dérouleur ne peut les atteindre. Et la liberté donnée est bornée
+> **exprès** — laisser chaque point aller où il veut rendrait zéro et ne dirait rien.
+
+⚠⚠ **Un défaut de conception attrapé par une sonde.** Ma première version mesurait `E3` le long de
+la normale **de départ**, donc elle ne contenait pas la liberté de `E2` : les niveaux n'étaient pas
+emboîtés, et une paire avait `E2` **meilleur** que `E3`. Une décomposition dont les niveaux ne
+s'emboîtent pas ne décompose rien — ses écarts cessent de nommer une classe de remèdes. `E3` se
+mesure désormais sur la normale **tournée**. ⚠ Et le contrôle « les quatre parts se somment à un »
+**ne pouvait pas échouer** : la somme télescope par construction, et elle était verte sur la
+version cassée, avec une part négative. Ce qui se vérifie est que chaque part soit **positive**.
+
+##### ⭐⭐⭐ Et pourquoi le premier tiers existe : le pas nominal vient d'ailleurs
+
+| paire | 4→5 | 5→6 | 6→7 | 7→8 | 8→9 | 9→10 | 12→13 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| écart **local** *(ne pas bouger)* | 171,0 | 104,1 | 100,3 | 115,4 | 114,5 | 70,9 | 63,9 |
+| meilleure **longueur** | 152,4 | 111,8 | 105,0 | 115,2 | 98,2 | ⛔ 67,8 | ⛔ 63,9 |
+
+> ⭐⭐⭐ **L'écart inter-feuilles mesuré DANS LA BOÎTE vaut 104,1 µm, pas les 135,5 µm du pas
+> nominal.** Le nominal est la médiane sur **toutes** les spires du fragment ; la boîte où toute
+> cette campagne mesure est une région plus serrée. La meilleure longueur suit l'écart **local**
+> plutôt que le nominal sur **4 paires sur 5** hors butée. Ce tiers du coût n'est donc pas un
+> réglage à trouver, **c'est un nombre à mesurer**.
+
+⚠ **Deux paires butent sur le bord de la fenêtre de recherche** : leur minimum est ailleurs, ce
+n'est pas un optimum mais un **refus**, et la médiane des longueurs est publiée **aussi** sans
+elles — 111,8 µm sur 5 paires.
+
+⚠⚠ **Une comparaison à seuil, retirée.** J'avais d'abord exigé que la meilleure longueur **égale**
+l'écart local à deux pas de balayage près (3,4 µm) — un seuil qui demande plus de précision que la
+médiane d'un nuage n'en a, et qui rendait **NON** pour 7,7 µm sur 110. La question qui se pose
+vraiment est comparative et **sans seuil** : la meilleure longueur ressemble-t-elle plus à l'écart
+local qu'au nominal ? Oui, 4 fois sur 5.
+
+##### Ce que les autres niveaux disent
+
+⛔ **La rotation globale ne prend rien** — 1,3 µm sur 42,7, soit 3 %. Il n'y a pas de biais
+systématique de direction à corriger, et cette piste est fermée avant d'avoir été ouverte.
+
+⭐ **Le plancher tient la feuille** : 19,1 µm contre 67,75. Un raccrochage **parfait** le long de
+la normale laisserait donc largement de quoi tenir — rien n'interdit au raccrochage de marcher. Mais
+il n'a que **19 %** du coût à prendre, là où la longueur en a **33 %** pour rien.
+
+> ⭐⭐⭐ **Ce que cette tranche laisse à la suivante, et c'est enfin une piste positive.** Un
+> dérouleur réel ne connaît pas l'écart local — c'est justement ce qu'il cherche. Mais il connaît
+> l'écart entre les spires qu'il a **déjà**, et la question devient : *l'écart local se prédit-il
+> depuis les précédents ?* Douze paires consécutives sont publiées, donc la corrélation entre
+> l'écart d'une paire et celui de la suivante se mesure **tout de suite et sans rien lire**. Si
+> elle existe, le tiers du coût est récupérable sans regarder la cible.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est
@@ -2970,7 +3053,7 @@ mesurer est le piège habituel : `concordance_des_plans` la mesure désormais.
 
 ---
 
-### D4 ⚠⚠⚠ — 67 batteries vertes sur 154 n'atteignent pas le nombre qu'elles publient
+### D4 ⚠⚠⚠ — 67 batteries vertes sur 156 n'atteignent pas le nombre qu'elles publient
 
 Document dédié : [`80`](80_la_batterie_natteint_pas_le_nombre.md). Suite de
 [`61`](61_les_batteries_qui_ne_pouvaient_pas_echouer.md), dont il franchit la limite finale —
@@ -2993,7 +3076,7 @@ sans rien exécuter) :
 
 | | |
 |---|---:|
-| modules qui publient une mesure ou une figure | **154** |
+| modules qui publient une mesure ou une figure | **156** |
 | dont la batterie n'atteint pas ce chemin | **67** (44 %) |
 | fonctions hors de portée | **102** |
 

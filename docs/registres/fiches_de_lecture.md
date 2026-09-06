@@ -4220,7 +4220,7 @@ vérification du dépôt lui-même.
   balayage syntaxique de tout l'arbre montre que ce n'est pas une exception, et le document
   livre le remède sur le module fautif, ses six sondes, puis un second constat trouvé en chemin.
 - **compte exact et cause** :
-  - **67 modules en dette sur 154 qui publient une mesure ou une figure** (44 %), **102
+  - **67 modules en dette sur 156 qui publient une mesure ou une figure** (43 %), **102
     fonctions** hors de portée, relevés par `src/depot/le_chemin_du_nombre_publie.py`, qui ferme
     le graphe d'appels de chaque module et rend `atteintes(main) − atteintes(verifier)`.
   - ⚠⚠ **La portée a été resserrée en cours de route** : la première règle comptait comme
@@ -5518,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 3227
+- **lignes** : 3310
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5591,6 +5591,39 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - **E, ce qui est hors registre avec sa raison** : la soumission (hors périmètre décidé par
     l'auteur) ; le second papier de `72`, qui est ⚠⚠⚠ **une occasion de publication et non un
     progrès vers le prix** et n'avance qu'avec C ; H3 et H6 de `69`, répondues par le dépôt.
+  - ⭐⭐⭐ **LE TIERS DU COÛT D'UN PAS EST UNE LONGUEUR PRISE AILLEURS (2026-09-06,
+    `le_cout_dun_seul_pas`, 25 contrôles).** Le premier pas est décomposé en une **hiérarchie de
+    libertés**, chaque niveau donnant un paramètre de plus : `E0` 42,7 µm (rien) → `E1` 28,7 (une
+    longueur) → `E2` 27,4 (plus une rotation globale) → `E3` 19,1 (une longueur **par point**),
+    et le plancher garde **45 %**. ⚠⚠⚠ Ce ne sont **pas des méthodes mais des bornes** : `E1` à
+    `E3` sont choisis en regardant la cible, et la liberté est bornée exprès — laisser chaque
+    point aller où il veut rendrait zéro.
+  - ⭐⭐⭐ **Et pourquoi le premier tiers existe : l'écart inter-feuilles mesuré DANS LA BOÎTE vaut
+    104,1 µm, pas les 135,5 du pas nominal.** Le nominal est la médiane sur toutes les spires du
+    fragment ; la boîte où toute la campagne mesure est une région plus serrée. La meilleure
+    longueur suit l'écart **local** plutôt que le nominal sur **4 paires sur 5** hors butée. Ce
+    tiers n'est donc pas un réglage à trouver, **c'est un nombre à mesurer**.
+  - ⛔ La **rotation globale** ne prend que 1,3 µm sur 42,7 (3 %) : il n'y a pas de biais
+    systématique de direction, et la piste est fermée avant d'avoir été ouverte. ⭐ Le **plancher**
+    tient la feuille (19,1 contre 67,75 µm), donc rien n'interdit au raccrochage de marcher — mais
+    il n'a que 19 % du coût à prendre.
+  - ⚠⚠ **Un défaut de conception attrapé par une sonde** : `E3` était mesuré le long de la normale
+    **de départ**, donc ne contenait pas la liberté de `E2` — les niveaux n'étaient pas emboîtés,
+    et une paire avait `E2` meilleur que `E3`. Une décomposition dont les niveaux ne s'emboîtent
+    pas ne décompose rien. ⚠ Et le contrôle « les quatre parts se somment à un » **ne pouvait pas
+    échouer** : la somme télescope par construction, et elle était verte sur la version cassée,
+    avec une part **négative**. Ce qui se vérifie est que chaque part soit positive.
+  - ⚠⚠ **Une comparaison à seuil, retirée** : j'avais exigé que la meilleure longueur **égale**
+    l'écart local à 3,4 µm près — plus de précision que la médiane d'un nuage n'en a, et un **NON**
+    pour 7,7 µm sur 110. Remplacée par une comparaison **sans seuil** : ressemble-t-elle plus à
+    l'écart local qu'au nominal ? Oui, 4 fois sur 5. ⚠ Deux paires **butent** sur le bord de la
+    fenêtre de recherche — ce n'est pas un optimum mais un refus, et la médiane est publiée aussi
+    sans elles (111,8 µm sur 5 paires).
+  - ⚠⚠ **Trois défauts de figure que ses propres contrôles ne voyaient pas**, et les contrôles ont
+    été élargis : la prose était coupée au nombre de **caractères** alors qu'une ligne en
+    capitales est bien plus large (la coupe est désormais **mesurée**) ; un marqueur de butée
+    sortait en **carré vide** parce que la traçabilité ne regardait que `prose` et pas les
+    étiquettes dessinées ; et trois étiquettes d'axe se chevauchaient.
   - ⭐⭐ **L'itération ne paie que de la NAPPE (2026-09-06, `pourquoi_la_derive_accelere`,
     24 contrôles).** Deux artefacts écartés : le **masque** qui rétrécit (996 → 671 cellules) n'y
     est pour rien — 1,5 / 2,1 / 2,7 / 0,0 µm d'écart entre le masque propre et le sous-ensemble
@@ -5644,7 +5677,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     même chose : la tranche précédente combinait **dans les deux sens** et mettait les distances en
     commun, celle-ci prend pour référence le nuage de l'ancre la plus basse.
   - ⚠⚠⚠ **D4 ouverte le 2026-09-06** — *le chemin qui produit le nombre publié n'est atteint
-    par aucune batterie* : **67 modules sur 154**, **102 fonctions**, et la branche laissée
+    par aucune batterie* : **67 modules sur 156**, **102 fonctions**, et la branche laissée
     dehors porte toujours le même nom (`mesurer` dans 13, `dessiner` dans 10). **Cinq modules**
     sont réparés et la matière **promue** en un lecteur unique plus deux fixtures qui décrivent
     le même objet (matière injectée par paramètre, découpage laissé dedans, batteries 32 → 46,
@@ -6128,8 +6161,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 2535 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 3227 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 2618 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 3310 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

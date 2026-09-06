@@ -1,5 +1,5 @@
 {
-  "modules_qui_publient": 154,
+  "modules_qui_publient": 156,
   "modules_en_dette": 67,
   "fonctions_non_couvertes": 102,
   "tetes_de_chemin": {
@@ -66,7 +66,7 @@
       "en_dette": 23
     },
     "figures": {
-      "publient": 52,
+      "publient": 53,
       "en_dette": 10
     },
     "graine": {
@@ -74,7 +74,7 @@
       "en_dette": 9
     },
     "nappe": {
-      "publient": 31,
+      "publient": 32,
       "en_dette": 12
     },
     "rendu": {
@@ -94,7 +94,7 @@
       "en_dette": 1
     }
   },
-  "part_en_dette": 0.435,
+  "part_en_dette": 0.429,
   "lignes": [
     {
       "fichier": "src/commun/audit_profils_plats.py",
@@ -991,6 +991,15 @@
       "en_dette": false
     },
     {
+      "fichier": "src/figures/figure_le_cout_dun_seul_pas.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
       "fichier": "src/figures/figure_le_debinage.py",
       "fonctions": 7,
       "atteintes_par_main": 6,
@@ -1515,6 +1524,15 @@
         "mesurer"
       ],
       "en_dette": true
+    },
+    {
+      "fichier": "src/nappe/le_cout_dun_seul_pas.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 5,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
     },
     {
       "fichier": "src/nappe/le_pas_de_la_grille.py",
