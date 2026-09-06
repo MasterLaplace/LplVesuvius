@@ -3706,7 +3706,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/55_les_murs_et_leurs_causes.md
-- **lignes** : 125
+- **lignes** : 126
 - **nature** : PROCEDE
 - **résumé** : Document **rendu** depuis `docs/registres/murs_et_causes.tsv` par `uv run python src/depot/murs_et_causes.py --rendre`, et non écrit à la main ; sa batterie vérifie que chaque ligne pointe vers un document contenant encore son ancre. Il recense **30 causes candidates sur 4 murs** : 19 éliminées, 10 confirmées, 1 bloquée, chacune avec la mesure qui l'a tranchée et le document d'origine. Sa thèse de forme est qu'un mur est un espace de causes dont on retire une entrée à la fois, et que la liste des causes éliminées — non celle des tâches — est le seul progrès mesurable. Une seule cause reste non tranchée, et elle est bloquée. (⚠ Note de lecture : l'en-tête compte 19 éliminations quand le §final écrit « les treize éliminations de ce document » ; le document ne signale pas l'écart. De même, il ne contient aucune cause ⏳ *ouverte* alors que son propre tableau de symboles définit ce statut.)
 - **conclusions extractibles** : *(les murs recensés, avec pour chacun les causes éliminées et celles qui restent ouvertes)*
@@ -3759,7 +3759,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
   - La figure `55_espace_de_causes.png` n'est pas une jauge de progression : rien ne dit que l'espace est borné.
 - **rétractations / corrections internes** : aucune rétractation déclarée. Le document précise en revanche deux bornes de portée sur des causes confirmées : « la graine, c'est-à-dire l'endroit » explique la famille m7 **et pas le mur**, et la chaîne tangentielle « ne dit pas que c'est la BONNE feuille (il faut de l'encre), et part d'un segment PUBLIÉ et non d'une de nos traces ». Il retire aussi explicitement une affirmation antérieure : « ⚠⚠ Le “croisement” que j'avais publié à 1 920 µm n'existe pas : chaîne ET bond y sont au niveau du hasard (−1,7 et +1,6) ».
 - **preuve de lecture intégrale** :
-  - ligne 87 : « | enchaîner la projection à GRAND pas (238 µm/maillon) | ❌ | cinq maillons de 238 µm étalent la boîte ×2,38 à nombre de points constant, contre ×1,10 pour le bond direct — et finissent 5,33 SPIRES à côté de lui. ⚠ Le pas réel dérive avant la boîte : 238 → 963 µm par maillon | [`44`](44_ou_la_chaine_se_trouve.md) | »
+  - ligne 92 : « | enchaîner la projection à GRAND pas (238 µm/maillon) | ❌ | cinq maillons de 238 µm étalent la boîte ×2,38 à nombre de points constant, contre ×1,10 pour le bond direct — et finissent 5,33 SPIRES à côté de lui. ⚠ Le pas réel dérive avant la boîte : 238 → 963 µm par maillon | [`44`](44_ou_la_chaine_se_trouve.md) | »
   - ligne 122 : « cause à laquelle personne n'a pensé. Le tableau borne ce qu'on a testé, jamais ce qui »
 
 ---
@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 2718
+- **lignes** : 2799
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5851,6 +5851,32 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Un délai réseau a tué un balayage après **232 blocs déjà téléchargés**. Le lecteur avait
     raison de refuser de confondre « pas de réponse » et « pas de matière », mais un incident ne
     dit rien du contenu : il se **réessaie**, borné, compté et rendu.
+  - ⛔⛔ **ET LA LONGUEUR LOCALE DU PAS NE SE LIT PAS NON PLUS** (2026-09-06). C'était la
+    dernière quantité que toutes les marches tenaient pour acquise. La médiane lue vaut
+    **136,9 µm** contre **135,5** publiée — un accord à sept millièmes qui ne prouve **rien** :
+    la médiane d'un tirage uniforme dans `[0,5 L ; 1,5 L]` vaut exactement `L`, et le témoin
+    mélangé rend 131,1.
+  - ⛔ **La queue haute est tronquée par construction** : la fenêtre se ferme à **203,2 µm** quand
+    le p90 publié est à **311,3**. Exclure la deuxième voisine et atteindre le neuvième décile
+    sont **deux exigences incompatibles** sur ce corpus — un fait sur la nappe, pas un réglage.
+  - ⭐⭐ **Le verdict est cellule par cellule, contre un étalon CALCULÉ** : la lecture et son
+    témoin s'écartent de **0,292** de la largeur de la fenêtre quand deux tirages **indépendants**
+    s'en écarteraient de **0,293** (`W(1 − 1/√2)`), soit **99,7 %**. ⚠⚠⚠ Et le **sens** était codé en dur derrière un commentaire qui prétendait le dériver — corrigé par la force de la corrélation, ce qui a changé les sens retenus et **renforcé** le verdict. Seconde preuve sans cible : le sens n'est pas unanime (3 spires sur 9 au minoritaire) alors que les grilles publiées partagent une orientation. ⚠⚠ Ma première version
+    comparait à 0,15, un nombre posé, et rendait le verdict **inverse** — remplacer un seuil
+    choisi par une quantité dérivée a retourné la conclusion.
+  - ⚠⚠ **Et les DÉCILES ne tranchent rien** : lecture et témoin rendent les mêmes trois quantiles.
+    Le champ qui annonçait « elle bat le témoin » sur cette base a été **retiré du JSON** — deux
+    verdicts contradictoires dans un même fichier sont un piège.
+  - ⚠⚠⚠ **Le témoin du gabarit mélangé a une limite, mesurée** : contre une crête isolée et très
+    piquée il la retrouve **quand même**, une permutation gardant la distribution des valeurs du
+    gabarit. Il discrimine sur la donnée réelle, bruitée ; pas sur une fixture propre. Le témoin
+    qui tranche là est un volume **sans feuille dans la fenêtre** (étalement 30,4 contre 0,7).
+  - ⚠ Deux fixtures de cette batterie ne pouvaient pas discriminer, pour deux raisons
+    différentes : feuilles **régulièrement espacées** (la ligne est périodique, n'importe quel
+    motif y trouve la période) et volume **constant en x et y** (les vingt-quatre lignes sont la
+    même ligne, donc le témoin a un échantillon de un).
+  - ⛔⛔⛔ **Cinq soupçons, cinq écartés** : la fenêtre, les décalages, le gabarit, les normales,
+    la longueur du pas. Le volume brut donne **un** gain, à un pas, depuis une surface déjà juste.
 - **rétractations / corrections internes** :
   - ⛔⛔⛔ **« Un décalage UNIQUE par tour déroule » est RETIRÉ** (publié et retiré le
     2026-09-06). À **191 cellules et quatre tours**, le décalage unique rendait une dérive
@@ -5894,8 +5920,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 2125 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 2718 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 2206 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 2799 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

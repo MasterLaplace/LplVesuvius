@@ -2080,6 +2080,87 @@ avait une **période de trois**, que le support trois annulait exactement : le c
 > mesuré. Et elle est lisible sans cible : la crête suivante le long de la normale **est** la
 > longueur du pas.
 
+#### ⛔⛔ Et la LONGUEUR locale ne se lit pas non plus : ce qui revient est un tirage dans la fenêtre
+
+> Mesure : `src/nappe/la_longueur_locale_du_pas.py` (18 contrôles) →
+> `docs/mesures/la_longueur_locale_du_pas.json`. Figure :
+> `src/figures/figure_la_longueur_locale_du_pas.py` (10 contrôles), le 2026-09-06.
+>
+> ```
+> uv run python src/nappe/la_longueur_locale_du_pas.py --cote 640 --json docs/mesures/la_longueur_locale_du_pas.json
+> uv run python src/figures/figure_la_longueur_locale_du_pas.py --sortie docs/images/75_la_longueur_locale_du_pas.png
+> ```
+
+C'était la dernière quantité que toutes les marches tenaient pour acquise. La crête suivante le
+long de la normale **est** la feuille voisine, et elle se lit **sans la cible** : le gabarit dit à
+quoi ressemble une feuille, une fenêtre ouverte vers l'extérieur dit à quelle distance est la
+prochaine. ⚠⚠ La fenêtre est **dérivée** — d'une demi-longueur nominale à une et demie : en deçà
+on retrouve la feuille de départ, au-delà on saute la voisine.
+
+![la longueur locale ne se lit pas](images/75_la_longueur_locale_du_pas.png)
+
+⚠⚠⚠ **Le nombre qui trompe est la médiane** : **136,9 µm lus contre 135,5 publiés**, un accord à
+un centième. Il ne prouve **rien** — la médiane d'un tirage uniforme dans `[0,5 L ; 1,5 L]`
+vaut exactement `L`. Et le témoin du gabarit mélangé rend **131,1**.
+
+| | p10 | médiane | p90 |
+|---|---:|---:|---:|
+| lues dans le volume | 82,7 µm | **136,9** | 193,0 |
+| publiées (spires) | 67,2 | **135,5** | **311,3** |
+| témoin mélangé | 78,2 | 131,1 | 190,6 |
+
+⛔ **La queue haute est TRONQUÉE, et par construction** : la fenêtre se ferme à **203,2 µm** quand
+le neuvième décile publié est à **311,3**. Exclure la deuxième voisine et atteindre le neuvième
+décile sont **deux exigences incompatibles** sur ce corpus — ce n'est pas un réglage à corriger,
+c'est un fait sur la nappe : ses écarts varient trop pour qu'une fenêtre bien posée les couvre.
+
+> ⛔⛔ **Et le verdict est cellule par cellule.** La lecture et son témoin s'écartent de **0,292**
+> de la largeur de la fenêtre, quand deux tirages **indépendants** s'en écarteraient de
+> **0,293** — la médiane de `|X − Y|` pour deux uniformes sur `W` vaut `W(1 − 1/√2)`, un étalon
+> qui se **calcule** et ne se choisit pas. La mesure en atteint **99,7 %**. Ce qui revient n'est pas
+> une longueur, c'est un tirage dans la fenêtre où on la cherche.
+
+⭐⭐ **Et une seconde preuve, qui ne demande AUCUNE cible** : les grilles publiées partagent une
+orientation — mesuré ailleurs, le sens retenu est le même pour les douze paires. Une lecture qui
+porterait du signal choisirait donc le même sens partout. Elle en change : **trois spires sur neuf**
+au sens minoritaire.
+
+⚠⚠⚠ **Et le sens était CODÉ EN DUR derrière un commentaire qui prétendait le dériver.** Le code le
+choisissait par le nombre de lignes lisibles — presque toujours égal des deux côtés — donc son
+`max` retombait sur le premier sens essayé, et les neuf spires rendaient « + ». Corrigé par la
+**force de la corrélation**, ce qui a changé les sens retenus *et* renforcé le verdict : l'écart au
+témoin passe de 0,277 à **0,292** pour un étalon de 0,293.
+
+⚠⚠ **Ma première version comparait à 0,15**, un nombre que j'avais posé — et il rendait le verdict
+inverse. Le remplacer par une quantité dérivée a retourné la conclusion, ce qui est exactement ce
+qu'un seuil choisi permet de ne jamais voir.
+
+⚠⚠ **Et la comparaison des DÉCILES ne tranche rien** : la lecture et son témoin rendent les mêmes
+trois quantiles à quelques micromètres près. Un verdict bâti dessus aurait été vrai
+arithmétiquement et faux au sens qui compte ; le champ qui l'annonçait a été retiré du JSON, parce
+que deux verdicts contradictoires dans un même fichier sont un piège.
+
+⚠ Deux fixtures de ma batterie ne pouvaient pas discriminer, et pour deux raisons différentes.
+La première avait des feuilles **régulièrement espacées** : la ligne entière est alors périodique,
+donc n'importe quel motif y trouve la période et le gabarit mélangé rendait 59,9 pour une vraie
+réponse de 60. La seconde était constante en `x` et en `y` : les vingt-quatre lignes étaient **la
+même ligne**, donc le témoin avait un échantillon de **un**.
+
+⚠⚠⚠ **Et le témoin du gabarit mélangé a une limite, mesurée plutôt qu'invoquée** : contre une
+crête **isolée et très piquée**, il la retrouve quand même — une permutation garde la distribution
+des valeurs du gabarit, et presque n'importe quel vecteur de cette distribution corrèle au maximum
+sur la crête. Il discrimine sur la donnée réelle, bruitée et peu piquée ; il ne discrimine pas sur
+une fixture propre. Le témoin qui tranche là est un volume **sans feuille dans la fenêtre** : les
+longueurs lues s'y étalent sur **30,4** contre **0,7** avec une feuille.
+
+> ⛔⛔⛔ **Cinq soupçons, cinq écartés.** La fenêtre, les décalages, le gabarit, les normales, et
+> maintenant la longueur du pas. Le volume brut donne **un** gain, à un pas, depuis une surface
+> déjà juste — et rien d'autre. ⭐ Ce qui reste n'est plus une variante de la même marche : c'est
+> que **la marche elle-même part d'une seule spire et n'a que sa propre reconstruction pour se
+> juger**. Les treize spires publiées offrent douze départs indépendants ; personne n'a encore
+> mesuré si un dérouleur qui part de **plusieurs** endroits à la fois — et dont les branches
+> doivent s'accorder là où elles se rencontrent — fait mieux qu'un seul qui part d'un bout.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est
