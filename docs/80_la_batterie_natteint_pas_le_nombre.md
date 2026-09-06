@@ -1,4 +1,4 @@
-# 80 — Soixante-sept batteries vertes n'atteignent pas le nombre qu'elles publient
+# 80 — Soixante-dix batteries vertes n'atteignent pas le nombre qu'elles publient
 
 > ⚠⚠⚠ **Le 2026-09-05, un patch appliqué à moitié a laissé `derouler_des_deux_bords.py`
 > avec un enregistrement qui référençait trois variables inexistantes — et la batterie est
@@ -32,36 +32,50 @@ pas exercer.
 
 | | |
 |---|---:|
-| modules qui publient une mesure | **140** |
-| dont la batterie n'atteint pas ce chemin | **67** (48 %) |
-| fonctions hors de portée, au total | **104** |
+| modules qui publient une mesure ou une figure | **150** |
+| dont la batterie n'atteint pas ce chemin | **70** (47 %) |
+| fonctions hors de portée, au total | **108** |
+
+⚠⚠ **La portée a été resserrée en cours de route, et le premier chiffre publié était trop
+large.** Ma première règle comptait comme publieur tout module *mentionnant* `docs/mesures` —
+donc aussi ceux qui ne font que **lire** une mesure. Trouvé en voyant `le_corpus_des_spires.py`,
+un pur lecteur, apparaître en dette pour la seule fonction qui lit le dépôt distant. Un lecteur
+n'a pas de nombre publié, donc le défaut nommé ici ne peut pas lui arriver. Le signe retenu est
+désormais l'**écriture**, sous ses deux formes : sérialiser **et** écrire un fichier (une
+mesure), ou enregistrer une image (une figure). Exiger la première seule aurait effacé les
+figures de la portée — or `dessiner` est la deuxième branche la plus souvent laissée dehors, et
+c'est exactement le même défaut.
 
 ⭐ **Et la branche laissée dehors porte toujours le même nom.** Les têtes de chemin jamais
 exercées, comptées par nom :
 
 | branche | modules |
 |---|---:|
-| `mesurer` | **17** |
+| `mesurer` | **16** |
 | `dessiner` | **10** |
-| `rapporter` | 7 |
+| `rapporter` | 6 |
 | `lire` | 4 |
 
 Ce sont les deux verbes qui **publient** : l'un rend le nombre, l'autre l'image.
 
-La dette n'est pas uniforme non plus — `graine` en porte 9 sur 10 et `encre` 22 sur 29, là où
-`figures` n'en porte que 10 sur 46.
+La dette n'est pas uniforme non plus — `graine` en porte 9 sur 10 et `encre` 23 sur 32, là où
+`figures` n'en porte que 10 sur 50.
 
 ⚠ **Un chiffre a été retiré de la mesure après avoir été calculé** : « les modules dont la
-tête de chemin est dehors », 67 sur 67. Ce n'est pas un constat, c'est une **identité** — la
+tête de chemin est dehors », 70 sur 70. Ce n'est pas un constat, c'est une **identité** — la
 couverture se propage vers le bas, donc si une fonction quelconque est hors de portée, celle
 que `main` appelle en premier sur ce chemin l'est forcément. Un nombre qui ne peut prendre
 qu'une valeur se lit comme une découverte et n'en est pas une.
 
-## 3. Le remède, sur le premier module
+## 3. Le remède, et un lecteur unique pour toute la famille
 
-Le chemin de mesure de `derouler_des_deux_bords.py` reçoit désormais sa matière par
-paramètre, et le défaut par défaut est le dépôt distant : **le nombre publié ne bouge pas
-d'une virgule.**
+Le chemin de mesure reçoit désormais sa matière par paramètre, et le défaut par défaut est le
+dépôt distant : **le nombre publié ne bouge pas d'une virgule.**
+
+⭐ Et la lecture a été **promue** dès le deuxième appelant : `src/nappe/le_corpus_des_spires.py`
+porte l'unique lecteur du corpus (l'index des spires, leur grille, l'écart inter-feuilles) et
+l'unique fixture hors ligne. Cinq modules de `src/nappe/` en avaient chacun leur copie — et deux
+dérouleurs comparés sur deux lectures différentes mesurent d'abord leur désaccord de lecture.
 
 ⚠⚠ **Ce qui est injectable est la MATIÈRE, pas le découpage.** La boîte, le seuil de
 cellules, le choix des encadrements, le signe de la normale, la marche, la combinaison, la
@@ -79,12 +93,21 @@ l'autre pour la même raison : en phase, c'est encore un décalage exact.
 dépôt distant, donc jamais par la batterie — et c'est précisément là que le patch de
 septembre a laissé son enregistrement cassé.
 
-**Ce que la batterie exerce désormais** : la mesure de bout en bout (18 encadrements sur une
-matière fabriquée), ses deux refus — une spire dont il ne reste que trois cellules est
-écartée, un corpus posé hors de la boîte est **refusé** plutôt que rendu vide —, l'affichage
-jusqu'à son verdict, la sérialisation, et la traçabilité dans l'autre sens : **la figure ne
-lit aucune clé que la mesure ne publie pas**, les clés étant lues dans l'arbre syntaxique de
-la figure plutôt que recopiées à la main.
+**Ce que les batteries exercent désormais** — `derouler_des_deux_bords` (32 → **46
+contrôles**) : la mesure de bout en bout (18 encadrements sur une matière fabriquée), ses deux
+refus — une spire dont il ne reste que trois cellules est écartée, un corpus posé hors de la
+boîte est **refusé** plutôt que rendu vide —, l'affichage jusqu'à son verdict, la sérialisation,
+et la traçabilité dans l'autre sens : **la figure ne lit aucune clé que la mesure ne publie
+pas**, les clés étant lues dans l'arbre syntaxique de la figure plutôt que recopiées à la main.
+
+`derouler_par_le_pas_normal` (9 → **17 contrôles**) : la marche de bout en bout, le rétrécissement
+du masque tour après tour, le **témoin du pas nul qui s'éloigne** — sans lui « le dérouleur
+atteint la spire » serait satisfait par un dérouleur immobile —, et le refus d'une spire de
+départ absente.
+
+`le_corpus_des_spires` (**8 contrôles**) garde ce qui appartient au corpus lui-même : la fixture
+a exactement la forme du vrai lecteur (clés lues dans l'arbre de `corpus_publie`), les spires
+sont espacées du pas, et **aucune n'est un décalage exact de sa voisine**.
 
 ### Les six sondes
 
@@ -92,12 +115,21 @@ la figure plutôt que recopiées à la main.
 
 | défaut remis | ce que la batterie fait |
 |---|---|
-| fixture aplatie | rouge (`mesurer` lève avant même le contrôle) |
+| fixture aplatie | rouge — *aucune spire n'est un décalage exact*, et la marche cesse d'être imparfaite |
+| spires collées, plus d'espacement | rouge — *les spires sont espacées du pas* |
 | la boîte ne découpe plus | rouge — *un corpus hors de la boîte est REFUSÉ* |
 | le seuil de cellules ne filtre plus | rouge — *une spire de trois cellules est écartée* |
 | le corpus publié gagne une clé | rouge — *la fixture a la forme du corpus publié* |
 | l'affichage lit une clé renommée | rouge — `KeyError` rendu en contrôle nommé |
 | la figure lit une clé absente | rouge — *la figure ne lit aucune clé absente* |
+| la spire absente n'est plus refusée | rouge — *une spire de départ absente est refusée* |
+| la demi-épaisseur devient l'épaisseur | rouge — *la demi-épaisseur est la moitié de l'écart lu* |
+| le témoin du pas nul est figé | rouge — *le témoin s'éloigne tour après tour* |
+
+⚠ Une sonde a rendu un verdict **vert** et avait raison : « le corpus publié gagne une clé » ne
+fait plus rougir `derouler_des_deux_bords`, parce que ce contrôle a déménagé chez le
+propriétaire du corpus. Le dupliquer chez chacun de ses cinq appelants ferait cinq copies d'une
+même exigence, libres de diverger.
 
 ## 4. ⚠⚠ Le second constat, trouvé en chemin : quarante-quatre batteries que rien ne lançait
 

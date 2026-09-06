@@ -39,7 +39,9 @@ RACINE = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(RACINE / "src" / "commun"))
 sys.path.insert(0, str(RACINE / "src" / "nappe"))
 
-WRAPS = RACINE / "docs" / "mesures" / "les_wraps_publies.json"
+# ⚠ La lecture du corpus vit dans UN seul fichier, partagé par tous les dérouleurs, et c'est
+# aussi ce qui permet de faire tourner `mesurer` hors ligne sur une matière fabriquée.
+from le_corpus_des_spires import corpus_fabrique, corpus_publie  # noqa: E402
 
 
 def un_pas(a: np.ndarray, ok: np.ndarray, pas_vx: float,
@@ -94,21 +96,18 @@ def derouler(depart: np.ndarray, ok: np.ndarray, cibles: dict[int, np.ndarray],
     return out
 
 
-def mesurer(echantillon: int = 4000, depuis: int = 1) -> dict:
-    """Le déroulement aveugle depuis une spire, jusqu'à perdre la feuille."""
-    from le_pas_normal_atteint_la_spire import distance_a, grille  # noqa: PLC0415
-    from les_wraps_publies import VOLUME, VOXEL_UM, wraps_du_fragment  # noqa: PLC0415
+def mesurer(echantillon: int = 4000, depuis: int = 1, corpus: dict | None = None) -> dict:
+    """Le déroulement aveugle depuis une spire, jusqu'à perdre la feuille.
 
-    if not WRAPS.is_file():
-        raise SystemExit("écart entre spires non mesuré : lancer les_wraps_publies d'abord")
-    ecart_um = json.loads(WRAPS.read_text())["resume"]["1"]["mediane_um"]
-    pas_vx = ecart_um / VOXEL_UM
-
-    grilles = {}
-    for w in wraps_du_fragment():
-        g = grille(w, VOLUME, VOXEL_UM)
-        if g is not None:
-            grilles[w["rang"]] = g
+    ⚠⚠ `corpus` par défaut est celui du dépôt distant, donc le nombre publié ne bouge pas. Un
+    appelant qui en fournit un autre — la batterie hors ligne — exerce le MÊME code sur une
+    autre matière, ce qui est la seule façon de tester le chemin qui produit ce nombre.
+    """
+    c = corpus_publie() if corpus is None else corpus
+    volume, voxel_um = c["volume"], float(c["voxel_um"])
+    ecart_um = float(c["ecart_um"])
+    pas_vx = ecart_um / voxel_um
+    grilles = dict(c["grilles"])
     if depuis not in grilles:
         raise SystemExit(f"spire {depuis} absente")
     a, ok = grilles[depuis]
@@ -120,16 +119,16 @@ def mesurer(echantillon: int = 4000, depuis: int = 1) -> dict:
     from le_pas_normal_atteint_la_spire import essayer_le_pas, normales  # noqa: PLC0415
 
     n0, bon0 = normales(a, ok)
-    essai = essayer_le_pas(a[bon0], n0[bon0], cibles[1], pas_vx, VOXEL_UM)
+    essai = essayer_le_pas(a[bon0], n0[bon0], cibles[1], pas_vx, voxel_um)
     sens = 1.0 if essai["retenu"] == "+" else -1.0
 
-    marche = derouler(a, ok, cibles, pas_vx, VOXEL_UM, sens, echantillon)
+    marche = derouler(a, ok, cibles, pas_vx, voxel_um, sens, echantillon)
     # ⚠⚠ « Perdu » est DÉFINI, pas ressenti : l'erreur dépasse une demi-épaisseur, donc le
     # dérouleur ne peut plus dire sur quelle feuille il est. C'est la même règle que la
     # coïncidence de `lemprise_des_spires`, et elle vient de la même mesure.
     demi = ecart_um / 2.0
     perdu = next((e["tours"] for e in marche if e["erreur_um"] > demi), None)
-    return dict(volume=VOLUME, voxel_um=VOXEL_UM, depuis=depuis,
+    return dict(volume=volume, voxel_um=voxel_um, depuis=depuis,
                 ecart_lu_um=ecart_um, pas_en_voxels=round(pas_vx, 2),
                 demi_epaisseur_um=round(demi, 2), sens_retenu=essai["retenu"],
                 bits_de_supervision=1,
@@ -189,6 +188,41 @@ def verifier() -> int:
       str([e["erreur_um"] for e in court]))
     v("... et il reste meilleur que ne pas bouger",
       all(e["erreur_um"] < e["temoin_sur_place_um"] for e in court))
+
+    # ⚠⚠⚠ LE CHEMIN QUI PRODUIT LE NOMBRE PUBLIÉ, HORS LIGNE. Ce qui précède teste `un_pas` et
+    # `derouler` ; ce qui suit fait tourner `mesurer` en entier sur une matière fabriquée. Sans
+    # ça, le seul chemin non testé du module serait celui qui produit son nombre — le défaut
+    # mesuré dans `80`, et payé le 2026-09-05.
+    fab = mesurer(echantillon=200, corpus=corpus_fabrique())
+    v("la mesure tourne de bout en bout sur un corpus fabriqué, sans rien lire",
+      fab["tours_mesures"] > 0, f"{fab['tours_mesures']} tours")
+    # ⚠⚠ LA GARDE ANTI-DÉGÉNÉRÉ : des spires parfaitement décalées sont atteintes EXACTEMENT par
+    # un pas normal, donc chaque erreur vaudrait zéro et tout ce qui suit serait satisfait par
+    # des zéros. C'est cette ligne qui doit rougir si l'ondulation quitte la fixture.
+    v("... et la marche y est imparfaite, donc les comparaisons portent sur quelque chose",
+      all(e["erreur_um"] > 0 for e in fab["marche"]),
+      str([e["erreur_um"] for e in fab["marche"]]))
+    v("... un tour de plus n'ajoute jamais de cellules",
+      all(b["cellules"] <= a_["cellules"] for a_, b in zip(fab["marche"], fab["marche"][1:])),
+      str([e["cellules"] for e in fab["marche"]]))
+    # ⚠⚠ LE TÉMOIN DU PAS NUL doit s'éloigner à mesure qu'on saute des spires : sans lui, « le
+    # dérouleur atteint la spire » serait satisfait par un dérouleur qui ne bouge pas.
+    v("... et le témoin du pas nul s'éloigne, lui, tour après tour",
+      fab["marche"][-1]["temoin_sur_place_um"] > fab["marche"][0]["temoin_sur_place_um"],
+      str([e["temoin_sur_place_um"] for e in fab["marche"]]))
+    v("... la demi-épaisseur est bien la moitié de l'écart lu",
+      abs(fab["demi_epaisseur_um"] - fab["ecart_lu_um"] / 2) < 0.01,
+      f"{fab['demi_epaisseur_um']} pour {fab['ecart_lu_um']}")
+    v("... et un seul bit de supervision est déclaré", fab["bits_de_supervision"] == 1)
+    v("le résultat est sérialisable tel quel, sans type qui traîne",
+      isinstance(json.dumps(fab), str))
+    # ⚠ Le refus : une spire de départ absente du corpus doit être REFUSÉE, pas contournée.
+    absente = None
+    try:
+        mesurer(echantillon=200, depuis=99, corpus=corpus_fabrique())
+    except SystemExit as exc:
+        absente = str(exc)
+    v("une spire de départ absente est refusée", absente is not None, str(absente))
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0

@@ -51,18 +51,17 @@ from pathlib import Path
 
 import numpy as np
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+# ⚠ La lecture du corpus et sa fixture vivent dans UN seul fichier, partagé par tous les
+# dérouleurs : cinq copies de la même boucle finiraient par ne pas lire la même matière, et
+# l'écart entre deux dérouleurs mesurerait leur désaccord de lecture.
+from le_corpus_des_spires import corpus_fabrique, corpus_publie  # noqa: E402
+
 RACINE = Path(__file__).resolve().parents[2]
 for _d in ("commun", "nappe", "encre"):
     sys.path.insert(0, str(RACINE / "src" / _d))
 
 WRAPS = RACINE / "docs" / "mesures" / "les_wraps_publies.json"
-
-# ⚠ La fixture hors ligne emprunte la géométrie du fragment — 2,215 µm de voxel, 135,5 µm entre
-# spires — plutôt que des nombres ronds : un corpus dont le pas ne ressemble pas au vrai ferait
-# marcher le dérouleur à une longueur qu'il ne rencontre jamais, et une marche calibrée sur une
-# autre échelle ne prouve rien sur celle-ci.
-VOXEL_UM_FIXTURE = 2.215
-ECART_UM_FIXTURE = 135.5
 
 
 def marcher(a: np.ndarray, ok: np.ndarray, tours: int, pas_vx: float,
@@ -186,112 +185,6 @@ def encadrements(rangs: list[int], portee: int) -> list[tuple[int, int, int]]:
             for b in presents if 0 < b - m <= portee]
 
 
-def corpus_publie() -> dict:
-    """La matière que la mesure lit : l'écart entre spires, et la grille de chaque spire publiée.
-
-    ⚠⚠⚠ POURQUOI CETTE LECTURE EST SÉPARÉE DE `mesurer`, ET C'EST UNE DETTE DU DÉPÔT ENTIER.
-    Tant qu'elle vivait DANS la mesure, le chemin qui produit le nombre publié ne pouvait pas
-    tourner hors ligne — donc la batterie ne testait que les briques, jamais leur assemblage.
-    Une batterie verte sur un module dont le seul chemin non testé est celui qui produit le
-    nombre publié est une batterie qui ne peut pas échouer là où ça compte : le 2026-09-05, un
-    patch à moitié appliqué a laissé l'enregistrement référencer des variables inexistantes, et
-    la batterie est restée verte parce qu'elle n'appelait pas `mesurer`.
-
-    ⚠⚠ CE QUI EST INJECTABLE EST LA MATIÈRE, PAS LE DÉCOUPAGE. La boîte, le seuil de cellules,
-    le choix des encadrements, la marche et tout l'enregistrement restent dans `mesurer`, donc
-    restent couverts par une fixture. Injecter un corpus déjà découpé ferait sortir du test la
-    moitié même de ce qu'on voulait tester.
-
-    ⚠ L'écart entre spires et la taille du voxel voyagent AVEC les grilles plutôt qu'à côté :
-    une fixture dont la géométrie ne s'accorderait pas avec le pas mesurerait un dérouleur qu'on
-    a fait marcher à la mauvaise longueur, ce qui ressemble à un dérouleur mauvais.
-    """
-    from le_pas_normal_atteint_la_spire import grille  # noqa: PLC0415
-    from les_wraps_publies import VOLUME, VOXEL_UM, wraps_du_fragment  # noqa: PLC0415
-
-    if not WRAPS.is_file():
-        raise RuntimeError(f"mesure absente : {WRAPS}")
-    grilles = {}
-    for w in wraps_du_fragment():
-        g = grille(w, VOLUME, VOXEL_UM)
-        if g is None:
-            continue
-        grilles[w["rang"]] = g
-    return dict(volume=VOLUME, voxel_um=VOXEL_UM,
-                ecart_um=float(json.loads(WRAPS.read_text())["resume"]["1"]["mediane_um"]),
-                grilles=grilles)
-
-
-def corpus_fabrique(spires: int = 6, cellules: int = 14, ondulation: float = 3.0,
-                    rayon_vx: float = 4000.0, creuse: int | None = None,
-                    decalage_vx: float = 0.0) -> dict:
-    """Un corps de spires concentriques fabriqué de toutes pièces, sans rien lire.
-
-    ⚠⚠⚠ CE QUE CETTE FIXTURE EXISTE POUR EXERCER : le chemin qui produit le nombre publié, dans
-    son entier — le découpage par la boîte, le seuil de cellules, le choix des encadrements, le
-    signe de la normale, la marche, la combinaison, la pondération et l'enregistrement. Ce qui
-    est vérifié dessus n'est jamais une VALEUR : la fixture n'est pas le fragment, donc ses
-    micromètres ne veulent rien dire. Ce qui est vérifié, ce sont les invariants que la mesure
-    revendique et les clés qu'elle promet à ses lecteurs.
-
-    ⚠⚠ LES SPIRES SONT ONDULÉES, ET C'EST LE POINT LE PLUS FACILE À RATER. Des cylindres
-    parfaitement décalés de `pas_vx` sont atteints EXACTEMENT par un pas normal : toutes les
-    erreurs vaudraient zéro, la division du gain lèverait, et le verdict « l'encadrement bat les
-    deux branches » serait décidé par des zéros. Une fixture sur laquelle la mesure ne peut rien
-    trouver est le cas le plus pur d'un contrôle satisfait pour la mauvaise raison.
-
-    ⚠ La phase de l'ondulation TOURNE d'une spire à l'autre. Une ondulation en phase serait, elle
-    aussi, un décalage exact : la marche retomberait juste et on aurait fabriqué le même
-    dégénéré, une fonction plus loin.
-
-    ⚠ Le rayon est grand devant la boîte, donc la courbure est douce et les cellules restent
-    dans la découpe. Une spire trop courbée sortirait de la boîte par ses bords et la fixture
-    mesurerait le découpage plutôt que la marche.
-
-    ⚠⚠ `creuse` et `decalage_vx` existent pour que les deux REFUS de la mesure puissent être
-    exercés, et pas seulement son chemin heureux : une spire dont il ne reste presque rien doit
-    être écartée — sans quoi le seuil de cellules serait un nombre que rien ne fait respecter —
-    et un corpus posé hors de la boîte ne doit rendre AUCUN triplet, sans quoi le découpage
-    serait décoratif.
-    """
-    from le_raccrochage_a_la_matiere import BOITE_CENTRE  # noqa: PLC0415
-
-    voxel_um, ecart_um = VOXEL_UM_FIXTURE, ECART_UM_FIXTURE
-    pas_vx = ecart_um / voxel_um
-    centre = np.array(BOITE_CENTRE, dtype=np.float64)
-    # Le centre de courbure est posé à `rayon_vx` de la boîte, sur x : la spire du milieu passe
-    # donc par le centre de la boîte, et les autres se rangent de part et d'autre.
-    foyer = centre - np.array([rayon_vx - decalage_vx, 0.0, 0.0])
-    milieu = (spires + 1) / 2.0
-    demi = (cellules - 1) / 2.0
-    # Le pas angulaire donne une maille tangentielle du même ordre que la maille en z : une
-    # grille très allongée rendrait des normales dominées par un seul axe.
-    dtheta = 10.0 / rayon_vx
-    tau = 2.0 * np.pi
-    grilles = {}
-    for k in range(1, spires + 1):
-        rayon = rayon_vx + (k - milieu) * pas_vx
-        a = np.empty((cellules, cellules, 3), dtype=np.float64)
-        for i in range(cellules):
-            th = (i - demi) * dtheta
-            for j in range(cellules):
-                # L'ondulation dépend des DEUX axes de la grille : une surface qui n'ondulerait
-                # que le long d'un axe laisserait la seconde tangente exacte, donc n'exercerait
-                # qu'une moitié du calcul de normale.
-                r = (rayon
-                     + ondulation * np.sin(tau * i / cellules + 0.7 * k)
-                     + 0.5 * ondulation * np.cos(tau * j / cellules - 0.4 * k))
-                a[i, j] = foyer + np.array([r * np.cos(th), r * np.sin(th),
-                                            (j - demi) * 10.0])
-        ok = np.ones((cellules, cellules), dtype=bool)
-        if k == creuse:
-            # Il en reste trois cellules : de quoi prouver que la spire est LUE et écartée pour
-            # ce qu'elle porte, alors qu'une spire absente de la table ne prouverait que sa
-            # propre absence.
-            ok[:] = False
-            ok[0, :3] = True
-        grilles[k] = (a, ok)
-    return dict(volume="fixture", voxel_um=voxel_um, ecart_um=ecart_um, grilles=grilles)
 
 
 def mesurer(cote: float | None = None, minimum: int = 30, portee: int = 4,
@@ -778,17 +671,6 @@ def verifier() -> int:
     except RuntimeError as exc:
         hors = str(exc)
     v("un corpus posé hors de la boîte est REFUSÉ, pas rendu vide", hors is not None, str(hors))
-    # ⚠⚠ ET LA FIXTURE DOIT AVOIR LA FORME DU VRAI LECTEUR, sinon elle exerce une forme qui
-    # n'arrive jamais. Les clés du corpus publié sont lues dans l'arbre plutôt que recopiées :
-    # une clé ajoutée là-bas et oubliée ici ferait passer la batterie sur un corpus périmé.
-    retour = next(n for n in ast.walk(ast.parse(Path(__file__).read_text(encoding="utf-8")))
-                  if isinstance(n, ast.FunctionDef) and n.name == "corpus_publie")
-    promises = {k.arg for n in ast.walk(retour) if isinstance(n, ast.Call)
-                and getattr(n.func, "id", None) == "dict" for k in n.keywords}
-    v("le corpus fabriqué a exactement la forme du corpus publié",
-      set(corpus_fabrique(spires=2, cellules=4)) == promises,
-      f"{sorted(promises)}")
-
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 

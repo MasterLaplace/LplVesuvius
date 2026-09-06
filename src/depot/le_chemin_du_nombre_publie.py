@@ -90,18 +90,28 @@ def atteintes_depuis(depart: str, defs: dict[str, ast.FunctionDef]) -> set[str]:
 
 
 def publie_une_mesure(source: str, arbre: ast.Module) -> bool:
-    """Ce module écrit-il un nombre dans `docs/mesures` ?
+    """Ce module ÉCRIT-il une mesure, ou se contente-t-il d'en lire une ?
 
-    ⚠⚠ Deux signes, et il en faut deux parce qu'aucun seul ne suffit : un chemin littéral vers
-    `docs/mesures` (le module écrit sa mesure lui-même) **ou** une option `--json` dans son
-    analyseur d'arguments (c'est l'appelant qui nomme le fichier, ce qui est la forme la plus
-    répandue ici). Ne retenir que le premier raterait la majorité des mesures du dépôt.
+    ⚠⚠⚠ LA DISTINCTION EST TOUT L'INTÉRÊT DE LA PORTÉE, et ma première règle la ratait :
+    elle acceptait n'importe quelle mention littérale de `docs/mesures`, donc elle comptait
+    comme publieur un module qui ne fait que **lire** l'écart entre spires. Trouvé en voyant
+    `le_corpus_des_spires.py` — un pur lecteur, dont la seule fonction non couverte est celle
+    qui lit le dépôt distant — apparaître dans la liste des modules en dette. Un lecteur n'a pas
+    de nombre publié, donc le défaut nommé ici ne peut pas lui arriver, et l'y compter gonflait
+    le chiffre avec des cas qui ne sont pas celui-là.
+
+    ⚠⚠ Le signe retenu est donc l'ÉCRITURE, sous ses deux formes, parce que ce dépôt publie
+    deux sortes d'artefacts : un module **sérialise et écrit** un fichier (une mesure), ou il
+    **enregistre une image** (une figure). Exiger la première seule effacerait les figures de la
+    portée — or `dessiner` était la deuxième branche la plus souvent laissée dehors, et c'est
+    exactement le même défaut : un dessin que personne n'exerce.
+
+    ⚠ Sérialiser pour AFFICHER n'est pas publier : les deux signes de la première forme sont
+    exigés ensemble.
     """
-    if "docs/mesures" in source or 'docs" / "mesures' in source:
-        return True
-    return any(isinstance(n, ast.Call) and getattr(n.func, "attr", None) == "add_argument"
-               and any(isinstance(a, ast.Constant) and a.value == "--json" for a in n.args)
-               for n in ast.walk(arbre))
+    noms = {getattr(n.func, "attr", None) for n in ast.walk(arbre) if isinstance(n, ast.Call)}
+    mesure = bool(noms & {"dumps", "dump"}) and bool(noms & {"write_text", "write"})
+    return mesure or "save" in noms
 
 
 def juger(chemin: Path) -> dict | None:
@@ -196,24 +206,34 @@ def verifier() -> int:
     sans = "def main():\n mesurer()\ndef mesurer():\n pass\n"
     v("un module qui ne publie rien n'est pas compté",
       not publie_une_mesure(sans, ast.parse(sans)))
-    avec_json = ('import argparse\np = argparse.ArgumentParser()\n'
-                 'p.add_argument("--json")\n')
-    v("... une option --json suffit à le compter",
-      publie_une_mesure(avec_json, ast.parse(avec_json)))
-    chemin_dur = 'SORTIE = "docs/mesures/x.json"\n'
-    v("... et un chemin littéral vers docs/mesures aussi",
-      publie_une_mesure(chemin_dur, ast.parse(chemin_dur)))
+    ecrit = 'import json\np.write_text(json.dumps(r))\n'
+    v("... un module qui sérialise ET écrit est compté",
+      publie_une_mesure(ecrit, ast.parse(ecrit)))
+    # ⚠⚠ LE CAS QUI A FAIT RESSERRER LA RÈGLE : un pur LECTEUR de `docs/mesures` était compté
+    # publieur, donc rangé en dette pour une fonction qu'aucune batterie ne peut exercer.
+    lecteur = ('import json\nW = "docs/mesures/x.json"\n'
+               'print(json.dumps(json.loads(open(W).read())))\n')
+    v("... mais un module qui LIT une mesure et n'écrit rien ne l'est pas",
+      not publie_une_mesure(lecteur, ast.parse(lecteur)))
+    affiche = 'import json\nprint(json.dumps(r))\n'
+    v("... et sérialiser pour afficher n'est pas publier",
+      not publie_une_mesure(affiche, ast.parse(affiche)))
+    # ⚠ Une figure publie une IMAGE : l'exclure ferait sortir de la portée la deuxième branche
+    # la plus souvent laissée dehors, alors que c'est le même défaut.
+    image = "toile.save(sortie)\n"
+    v("... une figure qui enregistre une image est comptée",
+      publie_une_mesure(image, ast.parse(image)))
 
     # --- le verdict, sur deux modules fabriqués ---
     # ⚠⚠ La dette est écrite dans la fixture, pas cherchée : `enregistrer` n'est atteint que
     # par `main`. Sans les deux cas, « aucun module en dette » et « ce contrôle ne regarde
     # rien » rendraient la même chose.
-    dette = ('import argparse\n'
+    dette = ('import json\n'
              'def enregistrer(r):\n pass\n'
              'def mesurer():\n enregistrer(1)\n'
              'def verifier():\n return 0\n'
              'def main():\n mesurer()\n'
-             'p = argparse.ArgumentParser()\np.add_argument("--json")\n')
+             'S.write_text(json.dumps(1))\n')
     saine = dette.replace("def verifier():\n return 0\n",
                           "def verifier():\n mesurer()\n return 0\n")
     tmp = RACINE / "build" / "chemin_du_nombre_publie"

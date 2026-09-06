@@ -2780,7 +2780,7 @@ mesurer est le piège habituel : `concordance_des_plans` la mesure désormais.
 
 ---
 
-### D4 ⚠⚠⚠ — 67 batteries vertes sur 140 n'atteignent pas le nombre qu'elles publient
+### D4 ⚠⚠⚠ — 70 batteries vertes sur 150 n'atteignent pas le nombre qu'elles publient
 
 Document dédié : [`80`](80_la_batterie_natteint_pas_le_nombre.md). Suite de
 [`61`](61_les_batteries_qui_ne_pouvaient_pas_echouer.md), dont il franchit la limite finale —
@@ -2803,31 +2803,45 @@ sans rien exécuter) :
 
 | | |
 |---|---:|
-| modules qui publient une mesure | **140** |
-| dont la batterie n'atteint pas ce chemin | **67** (48 %) |
-| fonctions hors de portée | **104** |
+| modules qui publient une mesure ou une figure | **150** |
+| dont la batterie n'atteint pas ce chemin | **70** (47 %) |
+| fonctions hors de portée | **108** |
 
-⭐ **La branche laissée dehors porte toujours le même nom** : `mesurer` dans **17** modules,
-`dessiner` dans **10**, `rapporter` dans **7**. Ce sont les deux verbes qui publient — l'un rend
-le nombre, l'autre l'image. Par famille : `graine` **9/10**, `encre` **22/29**, `nappe`
-**15/26**, `figures` **10/46**.
+⚠⚠ **La portée a été resserrée après le premier chiffre**, et il était trop large : la règle
+comptait comme publieur tout module *mentionnant* `docs/mesures`, donc aussi les purs lecteurs.
+Le signe retenu est l'**écriture**, sous ses deux formes — sérialiser et écrire un fichier (une
+mesure), ou enregistrer une image (une figure).
+
+⭐ **La branche laissée dehors porte toujours le même nom** : `mesurer` dans **16** modules,
+`dessiner` dans **10**, `rapporter` dans **6**. Ce sont les deux verbes qui publient — l'un rend
+le nombre, l'autre l'image. Par famille : `graine` **9/10**, `encre` **23/32**, `nappe`
+**15/29**, `figures` **10/50**.
 
 ⚠⚠ **Un chiffre calculé puis retiré** : « les modules dont la tête de chemin est dehors », 67 sur
-67. C'est une **identité** — la couverture se propage vers le bas — donc un nombre qui ne peut
+70. C'est une **identité** — la couverture se propage vers le bas — donc un nombre qui ne peut
 prendre qu'une valeur et se lirait comme une découverte.
 
-**Réparé, un module** : `derouler_des_deux_bords.py` reçoit sa matière par paramètre, le défaut
-restant le dépôt distant (donc le nombre publié ne bouge pas d'une virgule). Ce qui est
-injectable est la **matière**, pas le découpage : boîte, seuil de cellules, encadrements, marche,
-combinaison, pondération et enregistrement restent dans `mesurer`. La batterie passe de 32 à
-**47 contrôles**, dont les deux refus — une spire dont il ne reste que trois cellules est
-écartée, un corpus posé hors de la boîte est **refusé** plutôt que rendu vide.
+**Réparé, deux modules et un lecteur promu.** `derouler_des_deux_bords.py` et
+`derouler_par_le_pas_normal.py` reçoivent leur matière par paramètre, le défaut restant le dépôt
+distant (donc les nombres publiés ne bougent pas d'une virgule). Ce qui est injectable est la
+**matière**, pas le découpage : boîte, seuil de cellules, encadrements, marche, combinaison,
+pondération et enregistrement restent dans `mesurer`. Les batteries passent de 32 à **46** et de
+9 à **17 contrôles**.
+
+⭐ Et la lecture est **promue dès le deuxième appelant** : `src/nappe/le_corpus_des_spires.py`
+(**8 contrôles**) porte l'unique lecteur du corpus et l'unique fixture. Cinq modules de
+`src/nappe/` en avaient chacun leur copie, et deux dérouleurs comparés sur deux lectures
+différentes mesurent d'abord leur désaccord de lecture.
 
 ⚠⚠⚠ **La fixture doit être ONDULÉE** : des spires parfaitement décalées du pas sont atteintes
 *exactement* par un pas normal, donc toutes les erreurs vaudraient zéro et chaque comparaison
-serait satisfaite par des zéros. **Six sondes** remettent chacune un défaut — fixture aplatie,
-boîte qui ne découpe plus, seuil qui ne filtre plus, corpus qui gagne une clé, affichage lisant
-une clé renommée, figure lisant une clé absente — et les six font rougir la batterie.
+serait satisfaite par des zéros. **Dix sondes** remettent chacune un défaut — fixture aplatie,
+spires collées, boîte qui ne découpe plus, seuil qui ne filtre plus, corpus qui gagne une clé,
+affichage lisant une clé renommée, figure lisant une clé absente, spire absente non refusée,
+demi-épaisseur devenue épaisseur, témoin du pas nul figé — et toutes font rougir la batterie
+qu'elles visent. ⚠ Une sonde reste **verte** à bon droit : le contrôle de forme du corpus a
+déménagé chez son propriétaire, et le dupliquer chez ses cinq appelants ferait cinq copies d'une
+même exigence, libres de diverger.
 
 ⚠⚠ **Et un second constat, trouvé en cherchant où inscrire la batterie corrigée : 44 batteries
 que `temoins.sh` ne lançait pas** — toute la campagne de déroulage et ses figures. Le harnais
@@ -2836,8 +2850,11 @@ n'avait pas tourné, le harnais complet étant long. Un contrôle qu'on ne lance
 durée où on ne le lance pas, exactement un contrôle absent. Les 44 ont été lancées **une par une
 avant d'être inscrites** : toutes vertes, la plus lente en soixante secondes.
 
-**Reste à faire** : 66 modules. L'ordre suit la mesure — `mesurer` d'abord (17), puis `dessiner`
-(10), c'est-à-dire le nombre puis l'image.
+**Reste à faire** : 70 modules. L'ordre suit la mesure — `mesurer` d'abord (16), puis
+`dessiner` (10), c'est-à-dire le nombre puis l'image. ⚠ Les suivants dans la famille du
+déroulage (`la_longueur_locale_du_pas`, `le_raccrochage_a_la_matiere`, `derouler_en_raccrochant`)
+lisent **le volume brut** en plus du corpus : ils demandent une seconde matière fabriquée, un
+volume, et c'est la tranche d'après.
 
 ```
 uv run python src/depot/le_chemin_du_nombre_publie.py   # le balayage, par famille et par nom

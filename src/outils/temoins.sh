@@ -1513,6 +1513,7 @@ run "temoin de meme forme"     uv run --project "$ROOT" python "$ROOT/src/encre/
 run "reperes pleine resolution"uv run --project "$ROOT" python "$ROOT/src/encre/les_reperes_a_pleine_resolution.py" --verifier
 run "reperes apparies"         uv run --project "$ROOT" python "$ROOT/src/encre/les_reperes_apparies.py" --verifier
 run "reperes interieurs"       uv run --project "$ROOT" python "$ROOT/src/encre/les_reperes_interieurs.py" --verifier
+run "le corpus des spires"     uv run --project "$ROOT" python "$ROOT/src/nappe/le_corpus_des_spires.py" --verifier
 run "derouler des deux bords"  uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_des_deux_bords.py" --verifier
 run "derouler en raccrochant"  uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_en_raccrochant.py" --verifier
 run "derouler au pas normal"   uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_par_le_pas_normal.py" --verifier

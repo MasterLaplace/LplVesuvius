@@ -41,8 +41,11 @@ CADRE = (200, 200, 200)
 
 def prose(m: dict) -> list[str]:
     tetes = sorted(m["tetes_de_chemin"].items(), key=lambda kv: -kv[1])[:4]
-    pire = max(m["par_famille"].items(),
-               key=lambda kv: (kv[1]["en_dette"] / kv[1]["publient"], kv[1]["publient"]))
+    # ⚠⚠ LES DEUX PLUS GROSSES FAMILLES, ET PAS « LA PIRE ». Trier par part mettait `xpu` en
+    # tête avec 1 sur 1 : une famille d'un seul module n'est pas une observation sur une famille,
+    # et « la dette n'est pas uniforme, xpu en porte 1 sur 1 » se lit comme un fait alors que
+    # c'est un dénominateur de un. Les deux extrêmes retenus sont définis sans seuil.
+    grosses = sorted(m["par_famille"].items(), key=lambda kv: -kv[1]["publient"])[:2]
     return [
         f"{m['modules_qui_publient']} modules publient une mesure ; "
         f"{m['modules_en_dette']} d'entre eux ({m['part_en_dette']:.0%}) ont une batterie qui "
@@ -54,8 +57,9 @@ def prose(m: dict) -> list[str]:
         "les branches jamais exercees, par nom : "
         + ", ".join(f"{n} dans {c} module(s)" for n, c in tetes)
         + ". ce sont les deux verbes qui publient : l'un rend le nombre, l'autre l'image.",
-        f"la dette n'est pas uniforme : {pire[0]} en porte "
-        f"{pire[1]['en_dette']} sur {pire[1]['publient']}.",
+        "et elle n'est pas repartie egalement, la ou il y a de quoi le dire : "
+        + " contre ".join(f"{n} {d['en_dette']} sur {d['publient']}" for n, d in grosses)
+        + ".",
         "⚠ ce que ce balayage ne dit PAS : qu'une fonction atteinte soit TESTEE. il dit "
         "qu'une batterie la traverse, pas qu'elle y verifie quoi que ce soit. prendre "
         "l'un pour l'autre ferait de cet instrument la mesure trop confiante qu'il traque.",
@@ -182,12 +186,26 @@ def verifier() -> int:
       f"{m['fonctions_non_couvertes']} pour {m['modules_en_dette']}")
     # ⚠⚠ LA SOMME DES FAMILLES DOIT ÊTRE LE TOTAL. Un module rangé dans aucune famille — ou
     # dans deux — passerait inaperçu dans le panneau A tout en gonflant le titre.
+    # ⚠ La phrase de la legende nomme les DEUX plus grosses familles : si un jour elle nommait
+    # une famille d'un seul module, elle rendrait un denominateur de un pour une observation sur
+    # une famille. C'est le defaut qui a ete corrige ici, et cette ligne est ce qui l'empeche.
+    grosses = sorted(m["par_famille"].items(), key=lambda kv: -kv[1]["publient"])[:2]
+    # ⚠ Le seuil n'est pas choisi, il est DÉRIVÉ : avec un seul module une part ne peut valoir
+    # que zéro ou un, donc elle ne dit rien d'une famille. Deux est le plus petit dénominateur
+    # pour lequel une part est autre chose qu'un booléen.
+    v("la légende nomme deux familles dont la part veut dire quelque chose",
+      all(d["publient"] > 1 for _, d in grosses),
+      str([(n, d["publient"]) for n, d in grosses]))
     v("les familles se somment au total, sans reste",
       sum(d["publient"] for d in m["par_famille"].values()) == m["modules_qui_publient"]
       and sum(d["en_dette"] for d in m["par_famille"].values()) == m["modules_en_dette"])
     # ⚠⚠ ET L'INSTRUMENT NE DOIT PAS SE RANGER DANS SA PROPRE LISTE : une mesure de dette
     # portée par un module en dette serait la panne qu'elle décrit.
-    dedans = [e for e in m["lignes"] if e["fichier"].endswith("le_chemin_du_nombre_publie.py")]
+    # ⚠ Le chemin EXACT, pas un suffixe : le nom de cette figure se termine par celui de
+    # l'instrument, donc `endswith` en attrapait deux et le contrôle tombait sur sa propre
+    # ambiguïté plutôt que sur un défaut.
+    dedans = [e for e in m["lignes"]
+              if e["fichier"] == "src/depot/le_chemin_du_nombre_publie.py"]
     v("l'instrument lui-même n'est pas en dette",
       len(dedans) == 1 and not dedans[0]["en_dette"], str(dedans and dedans[0]["non_couvert"]))
 
