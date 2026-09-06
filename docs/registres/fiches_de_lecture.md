@@ -4220,7 +4220,7 @@ vérification du dépôt lui-même.
   balayage syntaxique de tout l'arbre montre que ce n'est pas une exception, et le document
   livre le remède sur le module fautif, ses six sondes, puis un second constat trouvé en chemin.
 - **compte exact et cause** :
-  - **67 modules en dette sur 156 qui publient une mesure ou une figure** (43 %), **102
+  - **67 modules en dette sur 158 qui publient une mesure ou une figure** (42 %), **102
     fonctions** hors de portée, relevés par `src/depot/le_chemin_du_nombre_publie.py`, qui ferme
     le graphe d'appels de chaque module et rend `atteintes(main) − atteintes(verifier)`.
   - ⚠⚠ **La portée a été resserrée en cours de route** : la première règle comptait comme
@@ -5518,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 3310
+- **lignes** : 3399
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5591,6 +5591,33 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - **E, ce qui est hors registre avec sa raison** : la soumission (hors périmètre décidé par
     l'auteur) ; le second papier de `72`, qui est ⚠⚠⚠ **une occasion de publication et non un
     progrès vers le prix** et n'avance qu'avec C ; H3 et H6 de `69`, répondues par le dépôt.
+  - ⛔ **L'ÉCART DÉJÀ FRANCHI NE DIT PRESQUE RIEN DU SUIVANT (2026-09-06,
+    `lecart_deja_franchi`, 16 contrôles, 5 triplets, 5163 cellules).** Un dérouleur parti d'une
+    paire d'ancres connaît en chaque point la distance entre ces deux surfaces : c'était la seule
+    piste positive restante. **Quand l'écart franchi parcourt 137 µm, le suivant n'en parcourt que
+    46, et en descendant** — ρ = **−0,119** (p = 9·10⁻¹⁸), négatif, significatif seulement parce
+    que l'échantillon est grand, et minuscule.
+  - En erreur de marche : nominal 39,0 µm, **prédit** 38,5 (2 triplets sur 5), **recentré** 37,2
+    (**4 sur 5**), témoin **mélangé** 43,3 — il fait **pire**, donc une longueur par point tirée
+    dans la bonne distribution mais mal placée coûte plus qu'elle ne rapporte. Oracle 18,8. ⭐ Ce
+    qui reste : le **recentrage** seul, sans aucune information par point, prend **1,8 µm sur les
+    20,2** que connaître le vrai écart rapporterait — un dixième, gratuit.
+  - ⚠⚠ **Deux chiffres mal formés, corrigés** : « la prédiction bat le nominal : OUI » sur un
+    écart de **0,5 µm** alors qu'elle ne gagnait que sur **2 triplets sur 5** — un verdict sur la
+    médiane que le compte par cas contredit n'est pas un verdict, et les deux sont désormais
+    exigés ensemble ; et « la part vraiment locale est **9,6** », un rapport supérieur à un qui
+    divisait par ce même gain de 0,5 µm — aucune part n'est publiée quand son dénominateur est
+    plus petit que la marge de la mesure.
+  - ⚠⚠⚠ **Un contrôle du dépôt en retard par construction, réparé.** Le `\u26d4` de la première
+    version de la figure est sorti en **carré vide** et la traçabilité l'a laissé passer :
+    `GLYPHES_ABSENTS` était une **liste écrite à la main**. ⭐⭐ La question est désormais posée à
+    la **police** — un caractère absent rend toujours le glyphe de secours, qu'on identifie par un
+    point de code de la zone à **usage privé** — et la liste ne sert plus que de **sonde**. ⚠ Sa
+    docstring **affirmait** écrire ces caractères en échappement alors que le fichier les portait
+    **en clair** : un commentaire qui dit l'inverse de son code. ⚠ Et ma première version du
+    contrôle les interdisait dans **tout** le fichier, où `\u2705` et `\u274c` servent
+    légitimement à l'affichage du terminal — un contrôle trop large refuse du travail correct ;
+    resserré sur la ligne de la constante.
   - ⭐⭐⭐ **LE TIERS DU COÛT D'UN PAS EST UNE LONGUEUR PRISE AILLEURS (2026-09-06,
     `le_cout_dun_seul_pas`, 25 contrôles).** Le premier pas est décomposé en une **hiérarchie de
     libertés**, chaque niveau donnant un paramètre de plus : `E0` 42,7 µm (rien) → `E1` 28,7 (une
@@ -5677,7 +5704,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     même chose : la tranche précédente combinait **dans les deux sens** et mettait les distances en
     commun, celle-ci prend pour référence le nuage de l'ancre la plus basse.
   - ⚠⚠⚠ **D4 ouverte le 2026-09-06** — *le chemin qui produit le nombre publié n'est atteint
-    par aucune batterie* : **67 modules sur 156**, **102 fonctions**, et la branche laissée
+    par aucune batterie* : **67 modules sur 158**, **102 fonctions**, et la branche laissée
     dehors porte toujours le même nom (`mesurer` dans 13, `dessiner` dans 10). **Cinq modules**
     sont réparés et la matière **promue** en un lecteur unique plus deux fixtures qui décrivent
     le même objet (matière injectée par paramètre, découpage laissé dedans, batteries 32 → 46,
@@ -6161,8 +6188,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 2618 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 3310 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 2707 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 3399 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

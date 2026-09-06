@@ -1,0 +1,184 @@
+{
+  "fragment": "PHerc0500P2",
+  "volume": "20250526151718",
+  "voxel_um": 2.215,
+  "boite": {
+    "centre": [
+      10615.0,
+      10571.0,
+      19831.0
+    ],
+    "cote_voxels": 640.0
+  },
+  "pas_nominal_um": 135.5,
+  "demi_epaisseur_um": 67.75,
+  "triplets": 5,
+  "cellules": 5163,
+  "lignes": [
+    {
+      "depuis": 5,
+      "avant": 4,
+      "cible": 6,
+      "cellules": 996,
+      "ecart_avant_median_um": 167.5,
+      "ecart_apres_median_um": 104.1,
+      "erreur_nominale_um": 39.0,
+      "erreur_predite_um": 73.6,
+      "erreur_melangee_um": 70.0,
+      "erreur_recentree_um": 67.3,
+      "erreur_oracle_um": 20.5,
+      "bits_de_supervision": 1
+    },
+    {
+      "depuis": 6,
+      "avant": 5,
+      "cible": 7,
+      "cellules": 1027,
+      "ecart_avant_median_um": 106.0,
+      "ecart_apres_median_um": 100.3,
+      "erreur_nominale_um": 38.3,
+      "erreur_predite_um": 31.5,
+      "erreur_melangee_um": 32.8,
+      "erreur_recentree_um": 28.8,
+      "erreur_oracle_um": 17.5,
+      "bits_de_supervision": 1
+    },
+    {
+      "depuis": 7,
+      "avant": 6,
+      "cible": 8,
+      "cellules": 1111,
+      "ecart_avant_median_um": 100.8,
+      "ecart_apres_median_um": 115.4,
+      "erreur_nominale_um": 32.8,
+      "erreur_predite_um": 36.0,
+      "erreur_melangee_um": 38.6,
+      "erreur_recentree_um": 30.2,
+      "erreur_oracle_um": 17.6,
+      "bits_de_supervision": 1
+    },
+    {
+      "depuis": 8,
+      "avant": 7,
+      "cible": 9,
+      "cellules": 1187,
+      "ecart_avant_median_um": 116.0,
+      "ecart_apres_median_um": 114.5,
+      "erreur_nominale_um": 46.7,
+      "erreur_predite_um": 59.3,
+      "erreur_melangee_um": 46.3,
+      "erreur_recentree_um": 38.1,
+      "erreur_oracle_um": 20.5,
+      "bits_de_supervision": 1
+    },
+    {
+      "depuis": 9,
+      "avant": 8,
+      "cible": 10,
+      "cellules": 842,
+      "ecart_avant_median_um": 96.6,
+      "ecart_apres_median_um": 70.9,
+      "erreur_nominale_um": 67.4,
+      "erreur_predite_um": 38.5,
+      "erreur_melangee_um": 43.3,
+      "erreur_recentree_um": 37.2,
+      "erreur_oracle_um": 18.8,
+      "bits_de_supervision": 1
+    }
+  ],
+  "erreur_nominale_mediane_um": 39.0,
+  "erreur_predite_mediane_um": 38.5,
+  "erreur_melangee_mediane_um": 43.3,
+  "erreur_recentree_mediane_um": 37.2,
+  "erreur_oracle_mediane_um": 18.8,
+  "ecart_avant_median_um": 113.3,
+  "ecart_apres_median_um": 103.2,
+  "ecart_avant_contre_apres": {
+    "rho": -0.119,
+    "p": 8.74e-18,
+    "n": 5163
+  },
+  "lecart_franchi_predit_le_suivant": false,
+  "apres_par_decile_de_avant": [
+    {
+      "decile": 1,
+      "n": 517,
+      "avant_median_um": 59.9,
+      "apres_median_um": 134.6
+    },
+    {
+      "decile": 2,
+      "n": 516,
+      "avant_median_um": 78.3,
+      "apres_median_um": 100.9
+    },
+    {
+      "decile": 3,
+      "n": 516,
+      "avant_median_um": 90.3,
+      "apres_median_um": 97.9
+    },
+    {
+      "decile": 4,
+      "n": 516,
+      "avant_median_um": 100.5,
+      "apres_median_um": 108.1
+    },
+    {
+      "decile": 5,
+      "n": 516,
+      "avant_median_um": 108.9,
+      "apres_median_um": 107.5
+    },
+    {
+      "decile": 6,
+      "n": 517,
+      "avant_median_um": 117.7,
+      "apres_median_um": 105.9
+    },
+    {
+      "decile": 7,
+      "n": 516,
+      "avant_median_um": 127.5,
+      "apres_median_um": 95.9
+    },
+    {
+      "decile": 8,
+      "n": 516,
+      "avant_median_um": 139.6,
+      "apres_median_um": 88.6
+    },
+    {
+      "decile": 9,
+      "n": 516,
+      "avant_median_um": 156.7,
+      "apres_median_um": 89.9
+    },
+    {
+      "decile": 10,
+      "n": 517,
+      "avant_median_um": 197.0,
+      "apres_median_um": 113.0
+    }
+  ],
+  "etendue_de_lecart_franchi_um": 137.1,
+  "etendue_de_lecart_suivant_um": 46.0,
+  "triplets_ou_la_prediction_bat_le_nominal": 2,
+  "la_prediction_bat_le_nominal": false,
+  "triplets_ou_la_prediction_bat_son_melange": 3,
+  "la_prediction_bat_son_melange": true,
+  "triplets_ou_la_prediction_bat_le_recentrage": 0,
+  "la_prediction_bat_le_recentrage": false,
+  "triplets_ou_le_recentrage_bat_le_nominal": 4,
+  "le_recentrage_bat_le_nominal": true,
+  "gain_sur_le_nominal_um": 0.5,
+  "gain_du_recentrage_um": 1.8,
+  "gain_du_melange_seul_um": -4.3,
+  "part_du_gain_de_loracle_prise": 0.025,
+  "gain_trop_petit_pour_une_part": true,
+  "sous_la_demi_feuille": {
+    "erreur_nominale_mediane_um": true,
+    "erreur_predite_mediane_um": true,
+    "erreur_oracle_mediane_um": true
+  }
+}

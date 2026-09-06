@@ -2573,6 +2573,95 @@ il n'a que **19 %** du coût à prendre, là où la longueur en a **33 %** pour 
 > l'écart d'une paire et celui de la suivante se mesure **tout de suite et sans rien lire**. Si
 > elle existe, le tiers du coût est récupérable sans regarder la cible.
 
+#### ⛔ L'ÉCART DÉJÀ FRANCHI NE DIT PRESQUE RIEN DU SUIVANT — la dernière piste, fermée
+
+> Mesure : `src/nappe/lecart_deja_franchi.py` (16 contrôles) →
+> `docs/mesures/lecart_deja_franchi.json`. Figure : `src/figures/figure_lecart_deja_franchi.py`
+> (16 contrôles), le 2026-09-06.
+>
+> ```
+> uv run python src/nappe/lecart_deja_franchi.py --cote 640 \
+>     --json docs/mesures/lecart_deja_franchi.json
+> uv run python src/figures/figure_lecart_deja_franchi.py \
+>     --sortie docs/images/75_lecart_deja_franchi.png
+> ```
+
+Un tiers du coût d'un pas vient d'une longueur prise sur la mauvaise population, et un dérouleur
+ne peut pas mesurer l'écart qu'il n'a **pas encore** franchi. Il peut mesurer celui qu'il **vient
+de** franchir : un dérouleur parti d'une paire d'ancres `r − 1` et `r` connaît, en chaque point,
+la distance entre ces deux surfaces. C'était la seule piste positive qui restait, et elle est
+mesurée sur **5 triplets, 5163 cellules**.
+
+![l'écart déjà franchi](images/75_lecart_deja_franchi.png)
+
+##### ⛔ Il ne prédit pas, et ce qu'il prédit va dans le mauvais sens
+
+| | | | | | | | | | |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| écart **franchi** *(décile)* | 60 | 78 | 90 | 100 | 109 | 118 | 128 | 140 | 197 |
+| écart **suivant** *(médiane)* | 135 | 101 | 98 | 108 | 108 | 106 | 96 | 89 | 113 |
+
+> ⛔ **Quand l'écart franchi parcourt 137 µm, le suivant n'en parcourt que 46 — et en
+> descendant.** ρ = **−0,119** sur 5163 cellules (p = 9·10⁻¹⁸) : négatif, significatif seulement
+> parce que l'échantillon est grand, et minuscule. Si le premier prédisait le second, les points
+> suivraient la diagonale du panneau B ; ils sont plats.
+
+##### En erreur de marche, les quatre contendants
+
+| | erreur médiane | bat le nominal sur |
+|---|---:|---|
+| pas **nominal** | 39,0 µm | *(la référence)* |
+| **prédit** par point | 38,5 | **2 triplets sur 5** |
+| **recentré** *(la médiane du franchi)* | **37,2** | **4 triplets sur 5** |
+| témoin **mélangé** | 43,3 | 0 — il fait **pire** |
+| *oracle (demande la réponse)* | *18,8* | — |
+
+⚠⚠ **Un verdict sur la médiane que le compte par cas contredit n'est pas un verdict**, et c'est
+une correction : la première version rendait « la prédiction bat le nominal : **OUI** » sur un
+écart de **0,5 µm** alors qu'elle ne gagnait que sur deux triplets sur cinq. Les deux conditions
+sont désormais exigées ensemble.
+
+⚠⚠ **Le témoin mélangé fait PIRE que le nominal** (−4,3 µm). Une longueur par point tirée dans la
+bonne distribution mais attribuée au mauvais point coûte donc plus qu'elle ne rapporte : c'est le
+bruit d'un prédicteur qui ne prédit pas.
+
+⚠ **Une part à dénominateur négligeable, retirée.** La première version publiait « la part
+vraiment locale est **9,6** » — un rapport supérieur à un, qui n'a aucun sens comme part, parce
+qu'il divisait par un gain de 0,5 µm. Aucune part n'est publiée quand son dénominateur est plus
+petit que la marge de la mesure.
+
+##### ⭐ Ce qui reste, petit mais réel
+
+> ⭐ **Le RECENTRAGE seul** — la médiane de l'écart franchi, prise comme longueur unique et sans
+> aucune information par point — bat le nominal sur **4 triplets sur 5**, pour **1,8 µm** des
+> **20,2** que connaître le vrai écart rapporterait. Un dixième, gratuit et sans regarder la
+> cible.
+
+##### ⚠⚠⚠ Et un contrôle du dépôt qui était en retard par construction
+
+Le `⛔` de la première version de cette figure est sorti en **carré vide**, et le contrôle de
+traçabilité l'a laissé passer : `GLYPHES_ABSENTS` est une **liste écrite à la main**, donc en
+retard sur tout caractère que personne n'y a ajouté.
+
+> ⭐⭐ **La question est désormais posée à la POLICE.** Un caractère absent rend toujours le même
+> dessin, celui du glyphe de secours : il suffit de comparer chaque caractère à un point de code
+> de la zone à **usage privé**, où aucune police générale ne met de dessin. La liste ne sert plus
+> que de **sonde** — elle vérifie que la question rend au moins les réponses déjà connues.
+
+⚠ Et sa docstring **affirmait** écrire ces caractères en séquences d'échappement alors que le
+fichier les portait **en clair** : un commentaire qui dit l'inverse de son code. Corrigé, et
+vérifié par un contrôle sur la ligne de la constante — ⚠ resserré après une première version qui
+les interdisait dans **tout** le fichier, où `✅` et `❌` servent légitimement à l'affichage du
+terminal. Un contrôle trop large refuse du travail correct.
+
+> ⭐⭐⭐ **Ce que cette tranche laisse à la suivante.** Les trois postes du coût d'un pas sont
+> maintenant chiffrés et leurs remèdes évalués : la **longueur** vaut 33 % et n'est récupérable
+> qu'à un dixième depuis ce qu'un dérouleur possède ; la **direction** vaut 3 % ; le **point à
+> point** vaut 19 % et c'est le domaine du raccrochage, dont le plancher (19,1 µm) tient
+> largement la feuille. Le seul poste qui garde une marge inexpliquée est donc celui-là — et la
+> question devient : **pourquoi le raccrochage mesuré n'en prend-il rien**, alors que sa borne
+> parfaite en prendrait 19 % ?
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est
@@ -3053,7 +3142,7 @@ mesurer est le piège habituel : `concordance_des_plans` la mesure désormais.
 
 ---
 
-### D4 ⚠⚠⚠ — 67 batteries vertes sur 156 n'atteignent pas le nombre qu'elles publient
+### D4 ⚠⚠⚠ — 67 batteries vertes sur 158 n'atteignent pas le nombre qu'elles publient
 
 Document dédié : [`80`](80_la_batterie_natteint_pas_le_nombre.md). Suite de
 [`61`](61_les_batteries_qui_ne_pouvaient_pas_echouer.md), dont il franchit la limite finale —
@@ -3076,7 +3165,7 @@ sans rien exécuter) :
 
 | | |
 |---|---:|
-| modules qui publient une mesure ou une figure | **156** |
+| modules qui publient une mesure ou une figure | **158** |
 | dont la batterie n'atteint pas ce chemin | **67** (44 %) |
 | fonctions hors de portée | **102** |
 

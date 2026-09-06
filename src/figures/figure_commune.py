@@ -29,10 +29,19 @@ CHEMINS = ("DejaVuSans.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")
 """Où chercher la police, dans l'ordre. ⚠ Le nom nu marche quand la police est installée dans
 le chemin de recherche de PIL ; le chemin absolu est le repli des environnements minces."""
 
-GLYPHES_ABSENTS = ("⭐", "✅", "❌", "⬛")
-"""Caractères que DejaVuSans ne rend pas : ils sortent en **carré vide**, et un carré dans une
-figure est du bruit qu'un lecteur prend pour une donnée. ⚠ Écrits en séquences d'échappement,
-sinon ce fichier contiendrait précisément ce qu'il aide à refuser."""
+GLYPHES_ABSENTS = ("\u2b50", "\u2705", "\u274c", "\u2b1b", "\u26d4")
+"""Quelques caractères que DejaVuSans ne rend pas : ils sortent en **carré vide**, et un
+carré dans une figure est du bruit qu'un lecteur prend pour une donnée.
+
+⚠⚠⚠ CETTE LISTE N'EST PLUS LE CONTRÔLE, ELLE EN EST LA SONDE. Écrite à la main, elle
+était en retard par construction : `\u26d4` a traversé une figure et en est sorti en
+carré vide, parce que personne ne l'y avait ajouté. `prose_tracable` demande désormais à
+la POLICE, et cette liste ne sert plus qu'à vérifier que la question rend au moins les
+réponses déjà connues.
+
+⚠ Et elle est enfin écrite en séquences d'échappement : la version précédente **affirmait
+l'être** et contenait les caractères en clair, donc ce fichier portait précisément ce
+qu'il aide à refuser — un commentaire qui dit l'inverse de son code."""
 
 
 def police(*tailles: int):
@@ -82,9 +91,42 @@ def etiquettes_de_traces(traces) -> list:
     return [f"{c} ({t[4:8]})" if c in doublons else c for c, t in zip(courts, traces)]
 
 
+def glyphes_manquants(texte: str, taille: int = 13) -> list[str]:
+    """Les caractères de ce texte que la police ne sait pas dessiner.
+
+    ⚠⚠⚠ LA QUESTION EST POSÉE À LA POLICE, PAS À UNE LISTE. Une liste écrite à la main est en
+    retard par construction — un caractère est sorti en carré vide d'une figure parce qu'il n'y
+    était pas. Un caractère absent rend TOUJOURS le même dessin, celui du glyphe de secours : il
+    suffit donc de comparer chaque caractère à un point de code dont on sait qu'aucune police ne
+    le porte.
+
+    ⚠ Le témoin est pris dans la zone à USAGE PRIVÉ : par définition, aucune police générale n'y
+    met de dessin, donc il rend le glyphe de secours à coup sûr. Choisir un caractère rare mais
+    réel exposerait le contrôle à une police qui, elle, le porterait.
+
+    ⚠ La police de secours de PIL n'expose pas de masque comparable ; sur elle, la question ne
+    peut pas être posée et rien n'est signalé, ce qui vaut mieux que signaler tout.
+    """
+    fonte = police(taille)
+    try:
+        secours = fonte.getmask("\ue000")
+    except (AttributeError, TypeError):  # pragma: no cover - police de secours de PIL
+        return []
+    reference = (bytes(secours), secours.size)
+    vus, out = set(), []
+    for ch in texte:
+        if ch in vus or ch.isspace():
+            continue
+        vus.add(ch)
+        m = fonte.getmask(ch)
+        if (bytes(m), m.size) == reference:
+            out.append(ch)
+    return out
+
+
 def prose_tracable(lignes) -> bool:
     """Aucune de ces lignes ne porte un caractère que la police ne sait pas rendre."""
-    return not any(g in "".join(lignes) for g in GLYPHES_ABSENTS)
+    return not glyphes_manquants("".join(lignes))
 
 
 def verifier() -> int:
@@ -143,6 +185,31 @@ def verifier() -> int:
                                  "20260623150417-w064-068"])
     v("deux traces aux memes indices sont distinguees", _lot[0] != _lot[1])
     v("... et une trace unique n'est pas encombree pour autant", _lot[2] == "w064-068")
+
+    # ⚠⚠⚠ LE CONTRÔLE DES GLYPHES EST DÉRIVÉ, PAS RECOPIÉ : il demande à la police. La liste
+    # écrite à la main ne sert plus qu'à vérifier que la question rend au moins les réponses
+    # déjà connues — et elle en contient une, `\u26d4`, qui est sortie en carré vide d'une
+    # figure précisément parce que personne ne l'avait ajoutée.
+    v("la question posée à la police retrouve tous les glyphes déjà connus absents",
+      glyphes_manquants("".join(GLYPHES_ABSENTS)) == list(GLYPHES_ABSENTS))
+    # ⚠⚠ ET LE NÉGATIF, sans lequel « rien ne manque » serait rendu par une fonction qui ne
+    # regarde rien : les caractères que ces figures emploient tous les jours doivent passer.
+    v("... et elle laisse passer ce que la police rend vraiment",
+      glyphes_manquants("\u26a0 \u00b7 \u2192 \u00b1 \u00b5 0123456789 aeiou") == [])
+    v("... un texte vide ne manque de rien", glyphes_manquants("") == [])
+    v("... et les blancs ne sont jamais comptés manquants",
+      glyphes_manquants(" \n\t") == [])
+    # ⚠ Le fichier ne doit PAS contenir en clair les caractères qu'il aide à refuser : la version
+    # précédente affirmait les écrire en échappement et les portait en clair.
+    # ⚠ La portée est la LIGNE DE LA CONSTANTE, pas le fichier : `\u2705` et `\u274c` servent
+    # légitimement à l'affichage du terminal, qui n'est pas une figure, et ma première version
+    # les interdisait partout — un contrôle trop large refuse du travail correct.
+    from pathlib import Path as _P  # noqa: PLC0415
+
+    declaration = next(l for l in _P(__file__).read_text(encoding="utf-8").splitlines()
+                       if l.startswith("GLYPHES_ABSENTS"))
+    v("la constante est écrite en séquences d'échappement, pas en clair",
+      not any(g in declaration for g in GLYPHES_ABSENTS))
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
