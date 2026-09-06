@@ -47,6 +47,9 @@ for _d in ("commun", "nappe", "encre", "tracecheck"):
 
 WRAPS = RACINE / "docs" / "mesures" / "les_wraps_publies.json"
 
+# ⚠ Un seul lecteur de corpus pour tous les dérouleurs, et sa fixture hors ligne avec lui.
+from le_corpus_des_spires import corpus_fabrique, corpus_publie, volume_fabrique  # noqa: E402
+
 
 def bornes_de_recherche(pas_vx: float) -> tuple[float, float]:
     """La bande où « la prochaine crête » veut dire quelque chose, en voxels.
@@ -131,31 +134,44 @@ def _publiees(lu: dict) -> dict:
 
 
 def mesurer(echantillon: int = 2000, graine: int = 42, cache_actif: bool = True,
-            cote: float | None = None) -> dict:
-    """La longueur locale du pas, lue dans le volume, confrontée aux écarts publiés."""
-    import tracecheck as tc  # noqa: PLC0415
+            cote: float | None = None, corpus: dict | None = None, volume=None) -> dict:
+    """La longueur locale du pas, lue dans le volume, confrontée aux écarts publiés.
 
-    from le_pas_normal_atteint_la_spire import distance_a, grille, normales  # noqa: PLC0415
+    ⚠⚠ DEUX MATIÈRES SONT INJECTABLES ICI, et il en faut deux : ce module lit les **spires**
+    pour savoir où regarder et le **volume** pour lire. Les défauts sont ceux du dépôt distant,
+    donc le nombre publié ne bouge pas ; la batterie en fournit deux fabriqués, qui décrivent
+    le même objet, et exerce ainsi le chemin qui produit ce nombre.
+
+    ⚠ `accorde_aux_spires` n'est vérifié que pour le volume PUBLIÉ : il compare l'horodatage et
+    la taille de voxel que le nom du zarr déclare à ce que les spires déclarent. Un volume
+    fabriqué n'a pas de nom, donc l'y confronter reviendrait à vérifier la fixture.
+    """
+    from le_pas_normal_atteint_la_spire import distance_a, normales  # noqa: PLC0415
     from le_raccrochage_a_la_matiere import (  # noqa: PLC0415
         BOITE_CENTRE, BOITE_COTE, CacheDisque, Volume, ZARR, accorde_aux_spires, le_long,
         profil_autour, url_du_volume,
     )
-    from les_wraps_publies import VOLUME, VOXEL_UM, wraps_du_fragment  # noqa: PLC0415
 
-    if not accorde_aux_spires():
+    c = corpus_publie() if corpus is None else corpus
+    VOLUME, VOXEL_UM = c["volume"], float(c["voxel_um"])
+    if volume is None and not accorde_aux_spires():
         raise RuntimeError(f"le volume {ZARR} n'est pas celui des spires ({VOLUME})")
     if not WRAPS.is_file():
         raise RuntimeError(f"mesure absente : {WRAPS}")
     lu = json.loads(WRAPS.read_text())
-    ecart_um = float(lu["resume"]["1"]["mediane_um"])
+    ecart_um = float(c["ecart_um"])
     pas_vx = ecart_um / VOXEL_UM
     demi_gab = round(pas_vx / 4.0)
     bas, haut = bornes_de_recherche(pas_vx)
 
-    url = url_du_volume()
-    meta = tc.array_meta(url, 0, 120)
-    cache = CacheDisque(actif=cache_actif)
-    vol = Volume(url, meta, cache)
+    if volume is None:
+        import tracecheck as tc  # noqa: PLC0415
+
+        url = url_du_volume()
+        vol = Volume(url, tc.array_meta(url, 0, 120), CacheDisque(actif=cache_actif))
+    else:
+        vol = volume
+    cache = vol.cache
 
     cote = BOITE_COTE if cote is None else float(cote)
     centre = np.array(BOITE_CENTRE)
@@ -164,11 +180,7 @@ def mesurer(echantillon: int = 2000, graine: int = 42, cache_actif: bool = True,
     t_gab = np.arange(-demi_gab, demi_gab + 1e-9, 1.0)
 
     lignes, toutes, toutes_melangees, ecarts_au_temoin = [], [], [], []
-    for w in wraps_du_fragment():
-        g = grille(w, VOLUME, VOXEL_UM)
-        if g is None:
-            continue
-        a, ok = g
+    for rang, (a, ok) in sorted(c["grilles"].items()):
         n, bon = normales(a, ok)
         dans = bon & ((a >= lo) & (a <= hi)).all(axis=-1)
         if int(dans.sum()) < 30:
@@ -209,7 +221,7 @@ def mesurer(echantillon: int = 2000, graine: int = 42, cache_actif: bool = True,
             # Si la lecture et son témoin s'accordent cellule à cellule, elles mesurent la même
             # chose — et cette chose est la fenêtre.
             ecarts_au_temoin.append(np.abs(um - mel * VOXEL_UM))
-        lignes.append(dict(spire=w["rang"], cellules=int(okl.sum()),
+        lignes.append(dict(spire=rang, cellules=int(okl.sum()),
                            sens="+" if sens > 0 else "-",
                            force_corr=round(force, 3),
                            force_corr_autre_sens=round(scores[-sens][2], 3),
@@ -460,6 +472,79 @@ def verifier() -> int:
     v("les écarts publiés sont pris sur les paires consécutives",
       pub["mediane"] == 135.0 and pub["n"] == 2, str(pub))
 
+    # ⚠⚠⚠ LE CHEMIN QUI PRODUIT LE NOMBRE PUBLIÉ, HORS LIGNE, avec ses DEUX matières : les
+    # spires disent où regarder, le volume dit ce qu'on y lit. Elles décrivent le même objet —
+    # `le_corpus_des_spires` ne le décrit qu'une fois —, sans quoi la lecture chercherait des
+    # crêtes là où il n'y en a pas et rendrait des nombres stables et absurdes.
+    import contextlib  # noqa: PLC0415
+    import io as _io  # noqa: PLC0415
+
+    from le_corpus_des_spires import geometrie_fabriquee  # noqa: PLC0415
+
+    g0 = geometrie_fabriquee()
+    fab = mesurer(echantillon=40, corpus=corpus_fabrique(), volume=volume_fabrique(g0))
+    v("la mesure tourne de bout en bout sur des matières fabriquées, sans rien lire",
+      fab["spires"] > 0 and fab["longueurs_lues"]["n"] > 0,
+      f"{fab['spires']} spires, {fab['longueurs_lues']['n']} lectures")
+    # ⚠⚠⚠ LE ROND-TRIP : on injecte des feuilles espacées d'un pas connu, et la lecture doit le
+    # retrouver. La tolérance est DÉRIVÉE de l'ondulation — deux feuilles voisines glissent
+    # chacune de son amplitude et demie, donc leur écart local vaut le pas à trois amplitudes
+    # près — et non choisie pour que le chiffre du jour passe.
+    marge = 3 * g0["ondulation"] * g0["voxel_um"]
+    v("... et elle retrouve le pas qu'on a injecté dans le volume",
+      abs(fab["longueurs_lues"]["mediane"] - g0["ecart_um"]) <= marge,
+      f"{fab['longueurs_lues']['mediane']} contre {g0['ecart_um']}, marge {marge:.1f} µm")
+    # ⚠⚠⚠ ET LE CONTRÔLE QUI DISCRIMINE, celui sans lequel le précédent ne prouve rien : une
+    # lecture qui rendrait le centre de sa fenêtre de recherche retrouverait AUSSI le nominal.
+    # On donne donc au volume un autre écart que celui des spires — les spires ne disent que
+    # où regarder — et la lecture doit SUIVRE la matière.
+    # ⚠ Elle ne le suit que partiellement, et c'est dit plutôt que caché : les ancres du corpus
+    # ne tombent plus sur des crêtes, donc le gabarit lu autour d'elles n'est plus un profil de
+    # feuille. Ce qui est vérifié est le SENS du déplacement, pas son ampleur.
+    g1 = geometrie_fabriquee(ecart_um=g0["ecart_um"] * 1.25)
+    large = mesurer(echantillon=40, corpus=corpus_fabrique(), volume=volume_fabrique(g1))
+    v("un volume dont les feuilles sont plus écartées se lit plus long",
+      large["longueurs_lues"]["mediane"] > fab["longueurs_lues"]["mediane"],
+      f"{large['longueurs_lues']['mediane']} contre {fab['longueurs_lues']['mediane']}")
+    v("... et les deux lectures tiennent dans la fenêtre, donc aucune n'est écrêtée",
+      all(fab["fenetre_um"][0] < d["mediane"] < fab["fenetre_um"][1]
+          for d in (fab["longueurs_lues"], large["longueurs_lues"])),
+      f"fenêtre {fab['fenetre_um']}")
+    # ⚠⚠ LE TÉMOIN MÉLANGÉ doit exister et différer : sans lui, « la lecture retrouve le pas »
+    # serait satisfait par une lecture qui mesure sa propre fenêtre.
+    v("le témoin du gabarit mélangé est mesuré lui aussi",
+      fab["temoin_melange"]["n"] > 0, str(fab["temoin_melange"]["n"]))
+    v("... et il ne rend pas les mêmes cellules que la lecture",
+      fab["ecart_au_temoin_um"]["mediane"] > 0,
+      str(fab["ecart_au_temoin_um"]["mediane"]))
+    v("chaque spire mesurée déclare un sens et des cellules",
+      all(e["cellules"] > 0 and e["sens"] in ("+", "-") for e in fab["par_spire"]))
+    v("le résultat est sérialisable tel quel, sans type qui traîne",
+      isinstance(json.dumps(fab), str))
+    tampon, souci = _io.StringIO(), None
+    try:
+        with contextlib.redirect_stdout(tampon):
+            afficher(fab)
+    except Exception as exc:  # noqa: BLE001
+        souci = f"{type(exc).__name__}: {exc}"
+    v("l'affichage tourne sur ce résultat et va jusqu'à son verdict",
+      souci is None and "la lecture retrouve les écarts publiés" in tampon.getvalue(),
+      souci or f"{len(tampon.getvalue().splitlines())} lignes")
+    # ⚠⚠ LE REFUS, ET IL A FALLU LE RENDRE DISCRIMINANT. Première version : seul le corpus était
+    # déplacé, donc le volume n'avait rien à lire là-bas et la mesure refusait pour ABSENCE DE
+    # MATIÈRE, pas parce que la boîte l'avait écartée — une sonde qui retirait le découpage
+    # laissait le contrôle vert. Les DEUX matières sont donc déplacées ensemble : les feuilles
+    # existent et se lisent, elles sont seulement ailleurs que la boîte.
+    ailleurs = geometrie_fabriquee(decalage_vx=5000.0)
+    hors = None
+    try:
+        mesurer(echantillon=40, corpus=corpus_fabrique(decalage_vx=5000.0),
+                volume=volume_fabrique(ailleurs))
+    except RuntimeError as exc:
+        hors = str(exc)
+    v("un objet entier posé hors de la boîte est REFUSÉ, pas rendu vide",
+      hors is not None, str(hors))
+
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -475,6 +560,22 @@ def main() -> int:
     if a.verifier:
         return verifier()
     r = mesurer(a.echantillon, cote=a.cote)
+    afficher(r)
+    if a.json:
+        a.json.parent.mkdir(parents=True, exist_ok=True)
+        a.json.write_text(json.dumps(r, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"écrit : {a.json}")
+    return 0
+
+
+def afficher(r: dict) -> None:
+    """Le compte rendu lisible d'une mesure.
+
+    ⚠⚠ Sorti de `main` pour la raison mesurée dans `80` : un bloc de `main` ne peut être exercé
+    qu'en lisant le dépôt distant, donc jamais par la batterie — et c'est exactement là qu'un
+    patch à moitié appliqué a laissé, le 2026-09-05, un enregistrement référençant des
+    variables inexistantes. Sorti de là, une clé absente ou renommée lève **hors ligne**.
+    """
     print(f"pas nominal {r['pas_nominal_um']} µm · fenêtre {r['fenetre_um']} µm · "
           f"{r['spires']} spires")
     print(f"\n{'spire':>6} {'cell.':>6} {'sens':>5} {'p10':>8} {'médiane':>9} {'p90':>8}")
@@ -513,11 +614,6 @@ def main() -> int:
           f"\n→ les distributions se séparent du témoin : "
           f"{'OUI' if r['les_distributions_se_separent'] else 'NON'}"
           " — donc les déciles ne tranchent pas, seule la comparaison cellule par cellule le fait")
-    if a.json:
-        a.json.parent.mkdir(parents=True, exist_ok=True)
-        a.json.write_text(json.dumps(r, indent=2, ensure_ascii=False), encoding="utf-8")
-        print(f"écrit : {a.json}")
-    return 0
 
 
 if __name__ == "__main__":

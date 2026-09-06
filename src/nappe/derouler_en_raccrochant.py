@@ -420,22 +420,37 @@ def _boite_du_depart(grilles: dict, centre, cote: float, minimum: int) -> int | 
 
 
 def mesurer(minimum: int = 30, graine: int = 42, cache_actif: bool = True,
-            cote: float | None = None, grilles: dict | None = None) -> dict:
-    """Le dérouleur raccroché, contre l'aveugle, contre le hasard, contre l'immobilité."""
-    import tracecheck as tc  # noqa: PLC0415
+            cote: float | None = None, grilles: dict | None = None,
+            corpus: dict | None = None, volume=None) -> dict:
+    """Le dérouleur raccroché, contre l'aveugle, contre le hasard, contre l'immobilité.
 
-    from le_pas_normal_atteint_la_spire import grille  # noqa: PLC0415
+    ⚠⚠ DEUX MATIÈRES SONT INJECTABLES : les **spires** disent d'où partir et où juger, le
+    **volume** dit sur quoi se raccrocher. Les défauts sont ceux du dépôt distant, donc les
+    nombres publiés ne bougent pas ; la batterie en fournit deux fabriqués, qui décrivent le
+    même objet — sans quoi la marche snapperait sur de la matière qui contredit ses ancres.
+
+    ⚠ `grilles` reste là et sert au balayage : les mêmes grilles servent à toutes les tailles
+    de boîte, et les retélécharger à chaque point ferait payer treize `tifxyz` par taille.
+    """
+    from le_corpus_des_spires import corpus_publie  # noqa: PLC0415
     from le_raccrochage_a_la_matiere import (  # noqa: PLC0415
         BOITE_CENTRE, BOITE_COTE, CacheDisque, Volume, ZARR, accorde_aux_spires,
         url_du_volume,
     )
-    from les_wraps_publies import VOLUME, VOXEL_UM, wraps_du_fragment  # noqa: PLC0415
 
-    if not accorde_aux_spires():
+    c = corpus_publie() if (corpus is None and grilles is None) else corpus
+    if c is None:
+        from les_wraps_publies import VOLUME, VOXEL_UM  # noqa: PLC0415
+
+        c = dict(volume=VOLUME, voxel_um=VOXEL_UM,
+                 ecart_um=float(json.loads(WRAPS.read_text())["resume"]["1"]["mediane_um"]),
+                 grilles=grilles)
+    VOLUME, VOXEL_UM = c["volume"], float(c["voxel_um"])
+    if volume is None and not accorde_aux_spires():
         raise RuntimeError(f"le volume {ZARR} n'est pas celui des spires ({VOLUME})")
     if not WRAPS.is_file():
         raise RuntimeError(f"mesure absente : {WRAPS}")
-    ecart_um = float(json.loads(WRAPS.read_text())["resume"]["1"]["mediane_um"])
+    ecart_um = float(c["ecart_um"])
     pas_vx = ecart_um / VOXEL_UM
     demi_vx = pas_vx / 2.0
     demi_gab = round(demi_vx / 2.0)
@@ -443,12 +458,7 @@ def mesurer(minimum: int = 30, graine: int = 42, cache_actif: bool = True,
     # ⚠ Les grilles sont RÉUTILISABLES d'un côté de boîte à l'autre : les retélécharger à
     # chaque taille ferait payer treize `tifxyz` par point du balayage, pour des données
     # identiques.
-    if grilles is None:
-        grilles = {}
-        for w in wraps_du_fragment():
-            g = grille(w, VOLUME, VOXEL_UM)
-            if g is not None:
-                grilles[w["rang"]] = g
+    grilles = c["grilles"] if grilles is None else grilles
     # ⚠⚠ LA BOÎTE S'ÉLARGIT, SON CENTRE NE BOUGE PAS. Élargir change UNE chose — combien de
     # tours la grille survit avant que l'érosion ne la mange. Déplacer le centre en changerait
     # une seconde : l'endroit de la nappe qu'on mesure. Deux marches à deux endroits ne se
@@ -486,10 +496,14 @@ def mesurer(minimum: int = 30, graine: int = 42, cache_actif: bool = True,
     if not cibles:
         raise RuntimeError("aucune spire d'arrivée dans la boîte")
 
-    url = url_du_volume()
-    meta = tc.array_meta(url, 0, 120)
-    cache = CacheDisque(actif=cache_actif)
-    vol = Volume(url, meta, cache)
+    if volume is None:
+        import tracecheck as tc  # noqa: PLC0415
+
+        url = url_du_volume()
+        vol = Volume(url, tc.array_meta(url, 0, 120), CacheDisque(actif=cache_actif))
+    else:
+        vol = volume
+    cache = vol.cache
 
     # ⚠⚠⚠ LE SENS EST LE SEUL BIT DE SUPERVISION, fixé au premier pas et jamais rechoisi.
     from le_pas_normal_atteint_la_spire import essayer_le_pas, normales  # noqa: PLC0415
@@ -855,7 +869,7 @@ def balayer_le_pas_de_normale(depart: np.ndarray, ok: np.ndarray,
 
 
 def balayer_la_boite(cotes: tuple[float, ...] = (384.0, 512.0, 640.0),
-                    minimum: int = 30) -> dict:
+                    minimum: int = 30, corpus: dict | None = None, volume=None) -> dict:
     """Le verdict de chaque dérouleur, à plusieurs tailles de morceau de nappe.
 
     ⚠⚠⚠ POURQUOI CE BALAYAGE EXISTE, ET C'EST UNE RÉTRACTATION. À 191 cellules et quatre
@@ -874,18 +888,13 @@ def balayer_la_boite(cotes: tuple[float, ...] = (384.0, 512.0, 640.0),
     ⚠ Le coût est cumulatif et il est rendu : les blocs d'une petite boîte servent à la
     grande, donc le balayage complet coûte le prix de la plus large.
     """
-    from le_pas_normal_atteint_la_spire import grille  # noqa: PLC0415
-    from les_wraps_publies import VOLUME, VOXEL_UM, wraps_du_fragment  # noqa: PLC0415
+    from le_corpus_des_spires import corpus_publie  # noqa: PLC0415
 
-    grilles = {}
-    for w in wraps_du_fragment():
-        g = grille(w, VOLUME, VOXEL_UM)
-        if g is not None:
-            grilles[w["rang"]] = g
+    c_ = corpus_publie() if corpus is None else corpus
 
     points = []
     for c in cotes:
-        r = mesurer(minimum=minimum, cote=c, grilles=grilles)
+        r = mesurer(minimum=minimum, cote=c, corpus=c_, volume=volume)
         points.append(dict(
             cote_voxels=c, cellules_au_depart=r["cellules_au_depart"],
             tours=r["tours_mesures"],
@@ -1263,6 +1272,97 @@ def verifier() -> int:
     v("... et rien n'est rendu si personne n'y est",
       _boite_du_depart(g, np.array([900.0, 900.0, 900.0]), 20.0, 30) is None)
 
+    # ⚠⚠⚠ LE CHEMIN QUI PRODUIT LES NOMBRES PUBLIÉS, HORS LIGNE, avec ses DEUX matières : les
+    # spires disent d'où partir et où juger, le volume sur quoi se raccrocher. Elles décrivent
+    # le même objet — `le_corpus_des_spires` ne le décrit qu'une fois —, sans quoi la marche
+    # snapperait sur de la matière qui contredit ses propres ancres.
+    # ⚠⚠ AUCUN VERDICT N'EST VÉRIFIÉ ICI. La fixture n'est pas le fragment : quel contendant y
+    # gagne ne dit rien, et l'épingler ferait de la batterie une mesure de la fixture. Ce qui
+    # est vérifié, ce sont les invariants que la mesure revendique.
+    import contextlib  # noqa: PLC0415
+    import io as _io  # noqa: PLC0415
+
+    from le_corpus_des_spires import (  # noqa: PLC0415
+        corpus_fabrique, geometrie_fabriquee, volume_fabrique,
+    )
+
+    g0 = geometrie_fabriquee()
+    corpus0, vol0 = corpus_fabrique(), volume_fabrique(g0)
+    fab = mesurer(minimum=20, corpus=corpus0, volume=vol0)
+    v("la mesure tourne de bout en bout sur des matières fabriquées, sans rien lire",
+      fab["tours_mesures"] > 0 and fab["cellules_au_depart"] > 0,
+      f"{fab['tours_mesures']} tours depuis {fab['cellules_au_depart']} cellules")
+    v("... et les dix contendants sont tous mesurés",
+      len(fab["derive_par_tour_um"]) == 10 and all(
+          v_ is not None for v_ in fab["derive_par_tour_um"].values()),
+      str(sorted(fab["derive_par_tour_um"])))
+    # ⚠⚠⚠ LE SEUL VERDICT QUI DOIT TENIR SUR N'IMPORTE QUELLE MATIÈRE : un décalage TIRÉ AU
+    # HASARD ne peut pas battre une méthode. S'il le fait, ce n'est pas un résultat sur la
+    # nappe, c'est que la mesure est cassée — et ce contrôle-là ne demande aucune cible.
+    v("le contendant tiré au hasard est le pire de tous",
+      fab["derive_par_tour_um"]["hasard"] == max(fab["derive_par_tour_um"].values()),
+      str(fab["derive_par_tour_um"]))
+    # ⚠⚠ LE ROND-TRIP : le pas nominal traverse la mesure sans se déformer, et la demi-épaisseur
+    # en est bien la moitié. Sans ça, une marche calibrée sur une autre échelle passerait.
+    v("... le pas lu est celui qu'on a injecté, et la demi-épaisseur en est la moitié",
+      abs(fab["ecart_lu_um"] - g0["ecart_um"]) < 0.01
+      and abs(fab["demi_epaisseur_um"] - g0["ecart_um"] / 2) < 0.01,
+      f"{fab['ecart_lu_um']} µm, demi {fab['demi_epaisseur_um']}")
+    v("... la marche perd des cellules et s'arrête sur le minimum déclaré",
+      fab["cellules_au_depart"] >= fab["minimum_de_cellules"]
+      and all(a_["cellules"] >= b_["cellules"] for a_, b_ in
+              zip(fab["marche_aveugle"], fab["marche_aveugle"][1:])),
+      str([e["cellules"] for e in fab["marche_aveugle"]]))
+    v("le résultat est sérialisable tel quel, sans type qui traîne",
+      isinstance(json.dumps(fab), str))
+    tampon, souci = _io.StringIO(), None
+    try:
+        with contextlib.redirect_stdout(tampon):
+            afficher(fab)
+    except Exception as exc:  # noqa: BLE001
+        souci = f"{type(exc).__name__}: {exc}"
+    v("l'affichage tourne sur ce résultat et va jusqu'à son verdict",
+      souci is None and "tient la feuille au dernier tour" in tampon.getvalue(),
+      souci or f"{len(tampon.getvalue().splitlines())} lignes")
+
+    # ⚠⚠ LE BALAYAGE, LUI AUSSI, doit tourner : c'est lui qui a rétracté une conclusion publiée,
+    # donc c'est le dernier endroit du module qu'on peut se permettre de ne jamais exercer.
+    bal = balayer_la_boite(cotes=(300.0, 384.0), minimum=20, corpus=corpus0, volume=vol0)
+    v("le balayage tourne sur les mêmes matières et rend un point par côté",
+      len(bal["points"]) == 2 and [p_["cote_voxels"] for p_ in bal["points"]] == [300.0, 384.0],
+      str([p_["cellules_au_depart"] for p_ in bal["points"]]))
+    # ⚠⚠ LES BOÎTES SONT EMBOÎTÉES : une boîte plus large contient PLUS de cellules. La
+    # comparaison est STRICTE, et c'est ce qui la rend capable d'échouer : la fixture déborde de
+    # la petite boîte, donc un découpage qui cesserait de mordre rendrait les deux points égaux
+    # — et une inégalité large serait satisfaite par une boîte qui ne fait rien. Sans ça, deux
+    # points du balayage ne seraient plus le même endroit avec plus de matière autour.
+    v("... et une boîte plus large contient strictement plus de cellules",
+      bal["points"][1]["cellules_au_depart"] > bal["points"][0]["cellules_au_depart"],
+      str([p_["cellules_au_depart"] for p_ in bal["points"]]))
+    v("... il nomme les contendants dont le verdict change avec la taille",
+      isinstance(bal["contendants_au_verdict_instable"], list),
+      str(bal["contendants_au_verdict_instable"]))
+    tampon2, souci2 = _io.StringIO(), None
+    try:
+        with contextlib.redirect_stdout(tampon2):
+            afficher_le_balayage(bal)
+    except Exception as exc:  # noqa: BLE001
+        souci2 = f"{type(exc).__name__}: {exc}"
+    v("... et son affichage tourne aussi",
+      souci2 is None and "verdict CHANGE" in tampon2.getvalue(),
+      souci2 or f"{len(tampon2.getvalue().splitlines())} lignes")
+    # ⚠ Le refus, DISCRIMINANT : les deux matières sont déplacées ensemble, donc les feuilles
+    # existent et se lisent — elles sont seulement ailleurs que la boîte.
+    ailleurs = geometrie_fabriquee(decalage_vx=5000.0)
+    refus = None
+    try:
+        mesurer(minimum=20, corpus=corpus_fabrique(decalage_vx=5000.0),
+                volume=volume_fabrique(ailleurs))
+    except RuntimeError as exc:
+        refus = str(exc)
+    v("un objet entier posé hors de la boîte est REFUSÉ, pas rendu vide",
+      refus is not None, str(refus))
+
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -1281,25 +1381,49 @@ def main() -> int:
         return verifier()
     if a.balayer:
         b = balayer_la_boite(tuple(float(x) for x in a.balayer.split(",")))
-        print(f"{'côté':>6} {'cellules':>9} {'tours':>6}  dérive par tour (µm)")
-        print("-" * 88)
-        for pt in b["points"]:
-            d_ = pt["derive_par_tour_um"]
-            print(f"{pt['cote_voxels']:>6.0f} {pt['cellules_au_depart']:>9} "
-                  f"{pt['tours']:>6}  " + "  ".join(
-                      f"{k} {v:+.1f}" for k, v in d_.items() if v is not None))
-        print(f"\ncontendants dont le verdict CHANGE avec la taille : "
-              f"{b['contendants_au_verdict_instable'] or 'aucun'}")
-        print(f"contendants qui ne tiennent la feuille à AUCUNE taille : "
-              f"{b['aucun_ne_tient_partout']}")
-        print(f"coût cumulé : {b['points'][-1]['cout']['blocs_telecharges']} blocs "
-              f"au dernier point")
+        afficher_le_balayage(b)
         if a.json:
             a.json.parent.mkdir(parents=True, exist_ok=True)
             a.json.write_text(json.dumps(b, indent=2, ensure_ascii=False), encoding="utf-8")
             print(f"écrit : {a.json}")
         return 0
     r = mesurer(cote=a.cote)
+    afficher(r)
+    if a.json:
+        a.json.parent.mkdir(parents=True, exist_ok=True)
+        a.json.write_text(json.dumps(r, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"écrit : {a.json}")
+    return 0
+
+
+def afficher_le_balayage(b: dict) -> None:
+    """Le compte rendu lisible d'un balayage de boîte.
+
+    ⚠⚠ Sorti de `main` pour la raison mesurée dans `80` : un bloc de `main` ne peut être exercé
+    qu'en lisant le dépôt distant, donc jamais par la batterie.
+    """
+    print(f"{'côté':>6} {'cellules':>9} {'tours':>6}  dérive par tour (µm)")
+    print("-" * 88)
+    for pt in b["points"]:
+        d_ = pt["derive_par_tour_um"]
+        print(f"{pt['cote_voxels']:>6.0f} {pt['cellules_au_depart']:>9} "
+              f"{pt['tours']:>6}  " + "  ".join(
+                  f"{k} {v:+.1f}" for k, v in d_.items() if v is not None))
+    print(f"\ncontendants dont le verdict CHANGE avec la taille : "
+          f"{b['contendants_au_verdict_instable'] or 'aucun'}")
+    print(f"contendants qui ne tiennent la feuille à AUCUNE taille : "
+          f"{b['aucun_ne_tient_partout']}")
+    print(f"coût cumulé : {b['points'][-1]['cout']['blocs_telecharges']} blocs "
+          f"au dernier point")
+
+
+def afficher(r: dict) -> None:
+    """Le compte rendu lisible d'une mesure.
+
+    ⚠⚠ Sorti de `main` pour la raison mesurée dans `80` : c'est dans un bloc d'affichage de
+    `main` qu'un patch à moitié appliqué a laissé, le 2026-09-05, un enregistrement
+    référençant des variables inexistantes, sans qu'aucune batterie puisse le voir.
+    """
     print(f"départ : spire {r['depuis']}, {r['cellules_au_depart']} cellules dans une boîte "
           f"de {r['boite']['cote_voxels']:.0f} voxels")
     print(f"pas nominal {r['ecart_lu_um']} µm, sens « {r['sens_retenu']} », "
@@ -1408,11 +1532,6 @@ def main() -> int:
     print(f"\n→ la dérive cesse de monter pour : {', '.join(arret) if arret else 'aucun'}")
     print(f"→ tient la feuille au dernier tour : "
           f"{', '.join(r['tient_la_feuille_a_la_fin']) or 'aucun'}")
-    if a.json:
-        a.json.parent.mkdir(parents=True, exist_ok=True)
-        a.json.write_text(json.dumps(r, indent=2, ensure_ascii=False), encoding="utf-8")
-        print(f"écrit : {a.json}")
-    return 0
 
 
 if __name__ == "__main__":

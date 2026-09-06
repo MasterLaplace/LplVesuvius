@@ -39,6 +39,57 @@ WRAPS = RACINE / "docs" / "mesures" / "les_wraps_publies.json"
 # autre échelle ne prouve rien sur celle-ci.
 VOXEL_UM_FIXTURE = 2.215
 ECART_UM_FIXTURE = 135.5
+TAU = 2.0 * np.pi
+
+
+def geometrie_fabriquee(spires: int = 6, cellules: int = 14, ondulation: float = 3.0,
+                        rayon_vx: float = 4000.0, decalage_vx: float = 0.0,
+                        ecart_um: float = ECART_UM_FIXTURE) -> dict:
+    """Où sont les feuilles de l'objet fabriqué — **la seule description**, et c'est le point.
+
+    ⚠⚠⚠ DEUX VUES D'UN MÊME OBJET, PAS DEUX OBJETS. Un dérouleur lit les spires comme des
+    **surfaces** (une grille de points) et le volume comme une **intensité** (des feuilles
+    brillantes). Décrire l'objet deux fois ferait un corpus dont les feuilles ne sont pas là où
+    le volume les met : le raccrochage snapperait alors sur de la matière qui contredit ses
+    propres ancres, et la mesure rendrait des nombres parfaitement stables et absurdes. La
+    géométrie est donc dite ici, et les deux vues la lisent.
+
+    ⚠ Le centre de courbure est posé à `rayon_vx` de la boîte, sur x : la spire du milieu passe
+    par le centre de la boîte, et les autres se rangent de part et d'autre.
+
+    ⚠⚠ `ecart_um` existe pour un contrôle précis, et pas pour du réglage : donner au VOLUME un
+    autre écart que celui du corpus permet de demander si une lecture suit la matière ou la
+    fenêtre de recherche. Une lecture qui rendrait toujours le nominal passerait le premier
+    contrôle et échouerait celui-là.
+    """
+    from le_raccrochage_a_la_matiere import BOITE_CENTRE  # noqa: PLC0415
+
+    centre = np.array(BOITE_CENTRE, dtype=np.float64)
+    return dict(
+        voxel_um=VOXEL_UM_FIXTURE, ecart_um=ecart_um,
+        pas_vx=ecart_um / VOXEL_UM_FIXTURE,
+        foyer=centre - np.array([rayon_vx - decalage_vx, 0.0, 0.0]),
+        rayon_vx=rayon_vx, spires=spires, cellules=cellules, ondulation=ondulation,
+        milieu=(spires + 1) / 2.0, demi=(cellules - 1) / 2.0,
+        # ⚠ Le pas angulaire donne une maille tangentielle du même ordre que la maille en z :
+        # une grille très allongée rendrait des normales dominées par un seul axe.
+        maille=10.0, dtheta=10.0 / rayon_vx)
+
+
+def rayon_de_spire(g: dict, k, theta, z_local):
+    """Le rayon de la spire `k` à l'angle `theta` et à la cote `z_local`, depuis le foyer.
+
+    ⚠⚠ L'ondulation dépend des DEUX coordonnées : une surface qui n'ondulerait que le long d'un
+    axe laisserait la seconde tangente exacte, donc n'exercerait qu'une moitié du calcul de
+    normale. Et sa phase TOURNE d'une spire à l'autre — en phase, les spires resteraient des
+    décalages exacts les unes des autres, donc un pas normal les atteindrait pile et toute
+    erreur mesurée dessus vaudrait zéro.
+    """
+    i = np.asarray(theta) / g["dtheta"] + g["demi"]
+    j = np.asarray(z_local) / g["maille"] + g["demi"]
+    return (g["rayon_vx"] + (k - g["milieu"]) * g["pas_vx"]
+            + g["ondulation"] * np.sin(TAU * i / g["cellules"] + 0.7 * k)
+            + 0.5 * g["ondulation"] * np.cos(TAU * j / g["cellules"] - 0.4 * k))
 
 
 def corpus_publie() -> dict:
@@ -109,35 +160,17 @@ def corpus_fabrique(spires: int = 6, cellules: int = 14, ondulation: float = 3.0
     et un corpus posé hors de la boîte ne doit rendre AUCUN triplet, sans quoi le découpage
     serait décoratif.
     """
-    from le_raccrochage_a_la_matiere import BOITE_CENTRE  # noqa: PLC0415
-
-    voxel_um, ecart_um = VOXEL_UM_FIXTURE, ECART_UM_FIXTURE
-    pas_vx = ecart_um / voxel_um
-    centre = np.array(BOITE_CENTRE, dtype=np.float64)
-    # Le centre de courbure est posé à `rayon_vx` de la boîte, sur x : la spire du milieu passe
-    # donc par le centre de la boîte, et les autres se rangent de part et d'autre.
-    foyer = centre - np.array([rayon_vx - decalage_vx, 0.0, 0.0])
-    milieu = (spires + 1) / 2.0
-    demi = (cellules - 1) / 2.0
-    # Le pas angulaire donne une maille tangentielle du même ordre que la maille en z : une
-    # grille très allongée rendrait des normales dominées par un seul axe.
-    dtheta = 10.0 / rayon_vx
-    tau = 2.0 * np.pi
+    g = geometrie_fabriquee(spires, cellules, ondulation, rayon_vx, decalage_vx)
+    foyer, demi = g["foyer"], g["demi"]
     grilles = {}
     for k in range(1, spires + 1):
-        rayon = rayon_vx + (k - milieu) * pas_vx
         a = np.empty((cellules, cellules, 3), dtype=np.float64)
         for i in range(cellules):
-            th = (i - demi) * dtheta
+            th = (i - demi) * g["dtheta"]
             for j in range(cellules):
-                # L'ondulation dépend des DEUX axes de la grille : une surface qui n'ondulerait
-                # que le long d'un axe laisserait la seconde tangente exacte, donc n'exercerait
-                # qu'une moitié du calcul de normale.
-                r = (rayon
-                     + ondulation * np.sin(tau * i / cellules + 0.7 * k)
-                     + 0.5 * ondulation * np.cos(tau * j / cellules - 0.4 * k))
-                a[i, j] = foyer + np.array([r * np.cos(th), r * np.sin(th),
-                                            (j - demi) * 10.0])
+                z_local = (j - demi) * g["maille"]
+                r = rayon_de_spire(g, k, th, z_local)
+                a[i, j] = foyer + np.array([r * np.cos(th), r * np.sin(th), z_local])
         ok = np.ones((cellules, cellules), dtype=bool)
         if k == creuse:
             # Il en reste trois cellules : de quoi prouver que la spire est LUE et écartée pour
@@ -146,8 +179,91 @@ def corpus_fabrique(spires: int = 6, cellules: int = 14, ondulation: float = 3.0
             ok[:] = False
             ok[0, :3] = True
         grilles[k] = (a, ok)
-    return dict(volume="fixture", voxel_um=voxel_um, ecart_um=ecart_um, grilles=grilles)
+    return dict(volume="fixture", voxel_um=g["voxel_um"], ecart_um=g["ecart_um"],
+                grilles=grilles)
 
+
+def meta_fabriquee(bloc_vx: int = 64) -> dict:
+    """Les métadonnées du volume fabriqué, dans la forme que le lecteur attend.
+
+    ⚠ La FORME déclarée est celle du vrai volume : les points des spires vivent autour de
+    (10615, 10571, 19831), donc un tableau plus petit les mettrait hors bornes et le lecteur
+    répondrait « rien à cet endroit » — ce qui ressemble à un trou dans le scan. Rien n'est
+    alloué : seuls les blocs réellement demandés sont fabriqués.
+
+    ⚠⚠ Le bloc est plus PETIT que celui du dépôt (64 au lieu de 128) pour une raison mesurable
+    et pas esthétique : un bloc fabriqué coûte son volume en calcul, et 128³ est huit fois
+    2 097 152 voxels pour une ligne qui en traverse soixante. Ce que la mesure exerce est le
+    GROUPEMENT par bloc, pas la taille du bloc du dépôt.
+    """
+    return dict(shape=[28096, 18209, 18209], chunks=[bloc_vx, bloc_vx, bloc_vx],
+                dtype="|u1", compressor=None, dimension_separator="/")
+
+
+def volume_fabrique(g: dict | None = None, bloc_vx: int = 64, portee_vx: float = 400.0,
+                    pannes: int = 0, essais: int = 4):
+    """Le volume de scan de l'objet fabriqué : ses feuilles vues comme une intensité.
+
+    ⚠⚠⚠ C'EST LA SECONDE VUE DU MÊME OBJET, et l'intensité est dérivée de la géométrie plutôt
+    que dessinée : un voxel vaut d'autant plus qu'il est proche de la feuille la plus proche.
+    Un volume dessiné à part mettrait ses feuilles ailleurs que le corpus, et le raccrochage
+    snapperait sur de la matière qui contredit ses propres ancres — en rendant des nombres
+    parfaitement stables.
+
+    ⚠⚠ Les blocs LOIN de l'objet sont déclarés ABSENTS, pas noirs. C'est ce que fait le vrai
+    dépôt hors du masque, et c'est le seul moyen d'exercer la mémorisation d'une absence : un
+    volume qui répondrait partout ne distinguerait jamais « rien ici » de « pas encore lu ».
+
+    ⚠ `pannes` injecte des échecs de réseau TRANSITOIRES, comptés et réessayés. Cette logique a
+    été écrite après un incident réel — un délai dépassé a jeté deux cent trente-deux blocs
+    déjà téléchargés — et rien ne pouvait l'exercer tant que la requête vivait dans le lecteur.
+    """
+    from le_raccrochage_a_la_matiere import CacheDisque, Volume  # noqa: PLC0415
+
+    g = geometrie_fabriquee() if g is None else g
+    meta = meta_fabriquee(bloc_vx)
+    foyer = g["foyer"]
+    # ⚠ L'épaisseur d'une feuille est DÉRIVÉE du pas, pas choisie : un sixième de l'écart
+    # inter-feuilles laisse entre deux crêtes un creux qui descend au bruit, ce qui est la
+    # condition pour qu'un détecteur de pics en trouve deux et non un plateau.
+    sigma = g["pas_vx"] / 6.0
+    restant = {"pannes": int(pannes)}
+    compte = {"blocs": 0, "absents": 0}
+
+    def chercher(adresse: str) -> tuple[bytes | None, str | None]:
+        if restant["pannes"] > 0:
+            restant["pannes"] -= 1
+            # ⚠ « le réseau n'a pas répondu » n'est PAS « absent du dépôt » : seul le second
+            # autorise à mémoriser un trou, et les confondre graverait une absence qui n'existe
+            # pas. Le lecteur doit réessayer celui-ci.
+            return None, "reseau"
+        cz, cy, cx = (int(x) for x in adresse.rsplit("/", 3)[1:])
+        z0, y0, x0 = cz * bloc_vx, cy * bloc_vx, cx * bloc_vx
+        coin = np.array([x0 + bloc_vx / 2, y0 + bloc_vx / 2, z0 + bloc_vx / 2])
+        rayon_bloc = bloc_vx * np.sqrt(3.0) / 2.0
+        if float(np.linalg.norm(coin - (foyer + np.array([g["rayon_vx"], 0.0, 0.0])))) \
+                > portee_vx + rayon_bloc:
+            compte["absents"] += 1
+            return None, "absent"
+        zz, yy, xx = np.meshgrid(np.arange(z0, z0 + bloc_vx, dtype=np.float64),
+                                 np.arange(y0, y0 + bloc_vx, dtype=np.float64),
+                                 np.arange(x0, x0 + bloc_vx, dtype=np.float64),
+                                 indexing="ij")
+        dx, dy, dz = xx - foyer[0], yy - foyer[1], zz - foyer[2]
+        r = np.hypot(dx, dy)
+        theta = np.arctan2(dy, dx)
+        # La feuille la plus proche se trouve par le rayon seul : l'ondulation vaut quelques
+        # voxels contre soixante d'écart, donc elle ne peut pas changer de voisine.
+        k = np.rint((r - g["rayon_vx"]) / g["pas_vx"] + g["milieu"])
+        ecart = r - rayon_de_spire(g, k, theta, dz)
+        val = 255.0 * np.exp(-(ecart / sigma) ** 2)
+        compte["blocs"] += 1
+        return val.astype(np.uint8).tobytes(), None
+
+    vol = Volume("fabrique://volume", meta, CacheDisque(actif=False), essais=essais,
+                 chercher=chercher)
+    vol.fabrique = compte
+    return vol
 
 def verifier() -> int:
     echecs = controles = 0
@@ -206,6 +322,64 @@ def verifier() -> int:
     loin = corpus_fabrique(decalage_vx=5000.0)
     v("un corpus décalé s'éloigne vraiment de la boîte",
       float(np.linalg.norm(loin["grilles"][1][0][7, 7] - c["grilles"][1][0][7, 7])) > 4000.0)
+
+    # ---- le volume fabriqué : la seconde vue du même objet ----
+    from le_raccrochage_a_la_matiere import lisser, pas_entre_pics  # noqa: PLC0415
+
+    g = geometrie_fabriquee()
+    vol = volume_fabrique(g)
+    axe = np.array([1.0, 0.0, 0.0])
+    coeur = g["foyer"] + g["rayon_vx"] * axe
+    t = np.arange(-160.0, 160.0, 1.0)
+    profil, lus = vol.lire(coeur[None, :] + t[:, None] * axe[None, :])
+    v("une ligne radiale traverse le volume fabriqué sans trou",
+      bool(lus.all()), f"{int(lus.sum())} sur {len(t)} · {vol.fabrique['blocs']} blocs")
+    v("... et elle y trouve du contraste, pas un plat",
+      profil.max() > 200 and profil.min() < 20, f"{profil.min():.0f} à {profil.max():.0f}")
+    # ⚠⚠⚠ LE CONTRÔLE QUI LIE LES DEUX VUES, et sans lui rien ne dirait qu'elles décrivent le
+    # même objet : un volume décalé d'un demi-pas laisserait passer tout le reste. La tolérance
+    # est DÉRIVÉE de l'ondulation — deux spires voisines peuvent glisser chacune de son
+    # amplitude et demie, donc leur écart lu vaut le pas à trois amplitudes près.
+    pic = pas_entre_pics(lisser(profil, 3), t)
+    v("le pas entre crêtes du volume est celui qui sépare les spires du corpus",
+      pic is not None and abs(pic - g["pas_vx"]) <= 3 * g["ondulation"],
+      f"{pic} contre {g['pas_vx']:.1f} voxels, tolérance {3 * g['ondulation']:.0f}")
+    # ⚠⚠ ET AU POINT PRÈS, pas seulement au pas : une feuille du corpus doit tomber sur une
+    # crête du volume, et le milieu entre deux feuilles dans un creux. Un volume décalé aurait
+    # le bon pas et la mauvaise phase.
+    a_, ok_ = corpus_fabrique()["grilles"][3]
+    pts = a_[ok_][:40]
+    radial = pts - g["foyer"]
+    radial[:, 2] = 0.0
+    radial /= np.linalg.norm(radial, axis=1, keepdims=True)
+    sur, _ = vol.lire(pts)
+    entre, _ = vol.lire(pts + radial * (g["pas_vx"] / 2.0))
+    v("une feuille du corpus tombe sur une crête du volume",
+      float(np.median(sur)) > 200, f"{np.median(sur):.0f}")
+    v("... et le milieu entre deux feuilles tombe dans un creux",
+      float(np.median(entre)) < 20, f"{np.median(entre):.0f}")
+
+    # ⚠⚠ LES TROIS RÉPONSES DU LECTEUR, qu'aucune batterie ne pouvait exercer tant que la
+    # requête vivait dedans : une absence se mémorise, un incident se réessaie, un incident qui
+    # persiste LÈVE. Les confondre fait soit jeter un balayage pour un hoquet, soit marteler le
+    # dépôt pour des blocs qui n'existent pas.
+    loin = volume_fabrique(g)
+    _, ok_loin = loin.lire((coeur + np.array([2000.0, 0.0, 0.0]))[None, :])
+    v("un bloc loin de l'objet est déclaré absent, et l'absence est mémorisée",
+      not ok_loin.any() and loin.absents > 0 and loin.reprises == 0,
+      f"absents {loin.absents} · reprises {loin.reprises}")
+    hoquet = volume_fabrique(g, pannes=2)
+    _, ok_h = hoquet.lire(coeur[None, :])
+    v("un incident de réseau est réessayé et compté",
+      bool(ok_h.all()) and hoquet.reprises == 2, str(hoquet.reprises))
+    tetu = volume_fabrique(g, pannes=10 ** 6, essais=2)
+    leve = None
+    try:
+        tetu.lire(coeur[None, :])
+    except RuntimeError as exc:
+        leve = str(exc)
+    v("... mais un incident qui persiste LÈVE, il ne devient pas une absence",
+      leve is not None and tetu.absents == 0, str(leve)[:60])
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0

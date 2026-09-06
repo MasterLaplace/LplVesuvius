@@ -1,12 +1,11 @@
 {
   "modules_qui_publient": 150,
-  "modules_en_dette": 70,
-  "fonctions_non_couvertes": 108,
+  "modules_en_dette": 67,
+  "fonctions_non_couvertes": 102,
   "tetes_de_chemin": {
     "alphas": 1,
     "auditer": 1,
     "balayer": 3,
-    "balayer_la_boite": 1,
     "barreau": 1,
     "batir": 1,
     "borne_des_appuis": 1,
@@ -35,7 +34,7 @@
     "lire_fragment": 1,
     "lire_tifxyz": 1,
     "lister": 2,
-    "mesurer": 16,
+    "mesurer": 13,
     "mesurer_pile": 1,
     "meta_de": 1,
     "normales_de": 1,
@@ -76,7 +75,7 @@
     },
     "nappe": {
       "publient": 29,
-      "en_dette": 15
+      "en_dette": 12
     },
     "rendu": {
       "publient": 2,
@@ -95,7 +94,7 @@
       "en_dette": 1
     }
   },
-  "part_en_dette": 0.467,
+  "part_en_dette": 0.447,
   "lignes": [
     {
       "fichier": "src/commun/audit_profils_plats.py",
@@ -1370,18 +1369,12 @@
     },
     {
       "fichier": "src/nappe/derouler_en_raccrochant.py",
-      "fonctions": 13,
-      "atteintes_par_main": 12,
-      "atteintes_par_la_batterie": 9,
-      "non_couvert": [
-        "balayer_la_boite",
-        "mesurer"
-      ],
-      "en_tete_de_chemin": [
-        "balayer_la_boite",
-        "mesurer"
-      ],
-      "en_dette": true
+      "fonctions": 15,
+      "atteintes_par_main": 14,
+      "atteintes_par_la_batterie": 13,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
     },
     {
       "fichier": "src/nappe/derouler_par_le_pas_normal.py",
@@ -1475,16 +1468,12 @@
     },
     {
       "fichier": "src/nappe/la_longueur_locale_du_pas.py",
-      "fonctions": 8,
-      "atteintes_par_main": 7,
-      "atteintes_par_la_batterie": 5,
-      "non_couvert": [
-        "mesurer"
-      ],
-      "en_tete_de_chemin": [
-        "mesurer"
-      ],
-      "en_dette": true
+      "fonctions": 9,
+      "atteintes_par_main": 8,
+      "atteintes_par_la_batterie": 7,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
     },
     {
       "fichier": "src/nappe/la_portee_des_piles_publiees.py",
@@ -1525,18 +1514,12 @@
     },
     {
       "fichier": "src/nappe/le_raccrochage_a_la_matiere.py",
-      "fonctions": 20,
-      "atteintes_par_main": 19,
-      "atteintes_par_la_batterie": 15,
-      "non_couvert": [
-        "_grilles",
-        "mesurer",
-        "url_du_volume"
-      ],
-      "en_tete_de_chemin": [
-        "mesurer"
-      ],
-      "en_dette": true
+      "fonctions": 22,
+      "atteintes_par_main": 20,
+      "atteintes_par_la_batterie": 19,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
     },
     {
       "fichier": "src/nappe/le_volume_du_maillage.py",

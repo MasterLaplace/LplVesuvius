@@ -4210,7 +4210,7 @@ vérification du dépôt lui-même.
 ---
 
 ### docs/80_la_batterie_natteint_pas_le_nombre.md
-- **lignes** : 170
+- **lignes** : 254
 - **nature** : MIXTE (RESULTAT sur le dépôt lui-même + remède livré sur un module + règle de garde)
 - **résumé** : Suite directe de [`61`](../61_les_batteries_qui_ne_pouvaient_pas_echouer.md), qui
   se terminait sur la limite que celui-ci franchit — *« ce contrôle dit qu'une batterie peut
@@ -4220,7 +4220,7 @@ vérification du dépôt lui-même.
   balayage syntaxique de tout l'arbre montre que ce n'est pas une exception, et le document
   livre le remède sur le module fautif, ses six sondes, puis un second constat trouvé en chemin.
 - **compte exact et cause** :
-  - **70 modules en dette sur 150 qui publient une mesure ou une figure** (47 %), **108
+  - **67 modules en dette sur 150 qui publient une mesure ou une figure** (45 %), **102
     fonctions** hors de portée, relevés par `src/depot/le_chemin_du_nombre_publie.py`, qui ferme
     le graphe d'appels de chaque module et rend `atteintes(main) − atteintes(verifier)`.
   - ⚠⚠ **La portée a été resserrée en cours de route** : la première règle comptait comme
@@ -4234,13 +4234,13 @@ vérification du dépôt lui-même.
     que ses batteries tournent hors ligne. Le chemin le plus important du module était donc le
     seul qu'on ne pouvait pas exercer.
 - **conclusions extractibles** :
-  - ⭐⭐ **La branche laissée dehors porte toujours le même nom** : `mesurer` dans **16** modules,
+  - ⭐⭐ **La branche laissée dehors porte toujours le même nom** : `mesurer` dans **13** modules,
     `dessiner` dans **10**, `rapporter` dans **6**, `lire` dans **4** — les deux premiers étant
     exactement les verbes qui publient, l'un le nombre, l'autre l'image.
-  - Dette non uniforme : `graine` **9 sur 10**, `encre` **23 sur 32**, `nappe` **15 sur 29**,
-    `figures` **10 sur 50**.
+  - Dette non uniforme : `graine` **9 sur 10**, `encre` **23 sur 32**, `nappe` **12 sur 29**
+    (elle était à 15), `figures` **10 sur 50**.
   - ⚠⚠ **Un chiffre calculé puis RETIRÉ de la mesure** : « les modules dont la tête de chemin est
-    dehors », 70 sur 70. C'est une **identité** — la couverture se propage vers le bas — donc un
+    dehors », 67 sur 67. C'est une **identité** — la couverture se propage vers le bas — donc un
     nombre qui ne peut prendre qu'une valeur et se lirait comme une découverte.
   - Le remède : la matière est injectée par paramètre, **pas le découpage** — boîte, seuil de
     cellules, choix des encadrements, marche, combinaison, pondération et enregistrement restent
@@ -4254,17 +4254,39 @@ vérification du dépôt lui-même.
     distant, et c'est là que le patch de septembre a laissé son enregistrement cassé.
   - **Traçabilité dans l'autre sens** : les clés que la figure lit sont extraites de **son arbre
     syntaxique** et confrontées à ce que la mesure publie — une liste dérivée, jamais recopiée.
-  - **Dix sondes**, chacune remettant un défaut : fixture aplatie, spires collées, boîte qui ne
-    découpe plus, seuil qui ne filtre plus, corpus publié qui gagne une clé, affichage lisant une
-    clé renommée, figure lisant une clé absente, spire de départ non refusée, demi-épaisseur
-    devenue épaisseur, témoin du pas nul figé. Toutes font rougir la batterie qu'elles visent.
+  - **Vingt-deux sondes**, chacune remettant un défaut — fixture aplatie, spires collées, volume
+    décalé d'un demi-pas, volume à un autre pas que le corpus, bloc lointain rendu noir au lieu
+    d'absent, absence réessayée, incident persistant devenu absence, lecture rendant le centre de
+    sa fenêtre, témoin mélangé qui ne l'est plus, hasard qui n'est plus tiré au hasard, balayage
+    rendu à l'envers, boîte qui ne découpe plus, seuil qui ne filtre plus, clé renommée dans un
+    affichage ou lue par une figure… Toutes font rougir la batterie qu'elles visent.
     ⚠ Une reste **verte** à bon droit : le contrôle de forme du corpus a déménagé chez son
     propriétaire, et le dupliquer chez ses cinq appelants ferait cinq copies d'une même exigence.
-  - ⭐ **La lecture est promue dès le deuxième appelant** : `src/nappe/le_corpus_des_spires.py`
-    porte l'unique lecteur du corpus et l'unique fixture, là où cinq modules de `src/nappe/` en
-    avaient chacun leur copie — deux dérouleurs comparés sur deux lectures différentes mesurent
-    d'abord leur désaccord de lecture. Deux modules réparés (`derouler_des_deux_bords` 32 → 46
-    contrôles, `derouler_par_le_pas_normal` 9 → 17).
+  - ⭐ **La matière est promue dès le deuxième appelant** : `src/nappe/le_corpus_des_spires.py`
+    porte l'unique lecteur du corpus, l'unique fixture de spires **et** le volume fabriqué, là où
+    cinq modules de `src/nappe/` avaient chacun leur copie du lecteur — deux dérouleurs comparés
+    sur deux lectures différentes mesurent d'abord leur désaccord de lecture. **Cinq modules
+    réparés** : `derouler_des_deux_bords` 32 → 46, `derouler_par_le_pas_normal` 9 → 17,
+    `le_raccrochage_a_la_matiere` 46 → 54, `la_longueur_locale_du_pas` 20 → 30,
+    `derouler_en_raccrochant` 63 → 75 contrôles.
+  - ⚠⚠⚠ **DEUX VUES D'UN MÊME OBJET, PAS DEUX OBJETS** : les spires sont des **surfaces**, le
+    volume une **intensité**. Décrire l'objet deux fois mettrait ses feuilles ailleurs que le
+    volume ne les met, et le raccrochage snapperait sur de la matière qui contredit ses ancres,
+    en rendant des nombres parfaitement stables. La géométrie est dite une fois, l'intensité en
+    est **dérivée**, et le contrôle qui les lie est que le gabarit lu autour d'une spire ait sa
+    **crête sur zéro**.
+  - **Trois ronds-trips** : feuilles injectées à 135,5 µm → « ne pas bouger » coûte **136,3 µm**,
+    longueur lue **136,1 µm**, pas entre crêtes **63,0 voxels** contre 61,2. Tolérance **dérivée**
+    de l'ondulation (trois amplitudes), jamais choisie.
+  - Le seul point du lecteur de volume qui touche le monde — la requête — est devenu injectable,
+    donc ses **trois réponses** sont exercées pour la première fois : une absence se mémorise, un
+    incident se réessaie, un incident qui persiste **lève**. Cette logique avait été écrite après
+    un incident réel (232 blocs jetés) sans qu'aucune batterie ne puisse l'atteindre.
+  - ⚠⚠ **Deux contrôles qui ne pouvaient pas échouer, trouvés par les sondes** : un refus « hors
+    de la boîte » où seules les spires étaient déplacées — le volume n'ayant rien à lire là-bas,
+    la mesure refusait pour **absence de matière** — et une inégalité **large** qu'un découpage
+    inerte satisfait, devenue stricte (20 contre 196 cellules). Même défaut de méthode : un
+    contrôle dont on n'a pas cherché par quelle autre voie il pourrait passer au vert.
   - ⚠⚠ Second constat, trouvé en cherchant où inscrire la batterie : **44 batteries que
     `temoins.sh` ne lançait pas**, dont toute la campagne de déroulage et ses figures — le
     harnais rendait « 184 batteries ALL PASS » sans les voir. Le garde-fou qui les nomme existait
@@ -4281,8 +4303,8 @@ vérification du dépôt lui-même.
   - §5 — la portée de l'instrument est bornée contre lui-même : il dit qu'une batterie traverse
     une fonction, pas qu'elle y vérifie quoi que ce soit.
 - **preuve de lecture intégrale** :
-  - l. 141 : `il n'avait simplement pas tourné depuis, le harnais complet étant long. Un contrôle qu'on ne`
-  - l. 156 : `tourne. L'erreur va dans le sens prudent : la dette est **surestimée**, jamais cachée.`
+  - l. 225 : `il n'avait simplement pas tourné depuis, le harnais complet étant long. Un contrôle qu'on ne`
+  - l. 240 : `tourne. L'erreur va dans le sens prudent : la dette est **surestimée**, jamais cachée.`
 
 ---
 
@@ -5496,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 3018
+- **lignes** : 3037
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5570,11 +5592,12 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     l'auteur) ; le second papier de `72`, qui est ⚠⚠⚠ **une occasion de publication et non un
     progrès vers le prix** et n'avance qu'avec C ; H3 et H6 de `69`, répondues par le dépôt.
   - ⚠⚠⚠ **D4 ouverte le 2026-09-06** — *le chemin qui produit le nombre publié n'est atteint
-    par aucune batterie* : **70 modules sur 150**, **108 fonctions**, et la branche laissée
-    dehors porte toujours le même nom (`mesurer` dans 16, `dessiner` dans 10). Deux modules sont
-    réparés et la lecture du corpus **promue** en un lecteur unique (matière injectée par
-    paramètre, découpage laissé dedans, batteries 32 → **46** et 9 → **17 contrôles**, dix sondes
-    qui les font rougir) ; en cherchant où l'inscrire, **44 batteries que
+    par aucune batterie* : **67 modules sur 150**, **102 fonctions**, et la branche laissée
+    dehors porte toujours le même nom (`mesurer` dans 13, `dessiner` dans 10). **Cinq modules**
+    sont réparés et la matière **promue** en un lecteur unique plus deux fixtures qui décrivent
+    le même objet (matière injectée par paramètre, découpage laissé dedans, batteries 32 → 46,
+    9 → 17, 46 → 54, 20 → 30 et 63 → **75 contrôles**, vingt-deux sondes qui les font rougir) ;
+    en cherchant où l'inscrire, **44 batteries que
     `temoins.sh` ne lançait pas** sont apparues. Document dédié :
     [`80`](../80_la_batterie_natteint_pas_le_nombre.md).
   - ✅✅ **D3 refermé le 2026-09-05** : `41 → 32 → 30 → 3` scripts sans appelant, et les onze
@@ -6054,7 +6077,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
   - ligne 2345 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 3018 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 3037 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

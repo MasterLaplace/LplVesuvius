@@ -2780,7 +2780,7 @@ mesurer est le piège habituel : `concordance_des_plans` la mesure désormais.
 
 ---
 
-### D4 ⚠⚠⚠ — 70 batteries vertes sur 150 n'atteignent pas le nombre qu'elles publient
+### D4 ⚠⚠⚠ — 67 batteries vertes sur 150 n'atteignent pas le nombre qu'elles publient
 
 Document dédié : [`80`](80_la_batterie_natteint_pas_le_nombre.md). Suite de
 [`61`](61_les_batteries_qui_ne_pouvaient_pas_echouer.md), dont il franchit la limite finale —
@@ -2804,34 +2804,48 @@ sans rien exécuter) :
 | | |
 |---|---:|
 | modules qui publient une mesure ou une figure | **150** |
-| dont la batterie n'atteint pas ce chemin | **70** (47 %) |
-| fonctions hors de portée | **108** |
+| dont la batterie n'atteint pas ce chemin | **67** (45 %) |
+| fonctions hors de portée | **102** |
 
 ⚠⚠ **La portée a été resserrée après le premier chiffre**, et il était trop large : la règle
 comptait comme publieur tout module *mentionnant* `docs/mesures`, donc aussi les purs lecteurs.
 Le signe retenu est l'**écriture**, sous ses deux formes — sérialiser et écrire un fichier (une
 mesure), ou enregistrer une image (une figure).
 
-⭐ **La branche laissée dehors porte toujours le même nom** : `mesurer` dans **16** modules,
+⭐ **La branche laissée dehors porte toujours le même nom** : `mesurer` dans **13** modules,
 `dessiner` dans **10**, `rapporter` dans **6**. Ce sont les deux verbes qui publient — l'un rend
 le nombre, l'autre l'image. Par famille : `graine` **9/10**, `encre` **23/32**, `nappe`
-**15/29**, `figures` **10/50**.
+**12/29** (elle était à 15), `figures` **10/50**.
 
 ⚠⚠ **Un chiffre calculé puis retiré** : « les modules dont la tête de chemin est dehors », 67 sur
-70. C'est une **identité** — la couverture se propage vers le bas — donc un nombre qui ne peut
+67. C'est une **identité** — la couverture se propage vers le bas — donc un nombre qui ne peut
 prendre qu'une valeur et se lirait comme une découverte.
 
-**Réparé, deux modules et un lecteur promu.** `derouler_des_deux_bords.py` et
-`derouler_par_le_pas_normal.py` reçoivent leur matière par paramètre, le défaut restant le dépôt
+**Réparé, cinq modules et une matière fabriquée.** `derouler_des_deux_bords`,
+`derouler_par_le_pas_normal`, `le_raccrochage_a_la_matiere`, `la_longueur_locale_du_pas` et
+`derouler_en_raccrochant` reçoivent leur matière par paramètre, le défaut restant le dépôt
 distant (donc les nombres publiés ne bougent pas d'une virgule). Ce qui est injectable est la
 **matière**, pas le découpage : boîte, seuil de cellules, encadrements, marche, combinaison,
-pondération et enregistrement restent dans `mesurer`. Les batteries passent de 32 à **46** et de
-9 à **17 contrôles**.
+pondération et enregistrement restent dans `mesurer`. Les batteries : 32 → **46**, 9 → **17**,
+46 → **54**, 20 → **30**, 63 → **75**.
 
-⭐ Et la lecture est **promue dès le deuxième appelant** : `src/nappe/le_corpus_des_spires.py`
-(**8 contrôles**) porte l'unique lecteur du corpus et l'unique fixture. Cinq modules de
-`src/nappe/` en avaient chacun leur copie, et deux dérouleurs comparés sur deux lectures
-différentes mesurent d'abord leur désaccord de lecture.
+⭐ Et la matière est **promue dès le deuxième appelant** : `src/nappe/le_corpus_des_spires.py`
+(**16 contrôles**) porte l'unique lecteur du corpus, l'unique fixture de spires **et** le volume
+fabriqué. Cinq modules de `src/nappe/` avaient chacun leur copie du lecteur, et deux dérouleurs
+comparés sur deux lectures différentes mesurent d'abord leur désaccord de lecture.
+
+⚠⚠⚠ **DEUX VUES D'UN MÊME OBJET, PAS DEUX OBJETS.** Un dérouleur lit les spires comme des
+**surfaces** et le volume comme une **intensité** : décrire l'objet deux fois ferait un corpus
+dont les feuilles ne sont pas là où le volume les met, et le raccrochage snapperait sur de la
+matière qui contredit ses ancres — en rendant des nombres parfaitement stables. La géométrie est
+dite **une fois**, l'intensité en est **dérivée**. Le contrôle qui lie les deux : le gabarit lu
+autour d'une spire doit avoir sa **crête sur zéro**.
+
+**Trois ronds-trips** : on injecte des feuilles à 135,5 µm, la mesure rend 136,3 µm (ne pas
+bouger), 136,1 µm (longueur lue) et 63,0 voxels contre 61,2 (pas entre crêtes). Tolérance
+**dérivée** de l'ondulation, jamais choisie. Et les trois réponses du lecteur de volume — une
+absence se mémorise, un incident se réessaie, un incident qui persiste **lève** — sont exercées
+pour la première fois, alors qu'elles avaient été écrites après un incident réel.
 
 ⚠⚠⚠ **La fixture doit être ONDULÉE** : des spires parfaitement décalées du pas sont atteintes
 *exactement* par un pas normal, donc toutes les erreurs vaudraient zéro et chaque comparaison
@@ -2850,11 +2864,16 @@ n'avait pas tourné, le harnais complet étant long. Un contrôle qu'on ne lance
 durée où on ne le lance pas, exactement un contrôle absent. Les 44 ont été lancées **une par une
 avant d'être inscrites** : toutes vertes, la plus lente en soixante secondes.
 
-**Reste à faire** : 70 modules. L'ordre suit la mesure — `mesurer` d'abord (16), puis
-`dessiner` (10), c'est-à-dire le nombre puis l'image. ⚠ Les suivants dans la famille du
-déroulage (`la_longueur_locale_du_pas`, `le_raccrochage_a_la_matiere`, `derouler_en_raccrochant`)
-lisent **le volume brut** en plus du corpus : ils demandent une seconde matière fabriquée, un
-volume, et c'est la tranche d'après.
+⚠⚠ **Deux de mes contrôles ne pouvaient pas échouer, et ce sont les sondes qui l'ont dit.** Un
+refus « hors de la boîte » où seules les spires étaient déplacées : le volume n'ayant rien à lire
+là-bas, la mesure refusait pour **absence de matière**, et retirer le découpage laissait le
+contrôle vert. Et une inégalité **large** (« pas moins de cellules ») qu'un découpage inerte
+satisfait, devenue stricte. Les deux sont le même défaut de méthode : un contrôle dont on n'a pas
+cherché par quelle autre voie il pourrait passer au vert.
+
+**Reste à faire** : 67 modules. L'ordre suit la mesure — `mesurer` d'abord (13), puis `dessiner`
+(10), c'est-à-dire le nombre puis l'image. La famille `graine` (**9 sur 10**) et `encre`
+(**23 sur 32**) sont les prochaines par densité.
 
 ```
 uv run python src/depot/le_chemin_du_nombre_publie.py   # le balayage, par famille et par nom

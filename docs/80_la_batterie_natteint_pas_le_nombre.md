@@ -1,4 +1,4 @@
-# 80 — Soixante-dix batteries vertes n'atteignent pas le nombre qu'elles publient
+# 80 — Soixante-sept batteries vertes n'atteignent pas le nombre qu'elles publient
 
 > ⚠⚠⚠ **Le 2026-09-05, un patch appliqué à moitié a laissé `derouler_des_deux_bords.py`
 > avec un enregistrement qui référençait trois variables inexistantes — et la batterie est
@@ -33,8 +33,8 @@ pas exercer.
 | | |
 |---|---:|
 | modules qui publient une mesure ou une figure | **150** |
-| dont la batterie n'atteint pas ce chemin | **70** (47 %) |
-| fonctions hors de portée, au total | **108** |
+| dont la batterie n'atteint pas ce chemin | **67** (45 %) |
+| fonctions hors de portée, au total | **102** |
 
 ⚠⚠ **La portée a été resserrée en cours de route, et le premier chiffre publié était trop
 large.** Ma première règle comptait comme publieur tout module *mentionnant* `docs/mesures` —
@@ -51,7 +51,7 @@ exercées, comptées par nom :
 
 | branche | modules |
 |---|---:|
-| `mesurer` | **16** |
+| `mesurer` | **13** |
 | `dessiner` | **10** |
 | `rapporter` | 6 |
 | `lire` | 4 |
@@ -59,10 +59,11 @@ exercées, comptées par nom :
 Ce sont les deux verbes qui **publient** : l'un rend le nombre, l'autre l'image.
 
 La dette n'est pas uniforme non plus — `graine` en porte 9 sur 10 et `encre` 23 sur 32, là où
-`figures` n'en porte que 10 sur 50.
+`figures` n'en porte que 10 sur 50. `nappe`, la famille du déroulage, est passée de 15 à
+**12 sur 29** en deux lots.
 
 ⚠ **Un chiffre a été retiré de la mesure après avoir été calculé** : « les modules dont la
-tête de chemin est dehors », 70 sur 70. Ce n'est pas un constat, c'est une **identité** — la
+tête de chemin est dehors », 67 sur 67. Ce n'est pas un constat, c'est une **identité** — la
 couverture se propage vers le bas, donc si une fonction quelconque est hors de portée, celle
 que `main` appelle en premier sur ce chemin l'est forcément. Un nombre qui ne peut prendre
 qu'une valeur se lit comme une découverte et n'en est pas une.
@@ -76,6 +77,49 @@ dépôt distant : **le nombre publié ne bouge pas d'une virgule.**
 porte l'unique lecteur du corpus (l'index des spires, leur grille, l'écart inter-feuilles) et
 l'unique fixture hors ligne. Cinq modules de `src/nappe/` en avaient chacun leur copie — et deux
 dérouleurs comparés sur deux lectures différentes mesurent d'abord leur désaccord de lecture.
+
+### ⭐⭐ La seconde matière : un volume fabriqué, seconde vue du même objet
+
+Trois modules de la famille lisent **le volume brut** en plus des spires. Le seul point du
+lecteur qui touche le monde — la requête — est devenu **injectable** ; tout le reste (les bornes,
+le groupement par bloc, le cache, les reprises, la mémorisation d'une absence, l'interpolation)
+est de l'arithmétique, et rien de tout ça ne pouvait tourner hors ligne.
+
+⚠⚠⚠ **DEUX VUES D'UN MÊME OBJET, PAS DEUX OBJETS.** Un dérouleur lit les spires comme des
+**surfaces** et le volume comme une **intensité**. Décrire l'objet deux fois ferait un corpus
+dont les feuilles ne sont pas là où le volume les met : le raccrochage snapperait sur de la
+matière qui contredit ses propres ancres, en rendant des nombres parfaitement stables et
+absurdes. La géométrie est donc dite **une fois** (`geometrie_fabriquee`), et les deux vues la
+lisent. L'intensité d'un voxel est **dérivée** de sa distance à la feuille la plus proche, jamais
+dessinée.
+
+Le contrôle qui lie les deux vues est celui sans lequel rien ne dirait qu'elles décrivent le même
+objet : le gabarit lu **autour d'une spire** doit avoir sa crête sur **zéro**. Une sonde qui
+décale le volume d'un demi-pas le fait tomber, et tout le reste de la mesure tournerait quand
+même.
+
+**Trois ronds-trips**, chacun injectant une grandeur connue et la relisant à travers la mesure :
+
+| module | on injecte | la mesure rend |
+|---|---|---|
+| `le_raccrochage_a_la_matiere` | des feuilles à 135,5 µm | ne pas bouger coûte **136,3 µm** |
+| `la_longueur_locale_du_pas` | des feuilles à 135,5 µm | longueur lue **136,1 µm** |
+| `le_corpus_des_spires` | des feuilles à 61,2 voxels | pas entre crêtes **63,0** |
+
+⚠ La tolérance est **dérivée**, pas choisie : deux feuilles voisines glissent chacune de son
+amplitude d'ondulation et demie, donc leur écart local vaut le pas à **trois amplitudes** près.
+
+⚠⚠ **Et le contrôle qui discrimine, pour la longueur locale** : un lecteur qui rendrait le centre
+de sa fenêtre de recherche retrouverait AUSSI le nominal. On donne donc au volume un autre écart
+que celui des spires — les spires ne disent que *où regarder* — et la lecture doit **suivre la
+matière**. Elle ne la suit que partiellement, et c'est dit plutôt que caché : les ancres ne
+tombent plus sur des crêtes, donc le gabarit n'est plus un profil de feuille. Ce qui est vérifié
+est le **sens** du déplacement, pas son ampleur.
+
+Les trois réponses du lecteur sont exercées elles aussi, et elles échouent différemment : une
+**absence** se mémorise, un **incident** se réessaie, un incident qui **persiste lève**. Cette
+logique avait été écrite après un incident réel — un délai dépassé a jeté deux cent trente-deux
+blocs déjà téléchargés — sans qu'aucune batterie ne puisse l'exercer.
 
 ⚠⚠ **Ce qui est injectable est la MATIÈRE, pas le découpage.** La boîte, le seuil de
 cellules, le choix des encadrements, le signe de la normale, la marche, la combinaison, la
@@ -105,11 +149,23 @@ du masque tour après tour, le **témoin du pas nul qui s'éloigne** — sans lu
 atteint la spire » serait satisfait par un dérouleur immobile —, et le refus d'une spire de
 départ absente.
 
-`le_corpus_des_spires` (**8 contrôles**) garde ce qui appartient au corpus lui-même : la fixture
-a exactement la forme du vrai lecteur (clés lues dans l'arbre de `corpus_publie`), les spires
-sont espacées du pas, et **aucune n'est un décalage exact de sa voisine**.
+`le_corpus_des_spires` (**16 contrôles**) garde ce qui appartient à la matière elle-même : la
+fixture a exactement la forme du vrai lecteur (clés lues dans l'arbre de `corpus_publie`), les
+spires sont espacées du pas, **aucune n'est un décalage exact de sa voisine**, et le volume
+fabriqué tombe sur les mêmes feuilles que le corpus.
 
-### Les six sondes
+`le_raccrochage_a_la_matiere` (46 → **54**), `la_longueur_locale_du_pas` (20 → **30**) et
+`derouler_en_raccrochant` (63 → **75**) exercent chacun leur mesure de bout en bout, leur
+affichage, et leur refus.
+
+⚠⚠ Pour `derouler_en_raccrochant`, le **balayage de boîte** est exercé aussi — c'est lui qui a
+rétracté une conclusion publiée, donc c'est le dernier endroit du module qu'on peut se permettre
+de ne jamais lancer. Et le seul verdict vérifié sur la fixture est celui qui doit tenir sur
+n'importe quelle matière : **un décalage tiré au hasard ne peut pas battre une méthode**. Quel
+contendant gagne sur une fixture ne dit rien, et l'épingler ferait de la batterie une mesure de
+la fixture.
+
+### Les vingt-deux sondes
 
 ⚠⚠ Une batterie verte au premier essai ne prouve rien. Chaque défaut a été **remis** :
 
@@ -125,11 +181,39 @@ sont espacées du pas, et **aucune n'est un décalage exact de sa voisine**.
 | la spire absente n'est plus refusée | rouge — *une spire de départ absente est refusée* |
 | la demi-épaisseur devient l'épaisseur | rouge — *la demi-épaisseur est la moitié de l'écart lu* |
 | le témoin du pas nul est figé | rouge — *le témoin s'éloigne tour après tour* |
+| le volume est décalé d'un demi-pas | rouge — *le gabarit a sa crête sur la spire* |
+| le volume a un autre pas que le corpus | rouge — *le pas entre crêtes est celui des spires* |
+| un bloc loin rend du noir au lieu d'une absence | rouge — *l'absence est mémorisée* |
+| une absence est réessayée comme un incident | rouge — *une absence n'est PAS réessayée* |
+| un incident persistant devient une absence | rouge — *un incident qui persiste LÈVE* |
+| la lecture rend le centre de sa fenêtre | rouge — *un volume plus écarté se lit plus long* |
+| le témoin mélangé n'est plus mélangé | rouge — *le raccrochage bat son témoin* |
+| le hasard n'est plus tiré au hasard | rouge — *le hasard est le pire de tous* |
+| le balayage rend ses points à l'envers | rouge — *une boîte plus large contient plus* |
 
 ⚠ Une sonde a rendu un verdict **vert** et avait raison : « le corpus publié gagne une clé » ne
 fait plus rougir `derouler_des_deux_bords`, parce que ce contrôle a déménagé chez le
 propriétaire du corpus. Le dupliquer chez chacun de ses cinq appelants ferait cinq copies d'une
 même exigence, libres de diverger.
+
+### ⚠⚠ Deux de mes contrôles ne pouvaient pas échouer, et ce sont les sondes qui l'ont dit
+
+**Un refus satisfait pour la mauvaise raison.** J'avais écrit, dans `la_longueur_locale_du_pas`,
+« un corpus posé hors de la boîte est REFUSÉ » — en ne déplaçant que **les spires**. Le volume
+fabriqué, lui, n'avait rien à lire là-bas, donc la mesure refusait pour **absence de matière** et
+non parce que la boîte l'avait écartée : une sonde qui retirait le découpage laissait le contrôle
+vert. Les deux matières sont désormais déplacées **ensemble** — les feuilles existent et se
+lisent, elles sont seulement ailleurs que la boîte.
+
+**Une inégalité large qu'une boîte inerte satisfaisait.** Dans le balayage de
+`derouler_en_raccrochant`, « une boîte plus large ne contient jamais **moins** de cellules » est
+satisfait par un découpage qui ne mord pas du tout — les deux points rendent alors le même
+compte. La fixture débordant de la petite boîte, la comparaison est devenue **stricte** (20 contre
+196 cellules), et la sonde tombe.
+
+⭐ Les deux sont le même défaut de méthode : **un contrôle dont on n'a pas cherché par quelle
+autre voie il pourrait passer au vert**. C'est pour ça que chaque batterie de ce lot a été
+sondée, et pas seulement lancée.
 
 ## 4. ⚠⚠ Le second constat, trouvé en chemin : quarante-quatre batteries que rien ne lançait
 

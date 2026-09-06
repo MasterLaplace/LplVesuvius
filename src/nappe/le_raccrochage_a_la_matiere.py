@@ -172,6 +172,13 @@ class CacheDisque:
                     blocs_en_memoire=len(self.memoire))
 
 
+def _chercher_en_ligne(adresse: str) -> tuple[bytes | None, str | None]:
+    """La requête réseau, isolée pour qu'un appelant puisse en mettre une autre à sa place."""
+    import tracecheck as tc  # noqa: PLC0415
+
+    return tc.get_with_reason(adresse, 120.0)
+
+
 class Volume:
     """Le volume de scan, lu bloc par bloc, avec interpolation trilinéaire.
 
@@ -184,8 +191,16 @@ class Volume:
     minutes pour des octets déjà en mémoire.
     """
 
-    def __init__(self, url: str, meta: dict, cache, essais: int = 4) -> None:
+    def __init__(self, url: str, meta: dict, cache, essais: int = 4,
+                 chercher=None) -> None:
         self.url = url
+        # ⚠⚠⚠ LE SEUL POINT DE CE FICHIER QUI TOUCHE LE MONDE, ET IL EST INJECTABLE. Tout le
+        # reste — les bornes, le groupement par bloc, le cache, les reprises, la mémorisation
+        # d'une absence, l'interpolation — est de l'arithmétique, donc testable ; mais tant que
+        # la requête vivait DEDANS, rien de tout ça ne pouvait tourner hors ligne. C'est la
+        # dette mesurée dans `80`, et la logique de reprise a été écrite après un vrai incident
+        # (deux cent trente-deux blocs jetés) sans qu'aucune batterie ne puisse l'exercer.
+        self.chercher = _chercher_en_ligne if chercher is None else chercher
         self.meta = meta
         self.cache = cache
         self.forme = tuple(meta["shape"])
@@ -208,7 +223,7 @@ class Volume:
             return self.cache[cle]
         brut = raison = None
         for tentative in range(self.essais):
-            brut, raison = tc.get_with_reason(f"{self.url}/{cle}", 120.0)
+            brut, raison = self.chercher(f"{self.url}/{cle}")
             # ⚠⚠ « absent du dépôt » et « le réseau n'a pas répondu » sont deux faits
             # différents. Seul un 404/403 autorise à mémoriser une absence ; mémoriser un
             # incident de réseau graverait un trou qui n'existe pas. Et un incident se
@@ -514,22 +529,16 @@ def boite_riche(nuages: dict[int, np.ndarray], cote: float,
     return meilleur[2], meilleur[3]
 
 
-def _grilles(rangs: list[int] | None = None) -> dict[int, tuple[np.ndarray, np.ndarray]]:
-    from le_pas_normal_atteint_la_spire import grille  # noqa: PLC0415
-    from les_wraps_publies import VOLUME, VOXEL_UM, wraps_du_fragment  # noqa: PLC0415
+def _grilles(rangs: list[int] | None = None,
+             corpus: dict | None = None) -> dict[int, tuple[np.ndarray, np.ndarray]]:
+    from le_corpus_des_spires import corpus_publie  # noqa: PLC0415
 
-    out = {}
-    for w in wraps_du_fragment():
-        if rangs is not None and w["rang"] not in rangs:
-            continue
-        g = grille(w, VOLUME, VOXEL_UM)
-        if g is not None:
-            out[w["rang"]] = g
-    return out
+    c = corpus_publie() if corpus is None else corpus
+    return {r: g for r, g in c["grilles"].items() if rangs is None or r in rangs}
 
 
 def mesurer(echantillon: int = 2000, graine: int = 42, minimum_par_spire: int = 30,
-            cache_actif: bool = True) -> dict:
+            cache_actif: bool = True, corpus: dict | None = None, volume=None) -> dict:
     """Le pas normal, avec et sans raccrochage, jugé sur les spires publiées.
 
     ⚠⚠ UNE PAIRE N'EST RETENUE QUE SI LA CIBLE PASSE DANS LA BOÎTE, et le critère est
@@ -537,18 +546,26 @@ def mesurer(echantillon: int = 2000, graine: int = 42, minimum_par_spire: int = 
     Sans lui, la paire 10→11 entrait avec une erreur de mille micromètres — non parce que le
     raccrochage échoue, mais parce que la spire 11 publiée ne couvre pas cette région. Écarter
     sur l'erreur aurait été choisir sur le résultat ; écarter sur la présence ne l'est pas.
+
+    ⚠⚠ DEUX MATIÈRES SONT INJECTABLES, et il en faut deux : les **spires** disent d'où partir
+    et où arriver, le **volume** dit sur quoi se raccrocher. Les défauts sont ceux du dépôt
+    distant, donc le nombre publié ne bouge pas ; la batterie en fournit deux fabriqués, qui
+    décrivent le même objet.
+
+    ⚠ `accorde_aux_spires` n'est vérifié que pour le volume PUBLIÉ : il confronte l'horodatage
+    et la taille de voxel que le nom du zarr déclare à ce que les spires déclarent, et un
+    volume fabriqué n'a pas de nom — l'y confronter reviendrait à vérifier la fixture.
     """
+    from le_corpus_des_spires import corpus_publie  # noqa: PLC0415
     from le_pas_normal_atteint_la_spire import distance_a, normales  # noqa: PLC0415
-    from les_wraps_publies import VOLUME, VOXEL_UM  # noqa: PLC0415
 
-    import tracecheck as tc  # noqa: PLC0415
-
-    if not accorde_aux_spires():
+    c = corpus_publie() if corpus is None else corpus
+    VOLUME, VOXEL_UM = c["volume"], float(c["voxel_um"])
+    if volume is None and not accorde_aux_spires():
         raise RuntimeError(f"le volume {ZARR} n'est pas celui des spires ({VOLUME})")
     if not WRAPS.is_file():
         raise RuntimeError(f"mesure absente : {WRAPS} — lancer les_wraps_publies d'abord")
-    lu = json.loads(WRAPS.read_text())
-    ecart_um = float(lu["resume"]["1"]["mediane_um"])
+    ecart_um = float(c["ecart_um"])
     pas_vx = ecart_um / VOXEL_UM
     # ⚠⚠ DÉRIVÉE, JAMAIS CHOISIE : une demi-épaisseur de feuille est la seule largeur où
     # exactement une feuille est à portée. Plus large, la voisine entre dans la fenêtre — et
@@ -556,12 +573,16 @@ def mesurer(echantillon: int = 2000, graine: int = 42, minimum_par_spire: int = 
     demi_vx = pas_vx / 2.0
     demi_gab = round(demi_vx / 2.0)
 
-    url = url_du_volume()
-    meta = tc.array_meta(url, 0, 120)
-    cache = CacheDisque(actif=cache_actif)
-    vol = Volume(url, meta, cache)
+    if volume is None:
+        import tracecheck as tc  # noqa: PLC0415
 
-    grilles = _grilles()
+        url = url_du_volume()
+        vol = Volume(url, tc.array_meta(url, 0, 120), CacheDisque(actif=cache_actif))
+    else:
+        vol = volume
+    cache = vol.cache
+
+    grilles = _grilles(corpus=c)
     nuages = {r: a[ok] for r, (a, ok) in grilles.items()}
     centre = np.array(BOITE_CENTRE)
     lo, hi = centre - BOITE_COTE / 2, centre + BOITE_COTE / 2
@@ -1010,6 +1031,67 @@ def verifier() -> int:
     c, n = boite_riche(faux, 10.0, reference=7, essais=5)
     v("la boîte se pose là où deux spires se croisent", n[1] >= 30 and n[7] >= 30, str(n))
 
+    # ⚠⚠⚠ LE CHEMIN QUI PRODUIT LE NOMBRE PUBLIÉ, HORS LIGNE, avec ses DEUX matières : les
+    # spires disent d'où partir et où arriver, le volume sur quoi se raccrocher. Elles
+    # décrivent le même objet — `le_corpus_des_spires` ne le décrit qu'une fois —, sans quoi le
+    # raccrochage snapperait sur de la matière qui contredit ses propres ancres.
+    import contextlib  # noqa: PLC0415
+    import io as _io  # noqa: PLC0415
+
+    from le_corpus_des_spires import (  # noqa: PLC0415
+        corpus_fabrique, geometrie_fabriquee, volume_fabrique,
+    )
+
+    g0 = geometrie_fabriquee()
+    fab = mesurer(echantillon=60, corpus=corpus_fabrique(), volume=volume_fabrique(g0))
+    v("la mesure tourne de bout en bout sur des matières fabriquées, sans rien lire",
+      fab["paires"] > 0, f"{fab['paires']} paires")
+    # ⚠⚠⚠ LE ROND-TRIP : ne pas bouger laisse exactement une feuille d'écart, donc l'erreur du
+    # témoin « sur place » doit rendre le pas qu'on a injecté. La tolérance est DÉRIVÉE de
+    # l'ondulation — deux feuilles voisines glissent chacune de son amplitude et demie — et non
+    # choisie pour que le chiffre du jour passe.
+    marge = 3 * g0["ondulation"] * g0["voxel_um"]
+    v("... et ne pas bouger laisse exactement le pas qu'on a injecté",
+      abs(fab["sur_place_median_um"] - g0["ecart_um"]) <= marge,
+      f"{fab['sur_place_median_um']} contre {g0['ecart_um']}, marge {marge:.1f} µm")
+    # ⚠⚠⚠ ET LE CONTRÔLE QUI LIE LES DEUX MATIÈRES : le gabarit est lu AUTOUR d'une spire, donc
+    # sa crête doit tomber sur zéro. Un volume dont les feuilles seraient ailleurs que les
+    # spires rendrait une crête décalée — et tout le reste de la mesure tournerait quand même.
+    v("le gabarit lu autour d'une spire a sa crête sur la spire",
+      abs(fab["convention"]["crete_um"]) <= marge,
+      f"crête à {fab['convention']['crete_um']} µm")
+    v("... et il porte du contraste, donc il y a bien une feuille à voir",
+      fab["convention"]["contraste"] > 50, str(fab["convention"]["contraste"]))
+    # ⚠⚠ LE TÉMOIN DU GABARIT MÉLANGÉ doit être PIRE : sans lui, « le raccrochage aide » serait
+    # satisfait par n'importe quel déplacement dans la fenêtre.
+    v("le raccrochage bat son témoin de gabarit mélangé",
+      fab["raccroche_median_um"] < fab["temoin_gabarit_melange_median_um"],
+      f"{fab['raccroche_median_um']} contre {fab['temoin_gabarit_melange_median_um']}")
+    v("le résultat est sérialisable tel quel, sans type qui traîne",
+      isinstance(json.dumps(fab), str))
+    tampon, souci = _io.StringIO(), None
+    try:
+        with contextlib.redirect_stdout(tampon):
+            afficher(fab)
+    except Exception as exc:  # noqa: BLE001
+        souci = f"{type(exc).__name__}: {exc}"
+    v("l'affichage tourne sur ce résultat et va jusqu'à son verdict",
+      souci is None and "sous l'étalon" in tampon.getvalue(),
+      souci or f"{len(tampon.getvalue().splitlines())} lignes")
+    # ⚠⚠ LE REFUS, ET IL EST DISCRIMINANT : les DEUX matières sont déplacées ensemble, donc les
+    # feuilles existent et se lisent — elles sont seulement ailleurs que la boîte. Ne déplacer
+    # que les spires ferait refuser pour absence de matière, et une sonde qui retirerait le
+    # découpage laisserait le contrôle vert.
+    ailleurs = geometrie_fabriquee(decalage_vx=5000.0)
+    refus = None
+    try:
+        mesurer(echantillon=60, corpus=corpus_fabrique(decalage_vx=5000.0),
+                volume=volume_fabrique(ailleurs))
+    except RuntimeError as exc:
+        refus = str(exc)
+    v("un objet entier posé hors de la boîte est REFUSÉ, pas rendu vide",
+      refus is not None, str(refus))
+
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -1032,6 +1114,22 @@ def main() -> int:
     if a.verifier:
         return verifier()
     r = mesurer(a.echantillon)
+    afficher(r)
+    if a.json:
+        a.json.parent.mkdir(parents=True, exist_ok=True)
+        a.json.write_text(json.dumps(r, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"écrit : {a.json}")
+    return 0
+
+
+def afficher(r: dict) -> None:
+    """Le compte rendu lisible d'une mesure.
+
+    ⚠⚠ Sorti de `main` pour la raison mesurée dans `80` : un bloc de `main` ne peut être exercé
+    qu'en lisant le dépôt distant, donc jamais par la batterie — et c'est là qu'un patch à
+    moitié appliqué a laissé, le 2026-09-05, un enregistrement référençant des variables
+    inexistantes. Sorti de là, une clé absente ou renommée lève **hors ligne**.
+    """
     c = r["convention"]
     print(f"volume brut : {r['zarr']}  ({r['voxel_um']} µm/voxel, accordé aux spires)")
     print(f"écart inter-feuilles lu : {r['ecart_lu_um']} µm = {r['pas_en_voxels']} voxels")
@@ -1073,11 +1171,6 @@ def main() -> int:
           f"{r['cout']['mebioctets']} Mio")
     print(f"\n→ sous l'étalon de {r['etalon_um']} µm (meilleure longueur constante) : "
           f"{'OUI' if r['passe_sous_letalon'] else 'NON'}")
-    if a.json:
-        a.json.parent.mkdir(parents=True, exist_ok=True)
-        a.json.write_text(json.dumps(r, indent=2, ensure_ascii=False), encoding="utf-8")
-        print(f"écrit : {a.json}")
-    return 0
 
 
 if __name__ == "__main__":
