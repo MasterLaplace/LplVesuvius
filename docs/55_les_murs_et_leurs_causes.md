@@ -11,7 +11,7 @@ la fois. Une feuille de route qui liste des tâches laisse croire qu'on avance q
 tourne ; celle-ci liste des causes **éliminées**, et montre l'espace rétrécir. C'est le
 seul progrès mesurable sur un problème que personne n'a résolu.
 
-**55 causes candidates** sur **4 murs** : ❌ **39** éliminées · ✅ **13** confirmées · 🔒 **3** bloquées
+**56 causes candidates** sur **4 murs** : ❌ **39** éliminées · ✅ **14** confirmées · 🔒 **3** bloquées
 
 | symbole | verdict | ce que ça veut dire |
 |---|---|---|
@@ -29,7 +29,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 
 ## 1. Le tracé ne suit pas de feuille
 
-❌ 21 éliminées · ✅ 8 confirmées · 🔒 3 bloquées
+❌ 21 éliminées · ✅ 9 confirmées · 🔒 3 bloquées
 
 | cause candidate | | ce qui a été mesuré | où |
 |---|---|---|---|
@@ -41,6 +41,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | lisser le champ de NORMALES avant le pas répare ce que le raccrochage abîme | ✅ | la dérive du raccrochage tombe de +56,1 à +25,3 um par tour, et le même lissage ne fait RIEN pour le pas aveugle (+22,3 contre +22,0) — donc le dégât était bien celui du raccrochage ; +26,0 / +25,8 / +25,3 aux trois tailles de boîte, le contendant le plus stable des dix | [`75`](75_registre_des_taches.md) |
 | encadrer une spire par ses deux voisines, au lieu de marcher depuis une seule | ✅ | sur 56 encadrements (portée 4, dont 14 symétriques) : branches seules 58,3 et 90,7 um, ENCADRÉE 43,1 — sous la demi-épaisseur de 67,75 — et elle bat les DEUX branches sur 41, ainsi que « la meilleure des deux » (50,3) qui demande de savoir laquelle ; à somme de bras égale la symétrie gagne (2+2 rend 33,2 contre 41,3 pour 1+3) | [`75`](75_registre_des_taches.md) |
 | le désaccord entre deux branches est un signal de confiance sans cible | ✅ | c'est la seule mesure du chantier qui ne demande pas la réponse, et elle prédit l'erreur de l'encadrement : rho 0,409 avec p 0,0018 sur 56 encadrements — sur les douze symétriques seuls elle ne prédisait rien (rho 0,28, p 0,38), donc un verdict sur un petit échantillon n'est pas un verdict | [`75`](75_registre_des_taches.md) |
+| pondérer les deux branches par la longueur de leur bras, au lieu de les moyenner à parts égales | ✅ | 35,9 um contre 43,1 à parts égales et 53,2 pour le témoin de poids INVERSÉ ; elle répare exactement les deux paires que la mesure disait cassées (1+4 et 2+4) et ne touche pas aux symétriques, le poids valant un demi à bras égaux — interpolation linéaire entre les deux ancres, aucun paramètre libre | [`75`](75_registre_des_taches.md) |
 | la fenêtre de lecture | ❌ | relu à 128 px × 109 couches, la géométrie du corpus : le classement ne bouge pas | [`52`](52_calibrer_sur_son_corpus.md) |
 | la chaîne de rendu | ❌ | un maillage PUBLIÉ passé par notre chaîne revient à 0,873 — au-dessus de la médiane du corpus | [`53`](53_le_temoin_positif_du_rendu.md) |
 | le champ de normales (NORMAL pèse 10) | ❌ | chargé pour de vrai : coût par génération ×29, trajectoire INCHANGÉE sur 118 générations | [`26`](26_le_champ_de_direction.md) |

@@ -3706,7 +3706,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/55_les_murs_et_leurs_causes.md
-- **lignes** : 130
+- **lignes** : 131
 - **nature** : PROCEDE
 - **résumé** : Document **rendu** depuis `docs/registres/murs_et_causes.tsv` par `uv run python src/depot/murs_et_causes.py --rendre`, et non écrit à la main ; sa batterie vérifie que chaque ligne pointe vers un document contenant encore son ancre. Il recense **30 causes candidates sur 4 murs** : 19 éliminées, 10 confirmées, 1 bloquée, chacune avec la mesure qui l'a tranchée et le document d'origine. Sa thèse de forme est qu'un mur est un espace de causes dont on retire une entrée à la fois, et que la liste des causes éliminées — non celle des tâches — est le seul progrès mesurable. Une seule cause reste non tranchée, et elle est bloquée. (⚠ Note de lecture : l'en-tête compte 19 éliminations quand le §final écrit « les treize éliminations de ce document » ; le document ne signale pas l'écart. De même, il ne contient aucune cause ⏳ *ouverte* alors que son propre tableau de symboles définit ce statut.)
 - **conclusions extractibles** : *(les murs recensés, avec pour chacun les causes éliminées et celles qui restent ouvertes)*
@@ -3759,7 +3759,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
   - La figure `55_espace_de_causes.png` n'est pas une jauge de progression : rien ne dit que l'espace est borné.
 - **rétractations / corrections internes** : aucune rétractation déclarée. Le document précise en revanche deux bornes de portée sur des causes confirmées : « la graine, c'est-à-dire l'endroit » explique la famille m7 **et pas le mur**, et la chaîne tangentielle « ne dit pas que c'est la BONNE feuille (il faut de l'encre), et part d'un segment PUBLIÉ et non d'une de nos traces ». Il retire aussi explicitement une affirmation antérieure : « ⚠⚠ Le “croisement” que j'avais publié à 1 920 µm n'existe pas : chaîne ET bond y sont au niveau du hasard (−1,7 et +1,6) ».
 - **preuve de lecture intégrale** :
-  - ligne 92 : « | enchaîner la projection à GRAND pas (238 µm/maillon) | ❌ | cinq maillons de 238 µm étalent la boîte ×2,38 à nombre de points constant, contre ×1,10 pour le bond direct — et finissent 5,33 SPIRES à côté de lui. ⚠ Le pas réel dérive avant la boîte : 238 → 963 µm par maillon | [`44`](44_ou_la_chaine_se_trouve.md) | »
+  - ligne 97 : « | enchaîner la projection à GRAND pas (238 µm/maillon) | ❌ | cinq maillons de 238 µm étalent la boîte ×2,38 à nombre de points constant, contre ×1,10 pour le bond direct — et finissent 5,33 SPIRES à côté de lui. ⚠ Le pas réel dérive avant la boîte : 238 → 963 µm par maillon | [`44`](44_ou_la_chaine_se_trouve.md) | »
   - ligne 127 : « cause à laquelle personne n'a pensé. Le tableau borne ce qu'on a testé, jamais ce qui »
 
 ---
@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 2910
+- **lignes** : 2938
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5890,6 +5890,21 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     ⚠⚠ **Le chiffre trompeur n'est pas publié** : le déséquilibre minimal des fautives vaut deux,
     mais `1+3` a le même et ne nuit pas. Ce qu'elles partagent est leur **bras long**, égal à la
     portée mesurée — ce corpus ne dit donc pas si c'est la longueur ou le déséquilibre.
+  - ⭐⭐⭐ **ET PONDÉRER LES DEUX BRANCHES PAR LEURS BRAS RÉPARE EXACTEMENT CE QUI ÉTAIT CASSÉ.**
+    Le désaccord est **symétrique**, donc il ne peut pas dire laquelle croire ; ce qui les
+    distingue **sans la réponse** est la longueur du bras. Si l'erreur y croît linéairement,
+    l'estimateur qui annule deux erreurs de signes opposés est l'**interpolation linéaire entre
+    les ancres** — la branche au bras court pèse `bras_long / somme`, **aucun paramètre libre**.
+    Résultat : **35,9 µm** contre 43,1 à parts égales, et **53,2** pour le témoin de poids
+    **inversé**.
+  - ⭐⭐ **Et elle répare les DEUX paires cassées** (`1+4`, `2+4`) **sans toucher aux
+    symétriques**, puisqu'à bras égaux le poids vaut un demi. Un remède qui ne PEUT PAS abîmer
+    les cas sains n'a pas besoin d'être vérifié sur eux. ⚠⚠ Les quatre verdicts sont exigés
+    ensemble — sans « répare les cassées », « ça améliore la médiane » pourrait vouloir dire
+    qu'elle a déplacé des cas déjà bons.
+  - ⚠ L'hypothèse dont le poids est tiré est **vérifiée dans la batterie** : sur deux branches
+    dont les dérives valent `d` et `4d` de part et d'autre, l'interpolation les annule
+    exactement, la moyenne non, et le poids inversé fait pire.
   - ⭐⭐ **Le mécanisme est un BIAIS annulé** : écarts **signés** +45,3 et −82,8 µm, de signes
     opposés sur **48 encadrements sur 56**. Moyenner du bruit gagne √2 au mieux ; annuler un biais
     gagne **tout le biais**. ⚠ Le témoin : deux branches du **même côté** ont un milieu qui ne bat
@@ -5953,8 +5968,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 2317 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 2910 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 2345 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 2938 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

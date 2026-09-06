@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deux ancres valent bien mieux qu'une : l'encadrement annule un biais.
+"""Deux ancres valent bien mieux qu'une — et pondérées par leurs bras, mieux encore.
 
 ⚠⚠ POURQUOI CETTE FIGURE EXISTE. Les trois médianes — 52,8 / 66,5 / **31,0 µm** — se lisent comme
 une moyenne qui aide un peu, et ce n'est pas ça : le panneau A montre que l'écart se **creuse**
@@ -52,6 +52,11 @@ def prose(m: dict) -> list[str]:
         f"{m['triplets']} mesures.",
         f"et elle bat aussi « la meilleure des deux » ({m['erreur_de_la_meilleure_mediane_um']} "
         "um), qui demande de savoir laquelle — donc ce n'est pas une regle de selection.",
+        f"PONDEREE par les bras — la branche au bras court pese le plus, sans aucun parametre "
+        f"libre — elle rend {m['erreur_ponderee_mediane_um']} um, contre "
+        f"{m['temoin_poids_inverse_median_um']} pour le poids INVERSE. et elle repare "
+        f"exactement les paires que la mesure disait cassees, {m['paires_reparees_par_la_ponderation']}, "
+        "sans toucher aux symetriques : a bras egaux le poids vaut un demi.",
         f"le mecanisme est un BIAIS annule : les ecarts signes valent "
         f"{m['ecart_signe_montant_median_um']:+.1f} et "
         f"{m['ecart_signe_descendant_median_um']:+.1f} um, de signes opposes sur "
@@ -81,7 +86,8 @@ def dessiner(m: dict, sortie: Path) -> dict:
     H = 96 + ph + 90 + len(lignes) * 19
     toile = Image.new("RGB", (L, H), FOND)
     art = ImageDraw.Draw(toile)
-    art.text((marge, 18), "Deux ancres valent bien mieux qu'une : l'encadrement annule un biais",
+    art.text((marge, 18),
+             "Deux ancres valent mieux qu'une, et ponderees par leurs bras mieux encore",
              fill=TEXTE, font=gros)
     art.text((marge, 42),
              f"{m['triplets']} encadrements dont {m['triplets_symetriques']} symetriques, "
@@ -94,6 +100,13 @@ def dessiner(m: dict, sortie: Path) -> dict:
              fill=TEXTE, font=moyen)
     art.rectangle([ax, ay, ax + pw, ay + ph], outline=CADRE)
     paires = list(m["par_paire_de_bras"].items())
+    # ⚠ La pondérée est relue par paire depuis les lignes : le résumé par paire ne la porte pas,
+    # et la recalculer dans la figure serait un nombre que la mesure ne publie pas.
+    pond = {}
+    for e in m["lignes"]:
+        cle = f"{min(e['bras_bas'], e['bras_haut'])}+{max(e['bras_bas'], e['bras_haut'])}"
+        pond.setdefault(cle, []).append(e["erreur_ponderee_um"])
+    pond = {k: sorted(v)[len(v) // 2] for k, v in pond.items()}
     top = max(max(d["meilleure_branche_um"], d["encadree_um"]) for _, d in paires) * 1.15
     larg = pw / (len(paires) + 1)
     yd = ay + ph - m["demi_epaisseur_um"] / top * (ph - 34)
@@ -102,14 +115,16 @@ def dessiner(m: dict, sortie: Path) -> dict:
              fill=TEXTE, font=petit)
     for k, (cle, d) in enumerate(paires):
         x0 = ax + larg * (k + 0.5)
-        for dec, val, coul in ((-0.22, d["meilleure_branche_um"], BLEU),
-                               (0.22, d["encadree_um"], AMBRE)):
+        for dec, val, coul in ((-0.28, d["meilleure_branche_um"], BLEU),
+                               (0.0, d["encadree_um"], DISCRET),
+                               (0.28, pond[cle], AMBRE)):
             h = val / top * (ph - 34)
-            art.rectangle([x0 + dec * larg - larg * 0.19, ay + ph - h,
-                           x0 + dec * larg + larg * 0.19, ay + ph], fill=coul)
+            art.rectangle([x0 + dec * larg - larg * 0.13, ay + ph - h,
+                           x0 + dec * larg + larg * 0.13, ay + ph], fill=coul)
         art.text((x0 - 12, ay + ph + 3), cle,
                  fill=(AMBRE if d["symetrique"] else DISCRET), font=petit)
-    art.text((ax + 6, ay + 6), "bleu : la MEILLEURE des deux branches   ambre : l'encadrement",
+    art.text((ax + 6, ay + 6),
+             "bleu : MEILLEURE branche   gris : encadrement   ambre : PONDERE par les bras",
              fill=DISCRET, font=petit)
     art.text((ax + 6, ay + 22),
              "abscisse : les deux bras, en spires — en ambre les symetriques",
@@ -202,6 +217,17 @@ def verifier() -> int:
     gains = [sum(x) / len(x) for _, x in sorted(par_saut.items())]
     v("le gain se creuse quand le saut grandit", gains[-1] > gains[0],
       str([round(g, 2) for g in gains]))
+    # ⚠⚠⚠ LA PONDÉRATION : elle bat le milieu, elle bat son témoin inversé, elle ne touche pas
+    # les symétriques, et elle répare TOUTES les paires cassées. Les quatre ensemble — sans la
+    # dernière, « ça améliore la médiane » pourrait vouloir dire qu'elle a déplacé des cas sains.
+    v("la pondération bat le milieu", m["la_ponderation_bat_le_milieu"],
+      f"{m['erreur_ponderee_mediane_um']} contre {m['erreur_encadree_mediane_um']}")
+    v("... et son témoin de poids inversé", m["la_ponderation_bat_son_temoin"],
+      f"{m['erreur_ponderee_mediane_um']} contre {m['temoin_poids_inverse_median_um']}")
+    v("... sans toucher aux symétriques", m["symetriques_inchanges_par_la_ponderation"])
+    v("... et elle répare toutes les paires cassées",
+      m["la_ponderation_repare_les_paires_cassees"],
+      f"{m['paires_reparees_par_la_ponderation']} sur {m['paires_ou_lencadrement_nuit']}")
     # ⚠ Les encadrements asymétriques doivent être la majorité du corpus mesuré, sinon la
     # question « où poser la seconde ancre » n'aurait presque pas de points.
     v("les encadrements asymétriques dominent la mesure",

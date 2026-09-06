@@ -67,8 +67,30 @@ def marcher(a: np.ndarray, ok: np.ndarray, tours: int, pas_vx: float,
     return a, ok
 
 
-def combiner(gauche: np.ndarray, droite: np.ndarray) -> np.ndarray:
-    """Le nuage à mi-chemin des deux branches, point par point du plus proche voisin.
+def poids_par_les_bras(bras_gauche: int, bras_droit: int) -> float:
+    """Le poids de la branche GAUCHE, dérivé des deux longueurs de bras.
+
+    ⚠⚠⚠ IL N'Y A PAS DE PARAMÈTRE LIBRE ICI, ET C'EST LE POINT. Le désaccord entre branches est
+    **symétrique** — c'est le même nombre pour les deux — donc il ne peut pas dire laquelle
+    croire. Ce qui les distingue sans regarder la réponse est la **longueur de leur bras**, et la
+    mesure a établi que l'erreur croît avec elle. Si elle croît linéairement, l'estimateur qui
+    annule les deux erreurs de signes opposés est l'interpolation linéaire entre les deux ancres :
+    la branche au bras COURT pèse `bras_long / (somme)`. Aucun réglage, aucune constante.
+
+    ⚠⚠ ET ELLE DÉGÉNÈRE EN MOYENNE À PARTS ÉGALES QUAND LES BRAS SONT ÉGAUX. C'est ce qui rend le
+    remède sûr : il ne peut toucher QUE les encadrements asymétriques, c'est-à-dire exactement
+    ceux que la mesure a identifiés comme cassés. Un remède qui déplacerait aussi les cas sains
+    demanderait de vérifier qu'il ne les abîme pas ; celui-ci ne le peut pas.
+    """
+    total = bras_gauche + bras_droit
+    return 0.5 if total <= 0 else bras_droit / total
+
+
+def combiner(gauche: np.ndarray, droite: np.ndarray, poids: float = 0.5) -> np.ndarray:
+    """Le nuage entre les deux branches, `poids` étant celui de `gauche`.
+
+    ⚠ `poids = 0.5` rend le milieu, qui est le cas déjà mesuré : le défaut préserve donc la
+    mesure publiée, et seul un appelant qui demande autre chose la déplace.
 
     ⚠⚠ LES DEUX BRANCHES N'ONT PAS LA MÊME GRILLE — elles viennent de deux spires publiées, donc
     de deux paramétrages. Les moyenner cellule à cellule apparierait des points qui n'ont rien à
@@ -84,7 +106,7 @@ def combiner(gauche: np.ndarray, droite: np.ndarray) -> np.ndarray:
     if gauche.size == 0 or droite.size == 0:
         return gauche
     proche = droite[cKDTree(droite).query(gauche, k=1)[1]]
-    return 0.5 * (gauche + proche)
+    return poids * gauche + (1.0 - poids) * proche
 
 
 def desaccord(gauche: np.ndarray, droite: np.ndarray, voxel_um: float) -> np.ndarray:
@@ -224,10 +246,23 @@ def mesurer(cote: float | None = None, minimum: int = 30, portee: int = 4) -> di
         s_d = ecart_signe(d_, cible, axe, VOXEL_UM)
         mid_g = combiner(g_, d_)
         mid_d = combiner(d_, g_)
+        # ⚠⚠ LE POIDS EST DÉRIVÉ DES BRAS, appliqué dans le bon sens : la branche au bras COURT
+        # pèse le plus. L'inverser est le témoin — sans lui, « la pondération aide » serait
+        # satisfait par n'importe quel déplacement du milieu.
+        w = poids_par_les_bras(milieu - bas, haut - milieu)
+        pond_g = combiner(g_, d_, w)
+        pond_d = combiner(d_, g_, 1.0 - w)
+        pond_inv_g = combiner(g_, d_, 1.0 - w)
+        pond_inv_d = combiner(d_, g_, w)
         e_g = float(np.median(distance_a(g_, cible, VOXEL_UM)))
         e_d = float(np.median(distance_a(d_, cible, VOXEL_UM)))
         e_m = float(np.median(np.concatenate([
             distance_a(mid_g, cible, VOXEL_UM), distance_a(mid_d, cible, VOXEL_UM)])))
+        e_p = float(np.median(np.concatenate([
+            distance_a(pond_g, cible, VOXEL_UM), distance_a(pond_d, cible, VOXEL_UM)])))
+        e_pi = float(np.median(np.concatenate([
+            distance_a(pond_inv_g, cible, VOXEL_UM),
+            distance_a(pond_inv_d, cible, VOXEL_UM)])))
         des = float(np.median(desaccord(g_, d_, VOXEL_UM)))
         lignes.append(dict(
             bras_bas=milieu - bas, bras_haut=haut - milieu,
@@ -237,6 +272,9 @@ def mesurer(cote: float | None = None, minimum: int = 30, portee: int = 4) -> di
             points_montante=int(len(g_)), points_descendante=int(len(d_)),
             erreur_montante_um=round(e_g, 1), erreur_descendante_um=round(e_d, 1),
             erreur_encadree_um=round(e_m, 1),
+            erreur_ponderee_um=round(e_p, 1),
+            temoin_poids_inverse_um=round(e_pi, 1),
+            poids_de_la_montante=round(w, 3),
             erreur_de_la_meilleure_um=round(min(e_g, e_d), 1),
             desaccord_um=round(des, 1),
             ecart_signe_montante_um=round(s_g, 1),
@@ -332,6 +370,31 @@ def mesurer(cote: float | None = None, minimum: int = 30, portee: int = 4) -> di
     # ⚠⚠ LE RAPPORT EST PUBLIÉ ICI, PAS CALCULÉ PAR LA FIGURE. Un nombre qui apparaît dans une
     # légende sans exister dans la mesure est un nombre que personne ne peut retrouver — et le
     # contrôle de traçabilité de la prose l'a attrapé.
+    r["erreur_ponderee_mediane_um"] = med("erreur_ponderee_um")
+    r["temoin_poids_inverse_median_um"] = med("temoin_poids_inverse_um")
+    # ⚠⚠⚠ LA PONDÉRATION NE PEUT TOUCHER QUE LES ASYMÉTRIQUES, par construction : à bras égaux
+    # le poids vaut un demi et rend le milieu. Le vérifier ici plutôt que l'affirmer, parce que
+    # c'est ce qui rend le remède sûr — il ne peut pas abîmer les cas qui marchaient.
+    r["symetriques_inchanges_par_la_ponderation"] = all(
+        e["erreur_ponderee_um"] == e["erreur_encadree_um"]
+        for e in lignes if e["symetrique"])
+    # ⚠⚠ ET LA VRAIE QUESTION : répare-t-elle les paires que la mesure a dites CASSÉES ? Une
+    # pondération qui améliorerait la médiane globale sans réparer celles-là aurait déplacé des
+    # cas déjà sains, ce qui ne vaut rien.
+    r["paires_reparees_par_la_ponderation"] = [
+        cle for cle in r["paires_ou_lencadrement_nuit"]
+        if float(np.median([e["erreur_ponderee_um"] for e in lignes
+                            if f"{min(e['bras_bas'], e['bras_haut'])}+"
+                            f"{max(e['bras_bas'], e['bras_haut'])}" == cle]))
+        < r["par_paire_de_bras"][cle]["meilleure_branche_um"]]
+    r["la_ponderation_repare_les_paires_cassees"] = bool(
+        r["paires_ou_lencadrement_nuit"]
+        and len(r["paires_reparees_par_la_ponderation"])
+        == len(r["paires_ou_lencadrement_nuit"]))
+    r["la_ponderation_bat_le_milieu"] = bool(
+        r["erreur_ponderee_mediane_um"] < r["erreur_encadree_mediane_um"])
+    r["la_ponderation_bat_son_temoin"] = bool(
+        r["erreur_ponderee_mediane_um"] < r["temoin_poids_inverse_median_um"])
     r["gain_sur_la_meilleure_branche"] = round(
         r["erreur_de_la_meilleure_mediane_um"] / r["erreur_encadree_mediane_um"], 2)
     r["gain_sur_la_branche_montante"] = round(
@@ -422,6 +485,34 @@ def verifier() -> int:
     v("la combinaison a la taille de son premier argument",
       combiner(g, np.vstack([d, d]))
       .shape[0] == 2 and combiner(np.vstack([g, g]), d).shape[0] == 4)
+
+    # --- le poids dérivé des bras ---
+    v("à bras égaux le poids vaut un demi", poids_par_les_bras(3, 3) == 0.5)
+    # ⚠⚠ LA BRANCHE AU BRAS COURT PÈSE LE PLUS : l'inverse serait une pondération qui fait
+    # confiance à celle qui a le plus dérivé, et le témoin de la mesure l'exerce.
+    v("... et la branche au bras COURT pèse le plus", poids_par_les_bras(1, 4) > 0.5,
+      str(poids_par_les_bras(1, 4)))
+    v("... proportionnellement à l'autre bras", abs(poids_par_les_bras(1, 4) - 0.8) < 1e-9,
+      str(poids_par_les_bras(1, 4)))
+    v("des bras nuls ne rendent pas une division par zéro", poids_par_les_bras(0, 0) == 0.5)
+    # ⚠⚠⚠ ET LA COMBINAISON PONDÉRÉE DOIT TOMBER SUR LA CIBLE quand l'erreur croît linéairement
+    # avec le bras — c'est l'hypothèse dont le poids est tiré, donc elle se vérifie plutôt que
+    # de se supposer. Une branche à un bras dérive de d, celle à quatre bras de 4d de l'autre
+    # côté : l'interpolation linéaire les annule exactement.
+    cib = np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0]])
+    court = cib + np.array([0.0, 0.0, -10.0])
+    long_ = cib + np.array([0.0, 0.0, 40.0])
+    from le_pas_normal_atteint_la_spire import distance_a as _d  # noqa: PLC0415
+    w_ = poids_par_les_bras(1, 4)
+    v("la pondération annule une dérive linéaire en la longueur du bras",
+      float(np.median(_d(combiner(court, long_, w_), cib, 1.0))) < 1e-6,
+      str(float(np.median(_d(combiner(court, long_, w_), cib, 1.0)))))
+    v("... alors que la moyenne à parts égales ne l'annule pas",
+      float(np.median(_d(combiner(court, long_), cib, 1.0))) > 10.0,
+      str(float(np.median(_d(combiner(court, long_), cib, 1.0)))))
+    v("... et le poids INVERSÉ fait bien pire",
+      float(np.median(_d(combiner(court, long_, 1.0 - w_), cib, 1.0)))
+      > float(np.median(_d(combiner(court, long_), cib, 1.0))))
 
     # --- le désaccord ---
     ds = desaccord(g, d, 2.0)
@@ -524,6 +615,13 @@ def main() -> int:
           f"{r['desequilibres_des_paires_qui_nuisent']} ; mais "
           f"{r['meme_desequilibre_sans_nuire']} ont le même déséquilibre et ne nuisent pas, "
           "donc ce corpus ne dit pas si c'est la longueur ou le déséquilibre")
+    print(f"\npondérée par les bras : {r['erreur_ponderee_mediane_um']} µm contre "
+          f"{r['erreur_encadree_mediane_um']} à parts égales · témoin poids INVERSÉ "
+          f"{r['temoin_poids_inverse_median_um']} µm")
+    print(f"  symétriques inchangés (par construction) : "
+          f"{'OUI' if r['symetriques_inchanges_par_la_ponderation'] else 'NON'} · "
+          f"paires cassées réparées : {r['paires_reparees_par_la_ponderation']} sur "
+          f"{r['paires_ou_lencadrement_nuit']}")
     print(f"\n→ l'encadrement bat les DEUX branches : "
           f"{'OUI' if r['lencadrement_bat_les_deux'] else 'NON'} "
           f"({r['triplets_ou_lencadrement_bat_les_deux']} triplets sur {r['triplets']})")

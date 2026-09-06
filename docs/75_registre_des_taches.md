@@ -2161,11 +2161,11 @@ longueurs lues s'y étalent sur **30,4** contre **0,7** avec une feuille.
 > mesuré si un dérouleur qui part de **plusieurs** endroits à la fois — et dont les branches
 > doivent s'accorder là où elles se rencontrent — fait mieux qu'un seul qui part d'un bout.
 
-#### ⭐⭐⭐ DEUX ANCRES VALENT BIEN MIEUX QU'UNE — et il faut les espacer RÉGULIÈREMENT
+#### ⭐⭐⭐ DEUX ANCRES VALENT BIEN MIEUX QU'UNE — espacées régulièrement, et PONDÉRÉES
 
-> Mesure : `src/nappe/derouler_des_deux_bords.py` (25 contrôles) →
+> Mesure : `src/nappe/derouler_des_deux_bords.py` (32 contrôles) →
 > `docs/mesures/derouler_des_deux_bords.json`. Figure :
-> `src/figures/figure_derouler_des_deux_bords.py` (15 contrôles), le 2026-09-06.
+> `src/figures/figure_derouler_des_deux_bords.py` (19 contrôles), le 2026-09-06.
 >
 > ```
 > uv run python src/nappe/derouler_des_deux_bords.py --cote 640 --json docs/mesures/derouler_des_deux_bords.json
@@ -2221,6 +2221,34 @@ déséquilibre minimal des paires fautives vaut deux, mais `1+3` a exactement ce
 nuit pas. Ce que les deux fautives partagent est leur **bras long**, et il vaut la portée mesurée —
 donc ce corpus ne dit **pas** si c'est la longueur absolue ou le déséquilibre qui casse. Les deux
 faits sont rendus, la conclusion non.
+
+##### ⭐⭐⭐ Et PONDÉRER les deux branches par leurs bras répare exactement ce qui était cassé
+
+Le désaccord entre branches est **symétrique** — c'est le même nombre pour les deux — donc il ne
+peut pas dire laquelle croire. Ce qui les distingue **sans regarder la réponse** est la longueur de
+leur bras, et la mesure a établi que l'erreur croît avec elle. Si elle croît **linéairement**,
+l'estimateur qui annule deux erreurs de signes opposés est l'**interpolation linéaire entre les
+deux ancres** : la branche au bras court pèse `bras_long / (somme)`. ⭐ **Aucun paramètre libre.**
+
+| | erreur médiane |
+|---|---:|
+| encadrée à parts égales | 43,1 µm |
+| **pondérée par les bras** | **35,9 µm** |
+| témoin : poids **inversé** | 53,2 µm |
+
+> ⭐⭐⭐ **Et elle répare EXACTEMENT les deux paires que la mesure avait dites cassées** — `1+4` et
+> `2+4` — **sans toucher aux symétriques**, parce qu'à bras égaux le poids vaut un demi et rend le
+> milieu. Un remède qui ne peut pas abîmer les cas qui marchaient n'a pas besoin qu'on le vérifie
+> sur eux ; celui-ci ne le peut pas **par construction**.
+
+⚠⚠ Les quatre verdicts sont exigés **ensemble** : elle bat le milieu, elle bat son témoin de poids
+inversé, elle laisse les symétriques intacts, et elle répare **toutes** les paires cassées. Sans le
+dernier, « ça améliore la médiane » pourrait vouloir dire qu'elle a déplacé des cas déjà sains.
+
+⚠ L'hypothèse dont le poids est tiré — l'erreur croît linéairement avec le bras — est **vérifiée
+dans la batterie** plutôt que supposée : sur deux branches dont les dérives valent `d` et `4d` de
+part et d'autre, l'interpolation les annule exactement, la moyenne à parts égales non, et le poids
+inversé fait bien pire.
 
 ##### ⭐⭐ Le mécanisme est mesuré : c'est un BIAIS qui s'annule, pas du bruit qu'on moyenne
 
