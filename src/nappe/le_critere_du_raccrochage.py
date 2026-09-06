@@ -142,24 +142,38 @@ def poser_sur_la_grille(valeurs: np.ndarray, ou: np.ndarray,
     return out
 
 
-def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
-            cote: float | None = None, fenetre_grille: int | None = None,
-            corpus: dict | None = None, volume=None) -> dict:
-    """Ce que chaque critère choisit, et ce que chacun coûte à la marche."""
+def parcourir_les_pas(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
+                      cote: float | None = None, fenetre_grille: int | None = None,
+                      corpus: dict | None = None, volume=None):
+    """Un contexte par pas de spire : la grille, les lignes lues, la corrélation et la cible.
+
+    ⚠⚠⚠ POURQUOI CE PARCOURS EST EXTRAIT. Ce que la lecture d'un pas coûte — deux traversées du
+    volume, une pour le gabarit et une pour les lignes — est le même quel que soit ce qu'on
+    balaye ensuite : des critères, des largeurs de lissage, autre chose demain. Le recopier
+    ferait deux descriptions d'une même lecture, donc deux mesures qui pourraient cesser de
+    marcher sur la même matière — ce qui est exactement le défaut que `le_corpus_des_spires`
+    existe pour avoir supprimé un cran plus haut.
+
+    ⚠⚠ LE CONTEXTE PORTE LA GRILLE, ET C'EST TOUT SON INTÉRÊT. Un voisinage se prend dans la
+    grille de la spire ; un nuage échantillonné au hasard n'en a plus. Les deux tranches qui
+    ont précédé ce fichier ne pouvaient pas exercer l'accord de voisinage pour cette seule
+    raison.
+    """
     from le_pas_normal_atteint_la_spire import distance_a, normales  # noqa: PLC0415
     from le_raccrochage_a_la_matiere import (  # noqa: PLC0415
         BOITE_CENTRE, BOITE_COTE, CacheDisque, Volume, ZARR, accorde_aux_spires,
         accorder_les_voisins, correler, le_long, profil_autour, url_du_volume,
     )
+    from scipy.spatial import cKDTree  # noqa: PLC0415
 
     c = corpus_publie() if corpus is None else corpus
-    volume_nom, voxel_um = c["volume"], float(c["voxel_um"])
+    voxel_um = float(c["voxel_um"])
     ecart_um = float(c["ecart_um"])
     pas_vx = ecart_um / voxel_um
     demi_vx = pas_vx / 2.0
     demi_gab = max(1, int(round(demi_vx / 2.0)))
     if volume is None and not accorde_aux_spires():
-        raise RuntimeError(f"le volume {ZARR} n'est pas celui des spires ({volume_nom})")
+        raise RuntimeError(f"le volume {ZARR} n'est pas celui des spires ({c['volume']})")
     if volume is None:
         import tracecheck as tc  # noqa: PLC0415
 
@@ -174,8 +188,6 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     rng = np.random.default_rng(graine)
     t_gab = np.arange(-demi_gab, demi_gab + 1e-9, 1.0)
     t_ligne = np.arange(-(demi_vx + demi_gab), demi_vx + demi_gab + 1e-9, 1.0)
-    # ⚠ La tranche de la ligne qui couvre exactement les centres atteignables : c'est la
-    # fenêtre dans laquelle `maximum` a le droit de chercher.
     fin = len(t_ligne) - demi_gab
     t_fenetre = t_ligne[demi_gab:fin]
 
@@ -187,8 +199,11 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
         grilles[rang] = (a, dans)
         nuages[rang] = a[ok]
 
-    lignes: list[dict] = []
-    ecartees = 0
+    reglage = dict(volume=c["volume"], voxel_um=voxel_um, ecart_um=ecart_um, pas_vx=pas_vx,
+                   demi_gab=int(demi_gab), cote=cote, fenetre_grille=fenetre_grille,
+                   boite=dict(centre=list(BOITE_CENTRE), cote_voxels=cote), vol=vol,
+                   ecartees=0)
+    yield reglage
     for r in sorted(grilles):
         if r + 1 not in nuages:
             continue
@@ -198,110 +213,114 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
         if fenetre_grille is not None:
             # ⚠ Une fenêtre de grille est CONTIGUË, jamais un tirage : un sous-échantillon
             # aléatoire n'a plus de voisins, donc l'accord de voisinage ne pourrait pas tourner
-            # dessus — ce qui est exactement ce que ce fichier existe pour exercer.
-            u, v = np.argwhere(garde).mean(axis=0).round().astype(int)
+            # dessus — ce qui est exactement ce que ces mesures existent pour exercer.
+            u, v_ = np.argwhere(garde).mean(axis=0).round().astype(int)
             demi_f = fenetre_grille // 2
             fen = np.zeros_like(garde)
-            fen[max(0, u - demi_f):u + demi_f + 1, max(0, v - demi_f):v + demi_f + 1] = True
+            fen[max(0, u - demi_f):u + demi_f + 1, max(0, v_ - demi_f):v_ + demi_f + 1] = True
             garde = garde & fen
         if int(garde.sum()) < minimum:
-            ecartees += 1
+            reglage["ecartees"] += 1
             continue
-        p, d = a0[garde], n0[garde]
+        p_, d_ = a0[garde], n0[garde]
         cible = nuages[r + 1]
-        sortant = float(np.median(distance_a(p + d * pas_vx, cible, voxel_um)))
-        rentrant = float(np.median(distance_a(p - d * pas_vx, cible, voxel_um)))
+        sortant = float(np.median(distance_a(p_ + d_ * pas_vx, cible, voxel_um)))
+        rentrant = float(np.median(distance_a(p_ - d_ * pas_vx, cible, voxel_um)))
         sens = 1.0 if sortant <= rentrant else -1.0
 
-        vg, okg = le_long(p, d, t_gab, vol)
+        vg, okg = le_long(p_, d_, t_gab, vol)
         if int(okg.sum()) < minimum:
-            ecartees += 1
+            reglage["ecartees"] += 1
             continue
         gab = profil_autour(vg[okg])
         gab_oriente = gab if sens > 0 else gab[::-1]
-        prevu, dd = p + d * (sens * pas_vx), d * sens
-        v_, okv = le_long(prevu, dd, t_ligne, vol)
+        prevu, dd = p_ + d_ * (sens * pas_vx), d_ * sens
+        v2, okv = le_long(prevu, dd, t_ligne, vol)
         if int(okv.sum()) < minimum:
-            ecartees += 1
+            reglage["ecartees"] += 1
             continue
 
-        # --- la validité revient sur la grille, parce que l'accord s'y prend ---
         lisible = poser_sur_la_grille(okv.astype(float), garde, garde.shape) == 1.0
-        # ⚠⚠⚠ UNE SEULE POPULATION, ET C'EST L'ACCORD QUI LA FIXE. `accorder_les_voisins` écarte
-        # toute cellule dont le voisinage ne fait pas majorité ; juger les critères bruts sur
-        # toutes les cellules et les accordés sur ce qui reste comparerait deux populations. Le
-        # jeu retenu ne dépend QUE du masque, donc il est le même pour tous les critères.
         _, assez = accorder_les_voisins(np.zeros_like(lisible, dtype=float), lisible)
         if int(assez.sum()) < minimum:
-            ecartees += 1
+            reglage["ecartees"] += 1
             continue
 
-        P = prevu[okv]
-        D = dd[okv]
-        L = v_[okv]
+        P, D, L = prevu[okv], dd[okv], v2[okv]
         corr, centres = correler(L, gab_oriente, t_ligne)
         corr_m, _ = correler(L, rng.permuted(gab_oriente), t_ligne)
-        t_oracle, _ = decalage_de_loracle(P, D, centres, cible, voxel_um)
-
-        # ⚠ L'arbre de la cible est construit UNE fois par pas.
-        from scipy.spatial import cKDTree  # noqa: PLC0415
-
         arbre = cKDTree(cible)
-        # De la liste des cellules lisibles vers la grille, puis vers celles retenues.
-        ou_lisible = np.argwhere(lisible)
-        garde_dans_lisible = assez[lisible]
 
-        def erreur_de(t_plat: np.ndarray) -> tuple[float, np.ndarray]:
-            """L'erreur médiane, sur les seules cellules que l'accord retient."""
-            pris = garde_dans_lisible
-            q = P[pris] + t_plat[pris][:, None] * D[pris]
-            e = arbre.query(q, k=1)[0] * voxel_um
+        def erreur(t_plat, pris, _P=P, _D=D, _arbre=arbre):
+            """L'erreur médiane sur les cellules retenues, et les distances par cellule."""
+            q = _P[pris] + t_plat[pris][:, None] * _D[pris]
+            e = _arbre.query(q, k=1)[0] * voxel_um
             return float(np.median(e)), e
 
+        yield dict(de=r, vers=r + 1, P=P, D=D, L=L, cible=cible, arbre=arbre,
+                   corr=corr, corr_melange=corr_m, centres=centres, t_fenetre=t_fenetre,
+                   lisible=lisible, assez=assez, erreur=erreur,
+                   ou_lisible=np.argwhere(lisible), garde_dans_lisible=assez[lisible])
+
+
+def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
+            cote: float | None = None, fenetre_grille: int | None = None,
+            corpus: dict | None = None, volume=None) -> dict:
+    """Ce que chaque critère choisit, et ce que chacun coûte à la marche."""
+    from le_raccrochage_a_la_matiere import accorder_les_voisins  # noqa: PLC0415
+
+    pas = parcourir_les_pas(graine, minimum, cache_actif, cote, fenetre_grille, corpus, volume)
+    reglage = next(pas)
+    lignes: list[dict] = []
+    for ctx in pas:
+        entree = dict(de=ctx["de"], vers=ctx["vers"],
+                      cellules_lisibles=int(ctx["lisible"].sum()),
+                      cellules=int(ctx["assez"].sum()),
+                      fenetre_vx=[round(float(ctx["centres"].min()), 2),
+                                  round(float(ctx["centres"].max()), 2)],
+                      bits_de_supervision=1)
+        pris = ctx["garde_dans_lisible"]
         choix: dict[str, np.ndarray] = {}
         for nom in CRITERES:
-            brut = decalages_du_critere(sans_accord(nom), corr, corr_m, centres, L, t_fenetre)
+            brut = decalages_du_critere(sans_accord(nom), ctx["corr"], ctx["corr_melange"],
+                                        ctx["centres"], ctx["L"], ctx["t_fenetre"])
             if not est_accorde(nom):
                 choix[nom] = brut
                 continue
-            grille_t = poser_sur_la_grille(brut, lisible, lisible.shape)
-            accorde, _ = accorder_les_voisins(grille_t, lisible)
+            grille_t = poser_sur_la_grille(brut, ctx["lisible"], ctx["lisible"].shape)
+            accorde, _ = accorder_les_voisins(grille_t, ctx["lisible"])
             # ⚠ Une cellule non retenue par l'accord garde son choix brut : elle est de toute
             # façon hors de la population jugée, et laisser un NaN ferait lever la marche.
-            valeurs = accorde[ou_lisible[:, 0], ou_lisible[:, 1]]
+            valeurs = accorde[ctx["ou_lisible"][:, 0], ctx["ou_lisible"][:, 1]]
             choix[nom] = np.where(np.isnan(valeurs), brut, valeurs)
-
-        entree = dict(de=r, vers=r + 1,
-                      cellules_lisibles=int(lisible.sum()), cellules=int(assez.sum()),
-                      fenetre_vx=[round(float(centres.min()), 2), round(float(centres.max()), 2)],
-                      bits_de_supervision=1)
         for nom in CRITERES:
-            med, _ = erreur_de(choix[nom])
+            med, _ = ctx["erreur"](choix[nom], pris)
             entree[f"erreur_{nom}_um"] = round(med, 1)
-            entree[f"decalage_median_{nom}_vx"] = round(
-                float(np.median(choix[nom][garde_dans_lisible])), 2)
+            entree[f"decalage_median_{nom}_vx"] = round(float(np.median(choix[nom][pris])), 2)
             if est_accorde(nom):
                 # ⚠⚠⚠ COMBIEN DE CELLULES L'ACCORD DÉPLACE RÉELLEMENT. Sans ce compte, un
-                # accord devenu inopérant — un masque mal posé, une grille perdue en route —
-                # rendrait un écart de zéro micromètre qui se lirait comme « le lissage
-                # n'apporte rien » alors qu'il veut dire « le lissage n'a pas eu lieu ». Les
-                # deux ont exactement la même tête dans un tableau de résultats.
-                ecart = np.abs(choix[nom] - choix[sans_accord(nom)])[garde_dans_lisible]
+                # accord devenu inopérant rendrait un écart de zéro micromètre qui se lirait
+                # comme « le lissage n'apporte rien » alors qu'il veut dire « le lissage n'a
+                # pas eu lieu ». Les deux ont la même tête dans un tableau de résultats.
+                ecart = np.abs(choix[nom] - choix[sans_accord(nom)])[pris]
                 entree[f"cellules_deplacees_{nom}"] = int((ecart > 1e-9).sum())
-        med_o, _ = erreur_de(t_oracle)
+        t_oracle, _ = decalage_de_loracle(ctx["P"], ctx["D"], ctx["centres"], ctx["cible"],
+                                          reglage["voxel_um"])
+        med_o, _ = ctx["erreur"](t_oracle, pris)
         entree[f"erreur_{BORNE}_um"] = round(med_o, 1)
         lignes.append(entree)
 
     if not lignes:
         raise RuntimeError("aucun pas ne rend un voisinage de grille dans la boîte")
 
+    vol = reglage["vol"]
     r = dict(
-        fragment="PHerc0500P2", volume=volume_nom, voxel_um=voxel_um,
-        boite=dict(centre=list(BOITE_CENTRE), cote_voxels=cote),
-        pas_nominal_um=ecart_um, demi_epaisseur_um=round(ecart_um / 2, 2),
-        demi_largeur_gabarit_vx=int(demi_gab), fenetre_grille=fenetre_grille,
+        fragment="PHerc0500P2", volume=reglage["volume"], voxel_um=reglage["voxel_um"],
+        boite=reglage["boite"],
+        pas_nominal_um=reglage["ecart_um"], demi_epaisseur_um=round(reglage["ecart_um"] / 2, 2),
+        demi_largeur_gabarit_vx=reglage["demi_gab"], fenetre_grille=fenetre_grille,
         criteres=list(CRITERES), borne=BORNE, temoins=list(TEMOINS),
-        paires=len(lignes), paires_ecartees=int(ecartees),
+        paires=len(lignes), paires_ecartees=int(reglage["ecartees"]),
         cellules=int(sum(e["cellules"] for e in lignes)),
         cellules_lisibles=int(sum(e["cellules_lisibles"] for e in lignes)),
         lignes=lignes,

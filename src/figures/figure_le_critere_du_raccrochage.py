@@ -29,7 +29,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "commun"))
-from figure_commune import police, prose_tracable  # noqa: E402
+from figure_commune import echelle_appariee, police, prose_tracable  # noqa: E402
 from figure_le_residu_est_une_translation import couper  # noqa: E402
 from lecart_apparie import tranche  # noqa: E402
 
@@ -134,64 +134,17 @@ def prose(m: dict, t: dict | None = None) -> list[str]:
 
 def echelle(art, x0: int, y0: int, pw: int, ph: int, m: dict, entrees: list[dict],
             cle: str, petit, moyen, legende: str) -> list[str]:
-    """Une échelle horizontale d'écarts appariés, chacun avec son intervalle.
+    """Le tableau des écarts appariés, tracé par l'échelle partagée.
 
-    ⚠⚠⚠ L'INTERVALLE EST DESSINÉ, PAS RÉSUMÉ EN LÉGENDE. C'est lui qui décide : un écart dont
-    le trait traverse le zéro ne tranche pas, si grande que soit sa barre. Une figure qui ne
-    porterait que les écarts médians ferait lire un verdict là où il n'y en a pas.
+    ⚠ Ce fichier ne dessine plus lui-même : `figure_commune.echelle_appariee` porte le tracé,
+    et `la_lissite_de_la_feuille` s'en sert aussi. Deux échelles séparées finiraient par ne
+    plus s'accorder sur ce qu'un intervalle veut dire, alors que c'est LUI le verdict.
     """
-    art.rectangle([x0, y0, x0 + pw, y0 + ph], outline=CADRE)
-    valeurs = []
-    for x in entrees:
-        e = x[cle]
-        if e is None or e["ecart_median_um"] is None:
-            continue
-        valeurs += [e["ecart_median_um"], *e["intervalle_um"]]
-    bas, haut = min(0.0, min(valeurs)), max(0.0, max(valeurs))
-    marge = max(1e-6, (haut - bas) * 0.08)
-    bas, haut = bas - marge, haut + marge
-    gauche, droite = x0 + 10, x0 + pw - 10
-    zero = gauche + (0.0 - bas) / (haut - bas) * (droite - gauche)
-    art.text((x0 + 8, y0 + 6), legende, fill=DISCRET, font=petit)
-    # ⚠ L'axe est PÂLE sur toute la hauteur et FRANC au niveau de chaque barre : tracé en noir
-    # partout, il traverse les chiffres alignés à droite et l'on ne lit plus ni l'un ni l'autre.
-    art.line([zero, y0 + 24, zero, y0 + ph - 8], fill=CADRE)
-    haut_ligne = (ph - 34) / max(1, len(entrees))
-    etiquettes = []
-    # ⚠⚠ LE NOM ET LE CHIFFRE VIVENT SUR LEUR PROPRE LIGNE, la barre en dessous. La première
-    # version les posait à la hauteur de la barre : la barre de l'oracle traverse tout le
-    # panneau, donc son chiffre tombait dessus et ne se lisait ni comme l'un ni comme l'autre.
-    for i, x in enumerate(entrees):
-        y_texte = y0 + 28 + haut_ligne * i
-        y_barre = y_texte + 19
-        e = x[cle]
-        nom = x["critere"].replace("_", " ")
-        etiquettes.append(nom)
-        art.text((x0 + 10, y_texte), nom, fill=TEXTE, font=petit)
-        if e is None or e["ecart_median_um"] is None:
-            art.text((x0 + pw - 10 - petit.getbbox("—")[2], y_texte), "—",
-                     fill=DISCRET, font=petit)
-            continue
-        texte = echelle_lisible(x, e)
-        art.text((x0 + pw - 10 - petit.getbbox(texte)[2], y_texte), texte,
-                 fill=DISCRET, font=petit)
-
-        def xx(val: float) -> float:
-            return gauche + (val - bas) / (haut - bas) * (droite - gauche)
-
-        h = 5.0
-        art.line([zero, y_barre - h - 4, zero, y_barre + h + 4], fill=TEXTE)
-        a, b = sorted((zero, xx(e["ecart_median_um"])))
-        art.rectangle([a, y_barre - h, b, y_barre + h], fill=couleur(x, e))
-        if x["deploye"]:
-            art.rectangle([a - 1, y_barre - h - 1, b + 1, y_barre + h + 1], outline=TEXTE)
-        # ⚠⚠⚠ Le trait de l'intervalle est dessiné PAR-DESSUS la barre : c'est LUI le verdict.
-        # Un écart dont le trait traverse le zéro ne tranche pas, si grande que soit sa barre.
-        g_, d_ = xx(e["intervalle_um"][0]), xx(e["intervalle_um"][1])
-        art.line([g_, y_barre, d_, y_barre], fill=TEXTE)
-        for bout in (g_, d_):
-            art.line([bout, y_barre - h - 2, bout, y_barre + h + 2], fill=TEXTE)
-    return etiquettes
+    return echelle_appariee(
+        art, x0, y0, pw, ph,
+        [(x["critere"].replace("_", " "), x[cle], couleur(x, x[cle]), x["deploye"])
+         for x in entrees],
+        petit, legende, FOND, TEXTE, DISCRET, CADRE)
 
 
 def dessiner(m: dict, sortie: Path, t: dict | None = None) -> dict:

@@ -5727,6 +5727,41 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     entre le chemin déployé (37,5) et l'oracle (20,0), et la question suivante est jusqu'où cette
     lissité peut aller (voisinage plus large, plusieurs passes, ajustement de surface). ⚠ Avec le
     témoin du mélange accordé à chaque étage : plus on lisse, plus le bruit s'améliore aussi.
+  - ⛔ **LA LISSITÉ EST ÉPUISÉE À L'ÉTAGE DÉPLOYÉ (2026-09-07, `la_lissite_de_la_feuille`,
+    19 contrôles, 8 pas, 15 618 cellules).** Le voisinage élargi (3×3 → 17×17) et itéré (une
+    passe → trois), tous les étages jugés sur **la même population**, fixée par le plus large.
+    **Aucun ne bat celui en service** : le meilleur écart apparié au déployé vaut **+0,4 µm**
+    (3/8, [0,0 ; 0,9]) — il ne tranche pas, et il est du mauvais côté.
+  - ⭐⭐⭐ **Et la colonne qui explique tout est la part HORS LISSAGE.** Contre l'immobilité,
+    élargir **semble** aider (−2,5 → −2,7 → −3,1 µm) ; mais le même lissage appliqué à un gabarit
+    **mélangé** gagne de plus en plus lui aussi, et ce qui reste une fois cette part retirée
+    **s'effondre et change de signe** : −1,1 → −0,8 → **+2,8** → **+6,4**. Au-delà du 3×3, tout le
+    gain supplémentaire est du **lissage pur** : un voisinage large n'améliore pas la lecture, il
+    l'**efface**.
+  - ⚠⚠ **La preuve visuelle** : l'erreur de la lecture et celle du bruit **convergent** quand la
+    fenêtre s'élargit — **21,9 µm** d'écart au 3×3, **4,8** au 17×17. Deux courbes qui se
+    rejoignent, c'est un lissage qui a détruit ce qui distinguait la lecture du hasard. ⚠ Itérer
+    ne paie pas plus qu'élargir (−0,9 / −1,0 contre −1,1) : les deux façons butent au même endroit.
+  - ⚠ **Deux vrais défauts dans le code généralisé** : le seuil de **cinq** voisins
+    d'`accorder_les_voisins` n'était pas un réglage mais la **majorité** de neuf cellules — laissé
+    fixe pendant que la fenêtre grandit, il aurait laissé un 9×9 s'accorder sur 5 sur 81 ; il est
+    désormais dérivé et le contrôle vérifie qu'il retombe sur 5. Et un décalage plus grand que la
+    grille faisait lever numpy : un voisin qui n'existe pas est **sauté**, ce qui est exact.
+  - ⚠ **Une affirmation à moi corrigée par la mesure** : j'avais écrit que le masque rétrécit à
+    **chaque** passe. Faux — sur une grille pleine il se stabilise dès la seconde (77 → 77 → 77).
+    Le contrôle dit désormais ce qui est vrai (il ne **grandit** jamais) et se rend discriminant
+    par un **îlot** de cellules lisibles, mangé passe après passe jusqu'à rien.
+  - ⚠ **Un refactor avec son contrôle** : le parcours des pas est extrait dans
+    `parcourir_les_pas`, et la preuve est que **les deux images publiées de
+    `le_critere_du_raccrochage` sortent identiques** après extraction. L'échelle d'écarts
+    appariés passe dans `figure_commune.echelle_appariee`, avec un contrôle qui compare deux
+    rendus ne différant **que** par l'intervalle — s'ils sortaient identiques, le trait ne serait
+    pas dessiné et la figure ferait lire un verdict là où il n'y en a pas.
+  - ⭐⭐⭐ **Ce que ça laisse** : quatre portes fermées sur la lecture — la forme, son lieu
+    d'apprentissage, son amplitude, sa lissité — et le chantier vaut toujours **15,7 µm**. Ce qui
+    n'a jamais été mis en question, c'est ce que le raccrochage **lit** : une **intensité**. Or
+    `le_champ_de_fibres` et `fiber_orientation` décrivent la matière par l'**orientation** locale,
+    qui n'a pas le défaut mesuré ici — l'intensité d'une feuille ressemble à celle de sa voisine.
   - ⛔ **L'ÉCART DÉJÀ FRANCHI NE DIT PRESQUE RIEN DU SUIVANT (2026-09-06,
     `lecart_deja_franchi`, 16 contrôles, 5 triplets, 5163 cellules).** Un dérouleur parti d'une
     paire d'ancres connaît en chaque point la distance entre ces deux surfaces : c'était la seule
@@ -6324,8 +6359,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 3080 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 3772 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 3172 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 3864 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

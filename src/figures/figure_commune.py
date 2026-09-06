@@ -129,6 +129,75 @@ def prose_tracable(lignes) -> bool:
     return not glyphes_manquants("".join(lignes))
 
 
+def echelle_appariee(art, x0: int, y0: int, pw: int, ph: int, entrees: list, petit,
+                     legende: str, fond=(255, 255, 255), texte=(25, 25, 25),
+                     discret=(120, 120, 120), cadre=(200, 200, 200)) -> list[str]:
+    """Une échelle horizontale d'écarts appariés, chacun avec son intervalle à un cas de moins.
+
+    ⚠⚠⚠ L'INTERVALLE EST DESSINÉ, PAS RÉSUMÉ EN LÉGENDE : c'est LUI le verdict. Un écart dont
+    le trait traverse le zéro ne tranche pas, si grande que soit sa barre. Une figure qui ne
+    porterait que les écarts médians ferait lire un verdict là où il n'y en a pas.
+
+    ⚠⚠ LE NOM ET LE CHIFFRE VIVENT SUR LEUR PROPRE LIGNE, la barre en dessous. Posés à la
+    hauteur de la barre, ils tombent dessus dès qu'une barre traverse le panneau — mesuré sur
+    la borne de `figure_le_critere_du_raccrochage`, dont le chiffre devenait illisible.
+
+    ⚠ Cette fonction ne connaît le schéma d'AUCUNE mesure : elle reçoit des tuples
+    `(nom, écart, couleur, souligné)`. Deux figures qui lui passeraient leurs dictionnaires
+    bruts la rendraient solidaire de deux formats, donc impossible à faire évoluer pour l'une
+    sans risquer l'autre.
+
+    `écart` est un dict de `lecart_apparie` — ou None pour une ligne sans comparaison.
+    """
+    art.rectangle([x0, y0, x0 + pw, y0 + ph], outline=cadre)
+    valeurs = []
+    for _, e, _, _ in entrees:
+        if e is None or e.get("ecart_median_um") is None:
+            continue
+        valeurs += [e["ecart_median_um"], *e["intervalle_um"]]
+    if not valeurs:
+        valeurs = [0.0]
+    bas, haut = min(0.0, min(valeurs)), max(0.0, max(valeurs))
+    marge = max(1e-6, (haut - bas) * 0.08)
+    bas, haut = bas - marge, haut + marge
+    gauche, droite = x0 + 10, x0 + pw - 10
+    zero = gauche + (0.0 - bas) / (haut - bas) * (droite - gauche)
+    art.text((x0 + 8, y0 + 6), legende, fill=discret, font=petit)
+    # ⚠ L'axe est PÂLE sur toute la hauteur et FRANC au niveau de chaque barre : tracé en noir
+    # partout, il traverse les chiffres alignés à droite et l'on ne lit plus ni l'un ni l'autre.
+    art.line([zero, y0 + 24, zero, y0 + ph - 8], fill=cadre)
+    haut_ligne = (ph - 34) / max(1, len(entrees))
+    noms = []
+    for i, (nom, e, coul, souligne) in enumerate(entrees):
+        y_texte = y0 + 28 + haut_ligne * i
+        y_barre = y_texte + 19
+        noms.append(nom)
+        art.text((x0 + 10, y_texte), nom, fill=texte, font=petit)
+        if e is None or e.get("ecart_median_um") is None:
+            art.text((x0 + pw - 10 - petit.getbbox("—")[2], y_texte), "—",
+                     fill=discret, font=petit)
+            continue
+        ligne = (f"{e['ecart_median_um']:+.1f} um  {e['pas_ameliores']}/{e['pas']}  "
+                 f"{e['intervalle_um']}")
+        art.text((x0 + pw - 10 - petit.getbbox(ligne)[2], y_texte), ligne,
+                 fill=discret, font=petit)
+
+        def xx(val: float) -> float:
+            return gauche + (val - bas) / (haut - bas) * (droite - gauche)
+
+        h = 5.0
+        art.line([zero, y_barre - h - 4, zero, y_barre + h + 4], fill=texte)
+        a_, b_ = sorted((zero, xx(e["ecart_median_um"])))
+        art.rectangle([a_, y_barre - h, b_, y_barre + h], fill=coul)
+        if souligne:
+            art.rectangle([a_ - 1, y_barre - h - 1, b_ + 1, y_barre + h + 1], outline=texte)
+        g_, d_ = xx(e["intervalle_um"][0]), xx(e["intervalle_um"][1])
+        art.line([g_, y_barre, d_, y_barre], fill=texte)
+        for bout in (g_, d_):
+            art.line([bout, y_barre - h - 2, bout, y_barre + h + 2], fill=texte)
+    return noms
+
+
 def verifier() -> int:
     echecs = controles = 0
 
@@ -210,6 +279,33 @@ def verifier() -> int:
                        if l.startswith("GLYPHES_ABSENTS"))
     v("la constante est écrite en séquences d'échappement, pas en clair",
       not any(g in declaration for g in GLYPHES_ABSENTS))
+
+    # ⚠⚠⚠ L'ÉCHELLE APPARIÉE DOIT DESSINER SON INTERVALLE, parce que c'est lui le verdict. Le
+    # contrôle compare deux rendus qui ne diffèrent QUE par l'intervalle : s'ils sortent
+    # identiques, le trait n'est pas dessiné et la figure ferait lire un verdict là où il n'y
+    # en a pas.
+    from PIL import Image, ImageDraw  # noqa: PLC0415
+
+    petit = police(11)
+    serre = dict(ecart_median_um=-2.0, intervalle_um=[-2.1, -1.9], pas_ameliores=6, pas=7)
+    large = dict(ecart_median_um=-2.0, intervalle_um=[-9.0, 5.0], pas_ameliores=6, pas=7)
+    rendus = []
+    for e in (serre, large):
+        img = Image.new("RGB", (300, 90), (255, 255, 255))
+        noms = echelle_appariee(ImageDraw.Draw(img), 0, 0, 300, 90,
+                                [("essai", e, (76, 122, 84), False)], petit, "legende")
+        rendus.append(img.tobytes())
+    v("l'échelle appariée DESSINE l'intervalle, pas seulement l'écart",
+      rendus[0] != rendus[1])
+    v("... et elle rend les noms qu'elle a dessinés", noms == ["essai"])
+    vide = Image.new("RGB", (300, 90), (255, 255, 255))
+    souci = None
+    try:
+        echelle_appariee(ImageDraw.Draw(vide), 0, 0, 300, 90,
+                         [("rien", None, (0, 0, 0), False)], petit, "legende")
+    except Exception as exc:  # noqa: BLE001
+        souci = f"{type(exc).__name__}: {exc}"
+    v("... une ligne sans comparaison se dessine sans lever", souci is None)
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0

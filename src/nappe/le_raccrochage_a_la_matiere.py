@@ -461,9 +461,9 @@ def decalage_retenu(corr: np.ndarray, centres: np.ndarray) -> np.ndarray:
     return t
 
 
-def accorder_les_voisins(t: np.ndarray, valide: np.ndarray,
-                         minimum: int = 5) -> tuple[np.ndarray, np.ndarray]:
-    """Chaque décalage remplacé par la médiane de son voisinage de grille 3×3.
+def accorder_les_voisins(t: np.ndarray, valide: np.ndarray, demi: int = 1,
+                         minimum: int | None = None) -> tuple[np.ndarray, np.ndarray]:
+    """Chaque décalage remplacé par la médiane de son voisinage de grille (2·demi+1)².
 
     ⚠⚠ CE N'EST PAS UN RÉGLAGE, C'EST UN ÉNONCÉ SUR LA MATIÈRE : une feuille de papyrus est
     lisse à l'échelle de trois cellules de grille, donc deux voisins qui se raccrochent à
@@ -477,11 +477,28 @@ def accorder_les_voisins(t: np.ndarray, valide: np.ndarray,
     ⚠ Le voisinage se prend dans la GRILLE, jamais dans l'espace : deux cellules voisines dans
     la grille sont voisines sur la feuille, alors que deux points proches dans le volume
     peuvent appartenir à deux spires différentes — c'est toute la difficulté du rouleau.
+
+    ⚠⚠⚠ `demi` ÉLARGIT LE VOISINAGE, ET `minimum` EST DÉRIVÉ DE LUI. Le seuil de cinq voisins
+    du 3×3 n'était pas un réglage : neuf cellules, cinq est la MAJORITÉ. Il est donc calculé
+    plutôt qu'écrit, et le défaut reproduit exactement la valeur déployée. Un seuil laissé fixe
+    pendant que la fenêtre grandit aurait laissé un 9×9 s'accorder sur cinq cellules sur
+    quatre-vingt-une, c'est-à-dire fabriquer une confiance que le voisinage ne porte pas.
     """
+    demi = max(1, int(demi))
+    if minimum is None:
+        minimum = (2 * demi + 1) ** 2 // 2 + 1
     h, w = t.shape
     empile, masque = [], []
-    for du in (-1, 0, 1):
-        for dv in (-1, 0, 1):
+    for du in range(-demi, demi + 1):
+        for dv in range(-demi, demi + 1):
+            # ⚠⚠ UN DÉCALAGE PLUS GRAND QUE LA GRILLE NE RECOUVRE RIEN, et il est SAUTÉ plutôt
+            # que découpé. Les tranches décalées ne se correspondent plus dès que le décalage
+            # dépasse la dimension — mesuré : une demi-largeur de 40 sur une grille de 14
+            # faisait lever numpy sur des formes (0,0) contre (0,1). Sauter est exact : un
+            # voisin qui n'existe pas ne compte pour rien, ni dans la médiane ni dans le
+            # décompte de majorité.
+            if abs(du) >= h or abs(dv) >= w:
+                continue
             dec = np.full((h, w), np.nan)
             m = np.zeros((h, w), dtype=bool)
             su = slice(max(0, du), h + min(0, du))
@@ -1007,6 +1024,33 @@ def verifier() -> int:
     champ = np.tile(np.array([10.0, 10.0, 10.0, 10.0, 10.0]), (5, 1))
     champ[2, 2] = -40.0
     val = np.ones((5, 5), dtype=bool)
+    # ⚠⚠⚠ LE SEUIL DÉPLOYÉ EST UNE MAJORITÉ, ET C'EST CE CONTRÔLE QUI L'ÉNONCE. Il valait 5 sur
+    # un 3×3 depuis le premier jour ; le rendre dérivé sans vérifier qu'il retombe sur 5 aurait
+    # déplacé en silence tout ce que ce module publie.
+    v("le seuil de voisins est la MAJORITÉ de la fenêtre, et il retombe sur le 5 déployé",
+      accorder_les_voisins(np.zeros((3, 3)), np.ones((3, 3), dtype=bool))[1].sum()
+      == accorder_les_voisins(np.zeros((3, 3)), np.ones((3, 3), dtype=bool), minimum=5)[1].sum()
+      and (2 * 1 + 1) ** 2 // 2 + 1 == 5)
+    # ⚠⚠ ET UNE FENÊTRE PLUS LARGE EXIGE PLUS DE VOISINS, sinon un 9×9 s'accorderait sur cinq
+    # cellules sur quatre-vingt-une — une confiance que le voisinage ne porte pas.
+    large = np.ones((11, 11), dtype=bool)
+    large[0, :] = False
+    _, assez_large = accorder_les_voisins(np.zeros((11, 11)), large, demi=4)
+    _, assez_etroit = accorder_les_voisins(np.zeros((11, 11)), large, demi=1)
+    v("... et une fenêtre plus large retient MOINS de cellules, jamais plus",
+      int(assez_large.sum()) < int(assez_etroit.sum()),
+      f"{int(assez_large.sum())} contre {int(assez_etroit.sum())}")
+    # ⚠ Un voisinage élargi lisse davantage : un pic isolé doit s'effacer d'autant plus.
+    pic = np.full((11, 11), 2.0)
+    pic[5, 5] = 40.0
+    v("... et elle lisse davantage : le même pic isolé s'efface autant, sur plus de cellules",
+      accorder_les_voisins(pic, np.ones((11, 11), dtype=bool), demi=3)[0][5, 5] == 2.0)
+    # ⚠⚠⚠ ET UNE FENÊTRE PLUS GRANDE QUE LA GRILLE NE RETIENT RIEN, plutôt que de lever. Un
+    # voisin qui n'existe pas ne compte pour rien : la majorité n'est atteinte nulle part, donc
+    # aucune cellule n'est accordée — et c'est un fait que l'appelant peut lire, pas une trace.
+    v("une fenêtre plus grande que la grille ne retient RIEN, et ne lève pas",
+      int(accorder_les_voisins(np.zeros((5, 5)), np.ones((5, 5), dtype=bool),
+                               demi=40)[1].sum()) == 0)
     acc, assez = accorder_les_voisins(champ, val)
     v("la médiane du voisinage corrige l'isolé", abs(acc[2, 2] - 10.0) < 1e-9, str(acc[2, 2]))
     v("... et laisse ses voisins tranquilles", abs(acc[1, 1] - 10.0) < 1e-9)

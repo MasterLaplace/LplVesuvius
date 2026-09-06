@@ -3035,6 +3035,98 @@ c'est le prix des deux pas supplémentaires que le relevé de la tranche précé
 > plusieurs passes, ou un **ajustement de surface** plutôt qu'une médiane. ⚠ Et le témoin du
 > mélange accordé devra suivre à chaque étage : plus on lisse, plus le bruit s'améliore aussi.
 
+#### ⛔ LA LISSITÉ EST ÉPUISÉE À L'ÉTAGE DÉPLOYÉ — au-delà, tout le gain est du lissage
+
+> Mesure : `src/nappe/la_lissite_de_la_feuille.py` (19 contrôles) →
+> `docs/mesures/la_lissite_de_la_feuille.json`. Figure :
+> `src/figures/figure_la_lissite_de_la_feuille.py` (16 contrôles), le 2026-09-07.
+>
+> ```bash
+> uv run python src/nappe/la_lissite_de_la_feuille.py --cote 960 \
+>     --json docs/mesures/la_lissite_de_la_feuille.json
+> uv run python src/figures/figure_la_lissite_de_la_feuille.py \
+>     --sortie docs/images/75_la_lissite_de_la_feuille.png
+> ```
+
+Le voisinage s'élargit — 3×3, 5×5, 9×9, 17×17 — et s'itère — une passe, deux, trois. Huit pas,
+**15 618 cellules** retenues sur 16 569, tous les étages jugés sur **la même population**, fixée
+par le plus large : sans ça un 17×17 serait noté sur le cœur de la grille pendant qu'un 3×3 le
+serait sur presque tout, et l'écart mesuré porterait sur les bords.
+
+![la lissité de la feuille](images/75_la_lissite_de_la_feuille.png)
+
+| étage | voisins | LECTURE | contre ne rien faire | BRUIT | **hors lissage** |
+|---|---:|---:|---|---:|---:|
+| brut | 1 | 44,2 µm | −0,4 · 4/8 · [−1,2 ; +0,5] ⛔ | 59,6 | +0,0 |
+| ⭐ **3×3, une passe** *(déployé)* | 9 | **35,7** | −2,5 · 6/8 · [−2,6 ; −2,4] ✅ | 57,6 | **−1,1** |
+| 5×5 | 25 | 35,9 | −2,7 · 7/8 · [−3,2 ; −2,2] ✅ | 55,7 | −0,8 |
+| 9×9 | 81 | 40,9 | −3,1 · 5/8 · [−3,5 ; −2,6] ✅ | 52,6 | **+2,8** |
+| 17×17 | 289 | 42,6 | −0,7 · 4/8 · [−2,2 ; +0,9] ⛔ | 47,4 | **+6,4** |
+| 3×3, deux passes | 9 | 35,8 | −2,6 · 6/8 ✅ | 57,2 | −0,9 |
+| 3×3, trois passes | 9 | 35,6 | −2,8 · 6/8 ✅ | 56,6 | −1,0 |
+
+> ⛔ **Aucun étage ne bat celui en service.** Le meilleur écart apparié au déployé vaut **+0,4 µm**
+> (3 pas sur 8, intervalle [0,0 ; 0,9]) : il ne tranche pas, et il est du mauvais côté.
+
+##### ⭐⭐⭐ Et la colonne qui explique tout : la part HORS LISSAGE
+
+Contre l'immobilité, élargir **semble** aider : −2,5 → −2,7 → −3,1 µm. Mais le même lissage
+appliqué aux décalages d'un gabarit **mélangé** gagne de plus en plus, lui aussi. Ce qui reste
+une fois cette part retirée — ce que la **lecture** apporte à cet étage — **s'effondre et change
+de signe** : −1,1 → −0,8 → **+2,8** → **+6,4**.
+
+> ⭐⭐⭐ **Au-delà du 3×3, tout le gain supplémentaire est du lissage pur.** Un voisinage large
+> n'améliore pas la lecture : il l'efface. Le panneau A le montre sans commentaire — l'erreur de
+> la lecture et celle du bruit **convergent** quand la fenêtre s'élargit, de **21,9 µm** d'écart
+> au 3×3 à **4,8 µm** au 17×17. Deux courbes qui se rejoignent, c'est un lissage qui a détruit ce
+> qui distinguait la lecture du hasard.
+
+⚠ **Itérer ne paie pas davantage qu'élargir** : deux et trois passes du 3×3 rendent 35,8 et
+35,6 µm, avec des parts hors lissage de −0,9 et −1,0 — soit la même chose que la passe unique
+(−1,1). Les deux façons d'élargir butent au même endroit.
+
+> ⛔ **Le 3×3 une passe n'est donc pas un réglage heureux : c'est l'optimum de la famille**, et la
+> mesure dit pourquoi. C'est la **quatrième porte fermée** sur la lecture, après la forme, l'endroit
+> où on l'apprend et l'amplitude de ce qu'elle choisit. Il reste **15,7 µm** entre l'étage déployé
+> (35,7) et l'oracle (20,0), et la lissité n'ira pas les chercher.
+
+⚠ **Deux vrais défauts, dans le code que cette tranche a dû généraliser.**
+
+1. `accorder_les_voisins` avait un seuil de **cinq** voisins écrit en dur. Ce n'était pas un
+   réglage — neuf cellules, cinq est la **majorité** — mais le laisser fixe pendant que la fenêtre
+   grandit aurait laissé un 9×9 s'accorder sur cinq cellules sur quatre-vingt-une, c'est-à-dire
+   fabriquer une confiance que le voisinage ne porte pas. Il est désormais **dérivé**, et le
+   contrôle vérifie qu'il retombe exactement sur le 5 déployé.
+2. Un décalage **plus grand que la grille** faisait lever numpy sur des formes incompatibles : les
+   tranches décalées cessent de se correspondre dès que le décalage dépasse la dimension. Un voisin
+   qui n'existe pas est désormais **sauté** — ce qui est exact, il ne compte ni dans la médiane ni
+   dans le décompte de majorité — et une fenêtre plus grande que la grille ne retient simplement
+   rien, au lieu de tracer.
+
+⚠ **Et une affirmation à moi, corrigée par la mesure** : j'avais écrit que le masque rétrécit à
+**chaque** passe. Faux — sur une grille pleine il se stabilise dès la seconde (77 → 77 → 77),
+parce que seuls les coins manquent de majorité et que leur absence n'en prive personne d'autre.
+Le contrôle dit désormais ce qui est vrai (le masque ne **grandit** jamais) et le rend
+discriminant par un cas où il rétrécit vraiment : un **îlot** de cellules lisibles, mangé
+passe après passe jusqu'à rien.
+
+⚠ **Un refactor, avec son contrôle** : le parcours des pas — une traversée du volume pour le
+gabarit, une pour les lignes — est extrait dans `parcourir_les_pas` et partagé par les deux
+mesures. Le contrôle est que les **deux images publiées de `le_critere_du_raccrochage` sortent
+identiques** après extraction. De même, l'échelle horizontale d'écarts appariés vit désormais dans
+`figure_commune.echelle_appariee`, avec un contrôle qui compare deux rendus ne différant **que**
+par l'intervalle : s'ils sortaient identiques, le trait ne serait pas dessiné et la figure ferait
+lire un verdict là où il n'y en a pas.
+
+> ⭐⭐⭐ **Ce que cette tranche laisse à la suivante.** Quatre portes sont fermées sur la lecture —
+> la forme, son lieu d'apprentissage, son amplitude, sa lissité — et le chantier vaut toujours
+> **15,7 µm**. Ce qui n'a jamais été mis en question, c'est ce que le raccrochage **lit** : une
+> **intensité**. Or `le_champ_de_fibres` et `fiber_orientation` existent dans ce dépôt et
+> décrivent la matière autrement — par l'**orientation** locale plutôt que par la brillance. Un
+> gabarit d'orientation n'aurait pas le défaut mesuré ici, qui est que l'intensité d'une feuille
+> ressemble à celle de sa voisine. ⚠ Et il faudra le juger avec les mêmes instruments : population
+> unique, écart apparié, témoin mélangé à chaque étage.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est
