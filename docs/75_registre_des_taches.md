@@ -2300,6 +2300,120 @@ serait sortie en carré vide.
 > les deux branches au lieu de les moyenner à parts égales est le geste que cette mesure rend
 > possible, et il ne demande toujours aucune cible.
 
+#### ⛔⭐⭐⭐ LA TROISIÈME ANCRE NE PAIE PAS — et la piste des ancres est refermée
+
+> Mesure : `src/nappe/combien_dancres.py` (38 contrôles) → `docs/mesures/combien_dancres.json`.
+> Figure : `src/figures/figure_combien_dancres.py` (18 contrôles), le 2026-09-06.
+>
+> ```
+> uv run python src/nappe/combien_dancres.py --cote 640 --portee 4 --kmax 4 \
+>     --json docs/mesures/combien_dancres.json
+> uv run python src/figures/figure_combien_dancres.py --sortie docs/images/75_combien_dancres.png
+> ```
+
+La tranche précédente avait ouvert **une** piste et une seule : *« ce n'est pas une méthode,
+c'est une borne — elle dit si l'effort doit aller vers une meilleure propagation ou vers PLUS
+D'ANCRES »*. Cette tranche la referme. **431 jeux d'ancres sur 9 cibles**, même boîte (640) et
+même portée (4) que l'étude qu'elle prolonge, donc les chiffres se comparent.
+
+![la deuxième ancre fait tout](images/75_combien_dancres.png)
+
+##### L'estimateur, et pourquoi il n'a aucun paramètre libre
+
+Si l'erreur d'une ancre croît linéairement avec son bras, la prédiction de l'ancre $i$ vaut
+$p_i \simeq p + \beta s_i$ où $s_i$ est son bras **signé**. Ce qui annule $\beta$ est la droite
+des moindres carrés en $s$, évaluée en $s = 0$.
+
+> ⭐⭐ **À deux ancres de signes opposés, elle rend EXACTEMENT la pondération par les bras déjà
+> mesurée.** Pour $s = (-a, +b)$ on obtient $w = (b, a)/(a+b)$ : ce n'est pas une ressemblance de
+> forme, c'est une **identité algébrique**, et la batterie la vérifie sur six paires de bras.
+> La généralisation ne remplace pas le résultat précédent, elle le **contient**.
+
+⚠⚠ **Les poids ne dépendent que des bras, jamais des données** — l'ordonnée à l'origine d'une
+régression s'écrit $\sum_i w_i p_i$ avec des $w_i$ qui ne contiennent que les $s_i$. Aucun bit de
+la cible n'entre donc dans la combinaison : un dérouleur pourrait l'appliquer sans jamais regarder
+où il doit arriver.
+
+##### ⛔ Le verdict : le gain s'arrête à DEUX ancres qui encadrent
+
+| ancres | jeux | ajusté | *dont ceux qui encadrent* |
+|---|---:|---:|---:|
+| 1 | 48 | 70,3 µm | — |
+| 2 | 112 | 42,5 µm | **36,7 µm** *(56 jeux)* |
+| 3 | 149 | 37,2 µm | **35,5 µm** *(119)* |
+| 4 | 122 | 35,3 µm | **35,3 µm** *(116)* |
+
+⚠ Le contendant sans information de bras — la **moyenne plate** des mêmes nuages — rend 53,3 /
+45,7 / 38,4 µm : l'ajustement le bat en médiane à tous les nombres d'ancres, mais **jeu par jeu**
+seulement 191 fois sur 291 chez les encadrants. Il gagne **gros** quand il gagne et perd **petit**
+quand il perd, et un seul compte agrégé laisserait croire à un ex æquo.
+
+> ⛔⭐⭐ **La deuxième ancre enlève 27,8 µm. La troisième, à jeux comparables, en enlève 1,2 ; la
+> quatrième, 0,2.** Le problème n'est **pas** le nombre d'ancres — cette piste est refermée.
+
+⚠⚠ **UN CHIFFRE PUBLIÉ SUR UNE POPULATION CONFONDUE, CORRIGÉ.** J'avais d'abord calculé la
+saturation sur la courbe **agrégée**, qui descend encore — et elle ment : la part de jeux qui
+encadrent passe de **0 à 50, 80 puis 95 %** avec le nombre d'ancres, donc son affaissement mesure
+d'abord ce **changement de composition**. Les deux courbes sont publiées, la seconde est celle qui
+tranche.
+
+##### ⚠⚠⚠ Et le panneau B dit ce que je croyais faux : la dérive ACCÉLÈRE
+
+| bras | 1 | 2 | 3 | 4 |
+|---|---:|---:|---:|---:|
+| **une** ancre | 41,1 µm | 63,1 | 100,8 | **149,4** |
+| incréments | | +22,0 | +37,7 | **+48,6** |
+| **deux** ancres à ±ce bras | 30,0 µm | 34,0 | 44,6 | **63,8** |
+| incréments | | +4,0 | +10,6 | **+19,2** |
+
+> ⚠⚠⚠ **La dérive d'une ancre n'est PAS linéaire, elle accélère** — et la prémisse de
+> l'estimateur, comme celle de la pondération par les bras de la tranche précédente, n'est donc
+> vraie que **localement**. Un estimateur linéaire n'en annule que la part linéaire ; ce qui reste
+> est la **courbure**, et le résidu de l'encadrement accélère lui aussi.
+
+⭐⭐⭐ **C'est le mécanisme qui manquait à la tranche précédente.** Elle avait constaté que `1+4` et
+`2+4` **nuisent** et écrit noir sur blanc : *« ce corpus ne dit PAS si c'est la longueur absolue ou
+le déséquilibre qui casse »*. Il le dit maintenant : c'est la **longueur**. À bras égaux et
+équilibrés — donc sans aucun déséquilibre — l'erreur passe de 30,0 à **63,8 µm** entre ±1 et ±4,
+et son accélération est ce qu'aucune pondération linéaire ne peut rattraper.
+
+##### Ce que ça donne comme consigne
+
+> ⭐⭐ **Deux ancres à ±2 tours tiennent la feuille à 34,0 µm** (4 cas), la moitié de la
+> demi-épaisseur. À ±4, encore **63,8 µm** — sous les 67,75 —, mais sur **2 cas** seulement, et ce
+> dépôt a déjà vu un verdict s'inverser quand l'échantillon a grandi.
+
+⚠ Une différence de méthode avec la tranche précédente, qui explique l'écart entre **36,7** et
+**35,9 µm** sur ce qui est presque la même chose : là-bas la combinaison était faite **dans les
+deux sens** et les distances mises en commun ; ici le nuage de référence est celui de l'ancre la
+plus basse. Deux populations de points, deux médianes voisines — et le dire vaut mieux que
+laisser croire à une contradiction.
+
+##### ⛔ Et la parabole ne paie pas non plus — mesurée avant d'être écrite comme une piste
+
+La courbure étant réelle, l'estimateur qui l'annulerait n'est plus une droite mais une
+**parabole** — ce qui demande **trois** ancres pour être identifiée, et redonnerait donc un rôle à
+la troisième : non plus moyenner, mais **mesurer la courbure**. J'allais l'écrire comme la seule
+lecture qui ouvre quelque chose. Elle est mesurée à la place.
+
+> ⛔ **Sur les 235 jeux d'au moins trois ancres qui encadrent — les MÊMES jeux, pas deux
+> populations — le degré deux rend 37,5 µm contre 35,3 pour la droite, et il ne gagne que sur 87.**
+> Sur des bras entiers de 1 à 4, identifier une courbure coûte plus de **variance** qu'elle
+> n'enlève de **biais**.
+
+⚠ Ce que ce négatif dit exactement, et pas plus : la courbure est réelle et mesurée, mais elle
+n'est pas **estimable** depuis trois ou quatre bras entiers. Un corpus qui offrirait des bras plus
+fins, ou plus nombreux, poserait la question autrement — et ce n'est pas ce corpus.
+
+> ⭐⭐⭐ **Ce que cette tranche laisse à la suivante, et c'est un inventaire de portes fermées.**
+> Le bilan des cinq soupçons avait laissé **deux** pistes : une meilleure propagation du pas, ou
+> plus d'ancres. La première était déjà close (cinq soupçons éliminés). Cette tranche ferme la
+> seconde — la troisième ancre ne paie pas — **et** la troisième piste que la mesure elle-même
+> avait suggérée, l'estimateur d'un degré de plus. Ce qui reste debout est le fait, pas le
+> remède : **la dérive accélère avec le bras**, et deux ancres qui encadrent en annulent la pente.
+> Toute suite qui prétend faire mieux devra s'attaquer à ce qui produit cette accélération, pas à
+> la façon de la combiner après coup.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est
@@ -2780,7 +2894,7 @@ mesurer est le piège habituel : `concordance_des_plans` la mesure désormais.
 
 ---
 
-### D4 ⚠⚠⚠ — 67 batteries vertes sur 150 n'atteignent pas le nombre qu'elles publient
+### D4 ⚠⚠⚠ — 67 batteries vertes sur 152 n'atteignent pas le nombre qu'elles publient
 
 Document dédié : [`80`](80_la_batterie_natteint_pas_le_nombre.md). Suite de
 [`61`](61_les_batteries_qui_ne_pouvaient_pas_echouer.md), dont il franchit la limite finale —
@@ -2803,8 +2917,8 @@ sans rien exécuter) :
 
 | | |
 |---|---:|
-| modules qui publient une mesure ou une figure | **150** |
-| dont la batterie n'atteint pas ce chemin | **67** (45 %) |
+| modules qui publient une mesure ou une figure | **152** |
+| dont la batterie n'atteint pas ce chemin | **67** (44 %) |
 | fonctions hors de portée | **102** |
 
 ⚠⚠ **La portée a été resserrée après le premier chiffre**, et il était trop large : la règle

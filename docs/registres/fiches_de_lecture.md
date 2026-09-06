@@ -4220,7 +4220,7 @@ vérification du dépôt lui-même.
   balayage syntaxique de tout l'arbre montre que ce n'est pas une exception, et le document
   livre le remède sur le module fautif, ses six sondes, puis un second constat trouvé en chemin.
 - **compte exact et cause** :
-  - **67 modules en dette sur 150 qui publient une mesure ou une figure** (45 %), **102
+  - **67 modules en dette sur 152 qui publient une mesure ou une figure** (44 %), **102
     fonctions** hors de portée, relevés par `src/depot/le_chemin_du_nombre_publie.py`, qui ferme
     le graphe d'appels de chaque module et rend `atteintes(main) − atteintes(verifier)`.
   - ⚠⚠ **La portée a été resserrée en cours de route** : la première règle comptait comme
@@ -5518,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 3037
+- **lignes** : 3151
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5591,8 +5591,39 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - **E, ce qui est hors registre avec sa raison** : la soumission (hors périmètre décidé par
     l'auteur) ; le second papier de `72`, qui est ⚠⚠⚠ **une occasion de publication et non un
     progrès vers le prix** et n'avance qu'avec C ; H3 et H6 de `69`, répondues par le dépôt.
+  - ⛔⭐⭐⭐ **La piste des ancres est REFERMÉE le 2026-09-06** (`combien_dancres`, 46 contrôles,
+    431 jeux d'ancres sur 9 cibles, même boîte 640 et même portée 4 que l'étude qu'elle
+    prolonge). L'estimateur est la **droite des moindres carrés en bras signé, évaluée en zéro** :
+    aucun paramètre libre, et à deux ancres de signes opposés elle rend **exactement** la
+    pondération par les bras déjà mesurée — identité algébrique vérifiée sur six paires de bras,
+    donc la généralisation **contient** le résultat qu'elle étend. Poids qui ne dépendent **que**
+    des bras, jamais des données : un dérouleur pourrait l'appliquer sans regarder sa cible.
+    **Courbe** : 70,3 → 42,5 → 37,2 → 35,3 µm ; sur les seuls jeux qui encadrent, 36,7 → 35,5 →
+    35,3. ⛔ **La deuxième ancre enlève 27,8 µm, la troisième 1,2 et la quatrième 0,2.**
+  - ⚠⚠ **Un chiffre publié sur une population confondue, corrigé** : la saturation était calculée
+    sur la courbe **agrégée**, qui descend encore — or la part de jeux encadrants passe de 0 à 50,
+    80 puis 95 % avec le nombre d'ancres, donc son affaissement mesure d'abord ce **changement de
+    composition**. Les deux courbes sont publiées, la seconde tranche.
+  - ⚠⚠⚠ **La prémisse de l'estimateur est FAUSSE au-delà du local, et la mesure le dit** : la
+    dérive d'une ancre vaut 41,1 / 63,1 / 100,8 / **149,4 µm** aux bras 1 à 4, soit des incréments
+    de **22,0 / 37,7 / 48,6** — elle **accélère**. Une droite n'en annule que la pente ; le résidu
+    de l'encadrement accélère lui aussi (**4,0 / 10,6 / 19,2**). ⭐⭐⭐ C'est le **mécanisme qui
+    manquait** à la tranche précédente, laquelle avait constaté que `1+4` et `2+4` nuisent en
+    écrivant *« ce corpus ne dit PAS si c'est la longueur absolue ou le déséquilibre qui casse »* :
+    c'est la **longueur** — à bras équilibrés, l'erreur passe de 30,0 à 63,8 µm entre ±1 et ±4.
+  - ⛔ **Et la parabole ne paie pas non plus, mesurée avant d'être écrite comme une piste.** Un
+    ajustement de **degré deux** annulerait la courbure et demanderait trois ancres pour être
+    identifié, ce qui redonnerait un rôle à la troisième. Sur les **235 jeux d'au moins trois
+    ancres qui encadrent — les mêmes jeux** — il rend **37,5 µm contre 35,3** pour la droite et ne
+    gagne que sur 87 : sur des bras entiers de 1 à 4, identifier une courbure coûte plus de
+    **variance** qu'elle n'enlève de **biais**.
+  - Consigne pratique : deux ancres à **±2 tours** tiennent la feuille à **34,0 µm** (4 cas) ; à
+    ±4, encore 63,8 µm mais sur **2 cas** seulement — le compte est publié **attaché** au chiffre.
+  - ⚠ Une différence de méthode explique l'écart entre 36,7 et 35,9 µm sur ce qui est presque la
+    même chose : la tranche précédente combinait **dans les deux sens** et mettait les distances en
+    commun, celle-ci prend pour référence le nuage de l'ancre la plus basse.
   - ⚠⚠⚠ **D4 ouverte le 2026-09-06** — *le chemin qui produit le nombre publié n'est atteint
-    par aucune batterie* : **67 modules sur 150**, **102 fonctions**, et la branche laissée
+    par aucune batterie* : **67 modules sur 152**, **102 fonctions**, et la branche laissée
     dehors porte toujours le même nom (`mesurer` dans 13, `dessiner` dans 10). **Cinq modules**
     sont réparés et la matière **promue** en un lecteur unique plus deux fixtures qui décrivent
     le même objet (matière injectée par paramètre, découpage laissé dedans, batteries 32 → 46,
@@ -6076,8 +6107,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 2345 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 3037 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 2459 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 3151 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

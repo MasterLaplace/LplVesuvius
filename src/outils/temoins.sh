@@ -1515,6 +1515,7 @@ run "reperes apparies"         uv run --project "$ROOT" python "$ROOT/src/encre/
 run "reperes interieurs"       uv run --project "$ROOT" python "$ROOT/src/encre/les_reperes_interieurs.py" --verifier
 run "le corpus des spires"     uv run --project "$ROOT" python "$ROOT/src/nappe/le_corpus_des_spires.py" --verifier
 run "derouler des deux bords"  uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_des_deux_bords.py" --verifier
+run "combien d ancres"         uv run --project "$ROOT" python "$ROOT/src/nappe/combien_dancres.py" --verifier
 run "derouler en raccrochant"  uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_en_raccrochant.py" --verifier
 run "derouler au pas normal"   uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_par_le_pas_normal.py" --verifier
 run "la derive est-elle un biais"uv run --project "$ROOT" python "$ROOT/src/nappe/la_derive_est_elle_un_biais.py" --verifier
@@ -1533,6 +1534,7 @@ run "topologie du volume"      uv run --project "$ROOT" python "$ROOT/src/rendu/
 
 # Les figures de la meme campagne : leur batterie tient sans dessiner.
 run "fig : deux bords"         uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_des_deux_bords.py" --verifier
+run "fig : combien d ancres"   uv run --project "$ROOT" python "$ROOT/src/figures/figure_combien_dancres.py" --verifier
 run "fig : en raccrochant"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_en_raccrochant.py" --verifier
 run "fig : pas normal"         uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_par_le_pas_normal.py" --verifier
 run "fig : drapeau de normale" uv run --project "$ROOT" python "$ROOT/src/figures/figure_drapeau_de_normale.py" --verifier

@@ -32,8 +32,8 @@ pas exercer.
 
 | | |
 |---|---:|
-| modules qui publient une mesure ou une figure | **150** |
-| dont la batterie n'atteint pas ce chemin | **67** (45 %) |
+| modules qui publient une mesure ou une figure | **152** |
+| dont la batterie n'atteint pas ce chemin | **67** (44 %) |
 | fonctions hors de portée, au total | **102** |
 
 ⚠⚠ **La portée a été resserrée en cours de route, et le premier chiffre publié était trop

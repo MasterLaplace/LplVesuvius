@@ -1,5 +1,5 @@
 {
-  "modules_qui_publient": 150,
+  "modules_qui_publient": 152,
   "modules_en_dette": 67,
   "fonctions_non_couvertes": 102,
   "tetes_de_chemin": {
@@ -66,7 +66,7 @@
       "en_dette": 23
     },
     "figures": {
-      "publient": 50,
+      "publient": 51,
       "en_dette": 10
     },
     "graine": {
@@ -74,7 +74,7 @@
       "en_dette": 9
     },
     "nappe": {
-      "publient": 29,
+      "publient": 30,
       "en_dette": 12
     },
     "rendu": {
@@ -94,7 +94,7 @@
       "en_dette": 1
     }
   },
-  "part_en_dette": 0.447,
+  "part_en_dette": 0.441,
   "lignes": [
     {
       "fichier": "src/commun/audit_profils_plats.py",
@@ -763,6 +763,15 @@
       "en_dette": false
     },
     {
+      "fichier": "src/figures/figure_combien_dancres.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
       "fichier": "src/figures/figure_correction_appliquee.py",
       "fonctions": 5,
       "atteintes_par_main": 4,
@@ -1316,6 +1325,15 @@
         "juger"
       ],
       "en_dette": true
+    },
+    {
+      "fichier": "src/nappe/combien_dancres.py",
+      "fonctions": 8,
+      "atteintes_par_main": 7,
+      "atteintes_par_la_batterie": 6,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
     },
     {
       "fichier": "src/nappe/couverture_publiee.py",
