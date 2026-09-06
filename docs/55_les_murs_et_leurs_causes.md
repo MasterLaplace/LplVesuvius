@@ -11,7 +11,7 @@ la fois. Une feuille de route qui liste des tâches laisse croire qu'on avance q
 tourne ; celle-ci liste des causes **éliminées**, et montre l'espace rétrécir. C'est le
 seul progrès mesurable sur un problème que personne n'a résolu.
 
-**51 causes candidates** sur **4 murs** : ❌ **37** éliminées · ✅ **11** confirmées · 🔒 **3** bloquées
+**54 causes candidates** sur **4 murs** : ❌ **39** éliminées · ✅ **12** confirmées · 🔒 **3** bloquées
 
 | symbole | verdict | ce que ça veut dire |
 |---|---|---|
@@ -29,7 +29,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 
 ## 1. Le tracé ne suit pas de feuille
 
-❌ 19 éliminées · ✅ 6 confirmées · 🔒 3 bloquées
+❌ 21 éliminées · ✅ 7 confirmées · 🔒 3 bloquées
 
 | cause candidate | | ce qui a été mesuré | où |
 |---|---|---|---|
@@ -39,6 +39,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | ce qui est établi : la surface est EN TRAVERS de l'empilement | ✅ | des spires coupées en travers, vues à l'image à étendue égale contre une feuille publiée | [`25`](25_une_graine_choisie_sur_la_planeite.md) |
 | le niveau de la prédiction n'était propagé nulle part | ✅ | trois conséquences : graine dans le vide, maillage rendu hors du scan, et min_area_cm évalué dans deux unités — les aires m7 sont fausses d'un facteur 16 | [`54`](54_cinq_rendus_vides.md) |
 | lisser le champ de NORMALES avant le pas répare ce que le raccrochage abîme | ✅ | la dérive du raccrochage tombe de +56,1 à +25,3 um par tour, et le même lissage ne fait RIEN pour le pas aveugle (+22,3 contre +22,0) — donc le dégât était bien celui du raccrochage ; +26,0 / +25,8 / +25,3 aux trois tailles de boîte, le contendant le plus stable des dix | [`75`](75_registre_des_taches.md) |
+| encadrer une spire par ses deux voisines, au lieu de marcher depuis une seule | ✅ | sur 12 triplets symétriques : branches seules 52,8 et 66,5 um, ENCADRÉE 31,0 — sous la demi-épaisseur de 67,75 — et elle bat les DEUX branches sur 11 triplets, ainsi que « la meilleure des deux » (50,3) qui demande de savoir laquelle ; le gain se creuse avec le saut (1,26 puis 1,79 puis 2,19) | [`75`](75_registre_des_taches.md) |
 | la fenêtre de lecture | ❌ | relu à 128 px × 109 couches, la géométrie du corpus : le classement ne bouge pas | [`52`](52_calibrer_sur_son_corpus.md) |
 | la chaîne de rendu | ❌ | un maillage PUBLIÉ passé par notre chaîne revient à 0,873 — au-dessus de la médiane du corpus | [`53`](53_le_temoin_positif_du_rendu.md) |
 | le champ de normales (NORMAL pèse 10) | ❌ | chargé pour de vrai : coût par génération ×29, trajectoire INCHANGÉE sur 118 générations | [`26`](26_le_champ_de_direction.md) |
@@ -58,6 +59,8 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | ce qui se dégrade sous un dérouleur raccroché est le gabarit qu'il relit | ❌ | geler le gabarit sur la spire de départ donne +54,2 um par tour contre +56,1 sans remède, et son contraste ne s'effondre pas (51, 78, 53, 40, 47, 51 au fil des six tours) : la surface ressemble encore à une feuille, c'est la DIRECTION de recherche qui se perd | [`75`](75_registre_des_taches.md) |
 | la dispersion des normales serait la cause de la dérive | ❌ | élargir le support de la dérivée de 1 à 4 cellules fait tomber la dispersion de 2,78 à 1,59 degré (-43 %) et laisse l'erreur du pas ou elle est : 42,7 puis 41,7 um, au premier tour ou tous les supports partent de 500 a 800 cellules — la dispersion est un SYMPTOME, quatre soupcons testes et quatre ecartes | [`75`](75_registre_des_taches.md) |
 | la longueur LOCALE du pas se lit dans le volume, crête à crête | ❌ | la médiane lue vaut 136,5 um contre 135,5 publiée — un accord a 7 millièmes qui ne prouve rien, la médiane d'un tirage uniforme dans [0,5 L ; 1,5 L] valant exactement L ; cellule par cellule la lecture et son témoin s'écartent de 0,292 de la fenêtre quand deux tirages INDÉPENDANTS s'en écarteraient de 0,293, soit 99,7 % de l'étalon ; et le sens retenu n'est meme pas unanime sur les neuf spires alors que les grilles publiées partagent une orientation | [`75`](75_registre_des_taches.md) |
+| le gain de l'encadrement viendrait du moyennage de deux bruits | ❌ | les écarts SIGNÉS des deux branches valent +34,1 et -59,9 um, de signes opposés sur 10 triplets sur 12 : c'est un BIAIS qui s'annule, pas du bruit — et le témoin le confirme, deux branches du MÊME côté ont un milieu qui ne bat pas la plus proche | [`75`](75_registre_des_taches.md) |
+| le désaccord entre deux branches serait un signal de confiance sans cible | ❌ | c'est la seule mesure du chantier qui ne demande pas la réponse, et elle ne prédit pas l'erreur : rho 0,28 avec p 0,38 sur douze triplets | [`75`](75_registre_des_taches.md) |
 | comparer le relief d'une trace L2 à une trace L0 | 🔒 | à aire égale un maillage L2 rend quatre fois moins de pixels de côté, donc les deux ne tiennent jamais dans la même fenêtre d'analyse — le relief ne peut pas les départager | [`54`](54_cinq_rendus_vides.md) |
 | les résidus du champ d'orientation publié (A2 ter) | 🔒 | le pas de grille publié vaut 64 voxels, soit 3,89 écarts inter-feuilles par cellule contre 0,5 exigés par Nyquist : le champ est REPLIÉ, pas bruité | [`75`](75_registre_des_taches.md) |
 | bâtir le raccrochage à la matière sur les piles de surface publiées | 🔒 | la pile porte à 129,6 um autour de la surface, soit 0,956 feuille, quand la voisine est à 135,5 : il manque 5,9 um — mesuré sur 1 459 592 colonnes, avec la convention du centre vérifiée (pic à -1,5 couche) | [`75`](75_registre_des_taches.md) |

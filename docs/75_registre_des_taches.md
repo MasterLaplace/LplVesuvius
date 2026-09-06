@@ -2161,6 +2161,88 @@ longueurs lues s'y étalent sur **30,4** contre **0,7** avec une feuille.
 > mesuré si un dérouleur qui part de **plusieurs** endroits à la fois — et dont les branches
 > doivent s'accorder là où elles se rencontrent — fait mieux qu'un seul qui part d'un bout.
 
+#### ⭐⭐⭐ DEUX ANCRES VALENT BIEN MIEUX QU'UNE — et l'encadrement annule un BIAIS
+
+> Mesure : `src/nappe/derouler_des_deux_bords.py` (20 contrôles) →
+> `docs/mesures/derouler_des_deux_bords.json`. Figure :
+> `src/figures/figure_derouler_des_deux_bords.py` (11 contrôles), le 2026-09-06.
+>
+> ```
+> uv run python src/nappe/derouler_des_deux_bords.py --cote 640 --json docs/mesures/derouler_des_deux_bords.json
+> uv run python src/figures/figure_derouler_des_deux_bords.py --sortie docs/images/75_derouler_des_deux_bords.png
+> ```
+
+Cinq soupçons écartés portaient tous sur **la même marche** : une qui part d'une seule spire et
+n'a que sa propre reconstruction pour se juger. Celle-ci change la **structure** du problème : la
+spire `m` est reconstruite depuis `m − j` **et** depuis `m + j`.
+
+⭐⭐ **Et là, pour la première fois, deux reconstructions se rencontrent.** Des spires concentriques
+ne se croisent jamais, donc « plusieurs départs » ne veut rien dire tant qu'on marche tous dans le
+même sens ; **encadrer**, si.
+
+![deux ancres valent bien mieux qu'une](images/75_derouler_des_deux_bords.png)
+
+| | erreur médiane |
+|---|---:|
+| branche montante seule | 52,8 µm |
+| branche descendante seule | 66,5 µm |
+| « la meilleure des deux » *(demande de savoir laquelle)* | 50,3 µm |
+| **encadrée** | **31,0 µm** |
+
+> ⭐⭐⭐ **L'encadrement bat les DEUX branches sur onze triplets sur douze**, et sa médiane est
+> **sous la demi-épaisseur** (67,75 µm) : la feuille est tenue. ⚠⚠ Battre la plus mauvaise serait
+> gratuit — « prendre la meilleure » y suffirait, et savoir laquelle demande la réponse. C'est
+> pour ça que le verdict porte sur les deux, et il bat aussi « la meilleure des deux ».
+
+⭐⭐ **Et le gain se CREUSE avec la difficulté** — rapport de la meilleure branche à l'encadrement :
+**1,26** au saut 1, **1,79** au saut 2, **2,19** au saut 3. Au saut 3 les branches rendent 116 et
+144 µm, donc **elles ont toutes deux perdu la feuille**, et l'encadrement rend **31**. C'est la
+première chose de tout ce chantier qui s'améliore quand le problème devient plus dur.
+
+##### ⭐⭐ Le mécanisme est mesuré : c'est un BIAIS qui s'annule, pas du bruit qu'on moyenne
+
+Une distance est toujours positive, donc deux branches qui se trompent en sens contraires ont
+exactement le même profil d'erreur qu'une qui se trompe deux fois dans le même sens. Le **signe**
+les sépare, et il est mesuré en projetant l'écart de chaque branche sur la direction de marche de
+la montante.
+
+| | écart **signé** médian |
+|---|---:|
+| branche montante | **+34,1 µm** |
+| branche descendante | **−59,9 µm** |
+
+> ⭐ **Signes opposés sur dix triplets sur douze.** Moyenner du bruit gagne √2 au mieux ; annuler
+> un biais gagne **tout le biais**. Les deux mécanismes rendent la même médiane et ne promettent
+> pas du tout la même chose ailleurs.
+
+⚠ Et le contrôle qui rend ça vérifiable est dans la batterie : **deux branches du MÊME côté** de
+la cible ont un milieu qui reste du même côté, donc pas meilleur que la plus proche. Sans lui,
+« l'encadrement gagne » serait une propriété de la moyenne et pas de l'encadrement.
+
+⛔ **Un négatif à l'intérieur du positif, et il coûte cher** : le **désaccord** entre les deux
+branches (130,4 µm médian) est la **seule** mesure de confiance de tout le chantier qui ne demande
+pas la réponse — un dérouleur pourrait s'en servir en marchant. Elle **ne prédit pas** l'erreur :
+ρ = 0,28, p = 0,38 sur douze triplets. Le seul signal sans cible ne sert pas.
+
+⚠⚠ **CE QUE CETTE MESURE EST, ET CE QU'ELLE N'EST PAS.** Un vrai dérouleur n'a qu'une ancre :
+encadrer suppose de connaître les deux bouts, et coûte **deux** bits de supervision au lieu d'un.
+Ce n'est donc pas une méthode, c'est une **borne**. Mais elle répond à la question qui décide de
+l'effort : cinq soupçons sur la mécanique du pas n'ont rien rendu, et une **seconde ancre** divise
+l'erreur par **1,7** — et par **plus de trois** là où une seule ancre a perdu la feuille.
+
+⚠ Aucune lecture du volume dans cette tranche : le pas aveugle est le meilleur dérouleur mesuré et
+il ne lit rien. Elle n'a donc pas coûté un bloc. ⚠ Les triplets sont **symétriques** — deux
+branches qui marchent un nombre de tours différent ne se comparent pas, et leur combinaison
+mesurerait surtout laquelle a le moins marché. ⚠ L'appariement des deux nuages se fait dans
+l'**espace**, par plus proche voisin : les deux branches viennent de deux spires publiées, donc de
+deux paramétrages, et les moyenner cellule à cellule apparierait des points sans rapport.
+
+> ⭐⭐⭐ **Ce que cette tranche laisse à la suivante.** Le corpus publie **treize** spires, donc
+> douze ancres, et la mesure dit qu'elles valent bien plus qu'un meilleur pas. La question suivante
+> est **combien d'ancres il faut** : l'écart au saut 3 se rattrape entièrement, mais que vaut un
+> encadrement à saut 6 — c'est-à-dire ce qu'on aurait avec des ancres **rares** ? Et sa forme est
+> déjà là : le même code, un saut de plus.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est

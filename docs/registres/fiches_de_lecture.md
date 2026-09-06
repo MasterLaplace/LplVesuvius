@@ -3706,7 +3706,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/55_les_murs_et_leurs_causes.md
-- **lignes** : 126
+- **lignes** : 129
 - **nature** : PROCEDE
 - **résumé** : Document **rendu** depuis `docs/registres/murs_et_causes.tsv` par `uv run python src/depot/murs_et_causes.py --rendre`, et non écrit à la main ; sa batterie vérifie que chaque ligne pointe vers un document contenant encore son ancre. Il recense **30 causes candidates sur 4 murs** : 19 éliminées, 10 confirmées, 1 bloquée, chacune avec la mesure qui l'a tranchée et le document d'origine. Sa thèse de forme est qu'un mur est un espace de causes dont on retire une entrée à la fois, et que la liste des causes éliminées — non celle des tâches — est le seul progrès mesurable. Une seule cause reste non tranchée, et elle est bloquée. (⚠ Note de lecture : l'en-tête compte 19 éliminations quand le §final écrit « les treize éliminations de ce document » ; le document ne signale pas l'écart. De même, il ne contient aucune cause ⏳ *ouverte* alors que son propre tableau de symboles définit ce statut.)
 - **conclusions extractibles** : *(les murs recensés, avec pour chacun les causes éliminées et celles qui restent ouvertes)*
@@ -3760,7 +3760,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 - **rétractations / corrections internes** : aucune rétractation déclarée. Le document précise en revanche deux bornes de portée sur des causes confirmées : « la graine, c'est-à-dire l'endroit » explique la famille m7 **et pas le mur**, et la chaîne tangentielle « ne dit pas que c'est la BONNE feuille (il faut de l'encre), et part d'un segment PUBLIÉ et non d'une de nos traces ». Il retire aussi explicitement une affirmation antérieure : « ⚠⚠ Le “croisement” que j'avais publié à 1 920 µm n'existe pas : chaîne ET bond y sont au niveau du hasard (−1,7 et +1,6) ».
 - **preuve de lecture intégrale** :
   - ligne 92 : « | enchaîner la projection à GRAND pas (238 µm/maillon) | ❌ | cinq maillons de 238 µm étalent la boîte ×2,38 à nombre de points constant, contre ×1,10 pour le bond direct — et finissent 5,33 SPIRES à côté de lui. ⚠ Le pas réel dérive avant la boîte : 238 → 963 µm par maillon | [`44`](44_ou_la_chaine_se_trouve.md) | »
-  - ligne 122 : « cause à laquelle personne n'a pensé. Le tableau borne ce qu'on a testé, jamais ce qui »
+  - ligne 127 : « cause à laquelle personne n'a pensé. Le tableau borne ce qu'on a testé, jamais ce qui »
 
 ---
 
@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 2799
+- **lignes** : 2881
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5877,6 +5877,31 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     même ligne, donc le témoin a un échantillon de un).
   - ⛔⛔⛔ **Cinq soupçons, cinq écartés** : la fenêtre, les décalages, le gabarit, les normales,
     la longueur du pas. Le volume brut donne **un** gain, à un pas, depuis une surface déjà juste.
+  - ⭐⭐⭐ **DEUX ANCRES VALENT BIEN MIEUX QU'UNE** (2026-09-06, et c'est le premier positif du
+    chantier). La spire `m` reconstruite depuis `m − j` **et** `m + j` : branches seules
+    **52,8** et **66,5 µm**, **encadrée 31,0** — sous la demi-épaisseur de 67,75, donc la feuille
+    est tenue. Elle bat les **deux** branches sur **11 triplets sur 12**, et bat aussi « la
+    meilleure des deux » (50,3), qui demande de savoir laquelle.
+  - ⭐⭐ **Et le gain se CREUSE avec la difficulté** : 1,26 au saut 1, **1,79** au saut 2, **2,19**
+    au saut 3 — là où les deux branches rendent 116 et 144 µm, donc **ont perdu la feuille**, et
+    l'encadrement rend 31. C'est la première chose du chantier qui s'améliore quand le problème
+    devient plus dur.
+  - ⭐⭐ **Le mécanisme est mesuré, et c'est un BIAIS annulé** : les écarts **signés** valent
+    **+34,1** et **−59,9 µm**, de signes opposés sur 10 triplets sur 12. Moyenner du bruit gagne
+    √2 au mieux ; annuler un biais gagne **tout le biais**. ⚠ Le témoin qui le rend vérifiable :
+    deux branches du **même côté** ont un milieu qui ne bat pas la plus proche — sans lui, « ça
+    gagne » serait une propriété de la moyenne et pas de l'encadrement.
+  - ⛔ **Un négatif à l'intérieur du positif** : le **désaccord** entre branches (130,4 µm) est la
+    **seule** mesure de confiance du chantier qui ne demande pas la réponse, et elle **ne prédit
+    pas** l'erreur (ρ = 0,28, p = 0,38). Le seul signal sans cible ne sert pas.
+  - ⚠⚠ **Ce n'est pas une méthode, c'est une BORNE** : encadrer suppose de connaître les deux
+    bouts et coûte **deux** bits de supervision au lieu d'un. Mais elle répond à la question qui
+    décide de l'effort — cinq soupçons sur la mécanique du pas n'ont rien rendu, une **seconde
+    ancre** divise l'erreur par 1,7, et par plus de trois là où une seule a perdu la feuille.
+  - ⚠ Aucune lecture du volume : le pas aveugle est le meilleur dérouleur mesuré et il ne lit
+    rien. Les triplets sont **symétriques** (deux branches de longueurs différentes ne se
+    comparent pas) et l'appariement des nuages est **spatial**, les deux branches venant de deux
+    paramétrages distincts.
 - **rétractations / corrections internes** :
   - ⛔⛔⛔ **« Un décalage UNIQUE par tour déroule » est RETIRÉ** (publié et retiré le
     2026-09-06). À **191 cellules et quatre tours**, le décalage unique rendait une dérive
@@ -5920,8 +5945,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 2206 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 2799 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 2288 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 2881 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
