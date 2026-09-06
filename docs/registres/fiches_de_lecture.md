@@ -4220,7 +4220,7 @@ vérification du dépôt lui-même.
   balayage syntaxique de tout l'arbre montre que ce n'est pas une exception, et le document
   livre le remède sur le module fautif, ses six sondes, puis un second constat trouvé en chemin.
 - **compte exact et cause** :
-  - **67 modules en dette sur 158 qui publient une mesure ou une figure** (42 %), **102
+  - **67 modules en dette sur 160 qui publient une mesure ou une figure** (42 %), **102
     fonctions** hors de portée, relevés par `src/depot/le_chemin_du_nombre_publie.py`, qui ferme
     le graphe d'appels de chaque module et rend `atteintes(main) − atteintes(verifier)`.
   - ⚠⚠ **La portée a été resserrée en cours de route** : la première règle comptait comme
@@ -5518,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 3399
+- **lignes** : 3492
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5591,6 +5591,35 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - **E, ce qui est hors registre avec sa raison** : la soumission (hors périmètre décidé par
     l'auteur) ; le second papier de `72`, qui est ⚠⚠⚠ **une occasion de publication et non un
     progrès vers le prix** et n'avance qu'avec C ; H3 et H6 de `69`, répondues par le dépôt.
+  - ⭐⭐⭐ **LE RACCROCHAGE LIT MAL, ET C'EST POURTANT SA LECTURE QUI LE SAUVE (2026-09-06,
+    `le_raccrochage_choisit_il_bien`, 17 contrôles, 7 paires, 5442 cellules).** Le poste point à
+    point valait 19 % du coût d'un pas et le raccrochage n'en prenait rien : deux explications
+    restaient, avec des remèdes opposés — la géométrie refuse, ou la lecture est mauvaise. La
+    tranche les sépare en confrontant les deux choix **sur les mêmes cellules**, l'oracle étant
+    borné à la **même fenêtre** (sans quoi la comparaison mesurerait une fenêtre, pas une lecture).
+  - **Il lit, très peu** : ρ = **+0,076** avec le choix de l'oracle (p = 2·10⁻⁸, n = 5442) contre
+    **−0,006** pour le gabarit mélangé. Son accord bat donc nettement le hasard — mais 0,076,
+    c'est un demi pour cent de variance, et son choix n'est que marginalement plus proche du bon
+    que **ne pas bouger du tout** (17,35 voxels contre 18,59).
+  - ⭐⭐⭐ **Le fait contre-intuitif** : son déplacement d'**ensemble** est **nuisible** — sa médiane
+    appliquée partout rend **47,5 µm** contre 42,7 en ne bougeant pas. C'est sa lecture **par
+    cellule** qui reprend tout et le fait descendre à **37,1**, et elle bat sa propre médiane sur
+    4 paires sur 7. ⚠ Mais son erreur ne bat **pas** celle de son gabarit mélangé (3 sur 7) : la
+    lecture est meilleure que le bruit dans ce qu'elle **choisit**, pas encore dans ce qu'elle
+    **coûte**.
+  - ⭐⭐⭐ **Ce que ça tranche** : la géométrie ne refuse **rien** — l'oracle prend **22,9 µm** dans
+    la même fenêtre, avec les mêmes points et les mêmes directions, et le raccrochage n'en prend
+    que **24 %**. C'est donc la **lecture** qui est le chantier.
+  - ⭐ **Le remède d'une ligne, mesuré avant d'être écrit comme une piste** : retirer son biais
+    d'ensemble — sa lecture par cellule intacte, son décalage médian soustrait — donne **37,1 →
+    36,5 µm sur 5 paires sur 7**. Premier gain de la campagne obtenu en **changeant** quelque
+    chose plutôt qu'en mesurant une borne. ⚠⚠ Mais il vaut **0,6 µm et non les 4,8 annoncés** :
+    « sa médiane seule coûte 4,8 » et « son biais coûte 4,8 » ne sont pas la même quantité, et le
+    biais ne s'additionne pas à la lecture. Corrigé **avant** publication, la mesure ayant précédé
+    la phrase.
+  - ⚠ Un défaut de dessin attrapé par la figure : une barre **négative** — l'accord du mélange,
+    précisément ce qu'on veut montrer — faisait **lever** PIL, qui exige que le coin haut d'un
+    rectangle vienne en premier.
   - ⛔ **L'ÉCART DÉJÀ FRANCHI NE DIT PRESQUE RIEN DU SUIVANT (2026-09-06,
     `lecart_deja_franchi`, 16 contrôles, 5 triplets, 5163 cellules).** Un dérouleur parti d'une
     paire d'ancres connaît en chaque point la distance entre ces deux surfaces : c'était la seule
@@ -5704,7 +5733,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     même chose : la tranche précédente combinait **dans les deux sens** et mettait les distances en
     commun, celle-ci prend pour référence le nuage de l'ancre la plus basse.
   - ⚠⚠⚠ **D4 ouverte le 2026-09-06** — *le chemin qui produit le nombre publié n'est atteint
-    par aucune batterie* : **67 modules sur 158**, **102 fonctions**, et la branche laissée
+    par aucune batterie* : **67 modules sur 160**, **102 fonctions**, et la branche laissée
     dehors porte toujours le même nom (`mesurer` dans 13, `dessiner` dans 10). **Cinq modules**
     sont réparés et la matière **promue** en un lecteur unique plus deux fixtures qui décrivent
     le même objet (matière injectée par paramètre, découpage laissé dedans, batteries 32 → 46,
@@ -6188,8 +6217,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 2707 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 3399 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 2800 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 3492 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

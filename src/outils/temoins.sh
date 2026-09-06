@@ -1519,6 +1519,7 @@ run "combien d ancres"         uv run --project "$ROOT" python "$ROOT/src/nappe/
 run "pourquoi la derive"       uv run --project "$ROOT" python "$ROOT/src/nappe/pourquoi_la_derive_accelere.py" --verifier
 run "le cout d un seul pas"    uv run --project "$ROOT" python "$ROOT/src/nappe/le_cout_dun_seul_pas.py" --verifier
 run "l ecart deja franchi"     uv run --project "$ROOT" python "$ROOT/src/nappe/lecart_deja_franchi.py" --verifier
+run "le raccrochage choisit"   uv run --project "$ROOT" python "$ROOT/src/nappe/le_raccrochage_choisit_il_bien.py" --verifier
 run "derouler en raccrochant"  uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_en_raccrochant.py" --verifier
 run "derouler au pas normal"   uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_par_le_pas_normal.py" --verifier
 run "la derive est-elle un biais"uv run --project "$ROOT" python "$ROOT/src/nappe/la_derive_est_elle_un_biais.py" --verifier
@@ -1541,6 +1542,7 @@ run "fig : combien d ancres"   uv run --project "$ROOT" python "$ROOT/src/figure
 run "fig : pourquoi la derive" uv run --project "$ROOT" python "$ROOT/src/figures/figure_pourquoi_la_derive_accelere.py" --verifier
 run "fig : cout d un seul pas" uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_cout_dun_seul_pas.py" --verifier
 run "fig : ecart deja franchi" uv run --project "$ROOT" python "$ROOT/src/figures/figure_lecart_deja_franchi.py" --verifier
+run "fig : raccrochage choisit"uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_raccrochage_choisit_il_bien.py" --verifier
 run "fig : en raccrochant"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_en_raccrochant.py" --verifier
 run "fig : pas normal"         uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_par_le_pas_normal.py" --verifier
 run "fig : drapeau de normale" uv run --project "$ROOT" python "$ROOT/src/figures/figure_drapeau_de_normale.py" --verifier

@@ -2662,6 +2662,99 @@ terminal. Un contrôle trop large refuse du travail correct.
 > question devient : **pourquoi le raccrochage mesuré n'en prend-il rien**, alors que sa borne
 > parfaite en prendrait 19 % ?
 
+#### ⭐⭐⭐ LE RACCROCHAGE LIT MAL — et c'est pourtant sa lecture qui le sauve
+
+> Mesure : `src/nappe/le_raccrochage_choisit_il_bien.py` (16 contrôles) →
+> `docs/mesures/le_raccrochage_choisit_il_bien.json`. Figure :
+> `src/figures/figure_le_raccrochage_choisit_il_bien.py` (17 contrôles), le 2026-09-06.
+>
+> ```
+> uv run python src/nappe/le_raccrochage_choisit_il_bien.py --cote 640 \
+>     --json docs/mesures/le_raccrochage_choisit_il_bien.json
+> uv run python src/figures/figure_le_raccrochage_choisit_il_bien.py \
+>     --sortie docs/images/75_le_raccrochage_choisit_il_bien.png
+> ```
+
+Le poste **point à point** vaut 19 % du coût d'un pas et sa borne parfaite tient largement la
+feuille — mais le raccrochage n'en prenait presque rien. **Deux explications restaient, avec des
+remèdes opposés** : soit la géométrie refuse le gain, soit la lecture est mauvaise. Cette tranche
+les sépare en confrontant les deux choix **sur les mêmes cellules** : 7 paires, **5442 cellules**.
+
+![le raccrochage choisit-il bien](images/75_le_raccrochage_choisit_il_bien.png)
+
+##### ⛔ Il lit, très peu
+
+| | ρ avec le choix de l'oracle | écart médian au choix de l'oracle |
+|---|---:|---:|
+| **raccrochage** | **+0,076** *(p = 2·10⁻⁸, n = 5442)* | 17,35 voxels |
+| gabarit **mélangé** | −0,006 *(p = 0,66)* | 19,3 |
+| ne pas bouger | — | 18,59 |
+
+> ⚠⚠ **L'oracle est borné à la MÊME fenêtre.** Le laisser viser hors de la fenêtre du
+> raccrochage ferait de la comparaison une mesure de la **fenêtre** et non d'une lecture : il
+> pourrait choisir un décalage que l'autre ne peut pas atteindre, et son avance ne dirait rien de
+> leur accord.
+
+⭐ **La lecture voit donc quelque chose** — son accord bat nettement celui du gabarit mélangé, qui
+reste à zéro. ⚠ Mais **0,076 de corrélation, c'est un demi pour cent de variance** : elle voit
+très peu, et son choix n'est que marginalement plus proche du bon que **ne pas bouger du tout**.
+
+##### ⭐⭐⭐ Et le fait contre-intuitif : son déplacement d'ENSEMBLE nuit
+
+| | erreur médiane |
+|---|---:|
+| ne pas bouger | 42,7 µm |
+| **raccroché** | **37,1** |
+| raccroché, **son biais retiré** | **36,5** |
+| sa propre **médiane seule** | **47,5** |
+| gabarit mélangé | 52,9 |
+| *oracle (même fenêtre)* | *19,8* |
+
+> ⭐⭐⭐ **Le déplacement d'ensemble que le raccrochage trouve est NUISIBLE** : sa médiane
+> appliquée partout rend **47,5 µm** contre 42,7 en ne bougeant pas, soit **−4,8**. C'est sa
+> lecture **par cellule** qui reprend tout et le fait descendre à 37,1 — elle bat sa propre
+> médiane sur **4 paires sur 7**. Ce n'était pas l'hypothèse : on aurait attendu qu'une
+> corrélation de 0,076 ne serve à rien et qu'un recentrage fasse le travail.
+
+⚠ **Mais son erreur ne bat PAS celle de son gabarit mélangé** (3 paires sur 7). La lecture est
+mesurablement meilleure que le bruit dans ce qu'elle **choisit**, pas encore dans ce qu'elle
+**coûte**.
+
+##### ⭐⭐ Ce que ça tranche
+
+> ⭐⭐⭐ **La géométrie ne refuse RIEN.** L'oracle prend **22,9 µm** dans la même fenêtre, avec les
+> mêmes points et les mêmes directions. Le raccrochage n'en prend que **24 %**. Ce n'est donc pas
+> la borne qui est illusoire — **c'est la lecture qui est le chantier**, et les trois quarts du
+> poste attendent.
+
+⚠ Un défaut de dessin attrapé par la figure elle-même : une barre **négative** — l'accord du
+mélange, précisément ce qu'on veut montrer — faisait **lever** PIL, qui exige que le coin haut
+d'un rectangle vienne en premier. Les deux ordonnées sont triées.
+
+##### ⭐ Le remède d'une ligne, mesuré avant d'être écrit comme une piste
+
+Son déplacement d'ensemble étant nuisible, le premier geste n'est pas de lire mieux mais de
+**retirer le biais** : le même raccrochage, sa lecture par cellule intacte, son décalage médian
+soustrait.
+
+> ⭐ **Ça marche : 37,1 → 36,5 µm, sur 5 paires sur 7.** C'est le premier gain que cette campagne
+> obtienne en **changeant** quelque chose plutôt qu'en mesurant une borne.
+
+⚠⚠ **Mais il vaut 0,6 µm et non les 4,8 que j'avais annoncés**, et la correction est faite avant
+publication parce que la mesure a précédé la phrase. « Sa médiane seule coûte 4,8 µm » et « son
+biais coûte 4,8 µm » ne sont **pas la même quantité** : le premier compare un déplacement
+d'ensemble **sans** lecture par cellule à l'immobilité ; le second retire ce déplacement **d'une**
+lecture par cellule. Le biais et la lecture ne s'additionnent pas.
+
+> ⭐⭐⭐ **Ce que cette tranche laisse à la suivante.** Pour la première fois la campagne désigne un
+> **chantier** plutôt qu'une porte fermée : améliorer ce que le raccrochage **lit**. Le geste
+> gratuit — retirer son biais — est pris et vaut 0,6 µm ; il reste **16,7 µm** entre le
+> raccrochage centré (36,5) et l'oracle (19,8), dans la même fenêtre et sur les mêmes cellules.
+> Et la mesure dit où chercher : avec ρ = 0,076, ce que la corrélation de gabarit choisit n'a
+> presque rien à voir avec le bon décalage. La question suivante porte donc sur le **gabarit
+> lui-même** — lu sur une seule spire, sur une largeur d'un quart de pas, et jamais comparé à ce
+> qu'un gabarit lu ailleurs, ou plus large, donnerait.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est
@@ -3142,7 +3235,7 @@ mesurer est le piège habituel : `concordance_des_plans` la mesure désormais.
 
 ---
 
-### D4 ⚠⚠⚠ — 67 batteries vertes sur 158 n'atteignent pas le nombre qu'elles publient
+### D4 ⚠⚠⚠ — 67 batteries vertes sur 160 n'atteignent pas le nombre qu'elles publient
 
 Document dédié : [`80`](80_la_batterie_natteint_pas_le_nombre.md). Suite de
 [`61`](61_les_batteries_qui_ne_pouvaient_pas_echouer.md), dont il franchit la limite finale —
@@ -3165,7 +3258,7 @@ sans rien exécuter) :
 
 | | |
 |---|---:|
-| modules qui publient une mesure ou une figure | **158** |
+| modules qui publient une mesure ou une figure | **160** |
 | dont la batterie n'atteint pas ce chemin | **67** (44 %) |
 | fonctions hors de portée | **102** |
 
