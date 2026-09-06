@@ -2161,11 +2161,11 @@ longueurs lues s'y étalent sur **30,4** contre **0,7** avec une feuille.
 > mesuré si un dérouleur qui part de **plusieurs** endroits à la fois — et dont les branches
 > doivent s'accorder là où elles se rencontrent — fait mieux qu'un seul qui part d'un bout.
 
-#### ⭐⭐⭐ DEUX ANCRES VALENT BIEN MIEUX QU'UNE — et l'encadrement annule un BIAIS
+#### ⭐⭐⭐ DEUX ANCRES VALENT BIEN MIEUX QU'UNE — et il faut les espacer RÉGULIÈREMENT
 
-> Mesure : `src/nappe/derouler_des_deux_bords.py` (20 contrôles) →
+> Mesure : `src/nappe/derouler_des_deux_bords.py` (25 contrôles) →
 > `docs/mesures/derouler_des_deux_bords.json`. Figure :
-> `src/figures/figure_derouler_des_deux_bords.py` (11 contrôles), le 2026-09-06.
+> `src/figures/figure_derouler_des_deux_bords.py` (15 contrôles), le 2026-09-06.
 >
 > ```
 > uv run python src/nappe/derouler_des_deux_bords.py --cote 640 --json docs/mesures/derouler_des_deux_bords.json
@@ -2173,75 +2173,104 @@ longueurs lues s'y étalent sur **30,4** contre **0,7** avec une feuille.
 > ```
 
 Cinq soupçons écartés portaient tous sur **la même marche** : une qui part d'une seule spire et
-n'a que sa propre reconstruction pour se juger. Celle-ci change la **structure** du problème : la
-spire `m` est reconstruite depuis `m − j` **et** depuis `m + j`.
+n'a que sa propre reconstruction pour se juger. Celle-ci change la **structure** : la spire `m` est
+reconstruite depuis une ancre `a < m` **et** une ancre `b > m`.
 
 ⭐⭐ **Et là, pour la première fois, deux reconstructions se rencontrent.** Des spires concentriques
 ne se croisent jamais, donc « plusieurs départs » ne veut rien dire tant qu'on marche tous dans le
-même sens ; **encadrer**, si.
+même sens ; **encadrer**, si. **56 encadrements** mesurés, portée 4, dont 14 symétriques.
 
 ![deux ancres valent bien mieux qu'une](images/75_derouler_des_deux_bords.png)
 
 | | erreur médiane |
 |---|---:|
-| branche montante seule | 52,8 µm |
-| branche descendante seule | 66,5 µm |
+| branche montante seule | 58,3 µm |
+| branche descendante seule | 90,7 µm |
 | « la meilleure des deux » *(demande de savoir laquelle)* | 50,3 µm |
-| **encadrée** | **31,0 µm** |
+| **encadrée** | **43,1 µm** |
 
-> ⭐⭐⭐ **L'encadrement bat les DEUX branches sur onze triplets sur douze**, et sa médiane est
+> ⭐⭐⭐ **L'encadrement bat les DEUX branches sur 41 encadrements sur 56**, et sa médiane est
 > **sous la demi-épaisseur** (67,75 µm) : la feuille est tenue. ⚠⚠ Battre la plus mauvaise serait
-> gratuit — « prendre la meilleure » y suffirait, et savoir laquelle demande la réponse. C'est
-> pour ça que le verdict porte sur les deux, et il bat aussi « la meilleure des deux ».
+> gratuit — « prendre la meilleure » y suffirait, et savoir laquelle demande la réponse. Il bat
+> aussi celle-là.
 
-⭐⭐ **Et le gain se CREUSE avec la difficulté** — rapport de la meilleure branche à l'encadrement :
-**1,26** au saut 1, **1,79** au saut 2, **2,19** au saut 3. Au saut 3 les branches rendent 116 et
-144 µm, donc **elles ont toutes deux perdu la feuille**, et l'encadrement rend **31**. C'est la
-première chose de tout ce chantier qui s'améliore quand le problème devient plus dur.
+##### ⭐⭐ Où poser la seconde ancre : régulièrement
+
+| bras | cas | encadrée | meilleure branche | |
+|---|---:|---:|---:|---|
+| 1+1 | 5 | **30,1 µm** | 36,1 | symétrique |
+| 1+2 | 10 | 32,7 | 40,0 | |
+| 1+3 | 9 | 41,3 | 42,7 | |
+| **1+4** | 7 | **59,9** | 42,7 | ⛔ **nuit** |
+| 2+2 | 4 | **33,2** | 54,5 | symétrique |
+| 2+3 | 7 | 39,4 | 66,8 | |
+| **2+4** | 5 | **64,6** | 58,3 | ⛔ **nuit** |
+| 3+3 | 3 | 48,6 | 86,2 | symétrique |
+| 3+4 | 4 | 50,4 | **113,8** | |
+| 4+4 | 2 | 62,6 | 102,3 | symétrique |
+
+> ⭐⭐ **À somme de bras égale — donc à même écartement d'ancres — la symétrie gagne** : `2+2`
+> rend **33,2 µm** contre **41,3** pour `1+3`, et `3+3` rend **48,6** contre **64,6** pour `2+4`.
+> C'est une réponse pratique à « où poser la seconde ancre » : **espacer régulièrement**, pas
+> grouper.
+
+⛔ **Et il y a une limite : un encadrement trop déséquilibré NUIT.** Sur `1+4` et `2+4`,
+l'encadrement rend **pire** que sa meilleure branche — la branche lointaine a tellement dérivé que
+la moyenne tire la bonne avec elle. ⚠⚠ **Le chiffre qui serait trompeur n'est pas publié** : le
+déséquilibre minimal des paires fautives vaut deux, mais `1+3` a exactement ce déséquilibre et ne
+nuit pas. Ce que les deux fautives partagent est leur **bras long**, et il vaut la portée mesurée —
+donc ce corpus ne dit **pas** si c'est la longueur absolue ou le déséquilibre qui casse. Les deux
+faits sont rendus, la conclusion non.
 
 ##### ⭐⭐ Le mécanisme est mesuré : c'est un BIAIS qui s'annule, pas du bruit qu'on moyenne
 
 Une distance est toujours positive, donc deux branches qui se trompent en sens contraires ont
 exactement le même profil d'erreur qu'une qui se trompe deux fois dans le même sens. Le **signe**
 les sépare, et il est mesuré en projetant l'écart de chaque branche sur la direction de marche de
-la montante.
+la montante : **+45,3 µm** contre **−82,8 µm**, de **signes opposés sur 48 encadrements sur 56**.
 
-| | écart **signé** médian |
-|---|---:|
-| branche montante | **+34,1 µm** |
-| branche descendante | **−59,9 µm** |
+> ⭐ Moyenner du bruit gagne √2 au mieux ; annuler un biais gagne **tout le biais**. Les deux
+> mécanismes rendent la même médiane et ne promettent pas du tout la même chose ailleurs.
 
-> ⭐ **Signes opposés sur dix triplets sur douze.** Moyenner du bruit gagne √2 au mieux ; annuler
-> un biais gagne **tout le biais**. Les deux mécanismes rendent la même médiane et ne promettent
-> pas du tout la même chose ailleurs.
+⚠ Le contrôle qui rend ça vérifiable est dans la batterie : **deux branches du MÊME côté** de la
+cible ont un milieu qui reste du même côté, donc pas meilleur que la plus proche.
 
-⚠ Et le contrôle qui rend ça vérifiable est dans la batterie : **deux branches du MÊME côté** de
-la cible ont un milieu qui reste du même côté, donc pas meilleur que la plus proche. Sans lui,
-« l'encadrement gagne » serait une propriété de la moyenne et pas de l'encadrement.
+##### ⭐⭐⭐ Et le désaccord entre branches PRÉDIT l'erreur — le premier signal sans cible qui sert
 
-⛔ **Un négatif à l'intérieur du positif, et il coûte cher** : le **désaccord** entre les deux
-branches (130,4 µm médian) est la **seule** mesure de confiance de tout le chantier qui ne demande
-pas la réponse — un dérouleur pourrait s'en servir en marchant. Elle **ne prédit pas** l'erreur :
-ρ = 0,28, p = 0,38 sur douze triplets. Le seul signal sans cible ne sert pas.
+Le désaccord entre les deux branches (162,5 µm médian) est la **seule** mesure de tout le chantier
+qui ne demande pas la réponse : un dérouleur pourrait la calculer **en marchant**. Elle prédit
+l'erreur de l'encadrement — **ρ = 0,409, p = 0,0018 sur 56**.
+
+⚠⚠⚠ **Et ce verdict s'est INVERSÉ avec l'échantillon, dans le bon sens.** Sur les douze
+encadrements **symétriques** seuls, il ne prédisait rien (ρ = 0,28, p = 0,38) et la première
+version de cette section l'écrivait comme un échec. Élargir aux 56 encadrements — symétriques et
+non — le rend significatif. C'est la même leçon que la boîte, dans l'autre sens : **un verdict sur
+un petit échantillon n'est pas un verdict**, qu'il soit positif ou négatif.
 
 ⚠⚠ **CE QUE CETTE MESURE EST, ET CE QU'ELLE N'EST PAS.** Un vrai dérouleur n'a qu'une ancre :
-encadrer suppose de connaître les deux bouts, et coûte **deux** bits de supervision au lieu d'un.
+encadrer suppose de connaître les deux bouts et coûte **deux** bits de supervision au lieu d'un.
 Ce n'est donc pas une méthode, c'est une **borne**. Mais elle répond à la question qui décide de
 l'effort : cinq soupçons sur la mécanique du pas n'ont rien rendu, et une **seconde ancre** divise
-l'erreur par **1,7** — et par **plus de trois** là où une seule ancre a perdu la feuille.
+l'erreur par **1,35**, avec un gain qui se creuse jusqu'à **×2,3** au bras 3+4.
 
 ⚠ Aucune lecture du volume dans cette tranche : le pas aveugle est le meilleur dérouleur mesuré et
-il ne lit rien. Elle n'a donc pas coûté un bloc. ⚠ Les triplets sont **symétriques** — deux
-branches qui marchent un nombre de tours différent ne se comparent pas, et leur combinaison
-mesurerait surtout laquelle a le moins marché. ⚠ L'appariement des deux nuages se fait dans
-l'**espace**, par plus proche voisin : les deux branches viennent de deux spires publiées, donc de
-deux paramétrages, et les moyenner cellule à cellule apparierait des points sans rapport.
+il ne lit rien. ⚠ Chaque branche marche le nombre de tours de **son** bras — avec des encadrements
+asymétriques les deux n'en font plus autant, et un compte commun ferait marcher l'une trop loin.
+⚠ L'appariement des deux nuages se fait dans l'**espace**, par plus proche voisin : les deux
+branches viennent de deux spires publiées, donc de deux paramétrages, et les moyenner cellule à
+cellule apparierait des points sans rapport.
+
+⚠ Deux défauts de ma prose de figure, tous deux attrapés par ses propres contrôles : elle
+**calculait** un rapport absent du JSON — une figure ne doit pas inventer de nombre, donc le
+rapport est publié dans la mesure — et elle portait une **étoile** que la police ne rend pas, qui
+serait sortie en carré vide.
 
 > ⭐⭐⭐ **Ce que cette tranche laisse à la suivante.** Le corpus publie **treize** spires, donc
-> douze ancres, et la mesure dit qu'elles valent bien plus qu'un meilleur pas. La question suivante
-> est **combien d'ancres il faut** : l'écart au saut 3 se rattrape entièrement, mais que vaut un
-> encadrement à saut 6 — c'est-à-dire ce qu'on aurait avec des ancres **rares** ? Et sa forme est
-> déjà là : le même code, un saut de plus.
+> douze ancres, et la mesure dit qu'elles valent bien plus qu'un meilleur pas — mais aussi qu'un
+> bras de quatre est déjà trop long. La question suivante est donc **ce qui se passe entre
+> ancres** : le désaccord prédit l'erreur, faiblement (ρ = 0,41) ; s'en servir pour **pondérer**
+> les deux branches au lieu de les moyenner à parts égales est le geste que cette mesure rend
+> possible, et il ne demande toujours aucune cible.
 
 ### C2 ⭐ — le nul verso (H7)
 
