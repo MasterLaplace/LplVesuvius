@@ -5689,6 +5689,44 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     c'est-à-dire **la surface que la marche cherche**, dans une variante annoncée disponible en
     production. Corrigée (rien au-delà du départ) ; le premier pas de la boîte, sans candidat, est
     **écarté entier et compté**.
+  - ⭐⭐⭐ **LE CRITÈRE — ET LA MESURE ÉVALUAIT UN RACCROCHAGE PLUS GROSSIER QUE CELUI QUI TOURNE
+    (2026-09-06, `le_critere_du_raccrochage`, 22 contrôles, 8 pas, 16 537 cellules).** Le
+    raccrochage **déployé** passe ses décalages par `accorder_les_voisins`, la médiane du
+    voisinage 3×3 **de grille** — et les deux tranches précédentes **ne l'appelaient pas** :
+    elles échantillonnaient au hasard, ce qui détruit l'adjacence et rend l'accord inappelable.
+    Elles jugeaient donc un raccrochage plus grossier que celui qui produit les nombres publiés,
+    c'est-à-dire le défaut que ce dépôt a nommé. Cette mesure travaille **sur la grille** ; la
+    forme et la fenêtre sont fixées, seul le **critère** varie.
+  - ⭐⭐ **Le chemin déployé bat l'immobilité** : **37,5 µm contre 43,6**, écart apparié −2,1 µm
+    sur **7 pas sur 8**, intervalle [−2,2 ; −1,9] entièrement négatif. Première fois qu'il est
+    mesuré **tel qu'il tourne**.
+  - ⚠⚠ **Et tout son gain vient du VOISINAGE, pas de la corrélation** : la corrélation seule ne
+    tranche pas (−0,2 µm, 4/8), le maximum d'intensité est **pire que ne rien faire** (+1,3 µm).
+    Ce qui fait marcher le raccrochage est donc un énoncé sur la **matière** — *une feuille est
+    lisse à l'échelle de trois cellules* — et non une lecture d'intensité.
+  - ⚠⚠⚠ **Le témoin refuse la lecture facile, et le lire au bon endroit la renforce** : le même
+    accord appliqué aux décalages d'un gabarit **mélangé** gagne −2,7 µm sur sa propre version
+    brute et **tranche**. Mais ce gain est pris contre une version brute catastrophique : le
+    mélange accordé reste à **57,1 µm, soit +1,9 au-dessus de ne rien faire**. Le lissage
+    **répare** du bruit, il n'en fabrique pas un gain ; l'avance de la lecture (−4,2 contre −2,7)
+    est ce qui reste après retrait de ce que le lissage rend seul.
+  - ⚠⚠⚠ **Publiée sur DEUX populations** (8 pas / 16 537 cellules et 7 pas / 6 582), parce que la
+    tranche précédente a mesuré qu'à sept pas un verdict bascule. **Acquis des deux côtés** :
+    l'accord améliore la lecture (−4,2 / −2,5), et corrélation + accord + centrage bat
+    l'immobilité (−3,5 / −5,8). **Ont basculé** : le chemin déployé seul (✅ à 8 pas, ⛔ à 7) et
+    le lissage du bruit (✅ à 8, ⛔ à 7). ⚠ Le contrôle de la figure **exige** la seconde
+    population : la sauter serait une vérification incapable de s'exécuter, là où l'on sait qu'un
+    verdict bascule.
+  - ⚠ **Un défaut que le vrai volume a attrapé et que la fixture laissait passer par chance** : le
+    critère `maximum` recevait la ligne **entière** avec les décalages de la seule **fenêtre**,
+    donc un argmax sur 92 colonnes indexant un tableau de 62. Sur le fragment ça lève ; sur la
+    fixture, dont le maximum tombe toujours dans les premières colonnes, ça passait. Le
+    commentaire disait « cherché sur la tranche » pendant que le code cherchait partout.
+  - ⭐⭐⭐ **Ce que ça laisse** : la contrainte de **lissité** est exploitée de la façon la plus
+    pauvre possible — une médiane sur trois cellules, appliquée une fois. Il reste **17,5 µm**
+    entre le chemin déployé (37,5) et l'oracle (20,0), et la question suivante est jusqu'où cette
+    lissité peut aller (voisinage plus large, plusieurs passes, ajustement de surface). ⚠ Avec le
+    témoin du mélange accordé à chaque étage : plus on lisse, plus le bruit s'améliore aussi.
   - ⛔ **L'ÉCART DÉJÀ FRANCHI NE DIT PRESQUE RIEN DU SUIVANT (2026-09-06,
     `lecart_deja_franchi`, 16 contrôles, 5 triplets, 5163 cellules).** Un dérouleur parti d'une
     paire d'ancres connaît en chaque point la distance entre ces deux surfaces : c'était la seule
@@ -6286,8 +6324,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 2974 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 3666 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 3080 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 3772 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

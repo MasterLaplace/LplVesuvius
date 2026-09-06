@@ -1522,6 +1522,7 @@ run "le cout d un seul pas"    uv run --project "$ROOT" python "$ROOT/src/nappe/
 run "l ecart deja franchi"     uv run --project "$ROOT" python "$ROOT/src/nappe/lecart_deja_franchi.py" --verifier
 run "le raccrochage choisit"   uv run --project "$ROOT" python "$ROOT/src/nappe/le_raccrochage_choisit_il_bien.py" --verifier
 run "le gabarit lu ailleurs"   uv run --project "$ROOT" python "$ROOT/src/nappe/le_gabarit_lu_ailleurs.py" --verifier
+run "le critere du raccroch."  uv run --project "$ROOT" python "$ROOT/src/nappe/le_critere_du_raccrochage.py" --verifier
 run "derouler en raccrochant"  uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_en_raccrochant.py" --verifier
 run "derouler au pas normal"   uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_par_le_pas_normal.py" --verifier
 run "la derive est-elle un biais"uv run --project "$ROOT" python "$ROOT/src/nappe/la_derive_est_elle_un_biais.py" --verifier
@@ -1546,6 +1547,7 @@ run "fig : cout d un seul pas" uv run --project "$ROOT" python "$ROOT/src/figure
 run "fig : ecart deja franchi" uv run --project "$ROOT" python "$ROOT/src/figures/figure_lecart_deja_franchi.py" --verifier
 run "fig : raccrochage choisit"uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_raccrochage_choisit_il_bien.py" --verifier
 run "fig : gabarit lu ailleurs"uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_gabarit_lu_ailleurs.py" --verifier
+run "fig : critere du raccroch"uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_critere_du_raccrochage.py" --verifier
 run "fig : en raccrochant"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_en_raccrochant.py" --verifier
 run "fig : pas normal"         uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_par_le_pas_normal.py" --verifier
 run "fig : drapeau de normale" uv run --project "$ROOT" python "$ROOT/src/figures/figure_drapeau_de_normale.py" --verifier

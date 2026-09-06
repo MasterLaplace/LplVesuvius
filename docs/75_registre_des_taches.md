@@ -2929,6 +2929,112 @@ compté** plutôt que servi par une source qui triche.
 > `le_raccrochage_a_la_matiere` possède déjà `accorder_les_voisins`, que ces deux tranches
 > **n'utilisent pas**. Et il faudra le juger sur **huit pas**, pas six.
 
+#### ⭐⭐⭐ LE CRITÈRE — et la mesure évaluait un raccrochage plus grossier que celui qui tourne
+
+> Mesure : `src/nappe/le_critere_du_raccrochage.py` (22 contrôles) →
+> `docs/mesures/le_critere_du_raccrochage.json` (**8 pas**, boîte de 960) et
+> `docs/mesures/le_critere_du_raccrochage_640.json` (**7 pas**, boîte de 640). Figure :
+> `src/figures/figure_le_critere_du_raccrochage.py` (22 contrôles), le 2026-09-06.
+>
+> ```bash
+> uv run python src/nappe/le_critere_du_raccrochage.py --cote 960 \
+>     --json docs/mesures/le_critere_du_raccrochage.json
+> uv run python src/nappe/le_critere_du_raccrochage.py --cote 640 \
+>     --json docs/mesures/le_critere_du_raccrochage_640.json
+> uv run python src/figures/figure_le_critere_du_raccrochage.py \
+>     --sortie docs/images/75_le_critere_du_raccrochage.png
+> ```
+
+⚠⚠⚠ **Le défaut de méthode d'abord, parce qu'il invalide la question précédente.** Le raccrochage
+**déployé** — celui de `le_raccrochage_a_la_matiere`, qui produit les nombres publiés — passe ses
+décalages par `accorder_les_voisins`, la médiane du voisinage 3×3 **de grille**. Les deux tranches
+précédentes **ne l'appelaient pas** : elles échantillonnaient des cellules au hasard, ce qui
+détruit l'adjacence et rend l'accord inappelable. Elles jugeaient donc un raccrochage **plus
+grossier que celui qui tourne** — c'est-à-dire, mot pour mot, le défaut que ce dépôt a nommé : une
+batterie verte sur un module dont le seul chemin non testé est celui qui produit le nombre publié.
+
+Cette mesure travaille donc **sur la grille**. La forme cherchée et la fenêtre sont **fixées** ;
+ce qui varie est le **critère**, c'est-à-dire comment on désigne un décalage.
+
+![le critère du raccrochage](images/75_le_critere_du_raccrochage.png)
+
+##### ⭐⭐ Le chemin déployé bat l'immobilité — et tout son gain vient du VOISINAGE
+
+Huit pas, 16 537 cellules retenues sur 16 569 lisibles (boîte de 960 voxels) :
+
+| critère | erreur | contre ne rien faire | contre sa version brute |
+|---|---:|---|---|
+| ne rien faire | 43,6 µm | — | — |
+| maximum d'intensité | 51,1 | +1,3 · 3/8 · [+0,1 ; +2,5] ⛔ | — |
+| corrélation seule | 45,8 | −0,2 · 4/8 · [−1,6 ; +1,2] ⛔ | — |
+| ⭐ **corrélation + accord** *(déployé)* | **37,5** | **−2,1 · 7/8 · [−2,2 ; −1,9]** ✅ | **−4,2 · 5/8 · [−4,3 ; −4,2]** ✅ |
+| corrélation centrée | 45,5 | −0,2 · 4/8 · [−1,0 ; +0,5] ⛔ | — |
+| ⭐ **corrélation + accord + centrage** | 37,6 | **−3,5 · 7/8 · [−3,7 ; −3,2]** ✅ | −3,6 · 5/8 ✅ |
+| *témoin : mélange* | 60,2 | +4,7 · 1/8 ⛔ | — |
+| *témoin : mélange accordé* | 57,1 | +1,9 · 2/8 ⛔ | −2,7 · 6/8 · [−2,8 ; −2,6] ✅ |
+| ⛔ oracle | 20,0 | **−23,5 · 8/8 · [−23,6 ; −23,4]** ✅ | — |
+
+> ⭐⭐⭐ **C'est la première fois que le raccrochage déployé est mesuré TEL QU'IL TOURNE, et il
+> gagne** : 37,5 µm contre 43,6, sur 7 pas sur 8, intervalle entièrement négatif.
+
+⚠⚠ **Et le fait qui redéfinit le chantier : la corrélation SEULE ne tranche pas** (−0,2 µm,
+4 pas sur 8). Tout le gain vient de l'**accord de voisinage**, c'est-à-dire d'un énoncé sur la
+**matière** — *une feuille de papyrus est lisse à l'échelle de trois cellules de grille* — et non
+d'une lecture d'intensité. Le maximum d'intensité, lui, est **pire que ne rien faire** (+1,3 µm),
+ce qui confirme ce que `le_raccrochage_a_la_matiere` avait mesuré.
+
+##### ⚠⚠⚠ Le témoin refuse la lecture facile — et le lire correctement la renforce
+
+Une médiane de voisinage améliore **n'importe quoi**. Le même accord appliqué aux décalages d'un
+gabarit **mélangé** gagne **−2,7 µm** sur sa propre version brute, et il **tranche** lui aussi.
+Une part du gain de l'accord est donc du **lissage pur**.
+
+> ⚠⚠ **Mais il faut lire ce chiffre au bon endroit** : ce gain est pris contre sa propre version
+> brute, qui est catastrophique. Le mélange **accordé** reste à **57,1 µm**, soit **+1,9 au-dessus
+> de ne rien faire** — le lissage répare du bruit, il n'en fabrique pas un gain. L'avance de la
+> lecture (−4,2 contre −2,7) est ce qui reste après avoir retiré ce que le lissage rend tout seul.
+
+##### ⚠⚠⚠ DEUX populations, parce qu'un verdict d'une seule bascule
+
+La tranche précédente a mesuré qu'à six ou sept pas un verdict change quand un pas sort. Cette
+mesure est donc publiée **deux fois**, sur deux boîtes :
+
+| | 8 pas / 16 537 cellules | 7 pas / 6 582 cellules |
+|---|---|---|
+| l'accord améliore la **lecture** | −4,2 ✅ | −2,5 ✅ |
+| accord + centrage bat l'**immobilité** | −3,5 ✅ | −5,8 ✅ |
+| le chemin déployé seul bat l'immobilité | −2,1 ✅ | −4,1 ⛔ (4/7, [−7,9 ; +0,4]) |
+| le lissage améliore le **bruit** | −2,7 ✅ | −0,5 ⛔ |
+
+> ⭐⭐ **Ce qui est ACQUIS est ce qui tranche des deux côtés** : l'accord de voisinage améliore la
+> lecture, et **corrélation + accord + retrait du biais bat l'immobilité**. Les deux autres lignes
+> ont **basculé** avec la population — et les publier sans la seconde boîte aurait été exactement
+> la faute que la rétraction ci-dessus vient de corriger.
+
+⚠ Le contrôle de la figure l'impose plutôt que de l'espérer : la seconde population **n'est pas
+optionnelle** une fois la première publiée. La sauter quand elle manque serait une vérification
+incapable de s'exécuter, là même où l'on sait qu'un verdict bascule.
+
+⚠ **Un vrai défaut attrapé par le vrai volume, que la fixture laissait passer par chance.** Le
+critère `maximum` recevait la ligne **entière** avec les décalages de la seule **fenêtre** :
+`sommet` prenait donc l'argmax sur 92 colonnes et indexait un tableau de 62. Sur le fragment ça
+lève ; sur la fixture, dont le maximum tombe toujours dans les premières colonnes, **ça passait**.
+Le commentaire disait « cherché sur la tranche » pendant que le code cherchait partout. Le
+contrôle ajouté est construit pour discriminer : une ligne dont le maximum **global** est hors
+fenêtre doit rendre le meilleur point **de la fenêtre**.
+
+⚠ Coût : **149 blocs, 298 Mio** téléchargés pour passer de la boîte de 640 à celle de 960 —
+c'est le prix des deux pas supplémentaires que le relevé de la tranche précédente annonçait.
+
+> ⭐⭐⭐ **Ce que cette tranche laisse à la suivante, et c'est un chantier neuf.** Ce qui fait
+> marcher le raccrochage n'est **pas** la corrélation d'intensité — elle ne tranche pas seule —
+> mais la **contrainte de lissité de la feuille**. Or cette contrainte est aujourd'hui exploitée
+> de la façon la plus pauvre possible : une médiane sur un voisinage de **trois cellules**,
+> appliquée **une fois**. Il reste **17,5 µm** entre le chemin déployé (37,5) et l'oracle (20,0),
+> et la question suivante est de savoir jusqu'où la lissité peut aller — un voisinage plus large,
+> plusieurs passes, ou un **ajustement de surface** plutôt qu'une médiane. ⚠ Et le témoin du
+> mélange accordé devra suivre à chaque étage : plus on lisse, plus le bruit s'améliore aussi.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est
