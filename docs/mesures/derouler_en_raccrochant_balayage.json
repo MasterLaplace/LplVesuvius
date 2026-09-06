@@ -1,0 +1,133 @@
+{
+  "cotes": [
+    384.0,
+    512.0,
+    640.0
+  ],
+  "points": [
+    {
+      "cote_voxels": 384.0,
+      "cellules_au_depart": 191,
+      "tours": 4,
+      "derive_par_tour_um": {
+        "raccroche": 27.8,
+        "accorde": 28.9,
+        "etroite": 22.0,
+        "globale": -19.5,
+        "aveugle": 13.3,
+        "hasard": 43.6
+      },
+      "erreur_au_dernier_tour_um": {
+        "raccroche": 113.3,
+        "accorde": 115.5,
+        "etroite": 135.5,
+        "globale": 26.2,
+        "aveugle": 82.8,
+        "hasard": 208.7
+      },
+      "tient_la_feuille_a_la_fin": [
+        "globale"
+      ],
+      "la_derive_est_arretee": {
+        "raccroche": false,
+        "accorde": false,
+        "etroite": false,
+        "globale": true,
+        "aveugle": false,
+        "hasard": false
+      },
+      "cout": {
+        "blocs_telecharges": 0,
+        "mebioctets": 0.0,
+        "blocs_en_memoire": 48,
+        "voxels_absents": 0,
+        "reprises_reseau": 0
+      }
+    },
+    {
+      "cote_voxels": 512.0,
+      "cellules_au_depart": 494,
+      "tours": 6,
+      "derive_par_tour_um": {
+        "raccroche": 49.9,
+        "accorde": 35.1,
+        "etroite": 43.2,
+        "globale": 67.3,
+        "aveugle": 25.5,
+        "hasard": 73.6
+      },
+      "erreur_au_dernier_tour_um": {
+        "raccroche": 275.7,
+        "accorde": 209.0,
+        "etroite": 277.0,
+        "globale": 370.6,
+        "aveugle": 176.5,
+        "hasard": 427.5
+      },
+      "tient_la_feuille_a_la_fin": [],
+      "la_derive_est_arretee": {
+        "raccroche": false,
+        "accorde": false,
+        "etroite": false,
+        "globale": false,
+        "aveugle": false,
+        "hasard": false
+      },
+      "cout": {
+        "blocs_telecharges": 0,
+        "mebioctets": 0.0,
+        "blocs_en_memoire": 167,
+        "voxels_absents": 0,
+        "reprises_reseau": 0
+      }
+    },
+    {
+      "cote_voxels": 640.0,
+      "cellules_au_depart": 906,
+      "tours": 6,
+      "derive_par_tour_um": {
+        "raccroche": 56.1,
+        "accorde": 33.6,
+        "etroite": 43.0,
+        "globale": 56.3,
+        "aveugle": 22.3,
+        "hasard": 65.7
+      },
+      "erreur_au_dernier_tour_um": {
+        "raccroche": 308.7,
+        "accorde": 192.2,
+        "etroite": 256.5,
+        "globale": 306.2,
+        "aveugle": 161.3,
+        "hasard": 368.0
+      },
+      "tient_la_feuille_a_la_fin": [],
+      "la_derive_est_arretee": {
+        "raccroche": false,
+        "accorde": false,
+        "etroite": false,
+        "globale": false,
+        "aveugle": false,
+        "hasard": false
+      },
+      "cout": {
+        "blocs_telecharges": 37,
+        "mebioctets": 74.0,
+        "blocs_en_memoire": 269,
+        "voxels_absents": 0,
+        "reprises_reseau": 0
+      }
+    }
+  ],
+  "contendants_au_verdict_instable": [
+    "globale"
+  ],
+  "verdict_stable": false,
+  "aucun_ne_tient_partout": [
+    "accorde",
+    "aveugle",
+    "etroite",
+    "hasard",
+    "raccroche"
+  ]
+}

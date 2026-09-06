@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Le raccrochage gagne un pas et perd la marche — sauf s'il décide UNE fois pour toute la nappe.
+"""Le raccrochage gagne un pas et perd la marche — son gain ne survit pas à UN tour.
 
 ⚠⚠ POURQUOI CETTE FIGURE EXISTE. Le tableau des six marches est illisible en chiffres : cinq
 d'entre elles montent et une descend, et c'est **laquelle descend** qui est le résultat. Tracées
@@ -34,6 +34,7 @@ from figure_le_residu_est_une_translation import couper  # noqa: E402
 
 RACINE = Path(__file__).resolve().parents[2]
 MESURE = RACINE / "docs" / "mesures" / "derouler_en_raccrochant.json"
+BALAYAGE = RACINE / "docs" / "mesures" / "derouler_en_raccrochant_balayage.json"
 
 FOND = (255, 255, 255)
 TEXTE = (25, 25, 25)
@@ -58,29 +59,38 @@ MARCHES = [
 
 
 def prose(m: dict) -> list[str]:
-    g = m["marche_globale"][-1]
-    pp = m["marche_raccrochee"][-1]
+    """Les cinq phrases que la figure porte, et pas une de plus.
+
+    ⚠ Une prose qui grossit à chaque tranche finit par faire une image plus haute que large,
+    donc illisible d'un coup d'œil. Ce qui est retiré est ce que les panneaux montrent déjà.
+    """
+    vi = m["le_gain_vieillit"]
     d = m["derive_par_tour_um"]
-    return [
-        f"depuis la spire {m['depuis']}, {m['cellules_au_depart']} cellules dans la boite, "
-        f"pas nominal {m['ecart_lu_um']} um, un seul bit de supervision (le sens).",
-        f"le raccrochage PAR POINT est le meilleur au tour 1 ({m['marche_raccrochee'][0]['erreur_um']:.0f} um "
-        f"contre {m['marche_aveugle'][0]['erreur_um']:.0f} pour l'aveugle) et le pire au tour "
-        f"{pp['tours'] if 'tours' in pp else len(m['marche_raccrochee'])} : "
-        f"{pp['erreur_um']:.0f} um, {100 * pp['part_perdue']:.0f} % des cellules au-dela d'une demi-feuille.",
-        f"ni l'accord des voisins ni une fenetre deux fois plus etroite ne le rattrapent : "
-        f"derives {d['accorde']} et {d['etroite']} um par tour contre {d['raccroche']}.",
-        f"UN SEUL decalage par tour, lui, converge : derive {d['globale']} um par tour, "
-        f"{g['erreur_um']:.0f} um au dernier tour, p90 {g['erreur_p90_um']:.0f}, et "
-        f"{100 * g['part_perdue']:.0f} % de cellules perdues.",
-        f"le mecanisme est la rugosite : le champ par point ride la nappe de "
-        f"{m['rugosite_um']['raccroche'][0]:.0f} a {m['rugosite_um']['raccroche'][-1]:.0f} um, "
-        "un decalage unique ne la ride pas du tout.",
-        f"et ce n'est PAS une longueur de pas corrigee : les decalages signes valent "
-        f"{m['decalage_global_signe_um']} um, donc ils CHANGENT DE SIGNE. leur mediane "
-        f"correspond a un pas de {m['longueur_equivalente_um']} um, a six micrometres de la "
-        "longueur ajustee sur les cibles (108,4) que ce depot avait mesuree autrement.",
+    b = m.get("_balayage")
+    out = [
+        f"depuis la spire {m['depuis']}, {m['cellules_au_depart']} cellules, pas nominal "
+        f"{m['ecart_lu_um']} um, un seul bit de supervision (le sens).",
+        f"panneau A : le raccrochage par point derive de {d['raccroche']:+.1f} um par tour "
+        f"contre {d['aveugle']:+.1f} pour l'aveugle. ni l'accord des voisins "
+        f"({d['accorde']:+.1f}) ni une fenetre deux fois plus etroite ({d['etroite']:+.1f}) "
+        "ne le rattrapent.",
+        f"panneau C, LA REPONSE : un pas raccroche gagne {vi[0]['gain_um']:+.1f} um depuis une "
+        f"spire PUBLIEE et {vi[1]['gain_um']:+.1f} um des qu'UN tour aveugle a ete fait ; "
+        f"ensuite la mediane vaut {m['gain_median_apres_le_premier_pas_um']:+.1f} um et le "
+        "signe change. le raccrochage ne raccroche que ce qui est deja a sa place.",
     ]
+    if b:
+        out.append(
+            "panneau D, RETRACTATION : a 191 cellules le decalage unique rendait une derive "
+            "NEGATIVE et etait publie comme le seul tenant la feuille ; a "
+            f"{b['points'][-1]['cellules_au_depart']} cellules il derive de "
+            f"{b['points'][-1]['derive_par_tour_um']['globale']:+.1f} um par tour. un resultat "
+            "qui s'inverse quand l'echantillon grandit n'etait pas un resultat.")
+        out.append(
+            "ce qui SURVIT au balayage : le raccrochage par point derive plus que l'aveugle "
+            "aux trois tailles, et aucun contendant ne tient la feuille a la fin sur les deux "
+            "plus larges.")
+    return out
 
 
 def _cadre(art, x0, y0, w, h):
@@ -96,11 +106,11 @@ def dessiner(m: dict, sortie: Path) -> dict:
     pw, ph = 400, 220
     ecart = 56
     L = marge * 2 + pw * 2 + ecart
-    H = 96 + ph + 106 + ph + 56 + len(lignes) * 19
+    H = 96 + ph + 106 + ph + 122 + len(lignes) * 19
     toile = Image.new("RGB", (L, H), FOND)
     art = ImageDraw.Draw(toile)
     art.text((marge, 18),
-             "Le raccrochage gagne un pas et perd la marche — sauf s'il decide UNE fois",
+             "Le raccrochage gagne un pas et perd la marche : son gain ne survit pas a UN tour",
              fill=TEXTE, font=gros)
     art.text((marge, 42),
              f"depart spire {m['depuis']}, {m['cellules_au_depart']} cellules, "
@@ -126,12 +136,15 @@ def dessiner(m: dict, sortie: Path) -> dict:
     art.text((ax + pw - 96, yd - 14), f"demi-feuille {demi:.0f}µ", fill=TEXTE, font=petit)
     # ⚠ Les extrêmes de l'axe sont écrits : une courbe sans échelle est un dessin.
     art.text((ax + 4, ay + 2), f"{top:.0f}µ", fill=DISCRET, font=petit)
-    art.text((ax + 4, ay + ph - 14), "0µ", fill=DISCRET, font=petit)
+    art.text((ax + 4, ay + ph - 30), "0µ", fill=DISCRET, font=petit)
     # ⚠ Le mot « tour » va SOUS les graduations, au milieu : à gauche il tombait sur le « 1 »,
     # à droite sur le dernier tour. Un axe dont le nom recouvre une graduation fait lire un
     # numéro de tour de travers.
     art.text((ax + pw / 2 - 12, ay + ph + 17), "tour", fill=DISCRET, font=petit)
-    art.text((ax + pw - 150, ay + 2), "couleurs : voir le panneau D", fill=DISCRET, font=petit)
+    # ⚠ La note de couleurs va SOUS l'axe, à côté du mot « tour » : en haut à gauche elle
+    # tombait sur la graduation de l'échelle, en haut à droite sur la courbe du témoin.
+    art.text((ax + pw / 2 + 26, ay + ph + 17), "· couleurs : legende sous les panneaux",
+             fill=DISCRET, font=petit)
     for cle, _, coul, ep in MARCHES:
         pts = [(axe_x(ax, e["tours"]), ay + ph - e["erreur_um"] / top * ph) for e in m[cle]]
         for a_, b_ in zip(pts, pts[1:]):
@@ -160,57 +173,89 @@ def dessiner(m: dict, sortie: Path) -> dict:
     for k in tours:
         art.text((axe_x(bx, k) - 4, by + ph + 3), str(k), fill=DISCRET, font=petit)
 
-    # ---------- C : la rugosite ----------
+    # ---------- C : le gain qui vieillit ----------
     cx, cy = marge, 96 + ph + 106
     art.text((cx, cy - 20),
-             "C · le mecanisme : de combien le raccrochage RIDE la nappe (um)",
+             "C · le gain d'UN pas, depuis une surface qui vieillit",
              fill=TEXTE, font=moyen)
     _cadre(art, cx, cy, pw, ph)
-    rug = [x for x in m["rugosite_um"]["raccroche"] if x is not None]
-    haut = max(max(rug), 1.0) * 1.2
-    larg = pw / (len(rug) * 2 + 1)
-    for k, val in enumerate(rug):
-        x_ = cx + larg * (2 * k + 1)
-        h_ = val / haut * (ph - 30)
-        art.rectangle([x_ - larg * 0.44, cy + ph - h_, x_ - 2, cy + ph], fill=VERT)
-        art.rectangle([x_ + 2, cy + ph - 2, x_ + larg * 0.44, cy + ph], fill=AMBRE)
-        art.text((x_ - 20, cy + ph - h_ - 15), f"{val:.0f}µ", fill=VERT, font=petit)
-        art.text((x_ - 4, cy + ph + 3), str(tours[k]), fill=DISCRET, font=petit)
-    art.text((cx + 8, cy + 8), "vert : un decalage par cellule", fill=VERT, font=petit)
-    art.text((cx + 8, cy + 24), "ambre : un decalage par tour — zero par construction",
-             fill=AMBRE, font=petit)
-
-    # ---------- D : au dernier tour ----------
-    dx, dy = marge + pw + ecart, 96 + ph + 106
-    art.text((dx, dy - 20), "D · au dernier tour mesure : erreur, p90, et qui tient encore",
-             fill=TEXTE, font=moyen)
-    fin = m["feuille_tenue_a_la_fin"]
-    cles = {"marche_globale": "globale", "marche_aveugle": "aveugle",
-            "marche_raccrochee": "raccroche", "marche_accordee": "accorde",
-            "marche_fenetre_etroite": "etroite", "marche_hasard": "hasard"}
-    plus = max(fin[c]["p90_um"] for c in cles.values() if fin[c]) * 1.05
-    haut2, lab = 22, 226
-    for k, (cle, nom, coul, _) in enumerate(MARCHES):
-        f = fin[cles[cle]]
-        y_ = dy + k * (haut2 + 8)
-        art.text((dx, y_ + 4), nom, fill=coul, font=petit)
-        w_ = f["erreur_um"] / plus * (pw - lab)
-        w9 = f["p90_um"] / plus * (pw - lab)
-        art.rectangle([dx + lab, y_ + 2, dx + lab + w9, y_ + haut2 - 4],
-                      outline=coul)
-        art.rectangle([dx + lab, y_ + 2, dx + lab + w_, y_ + haut2 - 4], fill=coul)
-        # ⚠ L'étiquette se pose après la barre p90 OU après le trait de la demi-feuille,
-        # selon lequel est le plus à droite : sinon celle de la marche qui GAGNE — la plus
-        # courte — s'écrit par-dessus le trait qu'elle est justement la seule à ne pas franchir.
-        bord = max(dx + lab + w9, dx + lab + demi / plus * (pw - lab)) + 6
-        art.text((bord, y_ + 4),
-                 f"{f['erreur_um']:.0f}µ" + ("  tient" if f["sous_la_demi_feuille"] else ""),
-                 fill=TEXTE if f["sous_la_demi_feuille"] else DISCRET, font=petit)
-    yd2 = dx + lab + demi / plus * (pw - lab)
-    art.line([yd2, dy - 4, yd2, dy + len(MARCHES) * (haut2 + 8)], fill=TEXTE, width=2)
-    art.text((dx, dy + len(MARCHES) * (haut2 + 8) + 4),
-             f"trait vertical : la demi-feuille, {demi:.0f}µ ; plein = mediane, contour = p90",
+    vieil = m["le_gain_vieillit"]
+    gmax = max(abs(e["gain_um"]) for e in vieil) * 1.25
+    zero = cy + ph / 2
+    art.line([cx, zero, cx + pw, zero], fill=TEXTE)
+    # ⚠ Le libellé du zéro se pose SOUS le cadre : sur la ligne, il tombait en travers des
+    # barres qu'il commente.
+    art.text((cx + pw - 190, cy + ph + 33), "· la ligne du milieu : 0, aucun gain",
              fill=TEXTE, font=petit)
+    lg2 = pw / (len(vieil) * 2 + 1)
+    for k, e_ in enumerate(vieil):
+        x_ = cx + lg2 * (2 * k + 1)
+        h_ = e_["gain_um"] / gmax * (ph / 2 - 16)
+        coul = VERT if e_["gain_um"] > 0 else ROUGE
+        art.rectangle([x_ - lg2 * 0.44, zero - max(h_, 0.0) - (0 if h_ > 0 else -h_) * 0,
+                       x_ + lg2 * 0.44, zero] if h_ > 0 else
+                      [x_ - lg2 * 0.44, zero, x_ + lg2 * 0.44, zero - h_], fill=coul)
+        art.text((x_ - 18, zero - h_ + (-16 if h_ > 0 else 4)),
+                 f"{e_['gain_um']:+.0f}µ", fill=coul, font=petit)
+        art.text((x_ - 4, cy + ph + 3), str(e_["tours_de_vieillissement"]),
+                 fill=DISCRET, font=petit)
+    # ⚠ Les deux legendes vont SOUS l'axe des ages : posees en haut a gauche elles tombaient
+    # sur la premiere barre, qui est justement la seule qui compte.
+    art.text((cx + 6, cy + ph + 17),
+             "age de la surface de depart, en tours deroules en aveugle", fill=DISCRET,
+             font=petit)
+    art.text((cx + 6, cy + ph + 33),
+             f"age 0 = une spire PUBLIEE : {vieil[0]['gain_um']:+.1f} um", fill=VERT, font=petit)
+
+    # ---------- D : la derive contre la taille de la boite ----------
+    dx, dy = marge + pw + ecart, 96 + ph + 106
+    art.text((dx, dy - 20),
+             "D · la derive par tour, contre la TAILLE du morceau de nappe",
+             fill=TEXTE, font=moyen)
+    _cadre(art, dx, dy, pw, ph)
+    b = m.get("_balayage")
+    if b:
+        cotes = [pt["cote_voxels"] for pt in b["points"]]
+        vals = [v for pt in b["points"] for v in pt["derive_par_tour_um"].values()
+                if v is not None]
+        bas, haut = min(vals + [0.0]), max(vals)
+        etendue = max(1e-9, haut - bas)
+
+        def yv(v_):
+            return dy + ph - (v_ - bas) / etendue * (ph - 24) - 12
+
+        def xc(k):
+            return dx + 40 + k / max(1, len(cotes) - 1) * (pw - 80)
+
+        y0_ = yv(0.0)
+        art.line([dx, y0_, dx + pw, y0_], fill=TEXTE)
+        art.text((dx + 4, y0_ + 3), "0 — l'erreur n'augmente plus", fill=TEXTE, font=petit)
+        for cle, nom, coul, ep in MARCHES:
+            k_ = cle.replace("marche_", "").replace("raccrochee", "raccroche").replace(
+                "accordee", "accorde").replace("fenetre_etroite", "etroite")
+            pts = [(xc(i), yv(pt["derive_par_tour_um"][k_]))
+                   for i, pt in enumerate(b["points"])
+                   if pt["derive_par_tour_um"].get(k_) is not None]
+            for a_, b_ in zip(pts, pts[1:]):
+                art.line([a_[0], a_[1], b_[0], b_[1]], fill=coul, width=ep)
+            for x_, y_ in pts:
+                art.ellipse([x_ - ep, y_ - ep, x_ + ep, y_ + ep], fill=coul)
+        for i, c_ in enumerate(cotes):
+            art.text((xc(i) - 24, dy + ph + 3),
+                     f"{c_:.0f} vx / {b['points'][i]['cellules_au_depart']} cell.",
+                     fill=DISCRET, font=petit)
+        art.text((dx + 4, dy + ph + 17),
+                 "en ambre : le decalage unique — son verdict S'INVERSE", fill=AMBRE,
+                 font=petit)
+
+    # ---------- legende, sous les panneaux ----------
+    ly = 96 + ph + 106 + ph + 52
+    for k, (cle, nom, coul, _) in enumerate(MARCHES):
+        col = k % 2
+        art.rectangle([marge + col * (pw + ecart), ly + (k // 2) * 17,
+                       marge + col * (pw + ecart) + 14, ly + (k // 2) * 17 + 10], fill=coul)
+        art.text((marge + col * (pw + ecart) + 20, ly + (k // 2) * 17 - 2), nom,
+                 fill=coul, font=petit)
 
     debut = H - len(lignes) * 19 - 12
     for j, l in enumerate(lignes):
@@ -219,7 +264,8 @@ def dessiner(m: dict, sortie: Path) -> dict:
     sortie.parent.mkdir(parents=True, exist_ok=True)
     toile.save(sortie)
     return {"marches": len(MARCHES), "tours": len(tours),
-            "tient": [c for c in cles.values() if fin[c] and fin[c]["sous_la_demi_feuille"]],
+            "points_de_balayage": len(m.get("_balayage", {}).get("points", [])),
+            "tient": list(m["tient_la_feuille_a_la_fin"]),
             "sortie": str(sortie)}
 
 
@@ -240,6 +286,8 @@ def verifier() -> int:
         return 1 if echecs else 0
 
     m = json.loads(MESURE.read_text())
+    if BALAYAGE.is_file():
+        m["_balayage"] = json.loads(BALAYAGE.read_text())
     v("la prose est traçable", prose_tracable(prose(m)))
     # ⚠⚠⚠ LES TROIS FAITS QUE LA FIGURE PORTE. Le raccrochage par point gagne au premier tour,
     # il perd au dernier, et un décalage unique par tour est le seul qui descende. Sans les
@@ -250,27 +298,50 @@ def verifier() -> int:
     v("... et perd au dernier",
       m["marche_raccrochee"][-1]["erreur_um"] > m["marche_aveugle"][-1]["erreur_um"],
       f"{m['marche_raccrochee'][-1]['erreur_um']} contre {m['marche_aveugle'][-1]['erreur_um']}")
-    v("le décalage global est le seul dont la dérive descende",
-      [c for c, ok_ in m["la_derive_est_arretee"].items() if ok_] == ["globale"],
-      str([c for c, ok_ in m["la_derive_est_arretee"].items() if ok_]))
-    v("... et le seul qui tienne la feuille au dernier tour",
-      m["tient_la_feuille_a_la_fin"] == ["globale"], str(m["tient_la_feuille_a_la_fin"]))
+    # ⚠⚠⚠ LA REVENDICATION DU 2026-09-06 EST RETIRÉE, ET C'EST LE PANNEAU D QUI LA RETIRE.
+    # « Le décalage global est le seul dont la dérive descende » était vrai à 191 cellules et
+    # faux dès 494 : la figure asserte donc ce qui SURVIT au balayage, pas ce qu'un point
+    # isolé disait.
+    b = m.get("_balayage")
+    v("le balayage porte au moins deux tailles de boîte", b and len(b["points"]) >= 2,
+      str(len(b["points"]) if b else 0))
+    v("le raccrochage par point dérive plus que l'aveugle à TOUTES les tailles",
+      all(pt["derive_par_tour_um"]["raccroche"] > pt["derive_par_tour_um"]["aveugle"]
+          for pt in b["points"]),
+      str([(pt["derive_par_tour_um"]["raccroche"], pt["derive_par_tour_um"]["aveugle"])
+           for pt in b["points"]]))
+    v("... et le verdict du décalage global, lui, CHANGE avec la taille",
+      "globale" in b["contendants_au_verdict_instable"],
+      str(b["contendants_au_verdict_instable"]))
     # ⚠ Le mécanisme doit être visible : la rugosité du champ par point MONTE.
     rug = [x for x in m["rugosite_um"]["raccroche"] if x is not None]
     v("la rugosité du champ par point monte au fil des tours", rug[-1] > rug[0], str(rug))
+    # ⚠⚠⚠ LE PANNEAU C PORTE LA RÉPONSE : le gain existe depuis une spire publiée et pas
+    # depuis une surface d'un tour. Sans les deux moitiés, le dessin ne dirait rien.
+    vi = m["le_gain_vieillit"]
+    v("le raccrochage gagne depuis une spire publiée", vi[0]["gain_um"] > 5.0,
+      str(vi[0]["gain_um"]))
+    v("... et ne gagne plus dès qu'un tour aveugle a été fait",
+      m["le_gain_nexiste_quau_premier_pas"],
+      f"{[e['gain_um'] for e in vi]}")
     # ⚠⚠ Et le témoin qui rend la marche capable d'échouer : le gabarit mélangé doit être pire
     # que tout le reste au dernier tour.
     fins = {c: m["feuille_tenue_a_la_fin"][c]["erreur_um"]
             for c in m["feuille_tenue_a_la_fin"] if m["feuille_tenue_a_la_fin"][c]}
     v("le gabarit mélangé est le pire au dernier tour",
       max(fins, key=fins.get) == "hasard", str(fins))
+    v("aucun contendant ne tient la feuille à la plus grande boîte",
+      not b["points"][-1]["tient_la_feuille_a_la_fin"],
+      str(b["points"][-1]["tient_la_feuille_a_la_fin"]))
     # ⚠⚠ LE FAIT QUI FERME L'AUTRE LECTURE : un décalage global toujours du même signe ne
     # serait qu'une longueur de pas corrigée, et ce dépôt a déjà mesuré ce que celle-là vaut
     # (54,1 µm sur des paires réservées). Il change de signe, donc il corrige tour par tour.
     v("le décalage global change de signe", m["le_global_change_de_signe"],
       str(m["decalage_global_signe_um"]))
-    v("... et sa longueur équivalente tombe près de celle ajustée sur les cibles",
-      abs(m["longueur_equivalente_um"] - 108.4) < 15.0, str(m["longueur_equivalente_um"]))
+    # ⚠⚠⚠ ET UNE SECONDE RÉTRACTATION, plus discrète que la première : à 191 cellules la
+    # longueur équivalente du décalage global tombait à 114,7 µm, « à six micromètres de la
+    # longueur ajustée sur les cibles ». À 906 cellules elle vaut 161,3. Ce rapprochement
+    # était une coïncidence de boîte, pas un fait sur la nappe, et il n'est plus asséré.
     v("toutes les marches ont le même nombre de tours",
       len({len(m[c]) for c, _, _, _ in MARCHES}) == 1,
       str({c: len(m[c]) for c, _, _, _ in MARCHES}))
@@ -280,13 +351,16 @@ def verifier() -> int:
     with tempfile.TemporaryDirectory() as d:
         r = dessiner(m, Path(d) / "t.png")
         v("les six marches sont dessinées", r["marches"] == 6)
-        v("... et seule la globale est marquée comme tenant", r["tient"] == ["globale"],
-          str(r["tient"]))
+        v("le balayage est dessiné", r["points_de_balayage"] == len(b["points"]),
+          str(r["points_de_balayage"]))
         from PIL import Image  # noqa: PLC0415
 
         img = Image.open(Path(d) / "t.png")
         v("l'image a du relief", img.convert("L").getextrema()[0] < 90)
-        v("l'image est plus large que haute", img.width > img.height * 0.9,
+        # ⚠ Une figure à quatre panneaux tient sur deux rangées : elle a donc le droit d'être
+        # un peu plus haute que large à cause de la prose, mais pas de devenir une colonne —
+        # au-delà, les panneaux ne se comparent plus d'un coup d'œil.
+        v("l'image reste une grille, pas une colonne", img.height < img.width * 1.25,
           f"{img.width}x{img.height}")
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
@@ -297,6 +371,7 @@ def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0],
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--mesure", type=Path, default=MESURE)
+    p.add_argument("--balayage", type=Path, default=BALAYAGE)
     p.add_argument("--sortie", type=Path,
                    default=RACINE / "docs" / "images" / "75_derouler_en_raccrochant.png")
     p.add_argument("--verifier", action="store_true")
@@ -305,8 +380,10 @@ def main() -> int:
         return verifier()
     if not a.mesure.is_file():
         raise SystemExit(f"mesure absente : {a.mesure}")
-    print(json.dumps(dessiner(json.loads(a.mesure.read_text()), a.sortie),
-                     indent=2, ensure_ascii=False))
+    m = json.loads(a.mesure.read_text())
+    if a.balayage.is_file():
+        m["_balayage"] = json.loads(a.balayage.read_text())
+    print(json.dumps(dessiner(m, a.sortie), indent=2, ensure_ascii=False))
     return 0
 
 

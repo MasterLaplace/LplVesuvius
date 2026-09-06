@@ -62,6 +62,7 @@ import argparse
 import json
 import re
 import sys
+import time
 from pathlib import Path
 
 import numpy as np
@@ -183,7 +184,7 @@ class Volume:
     minutes pour des octets déjà en mémoire.
     """
 
-    def __init__(self, url: str, meta: dict, cache) -> None:
+    def __init__(self, url: str, meta: dict, cache, essais: int = 4) -> None:
         self.url = url
         self.meta = meta
         self.cache = cache
@@ -192,6 +193,12 @@ class Volume:
         if len(self.forme) != 3:
             raise RuntimeError(f"tableau à {len(self.forme)} axes, attendu 3")
         self.absents = 0
+        # ⚠⚠ LES REPRISES SONT COMPTÉES, PAS SEULEMENT FAITES. Un balayage qui a demandé
+        # quarante reprises est un balayage dont le lien était mauvais ce jour-là, et c'est un
+        # fait sur les conditions de la mesure. Payé le 2026-09-06 : un seul délai dépassé a
+        # jeté deux cent trente-deux blocs déjà téléchargés et des minutes de marche.
+        self.essais = max(1, int(essais))
+        self.reprises = 0
 
     def _bloc(self, cz: int, cy: int, cx: int):
         import tracecheck as tc  # noqa: PLC0415
@@ -199,13 +206,22 @@ class Volume:
         cle = tc.chunk_key(self.meta, 0, cy, cx, cz)
         if cle in self.cache:
             return self.cache[cle]
-        brut, raison = tc.get_with_reason(f"{self.url}/{cle}", 120.0)
-        if brut is None:
+        brut = raison = None
+        for tentative in range(self.essais):
+            brut, raison = tc.get_with_reason(f"{self.url}/{cle}", 120.0)
             # ⚠⚠ « absent du dépôt » et « le réseau n'a pas répondu » sont deux faits
             # différents. Seul un 404/403 autorise à mémoriser une absence ; mémoriser un
-            # incident de réseau graverait un trou qui n'existe pas.
+            # incident de réseau graverait un trou qui n'existe pas. Et un incident se
+            # RÉESSAIE — il ne dit rien du contenu, donc rien ne justifie d'abandonner.
+            if brut is not None or raison == "absent":
+                break
+            self.reprises += 1
+            if tentative + 1 < self.essais:
+                time.sleep(2.0 * (tentative + 1))
+        if brut is None:
             if raison != "absent":
-                raise RuntimeError(f"lecture impossible ({raison}) pour {cle}")
+                raise RuntimeError(f"lecture impossible ({raison}) pour {cle} "
+                                   f"après {self.essais} tentatives")
             self.cache[cle] = None
             return None
         n = self.taille[0] * self.taille[1] * self.taille[2]
@@ -730,7 +746,7 @@ def mesurer(echantillon: int = 2000, graine: int = 42, minimum_par_spire: int = 
         temoin_accord_melange_median_um=med("temoin_accord_melange_um"),
         temoin_accord_melange_p90_median_um=med("temoin_accord_melange_p90_um"),
         deplacement_sur_place_median_um=med("deplacement_sur_place_um"),
-        cout=cache.cout() | dict(voxels_absents=vol.absents),
+        cout=cache.cout() | dict(voxels_absents=vol.absents, reprises_reseau=vol.reprises),
     )
     r["paires_ameliorees"] = sum(1 for e in lignes if e["raccroche_um"] < e["pas_seul_um"])
     r["paires_ameliorees_accord"] = sum(1 for e in lignes if e["accorde_um"] < e["pas_seul_um"])
@@ -856,6 +872,45 @@ def verifier() -> int:
     # ⚠ Une ligne qui sort du volume est écartée ENTIÈRE : un profil troué déplace son maximum.
     _, okd = le_long(np.array([[31.0, 8.0, 8.0]]), d, np.array([0.0, 4.0]), vf)
     v("une ligne qui sort du volume est écartée entière", not okd.any())
+
+    # --- la reprise d'un incident de réseau ---
+    # ⚠⚠⚠ CE QUI DOIT ÊTRE RÉESSAYÉ ET CE QUI NE DOIT PAS L'ÊTRE. Un délai dépassé ne dit
+    # RIEN du contenu, donc il se réessaie ; une absence est une réponse, donc elle se
+    # mémorise du premier coup. Confondre les deux fait soit jeter un balayage entier pour un
+    # hoquet, soit marteler le dépôt pour des blocs qui n'existent pas.
+    import tracecheck as tc_  # noqa: PLC0415
+
+    vrai_get = tc_.get_with_reason
+    vrai_decode = tc_.decode
+    try:
+        etat = {"n": 0}
+
+        def faux_get(url, timeout):
+            etat["n"] += 1
+            return (None, "delai depasse") if etat["n"] < 3 else (b"x" * 8, None)
+
+        tc_.get_with_reason = faux_get
+        tc_.decode = lambda raw, meta, n: b"\x07" * n
+        petitmeta = dict(shape=[16, 16, 16], chunks=[16, 16, 16], dtype="|u1",
+                         dimension_separator="/", compressor=None)
+        vr = Volume("", petitmeta, {}, essais=4)
+        val, ok_ = vr.voxels(np.array([[0, 0, 0]]))
+        v("un délai dépassé est réessayé, pas abandonné", bool(ok_.all()) and val[0] == 7,
+          f"{val} après {vr.reprises} reprises")
+        v("... et les reprises sont comptées", vr.reprises == 2, str(vr.reprises))
+        etat["n"] = -10 ** 6
+        vr2 = Volume("", petitmeta, {}, essais=2)
+        v("... mais un délai qui persiste LÈVE, il ne devient pas une absence",
+          _leve(lambda: vr2.voxels(np.array([[0, 0, 0]]))))
+        etat["n"] = 0
+        tc_.get_with_reason = lambda url, timeout: (None, "absent")
+        vr3 = Volume("", petitmeta, {}, essais=4)
+        _, ok3 = vr3.voxels(np.array([[0, 0, 0]]))
+        v("une absence n'est PAS réessayée", vr3.reprises == 0 and not ok3.any(),
+          str(vr3.reprises))
+    finally:
+        tc_.get_with_reason = vrai_get
+        tc_.decode = vrai_decode
 
     # --- le cache : ce qu'il sert et ce qu'il a téléchargé sont deux comptes ---
     import tempfile  # noqa: PLC0415

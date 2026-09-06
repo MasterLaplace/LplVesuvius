@@ -11,7 +11,7 @@ la fois. Une feuille de route qui liste des tâches laisse croire qu'on avance q
 tourne ; celle-ci liste des causes **éliminées**, et montre l'espace rétrécir. C'est le
 seul progrès mesurable sur un problème que personne n'a résolu.
 
-**46 causes candidates** sur **4 murs** : ❌ **32** éliminées · ✅ **11** confirmées · 🔒 **3** bloquées
+**47 causes candidates** sur **4 murs** : ❌ **34** éliminées · ✅ **10** confirmées · 🔒 **3** bloquées
 
 | symbole | verdict | ce que ça veut dire |
 |---|---|---|
@@ -29,7 +29,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 
 ## 1. Le tracé ne suit pas de feuille
 
-❌ 14 éliminées · ✅ 6 confirmées · 🔒 3 bloquées
+❌ 16 éliminées · ✅ 5 confirmées · 🔒 3 bloquées
 
 | cause candidate | | ce qui a été mesuré | où |
 |---|---|---|---|
@@ -38,7 +38,6 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | le traceur est un tirage, pas une fonction | ✅ | 13 traces propres sur 14 à paramètres identiques ; toute comparaison à un seul tirage ne vaut rien | [`30`](30_le_traceur_est_un_tirage.md) |
 | ce qui est établi : la surface est EN TRAVERS de l'empilement | ✅ | des spires coupées en travers, vues à l'image à étendue égale contre une feuille publiée | [`25`](25_une_graine_choisie_sur_la_planeite.md) |
 | le niveau de la prédiction n'était propagé nulle part | ✅ | trois conséquences : graine dans le vide, maillage rendu hors du scan, et min_area_cm évalué dans deux unités — les aires m7 sont fausses d'un facteur 16 | [`54`](54_cinq_rendus_vides.md) |
-| raccrocher par un décalage UNIQUE pour toute la nappe, un par tour | ✅ | même gabarit, même fenêtre, une seule décision au lieu de 141 : dérive NÉGATIVE de -19,5 um par tour, 26,2 um au dernier tour, p90 40,3 et 0 % de cellules au-delà d'une demi-feuille — le seul des six dérouleurs qui tienne encore la feuille à la fin ; et ses décalages CHANGENT de signe (-31,2 -42,4 -10,5 +12,5 um), donc ce n'est pas une longueur de pas corrigée | [`75`](75_registre_des_taches.md) |
 | la fenêtre de lecture | ❌ | relu à 128 px × 109 couches, la géométrie du corpus : le classement ne bouge pas | [`52`](52_calibrer_sur_son_corpus.md) |
 | la chaîne de rendu | ❌ | un maillage PUBLIÉ passé par notre chaîne revient à 0,873 — au-dessus de la médiane du corpus | [`53`](53_le_temoin_positif_du_rendu.md) |
 | le champ de normales (NORMAL pèse 10) | ❌ | chargé pour de vrai : coût par génération ×29, trajectoire INCHANGÉE sur 118 générations | [`26`](26_le_champ_de_direction.md) |
@@ -52,7 +51,9 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | le pas normal itéré suffirait à dérouler sans recalage | ❌ | déroulement aveugle depuis la spire 1 : la feuille est perdue au tour 2 (erreur 102 um contre une demi-épaisseur de 67,75), et la dérive vaut 53 um par tour soit 39 % d'une feuille — alors qu'il bat l'immobilité aux douze tours | [`75`](75_registre_des_taches.md) |
 | la dérive du pas normal viendrait d'une longueur mal estimée | ❌ | longueur ajustée sur six paires et jugée sur six réservées : 108,4 um contre 135,5 nominaux, erreur 54,1 contre 67,6 sur la moitié réservée — le biais est réel mais n'explique que 20 %, et le plancher de la courbe réservée est à 50,5 um | [`75`](75_registre_des_taches.md) |
 | le raccrochage à la matière ne ferait pas mieux qu'une longueur de pas bien choisie | ❌ | sur le volume brut de PHerc0500P2, sept paires de spires : le pas normal seul laisse 46,7 um, le maximum brut d'intensité 46,1 — soit rien — et la corrélation avec le gabarit de feuille lu sur la spire de DÉPART 33,3 um, sous l'étalon de 50,5 que laisse la meilleure longueur constante ; témoins gabarit mélangé 56,6 et fenêtre d'une feuille entière 76,6 | [`75`](75_registre_des_taches.md) |
-| le raccrochage point par point suffirait à dérouler | ❌ | enchaîné depuis la spire 4, il est le MEILLEUR au tour 1 (28 um contre 49 pour l'aveugle) et le PIRE au tour 4 (113 contre 83), dérive +27,8 um par tour contre 13,3 — ni l'accord des voisins (+28,9) ni une fenêtre deux fois plus étroite (+22,0) ne le rattrapent ; la rugosité qu'il ajoute monte de 5 à 25 um | [`75`](75_registre_des_taches.md) |
+| le raccrochage point par point suffirait à dérouler | ❌ | sur 906 cellules et six tours, il dérive de +56,1 um par tour contre +22,3 pour l'aveugle, et il dérive plus que lui aux TROIS tailles de boîte mesurées (384, 512, 640 voxels) ; ni l'accord des voisins (+33,6) ni une fenêtre deux fois plus étroite (+43,0) ne le rattrapent | [`75`](75_registre_des_taches.md) |
+| raccrocher par un décalage UNIQUE pour toute la nappe, un par tour | ❌ | RÉTRACTÉE le jour même : à 191 cellules la dérive sortait NÉGATIVE (-19,5 um par tour) et le décalage unique était le seul à tenir la feuille ; à 494 puis 906 cellules, au même endroit et avec le même code, elle vaut +67,3 puis +56,3 — un résultat qui s'inverse quand l'échantillon grandit n'était pas un résultat | [`75`](75_registre_des_taches.md) |
+| le gain d'un pas raccroché survivrait à une surface reconstruite | ❌ | depuis une spire PUBLIÉE le raccrochage gagne +12,7 um sur le pas aveugle ; dès qu'UN seul tour aveugle a été fait il gagne -0,2 um, et sur les quatre âges suivants la médiane vaut -0,2 avec un signe qui change quatre fois — le raccrochage ne raccroche que ce qui est déjà à sa place | [`75`](75_registre_des_taches.md) |
 | comparer le relief d'une trace L2 à une trace L0 | 🔒 | à aire égale un maillage L2 rend quatre fois moins de pixels de côté, donc les deux ne tiennent jamais dans la même fenêtre d'analyse — le relief ne peut pas les départager | [`54`](54_cinq_rendus_vides.md) |
 | les résidus du champ d'orientation publié (A2 ter) | 🔒 | le pas de grille publié vaut 64 voxels, soit 3,89 écarts inter-feuilles par cellule contre 0,5 exigés par Nyquist : le champ est REPLIÉ, pas bruité | [`75`](75_registre_des_taches.md) |
 | bâtir le raccrochage à la matière sur les piles de surface publiées | 🔒 | la pile porte à 129,6 um autour de la surface, soit 0,956 feuille, quand la voisine est à 135,5 : il manque 5,9 um — mesuré sur 1 459 592 colonnes, avec la convention du centre vérifiée (pic à -1,5 couche) | [`75`](75_registre_des_taches.md) |

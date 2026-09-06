@@ -27,10 +27,29 @@ dérouleur aveugle exige de toute façon le même pas des deux côtés.
 ⚠ Le témoin du gabarit MÉLANGÉ est itéré lui aussi, tour après tour : un dérouleur qui
 raccrocherait au hasard à chaque pas est le plancher de bruit de cette marche, pas d'un pas.
 
+⛔⛔⛔ LA RÉPONSE, ET ELLE EST NÉGATIVE : rien ne déroule. Sur 906 cellules et six tours, le
+raccrochage par point dérive de **+56 µm par tour** contre **+22** pour l'aveugle, et il dérive
+plus que lui aux **trois** tailles de boîte mesurées. Le moins mauvais des six dérouleurs est
+celui qui ne lit rien.
+
+⭐⭐⭐ ET LA RAISON EST MESURÉE PAR `le_gain_vieillit` : le gain d'un pas raccroché vaut
+**+12,7 µm** depuis une spire **publiée** et **−0,2 µm** dès qu'un seul tour aveugle a été fait.
+**Le raccrochage ne raccroche que ce qui est déjà à sa place.** Les 33,3 µm mesurés sur un pas
+sont donc un gain conditionnel au point de départ, pas une capacité de la méthode.
+
+⚠⚠⚠ ET LA BOÎTE DOIT ÊTRE BALAYÉE AVANT DE CONCLURE — payé le 2026-09-06. À 191 cellules, cette
+mesure rendait une dérive NÉGATIVE pour le décalage unique et il a été publié comme « le seul qui
+tienne encore la feuille ». À 494 puis 906 cellules, au même endroit et avec le même code, elle
+vaut +67 puis +56. La largeur de la boîte avait été choisie pour sa **facture de
+téléchargement** — un bloc fait 2 Mio non compressés — et un paramètre choisi pour son coût n'a
+aucune raison d'être neutre sur le résultat. D'où `--balayer`.
+
 Usage :
     uv run python src/nappe/derouler_en_raccrochant.py --verifier
-    uv run python src/nappe/derouler_en_raccrochant.py \\
+    uv run python src/nappe/derouler_en_raccrochant.py --cote 640 \\
         --json docs/mesures/derouler_en_raccrochant.json
+    uv run python src/nappe/derouler_en_raccrochant.py --balayer 384,512,640 \\
+        --json docs/mesures/derouler_en_raccrochant_balayage.json
 """
 
 from __future__ import annotations
@@ -297,7 +316,8 @@ def _boite_du_depart(grilles: dict, centre, cote: float, minimum: int) -> int | 
     return None
 
 
-def mesurer(minimum: int = 30, graine: int = 42, cache_actif: bool = True) -> dict:
+def mesurer(minimum: int = 30, graine: int = 42, cache_actif: bool = True,
+            cote: float | None = None, grilles: dict | None = None) -> dict:
     """Le dérouleur raccroché, contre l'aveugle, contre le hasard, contre l'immobilité."""
     import tracecheck as tc  # noqa: PLC0415
 
@@ -317,13 +337,23 @@ def mesurer(minimum: int = 30, graine: int = 42, cache_actif: bool = True) -> di
     demi_vx = pas_vx / 2.0
     demi_gab = round(demi_vx / 2.0)
 
-    grilles = {}
-    for w in wraps_du_fragment():
-        g = grille(w, VOLUME, VOXEL_UM)
-        if g is not None:
-            grilles[w["rang"]] = g
+    # ⚠ Les grilles sont RÉUTILISABLES d'un côté de boîte à l'autre : les retélécharger à
+    # chaque taille ferait payer treize `tifxyz` par point du balayage, pour des données
+    # identiques.
+    if grilles is None:
+        grilles = {}
+        for w in wraps_du_fragment():
+            g = grille(w, VOLUME, VOXEL_UM)
+            if g is not None:
+                grilles[w["rang"]] = g
+    # ⚠⚠ LA BOÎTE S'ÉLARGIT, SON CENTRE NE BOUGE PAS. Élargir change UNE chose — combien de
+    # tours la grille survit avant que l'érosion ne la mange. Déplacer le centre en changerait
+    # une seconde : l'endroit de la nappe qu'on mesure. Deux marches à deux endroits ne se
+    # comparent pas, et c'est précisément ce que ce dépôt appelle un témoin qui casse deux
+    # choses.
+    cote = BOITE_COTE if cote is None else float(cote)
     centre = np.array(BOITE_CENTRE)
-    depuis = _boite_du_depart(grilles, centre, BOITE_COTE, minimum)
+    depuis = _boite_du_depart(grilles, centre, cote, minimum)
     if depuis is None:
         raise RuntimeError("aucune spire de départ dans la boîte")
 
@@ -332,7 +362,7 @@ def mesurer(minimum: int = 30, graine: int = 42, cache_actif: bool = True) -> di
     # traverserait des centaines. Ce qui est mesuré est donc un morceau de nappe, pas la
     # nappe — et le compte de cellules le dit.
     a0, ok0 = grilles[depuis]
-    lo, hi = centre - BOITE_COTE / 2, centre + BOITE_COTE / 2
+    lo, hi = centre - cote / 2, centre + cote / 2
     dans = ok0 & ((a0 >= lo) & (a0 <= hi)).all(axis=-1)
     u = np.flatnonzero(dans.any(axis=1))
     v = np.flatnonzero(dans.any(axis=0))
@@ -387,10 +417,13 @@ def mesurer(minimum: int = 30, graine: int = 42, cache_actif: bool = True) -> di
     # produit la grille de `derouler_par_le_pas_normal.un_pas` au bit près.
     aveugle = derouler(a0, ok0, cibles, pas_vx, VOXEL_UM, sens, vol, demi_vx, demi_gab,
                        minimum=minimum, demi_feuille_um=ecart_um / 2, raccrocher=False)
+    vieillissement = le_gain_vieillit(a0, ok0, cibles, pas_vx, VOXEL_UM, sens, vol,
+                                      demi_vx, demi_gab, minimum=minimum)
 
     r = dict(
         volume=VOLUME, voxel_um=VOXEL_UM, zarr=ZARR,
-        boite=dict(centre=list(BOITE_CENTRE), cote_voxels=BOITE_COTE),
+        boite=dict(centre=list(BOITE_CENTRE), cote_voxels=cote,
+                   cote_par_defaut=BOITE_COTE),
         depuis=depuis, ecart_lu_um=ecart_um, pas_en_voxels=round(pas_vx, 2),
         demi_epaisseur_um=round(ecart_um / 2, 2),
         demi_fenetre_um=round(demi_vx * VOXEL_UM, 1),
@@ -401,7 +434,8 @@ def mesurer(minimum: int = 30, graine: int = 42, cache_actif: bool = True) -> di
         marche_raccrochee=raccroche, marche_accordee=accorde,
         marche_fenetre_etroite=etroite, marche_globale=globale,
         marche_aveugle=aveugle, marche_hasard=hasard,
-        cout=cache.cout() | dict(voxels_absents=vol.absents),
+        le_gain_vieillit=vieillissement,
+        cout=cache.cout() | dict(voxels_absents=vol.absents, reprises_reseau=vol.reprises),
     )
 
     def perdue(marche):
@@ -499,10 +533,137 @@ def mesurer(minimum: int = 30, graine: int = 42, cache_actif: bool = True) -> di
     r["la_derive_est_reduite"] = {
         cle: bool(d_ is not None and da is not None and abs(d_) < abs(da))
         for cle, d_ in r["derive_par_tour_um"].items()}
+    gains = [e_["gain_um"] for e_ in vieillissement]
+    r["gain_du_premier_pas_um"] = gains[0] if gains else None
+    r["gain_apres_un_tour_um"] = gains[1] if len(gains) > 1 else None
+    r["gain_du_dernier_pas_um"] = gains[-1] if gains else None
+    # ⚠⚠⚠ LE VERDICT QUI COMPTE, ET IL FAUT LES DEUX MOITIÉS : le gain existe au premier pas
+    # — depuis une spire PUBLIÉE — et il a disparu au suivant. Regarder seulement le dernier
+    # tour ferait conclure « le gain ne survit pas », ce qui est vrai mais trop faible : il ne
+    # survit pas à UN SEUL tour, et c'est ça qui explique pourquoi aucune marche n'en profite.
+    r["le_gain_existe_au_premier_pas"] = bool(gains and gains[0] > 0.0)
+    # ⚠⚠ LE CRITÈRE EST STRUCTUREL, PAS UN SEUIL. Ma première version demandait « moins de la
+    # moitié du gain initial », et elle est tombée sur 6,8 contre 6,35 — un verdict décidé au
+    # dixième de micromètre par un nombre que j'avais choisi. Ce qui distingue un effet d'un
+    # bruit n'est pas sa taille : c'est que le bruit CHANGE DE SIGNE et qu'un effet non.
+    apres = gains[1:]
+    r["gain_median_apres_le_premier_pas_um"] = (
+        None if not apres else round(float(np.median(apres)), 1))
+    r["le_gain_change_de_signe_apres_le_premier_pas"] = bool(
+        apres and min(apres) < 0.0 < max(apres))
+    r["le_gain_nexiste_quau_premier_pas"] = bool(
+        gains and gains[0] > 0.0 and apres
+        and min(apres) < 0.0 < max(apres))
     r["tient_la_feuille_a_la_fin"] = [
         cle for cle, f_ in r["feuille_tenue_a_la_fin"].items()
         if f_ and f_["sous_la_demi_feuille"]]
     return r
+
+
+def le_gain_vieillit(depart: np.ndarray, ok: np.ndarray, cibles: dict[int, np.ndarray],
+                    pas_vx: float, voxel_um: float, sens: float, vol,
+                    demi_vx: float, demi_gab: int, minimum: int = 30) -> list[dict]:
+    """Le gain d'UN pas raccroché, en partant d'une surface de plus en plus vieille.
+
+    ⚠⚠⚠ POURQUOI CETTE MESURE EXISTE, ET C'EST L'ÉCART QUE LES DEUX PRÉCÉDENTES LAISSENT.
+    Le raccrochage d'**un** pas gagne franchement (33,3 µm contre 46,7, sur 2401 lignes), et
+    aucune marche ne s'en trouve mieux. Ces deux faits ne se contredisent que si l'on oublie
+    d'où part chaque pas : la mesure d'un pas part TOUJOURS d'une spire **publiée**, dont les
+    normales sont propres ; une marche part de sa propre reconstruction, qui ne l'est plus.
+
+    Ici la trajectoire de référence est la marche **aveugle** — donc une surface qui vieillit
+    sans que le raccrochage y soit pour rien. À chaque tour on en tire DEUX pas depuis le même
+    point : un aveugle, un raccroché. La différence des deux, tour après tour, dit si le gain
+    survit à l'âge de la surface d'où il part.
+
+    ⚠⚠ UNE SEULE VARIABLE CHANGE ENTRE LES DEUX PAS : le raccrochage. Même surface de départ,
+    même normale, même longueur, même cible. C'est ce qui manquait aux deux marches, qui
+    partaient chacune de sa propre histoire — comparer leurs tours n'isolait rien.
+
+    ⚠ La surface vieillit ET s'éloigne en même temps, et les deux ne sont pas séparés ici : ce
+    qui est mesuré est « le gain survit-il à la dégradation », pas « laquelle des deux
+    dégradations compte ».
+    """
+    from le_pas_normal_atteint_la_spire import distance_a  # noqa: PLC0415
+
+    a, m = depart.copy(), ok.copy()
+    out = []
+    for k in sorted(cibles):
+        avant_a, avant_m = a.copy(), m.copy()
+        nu, mnu, _ = un_pas_raccroche(avant_a, avant_m, pas_vx, sens, vol, demi_vx, demi_gab,
+                                      raccrocher=False)
+        rac, mrac, diag = un_pas_raccroche(avant_a, avant_m, pas_vx, sens, vol,
+                                           demi_vx, demi_gab)
+        if int(mnu.sum()) < minimum:
+            break
+        d_nu = distance_a(nu[mnu], cibles[k], voxel_um)
+        d_rac = distance_a(rac[mrac], cibles[k], voxel_um)
+        out.append(dict(
+            tours_de_vieillissement=k - 1, cellules=int(mnu.sum()),
+            pas_aveugle_um=round(float(np.median(d_nu)), 1),
+            pas_raccroche_um=round(float(np.median(d_rac)), 1),
+            gain_um=round(float(np.median(d_nu)) - float(np.median(d_rac)), 1),
+            rugosite_um=(None if diag["rugosite_vx"] is None
+                         else round(diag["rugosite_vx"] * voxel_um, 1))))
+        # ⚠ La trajectoire de référence avance en AVEUGLE : si elle avançait raccrochée, l'âge
+        # de la surface dépendrait du geste qu'on est en train de juger.
+        a, m = nu, mnu
+    return out
+
+
+def balayer_la_boite(cotes: tuple[float, ...] = (384.0, 512.0, 640.0),
+                    minimum: int = 30) -> dict:
+    """Le verdict de chaque dérouleur, à plusieurs tailles de morceau de nappe.
+
+    ⚠⚠⚠ POURQUOI CE BALAYAGE EXISTE, ET C'EST UNE RÉTRACTATION. À 191 cellules et quatre
+    tours, le décalage unique par tour rendait une dérive **négative** — l'erreur descendait —
+    et c'était publié comme « le seul des six qui tienne encore la feuille ». À 494 cellules
+    et six tours, la même marche, au même endroit, avec le même code, dérive de **+67 µm par
+    tour** et devient la pire après le témoin. **Un résultat qui s'inverse quand l'échantillon
+    grandit n'était pas un résultat**, et le publier sans le balayage aurait fait porter une
+    conclusion par la taille d'une boîte choisie pour son coût de téléchargement.
+
+    ⚠⚠ CE QUI CHANGE ENTRE DEUX POINTS DU BALAYAGE EST UNE SEULE CHOSE : la largeur de la
+    boîte. Le centre ne bouge pas, la spire de départ non plus, le pas non plus. Les boîtes
+    sont **emboîtées** — la plus grande contient la plus petite — donc ce n'est pas un autre
+    endroit de la nappe, c'est le même endroit avec plus de matière autour.
+
+    ⚠ Le coût est cumulatif et il est rendu : les blocs d'une petite boîte servent à la
+    grande, donc le balayage complet coûte le prix de la plus large.
+    """
+    from le_pas_normal_atteint_la_spire import grille  # noqa: PLC0415
+    from les_wraps_publies import VOLUME, VOXEL_UM, wraps_du_fragment  # noqa: PLC0415
+
+    grilles = {}
+    for w in wraps_du_fragment():
+        g = grille(w, VOLUME, VOXEL_UM)
+        if g is not None:
+            grilles[w["rang"]] = g
+
+    points = []
+    for c in cotes:
+        r = mesurer(minimum=minimum, cote=c, grilles=grilles)
+        points.append(dict(
+            cote_voxels=c, cellules_au_depart=r["cellules_au_depart"],
+            tours=r["tours_mesures"],
+            derive_par_tour_um=r["derive_par_tour_um"],
+            erreur_au_dernier_tour_um={k: (v["erreur_um"] if v else None)
+                                       for k, v in r["feuille_tenue_a_la_fin"].items()},
+            tient_la_feuille_a_la_fin=r["tient_la_feuille_a_la_fin"],
+            la_derive_est_arretee=r["la_derive_est_arretee"],
+            cout=r["cout"]))
+
+    # ⚠⚠ LE FAIT QUE LE BALAYAGE EXISTE POUR ÉTABLIR : un contendant dont le verdict CHANGE
+    # d'un point à l'autre n'a pas de verdict. Il est nommé, pas moyenné.
+    contendants = sorted(points[0]["la_derive_est_arretee"])
+    instables = [c for c in contendants
+                 if len({p["la_derive_est_arretee"][c] for p in points}) > 1]
+    return dict(cotes=list(cotes), points=points,
+                contendants_au_verdict_instable=instables,
+                verdict_stable=not instables,
+                aucun_ne_tient_partout=[c for c in contendants
+                                        if all(c not in p["tient_la_feuille_a_la_fin"]
+                                               for p in points)])
 
 
 def verifier() -> int:
@@ -657,6 +818,30 @@ def verifier() -> int:
     v("... et il trouve quand même la feuille",
       mg[-1]["erreur_um"] < 30.0, str(mg[-1]["erreur_um"]))
 
+    # --- le gain qui vieillit ---
+    # ⚠⚠ SUR UN VOLUME OÙ LE PAS EST EXACT, le raccrochage n'a rien à gagner : le gain doit
+    # être nul, pas positif. Un gain positif là voudrait dire que la mesure récompense le
+    # raccrochage même quand il n'y a rien à corriger.
+    vj = le_gain_vieillit(plan, ok, cibles, 60.0, 1.0, 1.0, vf, 15.0, 8, minimum=1)
+    v("un pas exact ne laisse rien à gagner au raccrochage",
+      all(abs(e["gain_um"]) < 1.0 for e in vj), str([e["gain_um"] for e in vj]))
+    # ⚠⚠⚠ ET LE TÉMOIN QUI REND LA MESURE CAPABLE DE VOIR UN GAIN : avec un pas trop court, le
+    # raccrochage DOIT gagner à chaque tour, sinon le zéro ci-dessus ne prouverait rien.
+    vc = le_gain_vieillit(plan, ok, {1: cibles[1]}, 45.0, 1.0, 1.0, vf, 15.0, 8, minimum=1)
+    v("... et avec un pas trop court, il gagne", vc[0]["gain_um"] > 10.0, str(vc[0]))
+    # ⚠ La trajectoire de référence avance en AVEUGLE : l'âge de la surface ne doit pas
+    # dépendre du geste jugé.
+    v("l'âge se compte en tours, à partir de zéro",
+      [e["tours_de_vieillissement"] for e in vj] == list(range(len(vj))),
+      str([e["tours_de_vieillissement"] for e in vj]))
+
+    # ⚠⚠ UN GAIN QUI CHANGE DE SIGNE N'EST PAS UN GAIN, et c'est le critère retenu parce
+    # qu'il ne demande aucun seuil : un effet garde son signe, un bruit non.
+    v("un gain qui change de signe après le premier pas n'en est pas un",
+      bool(min([-0.2, -13.5, 2.5, 6.8, -9.5]) < 0 < max([-0.2, -13.5, 2.5, 6.8, -9.5])))
+    v("... alors qu'un gain qui garde son signe en est un",
+      not (min([12.0, 9.0, 7.0]) < 0 < max([12.0, 9.0, 7.0])))
+
     # ⚠⚠ Le verdict doit nommer SON contendant : un verdict global sur une marche qui en
     # compare six dirait le contraire de la mesure dès que deux d'entre elles divergent.
     v("une marche qui descend rend une pente négative",
@@ -745,13 +930,38 @@ def verifier() -> int:
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0],
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    p.add_argument("--cote", type=float, default=None,
+                   help="côté de la boîte en voxels ; le centre ne bouge jamais")
+    p.add_argument("--balayer", type=str, default=None,
+                   help="côtés de boîte séparés par des virgules, ex. 384,512,640")
     p.add_argument("--json", type=Path)
     p.add_argument("--verifier", action="store_true")
     a = p.parse_args()
     if a.verifier:
         return verifier()
-    r = mesurer()
-    print(f"départ : spire {r['depuis']}, {r['cellules_au_depart']} cellules dans la boîte")
+    if a.balayer:
+        b = balayer_la_boite(tuple(float(x) for x in a.balayer.split(",")))
+        print(f"{'côté':>6} {'cellules':>9} {'tours':>6}  dérive par tour (µm)")
+        print("-" * 88)
+        for pt in b["points"]:
+            d_ = pt["derive_par_tour_um"]
+            print(f"{pt['cote_voxels']:>6.0f} {pt['cellules_au_depart']:>9} "
+                  f"{pt['tours']:>6}  " + "  ".join(
+                      f"{k} {v:+.1f}" for k, v in d_.items() if v is not None))
+        print(f"\ncontendants dont le verdict CHANGE avec la taille : "
+              f"{b['contendants_au_verdict_instable'] or 'aucun'}")
+        print(f"contendants qui ne tiennent la feuille à AUCUNE taille : "
+              f"{b['aucun_ne_tient_partout']}")
+        print(f"coût cumulé : {b['points'][-1]['cout']['blocs_telecharges']} blocs "
+              f"au dernier point")
+        if a.json:
+            a.json.parent.mkdir(parents=True, exist_ok=True)
+            a.json.write_text(json.dumps(b, indent=2, ensure_ascii=False), encoding="utf-8")
+            print(f"écrit : {a.json}")
+        return 0
+    r = mesurer(cote=a.cote)
+    print(f"départ : spire {r['depuis']}, {r['cellules_au_depart']} cellules dans une boîte "
+          f"de {r['boite']['cote_voxels']:.0f} voxels")
     print(f"pas nominal {r['ecart_lu_um']} µm, sens « {r['sens_retenu']} », "
           f"{r['bits_de_supervision']} bit de supervision\n")
     print(f"{'tour':>5} {'cell.':>6} {'par point':>10} {'accordé':>9} {'étroite':>9} "
@@ -798,6 +1008,20 @@ def main() -> int:
     print(f"le raccrochage gagne à {r['tours_ou_le_raccrochage_gagne']} tours sur "
           f"{r['tours_mesures']} (accordé : {r['tours_ou_laccord_gagne']}), "
           f"et bat le hasard à {r['tours_ou_il_bat_le_hasard']}")
+    print("\nle gain d'UN pas raccroché, depuis une surface qui vieillit EN AVEUGLE :")
+    print(f"  {'âge':>4} {'cell.':>6} {'pas aveugle':>12} {'raccroché':>11} {'gain':>8} "
+          f"{'rugosité':>9}")
+    for e_ in r["le_gain_vieillit"]:
+        rug_ = e_["rugosite_um"]
+        print(f"  {e_['tours_de_vieillissement']:>4} {e_['cellules']:>6} "
+              f"{e_['pas_aveugle_um']:>11.1f}µ {e_['pas_raccroche_um']:>10.1f}µ "
+              f"{e_['gain_um']:>+7.1f}µ "
+              f"{('—' if rug_ is None else f'{rug_:.0f}µ'):>9}")
+    print(f"→ le gain n'existe qu'au premier pas : "
+          f"{'OUI' if r['le_gain_nexiste_quau_premier_pas'] else 'NON'}"
+          f"  (âge 0 : {r['gain_du_premier_pas_um']:+.1f} µm ; ensuite médiane "
+          f"{r['gain_median_apres_le_premier_pas_um']:+.1f} µm et le signe change : "
+          f"{'OUI' if r['le_gain_change_de_signe_apres_le_premier_pas'] else 'NON'})")
     print(f"décalage global par tour (signé) : {r['decalage_global_signe_um']} µm — "
           f"longueur de pas équivalente {r['longueur_equivalente_um']} µm "
           f"(change de signe : {'OUI' if r['le_global_change_de_signe'] else 'NON'})")

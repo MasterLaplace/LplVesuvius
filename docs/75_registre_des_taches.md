@@ -1883,94 +1883,131 @@ publié dépendrait de la patience de qui le rejoue.
 > Ce qu'il reste à mesurer est la seule chose qui décide : **est-ce que l'erreur cesse de
 > s'accumuler**, ou est-ce qu'elle s'accumule seulement plus lentement.
 
-#### ⭐⭐⭐ Et à l'ITÉRATION, le raccrochage PAR POINT perd — c'est un décalage UNIQUE qui déroule
+#### ⛔⛔ Et à l'ITÉRATION rien ne déroule — le gain du raccrochage ne survit pas à UN tour
 
-> Mesure : `src/nappe/derouler_en_raccrochant.py` (39 contrôles) →
-> `docs/mesures/derouler_en_raccrochant.json`. Figure :
-> `src/figures/figure_derouler_en_raccrochant.py` (12 contrôles), le 2026-09-06.
+> Mesure : `src/nappe/derouler_en_raccrochant.py` (47 contrôles) →
+> `docs/mesures/derouler_en_raccrochant.json` (boîte de 640 voxels) et
+> `docs/mesures/derouler_en_raccrochant_balayage.json` (trois tailles). Figure :
+> `src/figures/figure_derouler_en_raccrochant.py` (17 contrôles), le 2026-09-06.
 >
 > ```
-> uv run python src/nappe/derouler_en_raccrochant.py --json docs/mesures/derouler_en_raccrochant.json
+> uv run python src/nappe/derouler_en_raccrochant.py --cote 640 --json docs/mesures/derouler_en_raccrochant.json
+> uv run python src/nappe/derouler_en_raccrochant.py --balayer 384,512,640 --json docs/mesures/derouler_en_raccrochant_balayage.json
 > uv run python src/figures/figure_derouler_en_raccrochant.py --sortie docs/images/75_derouler_en_raccrochant.png
 > ```
 
-⚠⚠⚠ **Les deux nombres précédents ne se composent pas.** Un dérouleur aveugle perd la feuille au
-tour 2 et dérive de 53 µm par tour ; un raccrochage reprend un tiers de l'erreur sur **un** pas.
-Rien ne dit si, enchaîné, il **arrête** la dérive ou la ralentit seulement. Cette tranche enchaîne
-les pas et regarde laquelle des deux choses arrive.
+⚠⚠⚠ **Les deux nombres précédents ne se composaient pas, et c'est la mesure qui a tranché.** Un
+dérouleur aveugle perd la feuille au tour 2 ; un raccrochage reprend un tiers de l'erreur sur
+**un** pas. Enchaînés, ils ne s'additionnent pas — et la raison est maintenant chiffrée.
 
 ![le raccrochage gagne un pas et perd la marche](images/75_derouler_en_raccrochant.png)
 
-⚠⚠ **Le gabarit vient de la surface COURANTE, pas des spires publiées.** Au tour `k` le dérouleur
-n'a plus la spire `k` sous les pieds : il a sa propre reconstruction. C'est la seule version
-honnête, et c'est aussi celle qui peut échouer d'une façon qu'aucune autre ne peut — **un gabarit
-dit « je suis sur une feuille », jamais « je suis sur la BONNE feuille »**.
+##### ⛔⛔⛔ RÉTRACTATION : « un décalage UNIQUE par tour déroule » est retiré
 
-| tour | cell. | par point | accordé | fenêtre étroite | **GLOBAL** | aveugle | hasard | rugosité | perdues |
+La première version de cette section, publiée le matin même, mesurait sur **191 cellules et
+quatre tours** et concluait que le décalage unique par tour rendait une dérive **négative** et
+qu'il était **le seul des six à tenir encore la feuille**. Refait sur des morceaux de nappe plus
+larges, au **même endroit**, avec le **même code** :
+
+| côté de la boîte | cellules | tours | par point | accordé | étroite | **décalage unique** | aveugle | hasard |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 384 vx | 191 | 4 | +27,8 | +28,9 | +22,0 | **−19,5** | +13,3 | +43,6 |
+| 512 vx | 494 | 6 | +49,9 | +35,1 | +43,2 | **+67,3** | +25,5 | +73,6 |
+| 640 vx | 906 | 6 | +56,1 | +33,6 | +43,0 | **+56,3** | +22,3 | +65,7 |
+
+*(dérive en µm par tour, ajustée par moindres carrés sur toute la marche)*
+
+⛔ **Un résultat qui s'inverse quand l'échantillon grandit n'était pas un résultat.** Et il
+s'inverse à **deux** tailles indépendantes, pas une. Une seconde revendication tombe avec :
+la « longueur de pas équivalente » du décalage global valait 114,7 µm à 191 cellules — *« à six
+micromètres de la longueur ajustée sur les cibles »* — et vaut **161,3 µm** à 906. C'était une
+coïncidence de boîte, pas un fait sur la nappe.
+
+⚠⚠ **La boîte n'était pas un choix de résultat, elle était un choix de COÛT** : un bloc de ce
+volume fait 2 Mio non compressés, et 384 voxels était ce qui tenait dans le cache du jour. C'est
+exactement pour ça qu'il fallait la balayer avant de conclure — un paramètre choisi pour sa
+facture n'a aucune raison d'être neutre sur la mesure.
+
+##### La marche, sur le plus grand morceau mesuré (906 cellules, 6 tours)
+
+| tour | cell. | par point | accordé | étroite | décalage unique | aveugle | hasard | rugosité | perdues |
 |---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 1 | 141 | **28 µm** | 28 | 68 | 78 | 49 | 80 | 5 µm | 0,34 |
-| 2 | 99 | 57 | 52 | 57 | 74 | **28** | 54 | 19 µm | 0,41 |
-| 3 | 62 | 79 | 77 | 73 | **35** | 59 | 105 | 24 µm | 0,61 |
-| 4 | 33 | 113 | 116 | 136 | **26** | 83 | 209 | 25 µm | 0,67 |
+| 1 | 795 | **30 µm** | 28 | 43 | 40 | 43 | 72 | 6 µm | 0,30 |
+| 2 | 692 | 53 | 40 | 55 | 64 | **51** | 73 | 17 µm | 0,38 |
+| 3 | 596 | 97 | 89 | 76 | 152 | **55** | 129 | 25 µm | 0,64 |
+| 6 | 349 | 309 | 192 | 256 | 306 | **161** | 368 | 25 µm | 0,87 |
 
-⛔⛔ **Le raccrochage par point est le MEILLEUR au premier tour et le PIRE au quatrième.** Sa dérive
-vaut **+27,8 µm par tour** contre 13,3 pour l'aveugle : il dérive **deux fois plus vite** que ne
-rien lire du tout. Et il le fait en ayant l'air de gagner — au tour 1 sa médiane est deux fois
-meilleure, pendant que **34 % de ses cellules sont déjà au-delà d'une demi-feuille**.
+⛔ **Aucun contendant ne tient la feuille au dernier tour, et le moins mauvais est celui qui ne
+lit rien** : l'aveugle dérive de **+22,3 µm par tour** quand le meilleur raccrochage — l'accordé
+aux voisins — en fait +33,6. ⭐ Le seul ordre stable aux trois tailles est celui-là : **le
+raccrochage par point dérive plus que l'aveugle partout**, et le gabarit mélangé est pire que
+tout partout.
 
-⚠⚠⚠ **Deux remèdes essayés, deux réfutés, chacun ne cassant qu'une chose.** L'accord des voisins
-(médiane du voisinage 3×3) : **+28,9 µm par tour**, rien. Une fenêtre deux fois plus étroite, qui
-rend le saut sur la feuille voisine impossible : **+22,0**, et elle sacrifie le premier tour
-(68 µm au lieu de 28). ⚠ Et le groupement des perdues a **inversé mon hypothèse** : celles du
-raccrochage par point sont à peine groupées (rapport 1,94 puis 1,1) quand celles de l'aveugle le
-sont fortement (**7,67**). Le raccrochage échange donc une erreur **cohérente** contre une erreur
-**éparpillée** — et à 34 % puis 67 % de cellules fausses, une médiane de neuf est très au-delà de
-son point de rupture.
+##### ⭐⭐⭐ Et la RAISON est mesurée : le gain ne survit pas à un seul tour
 
-> ⭐⭐⭐ **Ce qui déroule est un décalage UNIQUE par tour.** Même gabarit, même fenêtre, même forme
-> cherchée : seul le nombre de décisions change — **une** au lieu de cent quarante et une, en
-> maximisant la corrélation **sommée** sur toute la nappe. Sa dérive est **négative, −19,5 µm par
-> tour** : l'erreur **descend**. Au dernier tour il rend **26,2 µm**, p90 **40,3**, et
-> **0 % de cellules au-delà d'une demi-feuille** — quand l'aveugle en a 82 % et le par-point 67 %.
-> **C'est le seul des six qui tienne encore la feuille à la fin.**
+L'expérience qui manquait tient en une phrase : la mesure d'**un** pas part toujours d'une spire
+**publiée**, dont les normales sont propres ; une marche part de sa propre reconstruction, qui ne
+l'est plus. Ici la trajectoire de référence est la marche **aveugle** — une surface qui vieillit
+sans que le raccrochage y soit pour rien — et à chaque tour on en tire **deux pas depuis le même
+point** : un aveugle, un raccroché. Une seule variable change.
 
-⭐⭐⭐ **Et ce n'est PAS une longueur de pas corrigée déguisée** — le doute est fermé par le signe.
-Un décalage global toujours du même côté ne serait qu'une longueur de pas ajustée, et ce dépôt a
-déjà mesuré ce que celle-là vaut : **54,1 µm** sur des paires réservées. Les décalages signés valent
-**−31,2 · −42,4 · −10,5 · +12,5 µm** : ils **changent de signe**, donc le raccrochage corrige tour
-par tour au lieu d'une fois pour toutes. ⭐ Et leur médiane correspond à un pas de **114,7 µm**, à
-six micromètres de la longueur **ajustée sur les cibles** (108,4 µm) que la tranche précédente avait
-trouvée par un tout autre chemin — un dérouleur qui ne voit jamais sa cible retombe sur le même
-nombre.
+| âge de la surface | pas aveugle | pas raccroché | **gain** |
+|---:|---:|---:|---:|
+| **0 tour — une spire publiée** | 42,7 µm | **30,0 µm** | **+12,7** |
+| 1 tour | 50,8 | 51,0 | **−0,2** |
+| 2 tours | 54,8 | 68,3 | −13,5 |
+| 3 tours | 71,0 | 68,5 | +2,5 |
+| 4 tours | 108,3 | 101,4 | +6,8 |
+| 5 tours | 161,3 | 170,8 | −9,5 |
 
-⭐⭐ **Et c'est la leçon de C1, rejouée sur un autre objet.** `le_residu_est_une_translation` avait
-montré qu'un « champ » de recalage estimé fenêtre par fenêtre était en réalité **une constante**, et
-que l'estimer par morceaux n'ajoutait que du bruit. Ici la constante est un décalage par tour, et la
-rugosité mesure le bruit qu'on s'ajoutait : le champ par point ride la nappe de **5 à 25 µm**, un
-décalage unique ne la ride pas du tout — zéro par construction.
+> ⛔⛔⛔ **Le raccrochage ne raccroche que ce qui est déjà à sa place.** Il gagne **12,7 µm**
+> depuis une spire publiée et **plus rien** dès qu'un seul tour aveugle a été fait — ensuite la
+> médiane vaut **−0,2 µm** et le signe change quatre fois. Les 33,3 µm de la tranche précédente
+> sont donc un gain **conditionnel au point de départ**, pas une capacité de la méthode.
 
-⚠ **Ce que cette tranche ne dit pas.** Quatre tours seulement, et la grille fond de **191 à 33**
-cellules (une normale demande quatre voisins valides, donc le masque s'érode d'une cellule par tour
-sur tout son pourtour). La marche s'arrête **sous 30 cellules**, sur un critère déclaré d'avance :
-une médiane sur deux cellules n'est pas une mesure. La descente du décalage global porte donc sur
-**quatre points**, et le confirmer demande une boîte plus large — c'est-à-dire du volume à
-télécharger, pas une idée de plus.
+⚠⚠ **Le critère est structurel, pas un seuil.** Ma première version demandait « moins de la
+moitié du gain initial » et elle est tombée sur **6,8 contre 6,35** — un verdict décidé au dixième
+de micromètre par un nombre que j'avais choisi. Ce qui distingue un effet d'un bruit n'est pas sa
+taille, c'est que le bruit **change de signe** et qu'un effet non.
+
+⚠ La rugosité dit la même chose autrement : le champ de décalages par point ride la nappe de
+**6 à 25 µm** au fil des tours, et la rugosité mesurée **depuis la surface aveugle** monte elle
+aussi (6 → 22 µm). Ce n'est pas le raccrochage qui abîme la surface au point de se saborder — la
+surface se dégrade toute seule, et le raccrochage cesse simplement d'y voir une feuille.
+
+##### Ce qui a été essayé et ce que chaque essai a coûté
+
+- **L'accord des voisins** (médiane du voisinage 3×3) : **+33,6 µm par tour** à 906 cellules,
+  soit le meilleur des raccrochages et toujours pire que l'aveugle. ⭐ À 191 cellules il
+  n'apportait rien ; à 906 il reprend un tiers de la dérive du par-point. **Un lissage sert
+  d'autant plus que la nappe est grande** — l'inverse de ce que la petite boîte laissait croire.
+- **Une fenêtre deux fois plus étroite** : +43,0. Elle rend le saut sur la feuille voisine
+  impossible et ne rattrape rien, donc ce saut n'était pas la panne.
+- **Le groupement des perdues** a inversé mon hypothèse : celles du par-point sont à peine
+  groupées (2,33 puis 1,0) quand celles de l'aveugle le sont fortement (**3,46 puis 4,14**). Le
+  raccrochage échange une erreur **cohérente** contre une erreur **éparpillée**.
 
 ⚠ Le pas aveugle de ce fichier **est** celui du dérouleur publié : `raccrocher=False` traverse le
 même code, et la batterie vérifie l'égalité **au bit près** avec `derouler_par_le_pas_normal.un_pas`.
-Deux implémentations d'un même geste finiraient par ne pas s'accorder, et la comparaison porterait
-sur leur désaccord.
 
-⚠ Deux défauts de méthode de cette tranche, tous deux miens : mon premier témoin de rugosité
-**ne pouvait pas échouer** — sur un volume parfaitement uniforme, un gabarit mélangé rend le *même*
-décalage faux partout, donc rugosité nulle des deux côtés ; il a fallu un bruit qui varie **le long
-de la ligne**, parce que la corrélation retire la moyenne de chaque segment et qu'un décalage
-constant par colonne ne la déplace pas. Et le verdict imprimé ne nommait **pas son contendant** : il
-annonçait « la dérive n'est pas arrêtée » au moment même où le décalage global la faisait descendre.
+⚠ Trois défauts de méthode de cette tranche, tous miens. Mon premier témoin de rugosité **ne
+pouvait pas échouer** — sur un volume uniforme un gabarit mélangé rend le *même* décalage faux
+partout, donc rugosité nulle des deux côtés ; il fallait un bruit variant **le long de la ligne**,
+la corrélation retirant la moyenne de chaque segment. Le verdict imprimé **ne nommait pas son
+contendant**. Et un `str.replace` **sans assertion** a fait disparaître en silence tout un bloc
+d'affichage — le piège que ce dépôt a déjà consigné, repayé le même jour.
 
-> ⭐⭐⭐ **La tranche qui suit est nommée par ce résultat** : élargir la boîte pour porter la marche
-> au-delà de quatre tours, et voir si le décalage unique tient sur une dizaine. Le coût est connu et
-> il est en mébioctets, pas en idées.
+⚠ Un délai réseau a tué un balayage après **232 blocs déjà téléchargés** : le lecteur avait
+raison de refuser de confondre « pas de réponse » et « pas de matière », mais un incident ne dit
+rien du contenu, donc il se **réessaie**. Les reprises sont bornées, comptées et rendues — un run
+qui en a demandé quarante est un run dont le lien était mauvais ce jour-là.
+
+> ⭐⭐⭐ **Ce que cette tranche laisse à la suivante est plus précis que ce qu'elle a retiré.** La
+> question n'est plus « quel raccrochage » mais **« comment garder une surface assez propre pour
+> qu'un raccrochage y voie encore une feuille »** — puisque le gain existe au tour 0 et a disparu
+> au tour 1. Les deux pistes que la mesure désigne : la surface se dégrade **avant** que le
+> raccrochage n'échoue (donc c'est la propagation des normales qu'il faut tenir), et le lissage
+> compte **d'autant plus que la nappe est grande**, ce que seule la boîte élargie a montré.
 
 ### C2 ⭐ — le nul verso (H7)
 

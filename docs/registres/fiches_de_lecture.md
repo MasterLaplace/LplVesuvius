@@ -3706,7 +3706,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/55_les_murs_et_leurs_causes.md
-- **lignes** : 121
+- **lignes** : 122
 - **nature** : PROCEDE
 - **résumé** : Document **rendu** depuis `docs/registres/murs_et_causes.tsv` par `uv run python src/depot/murs_et_causes.py --rendre`, et non écrit à la main ; sa batterie vérifie que chaque ligne pointe vers un document contenant encore son ancre. Il recense **30 causes candidates sur 4 murs** : 19 éliminées, 10 confirmées, 1 bloquée, chacune avec la mesure qui l'a tranchée et le document d'origine. Sa thèse de forme est qu'un mur est un espace de causes dont on retire une entrée à la fois, et que la liste des causes éliminées — non celle des tâches — est le seul progrès mesurable. Une seule cause reste non tranchée, et elle est bloquée. (⚠ Note de lecture : l'en-tête compte 19 éliminations quand le §final écrit « les treize éliminations de ce document » ; le document ne signale pas l'écart. De même, il ne contient aucune cause ⏳ *ouverte* alors que son propre tableau de symboles définit ce statut.)
 - **conclusions extractibles** : *(les murs recensés, avec pour chacun les causes éliminées et celles qui restent ouvertes)*
@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 2610
+- **lignes** : 2647
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5785,46 +5785,49 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     **géométrique** : sans lui 10→11 entrait avec mille micromètres d'erreur, non parce que le
     raccrochage échoue mais parce que la spire 11 ne couvre pas cette région. Écarter sur l'erreur
     aurait été choisir sur le résultat.
-  - ⛔⛔ **ET À L'ITÉRATION, LE RACCROCHAGE PAR POINT PERD** (2026-09-06). Enchaîné depuis la spire
-    4, il est le **meilleur au tour 1** (28 µm contre 49 pour l'aveugle) et le **pire au tour 4**
-    (113 contre 83) ; sa dérive vaut **+27,8 µm par tour** contre 13,3 — il dérive **deux fois
-    plus vite que ne rien lire du tout**, en ayant l'air de gagner : au tour 1 sa médiane est
-    deux fois meilleure pendant que **34 % de ses cellules sont déjà au-delà d'une demi-feuille**.
-  - ⚠⚠⚠ **Deux remèdes essayés, deux réfutés, chacun ne cassant qu'une chose** : l'accord des
-    voisins rend **+28,9 µm par tour** (rien), une fenêtre deux fois plus étroite **+22,0** en
-    sacrifiant le premier tour (68 au lieu de 28). ⚠ Et le **groupement des perdues a inversé mon
-    hypothèse** : celles du par-point sont à peine groupées (1,94 puis 1,1) quand celles de
-    l'aveugle le sont fortement (**7,67**). Le raccrochage échange une erreur **cohérente** contre
-    une erreur **éparpillée** — et à 34 puis 67 % de cellules fausses, une médiane de neuf est
-    très au-delà de son point de rupture.
-  - ⭐⭐⭐ **CE QUI DÉROULE EST UN DÉCALAGE UNIQUE PAR TOUR.** Même gabarit, même fenêtre, même
-    forme cherchée : seul le **nombre de décisions** change — une au lieu de cent quarante et une,
-    en maximisant la corrélation **sommée**. Dérive **négative, −19,5 µm par tour** ; au dernier
-    tour **26,2 µm**, p90 **40,3**, et **0 %** de cellules au-delà d'une demi-feuille, quand
-    l'aveugle en a 82 % et le par-point 67 %. **Le seul des six qui tienne encore la feuille.**
-  - ⭐⭐⭐ **Et ce n'est PAS une longueur de pas corrigée déguisée** : les décalages signés valent
-    **−31,2 · −42,4 · −10,5 · +12,5 µm**, donc ils **changent de signe** — un décalage toujours du
-    même côté ne serait qu'une longueur ajustée, et ce dépôt a déjà mesuré ce que celle-là vaut
-    (54,1 µm sur des paires réservées). ⭐ Leur médiane correspond à un pas de **114,7 µm**, à six
-    micromètres de la longueur ajustée **sur les cibles** (108,4) trouvée par un tout autre chemin.
-  - ⭐⭐ **Et c'est la leçon de C1 rejouée sur un autre objet** : un « champ » estimé par morceaux
-    était en réalité **une constante**, et l'estimer par morceaux n'ajoutait que du bruit. La
-    rugosité mesure ce bruit — le champ par point ride la nappe de **5 à 25 µm**, un décalage
-    unique ne la ride pas du tout.
-  - ⚠ Ce que la tranche ne dit **pas** : quatre tours, et la grille fond de **191 à 33** cellules
-    (une normale demande quatre voisins). La marche s'arrête **sous 30 cellules**, critère déclaré
-    d'avance. La descente porte donc sur quatre points ; la confirmer demande une boîte plus large,
-    c'est-à-dire des mébioctets, pas une idée.
-  - ⚠ Le pas aveugle de ce fichier **est** celui du dérouleur publié — `raccrocher=False` traverse
-    le même code, et la batterie vérifie l'égalité **au bit près**. Deux implémentations d'un même
-    geste finiraient par ne pas s'accorder, et la comparaison porterait sur leur désaccord.
-  - ⚠⚠ Deux défauts de méthode, tous deux miens : mon premier témoin de rugosité **ne pouvait pas
-    échouer** (sur un volume uniforme, un gabarit mélangé rend le *même* décalage faux partout,
-    donc rugosité nulle des deux côtés — il fallait un bruit variant **le long de la ligne**,
-    la corrélation retirant la moyenne de chaque segment) ; et le verdict imprimé **ne nommait pas
-    son contendant**, donc il annonçait « la dérive n'est pas arrêtée » au moment même où le
-    décalage global la faisait descendre.
+  - ⛔⛔ **ET À L'ITÉRATION, RIEN NE DÉROULE** (2026-09-06, sur 906 cellules et six tours). Le
+    raccrochage par point dérive de **+56,1 µm par tour** contre **+22,3** pour l'aveugle, et il
+    dérive plus que lui aux **trois** tailles de boîte mesurées (384, 512, 640 voxels). Ni
+    l'accord des voisins (+33,6) ni une fenêtre deux fois plus étroite (+43,0) ne le rattrapent.
+    ⛔ **Aucun contendant ne tient la feuille au dernier tour, et le moins mauvais est celui qui
+    ne lit rien.**
+  - ⭐⭐⭐ **ET LA RAISON EST MESURÉE : le gain ne survit pas à UN tour.** La trajectoire de
+    référence avance **en aveugle** — donc une surface qui vieillit sans que le raccrochage y
+    soit pour rien — et à chaque tour on en tire **deux pas depuis le même point**, un aveugle
+    et un raccroché ; une seule variable change. Depuis une spire **publiée** le raccrochage
+    gagne **+12,7 µm** ; dès qu'**un seul** tour aveugle a été fait il gagne **−0,2**, et sur les
+    quatre âges suivants la médiane vaut −0,2 avec un signe qui change quatre fois.
+    ⛔⛔ **Le raccrochage ne raccroche que ce qui est déjà à sa place** : les 33,3 µm d'un pas
+    sont un gain **conditionnel au point de départ**, pas une capacité de la méthode.
+  - ⚠⚠ **Le critère est structurel, pas un seuil** : ma première version demandait « moins de la
+    moitié du gain initial » et elle est tombée sur **6,8 contre 6,35**, un verdict décidé au
+    dixième de micromètre par un nombre que j'avais choisi. Ce qui distingue un effet d'un bruit
+    n'est pas sa taille — c'est que le bruit **change de signe** et qu'un effet non.
+  - ⭐ **Un lissage sert d'autant plus que la nappe est grande** : à 191 cellules l'accord des
+    voisins n'apportait rien, à 906 il reprend un tiers de la dérive du par-point. C'est
+    l'inverse de ce que la petite boîte laissait croire, et seule la boîte élargie l'a montré.
+  - ⚠ Le groupement des perdues a **inversé mon hypothèse** : celles du par-point sont à peine
+    groupées (2,33 puis 1,0) quand celles de l'aveugle le sont fortement (3,46 puis 4,14). Le
+    raccrochage échange une erreur **cohérente** contre une erreur **éparpillée**.
+  - ⚠ Le pas aveugle de ce fichier **est** celui du dérouleur publié — `raccrocher=False`
+    traverse le même code, et la batterie vérifie l'égalité **au bit près**.
+  - ⚠ Un délai réseau a tué un balayage après **232 blocs déjà téléchargés**. Le lecteur avait
+    raison de refuser de confondre « pas de réponse » et « pas de matière », mais un incident ne
+    dit rien du contenu : il se **réessaie**, borné, compté et rendu.
 - **rétractations / corrections internes** :
+  - ⛔⛔⛔ **« Un décalage UNIQUE par tour déroule » est RETIRÉ** (publié et retiré le
+    2026-09-06). À **191 cellules et quatre tours**, le décalage unique rendait une dérive
+    **négative** (−19,5 µm par tour) et était le seul des six à tenir la feuille. Au **même
+    endroit**, avec le **même code**, sur **494** puis **906** cellules : **+67,3** puis
+    **+56,3**. ⛔ **Un résultat qui s'inverse quand l'échantillon grandit n'était pas un
+    résultat**, et il s'inverse à deux tailles indépendantes, pas une.
+  - ⛔⛔ **Et une seconde revendication tombe avec** : la « longueur de pas équivalente » du
+    décalage global valait 114,7 µm à 191 cellules — *« à six micromètres de la longueur ajustée
+    sur les cibles »* — et vaut **161,3 µm** à 906. C'était une coïncidence de boîte.
+  - ⚠⚠ **La leçon de méthode** : la boîte n'était pas un choix de résultat, c'était un choix de
+    **coût** — un bloc fait 2 Mio non compressés et 384 voxels était ce qui tenait dans le cache
+    du jour. Un paramètre choisi pour sa facture n'a **aucune raison** d'être neutre sur la
+    mesure, donc il se balaye **avant** de conclure, pas après.
   - ⚠⚠⚠ **« Le résidu est très variable dans l'espace » est ANNULÉ** : il reposait sur un
     optimum à (−104, −120) qui touchait **le bord** de son balayage, donc sur une borne et non
     sur un déplacement. Sur 127 fenêtres les optima se serrent autour de (−24, 0). Ce qui reste
@@ -5854,8 +5857,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 2017 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 2610 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 2054 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 2647 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
