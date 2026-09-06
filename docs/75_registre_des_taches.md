@@ -2780,6 +2780,69 @@ mesurer est le piège habituel : `concordance_des_plans` la mesure désormais.
 
 ---
 
+### D4 ⚠⚠⚠ — 67 batteries vertes sur 140 n'atteignent pas le nombre qu'elles publient
+
+Document dédié : [`80`](80_la_batterie_natteint_pas_le_nombre.md). Suite de
+[`61`](61_les_batteries_qui_ne_pouvaient_pas_echouer.md), dont il franchit la limite finale —
+*« ce contrôle dit qu'une batterie peut échouer, jamais qu'elle teste quelque chose d'utile »*.
+
+![le chemin du nombre publié](images/80_le_chemin_du_nombre_publie.png)
+
+**Le défaut, payé le 2026-09-05** : un de mes patchs a échoué à mi-course et n'a écrit que son
+dernier bloc, laissant l'enregistrement de `derouler_des_deux_bords.py` référencer trois
+variables inexistantes — **et la batterie est restée verte**, parce qu'elle n'appelle pas
+`mesurer`. Une batterie verte sur un module dont le seul chemin non testé est celui qui produit
+le nombre publié est une batterie qui ne peut pas échouer **là où ça compte**.
+
+⚠ La raison n'est pas de la négligence, elle est mécanique : ce chemin **lit le dépôt distant**,
+et `temoins.sh` exige que ses batteries tournent hors ligne. Le chemin le plus important du
+module était le seul qu'on ne pouvait pas exercer.
+
+**Le balayage** (`src/depot/le_chemin_du_nombre_publie.py`, propriété du graphe d'appels, lue
+sans rien exécuter) :
+
+| | |
+|---|---:|
+| modules qui publient une mesure | **140** |
+| dont la batterie n'atteint pas ce chemin | **67** (48 %) |
+| fonctions hors de portée | **104** |
+
+⭐ **La branche laissée dehors porte toujours le même nom** : `mesurer` dans **17** modules,
+`dessiner` dans **10**, `rapporter` dans **7**. Ce sont les deux verbes qui publient — l'un rend
+le nombre, l'autre l'image. Par famille : `graine` **9/10**, `encre` **22/29**, `nappe`
+**15/26**, `figures` **10/46**.
+
+⚠⚠ **Un chiffre calculé puis retiré** : « les modules dont la tête de chemin est dehors », 67 sur
+67. C'est une **identité** — la couverture se propage vers le bas — donc un nombre qui ne peut
+prendre qu'une valeur et se lirait comme une découverte.
+
+**Réparé, un module** : `derouler_des_deux_bords.py` reçoit sa matière par paramètre, le défaut
+restant le dépôt distant (donc le nombre publié ne bouge pas d'une virgule). Ce qui est
+injectable est la **matière**, pas le découpage : boîte, seuil de cellules, encadrements, marche,
+combinaison, pondération et enregistrement restent dans `mesurer`. La batterie passe de 32 à
+**47 contrôles**, dont les deux refus — une spire dont il ne reste que trois cellules est
+écartée, un corpus posé hors de la boîte est **refusé** plutôt que rendu vide.
+
+⚠⚠⚠ **La fixture doit être ONDULÉE** : des spires parfaitement décalées du pas sont atteintes
+*exactement* par un pas normal, donc toutes les erreurs vaudraient zéro et chaque comparaison
+serait satisfaite par des zéros. **Six sondes** remettent chacune un défaut — fixture aplatie,
+boîte qui ne découpe plus, seuil qui ne filtre plus, corpus qui gagne une clé, affichage lisant
+une clé renommée, figure lisant une clé absente — et les six font rougir la batterie.
+
+⚠⚠ **Et un second constat, trouvé en cherchant où inscrire la batterie corrigée : 44 batteries
+que `temoins.sh` ne lançait pas** — toute la campagne de déroulage et ses figures. Le harnais
+rendait « 184 batteries ALL PASS » sans les voir. Le garde-fou qui les nomme existait déjà ; il
+n'avait pas tourné, le harnais complet étant long. Un contrôle qu'on ne lance pas est, pour la
+durée où on ne le lance pas, exactement un contrôle absent. Les 44 ont été lancées **une par une
+avant d'être inscrites** : toutes vertes, la plus lente en soixante secondes.
+
+**Reste à faire** : 66 modules. L'ordre suit la mesure — `mesurer` d'abord (17), puis `dessiner`
+(10), c'est-à-dire le nombre puis l'image.
+
+```
+uv run python src/depot/le_chemin_du_nombre_publie.py   # le balayage, par famille et par nom
+```
+
 ### D3 ⚠ — 41 → **33** scripts sans appelant, et aucune des huit réparations n'était une formalité
 
 > Entamé le 2026-09-04. `src/depot/appelants.py` juge **307 scripts**. La méthode : demander

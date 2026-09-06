@@ -1494,6 +1494,63 @@ run "rogner la nappe"          uv run --project "$ROOT" python "$ROOT/src/nappe/
 run "table de la chaine"       uv run --project "$ROOT" python "$ROOT/src/tables/table_chaine.py" --verifier
 run "faire la release"         "$ROOT/src/outils/faire_la_release.sh" --verifier
 
+# ⚠⚠⚠ QUARANTE-QUATRE BATTERIES QUI EXISTAIENT ET QUE PERSONNE NE LANCAIT. Elles ont ete
+# ecrites au fil de la campagne de deroulage, chacune verte chez elle, et aucune n inscrite
+# ici -- donc `temoins.sh` rendait « 184 batteries ALL PASS » sans les voir. Le garde-fou
+# « batteries non lancees » plus bas les nomme, et c est lui qui les a trouvees : un depot ou
+# l on ajoute une batterie sans l enregistrer accumule des controles qui ne controlent rien.
+#
+# ⚠ Les quarante-quatre ont ete lancees une par une avant d etre inscrites : toutes vertes,
+# la plus lente en soixante secondes (`le_residu_est_une_translation`). Les inscrire sans les
+# avoir lancees aurait fait rougir le harnais entier sur un defaut qu on n aurait pas nomme.
+run "ce que les serveurs publient"uv run --project "$ROOT" python "$ROOT/src/depot/ce_que_les_serveurs_publient.py" --verifier
+run "chemin du nombre publie"  uv run --project "$ROOT" python "$ROOT/src/depot/le_chemin_du_nombre_publie.py" --verifier
+run "fig : chemin du nombre"   uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_chemin_du_nombre_publie.py" --verifier
+run "translation applicable"   uv run --project "$ROOT" python "$ROOT/src/encre/la_translation_applicable.py" --verifier
+run "recalage local"           uv run --project "$ROOT" python "$ROOT/src/encre/le_recalage_local.py" --verifier
+run "residu = translation"     uv run --project "$ROOT" python "$ROOT/src/encre/le_residu_est_une_translation.py" --verifier
+run "temoin de meme forme"     uv run --project "$ROOT" python "$ROOT/src/encre/le_temoin_de_meme_forme.py" --verifier
+run "reperes pleine resolution"uv run --project "$ROOT" python "$ROOT/src/encre/les_reperes_a_pleine_resolution.py" --verifier
+run "reperes apparies"         uv run --project "$ROOT" python "$ROOT/src/encre/les_reperes_apparies.py" --verifier
+run "reperes interieurs"       uv run --project "$ROOT" python "$ROOT/src/encre/les_reperes_interieurs.py" --verifier
+run "derouler des deux bords"  uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_des_deux_bords.py" --verifier
+run "derouler en raccrochant"  uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_en_raccrochant.py" --verifier
+run "derouler au pas normal"   uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_par_le_pas_normal.py" --verifier
+run "la derive est-elle un biais"uv run --project "$ROOT" python "$ROOT/src/nappe/la_derive_est_elle_un_biais.py" --verifier
+run "derive contre referent"   uv run --project "$ROOT" python "$ROOT/src/nappe/la_derive_nest_pas_le_referent.py" --verifier
+run "la graine mieux etayee"   uv run --project "$ROOT" python "$ROOT/src/nappe/la_graine_mieux_etayee.py" --verifier
+run "longueur locale du pas"   uv run --project "$ROOT" python "$ROOT/src/nappe/la_longueur_locale_du_pas.py" --verifier
+run "portee des piles publiees"uv run --project "$ROOT" python "$ROOT/src/nappe/la_portee_des_piles_publiees.py" --verifier
+run "le pas de la grille"      uv run --project "$ROOT" python "$ROOT/src/nappe/le_pas_de_la_grille.py" --verifier
+run "le pas normal atteint-il" uv run --project "$ROOT" python "$ROOT/src/nappe/le_pas_normal_atteint_la_spire.py" --verifier
+run "raccrochage a la matiere" uv run --project "$ROOT" python "$ROOT/src/nappe/le_raccrochage_a_la_matiere.py" --verifier
+run "volume du maillage"       uv run --project "$ROOT" python "$ROOT/src/nappe/le_volume_du_maillage.py" --verifier
+run "emprise des spires"       uv run --project "$ROOT" python "$ROOT/src/nappe/lemprise_des_spires.py" --verifier
+run "les wraps publies"        uv run --project "$ROOT" python "$ROOT/src/nappe/les_wraps_publies.py" --verifier
+run "drapeau de normale"       uv run --project "$ROOT" python "$ROOT/src/rendu/le_drapeau_de_normale.py" --verifier
+run "topologie du volume"      uv run --project "$ROOT" python "$ROOT/src/rendu/topologie_du_volume.py" --verifier
+
+# Les figures de la meme campagne : leur batterie tient sans dessiner.
+run "fig : deux bords"         uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_des_deux_bords.py" --verifier
+run "fig : en raccrochant"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_en_raccrochant.py" --verifier
+run "fig : pas normal"         uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_par_le_pas_normal.py" --verifier
+run "fig : drapeau de normale" uv run --project "$ROOT" python "$ROOT/src/figures/figure_drapeau_de_normale.py" --verifier
+run "fig : derive et biais"    uv run --project "$ROOT" python "$ROOT/src/figures/figure_la_derive_est_elle_un_biais.py" --verifier
+run "fig : derive et referent" uv run --project "$ROOT" python "$ROOT/src/figures/figure_la_derive_et_le_referent.py" --verifier
+run "fig : longueur du pas"    uv run --project "$ROOT" python "$ROOT/src/figures/figure_la_longueur_locale_du_pas.py" --verifier
+run "fig : portee des piles"   uv run --project "$ROOT" python "$ROOT/src/figures/figure_la_portee_des_piles.py" --verifier
+run "fig : translation applicable"uv run --project "$ROOT" python "$ROOT/src/figures/figure_la_translation_applicable.py" --verifier
+run "fig : pas de la grille"   uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_pas_de_la_grille.py" --verifier
+run "fig : le pas normal"      uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_pas_normal.py" --verifier
+run "fig : raccrochage"        uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_raccrochage_a_la_matiere.py" --verifier
+run "fig : residu translation" uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_residu_est_une_translation.py" --verifier
+run "fig : le seuil ne separe rien"uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_seuil_ne_separe_rien.py" --verifier
+run "fig : temoin de meme forme"uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_temoin_de_meme_forme.py" --verifier
+run "fig : emprise des spires" uv run --project "$ROOT" python "$ROOT/src/figures/figure_lemprise_des_spires.py" --verifier
+run "fig : reperes pleine resol."uv run --project "$ROOT" python "$ROOT/src/figures/figure_les_reperes_a_pleine_resolution.py" --verifier
+run "fig : reperes apparies"   uv run --project "$ROOT" python "$ROOT/src/figures/figure_les_reperes_apparies.py" --verifier
+run "fig : les wraps publies"  uv run --project "$ROOT" python "$ROOT/src/figures/figure_les_wraps_publies.py" --verifier
+
 run "graine : les 2 versions"  uv run python - <<'PY'
 import sys
 import pathlib as _p; sys.path[:0]=[str(x) for _b in ('src','../src') for x in _p.Path(_b).glob('*') if x.is_dir()]

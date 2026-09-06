@@ -1,0 +1,1673 @@
+{
+  "modules_qui_publient": 140,
+  "modules_en_dette": 67,
+  "fonctions_non_couvertes": 104,
+  "tetes_de_chemin": {
+    "alphas": 1,
+    "auditer": 1,
+    "balayer": 3,
+    "balayer_la_boite": 1,
+    "barreau": 1,
+    "borne_des_appuis": 1,
+    "carte_npy_en_gris": 1,
+    "cartes_publiees": 1,
+    "charger": 3,
+    "charger_transformation": 1,
+    "comparer": 2,
+    "croiser_encre": 1,
+    "decrire_entree": 1,
+    "depouiller": 1,
+    "dessiner": 10,
+    "dessiner_comparaison": 1,
+    "dire": 1,
+    "ecrire_morceau": 1,
+    "geometries": 1,
+    "inventaire": 1,
+    "journaux_cites": 1,
+    "juger": 1,
+    "lire": 4,
+    "lire_bloc": 1,
+    "lire_chunk": 1,
+    "lire_en_ligne": 1,
+    "lire_fragment": 1,
+    "lire_tifxyz": 1,
+    "lister": 2,
+    "mesurer": 17,
+    "mesurer_pile": 1,
+    "meta_de": 1,
+    "normales_de": 1,
+    "panorama": 1,
+    "piles": 1,
+    "profil": 1,
+    "puissance": 1,
+    "rapporter": 7,
+    "recolter": 1,
+    "resume": 1,
+    "sonder_publication": 1,
+    "telecharger": 2,
+    "traces_historiques": 1
+  },
+  "par_famille": {
+    "commun": {
+      "publient": 5,
+      "en_dette": 3
+    },
+    "depot": {
+      "publient": 17,
+      "en_dette": 5
+    },
+    "encre": {
+      "publient": 29,
+      "en_dette": 22
+    },
+    "figures": {
+      "publient": 46,
+      "en_dette": 10
+    },
+    "graine": {
+      "publient": 10,
+      "en_dette": 9
+    },
+    "nappe": {
+      "publient": 26,
+      "en_dette": 15
+    },
+    "rendu": {
+      "publient": 2,
+      "en_dette": 1
+    },
+    "tables": {
+      "publient": 3,
+      "en_dette": 1
+    },
+    "volume": {
+      "publient": 2,
+      "en_dette": 1
+    }
+  },
+  "part_en_dette": 0.479,
+  "lignes": [
+    {
+      "fichier": "src/commun/audit_profils_plats.py",
+      "fonctions": 10,
+      "atteintes_par_main": 9,
+      "atteintes_par_la_batterie": 8,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/commun/carte_segments.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [
+        "lister",
+        "meta_de",
+        "telecharger"
+      ],
+      "en_tete_de_chemin": [
+        "lister",
+        "meta_de",
+        "telecharger"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/commun/incertitude_carte.py",
+      "fonctions": 6,
+      "atteintes_par_main": 5,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [
+        "charger"
+      ],
+      "en_tete_de_chemin": [
+        "charger"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/commun/suivre_nappe.py",
+      "fonctions": 16,
+      "atteintes_par_main": 14,
+      "atteintes_par_la_batterie": 13,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/commun/test_convergence.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 1,
+      "non_couvert": [
+        "borne_des_appuis"
+      ],
+      "en_tete_de_chemin": [
+        "borne_des_appuis"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/depot/appelants.py",
+      "fonctions": 12,
+      "atteintes_par_main": 11,
+      "atteintes_par_la_batterie": 10,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/depot/ce_que_les_serveurs_publient.py",
+      "fonctions": 9,
+      "atteintes_par_main": 8,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [
+        "lister_html",
+        "lister_s3",
+        "mesurer"
+      ],
+      "en_tete_de_chemin": [
+        "mesurer"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/depot/chiffres_sans_record.py",
+      "fonctions": 8,
+      "atteintes_par_main": 7,
+      "atteintes_par_la_batterie": 6,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/depot/contenu_en_double.py",
+      "fonctions": 6,
+      "atteintes_par_main": 5,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/depot/deja_dit.py",
+      "fonctions": 8,
+      "atteintes_par_main": 7,
+      "atteintes_par_la_batterie": 5,
+      "non_couvert": [
+        "rapporter"
+      ],
+      "en_tete_de_chemin": [
+        "rapporter"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/depot/deplacer.py",
+      "fonctions": 15,
+      "atteintes_par_main": 14,
+      "atteintes_par_la_batterie": 12,
+      "non_couvert": [
+        "traces_historiques"
+      ],
+      "en_tete_de_chemin": [
+        "traces_historiques"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/depot/donnees_sans_appelant.py",
+      "fonctions": 10,
+      "atteintes_par_main": 9,
+      "atteintes_par_la_batterie": 8,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/depot/echelle_des_piles.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [
+        "piles"
+      ],
+      "en_tete_de_chemin": [
+        "piles"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/depot/fraicheur_des_figures.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 5,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/depot/le_chemin_du_nombre_publie.py",
+      "fonctions": 9,
+      "atteintes_par_main": 8,
+      "atteintes_par_la_batterie": 7,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/depot/lplv.py",
+      "fonctions": 13,
+      "atteintes_par_main": 12,
+      "atteintes_par_la_batterie": 11,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/depot/nature_des_documents.py",
+      "fonctions": 14,
+      "atteintes_par_main": 13,
+      "atteintes_par_la_batterie": 11,
+      "non_couvert": [
+        "journaux_cites"
+      ],
+      "en_tete_de_chemin": [
+        "journaux_cites"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/depot/permalien.py",
+      "fonctions": 10,
+      "atteintes_par_main": 9,
+      "atteintes_par_la_batterie": 8,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/depot/poids_recuperable.py",
+      "fonctions": 3,
+      "atteintes_par_main": 2,
+      "atteintes_par_la_batterie": 1,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/depot/sous_fenetre.py",
+      "fonctions": 8,
+      "atteintes_par_main": 7,
+      "atteintes_par_la_batterie": 6,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/depot/taches_ouvertes.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 5,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/depot/verifier_chiffres.py",
+      "fonctions": 12,
+      "atteintes_par_main": 11,
+      "atteintes_par_la_batterie": 10,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/encre/ab_segments.py",
+      "fonctions": 8,
+      "atteintes_par_main": 7,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [
+        "comparer",
+        "rendre"
+      ],
+      "en_tete_de_chemin": [
+        "comparer"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/allure_du_rendu.py",
+      "fonctions": 8,
+      "atteintes_par_main": 7,
+      "atteintes_par_la_batterie": 5,
+      "non_couvert": [
+        "resume"
+      ],
+      "en_tete_de_chemin": [
+        "resume"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/bruit_dune_fenetre.py",
+      "fonctions": 13,
+      "atteintes_par_main": 12,
+      "atteintes_par_la_batterie": 9,
+      "non_couvert": [
+        "mesurer",
+        "rapporter"
+      ],
+      "en_tete_de_chemin": [
+        "mesurer",
+        "rapporter"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/campagnes_de_scan.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [
+        "cartes_publiees"
+      ],
+      "en_tete_de_chemin": [
+        "cartes_publiees"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/comparer_cartes.py",
+      "fonctions": 3,
+      "atteintes_par_main": 2,
+      "atteintes_par_la_batterie": 1,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/encre/comparer_encre.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/encre/comparer_predictions.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/encre/contraste_des_objets.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [
+        "mesurer_pile"
+      ],
+      "en_tete_de_chemin": [
+        "mesurer_pile"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/corpus_par_energie.py",
+      "fonctions": 8,
+      "atteintes_par_main": 7,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [
+        "rapporter",
+        "telecharger"
+      ],
+      "en_tete_de_chemin": [
+        "rapporter",
+        "telecharger"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/cout_de_la_fenetre.py",
+      "fonctions": 8,
+      "atteintes_par_main": 7,
+      "atteintes_par_la_batterie": 6,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/encre/cout_du_rendu.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/encre/deux_objets.py",
+      "fonctions": 6,
+      "atteintes_par_main": 5,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [
+        "lire_en_ligne"
+      ],
+      "en_tete_de_chemin": [
+        "lire_en_ligne"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/dispersion_des_fragments.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [
+        "lire"
+      ],
+      "en_tete_de_chemin": [
+        "lire"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/juge_a_un_rendu.py",
+      "fonctions": 6,
+      "atteintes_par_main": 5,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [
+        "geometries",
+        "recolter"
+      ],
+      "en_tete_de_chemin": [
+        "geometries",
+        "recolter"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/la_translation_applicable.py",
+      "fonctions": 10,
+      "atteintes_par_main": 9,
+      "atteintes_par_la_batterie": 5,
+      "non_couvert": [
+        "equivalence",
+        "juger",
+        "mesurer"
+      ],
+      "en_tete_de_chemin": [
+        "mesurer"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/le_recalage_local.py",
+      "fonctions": 9,
+      "atteintes_par_main": 8,
+      "atteintes_par_la_batterie": 7,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/encre/le_residu_est_une_translation.py",
+      "fonctions": 19,
+      "atteintes_par_main": 18,
+      "atteintes_par_la_batterie": 15,
+      "non_couvert": [
+        "_charger",
+        "mesurer"
+      ],
+      "en_tete_de_chemin": [
+        "mesurer"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/le_temoin_de_meme_forme.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [
+        "mesurer"
+      ],
+      "en_tete_de_chemin": [
+        "mesurer"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/les_reperes_a_pleine_resolution.py",
+      "fonctions": 9,
+      "atteintes_par_main": 8,
+      "atteintes_par_la_batterie": 5,
+      "non_couvert": [
+        "carte_publiee_pleine",
+        "mesurer"
+      ],
+      "en_tete_de_chemin": [
+        "mesurer"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/les_reperes_apparies.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [
+        "charger_transformation"
+      ],
+      "en_tete_de_chemin": [
+        "charger_transformation"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/les_reperes_interieurs.py",
+      "fonctions": 6,
+      "atteintes_par_main": 5,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/encre/lisible_a_neuf_microns.py",
+      "fonctions": 9,
+      "atteintes_par_main": 8,
+      "atteintes_par_la_batterie": 5,
+      "non_couvert": [
+        "mesurer",
+        "rapporter"
+      ],
+      "en_tete_de_chemin": [
+        "mesurer",
+        "rapporter"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/ou_la_verite_existe.py",
+      "fonctions": 9,
+      "atteintes_par_main": 8,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [
+        "_lister",
+        "cles_du_seau",
+        "inventaire",
+        "rapporter"
+      ],
+      "en_tete_de_chemin": [
+        "inventaire",
+        "rapporter"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/paires_denergie.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [
+        "_get",
+        "lire_fragment"
+      ],
+      "en_tete_de_chemin": [
+        "lire_fragment"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/resolution_ou_rouleau.py",
+      "fonctions": 11,
+      "atteintes_par_main": 10,
+      "atteintes_par_la_batterie": 7,
+      "non_couvert": [
+        "barreau",
+        "dire"
+      ],
+      "en_tete_de_chemin": [
+        "barreau",
+        "dire"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/temoin_contre_nos_cartes.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [
+        "rapporter"
+      ],
+      "en_tete_de_chemin": [
+        "rapporter"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/temoin_negatif.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [
+        "decrire_entree"
+      ],
+      "en_tete_de_chemin": [
+        "decrire_entree"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/transport_de_calibration.py",
+      "fonctions": 11,
+      "atteintes_par_main": 10,
+      "atteintes_par_la_batterie": 7,
+      "non_couvert": [
+        "mesurer",
+        "rapporter"
+      ],
+      "en_tete_de_chemin": [
+        "mesurer",
+        "rapporter"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/encre/typographie.py",
+      "fonctions": 21,
+      "atteintes_par_main": 20,
+      "atteintes_par_la_batterie": 17,
+      "non_couvert": [
+        "carte_npy_en_gris",
+        "croiser_encre"
+      ],
+      "en_tete_de_chemin": [
+        "carte_npy_en_gris",
+        "croiser_encre"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/figures/figure_2x2.py",
+      "fonctions": 3,
+      "atteintes_par_main": 2,
+      "atteintes_par_la_batterie": 1,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_bruit_de_lechantillon.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [
+        "dessiner"
+      ],
+      "en_tete_de_chemin": [
+        "dessiner"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/figures/figure_bruit_dune_fenetre.py",
+      "fonctions": 6,
+      "atteintes_par_main": 5,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [
+        "dessiner"
+      ],
+      "en_tete_de_chemin": [
+        "dessiner"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/figures/figure_case_vide_remplie.py",
+      "fonctions": 6,
+      "atteintes_par_main": 5,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_ce_que_sigma_ne_dit_pas.py",
+      "fonctions": 6,
+      "atteintes_par_main": 5,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [
+        "dessiner"
+      ],
+      "en_tete_de_chemin": [
+        "dessiner"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/figures/figure_champ_de_recalage.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_couverture.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_derive_profondeur.py",
+      "fonctions": 3,
+      "atteintes_par_main": 2,
+      "atteintes_par_la_batterie": 1,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_derouler_des_deux_bords.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_derouler_en_raccrochant.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_derouler_par_le_pas_normal.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_deux_pannes.py",
+      "fonctions": 3,
+      "atteintes_par_main": 2,
+      "atteintes_par_la_batterie": 1,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_doublons.py",
+      "fonctions": 3,
+      "atteintes_par_main": 2,
+      "atteintes_par_la_batterie": 1,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_drapeau_de_normale.py",
+      "fonctions": 6,
+      "atteintes_par_main": 5,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_eligibilite.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_excision.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [
+        "lire"
+      ],
+      "en_tete_de_chemin": [
+        "lire"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/figures/figure_graine_endroit.py",
+      "fonctions": 3,
+      "atteintes_par_main": 2,
+      "atteintes_par_la_batterie": 1,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_graines.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_hypothese_refutee.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [
+        "dessiner"
+      ],
+      "en_tete_de_chemin": [
+        "dessiner"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/figures/figure_la_derive_est_elle_un_biais.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_la_derive_et_le_referent.py",
+      "fonctions": 6,
+      "atteintes_par_main": 5,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_la_longueur_locale_du_pas.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_la_portee_des_piles.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_la_translation_applicable.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_le_bon_rayon.py",
+      "fonctions": 6,
+      "atteintes_par_main": 5,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [
+        "dessiner"
+      ],
+      "en_tete_de_chemin": [
+        "dessiner"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/figures/figure_le_champ_de_fibres.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 5,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_le_debinage.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [
+        "dessiner"
+      ],
+      "en_tete_de_chemin": [
+        "dessiner"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/figures/figure_le_nul_verso.py",
+      "fonctions": 8,
+      "atteintes_par_main": 7,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [
+        "dessiner",
+        "panorama"
+      ],
+      "en_tete_de_chemin": [
+        "dessiner",
+        "panorama"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/figures/figure_le_pas_de_la_grille.py",
+      "fonctions": 6,
+      "atteintes_par_main": 5,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_le_pas_normal.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_le_raccrochage_a_la_matiere.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 5,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_le_rayon_trouve_la_voisine.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [
+        "dessiner"
+      ],
+      "en_tete_de_chemin": [
+        "dessiner"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/figures/figure_le_residu_est_une_translation.py",
+      "fonctions": 10,
+      "atteintes_par_main": 9,
+      "atteintes_par_la_batterie": 8,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_le_seuil_ne_separe_rien.py",
+      "fonctions": 6,
+      "atteintes_par_main": 5,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_le_temoin_de_meme_forme.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_lemprise_des_spires.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_les_reperes_a_pleine_resolution.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_les_reperes_apparies.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_les_wraps_publies.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_plafond.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_profondeur_lue.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_segments.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_temoin_negatif.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_tirage_apparie.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [
+        "dessiner"
+      ],
+      "en_tete_de_chemin": [
+        "dessiner"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/figures/figure_typographie.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/figures/figure_verbes.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/graine/appui_de_pente.py",
+      "fonctions": 11,
+      "atteintes_par_main": 10,
+      "atteintes_par_la_batterie": 8,
+      "non_couvert": [
+        "balayer"
+      ],
+      "en_tete_de_chemin": [
+        "balayer"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/graine/calibration_corpus.py",
+      "fonctions": 9,
+      "atteintes_par_main": 8,
+      "atteintes_par_la_batterie": 6,
+      "non_couvert": [
+        "lire"
+      ],
+      "en_tete_de_chemin": [
+        "lire"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/graine/comparer_candidats.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [
+        "charger",
+        "lire_trace"
+      ],
+      "en_tete_de_chemin": [
+        "charger"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/graine/comparer_plafond.py",
+      "fonctions": 3,
+      "atteintes_par_main": 2,
+      "atteintes_par_la_batterie": 1,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/graine/derive_avec_profondeur.py",
+      "fonctions": 11,
+      "atteintes_par_main": 10,
+      "atteintes_par_la_batterie": 8,
+      "non_couvert": [
+        "charger"
+      ],
+      "en_tete_de_chemin": [
+        "charger"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/graine/derive_ou_loterie.py",
+      "fonctions": 8,
+      "atteintes_par_main": 7,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [
+        "alphas",
+        "puissance"
+      ],
+      "en_tete_de_chemin": [
+        "alphas",
+        "puissance"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/graine/effet_taille_fenetre.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [
+        "profil"
+      ],
+      "en_tete_de_chemin": [
+        "profil"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/graine/eligibilite_aval.py",
+      "fonctions": 6,
+      "atteintes_par_main": 5,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [
+        "sonder_publication"
+      ],
+      "en_tete_de_chemin": [
+        "sonder_publication"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/graine/fenetre_utilisable.py",
+      "fonctions": 13,
+      "atteintes_par_main": 12,
+      "atteintes_par_la_batterie": 10,
+      "non_couvert": [
+        "balayer"
+      ],
+      "en_tete_de_chemin": [
+        "balayer"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/graine/graine_admissible.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [
+        "juger"
+      ],
+      "en_tete_de_chemin": [
+        "juger"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/nappe/couverture_publiee.py",
+      "fonctions": 10,
+      "atteintes_par_main": 8,
+      "atteintes_par_la_batterie": 6,
+      "non_couvert": [
+        "normales_de"
+      ],
+      "en_tete_de_chemin": [
+        "normales_de"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/nappe/decouper_tifxyz.py",
+      "fonctions": 10,
+      "atteintes_par_main": 9,
+      "atteintes_par_la_batterie": 6,
+      "non_couvert": [
+        "ecrire_morceau",
+        "lire_tifxyz"
+      ],
+      "en_tete_de_chemin": [
+        "ecrire_morceau",
+        "lire_tifxyz"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/nappe/derouler_des_deux_bords.py",
+      "fonctions": 14,
+      "atteintes_par_main": 13,
+      "atteintes_par_la_batterie": 12,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/nappe/derouler_en_raccrochant.py",
+      "fonctions": 13,
+      "atteintes_par_main": 12,
+      "atteintes_par_la_batterie": 9,
+      "non_couvert": [
+        "balayer_la_boite",
+        "mesurer"
+      ],
+      "en_tete_de_chemin": [
+        "balayer_la_boite",
+        "mesurer"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/nappe/derouler_par_le_pas_normal.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [
+        "mesurer"
+      ],
+      "en_tete_de_chemin": [
+        "mesurer"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/nappe/distance_a_la_matiere.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/nappe/ecart_de_maillages.py",
+      "fonctions": 11,
+      "atteintes_par_main": 10,
+      "atteintes_par_la_batterie": 9,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/nappe/ecart_en_spires.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/nappe/geometrie_chaine.py",
+      "fonctions": 19,
+      "atteintes_par_main": 18,
+      "atteintes_par_la_batterie": 16,
+      "non_couvert": [
+        "dessiner"
+      ],
+      "en_tete_de_chemin": [
+        "dessiner"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/nappe/la_derive_est_elle_un_biais.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [
+        "_paires",
+        "mesurer"
+      ],
+      "en_tete_de_chemin": [
+        "mesurer"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/nappe/la_derive_nest_pas_le_referent.py",
+      "fonctions": 9,
+      "atteintes_par_main": 8,
+      "atteintes_par_la_batterie": 7,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/nappe/la_graine_mieux_etayee.py",
+      "fonctions": 9,
+      "atteintes_par_main": 8,
+      "atteintes_par_la_batterie": 7,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/nappe/la_longueur_locale_du_pas.py",
+      "fonctions": 8,
+      "atteintes_par_main": 7,
+      "atteintes_par_la_batterie": 5,
+      "non_couvert": [
+        "mesurer"
+      ],
+      "en_tete_de_chemin": [
+        "mesurer"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/nappe/la_portee_des_piles_publiees.py",
+      "fonctions": 6,
+      "atteintes_par_main": 5,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [
+        "mesurer",
+        "profil_de_pile"
+      ],
+      "en_tete_de_chemin": [
+        "mesurer"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/nappe/le_pas_de_la_grille.py",
+      "fonctions": 10,
+      "atteintes_par_main": 9,
+      "atteintes_par_la_batterie": 8,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/nappe/le_pas_normal_atteint_la_spire.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [
+        "grille",
+        "mesurer"
+      ],
+      "en_tete_de_chemin": [
+        "mesurer"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/nappe/le_raccrochage_a_la_matiere.py",
+      "fonctions": 20,
+      "atteintes_par_main": 19,
+      "atteintes_par_la_batterie": 15,
+      "non_couvert": [
+        "_grilles",
+        "mesurer",
+        "url_du_volume"
+      ],
+      "en_tete_de_chemin": [
+        "mesurer"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/nappe/le_volume_du_maillage.py",
+      "fonctions": 9,
+      "atteintes_par_main": 8,
+      "atteintes_par_la_batterie": 7,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/nappe/lemprise_des_spires.py",
+      "fonctions": 6,
+      "atteintes_par_main": 5,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [
+        "mesurer"
+      ],
+      "en_tete_de_chemin": [
+        "mesurer"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/nappe/les_wraps_publies.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [
+        "mesurer",
+        "surface",
+        "wraps_du_fragment"
+      ],
+      "en_tete_de_chemin": [
+        "mesurer"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/nappe/lire_selfcross.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 1,
+      "non_couvert": [
+        "auditer"
+      ],
+      "en_tete_de_chemin": [
+        "auditer"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/nappe/matiere_au_point.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 0,
+      "non_couvert": [
+        "balayer",
+        "lire_bloc"
+      ],
+      "en_tete_de_chemin": [
+        "balayer",
+        "lire_bloc"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/nappe/matiere_des_piles.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 2,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/nappe/niveau_du_maillage.py",
+      "fonctions": 5,
+      "atteintes_par_main": 4,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/nappe/projeter_tangentiel.py",
+      "fonctions": 10,
+      "atteintes_par_main": 9,
+      "atteintes_par_la_batterie": 7,
+      "non_couvert": [
+        "lire"
+      ],
+      "en_tete_de_chemin": [
+        "lire"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/nappe/recaler_sur_la_matiere.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 5,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/rendu/le_drapeau_de_normale.py",
+      "fonctions": 6,
+      "atteintes_par_main": 5,
+      "atteintes_par_la_batterie": 4,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/rendu/topologie_du_volume.py",
+      "fonctions": 9,
+      "atteintes_par_main": 8,
+      "atteintes_par_la_batterie": 6,
+      "non_couvert": [
+        "lire_chunk"
+      ],
+      "en_tete_de_chemin": [
+        "lire_chunk"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/tables/table_chaine.py",
+      "fonctions": 10,
+      "atteintes_par_main": 9,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [
+        "comparer",
+        "compensation_de",
+        "depouiller",
+        "dessiner_comparaison",
+        "pas_du_rayon"
+      ],
+      "en_tete_de_chemin": [
+        "comparer",
+        "depouiller",
+        "dessiner_comparaison"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/tables/table_second_axe.py",
+      "fonctions": 3,
+      "atteintes_par_main": 2,
+      "atteintes_par_la_batterie": 1,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/tables/table_tirages.py",
+      "fonctions": 4,
+      "atteintes_par_main": 3,
+      "atteintes_par_la_batterie": 3,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    },
+    {
+      "fichier": "src/volume/apparier_volumes.py",
+      "fonctions": 9,
+      "atteintes_par_main": 8,
+      "atteintes_par_la_batterie": 6,
+      "non_couvert": [
+        "lister"
+      ],
+      "en_tete_de_chemin": [
+        "lister"
+      ],
+      "en_dette": true
+    },
+    {
+      "fichier": "src/volume/assembler_mosaique.py",
+      "fonctions": 7,
+      "atteintes_par_main": 6,
+      "atteintes_par_la_batterie": 5,
+      "non_couvert": [],
+      "en_tete_de_chemin": [],
+      "en_dette": false
+    }
+  ]
+}

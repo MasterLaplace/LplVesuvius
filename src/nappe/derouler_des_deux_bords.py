@@ -28,6 +28,11 @@ marché.
 ⚠ Aucune lecture du volume ici : le pas aveugle est le meilleur dérouleur mesuré, et il ne lit rien.
 Cette tranche ne coûte donc pas un bloc.
 
+⚠⚠ LA MATIÈRE EST INJECTABLE, ET C'EST CE QUI REND LA MESURE TESTABLE. `mesurer` prend un `corpus`
+dont le défaut est le dépôt distant — donc le nombre publié ne bouge pas — et la batterie lui en
+donne un fabriqué. Sans ce paramètre, le seul chemin non testé du module était celui qui produit
+le nombre publié, ce qui a laissé passer un patch à moitié appliqué le 2026-09-05. Voir `80`.
+
 Usage :
     uv run python src/nappe/derouler_des_deux_bords.py --verifier
     uv run python src/nappe/derouler_des_deux_bords.py \\
@@ -37,6 +42,9 @@ Usage :
 from __future__ import annotations
 
 import argparse
+import ast
+import contextlib
+import io
 import json
 import sys
 from pathlib import Path
@@ -48,6 +56,13 @@ for _d in ("commun", "nappe", "encre"):
     sys.path.insert(0, str(RACINE / "src" / _d))
 
 WRAPS = RACINE / "docs" / "mesures" / "les_wraps_publies.json"
+
+# ⚠ La fixture hors ligne emprunte la géométrie du fragment — 2,215 µm de voxel, 135,5 µm entre
+# spires — plutôt que des nombres ronds : un corpus dont le pas ne ressemble pas au vrai ferait
+# marcher le dérouleur à une longueur qu'il ne rencontre jamais, et une marche calibrée sur une
+# autre échelle ne prouve rien sur celle-ci.
+VOXEL_UM_FIXTURE = 2.215
+ECART_UM_FIXTURE = 135.5
 
 
 def marcher(a: np.ndarray, ok: np.ndarray, tours: int, pas_vx: float,
@@ -171,40 +186,148 @@ def encadrements(rangs: list[int], portee: int) -> list[tuple[int, int, int]]:
             for b in presents if 0 < b - m <= portee]
 
 
-def mesurer(cote: float | None = None, minimum: int = 30, portee: int = 4) -> dict:
+def corpus_publie() -> dict:
+    """La matière que la mesure lit : l'écart entre spires, et la grille de chaque spire publiée.
+
+    ⚠⚠⚠ POURQUOI CETTE LECTURE EST SÉPARÉE DE `mesurer`, ET C'EST UNE DETTE DU DÉPÔT ENTIER.
+    Tant qu'elle vivait DANS la mesure, le chemin qui produit le nombre publié ne pouvait pas
+    tourner hors ligne — donc la batterie ne testait que les briques, jamais leur assemblage.
+    Une batterie verte sur un module dont le seul chemin non testé est celui qui produit le
+    nombre publié est une batterie qui ne peut pas échouer là où ça compte : le 2026-09-05, un
+    patch à moitié appliqué a laissé l'enregistrement référencer des variables inexistantes, et
+    la batterie est restée verte parce qu'elle n'appelait pas `mesurer`.
+
+    ⚠⚠ CE QUI EST INJECTABLE EST LA MATIÈRE, PAS LE DÉCOUPAGE. La boîte, le seuil de cellules,
+    le choix des encadrements, la marche et tout l'enregistrement restent dans `mesurer`, donc
+    restent couverts par une fixture. Injecter un corpus déjà découpé ferait sortir du test la
+    moitié même de ce qu'on voulait tester.
+
+    ⚠ L'écart entre spires et la taille du voxel voyagent AVEC les grilles plutôt qu'à côté :
+    une fixture dont la géométrie ne s'accorderait pas avec le pas mesurerait un dérouleur qu'on
+    a fait marcher à la mauvaise longueur, ce qui ressemble à un dérouleur mauvais.
+    """
+    from le_pas_normal_atteint_la_spire import grille  # noqa: PLC0415
+    from les_wraps_publies import VOLUME, VOXEL_UM, wraps_du_fragment  # noqa: PLC0415
+
+    if not WRAPS.is_file():
+        raise RuntimeError(f"mesure absente : {WRAPS}")
+    grilles = {}
+    for w in wraps_du_fragment():
+        g = grille(w, VOLUME, VOXEL_UM)
+        if g is None:
+            continue
+        grilles[w["rang"]] = g
+    return dict(volume=VOLUME, voxel_um=VOXEL_UM,
+                ecart_um=float(json.loads(WRAPS.read_text())["resume"]["1"]["mediane_um"]),
+                grilles=grilles)
+
+
+def corpus_fabrique(spires: int = 6, cellules: int = 14, ondulation: float = 3.0,
+                    rayon_vx: float = 4000.0, creuse: int | None = None,
+                    decalage_vx: float = 0.0) -> dict:
+    """Un corps de spires concentriques fabriqué de toutes pièces, sans rien lire.
+
+    ⚠⚠⚠ CE QUE CETTE FIXTURE EXISTE POUR EXERCER : le chemin qui produit le nombre publié, dans
+    son entier — le découpage par la boîte, le seuil de cellules, le choix des encadrements, le
+    signe de la normale, la marche, la combinaison, la pondération et l'enregistrement. Ce qui
+    est vérifié dessus n'est jamais une VALEUR : la fixture n'est pas le fragment, donc ses
+    micromètres ne veulent rien dire. Ce qui est vérifié, ce sont les invariants que la mesure
+    revendique et les clés qu'elle promet à ses lecteurs.
+
+    ⚠⚠ LES SPIRES SONT ONDULÉES, ET C'EST LE POINT LE PLUS FACILE À RATER. Des cylindres
+    parfaitement décalés de `pas_vx` sont atteints EXACTEMENT par un pas normal : toutes les
+    erreurs vaudraient zéro, la division du gain lèverait, et le verdict « l'encadrement bat les
+    deux branches » serait décidé par des zéros. Une fixture sur laquelle la mesure ne peut rien
+    trouver est le cas le plus pur d'un contrôle satisfait pour la mauvaise raison.
+
+    ⚠ La phase de l'ondulation TOURNE d'une spire à l'autre. Une ondulation en phase serait, elle
+    aussi, un décalage exact : la marche retomberait juste et on aurait fabriqué le même
+    dégénéré, une fonction plus loin.
+
+    ⚠ Le rayon est grand devant la boîte, donc la courbure est douce et les cellules restent
+    dans la découpe. Une spire trop courbée sortirait de la boîte par ses bords et la fixture
+    mesurerait le découpage plutôt que la marche.
+
+    ⚠⚠ `creuse` et `decalage_vx` existent pour que les deux REFUS de la mesure puissent être
+    exercés, et pas seulement son chemin heureux : une spire dont il ne reste presque rien doit
+    être écartée — sans quoi le seuil de cellules serait un nombre que rien ne fait respecter —
+    et un corpus posé hors de la boîte ne doit rendre AUCUN triplet, sans quoi le découpage
+    serait décoratif.
+    """
+    from le_raccrochage_a_la_matiere import BOITE_CENTRE  # noqa: PLC0415
+
+    voxel_um, ecart_um = VOXEL_UM_FIXTURE, ECART_UM_FIXTURE
+    pas_vx = ecart_um / voxel_um
+    centre = np.array(BOITE_CENTRE, dtype=np.float64)
+    # Le centre de courbure est posé à `rayon_vx` de la boîte, sur x : la spire du milieu passe
+    # donc par le centre de la boîte, et les autres se rangent de part et d'autre.
+    foyer = centre - np.array([rayon_vx - decalage_vx, 0.0, 0.0])
+    milieu = (spires + 1) / 2.0
+    demi = (cellules - 1) / 2.0
+    # Le pas angulaire donne une maille tangentielle du même ordre que la maille en z : une
+    # grille très allongée rendrait des normales dominées par un seul axe.
+    dtheta = 10.0 / rayon_vx
+    tau = 2.0 * np.pi
+    grilles = {}
+    for k in range(1, spires + 1):
+        rayon = rayon_vx + (k - milieu) * pas_vx
+        a = np.empty((cellules, cellules, 3), dtype=np.float64)
+        for i in range(cellules):
+            th = (i - demi) * dtheta
+            for j in range(cellules):
+                # L'ondulation dépend des DEUX axes de la grille : une surface qui n'ondulerait
+                # que le long d'un axe laisserait la seconde tangente exacte, donc n'exercerait
+                # qu'une moitié du calcul de normale.
+                r = (rayon
+                     + ondulation * np.sin(tau * i / cellules + 0.7 * k)
+                     + 0.5 * ondulation * np.cos(tau * j / cellules - 0.4 * k))
+                a[i, j] = foyer + np.array([r * np.cos(th), r * np.sin(th),
+                                            (j - demi) * 10.0])
+        ok = np.ones((cellules, cellules), dtype=bool)
+        if k == creuse:
+            # Il en reste trois cellules : de quoi prouver que la spire est LUE et écartée pour
+            # ce qu'elle porte, alors qu'une spire absente de la table ne prouverait que sa
+            # propre absence.
+            ok[:] = False
+            ok[0, :3] = True
+        grilles[k] = (a, ok)
+    return dict(volume="fixture", voxel_um=voxel_um, ecart_um=ecart_um, grilles=grilles)
+
+
+def mesurer(cote: float | None = None, minimum: int = 30, portee: int = 4,
+            corpus: dict | None = None) -> dict:
     """Encadrer chaque spire par toutes les paires d'ancres à portée, et juger les trois nuages.
 
     ⚠ `portee` borne CHAQUE bras séparément. Les encadrements symétriques sont un sous-ensemble
     des encadrements mesurés, pas une mesure à part : les séparer ferait deux populations qu'on
     finirait par comparer sans le dire.
-    """
-    from le_pas_normal_atteint_la_spire import distance_a, essayer_le_pas, grille, normales  # noqa: PLC0415, E501
-    from le_raccrochage_a_la_matiere import BOITE_CENTRE, BOITE_COTE  # noqa: PLC0415
-    from les_wraps_publies import VOLUME, VOXEL_UM, wraps_du_fragment  # noqa: PLC0415
 
-    if not WRAPS.is_file():
-        raise RuntimeError(f"mesure absente : {WRAPS}")
-    ecart_um = float(json.loads(WRAPS.read_text())["resume"]["1"]["mediane_um"])
-    pas_vx = ecart_um / VOXEL_UM
+    ⚠⚠ `corpus` par défaut est celui du dépôt distant : le nombre publié ne change donc pas
+    d'une virgule. Un appelant qui en fournit un autre — la batterie hors ligne — exerce le même
+    code sur une autre matière, ce qui est exactement la propriété qui manquait.
+    """
+    from le_pas_normal_atteint_la_spire import distance_a, essayer_le_pas, normales  # noqa: PLC0415, E501
+    from le_raccrochage_a_la_matiere import BOITE_CENTRE, BOITE_COTE  # noqa: PLC0415
+
+    c = corpus_publie() if corpus is None else corpus
+    volume, voxel_um = c["volume"], float(c["voxel_um"])
+    ecart_um = float(c["ecart_um"])
+    pas_vx = ecart_um / voxel_um
 
     cote = BOITE_COTE if cote is None else float(cote)
     centre = np.array(BOITE_CENTRE)
     lo, hi = centre - cote / 2, centre + cote / 2
 
     grilles, nuages = {}, {}
-    for w in wraps_du_fragment():
-        g = grille(w, VOLUME, VOXEL_UM)
-        if g is None:
-            continue
-        a, ok = g
+    for rang, (a, ok) in sorted(c["grilles"].items()):
         dans = ok & ((a >= lo) & (a <= hi)).all(axis=-1)
         if int(dans.sum()) < minimum:
             continue
         idx = np.argwhere(dans)
         sous = (slice(int(idx[:, 0].min()), int(idx[:, 0].max()) + 1),
                 slice(int(idx[:, 1].min()), int(idx[:, 1].max()) + 1))
-        grilles[w["rang"]] = (a[sous].copy(), dans[sous].copy())
-        nuages[w["rang"]] = a[ok]
+        grilles[rang] = (a[sous].copy(), dans[sous].copy())
+        nuages[rang] = a[ok]
 
     lignes = []
     for bas, milieu, haut in encadrements(sorted(grilles), portee):
@@ -220,7 +343,7 @@ def mesurer(cote: float | None = None, minimum: int = 30, portee: int = 4) -> di
             # paramétrage de la grille, pas de la matière, donc il est fixé au premier pas en
             # regardant la cible — et une seule fois. Les branches en ont donc deux à elles
             # deux, contre un pour une marche simple, et c'est le prix de l'encadrement.
-            e = essayer_le_pas(a0[bon0], n0[bon0], cible, pas_vx, VOXEL_UM)
+            e = essayer_le_pas(a0[bon0], n0[bon0], cible, pas_vx, voxel_um)
             sens = 1.0 if e["retenu"] == "+" else -1.0
             # ⚠ Chaque branche marche le nombre de tours de SON bras : avec des encadrements
             # asymétriques, les deux n'en font plus autant, et prendre un compte commun
@@ -242,8 +365,8 @@ def mesurer(cote: float | None = None, minimum: int = 30, portee: int = 4) -> di
         # sur la sienne rendrait deux nombres positifs et cacherait justement l'opposition
         # qu'on cherche à mesurer.
         axe = directions["montante"]
-        s_g = ecart_signe(g_, cible, axe, VOXEL_UM)
-        s_d = ecart_signe(d_, cible, axe, VOXEL_UM)
+        s_g = ecart_signe(g_, cible, axe, voxel_um)
+        s_d = ecart_signe(d_, cible, axe, voxel_um)
         mid_g = combiner(g_, d_)
         mid_d = combiner(d_, g_)
         # ⚠⚠ LE POIDS EST DÉRIVÉ DES BRAS, appliqué dans le bon sens : la branche au bras COURT
@@ -254,16 +377,16 @@ def mesurer(cote: float | None = None, minimum: int = 30, portee: int = 4) -> di
         pond_d = combiner(d_, g_, 1.0 - w)
         pond_inv_g = combiner(g_, d_, 1.0 - w)
         pond_inv_d = combiner(d_, g_, w)
-        e_g = float(np.median(distance_a(g_, cible, VOXEL_UM)))
-        e_d = float(np.median(distance_a(d_, cible, VOXEL_UM)))
+        e_g = float(np.median(distance_a(g_, cible, voxel_um)))
+        e_d = float(np.median(distance_a(d_, cible, voxel_um)))
         e_m = float(np.median(np.concatenate([
-            distance_a(mid_g, cible, VOXEL_UM), distance_a(mid_d, cible, VOXEL_UM)])))
+            distance_a(mid_g, cible, voxel_um), distance_a(mid_d, cible, voxel_um)])))
         e_p = float(np.median(np.concatenate([
-            distance_a(pond_g, cible, VOXEL_UM), distance_a(pond_d, cible, VOXEL_UM)])))
+            distance_a(pond_g, cible, voxel_um), distance_a(pond_d, cible, voxel_um)])))
         e_pi = float(np.median(np.concatenate([
-            distance_a(pond_inv_g, cible, VOXEL_UM),
-            distance_a(pond_inv_d, cible, VOXEL_UM)])))
-        des = float(np.median(desaccord(g_, d_, VOXEL_UM)))
+            distance_a(pond_inv_g, cible, voxel_um),
+            distance_a(pond_inv_d, cible, voxel_um)])))
+        des = float(np.median(desaccord(g_, d_, voxel_um)))
         lignes.append(dict(
             bras_bas=milieu - bas, bras_haut=haut - milieu,
             saut=max(milieu - bas, haut - milieu),
@@ -289,7 +412,7 @@ def mesurer(cote: float | None = None, minimum: int = 30, portee: int = 4) -> di
         return round(float(np.median([e[cle] for e in lignes])), 1)
 
     r = dict(
-        fragment="PHerc0500P2", volume=VOLUME, voxel_um=VOXEL_UM,
+        fragment="PHerc0500P2", volume=volume, voxel_um=voxel_um,
         boite=dict(centre=list(BOITE_CENTRE), cote_voxels=cote),
         ecart_lu_um=ecart_um, demi_epaisseur_um=round(ecart_um / 2, 2),
         portee=portee, triplets=len(lignes), lignes=lignes,
@@ -417,6 +540,23 @@ def mesurer(cote: float | None = None, minimum: int = 30, portee: int = 4) -> di
         ("erreur_montante_mediane_um", "erreur_descendante_mediane_um",
          "erreur_encadree_mediane_um")}
     return r
+
+
+def cles_lues_par(chemin: Path) -> set[str]:
+    """Les clés que ce fichier lit par indice littéral — `x["…"]` — dans son arbre syntaxique.
+
+    ⚠⚠ LUES DANS L'ARBRE, PAS PAR EXPRESSION RÉGULIÈRE. Une chaîne citée dans un commentaire ou
+    une f-string n'est pas une lecture, et la compter ferait rougir le contrôle sur du texte —
+    donc rendrait la traçabilité de la prose incompatible avec celle du code.
+
+    ⚠ La liste n'est écrite nulle part, elle est DÉRIVÉE du fichier qui lit. Une liste recopiée
+    à la main serait juste le jour où on l'écrit et se tairait à la première clé ajoutée, ce qui
+    est exactement la panne que ce contrôle existe pour attraper.
+    """
+    arbre = ast.parse(chemin.read_text(encoding="utf-8"))
+    return {n.slice.value for n in ast.walk(arbre)
+            if isinstance(n, ast.Subscript) and isinstance(n.slice, ast.Constant)
+            and isinstance(n.slice.value, str)}
 
 
 def verifier() -> int:
@@ -563,6 +703,92 @@ def verifier() -> int:
     v("... et une cible vide ne rend pas d'écart",
       ecart_signe(enc_a, np.zeros((0, 3)), axe, 1.0) == 0.0)
 
+    # ⚠⚠⚠ LE CHEMIN QUI PRODUIT LE NOMBRE PUBLIÉ, HORS LIGNE. Tout ce qui précède teste des
+    # briques ; ce qui suit fait tourner `mesurer` en entier sur une matière fabriquée. Une
+    # batterie verte sur un module dont le seul chemin non testé est celui qui produit le nombre
+    # publié est une batterie qui ne peut pas échouer là où ça compte — et c'est exactement ce
+    # qui a laissé passer, le 2026-09-05, un enregistrement référençant des variables absentes.
+    #
+    # ⚠⚠ AUCUNE VALEUR N'EST VÉRIFIÉE ICI. La fixture n'est pas le fragment : ses micromètres ne
+    # veulent rien dire, et une batterie qui les épinglerait mesurerait la fixture. Ce qui est
+    # vérifié, ce sont les invariants que la mesure revendique et les clés qu'elle promet.
+    fab = mesurer(minimum=30, portee=3, corpus=corpus_fabrique())
+    v("la mesure tourne de bout en bout sur un corpus fabriqué, sans rien lire",
+      fab["triplets"] > 0, f"{fab['triplets']} triplets")
+    # ⚠⚠ LA GARDE ANTI-DÉGÉNÉRÉ, et c'est la plus importante du bloc : des spires parfaitement
+    # décalées sont atteintes EXACTEMENT par un pas normal, donc toutes les erreurs vaudraient
+    # zéro et chaque comparaison ci-dessous serait satisfaite par des zéros.
+    # ⚠ Ce que la sonde dit exactement, plutôt que ce qu'on aimerait : aplatir la fixture fait
+    # aujourd'hui LEVER `mesurer` avant cette ligne — le gain se divise par une médiane nulle —
+    # donc la batterie rougit sans arriver jusqu'ici. Les deux issues sont rouges, aucune n'est
+    # silencieuse, et cette ligne reste celle qui NOMME l'exigence.
+    v("... et la marche y est imparfaite, donc les comparaisons portent sur quelque chose",
+      all(e["erreur_montante_um"] > 0 and e["erreur_descendante_um"] > 0 for e in fab["lignes"]),
+      f"erreur montante médiane {fab['erreur_montante_mediane_um']} µm")
+    v("... chaque bras est dans la portée demandée",
+      all(1 <= e["bras_bas"] <= 3 and 1 <= e["bras_haut"] <= 3 for e in fab["lignes"]))
+    v("... la meilleure branche est la plus petite des deux, ligne par ligne",
+      all(e["erreur_de_la_meilleure_um"]
+          == min(e["erreur_montante_um"], e["erreur_descendante_um"]) for e in fab["lignes"]))
+    v("... un encadrement est symétrique exactement quand ses deux bras sont égaux",
+      all(e["symetrique"] == (e["bras_bas"] == e["bras_haut"]) for e in fab["lignes"]))
+    v("... et le poids vaut un demi sur ceux-là, et sur eux seuls",
+      all((e["poids_de_la_montante"] == 0.5) == e["symetrique"] for e in fab["lignes"]))
+    v("... donc la pondération ne peut pas déplacer un cas symétrique",
+      fab["symetriques_inchanges_par_la_ponderation"])
+    v("... les encadrements asymétriques sont mesurés eux aussi",
+      any(not e["symetrique"] for e in fab["lignes"]),
+      str(sorted(fab["par_paire_de_bras"])))
+    v("... et la comparaison à somme de bras égale a de quoi comparer",
+      bool(fab["a_somme_egale"]), str(sorted(fab["a_somme_egale"])))
+    v("le résultat est sérialisable tel quel, sans type qui traîne",
+      isinstance(json.dumps(fab), str))
+    # ⚠ L'exception est RATTRAPÉE pour être rendue en contrôle rouge nommé, pas laissée
+    # remonter : une trace d'appels dit qu'il s'est passé quelque chose, une ligne rouge dit
+    # quoi. La sonde qui renomme une clé lue par l'affichage tombe sur celle-ci.
+    tampon, souci = io.StringIO(), None
+    try:
+        with contextlib.redirect_stdout(tampon):
+            afficher(fab)
+    except Exception as exc:  # noqa: BLE001
+        souci = f"{type(exc).__name__}: {exc}"
+    v("l'affichage tourne sur ce résultat et va jusqu'à son verdict",
+      souci is None and "l'encadrement bat les DEUX branches" in tampon.getvalue(),
+      souci or f"{len(tampon.getvalue().splitlines())} lignes")
+    # ⚠⚠ LA TRAÇABILITÉ DANS L'AUTRE SENS : la figure ne doit lire aucune clé que la mesure ne
+    # publie pas. Une légende qui affiche un nombre absent du JSON est un nombre que personne ne
+    # peut retrouver, et ce dépôt l'a déjà payé une fois.
+    formes = set(fab) | set(fab["lignes"][0]) | set(fab["desaccord_contre_erreur"]) \
+        | set(next(iter(fab["par_paire_de_bras"].values()))) \
+        | set(next(iter(fab["a_somme_egale"].values())))
+    manquantes = sorted(cles_lues_par(RACINE / "src" / "figures"
+                                      / "figure_derouler_des_deux_bords.py") - formes)
+    v("la figure ne lit aucune clé que la mesure ne publie pas",
+      not manquantes, str(manquantes))
+    # ⚠⚠ ET LES DEUX REFUS, parce qu'un chemin heureux qui marche ne dit pas qu'un seuil est
+    # respecté : une spire dont il ne reste presque rien doit être écartée, et un corpus posé
+    # hors de la boîte ne doit rendre aucun triplet.
+    creux = mesurer(minimum=30, portee=3, corpus=corpus_fabrique(creuse=3))
+    rangs_vus = {e[c] for e in creux["lignes"] for c in ("depuis_bas", "cible", "depuis_haut")}
+    v("une spire dont il ne reste que trois cellules est écartée",
+      3 not in rangs_vus and creux["triplets"] > 0, str(sorted(rangs_vus)))
+    hors = None
+    try:
+        mesurer(minimum=30, portee=3, corpus=corpus_fabrique(decalage_vx=5000.0))
+    except RuntimeError as exc:
+        hors = str(exc)
+    v("un corpus posé hors de la boîte est REFUSÉ, pas rendu vide", hors is not None, str(hors))
+    # ⚠⚠ ET LA FIXTURE DOIT AVOIR LA FORME DU VRAI LECTEUR, sinon elle exerce une forme qui
+    # n'arrive jamais. Les clés du corpus publié sont lues dans l'arbre plutôt que recopiées :
+    # une clé ajoutée là-bas et oubliée ici ferait passer la batterie sur un corpus périmé.
+    retour = next(n for n in ast.walk(ast.parse(Path(__file__).read_text(encoding="utf-8")))
+                  if isinstance(n, ast.FunctionDef) and n.name == "corpus_publie")
+    promises = {k.arg for n in ast.walk(retour) if isinstance(n, ast.Call)
+                and getattr(n.func, "id", None) == "dict" for k in n.keywords}
+    v("le corpus fabriqué a exactement la forme du corpus publié",
+      set(corpus_fabrique(spires=2, cellules=4)) == promises,
+      f"{sorted(promises)}")
+
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -577,6 +803,27 @@ def main() -> int:
     if a.verifier:
         return verifier()
     r = mesurer(cote=a.cote)
+    afficher(r)
+    if a.json:
+        a.json.parent.mkdir(parents=True, exist_ok=True)
+        a.json.write_text(json.dumps(r, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"écrit : {a.json}")
+    return 0
+
+
+def afficher(r: dict) -> None:
+    """Le compte rendu lisible d'une mesure.
+
+    ⚠⚠⚠ POURQUOI L'AFFICHAGE EST UNE FONCTION ET PLUS UN BLOC DE `main`. Un bloc de `main` ne
+    peut être exercé qu'en lisant le dépôt distant, donc jamais par la batterie — et c'est là
+    qu'un patch à moitié appliqué a laissé, le 2026-09-05, un enregistrement qui référençait des
+    variables inexistantes. Sorti de `main`, il tourne sur n'importe quel corpus, et une clé
+    absente ou renommée lève **hors ligne**.
+
+    ⚠ Il ne calcule rien. Un nombre qui apparaîtrait ici sans exister dans la mesure serait un
+    nombre que personne ne peut retrouver depuis le JSON publié — le contrôle de traçabilité de
+    la prose a déjà attrapé ce défaut une fois.
+    """
     print(f"écart inter-feuilles {r['ecart_lu_um']} µm · demi-épaisseur "
           f"{r['demi_epaisseur_um']} µm · {r['triplets']} triplets\n")
     print(f"{'saut':>5} {'triplet':>12} {'montante':>10} {'descend.':>10} {'ENCADRÉE':>10} "
@@ -625,11 +872,6 @@ def main() -> int:
     print(f"\n→ l'encadrement bat les DEUX branches : "
           f"{'OUI' if r['lencadrement_bat_les_deux'] else 'NON'} "
           f"({r['triplets_ou_lencadrement_bat_les_deux']} triplets sur {r['triplets']})")
-    if a.json:
-        a.json.parent.mkdir(parents=True, exist_ok=True)
-        a.json.write_text(json.dumps(r, indent=2, ensure_ascii=False), encoding="utf-8")
-        print(f"écrit : {a.json}")
-    return 0
 
 
 if __name__ == "__main__":
