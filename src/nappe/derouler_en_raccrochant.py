@@ -37,6 +37,19 @@ celui qui ne lit rien.
 **Le raccrochage ne raccroche que ce qui est déjà à sa place.** Les 33,3 µm mesurés sur un pas
 sont donc un gain conditionnel au point de départ, pas une capacité de la méthode.
 
+⭐⭐⭐ ET LE MÉCANISME EST TROUVÉ PAR ÉLIMINATION : ce sont les NORMALES. Trois soupçons ont été
+testés et écartés — fenêtre plus étroite (+43,0), décalages accordés au voisinage (+33,6),
+gabarit FIGÉ lu une fois sur la spire de départ (+54,2 contre +56,1 sans remède, et son
+contraste ne s'effondre pas). La surface ressemble encore à une feuille ; c'est la DIRECTION de
+recherche qui se perd. Lisser le champ de normales avant le pas fait tomber la dérive du
+raccrochage de **+56,1 à +25,3 µm par tour**, et ne fait **RIEN** pour le pas aveugle (+22,3
+contre +22,0) — c'est cette seconde moitié qui prouve la première : le raccrochage **ride** la
+nappe, la nappe gâte ses normales, et la mauvaise normale gâte le pas suivant.
+
+⚠⚠ `accorder_les_voisins` et `lisser_les_normales` ne portent PAS sur le même objet : l'un lisse
+DE COMBIEN on bouge, l'autre DANS QUELLE DIRECTION on cherche. Les deux ensemble donnent +29,4,
+donc moins bien que les normales seules — ils se recouvrent et sur-lissent.
+
 ⚠⚠⚠ ET LA BOÎTE DOIT ÊTRE BALAYÉE AVANT DE CONCLURE — payé le 2026-09-06. À 191 cellules, cette
 mesure rendait une dérive NÉGATIVE pour le décalage unique et il a été publié comme « le seul qui
 tienne encore la feuille ». À 494 puis 906 cellules, au même endroit et avec le même code, elle
@@ -68,11 +81,62 @@ for _d in ("commun", "nappe", "encre", "tracecheck"):
 WRAPS = RACINE / "docs" / "mesures" / "les_wraps_publies.json"
 
 
+def lisser_les_normales(n: np.ndarray, bon: np.ndarray) -> np.ndarray:
+    """Le champ de normales moyenné sur le voisinage de grille 3×3, puis renormalisé.
+
+    ⚠⚠⚠ CE N'EST PAS LE MÊME GESTE QUE `accorder_les_voisins`, ET LA DIFFÉRENCE EST TOUT LE
+    SUJET. Accorder les voisins lisse **de combien** on bouge ; lisser les normales lisse **dans
+    quelle direction** on cherche. Le premier corrige la sortie du raccrochage, le second
+    corrige la géométrie qui décide où le raccrochage va regarder — et le pas aveugle, qui ne
+    raccroche rien, en dépend tout autant.
+
+    ⚠⚠ La moyenne se fait sur les VECTEURS puis se renormalise : moyenner des angles n'a pas de
+    sens sur une sphère, et normaliser avant de moyenner donnerait le même poids à une normale
+    dégénérée qu'à une bonne.
+
+    ⚠ Une cellule sans voisin valide garde SA normale plutôt que d'être écartée : la retirer
+    ferait fondre la grille plus vite que le pas non lissé, donc comparerait deux populations.
+    """
+    somme = np.zeros_like(n)
+    combien = np.zeros(n.shape[:2], dtype=int)
+    for du in (-1, 0, 1):
+        for dv in (-1, 0, 1):
+            h, w = n.shape[0], n.shape[1]
+            su = slice(max(0, du), h + min(0, du))
+            sv = slice(max(0, dv), w + min(0, dv))
+            tu = slice(max(0, -du), h + min(0, -du))
+            tv = slice(max(0, -dv), w + min(0, -dv))
+            masque = np.zeros(n.shape[:2], dtype=bool)
+            masque[su, sv] = bon[tu, tv]
+            somme[su, sv] += np.where(bon[tu, tv][..., None], n[tu, tv], 0.0)
+            combien += masque
+    norme = np.linalg.norm(somme, axis=-1)
+    out = n.copy()
+    utile = bon & (combien >= 2) & (norme > 1e-9)
+    out[utile] = somme[utile] / norme[utile][:, None]
+    return out
+
+
+def dispersion_angulaire(n: np.ndarray, bon: np.ndarray) -> float | None:
+    """L'angle médian, en degrés, entre une normale et celle de sa voisine de droite.
+
+    ⚠⚠ CETTE GRANDEUR NE DEMANDE AUCUNE CIBLE, donc un dérouleur peut la calculer sur lui-même
+    en marchant. C'est ce qui la distingue de l'écart aux normales publiées, qui est un
+    diagnostic et ne pourrait jamais guider quoi que ce soit.
+    """
+    paire = bon[:, :-1] & bon[:, 1:]
+    if not paire.any():
+        return None
+    cos = np.sum(n[:, :-1][paire] * n[:, 1:][paire], axis=-1)
+    return float(np.degrees(np.arccos(np.clip(cos, -1.0, 1.0))).mean())
+
+
 def un_pas_raccroche(a: np.ndarray, ok: np.ndarray, pas_vx: float, sens: float,
                      vol, demi_vx: float, demi_gab: int,
                      lignes_gabarit: int = 400, melanger=None,
                      accorder: bool = False, raccrocher: bool = True,
-                     global_: bool = False) -> tuple:
+                     global_: bool = False, gabarit_fixe=None,
+                     normales_lissees: bool = False) -> tuple:
     """Un pas normal, puis le raccrochage de chaque cellule sur le gabarit de la surface courante.
 
     Rend `(grille avancée, masque, diagnostic)`.
@@ -91,11 +155,16 @@ def un_pas_raccroche(a: np.ndarray, ok: np.ndarray, pas_vx: float, sens: float,
     )
 
     n, bon = normales(a, ok)
+    brute = dispersion_angulaire(n, bon)
+    if normales_lissees:
+        n = lisser_les_normales(n, bon)
     avance = a.copy()
     avance[bon] = a[bon] + sens * pas_vx * n[bon]
     cel = np.argwhere(bon)
     diag = dict(cellules=int(bon.sum()), raccrochees=0, gabarit_lignes=0,
-                rugosite_vx=None, deplacement_vx=None, decalage_signe_vx=None)
+                rugosite_vx=None, deplacement_vx=None, decalage_signe_vx=None,
+                contraste_du_gabarit=None, gabarit=None,
+                dispersion_normales_deg=brute)
     # ⚠⚠ `raccrocher=False` DÉGÉNÈRE EN PAS AVEUGLE, et ce n'est pas une commodité : c'est ce
     # qui fait que le témoin aveugle de ce fichier et le dérouleur aveugle publié sont **le
     # même geste**, avec les mêmes diagnostics. Deux implémentations d'un même pas finiraient
@@ -109,14 +178,32 @@ def un_pas_raccroche(a: np.ndarray, ok: np.ndarray, pas_vx: float, sens: float,
     t_gab = np.arange(-demi_gab, demi_gab + 1e-9, 1.0)
     t_ligne = np.arange(-(demi_vx + demi_gab), demi_vx + demi_gab + 1e-9, 1.0)
 
+    # ⚠⚠⚠ LE GABARIT EST LU SUR LA SURFACE QU'IL EST CENSÉ CORRIGER, et c'est le soupçon que
+    # `gabarit_fixe` existe pour tester. Au tour 0 on se tient sur une spire publiée, donc sur
+    # la crête : le profil lu est celui d'une feuille. Au tour suivant on se tient à quelques
+    # dizaines de micromètres de la crête, donc le profil lu est un mélange de matière et
+    # d'air — l'outil qui cherche des feuilles est fabriqué à partir de ce qu'il doit réparer.
+    # `gabarit_fixe` casse cette boucle sans rien apprendre de la cible : la forme d'une
+    # feuille se lit UNE fois, sur la spire de départ, qui est une donnée qu'on a.
     pas_ech = max(1, len(cel) // lignes_gabarit)
     vg, okg = le_long(p[::pas_ech], d[::pas_ech], t_gab, vol)
     diag["gabarit_lignes"] = int(okg.sum())
-    if okg.sum() < 20:
+    if okg.sum() >= 20:
+        lu = profil_autour(vg[okg])
+        diag["gabarit"] = lu
+        # ⚠ Le contraste du gabarit est rendu MÊME quand un gabarit fixe est utilisé : c'est
+        # la grandeur qui dit si la surface courante ressemble encore à une feuille, et elle
+        # est intéressante précisément quand on a cessé de s'en servir.
+        lisse_ = np.convolve(lu, np.ones(5) / 5.0, mode="valid") if len(lu) >= 5 else lu
+        diag["contraste_du_gabarit"] = float(lisse_.max() - lisse_.min())
+    if gabarit_fixe is not None:
+        gab = np.asarray(gabarit_fixe, dtype=np.float64)
+    elif okg.sum() >= 20:
+        gab = profil_autour(vg[okg])
+    else:
         # ⚠⚠ Pas de gabarit lisible : le pas reste AVEUGLE plutôt que raccroché sur un profil
         # bâti sur trois lignes. Un gabarit tiré de presque rien est un dessin, pas une forme.
         return avance, bon, diag
-    gab = profil_autour(vg[okg])
     if melanger is not None:
         gab = melanger.permuted(gab)
 
@@ -168,7 +255,8 @@ def derouler(depart: np.ndarray, ok: np.ndarray, cibles: dict[int, np.ndarray],
              pas_vx: float, voxel_um: float, sens: float, vol,
              demi_vx: float, demi_gab: int, melanger=None, accorder: bool = False,
              minimum: int = 30, demi_feuille_um: float = 67.75,
-             raccrocher: bool = True, global_: bool = False) -> list[dict]:
+             raccrocher: bool = True, global_: bool = False,
+             gabarit_fige: bool = False, normales_lissees: bool = False) -> list[dict]:
     """La marche raccrochée, jugée à chaque tour contre la spire de même rang.
 
     ⚠⚠ Les cellules jugées sont celles **encore vivantes**, et leur compte accompagne chaque
@@ -185,11 +273,19 @@ def derouler(depart: np.ndarray, ok: np.ndarray, cibles: dict[int, np.ndarray],
 
     a, m = depart.copy(), ok.copy()
     sur_place = depart.copy()
+    fige = None
     out = []
     for k in sorted(cibles):
         a, m, diag = un_pas_raccroche(a, m, pas_vx, sens, vol, demi_vx, demi_gab,
                                       melanger=melanger, accorder=accorder,
-                                      raccrocher=raccrocher, global_=global_)
+                                      raccrocher=raccrocher, global_=global_,
+                                      gabarit_fixe=fige,
+                                      normales_lissees=normales_lissees)
+        # ⚠ Le gabarit figé est celui du PREMIER tour, donc celui de la spire de départ, et
+        # il est gelé après coup : le construire avant la boucle demanderait de dupliquer la
+        # lecture que le premier pas fait déjà.
+        if gabarit_fige and fige is None and diag["gabarit"] is not None:
+            fige = np.asarray(diag["gabarit"], dtype=np.float64)
         pts = a[m]
         if pts.shape[0] < minimum:
             break
@@ -213,6 +309,11 @@ def derouler(depart: np.ndarray, ok: np.ndarray, cibles: dict[int, np.ndarray],
                         gabarit_lignes=diag["gabarit_lignes"],
                         rugosite_um=(None if diag["rugosite_vx"] is None
                                      else round(diag["rugosite_vx"] * voxel_um, 1)),
+                        contraste_du_gabarit=(None if diag["contraste_du_gabarit"] is None
+                                              else round(diag["contraste_du_gabarit"], 1)),
+                        dispersion_normales_deg=(
+                            None if diag["dispersion_normales_deg"] is None
+                            else round(diag["dispersion_normales_deg"], 2)),
                         deplacement_um=(None if diag["deplacement_vx"] is None
                                         else round(diag["deplacement_vx"] * voxel_um, 1)),
                         decalage_signe_um=(None if diag["decalage_signe_vx"] is None
@@ -413,6 +514,29 @@ def mesurer(minimum: int = 30, graine: int = 42, cache_actif: bool = True,
                        minimum=minimum, demi_feuille_um=ecart_um / 2, global_=True)
     hasard = derouler(a0, ok0, cibles, pas_vx, VOXEL_UM, sens, vol, demi_vx, demi_gab,
                       melanger=rng, minimum=minimum, demi_feuille_um=ecart_um / 2)
+    # ⚠⚠⚠ LES DEUX CONTENDANTS QUI TESTENT LA GÉOMÉTRIE plutôt que la lecture. `accorder_les_
+    # voisins` lisse DE COMBIEN on bouge ; ceux-ci lissent DANS QUELLE DIRECTION on cherche.
+    # Le second n'a pas de raccrochage du tout : si le pas aveugle s'en trouve mieux, alors ce
+    # qui se dégrade est le champ de normales, et aucun raccrochage n'aurait pu y remédier.
+    normales_raccroche = derouler(a0, ok0, cibles, pas_vx, VOXEL_UM, sens, vol, demi_vx,
+                                  demi_gab, minimum=minimum, demi_feuille_um=ecart_um / 2,
+                                  normales_lissees=True)
+    normales_aveugle = derouler(a0, ok0, cibles, pas_vx, VOXEL_UM, sens, vol, demi_vx,
+                                demi_gab, minimum=minimum, demi_feuille_um=ecart_um / 2,
+                                raccrocher=False, normales_lissees=True)
+    # ⚠⚠⚠ LES DEUX REMÈDES ENSEMBLE. Ils ne portent pas sur le même objet — l'un lisse DE
+    # COMBIEN on bouge, l'autre DANS QUELLE DIRECTION on cherche — donc rien ne dit qu'ils se
+    # recouvrent. Les mesurer séparément puis ensemble est ce qui permet de dire s'ils
+    # s'additionnent ou si l'un contient l'autre.
+    les_deux = derouler(a0, ok0, cibles, pas_vx, VOXEL_UM, sens, vol, demi_vx, demi_gab,
+                        minimum=minimum, demi_feuille_um=ecart_um / 2,
+                        accorder=True, normales_lissees=True)
+    # ⚠⚠⚠ LE CONTENDANT QUI TESTE LE SOUPÇON : la forme d'une feuille est lue UNE fois, sur la
+    # spire de départ, et gelée. Rien d'autre ne change. Si la marche s'en trouve mieux, ce qui
+    # échouait était le gabarit relu sur une surface déjà fausse ; si elle n'y gagne rien, la
+    # boucle du gabarit n'était pas la panne et il faut la chercher ailleurs.
+    fige = derouler(a0, ok0, cibles, pas_vx, VOXEL_UM, sens, vol, demi_vx, demi_gab,
+                    minimum=minimum, demi_feuille_um=ecart_um / 2, gabarit_fige=True)
     # ⚠ Le pas aveugle passe par LE MÊME code, drapeau baissé : la batterie vérifie qu'il
     # produit la grille de `derouler_par_le_pas_normal.un_pas` au bit près.
     aveugle = derouler(a0, ok0, cibles, pas_vx, VOXEL_UM, sens, vol, demi_vx, demi_gab,
@@ -433,6 +557,10 @@ def mesurer(minimum: int = 30, graine: int = 42, cache_actif: bool = True,
         minimum_de_cellules=minimum,
         marche_raccrochee=raccroche, marche_accordee=accorde,
         marche_fenetre_etroite=etroite, marche_globale=globale,
+        marche_gabarit_fige=fige,
+        marche_normales_lissees=normales_raccroche,
+        marche_aveugle_normales_lissees=normales_aveugle,
+        marche_les_deux_remedes=les_deux,
         marche_aveugle=aveugle, marche_hasard=hasard,
         le_gain_vieillit=vieillissement,
         cout=cache.cout() | dict(voxels_absents=vol.absents, reprises_reseau=vol.reprises),
@@ -461,16 +589,26 @@ def mesurer(minimum: int = 30, graine: int = 42, cache_actif: bool = True,
 
     r["tours_avant_de_perdre_la_feuille"] = dict(
         raccroche=perdue(raccroche), accorde=perdue(accorde), etroite=perdue(etroite),
-        globale=perdue(globale), aveugle=perdue(aveugle), hasard=perdue(hasard))
+        globale=perdue(globale), fige=perdue(fige),
+        normales=perdue(normales_raccroche), aveugle_normales=perdue(normales_aveugle),
+        les_deux=perdue(les_deux),
+        aveugle=perdue(aveugle), hasard=perdue(hasard))
     r["feuille_tenue_a_la_fin"] = dict(
         raccroche=tenue(raccroche), accorde=tenue(accorde), etroite=tenue(etroite),
-        globale=tenue(globale), aveugle=tenue(aveugle), hasard=tenue(hasard))
+        globale=tenue(globale), fige=tenue(fige),
+        normales=tenue(normales_raccroche), aveugle_normales=tenue(normales_aveugle),
+        les_deux=tenue(les_deux),
+        aveugle=tenue(aveugle), hasard=tenue(hasard))
     def pente(m_):
         d_ = derive_par_tour(m_)
         return None if d_ is None else round(d_, 1)
 
     r["derive_par_tour_um"] = dict(raccroche=pente(raccroche), accorde=pente(accorde),
                                    etroite=pente(etroite), globale=pente(globale),
+                                   fige=pente(fige),
+                                   normales=pente(normales_raccroche),
+                                   aveugle_normales=pente(normales_aveugle),
+                                   les_deux=pente(les_deux),
                                    aveugle=pente(aveugle), hasard=pente(hasard))
     r["groupement_des_perdues"] = dict(
         raccroche=[e_["groupement"] for e_ in raccroche],
@@ -480,6 +618,7 @@ def mesurer(minimum: int = 30, graine: int = 42, cache_actif: bool = True,
         accorde=[e_["part_perdue"] for e_ in accorde],
         etroite=[e_["part_perdue"] for e_ in etroite],
         globale=[e_["part_perdue"] for e_ in globale],
+        fige=[e_["part_perdue"] for e_ in fige],
         aveugle=[e_["part_perdue"] for e_ in aveugle])
     # ⚠⚠ Un décalage global constant et toujours du même signe serait une longueur de pas
     # corrigée, pas un raccrochage. Les signes sont rendus pour que la lecture soit possible.
@@ -489,6 +628,30 @@ def mesurer(minimum: int = 30, graine: int = 42, cache_actif: bool = True,
         len(signes) > 1 and min(signes) < 0 < max(signes))
     r["longueur_equivalente_um"] = (
         None if not signes else round(ecart_um + float(np.median(signes)), 1))
+    # ⚠⚠ LE CONTRASTE DU GABARIT EST LA GRANDEUR QUI DIT SI LA SURFACE RESSEMBLE ENCORE À UNE
+    # FEUILLE : lu sur la crête il vaut plusieurs dizaines de niveaux, lu à côté il s'écrase.
+    r["dispersion_des_normales_deg"] = dict(
+        aveugle=[e_["dispersion_normales_deg"] for e_ in aveugle],
+        raccroche=[e_["dispersion_normales_deg"] for e_ in raccroche],
+        aveugle_normales_lissees=[e_["dispersion_normales_deg"]
+                                  for e_ in normales_aveugle])
+    r["les_deux_remedes_battent_laveugle"] = bool(
+        les_deux and aveugle
+        and pente(les_deux) is not None and pente(aveugle) is not None
+        and pente(les_deux) < pente(aveugle))
+    r["lisser_les_normales_aide_laveugle"] = bool(
+        normales_aveugle and aveugle
+        and np.median([e_["erreur_um"] for e_ in normales_aveugle])
+        < np.median([e_["erreur_um"] for e_ in aveugle]))
+    r["contraste_du_gabarit"] = dict(
+        raccroche=[e_["contraste_du_gabarit"] for e_ in raccroche],
+        aveugle=[e_["contraste_du_gabarit"] for e_ in aveugle])
+    r["erreur_mediane_figee_um"] = round(
+        float(np.median([e_["erreur_um"] for e_ in fige])), 1)
+    r["le_gabarit_fige_fait_mieux"] = bool(
+        fige and raccroche
+        and np.median([e_["erreur_um"] for e_ in fige])
+        < np.median([e_["erreur_um"] for e_ in raccroche]))
     r["erreur_mediane_globale_um"] = round(
         float(np.median([e_["erreur_um"] for e_ in globale])), 1)
     r["tours_ou_la_globale_gagne"] = sum(
@@ -835,6 +998,68 @@ def verifier() -> int:
       [e["tours_de_vieillissement"] for e in vj] == list(range(len(vj))),
       str([e["tours_de_vieillissement"] for e in vj]))
 
+    # --- les normales lissées ---
+    # ⚠⚠ SUR UN PLAN, toutes les normales sont déjà identiques : le lissage ne doit RIEN
+    # changer, et sa dispersion vaut zéro. Un écart là voudrait dire que le lissage déplace
+    # une géométrie qu'il devrait laisser en place.
+    from le_pas_normal_atteint_la_spire import normales as _norm  # noqa: PLC0415
+    n_p, bon_p = _norm(plan, ok)
+    v("sur un plan, la dispersion des normales est nulle",
+      abs(dispersion_angulaire(n_p, bon_p)) < 1e-6, str(dispersion_angulaire(n_p, bon_p)))
+    v("... et le lissage ne les déplace pas",
+      bool(np.allclose(lisser_les_normales(n_p, bon_p)[bon_p], n_p[bon_p])))
+    # ⚠⚠⚠ LE TÉMOIN QUI REND LE LISSAGE MESURABLE : une normale isolée retournée doit être
+    # ramenée par ses voisines, et la dispersion doit BAISSER. Sans ça, « lisser les normales »
+    # serait un no-op qu'aucun contrôle ne distinguerait.
+    tordu = n_p.copy()
+    tordu[5, 5] = np.array([0.6, 0.0, 0.8])
+    tordu[5, 5] /= np.linalg.norm(tordu[5, 5])
+    avant = dispersion_angulaire(tordu, bon_p)
+    apres = dispersion_angulaire(lisser_les_normales(tordu, bon_p), bon_p)
+    v("une normale isolée tordue est ramenée par ses voisines", apres < avant / 2.0,
+      f"{apres:.3f} contre {avant:.3f}")
+    v("... et la dispersion voit la torsion", avant > 0.1, f"{avant:.3f}")
+    # ⚠ Une cellule sans voisin valide garde SA normale : elle n'est pas écartée, sinon la
+    # grille fondrait plus vite que celle du pas non lissé.
+    seule = np.zeros(bon_p.shape, dtype=bool)
+    seule[4, 4] = True
+    v("une cellule sans voisin garde sa normale",
+      bool(np.allclose(lisser_les_normales(n_p, seule)[4, 4], n_p[4, 4])))
+    mn = derouler(plan, ok, cibles, 60.0, 1.0, 1.0, vf, 15.0, 8, normales_lissees=True)
+    v("lisser les normales ne casse pas une marche exacte",
+      all(e["erreur_um"] < 1.0 for e in mn), str([e["erreur_um"] for e in mn]))
+    v("la dispersion est rendue à chaque tour",
+      all(e["dispersion_normales_deg"] is not None for e in mn))
+
+    # --- le gabarit figé ---
+    # ⚠⚠ SUR UN VOLUME EN PLANS PARFAITS, geler le gabarit ne doit RIEN changer : la forme
+    # d'une feuille y est la même partout. Un écart là voudrait dire que le gel modifie autre
+    # chose que la source du gabarit.
+    mfig = derouler(plan, ok, cibles, 60.0, 1.0, 1.0, vf, 15.0, 8, gabarit_fige=True)
+    v("geler le gabarit ne change rien sur un volume homogène",
+      [e["erreur_um"] for e in mfig] == [e["erreur_um"] for e in m],
+      f"{[e['erreur_um'] for e in mfig]} contre {[e['erreur_um'] for e in m]}")
+    # ⚠⚠⚠ ET LE CONTRASTE DU GABARIT EST RENDU MÊME QUAND ON NE S'EN SERT PLUS : c'est la
+    # grandeur qui dit si la surface courante ressemble encore à une feuille, et elle est
+    # intéressante précisément là.
+    v("le contraste du gabarit est mesuré à chaque tour",
+      all(e["contraste_du_gabarit"] is not None for e in mfig),
+      str([e["contraste_du_gabarit"] for e in mfig]))
+    v("... et il est fort sur un volume à feuilles nettes",
+      all(e["contraste_du_gabarit"] > 20.0 for e in mfig),
+      str([e["contraste_du_gabarit"] for e in mfig]))
+    # ⚠ Sur un volume PLAT, il n'y a pas de feuille, donc pas de contraste — sinon le nombre
+    # mesurerait le bruit de la mesure.
+    uni = np.full(forme, 90, dtype=np.uint8)
+
+    class VolumeUni(Volume):
+        def _bloc(self, cz, cy, cx):
+            return uni
+
+    v("un volume sans feuille rend un contraste nul",
+      derouler(plan, ok, {1: cibles[1]}, 60.0, 1.0, 1.0, VolumeUni("", faux, {}), 15.0, 8,
+               minimum=1)[0]["contraste_du_gabarit"] < 1e-9)
+
     # ⚠⚠ UN GAIN QUI CHANGE DE SIGNE N'EST PAS UN GAIN, et c'est le critère retenu parce
     # qu'il ne demande aucun seuil : un effet garde son signe, un bruit non.
     v("un gain qui change de signe après le premier pas n'en est pas un",
@@ -965,8 +1190,9 @@ def main() -> int:
     print(f"pas nominal {r['ecart_lu_um']} µm, sens « {r['sens_retenu']} », "
           f"{r['bits_de_supervision']} bit de supervision\n")
     print(f"{'tour':>5} {'cell.':>6} {'par point':>10} {'accordé':>9} {'étroite':>9} "
-          f"{'GLOBAL':>8} {'aveugle':>9} {'hasard':>8} {'rugos.':>7} {'perdues':>8}")
-    print("-" * 92)
+          f"{'GLOBAL':>8} {'FIGÉ':>7} {'NORM.':>7} {'2 REM':>7} {'av.+N':>7} {'aveugle':>9} "
+          f"{'hasard':>8} {'disp°':>6} {'perdues':>8}")
+    print("-" * 126)
     for k in range(r["tours_mesures"]):
         x = r["marche_raccrochee"][k]
         w = r["marche_accordee"][k] if k < len(r["marche_accordee"]) else {}
@@ -974,18 +1200,28 @@ def main() -> int:
         z = r["marche_hasard"][k] if k < len(r["marche_hasard"]) else {}
         e_ = r["marche_fenetre_etroite"][k] if k < len(r["marche_fenetre_etroite"]) else {}
         g_ = r["marche_globale"][k] if k < len(r["marche_globale"]) else {}
-        rug = x.get("rugosite_um")
+        f_ = r["marche_gabarit_fige"][k] if k < len(r["marche_gabarit_fige"]) else {}
+        n_ = r["marche_normales_lissees"][k] if k < len(r["marche_normales_lissees"]) else {}
+        an = (r["marche_aveugle_normales_lissees"][k]
+              if k < len(r["marche_aveugle_normales_lissees"]) else {})
+        dsp = y.get("dispersion_normales_deg")
         print(f"{x['tours']:>5} {x['cellules']:>6} {x['erreur_um']:>9.0f}µ "
               f"{w.get('erreur_um', float('nan')):>8.0f}µ "
               f"{e_.get('erreur_um', float('nan')):>8.0f}µ "
               f"{g_.get('erreur_um', float('nan')):>7.0f}µ "
+              f"{f_.get('erreur_um', float('nan')):>6.0f}µ "
+              f"{n_.get('erreur_um', float('nan')):>6.0f}µ "
+              f"{r['marche_les_deux_remedes'][k].get('erreur_um', float('nan')):>6.0f}µ "
+              f"{an.get('erreur_um', float('nan')):>6.0f}µ "
               f"{y.get('erreur_um', float('nan')):>8.0f}µ "
               f"{z.get('erreur_um', float('nan')):>7.0f}µ "
-              f"{('—' if rug is None else f'{rug:.0f}µ'):>7} "
+              f"{('—' if dsp is None else f'{dsp:.1f}'):>6} "
               f"{x['part_perdue']:>8.2f}")
     d = r["derive_par_tour_um"]
     print(f"\ndérive par tour : raccroché {d['raccroche']} µm · accordé {d['accorde']} µm · "
           f"étroite {d['etroite']} µm · GLOBAL {d['globale']} µm · "
+          f"FIGÉ {d['fige']} µm · normales {d['normales']} µm · "
+          f"aveugle+normales {d['aveugle_normales']} µm · LES DEUX {d['les_deux']} µm · "
           f"aveugle {d['aveugle']} µm · hasard {d['hasard']} µm")
     print(f"part de cellules au-delà d'une demi-feuille — raccroché "
           f"{r['part_perdue']['raccroche']} contre aveugle {r['part_perdue']['aveugle']}")

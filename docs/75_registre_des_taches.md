@@ -1975,32 +1975,57 @@ taille, c'est que le bruit **change de signe** et qu'un effet non.
 aussi (6 → 22 µm). Ce n'est pas le raccrochage qui abîme la surface au point de se saborder — la
 surface se dégrade toute seule, et le raccrochage cesse simplement d'y voir une feuille.
 
-##### Ce qui a été essayé et ce que chaque essai a coûté
+##### ⭐⭐⭐ Le MÉCANISME, trouvé en éliminant : ce sont les NORMALES
 
-- **L'accord des voisins** (médiane du voisinage 3×3) : **+33,6 µm par tour** à 906 cellules,
-  soit le meilleur des raccrochages et toujours pire que l'aveugle. ⭐ À 191 cellules il
-  n'apportait rien ; à 906 il reprend un tiers de la dérive du par-point. **Un lissage sert
-  d'autant plus que la nappe est grande** — l'inverse de ce que la petite boîte laissait croire.
-- **Une fenêtre deux fois plus étroite** : +43,0. Elle rend le saut sur la feuille voisine
-  impossible et ne rattrape rien, donc ce saut n'était pas la panne.
-- **Le groupement des perdues** a inversé mon hypothèse : celles du par-point sont à peine
-  groupées (2,33 puis 1,0) quand celles de l'aveugle le sont fortement (**3,46 puis 4,14**). Le
-  raccrochage échange une erreur **cohérente** contre une erreur **éparpillée**.
+Trois soupçons ont été testés et écartés avant celui qui tient, et chacun ne cassait qu'une chose.
 
-⚠ Le pas aveugle de ce fichier **est** celui du dérouleur publié : `raccrocher=False` traverse le
-même code, et la batterie vérifie l'égalité **au bit près** avec `derouler_par_le_pas_normal.un_pas`.
+| soupçon | ce qui a été changé | dérive par tour |
+|---|---|---:|
+| les cellules sautent sur la feuille voisine | fenêtre deux fois plus **étroite** | +43,0 µm |
+| le champ de décalages est bruité | décalages **accordés** au voisinage 3×3 | +33,6 µm |
+| le gabarit se dégrade avec la surface | gabarit **figé**, lu une fois sur la spire de départ | **+54,2 µm** |
+| — | *raccrochage par point, sans remède* | +56,1 µm |
+| **la direction de recherche se dégrade** | **normales lissées** avant le pas | **+25,3 µm** |
+| — | *le pas aveugle, qui ne raccroche rien* | **+22,3 µm** |
+| la même chose, sans raccrochage du tout | aveugle + **normales lissées** | **+22,0 µm** |
 
-⚠ Trois défauts de méthode de cette tranche, tous miens. Mon premier témoin de rugosité **ne
-pouvait pas échouer** — sur un volume uniforme un gabarit mélangé rend le *même* décalage faux
-partout, donc rugosité nulle des deux côtés ; il fallait un bruit variant **le long de la ligne**,
-la corrélation retirant la moyenne de chaque segment. Le verdict imprimé **ne nommait pas son
-contendant**. Et un `str.replace` **sans assertion** a fait disparaître en silence tout un bloc
-d'affichage — le piège que ce dépôt a déjà consigné, repayé le même jour.
+⛔ **Le gabarit n'était pas la panne** : le figer ne change rien (+54,2 contre +56,1), et son
+**contraste ne s'effondre pas** — 51, 78, 53, 40, 47, 51 au fil des tours. La surface continue de
+ressembler à une feuille ; c'est la **direction** dans laquelle on la cherche qui se perd.
 
-⚠ Un délai réseau a tué un balayage après **232 blocs déjà téléchargés** : le lecteur avait
-raison de refuser de confondre « pas de réponse » et « pas de matière », mais un incident ne dit
-rien du contenu, donc il se **réessaie**. Les reprises sont bornées, comptées et rendues — un run
-qui en a demandé quarante est un run dont le lien était mauvais ce jour-là.
+> ⭐⭐⭐ **Lisser les NORMALES divise par deux la dérive du raccrochage — et ne fait RIEN pour
+> l'aveugle.** C'est la seconde moitié qui prouve la première : si les normales étaient
+> simplement mauvaises pour tout le monde, les lisser aiderait les deux marches. Elles ne sont
+> mauvaises que là où le raccrochage est passé. **Il ride la nappe, la nappe gâte ses normales,
+> et la mauvaise normale gâte le pas suivant.**
+
+⚠⚠ **Ce n'est pas le même geste que l'accord des voisins**, et la distinction est tout le sujet :
+accorder lisse **de combien** on bouge, lisser les normales lisse **dans quelle direction** on
+cherche. Les deux ensemble donnent **+29,4**, soit *moins bien* que les normales seules — ils ne
+s'additionnent pas, ils se recouvrent et finissent par sur-lisser.
+
+⭐⭐ **Et c'est le contendant le plus STABLE des dix au balayage** : normales lissées rend
+**+26,0 · +25,8 · +25,3** aux trois tailles de boîte, quand le pas aveugle lui-même oscille de
++13,3 à +25,5. Aux deux plus grandes tailles les deux sont donc **à égalité** — le raccrochage
+réparé ne coûte plus rien, il ne rapporte simplement toujours rien.
+
+⚠ La dispersion angulaire du champ de normales est mesurée à chaque tour et **ne demande aucune
+cible** : 2,8° puis 2,7 · 3,7 · 6,9 · 10,1 · 10,9. Un dérouleur peut donc la calculer sur
+lui-même en marchant — c'est le seul signal de confiance de toute la tranche qui n'exige pas de
+connaître la réponse.
+
+⛔⛔ **Et malgré tout ça, aucun raccrochage ne bat l'aveugle** : le meilleur, normales lissées, est
+à **+25,3** contre **+22,3**. Le mécanisme est réparé aux deux tiers et le geste ne se paie
+toujours pas — ce qui est cohérent avec la mesure du vieillissement, puisqu'il n'y a de gain à
+récupérer qu'au tout premier pas.
+
+> ⭐⭐⭐ **Ce que cette tranche laisse à la suivante.** Le raccrochage sur la matière est **clos
+> comme moteur de déroulement** : il gagne 12,7 µm depuis une spire publiée, plus rien après un
+> tour, et aucune de ses six variantes ne bat le pas aveugle. Ce qui reste ouvert est ce que la
+> chaîne d'élimination a désigné sans jamais l'attaquer : **la dispersion des normales monte de
+> 2,8° à 10,9° même sur la marche aveugle**, et c'est elle qui borne tout le reste. La question
+> suivante ne porte donc plus sur ce qu'on lit dans le volume mais sur **ce qui propage une
+> géométrie** — et elle a déjà son instrument, puisque cette dispersion se calcule sans cible.
 
 > ⭐⭐⭐ **Ce que cette tranche laisse à la suivante est plus précis que ce qu'elle a retiré.** La
 > question n'est plus « quel raccrochage » mais **« comment garder une surface assez propre pour

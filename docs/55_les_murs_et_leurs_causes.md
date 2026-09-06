@@ -11,7 +11,7 @@ la fois. Une feuille de route qui liste des tâches laisse croire qu'on avance q
 tourne ; celle-ci liste des causes **éliminées**, et montre l'espace rétrécir. C'est le
 seul progrès mesurable sur un problème que personne n'a résolu.
 
-**47 causes candidates** sur **4 murs** : ❌ **34** éliminées · ✅ **10** confirmées · 🔒 **3** bloquées
+**49 causes candidates** sur **4 murs** : ❌ **35** éliminées · ✅ **11** confirmées · 🔒 **3** bloquées
 
 | symbole | verdict | ce que ça veut dire |
 |---|---|---|
@@ -29,7 +29,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 
 ## 1. Le tracé ne suit pas de feuille
 
-❌ 16 éliminées · ✅ 5 confirmées · 🔒 3 bloquées
+❌ 17 éliminées · ✅ 6 confirmées · 🔒 3 bloquées
 
 | cause candidate | | ce qui a été mesuré | où |
 |---|---|---|---|
@@ -38,6 +38,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | le traceur est un tirage, pas une fonction | ✅ | 13 traces propres sur 14 à paramètres identiques ; toute comparaison à un seul tirage ne vaut rien | [`30`](30_le_traceur_est_un_tirage.md) |
 | ce qui est établi : la surface est EN TRAVERS de l'empilement | ✅ | des spires coupées en travers, vues à l'image à étendue égale contre une feuille publiée | [`25`](25_une_graine_choisie_sur_la_planeite.md) |
 | le niveau de la prédiction n'était propagé nulle part | ✅ | trois conséquences : graine dans le vide, maillage rendu hors du scan, et min_area_cm évalué dans deux unités — les aires m7 sont fausses d'un facteur 16 | [`54`](54_cinq_rendus_vides.md) |
+| lisser le champ de NORMALES avant le pas répare ce que le raccrochage abîme | ✅ | la dérive du raccrochage tombe de +56,1 à +25,3 um par tour, et le même lissage ne fait RIEN pour le pas aveugle (+22,3 contre +22,0) — donc le dégât était bien celui du raccrochage ; +26,0 / +25,8 / +25,3 aux trois tailles de boîte, le contendant le plus stable des dix | [`75`](75_registre_des_taches.md) |
 | la fenêtre de lecture | ❌ | relu à 128 px × 109 couches, la géométrie du corpus : le classement ne bouge pas | [`52`](52_calibrer_sur_son_corpus.md) |
 | la chaîne de rendu | ❌ | un maillage PUBLIÉ passé par notre chaîne revient à 0,873 — au-dessus de la médiane du corpus | [`53`](53_le_temoin_positif_du_rendu.md) |
 | le champ de normales (NORMAL pèse 10) | ❌ | chargé pour de vrai : coût par génération ×29, trajectoire INCHANGÉE sur 118 générations | [`26`](26_le_champ_de_direction.md) |
@@ -54,6 +55,7 @@ viennent du même registre et sont vérifiés contre ce tableau.*
 | le raccrochage point par point suffirait à dérouler | ❌ | sur 906 cellules et six tours, il dérive de +56,1 um par tour contre +22,3 pour l'aveugle, et il dérive plus que lui aux TROIS tailles de boîte mesurées (384, 512, 640 voxels) ; ni l'accord des voisins (+33,6) ni une fenêtre deux fois plus étroite (+43,0) ne le rattrapent | [`75`](75_registre_des_taches.md) |
 | raccrocher par un décalage UNIQUE pour toute la nappe, un par tour | ❌ | RÉTRACTÉE le jour même : à 191 cellules la dérive sortait NÉGATIVE (-19,5 um par tour) et le décalage unique était le seul à tenir la feuille ; à 494 puis 906 cellules, au même endroit et avec le même code, elle vaut +67,3 puis +56,3 — un résultat qui s'inverse quand l'échantillon grandit n'était pas un résultat | [`75`](75_registre_des_taches.md) |
 | le gain d'un pas raccroché survivrait à une surface reconstruite | ❌ | depuis une spire PUBLIÉE le raccrochage gagne +12,7 um sur le pas aveugle ; dès qu'UN seul tour aveugle a été fait il gagne -0,2 um, et sur les quatre âges suivants la médiane vaut -0,2 avec un signe qui change quatre fois — le raccrochage ne raccroche que ce qui est déjà à sa place | [`75`](75_registre_des_taches.md) |
+| ce qui se dégrade sous un dérouleur raccroché est le gabarit qu'il relit | ❌ | geler le gabarit sur la spire de départ donne +54,2 um par tour contre +56,1 sans remède, et son contraste ne s'effondre pas (51, 78, 53, 40, 47, 51 au fil des six tours) : la surface ressemble encore à une feuille, c'est la DIRECTION de recherche qui se perd | [`75`](75_registre_des_taches.md) |
 | comparer le relief d'une trace L2 à une trace L0 | 🔒 | à aire égale un maillage L2 rend quatre fois moins de pixels de côté, donc les deux ne tiennent jamais dans la même fenêtre d'analyse — le relief ne peut pas les départager | [`54`](54_cinq_rendus_vides.md) |
 | les résidus du champ d'orientation publié (A2 ter) | 🔒 | le pas de grille publié vaut 64 voxels, soit 3,89 écarts inter-feuilles par cellule contre 0,5 exigés par Nyquist : le champ est REPLIÉ, pas bruité | [`75`](75_registre_des_taches.md) |
 | bâtir le raccrochage à la matière sur les piles de surface publiées | 🔒 | la pile porte à 129,6 um autour de la surface, soit 0,956 feuille, quand la voisine est à 135,5 : il manque 5,9 um — mesuré sur 1 459 592 colonnes, avec la convention du centre vérifiée (pic à -1,5 couche) | [`75`](75_registre_des_taches.md) |

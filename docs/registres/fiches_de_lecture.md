@@ -3706,7 +3706,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 ---
 
 ### docs/55_les_murs_et_leurs_causes.md
-- **lignes** : 122
+- **lignes** : 124
 - **nature** : PROCEDE
 - **résumé** : Document **rendu** depuis `docs/registres/murs_et_causes.tsv` par `uv run python src/depot/murs_et_causes.py --rendre`, et non écrit à la main ; sa batterie vérifie que chaque ligne pointe vers un document contenant encore son ancre. Il recense **30 causes candidates sur 4 murs** : 19 éliminées, 10 confirmées, 1 bloquée, chacune avec la mesure qui l'a tranchée et le document d'origine. Sa thèse de forme est qu'un mur est un espace de causes dont on retire une entrée à la fois, et que la liste des causes éliminées — non celle des tâches — est le seul progrès mesurable. Une seule cause reste non tranchée, et elle est bloquée. (⚠ Note de lecture : l'en-tête compte 19 éliminations quand le §final écrit « les treize éliminations de ce document » ; le document ne signale pas l'écart. De même, il ne contient aucune cause ⏳ *ouverte* alors que son propre tableau de symboles définit ce statut.)
 - **conclusions extractibles** : *(les murs recensés, avec pour chacun les causes éliminées et celles qui restent ouvertes)*
@@ -3760,7 +3760,7 @@ Sept documents lus du premier au dernier caractère (`wc -l` relevé avant chaqu
 - **rétractations / corrections internes** : aucune rétractation déclarée. Le document précise en revanche deux bornes de portée sur des causes confirmées : « la graine, c'est-à-dire l'endroit » explique la famille m7 **et pas le mur**, et la chaîne tangentielle « ne dit pas que c'est la BONNE feuille (il faut de l'encre), et part d'un segment PUBLIÉ et non d'une de nos traces ». Il retire aussi explicitement une affirmation antérieure : « ⚠⚠ Le “croisement” que j'avais publié à 1 920 µm n'existe pas : chaîne ET bond y sont au niveau du hasard (−1,7 et +1,6) ».
 - **preuve de lecture intégrale** :
   - ligne 87 : « | enchaîner la projection à GRAND pas (238 µm/maillon) | ❌ | cinq maillons de 238 µm étalent la boîte ×2,38 à nombre de points constant, contre ×1,10 pour le bond direct — et finissent 5,33 SPIRES à côté de lui. ⚠ Le pas réel dérive avant la boîte : 238 → 963 µm par maillon | [`44`](44_ou_la_chaine_se_trouve.md) | »
-  - ligne 116 : « cause à laquelle personne n'a pensé. Le tableau borne ce qu'on a testé, jamais ce qui »
+  - ligne 122 : « cause à laquelle personne n'a pensé. Le tableau borne ce qu'on a testé, jamais ce qui »
 
 ---
 
@@ -5419,7 +5419,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 2647
+- **lignes** : 2672
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5811,6 +5811,27 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     raccrochage échange une erreur **cohérente** contre une erreur **éparpillée**.
   - ⚠ Le pas aveugle de ce fichier **est** celui du dérouleur publié — `raccrocher=False`
     traverse le même code, et la batterie vérifie l'égalité **au bit près**.
+  - ⭐⭐⭐ **LE MÉCANISME, trouvé en éliminant : ce sont les NORMALES.** Trois soupçons testés et
+    écartés, chacun ne cassant qu'une chose — fenêtre deux fois plus étroite (**+43,0**),
+    décalages accordés au voisinage (**+33,6**), gabarit **figé** lu une fois sur la spire de
+    départ (**+54,2** contre +56,1 sans remède, et son contraste ne s'effondre pas : 51, 78, 53,
+    40, 47, 51). La surface ressemble encore à une feuille ; c'est la **direction** de recherche
+    qui se perd.
+  - ⭐⭐⭐ **Lisser les NORMALES divise par deux la dérive du raccrochage (+56,1 → +25,3) et ne
+    fait RIEN pour l'aveugle (+22,3 → +22,0).** C'est la seconde moitié qui prouve la première :
+    si les normales étaient mauvaises pour tout le monde, les lisser aiderait les deux marches.
+    Elles ne le sont que là où le raccrochage est passé — **il ride la nappe, la nappe gâte ses
+    normales, et la mauvaise normale gâte le pas suivant.**
+  - ⚠⚠ **Ce n'est pas le même geste que l'accord des voisins** : accorder lisse **de combien** on
+    bouge, lisser les normales lisse **dans quelle direction** on cherche. Les deux ensemble
+    donnent **+29,4**, moins bien que les normales seules — ils se recouvrent et sur-lissent.
+  - ⭐⭐ **Et c'est le contendant le plus stable des dix au balayage** : +26,0 · +25,8 · +25,3 aux
+    trois tailles, quand le pas aveugle oscille de +13,3 à +25,5. Aux deux plus grandes tailles
+    les deux sont **à égalité** — le raccrochage réparé ne coûte plus rien et ne rapporte
+    toujours rien.
+  - ⚠ La **dispersion angulaire** du champ de normales (2,8° → 10,9° sur six tours) est le seul
+    signal de confiance de la tranche qui **n'exige pas de connaître la réponse** : un dérouleur
+    peut la calculer sur lui-même en marchant.
   - ⚠ Un délai réseau a tué un balayage après **232 blocs déjà téléchargés**. Le lecteur avait
     raison de refuser de confondre « pas de réponse » et « pas de matière », mais un incident ne
     dit rien du contenu : il se **réessaie**, borné, compté et rendu.
@@ -5857,8 +5878,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 2054 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 2647 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 2079 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 2672 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

@@ -14,6 +14,10 @@
         "accorde": 28.9,
         "etroite": 22.0,
         "globale": -19.5,
+        "fige": 29.1,
+        "normales": 26.0,
+        "aveugle_normales": 13.2,
+        "les_deux": 30.7,
         "aveugle": 13.3,
         "hasard": 43.6
       },
@@ -22,6 +26,10 @@
         "accorde": 115.5,
         "etroite": 135.5,
         "globale": 26.2,
+        "fige": 116.2,
+        "normales": 109.0,
+        "aveugle_normales": 82.9,
+        "les_deux": 117.2,
         "aveugle": 82.8,
         "hasard": 208.7
       },
@@ -33,13 +41,17 @@
         "accorde": false,
         "etroite": false,
         "globale": true,
+        "fige": false,
+        "normales": false,
+        "aveugle_normales": false,
+        "les_deux": false,
         "aveugle": false,
         "hasard": false
       },
       "cout": {
         "blocs_telecharges": 0,
         "mebioctets": 0.0,
-        "blocs_en_memoire": 48,
+        "blocs_en_memoire": 53,
         "voxels_absents": 0,
         "reprises_reseau": 0
       }
@@ -53,6 +65,10 @@
         "accorde": 35.1,
         "etroite": 43.2,
         "globale": 67.3,
+        "fige": 49.7,
+        "normales": 25.8,
+        "aveugle_normales": 25.4,
+        "les_deux": 36.2,
         "aveugle": 25.5,
         "hasard": 73.6
       },
@@ -61,6 +77,10 @@
         "accorde": 209.0,
         "etroite": 277.0,
         "globale": 370.6,
+        "fige": 264.6,
+        "normales": 157.4,
+        "aveugle_normales": 176.4,
+        "les_deux": 213.0,
         "aveugle": 176.5,
         "hasard": 427.5
       },
@@ -70,13 +90,17 @@
         "accorde": false,
         "etroite": false,
         "globale": false,
+        "fige": false,
+        "normales": false,
+        "aveugle_normales": false,
+        "les_deux": false,
         "aveugle": false,
         "hasard": false
       },
       "cout": {
-        "blocs_telecharges": 0,
-        "mebioctets": 0.0,
-        "blocs_en_memoire": 167,
+        "blocs_telecharges": 1,
+        "mebioctets": 2.0,
+        "blocs_en_memoire": 177,
         "voxels_absents": 0,
         "reprises_reseau": 0
       }
@@ -90,6 +114,10 @@
         "accorde": 33.6,
         "etroite": 43.0,
         "globale": 56.3,
+        "fige": 54.2,
+        "normales": 25.3,
+        "aveugle_normales": 22.0,
+        "les_deux": 29.4,
         "aveugle": 22.3,
         "hasard": 65.7
       },
@@ -98,6 +126,10 @@
         "accorde": 192.2,
         "etroite": 256.5,
         "globale": 306.2,
+        "fige": 298.0,
+        "normales": 155.4,
+        "aveugle_normales": 158.2,
+        "les_deux": 176.2,
         "aveugle": 161.3,
         "hasard": 368.0
       },
@@ -107,13 +139,17 @@
         "accorde": false,
         "etroite": false,
         "globale": false,
+        "fige": false,
+        "normales": false,
+        "aveugle_normales": false,
+        "les_deux": false,
         "aveugle": false,
         "hasard": false
       },
       "cout": {
-        "blocs_telecharges": 37,
-        "mebioctets": 74.0,
-        "blocs_en_memoire": 269,
+        "blocs_telecharges": 0,
+        "mebioctets": 0.0,
+        "blocs_en_memoire": 279,
         "voxels_absents": 0,
         "reprises_reseau": 0
       }
@@ -126,8 +162,12 @@
   "aucun_ne_tient_partout": [
     "accorde",
     "aveugle",
+    "aveugle_normales",
     "etroite",
+    "fige",
     "hasard",
+    "les_deux",
+    "normales",
     "raccroche"
   ]
 }

@@ -49,11 +49,11 @@ CADRE = (200, 200, 200)
 # ⚠ L'ordre et les couleurs sont déclarés UNE fois : trois panneaux les partagent, et deux
 # légendes qui divergeraient feraient lire une courbe sous le mauvais nom.
 MARCHES = [
-    ("marche_globale", "GLOBAL — un décalage par tour", AMBRE, 4),
-    ("marche_aveugle", "aveugle — aucun raccrochage", BLEU, 2),
-    ("marche_raccrochee", "par point", VERT, 2),
-    ("marche_accordee", "par point, accordé aux voisins", VIOLET, 2),
-    ("marche_fenetre_etroite", "par point, fenêtre deux fois plus étroite", DISCRET, 2),
+    ("marche_aveugle", "aveugle — aucun raccrochage", BLEU, 4),
+    ("marche_normales_lissees", "raccroché, NORMALES lissées", AMBRE, 3),
+    ("marche_accordee", "raccroché, décalages accordés", VIOLET, 2),
+    ("marche_raccrochee", "raccroché, par point", VERT, 2),
+    ("marche_globale", "raccroché, un décalage par tour", DISCRET, 2),
     ("marche_hasard", "gabarit mélangé (témoin)", ROUGE, 2),
 ]
 
@@ -78,6 +78,11 @@ def prose(m: dict) -> list[str]:
         f"spire PUBLIEE et {vi[1]['gain_um']:+.1f} um des qu'UN tour aveugle a ete fait ; "
         f"ensuite la mediane vaut {m['gain_median_apres_le_premier_pas_um']:+.1f} um et le "
         "signe change. le raccrochage ne raccroche que ce qui est deja a sa place.",
+        f"panneau A, LE MECANISME : lisser les NORMALES avant le pas fait tomber la derive "
+        f"du raccrochage de {d['raccroche']:+.1f} a {d['normales']:+.1f} um par tour, et ne "
+        f"fait RIEN pour l'aveugle ({d['aveugle']:+.1f} contre {d['aveugle_normales']:+.1f}). "
+        "c'est la preuve que le degat etait celui du raccrochage : il ride la nappe, la nappe "
+        "gate ses normales, et la mauvaise normale gate le pas suivant.",
     ]
     if b:
         out.append(
@@ -106,7 +111,7 @@ def dessiner(m: dict, sortie: Path) -> dict:
     pw, ph = 400, 220
     ecart = 56
     L = marge * 2 + pw * 2 + ecart
-    H = 96 + ph + 106 + ph + 122 + len(lignes) * 19
+    H = 96 + ph + 106 + ph + 138 + len(lignes) * 19
     toile = Image.new("RGB", (L, H), FOND)
     art = ImageDraw.Draw(toile)
     art.text((marge, 18),
@@ -185,7 +190,7 @@ def dessiner(m: dict, sortie: Path) -> dict:
     art.line([cx, zero, cx + pw, zero], fill=TEXTE)
     # ⚠ Le libellé du zéro se pose SOUS le cadre : sur la ligne, il tombait en travers des
     # barres qu'il commente.
-    art.text((cx + pw - 190, cy + ph + 33), "· la ligne du milieu : 0, aucun gain",
+    art.text((cx + 6, cy + ph + 49), "la ligne du milieu : 0, aucun gain",
              fill=TEXTE, font=petit)
     lg2 = pw / (len(vieil) * 2 + 1)
     for k, e_ in enumerate(vieil):
@@ -231,8 +236,15 @@ def dessiner(m: dict, sortie: Path) -> dict:
         art.line([dx, y0_, dx + pw, y0_], fill=TEXTE)
         art.text((dx + 4, y0_ + 3), "0 — l'erreur n'augmente plus", fill=TEXTE, font=petit)
         for cle, nom, coul, ep in MARCHES:
-            k_ = cle.replace("marche_", "").replace("raccrochee", "raccroche").replace(
-                "accordee", "accorde").replace("fenetre_etroite", "etroite")
+            # ⚠ Le nom d'une marche dans le résultat et sa clé de dérive ne coïncident pas
+            # toujours ; la table est écrite ICI plutôt que devinée par des remplacements
+            # successifs, qui rendaient une clé plausible pour une marche qui n'existe pas.
+            k_ = {"marche_raccrochee": "raccroche", "marche_accordee": "accorde",
+                  "marche_fenetre_etroite": "etroite", "marche_globale": "globale",
+                  "marche_gabarit_fige": "fige", "marche_normales_lissees": "normales",
+                  "marche_aveugle_normales_lissees": "aveugle_normales",
+                  "marche_les_deux_remedes": "les_deux",
+                  "marche_aveugle": "aveugle", "marche_hasard": "hasard"}[cle]
             pts = [(xc(i), yv(pt["derive_par_tour_um"][k_]))
                    for i, pt in enumerate(b["points"])
                    if pt["derive_par_tour_um"].get(k_) is not None]
@@ -244,12 +256,16 @@ def dessiner(m: dict, sortie: Path) -> dict:
             art.text((xc(i) - 24, dy + ph + 3),
                      f"{c_:.0f} vx / {b['points'][i]['cellules_au_depart']} cell.",
                      fill=DISCRET, font=petit)
+        # ⚠⚠ Ce libellé nomme la courbe par sa COULEUR, donc il devient faux dès qu'on
+        # réordonne `MARCHES`. Il est écrit depuis la table plutôt que recopié : une légende
+        # qui désigne la mauvaise courbe est pire que pas de légende.
+        gris_ = next(n for c_, n, k_, _ in MARCHES if c_ == "marche_globale")
         art.text((dx + 4, dy + ph + 17),
-                 "en ambre : le decalage unique — son verdict S'INVERSE", fill=AMBRE,
+                 f"« {gris_} » est le seul dont le verdict S'INVERSE", fill=DISCRET,
                  font=petit)
 
     # ---------- legende, sous les panneaux ----------
-    ly = 96 + ph + 106 + ph + 52
+    ly = 96 + ph + 106 + ph + 68
     for k, (cle, nom, coul, _) in enumerate(MARCHES):
         col = k % 2
         art.rectangle([marge + col * (pw + ecart), ly + (k // 2) * 17,
@@ -316,6 +332,22 @@ def verifier() -> int:
     # ⚠ Le mécanisme doit être visible : la rugosité du champ par point MONTE.
     rug = [x for x in m["rugosite_um"]["raccroche"] if x is not None]
     v("la rugosité du champ par point monte au fil des tours", rug[-1] > rug[0], str(rug))
+    # ⚠⚠⚠ LE MÉCANISME, ET IL FAUT SES DEUX MOITIÉS : lisser les normales répare le
+    # raccrochage et ne fait RIEN pour l'aveugle. La seconde moitié est celle qui prouve que
+    # le dégât venait du raccrochage — sans elle, « ça aide » pourrait juste vouloir dire que
+    # les normales sont mauvaises pour tout le monde.
+    d_ = m["derive_par_tour_um"]
+    v("lisser les normales répare la moitié de ce que le raccrochage coûte",
+      d_["normales"] < (d_["raccroche"] + d_["aveugle"]) / 2,
+      f"{d_['normales']} contre {d_['raccroche']} et {d_['aveugle']}")
+    v("... et ne fait rien pour l'aveugle, qui ne ride rien",
+      abs(d_["aveugle_normales"] - d_["aveugle"]) < 3.0,
+      f"{d_['aveugle_normales']} contre {d_['aveugle']}")
+    # ⚠⚠ ET AUCUN RACCROCHAGE NE BAT L'AVEUGLE, même réparé : c'est le verdict de la tranche.
+    v("aucun raccrochage ne bat l'aveugle",
+      min(v_ for k_, v_ in d_.items() if k_ not in ("aveugle", "aveugle_normales")
+          and v_ is not None) > d_["aveugle"],
+      str(d_))
     # ⚠⚠⚠ LE PANNEAU C PORTE LA RÉPONSE : le gain existe depuis une spire publiée et pas
     # depuis une surface d'un tour. Sans les deux moitiés, le dessin ne dirait rien.
     vi = m["le_gain_vieillit"]
