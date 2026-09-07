@@ -87,7 +87,7 @@ def portee(erreurs: list[float], demi_feuille_um: float) -> int:
     return len(erreurs)
 
 
-def _lisser_la_nappe(neuf, masque, accorder_les_voisins):
+def _lisser_la_nappe(neuf, masque, accorder_les_voisins, demi: int = 1, passes: int = 1):
     """Le voisinage déployé, appliqué à la NAPPE canal par canal, à masque CONSTANT.
 
     ⚠⚠⚠ LE MASQUE NE BOUGE PAS. Un lissage qui écarterait les cellules dont le voisinage ne fait
@@ -98,17 +98,35 @@ def _lisser_la_nappe(neuf, masque, accorder_les_voisins):
 
     ⚠ Écrit une seule fois pour ses trois appelants. Deux copies de « lisser la nappe » seraient
     deux occasions de ne pas s'accorder sur ce que le repli fait.
+
+    ⚠⚠ `demi` et `passes` valent par défaut CE QUI TOURNE — la demi-largeur et le nombre
+    d'applications du voisinage déployé — de sorte que ne rien passer reproduit exactement la
+    mesure publiée. Ils existent pour qu'un balayage puisse les faire varier HORS ÉCHANTILLON,
+    jamais pour qu'un appelant choisisse le réglage qui l'arrange.
+
+    ⚠ Zéro passe rend la nappe intacte : c'est l'étage « brut », traité comme les autres.
+
+    ⚠⚠⚠ REND AUSSI LA PART DE CELLULES RÉELLEMENT LISSÉES, et ce n'est pas un détail : une
+    fenêtre large exige une majorité de voisins présents, donc plus elle s'élargit, plus elle
+    est REFUSÉE près des bords et plus les cellules gardent leur valeur brute. Sans ce nombre,
+    « la fenêtre 17×17 gagne » pourrait vouloir dire « elle ne s'applique presque plus », ce qui
+    est un tout autre énoncé — et c'est la faute que le balayage du cône de directions a déjà
+    payée, où l'optimum était un plancher du balayage et pas une propriété de la matière.
     """
-    assez = masque.copy()
-    canaux = []
-    for c in range(neuf.shape[2]):
-        v2, ok2 = accorder_les_voisins(neuf[:, :, c], masque)
-        canaux.append(v2)
-        assez &= ok2
-    pris = assez & masque
-    for c in range(neuf.shape[2]):
-        neuf[:, :, c] = np.where(pris & np.isfinite(canaux[c]), canaux[c], neuf[:, :, c])
-    return neuf
+    part = 1.0 if int(passes) > 0 else 0.0
+    for _ in range(max(0, int(passes))):
+        assez = masque.copy()
+        canaux = []
+        for c in range(neuf.shape[2]):
+            v2, ok2 = accorder_les_voisins(neuf[:, :, c], masque, demi=max(1, int(demi)))
+            canaux.append(v2)
+            assez &= ok2
+        pris = assez & masque
+        vus = int(masque.sum())
+        part = min(part, (int(pris.sum()) / vus) if vus else 0.0)
+        for c in range(neuf.shape[2]):
+            neuf[:, :, c] = np.where(pris & np.isfinite(canaux[c]), canaux[c], neuf[:, :, c])
+    return neuf, part
 
 
 def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
@@ -151,10 +169,12 @@ def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
         # pose sur un décalage de formes — ce qui est le bon échec, mais tardif.
         from la_lissite_de_la_feuille import rugosite_de_la_nappe  # noqa: PLC0415
 
+        part_lissee = 0.0
         neuf = np.full(grille.shape, np.nan)
         neuf[vivant] = prevu
         if nom == "rien_lisse":
-            neuf = _lisser_la_nappe(neuf, vivant, accorder_les_voisins)
+            neuf, part_lissee = _lisser_la_nappe(neuf, vivant, accorder_les_voisins,
+                                                 *reglage["lissage_nappe"])
             prevu = neuf[vivant]
         # ⚠⚠ LE PLANCHER DU BRAS, PAR CELLULE. Une distance à un nuage est 1-lipschitzienne :
         # un point à distance d du nuage, déplacé de L, ne peut pas être à moins de |d − L|.
@@ -164,7 +184,9 @@ def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
                     decalage=np.zeros(len(prevu)), depart_um=float(np.median(depart)),
                     plancher_um=float(np.median(np.abs(depart - pas_vx * voxel_um))),
                     glissement_um=0.0, glissement_max_um=0.0, rugosite_vx=0.0,
-                    rugosite_nappe_um=rugosite_de_la_nappe(neuf, vivant, voxel_um))
+                    rugosite_nappe_um=rugosite_de_la_nappe(neuf, vivant, voxel_um),
+                    part_lissee=round(part_lissee, 3),
+                    forme_grille=list(vivant.shape))
 
     t_gab = reglage["t_gab"]
     t_ligne = reglage["t_ligne"]
@@ -203,8 +225,10 @@ def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
     # DÉCALAGE d'UN pas ; ce qu'une marche abîme est la SURFACE sur laquelle le bras suivant
     # estime ses normales et lit son gabarit. Le voisinage employé est celui qui tourne — même
     # demi-largeur, même règle de majorité — donc ce marcheur n'ajoute aucun réglage.
+    part_lissee = 0.0
     if nom == LISSE:
-        neuf = _lisser_la_nappe(neuf, lisible, accorder_les_voisins)
+        neuf, part_lissee = _lisser_la_nappe(neuf, lisible, accorder_les_voisins,
+                                             *reglage["lissage_nappe"])
     pts = neuf[ou[:, 0], ou[:, 1]]
     # ⚠⚠ LE PLANCHER EST CALCULÉ SUR LE DÉPLACEMENT RÉELLEMENT SUBI, du point de départ au point
     # final, et non sur le pas nominal. Le raccrochage glisse le long de la ligne et le lissage
@@ -231,7 +255,8 @@ def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
                 glissement_um=float(np.nanmedian(np.abs(t_final))) * voxel_um,
                 glissement_max_um=borne,
                 rugosite_vx=rugosite(champ_t, lisible),
-                rugosite_nappe_um=rugosite_de_la_nappe(neuf, lisible, voxel_um))
+                rugosite_nappe_um=rugosite_de_la_nappe(neuf, lisible, voxel_um),
+                part_lissee=round(part_lissee, 3), forme_grille=list(lisible.shape))
 
 
 def sur_les_cellules_communes(a: list[dict], b: list[dict]) -> tuple[list, list, list]:
@@ -259,7 +284,9 @@ def sur_les_cellules_communes(a: list[dict], b: list[dict]) -> tuple[list, list,
 
 def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
             cote: float | None = None, bras_max: int = 8,
-            corpus: dict | None = None, volume=None, decalage_ancre: int = 0) -> dict:
+            corpus: dict | None = None, volume=None, decalage_ancre: int = 0,
+            lissage_nappe: tuple[int, int] = (1, 1),
+            marcheurs: tuple[str, ...] | None = None) -> dict:
     """Jusqu'où chaque marcheur va avant que son erreur ne dépasse la demi-feuille."""
     from le_pas_normal_atteint_la_spire import distance_a, normales  # noqa: PLC0415
     from le_raccrochage_a_la_matiere import (  # noqa: PLC0415
@@ -288,6 +315,7 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     centre = np.array(BOITE_CENTRE)
     lo, hi = centre - cote / 2, centre + cote / 2
     reglage = dict(minimum=minimum, pas_vx=pas_vx, voxel_um=voxel_um,
+                   lissage_nappe=tuple(lissage_nappe),
                    t_gab=np.arange(-demi_gab, demi_gab + 1e-9, 1.0),
                    t_ligne=np.arange(-(demi_vx + demi_gab), demi_vx + demi_gab + 1e-9, 1.0))
 
@@ -336,7 +364,15 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     rng = np.random.default_rng(graine)
     glissement_max = 0.0
     resultats: dict[str, list[dict]] = {}
-    for nom in MARCHEURS:
+    # ⚠⚠ RESTREINDRE LES MARCHEURS SERT UN BALAYAGE, PAS UN VERDICT. Un balayage de réglage n'a
+    # besoin que de la colonne qu'il balaie, et faire marcher les autres à chaque réglage
+    # coûterait des lectures de volume pour rien. Mais un résultat restreint ne porte plus les
+    # verdicts qui comparent les colonnes absentes : ils sont alors mis à None, jamais devinés.
+    voulus = tuple(MARCHEURS if marcheurs is None else marcheurs)
+    inconnus = [x for x in voulus if x not in MARCHEURS]
+    if inconnus:
+        raise RuntimeError(f"marcheur(s) inconnu(s) : {inconnus}")
+    for nom in voulus:
         grille, garde = grilles[ancre]
         bras = []
         for k, cible_rang in enumerate(atteignables, start=1):
@@ -380,11 +416,17 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
                              # froissée : ce sont deux grandeurs, et c'est la seconde que le
                              # bras suivant subit quand il estime ses normales.
                              rugosite_nappe_um=etat["rugosite_nappe_um"],
+                             # ⚠⚠⚠ LA PART DE NAPPE RÉELLEMENT LISSÉE : une fenêtre large est
+                             # REFUSÉE près des bords, donc « elle gagne » et « elle s'applique »
+                             # sont deux affirmations, et la seconde doit être publiée.
+                             part_lissee=etat["part_lissee"],
                              ou=np.argwhere(pas["garde"]).tolist()))
             grille, garde = etat["grille"], etat["garde"]
         resultats[nom] = bras
 
-    if not resultats["rien"]:
+    # ⚠ Un balayage peut ne demander qu'une colonne : la garde porte alors sur ce qui a été
+    # demandé, pas sur un marcheur qu'on n'a pas fait marcher.
+    if not any(resultats.values()):
         raise RuntimeError("aucun marcheur n'a pu faire son premier pas")
 
     # ⚠⚠⚠ UNE SECONDE LECTURE SUR UNE SEULE POPULATION : les cellules encore vivantes au
@@ -393,7 +435,7 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     # deux ensemble empêchent de lire une perte de couverture comme un gain de précision.
     commun = min((len(v) for v in resultats.values() if v), default=0)
     lignes = []
-    for nom in MARCHEURS:
+    for nom in voulus:
         bras = resultats[nom]
         erreurs = [b["erreur_um"] for b in bras]
         lignes.append(dict(
@@ -402,10 +444,12 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
             bras_faits=len(bras), bras=[{k: b[k] for k in ("bras", "vers", "cellules",
                                                            "erreur_um", "pas_reel_um",
                                                            "plancher_um", "glissement_um",
-                                                           "rugosite_vx", "rugosite_nappe_um")}
+                                                           "rugosite_vx", "rugosite_nappe_um",
+                                                           "part_lissee")}
                                        for b in bras],
             rugosites_vx=[b["rugosite_vx"] for b in bras],
             rugosites_nappe_um=[b["rugosite_nappe_um"] for b in bras],
+            parts_lissees=[b["part_lissee"] for b in bras],
             erreurs_um=erreurs,
             glissements_um=[b["glissement_um"] for b in bras],
             pas_reels_um=[b["pas_reel_um"] for b in bras],
@@ -422,8 +466,10 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
         # seconde donnerait au raccrochage un pouvoir qu'il n'a pas.
         glissement_maximal_um=round(glissement_max, 1),
         glissement_en_demi_feuilles=round(glissement_max / demi_feuille_um, 2),
+        lissage_nappe=list(reglage["lissage_nappe"]), marcheurs_parcourus=list(voulus),
+        forme_grille=list(grilles[ancre][1].shape),
         ancre=ancre, spires_visees=atteignables, bras_communs=commun,
-        marcheurs=list(MARCHEURS), lignes=lignes, bras_du_corpus=corpus_bras,
+        marcheurs=list(voulus), lignes=lignes, bras_du_corpus=corpus_bras,
         cout=vol.cache.cout() | dict(voxels_absents=vol.absents, reprises_reseau=vol.reprises))
 
     # ⭐⭐ COMBIEN DE BRAS LE CORPUS DEMANDE AU PAS NOMINAL, avant le premier qui demande tout
@@ -433,66 +479,70 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
                                        for b in corpus_bras], 1.0)
     r["bras_hors_du_pas_nominal"] = [b["bras"] for b in corpus_bras if not b["au_pas_nominal"]]
 
-    def trouver(nom: str) -> dict:
-        return next(x for x in r["lignes"] if x["marcheur"] == nom)
+    def trouver(nom: str) -> dict | None:
+        return next((x for x in r["lignes"] if x["marcheur"] == nom), None)
 
-    dep, rien, orc = trouver("raccroche"), trouver("rien"), trouver(BORNE)
-    r["portee_du_deploye"] = dep["portee"]
-    r["portee_sans_rien_faire"] = rien["portee"]
-    r["portee_de_loracle"] = orc["portee"]
-    r["portee_du_temoin"] = trouver(TEMOIN)["portee"]
-    lis = trouver(LISSE)
-    r["portee_de_la_nappe_lissee"] = lis["portee"]
+    def portee_de(nom: str):
+        x = trouver(nom)
+        return x["portee"] if x else None
+
+    def apparier(a: str, b: str):
+        # ⚠ Un écart entre une colonne présente et une colonne absente n'est pas zéro : il n'est
+        # pas calculable, et le publier à zéro serait affirmer que les deux se valent.
+        if a not in resultats or b not in resultats:
+            return None, None
+        ma, mb, nc = sur_les_cellules_communes(resultats[a], resultats[b])
+        return (ecart_apparie(ma, mb) if nc else None), nc
+
+    dep, rien = trouver("raccroche"), trouver("rien")
+    r["portee_du_deploye"] = portee_de("raccroche")
+    r["portee_sans_rien_faire"] = portee_de("rien")
+    r["portee_de_loracle"] = portee_de(BORNE)
+    r["portee_du_temoin"] = portee_de(TEMOIN)
+    r["portee_de_la_nappe_lissee"] = portee_de(LISSE)
     # ⚠⚠ MÊME POPULATION, DONC APPARIEMENT LÉGITIME : le lissage garde le masque du raccrochage
     # (une cellule dont le voisinage ne suffit pas garde sa valeur non lissée), donc les deux
     # colonnes portent sur les mêmes cellules bras par bras.
-    ml, md2, ncl = sur_les_cellules_communes(resultats[LISSE], resultats["raccroche"])
+    r["ecart_du_lissage_au_raccrochage"], ncl = apparier(LISSE, "raccroche")
     r["cellules_communes_lissage_raccrochage"] = ncl
-    r["ecart_du_lissage_au_raccrochage"] = ecart_apparie(ml, md2) if ncl else None
     r["le_lissage_de_la_nappe_aide"] = bool(
         r["ecart_du_lissage_au_raccrochage"] and tranche(r["ecart_du_lissage_au_raccrochage"]))
-    so = trouver(SORTIE)
-    r["portee_de_la_sortie_raccrochee"] = so["portee"]
-    ms, mr3, ncs = sur_les_cellules_communes(resultats[SORTIE], resultats["rien"])
+    r["portee_de_la_sortie_raccrochee"] = portee_de(SORTIE)
+    r["ecart_de_la_sortie_au_pas_normal"], ncs = apparier(SORTIE, "rien")
     r["cellules_communes_sortie_pas_normal"] = ncs
-    r["ecart_de_la_sortie_au_pas_normal"] = ecart_apparie(ms, mr3) if ncs else None
     # ⭐⭐⭐ LE VERDICT QUE CETTE TRANCHE POSE : séparer l'état de la sortie fait-il mieux que ne
     # rien faire, sur une marche ? Les deux sens sont publiés, comme partout ailleurs ici.
     r["la_sortie_raccrochee_bat_le_pas_normal"] = bool(
         r["ecart_de_la_sortie_au_pas_normal"] and tranche(r["ecart_de_la_sortie_au_pas_normal"]))
-    r["le_pas_normal_bat_la_sortie_raccrochee"] = bool(
-        ncs and tranche(ecart_apparie(mr3, ms)))
+    inv_s, _ = apparier("rien", SORTIE)
+    r["le_pas_normal_bat_la_sortie_raccrochee"] = bool(inv_s and tranche(inv_s))
     # ⭐⭐ LES DEUX COMPOSITIONS, chacune appariée à ce qu'elle prétend améliorer.
-    mrl, mr4, ncrl = sur_les_cellules_communes(resultats["rien_lisse"], resultats["rien"])
-    r["portee_du_pas_normal_lisse"] = trouver("rien_lisse")["portee"]
+    r["portee_du_pas_normal_lisse"] = portee_de("rien_lisse")
+    r["ecart_du_pas_normal_lisse"], ncrl = apparier("rien_lisse", "rien")
     r["cellules_communes_rien_lisse"] = ncrl
-    r["ecart_du_pas_normal_lisse"] = ecart_apparie(mrl, mr4) if ncrl else None
     r["le_lissage_aide_le_pas_normal"] = bool(
         r["ecart_du_pas_normal_lisse"] and tranche(r["ecart_du_pas_normal_lisse"]))
-    msl, mr5, ncsl = sur_les_cellules_communes(resultats["sortie_lisse"], resultats["rien"])
-    r["portee_de_la_sortie_lisse"] = trouver("sortie_lisse")["portee"]
+    r["portee_de_la_sortie_lisse"] = portee_de("sortie_lisse")
+    r["ecart_de_la_sortie_lisse_au_pas_normal"], ncsl = apparier("sortie_lisse", "rien")
     r["cellules_communes_sortie_lisse"] = ncsl
-    r["ecart_de_la_sortie_lisse_au_pas_normal"] = ecart_apparie(msl, mr5) if ncsl else None
     r["la_sortie_lisse_bat_le_pas_normal"] = bool(
         r["ecart_de_la_sortie_lisse_au_pas_normal"]
         and tranche(r["ecart_de_la_sortie_lisse_au_pas_normal"]))
-    ml2, mr2, ncr = sur_les_cellules_communes(resultats[LISSE], resultats["rien"])
+    r["ecart_du_lissage_au_pas_normal"], ncr = apparier(LISSE, "rien")
     r["cellules_communes_lissage_pas_normal"] = ncr
-    r["ecart_du_lissage_au_pas_normal"] = ecart_apparie(ml2, mr2) if ncr else None
     r["le_lissage_bat_le_pas_normal"] = bool(
         r["ecart_du_lissage_au_pas_normal"] and tranche(r["ecart_du_lissage_au_pas_normal"]))
-    r["le_pas_normal_bat_le_lissage"] = bool(
-        ncr and tranche(ecart_apparie(mr2, ml2)))
+    inv_l, _ = apparier("rien", LISSE)
+    r["le_pas_normal_bat_le_lissage"] = bool(inv_l and tranche(inv_l))
     # ⭐⭐⭐ LE VERDICT DU BUT : la marche déployée va-t-elle plus loin que le pas normal seul ?
-    r["le_raccrochage_porte_plus_loin"] = bool(dep["portee"] > rien["portee"])
+    r["le_raccrochage_porte_plus_loin"] = bool(
+        dep and rien and dep["portee"] > rien["portee"])
     r["le_raccrochage_porte_plus_loin_que_son_temoin"] = bool(
-        dep["portee"] > trouver(TEMOIN)["portee"])
+        dep and trouver(TEMOIN) and dep["portee"] > trouver(TEMOIN)["portee"])
     # ⚠⚠ ET L'ÉCART APPARIÉ BRAS PAR BRAS, sur les bras que les deux ont faits : une portée est
     # un entier, donc elle ne dit rien de la marge. L'écart dit de combien.
-    md, mr, nc = sur_les_cellules_communes(resultats["raccroche"], resultats["rien"])
-    n = len(nc)
+    r["ecart_au_pas_normal"], nc = apparier("raccroche", "rien")
     r["cellules_communes_par_bras"] = nc
-    r["ecart_au_pas_normal"] = ecart_apparie(md, mr) if n else None
     r["le_raccrochage_bat_le_pas_normal"] = bool(
         r["ecart_au_pas_normal"] and tranche(r["ecart_au_pas_normal"]))
     # ⚠⚠⚠ ET LA QUESTION SYMÉTRIQUE, POSÉE AVEC LE MÊME INSTRUMENT. `tranche` répond « y
@@ -500,13 +550,13 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     # deux se valent » : il dit « pas en faveur du premier ». Renverser l'appariement pose
     # l'autre moitié de la question, sans seuil ajouté et sans nouvel instrument — et sans
     # elle un raccrochage qui coûte se lirait comme un raccrochage qui n'apporte rien.
-    r["ecart_du_pas_normal"] = ecart_apparie(mr, md) if n else None
+    r["ecart_du_pas_normal"], _ = apparier("rien", "raccroche")
     r["le_pas_normal_bat_le_raccrochage"] = bool(
         r["ecart_du_pas_normal"] and tranche(r["ecart_du_pas_normal"]))
     # ⚠ La couverture perdue en chemin est un fait sur la marche, publié à côté de l'erreur.
-    r["cellules_au_premier_bras"] = dep["cellules_par_bras"][0] if dep["cellules_par_bras"] else 0
-    r["cellules_au_dernier_bras"] = (dep["cellules_par_bras"][-1]
-                                     if dep["cellules_par_bras"] else 0)
+    cpb = dep["cellules_par_bras"] if dep else []
+    r["cellules_au_premier_bras"] = cpb[0] if cpb else 0
+    r["cellules_au_dernier_bras"] = cpb[-1] if cpb else 0
     r["part_de_nappe_gardee"] = (
         round(r["cellules_au_dernier_bras"] / r["cellules_au_premier_bras"], 3)
         if r["cellules_au_premier_bras"] else None)
@@ -603,6 +653,21 @@ def verifier() -> int:
       all(x["rugosites_nappe_um"] and all(g is not None for g in x["rugosites_nappe_um"])
           for x in fab["lignes"]),
       str({x["marcheur"]: x["rugosites_nappe_um"][:3] for x in fab["lignes"]}))
+    # ⚠⚠⚠ « LA FENÊTRE GAGNE » ET « LA FENÊTRE S'APPLIQUE » SONT DEUX AFFIRMATIONS. Une fenêtre
+    # large exige une majorité de voisins présents, donc elle est refusée près des bords et les
+    # cellules y gardent leur valeur brute. Le contrôle exige que la part lissée soit publiée, et
+    # qu'elle DÉCROISSE quand la fenêtre s'élargit — sinon ce nombre ne mesure rien.
+    v("... la part de nappe réellement lissée est publiée",
+      all(0.0 <= g <= 1.0 for x in fab["lignes"] for g in x["parts_lissees"]),
+      str({x["marcheur"]: x["parts_lissees"][:3] for x in fab["lignes"]}))
+    parts = []
+    for d in (1, 2, 4):
+        w = mesurer(minimum=20, corpus=corpus_fabrique(), volume=volume_fabrique(g0),
+                    marcheurs=("rien_lisse",), lissage_nappe=(d, 1))
+        parts.append(w["lignes"][0]["parts_lissees"][0])
+    v("... et elle décroît quand la fenêtre s'élargit",
+      parts == sorted(parts, reverse=True) and parts[0] > parts[-1],
+      f"demi 1/2/4 → {parts} sur une grille {fab['forme_grille']}")
     # ⚠⚠ ET LE LISSAGE DE LA NAPPE DOIT RÉELLEMENT LA LISSER : si la rugosité de nappe du
     # marcheur lissé n'était pas plus basse que celle de son homologue brut, le lissage ne
     # ferait rien et tous les verdicts posés dessus seraient des coïncidences.

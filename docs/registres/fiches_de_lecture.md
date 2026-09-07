@@ -5518,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 4498
+- **lignes** : 4575
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -6036,6 +6036,40 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     le voisinage **déjà déployé** rend **3 à 9 µm** sur une marche, de façon constante, sur toutes
     les ancres essayées, sans **aucun** réglage. Que ça se traduise en spires dépend de la marge
     que l'ancre avait — une propriété de la **matière** à cet endroit, pas de la méthode.
+  - ⛔ **COMBIEN LISSER ? LE BALAYAGE TRANCHE ET N'AUTORISE POURTANT RIEN (2026-09-07,
+    `combien_lisser_la_nappe`, 17 contrôles, 5 ancres × 9 étages, `--cote 960`).** Le lissage
+    tourne avec le voisinage déployé (demi-largeur un, une passe) et ce réglage n'avait jamais été
+    balayé **sur une marche** — la tranche qui l'a balayé le faisait sur **un** pas, où la largeur
+    s'épuise à 3×3. Chaque ancre est jugée à l'étage que les **quatre autres** ont préféré
+    (`choisir_hors_echantillon`) : essayer neuf étages pour publier le meilleur, c'est publier le
+    hasard du meilleur tirage.
+  - ⚠⚠⚠ **PREMIÈRE FAUTE, ATTRAPÉE ET CORRIGÉE : l'optimum était AU BORD de ma famille.** La
+    première version s'arrêtait à `median_8` et l'optimum y est tombé exactement — donc un
+    **plancher de ce qu'on a essayé** et pas une propriété de la matière, la faute que le balayage
+    du cône de directions a déjà payée. Famille étendue à `median_16` / `median_32` ; l'optimum
+    est désormais **intérieur**, et un drapeau le publie.
+  - ⚠⚠ **Seconde précaution nécessaire : la part de nappe RÉELLEMENT lissée.** Une fenêtre large
+    exige une majorité de voisins présents, donc elle est **refusée** près des bords : 1,00 · 0,99
+    · 0,98 · 0,95 · **0,80** · **0,17** de `median_1` à `median_32`. Sans ce nombre, « la fenêtre
+    65×65 gagne » pourrait vouloir dire « elle ne s'applique presque plus » — et un contrôle exige
+    qu'un étage qui ne lisse rien coûte **exactement** ce que coûte le brut.
+  - ⚠⚠⚠ **Le résultat TRANCHE (-26.0 µm sur 4/5 ancres, intervalle [-32.1, -16.4])... et ce n'est pas la
+    question du but.** À l'ancre 4 — **la seule dont la marche va quelque part** — l'étage que les
+    autres lui donnent fait tomber sa portée de **5 à ZÉRO**. La cause est dans la définition du
+    coût : la **médiane des erreurs par bras** inclut les bras où la marche est **déjà perdue**.
+    Passer de 120 à 70 µm sur une marche perdue n'est pas un progrès, les deux sont au-delà de la
+    demi-feuille — donc un réglage choisi là-dessus est **choisi sur la qualité de ses échecs**.
+  - ⚠⚠ **Et le coût en BRAS ne discrimine RIEN sur ce matériau** : aux ancres 6, 7, 8 la portée est la
+    même à tous les étages, donc sa médiane ne sépare pas et son « choix » est le premier de la
+    liste. Limite de la **matière**, pas de l'instrument.
+  - ⛔ **Donc le balayage n'autorise PAS de changer le réglage déployé**, et la porte est **fermée
+    par défaut** dans le code : optimum non au bord **et** gain qui tranche **et** aucune ancre
+    dont la portée diminue. Un contrôle vérifie qu'une portée qui empire ferme la porte.
+  - ⭐⭐ **Ce qui reste, et c'est un fait à garder** : à l'ancre 4, `median_8` donne une portée de
+    **6** — le plafond du corpus, celui que la **borne** atteint. Une fenêtre large **peut** mener
+    un marcheur aveugle jusqu'à la borne, mais la largeur qui y arrive dépend de l'ancre (6 à
+    `median_8`, 0 à `median_16`) et hors échantillon on ne la trouve pas. Condition de la piste :
+    plus d'ancres dont la marche soit vivante, donc une boîte plus grande ou un objet moins troué.
   - ⭐⭐⭐ **La première piste neuve depuis sept tranches.** *« Quelle méthode fait le meilleur
     pas ? »* et *« quelle méthode va le plus loin ? »* ont des réponses **différentes** sur la même
     donnée. Trois conséquences, dans l'ordre où elles se testent : débrancher le raccrochage au
@@ -6640,8 +6674,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 3806 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 4498 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 3883 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 4575 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

@@ -1,0 +1,383 @@
+{
+  "etages": [
+    "brut",
+    "median_1",
+    "median_2",
+    "median_4",
+    "median_8",
+    "median_16",
+    "median_32",
+    "median_1_x2",
+    "median_1_x3"
+  ],
+  "reglages": [
+    [
+      0,
+      0
+    ],
+    [
+      1,
+      1
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      8,
+      1
+    ],
+    [
+      16,
+      1
+    ],
+    [
+      32,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ]
+  ],
+  "ancres": 5,
+  "lignes": [
+    {
+      "decalage": 0,
+      "ancre": 4,
+      "bras": 8,
+      "forme_grille": [
+        274,
+        201
+      ],
+      "couts_um": [
+        69.7,
+        63.0,
+        59.8,
+        49.3,
+        55.7,
+        101.3,
+        69.7,
+        62.0,
+        62.2
+      ],
+      "portees": [
+        4,
+        5,
+        5,
+        5,
+        6,
+        0,
+        4,
+        5,
+        5
+      ],
+      "parts_lissees": [
+        0.0,
+        0.998,
+        0.992,
+        0.979,
+        0.933,
+        0.774,
+        0.0,
+        0.998,
+        0.998
+      ],
+      "etage_choisi_en_bras": "brut",
+      "bras_perdus_hors_echantillon": 4,
+      "portee_hors_echantillon_en_bras": 4,
+      "etage_choisi_par_les_autres": "median_16",
+      "cout_hors_echantillon_um": 101.3,
+      "cout_deploye_um": 63.0,
+      "cout_brut_um": 69.7,
+      "portee_hors_echantillon": 0,
+      "portee_deployee": 5,
+      "portee_brute": 4
+    },
+    {
+      "decalage": 1,
+      "ancre": 5,
+      "bras": 8,
+      "forme_grille": [
+        208,
+        238
+      ],
+      "couts_um": [
+        120.0,
+        109.7,
+        100.0,
+        91.8,
+        83.7,
+        70.8,
+        100.6,
+        107.3,
+        106.0
+      ],
+      "portees": [
+        2,
+        2,
+        2,
+        2,
+        3,
+        4,
+        3,
+        2,
+        2
+      ],
+      "parts_lissees": [
+        0.0,
+        0.998,
+        0.996,
+        0.988,
+        0.956,
+        0.84,
+        0.343,
+        0.998,
+        0.998
+      ],
+      "etage_choisi_en_bras": "brut",
+      "bras_perdus_hors_echantillon": 6,
+      "portee_hors_echantillon_en_bras": 2,
+      "etage_choisi_par_les_autres": "median_8",
+      "cout_hors_echantillon_um": 83.7,
+      "cout_deploye_um": 109.7,
+      "cout_brut_um": 120.0,
+      "portee_hors_echantillon": 3,
+      "portee_deployee": 2,
+      "portee_brute": 2
+    },
+    {
+      "decalage": 2,
+      "ancre": 6,
+      "bras": 7,
+      "forme_grille": [
+        197,
+        195
+      ],
+      "couts_um": [
+        119.5,
+        113.6,
+        115.3,
+        104.2,
+        70.1,
+        42.8,
+        104.8,
+        113.7,
+        109.0
+      ],
+      "portees": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "parts_lissees": [
+        0.0,
+        0.999,
+        0.994,
+        0.983,
+        0.943,
+        0.8,
+        0.168,
+        0.999,
+        0.999
+      ],
+      "etage_choisi_en_bras": "brut",
+      "bras_perdus_hors_echantillon": 4,
+      "portee_hors_echantillon_en_bras": 3,
+      "etage_choisi_par_les_autres": "median_16",
+      "cout_hors_echantillon_um": 42.8,
+      "cout_deploye_um": 113.6,
+      "cout_brut_um": 119.5,
+      "portee_hors_echantillon": 3,
+      "portee_deployee": 3,
+      "portee_brute": 3
+    },
+    {
+      "decalage": 3,
+      "ancre": 7,
+      "bras": 6,
+      "forme_grille": [
+        208,
+        185
+      ],
+      "couts_um": [
+        116.2,
+        110.2,
+        106.3,
+        96.8,
+        67.5,
+        72.1,
+        112.2,
+        107.1,
+        105.9
+      ],
+      "portees": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "parts_lissees": [
+        0.0,
+        0.998,
+        0.991,
+        0.985,
+        0.949,
+        0.803,
+        0.103,
+        0.998,
+        0.998
+      ],
+      "etage_choisi_en_bras": "brut",
+      "bras_perdus_hors_echantillon": 4,
+      "portee_hors_echantillon_en_bras": 2,
+      "etage_choisi_par_les_autres": "median_16",
+      "cout_hors_echantillon_um": 72.1,
+      "cout_deploye_um": 110.2,
+      "cout_brut_um": 116.2,
+      "portee_hors_echantillon": 2,
+      "portee_deployee": 2,
+      "portee_brute": 2
+    },
+    {
+      "decalage": 4,
+      "ancre": 8,
+      "bras": 5,
+      "forme_grille": [
+        204,
+        195
+      ],
+      "couts_um": [
+        124.7,
+        105.9,
+        109.8,
+        106.7,
+        99.2,
+        72.5,
+        123.9,
+        102.7,
+        103.4
+      ],
+      "portees": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "parts_lissees": [
+        0.0,
+        0.998,
+        0.993,
+        0.984,
+        0.952,
+        0.833,
+        0.317,
+        0.998,
+        0.998
+      ],
+      "etage_choisi_en_bras": "brut",
+      "bras_perdus_hors_echantillon": 4,
+      "portee_hors_echantillon_en_bras": 1,
+      "etage_choisi_par_les_autres": "median_8",
+      "cout_hors_echantillon_um": 99.2,
+      "cout_deploye_um": 105.9,
+      "cout_brut_um": 124.7,
+      "portee_hors_echantillon": 1,
+      "portee_deployee": 1,
+      "portee_brute": 1
+    }
+  ],
+  "ancres_refusees": [],
+  "etage_ajuste_sur_tout": "median_8",
+  "etage_ajuste_sur_tout_en_bras": "brut",
+  "etages_choisis_en_bras": [
+    "brut",
+    "brut",
+    "brut",
+    "brut",
+    "brut"
+  ],
+  "ancres_dont_la_portee_ne_bouge_jamais": [
+    2,
+    3,
+    4
+  ],
+  "loptimum_est_au_bord": false,
+  "etages_au_bord": [],
+  "parts_lissees_par_etage": [
+    0.0,
+    0.998,
+    0.993,
+    0.984,
+    0.949,
+    0.803,
+    0.168,
+    0.998,
+    0.998
+  ],
+  "etages_choisis_par_les_autres": [
+    "median_16",
+    "median_8",
+    "median_16",
+    "median_16",
+    "median_8"
+  ],
+  "ecart_au_deploye": {
+    "ecart_median_um": -26.0,
+    "intervalle_um": [
+      -32.1,
+      -16.4
+    ],
+    "pas_ameliores": 4,
+    "pas": 5
+  },
+  "le_reglage_bat_le_deploye": true,
+  "ecart_au_brut": {
+    "ecart_median_um": -36.3,
+    "intervalle_um": [
+      -40.2,
+      -30.9
+    ],
+    "pas_ameliores": 4,
+    "pas": 5
+  },
+  "le_reglage_bat_le_brut": true,
+  "ecart_du_deploye_au_brut": {
+    "ecart_median_um": -6.7,
+    "intervalle_um": [
+      -8.5,
+      -6.4
+    ],
+    "pas_ameliores": 5,
+    "pas": 5
+  },
+  "le_deploye_bat_le_brut": true,
+  "ancres_dont_la_portee_empire": [
+    0
+  ],
+  "le_balayage_autorise_un_changement": false
+}

@@ -14,6 +14,24 @@
   "demi_feuille_um": 67.75,
   "glissement_maximal_um": 67.8,
   "glissement_en_demi_feuilles": 1.0,
+  "lissage_nappe": [
+    1,
+    1
+  ],
+  "marcheurs_parcourus": [
+    "rien",
+    "rien_lisse",
+    "raccroche",
+    "raccroche_lisse",
+    "sortie_raccrochee",
+    "sortie_lisse",
+    "melange",
+    "oracle"
+  ],
+  "forme_grille": [
+    274,
+    201
+  ],
   "ancre": 4,
   "spires_visees": [
     5,
@@ -53,7 +71,8 @@
           "plancher_um": 37.5,
           "glissement_um": 0.0,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.0
         },
         {
           "bras": 2,
@@ -64,7 +83,8 @@
           "plancher_um": 44.8,
           "glissement_um": 0.0,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.0
         },
         {
           "bras": 3,
@@ -75,7 +95,8 @@
           "plancher_um": 46.2,
           "glissement_um": 0.0,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 0.3
+          "rugosite_nappe_um": 0.3,
+          "part_lissee": 0.0
         },
         {
           "bras": 4,
@@ -86,7 +107,8 @@
           "plancher_um": 62.0,
           "glissement_um": 0.0,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 1.24
+          "rugosite_nappe_um": 1.24,
+          "part_lissee": 0.0
         },
         {
           "bras": 5,
@@ -97,7 +119,8 @@
           "plancher_um": 62.4,
           "glissement_um": 0.0,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 2.83
+          "rugosite_nappe_um": 2.83,
+          "part_lissee": 0.0
         },
         {
           "bras": 6,
@@ -108,7 +131,8 @@
           "plancher_um": 76.5,
           "glissement_um": 0.0,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 5.11
+          "rugosite_nappe_um": 5.11,
+          "part_lissee": 0.0
         },
         {
           "bras": 7,
@@ -119,7 +143,8 @@
           "plancher_um": 880.8,
           "glissement_um": 0.0,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 9.93
+          "rugosite_nappe_um": 9.93,
+          "part_lissee": 0.0
         },
         {
           "bras": 8,
@@ -130,7 +155,8 @@
           "plancher_um": 74.9,
           "glissement_um": 0.0,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 19.87
+          "rugosite_nappe_um": 19.87,
+          "part_lissee": 0.0
         }
       ],
       "rugosites_vx": [
@@ -152,6 +178,16 @@
         5.11,
         9.93,
         19.87
+      ],
+      "parts_lissees": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ],
       "erreurs_um": [
         44.0,
@@ -221,7 +257,8 @@
           "plancher_um": 37.5,
           "glissement_um": 0.0,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.998
         },
         {
           "bras": 2,
@@ -232,7 +269,8 @@
           "plancher_um": 44.9,
           "glissement_um": 0.0,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.998
         },
         {
           "bras": 3,
@@ -243,7 +281,8 @@
           "plancher_um": 45.4,
           "glissement_um": 0.0,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.998
         },
         {
           "bras": 4,
@@ -254,7 +293,8 @@
           "plancher_um": 61.3,
           "glissement_um": 0.0,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.998
         },
         {
           "bras": 5,
@@ -265,7 +305,8 @@
           "plancher_um": 59.0,
           "glissement_um": 0.0,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.997
         },
         {
           "bras": 6,
@@ -276,7 +317,8 @@
           "plancher_um": 72.0,
           "glissement_um": 0.0,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.998
         },
         {
           "bras": 7,
@@ -287,7 +329,8 @@
           "plancher_um": 859.6,
           "glissement_um": 0.0,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 0.15
+          "rugosite_nappe_um": 0.15,
+          "part_lissee": 0.997
         },
         {
           "bras": 8,
@@ -298,7 +341,8 @@
           "plancher_um": 73.1,
           "glissement_um": 0.0,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 1.9
+          "rugosite_nappe_um": 1.9,
+          "part_lissee": 0.997
         }
       ],
       "rugosites_vx": [
@@ -320,6 +364,16 @@
         0.0,
         0.15,
         1.9
+      ],
+      "parts_lissees": [
+        0.998,
+        0.998,
+        0.998,
+        0.998,
+        0.997,
+        0.998,
+        0.997,
+        0.997
       ],
       "erreurs_um": [
         44.4,
@@ -389,7 +443,8 @@
           "plancher_um": 27.0,
           "glissement_um": 21.7,
           "rugosite_vx": 0.34,
-          "rugosite_nappe_um": 2.34
+          "rugosite_nappe_um": 2.34,
+          "part_lissee": 0.0
         },
         {
           "bras": 2,
@@ -400,7 +455,8 @@
           "plancher_um": 35.6,
           "glissement_um": 24.5,
           "rugosite_vx": 0.57,
-          "rugosite_nappe_um": 15.24
+          "rugosite_nappe_um": 15.24,
+          "part_lissee": 0.0
         },
         {
           "bras": 3,
@@ -411,7 +467,8 @@
           "plancher_um": 50.9,
           "glissement_um": 18.6,
           "rugosite_vx": 0.81,
-          "rugosite_nappe_um": 49.59
+          "rugosite_nappe_um": 49.59,
+          "part_lissee": 0.0
         },
         {
           "bras": 4,
@@ -422,7 +479,8 @@
           "plancher_um": 75.8,
           "glissement_um": 19.4,
           "rugosite_vx": 1.48,
-          "rugosite_nappe_um": 118.48
+          "rugosite_nappe_um": 118.48,
+          "part_lissee": 0.0
         },
         {
           "bras": 5,
@@ -433,7 +491,8 @@
           "plancher_um": 107.7,
           "glissement_um": 17.6,
           "rugosite_vx": 2.01,
-          "rugosite_nappe_um": 199.87
+          "rugosite_nappe_um": 199.87,
+          "part_lissee": 0.0
         },
         {
           "bras": 6,
@@ -444,7 +503,8 @@
           "plancher_um": 150.4,
           "glissement_um": 16.5,
           "rugosite_vx": 1.95,
-          "rugosite_nappe_um": 151.81
+          "rugosite_nappe_um": 151.81,
+          "part_lissee": 0.0
         },
         {
           "bras": 7,
@@ -455,7 +515,8 @@
           "plancher_um": 931.6,
           "glissement_um": 14.7,
           "rugosite_vx": 1.79,
-          "rugosite_nappe_um": 212.05
+          "rugosite_nappe_um": 212.05,
+          "part_lissee": 0.0
         },
         {
           "bras": 8,
@@ -466,7 +527,8 @@
           "plancher_um": 368.9,
           "glissement_um": 14.2,
           "rugosite_vx": 1.84,
-          "rugosite_nappe_um": 293.99
+          "rugosite_nappe_um": 293.99,
+          "part_lissee": 0.0
         }
       ],
       "rugosites_vx": [
@@ -488,6 +550,16 @@
         151.81,
         212.05,
         293.99
+      ],
+      "parts_lissees": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ],
       "erreurs_um": [
         34.7,
@@ -557,7 +629,8 @@
           "plancher_um": 30.0,
           "glissement_um": 21.7,
           "rugosite_vx": 0.34,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.998
         },
         {
           "bras": 2,
@@ -568,7 +641,8 @@
           "plancher_um": 34.2,
           "glissement_um": 24.3,
           "rugosite_vx": 0.48,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.998
         },
         {
           "bras": 3,
@@ -579,7 +653,8 @@
           "plancher_um": 45.1,
           "glissement_um": 17.8,
           "rugosite_vx": 0.83,
-          "rugosite_nappe_um": 3.66
+          "rugosite_nappe_um": 3.66,
+          "part_lissee": 0.998
         },
         {
           "bras": 4,
@@ -590,7 +665,8 @@
           "plancher_um": 61.2,
           "glissement_um": 20.2,
           "rugosite_vx": 1.06,
-          "rugosite_nappe_um": 8.68
+          "rugosite_nappe_um": 8.68,
+          "part_lissee": 0.998
         },
         {
           "bras": 5,
@@ -601,7 +677,8 @@
           "plancher_um": 80.6,
           "glissement_um": 15.7,
           "rugosite_vx": 1.78,
-          "rugosite_nappe_um": 16.26
+          "rugosite_nappe_um": 16.26,
+          "part_lissee": 0.997
         },
         {
           "bras": 6,
@@ -612,7 +689,8 @@
           "plancher_um": 79.8,
           "glissement_um": 16.0,
           "rugosite_vx": 1.22,
-          "rugosite_nappe_um": 23.34
+          "rugosite_nappe_um": 23.34,
+          "part_lissee": 0.995
         },
         {
           "bras": 7,
@@ -623,7 +701,8 @@
           "plancher_um": 848.5,
           "glissement_um": 15.1,
           "rugosite_vx": 2.0,
-          "rugosite_nappe_um": 28.28
+          "rugosite_nappe_um": 28.28,
+          "part_lissee": 0.996
         },
         {
           "bras": 8,
@@ -634,7 +713,8 @@
           "plancher_um": 262.8,
           "glissement_um": 15.2,
           "rugosite_vx": 1.75,
-          "rugosite_nappe_um": 34.08
+          "rugosite_nappe_um": 34.08,
+          "part_lissee": 0.996
         }
       ],
       "rugosites_vx": [
@@ -656,6 +736,16 @@
         23.34,
         28.28,
         34.08
+      ],
+      "parts_lissees": [
+        0.998,
+        0.998,
+        0.998,
+        0.998,
+        0.997,
+        0.995,
+        0.996,
+        0.996
       ],
       "erreurs_um": [
         36.6,
@@ -725,7 +815,8 @@
           "plancher_um": 27.0,
           "glissement_um": 21.7,
           "rugosite_vx": 0.34,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.0
         },
         {
           "bras": 2,
@@ -736,7 +827,8 @@
           "plancher_um": 45.8,
           "glissement_um": 29.1,
           "rugosite_vx": 0.46,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.0
         },
         {
           "bras": 3,
@@ -747,7 +839,8 @@
           "plancher_um": 52.7,
           "glissement_um": 23.2,
           "rugosite_vx": 0.56,
-          "rugosite_nappe_um": 0.3
+          "rugosite_nappe_um": 0.3,
+          "part_lissee": 0.0
         },
         {
           "bras": 4,
@@ -758,7 +851,8 @@
           "plancher_um": 58.5,
           "glissement_um": 22.0,
           "rugosite_vx": 0.71,
-          "rugosite_nappe_um": 1.24
+          "rugosite_nappe_um": 1.24,
+          "part_lissee": 0.0
         },
         {
           "bras": 5,
@@ -769,7 +863,8 @@
           "plancher_um": 67.8,
           "glissement_um": 19.9,
           "rugosite_vx": 0.92,
-          "rugosite_nappe_um": 2.83
+          "rugosite_nappe_um": 2.83,
+          "part_lissee": 0.0
         },
         {
           "bras": 6,
@@ -780,7 +875,8 @@
           "plancher_um": 73.1,
           "glissement_um": 18.3,
           "rugosite_vx": 1.19,
-          "rugosite_nappe_um": 5.11
+          "rugosite_nappe_um": 5.11,
+          "part_lissee": 0.0
         },
         {
           "bras": 7,
@@ -791,7 +887,8 @@
           "plancher_um": 875.3,
           "glissement_um": 18.2,
           "rugosite_vx": 1.6,
-          "rugosite_nappe_um": 9.93
+          "rugosite_nappe_um": 9.93,
+          "part_lissee": 0.0
         },
         {
           "bras": 8,
@@ -802,7 +899,8 @@
           "plancher_um": 77.3,
           "glissement_um": 18.9,
           "rugosite_vx": 1.15,
-          "rugosite_nappe_um": 19.87
+          "rugosite_nappe_um": 19.87,
+          "part_lissee": 0.0
         }
       ],
       "rugosites_vx": [
@@ -824,6 +922,16 @@
         5.11,
         9.93,
         19.87
+      ],
+      "parts_lissees": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ],
       "erreurs_um": [
         34.7,
@@ -893,7 +1001,8 @@
           "plancher_um": 27.0,
           "glissement_um": 21.7,
           "rugosite_vx": 0.34,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.998
         },
         {
           "bras": 2,
@@ -904,7 +1013,8 @@
           "plancher_um": 44.2,
           "glissement_um": 29.0,
           "rugosite_vx": 0.46,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.998
         },
         {
           "bras": 3,
@@ -915,7 +1025,8 @@
           "plancher_um": 53.3,
           "glissement_um": 23.2,
           "rugosite_vx": 0.54,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.998
         },
         {
           "bras": 4,
@@ -926,7 +1037,8 @@
           "plancher_um": 57.0,
           "glissement_um": 22.9,
           "rugosite_vx": 0.44,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.998
         },
         {
           "bras": 5,
@@ -937,7 +1049,8 @@
           "plancher_um": 72.9,
           "glissement_um": 26.3,
           "rugosite_vx": 1.06,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.997
         },
         {
           "bras": 6,
@@ -948,7 +1061,8 @@
           "plancher_um": 70.0,
           "glissement_um": 22.8,
           "rugosite_vx": 1.15,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.998
         },
         {
           "bras": 7,
@@ -959,7 +1073,8 @@
           "plancher_um": 854.9,
           "glissement_um": 17.6,
           "rugosite_vx": 1.23,
-          "rugosite_nappe_um": 0.15
+          "rugosite_nappe_um": 0.15,
+          "part_lissee": 0.997
         },
         {
           "bras": 8,
@@ -970,7 +1085,8 @@
           "plancher_um": 77.8,
           "glissement_um": 20.4,
           "rugosite_vx": 1.66,
-          "rugosite_nappe_um": 1.9
+          "rugosite_nappe_um": 1.9,
+          "part_lissee": 0.997
         }
       ],
       "rugosites_vx": [
@@ -992,6 +1108,16 @@
         0.0,
         0.15,
         1.9
+      ],
+      "parts_lissees": [
+        0.998,
+        0.998,
+        0.998,
+        0.998,
+        0.997,
+        0.998,
+        0.997,
+        0.997
       ],
       "erreurs_um": [
         34.7,
@@ -1061,7 +1187,8 @@
           "plancher_um": 58.8,
           "glissement_um": 28.0,
           "rugosite_vx": 0.57,
-          "rugosite_nappe_um": 3.8
+          "rugosite_nappe_um": 3.8,
+          "part_lissee": 0.0
         },
         {
           "bras": 2,
@@ -1072,7 +1199,8 @@
           "plancher_um": 57.3,
           "glissement_um": 17.2,
           "rugosite_vx": 1.13,
-          "rugosite_nappe_um": 23.36
+          "rugosite_nappe_um": 23.36,
+          "part_lissee": 0.0
         },
         {
           "bras": 3,
@@ -1083,7 +1211,8 @@
           "plancher_um": 59.8,
           "glissement_um": 17.5,
           "rugosite_vx": 1.58,
-          "rugosite_nappe_um": 79.34
+          "rugosite_nappe_um": 79.34,
+          "part_lissee": 0.0
         },
         {
           "bras": 4,
@@ -1094,7 +1223,8 @@
           "plancher_um": 80.1,
           "glissement_um": 16.2,
           "rugosite_vx": 1.7,
-          "rugosite_nappe_um": 163.12
+          "rugosite_nappe_um": 163.12,
+          "part_lissee": 0.0
         },
         {
           "bras": 5,
@@ -1105,7 +1235,8 @@
           "plancher_um": 131.3,
           "glissement_um": 15.1,
           "rugosite_vx": 1.56,
-          "rugosite_nappe_um": 249.4
+          "rugosite_nappe_um": 249.4,
+          "part_lissee": 0.0
         },
         {
           "bras": 6,
@@ -1116,7 +1247,8 @@
           "plancher_um": 213.4,
           "glissement_um": 14.9,
           "rugosite_vx": 1.64,
-          "rugosite_nappe_um": 189.73
+          "rugosite_nappe_um": 189.73,
+          "part_lissee": 0.0
         },
         {
           "bras": 7,
@@ -1127,7 +1259,8 @@
           "plancher_um": 1006.4,
           "glissement_um": 14.7,
           "rugosite_vx": 1.56,
-          "rugosite_nappe_um": 143.85
+          "rugosite_nappe_um": 143.85,
+          "part_lissee": 0.0
         },
         {
           "bras": 8,
@@ -1138,7 +1271,8 @@
           "plancher_um": 481.6,
           "glissement_um": 15.1,
           "rugosite_vx": 2.08,
-          "rugosite_nappe_um": 205.56
+          "rugosite_nappe_um": 205.56,
+          "part_lissee": 0.0
         }
       ],
       "rugosites_vx": [
@@ -1160,6 +1294,16 @@
         189.73,
         143.85,
         205.56
+      ],
+      "parts_lissees": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ],
       "erreurs_um": [
         62.4,
@@ -1229,7 +1373,8 @@
           "plancher_um": 3.5,
           "glissement_um": 40.8,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 0.0
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.0
         },
         {
           "bras": 2,
@@ -1240,7 +1385,8 @@
           "plancher_um": 1.9,
           "glissement_um": 30.1,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 0.48
+          "rugosite_nappe_um": 0.48,
+          "part_lissee": 0.0
         },
         {
           "bras": 3,
@@ -1251,7 +1397,8 @@
           "plancher_um": 3.1,
           "glissement_um": 34.5,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 2.66
+          "rugosite_nappe_um": 2.66,
+          "part_lissee": 0.0
         },
         {
           "bras": 4,
@@ -1262,7 +1409,8 @@
           "plancher_um": 3.0,
           "glissement_um": 30.1,
           "rugosite_vx": 1.0,
-          "rugosite_nappe_um": 5.88
+          "rugosite_nappe_um": 5.88,
+          "part_lissee": 0.0
         },
         {
           "bras": 5,
@@ -1273,7 +1421,8 @@
           "plancher_um": 3.2,
           "glissement_um": 36.7,
           "rugosite_vx": 1.0,
-          "rugosite_nappe_um": 10.73
+          "rugosite_nappe_um": 10.73,
+          "part_lissee": 0.0
         },
         {
           "bras": 6,
@@ -1284,7 +1433,8 @@
           "plancher_um": 12.3,
           "glissement_um": 67.4,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 18.07
+          "rugosite_nappe_um": 18.07,
+          "part_lissee": 0.0
         },
         {
           "bras": 7,
@@ -1295,7 +1445,8 @@
           "plancher_um": 734.7,
           "glissement_um": 67.4,
           "rugosite_vx": 0.0,
-          "rugosite_nappe_um": 51.28
+          "rugosite_nappe_um": 51.28,
+          "part_lissee": 0.0
         },
         {
           "bras": 8,
@@ -1306,7 +1457,8 @@
           "plancher_um": 49.4,
           "glissement_um": 67.4,
           "rugosite_vx": 1.0,
-          "rugosite_nappe_um": 114.07
+          "rugosite_nappe_um": 114.07,
+          "part_lissee": 0.0
         }
       ],
       "rugosites_vx": [
@@ -1328,6 +1480,16 @@
         18.07,
         51.28,
         114.07
+      ],
+      "parts_lissees": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ],
       "erreurs_um": [
         19.9,
@@ -1449,8 +1611,8 @@
     }
   ],
   "cout": {
-    "blocs_telecharges": 3,
-    "mebioctets": 6.0,
+    "blocs_telecharges": 0,
+    "mebioctets": 0.0,
     "blocs_en_memoire": 492,
     "voxels_absents": 0,
     "reprises_reseau": 0
@@ -1464,6 +1626,15 @@
   "portee_de_loracle": 6,
   "portee_du_temoin": 2,
   "portee_de_la_nappe_lissee": 3,
+  "ecart_du_lissage_au_raccrochage": {
+    "ecart_median_um": -65.9,
+    "intervalle_um": [
+      -85.9,
+      -45.9
+    ],
+    "pas_ameliores": 7,
+    "pas": 8
+  },
   "cellules_communes_lissage_raccrochage": [
     1805,
     1647,
@@ -1474,17 +1645,17 @@
     956,
     841
   ],
-  "ecart_du_lissage_au_raccrochage": {
-    "ecart_median_um": -65.9,
-    "intervalle_um": [
-      -85.9,
-      -45.9
-    ],
-    "pas_ameliores": 7,
-    "pas": 8
-  },
   "le_lissage_de_la_nappe_aide": true,
   "portee_de_la_sortie_raccrochee": 4,
+  "ecart_de_la_sortie_au_pas_normal": {
+    "ecart_median_um": -0.9,
+    "intervalle_um": [
+      -1.1,
+      -0.7
+    ],
+    "pas_ameliores": 5,
+    "pas": 8
+  },
   "cellules_communes_sortie_pas_normal": [
     1805,
     1647,
@@ -1495,18 +1666,18 @@
     977,
     864
   ],
-  "ecart_de_la_sortie_au_pas_normal": {
-    "ecart_median_um": -0.9,
-    "intervalle_um": [
-      -1.1,
-      -0.7
-    ],
-    "pas_ameliores": 5,
-    "pas": 8
-  },
   "la_sortie_raccrochee_bat_le_pas_normal": true,
   "le_pas_normal_bat_la_sortie_raccrochee": false,
   "portee_du_pas_normal_lisse": 5,
+  "ecart_du_pas_normal_lisse": {
+    "ecart_median_um": -6.7,
+    "intervalle_um": [
+      -11.0,
+      -2.4
+    ],
+    "pas_ameliores": 7,
+    "pas": 8
+  },
   "cellules_communes_rien_lisse": [
     1805,
     1647,
@@ -1517,17 +1688,17 @@
     977,
     864
   ],
-  "ecart_du_pas_normal_lisse": {
-    "ecart_median_um": -6.7,
-    "intervalle_um": [
-      -11.0,
-      -2.4
-    ],
-    "pas_ameliores": 7,
-    "pas": 8
-  },
   "le_lissage_aide_le_pas_normal": true,
   "portee_de_la_sortie_lisse": 4,
+  "ecart_de_la_sortie_lisse_au_pas_normal": {
+    "ecart_median_um": -6.0,
+    "intervalle_um": [
+      -9.3,
+      -2.7
+    ],
+    "pas_ameliores": 5,
+    "pas": 8
+  },
   "cellules_communes_sortie_lisse": [
     1805,
     1647,
@@ -1538,16 +1709,16 @@
     977,
     864
   ],
-  "ecart_de_la_sortie_lisse_au_pas_normal": {
-    "ecart_median_um": -6.0,
+  "la_sortie_lisse_bat_le_pas_normal": true,
+  "ecart_du_lissage_au_pas_normal": {
+    "ecart_median_um": 3.3,
     "intervalle_um": [
-      -9.3,
-      -2.7
+      -0.6,
+      7.2
     ],
-    "pas_ameliores": 5,
+    "pas_ameliores": 4,
     "pas": 8
   },
-  "la_sortie_lisse_bat_le_pas_normal": true,
   "cellules_communes_lissage_pas_normal": [
     1805,
     1647,
@@ -1558,19 +1729,19 @@
     956,
     841
   ],
-  "ecart_du_lissage_au_pas_normal": {
-    "ecart_median_um": 3.3,
-    "intervalle_um": [
-      -0.6,
-      7.2
-    ],
-    "pas_ameliores": 4,
-    "pas": 8
-  },
   "le_lissage_bat_le_pas_normal": false,
   "le_pas_normal_bat_le_lissage": false,
   "le_raccrochage_porte_plus_loin": false,
   "le_raccrochage_porte_plus_loin_que_son_temoin": false,
+  "ecart_au_pas_normal": {
+    "ecart_median_um": 52.0,
+    "intervalle_um": [
+      50.7,
+      53.2
+    ],
+    "pas_ameliores": 2,
+    "pas": 8
+  },
   "cellules_communes_par_bras": [
     1805,
     1647,
@@ -1581,15 +1752,6 @@
     977,
     864
   ],
-  "ecart_au_pas_normal": {
-    "ecart_median_um": 52.0,
-    "intervalle_um": [
-      50.7,
-      53.2
-    ],
-    "pas_ameliores": 2,
-    "pas": 8
-  },
   "le_raccrochage_bat_le_pas_normal": false,
   "ecart_du_pas_normal": {
     "ecart_median_um": -52.0,

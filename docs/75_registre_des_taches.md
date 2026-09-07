@@ -3709,6 +3709,83 @@ portée ne dépasse ce que le corpus autorise à son ancre.
 > traduise en spires supplémentaires dépend de la marge que l'ancre avait, ce qui est une
 > propriété de la **matière** à cet endroit et pas de la méthode.
 
+##### ⛔ COMBIEN LISSER ? Le balayage TRANCHE et n'autorise pourtant RIEN
+
+> Mesure : `src/nappe/combien_lisser_la_nappe.py` (17 contrôles) →
+> `docs/mesures/combien_lisser_la_nappe.json`. Figure :
+> `src/figures/figure_combien_lisser_la_nappe.py` (11 contrôles), le 2026-09-07.
+>
+> ```bash
+> uv run python src/nappe/combien_lisser_la_nappe.py --cote 960 --ancres 5 \
+>     --json docs/mesures/combien_lisser_la_nappe.json
+> uv run python src/figures/figure_combien_lisser_la_nappe.py \
+>     --sortie docs/images/75_combien_lisser_la_nappe.png
+> ```
+
+⚠⚠⚠ **Pourquoi ce balayage, et pourquoi il devait être hors échantillon.** Le lissage de la nappe
+tourne avec le voisinage **déployé** — demi-largeur un, une passe — et ce réglage n'avait jamais
+été balayé **sur une marche**. La tranche qui l'a balayé le faisait sur **un** pas, où elle a
+conclu que la largeur s'épuise à 3×3 ; une marche est un autre régime. Et essayer neuf étages
+pour publier le meilleur, c'est publier le hasard du meilleur tirage : chaque ancre est donc
+jugée à l'étage que les **quatre autres** ont préféré, avec `choisir_hors_echantillon`.
+
+![combien faut-il lisser la nappe](images/75_combien_lisser_la_nappe.png)
+
+| ancre | brut | m1 | m2 | m4 | m8 | m16 | m32 | m1×2 | m1×3 | choisi par les autres | portée |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|
+| 4 | 69.7 | 63.0 | 59.8 | 49.3 | 55.7 | 101.3 | 69.7 | 62.0 | 62.2 | **median_16** | 5 → **0** |
+| 5 | 120.0 | 109.7 | 100.0 | 91.8 | 83.7 | 70.8 | 100.6 | 107.3 | 106.0 | **median_8** | 2 → **3** |
+| 6 | 119.5 | 113.6 | 115.3 | 104.2 | 70.1 | 42.8 | 104.8 | 113.7 | 109.0 | **median_16** | 3 → **3** |
+| 7 | 116.2 | 110.2 | 106.3 | 96.8 | 67.5 | 72.1 | 112.2 | 107.1 | 105.9 | **median_16** | 2 → **2** |
+| 8 | 124.7 | 105.9 | 109.8 | 106.7 | 99.2 | 72.5 | 123.9 | 102.7 | 103.4 | **median_8** | 1 → **1** |
+| *part lissée* | 0.00 | 1.00 | 0.99 | 0.98 | 0.95 | 0.80 | 0.17 | 1.00 | 1.00 | | |
+
+⚠⚠⚠ **PREMIÈRE FAUTE, ATTRAPÉE ET CORRIGÉE : l'optimum était AU BORD de ma famille.** La première
+version s'arrêtait à `median_8`, et c'est exactement là que l'optimum est tombé — c'est-à-dire au
+bord du balayage, donc **un plancher de ce qu'on a essayé et non une propriété de la matière**.
+C'est la faute que le balayage du cône de directions a déjà payée. La famille a été **étendue** à
+`median_16` et `median_32` ; l'optimum est désormais **intérieur**, et un drapeau le publie.
+
+⚠⚠ **Seconde précaution, et elle était nécessaire : la part de nappe RÉELLEMENT lissée.** Une
+fenêtre large exige une majorité de voisins présents, donc elle est **refusée** près des bords.
+Mesuré : 1,00 · 0,99 · 0,98 · 0,95 · **0,80** · **0,17** de `median_1` à `median_32`. Sans ce
+nombre, « la fenêtre 65×65 gagne » pourrait vouloir dire « elle ne s'applique presque plus » — et
+un contrôle exige qu'un étage qui ne lisse rien coûte **exactement** ce que coûte le brut.
+
+> ⚠⚠⚠ **ET LE RÉSULTAT TRANCHE : -26.0 µm sur 4/5 ancres, intervalle [-32.1, -16.4].** Une fenêtre bien
+> plus large que celle qui tourne gagne vingt-six micromètres hors échantillon. Sur la seule
+> grandeur d'erreur, il n'y a pas de doute.
+
+⛔⛔⛔ **SAUF QUE CE N'EST PAS LA QUESTION DU BUT, et le coût en BRAS dit l'inverse.** À l'ancre 4
+— **la seule dont la marche va quelque part** — l'étage que les autres ancres lui donnent fait
+tomber sa portée de **5 à ZÉRO** : la marche échoue au premier bras. La cause est dans la
+définition du premier coût : c'est la **médiane des erreurs par bras**, et cette médiane inclut
+les bras où la marche est **DÉJÀ PERDUE**. Passer de 120 à 70 µm sur une marche perdue n'est pas
+un progrès — les deux sont au-delà de la demi-feuille — donc **un réglage choisi là-dessus est
+choisi sur la qualité de ses échecs**.
+
+⚠⚠ **Et le coût en bras ne peut RIEN discriminer sur ce matériau** : aux ancres 6, 7, 8 la portée est
+la **même à tous les étages**, donc sa médiane ne sépare pas et son « choix » est le premier de la
+liste. C'est une limite de la **matière**, pas de l'instrument : il faudrait des ancres dont la
+marche soit vivante, et le corpus n'en offre qu'une.
+
+> ⛔ **DONC LE BALAYAGE N'AUTORISE PAS À CHANGER LE RÉGLAGE DÉPLOYÉ**, et la porte est **fermée
+> par défaut** dans le code : il faut que l'optimum ne soit pas au bord, **que** le gain tranche,
+> **et** qu'aucune ancre ne voie sa portée diminuer. Un contrôle vérifie qu'une portée qui empire
+> ferme la porte — sans lui, un gain médian sur des marches déjà perdues suffirait à déplacer le
+> réglage qui tourne.
+
+> ⭐⭐ **Ce qui RESTE de ce balayage, et c'est un fait à garder.** À l'ancre 4, la fenêtre
+> `median_8` donne une portée de **6** — le plafond du corpus, celui que la **borne** atteint.
+> Une fenêtre large **peut** faire marcher un marcheur aveugle jusqu'à la borne. Mais la largeur
+> qui y arrive **dépend de l'ancre** (6 à `median_8`, 0 à `median_16`), et hors échantillon on ne
+> la trouve pas. C'est une piste avec sa condition : il faut plus d'ancres dont la marche soit
+> vivante, donc une boîte plus grande ou un objet moins troué.
+
+⚠ **Pour mémoire, le résultat de la tranche précédente se reproduit sur ces mêmes ancres** :
+l'étage déployé bat le brut de **-6.7 µm** sur 5/5 ancres, intervalle [-8.5, -6.4] — il tranche. Lisser
+vaut mieux que ne pas lisser ; c'est **combien** qui n'est pas tranché.
+
 ##### ⚠⚠ Ce que le corpus demande, et pourquoi il fallait le mesurer à part
 
 La dernière ligne du tableau ne fait intervenir **aucun marcheur** : c'est la distance médiane de
