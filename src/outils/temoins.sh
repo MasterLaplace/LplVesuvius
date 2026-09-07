@@ -1526,6 +1526,7 @@ run "le critere du raccroch."  uv run --project "$ROOT" python "$ROOT/src/nappe/
 run "la lissite de la feuille" uv run --project "$ROOT" python "$ROOT/src/nappe/la_lissite_de_la_feuille.py" --verifier
 run "l oracle atteignable"     uv run --project "$ROOT" python "$ROOT/src/nappe/loracle_est_il_atteignable.py" --verifier
 run "la direction du pas"      uv run --project "$ROOT" python "$ROOT/src/nappe/la_direction_du_pas.py" --verifier
+run "champ lisse construit"    uv run --project "$ROOT" python "$ROOT/src/nappe/le_champ_lisse_par_construction.py" --verifier
 run "derouler en raccrochant"  uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_en_raccrochant.py" --verifier
 run "derouler au pas normal"   uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_par_le_pas_normal.py" --verifier
 run "la derive est-elle un biais"uv run --project "$ROOT" python "$ROOT/src/nappe/la_derive_est_elle_un_biais.py" --verifier
@@ -1554,6 +1555,7 @@ run "fig : critere du raccroch"uv run --project "$ROOT" python "$ROOT/src/figure
 run "fig : lissite de la feuil"uv run --project "$ROOT" python "$ROOT/src/figures/figure_la_lissite_de_la_feuille.py" --verifier
 run "fig : oracle atteignable" uv run --project "$ROOT" python "$ROOT/src/figures/figure_loracle_est_il_atteignable.py" --verifier
 run "fig : direction du pas"   uv run --project "$ROOT" python "$ROOT/src/figures/figure_la_direction_du_pas.py" --verifier
+run "fig : champ lisse"        uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_champ_lisse_par_construction.py" --verifier
 run "fig : en raccrochant"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_en_raccrochant.py" --verifier
 run "fig : pas normal"         uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_par_le_pas_normal.py" --verifier
 run "fig : drapeau de normale" uv run --project "$ROOT" python "$ROOT/src/figures/figure_drapeau_de_normale.py" --verifier

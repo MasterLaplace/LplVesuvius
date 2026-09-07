@@ -5827,6 +5827,35 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     Les deux tranches convergent dessus — le champ utile, décalage comme rotation, est **lisse
     localement et étendu globalement**, ce qu'un **ajustement de surface** produit et qu'une
     médiane de voisinage ne fait qu'approcher en moyennant du bruit après coup.
+  - ⛔⛔ **ÊTRE LISSE NE SUFFIT PAS (2026-09-07, `le_champ_lisse_par_construction`,
+    18 contrôles, 8 pas, 16 275 cellules).** Une médiane de voisinage est un ajustement **local
+    par une constante** ; ce qui est essayé ici est un champ dont la lissité est une propriété de
+    sa **forme** — surfaces polynomiales de degré 0 à 3, plan ajusté localement sur 9×9, et la
+    composition du voisinage avec une surface. **Aucun ne bat le voisinage en service**, et le
+    meilleur (plan local) perd de façon **consistante** : +1,4 µm, intervalle entièrement positif
+    [1,2 ; 1,6].
+  - ⭐⭐⭐ **Et le fait qui tranche** : à rugosité **nulle** on trouve **deux choses** — le champ de
+    l'**oracle**, qui rend **20,0 µm**, et les surfaces ajustées, qui en rendent **41,9 à 44,6**.
+    Les surfaces font donc exactement ce qu'on leur demandait et marchent plus mal. **Être lisse
+    était une propriété NÉCESSAIRE du bon champ, jamais SUFFISANTE** — deux tranches l'avaient
+    prise pour une recette, et c'était une inférence tirée d'une corrélation.
+  - ⚠⚠ **Le témoin le confirme** : les surfaces améliorent énormément le **bruit** (60,2 →
+    46,3 µm) et à peine la **lecture** (45,3 → 41,9) ; leur part **hors lissage** est **positive
+    partout** (+3,5 à +4,0). Ce qui distingue une lecture d'un bruit est donc **local et de haute
+    fréquence spatiale** : la médiane 3×3 le garde, une surface globale l'écrase **avec** le
+    bruit. Ce que le voisinage réussit n'est pas « lisser » mais **lisser juste assez**.
+  - ⚠ **Deux propriétés numériques vérifiées plutôt que supposées** : un ajustement de degré trois
+    sur des indices bruts est mal conditionné au point de rendre un champ qui oscille — les
+    coordonnées sont normalisées et le contrôle exige qu'une cubique sorte **exactement** ; et un
+    plan local sur 3×3 aurait neuf points pour trois paramètres, donc une interpolation du bruit
+    (la demi-fenêtre est à quatre, soit 81 points).
+  - ⭐⭐⭐ **État des lieux après cinq tranches** : cinq portes fermées sur la lecture — la
+    **forme**, le **lieu** où on l'apprend, son **amplitude**, la **largeur** du lissage, un champ
+    **lisse par construction** — plus la **direction**, fermée par les deux bouts. Il reste
+    **16,6 µm** entre le voisinage en service (36,6) et l'oracle (20,0), et **18,2 µm** de
+    plancher sous l'oracle. ⚠ Ce qui n'a jamais été essayé : faire lire au raccrochage autre chose
+    qu'une **intensité** — à condition que `PHerc0500P2` ait un préfixe `fibers/`, ce qui est à
+    **vérifier** plutôt qu'à supposer.
   - ⛔ **L'ÉCART DÉJÀ FRANCHI NE DIT PRESQUE RIEN DU SUIVANT (2026-09-06,
     `lecart_deja_franchi`, 16 contrôles, 5 triplets, 5163 cellules).** Un dérouleur parti d'une
     paire d'ancres connaît en chaque point la distance entre ces deux surfaces : c'était la seule
@@ -6424,8 +6453,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 3348 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 4040 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 3422 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 4114 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

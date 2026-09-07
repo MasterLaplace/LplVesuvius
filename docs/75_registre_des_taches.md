@@ -3303,6 +3303,80 @@ que c'est la distance du point d'**arrivée** au nuage, c'est-à-dire l'erreur d
 > globalement**, et c'est exactement ce qu'un **ajustement de surface** produit, là où une médiane
 > de voisinage ne fait que moyenner du bruit après coup.
 
+#### ⛔⛔ ÊTRE LISSE NE SUFFIT PAS — la lissité du champ vrai était un INDICE, pas une recette
+
+> Mesure : `src/nappe/le_champ_lisse_par_construction.py` (18 contrôles) →
+> `docs/mesures/le_champ_lisse_par_construction.json`. Figure :
+> `src/figures/figure_le_champ_lisse_par_construction.py` (14 contrôles), le 2026-09-07.
+>
+> ```bash
+> uv run python src/nappe/le_champ_lisse_par_construction.py --cote 960 \
+>     --json docs/mesures/le_champ_lisse_par_construction.json
+> uv run python src/figures/figure_le_champ_lisse_par_construction.py \
+>     --sortie docs/images/75_le_champ_lisse_par_construction.png
+> ```
+
+Une médiane de voisinage est un **ajustement local par une constante**. Ce qui est essayé ici est
+un champ dont la lissité est une propriété de sa **forme** : une surface polynomiale de degré 0 à
+3 sur toute la grille — qui ne *peut pas* être bruitée, faute de degrés de liberté —, un plan
+ajusté localement sur un 9×9, et la composition du voisinage en service avec une surface.
+
+![un champ lisse par construction](images/75_le_champ_lisse_par_construction.png)
+
+| ajustement | paramètres | rugosité | LECTURE | contre le déployé | BRUIT | hors lissage |
+|---|---:|---:|---:|---|---:|---:|
+| brut | — | 3,48 | 45,3 µm | +4,1 · 3/8 | 60,2 | +1,3 |
+| ⭐ **voisinage 3×3** *(déployé)* | — | 0,34 | **36,6** | 0 | 57,0 | 0 |
+| surface, degré 0 | 1 | **0,00** | 43,9 | +3,6 · 1/8 | 46,8 | +3,7 |
+| surface, degré 1 | 3 | **0,00** | 44,6 | +3,2 · 1/8 | 47,2 | +3,5 |
+| surface, degré 2 | 6 | **0,00** | 43,6 | +3,3 · 1/8 | 46,5 | +4,0 |
+| surface, degré 3 | 10 | **0,00** | 41,9 | +2,4 · 1/8 | 46,3 | +3,6 |
+| plan local (9×9) | — | 0,24 | 40,9 | +1,4 · 2/8 · [1,2 ; 1,6] | 46,8 | +3,7 |
+| voisinage puis surface | 3 | **0,00** | 45,1 | +3,4 · 1/8 | 47,5 | +3,7 |
+
+> ⛔ **Aucun ne bat le voisinage en service**, et le meilleur — le plan local — perd de façon
+> **consistante** : +1,4 µm, intervalle **entièrement positif** [1,2 ; 1,6].
+
+##### ⭐⭐⭐ Et le panneau B dit pourquoi, ce qu'aucun classement ne montrerait
+
+**À rugosité NULLE on trouve deux choses** : le champ de l'**oracle**, qui rend **20,0 µm**, et
+les surfaces ajustées, qui en rendent **41,9 à 44,6**. Les surfaces font donc **exactement ce
+qu'on leur demandait** — elles sont parfaitement lisses — et elles marchent plus mal.
+
+> ⭐⭐⭐ **Être lisse était une propriété NÉCESSAIRE du bon champ, jamais une propriété
+> SUFFISANTE.** Deux tranches l'avaient prise pour une recette, et c'était une inférence tirée
+> d'une corrélation : « le champ vrai est lisse » ne dit pas « rends ton champ lisse ».
+
+⚠⚠ Le témoin le confirme étage par étage : les surfaces améliorent **énormément le bruit** (60,2 →
+46,3 µm) et **à peine la lecture** (45,3 → 41,9). Leur part **hors lissage** est **positive
+partout** (+3,5 à +4,0 µm) : elles rendent **moins sur la lecture que sur le hasard**.
+
+> ⚠⚠⚠ **Ce que ça corrige** : le champ vrai est plat, mais ce qui distingue une lecture d'un bruit
+> est **local et de haute fréquence spatiale**. La médiane 3×3 le garde, une surface globale
+> l'écrase **avec** le bruit. Ce que le voisinage réussit n'est donc pas « lisser » — c'est
+> **lisser juste assez**.
+
+⚠ Deux propriétés numériques valaient d'être vérifiées plutôt que supposées : un ajustement de
+degré trois sur des indices bruts est **mal conditionné** au point de rendre un champ qui oscille,
+donc les coordonnées sont normalisées dans [−1, 1] — et le contrôle exige qu'une cubique soit
+rendue **exactement**. Et un plan local sur un 3×3 aurait neuf points pour trois paramètres,
+c'est-à-dire une interpolation du bruit : la demi-fenêtre est à quatre, soit 81 points.
+
+> ⭐⭐⭐ **Ce que cette tranche laisse, et c'est un état des lieux plutôt qu'une piste.** Cinq
+> portes sont fermées sur la lecture — la **forme** cherchée, le **lieu** où on l'apprend, son
+> **amplitude**, la **largeur** du lissage, et un champ **lisse par construction** — plus la
+> **direction**, fermée par les deux bouts. Il reste **16,6 µm** entre le voisinage en service
+> (36,6) et l'oracle (20,0), et **18,2 µm** de plancher sous l'oracle que rien le long de la
+> normale ne prend.
+>
+> ⚠ Ce que la campagne sait maintenant et ne savait pas il y a cinq tranches : le raccrochage
+> déployé **gagne** (37,5 contre 43,6, 7 pas sur 8), tout son gain vient du **voisinage** et non
+> de la corrélation, et l'information qui reste à prendre est **locale**. Ce qui n'a jamais été
+> essayé, c'est de faire lire au raccrochage autre chose qu'une **intensité** — la piste que la
+> tranche sur le gabarit avait nommée et qu'aucune n'a encore ouverte, parce que le champ de
+> fibres publié ne couvre pas ce fragment. ⚠ Vérifier d'abord si `PHerc0500P2` a un préfixe
+> `fibers/`, plutôt que de supposer que non.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est
