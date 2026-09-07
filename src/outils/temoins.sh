@@ -1533,6 +1533,11 @@ run "portee ailleurs"        uv run --project "$ROOT" python "$ROOT/src/nappe/la
 run "combien lisser"         uv run --project "$ROOT" python "$ROOT/src/nappe/combien_lisser_la_nappe.py" --verifier
 run "nappe en obj"           uv run --project "$ROOT" python "$ROOT/src/nappe/la_nappe_en_obj.py" --verifier
 run "ou la nappe se froisse" uv run --project "$ROOT" python "$ROOT/src/nappe/ou_la_nappe_se_froisse.py" --verifier
+run "la cellule sait-elle"   uv run --project "$ROOT" python "$ROOT/src/nappe/la_cellule_sait_elle_quelle_a_tort.py" --verifier
+run "combien de fenetres"    uv run --project "$ROOT" python "$ROOT/src/commun/combien_de_fenetres.py" --verifier
+run "batteries enregistrees" uv run --project "$ROOT" python "$ROOT/src/depot/batteries_enregistrees.py" --verifier
+run "suivre nappe"           uv run --project "$ROOT" python "$ROOT/src/commun/suivre_nappe.py" --verifier
+run "assembler mosaique"     uv run --project "$ROOT" python "$ROOT/src/volume/assembler_mosaique.py" --verifier
 run "derouler en raccrochant"  uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_en_raccrochant.py" --verifier
 run "derouler au pas normal"   uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_par_le_pas_normal.py" --verifier
 run "la derive est-elle un biais"uv run --project "$ROOT" python "$ROOT/src/nappe/la_derive_est_elle_un_biais.py" --verifier
@@ -1567,6 +1572,8 @@ run "fig : portee"             uv run --project "$ROOT" python "$ROOT/src/figure
 run "fig : portee ailleurs"    uv run --project "$ROOT" python "$ROOT/src/figures/figure_la_portee_tient_elle_ailleurs.py" --verifier
 run "fig : combien lisser"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_combien_lisser_la_nappe.py" --verifier
 run "fig : ou ca se froisse"   uv run --project "$ROOT" python "$ROOT/src/figures/figure_ou_la_nappe_se_froisse.py" --verifier
+run "fig : la cellule sait"    uv run --project "$ROOT" python "$ROOT/src/figures/figure_la_cellule_sait_elle_quelle_a_tort.py" --verifier
+run "fig : combien fenetres"   uv run --project "$ROOT" python "$ROOT/src/figures/figure_combien_de_fenetres.py" --verifier
 run "fig : en raccrochant"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_en_raccrochant.py" --verifier
 run "fig : pas normal"         uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_par_le_pas_normal.py" --verifier
 run "fig : drapeau de normale" uv run --project "$ROOT" python "$ROOT/src/figures/figure_drapeau_de_normale.py" --verifier

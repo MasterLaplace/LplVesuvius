@@ -3712,6 +3712,127 @@ portée ne dépasse ce que le corpus autorise à son ancre.
 
 
 
+##### ⚠⚠ UNE GARDE QUI N'EST PAS ATTEIGNABLE NE GARDE RIEN — trois batteries retrouvées
+
+> Garde : `src/depot/batteries_enregistrees.py` (9 contrôles), le 2026-09-07.
+>
+> ```bash
+> uv run python src/depot/batteries_enregistrees.py
+> ```
+
+⚠⚠⚠ **Le défaut n'était pas l'absence de garde.** `temoins.sh` la porte déjà : il balaie
+`src/*/*.py`, retient ceux qui déclarent `--verifier`, et signale ceux qu'aucune de ses lignes ne
+lance. Le problème est qu'elle **n'est atteignable qu'en run COMPLET** — or le run complet prend
+trop longtemps pour tourner à chaque tranche, et la consigne permanente est de ne lancer que les
+batteries touchées. **Une garde qu'on ne peut pas se permettre de faire tourner est une garde qui
+ne garde rien.**
+
+⭐ Ce qui l'a révélé : `la_cellule_sait_elle_quelle_a_tort` a vécu **deux tranches** sans être
+enregistrée, parce qu'un patch d'édition avait échoué en silence. Elle était verte à chaque fois
+qu'on la lançait à la main, et n'était jamais lancée autrement.
+
+**Ce que la garde a trouvé en une seconde :**
+
+| trouvaille | ce que c'était |
+|---|---|
+| `la_cellule_sait_elle_quelle_a_tort` | oubliée depuis deux tranches |
+| `combien_de_fenetres` | oubliée le jour même |
+| ⭐ **`suivre_nappe`** (45 contrôles) | oubliée **depuis toujours** |
+| ⭐ **`assembler_mosaique`** (21 contrôles) | oubliée **depuis toujours** |
+| `src/famille/x.py` | ⚠ **faux positif de MA garde** : un chemin d'exemple dans un **commentaire** |
+
+⚠⚠ **Et la vraie cause des deux dernières est une leçon en soi.** Elles passaient, mais disaient
+« tous les témoins passent » au lieu du `ALL PASS (0 failures, N checks)` que `run()` exige. Une
+batterie qui passe **sans savoir le dire dans le format du dépôt** ne peut pas être comptée — donc
+personne ne l'enregistre, donc elle disparaît. Les deux parlent désormais la convention, et
+apportent **66 contrôles** que le dépôt n'avait jamais comptés.
+
+⚠ **Le faux positif est gardé dans le fichier**, parce qu'il dit quelque chose : ma première
+version lisait tout `temoins.sh` et accusait un chemin d'exemple écrit dans un commentaire qui
+explique justement un motif de recherche. **Une garde qui accuse un commentaire est une garde
+qu'on apprend à ignorer** — elle ne lit plus que les lignes `run`.
+
+---
+##### ⛔⛔⛔ COMBIEN DE FENÊTRES POUR QUE LA CARTE DES TREIZE DÉCIDE ? — 315× le budget actuel
+
+> Mesure : `src/commun/combien_de_fenetres.py` (19 contrôles) →
+> `docs/mesures/combien_de_fenetres.json`. Figure :
+> `src/figures/figure_combien_de_fenetres.py` (11 contrôles), le 2026-09-07.
+>
+> ```bash
+> uv run python src/commun/combien_de_fenetres.py \
+>     --json docs/mesures/combien_de_fenetres.json
+> uv run python src/figures/figure_combien_de_fenetres.py \
+>     --sortie docs/images/75_combien_de_fenetres.png
+> ```
+
+⚠⚠⚠ **Pourquoi cette mesure vient AVANT la campagne de septembre.** [`31`](31_roadmap.md) §10
+inscrit *« mesurer la part comprimée rouleau par rouleau, à 50 fenêtres minimum »* et dit que
+c'est ce qui décide **sur lequel des treize** dépenser six mois. [`33`](33_la_carte_nest_pas_resolue.md)
+a déjà montré qu'aux effectifs actuels la carte ne sépare **rien**. Restait la question qui
+précède la campagne : **à quel effectif la question deviendrait-elle décidable ?** Une campagne
+lancée sans ce chiffre est une campagne dont on ne sait pas si elle peut conclure.
+
+![combien de fenêtres pour que la carte décide](images/75_combien_de_fenetres.png)
+
+⚠⚠ **Et 50 est le chiffre de la MAUVAISE question.** Séparer un rouleau du **témoin** — « ce
+rouleau a-t-il plus de zones comprimées que celui qui n'en a pas ? » — n'est pas la décision.
+La décision est **quel rouleau attaquer**, donc séparer les rouleaux **entre eux** : deux
+estimations incertaines au lieu d'une contre un quasi-zéro, ce qui est strictement plus dur.
+
+| fenêtres par rouleau | paires séparées, nominal | après Holm |
+|---:|---:|---:|
+| 25 | 0 | 0 |
+| 50 | 1 | 0 |
+| 100 | 15 | 0 |
+| 200 | 31 | 13 |
+| 400 | 47 | 29 |
+
+> ⛔ **À 50 fenêtres — le chiffre du calendrier — on sépare UNE paire sur 78 au seuil nominal, et
+> ZÉRO après correction de Holm.** Et la correction n'est pas un raffinement optionnel : 78
+> comparaisons au seuil de 5 % produisent des « significatifs » par pur hasard, et ce registre a
+> déjà eu à retirer un classement pour cette raison exacte.
+
+##### ⭐⭐⭐ La paire qui DÉCIDE est la plus chère de toutes, et c'est structurel
+
+Choisir où dépenser six mois demande de séparer les **deux mieux classés** — donc les deux dont
+les parts sont les plus **proches**.
+
+| | |
+|---|---|
+| la paire | **PHerc0358** (3.6 %) contre **PHerc0211** (5.0 %) |
+| écart | **1.4 %** |
+| puissance à 50 fenêtres | **0.8 %** |
+| effectif exact nécessaire, après Holm | **> 400** (puissance plafonnée à 0.5 %) |
+| ⭐ borne **BASSE** sur l'effectif | **7277 fenêtres par rouleau** |
+| soit, pour les treize | **94601 fenêtres** — **315.3×** le budget actuel de 300 |
+
+⚠ **La borne est BASSE et le sens de l'erreur est ce qui la rend utilisable** : elle vient de
+l'approximation normale, qui **surestime la puissance** sur des parts de quelques pour-cent —
+`incertitude_carte` l'écrit déjà — donc elle **sous-estime l'effectif**. Le vrai coût est plus
+grand que 315×.
+
+##### ⚠⚠ Et le calendrier sous-finance même la question facile
+
+| rouleau | part | contre le témoin, nominal | après Holm |
+|---|---:|---:|---:|
+| PHerc0358 | 3.6 % | 400 | 400 |
+| PHerc0211 | 5.0 % | 200 | 400 |
+| PHerc1447 | 5.6 % | 200 | 400 |
+| PHerc0268 | 8.6 % | 100 | 200 |
+
+Séparer le mieux classé du témoin demande **400 fenêtres** après correction, là où le calendrier
+en inscrit **50**. **Les deux questions sont sous-financées, et celle qui décide l'est de deux
+ordres de grandeur.**
+
+> ⛔⛔⛔ **CE QUE ÇA CHANGE POUR LA ROADMAP.** L'item de septembre de [`31`](31_roadmap.md) —
+> *« mesurer la part comprimée rouleau par rouleau »* — n'est pas seulement à lancer : **son
+> critère de décision n'est pas mesurable à ce prix**. Il faut soit un **autre critère de choix
+> de rouleau**, soit accepter de choisir autrement et le dire. ⚠ Et ça ne dit **pas** que le prix
+> est hors de portée : ça dit qu'une procédure de décision proposée ne tient pas, ce qui coûte
+> infiniment moins cher à apprendre maintenant que six mois passés sur le mauvais rouleau.
+
+---
 ##### ⭐⭐⭐ UNE CELLULE PEUT-ELLE SAVOIR QU'ELLE A TORT, sans regarder la cible ?
 
 > Mesure : `src/nappe/la_cellule_sait_elle_quelle_a_tort.py` (14 contrôles) →

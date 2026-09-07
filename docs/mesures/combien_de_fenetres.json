@@ -1,0 +1,1565 @@
+{
+  "rouleaux": 13,
+  "paires": 78,
+  "cible": 0.8,
+  "alpha": 0.05,
+  "alpha_holm": 0.000641025641025641,
+  "echelle": [
+    25,
+    50,
+    100,
+    200,
+    400
+  ],
+  "temoin": {
+    "rouleau": "PHerc0139",
+    "part": 0.0,
+    "fenetres": 24
+  },
+  "fenetres_actuelles": {
+    "PHerc0358": 28,
+    "PHerc0211": 20,
+    "PHerc1447": 18,
+    "PHerc0268": 35,
+    "PHerc0257": 19,
+    "PHerc1545": 17,
+    "PHerc0826": 15,
+    "PHerc0813": 27,
+    "PHerc1203": 32,
+    "PHerc0800": 25,
+    "PHerc0191": 26,
+    "PHerc1218": 17,
+    "PHerc0125": 21
+  },
+  "fenetres_actuelles_total": 300,
+  "paire_decisive": {
+    "a": "PHerc0358",
+    "b": "PHerc0211",
+    "part_a": 0.0357,
+    "part_b": 0.05,
+    "ecart": 0.0143,
+    "nominal": {
+      "fenetres": null,
+      "puissance": 0.129
+    },
+    "holm": {
+      "fenetres": null,
+      "puissance": 0.005
+    },
+    "borne_basse_holm": 7277,
+    "puissance_a_50": 0.008
+  },
+  "paires_detail": [
+    {
+      "a": "PHerc0358",
+      "b": "PHerc0211",
+      "part_a": 0.0357,
+      "part_b": 0.05,
+      "ecart": 0.0143,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.129
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.005
+      },
+      "borne_basse_holm": 7277,
+      "puissance_a_50": 0.008
+    },
+    {
+      "a": "PHerc0358",
+      "b": "PHerc1447",
+      "part_a": 0.0357,
+      "part_b": 0.0556,
+      "ecart": 0.0198,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.218
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.012
+      },
+      "borne_basse_holm": 4005,
+      "puissance_a_50": 0.012
+    },
+    {
+      "a": "PHerc0358",
+      "b": "PHerc0268",
+      "part_a": 0.0357,
+      "part_b": 0.0857,
+      "ecart": 0.05,
+      "nominal": {
+        "fenetres": 400,
+        "puissance": 0.82
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.286
+      },
+      "borne_basse_holm": 824,
+      "puissance_a_50": 0.063
+    },
+    {
+      "a": "PHerc0358",
+      "b": "PHerc0257",
+      "part_a": 0.0357,
+      "part_b": 0.1053,
+      "ecart": 0.0695,
+      "nominal": {
+        "fenetres": 400,
+        "puissance": 0.97
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.648
+      },
+      "borne_basse_holm": 489,
+      "puissance_a_50": 0.127
+    },
+    {
+      "a": "PHerc0358",
+      "b": "PHerc1545",
+      "part_a": 0.0357,
+      "part_b": 0.1176,
+      "ecart": 0.0819,
+      "nominal": {
+        "fenetres": 200,
+        "puissance": 0.85
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 0.827
+      },
+      "borne_basse_holm": 380,
+      "puissance_a_50": 0.18
+    },
+    {
+      "a": "PHerc0358",
+      "b": "PHerc0826",
+      "part_a": 0.0357,
+      "part_b": 0.1333,
+      "ecart": 0.0976,
+      "nominal": {
+        "fenetres": 200,
+        "puissance": 0.936
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 0.948
+      },
+      "borne_basse_holm": 292,
+      "puissance_a_50": 0.258
+    },
+    {
+      "a": "PHerc0358",
+      "b": "PHerc0813",
+      "part_a": 0.0357,
+      "part_b": 0.1481,
+      "ecart": 0.1124,
+      "nominal": {
+        "fenetres": 200,
+        "puissance": 0.975
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 0.988
+      },
+      "borne_basse_holm": 237,
+      "puissance_a_50": 0.34
+    },
+    {
+      "a": "PHerc0358",
+      "b": "PHerc1203",
+      "part_a": 0.0357,
+      "part_b": 0.1875,
+      "ecart": 0.1518,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.925
+      },
+      "holm": {
+        "fenetres": 200,
+        "puissance": 0.937
+      },
+      "borne_basse_holm": 154,
+      "puissance_a_50": 0.566
+    },
+    {
+      "a": "PHerc0358",
+      "b": "PHerc0800",
+      "part_a": 0.0357,
+      "part_b": 0.2,
+      "ecart": 0.1643,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.953
+      },
+      "holm": {
+        "fenetres": 200,
+        "puissance": 0.968
+      },
+      "borne_basse_holm": 138,
+      "puissance_a_50": 0.633
+    },
+    {
+      "a": "PHerc0358",
+      "b": "PHerc0191",
+      "part_a": 0.0357,
+      "part_b": 0.2308,
+      "ecart": 0.1951,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.987
+      },
+      "holm": {
+        "fenetres": 200,
+        "puissance": 0.996
+      },
+      "borne_basse_holm": 108,
+      "puissance_a_50": 0.773
+    },
+    {
+      "a": "PHerc0358",
+      "b": "PHerc1218",
+      "part_a": 0.0357,
+      "part_b": 0.2353,
+      "ecart": 0.1996,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.99
+      },
+      "holm": {
+        "fenetres": 200,
+        "puissance": 0.997
+      },
+      "borne_basse_holm": 105,
+      "puissance_a_50": 0.79
+    },
+    {
+      "a": "PHerc0358",
+      "b": "PHerc0125",
+      "part_a": 0.0357,
+      "part_b": 0.2381,
+      "ecart": 0.2024,
+      "nominal": {
+        "fenetres": 50,
+        "puissance": 0.801
+      },
+      "holm": {
+        "fenetres": 200,
+        "puissance": 0.997
+      },
+      "borne_basse_holm": 103,
+      "puissance_a_50": 0.801
+    },
+    {
+      "a": "PHerc0211",
+      "b": "PHerc1447",
+      "part_a": 0.05,
+      "part_b": 0.0556,
+      "ecart": 0.0056,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.046
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.001
+      },
+      "borne_basse_holm": 58656,
+      "puissance_a_50": 0.009
+    },
+    {
+      "a": "PHerc0211",
+      "b": "PHerc0268",
+      "part_a": 0.05,
+      "part_b": 0.0857,
+      "ecart": 0.0357,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.472
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.06
+      },
+      "borne_basse_holm": 1794,
+      "puissance_a_50": 0.036
+    },
+    {
+      "a": "PHerc0211",
+      "b": "PHerc0257",
+      "part_a": 0.05,
+      "part_b": 0.1053,
+      "ecart": 0.0553,
+      "nominal": {
+        "fenetres": 400,
+        "puissance": 0.811
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.272
+      },
+      "borne_basse_holm": 847,
+      "puissance_a_50": 0.076
+    },
+    {
+      "a": "PHerc0211",
+      "b": "PHerc1545",
+      "part_a": 0.05,
+      "part_b": 0.1176,
+      "ecart": 0.0676,
+      "nominal": {
+        "fenetres": 400,
+        "puissance": 0.926
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.483
+      },
+      "borne_basse_holm": 606,
+      "puissance_a_50": 0.112
+    },
+    {
+      "a": "PHerc0211",
+      "b": "PHerc0826",
+      "part_a": 0.05,
+      "part_b": 0.1333,
+      "ecart": 0.0833,
+      "nominal": {
+        "fenetres": 400,
+        "puissance": 0.983
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.738
+      },
+      "borne_basse_holm": 432,
+      "puissance_a_50": 0.17
+    },
+    {
+      "a": "PHerc0211",
+      "b": "PHerc0813",
+      "part_a": 0.05,
+      "part_b": 0.1481,
+      "ecart": 0.0981,
+      "nominal": {
+        "fenetres": 200,
+        "puissance": 0.895
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 0.894
+      },
+      "borne_basse_holm": 334,
+      "puissance_a_50": 0.235
+    },
+    {
+      "a": "PHerc0211",
+      "b": "PHerc1203",
+      "part_a": 0.05,
+      "part_b": 0.1875,
+      "ecart": 0.1375,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.83
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 0.997
+      },
+      "borne_basse_holm": 199,
+      "puissance_a_50": 0.44
+    },
+    {
+      "a": "PHerc0211",
+      "b": "PHerc0800",
+      "part_a": 0.05,
+      "part_b": 0.2,
+      "ecart": 0.15,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.883
+      },
+      "holm": {
+        "fenetres": 200,
+        "puissance": 0.874
+      },
+      "borne_basse_holm": 174,
+      "puissance_a_50": 0.508
+    },
+    {
+      "a": "PHerc0211",
+      "b": "PHerc0191",
+      "part_a": 0.05,
+      "part_b": 0.2308,
+      "ecart": 0.1808,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.959
+      },
+      "holm": {
+        "fenetres": 200,
+        "puissance": 0.972
+      },
+      "borne_basse_holm": 132,
+      "puissance_a_50": 0.665
+    },
+    {
+      "a": "PHerc0211",
+      "b": "PHerc1218",
+      "part_a": 0.05,
+      "part_b": 0.2353,
+      "ecart": 0.1853,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.966
+      },
+      "holm": {
+        "fenetres": 200,
+        "puissance": 0.979
+      },
+      "borne_basse_holm": 127,
+      "puissance_a_50": 0.686
+    },
+    {
+      "a": "PHerc0211",
+      "b": "PHerc0125",
+      "part_a": 0.05,
+      "part_b": 0.2381,
+      "ecart": 0.1881,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.969
+      },
+      "holm": {
+        "fenetres": 200,
+        "puissance": 0.982
+      },
+      "borne_basse_holm": 124,
+      "puissance_a_50": 0.698
+    },
+    {
+      "a": "PHerc1447",
+      "b": "PHerc0268",
+      "part_a": 0.0556,
+      "part_b": 0.0857,
+      "ecart": 0.0302,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.338
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.029
+      },
+      "borne_basse_holm": 2612,
+      "puissance_a_50": 0.029
+    },
+    {
+      "a": "PHerc1447",
+      "b": "PHerc0257",
+      "part_a": 0.0556,
+      "part_b": 0.1053,
+      "ecart": 0.0497,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.703
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.17
+      },
+      "borne_basse_holm": 1082,
+      "puissance_a_50": 0.062
+    },
+    {
+      "a": "PHerc1447",
+      "b": "PHerc1545",
+      "part_a": 0.0556,
+      "part_b": 0.1176,
+      "ecart": 0.0621,
+      "nominal": {
+        "fenetres": 400,
+        "puissance": 0.863
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.349
+      },
+      "borne_basse_holm": 741,
+      "puissance_a_50": 0.093
+    },
+    {
+      "a": "PHerc1447",
+      "b": "PHerc0826",
+      "part_a": 0.0556,
+      "part_b": 0.1333,
+      "ecart": 0.0778,
+      "nominal": {
+        "fenetres": 400,
+        "puissance": 0.961
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.613
+      },
+      "borne_basse_holm": 510,
+      "puissance_a_50": 0.144
+    },
+    {
+      "a": "PHerc1447",
+      "b": "PHerc0813",
+      "part_a": 0.0556,
+      "part_b": 0.1481,
+      "ecart": 0.0926,
+      "nominal": {
+        "fenetres": 200,
+        "puissance": 0.844
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 0.814
+      },
+      "borne_basse_holm": 385,
+      "puissance_a_50": 0.202
+    },
+    {
+      "a": "PHerc1447",
+      "b": "PHerc1203",
+      "part_a": 0.0556,
+      "part_b": 0.1875,
+      "ecart": 0.1319,
+      "nominal": {
+        "fenetres": 200,
+        "puissance": 0.981
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 0.992
+      },
+      "borne_basse_holm": 220,
+      "puissance_a_50": 0.396
+    },
+    {
+      "a": "PHerc1447",
+      "b": "PHerc0800",
+      "part_a": 0.0556,
+      "part_b": 0.2,
+      "ecart": 0.1444,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.846
+      },
+      "holm": {
+        "fenetres": 200,
+        "puissance": 0.816
+      },
+      "borne_basse_holm": 192,
+      "puissance_a_50": 0.463
+    },
+    {
+      "a": "PHerc1447",
+      "b": "PHerc0191",
+      "part_a": 0.0556,
+      "part_b": 0.2308,
+      "ecart": 0.1752,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.942
+      },
+      "holm": {
+        "fenetres": 200,
+        "puissance": 0.953
+      },
+      "borne_basse_holm": 143,
+      "puissance_a_50": 0.622
+    },
+    {
+      "a": "PHerc1447",
+      "b": "PHerc1218",
+      "part_a": 0.0556,
+      "part_b": 0.2353,
+      "ecart": 0.1797,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.95
+      },
+      "holm": {
+        "fenetres": 200,
+        "puissance": 0.963
+      },
+      "borne_basse_holm": 137,
+      "puissance_a_50": 0.644
+    },
+    {
+      "a": "PHerc1447",
+      "b": "PHerc0125",
+      "part_a": 0.0556,
+      "part_b": 0.2381,
+      "ecart": 0.1825,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.955
+      },
+      "holm": {
+        "fenetres": 200,
+        "puissance": 0.968
+      },
+      "borne_basse_holm": 134,
+      "puissance_a_50": 0.657
+    },
+    {
+      "a": "PHerc0268",
+      "b": "PHerc0257",
+      "part_a": 0.0857,
+      "part_b": 0.1053,
+      "ecart": 0.0195,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.13
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.005
+      },
+      "borne_basse_holm": 8183,
+      "puissance_a_50": 0.023
+    },
+    {
+      "a": "PHerc0268",
+      "b": "PHerc1545",
+      "part_a": 0.0857,
+      "part_b": 0.1176,
+      "ecart": 0.0319,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.283
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.02
+      },
+      "borne_basse_holm": 3242,
+      "puissance_a_50": 0.034
+    },
+    {
+      "a": "PHerc0268",
+      "b": "PHerc0826",
+      "part_a": 0.0857,
+      "part_b": 0.1333,
+      "ecart": 0.0476,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.538
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.085
+      },
+      "borne_basse_holm": 1556,
+      "puissance_a_50": 0.057
+    },
+    {
+      "a": "PHerc0268",
+      "b": "PHerc0813",
+      "part_a": 0.0857,
+      "part_b": 0.1481,
+      "ecart": 0.0624,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.758
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.221
+      },
+      "borne_basse_holm": 958,
+      "puissance_a_50": 0.087
+    },
+    {
+      "a": "PHerc0268",
+      "b": "PHerc1203",
+      "part_a": 0.0857,
+      "part_b": 0.1875,
+      "ecart": 0.1018,
+      "nominal": {
+        "fenetres": 200,
+        "puissance": 0.817
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.768
+      },
+      "borne_basse_holm": 410,
+      "puissance_a_50": 0.212
+    },
+    {
+      "a": "PHerc0268",
+      "b": "PHerc0800",
+      "part_a": 0.0857,
+      "part_b": 0.2,
+      "ecart": 0.1143,
+      "nominal": {
+        "fenetres": 200,
+        "puissance": 0.89
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 0.882
+      },
+      "borne_basse_holm": 338,
+      "puissance_a_50": 0.263
+    },
+    {
+      "a": "PHerc0268",
+      "b": "PHerc0191",
+      "part_a": 0.0857,
+      "part_b": 0.2308,
+      "ecart": 0.1451,
+      "nominal": {
+        "fenetres": 200,
+        "puissance": 0.976
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 0.988
+      },
+      "borne_basse_holm": 227,
+      "puissance_a_50": 0.407
+    },
+    {
+      "a": "PHerc0268",
+      "b": "PHerc1218",
+      "part_a": 0.0857,
+      "part_b": 0.2353,
+      "ecart": 0.1496,
+      "nominal": {
+        "fenetres": 200,
+        "puissance": 0.982
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 0.992
+      },
+      "borne_basse_holm": 216,
+      "puissance_a_50": 0.429
+    },
+    {
+      "a": "PHerc0268",
+      "b": "PHerc0125",
+      "part_a": 0.0857,
+      "part_b": 0.2381,
+      "ecart": 0.1524,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.806
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 0.994
+      },
+      "borne_basse_holm": 210,
+      "puissance_a_50": 0.443
+    },
+    {
+      "a": "PHerc0257",
+      "b": "PHerc1545",
+      "part_a": 0.1053,
+      "part_b": 0.1176,
+      "ecart": 0.0124,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.07
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.001
+      },
+      "borne_basse_holm": 23384,
+      "puissance_a_50": 0.022
+    },
+    {
+      "a": "PHerc0257",
+      "b": "PHerc0826",
+      "part_a": 0.1053,
+      "part_b": 0.1333,
+      "ecart": 0.0281,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.2
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.011
+      },
+      "borne_basse_holm": 4827,
+      "puissance_a_50": 0.032
+    },
+    {
+      "a": "PHerc0257",
+      "b": "PHerc0813",
+      "part_a": 0.1053,
+      "part_b": 0.1481,
+      "ecart": 0.0429,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.406
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.044
+      },
+      "borne_basse_holm": 2177,
+      "puissance_a_50": 0.049
+    },
+    {
+      "a": "PHerc0257",
+      "b": "PHerc1203",
+      "part_a": 0.1053,
+      "part_b": 0.1875,
+      "ecart": 0.0822,
+      "nominal": {
+        "fenetres": 400,
+        "puissance": 0.897
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.42
+      },
+      "borne_basse_holm": 667,
+      "puissance_a_50": 0.134
+    },
+    {
+      "a": "PHerc0257",
+      "b": "PHerc0800",
+      "part_a": 0.1053,
+      "part_b": 0.2,
+      "ecart": 0.0947,
+      "nominal": {
+        "fenetres": 400,
+        "puissance": 0.957
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.599
+      },
+      "borne_basse_holm": 520,
+      "puissance_a_50": 0.173
+    },
+    {
+      "a": "PHerc0257",
+      "b": "PHerc0191",
+      "part_a": 0.1053,
+      "part_b": 0.2308,
+      "ecart": 0.1255,
+      "nominal": {
+        "fenetres": 200,
+        "puissance": 0.906
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 0.906
+      },
+      "borne_basse_holm": 320,
+      "puissance_a_50": 0.292
+    },
+    {
+      "a": "PHerc0257",
+      "b": "PHerc1218",
+      "part_a": 0.1053,
+      "part_b": 0.2353,
+      "ecart": 0.13,
+      "nominal": {
+        "fenetres": 200,
+        "puissance": 0.923
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 0.929
+      },
+      "borne_basse_holm": 301,
+      "puissance_a_50": 0.312
+    },
+    {
+      "a": "PHerc0257",
+      "b": "PHerc0125",
+      "part_a": 0.1053,
+      "part_b": 0.2381,
+      "ecart": 0.1328,
+      "nominal": {
+        "fenetres": 200,
+        "puissance": 0.932
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 0.941
+      },
+      "borne_basse_holm": 290,
+      "puissance_a_50": 0.324
+    },
+    {
+      "a": "PHerc1545",
+      "b": "PHerc0826",
+      "part_a": 0.1176,
+      "part_b": 0.1333,
+      "ecart": 0.0157,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.084
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.002
+      },
+      "borne_basse_holm": 16150,
+      "puissance_a_50": 0.025
+    },
+    {
+      "a": "PHerc1545",
+      "b": "PHerc0813",
+      "part_a": 0.1176,
+      "part_b": 0.1481,
+      "ecart": 0.0305,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.215
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.012
+      },
+      "borne_basse_holm": 4484,
+      "puissance_a_50": 0.036
+    },
+    {
+      "a": "PHerc1545",
+      "b": "PHerc1203",
+      "part_a": 0.1176,
+      "part_b": 0.1875,
+      "ecart": 0.0699,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.76
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.226
+      },
+      "borne_basse_holm": 958,
+      "puissance_a_50": 0.099
+    },
+    {
+      "a": "PHerc1545",
+      "b": "PHerc0800",
+      "part_a": 0.1176,
+      "part_b": 0.2,
+      "ecart": 0.0824,
+      "nominal": {
+        "fenetres": 400,
+        "puissance": 0.876
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.382
+      },
+      "borne_basse_holm": 712,
+      "puissance_a_50": 0.131
+    },
+    {
+      "a": "PHerc1545",
+      "b": "PHerc0191",
+      "part_a": 0.1176,
+      "part_b": 0.2308,
+      "ecart": 0.1131,
+      "nominal": {
+        "fenetres": 200,
+        "puissance": 0.821
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.777
+      },
+      "borne_basse_holm": 405,
+      "puissance_a_50": 0.232
+    },
+    {
+      "a": "PHerc1545",
+      "b": "PHerc1218",
+      "part_a": 0.1176,
+      "part_b": 0.2353,
+      "ecart": 0.1176,
+      "nominal": {
+        "fenetres": 200,
+        "puissance": 0.848
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 0.819
+      },
+      "borne_basse_holm": 378,
+      "puissance_a_50": 0.25
+    },
+    {
+      "a": "PHerc1545",
+      "b": "PHerc0125",
+      "part_a": 0.1176,
+      "part_b": 0.2381,
+      "ecart": 0.1204,
+      "nominal": {
+        "fenetres": 200,
+        "puissance": 0.863
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 0.843
+      },
+      "borne_basse_holm": 363,
+      "puissance_a_50": 0.261
+    },
+    {
+      "a": "PHerc0826",
+      "b": "PHerc0813",
+      "part_a": 0.1333,
+      "part_b": 0.1481,
+      "ecart": 0.0148,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.076
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.002
+      },
+      "borne_basse_holm": 19952,
+      "puissance_a_50": 0.026
+    },
+    {
+      "a": "PHerc0826",
+      "b": "PHerc1203",
+      "part_a": 0.1333,
+      "part_b": 0.1875,
+      "ecart": 0.0542,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.515
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.079
+      },
+      "borne_basse_holm": 1661,
+      "puissance_a_50": 0.067
+    },
+    {
+      "a": "PHerc0826",
+      "b": "PHerc0800",
+      "part_a": 0.1333,
+      "part_b": 0.2,
+      "ecart": 0.0667,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.687
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.167
+      },
+      "borne_basse_holm": 1130,
+      "puissance_a_50": 0.09
+    },
+    {
+      "a": "PHerc0826",
+      "b": "PHerc0191",
+      "part_a": 0.1333,
+      "part_b": 0.2308,
+      "ecart": 0.0974,
+      "nominal": {
+        "fenetres": 400,
+        "puissance": 0.94
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.536
+      },
+      "borne_basse_holm": 566,
+      "puissance_a_50": 0.17
+    },
+    {
+      "a": "PHerc0826",
+      "b": "PHerc1218",
+      "part_a": 0.1333,
+      "part_b": 0.2353,
+      "ecart": 0.102,
+      "nominal": {
+        "fenetres": 400,
+        "puissance": 0.956
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.595
+      },
+      "borne_basse_holm": 522,
+      "puissance_a_50": 0.185
+    },
+    {
+      "a": "PHerc0826",
+      "b": "PHerc0125",
+      "part_a": 0.1333,
+      "part_b": 0.2381,
+      "ecart": 0.1048,
+      "nominal": {
+        "fenetres": 400,
+        "puissance": 0.964
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.631
+      },
+      "borne_basse_holm": 497,
+      "puissance_a_50": 0.194
+    },
+    {
+      "a": "PHerc0813",
+      "b": "PHerc1203",
+      "part_a": 0.1481,
+      "part_b": 0.1875,
+      "ecart": 0.0394,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.287
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.022
+      },
+      "borne_basse_holm": 3264,
+      "puissance_a_50": 0.047
+    },
+    {
+      "a": "PHerc0813",
+      "b": "PHerc0800",
+      "part_a": 0.1481,
+      "part_b": 0.2,
+      "ecart": 0.0519,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.455
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.058
+      },
+      "borne_basse_holm": 1935,
+      "puissance_a_50": 0.063
+    },
+    {
+      "a": "PHerc0813",
+      "b": "PHerc0191",
+      "part_a": 0.1481,
+      "part_b": 0.2308,
+      "ecart": 0.0826,
+      "nominal": {
+        "fenetres": 400,
+        "puissance": 0.829
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.304
+      },
+      "borne_basse_holm": 813,
+      "puissance_a_50": 0.124
+    },
+    {
+      "a": "PHerc0813",
+      "b": "PHerc1218",
+      "part_a": 0.1481,
+      "part_b": 0.2353,
+      "ecart": 0.0871,
+      "nominal": {
+        "fenetres": 400,
+        "puissance": 0.865
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.358
+      },
+      "borne_basse_holm": 737,
+      "puissance_a_50": 0.136
+    },
+    {
+      "a": "PHerc0813",
+      "b": "PHerc0125",
+      "part_a": 0.1481,
+      "part_b": 0.2381,
+      "ecart": 0.0899,
+      "nominal": {
+        "fenetres": 400,
+        "puissance": 0.884
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.394
+      },
+      "borne_basse_holm": 696,
+      "puissance_a_50": 0.143
+    },
+    {
+      "a": "PHerc1203",
+      "b": "PHerc0800",
+      "part_a": 0.1875,
+      "part_b": 0.2,
+      "ecart": 0.0125,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.061
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.001
+      },
+      "borne_basse_holm": 36204,
+      "puissance_a_50": 0.03
+    },
+    {
+      "a": "PHerc1203",
+      "b": "PHerc0191",
+      "part_a": 0.1875,
+      "part_b": 0.2308,
+      "ecart": 0.0433,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.295
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.023
+      },
+      "borne_basse_holm": 3197,
+      "puissance_a_50": 0.052
+    },
+    {
+      "a": "PHerc1203",
+      "b": "PHerc1218",
+      "part_a": 0.1875,
+      "part_b": 0.2353,
+      "ecart": 0.0478,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.349
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.032
+      },
+      "borne_basse_holm": 2641,
+      "puissance_a_50": 0.057
+    },
+    {
+      "a": "PHerc1203",
+      "b": "PHerc0125",
+      "part_a": 0.1875,
+      "part_b": 0.2381,
+      "ecart": 0.0506,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.385
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.04
+      },
+      "borne_basse_holm": 2368,
+      "puissance_a_50": 0.061
+    },
+    {
+      "a": "PHerc0800",
+      "b": "PHerc0191",
+      "part_a": 0.2,
+      "part_b": 0.2308,
+      "ecart": 0.0308,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.163
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.007
+      },
+      "borne_basse_holm": 6462,
+      "puissance_a_50": 0.04
+    },
+    {
+      "a": "PHerc0800",
+      "b": "PHerc1218",
+      "part_a": 0.2,
+      "part_b": 0.2353,
+      "ecart": 0.0353,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.203
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.011
+      },
+      "borne_basse_holm": 4949,
+      "puissance_a_50": 0.044
+    },
+    {
+      "a": "PHerc0800",
+      "b": "PHerc0125",
+      "part_a": 0.2,
+      "part_b": 0.2381,
+      "ecart": 0.0381,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.23
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.014
+      },
+      "borne_basse_holm": 4267,
+      "puissance_a_50": 0.046
+    },
+    {
+      "a": "PHerc0191",
+      "b": "PHerc1218",
+      "part_a": 0.2308,
+      "part_b": 0.2353,
+      "ecart": 0.0045,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.043
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.001
+      },
+      "borne_basse_holm": 316123,
+      "puissance_a_50": 0.03
+    },
+    {
+      "a": "PHerc0191",
+      "b": "PHerc0125",
+      "part_a": 0.2308,
+      "part_b": 0.2381,
+      "ecart": 0.0073,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.047
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.001
+      },
+      "borne_basse_holm": 121099,
+      "puissance_a_50": 0.03
+    },
+    {
+      "a": "PHerc1218",
+      "b": "PHerc0125",
+      "part_a": 0.2353,
+      "part_b": 0.2381,
+      "ecart": 0.0028,
+      "nominal": {
+        "fenetres": null,
+        "puissance": 0.042
+      },
+      "holm": {
+        "fenetres": null,
+        "puissance": 0.001
+      },
+      "borne_basse_holm": 833880,
+      "puissance_a_50": 0.03
+    }
+  ],
+  "au_temoin": [
+    {
+      "rouleau": "PHerc0358",
+      "part": 0.0357,
+      "nominal": {
+        "fenetres": 400,
+        "puissance": 0.996
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 0.949
+      }
+    },
+    {
+      "rouleau": "PHerc0211",
+      "part": 0.05,
+      "nominal": {
+        "fenetres": 200,
+        "puissance": 0.938
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 0.998
+      }
+    },
+    {
+      "rouleau": "PHerc1447",
+      "part": 0.0556,
+      "nominal": {
+        "fenetres": 200,
+        "puissance": 0.968
+      },
+      "holm": {
+        "fenetres": 400,
+        "puissance": 1.0
+      }
+    },
+    {
+      "rouleau": "PHerc0268",
+      "part": 0.0857,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.867
+      },
+      "holm": {
+        "fenetres": 200,
+        "puissance": 0.991
+      }
+    },
+    {
+      "rouleau": "PHerc0257",
+      "part": 0.1053,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.959
+      },
+      "holm": {
+        "fenetres": 200,
+        "puissance": 0.999
+      }
+    },
+    {
+      "rouleau": "PHerc1545",
+      "part": 0.1176,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.982
+      },
+      "holm": {
+        "fenetres": 100,
+        "puissance": 0.845
+      }
+    },
+    {
+      "rouleau": "PHerc0826",
+      "part": 0.1333,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.994
+      },
+      "holm": {
+        "fenetres": 100,
+        "puissance": 0.929
+      }
+    },
+    {
+      "rouleau": "PHerc0813",
+      "part": 0.1481,
+      "nominal": {
+        "fenetres": 100,
+        "puissance": 0.998
+      },
+      "holm": {
+        "fenetres": 100,
+        "puissance": 0.969
+      }
+    },
+    {
+      "rouleau": "PHerc1203",
+      "part": 0.1875,
+      "nominal": {
+        "fenetres": 50,
+        "puissance": 0.927
+      },
+      "holm": {
+        "fenetres": 100,
+        "puissance": 0.998
+      }
+    },
+    {
+      "rouleau": "PHerc0800",
+      "part": 0.2,
+      "nominal": {
+        "fenetres": 50,
+        "puissance": 0.952
+      },
+      "holm": {
+        "fenetres": 100,
+        "puissance": 0.999
+      }
+    },
+    {
+      "rouleau": "PHerc0191",
+      "part": 0.2308,
+      "nominal": {
+        "fenetres": 50,
+        "puissance": 0.985
+      },
+      "holm": {
+        "fenetres": 50,
+        "puissance": 0.847
+      }
+    },
+    {
+      "rouleau": "PHerc1218",
+      "part": 0.2353,
+      "nominal": {
+        "fenetres": 50,
+        "puissance": 0.987
+      },
+      "holm": {
+        "fenetres": 50,
+        "puissance": 0.863
+      }
+    },
+    {
+      "rouleau": "PHerc0125",
+      "part": 0.2381,
+      "nominal": {
+        "fenetres": 50,
+        "puissance": 0.988
+      },
+      "holm": {
+        "fenetres": 50,
+        "puissance": 0.873
+      }
+    }
+  ],
+  "paires_separees_par_budget": {
+    "25": {
+      "nominal": 0,
+      "holm": 0
+    },
+    "50": {
+      "nominal": 1,
+      "holm": 0
+    },
+    "100": {
+      "nominal": 15,
+      "holm": 0
+    },
+    "200": {
+      "nominal": 31,
+      "holm": 13
+    },
+    "400": {
+      "nominal": 47,
+      "holm": 29
+    }
+  },
+  "la_paire_decisive_est_atteignable": false,
+  "cout_total_fenetres": null,
+  "borne_basse_decisive": 7277,
+  "borne_basse_totale": 94601,
+  "facteur_sur_lexistant": 315.3
+}

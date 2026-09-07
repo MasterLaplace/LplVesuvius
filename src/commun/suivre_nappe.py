@@ -546,10 +546,14 @@ def _nappe_cylindrique(n=96, rayon=28.0, epaisseur=1.2, entre=0.0):
 def verifier() -> int:
     import tempfile
 
-    echecs = 0
+    echecs = controles = 0
 
     def ok(cond, quoi):
-        nonlocal echecs
+        # ⚠ Le compte des CONTROLES est tenu a cote de celui des echecs : `temoins.sh` lit le
+        # nombre de controles dans le verdict, et une batterie qui n'en publierait pas serait
+        # comptee pour zero — donc invisible dans le total du depot.
+        nonlocal echecs, controles
+        controles += 1
         print(("  ✅ " if cond else "  ❌ ") + quoi)
         if not cond:
             echecs += 1
@@ -806,7 +810,12 @@ def verifier() -> int:
         ok(True, "un type déclaré trop petit est refusé")
         ok("type lu" in str(e), "... et le refus dit que le type lu n'est pas celui des données")
 
-    print(f"\n{'tous les témoins passent' if not echecs else f'{echecs} échec(s)'}")
+    # ⚠⚠⚠ LE VERDICT EST ECRIT DANS LE FORMAT DU DEPOT, et ce n'est pas cosmetique :
+    # `temoins.sh` ne compte une batterie que s'il lit « ALL PASS », donc une batterie qui
+    # passe sans le dire ainsi est une batterie qu'aucun run complet ne peut compter — et
+    # c'est exactement pourquoi ce fichier n'y etait pas enregistre.
+    print(f"\n{'ALL PASS' if not echecs else 'FAILURES'} ({echecs} failures, "
+          f"{controles} checks)")
     return 1 if echecs else 0
 
 

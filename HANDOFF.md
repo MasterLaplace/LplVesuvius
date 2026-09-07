@@ -1239,7 +1239,7 @@ l'équipe : data/repos/villa/scrollprize.org/docs/37_2026_open_problems.md.
 Maintenant : continue à vider les tâches et tenter d'atteindre ce graal-là ; n'oublie
 cependant pas de mettre à jour la documentation et que chaque script dans le terminal peut
 être perdu, donc s'il mérite d'être du vrai code n'hésite pas. et également que c'est bien
-les illustrations/figures/images dans les doc.
+les illustrations/figures/images dans les doc. NE PAS relancer temoins.sh en entier (trop long) — ne lancer que les batteries touchées.
 ```
 
 Cinq exigences permanentes : **(a)** ⭐⭐⭐ **le graal est le déroulement AUTOMATIQUE livré en

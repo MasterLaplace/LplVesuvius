@@ -5518,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 4920
+- **lignes** : 5041
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -6036,6 +6036,50 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     le voisinage **déjà déployé** rend **3 à 9 µm** sur une marche, de façon constante, sur toutes
     les ancres essayées, sans **aucun** réglage. Que ça se traduise en spires dépend de la marge
     que l'ancre avait — une propriété de la **matière** à cet endroit, pas de la méthode.
+  - ⚠⚠ **UNE GARDE QUI N'EST PAS ATTEIGNABLE NE GARDE RIEN — trois batteries retrouvées
+    (2026-09-07, `batteries_enregistrees`, 9 contrôles).** Le défaut n'était **pas** l'absence de
+    garde : `temoins.sh` la porte déjà, mais elle n'est atteignable **qu'en run complet**, que la
+    consigne permanente interdit de payer à chaque tranche. Révélé par
+    `la_cellule_sait_elle_quelle_a_tort`, oubliée **deux tranches** après un patch qui avait
+    échoué en silence — verte à la main, jamais lancée autrement.
+  - ⭐ **Trouvé en une seconde** : deux batteries oubliées du jour, et surtout **`suivre_nappe`
+    (45 contrôles)** et **`assembler_mosaique` (21)**, oubliées **depuis toujours**. ⚠⚠ Et leur
+    vraie cause est une leçon : elles passaient en disant « tous les témoins passent » au lieu du
+    `ALL PASS (0 failures, N checks)` que `run()` exige. **Une batterie qui passe sans savoir le
+    dire dans le format du dépôt ne peut pas être comptée**, donc personne ne l'enregistre, donc
+    elle disparaît. Les deux parlent désormais la convention : **66 contrôles** que le dépôt
+    n'avait jamais comptés.
+  - ⚠ **Un faux positif gardé dans le fichier parce qu'il dit quelque chose** : ma première
+    version lisait tout `temoins.sh` et accusait `src/famille/x.py`, un chemin d'**exemple** dans
+    un commentaire. **Une garde qui accuse un commentaire est une garde qu'on apprend à
+    ignorer** — elle ne lit plus que les lignes `run`.
+  - ⛔⛔⛔ **COMBIEN DE FENÊTRES POUR QUE LA CARTE DES TREIZE DÉCIDE ? — 315× LE BUDGET ACTUEL
+    (2026-09-07, `combien_de_fenetres`, 19 contrôles, 78 paires).** `31` §10 inscrit « mesurer la
+    part comprimée rouleau par rouleau, à 50 fenêtres minimum » et dit que c'est ce qui décide
+    **sur lequel des treize** dépenser six mois ; `33` a montré qu'aux effectifs actuels la carte
+    ne sépare **rien**. Restait la question qui **précède** la campagne : à quel effectif
+    deviendrait-elle décidable ? Ce module ne mesure rien sur les rouleaux — il répond à ça.
+  - ⚠⚠ **50 est le chiffre de la MAUVAISE question.** Séparer un rouleau du **témoin** n'est pas
+    la décision ; la décision est **quel rouleau attaquer**, donc séparer les rouleaux **entre
+    eux** — deux estimations incertaines au lieu d'une contre un quasi-zéro. À 50 fenêtres on
+    sépare **1 paire sur 78** au seuil nominal et **0 après Holm** ; il faut **200** fenêtres pour
+    en séparer 13 après correction, **400** pour 29.
+  - ⭐⭐⭐ **La paire qui DÉCIDE est la plus chère de toutes, et c'est structurel** : choisir où
+    dépenser six mois demande de séparer les **deux mieux classés**, donc les deux dont les parts
+    sont les plus **proches** — PHerc0358 (3.6 %) contre PHerc0211 (5.0 %), écart **1.4 %**. Sa puissance à
+    50 fenêtres vaut **0.8 %**, et elle plafonne à **0.5 %** même à 400.
+  - ⛔ **Il en faudrait AU MOINS 7277 fenêtres par rouleau, soit 94601 au total — 315.3× le budget actuel
+    de 300.** ⚠ Et c'est une borne **basse** : l'approximation normale surestime la puissance sur
+    des parts de quelques pour-cent (`incertitude_carte` l'écrit déjà), donc elle **sous-estime**
+    l'effectif. Le vrai coût est plus grand.
+  - ⚠⚠ **Le calendrier sous-finance même la question facile** : séparer le mieux classé du témoin
+    demande **400** fenêtres après correction, là où il en inscrit 50. Les deux questions sont
+    sous-financées, et celle qui décide l'est de **deux ordres de grandeur**.
+  - ⛔⛔⛔ **Ce que ça change pour la roadmap** : l'item de septembre n'est pas seulement à lancer,
+    **son critère de décision n'est pas mesurable à ce prix**. Il faut soit un **autre critère de
+    choix de rouleau**, soit choisir autrement et le dire. ⚠ Ça ne dit **pas** que le prix est
+    hors de portée — ça dit qu'une procédure de décision proposée ne tient pas, ce qui coûte
+    infiniment moins cher à apprendre maintenant que six mois sur le mauvais rouleau.
   - ⭐⭐⭐ **UNE CELLULE PEUT-ELLE SAVOIR QU'ELLE A TORT, SANS VOIR LA CIBLE ? (2026-09-07,
     `la_cellule_sait_elle_quelle_a_tort`, 14 contrôles, 8 bras, 7 fractions).** Question de
     **produit** et pas de méthode : un dérouleur qui livre une nappe livre la prétention que chaque
@@ -6804,8 +6848,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 4228 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 4920 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 4349 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 5041 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
