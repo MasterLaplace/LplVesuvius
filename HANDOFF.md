@@ -1228,13 +1228,34 @@ Ce bloc est en tête pour une raison : c'est ce qu'il faut lire en premier aprè
 ⚠ Il vit dans l'historique d'une session, donc il disparaît avec elle. Copié verbatim :
 
 ```
-/loop continue à vider les tâches et tenter d'atteindre le graal; n'oublie cependant pas de mettre à jour la documentation et que chaque script dans le terminal peut être perdu, donc s'il mérite d'être du vrai code n'hésite pas. et également que c'est bien les illustrations/figures/images dans les doc.
+/loop LE GRAAL, ET IL EST ECRIT ICI PLUTOT QUE SUPPOSE : dérouler 100 % du recto d'un rouleau
+AUTOMATIQUEMENT — le prix tolère 8 h d'humain là où l'état de l'art en dépense 775 (31 spires
+× ~25 h de correction manuelle du transfert de spire à spire), et le livrable est une image
+DOCKER qu'ils lancent. Ce n'est PAS lire du grec, PAS entraîner un modèle d'encre : l'encre
+est la règle graduée, pas l'ouvrage, et pousser l'AUC ne sert pas l'objectif. La question se
+réduit à une seule : QU'EST-CE QUI REMPLACE L'HUMAIN QUI CORRIGE LE TRANSFERT DE SPIRE A
+SPIRE ? Cadrage complet : HANDOFF §0-§1 et docs/31_roadmap.md §1 ; problèmes ouverts de
+l'équipe : data/repos/villa/scrollprize.org/docs/37_2026_open_problems.md.
+Maintenant : continue à vider les tâches et tenter d'atteindre ce graal-là ; n'oublie
+cependant pas de mettre à jour la documentation et que chaque script dans le terminal peut
+être perdu, donc s'il mérite d'être du vrai code n'hésite pas. et également que c'est bien
+les illustrations/figures/images dans les doc.
 ```
 
-Quatre exigences permanentes : **(a)** vider le registre de tâches et viser le graal,
-**(b)** tenir la documentation à jour, **(c)** tout script de terminal qui mérite d'être du
-vrai code doit le devenir — un script perdu est une mesure perdue, **(d)** les
-illustrations, figures et images des documents comptent.
+Cinq exigences permanentes : **(a)** ⭐⭐⭐ **le graal est le déroulement AUTOMATIQUE livré en
+Docker**, pas la lecture — il est rappelé dans le prompt lui-même parce qu'une session qui ne
+l'a pas sous les yeux travaille sur un problème qu'elle n'a pas vérifié ; **(b)** vider le
+registre de tâches ; **(c)** tenir la documentation à jour ; **(d)** tout script de terminal
+qui mérite d'être du vrai code doit le devenir — un script perdu est une mesure perdue ;
+**(e)** les illustrations, figures et images des documents comptent.
+
+> ⚠⚠⚠ **Pourquoi le cadrage est DANS le prompt depuis le 2026-09-07.** Une session a passé
+> une journée entière à mesurer le transfert de spire à spire — c'est-à-dire exactement le
+> goulot du prix — **sans savoir que c'était ça**, puis a rendu une estimation de distance au
+> graal tirée de sa mémoire au lieu des documents. Le cadrage était pourtant écrit ici en §0
+> et §1, dans `31` §1, et les problèmes ouverts de l'équipe sont mirrorés dans le dépôt. Un
+> objectif qui vit dans un document qu'on peut ne pas ouvrir n'est pas un objectif : il est
+> désormais dans la première ligne de ce qui réveille la boucle.
 
 ### Où en est le dépôt
 
