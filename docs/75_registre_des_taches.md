@@ -3513,13 +3513,23 @@ lui laisse une surface **froissée**. Le témoin mélangé, qui glisse au hasard
 aussi loin que le raccrochage (2) — et c'est la seconde moitié du diagnostic : sur une marche, ce
 qui compte n'est plus *où* on glisse mais *qu'on glisse*.
 
-⚠⚠⚠ **Et un fait dérivé qui nomme le mécanisme exactement** : la fenêtre balayée par le
-raccrochage vaut ±(demi-pas + demi-gabarit) voxels, soit **±100,6 µm — 1,48 demi-feuille**. Un
-**seul** raccrochage peut donc poser la cellule sur la feuille **VOISINE**, et rien en aval ne
-peut le savoir puisque le critère qui définit « perdu » est justement la demi-feuille. Ce n'est
-pas un réglage à corriger ici — c'est la fenêtre déployée, et la tranche du critère l'avait
-dérivée pour de bonnes raisons sur **un** pas — mais sur une marche c'est une porte ouverte à
-chaque bras. Le nombre est publié à côté de la portée plutôt que laissé à déduire du code.
+⚠⚠⚠ **RECTIFIÉ LE JOUR MÊME, et l'erreur était à moi.** J'avais publié que la fenêtre du
+raccrochage vaut **±100,6 µm — 1,48 demi-feuille** et conclu qu'un **seul** raccrochage peut poser
+la cellule sur la feuille voisine. **Faux** : ±100,6 µm est la demi-largeur de la **LIGNE LUE**,
+pas le décalage atteignable. La corrélation consomme la demi-largeur du **gabarit** à chaque bout,
+donc le décalage que le raccrochage peut réellement proposer vaut **±67,8 µm — 1,00 demi-feuille
+exactement**, mesuré sur les décalages que la corrélation rend et non déduit du code. Le chiffre
+publié était **un pouvoir que le raccrochage n'a pas**, et il est remplacé par celui qu'il a. Un
+contrôle exige désormais que ce qui est **appliqué** tienne dans ce qui est **annoncé**.
+
+> ⭐⭐ **Et le fait corrigé est meilleur que le faux.** La construction du raccrochage lui interdit
+> de traverser une demi-feuille **en un seul mouvement** — ce n'est pas une coïncidence, c'est ce
+> que `t_ligne = ±(demi-pas + demi-gabarit)` produit exactement. Le glissement **appliqué** est
+> d'ailleurs bien plus petit : **22 · 24 · 19 · 19 · 18 · 16 · 15 · 14 µm** bras par bras (médiane des |t|), soit environ un tiers de
+> la borne. Ce qui dérive n'est donc **pas un pas mais leur somme** — huit bras à une vingtaine de
+> µm dans le même sens font deux demi-feuilles — et c'est ce qu'on attend d'un glissement guidé par
+> une surface de plus en plus froissée. ⚠ La corrélation des signes d'un bras à l'autre n'est pas
+> encore mesurée ; l'affirmer serait refaire la faute qu'on vient de corriger.
 
 ##### ⚠⚠ Ce que le corpus demande, et pourquoi il fallait le mesurer à part
 

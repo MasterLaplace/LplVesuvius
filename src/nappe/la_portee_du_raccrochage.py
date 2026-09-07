@@ -119,7 +119,8 @@ def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
         # pour l'oracle comme pour le reste — lui aussi garde la longueur de son pas.
         return dict(grille=neuf, garde=vivant, points=prevu, directions=dd,
                     decalage=np.zeros(len(prevu)), depart_um=float(np.median(depart)),
-                    plancher_um=float(np.median(np.abs(depart - pas_vx * voxel_um))))
+                    plancher_um=float(np.median(np.abs(depart - pas_vx * voxel_um))),
+                    glissement_um=0.0, glissement_max_um=0.0)
 
     t_gab = reglage["t_gab"]
     t_ligne = reglage["t_ligne"]
@@ -159,9 +160,14 @@ def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
     # un plancher du tout.
     dep_ok = depart[okv]
     bouge = np.abs(pas_vx + t) * voxel_um
+    # ⚠⚠ CE QUE LA CORRÉLATION PROPOSE, ET CE QUE LE BRAS A PRIS. Le premier borne le second, et
+    # les deux sont publiés : une borne sans usage ne dit pas si elle serre.
+    borne = float(max(abs(centres[0]), abs(centres[-1]))) * voxel_um if len(centres) else 0.0
     return dict(grille=neuf, garde=lisible, points=P + t[:, None] * D, directions=D,
                 decalage=t, depart_um=float(np.median(dep_ok)),
-                plancher_um=float(np.median(np.abs(dep_ok - bouge))))
+                plancher_um=float(np.median(np.abs(dep_ok - bouge))),
+                glissement_um=float(np.median(np.abs(t))) * voxel_um,
+                glissement_max_um=borne)
 
 
 def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
@@ -234,6 +240,7 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
                                 au_pas_nominal=bool(abs(g - ecart_um) < demi_feuille_um)))
 
     rng = np.random.default_rng(graine)
+    glissement_max = 0.0
     resultats: dict[str, list[dict]] = {}
     for nom in MARCHEURS:
         grille, garde = grilles[ancre]
@@ -243,6 +250,7 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
             pas = marcher(nom, grille, garde, cible, vol, reglage, rng)
             if pas is None:
                 break
+            glissement_max = max(glissement_max, pas["glissement_max_um"])
             e = distance_a(pas["points"], cible, voxel_um)
             # ⚠⚠ LE PLANCHER DU BRAS : un pas de longueur nominale le long de la normale ne
             # peut pas mieux faire que l'écart entre ce qu'il franchit et ce qu'il devait
@@ -252,6 +260,7 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
                              erreur_um=round(float(np.median(e)), 1),
                              pas_reel_um=round(pas["depart_um"], 1),
                              plancher_um=round(pas["plancher_um"], 1),
+                             glissement_um=round(pas["glissement_um"], 1),
                              ou=np.argwhere(pas["garde"]).tolist()))
             grille, garde = pas["grille"], pas["garde"]
         resultats[nom] = bras
@@ -273,8 +282,10 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
             deploye=nom == "raccroche",
             bras_faits=len(bras), bras=[{k: b[k] for k in ("bras", "vers", "cellules",
                                                            "erreur_um", "pas_reel_um",
-                                                           "plancher_um")} for b in bras],
+                                                           "plancher_um", "glissement_um")}
+                                       for b in bras],
             erreurs_um=erreurs,
+            glissements_um=[b["glissement_um"] for b in bras],
             pas_reels_um=[b["pas_reel_um"] for b in bras],
             planchers_um=[b["plancher_um"] for b in bras],
             cellules_par_bras=[b["cellules"] for b in bras],
@@ -283,14 +294,12 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
         fragment="PHerc0500P2", volume=c["volume"], voxel_um=voxel_um,
         boite=dict(centre=list(BOITE_CENTRE), cote_voxels=cote),
         pas_nominal_um=ecart_um, demi_feuille_um=round(demi_feuille_um, 2),
-        # ⚠⚠⚠ CE QUE LE RACCROCHAGE A LE DROIT DE FAIRE, en µm et en demi-feuilles. La fenêtre
-        # balayée vaut ±(demi-pas + demi-gabarit) voxels ; si elle dépasse la demi-feuille, un
-        # SEUL raccrochage peut poser la cellule sur la feuille VOISINE. Ce n'est pas un réglage
-        # à corriger ici — c'est la fenêtre déployée — mais c'est le mécanisme, et il doit être
-        # publié à côté de la portée plutôt que déduit à la lecture du code.
-        fenetre_du_raccrochage_um=round(float(reglage["t_ligne"][-1]) * voxel_um, 1),
-        fenetre_en_demi_feuilles=round(
-            float(reglage["t_ligne"][-1]) * voxel_um / demi_feuille_um, 2),
+        # ⚠⚠⚠ CE QUE LE RACCROCHAGE PEUT RÉELLEMENT APPLIQUER, mesuré sur les décalages que la
+        # corrélation propose et NON sur la demi-largeur de la ligne. Les deux diffèrent de la
+        # demi-largeur du gabarit, que la corrélation consomme à chaque bout. Publier la
+        # seconde donnerait au raccrochage un pouvoir qu'il n'a pas.
+        glissement_maximal_um=round(glissement_max, 1),
+        glissement_en_demi_feuilles=round(glissement_max / demi_feuille_um, 2),
         ancre=ancre, spires_visees=atteignables, bras_communs=commun,
         marcheurs=list(MARCHEURS), lignes=lignes, bras_du_corpus=corpus_bras,
         cout=vol.cache.cout() | dict(voxels_absents=vol.absents, reprises_reseau=vol.reprises))
@@ -395,17 +404,27 @@ def verifier() -> int:
     v("... et la part de nappe gardée est publiée",
       fab["part_de_nappe_gardee"] is None or 0.0 < fab["part_de_nappe_gardee"] <= 1.0,
       str(fab["part_de_nappe_gardee"]))
+    # ⚠⚠⚠ LE GLISSEMENT PUBLIÉ EST CELUI QUE LA CORRÉLATION PROPOSE, jamais la demi-largeur de
+    # la ligne : les deux diffèrent de la demi-largeur du gabarit, que la corrélation consomme à
+    # chaque bout, et publier la seconde donnerait au raccrochage un pouvoir qu'il n'a pas. Le
+    # contrôle exige que ce qui est APPLIQUÉ tienne dans ce qui est ANNONCÉ.
+    trop = [(x["marcheur"], b["bras"], b["glissement_um"])
+            for x in fab["lignes"] for b in x["bras"]
+            if b["glissement_um"] > fab["glissement_maximal_um"] + 1e-6]
+    v("... aucun bras ne glisse plus loin que ce que la corrélation propose",
+      not trop and fab["glissement_maximal_um"] > 0,
+      str(trop[:3]) if trop else f"au plus ±{fab['glissement_maximal_um']:.1f} µm = "
+      f"{fab['glissement_en_demi_feuilles']} demi-feuille")
+    # ⚠⚠ ET UN MARCHEUR QUI NE GLISSE PAS DOIT LE PUBLIER À ZÉRO : sans ça « le pas normal ne
+    # raccroche rien » serait une affirmation du code et non une mesure.
+    v("... et le pas normal seul ne glisse d'aucun bras",
+      all(b["glissement_um"] == 0.0
+          for x in fab["lignes"] if x["marcheur"] == "rien" for b in x["bras"]),
+      str([b["glissement_um"] for x in fab["lignes"] if x["marcheur"] == "rien"
+           for b in x["bras"]]))
     # ⚠⚠⚠ LES DEUX MOITIÉS DE LA QUESTION NE PEUVENT PAS ÊTRE VRAIES ENSEMBLE : un même
     # appariement ne peut pas trancher dans les deux sens. Si les deux sortaient vrais, c'est
     # `tranche` qui serait cassé, et tous les verdicts de la campagne avec lui.
-    # ⚠⚠ LA FENÊTRE EST PUBLIÉE EN DEMI-FEUILLES, parce que c'est la seule unité dans laquelle
-    # elle veut dire quelque chose : au-delà de un, un seul raccrochage peut poser la cellule
-    # sur la feuille voisine, et la marche n'a alors aucun moyen de le savoir.
-    v("... la fenêtre du raccrochage est publiée en demi-feuilles",
-      fab["fenetre_en_demi_feuilles"] > 0
-      and abs(fab["fenetre_du_raccrochage_um"]
-              / fab["demi_feuille_um"] - fab["fenetre_en_demi_feuilles"]) < 0.01,
-      f"{fab['fenetre_du_raccrochage_um']} µm = {fab['fenetre_en_demi_feuilles']} demi-feuilles")
     v("... les deux sens de l'écart apparié ne tranchent jamais tous les deux",
       not (fab["le_raccrochage_bat_le_pas_normal"] and fab["le_pas_normal_bat_le_raccrochage"]),
       f"{fab['le_raccrochage_bat_le_pas_normal']} / "
@@ -474,10 +493,10 @@ def afficher(r: dict) -> None:
     print(f"{'le corpus':>12} {' '.join(cases)} {r['bras_au_pas_nominal']:>8}  ·")
     print()
     print("* = au-delà de la demi-feuille : la marche est plus près de la MAUVAISE feuille")
-    print(f"fenêtre du raccrochage : ±{r['fenetre_du_raccrochage_um']} µm, soit "
-          f"{r['fenetre_en_demi_feuilles']} demi-feuille(s)"
-          + (" — un SEUL raccrochage peut poser la cellule sur la feuille VOISINE"
-             if r["fenetre_en_demi_feuilles"] > 1.0 else ""))
+    dep_l = next(x for x in r["lignes"] if x["deploye"])
+    print(f"glissement : au plus ±{r['glissement_maximal_um']} µm "
+          f"({r['glissement_en_demi_feuilles']} demi-feuille) · appliqué bras par bras "
+          f"{[round(g, 1) for g in dep_l['glissements_um']]}")
     print("! = le corpus demande à ce bras tout autre chose que le pas nominal : ce qui s'y "
           "arrête s'arrête sur la matière")
     print(f"cellules du chemin déployé : {r['cellules_au_premier_bras']} au premier bras, "

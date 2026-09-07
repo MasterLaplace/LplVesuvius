@@ -5518,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 4308
+- **lignes** : 4318
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5902,12 +5902,20 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     **surface** sur laquelle le suivant estime ses normales et relit son gabarit : elle ne
     s'ajoute pas, elle se **compose**. ⚠ Et le témoin mélangé porte **exactement aussi loin** que
     le raccrochage — sur une marche, ce qui compte n'est plus *où* on glisse mais *qu'on glisse*.
-  - ⚠⚠⚠ **Le mécanisme, dérivé et publié** : la fenêtre balayée par le raccrochage vaut
-    ±(demi-pas + demi-gabarit) voxels, soit **±100,6 µm — 1,48 demi-feuille**. Un **seul**
-    raccrochage peut donc poser la cellule sur la feuille **voisine**, et rien en aval ne peut le
-    savoir puisque « perdu » se définit justement par la demi-feuille. Ce n'est pas un réglage
-    fautif — c'est la fenêtre déployée, dérivée pour de bonnes raisons sur **un** pas — mais sur
-    une marche c'est une porte ouverte à chaque bras.
+  - ⚠⚠⚠ **UNE ERREUR À MOI, RECTIFIÉE LE JOUR MÊME.** J'avais publié que la fenêtre du
+    raccrochage vaut **±100,6 µm — 1,48 demi-feuille**, donc qu'un **seul** raccrochage peut poser
+    la cellule sur la feuille voisine. **Faux** : ±100,6 µm est la demi-largeur de la **ligne
+    lue**, pas le décalage atteignable — la corrélation consomme la demi-largeur du **gabarit** à
+    chaque bout. Le décalage réellement proposable vaut **±67,8 µm, soit 1,00 demi-feuille
+    exactement**, mesuré sur les décalages que la corrélation rend. Le chiffre publié était un
+    **pouvoir que le raccrochage n'a pas** ; un contrôle exige désormais que ce qui est appliqué
+    tienne dans ce qui est annoncé.
+  - ⭐⭐ **Et le fait corrigé vaut mieux que le faux** : la construction du raccrochage lui interdit
+    de traverser une demi-feuille **en un seul mouvement**, ce que `t_ligne = ±(demi-pas +
+    demi-gabarit)` produit exactement. Le glissement **appliqué** est d'ailleurs bien plus petit —
+    **22 · 24 · 19 · 19 · 18 · 16 · 15 · 14 µm** bras par bras — soit un tiers de la borne. Ce qui dérive n'est donc **pas un pas mais
+    leur somme**. ⚠ La corrélation des signes d'un bras à l'autre n'est pas encore mesurée :
+    l'affirmer serait refaire la faute qu'on vient de corriger.
   - ⚠⚠ **Ce que le corpus demande, mesuré SANS aucun marcheur.** Distance médiane de la spire de
     départ à celle d'arrivée : le bras 7 demande **1000,6 µm**, soit **7,4 fois** le pas nominal —
     les spires 10 et 11 sont voisines par leur **numéro** et à huit feuilles dans la **matière**.
@@ -6529,8 +6537,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 3616 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 4308 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 3626 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 4318 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

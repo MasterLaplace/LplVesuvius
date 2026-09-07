@@ -58,6 +58,8 @@ def prose(m: dict) -> list[str]:
         return next(x for x in m["lignes"] if x["marcheur"] == nom)
 
     e, inv = m["ecart_au_pas_normal"], m["ecart_du_pas_normal"]
+    dep = next(x for x in m["lignes"] if x["deploye"])
+    gl_txt = " ".join(f"{g:.0f}" for g in dep["glissements_um"])
     hors = m["bras_hors_du_pas_nominal"]
     return [
         f"la marche part de la spire {m['ancre']} et vise {m['spires_visees']}. ⚠ elle ne "
@@ -85,10 +87,12 @@ def prose(m: dict) -> list[str]:
          f"({par('raccroche')['erreurs_um'][0]:.1f} contre "
          f"{par('rien')['erreurs_um'][0]:.1f} um) puis les perd tous. aucune mesure sur UN pas "
          "ne pouvait le voir : l'erreur d'un bras devient la surface sur laquelle le suivant "
-         "estime ses normales et relit son gabarit, donc elle se compose. ⚠⚠ et la fenetre "
-         f"balayee par le raccrochage vaut ±{m['fenetre_du_raccrochage_um']:.0f} um, soit "
-         f"{m['fenetre_en_demi_feuilles']:.2f} demi-feuille : UN SEUL raccrochage peut donc "
-         "poser la cellule sur la feuille voisine, et rien en aval ne peut le savoir."
+         "estime ses normales et relit son gabarit, donc elle se compose. ⚠⚠ et le glissement "
+         f"que la correlation peut proposer vaut au plus ±{m['glissement_maximal_um']:.0f} um, "
+         f"soit {m['glissement_en_demi_feuilles']:.2f} demi-feuille EXACTEMENT : un seul "
+         "raccrochage ne peut donc PAS poser la cellule sur la feuille voisine. ce qui derive "
+         f"n'est pas un pas mais leur somme — {gl_txt} um bras par bras, tous dans le meme "
+         "sens des que la surface est froissee."
          if inv else "⚠ aucun bras commun : l'ecart apparie n'est pas calculable."),
         (f"⚠⚠ panneau B : le corpus demande a chaque bras un ecart qui lui est propre, et le "
          f"bras {hors[0] if hors else '—'} en demande "
