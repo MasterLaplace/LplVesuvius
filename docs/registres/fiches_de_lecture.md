@@ -5518,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 4729
+- **lignes** : 4805
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -6036,6 +6036,32 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     le voisinage **déjà déployé** rend **3 à 9 µm** sur une marche, de façon constante, sur toutes
     les ancres essayées, sans **aucun** réglage. Que ça se traduise en spires dépend de la marge
     que l'ancre avait — une propriété de la **matière** à cet endroit, pas de la méthode.
+  - ⭐⭐⭐ **UNE CELLULE PEUT-ELLE SAVOIR QU'ELLE A TORT, SANS VOIR LA CIBLE ? (2026-09-07,
+    `la_cellule_sait_elle_quelle_a_tort`, 14 contrôles, 8 bras, 7 fractions).** Question de
+    **produit** et pas de méthode : un dérouleur qui livre une nappe livre la prétention que chaque
+    cellule est à sa place. Si le **pli** — écart d'une cellule à la médiane de ses voisins,
+    observable **sans supervision** — prédit son **erreur**, un marcheur aveugle peut publier une
+    **confiance par cellule**. ⚠⚠ Aucun seuil : les cellules sont **classées** par leur pli et la
+    fraction gardée est **balayée**, donc la courbe entière est l'objet livré.
+  - ⚠⚠⚠ **Et la courbe ne veut rien dire sans son témoin** : garder la moitié d'un échantillon au
+    hasard déplace déjà sa médiane. Écart médian classé − hasard : **raccrochage -43.2 µm** à
+    moitié gardée, **-50.3** à un dixième, sur **8 bras sur 8** ; **pas normal -5.4** à trois
+    quarts, faiblement ; **pas normal lissé +7.1**, donc **pire que le hasard**.
+  - ⭐⭐ **Le fait le plus intéressant des trois** : le lissage retire les plis, donc il retire
+    **aussi le signal** qui permettait de savoir où l'on se trompe. La même opération qui améliore
+    la nappe **aveugle** le marcheur sur ses propres cellules — arbitrage à connaître, pas un
+    défaut, et il n'apparaît que parce que les deux quantités ont été mesurées ensemble.
+  - ⭐⭐⭐ **Le seul chiffre actionnable : « prédire » et « sauver » sont deux affirmations.** Un
+    gain de 50 µm sur une nappe à 300 en est encore à 300. Un bras n'est **sauvé** que s'il était
+    **perdu** à couverture pleine et passe **sous la demi-feuille** en classant : pas normal
+    **1/4**, raccrochage **1/6**, pas normal lissé **0/3** — et le témoin au hasard **0**.
+    ⭐ La fraction qui suffit est **90 %** : jeter les dix pour cent de cellules les plus pliées.
+    À comparer aux **45 %** que garde le refus **au seuil** — **classer coûte cinq fois moins de
+    couverture pour le même bras**. ⚠ Et c'est le **même bras 5** que le lissage achète : les
+    trois voies mènent au 5, aucune au 6.
+  - ⚠ **Ce que ça ne dit pas** : que le pli soit une bonne confiance **en général**. Il l'est là où
+    il y a des plis, et le pas normal lissé en a si peu que son classement fait pire que le hasard.
+    Une confiance par cellule utilisable demandera une autre observable, ou de ne pas lisser.
   - ⛔⛔⛔ **REFUSER SES PROPRES PLIS : la portée monte, et l'écart apparié vaut EXACTEMENT ZÉRO
     (2026-09-07, `la_portee_du_raccrochage`, 35 contrôles, 10 marcheurs).** L'idée venait de la
     tranche précédente : les plis sont **localisés** et une cellule pliée est détectable **sans la
@@ -6738,8 +6764,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 4037 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 4729 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 4113 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 4805 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

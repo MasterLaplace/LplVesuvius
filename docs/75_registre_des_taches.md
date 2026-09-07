@@ -3711,6 +3711,82 @@ portée ne dépasse ce que le corpus autorise à son ancre.
 
 
 
+
+##### ⭐⭐⭐ UNE CELLULE PEUT-ELLE SAVOIR QU'ELLE A TORT, sans regarder la cible ?
+
+> Mesure : `src/nappe/la_cellule_sait_elle_quelle_a_tort.py` (14 contrôles) →
+> `docs/mesures/la_cellule_sait_elle_quelle_a_tort.json`. Figure :
+> `src/figures/figure_la_cellule_sait_elle_quelle_a_tort.py` (10 contrôles), le 2026-09-07.
+>
+> ```bash
+> uv run python src/nappe/la_cellule_sait_elle_quelle_a_tort.py --cote 960 \
+>     --json docs/mesures/la_cellule_sait_elle_quelle_a_tort.json
+> uv run python src/figures/figure_la_cellule_sait_elle_quelle_a_tort.py \
+>     --sortie docs/images/75_la_cellule_sait_elle_quelle_a_tort.png
+> ```
+
+⚠⚠⚠ **Pourquoi cette question est celle du BUT, et pourquoi elle est indépendante de toute
+amélioration de méthode.** Un dérouleur qui livre une nappe livre aussi, implicitement, la
+prétention que **chaque cellule est à sa place**. Si le **PLI** d'une cellule — son écart à la
+médiane de ses voisins, observable **sans aucune supervision** — prédit son **ERREUR**, alors un
+marcheur aveugle peut publier une **confiance par cellule**. Il ne sait pas où est la vérité, mais
+il sait où il se trompe.
+
+![une cellule peut-elle savoir qu'elle a tort](images/75_la_cellule_sait_elle_quelle_a_tort.png)
+
+⚠⚠ **Aucun seuil n'est choisi.** Les cellules sont **classées** par leur pli et la **fraction
+gardée** est balayée : la courbe entière est l'objet livré, et le point où l'on se place appartient
+à l'auteur. ⚠⚠⚠ Et elle ne veut rien dire sans son **témoin** — garder la moitié d'un échantillon
+**au hasard** déplace déjà sa médiane, donc ce qui compte est l'écart entre les deux, à fraction
+égale et sur les mêmes cellules.
+
+| écart médian sur les bras (classé − hasard, µm) | 100 % | 90 % | 75 % | 50 % | 35 % | 25 % | 10 % |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| rien | +0.0 | -5.1 | -5.4 | -0.6 | +1.6 | -0.3 | -1.8 |
+| rien_lisse | +0.0 | -1.2 | +1.2 | +3.0 | +7.1 | +5.5 | -0.8 |
+| raccroche | +0.0 | -13.2 | -27.9 | -43.2 | -44.6 | -46.6 | -50.3 |
+
+| bras où le pli gagne | 100 % | 90 % | 75 % | 50 % | 35 % | 25 % | 10 % |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| rien | 0/8 | 7/8 | 8/8 | 5/8 | 4/8 | 4/8 | 5/8 |
+| rien_lisse | 0/8 | 6/8 | 1/8 | 3/8 | 3/8 | 3/8 | 4/8 |
+| raccroche | 0/8 | 8/8 | 8/8 | 8/8 | 8/8 | 8/8 | 7/8 |
+
+> ⚠⚠ **Le pli prédit fortement chez le RACCROCHAGE** — -43.2 µm à moitié gardée, -50.3 à un
+> dixième, et il gagne sur **8 bras sur 8**. Il prédit **faiblement** chez le pas normal (-5.4 µm
+> à trois quarts) et **pas du tout** chez le pas normal lissé (+7.1 µm, donc **pire** que le
+> hasard).
+
+> ⭐⭐ **Et cette dernière ligne est le fait le plus intéressant des trois.** Le lissage retire les
+> plis, donc il retire **aussi le signal** qui permettait de savoir où l'on se trompe. La même
+> opération qui améliore la nappe **aveugle** le marcheur sur ses propres cellules. C'est un
+> arbitrage à connaître, pas un défaut — et il n'apparaît que parce que les deux quantités ont été
+> mesurées ensemble.
+
+##### ⭐⭐⭐ Et le seul chiffre actionnable : « prédire » et « SAUVER » sont deux affirmations
+
+Un gain de cinquante micromètres sur une nappe à trois cents en est **encore à trois cents**. Un
+bras n'est **SAUVÉ** que s'il était **perdu** à couverture pleine et **passe sous la demi-feuille**
+en classant.
+
+| marcheur | bras perdus | sauvés en classant | sauvés au hasard | fraction qui suffit |
+|---|---:|---:|---:|---:|
+| rien | 4 | **1** | 0 | 90 % |
+| rien_lisse | 3 | **0** | 0 | — |
+| raccroche | 6 | **1** | 0 | 90 % |
+
+> ⭐⭐⭐ **Le pas normal sauve un bras en jetant les DIX POUR CENT de cellules les plus pliées, et
+> le témoin au hasard n'en sauve AUCUN.** À comparer aux **45 %** que garde le marcheur qui refuse
+> ses plis à un **seuil** : **classer coûte cinq fois moins de couverture pour le même bras**. Et
+> c'est le même bras que le lissage achète — donc les trois voies mènent au bras 5 et aucune ne
+> mène au 6.
+
+⚠ **Ce que ça ne dit pas** : que le pli soit une bonne confiance **en général**. Il l'est là où il
+y a des plis, et le pas normal lissé en a si peu que son classement fait **pire** que le hasard.
+Une confiance par cellule utilisable demandera donc soit une autre observable, soit de ne pas
+lisser — et les deux se mesurent.
+
+---
 ##### ⛔⛔⛔ REFUSER SES PROPRES PLIS : la portée monte, et l'écart apparié vaut EXACTEMENT ZÉRO
 
 ⚠⚠⚠ **L'idée était bonne et vient de la tranche précédente** : les plis sont **localisés**, et une

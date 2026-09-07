@@ -317,7 +317,8 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
             lissage_nappe: tuple[int, int] = (1, 1),
             marcheurs: tuple[str, ...] | None = None,
             dossier_obj: Path | None = None,
-            champs_de_froissement: bool = False) -> dict:
+            champs_de_froissement: bool = False,
+            erreurs_par_cellule: bool = False) -> dict:
     """Jusqu'où chaque marcheur va avant que son erreur ne dépasse la demi-feuille."""
     from le_pas_normal_atteint_la_spire import distance_a, normales  # noqa: PLC0415
     from le_raccrochage_a_la_matiere import (  # noqa: PLC0415
@@ -400,6 +401,11 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     # pas sérialisable dans le JSON — un tableau par bras et par marcheur — donc il est rendu à
     # côté du résultat et retiré par son appelant.
     champs: dict[str, list] = {nom: [] for nom in (marcheurs or MARCHEURS)}
+    # ⚠⚠ ET L'ERREUR PAR CELLULE AVEC L'INDICE DE SA CELLULE, sur demande. Une médiane par bras
+    # ne dit pas quelles cellules sont fausses, et c'est exactement la question qu'un dérouleur
+    # doit pouvoir poser à sa propre nappe. Comme les champs, ce n'est pas sérialisable — un
+    # tableau par bras et par marcheur — donc c'est rendu à côté et retiré par l'appelant.
+    par_cellule: dict[str, list] = {nom: [] for nom in (marcheurs or MARCHEURS)}
     # ⚠⚠ RESTREINDRE LES MARCHEURS SERT UN BALAYAGE, PAS UN VERDICT. Un balayage de réglage n'a
     # besoin que de la colonne qu'il balaie, et faire marcher les autres à chaque réglage
     # coûterait des lectures de volume pour rien. Mais un résultat restreint ne porte plus les
@@ -494,6 +500,8 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
 
                 champs[nom].append(champ_de_froissement(etat["grille"], etat["garde"],
                                                         voxel_um))
+            if erreurs_par_cellule:
+                par_cellule[nom].append((ou_k, e))
             grille, garde = etat["grille"], etat["garde"]
         resultats[nom] = bras
 
@@ -649,6 +657,8 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     r["cellules_au_dernier_bras"] = cpb[-1] if cpb else 0
     if champs_de_froissement:
         r["champs"] = champs
+    if erreurs_par_cellule:
+        r["erreurs_par_cellule"] = par_cellule
     r["part_de_nappe_gardee"] = (
         round(r["cellules_au_dernier_bras"] / r["cellules_au_premier_bras"], 3)
         if r["cellules_au_premier_bras"] else None)
