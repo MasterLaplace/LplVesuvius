@@ -43,6 +43,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "commun"))
 from le_corpus_des_spires import corpus_fabrique, volume_fabrique  # noqa: E402
 
 MARCHEURS = ("rien", "rien_lisse", "raccroche")
+# ⚠⚠⚠ DEUX OBSERVABLES, ET LA CONVENTION EST QUE GRAND VEUT DIRE SUSPECT. Le pli est déjà dans
+# ce sens ; l'intensité est dans l'AUTRE — une feuille est un ruban brillant, donc c'est le
+# point SOMBRE qui est suspect. On classe donc sur son opposé, et le dire ici plutôt que de le
+# cacher dans un signe est ce qui évite de publier une courbe parfaitement inversée.
+OBSERVABLES = ("pli", "obscurite")
 # ⚠ Les fractions gardées sont un balayage, pas des réglages : la courbe entière est l'objet
 # livré. Elles descendent jusqu'à un dixième parce qu'en dessous la médiane porte sur si peu de
 # cellules qu'elle mesure surtout le tirage.
@@ -103,18 +108,20 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     lignes = []
     for nom in MARCHEURS:
         bras = []
-        for k, ((pli, ou_pli), (ou, err)) in enumerate(zip(champs[nom], parcelles[nom]),
-                                                       start=1):
+        for k, ((pli, ou_pli), (ou, err, inten)) in enumerate(zip(champs[nom], parcelles[nom]),
+                                                             start=1):
             # ⚠⚠ LE PLI ET L'ERREUR SONT LUS SUR LES MÊMES CELLULES, et seules celles où le pli
             # EXISTE comptent : une cellule de bord n'a pas de voisinage complet, donc son pli
             # n'est pas mesurable, et lui en inventer un la ferait classer sur rien.
-            garde = ou_pli[ou[:, 0], ou[:, 1]]
+            garde = ou_pli[ou[:, 0], ou[:, 1]] & np.isfinite(inten)
             if int(garde.sum()) < 8:
                 continue
-            p, e = pli[ou[:, 0], ou[:, 1]][garde], err[garde]
+            e = err[garde]
+            vues = dict(pli=pli[ou[:, 0], ou[:, 1]][garde], obscurite=-inten[garde])
             bras.append(dict(
                 bras=k, cellules=int(len(e)),
-                classe_um=[round(garder_les_meilleures(p, e, f), 1) for f in fractions],
+                classe_um={o: [round(garder_les_meilleures(vues[o], e, f), 1)
+                               for f in fractions] for o in OBSERVABLES},
                 hasard_um=[round(temoin_au_hasard(e, f, graine=graine), 1)
                            for f in fractions]))
         lignes.append(dict(marcheur=nom, bras=bras))
@@ -125,19 +132,22 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     # et il ne sauve rien. Ce compte-là distingue les deux, et il est publié à côté du gain.
     seuil = float(r["demi_feuille_um"])
     for x in lignes:
-        sauves, sauves_au_hasard = [], []
-        for b in x["bras"]:
-            perdu = b["classe_um"][0] >= seuil
-            sauves.append(bool(perdu and any(u < seuil for u in b["classe_um"][1:])))
-            sauves_au_hasard.append(bool(perdu and any(u < seuil for u in b["hasard_um"][1:])))
-        x["bras_sauves"] = int(sum(sauves))
-        x["bras_sauves_au_hasard"] = int(sum(sauves_au_hasard))
-        x["bras_perdus"] = int(sum(1 for b in x["bras"] if b["classe_um"][0] >= seuil))
-        # ⚠ La fraction qu'il aurait fallu garder pour sauver le bras est publiée : « sauvé »
-        # sans « en gardant quoi » se lirait comme un sauvetage gratuit.
-        x["fractions_qui_sauvent"] = [
-            next((f for f, u in zip(fractions[1:], b["classe_um"][1:]) if u < seuil), None)
-            for b in x["bras"] if b["classe_um"][0] >= seuil]
+        x["bras_perdus"] = int(sum(1 for b in x["bras"]
+                                   if b["classe_um"][OBSERVABLES[0]][0] >= seuil))
+        x["bras_sauves"], x["fractions_qui_sauvent"] = {}, {}
+        for o in OBSERVABLES:
+            sauves = [bool(b["classe_um"][o][0] >= seuil
+                           and any(u < seuil for u in b["classe_um"][o][1:]))
+                      for b in x["bras"]]
+            x["bras_sauves"][o] = int(sum(sauves))
+            # ⚠ La fraction qu'il aurait fallu garder pour sauver le bras est publiée : « sauvé »
+            # sans « en gardant quoi » se lirait comme un sauvetage gratuit.
+            x["fractions_qui_sauvent"][o] = [
+                next((f for f, u in zip(fractions[1:], b["classe_um"][o][1:]) if u < seuil), None)
+                for b in x["bras"] if b["classe_um"][o][0] >= seuil]
+        x["bras_sauves_au_hasard"] = int(sum(
+            1 for b in x["bras"] if b["classe_um"][OBSERVABLES[0]][0] >= seuil
+            and any(u < seuil for u in b["hasard_um"][1:])))
     # ⭐⭐⭐ LE VERDICT : à chaque fraction, classer par le pli fait-il MIEUX que jeter au hasard ?
     # Agrégé sur les bras, par marcheur, en écart médian — jamais en moyenne, parce qu'un bras
     # effondré déciderait de la moyenne à lui seul.
@@ -145,13 +155,14 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     for x in lignes:
         if not x["bras"]:
             continue
-        for j, f in enumerate(fractions):
-            ecarts = [b["classe_um"][j] - b["hasard_um"][j] for b in x["bras"]]
-            verdicts.append(dict(
-                marcheur=x["marcheur"], fraction=f,
-                ecart_median_um=round(float(np.median(ecarts)), 1),
-                bras_ou_le_pli_gagne=int(sum(1 for d in ecarts if d < 0)),
-                bras=len(ecarts)))
+        for o in OBSERVABLES:
+            for j, f in enumerate(fractions):
+                ecarts = [b["classe_um"][o][j] - b["hasard_um"][j] for b in x["bras"]]
+                verdicts.append(dict(
+                    marcheur=x["marcheur"], observable=o, fraction=f,
+                    ecart_median_um=round(float(np.median(ecarts)), 1),
+                    bras_ou_elle_gagne=int(sum(1 for d in ecarts if d < 0)),
+                    bras=len(ecarts)))
     return dict(
         fragment=r["fragment"], ancre=r["ancre"], spires_visees=r["spires_visees"],
         demi_feuille_um=r["demi_feuille_um"], marcheurs=list(MARCHEURS),
@@ -159,11 +170,14 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
         # ⚠⚠ LE VERDICT EST PAR MARCHEUR ET PAR FRACTION, jamais un seul oui : le pli peut
         # prédire chez l'un et pas chez l'autre, et à une fraction et pas à une autre. Un verdict
         # unique moyennerait ces cas et rendrait un nombre qui n'appartient à personne.
-        le_pli_predit_lerreur={
-            x["marcheur"]: bool(x["bras"]) and all(
-                v["ecart_median_um"] < 0
-                for v in verdicts if v["marcheur"] == x["marcheur"] and v["fraction"] < 1.0)
-            for x in lignes})
+        observables=list(OBSERVABLES),
+        elle_predit_lerreur={
+            o: {x["marcheur"]: bool(x["bras"]) and all(
+                v["ecart_median_um"] < 0 for v in verdicts
+                if v["marcheur"] == x["marcheur"] and v["observable"] == o
+                and v["fraction"] < 1.0)
+                for x in lignes}
+            for o in OBSERVABLES})
 
 
 def verifier() -> int:
@@ -206,29 +220,40 @@ def verifier() -> int:
     v("la mesure tourne de bout en bout sur des matières fabriquées",
       any(x["bras"] for x in fab["lignes"]),
       str({x["marcheur"]: len(x["bras"]) for x in fab["lignes"]}))
-    v("... chaque bras publie une courbe classée ET son témoin, de même longueur",
-      all(len(b["classe_um"]) == len(fab["fractions"]) == len(b["hasard_um"])
-          for x in fab["lignes"] for b in x["bras"]))
+    v("... chaque bras publie une courbe classée par observable ET son témoin, même longueur",
+      all(len(b["classe_um"][o]) == len(fab["fractions"]) == len(b["hasard_um"])
+          for x in fab["lignes"] for b in x["bras"] for o in fab["observables"]))
     # ⚠⚠ À FRACTION UN, LES DEUX COURBES SONT LE MÊME NOMBRE : garder tout ne laisse aucune place
     # au tri. Si elles différaient, c'est que l'une des deux ne mesure pas ce qu'elle annonce.
-    memes = [(b["classe_um"][0], b["hasard_um"][0])
-             for x in fab["lignes"] for b in x["bras"]]
+    memes = [(b["classe_um"][o][0], b["hasard_um"][0])
+             for x in fab["lignes"] for b in x["bras"] for o in fab["observables"]]
     v("... et à fraction un, classer et tirer au hasard donnent le MÊME nombre",
       all(abs(a - b) < 0.05 for a, b in memes), str(memes[:3]))
     # ⭐⭐⭐ « PRÉDIRE » ET « SAUVER » SONT DEUX AFFIRMATIONS, et la seconde est celle qui compte :
     # un gain de cinquante micromètres sur une nappe à trois cents en est encore à trois cents.
     # Le contrôle exige que le compte des bras sauvés soit publié, et qu'un bras ne soit compté
     # sauvé que s'il était PERDU à couverture pleine.
-    v("... les bras SAUVÉS sont comptés à part des bras où le pli prédit",
-      all("bras_sauves" in x and x["bras_sauves"] <= x["bras_perdus"] for x in fab["lignes"]),
-      str({x["marcheur"]: (x["bras_sauves"], x["bras_perdus"]) for x in fab["lignes"]}))
+    v("... les bras SAUVÉS sont comptés à part, et par observable",
+      all(x["bras_sauves"][o] <= x["bras_perdus"]
+          for x in fab["lignes"] for o in fab["observables"]),
+      str({x["marcheur"]: x["bras_sauves"] for x in fab["lignes"]}))
     v("... et la fraction qu'il faut garder pour sauver un bras est publiée avec lui",
-      all(len(x["fractions_qui_sauvent"]) == x["bras_perdus"] for x in fab["lignes"]),
+      all(len(x["fractions_qui_sauvent"][o]) == x["bras_perdus"]
+          for x in fab["lignes"] for o in fab["observables"]),
       str({x["marcheur"]: x["fractions_qui_sauvent"] for x in fab["lignes"]}))
-    v("... le verdict est rendu par marcheur ET par fraction, jamais en un seul oui",
-      isinstance(fab["le_pli_predit_lerreur"], dict)
-      and len(fab["verdicts"]) >= len(fab["fractions"]),
-      str(fab["le_pli_predit_lerreur"]))
+    # ⚠⚠⚠ LES DEUX OBSERVABLES SONT BALAYÉES, et la convention « grand = suspect » doit tenir
+    # pour les deux : l'intensité est dans l'autre sens, donc on classe sur son OPPOSÉ. Si le
+    # signe était perdu, la courbe de l'obscurité sortirait parfaitement inversée — un défaut qui
+    # se lit comme « cette observable anti-prédit », c'est-à-dire comme un résultat.
+    v("... les deux observables sont balayées, et chacune a son verdict par marcheur",
+      set(fab["observables"]) == {"pli", "obscurite"}
+      and all(set(fab["elle_predit_lerreur"][o]) == set(fab["marcheurs"])
+              for o in fab["observables"]),
+      str(fab["elle_predit_lerreur"]))
+    v("... le verdict est rendu par observable, par marcheur ET par fraction",
+      isinstance(fab["elle_predit_lerreur"], dict)
+      and len(fab["verdicts"]) >= len(fab["fractions"]) * len(fab["observables"]),
+      str(fab["elle_predit_lerreur"]))
     v("... le résultat est sérialisable tel quel, sans type qui traîne",
       isinstance(json.dumps(fab), str))
     souci = None
@@ -248,39 +273,36 @@ def afficher(r: dict) -> None:
           f"{r['demi_feuille_um']} µm")
     print()
     entete = " ".join(f"{f:>8.0%}" for f in r["fractions"])
-    for x in r["lignes"]:
-        if not x["bras"]:
-            continue
-        print(f"{x['marcheur']} — erreur médiane (µm) selon la part de nappe GARDÉE")
-        print(f"{'bras':>6} {entete}")
-        for b in x["bras"]:
-            cl = " ".join(f"{u:>8.1f}" for u in b["classe_um"])
-            ha = " ".join(f"{u:>8.1f}" for u in b["hasard_um"])
-            print(f"{b['bras']:>6} {cl}   classé par le pli")
-            print(f"{'':>6} {ha}   au hasard")
-        print()
-    print("→ écart médian sur les bras, classé moins hasard (négatif = le pli prédit) :")
-    for x in r["lignes"]:
-        vs = [v for v in r["verdicts"] if v["marcheur"] == x["marcheur"]]
-        if not vs:
-            continue
-        cases = " ".join(f"{v['ecart_median_um']:>+8.1f}" for v in vs)
-        print(f"{x['marcheur']:>18} {cases}")
-        gagne = " ".join(f"{v['bras_ou_le_pli_gagne']:>4}/{v['bras']:<3}" for v in vs)
-        print(f"{'bras où il gagne':>18} {gagne}")
+    print(f"{'observable':>11} {'marcheur':>12} {entete}")
+    print("-" * (25 + 9 * len(r["fractions"])))
+    for o in r["observables"]:
+        for x in r["lignes"]:
+            vs = [v for v in r["verdicts"]
+                  if v["marcheur"] == x["marcheur"] and v["observable"] == o]
+            if not vs:
+                continue
+            cases = " ".join(f"{v['ecart_median_um']:>+8.1f}" for v in vs)
+            print(f"{o:>11} {x['marcheur']:>12} {cases}")
+            gagne = " ".join(f"{v['bras_ou_elle_gagne']:>4}/{v['bras']:<3}" for v in vs)
+            print(f"{'':>11} {'bras gagnés':>12} {gagne}")
     print()
-    for nom, oui in r["le_pli_predit_lerreur"].items():
-        print(f"→ {'⭐' if oui else '⚠'} le pli prédit l'erreur pour {nom} : "
-              f"{'OUI, à toutes les fractions' if oui else 'NON, pas à toutes les fractions'}")
+    print("écart médian sur les bras, classé moins hasard · négatif = l'observable PRÉDIT")
     print()
-    print("→ ⭐⭐⭐ et le seul chiffre actionnable : combien de bras PERDUS passent sous la "
+    for o, par in r["elle_predit_lerreur"].items():
+        for nom, oui in par.items():
+            print(f"→ {'⭐' if oui else '⚠'} « {o} » prédit l'erreur pour {nom} : "
+                  f"{'OUI, à toutes les fractions' if oui else 'non'}")
+    print()
+    print("→ ⭐⭐⭐ le seul chiffre actionnable : combien de bras PERDUS passent sous la "
           "demi-feuille en classant ?")
     for x in r["lignes"]:
         if not x["bras"]:
             continue
-        print(f"{x['marcheur']:>18} : {x['bras_sauves']}/{x['bras_perdus']} bras perdus sauvés "
-              f"(au hasard : {x['bras_sauves_au_hasard']}) · fractions qui sauvent "
-              f"{x['fractions_qui_sauvent']}")
+        for o in r["observables"]:
+            fs = [g for g in x["fractions_qui_sauvent"][o] if g is not None]
+            print(f"{x['marcheur']:>18} par « {o} » : {x['bras_sauves'][o]}/{x['bras_perdus']} "
+                  f"sauvés (au hasard : {x['bras_sauves_au_hasard']}) · fractions "
+                  f"{fs if fs else '—'}")
 
 
 def main() -> int:

@@ -5518,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 4805
+- **lignes** : 4860
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -6059,9 +6059,29 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     À comparer aux **45 %** que garde le refus **au seuil** — **classer coûte cinq fois moins de
     couverture pour le même bras**. ⚠ Et c'est le **même bras 5** que le lissage achète : les
     trois voies mènent au 5, aucune au 6.
-  - ⚠ **Ce que ça ne dit pas** : que le pli soit une bonne confiance **en général**. Il l'est là où
-    il y a des plis, et le pas normal lissé en a si peu que son classement fait pire que le hasard.
-    Une confiance par cellule utilisable demandera une autre observable, ou de ne pas lisser.
+  - ⭐⭐⭐ **ET LA SECONDE OBSERVABLE EXISTE : l'OBSCURITÉ prend le relais là où le pli échoue
+    (même module, 15 contrôles, 2 observables).** La plus physique était à portée — **le volume au
+    point prédit** : une feuille est un **ruban brillant**, donc une cellule tombée dans un **vide
+    entre deux feuilles** le voit. ⚠⚠ Lire son propre point n'est **pas** de la supervision (la
+    cible n'est jamais consultée) et c'est **un seul échantillon** par cellule, pas une ligne.
+    ⚠ La convention est que **grand = suspect** : le pli l'est déjà, l'intensité est dans l'autre
+    sens, donc on classe sur son **opposé** — le dire plutôt que le cacher dans un signe évite de
+    publier une courbe parfaitement **inversée**.
+  - ⭐⭐⭐ **Les deux observables sont COMPLÉMENTAIRES, et celle qui marche est celle que le
+    traitement n'a pas détruite.** Le **pli** prédit chez le raccrochage (-43.2 µm à moitié
+    gardée, **8 bras sur 8**) et **pas du tout** chez le pas normal lissé (+7.1, pire que le
+    hasard). L'**obscurité** fait l'inverse : -13.1 µm chez le pas normal lissé sur **7 bras sur
+    8**, -8.1 chez le pas normal. Le lissage peut effacer les plis, il ne peut **pas** empêcher
+    une cellule tombée dans un vide de lire **sombre**.
+  - ⚠⚠ **Et le chiffre actionnable ne bouge pas** : par l'obscurité le pas normal sauve **1/4**
+    bras à 50 % gardé (contre 1/4 à 90 % par le pli), le raccrochage **0/6**, le pas normal lissé
+    **0/3**. ⚠ Aucune des deux ne sauve un bras du pas normal **lissé** : une confiance par cellule
+    dit **où** un marcheur se trompe, elle ne le rend pas **juste**. Ce qu'elle change est ce qu'un
+    déroulement peut **livrer** — une nappe accompagnée de sa carte de doute — et c'est indépendant
+    de toute amélioration de méthode.
+  - ⚠ **Et à un dixième gardé, l'obscurité cesse de prédire** (+10,5 et +15,2 µm) : classer sur si
+    peu de cellules mesure surtout le tirage. C'est pourquoi la **courbe entière** est livrée
+    plutôt qu'un point.
   - ⛔⛔⛔ **REFUSER SES PROPRES PLIS : la portée monte, et l'écart apparié vaut EXACTEMENT ZÉRO
     (2026-09-07, `la_portee_du_raccrochage`, 35 contrôles, 10 marcheurs).** L'idée venait de la
     tranche précédente : les plis sont **localisés** et une cellule pliée est détectable **sans la
@@ -6764,8 +6784,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 4113 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 4805 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 4168 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 4860 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

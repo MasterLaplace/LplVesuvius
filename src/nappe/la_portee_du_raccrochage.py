@@ -501,7 +501,18 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
                 champs[nom].append(champ_de_froissement(etat["grille"], etat["garde"],
                                                         voxel_um))
             if erreurs_par_cellule:
-                par_cellule[nom].append((ou_k, e))
+                # ⚠⚠⚠ LA SECONDE OBSERVABLE : l'intensité du volume AU POINT PRÉDIT. Une feuille
+                # est un ruban brillant, donc une cellule qui atterrit dans un vide entre deux
+                # feuilles le VOIT. Lire son propre point n'est PAS de la supervision — la cible
+                # n'est pas consultée — et c'est exactement ce qu'un vrai dérouleur a en main.
+                # ⚠ Un seul échantillon par cellule, pas une ligne : c'est ce qui garde le coût
+                # d'un marcheur qui ne raccroche pas proche de celui qui ne lit rien.
+                from le_raccrochage_a_la_matiere import le_long  # noqa: PLC0415
+
+                iv, ok_i = le_long(etat["points"], etat["directions"],
+                                   np.zeros(1), vol)
+                intensite = np.where(ok_i, iv[:, 0], np.nan)
+                par_cellule[nom].append((ou_k, e, intensite))
             grille, garde = etat["grille"], etat["garde"]
         resultats[nom] = bras
 

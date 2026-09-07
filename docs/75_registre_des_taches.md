@@ -3787,6 +3787,61 @@ Une confiance par cellule utilisable demandera donc soit une autre observable, s
 lisser — et les deux se mesurent.
 
 ---
+##### ⭐⭐⭐ ET LA SECONDE OBSERVABLE EXISTE : l'OBSCURITÉ prend le relais là où le pli échoue
+
+⚠⚠⚠ **La tranche précédente laissait la question ouverte** : le pli est une confiance utilisable
+**là où il y a des plis**, et le pas normal lissé en a si peu que son classement fait **pire** que
+le hasard. Il fallait donc une **autre observable**, et la plus physique était à portée : **le
+volume au point prédit lui-même**. Une feuille est un **ruban brillant**, donc une cellule qui
+atterrit dans un **vide entre deux feuilles** le voit.
+
+> ⚠⚠ **Lire son propre point n'est PAS de la supervision** : la cible n'est jamais consultée. C'est
+> exactement ce qu'un vrai dérouleur a en main, et c'est un **seul échantillon** par cellule — pas
+> une ligne — donc le coût d'un marcheur qui ne raccroche pas reste proche de celui qui ne lit rien.
+
+⚠⚠ **La convention est que GRAND veut dire SUSPECT**, et le pli l'est déjà. L'intensité est dans
+l'autre sens, donc on classe sur son **opposé** — et le dire ici plutôt que le cacher dans un signe
+est ce qui évite de publier une courbe parfaitement **inversée**, défaut qui se lirait comme
+« cette observable anti-prédit », c'est-à-dire comme un résultat.
+
+![une cellule peut-elle savoir qu'elle a tort](images/75_la_cellule_sait_elle_quelle_a_tort.png)
+
+| observable | marcheur | 100 % | 90 % | 75 % | 50 % | 35 % | 25 % | 10 % |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| pli | rien | +0.0 | -5.1 | -5.4 | -0.6 | +1.6 | -0.3 | -1.8 |
+| pli | rien_lisse | +0.0 | -1.2 | +1.2 | +3.0 | +7.1 | +5.5 | -0.8 |
+| pli | raccroche | +0.0 | -13.2 | -27.9 | -43.2 | -44.6 | -46.6 | -50.3 |
+| obscurite | rien | +0.0 | -0.4 | -3.1 | -8.1 | -6.6 | -7.8 | +10.5 |
+| obscurite | rien_lisse | +0.0 | -0.6 | -3.6 | -10.8 | -13.1 | -12.6 | -3.2 |
+| obscurite | raccroche | +0.0 | -0.3 | -1.5 | -6.6 | -8.0 | -20.6 | +15.2 |
+
+*écart médian sur les bras, classé moins hasard, en µm. Négatif = l'observable **prédit**.*
+
+> ⭐⭐⭐ **LES DEUX OBSERVABLES SONT COMPLÉMENTAIRES, et celle qui marche est celle que le
+> traitement n'a pas détruite.** Le **pli** prédit fortement chez le raccrochage (-43.2 µm à
+> moitié gardée, -50.3 à un dixième, **8 bras sur 8**) et **pas du tout** chez le pas normal
+> lissé (+7.1, donc pire que le hasard). L'**obscurité** fait l'inverse : -13.1 µm chez le pas
+> normal lissé sur **7 bras sur 8**, et -8.1 chez le pas normal. Le lissage peut effacer les
+> plis, il ne peut **pas** empêcher une cellule tombée dans un vide de lire **sombre**.
+
+##### ⚠⚠ Et le chiffre actionnable ne bouge pas : elles disent où il se trompe sans le rendre juste
+
+| marcheur | bras perdus | sauvés par le PLI | sauvés par l'OBSCURITÉ | au hasard |
+|---|---:|---:|---:|---:|
+| rien | 4 | **1** à 90 % | **1** à 50 % | 0 |
+| rien_lisse | 3 | **0** | **0** | 0 |
+| raccroche | 6 | **1** à 90 % | **0** | 0 |
+
+> ⚠ **Aucune des deux ne sauve un bras du pas normal LISSÉ**, et c'est le point à retenir : une
+> confiance par cellule dit **où** un marcheur se trompe, elle ne le rend pas **juste**. Ce qu'elle
+> change est ce qu'un déroulement peut **livrer** — une nappe accompagnée de sa propre carte de
+> doute — et c'est indépendant de toute amélioration de méthode.
+
+⚠ Et à un dixième gardé, l'obscurité **cesse de prédire** (+10,5 et +15,2 µm) : classer sur si peu
+de cellules mesure surtout le tirage. La courbe le montre, et c'est pourquoi c'est la **courbe
+entière** qui est livrée plutôt qu'un point.
+
+---
 ##### ⛔⛔⛔ REFUSER SES PROPRES PLIS : la portée monte, et l'écart apparié vaut EXACTEMENT ZÉRO
 
 ⚠⚠⚠ **L'idée était bonne et vient de la tranche précédente** : les plis sont **localisés**, et une
