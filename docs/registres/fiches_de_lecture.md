@@ -5518,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 3492
+- **lignes** : 4308
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5885,6 +5885,53 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     obtenir un champ d'orientation sur `PHerc0500P2`, ou des spires sur un objet qui en a un.
     ⚠ `PHercParis4` publie des fibres **et** de l'`ink-3d` et c'est le rouleau le plus segmenté —
     mais ce serait changer d'objet, donc de campagne : à trancher avec l'auteur.
+  - ⛔⛔⛔ **LA MARCHE : LE RACCROCHAGE DÉPLOYÉ PORTE MOINS LOIN QUE LE PAS NORMAL SEUL
+    (2026-09-07, `la_portee_du_raccrochage`, 18 contrôles, 8 bras, ~1 800 cellules,
+    `--cote 960`).** Sept tranches mesuraient **un pas** ; le but est le **déroulement**. La
+    marche ne connaît que sa spire d'ancrage : à chaque bras elle repart de sa **propre
+    prédiction**, y recalcule ses normales, y relit son gabarit. Critère dérivé de la matière —
+    perdue quand l'erreur dépasse la **demi-feuille** (67,75 µm), au-delà de laquelle le point est
+    plus près de la feuille **voisine**. La portée **s'arrête au premier échec** : repasser sous
+    le seuil n'est pas rattraper, c'est bâtir sur une erreur.
+  - ⛔⛔⛔ **Portées : déployé 2 · pas normal seul 4 · témoin mélangé 2 · borne 6.** Et l'écart
+    apparié **tranche dans l'autre sens** — le pas normal est à **−52,0 µm** du raccrochage sur
+    **6/8 bras**, intervalle **[−53,2 ; −50,7]**, les trois conditions sans seuil tenues.
+  - ⚠⚠⚠ **Ce que ça rétracte, et ce que ça ne rétracte pas.** Le gain sur **un** pas reste vrai et
+    mesuré (bras 1 : 34,7 contre 44,0 ; bras 2 : 44,3 contre 50,1). Ce qui est rétracté est son
+    **extension** à un déroulement, que rien n'avait mesuré. L'erreur d'un bras devient la
+    **surface** sur laquelle le suivant estime ses normales et relit son gabarit : elle ne
+    s'ajoute pas, elle se **compose**. ⚠ Et le témoin mélangé porte **exactement aussi loin** que
+    le raccrochage — sur une marche, ce qui compte n'est plus *où* on glisse mais *qu'on glisse*.
+  - ⚠⚠⚠ **Le mécanisme, dérivé et publié** : la fenêtre balayée par le raccrochage vaut
+    ±(demi-pas + demi-gabarit) voxels, soit **±100,6 µm — 1,48 demi-feuille**. Un **seul**
+    raccrochage peut donc poser la cellule sur la feuille **voisine**, et rien en aval ne peut le
+    savoir puisque « perdu » se définit justement par la demi-feuille. Ce n'est pas un réglage
+    fautif — c'est la fenêtre déployée, dérivée pour de bonnes raisons sur **un** pas — mais sur
+    une marche c'est une porte ouverte à chaque bras.
+  - ⚠⚠ **Ce que le corpus demande, mesuré SANS aucun marcheur.** Distance médiane de la spire de
+    départ à celle d'arrivée : le bras 7 demande **1000,6 µm**, soit **7,4 fois** le pas nominal —
+    les spires 10 et 11 sont voisines par leur **numéro** et à huit feuilles dans la **matière**.
+    Sans cette ligne, l'effondrement du bras 7 se lirait comme un échec de méthode ; avec elle,
+    c'est un trou du corpus, et c'est pourquoi **la borne elle-même y échoue**.
+  - ⭐⭐ **Et la borne s'arrête exactement où le corpus s'arrête** : elle porte **6** bras, et 6 est
+    le nombre de bras que le corpus demande au pas nominal à une demi-feuille près. Ce qui
+    l'arrête est la **matière**, pas la méthode — la seule des deux qui se corrige.
+  - ⚠ **Trois précautions, chacune un contrôle.** (1) Le **plancher** d'un bras est dérivé : une
+    distance à un nuage est **1-lipschitzienne**, donc un point à distance *d* déplacé de *L* ne
+    peut être à moins de |*d* − *L*| — ⚠ et le déplacement n'est **pas** le pas, le raccrochage
+    glissant de *t* voxels sur la même ligne ; prendre le pas nominal aurait donné un plancher que
+    l'erreur pouvait passer sous. (2) **Une seule population** : les quatre marcheurs gardent
+    exactement les **mêmes cellules** (1 805 → 864, soit 0,479), donc aucun écart ne s'explique
+    par qui est compté. (3) **La question est posée dans les DEUX sens** — `tranche` répond « en
+    faveur du premier », donc un faux ne dit pas « les deux se valent » ; sans la moitié renversée,
+    un raccrochage qui **coûte** se lirait comme un raccrochage qui **n'apporte rien**.
+  - ⭐⭐⭐ **La première piste neuve depuis sept tranches.** *« Quelle méthode fait le meilleur
+    pas ? »* et *« quelle méthode va le plus loin ? »* ont des réponses **différentes** sur la même
+    donnée. Trois conséquences, dans l'ordre où elles se testent : débrancher le raccrochage au
+    delà du bras 2 (un **cinquième marcheur**, dont la portée se mesure) ; mesurer le
+    **froissement** du champ de décalage bras après bras (`loracle_est_il_atteignable.rugosite`) ;
+    et lisser la **surface** entre deux bras plutôt que le **décalage** d'un pas — sept tranches
+    ont lissé le second, personne n'a jamais lissé la première.
   - ⛔ **L'ÉCART DÉJÀ FRANCHI NE DIT PRESQUE RIEN DU SUIVANT (2026-09-06,
     `lecart_deja_franchi`, 16 contrôles, 5 triplets, 5163 cellules).** Un dérouleur parti d'une
     paire d'ancres connaît en chaque point la distance entre ces deux surfaces : c'était la seule
@@ -6482,8 +6529,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 3485 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 4177 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 3616 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 4308 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

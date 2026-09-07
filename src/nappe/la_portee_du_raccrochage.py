@@ -1,0 +1,526 @@
+#!/usr/bin/env python3
+"""Combien de spires la marche traverse-t-elle avant de se perdre ?
+
+⚠⚠⚠ POURQUOI CE FICHIER EXISTE, ET C'EST LA QUESTION DU BUT. Sept tranches ont mesuré ce que
+coûte **un** pas — 37,5 µm pour le chemin déployé, contre 43,6 en ne bougeant pas et 20,0 pour un
+oracle. Mais le but n'est pas un pas : c'est le **déroulement**, donc une marche qui traverse
+plusieurs feuilles. Et cette marche-là n'a jamais été mesurée avec la méthode **réellement
+déployée** : les tranches sur la dérive datent d'avant l'accord de voisinage et d'avant l'écart
+apparié qui a invalidé leur instrument.
+
+⭐⭐⭐ LE CRITÈRE N'EST PAS CHOISI, IL EST PHYSIQUE. Une marche est **perdue** quand son erreur
+dépasse la **demi-feuille** : au-delà, le point prédit est plus proche de la feuille voisine que
+de la sienne, et rien en aval ne peut le savoir. La portée est donc le plus grand bras dont
+l'erreur reste sous ce seuil, et ce seuil vient de la matière, pas d'un réglage.
+
+⚠⚠ LA MARCHE NE CONNAÎT QUE SA SPIRE DE DÉPART. À chaque bras, elle part de sa **propre
+prédiction** — jamais de la spire publiée suivante —, y recalcule ses normales, y relit son
+gabarit. Relire les spires publiées en chemin serait se ré-ancrer à chaque pas, et la portée
+mesurerait alors les ancres et non la marche.
+
+⚠⚠ ET LA POPULATION RÉTRÉCIT EN CHEMIN, ce qui est un fait sur la marche et pas un défaut : une
+cellule dont la ligne sort du volume est perdue pour de bon. Le nombre de cellules encore vivantes
+à chaque bras est donc publié à côté de l'erreur — et un second jeu de nombres, restreint aux
+cellules vivantes **au dernier bras**, dit ce que la même population donne d'un bout à l'autre.
+
+Usage :
+    uv run python src/nappe/la_portee_du_raccrochage.py --verifier
+    uv run python src/nappe/la_portee_du_raccrochage.py --cote 960 \\
+        --json docs/mesures/la_portee_du_raccrochage.json
+"""
+
+from __future__ import annotations
+
+import argparse
+import contextlib
+import io
+import json
+import sys
+from pathlib import Path
+
+import numpy as np
+
+RACINE = Path(__file__).resolve().parents[2]
+for _d in ("commun", "nappe", "encre"):
+    sys.path.insert(0, str(RACINE / "src" / _d))
+
+from le_corpus_des_spires import corpus_fabrique, corpus_publie, volume_fabrique  # noqa: E402
+from le_critere_du_raccrochage import poser_sur_la_grille  # noqa: E402
+from lecart_apparie import ecart_apparie, tranche  # noqa: E402
+
+# ⚠ Les marcheurs comparés. « rien » est le pas normal seul — la référence contre laquelle tout
+# se juge ; « oracle » regarde la cible une fois par cellule et par bras, donc c'est une BORNE
+# et jamais une méthode ; « melange » est le témoin, même géométrie et forme détruite.
+MARCHEURS = ("rien", "raccroche", "melange", "oracle")
+BORNE = "oracle"
+TEMOIN = "melange"
+
+
+def portee(erreurs: list[float], demi_feuille_um: float) -> int:
+    """Le plus grand bras dont l'erreur reste sous la demi-feuille — zéro si le premier échoue.
+
+    ⚠⚠⚠ LA PORTÉE S'ARRÊTE AU PREMIER ÉCHEC, elle ne compte pas les bras réussis. Une marche
+    qui repasse sous le seuil après l'avoir franchi n'a pas « rattrapé » : elle a traversé une
+    zone où elle était plus proche de la mauvaise feuille, et tout ce qui suit est bâti dessus.
+    Compter les succès isolés rendrait une portée qu'aucun dérouleur ne peut utiliser.
+
+    ⚠ Le seuil est la demi-feuille, qui vient de la matière : au-delà, le point prédit est plus
+    près de la feuille voisine que de la sienne.
+    """
+    for k, e in enumerate(erreurs):
+        if not np.isfinite(e) or e >= demi_feuille_um:
+            return k
+    return len(erreurs)
+
+
+def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
+    """Un pas de marche depuis la grille courante, par la méthode demandée.
+
+    ⚠⚠⚠ LES NORMALES SONT RECALCULÉES SUR LA GRILLE COURANTE, qui est la PRÉDICTION du bras
+    précédent et non une spire publiée. C'est ce que fait un vrai déroulement, et c'est là que
+    l'erreur se compose : une normale estimée sur une surface déjà fausse l'est un peu plus.
+
+    Rend la grille prédite, son masque, et de quoi juger — ou None si le pas n'est plus
+    calculable.
+    """
+    from le_pas_normal_atteint_la_spire import distance_a, normales  # noqa: PLC0415
+    from le_raccrochage_a_la_matiere import (  # noqa: PLC0415
+        accorder_les_voisins, correler, decalage_retenu, le_long, profil_autour,
+    )
+
+    n, bon = normales(grille, garde)
+    vivant = bon & garde
+    if int(vivant.sum()) < reglage["minimum"]:
+        return None
+    p, d = grille[vivant], n[vivant]
+    pas_vx = reglage["pas_vx"]
+    voxel_um = reglage["voxel_um"]
+    # ⚠ Le sens sortant est décidé sur la CIBLE, et c'est le bit de supervision unique de toute
+    # la campagne. Le décider sur la prédiction précédente ferait tourner la marche sur
+    # elle-même dès qu'elle s'égare.
+    sortant = float(np.median(distance_a(p + d * pas_vx, cible, voxel_um)))
+    rentrant = float(np.median(distance_a(p - d * pas_vx, cible, voxel_um)))
+    sens = 1.0 if sortant <= rentrant else -1.0
+    prevu, dd = p + d * (sens * pas_vx), d * sens
+    # ⚠⚠⚠ CE QUE LE BRAS DOIT RÉELLEMENT FRANCHIR, mesuré AVANT le pas et depuis là où la
+    # marche se tient. Sans lui, un bras que le corpus rend impossible — deux spires voisines
+    # par leur numéro et éloignées de huit feuilles dans la matière — se lit comme une méthode
+    # qui échoue, et le blâme tombe sur le marcheur au lieu du corpus.
+    depart = distance_a(p, cible, voxel_um)
+    if nom == "rien":
+        # ⚠ La grille porte trois coordonnées par cellule : son masque a donc la forme des deux
+        # premiers axes, jamais celle de la grille entière. Confondre les deux fait lever la
+        # pose sur un décalage de formes — ce qui est le bon échec, mais tardif.
+        neuf = np.full(grille.shape, np.nan)
+        neuf[vivant] = prevu
+        # ⚠⚠ LE PLANCHER DU BRAS, PAR CELLULE. Une distance à un nuage est 1-lipschitzienne :
+        # un point à distance d du nuage, déplacé de L, ne peut pas être à moins de |d − L|.
+        # C'est une borne INFÉRIEURE dérivée de la géométrie et d'aucun réglage, et elle vaut
+        # pour l'oracle comme pour le reste — lui aussi garde la longueur de son pas.
+        return dict(grille=neuf, garde=vivant, points=prevu, directions=dd,
+                    decalage=np.zeros(len(prevu)), depart_um=float(np.median(depart)),
+                    plancher_um=float(np.median(np.abs(depart - pas_vx * voxel_um))))
+
+    t_gab = reglage["t_gab"]
+    t_ligne = reglage["t_ligne"]
+    vg, okg = le_long(p, d, t_gab, vol)
+    if int(okg.sum()) < reglage["minimum"]:
+        return None
+    gab = profil_autour(vg[okg])
+    gab_oriente = gab if sens > 0 else gab[::-1]
+    v_, okv = le_long(prevu, dd, t_ligne, vol)
+    if int(okv.sum()) < reglage["minimum"]:
+        return None
+    lisible = poser_sur_la_grille(okv.astype(float), vivant, vivant.shape) == 1.0
+    P, D, L = prevu[okv], dd[okv], v_[okv]
+    corr, centres = correler(L, gab_oriente, t_ligne)
+    if nom == TEMOIN:
+        corr, _ = correler(L, rng.permuted(gab_oriente), t_ligne)
+    if nom == BORNE:
+        from le_raccrochage_choisit_il_bien import decalage_de_loracle  # noqa: PLC0415
+
+        t, _ = decalage_de_loracle(P, D, centres, cible, voxel_um)
+    else:
+        brut = decalage_retenu(corr, centres)
+        # ⚠⚠ L'ACCORD DE VOISINAGE EST LE CHEMIN RÉELLEMENT DÉPLOYÉ, et sept tranches ont
+        # mesuré que tout le gain vient de lui. Une marche qui ne l'appliquerait pas mesurerait
+        # un raccrochage plus grossier que celui qui tourne.
+        champ = poser_sur_la_grille(brut, lisible, lisible.shape)
+        acc, _ = accorder_les_voisins(champ, lisible)
+        ou = np.argwhere(lisible)
+        val = acc[ou[:, 0], ou[:, 1]]
+        t = np.where(np.isfinite(val), val, brut)
+    neuf = np.full(grille.shape, np.nan)
+    ou = np.argwhere(lisible)
+    neuf[ou[:, 0], ou[:, 1]] = P + t[:, None] * D
+    # ⚠ LE DÉPLACEMENT N'EST PAS LE PAS : le raccrochage glisse de t voxels le long de la même
+    # ligne, donc la cellule bouge de |pas + t| et non de pas. Prendre le pas nominal ici
+    # donnerait un « plancher » que l'erreur mesurée pourrait passer sous — c'est-à-dire pas
+    # un plancher du tout.
+    dep_ok = depart[okv]
+    bouge = np.abs(pas_vx + t) * voxel_um
+    return dict(grille=neuf, garde=lisible, points=P + t[:, None] * D, directions=D,
+                decalage=t, depart_um=float(np.median(dep_ok)),
+                plancher_um=float(np.median(np.abs(dep_ok - bouge))))
+
+
+def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
+            cote: float | None = None, bras_max: int = 8,
+            corpus: dict | None = None, volume=None) -> dict:
+    """Jusqu'où chaque marcheur va avant que son erreur ne dépasse la demi-feuille."""
+    from le_pas_normal_atteint_la_spire import distance_a, normales  # noqa: PLC0415
+    from le_raccrochage_a_la_matiere import (  # noqa: PLC0415
+        BOITE_CENTRE, BOITE_COTE, CacheDisque, Volume, ZARR, accorde_aux_spires,
+        url_du_volume,
+    )
+
+    c = corpus_publie() if corpus is None else corpus
+    voxel_um = float(c["voxel_um"])
+    ecart_um = float(c["ecart_um"])
+    pas_vx = ecart_um / voxel_um
+    demi_vx = pas_vx / 2.0
+    demi_gab = max(1, int(round(demi_vx / 2.0)))
+    demi_feuille_um = ecart_um / 2.0
+    if volume is None and not accorde_aux_spires():
+        raise RuntimeError(f"le volume {ZARR} n'est pas celui des spires ({c['volume']})")
+    if volume is None:
+        import tracecheck as tc  # noqa: PLC0415
+
+        url = url_du_volume()
+        vol = Volume(url, tc.array_meta(url, 0, 120), CacheDisque(actif=cache_actif))
+    else:
+        vol = volume
+
+    cote = BOITE_COTE if cote is None else float(cote)
+    centre = np.array(BOITE_CENTRE)
+    lo, hi = centre - cote / 2, centre + cote / 2
+    reglage = dict(minimum=minimum, pas_vx=pas_vx, voxel_um=voxel_um,
+                   t_gab=np.arange(-demi_gab, demi_gab + 1e-9, 1.0),
+                   t_ligne=np.arange(-(demi_vx + demi_gab), demi_vx + demi_gab + 1e-9, 1.0))
+
+    grilles, nuages = {}, {}
+    for rang, (a, ok) in sorted(c["grilles"].items()):
+        dans = ok & ((a >= lo) & (a <= hi)).all(axis=-1)
+        if int(dans.sum()) < minimum:
+            continue
+        grilles[rang] = (a, dans)
+        nuages[rang] = a[ok]
+
+    # ⚠⚠ L'ANCRE EST LA SPIRE LA PLUS BASSE DE LA BOÎTE, et la marche va vers les rangs
+    # croissants. Choisir l'ancre sur le résultat serait choisir l'endroit où la marche est
+    # belle ; la prendre au bord est le seul choix qui ne regarde rien.
+    rangs = sorted(grilles)
+    if len(rangs) < 2:
+        raise RuntimeError("il faut au moins deux spires dans la boîte pour marcher")
+    ancre = rangs[0]
+    atteignables = [r for r in rangs if r > ancre][:bras_max]
+    if not atteignables:
+        raise RuntimeError("aucune spire à atteindre depuis l'ancre")
+
+    # ⚠⚠⚠ CE QUE LE CORPUS DEMANDE À CHAQUE BRAS, mesuré sans aucun marcheur : la distance
+    # médiane de la spire de départ à la spire d'arrivée, dans la boîte. C'est une DESCRIPTION
+    # du corpus et jamais un verdict sur une méthode — un marcheur qui a déjà dérivé vers sa
+    # cible part de plus près que la spire publiée, donc ce chiffre ne le borne pas. Ce qui le
+    # borne est son propre plancher, bras par bras. Ce que cette ligne empêche, c'est de lire
+    # un trou de numérotation — deux spires voisines par leur numéro et éloignées de huit
+    # feuilles dans la matière — comme un échec de méthode.
+    chaine = [ancre, *atteignables]
+    corpus_bras = []
+    for k, (de, vers) in enumerate(zip(chaine, chaine[1:]), start=1):
+        ad, dd_ = grilles[de]
+        g = float(np.median(distance_a(ad[dd_], nuages[vers], voxel_um)))
+        corpus_bras.append(dict(bras=k, de=de, vers=vers, ecart_um=round(g, 1),
+                                ecart_au_pas_um=round(abs(g - ecart_um), 1),
+                                au_pas_nominal=bool(abs(g - ecart_um) < demi_feuille_um)))
+
+    rng = np.random.default_rng(graine)
+    resultats: dict[str, list[dict]] = {}
+    for nom in MARCHEURS:
+        grille, garde = grilles[ancre]
+        bras = []
+        for k, cible_rang in enumerate(atteignables, start=1):
+            cible = nuages[cible_rang]
+            pas = marcher(nom, grille, garde, cible, vol, reglage, rng)
+            if pas is None:
+                break
+            e = distance_a(pas["points"], cible, voxel_um)
+            # ⚠⚠ LE PLANCHER DU BRAS : un pas de longueur nominale le long de la normale ne
+            # peut pas mieux faire que l'écart entre ce qu'il franchit et ce qu'il devait
+            # franchir. C'est une borne INFÉRIEURE sur l'erreur, dérivée et non choisie —
+            # aucune méthode qui garde la longueur du pas ne descend en dessous.
+            bras.append(dict(bras=k, vers=cible_rang, cellules=int(len(e)),
+                             erreur_um=round(float(np.median(e)), 1),
+                             pas_reel_um=round(pas["depart_um"], 1),
+                             plancher_um=round(pas["plancher_um"], 1),
+                             ou=np.argwhere(pas["garde"]).tolist()))
+            grille, garde = pas["grille"], pas["garde"]
+        resultats[nom] = bras
+
+    if not resultats["rien"]:
+        raise RuntimeError("aucun marcheur n'a pu faire son premier pas")
+
+    # ⚠⚠⚠ UNE SECONDE LECTURE SUR UNE SEULE POPULATION : les cellules encore vivantes au
+    # dernier bras commun. La première dit ce que la marche fait vraiment — elle perd des
+    # cellules — la seconde dit ce que la même population donne d'un bout à l'autre, et les
+    # deux ensemble empêchent de lire une perte de couverture comme un gain de précision.
+    commun = min((len(v) for v in resultats.values() if v), default=0)
+    lignes = []
+    for nom in MARCHEURS:
+        bras = resultats[nom]
+        erreurs = [b["erreur_um"] for b in bras]
+        lignes.append(dict(
+            marcheur=nom, borne=nom == BORNE, temoin=nom == TEMOIN,
+            deploye=nom == "raccroche",
+            bras_faits=len(bras), bras=[{k: b[k] for k in ("bras", "vers", "cellules",
+                                                           "erreur_um", "pas_reel_um",
+                                                           "plancher_um")} for b in bras],
+            erreurs_um=erreurs,
+            pas_reels_um=[b["pas_reel_um"] for b in bras],
+            planchers_um=[b["plancher_um"] for b in bras],
+            cellules_par_bras=[b["cellules"] for b in bras],
+            portee=portee(erreurs, demi_feuille_um)))
+    r = dict(
+        fragment="PHerc0500P2", volume=c["volume"], voxel_um=voxel_um,
+        boite=dict(centre=list(BOITE_CENTRE), cote_voxels=cote),
+        pas_nominal_um=ecart_um, demi_feuille_um=round(demi_feuille_um, 2),
+        # ⚠⚠⚠ CE QUE LE RACCROCHAGE A LE DROIT DE FAIRE, en µm et en demi-feuilles. La fenêtre
+        # balayée vaut ±(demi-pas + demi-gabarit) voxels ; si elle dépasse la demi-feuille, un
+        # SEUL raccrochage peut poser la cellule sur la feuille VOISINE. Ce n'est pas un réglage
+        # à corriger ici — c'est la fenêtre déployée — mais c'est le mécanisme, et il doit être
+        # publié à côté de la portée plutôt que déduit à la lecture du code.
+        fenetre_du_raccrochage_um=round(float(reglage["t_ligne"][-1]) * voxel_um, 1),
+        fenetre_en_demi_feuilles=round(
+            float(reglage["t_ligne"][-1]) * voxel_um / demi_feuille_um, 2),
+        ancre=ancre, spires_visees=atteignables, bras_communs=commun,
+        marcheurs=list(MARCHEURS), lignes=lignes, bras_du_corpus=corpus_bras,
+        cout=vol.cache.cout() | dict(voxels_absents=vol.absents, reprises_reseau=vol.reprises))
+
+    # ⭐⭐ COMBIEN DE BRAS LE CORPUS DEMANDE AU PAS NOMINAL, avant le premier qui demande tout
+    # autre chose. Une portée qui s'arrête là s'arrête sur la matière ; une portée qui s'arrête
+    # avant s'arrête sur la méthode, et c'est la seule des deux qui se corrige.
+    r["bras_au_pas_nominal"] = portee([0.0 if b["au_pas_nominal"] else np.inf
+                                       for b in corpus_bras], 1.0)
+    r["bras_hors_du_pas_nominal"] = [b["bras"] for b in corpus_bras if not b["au_pas_nominal"]]
+
+    def trouver(nom: str) -> dict:
+        return next(x for x in r["lignes"] if x["marcheur"] == nom)
+
+    dep, rien, orc = trouver("raccroche"), trouver("rien"), trouver(BORNE)
+    r["portee_du_deploye"] = dep["portee"]
+    r["portee_sans_rien_faire"] = rien["portee"]
+    r["portee_de_loracle"] = orc["portee"]
+    r["portee_du_temoin"] = trouver(TEMOIN)["portee"]
+    # ⭐⭐⭐ LE VERDICT DU BUT : la marche déployée va-t-elle plus loin que le pas normal seul ?
+    r["le_raccrochage_porte_plus_loin"] = bool(dep["portee"] > rien["portee"])
+    r["le_raccrochage_porte_plus_loin_que_son_temoin"] = bool(
+        dep["portee"] > trouver(TEMOIN)["portee"])
+    # ⚠⚠ ET L'ÉCART APPARIÉ BRAS PAR BRAS, sur les bras que les deux ont faits : une portée est
+    # un entier, donc elle ne dit rien de la marge. L'écart dit de combien.
+    n = min(len(dep["erreurs_um"]), len(rien["erreurs_um"]))
+    r["ecart_au_pas_normal"] = (ecart_apparie(dep["erreurs_um"][:n], rien["erreurs_um"][:n])
+                                if n else None)
+    r["le_raccrochage_bat_le_pas_normal"] = bool(
+        r["ecart_au_pas_normal"] and tranche(r["ecart_au_pas_normal"]))
+    # ⚠⚠⚠ ET LA QUESTION SYMÉTRIQUE, POSÉE AVEC LE MÊME INSTRUMENT. `tranche` répond « y
+    # a-t-il une différence constante EN FAVEUR DU PREMIER », donc un faux ne dit pas « les
+    # deux se valent » : il dit « pas en faveur du premier ». Renverser l'appariement pose
+    # l'autre moitié de la question, sans seuil ajouté et sans nouvel instrument — et sans
+    # elle un raccrochage qui coûte se lirait comme un raccrochage qui n'apporte rien.
+    r["ecart_du_pas_normal"] = (ecart_apparie(rien["erreurs_um"][:n], dep["erreurs_um"][:n])
+                                if n else None)
+    r["le_pas_normal_bat_le_raccrochage"] = bool(
+        r["ecart_du_pas_normal"] and tranche(r["ecart_du_pas_normal"]))
+    # ⚠ La couverture perdue en chemin est un fait sur la marche, publié à côté de l'erreur.
+    r["cellules_au_premier_bras"] = dep["cellules_par_bras"][0] if dep["cellules_par_bras"] else 0
+    r["cellules_au_dernier_bras"] = (dep["cellules_par_bras"][-1]
+                                     if dep["cellules_par_bras"] else 0)
+    r["part_de_nappe_gardee"] = (
+        round(r["cellules_au_dernier_bras"] / r["cellules_au_premier_bras"], 3)
+        if r["cellules_au_premier_bras"] else None)
+    return r
+
+
+def verifier() -> int:
+    echecs = controles = 0
+
+    def v(nom: str, ok: bool, detail: str = "") -> None:
+        nonlocal echecs, controles
+        controles += 1
+        if not ok:
+            echecs += 1
+        print(f"  {'✅' if ok else '❌'} {nom}" + (f"  — {detail}" if detail else ""))
+
+    # --- la portée ---
+    v("la portée compte les bras réussis jusqu'au premier échec",
+      portee([10.0, 20.0, 30.0], 25.0) == 2, str(portee([10.0, 20.0, 30.0], 25.0)))
+    v("... elle vaut zéro si le premier bras échoue déjà",
+      portee([99.0, 1.0], 25.0) == 0)
+    # ⚠⚠⚠ ELLE NE COMPTE PAS LES SUCCÈS APRÈS UN ÉCHEC : une marche qui repasse sous le seuil
+    # n'a pas rattrapé, elle a traversé une zone où elle était plus près de la mauvaise feuille,
+    # et tout ce qui suit est bâti dessus.
+    v("... et un retour sous le seuil après un échec ne la rallonge PAS",
+      portee([10.0, 99.0, 10.0, 10.0], 25.0) == 1,
+      str(portee([10.0, 99.0, 10.0, 10.0], 25.0)))
+    v("... une marche qui ne dépasse jamais le seuil porte sur tous ses bras",
+      portee([1.0, 2.0, 3.0], 25.0) == 3)
+    v("... et un bras non calculable arrête la portée",
+      portee([1.0, float("nan"), 1.0], 25.0) == 1)
+
+    # ⚠⚠⚠ LE CHEMIN QUI PRODUIT LE NOMBRE PUBLIÉ, HORS LIGNE, avec ses DEUX matières.
+    from le_corpus_des_spires import geometrie_fabriquee  # noqa: PLC0415
+
+    g0 = geometrie_fabriquee()
+    fab = mesurer(minimum=20, corpus=corpus_fabrique(), volume=volume_fabrique(g0))
+    v("la mesure tourne de bout en bout sur des matières fabriquées, sans rien lire",
+      len(fab["lignes"]) == len(MARCHEURS) and fab["lignes"][0]["bras_faits"] > 0,
+      f"ancre {fab['ancre']} · vise {fab['spires_visees']}")
+    # ⚠⚠ LE SEUIL VIENT DE LA MATIÈRE : c'est la demi-feuille, pas un réglage.
+    v("... le seuil est la demi-feuille, dérivée du pas nominal",
+      abs(fab["demi_feuille_um"] - fab["pas_nominal_um"] / 2) < 1e-6,
+      f"{fab['demi_feuille_um']} pour un pas de {fab['pas_nominal_um']}")
+    v("... chaque marcheur rend une portée entre zéro et le nombre de bras qu'il a faits",
+      all(0 <= x["portee"] <= x["bras_faits"] for x in fab["lignes"]),
+      str({x["marcheur"]: (x["portee"], x["bras_faits"]) for x in fab["lignes"]}))
+    # ⚠⚠⚠ L'ORACLE EST UNE BORNE : il ne peut pas porter moins loin qu'un marcheur aveugle,
+    # puisqu'il regarde la cible à chaque bras.
+    orc = next(x for x in fab["lignes"] if x["borne"])
+    v("... l'oracle porte au moins aussi loin que tout marcheur aveugle",
+      all(orc["portee"] >= x["portee"] for x in fab["lignes"] if not x["borne"]),
+      str({x["marcheur"]: x["portee"] for x in fab["lignes"]}))
+    # ⚠⚠ LA COUVERTURE NE PEUT QUE DÉCROÎTRE : une cellule perdue l'est pour de bon.
+    v("... la couverture ne remonte jamais en chemin",
+      all(all(b <= a for a, b in zip(x["cellules_par_bras"], x["cellules_par_bras"][1:]))
+          for x in fab["lignes"]),
+      str(next(x for x in fab["lignes"] if x["deploye"])["cellules_par_bras"]))
+    v("... et la part de nappe gardée est publiée",
+      fab["part_de_nappe_gardee"] is None or 0.0 < fab["part_de_nappe_gardee"] <= 1.0,
+      str(fab["part_de_nappe_gardee"]))
+    # ⚠⚠⚠ LES DEUX MOITIÉS DE LA QUESTION NE PEUVENT PAS ÊTRE VRAIES ENSEMBLE : un même
+    # appariement ne peut pas trancher dans les deux sens. Si les deux sortaient vrais, c'est
+    # `tranche` qui serait cassé, et tous les verdicts de la campagne avec lui.
+    # ⚠⚠ LA FENÊTRE EST PUBLIÉE EN DEMI-FEUILLES, parce que c'est la seule unité dans laquelle
+    # elle veut dire quelque chose : au-delà de un, un seul raccrochage peut poser la cellule
+    # sur la feuille voisine, et la marche n'a alors aucun moyen de le savoir.
+    v("... la fenêtre du raccrochage est publiée en demi-feuilles",
+      fab["fenetre_en_demi_feuilles"] > 0
+      and abs(fab["fenetre_du_raccrochage_um"]
+              / fab["demi_feuille_um"] - fab["fenetre_en_demi_feuilles"]) < 0.01,
+      f"{fab['fenetre_du_raccrochage_um']} µm = {fab['fenetre_en_demi_feuilles']} demi-feuilles")
+    v("... les deux sens de l'écart apparié ne tranchent jamais tous les deux",
+      not (fab["le_raccrochage_bat_le_pas_normal"] and fab["le_pas_normal_bat_le_raccrochage"]),
+      f"{fab['le_raccrochage_bat_le_pas_normal']} / "
+      f"{fab['le_pas_normal_bat_le_raccrochage']}")
+    v("... l'écart au pas normal est apparié, avec son intervalle",
+      fab["ecart_au_pas_normal"] is None
+      or fab["ecart_au_pas_normal"]["intervalle_um"] is not None,
+      str(fab["ecart_au_pas_normal"]))
+    v("le résultat est sérialisable tel quel, sans type qui traîne",
+      isinstance(json.dumps(fab), str))
+    tampon, souci = io.StringIO(), None
+    try:
+        with contextlib.redirect_stdout(tampon):
+            afficher(fab)
+    except Exception as exc:  # noqa: BLE001
+        souci = f"{type(exc).__name__}: {exc}"
+    v("l'affichage tourne sur ce résultat et va jusqu'à son verdict",
+      souci is None and "PORTÉE" in tampon.getvalue(),
+      souci or f"{len(tampon.getvalue().splitlines())} lignes")
+    hors = None
+    try:
+        mesurer(minimum=20, corpus=corpus_fabrique(decalage_vx=5000.0),
+                volume=volume_fabrique(geometrie_fabriquee(decalage_vx=5000.0)))
+    except RuntimeError as exc:
+        hors = str(exc)
+    # ⚠⚠⚠ LE PLANCHER EST UNE BORNE INFÉRIEURE, et elle vaut pour TOUS les marcheurs — la
+    # distance à un nuage est 1-lipschitzienne. S'il dépassait l'erreur d'un seul bras, ce ne
+    # serait pas un plancher mais un nombre posé à côté.
+    hors = [(x["marcheur"], b["bras"], b["plancher_um"], b["erreur_um"])
+            for x in fab["lignes"] for b in x["bras"]
+            if b["plancher_um"] > b["erreur_um"] + 1e-6]
+    v("... le plancher d'un bras ne dépasse JAMAIS l'erreur mesurée sur ce bras",
+      not hors and any(x["bras"] for x in fab["lignes"]), str(hors[:3]))
+    # ⚠⚠ ET LE CORPUS EST DÉCRIT, PAS JUGÉ : un bras que le corpus demande loin du pas nominal
+    # est nommé, pour qu'un trou de numérotation ne se lise pas comme un échec de méthode.
+    v("... et le corpus publie l'écart qu'il demande à chaque bras",
+      len(fab["bras_du_corpus"]) == len(fab["spires_visees"])
+      and all("au_pas_nominal" in b for b in fab["bras_du_corpus"]),
+      str([b["ecart_um"] for b in fab["bras_du_corpus"]]))
+    v("un objet entier posé hors de la boîte est REFUSÉ, pas rendu vide",
+      hors is not None, str(hors))
+
+    print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
+    return 1 if echecs else 0
+
+
+def afficher(r: dict) -> None:
+    """Le compte rendu lisible d'une marche."""
+    print(f"pas nominal {r['pas_nominal_um']} µm · demi-feuille {r['demi_feuille_um']} µm · "
+          f"ancre = spire {r['ancre']} · vise {r['spires_visees']}")
+    print()
+    entete = " ".join(f"{b:>8}" for b in range(1, len(r["spires_visees"]) + 1))
+    print(f"{'marcheur':>12} {entete} {'portée':>8}")
+    print("-" * (14 + 9 * len(r["spires_visees"]) + 9))
+    for x in r["lignes"]:
+        cases = []
+        for e in x["erreurs_um"]:
+            perdu = "*" if e >= r["demi_feuille_um"] else " "
+            cases.append(f"{e:>7.1f}{perdu}")
+        cases += ["      —"] * (len(r["spires_visees"]) - len(cases))
+        marque = (" ⭐" if x["deploye"] else (" ⛔" if x["borne"] else
+                                             ("  ~" if x["temoin"] else "")))
+        print(f"{x['marcheur']:>12} {' '.join(cases)} {x['portee']:>8}{marque}")
+    cases = [f"{b['ecart_um']:>7.1f}{'!' if not b['au_pas_nominal'] else ' '}"
+             for b in r["bras_du_corpus"]]
+    print(f"{'le corpus':>12} {' '.join(cases)} {r['bras_au_pas_nominal']:>8}  ·")
+    print()
+    print("* = au-delà de la demi-feuille : la marche est plus près de la MAUVAISE feuille")
+    print(f"fenêtre du raccrochage : ±{r['fenetre_du_raccrochage_um']} µm, soit "
+          f"{r['fenetre_en_demi_feuilles']} demi-feuille(s)"
+          + (" — un SEUL raccrochage peut poser la cellule sur la feuille VOISINE"
+             if r["fenetre_en_demi_feuilles"] > 1.0 else ""))
+    print("! = le corpus demande à ce bras tout autre chose que le pas nominal : ce qui s'y "
+          "arrête s'arrête sur la matière")
+    print(f"cellules du chemin déployé : {r['cellules_au_premier_bras']} au premier bras, "
+          f"{r['cellules_au_dernier_bras']} au dernier — il en garde "
+          f"{r['part_de_nappe_gardee']}")
+    print(f"→ ⭐⭐⭐ PORTÉE du chemin déployé : {r['portee_du_deploye']} spires · pas normal seul "
+          f"{r['portee_sans_rien_faire']} · témoin mélangé {r['portee_du_temoin']} · ⛔ oracle "
+          f"{r['portee_de_loracle']}")
+    print(f"→ le raccrochage porte plus loin que le pas normal : "
+          f"{'OUI' if r['le_raccrochage_porte_plus_loin'] else 'NON'} · que son témoin : "
+          f"{'OUI' if r['le_raccrochage_porte_plus_loin_que_son_temoin'] else 'NON'}")
+    inv = r["ecart_du_pas_normal"]
+    if inv:
+        print(f"→ ⚠ et le PAS NORMAL bat-il le raccrochage : "
+              f"{'OUI' if r['le_pas_normal_bat_le_raccrochage'] else 'non'} "
+              f"({inv['ecart_median_um']:+.1f} µm · {inv['pas_ameliores']}/{inv['pas']} bras · "
+              f"{inv['intervalle_um']})")
+    e = r["ecart_au_pas_normal"]
+    if e:
+        print(f"→ et son écart apparié au pas normal : {e['ecart_median_um']:+.1f} µm · "
+              f"{e['pas_ameliores']}/{e['pas']} bras · {e['intervalle_um']} · "
+              f"{'TRANCHE' if tranche(e) else 'ne tranche pas'}")
+    print(f"coût : {r['cout']['blocs_telecharges']} blocs, {r['cout']['mebioctets']} Mio")
+
+
+def main() -> int:
+    p = argparse.ArgumentParser(description=__doc__.splitlines()[0],
+                                formatter_class=argparse.RawDescriptionHelpFormatter)
+    p.add_argument("--cote", type=float, default=None)
+    p.add_argument("--bras-max", type=int, default=8, dest="bras_max")
+    p.add_argument("--json", type=Path)
+    p.add_argument("--verifier", action="store_true")
+    a = p.parse_args()
+    if a.verifier:
+        return verifier()
+    r = mesurer(cote=a.cote, bras_max=a.bras_max)
+    afficher(r)
+    if a.json:
+        a.json.parent.mkdir(parents=True, exist_ok=True)
+        a.json.write_text(json.dumps(r, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"écrit : {a.json}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

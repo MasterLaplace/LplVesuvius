@@ -2976,6 +2976,13 @@ Huit pas, 16 537 cellules retenues sur 16 569 lisibles (boîte de 960 voxels) :
 
 > ⭐⭐⭐ **C'est la première fois que le raccrochage déployé est mesuré TEL QU'IL TOURNE, et il
 > gagne** : 37,5 µm contre 43,6, sur 7 pas sur 8, intervalle entièrement négatif.
+>
+> ⚠⚠⚠ **PORTÉE DE CE VERDICT, marquée le 2026-09-07 : il vaut pour UN pas, et pour un pas
+> seulement.** Mesuré depuis : sur une marche de huit bras qui repart de sa propre prédiction, le
+> même raccrochage porte **2 spires contre 4** pour le pas normal seul, et l'écart apparié
+> tranche **dans l'autre sens** (−52,0 µm, 6/8 bras). Voir *« LA MARCHE : le raccrochage déployé
+> porte MOINS LOIN que le pas normal seul »*. Le gain sur un pas n'est pas rétracté ; ce qui l'est
+> est son extension implicite à un déroulement.
 
 ⚠⚠ **Et le fait qui redéfinit le chantier : la corrélation SEULE ne tranche pas** (−0,2 µm,
 4 pas sur 8). Tout le gain vient de l'**accord de voisinage**, c'est-à-dire d'un énoncé sur la
@@ -3370,8 +3377,9 @@ c'est-à-dire une interpolation du bruit : la demi-fenêtre est à quatre, soit 
 > normale ne prend.
 >
 > ⚠ Ce que la campagne sait maintenant et ne savait pas il y a cinq tranches : le raccrochage
-> déployé **gagne** (37,5 contre 43,6, 7 pas sur 8), tout son gain vient du **voisinage** et non
-> de la corrélation, et l'information qui reste à prendre est **locale**. Ce qui n'a jamais été
+> déployé **gagne SUR UN PAS** (37,5 contre 43,6, 7 pas sur 8 — ⚠ et **perd sur une marche**,
+> mesuré le 2026-09-07 : voir *« LA MARCHE »* plus bas), tout son gain vient du **voisinage** et
+> non de la corrélation, et l'information qui reste à prendre est **locale**. Ce qui n'a jamais été
 > essayé, c'est de faire lire au raccrochage autre chose qu'une **intensité** — la piste que la
 > tranche sur le gabarit avait nommée et qu'aucune n'a encore ouverte, parce que le champ de
 > fibres publié ne couvre pas ce fragment. ⚠ Vérifier d'abord si `PHerc0500P2` a un préfixe
@@ -3439,6 +3447,129 @@ piège qui attend sa donnée ; il filtre désormais, et un contrôle l'épingle.
 > `PHercParis4` publie des fibres **et** de l'`ink-3d`, et c'est le rouleau le plus segmenté du
 > concours. ⚠ Mais ce serait changer d'objet, donc de campagne : à trancher avec l'auteur plutôt
 > qu'à décider ici.
+
+---
+
+#### ⛔⛔⛔ LA MARCHE : le raccrochage déployé porte **MOINS LOIN** que le pas normal seul
+
+> Mesure : `src/nappe/la_portee_du_raccrochage.py` (18 contrôles) →
+> `docs/mesures/la_portee_du_raccrochage.json`. Figure :
+> `src/figures/figure_la_portee_du_raccrochage.py` (17 contrôles), le 2026-09-07.
+>
+> ```bash
+> uv run python src/nappe/la_portee_du_raccrochage.py --cote 960 \
+>     --json docs/mesures/la_portee_du_raccrochage.json
+> uv run python src/figures/figure_la_portee_du_raccrochage.py \
+>     --sortie docs/images/75_la_portee_du_raccrochage.png
+> ```
+
+⚠⚠⚠ **Pourquoi cette mesure, et pourquoi elle vient maintenant.** Les sept tranches précédentes
+mesurent toutes **un pas** : on part d'une spire publiée, on en vise la suivante, on lit l'erreur.
+Or le but n'est pas un pas, c'est le **DÉROULEMENT** — et rien, dans une mesure sur un pas, ne dit
+ce que la même méthode fait sur huit. La marche ici ne connaît **que sa spire d'ancrage** : à
+chaque bras elle repart de sa **propre prédiction**, y recalcule ses normales et y relit son
+gabarit. Relire les spires publiées en chemin serait se ré-ancrer à chaque pas, et la portée
+mesurerait les ancres au lieu de la marche.
+
+⚠⚠ **Le critère vient de la matière, pas d'un réglage.** Une marche est perdue quand son erreur
+dépasse la **demi-feuille** (67,75 µm) : au-delà, le point prédit est plus près de la feuille
+**voisine** que de la sienne, et rien en aval ne peut le savoir. Et la portée **s'arrête au
+premier échec** — repasser sous le seuil après l'avoir franchi n'est pas rattraper, c'est bâtir
+sur une erreur.
+
+![jusqu'où la marche va avant d'être plus près de la mauvaise feuille](images/75_la_portee_du_raccrochage.png)
+
+**Sur 8 bras, ancre = spire 4, `--cote 960`, ~1 800 cellules au départ :**
+
+| marcheur | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | portée |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| pas normal seul | 44,0 | 50,1 | 49,5 | 67,2 | 72,2\* | 114,2\* | 1016,5\* | 177,3\* | **4** |
+| ⭐ raccrochage déployé | 34,7 | 44,3 | 71,8\* | 120,4\* | 207,2\* | 274,6\* | 1067,2\* | 499,5\* | **2** |
+| témoin mélangé | 62,4 | 64,9 | 92,6\* | 149,4\* | 267,5\* | 334,2\* | 1141,7\* | 597,5\* | 2 |
+| ⛔ la borne | 19,9 | 17,5 | 19,0 | 17,9 | 19,4 | 22,1 | 849,0\* | 105,4\* | **6** |
+| *ce que le corpus demande* | *170,0* | *119,5* | *100,6* | *120,0* | *137,6* | *89,2* | ***1000,6*** | *76,7* | *6* |
+
+*\* = au-delà de la demi-feuille. Toutes les valeurs en µm, médianes sur les cellules vivantes.*
+
+> ⛔⛔⛔ **LE VERDICT, ET IL VA CONTRE LA MÉTHODE EN SERVICE.** Le raccrochage déployé traverse
+> **2 spires**, le pas normal seul en traverse **4**. Et l'écart apparié bras par bras **tranche
+> dans l'autre sens** : le pas normal est à **-52.0 µm** du raccrochage sur **6/8 bras**,
+> intervalle **[-53.2, -50.7]** — les trois conditions sans seuil, les trois tenues.
+
+⚠⚠⚠ **Ce que ça RÉTRACTE, et ce que ça ne rétracte pas.** Le gain sur **un** pas reste mesuré et
+reste vrai : le raccrochage bat le pas normal aux bras 1 et 2 (34,7 contre 44,0 ; 44,3 contre
+50,1), exactement ce que la tranche du critère avait publié. Ce qui est rétracté est
+l'**extension** de ce gain à un déroulement, que rien n'avait mesuré et que la campagne tenait
+pour acquise. La différence n'est pas un détail de statistique : **l'erreur d'un bras devient la
+surface sur laquelle le suivant estime ses normales et relit son gabarit**, donc elle ne s'ajoute
+pas, elle se compose. Un décalage de 35 µm au bras 1 fait une normale légèrement fausse au bras 2,
+qui fait un gabarit lu de travers au bras 3.
+
+⚠⚠ **Et le raccrochage se compose PLUS VITE que le pas normal**, ce qui est le fait mécanique
+derrière le verdict : il **déplace** le point le long de la ligne, donc il déplace aussi la
+surface sur laquelle le bras suivant travaille. Un pas normal qui ne fait rien laisse au bras
+suivant une surface **régulière quoique décalée** ; un raccrochage qui glisse cellule par cellule
+lui laisse une surface **froissée**. Le témoin mélangé, qui glisse au hasard, porte exactement
+aussi loin que le raccrochage (2) — et c'est la seconde moitié du diagnostic : sur une marche, ce
+qui compte n'est plus *où* on glisse mais *qu'on glisse*.
+
+⚠⚠⚠ **Et un fait dérivé qui nomme le mécanisme exactement** : la fenêtre balayée par le
+raccrochage vaut ±(demi-pas + demi-gabarit) voxels, soit **±100,6 µm — 1,48 demi-feuille**. Un
+**seul** raccrochage peut donc poser la cellule sur la feuille **VOISINE**, et rien en aval ne
+peut le savoir puisque le critère qui définit « perdu » est justement la demi-feuille. Ce n'est
+pas un réglage à corriger ici — c'est la fenêtre déployée, et la tranche du critère l'avait
+dérivée pour de bonnes raisons sur **un** pas — mais sur une marche c'est une porte ouverte à
+chaque bras. Le nombre est publié à côté de la portée plutôt que laissé à déduire du code.
+
+##### ⚠⚠ Ce que le corpus demande, et pourquoi il fallait le mesurer à part
+
+La dernière ligne du tableau ne fait intervenir **aucun marcheur** : c'est la distance médiane de
+la spire de départ à la spire d'arrivée, dans la boîte. Le bras 7 y demande **1000,6 µm**, soit
+**7,4 fois** le pas nominal — les spires 10 et 11 sont voisines par leur **numéro** et éloignées
+de huit feuilles dans la **matière**. Sans cette ligne, l'effondrement du bras 7 se lirait comme
+un échec de méthode ; avec elle, c'est un trou du corpus, et c'est pourquoi **la borne elle-même y
+échoue**.
+
+> ⭐⭐ **Et la borne s'arrête exactement là où le corpus s'arrête** : elle porte **6** bras, et
+> **6** est le nombre de bras que le corpus demande au pas nominal à une demi-feuille près. Ce
+> qui l'arrête est la **matière**, pas la méthode — la seule des deux qui ne se corrige pas.
+
+##### ⚠ Trois précautions, chacune un contrôle de la batterie
+
+1. **Le plancher est dérivé, jamais choisi.** Une distance à un nuage est **1-lipschitzienne** :
+   un point à distance *d*, déplacé de *L*, ne peut pas être à moins de |*d* − *L*|. Chaque bras
+   publie donc une borne inférieure sur son erreur, et un contrôle exige qu'elle ne dépasse jamais
+   l'erreur mesurée. ⚠ Le déplacement n'est **pas** le pas : le raccrochage glisse de *t* voxels
+   sur la même ligne, donc la cellule bouge de |pas + *t*|. Prendre le pas nominal ici aurait
+   donné un « plancher » que l'erreur mesurée pouvait passer sous — c'est-à-dire pas un plancher.
+2. **Une seule population.** Les quatre marcheurs gardent **exactement les mêmes cellules** à
+   chaque bras (1 805 → 864, soit 0,479 de la nappe), donc aucune différence de ce tableau ne
+   s'explique par qui est compté. La perte est réelle et publiée à côté de l'erreur : une erreur
+   qui s'améliorerait pendant que la couverture s'effondre ne serait pas un progrès.
+3. **La question est posée dans les DEUX sens.** `tranche` répond « y a-t-il une différence
+   constante **en faveur du premier** », donc un faux ne veut pas dire « les deux se valent ». La
+   moitié renversée est publiée à côté, avec le même instrument et sans seuil ajouté — sans elle,
+   un raccrochage qui **coûte** se lirait comme un raccrochage qui **n'apporte rien**, ce qui est
+   un tout autre verdict. Un contrôle exige que les deux ne soient jamais vrais ensemble.
+
+> ⭐⭐⭐ **Ce que cette tranche laisse, et c'est la première piste neuve depuis sept tranches.**
+> La question à laquelle la campagne répondait — *« quelle méthode fait le meilleur pas ? »* —
+> n'est pas celle du but. Celle du but est *« quelle méthode va le plus loin ? »*, et les deux
+> ont des réponses **différentes** sur la même donnée. Trois conséquences immédiates, dans
+> l'ordre où elles se testent :
+>
+> 1. **Ce qui tourne devrait être débranché sur les bras ≥ 3.** Une méthode dont on sait qu'elle
+>    coûte au-delà du deuxième bras n'a pas à y être appliquée. ⚠ Mesure, pas décision : un
+>    marcheur qui raccroche les deux premiers bras puis passe au pas normal seul est un cinquième
+>    marcheur, et sa portée se mesure comme les autres.
+> 2. **Le froissement se mesure.** La rugosité du champ de décalage est déjà instrumentée
+>    (`loracle_est_il_atteignable.rugosite`) ; si le diagnostic est juste, elle doit **croître**
+>    bras après bras pour le raccrochage et le témoin, et rester plate pour le pas normal.
+> 3. **Et le lissage devrait porter sur la SURFACE, pas sur le décalage.** Sept tranches ont
+>    lissé le champ de décalage d'**un** pas ; ce que la marche abîme est la **nappe**, et rien
+>    n'a jamais lissé celle-là entre deux bras.
+
+---
 
 ### C2 ⭐ — le nul verso (H7)
 
