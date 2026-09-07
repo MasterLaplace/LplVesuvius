@@ -259,7 +259,7 @@ def sur_les_cellules_communes(a: list[dict], b: list[dict]) -> tuple[list, list,
 
 def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
             cote: float | None = None, bras_max: int = 8,
-            corpus: dict | None = None, volume=None) -> dict:
+            corpus: dict | None = None, volume=None, decalage_ancre: int = 0) -> dict:
     """Jusqu'où chaque marcheur va avant que son erreur ne dépasse la demi-feuille."""
     from le_pas_normal_atteint_la_spire import distance_a, normales  # noqa: PLC0415
     from le_raccrochage_a_la_matiere import (  # noqa: PLC0415
@@ -305,7 +305,14 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     rangs = sorted(grilles)
     if len(rangs) < 2:
         raise RuntimeError("il faut au moins deux spires dans la boîte pour marcher")
-    ancre = rangs[0]
+    # ⚠⚠ L'ANCRE EST LA PLUS BASSE DE LA BOÎTE, et `decalage_ancre` la fait glisser vers le haut
+    # pour REFAIRE la même marche ailleurs. Ce n'est pas un réglage de méthode : c'est ce qui
+    # permet de demander si un verdict tient hors de la population où il a été trouvé — question
+    # que ce dépôt a déjà eu à se poser après trois verdicts inversés par un changement de pas.
+    if not 0 <= decalage_ancre < len(rangs) - 1:
+        raise RuntimeError(
+            f"décalage d'ancre {decalage_ancre} hors des {len(rangs)} spires de la boîte")
+    ancre = rangs[decalage_ancre]
     atteignables = [r for r in rangs if r > ancre][:bras_max]
     if not atteignables:
         raise RuntimeError("aucune spire à atteindre depuis l'ancre")

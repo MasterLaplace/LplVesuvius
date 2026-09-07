@@ -1,0 +1,288 @@
+{
+  "candidat": "rien_lisse",
+  "reference": "rien",
+  "ancres": 5,
+  "lignes": [
+    {
+      "decalage": 0,
+      "ancre": 4,
+      "spires_visees": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "bras_au_pas_nominal": 6,
+      "portees": {
+        "rien": 4,
+        "rien_lisse": 5,
+        "raccroche": 2,
+        "raccroche_lisse": 3,
+        "sortie_raccrochee": 4,
+        "sortie_lisse": 4,
+        "melange": 2,
+        "oracle": 6
+      },
+      "portee_candidat": 5,
+      "portee_reference": 4,
+      "ecart": {
+        "ecart_median_um": -6.7,
+        "intervalle_um": [
+          -11.0,
+          -2.4
+        ],
+        "pas_ameliores": 7,
+        "pas": 8
+      },
+      "rugosite_nappe_candidat": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.15,
+        1.9
+      ],
+      "rugosite_nappe_reference": [
+        0.0,
+        0.0,
+        0.3,
+        1.24,
+        2.83,
+        5.11,
+        9.93,
+        19.87
+      ],
+      "signe_tient": true
+    },
+    {
+      "decalage": 1,
+      "ancre": 5,
+      "spires_visees": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "bras_au_pas_nominal": 5,
+      "portees": {
+        "rien": 2,
+        "rien_lisse": 2,
+        "raccroche": 2,
+        "raccroche_lisse": 3,
+        "sortie_raccrochee": 1,
+        "sortie_lisse": 1,
+        "melange": 1,
+        "oracle": 5
+      },
+      "portee_candidat": 2,
+      "portee_reference": 2,
+      "ecart": {
+        "ecart_median_um": -3.1,
+        "intervalle_um": [
+          -3.1,
+          -3.0
+        ],
+        "pas_ameliores": 7,
+        "pas": 8
+      },
+      "rugosite_nappe_candidat": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rugosite_nappe_reference": [
+        0.0,
+        0.0,
+        0.05,
+        0.83,
+        0.86,
+        3.17,
+        7.6,
+        16.13
+      ],
+      "signe_tient": true
+    },
+    {
+      "decalage": 2,
+      "ancre": 6,
+      "spires_visees": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "bras_au_pas_nominal": 4,
+      "portees": {
+        "rien": 3,
+        "rien_lisse": 3,
+        "raccroche": 2,
+        "raccroche_lisse": 3,
+        "sortie_raccrochee": 2,
+        "sortie_lisse": 2,
+        "melange": 2,
+        "oracle": 4
+      },
+      "portee_candidat": 3,
+      "portee_reference": 3,
+      "ecart": {
+        "ecart_median_um": -5.9,
+        "intervalle_um": [
+          -9.5,
+          -3.2
+        ],
+        "pas_ameliores": 7,
+        "pas": 7
+      },
+      "rugosite_nappe_candidat": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.96,
+        2.17
+      ],
+      "rugosite_nappe_reference": [
+        0.0,
+        0.0,
+        1.19,
+        3.18,
+        7.89,
+        20.08,
+        31.7
+      ],
+      "signe_tient": true
+    },
+    {
+      "decalage": 3,
+      "ancre": 7,
+      "spires_visees": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "bras_au_pas_nominal": 3,
+      "portees": {
+        "rien": 2,
+        "rien_lisse": 2,
+        "raccroche": 2,
+        "raccroche_lisse": 2,
+        "sortie_raccrochee": 2,
+        "sortie_lisse": 2,
+        "melange": 2,
+        "oracle": 3
+      },
+      "portee_candidat": 2,
+      "portee_reference": 2,
+      "ecart": {
+        "ecart_median_um": -5.6,
+        "intervalle_um": [
+          -11.0,
+          -0.2
+        ],
+        "pas_ameliores": 5,
+        "pas": 6
+      },
+      "rugosite_nappe_candidat": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.59
+      ],
+      "rugosite_nappe_reference": [
+        0.0,
+        0.15,
+        1.49,
+        4.31,
+        10.37,
+        23.26
+      ],
+      "signe_tient": true
+    },
+    {
+      "decalage": 4,
+      "ancre": 8,
+      "spires_visees": [
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "bras_au_pas_nominal": 2,
+      "portees": {
+        "rien": 1,
+        "rien_lisse": 1,
+        "raccroche": 1,
+        "raccroche_lisse": 1,
+        "sortie_raccrochee": 1,
+        "sortie_lisse": 1,
+        "melange": 1,
+        "oracle": 2
+      },
+      "portee_candidat": 1,
+      "portee_reference": 1,
+      "ecart": {
+        "ecart_median_um": -8.6,
+        "intervalle_um": [
+          -8.9,
+          -4.5
+        ],
+        "pas_ameliores": 4,
+        "pas": 5
+      },
+      "rugosite_nappe_candidat": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rugosite_nappe_reference": [
+        0.0,
+        0.63,
+        2.39,
+        7.06,
+        16.2
+      ],
+      "signe_tient": true
+    }
+  ],
+  "ancres_refusees": [],
+  "ancres_ou_le_signe_tient": 5,
+  "le_signe_tient_partout": true,
+  "ancres_ou_le_candidat_perd": [],
+  "ancres_ou_la_portee_gagne": [
+    0
+  ],
+  "ancres_ou_lecart_est_negatif": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ]
+}

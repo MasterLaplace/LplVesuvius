@@ -3647,6 +3647,9 @@ voisinage **déjà déployé** appliqué à la **NAPPE** entre deux bras. Sa nap
 > ⭐⭐⭐ **CINQ des SIX bras que le corpus autorise**, contre 4 sans lissage, par un marcheur qui
 > **ne contient aucun raccrochage du tout**. C'est le meilleur marcheur aveugle de la campagne, et
 > il est plus **simple** que celui qui tourne.
+>
+> ⚠⚠⚠ **PORTÉE DE CE TITRE, mesurée le jour même sur CINQ ancres** : le **gain apparié** tient
+> partout, le **bras gagné** non. Voir *« Le verdict tient-il depuis une autre ancre ? »*.
 
 ⚠⚠ **La borne dit la dernière moitié du mécanisme.** Sa nappe se froisse aussi — **0.0 · 0.5 · 2.7 · 5.9 · 10.7 · 18.1 · 51.3 · 114.1** µm — et
 son erreur reste **plate** (17 à 22 µm sur six bras). Elle ne subit jamais ce qu'elle laisse,
@@ -3657,6 +3660,54 @@ n'est donc pas d'avoir une nappe froissée : c'est de **devoir repartir de la si
 5 la sortie raccrochée lit 81,7 µm là où la nappe lissée seule en lit 61,2. Le raccrochage lu sur
 une surface propre reste moins bon que la prédiction de cette surface. C'est mesuré, contraire à
 l'intuition, et publié tel quel.
+
+##### ⚠⚠⚠ LE VERDICT TIENT-IL DEPUIS UNE AUTRE ANCRE ? Le GAIN oui, le BRAS non
+
+> Mesure : `src/nappe/la_portee_tient_elle_ailleurs.py` (12 contrôles) →
+> `docs/mesures/la_portee_tient_elle_ailleurs.json`. Figure :
+> `src/figures/figure_la_portee_tient_elle_ailleurs.py` (10 contrôles), le 2026-09-07.
+>
+> ```bash
+> uv run python src/nappe/la_portee_tient_elle_ailleurs.py --cote 960 --ancres 5 \
+>     --json docs/mesures/la_portee_tient_elle_ailleurs.json
+> uv run python src/figures/figure_la_portee_tient_elle_ailleurs.py \
+>     --sortie docs/images/75_la_portee_tient_elle_ailleurs.png
+> ```
+
+⚠⚠⚠ **Pourquoi cette mesure, et elle vient d'une faute déjà payée.** Le titre précédent est tiré
+d'**une seule** marche, depuis **une seule** ancre. Or ce registre a déjà vu trois verdicts
+s'inverser en changeant la population — passer de 7 à 6 pas déplaçait l'erreur du chemin déployé
+de 36,0 à 48,5 µm — et c'est cette découverte qui a produit `lecart_apparie`. Un verdict tiré
+d'une population est une **hypothèse** sur les autres tant que les autres n'ont pas été regardées.
+
+![le verdict tient-il depuis une autre ancre](images/75_la_portee_tient_elle_ailleurs.png)
+
+⚠⚠ **Les ancres ne sont PAS comparables entre elles, donc rien n'est moyenné.** Une ancre plus
+haute a moins de bras devant elle et rencontre d'autres spires ; agréger leurs portées ferait la
+moyenne de choses différentes. Ce qui s'agrège est le **COMPTE** des ancres où le signe tient, ce
+qui est un fait sur la **robustesse** et non sur la matière.
+
+> ⭐⭐⭐ **LE GAIN TIENT PARTOUT.** L'écart apparié du marcheur lissé au pas normal seul est
+> **négatif aux 5 ancres sur 5** — -6.7, -3.1, -5.9, -5.6, -8.6 µm — avec la majorité des bras améliorée à chaque fois
+> (7/8, 7/8, 7/7, 5/6, 4/5). Le gain de la nappe lissée n'est donc **pas** une propriété de l'ancre où il a été trouvé.
+
+> ⚠⚠⚠ **MAIS LE BRAS GAGNÉ, NON : une ancre sur cinq.** Portées, référence → candidat :
+> 4 : 4 → 5 | 5 : 2 → 2 | 6 : 3 → 3 | 7 : 2 → 2 | 8 : 1 → 1. Un gain de six micromètres est **constant et fin** ; un bras gagné demande que l'erreur
+> passe **SOUS** le seuil de la demi-feuille, ce qui n'arrive que là où elle en était déjà
+> proche — à l'ancre 4, le pas normal seul lisait 72,2 µm pour un seuil de 67,75. **Publier le
+> second à la place du premier ferait passer la chance d'une ancre pour une propriété de la
+> méthode**, et un contrôle exige désormais que les deux comptes soient publiés séparément.
+
+⚠⚠ **Et la colonne du corpus tombe avec l'ancre** (6, 5, 4, 3, 2) : plus on part haut, moins il reste de bras
+que le corpus demande au pas nominal avant son trou. Les portées courtes des ancres hautes ne sont
+donc **pas un échec de méthode** — c'est la matière qui s'arrête, et un contrôle vérifie qu'aucune
+portée ne dépasse ce que le corpus autorise à son ancre.
+
+> ⭐⭐ **Ce que la campagne peut dire, maintenant, sans surinterpréter.** Lisser la nappe entre deux
+> bras avec le voisinage **déjà déployé** rend **entre 3 et 9 µm** sur une marche, de façon
+> **constante** et sur **toutes** les ancres essayées, et ne coûte **aucun réglage**. Que ça
+> traduise en spires supplémentaires dépend de la marge que l'ancre avait, ce qui est une
+> propriété de la **matière** à cet endroit et pas de la méthode.
 
 ##### ⚠⚠ Ce que le corpus demande, et pourquoi il fallait le mesurer à part
 

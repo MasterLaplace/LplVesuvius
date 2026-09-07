@@ -5518,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 4447
+- **lignes** : 4498
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -6012,6 +6012,30 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     elle lit 81,7 µm là où la nappe lissée seule en lit 61,2. Le raccrochage lu sur une surface
     propre reste moins bon que la prédiction de cette surface. Contraire à l'intuition, mesuré,
     publié tel quel.
+  - ⚠⚠⚠ **LE VERDICT TIENT-IL DEPUIS UNE AUTRE ANCRE ? (2026-09-07,
+    `la_portee_tient_elle_ailleurs`, 12 contrôles, 5 ancres, `--cote 960`).** Le titre précédent
+    est tiré d'**une seule** marche depuis **une seule** ancre — or ce registre a déjà vu trois
+    verdicts s'inverser en changeant la population (7 → 6 pas déplaçait l'erreur du chemin déployé
+    de 36,0 à 48,5 µm), et c'est cette découverte qui a produit `lecart_apparie`.
+  - ⚠⚠ **Les ancres ne sont PAS comparables entre elles, donc rien n'est moyenné** : une ancre
+    plus haute a moins de bras devant elle et rencontre d'autres spires. Ce qui s'agrège est le
+    **compte** des ancres où le signe tient — un fait sur la robustesse, pas sur la matière.
+  - ⭐⭐⭐ **LE GAIN TIENT PARTOUT** : l'écart apparié est **négatif aux 5 ancres sur 5** (-6.7, -3.1, -5.9, -5.6, -8.6 µm),
+    avec la majorité des bras améliorée à chaque fois (7/8, 7/8, 7/7, 5/6, 4/5). Le gain de la nappe lissée n'est pas
+    une propriété de l'ancre où il a été trouvé.
+  - ⚠⚠⚠ **MAIS LE BRAS GAGNÉ, NON : une ancre sur cinq.** Portées référence→candidat : 4 : 4→5 | 5 : 2→2 | 6 : 3→3 | 7 : 2→2 | 8 : 1→1. Un gain
+    de six micromètres est **constant et fin** ; un bras gagné demande que l'erreur passe **sous**
+    la demi-feuille, ce qui n'arrive que là où elle en était proche (à l'ancre 4 le pas normal
+    lisait 72,2 pour un seuil de 67,75). Publier le second à la place du premier ferait passer la
+    **chance d'une ancre** pour une propriété de la méthode ; un contrôle exige que les deux
+    comptes soient publiés séparément.
+  - ⚠⚠ **La colonne du corpus tombe avec l'ancre** (6, 5, 4, 3, 2) : plus on part haut, moins il reste de
+    bras au pas nominal avant le trou. Les portées courtes des ancres hautes ne sont pas un échec
+    de méthode, et un contrôle vérifie qu'aucune portée ne dépasse ce que le corpus autorise.
+  - ⭐⭐ **Ce que la campagne peut dire sans surinterpréter** : lisser la nappe entre deux bras avec
+    le voisinage **déjà déployé** rend **3 à 9 µm** sur une marche, de façon constante, sur toutes
+    les ancres essayées, sans **aucun** réglage. Que ça se traduise en spires dépend de la marge
+    que l'ancre avait — une propriété de la **matière** à cet endroit, pas de la méthode.
   - ⭐⭐⭐ **La première piste neuve depuis sept tranches.** *« Quelle méthode fait le meilleur
     pas ? »* et *« quelle méthode va le plus loin ? »* ont des réponses **différentes** sur la même
     donnée. Trois conséquences, dans l'ordre où elles se testent : débrancher le raccrochage au
@@ -6616,8 +6640,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 3755 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 4447 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 3806 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 4498 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
