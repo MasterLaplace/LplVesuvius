@@ -51,8 +51,16 @@ from lecart_apparie import ecart_apparie, tranche  # noqa: E402
 # ⚠ Les marcheurs comparés. « rien » est le pas normal seul — la référence contre laquelle tout
 # se juge ; « oracle » regarde la cible une fois par cellule et par bras, donc c'est une BORNE
 # et jamais une méthode ; « melange » est le témoin, même géométrie et forme détruite.
-MARCHEURS = ("rien", "rien_lisse", "raccroche", "raccroche_lisse", "sortie_raccrochee",
-             "sortie_lisse", "melange", "oracle")
+MARCHEURS = ("rien", "rien_lisse", "rien_elague", "rien_lisse_elague", "raccroche",
+             "raccroche_lisse", "sortie_raccrochee", "sortie_lisse", "melange", "oracle")
+# ⭐⭐⭐ LES MARCHEURS QUI REFUSENT LEURS PROPRES PLIS. `ou_la_nappe_se_froisse` mesure que le
+# froissement n'est pas distribué : ce sont des TACHES, et une cellule pliée est détectable
+# SANS LA CIBLE — son écart à la médiane de ses voisins dépasse la demi-feuille, donc elle est
+# plus près de la feuille voisine que du plan de ses propres voisins. Un marcheur peut donc la
+# refuser au lieu de la porter au bras suivant. Le critère vient de la matière, l'observation ne
+# demande aucune supervision, et le prix est la COUVERTURE — qui est déjà publiée à côté.
+ELAGUE = ("rien_elague", "rien_lisse_elague")
+FAMILLE_DU_PAS_NORMAL = ("rien", "rien_lisse", "rien_elague", "rien_lisse_elague")
 # ⚠⚠ LES DEUX MARCHEURS QUI COMPOSENT CE QUI A MARCHÉ. `rien_lisse` avance au pas normal et
 # lisse la NAPPE entre deux bras ; `sortie_lisse` fait de même et publie la sortie raccrochée.
 # Aucun des deux n'ajoute de réglage : le voisinage est celui qui tourne, et la séparation
@@ -151,6 +159,7 @@ def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
     p, d = grille[vivant], n[vivant]
     pas_vx = reglage["pas_vx"]
     voxel_um = reglage["voxel_um"]
+    demi_feuille_um = reglage["demi_feuille_um"]
     # ⚠ Le sens sortant est décidé sur la CIBLE, et c'est le bit de supervision unique de toute
     # la campagne. Le décider sur la prédiction précédente ferait tourner la marche sur
     # elle-même dès qu'elle s'égare.
@@ -163,7 +172,12 @@ def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
     # par leur numéro et éloignées de huit feuilles dans la matière — se lit comme une méthode
     # qui échoue, et le blâme tombe sur le marcheur au lieu du corpus.
     depart = distance_a(p, cible, voxel_um)
-    if nom in ("rien", "rien_lisse"):
+    # ⚠⚠⚠ LA FAMILLE DU PAS NORMAL EST NOMMÉE EN UN SEUL ENDROIT. Ajouter un marcheur à
+    # `MARCHEURS` sans l'ajouter ici le fait tomber dans la branche du RACCROCHAGE — il lit le
+    # volume, corrèle un gabarit, et publie sous un nom qui annonce l'inverse. C'est arrivé, et
+    # ce sont les rugosités publiées qui l'ont dit : `rien_elague` avait exactement celles de
+    # `raccroche`.
+    if nom in FAMILLE_DU_PAS_NORMAL:
         # ⚠ La grille porte trois coordonnées par cellule : son masque a donc la forme des deux
         # premiers axes, jamais celle de la grille entière. Confondre les deux fait lever la
         # pose sur un décalage de formes — ce qui est le bon échec, mais tardif.
@@ -172,10 +186,25 @@ def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
         part_lissee = 0.0
         neuf = np.full(grille.shape, np.nan)
         neuf[vivant] = prevu
-        if nom == "rien_lisse":
+        if nom in ("rien_lisse", "rien_lisse_elague"):
             neuf, part_lissee = _lisser_la_nappe(neuf, vivant, accorder_les_voisins,
                                                  *reglage["lissage_nappe"])
-            prevu = neuf[vivant]
+        if nom in ELAGUE:
+            # ⚠⚠⚠ UNE CELLULE PLIÉE EST REFUSÉE, PAS CORRIGÉE. La corriger demanderait de savoir
+            # où elle devrait être, ce que seule la cible sait ; la refuser ne demande que de
+            # constater qu'elle s'écarte de ses voisins de plus d'une demi-feuille, donc qu'elle
+            # est plus près de la feuille voisine que du plan de ses propres voisins.
+            from ou_la_nappe_se_froisse import champ_de_froissement  # noqa: PLC0415
+
+            pli, ou_pli = champ_de_froissement(neuf, vivant, voxel_um)
+            # ⚠⚠ UNE CELLULE DONT LE PLI N'EST PAS MESURABLE EST GARDÉE, jamais refusée : son
+            # voisinage est incomplet — un bord — et refuser faute de mesure éroderait la nappe
+            # par ses bords à chaque bras, ce qui ressemblerait à un élagage qui marche.
+            vivant = vivant & ~(ou_pli & (pli >= demi_feuille_um))
+            if int(vivant.sum()) < reglage["minimum"]:
+                return None
+            neuf = np.where(vivant[..., None], neuf, np.nan)
+        prevu = neuf[vivant]
         # ⚠⚠ LE PLANCHER DU BRAS, PAR CELLULE. Une distance à un nuage est 1-lipschitzienne :
         # un point à distance d du nuage, déplacé de L, ne peut pas être à moins de |d − L|.
         # C'est une borne INFÉRIEURE dérivée de la géométrie et d'aucun réglage, et elle vaut
@@ -317,7 +346,7 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     centre = np.array(BOITE_CENTRE)
     lo, hi = centre - cote / 2, centre + cote / 2
     reglage = dict(minimum=minimum, pas_vx=pas_vx, voxel_um=voxel_um,
-                   lissage_nappe=tuple(lissage_nappe),
+                   lissage_nappe=tuple(lissage_nappe), demi_feuille_um=demi_feuille_um,
                    t_gab=np.arange(-demi_gab, demi_gab + 1e-9, 1.0),
                    t_ligne=np.arange(-(demi_vx + demi_gab), demi_vx + demi_gab + 1e-9, 1.0))
 
@@ -572,6 +601,23 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     r["la_sortie_lisse_bat_le_pas_normal"] = bool(
         r["ecart_de_la_sortie_lisse_au_pas_normal"]
         and tranche(r["ecart_de_la_sortie_lisse_au_pas_normal"]))
+    # ⭐⭐⭐ LES DEUX MARCHEURS QUI REFUSENT LEURS PLIS, chacun apparié à ce qu'il prétend
+    # améliorer. ⚠ Leur couverture DIVERGE de celle de leur référence par construction — c'est le
+    # prix du refus — donc l'appariement sur l'intersection n'est pas une précaution ici, c'est la
+    # seule façon de comparer autre chose que « qui a écarté le plus de cellules difficiles ».
+    for court, ref in (("rien_elague", "rien"), ("rien_lisse_elague", "rien_lisse")):
+        r[f"portee_{court}"] = portee_de(court)
+        r[f"ecart_{court}"], nc_ = apparier(court, ref)
+        r[f"cellules_communes_{court}"] = nc_
+        r[f"le_{court}_bat_sa_reference"] = bool(
+            r[f"ecart_{court}"] and tranche(r[f"ecart_{court}"]))
+        # ⚠⚠ ET LA PART DE NAPPE QU'IL GARDE, publiée à côté du gain : une erreur qui s'améliore
+        # parce qu'on a jeté les cellules difficiles n'est pas une méthode meilleure, c'est un
+        # échantillon plus facile. Sans ce nombre, le gain n'est pas lisible.
+        x_, y_ = trouver(court), trouver(ref)
+        r[f"part_gardee_{court}"] = (
+            round(x_["cellules_par_bras"][-1] / y_["cellules_par_bras"][-1], 3)
+            if x_ and y_ and y_["cellules_par_bras"] and x_["cellules_par_bras"] else None)
     r["ecart_du_lissage_au_pas_normal"], ncr = apparier(LISSE, "rien")
     r["cellules_communes_lissage_pas_normal"] = ncr
     r["le_lissage_bat_le_pas_normal"] = bool(
@@ -714,6 +760,29 @@ def verifier() -> int:
     v("... et elle décroît quand la fenêtre s'élargit",
       parts == sorted(parts, reverse=True) and parts[0] > parts[-1],
       f"demi 1/2/4 → {parts} sur une grille {fab['forme_grille']}")
+    # ⚠⚠⚠ CHAQUE MARCHEUR DE `MARCHEURS` EST DANS EXACTEMENT UNE FAMILLE, et le contrôle porte
+    # là-dessus : un marcheur oublié dans la branche du pas normal tombe dans celle du
+    # raccrochage, lit le volume et publie sous un nom qui annonce l'inverse. C'est arrivé.
+    v("... chaque marcheur du pas normal est déclaré dans sa famille, et n'en lit aucun volume",
+      all(g == 0.0 for x in fab["lignes"] if x["marcheur"] in FAMILLE_DU_PAS_NORMAL
+          for g in x["rugosites_vx"]),
+      str({x["marcheur"]: x["rugosites_vx"][:2] for x in fab["lignes"]
+           if x["marcheur"] in FAMILLE_DU_PAS_NORMAL}))
+    v("... et un marcheur qui lisse publie une part lissée non nulle",
+      all(any(g > 0 for g in x["parts_lissees"]) for x in fab["lignes"]
+          if "lisse" in x["marcheur"]),
+      str({x["marcheur"]: x["parts_lissees"][:2] for x in fab["lignes"]
+           if "lisse" in x["marcheur"]}))
+    # ⭐⭐⭐ LE REFUS DES PLIS NE PEUT QUE PERDRE DE LA COUVERTURE, jamais en gagner : c'est son
+    # prix, et un marcheur élagué qui garderait autant de cellules que sa référence n'aurait rien
+    # élagué du tout — donc son gain viendrait d'ailleurs que de ce qu'il prétend.
+    for court_, ref_ in (("rien_elague", "rien"), ("rien_lisse_elague", "rien_lisse")):
+        xc = next((x for x in fab["lignes"] if x["marcheur"] == court_), None)
+        xr = next((x for x in fab["lignes"] if x["marcheur"] == ref_), None)
+        if xc and xr:
+            v(f"... {court_} ne garde jamais plus de cellules que {ref_}",
+              all(a <= b for a, b in zip(xc["cellules_par_bras"], xr["cellules_par_bras"])),
+              f"{xc['cellules_par_bras']} contre {xr['cellules_par_bras']}")
     # ⚠⚠ ET LE LISSAGE DE LA NAPPE DOIT RÉELLEMENT LA LISSER : si la rugosité de nappe du
     # marcheur lissé n'était pas plus basse que celle de son homologue brut, le lissage ne
     # ferait rien et tous les verdicts posés dessus seraient des coïncidences.

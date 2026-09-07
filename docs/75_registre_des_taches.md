@@ -3710,6 +3710,62 @@ portée ne dépasse ce que le corpus autorise à son ancre.
 > propriété de la **matière** à cet endroit et pas de la méthode.
 
 
+
+##### ⛔⛔⛔ REFUSER SES PROPRES PLIS : la portée monte, et l'écart apparié vaut EXACTEMENT ZÉRO
+
+⚠⚠⚠ **L'idée était bonne et vient de la tranche précédente** : les plis sont **localisés**, et une
+cellule pliée est détectable **SANS la cible** — son écart à la médiane de ses voisins dépasse la
+demi-feuille, donc elle est plus près de la feuille voisine que du plan de ses **propres** voisins.
+Un marcheur peut donc la **refuser** au lieu de la porter au bras suivant. Le critère vient de la
+matière, l'observation ne demande **aucune supervision**, et le prix annoncé est la couverture.
+
+| marcheur | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | portée |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| pas normal seul | 44,0 | 50,1 | 49,5 | 67,2 | 72,2\* | 114,2\* | 1016,5\* | 177,3\* | 4 |
+| **pas normal, plis REFUSÉS** | 44,0 | 50,1 | 48,6 | 64,4 | **58,0** | 103,9\* | 975,0\* | 101,0\* | **5** |
+| **nappe lissée, plis refusés** | 44,4 | 50,0 | 48,7 | 63,9 | **57,9** | 90,5\* | 865,4\* | 138,0\* | **5** |
+
+⭐ **Et la nappe reste PLATE** : le marcheur qui lisse **et** refuse ses plis publie une rugosité de
+nappe de **0,00 µm aux HUIT bras**, là où le pas normal seul monte à 19,87. Le refus des plis à lui
+seul la plafonne à 2,14 au lieu de 19,87.
+
+> ⛔⛔⛔ **ET POURTANT IL NE GAGNE RIEN — ce que seul l'appariement sur les cellules COMMUNES pouvait
+> dire.** Sur les cellules que le marcheur élagué et sa référence ont **tous les deux** gardées,
+> l'écart apparié vaut **+0.0 µm, intervalle [0.0, 0.0]** : **exactement zéro**. Refuser une cellule ne change
+> **rien** à celles qui restent — c'est même la seule chose qu'un refus puisse faire.
+
+⚠⚠⚠ **Tout le gain apparent vient donc de ce qu'il JETTE.** Il garde **0.453** de la nappe du pas
+normal au dernier bras (391 cellules contre 864). Une erreur qui s'améliore parce qu'on a écarté
+les cellules difficiles n'est pas une méthode meilleure, **c'est un échantillon plus facile** — et
+c'est exactement le mode de panne qu'un contrôle écrit deux tranches plus tôt nommait, appliqué
+cette fois à mon propre marcheur.
+
+> ⭐ **Ce n'est pas rien pour autant, et il faut le dire dans les deux sens.** Un dérouleur peut
+> parfaitement préférer **la moitié de la nappe à 58 µm** plutôt que toute à 72, parce que les
+> cellules écartées sont précisément celles qui seraient **fausses**. Mais c'est un **arbitrage
+> couverture / justesse**, jamais un gain de méthode, et publier la portée de 5 sans la part gardée
+> de 0.453 serait le présenter pour ce qu'il n'est pas.
+
+⚠⚠ **Et le panneau C de la figure a changé de forme pour ça** : il dessine désormais **une courbe
+par marcheur** au lieu d'une seule. Tant que tous gardaient les mêmes cellules, une courbe suffisait
+et le disait ; dès qu'un marcheur en refuse, une courbe unique laisserait lire une portée gagnée
+sans son coût.
+
+##### ⚠⚠ Un défaut de ma part, attrapé par la sortie d'un contrôle et pas par une relecture
+
+Les deux marcheurs neufs sont d'abord tombés dans la branche du **RACCROCHAGE** : je les avais
+ajoutés à `MARCHEURS` sans élargir la condition qui nomme la famille du pas normal. Ils lisaient
+donc le volume, corrélaient un gabarit, et publiaient sous un nom qui annonce l'inverse. Ce qui l'a
+dit : la **rugosité de champ** publiée par `rien_elague` était exactement celle de `raccroche` —
+un marcheur qui ne glisse pas ne peut pas avoir un champ de décalage rugueux.
+
+> ⚠ La famille est désormais nommée **en un seul endroit** (`FAMILLE_DU_PAS_NORMAL`), et deux
+> contrôles l'épinglent : aucun marcheur de cette famille n'a de rugosité de champ non nulle, et
+> tout marcheur dont le nom porte « lisse » publie une part lissée non nulle. Un nom qui ment sur
+> ce que le code fait est le pire des défauts silencieux, parce que toute la lecture en aval en
+> dépend.
+
+---
 ##### ⭐⭐⭐ OÙ la nappe se froisse — et ce que les MÉDIANES cachaient
 
 > Mesure : `src/nappe/ou_la_nappe_se_froisse.py` (15 contrôles) →

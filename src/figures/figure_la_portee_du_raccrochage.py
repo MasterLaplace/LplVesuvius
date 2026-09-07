@@ -53,14 +53,17 @@ VIOLET = (124, 80, 140)
 TURQUOISE = (26, 128, 128)
 COULEUR = {"rien": (70, 70, 70), "rien_lisse": TURQUOISE, "raccroche": VERT,
            "raccroche_lisse": BLEU, "sortie_raccrochee": VIOLET, "sortie_lisse": (170, 130, 60),
-           "melange": AMBRE, "oracle": ROUGE}
+           "melange": AMBRE, "oracle": ROUGE,
+           "rien_elague": (150, 60, 110), "rien_lisse_elague": (60, 150, 190)}
 MARQUE = {"rien_lisse": "pas normal + NAPPE LISSEE", "rien": "pas normal seul",
+          "rien_elague": "pas normal, plis REFUSES",
+          "rien_lisse_elague": "nappe lissee, plis refuses",
           "raccroche": "raccrochage deploye", "raccroche_lisse": "raccrochage + nappe lissee",
           "sortie_raccrochee": "etat pas normal, sortie raccrochee",
           "sortie_lisse": "nappe lissee, sortie raccrochee",
           "melange": "temoin melange", "oracle": "la borne (elle regarde la cible)"}
-ORDRE_LEGENDE = ("rien_lisse", "rien", "raccroche", "raccroche_lisse",
-                 "sortie_raccrochee", "sortie_lisse", "melange", "oracle")
+ORDRE_LEGENDE = ("rien_lisse", "rien", "rien_elague", "rien_lisse_elague", "raccroche",
+                 "raccroche_lisse", "sortie_raccrochee", "sortie_lisse", "melange", "oracle")
 
 
 def prose(m: dict) -> list[str]:
@@ -72,6 +75,7 @@ def prose(m: dict) -> list[str]:
     epn = m["ecart_du_lissage_au_pas_normal"]
     es = m["ecart_de_la_sortie_au_pas_normal"]
     erl = m["ecart_du_pas_normal_lisse"]
+    ee = m.get("ecart_rien_elague")
 
     def nap(nom: str, k: int = 8) -> str:
         return " ".join(f"{g:.0f}" for g in par(nom)["rugosites_nappe_um"][:k])
@@ -135,6 +139,22 @@ def prose(m: dict) -> list[str]:
          f"({rug_s}) la ou lu sur sa propre prediction il en produit un rugueux ({rug_r}) "
          "voxels. la rugosite du champ n'est donc pas une propriete du raccrochage, elle "
          "est HERITEE de la surface sur laquelle il lit."),
+        (f"⚠⚠⚠ ET LE MARCHEUR QUI REFUSE SES PLIS NE GAGNE RIEN, ce que seul l'appariement sur "
+         f"les cellules COMMUNES pouvait dire. une cellule pliee est detectable SANS la cible — "
+         f"son ecart a ses voisins depasse la demi-feuille — donc un marcheur peut la refuser au "
+         f"lieu de la porter. sa portee passe bien de {m['portee_sans_rien_faire']} a "
+         f"{m['portee_rien_elague']}... mais sur les cellules que les deux ont gardees son ecart "
+         f"vaut {ee['ecart_median_um']:+.1f} um, intervalle {ee['intervalle_um']} : "
+         f"EXACTEMENT ZERO. refuser une cellule ne change rien a celles qui restent."
+         if ee else "⚠ le marcheur elague n'a pas de bras commun avec sa reference."),
+        (f"⚠⚠⚠ tout le gain apparent vient donc de ce qu'il JETTE : il garde "
+         f"{m['part_gardee_rien_elague']} de la nappe du pas normal au dernier bras (panneau C). "
+         "une erreur qui s'ameliore parce qu'on a ecarte les cellules difficiles n'est pas une "
+         "methode meilleure, c'est un ECHANTILLON PLUS FACILE. et ce n'est pas rien pour autant : "
+         "un derouleur peut preferer la moitie de la nappe a 58 um plutot que toute a 72, parce "
+         "que les cellules ecartees sont celles qui seraient FAUSSES. mais c'est un arbitrage "
+         "couverture/justesse, jamais un gain de methode, et le publier sans sa part gardee "
+         "serait le presenter pour ce qu'il n'est pas."),
         (f"⚠⚠ LE CINQUIEME MARCHEUR n'ajoute AUCUN reglage : il applique a la NAPPE le voisinage "
          f"deja deploye sur le champ de decalage — meme demi-largeur, meme regle de majorite — "
          f"et garde le meme masque, donc les colonnes restent appariables. portee "
@@ -298,33 +318,39 @@ def panneau_corpus(art, x0, y0, pw, ph, m, petit) -> None:
 
 
 def panneau_couverture(art, x0, y0, pw, ph, m, petit) -> None:
-    """La couverture, une seule courbe parce que les quatre marcheurs gardent les memes."""
+    """La couverture de CHAQUE marcheur : elles divergent des qu'un marcheur refuse ses plis.
+
+    ⚠⚠⚠ UNE COURBE PAR MARCHEUR, ET C'EST LE POINT DU PANNEAU. Les marcheurs qui REFUSENT leurs
+    plis paient en couverture, et c'est le seul endroit ou ce prix se voit. Une courbe unique
+    laisserait lire une portee gagnee sans son cout, ce qui est exactement la faute que ce
+    tableau existe pour rendre impossible.
+    """
     gauche, droite, base, sommet = _cadre(
         art, x0, y0, pw, ph, "une cellule sortie du volume est perdue pour de bon", petit)
-    serie = next(x["cellules_par_bras"] for x in m["lignes"] if x["deploye"])
-    haut = max(serie) * 1.18
+    series = {x["marcheur"]: x["cellules_par_bras"] for x in m["lignes"]}
+    haut = max(max(v) for v in series.values() if v) * 1.12
+    n = len(m["spires_visees"])
 
     def py(v: float) -> float:
         return base - (base - sommet) * v / haut
 
-    pts = [(gauche + (droite - gauche) * i / max(1, len(serie) - 1), py(v))
-           for i, v in enumerate(serie)]
-    for (ax, ay), (bx, by) in zip(pts, pts[1:]):
-        art.polygon([(ax, ay), (bx, by), (bx, base), (ax, base)], fill=(232, 238, 233))
-    for (ax, ay), (bx, by) in zip(pts, pts[1:]):
-        art.line([ax, ay, bx, by], fill=VERT, width=2)
-    for cx, cy in pts:
-        art.ellipse([cx - 3, cy - 3, cx + 3, cy + 3], fill=VERT)
-    art.text((pts[0][0] + 6, pts[0][1] + 4), str(serie[0]), fill=VERT, font=petit)
-    art.text((pts[-1][0] - 30, pts[-1][1] - 16), str(serie[-1]), fill=VERT, font=petit)
+    for nom, serie in series.items():
+        coul = COULEUR.get(nom, DISCRET)
+        pts = [(gauche + (droite - gauche) * i / max(1, n - 1), py(v))
+               for i, v in enumerate(serie)]
+        for (ax, ay), (bx, by) in zip(pts, pts[1:]):
+            art.line([ax, ay, bx, by], fill=coul, width=2)
+        for cx, cy in pts:
+            art.ellipse([cx - 2, cy - 2, cx + 2, cy + 2], fill=coul)
     for v in (500, 1000, 1500):
         if v < haut:
             art.text((gauche - 46, py(v) - 6), f"{v:>4}", fill=DISCRET, font=petit)
-    ecrire(art, (x0 + 8, y0 + 20), "chaque ecart apparie est pris sur les cellules",
+    ecrire(art, (x0 + 8, y0 + 20), "les marcheurs qui REFUSENT leurs plis paient ICI",
            DISCRET, petit, (x0, x0 + pw))
-    ecrire(art, (x0 + 8, y0 + 33), f"COMMUNES aux deux ; il en reste "
-           f"{m['part_de_nappe_gardee']} au dernier bras", DISCRET, petit, (x0, x0 + pw))
-    _abscisse(art, gauche, droite, base, len(serie), petit, "bras :")
+    ecrire(art, (x0 + 8, y0 + 33),
+           f"plis refuses : il en reste {m.get('part_gardee_rien_elague')} du pas normal",
+           COULEUR["rien_elague"], petit, (x0, x0 + pw))
+    _abscisse(art, gauche, droite, base, n, petit, "bras :")
     ecrire(art, (x0 + 8, y0 + ph - 18), "cellules", DISCRET, petit, (x0, x0 + pw))
 
 
@@ -373,7 +399,7 @@ def legende(art, x0: int, y: int, petit) -> None:
     x = x0
     ligne = y
     for k, nom in enumerate(ORDRE_LEGENDE):
-        if k == 4:
+        if k == 5:
             x, ligne = x0, y + 15
         art.rectangle([x, ligne + 3, x + 16, ligne + 9], fill=COULEUR[nom])
         art.text((x + 22, ligne), MARQUE[nom], fill=TEXTE, font=petit)
@@ -492,6 +518,20 @@ def verifier() -> int:
     v("le pas normal seul ne glisse pas, et sa nappe se froisse quand même",
       all(g == 0.0 for g in ri["rugosites_vx"]) and max(ri["rugosites_nappe_um"]) > 0,
       f"champ {ri['rugosites_vx'][:3]} · nappe {ri['rugosites_nappe_um']}")
+    # ⛔⛔⛔ LE RÉSULTAT NÉGATIF QUE CETTE FIGURE PORTE, et il est exact : refuser une cellule ne
+    # change RIEN à celles qui restent, donc l'écart apparié sur les cellules communes vaut zéro.
+    # Le contrôle porte là-dessus : si l'écart n'était pas nul, l'élagage ferait autre chose que
+    # ce que sa description dit, et il faudrait chercher quoi.
+    v("refuser ses plis ne change rien aux cellules qui restent : l'écart apparié est nul",
+      m["ecart_rien_elague"] is not None
+      and abs(m["ecart_rien_elague"]["ecart_median_um"]) < 1e-9,
+      str(m["ecart_rien_elague"]))
+    # ⚠⚠⚠ ET LA PART GARDÉE EST CE QUI REND LA PORTÉE LISIBLE : sans elle, « portée 5 » se lirait
+    # comme un gain de méthode alors que c'est un échantillon plus facile.
+    v("... et la part de nappe qu'il garde est publiée à côté de sa portée",
+      m.get("part_gardee_rien_elague") is not None
+      and m["part_gardee_rien_elague"] < 1.0,
+      f"portée {m['portee_rien_elague']} · garde {m['part_gardee_rien_elague']}")
     # ⭐⭐⭐ LE MÉCANISME, DÉMONTRÉ PLUTÔT QU'AFFIRMÉ : le MÊME raccrochage, lu sur la surface
     # lisse du pas normal, produit un champ de décalage plus lisse que lu sur sa propre
     # prédiction. La rugosité n'est donc pas une propriété du raccrochage, elle est héritée.

@@ -21,6 +21,8 @@
   "marcheurs_parcourus": [
     "rien",
     "rien_lisse",
+    "rien_elague",
+    "rien_lisse_elague",
     "raccroche",
     "raccroche_lisse",
     "sortie_raccrochee",
@@ -47,6 +49,8 @@
   "marcheurs": [
     "rien",
     "rien_lisse",
+    "rien_elague",
+    "rien_lisse_elague",
     "raccroche",
     "raccroche_lisse",
     "sortie_raccrochee",
@@ -424,6 +428,378 @@
         1096,
         977,
         864
+      ],
+      "portee": 5
+    },
+    {
+      "marcheur": "rien_elague",
+      "borne": false,
+      "temoin": false,
+      "deploye": false,
+      "bras_faits": 8,
+      "bras": [
+        {
+          "bras": 1,
+          "vers": 5,
+          "cellules": 1805,
+          "erreur_um": 44.0,
+          "pas_reel_um": 170.7,
+          "plancher_um": 37.5,
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0,
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.0
+        },
+        {
+          "bras": 2,
+          "vers": 6,
+          "cellules": 1647,
+          "erreur_um": 50.1,
+          "pas_reel_um": 147.6,
+          "plancher_um": 44.8,
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0,
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.0
+        },
+        {
+          "bras": 3,
+          "vers": 7,
+          "cellules": 1469,
+          "erreur_um": 48.6,
+          "pas_reel_um": 111.8,
+          "plancher_um": 46.2,
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0,
+          "rugosite_nappe_um": 0.21,
+          "part_lissee": 0.0
+        },
+        {
+          "bras": 4,
+          "vers": 8,
+          "cellules": 1239,
+          "erreur_um": 64.4,
+          "pas_reel_um": 85.2,
+          "plancher_um": 61.3,
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0,
+          "rugosite_nappe_um": 0.74,
+          "part_lissee": 0.0
+        },
+        {
+          "bras": 5,
+          "vers": 9,
+          "cellules": 994,
+          "erreur_um": 58.0,
+          "pas_reel_um": 80.6,
+          "plancher_um": 57.3,
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0,
+          "rugosite_nappe_um": 1.63,
+          "part_lissee": 0.0
+        },
+        {
+          "bras": 6,
+          "vers": 10,
+          "cellules": 778,
+          "erreur_um": 103.9,
+          "pas_reel_um": 64.5,
+          "plancher_um": 72.2,
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0,
+          "rugosite_nappe_um": 2.04,
+          "part_lissee": 0.0
+        },
+        {
+          "bras": 7,
+          "vers": 11,
+          "cellules": 565,
+          "erreur_um": 975.0,
+          "pas_reel_um": 951.1,
+          "plancher_um": 815.6,
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0,
+          "rugosite_nappe_um": 2.14,
+          "part_lissee": 0.0
+        },
+        {
+          "bras": 8,
+          "vers": 12,
+          "cellules": 391,
+          "erreur_um": 101.0,
+          "pas_reel_um": 112.5,
+          "plancher_um": 54.7,
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0,
+          "rugosite_nappe_um": 1.96,
+          "part_lissee": 0.0
+        }
+      ],
+      "rugosites_vx": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rugosites_nappe_um": [
+        0.0,
+        0.0,
+        0.21,
+        0.74,
+        1.63,
+        2.04,
+        2.14,
+        1.96
+      ],
+      "parts_lissees": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "erreurs_um": [
+        44.0,
+        50.1,
+        48.6,
+        64.4,
+        58.0,
+        103.9,
+        975.0,
+        101.0
+      ],
+      "glissements_um": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pas_reels_um": [
+        170.7,
+        147.6,
+        111.8,
+        85.2,
+        80.6,
+        64.5,
+        951.1,
+        112.5
+      ],
+      "planchers_um": [
+        37.5,
+        44.8,
+        46.2,
+        61.3,
+        57.3,
+        72.2,
+        815.6,
+        54.7
+      ],
+      "cellules_par_bras": [
+        1805,
+        1647,
+        1469,
+        1239,
+        994,
+        778,
+        565,
+        391
+      ],
+      "portee": 5
+    },
+    {
+      "marcheur": "rien_lisse_elague",
+      "borne": false,
+      "temoin": false,
+      "deploye": false,
+      "bras_faits": 8,
+      "bras": [
+        {
+          "bras": 1,
+          "vers": 5,
+          "cellules": 1805,
+          "erreur_um": 44.4,
+          "pas_reel_um": 170.7,
+          "plancher_um": 37.5,
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0,
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.998
+        },
+        {
+          "bras": 2,
+          "vers": 6,
+          "cellules": 1647,
+          "erreur_um": 50.0,
+          "pas_reel_um": 147.7,
+          "plancher_um": 44.9,
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0,
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.998
+        },
+        {
+          "bras": 3,
+          "vers": 7,
+          "cellules": 1495,
+          "erreur_um": 48.7,
+          "pas_reel_um": 112.1,
+          "plancher_um": 45.4,
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0,
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.998
+        },
+        {
+          "bras": 4,
+          "vers": 8,
+          "cellules": 1336,
+          "erreur_um": 63.9,
+          "pas_reel_um": 88.6,
+          "plancher_um": 60.9,
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0,
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.996
+        },
+        {
+          "bras": 5,
+          "vers": 9,
+          "cellules": 1156,
+          "erreur_um": 57.9,
+          "pas_reel_um": 87.0,
+          "plancher_um": 57.5,
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0,
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.994
+        },
+        {
+          "bras": 6,
+          "vers": 10,
+          "cellules": 958,
+          "erreur_um": 90.5,
+          "pas_reel_um": 68.3,
+          "plancher_um": 70.1,
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0,
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.991
+        },
+        {
+          "bras": 7,
+          "vers": 11,
+          "cellules": 769,
+          "erreur_um": 865.4,
+          "pas_reel_um": 869.5,
+          "plancher_um": 734.0,
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0,
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.978
+        },
+        {
+          "bras": 8,
+          "vers": 12,
+          "cellules": 587,
+          "erreur_um": 138.0,
+          "pas_reel_um": 118.6,
+          "plancher_um": 56.7,
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0,
+          "rugosite_nappe_um": 0.0,
+          "part_lissee": 0.961
+        }
+      ],
+      "rugosites_vx": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rugosites_nappe_um": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "parts_lissees": [
+        0.998,
+        0.998,
+        0.998,
+        0.996,
+        0.994,
+        0.991,
+        0.978,
+        0.961
+      ],
+      "erreurs_um": [
+        44.4,
+        50.0,
+        48.7,
+        63.9,
+        57.9,
+        90.5,
+        865.4,
+        138.0
+      ],
+      "glissements_um": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pas_reels_um": [
+        170.7,
+        147.7,
+        112.1,
+        88.6,
+        87.0,
+        68.3,
+        869.5,
+        118.6
+      ],
+      "planchers_um": [
+        37.5,
+        44.9,
+        45.4,
+        60.9,
+        57.5,
+        70.1,
+        734.0,
+        56.7
+      ],
+      "cellules_par_bras": [
+        1805,
+        1647,
+        1495,
+        1336,
+        1156,
+        958,
+        769,
+        587
       ],
       "portee": 5
     },
@@ -1710,6 +2086,50 @@
     864
   ],
   "la_sortie_lisse_bat_le_pas_normal": true,
+  "portee_rien_elague": 5,
+  "ecart_rien_elague": {
+    "ecart_median_um": 0.0,
+    "intervalle_um": [
+      0.0,
+      0.0
+    ],
+    "pas_ameliores": 1,
+    "pas": 8
+  },
+  "cellules_communes_rien_elague": [
+    1805,
+    1647,
+    1469,
+    1239,
+    994,
+    778,
+    565,
+    391
+  ],
+  "le_rien_elague_bat_sa_reference": false,
+  "part_gardee_rien_elague": 0.453,
+  "portee_rien_lisse_elague": 5,
+  "ecart_rien_lisse_elague": {
+    "ecart_median_um": 0.0,
+    "intervalle_um": [
+      0.0,
+      0.0
+    ],
+    "pas_ameliores": 3,
+    "pas": 8
+  },
+  "cellules_communes_rien_lisse_elague": [
+    1805,
+    1647,
+    1495,
+    1336,
+    1156,
+    958,
+    769,
+    587
+  ],
+  "le_rien_lisse_elague_bat_sa_reference": false,
+  "part_gardee_rien_lisse_elague": 0.679,
   "ecart_du_lissage_au_pas_normal": {
     "ecart_median_um": 3.3,
     "intervalle_um": [

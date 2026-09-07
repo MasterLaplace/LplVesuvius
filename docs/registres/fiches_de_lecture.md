@@ -5518,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 4673
+- **lignes** : 4729
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -6036,6 +6036,35 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     le voisinage **déjà déployé** rend **3 à 9 µm** sur une marche, de façon constante, sur toutes
     les ancres essayées, sans **aucun** réglage. Que ça se traduise en spires dépend de la marge
     que l'ancre avait — une propriété de la **matière** à cet endroit, pas de la méthode.
+  - ⛔⛔⛔ **REFUSER SES PROPRES PLIS : la portée monte, et l'écart apparié vaut EXACTEMENT ZÉRO
+    (2026-09-07, `la_portee_du_raccrochage`, 35 contrôles, 10 marcheurs).** L'idée venait de la
+    tranche précédente : les plis sont **localisés** et une cellule pliée est détectable **sans la
+    cible** (son écart à ses voisins dépasse la demi-feuille), donc un marcheur peut la **refuser**
+    au lieu de la porter. Critère dérivé de la matière, aucune supervision, prix annoncé en
+    couverture. Portée **4 → 5**, et la nappe du marcheur qui lisse **et** refuse reste à **0,00 µm
+    aux huit bras** (contre 19,87 pour le pas normal seul).
+  - ⛔⛔⛔ **Et pourtant il ne gagne RIEN** : sur les cellules que les deux ont gardées, l'écart
+    apparié vaut **+0,0 µm, intervalle [0,0 ; 0,0]** — exactement zéro. Refuser une cellule ne
+    change **rien** à celles qui restent, c'est même la seule chose qu'un refus puisse faire. Tout
+    le gain apparent vient de ce qu'il **jette** : il garde **0,453** de la nappe du pas normal
+    (391 cellules contre 864). ⚠ C'est le mode de panne qu'un contrôle écrit deux tranches plus
+    tôt nommait — « une erreur qui s'améliore parce qu'on a écarté les cellules difficiles est un
+    échantillon plus facile » — appliqué cette fois à mon propre marcheur.
+  - ⭐ **Ce n'est pas rien pour autant** : un dérouleur peut préférer **la moitié de la nappe à
+    58 µm** plutôt que toute à 72, les cellules écartées étant celles qui seraient **fausses**.
+    Mais c'est un **arbitrage couverture/justesse**, jamais un gain de méthode, et publier la
+    portée sans la part gardée serait le présenter pour ce qu'il n'est pas. ⚠⚠ Le panneau de
+    couverture de la figure dessine désormais **une courbe par marcheur** : tant que tous
+    gardaient les mêmes cellules une seule suffisait, dès qu'un en refuse elle laisserait lire une
+    portée gagnée sans son coût.
+  - ⚠⚠ **Un défaut à moi, attrapé par la SORTIE d'un contrôle et pas par une relecture** : les deux
+    marcheurs neufs tombaient dans la branche du **raccrochage** — ajoutés à `MARCHEURS` sans
+    élargir la condition qui nomme la famille du pas normal — donc ils lisaient le volume et
+    publiaient sous un nom qui annonce l'inverse. Ce qui l'a dit : la rugosité de **champ** de
+    `rien_elague` était exactement celle de `raccroche`, or un marcheur qui ne glisse pas ne peut
+    pas avoir un champ rugueux. La famille est nommée **en un seul endroit** et deux contrôles
+    l'épinglent. Un nom qui ment sur ce que le code fait est le pire défaut silencieux : toute la
+    lecture en aval en dépend.
   - ⭐⭐⭐ **OÙ LA NAPPE SE FROISSE, ET CE QUE LES MÉDIANES CACHAIENT (2026-09-07,
     `ou_la_nappe_se_froisse`, 15 contrôles, 8 bras, 857 cellules gardées par tous).** Cette
     tranche vient d'avoir **regardé** — l'auteur a rappelé que le dépôt a un instrument
@@ -6709,8 +6738,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 3981 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 4673 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 4037 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 4729 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
