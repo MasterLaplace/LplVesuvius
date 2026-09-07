@@ -5518,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 4400
+- **lignes** : 4447
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5983,6 +5983,35 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     donc plus une question de **lecture** — les sept portes sont fermées, et la borne, qui lit
     parfaitement, ne dépasse pas 6 non plus. C'est une question de **propagation** : ce que la
     marche transporte d'un bras au suivant.
+  - ⭐⭐⭐ **ET C'EST LA PROPAGATION : lisser la NAPPE achète un bras, sans un réglage de plus.**
+    L'instrument manquait depuis le début — la rugosité instrumentée porte sur le champ de
+    **décalage**, un scalaire le long de la normale, et ne dit **rien** de la surface sur laquelle
+    le bras suivant estime ses normales. `la_lissite_de_la_feuille.rugosite_de_la_nappe` mesure la
+    seconde, avec le voisinage **déployé** : nulle sur un plan **et sur une pente** (une
+    inclinaison n'est pas un froissement), et l'ordre plan < ondulation < bruit tient sans seuil.
+  - ⚠⚠ **Deux angles morts, écrits plutôt que découverts plus tard** : un **damier de période
+    deux** lui est invisible (dans un 3×3 la valeur du centre est en majorité, cinq contre quatre,
+    donc la médiane rend le centre), et une **pointe isolée** aussi (une médiane sur toutes les
+    cellules ne bouge pas pour une seule aberrante). Le nombre répond à « la nappe est-elle
+    froissée », jamais à « y a-t-il une cellule aberrante ».
+  - ⚠⚠⚠ **Il contredit ce que la tranche précédente laissait croire.** Le pas normal seul a un
+    champ de décalage **identiquement nul** et sa **nappe se froisse quand même** : 0.0 · 0.0 · 0.3 · 1.2 · 2.8 · 5.1 · 9.9 · 19.9 µm bras par
+    bras. Elle se froisse par les **NORMALES**, estimées sur une surface déjà fausse. « Il ne
+    glisse pas donc rien ne se compose » était tiré de la **mauvaise grandeur**, et un contrôle
+    l'épingle.
+  - ⭐⭐⭐ **Le remède suit du diagnostic et n'ajoute AUCUN réglage** : pas normal + le voisinage
+    déjà déployé appliqué à la **nappe** entre deux bras. Sa nappe reste à 0.0 · 0.0 · 0.0 · 0.0 · 0.0 · 0.0 · 0.1 · 1.9 µm. Portée **5 sur
+    les 6 que le corpus autorise** (contre 4), écart apparié **-6.7 µm** sur 7/8 bras,
+    intervalle [-11.0, -2.4] — **il tranche**. C'est le meilleur marcheur aveugle de la campagne, il ne
+    contient **aucun raccrochage**, et il est plus **simple** que celui qui tourne.
+  - ⚠⚠ **La borne dit la dernière moitié du mécanisme** : sa nappe se froisse aussi (0.0 · 0.5 · 2.7 · 5.9 · 10.7 · 18.1 · 51.3 · 114.1 µm) et son
+    erreur reste **plate** (17 à 22 µm sur six bras), parce qu'elle se raccroche à la **vraie
+    spire** à chaque bras. Ce qu'un marcheur aveugle paie n'est donc pas d'avoir une nappe
+    froissée, c'est de **devoir repartir de la sienne**.
+  - ⚠ **Et ajouter la sortie raccrochée par-dessus fait PERDRE le bras** (4 contre 5) : au bras 5
+    elle lit 81,7 µm là où la nappe lissée seule en lit 61,2. Le raccrochage lu sur une surface
+    propre reste moins bon que la prédiction de cette surface. Contraire à l'intuition, mesuré,
+    publié tel quel.
   - ⭐⭐⭐ **La première piste neuve depuis sept tranches.** *« Quelle méthode fait le meilleur
     pas ? »* et *« quelle méthode va le plus loin ? »* ont des réponses **différentes** sur la même
     donnée. Trois conséquences, dans l'ordre où elles se testent : débrancher le raccrochage au
@@ -6587,8 +6616,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 3708 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 4400 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 3755 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 4447 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

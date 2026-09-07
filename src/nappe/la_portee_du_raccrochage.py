@@ -51,7 +51,13 @@ from lecart_apparie import ecart_apparie, tranche  # noqa: E402
 # ⚠ Les marcheurs comparés. « rien » est le pas normal seul — la référence contre laquelle tout
 # se juge ; « oracle » regarde la cible une fois par cellule et par bras, donc c'est une BORNE
 # et jamais une méthode ; « melange » est le témoin, même géométrie et forme détruite.
-MARCHEURS = ("rien", "raccroche", "raccroche_lisse", "sortie_raccrochee", "melange", "oracle")
+MARCHEURS = ("rien", "rien_lisse", "raccroche", "raccroche_lisse", "sortie_raccrochee",
+             "sortie_lisse", "melange", "oracle")
+# ⚠⚠ LES DEUX MARCHEURS QUI COMPOSENT CE QUI A MARCHÉ. `rien_lisse` avance au pas normal et
+# lisse la NAPPE entre deux bras ; `sortie_lisse` fait de même et publie la sortie raccrochée.
+# Aucun des deux n'ajoute de réglage : le voisinage est celui qui tourne, et la séparation
+# état/sortie est la séparation ordinaire d'un système. Ce sont des COMPOSITIONS, pas des idées.
+ETAT_LISSE = ("rien_lisse", "sortie_lisse")
 LISSE = "raccroche_lisse"
 # ⭐⭐⭐ LE MARCHEUR QUI SÉPARE L'ÉTAT DE LA SORTIE. Sept tranches ont mesuré qu'un raccrochage
 # gagne quelques µm sur UN pas ; la tranche de la marche mesure qu'il en coûte cinquante sur
@@ -79,6 +85,30 @@ def portee(erreurs: list[float], demi_feuille_um: float) -> int:
         if not np.isfinite(e) or e >= demi_feuille_um:
             return k
     return len(erreurs)
+
+
+def _lisser_la_nappe(neuf, masque, accorder_les_voisins):
+    """Le voisinage déployé, appliqué à la NAPPE canal par canal, à masque CONSTANT.
+
+    ⚠⚠⚠ LE MASQUE NE BOUGE PAS. Un lissage qui écarterait les cellules dont le voisinage ne fait
+    pas majorité comparerait ce marcheur aux autres sur une AUTRE population, et une médiane sur
+    moins de cellules n'est pas une médiane meilleure. Là où le voisinage ne suffit pas, la
+    cellule garde sa valeur non lissée — c'est exactement ce que fait le raccrochage déployé sur
+    son champ de décalage.
+
+    ⚠ Écrit une seule fois pour ses trois appelants. Deux copies de « lisser la nappe » seraient
+    deux occasions de ne pas s'accorder sur ce que le repli fait.
+    """
+    assez = masque.copy()
+    canaux = []
+    for c in range(neuf.shape[2]):
+        v2, ok2 = accorder_les_voisins(neuf[:, :, c], masque)
+        canaux.append(v2)
+        assez &= ok2
+    pris = assez & masque
+    for c in range(neuf.shape[2]):
+        neuf[:, :, c] = np.where(pris & np.isfinite(canaux[c]), canaux[c], neuf[:, :, c])
+    return neuf
 
 
 def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
@@ -115,12 +145,17 @@ def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
     # par leur numéro et éloignées de huit feuilles dans la matière — se lit comme une méthode
     # qui échoue, et le blâme tombe sur le marcheur au lieu du corpus.
     depart = distance_a(p, cible, voxel_um)
-    if nom == "rien":
+    if nom in ("rien", "rien_lisse"):
         # ⚠ La grille porte trois coordonnées par cellule : son masque a donc la forme des deux
         # premiers axes, jamais celle de la grille entière. Confondre les deux fait lever la
         # pose sur un décalage de formes — ce qui est le bon échec, mais tardif.
+        from la_lissite_de_la_feuille import rugosite_de_la_nappe  # noqa: PLC0415
+
         neuf = np.full(grille.shape, np.nan)
         neuf[vivant] = prevu
+        if nom == "rien_lisse":
+            neuf = _lisser_la_nappe(neuf, vivant, accorder_les_voisins)
+            prevu = neuf[vivant]
         # ⚠⚠ LE PLANCHER DU BRAS, PAR CELLULE. Une distance à un nuage est 1-lipschitzienne :
         # un point à distance d du nuage, déplacé de L, ne peut pas être à moins de |d − L|.
         # C'est une borne INFÉRIEURE dérivée de la géométrie et d'aucun réglage, et elle vaut
@@ -128,7 +163,8 @@ def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
         return dict(grille=neuf, garde=vivant, points=prevu, directions=dd,
                     decalage=np.zeros(len(prevu)), depart_um=float(np.median(depart)),
                     plancher_um=float(np.median(np.abs(depart - pas_vx * voxel_um))),
-                    glissement_um=0.0, glissement_max_um=0.0, rugosite_vx=0.0)
+                    glissement_um=0.0, glissement_max_um=0.0, rugosite_vx=0.0,
+                    rugosite_nappe_um=rugosite_de_la_nappe(neuf, vivant, voxel_um))
 
     t_gab = reglage["t_gab"]
     t_ligne = reglage["t_ligne"]
@@ -168,20 +204,7 @@ def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
     # estime ses normales et lit son gabarit. Le voisinage employé est celui qui tourne — même
     # demi-largeur, même règle de majorité — donc ce marcheur n'ajoute aucun réglage.
     if nom == LISSE:
-        # ⚠⚠⚠ LE MASQUE NE DOIT PAS BOUGER. Un lissage qui écarte les cellules dont le voisinage
-        # ne fait pas majorité comparerait ce marcheur aux autres sur une AUTRE population, et
-        # une médiane sur moins de cellules n'est pas une médiane meilleure. Là où le voisinage
-        # ne suffit pas, la cellule garde sa valeur non lissée — c'est exactement ce que fait le
-        # raccrochage déployé sur son champ de décalage.
-        assez = lisible.copy()
-        canaux = []
-        for c in range(neuf.shape[2]):
-            v2, ok2 = accorder_les_voisins(neuf[:, :, c], lisible)
-            canaux.append(v2)
-            assez &= ok2
-        pris = assez & lisible
-        for c in range(neuf.shape[2]):
-            neuf[:, :, c] = np.where(pris & np.isfinite(canaux[c]), canaux[c], neuf[:, :, c])
+        neuf = _lisser_la_nappe(neuf, lisible, accorder_les_voisins)
     pts = neuf[ou[:, 0], ou[:, 1]]
     # ⚠⚠ LE PLANCHER EST CALCULÉ SUR LE DÉPLACEMENT RÉELLEMENT SUBI, du point de départ au point
     # final, et non sur le pas nominal. Le raccrochage glisse le long de la ligne et le lissage
@@ -199,6 +222,7 @@ def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
     # ⚠⚠ LA RUGOSITÉ DU CHAMP DE DÉCALAGE, bras par bras : c'est la PRÉMISSE du diagnostic — si
     # la surface ne se froisse pas, « la marche froisse ce qu'elle laisse » est une histoire et
     # non un fait. Elle est mesurée sur le champ que ce bras a réellement appliqué.
+    from la_lissite_de_la_feuille import rugosite_de_la_nappe  # noqa: PLC0415
     from loracle_est_il_atteignable import rugosite  # noqa: PLC0415
 
     return dict(grille=neuf, garde=lisible, points=pts, directions=D,
@@ -206,7 +230,8 @@ def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
                 plancher_um=float(np.median(np.abs(dep_ok - bouge))),
                 glissement_um=float(np.nanmedian(np.abs(t_final))) * voxel_um,
                 glissement_max_um=borne,
-                rugosite_vx=rugosite(champ_t, lisible))
+                rugosite_vx=rugosite(champ_t, lisible),
+                rugosite_nappe_um=rugosite_de_la_nappe(neuf, lisible, voxel_um))
 
 
 def sur_les_cellules_communes(a: list[dict], b: list[dict]) -> tuple[list, list, list]:
@@ -314,8 +339,9 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
             # sans jamais être réinjecté. Ce qui est jugé est la sortie ; ce qui est porté au
             # bras suivant est l'état. Confondre les deux est exactement ce que la tranche de
             # la marche a mesuré comme coûteux.
-            if nom == SORTIE:
-                etat = marcher("rien", grille, garde, cible, vol, reglage, rng)
+            if nom in (SORTIE, "sortie_lisse"):
+                etat = marcher("rien_lisse" if nom == "sortie_lisse" else "rien",
+                               grille, garde, cible, vol, reglage, rng)
                 pas = marcher("raccroche", grille, garde, cible, vol, reglage, rng)
                 if etat is None or pas is None:
                     break
@@ -342,6 +368,11 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
                              plancher_um=round(pas["plancher_um"], 1),
                              glissement_um=round(pas["glissement_um"], 1),
                              rugosite_vx=pas["rugosite_vx"],
+                             # ⚠⚠ LA RUGOSITÉ DE LA NAPPE, à côté de celle du CHAMP. Un marcheur
+                             # peut avoir un champ de décalage lisse et laisser une nappe
+                             # froissée : ce sont deux grandeurs, et c'est la seconde que le
+                             # bras suivant subit quand il estime ses normales.
+                             rugosite_nappe_um=etat["rugosite_nappe_um"],
                              ou=np.argwhere(pas["garde"]).tolist()))
             grille, garde = etat["grille"], etat["garde"]
         resultats[nom] = bras
@@ -364,9 +395,10 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
             bras_faits=len(bras), bras=[{k: b[k] for k in ("bras", "vers", "cellules",
                                                            "erreur_um", "pas_reel_um",
                                                            "plancher_um", "glissement_um",
-                                                           "rugosite_vx")}
+                                                           "rugosite_vx", "rugosite_nappe_um")}
                                        for b in bras],
             rugosites_vx=[b["rugosite_vx"] for b in bras],
+            rugosites_nappe_um=[b["rugosite_nappe_um"] for b in bras],
             erreurs_um=erreurs,
             glissements_um=[b["glissement_um"] for b in bras],
             pas_reels_um=[b["pas_reel_um"] for b in bras],
@@ -423,6 +455,20 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
         r["ecart_de_la_sortie_au_pas_normal"] and tranche(r["ecart_de_la_sortie_au_pas_normal"]))
     r["le_pas_normal_bat_la_sortie_raccrochee"] = bool(
         ncs and tranche(ecart_apparie(mr3, ms)))
+    # ⭐⭐ LES DEUX COMPOSITIONS, chacune appariée à ce qu'elle prétend améliorer.
+    mrl, mr4, ncrl = sur_les_cellules_communes(resultats["rien_lisse"], resultats["rien"])
+    r["portee_du_pas_normal_lisse"] = trouver("rien_lisse")["portee"]
+    r["cellules_communes_rien_lisse"] = ncrl
+    r["ecart_du_pas_normal_lisse"] = ecart_apparie(mrl, mr4) if ncrl else None
+    r["le_lissage_aide_le_pas_normal"] = bool(
+        r["ecart_du_pas_normal_lisse"] and tranche(r["ecart_du_pas_normal_lisse"]))
+    msl, mr5, ncsl = sur_les_cellules_communes(resultats["sortie_lisse"], resultats["rien"])
+    r["portee_de_la_sortie_lisse"] = trouver("sortie_lisse")["portee"]
+    r["cellules_communes_sortie_lisse"] = ncsl
+    r["ecart_de_la_sortie_lisse_au_pas_normal"] = ecart_apparie(msl, mr5) if ncsl else None
+    r["la_sortie_lisse_bat_le_pas_normal"] = bool(
+        r["ecart_de_la_sortie_lisse_au_pas_normal"]
+        and tranche(r["ecart_de_la_sortie_lisse_au_pas_normal"]))
     ml2, mr2, ncr = sur_les_cellules_communes(resultats[LISSE], resultats["rien"])
     r["cellules_communes_lissage_pas_normal"] = ncr
     r["ecart_du_lissage_au_pas_normal"] = ecart_apparie(ml2, mr2) if ncr else None
@@ -542,6 +588,22 @@ def verifier() -> int:
       all(g == 0.0 for x in fab["lignes"] if x["marcheur"] == "rien" for g in x["rugosites_vx"])
       and any(g for x in fab["lignes"] if x["deploye"] for g in x["rugosites_vx"]),
       str({x["marcheur"]: x["rugosites_vx"] for x in fab["lignes"]}))
+    # ⚠⚠⚠ LA RUGOSITÉ DE LA NAPPE EST UNE SECONDE GRANDEUR, pas une relecture de la première :
+    # un marcheur peut avoir un champ de décalage lisse et laisser une nappe froissée. Le
+    # contrôle exige qu'elle soit publiée pour TOUS, y compris ceux qui ne glissent pas — dont
+    # le champ est nul et dont la nappe, elle, ne l'est pas.
+    v("... la rugosité de la NAPPE est publiée pour chaque marcheur, à côté de celle du champ",
+      all(x["rugosites_nappe_um"] and all(g is not None for g in x["rugosites_nappe_um"])
+          for x in fab["lignes"]),
+      str({x["marcheur"]: x["rugosites_nappe_um"][:3] for x in fab["lignes"]}))
+    # ⚠⚠ ET LE LISSAGE DE LA NAPPE DOIT RÉELLEMENT LA LISSER : si la rugosité de nappe du
+    # marcheur lissé n'était pas plus basse que celle de son homologue brut, le lissage ne
+    # ferait rien et tous les verdicts posés dessus seraient des coïncidences.
+    rn_l = next(x for x in fab["lignes"] if x["marcheur"] == "rien_lisse")["rugosites_nappe_um"]
+    rn_r = next(x for x in fab["lignes"] if x["marcheur"] == "rien")["rugosites_nappe_um"]
+    v("... et lisser la nappe la rend effectivement moins rugueuse",
+      sum(a <= b for a, b in zip(rn_l, rn_r)) > len(rn_l) // 2,
+      f"lissé {rn_l} · brut {rn_r}")
     # ⭐⭐⭐ L'ÉTAT ET LA SORTIE SONT DEUX CHOSES, et le contrôle porte sur la seule propriété qui
     # rend ce marcheur différent : sa COUVERTURE est celle du raccrochage (c'est lui qui est
     # publié) tandis que ce qu'il porte au bras suivant est le pas normal. Si son état était
@@ -655,10 +717,10 @@ def afficher(r: dict) -> None:
     print(f"{'le corpus':>12} {' '.join(cases)} {r['bras_au_pas_nominal']:>8}  ·")
     print()
     print("* = au-delà de la demi-feuille : la marche est plus près de la MAUVAISE feuille")
+    print("rugosité du CHAMP de décalage (voxels) / rugosité de la NAPPE (µm), bras par bras :")
     for x in r["lignes"]:
-        if any(g is not None for g in x["rugosites_vx"]):
-            print(f"{'rugosité ' + x['marcheur']:>24} : "
-                  f"{[g for g in x['rugosites_vx']]}")
+        print(f"{x['marcheur']:>18} champ {str(x['rugosites_vx']):<44} "
+              f"nappe {x['rugosites_nappe_um']}")
     dep_l = next(x for x in r["lignes"] if x["deploye"])
     print(f"glissement : au plus ±{r['glissement_maximal_um']} µm "
           f"({r['glissement_en_demi_feuilles']} demi-feuille) · appliqué bras par bras "
@@ -674,6 +736,15 @@ def afficher(r: dict) -> None:
     print(f"→ le raccrochage porte plus loin que le pas normal : "
           f"{'OUI' if r['le_raccrochage_porte_plus_loin'] else 'NON'} · que son témoin : "
           f"{'OUI' if r['le_raccrochage_porte_plus_loin_que_son_temoin'] else 'NON'}")
+    for cle, nom_, por in (("ecart_du_pas_normal_lisse", "pas normal + nappe lissée",
+                           "portee_du_pas_normal_lisse"),
+                          ("ecart_de_la_sortie_lisse_au_pas_normal",
+                           "nappe lissée + sortie raccrochée", "portee_de_la_sortie_lisse")):
+        x = r[cle]
+        if x:
+            print(f"→ ⭐ {nom_} : portée {r[por]} · écart au pas normal "
+                  f"{x['ecart_median_um']:+.1f} µm · {x['pas_ameliores']}/{x['pas']} bras · "
+                  f"{x['intervalle_um']}")
     es = r["ecart_de_la_sortie_au_pas_normal"]
     if es:
         print(f"→ ⭐ l'ÉTAT au pas normal, la SORTIE raccrochée : portée "

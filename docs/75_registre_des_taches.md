@@ -3486,7 +3486,9 @@ sur une erreur.
 | pas normal seul | 44,0 | 50,1 | 49,5 | 67,2 | 72,2\* | 114,2\* | 1016,5\* | 177,3\* | **4** |
 | ⭐ raccrochage déployé | 34,7 | 44,3 | 71,8\* | 120,4\* | 207,2\* | 274,6\* | 1067,2\* | 499,5\* | **2** |
 | ⭐ **+ nappe lissée entre deux bras** | 36,6 | 42,8 | 48,9 | 74,4\* | 120,9\* | 160,8\* | 940,7\* | 354,7\* | **3** |
+| ⭐⭐⭐ **pas normal + nappe lissée** | 44,4 | 50,0 | 48,8 | 64,8 | **61,2** | 99,8\* | 995,8\* | 160,0\* | **5** |
 | ⭐⭐ **état au pas normal, sortie raccrochée** | 34,7 | 52,0 | 56,1 | 66,1 | 79,5\* | 110,6\* | 1015,8\* | 173,2\* | **4** |
+| nappe lissée + sortie raccrochée | 34,7 | 50,8 | 57,6 | 64,5 | 81,7\* | 101,2\* | 1002,5\* | 163,7\* | 4 |
 | témoin mélangé | 62,4 | 64,9 | 92,6\* | 149,4\* | 267,5\* | 334,2\* | 1141,7\* | 597,5\* | 2 |
 | ⛔ la borne | 19,9 | 17,5 | 19,0 | 17,9 | 19,4 | 22,1 | 849,0\* | 105,4\* | **6** |
 | *ce que le corpus demande* | *170,0* | *119,5* | *100,6* | *120,0* | *137,6* | *89,2* | ***1000,6*** | *76,7* | *6* |
@@ -3610,6 +3612,51 @@ serait la faute que ce registre corrige en boucle.
 > reste entre 4 et 6 n'est donc plus une question de *lecture* — les sept portes de la lecture sont
 > fermées et la borne, qui lit parfaitement, ne fait pas mieux que 6 non plus. C'est une question
 > de **propagation** : ce que la marche transporte d'un bras au suivant.
+
+##### ⭐⭐⭐ ET C'EST LA PROPAGATION : lisser la NAPPE achète un bras, sans un réglage de plus
+
+⚠⚠⚠ **L'instrument manquait, et il manquait depuis le début.** La rugosité déjà instrumentée
+porte sur le champ de **DÉCALAGE** — un scalaire le long de la normale. Elle ne dit **rien** de la
+surface, qui est pourtant ce sur quoi le bras suivant estime ses normales.
+`la_lissite_de_la_feuille.rugosite_de_la_nappe` mesure la seconde : de combien un point s'écarte
+de la médiane de ses voisins, en µm, avec le voisinage **déployé**. Elle est nulle sur un plan
+**et sur une pente** — une inclinaison n'est pas un froissement — et l'ordre plan < ondulation <
+bruit tient sans qu'aucun seuil soit choisi.
+
+> ⚠⚠ **Deux angles morts, écrits plutôt que découverts plus tard.** Un **damier de période deux**
+> lui est invisible : dans un 3×3, la valeur du centre est en majorité (cinq contre quatre), donc
+> la médiane rend le centre. Et une **pointe isolée** l'est aussi : une médiane prise sur toutes
+> les cellules ne bouge pas pour une seule aberrante. Ce nombre répond à *« la nappe est-elle
+> froissée »*, jamais à *« y a-t-il une cellule aberrante »* — confondre les deux ferait lire un
+> zéro comme une garantie qu'il ne donne pas.
+
+⚠⚠⚠ **Et il contredit ce que la tranche précédente laissait croire.** Le pas normal seul a un
+champ de décalage **identiquement nul** — il ne glisse jamais — et sa **nappe se froisse quand
+même** : **0.0 · 0.0 · 0.3 · 1.2 · 2.8 · 5.1 · 9.9 · 19.9** µm bras par bras. Elle se froisse par les **NORMALES**, estimées sur une surface
+déjà fausse. « Il ne glisse pas donc rien ne se compose » était une conclusion tirée de la
+**mauvaise grandeur**, et un contrôle l'épingle désormais.
+
+⭐⭐⭐ **Le remède suit du diagnostic, et il n'ajoute AUCUN réglage** : le pas normal seul, avec le
+voisinage **déjà déployé** appliqué à la **NAPPE** entre deux bras. Sa nappe reste à **0.0 · 0.0 · 0.0 · 0.0 · 0.0 · 0.0 · 0.1 · 1.9** µm.
+
+| marcheur | portée | écart apparié au pas normal seul | verdict |
+|---|---:|---|---|
+| ⭐⭐⭐ **pas normal + nappe lissée** | **5** | **-6.7 µm · 7/8 bras · [-11.0, -2.4]** | ⭐ **il tranche** |
+| nappe lissée + sortie raccrochée | 4 | -6.0 µm · 5/8 bras · [-9.3, -2.7] | il tranche |
+
+> ⭐⭐⭐ **CINQ des SIX bras que le corpus autorise**, contre 4 sans lissage, par un marcheur qui
+> **ne contient aucun raccrochage du tout**. C'est le meilleur marcheur aveugle de la campagne, et
+> il est plus **simple** que celui qui tourne.
+
+⚠⚠ **La borne dit la dernière moitié du mécanisme.** Sa nappe se froisse aussi — **0.0 · 0.5 · 2.7 · 5.9 · 10.7 · 18.1 · 51.3 · 114.1** µm — et
+son erreur reste **plate** (17 à 22 µm sur six bras). Elle ne subit jamais ce qu'elle laisse,
+parce qu'elle se raccroche à la **vraie spire** à chaque bras. Ce qu'un marcheur aveugle paie
+n'est donc pas d'avoir une nappe froissée : c'est de **devoir repartir de la sienne**.
+
+⚠ **Et ajouter la sortie raccrochée par-dessus fait PERDRE le bras** (portée 4 contre 5) : au bras
+5 la sortie raccrochée lit 81,7 µm là où la nappe lissée seule en lit 61,2. Le raccrochage lu sur
+une surface propre reste moins bon que la prédiction de cette surface. C'est mesuré, contraire à
+l'intuition, et publié tel quel.
 
 ##### ⚠⚠ Ce que le corpus demande, et pourquoi il fallait le mesurer à part
 

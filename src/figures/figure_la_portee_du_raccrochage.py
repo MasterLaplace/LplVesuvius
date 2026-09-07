@@ -50,12 +50,17 @@ CADRE = (200, 200, 200)
 
 BLEU = (54, 88, 132)
 VIOLET = (124, 80, 140)
-COULEUR = {"rien": (70, 70, 70), "raccroche": VERT, "raccroche_lisse": BLEU,
-           "sortie_raccrochee": VIOLET, "melange": AMBRE, "oracle": ROUGE}
-MARQUE = {"raccroche": "raccrochage deploye", "raccroche_lisse": "+ nappe lissee",
-          "sortie_raccrochee": "etat au pas normal, sortie raccrochee",
-          "rien": "pas normal seul", "melange": "temoin melange",
-          "oracle": "la borne (elle regarde la cible)"}
+TURQUOISE = (26, 128, 128)
+COULEUR = {"rien": (70, 70, 70), "rien_lisse": TURQUOISE, "raccroche": VERT,
+           "raccroche_lisse": BLEU, "sortie_raccrochee": VIOLET, "sortie_lisse": (170, 130, 60),
+           "melange": AMBRE, "oracle": ROUGE}
+MARQUE = {"rien_lisse": "pas normal + NAPPE LISSEE", "rien": "pas normal seul",
+          "raccroche": "raccrochage deploye", "raccroche_lisse": "raccrochage + nappe lissee",
+          "sortie_raccrochee": "etat pas normal, sortie raccrochee",
+          "sortie_lisse": "nappe lissee, sortie raccrochee",
+          "melange": "temoin melange", "oracle": "la borne (elle regarde la cible)"}
+ORDRE_LEGENDE = ("rien_lisse", "rien", "raccroche", "raccroche_lisse",
+                 "sortie_raccrochee", "sortie_lisse", "melange", "oracle")
 
 
 def prose(m: dict) -> list[str]:
@@ -66,6 +71,12 @@ def prose(m: dict) -> list[str]:
     el = m["ecart_du_lissage_au_raccrochage"]
     epn = m["ecart_du_lissage_au_pas_normal"]
     es = m["ecart_de_la_sortie_au_pas_normal"]
+    erl = m["ecart_du_pas_normal_lisse"]
+
+    def nap(nom: str, k: int = 8) -> str:
+        return " ".join(f"{g:.0f}" for g in par(nom)["rugosites_nappe_um"][:k])
+
+    nap_r, nap_l, nap_o = nap("rien"), nap("rien_lisse"), nap("oracle")
     rug_s = " ".join(f"{g:.2f}" for g in
                      next(x for x in m["lignes"] if x["marcheur"] == "sortie_raccrochee"
                           )["rugosites_vx"][:5])
@@ -89,10 +100,26 @@ def prose(m: dict) -> list[str]:
            f"{m['bras_au_pas_nominal']} bras que le corpus demande au pas nominal (panneau B) : "
            "ce qui l'arrete est la matiere."
            if m["portee_de_loracle"] == m["bras_au_pas_nominal"] else ""),
-        f"⚠⚠⚠ PORTEE : le chemin deploye traverse {m['portee_du_deploye']} spires, le pas "
-        f"normal seul {m['portee_sans_rien_faire']}, le temoin melange {m['portee_du_temoin']}, "
-        f"la borne {m['portee_de_loracle']}. le raccrochage porte plus loin que le pas normal : "
-        f"{'OUI' if m['le_raccrochage_porte_plus_loin'] else 'NON'}.",
+        (f"⚠⚠⚠ LE RESULTAT DE CETTE TRANCHE, et il n'ajoute AUCUN reglage : le pas normal seul, "
+         f"avec le voisinage DEJA DEPLOYE applique a la NAPPE entre deux bras, traverse "
+         f"{m['portee_du_pas_normal_lisse']} spires sur les {m['bras_au_pas_nominal']} que le "
+         f"corpus autorise — contre {m['portee_sans_rien_faire']} sans lissage. ecart apparie "
+         f"{erl['ecart_median_um']:+.1f} um sur {erl['pas_ameliores']}/{erl['pas']} bras, "
+         f"intervalle {erl['intervalle_um']} : "
+         f"{'il tranche' if m['le_lissage_aide_le_pas_normal'] else 'il ne tranche pas'}. et il "
+         "ne contient PAS de raccrochage du tout."
+         if erl else "⚠ pas normal + nappe lissee : aucun bras commun."),
+        (f"⚠⚠⚠ PANNEAU D EXPLIQUE POURQUOI, et il contredit ce que la tranche precedente laissait "
+         f"croire. le pas normal seul a un champ de decalage NUL — il ne glisse jamais — et "
+         f"pourtant sa NAPPE se froisse : {nap_r} um bras par bras. elle se froisse par les "
+         "NORMALES, estimees sur une surface deja fausse. le lissage la tient a "
+         f"{nap_l} um, et c'est ce qui achete le bras. ⚠⚠ la borne aussi voit sa nappe se "
+         f"froisser ({nap_o} um) et son erreur reste plate : elle se raccroche a la vraie spire "
+         "a chaque bras, donc elle ne subit jamais ce qu'elle laisse."),
+        (f"⚠⚠⚠ PORTEE : le chemin deploye traverse {m['portee_du_deploye']} spires, le pas "
+         f"normal seul {m['portee_sans_rien_faire']}, le temoin melange {m['portee_du_temoin']}, "
+         f"la borne {m['portee_de_loracle']}. le raccrochage porte plus loin que le pas normal : "
+         f"{'OUI' if m['le_raccrochage_porte_plus_loin'] else 'NON'}."),
         (f"⚠⚠⚠ LE MARCHEUR QUI SEPARE L'ETAT DE LA SORTIE : la marche avance au pas normal, "
          f"donc rien ne se compose, et le raccrochage n'est applique qu'a ce qui est PUBLIE, "
          f"jamais reinjecte. c'est la separation ordinaire entre l'etat d'un systeme et sa "
@@ -105,8 +132,8 @@ def prose(m: dict) -> list[str]:
          if es else "⚠ la sortie raccrochee n'a pas de bras commun avec le pas normal."),
         (f"⚠⚠ ET IL DEMONTRE LE MECANISME, que la tranche precedente disait plausible : le "
          f"MEME raccrochage, lu sur une surface lisse, produit un champ de decalage lisse "
-         f"({rug_s}) la ou lu sur sa propre prediction il en produit un rugueux ({rug_r}) — "
-         "panneau D. la rugosite du champ n'est donc pas une propriete du raccrochage, elle "
+         f"({rug_s}) la ou lu sur sa propre prediction il en produit un rugueux ({rug_r}) "
+         "voxels. la rugosite du champ n'est donc pas une propriete du raccrochage, elle "
          "est HERITEE de la surface sur laquelle il lit."),
         (f"⚠⚠ LE CINQUIEME MARCHEUR n'ajoute AUCUN reglage : il applique a la NAPPE le voisinage "
          f"deja deploye sur le champ de decalage — meme demi-largeur, meme regle de majorite — "
@@ -302,37 +329,39 @@ def panneau_couverture(art, x0, y0, pw, ph, m, petit) -> None:
 
 
 def panneau_rugosite(art, x0, y0, pw, ph, m, petit) -> None:
-    """De combien le champ de decalage s'ecarte de son propre voisinage, bras par bras.
+    """De combien un point de la NAPPE s'ecarte de la mediane de ses voisins, bras par bras.
 
     ⚠⚠ C'EST LA PRÉMISSE DU DIAGNOSTIC. « La marche froisse la surface qu'elle laisse » reste
     une histoire tant que ce nombre n'est pas mesuré ; s'il ne monte pas, l'explication tombe et
     il faut en chercher une autre.
     """
     gauche, droite, base, sommet = _cadre(
-        art, x0, y0, pw, ph, "ecart median au voisinage, en voxels", petit)
-    series = [(x["marcheur"], x["rugosites_vx"]) for x in m["lignes"]
-              if any(g for g in x["rugosites_vx"])]
+        art, x0, y0, pw, ph, "ecart median d'un point a ses voisins, en um", petit)
+    series = [(x["marcheur"], x["rugosites_nappe_um"]) for x in m["lignes"]]
     toutes = [g for _, ser in series for g in ser if g]
     if not toutes:
         return
-    haut = max(toutes) * 1.2
+    # ⚠ Échelle logarithmique à PLANCHER : la rugosité de nappe va de zéro à trois cents µm, donc
+    # une échelle linéaire écrase sept marcheurs sur huit contre l'axe. Le plancher est dessiné,
+    # et un zéro y est posé — c'est dit plutôt que caché.
+    plancher = 0.1
+    py, grad = _log(plancher, max(toutes) * 1.4, base, sommet)
     n = len(m["spires_visees"])
+    art.line([gauche - 8, base, droite + 8, base], fill=CADRE)
     for nom, ser in series:
         coul = COULEUR[nom]
-        pts = [(gauche + (droite - gauche) * i / max(1, n - 1),
-                base - (base - sommet) * (g or 0.0) / haut) for i, g in enumerate(ser)]
+        pts = [(gauche + (droite - gauche) * i / max(1, n - 1), py(max(g or 0.0, plancher)))
+               for i, g in enumerate(ser)]
         for (ax, ay), (bx, by) in zip(pts, pts[1:]):
             art.line([ax, ay, bx, by], fill=coul, width=2)
         for cx, cy in pts:
             art.ellipse([cx - 3, cy - 3, cx + 3, cy + 3], fill=coul)
-    for g in (0.5, 1.0, 1.5, 2.0, 3.0):
-        if g < haut:
-            art.text((gauche - 46, base - (base - sommet) * g / haut - 6), f"{g:>4.1f}",
-                     fill=DISCRET, font=petit)
-    ecrire(art, (x0 + 8, y0 + 20), "le pas normal seul ne glisse pas, donc il est absent",
+    for g in grad:
+        art.text((gauche - 46, py(g) - 6), f"{g:>4}", fill=DISCRET, font=petit)
+    ecrire(art, (x0 + 8, y0 + 20), "zero est pose sur le plancher de l'echelle log",
            DISCRET, petit, (x0, x0 + pw))
     _abscisse(art, gauche, droite, base, n, petit, "bras :")
-    ecrire(art, (x0 + 8, y0 + ph - 18), "voxels", DISCRET, petit, (x0, x0 + pw))
+    ecrire(art, (x0 + 8, y0 + ph - 18), "um", DISCRET, petit, (x0, x0 + pw))
 
 
 def legende(art, x0: int, y: int, petit) -> None:
@@ -342,11 +371,13 @@ def legende(art, x0: int, y: int, petit) -> None:
     tourne — c'est-a-dire ne peut pas lire le resultat.
     """
     x = x0
-    for nom in ("sortie_raccrochee", "raccroche", "raccroche_lisse", "rien", "melange",
-                "oracle"):
-        art.rectangle([x, y + 3, x + 16, y + 9], fill=COULEUR[nom])
-        art.text((x + 22, y), MARQUE[nom], fill=TEXTE, font=petit)
-        x += 26 + petit.getbbox(MARQUE[nom])[2] + 24
+    ligne = y
+    for k, nom in enumerate(ORDRE_LEGENDE):
+        if k == 4:
+            x, ligne = x0, y + 15
+        art.rectangle([x, ligne + 3, x + 16, ligne + 9], fill=COULEUR[nom])
+        art.text((x + 22, ligne), MARQUE[nom], fill=TEXTE, font=petit)
+        x += 26 + petit.getbbox(MARQUE[nom])[2] + 20
 
 
 def dessiner(m: dict, sortie: Path) -> dict:
@@ -360,7 +391,7 @@ def dessiner(m: dict, sortie: Path) -> dict:
         if max(moyen.getbbox(x)[2] for x in lignes) <= largeur_utile:
             break
     L = marge * 2 + largeur_utile
-    H = 110 + ph + 44 + len(lignes) * 19
+    H = 124 + ph + 44 + len(lignes) * 19
     ANNOTATIONS.clear()
     toile = Image.new("RGB", (L, H), FOND)
     art = ImageDraw.Draw(toile)
@@ -370,17 +401,17 @@ def dessiner(m: dict, sortie: Path) -> dict:
              f"ancre : spire {m['ancre']} · {len(m['spires_visees'])} bras · seuil = "
              f"demi-feuille {m['demi_feuille_um']} um · le cercle marque la portee",
              fill=DISCRET, font=moyen)
-    legende(art, marge, 62, petit)
+    legende(art, marge, 60, petit)
     titres = ("A · l'erreur bras par bras et le seuil",
               "B · ce que chaque bras demande",
               "C · la couverture perdue en chemin",
-              "D · le froissement du champ de decalage")
+              "D · le froissement de la NAPPE elle-meme")
     for j, t in enumerate(titres):
-        art.text((marge + j * (pw + ecart), 86), t, fill=TEXTE, font=moyen)
-    eta = panneau_erreurs(art, marge, 110, pw, ph, m, petit)
-    panneau_corpus(art, marge + pw + ecart, 110, pw, ph, m, petit)
-    panneau_couverture(art, marge + 2 * (pw + ecart), 110, pw, ph, m, petit)
-    panneau_rugosite(art, marge + 3 * (pw + ecart), 110, pw, ph, m, petit)
+        art.text((marge + j * (pw + ecart), 100), t, fill=TEXTE, font=moyen)
+    eta = panneau_erreurs(art, marge, 124, pw, ph, m, petit)
+    panneau_corpus(art, marge + pw + ecart, 124, pw, ph, m, petit)
+    panneau_couverture(art, marge + 2 * (pw + ecart), 124, pw, ph, m, petit)
+    panneau_rugosite(art, marge + 3 * (pw + ecart), 124, pw, ph, m, petit)
     debut = H - len(lignes) * 19 - 12
     for j, l in enumerate(lignes):
         art.text((marge, debut + j * 19), l, fill=TEXTE, font=moyen)
@@ -445,6 +476,22 @@ def verifier() -> int:
             if b["plancher_um"] > b["erreur_um"] + 1e-6]
     v("le plancher d'un bras ne dépasse jamais l'erreur mesurée sur ce bras", not hors,
       str(hors[:3]))
+    # ⭐⭐⭐ LE RÉSULTAT DE TÊTE : lisser la nappe achète un bras, et le contrôle exige que la
+    # portée ET l'écart apparié disent la même chose. Une portée qui monte pendant qu'un écart
+    # apparié monte aussi serait un verdict que sa propre autre mesure contredit.
+    erl_ = m["ecart_du_pas_normal_lisse"]
+    v("la portée du pas normal lissé et son écart apparié ne se contredisent pas",
+      erl_ is not None and not (m["portee_du_pas_normal_lisse"]
+                               > m["portee_sans_rien_faire"] and erl_["ecart_median_um"] > 0),
+      f"portée {m['portee_du_pas_normal_lisse']} contre {m['portee_sans_rien_faire']} · "
+      + str(erl_))
+    # ⚠⚠⚠ ET LE PAS NORMAL SEUL A UN CHAMP DE DÉCALAGE NUL TOUT EN AYANT UNE NAPPE QUI SE
+    # FROISSE. C'est ce fait qui rend le panneau D nécessaire : sans lui, « il ne glisse pas
+    # donc rien ne se compose » serait une conclusion tirée de la mauvaise grandeur.
+    ri = par("rien")
+    v("le pas normal seul ne glisse pas, et sa nappe se froisse quand même",
+      all(g == 0.0 for g in ri["rugosites_vx"]) and max(ri["rugosites_nappe_um"]) > 0,
+      f"champ {ri['rugosites_vx'][:3]} · nappe {ri['rugosites_nappe_um']}")
     # ⭐⭐⭐ LE MÉCANISME, DÉMONTRÉ PLUTÔT QU'AFFIRMÉ : le MÊME raccrochage, lu sur la surface
     # lisse du pas normal, produit un champ de décalage plus lisse que lu sur sa propre
     # prédiction. La rugosité n'est donc pas une propriété du raccrochage, elle est héritée.

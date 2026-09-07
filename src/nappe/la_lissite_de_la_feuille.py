@@ -93,6 +93,40 @@ def lisser(t: np.ndarray, valide: np.ndarray, demi: int,
     return champ, masque
 
 
+def rugosite_de_la_nappe(grille: np.ndarray, valide: np.ndarray,
+                         voxel_um: float, demi: int = 1) -> float | None:
+    """De combien un point de la nappe s'écarte de la médiane de ses voisins, en µm.
+
+    ⚠⚠⚠ C'EST LA GRANDEUR QUE LE DIAGNOSTIC DE LA MARCHE DEMANDE, et elle n'existait pas. La
+    rugosité déjà instrumentée porte sur le champ de DÉCALAGE — un scalaire le long de la
+    normale — donc elle ne dit rien de la surface elle-même, qui est ce sur quoi le bras suivant
+    estime ses normales. Un marcheur peut très bien avoir un champ de décalage lisse et laisser
+    une nappe froissée, et c'est exactement le cas qu'il faut pouvoir distinguer.
+
+    ⚠ La médiane est prise CANAL PAR CANAL, comme le voisinage déployé le fait déjà partout ici,
+    puis l'écart est une NORME : c'est une distance, donc elle ne dépend pas du repère, là où
+    trois écarts séparés dépendraient de l'orientation des axes du volume.
+
+    ⚠ Le voisinage est celui qui tourne (demi = 1, majorité). Le prendre plus large mesurerait
+    autre chose : la rugosité d'une nappe est une propriété locale, et à demi-largeur croissante
+    toute surface courbe finit par paraître rugueuse.
+    """
+    from le_raccrochage_a_la_matiere import accorder_les_voisins  # noqa: PLC0415
+
+    if grille.ndim != 3 or grille.shape[:2] != valide.shape:
+        raise ValueError("la nappe porte trois coordonnées par cellule, et son masque deux axes")
+    garde = valide & np.isfinite(grille).all(axis=-1)
+    ecarts = np.zeros(grille.shape, dtype=float)
+    for c in range(grille.shape[2]):
+        lisse, assez = accorder_les_voisins(grille[:, :, c], garde, demi=demi)
+        garde = garde & assez & np.isfinite(lisse)
+        ecarts[:, :, c] = grille[:, :, c] - lisse
+    if int(garde.sum()) < 3:
+        return None
+    d = np.linalg.norm(ecarts[garde], axis=-1) * voxel_um
+    return round(float(np.median(d)), 2)
+
+
 def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
             cote: float | None = None, fenetre_grille: int | None = None,
             demi_largeurs=DEMI_LARGEURS, passes=PASSES,
@@ -236,6 +270,8 @@ def verifier() -> int:
             echecs += 1
         print(f"  {'✅' if ok else '❌'} {nom}" + (f"  — {detail}" if detail else ""))
 
+    _controles_de_la_rugosite(v)
+
     t = etages()
     v("l'échelle part du BRUT et contient l'étage en service",
       t[0][0] == "brut" and ("median_1", 1, 1) in t, str([n for n, _, _ in t]))
@@ -346,6 +382,71 @@ def verifier() -> int:
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
+
+
+def _controles_de_la_rugosite(v) -> None:
+    """Les contrôles de `rugosite_de_la_nappe`, séparés pour rester lisibles."""
+    h, w = 9, 9
+    i, j = np.mgrid[0:h, 0:w]
+    tout = np.ones((h, w), dtype=bool)
+    plan = np.stack([i * 1.0, j * 1.0, np.zeros((h, w))], axis=-1)
+    # ⚠⚠ UN PLAN EST EXACTEMENT LISSE, et c'est le contrôle qui rend le nombre lisible : une
+    # rugosité qui ne serait pas nulle sur un plan mesurerait sa propre méthode d'estimation.
+    v("une nappe plane a une rugosité nulle",
+      rugosite_de_la_nappe(plan, tout, 2.0) == 0.0,
+      str(rugosite_de_la_nappe(plan, tout, 2.0)))
+    incline = plan.copy()
+    incline[:, :, 2] = i * 0.5 + j * 0.25
+    v("... une nappe inclinée aussi : une pente n'est pas un froissement",
+      rugosite_de_la_nappe(incline, tout, 2.0) == 0.0,
+      str(rugosite_de_la_nappe(incline, tout, 2.0)))
+    onde = plan.copy()
+    onde[:, :, 2] = np.sin(2 * np.pi * (i + j) / 4.0)
+    bruit = plan.copy()
+    bruit[:, :, 2] = np.random.default_rng(7).normal(0.0, 3.0, (h, w))
+    # ⚠⚠⚠ L'ORDRE, JAMAIS UN SEUIL. « Plus grand que 1,0 » serait un nombre choisi pour que la
+    # matière du jour passe ; que le plan soit sous une ondulation, et l'ondulation sous du
+    # bruit, est une propriété de la grandeur et non de ce corpus.
+    rp = rugosite_de_la_nappe(plan, tout, 2.0)
+    ro = rugosite_de_la_nappe(onde, tout, 2.0)
+    rb = rugosite_de_la_nappe(bruit, tout, 2.0)
+    v("... et l'ordre plan < ondulation < bruit tient, sans qu'aucun seuil soit choisi",
+      rp < ro < rb, f"{rp} < {ro} < {rb}")
+    # ⚠⚠ SECOND ANGLE MORT, ET IL EST DANS LA MÉDIANE SUR LES CELLULES : une pointe isolée ne
+    # déplace pas une médiane prise sur toute la nappe. Ce nombre répond à « la nappe est-elle
+    # froissée », jamais à « y a-t-il une cellule aberrante » — deux questions différentes, et
+    # confondre les deux ferait lire un zéro comme une garantie qu'il ne donne pas.
+    pointe = plan.copy()
+    pointe[h // 2, w // 2, 2] = 4.0
+    v("... ⚠ et une POINTE isolée lui est invisible : une médiane sur les cellules l'ignore",
+      rugosite_de_la_nappe(pointe, tout, 2.0) == 0.0,
+      str(rugosite_de_la_nappe(pointe, tout, 2.0)))
+    # ⚠⚠⚠ CE QUE CE VOISINAGE NE PEUT PAS VOIR, et c'est un fait sur l'outil qui tourne. Dans un
+    # 3×3, un damier de période deux met la valeur du CENTRE en majorité — cinq contre quatre —
+    # donc la médiane rend le centre et l'écart est exactement nul. « Lisse au sens de ce
+    # voisinage » n'exclut donc PAS une nappe pliée en damier, et c'est écrit ici plutôt que
+    # découvert le jour où une méthode en produira une.
+    damier = plan.copy()
+    damier[:, :, 2] = ((i + j) % 2) * 1.0
+    v("... ⚠ mais un damier de période DEUX lui est invisible : le centre est en majorité",
+      rugosite_de_la_nappe(damier, tout, 2.0) == 0.0,
+      str(rugosite_de_la_nappe(damier, tout, 2.0)))
+    # ⚠ L'ÉCART EST UNE NORME, donc il ne dépend pas du repère : échanger deux axes ne peut pas
+    # changer la rugosité d'une nappe.
+    tourne = bruit[:, :, [1, 0, 2]].copy()
+    v("... la rugosité est une distance, donc elle ne dépend pas de l'ordre des axes",
+      rugosite_de_la_nappe(tourne, tout, 2.0) == rb,
+      f"{rugosite_de_la_nappe(tourne, tout, 2.0)} contre {rb}")
+    v("... et elle est proportionnelle à la taille du voxel",
+      abs(rugosite_de_la_nappe(bruit, tout, 4.0) - 2 * rb) < 0.02,
+      f"{rugosite_de_la_nappe(bruit, tout, 4.0)} pour 2×{rb}")
+    souci = None
+    try:
+        rugosite_de_la_nappe(damier[:, :, 0], tout, 2.0)
+    except ValueError as exc:
+        souci = str(exc)
+    v("... et une nappe qui n'a pas trois coordonnées est REFUSÉE, pas devinée",
+      souci is not None, str(souci))
 
 
 def afficher(r: dict) -> None:
