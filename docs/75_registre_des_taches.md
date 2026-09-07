@@ -3842,6 +3842,66 @@ de cellules mesure surtout le tirage. La courbe le montre, et c'est pourquoi c'e
 entière** qui est livrée plutôt qu'un point.
 
 ---
+##### ⛔ COMBINER LES DEUX OBSERVABLES : sans aucun paramètre, et aucune ne DOMINE
+
+⚠⚠⚠ **Combiner deux observables demande normalement un POIDS**, donc un réglage — et un réglage
+choisi sur ce qu'il juge ne peut que gagner. Le passage en **RANG** le supprime **deux fois** : les
+unités disparaissent (un pli en µm et une obscurité en niveaux de gris ne s'additionnent pas), et
+les trois façons de recombiner deux rangs n'ont plus **rien à régler**.
+
+| combinaison | ce qu'elle dit |
+|---|---|
+| **ou** | le **max** des rangs : suspect dès qu'**une** des deux le dit |
+| **et** | le **min** : suspect seulement si les **deux** le disent |
+| **moyenne** | les deux comptent pareil — le seul poids qu'on n'a pas choisi, puisqu'il est le seul qui ne privilégie personne |
+
+![une cellule peut-elle savoir qu'elle a tort](images/75_la_cellule_sait_elle_quelle_a_tort.png)
+
+| colonne | marcheur | 100 % | 90 % | 75 % | 50 % | 35 % | 25 % | 10 % | partout |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---|
+| pli | rien | +0.0 | -5.1 | -5.4 | -0.6 | +1.6 | -0.3 | -1.8 |  |
+| pli | rien_lisse | +0.0 | -1.2 | +1.2 | +3.0 | +7.1 | +5.5 | -0.8 |  |
+| pli | raccroche | +0.0 | -13.2 | -27.9 | -43.2 | -44.6 | -46.6 | -50.3 | ⭐ |
+| obscurite | rien | +0.0 | -0.4 | -3.1 | -8.1 | -6.6 | -7.8 | +10.5 |  |
+| obscurite | rien_lisse | +0.0 | -0.6 | -3.6 | -10.8 | -13.1 | -12.6 | -3.2 | ⭐ |
+| obscurite | raccroche | +0.0 | -0.3 | -1.5 | -6.6 | -8.0 | -20.6 | +15.2 |  |
+| ou | rien | +0.0 | -2.7 | -5.2 | -6.1 | -7.7 | -9.4 | -12.3 | ⭐ |
+| ou | rien_lisse | +0.0 | -1.7 | -1.2 | -0.9 | +1.5 | -8.4 | +2.1 |  |
+| ou | raccroche | +0.0 | -5.5 | -15.1 | -37.2 | -47.9 | -53.0 | -65.3 | ⭐ |
+| moyenne | rien | +0.0 | -1.9 | -2.3 | -3.8 | -6.7 | -8.4 | +2.7 |  |
+| moyenne | rien_lisse | +0.0 | -0.9 | +0.4 | +0.3 | -3.4 | -5.9 | -8.3 |  |
+| moyenne | raccroche | +0.0 | -11.0 | -22.1 | -40.1 | -46.8 | -54.4 | -60.5 | ⭐ |
+| et | rien | +0.0 | -1.6 | -2.1 | -1.4 | -2.8 | +0.4 | -3.7 |  |
+| et | rien_lisse | +0.0 | +0.1 | -0.1 | -4.7 | -3.4 | -2.8 | -8.0 |  |
+| et | raccroche | +0.0 | -10.8 | -22.1 | -35.3 | -40.8 | -44.3 | -29.0 | ⭐ |
+
+*écart médian sur les bras, classé moins hasard, en µm. Négatif = l'observable **prédit**.
+⭐ = elle prédit à **toutes** les fractions.*
+
+> ⛔ **LE VERDICT STRICT EST VIDE** : aucune combinaison ne bat **les deux** observables seules à
+> **toutes** les fractions, chez aucun des trois marcheurs. Le publier autrement — désigner « la
+> meilleure des cinq » après les avoir vues — serait choisir sur ce qu'on juge, la faute nº1 de ce
+> registre.
+
+> ⭐⭐ **Ce qui se publie sans rien choisir est un COMPTE.** Quelles colonnes prédisent à **toutes**
+> les fractions : pour le **pas normal**, `ou` **et elle seule** ; pour le **pas normal lissé**,
+> l'obscurité seule ; pour le **raccrochage**, quatre colonnes sur cinq. ⚠ Donc `ou` n'est
+> **meilleure nulle part** et **la seule utilisable partout** chez le pas normal : c'est de la
+> **robustesse au point de fonctionnement**, pas de la domination — et c'est exactement ce dont un
+> dérouleur qui ne choisit pas sa fraction a besoin.
+
+| marcheur | bras perdus | pli | obscurite | ou | moyenne | et | au hasard |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| rien | 4 | 1 | 1 | 1 | 1 | 1 | 0 |
+| rien_lisse | 3 | 0 | 0 | 0 | 0 | 0 | 0 |
+| raccroche | 6 | 1 | 0 | 2 | 2 | 1 | 0 |
+
+⚠ **Le seul endroit où une combinaison ajoute un bras est chez le raccrochage** : `ou` et
+`moyenne` en sauvent **2 sur 6** contre 1 pour le pli seul. Chez le pas normal, les cinq colonnes
+sauvent le même unique bras — à des fractions différentes (90 % par le pli, 50 % par l'obscurité,
+75 % par `et`), ce qui est une information de **coût** et pas de capacité.
+
+---
 ##### ⛔⛔⛔ REFUSER SES PROPRES PLIS : la portée monte, et l'écart apparié vaut EXACTEMENT ZÉRO
 
 ⚠⚠⚠ **L'idée était bonne et vient de la tranche précédente** : les plis sont **localisés**, et une

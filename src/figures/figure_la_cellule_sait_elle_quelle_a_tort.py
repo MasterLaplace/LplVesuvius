@@ -79,6 +79,19 @@ def prose(m: dict) -> list[str]:
         f"faiblement chez le PAS NORMAL ({ec('rien', 0.75):+.1f} a trois quarts) et PAS DU TOUT "
         f"chez le pas normal LISSE ({ec('rien_lisse', 0.35):+.1f}, donc PIRE que le hasard). le "
         "lissage retire les plis, donc il retire AUSSI le signal qui disait ou l'on se trompe.",
+        f"⚠⚠⚠ ET AUCUNE COMBINAISON NE BAT LES DEUX SEULES A TOUTES LES FRACTIONS : le verdict "
+         "strict est VIDE pour les trois marcheurs. combiner deux observables demande normalement "
+         "un POIDS, donc un reglage ; passer chaque observable en RANG le supprime — les unites "
+         "disparaissent, un pli en um et une obscurite en niveaux de gris deviennent comparables "
+         "sans facteur choisi — mais aucune des trois recombinaisons ne DOMINE.",
+         f"⚠⚠⚠ ce qui se publie sans rien choisir est un COMPTE et pas une gagnante : quelles "
+         f"colonnes predisent a TOUTES les fractions. pas normal : "
+         f"{m['colonnes_qui_predisent_partout']['rien'] or 'aucune'} et elles seules ; pas normal "
+         f"lisse : {m['colonnes_qui_predisent_partout']['rien_lisse'] or 'aucune'} ; raccrochage : "
+         f"{len(m['colonnes_qui_predisent_partout']['raccroche'])} colonnes sur cinq. ⚠ « ou » "
+         "n'est donc MEILLEURE nulle part et la seule UTILISABLE partout chez le pas normal : "
+         "c'est de la robustesse au point de fonctionnement, pas de la domination — et c'est ce "
+         "dont un derouleur qui ne choisit pas sa fraction a besoin.",
         f"⚠⚠⚠ ET C'EST EXACTEMENT LA OU L'OBSCURITE PREND LE RELAIS : "
         f"{ec('rien_lisse', 0.35, 'obscurite'):+.1f} um chez le pas normal lisse, sur 7 bras sur "
         f"8, et {ec('rien', 0.5, 'obscurite'):+.1f} chez le pas normal. le lissage peut effacer "
@@ -92,7 +105,10 @@ def prose(m: dict) -> list[str]:
         f"{sv(ri, 'pli')}/{ri['bras_perdus']}, le raccrochage {sv(ra, 'pli')}/{ra['bras_perdus']}, "
         f"le pas normal lisse {sv(li, 'pli')}/{li['bras_perdus']} ; par l'OBSCURITE, "
         f"{sv(ri, 'obscurite')}/{ri['bras_perdus']}, {sv(ra, 'obscurite')}/{ra['bras_perdus']} et "
-        f"{sv(li, 'obscurite')}/{li['bras_perdus']}.",
+        f"{sv(li, 'obscurite')}/{li['bras_perdus']} ; et par « ou », {sv(ri, 'ou')}/"
+        f"{ri['bras_perdus']}, {sv(ra, 'ou')}/{ra['bras_perdus']} et {sv(li, 'ou')}/"
+        f"{li['bras_perdus']} — le SEUL endroit ou une combinaison ajoute un bras est chez le "
+        "raccrochage.",
         f"⚠⚠ et le temoin au hasard n'en sauve AUCUN. la fraction qui suffit est "
         f"{ri['fractions_qui_sauvent']['pli'][0]:.0%} par le pli — jeter les dix pour cent de "
         f"cellules les plus pliees — et {ri['fractions_qui_sauvent']['obscurite'][0]:.0%} par "
@@ -103,55 +119,55 @@ def prose(m: dict) -> list[str]:
     ]
 
 
-def panneau_courbes(art, x0, y0, pw, ph, m, petit) -> None:
-    """L'erreur mediane selon la fraction gardee, classee contre le hasard."""
+def panneau_grille(art, x0, y0, pw, ph, m, petit) -> None:
+    """Une case par (colonne, marcheur, fraction) : vert = predit, rouge = non.
+
+    ⚠⚠⚠ UNE GRILLE ET PAS DES COURBES, et c'est une decision de lisibilite qui est aussi une
+    decision d'honnetete. Cinq colonnes fois trois marcheurs font quinze courbes sur un meme
+    axe : personne ne les lit, et « personne ne les lit » finit par vouloir dire « on ne montre
+    que les trois qui arrangent ». Une grille porte TOUT, sans qu'aucune ligne n'ait ete choisie.
+
+    ⚠ L'intensite est bornee a cinquante micrometres : au-dela les cases sauteraient toutes au
+    meme vert et la nuance disparaitrait. La borne est dessinee dans la legende plutot que tue.
+    """
     art.rectangle([x0, y0, x0 + pw, y0 + ph], outline=CADRE)
-    art.text((x0 + 8, y0 + 6), "trait plein + disque : le PLI · trait fin + cercle : l'OBSCURITE",
+    art.text((x0 + 8, y0 + 6), "vert : l'observable PREDIT (ecart negatif) · rouge : elle nuit",
              fill=DISCRET, font=petit)
-    art.text((x0 + 8, y0 + 19), "ecart median sur les bras, en um (negatif = le pli predit)",
+    art.text((x0 + 8, y0 + 19), "intensite = ampleur, saturee a 50 um",
              fill=DISCRET, font=petit)
     fr = m["fractions"]
-    gauche, droite = x0 + 54, x0 + pw - 62
-    base, sommet = y0 + ph - 40, y0 + 42
-    tous = [v["ecart_median_um"] for v in m["verdicts"]]
-    lo, hi = min(tous + [0.0]) * 1.15, max(tous + [0.0]) * 1.2 + 1.0
-
-    def px(i: int) -> float:
-        return gauche + (droite - gauche) * i / max(1, len(fr) - 1)
-
-    def py(v: float) -> float:
-        return base - (base - sommet) * (v - lo) / (hi - lo)
-
-    art.rectangle([gauche - 8, py(0.0), droite + 8, base], fill=PALE)
-    art.line([gauche - 8, py(0.0), droite + 8, py(0.0)], fill=TEXTE)
-    art.text((gauche - 50, py(0.0) - 6), "   0", fill=TEXTE, font=petit)
-    art.text((gauche + 4, py(0.0) + 4), "sous la ligne : le pli predit", fill=VERT, font=petit)
-    for g in (-50, -25, 25):
-        if lo < g < hi:
-            art.text((gauche - 50, py(g) - 6), f"{g:>4}", fill=DISCRET, font=petit)
-    # ⚠⚠ LE PLI EN TRAIT PLEIN, L'OBSCURITE EN POINTILLE : deux observables sur un meme axe,
-    # donc la distinction doit tenir sans la couleur, qui porte deja le marcheur.
+    gauche, haut = x0 + 152, y0 + 52
+    larg = (pw - 164) / max(1, len(fr))
+    hy = (ph - 78) / max(1, len(m["observables"]) * len(m["marcheurs"]))
+    for j, f in enumerate(fr):
+        art.text((gauche + j * larg + larg / 2 - 12, haut - 14), f"{f:.0%}",
+                 fill=DISCRET, font=petit)
+    i = 0
     for o in m["observables"]:
         for x in m["lignes"]:
             vs = [v for v in m["verdicts"]
                   if v["marcheur"] == x["marcheur"] and v["observable"] == o]
             if not vs:
                 continue
-            coul = COULEUR.get(x["marcheur"], DISCRET)
-            pts = [(px(i), py(v["ecart_median_um"])) for i, v in enumerate(vs)]
-            for k_, ((ax, ay), (bx, by)) in enumerate(zip(pts, pts[1:])):
-                if o == "pli" or k_ % 2 == 0:
-                    art.line([ax, ay, bx, by], fill=coul, width=2 if o == "pli" else 1)
-            for cx, cy in pts:
-                if o == "pli":
-                    art.ellipse([cx - 3, cy - 3, cx + 3, cy + 3], fill=coul)
+            y = haut + i * hy
+            partout = o in m["colonnes_qui_predisent_partout"][x["marcheur"]]
+            art.text((x0 + 6, y + hy / 2 - 6),
+                     f"{'>' if partout else ' '} {o[:8]} · {x['marcheur'][:9]}",
+                     fill=TEXTE if partout else DISCRET, font=petit)
+            for j, v in enumerate(vs):
+                d = v["ecart_median_um"]
+                t = min(abs(d) / 50.0, 1.0)
+                if d < 0:
+                    c = (int(255 - 175 * t), int(255 - 55 * t), int(255 - 175 * t))
+                elif d > 0:
+                    c = (int(255 - 30 * t), int(255 - 120 * t), int(255 - 120 * t))
                 else:
-                    art.ellipse([cx - 3, cy - 3, cx + 3, cy + 3], outline=coul)
-            art.text((droite + 6, pts[-1][1] - 6),
-                     x["marcheur"][:9] + ("" if o == "pli" else " ○"), fill=coul, font=petit)
-    for i, f in enumerate(fr):
-        art.text((px(i) - 12, base + 8), f"{f:.0%}", fill=DISCRET, font=petit)
-    art.text((x0 + 8, y0 + ph - 18), "abscisse : la part de nappe GARDEE",
+                    c = (245, 245, 245)
+                art.rectangle([gauche + j * larg, y + 1, gauche + (j + 1) * larg - 2,
+                               y + hy - 2], fill=c, outline=(230, 230, 230))
+            i += 1
+    art.text((x0 + 8, y0 + ph - 18),
+             "> = cette colonne predit a TOUTES les fractions · abscisse : part gardee",
              fill=DISCRET, font=petit)
 
 
@@ -171,18 +187,21 @@ def panneau_sauves(art, x0, y0, pw, ph, m, petit) -> None:
         art.text((x0 + 8, y + haut_l / 2 - 6), x["marcheur"], fill=coul, font=petit)
         art.rectangle([gauche, y + haut_l * 0.14, gauche + (droite - gauche)
                        * x["bras_perdus"] / plafond, y + haut_l * 0.80], outline=DISCRET)
-        for k_, o in enumerate(m["observables"]):
-            hb = y + haut_l * (0.22 + 0.30 * k_)
+        # ⚠ Le panneau B ne dessine que les deux observables SEULES et « ou » : les cinq
+        # tiendraient mal, et les trois dessinees sont celles nommees par la prose. Les cinq
+        # comptes restent dans le JSON et dans le registre — la figure est un raccourci de
+        # lecture, jamais la seule trace.
+        for k_, o in enumerate([*m["seules"], "ou"]):
+            hb = y + haut_l * (0.16 + 0.22 * k_)
             art.rectangle([gauche, hb, gauche + (droite - gauche)
-                           * x["bras_sauves"][o] / plafond, hb + haut_l * 0.22],
-                          fill=coul if o == "pli" else None,
-                          outline=coul)
+                           * x["bras_sauves"][o] / plafond, hb + haut_l * 0.16],
+                          fill=coul if o == "pli" else None, outline=coul)
             f = next((g for g in x["fractions_qui_sauvent"][o] if g is not None), None)
             art.text((droite + 6, hb + 1),
                      f"{o[:4]} {x['bras_sauves'][o]}/{x['bras_perdus']}"
                      + (f" a {f:.0%}" if f else ""), fill=coul, font=petit)
     art.text((x0 + 8, y0 + ph - 30),
-             "grand contour : bras perdus · plein : sauves par le PLI · creux : par l'OBSCURITE",
+             "contour : bras perdus · trois barres : pli, obscurite, « ou »",
              fill=DISCRET, font=petit)
     art.text((x0 + 8, y0 + ph - 17),
              f"au hasard : {sum(x['bras_sauves_au_hasard'] for x in m['lignes'])} sauve(s) "
@@ -209,11 +228,11 @@ def dessiner(m: dict, sortie: Path) -> dict:
              f"ancre {m['ancre']} · {len(m['spires_visees'])} bras · demi-feuille "
              f"{m['demi_feuille_um']} um · classement par le PLI, aucun seuil choisi",
              fill=DISCRET, font=moyen)
-    titres = ("A · classer par le pli contre jeter au hasard",
+    titres = ("A · les cinq colonnes, contre le hasard, a chaque fraction",
               "B · le seul chiffre actionnable : les bras SAUVES")
     for j, t in enumerate(titres):
         art.text((marge + j * (pw + ecart), 76), t, fill=TEXTE, font=moyen)
-    panneau_courbes(art, marge, 104, pw, ph, m, petit)
+    panneau_grille(art, marge, 104, pw, ph, m, petit)
     panneau_sauves(art, marge + pw + ecart, 104, pw, ph, m, petit)
     debut = H - len(lignes) * 19 - 12
     for j, l in enumerate(lignes):

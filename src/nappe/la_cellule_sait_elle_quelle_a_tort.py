@@ -48,11 +48,71 @@ MARCHEURS = ("rien", "rien_lisse", "raccroche")
 # point SOMBRE qui est suspect. On classe donc sur son opposé, et le dire ici plutôt que de le
 # cacher dans un signe est ce qui évite de publier une courbe parfaitement inversée.
 OBSERVABLES = ("pli", "obscurite")
+# ⭐⭐⭐ ET LES TROIS COMBINAISONS SANS AUCUN PARAMÈTRE. Combiner deux observables demande
+# normalement un POIDS, donc un réglage — et un réglage choisi sur ce qu'il juge ne peut que
+# gagner. Passer chaque observable en RANG supprime le problème deux fois : les unités
+# disparaissent (un micromètre et une intensité ne s'additionnent pas), et les trois façons de
+# recombiner deux rangs n'ont plus rien à régler.
+#   « ou »  = le MAX des rangs : suspect dès qu'UNE des deux le dit
+#   « et »  = le MIN des rangs : suspect seulement si les DEUX le disent
+#   « moy » = la moyenne : les deux comptent pareil, ce qui est le seul poids qu'on n'a pas
+#             choisi puisqu'il est le seul qui ne privilégie personne
+COMBINAISONS = ("ou", "moyenne", "et")
+COLONNES = OBSERVABLES + COMBINAISONS
 # ⚠ Les fractions gardées sont un balayage, pas des réglages : la courbe entière est l'objet
 # livré. Elles descendent jusqu'à un dixième parce qu'en dessous la médiane porte sur si peu de
 # cellules qu'elle mesure surtout le tirage.
 FRACTIONS = (1.0, 0.9, 0.75, 0.5, 0.35, 0.25, 0.1)
 TIRAGES = 60
+
+
+def _leve(appel) -> bool:
+    """Vrai si l'appel lève. ⚠ Pour les contrôles seulement."""
+    try:
+        appel()
+    except ValueError:
+        return True
+    return False
+
+
+def en_rangs(x: np.ndarray) -> np.ndarray:
+    """Le rang de chaque valeur, ramené dans [0, 1]. ⚠ Grand veut toujours dire SUSPECT.
+
+    ⚠⚠⚠ POURQUOI LE RANG PLUTÔT QUE LA VALEUR. Un pli est en micromètres et une obscurité en
+    niveaux de gris : les additionner demanderait un facteur de conversion, c'est-à-dire un
+    réglage, c'est-à-dire un nombre choisi. Le rang efface l'unité, donc deux observables
+    deviennent comparables **sans que rien n'ait été décidé**.
+
+    ⚠ Les égalités reçoivent des rangs différents plutôt que le même : un tri stable les départage
+    par leur ordre d'arrivée. C'est arbitraire et sans conséquence ici — le classement sert à
+    couper une fraction, pas à noter une cellule — mais ça vaut d'être dit.
+    """
+    n = len(x)
+    if n == 0:
+        return np.zeros(0)
+    if n == 1:
+        return np.zeros(1)
+    r = np.empty(n, dtype=float)
+    r[np.argsort(x, kind="stable")] = np.arange(n, dtype=float)
+    return r / (n - 1)
+
+
+def combiner(rangs: dict, comment: str) -> np.ndarray:
+    """Les deux rangs recombinés, sans aucun paramètre.
+
+    ⚠⚠ LES TROIS FORMES SONT PUBLIÉES ENSEMBLE, jamais la meilleure seule. Choisir laquelle
+    rapporter après avoir vu les trois serait choisir sur ce qu'on juge — la faute nº1 de ce
+    dépôt — donc le verdict n'est rendu que sous une condition qu'un tirage heureux ne satisfait
+    pas : battre les DEUX observables seules, à TOUTES les fractions.
+    """
+    a, b = rangs[OBSERVABLES[0]], rangs[OBSERVABLES[1]]
+    if comment == "ou":
+        return np.maximum(a, b)
+    if comment == "et":
+        return np.minimum(a, b)
+    if comment == "moyenne":
+        return (a + b) / 2.0
+    raise ValueError(f"combinaison inconnue : {comment}")
 
 
 def garder_les_meilleures(pli: np.ndarray, erreur: np.ndarray, part: float) -> float:
@@ -117,11 +177,14 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
             if int(garde.sum()) < 8:
                 continue
             e = err[garde]
-            vues = dict(pli=pli[ou[:, 0], ou[:, 1]][garde], obscurite=-inten[garde])
+            brutes = dict(pli=pli[ou[:, 0], ou[:, 1]][garde], obscurite=-inten[garde])
+            rangs = {o: en_rangs(brutes[o]) for o in OBSERVABLES}
+            vues = dict(brutes)
+            vues.update({c: combiner(rangs, c) for c in COMBINAISONS})
             bras.append(dict(
                 bras=k, cellules=int(len(e)),
                 classe_um={o: [round(garder_les_meilleures(vues[o], e, f), 1)
-                               for f in fractions] for o in OBSERVABLES},
+                               for f in fractions] for o in COLONNES},
                 hasard_um=[round(temoin_au_hasard(e, f, graine=graine), 1)
                            for f in fractions]))
         lignes.append(dict(marcheur=nom, bras=bras))
@@ -135,7 +198,7 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
         x["bras_perdus"] = int(sum(1 for b in x["bras"]
                                    if b["classe_um"][OBSERVABLES[0]][0] >= seuil))
         x["bras_sauves"], x["fractions_qui_sauvent"] = {}, {}
-        for o in OBSERVABLES:
+        for o in COLONNES:
             sauves = [bool(b["classe_um"][o][0] >= seuil
                            and any(u < seuil for u in b["classe_um"][o][1:]))
                       for b in x["bras"]]
@@ -155,7 +218,7 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     for x in lignes:
         if not x["bras"]:
             continue
-        for o in OBSERVABLES:
+        for o in COLONNES:
             for j, f in enumerate(fractions):
                 ecarts = [b["classe_um"][o][j] - b["hasard_um"][j] for b in x["bras"]]
                 verdicts.append(dict(
@@ -170,14 +233,42 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
         # ⚠⚠ LE VERDICT EST PAR MARCHEUR ET PAR FRACTION, jamais un seul oui : le pli peut
         # prédire chez l'un et pas chez l'autre, et à une fraction et pas à une autre. Un verdict
         # unique moyennerait ces cas et rendrait un nombre qui n'appartient à personne.
-        observables=list(OBSERVABLES),
+        observables=list(COLONNES), seules=list(OBSERVABLES),
+        combinaisons=list(COMBINAISONS),
         elle_predit_lerreur={
             o: {x["marcheur"]: bool(x["bras"]) and all(
                 v["ecart_median_um"] < 0 for v in verdicts
                 if v["marcheur"] == x["marcheur"] and v["observable"] == o
                 and v["fraction"] < 1.0)
                 for x in lignes}
-            for o in OBSERVABLES})
+            for o in COLONNES},
+        # ⭐⭐ CE QUI SE PUBLIE SANS RIEN CHOISIR : quelles colonnes prédisent à TOUTES les
+        # fractions. Ce n'est pas « la meilleure » — désigner la meilleure après les avoir vues
+        # serait choisir sur ce qu'on juge — c'est un COMPTE, donc une propriété du tableau. Et
+        # c'est ce qui compte pour un dérouleur qui ne choisit pas son point de fonctionnement :
+        # une colonne qui prédit partout est utilisable sans avoir à décider où se placer.
+        colonnes_qui_predisent_partout={
+            x["marcheur"]: [o for o in COLONNES
+                            if bool(x["bras"]) and all(
+                                v["ecart_median_um"] < 0 for v in verdicts
+                                if v["marcheur"] == x["marcheur"] and v["observable"] == o
+                                and v["fraction"] < 1.0)]
+            for x in lignes},
+        # ⭐⭐⭐ LE SEUL VERDICT QU'UNE COMBINAISON A LE DROIT DE RÉCLAMER, et il est dur : battre
+        # les DEUX observables seules, à TOUTES les fractions, chez un marcheur donné. Publier
+        # « la meilleure des cinq » après les avoir vues serait choisir sur ce qu'on juge.
+        une_combinaison_bat_les_deux_seules={
+            x["marcheur"]: [
+                c for c in COMBINAISONS
+                if all(
+                    next(v["ecart_median_um"] for v in verdicts
+                         if v["marcheur"] == x["marcheur"] and v["observable"] == c
+                         and abs(v["fraction"] - f) < 1e-9)
+                    < min(next(v["ecart_median_um"] for v in verdicts
+                               if v["marcheur"] == x["marcheur"] and v["observable"] == o
+                               and abs(v["fraction"] - f) < 1e-9) for o in OBSERVABLES)
+                    for f in fractions if f < 1.0)]
+            for x in lignes if x["bras"]})
 
 
 def verifier() -> int:
@@ -245,11 +336,44 @@ def verifier() -> int:
     # pour les deux : l'intensité est dans l'autre sens, donc on classe sur son OPPOSÉ. Si le
     # signe était perdu, la courbe de l'obscurité sortirait parfaitement inversée — un défaut qui
     # se lit comme « cette observable anti-prédit », c'est-à-dire comme un résultat.
-    v("... les deux observables sont balayées, et chacune a son verdict par marcheur",
-      set(fab["observables"]) == {"pli", "obscurite"}
+    v("... les deux observables ET leurs trois combinaisons sont balayées",
+      set(fab["seules"]) == {"pli", "obscurite"}
+      and set(fab["combinaisons"]) == {"ou", "moyenne", "et"}
       and all(set(fab["elle_predit_lerreur"][o]) == set(fab["marcheurs"])
               for o in fab["observables"]),
-      str(fab["elle_predit_lerreur"]))
+      str(sorted(fab["observables"])))
+    # ⚠⚠⚠ LES TROIS COMBINAISONS SONT SANS PARAMÈTRE, et le contrôle le prouve sur des rangs
+    # dont la réponse est connue : « ou » est le max, « et » le min, et la moyenne entre les
+    # deux. Un poids qui se serait glissé dedans casserait au moins l'un des trois.
+    ra = {"pli": np.array([0.0, 1.0]), "obscurite": np.array([1.0, 0.0])}
+    v("« ou » prend le max des rangs, « et » le min, la moyenne est entre les deux",
+      np.allclose(combiner(ra, "ou"), [1.0, 1.0])
+      and np.allclose(combiner(ra, "et"), [0.0, 0.0])
+      and np.allclose(combiner(ra, "moyenne"), [0.5, 0.5]))
+    v("... et une combinaison inconnue est REFUSÉE, jamais devinée",
+      _leve(lambda: combiner(ra, "mediane")))
+    # ⚠⚠ LE RANG EFFACE L'UNITÉ : c'est ce qui permet d'additionner un pli en µm et une obscurité
+    # en niveaux de gris sans facteur de conversion, donc sans réglage. Le contrôle porte sur
+    # l'invariance : multiplier une observable par mille ne doit RIEN changer à son rang.
+    x = np.array([3.0, 1.0, 2.0])
+    v("le rang efface l'unité : une échelle mille fois plus grande donne le même rang",
+      np.allclose(en_rangs(x), en_rangs(x * 1000.0))
+      and np.allclose(en_rangs(x), [1.0, 0.0, 0.5]), str(en_rangs(x)))
+    v("... et un seul élément a un rang défini, jamais une division par zéro",
+      en_rangs(np.array([5.0])).tolist() == [0.0])
+    # ⭐⭐⭐ UNE COMBINAISON NE PEUT RÉCLAMER QUELQUE CHOSE QUE SI ELLE BAT LES DEUX SEULES, à
+    # toutes les fractions. Le contrôle vérifie que ce verdict est bien plus dur que « elle
+    # prédit » : une combinaison qui prédit sans battre les deux ne doit PAS y figurer.
+    # ⚠⚠ « PRÉDIT PARTOUT » EST INCLUS DANS « PRÉDIT » : le contrôle l'épingle, parce que deux
+    # listes qui divergeraient voudraient dire que l'une des deux ne compte pas ce qu'elle dit.
+    v("... les colonnes qui prédisent partout sont exactement celles dont le verdict est vrai",
+      all(set(fab["colonnes_qui_predisent_partout"][n])
+          == {o for o in fab["observables"] if fab["elle_predit_lerreur"][o][n]}
+          for n in fab["marcheurs"]),
+      str(fab["colonnes_qui_predisent_partout"]))
+    for nom, gagnantes in fab["une_combinaison_bat_les_deux_seules"].items():
+        v(f"... et chez {nom}, toute combinaison déclarée gagnante prédit aussi",
+          all(fab["elle_predit_lerreur"][c][nom] for c in gagnantes), str(gagnantes))
     v("... le verdict est rendu par observable, par marcheur ET par fraction",
       isinstance(fab["elle_predit_lerreur"], dict)
       and len(fab["verdicts"]) >= len(fab["fractions"]) * len(fab["observables"]),
@@ -292,6 +416,12 @@ def afficher(r: dict) -> None:
         for nom, oui in par.items():
             print(f"→ {'⭐' if oui else '⚠'} « {o} » prédit l'erreur pour {nom} : "
                   f"{'OUI, à toutes les fractions' if oui else 'non'}")
+    print()
+    print("→ ⭐⭐ colonnes qui prédisent à TOUTES les fractions (aucune n'est « choisie ») :")
+    for nom, cols in r["colonnes_qui_predisent_partout"].items():
+        print(f"{nom:>18} : {cols if cols else 'aucune'}")
+    print(f"→ ⛔ combinaison(s) qui battent LES DEUX seules à toutes les fractions : "
+          f"{r['une_combinaison_bat_les_deux_seules']}")
     print()
     print("→ ⭐⭐⭐ le seul chiffre actionnable : combien de bras PERDUS passent sous la "
           "demi-feuille en classant ?")

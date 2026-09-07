@@ -5518,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 4860
+- **lignes** : 4920
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -6079,6 +6079,26 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     dit **où** un marcheur se trompe, elle ne le rend pas **juste**. Ce qu'elle change est ce qu'un
     déroulement peut **livrer** — une nappe accompagnée de sa carte de doute — et c'est indépendant
     de toute amélioration de méthode.
+  - ⛔ **COMBINER LES DEUX OBSERVABLES : sans aucun paramètre, et aucune ne DOMINE (même module,
+    23 contrôles, 5 colonnes).** Combiner demande normalement un **poids**, donc un réglage — et un
+    réglage choisi sur ce qu'il juge ne peut que gagner. Le passage en **RANG** le supprime deux
+    fois : les unités disparaissent (un pli en µm et une obscurité en niveaux de gris ne
+    s'additionnent pas), et les trois recombinaisons n'ont plus rien à régler — **ou** = max des
+    rangs (une des deux suffit), **et** = min (les deux doivent le dire), **moyenne** = le seul
+    poids qu'on n'a pas choisi puisqu'il ne privilégie personne.
+  - ⛔ **Le verdict strict est VIDE** : aucune combinaison ne bat **les deux** seules à **toutes**
+    les fractions, chez aucun des trois marcheurs. Désigner « la meilleure des cinq » après les
+    avoir vues serait choisir sur ce qu'on juge.
+  - ⭐⭐ **Ce qui se publie sans rien choisir est un COMPTE** : quelles colonnes prédisent à toutes
+    les fractions. Pas normal → **`ou` et elle seule** ; pas normal lissé → l'obscurité seule ;
+    raccrochage → quatre colonnes sur cinq. ⚠ Donc `ou` n'est **meilleure nulle part** et **la
+    seule utilisable partout** chez le pas normal : c'est de la **robustesse au point de
+    fonctionnement**, pas de la domination — ce dont a besoin un dérouleur qui ne choisit pas sa
+    fraction.
+  - ⚠ **Le seul endroit où une combinaison ajoute un bras est chez le raccrochage** : `ou` et
+    `moyenne` en sauvent **2/6** contre 1 pour le pli seul. Chez le pas normal les cinq colonnes
+    sauvent le même unique bras, à des fractions différentes (90 % par le pli, 50 % par
+    l'obscurité, 75 % par `et`) — information de **coût**, pas de capacité.
   - ⚠ **Et à un dixième gardé, l'obscurité cesse de prédire** (+10,5 et +15,2 µm) : classer sur si
     peu de cellules mesure surtout le tirage. C'est pourquoi la **courbe entière** est livrée
     plutôt qu'un point.
@@ -6784,8 +6804,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 4168 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 4860 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 4228 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 4920 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
