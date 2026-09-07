@@ -3377,6 +3377,69 @@ c'est-à-dire une interpolation du bruit : la demi-fenêtre est à quatre, soit 
 > fibres publié ne couvre pas ce fragment. ⚠ Vérifier d'abord si `PHerc0500P2` a un préfixe
 > `fibers/`, plutôt que de supposer que non.
 
+#### ⛔⛔⛔ LA VOIE DE L'ORIENTATION EST FERMÉE PAR LA DONNÉE — vérifié sur les DEUX serveurs
+
+> Mesure : `src/nappe/ou_vit_le_champ_de_fibres.py` (17 contrôles) →
+> `docs/mesures/ou_vit_le_champ_de_fibres.json`. Figure :
+> `src/figures/figure_ou_vit_le_champ_de_fibres.py` (14 contrôles), le 2026-09-07.
+>
+> ```bash
+> uv run python src/nappe/ou_vit_le_champ_de_fibres.py \
+>     --json docs/mesures/ou_vit_le_champ_de_fibres.json
+> uv run python src/figures/figure_ou_vit_le_champ_de_fibres.py \
+>     --sortie docs/images/75_ou_vit_le_champ_de_fibres.png
+> ```
+
+⚠⚠ **La consigne était de ne pas se contenter d'un serveur**, et elle était justifiée : ce dépôt
+a déjà été mordu **trois fois** pour avoir interrogé **une** vue du corpus et conclu sur **le**
+corpus — c'est la raison d'être de `ou_vit_ce_rouleau`. La question « `PHerc0500P2` a-t-il un
+champ de fibres ? » est donc posée aux **deux** sources, et le serveur dans ses **deux**
+arborescences (`fragments/` et `full-scrolls/<Scroll>/<objet>.volpkg/`).
+
+![où vit le champ de fibres](images/75_ou_vit_le_champ_de_fibres.png)
+
+**46 objets interrogés.** Cinq publient un champ de fibres — `PHerc0139`, `PHerc0332`,
+`PHerc1299`, `PHerc1451` et **`PHercParis4`**, qui est le rouleau 1. Un seul publie des
+**spires** : `PHerc0500P2`, celui que la campagne déroule.
+
+> ⛔⛔⛔ **L'INTERSECTION EST VIDE.** Un champ d'orientation ne sert à cette campagne que sur un
+> objet qui publie **aussi** des spires — c'est sur elles que la marche s'appuie et entre elles
+> que l'erreur se mesure. La voie de l'orientation est donc fermée **par la donnée**, pas par la
+> méthode, et c'est une porte qu'aucune tranche de mesure ne pouvait ouvrir.
+
+##### ⚠⚠⚠ Et deux défauts de méthode attrapés dans la mesure elle-même
+
+**1. Trente-huit désaccords qui étaient des erreurs d'adresse.** La première version demandait à
+**tous** les objets l'adresse `fragments/<objet>/…`, y compris aux rouleaux, qui vivent sous
+`full-scrolls/<Scroll>/<objet>.volpkg/`. Elle rapportait donc **38 désaccords sur 38** — un
+artefact de construction d'URL présenté comme un fait sur le corpus, c'est-à-dire **exactement le
+mode de panne que ce fichier existe pour éviter**, commis à l'intérieur de lui-même.
+
+**2. Une comparaison entre deux étages de l'arbre.** Le relevé annonçait ensuite que « les deux
+sources ne partagent aucun mot de vocabulaire » — vrai, et trivial : il comparait les **genres**
+du bucket (deux niveaux sous `representations/predictions/`) aux dossiers de **premier niveau** du
+serveur. La question posée au même niveau donne un fait utile : **un seul objet** a un dossier
+`representations/` sur le serveur, et il n'y a **aucun étage `predictions/`** dessous.
+
+> ⚠ **L'absence de fibres sur le serveur parle donc de son RANGEMENT, pas du corpus** — et c'est
+> le bucket qui répond à la question des fibres. Le relevé écrit cette portée dans la mesure
+> elle-même : *absent veut dire absent des sources interrogées, jamais inexistant*.
+
+⚠ **Un paramètre mort corrigé au passage**, trouvé en cherchant qui publie des spires :
+`les_wraps_publies.wraps_du_fragment(fragment)` **ignorait son argument** et balayait tout l'index
+en retenant tout segment nommé `wrapNN`. Sans conséquence aujourd'hui — un seul objet du corpus en
+publie, mesuré — mais le jour où un second en publierait, la campagne aurait marché sur les spires
+de **deux objets mélangées** sans que rien ne le signale. Un paramètre qui ne fait rien est un
+piège qui attend sa donnée ; il filtre désormais, et un contrôle l'épingle.
+
+> ⭐⭐⭐ **Ce que cette tranche laisse.** Les six portes de la lecture sont fermées, et la
+> septième — l'orientation — l'est par la **donnée**. Ce qui reste ouvert n'est donc plus une
+> idée de méthode mais une question de **matière** : obtenir un champ d'orientation sur
+> `PHerc0500P2`, ou des spires sur un objet qui en a un. La seconde est la moins chère des deux —
+> `PHercParis4` publie des fibres **et** de l'`ink-3d`, et c'est le rouleau le plus segmenté du
+> concours. ⚠ Mais ce serait changer d'objet, donc de campagne : à trancher avec l'auteur plutôt
+> qu'à décider ici.
+
 ### C2 ⭐ — le nul verso (H7)
 
 Un rendu décalé par segment, sur les mêmes couches et sur trois segments `w` de `0139`. C'est

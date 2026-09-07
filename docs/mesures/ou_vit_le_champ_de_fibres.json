@@ -1,0 +1,707 @@
+{
+  "bucket": "https://vesuvius-challenge-open-data.s3.amazonaws.com",
+  "serveur": "https://dl.ash2txt.org",
+  "layouts": [
+    "fragments",
+    "full-scrolls"
+  ],
+  "objets": 46,
+  "lignes": [
+    {
+      "objet": "PHerc0009B",
+      "genres_du_bucket": [
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": "https://dl.ash2txt.org/fragments/PHerc0009B",
+      "dossiers_du_serveur": [
+        "cases",
+        "multispectral",
+        "paths",
+        "volumes"
+      ],
+      "genres_du_serveur": null,
+      "connu_du_serveur": true,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0125",
+      "genres_du_bucket": [
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0139",
+      "genres_du_bucket": [
+        "fibers",
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": true
+    },
+    {
+      "objet": "PHerc0172",
+      "genres_du_bucket": [],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0175A",
+      "genres_du_bucket": [
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0175B",
+      "genres_du_bucket": [
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0191",
+      "genres_du_bucket": [
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0211",
+      "genres_du_bucket": [
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0257",
+      "genres_du_bucket": [
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0268",
+      "genres_du_bucket": [
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0306B",
+      "genres_du_bucket": [
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0332",
+      "genres_du_bucket": [
+        "fibers",
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": true
+    },
+    {
+      "objet": "PHerc0343",
+      "genres_du_bucket": [
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0343P",
+      "genres_du_bucket": [
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": "https://dl.ash2txt.org/fragments/PHerc0343P",
+      "dossiers_du_serveur": [
+        "cases",
+        "multispectral",
+        "paths",
+        "volumes"
+      ],
+      "genres_du_serveur": null,
+      "connu_du_serveur": true,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0358",
+      "genres_du_bucket": [
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0483A",
+      "genres_du_bucket": [
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0483B",
+      "genres_du_bucket": [
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0490A",
+      "genres_du_bucket": [
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0490B",
+      "genres_du_bucket": [
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0500P2",
+      "genres_du_bucket": [
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": "https://dl.ash2txt.org/fragments/PHerc0500P2",
+      "dossiers_du_serveur": [
+        "cases",
+        "multispectral",
+        "paths",
+        "representations",
+        "volumes"
+      ],
+      "genres_du_serveur": [],
+      "connu_du_serveur": true,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0800",
+      "genres_du_bucket": [
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0813",
+      "genres_du_bucket": [
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0814",
+      "genres_du_bucket": [
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0826",
+      "genres_du_bucket": [
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0841",
+      "genres_du_bucket": [
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0846A",
+      "genres_du_bucket": [
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc0846B",
+      "genres_du_bucket": [
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc1203",
+      "genres_du_bucket": [
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc1218",
+      "genres_du_bucket": [
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc1299",
+      "genres_du_bucket": [
+        "fibers",
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": true
+    },
+    {
+      "objet": "PHerc1447",
+      "genres_du_bucket": [
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc1451",
+      "genres_du_bucket": [
+        "fibers",
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": true
+    },
+    {
+      "objet": "PHerc1545",
+      "genres_du_bucket": [
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc1667",
+      "genres_du_bucket": [
+        "lasagna"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": "https://dl.ash2txt.org/full-scrolls/Scroll4/PHerc1667.volpkg",
+      "dossiers_du_serveur": [
+        "paths",
+        "renders",
+        "thaumato_outputs",
+        "transforms",
+        "volume_grids",
+        "volumes",
+        "volumes_small",
+        "volumes_zarr",
+        "working"
+      ],
+      "genres_du_serveur": null,
+      "connu_du_serveur": true,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc1667Cr1Fr3",
+      "genres_du_bucket": [],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHerc51Cr4Fr8",
+      "genres_du_bucket": [],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHercMAN5",
+      "genres_du_bucket": [
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHercMANB",
+      "genres_du_bucket": [
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHercMANBp",
+      "genres_du_bucket": [
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHercParis1Fr34",
+      "genres_du_bucket": [],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHercParis1Fr39",
+      "genres_du_bucket": [],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHercParis2Fr143",
+      "genres_du_bucket": [],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHercParis2Fr47",
+      "genres_du_bucket": [],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHercParis3",
+      "genres_du_bucket": [
+        "lasagna"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": "https://dl.ash2txt.org/full-scrolls/Scroll2/PHercParis3.volpkg",
+      "dossiers_du_serveur": [
+        "paths",
+        "renders",
+        "transforms",
+        "volume_grids",
+        "volumes",
+        "volumes_masked",
+        "volumes_zarr_standardized",
+        "working"
+      ],
+      "genres_du_serveur": null,
+      "connu_du_serveur": true,
+      "a_des_fibres": false
+    },
+    {
+      "objet": "PHercParis4",
+      "genres_du_bucket": [
+        "fibers",
+        "ink-3d",
+        "lasagna",
+        "surfaces"
+      ],
+      "bucket_muet": false,
+      "adresse_serveur": "https://dl.ash2txt.org/full-scrolls/Scroll1/PHercParis4.volpkg",
+      "dossiers_du_serveur": [
+        "paths",
+        "renders",
+        "thaumato_outputs",
+        "transforms",
+        "umbilici",
+        "volume_grids",
+        "volumes",
+        "volumes_masked",
+        "volumes_zarr_standardized",
+        "volumetric-instance-labels",
+        "working"
+      ],
+      "genres_du_serveur": null,
+      "connu_du_serveur": true,
+      "a_des_fibres": true
+    },
+    {
+      "objet": "_thumbnails",
+      "genres_du_bucket": [],
+      "bucket_muet": false,
+      "adresse_serveur": null,
+      "dossiers_du_serveur": null,
+      "genres_du_serveur": null,
+      "connu_du_serveur": false,
+      "a_des_fibres": false
+    }
+  ],
+  "objets_avec_fibres": [
+    "PHerc0139",
+    "PHerc0332",
+    "PHerc1299",
+    "PHerc1451",
+    "PHercParis4"
+  ],
+  "objets_avec_spires": [
+    "PHerc0500P2"
+  ],
+  "objets_avec_les_deux": [],
+  "genres_du_bucket": [
+    "fibers",
+    "ink-3d",
+    "lasagna",
+    "surfaces"
+  ],
+  "dossiers_du_serveur": [
+    "cases",
+    "multispectral",
+    "paths",
+    "renders",
+    "representations",
+    "thaumato_outputs",
+    "transforms",
+    "umbilici",
+    "volume_grids",
+    "volumes",
+    "volumes_masked",
+    "volumes_small",
+    "volumes_zarr",
+    "volumes_zarr_standardized",
+    "volumetric-instance-labels",
+    "working"
+  ],
+  "objets_absents_du_serveur": [
+    "PHerc0125",
+    "PHerc0139",
+    "PHerc0172",
+    "PHerc0175A",
+    "PHerc0175B",
+    "PHerc0191",
+    "PHerc0211",
+    "PHerc0257",
+    "PHerc0268",
+    "PHerc0306B",
+    "PHerc0332",
+    "PHerc0343",
+    "PHerc0358",
+    "PHerc0483A",
+    "PHerc0483B",
+    "PHerc0490A",
+    "PHerc0490B",
+    "PHerc0800",
+    "PHerc0813",
+    "PHerc0814",
+    "PHerc0826",
+    "PHerc0841",
+    "PHerc0846A",
+    "PHerc0846B",
+    "PHerc1203",
+    "PHerc1218",
+    "PHerc1299",
+    "PHerc1447",
+    "PHerc1451",
+    "PHerc1545",
+    "PHerc1667Cr1Fr3",
+    "PHerc51Cr4Fr8",
+    "PHercMAN5",
+    "PHercMANB",
+    "PHercMANBp",
+    "PHercParis1Fr34",
+    "PHercParis1Fr39",
+    "PHercParis2Fr143",
+    "PHercParis2Fr47",
+    "_thumbnails"
+  ],
+  "sources_muettes": [],
+  "la_voie_de_lorientation_est_ouverte": false,
+  "objets_comparables": [
+    "PHerc0500P2"
+  ],
+  "genres_du_serveur": [],
+  "vocabulaires_communs": [],
+  "le_serveur_a_un_etage_predictions": false,
+  "les_sources_parlent_le_meme_vocabulaire": false,
+  "portee": "absent veut dire absent des sources interrogées, jamais inexistant ; et les deux sources rangent différemment, donc un genre vu sur l'une n'est pas attendu sur l'autre"
+}

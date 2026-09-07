@@ -54,11 +54,20 @@ def wraps_du_fragment(fragment: str = FRAGMENT) -> list[dict]:
     porte l'horodatage `20250922024644` quand `wrap12` et `wrap13` portent `20250920…`. Trier
     par identifiant mettrait donc la onzième spire **après** la treizième, et toute mesure
     « entre spires consécutives » comparerait des voisines qui ne le sont pas.
+
+    ⚠⚠⚠ ET LE FRAGMENT EST RÉELLEMENT FILTRÉ, ce qui n'était pas le cas. Ce paramètre existait
+    sans rien faire : la boucle balayait **tout** l'index et retenait tout segment nommé
+    `wrapNN`. Aujourd'hui c'est sans conséquence — mesuré, un seul objet du corpus en publie —
+    mais le jour où un second en publierait, la campagne marcherait sur les spires de deux
+    objets mélangées sans que rien ne le signale. Un paramètre qui ne fait rien est un piège
+    qui attend sa donnée.
     """
     import la_case_vide as cv  # noqa: PLC0415
 
     vus, out = set(), []
-    for _, fiche in cv._charger().items():
+    for cle, fiche in cv._charger().items():
+        if fragment not in (cle, fiche.get("id"), fiche.get("nom")):
+            continue
         for sid, seg in fiche.get("segments", {}).items():
             nom = seg.get("long_id", sid)
             m = RANG.search(nom)
@@ -201,6 +210,16 @@ def verifier() -> int:
     faux = ["20250920020223-0500P2-wrap12_0919", "20250922024644-0500P2-wrap11_0919",
             "20250920020224-0500P2-wrap13_0919"]
     rangs = [int(RANG.search(n).group(1)) for n in faux]
+    # ⚠⚠⚠ LE PARAMÈTRE `fragment` DOIT RÉELLEMENT FILTRER. Il ne le faisait pas : la boucle
+    # balayait tout l'index et retenait tout segment nommé `wrapNN`. Sans conséquence
+    # aujourd'hui — un seul objet du corpus en publie — mais le jour où un second en
+    # publierait, la campagne marcherait sur deux objets mélangés en silence.
+    v("le fragment demandé est réellement filtré, pas ignoré",
+      len(wraps_du_fragment(FRAGMENT)) > 0
+      and len(wraps_du_fragment("PHercInexistant")) == 0,
+      f"{len(wraps_du_fragment(FRAGMENT))} pour {FRAGMENT}, "
+      f"{len(wraps_du_fragment('PHercInexistant'))} pour un objet absent")
+
     v("le rang se lit dans le nom", rangs == [12, 11, 13], str(rangs))
     tries = [n for _, n in sorted(zip(rangs, faux))]
     v("... et trier par rang diffère de trier par identifiant",

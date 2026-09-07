@@ -5856,6 +5856,35 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     plancher sous l'oracle. ⚠ Ce qui n'a jamais été essayé : faire lire au raccrochage autre chose
     qu'une **intensité** — à condition que `PHerc0500P2` ait un préfixe `fibers/`, ce qui est à
     **vérifier** plutôt qu'à supposer.
+  - ⛔⛔⛔ **LA VOIE DE L'ORIENTATION EST FERMÉE PAR LA DONNÉE (2026-09-07,
+    `ou_vit_le_champ_de_fibres`, 17 contrôles, 46 objets, DEUX serveurs).** La question est posée
+    aux deux sources — le bucket open-data et le serveur de données, ce dernier dans ses **deux**
+    arborescences (`fragments/` et `full-scrolls/<Scroll>/<objet>.volpkg/`) — parce que ce dépôt a
+    déjà été mordu **trois fois** pour avoir interrogé une seule vue et conclu sur le corpus.
+  - ⛔⛔ **Cinq objets publient un champ de fibres** — `PHerc0139`, `PHerc0332`, `PHerc1299`,
+    `PHerc1451` et **`PHercParis4`** (le rouleau 1) — et **un seul publie des spires** :
+    `PHerc0500P2`, celui que la campagne déroule. **L'intersection est VIDE.** Un champ
+    d'orientation ne sert que sur un objet qui publie aussi des spires, donc la porte est fermée
+    **par la donnée** et aucune tranche de mesure ne pouvait l'ouvrir.
+  - ⚠⚠⚠ **Deux défauts de méthode attrapés dans la mesure elle-même.** (1) La première version
+    demandait `fragments/<objet>` à **tous** les objets, y compris aux rouleaux : elle rapportait
+    **38 désaccords sur 38**, un artefact d'URL présenté comme un fait sur le corpus — exactement
+    le mode de panne que ce fichier existe pour éviter, commis à l'intérieur de lui-même. (2) Elle
+    annonçait ensuite que « les deux sources ne partagent aucun mot de vocabulaire » : vrai et
+    **trivial**, puisqu'elle comparait les **genres** du bucket aux dossiers de **premier niveau**
+    du serveur. Posée au même niveau, la question rend un fait utile — **un seul objet** a un
+    `representations/` sur le serveur et il n'y a **aucun étage `predictions/`** dessous.
+  - ⚠ **Donc l'absence de fibres sur le serveur parle de son RANGEMENT, pas du corpus**, et c'est
+    le bucket qui répond. La portée est écrite dans la mesure : *absent veut dire absent des
+    sources interrogées, jamais inexistant*.
+  - ⚠ **Un paramètre mort corrigé au passage** : `les_wraps_publies.wraps_du_fragment(fragment)`
+    **ignorait son argument** et retenait tout segment nommé `wrapNN` de tout l'index. Sans
+    conséquence aujourd'hui — un seul objet en publie, mesuré — mais le jour où un second en
+    publierait, la campagne aurait marché sur les spires de **deux objets mélangées** en silence.
+  - ⭐⭐⭐ **Ce qui reste ouvert n'est plus une idée de méthode mais une question de MATIÈRE** :
+    obtenir un champ d'orientation sur `PHerc0500P2`, ou des spires sur un objet qui en a un.
+    ⚠ `PHercParis4` publie des fibres **et** de l'`ink-3d` et c'est le rouleau le plus segmenté —
+    mais ce serait changer d'objet, donc de campagne : à trancher avec l'auteur.
   - ⛔ **L'ÉCART DÉJÀ FRANCHI NE DIT PRESQUE RIEN DU SUIVANT (2026-09-06,
     `lecart_deja_franchi`, 16 contrôles, 5 triplets, 5163 cellules).** Un dérouleur parti d'une
     paire d'ancres connaît en chaque point la distance entre ces deux surfaces : c'était la seule
@@ -6453,8 +6482,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 3422 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 4114 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 3485 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 4177 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
