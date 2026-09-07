@@ -48,9 +48,12 @@ PALE = (243, 231, 227)
 BLEU_PALE = (222, 231, 240)
 CADRE = (200, 200, 200)
 
-COULEUR = {"rien": (70, 70, 70), "raccroche": VERT, "melange": AMBRE, "oracle": ROUGE}
-MARQUE = {"raccroche": "le chemin deploye", "rien": "le pas normal seul",
-          "melange": "le temoin melange", "oracle": "la borne (elle regarde la cible)"}
+BLEU = (54, 88, 132)
+COULEUR = {"rien": (70, 70, 70), "raccroche": VERT, "raccroche_lisse": BLEU,
+           "melange": AMBRE, "oracle": ROUGE}
+MARQUE = {"raccroche": "le chemin deploye", "raccroche_lisse": "+ nappe lissee entre deux bras",
+          "rien": "le pas normal seul", "melange": "le temoin melange",
+          "oracle": "la borne (elle regarde la cible)"}
 
 
 def prose(m: dict) -> list[str]:
@@ -58,6 +61,8 @@ def prose(m: dict) -> list[str]:
         return next(x for x in m["lignes"] if x["marcheur"] == nom)
 
     e, inv = m["ecart_au_pas_normal"], m["ecart_du_pas_normal"]
+    el = m["ecart_du_lissage_au_raccrochage"]
+    epn = m["ecart_du_lissage_au_pas_normal"]
     dep = next(x for x in m["lignes"] if x["deploye"])
     gl_txt = " ".join(f"{g:.0f}" for g in dep["glissements_um"])
     hors = m["bras_hors_du_pas_nominal"]
@@ -80,6 +85,18 @@ def prose(m: dict) -> list[str]:
         f"normal seul {m['portee_sans_rien_faire']}, le temoin melange {m['portee_du_temoin']}, "
         f"la borne {m['portee_de_loracle']}. le raccrochage porte plus loin que le pas normal : "
         f"{'OUI' if m['le_raccrochage_porte_plus_loin'] else 'NON'}.",
+        (f"⚠⚠⚠ LE CINQUIEME MARCHEUR n'ajoute AUCUN reglage : il applique a la NAPPE le voisinage "
+         f"deja deploye sur le champ de decalage — meme demi-largeur, meme regle de majorite — "
+         f"et garde le meme masque, donc les colonnes restent appariables. portee "
+         f"{m['portee_de_la_nappe_lissee']}, ecart au raccrochage "
+         f"{el['ecart_median_um']:+.1f} um sur {el['pas_ameliores']}/{el['pas']} bras, "
+         f"intervalle {el['intervalle_um']} : "
+         f"{'IL AIDE' if m['le_lissage_de_la_nappe_aide'] else 'il ne tranche pas'}. et "
+         f"face au PAS NORMAL SEUL il revient a parite : {epn['ecart_median_um']:+.1f} um sur "
+         f"{epn['pas_ameliores']}/{epn['pas']} bras, intervalle {epn['intervalle_um']} — aucun "
+         "des deux sens ne tranche. le lissage de la nappe reprend donc PRESQUE TOUT ce que le "
+         "raccrochage coute a une marche, en n'ajoutant aucun reglage."
+         if el and epn else "⚠ le cinquieme marcheur n'a pas de bras commun avec le raccrochage."),
         (f"⚠⚠⚠ et l'ecart apparie tranche DANS L'AUTRE SENS : le pas normal seul est a "
          f"{inv['ecart_median_um']:+.1f} um du raccrochage sur {inv['pas_ameliores']}/"
          f"{inv['pas']} bras, intervalle {inv['intervalle_um']} — trois conditions sans seuil, "
@@ -91,8 +108,9 @@ def prose(m: dict) -> list[str]:
          f"que la correlation peut proposer vaut au plus ±{m['glissement_maximal_um']:.0f} um, "
          f"soit {m['glissement_en_demi_feuilles']:.2f} demi-feuille EXACTEMENT : un seul "
          "raccrochage ne peut donc PAS poser la cellule sur la feuille voisine. ce qui derive "
-         f"n'est pas un pas mais leur somme — {gl_txt} um bras par bras, tous dans le meme "
-         "sens des que la surface est froissee."
+         f"n'est pas un pas mais leur somme — {gl_txt} um bras par bras. ⚠ que les signes "
+         "soient correles d'un bras a l'autre n'est PAS mesure : l'affirmer serait refaire la "
+         "faute que ce module a deja eu a corriger."
          if inv else "⚠ aucun bras commun : l'ecart apparie n'est pas calculable."),
         (f"⚠⚠ panneau B : le corpus demande a chaque bras un ecart qui lui est propre, et le "
          f"bras {hors[0] if hors else '—'} en demande "
@@ -102,10 +120,13 @@ def prose(m: dict) -> list[str]:
          "c'est pourquoi la borne elle-meme y echoue."
          if hors else "⚠ panneau B : tous les bras demandent le pas nominal a une demi-feuille "
          "pres, donc rien de ce tableau ne s'explique par un trou du corpus."),
-        f"⚠ panneau C : les quatre marcheurs gardent EXACTEMENT les memes cellules a chaque "
-        f"bras — {m['cellules_au_premier_bras']} au premier, {m['cellules_au_dernier_bras']} au "
-        f"dernier, soit {m['part_de_nappe_gardee']} de la nappe. la perte est reelle et elle "
-        "n'explique aucune difference entre eux : ils sont compares sur une seule population.",
+        f"⚠⚠ panneau C : la marche PERD DES CELLULES — {m['cellules_au_premier_bras']} au "
+        f"premier bras, {m['cellules_au_dernier_bras']} au dernier, soit "
+        f"{m['part_de_nappe_gardee']} de la nappe. et comme deux marcheurs divergent, leurs "
+        "masques divergent : chaque ecart apparie est donc pris sur les cellules COMMUNES aux "
+        "deux, jamais sur deux medianes publiees separement. exiger des couvertures identiques "
+        "serait exiger que les marcheurs ne divergent pas, c'est-a-dire qu'il n'y ait rien a "
+        "mesurer.",
     ]
 
 
@@ -220,8 +241,8 @@ def panneau_corpus(art, x0, y0, pw, ph, m, petit) -> None:
         art.rectangle([cx - larg / 2, py(b["ecart_um"]), cx + larg / 2, base], fill=coul)
         art.text((cx - 12, py(b["ecart_um"]) - 14), f"{b['ecart_um']:.0f}",
                  fill=coul if not b["au_pas_nominal"] else DISCRET, font=petit)
-    ecrire(art, (x0 + 8, y0 + 20), f"bande bleue : le pas nominal {nom:.0f} um, a une "
-           "demi-feuille pres", (90, 120, 150), petit, (x0, x0 + pw))
+    ecrire(art, (x0 + 8, y0 + 20), f"bande bleue : {nom:.0f} um a une demi-feuille pres",
+           (90, 120, 150), petit, (x0, x0 + pw))
     _abscisse(art, gauche, droite, base, len(bras), petit, "bras :")
     ecrire(art, (x0 + 8, y0 + ph - 18), "um", DISCRET, petit, (x0, x0 + pw))
 
@@ -229,8 +250,7 @@ def panneau_corpus(art, x0, y0, pw, ph, m, petit) -> None:
 def panneau_couverture(art, x0, y0, pw, ph, m, petit) -> None:
     """La couverture, une seule courbe parce que les quatre marcheurs gardent les memes."""
     gauche, droite, base, sommet = _cadre(
-        art, x0, y0, pw, ph, "une cellule dont la ligne sort du volume est perdue pour de bon",
-        petit)
+        art, x0, y0, pw, ph, "une cellule sortie du volume est perdue pour de bon", petit)
     serie = next(x["cellules_par_bras"] for x in m["lignes"] if x["deploye"])
     haut = max(serie) * 1.18
 
@@ -250,12 +270,46 @@ def panneau_couverture(art, x0, y0, pw, ph, m, petit) -> None:
     for v in (500, 1000, 1500):
         if v < haut:
             art.text((gauche - 46, py(v) - 6), f"{v:>4}", fill=DISCRET, font=petit)
-    ecrire(art, (x0 + 8, y0 + 20), "les QUATRE marcheurs gardent les memes cellules,",
+    ecrire(art, (x0 + 8, y0 + 20), "chaque ecart apparie est pris sur les cellules",
            DISCRET, petit, (x0, x0 + pw))
-    ecrire(art, (x0 + 8, y0 + 33), f"donc la perte n'explique aucun ecart entre eux : il en "
-           f"reste {m['part_de_nappe_gardee']}", DISCRET, petit, (x0, x0 + pw))
+    ecrire(art, (x0 + 8, y0 + 33), f"COMMUNES aux deux ; il en reste "
+           f"{m['part_de_nappe_gardee']} au dernier bras", DISCRET, petit, (x0, x0 + pw))
     _abscisse(art, gauche, droite, base, len(serie), petit, "bras :")
     ecrire(art, (x0 + 8, y0 + ph - 18), "cellules", DISCRET, petit, (x0, x0 + pw))
+
+
+def panneau_rugosite(art, x0, y0, pw, ph, m, petit) -> None:
+    """De combien le champ de decalage s'ecarte de son propre voisinage, bras par bras.
+
+    ⚠⚠ C'EST LA PRÉMISSE DU DIAGNOSTIC. « La marche froisse la surface qu'elle laisse » reste
+    une histoire tant que ce nombre n'est pas mesuré ; s'il ne monte pas, l'explication tombe et
+    il faut en chercher une autre.
+    """
+    gauche, droite, base, sommet = _cadre(
+        art, x0, y0, pw, ph, "ecart median au voisinage, en voxels", petit)
+    series = [(x["marcheur"], x["rugosites_vx"]) for x in m["lignes"]
+              if any(g for g in x["rugosites_vx"])]
+    toutes = [g for _, ser in series for g in ser if g]
+    if not toutes:
+        return
+    haut = max(toutes) * 1.2
+    n = len(m["spires_visees"])
+    for nom, ser in series:
+        coul = COULEUR[nom]
+        pts = [(gauche + (droite - gauche) * i / max(1, n - 1),
+                base - (base - sommet) * (g or 0.0) / haut) for i, g in enumerate(ser)]
+        for (ax, ay), (bx, by) in zip(pts, pts[1:]):
+            art.line([ax, ay, bx, by], fill=coul, width=2)
+        for cx, cy in pts:
+            art.ellipse([cx - 3, cy - 3, cx + 3, cy + 3], fill=coul)
+    for g in (0.5, 1.0, 1.5, 2.0, 3.0):
+        if g < haut:
+            art.text((gauche - 46, base - (base - sommet) * g / haut - 6), f"{g:>4.1f}",
+                     fill=DISCRET, font=petit)
+    ecrire(art, (x0 + 8, y0 + 20), "le pas normal seul ne glisse pas, donc il est absent",
+           DISCRET, petit, (x0, x0 + pw))
+    _abscisse(art, gauche, droite, base, n, petit, "bras :")
+    ecrire(art, (x0 + 8, y0 + ph - 18), "voxels", DISCRET, petit, (x0, x0 + pw))
 
 
 def legende(art, x0: int, y: int, petit) -> None:
@@ -265,7 +319,7 @@ def legende(art, x0: int, y: int, petit) -> None:
     tourne — c'est-a-dire ne peut pas lire le resultat.
     """
     x = x0
-    for nom in ("raccroche", "rien", "melange", "oracle"):
+    for nom in ("raccroche", "raccroche_lisse", "rien", "melange", "oracle"):
         art.rectangle([x, y + 3, x + 16, y + 9], fill=COULEUR[nom])
         art.text((x + 22, y), MARQUE[nom], fill=TEXTE, font=petit)
         x += 26 + petit.getbbox(MARQUE[nom])[2] + 24
@@ -275,8 +329,8 @@ def dessiner(m: dict, sortie: Path) -> dict:
     from PIL import Image, ImageDraw
 
     gros, moyen, petit = police(17, 13, 11)
-    marge, pw, ecart, ph = 38, 396, 30, 250
-    largeur_utile = pw * 3 + ecart * 2
+    marge, pw, ecart, ph = 34, 344, 22, 250
+    largeur_utile = pw * 4 + ecart * 3
     for coupe in (150, 140, 132, 124, 116, 108, 100):
         lignes = couper(prose(m), coupe)
         if max(moyen.getbbox(x)[2] for x in lignes) <= largeur_utile:
@@ -293,14 +347,16 @@ def dessiner(m: dict, sortie: Path) -> dict:
              f"demi-feuille {m['demi_feuille_um']} um · le cercle marque la portee",
              fill=DISCRET, font=moyen)
     legende(art, marge, 62, petit)
-    titres = ("A · l'erreur bras par bras, et le seuil qui perd la marche",
-              "B · ce que chaque bras demande, mesure sur le corpus seul",
-              "C · la couverture, que la marche perd en chemin")
+    titres = ("A · l'erreur bras par bras et le seuil",
+              "B · ce que chaque bras demande",
+              "C · la couverture perdue en chemin",
+              "D · le froissement du champ de decalage")
     for j, t in enumerate(titres):
         art.text((marge + j * (pw + ecart), 86), t, fill=TEXTE, font=moyen)
     eta = panneau_erreurs(art, marge, 110, pw, ph, m, petit)
     panneau_corpus(art, marge + pw + ecart, 110, pw, ph, m, petit)
     panneau_couverture(art, marge + 2 * (pw + ecart), 110, pw, ph, m, petit)
+    panneau_rugosite(art, marge + 3 * (pw + ecart), 110, pw, ph, m, petit)
     debut = H - len(lignes) * 19 - 12
     for j, l in enumerate(lignes):
         art.text((marge, debut + j * 19), l, fill=TEXTE, font=moyen)
@@ -341,9 +397,20 @@ def verifier() -> int:
     # ⚠⚠⚠ LA COMPARAISON PORTE SUR UNE SEULE POPULATION : si les marcheurs gardaient des
     # cellules différentes, une différence de médianes pourrait n'être qu'une différence de
     # qui est compté. La figure l'affirme dans sa prose, donc un contrôle le vérifie.
-    couvertures = {tuple(x["cellules_par_bras"]) for x in m["lignes"]}
-    v("les quatre marcheurs gardent exactement les mêmes cellules à chaque bras",
-      len(couvertures) == 1, f"{len(couvertures)} couvertures distinctes")
+    # ⚠⚠⚠ DEUX MARCHEURS DIVERGENT, DONC LEURS MASQUES DIVERGENT : ce qui doit tenir n'est pas
+    # l'égalité des couvertures mais que chaque écart apparié soit pris sur l'INTERSECTION, et
+    # qu'il publie combien de cellules elle contient.
+    v("chaque écart apparié publie les cellules communes sur lesquelles il est pris",
+      all(m[c] and all(x > 0 for x in m[c])
+          for c in ("cellules_communes_par_bras", "cellules_communes_lissage_raccrochage",
+                    "cellules_communes_lissage_pas_normal")),
+      str(m["cellules_communes_lissage_raccrochage"]))
+    # ⚠⚠ ET UNE INTERSECTION NE PEUT PAS ÊTRE PLUS GRANDE QUE LE PLUS PETIT DES DEUX MASQUES.
+    lis = par("raccroche_lisse")
+    v("... et aucune intersection ne dépasse le plus petit des deux masques",
+      all(c <= min(a, b) for c, a, b in zip(m["cellules_communes_lissage_raccrochage"],
+                                            lis["cellules_par_bras"],
+                                            par("raccroche")["cellules_par_bras"])))
     v("... et la couverture ne remonte jamais en chemin",
       all(all(b <= a for a, b in zip(x["cellules_par_bras"], x["cellules_par_bras"][1:]))
           for x in m["lignes"]),

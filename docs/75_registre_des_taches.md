@@ -3485,6 +3485,7 @@ sur une erreur.
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | pas normal seul | 44,0 | 50,1 | 49,5 | 67,2 | 72,2\* | 114,2\* | 1016,5\* | 177,3\* | **4** |
 | ⭐ raccrochage déployé | 34,7 | 44,3 | 71,8\* | 120,4\* | 207,2\* | 274,6\* | 1067,2\* | 499,5\* | **2** |
+| ⭐ **+ nappe lissée entre deux bras** | 36,6 | 42,8 | 48,9 | 74,4\* | 120,9\* | 160,8\* | 940,7\* | 354,7\* | **3** |
 | témoin mélangé | 62,4 | 64,9 | 92,6\* | 149,4\* | 267,5\* | 334,2\* | 1141,7\* | 597,5\* | 2 |
 | ⛔ la borne | 19,9 | 17,5 | 19,0 | 17,9 | 19,4 | 22,1 | 849,0\* | 105,4\* | **6** |
 | *ce que le corpus demande* | *170,0* | *119,5* | *100,6* | *120,0* | *137,6* | *89,2* | ***1000,6*** | *76,7* | *6* |
@@ -3531,6 +3532,49 @@ contrôle exige désormais que ce qui est **appliqué** tienne dans ce qui est *
 > une surface de plus en plus froissée. ⚠ La corrélation des signes d'un bras à l'autre n'est pas
 > encore mesurée ; l'affirmer serait refaire la faute qu'on vient de corriger.
 
+##### ⭐⭐⭐ LA PRÉMISSE EST MESURÉE, ET LE REMÈDE REPREND PRESQUE TOUT
+
+⚠⚠ **D'abord la prémisse, parce que sans elle « la marche froisse ce qu'elle laisse » est une
+histoire.** La rugosité du champ de décalage — de combien une cellule s'écarte de la médiane de son
+voisinage — est mesurée bras par bras : **0.34 · 0.57 · 0.81 · 1.48 · 2.01 · 1.95 · 1.79 · 1.84** voxels pour le chemin déployé. Elle **croît**, et
+elle triple entre le premier bras et le cinquième. Le pas normal seul la publie à **zéro partout**,
+puisqu'il ne glisse pas ; la borne la garde entre 0 et 1, ce qui redit sur une marche ce que la
+tranche de l'oracle avait mesuré sur un pas — **le champ qu'une méthode parfaite produirait est
+plat**.
+
+⭐⭐⭐ **Ensuite le remède, et il n'ajoute AUCUN réglage.** Sept tranches ont lissé le champ de
+**décalage** d'un pas ; ce qu'une marche abîme est la **NAPPE**, et personne n'avait jamais lissé
+celle-là entre deux bras. Le cinquième marcheur applique donc à la surface prédite le voisinage
+**déjà déployé** sur le champ de décalage : même demi-largeur, même règle de majorité, et une
+cellule dont le voisinage ne suffit pas garde sa valeur non lissée — exactement ce que fait le
+raccrochage en service.
+
+| comparaison, appariée bras par bras sur les cellules **communes** | écart médian | bras améliorés | intervalle | verdict |
+|---|---:|---:|---|---|
+| nappe lissée **contre raccrochage** | **-65.9 µm** | 7/8 | [-85.9, -45.9] | ⭐ **elle tranche** |
+| nappe lissée **contre pas normal seul** | +3.3 µm | 4/8 | [-0.6, 7.2] | ne tranche **dans aucun sens** |
+
+> ⭐⭐⭐ **Le lissage de la nappe reprend presque tout ce que le raccrochage coûte à une marche.**
+> Sa portée passe de **2 à 3**, et face au pas normal seul il revient à **parité** : ni l'un ni
+> l'autre ne tranche, l'intervalle chevauchant zéro. ⚠ Ce n'est donc pas encore un gain — c'est la
+> récupération d'une perte, obtenue sans un seul paramètre neuf.
+
+⚠⚠ **Et l'appariement a été refait pour que ce chiffre veuille dire quelque chose.** Deux marcheurs
+divergent, donc leurs masques divergent : le marcheur lissé garde **841** cellules au dernier bras
+là où le raccrochage en garde 864. Comparer les deux médianes publiées serait comparer deux
+populations, et une médiane sur moins de cellules n'est pas une médiane meilleure. Chaque écart
+apparié est désormais pris sur l'**intersection**, cellule par cellule, et **publie combien de
+cellules elle contient**. ⚠ Un contrôle vérifie que l'intersection écarte bien les cellules qu'un
+seul des deux a gardées — un contrôle qui ne relirait que les médianes passerait aussi bien avec
+deux populations disjointes.
+
+⚠ **Ce que la mesure ne dit PAS**, et il faut le dire plutôt que de le combler : le lien entre la
+rugosité qui monte et l'erreur qui explose est **plausible et non démontré**. La rugosité publiée
+pour le marcheur lissé reste proche de celle du raccrochage (le champ mesuré est le décalage du
+**snap**, en amont du lissage), donc ce que le lissage répare est visible dans l'**erreur** et pas
+dans ce champ-là. Mesurer la rugosité de la **surface** est un instrument de plus, pas une lecture
+de celui-ci.
+
 ##### ⚠⚠ Ce que le corpus demande, et pourquoi il fallait le mesurer à part
 
 La dernière ligne du tableau ne fait intervenir **aucun marcheur** : c'est la distance médiane de
@@ -3568,16 +3612,18 @@ un échec de méthode ; avec elle, c'est un trou du corpus, et c'est pourquoi **
 > ont des réponses **différentes** sur la même donnée. Trois conséquences immédiates, dans
 > l'ordre où elles se testent :
 >
-> 1. **Ce qui tourne devrait être débranché sur les bras ≥ 3.** Une méthode dont on sait qu'elle
->    coûte au-delà du deuxième bras n'a pas à y être appliquée. ⚠ Mesure, pas décision : un
->    marcheur qui raccroche les deux premiers bras puis passe au pas normal seul est un cinquième
->    marcheur, et sa portée se mesure comme les autres.
-> 2. **Le froissement se mesure.** La rugosité du champ de décalage est déjà instrumentée
->    (`loracle_est_il_atteignable.rugosite`) ; si le diagnostic est juste, elle doit **croître**
->    bras après bras pour le raccrochage et le témoin, et rester plate pour le pas normal.
-> 3. **Et le lissage devrait porter sur la SURFACE, pas sur le décalage.** Sept tranches ont
->    lissé le champ de décalage d'**un** pas ; ce que la marche abîme est la **nappe**, et rien
->    n'a jamais lissé celle-là entre deux bras.
+> 1. ✅ **Le froissement se mesure** — FAIT dans la même tranche : la rugosité du champ de
+>    décalage **croît** de 0,34 à 2,01 voxels sur les cinq premiers bras, elle est **nulle
+>    partout** pour le pas normal seul, et **entre 0 et 1** pour la borne. La prémisse tient.
+> 2. ✅ **Le lissage devrait porter sur la SURFACE, pas sur le décalage** — FAIT : portée 2 → 3,
+>    et retour à **parité** avec le pas normal seul, sans un réglage de plus.
+> 3. ⚠ **Ce qui reste, et c'est le seul des trois qui demande une décision.** Un marcheur qui
+>    raccroche puis s'arrête de raccrocher aurait besoin d'un critère d'arrêt — et « après le
+>    deuxième bras » serait un seuil **choisi sur le résultat qu'on mesure**, c'est-à-dire la
+>    faute nº1 de ce dépôt. Le critère devrait venir de ce que la méthode **peut savoir**, donc
+>    pas de son erreur, qui est de la supervision. La rugosité de son propre champ, elle, est
+>    observable sans cible : c'est la piste, et elle demande d'abord de vérifier qu'elle prédit
+>    l'échec plutôt que de l'accompagner.
 
 ---
 

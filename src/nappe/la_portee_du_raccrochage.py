@@ -51,7 +51,8 @@ from lecart_apparie import ecart_apparie, tranche  # noqa: E402
 # ⚠ Les marcheurs comparés. « rien » est le pas normal seul — la référence contre laquelle tout
 # se juge ; « oracle » regarde la cible une fois par cellule et par bras, donc c'est une BORNE
 # et jamais une méthode ; « melange » est le témoin, même géométrie et forme détruite.
-MARCHEURS = ("rien", "raccroche", "melange", "oracle")
+MARCHEURS = ("rien", "raccroche", "raccroche_lisse", "melange", "oracle")
+LISSE = "raccroche_lisse"
 BORNE = "oracle"
 TEMOIN = "melange"
 
@@ -120,7 +121,7 @@ def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
         return dict(grille=neuf, garde=vivant, points=prevu, directions=dd,
                     decalage=np.zeros(len(prevu)), depart_um=float(np.median(depart)),
                     plancher_um=float(np.median(np.abs(depart - pas_vx * voxel_um))),
-                    glissement_um=0.0, glissement_max_um=0.0)
+                    glissement_um=0.0, glissement_max_um=0.0, rugosite_vx=0.0)
 
     t_gab = reglage["t_gab"]
     t_ligne = reglage["t_ligne"]
@@ -154,20 +155,74 @@ def marcher(nom: str, grille, garde, cible, vol, reglage, rng) -> dict | None:
     neuf = np.full(grille.shape, np.nan)
     ou = np.argwhere(lisible)
     neuf[ou[:, 0], ou[:, 1]] = P + t[:, None] * D
-    # ⚠ LE DÉPLACEMENT N'EST PAS LE PAS : le raccrochage glisse de t voxels le long de la même
-    # ligne, donc la cellule bouge de |pas + t| et non de pas. Prendre le pas nominal ici
-    # donnerait un « plancher » que l'erreur mesurée pourrait passer sous — c'est-à-dire pas
-    # un plancher du tout.
-    dep_ok = depart[okv]
-    bouge = np.abs(pas_vx + t) * voxel_um
-    # ⚠⚠ CE QUE LA CORRÉLATION PROPOSE, ET CE QUE LE BRAS A PRIS. Le premier borne le second, et
+    champ_t = poser_sur_la_grille(t, lisible, lisible.shape)
+    # ⚠⚠⚠ CE QUE SEPT TRANCHES N'ONT JAMAIS LISSÉ : la NAPPE. Toutes ont lissé le champ de
+    # DÉCALAGE d'UN pas ; ce qu'une marche abîme est la SURFACE sur laquelle le bras suivant
+    # estime ses normales et lit son gabarit. Le voisinage employé est celui qui tourne — même
+    # demi-largeur, même règle de majorité — donc ce marcheur n'ajoute aucun réglage.
+    if nom == LISSE:
+        # ⚠⚠⚠ LE MASQUE NE DOIT PAS BOUGER. Un lissage qui écarte les cellules dont le voisinage
+        # ne fait pas majorité comparerait ce marcheur aux autres sur une AUTRE population, et
+        # une médiane sur moins de cellules n'est pas une médiane meilleure. Là où le voisinage
+        # ne suffit pas, la cellule garde sa valeur non lissée — c'est exactement ce que fait le
+        # raccrochage déployé sur son champ de décalage.
+        assez = lisible.copy()
+        canaux = []
+        for c in range(neuf.shape[2]):
+            v2, ok2 = accorder_les_voisins(neuf[:, :, c], lisible)
+            canaux.append(v2)
+            assez &= ok2
+        pris = assez & lisible
+        for c in range(neuf.shape[2]):
+            neuf[:, :, c] = np.where(pris & np.isfinite(canaux[c]), canaux[c], neuf[:, :, c])
+    pts = neuf[ou[:, 0], ou[:, 1]]
+    # ⚠⚠ LE PLANCHER EST CALCULÉ SUR LE DÉPLACEMENT RÉELLEMENT SUBI, du point de départ au point
+    # final, et non sur le pas nominal. Le raccrochage glisse le long de la ligne et le lissage
+    # déplace encore : prendre le pas donnerait un « plancher » que l'erreur peut passer sous,
+    # c'est-à-dire pas un plancher.
+    d0 = np.full(grille.shape, np.nan)
+    d0[vivant] = p
+    depart_g = poser_sur_la_grille(depart, vivant, vivant.shape)
+    dep_ok = depart_g[ou[:, 0], ou[:, 1]]
+    bouge = np.linalg.norm(pts - d0[ou[:, 0], ou[:, 1]], axis=1) * voxel_um
+    # ⚠ CE QUE LA CORRÉLATION PROPOSE, ET CE QUE LE BRAS A PRIS. Le premier borne le second, et
     # les deux sont publiés : une borne sans usage ne dit pas si elle serre.
     borne = float(max(abs(centres[0]), abs(centres[-1]))) * voxel_um if len(centres) else 0.0
-    return dict(grille=neuf, garde=lisible, points=P + t[:, None] * D, directions=D,
+    t_final = champ_t[ou[:, 0], ou[:, 1]]
+    # ⚠⚠ LA RUGOSITÉ DU CHAMP DE DÉCALAGE, bras par bras : c'est la PRÉMISSE du diagnostic — si
+    # la surface ne se froisse pas, « la marche froisse ce qu'elle laisse » est une histoire et
+    # non un fait. Elle est mesurée sur le champ que ce bras a réellement appliqué.
+    from loracle_est_il_atteignable import rugosite  # noqa: PLC0415
+
+    return dict(grille=neuf, garde=lisible, points=pts, directions=D,
                 decalage=t, depart_um=float(np.median(dep_ok)),
                 plancher_um=float(np.median(np.abs(dep_ok - bouge))),
-                glissement_um=float(np.median(np.abs(t))) * voxel_um,
-                glissement_max_um=borne)
+                glissement_um=float(np.nanmedian(np.abs(t_final))) * voxel_um,
+                glissement_max_um=borne,
+                rugosite_vx=rugosite(champ_t, lisible))
+
+
+def sur_les_cellules_communes(a: list[dict], b: list[dict]) -> tuple[list, list, list]:
+    """Les deux séries de médianes, bras par bras, sur les cellules que les DEUX ont gardées.
+
+    ⚠⚠⚠ DEUX MARCHEURS DIVERGENT, DONC LEURS MASQUES DIVERGENT. Comparer leurs médianes
+    publiées reviendrait à comparer deux populations, et une médiane sur moins de cellules
+    n'est pas une médiane meilleure — c'est la faute que ce dépôt a déjà eu à retirer.
+
+    Rend `(médianes de a, médianes de b, nombre de cellules communes)`, tronqué au nombre de
+    bras que les deux ont faits. Un bras sans aucune cellule commune est écarté des trois.
+    """
+    ma, mb, nc = [], [], []
+    for x, y in zip(a, b):
+        cles = np.intersect1d(x["cles"], y["cles"], assume_unique=False)
+        if len(cles) == 0:
+            break
+        ia = np.isin(x["cles"], cles)
+        ib = np.isin(y["cles"], cles)
+        ma.append(round(float(np.median(x["erreurs"][ia])), 1))
+        mb.append(round(float(np.median(y["erreurs"][ib])), 1))
+        nc.append(int(len(cles)))
+    return ma, mb, nc
 
 
 def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
@@ -256,11 +311,19 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
             # peut pas mieux faire que l'écart entre ce qu'il franchit et ce qu'il devait
             # franchir. C'est une borne INFÉRIEURE sur l'erreur, dérivée et non choisie —
             # aucune méthode qui garde la longueur du pas ne descend en dessous.
+            ou_k = np.argwhere(pas["garde"])
             bras.append(dict(bras=k, vers=cible_rang, cellules=int(len(e)),
                              erreur_um=round(float(np.median(e)), 1),
+                             # ⚠⚠⚠ L'ERREUR PAR CELLULE, gardée avec l'INDICE de sa cellule.
+                             # Deux marcheurs divergent, donc leurs masques divergent : sans
+                             # l'indice, un écart apparié comparerait deux médianes prises sur
+                             # deux populations, ce que ce dépôt a déjà eu à retirer une fois.
+                             cles=(ou_k[:, 0] * pas["garde"].shape[1] + ou_k[:, 1]),
+                             erreurs=e,
                              pas_reel_um=round(pas["depart_um"], 1),
                              plancher_um=round(pas["plancher_um"], 1),
                              glissement_um=round(pas["glissement_um"], 1),
+                             rugosite_vx=pas["rugosite_vx"],
                              ou=np.argwhere(pas["garde"]).tolist()))
             grille, garde = pas["grille"], pas["garde"]
         resultats[nom] = bras
@@ -282,8 +345,10 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
             deploye=nom == "raccroche",
             bras_faits=len(bras), bras=[{k: b[k] for k in ("bras", "vers", "cellules",
                                                            "erreur_um", "pas_reel_um",
-                                                           "plancher_um", "glissement_um")}
+                                                           "plancher_um", "glissement_um",
+                                                           "rugosite_vx")}
                                        for b in bras],
+            rugosites_vx=[b["rugosite_vx"] for b in bras],
             erreurs_um=erreurs,
             glissements_um=[b["glissement_um"] for b in bras],
             pas_reels_um=[b["pas_reel_um"] for b in bras],
@@ -319,15 +384,33 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     r["portee_sans_rien_faire"] = rien["portee"]
     r["portee_de_loracle"] = orc["portee"]
     r["portee_du_temoin"] = trouver(TEMOIN)["portee"]
+    lis = trouver(LISSE)
+    r["portee_de_la_nappe_lissee"] = lis["portee"]
+    # ⚠⚠ MÊME POPULATION, DONC APPARIEMENT LÉGITIME : le lissage garde le masque du raccrochage
+    # (une cellule dont le voisinage ne suffit pas garde sa valeur non lissée), donc les deux
+    # colonnes portent sur les mêmes cellules bras par bras.
+    ml, md2, ncl = sur_les_cellules_communes(resultats[LISSE], resultats["raccroche"])
+    r["cellules_communes_lissage_raccrochage"] = ncl
+    r["ecart_du_lissage_au_raccrochage"] = ecart_apparie(ml, md2) if ncl else None
+    r["le_lissage_de_la_nappe_aide"] = bool(
+        r["ecart_du_lissage_au_raccrochage"] and tranche(r["ecart_du_lissage_au_raccrochage"]))
+    ml2, mr2, ncr = sur_les_cellules_communes(resultats[LISSE], resultats["rien"])
+    r["cellules_communes_lissage_pas_normal"] = ncr
+    r["ecart_du_lissage_au_pas_normal"] = ecart_apparie(ml2, mr2) if ncr else None
+    r["le_lissage_bat_le_pas_normal"] = bool(
+        r["ecart_du_lissage_au_pas_normal"] and tranche(r["ecart_du_lissage_au_pas_normal"]))
+    r["le_pas_normal_bat_le_lissage"] = bool(
+        ncr and tranche(ecart_apparie(mr2, ml2)))
     # ⭐⭐⭐ LE VERDICT DU BUT : la marche déployée va-t-elle plus loin que le pas normal seul ?
     r["le_raccrochage_porte_plus_loin"] = bool(dep["portee"] > rien["portee"])
     r["le_raccrochage_porte_plus_loin_que_son_temoin"] = bool(
         dep["portee"] > trouver(TEMOIN)["portee"])
     # ⚠⚠ ET L'ÉCART APPARIÉ BRAS PAR BRAS, sur les bras que les deux ont faits : une portée est
     # un entier, donc elle ne dit rien de la marge. L'écart dit de combien.
-    n = min(len(dep["erreurs_um"]), len(rien["erreurs_um"]))
-    r["ecart_au_pas_normal"] = (ecart_apparie(dep["erreurs_um"][:n], rien["erreurs_um"][:n])
-                                if n else None)
+    md, mr, nc = sur_les_cellules_communes(resultats["raccroche"], resultats["rien"])
+    n = len(nc)
+    r["cellules_communes_par_bras"] = nc
+    r["ecart_au_pas_normal"] = ecart_apparie(md, mr) if n else None
     r["le_raccrochage_bat_le_pas_normal"] = bool(
         r["ecart_au_pas_normal"] and tranche(r["ecart_au_pas_normal"]))
     # ⚠⚠⚠ ET LA QUESTION SYMÉTRIQUE, POSÉE AVEC LE MÊME INSTRUMENT. `tranche` répond « y
@@ -335,8 +418,7 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     # deux se valent » : il dit « pas en faveur du premier ». Renverser l'appariement pose
     # l'autre moitié de la question, sans seuil ajouté et sans nouvel instrument — et sans
     # elle un raccrochage qui coûte se lirait comme un raccrochage qui n'apporte rien.
-    r["ecart_du_pas_normal"] = (ecart_apparie(rien["erreurs_um"][:n], dep["erreurs_um"][:n])
-                                if n else None)
+    r["ecart_du_pas_normal"] = ecart_apparie(mr, md) if n else None
     r["le_pas_normal_bat_le_raccrochage"] = bool(
         r["ecart_du_pas_normal"] and tranche(r["ecart_du_pas_normal"]))
     # ⚠ La couverture perdue en chemin est un fait sur la marche, publié à côté de l'erreur.
@@ -404,6 +486,41 @@ def verifier() -> int:
     v("... et la part de nappe gardée est publiée",
       fab["part_de_nappe_gardee"] is None or 0.0 < fab["part_de_nappe_gardee"] <= 1.0,
       str(fab["part_de_nappe_gardee"]))
+    # ⚠⚠⚠ LES MARCHEURS DIVERGENT, DONC LEURS MASQUES DIVERGENT, et c'est pourquoi chaque écart
+    # apparié publie le nombre de cellules COMMUNES sur lesquelles il est pris. Exiger des
+    # couvertures identiques serait exiger que les marcheurs ne divergent pas — c'est-à-dire
+    # exiger qu'il n'y ait rien à mesurer.
+    v("... chaque écart apparié publie les cellules communes sur lesquelles il est pris",
+      all(isinstance(fab[c], list) and fab[c] and all(x > 0 for x in fab[c])
+          for c in ("cellules_communes_par_bras", "cellules_communes_lissage_raccrochage",
+                    "cellules_communes_lissage_pas_normal")),
+      str(fab["cellules_communes_par_bras"]))
+    # ⚠⚠ ET L'APPARIEMENT NE PREND QUE L'INTERSECTION : un contrôle qui ne ferait que lire les
+    # médianes publiées passerait aussi bien avec deux populations disjointes.
+    a = [dict(cles=np.array([1, 2, 3]), erreurs=np.array([10.0, 20.0, 90.0]))]
+    b = [dict(cles=np.array([2, 3, 4]), erreurs=np.array([21.0, 91.0, 1000.0]))]
+    ma, mb, nc = sur_les_cellules_communes(a, b)
+    v("... et il écarte les cellules qu'un seul des deux a gardées",
+      (ma, mb, nc) == ([55.0], [56.0], [2]), f"{ma} {mb} {nc}")
+    v("... un bras sans aucune cellule commune arrête l'appariement",
+      sur_les_cellules_communes(
+          [dict(cles=np.array([1]), erreurs=np.array([1.0]))],
+          [dict(cles=np.array([9]), erreurs=np.array([1.0]))]) == ([], [], []))
+    # ⚠⚠ LA RUGOSITÉ EST LA PRÉMISSE DU DIAGNOSTIC : « la marche froisse ce qu'elle laisse » est
+    # une histoire tant que le champ de décalage n'est pas mesuré bras après bras. Elle est
+    # publiée pour les marcheurs qui glissent, et nulle pour celui qui ne glisse pas.
+    v("... la rugosité du champ de décalage est publiée bras par bras",
+      all(g == 0.0 for x in fab["lignes"] if x["marcheur"] == "rien" for g in x["rugosites_vx"])
+      and any(g for x in fab["lignes"] if x["deploye"] for g in x["rugosites_vx"]),
+      str({x["marcheur"]: x["rugosites_vx"] for x in fab["lignes"]}))
+    # ⚠ LE CINQUIÈME MARCHEUR N'AJOUTE AUCUN RÉGLAGE : il applique le voisinage déployé à la
+    # NAPPE au lieu du champ de décalage. Son écart au raccrochage est donc apparié cellule à
+    # cellule, et il est publié qu'il aide ou non.
+    v("... le lissage de la nappe est comparé au raccrochage, apparié",
+      fab["ecart_du_lissage_au_raccrochage"] is not None
+      and fab["ecart_du_lissage_au_raccrochage"]["intervalle_um"] is not None,
+      f"portée {fab['portee_de_la_nappe_lissee']} · "
+      + str(fab["ecart_du_lissage_au_raccrochage"]))
     # ⚠⚠⚠ LE GLISSEMENT PUBLIÉ EST CELUI QUE LA CORRÉLATION PROPOSE, jamais la demi-largeur de
     # la ligne : les deux diffèrent de la demi-largeur du gabarit, que la corrélation consomme à
     # chaque bout, et publier la seconde donnerait au raccrochage un pouvoir qu'il n'a pas. Le
@@ -493,6 +610,10 @@ def afficher(r: dict) -> None:
     print(f"{'le corpus':>12} {' '.join(cases)} {r['bras_au_pas_nominal']:>8}  ·")
     print()
     print("* = au-delà de la demi-feuille : la marche est plus près de la MAUVAISE feuille")
+    for x in r["lignes"]:
+        if any(g is not None for g in x["rugosites_vx"]):
+            print(f"{'rugosité ' + x['marcheur']:>24} : "
+                  f"{[g for g in x['rugosites_vx']]}")
     dep_l = next(x for x in r["lignes"] if x["deploye"])
     print(f"glissement : au plus ±{r['glissement_maximal_um']} µm "
           f"({r['glissement_en_demi_feuilles']} demi-feuille) · appliqué bras par bras "
@@ -508,6 +629,12 @@ def afficher(r: dict) -> None:
     print(f"→ le raccrochage porte plus loin que le pas normal : "
           f"{'OUI' if r['le_raccrochage_porte_plus_loin'] else 'NON'} · que son témoin : "
           f"{'OUI' if r['le_raccrochage_porte_plus_loin_que_son_temoin'] else 'NON'}")
+    el = r["ecart_du_lissage_au_raccrochage"]
+    if el:
+        print(f"→ ⭐ la NAPPE lissée entre deux bras : portée {r['portee_de_la_nappe_lissee']} · "
+              f"écart au raccrochage {el['ecart_median_um']:+.1f} µm · "
+              f"{el['pas_ameliores']}/{el['pas']} bras · {el['intervalle_um']} · "
+              f"{'elle AIDE' if r['le_lissage_de_la_nappe_aide'] else 'ne tranche pas'}")
     inv = r["ecart_du_pas_normal"]
     if inv:
         print(f"→ ⚠ et le PAS NORMAL bat-il le raccrochage : "

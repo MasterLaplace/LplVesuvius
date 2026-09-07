@@ -5518,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 4318
+- **lignes** : 4364
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5933,6 +5933,32 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     par qui est compté. (3) **La question est posée dans les DEUX sens** — `tranche` répond « en
     faveur du premier », donc un faux ne dit pas « les deux se valent » ; sans la moitié renversée,
     un raccrochage qui **coûte** se lirait comme un raccrochage qui **n'apporte rien**.
+  - ⭐⭐⭐ **LA PRÉMISSE EST MESURÉE** : la rugosité du champ de décalage — de combien une cellule
+    s'écarte de la médiane de son voisinage — **croît** bras après bras pour le chemin déployé
+    (**0,34 · 0,57 · 0,81 · 1,48 · 2,01** voxels sur les cinq premiers), elle est **nulle partout**
+    pour le pas normal seul qui ne glisse pas, et reste **entre 0 et 1** pour la borne. Ce dernier
+    point redit sur une marche ce que la tranche de l'oracle avait mesuré sur un pas : le champ
+    qu'une méthode parfaite produirait est **plat**.
+  - ⭐⭐⭐ **ET LE REMÈDE REPREND PRESQUE TOUT, SANS UN RÉGLAGE DE PLUS.** Sept tranches ont lissé le
+    champ de **décalage** d'un pas ; ce qu'une marche abîme est la **nappe**, et personne n'avait
+    lissé celle-là entre deux bras. Le cinquième marcheur applique à la surface prédite le
+    voisinage **déjà déployé** (même demi-largeur, même règle de majorité, valeur non lissée là où
+    le voisinage ne suffit pas). Portée **2 → 3**, écart au raccrochage **-65.9 µm** sur
+    7/8 bras, intervalle [-85.9, -45.9] — **il tranche** ; et face au pas normal seul, **+3.3 µm** sur
+    4/8 bras, intervalle [-0.6, 7.2] — **aucun des deux sens ne tranche**, donc retour à **parité**.
+    ⚠ Ce n'est pas un gain : c'est la récupération d'une perte.
+  - ⚠⚠ **L'appariement a été refait pour que ce chiffre veuille dire quelque chose.** Deux
+    marcheurs divergent, donc leurs masques divergent — le marcheur lissé garde **841** cellules au
+    dernier bras contre 864 pour le raccrochage. Comparer les deux médianes publiées serait
+    comparer deux **populations**. Chaque écart apparié est donc pris sur l'**intersection**,
+    cellule par cellule, et publie combien de cellules elle contient. ⚠ Un contrôle vérifie que
+    l'intersection écarte bien ce qu'un seul des deux a gardé : un contrôle qui relirait seulement
+    les médianes passerait aussi bien avec deux populations disjointes.
+  - ⚠ **Ce que la mesure NE dit pas** : le lien entre la rugosité qui monte et l'erreur qui explose
+    est **plausible et non démontré**. La rugosité publiée pour le marcheur lissé reste proche de
+    celle du raccrochage, parce que le champ mesuré est le décalage du **snap**, en amont du
+    lissage — donc ce que le lissage répare se voit dans l'**erreur** et pas dans ce champ-là.
+    Mesurer la rugosité de la **surface** est un instrument de plus, pas une lecture de celui-ci.
   - ⭐⭐⭐ **La première piste neuve depuis sept tranches.** *« Quelle méthode fait le meilleur
     pas ? »* et *« quelle méthode va le plus loin ? »* ont des réponses **différentes** sur la même
     donnée. Trois conséquences, dans l'ordre où elles se testent : débrancher le raccrochage au
@@ -6537,8 +6563,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 3626 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 4318 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 3672 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 4364 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

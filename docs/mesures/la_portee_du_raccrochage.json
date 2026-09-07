@@ -29,6 +29,7 @@
   "marcheurs": [
     "rien",
     "raccroche",
+    "raccroche_lisse",
     "melange",
     "oracle"
   ],
@@ -47,7 +48,8 @@
           "erreur_um": 44.0,
           "pas_reel_um": 170.7,
           "plancher_um": 37.5,
-          "glissement_um": 0.0
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0
         },
         {
           "bras": 2,
@@ -56,7 +58,8 @@
           "erreur_um": 50.1,
           "pas_reel_um": 147.6,
           "plancher_um": 44.8,
-          "glissement_um": 0.0
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0
         },
         {
           "bras": 3,
@@ -65,7 +68,8 @@
           "erreur_um": 49.5,
           "pas_reel_um": 111.8,
           "plancher_um": 46.2,
-          "glissement_um": 0.0
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0
         },
         {
           "bras": 4,
@@ -74,7 +78,8 @@
           "erreur_um": 67.2,
           "pas_reel_um": 89.2,
           "plancher_um": 62.0,
-          "glissement_um": 0.0
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0
         },
         {
           "bras": 5,
@@ -83,7 +88,8 @@
           "erreur_um": 72.2,
           "pas_reel_um": 92.4,
           "plancher_um": 62.4,
-          "glissement_um": 0.0
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0
         },
         {
           "bras": 6,
@@ -92,7 +98,8 @@
           "erreur_um": 114.2,
           "pas_reel_um": 80.3,
           "plancher_um": 76.5,
-          "glissement_um": 0.0
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0
         },
         {
           "bras": 7,
@@ -101,7 +108,8 @@
           "erreur_um": 1016.5,
           "pas_reel_um": 1016.3,
           "plancher_um": 880.8,
-          "glissement_um": 0.0
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0
         },
         {
           "bras": 8,
@@ -110,8 +118,19 @@
           "erreur_um": 177.3,
           "pas_reel_um": 145.6,
           "plancher_um": 74.9,
-          "glissement_um": 0.0
+          "glissement_um": 0.0,
+          "rugosite_vx": 0.0
         }
+      ],
+      "rugosites_vx": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
       ],
       "erreurs_um": [
         44.0,
@@ -179,7 +198,8 @@
           "erreur_um": 34.7,
           "pas_reel_um": 170.7,
           "plancher_um": 27.0,
-          "glissement_um": 21.7
+          "glissement_um": 21.7,
+          "rugosite_vx": 0.34
         },
         {
           "bras": 2,
@@ -188,7 +208,8 @@
           "erreur_um": 44.3,
           "pas_reel_um": 141.5,
           "plancher_um": 35.6,
-          "glissement_um": 24.5
+          "glissement_um": 24.5,
+          "rugosite_vx": 0.57
         },
         {
           "bras": 3,
@@ -197,7 +218,8 @@
           "erreur_um": 71.8,
           "pas_reel_um": 129.6,
           "plancher_um": 50.9,
-          "glissement_um": 18.6
+          "glissement_um": 18.6,
+          "rugosite_vx": 0.81
         },
         {
           "bras": 4,
@@ -206,7 +228,8 @@
           "erreur_um": 120.4,
           "pas_reel_um": 126.9,
           "plancher_um": 75.8,
-          "glissement_um": 19.4
+          "glissement_um": 19.4,
+          "rugosite_vx": 1.48
         },
         {
           "bras": 5,
@@ -215,7 +238,8 @@
           "erreur_um": 207.2,
           "pas_reel_um": 194.0,
           "plancher_um": 107.7,
-          "glissement_um": 17.6
+          "glissement_um": 17.6,
+          "rugosite_vx": 2.01
         },
         {
           "bras": 6,
@@ -224,7 +248,8 @@
           "erreur_um": 274.6,
           "pas_reel_um": 268.4,
           "plancher_um": 150.4,
-          "glissement_um": 16.5
+          "glissement_um": 16.5,
+          "rugosite_vx": 1.95
         },
         {
           "bras": 7,
@@ -233,7 +258,8 @@
           "erreur_um": 1067.2,
           "pas_reel_um": 1064.8,
           "plancher_um": 931.6,
-          "glissement_um": 14.7
+          "glissement_um": 14.7,
+          "rugosite_vx": 1.79
         },
         {
           "bras": 8,
@@ -242,8 +268,19 @@
           "erreur_um": 499.5,
           "pas_reel_um": 505.1,
           "plancher_um": 368.9,
-          "glissement_um": 14.2
+          "glissement_um": 14.2,
+          "rugosite_vx": 1.84
         }
+      ],
+      "rugosites_vx": [
+        0.34,
+        0.57,
+        0.81,
+        1.48,
+        2.01,
+        1.95,
+        1.79,
+        1.84
       ],
       "erreurs_um": [
         34.7,
@@ -298,6 +335,156 @@
       "portee": 2
     },
     {
+      "marcheur": "raccroche_lisse",
+      "borne": false,
+      "temoin": false,
+      "deploye": false,
+      "bras_faits": 8,
+      "bras": [
+        {
+          "bras": 1,
+          "vers": 5,
+          "cellules": 1805,
+          "erreur_um": 36.6,
+          "pas_reel_um": 170.7,
+          "plancher_um": 30.0,
+          "glissement_um": 21.7,
+          "rugosite_vx": 0.34
+        },
+        {
+          "bras": 2,
+          "vers": 6,
+          "cellules": 1647,
+          "erreur_um": 42.8,
+          "pas_reel_um": 143.7,
+          "plancher_um": 34.2,
+          "glissement_um": 24.3,
+          "rugosite_vx": 0.48
+        },
+        {
+          "bras": 3,
+          "vers": 7,
+          "cellules": 1498,
+          "erreur_um": 48.9,
+          "pas_reel_um": 126.9,
+          "plancher_um": 45.1,
+          "glissement_um": 17.8,
+          "rugosite_vx": 0.83
+        },
+        {
+          "bras": 4,
+          "vers": 8,
+          "cellules": 1356,
+          "erreur_um": 74.4,
+          "pas_reel_um": 110.8,
+          "plancher_um": 61.2,
+          "glissement_um": 20.2,
+          "rugosite_vx": 1.06
+        },
+        {
+          "bras": 5,
+          "vers": 9,
+          "cellules": 1218,
+          "erreur_um": 120.9,
+          "pas_reel_um": 129.0,
+          "plancher_um": 80.6,
+          "glissement_um": 15.7,
+          "rugosite_vx": 1.78
+        },
+        {
+          "bras": 6,
+          "vers": 10,
+          "cellules": 1083,
+          "erreur_um": 160.8,
+          "pas_reel_um": 134.2,
+          "plancher_um": 79.8,
+          "glissement_um": 16.0,
+          "rugosite_vx": 1.22
+        },
+        {
+          "bras": 7,
+          "vers": 11,
+          "cellules": 956,
+          "erreur_um": 940.7,
+          "pas_reel_um": 950.0,
+          "plancher_um": 848.5,
+          "glissement_um": 15.1,
+          "rugosite_vx": 2.0
+        },
+        {
+          "bras": 8,
+          "vers": 12,
+          "cellules": 841,
+          "erreur_um": 354.7,
+          "pas_reel_um": 359.2,
+          "plancher_um": 262.8,
+          "glissement_um": 15.2,
+          "rugosite_vx": 1.75
+        }
+      ],
+      "rugosites_vx": [
+        0.34,
+        0.48,
+        0.83,
+        1.06,
+        1.78,
+        1.22,
+        2.0,
+        1.75
+      ],
+      "erreurs_um": [
+        36.6,
+        42.8,
+        48.9,
+        74.4,
+        120.9,
+        160.8,
+        940.7,
+        354.7
+      ],
+      "glissements_um": [
+        21.7,
+        24.3,
+        17.8,
+        20.2,
+        15.7,
+        16.0,
+        15.1,
+        15.2
+      ],
+      "pas_reels_um": [
+        170.7,
+        143.7,
+        126.9,
+        110.8,
+        129.0,
+        134.2,
+        950.0,
+        359.2
+      ],
+      "planchers_um": [
+        30.0,
+        34.2,
+        45.1,
+        61.2,
+        80.6,
+        79.8,
+        848.5,
+        262.8
+      ],
+      "cellules_par_bras": [
+        1805,
+        1647,
+        1498,
+        1356,
+        1218,
+        1083,
+        956,
+        841
+      ],
+      "portee": 3
+    },
+    {
       "marcheur": "melange",
       "borne": false,
       "temoin": true,
@@ -311,7 +498,8 @@
           "erreur_um": 62.4,
           "pas_reel_um": 170.7,
           "plancher_um": 58.8,
-          "glissement_um": 28.0
+          "glissement_um": 28.0,
+          "rugosite_vx": 0.57
         },
         {
           "bras": 2,
@@ -320,7 +508,8 @@
           "erreur_um": 64.9,
           "pas_reel_um": 164.6,
           "plancher_um": 57.3,
-          "glissement_um": 17.2
+          "glissement_um": 17.2,
+          "rugosite_vx": 1.13
         },
         {
           "bras": 3,
@@ -329,7 +518,8 @@
           "erreur_um": 92.6,
           "pas_reel_um": 130.4,
           "plancher_um": 59.8,
-          "glissement_um": 17.5
+          "glissement_um": 17.5,
+          "rugosite_vx": 1.58
         },
         {
           "bras": 4,
@@ -338,7 +528,8 @@
           "erreur_um": 149.4,
           "pas_reel_um": 175.2,
           "plancher_um": 80.1,
-          "glissement_um": 16.2
+          "glissement_um": 16.2,
+          "rugosite_vx": 1.7
         },
         {
           "bras": 5,
@@ -347,7 +538,8 @@
           "erreur_um": 267.5,
           "pas_reel_um": 256.3,
           "plancher_um": 131.3,
-          "glissement_um": 15.1
+          "glissement_um": 15.1,
+          "rugosite_vx": 1.56
         },
         {
           "bras": 6,
@@ -356,7 +548,8 @@
           "erreur_um": 334.2,
           "pas_reel_um": 346.9,
           "plancher_um": 213.4,
-          "glissement_um": 14.9
+          "glissement_um": 14.9,
+          "rugosite_vx": 1.64
         },
         {
           "bras": 7,
@@ -365,7 +558,8 @@
           "erreur_um": 1141.7,
           "pas_reel_um": 1126.0,
           "plancher_um": 1006.4,
-          "glissement_um": 14.7
+          "glissement_um": 14.7,
+          "rugosite_vx": 1.56
         },
         {
           "bras": 8,
@@ -374,8 +568,19 @@
           "erreur_um": 597.5,
           "pas_reel_um": 613.6,
           "plancher_um": 481.6,
-          "glissement_um": 15.1
+          "glissement_um": 15.1,
+          "rugosite_vx": 2.08
         }
+      ],
+      "rugosites_vx": [
+        0.57,
+        1.13,
+        1.58,
+        1.7,
+        1.56,
+        1.64,
+        1.56,
+        2.08
       ],
       "erreurs_um": [
         62.4,
@@ -443,7 +648,8 @@
           "erreur_um": 19.9,
           "pas_reel_um": 170.7,
           "plancher_um": 3.5,
-          "glissement_um": 40.8
+          "glissement_um": 40.8,
+          "rugosite_vx": 0.0
         },
         {
           "bras": 2,
@@ -452,7 +658,8 @@
           "erreur_um": 17.5,
           "pas_reel_um": 115.2,
           "plancher_um": 1.9,
-          "glissement_um": 30.1
+          "glissement_um": 30.1,
+          "rugosite_vx": 0.0
         },
         {
           "bras": 3,
@@ -461,7 +668,8 @@
           "erreur_um": 19.0,
           "pas_reel_um": 101.0,
           "plancher_um": 3.1,
-          "glissement_um": 34.5
+          "glissement_um": 34.5,
+          "rugosite_vx": 0.0
         },
         {
           "bras": 4,
@@ -470,7 +678,8 @@
           "erreur_um": 17.9,
           "pas_reel_um": 114.5,
           "plancher_um": 3.0,
-          "glissement_um": 30.1
+          "glissement_um": 30.1,
+          "rugosite_vx": 1.0
         },
         {
           "bras": 5,
@@ -479,7 +688,8 @@
           "erreur_um": 19.4,
           "pas_reel_um": 111.9,
           "plancher_um": 3.2,
-          "glissement_um": 36.7
+          "glissement_um": 36.7,
+          "rugosite_vx": 1.0
         },
         {
           "bras": 6,
@@ -488,7 +698,8 @@
           "erreur_um": 22.1,
           "pas_reel_um": 88.2,
           "plancher_um": 12.3,
-          "glissement_um": 67.4
+          "glissement_um": 67.4,
+          "rugosite_vx": 0.0
         },
         {
           "bras": 7,
@@ -497,7 +708,8 @@
           "erreur_um": 849.0,
           "pas_reel_um": 904.6,
           "plancher_um": 734.7,
-          "glissement_um": 67.4
+          "glissement_um": 67.4,
+          "rugosite_vx": 0.0
         },
         {
           "bras": 8,
@@ -506,8 +718,19 @@
           "erreur_um": 105.4,
           "pas_reel_um": 136.1,
           "plancher_um": 49.4,
-          "glissement_um": 67.4
+          "glissement_um": 67.4,
+          "rugosite_vx": 1.0
         }
+      ],
+      "rugosites_vx": [
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0
       ],
       "erreurs_um": [
         19.9,
@@ -631,7 +854,7 @@
   "cout": {
     "blocs_telecharges": 0,
     "mebioctets": 0.0,
-    "blocs_en_memoire": 428,
+    "blocs_en_memoire": 463,
     "voxels_absents": 0,
     "reprises_reseau": 0
   },
@@ -643,8 +866,60 @@
   "portee_sans_rien_faire": 4,
   "portee_de_loracle": 6,
   "portee_du_temoin": 2,
+  "portee_de_la_nappe_lissee": 3,
+  "cellules_communes_lissage_raccrochage": [
+    1805,
+    1647,
+    1498,
+    1356,
+    1218,
+    1083,
+    956,
+    841
+  ],
+  "ecart_du_lissage_au_raccrochage": {
+    "ecart_median_um": -65.9,
+    "intervalle_um": [
+      -85.9,
+      -45.9
+    ],
+    "pas_ameliores": 7,
+    "pas": 8
+  },
+  "le_lissage_de_la_nappe_aide": true,
+  "cellules_communes_lissage_pas_normal": [
+    1805,
+    1647,
+    1498,
+    1356,
+    1218,
+    1083,
+    956,
+    841
+  ],
+  "ecart_du_lissage_au_pas_normal": {
+    "ecart_median_um": 3.3,
+    "intervalle_um": [
+      -0.6,
+      7.2
+    ],
+    "pas_ameliores": 4,
+    "pas": 8
+  },
+  "le_lissage_bat_le_pas_normal": false,
+  "le_pas_normal_bat_le_lissage": false,
   "le_raccrochage_porte_plus_loin": false,
   "le_raccrochage_porte_plus_loin_que_son_temoin": false,
+  "cellules_communes_par_bras": [
+    1805,
+    1647,
+    1498,
+    1357,
+    1223,
+    1096,
+    977,
+    864
+  ],
   "ecart_au_pas_normal": {
     "ecart_median_um": 52.0,
     "intervalle_um": [
