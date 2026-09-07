@@ -51,8 +51,15 @@ from lecart_apparie import ecart_apparie, tranche  # noqa: E402
 # ⚠ Les marcheurs comparés. « rien » est le pas normal seul — la référence contre laquelle tout
 # se juge ; « oracle » regarde la cible une fois par cellule et par bras, donc c'est une BORNE
 # et jamais une méthode ; « melange » est le témoin, même géométrie et forme détruite.
-MARCHEURS = ("rien", "raccroche", "raccroche_lisse", "melange", "oracle")
+MARCHEURS = ("rien", "raccroche", "raccroche_lisse", "sortie_raccrochee", "melange", "oracle")
 LISSE = "raccroche_lisse"
+# ⭐⭐⭐ LE MARCHEUR QUI SÉPARE L'ÉTAT DE LA SORTIE. Sept tranches ont mesuré qu'un raccrochage
+# gagne quelques µm sur UN pas ; la tranche de la marche mesure qu'il en coûte cinquante sur
+# huit, parce que ce qu'il corrige devient la surface où le bras suivant estime ses normales.
+# Les deux faits tiennent ensemble dès qu'on cesse de RÉINJECTER la correction : la marche
+# avance au pas normal, et le raccrochage n'est appliqué qu'à ce qui est PUBLIÉ. C'est la
+# séparation ordinaire entre l'état d'un système et sa sortie, et elle n'ajoute aucun réglage.
+SORTIE = "sortie_raccrochee"
 BORNE = "oracle"
 TEMOIN = "melange"
 
@@ -302,9 +309,20 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
         bras = []
         for k, cible_rang in enumerate(atteignables, start=1):
             cible = nuages[cible_rang]
-            pas = marcher(nom, grille, garde, cible, vol, reglage, rng)
-            if pas is None:
-                break
+            # ⭐⭐⭐ L'ÉTAT ET LA SORTIE SONT DEUX CHOSES. Pour ce marcheur, l'état avance au pas
+            # normal — donc rien ne se compose — et le raccrochage est lu SUR CE MÊME DÉPART
+            # sans jamais être réinjecté. Ce qui est jugé est la sortie ; ce qui est porté au
+            # bras suivant est l'état. Confondre les deux est exactement ce que la tranche de
+            # la marche a mesuré comme coûteux.
+            if nom == SORTIE:
+                etat = marcher("rien", grille, garde, cible, vol, reglage, rng)
+                pas = marcher("raccroche", grille, garde, cible, vol, reglage, rng)
+                if etat is None or pas is None:
+                    break
+            else:
+                etat = pas = marcher(nom, grille, garde, cible, vol, reglage, rng)
+                if pas is None:
+                    break
             glissement_max = max(glissement_max, pas["glissement_max_um"])
             e = distance_a(pas["points"], cible, voxel_um)
             # ⚠⚠ LE PLANCHER DU BRAS : un pas de longueur nominale le long de la normale ne
@@ -325,7 +343,7 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
                              glissement_um=round(pas["glissement_um"], 1),
                              rugosite_vx=pas["rugosite_vx"],
                              ou=np.argwhere(pas["garde"]).tolist()))
-            grille, garde = pas["grille"], pas["garde"]
+            grille, garde = etat["grille"], etat["garde"]
         resultats[nom] = bras
 
     if not resultats["rien"]:
@@ -394,6 +412,17 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     r["ecart_du_lissage_au_raccrochage"] = ecart_apparie(ml, md2) if ncl else None
     r["le_lissage_de_la_nappe_aide"] = bool(
         r["ecart_du_lissage_au_raccrochage"] and tranche(r["ecart_du_lissage_au_raccrochage"]))
+    so = trouver(SORTIE)
+    r["portee_de_la_sortie_raccrochee"] = so["portee"]
+    ms, mr3, ncs = sur_les_cellules_communes(resultats[SORTIE], resultats["rien"])
+    r["cellules_communes_sortie_pas_normal"] = ncs
+    r["ecart_de_la_sortie_au_pas_normal"] = ecart_apparie(ms, mr3) if ncs else None
+    # ⭐⭐⭐ LE VERDICT QUE CETTE TRANCHE POSE : séparer l'état de la sortie fait-il mieux que ne
+    # rien faire, sur une marche ? Les deux sens sont publiés, comme partout ailleurs ici.
+    r["la_sortie_raccrochee_bat_le_pas_normal"] = bool(
+        r["ecart_de_la_sortie_au_pas_normal"] and tranche(r["ecart_de_la_sortie_au_pas_normal"]))
+    r["le_pas_normal_bat_la_sortie_raccrochee"] = bool(
+        ncs and tranche(ecart_apparie(mr3, ms)))
     ml2, mr2, ncr = sur_les_cellules_communes(resultats[LISSE], resultats["rien"])
     r["cellules_communes_lissage_pas_normal"] = ncr
     r["ecart_du_lissage_au_pas_normal"] = ecart_apparie(ml2, mr2) if ncr else None
@@ -513,6 +542,22 @@ def verifier() -> int:
       all(g == 0.0 for x in fab["lignes"] if x["marcheur"] == "rien" for g in x["rugosites_vx"])
       and any(g for x in fab["lignes"] if x["deploye"] for g in x["rugosites_vx"]),
       str({x["marcheur"]: x["rugosites_vx"] for x in fab["lignes"]}))
+    # ⭐⭐⭐ L'ÉTAT ET LA SORTIE SONT DEUX CHOSES, et le contrôle porte sur la seule propriété qui
+    # rend ce marcheur différent : sa COUVERTURE est celle du raccrochage (c'est lui qui est
+    # publié) tandis que ce qu'il porte au bras suivant est le pas normal. Si son état était
+    # raccroché, ses erreurs égaleraient celles du raccrochage et le marcheur ne mesurerait rien.
+    so_ = next(x for x in fab["lignes"] if x["marcheur"] == "sortie_raccrochee")
+    ra_ = next(x for x in fab["lignes"] if x["marcheur"] == "raccroche")
+    ri_ = next(x for x in fab["lignes"] if x["marcheur"] == "rien")
+    v("... la sortie raccrochée a le PREMIER bras du raccrochage et diverge ensuite",
+      bool(so_["erreurs_um"]) and so_["erreurs_um"][0] == ra_["erreurs_um"][0]
+      and (len(so_["erreurs_um"]) < 2 or so_["erreurs_um"] != ra_["erreurs_um"]),
+      f"sortie {so_['erreurs_um']} · raccroche {ra_['erreurs_um']} · rien {ri_['erreurs_um']}")
+    v("... et son écart au pas normal est apparié, avec son intervalle",
+      fab["ecart_de_la_sortie_au_pas_normal"] is not None
+      and fab["ecart_de_la_sortie_au_pas_normal"]["intervalle_um"] is not None,
+      f"portée {fab['portee_de_la_sortie_raccrochee']} · "
+      + str(fab["ecart_de_la_sortie_au_pas_normal"]))
     # ⚠ LE CINQUIÈME MARCHEUR N'AJOUTE AUCUN RÉGLAGE : il applique le voisinage déployé à la
     # NAPPE au lieu du champ de décalage. Son écart au raccrochage est donc apparié cellule à
     # cellule, et il est publié qu'il aide ou non.
@@ -629,6 +674,13 @@ def afficher(r: dict) -> None:
     print(f"→ le raccrochage porte plus loin que le pas normal : "
           f"{'OUI' if r['le_raccrochage_porte_plus_loin'] else 'NON'} · que son témoin : "
           f"{'OUI' if r['le_raccrochage_porte_plus_loin_que_son_temoin'] else 'NON'}")
+    es = r["ecart_de_la_sortie_au_pas_normal"]
+    if es:
+        print(f"→ ⭐ l'ÉTAT au pas normal, la SORTIE raccrochée : portée "
+              f"{r['portee_de_la_sortie_raccrochee']} · écart au pas normal "
+              f"{es['ecart_median_um']:+.1f} µm · {es['pas_ameliores']}/{es['pas']} bras · "
+              f"{es['intervalle_um']} · "
+              f"{'elle GAGNE' if r['la_sortie_raccrochee_bat_le_pas_normal'] else 'ne tranche pas'}")
     el = r["ecart_du_lissage_au_raccrochage"]
     if el:
         print(f"→ ⭐ la NAPPE lissée entre deux bras : portée {r['portee_de_la_nappe_lissee']} · "

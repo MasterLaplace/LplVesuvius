@@ -3486,6 +3486,7 @@ sur une erreur.
 | pas normal seul | 44,0 | 50,1 | 49,5 | 67,2 | 72,2\* | 114,2\* | 1016,5\* | 177,3\* | **4** |
 | ⭐ raccrochage déployé | 34,7 | 44,3 | 71,8\* | 120,4\* | 207,2\* | 274,6\* | 1067,2\* | 499,5\* | **2** |
 | ⭐ **+ nappe lissée entre deux bras** | 36,6 | 42,8 | 48,9 | 74,4\* | 120,9\* | 160,8\* | 940,7\* | 354,7\* | **3** |
+| ⭐⭐ **état au pas normal, sortie raccrochée** | 34,7 | 52,0 | 56,1 | 66,1 | 79,5\* | 110,6\* | 1015,8\* | 173,2\* | **4** |
 | témoin mélangé | 62,4 | 64,9 | 92,6\* | 149,4\* | 267,5\* | 334,2\* | 1141,7\* | 597,5\* | 2 |
 | ⛔ la borne | 19,9 | 17,5 | 19,0 | 17,9 | 19,4 | 22,1 | 849,0\* | 105,4\* | **6** |
 | *ce que le corpus demande* | *170,0* | *119,5* | *100,6* | *120,0* | *137,6* | *89,2* | ***1000,6*** | *76,7* | *6* |
@@ -3568,12 +3569,47 @@ cellules elle contient**. ⚠ Un contrôle vérifie que l'intersection écarte b
 seul des deux a gardées — un contrôle qui ne relirait que les médianes passerait aussi bien avec
 deux populations disjointes.
 
-⚠ **Ce que la mesure ne dit PAS**, et il faut le dire plutôt que de le combler : le lien entre la
-rugosité qui monte et l'erreur qui explose est **plausible et non démontré**. La rugosité publiée
+⚠ **Ce que cette mesure-là ne disait PAS** — et la suivante l'a démontré, voir plus bas : le lien
+entre la rugosité qui monte et l'erreur qui explose était **plausible et non démontré**. La rugosité publiée
 pour le marcheur lissé reste proche de celle du raccrochage (le champ mesuré est le décalage du
 **snap**, en amont du lissage), donc ce que le lissage répare est visible dans l'**erreur** et pas
 dans ce champ-là. Mesurer la rugosité de la **surface** est un instrument de plus, pas une lecture
 de celui-ci.
+
+##### ⭐⭐⭐ SÉPARER L'ÉTAT DE LA SORTIE : le premier marcheur aveugle à battre le pas normal
+
+⚠⚠⚠ **Le raisonnement, et il tient en une phrase.** Sept tranches mesurent qu'un raccrochage gagne
+quelques µm sur **un** pas ; la tranche de la marche mesure qu'il en **coûte cinquante** sur huit,
+parce que ce qu'il corrige devient la surface où le bras suivant estime ses normales. Les deux
+faits tiennent ensemble dès qu'on cesse de **RÉINJECTER** la correction : la marche avance au pas
+normal — donc rien ne se compose — et le raccrochage n'est appliqué qu'à ce qui est **PUBLIÉ**.
+C'est la séparation ordinaire entre l'**état** d'un système et sa **sortie**, et elle n'ajoute
+aucun réglage.
+
+> ⭐⭐⭐ **Il gagne, et il tranche.** Portée **4**, et l'écart apparié au pas normal seul vaut
+> **-0.9 µm** sur **5/8 bras**, intervalle **[-1.1, -0.7]** : médiane négative, majorité de bras
+> améliorés, intervalle entièrement négatif. C'est le **premier marcheur aveugle** de toute la
+> campagne à battre le pas normal **sur une marche**.
+
+⚠⚠ **Et il démontre le mécanisme que la tranche précédente disait plausible.** Le **MÊME**
+raccrochage, lu sur la surface lisse du pas normal, produit un champ de décalage **lisse**
+(0.34 · 0.46 · 0.56 · 0.71 · 0.92) là où, lu sur sa propre prédiction, il en produit un **rugueux** (0.34 · 0.57 · 0.81 · 1.48 · 2.01). La rugosité du champ
+n'est donc **pas une propriété du raccrochage** : elle est **HÉRITÉE** de la surface sur laquelle
+il lit. Le contrôle porte sur la comparaison des deux séries, pas sur un seuil.
+
+⚠ **Ce que ça ne fait pas, et il faut le dire.** La portée reste à **4** : le bras 5 échoue
+toujours, à 79,5 µm pour un seuil de 67,75. Le pas normal seul y lit 72,2, donc il manquait
+**4,5 µm** et ce marcheur en gagne **0,9**. Le gain est **constant** — c'est ce que l'intervalle
+dit — mais il est **cinq fois trop petit** pour sauver un bras. Un gain qui tranche et une portée
+qui bouge sont deux choses différentes, et publier la première en laissant croire la seconde
+serait la faute que ce registre corrige en boucle.
+
+> ⭐⭐ **L'état des lieux de la marche, après trois marcheurs neufs.** Le corpus autorise **6** bras
+> et la borne les prend tous. Le pas normal seul en fait **4**, le raccrochage déployé **2**, le
+> lissage de la nappe **3**, et la séparation état/sortie **4 avec un gain qui tranche**. Ce qui
+> reste entre 4 et 6 n'est donc plus une question de *lecture* — les sept portes de la lecture sont
+> fermées et la borne, qui lit parfaitement, ne fait pas mieux que 6 non plus. C'est une question
+> de **propagation** : ce que la marche transporte d'un bras au suivant.
 
 ##### ⚠⚠ Ce que le corpus demande, et pourquoi il fallait le mesurer à part
 

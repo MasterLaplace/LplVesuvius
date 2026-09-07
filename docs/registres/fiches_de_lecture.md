@@ -5518,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 4364
+- **lignes** : 4400
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -5954,11 +5954,35 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     cellule par cellule, et publie combien de cellules elle contient. ⚠ Un contrôle vérifie que
     l'intersection écarte bien ce qu'un seul des deux a gardé : un contrôle qui relirait seulement
     les médianes passerait aussi bien avec deux populations disjointes.
-  - ⚠ **Ce que la mesure NE dit pas** : le lien entre la rugosité qui monte et l'erreur qui explose
-    est **plausible et non démontré**. La rugosité publiée pour le marcheur lissé reste proche de
+  - ⚠ **Ce que cette mesure-là NE disait pas** — démontré depuis, voir la ligne suivante : le lien
+    entre la rugosité qui monte et l'erreur qui explose était **plausible et non démontré**. La rugosité publiée pour le marcheur lissé reste proche de
     celle du raccrochage, parce que le champ mesuré est le décalage du **snap**, en amont du
     lissage — donc ce que le lissage répare se voit dans l'**erreur** et pas dans ce champ-là.
     Mesurer la rugosité de la **surface** est un instrument de plus, pas une lecture de celui-ci.
+  - ⭐⭐⭐ **SÉPARER L'ÉTAT DE LA SORTIE : le premier marcheur aveugle à battre le pas normal sur
+    une marche.** Le raisonnement tient en une phrase — sept tranches mesurent qu'un raccrochage
+    gagne quelques µm sur **un** pas, la marche mesure qu'il en coûte cinquante sur huit, et les
+    deux tiennent ensemble dès qu'on cesse de **réinjecter** la correction. La marche avance donc
+    au pas normal (rien ne se compose) et le raccrochage n'est appliqué qu'à ce qui est **publié**.
+    C'est la séparation ordinaire entre l'**état** d'un système et sa **sortie**, et elle n'ajoute
+    aucun réglage. Portée **4**, écart apparié au pas normal **-0.9 µm** sur 5/8 bras,
+    intervalle [-1.1, -0.7] — **il tranche**.
+  - ⚠⚠ **ET IL DÉMONTRE LE MÉCANISME.** Le **même** raccrochage, lu sur la surface lisse du pas
+    normal, produit un champ de décalage **lisse** (0.34 · 0.46 · 0.56 · 0.71 · 0.92) là où, lu sur sa propre prédiction, il en
+    produit un **rugueux** (0.34 · 0.57 · 0.81 · 1.48 · 2.01). La rugosité du champ n'est donc **pas une propriété du
+    raccrochage** : elle est **héritée** de la surface sur laquelle il lit. Le contrôle compare les
+    deux séries, sans seuil.
+  - ⚠ **Ce que ça ne fait PAS** : la portée reste à **4**. Le bras 5 échoue toujours, à 79,5 µm
+    pour un seuil de 67,75 ; le pas normal seul y lit 72,2, donc il manquait **4,5 µm** et ce
+    marcheur en gagne **0,9**. Le gain est constant — c'est ce que dit l'intervalle — et **cinq
+    fois trop petit** pour sauver un bras. Un gain qui tranche et une portée qui bouge sont deux
+    choses différentes.
+  - ⭐⭐ **État des lieux de la marche, après trois marcheurs neufs** : le corpus autorise **6** bras
+    et la borne les prend tous ; pas normal seul **4**, raccrochage déployé **2**, nappe lissée
+    **3**, séparation état/sortie **4 avec un gain qui tranche**. Ce qui reste entre 4 et 6 n'est
+    donc plus une question de **lecture** — les sept portes sont fermées, et la borne, qui lit
+    parfaitement, ne dépasse pas 6 non plus. C'est une question de **propagation** : ce que la
+    marche transporte d'un bras au suivant.
   - ⭐⭐⭐ **La première piste neuve depuis sept tranches.** *« Quelle méthode fait le meilleur
     pas ? »* et *« quelle méthode va le plus loin ? »* ont des réponses **différentes** sur la même
     donnée. Trois conséquences, dans l'ordre où elles se testent : débrancher le raccrochage au
@@ -6563,8 +6587,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 3672 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 4364 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 3708 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 4400 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

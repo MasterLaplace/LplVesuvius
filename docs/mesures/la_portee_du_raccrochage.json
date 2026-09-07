@@ -30,6 +30,7 @@
     "rien",
     "raccroche",
     "raccroche_lisse",
+    "sortie_raccrochee",
     "melange",
     "oracle"
   ],
@@ -485,6 +486,156 @@
       "portee": 3
     },
     {
+      "marcheur": "sortie_raccrochee",
+      "borne": false,
+      "temoin": false,
+      "deploye": false,
+      "bras_faits": 8,
+      "bras": [
+        {
+          "bras": 1,
+          "vers": 5,
+          "cellules": 1805,
+          "erreur_um": 34.7,
+          "pas_reel_um": 170.7,
+          "plancher_um": 27.0,
+          "glissement_um": 21.7,
+          "rugosite_vx": 0.34
+        },
+        {
+          "bras": 2,
+          "vers": 6,
+          "cellules": 1647,
+          "erreur_um": 52.0,
+          "pas_reel_um": 147.6,
+          "plancher_um": 45.8,
+          "glissement_um": 29.1,
+          "rugosite_vx": 0.46
+        },
+        {
+          "bras": 3,
+          "vers": 7,
+          "cellules": 1498,
+          "erreur_um": 56.1,
+          "pas_reel_um": 111.8,
+          "plancher_um": 52.7,
+          "glissement_um": 23.2,
+          "rugosite_vx": 0.56
+        },
+        {
+          "bras": 4,
+          "vers": 8,
+          "cellules": 1357,
+          "erreur_um": 66.1,
+          "pas_reel_um": 89.2,
+          "plancher_um": 58.5,
+          "glissement_um": 22.0,
+          "rugosite_vx": 0.71
+        },
+        {
+          "bras": 5,
+          "vers": 9,
+          "cellules": 1223,
+          "erreur_um": 79.5,
+          "pas_reel_um": 92.4,
+          "plancher_um": 67.8,
+          "glissement_um": 19.9,
+          "rugosite_vx": 0.92
+        },
+        {
+          "bras": 6,
+          "vers": 10,
+          "cellules": 1096,
+          "erreur_um": 110.6,
+          "pas_reel_um": 80.3,
+          "plancher_um": 73.1,
+          "glissement_um": 18.3,
+          "rugosite_vx": 1.19
+        },
+        {
+          "bras": 7,
+          "vers": 11,
+          "cellules": 977,
+          "erreur_um": 1015.8,
+          "pas_reel_um": 1016.3,
+          "plancher_um": 875.3,
+          "glissement_um": 18.2,
+          "rugosite_vx": 1.6
+        },
+        {
+          "bras": 8,
+          "vers": 12,
+          "cellules": 864,
+          "erreur_um": 173.2,
+          "pas_reel_um": 145.6,
+          "plancher_um": 77.3,
+          "glissement_um": 18.9,
+          "rugosite_vx": 1.15
+        }
+      ],
+      "rugosites_vx": [
+        0.34,
+        0.46,
+        0.56,
+        0.71,
+        0.92,
+        1.19,
+        1.6,
+        1.15
+      ],
+      "erreurs_um": [
+        34.7,
+        52.0,
+        56.1,
+        66.1,
+        79.5,
+        110.6,
+        1015.8,
+        173.2
+      ],
+      "glissements_um": [
+        21.7,
+        29.1,
+        23.2,
+        22.0,
+        19.9,
+        18.3,
+        18.2,
+        18.9
+      ],
+      "pas_reels_um": [
+        170.7,
+        147.6,
+        111.8,
+        89.2,
+        92.4,
+        80.3,
+        1016.3,
+        145.6
+      ],
+      "planchers_um": [
+        27.0,
+        45.8,
+        52.7,
+        58.5,
+        67.8,
+        73.1,
+        875.3,
+        77.3
+      ],
+      "cellules_par_bras": [
+        1805,
+        1647,
+        1498,
+        1357,
+        1223,
+        1096,
+        977,
+        864
+      ],
+      "portee": 4
+    },
+    {
       "marcheur": "melange",
       "borne": false,
       "temoin": true,
@@ -852,9 +1003,9 @@
     }
   ],
   "cout": {
-    "blocs_telecharges": 0,
-    "mebioctets": 0.0,
-    "blocs_en_memoire": 463,
+    "blocs_telecharges": 12,
+    "mebioctets": 24.0,
+    "blocs_en_memoire": 488,
     "voxels_absents": 0,
     "reprises_reseau": 0
   },
@@ -887,6 +1038,28 @@
     "pas": 8
   },
   "le_lissage_de_la_nappe_aide": true,
+  "portee_de_la_sortie_raccrochee": 4,
+  "cellules_communes_sortie_pas_normal": [
+    1805,
+    1647,
+    1498,
+    1357,
+    1223,
+    1096,
+    977,
+    864
+  ],
+  "ecart_de_la_sortie_au_pas_normal": {
+    "ecart_median_um": -0.9,
+    "intervalle_um": [
+      -1.1,
+      -0.7
+    ],
+    "pas_ameliores": 5,
+    "pas": 8
+  },
+  "la_sortie_raccrochee_bat_le_pas_normal": true,
+  "le_pas_normal_bat_la_sortie_raccrochee": false,
   "cellules_communes_lissage_pas_normal": [
     1805,
     1647,

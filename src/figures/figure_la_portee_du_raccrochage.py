@@ -49,10 +49,12 @@ BLEU_PALE = (222, 231, 240)
 CADRE = (200, 200, 200)
 
 BLEU = (54, 88, 132)
+VIOLET = (124, 80, 140)
 COULEUR = {"rien": (70, 70, 70), "raccroche": VERT, "raccroche_lisse": BLEU,
-           "melange": AMBRE, "oracle": ROUGE}
-MARQUE = {"raccroche": "le chemin deploye", "raccroche_lisse": "+ nappe lissee entre deux bras",
-          "rien": "le pas normal seul", "melange": "le temoin melange",
+           "sortie_raccrochee": VIOLET, "melange": AMBRE, "oracle": ROUGE}
+MARQUE = {"raccroche": "raccrochage deploye", "raccroche_lisse": "+ nappe lissee",
+          "sortie_raccrochee": "etat au pas normal, sortie raccrochee",
+          "rien": "pas normal seul", "melange": "temoin melange",
           "oracle": "la borne (elle regarde la cible)"}
 
 
@@ -63,6 +65,12 @@ def prose(m: dict) -> list[str]:
     e, inv = m["ecart_au_pas_normal"], m["ecart_du_pas_normal"]
     el = m["ecart_du_lissage_au_raccrochage"]
     epn = m["ecart_du_lissage_au_pas_normal"]
+    es = m["ecart_de_la_sortie_au_pas_normal"]
+    rug_s = " ".join(f"{g:.2f}" for g in
+                     next(x for x in m["lignes"] if x["marcheur"] == "sortie_raccrochee"
+                          )["rugosites_vx"][:5])
+    rug_r = " ".join(f"{g:.2f}" for g in
+                     next(x for x in m["lignes"] if x["deploye"])["rugosites_vx"][:5])
     dep = next(x for x in m["lignes"] if x["deploye"])
     gl_txt = " ".join(f"{g:.0f}" for g in dep["glissements_um"])
     hors = m["bras_hors_du_pas_nominal"]
@@ -85,7 +93,22 @@ def prose(m: dict) -> list[str]:
         f"normal seul {m['portee_sans_rien_faire']}, le temoin melange {m['portee_du_temoin']}, "
         f"la borne {m['portee_de_loracle']}. le raccrochage porte plus loin que le pas normal : "
         f"{'OUI' if m['le_raccrochage_porte_plus_loin'] else 'NON'}.",
-        (f"⚠⚠⚠ LE CINQUIEME MARCHEUR n'ajoute AUCUN reglage : il applique a la NAPPE le voisinage "
+        (f"⚠⚠⚠ LE MARCHEUR QUI SEPARE L'ETAT DE LA SORTIE : la marche avance au pas normal, "
+         f"donc rien ne se compose, et le raccrochage n'est applique qu'a ce qui est PUBLIE, "
+         f"jamais reinjecte. c'est la separation ordinaire entre l'etat d'un systeme et sa "
+         f"sortie, et elle n'ajoute aucun reglage. portee "
+         f"{m['portee_de_la_sortie_raccrochee']}, ecart au pas normal seul "
+         f"{es['ecart_median_um']:+.1f} um sur {es['pas_ameliores']}/{es['pas']} bras, "
+         f"intervalle {es['intervalle_um']} : "
+         f"{'IL GAGNE' if m['la_sortie_raccrochee_bat_le_pas_normal'] else 'il ne tranche pas'}"
+         f" — le PREMIER marcheur aveugle a battre le pas normal sur une marche."
+         if es else "⚠ la sortie raccrochee n'a pas de bras commun avec le pas normal."),
+        (f"⚠⚠ ET IL DEMONTRE LE MECANISME, que la tranche precedente disait plausible : le "
+         f"MEME raccrochage, lu sur une surface lisse, produit un champ de decalage lisse "
+         f"({rug_s}) la ou lu sur sa propre prediction il en produit un rugueux ({rug_r}) — "
+         "panneau D. la rugosite du champ n'est donc pas une propriete du raccrochage, elle "
+         "est HERITEE de la surface sur laquelle il lit."),
+        (f"⚠⚠ LE CINQUIEME MARCHEUR n'ajoute AUCUN reglage : il applique a la NAPPE le voisinage "
          f"deja deploye sur le champ de decalage — meme demi-largeur, meme regle de majorite — "
          f"et garde le meme masque, donc les colonnes restent appariables. portee "
          f"{m['portee_de_la_nappe_lissee']}, ecart au raccrochage "
@@ -319,7 +342,8 @@ def legende(art, x0: int, y: int, petit) -> None:
     tourne — c'est-a-dire ne peut pas lire le resultat.
     """
     x = x0
-    for nom in ("raccroche", "raccroche_lisse", "rien", "melange", "oracle"):
+    for nom in ("sortie_raccrochee", "raccroche", "raccroche_lisse", "rien", "melange",
+                "oracle"):
         art.rectangle([x, y + 3, x + 16, y + 9], fill=COULEUR[nom])
         art.text((x + 22, y), MARQUE[nom], fill=TEXTE, font=petit)
         x += 26 + petit.getbbox(MARQUE[nom])[2] + 24
@@ -421,6 +445,19 @@ def verifier() -> int:
             if b["plancher_um"] > b["erreur_um"] + 1e-6]
     v("le plancher d'un bras ne dépasse jamais l'erreur mesurée sur ce bras", not hors,
       str(hors[:3]))
+    # ⭐⭐⭐ LE MÉCANISME, DÉMONTRÉ PLUTÔT QU'AFFIRMÉ : le MÊME raccrochage, lu sur la surface
+    # lisse du pas normal, produit un champ de décalage plus lisse que lu sur sa propre
+    # prédiction. La rugosité n'est donc pas une propriété du raccrochage, elle est héritée.
+    rs = par("sortie_raccrochee")["rugosites_vx"]
+    rr = par("raccroche")["rugosites_vx"]
+    v("la rugosité du champ est héritée de la surface lue, pas propre au raccrochage",
+      sum(a <= b for a, b in zip(rs, rr)) > len(rs) // 2,
+      f"sortie {rs} · raccroche {rr}")
+    v("... et la sortie raccrochée est comparée au pas normal, appariée",
+      m["ecart_de_la_sortie_au_pas_normal"] is not None
+      and m["cellules_communes_sortie_pas_normal"],
+      f"portée {m['portee_de_la_sortie_raccrochee']} · "
+      + str(m["ecart_de_la_sortie_au_pas_normal"]))
     # ⭐⭐⭐ LE RÉSULTAT QUE LA FIGURE PORTE, ET IL A DEUX MOITIÉS : la portée, et la marge.
     v("la portée du chemin déployé est publiée avec celles de ses trois témoins",
       all(isinstance(m[c], int) for c in ("portee_du_deploye", "portee_sans_rien_faire",
