@@ -3709,6 +3709,104 @@ portée ne dépasse ce que le corpus autorise à son ancre.
 > traduise en spires supplémentaires dépend de la marge que l'ancre avait, ce qui est une
 > propriété de la **matière** à cet endroit et pas de la méthode.
 
+
+##### ⭐⭐⭐ OÙ la nappe se froisse — et ce que les MÉDIANES cachaient
+
+> Mesure : `src/nappe/ou_la_nappe_se_froisse.py` (15 contrôles) →
+> `docs/mesures/ou_la_nappe_se_froisse.json`. Figure :
+> `src/figures/figure_ou_la_nappe_se_froisse.py` (11 contrôles). Pont vers l'instrument
+> volumétrique : `src/nappe/la_nappe_en_obj.py` (27 contrôles), le 2026-09-07.
+>
+> ```bash
+> uv run python src/nappe/ou_la_nappe_se_froisse.py --cote 960 \
+>     --json docs/mesures/ou_la_nappe_se_froisse.json
+> uv run python src/figures/figure_ou_la_nappe_se_froisse.py \
+>     --sortie docs/images/75_ou_la_nappe_se_froisse.png
+> ```
+
+⚠⚠⚠ **CETTE TRANCHE VIENT D'AVOIR REGARDÉ, et c'est l'auteur qui l'a rappelé** : ce dépôt a un
+instrument volumétrique (`lpl-scrollwalk`, `lpl::voxel` et `lpl::zarr` dans LplPlugin) et sept
+tranches de marche l'avaient ignoré. Toute la campagne publiait le froissement en **MÉDIANES** —
+5,11 µm pour le pas normal au bras 6, 151,81 pour le raccrochage. Une médiane dit **combien**,
+jamais **où**.
+
+![où la nappe se froisse](images/75_ou_la_nappe_se_froisse.png)
+
+**Une TACHE est une cellule dont l'écart à la médiane de ses voisins dépasse la demi-feuille.**
+Le seuil vient de la matière : au-delà, le point est plus près de la feuille **voisine** que du
+plan de ses **propres** voisins, donc la nappe y est localement **pliée** et non bosselée.
+
+| marcheur, part de cellules pliées | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| rien | 0.0 % | 0.0 % | 1.9 % | 6.9 % | 13.0 % | 18.6 % | 26.3 % | 32.8 % |
+| rien_lisse | 0.0 % | 0.0 % | 0.2 % | 1.0 % | 2.1 % | 3.9 % | 4.8 % | 6.5 % |
+| raccroche | 0.2 % | 4.6 % | 38.3 % | 71.3 % | 91.0 % | 83.0 % | 91.0 % | 96.6 % |
+| oracle | 0.0 % | 1.2 % | 4.0 % | 7.5 % | 14.2 % | 26.1 % | 43.4 % | 62.8 % |
+
+> ⚠⚠⚠ **LE FROISSEMENT DU PAS NORMAL N'EST PAS DISTRIBUÉ.** Il commence à **zéro**, apparaît au
+> bras 3 et atteint **33 %** des cellules au bras 8 — pendant que sa rugosité **médiane** reste
+> à une vingtaine de micromètres. Une médiane sur une nappe **surtout lisse avec quelques régions
+> ruinées**, et une médiane sur une nappe **uniformément tiède**, sont le même nombre. C'est
+> exactement ce qu'une médiane ne peut pas distinguer, et c'est pour ça qu'il fallait regarder.
+
+> ⭐⭐⭐ **ET C'EST LA MESURE LA PLUS NETTE DE CE QUE LE LISSAGE FAIT** : il ramène la part pliée de
+> **33 % à 7 %**, soit **80 % des cellules pliées en moins**. Dit comme ça, c'est un tout
+> autre énoncé que « six micromètres de mieux » — et c'est le **même fait**.
+
+⚠⚠ **Le raccrochage est une panne d'une AUTRE NATURE** : 38 % des cellules dès le bras 3,
+97 % au bras 8. Ce n'est plus une tache qui grandit, c'est la nappe **entière** qui plie.
+
+> ⚠⚠⚠ **ET LA BORNE SE FROISSE AUSSI — 63 % au dernier bras — en gardant une erreur de 17 à
+> 22 µm.** Donc **un froissement n'est PAS ce qui perd une marche** : il ne le devient que si rien
+> ne vient recaler ce qui repart dessus. Ça affine le diagnostic de la tranche précédente, qui
+> disait « ce qu'un marcheur aveugle paie, c'est de devoir repartir de sa propre nappe » — la
+> nappe froissée est une **condition**, le défaut de recalage est la **cause**.
+
+##### ⚠⚠ Les taches coïncident-elles ? Oui, et faiblement — le témoin le dit
+
+⚠⚠⚠ **Cette question ne se répond pas sans témoin.** Deux ensembles de taches couvrant chacun
+soixante pour cent d'une même région se recouvrent largement **par construction** : le
+recouvrement brut mesure surtout leurs **tailles**. Le témoin est le recouvrement de deux
+ensembles de **mêmes tailles** tirés au hasard dans les **mêmes cellules**.
+
+| paire | recouvrement | témoin au hasard | rapport |
+|---|---:|---:|---:|
+| rien / rien_lisse | 0.182 | 0.060 | **×3.03** |
+| rien / raccroche | 0.331 | 0.325 | **×1.02** |
+| rien / oracle | 0.415 | 0.274 | **×1.51** |
+| rien_lisse / raccroche | 0.066 | 0.065 | **×1.02** |
+| rien_lisse / oracle | 0.094 | 0.063 | **×1.49** |
+| raccroche / oracle | 0.624 | 0.615 | **×1.01** |
+
+> ⚠ **Les 6 paires sont au-dessus de leur témoin, et le rapport médian n'est que de 1.26.** « Au
+> dessus du témoin » est satisfait par un rapport de **1,01**, donc le verdict tient sur un
+> **signe** et pas sur une marge — la mesure le publie, et le rapport le plus faible est rendu à
+> côté du oui.
+
+> ⭐ **Ce qui reste** : les deux paires où les taches sont encore **minoritaires** montrent une
+> vraie co-localisation — **×3,0** pour pas normal / pas normal lissé, **×1,5** pour pas normal /
+> borne. Le froissement est donc **en partie** une propriété du **LIEU** et pas seulement du
+> marcheur. Modestement, et à vérifier sur d'autres ancres avant d'en faire quoi que ce soit.
+
+##### ⚠ Le pont vers l'instrument volumétrique, et ce qu'il a montré
+
+`la_nappe_en_obj` écrit une nappe prédite en **OBJ** — coordonnées en échantillons de niveau 0,
+ordre `x y z`, celui du corpus et celui que `scroll::loadSegmentObj` lit **droit** — plus ses
+**coordonnées de texture**, sans lesquelles `--segment-ink` ne peut pas peindre une mesure **sur**
+la surface qu'elle décrit. Et un écrivain **PGM** pour la carte elle-même, format choisi par
+`lpl-scrollwalk` parce qu'un PNG demanderait un décompresseur qu'un outil porterait pour toujours.
+La pose de caméra est **lue dans le rendu** et non devinée : `--at Z Y X` pose
+`camera.position = (X, Y, Z)` et `voxel::FreeCamera::eye` construit
+`avant = (sin lacet · cos tangage, sin tangage, cos lacet · cos tangage)`.
+
+⚠⚠ **Ce que le raymarcher a montré, et ce qu'il ne peut pas montrer.** Mesuré : à 2 600
+échantillons de la nappe — 5,8 mm de papyrus — **tous** les rayons saturent avant de l'atteindre,
+et à 240 échantillons la nappe remplit le cadre. Le milieu est opaque à l'échelle d'une nappe de
+mille échantillons, donc une vue en première personne d'un patch entier est du **brouillard**.
+L'instrument répond à *« cette nappe est-elle posée sur de la matière »*, pas à *« de quelle forme
+est ce froissement »* — et c'est pour la seconde que les cartes existent.
+
+---
 ##### ⛔ COMBIEN LISSER ? Le balayage TRANCHE et n'autorise pourtant RIEN
 
 > Mesure : `src/nappe/combien_lisser_la_nappe.py` (17 contrôles) →

@@ -1,0 +1,223 @@
+{
+  "fragment": "PHerc0500P2",
+  "ancre": 4,
+  "spires_visees": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "demi_feuille_um": 67.75,
+  "bras_communs": 8,
+  "cellules_comparees": 857,
+  "marcheurs": [
+    "rien",
+    "rien_lisse",
+    "raccroche",
+    "oracle"
+  ],
+  "lignes": [
+    {
+      "marcheur": "rien",
+      "taches": [
+        0,
+        0,
+        29,
+        93,
+        158,
+        204,
+        256,
+        281
+      ],
+      "part_froissee": [
+        0.0,
+        0.0,
+        0.0194,
+        0.0687,
+        0.1296,
+        0.1865,
+        0.2628,
+        0.3279
+      ],
+      "cellules": [
+        1799,
+        1643,
+        1495,
+        1354,
+        1219,
+        1094,
+        974,
+        857
+      ]
+    },
+    {
+      "marcheur": "rien_lisse",
+      "taches": [
+        0,
+        0,
+        3,
+        13,
+        25,
+        43,
+        47,
+        56
+      ],
+      "part_froissee": [
+        0.0,
+        0.0,
+        0.002,
+        0.0096,
+        0.0205,
+        0.0393,
+        0.0483,
+        0.0653
+      ],
+      "cellules": [
+        1799,
+        1643,
+        1495,
+        1354,
+        1219,
+        1094,
+        974,
+        857
+      ]
+    },
+    {
+      "marcheur": "raccroche",
+      "taches": [
+        3,
+        75,
+        573,
+        966,
+        1109,
+        908,
+        886,
+        828
+      ],
+      "part_froissee": [
+        0.0017,
+        0.0456,
+        0.3833,
+        0.7134,
+        0.9098,
+        0.83,
+        0.9097,
+        0.9662
+      ],
+      "cellules": [
+        1799,
+        1643,
+        1495,
+        1354,
+        1219,
+        1094,
+        974,
+        857
+      ]
+    },
+    {
+      "marcheur": "oracle",
+      "taches": [
+        0,
+        20,
+        60,
+        102,
+        173,
+        285,
+        423,
+        538
+      ],
+      "part_froissee": [
+        0.0,
+        0.0122,
+        0.0401,
+        0.0753,
+        0.1419,
+        0.2605,
+        0.4343,
+        0.6278
+      ],
+      "cellules": [
+        1799,
+        1643,
+        1495,
+        1354,
+        1219,
+        1094,
+        974,
+        857
+      ]
+    }
+  ],
+  "paires_au_dessus_du_temoin": 6,
+  "paires": [
+    {
+      "a": "rien",
+      "b": "rien_lisse",
+      "recouvrement": 0.182,
+      "temoin": 0.06,
+      "rapport": 3.03,
+      "au_dessus_du_temoin": true,
+      "taches_a": 281,
+      "taches_b": 56
+    },
+    {
+      "a": "rien",
+      "b": "raccroche",
+      "recouvrement": 0.331,
+      "temoin": 0.325,
+      "rapport": 1.02,
+      "au_dessus_du_temoin": true,
+      "taches_a": 281,
+      "taches_b": 828
+    },
+    {
+      "a": "rien",
+      "b": "oracle",
+      "recouvrement": 0.415,
+      "temoin": 0.274,
+      "rapport": 1.51,
+      "au_dessus_du_temoin": true,
+      "taches_a": 281,
+      "taches_b": 538
+    },
+    {
+      "a": "rien_lisse",
+      "b": "raccroche",
+      "recouvrement": 0.066,
+      "temoin": 0.065,
+      "rapport": 1.02,
+      "au_dessus_du_temoin": true,
+      "taches_a": 56,
+      "taches_b": 828
+    },
+    {
+      "a": "rien_lisse",
+      "b": "oracle",
+      "recouvrement": 0.094,
+      "temoin": 0.063,
+      "rapport": 1.49,
+      "au_dessus_du_temoin": true,
+      "taches_a": 56,
+      "taches_b": 538
+    },
+    {
+      "a": "raccroche",
+      "b": "oracle",
+      "recouvrement": 0.624,
+      "temoin": 0.615,
+      "rapport": 1.01,
+      "au_dessus_du_temoin": true,
+      "taches_a": 828,
+      "taches_b": 538
+    }
+  ],
+  "les_taches_coincident": true,
+  "rapport_le_plus_faible": 1.01,
+  "rapport_median": 1.26
+}

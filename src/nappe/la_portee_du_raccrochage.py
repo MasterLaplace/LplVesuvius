@@ -286,7 +286,9 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
             cote: float | None = None, bras_max: int = 8,
             corpus: dict | None = None, volume=None, decalage_ancre: int = 0,
             lissage_nappe: tuple[int, int] = (1, 1),
-            marcheurs: tuple[str, ...] | None = None) -> dict:
+            marcheurs: tuple[str, ...] | None = None,
+            dossier_obj: Path | None = None,
+            champs_de_froissement: bool = False) -> dict:
     """Jusqu'où chaque marcheur va avant que son erreur ne dépasse la demi-feuille."""
     from le_pas_normal_atteint_la_spire import distance_a, normales  # noqa: PLC0415
     from le_raccrochage_a_la_matiere import (  # noqa: PLC0415
@@ -364,6 +366,11 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     rng = np.random.default_rng(graine)
     glissement_max = 0.0
     resultats: dict[str, list[dict]] = {}
+    # ⚠⚠ LE CHAMP DE FROISSEMENT GARDÉ EN MÉMOIRE, sur demande seulement. Une médiane dit combien
+    # et jamais OÙ, et `ou_la_nappe_se_froisse` a besoin du champ cellule par cellule. Il n'est
+    # pas sérialisable dans le JSON — un tableau par bras et par marcheur — donc il est rendu à
+    # côté du résultat et retiré par son appelant.
+    champs: dict[str, list] = {nom: [] for nom in (marcheurs or MARCHEURS)}
     # ⚠⚠ RESTREINDRE LES MARCHEURS SERT UN BALAYAGE, PAS UN VERDICT. Un balayage de réglage n'a
     # besoin que de la colonne qu'il balaie, et faire marcher les autres à chaque réglage
     # coûterait des lectures de volume pour rien. Mais un résultat restreint ne porte plus les
@@ -421,6 +428,43 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
                              # sont deux affirmations, et la seconde doit être publiée.
                              part_lissee=etat["part_lissee"],
                              ou=np.argwhere(pas["garde"]).tolist()))
+            # ⚠⚠⚠ LA NAPPE ÉCRITE POUR ÊTRE REGARDÉE, jamais pour être relue par la campagne.
+            # Sept tranches ont mesuré le froissement en NOMBRES ; un nombre dit combien et
+            # jamais de quelle FORME, et une gondole d'ensemble, des pointes isolées et un pli
+            # qui bascule sur la feuille voisine appellent trois remèdes différents.
+            # `lpl-scrollwalk --segment` sait dessiner un maillage dans le scan.
+            if dossier_obj is not None:
+                from la_nappe_en_obj import ecrire_obj, ecrire_pgm  # noqa: PLC0415
+                from le_raccrochage_a_la_matiere import (  # noqa: PLC0415
+                    accorder_les_voisins as _acc,
+                )
+
+                # ⚠⚠⚠ ET LA CARTE DU FROISSEMENT À CÔTÉ, sur la MÊME grille : l'écart de chaque
+                # point à la médiane de ses voisins, en µm. C'est la forme que la médiane publiée
+                # résume en un nombre, et une gondole, des pointes et un pli lui donnent trois
+                # images différentes. L'échelle est FIXÉE à la demi-feuille pour que deux bras et
+                # deux marcheurs se comparent : normalisée sur son propre maximum, chaque carte
+                # aurait sa propre échelle et le même gris vaudrait deux valeurs.
+                ec = np.zeros(etat["grille"].shape)
+                gg = etat["garde"].copy()
+                for cc in range(3):
+                    li, ok2 = _acc(etat["grille"][:, :, cc], etat["garde"])
+                    gg &= ok2 & np.isfinite(li)
+                    ec[:, :, cc] = etat["grille"][:, :, cc] - li
+                champ = np.linalg.norm(np.where(gg[..., None], ec, 0.0), axis=-1) * voxel_um
+                ecrire_pgm(champ, gg,
+                           Path(dossier_obj) / f"{nom}_bras{k}_froissement.pgm",
+                           haut=demi_feuille_um)
+                ecrire_obj(etat["grille"], etat["garde"],
+                           Path(dossier_obj) / f"{nom}_bras{k}.obj",
+                           f"marcheur {nom} · bras {k} · ancre {ancre} vers {cible_rang}\n"
+                           f"erreur médiane {bras[-1]['erreur_um']} µm · rugosité de nappe "
+                           f"{etat['rugosite_nappe_um']} µm")
+            if champs_de_froissement:
+                from ou_la_nappe_se_froisse import champ_de_froissement  # noqa: PLC0415
+
+                champs[nom].append(champ_de_froissement(etat["grille"], etat["garde"],
+                                                        voxel_um))
             grille, garde = etat["grille"], etat["garde"]
         resultats[nom] = bras
 
@@ -557,6 +601,8 @@ def mesurer(graine: int = 42, minimum: int = 30, cache_actif: bool = True,
     cpb = dep["cellules_par_bras"] if dep else []
     r["cellules_au_premier_bras"] = cpb[0] if cpb else 0
     r["cellules_au_dernier_bras"] = cpb[-1] if cpb else 0
+    if champs_de_froissement:
+        r["champs"] = champs
     r["part_de_nappe_gardee"] = (
         round(r["cellules_au_dernier_bras"] / r["cellules_au_premier_bras"], 3)
         if r["cellules_au_premier_bras"] else None)
@@ -850,11 +896,17 @@ def main() -> int:
     p.add_argument("--cote", type=float, default=None)
     p.add_argument("--bras-max", type=int, default=8, dest="bras_max")
     p.add_argument("--json", type=Path)
+    p.add_argument("--obj", type=Path, default=None,
+                   help="dossier où écrire la nappe de chaque marcheur à chaque bras, en OBJ, "
+                        "pour la REGARDER avec lpl-scrollwalk --segment")
+    p.add_argument("--ancre", type=int, default=0, dest="decalage_ancre",
+                   help="décalage de l'ancre vers le haut, pour refaire la marche ailleurs")
     p.add_argument("--verifier", action="store_true")
     a = p.parse_args()
     if a.verifier:
         return verifier()
-    r = mesurer(cote=a.cote, bras_max=a.bras_max)
+    r = mesurer(cote=a.cote, bras_max=a.bras_max, dossier_obj=a.obj,
+                decalage_ancre=a.decalage_ancre)
     afficher(r)
     if a.json:
         a.json.parent.mkdir(parents=True, exist_ok=True)

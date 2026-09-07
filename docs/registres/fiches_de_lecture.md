@@ -5518,7 +5518,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 4575
+- **lignes** : 4673
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -6036,6 +6036,41 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     le voisinage **déjà déployé** rend **3 à 9 µm** sur une marche, de façon constante, sur toutes
     les ancres essayées, sans **aucun** réglage. Que ça se traduise en spires dépend de la marge
     que l'ancre avait — une propriété de la **matière** à cet endroit, pas de la méthode.
+  - ⭐⭐⭐ **OÙ LA NAPPE SE FROISSE, ET CE QUE LES MÉDIANES CACHAIENT (2026-09-07,
+    `ou_la_nappe_se_froisse`, 15 contrôles, 8 bras, 857 cellules gardées par tous).** Cette
+    tranche vient d'avoir **regardé** — l'auteur a rappelé que le dépôt a un instrument
+    volumétrique (`lpl-scrollwalk`, `lpl::voxel` / `lpl::zarr` dans LplPlugin) que sept tranches
+    de marche avaient ignoré. Une **tache** est une cellule dont l'écart à la médiane de ses
+    voisins dépasse la demi-feuille : au-delà, le point est plus près de la feuille voisine que du
+    plan de ses **propres** voisins, donc la nappe y est localement **pliée**.
+  - ⚠⚠⚠ **Le froissement du pas normal n'est PAS distribué** : zéro, zéro, puis apparition au
+    bras 3 et **33 %** des cellules au bras 8 — pendant que sa rugosité **médiane** reste à une
+    vingtaine de µm. Une médiane sur une nappe surtout lisse avec quelques régions ruinées, et une
+    médiane sur une nappe uniformément tiède, sont **le même nombre**.
+  - ⭐⭐⭐ **Et c'est la mesure la plus nette de ce que le lissage fait** : la part pliée passe de
+    **33 % à 7 %**, soit **80 % des cellules pliées en moins**. Tout autre énoncé que
+    « six micromètres de mieux », et le **même fait**.
+  - ⚠⚠ **Le raccrochage est une panne d'une AUTRE nature** : 38 % dès le bras 3, 97 % au
+    bras 8 — la nappe **entière** plie, ce n'est plus une tache qui grandit.
+  - ⚠⚠⚠ **Et la borne se froisse AUSSI (63 % au dernier bras) en gardant une erreur de 17 à
+    22 µm.** Donc **un froissement n'est pas ce qui perd une marche** : il ne le devient que si
+    rien ne vient recaler ce qui repart dessus. La nappe froissée est une **condition**, le défaut
+    de recalage est la **cause** — ça affine le diagnostic de la tranche précédente.
+  - ⚠⚠ **Les taches coïncident-elles ? Oui, et faiblement.** Les 6 paires sont au-dessus de leur
+    témoin (deux ensembles de **mêmes tailles** tirés au hasard dans les **mêmes cellules**), mais
+    le rapport médian est **1.26** et le plus faible **1,01** — « au-dessus du témoin » est
+    satisfait par un rapport de 1,01, donc le verdict tient sur un **signe** et pas sur une marge.
+    ⭐ Seules les deux paires où les taches sont encore **minoritaires** montrent une vraie
+    co-localisation (**×3,0** rien/rien_lisse, **×1,5** rien/oracle) : le froissement est **en
+    partie** une propriété du **lieu**, à vérifier sur d'autres ancres.
+  - ⚠ **Le pont vers l'instrument, et sa limite mesurée.** `la_nappe_en_obj` (27 contrôles) écrit
+    une nappe en **OBJ** (échantillons de niveau 0, ordre `x y z`, celui que `loadSegmentObj` lit
+    droit) **avec ses coordonnées de texture** — sans elles `--segment-ink` ne peut pas peindre
+    une mesure **sur** la surface — plus un écrivain **PGM**, et la pose de caméra **lue dans le
+    rendu** (`--at Z Y X` → `position = (X, Y, Z)` ; `avant = (sin l·cos t, sin t, cos l·cos t)`).
+    ⚠⚠ Mesuré : à **2 600** échantillons (5,8 mm de papyrus) **tous** les rayons saturent avant
+    d'atteindre la nappe, et à **240** elle remplit le cadre. Le raymarcher répond donc à « cette
+    nappe est-elle posée sur de la matière », **pas** à « de quelle forme est ce froissement ».
   - ⛔ **COMBIEN LISSER ? LE BALAYAGE TRANCHE ET N'AUTORISE POURTANT RIEN (2026-09-07,
     `combien_lisser_la_nappe`, 17 contrôles, 5 ancres × 9 étages, `--cote 960`).** Le lissage
     tourne avec le voisinage déployé (demi-largeur un, une passe) et ce réglage n'avait jamais été
@@ -6674,8 +6709,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 3883 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 4575 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 3981 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 4673 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
