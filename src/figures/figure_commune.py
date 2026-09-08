@@ -198,6 +198,39 @@ def echelle_appariee(art, x0: int, y0: int, pw: int, ph: int, entrees: list, pet
     return noms
 
 
+
+class Tracee:
+    """Un calque de dessin qui RETIENT tout le texte qu'on lui demande d'ecrire.
+
+    ⚠⚠⚠ POURQUOI CETTE CLASSE VIT ICI ET PAS DANS UNE FIGURE. `prose_tracable` ne lit que la
+    prose du bas d'une figure, donc le texte ecrit DANS les panneaux n'etait couvert par rien —
+    et un « ⛔ » est sorti en carre dans la ligne qui portait un verdict, sans qu'aucune garde
+    ne le voie. Une garde qui ne voit qu'une partie de ce qu'elle garde est un ANGLE MORT.
+
+    ⭐ Elle est dans le module commun parce que le depot compte plus de cent figures et que
+    l'angle mort est le meme dans toutes. Les figures existantes ne sont PAS reecrites d'un
+    coup : ce qui est pose ici est disponible, et chaque figure y passe quand on la touche.
+
+    Usage : `art = Tracee(ImageDraw.Draw(toile))`, puis dessiner normalement ; a la fin,
+    `glyphes_manquants("".join(art.textes))` doit etre vide.
+    """
+
+    def __init__(self, art):
+        self._art = art
+        self.textes: list[str] = []
+
+    def text(self, *a, **k):
+        # ⚠ Le texte est le DEUXIEME argument positionnel de `ImageDraw.text`, et il peut etre
+        # passe par mot-clef : les deux formes sont retenues, sinon la garde en manquerait une.
+        if len(a) >= 2 and isinstance(a[1], str):
+            self.textes.append(a[1])
+        elif isinstance(k.get("text"), str):
+            self.textes.append(k["text"])
+        return self._art.text(*a, **k)
+
+    def __getattr__(self, nom):
+        return getattr(self._art, nom)
+
 def verifier() -> int:
     echecs = controles = 0
 
@@ -306,6 +339,29 @@ def verifier() -> int:
     except Exception as exc:  # noqa: BLE001
         souci = f"{type(exc).__name__}: {exc}"
     v("... une ligne sans comparaison se dessine sans lever", souci is None)
+
+    # ⚠⚠⚠ `Tracee` EXISTE POUR COUVRIR UN ANGLE MORT, donc elle doit elle-meme etre gardee :
+    # une classe qui retient le texte mais en oublie une forme d'appel ne garde rien.
+    class _Faux:
+        def __init__(self):
+            self.appels = 0
+
+        def text(self, *a, **k):
+            self.appels += 1
+
+        def autre_chose(self):
+            return "delegue"
+
+    faux = _Faux()
+    tr = Tracee(faux)
+    tr.text((0, 0), "positionnel")
+    tr.text((0, 0), text="par mot-clef")
+    tr.text((0, 0), 42)  # ⚠ ce qui n'est pas du texte ne doit pas entrer dans la garde
+    v("Tracee retient le texte passe positionnellement", "positionnel" in tr.textes)
+    v("... et celui passe par mot-clef", "par mot-clef" in tr.textes)
+    v("... et rien qui ne soit pas du texte", len(tr.textes) == 2)
+    v("... tout en delegant chaque appel au vrai calque", faux.appels == 3)
+    v("... et le reste de l'interface de dessin", tr.autre_chose() == "delegue")
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0

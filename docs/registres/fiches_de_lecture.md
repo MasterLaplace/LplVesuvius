@@ -5247,6 +5247,58 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/86_la_demi_feuille_par_objet.md
+- **lignes** : 101
+- **nature** : RESULTAT
+  (confrontation du critère de marche perdue de ce dépôt avec l'atlas inter-spires de 36 objets
+  publié par `winding-ruler`, lu dans un clone de l'arbre, sans aucun téléchargement.)
+- **résumé** : ⭐⭐⭐ Le dépôt dérive sa demi-feuille — **67,75 µm**, le critère qui déclare une
+  marche perdue — de **135,5 µm** mesurés sur 12 paires des 13 spires publiées de `PHerc0500P2`.
+  L'atlas mesure **196,6 µm** de médiane sur le **même** fragment (p25 131,1 · p75 337,0), donc
+  notre chiffre tombe au **percentile 27** : la marche est jugée dans la moitié la plus **serrée**
+  de la matière, et les portées publiées (4 / 5 / 6) sont des **bornes basses**. Corrige au
+  passage l'omission de [`85`](../85_le_sens_du_rang.md), qui disait la demi-feuille de
+  `PHercParis4` « à mesurer ailleurs » alors qu'elle était mesurée à côté.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **Le critère le plus porteur de l'appareil de marche décrit le quartile le plus serré de
+    son objet.** Donc les portées sont des bornes basses ; à la médiane du fragment (98,3 µm) le
+    même marcheur disposerait de **45 % de tolérance en plus**.
+  - ⚠ Ce qui ne change PAS : c'est le bon endroit pour juger, puisque la marche marche là où les
+    spires sont publiées. L'atlas ne corrige pas le chiffre, il dit **quelle partie de l'objet**
+    il décrit — ce que le dépôt ne savait pas.
+  - ⚠⚠ **Ce ne sont pas deux mesures contradictoires** : même grandeur, deux **populations** (12
+    paires d'une région contre 16 coupes × 812 rayons du fragment). Le lire comme une
+    contradiction serait la faute.
+  - ⚠⚠ Le **sens du biais est connu** : l'atlas lit des prédictions, et une prédiction qui
+    fusionne deux feuilles saute un écart et en rapporte un double — donc il **surestime**.
+  - ⭐⭐ **Le prix du changement d'objet est chiffré** : demi-feuille `PHercParis4` = **91,20 µm**
+    contre 67,75 local, soit +34,6 % ; mais à médiane contre médiane c'est **98,3 → 91,2**, donc
+    le candidat est **7 % plus serré**. Les deux lectures sont dans la mesure, et celle qui compte
+    dépend d'une région qui n'existe pas encore pour le candidat.
+  - ■ **Comme critère de choix de rouleau, il ne choisit pas** : les treize tiennent dans un
+    facteur **1,20** (86,4 à 103,7 µm) quand l'atlas entier va jusqu'à **1,71** — l'étroitesse est
+    celle des treize, pas de la mesure. Même verdict que [`33`](../33_incertitude_de_la_carte.md)
+    par le côté géométrique, et gratuit puisque déjà mesuré.
+  - ⚠ Sixième fois que « chercher dehors ce qu'on croit absent » paie ; `67` §1 l'avait déjà écrit
+    pour ce fichier précis.
+- **rétractations / corrections internes** :
+  - §5 : ⚠⚠ **un seuil choisi pour que le chiffre du jour passe.** Ma première version rendait un
+    *mot* — « au premier quartile » — en tolérant 5 % autour de p25 ; une sonde qui retirait la
+    tolérance faisait basculer le verdict. Remplacé par un **percentile**, sans seuil, dont
+    l'interpolation **borne** hors des quantiles publiés au lieu d'extrapoler.
+  - §5 : ⚠ **une garde avec un angle mort.** Le glyphe `⛔` sortait en carré dans la ligne du
+    panneau A qui porte le verdict, parce que `prose_tracable` ne lit que la prose du bas.
+    Corrigé par `figure_commune.Tracee`, un calque qui retient **tout** le texte dessiné — posé
+    dans le module commun, gardé par 5 contrôles, et non retrofité sur les 104 figures.
+  - §1 : ⚠ un atlas malformé est devenu un **échec nommé** et non une exception, la leçon de
+    [`84`](../84_une_surface_combien_de_spires.md) repayée : une sonde décalant les colonnes d'un
+    rang tuait la batterie sur un `int()`.
+- **preuve de lecture intégrale** :
+  - l. 48 : `dit **quelle partie de l'objet** il décrit — ce que nous ne savions pas.`
+  - l. 88 : `qui ne voit qu'une partie de ce qu'elle garde est un **angle mort**. Corrigé par`
+
+---
+
 ### docs/85_le_sens_du_rang.md
 - **lignes** : 102
 - **nature** : RESULTAT
@@ -5799,7 +5851,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 5352
+- **lignes** : 5412
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -7129,8 +7181,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 4660 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 5352 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 4720 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 5412 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

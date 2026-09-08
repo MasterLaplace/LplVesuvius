@@ -151,9 +151,23 @@ feuille en médiane** — hors la bande du cœur, les 27 autres tiennent dans **
 facteur 1,89. La même heure couvre donc **neuf fois moins de spires au bord qu'au cœur**, et
 « 31 spires » n'est pas l'unité naturelle de l'effort.
 
-⚠⚠⚠ **Ce qui reste non chiffré, et c'est un coût du changement d'objet** : le maillage à 45,532 µm
-a ses cellules voisines à **905 µm**, donc il ne peut pas donner le pas inter-feuilles. **La
-demi-feuille de `PHercParis4` reste à mesurer**, sur un maillage plus fin ou sur le volume.
+⭐⭐⭐ **ET LE CRITÈRE LE PLUS PORTEUR DE TOUT L'APPAREIL EST AU PERCENTILE 27 DE SON OBJET**
+([`86`](docs/86_la_demi_feuille_par_objet.md)). La demi-feuille de **67,75 µm** vient de 135,5 µm
+mesurés sur 12 paires des 13 spires publiées de `PHerc0500P2` ; l'atlas de `winding-ruler` mesure
+**196,6 µm** de médiane sur le **même** fragment (p25 131,1). Donc **les portées publiées — 4, 5,
+6 — sont des BORNES BASSES** : à la demi-feuille médiane du fragment, le même marcheur aurait
+**45 % de tolérance en plus**. ⚠ Ce n'est pas une contradiction mais une différence de
+**population**, et l'atlas lisant des prédictions il **surestime** plutôt qu'il ne sous-estime.
+
+⚠ Le coût du changement d'objet est donc chiffré, et il se lit dans les deux sens :
+`PHercParis4` demi-feuille **91,20 µm** contre 67,75 local (**+34,6 %**), mais **98,3 → 91,2** à
+médiane contre médiane, donc **7 % plus serré**. Celle qui compte dépend d'une région qui n'existe
+pas encore pour le candidat.
+
+■ **Et par le côté géométrique, le choix de rouleau ne se décide pas non plus** : les treize
+tiennent dans un facteur **1,20** de demi-feuille (86,4 à 103,7 µm) quand l'atlas entier va
+jusqu'à 1,71. **Deux critères indépendants concordent : rien dans les treize ne désigne un
+rouleau.**
 
 ---
 

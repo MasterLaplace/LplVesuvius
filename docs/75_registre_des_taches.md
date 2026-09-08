@@ -4144,6 +4144,66 @@ l'égalité ne peut pas passer pour une raison qui n'est pas un défaut. Ce qui 
 **classement**, qui survit entier.
 
 ---
+##### ⭐⭐⭐ LE CRITÈRE DE MARCHE PERDUE EST AU PERCENTILE 27 DE SON PROPRE OBJET
+
+> Mesure : `src/nappe/la_demi_feuille_par_objet.py` (21 contrôles, hors ligne) →
+> `docs/mesures/la_demi_feuille_par_objet.json`. Figure :
+> `src/figures/figure_la_demi_feuille_par_objet.py` (14 contrôles), le 2026-09-08.
+> Document : [`86`](86_la_demi_feuille_par_objet.md).
+>
+> ```bash
+> git clone https://github.com/pscamillo/winding-ruler data/repos/winding-ruler
+> uv run python src/nappe/la_demi_feuille_par_objet.py \
+>     --json docs/mesures/la_demi_feuille_par_objet.json
+> uv run python src/figures/figure_la_demi_feuille_par_objet.py \
+>     --sortie docs/images/86_la_demi_feuille_par_objet.png
+> ```
+
+⚠ `85` disait la demi-feuille de `PHercParis4` « à mesurer ailleurs ». **Elle était mesurée, à
+côté, dans un clone de l'arbre** — `winding-ruler/results/atlas_collection_v2.csv`, période
+inter-spires de **36 objets**. Sixième fois que « chercher dehors ce qu'on croit absent » paie, et
+`67` §1 l'avait déjà écrit pour ce fichier précis.
+
+![la demi-feuille, objet par objet](images/86_la_demi_feuille_par_objet.png)
+
+| | valeur | population |
+|---|---:|---|
+| ce dépôt | **135,5 µm** → demi **67,75** | 12 paires des 13 spires publiées, maillages 2,215 µm |
+| l'atlas | **196,6 µm** (p25 131,1 · p75 337,0) | 16 coupes × 812 rayons du fragment entier |
+| **percentile du nôtre** | **27** | rapport ×1,45 |
+
+⭐⭐⭐ **CONSÉQUENCE SUR TOUT L'APPAREIL DE MARCHE.** Un critère dérivé du quartile le plus
+**serré** est plus exigeant que l'objet : les portées publiées — **4** pour le pas normal, **5**
+avec la nappe lissée, **6** pour la borne — sont des **BORNES BASSES**, pas des plafonds. À la
+demi-feuille médiane du fragment (98,3 µm), le même marcheur aurait **45 % de tolérance en plus**.
+
+⚠⚠ **Ce ne sont pas deux mesures contradictoires** — même grandeur, deux **populations**. Et le
+sens du biais est connu : l'atlas lit des **prédictions**, donc une fusion de deux feuilles saute
+un écart et en rapporte un double, donc il **surestime**. ⚠ Ce qui ne change pas : la marche
+marche là où les spires sont publiées, donc c'est le **bon endroit pour juger** — l'atlas ne
+corrige pas le chiffre, il dit **quelle partie de l'objet** il décrit.
+
+⭐⭐ **Le prix du changement d'objet est chiffré** : `PHercParis4` demi-feuille **91,20 µm** contre
+67,75 local (**+34,6 %**), mais à médiane contre médiane **98,3 → 91,2**, donc le candidat est
+**7 % plus serré**. Les deux lectures sont dans la mesure ; celle qui compte dépend d'une région
+qui n'existe pas encore pour le candidat.
+
+> ■ **ET COMME CRITÈRE DE CHOIX DE ROULEAU, IL NE CHOISIT PAS** : les treize tiennent dans un
+> facteur **1,20** (86,4 à 103,7 µm) quand l'atlas entier va jusqu'à **1,71**. L'étroitesse est
+> celle **des treize**, pas de la mesure — donc la géométrie ne sépare pas mieux que la part
+> comprimée de `33`, et elle est *déjà mesurée*, donc gratuite à essayer. **Deux critères
+> indépendants concordent : rien dans les treize ne désigne un rouleau.**
+
+⚠⚠ **Deux fautes à moi, gardées.** (1) Ma première version rendait un **mot** — « au premier
+quartile » — en tolérant **5 % autour de p25**, soit un **seuil choisi pour que le chiffre du jour
+passe** ; une sonde qui le retirait faisait basculer le verdict. Remplacé par un **percentile**,
+sans seuil, qui **borne** hors des quantiles publiés au lieu d'extrapoler. (2) Le glyphe `⛔`
+sortait **en carré** dans la ligne du panneau A qui porte le verdict, parce que `prose_tracable`
+ne lit que la prose du bas : ⭐ corrigé par **`figure_commune.Tracee`**, un calque qui retient
+**tout** le texte dessiné, posé dans le module commun (5 contrôles) parce que le dépôt compte
+**104 figures** et que l'angle mort y est le même — sans retrofit des 104.
+
+---
 ##### ⭐⭐⭐ UNE CELLULE PEUT-ELLE SAVOIR QU'ELLE A TORT, sans regarder la cible ?
 
 > Mesure : `src/nappe/la_cellule_sait_elle_quelle_a_tort.py` (14 contrôles) →
