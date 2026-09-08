@@ -1,0 +1,323 @@
+{
+  "index": "data/metadata.min.json",
+  "spires_du_prix": 31,
+  "objets_avec_bandes": 6,
+  "lignes": [
+    {
+      "nom": "PHercParis4",
+      "du_prix": false,
+      "bandes": 28,
+      "spires_couvertes": 120,
+      "spires_par_surface": 4.29,
+      "bande_la_plus_longue": 18,
+      "franchissements_dans_une_maille": 92,
+      "revisions": 58,
+      "bornes": [
+        10,
+        129
+      ],
+      "trous": 0,
+      "spans": [
+        18,
+        10,
+        8,
+        7,
+        6,
+        5,
+        5,
+        4,
+        4,
+        4,
+        4,
+        4,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "decroissance": {
+        "bandes": 28,
+        "inversions": 0,
+        "monotone": true,
+        "du_premier_au_dernier": [
+          18,
+          2
+        ]
+      }
+    },
+    {
+      "nom": "PHerc0172",
+      "du_prix": false,
+      "bandes": 44,
+      "spires_couvertes": 44,
+      "spires_par_surface": 1.0,
+      "bande_la_plus_longue": 1,
+      "franchissements_dans_une_maille": 0,
+      "revisions": 44,
+      "bornes": [
+        52,
+        95
+      ],
+      "trous": 0,
+      "spans": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "decroissance": {
+        "bandes": 44,
+        "inversions": 0,
+        "monotone": true,
+        "du_premier_au_dernier": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "nom": "PHerc0139",
+      "du_prix": false,
+      "bandes": 37,
+      "spires_couvertes": 37,
+      "spires_par_surface": 1.0,
+      "bande_la_plus_longue": 1,
+      "franchissements_dans_une_maille": 0,
+      "revisions": 37,
+      "bornes": [
+        23,
+        59
+      ],
+      "trous": 0,
+      "spans": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "decroissance": {
+        "bandes": 37,
+        "inversions": 0,
+        "monotone": true,
+        "du_premier_au_dernier": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "nom": "PHerc1667",
+      "du_prix": false,
+      "bandes": 19,
+      "spires_couvertes": 19,
+      "spires_par_surface": 1.0,
+      "bande_la_plus_longue": 1,
+      "franchissements_dans_une_maille": 0,
+      "revisions": 20,
+      "bornes": [
+        11,
+        41
+      ],
+      "trous": 12,
+      "spans": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "decroissance": {
+        "bandes": 19,
+        "inversions": 0,
+        "monotone": true,
+        "du_premier_au_dernier": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "nom": "PHerc0500P2",
+      "du_prix": false,
+      "bandes": 13,
+      "spires_couvertes": 13,
+      "spires_par_surface": 1.0,
+      "bande_la_plus_longue": 1,
+      "franchissements_dans_une_maille": 0,
+      "revisions": 13,
+      "bornes": [
+        1,
+        13
+      ],
+      "trous": 0,
+      "spans": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "decroissance": {
+        "bandes": 13,
+        "inversions": 0,
+        "monotone": true,
+        "du_premier_au_dernier": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "nom": "PHercMANBp",
+      "du_prix": false,
+      "bandes": 9,
+      "spires_couvertes": 9,
+      "spires_par_surface": 1.0,
+      "bande_la_plus_longue": 1,
+      "franchissements_dans_une_maille": 0,
+      "revisions": 11,
+      "bornes": [
+        0,
+        8
+      ],
+      "trous": 0,
+      "spans": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "decroissance": {
+        "bandes": 9,
+        "inversions": 0,
+        "monotone": true,
+        "du_premier_au_dernier": [
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "objets_qui_publient_un_franchissement": [
+    "PHercParis4"
+  ],
+  "objets_a_une_spire_par_surface": [
+    "PHerc0172",
+    "PHerc0139",
+    "PHerc1667",
+    "PHerc0500P2",
+    "PHercMANBp"
+  ]
+}

@@ -4033,6 +4033,60 @@ parti dans le commit précédent sans être enregistré dans `temoins.sh`, et
 `batteries_enregistrees` — écrite la veille pour exactement ça — l'a nommée aussitôt.
 
 ---
+##### ⭐⭐⭐ LA VÉRITÉ DE TERRAIN DU GOULOT EXISTE SUR UN OBJET, ET UN SEUL — 92 contre 0
+
+> Mesure : `src/depot/une_surface_combien_de_spires.py` (20 contrôles, hors ligne) →
+> `docs/mesures/une_surface_combien_de_spires.json`. Figure :
+> `src/figures/figure_une_surface_combien_de_spires.py` (12 contrôles), le 2026-09-08.
+> Document : [`84`](84_une_surface_combien_de_spires.md).
+>
+> ```bash
+> uv run python src/depot/une_surface_combien_de_spires.py \
+>     --json docs/mesures/une_surface_combien_de_spires.json
+> uv run python src/figures/figure_une_surface_combien_de_spires.py \
+>     --sortie docs/images/84_une_surface_combien_de_spires.png
+> ```
+
+⚠⚠⚠ **Une surface publiée qui ne couvre qu'UNE spire ne contient AUCUN transfert de spire à
+spire** — elle dit où sont les feuilles, jamais comment on passe de l'une à l'autre. Or c'est
+exactement le goulot de l'objectif. Mesuré sur l'index, sans un téléchargement :
+
+![combien de spires une seule surface traverse-t-elle](images/84_une_surface_combien_de_spires.png)
+
+| objet | bandes | spires | spires/surface | la + longue | **franchissements dans une maille** |
+|---|---:|---:|---:|---:|---:|
+| **`PHercParis4`** | 28 | 120 | **4,29** | **18** | **92** |
+| `PHerc0172` | 44 | 44 | 1,0 | 1 | **0** |
+| `PHerc0139` | 37 | 37 | 1,0 | 1 | **0** |
+| `PHerc1667` | 19 | 19 | 1,0 | 1 | **0** |
+| `PHerc0500P2` | 13 | 13 | 1,0 | 1 | **0** |
+| `PHercMANBp` | 9 | 9 | 1,0 | 1 | **0** |
+
+⭐⭐ **Et la longueur des bandes décroît sans une seule inversion** — `18 10 8 7 6 5 5 4 4 4 4 4 3
+3 3 3 3 3 3 3 3 2 2 2 2 2 2 2` — en pavant `w010..w129` **sans un trou**. Une bande est ce qu'une
+passe humaine a produit d'un coup : c'est la **courbe de coût du déroulage manuel**, lue sans rien
+mesurer soi-même. ⚠ Le **sens** du rang, lui, n'est pas établi : la circonférence croît vers
+l'extérieur, ce qui expliquerait la décroissance, mais le trancher demande un rayon donc un
+`tifxyz`.
+
+⚠⚠⚠ **Même la meilleure bande reste sous le compte du prix : 18 contre 31.** Le corpus le plus
+riche du concours ne contient pas une marche entière ; il contient dix-sept franchissements
+d'affilée, puis il faut **recoudre 28 bandes** — le même problème une spire plus loin.
+
+> ⭐⭐ **CE QUE ÇA DÉBLOQUE.** C'est la première fois que la **portée** de ce dépôt peut se situer
+> contre du **travail humain publié** plutôt que contre une borne censurée par le corpus
+> ([`82`](82_la_borne_etait_le_mur.md)) : une portée de **18** égalerait la meilleure passe humaine
+> publiée, une portée de **31** la dépasserait de 72 %. Et le corpus qui permet cette comparaison
+> est sur **un seul objet**.
+
+⚠⚠ **Ma première version a effacé un objet en silence** : exiger que le nom d'un segment
+**commence** par sa bande a fait disparaître `PHerc0500P2` (`0500P2-wrap01_0919`) — l'objet
+courant, absent du tableau sans qu'une ligne le signale. Le contrôle « l'objet courant publie une
+spire par surface » l'a dit **en levant sur une clef absente**, ce qui a produit une seconde
+correction : ⭐ **un objet manquant est désormais un échec NOMMÉ, pas une exception** — une
+batterie qui lève ne dit pas combien de contrôles ont tourné.
+
+---
 ##### ⭐⭐⭐ UNE CELLULE PEUT-ELLE SAVOIR QU'ELLE A TORT, sans regarder la cible ?
 
 > Mesure : `src/nappe/la_cellule_sait_elle_quelle_a_tort.py` (14 contrôles) →

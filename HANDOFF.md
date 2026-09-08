@@ -132,6 +132,18 @@ varie de moins d'un facteur dix** selon l'endroit (`10→11` : 19,4 à 1224,8 µ
 `10615 10571 19831` rend **+2 bras de dynamique** à toutes les comparaisons de marcheurs, sans
 changer d'objet ni recalibrer quoi que ce soit.
 
+⭐⭐⭐ **ET LE FAIT QUI PÈSE LE PLUS LOURD SUR LA DÉCISION D'OBJET**
+([`84`](docs/84_une_surface_combien_de_spires.md)) : `PHercParis4` publie ses 120 spires en **28
+bandes multi-spires**, donc **92 franchissements de spire contenus dans une seule maille**. Les
+cinq autres objets du corpus — `PHerc0172`, `PHerc0139`, `PHerc1667`, `PHerc0500P2`, `PHercMANBp` —
+publient **une spire par surface, sans exception**, donc **zéro**. Or le goulot de l'objectif
+**est** le transfert de spire à spire : **la vérité de terrain de ce goulot existe sur un objet, et
+un seul.**
+
+⚠⚠ Et la plus longue bande vaut **18** spires contre les **31** du prix : même le corpus le plus
+riche du concours ne contient pas une marche entière. Mais c'est la première fois que la portée de
+ce dépôt peut se comparer à du **travail humain publié** plutôt qu'à une borne censurée.
+
 ---
 
 ## REPRISE (historique) — 2026-08-28, fin d'après-midi

@@ -5247,6 +5247,61 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/84_une_surface_combien_de_spires.md
+- **lignes** : 103
+- **nature** : RESULTAT
+  (recensement de l'empaquetage des spires dans les surfaces publiées, lu sur l'index cache, sans
+  aucun téléchargement.)
+- **résumé** : La vérification que [`81`](../81_le_rouleau_designe_ne_publie_rien.md) avait laissée
+  ouverte a rendu, **avant tout téléchargement**, plus que la question posée. `PHercParis4` ne
+  publie pas 120 surfaces d'une spire : il publie **28 bandes multi-spires** — `w010-027`,
+  `w028-037`, … `w128-129` — donc **92 franchissements de spire contenus dans une seule maille**.
+  `PHerc0172` (44), `PHerc0139` (37), `PHerc1667` (19), `PHerc0500P2` (13) et `PHercMANBp` (9)
+  publient **une spire par surface, sans exception**, donc **zéro**. Or le goulot de l'objectif
+  **est** le transfert de spire à spire : la vérité de terrain de ce goulot existe donc sur un
+  objet, et un seul.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **Un franchissement dans une seule maille est la vérité de terrain du goulot.** Une
+    surface d'une seule spire dit *où sont les feuilles*, jamais *comment on passe de l'une à
+    l'autre* — elle donne la réponse en morceaux déjà séparés.
+  - ⚠ L'identité qui rend le compte vérifiable : *franchissements = spires couvertes − bandes*,
+    assertée sur chaque ligne. Le 92 n'est pas un chiffre à part mais une conséquence des deux
+    autres.
+  - ⚠ **Deux révisions d'une même bande ne font pas deux bandes** : `PHercParis4` publie **58**
+    segments pour 28 bandes ; les compter deux fois doublerait le corpus sans une spire de plus.
+  - ⭐⭐ **La longueur des bandes décroît sans une seule inversion** : 18, 10, 8, 7, 6, 5, 5, puis
+    des 4, des 3 et des 2 — zéro remontée sur 28, et les bandes **pavent** `w010..w129` sans un
+    trou (asserté à part : douze bandes peuvent couvrir douze spires en sautant des rangs). Une
+    bande est ce qu'une passe humaine a produit d'un coup, donc la suite est la **courbe de coût du
+    déroulage manuel**.
+  - ⚠ **Ce que la suite ne dit PAS : le sens du rang.** La circonférence croît vers l'extérieur,
+    ce qui expliquerait la décroissance, mais rien ici ne l'établit — le trancher demande un rayon,
+    donc un `tifxyz` (le moins cher publié est à 45,532 µm).
+  - ⚠⚠⚠ **Même la meilleure bande reste sous le compte du prix : 18 spires contre 31.** Le corpus
+    le plus riche du concours ne contient pas une marche entière ; il contient dix-sept
+    franchissements d'affilée, puis il faut recoudre 28 bandes — le même problème une spire plus
+    loin.
+  - ⭐⭐ Première fois que le dépôt peut situer sa **portée** contre du travail humain publié
+    plutôt que contre une borne censurée par le corpus ([`82`](../82_la_borne_etait_le_mur.md) ) :
+    une portée de 18 égalerait la meilleure passe humaine publiée, une portée de 31 la dépasserait
+    de 72 %.
+  - ⚠ Aucun des treize rouleaux du Grand Prize n'apparaît dans le tableau, faute d'une seule bande.
+- **rétractations / corrections internes** :
+  - §5 : ⚠⚠ **ma première version a effacé un objet en silence.** Exiger que le nom d'un segment
+    **commence** par sa bande a fait disparaître `PHerc0500P2`, dont les surfaces s'appellent
+    `0500P2-wrap01_0919` — l'objet courant, absent du tableau sans qu'une ligne le signale. C'est
+    le contrôle « l'objet courant publie une spire par surface » qui l'a dit, **en levant sur une
+    clef absente**. La bande est désormais lue par le **lecteur partagé** de
+    `les_spires_consecutives_publiees`, qui porte déjà la règle et ses sondes.
+  - §5 : ⭐ **un objet manquant est devenu un échec NOMMÉ, pas une exception.** Une batterie qui
+    lève ne dit pas combien de contrôles ont tourné : tous ceux qui suivaient le crash n'avaient
+    pas eu lieu, et le compte ne le disait pas.
+- **preuve de lecture intégrale** :
+  - l. 54 : `monotonie se réfute d'une seule inversion, donc elle se mesure plutôt qu'elle ne s'affirme. Les`
+  - l. 73 : `⭐⭐ C'est la première fois que ce dépôt peut situer sa propre grandeur — la **portée** — contre du`
+
+---
+
 ### docs/83_le_corpus_et_non_la_boite.md
 - **lignes** : 124
 - **nature** : RESULTAT
@@ -5694,7 +5749,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 5241
+- **lignes** : 5295
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -7024,8 +7079,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 4549 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 5241 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 4603 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 5295 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

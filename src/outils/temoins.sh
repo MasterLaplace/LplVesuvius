@@ -1537,6 +1537,7 @@ run "la cellule sait-elle"   uv run --project "$ROOT" python "$ROOT/src/nappe/la
 run "combien de fenetres"    uv run --project "$ROOT" python "$ROOT/src/commun/combien_de_fenetres.py" --verifier
 run "batteries enregistrees" uv run --project "$ROOT" python "$ROOT/src/depot/batteries_enregistrees.py" --verifier
 run "spires consecutives"   uv run --project "$ROOT" python "$ROOT/src/depot/les_spires_consecutives_publiees.py" --verifier
+run "spires par surface"    uv run --project "$ROOT" python "$ROOT/src/depot/une_surface_combien_de_spires.py" --verifier
 run "le mur du corpus"      uv run --project "$ROOT" python "$ROOT/src/nappe/le_mur_du_corpus.py" --verifier
 run "ou poser la boite"     uv run --project "$ROOT" python "$ROOT/src/nappe/ou_poser_la_boite.py" --verifier
 run "suivre nappe"           uv run --project "$ROOT" python "$ROOT/src/commun/suivre_nappe.py" --verifier
@@ -1578,6 +1579,7 @@ run "fig : ou ca se froisse"   uv run --project "$ROOT" python "$ROOT/src/figure
 run "fig : la cellule sait"    uv run --project "$ROOT" python "$ROOT/src/figures/figure_la_cellule_sait_elle_quelle_a_tort.py" --verifier
 run "fig : combien fenetres"   uv run --project "$ROOT" python "$ROOT/src/figures/figure_combien_de_fenetres.py" --verifier
 run "fig : spires consecutives" uv run --project "$ROOT" python "$ROOT/src/figures/figure_les_spires_consecutives.py" --verifier
+run "fig : spires par surface" uv run --project "$ROOT" python "$ROOT/src/figures/figure_une_surface_combien_de_spires.py" --verifier
 run "fig : mur du corpus"    uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_mur_du_corpus.py" --verifier
 run "fig : ou poser la boite" uv run --project "$ROOT" python "$ROOT/src/figures/figure_ou_poser_la_boite.py" --verifier
 run "fig : en raccrochant"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_en_raccrochant.py" --verifier
