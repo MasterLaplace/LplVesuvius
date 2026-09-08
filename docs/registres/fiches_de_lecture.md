@@ -5247,6 +5247,56 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/85_le_sens_du_rang.md
+- **lignes** : 102
+- **nature** : RESULTAT
+  (rayon des 28 bandes de `PHercParis4`, lu sur 28 Mio de maillage publié, plus le test d'une
+  prédiction falsifiable sur le coût d'une passe humaine.)
+- **résumé** : Tranche la seule question que [`84`](../84_une_surface_combien_de_spires.md) avait
+  laissée ouverte : **le rang monte vers le DEHORS**, 27 montées de rayon sur 27 paires, de
+  **7,41 mm** au rang 10 à **24,84 mm** au rang 128, et le verdict **survit à un second centre**.
+  La décroissance des bandes est donc bien la direction radiale. Et la prédiction ajoutée pour
+  rendre l'explication falsifiable — si une passe couvre une longueur de feuille constante, alors
+  `étendue × 2πR` l'est — tient : **384 mm en médiane**, et hors la bande du cœur les 27 autres
+  dans **283 à 535 mm**, un facteur **1,89**, écart-type relatif **17 %**.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **Le rang monte vers le dehors** : 27/27 montées, et l'ordre survit à un second centre
+    (celui de la seule bande intérieure). Une sonde le confirme dans l'autre sens : forcer le
+    centre à l'origine fait tomber **sept** contrôles, dont le sens lui-même.
+  - ⭐⭐ **Le nombre de spires tombe parce que les spires s'allongent**, à longueur de feuille à peu
+    près constante. La bande du cœur (18 spires, 838 mm) est publiée **à part** : c'est un second
+    régime, et une dispersion qui la mélangerait décrirait deux populations comme une.
+  - ⚠⚠ **Le résidu de 17 % n'est pas du bruit, c'est de la quantification.** On ne coupe pas deux
+    spires et demie : dans chacun des **9 paliers** d'étendue constante la longueur croît
+    mécaniquement avec le rayon.
+  - ⚠ Les maximums avant chaque descente d'étendue déclinent (838, 535, 498, 490, 459, 436, 433,
+    415 mm), ce qui **ressemble** à un budget par passe se réduisant vers l'extérieur — mais un pas
+    de quantification vaut une circonférence entière (156 mm au rang 128), donc à cette précision
+    les deux **ne sont pas séparables**, et la mesure ne tranche pas.
+  - ⚠⚠⚠ **Ce maillage ne donne PAS le pas inter-feuilles**, et c'est mesuré sur la grille
+    elle-même : ses cellules voisines sont à **905 µm**, trois à six fois l'écart cherché. C'est
+    une limite de **GRILLE**, publiée comme telle — donc la **demi-feuille de `PHercParis4` reste
+    un chiffre à mesurer ailleurs**, et le coût d'un changement d'objet n'est pas encore chiffré.
+  - ⭐⭐ **Le coût humain se compte en longueur de feuille, pas en nombre de spires** : la même
+    heure couvre **neuf fois moins de spires** au bord qu'au cœur. Donc « 31 spires » n'est pas
+    l'unité naturelle de l'effort, et deux objets de 31 spires ne coûtent pas la même chose.
+- **rétractations / corrections internes** :
+  - §5 : ⚠⚠ **un contrôle corrigé deux fois.** Il comparait d'abord les deux révisions **par
+    position** dans deux listes de longueurs différentes — une bande manquante décalait tout, et
+    les « 16 % d'écart de rayon entre révisions » étaient un désaccord de **mes deux listes**.
+    Corrigé, il exigeait ensuite que les rayons ne bougent pas de plus d'un pour cent : **ils
+    bougent de 15,9 %, et ce n'est pas un défaut** — les deux révisions couvrent 50 877 et 78 453
+    cellules, donc leurs médianes portent sur deux échantillons. Un contrôle qui exigerait
+    l'égalité serait un contrôle qui ne peut pas passer pour une raison qui n'est pas un défaut.
+    Ce qui est asserté est le **classement**, qui survit entier (27/27 sur l'ancienne révision).
+  - §6 : le document borne sa portée — il ne change pas les 31 spires que le prix demande, et la
+    plus longue bande publiée en vaut 18.
+- **preuve de lecture intégrale** :
+  - l. 77 : `l'égalité serait un contrôle qui ne peut pas passer pour une raison qui n'est pas un défaut.`
+  - l. 87 : `couvre **neuf fois moins de spires** au bord qu'au cœur, à longueur de feuille égale. Donc « 31`
+
+---
+
 ### docs/84_une_surface_combien_de_spires.md
 - **lignes** : 103
 - **nature** : RESULTAT
@@ -5749,7 +5799,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 5295
+- **lignes** : 5352
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -7079,8 +7129,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 4603 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 5295 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 4660 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 5352 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

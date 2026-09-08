@@ -1,0 +1,462 @@
+{
+  "fragment": "PHercParis4",
+  "volume": "20260310170716",
+  "voxel_um": 45.532,
+  "revision": "recente",
+  "bandes": 28,
+  "bandes_lues": 28,
+  "bandes_absentes": [],
+  "centre_vx": [
+    1183.5,
+    1143.0
+  ],
+  "centre_de_controle_vx": [
+    1196.2,
+    1129.2
+  ],
+  "lignes": [
+    {
+      "de": 10,
+      "a": 27,
+      "etendue": 18,
+      "rayon_median_um": 7409.9,
+      "rayon_p10_um": 3325.7,
+      "rayon_p90_um": 11294.4,
+      "points": 78453,
+      "rayon_median_second_centre_um": 7263.4,
+      "longueur_par_passe_mm": 838.0
+    },
+    {
+      "de": 28,
+      "a": 37,
+      "etendue": 10,
+      "rayon_median_um": 8509.8,
+      "rayon_p10_um": 3609.5,
+      "rayon_p90_um": 13166.6,
+      "points": 81876,
+      "rayon_median_second_centre_um": 8468.5,
+      "longueur_par_passe_mm": 534.7
+    },
+    {
+      "de": 38,
+      "a": 45,
+      "etendue": 8,
+      "rayon_median_um": 9912.4,
+      "rayon_p10_um": 3879.3,
+      "rayon_p90_um": 14627.5,
+      "points": 86786,
+      "rayon_median_second_centre_um": 9857.9,
+      "longueur_par_passe_mm": 498.3
+    },
+    {
+      "de": 46,
+      "a": 52,
+      "etendue": 7,
+      "rayon_median_um": 11144.1,
+      "rayon_p10_um": 4409.4,
+      "rayon_p90_um": 15890.8,
+      "points": 92333,
+      "rayon_median_second_centre_um": 11079.3,
+      "longueur_par_passe_mm": 490.1
+    },
+    {
+      "de": 53,
+      "a": 58,
+      "etendue": 6,
+      "rayon_median_um": 12167.7,
+      "rayon_p10_um": 5124.5,
+      "rayon_p90_um": 17090.2,
+      "points": 88354,
+      "rayon_median_second_centre_um": 12018.5,
+      "longueur_par_passe_mm": 458.7
+    },
+    {
+      "de": 59,
+      "a": 63,
+      "etendue": 5,
+      "rayon_median_um": 13096.4,
+      "rayon_p10_um": 5868.3,
+      "rayon_p90_um": 18211.0,
+      "points": 83893,
+      "rayon_median_second_centre_um": 12918.3,
+      "longueur_par_passe_mm": 411.4
+    },
+    {
+      "de": 64,
+      "a": 68,
+      "etendue": 5,
+      "rayon_median_um": 13886.8,
+      "rayon_p10_um": 6514.8,
+      "rayon_p90_um": 19193.8,
+      "points": 91081,
+      "rayon_median_second_centre_um": 13711.2,
+      "longueur_par_passe_mm": 436.3
+    },
+    {
+      "de": 69,
+      "a": 72,
+      "etendue": 4,
+      "rayon_median_um": 14577.6,
+      "rayon_p10_um": 7076.4,
+      "rayon_p90_um": 20067.8,
+      "points": 77759,
+      "rayon_median_second_centre_um": 14399.6,
+      "longueur_par_passe_mm": 366.4
+    },
+    {
+      "de": 73,
+      "a": 76,
+      "etendue": 4,
+      "rayon_median_um": 15192.1,
+      "rayon_p10_um": 7654.3,
+      "rayon_p90_um": 20927.0,
+      "points": 82584,
+      "rayon_median_second_centre_um": 15039.3,
+      "longueur_par_passe_mm": 381.8
+    },
+    {
+      "de": 77,
+      "a": 80,
+      "etendue": 4,
+      "rayon_median_um": 15832.8,
+      "rayon_p10_um": 8266.0,
+      "rayon_p90_um": 21750.2,
+      "points": 87382,
+      "rayon_median_second_centre_um": 15687.4,
+      "longueur_par_passe_mm": 397.9
+    },
+    {
+      "de": 81,
+      "a": 84,
+      "etendue": 4,
+      "rayon_median_um": 16508.3,
+      "rayon_p10_um": 8931.6,
+      "rayon_p90_um": 22638.6,
+      "points": 92832,
+      "rayon_median_second_centre_um": 16392.8,
+      "longueur_par_passe_mm": 414.9
+    },
+    {
+      "de": 85,
+      "a": 88,
+      "etendue": 4,
+      "rayon_median_um": 17212.6,
+      "rayon_p10_um": 9583.1,
+      "rayon_p90_um": 23416.1,
+      "points": 96930,
+      "rayon_median_second_centre_um": 17116.9,
+      "longueur_par_passe_mm": 432.6
+    },
+    {
+      "de": 89,
+      "a": 91,
+      "etendue": 3,
+      "rayon_median_um": 17872.9,
+      "rayon_p10_um": 10225.4,
+      "rayon_p90_um": 24189.8,
+      "points": 76264,
+      "rayon_median_second_centre_um": 17808.4,
+      "longueur_par_passe_mm": 336.9
+    },
+    {
+      "de": 92,
+      "a": 94,
+      "etendue": 3,
+      "rayon_median_um": 18423.6,
+      "rayon_p10_um": 10769.3,
+      "rayon_p90_um": 24784.9,
+      "points": 78655,
+      "rayon_median_second_centre_um": 18364.6,
+      "longueur_par_passe_mm": 347.3
+    },
+    {
+      "de": 95,
+      "a": 97,
+      "etendue": 3,
+      "rayon_median_um": 18975.4,
+      "rayon_p10_um": 11279.9,
+      "rayon_p90_um": 25360.8,
+      "points": 80609,
+      "rayon_median_second_centre_um": 18899.5,
+      "longueur_par_passe_mm": 357.7
+    },
+    {
+      "de": 98,
+      "a": 100,
+      "etendue": 3,
+      "rayon_median_um": 19486.8,
+      "rayon_p10_um": 11762.6,
+      "rayon_p90_um": 25872.8,
+      "points": 82176,
+      "rayon_median_second_centre_um": 19403.7,
+      "longueur_par_passe_mm": 367.3
+    },
+    {
+      "de": 101,
+      "a": 103,
+      "etendue": 3,
+      "rayon_median_um": 20016.2,
+      "rayon_p10_um": 12254.9,
+      "rayon_p90_um": 26415.6,
+      "points": 84026,
+      "rayon_median_second_centre_um": 19936.8,
+      "longueur_par_passe_mm": 377.3
+    },
+    {
+      "de": 104,
+      "a": 106,
+      "etendue": 3,
+      "rayon_median_um": 20480.7,
+      "rayon_p10_um": 12740.6,
+      "rayon_p90_um": 26863.7,
+      "points": 84858,
+      "rayon_median_second_centre_um": 20411.9,
+      "longueur_par_passe_mm": 386.1
+    },
+    {
+      "de": 107,
+      "a": 109,
+      "etendue": 3,
+      "rayon_median_um": 20971.5,
+      "rayon_p10_um": 13208.1,
+      "rayon_p90_um": 27354.4,
+      "points": 86912,
+      "rayon_median_second_centre_um": 20907.6,
+      "longueur_par_passe_mm": 395.3
+    },
+    {
+      "de": 110,
+      "a": 112,
+      "etendue": 3,
+      "rayon_median_um": 21472.3,
+      "rayon_p10_um": 13653.8,
+      "rayon_p90_um": 27794.2,
+      "points": 88415,
+      "rayon_median_second_centre_um": 21411.7,
+      "longueur_par_passe_mm": 404.7
+    },
+    {
+      "de": 113,
+      "a": 115,
+      "etendue": 3,
+      "rayon_median_um": 22010.4,
+      "rayon_p10_um": 14191.7,
+      "rayon_p90_um": 28247.6,
+      "points": 90169,
+      "rayon_median_second_centre_um": 21967.1,
+      "longueur_par_passe_mm": 414.9
+    },
+    {
+      "de": 116,
+      "a": 117,
+      "etendue": 2,
+      "rayon_median_um": 22488.3,
+      "rayon_p10_um": 14673.8,
+      "rayon_p90_um": 28626.1,
+      "points": 61530,
+      "rayon_median_second_centre_um": 22439.9,
+      "longueur_par_passe_mm": 282.6
+    },
+    {
+      "de": 118,
+      "a": 119,
+      "etendue": 2,
+      "rayon_median_um": 22883.0,
+      "rayon_p10_um": 15130.3,
+      "rayon_p90_um": 28943.1,
+      "points": 62058,
+      "rayon_median_second_centre_um": 22811.7,
+      "longueur_par_passe_mm": 287.6
+    },
+    {
+      "de": 120,
+      "a": 121,
+      "etendue": 2,
+      "rayon_median_um": 23295.9,
+      "rayon_p10_um": 15531.2,
+      "rayon_p90_um": 29323.9,
+      "points": 63195,
+      "rayon_median_second_centre_um": 23221.8,
+      "longueur_par_passe_mm": 292.7
+    },
+    {
+      "de": 122,
+      "a": 123,
+      "etendue": 2,
+      "rayon_median_um": 23725.4,
+      "rayon_p10_um": 15937.7,
+      "rayon_p90_um": 29734.5,
+      "points": 63072,
+      "rayon_median_second_centre_um": 23657.7,
+      "longueur_par_passe_mm": 298.1
+    },
+    {
+      "de": 124,
+      "a": 125,
+      "etendue": 2,
+      "rayon_median_um": 24232.1,
+      "rayon_p10_um": 16453.5,
+      "rayon_p90_um": 30063.6,
+      "points": 65154,
+      "rayon_median_second_centre_um": 24159.2,
+      "longueur_par_passe_mm": 304.5
+    },
+    {
+      "de": 126,
+      "a": 127,
+      "etendue": 2,
+      "rayon_median_um": 24778.9,
+      "rayon_p10_um": 16712.6,
+      "rayon_p90_um": 30549.0,
+      "points": 72670,
+      "rayon_median_second_centre_um": 24705.0,
+      "longueur_par_passe_mm": 311.4
+    },
+    {
+      "de": 128,
+      "a": 129,
+      "etendue": 2,
+      "rayon_median_um": 24844.6,
+      "rayon_p10_um": 16534.8,
+      "rayon_p90_um": 30594.7,
+      "points": 67565,
+      "rayon_median_second_centre_um": 24834.1,
+      "longueur_par_passe_mm": 312.2
+    }
+  ],
+  "sens": {
+    "paires": 27,
+    "montees": 27,
+    "descentes": 0,
+    "vers_le_dehors": true,
+    "vers_le_dedans": false,
+    "du_premier_au_dernier": [
+      7409.9,
+      24844.6
+    ],
+    "rangs": [
+      10,
+      128
+    ]
+  },
+  "sens_second_centre": {
+    "paires": 27,
+    "montees": 27,
+    "descentes": 0,
+    "vers_le_dehors": true,
+    "vers_le_dedans": false,
+    "du_premier_au_dernier": [
+      7263.4,
+      24834.1
+    ],
+    "rangs": [
+      10,
+      128
+    ]
+  },
+  "le_sens_survit_au_centre": true,
+  "longueur_par_passe_mm": {
+    "bandes": 28,
+    "median": 384.0,
+    "min": 282.6,
+    "max": 838.0,
+    "rapport": 2.97,
+    "ecart_type_relatif": 0.268
+  },
+  "paliers_dune_meme_etendue": {
+    "paliers": [
+      {
+        "etendue": 18,
+        "bandes": 1,
+        "longueur_min_mm": 838.0,
+        "longueur_max_mm": 838.0,
+        "croit_avec_le_rayon": true
+      },
+      {
+        "etendue": 10,
+        "bandes": 1,
+        "longueur_min_mm": 534.7,
+        "longueur_max_mm": 534.7,
+        "croit_avec_le_rayon": true
+      },
+      {
+        "etendue": 8,
+        "bandes": 1,
+        "longueur_min_mm": 498.3,
+        "longueur_max_mm": 498.3,
+        "croit_avec_le_rayon": true
+      },
+      {
+        "etendue": 7,
+        "bandes": 1,
+        "longueur_min_mm": 490.1,
+        "longueur_max_mm": 490.1,
+        "croit_avec_le_rayon": true
+      },
+      {
+        "etendue": 6,
+        "bandes": 1,
+        "longueur_min_mm": 458.7,
+        "longueur_max_mm": 458.7,
+        "croit_avec_le_rayon": true
+      },
+      {
+        "etendue": 5,
+        "bandes": 2,
+        "longueur_min_mm": 411.4,
+        "longueur_max_mm": 436.3,
+        "croit_avec_le_rayon": true
+      },
+      {
+        "etendue": 4,
+        "bandes": 5,
+        "longueur_min_mm": 366.4,
+        "longueur_max_mm": 432.6,
+        "croit_avec_le_rayon": true
+      },
+      {
+        "etendue": 3,
+        "bandes": 9,
+        "longueur_min_mm": 336.9,
+        "longueur_max_mm": 414.9,
+        "croit_avec_le_rayon": true
+      },
+      {
+        "etendue": 2,
+        "bandes": 7,
+        "longueur_min_mm": 282.6,
+        "longueur_max_mm": 312.2,
+        "croit_avec_le_rayon": true
+      }
+    ],
+    "maximums_avant_descente_mm": [
+      838.0,
+      534.7,
+      498.3,
+      490.1,
+      458.7,
+      436.3,
+      432.6,
+      414.9
+    ],
+    "tous_les_paliers_croissent": true
+  },
+  "longueur_par_passe_hors_coeur_mm": {
+    "bandes": 27,
+    "median": 381.8,
+    "min": 282.6,
+    "max": 534.7,
+    "rapport": 1.89,
+    "ecart_type_relatif": 0.173
+  },
+  "echantillonnage_du_maillage": {
+    "grille": [
+      184,
+      448
+    ],
+    "valides": 78453,
+    "pas_median_vx": 19.88,
+    "pas_median_um": 905.2
+  },
+  "ce_maillage_donne_le_pas_inter_feuilles": false
+}

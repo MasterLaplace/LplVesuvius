@@ -144,6 +144,17 @@ un seul.**
 riche du concours ne contient pas une marche entière. Mais c'est la première fois que la portée de
 ce dépôt peut se comparer à du **travail humain publié** plutôt qu'à une borne censurée.
 
+⭐⭐ **Et le coût humain se compte en LONGUEUR DE FEUILLE, pas en nombre de spires**
+([`85`](docs/85_le_sens_du_rang.md)) : le rang monte vers le dehors (27/27 montées de rayon, de
+7,41 à 24,84 mm, verdict survivant à un second centre), et une passe humaine couvre **384 mm de
+feuille en médiane** — hors la bande du cœur, les 27 autres tiennent dans **283 à 535 mm**, un
+facteur 1,89. La même heure couvre donc **neuf fois moins de spires au bord qu'au cœur**, et
+« 31 spires » n'est pas l'unité naturelle de l'effort.
+
+⚠⚠⚠ **Ce qui reste non chiffré, et c'est un coût du changement d'objet** : le maillage à 45,532 µm
+a ses cellules voisines à **905 µm**, donc il ne peut pas donner le pas inter-feuilles. **La
+demi-feuille de `PHercParis4` reste à mesurer**, sur un maillage plus fin ou sur le volume.
+
 ---
 
 ## REPRISE (historique) — 2026-08-28, fin d'après-midi

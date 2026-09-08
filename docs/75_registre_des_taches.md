@@ -4087,6 +4087,63 @@ correction : ⭐ **un objet manquant est désormais un échec NOMMÉ, pas une ex
 batterie qui lève ne dit pas combien de contrôles ont tourné.
 
 ---
+##### ⭐⭐⭐ LE RANG MONTE VERS LE DEHORS — 27/27, et une passe humaine couvre un tiers de mètre
+
+> Mesure : `src/nappe/le_sens_du_rang.py` (34 contrôles) → `docs/mesures/le_sens_du_rang.json`.
+> Figure : `src/figures/figure_le_sens_du_rang.py` (12 contrôles), le 2026-09-08.
+> Document : [`85`](85_le_sens_du_rang.md). ⚠ 28 Mio de maillage rapatriés dans
+> `data/paris4_bandes/` (gitignoré, retéléchargeable depuis l'index).
+>
+> ```bash
+> uv run python src/nappe/le_sens_du_rang.py --telecharger --toutes-revisions
+> uv run python src/nappe/le_sens_du_rang.py --json docs/mesures/le_sens_du_rang.json
+> uv run python src/figures/figure_le_sens_du_rang.py \
+>     --sortie docs/images/85_le_sens_du_rang.png
+> ```
+
+![le rang monte-t-il vers le dehors](images/85_le_sens_du_rang.png)
+
+⭐⭐⭐ **La seule question que `84` avait laissée ouverte est tranchée** : le rayon des 28 bandes
+monte **27 fois sur 27**, de **7,41 mm** au rang 10 à **24,84 mm** au rang 128, et l'ordre
+**survit à un second centre**. ⭐ Sonde dans l'autre sens : forcer le centre à l'origine fait
+tomber **sept** contrôles.
+
+★★ **Et la prédiction ajoutée pour rendre l'explication FALSIFIABLE tient.** Si une passe humaine
+couvre une longueur de feuille constante, `étendue × 2πR` l'est aussi :
+
+| | |
+|---|---:|
+| médiane, 28 bandes | **384 mm** |
+| bornes hors la bande du cœur (27) | **283 à 535 mm** (**×1,89**), écart-type relatif **17 %** |
+| la bande du cœur, à part | 18 spires, **838 mm** — un second régime |
+
+⚠⚠ **Le résidu de 17 % n'est pas du bruit, c'est de la quantification** : on ne coupe pas deux
+spires et demie, et dans chacun des **9 paliers** d'étendue constante la longueur croît
+mécaniquement avec le rayon. Les maximums avant chaque descente déclinent (838, 535, 498, 490,
+459, 436, 433, 415 mm), ce qui *ressemblerait* à un budget par passe se réduisant vers
+l'extérieur — mais un pas de quantification vaut une **circonférence entière** (156 mm au rang
+128), donc **à cette précision les deux ne sont pas séparables** et la mesure ne tranche pas.
+
+⚠⚠⚠ **ET CE MAILLAGE NE DONNE PAS LE PAS INTER-FEUILLES**, mesuré sur la grille elle-même : ses
+cellules voisines sont à **905 µm**, trois à six fois l'écart cherché. Limite de **GRILLE**,
+publiée comme telle — donc **la demi-feuille de `PHercParis4` reste un chiffre à mesurer
+ailleurs**, et le coût d'un changement d'objet n'est pas encore chiffré.
+
+> ⭐⭐ **CE QUE ÇA CHANGE.** Le coût humain se compte en **longueur de feuille**, pas en nombre de
+> spires : la même heure couvre **neuf fois moins de spires** au bord qu'au cœur. Donc « 31
+> spires » n'est pas l'unité naturelle de l'effort, et deux objets de 31 spires ne coûtent pas la
+> même chose. ⚠ Ce que ça ne change pas : le prix demande toujours 31, et la plus longue bande
+> publiée en vaut **18**.
+
+⚠⚠ **Un contrôle corrigé DEUX fois, et les deux erreurs sont gardées.** Il comparait d'abord les
+révisions **par position** dans deux listes de longueurs différentes — une bande manquante décalait
+tout, et les « 16 % d'écart de rayon » étaient un désaccord de **mes deux listes**. Corrigé, il
+exigeait ensuite l'égalité des rayons à 1 % : **ils diffèrent de 15,9 % et ce n'est pas un défaut**
+— les deux révisions couvrent **50 877** et **78 453** cellules. Un contrôle qui exigerait
+l'égalité ne peut pas passer pour une raison qui n'est pas un défaut. Ce qui est asserté est le
+**classement**, qui survit entier.
+
+---
 ##### ⭐⭐⭐ UNE CELLULE PEUT-ELLE SAVOIR QU'ELLE A TORT, sans regarder la cible ?
 
 > Mesure : `src/nappe/la_cellule_sait_elle_quelle_a_tort.py` (14 contrôles) →
