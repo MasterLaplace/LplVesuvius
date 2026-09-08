@@ -4307,6 +4307,55 @@ laisser le disque **intact**.
 > ne pourrait que rétrécir**. Tranche suivante, à part parce qu'elle touche une garde.
 
 ---
+##### ⭐⭐⭐ L'ÉCHELLE DE LA PROVENANCE — ce que « 0 orphelin » cachait
+
+> Garde : `src/depot/artefacts_orphelins.py`, désormais **9 contrôles de mécanique + 5 contrôles
+> d'échelle + 1116 artefacts balayés**. Document : [`89`](89_lechelle_de_la_provenance.md), le
+> 2026-09-08.
+>
+> ```bash
+> uv run python src/depot/artefacts_orphelins.py --verifier
+> lplv enchainer docs/chaines/les_gardes_de_larbre.chaine
+> ```
+
+| barreau | ce qu'il affirme | compte |
+|---|---|---:|
+| ⭐ **1 · OBSERVÉ** | une chaîne a **vu** ce fichier apparaître pendant un étage | **3** |
+| ⚠ **2 · DEVINÉ** | l'heuristique de tige a matché, **et sa longueur est retenue** | **1111** |
+| ⛔ **3 · ORPHELIN** | ni l'un ni l'autre | **0** |
+
+**La dette : `4 car. ×12 · 5 car. ×275 · 6 car. ×30 · 7 car. ×22 · 8 car. ×162 · 9 car. ×70 ·
+10 car. ×67 · 11 car. ×10 · 12 car. ×27`** — soit **675 verdicts sur 1111 (61 %) qui tiennent à
+douze caractères ou moins**, et **12 à quatre**.
+
+⚠⚠ **Le dépôt n'est pas en plus mauvais état qu'hier** : ces 1111 verdicts étaient déjà des
+devinettes. Ce qui change est qu'ils **portent leur prix**, et qu'une chaîne écrite les déplace un
+par un vers le barreau certain. ⚠ La dette ne fait **pas** échouer la garde — rouge sur 61 % du
+corpus, elle se ferait désapprendre, et son propre compromis l'avait établi (389 orphelins sur 568
+au nom exact).
+
+⭐ **Neuf contrôles sur entrée fabriquée tournent AVANT le parcours** de **430,76 s** — 81 % du
+budget des quatre gardes, chiffre que `lplv enchainer` venait de mesurer — et sortent sans le payer
+s'ils échouent.
+
+> ⭐⭐⭐ **TROIS DÉFAUTS ATTRAPÉS DÈS LE PREMIER PARCOURS, TOUS LES MIENS**, dont deux dans les
+> contrôles que je venais d'écrire :
+> 1. ⛔ « 3 enregistrements créditent un fichier disparu » — **les trois PNG existent**. Je testais
+>    « disparu » contre la liste **filtrée** (`SUFFIXES` n'a pas `.png`), pas contre le disque.
+> 2. ⛔ le compte des barreaux tombait **à une unité près** : je soustrayais `len(EXEMPTS)` en
+>    supposant tous les exemptés rencontrés.
+> 3. ⭐⭐ **et cette unité cachait une EXEMPTION MORTE** — `src/outils/repos.tsv` exempté d'un
+>    parcours qui ne retenait que `docs/` et `data/`, donc une décision qui **ne protégeait rien**.
+>    Réparation d'**accessibilité** et non suppression (le skill : injoignable = défaut), coût
+>    **zéro** — `git ls-files src/**` ne rend qu'**un** fichier à suffixe d'artefact, exactement
+>    celui que la table nomme. Un contrôle neuf garde le cas pour de bon.
+
+⚠ **Piège d'outillage repayé sous une forme neuve** : mes relances ont laissé **trois parcours de
+430 s tourner en concurrence**, se disputant les entrées-sorties — aucun ne finissait et aucune
+sortie n'apparaissait, les tampons n'étant vidés qu'à la fin. Variante en **lecture seule** du
+piège « deux `validate.sh` concurrents ». Tués **par PID**, jamais par motif.
+
+---
 ##### ⭐⭐⭐ UNE CELLULE PEUT-ELLE SAVOIR QU'ELLE A TORT, sans regarder la cible ?
 
 > Mesure : `src/nappe/la_cellule_sait_elle_quelle_a_tort.py` (14 contrôles) →

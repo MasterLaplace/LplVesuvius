@@ -188,10 +188,21 @@ est la **retrouvabilité** : seuls **38 %** des 486 artefacts sont retrouvables 
 domaine (AST, co-occurrence) : rapport global **×1,89**, `tracecheck` **×0,61** (sous le hasard).
 Un reclassement gagnerait peut-être ×3 pour **353 déplacements**.
 
+⭐⭐⭐ **ET `artefacts_orphelins` EST DEVENU UNE ÉCHELLE** ([`89`](docs/89_lechelle_de_la_provenance.md)) :
+il ne dit plus « produit » mais **par quel barreau** — **3 observés** par une chaîne, **1111
+devinés** par une tige (dont **675 sur ≤12 caractères**, 12 sur quatre), **0 orphelin**. ⚠ Le dépôt
+n'est pas en plus mauvais état qu'hier : ces verdicts étaient déjà des devinettes, ils **portent
+maintenant leur prix**, et chaque chaîne écrite en déplace vers le barreau certain. La dette ne
+fait **pas** échouer la garde — rouge sur 61 % du corpus, elle se ferait désapprendre.
+
+⚠ Trois défauts attrapés dès le premier parcours, dont ⭐ **une exemption morte** :
+`src/outils/repos.tsv` était exempté d'un parcours qui ne retenait que `docs/` et `data/`, donc une
+décision qui ne protégeait rien. Réparée par **accessibilité** (coût zéro : un seul fichier à
+suffixe d'artefact sous `src/`), et gardée par un contrôle neuf.
+
 ⭐ **Reste de l'architecture, chiffré** : la couche partagée (`_leve` ×19, `_pixels` ×14, `lire`
-×13, `charger` ×10 — le noyau de fait est `figure_commune` 77×, `zarr_depth` 22×) ; les **paliers
-de build**, qui coûtent **5 arêtes** puisque le graphe est déjà à sens unique à **96 %** ; et
-`artefacts_orphelins` lisant les enregistrements de chaîne pour cesser de deviner.
+×13, `charger` ×10 — le noyau de fait est `figure_commune` 77×, `zarr_depth` 22×) ; et les
+**paliers de build**, qui coûtent **5 arêtes** puisque le graphe est déjà à sens unique à **96 %**.
 
 ---
 

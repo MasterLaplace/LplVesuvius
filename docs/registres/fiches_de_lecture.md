@@ -5247,6 +5247,51 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/89_lechelle_de_la_provenance.md
+- **lignes** : 94
+- **nature** : RESULTAT
+  (`artefacts_orphelins` devient une échelle d'escalade à trois barreaux, adossée à la provenance
+  observée par [`88`](../88_enchainer.md).)
+- **résumé** : ⭐⭐⭐ La garde disait « 0 artefact sans producteur ». Elle dit désormais **par quel
+  barreau** chaque artefact est passé : **3 observés** par une chaîne, **1111 devinés** par une
+  tige — dont **675 sur ≤12 caractères** et **275 sur cinq**. Le compte d'orphelins ne bouge pas ;
+  ce qui change est qu'on sait ce qu'il vaut. La dette **ne peut que rétrécir** : chaque chaîne
+  écrite déplace des artefacts du barreau 2 vers le 1.
+- **conclusions extractibles** :
+  - ⚠⚠ **L'invariant du skill était exactement ce qui manquait** : *un barreau baisse la
+    PRÉTENTION du résultat, jamais la BARRE, et jamais en silence.* Le fichier disait « produit »
+    pour les barreaux 1 et 2 **indistinctement**.
+  - ⭐ **Un préfixe plus étroit était déjà réfuté par la garde elle-même** : le nom exact
+    signalait 389 orphelins sur 568, et une alerte qui désigne les deux tiers du corpus ne
+    désigne rien. Le remède est l'**observation**, pas un seuil.
+  - ⚠⚠ **La dette ne fait PAS échouer la garde**, délibérément : rouge sur 61 % du corpus, elle
+    se ferait désapprendre. Ce qui échoue reste un orphelin, plus **quatre incohérences de
+    l'échelle elle-même**.
+  - ⭐ **Neuf contrôles sur entrée fabriquée tournent AVANT le parcours** de 430 s (81 % du
+    budget des quatre gardes, mesuré par `lplv enchainer`) et sortent sans le payer s'ils
+    échouent. Une logique exerçable seulement en payant 430 s est une logique que personne
+    n'exerce en développant.
+- **rétractations / corrections internes** :
+  - §3 : ⛔ **« 3 enregistrements créditent un fichier disparu »** — les trois PNG existent et
+    sont commités. Je testais « disparu » contre la **liste filtrée** (`SUFFIXES` n'a pas
+    `.png`), pas contre le disque. Un fichier qui existe sans être un artefact *gardé* n'est pas
+    un fichier disparu.
+  - §3 : ⛔ **le compte des barreaux tombait à une unité près** — je soustrayais `len(EXEMPTS)`
+    en supposant tous les exemptés rencontrés.
+  - §3 : ⭐⭐ **et cette unité cachait une EXEMPTION MORTE.** `src/outils/repos.tsv` était exempté
+    d'un parcours qui ne retenait que `docs/` et `data/` : la décision ne protégeait rien.
+    Réparation d'**accessibilité** (le skill : injoignable = défaut) et non suppression — coût
+    **zéro**, `git ls-files src/**` ne rend qu'un fichier à suffixe d'artefact. Un contrôle neuf
+    garde le cas.
+  - §5 : ⚠ **trois parcours de 430 s en concurrence** se disputaient les entrées-sorties — aucun
+    ne finissait, aucune sortie n'apparaissait (tampons vidés à la fin). Variante en lecture
+    seule du piège « deux `validate.sh` concurrents ». Tués **par PID**, jamais par motif.
+- **preuve de lecture intégrale** :
+  - l. 52 : `n'est pas un fichier disparu.**`
+  - l. 59 : `décision **ne protégeait rien**, et personne ne pouvait le voir. Le skill tranche entre`
+
+---
+
 ### docs/88_enchainer.md
 - **lignes** : 102
 - **nature** : OUTIL
@@ -5946,7 +5991,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 5515
+- **lignes** : 5564
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -7276,8 +7321,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 4823 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 5515 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 4872 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 5564 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
