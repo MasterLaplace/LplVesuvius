@@ -4507,8 +4507,15 @@ la pente de 0,2 % en médiane et 1,5 % au pire**, sur 15 bandes.
 ##### ⭐⭐⭐ OÙ LES SPIRES SONT-ELLES PARALLÈLES ? AU MILIEU — et les deux échecs sont au BORD
 
 > Mesure : `src/nappe/deux_modes_dechec_du_transfert.py` (20 contrôles) →
-> `docs/mesures/deux_modes_dechec_du_transfert.json`.
+> `docs/mesures/deux_modes_dechec_du_transfert.json`. Figure :
+> `src/figures/figure_ou_les_spires_sont_elles_paralleles.py` (14 contrôles).
 > Document : [`93`](93_ou_les_spires_sont_elles_paralleles.md), le 2026-09-08.
+
+![où les spires sont-elles parallèles](images/93_ou_les_spires_sont_elles_paralleles.png)
+
+⭐⭐ **Le panneau B de la figure est la carte du problème** : il superpose la continuité de `92` et
+le parallélisme de `93` par tiers, et montre que **les deux montent au même endroit**. Écrire « le
+problème est localisé » sans les mettre côte à côte demanderait qu'on le croie.
 
 Un marcheur transfère le long de la **normale**, et ce pas n'atterrit sur la spire voisine que si
 les deux spires sont **parallèles** — à 30° de désalignement, un pas de 182 µm tombe à **91 µm de

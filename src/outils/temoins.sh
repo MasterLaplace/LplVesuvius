@@ -1593,6 +1593,7 @@ run "fig : demi-feuille"     uv run --project "$ROOT" python "$ROOT/src/figures/
 run "fig : axe courbe"       uv run --project "$ROOT" python "$ROOT/src/figures/figure_laxe_est_une_courbe.py" --verifier
 run "fig : pas transferts"   uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_pas_lu_sur_les_transferts.py" --verifier
 run "fig : continuite"       uv run --project "$ROOT" python "$ROOT/src/figures/figure_la_continuite_des_transferts.py" --verifier
+run "fig : paralleles ?"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_ou_les_spires_sont_elles_paralleles.py" --verifier
 run "fig : mur du corpus"    uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_mur_du_corpus.py" --verifier
 run "fig : ou poser la boite" uv run --project "$ROOT" python "$ROOT/src/figures/figure_ou_poser_la_boite.py" --verifier
 run "fig : en raccrochant"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_en_raccrochant.py" --verifier

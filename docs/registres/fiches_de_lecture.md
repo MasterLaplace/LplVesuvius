@@ -5248,7 +5248,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
 
 
 ### docs/93_ou_les_spires_sont_elles_paralleles.md
-- **lignes** : 83
+- **lignes** : 86
 - **nature** : RESULTAT
   (le parallélisme entre spires voisines, mesuré sur les transferts humains de `PHercParis4` ;
   la question qui décide où un pas géométrique suffit.)
@@ -5268,6 +5268,10 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⭐ **Contrôle de méthode intégré** : une normale de spirale doit diverger au quart de tour
     (62–66°) et **revenir** au tour entier (7,7–42°). Sans ce retour, la mesure ne suivrait pas
     la spire.
+  - ⭐⭐ **La figure porte la carte du problème** : son panneau B superpose la continuité de `92`
+    et le parallélisme de `93` par tiers, et c'est lui qui montre que **les deux montent au même
+    endroit**. Écrire « le problème est localisé » sans les mettre côte à côte demanderait qu'on
+    le croie.
 - **rétractations / corrections internes** :
   - §5 : ⚠⚠⚠ **une erreur qui a inversé la conclusion.** Mon exploration comparait la **bande 0**
     à la **bande 7** en appelant la seconde « le bord » — or les deux sont dans le tiers
@@ -5279,6 +5283,11 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     l'inverse ont été corrigées.
   - §6 : ⚠⚠ le repère **trompeur** est gardé : comparée à une spirale parfaite (0,4°), la mesure
     semblait 14 à 19× trop grande **partout**.
+  - figure : ⚠ **la figure et le document portaient deux noms pour une même tranche**
+    (`93_ou_les_spires_sont_paralleles` contre `..._sont_elles_...`), soit exactement le défaut
+    de retrouvabilité que [`87`](../87_la_forme_du_depot.md) et
+    [`89`](../89_lechelle_de_la_provenance.md) viennent de chiffrer. Aligné sur le nom du
+    document. ⚠ Et trois collisions verticales corrigées dans les panneaux.
   - §7 : ⚠ **`--verifier` est resté vert à 17 contrôles pendant que `main()` plantait** sur une
     clef renommée. L'affichage vit désormais dans `main_affichage(r)`, **que la batterie lance**.
     Et un titre d'affichage disait « AUX DEUX BOUTS » juste au-dessus d'une ligne qui le
@@ -6168,7 +6177,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 5754
+- **lignes** : 5761
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -7498,8 +7507,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 5062 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 5754 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 5069 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 5761 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

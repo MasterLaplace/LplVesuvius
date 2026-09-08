@@ -5,6 +5,8 @@
 > réussis : quasi parallèles à mi-rayon (×1,23), désalignées au bord (×4,18), et non résolues sur
 > les deux bandes les plus internes.**
 
+![où les spires sont-elles parallèles](images/93_ou_les_spires_sont_elles_paralleles.png)
+
 ## 1. Pourquoi cette question précède toute construction
 
 À un désalignement de trente degrés, un pas de 182 µm tombe à **91 µm de côté** — la moitié du pas
@@ -80,4 +82,5 @@ uv run python src/nappe/le_sens_du_rang.py --telecharger
 uv run python src/nappe/deux_modes_dechec_du_transfert.py --verifier
 uv run python src/nappe/deux_modes_dechec_du_transfert.py \
     --json docs/mesures/deux_modes_dechec_du_transfert.json
+uv run python src/figures/figure_ou_les_spires_sont_elles_paralleles.py --verifier
 ```
