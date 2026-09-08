@@ -5247,6 +5247,55 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/87_la_forme_du_depot.md
+- **lignes** : 111
+- **nature** : INSTRUMENT + RESULTAT
+  (diagnostic re-mesurable de la forme du dépôt : graphe d'imports, duplication, retrouvabilité
+  des artefacts, surface de test, cohésion des dossiers. C'est lui qui dira si un refactor a
+  servi.)
+- **résumé** : La plainte de l'auteur — *« plein de scripts dans tous les sens, des duplicata, des
+  trucs abandonnés qu'on refait sans le savoir, aucun test »* — est **vraie sur trois points et
+  fausse sur le quatrième**. ⛔ Faux : **267/356** modules (75 %) exposent `--verifier` et **0**
+  batterie n'est non enregistrée, donc les tests ne sont pas la panne. ⭐⭐⭐ Vrai et chiffré :
+  **117 modules isolés** (33 %), 26 noms dupliqués dans ≥4 modules (contrat de greffon écarté), et
+  surtout **seuls 38 % des 486 artefacts sont retrouvables par leur nom complet**.
+- **conclusions extractibles** :
+  - ⚠⚠⚠ **La garde qui existe pour ne rien perdre ne peut pas échouer.** `artefacts_orphelins`
+    déclare « 0 orphelin » et **46 % de son verdict repose sur une tige de ≤12 caractères**, la
+    plus courte à **4** (`juge_scroll4.json` matché par le mot `juge`). Le compromis est assumé
+    dans sa docstring — le nom exact signalait 389/568 — donc le remède n'est pas un préfixe plus
+    étroit mais un producteur **DÉCLARÉ** au lieu de deviné. C'est la cause mécanique de « on
+    refait des trucs existants ».
+  - ⭐⭐⭐ **ET IL NE FAUT PAS RE-PARTITIONNER LES DOSSIERS**, mesuré : cohésion de vocabulaire de
+    domaine (AST, co-occurrence) `apprendre` ×23,9 · `rendu` ×10,5 · `figures` ×5,6 · `nappe` ×2,0
+    · `encre` ×1,35 · `volume` ×1,15 · ⛔ **`tracecheck` ×0,61**, rapport global **×1,89**. Un
+    reclassement gagnerait peut-être ×3 pour **353 déplacements** : beaucoup de churn, aucun gain
+    sur la panne. Ce que la mesure désigne est la **couche partagée**, pas le rangement.
+  - ⚠⚠ **La cohésion absolue est 0,0385** : deux modules d'un même dossier partagent **4 %** de
+    leur vocabulaire. Les modules ne partagent pas du code, ils **réexpriment** un domaine commun.
+  - ⛔ `tracecheck` n'est pas un dossier : cinq modules qui se ressemblent moins entre eux qu'avec
+    un module au hasard.
+  - ⚠ Les vrais trous de test sont **`excision` 13/29 (45 %)** et **`volume` 8/17 (47 %)** ;
+    `apprendre` 8/8 et `outils` 8/8 sont des récits et des lanceurs, légitimement sans batterie.
+  - ⚠ **2 `.venv` sous `src/`** portant **27 245** fichiers (d'où « 30 657 `.py` » d'un `find`
+    naïf contre **356** réels), **482** lanceurs gelés, et **588** des 1 074 `.json` versionnés
+    hors de `docs/mesures/`.
+  - Le noyau de fait, donc l'endroit où une primitive doit remonter : `figure_commune` (77),
+    `figure_le_residu_est_une_translation` (38), `zarr_depth` (22), `le_corpus_des_spires` (22).
+- **rétractations / corrections internes** :
+  - §6 : ⚠⚠ **une vérification incapable d'échouer, dans le module qui diagnostique les
+    vérifications incapables d'échouer.** Mon compte de batteries sortait à **zéro** — `Path(champ)
+    .name` sur un chemin entre guillemets — et mon contrôle n'assertait que « c'est un entier ».
+    Le compte est désormais borné par le bas.
+  - §6 : ⚠ **deux mesures jetées avant publication** : « 348 artefacts nommés nulle part » (ne
+    captait que les chemins littéraux) puis « 240 » (ignorait la troncature de la garde). Gardées
+    au journal parce qu'une mesure jetée est une leçon sur l'instrument.
+- **preuve de lecture intégrale** :
+  - l. 48 : `**389 orphelins sur 568**, et « une alerte qui désigne les deux tiers du corpus ne désigne rien ».`
+  - l. 97 : `d'échouer, dans le module qui diagnostique les vérifications incapables d'échouer.** Le contrôle`
+
+---
+
 ### docs/86_la_demi_feuille_par_objet.md
 - **lignes** : 101
 - **nature** : RESULTAT
@@ -5851,7 +5900,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 5412
+- **lignes** : 5469
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -7181,8 +7230,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 4720 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 5412 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 4777 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 5469 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

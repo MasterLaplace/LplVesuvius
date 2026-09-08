@@ -4204,6 +4204,63 @@ ne lit que la prose du bas : ⭐ corrigé par **`figure_commune.Tracee`**, un ca
 **104 figures** et que l'angle mort y est le même — sans retrofit des 104.
 
 ---
+##### ⭐⭐⭐ LA FORME DU DÉPÔT, MESURÉE — et la garde qui ne peut pas échouer
+
+> Instrument : `src/depot/la_forme_du_depot.py` (22 contrôles) →
+> `docs/mesures/la_forme_du_depot.json`. Document : [`87`](87_la_forme_du_depot.md), le
+> 2026-09-08. ⚠ Ce n'est pas un audit ponctuel : c'est lui qui dira si un refactor a servi.
+>
+> ```bash
+> uv run python src/depot/la_forme_du_depot.py --json docs/mesures/la_forme_du_depot.json
+> ```
+
+Plainte de l'auteur : *« plein de scripts dans tous les sens, pas un gros logiciel avec des
+plugins, des duplicata, des trucs abandonnés qu'on refait sans le savoir, aucun test »*. Une
+plainte se traite avec un chiffre.
+
+⛔ **FAUX sur un point, et il faut le dire d'abord** : **267/356** modules (75 %) exposent
+`--verifier` et **0** batterie n'est non enregistrée. **Les tests ne sont pas la panne.** Les
+vrais trous sont `excision` **13/29** et `volume` **8/17** ; `apprendre` 8/8 et `outils` 8/8 sont
+des récits et des lanceurs.
+
+⭐ **Vrai et chiffré** : 356 modules, **393 arêtes** d'import, **152 (43 %)** n'importent rien du
+dépôt, **117 (33 %) isolés**. Duplication hors contrat de greffon : `_leve` ×19, `_pixels` ×14,
+`lire` ×13, `charger` ×10, `comparer` ×10, `rapporter` ×10.
+
+⚠⚠⚠ **LA VRAIE PANNE, ET C'EST UNE GARDE DU DÉPÔT.** Sur **486** artefacts de `docs/mesures/`,
+seuls **182 (38 %)** sont retrouvables par leur **nom complet** ; `artefacts_orphelins` déclare
+« 0 orphelin » avec **46 % de son verdict reposant sur une tige de ≤12 caractères**, la plus courte
+à **4** (`juge_scroll4.json` matché par le mot `juge`). ⚠ Le compromis est **assumé dans sa
+docstring** — le nom exact signalait 389/568, « une alerte qui désigne les deux tiers du corpus ne
+désigne rien » — donc le remède n'est pas un préfixe plus étroit : **le producteur doit être
+DÉCLARÉ.** C'est la cause mécanique de « on refait des trucs existants ».
+
+> ⭐⭐⭐ **ET UNE IDÉE DE L'AUTEUR A ANNULÉ UN REFACTOR.** Sa proposition — *« la liste de tous les
+> mots du dépôt, les plus utilisés, ça peut faire des catégories ? »* — reformulée en la version
+> qui marche : pas les mots de la prose (francophone, ils fuient des docstrings) mais le
+> **vocabulaire de domaine lu par l'AST**, et pas la fréquence mais la **co-occurrence**.
+>
+> | dossier | rapport cohésion interne / hors dossier |
+> |---|---:|
+> | `apprendre` · `rendu` · `figures` | ×23,9 · ×10,5 · ×5,6 |
+> | `depot` · `nappe` · `tables` | ×2,0 à ×2,3 |
+> | `encre` (48) · `volume` (17) | ×1,35 · **×1,15** |
+> | ⛔ **`tracecheck`** (5) | **×0,61** |
+>
+> Rapport global **×1,89**, et cohésion absolue **0,0385** — deux modules d'un même dossier
+> partagent **4 %** de leur vocabulaire. ⛔ `tracecheck` est **sous le hasard** : ses modules se
+> ressemblent moins entre eux qu'avec un module tiré au hasard. **CONCLUSION : il ne faut PAS
+> re-partitionner.** Un reclassement gagnerait peut-être ×3 pour **353 déplacements** — la mesure
+> désigne la **couche partagée** et la **provenance déclarée**, pas le rangement.
+
+⚠⚠ **Une faute à moi, dans le module qui diagnostique les fautes** : mon compte de batteries
+sortait à **zéro** (`Path(champ).name` sur un chemin entre guillemets) et **mon contrôle
+n'assertait que « c'est un entier »** — une vérification incapable d'échouer, dans le module qui
+diagnostique les vérifications incapables d'échouer. ⚠ Et **deux mesures jetées avant
+publication** : « 348 artefacts nommés nulle part » puis « 240 », toutes deux fausses pour deux
+raisons différentes. Une mesure jetée est une leçon sur l'instrument.
+
+---
 ##### ⭐⭐⭐ UNE CELLULE PEUT-ELLE SAVOIR QU'ELLE A TORT, sans regarder la cible ?
 
 > Mesure : `src/nappe/la_cellule_sait_elle_quelle_a_tort.py` (14 contrôles) →

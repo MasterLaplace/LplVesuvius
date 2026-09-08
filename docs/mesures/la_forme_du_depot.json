@@ -1,0 +1,756 @@
+{
+  "modules_du_depot": 356,
+  "graphe": {
+    "modules": 356,
+    "aretes": 393,
+    "sans_dependance": [
+      "01_suivre_une_feuille",
+      "02_comment_savoir",
+      "03_le_mur_invisible",
+      "04_pas_une_fonction",
+      "05_le_temoin_negatif",
+      "06_deux_causes",
+      "07_ce_que_mesurer_coute",
+      "08_la_fenetre_qui_mesure",
+      "ab_segments",
+      "allure_du_rendu",
+      "analyse",
+      "apparier_volumes",
+      "artefacts_orphelins",
+      "assembler_mosaique",
+      "batteries_enregistrees",
+      "batteries_incapables_dechouer",
+      "bruit_dune_fenetre",
+      "calibration_corpus",
+      "chiffres_sans_record",
+      "choisir_tirages",
+      "compare_maps",
+      "comparer_encre",
+      "comparer_plafond",
+      "compter_corpus",
+      "contenu_en_double",
+      "contraste_des_objets",
+      "correlate",
+      "couche_de_rendu",
+      "couches_distantes",
+      "cout_de_la_fenetre",
+      "cout_du_rendu",
+      "cout_passage_echelle",
+      "croiser_instruments",
+      "decimer_couches",
+      "decimer_tifxyz",
+      "decouper_tifxyz",
+      "deja_dit",
+      "deplacer",
+      "depth_profile",
+      "derive_avec_profondeur",
+      "derive_extrapolable",
+      "derive_ou_loterie",
+      "deux_objets",
+      "dimensions_tiff",
+      "dispersion_des_fragments",
+      "ecart_en_spires",
+      "effet_du_cache",
+      "effet_taille_fenetre",
+      "empreinte_surface",
+      "evaluate_segment",
+      "fenetre_sur_masque",
+      "fenetres_par_region",
+      "fetch_traces",
+      "fiches_a_jour",
+      "figure_commune",
+      "figure_comparaison",
+      "figure_correction_appliquee",
+      "figure_deux_axes",
+      "figure_deux_traces",
+      "figure_difficulte",
+      "figure_doublons",
+      "figure_echelle",
+      "figure_graine_endroit",
+      "figure_incertitude",
+      "figure_profondeur",
+      "figure_sensibilite",
+      "figure_signatures",
+      "figure_typographie",
+      "figure_verbes",
+      "fraicheur_des_figures",
+      "fusions",
+      "incertitude_carte",
+      "infer_ink",
+      "jeu_du_juge",
+      "la_case_vide",
+      "la_demi_feuille_par_objet",
+      "la_derive_nest_pas_le_referent",
+      "la_forme_du_depot",
+      "la_graine_mieux_etayee",
+      "la_nappe_en_obj",
+      "langue",
+      "laxe_nest_pas_une_ligne",
+      "le_bruit_de_lechantillon",
+      "le_chemin_du_nombre_publie",
+      "le_debinage_rend_il_quelque_chose",
+      "le_drapeau_de_normale",
+      "le_mur_du_corpus",
+      "le_pas_de_la_grille",
+      "le_rayon_des_mesures",
+      "le_recalage_local",
+      "le_sens_des_indices",
+      "le_seuil_au_bon_rayon",
+      "le_volume_du_maillage",
+      "lecart_apparie",
+      "les_indices_de_spire",
+      "les_spires_consecutives_publiees",
+      "liens_casses",
+      "lire_selfcross",
+      "lisible_a_neuf_microns",
+      "lplv",
+      "matiere_des_piles",
+      "measure",
+      "mesures_videes",
+      "modele_de_proprete",
+      "murs_et_causes",
+      "nature_des_documents",
+      "niveau_du_maillage",
+      "nombre_de_fresnel",
+      "ou_la_verite_existe",
+      "ou_vit_ce_rouleau",
+      "paires_denergie",
+      "paver_ou_echantillonner",
+      "permalien",
+      "poids_growpatch",
+      "poids_recuperable",
+      "ppm_to_tifxyz",
+      "projeter_tangentiel",
+      "proximity",
+      "proximity_vs_ink",
+      "radial",
+      "regarder_rendu",
+      "render_segment",
+      "renvois_article",
+      "reparation_et_proximite",
+      "repro_empty_verdict",
+      "resolution_phase",
+      "robustesse_material",
+      "rogner_nappe",
+      "rouleau_entier",
+      "s3_size",
+      "sous_fenetre",
+      "stack_structure",
+      "structure",
+      "table_difficulte",
+      "table_graines",
+      "table_pas",
+      "table_saut_spire",
+      "table_second_axe",
+      "table_separabilite",
+      "table_thread_limit",
+      "taches_ouvertes",
+      "telecharger",
+      "temoin_contre_nos_cartes",
+      "temoin_negatif",
+      "tif_en_png",
+      "topologie_du_volume",
+      "tracecheck",
+      "track_z",
+      "transport_de_calibration",
+      "typographie",
+      "verifier_citations",
+      "zarr_depth"
+    ],
+    "isoles": [
+      "01_suivre_une_feuille",
+      "02_comment_savoir",
+      "03_le_mur_invisible",
+      "04_pas_une_fonction",
+      "05_le_temoin_negatif",
+      "06_deux_causes",
+      "07_ce_que_mesurer_coute",
+      "08_la_fenetre_qui_mesure",
+      "ab_segments",
+      "allure_du_rendu",
+      "analyse",
+      "artefacts_orphelins",
+      "assembler_mosaique",
+      "batteries_enregistrees",
+      "batteries_incapables_dechouer",
+      "bruit_dune_fenetre",
+      "chiffres_sans_record",
+      "choisir_tirages",
+      "compare_maps",
+      "compter_corpus",
+      "contenu_en_double",
+      "contraste_des_objets",
+      "couche_de_rendu",
+      "couches_distantes",
+      "cout_de_la_fenetre",
+      "cout_du_rendu",
+      "cout_passage_echelle",
+      "decimer_couches",
+      "decimer_tifxyz",
+      "decouper_tifxyz",
+      "deja_dit",
+      "deplacer",
+      "derive_extrapolable",
+      "deux_objets",
+      "dimensions_tiff",
+      "dispersion_des_fragments",
+      "ecart_en_spires",
+      "effet_du_cache",
+      "effet_taille_fenetre",
+      "empreinte_surface",
+      "evaluate_segment",
+      "fenetre_sur_masque",
+      "fenetres_par_region",
+      "fetch_traces",
+      "fiches_a_jour",
+      "figure_comparaison",
+      "figure_correction_appliquee",
+      "figure_deux_axes",
+      "figure_deux_traces",
+      "figure_difficulte",
+      "figure_doublons",
+      "figure_echelle",
+      "figure_graine_endroit",
+      "figure_incertitude",
+      "figure_profondeur",
+      "figure_sensibilite",
+      "figure_signatures",
+      "figure_typographie",
+      "figure_verbes",
+      "fraicheur_des_figures",
+      "jeu_du_juge",
+      "la_demi_feuille_par_objet",
+      "la_derive_nest_pas_le_referent",
+      "la_forme_du_depot",
+      "la_graine_mieux_etayee",
+      "laxe_nest_pas_une_ligne",
+      "le_bruit_de_lechantillon",
+      "le_chemin_du_nombre_publie",
+      "le_debinage_rend_il_quelque_chose",
+      "le_drapeau_de_normale",
+      "le_mur_du_corpus",
+      "le_pas_de_la_grille",
+      "le_rayon_des_mesures",
+      "le_seuil_au_bon_rayon",
+      "le_volume_du_maillage",
+      "les_indices_de_spire",
+      "liens_casses",
+      "lisible_a_neuf_microns",
+      "matiere_des_piles",
+      "measure",
+      "mesures_videes",
+      "modele_de_proprete",
+      "nature_des_documents",
+      "niveau_du_maillage",
+      "nombre_de_fresnel",
+      "ou_la_verite_existe",
+      "paires_denergie",
+      "paver_ou_echantillonner",
+      "permalien",
+      "poids_growpatch",
+      "poids_recuperable",
+      "ppm_to_tifxyz",
+      "regarder_rendu",
+      "renvois_article",
+      "reparation_et_proximite",
+      "repro_empty_verdict",
+      "resolution_phase",
+      "robustesse_material",
+      "rogner_nappe",
+      "rouleau_entier",
+      "s3_size",
+      "stack_structure",
+      "structure",
+      "table_difficulte",
+      "table_graines",
+      "table_pas",
+      "table_saut_spire",
+      "table_second_axe",
+      "table_separabilite",
+      "table_thread_limit",
+      "taches_ouvertes",
+      "temoin_contre_nos_cartes",
+      "tif_en_png",
+      "track_z",
+      "transport_de_calibration",
+      "typographie",
+      "verifier_citations"
+    ],
+    "noyau_de_fait": [
+      {
+        "module": "figure_commune",
+        "importe_par": 77
+      },
+      {
+        "module": "figure_le_residu_est_une_translation",
+        "importe_par": 38
+      },
+      {
+        "module": "zarr_depth",
+        "importe_par": 22
+      },
+      {
+        "module": "le_corpus_des_spires",
+        "importe_par": 22
+      },
+      {
+        "module": "langue",
+        "importe_par": 19
+      },
+      {
+        "module": "le_raccrochage_a_la_matiere",
+        "importe_par": 17
+      },
+      {
+        "module": "lecart_apparie",
+        "importe_par": 16
+      },
+      {
+        "module": "le_pas_normal_atteint_la_spire",
+        "importe_par": 16
+      },
+      {
+        "module": "tracecheck",
+        "importe_par": 12
+      },
+      {
+        "module": "test_convergence",
+        "importe_par": 10
+      },
+      {
+        "module": "le_sens_des_indices",
+        "importe_par": 9
+      },
+      {
+        "module": "les_wraps_publies",
+        "importe_par": 8
+      }
+    ]
+  },
+  "duplication": {
+    "contrat_de_greffon": [
+      "_verifier",
+      "afficher",
+      "dessiner",
+      "main",
+      "mesurer",
+      "prose",
+      "verifier"
+    ],
+    "noms_suspects": 26,
+    "les_pires": [
+      {
+        "nom": "_leve",
+        "modules": 19,
+        "ou": [
+          "decouper_tifxyz",
+          "figure_case_vide_remplie",
+          "figure_champ_de_recalage",
+          "figure_drapeau_de_normale",
+          "figure_la_derive_et_le_referent",
+          "figure_le_champ_de_fibres"
+        ]
+      },
+      {
+        "nom": "_pixels",
+        "modules": 14,
+        "ou": [
+          "ecart_de_maillages",
+          "figure_appuis",
+          "figure_calibration",
+          "figure_candidats",
+          "figure_contraste",
+          "figure_emballement"
+        ]
+      },
+      {
+        "nom": "lire",
+        "modules": 13,
+        "ou": [
+          "calibration_corpus",
+          "dispersion_des_fragments",
+          "ecart_de_maillages",
+          "figure_couverture",
+          "figure_excision",
+          "figure_graine_endroit"
+        ]
+      },
+      {
+        "nom": "charger",
+        "modules": 10,
+        "ou": [
+          "comparer_candidats",
+          "comparer_predictions",
+          "derive_avec_profondeur",
+          "effet_du_plafond",
+          "incertitude_carte",
+          "laxe_nest_pas_une_ligne"
+        ]
+      },
+      {
+        "nom": "comparer",
+        "modules": 10,
+        "ou": [
+          "ab_segments",
+          "ce_que_les_serveurs_publient",
+          "comparer_cartes",
+          "contraste_des_objets",
+          "deux_objets",
+          "le_rayon_des_mesures"
+        ]
+      },
+      {
+        "nom": "rapporter",
+        "modules": 10,
+        "ou": [
+          "bruit_dune_fenetre",
+          "corpus_par_energie",
+          "critere_relatif",
+          "deja_dit",
+          "effet_du_cache",
+          "effet_du_plafond"
+        ]
+      },
+      {
+        "nom": "legende",
+        "modules": 9,
+        "ou": [
+          "01_suivre_une_feuille",
+          "02_comment_savoir",
+          "03_le_mur_invisible",
+          "04_pas_une_fonction",
+          "05_le_temoin_negatif",
+          "06_deux_causes"
+        ]
+      },
+      {
+        "nom": "balayer",
+        "modules": 9,
+        "ou": [
+          "appui_de_pente",
+          "audit_profils_plats",
+          "deux_aplatissements",
+          "fenetre_utilisable",
+          "la_derive_est_elle_un_biais",
+          "le_recalage_local"
+        ]
+      },
+      {
+        "nom": "titre",
+        "modules": 8,
+        "ou": [
+          "01_suivre_une_feuille",
+          "02_comment_savoir",
+          "03_le_mur_invisible",
+          "04_pas_une_fonction",
+          "05_le_temoin_negatif",
+          "06_deux_causes"
+        ]
+      },
+      {
+        "nom": "phrase",
+        "modules": 8,
+        "ou": [
+          "01_suivre_une_feuille",
+          "02_comment_savoir",
+          "03_le_mur_invisible",
+          "04_pas_une_fonction",
+          "05_le_temoin_negatif",
+          "06_deux_causes"
+        ]
+      },
+      {
+        "nom": "confronter",
+        "modules": 8,
+        "ou": [
+          "comparer_candidats",
+          "comparer_plafond",
+          "critere_relatif",
+          "derive_avec_profondeur",
+          "effet_du_cache",
+          "effet_du_plafond"
+        ]
+      },
+      {
+        "nom": "juger",
+        "modules": 7,
+        "ou": [
+          "audit_profils_plats",
+          "critere_relatif",
+          "derive_extrapolable",
+          "fraicheur_des_figures",
+          "graine_admissible",
+          "la_translation_applicable"
+        ]
+      }
+    ]
+  },
+  "retrouvabilite": {
+    "artefacts": 486,
+    "nom_complet": 183,
+    "apres_troncature": 303,
+    "jamais_retrouves": 0,
+    "sur_tige_peu_credible": 224,
+    "part_peu_credible": 0.461,
+    "tige_la_plus_courte": 4,
+    "histogramme_des_tiges": {
+      "4": 11,
+      "5": 56,
+      "6": 28,
+      "7": 22,
+      "8": 18,
+      "9": 25,
+      "10": 31,
+      "11": 8,
+      "12": 25,
+      "13": 28,
+      "14": 1,
+      "15": 10,
+      "16": 5,
+      "17": 6,
+      "18": 4,
+      "19": 2,
+      "20": 10,
+      "21": 2,
+      "23": 9,
+      "25": 1,
+      "26": 1
+    },
+    "exemples": [
+      {
+        "tige": 4,
+        "artefact": "juge_scroll4.json"
+      },
+      {
+        "tige": 4,
+        "artefact": "juge_scroll4_bas.json"
+      },
+      {
+        "tige": 4,
+        "artefact": "onde_radiale.json"
+      },
+      {
+        "tige": 4,
+        "artefact": "saut_20250108000001-w026_2025010854.json"
+      },
+      {
+        "tige": 4,
+        "artefact": "saut_20251226000000-w055_2025122611.json"
+      },
+      {
+        "tige": 4,
+        "artefact": "saut_20260206000000-w042_2026020613.json"
+      },
+      {
+        "tige": 4,
+        "artefact": "saut_20260206000002-w054_2026020617.json"
+      },
+      {
+        "tige": 4,
+        "artefact": "saut_20260219000001-w048_2026021912.json"
+      },
+      {
+        "tige": 4,
+        "artefact": "saut_20260227000000-w052_2026022705.json"
+      },
+      {
+        "tige": 4,
+        "artefact": "saut_20260302000000-w039_2026030210.json"
+      }
+    ]
+  },
+  "surface": {
+    "modules": 356,
+    "exposent_verifier": 267,
+    "exposent_json": 180,
+    "enregistres_dans_la_batterie": 267,
+    "verifiables_non_enregistres": 0,
+    "sans_batterie": 89,
+    "sans_batterie_par_dossier": [
+      {
+        "dossier": "figures",
+        "sans": 16,
+        "total": 105,
+        "part": 0.15
+      },
+      {
+        "dossier": "excision",
+        "sans": 13,
+        "total": 29,
+        "part": 0.45
+      },
+      {
+        "dossier": "nappe",
+        "sans": 10,
+        "total": 64,
+        "part": 0.16
+      },
+      {
+        "dossier": "apprendre",
+        "sans": 8,
+        "total": 8,
+        "part": 1.0
+      },
+      {
+        "dossier": "outils",
+        "sans": 8,
+        "total": 8,
+        "part": 1.0
+      },
+      {
+        "dossier": "volume",
+        "sans": 8,
+        "total": 17,
+        "part": 0.47
+      },
+      {
+        "dossier": "encre",
+        "sans": 7,
+        "total": 48,
+        "part": 0.15
+      },
+      {
+        "dossier": "tables",
+        "sans": 7,
+        "total": 10,
+        "part": 0.7
+      },
+      {
+        "dossier": "tracecheck",
+        "sans": 4,
+        "total": 5,
+        "part": 0.8
+      },
+      {
+        "dossier": "commun",
+        "sans": 3,
+        "total": 10,
+        "part": 0.3
+      },
+      {
+        "dossier": "rendu",
+        "sans": 3,
+        "total": 5,
+        "part": 0.6
+      },
+      {
+        "dossier": "graine",
+        "sans": 2,
+        "total": 15,
+        "part": 0.13
+      }
+    ]
+  },
+  "cohesion": {
+    "modules_retenus": 354,
+    "lignes": [
+      {
+        "dossier": "figures",
+        "modules": 105,
+        "cohesion_interne": 0.125,
+        "hors_dossier": 0.0222,
+        "rapport": 5.62
+      },
+      {
+        "dossier": "nappe",
+        "modules": 64,
+        "cohesion_interne": 0.0466,
+        "hors_dossier": 0.0235,
+        "rapport": 1.99
+      },
+      {
+        "dossier": "encre",
+        "modules": 48,
+        "cohesion_interne": 0.0337,
+        "hors_dossier": 0.025,
+        "rapport": 1.35
+      },
+      {
+        "dossier": "depot",
+        "modules": 31,
+        "cohesion_interne": 0.0439,
+        "hors_dossier": 0.0196,
+        "rapport": 2.24
+      },
+      {
+        "dossier": "excision",
+        "modules": 29,
+        "cohesion_interne": 0.0385,
+        "hors_dossier": 0.0216,
+        "rapport": 1.78
+      },
+      {
+        "dossier": "volume",
+        "modules": 17,
+        "cohesion_interne": 0.0244,
+        "hors_dossier": 0.0213,
+        "rapport": 1.15
+      },
+      {
+        "dossier": "graine",
+        "modules": 15,
+        "cohesion_interne": 0.0263,
+        "hors_dossier": 0.0185,
+        "rapport": 1.42
+      },
+      {
+        "dossier": "commun",
+        "modules": 10,
+        "cohesion_interne": 0.0297,
+        "hors_dossier": 0.0227,
+        "rapport": 1.31
+      },
+      {
+        "dossier": "apprendre",
+        "modules": 8,
+        "cohesion_interne": 0.398,
+        "hors_dossier": 0.0167,
+        "rapport": 23.88
+      },
+      {
+        "dossier": "outils",
+        "modules": 8,
+        "cohesion_interne": 0.0198,
+        "hors_dossier": 0.0108,
+        "rapport": 1.83
+      },
+      {
+        "dossier": "tables",
+        "modules": 8,
+        "cohesion_interne": 0.0477,
+        "hors_dossier": 0.0204,
+        "rapport": 2.34
+      },
+      {
+        "dossier": "rendu",
+        "modules": 5,
+        "cohesion_interne": 0.1406,
+        "hors_dossier": 0.0133,
+        "rapport": 10.54
+      },
+      {
+        "dossier": "tracecheck",
+        "modules": 5,
+        "cohesion_interne": 0.009,
+        "hors_dossier": 0.0147,
+        "rapport": 0.61
+      }
+    ],
+    "rapport_global": 1.89,
+    "cohesion_mediane_absolue": 0.0385,
+    "dossiers_sous_le_hasard": [
+      "tracecheck"
+    ],
+    "dossiers_a_peine_au_dessus": [
+      "volume"
+    ],
+    "rapport_min": 0.61
+  },
+  "hors_arbre": {
+    "venv_sous_src": 2,
+    "fichiers_dans_ces_venv": 27245,
+    "lanceurs_geles": 482,
+    "json_versionnes": 1074,
+    "json_dans_docs_mesures": 486
+  }
+}
