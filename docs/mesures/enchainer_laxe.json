@@ -1,0 +1,81 @@
+{
+  "chaine": "docs/chaines/laxe_et_le_cout.chaine",
+  "sec": false,
+  "racines_observees": [
+    "docs"
+  ],
+  "etages": 4,
+  "lances": 4,
+  "reussis": 4,
+  "echoues": 0,
+  "non_lances": 0,
+  "arrete_a_la_ligne": null,
+  "secondes": 4.96,
+  "artefacts_observes": 5,
+  "etages_muets": [],
+  "provenance_observee": {
+    "docs/mesures/le_sens_du_rang.json": "le_sens_du_rang",
+    "docs/mesures/laxe_est_une_courbe.json": "laxe_est_une_courbe",
+    "docs/mesures/laxe_trace.json": "laxe_est_une_courbe",
+    "docs/images/85_le_sens_du_rang.png": "figure_le_sens_du_rang",
+    "docs/images/90_laxe_est_une_courbe.png": "figure_laxe_est_une_courbe"
+  },
+  "detail": [
+    {
+      "ligne": 11,
+      "verbe": "le_sens_du_rang",
+      "arguments": [
+        "--telecharger",
+        "--json",
+        "docs/mesures/le_sens_du_rang.json"
+      ],
+      "code": 0,
+      "secondes": 1.03,
+      "ecrits": [],
+      "modifies": [
+        "docs/mesures/le_sens_du_rang.json"
+      ]
+    },
+    {
+      "ligne": 12,
+      "verbe": "laxe_est_une_courbe",
+      "arguments": [
+        "--json",
+        "docs/mesures/laxe_est_une_courbe.json"
+      ],
+      "code": 0,
+      "secondes": 3.4,
+      "ecrits": [],
+      "modifies": [
+        "docs/mesures/laxe_est_une_courbe.json",
+        "docs/mesures/laxe_trace.json"
+      ]
+    },
+    {
+      "ligne": 14,
+      "verbe": "figure_le_sens_du_rang",
+      "arguments": [
+        "--verifier"
+      ],
+      "code": 0,
+      "secondes": 0.25,
+      "ecrits": [],
+      "modifies": [
+        "docs/images/85_le_sens_du_rang.png"
+      ]
+    },
+    {
+      "ligne": 15,
+      "verbe": "figure_laxe_est_une_courbe",
+      "arguments": [
+        "--verifier"
+      ],
+      "code": 0,
+      "secondes": 0.28,
+      "ecrits": [],
+      "modifies": [
+        "docs/images/90_laxe_est_une_courbe.png"
+      ]
+    }
+  ]
+}

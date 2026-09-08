@@ -24,6 +24,22 @@ toutes les bandes, puis on refait le classement avec le centre de la seule bande
 deux rendent le même ordre. ⭐ Une sonde le confirme dans l'autre sens : forcer le centre à
 l'origine fait tomber **sept** contrôles, dont le sens lui-même.
 
+> ## ⚠⚠⚠ RÉTRACTATION — [`90`](90_laxe_est_une_courbe.md), le 2026-09-08
+>
+> **L'axe estimé ici est UN point (x, y). L'axe réel de ce fragment est une COURBE** : le centre
+> par tranche se déplace de **12,6 mm en x et 19,8 mm en y** sur 144 mm de z, **en revenant sur
+> ses pas**, et s'écarte de sa propre droite de **11,6 mm — 63,9 épaisseurs de feuille**.
+>
+> ⭐⭐ **Ce que §1 et §2 affirment SURVIT, et survit mieux** : le classement rend **27/27** sous
+> l'axe courbe aussi, et la longueur par passe se **resserre** — 362 mm, 273 à 460, rapport
+> **1,68** au lieu de 2,97.
+>
+> ⚠⚠⚠ **Ce qui est RETIRÉ : le « second régime » de la bande du cœur.** Elle valait 838 mm ici,
+> un facteur 2,2 au-dessus des autres ; sous l'axe courbe elle vaut **460 mm** et rentre dans la
+> distribution. Il n'y avait pas deux populations — il y avait mon erreur d'axe, concentrée sur la
+> bande la plus **proche** de l'axe, donc la plus sensible à s'être trompé dessus. **Toutes les
+> mentions d'un second régime ci-dessous sont fausses.**
+
 ## 2. ⭐⭐ La prédiction, et pourquoi elle rend l'explication falsifiable
 
 Dire *« la circonférence croît vers l'extérieur, donc une passe y couvre moins de spires »* n'est

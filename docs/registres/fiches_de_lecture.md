@@ -5247,6 +5247,53 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/90_laxe_est_une_courbe.md
+- **lignes** : 93
+- **nature** : RESULTAT
+  (l'axe d'enroulement de `PHercParis4`, mesuré tranche par tranche ; rétracte une conclusion de
+  [`85`](../85_le_sens_du_rang.md) et en confirme deux autres.)
+- **résumé** : ⭐⭐⭐ Le centre d'enroulement se déplace de **12,6 mm en x et 19,8 mm en y** sur
+  144 mm de z, **en revenant sur ses pas**, et s'écarte de sa **propre droite** de 11,6 mm — soit
+  **63,9 épaisseurs de feuille**. `85` estimait l'axe comme **un** point ; un contrôle simple le
+  réfute (l'étendue radiale d'une bande vaut ×2,4 à ×38 ce que « étendue × période » prédit, et le
+  rapport croît quand l'étendue diminue).
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **Le rouleau est COURBE**, ce qui est l'état normal d'un papyrus carbonisé. Tout marcheur
+    qui suppose un repère cylindrique global se trompe de **deux centimètres**, soit une centaine
+    d'épaisseurs de feuille — un tel cadre placerait **une spire à la place d'une autre**, ce qui
+    EST l'erreur que l'humain corrige. ⭐ Donc **aucun repère global ne remplacera cet humain** :
+    ce qui le remplacera devra être **local**, comme la marche l'est déjà.
+  - ⚠⚠ **Le confondant est levé, pas supposé** : si une tranche ne contenait pas un tour complet,
+    sa médiane serait biaisée, et un secteur variant avec z se lirait comme une courbure. Mesuré
+    **100 % des 36 secteurs dans chaque tranche**. C'est une **sonde fabriquée** qui a appris à
+    poser la question, en échouant.
+  - ⭐⭐ **Ce qui survit survit mieux** : classement **27/27** sous l'axe courbe aussi (donc trois
+    modèles d'axe rendent le même ordre), et la longueur par passe se **resserre** — 362 mm,
+    273 à 460, **×1,68** contre ×2,97, et hors le cœur **×1,51** avec 12,7 % d'écart-type relatif.
+  - ⚠ **Reste réfuté** : « l'étendue radiale d'une bande vaut son étendue fois la période » —
+    rapports de 1,5 à 25,9 même sous l'axe courbe. Une bande n'est pas un ruban d'épaisseur
+    constante.
+- **rétractations / corrections internes** :
+  - §4 : ⚠⚠⚠ **le « second régime » de `85` est RETIRÉ.** La bande du cœur valait 838 mm et
+    passait pour une population à part ; sous l'axe courbe elle vaut **460 mm**. Il n'y avait pas
+    deux régimes — il y avait mon erreur d'axe, **concentrée sur la bande la plus proche de
+    l'axe**, donc la plus sensible à s'être trompé dessus. La rétractation est portée **en tête de
+    `85`**, là où le chiffre faux a été publié.
+  - §6 : ⚠⚠ **trois seuils que j'aurais réglés sur ce qui passe** (« ×10 » pour 7,4, « <5 % » pour
+    6,3). Remplacés par des **comparaisons** : écart à sa propre droite en épaisseurs de feuille
+    (1,0 droit contre 14,1 courbé), et « bien plus serré qu'un centre unique ». ⚠ Le troisième
+    cachait une vérité que ma revendication ignorait : **une tranche a une épaisseur, donc l'axe
+    bouge dedans** — « le rayon par tranche est parfait » n'a jamais été vrai.
+  - figure : ⚠⚠ les **graduations de l'axe étaient inversées** (`lo` écrit en haut alors que `py`
+    le place en bas) — une figure étiquetée à l'envers dit la mauvaise **direction**, et la
+    direction est tout le sujet. Gardée par un contrôle. ⚠ Et un détail de contrôle affichait un
+    message d'**échec sur un succès**.
+- **preuve de lecture intégrale** :
+  - l. 50 : `**Il n'y avait pas deux régimes** : il y avait mon erreur d'axe, **concentrée sur la bande la plus`
+  - l. 67 : `dit qu'aucun repère global ne remplacera cet humain. Ce qui le remplacera devra être **local**,`
+
+---
+
 ### docs/89_lechelle_de_la_provenance.md
 - **lignes** : 94
 - **nature** : RESULTAT
@@ -5440,7 +5487,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
 ---
 
 ### docs/85_le_sens_du_rang.md
-- **lignes** : 102
+- **lignes** : 118
 - **nature** : RESULTAT
   (rayon des 28 bandes de `PHercParis4`, lu sur 28 Mio de maillage publié, plus le test d'une
   prédiction falsifiable sur le coût d'une passe humaine.)
@@ -5473,6 +5520,13 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     heure couvre **neuf fois moins de spires** au bord qu'au cœur. Donc « 31 spires » n'est pas
     l'unité naturelle de l'effort, et deux objets de 31 spires ne coûtent pas la même chose.
 - **rétractations / corrections internes** :
+  - ⚠⚠⚠ **RÉTRACTÉ PAR [`90`](../90_laxe_est_une_courbe.md), le 2026-09-08** : l'axe estimé ici
+    est UN point, l'axe réel est une **COURBE** (12,6 mm en x, 19,8 mm en y sur 144 mm de z, en
+    revenant sur ses pas, soit **63,9 épaisseurs de feuille** d'écart à sa propre droite). ⭐ Le
+    **classement survit** (27/27 sous l'axe courbe aussi) et la courbe de coût se **resserre**
+    (362 mm, ×1,68 au lieu de ×2,97) — mais le **« second régime » de la bande du cœur est
+    RETIRÉ** : 838 mm devient **460 mm** et rentre dans la distribution. C'était mon erreur
+    d'axe, concentrée sur la bande la plus proche de l'axe.
   - §5 : ⚠⚠ **un contrôle corrigé deux fois.** Il comparait d'abord les deux révisions **par
     position** dans deux listes de longueurs différentes — une bande manquante décalait tout, et
     les « 16 % d'écart de rayon entre révisions » étaient un désaccord de **mes deux listes**.
@@ -5484,8 +5538,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - §6 : le document borne sa portée — il ne change pas les 31 spires que le prix demande, et la
     plus longue bande publiée en vaut 18.
 - **preuve de lecture intégrale** :
-  - l. 77 : `l'égalité serait un contrôle qui ne peut pas passer pour une raison qui n'est pas un défaut.`
-  - l. 87 : `couvre **neuf fois moins de spires** au bord qu'au cœur, à longueur de feuille égale. Donc « 31`
+  - l. 93 : `l'égalité serait un contrôle qui ne peut pas passer pour une raison qui n'est pas un défaut.`
+  - l. 103 : `couvre **neuf fois moins de spires** au bord qu'au cœur, à longueur de feuille égale. Donc « 31`
 
 ---
 
@@ -5991,7 +6045,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 5564
+- **lignes** : 5622
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -7321,8 +7375,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 4872 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 5564 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 4930 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 5622 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

@@ -4356,6 +4356,64 @@ sortie n'apparaissait, les tampons n'étant vidés qu'à la fin. Variante en **l
 piège « deux `validate.sh` concurrents ». Tués **par PID**, jamais par motif.
 
 ---
+##### ⭐⭐⭐ L'AXE DU ROULEAU EST UNE COURBE — 63,9 épaisseurs de feuille, et `85` rétracté
+
+> Mesure : `src/nappe/laxe_est_une_courbe.py` (21 contrôles) →
+> `docs/mesures/laxe_est_une_courbe.json` + `laxe_trace.json`. Figure :
+> `src/figures/figure_laxe_est_une_courbe.py` (14 contrôles). Chaîne :
+> `docs/chaines/laxe_et_le_cout.chaine`. Document : [`90`](90_laxe_est_une_courbe.md), le
+> 2026-09-08.
+>
+> ```bash
+> lplv enchainer docs/chaines/laxe_et_le_cout.chaine
+> ```
+
+![l'axe du rouleau est une courbe](images/90_laxe_est_une_courbe.png)
+
+⚠ `85` estime l'axe comme **UN** point (x, y). Un contrôle que je n'avais pas fait le réfute :
+l'étendue radiale d'une bande vaut **×2,4 à ×38** ce que « étendue × période » prédit, et le
+rapport **croît** quand l'étendue diminue — une bande de deux spires couvrirait l'équivalent de
+soixante-dix-sept spires.
+
+⭐⭐⭐ **MESURE : le centre par tranche se déplace de 12,6 mm en x et 19,8 mm en y sur 144 mm de z,
+EN REVENANT SUR SES PAS**, et s'écarte de sa **propre droite** de 11,6 mm — soit **63,9 épaisseurs
+de feuille**. Le rouleau est **courbé**, ce qui est l'état normal d'un papyrus carbonisé.
+
+⚠⚠ **Le confondant est levé, pas supposé** : si une tranche ne contenait pas un tour complet, sa
+médiane serait tirée vers le secteur présent, et un secteur variant avec z se lirait comme une
+courbure. Mesuré **100 % des 36 secteurs dans chaque tranche**. ⭐ C'est **une sonde fabriquée qui
+m'a appris à poser cette question, en échouant**.
+
+| | axe plat (`85`) | axe **courbe** |
+|---|---|---|
+| classement des rayons | 27/27 | **27/27** |
+| longueur par passe | 384 mm, 283 à **838** (**×2,97**) | **362 mm, 273 à 460** (**×1,68**) |
+| hors le cœur | ×1,89, étr 17 % | ×**1,51**, étr **12,7 %** |
+
+⚠⚠⚠ **RÉTRACTATION — le « second régime » de `85` n'existe pas.** La bande du cœur y valait
+**838 mm**, un facteur 2,2 au-dessus des autres, et je l'avais publiée comme une population à
+part. Elle vaut **460 mm** et rentre dans la distribution. **Il n'y avait pas deux régimes : il y
+avait mon erreur d'axe, concentrée sur la bande la plus PROCHE de l'axe**, donc la plus sensible à
+s'être trompé dessus. La rétractation est portée **en tête de `85`**, là où le chiffre faux a été
+publié.
+
+> ⭐⭐⭐ **POURQUOI ÇA COMPTE POUR LE GRAAL.** Un marcheur qui supposerait un axe droit se trompe
+> de **deux centimètres**, soit une **centaine d'épaisseurs de feuille** : un tel cadre placerait
+> **une spire à la place d'une autre**, ce qui *est* exactement l'erreur que l'humain corrige à la
+> main. ⭐ Donc **aucun repère global ne remplacera cet humain** — ce qui le remplacera devra être
+> **local**, comme la marche l'est déjà.
+
+⚠⚠ **Trois seuils que j'aurais réglés sur ce qui passe** (« ×10 » quand la sonde donnait 7,4,
+« <5 % » pour 6,3). Remplacés par des **comparaisons** : l'écart à sa propre droite en épaisseurs
+de feuille (**1,0** droit contre **14,1** courbé), et « bien plus serré qu'un centre unique ».
+⚠ Le troisième cachait une vérité que ma revendication ignorait — **une tranche a une épaisseur,
+donc l'axe bouge dedans** : « le rayon par tranche est parfait » n'a jamais été vrai.
+
+⚠ Et deux défauts de figure : les **graduations d'axe inversées** (`lo` écrit en haut alors que le
+tracé le place en bas — une figure étiquetée à l'envers dit la mauvaise **direction**, qui est tout
+le sujet), et un détail de contrôle affichant un **message d'échec sur un succès**.
+
+---
 ##### ⭐⭐⭐ UNE CELLULE PEUT-ELLE SAVOIR QU'ELLE A TORT, sans regarder la cible ?
 
 > Mesure : `src/nappe/la_cellule_sait_elle_quelle_a_tort.py` (14 contrôles) →

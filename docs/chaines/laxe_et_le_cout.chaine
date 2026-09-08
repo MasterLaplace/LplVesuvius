@@ -1,0 +1,15 @@
+# L'axe du rouleau, et ce que sa courbure fait a la courbe de cout de `85`.
+#
+# ⚠⚠ L'ORDRE PORTE SA RAISON : `laxe_est_une_courbe` lit le cache de maillages que
+# `le_sens_du_rang --telecharger` rapatrie, et ecrit DEUX artefacts — le resume et le trace de
+# l'axe, ce dernier dans son propre fichier parce que soixante-quatre points n'ont rien a faire
+# au milieu d'un resume. La figure lit les deux, donc elle vient apres.
+#
+# ⚠ `--telecharger` est idempotent : il saute les 28 Mio deja la. La chaine est donc rejouable
+# depuis un arbre nu comme depuis un arbre chaud.
+
+le_sens_du_rang --telecharger --json docs/mesures/le_sens_du_rang.json
+laxe_est_une_courbe --json docs/mesures/laxe_est_une_courbe.json
+
+figure_le_sens_du_rang --verifier
+figure_laxe_est_une_courbe --verifier

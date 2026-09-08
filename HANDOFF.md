@@ -144,6 +144,19 @@ un seul.**
 riche du concours ne contient pas une marche entière. Mais c'est la première fois que la portée de
 ce dépôt peut se comparer à du **travail humain publié** plutôt qu'à une borne censurée.
 
+⭐⭐⭐ **L'AXE DU ROULEAU EST UNE COURBE, ET ÇA CONTRAINT LE REMPLAÇANT DE L'HUMAIN**
+([`90`](docs/90_laxe_est_une_courbe.md)) : le centre par tranche se déplace de **12,6 mm en x et
+19,8 mm en y sur 144 mm de z, en revenant sur ses pas**, et s'écarte de sa **propre droite** de
+**63,9 épaisseurs de feuille**. ⚠⚠ Un marcheur qui supposerait un repère cylindrique global se
+trompe de **deux centimètres** — une centaine d'épaisseurs — donc **placerait une spire à la place
+d'une autre**, ce qui *est* l'erreur que l'humain corrige. ⭐ **Aucun repère global ne remplacera
+cet humain : ce qui le remplacera devra être LOCAL, comme la marche l'est déjà.**
+
+⚠⚠⚠ Et `85` est **rétracté en partie** : son « second régime » de la bande du cœur (838 mm)
+n'existe pas — c'était mon erreur d'axe, concentrée sur la bande la plus proche de l'axe. Sous
+l'axe courbe elle vaut **460 mm**. ⭐ Ce qui **survit et survit mieux** : le classement (27/27 sous
+trois modèles d'axe) et la courbe de coût, qui se **resserre** à ×1,68 au lieu de ×2,97.
+
 ⭐⭐ **Et le coût humain se compte en LONGUEUR DE FEUILLE, pas en nombre de spires**
 ([`85`](docs/85_le_sens_du_rang.md)) : le rang monte vers le dehors (27/27 montées de rayon, de
 7,41 à 24,84 mm, verdict survivant à un second centre), et une passe humaine couvre **384 mm de
