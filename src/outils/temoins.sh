@@ -1545,6 +1545,7 @@ run "ou poser la boite"     uv run --project "$ROOT" python "$ROOT/src/nappe/ou_
 run "le sens du rang"       uv run --project "$ROOT" python "$ROOT/src/nappe/le_sens_du_rang.py" --verifier
 run "demi-feuille/objet"    uv run --project "$ROOT" python "$ROOT/src/nappe/la_demi_feuille_par_objet.py" --verifier
 run "axe est une courbe"    uv run --project "$ROOT" python "$ROOT/src/nappe/laxe_est_une_courbe.py" --verifier
+run "pas sur transferts"    uv run --project "$ROOT" python "$ROOT/src/nappe/le_pas_lu_sur_les_transferts.py" --verifier
 run "suivre nappe"           uv run --project "$ROOT" python "$ROOT/src/commun/suivre_nappe.py" --verifier
 run "assembler mosaique"     uv run --project "$ROOT" python "$ROOT/src/volume/assembler_mosaique.py" --verifier
 run "derouler en raccrochant"  uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_en_raccrochant.py" --verifier
@@ -1588,6 +1589,7 @@ run "fig : spires par surface" uv run --project "$ROOT" python "$ROOT/src/figure
 run "fig : sens du rang"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_sens_du_rang.py" --verifier
 run "fig : demi-feuille"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_la_demi_feuille_par_objet.py" --verifier
 run "fig : axe courbe"       uv run --project "$ROOT" python "$ROOT/src/figures/figure_laxe_est_une_courbe.py" --verifier
+run "fig : pas transferts"   uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_pas_lu_sur_les_transferts.py" --verifier
 run "fig : mur du corpus"    uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_mur_du_corpus.py" --verifier
 run "fig : ou poser la boite" uv run --project "$ROOT" python "$ROOT/src/figures/figure_ou_poser_la_boite.py" --verifier
 run "fig : en raccrochant"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_en_raccrochant.py" --verifier

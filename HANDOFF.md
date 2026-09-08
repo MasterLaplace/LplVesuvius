@@ -144,6 +144,19 @@ un seul.**
 riche du concours ne contient pas une marche entière. Mais c'est la première fois que la portée de
 ce dépôt peut se comparer à du **travail humain publié** plutôt qu'à une borne censurée.
 
+⭐⭐⭐ **LE NOM D'UNE BANDE EST SA GÉOMÉTRIE, DONC LES 92 FRANCHISSEMENTS SONT 92 TRANSFERTS
+RÉELS** ([`91`](docs/91_le_pas_lu_sur_les_transferts.md)) : l'étendue déclarée **est** le nombre de
+tours mesuré — écart médian **−0,01 tour, 27 bandes sur 28**. Et le pas lu sur ces transferts vaut
+**164 µm** contre **182,4 µm** à l'atlas, par deux chemins qui ne partagent ni donnée, ni méthode,
+ni auteur. ⭐ La demi-feuille de `PHercParis4` est donc **établie** et non empruntée : **82 à
+91 µm**, contre 67,75 sur l'objet courant.
+
+⚠⚠⚠ Et un **gradient rétracté avant publication** : la pente brute suggérait une délamination du
+bord (~1000 µm), c'est **l'estimateur** — sur UNE bande à pas constant par construction, rétrécir
+la fenêtre de 10 à 1 tour donne 202 → **1817 µm**. ⭐⭐ **Règle : on ne mesure pas le pas d'un
+enroulement sur un arc court.** ⚠ La cause n'est pas établie et c'est écrit : une section ovale
+*dégonfle*, un centre décalé gonfle d'un dixième de ce qu'il faudrait.
+
 ⭐⭐⭐ **L'AXE DU ROULEAU EST UNE COURBE, ET ÇA CONTRAINT LE REMPLAÇANT DE L'HUMAIN**
 ([`90`](docs/90_laxe_est_une_courbe.md)) : le centre par tranche se déplace de **12,6 mm en x et
 19,8 mm en y sur 144 mm de z, en revenant sur ses pas**, et s'écarte de sa **propre droite** de

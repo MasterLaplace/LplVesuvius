@@ -4414,6 +4414,56 @@ tracé le place en bas — une figure étiquetée à l'envers dit la mauvaise **
 le sujet), et un détail de contrôle affichant un **message d'échec sur un succès**.
 
 ---
+##### ⭐⭐⭐ LE PAS LU SUR LES TRANSFERTS QUE L'HUMAIN A RÉUSSIS — et un gradient rétracté
+
+> Mesure : `src/nappe/le_pas_lu_sur_les_transferts.py` (15 contrôles) →
+> `docs/mesures/le_pas_lu_sur_les_transferts.json`. Figure :
+> `src/figures/figure_le_pas_lu_sur_les_transferts.py` (14 contrôles).
+> Document : [`91`](91_le_pas_lu_sur_les_transferts.md), le 2026-09-08.
+
+![le pas lu sur les transferts](images/91_le_pas_lu_sur_les_transferts.png)
+
+`84` établit que `PHercParis4` publie **92 franchissements de spire dans une seule maille**, et
+zéro ailleurs. Une bande est donc **un transfert déjà fait à la main**, et sa géométrie se lit
+**sans toucher au volume**.
+
+⭐⭐⭐ **L'ÉTENDUE DÉCLARÉE EST LE NOMBRE DE TOURS** : écart médian **−0,01 tour**, **27 bandes
+sur 28** à moins d'un dixième. `w028-037` rend **9,97** pour 10, `w116-117` rend **1,99** pour 2.
+Les noms ne sont pas des étiquettes — donc les 92 franchissements sont **92 transferts réels**.
+⚠ Une exception nommée : `w010-027`, **12,75** tours pour 18.
+
+⭐⭐ **ET LE PAS VAUT 164 µm** (136 à 207) sur les 12 bandes d'au moins 4 tours, contre **182,4 µm**
+à l'atlas `winding-ruler`. Les deux chemins ne partagent **ni la donnée, ni la méthode, ni
+l'auteur** — prédictions de surface le long de rayons contre maillages publiés par des humains — et
+s'accordent à 10 %.
+
+⚠ La lecture est valide parce qu'une **ligne** de grille est iso-z : **0,73 mm** d'écart-type
+contre **41,8 mm** pour une colonne. Vérifié, pas supposé.
+
+⚠⚠⚠ **UN GRADIENT RÉTRACTÉ AVANT D'ÊTRE PUBLIÉ.** La pente brute donne ~205 µm au cœur et
+**~1000 µm au bord** — les 16 bandes courtes rendent **391 µm** de médiane, qu'on lirait comme une
+**délamination**. Le contrôle le tue sans aucune hypothèse, sur **UNE SEULE bande de dix tours**,
+donc à pas constant **par construction** :
+
+| fenêtre | 10 | 6 | 4 | 3 | 2 | 1 |
+|---|---:|---:|---:|---:|---:|---:|
+| pente | **202** | 208 | 224 | 287 | **523** | **1817** µm |
+
+⭐⭐ **RÈGLE POUR TOUT MARCHEUR : on ne mesure pas le pas d'un enroulement sur un arc court.**
+
+⚠⚠ **Et la cause n'est PAS établie**, écrit plutôt que deviné. Une section **ovale** ne gonfle pas
+la pente, elle la **DÉGONFLE** (200,3 contre 183,2) — c'était ma première explication, fausse : un
+`cos(2θ)` fait deux périodes par tour. Un **centre décalé** gonfle dans le bon sens (200 / 216 /
+233 / 270 pour 0 à 2 mm) mais il faudrait des **dizaines** de mm pour atteindre 1817. ⭐ **Le
+contrôle tient sans la cause**, et les deux explications réfutées sont **gardées dans les
+contrôles** pour qu'on ne les re-propose pas.
+
+> ⭐ **CE QUE ÇA DONNE AU GRAAL.** La demi-feuille de `PHercParis4` devient un chiffre **établi
+> par deux instruments indépendants** et non emprunté : **82 à 91 µm**, contre 67,75 µm sur
+> l'objet courant. Le coût d'un changement d'objet, chiffré par `86` à l'atlas seul, est
+> **corroboré**.
+
+---
 ##### ⭐⭐⭐ UNE CELLULE PEUT-ELLE SAVOIR QU'ELLE A TORT, sans regarder la cible ?
 
 > Mesure : `src/nappe/la_cellule_sait_elle_quelle_a_tort.py` (14 contrôles) →

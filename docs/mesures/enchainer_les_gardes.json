@@ -10,7 +10,7 @@
   "echoues": 0,
   "non_lances": 0,
   "arrete_a_la_ligne": null,
-  "secondes": 513.72,
+  "secondes": 289.53,
   "artefacts_observes": 0,
   "etages_muets": [
     "artefacts_orphelins",
@@ -27,7 +27,7 @@
         "--verifier"
       ],
       "code": 0,
-      "secondes": 412.54,
+      "secondes": 233.94,
       "ecrits": [],
       "modifies": []
     },
@@ -38,7 +38,7 @@
         "--verifier"
       ],
       "code": 0,
-      "secondes": 0.54,
+      "secondes": 0.26,
       "ecrits": [],
       "modifies": []
     },
@@ -49,7 +49,7 @@
         "--verifier"
       ],
       "code": 0,
-      "secondes": 0.07,
+      "secondes": 0.05,
       "ecrits": [],
       "modifies": []
     },
@@ -60,7 +60,7 @@
         "--verifier"
       ],
       "code": 0,
-      "secondes": 100.57,
+      "secondes": 55.28,
       "ecrits": [],
       "modifies": []
     }

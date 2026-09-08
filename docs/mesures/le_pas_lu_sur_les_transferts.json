@@ -1,0 +1,370 @@
+{
+  "fragment": "PHercParis4",
+  "voxel_um": 45.532,
+  "tours_minimum": 4,
+  "orientation_de_la_grille": {
+    "ecart_type_z_le_long_dune_ligne_mm": 0.73,
+    "ecart_type_z_le_long_dune_colonne_mm": 41.8,
+    "les_lignes_sont_iso_z": true
+  },
+  "bandes": 28,
+  "lignes": [
+    {
+      "de": 10,
+      "a": 27,
+      "etendue": 18,
+      "lignes": 166,
+      "tours_median": 12.75,
+      "pente_um_par_tour": 205.1,
+      "pente_p25": 193.2,
+      "pente_p75": 232.7,
+      "ecart_tours": -5.25
+    },
+    {
+      "de": 28,
+      "a": 37,
+      "etendue": 10,
+      "lignes": 177,
+      "tours_median": 9.97,
+      "pente_um_par_tour": 204.4,
+      "pente_p25": 173.5,
+      "pente_p75": 233.8,
+      "ecart_tours": -0.03
+    },
+    {
+      "de": 38,
+      "a": 45,
+      "etendue": 8,
+      "lignes": 179,
+      "tours_median": 7.98,
+      "pente_um_par_tour": 206.8,
+      "pente_p25": 158.2,
+      "pente_p75": 248.0,
+      "ecart_tours": -0.02
+    },
+    {
+      "de": 46,
+      "a": 52,
+      "etendue": 7,
+      "lignes": 179,
+      "tours_median": 6.98,
+      "pente_um_par_tour": 172.9,
+      "pente_p25": 128.5,
+      "pente_p75": 210.9,
+      "ecart_tours": -0.02
+    },
+    {
+      "de": 53,
+      "a": 58,
+      "etendue": 6,
+      "lignes": 180,
+      "tours_median": 5.98,
+      "pente_um_par_tour": 182.6,
+      "pente_p25": 136.3,
+      "pente_p75": 217.0,
+      "ecart_tours": -0.02
+    },
+    {
+      "de": 59,
+      "a": 63,
+      "etendue": 5,
+      "lignes": 180,
+      "tours_median": 4.99,
+      "pente_um_par_tour": 197.5,
+      "pente_p25": 97.6,
+      "pente_p75": 262.5,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 64,
+      "a": 68,
+      "etendue": 5,
+      "lignes": 178,
+      "tours_median": 4.98,
+      "pente_um_par_tour": 148.6,
+      "pente_p25": 56.6,
+      "pente_p75": 236.0,
+      "ecart_tours": -0.02
+    },
+    {
+      "de": 69,
+      "a": 72,
+      "etendue": 4,
+      "lignes": 178,
+      "tours_median": 3.99,
+      "pente_um_par_tour": 145.3,
+      "pente_p25": 60.2,
+      "pente_p75": 308.1,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 73,
+      "a": 76,
+      "etendue": 4,
+      "lignes": 179,
+      "tours_median": 3.99,
+      "pente_um_par_tour": 136.0,
+      "pente_p25": 65.9,
+      "pente_p75": 289.2,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 77,
+      "a": 80,
+      "etendue": 4,
+      "lignes": 178,
+      "tours_median": 3.99,
+      "pente_um_par_tour": 152.4,
+      "pente_p25": 70.2,
+      "pente_p75": 304.1,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 81,
+      "a": 84,
+      "etendue": 4,
+      "lignes": 179,
+      "tours_median": 3.99,
+      "pente_um_par_tour": 145.7,
+      "pente_p25": 86.0,
+      "pente_p75": 314.1,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 85,
+      "a": 88,
+      "etendue": 4,
+      "lignes": 178,
+      "tours_median": 3.99,
+      "pente_um_par_tour": 156.0,
+      "pente_p25": 84.8,
+      "pente_p75": 309.8,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 89,
+      "a": 91,
+      "etendue": 3,
+      "lignes": 178,
+      "tours_median": 2.99,
+      "pente_um_par_tour": 336.9,
+      "pente_p25": 177.4,
+      "pente_p75": 468.1,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 92,
+      "a": 94,
+      "etendue": 3,
+      "lignes": 178,
+      "tours_median": 2.99,
+      "pente_um_par_tour": 344.0,
+      "pente_p25": 197.3,
+      "pente_p75": 459.1,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 95,
+      "a": 97,
+      "etendue": 3,
+      "lignes": 176,
+      "tours_median": 2.99,
+      "pente_um_par_tour": 377.5,
+      "pente_p25": 213.6,
+      "pente_p75": 483.5,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 98,
+      "a": 100,
+      "etendue": 3,
+      "lignes": 176,
+      "tours_median": 2.99,
+      "pente_um_par_tour": 380.1,
+      "pente_p25": 228.1,
+      "pente_p75": 506.6,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 101,
+      "a": 103,
+      "etendue": 3,
+      "lignes": 174,
+      "tours_median": 2.99,
+      "pente_um_par_tour": 393.2,
+      "pente_p25": 231.7,
+      "pente_p75": 489.1,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 104,
+      "a": 106,
+      "etendue": 3,
+      "lignes": 173,
+      "tours_median": 2.99,
+      "pente_um_par_tour": 386.1,
+      "pente_p25": 233.1,
+      "pente_p75": 484.9,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 107,
+      "a": 109,
+      "etendue": 3,
+      "lignes": 172,
+      "tours_median": 2.99,
+      "pente_um_par_tour": 388.8,
+      "pente_p25": 229.2,
+      "pente_p75": 480.3,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 110,
+      "a": 112,
+      "etendue": 3,
+      "lignes": 171,
+      "tours_median": 2.99,
+      "pente_um_par_tour": 370.3,
+      "pente_p25": 230.3,
+      "pente_p75": 475.2,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 113,
+      "a": 115,
+      "etendue": 3,
+      "lignes": 171,
+      "tours_median": 2.99,
+      "pente_um_par_tour": 362.4,
+      "pente_p25": 237.6,
+      "pente_p75": 472.0,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 116,
+      "a": 117,
+      "etendue": 2,
+      "lignes": 171,
+      "tours_median": 1.99,
+      "pente_um_par_tour": 941.1,
+      "pente_p25": 598.6,
+      "pente_p75": 1074.9,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 118,
+      "a": 119,
+      "etendue": 2,
+      "lignes": 171,
+      "tours_median": 1.99,
+      "pente_um_par_tour": 932.3,
+      "pente_p25": 561.8,
+      "pente_p75": 1103.4,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 120,
+      "a": 121,
+      "etendue": 2,
+      "lignes": 171,
+      "tours_median": 1.99,
+      "pente_um_par_tour": 959.9,
+      "pente_p25": 569.2,
+      "pente_p75": 1100.6,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 122,
+      "a": 123,
+      "etendue": 2,
+      "lignes": 171,
+      "tours_median": 1.99,
+      "pente_um_par_tour": 981.9,
+      "pente_p25": 588.2,
+      "pente_p75": 1180.4,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 124,
+      "a": 125,
+      "etendue": 2,
+      "lignes": 170,
+      "tours_median": 1.99,
+      "pente_um_par_tour": 1110.7,
+      "pente_p25": 663.6,
+      "pente_p75": 1380.5,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 126,
+      "a": 127,
+      "etendue": 2,
+      "lignes": 174,
+      "tours_median": 1.99,
+      "pente_um_par_tour": 1151.7,
+      "pente_p25": 785.9,
+      "pente_p75": 1684.3,
+      "ecart_tours": -0.01
+    },
+    {
+      "de": 128,
+      "a": 129,
+      "etendue": 2,
+      "lignes": 173,
+      "tours_median": 1.99,
+      "pente_um_par_tour": 1160.0,
+      "pente_p25": 743.0,
+      "pente_p75": 1519.6,
+      "ecart_tours": -0.01
+    }
+  ],
+  "letendue_est_le_nombre_de_tours": {
+    "ecart_median_tours": -0.01,
+    "bandes_a_moins_dun_dixieme_de_tour": 27,
+    "pire_ecart": 5.25,
+    "la_pire": "w010-027"
+  },
+  "pas_sur_les_bandes_longues_um": {
+    "bandes": 12,
+    "median": 164.4,
+    "min": 136.0,
+    "max": 206.8
+  },
+  "pas_sur_les_bandes_courtes_um": {
+    "bandes": 16,
+    "median": 391.0
+  },
+  "balayage_de_fenetre_sur_une_seule_bande": [
+    {
+      "fenetre_tours": 10,
+      "pente_um_par_tour": 202.0,
+      "lignes": 177
+    },
+    {
+      "fenetre_tours": 6,
+      "pente_um_par_tour": 207.9,
+      "lignes": 177
+    },
+    {
+      "fenetre_tours": 4,
+      "pente_um_par_tour": 224.4,
+      "lignes": 177
+    },
+    {
+      "fenetre_tours": 3,
+      "pente_um_par_tour": 286.9,
+      "lignes": 177
+    },
+    {
+      "fenetre_tours": 2,
+      "pente_um_par_tour": 522.7,
+      "lignes": 177
+    },
+    {
+      "fenetre_tours": 1,
+      "pente_um_par_tour": 1817.3,
+      "lignes": 177
+    }
+  ],
+  "le_gradient_est_un_artefact": true
+}

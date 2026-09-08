@@ -5247,6 +5247,49 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/91_le_pas_lu_sur_les_transferts.md
+- **lignes** : 94
+- **nature** : RESULTAT
+  (le pas inter-feuilles lu sur les 28 bandes multi-spires de `PHercParis4`, c'est-à-dire sur des
+  transferts de spire à spire **déjà faits à la main** ; plus une rétractation avant publication.)
+- **résumé** : ⭐⭐⭐ **L'étendue déclarée d'une bande EST son nombre de tours mesuré** — écart
+  médian **−0,01 tour**, **27 bandes sur 28** à moins d'un dixième (`w028-037` rend 9,97 pour 10,
+  `w116-117` rend 1,99 pour 2). ⭐⭐ Et le pas lu sur ces transferts vaut **164 µm** (136 à 207,
+  sur les 12 bandes d'au moins 4 tours) contre **182,4 µm** à l'atlas `winding-ruler` — deux
+  instruments qui ne partagent ni la donnée, ni la méthode, ni l'auteur.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **Le nom d'une bande est sa géométrie**, pas une étiquette. Donc les 92 franchissements
+    de [`84`](../84_une_surface_combien_de_spires.md) sont bien 92 transferts réels.
+  - ⭐⭐ **Deux chemins indépendants s'accordent à 10 %** sur le pas : prédictions de surface le
+    long de rayons (atlas) contre maillages publiés par des humains (ici).
+  - ⚠ La lecture est valide parce qu'une **ligne** de grille est iso-z — 0,73 mm d'écart-type
+    contre 41,8 mm pour une colonne. **Vérifié, pas supposé.**
+  - ⭐⭐ **RÈGLE POUR TOUT MARCHEUR : on ne mesure pas le pas d'un enroulement sur un arc court.**
+  - ⭐ La demi-feuille de `PHercParis4` devient un chiffre **établi** et non emprunté — **82 à
+    91 µm** selon l'instrument, contre 67,75 µm sur l'objet courant. Le coût d'un changement
+    d'objet, chiffré par [`86`](../86_la_demi_feuille_par_objet.md) à l'atlas seul, est
+    **corroboré**.
+  - ⚠ Une exception nommée plutôt que lissée : `w010-027` rend **12,75** tours pour 18.
+- **rétractations / corrections internes** :
+  - §4 : ⚠⚠⚠ **un gradient rétracté AVANT d'être publié.** La pente brute donne ~205 µm au cœur
+    et **~1000 µm au bord** (les 16 bandes courtes : 391 µm de médiane), ce qu'on lirait comme une
+    **délamination**. Le contrôle le tue sans hypothèse : sur **UNE SEULE bande de dix tours**,
+    donc à pas constant par construction, la pente vaut 202, 208, 224, 287, **523**, **1817** µm
+    pour des fenêtres de 10, 6, 4, 3, 2 et 1 tour. **Le pas ne change pas, seule la fenêtre.**
+  - §5 : ⚠⚠ **la cause n'est PAS établie**, et c'est écrit plutôt que deviné. Une section
+    **ovale** ne gonfle pas la pente, elle la **DÉGONFLE** (200,3 sur huit tours contre 183,2 sur
+    un) — c'était ma première explication, et elle est fausse : un `cos(2θ)` fait deux périodes
+    par tour. Un **centre décalé** gonfle dans le bon sens (200 / 216 / 233 / 270 pour 0, 0,5, 1
+    et 2 mm) mais il faudrait des **dizaines** de mm pour atteindre 1817. ⭐ Les deux explications
+    réfutées sont **gardées dans les contrôles**, pour qu'on ne les re-propose pas.
+  - figure : ⚠ la légende du bas recouvrait les graduations ; l'écart est désormais **mesuré** et
+    un contrôle refuse la superposition.
+- **preuve de lecture intégrale** :
+  - l. 56 : `**Le pas ne change pas ; seule la fenêtre change.**`
+  - l. 75 : `qui empêche de réécrire ma première phrase.`
+
+---
+
 ### docs/90_laxe_est_une_courbe.md
 - **lignes** : 93
 - **nature** : RESULTAT
@@ -6045,7 +6088,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 5622
+- **lignes** : 5672
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -7375,8 +7418,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 4930 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 5622 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 4980 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 5672 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
