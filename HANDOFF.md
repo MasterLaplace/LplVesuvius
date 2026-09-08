@@ -144,6 +144,19 @@ un seul.**
 riche du concours ne contient pas une marche entière. Mais c'est la première fois que la portée de
 ce dépôt peut se comparer à du **travail humain publié** plutôt qu'à une borne censurée.
 
+⭐⭐⭐ **LES TRANSFERTS HUMAINS SONT CONTINUS AU CŒUR, BRISÉS AU BORD**
+([`92`](docs/92_la_continuite_des_transferts.md)) : le plus grand saut entre cellules voisines,
+rapporté au pas d'échantillonnage, vaut **1,7 · 5,9 · 31,0** du cœur au bord. ⭐⭐ **Là où le
+rouleau est intact un humain trace continûment ; là où il ne l'est pas, MÊME UN HUMAIN rend une
+surface discontinue** — donc un automate ne peut pas être jugé partout de la même façon, et
+l'étendue qui tombe de 18 à 2 spires n'est pas seulement la circonférence, c'est la continuité qui
+casse.
+
+⚠⚠⚠ Et une corrélation de **r = 0,797** suggérait que ces sauts expliquaient le gonflement de
+pente de `91`. **Le test direct la refuse** : les retirer change la pente de **0,2 %**. Une
+corrélation entre deux quantités qui montent ensemble n'est pas un mécanisme. La cause de `91`
+reste **non trouvée**, avec **trois** candidats réfutés.
+
 ⭐⭐⭐ **LE NOM D'UNE BANDE EST SA GÉOMÉTRIE, DONC LES 92 FRANCHISSEMENTS SONT 92 TRANSFERTS
 RÉELS** ([`91`](docs/91_le_pas_lu_sur_les_transferts.md)) : l'étendue déclarée **est** le nombre de
 tours mesuré — écart médian **−0,01 tour, 27 bandes sur 28**. Et le pas lu sur ces transferts vaut

@@ -5247,6 +5247,44 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/92_la_continuite_des_transferts.md
+- **lignes** : 73
+- **nature** : RESULTAT
+  (la continuité des 28 surfaces multi-spires de `PHercParis4`, mesurée sur cellules intérieures ;
+  plus le refus d'un confondant que la corrélation suggérait.)
+- **résumé** : ⭐⭐⭐ Le plus grand saut entre cellules voisines d'une même ligne de grille,
+  rapporté au pas d'échantillonnage, vaut **1,7 au cœur, 5,9 au milieu, 31,0 au bord**. Là où le
+  rouleau est intact, un humain trace **continûment** ; là où il ne l'est pas, **même un humain**
+  rend une surface discontinue.
+- **conclusions extractibles** :
+  - ⭐⭐ **Borne sur le remplaçant de l'humain** : un automate ne peut pas être jugé sur les bandes
+    externes comme sur les internes — exiger d'une machine la continuité que personne n'a produite
+    n'a pas de sens.
+  - ⭐ **Complète l'explication de [`84`](../84_une_surface_combien_de_spires.md)** : l'étendue qui
+    tombe de 18 à 2 spires n'est pas seulement la circonférence qui croît
+    ([`85`](../85_le_sens_du_rang.md)), c'est aussi **la continuité qui casse**.
+  - ⚠ Le verdict porte sur le **rapport au pas d'échantillonnage**, qui n'a aucune unité à choisir,
+    et les tiers sont une **découpe de la matière** (les bandes sont déjà ordonnées).
+- **rétractations / corrections internes** :
+  - §4 : ⚠⚠ **une première lecture fausse, gardée.** J'ai vu les sauts sur les lignes 3, 4 et 181
+    d'une grille de 198 et conclu « effilochage du bord ». Le test **structurel** — une cellule
+    est intérieure quand ses **quatre** voisines sont valides, sans marge choisie — les **garde** :
+    les sauts de 30 mm sont dans de la matière réellement maillée.
+  - §5 : ⚠⚠⚠ **une seconde, réfutée par le test direct.** Les sauts corrèlent à **r = 0,797** avec
+    le gonflement de pente de `91` (173 µm de pente médiane sous 5 mm de saut, 393 au-delà), et
+    j'ai failli publier la cause. **Retirer les lignes qui contiennent un saut change la pente de
+    0,2 % en médiane, 1,5 % au pire.** Une corrélation de 0,80 entre deux quantités qui montent
+    ensemble n'est pas un mécanisme.
+  - §5 : ⚠ la cause du gonflement de `91` reste **non trouvée**, avec **trois** candidats réfutés
+    — section ovale (dégonfle), centre décalé (dix fois trop faible), sauts (< 2 % d'effet).
+  - figure : ⚠ la légende du panneau B était **tronquée au bord** (« au pir »), et l'étiquette du
+    premier tiers chevauchait celle de la bande verte. Les deux sont gardées par une mesure.
+- **preuve de lecture intégrale** :
+  - l. 33 : `humain rend une surface discontinue, exiger la continuité d'une machine serait exiger ce que`
+  - l. 58 : `> **Une corrélation de 0,80 entre deux quantités qui montent ensemble n'est pas un mécanisme.**`
+
+---
+
 ### docs/91_le_pas_lu_sur_les_transferts.md
 - **lignes** : 94
 - **nature** : RESULTAT
@@ -6088,7 +6126,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 5672
+- **lignes** : 5712
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -7418,8 +7456,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 4980 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 5672 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 5020 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 5712 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

@@ -4464,6 +4464,46 @@ contrôles** pour qu'on ne les re-propose pas.
 > **corroboré**.
 
 ---
+##### ⭐⭐⭐ LES TRANSFERTS HUMAINS SONT CONTINUS AU CŒUR, BRISÉS AU BORD
+
+> Mesure : `src/nappe/la_continuite_des_transferts.py` (16 contrôles) →
+> `docs/mesures/la_continuite_des_transferts.json`. Figure :
+> `src/figures/figure_la_continuite_des_transferts.py` (14 contrôles).
+> Document : [`92`](92_la_continuite_des_transferts.md), le 2026-09-08.
+
+![la continuité des transferts](images/92_la_continuite_des_transferts.png)
+
+Le plus grand saut entre deux cellules **voisines** d'une même ligne de grille, rapporté au pas
+d'échantillonnage — une grandeur **sans unité à choisir** :
+
+| tiers | rapport médian | max | bandes |
+|---|---:|---:|---:|
+| **cœur** | **1,7** | 2,4 | 9 |
+| **milieu** | **5,9** | 22,1 | 9 |
+| **bord** | **31,0** | 41,1 | 10 |
+
+⭐⭐ **Là où le rouleau est intact, un humain trace continûment ; là où il ne l'est pas, MÊME UN
+HUMAIN rend une surface discontinue.** Un automate ne peut donc pas être jugé sur les bandes
+externes comme sur les internes. ⭐ Et ça **complète** `84` : l'étendue qui tombe de 18 à 2 spires
+n'est pas seulement la circonférence qui croît (`85`), c'est aussi **la continuité qui casse**.
+
+⚠⚠ **Une première lecture fausse, gardée.** J'ai vu les sauts sur les lignes 3, 4 et 181 d'une
+grille de 198 et conclu « effilochage du bord ». Le test **structurel** — une cellule est
+intérieure quand ses **quatre** voisines sont valides, sans marge choisie — les **garde** : les
+sauts de trente millimètres sont dans de la matière réellement maillée.
+
+⚠⚠⚠ **Et une seconde, réfutée par le test direct.** Les sauts corrèlent à **r = 0,797** avec le
+gonflement de pente que `91` n'expliquait pas — 173 µm de pente médiane sous 5 mm de saut, **393**
+au-delà. **J'ai failli publier la cause.** Mais **retirer les lignes qui contiennent un saut change
+la pente de 0,2 % en médiane et 1,5 % au pire**, sur 15 bandes.
+
+> **Une corrélation de 0,80 entre deux quantités qui montent ensemble n'est pas un mécanisme.**
+> Retirer la cause supposée et regarder si l'effet bouge, si.
+
+⚠ La cause de `91` reste donc **non trouvée**, avec **trois** candidats réfutés : section ovale
+(elle dégonfle), centre décalé (dix fois trop faible), sauts (moins de 2 % d'effet).
+
+---
 ##### ⭐⭐⭐ UNE CELLULE PEUT-ELLE SAVOIR QU'ELLE A TORT, sans regarder la cible ?
 
 > Mesure : `src/nappe/la_cellule_sait_elle_quelle_a_tort.py` (14 contrôles) →
