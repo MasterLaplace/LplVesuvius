@@ -5247,6 +5247,64 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/83_le_corpus_et_non_la_boite.md
+- **lignes** : 124
+- **nature** : RESULTAT
+  (balayage de 1296 placements de boîte sur les spires publiées, sans faire tourner aucun
+  marcheur, plus le balayage du treillis lui-même.)
+- **résumé** : Suite directe de [`82`](../82_la_borne_etait_le_mur.md). Puisque toutes les portées
+  publiées sont censurées par un plafond de six, la question gratuite est : en **déplaçant** la
+  boîte sur le même fragment, ce plafond se desserre-t-il ? Réponse mesurée : à peine. Sur **1296**
+  placements, **597** n'offrent même pas un bras, la boîte actuelle atteint **6**, seules **16**
+  font mieux, et le meilleur du fragment entier vaut **8** — quand le prix en demande **31**. Le
+  déplacement achète **+2 bras de dynamique** sans changer d'objet, ce qui n'est pas une marche
+  meilleure mais une mesure capable de juger deux bras plus loin.
+- **conclusions extractibles** :
+  - ⭐⭐ **Le plafond n'est pas un défaut de placement** : aucun des 1296 placements ne dépasse 8,
+    alors que douze spires sont présentes dans les meilleurs. Ce n'est pas la boîte qui manque de
+    matière, c'est le corpus qui ne présente pas une spirale au pas nominal.
+  - ⚠⚠ **Le corpus échoue dans les DEUX sens** : sur 8589 bras, **3395 sont hors du pas nominal
+    (40 %)** — **2226 trop loin** (un trou de numérotation) et **1169 trop près** (deux spires que
+    la boîte ne sépare pas). Les confondre perdrait ce qui distingue une lacune d'un doublon.
+  - ⭐⭐⭐ **La même paire de spires ne demande pas la même chose partout.** Sur les **12 paires de
+    rangs voisins** vues dans plusieurs boîtes, l'écart médian varie d'un facteur **2,6 à 63,1**,
+    et **huit d'entre elles de plus de dix** : `10→11` va de **19,4 à 1224,8 µm** (×63,1),
+    `8→9` ×22,3, `4→5` ×18,9, jusqu'à `2→3` à ×2,6. « Les spires publiées sont des feuilles
+    voisines » est vrai localement et faux comme énoncé sur le fragment.
+  - ⚠⚠⚠ **Le maximum dépend du treillis, donc il est publié comme un MINORANT** : au pas 480 le
+    meilleur sort à 7, au pas 240 à 8. Un treillis plus grossier ne peut que rater un bon
+    placement, jamais en inventer un — le sens de l'erreur est donc connu.
+  - ⭐ **La boîte se choisit sur le CORPUS, jamais sur le résultat** : aucun marcheur ne tourne dans
+    ce balayage. Choisir celle où la marche est belle serait choisir l'endroit où le verdict
+    arrange ; choisir celle où le corpus est mesurable retire une limite d'instrument.
+  - Le déplacement proposé (`8655 10820 21924` au lieu de `10615 10571 19831`) **n'engage rien** :
+    il ne change pas d'objet, ne recalibre rien, et rendrait deux bras de dynamique à toutes les
+    comparaisons de marcheurs.
+  - Troisième recoupement de [`81`](../81_le_rouleau_designe_ne_publie_rien.md) : le corpus borne
+    ce qu'on peut **prouver** (13 spires), **apprendre** (portée censurée à 6) et **atteindre en le
+    déplaçant** (8 au mieux).
+- **rétractations / corrections internes** :
+  - §3 : ⚠⚠⚠ **un défaut mort, attrapé pendant l'écriture.** `--pas` prenait un scalaire avec son
+    propre défaut, donc le balayage de treillis — la raison d'être de la fonction — **n'était
+    atteignable par aucune ligne de commande**, et le premier run publié annonçait un minorant
+    qu'il n'avait pas mesuré. Le défaut de la ligne de commande est désormais **lu sur la
+    fonction** (`inspect.signature`) et un contrôle le vérifie.
+  - §5 : ⚠⚠⚠ **j'avais publié « aucune paire ne varie de moins d'un facteur dix », et ma propre
+    batterie l'a démenti** en une exécution. Deux fautes dans la même phrase : `2→3` varie de ×2,6,
+    et le compte mélangeait les paires à **saut de rang** — `5→7` n'existe que dans les boîtes où
+    la spire 6 est trop pauvre, donc son étendue décrit une population de boîtes et non l'écart
+    entre deux feuilles voisines. La mesure publie désormais un drapeau `consecutif`.
+  - §5 : le document borne lui-même sa portée — un bras n'existe que si les deux spires ont trente
+    cellules dans la boîte, donc « la cible n'est pas là » est largement écarté, mais trente est un
+    seuil bas et une spire qui effleure un coin peut légitimement faire monter la médiane.
+    Distinguer « les feuilles sont plus écartées ici » de « la surface s'arrête ici » demanderait
+    une mesure de couverture, qui n'est pas celle-ci.
+- **preuve de lecture intégrale** :
+  - l. 62 : `| **trop près** (deux spires que la boîte ne sépare pas) | **1169** |`
+  - l. 106 : `c'est le corpus qui ne présente pas une spirale au pas nominal.`
+
+---
+
 ### docs/82_la_borne_etait_le_mur.md
 - **lignes** : 97
 - **nature** : RESULTAT
@@ -5636,7 +5694,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 5191
+- **lignes** : 5241
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -6966,8 +7024,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 4499 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 5191 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 4549 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 5241 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

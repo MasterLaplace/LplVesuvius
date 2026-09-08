@@ -32,6 +32,7 @@ Usage :
 from __future__ import annotations
 
 import argparse
+import inspect
 import json
 import sys
 from pathlib import Path
@@ -149,23 +150,46 @@ def balayer(pre: dict, cote: float = COTE, pas: float = 480.0,
     return out
 
 
-def mesurer(cote: float = COTE, pas: float = 480.0, minimum: int = MINIMUM,
-            corpus: dict | None = None) -> dict:
-    """Le plafond de la boite actuelle, et le meilleur plafond du fragment."""
+def mesurer(cote: float = COTE, pas: tuple[float, ...] = (480.0, 240.0),
+            minimum: int = MINIMUM, corpus: dict | None = None) -> dict:
+    """Le plafond de la boite actuelle, et le meilleur plafond du fragment.
+
+    ⚠⚠⚠ LE MAXIMUM DEPEND DU TREILLIS, DONC LE TREILLIS EST BALAYE LUI AUSSI. Mesure : a un pas
+    de 480 le meilleur plafond sort a 7, a 240 il sort a 8. Publier un seul pas ferait lire une
+    limite de treillis comme une limite de fragment — le peche exact que `le_mur_du_corpus` vient
+    d'auditer. Le maximum rendu est donc un **minorant**, et le sens de l'erreur est ecrit.
+    """
     if corpus is None:
         from le_corpus_des_spires import corpus_publie  # noqa: PLC0415
 
         corpus = corpus_publie()
+    if isinstance(pas, (int, float)):
+        pas = (float(pas),)
     pre = distances_par_paire(corpus)
     actuelle = chaine_dans_la_boite(pre, BOITE_CENTRE, cote, minimum)
-    toutes = balayer(pre, cote, pas, minimum)
+    par_pas = {}
+    toutes = []
+    for q in sorted(pas, reverse=True):
+        lot = balayer(pre, cote, q, minimum)
+        par_pas[str(int(q))] = {
+            "boites": len(lot),
+            "plafond_maximal": max((b["plafond"] for b in lot), default=0),
+            "boites_meilleures": sum(1 for b in lot if b["plafond"] > actuelle["plafond"]),
+        }
+        toutes += lot
+    pas_le_plus_fin = min(pas)
     # ⚠ Le tri departage a plafond egal par le nombre de spires, puis par le centre, pour que
     # deux executions rendent la MEME meilleure boite : un maximum choisi au hasard parmi des
     # ex aequo ferait bouger le chiffre publie sans qu'aucune donnee ait change.
     ordre = sorted(toutes, key=lambda b: (-b["plafond"], -b["spires"], b["centre"]))
     meilleure = ordre[0] if ordre else actuelle
     return {
-        "cote": cote, "pas_du_treillis": pas, "minimum_cellules": minimum,
+        "cote": cote, "pas_essayes": sorted(pas), "pas_le_plus_fin": pas_le_plus_fin,
+        "par_pas": par_pas,
+        # ⚠⚠⚠ LE SENS DE L'ERREUR EST ECRIT : un treillis plus grossier ne peut que RATER un bon
+        # placement, jamais en inventer un. Le maximum publie est donc un minorant.
+        "le_plafond_maximal_est_un_minorant": True,
+        "minimum_cellules": minimum,
         "ecart_um": pre["ecart_um"], "demi_feuille_um": pre["ecart_um"] / 2.0,
         "boites_essayees": len(toutes),
         "boite_actuelle": actuelle,
@@ -192,7 +216,36 @@ def mesurer(cote: float = COTE, pas: float = 480.0, minimum: int = MINIMUM,
         "bras_trop_pres": sum(1 for b in toutes for a in b["bras"]
                               if not a["au_pas_nominal"] and a["ecart_um"] < pre["ecart_um"]),
         "bras_au_total": sum(len(b["bras"]) for b in toutes),
+        # ⭐⭐⭐ LA MEME PAIRE DE SPIRES NE DEMANDE PAS LA MEME CHOSE PARTOUT, et c'est le fait le
+        # plus dur du lot : si `10→11` vaut mille micrometres ici et cinquante la-bas, les deux
+        # surfaces publiees se CROISENT quelque part. Ce n'est plus un trou de numerotation,
+        # c'est une numerotation qui ne decrit pas une spirale. La mesure le rend paire par
+        # paire, sans qu'aucun seuil ne soit choisi.
+        "ecarts_par_paire": _ecarts_par_paire(toutes),
     }
+
+
+def _ecarts_par_paire(toutes: list[dict]) -> list[dict]:
+    """Pour chaque paire de spires, le plus petit et le plus grand ecart median rencontre.
+
+    ⚠ Une paire vue dans une seule boite n'a pas d'etendue : son minimum et son maximum sont le
+    meme nombre, ce qui est honnete et se lit tel quel. Ce qui compte est la paire vue partout et
+    dont l'ecart change d'un ordre de grandeur.
+    """
+    vus: dict[tuple, list[float]] = {}
+    for b in toutes:
+        for a in b["bras"]:
+            vus.setdefault((a["de"], a["vers"]), []).append(a["ecart_um"])
+    # ⚠⚠ UNE PAIRE A SAUT DE RANG N'EST PAS UNE PAIRE VOISINE, et les mélanger fausse le
+    # verdict dans les deux sens. `5→7` n'existe que dans les boîtes où la spire 6 est trop
+    # pauvre : son étendue décrit une population de boîtes particulière, pas l'écart entre deux
+    # feuilles voisines. Le drapeau est publié plutôt que laissé à déduire du couple.
+    out = [{"de": k[0], "vers": k[1], "consecutif": k[1] == k[0] + 1, "boites": len(v),
+            "ecart_min_um": round(min(v), 1), "ecart_max_um": round(max(v), 1),
+            "rapport": round(max(v) / min(v), 1) if min(v) > 0 else None}
+           for k, v in vus.items()]
+    out.sort(key=lambda x: -(x["rapport"] or 0))
+    return out
 
 
 def verifier() -> int:
@@ -258,15 +311,15 @@ def verifier() -> int:
     # ⚠⚠ LE TRI DOIT ETRE DETERMINISTE : deux exécutions doivent rendre la MÊME meilleure boîte.
     # ⚠ Une boite ETROITE, sinon la fixture tient entiere dedans et le treillis n'a qu'un point :
     # un balayage a une seule boite ne peut pas montrer qu'il est deterministe.
-    a = mesurer(cote=150.0, pas=60.0, corpus=corpus_fabrique())
-    b = mesurer(cote=150.0, pas=60.0, corpus=corpus_fabrique())
+    a = mesurer(cote=150.0, pas=(60.0,), corpus=corpus_fabrique())
+    b = mesurer(cote=150.0, pas=(60.0,), corpus=corpus_fabrique())
     v("le balayage est déterministe", a["meilleure_boite"]["centre"] ==
       b["meilleure_boite"]["centre"], str(a["meilleure_boite"]["centre"]))
     v("... et il essaie plus d'une boîte", a["boites_essayees"] > 1,
       str(a["boites_essayees"]))
     # ⚠⚠ UN AXE PLUS COURT QUE LA BOITE NE DOIT PAS VIDER LE BALAYAGE : « aucune boîte ne fait
     # mieux » et « aucune boîte n'a été essayée » se ressemblent, et l'un est un verdict.
-    large = mesurer(cote=100000.0, pas=1000.0, corpus=corpus_fabrique())
+    large = mesurer(cote=100000.0, pas=(1000.0,), corpus=corpus_fabrique())
     v("une boîte plus grande que la matière donne quand même une boîte",
       large["boites_essayees"] == 1, str(large["boites_essayees"]))
     # ⚠⚠ LES DEUX SENS D'ECHEC SONT COMPTES A PART : un bras trop LOIN est une lacune de
@@ -277,6 +330,36 @@ def verifier() -> int:
       f"{a['bras_trop_loin']} + {a['bras_trop_pres']} sur {a['bras_au_total']}")
     v("... et la distribution des plafonds couvre toutes les boîtes",
       sum(a["plafonds"].values()) == a["boites_essayees"], str(a["plafonds"]))
+    # ⚠⚠⚠ LE MAXIMUM DEPEND DU TREILLIS : un pas plus fin ne peut que trouver au moins autant.
+    deux = mesurer(cote=150.0, pas=(120.0, 60.0), corpus=corpus_fabrique())
+    v("un treillis plus fin ne trouve jamais MOINS qu'un plus grossier",
+      deux["par_pas"]["60"]["plafond_maximal"] >= deux["par_pas"]["120"]["plafond_maximal"],
+      str({k: v["plafond_maximal"] for k, v in deux["par_pas"].items()}))
+    v("... et le minorant est déclaré comme tel",
+      deux["le_plafond_maximal_est_un_minorant"] is True)
+    v("... et chaque pas essayé publie son propre compte de boîtes",
+      set(deux["par_pas"]) == {"120", "60"}
+      and all(v["boites"] > 0 for v in deux["par_pas"].values()), str(deux["par_pas"]))
+    # ⚠⚠⚠ LE DEFAUT DE LA LIGNE DE COMMANDE EST CELUI DE LA FONCTION, verifie et non espere :
+    # un defaut recopie a la main a deja rendu le balayage de treillis inatteignable, donc un
+    # minorant annonce sans avoir ete mesure.
+    import argparse as _a  # noqa: PLC0415
+    _p = _a.ArgumentParser()
+    _p.add_argument("--pas", type=float, nargs="+",
+                    default=list(inspect.signature(mesurer).parameters["pas"].default))
+    v("le défaut de --pas est celui de la fonction, et il en essaie plusieurs",
+      len(_p.parse_args([]).pas) > 1,
+      str(_p.parse_args([]).pas))
+    # ⚠⚠ L'ETENDUE PAR PAIRE DOIT COUVRIR TOUS LES BRAS VUS, sinon la pire paire pourrait
+    # manquer précisément parce qu'elle n'apparaît que dans quelques boîtes.
+    v("chaque paire vue publie son étendue",
+      sum(x["boites"] for x in a["ecarts_par_paire"]) == a["bras_au_total"],
+      f"{sum(x['boites'] for x in a['ecarts_par_paire'])} pour {a['bras_au_total']}")
+    v("une paire à saut de rang est marquée comme telle",
+      all(x["consecutif"] == (x["vers"] == x["de"] + 1) for x in a["ecarts_par_paire"]))
+    v("... et une paire vue une seule fois a une étendue nulle",
+      all(x["ecart_min_um"] == x["ecart_max_um"]
+          for x in a["ecarts_par_paire"] if x["boites"] == 1))
     v("... et le gain est la différence des deux plafonds",
       a["gain_de_plafond"] == a["meilleure_boite"]["plafond"] -
       a["boite_actuelle"]["plafond"])
@@ -290,15 +373,22 @@ def main() -> int:
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--verifier", action="store_true")
     p.add_argument("--cote", type=float, default=COTE)
-    p.add_argument("--pas", type=float, default=480.0)
+    # ⚠⚠⚠ UN DEFAUT MORT EST UN PARAMETRE MORT. La version precedente prenait `--pas` en
+    # scalaire avec son propre defaut, donc le balayage de treillis de `mesurer` — sa raison
+    # d'exister — n'etait ATTEIGNABLE PAR AUCUNE LIGNE DE COMMANDE, et le run publie n'a essaye
+    # qu'un seul pas en annoncant un minorant qu'il n'avait pas mesure. Le defaut est desormais
+    # LU sur la fonction, jamais recopie.
+    p.add_argument("--pas", type=float, nargs="+",
+                   default=list(inspect.signature(mesurer).parameters["pas"].default))
     p.add_argument("--json", type=Path)
     a = p.parse_args()
     if a.verifier:
         return verifier()
 
-    r = mesurer(cote=a.cote, pas=a.pas)
+    r = mesurer(cote=a.cote, pas=tuple(a.pas))
     act, mei = r["boite_actuelle"], r["meilleure_boite"]
-    print(f"boîte de {r['cote']:.0f} vx · treillis au pas {r['pas_du_treillis']:.0f} · "
+    print(f"boîte de {r['cote']:.0f} vx · treillis aux pas "
+          f"{', '.join(str(int(q)) for q in r['pas_essayes'])} · "
           f"{r['boites_essayees']} boîtes essayées\n")
     print(f"{'boîte':>10} {'centre (z,y,x)':>28} {'spires':>7} {'plafond':>8}  chaîne")
     for nom, b in (("actuelle", act), ("meilleure", mei)):
@@ -309,9 +399,22 @@ def main() -> int:
           f"l'actuelle")
     print("plafonds atteints : " + " · ".join(f"{k} → {n} boîte(s)"
                                               for k, n in r["plafonds"].items()))
+    print("par pas de treillis : " + " · ".join(
+        f"{k} → max {v['plafond_maximal']} sur {v['boites']} boîtes"
+        for k, v in r["par_pas"].items())
+        + "  ⚠ un treillis plus grossier ne peut que RATER un bon placement,")
+    print("                      donc le maximum publié est un MINORANT")
     hors = r["bras_trop_loin"] + r["bras_trop_pres"]
     print(f"bras hors du pas nominal : {hors} sur {r['bras_au_total']} "
           f"({r['bras_trop_loin']} trop loin, {r['bras_trop_pres']} trop près)")
+    pires = [x for x in r["ecarts_par_paire"]
+             if x["boites"] > 1 and x["consecutif"]][:3]
+    if pires:
+        print("\n⛔ la même paire de spires ne demande pas la même chose partout :")
+        for x in pires:
+            print(f"    {x['de']:>2}→{x['vers']:<2} de {x['ecart_min_um']:>7.1f} à "
+                  f"{x['ecart_max_um']:>7.1f} µm sur {x['boites']} boîtes — rapport "
+                  f"×{x['rapport']}")
     if r["gain_de_plafond"] > 0:
         print(f"\n⭐ une portée pourrait être mesurée jusqu'à {r['plafond_maximal']} bras "
               f"au lieu de {act['plafond']} — sans changer d'objet")

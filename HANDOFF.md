@@ -122,6 +122,16 @@ marge entre le meilleur marcheur aveugle et elle pourrait être bien plus grande
 sont sous le plafond, donc le gain d'un bras par le lissage n'est pas touché. Ce qui tombe est la
 **borne**, pas le résultat.
 
+⛔⛔ **Et déplacer la boîte n'y change presque rien** ([`83`](docs/83_le_corpus_et_non_la_boite.md)) :
+sur **1296 placements**, 597 n'offrent même pas un bras, la boîte actuelle atteint 6, **16 font
+mieux**, et le meilleur du fragment vaut **8** — un **minorant**, puisqu'un treillis plus fin trouve
+plus. 40 % des bras de tous les placements sont hors du pas nominal, et **aucune paire de spires ne
+varie de moins d'un facteur dix** selon l'endroit (`10→11` : 19,4 à 1224,8 µm, ×63).
+
+★ **Disponible et sans engagement** : poser la boîte en `8655 10820 21924` au lieu de
+`10615 10571 19831` rend **+2 bras de dynamique** à toutes les comparaisons de marcheurs, sans
+changer d'objet ni recalibrer quoi que ce soit.
+
 ---
 
 ## REPRISE (historique) — 2026-08-28, fin d'après-midi

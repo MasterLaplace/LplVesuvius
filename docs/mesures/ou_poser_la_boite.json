@@ -1,10 +1,27 @@
 {
   "cote": 960.0,
-  "pas_du_treillis": 480.0,
+  "pas_essayes": [
+    240.0,
+    480.0
+  ],
+  "pas_le_plus_fin": 240.0,
+  "par_pas": {
+    "480": {
+      "boites": 144,
+      "plafond_maximal": 7,
+      "boites_meilleures": 1
+    },
+    "240": {
+      "boites": 1152,
+      "plafond_maximal": 8,
+      "boites_meilleures": 15
+    }
+  },
+  "le_plafond_maximal_est_un_minorant": true,
   "minimum_cellules": 30,
   "ecart_um": 135.5,
   "demi_feuille_um": 67.75,
-  "boites_essayees": 144,
+  "boites_essayees": 1296,
   "boite_actuelle": {
     "centre": [
       10615.0,
@@ -118,9 +135,9 @@
   },
   "meilleure_boite": {
     "centre": [
-      8895.08935546875,
-      10579.884765625,
-      21683.67578125
+      8655.08935546875,
+      10819.884765625,
+      21923.67578125
     ],
     "cote": 960.0,
     "spires": 12,
@@ -138,123 +155,123 @@
       12,
       13
     ],
-    "plafond": 7,
+    "plafond": 8,
     "bras": [
       {
         "bras": 1,
         "de": 2,
         "vers": 3,
-        "ecart_um": 170.4,
-        "ecart_au_pas_um": 34.9,
+        "ecart_um": 170.0,
+        "ecart_au_pas_um": 34.5,
         "au_pas_nominal": true
       },
       {
         "bras": 2,
         "de": 3,
         "vers": 4,
-        "ecart_um": 82.7,
-        "ecart_au_pas_um": 52.8,
+        "ecart_um": 104.8,
+        "ecart_au_pas_um": 30.7,
         "au_pas_nominal": true
       },
       {
         "bras": 3,
         "de": 4,
         "vers": 5,
-        "ecart_um": 202.3,
-        "ecart_au_pas_um": 66.8,
+        "ecart_um": 190.9,
+        "ecart_au_pas_um": 55.4,
         "au_pas_nominal": true
       },
       {
         "bras": 4,
         "de": 5,
         "vers": 6,
-        "ecart_um": 124.8,
-        "ecart_au_pas_um": 10.7,
+        "ecart_um": 138.3,
+        "ecart_au_pas_um": 2.8,
         "au_pas_nominal": true
       },
       {
         "bras": 5,
         "de": 6,
         "vers": 7,
-        "ecart_um": 145.7,
-        "ecart_au_pas_um": 10.2,
+        "ecart_um": 87.6,
+        "ecart_au_pas_um": 47.9,
         "au_pas_nominal": true
       },
       {
         "bras": 6,
         "de": 7,
         "vers": 8,
-        "ecart_um": 123.4,
-        "ecart_au_pas_um": 12.1,
+        "ecart_um": 107.6,
+        "ecart_au_pas_um": 27.9,
         "au_pas_nominal": true
       },
       {
         "bras": 7,
         "de": 8,
         "vers": 9,
-        "ecart_um": 108.0,
-        "ecart_au_pas_um": 27.5,
+        "ecart_um": 89.2,
+        "ecart_au_pas_um": 46.3,
         "au_pas_nominal": true
       },
       {
         "bras": 8,
         "de": 9,
         "vers": 10,
-        "ecart_um": 62.3,
-        "ecart_au_pas_um": 73.2,
-        "au_pas_nominal": false
+        "ecart_um": 82.8,
+        "ecart_au_pas_um": 52.7,
+        "au_pas_nominal": true
       },
       {
         "bras": 9,
         "de": 10,
         "vers": 11,
-        "ecart_um": 38.1,
-        "ecart_au_pas_um": 97.4,
+        "ecart_um": 58.2,
+        "ecart_au_pas_um": 77.3,
         "au_pas_nominal": false
       },
       {
         "bras": 10,
         "de": 11,
         "vers": 12,
-        "ecart_um": 182.8,
-        "ecart_au_pas_um": 47.3,
+        "ecart_um": 135.1,
+        "ecart_au_pas_um": 0.4,
         "au_pas_nominal": true
       },
       {
         "bras": 11,
         "de": 12,
         "vers": 13,
-        "ecart_um": 83.9,
-        "ecart_au_pas_um": 51.6,
+        "ecart_um": 101.7,
+        "ecart_au_pas_um": 33.8,
         "au_pas_nominal": true
       }
     ],
     "cellules_par_spire": {
       "1": 0,
-      "2": 112,
-      "3": 1092,
-      "4": 1321,
-      "5": 1253,
-      "6": 1037,
-      "7": 1315,
-      "8": 1378,
-      "9": 1731,
-      "10": 1264,
-      "11": 1526,
-      "12": 1083,
-      "13": 1089
+      "2": 295,
+      "3": 774,
+      "4": 682,
+      "5": 655,
+      "6": 416,
+      "7": 604,
+      "8": 698,
+      "9": 834,
+      "10": 457,
+      "11": 557,
+      "12": 328,
+      "13": 377
     }
   },
-  "gain_de_plafond": 1,
-  "plafond_maximal": 7,
-  "boites_au_moins_aussi_bonnes": 16,
-  "boites_meilleures": 1,
+  "gain_de_plafond": 2,
+  "plafond_maximal": 8,
+  "boites_au_moins_aussi_bonnes": 177,
+  "boites_meilleures": 16,
   "meilleures_boites": [
     {
       "centre": [
-        8895.08935546875,
-        10579.884765625,
-        21683.67578125
+        8655.08935546875,
+        10819.884765625,
+        21923.67578125
       ],
       "cote": 960.0,
       "spires": 12,
@@ -272,455 +289,123 @@
         12,
         13
       ],
-      "plafond": 7,
+      "plafond": 8,
       "bras": [
         {
           "bras": 1,
           "de": 2,
           "vers": 3,
-          "ecart_um": 170.4,
-          "ecart_au_pas_um": 34.9,
+          "ecart_um": 170.0,
+          "ecart_au_pas_um": 34.5,
           "au_pas_nominal": true
         },
         {
           "bras": 2,
           "de": 3,
           "vers": 4,
-          "ecart_um": 82.7,
-          "ecart_au_pas_um": 52.8,
+          "ecart_um": 104.8,
+          "ecart_au_pas_um": 30.7,
           "au_pas_nominal": true
         },
         {
           "bras": 3,
           "de": 4,
           "vers": 5,
-          "ecart_um": 202.3,
-          "ecart_au_pas_um": 66.8,
+          "ecart_um": 190.9,
+          "ecart_au_pas_um": 55.4,
           "au_pas_nominal": true
         },
         {
           "bras": 4,
           "de": 5,
           "vers": 6,
-          "ecart_um": 124.8,
-          "ecart_au_pas_um": 10.7,
+          "ecart_um": 138.3,
+          "ecart_au_pas_um": 2.8,
           "au_pas_nominal": true
         },
         {
           "bras": 5,
           "de": 6,
           "vers": 7,
-          "ecart_um": 145.7,
-          "ecart_au_pas_um": 10.2,
+          "ecart_um": 87.6,
+          "ecart_au_pas_um": 47.9,
           "au_pas_nominal": true
         },
         {
           "bras": 6,
           "de": 7,
           "vers": 8,
-          "ecart_um": 123.4,
-          "ecart_au_pas_um": 12.1,
+          "ecart_um": 107.6,
+          "ecart_au_pas_um": 27.9,
           "au_pas_nominal": true
         },
         {
           "bras": 7,
           "de": 8,
           "vers": 9,
-          "ecart_um": 108.0,
-          "ecart_au_pas_um": 27.5,
+          "ecart_um": 89.2,
+          "ecart_au_pas_um": 46.3,
           "au_pas_nominal": true
         },
         {
           "bras": 8,
           "de": 9,
           "vers": 10,
-          "ecart_um": 62.3,
-          "ecart_au_pas_um": 73.2,
-          "au_pas_nominal": false
+          "ecart_um": 82.8,
+          "ecart_au_pas_um": 52.7,
+          "au_pas_nominal": true
         },
         {
           "bras": 9,
           "de": 10,
           "vers": 11,
-          "ecart_um": 38.1,
-          "ecart_au_pas_um": 97.4,
+          "ecart_um": 58.2,
+          "ecart_au_pas_um": 77.3,
           "au_pas_nominal": false
         },
         {
           "bras": 10,
           "de": 11,
           "vers": 12,
-          "ecart_um": 182.8,
-          "ecart_au_pas_um": 47.3,
+          "ecart_um": 135.1,
+          "ecart_au_pas_um": 0.4,
           "au_pas_nominal": true
         },
         {
           "bras": 11,
           "de": 12,
           "vers": 13,
-          "ecart_um": 83.9,
-          "ecart_au_pas_um": 51.6,
+          "ecart_um": 101.7,
+          "ecart_au_pas_um": 33.8,
           "au_pas_nominal": true
         }
       ],
       "cellules_par_spire": {
         "1": 0,
-        "2": 112,
-        "3": 1092,
-        "4": 1321,
-        "5": 1253,
-        "6": 1037,
-        "7": 1315,
-        "8": 1378,
-        "9": 1731,
-        "10": 1264,
-        "11": 1526,
-        "12": 1083,
-        "13": 1089
+        "2": 295,
+        "3": 774,
+        "4": 682,
+        "5": 655,
+        "6": 416,
+        "7": 604,
+        "8": 698,
+        "9": 834,
+        "10": 457,
+        "11": 557,
+        "12": 328,
+        "13": 377
       }
     },
     {
       "centre": [
-        8895.08935546875,
-        10579.884765625,
-        19763.67578125
-      ],
-      "cote": 960.0,
-      "spires": 10,
-      "chaine": [
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13
-      ],
-      "plafond": 6,
-      "bras": [
-        {
-          "bras": 1,
-          "de": 4,
-          "vers": 5,
-          "ecart_um": 131.4,
-          "ecart_au_pas_um": 4.1,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 2,
-          "de": 5,
-          "vers": 6,
-          "ecart_um": 131.2,
-          "ecart_au_pas_um": 4.3,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 3,
-          "de": 6,
-          "vers": 7,
-          "ecart_um": 73.5,
-          "ecart_au_pas_um": 62.0,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 4,
-          "de": 7,
-          "vers": 8,
-          "ecart_um": 111.7,
-          "ecart_au_pas_um": 23.8,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 5,
-          "de": 8,
-          "vers": 9,
-          "ecart_um": 100.3,
-          "ecart_au_pas_um": 35.2,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 6,
-          "de": 9,
-          "vers": 10,
-          "ecart_um": 112.6,
-          "ecart_au_pas_um": 22.9,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 7,
-          "de": 10,
-          "vers": 11,
-          "ecart_um": 525.9,
-          "ecart_au_pas_um": 390.4,
-          "au_pas_nominal": false
-        },
-        {
-          "bras": 8,
-          "de": 11,
-          "vers": 12,
-          "ecart_um": 298.3,
-          "ecart_au_pas_um": 162.8,
-          "au_pas_nominal": false
-        },
-        {
-          "bras": 9,
-          "de": 12,
-          "vers": 13,
-          "ecart_um": 39.8,
-          "ecart_au_pas_um": 95.7,
-          "au_pas_nominal": false
-        }
-      ],
-      "cellules_par_spire": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 489,
-        "5": 1109,
-        "6": 1467,
-        "7": 1877,
-        "8": 2470,
-        "9": 2378,
-        "10": 2195,
-        "11": 462,
-        "12": 2293,
-        "13": 2266
-      }
-    },
-    {
-      "centre": [
-        9375.08935546875,
-        10579.884765625,
-        19763.67578125
-      ],
-      "cote": 960.0,
-      "spires": 10,
-      "chaine": [
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13
-      ],
-      "plafond": 6,
-      "bras": [
-        {
-          "bras": 1,
-          "de": 4,
-          "vers": 5,
-          "ecart_um": 116.7,
-          "ecart_au_pas_um": 18.8,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 2,
-          "de": 5,
-          "vers": 6,
-          "ecart_um": 127.0,
-          "ecart_au_pas_um": 8.5,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 3,
-          "de": 6,
-          "vers": 7,
-          "ecart_um": 79.7,
-          "ecart_au_pas_um": 55.8,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 4,
-          "de": 7,
-          "vers": 8,
-          "ecart_um": 119.0,
-          "ecart_au_pas_um": 16.5,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 5,
-          "de": 8,
-          "vers": 9,
-          "ecart_um": 108.5,
-          "ecart_au_pas_um": 27.0,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 6,
-          "de": 9,
-          "vers": 10,
-          "ecart_um": 107.3,
-          "ecart_au_pas_um": 28.2,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 7,
-          "de": 10,
-          "vers": 11,
-          "ecart_um": 561.8,
-          "ecart_au_pas_um": 426.3,
-          "au_pas_nominal": false
-        },
-        {
-          "bras": 8,
-          "de": 11,
-          "vers": 12,
-          "ecart_um": 248.3,
-          "ecart_au_pas_um": 112.8,
-          "au_pas_nominal": false
-        },
-        {
-          "bras": 9,
-          "de": 12,
-          "vers": 13,
-          "ecart_um": 48.1,
-          "ecart_au_pas_um": 87.4,
-          "au_pas_nominal": false
-        }
-      ],
-      "cellules_par_spire": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 828,
-        "5": 1355,
-        "6": 1806,
-        "7": 2043,
-        "8": 2518,
-        "9": 2531,
-        "10": 2503,
-        "11": 673,
-        "12": 2594,
-        "13": 2575
-      }
-    },
-    {
-      "centre": [
-        9855.08935546875,
-        10579.884765625,
-        19763.67578125
-      ],
-      "cote": 960.0,
-      "spires": 10,
-      "chaine": [
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13
-      ],
-      "plafond": 6,
-      "bras": [
-        {
-          "bras": 1,
-          "de": 4,
-          "vers": 5,
-          "ecart_um": 134.6,
-          "ecart_au_pas_um": 0.9,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 2,
-          "de": 5,
-          "vers": 6,
-          "ecart_um": 99.6,
-          "ecart_au_pas_um": 35.9,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 3,
-          "de": 6,
-          "vers": 7,
-          "ecart_um": 105.4,
-          "ecart_au_pas_um": 30.1,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 4,
-          "de": 7,
-          "vers": 8,
-          "ecart_um": 104.8,
-          "ecart_au_pas_um": 30.7,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 5,
-          "de": 8,
-          "vers": 9,
-          "ecart_um": 132.3,
-          "ecart_au_pas_um": 3.2,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 6,
-          "de": 9,
-          "vers": 10,
-          "ecart_um": 137.3,
-          "ecart_au_pas_um": 1.8,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 7,
-          "de": 10,
-          "vers": 11,
-          "ecart_um": 808.6,
-          "ecart_au_pas_um": 673.1,
-          "au_pas_nominal": false
-        },
-        {
-          "bras": 8,
-          "de": 11,
-          "vers": 12,
-          "ecart_um": 191.2,
-          "ecart_au_pas_um": 55.7,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 9,
-          "de": 12,
-          "vers": 13,
-          "ecart_um": 55.4,
-          "ecart_au_pas_um": 80.1,
-          "au_pas_nominal": false
-        }
-      ],
-      "cellules_par_spire": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 1192,
-        "5": 1668,
-        "6": 2203,
-        "7": 2434,
-        "8": 2639,
-        "9": 2645,
-        "10": 2794,
-        "11": 369,
-        "12": 2621,
-        "13": 2617
-      }
-    },
-    {
-      "centre": [
-        9855.08935546875,
-        10579.884765625,
+        9135.08935546875,
+        10819.884765625,
         20243.67578125
       ],
       "cote": 960.0,
-      "spires": 10,
+      "spires": 11,
       "chaine": [
+        3,
         4,
         5,
         6,
@@ -732,96 +417,768 @@
         12,
         13
       ],
-      "plafond": 6,
+      "plafond": 8,
       "bras": [
         {
           "bras": 1,
-          "de": 4,
-          "vers": 5,
-          "ecart_um": 161.6,
-          "ecart_au_pas_um": 26.1,
-          "au_pas_nominal": true
-        },
-        {
-          "bras": 2,
-          "de": 5,
-          "vers": 6,
+          "de": 3,
+          "vers": 4,
           "ecart_um": 106.8,
           "ecart_au_pas_um": 28.7,
           "au_pas_nominal": true
         },
         {
+          "bras": 2,
+          "de": 4,
+          "vers": 5,
+          "ecart_um": 196.6,
+          "ecart_au_pas_um": 61.1,
+          "au_pas_nominal": true
+        },
+        {
           "bras": 3,
-          "de": 6,
-          "vers": 7,
-          "ecart_um": 84.3,
-          "ecart_au_pas_um": 51.2,
+          "de": 5,
+          "vers": 6,
+          "ecart_um": 105.7,
+          "ecart_au_pas_um": 29.8,
           "au_pas_nominal": true
         },
         {
           "bras": 4,
-          "de": 7,
-          "vers": 8,
-          "ecart_um": 105.1,
-          "ecart_au_pas_um": 30.4,
+          "de": 6,
+          "vers": 7,
+          "ecart_um": 107.2,
+          "ecart_au_pas_um": 28.3,
           "au_pas_nominal": true
         },
         {
           "bras": 5,
-          "de": 8,
-          "vers": 9,
-          "ecart_um": 135.9,
-          "ecart_au_pas_um": 0.4,
+          "de": 7,
+          "vers": 8,
+          "ecart_um": 123.9,
+          "ecart_au_pas_um": 11.6,
           "au_pas_nominal": true
         },
         {
           "bras": 6,
-          "de": 9,
-          "vers": 10,
-          "ecart_um": 143.1,
-          "ecart_au_pas_um": 7.6,
+          "de": 8,
+          "vers": 9,
+          "ecart_um": 103.1,
+          "ecart_au_pas_um": 32.4,
           "au_pas_nominal": true
         },
         {
           "bras": 7,
-          "de": 10,
-          "vers": 11,
-          "ecart_um": 246.7,
-          "ecart_au_pas_um": 111.2,
-          "au_pas_nominal": false
+          "de": 9,
+          "vers": 10,
+          "ecart_um": 106.7,
+          "ecart_au_pas_um": 28.8,
+          "au_pas_nominal": true
         },
         {
           "bras": 8,
-          "de": 11,
-          "vers": 12,
-          "ecart_um": 242.6,
-          "ecart_au_pas_um": 107.1,
-          "au_pas_nominal": false
+          "de": 10,
+          "vers": 11,
+          "ecart_um": 134.1,
+          "ecart_au_pas_um": 1.4,
+          "au_pas_nominal": true
         },
         {
           "bras": 9,
+          "de": 11,
+          "vers": 12,
+          "ecart_um": 334.0,
+          "ecart_au_pas_um": 198.5,
+          "au_pas_nominal": false
+        },
+        {
+          "bras": 10,
           "de": 12,
           "vers": 13,
-          "ecart_um": 68.4,
-          "ecart_au_pas_um": 67.1,
-          "au_pas_nominal": true
+          "ecart_um": 52.4,
+          "ecart_au_pas_um": 83.1,
+          "au_pas_nominal": false
         }
       ],
       "cellules_par_spire": {
         "1": 0,
         "2": 0,
-        "3": 0,
-        "4": 50,
-        "5": 321,
-        "6": 935,
-        "7": 1313,
-        "8": 2390,
-        "9": 2551,
-        "10": 2689,
-        "11": 1724,
-        "12": 2661,
-        "13": 2560
+        "3": 147,
+        "4": 2206,
+        "5": 2663,
+        "6": 2783,
+        "7": 2696,
+        "8": 2745,
+        "9": 2742,
+        "10": 2699,
+        "11": 2051,
+        "12": 2624,
+        "13": 2605
       }
+    },
+    {
+      "centre": [
+        9375.08935546875,
+        10819.884765625,
+        20243.67578125
+      ],
+      "cote": 960.0,
+      "spires": 11,
+      "chaine": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "plafond": 8,
+      "bras": [
+        {
+          "bras": 1,
+          "de": 3,
+          "vers": 4,
+          "ecart_um": 82.9,
+          "ecart_au_pas_um": 52.6,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 2,
+          "de": 4,
+          "vers": 5,
+          "ecart_um": 190.2,
+          "ecart_au_pas_um": 54.7,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 3,
+          "de": 5,
+          "vers": 6,
+          "ecart_um": 101.4,
+          "ecart_au_pas_um": 34.1,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 4,
+          "de": 6,
+          "vers": 7,
+          "ecart_um": 124.0,
+          "ecart_au_pas_um": 11.5,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 5,
+          "de": 7,
+          "vers": 8,
+          "ecart_um": 121.7,
+          "ecart_au_pas_um": 13.8,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 6,
+          "de": 8,
+          "vers": 9,
+          "ecart_um": 110.6,
+          "ecart_au_pas_um": 24.9,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 7,
+          "de": 9,
+          "vers": 10,
+          "ecart_um": 115.4,
+          "ecart_au_pas_um": 20.1,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 8,
+          "de": 10,
+          "vers": 11,
+          "ecart_um": 161.6,
+          "ecart_au_pas_um": 26.1,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 9,
+          "de": 11,
+          "vers": 12,
+          "ecart_um": 307.3,
+          "ecart_au_pas_um": 171.8,
+          "au_pas_nominal": false
+        },
+        {
+          "bras": 10,
+          "de": 12,
+          "vers": 13,
+          "ecart_um": 57.0,
+          "ecart_au_pas_um": 78.5,
+          "au_pas_nominal": false
+        }
+      ],
+      "cellules_par_spire": {
+        "1": 0,
+        "2": 0,
+        "3": 89,
+        "4": 1881,
+        "5": 2646,
+        "6": 2726,
+        "7": 2628,
+        "8": 2672,
+        "9": 2668,
+        "10": 2626,
+        "11": 2100,
+        "12": 2655,
+        "13": 2606
+      }
+    },
+    {
+      "centre": [
+        9615.08935546875,
+        10579.884765625,
+        20483.67578125
+      ],
+      "cote": 960.0,
+      "spires": 11,
+      "chaine": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "plafond": 8,
+      "bras": [
+        {
+          "bras": 1,
+          "de": 3,
+          "vers": 4,
+          "ecart_um": 109.9,
+          "ecart_au_pas_um": 25.6,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 2,
+          "de": 4,
+          "vers": 5,
+          "ecart_um": 178.6,
+          "ecart_au_pas_um": 43.1,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 3,
+          "de": 5,
+          "vers": 6,
+          "ecart_um": 131.6,
+          "ecart_au_pas_um": 3.9,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 4,
+          "de": 6,
+          "vers": 7,
+          "ecart_um": 85.9,
+          "ecart_au_pas_um": 49.6,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 5,
+          "de": 7,
+          "vers": 8,
+          "ecart_um": 106.0,
+          "ecart_au_pas_um": 29.5,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 6,
+          "de": 8,
+          "vers": 9,
+          "ecart_um": 95.8,
+          "ecart_au_pas_um": 39.7,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 7,
+          "de": 9,
+          "vers": 10,
+          "ecart_um": 110.6,
+          "ecart_au_pas_um": 24.9,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 8,
+          "de": 10,
+          "vers": 11,
+          "ecart_um": 135.4,
+          "ecart_au_pas_um": 0.1,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 9,
+          "de": 11,
+          "vers": 12,
+          "ecart_um": 283.6,
+          "ecart_au_pas_um": 148.1,
+          "au_pas_nominal": false
+        },
+        {
+          "bras": 10,
+          "de": 12,
+          "vers": 13,
+          "ecart_um": 62.7,
+          "ecart_au_pas_um": 72.8,
+          "au_pas_nominal": false
+        }
+      ],
+      "cellules_par_spire": {
+        "1": 0,
+        "2": 0,
+        "3": 116,
+        "4": 259,
+        "5": 699,
+        "6": 1068,
+        "7": 1625,
+        "8": 2728,
+        "9": 2875,
+        "10": 2920,
+        "11": 2786,
+        "12": 2713,
+        "13": 2620
+      }
+    },
+    {
+      "centre": [
+        10815.08935546875,
+        10819.884765625,
+        20723.67578125
+      ],
+      "cote": 960.0,
+      "spires": 11,
+      "chaine": [
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "plafond": 8,
+      "bras": [
+        {
+          "bras": 1,
+          "de": 2,
+          "vers": 4,
+          "ecart_um": 189.9,
+          "ecart_au_pas_um": 54.4,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 2,
+          "de": 4,
+          "vers": 5,
+          "ecart_um": 202.5,
+          "ecart_au_pas_um": 67.0,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 3,
+          "de": 5,
+          "vers": 6,
+          "ecart_um": 166.8,
+          "ecart_au_pas_um": 31.3,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 4,
+          "de": 6,
+          "vers": 7,
+          "ecart_um": 107.0,
+          "ecart_au_pas_um": 28.5,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 5,
+          "de": 7,
+          "vers": 8,
+          "ecart_um": 138.7,
+          "ecart_au_pas_um": 3.2,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 6,
+          "de": 8,
+          "vers": 9,
+          "ecart_um": 144.8,
+          "ecart_au_pas_um": 9.3,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 7,
+          "de": 9,
+          "vers": 10,
+          "ecart_um": 87.3,
+          "ecart_au_pas_um": 48.2,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 8,
+          "de": 10,
+          "vers": 11,
+          "ecart_um": 128.0,
+          "ecart_au_pas_um": 7.5,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 9,
+          "de": 11,
+          "vers": 12,
+          "ecart_um": 246.6,
+          "ecart_au_pas_um": 111.1,
+          "au_pas_nominal": false
+        },
+        {
+          "bras": 10,
+          "de": 12,
+          "vers": 13,
+          "ecart_um": 123.4,
+          "ecart_au_pas_um": 12.1,
+          "au_pas_nominal": true
+        }
+      ],
+      "cellules_par_spire": {
+        "1": 21,
+        "2": 158,
+        "3": 0,
+        "4": 1774,
+        "5": 2754,
+        "6": 1632,
+        "7": 1984,
+        "8": 2098,
+        "9": 1522,
+        "10": 1657,
+        "11": 1877,
+        "12": 2346,
+        "13": 1665
+      }
+    }
+  ],
+  "plafonds": {
+    "0": 597,
+    "1": 217,
+    "2": 101,
+    "3": 44,
+    "4": 110,
+    "5": 50,
+    "6": 161,
+    "7": 11,
+    "8": 5
+  },
+  "bras_trop_loin": 2226,
+  "bras_trop_pres": 1169,
+  "bras_au_total": 8589,
+  "ecarts_par_paire": [
+    {
+      "de": 10,
+      "vers": 11,
+      "consecutif": true,
+      "boites": 543,
+      "ecart_min_um": 19.4,
+      "ecart_max_um": 1224.8,
+      "rapport": 63.1
+    },
+    {
+      "de": 8,
+      "vers": 9,
+      "consecutif": true,
+      "boites": 938,
+      "ecart_min_um": 56.2,
+      "ecart_max_um": 1251.0,
+      "rapport": 22.3
+    },
+    {
+      "de": 4,
+      "vers": 5,
+      "consecutif": true,
+      "boites": 842,
+      "ecart_min_um": 82.7,
+      "ecart_max_um": 1560.9,
+      "rapport": 18.9
+    },
+    {
+      "de": 5,
+      "vers": 6,
+      "consecutif": true,
+      "boites": 860,
+      "ecart_min_um": 70.4,
+      "ecart_max_um": 1301.4,
+      "rapport": 18.5
+    },
+    {
+      "de": 12,
+      "vers": 13,
+      "consecutif": true,
+      "boites": 943,
+      "ecart_min_um": 23.5,
+      "ecart_max_um": 362.6,
+      "rapport": 15.4
+    },
+    {
+      "de": 6,
+      "vers": 7,
+      "consecutif": true,
+      "boites": 902,
+      "ecart_min_um": 28.1,
+      "ecart_max_um": 354.2,
+      "rapport": 12.6
+    },
+    {
+      "de": 11,
+      "vers": 12,
+      "consecutif": true,
+      "boites": 574,
+      "ecart_min_um": 70.1,
+      "ecart_max_um": 847.0,
+      "rapport": 12.1
+    },
+    {
+      "de": 9,
+      "vers": 10,
+      "consecutif": true,
+      "boites": 918,
+      "ecart_min_um": 33.0,
+      "ecart_max_um": 333.0,
+      "rapport": 10.1
+    },
+    {
+      "de": 3,
+      "vers": 4,
+      "consecutif": true,
+      "boites": 239,
+      "ecart_min_um": 26.2,
+      "ecart_max_um": 230.4,
+      "rapport": 8.8
+    },
+    {
+      "de": 1,
+      "vers": 2,
+      "consecutif": true,
+      "boites": 83,
+      "ecart_min_um": 33.9,
+      "ecart_max_um": 293.2,
+      "rapport": 8.6
+    },
+    {
+      "de": 5,
+      "vers": 7,
+      "consecutif": false,
+      "boites": 21,
+      "ecart_min_um": 197.6,
+      "ecart_max_um": 1320.0,
+      "rapport": 6.7
+    },
+    {
+      "de": 11,
+      "vers": 13,
+      "consecutif": false,
+      "boites": 10,
+      "ecart_min_um": 113.0,
+      "ecart_max_um": 755.5,
+      "rapport": 6.7
+    },
+    {
+      "de": 8,
+      "vers": 11,
+      "consecutif": false,
+      "boites": 55,
+      "ecart_min_um": 165.8,
+      "ecart_max_um": 1089.8,
+      "rapport": 6.6
+    },
+    {
+      "de": 5,
+      "vers": 8,
+      "consecutif": false,
+      "boites": 20,
+      "ecart_min_um": 290.5,
+      "ecart_max_um": 1626.7,
+      "rapport": 5.6
+    },
+    {
+      "de": 7,
+      "vers": 8,
+      "consecutif": true,
+      "boites": 990,
+      "ecart_min_um": 66.0,
+      "ecart_max_um": 248.4,
+      "rapport": 3.8
+    },
+    {
+      "de": 10,
+      "vers": 12,
+      "consecutif": false,
+      "boites": 373,
+      "ecart_min_um": 145.0,
+      "ecart_max_um": 517.8,
+      "rapport": 3.6
+    },
+    {
+      "de": 2,
+      "vers": 3,
+      "consecutif": true,
+      "boites": 149,
+      "ecart_min_um": 123.9,
+      "ecart_max_um": 319.0,
+      "rapport": 2.6
+    },
+    {
+      "de": 4,
+      "vers": 6,
+      "consecutif": false,
+      "boites": 17,
+      "ecart_min_um": 615.8,
+      "ecart_max_um": 1390.0,
+      "rapport": 2.3
+    },
+    {
+      "de": 8,
+      "vers": 10,
+      "consecutif": false,
+      "boites": 19,
+      "ecart_min_um": 182.0,
+      "ecart_max_um": 325.2,
+      "rapport": 1.8
+    },
+    {
+      "de": 9,
+      "vers": 11,
+      "consecutif": false,
+      "boites": 16,
+      "ecart_min_um": 92.6,
+      "ecart_max_um": 162.9,
+      "rapport": 1.8
+    },
+    {
+      "de": 8,
+      "vers": 12,
+      "consecutif": false,
+      "boites": 12,
+      "ecart_min_um": 405.3,
+      "ecart_max_um": 614.9,
+      "rapport": 1.5
+    },
+    {
+      "de": 5,
+      "vers": 12,
+      "consecutif": false,
+      "boites": 8,
+      "ecart_min_um": 1017.8,
+      "ecart_max_um": 1529.2,
+      "rapport": 1.5
+    },
+    {
+      "de": 4,
+      "vers": 9,
+      "consecutif": false,
+      "boites": 17,
+      "ecart_min_um": 1150.1,
+      "ecart_max_um": 1532.9,
+      "rapport": 1.3
+    },
+    {
+      "de": 2,
+      "vers": 4,
+      "consecutif": false,
+      "boites": 3,
+      "ecart_min_um": 150.5,
+      "ecart_max_um": 189.9,
+      "rapport": 1.3
+    },
+    {
+      "de": 5,
+      "vers": 11,
+      "consecutif": false,
+      "boites": 2,
+      "ecart_min_um": 1116.4,
+      "ecart_max_um": 1354.7,
+      "rapport": 1.2
+    },
+    {
+      "de": 5,
+      "vers": 9,
+      "consecutif": false,
+      "boites": 19,
+      "ecart_min_um": 749.3,
+      "ecart_max_um": 823.0,
+      "rapport": 1.1
+    },
+    {
+      "de": 9,
+      "vers": 12,
+      "consecutif": false,
+      "boites": 4,
+      "ecart_min_um": 476.1,
+      "ecart_max_um": 507.5,
+      "rapport": 1.1
+    },
+    {
+      "de": 6,
+      "vers": 12,
+      "consecutif": false,
+      "boites": 2,
+      "ecart_min_um": 842.7,
+      "ecart_max_um": 842.7,
+      "rapport": 1.0
+    },
+    {
+      "de": 6,
+      "vers": 8,
+      "consecutif": false,
+      "boites": 1,
+      "ecart_min_um": 415.2,
+      "ecart_max_um": 415.2,
+      "rapport": 1.0
+    },
+    {
+      "de": 4,
+      "vers": 12,
+      "consecutif": false,
+      "boites": 1,
+      "ecart_min_um": 1388.6,
+      "ecart_max_um": 1388.6,
+      "rapport": 1.0
+    },
+    {
+      "de": 7,
+      "vers": 11,
+      "consecutif": false,
+      "boites": 2,
+      "ecart_min_um": 479.4,
+      "ecart_max_um": 479.4,
+      "rapport": 1.0
+    },
+    {
+      "de": 1,
+      "vers": 5,
+      "consecutif": false,
+      "boites": 6,
+      "ecart_min_um": 471.8,
+      "ecart_max_um": 472.4,
+      "rapport": 1.0
     }
   ]
 }

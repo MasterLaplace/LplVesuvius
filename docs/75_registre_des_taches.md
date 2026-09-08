@@ -3983,6 +3983,56 @@ les compter comme des confirmations, c'est **compter du silence**.
 > nouvelle pour l'objectif** — et la mesurer demande un corpus sans ce trou.
 
 ---
+##### ⛔⛔ ET DÉPLACER LA BOÎTE N'Y CHANGE PRESQUE RIEN — 8 au mieux, sur 1296 placements
+
+> Mesure : `src/nappe/ou_poser_la_boite.py` (20 contrôles) →
+> `docs/mesures/ou_poser_la_boite.json`. Figure : `src/figures/figure_ou_poser_la_boite.py`
+> (10 contrôles), le 2026-09-08. Document : [`83`](83_le_corpus_et_non_la_boite.md).
+>
+> ```bash
+> uv run python src/nappe/ou_poser_la_boite.py --cote 960 \
+>     --json docs/mesures/ou_poser_la_boite.json
+> uv run python src/figures/figure_ou_poser_la_boite.py \
+>     --sortie docs/images/83_ou_poser_la_boite.png
+> ```
+
+![existe-t-il une boîte où la portée cesse d'être censurée](images/83_ou_poser_la_boite.png)
+
+| plafond atteint | 0 | 1 | 2 | 3 | 4 | 5 | **6** | 7 | 8 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| placements | **597** | 217 | 101 | 44 | 110 | 50 | **161** | 11 | 5 |
+
+⭐⭐ **Le plafond n'est pas un défaut de placement.** Aucun des 1296 placements ne dépasse **8**,
+alors que douze spires sont présentes dans les meilleurs. Ce n'est pas la boîte qui manque de
+matière, c'est le corpus qui ne présente pas une spirale au pas nominal.
+★★ Ce que le déplacement achète quand même : **+2 bras de dynamique**, sans changer d'objet
+(centre `8655 10820 21924` au lieu de `10615 10571 19831`) — pas une marche meilleure, une **mesure
+capable de juger deux bras plus loin**.
+
+⚠⚠ **Le corpus échoue dans les DEUX sens** : sur 8589 bras, **3395 hors du pas nominal (40 %)** —
+**2226 trop loin** (un trou de numérotation) et **1169 trop près** (deux spires que la boîte ne
+sépare pas). ⭐⭐⭐ Et **la même paire ne demande pas la même chose partout** : sur les **12 paires
+de rangs voisins**, l'écart médian varie d'un facteur **2,6 à 63,1**, et **huit** de plus de dix —
+`10→11` de **19,4 à 1224,8 µm** (**×63,1**), `8→9` ×22,3, `4→5` ×18,9, jusqu'à `2→3` à ×2,6.
+
+⚠⚠⚠ **J'avais d'abord écrit « aucune paire ne varie de moins d'un facteur dix », et ma propre
+batterie l'a démenti en une exécution** : `2→3` varie de ×2,6, et le compte mélangeait les paires à
+**saut de rang**, qui n'existent que dans les boîtes où une spire intermédiaire est trop pauvre —
+donc décrivent une population de boîtes et non l'écart entre deux feuilles voisines. Le drapeau
+`consecutif` est désormais publié par la mesure.
+
+⚠⚠⚠ **Le maximum dépend du treillis, donc il est publié comme un MINORANT** : au pas 480 il sort à
+7, au pas 240 à 8. Un treillis plus grossier ne peut que **rater** un bon placement, jamais en
+inventer un. ⚠ **Et ce piège s'est refermé pendant l'écriture** : `--pas` prenait un scalaire avec
+son propre défaut, donc le balayage de treillis n'était **atteignable par aucune ligne de
+commande**, et le premier run publié annonçait un minorant qu'il n'avait pas mesuré. Le défaut est
+désormais **lu sur la fonction**, et un contrôle le vérifie.
+
+⚠ Et une garde de ce dépôt a attrapé ma propre faute en une seconde : `ou_poser_la_boite` est
+parti dans le commit précédent sans être enregistré dans `temoins.sh`, et
+`batteries_enregistrees` — écrite la veille pour exactement ça — l'a nommée aussitôt.
+
+---
 ##### ⭐⭐⭐ UNE CELLULE PEUT-ELLE SAVOIR QU'ELLE A TORT, sans regarder la cible ?
 
 > Mesure : `src/nappe/la_cellule_sait_elle_quelle_a_tort.py` (14 contrôles) →
