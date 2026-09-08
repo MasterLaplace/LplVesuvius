@@ -4261,6 +4261,52 @@ publication** : « 348 artefacts nommés nulle part » puis « 240 », toutes de
 raisons différentes. Une mesure jetée est une leçon sur l'instrument.
 
 ---
+##### ⭐⭐⭐ LA COMPOSITION — et la provenance devient un fait OBSERVÉ
+
+> Outil : `src/depot/enchainer.py` (32 contrôles) + `docs/chaines/*.chaine`. Document :
+> [`88`](88_enchainer.md), le 2026-09-08. ⭐ Le lanceur est **lui-même un greffon** : il vit dans
+> `src/depot/`, donc `lplv` le découvre comme les 190 autres, et un contrôle l'asserte.
+>
+> ```bash
+> lplv enchainer docs/chaines/les_spires_publiees.chaine --sec
+> lplv enchainer docs/chaines/les_spires_publiees.chaine \
+>     --json docs/mesures/enchainer_les_spires_publiees.json
+> ```
+
+Choix de l'auteur, après le diagnostic de `87` : **la composition avant la provenance déclarée**.
+Et la mesure lui donne raison — faire déclarer chaque module aurait demandé **314 motifs écrits à
+la main** sur 486 artefacts, dont **105** nommés par plusieurs modules (un lit, un écrit) : une
+seconde description, libre de dériver.
+
+⭐⭐⭐ **Une chaîne qui tourne fait mieux qu'une déclaration : elle OBSERVE.** Inventaire des
+racines surveillées avant et après chaque étage, puis différence. Mesuré sur la première chaîne
+réelle : **6/6 étages en 2,71 s**, **6 artefacts attribués au verbe exact qui les a écrits** —
+trois `.json` et trois `.png`, **sans un mot de déclaration**.
+
+| décision | raison |
+|---|---|
+| `subprocess`, pas `os.execvp` | un processus remplacé ne revient jamais, donc un seul étage tournerait ; le code de sortie est **enregistré** plutôt que consulté au vol |
+| ⚠⚠⚠ validation **avant** le premier étage | une coquille à la cinquième ligne ne doit pas coûter les quatre étages du dessus |
+| « créé » et « modifié » = **deux** listes | régénérer un artefact n'est pas en produire un neuf |
+| la portée de l'observation **voyage** avec le résultat | `data/` (98 275 fichiers, 168 Gio) est hors surveillance, donc « rien écrit **parmi les racines observées** » |
+| ⚠⚠ ni parallélisme, ni cache, ni reprise, ni réessai | une couche se construit quand un **compteur** montre ce que celle du dessous laisse passer |
+
+⚠ Les deux chaînes livrées rejouent ce qui était lancé **à la main** : les six étages de `84`/`85`/
+`86` (dont deux téléchargements), et les quatre gardes de l'arbre — dont l'attente était réécrite
+à chaque fois, et dont un `pkill -f` mal fermé a déjà tué le shell.
+
+⚠⚠ **Deux fautes à moi, trouvées par mes propres sondes.** (1) Le run à sec annonçait **6 étages
+muets** alors que rien n'avait tourné : il signalait l'absence d'un effet qu'il avait lui-même
+empêché. (2) ⚠⚠⚠ Une sonde déplaçant la validation **au fil de l'eau passait les trente
+contrôles** — j'assertais que l'exception nomme le verbe, **jamais que rien n'avait tourné**. Forme
+falsifiable retenue : une chaîne dont le premier étage écrit et le second verbe est inconnu doit
+laisser le disque **intact**.
+
+> ⭐⭐ **CE QUE ÇA DÉBLOQUE.** `artefacts_orphelins` pourrait lire les enregistrements de chaîne et
+> ne deviner que pour ce qu'aucune chaîne n'a jamais produit — le décompte deviendrait **visible et
+> ne pourrait que rétrécir**. Tranche suivante, à part parce qu'elle touche une garde.
+
+---
 ##### ⭐⭐⭐ UNE CELLULE PEUT-ELLE SAVOIR QU'ELLE A TORT, sans regarder la cible ?
 
 > Mesure : `src/nappe/la_cellule_sait_elle_quelle_a_tort.py` (14 contrôles) →

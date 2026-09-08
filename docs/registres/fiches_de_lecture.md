@@ -5247,6 +5247,52 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/88_enchainer.md
+- **lignes** : 102
+- **nature** : OUTIL
+  (le lanceur de chaînes de `lplv`, plus les deux premières chaînes réelles du dépôt. C'est la
+  moitié absente de l'architecture mesurée par [`87`](../87_la_forme_du_depot.md).)
+- **résumé** : ⭐⭐⭐ `lplv` nommait 190 greffons et **n'en composait aucun**. `lplv enchainer
+  <chaîne>` les enchaîne, s'arrête à la première panne, et **OBSERVE** quel verbe a écrit quel
+  fichier — donc la provenance devient un fait mesuré, sans une déclaration à maintenir. Mesuré
+  sur la première chaîne réelle : **6/6 étages en 2,71 s**, **6 artefacts attribués au verbe
+  exact** (trois `.json`, trois `.png`).
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **La composition résout la provenance mieux que la déclaration.** Faire déclarer chaque
+    module aurait demandé **314 motifs écrits à la main** sur 486 artefacts, dont **105** nommés
+    par plusieurs modules (un lit, un écrit) : une seconde description, libre de dériver. Une
+    chaîne qui tourne **observe** — inventaire avant/après chaque étage — donc zéro motif, et les
+    105 ambiguïtés disparaissent puisque seul l'étage qui écrit est crédité.
+  - ⚠⚠ **`subprocess` et non `os.execvp`**, délibérément : `lplv <verbe>` remplace le processus
+    pour que code de sortie, signaux et terminal soient ceux du verbe — un processus remplacé ne
+    revient jamais, donc un seul étage tournerait. Le prix est un maillon de plus, d'où le code de
+    sortie **enregistré** plutôt que consulté au vol.
+  - ⚠⚠⚠ **La chaîne entière est validée AVANT le premier étage** : une coquille à la cinquième
+    ligne ne doit pas coûter les quatre étages du dessus.
+  - ⚠⚠ « Créé » et « modifié » sont **deux listes** : régénérer un artefact n'est pas en produire
+    un neuf.
+  - ⚠ **La portée de l'observation voyage avec le résultat** : `data/` (98 275 fichiers, 168 Gio)
+    en est absent, donc un étage est rapporté « rien écrit **parmi les racines observées** ».
+  - ⚠⚠ **Ni parallélisme, ni cache, ni reprise, ni réessai** — décision et non oubli : une couche
+    se construit quand un compteur montre ce que la couche du dessous laisse passer. Le lanceur
+    compte les étages, leur durée et leurs artefacts.
+  - ⭐ **Le lanceur est lui-même un greffon** (`src/depot/`, découvert par `lplv`), et un contrôle
+    l'asserte : l'architecture reste cohérente avec elle-même.
+  - Les deux chaînes rejouent ce qui avait été lancé **à la main** le 2026-09-08 — une commande
+    tapée dans un terminal est perdue au prochain shell, et l'ordre des étages porte sa raison.
+- **rétractations / corrections internes** :
+  - §5 : ⚠⚠ **un faux signal** — le run à sec annonçait 6 étages « muets », or rien n'avait
+    tourné : il signalait l'absence d'un effet qu'il avait lui-même empêché.
+  - §5 : ⚠⚠⚠ **un contrôle qui ne testait pas ce qu'il prétendait.** Une sonde déplaçant la
+    validation au fil de l'eau **passait les trente contrôles** : j'assertais que l'exception
+    nomme le verbe, jamais que **rien n'avait tourné**. Forme falsifiable retenue : une chaîne
+    dont le premier étage écrit et le second verbe est inconnu doit laisser le disque intact.
+- **preuve de lecture intégrale** :
+  - l. 69 : `le shell qui les attendait. **Une commande tapée dans un terminal est perdue au prochain shell** ;`
+  - l. 80 : `fautif, jamais que **rien n'avait tourné**. La forme falsifiable est celle-ci — une chaîne dont le`
+
+---
+
 ### docs/87_la_forme_du_depot.md
 - **lignes** : 111
 - **nature** : INSTRUMENT + RESULTAT
@@ -5900,7 +5946,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 5469
+- **lignes** : 5515
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -7230,8 +7276,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 4777 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 5469 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 4823 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 5515 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

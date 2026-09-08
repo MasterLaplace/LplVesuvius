@@ -171,6 +171,30 @@ rouleau.**
 
 ---
 
+⭐⭐⭐ **L'ARCHITECTURE — la composition existe, et la provenance est devenue un fait OBSERVÉ**
+([`87`](docs/87_la_forme_du_depot.md) le diagnostic, [`88`](docs/88_enchainer.md) l'outil).
+
+`lplv enchainer <chaîne>` enchaîne des verbes, s'arrête à la première panne, et **observe** quel
+verbe a écrit quel fichier. Mesuré : **6/6 étages en 2,71 s, 6 artefacts attribués au verbe
+exact, sans une déclaration**. Deux chaînes livrées — `docs/chaines/les_spires_publiees.chaine` et
+`les_gardes_de_larbre.chaine`.
+
+⚠⚠ **Le diagnostic de `87` corrige une partie de la plainte** : **267/356** modules exposent
+`--verifier` et **0** batterie n'est non enregistrée — **les tests ne sont pas la panne**. La panne
+est la **retrouvabilité** : seuls **38 %** des 486 artefacts sont retrouvables par leur nom, et
+`artefacts_orphelins` déclare « 0 orphelin » avec **46 % de son verdict sur ≤12 caractères**.
+
+⛔ **ET IL NE FAUT PAS RE-PARTITIONNER LES DOSSIERS**, mesuré par cohésion de vocabulaire de
+domaine (AST, co-occurrence) : rapport global **×1,89**, `tracecheck` **×0,61** (sous le hasard).
+Un reclassement gagnerait peut-être ×3 pour **353 déplacements**.
+
+⭐ **Reste de l'architecture, chiffré** : la couche partagée (`_leve` ×19, `_pixels` ×14, `lire`
+×13, `charger` ×10 — le noyau de fait est `figure_commune` 77×, `zarr_depth` 22×) ; les **paliers
+de build**, qui coûtent **5 arêtes** puisque le graphe est déjà à sens unique à **96 %** ; et
+`artefacts_orphelins` lisant les enregistrements de chaîne pour cesser de deviner.
+
+---
+
 ## REPRISE (historique) — 2026-08-28, fin d'après-midi
 
 **Trente-six commits depuis la nuit du 27.** L'arbre est propre, la suite est verte. Ce bloc

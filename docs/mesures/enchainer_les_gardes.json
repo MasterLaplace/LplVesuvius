@@ -1,0 +1,68 @@
+{
+  "chaine": "docs/chaines/les_gardes_de_larbre.chaine",
+  "sec": false,
+  "racines_observees": [
+    "docs"
+  ],
+  "etages": 4,
+  "lances": 4,
+  "reussis": 4,
+  "echoues": 0,
+  "non_lances": 0,
+  "arrete_a_la_ligne": null,
+  "secondes": 532.89,
+  "artefacts_observes": 0,
+  "etages_muets": [
+    "artefacts_orphelins",
+    "appelants",
+    "le_chemin_du_nombre_publie",
+    "la_forme_du_depot"
+  ],
+  "provenance_observee": {},
+  "detail": [
+    {
+      "ligne": 12,
+      "verbe": "artefacts_orphelins",
+      "arguments": [
+        "--verifier"
+      ],
+      "code": 0,
+      "secondes": 430.76,
+      "ecrits": [],
+      "modifies": []
+    },
+    {
+      "ligne": 13,
+      "verbe": "appelants",
+      "arguments": [
+        "--verifier"
+      ],
+      "code": 0,
+      "secondes": 0.45,
+      "ecrits": [],
+      "modifies": []
+    },
+    {
+      "ligne": 14,
+      "verbe": "le_chemin_du_nombre_publie",
+      "arguments": [
+        "--verifier"
+      ],
+      "code": 0,
+      "secondes": 0.08,
+      "ecrits": [],
+      "modifies": []
+    },
+    {
+      "ligne": 15,
+      "verbe": "la_forme_du_depot",
+      "arguments": [
+        "--verifier"
+      ],
+      "code": 0,
+      "secondes": 101.6,
+      "ecrits": [],
+      "modifies": []
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+# Ce que les objets publient de leurs spires, et ce que le corpus autorise d'en mesurer.
+#
+# ⚠⚠⚠ CETTE CHAINE EXISTE PARCE QU'ELLE A ETE LANCEE A LA MAIN, LE 2026-09-08, dans un
+# terminal — six modules dans le bon ordre, dont deux telechargements. Une commande tapee
+# dans un terminal est perdue au prochain shell : c'est exactement ce que ce fichier repare.
+#
+# ⚠ L'ORDRE N'EST PAS LIBRE, et voici sa raison, etage par etage :
+#   1. `une_surface_combien_de_spires` lit l'index et n'a besoin de rien.
+#   2. `le_sens_du_rang --telecharger` a besoin du meme index, et rapatrie 28 Mio de
+#      maillage dans `data/paris4_bandes/` (gitignore, idempotent : il saute ce qui est la).
+#   3. `la_demi_feuille_par_objet` lit `les_wraps_publies.json`, deja versionne, et l'atlas
+#      d'un clone tiers. Il ne depend donc pas des deux etages du dessus — il est ici parce
+#      que sa CONCLUSION les corrige, et qu'une chaine se lit aussi comme un raisonnement.
+#   4-6. les figures lisent les artefacts des etages 1 a 3, donc elles viennent apres.
+#
+# ⚠ Chaque figure porte `--verifier` plutot que `--sortie` : sa batterie DESSINE puis controle,
+# donc `--verifier` produit l'image ET la juge. Passer `--sortie` dessinerait sans juger.
+
+une_surface_combien_de_spires --json docs/mesures/une_surface_combien_de_spires.json
+le_sens_du_rang --telecharger --json docs/mesures/le_sens_du_rang.json
+la_demi_feuille_par_objet --json docs/mesures/la_demi_feuille_par_objet.json
+
+figure_une_surface_combien_de_spires --verifier
+figure_le_sens_du_rang --verifier
+figure_la_demi_feuille_par_objet --verifier

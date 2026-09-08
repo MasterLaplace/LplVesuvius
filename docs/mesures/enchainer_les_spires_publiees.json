@@ -1,0 +1,108 @@
+{
+  "chaine": "docs/chaines/les_spires_publiees.chaine",
+  "sec": false,
+  "racines_observees": [
+    "docs"
+  ],
+  "etages": 6,
+  "lances": 6,
+  "reussis": 6,
+  "echoues": 0,
+  "non_lances": 0,
+  "arrete_a_la_ligne": null,
+  "secondes": 2.71,
+  "artefacts_observes": 6,
+  "etages_muets": [],
+  "provenance_observee": {
+    "docs/mesures/une_surface_combien_de_spires.json": "une_surface_combien_de_spires",
+    "docs/mesures/le_sens_du_rang.json": "le_sens_du_rang",
+    "docs/mesures/la_demi_feuille_par_objet.json": "la_demi_feuille_par_objet",
+    "docs/images/84_une_surface_combien_de_spires.png": "figure_une_surface_combien_de_spires",
+    "docs/images/85_le_sens_du_rang.png": "figure_le_sens_du_rang",
+    "docs/images/86_la_demi_feuille_par_objet.png": "figure_la_demi_feuille_par_objet"
+  },
+  "detail": [
+    {
+      "ligne": 19,
+      "verbe": "une_surface_combien_de_spires",
+      "arguments": [
+        "--json",
+        "docs/mesures/une_surface_combien_de_spires.json"
+      ],
+      "code": 0,
+      "secondes": 0.09,
+      "ecrits": [],
+      "modifies": [
+        "docs/mesures/une_surface_combien_de_spires.json"
+      ]
+    },
+    {
+      "ligne": 20,
+      "verbe": "le_sens_du_rang",
+      "arguments": [
+        "--telecharger",
+        "--json",
+        "docs/mesures/le_sens_du_rang.json"
+      ],
+      "code": 0,
+      "secondes": 1.47,
+      "ecrits": [],
+      "modifies": [
+        "docs/mesures/le_sens_du_rang.json"
+      ]
+    },
+    {
+      "ligne": 21,
+      "verbe": "la_demi_feuille_par_objet",
+      "arguments": [
+        "--json",
+        "docs/mesures/la_demi_feuille_par_objet.json"
+      ],
+      "code": 0,
+      "secondes": 0.24,
+      "ecrits": [],
+      "modifies": [
+        "docs/mesures/la_demi_feuille_par_objet.json"
+      ]
+    },
+    {
+      "ligne": 23,
+      "verbe": "figure_une_surface_combien_de_spires",
+      "arguments": [
+        "--verifier"
+      ],
+      "code": 0,
+      "secondes": 0.33,
+      "ecrits": [],
+      "modifies": [
+        "docs/images/84_une_surface_combien_de_spires.png"
+      ]
+    },
+    {
+      "ligne": 24,
+      "verbe": "figure_le_sens_du_rang",
+      "arguments": [
+        "--verifier"
+      ],
+      "code": 0,
+      "secondes": 0.26,
+      "ecrits": [],
+      "modifies": [
+        "docs/images/85_le_sens_du_rang.png"
+      ]
+    },
+    {
+      "ligne": 25,
+      "verbe": "figure_la_demi_feuille_par_objet",
+      "arguments": [
+        "--verifier"
+      ],
+      "code": 0,
+      "secondes": 0.32,
+      "ecrits": [],
+      "modifies": [
+        "docs/images/86_la_demi_feuille_par_objet.png"
+      ]
+    }
+  ]
+}

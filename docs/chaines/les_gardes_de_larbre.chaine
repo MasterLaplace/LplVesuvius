@@ -1,0 +1,15 @@
+# Les gardes qui parcourent tout l'arbre — les trois lentes, plus la forme du depot.
+#
+# ⚠⚠ POURQUOI CETTE CHAINE EXISTE. Ces quatre gardes coutent plusieurs minutes et se lancent
+# apres CHAQUE tranche. Elles etaient relancees a la main, une par une, avec un `until` de
+# surveillance ecrit a chaque fois — et un `pkill -f` mal ferme a deja tue le shell qui les
+# attendait. Une chaine les nomme une fois, s'arrete a la premiere panne, et dit laquelle.
+#
+# ⚠ AUCUNE N'ECRIT RIEN : ce sont des batteries. Elles seront donc toutes rapportees « muettes »,
+# et c'est correct — le lanceur nomme les etages muets sans les compter comme des echecs,
+# precisement pour que ce cas-la ne ressemble pas a une panne.
+
+artefacts_orphelins --verifier
+appelants --verifier
+le_chemin_du_nombre_publie --verifier
+la_forme_du_depot --verifier

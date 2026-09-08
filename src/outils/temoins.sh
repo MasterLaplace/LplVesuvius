@@ -1537,6 +1537,7 @@ run "la cellule sait-elle"   uv run --project "$ROOT" python "$ROOT/src/nappe/la
 run "combien de fenetres"    uv run --project "$ROOT" python "$ROOT/src/commun/combien_de_fenetres.py" --verifier
 run "batteries enregistrees" uv run --project "$ROOT" python "$ROOT/src/depot/batteries_enregistrees.py" --verifier
 run "la forme du depot"     uv run --project "$ROOT" python "$ROOT/src/depot/la_forme_du_depot.py" --verifier
+run "enchainer"             uv run --project "$ROOT" python "$ROOT/src/depot/enchainer.py" --verifier
 run "spires consecutives"   uv run --project "$ROOT" python "$ROOT/src/depot/les_spires_consecutives_publiees.py" --verifier
 run "spires par surface"    uv run --project "$ROOT" python "$ROOT/src/depot/une_surface_combien_de_spires.py" --verifier
 run "le mur du corpus"      uv run --project "$ROOT" python "$ROOT/src/nappe/le_mur_du_corpus.py" --verifier
