@@ -144,6 +144,38 @@ un seul.**
 riche du concours ne contient pas une marche entière. Mais c'est la première fois que la portée de
 ce dépôt peut se comparer à du **travail humain publié** plutôt qu'à une borne censurée.
 
+⛔⛔⛔ **LE FROISSEMENT NE PEUT PAS SERVIR DE SIGNAL DE CONFIANCE — IL EST ANTI-PRÉDICTIF**
+([`94`](docs/94_le_froissement_mesure_la_rugosite.md)). `93` dit **où** le pas géométrique échoue ;
+ce qui manque est un signal que le marcheur lit **tout seul**, et le **pli** était le candidat —
+`75` le mesure prédictif **par cellule** (8 bras sur 8 chez le raccrochage, **un bras sauvé**).
+Testé sur les 28 bandes humaines de `PHercParis4` : **15,2 µm au cœur, 3,8 au bord**, alors que la
+continuité y passe de ×1,7 à **×31**. Corrélations **−0,957** avec le rayon et **−0,825** avec la
+rupture. ⛔ **Un marcheur qui s'en servirait signalerait le cœur, où tout est propre, et se tairait
+au bord.** ⚠⚠ Normaliser par la sagitta retire le rayon (−0,404) mais **pas le signe** (−0,678).
+
+⭐⭐⭐ **Et ce que le champ mesure est établi par FIXTURE, pas par corrélation** : il prend la
+**médiane** d'un voisinage 3×3, donc il est **exactement aveugle à la courbure lisse** — un
+cylindre parfait rend **0,00 µm**, un cylindre à **axe courbe** (celui que `90` mesure) **0,00 µm**
+aussi, et seul du bruit le réveille, **presque sans dépendre du rayon** (×1,10 entre R = 5 et
+R = 20 mm).
+
+⭐⭐ **Donc le verdict devient plus fort** : le réel tombe de **×5,2** du cœur au bord là où la
+rugosité seule n'en donnerait que ×1,1, donc les maillages humains sont **cinq fois plus lisses au
+bord**. Or un maillage lisse qui porte des **sauts de 30 mm** (`92`) et des spires **désalignées**
+(`93`) a **enjambé ce qu'il ne pouvait pas suivre**. **La douceur au bord n'est pas de la qualité,
+c'est la signature d'un pontage** — et un signal de confiance bâti dessus **classerait l'abandon
+comme une réussite**, le pire mode de panne pour un automate lancé sans surveillance.
+
+⚠⚠⚠ Et une **cause publiée puis rétractée avant commit** : j'expliquais la chute en 1/R par la
+**sagitta** d'un cercle, avec un accord de **1,11 en médiane** sur 28 bandes. La fixture la réfute
+d'un coup — elle prédit **20,2 µm** là où le champ rend **zéro**. ⭐ **Une corrélation sur
+vingt-huit points ne vaut pas une fixture dont on connaît la réponse.**
+
+⚠⚠ **La contrainte que ça laisse au remplaçant de l'humain** : une marche de 31 spires change le
+rayon d'un **facteur six**, donc **tout signal de confiance doit être vérifié À TRAVERS les
+rayons**, ou il classera par rayon en croyant classer par difficulté. Le pli reste valable **à
+rayon constant** — `94` ne rétracte pas `75`, il borne l'autre axe.
+
 ⭐⭐⭐ **OÙ LES SPIRES SONT-ELLES PARALLÈLES ? AU MILIEU**
 ([`93`](docs/93_ou_les_spires_sont_elles_paralleles.md)) — un pas le long de la normale n'atterrit
 sur la spire voisine que si elles le sont, et à 30° d'écart un pas de 182 µm tombe à **91 µm de

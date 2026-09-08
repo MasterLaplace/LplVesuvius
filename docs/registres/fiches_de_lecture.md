@@ -5247,6 +5247,75 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/94_le_froissement_mesure_la_rugosite.md
+- **lignes** : 123
+- **nature** : RESULTAT
+  (le froissement testé comme signal de confiance là où la carte d'échec existe ; plus la fixture
+  qui dit ce que le champ mesure réellement, et une cause publiée puis rétractée.)
+- **résumé** : ⛔⛔⛔ Il manque au marcheur un signal qui lui dise **sans supervision** qu'il est
+  dans la zone où le pas géométrique ne suffit plus, et le **pli** était le candidat que le dépôt
+  avait déjà **mesuré** ([`75`](../75_registre_des_taches.md), « Une cellule peut-elle savoir
+  qu'elle a tort » : prédictif **par cellule**, 8 bras sur 8 chez le raccrochage, **un bras
+  sauvé**). Testé sur les 28
+  bandes humaines de `PHercParis4` : il est **ANTI-prédictif** — 15,2 µm au cœur, 3,8 au bord,
+  soit le plus faible exactement là où la continuité casse (×31). Corrélations **−0,957** avec le
+  rayon et **−0,825** avec la rupture. Un marcheur qui s'en servirait signalerait le cœur, où tout
+  est propre, et **se tairait au bord**.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **Ce que le champ mesure est établi par FIXTURE, pas par corrélation.**
+    `champ_de_froissement` prend la **médiane** d'un voisinage 3×3, donc il est **exactement
+    aveugle à la courbure lisse** : un cylindre parfait rend **0,00 µm**, un cylindre à **axe
+    courbe** — celui que [`90`](../90_laxe_est_une_courbe.md) mesure — **0,00 µm** aussi. Seul du
+    bruit le réveille, et **presque sans dépendre du rayon** (×1,10 entre R = 5 et R = 20 mm).
+  - ⭐⭐ **Donc le verdict devient plus fort, pas plus faible.** Le réel tombe de **×5,2** du cœur
+    au bord là où la rugosité seule n'en donnerait que ×1,1 : les maillages humains sont **cinq
+    fois plus lisses au bord**. Or un maillage lisse qui porte des **sauts de 30 mm**
+    ([`92`](../92_la_continuite_des_transferts.md)) et des spires **désalignées**
+    ([`93`](../93_ou_les_spires_sont_elles_paralleles.md)) est un maillage qui a **enjambé ce
+    qu'il ne pouvait pas suivre**. ⭐⭐⭐ **La douceur au bord n'est pas de la qualité, c'est la
+    signature d'un pontage** — et un signal de confiance bâti dessus **classerait l'abandon comme
+    une réussite**.
+  - ⚠⚠ **Normaliser ne sauve pas le candidat** : diviser par la sagitta retire le rayon (−0,957 →
+    −0,404) mais **pas le signe** (−0,678). Ce n'est donc pas un artefact d'échelle.
+  - ⭐ **La contrainte que ça pose au remplaçant de l'humain** : une marche de 31 spires change le
+    rayon d'un **facteur six**, donc tout signal de confiance qu'elle emploie doit être **vérifié
+    à travers les rayons**, ou il classera par rayon en croyant classer par difficulté.
+- **rétractations / corrections internes** :
+  - §5 : ⚠⚠⚠ **une cause publiée puis rétractée avant d'être committée.** J'avais expliqué la
+    chute en 1/R par la **sagitta** d'un cercle, `s²/(8R)`, avec un accord frappant — rapport
+    mesuré/prédit de **1,11 en médiane** sur 28 bandes. **C'était une coïncidence** : la fixture
+    prédit 20,2 µm à R = 5 mm là où le champ rend **zéro**. ⭐ **Une corrélation sur vingt-huit
+    points ne vaut pas une fixture dont on connaît la réponse.** Elle est **gardée** dans le code,
+    réfutée et nommée, parce qu'un accord de cet ordre réapparaîtra à qui refera la mesure.
+  - §1 : ⚠⚠⚠ **une citation inventée, corrigée avant commit.** J'avais attribué « le pli prédit
+    l'erreur par cellule » à `78`, qui est *Cinq rouleaux publient leur axe*. Le résultat existe
+    bien, mais dans `75` (« Une cellule peut-elle savoir qu'elle a tort »), **et il bornait déjà
+    sa portée** : *« ce que ça ne dit pas, c'est que le pli soit une bonne confiance en général ;
+    il l'est là où il y a des plis »* — le pas normal **lissé** en a si peu que son classement
+    fait **pire que le hasard** (+7,1 µm). Ma première version effaçait cette borne, ce qui
+    rendait le résultat négatif d'ici plus spectaculaire qu'il n'est. ⭐ **Une citation qu'on ne
+    vérifie pas est une citation qu'on invente.**
+  - §5 : ⚠ Le module et la clef JSON ont porté la conclusion réfutée après sa réfutation —
+    `le_froissement_mesure_la_courbure` / `le_champ_est_la_courbure`, et un affichage qui
+    annonçait « LE CHAMP EST LA COURBURE » au-dessus d'une docstring qui la démentait. Renommés
+    en `…rugosite` / `laccord_avec_la_sagitta_est_une_coincidence`.
+  - §6 : ⚠⚠ **avertissement de niveau — ceci ne rétracte pas `75`.** `75` compare des **cellules**
+    à rayon presque constant, ce fichier compare des **bandes** à travers les rayons. Les deux
+    peuvent être vrais ; un observable valide à un rayon n'est pas valide à travers les rayons.
+  - §7 : ⚠⚠ **la revendication porteuse n'était pas publiée.** La fixture ne vivait que dans
+    `verifier()`, donc aucun document ne pouvait citer ses nombres. `ce_que_le_champ_voit()` est
+    appelée par `mesurer()`, par la batterie **et** par la figure — un seul calcul, trois usages.
+  - §7 : ⚠⚠ **le garde de largeur ne lisait que la prose du bas**, donc une ligne de **verdict**
+    écrite dans un panneau pouvait être **coupée à mi-mot** sans que rien ne le dise — l'angle
+    mort du garde de glyphes, un cran plus loin. `Tracee` retient désormais la **position** avec
+    le texte et `textes_debordants` en fait un contrôle, qui a attrapé **une seconde ligne coupée
+    que l'œil avait laissée passer**.
+- **preuve de lecture intégrale** :
+  - l. 68 (après 55 % du fichier) : `⭐⭐⭐ **La douceur au bord n'est pas de la qualité : c'est la signature d'un pontage.** Un signal`
+  - l. 95 : `classera par rayon en croyant classer par difficulté.`
+
+---
+
 ### docs/93_ou_les_spires_sont_elles_paralleles.md
 - **lignes** : 86
 - **nature** : RESULTAT
@@ -6177,7 +6246,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 5761
+- **lignes** : 5830
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)

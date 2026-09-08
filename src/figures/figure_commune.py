@@ -129,6 +129,26 @@ def prose_tracable(lignes) -> bool:
     return not glyphes_manquants("".join(lignes))
 
 
+def textes_debordants(poses, largeur: float) -> list[tuple[str, int]]:
+    """Les textes DESSINES dont la boite depasse `largeur`, avec leur bord droit.
+
+    ⚠⚠⚠ CE QUE CETTE GARDE VOIT, ET CE QU'ELLE NE VOIT PAS. Elle mesure contre le bord droit
+    de la TOILE, pas contre celui du panneau qui contient le texte : une pose ne dit pas dans
+    quel cadre elle vit. Elle attrape donc tout ce qui sort de l'image — le cas ou la coupure
+    est visible — et laisse passer un texte qui deborde d'un panneau vers son voisin.
+    ⚠ Elle saute les poses sans police : on ne peut pas mesurer sans fonte, et rendre zero
+    pour ces textes-la serait une garde qui declare sain ce qu'elle n'a pas regarde.
+    """
+    sortants = []
+    for x, _y, texte, fonte in poses:
+        if fonte is None or not texte:
+            continue
+        droite = int(x + fonte.getbbox(texte)[2])
+        if droite > largeur:
+            sortants.append((texte, droite))
+    return sortants
+
+
 def echelle_appariee(art, x0: int, y0: int, pw: int, ph: int, entrees: list, petit,
                      legende: str, fond=(255, 255, 255), texte=(25, 25, 25),
                      discret=(120, 120, 120), cadre=(200, 200, 200)) -> list[str]:
@@ -218,14 +238,26 @@ class Tracee:
     def __init__(self, art):
         self._art = art
         self.textes: list[str] = []
+        # ⚠⚠⚠ ET LA POSITION AVEC LE TEXTE, POUR LA MEME RAISON QUE LE TEXTE. Le garde de
+        # largeur ne lisait que la prose du bas, donc une ligne de VERDICT ecrite dans un
+        # panneau pouvait sortir du cadre et etre COUPEE a mi-mot sans que rien ne le dise —
+        # exactement l'angle mort que le garde de glyphes avait deja revele, un cran plus loin.
+        # Une phrase tronquee est pire qu'un glyphe manquant : elle reste lisible et FAUSSE.
+        self.poses: list[tuple[float, float, str, object]] = []
 
     def text(self, *a, **k):
         # ⚠ Le texte est le DEUXIEME argument positionnel de `ImageDraw.text`, et il peut etre
         # passe par mot-clef : les deux formes sont retenues, sinon la garde en manquerait une.
-        if len(a) >= 2 and isinstance(a[1], str):
-            self.textes.append(a[1])
-        elif isinstance(k.get("text"), str):
-            self.textes.append(k["text"])
+        texte = a[1] if len(a) >= 2 and isinstance(a[1], str) else k.get("text")
+        if isinstance(texte, str):
+            self.textes.append(texte)
+            xy = a[0] if a else k.get("xy")
+            # ⚠ `font` est le QUATRIEME argument positionnel de `ImageDraw.text` et se passe le
+            # plus souvent par mot-clef ; sans police on ne peut pas mesurer, donc on ne
+            # PRETEND pas mesurer : la pose est retenue sans police et le garde la saute.
+            fonte = k.get("font") if "font" in k else (a[3] if len(a) >= 4 else None)
+            if isinstance(xy, (tuple, list)) and len(xy) == 2:
+                self.poses.append((float(xy[0]), float(xy[1]), texte, fonte))
         return self._art.text(*a, **k)
 
     def __getattr__(self, nom):

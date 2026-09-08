@@ -4553,6 +4553,75 @@ renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la bat
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
 
 ---
+##### ⛔⛔⛔ LE FROISSEMENT DÉSIGNE-T-IL OÙ LE TRANSFERT ÉCHOUE ? Non — il désigne l'INVERSE
+
+> Mesure : `src/nappe/le_froissement_mesure_la_rugosite.py` (15 contrôles) →
+> `docs/mesures/le_froissement_mesure_la_rugosite.json`. Figure :
+> `src/figures/figure_le_froissement_mesure_la_rugosite.py` (16 contrôles).
+> Document : [`94`](94_le_froissement_mesure_la_rugosite.md), le 2026-09-09.
+
+![le froissement mesure la rugosité](images/94_le_froissement_mesure_la_rugosite.png)
+
+`93` dit **où** le pas géométrique échoue ; ce qui manque est un signal que le marcheur peut lire
+**tout seul**. Le **pli** était le candidat, et il est mesuré prédictif **par cellule** juste en
+dessous (« Une cellule peut-elle savoir qu'elle a tort »). Testé sur les 28 bandes humaines de
+`PHercParis4`, du cœur au bord :
+
+| tiers | froissement | désalignement | continuité |
+|---|---:|---:|---:|
+| cœur (9 bandes) | **15,2 µm** | ×1,88 | ×1,7 |
+| milieu (9) | 10,1 µm | ×1,80 | ×5,9 |
+| bord (10) | **3,8 µm** | ×3,67 | **×31,0** |
+
+⛔⛔⛔ **Il est ANTI-prédictif** : −0,957 avec le rayon, **−0,825** avec la rupture de continuité.
+Un marcheur qui s'en servirait signalerait le **cœur**, où tout est propre, et **se tairait au
+bord**. ⚠⚠ Normaliser par la sagitta retire le rayon (−0,404) mais **pas le signe** (−0,678).
+
+⭐⭐⭐ **Et ce que le champ mesure est établi par FIXTURE, pas par corrélation.**
+`champ_de_froissement` prend la **médiane** d'un voisinage 3×3, donc il est **exactement aveugle à
+la courbure lisse** :
+
+| cas | R = 5 mm | R = 20 mm | rapport |
+|---|---:|---:|---:|
+| cylindre parfait | **0,00 µm** | **0,00 µm** | — |
+| + axe courbe (celui que `90` mesure) | **0,00 µm** | **0,00 µm** | — |
+| + bruit 5 µm | 7,54 | 6,87 | **×1,10** |
+| + bruit 20 µm | 29,10 | 27,06 | ×1,08 |
+
+⭐⭐ **Le verdict devient donc plus fort, pas plus faible.** Le réel tombe de **×5,2** du cœur au
+bord là où la rugosité seule n'en donnerait que ×1,1 : les maillages humains sont **cinq fois plus
+lisses au bord**. Or un maillage lisse qui porte des **sauts de 30 mm** (`92`) et des spires
+**désalignées** (`93`) a **enjambé ce qu'il ne pouvait pas suivre**. **La douceur au bord n'est pas
+de la qualité, c'est la signature d'un pontage** — et un signal de confiance bâti dessus
+**classerait l'abandon comme une réussite**.
+
+⚠⚠⚠ **Une cause publiée puis rétractée avant d'être committée.** J'avais expliqué la chute en 1/R
+par la **sagitta** d'un cercle, `s²/(8R)`, avec un accord frappant : **1,11 en médiane** sur 28
+bandes. La fixture la réfute d'un coup — elle prédit **20,2 µm** à R = 5 mm là où le champ rend
+**zéro**.
+
+> ⭐ **Une corrélation sur vingt-huit points ne vaut pas une fixture dont on connaît la réponse.**
+
+⚠ Elle est **gardée** dans le code, réfutée et nommée : un accord de cet ordre réapparaîtra à qui
+refera la mesure, et le trouver sans trouver sa réfutation conduirait à le republier.
+
+⚠⚠ **Avertissement de niveau, qui ne rétracte pas la tranche du dessous.** Elle compare des
+**cellules** à rayon presque constant, celle-ci compare des **bandes** à travers les rayons — et
+elle bornait **déjà** sa portée (*« il l'est là où il y a des plis »*). ⭐ Une marche de 31 spires
+change le rayon d'un **facteur six**, donc tout signal de confiance doit être **vérifié à travers
+les rayons**, ou il classera par rayon en croyant classer par difficulté.
+
+⚠⚠ **Deux angles morts d'outillage attrapés ici.** (1) La revendication porteuse **n'était pas
+publiée** — la fixture ne vivait que dans `verifier()`, donc aucun document ne pouvait citer ses
+nombres ; `ce_que_le_champ_voit()` sert maintenant la mesure, la batterie et la figure. (2) **Le
+garde de largeur ne lisait que la prose du bas**, donc une ligne de **verdict** d'un panneau
+pouvait être **coupée à mi-mot** ; `Tracee` retient désormais la **position** avec le texte, et le
+contrôle a attrapé **une seconde ligne coupée que l'œil avait laissée passer**.
+
+⚠ **Et une citation inventée, corrigée avant commit** : j'avais attribué « le pli prédit l'erreur
+par cellule » à `78`, qui est *Cinq rouleaux publient leur axe*.
+
+---
 ##### ⭐⭐⭐ UNE CELLULE PEUT-ELLE SAVOIR QU'ELLE A TORT, sans regarder la cible ?
 
 > Mesure : `src/nappe/la_cellule_sait_elle_quelle_a_tort.py` (14 contrôles) →

@@ -1,0 +1,410 @@
+{
+  "fragment": "PHercParis4",
+  "bandes": 28,
+  "lignes": [
+    {
+      "de": 10,
+      "a": 27,
+      "rayon_mm": 4.07,
+      "pas_de_cellule_um": 906.0,
+      "froissement_brut_um": 19.8,
+      "sagitta_predite_um": 25.2,
+      "mesure_sur_predit": 0.79,
+      "froissement_normalise": 0.79,
+      "desalignement": 3.66,
+      "continuite": 1.5
+    },
+    {
+      "de": 28,
+      "a": 37,
+      "rayon_mm": 6.32,
+      "pas_de_cellule_um": 916.0,
+      "froissement_brut_um": 16.1,
+      "sagitta_predite_um": 16.6,
+      "mesure_sur_predit": 0.97,
+      "froissement_normalise": 0.97,
+      "desalignement": 3.11,
+      "continuite": 1.7
+    },
+    {
+      "de": 38,
+      "a": 45,
+      "rayon_mm": 8.02,
+      "pas_de_cellule_um": 913.0,
+      "froissement_brut_um": 15.9,
+      "sagitta_predite_um": 13.0,
+      "mesure_sur_predit": 1.22,
+      "froissement_normalise": 1.22,
+      "desalignement": 2.49,
+      "continuite": 2.1
+    },
+    {
+      "de": 46,
+      "a": 52,
+      "rayon_mm": 9.4,
+      "pas_de_cellule_um": 911.0,
+      "froissement_brut_um": 16.9,
+      "sagitta_predite_um": 11.0,
+      "mesure_sur_predit": 1.53,
+      "froissement_normalise": 1.53,
+      "desalignement": 2.19,
+      "continuite": 2.4
+    },
+    {
+      "de": 53,
+      "a": 58,
+      "rayon_mm": 10.51,
+      "pas_de_cellule_um": 932.0,
+      "froissement_brut_um": 14.8,
+      "sagitta_predite_um": 10.3,
+      "mesure_sur_predit": 1.43,
+      "froissement_normalise": 1.43,
+      "desalignement": 1.88,
+      "continuite": 1.7
+    },
+    {
+      "de": 59,
+      "a": 63,
+      "rayon_mm": 11.57,
+      "pas_de_cellule_um": 913.0,
+      "froissement_brut_um": 15.2,
+      "sagitta_predite_um": 9.0,
+      "mesure_sur_predit": 1.69,
+      "froissement_normalise": 1.69,
+      "desalignement": 1.69,
+      "continuite": 2.0
+    },
+    {
+      "de": 64,
+      "a": 68,
+      "rayon_mm": 12.48,
+      "pas_de_cellule_um": 906.0,
+      "froissement_brut_um": 13.5,
+      "sagitta_predite_um": 8.2,
+      "mesure_sur_predit": 1.64,
+      "froissement_normalise": 1.64,
+      "desalignement": 1.44,
+      "continuite": 1.4
+    },
+    {
+      "de": 69,
+      "a": 72,
+      "rayon_mm": 13.27,
+      "pas_de_cellule_um": 906.0,
+      "froissement_brut_um": 14.0,
+      "sagitta_predite_um": 7.7,
+      "mesure_sur_predit": 1.81,
+      "froissement_normalise": 1.81,
+      "desalignement": 1.3,
+      "continuite": 1.2
+    },
+    {
+      "de": 73,
+      "a": 76,
+      "rayon_mm": 13.99,
+      "pas_de_cellule_um": 907.0,
+      "froissement_brut_um": 12.4,
+      "sagitta_predite_um": 7.4,
+      "mesure_sur_predit": 1.68,
+      "froissement_normalise": 1.68,
+      "desalignement": 1.23,
+      "continuite": 1.7
+    },
+    {
+      "de": 77,
+      "a": 80,
+      "rayon_mm": 14.7,
+      "pas_de_cellule_um": 906.0,
+      "froissement_brut_um": 11.8,
+      "sagitta_predite_um": 7.0,
+      "mesure_sur_predit": 1.69,
+      "froissement_normalise": 1.69,
+      "desalignement": 1.67,
+      "continuite": 2.6
+    },
+    {
+      "de": 81,
+      "a": 84,
+      "rayon_mm": 15.46,
+      "pas_de_cellule_um": 907.0,
+      "froissement_brut_um": 11.1,
+      "sagitta_predite_um": 6.6,
+      "mesure_sur_predit": 1.66,
+      "froissement_normalise": 1.66,
+      "desalignement": 1.87,
+      "continuite": 4.3
+    },
+    {
+      "de": 85,
+      "a": 88,
+      "rayon_mm": 16.22,
+      "pas_de_cellule_um": 907.0,
+      "froissement_brut_um": 10.2,
+      "sagitta_predite_um": 6.3,
+      "mesure_sur_predit": 1.6,
+      "froissement_normalise": 1.6,
+      "desalignement": 1.77,
+      "continuite": 3.9
+    },
+    {
+      "de": 89,
+      "a": 91,
+      "rayon_mm": 16.93,
+      "pas_de_cellule_um": 906.0,
+      "froissement_brut_um": 10.5,
+      "sagitta_predite_um": 6.1,
+      "mesure_sur_predit": 1.73,
+      "froissement_normalise": 1.73,
+      "desalignement": 1.8,
+      "continuite": 6.7
+    },
+    {
+      "de": 92,
+      "a": 94,
+      "rayon_mm": 17.51,
+      "pas_de_cellule_um": 906.0,
+      "froissement_brut_um": 10.1,
+      "sagitta_predite_um": 5.9,
+      "mesure_sur_predit": 1.71,
+      "froissement_normalise": 1.71,
+      "desalignement": 1.87,
+      "continuite": 3.9
+    },
+    {
+      "de": 95,
+      "a": 97,
+      "rayon_mm": 18.06,
+      "pas_de_cellule_um": 908.0,
+      "froissement_brut_um": 8.4,
+      "sagitta_predite_um": 5.7,
+      "mesure_sur_predit": 1.48,
+      "froissement_normalise": 1.48,
+      "desalignement": 1.76,
+      "continuite": 8.8
+    },
+    {
+      "de": 98,
+      "a": 100,
+      "rayon_mm": 18.62,
+      "pas_de_cellule_um": 909.0,
+      "froissement_brut_um": 5.1,
+      "sagitta_predite_um": 5.6,
+      "mesure_sur_predit": 0.92,
+      "froissement_normalise": 0.92,
+      "desalignement": 2.07,
+      "continuite": 5.9
+    },
+    {
+      "de": 101,
+      "a": 103,
+      "rayon_mm": 19.15,
+      "pas_de_cellule_um": 909.0,
+      "froissement_brut_um": 4.3,
+      "sagitta_predite_um": 5.4,
+      "mesure_sur_predit": 0.79,
+      "froissement_normalise": 0.79,
+      "desalignement": 1.78,
+      "continuite": 6.8
+    },
+    {
+      "de": 104,
+      "a": 106,
+      "rayon_mm": 19.66,
+      "pas_de_cellule_um": 915.0,
+      "froissement_brut_um": 3.9,
+      "sagitta_predite_um": 5.3,
+      "mesure_sur_predit": 0.73,
+      "froissement_normalise": 0.73,
+      "desalignement": 2.43,
+      "continuite": 22.1
+    },
+    {
+      "de": 107,
+      "a": 109,
+      "rayon_mm": 20.17,
+      "pas_de_cellule_um": 913.0,
+      "froissement_brut_um": 3.9,
+      "sagitta_predite_um": 5.2,
+      "mesure_sur_predit": 0.76,
+      "froissement_normalise": 0.76,
+      "desalignement": 2.64,
+      "continuite": 25.1
+    },
+    {
+      "de": 110,
+      "a": 112,
+      "rayon_mm": 20.69,
+      "pas_de_cellule_um": 911.0,
+      "froissement_brut_um": 3.7,
+      "sagitta_predite_um": 5.0,
+      "mesure_sur_predit": 0.74,
+      "froissement_normalise": 0.74,
+      "desalignement": 2.93,
+      "continuite": 31.4
+    },
+    {
+      "de": 113,
+      "a": 115,
+      "rayon_mm": 21.26,
+      "pas_de_cellule_um": 912.0,
+      "froissement_brut_um": 3.3,
+      "sagitta_predite_um": 4.9,
+      "mesure_sur_predit": 0.68,
+      "froissement_normalise": 0.68,
+      "desalignement": 3.53,
+      "continuite": 41.1
+    },
+    {
+      "de": 116,
+      "a": 117,
+      "rayon_mm": 21.75,
+      "pas_de_cellule_um": 904.0,
+      "froissement_brut_um": 3.7,
+      "sagitta_predite_um": 4.7,
+      "mesure_sur_predit": 0.78,
+      "froissement_normalise": 0.78,
+      "desalignement": 3.67,
+      "continuite": 30.3
+    },
+    {
+      "de": 118,
+      "a": 119,
+      "rayon_mm": 22.17,
+      "pas_de_cellule_um": 905.0,
+      "froissement_brut_um": 3.8,
+      "sagitta_predite_um": 4.6,
+      "mesure_sur_predit": 0.82,
+      "froissement_normalise": 0.82,
+      "desalignement": 3.66,
+      "continuite": 30.6
+    },
+    {
+      "de": 120,
+      "a": 121,
+      "rayon_mm": 22.61,
+      "pas_de_cellule_um": 904.0,
+      "froissement_brut_um": 4.1,
+      "sagitta_predite_um": 4.5,
+      "mesure_sur_predit": 0.91,
+      "froissement_normalise": 0.91,
+      "desalignement": 3.87,
+      "continuite": 30.5
+    },
+    {
+      "de": 122,
+      "a": 123,
+      "rayon_mm": 23.03,
+      "pas_de_cellule_um": 914.0,
+      "froissement_brut_um": 5.0,
+      "sagitta_predite_um": 4.5,
+      "mesure_sur_predit": 1.1,
+      "froissement_normalise": 1.1,
+      "desalignement": 3.68,
+      "continuite": 33.2
+    },
+    {
+      "de": 124,
+      "a": 125,
+      "rayon_mm": 23.31,
+      "pas_de_cellule_um": 914.0,
+      "froissement_brut_um": 4.6,
+      "sagitta_predite_um": 4.5,
+      "mesure_sur_predit": 1.03,
+      "froissement_normalise": 1.03,
+      "desalignement": 4.52,
+      "continuite": 36.9
+    },
+    {
+      "de": 126,
+      "a": 127,
+      "rayon_mm": 23.36,
+      "pas_de_cellule_um": 900.0,
+      "froissement_brut_um": 4.8,
+      "sagitta_predite_um": 4.3,
+      "mesure_sur_predit": 1.11,
+      "froissement_normalise": 1.11,
+      "desalignement": 5.25,
+      "continuite": 32.0
+    },
+    {
+      "de": 128,
+      "a": 129,
+      "rayon_mm": 23.8,
+      "pas_de_cellule_um": 927.0,
+      "froissement_brut_um": 3.8,
+      "sagitta_predite_um": 4.5,
+      "mesure_sur_predit": 0.84,
+      "froissement_normalise": 0.84,
+      "desalignement": 4.18,
+      "continuite": 25.9
+    }
+  ],
+  "ce_que_le_champ_voit": {
+    "cas": {
+      "cylindre_parfait": {
+        "R5": 0.0,
+        "R20": 0.0,
+        "rapport_R5_sur_R20": null
+      },
+      "axe_courbe": {
+        "R5": 0.0,
+        "R20": 0.0,
+        "rapport_R5_sur_R20": null
+      },
+      "bruit_5um": {
+        "R5": 7.54,
+        "R20": 6.87,
+        "rapport_R5_sur_R20": 1.1
+      },
+      "bruit_20um": {
+        "R5": 29.1,
+        "R20": 27.06,
+        "rapport_R5_sur_R20": 1.08
+      }
+    },
+    "sagitta_predite_a_R5_um": 20.2,
+    "le_champ_est_aveugle_a_la_courbure_lisse": true,
+    "le_champ_repond_au_bruit": true,
+    "et_presque_sans_dependre_du_rayon": true
+  },
+  "laccord_avec_la_sagitta_est_une_coincidence": {
+    "rapport_median": 1.1,
+    "min": 0.68,
+    "max": 1.81,
+    "ecart_type_relatif": 0.327
+  },
+  "correlations": {
+    "brut_contre_rayon": -0.957,
+    "brut_contre_desalignement": -0.47,
+    "brut_contre_continuite": -0.825,
+    "normalise_contre_rayon": -0.404,
+    "normalise_contre_desalignement": -0.675,
+    "normalise_contre_continuite": -0.678
+  },
+  "par_tiers": {
+    "coeur": {
+      "bandes": 9,
+      "froissement_brut_um": 15.2,
+      "normalise": 1.53,
+      "desalignement": 1.88,
+      "continuite": 1.7
+    },
+    "milieu": {
+      "bandes": 9,
+      "froissement_brut_um": 10.1,
+      "normalise": 1.6,
+      "desalignement": 1.8,
+      "continuite": 5.9
+    },
+    "bord": {
+      "bandes": 10,
+      "froissement_brut_um": 3.8,
+      "normalise": 0.83,
+      "desalignement": 3.67,
+      "continuite": 31.0
+    }
+  },
+  "le_froissement_est_anti_predictif": true,
+  "normaliser_retire_le_rayon": true,
+  "normaliser_corrige_le_signe": false
+}
