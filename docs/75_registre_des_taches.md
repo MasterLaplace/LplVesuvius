@@ -4504,6 +4504,48 @@ la pente de 0,2 % en médiane et 1,5 % au pire**, sur 15 bandes.
 (elle dégonfle), centre décalé (dix fois trop faible), sauts (moins de 2 % d'effet).
 
 ---
+##### ⭐⭐⭐ OÙ LES SPIRES SONT-ELLES PARALLÈLES ? AU MILIEU — et les deux échecs sont au BORD
+
+> Mesure : `src/nappe/deux_modes_dechec_du_transfert.py` (20 contrôles) →
+> `docs/mesures/deux_modes_dechec_du_transfert.json`.
+> Document : [`93`](93_ou_les_spires_sont_elles_paralleles.md), le 2026-09-08.
+
+Un marcheur transfère le long de la **normale**, et ce pas n'atterrit sur la spire voisine que si
+les deux spires sont **parallèles** — à 30° de désalignement, un pas de 182 µm tombe à **91 µm de
+côté**, la moitié du pas.
+
+| bande | rayon | rot./cellule | adjacent | **un tour** | rapport |
+|---|---:|---:|---:|---:|---:|
+| `w010-027` | 4,1 mm | **13,3°** | 11,6° | 42,4° | ⚠ **non résolue** |
+| `w073-076` | 14,0 mm | 3,2° | 6,2° | **7,7°** | **×1,23** |
+| `w128-129` | 23,8 mm | 1,9° | 6,3° | **26,3°** | **×4,18** |
+
+⭐⭐⭐ **La réponse est un U** : ni « pire au cœur » ni « pire au bord », **minimal au milieu**.
+Par tiers : cœur ×1,88 · milieu ×1,80 · **bord ×3,67**.
+
+⚠⚠⚠ **Les deux bandes internes ne sont pas désalignées, elles sont NON RÉSOLUES** : `w010-027`
+n'a que 27 colonnes par tour, donc sa normale est moyennée sur **13,3° d'arc** — plus que son
+propre désaccord adjacent. ⭐ Le critère d'exclusion est **dérivé** de cette comparaison, pas
+choisi, et il exclut exactement deux bandes.
+
+> ⭐⭐ **LES DEUX MODES D'ÉCHEC SONT AU BORD**, pas aux deux bouts : la surface y est **brisée**
+> (×31, `92`) *et* les spires y sont **désalignées** (×4,18). Au milieu, les deux sont propres.
+> **Un automate a un problème localisé, pas uniforme.**
+
+⚠⚠⚠ **Une erreur à moi qui a INVERSÉ la conclusion.** Mon exploration comparait la **bande 0** à
+la **bande 7** en appelant la seconde « le bord » — or les deux sont dans le tiers intérieur. J'en
+avais tiré « désaligné au cœur, parallèle au bord ». **Un tiers se compte sur le corpus entier,
+pas sur les premières lignes d'un tableau.**
+
+⚠⚠ **Et le « plancher » n'est pas du bruit** : le désaccord entre cellules adjacentes est dominé
+par la **rotation** de la normale (13,3° au cœur, 1,9° au bord). Preuve : une spirale **parfaite**
+à 60 colonnes/tour rend **6,0° = 360/60**. Deux fixtures qui affirmaient l'inverse sont corrigées.
+
+⚠ **Et `--verifier` est resté vert à 17 contrôles pendant que `main()` plantait** sur une clef
+renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la batterie lance** — une
+batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
+
+---
 ##### ⭐⭐⭐ UNE CELLULE PEUT-ELLE SAVOIR QU'ELLE A TORT, sans regarder la cible ?
 
 > Mesure : `src/nappe/la_cellule_sait_elle_quelle_a_tort.py` (14 contrôles) →

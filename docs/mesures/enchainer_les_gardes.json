@@ -10,7 +10,7 @@
   "echoues": 0,
   "non_lances": 0,
   "arrete_a_la_ligne": null,
-  "secondes": 289.65,
+  "secondes": 291.21,
   "artefacts_observes": 0,
   "etages_muets": [
     "artefacts_orphelins",
@@ -27,7 +27,7 @@
         "--verifier"
       ],
       "code": 0,
-      "secondes": 235.11,
+      "secondes": 235.8,
       "ecrits": [],
       "modifies": []
     },
@@ -60,7 +60,7 @@
         "--verifier"
       ],
       "code": 0,
-      "secondes": 54.3,
+      "secondes": 55.17,
       "ecrits": [],
       "modifies": []
     }

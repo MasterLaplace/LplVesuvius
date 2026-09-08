@@ -144,6 +144,19 @@ un seul.**
 riche du concours ne contient pas une marche entière. Mais c'est la première fois que la portée de
 ce dépôt peut se comparer à du **travail humain publié** plutôt qu'à une borne censurée.
 
+⭐⭐⭐ **OÙ LES SPIRES SONT-ELLES PARALLÈLES ? AU MILIEU**
+([`93`](docs/93_ou_les_spires_sont_elles_paralleles.md)) — un pas le long de la normale n'atterrit
+sur la spire voisine que si elles le sont, et à 30° d'écart un pas de 182 µm tombe à **91 µm de
+côté**. Mesuré : **×1,23 à mi-rayon** (quasi parallèles), **×4,18 au bord**, et **2 bandes non
+résolues** au cœur par un critère **dérivé** (la rotation d'une cellule y dépasse la variation
+locale). ⭐⭐ **Donc les deux modes d'échec sont au BORD** : la surface y est brisée (×31, `92`)
+*et* les spires y sont désalignées. Au milieu, les deux sont propres — **un automate a un problème
+localisé, pas uniforme.**
+
+⚠⚠⚠ Et une erreur à moi qui avait **inversé** la conclusion : je comparais la bande 0 à la bande 7
+en appelant la seconde « le bord », alors que les deux sont dans le tiers intérieur. **Un tiers se
+compte sur le corpus entier, pas sur les premières lignes d'un tableau.**
+
 ⭐⭐⭐ **LES TRANSFERTS HUMAINS SONT CONTINUS AU CŒUR, BRISÉS AU BORD**
 ([`92`](docs/92_la_continuite_des_transferts.md)) : le plus grand saut entre cellules voisines,
 rapporté au pas d'échantillonnage, vaut **1,7 · 5,9 · 31,0** du cœur au bord. ⭐⭐ **Là où le

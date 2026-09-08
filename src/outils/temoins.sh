@@ -1547,6 +1547,7 @@ run "demi-feuille/objet"    uv run --project "$ROOT" python "$ROOT/src/nappe/la_
 run "axe est une courbe"    uv run --project "$ROOT" python "$ROOT/src/nappe/laxe_est_une_courbe.py" --verifier
 run "pas sur transferts"    uv run --project "$ROOT" python "$ROOT/src/nappe/le_pas_lu_sur_les_transferts.py" --verifier
 run "continuite transferts" uv run --project "$ROOT" python "$ROOT/src/nappe/la_continuite_des_transferts.py" --verifier
+run "spires paralleles ?"   uv run --project "$ROOT" python "$ROOT/src/nappe/deux_modes_dechec_du_transfert.py" --verifier
 run "suivre nappe"           uv run --project "$ROOT" python "$ROOT/src/commun/suivre_nappe.py" --verifier
 run "assembler mosaique"     uv run --project "$ROOT" python "$ROOT/src/volume/assembler_mosaique.py" --verifier
 run "derouler en raccrochant"  uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_en_raccrochant.py" --verifier

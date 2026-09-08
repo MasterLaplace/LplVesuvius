@@ -5247,6 +5247,48 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/93_ou_les_spires_sont_elles_paralleles.md
+- **lignes** : 83
+- **nature** : RESULTAT
+  (le parallélisme entre spires voisines, mesuré sur les transferts humains de `PHercParis4` ;
+  la question qui décide où un pas géométrique suffit.)
+- **résumé** : ⭐⭐⭐ Un marcheur transfère le long de la **normale**, et ce pas n'atterrit sur la
+  spire voisine que si les deux spires sont **parallèles** — à 30° de désalignement, un pas de
+  182 µm tombe à 91 µm de côté. Mesuré : **quasi parallèles à mi-rayon** (`w073-076`, 7,7° contre
+  6,2°, **×1,23**), **désalignées au bord** (`w128-129`, 26,3°, **×4,18**), et **non résolues**
+  sur les deux bandes les plus internes. La réponse est un **U**, minimal au milieu.
+- **conclusions extractibles** :
+  - ⭐⭐ **Les deux modes d'échec sont au BORD**, pas aux deux bouts : la surface y est **brisée**
+    (×31, [`92`](../92_la_continuite_des_transferts.md)) *et* les spires y sont **désalignées**
+    (×4,18). Au milieu les deux sont propres. Un automate a donc un problème **localisé**.
+  - ⚠⚠⚠ **Les deux bandes internes ne sont pas désalignées, elles sont NON RÉSOLUES** :
+    `w010-027` n'a que 27 colonnes par tour, donc sa normale est moyennée sur **13,3° d'arc** —
+    plus que son propre désaccord adjacent (11,6°). ⭐ Critère d'exclusion **dérivé** de cette
+    comparaison, pas choisi ; il exclut exactement deux bandes.
+  - ⭐ **Contrôle de méthode intégré** : une normale de spirale doit diverger au quart de tour
+    (62–66°) et **revenir** au tour entier (7,7–42°). Sans ce retour, la mesure ne suivrait pas
+    la spire.
+- **rétractations / corrections internes** :
+  - §5 : ⚠⚠⚠ **une erreur qui a inversé la conclusion.** Mon exploration comparait la **bande 0**
+    à la **bande 7** en appelant la seconde « le bord » — or les deux sont dans le tiers
+    intérieur. J'en avais tiré « désaligné au cœur, parallèle au bord », soit l'inverse.
+    **Un tiers se compte sur le corpus entier, pas sur les premières lignes d'un tableau.**
+  - §6 : ⚠⚠ **le « plancher » n'est pas du bruit** — le désaccord entre cellules adjacentes est
+    dominé par la **rotation** de la normale (13,3° au cœur, 1,9° au bord). Preuve : une spirale
+    **parfaite** à 60 colonnes/tour rend **6,0° = 360/60**. Deux fixtures qui affirmaient
+    l'inverse ont été corrigées.
+  - §6 : ⚠⚠ le repère **trompeur** est gardé : comparée à une spirale parfaite (0,4°), la mesure
+    semblait 14 à 19× trop grande **partout**.
+  - §7 : ⚠ **`--verifier` est resté vert à 17 contrôles pendant que `main()` plantait** sur une
+    clef renommée. L'affichage vit désormais dans `main_affichage(r)`, **que la batterie lance**.
+    Et un titre d'affichage disait « AUX DEUX BOUTS » juste au-dessus d'une ligne qui le
+    contredisait.
+- **preuve de lecture intégrale** :
+  - l. 51 : `> **Un tiers se compte sur le corpus entier, pas sur les premières lignes d'un tableau.**`
+  - l. 74 : `l'utilisateur ne garde pas ce que l'utilisateur voit.`
+
+---
+
 ### docs/92_la_continuite_des_transferts.md
 - **lignes** : 73
 - **nature** : RESULTAT
@@ -6126,7 +6168,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 5712
+- **lignes** : 5754
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -7456,8 +7498,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 5020 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 5712 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 5062 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 5754 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md
