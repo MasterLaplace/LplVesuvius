@@ -1536,6 +1536,7 @@ run "ou la nappe se froisse" uv run --project "$ROOT" python "$ROOT/src/nappe/ou
 run "la cellule sait-elle"   uv run --project "$ROOT" python "$ROOT/src/nappe/la_cellule_sait_elle_quelle_a_tort.py" --verifier
 run "combien de fenetres"    uv run --project "$ROOT" python "$ROOT/src/commun/combien_de_fenetres.py" --verifier
 run "batteries enregistrees" uv run --project "$ROOT" python "$ROOT/src/depot/batteries_enregistrees.py" --verifier
+run "spires consecutives"   uv run --project "$ROOT" python "$ROOT/src/depot/les_spires_consecutives_publiees.py" --verifier
 run "suivre nappe"           uv run --project "$ROOT" python "$ROOT/src/commun/suivre_nappe.py" --verifier
 run "assembler mosaique"     uv run --project "$ROOT" python "$ROOT/src/volume/assembler_mosaique.py" --verifier
 run "derouler en raccrochant"  uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_en_raccrochant.py" --verifier
@@ -1574,6 +1575,7 @@ run "fig : combien lisser"     uv run --project "$ROOT" python "$ROOT/src/figure
 run "fig : ou ca se froisse"   uv run --project "$ROOT" python "$ROOT/src/figures/figure_ou_la_nappe_se_froisse.py" --verifier
 run "fig : la cellule sait"    uv run --project "$ROOT" python "$ROOT/src/figures/figure_la_cellule_sait_elle_quelle_a_tort.py" --verifier
 run "fig : combien fenetres"   uv run --project "$ROOT" python "$ROOT/src/figures/figure_combien_de_fenetres.py" --verifier
+run "fig : spires consecutives" uv run --project "$ROOT" python "$ROOT/src/figures/figure_les_spires_consecutives.py" --verifier
 run "fig : en raccrochant"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_en_raccrochant.py" --verifier
 run "fig : pas normal"         uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_par_le_pas_normal.py" --verifier
 run "fig : drapeau de normale" uv run --project "$ROOT" python "$ROOT/src/figures/figure_drapeau_de_normale.py" --verifier

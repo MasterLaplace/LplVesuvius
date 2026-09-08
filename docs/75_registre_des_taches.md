@@ -3833,6 +3833,106 @@ ordres de grandeur.**
 > infiniment moins cher à apprendre maintenant que six mois passés sur le mauvais rouleau.
 
 ---
+##### ⛔⛔⛔ ET LA RÉPONSE DE CE CRITÈRE N'EST MÊME PAS EXÉCUTABLE — 0 rang de spire sur 13
+
+> Mesure : `src/depot/les_spires_consecutives_publiees.py` (30 contrôles) →
+> `docs/mesures/les_spires_consecutives_publiees.json`. Figure :
+> `src/figures/figure_les_spires_consecutives.py` (13 contrôles), le 2026-09-08.
+> Document : [`81`](81_le_rouleau_designe_ne_publie_rien.md).
+>
+> ```bash
+> uv run python src/depot/les_spires_consecutives_publiees.py \
+>     --json docs/mesures/les_spires_consecutives_publiees.json
+> uv run python src/figures/figure_les_spires_consecutives.py \
+>     --sortie docs/images/81_les_spires_consecutives.png
+> uv run python src/depot/ce_que_les_serveurs_publient.py --fragment PHerc0358
+> ```
+
+⚠⚠⚠ **La tranche précédente disait « trop cher » ; celle-ci dit « pas exécutable », et c'est
+gratuit.** Avant de payer 315× pour départager les treize, il fallait demander sur lequel on
+aurait de quoi vérifier quoi que ce soit. **Onze des treize ne publient aucun segment. Les treize,
+sans exception, ne publient aucun rang de spire.** Le classement de [`16`](16_carte_difficulte_rouleaux_du_prix.md)
+désigne donc un objet sur lequel il n'existe **ni ancre pour partir, ni vérité de terrain pour
+dire jusqu'où on est allé**.
+
+![sur quel objet peut-on vérifier trente et une spires](images/81_les_spires_consecutives.png)
+
+⭐⭐ **Le critère qui reste est celui de l'OBJECTIF, pas celui de l'encre** : le nombre de spires
+**consécutives** publiées, parce qu'une portée est un nombre de spires traversées avant que
+l'erreur dépasse la demi-feuille — et qu'au-delà du dernier rang publié d'affilée, il n'existe plus
+rien contre quoi dire qu'on a franchi une spire de plus.
+
+| objet | segments | rangs | plus longue suite | porte les 31 ? |
+|---|---:|---:|---:|:--:|
+| `PHercParis4` | 81 | 120 | **120** (w010..w129, 0 trou) | ✅ |
+| `PHerc0172` | 53 | 44 | **44** (w052..w095) | ✅ |
+| `PHerc0139` — le **témoin** de la carte | 38 | 37 | **37** (w023..w059) | ✅ |
+| `PHerc1667` — l'objet des **775 h** | 20 | 19 | 14 (12 trous) | ⛔ |
+| **`PHerc0500P2`** — l'objet **courant** | 39 | 13 | **13** | ⛔ |
+| `PHercMANBp` | 11 | 9 | 9 | ⛔ |
+| **les treize du prix** | 0 ×11, 6, 15 | **0** | **0** | — |
+
+⚠⚠ **Segments et rangs sont deux comptes différents, et c'est le second qui décide.**
+`PHerc0800` (6) et `PHerc1447` (15) ne publient que des `auto_grown_*`, **sans rang de spire** :
+on ne peut pas les mettre en spirale sans les remesurer, et « les remesurer » est exactement le
+travail qu'un corpus publié existe pour éviter.
+
+⚠ **Confronté aux serveurs, pas lu du cache seul** — l'angle mort déjà payé cinq fois. S3 confirme
+l'absence de dossier `segments/` pour `PHerc0358`, `PHerc0211`, `PHerc0125` ; un seul écart trouvé
+(`PHerc1447` : 15 en cache, 16 sur S3), sans effet sur le verdict.
+
+⚠⚠ **Deux erreurs à moi, gardées par des contrôles nommés.** (1) J'ai d'abord lu `w046-052` comme
+un **rang** au lieu d'un **intervalle** : `PHercParis4` sortait à 28 spires et **91 trous**, donc
+le pire du tableau au lieu du meilleur — sonde, sa suite tombe de **120 à 1**. (2) Mon filtre
+« géométrie » ne retenait que `tifxyz` et publiait `PHerc0172` à **une** spire marchable sur 44 —
+une limite de mon filtre présentée comme une limite du corpus, le péché n° 1 du dépôt ; corrigé en
+lisant `deux_aplatissements`, qui avait déjà établi que `tifxyz-transformed` porte une position 3D
+par cellule.
+
+##### ⚠⚠⚠ ET UN TROU GÉOMÉTRIQUE AU MILIEU D'UNE NUMÉROTATION CONTINUE — la limite du critère
+
+⚠⚠⚠ **J'ai failli publier une coïncidence comme un recoupement.** Le majorant dérivé du corpus
+(une suite de $N$ spires majore la portée mesurable à $N-1$, l'ancre étant la spire la plus basse
+de la boîte) donne **12** pour `PHerc0500P2` ; `la_portee_du_raccrochage` publie *« ce que le
+corpus autorise : 6 »*, et j'ai d'abord écrit que ce 6 était $13/2$, la portée d'une ancre
+centrale. **Vérifié dans la mesure, c'est faux** — l'ancre n'est pas centrale (c'est la spire 4,
+la plus basse de la boîte), les bras montent seulement, et il y en a huit.
+
+Le 6 vient d'ailleurs, et de bien plus instructif :
+
+| bras | de → vers | écart mesuré | au pas nominal ? |
+|---:|---|---:|:--:|
+| 6 | 9 → 10 | 89,2 µm | ✅ |
+| **7** | **10 → 11** | **1000,6 µm** | ⛔ |
+| 8 | 11 → 12 | 76,7 µm | ✅ |
+
+⭐⭐⭐ **Les spires 10 et 11 se suivent par leur NUMÉRO et sont à 7,4 feuilles l'une de l'autre dans
+la matière.** Le plafond de 6 n'est ni la méthode, ni la longueur du corpus : c'est un **trou
+géométrique** au milieu d'une numérotation continue.
+
+⚠⚠ **Donc compter les rangs publiés est NÉCESSAIRE et NON SUFFISANT.** Un corpus de 120 spires
+numérotées peut porter le même saut, et le compte des noms ne le verra pas. Vérifier que deux
+voisines par leur nom le sont dans la matière coûte un téléchargement — c'est ce que
+`les_wraps_publies` fait pour `PHerc0500P2`, et ce qui reste à faire pour tout objet retenu.
+
+⚠ La leçon de méthode : **un chiffre qui tombe juste n'est pas un recoupement.** Deux routes qui
+rendent 6 pour deux raisons sans rapport se lisent comme une confirmation, et c'est la forme de
+faux verdict la plus difficile à voir — celle qu'on n'a aucune raison d'aller vérifier.
+
+> ⛔⛔⛔ **CE QUE ÇA CHANGE POUR L'OBJET COURANT.** `PHerc0500P2` publie **13** spires consécutives
+> là où le prix en demande **31**. Sur lui, tenir 31 spires n'est pas seulement difficile : c'est
+> **INVÉRIFIABLE**, faute de quoi que ce soit à comparer au-delà de la treizième. C'est la forme
+> mesurée du facteur 97×, et elle dit que ce facteur **ne se réduira pas par du travail sur cet
+> objet-là**. Trois objets portent les 31 : `PHercParis4` (120), `PHerc0172` (44), `PHerc0139`
+> (37).
+>
+> ⚠ **Le changement d'objet reste une décision de l'auteur.** Ce registre lui donne le chiffre,
+> pas le choix, et nomme les deux coûts : tout ce qui est calibré sur `PHerc0500P2` (voxel
+> 2,215 µm, pas nominal 135,5 µm, boîte et ancres) est à re-dériver, et la **demi-feuille de
+> 67,75 µm est une mesure DE CET OBJET**, donc à remesurer avant d'être réutilisée comme critère
+> ailleurs.
+
+---
 ##### ⭐⭐⭐ UNE CELLULE PEUT-ELLE SAVOIR QU'ELLE A TORT, sans regarder la cible ?
 
 > Mesure : `src/nappe/la_cellule_sait_elle_quelle_a_tort.py` (14 contrôles) →

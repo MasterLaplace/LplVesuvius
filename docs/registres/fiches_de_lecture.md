@@ -5247,6 +5247,79 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/81_le_rouleau_designe_ne_publie_rien.md
+- **lignes** : 180
+- **nature** : RESULTAT
+  (recensement du corpus publié des 45 échantillons de l'index, confronté aux serveurs, plus la
+  conséquence sur la décision de choix de rouleau de `31` §10.)
+- **résumé** : Répond à la question qui **précède** celle que `31` §10 met au calendrier. La
+  feuille de route veut choisir l'un des treize rouleaux du Grand Prize par sa part comprimée ;
+  la tranche précédente a chiffré ce critère à **315 fois** son budget. Celle-ci mesure si sa
+  réponse serait seulement **exécutable**, et la réponse est non : **onze des treize ne publient
+  aucun segment**, et **les treize, sans exception, aucun rang de spire**. Le classement désigne
+  donc un objet sur lequel il n'existe ni ancre pour partir, ni vérité de terrain pour dire
+  jusqu'où on est allé. La mesure rend au passage le corpus de tout le dépôt, et il plafonne
+  l'objet courant : `PHerc0500P2` publie **13** spires consécutives là où le prix en demande
+  **31**.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **La grandeur qui décide est le nombre de spires CONSÉCUTIVES publiées**, parce qu'une
+    portée est un nombre de spires traversées avant échec : au-delà du dernier rang publié
+    d'affilée, il n'existe plus rien contre quoi dire qu'on a franchi une spire de plus. C'est une
+    grandeur de l'**objectif** (le déroulage), pas de l'encre.
+  - Le corpus mesuré : `PHercParis4` **120** d'affilée (w010..w129, zéro trou), `PHerc0172` **44**
+    (w052..w095), `PHerc0139` — le témoin de la carte — **37** (w023..w059), `PHerc1667` — l'objet
+    des 775 h — 19 rangs sur une étendue de 31 donc une suite de **14**, `PHerc0500P2` **13**,
+    `PHercMANBp` **9**, les treize du prix **0**.
+  - ⚠⚠ **Segments et rangs sont deux comptes différents.** `PHerc0800` (6) et `PHerc1447` (15)
+    publient des `auto_grown_*` **sans rang de spire** : on ne peut pas les mettre en spirale sans
+    les remesurer. Un compte de segments ferait croire que deux des treize sont exploitables ; le
+    compte de rangs dit que zéro l'est.
+  - ⚠⚠ Ce que ça ne dit **pas** : que les treize soient difficiles. Zéro segment publié est un
+    fait sur l'effort de la communauté, pas sur le papyrus. Mais le prix se gagne en livrant une
+    image Docker qu'**ils** lancent sur un résultat vérifiable, donc le fait décide quand même.
+  - ⭐ **Un trou ne se recolle pas** : deux tronçons de sept spires ne témoignent pas d'une marche
+    de quatorze, le trou étant précisément l'endroit où la marche cesserait d'être vérifiable.
+  - ⭐⭐⭐ **§3 bis — compter des NOMS n'est pas compter des VOISINES.** Sur `PHerc0500P2`, les
+    spires **10 et 11 se suivent par leur numéro et sont à 1000,6 µm** l'une de l'autre, soit
+    **7,4 feuilles**. Le plafond de 6 que `la_portee_du_raccrochage` publie comme « ce que le
+    corpus autorise » n'est donc ni la méthode ni la longueur du corpus : c'est un **trou
+    géométrique** au milieu d'une numérotation continue. Le critère de ce document est donc
+    **nécessaire et non suffisant** — un corpus de 120 rangs peut porter le même saut, et le
+    compte des noms ne le verra pas ; le vérifier coûte un téléchargement (`les_wraps_publies`).
+  - Le majorant dérivé, publié comme tel : une suite de $N$ spires majore la portée mesurable à
+    $N-1$ (l'ancre est la spire la plus **basse** de la boîte et les bras montent). 119 pour
+    `PHercParis4`, **12** pour `PHerc0500P2`.
+  - Confronté aux serveurs et non lu du cache seul : S3 confirme l'absence de dossier `segments/`
+    pour `PHerc0358`, `PHerc0211`, `PHerc0125`. Un seul écart trouvé, `PHerc1447` (15 en cache,
+    16 sur S3), sans effet sur le verdict.
+  - Conséquence sur l'objet courant : tenir 31 spires sur `PHerc0500P2` n'est pas seulement
+    difficile, c'est **invérifiable**. Le changement d'objet reste une décision de l'auteur, et le
+    document nomme les deux coûts qu'il porterait (recalibrage voxel/pas/ancres, et la
+    demi-feuille de 67,75 µm à remesurer, étant une mesure **de cet objet**).
+- **rétractations / corrections internes** :
+  - §4 : ma première lecture prenait `w046-052` pour un **rang** au lieu d'un **intervalle**, et
+    rendait `PHercParis4` à 28 spires et 91 trous — le pire du tableau au lieu du meilleur. Sonde :
+    en réduisant les intervalles à leur borne basse, sa plus longue suite tombe de **120 à 1**.
+  - §5 : le premier filtre « géométrie » ne retenait que `tifxyz` et publiait `PHerc0172` à **une**
+    spire marchable sur quarante-quatre — une limite de mon filtre présentée comme une limite du
+    corpus, le péché numéro un du dépôt. Corrigé en lisant `deux_aplatissements`, qui avait déjà
+    établi que `tifxyz-transformed` porte une position 3D par cellule.
+  - La figure mentait un instant à l'endroit exact de son verdict : sa légende annonçait « plein :
+    publié » alors que le panneau ne peignait que la plus longue suite, donc les trois spires
+    isolées de `PHerc1667` sortaient vides. Gardé par un contrôle qui compte les cellules peintes.
+  - ⚠⚠⚠ §3 bis : **j'ai publié un instant une coïncidence comme un recoupement.** Le majorant du
+    corpus donne 12 et la marche publie 6 ; j'ai écrit que ce 6 était $13/2$, la portée d'une ancre
+    centrale. Vérifié dans `la_portee_du_raccrochage.json` : l'ancre n'est pas centrale (spire 4,
+    la plus basse de la boîte), les bras montent seulement, il y en a huit, et le 6 vient du trou
+    géométrique du bras 7. **Un chiffre qui tombe juste n'est pas un recoupement** — deux routes
+    qui rendent le même nombre pour deux raisons sans rapport se lisent comme une confirmation,
+    et c'est le faux verdict qu'on n'a aucune raison d'aller vérifier.
+- **preuve de lecture intégrale** :
+  - l. 130 : `⭐ Une lecture qui invente des trous ne se lit pas comme un bug : elle se lit comme un corpus`
+  - l. 168 : `demi-feuille de 67,75 µm est une mesure **de cet objet**, donc à remesurer avant d'être réutilisée`
+
+---
+
 ### docs/71_les_trois_resultats_de_tete_audites.md
 - **lignes** : 108
 - **nature** : AUDIT
@@ -5518,7 +5591,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 5041
+- **lignes** : 5141
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -6848,8 +6921,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 4349 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 5041 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 4449 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 5141 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

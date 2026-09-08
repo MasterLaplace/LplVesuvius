@@ -83,6 +83,34 @@ l'invariant n'y bouge que de **1,85 %** — la conclusion tient, sur une mesure 
 | **`docs/69`** | écrit par Fable, **non lu** sur consigne de l'auteur |
 | le contrôle P1 bis du `71` | ×15,9 exigé contre ×3,8 observé, à faire tourner |
 
+### ⚠⚠⚠ UNE DÉCISION ATTEND L'AUTEUR — 2026-09-08 : l'objet courant ne peut pas porter la preuve
+
+Mesuré et versionné ([`81`](docs/81_le_rouleau_designe_ne_publie_rien.md),
+`src/depot/les_spires_consecutives_publiees.py`, confronté à S3) :
+
+| objet | spires **consécutives** publiées |
+|---|---:|
+| `PHercParis4` | **120** (w010..w129, zéro trou) |
+| `PHerc0172` | **44** |
+| `PHerc0139` (le témoin de la carte) | **37** |
+| `PHerc1667` (l'objet des 775 h) | 14 (19 rangs, 12 trous) |
+| **`PHerc0500P2` — l'objet courant** | **13** |
+| **les treize rouleaux du Grand Prize** | **0** |
+
+⭐⭐ Une portée ne se mesure que jusqu'où le corpus publie des spires consécutives : au-delà du
+dernier rang publié d'affilée, il n'existe plus rien contre quoi dire qu'on a franchi une spire de
+plus. **Le prix en demande 31.** Sur `PHerc0500P2`, les tenir n'est donc pas seulement difficile —
+c'est **invérifiable**, et aucun travail sur cet objet-là ne changera ça.
+
+⚠⚠ Et la décision de septembre de [`31`](docs/31_roadmap.md) §10 tombe avec : **onze des treize
+rouleaux du prix ne publient aucun segment, et les treize aucun rang de spire.** Son critère
+n'était pas seulement 315× hors budget — sa réponse n'est pas exécutable.
+
+> ⚠ **Le changement d'objet est la décision de l'auteur, pas la mienne.** Ses deux coûts sont
+> nommés : tout ce qui est calibré sur `PHerc0500P2` (voxel 2,215 µm, pas nominal 135,5 µm, boîte
+> et ancres) est à re-dériver, et la **demi-feuille de 67,75 µm est une mesure DE CET OBJET**, donc
+> à remesurer avant d'être réutilisée comme critère ailleurs.
+
 ---
 
 ## REPRISE (historique) — 2026-08-28, fin d'après-midi
