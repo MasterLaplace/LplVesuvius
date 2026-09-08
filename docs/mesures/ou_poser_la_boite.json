@@ -1,0 +1,827 @@
+{
+  "cote": 960.0,
+  "pas_du_treillis": 480.0,
+  "minimum_cellules": 30,
+  "ecart_um": 135.5,
+  "demi_feuille_um": 67.75,
+  "boites_essayees": 144,
+  "boite_actuelle": {
+    "centre": [
+      10615.0,
+      10571.0,
+      19831.0
+    ],
+    "cote": 960.0,
+    "spires": 10,
+    "chaine": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "plafond": 6,
+    "bras": [
+      {
+        "bras": 1,
+        "de": 4,
+        "vers": 5,
+        "ecart_um": 170.0,
+        "ecart_au_pas_um": 34.5,
+        "au_pas_nominal": true
+      },
+      {
+        "bras": 2,
+        "de": 5,
+        "vers": 6,
+        "ecart_um": 119.5,
+        "ecart_au_pas_um": 16.0,
+        "au_pas_nominal": true
+      },
+      {
+        "bras": 3,
+        "de": 6,
+        "vers": 7,
+        "ecart_um": 100.6,
+        "ecart_au_pas_um": 34.9,
+        "au_pas_nominal": true
+      },
+      {
+        "bras": 4,
+        "de": 7,
+        "vers": 8,
+        "ecart_um": 120.0,
+        "ecart_au_pas_um": 15.5,
+        "au_pas_nominal": true
+      },
+      {
+        "bras": 5,
+        "de": 8,
+        "vers": 9,
+        "ecart_um": 137.6,
+        "ecart_au_pas_um": 2.1,
+        "au_pas_nominal": true
+      },
+      {
+        "bras": 6,
+        "de": 9,
+        "vers": 10,
+        "ecart_um": 89.2,
+        "ecart_au_pas_um": 46.3,
+        "au_pas_nominal": true
+      },
+      {
+        "bras": 7,
+        "de": 10,
+        "vers": 11,
+        "ecart_um": 1000.6,
+        "ecart_au_pas_um": 865.1,
+        "au_pas_nominal": false
+      },
+      {
+        "bras": 8,
+        "de": 11,
+        "vers": 12,
+        "ecart_um": 76.7,
+        "ecart_au_pas_um": 58.8,
+        "au_pas_nominal": true
+      },
+      {
+        "bras": 9,
+        "de": 12,
+        "vers": 13,
+        "ecart_um": 54.9,
+        "ecart_au_pas_um": 80.6,
+        "au_pas_nominal": false
+      }
+    ],
+    "cellules_par_spire": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1976,
+      "5": 2730,
+      "6": 2402,
+      "7": 2307,
+      "8": 2649,
+      "9": 1927,
+      "10": 2053,
+      "11": 61,
+      "12": 2003,
+      "13": 1917
+    }
+  },
+  "meilleure_boite": {
+    "centre": [
+      8895.08935546875,
+      10579.884765625,
+      21683.67578125
+    ],
+    "cote": 960.0,
+    "spires": 12,
+    "chaine": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "plafond": 7,
+    "bras": [
+      {
+        "bras": 1,
+        "de": 2,
+        "vers": 3,
+        "ecart_um": 170.4,
+        "ecart_au_pas_um": 34.9,
+        "au_pas_nominal": true
+      },
+      {
+        "bras": 2,
+        "de": 3,
+        "vers": 4,
+        "ecart_um": 82.7,
+        "ecart_au_pas_um": 52.8,
+        "au_pas_nominal": true
+      },
+      {
+        "bras": 3,
+        "de": 4,
+        "vers": 5,
+        "ecart_um": 202.3,
+        "ecart_au_pas_um": 66.8,
+        "au_pas_nominal": true
+      },
+      {
+        "bras": 4,
+        "de": 5,
+        "vers": 6,
+        "ecart_um": 124.8,
+        "ecart_au_pas_um": 10.7,
+        "au_pas_nominal": true
+      },
+      {
+        "bras": 5,
+        "de": 6,
+        "vers": 7,
+        "ecart_um": 145.7,
+        "ecart_au_pas_um": 10.2,
+        "au_pas_nominal": true
+      },
+      {
+        "bras": 6,
+        "de": 7,
+        "vers": 8,
+        "ecart_um": 123.4,
+        "ecart_au_pas_um": 12.1,
+        "au_pas_nominal": true
+      },
+      {
+        "bras": 7,
+        "de": 8,
+        "vers": 9,
+        "ecart_um": 108.0,
+        "ecart_au_pas_um": 27.5,
+        "au_pas_nominal": true
+      },
+      {
+        "bras": 8,
+        "de": 9,
+        "vers": 10,
+        "ecart_um": 62.3,
+        "ecart_au_pas_um": 73.2,
+        "au_pas_nominal": false
+      },
+      {
+        "bras": 9,
+        "de": 10,
+        "vers": 11,
+        "ecart_um": 38.1,
+        "ecart_au_pas_um": 97.4,
+        "au_pas_nominal": false
+      },
+      {
+        "bras": 10,
+        "de": 11,
+        "vers": 12,
+        "ecart_um": 182.8,
+        "ecart_au_pas_um": 47.3,
+        "au_pas_nominal": true
+      },
+      {
+        "bras": 11,
+        "de": 12,
+        "vers": 13,
+        "ecart_um": 83.9,
+        "ecart_au_pas_um": 51.6,
+        "au_pas_nominal": true
+      }
+    ],
+    "cellules_par_spire": {
+      "1": 0,
+      "2": 112,
+      "3": 1092,
+      "4": 1321,
+      "5": 1253,
+      "6": 1037,
+      "7": 1315,
+      "8": 1378,
+      "9": 1731,
+      "10": 1264,
+      "11": 1526,
+      "12": 1083,
+      "13": 1089
+    }
+  },
+  "gain_de_plafond": 1,
+  "plafond_maximal": 7,
+  "boites_au_moins_aussi_bonnes": 16,
+  "boites_meilleures": 1,
+  "meilleures_boites": [
+    {
+      "centre": [
+        8895.08935546875,
+        10579.884765625,
+        21683.67578125
+      ],
+      "cote": 960.0,
+      "spires": 12,
+      "chaine": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "plafond": 7,
+      "bras": [
+        {
+          "bras": 1,
+          "de": 2,
+          "vers": 3,
+          "ecart_um": 170.4,
+          "ecart_au_pas_um": 34.9,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 2,
+          "de": 3,
+          "vers": 4,
+          "ecart_um": 82.7,
+          "ecart_au_pas_um": 52.8,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 3,
+          "de": 4,
+          "vers": 5,
+          "ecart_um": 202.3,
+          "ecart_au_pas_um": 66.8,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 4,
+          "de": 5,
+          "vers": 6,
+          "ecart_um": 124.8,
+          "ecart_au_pas_um": 10.7,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 5,
+          "de": 6,
+          "vers": 7,
+          "ecart_um": 145.7,
+          "ecart_au_pas_um": 10.2,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 6,
+          "de": 7,
+          "vers": 8,
+          "ecart_um": 123.4,
+          "ecart_au_pas_um": 12.1,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 7,
+          "de": 8,
+          "vers": 9,
+          "ecart_um": 108.0,
+          "ecart_au_pas_um": 27.5,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 8,
+          "de": 9,
+          "vers": 10,
+          "ecart_um": 62.3,
+          "ecart_au_pas_um": 73.2,
+          "au_pas_nominal": false
+        },
+        {
+          "bras": 9,
+          "de": 10,
+          "vers": 11,
+          "ecart_um": 38.1,
+          "ecart_au_pas_um": 97.4,
+          "au_pas_nominal": false
+        },
+        {
+          "bras": 10,
+          "de": 11,
+          "vers": 12,
+          "ecart_um": 182.8,
+          "ecart_au_pas_um": 47.3,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 11,
+          "de": 12,
+          "vers": 13,
+          "ecart_um": 83.9,
+          "ecart_au_pas_um": 51.6,
+          "au_pas_nominal": true
+        }
+      ],
+      "cellules_par_spire": {
+        "1": 0,
+        "2": 112,
+        "3": 1092,
+        "4": 1321,
+        "5": 1253,
+        "6": 1037,
+        "7": 1315,
+        "8": 1378,
+        "9": 1731,
+        "10": 1264,
+        "11": 1526,
+        "12": 1083,
+        "13": 1089
+      }
+    },
+    {
+      "centre": [
+        8895.08935546875,
+        10579.884765625,
+        19763.67578125
+      ],
+      "cote": 960.0,
+      "spires": 10,
+      "chaine": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "plafond": 6,
+      "bras": [
+        {
+          "bras": 1,
+          "de": 4,
+          "vers": 5,
+          "ecart_um": 131.4,
+          "ecart_au_pas_um": 4.1,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 2,
+          "de": 5,
+          "vers": 6,
+          "ecart_um": 131.2,
+          "ecart_au_pas_um": 4.3,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 3,
+          "de": 6,
+          "vers": 7,
+          "ecart_um": 73.5,
+          "ecart_au_pas_um": 62.0,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 4,
+          "de": 7,
+          "vers": 8,
+          "ecart_um": 111.7,
+          "ecart_au_pas_um": 23.8,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 5,
+          "de": 8,
+          "vers": 9,
+          "ecart_um": 100.3,
+          "ecart_au_pas_um": 35.2,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 6,
+          "de": 9,
+          "vers": 10,
+          "ecart_um": 112.6,
+          "ecart_au_pas_um": 22.9,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 7,
+          "de": 10,
+          "vers": 11,
+          "ecart_um": 525.9,
+          "ecart_au_pas_um": 390.4,
+          "au_pas_nominal": false
+        },
+        {
+          "bras": 8,
+          "de": 11,
+          "vers": 12,
+          "ecart_um": 298.3,
+          "ecart_au_pas_um": 162.8,
+          "au_pas_nominal": false
+        },
+        {
+          "bras": 9,
+          "de": 12,
+          "vers": 13,
+          "ecart_um": 39.8,
+          "ecart_au_pas_um": 95.7,
+          "au_pas_nominal": false
+        }
+      ],
+      "cellules_par_spire": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 489,
+        "5": 1109,
+        "6": 1467,
+        "7": 1877,
+        "8": 2470,
+        "9": 2378,
+        "10": 2195,
+        "11": 462,
+        "12": 2293,
+        "13": 2266
+      }
+    },
+    {
+      "centre": [
+        9375.08935546875,
+        10579.884765625,
+        19763.67578125
+      ],
+      "cote": 960.0,
+      "spires": 10,
+      "chaine": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "plafond": 6,
+      "bras": [
+        {
+          "bras": 1,
+          "de": 4,
+          "vers": 5,
+          "ecart_um": 116.7,
+          "ecart_au_pas_um": 18.8,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 2,
+          "de": 5,
+          "vers": 6,
+          "ecart_um": 127.0,
+          "ecart_au_pas_um": 8.5,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 3,
+          "de": 6,
+          "vers": 7,
+          "ecart_um": 79.7,
+          "ecart_au_pas_um": 55.8,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 4,
+          "de": 7,
+          "vers": 8,
+          "ecart_um": 119.0,
+          "ecart_au_pas_um": 16.5,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 5,
+          "de": 8,
+          "vers": 9,
+          "ecart_um": 108.5,
+          "ecart_au_pas_um": 27.0,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 6,
+          "de": 9,
+          "vers": 10,
+          "ecart_um": 107.3,
+          "ecart_au_pas_um": 28.2,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 7,
+          "de": 10,
+          "vers": 11,
+          "ecart_um": 561.8,
+          "ecart_au_pas_um": 426.3,
+          "au_pas_nominal": false
+        },
+        {
+          "bras": 8,
+          "de": 11,
+          "vers": 12,
+          "ecart_um": 248.3,
+          "ecart_au_pas_um": 112.8,
+          "au_pas_nominal": false
+        },
+        {
+          "bras": 9,
+          "de": 12,
+          "vers": 13,
+          "ecart_um": 48.1,
+          "ecart_au_pas_um": 87.4,
+          "au_pas_nominal": false
+        }
+      ],
+      "cellules_par_spire": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 828,
+        "5": 1355,
+        "6": 1806,
+        "7": 2043,
+        "8": 2518,
+        "9": 2531,
+        "10": 2503,
+        "11": 673,
+        "12": 2594,
+        "13": 2575
+      }
+    },
+    {
+      "centre": [
+        9855.08935546875,
+        10579.884765625,
+        19763.67578125
+      ],
+      "cote": 960.0,
+      "spires": 10,
+      "chaine": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "plafond": 6,
+      "bras": [
+        {
+          "bras": 1,
+          "de": 4,
+          "vers": 5,
+          "ecart_um": 134.6,
+          "ecart_au_pas_um": 0.9,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 2,
+          "de": 5,
+          "vers": 6,
+          "ecart_um": 99.6,
+          "ecart_au_pas_um": 35.9,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 3,
+          "de": 6,
+          "vers": 7,
+          "ecart_um": 105.4,
+          "ecart_au_pas_um": 30.1,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 4,
+          "de": 7,
+          "vers": 8,
+          "ecart_um": 104.8,
+          "ecart_au_pas_um": 30.7,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 5,
+          "de": 8,
+          "vers": 9,
+          "ecart_um": 132.3,
+          "ecart_au_pas_um": 3.2,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 6,
+          "de": 9,
+          "vers": 10,
+          "ecart_um": 137.3,
+          "ecart_au_pas_um": 1.8,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 7,
+          "de": 10,
+          "vers": 11,
+          "ecart_um": 808.6,
+          "ecart_au_pas_um": 673.1,
+          "au_pas_nominal": false
+        },
+        {
+          "bras": 8,
+          "de": 11,
+          "vers": 12,
+          "ecart_um": 191.2,
+          "ecart_au_pas_um": 55.7,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 9,
+          "de": 12,
+          "vers": 13,
+          "ecart_um": 55.4,
+          "ecart_au_pas_um": 80.1,
+          "au_pas_nominal": false
+        }
+      ],
+      "cellules_par_spire": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 1192,
+        "5": 1668,
+        "6": 2203,
+        "7": 2434,
+        "8": 2639,
+        "9": 2645,
+        "10": 2794,
+        "11": 369,
+        "12": 2621,
+        "13": 2617
+      }
+    },
+    {
+      "centre": [
+        9855.08935546875,
+        10579.884765625,
+        20243.67578125
+      ],
+      "cote": 960.0,
+      "spires": 10,
+      "chaine": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "plafond": 6,
+      "bras": [
+        {
+          "bras": 1,
+          "de": 4,
+          "vers": 5,
+          "ecart_um": 161.6,
+          "ecart_au_pas_um": 26.1,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 2,
+          "de": 5,
+          "vers": 6,
+          "ecart_um": 106.8,
+          "ecart_au_pas_um": 28.7,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 3,
+          "de": 6,
+          "vers": 7,
+          "ecart_um": 84.3,
+          "ecart_au_pas_um": 51.2,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 4,
+          "de": 7,
+          "vers": 8,
+          "ecart_um": 105.1,
+          "ecart_au_pas_um": 30.4,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 5,
+          "de": 8,
+          "vers": 9,
+          "ecart_um": 135.9,
+          "ecart_au_pas_um": 0.4,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 6,
+          "de": 9,
+          "vers": 10,
+          "ecart_um": 143.1,
+          "ecart_au_pas_um": 7.6,
+          "au_pas_nominal": true
+        },
+        {
+          "bras": 7,
+          "de": 10,
+          "vers": 11,
+          "ecart_um": 246.7,
+          "ecart_au_pas_um": 111.2,
+          "au_pas_nominal": false
+        },
+        {
+          "bras": 8,
+          "de": 11,
+          "vers": 12,
+          "ecart_um": 242.6,
+          "ecart_au_pas_um": 107.1,
+          "au_pas_nominal": false
+        },
+        {
+          "bras": 9,
+          "de": 12,
+          "vers": 13,
+          "ecart_um": 68.4,
+          "ecart_au_pas_um": 67.1,
+          "au_pas_nominal": true
+        }
+      ],
+      "cellules_par_spire": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 50,
+        "5": 321,
+        "6": 935,
+        "7": 1313,
+        "8": 2390,
+        "9": 2551,
+        "10": 2689,
+        "11": 1724,
+        "12": 2661,
+        "13": 2560
+      }
+    }
+  ]
+}

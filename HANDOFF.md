@@ -111,6 +111,17 @@ n'était pas seulement 315× hors budget — sa réponse n'est pas exécutable.
 > et ancres) est à re-dériver, et la **demi-feuille de 67,75 µm est une mesure DE CET OBJET**, donc
 > à remesurer avant d'être réutilisée comme critère ailleurs.
 
+⚠⚠⚠ **Et l'audit qui a suivi ([`82`](docs/82_la_borne_etait_le_mur.md)) montre que le corpus ne
+borne pas seulement ce qu'on peut PROUVER, il borne ce qu'on peut APPRENDRE.** Les spires 10 et 11
+de `PHerc0500P2` se suivent par leur numéro et sont à **1000,6 µm** l'une de l'autre — 12,8× le
+décalage que la famille sait appliquer — donc **l'oracle est collé au plafond du corpus sur les
+cinq ancres**. « La borne vaut 6 » n'est pas établi : la vraie borne est **inconnue et ≥ 6**, et la
+marge entre le meilleur marcheur aveugle et elle pourrait être bien plus grande qu'un bras.
+
+★★ Ce qui **tient** : à l'ancre 4 le plafond vaut 6, le pas normal (4) et sa version lissée (5)
+sont sous le plafond, donc le gain d'un bras par le lissage n'est pas touché. Ce qui tombe est la
+**borne**, pas le résultat.
+
 ---
 
 ## REPRISE (historique) — 2026-08-28, fin d'après-midi

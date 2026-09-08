@@ -1,0 +1,333 @@
+{
+  "source_marche": "docs/mesures/la_portee_du_raccrochage.json",
+  "source_ailleurs": "docs/mesures/la_portee_tient_elle_ailleurs.json",
+  "fragment": "PHerc0500P2",
+  "demi_feuille_um": 67.75,
+  "glissement_maximal_um": 67.8,
+  "mur": {
+    "bras": 7,
+    "de": 10,
+    "vers": 11,
+    "ecart_um": 1000.6,
+    "ecart_au_pas_um": 865.1,
+    "au_pas_nominal": false
+  },
+  "mur_en_demi_feuilles": 12.8,
+  "mur_en_glissements": 12.8,
+  "ancres": 5,
+  "lignes": [
+    {
+      "ancre": 4,
+      "bras_offerts": 8,
+      "plafond": 6,
+      "plafond_attendu_du_mur": 6,
+      "marcheurs": {
+        "rien": {
+          "portee": 4,
+          "plafond": 6,
+          "censuree": false,
+          "marge": 2
+        },
+        "rien_lisse": {
+          "portee": 5,
+          "plafond": 6,
+          "censuree": false,
+          "marge": 1
+        },
+        "raccroche": {
+          "portee": 2,
+          "plafond": 6,
+          "censuree": false,
+          "marge": 4
+        },
+        "raccroche_lisse": {
+          "portee": 3,
+          "plafond": 6,
+          "censuree": false,
+          "marge": 3
+        },
+        "sortie_raccrochee": {
+          "portee": 4,
+          "plafond": 6,
+          "censuree": false,
+          "marge": 2
+        },
+        "sortie_lisse": {
+          "portee": 4,
+          "plafond": 6,
+          "censuree": false,
+          "marge": 2
+        },
+        "melange": {
+          "portee": 2,
+          "plafond": 6,
+          "censuree": false,
+          "marge": 4
+        },
+        "oracle": {
+          "portee": 6,
+          "plafond": 6,
+          "censuree": true,
+          "marge": 0
+        }
+      },
+      "censures": [
+        "oracle"
+      ],
+      "pouvoir_de_separer": 4
+    },
+    {
+      "ancre": 5,
+      "bras_offerts": 8,
+      "plafond": 5,
+      "plafond_attendu_du_mur": 5,
+      "marcheurs": {
+        "rien": {
+          "portee": 2,
+          "plafond": 5,
+          "censuree": false,
+          "marge": 3
+        },
+        "rien_lisse": {
+          "portee": 2,
+          "plafond": 5,
+          "censuree": false,
+          "marge": 3
+        },
+        "raccroche": {
+          "portee": 2,
+          "plafond": 5,
+          "censuree": false,
+          "marge": 3
+        },
+        "raccroche_lisse": {
+          "portee": 3,
+          "plafond": 5,
+          "censuree": false,
+          "marge": 2
+        },
+        "sortie_raccrochee": {
+          "portee": 1,
+          "plafond": 5,
+          "censuree": false,
+          "marge": 4
+        },
+        "sortie_lisse": {
+          "portee": 1,
+          "plafond": 5,
+          "censuree": false,
+          "marge": 4
+        },
+        "melange": {
+          "portee": 1,
+          "plafond": 5,
+          "censuree": false,
+          "marge": 4
+        },
+        "oracle": {
+          "portee": 5,
+          "plafond": 5,
+          "censuree": true,
+          "marge": 0
+        }
+      },
+      "censures": [
+        "oracle"
+      ],
+      "pouvoir_de_separer": 3
+    },
+    {
+      "ancre": 6,
+      "bras_offerts": 7,
+      "plafond": 4,
+      "plafond_attendu_du_mur": 4,
+      "marcheurs": {
+        "rien": {
+          "portee": 3,
+          "plafond": 4,
+          "censuree": false,
+          "marge": 1
+        },
+        "rien_lisse": {
+          "portee": 3,
+          "plafond": 4,
+          "censuree": false,
+          "marge": 1
+        },
+        "raccroche": {
+          "portee": 2,
+          "plafond": 4,
+          "censuree": false,
+          "marge": 2
+        },
+        "raccroche_lisse": {
+          "portee": 3,
+          "plafond": 4,
+          "censuree": false,
+          "marge": 1
+        },
+        "sortie_raccrochee": {
+          "portee": 2,
+          "plafond": 4,
+          "censuree": false,
+          "marge": 2
+        },
+        "sortie_lisse": {
+          "portee": 2,
+          "plafond": 4,
+          "censuree": false,
+          "marge": 2
+        },
+        "melange": {
+          "portee": 2,
+          "plafond": 4,
+          "censuree": false,
+          "marge": 2
+        },
+        "oracle": {
+          "portee": 4,
+          "plafond": 4,
+          "censuree": true,
+          "marge": 0
+        }
+      },
+      "censures": [
+        "oracle"
+      ],
+      "pouvoir_de_separer": 2
+    },
+    {
+      "ancre": 7,
+      "bras_offerts": 6,
+      "plafond": 3,
+      "plafond_attendu_du_mur": 3,
+      "marcheurs": {
+        "rien": {
+          "portee": 2,
+          "plafond": 3,
+          "censuree": false,
+          "marge": 1
+        },
+        "rien_lisse": {
+          "portee": 2,
+          "plafond": 3,
+          "censuree": false,
+          "marge": 1
+        },
+        "raccroche": {
+          "portee": 2,
+          "plafond": 3,
+          "censuree": false,
+          "marge": 1
+        },
+        "raccroche_lisse": {
+          "portee": 2,
+          "plafond": 3,
+          "censuree": false,
+          "marge": 1
+        },
+        "sortie_raccrochee": {
+          "portee": 2,
+          "plafond": 3,
+          "censuree": false,
+          "marge": 1
+        },
+        "sortie_lisse": {
+          "portee": 2,
+          "plafond": 3,
+          "censuree": false,
+          "marge": 1
+        },
+        "melange": {
+          "portee": 2,
+          "plafond": 3,
+          "censuree": false,
+          "marge": 1
+        },
+        "oracle": {
+          "portee": 3,
+          "plafond": 3,
+          "censuree": true,
+          "marge": 0
+        }
+      },
+      "censures": [
+        "oracle"
+      ],
+      "pouvoir_de_separer": 1
+    },
+    {
+      "ancre": 8,
+      "bras_offerts": 5,
+      "plafond": 2,
+      "plafond_attendu_du_mur": 2,
+      "marcheurs": {
+        "rien": {
+          "portee": 1,
+          "plafond": 2,
+          "censuree": false,
+          "marge": 1
+        },
+        "rien_lisse": {
+          "portee": 1,
+          "plafond": 2,
+          "censuree": false,
+          "marge": 1
+        },
+        "raccroche": {
+          "portee": 1,
+          "plafond": 2,
+          "censuree": false,
+          "marge": 1
+        },
+        "raccroche_lisse": {
+          "portee": 1,
+          "plafond": 2,
+          "censuree": false,
+          "marge": 1
+        },
+        "sortie_raccrochee": {
+          "portee": 1,
+          "plafond": 2,
+          "censuree": false,
+          "marge": 1
+        },
+        "sortie_lisse": {
+          "portee": 1,
+          "plafond": 2,
+          "censuree": false,
+          "marge": 1
+        },
+        "melange": {
+          "portee": 1,
+          "plafond": 2,
+          "censuree": false,
+          "marge": 1
+        },
+        "oracle": {
+          "portee": 2,
+          "plafond": 2,
+          "censuree": true,
+          "marge": 0
+        }
+      },
+      "censures": [
+        "oracle"
+      ],
+      "pouvoir_de_separer": 1
+    }
+  ],
+  "ancres_ou_la_borne_est_censuree": [
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "la_borne_est_censuree_partout": true,
+  "le_meme_mur_explique_tout": true,
+  "ancres_sans_pouvoir_de_separer": [
+    7,
+    8
+  ]
+}

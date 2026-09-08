@@ -5247,6 +5247,51 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/82_la_borne_etait_le_mur.md
+- **lignes** : 97
+- **nature** : RESULTAT
+  (audit du résultat de portée par croisement de deux artefacts versionnés, hors ligne, sans
+  aucune remesure.)
+- **résumé** : `la_portee_du_raccrochage` publie côte à côte « la borne (oracle) : 6 » et « ce que
+  le corpus autorise : 6 » ; **les deux 6 sont le même 6**, et l'oracle est collé au plafond du
+  corpus sur les **cinq** ancres. Une portée égale au plafond est une observation **censurée à
+  droite** — « au moins », jamais « vaut » — donc « la borne vaut 6 » n'est pas établi et la vraie
+  borne est inconnue. La cause est unique : un saut de **1000,6 µm entre les spires 10 et 11**, là
+  où le pas nominal en demande 135,5 et où la famille entière ne sait décaler que de ±67,8. Les
+  cinq plafonds valent exactement `10 − ancre`, donc les cinq ancres ne sont pas cinq réplications.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **La borne est censurée sur 5/5 ancres** (6/6, 5/5, 4/4, 3/3, 2/2). C'est le péché n° 1
+    du dépôt — une limite de grille publiée comme une limite matérielle — dans son résultat le plus
+    cité, et il a fallu croiser deux fichiers de mesure que rien ne croisait pour le voir.
+  - ⭐⭐ **Le saut est infranchissable par CONSTRUCTION, l'oracle compris.** Le bras demande
+    865,1 µm de plus que le pas nominal ; le décalage atteignable est ±67,8 µm, soit **12,8×**
+    moins. L'oracle regarde la cible mais garde la longueur de son pas, donc il bute pareil.
+  - ⚠⚠ **Les cinq ancres meurent au même mur** : plafond = `10 − ancre` = 6, 5, 4, 3, 2. « Le signe
+    tient sur 5/5 ancres » compte cinq fois un seul défaut du corpus.
+  - ⛔ **Deux ancres ne séparent rien** : à l'ancre 7 les sept marcheurs aveugles rendent tous 2, à
+    l'ancre 8 tous 1. Une ancre de plafond 2 offre trois valeurs dont une censurée ; les compter
+    comme des confirmations, c'est compter du silence.
+  - ★★ **Ce qui TIENT** : à l'ancre 4 le plafond vaut 6, quatre valeurs distinctes sortent, et le
+    pas normal (4) comme sa version lissée (5) sont **sous** le plafond. Le gain d'un bras par le
+    lissage n'est pas touché. Ce qui tombe est la borne, pas le résultat.
+  - ⚠ Ce qui tombe aussi : la lecture « il ne reste qu'un bras de marge avant la borne ». La marge
+    réelle est **inconnue**, et pourrait être bien plus grande — ce qui serait une bonne nouvelle
+    pour l'objectif.
+  - Recoupe [`81`](../81_le_rouleau_designe_ne_publie_rien.md) par un chemin indépendant : le
+    corpus ne borne pas seulement ce qu'on peut **prouver**, il borne ce qu'on peut **apprendre**.
+- **rétractations / corrections internes** :
+  - §2 : rétracte, en place, la lecture de « la borne (oracle) = 6 » comme une valeur. Elle est
+    censurée ; le document la réécrit **≥ 6** partout et le module publie le champ `censuree`.
+  - §3 : rétracte la lecture de « 5/5 ancres » comme cinq réplications indépendantes.
+  - §4 : borne sa propre portée — le résultat de portée à l'ancre 4 n'est **pas** touché, et le
+    document le dit avant qu'on le lui demande, parce qu'un audit lu comme une rétractation
+    générale coûterait plus qu'il ne rapporte.
+- **preuve de lecture intégrale** :
+  - l. 61 : `qu'elles soient. Les compter comme des confirmations, c'est **compter du silence**.`
+  - l. 79 : `contre un plafond de 6 au mieux, 2 au pire, quand l'objectif en demande **31**.`
+
+---
+
 ### docs/81_le_rouleau_designe_ne_publie_rien.md
 - **lignes** : 180
 - **nature** : RESULTAT
@@ -5591,7 +5636,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 5141
+- **lignes** : 5191
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
@@ -6921,8 +6966,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ Une fausse alerte déclarée : `proximity_scroll1.json` cru manquant, il existe en
     `.jsonl` — « mon motif cherchait la mauvaise extension ».
 - **preuve de lecture intégrale** :
-  - ligne 4449 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
-  - ligne 5141 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
+  - ligne 4499 (après 60 % du fichier) : `chercher sur l'un et refuser sur l'autre garantit de trouver ce qui sera refusé.`
+  - ligne 5191 (dernière ligne non vide) : `déjà sous deux formes, et le prior n'est pas universel.`
 
 
 ### docs/76_le_sens_des_indices.md

@@ -3933,6 +3933,56 @@ faux verdict la plus difficile à voir — celle qu'on n'a aucune raison d'aller
 > ailleurs.
 
 ---
+##### ⛔⛔⛔ LA BORNE QU'ON PUBLIAIT ÉTAIT LE MUR — l'oracle est censuré sur 5/5 ancres
+
+> Mesure : `src/nappe/le_mur_du_corpus.py` (18 contrôles, hors ligne) →
+> `docs/mesures/le_mur_du_corpus.json`. Figure : `src/figures/figure_le_mur_du_corpus.py`
+> (10 contrôles), le 2026-09-08. Document : [`82`](82_la_borne_etait_le_mur.md).
+>
+> ```bash
+> uv run python src/nappe/le_mur_du_corpus.py --json docs/mesures/le_mur_du_corpus.json
+> uv run python src/figures/figure_le_mur_du_corpus.py \
+>     --sortie docs/images/82_le_mur_du_corpus.png
+> ```
+
+⚠⚠⚠ **`la_portee_du_raccrochage` publie côte à côte « la borne (oracle) : 6 » et « ce que le
+corpus autorise : 6 », et personne n'avait demandé si les deux 6 sont le même 6.** Ils le sont, et
+sur les **cinq** ancres : 6/6, 5/5, 4/4, 3/3, 2/2. Une portée égale au plafond du corpus est une
+observation **censurée à droite** — elle dit « au moins », jamais « vaut ».
+
+![la portée mesure-t-elle le marcheur, ou le mur du corpus](images/82_le_mur_du_corpus.png)
+
+| ancre | bras offerts | plafond du corpus | oracle | pouvoir de séparer |
+|---:|---:|---:|---:|---:|
+| 4 | 8 | **6** | **≥6** | 4 |
+| 5 | 8 | **5** | **≥5** | 3 |
+| 6 | 7 | **4** | **≥4** | 2 |
+| 7 | 6 | **3** | **≥3** | **1** |
+| 8 | 5 | **2** | **≥2** | **1** |
+
+⭐⭐⭐ **La cause est unique, et c'est le trou trouvé par accident dans la tranche précédente** :
+les spires **10 et 11** se suivent par leur numéro et sont à **1000,6 µm** l'une de l'autre, soit
+865,1 µm de plus que le pas nominal — quand le décalage que cette famille sait appliquer vaut
+**±67,8 µm**, une demi-feuille. Le bras 7 demande donc **12,8×** ce que le meilleur d'entre eux
+peut atteindre. **Ce n'est pas un échec de méthode, c'est une impossibilité de construction**, et
+l'oracle est dedans : il regarde la cible mais *garde la longueur de son pas*.
+
+⚠⚠ **Les cinq ancres ne sont donc pas cinq réplications** : leurs plafonds valent exactement
+`10 − ancre`. « Le signe tient sur 5/5 ancres » compte cinq fois un seul défaut du corpus.
+⛔ Et **deux d'entre elles ne séparent rien** : à l'ancre 7 les sept marcheurs aveugles rendent
+tous **2**, à l'ancre 8 tous **1**. Une ancre de plafond 2 offre trois valeurs dont une censurée ;
+les compter comme des confirmations, c'est **compter du silence**.
+
+> ★★ **CE QUI TIENT, ET IL FAUT LE DIRE AUSSI.** À l'ancre 4 le plafond vaut 6, quatre valeurs
+> distinctes sortent, et le pas normal (4) comme sa version lissée (5) sont **sous** le plafond :
+> cette comparaison-là mesure bien les marcheurs, et **le gain d'un bras par le lissage n'est pas
+> touché**. Ce qui tombe est la **borne**, pas le résultat.
+>
+> ⚠ Ce qui tombe aussi : la lecture « il ne reste qu'un bras de marge avant la borne ». La marge
+> réelle est **inconnue** — elle pourrait être bien plus grande, ce qui serait une **bonne
+> nouvelle pour l'objectif** — et la mesurer demande un corpus sans ce trou.
+
+---
 ##### ⭐⭐⭐ UNE CELLULE PEUT-ELLE SAVOIR QU'ELLE A TORT, sans regarder la cible ?
 
 > Mesure : `src/nappe/la_cellule_sait_elle_quelle_a_tort.py` (14 contrôles) →
