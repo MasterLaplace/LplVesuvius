@@ -4553,6 +4553,82 @@ renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la bat
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
 
 ---
+##### ⭐⭐⭐ DEUX HUMAINS SUR LA MÊME MATIÈRE DIVERGENT DE PLUS D'UNE DEMI-FEUILLE, PARTOUT
+
+> Mesure : `src/nappe/deux_humains_sur_la_meme_matiere.py` (18 contrôles) →
+> `docs/mesures/deux_humains_sur_la_meme_matiere.json`. Figure :
+> `src/figures/figure_deux_humains_sur_la_meme_matiere.py` (15 contrôles).
+> Document : [`97`](97_deux_humains_sur_la_meme_matiere.md), le 2026-09-09.
+
+![deux humains sur la même matière](images/97_deux_humains_sur_la_meme_matiere.png)
+
+La tranche du dessous a nommé ce qui manquait — un **référent** — et le dépôt en télécharge un
+depuis le début sans l'avoir employé : chaque bande existe en **deux révisions**, soit deux tracés
+humains **indépendants** de la même matière. Là où les deux s'accordent, la matière a dicté la
+réponse ; là où ils divergent, au moins l'un des deux se trompe, et **aucun oracle n'est requis**.
+
+| tiers | au plan local | au plus proche voisin ⛔ | hors ½ | > 1 feuille | continuité |
+|---|---:|---:|---:|---:|---:|
+| cœur (9) | **121,7 µm** | 270,8 µm | 0,629 | 0,339 | ×1,7 |
+| milieu (9) | 110,9 µm | 276,9 µm | 0,622 | 0,303 | ×5,9 |
+| bord (10) | **106,6 µm** | 315,4 µm | 0,609 | 0,301 | ×31,0 |
+
+⭐⭐⭐ **Pour une demi-feuille de 82 à 91 µm** (`91`), les deux humains sont donc à **plus d'une
+demi-feuille** l'un de l'autre, et **34 %** des points à plus d'une feuille **entière**. ⭐ Et c'est
+**PLAT** (corrélation avec le rayon **+0,081**) : ce n'est pas un problème de bord, c'est partout —
+ce qui en fait un **plancher** plutôt qu'une région à traiter à part.
+
+⚠ **Aucune translation systématique** : restreint au recouvrement en z, le vecteur moyen de A vers B
+tombe à **8–38 µm**. Le désaccord est réel et local, pas un décalage de convention.
+
+⛔ **Et ce référent ne calibre PAS la fermeture de la tranche du dessous** : le désaccord ne suit ni
+le rayon (+0,081), ni la rupture (−0,097), ni la fermeture (**+0,079**). Là où les deux humains
+divergent n'est donc pas là où la fermeture échoue.
+
+##### ⛔⛔ L'estimateur réfuté, gardé — et c'est le facteur qui compte
+
+Au plus proche voisin le désaccord rend **270 à 315 µm** contre **107 à 122** au plan local, soit un
+facteur **2,2 à 3,0**. Les rangs de l'ancienne révision sont espacés d'environ **800 µm**, donc un
+point à mi-chemin entre deux rangs en est loin **même si les deux surfaces coïncident exactement** —
+et la fixture le montre en rendant une distance non nulle sur deux surfaces **identiques**.
+
+> ⭐ **Publier ce nombre aurait été publier une limite de GRILLE comme une limite de MATIÈRE**, le
+> péché nº 1 de ce dépôt.
+
+##### ⚠⚠⚠ Une garde à moi qui supprimait ce qu'elle devait laisser mesurer
+
+Mon critère de bord — *« mes voisins sont-ils tous du même côté ? »* — était d'abord mesuré dans
+l'**espace**, où il mélange deux choses : être au **bord** d'une couverture, et être **loin** de la
+surface. Mesure du défaut : sur deux plans séparés de 2 avec des voisins à 2,4, le rapport **ne
+descendait jamais sous 0,354** — donc appliqué au réel il aurait écarté **exactement** les points où
+les deux humains divergent le plus.
+
+> **Une garde qui supprime ce qu'elle doit laisser mesurer est pire qu'aucune garde.**
+
+Mesuré dans le **plan tangent**, il ne voit plus que le bord, et le désaccord publié **double** : de
+53 à **122 µm**. ⚠ Le critère est **borné dans [0, 1]** par construction et son défaut est **mesuré
+sur fixture** — 0,13 à l'intérieur, 0,49 sur la bordure, donc 0,35 entre les deux — avec le balayage
+publié.
+
+⚠⚠ Et le **confondant de couverture** est traité avant tout le reste, comme `85` l'avait déjà payé :
+l'ancienne révision ne couvre que **65 %** de l'étendue en z de la récente (119 rangs contre 184), et
+sans restriction le vecteur moyen valait 5918 µm dominé par 5567 en z — c'est-à-dire qu'on mesurait
+la couverture.
+
+##### ⭐⭐⭐ Ce que ça change pour le graal, et c'est plus lourd que la calibration cherchée
+
+Le prix demande d'automatiser un travail dont **l'état de l'art ne reproduit pas sa propre sortie à
+une feuille près**.
+
+> ⛔ **La cible d'un automate ne peut donc pas être « égaler le maillage humain » — cette cible n'a
+> pas de valeur unique.** Elle doit être un critère que la **matière** tranche, pas un maillage.
+
+⭐ Et ça donne un sens neuf aux trois échecs précédents : le pli, la pose sur la matière et la
+fermeture cherchaient tous un signal qui prédise l'écart **à un maillage humain**, ou calibré
+**contre** lui. Les trois mesuraient contre une règle dont on sait maintenant qu'elle bouge de plus
+d'une demi-feuille selon qui la tient.
+
+---
 ##### ⭐⭐⭐ LE PREMIER SIGNAL DONT LE SIGNE EST LE BON — et le plancher qui l'empêche de certifier
 
 > Mesure : `src/nappe/la_fermeture_dun_tour.py` (28 contrôles) →

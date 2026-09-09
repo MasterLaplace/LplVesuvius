@@ -144,6 +144,39 @@ un seul.**
 riche du concours ne contient pas une marche entière. Mais c'est la première fois que la portée de
 ce dépôt peut se comparer à du **travail humain publié** plutôt qu'à une borne censurée.
 
+⭐⭐⭐ **DEUX HUMAINS SUR LA MÊME MATIÈRE DIVERGENT DE PLUS D'UNE DEMI-FEUILLE, PARTOUT — LE
+PLANCHER EST CHIFFRÉ** ([`97`](docs/97_deux_humains_sur_la_meme_matiere.md)). `96` a nommé ce qui
+manquait, un **référent**, et le dépôt en télécharge un depuis le début sans l'avoir employé :
+chaque bande existe en **deux révisions**, soit deux tracés humains **indépendants** de la même
+matière. Leur désaccord vaut **121,7 µm au cœur, 110,9 au milieu, 106,6 au bord**, pour une
+demi-feuille de **82 à 91 µm** (`91`) — donc plus d'une demi-feuille l'un de l'autre, et **34 %**
+des points à plus d'une feuille **entière**. ⭐ Et c'est **PLAT** (+0,081 avec le rayon) : pas un
+problème de bord, un plancher. ⚠ **Aucune translation systématique** — restreint au recouvrement en
+z, le vecteur moyen tombe à 8–38 µm.
+
+⛔⛔ **ET LA CIBLE D'UN AUTOMATE NE PEUT DONC PAS ÊTRE « ÉGALER LE MAILLAGE HUMAIN », parce que
+cette cible n'a pas de valeur unique.** Le prix demande d'automatiser un travail dont l'état de
+l'art ne reproduit pas sa propre sortie à une feuille près. La cible doit être un critère que la
+**matière** tranche, pas un maillage. ⭐ Et ça donne un sens neuf aux trois échecs précédents : `94`,
+`95` et `96` mesuraient tous contre une règle dont on sait maintenant qu'elle bouge de plus d'une
+demi-feuille selon qui la tient.
+
+⛔ Ce référent ne **calibre pas** la fermeture pour autant : le désaccord ne suit ni le rayon
+(+0,081), ni la rupture (−0,097), ni la fermeture (**+0,079**).
+
+⛔⛔ **Et l'estimateur naïf était réfuté**, gardé publié : au plus proche voisin le désaccord rend
+270 à 315 µm contre 107 à 122 au plan local, parce qu'il mesure l'**espacement des rangs**
+(~800 µm) de l'autre révision — un point à mi-chemin entre deux rangs en est loin **même si les
+deux surfaces coïncident**, ce que la fixture montre en rendant une distance non nulle sur deux
+surfaces identiques. Le publier aurait été publier une limite de **grille** comme une limite de
+**matière**.
+
+⚠⚠⚠ Et une **garde à moi qui supprimait ce qu'elle devait laisser mesurer** : mon critère de bord,
+mesuré dans l'espace, ne descendait jamais sous 0,354 sur deux plans décalés, donc il aurait écarté
+exactement les points où les deux humains divergent le plus. Mesuré dans le **plan tangent**, le
+désaccord publié **double** (53 → 122 µm). *Une garde qui supprime ce qu'elle doit laisser mesurer
+est pire qu'aucune garde.*
+
 ⭐⭐⭐ **LE PREMIER SIGNAL DONT LE SIGNE EST LE BON — ET LE RÉFÉRENT QUI MANQUE POUR LE CALIBRER**
 ([`96`](docs/96_la_fermeture_dun_tour.md)). `95` a laissé que ce qui échoue au bord est l'**identité**
 de la feuille, donc que le signal doit être **topologique**. La **fermeture** en est un : partir

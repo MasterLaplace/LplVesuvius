@@ -5247,6 +5247,63 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/97_deux_humains_sur_la_meme_matiere.md
+- **lignes** : 114
+- **nature** : RESULTAT
+  (le désaccord entre les deux révisions humaines de chaque bande : le plancher du référent,
+  chiffré, plus l'estimateur qui mesurait la grille et la garde qui supprimait sa propre mesure.)
+- **résumé** : ⭐⭐⭐ [`96`](../96_la_fermeture_dun_tour.md) a nommé ce qui manquait — un
+  **référent** — et le dépôt en télécharge un depuis le début sans l'avoir employé : chaque bande
+  existe en **deux révisions**, soit deux tracés humains **indépendants** de la même matière. Leur
+  désaccord vaut **121,7 µm au cœur, 110,9 au milieu, 106,6 au bord**, pour une demi-feuille de
+  **82 à 91 µm** (`91`). Les deux humains sont donc à **plus d'une demi-feuille** l'un de l'autre,
+  **partout** (corrélation avec le rayon **+0,081**), et **34 %** des points à plus d'une feuille
+  **entière**.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **La cible d'un automate ne peut pas être « égaler le maillage humain », parce que cette
+    cible n'a pas de valeur unique.** Le prix demande d'automatiser un travail dont l'état de l'art
+    ne reproduit pas sa propre sortie à une feuille près. La cible doit être un critère que la
+    **matière** tranche, pas un maillage. ⭐ Et ça donne un sens neuf aux trois échecs précédents :
+    `94`, `95` et `96` mesuraient tous contre une règle dont on sait maintenant qu'elle bouge de
+    plus d'une demi-feuille selon qui la tient.
+  - ⛔ **Et ce référent ne calibre PAS la fermeture de `96`** : le désaccord entre les deux humains
+    ne suit ni le rayon (+0,081), ni la rupture (−0,097), ni la fermeture (**+0,079**). Là où les
+    deux humains divergent n'est donc pas là où la fermeture échoue.
+  - ⭐ **Le plancher est PLAT** — ce n'est pas une difficulté de bord, c'est partout, et c'est ce
+    qui en fait un plancher plutôt qu'une région à traiter à part.
+  - ⚠ **Aucune translation systématique** entre les deux tracés : restreint au recouvrement en z,
+    le vecteur moyen tombe à **8–38 µm**. Le désaccord est réel et local, pas un décalage de
+    convention.
+- **rétractations / corrections internes** :
+  - §4 : ⛔⛔ **l'estimateur au plus proche voisin est réfuté et gardé** — il rend **270 à 315 µm**
+    contre 107 à 122 au plan local, un facteur 2,2 à 3,0, parce qu'il mesure l'**espacement des
+    rangs** de l'autre révision (~800 µm) : un point à mi-chemin entre deux rangs en est loin
+    **même si les deux surfaces coïncident exactement**, et la fixture le montre en rendant une
+    distance non nulle sur deux surfaces identiques. ⭐ Le publier aurait été publier une limite de
+    **grille** comme une limite de **matière**.
+  - §5 : ⚠⚠⚠ **une garde à moi qui supprimait ce qu'elle devait laisser mesurer.** Mon critère de
+    bord était mesuré dans l'**espace**, où il mélange « être au bord d'une couverture » et « être
+    loin de la surface » : sur deux plans séparés de 2 avec des voisins à 2,4, le rapport ne
+    descendait **jamais sous 0,354**, donc appliqué au réel il aurait écarté **exactement** les
+    points où les deux humains divergent le plus. Mesuré dans le **plan tangent**, le désaccord
+    publié **double** (53 → 122 µm). ⭐ *Une garde qui supprime ce qu'elle doit laisser mesurer est
+    pire qu'aucune garde.*
+  - §6 : ⚠⚠ **le confondant de couverture, traité avant tout le reste** — l'ancienne révision ne
+    couvre que **65 %** de l'étendue en z de la récente, et sans restriction le vecteur moyen
+    valait **5918 µm** dominé par 5567 en z, c'est-à-dire qu'on mesurait la couverture. C'est une
+    restriction dans un **paramètre naturel** et non un seuil sur la quantité mesurée, la
+    différence étant qu'un seuil sur la mesure serait circulaire.
+  - batterie : ⚠ deux fixtures mal bâties, corrigées plutôt que contournées — un nuage fait de
+    lignes très espacées n'a presque pas d'**intérieur** au sens du critère (la médiane rendait
+    NaN), et une fixture dont le pas est du même ordre que l'écart cherché ne montre pas le facteur
+    que le fichier existe pour nommer.
+  - figure : ⚠ le garde de glyphes a attrapé sept `⛔` que la police déployée ne rend pas.
+- **preuve de lecture intégrale** :
+  - l. 71 (après 62 % du fichier) : `> **Une garde qui supprime ce qu'elle doit laisser mesurer est pire qu'aucune garde.**`
+  - l. 99 : `> pas de valeur unique.** Elle doit être un critère que la **matière** tranche, pas un maillage.`
+
+---
+
 ### docs/96_la_fermeture_dun_tour.md
 - **lignes** : 157
 - **nature** : RESULTAT
@@ -6372,7 +6429,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 6024
+- **lignes** : 6100
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)

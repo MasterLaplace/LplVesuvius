@@ -1976,6 +1976,31 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # ⭐⭐⭐ L'ecart de la spire PUBLIEE a la feuille (`77` §10). Garde parce que c'est un
     # PLANCHER sur toute erreur mesuree contre ces spires -- y compris les 47 um du champ.
     # Publier l'un sans l'autre ferait passer l'erreur du referent pour la mienne.
+    # ⭐⭐⭐ LE DESACCORD ENTRE DEUX TRACES HUMAINS (`97`), ET C'EST UN PLANCHER. Garde parce que
+    # les DEUX estimateurs doivent voyager ensemble : le plus proche voisin rend deux a trois
+    # fois plus et mesure l'espacement des rangs de l'autre revision, donc publier l'un sans
+    # l'autre laisserait croire le choix d'estimateur indifferent.
+    dhm = _source(racine, "deux_humains_sur_la_meme_matiere.json")
+    if dhm.exists():
+        d = json.loads(dhm.read_text())
+        for tiers in ("coeur", "milieu", "bord"):
+            t = d["par_tiers"].get(tiers)
+            if not t:
+                continue
+            for cle, nom in (("desaccord_median_um", "desaccord au plan au"),
+                             ("au_plus_proche_voisin_um", "desaccord au plus proche voisin au"),
+                             ("part_au_dela_dune_feuille", "part au-dela d'une feuille au")):
+                val = t[cle]
+                txt = (f"{val:.1f}" if cle.endswith("_um") else f"{val:.3f}").replace(".", ",")
+                out.append((f"{nom} {tiers}",
+                            [f"**{txt} µm**", f"**{txt}**", f"{txt} µm", txt, f"{val}"],
+                            dhm.name))
+        for cle, nom in (("desaccord_contre_rayon", "desaccord contre le rayon"),
+                         ("desaccord_contre_fermeture", "desaccord contre la fermeture")):
+            val = d["correlations"][cle]
+            txt = f"{val:+.3f}".replace(".", ",").replace("-", "\u2212")
+            out.append((nom, [f"**{txt}**", txt, f"{val:.3f}"], dhm.name))
+
     # ⭐⭐⭐ LA FERMETURE D'UN TOUR (`96`), LE PREMIER SIGNAL DONT LE SIGNE SOIT LE BON. Garde
     # parce que son verdict tient a DEUX choses qui doivent voyager ensemble : le signe positif,
     # et le plancher au coeur qui l'empeche de certifier. Publier le premier sans le second
