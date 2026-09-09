@@ -5247,6 +5247,73 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/98_combien_dinterstices_traverses.md
+- **lignes** : 151
+- **nature** : RESULTAT
+  (le premier critere dont le seuil vient de la matiere et non d'un maillage : combien
+  d'interstices separent une cellule de sa voisine, lu par filtre adapte contre un modele nul.)
+- **résumé** : ⭐⭐⭐ `97` a mesuré qu'aucun signal calibré contre un maillage humain ne peut l'être.
+  Il fallait un critère que la **matière** tranche : entre une cellule et le point situé un pas de
+  feuille plus loin, le profil doit valoir *brillant – sombre – brillant*, soit **un** interstice.
+  Mesuré sur les 28 bandes à 2,4 µm : la part confirmée vaut **0,557 au cœur, 0,536 au milieu,
+  0,518 au bord**, et **baisse** avec la rupture de continuité (**−0,411**) — signe correct.
+  ⚠⚠ Mais **faible** : au bord l'accord vaut **0,353** pour une barre de **0,3311**, et la matière
+  ne répond que **54 %** du temps.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **La réponse à « faut-il être adaptatif par rapport au rouleau ? » n'est pas d'adapter le
+    seuil, c'est de choisir une quantité qui n'en a pas besoin.** Un seuil absolu est sans espoir —
+    l'étendue du profil varie d'un facteur **146** dans une seule bande du bord, et de 2,4 au
+    milieu — et une constante par rouleau serait déjà un paramètre ajusté. Une **corrélation
+    normalisée** est invariante en amplitude **et** en décalage : rien n'est à adapter, ni au
+    rouleau, ni à la bande, ni au profil. Asséré — mettre signal et bruit à l'échelle ×0,05 puis
+    ×50 laisse le score identique au bit près.
+  - ⭐⭐⭐ **Le seuil vient d'un modèle nul FABRIQUÉ** : le p99 de ce qu'un bruit blanc atteint,
+    soit **0,3311**, calculable sans regarder le rouleau. Et le nul est **indépendant de σ**
+    (0,1482 · 0,1502 · 0,1497 pour σ = 2, 10, 40) — c'est le contrôle de l'invariance d'échelle,
+    car un nul qui dépendrait du bruit trahirait un paramètre caché.
+  - ⚠⚠ **Et le signal est faible là où il compte** : au bord l'accord frôle la barre et la matière
+    ne répond que 54 % du temps, contre 74 % au cœur. Cohérent avec `94` — au bord le maillage a
+    **enjambé** ce qu'il ne pouvait pas suivre, donc il n'y a pas toujours de matière à
+    interroger.
+  - ⭐⭐ **Un second verdict gratuit, et il fallait le distinguer d'un tirage.** La cellule part
+    **sur** une feuille une fois sur deux (0,487 · 0,474 · 0,506). ⚠⚠⚠ Ce nombre a deux lectures
+    opposées — le maillage est-il vraiment dans un interstice la moitié du temps, ou les deux
+    gabarits sont-ils à égalité ? Seule la **marge** les sépare : **0,376** au cœur, comparable à
+    l'accord (0,457), et **81 %** des profils lus l'ont franche. ⭐ L'instrument tranche donc, et
+    ce qu'il tranche est que **la moitié des cellules du maillage humain partent d'un interstice**.
+- **rétractations / corrections internes** :
+  - §7 : ⛔⛔ **le compteur de minima proéminents est réfuté et gardé**, parce que son échec se
+    généralise : à ×3 le bruit pur passe à **98,8 %**, à ×6 un interstice réel n'est vu que
+    **6 %** du temps. Lisser fait monter la détection à 0,95 **sans rien changer** aux faux
+    positifs, et la raison est structurelle — ⭐ *une proéminence exprimée en unités du bruit
+    propre au profil est invariante d'échelle, donc lisser abaisse le bruit ET le seuil ensemble.*
+    La discrimination ne peut pas venir de la **profondeur**, elle vient de la **forme**.
+  - §8 : ⚠⚠⚠ **les gabarits étaient de signe INVERSÉ.** `−cos(2π(k+1)t)` commence et finit
+    sombre, alors qu'un segment partant du centre d'une feuille doit commencer brillant. Trouvé en
+    lisant les comptes : 40 % des profils réels s'appariaient à un gabarit dont la lecture correcte
+    est « la cellule est dans un interstice », et je publiais ce compte sous le nom « zéro
+    interstice » — **deux états sous une seule étiquette**.
+  - §8 : ⚠⚠ **mon test de platitude ne pouvait pas voir le cas dégénéré** : un profil
+    **exactement constant** a une étendue nulle *et* un bruit nul, donc `0 < 4×0` est faux et il
+    ressortait « non muet » avec un compte de zéro, ce qui se lit « même feuille » au lieu de « on
+    ne sait pas ». Une mesure satisfaite par l'absence de ce qu'elle mesure.
+  - §7 : ⚠ **l'estimateur de bruit prenait une différence PREMIÈRE**, qui lit aussi la **pente**
+    du signal cherché (6,9 niveaux pour une amplitude de 40). Corrigé en différence **seconde**,
+    insensible à une pente (0,3 niveau).
+  - batterie : ⚠ deux contrôles à moi mal formulés, corrigés plutôt que contournés — j'affirmais
+    que le score ne dépend pas de l'**amplitude** à bruit fixe (faux : à SNR 3 il baisse
+    légitimement ; l'invariance porte sur l'**échelle**), et j'exigeais une marge supérieure à
+    **1,0**, un nombre pris au hasard que la fixture rendait à 0,952 — remplacé par un rapport au
+    **nul**.
+  - ⚠ « Zéro interstice » n'est pas exprimable en gabarit : un segment restant sur la même feuille
+    est plat, donc de norme nulle après centrage. C'est le cas **sans accord**, et le refus est
+    explicite.
+- **preuve de lecture intégrale** :
+  - l. 96 (après 63 % du fichier) : `Mesuré : marge médiane **0,376** au cœur, **0,392** au milieu, **0,356** au bord — comparable à`
+  - l. 118 : `> profondeur — elle vient de la **forme**.`
+
+---
+
 ### docs/97_deux_humains_sur_la_meme_matiere.md
 - **lignes** : 114
 - **nature** : RESULTAT
@@ -6429,7 +6496,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 6100
+- **lignes** : 6198
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)

@@ -1976,6 +1976,35 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # ⭐⭐⭐ L'ecart de la spire PUBLIEE a la feuille (`77` §10). Garde parce que c'est un
     # PLANCHER sur toute erreur mesuree contre ces spires -- y compris les 47 um du champ.
     # Publier l'un sans l'autre ferait passer l'erreur du referent pour la mienne.
+    # ⭐⭐⭐ LES INTERSTICES TRAVERSES (`98`), LE PREMIER CRITERE DONT LE SEUIL VIENT DE LA
+    # MATIERE. Garde parce que le verdict n'a de sens qu'avec la BARRE DU NUL a cote : « accord
+    # 0,353 » est un nombre nu, « 0,353 pour une barre de 0,331 » dit que la matiere est presque
+    # muette. Publier l'un sans l'autre serait publier un accord sans son etalon.
+    cit = _source(racine, "combien_dinterstices_traverses.json")
+    if cit.exists():
+        d = json.loads(cit.read_text())
+        txt = f"{d['barre_du_nul']:.4f}".replace(".", ",")
+        out.append(("barre du modele nul",
+                    [f"**{txt}**", txt, f"{d['barre_du_nul']}"], cit.name))
+        for tiers in ("coeur", "milieu", "bord"):
+            t = d["par_tiers"].get(tiers)
+            if not t:
+                continue
+            for cle, nom in (("part_un_interstice", "part a un interstice au"),
+                             ("accord_median", "accord median au"),
+                             ("part_lue", "part ou la matiere repond au"),
+                             ("part_partant_sur_la_feuille", "part partant sur la feuille au"),
+                             ("marge_de_polarite_mediane", "marge de polarite au")):
+                val = t[cle]
+                txt = f"{val:.3f}".replace(".", ",")
+                out.append((f"{nom} {tiers}", [f"**{txt}**", txt, f"{val}"], cit.name))
+        for cle, nom in (("un_interstice_contre_rayon", "interstices contre le rayon"),
+                         ("un_interstice_contre_continuite",
+                          "interstices contre la continuite")):
+            val = d["correlations"][cle]
+            txt = f"{val:+.3f}".replace(".", ",").replace("-", "\u2212")
+            out.append((nom, [f"**{txt}**", txt, f"{val:.3f}"], cit.name))
+
     # ⭐⭐⭐ LE DESACCORD ENTRE DEUX TRACES HUMAINS (`97`), ET C'EST UN PLANCHER. Garde parce que
     # les DEUX estimateurs doivent voyager ensemble : le plus proche voisin rend deux a trois
     # fois plus et mesure l'espacement des rangs de l'autre revision, donc publier l'un sans

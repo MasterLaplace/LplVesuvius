@@ -4553,6 +4553,104 @@ renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la bat
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
 
 ---
+##### ⭐⭐⭐ LE PREMIER CRITÈRE DONT LE SEUIL VIENT DE LA MATIÈRE — et il est faible là où il compte
+
+> Mesure : `src/nappe/combien_dinterstices_traverses.py` (32 contrôles) →
+> `docs/mesures/combien_dinterstices_traverses.json`. Figure :
+> `src/figures/figure_combien_dinterstices_traverses.py` (17 contrôles).
+> Document : [`98`](98_combien_dinterstices_traverses.md), le 2026-09-09.
+
+![combien d'interstices traversés](images/98_combien_dinterstices_traverses.png)
+
+La tranche du dessous a mesuré qu'**aucun signal calibré contre un maillage humain ne peut
+l'être**. Il fallait donc un critère que la **matière** tranche, et il s'énonce en une phrase :
+entre une cellule et le point situé un pas de feuille plus loin, le profil doit valoir
+*brillant – sombre – brillant*, soit **un** interstice. Zéro voudrait dire qu'on est revenu sur la
+même feuille, deux qu'on en a sauté une. Aucun maillage, aucun oracle, aucune supervision.
+
+| tiers | matière répond | accord | 1 interstice | 2 ou + | sur la feuille | continuité |
+|---|---:|---:|---:|---:|---:|---:|
+| cœur (9) | 0,740 | 0,457 | **0,557** | 0,443 | 0,487 | ×1,7 |
+| milieu (9) | 0,690 | 0,429 | 0,536 | 0,464 | 0,474 | ×5,9 |
+| bord (10) | **0,540** | **0,353** | **0,518** | 0,482 | 0,506 | ×31,0 |
+
+⭐⭐ **Le signe est correct** : −0,354 avec le rayon, **−0,411** avec la rupture. La part de
+transferts que la matière confirme **baisse là où la continuité casse**. C'est le second signal
+après la fermeture à avoir le bon signe, et le **premier dont le seuil soit matériel**.
+
+⚠⚠ **Et il est faible là où il compte** : au bord l'accord médian vaut **0,353** pour une barre de
+**0,3311**, et la matière ne répond que **54 %** du temps contre 74 % au cœur. Cohérent avec `94` —
+au bord le maillage humain a **enjambé** ce qu'il ne pouvait pas suivre, donc il n'y a pas toujours
+de matière à interroger.
+
+##### ⭐⭐⭐ La question de l'auteur, et pourquoi la réponse n'est pas d'adapter le seuil
+
+*« Il faut être adaptatif par rapport au rouleau testé, non ? »* — oui, et la mesure rend la
+question plus forte : dans **une seule bande du bord**, l'étendue du profil varie d'un facteur
+**146** (p10 = 0, p90 = 146 niveaux), et de **2,4** au milieu. Un seuil absolu de « sombre » est
+donc sans espoir, et une constante **par rouleau** serait déjà un paramètre ajusté.
+
+> ⭐ **Mais la bonne réponse n'est pas d'adapter le seuil : c'est de choisir une quantité qui n'en
+> a pas besoin.** Une corrélation normalisée est invariante en amplitude **et** en décalage.
+
+⚠ Asséré plutôt que supposé : mettre signal **et** bruit à l'échelle ×0,05 puis ×50 laisse le score
+**identique au bit près**. Et le seuil vient d'un **modèle nul fabriqué** — le p99 de ce qu'un
+bruit blanc atteint, **0,3311**, calculable sans regarder le rouleau — dont l'indépendance en σ
+(0,1482 · 0,1502 · 0,1497 pour σ = 2, 10, 40) est le contrôle de l'invariance d'échelle : un nul
+qui dépendrait du bruit trahirait un paramètre caché.
+
+##### ⭐⭐ Un second verdict gratuit, et il fallait le distinguer d'un tirage
+
+Le gabarit existe en deux polarités, et la cellule part **sur** une feuille **une fois sur deux**
+(0,487 · 0,474 · 0,506). ⚠⚠⚠ Ce nombre a **deux lectures opposées** : soit le maillage est
+réellement dans un interstice la moitié du temps, soit les deux gabarits sont à égalité et le choix
+est un **tirage**. Seule la **marge** les sépare — **0,376** au cœur, comparable à l'accord
+lui-même (0,457), et **81 %** des profils lus l'ont franche.
+
+> ⭐ **L'instrument tranche donc, et ce qu'il tranche est que la moitié des cellules du maillage
+> humain partent d'un interstice et non d'une feuille.**
+
+##### ⛔⛔ Le compteur de minima, réfuté et gardé — et son échec se généralise
+
+| proéminence | faux positifs (bruit pur) | détection (un interstice réel) |
+|---:|---:|---:|
+| ×3 | 0,988 | 0,265 |
+| ×4 | 0,769 | 0,285 |
+| ×6 | 0,087 | 0,060 |
+
+Lisser fait monter la détection à **0,95** sans rien changer aux faux positifs (0,6 à 1,0).
+
+> ⭐⭐⭐ **Une proéminence exprimée en unités du bruit propre au profil est invariante d'échelle,
+> donc lisser abaisse le bruit ET le seuil ensemble.** La discrimination ne peut pas venir de la
+> **profondeur** — elle vient de la **forme**.
+
+⚠ Et son estimateur de bruit était faux : une différence **première** lit aussi la **pente** du
+signal cherché (6,9 niveaux pour une amplitude de 40). Corrigé en différence **seconde**,
+insensible à une pente (0,3 niveau).
+
+##### ⚠⚠⚠ Trois défauts payés, tous gardés
+
+**Les gabarits étaient de signe INVERSÉ** — `−cos(2π(k+1)t)` commence et finit sombre, alors qu'un
+segment partant du centre d'une feuille doit commencer brillant. Trouvé **en lisant les comptes** :
+40 % des profils réels s'appariaient à un gabarit dont la lecture correcte est « la cellule est
+dans un interstice », et je publiais ce compte sous le nom « zéro interstice ». **Deux états sous
+une seule étiquette.**
+
+**Mon test de platitude ne pouvait pas voir le cas dégénéré** : un profil **exactement constant** a
+une étendue nulle *et* un bruit nul, donc `0 < 4×0` est faux, et il ressortait « non muet » avec un
+compte de zéro — ce qui se lit « même feuille » au lieu de « on ne sait pas ». Une mesure satisfaite
+par l'absence de ce qu'elle mesure.
+
+**Et deux contrôles à moi mal formulés**, corrigés plutôt que contournés : j'affirmais que le score
+ne dépend pas de l'**amplitude** à bruit fixe — faux, à SNR 3 il baisse légitimement, l'invariance
+portant sur l'**échelle** ; et j'exigeais une marge de polarité supérieure à **1,0**, un nombre pris
+au hasard que la fixture rendait à 0,952, remplacé par un rapport au **nul**.
+
+⚠ « Zéro interstice » n'est **pas** exprimable en gabarit : un segment restant sur la même feuille
+est plat, donc de norme nulle après centrage. C'est le cas **sans accord**, et le refus est
+explicite plutôt que silencieux.
+
+---
 ##### ⭐⭐⭐ DEUX HUMAINS SUR LA MÊME MATIÈRE DIVERGENT DE PLUS D'UNE DEMI-FEUILLE, PARTOUT
 
 > Mesure : `src/nappe/deux_humains_sur_la_meme_matiere.py` (18 contrôles) →

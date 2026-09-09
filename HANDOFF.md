@@ -144,6 +144,45 @@ un seul.**
 riche du concours ne contient pas une marche entière. Mais c'est la première fois que la portée de
 ce dépôt peut se comparer à du **travail humain publié** plutôt qu'à une borne censurée.
 
+⭐⭐⭐ **LE PREMIER CRITÈRE DONT LE SEUIL VIENT DE LA MATIÈRE, ET IL EST FAIBLE LÀ OÙ IL COMPTE**
+([`98`](docs/98_combien_dinterstices_traverses.md)). `97` a mesuré qu'aucun signal calibré contre un
+maillage humain ne peut l'être, donc il fallait un critère que la **matière** tranche : entre une
+cellule et le point situé un pas de feuille plus loin, le profil doit valoir *brillant – sombre –
+brillant*, soit **un** interstice. Mesuré sur les 28 bandes à 2,4 µm : la part confirmée vaut
+**0,557 au cœur, 0,536 au milieu, 0,518 au bord**, et **baisse** avec la rupture de continuité
+(**−0,411**) — signe correct, et **premier seuil matériel** de la campagne.
+
+⚠⚠ **Et faible là où ça compte** : au bord l'accord médian vaut **0,353** pour une barre de
+**0,3311**, et la matière ne répond que **54 %** du temps contre 74 % au cœur. Cohérent avec `94` :
+au bord le maillage a **enjambé** ce qu'il ne pouvait pas suivre, donc il n'y a pas toujours de
+matière à interroger.
+
+⭐⭐⭐ **LA QUESTION DE L'AUTEUR — « faut-il être adaptatif par rapport au rouleau ? » — ET SA
+RÉPONSE.** Oui, et la mesure la rend plus forte : dans **une seule bande du bord** l'étendue du
+profil varie d'un facteur **146**, et de 2,4 au milieu, donc une constante par rouleau serait déjà
+un paramètre ajusté. Mais la bonne réponse n'est pas d'adapter le seuil, c'est de **choisir une
+quantité qui n'en a pas besoin** : une **corrélation normalisée** est invariante en amplitude ET en
+décalage. Asséré — mettre signal et bruit à l'échelle ×0,05 puis ×50 laisse le score identique au
+bit près. Et le seuil vient d'un **modèle nul fabriqué** (p99 du bruit blanc, **0,3311**),
+indépendant de σ, ce qui est le contrôle qu'aucun paramètre ne se cache dedans.
+
+⭐⭐ **Un second verdict gratuit** : la cellule part **sur** une feuille une fois sur deux. ⚠⚠⚠ Deux
+lectures opposées se cachaient derrière ce 0,49 — un vrai désaccord ou un **tirage** entre gabarits
+à égalité — et seule la **marge** les sépare : 0,376, comparable à l'accord (0,457), avec **81 %**
+de polarités franches. Donc l'instrument tranche, et **la moitié des cellules du maillage humain
+partent d'un interstice**.
+
+⛔⛔ **Le compteur de minima est réfuté**, et son échec se généralise : à ×3 le bruit pur passe à
+98,8 %, à ×6 un interstice réel n'est vu que 6 %. Lisser fait monter la détection à 0,95 sans rien
+changer aux faux positifs, parce qu'**une proéminence en unités du bruit propre au profil est
+invariante d'échelle — lisser abaisse le bruit ET le seuil ensemble**. La discrimination vient de la
+**forme**, pas de la profondeur.
+
+⚠⚠⚠ Trois défauts payés, gardés : les gabarits étaient de **signe inversé** (40 % des profils réels
+appariés à un gabarit signifiant « la cellule est dans un interstice », publiés sous le nom « zéro
+interstice ») ; le test de platitude ne voyait pas le cas **exactement constant** (`0 < 0` faux) ;
+et l'estimateur de bruit prenait une différence **première**, qui lit la pente du signal cherché.
+
 ⭐⭐⭐ **DEUX HUMAINS SUR LA MÊME MATIÈRE DIVERGENT DE PLUS D'UNE DEMI-FEUILLE, PARTOUT — LE
 PLANCHER EST CHIFFRÉ** ([`97`](docs/97_deux_humains_sur_la_meme_matiere.md)). `96` a nommé ce qui
 manquait, un **référent**, et le dépôt en télécharge un depuis le début sans l'avoir employé :
