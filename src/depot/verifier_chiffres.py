@@ -2061,6 +2061,80 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         out.append(("part utilisable contre la continuite",
                     [f"**{txt}**", txt, f"{val:.3f}"], pmm.name))
 
+    # ⭐⭐⭐ LA DIRECTION QUE LA MATIERE MONTRE (`101`), ET L'APPARIEMENT EST OBLIGATOIRE ICI
+    # AUSSI. L'angle de la matiere au MAILLAGE ne voyage jamais sans celui au RAYON : « la matiere
+    # est a 13° du maillage » est un nombre nu, « 13° du maillage contre 35° du rayon » EST le
+    # verdict — c'est leur ECART qui distingue les deux lectures que `100` laissait ouvertes.
+    # Et les deux residus du modele d'axe voyagent ensemble pour la meme raison : un residu seul
+    # ne dit pas s'il est bon ou mauvais, c'est sa comparaison a l'autre modele qui tranche.
+    dir_ = _source(racine, "la_direction_que_la_matiere_montre.json")
+    if dir_.exists():
+        d = json.loads(dir_.read_text())
+        s101 = d.get("resume", {})
+        for cle, nom in (("angle_matiere_maillage_median_deg",
+                          "angle de la matiere au maillage"),
+                         ("angle_matiere_rayon_median_deg",
+                          "angle de la matiere au rayon"),
+                         ("ecart_entre_les_deux_lectures_deg",
+                          "ecart entre les deux lectures de l'obliquite"),
+                         ("part_orientee_mediane", "part de cellules orientees"),
+                         ("planarite_mediane", "planarite mediane de la matiere")):
+            if cle not in s101:
+                continue
+            val = s101[cle]
+            txt = f"{val}".replace(".", ",")
+            formes = [f"**{txt}**", txt, f"{val}"]
+            if cle.endswith("_deg") and isinstance(val, float):
+                court = f"{val:.1f}".replace(".", ",")
+                formes = [f"**{court}**", court, f"{val:.1f}"] + formes
+            out.append((nom, formes, dir_.name))
+        for cle, nom in (("part_orientee_contre_continuite",
+                          "part orientee contre la continuite"),
+                         ("part_orientee_contre_continuite_a_rayon_tenu",
+                          "part orientee contre la continuite a rayon tenu"),
+                         ("ecart_a_la_matiere_contre_continuite",
+                          "ecart a la matiere contre la continuite"),
+                         ("part_orientee_contre_rayon", "part orientee contre le rayon"),
+                         ("continuite_contre_rayon", "continuite contre le rayon")):
+            if cle not in s101:
+                continue
+            val = s101[cle]
+            signe = f"{val:+.3f}".replace(".", ",").replace("-", "\u2212")
+            out.append((nom, [f"**{signe}**", signe, f"{val:+.3f}",
+                              f"{val}".replace(".", ","), f"{val}"], dir_.name))
+        ax = d.get("un_axe_decale_est_il_lexplication", {})
+        for cle, nom in (("residu_du_modele_daxe_deg", "residu du modele d'axe decale"),
+                         ("residu_du_modele_constant_deg",
+                          "residu du modele d'obliquite constante"),
+                         ("decalage_qui_explique_le_coeur_mm",
+                          "decalage qui explique le coeur"),
+                         ("angle_predit_au_bord_par_ce_decalage_deg",
+                          "angle predit au bord par ce decalage"),
+                         ("decalage_qui_explique_le_bord_mm",
+                          "decalage qui explique le bord"),
+                         ("angle_predit_au_coeur_par_ce_decalage_deg",
+                          "angle predit au coeur par ce decalage")):
+            if cle not in ax:
+                continue
+            val = ax[cle]
+            txt = f"{val}".replace(".", ",")
+            out.append((nom, [f"**{txt}**", txt, f"{val}"], dir_.name))
+        n101 = d.get("nul_du_tenseur", {})
+        for cle, nom in (("accord_des_moities_median_deg",
+                          "desaccord des moities sur du bruit pur"),
+                         ("accord_des_moities_p1_deg", "barre d'accord des moities"),
+                         ("planarite_mediane", "planarite du bruit pur")):
+            if cle not in n101:
+                continue
+            val = n101[cle]
+            txt = f"{val}".replace(".", ",")
+            out.append((nom, [f"**{txt}**", txt, f"{val}"], dir_.name))
+        if "defaut_de_similitude_deg" in d:
+            val = d["defaut_de_similitude_deg"]
+            txt = f"{val}".replace(".", ",")
+            out.append(("defaut de similitude de la transformation",
+                        [f"**{txt}**", txt, f"{val}"], dir_.name))
+
     # ⭐⭐⭐ L'OBLIQUITE DE LA NAPPE (`100`), ET DEUX APPARIEMENTS SONT OBLIGATOIRES ICI.
     # (1) L'angle MESURE ne voyage jamais sans l'angle PREDIT : « la normale est a 31° du rayon »
     # est un nombre nu, « 31° la ou une spirale en predit 0,25 » EST le resultat. Publier le

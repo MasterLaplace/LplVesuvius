@@ -5247,6 +5247,77 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/101_la_direction_que_la_matiere_montre.md
+- **lignes** : 187
+- **nature** : RESULTAT
+  (la question que `100` laissait ouverte est tranchée par la matière : l'obliquité est réelle, et
+  la direction s'ajoute au pas de `99` pour donner à un automate ses deux nombres.)
+- **résumé** : ⭐⭐⭐ **La matière suit le maillage, pas le rayon.** Le tenseur de structure du
+  volume fin — sans aucun maillage — rend une normale à **13,32°** de celle du maillage humain et à
+  **34,59°** du rayon, sur 28 bandes. Ce **34,59°** recoupe **indépendamment** le **34,06°** que
+  `100` lisait sur le maillage seul : deux instruments qui ne partagent ni les données ni le
+  principe. ⭐⭐ Avec le pas de `99` et la direction d'ici, un automate a les deux nombres qu'il
+  faut pour franchir une feuille sans humain, et la matière les donne sur **64 %** des cellules,
+  **plus souvent au bord** que `99` n'y trouvait de périodicité.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **L'obliquité est une propriété de la MATIÈRE**, pas un artefact du maillage : deux
+    instruments indépendants (normales de maillage et ACP dans `100`, tenseur de structure sur les
+    voxels bruts ici) donnent **34,06°** et **34,59°**.
+  - ⚠⚠ **Le maillage est sur la matière en ORIENTATION (13,32°) et faux en IDENTITÉ** (`97` :
+    plus d'une demi-feuille). **Deux pannes différentes**, et une seule est fatale : savoir sur
+    *quelle* feuille on est.
+  - ⭐⭐⭐ **Un axe décalé est réfuté par sa SIGNATURE en 1/r** : le décalage qui explique le cœur
+    (**2,87 mm**) prédit **6,9°** au bord où l'on mesure **24,0°** ; celui qui explique le bord
+    (**10,61 mm**) prédit **69,0°** au cœur où l'on mesure **35,2°**. Résidus à nombre égal de
+    paramètres : **12,2°** pour l'axe contre **8,7°** pour une obliquité constante. ⭐ Et le
+    verdict sait dire **oui** — sur un jeu fabriqué à `d = 5 mm` il retrouve **5,0 mm**.
+  - ⛔⛔ **La planarité est réfutée comme juge de direction** : un bruit isotrope écrase le
+    **rapport** des valeurs propres sans déplacer la **direction**, donc à σ = 15 elle retombe à
+    **0,345** (le niveau du bruit pur) là où la direction est encore juste à **7,51°**. Fermer sur
+    elle aurait été une garde qui supprime ce qu'elle doit laisser passer — le péché de `97`.
+    ⭐ La garde qui la remplace est **sans modèle nul** : l'accord des deux moitiés disjointes du
+    cube, qui se calibre elle-même.
+  - ⚠⚠⚠ **`np.gradient` injecte une anisotropie au BORD du cube** — différences unilatérales, de
+    variance **×4** — donc couper en deux crée un nouveau bord en z et biaise les **deux** moitiés
+    vers z : sur du **bruit pur** elles s'accordaient à **10,4°** au lieu des **~60°** du hasard.
+    Plans de bord jetés, le nul remonte à **62,03°**. *Un estimateur qui mesure la grille*, sous un
+    nouveau costume.
+  - ⚠ **La taille du cube est DÉRIVÉE** : à demi = 10 l'empilement bruité ne passe pas la garde
+    (40,1° contre 15,5), à demi = 20 il passe (**3,46°** contre 10,06). Le contraste entre les deux
+    tailles est asserté, donc la valeur n'est pas un réglage.
+  - ⚠⚠ **Un angle ne se transporte d'un volume à l'autre que si la transformation conserve les
+    angles**, et c'est mesuré : conditionnement **1,0075**, défaut **0,301°**. Et une **direction**
+    ne se transporte pas comme un point — la translation ne s'y applique pas, sans quoi le vecteur
+    reçoit le décalage de 5000 voxels de la matrice.
+  - ⭐⭐ **La direction survit là où le pas ne survit pas** : part orientée **+0,452** contre la
+    rupture **à rayon tenu constant** (+0,581 brut, avec un rayon qui corrèle +0,421 à la part et
+    +0,815 à la rupture). Instrument de `95`, importé.
+- **rétractations / corrections internes** :
+  - §4.1 : ⛔ **la première conception fermait sur la PLANARITÉ et aurait été fausse.** C'est le
+    balayage de bruit qui l'a corrigée, pas une relecture : le gradient du signal par voxel vaut
+    **3,49** contre **21,2** pour le bruit à σ = 15, soit un facteur **six**, et la direction
+    survit quand même.
+  - §4.2 : ⚠⚠⚠ **la garde elle-même mentait avant correction** — 10,4° de désaccord sur du bruit
+    pur au lieu de 60. Elle aurait paru stricte tout en laissant passer du bruit.
+  - §6 : ⛔ **un faux zéro attrapé pendant la réagrégation** : les corrélations sortaient à
+    **+0,000** parce que la continuité n'était pas jointe, et « +0,000 » se lit *rien ne corrèle*
+    au lieu de *la donnée est absente*. Une corrélation sans donnée est désormais **déclarée
+    absente**, pas rendue nulle — le même zéro que le dépôt a déjà payé sous la forme d'un
+    compteur que personne ne remplissait.
+  - §6 : ⛔ **l'écart maillage/matière n'est PAS un signal de confiance** — +0,078 brut, −0,366 à
+    rayon tenu sur 28 bandes. Faible et de signe instable ; s'en servir serait lire du bruit.
+  - §7 : ⚠ le tenseur lit une orientation **locale** (98,4 µm). Il ne dit pas *quelle* feuille,
+    seulement *comment elle est posée* — donc il ne remplace pas à lui seul l'humain qui corrige
+    l'**identité**, qui est la panne de `97`.
+  - outillage : ⚠ `agreger` supposait un champ présent et levait un `KeyError` au milieu d'un
+    recalcul. Rendu tolérant : une ligne qui n'a pas pu mesurer sa planarité est légitime, et une
+    image écrite avant qu'un champ n'existe doit rester réagrégeable.
+- **preuve de lecture intégrale** :
+  - l. 112 (après 60 % du fichier) : `> ⚠ **Mesure du défaut** : sur du **bruit pur**, deux moitiés d'un même cube coupées selon z`
+  - l. 150 : `La part orientée monte vers le bord **et** la rupture monte vers le bord, donc « la matière répond`
+
+---
+
 ### docs/100_la_normale_nest_pas_le_rayon.md
 - **lignes** : 176
 - **nature** : RESULTAT
@@ -6614,7 +6685,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 6269
+- **lignes** : 6521
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)

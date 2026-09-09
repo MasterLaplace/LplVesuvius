@@ -4553,6 +4553,130 @@ renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la bat
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
 
 ---
+##### ⭐⭐⭐ LA DIRECTION QUE LA MATIÈRE MONTRE — l'obliquité est RÉELLE, et le graal gagne son second nombre
+
+> Mesure : `src/nappe/la_direction_que_la_matiere_montre.py` (42 contrôles) →
+> `docs/mesures/la_direction_que_la_matiere_montre.json`. Figure :
+> `src/figures/figure_la_direction_que_la_matiere_montre.py` (19 contrôles).
+> Document : [`101`](101_la_direction_que_la_matiere_montre.md), le 2026-09-09.
+
+![la direction que la matière montre](images/101_la_direction_que_la_matiere_montre.png)
+
+`100` laissait **deux lectures** indistinguables dans le maillage : soit la matière est réellement
+oblique au rayon et le maillage la suit, soit c'est le **maillage** qui est oblique à la matière —
+c'est-à-dire que la surface tracée par les humains ne repose pas sur une feuille. Seule la matière
+pouvait trancher, et le **tenseur de structure** du volume fin le fait sans aucun maillage.
+
+| | mesuré |
+|---|---:|
+| angle de la matière au **maillage** | **13,32°** |
+| angle de la matière au **rayon** | **34,59°** |
+| ce que `100` lisait sur le maillage seul | **34,06°** |
+| part de cellules orientées | **0,636** |
+| planarité médiane (contre 0,3365 au bruit pur) | **0,685** |
+
+> ⭐⭐⭐ **La matière suit le maillage.** L'obliquité est donc une propriété de la **matière**, et
+> le recoupement est le fait qui porte : **34,59°** contre **34,06°**, par deux instruments qui ne
+> partagent ni les données ni le principe.
+
+⚠⚠ **Et la nuance sur le référent humain compte** : le maillage est sur la matière en
+**orientation**, à treize degrés — alors que `97` a mesuré qu'il se trompe de plus d'une
+demi-feuille en **identité**. Deux pannes différentes, une seule fatale.
+
+##### ⭐⭐⭐ Un axe décalé est réfuté par sa signature en 1/r
+
+`90` a mesuré que l'axe **dérive de 12,6 mm**, donc l'hypothèse n'était pas farfelue — mais elle
+prédit `arctan(d/r)`, et cette forme-là est falsifiable.
+
+| | valeur |
+|---|---:|
+| décalage qui explique le **cœur** (4,1 mm, 35,2° mesurés) | **2,87 mm** |
+| ... prédit au bord | **6,9°** pour **24,0°** mesurés |
+| décalage qui explique le **bord** (23,8 mm, 24,0° mesurés) | **10,61 mm** |
+| ... prédit au cœur | **69,0°** pour **35,2°** mesurés |
+| résidu du modèle d'axe (1 paramètre) | **12,2°** |
+| résidu du modèle constant (1 paramètre) | **8,7°** |
+
+⭐ **Et le verdict sait dire oui**, ce qui est la condition pour que son « non » veuille dire
+quelque chose : sur un jeu fabriqué à `d = 5 mm` il retrouve **5,0 mm** et conclut que l'axe
+explique ; sur des angles constants, il conclut que non.
+
+##### ⛔⛔ La planarité est réfutée comme juge, et la garde qui la remplace n'a pas de modèle nul
+
+| σ | gradient du bruit / voxel | angle lu | planarité |
+|---:|---:|---:|---:|
+| 0 | 0,0 | 0,02° | 1,000 |
+| 8 | 11,3 | 1,74° | 0,370 |
+| 15 | 21,2 | **7,51°** | **0,345** |
+
+Le gradient du **signal** par voxel vaut **3,49**, celui du **bruit** **21,2** à σ = 15 : le bruit
+domine d'un facteur **six**, et la direction reste juste — parce qu'un bruit isotrope s'annule dans
+la **moyenne** des produits extérieurs sans s'annuler dans leur **rapport**.
+
+> ⛔ Fermer sur la planarité aurait donc été **une garde qui supprime ce qu'elle doit laisser
+> passer** — le péché de `97`. Elle est publiée, mais comme mesure de contraste.
+
+⭐ La garde retenue est l'**accord des deux moitiés disjointes** du cube : si la direction est
+réelle les deux s'accordent, sinon non. Elle se calibre elle-même.
+
+##### ⚠⚠⚠ Et la garde elle-même MENTAIT avant correction
+
+`np.gradient` prend des différences **unilatérales** sur les plans extrêmes de chaque axe, de
+variance **quatre fois** celle d'une différence centrée. Couper le cube en deux crée donc un
+nouveau bord en z et biaise les **deux** moitiés vers z.
+
+> ⚠ **Sur du bruit pur, elles s'accordaient à 10,4°** au lieu des **~60°** que deux directions au
+> hasard donnent en trois dimensions. La garde paraissait stricte tout en laissant passer du bruit,
+> et la direction de la matière aurait été tirée vers z.
+
+Plans de bord jetés, le nul remonte à **62,03°** et la barre devient **8,88°** (p1 du bruit pur).
+⚠ La taille du cube est **dérivée** : à demi = 10 l'empilement bruité ne passe pas (40,1° contre
+15,5), à demi = 20 il passe (**3,46°** contre 10,06).
+
+##### ⚠⚠ La condition qui rend la confrontation possible, mesurée
+
+L'angle du maillage vit à **45,532 µm**, la direction de la matière à **2,4 µm**. Une
+transformation qui cisaillerait ne conserverait pas les angles, et l'écart serait **silencieux**.
+Mesure : conditionnement **1,0075**, défaut **0,301°**.
+
+⚠ Et une **direction** ne se transporte pas comme un point — la translation ne s'y applique pas.
+`appliquer_direction` vit à côté d'`appliquer`, dans le seul endroit qui connaît l'inversion
+d'axes : passer une direction à `appliquer` ajouterait le décalage de 5000 voxels de la matrice et
+rendrait un vecteur pointant vers un coin du volume, parfaitement fini et parfaitement faux.
+
+##### ⭐⭐ Un signal pour le graal, et son confondant retiré
+
+| | brut | à rayon tenu |
+|---|---:|---:|
+| part orientée contre la rupture | **+0,581** | **+0,452** |
+| écart maillage/matière contre la rupture | +0,078 | −0,366 |
+| part orientée contre le rayon | **+0,421** | |
+| rupture contre le rayon | **+0,815** | |
+
+> ⭐⭐ **La direction survit là où le pas ne survit pas** : la matière donne une direction sur
+> **64 %** des cellules, **plus souvent au bord**, là où `99` perdait la périodicité (0,54
+> d'utilisable). Avec le **pas** de `99` et la **direction** d'ici, un automate a les deux nombres
+> qu'il faut pour franchir une feuille sans humain.
+
+⛔ **Et ce qui n'est pas un signal est dit** : l'écart du maillage à la matière ne prédit **pas** la
+rupture (+0,078 brut, −0,366 à rayon tenu sur 28 bandes). Faible et de signe instable.
+
+⛔ **Un faux zéro attrapé pendant la réagrégation** : les corrélations sortaient à **+0,000** parce
+que la continuité n'était pas jointe, et « +0,000 » se lit *rien ne corrèle* au lieu de *la donnée
+est absente*. Une corrélation sans donnée est désormais **déclarée absente**. C'est le même zéro
+que le dépôt a déjà payé sous la forme d'un compteur que personne ne remplissait.
+
+##### ⚠⚠ Ce que la tranche ne dit pas
+
+- **Pourquoi la surface est oblique n'est pas tranché** — écrasement, cône réel, ou propriété du
+  traçage. Le fait est confirmé par deux instruments indépendants ; sa cause non.
+- **L'écart de pas de `99` reste inexpliqué** : l'obliquité est réelle sans l'expliquer, puisque le
+  pas ne dépend pas de la direction.
+- ⚠ Le tenseur lit une orientation **locale** (98,4 µm) : il dit *comment la feuille est posée*, pas
+  *quelle* feuille. Il ne remplace donc pas à lui seul l'humain qui corrige l'**identité**, qui est
+  la panne mesurée par `97`.
+
+---
 ##### ⛔⛔⛔ LA NORMALE N'EST PAS LE RAYON — l'item A bis, et l'explication tombe
 
 > Mesure : `src/nappe/la_normale_nest_pas_le_rayon.py` (30 contrôles) →

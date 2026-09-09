@@ -86,6 +86,44 @@ def appliquer(m: np.ndarray, xyz: np.ndarray) -> np.ndarray:
     return q[:, ::-1].reshape(*forme, 3)
 
 
+def appliquer_direction(m: np.ndarray, xyz: np.ndarray) -> np.ndarray:
+    """Envoie une DIRECTION (x, y, z) du volume source vers une direction (z, y, x) de la cible.
+
+    ⚠⚠⚠ UNE DIRECTION N'EST PAS UN POINT, ET LA DIFFERENCE N'EST PAS ANODINE : la translation
+    ne s'y applique pas. Passer une direction a `appliquer` ajouterait le decalage de 5000 voxels
+    de la matrice, ce qui rendrait un vecteur pointant vers un coin du volume — parfaitement
+    fini, parfaitement faux, et sans rien pour le signaler.
+
+    ⭐⭐ ELLE VIT ICI POUR LA MEME RAISON QUE `appliquer` : l'inversion d'axes est faite en UN
+    endroit. Un site d'appel qui la referait finirait par l'oublier, et l'oubli ne leve rien.
+
+    Le resultat est renormalise : ce qu'on transporte est une direction, pas une longueur.
+    """
+    p = np.asarray(xyz, dtype=np.float64)
+    forme = p.shape[:-1]
+    q = p.reshape(-1, 3) @ m[:, :3].T
+    q = q[:, ::-1]
+    n = np.linalg.norm(q, axis=-1, keepdims=True)
+    return (q / np.maximum(n, 1e-12)).reshape(*forme, 3)
+
+
+def defaut_de_similitude(m: np.ndarray) -> float:
+    """De combien la partie lineaire s'ecarte d'une rotation a l'echelle pres, en degres.
+
+    ⭐⭐⭐ C'EST LA CONDITION QUI REND UN ANGLE COMPARABLE D'UN VOLUME A L'AUTRE, et sans elle
+    toute confrontation entre un angle mesure dans le maillage et une direction mesuree dans le
+    volume fin serait vide de sens. Une transformation qui cisaille ne conserve PAS les angles :
+    « 34° dans le maillage » ne voudrait alors rien dire dans le volume fin, et l'ecart serait
+    silencieux parce que les deux nombres resteraient plausibles.
+
+    Mesure sur la transformation publiee de `PHercParis4` : conditionnement **1,0075**, ecart
+    maximal de `R R^T` a l'identite **0,0053**, soit **0,30°**. Negligeable devant les dizaines
+    de degres que `100` mesure, mais il fallait le montrer plutot que l'esperer.
+    """
+    r = m[:, :3] / echelle(m)
+    return float(np.degrees(np.arcsin(min(1.0, np.max(np.abs(r @ r.T - np.eye(3)))))))
+
+
 def echelle(m: np.ndarray) -> float:
     """Le facteur d'echelle de la matrice, mediane des normes de ses lignes.
 
@@ -134,6 +172,11 @@ def verifier() -> int:
       f"{echelle(mm):.3f} pour {attendu:.3f} attendu")
     v("... dans le sens FIN, pas son inverse", echelle(mm) > 1.0, f"{echelle(mm):.3f}")
     inverse = matrice("PHercParis4", "20260411134726", "20260310170716")
+    # ⭐⭐⭐ LA CONDITION QUI REND LES ANGLES DE `100` TRANSPORTABLES D'UN VOLUME A L'AUTRE.
+    # Sans elle, confronter un angle mesure dans le maillage a une direction mesuree dans le
+    # volume fin comparerait deux quantites qui ne sont pas la meme.
+    v("la transformation publiée conserve les angles",
+      defaut_de_similitude(mm) < 1.0, f"{defaut_de_similitude(mm):.2f}° d'écart")
     v("le sens inverse est publié aussi", inverse is not None)
     if inverse is not None:
         v("... et son échelle est bien l'inverse",
@@ -147,6 +190,41 @@ def verifier() -> int:
         v("... et l'aller-retour revient au point de départ",
           float(np.max(np.abs(retour - p))) < 1.0,
           f"{float(np.max(np.abs(retour - p))):.3f} voxel d'écart")
+    # --- LES DIRECTIONS, ET LA CONDITION QUI LES REND COMPARABLES -------------------------
+    # ⚠⚠⚠ Une direction passee a `appliquer` recevrait la TRANSLATION : le controle est que les
+    # deux fonctions ne rendent PAS la meme chose sur la meme entree, sinon l'une des deux est
+    # inutile et le site d'appel a une chance sur deux de prendre la mauvaise.
+    d_point = appliquer(m, np.array([[1.0, 0.0, 0.0]]))
+    d_dir = appliquer_direction(m, np.array([[1.0, 0.0, 0.0]]))
+    v("une direction ne reçoit PAS la translation",
+      float(np.max(np.abs(d_point - d_dir))) > 1.0,
+      f"point {np.round(d_point[0], 1)} contre direction {np.round(d_dir[0], 3)}")
+    v("... et elle sort unitaire",
+      abs(float(np.linalg.norm(d_dir[0])) - 1.0) < 1e-9)
+    # ⚠ Sur la matrice fabriquee (diagonale 2, 3, 4), x -> z apres inversion d'axes.
+    v("... et elle sort en (z, y, x) comme un point",
+      abs(d_dir[0][2] - 1.0) < 1e-9 and abs(d_dir[0][0]) < 1e-9, str(np.round(d_dir[0], 6)))
+    # ⭐⭐⭐ UNE SIMILITUDE CONSERVE LES ANGLES, UNE ECHELLE PAR AXE NON : le defaut est mesure,
+    # pas suppose.
+    # ⚠⚠ Et mon premier controle avait tort, pas le code : j'avais appele « similitude pure » la
+    # matrice diag(2, 3, 4) de la fixture ci-dessus, qui change l'echelle PAR AXE et ne conserve
+    # donc pas les angles — elle sort a 51°, correctement. Une vraie similitude est une rotation
+    # fois un scalaire, et c'est celle-la qu'il faut opposer.
+    theta = 0.7
+    rot = np.array([[np.cos(theta), -np.sin(theta), 0.0],
+                    [np.sin(theta), np.cos(theta), 0.0],
+                    [0.0, 0.0, 1.0]])
+    sim = np.hstack([3.0 * rot, np.array([[7.0], [8.0], [9.0]])])
+    v("une similitude (rotation × scalaire) a un défaut nul",
+      defaut_de_similitude(sim) < 1e-6, f"{defaut_de_similitude(sim):.8f}°")
+    # ⚠ Une echelle DIFFERENTE PAR AXE n'est pas une similitude, et c'est exactement le piege
+    # qu'un voxel anisotrope tendrait : les angles y changent sans que rien ne le dise.
+    v("... alors qu'une échelle par axe est signalée", defaut_de_similitude(m) > 5.0,
+      f"diag(2, 3, 4) → {defaut_de_similitude(m):.2f}°")
+    cisaille = sim.copy()
+    cisaille[0, 1] += 1.5
+    v("... et un cisaillement aussi", defaut_de_similitude(cisaille) > 5.0,
+      f"{defaut_de_similitude(cisaille):.2f}°")
     v("un objet inconnu rend None", matrice("PasUnObjet", "a", "b") is None)
     v("... et un couple de volumes inconnu aussi",
       matrice("PHercParis4", "20260310170716", "pas_un_volume") is None)
