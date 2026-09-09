@@ -1552,6 +1552,7 @@ run "froissement = rugosite" uv run --project "$ROOT" python "$ROOT/src/nappe/le
 run "voxel distant"          uv run --project "$ROOT" python "$ROOT/src/commun/voxel_distant.py" --verifier
 run "transfos de volume"     uv run --project "$ROOT" python "$ROOT/src/commun/transformations_de_volume.py" --verifier
 run "surface/feuille/rayon"  uv run --project "$ROOT" python "$ROOT/src/nappe/la_surface_et_la_feuille_par_rayon.py" --verifier
+run "fermeture d un tour"    uv run --project "$ROOT" python "$ROOT/src/nappe/la_fermeture_dun_tour.py" --verifier
 run "suivre nappe"           uv run --project "$ROOT" python "$ROOT/src/commun/suivre_nappe.py" --verifier
 run "assembler mosaique"     uv run --project "$ROOT" python "$ROOT/src/volume/assembler_mosaique.py" --verifier
 run "derouler en raccrochant"  uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_en_raccrochant.py" --verifier
@@ -1600,6 +1601,7 @@ run "fig : continuite"       uv run --project "$ROOT" python "$ROOT/src/figures/
 run "fig : paralleles ?"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_ou_les_spires_sont_elles_paralleles.py" --verifier
 run "fig : rugosite"         uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_froissement_mesure_la_rugosite.py" --verifier
 run "fig : surface/feuille"  uv run --project "$ROOT" python "$ROOT/src/figures/figure_la_surface_et_la_feuille_par_rayon.py" --verifier
+run "fig : fermeture"        uv run --project "$ROOT" python "$ROOT/src/figures/figure_la_fermeture_dun_tour.py" --verifier
 run "fig : mur du corpus"    uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_mur_du_corpus.py" --verifier
 run "fig : ou poser la boite" uv run --project "$ROOT" python "$ROOT/src/figures/figure_ou_poser_la_boite.py" --verifier
 run "fig : en raccrochant"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_en_raccrochant.py" --verifier

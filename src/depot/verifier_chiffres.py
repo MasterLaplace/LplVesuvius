@@ -1976,6 +1976,44 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # ⭐⭐⭐ L'ecart de la spire PUBLIEE a la feuille (`77` §10). Garde parce que c'est un
     # PLANCHER sur toute erreur mesuree contre ces spires -- y compris les 47 um du champ.
     # Publier l'un sans l'autre ferait passer l'erreur du referent pour la mienne.
+    # ⭐⭐⭐ LA FERMETURE D'UN TOUR (`96`), LE PREMIER SIGNAL DONT LE SIGNE SOIT LE BON. Garde
+    # parce que son verdict tient a DEUX choses qui doivent voyager ensemble : le signe positif,
+    # et le plancher au coeur qui l'empeche de certifier. Publier le premier sans le second
+    # ferait passer un signal non calibrable pour une confiance par cellule.
+    fdt = _source(racine, "la_fermeture_dun_tour.json")
+    if fdt.exists():
+        d = json.loads(fdt.read_text())
+        for tiers in ("coeur", "milieu", "bord"):
+            t = d["par_tiers"].get(tiers)
+            if not t:
+                continue
+            for cle, nom in (("part_hors_demi_feuille", "part hors demi-feuille au"),
+                             ("fermeture_en_feuilles", "fermeture en feuilles au")):
+                txt = f"{t[cle]:.3f}".replace(".", ",")
+                out.append((f"{nom} {tiers}",
+                            [f"**{txt}**", txt, f"{t[cle]}"], fdt.name))
+        for cle, nom in (("hors_demi_feuille_contre_rayon", "fermeture contre le rayon"),
+                         ("hors_demi_feuille_contre_continuite",
+                          "fermeture contre la continuite")):
+            val = d["correlations"][cle]
+            txt = f"{val:+.3f}".replace(".", ",").replace("-", "\u2212")
+            out.append((nom, [f"**{txt}**", txt, f"{val:.3f}"], fdt.name))
+        # ⚠⚠ LE BALAYAGE EST GARDE ENTIER, REEL ET FIXTURE : c'est la comparaison des deux qui
+        # etablit « structure et non bruit », donc citer l'un sans l'autre serait perime.
+        for b in d["balayage_reel"]:
+            if "part_hors_demi_feuille_mediane" not in b:
+                continue
+            txt = f"{b['part_hors_demi_feuille_mediane']:.3f}".replace(".", ",")
+            out.append((f"fermeture reelle a {b['tours']} tour(s)",
+                        [f"**{txt}**", txt, f"{b['part_hors_demi_feuille_mediane']}"],
+                        fdt.name))
+        for b in d["balayage_des_fixtures"]:
+            for cle, nom in (("bruit_seul", "fixture bruit seul a"),
+                             ("avec_une_feuille_sautee", "fixture avec saut a")):
+                txt = f"{b[cle]:.3f}".replace(".", ",")
+                out.append((f"{nom} {b['tours']} tour(s)",
+                            [f"**{txt}**", txt, f"{b[cle]}"], fdt.name))
+
     # ⭐⭐⭐ LE MEME ECART, MAIS A TRAVERS LES RAYONS (`95`). Garde parce que c'est le SECOND
     # candidat de signal de confiance a echouer, et que son verdict ne tient que si le
     # confondant du masque est publie a cote : sans lui, « la surface est mieux posee au bord »

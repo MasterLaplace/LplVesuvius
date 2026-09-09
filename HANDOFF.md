@@ -144,6 +144,40 @@ un seul.**
 riche du concours ne contient pas une marche entière. Mais c'est la première fois que la portée de
 ce dépôt peut se comparer à du **travail humain publié** plutôt qu'à une borne censurée.
 
+⭐⭐⭐ **LE PREMIER SIGNAL DONT LE SIGNE EST LE BON — ET LE RÉFÉRENT QUI MANQUE POUR LE CALIBRER**
+([`96`](docs/96_la_fermeture_dun_tour.md)). `95` a laissé que ce qui échoue au bord est l'**identité**
+de la feuille, donc que le signal doit être **topologique**. La **fermeture** en est un : partir
+d'une cellule, faire **un tour complet**, et le rayon doit avoir monté d'**un** pas de feuille —
+zéro voudrait dire qu'on est revenu sur la même, deux qu'on en a sauté une, et aucune supervision
+n'entre. Mesuré sur les 28 bandes : la part de cellules hors de la demi-feuille vaut **0,621 au cœur
+et 0,804 au bord**, corrélations **+0,858** avec le rayon et **+0,822** avec la rupture — là où le
+pli donnait −0,825 et la pose sur la matière −0,694. **Premier renversement de signe de la
+campagne.**
+
+⚠⚠⚠ **Et elle ne certifie pourtant aucune cellule** : 0,621 au **cœur**, là où la continuité est
+intacte. ⭐⭐⭐ Le **balayage de fenêtre** dit pourquoi, sans aucun seuil : du bruit se moyenne quand
+la fenêtre s'allonge, une structure non. Allonger ×5 fait tomber le réel de **11 %** (0,556 → 0,495)
+quand le même estimateur écrase un bruit blanc à **zéro** (0,312 → 0,000). L'irrégularité radiale
+des maillages humains n'est donc **pas du bruit**.
+
+⛔ **CE QUI MANQUE N'EST PAS L'INSTRUMENT MAIS UN RÉFÉRENT.** La fixture prouve que l'estimateur
+**sait** détecter une feuille sautée (0,096 contre 0,004 à trois tours) ; ce sont les maillages
+humains qui ne ferment pas eux-mêmes à la demi-feuille près — **62 % des cellules y échouent au
+cœur**. Une confiance par cellule bâtie sur la fermeture est donc **écrivable et non calibrable**
+avec ce corpus. ⭐ Même plancher que `95` sur un autre axe : *l'erreur du référent, pas la mienne* —
+`95` mesurait que la surface publiée n'est pas **sur** la feuille, `96` qu'elle ne **ferme** pas.
+
+⭐⭐ **Et la médiane est aveugle là où la part voit** : sur une spirale fabriquée où **une feuille
+est sautée**, la fermeture médiane reste à **1,000** pendant que la part hors demi-feuille l'attrape.
+C'est pourquoi la pente globale de `91` — une droite ajustée sur tout le rang — ne pouvait pas la
+voir, et pourquoi la part est publiée avant la médiane.
+
+⚠⚠⚠ Deux défauts payés, gardés : **le balayage a dû être refait à sous-ensemble constant** (28
+bandes à un tour contre 5 à cinq, et les cinq sont les plus internes donc les plus propres — la
+faute de `93`, et le confondant retiré rend le fait PLUS fort) ; et **le centre était indexé par
+cellule** alors que l'axe dérive de 12,6 mm, ce qui faisait sortir **22 % des fermetures
+négatives**.
+
 ⛔⛔⛔ **DEUX OBSERVABLES LOCALES ÉCHOUENT DE LA MÊME FAÇON, ET C'EST LE MOTIF QUI COMPTE**
 ([`95`](docs/95_la_surface_et_la_feuille_par_rayon.md)). `94` a tué le froissement parce qu'il est
 une propriété du **maillage** ; il fallait donc une observable de la **matière**, et le dépôt en

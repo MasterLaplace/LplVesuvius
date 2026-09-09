@@ -5247,6 +5247,68 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/96_la_fermeture_dun_tour.md
+- **lignes** : 157
+- **nature** : RESULTAT
+  (la fermeture d'un tour comme signal de confiance : le premier renversement de signe de la
+  campagne, et le plancher du référent qui l'empêche de calibrer un seuil.)
+- **résumé** : ⭐⭐⭐ Trois observables, et celle-ci est la **première dont le signe soit correct**.
+  `94` (le pli) et `95` (la pose sur la matière) disaient « plus propre » là où le transfert casse ;
+  la part de cellules dont un tour de fermeture atterrit hors de la demi-feuille vaut **0,621 au
+  cœur et 0,804 au bord**, et **monte** avec la rupture (**+0,822**, contre −0,825 et −0,694).
+  ⚠⚠⚠ Et elle ne certifie pourtant **aucune** cellule : 0,621 au cœur, là où la continuité est
+  intacte (×1,7).
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **La fermeture est un énoncé d'IDENTITÉ, pas de propreté** : partir d'une cellule, faire
+    un tour complet, et le rayon doit avoir monté d'**un** pas de feuille — zéro voudrait dire
+    qu'on est revenu sur la même, deux qu'on en a sauté une. C'est la seule famille dont le signe
+    soit correct, ce qui valide la **direction** laissée par `95`.
+  - ⭐⭐⭐ **Bruit ou structure ? Le balayage de fenêtre répond sans aucun seuil.** Du bruit se
+    moyenne quand la fenêtre s'allonge, une structure non. Allonger ×5 fait tomber le réel de
+    **11 %** (0,556 → 0,495) quand le même estimateur écrase un bruit blanc à **zéro** (0,312 →
+    0,000). ⛔ L'irrégularité radiale des maillages humains n'est donc **pas du bruit**.
+  - ⭐⭐ **L'argument qui rend la mesure possible vient de `91` lui-même** : son avertissement dit
+    qu'une pente sur arc court lit l'ovalité comme une montée (202 µm sur dix tours, **1817 sur
+    un**). Or à **exactement 2π** l'oscillation revient sur elle-même, donc la fermeture y est
+    **immune** — asséré sur fixture, une section ovale à 15 % ne déplace rien.
+  - ⭐⭐⭐ **La médiane est aveugle, la part non**, et seule une fixture pouvait l'établir : sur une
+    spirale où **une feuille est sautée**, la fermeture médiane reste à **1,000** pendant que la
+    part hors demi-feuille l'attrape à 0,200, entièrement attribuée à *sautée*. C'est pourquoi la
+    part est publiée avant la médiane, et pourquoi la pente globale de `91` ne pouvait pas la voir.
+  - ⛔ **Ce qui manque n'est pas l'instrument mais un RÉFÉRENT.** La fixture prouve que
+    l'estimateur SAIT détecter une feuille sautée (0,096 contre 0,004 à trois tours) ; ce sont les
+    maillages humains qui ne ferment pas eux-mêmes à la demi-feuille près, **62 % des cellules y
+    échouant au cœur**. Une confiance par cellule bâtie sur la fermeture est donc **écrivable et
+    non calibrable** avec ce corpus. ⭐ Même plancher que `95` sur un autre axe : *l'erreur du
+    référent, pas la mienne.*
+  - ⚠ **Le corpus borne aussi le remède** : les bandes du bord ne portent que **deux tours**, donc
+    une fenêtre plus longue n'y est même pas disponible.
+- **rétractations / corrections internes** :
+  - §7 : ⚠⚠⚠ **le balayage a dû être refait à sous-ensemble CONSTANT.** Ma première version
+    prenait toutes les bandes disponibles à chaque fenêtre — 28 à un tour, 5 à cinq — or les cinq
+    qui portent cinq tours sont les plus **internes**, donc les plus propres : la baisse mesurée
+    était celle du **sous-ensemble**, pas celle de la fenêtre. C'est la faute que `93` avait déjà
+    payée en comparant la bande 0 à la bande 7. ⭐ Le confondant retiré rend le fait **plus fort**
+    (11 % contre les 30 % annoncés), et la forme confondue est gardée à côté, nommée.
+  - §8 : ⚠⚠ **un défaut de centre trouvé en regardant.** J'indexais le centre d'enroulement **par
+    cellule**, or `axe_par_tranche` le rend constant par tranche et l'axe dérive de 12,6 mm : deux
+    cellules d'un même rang enjambant une frontière voyaient des centres écartés de centaines de
+    µm, et l'écart tombait dans la fermeture. Mesure du défaut : **22 % des fermetures sortaient
+    négatives**. Centre désormais **interpolé** en z. ⚠ Un ajustement global comme `91` en est en
+    partie protégé par moyennage ; une fermeture par tour ne l'est pas du tout.
+  - §6 : ⚠⚠ **la colonne à 5 tours de la fixture n'est PAS un témoin** — sur une spirale de huit
+    tours, une fenêtre de cinq efface l'échelon elle aussi (0,002). La plage où le balayage
+    discrimine est **2 à 3 tours**, et le dire évite de lire une fenêtre trop longue comme une
+    preuve de propreté.
+  - batterie : ⚠ deux lignes mortes laissées dans la batterie, et une fixture d'axe à une seule
+    tranche qui a **levé** dès que le centre est passé de « par tranche » à « interpolé » — donc
+    qui a attrapé le changement plutôt que de rendre un centre faux.
+- **preuve de lecture intégrale** :
+  - l. 86 (après 55 % du fichier) : `| fenêtre | réel (5 bandes) | fixture bruit seul | fixture + saut |`
+  - l. 140 : `⛔ **Ce qui manque n'est pas l'instrument mais un RÉFÉRENT.** Ces maillages ne ferment pas`
+
+---
+
 ### docs/95_la_surface_et_la_feuille_par_rayon.md
 - **lignes** : 140
 - **nature** : RESULTAT
@@ -6310,7 +6372,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 5926
+- **lignes** : 6024
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)

@@ -4553,6 +4553,104 @@ renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la bat
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
 
 ---
+##### ⭐⭐⭐ LE PREMIER SIGNAL DONT LE SIGNE EST LE BON — et le plancher qui l'empêche de certifier
+
+> Mesure : `src/nappe/la_fermeture_dun_tour.py` (28 contrôles) →
+> `docs/mesures/la_fermeture_dun_tour.json`. Figure :
+> `src/figures/figure_la_fermeture_dun_tour.py` (15 contrôles).
+> Document : [`96`](96_la_fermeture_dun_tour.md), le 2026-09-09.
+
+![la fermeture d'un tour](images/96_la_fermeture_dun_tour.png)
+
+Les deux tranches du dessous ont échoué de la **même** façon, et le motif est établi : au bord,
+l'humain qui ne peut pas suivre la vraie feuille en trace une autre, **proprement**. Ce qui échoue
+n'est donc pas la **qualité locale** mais l'**identité** de la feuille. La **fermeture** est un
+énoncé d'identité : partir d'une cellule, faire **un tour complet**, et le rayon doit avoir monté
+d'**un** pas de feuille — zéro voudrait dire qu'on est revenu sur la même, deux qu'on en a sauté
+une. Aucune supervision n'entre.
+
+| tiers | fermeture | dispersion | hors ½ | sautée | continuité |
+|---|---:|---:|---:|---:|---:|
+| cœur (9) | 0,998 | 2,30 | **0,621** | 0,348 | ×1,7 |
+| milieu (9) | 1,022 | 2,73 | 0,710 | 0,376 | ×5,9 |
+| bord (10) | 0,952 | 4,65 | **0,804** | 0,397 | **×31,0** |
+
+⭐⭐⭐ **LE SIGNE EST ENFIN LE BON** : **+0,858** avec le rayon et **+0,822** avec la rupture, là où
+le pli donnait −0,825 et la pose sur la matière −0,694. C'est le premier renversement de signe de la
+campagne. ⭐ Et le pas est juste partout (0,95 à 1,02 feuille) : ce n'est pas le pas qui manque,
+c'est la fermeture **cellule par cellule**.
+
+⚠⚠⚠ **ET ELLE NE CERTIFIE POURTANT AUCUNE CELLULE** : 0,621 au **cœur**, là où la continuité est
+intacte (×1,7). Un signal qui marque trois cellules sur cinq dans la région propre ne peut rien
+garantir. Reste à savoir si c'est du **bruit**, qui se moyennerait, ou de la **structure**.
+
+##### ⭐⭐⭐ Bruit ou structure ? Le balayage de fenêtre répond sans aucun seuil
+
+| fenêtre | réel (5 bandes) | fixture bruit seul | fixture + saut |
+|---:|---:|---:|---:|
+| 1 tour | **0,556** | 0,312 | 0,398 |
+| 2 tours | 0,530 | 0,061 | 0,211 |
+| 3 tours | 0,517 | **0,004** | 0,096 |
+| 5 tours | **0,495** | 0,000 | ⚠ 0,002 |
+
+⭐⭐⭐ **Le réel est PLAT là où le bruit s'effondre** : allonger la fenêtre ×5 fait tomber le réel de
+**11 %** quand le même estimateur écrase un bruit blanc à **zéro**. L'irrégularité radiale des
+maillages humains n'est donc **pas du bruit**.
+
+⚠⚠ **La colonne à 5 tours de la fixture n'est pas un témoin** : sur une spirale de huit tours, une
+fenêtre de cinq n'en laisse que trois de testables et efface l'échelon elle aussi. La plage où le
+balayage **discrimine** est 2 à 3 tours. ⚠ Et le corpus borne le remède : les bandes du bord ne
+portent que **deux tours**.
+
+⭐⭐⭐ **LA MÉDIANE EST AVEUGLE, LA PART NON**, et seule une fixture pouvait l'établir : sur une
+spirale où **une feuille est sautée**, la fermeture médiane reste à **1,000** pendant que la part
+hors demi-feuille l'attrape à 0,200, entièrement attribuée à *sautée*. C'est pourquoi la part est
+publiée avant la médiane, et pourquoi la pente globale de `91` — qui ajuste une droite sur tout le
+rang — ne pouvait pas la voir.
+
+⭐⭐ **Et l'argument qui rend la mesure possible vient de `91` lui-même** : son avertissement dit
+qu'une pente sur arc court lit l'ovalité comme une montée (202 µm sur dix tours, **1817 sur un**).
+À **exactement 2π** l'oscillation revient sur elle-même, donc la fermeture y est **immune** —
+asséré sur fixture, une section ovale à 15 % ne déplace rien.
+
+⚠⚠⚠ **Un obstacle d'échelle interdit la version naïve** : un pas de cellule vaut ~905 µm pour un
+pas de feuille de ~173, donc une cellule fait **cinq feuilles** et indexer par colonnes entières ne
+peut pas résoudre une feuille. La fermeture est lue en **interpolant** le rang par son angle
+déroulé — erreur d'interpolation ≈ **5 µm**, trente-cinq fois sous le pas.
+
+##### ⚠⚠⚠ Deux défauts payés dans cette tranche, tous deux gardés
+
+**Le balayage a dû être refait à sous-ensemble CONSTANT.** Ma première version prenait toutes les
+bandes disponibles à chaque fenêtre — 28 à un tour, 5 à cinq — or les cinq qui portent cinq tours
+sont les plus **internes**, donc les plus propres : la baisse mesurée était celle du
+**sous-ensemble**, pas celle de la fenêtre.
+
+> **C'est la faute que `93` avait déjà payée** en comparant la bande 0 à la bande 7.
+
+⭐ Le confondant retiré rend le fait **plus fort** — 11 % contre les 30 % annoncés — et la forme
+confondue est gardée à côté, nommée, parce que les comparer montre l'ampleur du confondant.
+
+**Un défaut de centre trouvé en regardant.** J'indexais le centre d'enroulement **par cellule**, or
+`axe_par_tranche` le rend constant par tranche et l'axe dérive de 12,6 mm : deux cellules d'un même
+rang enjambant une frontière voyaient des centres écartés de centaines de µm, et l'écart tombait
+directement dans la fermeture. Mesure du défaut : **22 % des fermetures sortaient négatives**, c'est
+à dire un maillage qui rentrerait vers l'intérieur après un tour entier une fois sur cinq. Centre
+désormais **interpolé** en z. ⚠ Un ajustement global comme `91` en est en partie protégé par
+moyennage ; une fermeture par tour ne l'est **pas du tout**.
+
+##### ⛔ Ce que ça laisse : la direction est bonne, le RÉFÉRENT manque
+
+La fixture prouve que l'estimateur **sait** détecter une feuille sautée (0,096 contre 0,004 à trois
+tours). Ce qui manque n'est donc pas l'instrument mais un **référent** : ces maillages ne ferment
+pas eux-mêmes à la demi-feuille près — **62 % des cellules y échouent au cœur** — donc ils ne
+peuvent pas servir à calibrer le seuil d'un automate.
+
+> ⭐ **C'est le même plancher que `95` sur un autre axe : l'erreur du référent, pas la mienne.**
+> `95` mesurait que la surface publiée n'est pas **sur** la feuille ; `96` mesure qu'elle ne
+> **ferme** pas non plus. Une confiance par cellule bâtie sur la fermeture est donc **écrivable et
+> non calibrable** avec ce corpus.
+
+---
 ##### ⛔⛔⛔ LA SURFACE HUMAINE EST MIEUX POSÉE SUR LA FEUILLE LÀ OÙ LE TRANSFERT CASSE
 
 > Mesure : `src/nappe/la_surface_et_la_feuille_par_rayon.py` (26 contrôles) →
