@@ -5247,6 +5247,72 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/100_la_normale_nest_pas_le_rayon.md
+- **lignes** : 176
+- **nature** : RESULTAT
+  (l'item A bis : l'obliquité de la nappe est mesurée, l'explication qu'elle devait fournir est
+  réfutée, et le fait qui reste est plus lourd que l'hypothèse.)
+- **résumé** : ⛔⛔⛔ L'hypothèse qui expliquait le trou de `99` est **réfutée** : le long de la
+  **normale**, le pas est le **même** que radialement — rapport médian **1,018** (0,84 à 1,333) là
+  où l'obliquité en prédirait **1,184**, écart à 1 de **0,083** contre **0,16** à `1/cos`.
+  L'accord **1,212 contre 1,213** entre `1/cos` et le rapport 198,9/164,0 était une
+  **coïncidence**, exactement la forme du piège que `94` a enregistré avec la sagitta.
+  ⭐⭐⭐ Mais le test laisse un fait plus lourd que ce qu'il réfute : la normale du maillage est à
+  **34,1°** du rayon là où une spirale de ce pas en prédit **0,09°** — **378 fois** moins.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **La surface tracée n'est pas une spirale vue de face.** 34,06° mesurés contre 0,09°
+    prédits par $\arctan(p / 2\pi r)$, sur les **28** bandes. ⚠ L'angle décroît vers le bord
+    (corrélation **−0,549** avec le rayon) : 34,5° à 4 mm, 25,7° à 23,9 mm.
+  - ⭐⭐ **Ce n'est pas l'estimateur** : la normale par **ACP** — plus petit vecteur propre de la
+    covariance des 30 voisins, donc indépendante de la grille — rend **33,59°** contre **34,06°**,
+    soit **1,59°** d'écart. Deux estimateurs sans hypothèse commune s'accordent, donc l'obliquité
+    est dans la matière tracée. ⚠ Fixture : sur un plan échantillonné **8× anisotrope**, l'ACP
+    rend la normale du plan à **0,0000°**.
+  - ⚠⚠ **Bruit ou structure, les deux moitiés** (contrôle de `96` appliqué à une direction) :
+    l'angle tombe de **35,78°** à 10 voisins à **21,22°** à 1000 — donc une part est de la
+    rugosité — mais il **plafonne** à **236 fois** la prédiction. Les deux sont publiées, parce
+    que publier la décroissance seule laisserait croire que tout s'efface.
+  - ⚠ **Décomposée, l'obliquité est les deux à la fois** : **14,62°** hors du plan (les feuilles
+    seraient **coniques**) et **24,04°** dans le plan (la section n'est pas un **cercle**, ce que
+    `91` signalait déjà). Un angle total seul ne dirait pas laquelle on regarde.
+  - ⭐⭐⭐ **Un second verdict, indépendant du premier** : comparer deux médianes peut rater un
+    effet noyé dans la dispersion, donc la **dépendance** est testée directement — si l'obliquité
+    jouait, le rapport suivrait `1/cos` d'une bande à l'autre. Corrélation **+0,153**.
+  - ⭐⭐⭐ **Un test qui ne voit rien est indiscernable d'un test aveugle**, et c'est le contrôle
+    qui rend le résultat négatif lisible : sur un empilement fabriqué d'angle **connu**, le même
+    instrument lit **1,238** pour un `1/cos(35°)` = **1,221** attendu, et **1,000** à angle nul.
+  - ⚠⚠⚠ **Correction apportée à `98`** : sa docstring de `segments` affirmait *« le segment est
+    radial et à z constant, DONC il traverse l'empilement perpendiculairement »*. La seconde
+    moitié est mesurée **fausse**. Ce qui sauve la mesure de `98` n'est pas ce qui était écrit,
+    c'est l'autre résultat de ce fichier — le pas ignore la direction — pour une raison qui reste
+    **inexpliquée**.
+- **rétractations / corrections internes** :
+  - §7 : ⚠⚠ **la fixture du contrôle a d'abord ÉCHOUÉ, et sa cause valait d'être écrite.** Avec un
+    rayon de départ rond (10 mm) et un pas de 173 µm, la cellule tombe à la **phase 0,80** d'une
+    période — ni sur une feuille, ni dans un interstice — donc **aucune** des deux polarités du
+    gabarit ne peut correspondre et la recherche rend **242 µm** pour 173 injectés. *Un contrôle
+    doit poser sa cellule là où la matière la poserait.*
+  - §9 : ⚠⚠ **l'écart de `99` reste inexpliqué** — un candidat est éliminé, pas remplacé, et
+    **A bis** reste ouvert avec une piste de moins. La **cause** de l'obliquité n'est pas tranchée
+    non plus, et le plateau à 21,22° est une **borne inférieure** sur ce qui est réel, pas une
+    mesure de la seule structure.
+  - figure : ⭐⭐⭐ **le panneau C était illisible en barres** — 28 bandes × 2 barres se
+    recouvraient — et il a été refait en **nuage** (rapport observé contre `1/cos`), avec les
+    **deux** hypothèses tracées : la diagonale rouge de l'obliquité et l'horizontale verte de
+    l'indépendance. Sans la diagonale, l'horizontale n'aurait été qu'une référence et la figure
+    n'aurait rien opposé.
+  - outillage : ⭐⭐⭐ **deux gardes de figure neuves, et elles ont attrapé trois défauts que la
+    garde existante ne pouvait pas voir** — `textes_hors_cadre` (un texte qui tient dans la
+    **toile** en débordant de son **panneau**, ce que la docstring de `textes_debordants` nommait
+    elle-même comme son angle mort) et `textes_qui_se_recouvrent` (un texte lisible **écrit
+    par-dessus** un autre). Marge à **zéro** volontairement : un seuil choisi pour que la figure
+    du jour passe serait le péché nº 1 du dépôt.
+- **preuve de lecture intégrale** :
+  - l. 106 (après 60 % du fichier) : `| ce que l'obliquité prédirait (\`1/cos\`, médiane) | **1,184** |`
+  - l. 146 : `> *« LE SEGMENT EST RADIAL ET A z CONSTANT, donc il traverse l'empilement perpendiculairement. »*`
+
+---
+
 ### docs/99_le_pas_que_la_matiere_montre.md
 - **lignes** : 124
 - **nature** : RESULTAT

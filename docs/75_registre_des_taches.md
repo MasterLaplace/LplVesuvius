@@ -4553,6 +4553,134 @@ renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la bat
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
 
 ---
+##### ⛔⛔⛔ LA NORMALE N'EST PAS LE RAYON — l'item A bis, et l'explication tombe
+
+> Mesure : `src/nappe/la_normale_nest_pas_le_rayon.py` (30 contrôles) →
+> `docs/mesures/la_normale_nest_pas_le_rayon.json`. Figure :
+> `src/figures/figure_la_normale_nest_pas_le_rayon.py` (20 contrôles).
+> Document : [`100`](100_la_normale_nest_pas_le_rayon.md), le 2026-09-09.
+
+![la normale n'est pas le rayon](images/100_la_normale_nest_pas_le_rayon.png)
+
+`99` laissait **21 % d'écart inexpliqué** entre le pas de la matière (198,9 µm) et celui des
+transferts humains (`91`, 164 µm). Une explication évidente se présentait : si le rayon n'est pas
+perpendiculaire à l'empilement, la distance radiale entre deux feuilles vaut $p / \cos\theta$.
+Et l'accord numérique était **stupéfiant** — `1/cos` médian **1,212** contre un rapport observé
+198,9 / 164,0 = **1,213**.
+
+> ⚠⚠⚠ **C'est exactement la forme du piège que `94` a enregistré avec la sagitta.** Rien n'a été
+> publié avant d'avoir lancé le test qui tranche.
+
+| | mesuré |
+|---|---:|
+| rapport pas radial / pas normal, médiane (28 bandes) | **1,018** |
+| son étendue | 0,84 à 1,333 |
+| ce que l'obliquité prédirait (`1/cos`, médiane) | **1,184** |
+| écart du rapport à **1** | **0,083** |
+| écart du rapport à **1/cos** | **0,16** |
+| corrélation du rapport contre `1/cos` | **+0,153** |
+
+> ⛔ **L'hypothèse est réfutée deux fois, et les deux verdicts sont indépendants.** Le rapport est
+> **deux fois** plus proche de 1 que de `1/cos` ; et la **dépendance** que l'hypothèse prédit —
+> le rapport suit `1/cos` d'une bande à l'autre — n'existe pas non plus. Comparer deux médianes
+> peut rater un effet noyé dans la dispersion, donc il fallait tester la pente séparément.
+
+##### ⭐⭐⭐ Mais le test laisse un fait plus lourd que ce qu'il réfute
+
+Sur une spirale d'Archimède, la feuille n'est inclinée sur le rayon que de
+$\arctan(p / 2\pi r)$, soit **0,07 à 0,39°** sur ce fragment. Or la normale du maillage en est à
+**34,06°** — **378 fois** plus.
+
+| | mesuré |
+|---|---:|
+| angle de la normale de la **grille** au rayon | **34,06°** |
+| angle de la normale par **ACP** au rayon | **33,59°** |
+| écart entre les deux estimateurs | **1,59°** |
+| part hors du plan (feuilles **coniques**) | **14,62°** |
+| part dans le plan (section non **circulaire**) | **24,04°** |
+| corrélation de l'angle contre le rayon | **−0,549** |
+
+⭐⭐ **Et ce n'est pas l'estimateur.** La normale par **ACP** — plus petit vecteur propre de la
+covariance des 30 voisins, donc **indépendante de la grille** — s'accorde à **1,59°** près. Deux
+estimateurs sans hypothèse commune s'accordent, donc l'obliquité est dans la **matière tracée**.
+⚠ Fixture : sur un plan échantillonné **8× anisotrope** — le cas réel, `97` a mesuré des rangs à
+~800 µm pour des colonnes à ~100 — l'ACP rend la normale du plan à **0,0000°**.
+
+##### ⚠⚠ Bruit ou structure ? Le contrôle de `96`, appliqué à une direction
+
+| voisins de l'ACP | 10 | 30 | 100 | 300 | 1000 |
+|---|---:|---:|---:|---:|---:|
+| angle médian | **35,78°** | 33,59° | 30,14° | 26,62° | **21,22°** |
+
+⭐ **Les deux moitiés sont publiées ensemble.** L'angle **décroît**, donc une part est de la
+rugosité locale ; mais il **ne converge pas vers zéro** — à mille voisins il reste **236 fois** la
+prédiction. Publier la décroissance seule laisserait croire que tout s'efface.
+
+##### ⭐⭐⭐ Le contrôle qui rend ce résultat NÉGATIF lisible
+
+> **Un test qui ne voit rien est indiscernable d'un test aveugle.**
+
+`empilement_oblique` fabrique une pile de feuilles planes dont l'angle **et** l'espacement vrai
+sont connus.
+
+| empilement fabriqué | angle mesuré | pas normal lu | rapport lu | `1/cos` attendu |
+|---|---:|---:|---:|---:|
+| θ = 0° | **0,00°** | 181,7 µm | **1,000** | 1,000 |
+| θ = 35° | **35,00°** | 181,7 µm | **1,238** | **1,221** |
+
+⚠⚠ **Et la fixture a d'abord ÉCHOUÉ, pour une raison qui valait d'être écrite.** Avec un rayon de
+départ rond (10 mm) et un pas de 173 µm, la cellule tombe à la **phase 0,80** d'une période — ni
+sur une feuille, ni dans un interstice — donc **aucune** des deux polarités du gabarit ne peut
+correspondre, et la recherche rend **242 µm** pour 173 injectés. *Un contrôle doit poser sa cellule
+là où la matière la poserait.*
+
+##### ⚠⚠⚠ Ce que cela corrige dans `98`, et ce qui sauve sa mesure
+
+La docstring de `combien_dinterstices_traverses.segments` affirmait *« le segment est radial et à z
+constant, **donc** il traverse l'empilement perpendiculairement »*. La seconde moitié est mesurée
+**fausse** : le segment coupe l'empilement de biais, de 34°.
+
+> ⭐⭐⭐ **Ce qui sauve la mesure de `98` n'est pas ce qui était écrit**, c'est l'autre résultat de
+> ce fichier — le pas ignore la direction. Pour une raison qui **n'est pas** celle que la docstring
+> donnait, et qui reste **inexpliquée**. La correction est faite sur place, avec sa mesure.
+
+##### ⭐⭐⭐ Deux gardes de figure neuves, et elles ont mordu tout de suite
+
+La docstring de `textes_debordants` nommait elle-même son angle mort : *« elle laisse passer un
+texte qui déborde d'un panneau vers son voisin »*. Il est refermé dans le module **commun**, pas
+dans cette figure seule.
+
+- **`textes_hors_cadre`** — un texte qui tient dans la **toile** en débordant de son **panneau**,
+  où il recouvre ce que le voisin dit. Il a attrapé **deux** légendes d'axe.
+- **`textes_qui_se_recouvrent`** — un texte parfaitement placé mais **écrit par-dessus** un autre,
+  donc illisible. Il a attrapé **trois** paires, dont la légende de série du panneau A que l'œil
+  avait vue avant la garde. ⚠ Marge à **zéro** volontairement : un chevauchement d'un pixel est un
+  chevauchement, et une marge choisie pour que la figure du jour passe serait un seuil réglé sur ce
+  qui passe.
+
+⭐ **Et le panneau C était illisible en barres** — 28 bandes × 2 barres se recouvraient. Refait en
+**nuage** (rapport observé contre `1/cos`), avec les **deux** hypothèses tracées : la diagonale
+rouge de l'obliquité et l'horizontale verte de l'indépendance. Sans la diagonale, l'horizontale
+n'aurait été qu'une référence et la figure n'aurait rien opposé.
+
+##### ⚠⚠ Ce que la tranche ne dit pas
+
+- **L'écart de `99` reste inexpliqué** : un candidat est éliminé, pas remplacé. **A bis** reste
+  ouvert, avec une piste de moins.
+- **Pourquoi la surface est oblique n'est pas tranché** — écrasement, cône réel, ou propriété du
+  traçage humain. Le fait est mesuré et confirmé ; sa cause non.
+- Le plateau à **21,22°** est une **borne inférieure** sur ce qui est réel, pas une mesure de la
+  seule structure.
+
+⭐ **Et `--reagreger` sépare ce qui est MESURÉ de ce qui en est DÉRIVÉ** : les pas par bande sont
+la mesure, les verdicts n'en sont qu'une lecture. Ajouter une quantité dérivée ne doit pas coûter
+une demi-heure de lecture réseau — et le contrôle asserte que la réagrégation laisse les lignes par
+bande **intactes**, sinon un recalcul deviendrait une nouvelle mesure sans que rien ne le dise.
+⚠ Le verdict est aussi testé **dans l'autre sens** : sur une fixture dont le rapport **suit**
+`1/cos`, il doit dire que l'obliquité explique — un verdict qui répond « réfuté » quoi qu'on lui
+donne ne trancherait rien.
+
+---
 ##### ⭐⭐⭐ LE PAS QUE LA MATIÈRE MONTRE — `98` cesse d'auditer et se met à décider
 
 > Mesure : `src/nappe/le_pas_que_la_matiere_montre.py` (22 contrôles) →

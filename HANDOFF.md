@@ -7,11 +7,17 @@ l'historique, daté, et se lit ensuite.
 
 ## ⭐⭐⭐⭐ REPRISE — 2026-09-09
 
-**Cinq tranches d'une même campagne, `94` à `98`, et elles ont UNE conclusion.** L'arbre est
-propre, les gardes vertes, 100 fiches sans dérive, 1126 artefacts versionnés sans orphelin. Ce
+**Sept tranches d'une même campagne, `94` à `100`, et elles ont UNE conclusion.** L'arbre est
+propre, les gardes vertes, 102 fiches sans dérive, aucun artefact versionné sans appelant. Ce
 bloc remplace le précédent comme état courant ; tout ce qui suit est l'historique, daté.
 
-⚠ Le bloc précédent, daté du 2026-09-03, annonçait un état courant que ces cinq tranches ont
+⭐⭐ **Et la campagne s'est prolongée d'une tranche qui ne cherchait plus un signal mais une
+EXPLICATION** : `100` est allé chercher pourquoi le pas que la matière montre (199 µm) diffère de
+celui des transferts humains (164). L'explication évidente — la nappe n'est pas perpendiculaire au
+rayon — est **réfutée**, et le fait qu'elle laisse derrière elle est plus lourd qu'elle : la
+surface tracée est à **34,1°** du rayon là où une spirale de ce pas en prédit **0,09°**.
+
+⚠ Le bloc précédent, daté du 2026-09-03, annonçait un état courant que ces sept tranches ont
 dépassé. Il est conservé plus bas, sous son en-tête, parce que ses résultats tiennent.
 
 ### ⭐⭐⭐ La question était : QU'EST-CE QUI REMPLACE L'HUMAIN QUI CORRIGE LE TRANSFERT ?
@@ -29,6 +35,8 @@ candidats ont été testés, dans cet ordre, et chacun a fermé une famille enti
 | [`96`](docs/96_la_fermeture_dun_tour.md) | la **fermeture d'un tour** | ⭐ bon signe (**+0,822**), mais **aucun étalon** |
 | [`97`](docs/97_deux_humains_sur_la_meme_matiere.md) | deux **tracés humains** de la même matière | ⛔ le **référent lui-même** diverge de plus d'une demi-feuille |
 | [`98`](docs/98_combien_dinterstices_traverses.md) | le **compte d'interstices**, lu dans le volume | ⭐⭐ bon signe (**−0,411**) et **premier seuil matériel** — mais faible au bord |
+| [`99`](docs/99_le_pas_que_la_matiere_montre.md) | le **pas que la matière montre** | ⭐⭐ `part_utilisable` à **−0,845**, le signal au bon signe le **plus fort** — et le pas montré (**199 à 214 µm**) n'est pas le nominal |
+| [`100`](docs/100_la_normale_nest_pas_le_rayon.md) | l'**obliquité de la nappe** au rayon | ⛔ l'explication de l'écart de `99` est **réfutée** — mais la surface est à **34,1°** du rayon pour **0,09°** prédits |
 
 ### ⭐⭐⭐ LA CONCLUSION, ET ELLE TIENT EN UNE PHRASE
 
@@ -83,7 +91,7 @@ presque muette**, et c'est la contrainte dure que la suite doit affronter.
 | # | quoi | pourquoi maintenant |
 |---|---|---|
 | ~~**A**~~ | ~~faire de `98` une règle de décision~~ | ✅ **FAIT** → [`99`](docs/99_le_pas_que_la_matiere_montre.md). Le balayage rend le pas que la matière montre : **198,9 µm au cœur, 214,05 au bord** contre **173** nominal, et **>81 %** des cellules à plus d'un dixième — un pas constant est faux **quatre fois sur cinq**. ⭐⭐ Et la part où la matière répond corrèle **−0,845** avec la rupture, le signal au bon signe **le plus fort de la campagne**. ⛔ Deux erreurs de nul payées : le premier résultat (147 µm) était **indiscernable du bruit pur**, et la barre comparait le max de 62 essais au nul d'un seul. ⭐⭐⭐ **Un modèle nul doit s'appliquer à CHAQUE quantité qu'une recherche rapporte, pas seulement à sa confiance** |
-| **A bis** ⭐⭐ | l'écart **non expliqué** entre le pas de la matière (199 µm) et celui des transferts humains (`91`, 164 µm) | 9 à 21 % : `97` rend un désaccord attendu, son AMPLEUR non |
+| **A bis** ⭐⭐ | l'écart **non expliqué** entre le pas de la matière (199 µm) et celui des transferts humains (`91`, 164 µm) | 9 à 21 % : `97` rend un désaccord attendu, son AMPLEUR non. ⛔ **Un candidat éliminé le 2026-09-09** → [`100`](docs/100_la_normale_nest_pas_le_rayon.md) : l'obliquité de la nappe n'explique PAS l'écart — le pas lu le long de la **normale** égale le pas radial (rapport médian **1,018**, corrélation contre `1/cos` **+0,153**) là où l'obliquité en prédirait **1,184**. ⚠⚠⚠ L'accord **1,212 contre 1,213** était une **coïncidence**, le piège de la sagitta de `94`. ⭐⭐⭐ Mais le test laisse un fait **plus lourd** : la normale du maillage est à **34,1°** du rayon là où une spirale de ce pas en prédit **0,09°** — **378 fois** moins, confirmé par un estimateur **indépendant de la grille** (ACP, 33,6°). La surface tracée n'est **pas** une spirale vue de face : **14,6°** hors du plan (feuilles coniques) et **24,0°** dedans (section non circulaire) |
 | **A quater** ⚠ | `src/nappe/la_longueur_locale_du_pas.py` fait la **même** lecture sur l'AUTRE objet, mais valide **contre les spires publiées** — un référent que `97` a montré non fiable, et son gabarit est pris **sur la surface de départ**, dont `98` mesure qu'elle est dans un interstice une fois sur deux | ⚠ Il n'a PAS été touché : `99` a porté le balayage sur `PHercParis4` plutôt que de modifier l'existant, parce que c'est là que sont les 92 vrais transferts. Le rapprocher des deux est un lot à soi |
 | **B** ⭐⭐ | mesurer ce que la matière dit là où elle **répond** (mi-rayon, 74 %) plutôt que là où elle se tait | le graal demande 31 spires ; commencer par la zone où le critère est net est le seul ordre qui produise une marche mesurable |
 | **C** ⚠ | le **bord** : quand la matière est muette, aucun critère local ne peut trancher | c'est le vrai mur, et il est maintenant **chiffré** plutôt que soupçonné |
@@ -117,6 +125,24 @@ contrôle, chacun avec sa raison écrite.
   « zéro interstice ».
 - **Un test de platitude aveugle au cas dégénéré** (`98`) : un profil exactement constant a une
   étendue nulle **et** un bruit nul, donc `0 < 4×0` est faux.
+- ⚠⚠ **Une fixture qui posait sa cellule là où la matière ne la pose pas** (`100`) : avec un rayon
+  de départ **rond** et un pas de 173 µm, la cellule tombe à la **phase 0,80** d'une période — ni
+  sur une feuille, ni dans un interstice — donc **aucune** des deux polarités du gabarit ne peut
+  correspondre, et le contrôle rendait **242 µm** pour 173 injectés. *Un contrôle doit poser sa
+  cellule là où la matière la poserait.*
+- ⭐⭐⭐ **Deux angles morts de figure, refermés dans le module commun** (`100`) : la docstring de
+  `textes_debordants` nommait elle-même le premier — un texte peut tenir dans la **toile** en
+  débordant de son **panneau**, où il recouvre ce que le voisin dit. Le second est plus silencieux
+  encore : un texte parfaitement placé mais **écrit par-dessus** un autre. `textes_hors_cadre` et
+  `textes_qui_se_recouvrent` ont mordu **cinq fois** sur la figure de cette tranche même, dont une
+  paire que l'œil avait vue avant la garde. ⚠ Marge à **zéro** : une marge choisie pour que la
+  figure du jour passe serait un seuil réglé sur ce qui passe.
+- ⭐⭐ **Un verdict qui ne pouvait pas dire l'inverse** (`100`) : le contrôle est lancé **dans les
+  deux sens** — sur une fixture dont le rapport **suit** `1/cos`, le verdict doit dire que
+  l'obliquité explique. Un verdict qui répond « réfuté » quoi qu'on lui donne ne tranche rien.
+- ⭐⭐ **Un modèle nul appliqué à la confiance mais pas à la valeur** — et son pendant ici : un
+  résultat **négatif** doit prouver que son instrument n'est pas **aveugle**. Sur un empilement
+  fabriqué d'angle connu, le même instrument lit **1,238** pour **1,221** attendu.
 - ⚠⚠⚠ **Et un garde qui accusait à tort, trouvé en écrivant ce bloc même** —
   `verifier_chiffres` signalait **six** citations périmées dans ce fichier, et **les six étaient
   fausses**, dont **deux sur du texte fraîchement écrit et correct**. Cause : le diagnostic

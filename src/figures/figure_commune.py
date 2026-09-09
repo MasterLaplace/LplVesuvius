@@ -149,6 +149,69 @@ def textes_debordants(poses, largeur: float) -> list[tuple[str, int]]:
     return sortants
 
 
+def _boite(pose) -> tuple[float, float, float, float] | None:
+    """La boite dessinee d'une pose, ou None quand on ne peut pas la mesurer."""
+    x, y, texte, fonte = pose
+    if fonte is None or not texte.strip():
+        return None
+    b = fonte.getbbox(texte)
+    return (x + b[0], y + b[1], x + b[2], y + b[3])
+
+
+def textes_hors_cadre(poses, cadres) -> list[tuple[str, int, int]]:
+    """Les textes DESSINES qui sortent du panneau dans lequel ils sont ecrits.
+
+    ⭐⭐⭐ C'EST L'ANGLE MORT QUE `textes_debordants` NOMME DANS SA PROPRE DOCSTRING, et il a
+    ete paye : un texte peut tenir dans la TOILE tout en debordant de son panneau vers le
+    voisin, ou il recouvre ce que le voisin dit. La garde de largeur ne pouvait pas le voir,
+    parce qu'une pose ne dit pas dans quel cadre elle vit — d'ou `cadres`, que seule la figure
+    connait.
+
+    `cadres` est une liste de `(x0, y0, x1, y1)`. Un texte est rattache au cadre qui contient
+    son point de depart ; un texte qui n'est dans aucun cadre — la prose du bas, un titre — est
+    ignore ici, parce que c'est `textes_debordants` qui le couvre contre la toile.
+
+    Rend `(texte, bord droit, bord droit du cadre)`.
+    """
+    sortants = []
+    for pose in poses:
+        b = _boite(pose)
+        if b is None:
+            continue
+        x, y = pose[0], pose[1]
+        for cx0, cy0, cx1, cy1 in cadres:
+            if cx0 <= x <= cx1 and cy0 <= y <= cy1:
+                if b[2] > cx1:
+                    sortants.append((pose[2], int(b[2]), int(cx1)))
+                break
+    return sortants
+
+
+def textes_qui_se_recouvrent(poses, marge: float = 0.0) -> list[tuple[str, str]]:
+    """Les paires de textes DESSINES dont les boites se croisent.
+
+    ⚠⚠⚠ ET C'EST UNE TROISIEME CLASSE, DIFFERENTE DES DEUX AUTRES. Un texte peut tenir dans la
+    toile ET dans son panneau, et rester ILLISIBLE parce qu'un autre est ecrit par-dessus. Le
+    depot a deja paye ce defaut sous sa forme visible — une etiquette recouverte par sa propre
+    barre — et l'oeil l'avait attrape avant la garde, ce qui est l'ordre qu'il faut inverser.
+
+    ⚠ La marge est a ZERO par defaut, et volontairement : un chevauchement d'un seul pixel est
+    un chevauchement. Une marge choisie pour que la figure du jour passe serait un seuil regle
+    sur ce qui passe, c'est-a-dire le peche n° 1 de ce depot.
+    """
+    boites = [(pose[2], _boite(pose)) for pose in poses]
+    boites = [(t, b) for t, b in boites if b is not None]
+    paires = []
+    for i in range(len(boites)):
+        ti, bi = boites[i]
+        for j in range(i + 1, len(boites)):
+            tj, bj = boites[j]
+            if (bi[0] < bj[2] - marge and bj[0] < bi[2] - marge
+                    and bi[1] < bj[3] - marge and bj[1] < bi[3] - marge):
+                paires.append((ti, tj))
+    return paires
+
+
 def echelle_appariee(art, x0: int, y0: int, pw: int, ph: int, entrees: list, petit,
                      legende: str, fond=(255, 255, 255), texte=(25, 25, 25),
                      discret=(120, 120, 120), cadre=(200, 200, 200)) -> list[str]:
@@ -394,6 +457,31 @@ def verifier() -> int:
     v("... et rien qui ne soit pas du texte", len(tr.textes) == 2)
     v("... tout en delegant chaque appel au vrai calque", faux.appels == 3)
     v("... et le reste de l'interface de dessin", tr.autre_chose() == "delegue")
+
+    # ⭐⭐⭐ LES DEUX GARDES QUI FERMENT L'ANGLE MORT QUE `textes_debordants` NOMME LUI-MEME.
+    # Elles sont testees sur des poses fabriquees ou l'on SAIT laquelle deborde : une garde
+    # verifiee sur une vraie figure ne prouve que ce que cette figure fait ce jour-la.
+    cadres = [(0, 0, 100, 100), (120, 0, 220, 100)]
+    dedans = (10.0, 10.0, "court", petit)
+    dehors = (10.0, 30.0, "un texte beaucoup trop long pour ce panneau", petit)
+    hors_cadre = (300.0, 10.0, "hors de tout cadre", petit)
+    sortants = textes_hors_cadre([dedans, dehors, hors_cadre], cadres)
+    v("un texte qui sort de son panneau est signale",
+      [t for t, _, _ in sortants] == ["un texte beaucoup trop long pour ce panneau"])
+    # ⚠ Le meme texte, mesure contre la TOILE, ne deborde PAS : c'est exactement l'ecart entre
+    # les deux gardes, et il doit etre montre plutot qu'affirme.
+    v("... alors que la garde de toile le laisse passer",
+      not textes_debordants([dehors], 1000))
+    v("... et un texte hors de tout cadre est ignore, pas accuse",
+      all(t != "hors de tout cadre" for t, _, _ in sortants))
+    # ⚠⚠ Deux lignes empilees a l'interligne usuel ne doivent PAS etre declarees en
+    # chevauchement, sinon la garde crie au loup — le defaut que `verifier_chiffres` a paye.
+    empilees = [(0.0, 0.0, "premiere ligne", petit), (0.0, 19.0, "seconde ligne", petit)]
+    v("deux lignes a l'interligne usuel ne se recouvrent pas",
+      not textes_qui_se_recouvrent(empilees))
+    ecrasees = [(0.0, 0.0, "une etiquette", petit), (20.0, 2.0, "par-dessus", petit)]
+    v("... mais deux textes ecrits l'un sur l'autre le sont",
+      len(textes_qui_se_recouvrent(ecrasees)) == 1)
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0

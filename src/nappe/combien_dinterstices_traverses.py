@@ -258,9 +258,20 @@ def segments(a: np.ndarray, ok: np.ndarray, bords: np.ndarray, cx: np.ndarray,
              pas_um: float = PAS_UM) -> np.ndarray:
     """Les points a lire : de chaque cellule choisie jusqu'a UN PAS DE FEUILLE plus loin, radial.
 
-    ⚠⚠ LE SEGMENT EST RADIAL ET A z CONSTANT, donc il traverse l'empilement perpendiculairement.
-    Le suivre le long de la spire au lieu de radialement mesurerait la feuille et non l'espace
-    entre deux feuilles.
+    ⚠⚠ LE SEGMENT EST RADIAL ET A z CONSTANT. Le suivre le long de la spire au lieu de
+    radialement mesurerait la feuille et non l'espace entre deux feuilles.
+
+    ⛔⛔⛔ CORRECTION D'UNE AFFIRMATION QUI ETAIT ECRITE ICI ET QUI EST MESUREE FAUSSE. Cette
+    docstring disait « donc il traverse l'empilement perpendiculairement ». `100` a mesure que non :
+    la normale de la nappe est a **16 a 38°** du rayon, la ou une spirale de ce pas en predirait
+    **0,06 a 0,35°**, et deux estimateurs sans hypothese commune s'accordent dessus. Le segment
+    radial coupe donc l'empilement DE BIAIS.
+
+    ⭐⭐⭐ ET CE QUI SAUVE LA MESURE N'EST PAS CE QUI ETAIT ECRIT, C'EST UN AUTRE RESULTAT DE `100` :
+    le pas lu le long de la NORMALE egale le pas lu radialement (rapports 0,91 a 1,19 disperses
+    autour de 1,00, aucun 1/cos systematique), sur un instrument dont le controle montre qu'il VOIT
+    l'obliquite quand elle existe. La direction du segment ne change donc pas ce qui est mesure —
+    mais pour une raison qui reste inexpliquee, pas parce que le segment serait perpendiculaire.
 
     ⚠⚠⚠ ET LE CENTRE EST INTERPOLE EN z, PAS PRIS PAR TRANCHE — c'est le defaut que `96` a paye :
     `axe_par_tranche` rend un centre constant par tranche et l'axe derive de 12,6 mm, donc deux

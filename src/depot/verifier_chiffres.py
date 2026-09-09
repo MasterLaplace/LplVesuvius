@@ -2061,6 +2061,65 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         out.append(("part utilisable contre la continuite",
                     [f"**{txt}**", txt, f"{val:.3f}"], pmm.name))
 
+    # ⭐⭐⭐ L'OBLIQUITE DE LA NAPPE (`100`), ET DEUX APPARIEMENTS SONT OBLIGATOIRES ICI.
+    # (1) L'angle MESURE ne voyage jamais sans l'angle PREDIT : « la normale est a 31° du rayon »
+    # est un nombre nu, « 31° la ou une spirale en predit 0,25 » EST le resultat. Publier le
+    # premier seul serait publier une surprise sans dire qu'elle en est une.
+    # (2) Le rapport radial/normal ne voyage jamais sans 1/cos : le rapport seul se lit comme une
+    # egalite banale, alors que c'est une REFUTATION — et une refutation sans ce qu'elle refute
+    # n'est pas verifiable.
+    obl = _source(racine, "la_normale_nest_pas_le_rayon.json")
+    if obl.exists():
+        d = json.loads(obl.read_text())
+        s100 = d.get("resume", {})
+        for cle, nom in (("angle_grille_median_deg", "angle de la normale de grille au rayon"),
+                         ("angle_acp_median_deg", "angle de la normale ACP au rayon"),
+                         ("inclinaison_predite_mediane_deg",
+                          "inclinaison predite par la spirale"),
+                         ("combien_de_fois_la_prediction",
+                          "combien de fois la prediction de la spirale"),
+                         ("ecart_entre_estimateurs_deg", "ecart entre les deux estimateurs"),
+                         ("angle_du_a_z_median_deg", "part de l'obliquite due a z"),
+                         ("angle_dans_le_plan_median_deg",
+                          "part de l'obliquite dans le plan"),
+                         ("angle_au_plus_petit_voisinage_deg",
+                          "angle au plus petit voisinage"),
+                         ("angle_au_plus_grand_voisinage_deg",
+                          "angle au plus grand voisinage")):
+            if cle not in s100:
+                continue
+            val = s100[cle]
+            txt = f"{val}".replace(".", ",")
+            formes = [f"**{txt}**", txt, f"{val}"]
+            # ⚠⚠ UN ANGLE SE REDIGE AU DIXIEME DE DEGRE, ET C'EST CE QUE LE MODULE IMPRIME
+            # LUI-MEME. Exiger la forme a deux decimales ferait accuser un texte correct de
+            # citer un chiffre perime — la faute que ce garde a deja payee, et il n'y a pas
+            # d'ambiguite ici : 34,1 et 34,06 sont le meme nombre a la precision affichee.
+            if cle.endswith("_deg") and isinstance(val, float):
+                court = f"{val:.1f}".replace(".", ",")
+                formes = [f"**{court}**", court, f"{val:.1f}"] + formes
+            out.append((nom, formes, obl.name))
+        dd = d.get("le_pas_dans_les_deux_directions", {})
+        for cle, nom in (("rapport_median", "rapport pas radial sur pas normal"),
+                         ("rapport_min", "rapport radial/normal, minimum"),
+                         ("rapport_max", "rapport radial/normal, maximum"),
+                         ("un_sur_cos_median", "1/cos median de l'obliquite"),
+                         ("ecart_a_un", "ecart du rapport a un"),
+                         ("ecart_a_un_sur_cos", "ecart du rapport a 1/cos"),
+                         ("correlation_rapport_contre_un_sur_cos",
+                          "correlation du rapport contre 1/cos")):
+            if cle not in dd:
+                continue
+            val = dd[cle]
+            txt = f"{val}".replace(".", ",")
+            formes = [f"**{txt}**", txt, f"{val}"]
+            # ⚠ Une correlation se publie AVEC SON SIGNE : « 0,153 » et « +0,153 » sont le meme
+            # nombre, et le depot ecrit le second — sans cette forme le garde le croirait absent.
+            if cle.startswith("correlation"):
+                signe = f"{val:+.3f}".replace(".", ",").replace("-", "\u2212")
+                formes = [f"**{signe}**", signe, f"{val:+.3f}"] + formes
+            out.append((nom, formes, obl.name))
+
     # ⭐⭐⭐ LES INTERSTICES TRAVERSES (`98`), LE PREMIER CRITERE DONT LE SEUIL VIENT DE LA
     # MATIERE. Garde parce que le verdict n'a de sens qu'avec la BARRE DU NUL a cote : « accord
     # 0,353 » est un nombre nu, « 0,353 pour une barre de 0,331 » dit que la matiere est presque
