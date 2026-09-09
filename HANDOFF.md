@@ -144,6 +144,49 @@ un seul.**
 riche du concours ne contient pas une marche entière. Mais c'est la première fois que la portée de
 ce dépôt peut se comparer à du **travail humain publié** plutôt qu'à une borne censurée.
 
+⛔⛔⛔ **DEUX OBSERVABLES LOCALES ÉCHOUENT DE LA MÊME FAÇON, ET C'EST LE MOTIF QUI COMPTE**
+([`95`](docs/95_la_surface_et_la_feuille_par_rayon.md)). `94` a tué le froissement parce qu'il est
+une propriété du **maillage** ; il fallait donc une observable de la **matière**, et le dépôt en
+avait une — l'écart entre la surface publiée et le ruban qu'elle suit — qui ne couvrait
+`PHercParis4` que par **une bande**. Étendue aux 28, à 2,4 µm : la dispersion vaut **20,0 µm au
+cœur et 13,85 au bord**, donc la surface humaine est **MIEUX posée** là où `92` mesure une
+continuité brisée (×31) et `93` des spires désalignées (×3,67 au même tiers). Corrélations **−0,702** avec le
+rayon, **−0,694** avec la rupture.
+
+⭐⭐ **Le confondant est traité par trois chemins qui s'accordent** : le volume est masqué et la part
+au remplissage monte à **+0,800** avec le rayon, donc sans la retirer « la surface est mieux posée
+au bord » et « le volume s'arrête au bord » seraient la même observation. Brut −0,694, **partielle
+−0,533**, et en **jetant** les bandes rongées −0,434 sur 16 bandes. ⭐⭐⭐ Et le seuil n'est pas
+réglé, c'est **vérifiable** : le balayage publié donne −0,630 · −0,658 · −0,646 · −0,738 · −0,753
+de 5 % à 30 % de remplissage toléré.
+
+⭐⭐⭐ **ET LE VRAI RÉSULTAT EST LE MOTIF.** Deux observables locales indépendantes disent « plus
+propre » exactement là où le transfert échoue. **Au bord, l'humain qui ne peut pas suivre la vraie
+feuille en trace une autre, proprement : le maillage épouse très bien UNE feuille, simplement pas
+la bonne.** ⛔⛔ Donc ce qui échoue au bord n'est pas la **qualité locale** mais l'**identité** de
+la feuille, et une observable locale ne peut pas la voir par construction — elle mesure à quel point
+on est bien posé sur ce qu'on suit, jamais si c'est ce qu'il fallait suivre. **Le signal à chercher
+est topologique, donc global.**
+
+⭐⭐ **Deux outils partagés livrés au passage, et ils valent au-delà de cette tranche** : les chunks
+du dépôt sont écrits **sans compression**, donc un voxel se lit par requête `Range`
+(`src/commun/voxel_distant.py`, 20,7 Go lus sans rien rapatrier) ; et la matrice
+`45,532 µm → 2,4 µm` est **publiée** dans `metadata.min.json`
+(`src/commun/transformations_de_volume.py`). ⚠⚠ Le volume fin n'est pas un luxe : à 45,532 µm un
+demi-écart inter-feuilles vaut **deux voxels**, donc y mesurer un décalage de vingt micromètres
+publierait une **limite de grille** comme une limite de matière.
+
+⚠⚠⚠ **Et un résultat qui bougeait entre deux exécutions du même calcul** : une bande avait perdu
+**25 cellules sur 90** par coupure réseau passagère, en silence, ce qui déplaçait la médiane du
+tiers du bord de 13,85 à 13,1 µm. Les lectures sont désormais **réessayées** (pannes réseau
+seulement — un code HTTP est une réponse, pas une panne) **et** le compte de pertes est **publié**
+par bande : il faut les deux, un réessai qui échoue quand même laissant le même trou muet.
+
+⚠⚠⚠ Et une erreur à moi, gardée : ma sonde exploratoire prenait **trois** bandes et voyait le
+contraste tomber de 119 à 11 — or `w128-129` est l'une des **deux seules** bandes dont le contraste
+s'effondre, et celle dont le remplissage est le plus fort. **Un bord se compte sur le corpus entier,
+pas sur les bandes qu'on a sondées** — la faute que `93` avait déjà payée, réécrite autrement.
+
 ⛔⛔⛔ **LE FROISSEMENT NE PEUT PAS SERVIR DE SIGNAL DE CONFIANCE — IL EST ANTI-PRÉDICTIF**
 ([`94`](docs/94_le_froissement_mesure_la_rugosite.md)). `93` dit **où** le pas géométrique échoue ;
 ce qui manque est un signal que le marcheur lit **tout seul**, et le **pli** était le candidat —

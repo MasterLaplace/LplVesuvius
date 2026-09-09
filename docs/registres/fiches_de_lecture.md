@@ -5247,6 +5247,70 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/95_la_surface_et_la_feuille_par_rayon.md
+- **lignes** : 140
+- **nature** : RESULTAT
+  (l'écart entre la surface humaine et la feuille qu'elle suit, mesuré à 2,4 µm sur les 28 bandes
+  de `PHercParis4` ; la seconde observable candidate, et le motif que son échec révèle.)
+- **résumé** : ⛔⛔⛔ [`94`](../94_le_froissement_mesure_la_rugosite.md) a tué le froissement parce
+  qu'il est une propriété du **maillage** ; il fallait donc une observable de la **matière**. Le
+  dépôt en avait une — l'écart surface/feuille — mais elle ne couvrait `PHercParis4` que par **une
+  bande**. Étendue aux 28 : la dispersion vaut **20,0 µm au cœur et 13,85 au bord**, donc la surface
+  humaine est **MIEUX posée** là où `92` mesure une continuité brisée (×31) et `93` des spires
+  désalignées (×3,67 au même tiers). Corrélations **−0,702** avec le rayon, **−0,694** avec la rupture.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **Deux observables locales indépendantes échouent de la MÊME façon, et c'est le
+    résultat.** Le pli du maillage (`94`) et la pose sur la matière (ici) disent tous deux « plus
+    propre » exactement là où le transfert échoue. Ce n'est plus une coïncidence, c'est un motif :
+    **au bord, l'humain qui ne peut pas suivre la vraie feuille en trace une autre, proprement.
+    Le maillage épouse très bien UNE feuille, simplement pas la bonne.**
+  - ⛔⛔ **Donc ce qui échoue au bord n'est pas la qualité LOCALE mais l'IDENTITÉ de la feuille**,
+    et une observable locale ne peut pas la voir par construction : elle mesure à quel point on est
+    bien posé sur ce qu'on suit, jamais si c'est ce qu'il fallait suivre. Le signal à chercher est
+    **topologique**, donc global.
+  - ⭐⭐ **Le confondant est traité par TROIS chemins qui doivent s'accorder** : brut (−0,694),
+    corrélation **partielle** masque retiré (−0,533), et en **jetant** les bandes rongées (−0,434
+    sur 16 bandes). ⭐ Retirer un confondant par une formule et le retirer en jetant les cas
+    concernés sont deux gestes différents ; s'ils divergent, c'est la formule qui a tort.
+  - ⭐⭐⭐ **Le seuil n'est pas réglé, et c'est vérifiable** : le balayage publié donne −0,630 ·
+    −0,658 · −0,646 · −0,738 · −0,753 de 5 % à 30 % de remplissage toléré. Un verdict qui ne
+    tiendrait qu'à une valeur serait un nombre choisi pour que le résultat passe.
+  - ⭐⭐ **Deux outils partagés rendent la mesure abordable, et ils valent au-delà d'elle** :
+    les chunks du dépôt sont **sans compression**, donc un voxel se lit par requête `Range`
+    (20,7 Go sans rien rapatrier) ; et la matrice `45,532 µm → 2,4 µm` est **publiée**. ⚠ Le
+    volume fin n'est pas un luxe : à 45,532 µm un demi-écart inter-feuilles vaut **deux voxels**,
+    donc y mesurer un décalage de 20 µm publierait une limite de grille comme une limite de
+    matière. C'est un contrôle de la batterie.
+- **rétractations / corrections internes** :
+  - §6 : ⚠⚠⚠ **ma sonde exploratoire à TROIS bandes était fausse, et fausse comme `93` l'avait
+    déjà payé.** Elle prenait cœur, milieu et `w128-129`, et voyait le contraste tomber de **119
+    à 11** — or `w128-129` est l'une des **deux seules** bandes dont le contraste s'effondre, et
+    celle dont le remplissage est le plus fort (0,385). Sur les 28, le contraste n'a **aucune
+    relation stable** au rayon : −0,276 brut, +0,356 masque retiré, et le **signe change** selon
+    le seuil. ⭐ **Un bord se compte sur le corpus entier, pas sur les bandes qu'on a sondées.**
+  - §7 : ⚠⚠ **la dispersion ne se lit jamais sans son contraste** — sans relief, le centre de
+    masse d'un profil de bruit se pose au **milieu** de la fenêtre, donc il disperse peu, et lue
+    seule la colonne dirait « la surface est la mieux placée au bord » pour une bande où il n'y a
+    rien à mesurer. La batterie fixture exactement ce piège.
+  - batterie : ⚠ une fixture de corrélation partielle **décrivait mal ce qu'elle contenait** —
+    j'y affirmais un lien « qui ne passe pas par le confondant » alors qu'il y passait, et la
+    partielle avait **raison** de le réduire à 0,48. Corrigée en rendant la composante étrangère
+    au confondant explicite, plutôt qu'en déplaçant le seuil.
+  - outillage : ⚠ `voxel_distant` confondait d'abord **un chunk absent** (404 = remplissage, une
+    valeur légitime) avec **une panne réseau**. Les aplatir ferait lire du vide là où le réseau a
+    lâché, c'est-à-dire fabriquer la mesure qu'on cherche.
+  - §8 : ⚠⚠⚠ **le résultat bougeait entre deux exécutions du même calcul** — bord 13,8 puis
+    13,1 µm — parce qu'une bande avait perdu **25 cellules sur 90** par coupure réseau passagère,
+    **en silence**. Deux remèdes, tous deux nécessaires : les lectures sont **réessayées** (sur
+    les pannes réseau seulement, jamais sur un code HTTP), et le compte de cellules perdues est
+    **publié** par bande. ⭐ Un nombre dont la valeur dépend de l'humeur du réseau n'est pas un
+    résultat, et un réessai sans compte publié laisserait le même trou muet.
+- **preuve de lecture intégrale** :
+  - l. 70 (après 56 % du fichier) : `| 15 % | 20 | −0,646 |`
+  - l. 110 : `feuille suivie. Une observable locale, par construction, ne peut pas la voir : elle mesure à quel`
+
+---
+
 ### docs/94_le_froissement_mesure_la_rugosite.md
 - **lignes** : 123
 - **nature** : RESULTAT
@@ -5329,7 +5393,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
 - **conclusions extractibles** :
   - ⭐⭐ **Les deux modes d'échec sont au BORD**, pas aux deux bouts : la surface y est **brisée**
     (×31, [`92`](../92_la_continuite_des_transferts.md)) *et* les spires y sont **désalignées**
-    (×4,18). Au milieu les deux sont propres. Un automate a donc un problème **localisé**.
+    (×3,67 au même tiers). Au milieu les deux sont propres. Un automate a donc un problème **localisé**.
   - ⚠⚠⚠ **Les deux bandes internes ne sont pas désalignées, elles sont NON RÉSOLUES** :
     `w010-027` n'a que 27 colonnes par tour, donc sa normale est moyennée sur **13,3° d'arc** —
     plus que son propre désaccord adjacent (11,6°). ⭐ Critère d'exclusion **dérivé** de cette
@@ -6246,7 +6310,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 5830
+- **lignes** : 5926
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)

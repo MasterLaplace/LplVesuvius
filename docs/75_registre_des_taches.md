@@ -4536,7 +4536,7 @@ propre désaccord adjacent. ⭐ Le critère d'exclusion est **dérivé** de cett
 choisi, et il exclut exactement deux bandes.
 
 > ⭐⭐ **LES DEUX MODES D'ÉCHEC SONT AU BORD**, pas aux deux bouts : la surface y est **brisée**
-> (×31, `92`) *et* les spires y sont **désalignées** (×4,18). Au milieu, les deux sont propres.
+> (×31, `92`) *et* les spires y sont **désalignées** (×3,67 au même tiers). Au milieu, les deux sont propres.
 > **Un automate a un problème localisé, pas uniforme.**
 
 ⚠⚠⚠ **Une erreur à moi qui a INVERSÉ la conclusion.** Mon exploration comparait la **bande 0** à
@@ -4551,6 +4551,102 @@ par la **rotation** de la normale (13,3° au cœur, 1,9° au bord). Preuve : une
 ⚠ **Et `--verifier` est resté vert à 17 contrôles pendant que `main()` plantait** sur une clef
 renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la batterie lance** — une
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
+
+---
+##### ⛔⛔⛔ LA SURFACE HUMAINE EST MIEUX POSÉE SUR LA FEUILLE LÀ OÙ LE TRANSFERT CASSE
+
+> Mesure : `src/nappe/la_surface_et_la_feuille_par_rayon.py` (26 contrôles) →
+> `docs/mesures/la_surface_et_la_feuille_par_rayon.json`. Outils partagés :
+> `src/commun/voxel_distant.py` (16 contrôles), `src/commun/transformations_de_volume.py`
+> (12 contrôles). Figure : `src/figures/figure_la_surface_et_la_feuille_par_rayon.py`.
+> Document : [`95`](95_la_surface_et_la_feuille_par_rayon.md), le 2026-09-09.
+
+![la surface et la feuille par rayon](images/95_la_surface_et_la_feuille_par_rayon.png)
+
+La tranche du dessous a tué le froissement parce qu'il est une propriété du **maillage** ; il
+fallait une observable de la **matière**. Le dépôt en avait une — `la_surface_et_la_feuille`, l'écart
+entre la spire publiée et le ruban qu'elle suit — mais elle ne couvre `PHercParis4` que par **une
+bande**. Étendue aux 28, à 2,4 µm :
+
+| tiers | dispersion | contraste | part au remplissage | continuité |
+|---|---:|---:|---:|---:|
+| cœur (9) | **20,0 µm** | 107,5 | 0,011 | ×1,7 |
+| milieu (9) | 17,1 µm | 108,5 | 0,068 | ×5,9 |
+| bord (10) | **13,85 µm** | 114,5 | 0,167 | **×31,0** |
+
+⛔⛔⛔ **La surface est donc MIEUX posée là où le transfert casse** : −0,702 avec le rayon, −0,694
+avec la rupture de continuité.
+
+⭐⭐⭐ **CE QUI A RENDU LES 28 BANDES ABORDABLES**, et les deux outils valent au-delà de cette
+tranche : les chunks du dépôt sont écrits **sans compression**, donc l'octet d'un voxel est à un
+décalage calculable et une requête `Range` suffit — 20,7 Go lus sans rien rapatrier ; et la matrice
+`45,532 µm → 2,4 µm` est **publiée** dans `metadata.min.json`. ⚠⚠ Le volume fin n'est pas un
+luxe : à 45,532 µm un demi-écart inter-feuilles vaut **deux voxels**, donc y mesurer un décalage de
+vingt micromètres publierait une **limite de grille** comme une limite de matière.
+
+⚠ Et la convention de la matrice ne se devine pas : mesurée sur 400 cellules réelles, **+0,412**
+pour « matrice sur (x,y,z) puis inversion » contre **+0,073** pour l'autre lecture. Un mauvais
+ordre d'axes rend des octets parfaitement valides, pris ailleurs dans le rouleau.
+
+⭐⭐ **LE CONFONDANT EST TRAITÉ PAR TROIS CHEMINS QUI DOIVENT S'ACCORDER.** Le volume est masqué et
+la part au remplissage monte à **+0,800** avec le rayon, donc sans la retirer « la surface est mieux
+posée au bord » et « le volume s'arrête au bord » seraient la **même observation**.
+
+| chemin | dispersion / rayon | dispersion / continuité |
+|---|---:|---:|
+| brut | −0,702 | −0,694 |
+| corrélation **partielle** | **−0,550** | **−0,533** |
+| en **jetant** les bandes rongées (16) | −0,658 | −0,434 |
+
+⭐ Retirer un confondant par une formule et le retirer en jetant les cas concernés sont **deux
+gestes différents** : s'ils ne s'accordent pas, c'est la formule qui a tort, parce qu'elle suppose
+une relation linéaire que des bandes à 0,2 et 0,4 de remplissage ne respectent pas.
+
+⭐⭐⭐ **Et le seuil n'est pas réglé, c'est vérifiable** : le balayage publié donne **−0,630 ·
+−0,658 · −0,646 · −0,738 · −0,753** de 5 % à 30 % de remplissage toléré.
+
+⚠⚠⚠ **Une erreur à moi, gardée.** Ma sonde exploratoire prenait **trois** bandes — cœur, milieu,
+`w128-129` — et voyait le contraste tomber de **119 à 11**. Or `w128-129` est l'une des **deux
+seules** bandes dont le contraste s'effondre, et celle dont le remplissage est le plus fort (0,385).
+Sur les 28, le contraste n'a **aucune relation stable** au rayon (−0,276 brut, +0,356 masque retiré,
+signe changeant selon le seuil).
+
+> **Un bord se compte sur le corpus entier, pas sur les bandes qu'on a sondées.**
+
+C'est la faute que `93` avait déjà payée en comparant la bande 0 à la bande 7, réécrite sous une
+autre forme.
+
+⚠⚠ **La dispersion ne se lit jamais sans son contraste** : sans relief, le centre de masse d'un
+profil de bruit se pose au **milieu** de la fenêtre, donc il disperse peu. Lue seule, la colonne
+dirait « la surface est la mieux placée au bord » pour une bande où il n'y a rien à mesurer.
+
+##### ⚠⚠⚠ Un résultat qui bougeait entre deux exécutions du même calcul
+
+Les deux premiers runs ont rendu des médianes par tiers **différentes** (bord 13,85 puis 13,1 µm)
+alors que toutes les valeurs par bande étaient identiques : la bande `w110-112` avait **65 cellules
+au lieu de 90**, vingt-cinq perdues par coupure réseau passagère, **en silence**.
+
+> **Un nombre publié dont la valeur dépend de l'humeur du réseau n'est pas un résultat.**
+
+Deux remèdes, et il faut les **deux** : les lectures sont **réessayées** — sur les pannes réseau
+seulement, jamais sur un code HTTP, qui est une réponse et non une panne — et le compte de cellules
+perdues est **publié** par bande et en tête. Un réessai qui échoue quand même laisserait sinon
+exactement le même trou muet. Le contrôle est dans la batterie de `voxel_distant` : une panne
+réseau doit être réessayée trois fois, un 404 rendu du premier coup.
+
+##### ⭐⭐⭐ ET LE VRAI RÉSULTAT EST LE MOTIF, PAS LA CORRÉLATION
+
+**Deux observables locales indépendantes** — le pli du maillage et la pose sur la matière — disent
+toutes deux « plus propre » exactement là où le transfert échoue. Ce n'est plus une coïncidence.
+
+> ⭐⭐⭐ **Au bord, l'humain qui ne peut pas suivre la vraie feuille en trace une autre,
+> proprement. Le maillage épouse très bien UNE feuille — simplement pas la bonne.**
+
+⛔⛔ **Donc ce qui échoue au bord n'est pas la QUALITÉ locale mais l'IDENTITÉ de la feuille**, et
+une observable locale ne peut pas la voir par construction : elle mesure à quel point on est bien
+posé sur ce qu'on suit, jamais si c'est ce qu'il fallait suivre. Un signal de confiance bâti sur
+l'une ou l'autre de ces deux familles **classerait l'abandon comme une réussite**. Le signal à
+chercher est **topologique**, donc global.
 
 ---
 ##### ⛔⛔⛔ LE FROISSEMENT DÉSIGNE-T-IL OÙ LE TRANSFERT ÉCHOUE ? Non — il désigne l'INVERSE

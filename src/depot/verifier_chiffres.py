@@ -1976,6 +1976,45 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # ⭐⭐⭐ L'ecart de la spire PUBLIEE a la feuille (`77` §10). Garde parce que c'est un
     # PLANCHER sur toute erreur mesuree contre ces spires -- y compris les 47 um du champ.
     # Publier l'un sans l'autre ferait passer l'erreur du referent pour la mienne.
+    # ⭐⭐⭐ LE MEME ECART, MAIS A TRAVERS LES RAYONS (`95`). Garde parce que c'est le SECOND
+    # candidat de signal de confiance a echouer, et que son verdict ne tient que si le
+    # confondant du masque est publie a cote : sans lui, « la surface est mieux posee au bord »
+    # et « le volume s'arrete au bord » sont la meme observation.
+    sfr = _source(racine, "la_surface_et_la_feuille_par_rayon.json")
+    if sfr.exists():
+        d = json.loads(sfr.read_text())
+        for tiers in ("coeur", "milieu", "bord"):
+            t = d["par_tiers"].get(tiers)
+            if not t:
+                continue
+            out.append((f"dispersion surface/feuille au {tiers}",
+                        [f"**{t['dispersion_um']} µm**", f"{t['dispersion_um']} µm",
+                         f"{t['dispersion_um']}".replace(".", ",") + " µm",
+                         f"{t['dispersion_um']}".replace(".", ",")], sfr.name))
+        c, q = d["correlations"], d["une_fois_le_masque_retire"]
+        for nom, val in (("dispersion contre le rayon", c["dispersion_contre_rayon"]),
+                         ("dispersion contre la continuite", c["dispersion_contre_continuite"]),
+                         ("part au remplissage contre le rayon", c["part_au_zero_contre_rayon"]),
+                         ("contraste contre le rayon", c["contraste_contre_rayon"]),
+                         ("dispersion/rayon masque retire", q["dispersion_contre_rayon"]),
+                         ("dispersion/continuite masque retire",
+                          q["dispersion_contre_continuite"])):
+            txt = f"{val:.3f}".replace(".", ",").replace("-", "\u2212")
+            out.append((nom, [f"**{txt}**", txt, f"{val:.3f}"], sfr.name))
+        # ⚠⚠ LE BALAYAGE EST GARDE ENTIER : c'est lui qui rend « le seuil n'est pas regle »
+        # verifiable, donc un document qui n'en citerait qu'une valeur serait perime sans
+        # qu'on le voie.
+        for b in d["balayage_du_seuil"]:
+            if "dispersion_contre_rayon" not in b:
+                continue
+            v = b["dispersion_contre_rayon"]
+            txt = f"{v:.3f}".replace(".", ",").replace("-", "\u2212")
+            out.append((f"balayage a {int(b['seuil'] * 100)} % de remplissage",
+                        [f"**{txt}**", txt, f"{v}".replace(".", ",").replace("-", "\u2212"),
+                         f"{v}"], sfr.name))
+        out.append(("cellules perdues au reseau",
+                    [f"**{d['cellules_perdues']}**", str(d["cellules_perdues"])], sfr.name))
+
     sef = _source(racine, "la_surface_et_la_feuille.json")
     if sef.exists():
         d = json.loads(sef.read_text())
