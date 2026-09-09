@@ -216,6 +216,48 @@ def perimee(attendu: str, textes: dict) -> list[str]:
     # fois que ce fichier le paie.
     if not _re.search(r"[A-Za-zÀ-ÿ]", attendu):
         return []
+    # ⚠⚠⚠ IL FAUT UN MOT QUI NOMME LA QUANTITE, PAS SEULEMENT UNE LETTRE — et c'est la
+    # QUATRIEME occurrence du meme mode d'echec dans ce fichier ; les deux premieres sont
+    # nommees juste au-dessus, la troisieme etait celle des unites.
+    #
+    # Une fois les chiffres remplaces par un joker, `**276,9 µm**` devient `**<nombre> µm**`,
+    # et `0,55 % a 86,00 %` devient `<nombre> % a <nombre> %`. Des dizaines de quantites
+    # differentes partagent ces formes, donc le motif ne peut designer personne. Mesure du
+    # defaut : sur un seul document, SIX accusations, dont DEUX portaient sur un bloc
+    # fraichement ecrit et correct — le garde reprochait au HANDOFF une valeur du tiers MILIEU
+    # alors qu'il citait celle du COEUR, et une etendue de mosaique alors qu'il ecrivait une
+    # demi-feuille « de 82 a 91 ».
+    #
+    # ⭐ CE QUI DISCRIMINE EST LE NOM DE LA QUANTITE. Une unite (`µm`, `%`) et un connecteur
+    # (`a`, `fois`, `partout`, `sur`) sont STRUCTURELS : ils apparaissent dans toutes les
+    # phrases de mesure du depot. Si rien d'autre ne reste apres les avoir retires, l'ecriture
+    # attendue ne nomme pas ce dont elle parle, et accuser serait tirer au sort un coupable.
+    STRUCTURELS = (
+        # unites
+        "µm", "mm", "cm²", "cm", "px", "µs", "ms", "octets", "voxels", "voxel",
+        "feuilles", "feuille", "tours", "tour", "bandes", "bande", "points", "point",
+        # connecteurs et quantificateurs
+        "partout", "environ", "jusqu", "contre", "entre", "fois", "sur", "de", "du",
+        "des", "la", "le", "les", "et", "ou", "en", "au", "aux", "un", "une", "a",
+        "paires", "paire", "cellules", "cellule", "lignes", "ligne",
+    )
+    reste = attendu.lower()
+    for u in sorted(STRUCTURELS, key=len, reverse=True):
+        reste = _re.sub(rf"(?<![a-zà-ÿ]){_re.escape(u)}(?![a-zà-ÿ])", " ", reste)
+    reste = _re.sub(r"[^a-zà-ÿ]+", " ", reste)
+    # ⚠ Un reste de moins de trois lettres ne nomme rien : `s`, `h`, `x` sont des unites ou
+    # des symboles, pas des quantites.
+    nommants = [mot for mot in reste.split() if len(mot) >= 3]
+    # ⚠⚠⚠ ET IL EN FAUT DEUX, ce qui est la cinquieme et derniere forme du meme mode d'echec.
+    # Un motif d'UN SEUL nom de quantite est partage par des quantites differentes : `79
+    # segments` (le compte de la table du champ, tous corpus confondus) accusait le HANDOFF de
+    # citer une valeur perimee alors qu'il ecrivait, correctement, les `80 segments` de
+    # `Scroll1` que `52` publie. Aucun apparieur purement textuel ne peut les distinguer.
+    # ⭐ Deux noms suffisent a lever l'ambiguite en pratique — « 45 batteries, 1322 controles »
+    # en a deux, « 79 segments » un seul — et une ecriture attendue qui n'en porte qu'un peut
+    # etre RENDUE plus specifique a l'enregistrement, ce que le mecanisme permet deja.
+    if len(nommants) < 2:
+        return []
     motif = _re.escape(attendu)
     # ⚠ `re.escape` protege les chiffres tels quels ; on les rouvre un par un.
     motif = _re.sub(r"(?:\\?[0-9])+(?:[.,](?:\\?[0-9])+)?", r"[-+0-9  .,]+", motif)
@@ -2298,6 +2340,68 @@ def verifier() -> int:
     vieux = {_P("perime.md"): normaliser("on a 43 batteries, 1272 controles ici")}
     d_ = perimee("45 batteries, 1322 controles", vieux)
     v("une valeur PÉRIMÉE est localisée", len(d_) == 1 and "perime.md:1" in d_[0], str(d_))
+    # ⚠⚠⚠ ET LE CONTROLE DE LA TROISIEME OCCURRENCE : un motif qui n'est qu'un nombre et une
+    # UNITE ne peut accuser personne, parce que des dizaines de quantites partagent cette forme.
+    # Payé sur le HANDOFF, qui se voyait reprocher une valeur du tiers MILIEU alors qu'il citait
+    # correctement celle du tiers COEUR.
+    unites = {_P("u.md"): normaliser("le plus proche voisin rend **270,8 µm** au coeur")}
+    v("un motif qui n'est qu'un nombre et une unité n'accuse personne",
+      perimee("**276,9 µm**", unites) == [], str(perimee("**276,9 µm**", unites)))
+    v("... ni en pourcentage", perimee("**42,0 %**", {_P("u.md"): normaliser("il en reste 17,5 %")})
+      == [])
+    # ⚠⚠⚠ NI UN CONNECTEUR, ce qui est la forme qui a accuse un bloc fraichement ecrit : « X a
+    # Y », « N fois », « N partout », « N paires sur M » sont des formes que toutes les phrases
+    # de mesure du depot partagent.
+    for forme, texte in (("0,55 % à 86,00 %", "de 5 % à 30 % de remplissage toléré"),
+                         ("1,195 fois", "il est 77 fois plus grand"),
+                         ("0 partout", "on lit 404 partout"),
+                         ("51 paires sur 105", "il reste 2 paires sur 3"),
+                         ("052 à 095", "une demi-feuille de 82 à 91")):
+        v(f"... ni « {forme} », qui ne nomme aucune quantité",
+          perimee(forme, {_P("c.md"): normaliser(texte)}) == [],
+          str(perimee(forme, {_P("c.md"): normaliser(texte)})))
+    # ⭐ Mais un motif qui porte le NOM de la quantité accuse toujours, sinon la garde serait
+    # devenue incapable de signaler ce qu'elle existe pour signaler.
+    # ⚠⚠⚠ ET UN SEUL NOM DE QUANTITE NE SUFFIT PAS : `N segments` est partage par le compte de
+    # la table du champ et par celui des segments de `Scroll1`, et aucun apparieur textuel ne
+    # peut les distinguer. Payé sur le HANDOFF, accusé à tort.
+    # ⚠⚠⚠ ET L'ARBITRAGE EST MESURE ET PUBLIE, POUR QU'IL NE SOIT PAS RE-DESSERRE PAR ACCIDENT.
+    # Resserrer la specificite tue presque le diagnostic PERIME : mesure sur les chiffres
+    # enregistres, SEULS 15 SUR 568 portent un motif capable d'accuser. Deux lectures s'opposent
+    # et il faut choisir la bonne :
+    #
+    #   - avant : le diagnostic tirait sur ~97 % des chiffres, et sur un seul document les SIX
+    #     accusations etaient FAUSSES ;
+    #   - apres : il tire sur 3 %, et aucune n'est fausse.
+    #
+    # ⭐ CE QUI TRANCHE EST QU'« ABSENT » EST LA DETECTION, ET IL EST INTACT. Un document qui ne
+    # cite pas la valeur courante est signale ABSENT quoi qu'il arrive ; PERIME n'ajoute que OU
+    # vit l'ancienne valeur, c'est-a-dire une commodite. Perdre cette commodite sur 97 % des
+    # chiffres coute du confort ; garder six fausses accusations coute la CREDIBILITE du garde,
+    # et ce fichier l'a deja paye deux fois — « un garde qui crie a tort finit ignore ».
+    # ⚠ Donc : ne PAS assouplir `perimee` en constatant son silence. Le silence est le prix
+    # choisi, et le compte ci-dessous le rend visible plutot qu'a redecouvrir.
+    tous = collecter(_P("."))
+    peut_accuser = 0
+    for _n, ecr, _s in tous:
+        faux = re.sub(r"[0-9]", "9", ecr[0])
+        if faux == ecr[0]:
+            continue
+        if perimee(ecr[0], {_P("x.md"): normaliser(faux)}):
+            peut_accuser += 1
+    v("le prix du resserrement est MESURÉ et publié, pas subi",
+      peut_accuser < len(tous) // 4,
+      f"{peut_accuser} motifs sur {len(tous)} peuvent accuser — ABSENT, lui, reste intact")
+    v("... et le diagnostic n'est pas mort pour autant", peut_accuser >= 5,
+      f"{peut_accuser} motifs restent capables d'accuser")
+
+    v("un motif d'un SEUL nom de quantité n'accuse personne",
+      perimee("79 segments", {_P("s.md"): normaliser("sur Scroll1, 80 segments à 128 px")})
+      == [])
+    nomme = {_P("n.md"): normaliser("le desaccord au plan vaut 99,9 µm au coeur")}
+    d2 = perimee("le desaccord au plan vaut 121,7 µm au coeur", nomme)
+    v("... alors qu'un motif qui NOMME la quantité accuse encore",
+      len(d2) == 1 and "n.md:1" in d2[0], str(d2))
     v("... et l'ancienne valeur est citée", "43 batteries" in d_[0])
     # ⚠ Un motif qui n'est QUE des chiffres matcherait n'importe quel nombre du depot.
     v("un chiffre nu ne déclenche pas de diagnostic périmé", perimee("1322", vieux) == [])
@@ -2305,8 +2409,18 @@ def verifier() -> int:
     # accuse un document qui parlait d'autre chose. Deuxieme faux positif du meme fichier.
     v("un motif sans lettre non plus",
       perimee("0 / 4", {_P("x.md"): normaliser("accords 0 / 1 ici")}) == [])
-    v("... alors qu'avec une lettre le diagnostic revient",
-      len(perimee("accords 0 / 4", {_P("x.md"): normaliser("accords 0 / 1 ici")})) == 1)
+    # ⚠⚠⚠ CE CONTROLE A DU ETRE RESSERRE, ET C'EST UNE CORRECTION DE SA PREMISSE. Il exigeait
+    # qu'une SEULE lettre suffise a accuser — c'etait la lecon de la deuxieme occurrence, et la
+    # cinquieme a montre qu'elle etait trop faible : un motif d'un seul nom de quantite
+    # (« accords N », « N segments », « N fois ») est partage par des quantites differentes, et
+    # produisait CINQ fausses accusations sur un seul document. L'intention du controle est
+    # conservee — un motif specifique doit encore accuser — mais la barre est desormais DEUX
+    # noms, ce qui est ce que la mesure impose.
+    v("... alors qu'avec deux mots nommants le diagnostic revient",
+      len(perimee("accords mesures 0 / 4",
+                  {_P("x.md"): normaliser("accords mesures 0 / 1 ici")})) == 1)
+    v("... mais un seul mot nommant ne suffit plus, et c'est mesuré",
+      perimee("accords 0 / 4", {_P("x.md"): normaliser("accords 0 / 1 ici")}) == [])
     v("un document qui n'en parle pas n'est pas accusé",
       perimee("45 batteries, 1322 controles", {_P("autre.md"): "rien"}) == [])
     # ⚠ Et le controle du controle : la meme valeur presente ne doit PAS etre dite perimee.

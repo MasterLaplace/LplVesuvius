@@ -5,6 +5,137 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
+## ⭐⭐⭐⭐ REPRISE — 2026-09-09
+
+**Cinq tranches d'une même campagne, `94` à `98`, et elles ont UNE conclusion.** L'arbre est
+propre, les gardes vertes, 100 fiches sans dérive, 1126 artefacts versionnés sans orphelin. Ce
+bloc remplace le précédent comme état courant ; tout ce qui suit est l'historique, daté.
+
+⚠ Le bloc précédent, daté du 2026-09-03, annonçait un état courant que ces cinq tranches ont
+dépassé. Il est conservé plus bas, sous son en-tête, parce que ses résultats tiennent.
+
+### ⭐⭐⭐ La question était : QU'EST-CE QUI REMPLACE L'HUMAIN QUI CORRIGE LE TRANSFERT ?
+
+La carte du goulot était établie ([`90`](docs/90_laxe_est_une_courbe.md) à
+[`93`](docs/93_ou_les_spires_sont_elles_paralleles.md)) : le transfert casse au **bord**, où la
+surface est brisée (×31) et les spires désalignées (×3,67), et il suffit à **mi-rayon** (×1,23).
+Ce qui manquait était un **signal de confiance** qu'un automate puisse lire seul. Quatre
+candidats ont été testés, dans cet ordre, et chacun a fermé une famille entière :
+
+| tranche | observable | verdict |
+|---|---|---|
+| [`94`](docs/94_le_froissement_mesure_la_rugosite.md) | le **pli** du maillage | ⛔ **anti-prédictif** — −0,825 avec la rupture |
+| [`95`](docs/95_la_surface_et_la_feuille_par_rayon.md) | la **pose sur la matière** | ⛔ **anti-prédictif** — −0,694 |
+| [`96`](docs/96_la_fermeture_dun_tour.md) | la **fermeture d'un tour** | ⭐ bon signe (**+0,822**), mais **aucun étalon** |
+| [`97`](docs/97_deux_humains_sur_la_meme_matiere.md) | deux **tracés humains** de la même matière | ⛔ le **référent lui-même** diverge de plus d'une demi-feuille |
+| [`98`](docs/98_combien_dinterstices_traverses.md) | le **compte d'interstices**, lu dans le volume | ⭐⭐ bon signe (**−0,411**) et **premier seuil matériel** — mais faible au bord |
+
+### ⭐⭐⭐ LA CONCLUSION, ET ELLE TIENT EN UNE PHRASE
+
+> **Aucun signal mesuré contre un maillage humain ne peut être calibré, parce que le maillage
+> humain n'a pas de valeur unique** — deux tracés indépendants de la même matière divergent de
+> **121,7 µm au cœur** pour une demi-feuille de 82 à 91, et de plus d'une feuille entière sur
+> une part de **0,339** des points (`97`).
+
+⭐⭐ **Et c'est ce qui explique les deux premiers négatifs plutôt que de les subir.** `94` et `95`
+cherchaient un signal qui prédise l'écart **à un maillage** ; `96` un signal calibré **contre**
+lui. Les trois mesuraient contre une règle dont on sait maintenant qu'elle bouge de plus d'une
+demi-feuille selon qui la tient. Le motif commun des deux anti-prédictions a d'ailleurs sa
+raison, mesurée : **au bord, l'humain qui ne peut pas suivre la vraie feuille en trace une autre,
+proprement** — le maillage épouse très bien UNE feuille, simplement pas la bonne. Donc ce qui
+échoue au bord n'est pas la **qualité locale** mais l'**identité** de la feuille, et aucune
+observable locale ne peut la voir par construction.
+
+### ⭐⭐ CE QUE ÇA ALIGNE AVEC LE PRIX, ET C'EST UNE BONNE NOUVELLE
+
+[`31`](docs/31_roadmap.md) §1 cite le critère du prix mot pour mot : **100 % du recto déroulé**,
+un **rendu sur lequel l'encre est visible**, jugé par leurs papyrologues à **70 %** des
+caractères lisibles par colonne. Le critère d'acceptation n'est donc **pas** la ressemblance à un
+maillage humain — c'est la lisibilité d'un rendu, que la **matière** tranche.
+
+> ⭐ La campagne ne bute donc pas sur le prix : elle démontre que la voie « imiter le maillage
+> humain » est fermée, et que la voie « interroger la matière » est la seule qui reste — ce qui
+> est exactement ce que le prix demande.
+
+### ⭐⭐ L'INSTRUMENT QUI EST PRÊT, ET CE QU'IL VAUT
+
+`98` livre le premier critère dont le seuil ne vient **ni d'un maillage ni d'un réglage** : entre
+une cellule et le point situé un pas de feuille plus loin, le profil doit valoir
+*brillant – sombre – brillant*. Un **filtre adapté** le lit, et il est **invariant en amplitude
+et en décalage** — donc rien n'est à adapter au rouleau, ce qui répond à la question de l'auteur
+autrement qu'en adaptant un seuil. La barre vient d'un **modèle nul fabriqué** (p99 du bruit
+blanc, **0,3311**), indépendant de σ.
+
+| | mesuré |
+|---|---|
+| fixture : bon nombre d'interstices ET bon côté | **1,000** jusqu'à un bruit **égal** à l'amplitude |
+| réel : la matière répond | **74 %** au cœur, **54 %** au bord |
+| réel : accord médian | 0,457 au cœur, **0,353** au bord pour une barre de 0,3311 |
+| réel : part confirmée à un interstice | 0,557 → 0,518, **−0,411** avec la rupture |
+
+⚠⚠ **Sa limite est nommée** : au bord l'accord frôle la barre et la matière ne répond que la
+moitié du temps. Cohérent avec `94` — le maillage y a **enjambé** ce qu'il ne pouvait pas suivre,
+donc il n'y a pas toujours de matière à interroger. **Là où le transfert casse, la matière est
+presque muette**, et c'est la contrainte dure que la suite doit affronter.
+
+### ⏳ CE QUE LA CAMPAGNE DÉSIGNE COMME SUITE
+
+| # | quoi | pourquoi maintenant |
+|---|---|---|
+| **A** ⭐⭐⭐ | faire de `98` une **règle de décision** et non un audit : noter des pas candidats et **choisir** celui que la matière confirme | ⚠ ne PAS repartir de zéro — `src/nappe/la_longueur_locale_du_pas.py` lit **déjà** la longueur du pas dans le volume, sans la cible. Ce qui manque est de remplacer sa validation **contre les spires publiées** par la barre du **nul** de `98`, puisque `97` a montré qu'un maillage ne peut pas valider |
+| **B** ⭐⭐ | mesurer ce que la matière dit là où elle **répond** (mi-rayon, 74 %) plutôt que là où elle se tait | le graal demande 31 spires ; commencer par la zone où le critère est net est le seul ordre qui produise une marche mesurable |
+| **C** ⚠ | le **bord** : quand la matière est muette, aucun critère local ne peut trancher | c'est le vrai mur, et il est maintenant **chiffré** plutôt que soupçonné |
+| **D** | les deux `.venv` sous `src/` (27 245 fichiers), 482 lanceurs gelés dans `.lances/gel` | dette d'arbre, sans effet sur la mesure |
+
+⚠⚠ **Ne pas re-tenter** : le pli (`94`), la pose sur la matière (`95`), et toute calibration
+d'un signal **contre un maillage humain** (`97`). Trois négatifs mesurés, chacun avec son
+contrôle, chacun avec sa raison écrite.
+
+### ⚠⚠⚠ LES DÉFAUTS D'INSTRUMENT PAYÉS DANS CETTE CAMPAGNE, à ne pas repayer
+
+- **Une sonde sur trois bandes prise pour le corpus** (`95`) : `w128-129` est l'une des deux
+  seules bandes dont le contraste s'effondre. *Un bord se compte sur le corpus entier, pas sur
+  les bandes qu'on a sondées* — la faute de `93`, réécrite.
+- **Un balayage à sous-ensemble variable** (`96`) : 28 bandes à un tour contre 5 à cinq, et les
+  cinq sont les plus internes donc les plus propres. Le confondant retiré rend le fait **plus**
+  fort.
+- **Un centre indexé par cellule** (`96`) alors que l'axe dérive de 12,6 mm : **22 %** des
+  fermetures sortaient négatives.
+- **Une garde qui supprimait ce qu'elle devait laisser mesurer** (`97`) : un critère de bord
+  mesuré dans l'espace mélange « être au bord » et « être loin de la surface », donc il écartait
+  exactement les points où les deux humains divergent. Mesuré dans le **plan tangent**, le
+  désaccord publié **double**.
+- **Un estimateur qui mesurait la grille** (`97`) : au tiers du **cœur**, le plus proche voisin
+  rend **270,8 µm** quand le plan local rend **121,7** — parce qu'il mesure l'**espacement des
+  rangs** de l'autre révision. *Une limite de grille publiée comme une limite de matière.*
+  ⚠ Le vérificateur de chiffres ne sait pas de quel tiers un nombre parle, donc il signalait
+  ce 270,8 comme périmé pour les tiers milieu et bord : nommer le tiers lève l'ambiguïté.
+- **Des gabarits de signe inversé** (`98`), trouvés en **lisant les comptes** : 40 % des profils
+  appariés à un gabarit signifiant « la cellule est dans un interstice », publiés sous le nom
+  « zéro interstice ».
+- **Un test de platitude aveugle au cas dégénéré** (`98`) : un profil exactement constant a une
+  étendue nulle **et** un bruit nul, donc `0 < 4×0` est faux.
+- ⚠⚠⚠ **Et un garde qui accusait à tort, trouvé en écrivant ce bloc même** —
+  `verifier_chiffres` signalait **six** citations périmées dans ce fichier, et **les six étaient
+  fausses**, dont **deux sur du texte fraîchement écrit et correct**. Cause : le diagnostic
+  remplace les chiffres d'une écriture attendue par un joker, donc `**276,9 µm**` devient
+  `**<nombre> µm**` et `0,55 % à 86,00 %` devient `<nombre> % à <nombre> %` — des formes que
+  toutes les phrases de mesure du dépôt partagent. ⭐ **Ce qui discrimine est le nom de la
+  quantité**, jamais une unité ni un connecteur, et il en faut **deux** : un seul nom (`N
+  segments`, `N fois`) est partagé par des quantités différentes. C'est la **quatrième** et
+  **cinquième** occurrence du même mode d'échec dans ce fichier, dont la docstring nommait déjà
+  les deux premières — *« un garde qui crie à tort finit ignoré »*.
+  ⚠⚠ **Et le prix du resserrage est mesuré et publié plutôt que subi** : seuls **15 motifs sur
+  568** peuvent encore accuser, donc le diagnostic PÉRIMÉ est presque muet. Ce qui tranche est
+  qu'**ABSENT est la détection et il est intact** — PÉRIMÉ n'ajoute que *où* vit l'ancienne
+  valeur, une commodité. ⛔ **Ne pas assouplir `perimee` en constatant son silence** : le silence
+  est le prix choisi, et un contrôle le rend visible.
+- ⭐ **Et une leçon d'estimateur qui se généralise** (`98`) : *une proéminence exprimée en unités
+  du bruit propre au profil est invariante d'échelle, donc lisser abaisse le bruit ET le seuil
+  ensemble.* La discrimination vient de la **forme**, jamais de la profondeur.
+
+---
+
 ## ⭐⭐⭐⭐ REPRISE — 2026-09-03
 
 **Douze commits depuis le 2 septembre.** L'arbre est propre, les sept gardes sont vertes,
