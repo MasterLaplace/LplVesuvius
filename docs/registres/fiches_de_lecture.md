@@ -5247,6 +5247,58 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/99_le_pas_que_la_matiere_montre.md
+- **lignes** : 124
+- **nature** : RESULTAT
+  (`98` cesse d'auditer et se met à décider : le balayage rend le pas que la matière montre, plus
+  deux erreurs de modèle nul dont l'une avait produit un artefact publiable.)
+- **résumé** : ⭐⭐⭐ Le pas montré **n'est pas le nominal** — **198,9 µm au cœur, 214,05 au bord**
+  contre **173** publié, avec **plus de 81 %** des cellules à plus d'un dixième du nominal : un
+  automate qui avancerait d'un pas constant se tromperait **quatre fois sur cinq**. ⭐⭐ Et la part
+  de cellules où la matière répond corrèle à **−0,845** avec la rupture de continuité — le signal
+  au bon signe **le plus fort de toute la campagne**, et il est au niveau de la **bande**, donc
+  utilisable pour dire où un automate doit ralentir.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **Un modèle nul doit s'appliquer à CHAQUE quantité qu'une recherche rapporte, pas
+    seulement à sa confiance.** Le nul du **score** existait et était juste ; celui de la
+    **longueur choisie** manquait, et c'est là que vivait l'artefact.
+  - ⭐⭐ **La dégénérescence est levée en fixant k = 1** : un segment de `2p` traversé par deux
+    interstices est indiscernable d'un segment de `p` traversé par un. Chercher `p` à k fixé rend
+    la distance à la feuille **voisine**, qui est la question de l'automate.
+  - ⭐⭐ **Les candidats sont emboîtés**, donc un seul aller au volume suffit — lire 31 segments
+    séparément coûterait **dix-neuf fois** `98`. ⚠ Et chaque candidat porte le **même nombre
+    d'échantillons**, ce qui est la condition pour que la barre soit la même pour toutes les
+    longueurs.
+  - ⚠⚠ **Une butée n'est pas une mesure** : quand l'optimum tombe sur une extrémité de la
+    fenêtre, la matière dit « au moins ceci ». Ces cellules (10 à 14 %) sont retirées de
+    l'utilisable, sinon une limite de **fenêtre** se publierait comme une limite de **matière**.
+- **rétractations / corrections internes** :
+  - §3 : ⛔⛔⛔ **le premier résultat était un ARTEFACT, et seul le nul pouvait le montrer.** La
+    recherche rendait **147 µm** sur le vrai volume — et **147 µm** sur du **bruit pur**. Cause
+    chiffrée : un segment court rééchantillonné sur le même nombre de points est
+    **sur-échantillonné**, donc plus lisse, donc mieux corrélé — le nul passe de **0,1582** au
+    plus court à **0,0925** au plus long, soit **×1,71**. Après calibration par candidat, la même
+    recherche sur du bruit pur choisit 207,6 µm pour une fenêtre centrée à 216.
+  - §4 : ⚠⚠⚠ **une seconde erreur de nul, corrigée avant celle-là** : la barre comparait le
+    **maximum sur 62 essais** au nul d'**un seul** test — l'erreur des comparaisons multiples, qui
+    rend la mesure **incapable d'échouer** (la part lue sautait à **0,98**). Les **trois** barres
+    sont publiées parce que leur écart montre l'ampleur de chaque correction.
+  - §5 : ⭐ **Le contrôle qui décide si la longueur est une mesure** : sa distribution est
+    confrontée à celle du nul, au-dessus de la même barre. Elles **diffèrent** — Kolmogorov-Smirnov
+    **D = 0,603, p = 1,41·10⁻⁵**, médiane **198,9** contre **276,8** — et la barre ne laisse passer
+    que **1,03 %** du bruit pur.
+  - §6 : ⚠⚠ **ce que ça ne dit pas** — le pas montré dépasse aussi celui de `91` sur les transferts
+    humains (164 µm) et celui de l'atlas (182,4), de 9 à 21 %. `97` a établi que le maillage humain
+    n'a pas de valeur unique, donc un désaccord est attendu, mais son **ampleur n'est pas
+    expliquée ici**, et il faut le dire plutôt que choisir le chiffre qui arrange.
+  - figure : ⚠ une étiquette recouverte par sa propre barre — et c'était justement la ligne
+    « BRUIT PUR, non calibré » qui porte l'argument du panneau.
+- **preuve de lecture intégrale** :
+  - l. 75 (après 60 % du fichier) : `## 5. ⭐⭐⭐ Le contrôle qui décide si la longueur est une mesure`
+  - l. 100 : `il est **au niveau de la bande**, donc utilisable pour dire où un automate doit ralentir.`
+
+---
+
 ### docs/98_combien_dinterstices_traverses.md
 - **lignes** : 151
 - **nature** : RESULTAT
@@ -6496,7 +6548,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 6198
+- **lignes** : 6269
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)

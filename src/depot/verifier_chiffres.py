@@ -2018,6 +2018,49 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # ⭐⭐⭐ L'ecart de la spire PUBLIEE a la feuille (`77` §10). Garde parce que c'est un
     # PLANCHER sur toute erreur mesuree contre ces spires -- y compris les 47 um du champ.
     # Publier l'un sans l'autre ferait passer l'erreur du referent pour la mienne.
+    # ⭐⭐⭐ LE PAS QUE LA MATIERE MONTRE (`99`), ET LES TROIS BARRES DOIVENT VOYAGER ENSEMBLE.
+    # Le verdict n'a de sens que si l'on voit l'ecart entre la barre d'un seul essai, celle du
+    # balayage, et celle du balayage CALIBRE : c'est cet ecart qui mesure l'ampleur des deux
+    # corrections. Et la comparaison au nul est gardee entiere, parce que sans elle la longueur
+    # rendue serait indiscernable du biais de la recherche.
+    pmm = _source(racine, "le_pas_que_la_matiere_montre.json")
+    if pmm.exists():
+        d = json.loads(pmm.read_text())
+        for cle, nom in (("barre_du_nul", "barre du nul calibre"),
+                         ("barre_dun_seul_essai", "barre d'un seul essai")):
+            val = d[cle]
+            txt = f"{val}".replace(".", ",")
+            out.append((nom, [f"**{txt}**", txt, f"{val}"], pmm.name))
+        cn = d["la_longueur_differe_du_nul"]
+        for cle, nom in (("mediane_reelle_um", "pas montre, mediane reelle"),
+                         ("mediane_du_nul_um", "pas montre, mediane du nul"),
+                         ("kolmogorov_smirnov_D", "Kolmogorov-Smirnov D du pas montre")):
+            val = cn[cle]
+            txt = f"{val}".replace(".", ",")
+            out.append((nom, [f"**{txt}**", txt, f"{val}"], pmm.name))
+        npc = d["nul_par_candidat"]
+        for cle, nom in (("le_plus_court", "nul du candidat le plus court"),
+                         ("le_plus_long", "nul du candidat le plus long"),
+                         ("rapport", "rapport du biais par candidat")):
+            val = npc[cle]
+            txt = f"{val}".replace(".", ",")
+            out.append((nom, [f"**{txt}**", txt, f"{val}"], pmm.name))
+        for tiers in ("coeur", "milieu", "bord"):
+            t = d["par_tiers"].get(tiers)
+            if not t:
+                continue
+            for cle, nom in (("pas_median_um", "pas montre au"),
+                             ("part_utilisable", "part utilisable au"),
+                             ("part_a_plus_dun_dixieme_du_nominal",
+                              "part a plus d'un dixieme du nominal au")):
+                val = t[cle]
+                txt = f"{val}".replace(".", ",")
+                out.append((f"{nom} {tiers}", [f"**{txt}**", txt, f"{val}"], pmm.name))
+        val = d["correlations"]["part_utilisable_contre_continuite"]
+        txt = f"{val:+.3f}".replace(".", ",").replace("-", "\u2212")
+        out.append(("part utilisable contre la continuite",
+                    [f"**{txt}**", txt, f"{val:.3f}"], pmm.name))
+
     # ⭐⭐⭐ LES INTERSTICES TRAVERSES (`98`), LE PREMIER CRITERE DONT LE SEUIL VIENT DE LA
     # MATIERE. Garde parce que le verdict n'a de sens qu'avec la BARRE DU NUL a cote : « accord
     # 0,353 » est un nombre nu, « 0,353 pour une barre de 0,331 » dit que la matiere est presque

@@ -4553,6 +4553,77 @@ renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la bat
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
 
 ---
+##### ⭐⭐⭐ LE PAS QUE LA MATIÈRE MONTRE — `98` cesse d'auditer et se met à décider
+
+> Mesure : `src/nappe/le_pas_que_la_matiere_montre.py` (22 contrôles) →
+> `docs/mesures/le_pas_que_la_matiere_montre.json`. Figure :
+> `src/figures/figure_le_pas_que_la_matiere_montre.py` (16 contrôles).
+> Document : [`99`](99_le_pas_que_la_matiere_montre.md), le 2026-09-09.
+
+![le pas que la matière montre](images/99_le_pas_que_la_matiere_montre.png)
+
+La tranche du dessous **audite** : elle vérifie un pas qu'on lui donne. Un automate a besoin de
+l'inverse — qu'on lui **dise** le pas. Le même filtre le fait en **balayant** la distance.
+⚠ La dégénérescence est levée en fixant **k = 1** : un segment de `2p` traversé par deux
+interstices est indiscernable d'un segment de `p` traversé par un.
+
+| tiers | utilisable | butée | pas µm | / nominal | > 10 % | continuité |
+|---|---:|---:|---:|---:|---:|---:|
+| cœur (9) | **0,750** | 0,142 | **198,9** | 1,15 | 0,837 | ×1,7 |
+| milieu (9) | 0,742 | 0,100 | 198,9 | 1,15 | 0,811 | ×5,9 |
+| bord (10) | **0,542** | 0,117 | **214,05** | 1,24 | 0,824 | ×31,0 |
+
+⭐⭐ **La part de cellules où la matière répond corrèle à −0,845 avec la rupture** — le signal au
+bon signe **le plus fort de toute la campagne**, et il est au niveau de la **bande**, donc
+utilisable pour dire où un automate doit ralentir.
+
+⭐ **Et le pas montré n'est pas le nominal** : 198,9 à 214,05 µm contre **173**, avec plus de
+**81 %** des cellules à plus d'un dixième. Un pas constant est donc faux **quatre fois sur cinq**.
+
+##### ⛔⛔⛔ Le premier résultat était un ARTEFACT, et seul le nul pouvait le montrer
+
+La recherche rendait un pas médian de **147 µm** sur le vrai volume. Contrôle : la **même**
+recherche sur du **bruit pur** rendait **147 µm** aussi.
+
+> ⭐ **Le « pas que la matière montre » était donc indiscernable du biais de la recherche.**
+
+Cause chiffrée : un segment court rééchantillonné sur le même nombre de points est
+**sur-échantillonné**, donc plus lisse, donc mieux corrélé — le nul passe de **0,1582** au plus
+court à **0,0925** au plus long, soit **×1,71**.
+
+> ⭐⭐⭐ **Un modèle nul doit s'appliquer à CHAQUE quantité qu'une recherche rapporte, pas
+> seulement à sa confiance.** Le nul du **score** existait et était juste ; celui de la **longueur
+> choisie** manquait, et c'est là que vivait l'artefact.
+
+Après calibration par candidat, la même recherche sur du bruit pur choisit **207,6 µm** pour une
+fenêtre centrée à 216, avec un histogramme quasi plat.
+
+##### ⚠⚠⚠ Et une seconde erreur de nul, corrigée avant celle-là
+
+La barre comparait le **maximum sur 62 essais** (31 candidats × 2 polarités) au nul d'**un seul**
+test — l'erreur des comparaisons multiples, qui rend la mesure **incapable d'échouer** : la part
+lue sautait à **0,98**.
+
+| barre | valeur |
+|---|---:|
+| nul d'un seul essai (`98`) | 0,3311 |
+| nul du balayage, non calibré | 0,512 |
+| **nul du balayage, calibré** | **4,357** (écarts-types) |
+
+⚠ Les trois sont publiées, parce que leur **écart** montre l'ampleur de chaque correction.
+
+##### ⭐⭐⭐ Le contrôle qui décide si la longueur est une mesure
+
+La distribution des longueurs retenues est confrontée à celle que le **même** balayage retient sur
+du **bruit pur**, au-dessus de la **même** barre et avec le même rejet des butées :
+**Kolmogorov-Smirnov D = 0,603, p = 1,41·10⁻⁵**, médiane **198,9 µm** contre **276,8** au nul, et
+la barre ne laisse passer que **1,03 %** du bruit.
+
+⚠⚠ **Ce que ça ne dit pas** : le pas montré dépasse aussi celui de `91` sur les transferts humains
+(164 µm) et celui de l'atlas (182,4), de 9 à 21 %. `97` a établi que le maillage humain n'a pas de
+valeur unique, donc un désaccord est attendu — mais son **ampleur n'est pas expliquée ici**.
+
+---
 ##### ⭐⭐⭐ LE PREMIER CRITÈRE DONT LE SEUIL VIENT DE LA MATIÈRE — et il est faible là où il compte
 
 > Mesure : `src/nappe/combien_dinterstices_traverses.py` (32 contrôles) →
