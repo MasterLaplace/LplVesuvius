@@ -2124,6 +2124,111 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             out.append(("cellules appariees lues a tous les pas",
                         [f"**{v['cellules']}**", f"{v['cellules']}"], cub.name))
 
+    # ⛔⛔⛔ LE BALAYAGE REND-IL LE PAS INJECTE (`105`), ET DEUX APPARIEMENTS SONT OBLIGATOIRES.
+    # (1) Le pas lu par le BRUT ne voyage jamais sans celui lu par le CALIBRE : « 164,3 µm » est un
+    # nombre nu, « 164,3 contre 194,6 sur les MEMES lectures » EST le resultat, et c'est leur ecart
+    # qui dit que le sélecteur derive.
+    # (2) Et le pas du marcheur ne voyage jamais sans la BANDE de `104` : sans elle, « 1,184 feuille
+    # par pas » se lirait comme un ecart qu'une verification attraperait, alors que le fait est
+    # qu'aucune ne l'attrape.
+    bal = _source(racine, "le_balayage_rend_il_le_pas_injecte.json")
+    if bal.exists():
+        d = json.loads(bal.read_text())
+        s105 = d.get("resume", {})
+        for cle, nom in (("ecart_calibre_moins_brut_um", "ecart entre les deux selecteurs"),
+                         ("ecart_relatif", "ecart relatif entre les deux selecteurs"),
+                         ("bandes_lues", "bandes appariees du balayage")):
+            if cle not in s105:
+                continue
+            val = s105[cle]
+            txt = f"{val}".replace(".", ",")
+            formes = [f"**{txt}**", txt, f"{val}"]
+            if cle == "ecart_relatif":
+                pc = f"{100 * val:.1f}".replace(".", ",")
+                formes = [f"**{pc} %**", f"{pc} %", f"{pc}%"] + formes
+            out.append((nom, formes, bal.name))
+        for nom_s, val in s105.get("pas_median_par_selecteur_um", {}).items():
+            if val is None:
+                continue
+            txt = f"{val}".replace(".", ",")
+            out.append((f"pas lu par le selecteur {nom_s}", [f"**{txt}**", txt, f"{val}"],
+                        bal.name))
+        for nom_t, par in d.get("par_tiers", {}).items():
+            for nom_s, val in par.items():
+                if val is None:
+                    continue
+                txt = f"{val}".replace(".", ",")
+                out.append((f"pas au {nom_t} par le selecteur {nom_s}",
+                            [f"**{txt}**", txt, f"{val}"], bal.name))
+        for nom_s, b in d.get("biais_fabrique", {}).items():
+            for cle, nom in (("biais_relatif_median", "biais median fabrique du selecteur"),
+                             ("biais_relatif_max", "biais maximal fabrique du selecteur")):
+                val = b[cle]
+                txt = f"{val}".replace(".", ",")
+                formes = [f"**{txt}**", txt, f"{val}", f"{val:+.4f}".replace(".", ",")]
+                pc = f"{100 * val:.1f}".replace(".", ",")
+                formes += [f"**{pc} %**", f"+{pc} %", f"+{pc}%", f"{pc} %"]
+                out.append((f"{nom} {nom_s}", formes, bal.name))
+        mec = d.get("mecanisme", {})
+        for cle, nom in (("mu_le_plus_court", "mu du nul au plus court"),
+                         ("mu_le_plus_long", "mu du nul au plus long"),
+                         ("sd_le_plus_court", "sigma du nul au plus court"),
+                         ("sd_le_plus_long", "sigma du nul au plus long"),
+                         ("choix_brut_um", "candidat retenu par le brut"),
+                         ("choix_calibre_um", "candidat retenu par le calibre"),
+                         ("accord_brut_du_choix_brut", "accord brut du choix brut"),
+                         ("accord_brut_du_choix_calibre", "accord brut du choix calibre")):
+            if cle not in mec:
+                continue
+            val = mec[cle]
+            txt = f"{val}".replace(".", ",")
+            out.append((nom, [f"**{txt}**", txt, f"{val}"], bal.name))
+        for nom_s, c in d.get("la_longueur_differe_du_nul", {}).items():
+            if "kolmogorov_smirnov_D" not in c:
+                continue
+            for cle, nom in (("mediane_reelle_um", "mediane reelle du selecteur"),
+                             ("mediane_du_nul_um", "mediane du nul du selecteur"),
+                             ("kolmogorov_smirnov_D", "D de Kolmogorov-Smirnov du selecteur")):
+                val = c[cle]
+                txt = f"{val}".replace(".", ",")
+                out.append((f"{nom} {nom_s}", [f"**{txt}**", txt, f"{val}"], bal.name))
+        w = d.get("consequence_pour_le_marcheur", {})
+        for cle, nom in (("pas_du_marcheur_um", "pas du marcheur"),
+                         ("pas_vrai_indique_um", "pas vrai indique"),
+                         ("feuilles_franchies_par_pas", "feuilles franchies par pas"),
+                         ("spires_apres_120_pas", "spires apres cent vingt pas"),
+                         ("spires_en_trop_sur_120", "spires en trop sur cent vingt")):
+            if cle not in w:
+                continue
+            val = w[cle]
+            txt = f"{val}".replace(".", ",")
+            formes = [f"**{txt}**", txt, f"{val}"]
+            if isinstance(val, float) and abs(val) >= 10.0:
+                formes = [f"**{val:.0f}**", f"{val:.0f}"] + formes
+            out.append((nom, formes, bal.name))
+        c99 = d.get("ce_que_ca_change_pour_99", {})
+        for cle, nom in (("periode_vraie_indiquee_um", "periode vraie indiquee par l'inversion"),
+                         ("ecart_publie_en_pourcent", "ecart publie en pourcent"),
+                         ("ecart_indique_en_pourcent", "ecart indique en pourcent")):
+            if cle not in c99:
+                continue
+            val = c99[cle]
+            txt = f"{val}".replace(".", ",")
+            formes = [f"**{txt}**", txt, f"{val}"]
+            if "pourcent" in cle:
+                formes = [f"**{txt} %**", f"{txt} %", f"{txt}%"] + formes
+            out.append((nom, formes, bal.name))
+        if "part_de_lecart_imputable_a_linstrument" in c99:
+            val = c99["part_de_lecart_imputable_a_linstrument"]
+            pc = f"{100 * val:.1f}".replace(".", ",")
+            out.append(("part de l'ecart imputable a l'instrument",
+                        [f"**{pc} %**", f"{pc} %", f"{pc}%",
+                         f"{val}".replace(".", ","), f"{val}"], bal.name))
+        if "cran_du_balayage_um" in d:
+            val = d["cran_du_balayage_um"]
+            txt = f"{val}".replace(".", ",")
+            out.append(("cran du balayage apparie", [f"**{txt}**", txt, f"{val}"], bal.name))
+
     # ⛔⛔⛔ UN PAS CONFIRME N'EST PAS UNE FEUILLE (`104`), ET DEUX APPARIEMENTS SONT OBLIGATOIRES.
     # (1) La fraction basse ne voyage JAMAIS sans sa consequence enchainee : « 0,68 feuille »
     # parait inoffensif, « 38 spires manquantes sur 120 » EST le fait qui refute le critere.

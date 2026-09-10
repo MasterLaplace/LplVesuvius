@@ -4553,6 +4553,83 @@ renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la bat
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
 
 ---
+##### ⛔⛔⛔ LE BALAYAGE REND-IL LE PAS INJECTÉ ? — le sélecteur de production choisit un cran trop haut
+
+> Mesure : `src/nappe/le_balayage_rend_il_le_pas_injecte.py` (20 contrôles) →
+> `docs/mesures/le_balayage_rend_il_le_pas_injecte.json`. Figure :
+> `src/figures/figure_le_balayage_rend_il_le_pas_injecte.py` (19 contrôles).
+> Document : [`105`](105_le_balayage_rend_il_le_pas_injecte.md), le 2026-09-10.
+
+![le balayage rend-il le pas injecté](images/105_le_balayage_rend_il_le_pas_injecte.png)
+
+En calibrant un instrument sur un empilement **fabriqué** de pas **173,0 µm exactement**, le minimum
+est ressorti à **181,7** — un cran au-dessus, sur une donnée sans le moindre bruit.
+
+⛔⛔⛔ **Et la batterie de `99` ne pouvait pas le voir.** Elle a un contrôle aller-retour, et il
+relit par `pas_montre` — le sélecteur **brut** — alors que `mesurer` appelle `pas_montre_calibre`.
+*Une vérification qui n'emprunte pas le chemin de la production.*
+
+| injecté | **brut** | **calibré** | **deux rôles** |
+|---:|---:|---:|---:|
+| **173,0** | **173,0** (+0,000) | **181,7** (+0,050) | **173,0** (+0,000) |
+| 190,0 | 190,3 (+0,002) | 198,9 (+0,047) | 190,3 (+0,002) |
+| 198,9 | 198,9 (+0,000) | 216,2 (+0,087) | 198,9 (+0,000) |
+
+Biais médian sur toute la grille : **brut +0,0016**, **calibré +0,0500**, **deux rôles
++0,0016** — et le calibré monte jusqu'à **+11,2 %**.
+
+##### ⭐⭐⭐ Le mécanisme, mesuré : le nul décroît avec la longueur du candidat
+
+| candidat | $\mu$ du nul | $\sigma$ du nul |
+|---|---:|---:|
+| le plus court (86,5 µm) | **0,1582** | **0,1176** |
+| le plus long (346,0 µm) | **0,0925** | **0,0694** |
+
+Sur 173 µm injectés, le brut retient **173,0** (accord **1,0000**) et le calibré **181,7** (accord
+**0,9882**) : **il préfère un candidat qui colle MOINS bien.** La calibration est juste pour *« ce
+candidat dépasse-t-il le bruit ? »* et fausse pour *« lequel colle le mieux ? »*.
+
+##### ⭐⭐⭐ Le contrôle apparié sur le vrai volume — mêmes lectures, trois sélecteurs
+
+| | brut | calibré | deux rôles |
+|---|---:|---:|---:|
+| cœur | 155,7 | 181,7 | 155,7 |
+| milieu | 164,3 | 198,9 | 164,3 |
+| bord | 168,7 | 196,8 | 168,7 |
+| **toutes bandes** | **164,3** | **194,6** | **164,3** |
+
+> ⭐ **+30,3 µm, soit +18,4 %**, et **28 bandes sur 28** au-dessus de la diagonale d'égalité.
+
+⚠⚠ **Le pilote à deux bandes disait +6,75 %** ; le corpus dit **+18,4 %**. La leçon de `103` se
+rejoue, cette fois en faveur du résultat.
+
+##### ⭐⭐ Le contrôle qui autorise à publier la nouvelle valeur
+
+| sélecteur | réel | nul | D | p |
+|---|---:|---:|---:|---|
+| brut | 164,3 | 259,5 | 0,706 | 9,66e-08 |
+| calibré | 194,6 | 276,8 | 0,638 | 2,86e-06 |
+| **deux rôles** | **164,3** | **276,8** | **0,738** | **1,65e-08** |
+
+Le remède a la séparation **la plus forte** des trois : le nombre court n'est pas ce que le bruit
+produit.
+
+##### ⭐⭐⭐ La conséquence pour le marcheur, et c'est le lien avec `104`
+
+Le marcheur de `102` avance de ce que ce sélecteur rend : **194,6 / 164,3 = 1,184** feuille par pas,
+donc **142** spires pour cent vingt pas — **22 de trop**. Et `104` a mesuré que le critère accepte
+tout ce qui franchit entre **0,70** et **1,36** feuille : **1,184 est dedans**, donc **chaque pas est
+confirmé et rien ne le signale**.
+
+##### ⚠⚠ Une tension à dire plutôt qu'à lisser
+
+L'inversion de la carte fabriquée impute **25,5 %** de l'écart de `99` à l'instrument ; le contrôle
+apparié en impute la quasi-totalité. La carte est établie sur un profil **sinusoïdal parfait** où le
+biais vaut +5 %, alors qu'il vaut **+18,4 %** sur les profils réels : ceux-ci ne sont donc pas des
+sinusoïdes, et l'inversion est une **borne inférieure**. ⚠ Et la précision revendiquée est celle de
+la grille — cran **8,65 µm**, soit 5,3 % du pas.
+
+---
 ##### ⛔⛔⛔ UN PAS CONFIRMÉ N'EST PAS UNE FEUILLE — la bande d'acceptation, et son biais silencieux
 
 > Mesure : `src/nappe/un_pas_confirme_nest_pas_une_feuille.py` (28 contrôles) →

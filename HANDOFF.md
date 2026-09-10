@@ -7,8 +7,8 @@ l'historique, daté, et se lit ensuite.
 
 ## ⭐⭐⭐⭐ REPRISE — 2026-09-10
 
-**Onze tranches d'une même campagne, `94` à `104`, et elles ont UNE conclusion — plus, désormais,
-UN acquis.** L'arbre est propre, les gardes vertes, 106 fiches sans dérive, aucun artefact
+**Douze tranches d'une même campagne, `94` à `105`, et elles ont UNE conclusion — plus, désormais,
+UN acquis.** L'arbre est propre, les gardes vertes, 107 fiches sans dérive, aucun artefact
 versionné sans appelant. Ce
 bloc remplace le précédent comme état courant ; tout ce qui suit est l'historique, daté.
 
@@ -33,6 +33,34 @@ pas du balayage calibré, vérification par le critère de `98`, **aucun référ
 bandes. Il porte **583,9 µm**, soit **3,4 feuilles nominales**, sans **aucune** sortie du volume.
 ⭐ Et le témoin **n'est pas un homme de paille** : sur un empilement fabriqué **droit** il atteint
 le plafond exactement comme la matière ; c'est l'**obliquité** de `100`/`101` qui le fait tomber.
+
+⛔⛔⛔ **ET `105` A TROUVÉ L'INSTRUMENT EN DÉFAUT SOUS TOUT LE RESTE.** Le sélecteur que `99`
+appelle réellement — `pas_montre_calibre` — **ne rend pas la période qu'on lui injecte** : sur des
+profils fabriqués dont la réponse est exacte il lit **+5,0 %** trop haut, jusqu'à **+11,2 %**, là où
+le sélecteur brut la retrouve au cran près (**+0,0016**). ⛔⛔ Et **la batterie de `99` ne pouvait
+pas le voir** : son contrôle aller-retour relit par `pas_montre`, le **brut**, alors que la mesure
+appelle le **calibré**. *Une vérification qui n'emprunte pas le chemin de la production.*
+
+⭐⭐⭐ **SUR LE VRAI VOLUME, CONTRÔLE APPARIÉ — 28 bandes × 120 cellules, MÊMES lectures, même
+garde — le calibré lit 194,6 µm là où le brut lit 164,3**, soit **+18,4 %**, et **28 bandes sur 28**
+sont du même côté. ⭐ **164,3 tombe sur la même case de grille que les 164,0 µm des transferts
+humains**, donc l'écart de 21,3 % que `99` laisse ouvert depuis cinq tranches est, pour l'essentiel,
+**l'instrument**. ⚠ La précision revendiquée est celle de la grille — cran de **8,65 µm**, soit
+5,3 % du pas — et le sens de l'écart au nominal **s'inverse** (×1,15 publié, ×0,95 corrigé).
+
+⭐⭐⭐ **LE MÉCANISME EST MESURÉ** : le nul par candidat décroît avec la longueur (µ de **0,1582** à
+**0,0925**), donc la calibration favorise les candidats longs — sur 173 µm injectés elle retient
+**181,7** avec un accord brut de **0,9882** contre **1,0000**. *Une statistique qui rend deux
+questions comparables n'en résout qu'une.* ⭐⭐ Le remède est le patron du dépôt : **le calibré
+garde, le brut choisit parmi les admis** — et il passe le contrôle que `99` impose à sa propre
+longueur **mieux que les deux autres** (D = **0,738**, p = **1,65e-08**).
+
+⭐⭐⭐ **ET LA CONSÉQUENCE POUR LE MARCHEUR RELIE `104` ET `105`.** Le marcheur de `102` avance de ce
+que ce sélecteur rend, donc il franchit **1,184 feuille par pas** : cent vingt pas en franchissent
+**142**, soit **22 spires de trop**. Et `104` a mesuré que le critère accepte tout ce qui franchit
+entre **0,70** et **1,36** feuille — **1,184 est dedans**, donc **chaque pas est confirmé et rien ne
+le signale**. C'est le cas « biais » que `104` opposait au cas « taux d'échec », **mesuré** cette
+fois au lieu d'être hypothétique.
 
 ⛔⛔⛔ **ET `104` A RÉFUTÉ LE CRITÈRE QUI PORTAIT TOUT.** En construisant le REGISTRE des feuilles
 franchies — l'équivalent gratuit de ce que l'humain dit quand il corrige un transfert, *« tu es sur
@@ -102,6 +130,11 @@ dépassé. Il est conservé plus bas, sous son en-tête, parce que ses résultat
 
 ### ⭐⭐ CE QUI VIENT ENSUITE, ET L'ORDRE EST DÉRIVÉ PLUTÔT QUE CHOISI
 
+0. ⛔⛔⛔ **AVANT TOUT LE RESTE : relancer avec le sélecteur corrigé.** `99`, `100`, `101` et `102`
+   ont tous été calculés avec le sélecteur biaisé, et `105` montre que la correction n'est PAS un
+   facteur à appliquer — il faut relancer. ⚠ `100` compare deux directions avec ce sélecteur, donc
+   son anomalie d'isotropie hérite de la dérive ; `102` marche avec, donc sa portée est mesurée par
+   un marcheur qui dépasse de 18 % à chaque pas.
 1. ⭐⭐⭐ **Le registre continu, sur le vrai volume.** `feuilles_franchies` est calibrée mais elle
    n'a **aucun appelant en production** : le marcheur de `102` n'accumule rien. Le brancher rend une
    question que rien n'a encore posée — *après k pas, combien de feuilles ai-je RÉELLEMENT

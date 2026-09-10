@@ -5247,6 +5247,68 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/105_le_balayage_rend_il_le_pas_injecte.md
+- **lignes** : 181
+- **nature** : RESULTAT
+  (l'audit du sélecteur de `99` : rend-il la période qu'on lui injecte, et que vaut la longueur
+  publiée depuis cinq tranches une fois le sélecteur corrigé.)
+- **résumé** : ⛔⛔⛔ **Non.** Le sélecteur **calibré**, celui que `99` appelle réellement, lit
+  **+5,0 %** trop haut sur des profils fabriqués dont la réponse est exacte, jusqu'à **+11,2 %**,
+  là où le **brut** retrouve la période au cran près (**+0,0016**). ⭐⭐⭐ Sur le vrai volume,
+  contrôle apparié de 28 bandes × 120 cellules et **mêmes lectures**, il lit **194,6 µm** contre
+  **164,3** pour le brut — soit **+18,4 %**, et 164,3 tombe sur la même case de grille que les
+  **164,0** des transferts humains. ⭐⭐⭐ Le marcheur de `102` franchit donc **1,184** feuille par
+  pas : cent vingt pas en franchissent **142**, et `104` a mesuré que ce dépassement est
+  **confirmé** par le critère.
+- **conclusions extractibles** :
+  - ⛔⛔⛔ **Une vérification qui n'emprunte pas le chemin de la production ne peut rien attraper.**
+    `99` a un contrôle aller-retour et il relit par `pas_montre`, le sélecteur **brut**, alors que
+    `mesurer` appelle `pas_montre_calibre`. Le seul contrôle capable de voir le défaut regardait à
+    côté. ⭐ D'où la première assertion de `105` : le sélecteur audité **est** celui de la
+    production, comparé sortie pour sortie.
+  - ⭐⭐⭐ **Une statistique qui rend deux questions comparables n'en résout qu'une.** Le nul par
+    candidat décroît avec la longueur (µ de **0,1582** à **0,0925**, σ de **0,1176** à **0,0694**),
+    donc la calibration favorise les candidats longs : sur 173 µm injectés elle retient **181,7**
+    avec un accord brut de **0,9882** contre **1,0000**. Elle est juste pour *« ce candidat
+    dépasse-t-il le bruit ? »* et fausse pour *« lequel colle le mieux ? »*.
+  - ⭐⭐⭐ **Le remède est le patron du dépôt : deux rôles, deux statistiques.** Le calibré garde,
+    le brut choisit parmi les admis — exactement la séparation que `102` impose entre `99` qui
+    DÉCIDE et `98` qui VÉRIFIE. ⚠ Et la calibration n'est pas jetée : sans garde le brut se rue sur
+    les candidats courts et rend 147 µm sur du bruit pur, la panne d'origine de `99`.
+  - ⭐⭐⭐ **Un contrôle apparié : une lecture par cellule, trois sélecteurs, la même garde.**
+    28 bandes sur 28 au-dessus de la diagonale d'égalité, donc l'effet est uniforme et non
+    l'accident de quelques bandes.
+  - ⭐⭐ **La nouvelle valeur passe le contrôle que `99` impose à la sienne, et mieux** : la
+    longueur du remède diffère du nul avec **D = 0,738** et **p = 1,65e-08**, la séparation la plus
+    forte des trois. Un nombre plus proche des humains qui aurait été un artefact du sélecteur
+    aurait été la pire issue possible.
+  - ⚠⚠ **Le pilote à deux bandes disait +6,75 %, le corpus dit +18,4 %.** La leçon de `103` se
+    rejoue, cette fois en faveur du résultat — et elle vaut dans les deux sens.
+  - ⚠⚠ **Deux estimations qui ne s'accordent pas, et leur désaccord informe.** L'inversion de la
+    carte fabriquée impute **25,5 %** de l'écart à l'instrument ; le contrôle apparié en impute la
+    quasi-totalité. La carte est établie sur un profil **sinusoïdal parfait** où le biais vaut +5 %,
+    alors qu'il vaut +18,4 % sur les profils réels : les profils réels ne sont donc pas des
+    sinusoïdes, et l'inversion est une **borne inférieure**.
+  - ⚠ **La précision revendiquée est celle de la grille** : le cran vaut **8,65 µm**, soit 5,3 % du
+    pas. « 164,3 et 164,0 s'accordent » veut dire *dans la même case*, pas *à 0,2 % près*.
+  - ⭐⭐ **Le sens de l'écart au nominal s'inverse** : `99` publiait un pas supérieur au nominal
+    (×1,15) ; corrigé, il lui est inférieur (×0,95).
+- **rétractations / corrections internes** :
+  - §6 : ⚠ **ma première version lisait un fichier d'alignement qui n'existe pas**, donc `rayon_mm`
+    valait `None` sur les 28 bandes — un champ toujours absent qui ne fait échouer rien. Corrigé en
+    lisant la source que `99` utilise.
+  - §3 : ⚠ **mon premier seuil pour « le brut non gardé se rue sur les courts » était un nombre
+    choisi** (1,2 fois le plus court candidat) et il a échoué contre une observation juste : le brut
+    rend **147,1 µm** sur du bruit pur, exactement la valeur que la prose de `99` documente. La
+    propriété assertée est désormais « biaisé sous le nominal ».
+  - ⚠ **`pas_montre` rend TROIS valeurs, pas quatre** — un dépaquetage erroné a fait tomber la
+    batterie avant son premier contrôle réel.
+- **preuve de lecture intégrale** :
+  - l. 97 (après 55 % du fichier) : `⭐⭐⭐ **Le calibré retient donc un candidat qui colle MOINS bien.**`
+  - l. 175 : `uv run python src/nappe/le_balayage_rend_il_le_pas_injecte.py --verifier`
+
+---
+
 ### docs/104_un_pas_confirme_nest_pas_une_feuille.md
 - **lignes** : 166
 - **nature** : RESULTAT
@@ -5573,7 +5635,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
 ---
 
 ### docs/99_le_pas_que_la_matiere_montre.md
-- **lignes** : 124
+- **lignes** : 146
 - **nature** : RESULTAT
   (`98` cesse d'auditer et se met à décider : le balayage rend le pas que la matière montre, plus
   deux erreurs de modèle nul dont l'une avait produit un artefact publiable.)
@@ -5618,6 +5680,12 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     expliquée ici**, et il faut le dire plutôt que choisir le chiffre qui arrange.
   - figure : ⚠ une étiquette recouverte par sa propre barre — et c'était justement la ligne
     « BRUIT PUR, non calibré » qui porte l'argument du panneau.
+  - ⛔⛔⛔ **`105` a mesuré que le sélecteur de ce fichier ne rend pas la période qu'on lui
+    injecte.** `pas_montre_calibre` lit **+5,0 %** trop haut sur des profils fabriqués, et
+    **+18,4 %** sur le vrai volume face au sélecteur brut, sur les MÊMES lectures (194,6 contre
+    164,3 µm). ⚠⚠ Et le contrôle aller-retour de ce fichier **exerçait un autre chemin** : il
+    relit par `pas_montre`, le brut, alors que la mesure appelle le calibré. Le nombre publié
+    (198,9 µm) n'est pas recalculé ici ; le relire demande de relancer la mesure.
 - **preuve de lecture intégrale** :
   - l. 75 (après 60 % du fichier) : `## 5. ⭐⭐⭐ Le contrôle qui décide si la longueur est une mesure`
   - l. 100 : `il est **au niveau de la bande**, donc utilisable pour dire où un automate doit ralentir.`
@@ -6880,7 +6948,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 6784
+- **lignes** : 6861
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)

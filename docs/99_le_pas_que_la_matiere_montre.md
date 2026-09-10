@@ -113,6 +113,28 @@ Quand l'optimum tombe sur une extrémité de la fenêtre, la matière dit *« au
 *« ceci »*. Ces cellules — **10 à 14 %** — sont comptées à part et retirées de l'utilisable, sinon
 une limite de **fenêtre** se publierait comme une limite de **matière**.
 
+## 8. ⛔⛔⛔ Ce que `105` corrige ici : le sélecteur de ce fichier est biaisé haut
+
+Le nombre publié plus haut — **198,9 µm** — a été obtenu par `pas_montre_calibre`, et
+[`105`](105_le_balayage_rend_il_le_pas_injecte.md) mesure que **ce sélecteur ne rend pas la période
+qu'on lui injecte** : sur des profils fabriqués dont la réponse est exacte il lit **+5,0 %** trop
+haut, jusqu'à **+11,2 %**, et sur le vrai volume — 28 bandes × 120 cellules, **mêmes lectures** — il
+lit **194,6 µm** là où le sélecteur brut lit **164,3**, soit **+18,4 %**.
+
+⛔⛔ **Et le contrôle aller-retour de ce fichier ne pouvait pas le voir** : il relit par
+`pas_montre`, le sélecteur **brut**, alors que `mesurer` appelle `pas_montre_calibre`. *Une
+vérification qui n'emprunte pas le chemin de la production.*
+
+⭐⭐ **Le mécanisme** : le nul par candidat décroît avec la longueur (µ de **0,1582** à **0,0925**),
+donc la calibration favorise les candidats longs — sur 173 µm injectés elle retient **181,7** avec
+un accord brut de **0,9882** contre **1,0000** pour le choix brut. Elle est juste pour *« ce
+candidat dépasse-t-il le bruit ? »* et fausse pour *« lequel colle le mieux ? »*.
+
+⚠ **La calibration reste indispensable comme GARDE** — sans elle ce fichier lisait 147 µm sur le
+vrai volume comme sur du bruit pur. Ce qui change est le **choix** parmi les candidats admis, pas la
+garde. ⚠⚠ Le nombre publié ici n'a **pas** été recalculé : le relire demande de relancer la mesure,
+pas de le diviser par un facteur.
+
 ## Reproduire
 
 ```
