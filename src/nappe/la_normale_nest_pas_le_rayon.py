@@ -52,6 +52,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 from pathlib import Path
 
 import numpy as np
@@ -295,6 +296,49 @@ def correlation(x, y) -> float:
     return round(float(np.corrcoef(x, y)[0, 1]), 3)
 
 
+def avancement(fait: int, total: int, quoi: str, depart: float) -> None:
+    """Ecrire sur STDERR ou en est une mesure longue, avec une fin estimee.
+
+    ⚠⚠⚠ ELLE EXISTE PARCE QUE L'ABSENCE A COUTE UNE DECISION. `102` a tourne **quatre heures et
+    demie** sans rien imprimer, et il a fallu sonder le cout d'un cube au chronometre pour savoir
+    s'il en etait a 10 % ou a 90 % — c'est-a-dire pour savoir s'il fallait l'attendre ou le tuer.
+    Une mesure qui coute des heures et se tait oblige a decider sans donnee, ce qui est exactement
+    ce que ce depot refuse partout ailleurs.
+
+    ⚠⚠ ELLE ECRIT SUR STDERR, ET C'EST LA CONDITION QUI LA REND SANS RISQUE : la sortie standard
+    peut etre redirigee vers un fichier ou lue par un autre programme, donc y melanger un
+    avancement corromprait le resultat. Le meme choix que fait `--json` en n'imprimant que le
+    chemin sur stdout.
+
+    ⭐ La fin estimee suppose que les etages restants coutent comme ceux deja faits. C'est faux au
+    debut, quand un seul etage a servi de base, et cela devient juste ensuite — donc elle est
+    affichee comme une ESTIMATION et non comme une promesse.
+    """
+    import time  # noqa: PLC0415
+
+    if fait <= 0 or total <= 0:
+        return
+    ecoule = time.time() - depart
+    reste = ecoule * (total - fait) / fait
+    print(f"  … {quoi} {fait}/{total} · {ecoule / 60:.1f} min écoulées · "
+          f"~{reste / 60:.0f} min restantes (estimation)", file=sys.stderr, flush=True)
+
+
+def nombre_ou_absent(valeur) -> float:
+    """La valeur, ou NaN seulement si elle est ABSENTE — jamais si elle vaut zero.
+
+    ⚠⚠⚠ ELLE EXISTE PARCE QUE `valeur or float("nan")` EST UN PIEGE, ET IL A MORDU. En Python
+    `0.0` est FAUX, donc cette forme affiche « nan » pour un zero parfaitement mesure : un temoin
+    naif qui confirme ZERO pas, ce qui est le resultat le plus informatif qu'il puisse rendre,
+    s'affichait comme une donnee manquante. C'est le meme faux zero que `101` a paye sur une
+    correlation calculee sur une liste vide, une ligne plus loin — et la lecon est la meme :
+    « zero » et « on ne sait pas » ne doivent jamais partager une representation.
+
+    ⭐ Elle vit ici et non en trois exemplaires parce que `101` et `102` importent deja ce module.
+    """
+    return float("nan") if valeur is None else float(valeur)
+
+
 def _mediane(v: np.ndarray) -> float | None:
     v = v[np.isfinite(v)]
     return round(float(np.median(v)), 2) if len(v) else None
@@ -316,6 +360,7 @@ def mesurer_les_angles(cellules: int = CELLULES_PAR_BANDE, graine: int = 61,
         return {"message": "cache incomplet : lancer `le_sens_du_rang --telecharger`"}
     bords, cx, cy, _, _ = A.axe_par_tranche(np.concatenate(nuages))
 
+    depart = time.time()
     lignes = []
     for x in bandes:
         g = P.grille(x["recente"])
@@ -361,6 +406,7 @@ def mesurer_les_angles(cellules: int = CELLULES_PAR_BANDE, graine: int = 61,
             "inclinaison_predite_deg": round(
                 inclinaison_de_la_spirale(r_med, C.PAS_UM), 3),
         })
+        avancement(len(lignes), len(bandes), "bandes", depart)
     return {"fragment": C.OBJET, "pas_nominal_um": C.PAS_UM,
             "voxel_maillage_um": C.VOXEL_MAILLAGE_UM,
             "voisinages": list(VOISINAGES), "cellules_par_bande": cellules,
@@ -406,6 +452,7 @@ def mesurer_le_pas_dans_les_deux_directions(cellules: int = CELLULES_POUR_LE_VOL
         return {"message": "cache incomplet : lancer `le_sens_du_rang --telecharger`"}
     bords, cx, cy, _, _ = A.axe_par_tranche(np.concatenate(nuages))
 
+    depart = time.time()
     lignes = []
     for x in bandes:
         g = P.grille(x["recente"])
@@ -586,8 +633,8 @@ def afficher(r: dict) -> int:
         print(f"  w{x['de']:03d}-{x['a']:03d} {x['rayon_mesure_mm']:>6.1f} "
               f"{x['angle_grille_deg']:>7.1f}° {x['angle_acp_deg']:>7.1f}° "
               f"{x['inclinaison_predite_deg']:>7.2f}° {rap:>6.0f} "
-              f"{(x['angle_du_a_z_deg'] or float('nan')):>7.1f}° "
-              f"{(x['angle_dans_le_plan_deg'] or float('nan')):>7.1f}°")
+              f"{nombre_ou_absent(x['angle_du_a_z_deg']):>7.1f}° "
+              f"{nombre_ou_absent(x['angle_dans_le_plan_deg']):>7.1f}°")
     s = r.get("resume", {})
     b = r.get("balayage_de_voisinage_deg", {})
     if b:
@@ -625,7 +672,7 @@ def afficher(r: dict) -> int:
             if x.get("rapport_radial_sur_normal") is None:
                 continue
             print(f"  w{x['de']:03d}-{x['a']:03d} "
-                  f"{(x['rayon_mm'] or float('nan')):>6.1f} {x['angle_deg']:>6.1f}° "
+                  f"{nombre_ou_absent(x['rayon_mm']):>6.1f} {x['angle_deg']:>6.1f}° "
                   f"{x['pas_radial_um']:>10.1f}µ {x['pas_normal_um']:>10.1f}µ "
                   f"{x['rapport_radial_sur_normal']:>8.3f} {x['un_sur_cos']:>7.3f}")
         print(f"\n⛔⛔⛔ L'HYPOTHÈSE EST RÉFUTÉE. Le rapport médian vaut "
@@ -717,6 +764,40 @@ def verifier() -> int:
     u2 = np.array([[1.0, 0.0, 0.0], [1.0, 0.0, 0.0]])
     v("l'angle est insensible au signe de la normale",
       float(np.max(angle_entre(u1, u2))) < 1e-9, str(angle_entre(u1, u2)))
+
+    # --- ZERO N'EST PAS « ON NE SAIT PAS », et le piege a mordu pour de vrai --------------
+    # ⚠⚠⚠ `valeur or float("nan")` affiche « nan » pour un ZERO mesure, parce que 0.0 est faux en
+    # Python. Un temoin qui confirme zero pas — le resultat le plus informatif qu'il puisse
+    # rendre — s'affichait donc comme une donnee manquante.
+    v("un zéro mesuré reste un zéro, il ne devient pas « absent »",
+      nombre_ou_absent(0.0) == 0.0 and nombre_ou_absent(0) == 0.0)
+    v("... alors qu'une valeur ABSENTE devient NaN",
+      not np.isfinite(nombre_ou_absent(None)))
+    v("... et une valeur ordinaire traverse intacte", nombre_ou_absent(34.06) == 34.06)
+
+    # --- l'avancement ecrit sur STDERR, et c'est ce qui le rend sans risque ---------------
+    # ⚠⚠ SUR STDOUT IL CORROMPRAIT UNE SORTIE REDIRIGEE. Le contrôle capture les deux flux
+    # separement plutot que de le supposer.
+    import contextlib  # noqa: PLC0415
+    import io as _io  # noqa: PLC0415
+
+    _out, _err = _io.StringIO(), _io.StringIO()
+    with contextlib.redirect_stdout(_out), contextlib.redirect_stderr(_err):
+        avancement(3, 28, "bandes", time.time() - 120.0)
+    v("l'avancement n'écrit RIEN sur stdout", _out.getvalue() == "",
+      repr(_out.getvalue()))
+    v("... et il dit où il en est sur stderr",
+      "3/28" in _err.getvalue() and "restantes" in _err.getvalue(),
+      _err.getvalue().strip())
+    # ⚠ Une estimation qui suppose que le reste coûte comme le fait : 2 min pour 3 bandes sur 28
+    # doit annoncer de l'ordre de 17 min.
+    v("... avec une fin estimée cohérente", "17 min" in _err.getvalue(),
+      _err.getvalue().strip())
+    _out2, _err2 = _io.StringIO(), _io.StringIO()
+    with contextlib.redirect_stdout(_out2), contextlib.redirect_stderr(_err2):
+        avancement(0, 28, "bandes", time.time())
+    v("... et il se tait plutôt que de diviser par zéro au premier étage",
+      _err2.getvalue() == "")
 
     # --- la decomposition attribue le basculement au bon axe -------------------------------
     # ⚠⚠ SANS CE CONTROLE, LES DEUX COLONNES POURRAIENT ETRE INTERVERTIES sans que rien ne

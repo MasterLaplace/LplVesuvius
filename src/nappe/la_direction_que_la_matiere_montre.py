@@ -51,6 +51,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 from pathlib import Path
 
 import numpy as np
@@ -387,6 +388,7 @@ def mesurer(cellules: int = CELLULES_PAR_BANDE, demi: int = DEMI, graine: int = 
     """Pour chaque bande : la direction de la matiere, contre le rayon et contre le maillage."""
     import combien_dinterstices_traverses as C  # noqa: PLC0415
     import la_normale_nest_pas_le_rayon as N  # noqa: PLC0415
+    from la_normale_nest_pas_le_rayon import avancement  # noqa: PLC0415
     import laxe_est_une_courbe as A  # noqa: PLC0415
     import le_pas_lu_sur_les_transferts as P  # noqa: PLC0415
     import le_sens_du_rang as R  # noqa: PLC0415
@@ -428,6 +430,7 @@ def mesurer(cellules: int = CELLULES_PAR_BANDE, demi: int = DEMI, graine: int = 
         return {"message": f"l'axe demande au moins deux bandes ; {len(bandes)} demandée(s)"}
     bords, cx, cy, _, _ = A.axe_par_tranche(np.concatenate(nuages))
 
+    depart = time.time()
     lignes = []
     for x in bandes:
         g = P.grille(x["recente"])
@@ -488,6 +491,7 @@ def mesurer(cellules: int = CELLULES_PAR_BANDE, demi: int = DEMI, graine: int = 
             "angle_matiere_maillage_deg": _mediane(d_mail),
         }
         lignes.append(d)
+        avancement(len(lignes), len(bandes), "bandes", depart)
 
     out = {"fragment": C.OBJET, "volume_fin": C.VOLUME_FIN,
            "voxel_fin_um": C.VOXEL_FIN_UM, "voxel_maillage_um": C.VOXEL_MAILLAGE_UM,
@@ -605,6 +609,8 @@ def reagreger(chemin: Path) -> dict:
 
 def afficher(r: dict) -> int:
     """L'affichage, séparé pour que la batterie puisse le lancer — la leçon de `93`."""
+    from la_normale_nest_pas_le_rayon import nombre_ou_absent  # noqa: PLC0415
+
     if "message" in r:
         print(f"⚠ {r['message']}")
         return 0
@@ -625,13 +631,13 @@ def afficher(r: dict) -> int:
           f"{'planar.':>8} {'∠ rayon':>9} {'∠ maillage':>11}")
     for x in r["lignes"]:
         if x.get("angle_matiere_rayon_deg") is None:
-            print(f"  w{x['de']:03d}-{x['a']:03d} {(x['rayon_mm'] or float('nan')):>6.1f} "
+            print(f"  w{x['de']:03d}-{x['a']:03d} {nombre_ou_absent(x['rayon_mm']):>6.1f} "
                   f"{x['cubes_lus']:>6d} {'MUETTE':>9}")
             continue
-        print(f"  w{x['de']:03d}-{x['a']:03d} {(x['rayon_mm'] or float('nan')):>6.1f} "
+        print(f"  w{x['de']:03d}-{x['a']:03d} {nombre_ou_absent(x['rayon_mm']):>6.1f} "
               f"{x['cubes_lus']:>6d} {x['part_orientee']:>9.2f} "
-              f"{(x['desaccord_des_moities_median_deg'] or float('nan')):>7.1f}° "
-              f"{(x['planarite_mediane'] or float('nan')):>8.3f} "
+              f"{nombre_ou_absent(x['desaccord_des_moities_median_deg']):>7.1f}° "
+              f"{nombre_ou_absent(x['planarite_mediane']):>8.3f} "
               f"{x['angle_matiere_rayon_deg']:>8.1f}° "
               f"{x['angle_matiere_maillage_deg']:>10.1f}°")
     s = r.get("resume")

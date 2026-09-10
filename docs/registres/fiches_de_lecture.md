@@ -5247,6 +5247,68 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/102_combien_de_pas_la_matiere_porte.md
+- **lignes** : 142
+- **nature** : RESULTAT
+  (le graal posé directement : le pas de `99` et la direction de `101` enchaînés, sans aucun
+  référent humain — premier acquis positif de la campagne, et sa borne.)
+- **résumé** : ⭐⭐⭐ **Interroger la matière porte 2,00 pas là où l'automate naïf en porte 0,00**,
+  sur les 28 bandes — première fois que la voie « interroger la matière » **bat** l'état de l'art
+  au lieu de simplement ne pas être réfutée. ⚠⚠⚠ Mais la portée est **censurée** : **17 bandes sur
+  28** (61 %) ont une cellule au plafond de 6 pas, donc « 2,00 » est une **borne inférieure**.
+  ⭐ Le témoin n'est pas un homme de paille — sur un empilement fabriqué **droit** il atteint le
+  plafond comme la matière, sur un **oblique à 35°** il tombe à 1.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **Le pas et la direction de la matière sont utilisables ENCHAÎNÉS, pas seulement un par
+    un** : 2,00 pas confirmés contre 0,00 pour un pas nominal le long du rayon, distance médiane
+    portée **583,9 µm** = **3,4 feuilles nominales**, **0 sortie du volume** sur 28 bandes.
+  - ⭐⭐⭐ **Aucun référent humain dans la boucle** : direction du tenseur de structure, pas du
+    balayage calibré, vérification par le critère de `98`. Le maillage ne sert qu'à dire **où
+    commencer**, et les deux bits de supervision (graine, sens) sont **déclarés**.
+  - ⭐⭐⭐ **Le lecteur est un SEAM**, donc le **même** marcheur tourne sur un volume fabriqué dont
+    on connaît la réponse et sur le vrai volume. Une fixture qui n'exerce pas le chemin réel ne
+    prouve rien.
+  - ⭐⭐ **Le témoin réussit quand il a raison** (obliquité 0° : 6 pas, le plafond, comme la
+    matière) et **échoue quand la matière est oblique** (35° : 1 contre 6). Son zéro sur données
+    réelles veut donc dire quelque chose.
+  - ⚠⚠ **Les pas sont comptés CONSÉCUTIFS** : un marcheur qui perd la feuille au pas 3 écrit du
+    faux ensuite, même si la matière répond au pas 5. Le total surestimerait l'automate.
+  - ⚠⚠ **La distance portée se lit avec son SOUS-ENSEMBLE** — les seules cellules qui ont porté au
+    moins un pas — donc une bande peut afficher zéro pas médian **et** une distance non nulle.
+    Deux populations, la faute que `99` a payée.
+  - ⚠⚠⚠ **La censure se publie AVANT le résultat qu'elle borne** : 17/28 bandes au plafond. Un
+    plafond est un **budget de lecture** — 15,4 s par cube mesurés, 2 h 52 de plancher pour 672
+    cubes, 7 h de course — et le publier comme une limite de matière serait la butée de `99`.
+- **rétractations / corrections internes** :
+  - §5 : ⛔⛔ **le vérificateur ne pouvait pas échouer, et le naïf passait 8 pas sur 8.** Ma
+    première version vérifiait avec le **balayage** de `99`, qui cherche la meilleure période le
+    long de la direction donnée ; sur un empilement oblique à 35° la période radiale vaut
+    `173/cos(35°) = 211 µm`, **dans la fenêtre**, donc il la trouve et confirme. Il testait « la
+    matière est-elle feuilletée ici » — vrai partout — au lieu de « le pas a-t-il franchi UNE
+    feuille ». ⭐ Corrigé en **séparant les deux rôles** : `99` décide de combien avancer, `98`
+    vérifie à gabarit **fixe** ce que l'avance a traversé. Après correction : naïf **1**, matière
+    **8**.
+  - ⛔ **Un second faux zéro** : `x or float('nan')` affichait un **0 mesuré** comme « pas de
+    donnée », parce que `0.0` est faux en Python — et un témoin qui confirme zéro pas est le
+    résultat le plus informatif qu'il puisse rendre. Corrigé par `nombre_ou_absent`, une seule
+    définition dans le module que les deux autres importent, avec sa fixture. Même famille que le
+    faux zéro de corrélation de `101`.
+  - ⚠ **Le verdict ne s'émet plus sans donnée de témoin** : `bool(naif and …)` rendait *False* sur
+    une liste vide, c'est-à-dire « la matière ne porte pas plus loin » alors que la vérité est
+    « le témoin n'a pas tourné ».
+  - outillage : ⚠⚠⚠ **la mesure a tourné 7 h sans rien imprimer**, et il a fallu chronométrer une
+    sonde pour savoir s'il fallait l'attendre ou la tuer. Les trois mesures longues (`100`, `101`,
+    `102`) impriment désormais une ligne par bande avec une fin estimée, **sur stderr** — jamais
+    sur stdout, qui peut être redirigé ou lu par un autre programme.
+  - §7 : ⚠ **deux pas ne sont pas cent vingt.** Le graal demande 31 spires ; ce fichier mesure la
+    **pente**, et elle est censurée par le haut. La corrélation avec la rupture (−0,167) est trop
+    faible pour être un signal de confiance, et c'est dit.
+- **preuve de lecture intégrale** :
+  - l. 95 (après 60 % du fichier) : `Après correction, sur le même empilement oblique : **naïf 1, matière 8**.`
+  - l. 117 : `⚠ **Et l'automate naïf est censuré lui aussi** sur quelques bandes, ce qui est publié : son 0,00`
+
+---
+
 ### docs/101_la_direction_que_la_matiere_montre.md
 - **lignes** : 187
 - **nature** : RESULTAT
@@ -6685,7 +6747,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 6521
+- **lignes** : 6617
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)

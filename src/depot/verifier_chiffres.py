@@ -2061,6 +2061,54 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         out.append(("part utilisable contre la continuite",
                     [f"**{txt}**", txt, f"{val:.3f}"], pmm.name))
 
+    # ⭐⭐⭐ COMBIEN DE PAS LA MATIERE PORTE (`102`), ET DEUX APPARIEMENTS SONT OBLIGATOIRES.
+    # (1) Le nombre de pas de la MATIERE ne voyage jamais sans celui du NAIF : « 2,00 pas » est un
+    # nombre nu, « 2,00 contre 0,00 » EST le resultat, et c'est leur ecart qui dit que la voie
+    # sert a quelque chose.
+    # (2) Et il ne voyage jamais sans la CENSURE : 17 bandes sur 28 ont une cellule au plafond,
+    # donc publier la mediane sans dire qu'elle est tronquee ferait passer un budget de lecture
+    # pour une limite de matiere — la butee de `99`.
+    prt = _source(racine, "combien_de_pas_la_matiere_porte.json")
+    if prt.exists():
+        d = json.loads(prt.read_text())
+        s102 = d.get("resume", {})
+        for cle, nom in (("pas_confirmes_median_matiere", "pas confirmes par la matiere"),
+                         ("pas_confirmes_median_naif", "pas confirmes par l'automate naif"),
+                         ("avantage_en_pas", "avantage en pas de la matiere"),
+                         ("distance_portee_mediane_um", "distance mediane portee"),
+                         ("bandes_dont_une_cellule_atteint_le_plafond",
+                          "bandes dont une cellule atteint le plafond"),
+                         ("plafond_de_pas", "plafond de pas de la marche"),
+                         ("bandes_lues", "bandes marchees")):
+            if cle not in s102:
+                continue
+            val = s102[cle]
+            txt = f"{val}".replace(".", ",")
+            formes = [f"**{txt}**", txt, f"{val}"]
+            if isinstance(val, float):
+                court = f"{val:.2f}".replace(".", ",")
+                formes = [f"**{court}**", court, f"{val:.2f}"] + formes
+            out.append((nom, formes, prt.name))
+        for cle, nom in (("pas_confirmes_contre_rayon",
+                          "pas confirmes contre le rayon"),
+                         ("pas_confirmes_contre_continuite",
+                          "pas confirmes contre la continuite")):
+            if cle not in s102:
+                continue
+            val = s102[cle]
+            signe = f"{val:+.3f}".replace(".", ",").replace("-", "\u2212")
+            out.append((nom, [f"**{signe}**", signe, f"{val:+.3f}",
+                              f"{val}".replace(".", ","), f"{val}"], prt.name))
+        # ⭐⭐ LE CONTROLE FABRIQUE VOYAGE ENTIER : « le naif fait 1 » ne veut rien dire sans
+        # « et il fait 6 quand il a raison » — sans quoi il se lirait comme un homme de paille.
+        for e in d.get("controle_fabrique", {}).get("empilements", []):
+            th = f"{e['obliquite_deg']:.0f}"
+            for cle, nom in (("pas_confirmes_matiere", "pas de la matiere a"),
+                             ("pas_confirmes_naif", "pas du naif a")):
+                val = e[cle]
+                out.append((f"{nom} {th} degres",
+                            [f"**{val}**", f"{val}"], prt.name))
+
     # ⭐⭐⭐ LA DIRECTION QUE LA MATIERE MONTRE (`101`), ET L'APPARIEMENT EST OBLIGATOIRE ICI
     # AUSSI. L'angle de la matiere au MAILLAGE ne voyage jamais sans celui au RAYON : « la matiere
     # est a 13° du maillage » est un nombre nu, « 13° du maillage contre 35° du rayon » EST le

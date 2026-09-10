@@ -7,8 +7,9 @@ l'historique, daté, et se lit ensuite.
 
 ## ⭐⭐⭐⭐ REPRISE — 2026-09-09
 
-**Huit tranches d'une même campagne, `94` à `101`, et elles ont UNE conclusion.** L'arbre est
-propre, les gardes vertes, 103 fiches sans dérive, aucun artefact versionné sans appelant. Ce
+**Neuf tranches d'une même campagne, `94` à `102`, et elles ont UNE conclusion — plus, désormais,
+UN acquis.** L'arbre est propre, les gardes vertes, 104 fiches sans dérive, aucun artefact
+versionné sans appelant. Ce
 bloc remplace le précédent comme état courant ; tout ce qui suit est l'historique, daté.
 
 ⭐⭐ **Et la campagne s'est prolongée de deux tranches qui ne cherchaient plus un signal mais une
@@ -25,6 +26,20 @@ par sa signature en 1/r, et **le maillage humain est sur la matière en ORIENTAT
 étant faux en IDENTITÉ** (`97`, plus d'une demi-feuille). Deux pannes différentes, une seule
 fatale.
 
+⭐⭐⭐ **ET `102` A ENCHAÎNÉ LES DEUX, CE QUI EST LA QUESTION DU GRAAL ELLE-MÊME.** Dérouler n'est
+pas faire **un** pas mais les **enchaîner**, et le marcheur — direction du tenseur de structure,
+pas du balayage calibré, vérification par le critère de `98`, **aucun référent humain** — confirme
+**2,00 pas** là où l'automate naïf (pas nominal le long du rayon) en confirme **0,00**, sur les 28
+bandes. Il porte **583,9 µm**, soit **3,4 feuilles nominales**, sans **aucune** sortie du volume.
+⭐ Et le témoin **n'est pas un homme de paille** : sur un empilement fabriqué **droit** il atteint
+le plafond exactement comme la matière ; c'est l'**obliquité** de `100`/`101` qui le fait tomber.
+
+⚠⚠⚠ **MAIS LA PORTÉE EST CENSURÉE, ET ÇA SE DIT AVANT LE RÉSULTAT** : **17 bandes sur 28** (61 %)
+ont une cellule au plafond de **6 pas**, donc **2,00 est une borne inférieure**. Le plafond est un
+**budget de lecture** — **15,4 s par cube** mesurés, 2 h 52 de plancher pour 672 cubes, **7 h** de
+course — et le publier comme une limite de matière serait la butée de `99`. **Deux pas ne sont pas
+cent vingt** : ceci mesure la **pente**, pas le total.
+
 ⭐⭐⭐ **ET C'EST LE PREMIER ACQUIS POSITIF DE LA CAMPAGNE POUR LE GRAAL.** `99` donne le **pas**
 que la matière montre, `101` donne la **direction** : *avance de `p(matière)` le long de
 `n(matière)`* est un pas de transfert qui ne demande **aucun maillage**. La matière répond sur
@@ -32,7 +47,7 @@ que la matière montre, `101` donne la **direction** : *avance de `p(matière)` 
 bord**, là où `99` perdait la périodicité (0,54). ⚠ Ce qui reste hors de portée est
 l'**identité** de la feuille : le tenseur dit *comment elle est posée*, pas *laquelle*.
 
-⚠ Le bloc précédent, daté du 2026-09-03, annonçait un état courant que ces huit tranches ont
+⚠ Le bloc précédent, daté du 2026-09-03, annonçait un état courant que ces neuf tranches ont
 dépassé. Il est conservé plus bas, sous son en-tête, parce que ses résultats tiennent.
 
 ### ⭐⭐⭐ La question était : QU'EST-CE QUI REMPLACE L'HUMAIN QUI CORRIGE LE TRANSFERT ?
@@ -53,6 +68,7 @@ candidats ont été testés, dans cet ordre, et chacun a fermé une famille enti
 | [`99`](docs/99_le_pas_que_la_matiere_montre.md) | le **pas que la matière montre** | ⭐⭐ `part_utilisable` à **−0,845**, le signal au bon signe le **plus fort** — et le pas montré (**199 à 214 µm**) n'est pas le nominal |
 | [`100`](docs/100_la_normale_nest_pas_le_rayon.md) | l'**obliquité de la nappe** au rayon | ⛔ l'explication de l'écart de `99` est **réfutée** — mais la surface est à **34,1°** du rayon pour **0,09°** prédits |
 | [`101`](docs/101_la_direction_que_la_matiere_montre.md) | la **direction que la matière montre**, lue dans le volume fin | ⭐⭐⭐ l'obliquité est **réelle** : la matière est à **13,3°** du maillage contre **34,6°** du rayon, et ce 34,6 recoupe le 34,06 de `100` par un instrument qui ne partage rien. ⭐⭐ **Le graal gagne son second nombre** |
+| [`102`](docs/102_combien_de_pas_la_matiere_porte.md) | le pas de `99` et la direction de `101`, **enchaînés** | ⭐⭐⭐ **PREMIER ACQUIS POSITIF** : **2,00** pas confirmés contre **0,00** pour l'automate naïf, **sans aucun référent humain**. ⚠⚠⚠ Mais **censuré** — 17 bandes sur 28 au plafond, donc « 2,00 » est une **borne inférieure** |
 
 ### ⭐⭐⭐ LA CONCLUSION, ET ELLE TIENT EN UNE PHRASE
 
@@ -179,6 +195,23 @@ contrôle, chacun avec sa raison écrite.
   angles** (`101`) : un cisaillement rendrait « 34° » vide de sens, et l'écart serait silencieux.
   Mesuré : conditionnement **1,0075**, défaut **0,301°**. Et une **direction** ne se transporte
   pas comme un point — la translation ne s'y applique pas.
+- ⛔⛔ **Une vérification qui ne pouvait pas échouer, et le témoin passait huit pas sur huit**
+  (`102`) : je vérifiais chaque pas avec le **balayage** de `99`, qui cherche la meilleure période
+  le long de la direction donnée — or sur un empilement oblique à 35° la période **radiale** vaut
+  `173/cos(35°) = 211 µm`, **dans la fenêtre**, donc il la trouve et confirme. Elle testait « la
+  matière est-elle feuilletée ici » — vrai partout — au lieu de « le pas a-t-il franchi UNE
+  feuille ». ⭐ Corrigé en **séparant les deux rôles** : `99` décide de combien avancer, `98`
+  vérifie à gabarit **fixe** ce que l'avance a traversé. Après correction : naïf **1**, matière
+  **8**.
+- ⛔ **Un zéro mesuré affiché comme « pas de donnée »** (`102`) : `x or float('nan')` traite `0.0`
+  comme faux, et un témoin qui confirme **zéro** pas est le résultat le plus informatif qu'il
+  puisse rendre. Corrigé par `nombre_ou_absent`, **une seule** définition, avec sa fixture. Même
+  famille que le faux zéro de corrélation de `101` : *zéro et « on ne sait pas » ne doivent jamais
+  partager une représentation.*
+- ⚠⚠⚠ **Une mesure de SEPT HEURES qui n'imprime rien** (`102`) : il a fallu chronométrer une sonde
+  pour savoir s'il fallait l'attendre ou la tuer, c'est-à-dire décider sans donnée — ce que ce
+  dépôt refuse partout ailleurs. Les trois mesures longues impriment désormais leur avancement
+  **sur stderr**, jamais sur stdout, qui peut être redirigé ou lu par un autre programme.
 - ⚠⚠⚠ **Et un garde qui accusait à tort, trouvé en écrivant ce bloc même** —
   `verifier_chiffres` signalait **six** citations périmées dans ce fichier, et **les six étaient
   fausses**, dont **deux sur du texte fraîchement écrit et correct**. Cause : le diagnostic

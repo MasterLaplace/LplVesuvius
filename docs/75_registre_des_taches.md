@@ -4553,6 +4553,102 @@ renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la bat
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
 
 ---
+##### ⭐⭐⭐ COMBIEN DE PAS LA MATIÈRE PORTE — le premier acquis POSITIF, et sa borne
+
+> Mesure : `src/nappe/combien_de_pas_la_matiere_porte.py` (21 contrôles) →
+> `docs/mesures/combien_de_pas_la_matiere_porte.json`. Figure :
+> `src/figures/figure_combien_de_pas_la_matiere_porte.py` (18 contrôles).
+> Document : [`102`](102_combien_de_pas_la_matiere_porte.md), le 2026-09-10.
+
+![combien de pas la matière porte](images/102_combien_de_pas_la_matiere_porte.png)
+
+`99` rend le **pas**, `101` la **direction**. Mais dérouler n'est pas faire **un** pas, c'est les
+**enchaîner** — et la question qui décide est *au bout de combien de pas la matière cesse de
+confirmer*. Le prix tolère 8 h d'humain là où l'état de l'art en dépense 775 sur la correction du
+transfert ; cette tranche mesure jusqu'où on va sans lui.
+
+| | mesuré |
+|---|---:|
+| pas confirmés, médiane, en **interrogeant la matière** | **2,00** |
+| pas confirmés, médiane, **automate naïf** (pas nominal, direction radiale) | **0,00** |
+| avantage | **+2,00 pas** |
+| distance médiane portée | **583,9 µm** = **3,4** feuilles nominales |
+| sorties du volume | **0** sur 28 bandes |
+
+> ⭐⭐⭐ **C'est la PREMIÈRE fois de la campagne que la voie « interroger la matière » BAT l'état
+> de l'art**, au lieu de simplement ne pas être réfutée. Et il n'y a **aucun référent humain** dans
+> la boucle : direction du tenseur de structure, pas du balayage calibré, vérification par le
+> critère de `98`. Le maillage ne sert qu'à dire **où commencer**.
+
+⭐⭐ **Le lecteur est un seam**, donc le **même** marcheur tourne sur un volume fabriqué dont on
+connaît la réponse et sur le vrai volume. Une fixture qui n'exerce pas le chemin réel ne prouve
+rien.
+
+##### ⭐⭐⭐ Le témoin n'est pas un homme de paille, et c'est la condition pour que son zéro compte
+
+| empilement fabriqué | matière | naïf |
+|---|---:|---:|
+| obliquité **0°** — pas nominal et rayon **justes** | **6** (plafond) | **6** (plafond) |
+| obliquité **35°** — ce que `100` et `101` ont mesuré | **6** (plafond) | **1** |
+
+⚠ Le départ est recalé sur la famille de plans à chaque obliquité : une cellule qui tombe **entre**
+deux feuilles ne correspond à aucune polarité du gabarit, et le contrôle mesurerait alors sa propre
+erreur de mise en place — le défaut que la fixture de `100` a payé.
+
+##### ⛔⛔ Le vérificateur ne pouvait pas échouer, et le naïf passait huit pas sur huit
+
+Ma première version vérifiait chaque pas avec le **balayage** de `99`, qui cherche la meilleure
+période le long de la direction donnée. Sur un empilement oblique à 35°, la période le long du
+**rayon** vaut `173 / cos(35°) = 211 µm` — **dans la fenêtre** — donc le balayage la trouve et
+**confirme**.
+
+> ⛔ Elle testait *« la matière est-elle feuilletée ici »* — vrai partout — et non *« le pas a-t-il
+> franchi UNE feuille »*, qui est la seule question. Le péché nº 1 du dépôt, sous sa forme la plus
+> sournoise.
+
+⭐⭐ **Les deux rôles sont désormais séparés** : `99` **décide** de combien avancer, `98` **vérifie**
+à gabarit **fixe** ce que l'avance a traversé, sur le segment réellement parcouru. Après
+correction, sur le même empilement oblique : **naïf 1, matière 8**.
+
+##### ⚠⚠⚠ La borne, et elle se dit avant le résultat qu'elle borne
+
+| maximum sur les cellules de la bande | 0 | 1 | 2 | 3 | 4 | 5 | **6 (plafond)** |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| bandes | 0 | 3 | 1 | 2 | 2 | 3 | **17** |
+
+> ⚠⚠ **17 bandes sur 28, soit 61 %, ont une cellule AU PLAFOND** : « 2,00 pas » est une **borne
+> inférieure**, pas une valeur.
+
+Le plafond est un **budget de lecture** : une sonde chronométrée mesure **15,4 s par cube** de 41³
+voxels, donc les 672 cubes de la course font **2 h 52 de plancher incompressible** — elle a pris
+**7 h**. Le publier comme une limite de matière serait la **butée** de `99`.
+
+##### ⚠⚠ Deux faux zéros et une mesure muette, corrigés dans la foulée
+
+- ⛔ **`x or float('nan')` affichait un ZÉRO MESURÉ comme « pas de donnée »**, parce que `0.0` est
+  faux en Python — et un témoin qui confirme zéro pas est le résultat le plus informatif qu'il
+  puisse rendre. Corrigé par `nombre_ou_absent`, **une seule** définition dans le module que les
+  deux autres importent, avec sa fixture. Même famille que le faux zéro de corrélation de `101`.
+- ⚠ **Le verdict ne s'émet plus sans donnée de témoin** : `bool(naif and …)` rendait *False* sur
+  une liste vide, c'est-à-dire « la matière ne porte pas plus loin » alors que la vérité est « le
+  témoin n'a pas tourné ».
+- ⚠⚠⚠ **La mesure a tourné SEPT HEURES sans rien imprimer**, et il a fallu chronométrer une sonde
+  pour savoir s'il fallait l'attendre ou la tuer. Une mesure qui coûte des heures et se tait oblige
+  à décider sans donnée, ce que ce dépôt refuse partout ailleurs. Les trois mesures longues
+  impriment désormais une ligne par bande avec une fin estimée, **sur stderr** — jamais sur stdout,
+  qui peut être redirigé ou lu par un autre programme.
+
+##### ⚠ Ce que la tranche ne dit pas
+
+- **Deux pas ne sont pas cent vingt.** Le graal demande 31 spires ; ceci mesure la **pente**, et
+  elle est **censurée par le haut**. Relever le plafond est la marche suivante, et son coût est
+  chiffré : ~15 s par cellule et par pas supplémentaire.
+- ⚠ Le marcheur part d'une cellule de maillage — il n'en a plus besoin ensuite, mais **il faut
+  bien partir de quelque part**, et ce bit-là reste de la supervision.
+- ⚠ La corrélation avec la rupture de continuité (**−0,167**) est **trop faible** pour être un
+  signal de confiance, et c'est dit plutôt que publié comme tel.
+
+---
 ##### ⭐⭐⭐ LA DIRECTION QUE LA MATIÈRE MONTRE — l'obliquité est RÉELLE, et le graal gagne son second nombre
 
 > Mesure : `src/nappe/la_direction_que_la_matiere_montre.py` (42 contrôles) →
