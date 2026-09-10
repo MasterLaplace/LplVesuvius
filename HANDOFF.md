@@ -7,6 +7,63 @@ l'historique, daté, et se lit ensuite.
 
 ## ⭐⭐⭐⭐ REPRISE — 2026-09-10
 
+⭐⭐⭐⭐ **ET `108` A RÉPONDU À LA QUESTION QUE `107` POSAIT EN PREMIER, SANS UNE LECTURE DE PLUS.**
+`107` laissait deux populations « que rien d'autre ne distingue ». C'est faux, et la mesure le dit :
+sur **onze candidats déclarés AVANT de regarder**, corrigés par permutation sur le maximum de la
+famille, **deux survivent** — le **score médian du balayage** (force **0,664**, p corrigée
+**0,0008** ; **6,054** pour les marches qui comptent contre **4,5852**) et l'**accord médian de
+l'interstice** (force **0,563**, p corrigée **0,0046**). Les deux sont mesurés **sur le cube, à
+chaque pas**, avant qu'aucun profil de trajet ne soit ajusté.
+
+⭐⭐⭐ **ET LE FAIT CENTRAL EST UN CONTRASTE, PAS UN GAGNANT.** Le score du **trajet** sépare fort
+(**0,6888**) et **à l'envers** ; le score du **pas** sépare presque autant (**0,6643**) et **à
+l'endroit**. `107` avait raison sur le fait et tort sur la portée : *ce n'était pas le bon score, et
+le bon était déjà calculé à chaque pas sans jamais être lu*. Le mécanisme est nommé — une dérive de
+basse fréquence s'ajuste d'autant mieux qu'on lui laisse une longue fenêtre (1250 µm), et la
+fenêtre d'un pas (230 µm) est trop courte pour qu'elle y passe pour une périodicité.
+
+⚠⚠ **MAIS LE PREMIER PAS NE SUFFIT PAS** (force **0,0385**, p corrigée **0,9986**) : il en faut
+**trois** (force **0,5035**, p corrigée **0,0100**), soit **trois cubes payés avant de savoir**. Un
+automate ne peut pas savoir en partant ; il peut savoir assez tôt pour **repartir ailleurs** — ce
+qui est exactement le remède que le risque décroissant de `107` désignait.
+
+⚠⚠ **ET LA RÉPLICATION PAR SÉLECTEUR NE TIENT PAS**, ce qui borne tout le reste : `calibre` (12/12)
+retient les deux, `deux_roles` (10/14) n'en retient **aucun** — même meilleur candidat des deux
+côtés, force **0,6286**, mais à l'effectif d'un seul sélecteur la correction n'est plus franchie. Et
+les **48** trajets de l'ensemble **ne sont pas indépendants** : deux marches partent de la même
+cellule. ⚠ Trois candidats montent dans le sens attendu sans franchir la correction (planarité
+médiane 0,434 et minimale 0,418, virage 0,378) : ce ne sont pas des non-résultats, c'est un effectif
+qui ne décide pas.
+
+⚠⚠⚠ **ET LE PIÈGE DE CETTE TRANCHE EST CHIFFRÉ AVANT SON RÉSULTAT.** Avec onze candidats et
+quarante-huit trajets, un test par candidat sans correction déclare un gagnant sur du **bruit pur**
+**42,7 %** du temps — **mesuré** (400 tirages), pas invoqué ; avec un seul candidat il retombe à
+**7 %**. Le 95ᵉ centile de la plus grande force **sous le nul** vaut **0,4615**, et cinq candidats
+sur onze franchissent 0,32.
+
+⚠⚠⚠ **ET DEUX FAUTES À MOI, DONT UNE QUE `107` AVAIT DÉJÀ PAYÉE.** *Une médiane sur une loi en U
+n'est pas un résumé* : le niveau de chance hors échantillon a une **moyenne** de 0,512 et une
+**médiane** de 0,575, avec **37,5 %** des tirages **sous** le hasard — un seuil a un sens, donc
+chaque tirage tombe du bon côté ou du mauvais. Attrapée par une sonde, pas après publication. Et
+*un témoin positif mal spécifié n'est pas un témoin* : j'avais déclaré la longueur parcourue comme
+devant séparer, et la matière l'a réfutée **à l'envers** — le mode qui ne compte **rien** marche
+**plus loin** (**1276,0 µm** contre **1189,4**). ⭐ Le retard n'est donc pas une marche qui s'arrête
+tôt : c'est une marche qui **avance sans rien traverser**. ⚠ Le témoin est resté **hors famille** :
+l'y faire entrer après avoir vu les résultats aurait été la faute exacte que la correction existe
+pour empêcher.
+
+⭐ **ET LA PARTITION NE DÉPEND PAS DU SEUIL** : dernier trajet du mode bas **0,237** feuille par pas,
+premier du mode haut **0,671**, pour un seuil à **0,5** — un **vide de 0,434**, et c'est le plus
+grand vide de toute la distribution. Rien ne se tient près du seuil.
+
+⚠ **ET LE NIVEAU DE CHANCE N'EST PAS LE TAUX DU MODE MAJORITAIRE.** Un seuil sur le score du pas
+classe juste **75,0 %** hors échantillon contre **49,2 %** pour le niveau **mesuré** (200 tirages de
+bruit au même effectif) — c'est **ce niveau-là** qu'il doit battre, pas les 54,2 % du mode
+majoritaire, qui lui offriraient l'optimisme résiduel de la validation. Coût du seuil, chiffré en
+marches : **7** bonnes jetées sur 22, **3** mauvaises gardées sur 26.
+
+---
+
 **Quatorze tranches d'une même campagne, `94` à `107`, et elles ont UNE conclusion — plus, désormais,
 UN acquis.** L'arbre est propre, les gardes vertes, 109 fiches sans dérive, aucun artefact
 versionné sans appelant. Ce
@@ -207,12 +264,13 @@ dépassé. Il est conservé plus bas, sous son en-tête, parce que ses résultat
    facteur à appliquer — il faut relancer. ⚠ `100` compare deux directions avec ce sélecteur, donc
    son anomalie d'isotropie hérite de la dérive ; `102` marche avec, donc sa portée est mesurée par
    un marcheur qui dépasse de 18 % à chaque pas.
-1. ⭐⭐⭐ **SÉPARER LES DEUX POPULATIONS DE `107`, ET C'EST LA MARCHE QUI COMPTE.** Quatre marches
-   sur dix comptent juste et six ne comptent rien, et **aucun critère existant ne les distingue** —
-   le score les sépare à l'envers. Trouver ce qui les sépare EST le graal : ce serait le signal
-   qu'un automate lit pour savoir s'il est encore sur la feuille. ⚠ Et ce n'est PAS un seuil à
-   régler sur les données de `107` : il faudrait une quantité mesurée indépendamment, éprouvée sur
-   les deux modes.
+1. ⭐⭐⭐⭐ **FAIT PAR `108`, ET CE QUI RESTE EST UNE COURSE, PAS UN CHIFFRE.** Le signal existe (le
+   score du balayage, mesuré à chaque pas, lisible au troisième), mais **un signal n'est pas une
+   politique**. Ce qui manque est la mesure appariée que `102` et `107` emploient déjà : *un
+   marcheur qui REDÉMARRE ailleurs quand le score des trois premiers pas est bas porte-t-il plus
+   loin qu'un marcheur qui ne le lit pas ?* Départs identiques, même corpus, deux politiques. ⚠ Et
+   la borne à lever d'abord : la réplication par sélecteur ne tient pas (24 trajets par sélecteur),
+   donc la course doit rendre assez de marches pour que chaque moitié décide seule.
 2. ⭐⭐ **Le registre continu, sur le vrai volume.** `feuilles_franchies` est calibrée mais elle
    n'a **aucun appelant en production** : le marcheur de `102` n'accumule rien. Le brancher rend une
    question que rien n'a encore posée — *après k pas, combien de feuilles ai-je RÉELLEMENT

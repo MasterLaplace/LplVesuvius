@@ -5247,8 +5247,66 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/108_ce_qui_separe_les_deux_populations.md
+- **lignes** : 225
+- **nature** : RESULTAT
+  (onze candidats déclarés avant la mesure, testés sur les étapes gardées par `107` et corrigés par
+  permutation sur le maximum de la famille ; zéro lecture distante.)
+- **résumé** : ⭐⭐⭐ **Quelque chose sépare les deux populations de `107`, et dans le BON sens** :
+  le **score médian du balayage** (force **0,6643**, p corrigée **0,0008**) et l'**accord médian de
+  l'interstice** (force **0,5629**, p corrigée **0,0046**), tous deux mesurés sur le cube à chaque
+  pas. ⭐⭐⭐ Le fait central est un **contraste** : le score du trajet sépare à l'envers (0,6888),
+  le score du pas à l'endroit. ⚠⚠ Le premier pas ne suffit pas (0,0385) ; il en faut **trois**
+  (0,5035, p corrigée **0,0100**). ⚠⚠ Et la réplication par sélecteur ne tient pas.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **Le signal qu'un automate lirait existe, et il était déjà calculé.** Le score du balayage
+    d'un pas est utilisé par le marcheur comme garde binaire ; sa VALEUR, médiane sur les pas déjà
+    faits, sépare les marches qui comptent de celles qui ne comptent rien. C'est le premier élément
+    d'une politique de départ — et `107` avait mesuré que la difficulté est de s'accrocher.
+  - ⭐⭐⭐ **`107` avait raison sur le fait et tort sur la portée.** « Le score sépare à l'envers »
+    est vrai du score du TRAJET (fenêtre de 1250 µm, où une dérive de basse fréquence s'ajuste
+    confortablement) et faux du score du PAS (fenêtre de 230 µm, trop courte pour qu'une dérive y
+    passe pour une périodicité). Le mécanisme est nommé, pas supposé.
+  - ⚠⚠⚠ **Une famille de candidats se déclare AVANT de regarder, et se publie entière.** Avec onze
+    candidats et quarante-huit trajets, un test par candidat sans correction déclare un gagnant sur
+    du **bruit pur 42,7 %** du temps — mesuré (400 tirages), contre **7 %** avec un seul candidat.
+    La correction est une permutation sur le MAXIMUM, donc exacte sans hypothèse d'indépendance :
+    Bonferroni supposerait que planarité et désaccord des demi-blocs ne mesurent pas la même chose.
+  - ⚠⚠ **Un seuil se chiffre en COÛT et se valide HORS échantillon.** Au-dessus de 5,5432 :
+    **7** bonnes marches jetées sur 22, **3** mauvaises gardées sur 26, **75,0 %** de classements
+    justes hors échantillon. ⚠⚠⚠ Et le niveau de chance n'est **pas** le taux du mode majoritaire :
+    mesuré, un seuil réglé sur du bruit obtient **49,2 %**, donc comparer à 54,2 % offrirait
+    l'optimisme résiduel de la validation.
+  - ⚠⚠ **La partition ne dépend pas du seuil, et c'est vérifié avant tout le reste** : un vide de
+    **0,434** feuille par pas l'entoure (dernier du mode bas 0,237, premier du mode haut 0,671), et
+    c'est le plus grand vide de la distribution. Un seuil qui coupe un continuum FABRIQUE ses deux
+    populations.
+  - ⚠⚠ **Ce qui borne le résultat est publié avec lui** : `calibre` retient les deux candidats,
+    `deux_roles` n'en retient aucun (même meilleur candidat, force 0,6286), et les 48 trajets ne
+    sont pas indépendants — deux marches partent de la même cellule. Trois candidats montent dans
+    le bon sens sans franchir la correction : un effectif qui ne décide pas, pas un non-résultat.
+  - ⚠ **Un signal n'est pas une politique.** Il resterait à mesurer qu'un marcheur qui redémarre
+    sur ce signal porte plus loin qu'un marcheur qui ne le lit pas, départs appariés — la forme que
+    `102` et `107` emploient déjà.
+- **rétractations / corrections internes** :
+  - §8 : ⚠⚠⚠ **j'ai réécrit une médiane sur une distribution en U**, la faute exacte que `107`
+    avait payée une tranche plus tôt : le niveau de chance hors échantillon a une moyenne de 0,512
+    et une médiane de 0,575, avec **37,5 %** des tirages **sous** le hasard. Attrapée par une sonde
+    avant publication, pas après.
+  - §6 : ⚠⚠ **mon témoin POSITIF était mal spécifié** — j'avais déclaré la longueur parcourue comme
+    devant séparer, et la matière l'a réfutée à l'envers (le mode qui ne compte rien marche **plus
+    loin**). Le vrai témoin positif est la quantité qui DÉFINIT les modes, dont la force doit valoir
+    exactement un : un contrôle de plomberie, pas une hypothèse.
+  - §6 : ⚠ **la correction du témoin n'a PAS touché la famille** — l'y faire entrer après avoir vu
+    les résultats aurait été la faute que la correction existe pour empêcher.
+- **preuve de lecture intégrale** :
+  - l. 144 (après 64 % du fichier) : `## 7. ⭐⭐⭐ La question opérationnelle : après combien de pas le sait-on ?`
+  - l. 217 : `uv run python src/nappe/ce_qui_separe_les_deux_populations.py --verifier`
+
+---
+
 ### docs/107_le_marcheur_avec_le_bon_pas.md
-- **lignes** : 167
+- **lignes** : 183
 - **nature** : RESULTAT
   (la marche de `102` rejouée avec le sélecteur corrigé de `105`, appariée par le départ et en
   gardant les étapes ; la forme du risque, et le registre du trajet entier.)
@@ -5300,9 +5358,15 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     une autre batterie, puis à 38,0 sur des cellules déjà lues. La course réelle en coûte 55,0.
   - ⚠ **Un bloc de contrôles utilisait `C` avant son import**, donc la batterie **plantait** au lieu
     d'**échouer** — ce n'est pas la même chose.
+  - §7 bis : ⭐⭐⭐ **« aucun critère existant ne les distingue » est RÉFUTÉ par `108`**, sur ces
+    mêmes étapes et sans une lecture de plus. Le score du **pas** sépare à l'endroit (0,6643) là où
+    le score du **trajet** sépare à l'envers (0,6888) : la phrase de ce document reste vraie du
+    score qu'il mesure, et fausse de celui que le marcheur calculait déjà à chaque pas.
+  - §7 bis : ⚠ **« le retard est une marche qui s'arrête tôt » est réfuté** : le mode qui ne compte
+    rien marche **plus loin** (1276,0 µm contre 1189,4).
 - **preuve de lecture intégrale** :
-  - l. 97 (après 58 % du fichier) : `## 4. ⚠⚠ Une médiane sur une distribution bimodale n'est pas un résumé`
-  - l. 156 : `uv run python src/nappe/le_marcheur_avec_le_bon_pas.py --verifier`
+  - l. 88 (après 48 % du fichier) : `## 4. ⚠⚠ Une médiane sur une distribution bimodale n'est pas un résumé`
+  - l. 179 : `uv run python src/nappe/le_marcheur_avec_le_bon_pas.py --verifier`
 
 ---
 
@@ -7090,7 +7154,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 7019
+- **lignes** : 7108
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)

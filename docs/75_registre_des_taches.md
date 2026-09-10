@@ -4553,6 +4553,95 @@ renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la bat
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
 
 ---
+##### ⭐⭐⭐⭐ CE QUI SÉPARE LES DEUX POPULATIONS — et le signal était déjà calculé
+
+> Mesure : `src/nappe/ce_qui_separe_les_deux_populations.py` (49 contrôles) →
+> `docs/mesures/ce_qui_separe_les_deux_populations.json`. Figure :
+> `src/figures/figure_ce_qui_separe_les_deux_populations.py` (17 contrôles).
+> Document : [`108`](108_ce_qui_separe_les_deux_populations.md), le 2026-09-10.
+> ⭐ **Zéro lecture distante** : la tranche entière se calcule sur les étapes gardées par `107`.
+
+![ce qui sépare les deux populations](images/108_ce_qui_separe_les_deux_populations.png)
+
+`107` laissait deux populations « que rien d'autre ne distingue ». **C'est faux**, et onze candidats
+**déclarés avant de regarder** le disent.
+
+⭐ **La famille est publiée ENTIÈRE** : le gagnant seul serait le survivant d'une sélection
+invisible. ↑ veut dire *plus grand pour les marches qui comptent*.
+
+| candidat | force | p corrigée | compte | compte rien |
+|---|---:|---:|---:|---:|
+| **score médian du balayage** | **0,6643** ↑ | **0,0008** | 6,054 | 4,5852 |
+| **accord médian de l'interstice** | **0,5629** ↑ | **0,0046** | 0,6538 | 0,5275 |
+| planarité médiane du tenseur | 0,4344 ↑ | 0,08218 | 0,6907 | 0,603 |
+| planarité minimale du tenseur | 0,4179 ↑ | 0,10098 | 0,607 | 0,431 |
+| virage médian entre deux pas | 0,3776 ↑ | 0,18156 | 15,2743° | 10,0277° |
+| dispersion du pas retenu | 0,3252 ↑ | 0,35553 | 0,5017 | 0,3992 |
+| rayon de la bande | 0,3217 ↓ | 0,36713 | **14,345** mm | 18,06 mm |
+| désaccord médian des demi-blocs | 0,2378 ↑ | 0,72585 | 7,66° | 6,8175° |
+| désaccord maximal des demi-blocs | 0,2150 ↓ | 0,82503 | **18,34°** | 21,34° |
+| pas médian retenu | 0,1452 ↓ | **0,9812** | 203,25 µm | 224,925 µm |
+| part des pas en butée | 0,1333 ↓ | **0,9904** | 0,0 | 0,1667 |
+
+⚠⚠ **Trois candidats montent dans le sens attendu sans franchir la correction** — planarité (deux
+formes) et virage. Ce sont des effectifs qui ne décident pas, pas des non-résultats.
+
+##### ⭐⭐⭐ Le fait central est un CONTRASTE, pas un gagnant
+
+| | fenêtre | quand | sens | force |
+|---|---|---|---|---:|
+| score du **pas** | ~230 µm | pendant la marche | **à l'endroit** | 0,6643 |
+| score du **trajet** | ~1250 µm | après coup | **à l'envers** | 0,6888 |
+
+> ⭐⭐⭐ `107` avait raison sur le fait et tort sur la portée : **ce n'était pas le bon score**, et le
+> bon était déjà calculé à chaque pas sans jamais être lu. Une dérive de basse fréquence s'ajuste
+> d'autant mieux qu'on lui laisse une longue fenêtre.
+
+##### ⭐⭐⭐ Après combien de pas le sait-on ? Trois
+
+| pas vus | force | p corrigée | justes hors échantillon |
+|---:|---:|---:|---:|
+| 1 | 0,0385 | 0,9986 | 0,521 |
+| 2 | **0,2675** | **0,29594** | 0,479 |
+| **3** | **0,5035** | **0,0100** | **0,688** |
+| 4 | **0,5105** | 0,0086 | **0,771** |
+| 5 | 0,6224 | 0,0008 | 0,708 |
+| 6 | 0,6643 | 0,0004 | 0,750 |
+
+> ⛔ Le premier pas **ne suffit pas**. Il en faut **trois**, soit trois cubes payés avant de savoir.
+> Un automate ne peut pas savoir en partant ; il peut savoir assez tôt pour **repartir ailleurs**.
+
+##### ⚠⚠⚠ Le piège est chiffré AVANT le résultat
+
+Avec onze candidats et quarante-huit trajets, un test par candidat sans correction déclare un gagnant
+sur du **bruit pur 42,7 %** du temps — **mesuré** (400 tirages) — contre **7 %** avec un seul
+candidat. Le 95ᵉ centile de la plus grande force **sous le nul** vaut **0,4615**.
+
+⚠⚠ **Et le niveau de chance n'est pas le taux du mode majoritaire** : un seuil sur le score classe
+juste **75,0 %** hors échantillon contre **49,2 %** pour le niveau **mesuré**, pas les 54,2 % du mode
+majoritaire. Coût d'un seuil au-dessus de **5,5432** : **7** bonnes marches jetées sur 22,
+**3** mauvaises gardées sur 26.
+
+##### ⚠⚠ Deux fautes à moi, dont une déjà payée par `107`
+
+*Une médiane sur une loi en U n'est pas un résumé* — le niveau de chance a une moyenne de **0,512**
+et une médiane de **0,575**, avec **37,5 %** des tirages **sous** le hasard. Attrapée par une sonde
+avant publication. Et *un témoin positif mal spécifié n'est pas un témoin* : j'avais déclaré la
+longueur parcourue comme devant séparer, et la matière l'a réfutée **à l'envers** — le mode qui ne
+compte rien marche **plus loin** (**1276,0 µm** contre **1189,4**).
+
+> ⭐ Le retard n'est donc pas une marche qui s'arrête tôt : c'est une marche qui **avance sans rien
+> traverser**.
+
+⚠⚠ **Ce qui borne le résultat** : `calibre` (12/12) retient les deux candidats avec une force de
+**0,7083** ; `deux_roles` (10/14) n'en retient **aucun**, même meilleur candidat, force **0,6286**.
+Et les 48 trajets **ne sont pas indépendants** — deux marches partent de la même cellule.
+
+⭐ **La partition ne dépend pas du seuil** : dernier trajet du mode bas **0,237** feuille par pas,
+premier du mode haut **0,671**, pour un seuil à 0,5 — un **vide de 0,434**, le plus grand de la
+distribution.
+
+---
 ##### ⭐⭐⭐ LE MARCHEUR AVEC LE BON PAS — deux populations que rien d'autre ne distingue
 
 > Mesure : `src/nappe/le_marcheur_avec_le_bon_pas.py` (50 contrôles) →

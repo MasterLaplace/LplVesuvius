@@ -144,6 +144,22 @@ rendent 173,0. Le biais de `105` est mesuré sur des profils analytiques **et** 
 l'asserter ici ferait dépendre le contrôle d'un effet de quantification sans rapport avec ce qu'il
 nomme.
 
+## 7 bis. ⭐⭐⭐ Ce que `108` a trouvé, et il corrige une phrase de ce document
+
+> ⭐⭐⭐ **Quelque chose SÉPARE les deux modes, et ce document disait le contraire.**
+> [`108`](108_ce_qui_separe_les_deux_populations.md) a repris les étapes gardées ici — sans une
+> lecture de plus — et testé onze candidats **déclarés avant la mesure**, corrigés par permutation
+> sur le maximum de la famille. Deux survivent : le **score médian du balayage** (force 0,664,
+> p corrigée 0,0008) et l'**accord médian de l'interstice** (force 0,563, p corrigée 0,0046).
+>
+> ⚠⚠⚠ **La phrase de ce document — « un seuil de score écarterait le BON mode » — reste vraie du
+> score qu'il mesure, et fausse du score que le marcheur calcule à chaque pas.** Le score du
+> **trajet** sépare à l'envers (0,689) ; le score du **pas** sépare à l'endroit (0,664). Ce
+> n'était pas le bon score, et le bon était déjà là.
+>
+> ⚠ Et une hypothèse écrite ici est réfutée : le mode qui ne compte rien marche **plus loin**
+> (1276,0 µm contre 1189,4). Le retard n'est pas une marche qui s'arrête tôt.
+
 ## 8. Ce que cette course ne dit pas
 
 - Elle ne dit **pas** que « une feuille » a le sens géométrique qu'on lui prêtait : `106` a montré

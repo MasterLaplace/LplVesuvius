@@ -2237,6 +2237,153 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             txt = f"{val}".replace(".", ",")
             out.append((nom, [f"**{txt}**", txt, f"{val}"], mar.name))
 
+    # ⭐⭐⭐ CE QUI SEPARE LES DEUX POPULATIONS (`108`), ET TROIS APPARIEMENTS SONT OBLIGATOIRES.
+    # (1) Une FORCE ne voyage jamais sans son SENS : « le score separe » se lit comme un critere
+    # utilisable, et le temoin negatif prouve qu'un seuil de score du TRAJET ecarterait le bon
+    # mode. (2) Une p BRUTE ne voyage jamais sans sa p CORRIGEE, parce qu'un test par candidat
+    # sans correction declare un gagnant sur du bruit pur quatre fois sur dix. (3) Et le taux
+    # juste hors echantillon ne voyage jamais sans le NIVEAU DE CHANCE MESURE : le comparer au
+    # taux du mode majoritaire lui offrirait l'optimisme residuel de la validation.
+    sep = _source(racine, "ce_qui_separe_les_deux_populations.json")
+    if sep.exists():
+        d = json.loads(sep.read_text())
+        e = d.get("ensemble", {})
+        for cle, nom in (("trajets_lisibles", "trajets lisibles de 108"),):
+            if cle in d:
+                val = d[cle]
+                out.append((nom, [f"**{val}**", f"{val}"], sep.name))
+        for cle, nom in (("mode_haut", "trajets du mode haut de 108"),
+                         ("mode_bas", "trajets du mode bas de 108"),
+                         ("candidats_declares", "candidats declares de 108")):
+            if cle in e:
+                val = e[cle]
+                out.append((nom, [f"**{val}**", f"{val}"], sep.name))
+        v_ = d.get("vide_entre_les_modes", {})
+        for cle, nom in (("dernier_du_mode_bas", "dernier trajet du mode bas"),
+                         ("premier_du_mode_haut", "premier trajet du mode haut"),
+                         ("vide_au_seuil", "vide au seuil des modes"),
+                         ("seuil_feuilles_par_pas", "seuil en feuilles par pas")):
+            if cle not in v_ or v_[cle] is None:
+                continue
+            val = v_[cle]
+            txt = f"{val}".replace(".", ",")
+            out.append((nom, [f"**{txt}**", txt, f"{val}"], sep.name))
+        fg = d.get("faux_gagnants_sans_correction", {})
+        if "part_de_faux_gagnants" in fg:
+            val = fg["part_de_faux_gagnants"]
+            pc = f"{100 * val:.1f}".replace(".", ",")
+            out.append(("part de faux gagnants sans correction",
+                        [f"**{pc} %**", f"{pc} %", f"{pc}%",
+                         f"**{100 * val:.0f} %**", f"{100 * val:.0f} %"], sep.name))
+        n_ = e.get("nul", {})
+        for cle, nom in (("force_max_du_nul_p95", "95e centile de la plus grande force"),
+                         ("tirages", "tirages de la permutation de 108")):
+            if cle not in n_:
+                continue
+            val = n_[cle]
+            txt = f"{val}".replace(".", ",")
+            out.append((nom, [f"**{txt}**", txt, f"{val}"], sep.name))
+        for x in e.get("par_candidat", []):
+            if not x.get("decidable"):
+                continue
+            txt = f"{x['force']}".replace(".", ",")
+            formes = [f"**{txt}**", txt, f"{x['force']}"]
+            for n_dec in (2, 3):
+                q = f"{x['force']:.{n_dec}f}".replace(".", ",")
+                formes += [f"**{q}**", q]
+            out.append((f"force de {x['cle']}", formes, sep.name))
+            if "p_corrigee" in x:
+                q = f"{x['p_corrigee']}".replace(".", ",")
+                formes = [f"**{q}**", q, f"{x['p_corrigee']}"]
+                for n_dec in (3, 4):
+                    r = f"{x['p_corrigee']:.{n_dec}f}".replace(".", ",")
+                    formes += [f"**{r}**", r]
+                out.append((f"p corrigee de {x['cle']}", formes, sep.name))
+            for cote in ("mediane_mode_haut", "mediane_mode_bas"):
+                if x.get(cote) is None:
+                    continue
+                val = x[cote]
+                txt = f"{val}".replace(".", ",")
+                formes = [f"**{txt}**", txt, f"{val}"]
+                for n_dec in (1, 2, 3):
+                    q = f"{val:.{n_dec}f}".replace(".", ",")
+                    formes += [f"**{q}**", q]
+                out.append((f"{cote} de {x['cle']}", formes, sep.name))
+        c_ = e.get("cout_dun_seuil", {})
+        for cle, nom in (("seuil", "seuil sur le score du balayage"),
+                         ("bonnes_marches_jetees", "bonnes marches jetees"),
+                         ("bonnes_marches", "bonnes marches de 108"),
+                         ("mauvaises_marches_gardees", "mauvaises marches gardees"),
+                         ("mauvaises_marches", "mauvaises marches de 108")):
+            if cle not in c_:
+                continue
+            val = c_[cle]
+            txt = f"{val}".replace(".", ",")
+            out.append((nom, [f"**{txt}**", txt, f"{val}"], sep.name))
+        for cle, nom in (("part_juste_hors_echantillon", "part juste hors echantillon"),
+                         ("niveau_de_chance_mesure", "niveau de chance mesure"),
+                         ("part_juste_du_mode_majoritaire", "part juste du mode majoritaire")):
+            if cle not in c_:
+                continue
+            val = c_[cle]
+            pc = f"{100 * val:.1f}".replace(".", ",")
+            txt = f"{val}".replace(".", ",")
+            out.append((nom, [f"**{pc} %**", f"{pc} %", f"{pc}%",
+                              f"**{txt}**", txt, f"{val}"], sep.name))
+        h_ = e.get("ce_que_le_hasard_obtient", {})
+        for cle, nom in (("part_sous_le_hasard", "part des tirages sous le hasard"),):
+            if cle not in h_:
+                continue
+            val = h_[cle]
+            pc = f"{100 * val:.1f}".replace(".", ",")
+            out.append((nom, [f"**{pc} %**", f"{pc} %", f"{pc}%"], sep.name))
+        ap = d.get("apres_combien_de_pas", {})
+        for cle, nom in (("force_au_premier_pas", "force au premier pas"),
+                         ("p_corrigee_au_premier_pas", "p corrigee au premier pas")):
+            if cle not in ap or ap[cle] is None:
+                continue
+            val = ap[cle]
+            txt = f"{val}".replace(".", ",")
+            formes = [f"**{txt}**", txt, f"{val}"]
+            for n_dec in (3, 4):
+                q = f"{val:.{n_dec}f}".replace(".", ",")
+                formes += [f"**{q}**", q]
+            out.append((nom, formes, sep.name))
+        for x in ap.get("par_longueur", []):
+            for cle, nom in (("force", "force apres"), ("p_corrigee", "p corrigee apres")):
+                val = x[cle]
+                txt = f"{val}".replace(".", ",")
+                formes = [f"**{txt}**", txt, f"{val}"]
+                for n_dec in (3, 4):
+                    q = f"{val:.{n_dec}f}".replace(".", ",")
+                    formes += [f"**{q}**", q]
+                out.append((f"{nom} {x['pas_vus']} pas", formes, sep.name))
+            lo = (x.get("cout") or {}).get("part_juste_hors_echantillon")
+            if lo is not None:
+                txt = f"{lo}".replace(".", ",")
+                formes = [f"**{txt}**", txt, f"{lo}"]
+                for n_dec in (3,):
+                    q = f"{lo:.{n_dec}f}".replace(".", ",")
+                    formes += [f"**{q}**", q]
+                out.append((f"juste hors echantillon apres {x['pas_vus']} pas", formes,
+                            sep.name))
+        for sel in ("calibre", "deux_roles"):
+            b = d.get("par_selecteur", {}).get(sel, {})
+            for cle, nom in (("mode_haut", "mode haut du selecteur"),
+                             ("mode_bas", "mode bas du selecteur"),
+                             ("trajets", "trajets du selecteur"),
+                             ("force_du_meilleur", "force du meilleur du selecteur")):
+                if cle not in b or b[cle] is None:
+                    continue
+                val = b[cle]
+                txt = f"{val}".replace(".", ",")
+                formes = [f"**{txt}**", txt, f"{val}"]
+                if isinstance(val, float):
+                    for n_dec in (3,):
+                        q = f"{val:.{n_dec}f}".replace(".", ",")
+                        formes += [f"**{q}**", q]
+                out.append((f"{nom} {sel}", formes, sep.name))
+
     # ⛔⛔⛔ LE PAS SELON LA DIRECTION (`106`), ET DEUX APPARIEMENTS SONT OBLIGATOIRES.
     # (1) Le residu sur la MATIERE ne voyage jamais sans celui sur la pile FABRIQUEE : « 19,3 µm »
     # est un nombre nu, « 19,3 contre 0,72 sur du connu, soit x22,3 » EST le resultat.
