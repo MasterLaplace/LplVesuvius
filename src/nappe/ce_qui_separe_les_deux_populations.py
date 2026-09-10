@@ -703,6 +703,110 @@ def apres_combien_de_pas_le_sait_on(trajets: list[dict], tirages: int = TIRAGES,
                 lignes[-1].get("force", 0.0) > premier.get("force", 0.0))}
 
 
+def combien_de_marches_pour_decider(trajets: list[dict],
+                                    cibles=(24, 36, 48, 72, 96, 144),
+                                    tirages: int = 300, tirages_du_nul: int = 600,
+                                    graine: int = GRAINE + 4,
+                                    part: float = PART_DU_COMPTE_ATTENDU) -> dict:
+    """A quel effectif un SEUL selecteur deciderait-il, sans mise en commun ?
+
+    ⭐⭐⭐ ELLE CHIFFRE LE PRIX DE LA COURSE SUIVANTE AVANT QU'ON LE PAIE, et c'est sa seule raison
+    d'etre. Le resultat de cette tranche tient sur quarante-huit trajets qui ne sont PAS
+    independants — deux marches partent de la meme cellule — et il ne se replique pas a
+    l'effectif d'un selecteur. « Il faudrait plus de marches » est une phrase ; combien, et pour
+    combien d'heures, est un chiffre. Une course de vingt-huit bandes coute cinq heures ; savoir
+    s'il en faut deux ou dix se decide ici, sur des donnees deja payees.
+
+    ⚠⚠ LA METHODE EST UN REECHANTILLONNAGE PAR LIGNE ENTIERE, jamais par colonne. Tirer chaque
+    candidat separement casserait les correlations entre eux — or c'est exactement d'elles que
+    depend la loi du MAXIMUM de la famille, donc la correction. Une ligne est un trajet ; on tire
+    des trajets.
+
+    ⚠⚠⚠ ET LA REPONSE EST OPTIMISTE, PAR CONSTRUCTION, POUR UNE RAISON QUI A UN NOM. L'ampleur
+    qu'on reechantillonne est celle du candidat RETENU, c'est-a-dire du maximum d'une famille de
+    onze — et un maximum surestime ce qu'il mesure (la « malediction du vainqueur »). Le nombre
+    rendu est donc un PLANCHER du nombre de marches necessaires, jamais une estimation centrale,
+    et il est publie comme tel.
+
+    ⚠⚠⚠ ET CE QU'ELLE NE PEUT PAS FAIRE EST MESURE PAR SA PROPRE BATTERIE : elle ne distingue pas
+    un effet REEL d'un effet CHANCEUX. Sur une table de bruit pur, le meilleur candidat porte
+    quand meme une force non nulle par accident, et le reechantillonnage la traite comme la
+    verite — a cent vingt trajets, il annonce alors quatre chances sur cinq de la « retrouver ».
+    Ce qu'elle repond n'est donc PAS « combien de marches pour savoir » mais **combien de marches
+    pour REPRODUIRE l'ampleur observee, quelle que soit son origine**. Le chiffre n'a de sens que
+    si l'effet est etabli AILLEURS — ici il l'est, par l'ensemble des deux selecteurs, a p
+    corrigee 0,0008 ; c'est cette p-la, et non celle du selecteur reechantillonne, qui autorise a
+    poser la question.
+
+    ⚠ La valeur critique du maximum est calculee UNE FOIS par effectif, sur une table
+    reechantillonnee dont les etiquettes sont brassees : c'est exactement le seuil qu'une p
+    corrigee inferieure a 0,05 franchit, et le recalculer a chaque tirage couterait mille fois
+    plus pour le meme nombre.
+    """
+    if len(trajets) < 8:
+        return {"decidable": False, "pourquoi": "moins de huit trajets"}
+    m = modes(trajets, part)
+    if m.sum() < 3 or (~m).sum() < 3:
+        return {"decidable": False, "pourquoi": "un mode a moins de trois trajets"}
+    noms = list(NOMS_DES_CANDIDATS)
+    table = _table(trajets, noms)
+    obs = _forces(table, m)
+    if not np.isfinite(obs).any():
+        return {"decidable": False, "pourquoi": "aucun candidat lisible"}
+    meilleur = int(np.nanargmax(obs))
+    part_haute = float(m.mean())
+    hauts = np.flatnonzero(m)
+    bas = np.flatnonzero(~m)
+    rng = np.random.default_rng(graine)
+    lignes = []
+    for n in cibles:
+        n_haut = max(int(round(n * part_haute)), 3)
+        n_bas = max(n - n_haut, 3)
+        mm = np.zeros(n_haut + n_bas, dtype=bool)
+        mm[:n_haut] = True
+
+        def tirer():
+            return np.vstack([table[rng.choice(hauts, n_haut, replace=True)],
+                              table[rng.choice(bas, n_bas, replace=True)]])
+
+        # ⚠ La valeur critique vient d'une table reechantillonnee dont les etiquettes sont
+        # BRASSEES : sous le nul, les deux modes sont echangeables, donc c'est bien la loi du
+        # maximum a cet effectif, correlations comprises.
+        t0 = tirer()
+        maxi = np.empty(tirages_du_nul)
+        for k in range(tirages_du_nul):
+            b = np.zeros(t0.shape[0], dtype=bool)
+            b[rng.permutation(t0.shape[0])[:n_haut]] = True
+            f = _forces(t0, b)
+            maxi[k] = np.nanmax(f) if np.isfinite(f).any() else 0.0
+        critique = float(np.percentile(maxi, 95))
+        retenu_meilleur = retenu_un = 0
+        for _ in range(tirages):
+            f = _forces(tirer(), mm)
+            if np.isfinite(f[meilleur]) and f[meilleur] >= critique:
+                retenu_meilleur += 1
+            if np.isfinite(f).any() and np.nanmax(f) >= critique:
+                retenu_un += 1
+        lignes.append({"trajets": int(n_haut + n_bas), "mode_haut": n_haut, "mode_bas": n_bas,
+                       "force_critique": round(critique, 4),
+                       "part_ou_le_meilleur_est_retenu": round(retenu_meilleur / tirages, 3),
+                       "part_ou_un_candidat_est_retenu": round(retenu_un / tirages, 3)})
+    atteint = next((x for x in lignes if x["part_ou_le_meilleur_est_retenu"] >= 0.80), None)
+    return {"decidable": True, "candidat": noms[meilleur],
+            "force_observee": round(float(obs[meilleur]), 4),
+            "trajets_de_depart": len(trajets), "tirages": int(tirages),
+            "tirages_du_nul": int(tirages_du_nul), "par_effectif": lignes,
+            "trajets_pour_quatre_chances_sur_cinq": None if atteint is None
+            else atteint["trajets"],
+            "la_reponse_est_un_plancher": True,
+            "pourquoi_un_plancher": "l'ampleur reechantillonnee est celle du maximum d'une "
+                                    "famille de onze, donc surestimee",
+            "ce_nest_pas_combien_pour_savoir": "c'est combien pour REPRODUIRE l'ampleur "
+                                               "observee ; sur du bruit pur la reponse monte "
+                                               "aussi, donc le chiffre n'a de sens que si "
+                                               "l'effet est etabli ailleurs"}
+
+
 def mesurer(chemin: Path = CHEMIN_DE_107, tirages: int = TIRAGES,
             graine: int = GRAINE) -> dict:
     """La tranche entiere : le corpus des deux selecteurs, puis chacun separement."""
@@ -723,6 +827,49 @@ def mesurer(chemin: Path = CHEMIN_DE_107, tirages: int = TIRAGES,
          "ensemble": separer(tous, tirages, graine),
          "apres_combien_de_pas": apres_combien_de_pas_le_sait_on(tous, tirages, graine + 3),
          "par_selecteur": {}}
+    # ⚠⚠ LE PRIX DE LA COURSE SUIVANTE EST CHIFFRE SUR LE SELECTEUR QUI A ECHOUE, pas sur
+    # l'ensemble : c'est `deux_roles` qui ne retient rien a vingt-quatre trajets, donc c'est lui
+    # qui dit combien il en aurait fallu. Le prendre sur l'ensemble repondrait a une question que
+    # personne ne pose, puisque l'ensemble decide deja.
+    faible = [x for x in tous if x["selecteur"] == "deux_roles"]
+    prix = combien_de_marches_pour_decider(faible)
+    # ⚠⚠⚠ LA P CORRIGEE DE L'ENSEMBLE VOYAGE AVEC LE PRIX, et sans elle le prix ne veut rien dire :
+    # le reechantillonnage ne sait pas si l'ampleur qu'il reproduit est reelle ou chanceuse, donc
+    # c'est la correction sur les quarante-huit trajets qui autorise a poser la question.
+    # ⚠⚠ LE PRIX EN HEURES VIENT DU COUT QUE `107` A MESURE, jamais d'une estimation neuve : la
+    # tranche precedente a mesure quatre valeurs et retenu la plus GRANDE des fiables, parce que
+    # sous-estimer fait lancer une course qu'on ne peut pas finir. Le reprendre est ce qui rend
+    # les deux projections comparables.
+    n_cible = prix.get("trajets_pour_quatre_chances_sur_cinq") if prix.get("decidable") else None
+    if n_cible:
+        lu = len([x for x in tous if x["selecteur"] == "deux_roles"])
+        marches = len(brut.get("lignes", [])) * max(brut.get("cellules_par_bande", 1), 1)
+        # La part des marches dont le registre est lisible, mesuree plutot que supposee.
+        part_lisible = lu / marches if marches else 1.0
+        cellules = int(np.ceil(n_cible / max(part_lisible, 1e-9)
+                               / max(len(brut.get("lignes", [])), 1)))
+        pas = int(brut.get("pas_max", 6))
+        etapes = len(brut.get("lignes", [])) * cellules * pas * 2
+        sec = float((brut.get("cout_par_etape") or {}).get(
+            "retenue_pour_les_projections_s", 55.0))
+        reel = (float(brut.get("secondes", 0.0))
+                / max((brut.get("prix_projete") or {}).get("etapes", 1), 1))
+        prix["course_qui_deciderait"] = {
+            "trajets_vises_par_selecteur": int(n_cible),
+            "part_des_marches_lisibles": round(part_lisible, 3),
+            "cellules_par_bande": cellules,
+            "bandes": len(brut.get("lignes", [])),
+            "etapes": etapes,
+            "secondes_par_etape_retenue": sec,
+            "heures_projetees": round(etapes * sec / 3600.0, 2),
+            "secondes_par_etape_reelle_de_107": round(reel, 1),
+            "heures_au_rythme_reel_de_107": round(etapes * reel / 3600.0, 2)}
+    if prix.get("decidable") and r["ensemble"].get("decidable"):
+        pc = next((x.get("p_corrigee") for x in r["ensemble"]["par_candidat"]
+                   if x["cle"] == prix["candidat"]), None)
+        prix["p_corrigee_de_lensemble_pour_ce_candidat"] = pc
+        prix["leffet_est_etabli_par_lensemble"] = bool(pc is not None and pc < 0.05)
+    r["combien_de_marches_pour_decider"] = prix
     for sel in ("calibre", "deux_roles"):
         jeu = [x for x in tous if x["selecteur"] == sel]
         r["par_selecteur"][sel] = separer(jeu, tirages, graine + 1)
@@ -804,6 +951,34 @@ def afficher(r: dict) -> None:
               f"{'OUI' if ap['le_premier_pas_suffit'] else 'NON'} "
               f"(force {ap['force_au_premier_pas']}, p corrigée {ap['p_corrigee_au_premier_pas']})")
         print(f"   ★ voir plus longtemps aide : {ap['voir_plus_longtemps_aide']}")
+    cm = r.get("combien_de_marches_pour_decider", {})
+    if cm.get("decidable"):
+        print(f"\nCOMBIEN DE MARCHES POUR QU'UN SEUL SÉLECTEUR DÉCIDE ? "
+              f"(rééchantillonnage de `deux_roles`, force observée {cm['force_observee']})")
+        print(f"   {'trajets':>8} {'force critique':>15} {'le meilleur retenu':>20} "
+              f"{'un candidat retenu':>20}")
+        for x in cm["par_effectif"]:
+            print(f"   {x['trajets']:>8} {x['force_critique']:>15.4f} "
+                  f"{x['part_ou_le_meilleur_est_retenu']:>20.3f} "
+                  f"{x['part_ou_un_candidat_est_retenu']:>20.3f}")
+        n = cm["trajets_pour_quatre_chances_sur_cinq"]
+        print(f"   ★★★ QUATRE CHANCES SUR CINQ À PARTIR DE "
+              f"{n if n else 'PLUS QUE CE QUI A ÉTÉ SONDÉ'} TRAJETS")
+        print(f"   ⚠ et c'est un PLANCHER : {cm['pourquoi_un_plancher']}")
+        print(f"   ⚠⚠ et ce n'est PAS « combien pour savoir » : {cm['ce_nest_pas_combien_pour_savoir']}")
+        c2 = cm.get("course_qui_deciderait")
+        if c2:
+            print(f"   ★★ LA COURSE QUI DÉCIDERAIT : {c2['bandes']} bandes × "
+                  f"{c2['cellules_par_bande']} cellules × 2 sélecteurs × 6 pas = "
+                  f"{c2['etapes']} étapes")
+            print(f"      soit {c2['heures_projetees']} h au coût retenu "
+                  f"({c2['secondes_par_etape_retenue']} s/étape) et "
+                  f"{c2['heures_au_rythme_reel_de_107']} h au rythme réel de `107` "
+                  f"({c2['secondes_par_etape_reelle_de_107']} s/étape)")
+        if "p_corrigee_de_lensemble_pour_ce_candidat" in cm:
+            print(f"   ★ ce qui autorise la question : l'ensemble établit ce candidat à p corrigée "
+                  f"{cm['p_corrigee_de_lensemble_pour_ce_candidat']} "
+                  f"({cm.get('leffet_est_etabli_par_lensemble')})")
     print("\nPAR SÉLECTEUR (mêmes cellules, donc PAS une réplication indépendante)")
     for sel, s in r.get("par_selecteur", {}).items():
         if s.get("decidable"):
@@ -1016,6 +1191,54 @@ def verifier() -> int:
     v("... et la courbe porte une colonne par pas vu",
       len(ap0["par_longueur"]) == 6, f"{len(ap0['par_longueur'])} colonnes")
 
+    # === COMBIEN DE MARCHES POUR DECIDER ====================================================
+    # ⭐⭐⭐ ELLE CHIFFRE LE PRIX DE LA COURSE SUIVANTE, donc elle doit se tromper dans les deux
+    # sens : rendre un effectif atteignable quand l'effet existe, et n'en rendre AUCUN quand il
+    # n'existe pas — sinon elle ferait payer une course pour mesurer du bruit.
+    pw = combien_de_marches_pour_decider(
+        _trajets_fabriques(20, 24, graine=11, separateur="planarite_mediane", ecart=1.2),
+        cibles=(24, 48, 120), tirages=120, tirages_du_nul=200)
+    v("un effet réel finit par être retenu quand l'effectif monte",
+      pw["trajets_pour_quatre_chances_sur_cinq"] is not None,
+      f"{[x['part_ou_le_meilleur_est_retenu'] for x in pw['par_effectif']]}")
+    v("... et la part retenue MONTE avec l'effectif",
+      [x["part_ou_le_meilleur_est_retenu"] for x in pw["par_effectif"]]
+      == sorted(x["part_ou_le_meilleur_est_retenu"] for x in pw["par_effectif"]),
+      f"{[x['part_ou_le_meilleur_est_retenu'] for x in pw['par_effectif']]}")
+    # ⚠⚠ ET LA FORCE CRITIQUE DOIT BAISSER QUAND L'EFFECTIF MONTE : c'est ce qui fait qu'un effet
+    # constant devient decidable. Si elle ne baissait pas, ce serait la correction qui est fausse.
+    v("... et la force critique BAISSE avec l'effectif",
+      [x["force_critique"] for x in pw["par_effectif"]]
+      == sorted((x["force_critique"] for x in pw["par_effectif"]), reverse=True),
+      f"{[x['force_critique'] for x in pw['par_effectif']]}")
+    # ⭐⭐⭐ ET LA LIMITE DE LA METHODE EST MESUREE PLUTOT QUE TUE. Mon premier controle exigeait
+    # que le bruit ne rende JAMAIS quatre chances sur cinq ; il a echoue, et il avait tort. Sur
+    # une table de bruit le meilleur candidat porte une force non nulle par accident, et le
+    # reechantillonnage la traite comme la verite : a cent vingt trajets il annonce donc quatre
+    # chances sur cinq de la retrouver. La fonction ne repond pas « combien de marches pour
+    # savoir » mais « combien pour REPRODUIRE l'ampleur observee ». La batterie asserte cette
+    # limite dans les deux sens, parce que la taire ferait lire le chiffre comme une preuve.
+    pw0 = combien_de_marches_pour_decider(_trajets_fabriques(20, 24, graine=11),
+                                          cibles=(24, 48, 120), tirages=120,
+                                          tirages_du_nul=200)
+    v("⚠ sur du BRUIT aussi la part retenue monte : la méthode ne sait pas si l'effet est réel",
+      pw0["par_effectif"][-1]["part_ou_le_meilleur_est_retenu"] > 0.5,
+      f"{[x['part_ou_le_meilleur_est_retenu'] for x in pw0['par_effectif']]}")
+    v("... donc la fonction DIT qu'elle ne répond pas à « combien pour savoir »",
+      "etabli ailleurs" in pw0["ce_nest_pas_combien_pour_savoir"])
+    # ⚠⚠ CE QUI SEPARE LE BRUIT DU REEL N'EST PAS ICI MAIS DANS LA CORRECTION : sur la meme table
+    # de bruit, `separer` ne retient personne. Les deux outils repondent a deux questions, et
+    # c'est leur COMBINAISON qui autorise a lire le prix.
+    v("... et c'est la CORRECTION, pas le prix, qui écarte le bruit",
+      separer(_trajets_fabriques(20, 24, graine=11), tirages=400,
+              graine=5)["quelque_chose_les_separe"] is False)
+    v("le prix se refuse sur trop peu de trajets",
+      combien_de_marches_pour_decider(_trajets_fabriques(2, 2))["decidable"] is False)
+    # ⚠⚠ ET LA REPONSE EST DECLAREE COMME UN PLANCHER, avec sa raison : l'ampleur
+    # reechantillonnee est celle du MAXIMUM d'une famille, donc surestimee.
+    v("... et la réponse se déclare comme un PLANCHER, avec sa raison",
+      pw.get("la_reponse_est_un_plancher") is True and "famille" in pw["pourquoi_un_plancher"])
+
     # === LE FAUX POSITIF SANS CORRECTION ====================================================
     # ⭐⭐⭐ LE CHIFFRE QUI JUSTIFIE LA CORRECTION EST MESURE, PAS INVOQUE.
     fg = combien_de_faux_gagnants_sans_correction(20, 24, len(NOMS_DES_CANDIDATS),
@@ -1101,6 +1324,23 @@ def verifier() -> int:
         v("... et les deux modes sont peuplés",
           int(mo.sum()) >= 5 and int((~mo).sum()) >= 5,
           f"{int(mo.sum())} haut / {int((~mo).sum())} bas")
+        # ⚠⚠ LE PRIX EN HEURES DOIT ETRE PLUS GRAND AU COUT RETENU QU'AU RYTHME REEL, sinon la
+        # projection ne serait plus conservatrice — et `107` a retenu la plus grande des valeurs
+        # fiables precisement pour que sous-estimer ne fasse pas lancer une course infinissable.
+        m108 = json.loads(
+            (RACINE / "docs" / "mesures"
+             / "ce_qui_separe_les_deux_populations.json").read_text()) if (
+                RACINE / "docs" / "mesures"
+                / "ce_qui_separe_les_deux_populations.json").is_file() else {}
+        c2 = ((m108.get("combien_de_marches_pour_decider") or {}).get(
+            "course_qui_deciderait") or {})
+        if c2:
+            v("la course qui déciderait est projetée au coût RETENU, donc plus cher que le réel",
+              c2["heures_projetees"] > c2["heures_au_rythme_reel_de_107"],
+              f"{c2['heures_projetees']} h contre {c2['heures_au_rythme_reel_de_107']} h")
+            v("... et ses étapes se recomposent depuis ses facteurs",
+              c2["etapes"] == c2["bandes"] * c2["cellules_par_bande"] * 6 * 2,
+              f"{c2['etapes']} étapes")
     else:
         v("la mesure de `107` est présente", False, str(CHEMIN_DE_107))
 

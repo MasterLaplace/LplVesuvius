@@ -1069,6 +1069,81 @@
       "force_du_temoin_negatif": 0.6714
     }
   },
+  "combien_de_marches_pour_decider": {
+    "decidable": true,
+    "candidat": "score_du_balayage_median",
+    "force_observee": 0.6286,
+    "trajets_de_depart": 24,
+    "tirages": 300,
+    "tirages_du_nul": 600,
+    "par_effectif": [
+      {
+        "trajets": 24,
+        "mode_haut": 10,
+        "mode_bas": 14,
+        "force_critique": 0.6357,
+        "part_ou_le_meilleur_est_retenu": 0.573,
+        "part_ou_un_candidat_est_retenu": 0.627
+      },
+      {
+        "trajets": 36,
+        "mode_haut": 15,
+        "mode_bas": 21,
+        "force_critique": 0.5333,
+        "part_ou_le_meilleur_est_retenu": 0.77,
+        "part_ou_un_candidat_est_retenu": 0.82
+      },
+      {
+        "trajets": 48,
+        "mode_haut": 20,
+        "mode_bas": 28,
+        "force_critique": 0.4501,
+        "part_ou_le_meilleur_est_retenu": 0.897,
+        "part_ou_un_candidat_est_retenu": 0.947
+      },
+      {
+        "trajets": 72,
+        "mode_haut": 30,
+        "mode_bas": 42,
+        "force_critique": 0.3842,
+        "part_ou_le_meilleur_est_retenu": 1.0,
+        "part_ou_un_candidat_est_retenu": 1.0
+      },
+      {
+        "trajets": 96,
+        "mode_haut": 40,
+        "mode_bas": 56,
+        "force_critique": 0.3175,
+        "part_ou_le_meilleur_est_retenu": 1.0,
+        "part_ou_un_candidat_est_retenu": 1.0
+      },
+      {
+        "trajets": 144,
+        "mode_haut": 60,
+        "mode_bas": 84,
+        "force_critique": 0.2566,
+        "part_ou_le_meilleur_est_retenu": 1.0,
+        "part_ou_un_candidat_est_retenu": 1.0
+      }
+    ],
+    "trajets_pour_quatre_chances_sur_cinq": 48,
+    "la_reponse_est_un_plancher": true,
+    "pourquoi_un_plancher": "l'ampleur reechantillonnee est celle du maximum d'une famille de onze, donc surestimee",
+    "ce_nest_pas_combien_pour_savoir": "c'est combien pour REPRODUIRE l'ampleur observee ; sur du bruit pur la reponse monte aussi, donc le chiffre n'a de sens que si l'effet est etabli ailleurs",
+    "course_qui_deciderait": {
+      "trajets_vises_par_selecteur": 48,
+      "part_des_marches_lisibles": 0.857,
+      "cellules_par_bande": 2,
+      "bandes": 28,
+      "etapes": 672,
+      "secondes_par_etape_retenue": 55.0,
+      "heures_projetees": 10.27,
+      "secondes_par_etape_reelle_de_107": 37.8,
+      "heures_au_rythme_reel_de_107": 7.05
+    },
+    "p_corrigee_de_lensemble_pour_ce_candidat": 0.0008,
+    "leffet_est_etabli_par_lensemble": true
+  },
   "faux_gagnants_sans_correction": {
     "tirages": 400,
     "candidats": 11,

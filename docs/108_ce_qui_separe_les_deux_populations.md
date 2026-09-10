@@ -196,7 +196,43 @@ niveau-là** que 75,0 % doit battre, et il le bat.
 - **`106` reste debout** : la quantité que ce pas suit n'est pas l'espacement d'un empilement
   localement parallèle. Un signal lisible ne rend pas son sens géométrique.
 
-## 10. Ce que ça change pour le graal
+## 10. ⭐⭐ Le prix de la course qui déciderait, chiffré avant d'être payé
+
+La réplication échoue à **24** trajets par sélecteur. « Il en faudrait plus » est une phrase ;
+combien, et pour combien d'heures, est un chiffre — et il se calcule sur des données déjà payées,
+en rééchantillonnant `deux_roles`, le sélecteur qui a **échoué**, dont la force observée est
+**0,6286**.
+
+| trajets par sélecteur | force critique | le meilleur retenu | un candidat retenu |
+|---:|---:|---:|---:|
+| 24 | 0,6357 | 0,573 | 0,627 |
+| 36 | 0,5333 | 0,770 | 0,820 |
+| **48** | **0,4501** | **0,897** | 0,947 |
+| 72 | 0,3842 | 1,000 | 1,000 |
+| 96 | 0,3175 | 1,000 | 1,000 |
+| 144 | 0,2566 | 1,000 | 1,000 |
+
+> ⭐ **Quatre chances sur cinq à partir de 48 trajets par sélecteur** — exactement le **double** de
+> `107`. Soit **28** bandes × **2** cellules × 2 sélecteurs × 6 pas = **672 étapes**, donc
+> **10,27 h** au coût retenu (**55,0** s/étape) et **7,05 h** au rythme réel de `107`
+> (**37,8** s/étape).
+
+⚠⚠ **Et c'est un PLANCHER**, pour une raison qui a un nom : l'ampleur rééchantillonnée est celle
+du **maximum** d'une famille de onze, et un maximum surestime ce qu'il mesure — la malédiction du
+vainqueur.
+
+⚠⚠⚠ **Et ce n'est pas « combien de marches pour SAVOIR ».** La batterie le mesure sur son propre
+témoin : sur une table de **bruit pur**, le meilleur candidat porte une force non nulle par
+accident, le rééchantillonnage la traite comme la vérité, et à 120 trajets il annonce **aussi**
+quatre chances sur cinq de la retrouver. Ce que la fonction rend est donc **combien de marches
+pour REPRODUIRE l'ampleur observée, quelle que soit son origine**.
+
+> ⭐ **Ce qui autorise quand même la question, c'est que l'effet est établi AILLEURS** : l'ensemble
+> des deux sélecteurs retient ce candidat à p corrigée **0,0008**. C'est la **correction**, pas le
+> prix, qui écarte le bruit ; les deux outils répondent à deux questions et c'est leur combinaison
+> qui rend le chiffre lisible.
+
+## 11. Ce que ça change pour le graal
 
 `107` avait mesuré que le risque par pas **baisse** (0,382 → 0,105), donc que *la difficulté est de
 s'accrocher, pas de porter*, donc que le remède est un **meilleur départ**.

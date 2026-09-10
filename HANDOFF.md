@@ -52,6 +52,17 @@ tôt : c'est une marche qui **avance sans rien traverser**. ⚠ Le témoin est r
 l'y faire entrer après avoir vu les résultats aurait été la faute exacte que la correction existe
 pour empêcher.
 
+⭐⭐ **ET LE PRIX DE LA COURSE QUI LÈVERAIT LA BORNE EST CHIFFRÉ AVANT D'ÊTRE PAYÉ**, sur des
+données déjà payées. En rééchantillonnant `deux_roles` — celui qui a échoué, force **0,6286** —
+quatre chances sur cinq arrivent à **48** trajets par sélecteur, soit le **double** de `107` :
+**28** bandes × **2** cellules × 2 sélecteurs × 6 pas = **672 étapes**, donc **10,27 h** au coût
+retenu (55,0 s/étape) et **7,05 h** au rythme réel (37,8). ⚠⚠ C'est un **PLANCHER** — l'ampleur
+rééchantillonnée est celle du **maximum** d'une famille de onze. ⚠⚠⚠ **Et ce n'est pas « combien
+pour SAVOIR », ce que sa propre batterie mesure** : sur du **bruit pur** la même fonction fait
+monter la réponse pareil, parce qu'elle traite l'ampleur observée comme la vérité. Le chiffre n'a
+de sens que parce que l'ensemble établit ce candidat à p corrigée **0,0008** — *c'est la
+correction, pas le prix, qui écarte le bruit*.
+
 ⭐ **ET LA PARTITION NE DÉPEND PAS DU SEUIL** : dernier trajet du mode bas **0,237** feuille par pas,
 premier du mode haut **0,671**, pour un seuil à **0,5** — un **vide de 0,434**, et c'est le plus
 grand vide de toute la distribution. Rien ne se tient près du seuil.
@@ -270,7 +281,9 @@ dépassé. Il est conservé plus bas, sous son en-tête, parce que ses résultat
    marcheur qui REDÉMARRE ailleurs quand le score des trois premiers pas est bas porte-t-il plus
    loin qu'un marcheur qui ne le lit pas ?* Départs identiques, même corpus, deux politiques. ⚠ Et
    la borne à lever d'abord : la réplication par sélecteur ne tient pas (24 trajets par sélecteur),
-   donc la course doit rendre assez de marches pour que chaque moitié décide seule.
+   donc la course doit rendre assez de marches pour que chaque moitié décide seule. ⭐ **Le prix en
+   est chiffré** : **48** trajets par sélecteur, soit **28 bandes × 2 cellules**, **672** étapes,
+   **10,27 h** au coût retenu et **7,05 h** au rythme réel — et c'est un plancher.
 2. ⭐⭐ **Le registre continu, sur le vrai volume.** `feuilles_franchies` est calibrée mais elle
    n'a **aucun appelant en production** : le marcheur de `102` n'accumule rien. Le brancher rend une
    question que rien n'a encore posée — *après k pas, combien de feuilles ai-je RÉELLEMENT

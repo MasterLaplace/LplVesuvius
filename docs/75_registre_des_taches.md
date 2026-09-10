@@ -4641,6 +4641,29 @@ Et les 48 trajets **ne sont pas indépendants** — deux marches partent de la m
 premier du mode haut **0,671**, pour un seuil à 0,5 — un **vide de 0,434**, le plus grand de la
 distribution.
 
+##### ⭐⭐ Le prix de la course qui lèverait cette borne, chiffré avant d'être payé
+
+En rééchantillonnant `deux_roles` — celui qui a échoué, force observée **0,6286** :
+
+| trajets par sélecteur | force critique | le meilleur retenu | un candidat retenu |
+|---:|---:|---:|---:|
+| 24 | 0,6357 | **0,573** | 0,627 |
+| 36 | 0,5333 | **0,77** | 0,82 |
+| **48** | **0,4501** | **0,897** | **0,947** |
+| 72 | 0,3842 | 1,0 | 1,0 |
+| 96 | **0,3175** | 1,0 | 1,0 |
+| 144 | **0,2566** | 1,0 | 1,0 |
+
+> ⭐ **Quatre chances sur cinq à 48 trajets par sélecteur**, soit le **double** de `107` :
+> **28** bandes × **2** cellules × 2 sélecteurs × 6 pas = **672 étapes**, donc **10,27 h** au coût
+> retenu (**55,0** s/étape) et **7,05 h** au rythme réel de `107` (**37,8** s/étape).
+
+⚠⚠ **C'est un PLANCHER** — l'ampleur rééchantillonnée est celle du **maximum** d'une famille de
+onze. ⚠⚠⚠ **Et ce n'est pas « combien pour SAVOIR »** : sur du **bruit pur** la même fonction fait
+monter la réponse de la même façon, parce qu'elle traite l'ampleur observée comme la vérité. Le
+chiffre n'a de sens que parce que l'ensemble établit ce candidat à p corrigée **0,0008** — c'est la
+**correction**, pas le prix, qui écarte le bruit.
+
 ---
 ##### ⭐⭐⭐ LE MARCHEUR AVEC LE BON PAS — deux populations que rien d'autre ne distingue
 

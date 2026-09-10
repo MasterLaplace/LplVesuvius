@@ -5248,7 +5248,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
 
 
 ### docs/108_ce_qui_separe_les_deux_populations.md
-- **lignes** : 225
+- **lignes** : 261
 - **nature** : RESULTAT
   (onze candidats déclarés avant la mesure, testés sur les étapes gardées par `107` et corrigés par
   permutation sur le maximum de la famille ; zéro lecture distante.)
@@ -5288,6 +5288,15 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ⚠ **Un signal n'est pas une politique.** Il resterait à mesurer qu'un marcheur qui redémarre
     sur ce signal porte plus loin qu'un marcheur qui ne le lit pas, départs appariés — la forme que
     `102` et `107` emploient déjà.
+  - ⭐⭐ **Le prix de la course qui lèverait la borne est chiffré AVANT d'être payé**, sur des
+    données déjà payées : quatre chances sur cinq à **48** trajets par sélecteur, soit le **double**
+    de `107` — **672** étapes, **10,27 h** au coût retenu et **7,05 h** au rythme réel.
+  - ⚠⚠⚠ **Et ce prix ne répond PAS à « combien pour savoir », ce que sa propre batterie mesure** :
+    sur une table de **bruit pur** le meilleur candidat porte une force non nulle par accident, le
+    rééchantillonnage la traite comme la vérité, et à 120 trajets il annonce **aussi** quatre
+    chances sur cinq. Ce qu'il rend est *combien pour REPRODUIRE l'ampleur observée*. ⭐ Ce qui
+    autorise la question est ailleurs : l'ensemble établit ce candidat à p corrigée **0,0008**.
+    C'est la **correction**, pas le prix, qui écarte le bruit.
 - **rétractations / corrections internes** :
   - §8 : ⚠⚠⚠ **j'ai réécrit une médiane sur une distribution en U**, la faute exacte que `107`
     avait payée une tranche plus tôt : le niveau de chance hors échantillon a une moyenne de 0,512
@@ -5300,8 +5309,8 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - §6 : ⚠ **la correction du témoin n'a PAS touché la famille** — l'y faire entrer après avoir vu
     les résultats aurait été la faute que la correction existe pour empêcher.
 - **preuve de lecture intégrale** :
-  - l. 144 (après 64 % du fichier) : `## 7. ⭐⭐⭐ La question opérationnelle : après combien de pas le sait-on ?`
-  - l. 217 : `uv run python src/nappe/ce_qui_separe_les_deux_populations.py --verifier`
+  - l. 199 (après 77 % du fichier) : `## 10. ⭐⭐ Le prix de la course qui déciderait, chiffré avant d'être payé`
+  - l. 253 : `uv run python src/nappe/ce_qui_separe_les_deux_populations.py --verifier`
 
 ---
 
@@ -7154,7 +7163,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 7108
+- **lignes** : 7131
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)

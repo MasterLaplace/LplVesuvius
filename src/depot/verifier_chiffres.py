@@ -2367,6 +2367,44 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                     formes += [f"**{q}**", q]
                 out.append((f"juste hors echantillon apres {x['pas_vus']} pas", formes,
                             sep.name))
+        cm = d.get("combien_de_marches_pour_decider", {})
+        for cle, nom in (("force_observee", "force observee du prix"),
+                         ("trajets_pour_quatre_chances_sur_cinq",
+                          "trajets pour quatre chances sur cinq")):
+            if cle not in cm or cm[cle] is None:
+                continue
+            val = cm[cle]
+            txt = f"{val}".replace(".", ",")
+            out.append((nom, [f"**{txt}**", txt, f"{val}"], sep.name))
+        for x in cm.get("par_effectif", []):
+            for cle, nom in (("force_critique", "force critique a"),
+                             ("part_ou_le_meilleur_est_retenu", "meilleur retenu a"),
+                             ("part_ou_un_candidat_est_retenu", "un candidat retenu a")):
+                val = x[cle]
+                txt = f"{val}".replace(".", ",")
+                formes = [f"**{txt}**", txt, f"{val}"]
+                for n_dec in (3, 4):
+                    q = f"{val:.{n_dec}f}".replace(".", ",")
+                    formes += [f"**{q}**", q]
+                out.append((f"{nom} {x['trajets']} trajets", formes, sep.name))
+        c2 = cm.get("course_qui_deciderait", {})
+        for cle, nom in (("etapes", "etapes de la course qui deciderait"),
+                         ("cellules_par_bande", "cellules par bande de la course qui deciderait"),
+                         ("bandes", "bandes de la course qui deciderait"),
+                         ("heures_projetees", "heures projetees de la course qui deciderait"),
+                         ("secondes_par_etape_retenue", "cout retenu de la course qui deciderait"),
+                         ("heures_au_rythme_reel_de_107", "heures au rythme reel de 107"),
+                         ("secondes_par_etape_reelle_de_107", "cout reel par etape de 107")):
+            if cle not in c2 or c2[cle] is None:
+                continue
+            val = c2[cle]
+            txt = f"{val}".replace(".", ",")
+            formes = [f"**{txt}**", txt, f"{val}"]
+            if isinstance(val, float):
+                for n_dec in (1, 2):
+                    q = f"{val:.{n_dec}f}".replace(".", ",")
+                    formes += [f"**{q}**", q]
+            out.append((nom, formes, sep.name))
         for sel in ("calibre", "deux_roles"):
             b = d.get("par_selecteur", {}).get(sel, {})
             for cle, nom in (("mode_haut", "mode haut du selecteur"),

@@ -143,6 +143,24 @@ def prose(m: dict) -> list[str]:
             f"niveau n'est pas {c['part_juste_du_mode_majoritaire']:.1%} : choisir un seuil sur "
             f"les points qui le jugent laisse un optimisme résiduel que l'exclusion d'un point ne "
             f"retire pas entièrement.")
+    cm = m.get("combien_de_marches_pour_decider", {})
+    if cm.get("decidable") and cm.get("trajets_pour_quatre_chances_sur_cinq"):
+        c2 = cm.get("course_qui_deciderait") or {}
+        lignes.append(
+            f"★★ ET LE PRIX DE LA COURSE QUI LÈVERAIT CETTE BORNE EST CHIFFRÉ AVANT D'ÊTRE PAYÉ, "
+            f"sur des données déjà payées. En rééchantillonnant `deux_roles` — le sélecteur qui a "
+            f"ÉCHOUÉ, force {cm['force_observee']} — quatre chances sur cinq arrivent à "
+            f"{cm['trajets_pour_quatre_chances_sur_cinq']} trajets par sélecteur, soit le DOUBLE "
+            f"de `107` : {c2.get('bandes')} bandes × {c2.get('cellules_par_bande')} cellules × 2 "
+            f"sélecteurs × 6 pas = {c2.get('etapes')} étapes, donc "
+            f"{c2.get('heures_projetees')} h au coût retenu et "
+            f"{c2.get('heures_au_rythme_reel_de_107')} h au rythme réel. ⚠⚠ Et c'est un PLANCHER, "
+            f"parce que l'ampleur rééchantillonnée est celle du MAXIMUM d'une famille de onze. "
+            f"⚠⚠⚠ Ce n'est pas non plus « combien pour SAVOIR » : sur du bruit pur la réponse "
+            f"monte aussi, donc le chiffre n'a de sens que parce que l'ensemble établit ce "
+            f"candidat à p corrigée "
+            f"{cm.get('p_corrigee_de_lensemble_pour_ce_candidat')}. C'est la CORRECTION, pas le "
+            f"prix, qui écarte le bruit.")
     lignes.append(
         "⚠ CE QUE CETTE TRANCHE NE DIT PAS : le score du balayage et le registre du trajet "
         "mesurent tous deux une PÉRIODICITÉ, sur deux fenêtres et par deux estimateurs "
@@ -411,6 +429,17 @@ def verifier() -> int:
           "RÉFUTÉE" in txt and "PLUS LOIN" in txt)
     v("la prose garde debout ce que `106` a mesuré",
       "`106`" in txt and "parallèle" in txt)
+    # ⚠⚠ LE PRIX NE VOYAGE JAMAIS SANS SES DEUX RESERVES : que c'est un PLANCHER, et que ce n'est
+    # pas « combien pour savoir ». Sans elles il se lirait comme une preuve que la course
+    # trancherait, alors que sur du bruit pur la meme fonction rend le meme genre de nombre.
+    cm = m.get("combien_de_marches_pour_decider", {})
+    if cm.get("decidable") and cm.get("trajets_pour_quatre_chances_sur_cinq"):
+        v("la prose porte le prix de la course qui déciderait",
+          "chances sur cinq" in txt and "étapes" in txt)
+        v("... et ses DEUX réserves : un plancher, et pas « combien pour savoir »",
+          "PLANCHER" in txt and "bruit pur la réponse" in txt)
+        v("... et ce qui autorise la question, la p corrigée de l'ensemble",
+          "p corrigée" in txt and "CORRECTION, pas le" in txt)
     # ⭐ La plomberie doit etre verte, sinon la figure publie un tableau a jeter.
     v("le témoin positif sépare parfaitement, donc la plomberie tient",
       e.get("la_plomberie_tient") is True, f"force {e.get('force_du_temoin_positif')}")
