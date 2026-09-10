@@ -112,6 +112,32 @@ dépassé. Il est conservé plus bas, sous son en-tête, parce que ses résultat
 3. ⚠⚠ **Et le marcheur devra GARDER ses étapes cette fois.** `102` les a jetées au profit d'une
    médiane par bande, et sept heures de course sont irrécupérables.
 
+⛔⛔ **UNE PISTE À NE PAS REPRENDRE, ET ELLE EST SÉDUISANTE.** `104` montre que le critère confond
+198,9 (le pas que la matière montre le long du RAYON) et 164,0 (celui des transferts humains), et
+`101` donne 34,59° entre la normale de la matière et le rayon. Or `198,9 × cos(34,59°) = 163,7`, à
+**0,2 %** de 164,0, et `1/cos(34,59°) = 1,215` contre les **21,3 %** que `99` laisse ouverts. La
+tentation est de conclure que l'écart de `99` EST l'obliquité.
+
+⚠⚠⚠ **`100` a déjà fait exactement cette mesure et elle est réfutée**, par bande et sur les 28 :
+`le_pas_dans_les_deux_directions` balaie le pas le long du rayon ET le long de la normale, et rend
+un rapport médian de **1,018** contre **1,184** prédit par `1/cos`. Le pas est le MÊME dans les deux
+directions (198,9 radial contre 196,8 normal). L'accord global entre 163,7 et 164,0 est donc une
+**coïncidence de médianes**, et la reprendre serait repayer une réfutation. ⚠ Et l'écart de 13°
+entre la normale du maillage (que `100` utilise) et celle de la matière (`101`) ne peut pas
+l'expliquer : `1/cos(13°) = 1,026`, soit 2,6 %.
+
+⭐⭐ **CE QUE CETTE RÉFUTATION LAISSE, EN REVANCHE, EST UNE ANOMALIE QUE PERSONNE N'A RELEVÉE.** Un
+empilement de feuilles PARALLÈLES ne peut pas avoir la même période dans deux directions séparées de
+34° : sa période apparente est minimale le long de sa normale et plus grande partout ailleurs. Que
+la mesure rende 1,018 veut donc dire que l'une de ces deux choses est vraie, et les deux comptent
+pour le marcheur :
+- ce que le balayage appelle « période » n'est pas l'espacement des feuilles ;
+- ou les feuilles ne sont pas localement parallèles sur la longueur d'un segment (~199 µm), et la
+  période mesurée est une moyenne où l'anisotropie se dissout.
+⚠ Et le balayage est DISCRET (cran de 8,7 µm, **12** valeurs distinctes pour 28 bandes), donc le
+rapport a un plancher de résolution de ~4,4 % : c'est à mesurer avec un pas de balayage plus fin
+avant d'en tirer quoi que ce soit.
+
 ### ⭐⭐⭐ La question était : QU'EST-CE QUI REMPLACE L'HUMAIN QUI CORRIGE LE TRANSFERT ?
 
 La carte du goulot était établie ([`90`](docs/90_laxe_est_une_courbe.md) à
