@@ -2124,6 +2124,119 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             out.append(("cellules appariees lues a tous les pas",
                         [f"**{v['cellules']}**", f"{v['cellules']}"], cub.name))
 
+    # ⛔⛔⛔ LE MARCHEUR AVEC LE BON PAS (`107`), ET DEUX APPARIEMENTS SONT OBLIGATOIRES.
+    # (1) Le mode HAUT ne voyage jamais sans le mode BAS : « dix trajets comptent juste » est un
+    # nombre nu, « dix contre quatorze qui ne mesurent rien » EST le resultat, et leur mediane
+    # commune serait un choix de mode qui s'ignore.
+    # (2) Et le risque tardif ne voyage jamais sans sa consequence enchainee : 0,105 par pas se lit
+    # comme un petit nombre alors que (1-0,105)^120 vaut deux millionniemes.
+    mar = _source(racine, "le_marcheur_avec_le_bon_pas.json")
+    if mar.exists():
+        d = json.loads(mar.read_text())
+        s107 = d.get("resume", {})
+        for cle, nom in (("cellules", "cellules du marcheur"),
+                         ("bandes", "bandes du marcheur"),
+                         ("plafond_de_pas", "plafond de pas du marcheur"),
+                         ("pas_confirmes_calibre", "pas confirmes par le selecteur de 102"),
+                         ("pas_confirmes_corrige", "pas confirmes par le selecteur corrige"),
+                         ("gain_en_pas", "gain en pas du selecteur corrige"),
+                         ("trajets_lisibles", "trajets lisibles"),
+                         ("part_des_trajets_au_compte_attendu",
+                          "part des trajets au compte attendu"),
+                         ("feuilles_par_pas_du_mode_haut", "feuilles par pas du mode haut"),
+                         ("feuilles_par_pas_du_mode_bas", "feuilles par pas du mode bas"),
+                         ("ecart_des_scores_entre_modes", "ecart des scores entre modes"),
+                         ("feuilles_par_pas_du_trajet_corrige",
+                          "feuilles par pas du trajet corrige"),
+                         ("feuilles_par_pas_du_trajet_calibre",
+                          "feuilles par pas du trajet calibre"),
+                         ("spires_du_trajet_corrige", "spires du trajet corrige"),
+                         ("spires_du_trajet_calibre", "spires du trajet calibre"),
+                         ("feuilles_par_pas_corrige", "fraction par pas du corrige"),
+                         ("feuilles_par_pas_calibre", "fraction par pas du calibre"),
+                         ("virage_median_deg", "virage median entre pas"),
+                         ("virage_p90_deg", "virage p90 entre pas"),
+                         ("heures_si_un_cube_sur_deux", "heures si un cube sur deux"),
+                         ("risque_precoce", "risque precoce du marcheur"),
+                         ("risque_tardif", "risque tardif du marcheur"),
+                         ("survie_a_120_spires_au_risque_tardif",
+                          "survie a cent vingt spires au risque tardif")):
+            if cle not in s107 or s107[cle] is None:
+                continue
+            val = s107[cle]
+            txt = f"{val}".replace(".", ",")
+            formes = [f"**{txt}**", txt, f"{val}"]
+            if cle.startswith("part_"):
+                pc = f"{100 * val:.1f}".replace(".", ",")
+                formes = [f"**{pc} %**", f"{pc} %", f"{pc}%"] + formes
+            if cle.startswith("ecart_des_scores"):
+                formes += [f"**+{txt}**", f"+{txt}"]
+            if isinstance(val, float):
+                for n_dec in (1, 2, 3):
+                    q = f"{val:.{n_dec}f}".replace(".", ",")
+                    formes += [f"**{q}**", q]
+            if cle.startswith("survie"):
+                formes += ["**0,000002**", "0,000002", "2e-06"]
+            out.append((nom, formes, mar.name))
+        for sel in ("calibre", "deux_roles"):
+            b = d.get(sel, {})
+            for cle, nom in (("cellules_au_plafond", "cellules au plafond du selecteur"),
+                             ("part_censuree", "part censuree du selecteur"),
+                             ("pas_lu_median_um", "pas lu median du selecteur"),
+                             ("cellules_qui_ont_porte", "cellules qui ont porte du selecteur")):
+                if cle not in b or b[cle] is None:
+                    continue
+                val = b[cle]
+                txt = f"{val}".replace(".", ",")
+                formes = [f"**{txt}**", txt, f"{val}"]
+                if cle == "part_censuree":
+                    pc = f"{100 * val:.1f}".replace(".", ",")
+                    formes = [f"**{pc} %**", f"{pc} %", f"{pc}%"] + formes
+                out.append((f"{nom} {sel}", formes, mar.name))
+            md = b.get("modes_du_trajet", {})
+            for nom_m in ("mode_haut", "mode_bas"):
+                if nom_m not in md:
+                    continue
+                for cle, nom in (("trajets", "trajets du"), ("feuilles_median", "feuilles du"),
+                                 ("score_median", "score du")):
+                    val = md[nom_m][cle]
+                    txt = f"{val}".replace(".", ",")
+                    out.append((f"{nom} {nom_m} {sel}", [f"**{txt}**", txt, f"{val}"], mar.name))
+            if "seuil_feuilles" in md:
+                val = md["seuil_feuilles"]
+                txt = f"{val}".replace(".", ",")
+                out.append((f"seuil des modes {sel}",
+                            [f"**{txt}**", txt, f"{val}", f"**{val:.0f}**", f"{val:.0f}"],
+                            mar.name))
+        v_ = d.get("deux_roles", {}).get("le_risque_baisse", {})
+        for cle, nom in (("rapport", "rapport des risques"),
+                         ("p_sous_risque_constant", "p sous un risque constant"),
+                         ("en_risque_precoce", "pas en risque precoce"),
+                         ("en_risque_tardif", "pas en risque tardif")):
+            if cle not in v_:
+                continue
+            val = v_[cle]
+            txt = f"{val}".replace(".", ",")
+            out.append((nom, [f"**{txt}**", txt, f"{val}"], mar.name))
+        for x in d.get("cout_par_etape", {}).get("mesures", []):
+            val = x["secondes"]
+            txt = f"{val}".replace(".", ",")
+            out.append((f"cout par etape mesure {txt}",
+                        [f"**{txt}**", txt, f"{val}"], mar.name))
+        if "secondes" in d:
+            h = round(d["secondes"] / 3600.0, 2)
+            out.append(("heures de la course du marcheur",
+                        [f"**{h}**".replace(".", ","), f"{h}".replace(".", ","), f"{h}"],
+                        mar.name))
+        p_ = d.get("prix_projete", {})
+        for cle, nom in (("etapes", "etapes de la course du marcheur"),
+                         ("heures", "heures projetees de la course")):
+            if cle not in p_:
+                continue
+            val = p_[cle]
+            txt = f"{val}".replace(".", ",")
+            out.append((nom, [f"**{txt}**", txt, f"{val}"], mar.name))
+
     # ⛔⛔⛔ LE PAS SELON LA DIRECTION (`106`), ET DEUX APPARIEMENTS SONT OBLIGATOIRES.
     # (1) Le residu sur la MATIERE ne voyage jamais sans celui sur la pile FABRIQUEE : « 19,3 µm »
     # est un nombre nu, « 19,3 contre 0,72 sur du connu, soit x22,3 » EST le resultat.

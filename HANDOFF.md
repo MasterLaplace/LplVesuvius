@@ -7,8 +7,8 @@ l'historique, daté, et se lit ensuite.
 
 ## ⭐⭐⭐⭐ REPRISE — 2026-09-10
 
-**Treize tranches d'une même campagne, `94` à `106`, et elles ont UNE conclusion — plus, désormais,
-UN acquis.** L'arbre est propre, les gardes vertes, 108 fiches sans dérive, aucun artefact
+**Quatorze tranches d'une même campagne, `94` à `107`, et elles ont UNE conclusion — plus, désormais,
+UN acquis.** L'arbre est propre, les gardes vertes, 109 fiches sans dérive, aucun artefact
 versionné sans appelant. Ce
 bloc remplace le précédent comme état courant ; tout ce qui suit est l'historique, daté.
 
@@ -33,6 +33,37 @@ pas du balayage calibré, vérification par le critère de `98`, **aucun référ
 bandes. Il porte **583,9 µm**, soit **3,4 feuilles nominales**, sans **aucune** sortie du volume.
 ⭐ Et le témoin **n'est pas un homme de paille** : sur un empilement fabriqué **droit** il atteint
 le plafond exactement comme la matière ; c'est l'**obliquité** de `100`/`101` qui le fait tomber.
+
+⭐⭐⭐ **ET `107` A REJOUÉ LA MARCHE AVEC LE BON PAS, EN GARDANT SES ÉTAPES — LE PREMIER RÉSULTAT
+STRUCTUREL POSITIF DE LA CAMPAGNE.** Le pas corrigé **ne porte pas plus loin** (1,0 contre 1,0 pas
+confirmés, 17,9 % au plafond), mais **le risque par pas BAISSE** : précoce **0,382** sur 55 pas en
+risque, tardif **0,105** sur 19, soit **×3,63**, et **p = 0,0418** sous un risque constant. *La
+difficulté est de s'accrocher, pas de porter* — donc le remède est un meilleur DÉPART, pas un
+meilleur marcheur. ⚠⚠ Mais il ne baisse pas assez : `(1 − 0,105)^120` vaut **2·10⁻⁶**, et le tiers
+tardif ne tient que sur 19 pas en risque.
+
+⭐⭐⭐ **ET LE REGISTRE DU TRAJET ENTIER SÉPARE LES MARCHES EN DEUX POPULATIONS QUE RIEN D'AUTRE NE
+DISTINGUE** : **10** trajets franchissent **6,478** feuilles pour six pas — **1,08 par pas**, ce que
+le marcheur doit faire — et **14** n'en franchissent que **0,748**, soit **0,125**. ⭐ Les DEUX
+sélecteurs se séparent de la même façon, donc c'est une propriété de la **matière** et non du
+sélecteur. ⚠⚠⚠ Et **le score est PLUS HAUT pour les mauvaises** (0,483 contre 0,371) : une dérive de
+basse fréquence s'ajuste mieux sur une longue fenêtre qu'un vrai signal périodique, donc **un seuil
+de score écarterait le BON mode**. C'est le point de `104` mesuré sur la marche elle-même.
+
+⚠⚠⚠ **ET TROIS FAUTES À MOI DANS CETTE TRANCHE, CHACUNE ATTRAPÉE PAR UNE MESURE.** *Une fraction
+mesurée sur UN pas est tautologique* — les deux sélecteurs y rendent 1,007 et 1,010 malgré des pas
+de 224,9 et 233,6 µm, parce que chacun CHOISIT son pas pour qu'une période y tienne ; seconde
+réfutation d'un registre après `104`, par une autre route. *Une médiane sur une distribution
+bimodale n'est pas un résumé* — la mienne valait 0,199 et tombait dans le mauvais mode. Et *un coût
+mesuré sous contention n'est pas un coût* : j'ai chiffré la course à 58,5 s par étape sur un pilote
+lancé à côté d'une autre batterie, puis à 38,0 sur des cellules déjà lues ; elle en coûte **55,0**.
+
+⛔ **L'OPTIMISATION DU COÛT EST CHIFFRÉE PAR LA MÊME COURSE ET REFUSÉE.** Le cube fait **91 %** du
+prix d'un pas (14,88 s contre 0,76 et 0,70), monter les fils de 32 à 96 ne gagne rien (15,62 s), et
+`103` avait déjà réfuté de le lire moins cher. Restait de le lire **moins souvent** : la direction
+tourne de **10,12°** d'un pas au suivant (p90 22,84°) pour une barre d'accord des demi-blocs de
+**8,88°**, donc **non**. ⭐ Le chiffre est venu **sans une lecture de plus**, parce que les étapes
+sont gardées.
 
 ⛔⛔⛔ **ET `106` A RETIRÉ AU MARCHEUR LE SENS DE CE QU'IL MESURE.** `100` avait comparé la période
 dans DEUX directions séparées de 34° et rendu **1,018** là où un empilement parallèle prédit
@@ -176,7 +207,13 @@ dépassé. Il est conservé plus bas, sous son en-tête, parce que ses résultat
    facteur à appliquer — il faut relancer. ⚠ `100` compare deux directions avec ce sélecteur, donc
    son anomalie d'isotropie hérite de la dérive ; `102` marche avec, donc sa portée est mesurée par
    un marcheur qui dépasse de 18 % à chaque pas.
-1. ⭐⭐⭐ **Le registre continu, sur le vrai volume.** `feuilles_franchies` est calibrée mais elle
+1. ⭐⭐⭐ **SÉPARER LES DEUX POPULATIONS DE `107`, ET C'EST LA MARCHE QUI COMPTE.** Quatre marches
+   sur dix comptent juste et six ne comptent rien, et **aucun critère existant ne les distingue** —
+   le score les sépare à l'envers. Trouver ce qui les sépare EST le graal : ce serait le signal
+   qu'un automate lit pour savoir s'il est encore sur la feuille. ⚠ Et ce n'est PAS un seuil à
+   régler sur les données de `107` : il faudrait une quantité mesurée indépendamment, éprouvée sur
+   les deux modes.
+2. ⭐⭐ **Le registre continu, sur le vrai volume.** `feuilles_franchies` est calibrée mais elle
    n'a **aucun appelant en production** : le marcheur de `102` n'accumule rien. Le brancher rend une
    question que rien n'a encore posée — *après k pas, combien de feuilles ai-je RÉELLEMENT
    franchies ?* — et sa réponse tranche la seule chose qui décide du graal : le retard est-il un

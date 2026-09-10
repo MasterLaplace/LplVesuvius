@@ -129,6 +129,29 @@ médian n'est pas un 0 partout.
 - ⚠ **La corrélation avec la rupture de continuité est faible** (−0,167) : ce n'est pas un signal
   de confiance utilisable, et il faut le dire plutôt que de le publier comme tel.
 
+## ⭐⭐⭐ Ce que `107` rejoue ici, et ce que la course a rendu de neuf
+
+Le marcheur de ce fichier avance de ce que `pas_montre_calibre` rend, et
+[`105`](105_le_balayage_rend_il_le_pas_injecte.md) a mesuré que ce sélecteur lit **+18,4 %** trop
+haut. [`107`](107_le_marcheur_avec_le_bon_pas.md) rejoue la marche avec le sélecteur corrigé,
+**appariée par le départ**, et **en gardant les étapes** — ce que ce fichier n'a pas fait, et sept
+heures de course sont irrécupérables.
+
+⛔ **Le pas corrigé ne porte pas plus loin** : 1,0 pas confirmés contre 1,0. ⚠ Les deux nombres ne se
+comparent pas à la médiane de 2,00 publiée ici : `102` prend 4 cellules par bande et publie une
+médiane de médianes par bande, `107` une cellule et une médiane sur cellules.
+
+⭐⭐⭐ **Mais le risque par pas BAISSE** — précoce 0,382, tardif 0,105, ×3,63, p = 0,0418 sous un
+risque constant. *La difficulté est de s'accrocher, pas de porter.* ⚠ Et il ne baisse pas assez :
+$(1-0{,}105)^{120} = 2\cdot10^{-6}$.
+
+⭐⭐⭐ **Et le registre du trajet entier sépare les marches en DEUX populations que le critère de ce
+fichier ne distingue pas** : 10 trajets franchissent 6,478 feuilles pour six pas (1,08 par pas) et 14
+n'en franchissent que 0,748 (0,125 par pas). ⚠⚠⚠ Le score est **plus haut pour les mauvaises**
+(0,483 contre 0,371), donc un seuil de score écarterait le **bon** mode.
+
+⚠ Les chiffres de ce document ne sont **pas** recalculés : les relire demande de relancer la mesure.
+
 ## Reproduire
 
 ```

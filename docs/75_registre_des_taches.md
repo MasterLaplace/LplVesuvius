@@ -4553,6 +4553,85 @@ renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la bat
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
 
 ---
+##### ⭐⭐⭐ LE MARCHEUR AVEC LE BON PAS — deux populations que rien d'autre ne distingue
+
+> Mesure : `src/nappe/le_marcheur_avec_le_bon_pas.py` (50 contrôles) →
+> `docs/mesures/le_marcheur_avec_le_bon_pas.json`. Figure :
+> `src/figures/figure_le_marcheur_avec_le_bon_pas.py` (19 contrôles).
+> Document : [`107`](107_le_marcheur_avec_le_bon_pas.md), le 2026-09-10.
+
+![le marcheur avec le bon pas](images/107_le_marcheur_avec_le_bon_pas.png)
+
+`105` a mesuré que le pas du marcheur de `102` est **+18,4 %** trop grand. `107` rejoue la marche
+avec le sélecteur corrigé, **appariée par le départ** — la seule forme honnête pour une marche — et
+**en gardant les étapes**, ce que `102` n'a pas fait.
+
+⛔ **Le pas corrigé ne porte pas plus loin** : **1,0** pas confirmés contre **1,0**, avec **17,9 %**
+de cellules au plafond, donc une borne inférieure.
+
+##### ⭐⭐⭐ Mais le risque par pas BAISSE — le premier résultat structurel positif
+
+| | risque | pas en risque |
+|---|---:|---:|
+| précoce (pas 1 à 3) | **0,382** | 55 |
+| tardif (pas 4 à 6) | **0,105** | 19 |
+
+Rapport **×3,63**, et **p = 0,0418** sous un risque constant.
+
+> ⭐ *La difficulté est de s'accrocher, pas de porter* — donc le remède est un meilleur départ, pas
+> un meilleur marcheur.
+
+⚠⚠ **Mais il ne baisse pas assez** : `(1 − 0,105)^120` vaut **2·10⁻⁶**. Et le résultat est mince —
+19 pas en risque dans le tiers tardif.
+
+##### ⭐⭐⭐ Le registre du trajet entier, et deux populations
+
+⚠⚠⚠ **La fraction mesurée sur UN pas est tautologique** : les deux sélecteurs y rendent **1,007** et
+**1,010** malgré des pas de **224,9** et **233,6 µm**, parce que chacun choisit son pas pour qu'une
+période y tienne. Seconde réfutation d'un registre après `104`, par une autre route.
+
+| sélecteur | mode | trajets | feuilles / 6 pas | par pas | score |
+|---|---|---:|---:|---:|---:|
+| **corrigé** | au compte attendu | **10** | **6,478** | **1,08** | 0,371 |
+| **corrigé** | sans périodicité | **14** | **0,748** | **0,125** | **0,483** |
+| de `102` | au compte attendu | 12 | 6,51 | 1,085 | 0,379 |
+| de `102` | sans périodicité | 11 | 0,695 | 0,116 | 0,539 |
+
+> ⭐ **41,7 %** des marches comptent juste ; les autres mesurent une **dérive de basse fréquence**.
+> Les **deux** sélecteurs se séparent pareil, donc c'est la matière et non le sélecteur.
+
+⚠⚠⚠ **Et le score est PLUS HAUT pour les mauvaises** (**+0,112**) : un seuil de score écarterait le
+**bon** mode. C'est le point de `104` mesuré sur la marche elle-même.
+
+##### ⚠⚠ Une médiane sur une distribution bimodale n'est pas un résumé
+
+La mienne valait **0,199** feuille par pas et tombait dans le mode bas par accident de comptage —
+elle donnerait **23,9** spires pour cent vingt pas, contre **80,5** avec le sélecteur de `102`, deux
+nombres qui ne veulent rien dire. Le seuil qui sépare est **dérivé** — la moitié du compte attendu,
+**3** feuilles pour 6 pas.
+
+##### ⛔ L'optimisation, chiffrée par la même course et refusée
+
+Le cube fait **91 %** du prix d'un pas (**14,88 s** contre 0,76 et 0,70), et monter les fils de 32 à
+96 ne gagne rien (**15,62 s**). `103` avait réfuté de le lire moins cher ; reste de le lire moins
+souvent. ⛔ **Non** : la direction tourne de **10,12°** d'un pas au suivant (p90 **22,84°**) pour une
+barre de **8,88°**. Un cube sur deux ferait passer la course à **1,77 h**, mais la mesure ne vaut pas
+d'être payée — et le chiffre est venu **sans une lecture de plus**.
+
+##### ⚠⚠⚠ Le coût d'une étape, mesuré quatre fois, quatre valeurs
+
+| secondes | condition | mesuré ? |
+|---:|---|:---:|
+| 22,92 | projeté par `104` | non |
+| **58,5** | pilote **en concurrence** avec une autre batterie | oui |
+| **38,0** | marche mesurée **seule**, cellules déjà lues | oui |
+| **55,0** | course complète, cellules **neuves** | oui |
+
+⭐ La dispersion **est** le résultat. *Un coût mesuré sous contention n'est pas un coût*, et c'est la
+plus **grande** des fiables qui sert — d'où une projection à **5,13 h** pour **336** étapes, quand la
+course réelle en a pris **3,53**.
+
+---
 ##### ⛔⛔⛔ LE PAS SELON LA DIRECTION — la matière n'est pas un empilement localement parallèle
 
 > Mesure : `src/nappe/le_pas_selon_la_direction.py` (44 contrôles) →

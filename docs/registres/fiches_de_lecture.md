@@ -5247,6 +5247,65 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/107_le_marcheur_avec_le_bon_pas.md
+- **lignes** : 167
+- **nature** : RESULTAT
+  (la marche de `102` rejouée avec le sélecteur corrigé de `105`, appariée par le départ et en
+  gardant les étapes ; la forme du risque, et le registre du trajet entier.)
+- **résumé** : ⛔ Le pas corrigé **ne porte pas plus loin** (1,0 contre 1,0 pas confirmés, 17,9 % de
+  cellules au plafond). ⭐⭐⭐ Mais le **risque par pas BAISSE** — précoce **0,382**, tardif
+  **0,105**, ×3,63, **p = 0,0418** sous un risque constant : *la difficulté est de s'accrocher, pas
+  de porter*. ⚠ Il ne baisse pas assez, **2·10⁻⁶** des cent vingt spires survivant. ⭐⭐⭐ Et le
+  registre du trajet entier sépare les marches en **deux populations** que rien d'autre ne
+  distingue : **10** trajets à **1,08** feuille par pas contre **14** à **0,125**.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **Le risque par pas est ce qui décide du graal, pas la portée.** Un risque constant `p`
+    rend `(1−p)^120`. Mesuré, il **baisse** d'un facteur 3,63 — premier résultat structurel positif
+    de la campagne — mais même le risque tardif tue cent vingt spires enchaînées.
+  - ⭐⭐⭐ **Une fraction mesurée sur le segment d'UN pas est TAUTOLOGIQUE, et c'est mesuré** : les
+    deux sélecteurs y rendent 1,007 et 1,010 malgré des pas de 224,9 et 233,6 µm, parce que chacun
+    CHOISIT son pas pour qu'une période y tienne. Seconde réfutation d'un registre après `104`, par
+    une autre route. ⭐ Ce qui n'est pas tautologique est le **trajet entier** : le marcheur a
+    optimisé chaque pas séparément, jamais la concaténation, et le compte de franchissements est
+    **topologique**, donc lisible sur une polyligne.
+  - ⭐⭐⭐ **Deux populations que le critère ne distingue pas**, et les DEUX sélecteurs se séparent
+    de la même façon — donc c'est une propriété de la matière, pas du sélecteur. C'est le point de
+    `104` mesuré sur la marche elle-même.
+  - ⚠⚠⚠ **Le score est PLUS HAUT pour les marches qui ne mesurent rien** (0,483 contre 0,371) :
+    une dérive de basse fréquence s'ajuste mieux sur une longue fenêtre qu'un vrai signal
+    périodique. **Un seuil de score écarterait donc le BON mode**, et publier le SENS de l'écart est
+    ce qui empêche de croire qu'un seuil réglerait la question.
+  - ⚠⚠ **Une médiane sur une distribution bimodale n'est pas un résumé, c'est un choix de mode qui
+    s'ignore.** La mienne valait 0,199 feuille par pas et tombait dans le mode bas par accident de
+    comptage. ⭐ Le seuil qui sépare est **dérivé** (la moitié du compte attendu), et « bimodal »
+    n'est revendiqué qu'avec cinq trajets de chaque côté.
+  - ⛔ **L'optimisation du coût est chiffrée par la même course et refusée.** Le cube fait **91 %**
+    du prix d'un pas et monter les fils de 32 à 96 ne gagne rien (14,88 → 15,62 s) ; `103` avait
+    réfuté de le lire moins cher, et la direction tourne de **10,12°** d'un pas au suivant pour une
+    barre de 8,88° — donc le lire moins souvent n'est pas justifié non plus. ⭐ Le chiffre est venu
+    **sans une lecture de plus**, parce que les étapes sont gardées.
+  - ⚠⚠⚠ **Le coût d'une étape a été mesuré quatre fois et a rendu quatre valeurs** — 22,92
+    (projeté), **58,5** (sous contention), **38,0** (seul, cellules déjà lues), **55,0** (cellules
+    neuves). *Un coût mesuré sous contention n'est pas un coût*, et c'est la plus GRANDE des fiables
+    qui sert : sous-estimer fait lancer une course qu'on ne peut pas finir.
+  - ⚠ **Un contrôle rétrogradé d'assertion en rapport** : sur une pile fabriquée lue par le
+    marcheur, les positions sont arrondies au voxel, donc les deux sélecteurs y rendent 173,0.
+    Asserter le biais de `105` ici ferait dépendre le contrôle d'un effet de quantification.
+- **rétractations / corrections internes** :
+  - §4 : ⚠⚠ **j'ai publié la médiane de deux modes**, qui tombe dans le mauvais par accident de
+    comptage et se lit « le marcheur ne franchit presque rien ».
+  - §3 : ⚠⚠ **mon premier libellé disait « le score sépare les modes »** sans en dire le SENS, ce
+    qui laissait croire qu'un seuil de score réglerait la question — alors qu'il écarterait le bon.
+  - §6 : ⚠⚠ **j'ai chiffré la course à 58,5 s par étape sur un pilote lancé en concurrence** avec
+    une autre batterie, puis à 38,0 sur des cellules déjà lues. La course réelle en coûte 55,0.
+  - ⚠ **Un bloc de contrôles utilisait `C` avant son import**, donc la batterie **plantait** au lieu
+    d'**échouer** — ce n'est pas la même chose.
+- **preuve de lecture intégrale** :
+  - l. 97 (après 58 % du fichier) : `## 4. ⚠⚠ Une médiane sur une distribution bimodale n'est pas un résumé`
+  - l. 156 : `uv run python src/nappe/le_marcheur_avec_le_bon_pas.py --verifier`
+
+---
+
 ### docs/106_le_pas_selon_la_direction.md
 - **lignes** : 173
 - **nature** : RESULTAT
@@ -5505,7 +5564,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
 ---
 
 ### docs/102_combien_de_pas_la_matiere_porte.md
-- **lignes** : 142
+- **lignes** : 165
 - **nature** : RESULTAT
   (le graal posé directement : le pas de `99` et la direction de `101` enchaînés, sans aucun
   référent humain — premier acquis positif de la campagne, et sa borne.)
@@ -5560,6 +5619,13 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - §7 : ⚠ **deux pas ne sont pas cent vingt.** Le graal demande 31 spires ; ce fichier mesure la
     **pente**, et elle est censurée par le haut. La corrélation avec la rupture (−0,167) est trop
     faible pour être un signal de confiance, et c'est dit.
+  - ⭐⭐⭐ **`107` a rejoué cette marche avec le sélecteur que `105` a corrigé, appariée par le
+    départ et EN GARDANT LES ÉTAPES.** Le pas corrigé ne porte pas plus loin (1,0 contre 1,0), mais
+    le **risque par pas BAISSE** — 0,382 précoce contre 0,105 tardif, ×3,63, p = 0,0418 — donc *la
+    difficulté est de s'accrocher, pas de porter*. ⚠ Il ne baisse pas assez : deux millionnièmes des
+    cent vingt spires survivent. ⭐⭐⭐ Et le registre du trajet entier sépare les marches en DEUX
+    populations que le critère de ce fichier ne distingue pas (10 trajets à 1,08 feuille par pas
+    contre 14 à 0,125), le score étant **plus haut pour les mauvaises**.
 - **preuve de lecture intégrale** :
   - l. 95 (après 60 % du fichier) : `Après correction, sur le même empilement oblique : **naïf 1, matière 8**.`
   - l. 117 : `⚠ **Et l'automate naïf est censuré lui aussi** sur quelques bandes, ce qui est publié : son 0,00`
@@ -7024,7 +7090,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 6940
+- **lignes** : 7019
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)

@@ -137,12 +137,19 @@ def direction_de_la_matiere(lecteur, centre_fin: np.ndarray, demi: int = DEMI,
 
 def pas_que_la_matiere_dicte(lecteur, p_fin: np.ndarray, direction_fin: np.ndarray,
                              longueurs: np.ndarray, mu: np.ndarray, sd: np.ndarray,
-                             voxel_fin_um: float, fils: int = 32) -> dict:
+                             voxel_fin_um: float, fils: int = 32,
+                             selecteur: str = "calibre", barre: float | None = None) -> dict:
     """La longueur que la matiere accorde le mieux le long de cette direction, et son score.
 
     ⭐⭐ LE BALAYAGE EST CELUI DE `99`, IMPORTE ET NON RECOPIE — meme fenetre, meme nul par
     candidat, meme rejet des butees. Seule la DIRECTION change ici, ce qui est la seule facon que
     la comparaison entre le marcheur et le naif porte sur la direction et sur rien d'autre.
+
+    ⚠⚠⚠ `selecteur` EXISTE PARCE QUE `105` A TROUVE CELUI DE PRODUCTION BIAISE HAUT — il lit un
+    cran trop haut, soit +18,4 % sur le vrai volume. Le defaut vaut `"calibre"`, donc AUCUN chiffre
+    deja publie ne bouge ; `"deux_roles"` prend le selecteur corrige, ou le calibre GARDE et le brut
+    CHOISIT parmi les admis. Un second `pas_que_la_matiere_dicte` aurait ete deux implementations
+    d'un meme pas, libres de ne pas s'accorder — la duplication que ce depot paie en boucle.
     """
     import le_pas_que_la_matiere_montre as M  # noqa: PLC0415
 
@@ -156,8 +163,14 @@ def pas_que_la_matiere_dicte(lecteur, p_fin: np.ndarray, direction_fin: np.ndarr
     v = lecteur.lire(zyx, fils=fils)
     if not np.isfinite(v).all():
         return {"sortie": True}
-    lu, sc, k, sur = M.pas_montre_calibre(
-        M.profils_emboites(v.reshape(1, n_long), longueurs), longueurs, mu, sd)
+    profs = M.profils_emboites(v.reshape(1, n_long), longueurs)
+    if selecteur == "calibre":
+        lu, sc, k, sur = M.pas_montre_calibre(profs, longueurs, mu, sd)
+    else:
+        from le_balayage_rend_il_le_pas_injecte import choisir  # noqa: PLC0415
+        if barre is None:
+            raise ValueError("le sélecteur corrigé demande la barre du nul calibré")
+        lu, sc, k, sur = choisir(profs, longueurs, mu, sd, selecteur, barre)
     return {"sortie": False, "pas_um": float(lu[0]), "score": float(sc[0]),
             "indice": int(k[0]),
             "en_butee": bool(M.touche_un_bord(k, len(longueurs))[0]),
@@ -200,9 +213,18 @@ def traverse_un_interstice(lecteur, p_fin: np.ndarray, direction_fin: np.ndarray
     if not np.isfinite(v).all():
         return {"sortie": True}
     combien, sur, score, marge = C.accord(v.reshape(1, -1))
+    # ⭐⭐⭐ ET LA FRACTION CONTINUE, AJOUTEE PAR `104` : la famille de gabarits de `98` est
+    # {1, 2, 3}, donc `combien` ne descend JAMAIS sous un et le compteur est AVEUGLE A UN RETARD —
+    # un segment ne franchissant que 0,82 feuille rend « 1 interstice » au score 0,781. La famille
+    # CONTINUE rend la fraction, donc elle peut valoir moins de un, et elle s'accumule en registre.
+    # ⚠ Elle ne remplace PAS `accord` pour la garde : chaque famille porte la barre de sa forme.
+    frac, sc_c, butee = C.feuilles_franchies(v.reshape(1, -1))
     return {"sortie": False, "interstices": int(combien[0]),
             "part_sur_la_feuille": bool(sur[0]),
-            "accord": float(score[0]), "marge": float(marge[0])}
+            "accord": float(score[0]), "marge": float(marge[0]),
+            "feuilles_franchies": (float(frac[0]) if np.isfinite(frac[0]) else None),
+            "score_continu": (float(sc_c[0]) if np.isfinite(sc_c[0]) else None),
+            "fraction_en_butee": bool(butee[0])}
 
 
 def marcher(lecteur, depart_fin: np.ndarray, direction0: np.ndarray, longueurs: np.ndarray,
@@ -210,7 +232,8 @@ def marcher(lecteur, depart_fin: np.ndarray, direction0: np.ndarray, longueurs: 
             barre_interstice: float, voxel_fin_um: float, pas_max: int = PAS_MAX,
             demi: int = DEMI, interroge_la_matiere: bool = True,
             pas_impose_um: float | None = None, direction_imposee=None,
-            fils: int = 32) -> list[dict]:
+            fils: int = 32, selecteur: str = "calibre",
+            barre_du_selecteur: float | None = None) -> list[dict]:
     """Enchainer les pas, et rendre a CHAQUE pas si la matiere confirme encore.
 
     ⭐⭐⭐ C'EST LE MARCHEUR, ET IL N'A BESOIN D'AUCUN MAILLAGE. `interroge_la_matiere` a False
@@ -251,7 +274,11 @@ def marcher(lecteur, depart_fin: np.ndarray, direction0: np.ndarray, longueurs: 
             r = {"sortie": False, "pas_um": avance_um, "score": float("nan"),
                  "en_butee": False}
         else:
-            r = pas_que_la_matiere_dicte(lecteur, p, d, longueurs, mu, sd, voxel_fin_um, fils)
+            # ⚠⚠ `selecteur` DEFAUTE A `"calibre"`, donc aucune marche deja publiee ne bouge ;
+            # `"deux_roles"` prend le selecteur que `105` a corrige. Un second `marcher` aurait ete
+            # deux implementations d'une meme marche, libres de ne pas s'accorder.
+            r = pas_que_la_matiere_dicte(lecteur, p, d, longueurs, mu, sd, voxel_fin_um, fils,
+                                         selecteur=selecteur, barre=barre_du_selecteur)
             if r.get("sortie"):
                 etapes.append({"pas": k, "fin": "sortie du volume"})
                 break
@@ -279,8 +306,18 @@ def marcher(lecteur, depart_fin: np.ndarray, direction0: np.ndarray, longueurs: 
                                   if np.isfinite(r["score"]) else None),
             "interstices_traverses": w["interstices"],
             "accord_de_linterstice": round(w["accord"], 3),
+            # ⚠ La fraction CONTINUE voyage avec le compte entier, jamais a sa place : l'un garde
+            # (« la matiere a-t-elle repondu »), l'autre mesure (« de combien »).
+            "feuilles_franchies": (round(w["feuilles_franchies"], 3)
+                                   if w.get("feuilles_franchies") is not None else None),
+            "fraction_en_butee": w.get("fraction_en_butee"),
             "en_butee": r["en_butee"], "confirme": confirme,
             "avance_um": round(avance_um, 1),
+            # ⚠⚠ LA DIRECTION EST GARDEE, et sans elle le trajet n'est pas reconstructible : `107`
+            # doit relire la POLYLIGNE reellement parcourue pour compter les feuilles franchies sur
+            # l'ensemble, ce qui est la seule forme NON tautologique du registre. Une droite entre
+            # les deux bouts couperait au travers et compterait autre chose.
+            "direction": [round(float(x), 6) for x in d],
             "parcouru_um": round(parcouru + avance_um, 1),
         })
         p = p + d * (avance_um / voxel_fin_um)
