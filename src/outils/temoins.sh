@@ -1559,6 +1559,7 @@ run "le pas de la matiere"  uv run --project "$ROOT" python "$ROOT/src/nappe/le_
 run "normale et rayon"      uv run --project "$ROOT" python "$ROOT/src/nappe/la_normale_nest_pas_le_rayon.py" --verifier
 run "direction matiere"     uv run --project "$ROOT" python "$ROOT/src/nappe/la_direction_que_la_matiere_montre.py" --verifier
 run "pas portes"            uv run --project "$ROOT" python "$ROOT/src/nappe/combien_de_pas_la_matiere_porte.py" --verifier
+run "cube moins cher"       uv run --project "$ROOT" python "$ROOT/src/nappe/le_cube_lu_moins_cher.py" --verifier
 run "suivre nappe"           uv run --project "$ROOT" python "$ROOT/src/commun/suivre_nappe.py" --verifier
 run "assembler mosaique"     uv run --project "$ROOT" python "$ROOT/src/volume/assembler_mosaique.py" --verifier
 run "derouler en raccrochant"  uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_en_raccrochant.py" --verifier
@@ -1614,6 +1615,7 @@ run "fig : pas de matiere"   uv run --project "$ROOT" python "$ROOT/src/figures/
 run "fig : normale/rayon"    uv run --project "$ROOT" python "$ROOT/src/figures/figure_la_normale_nest_pas_le_rayon.py" --verifier
 run "fig : direction mat."   uv run --project "$ROOT" python "$ROOT/src/figures/figure_la_direction_que_la_matiere_montre.py" --verifier
 run "fig : pas portes"       uv run --project "$ROOT" python "$ROOT/src/figures/figure_combien_de_pas_la_matiere_porte.py" --verifier
+run "fig : cube moins cher"  uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_cube_lu_moins_cher.py" --verifier
 run "fig : mur du corpus"    uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_mur_du_corpus.py" --verifier
 run "fig : ou poser la boite" uv run --project "$ROOT" python "$ROOT/src/figures/figure_ou_poser_la_boite.py" --verifier
 run "fig : en raccrochant"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_en_raccrochant.py" --verifier

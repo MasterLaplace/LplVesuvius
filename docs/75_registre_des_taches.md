@@ -4553,6 +4553,79 @@ renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la bat
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
 
 ---
+##### ⛔⛔ LE CUBE LU MOINS CHER — l'économie est RÉFUTÉE par le corpus, et par ma propre sonde
+
+> Mesure : `src/nappe/le_cube_lu_moins_cher.py` (22 contrôles) →
+> `docs/mesures/le_cube_lu_moins_cher.json`. Figure :
+> `src/figures/figure_le_cube_lu_moins_cher.py` (18 contrôles).
+> Document : [`103`](103_le_cube_lu_moins_cher.md), le 2026-09-10.
+
+![le cube lu moins cher](images/103_le_cube_lu_moins_cher.png)
+
+`102` a mesuré que la matière porte **au moins** deux pas, et sa portée est **censurée** : 17 bandes
+sur 28 butent sur le plafond. Relever ce plafond coûterait **quatorze heures** à 15,4 s le cube.
+Avant de subir ce coût, il fallait savoir s'il était réductible.
+
+Une économie existait **en principe** : **échantillonner** le cube plus grossièrement — un voxel sur
+deux, **même portée** de 98,4 µm — ne change pas ce qu'on regarde, seulement ce qu'on paie.
+
+| pas | rangées | s/cube | gain | écart médian | p90 | **> 10°** | marches de 6 pas abîmées |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 1681 | 14,40 | ×1,00 | — | — | — | — |
+| 2 | 441 | 8,37 | **×1,72** | 2,09° | 6,18° | **7,3 %** | **36,5 %** |
+| 3 | 196 | 4,82 | ×2,99 | 4,39° | 10,87° | 10,9 % | 50,0 % |
+| 4 | 121 | 3,76 | ×3,83 | 5,77° | 16,36° | 29,1 % | 87,3 % |
+
+> ⛔ **Aucune économie ne passe : le cube se lit au voxel près.**
+
+⭐⭐⭐ **Et c'est la conséquence ENCHAÎNÉE qui décide.** Pris **un** pas à la fois, 7,3 % n'a l'air de
+rien — mais `102` **enchaîne**, et `1 − (1 − p)^6` vaut **36,5 %** de marches abîmées. Publier le
+taux par pas sans sa conséquence laisserait croire l'économie inoffensive.
+
+##### ⚠⚠⚠ Ma propre sonde disait l'inverse, sur deux bandes
+
+Le premier contrôle apparié, sur **2 bandes**, donnait **0 %** de cellules au-delà de dix degrés au
+pas 2. J'allais adopter l'économie sur cette base ; les **28 bandes** disent **7,3 %**.
+
+> ⚠⚠ *Un bord se compte sur le corpus entier, pas sur les bandes qu'on a sondées* — la faute que
+> `93` a payée, que `95` a réécrite, et que je viens de repayer. ⭐ Ce qui l'a attrapée n'est pas
+> une relecture : c'est d'avoir relancé sur le corpus **avant** de publier, parce que la règle
+> était écrite.
+
+##### ⚠⚠⚠ Et le gain de temps n'est pas le gain de points
+
+| pas | prédit par les points | **mesuré** |
+|---|---:|---:|
+| 2 | ×7,44 | **×1,72** |
+| 3 | ×25,12 | ×2,99 |
+| 4 | ×51,78 | ×3,83 |
+
+Une lecture distante est dominée par le nombre de **plages d'octets** — une par rangée `(z, y)` — et
+par un **fixe par cube** (plancher de **3,76 s**), pas par le nombre de points. **Le coût se mesure,
+il ne se modélise pas.** ⚠ Et le rapport de points lui-même n'est pas huit : `(41/21)³ = 7,44`.
+
+##### ⚠⚠ Trois corrections de contrôle, dont deux sur mes propres assertions
+
+- ⚠ **La référence n'est pas une économie à juger**, c'est le statu quo. La compter produisait la
+  ligne absurde « pas 1 — la garde ne tient pas », qui se lit comme un refus de lire le cube entier.
+- ⚠⚠ **J'avais asserté que la barre du nul est plus haute pour un cube grossier** ; la mesure dit
+  l'inverse à demi = 10, et le balayage montre qu'elle n'est **pas monotone** (8,91 / 11,21 / 7,54 /
+  6,00). Le contrôle asserte désormais qu'elle est **refaite par forme**, pas son sens.
+- ⚠ **Mes contrôles assertaient le RÉSULTAT** — « un pas plus grossier est retenu » — ce qui aurait
+  obligé à les réécrire le jour où la réponse change, c'est-à-dire un contrôle incapable d'échouer
+  honnêtement. Ils sont devenus **structurels**.
+
+##### ⚠ Ce que la tranche ne débloque pas, et ce qu'elle laisse
+
+- **La portée de `102` reste à quatorze heures** pour trente pas : la borne se lèvera au prix plein,
+  ou pas du tout.
+- ⭐ **Mais le coût est mesuré et non supposé** — 15,4 s par cube, plancher de 3,76 s, temps qui suit
+  les rangées — donc chaque mesure future se chiffre **d'avance** au lieu de se découvrir après sept
+  heures.
+- ⚠ Le verdict porte sur **ce** cube (98,4 µm, demi = 20) et **ce** fragment ; et la garde du
+  fabriqué est éprouvée à **un** niveau de bruit (σ = 15) qui n'est pas celui, inconnu, du volume.
+
+---
 ##### ⭐⭐⭐ COMBIEN DE PAS LA MATIÈRE PORTE — le premier acquis POSITIF, et sa borne
 
 > Mesure : `src/nappe/combien_de_pas_la_matiere_porte.py` (21 contrôles) →

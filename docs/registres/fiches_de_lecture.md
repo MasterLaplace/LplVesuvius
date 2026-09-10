@@ -5247,6 +5247,63 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/103_le_cube_lu_moins_cher.md
+- **lignes** : 124
+- **nature** : RESULTAT
+  (une économie de lecture réfutée par le corpus entier après avoir été approuvée par une sonde à
+  deux bandes ; et le coût d'une lecture distante, mesuré au lieu d'être modélisé.)
+- **résumé** : ⛔⛔⛔ **Aucune économie ne passe : le cube se lit au voxel près.** Échantillonner un
+  voxel sur deux — **même portée** de 98,4 µm — coûterait **×1,72** moins, mais **7,3 %** des
+  cellules s'en écartent de plus de dix degrés, et comme `102` **enchaîne** les pas cela abîme
+  **36,5 %** des marches de six pas. ⚠⚠⚠ Et c'est **ma propre sonde** qui était tombée dans le
+  piège : **0 %** sur 2 bandes, **7,3 %** sur les 28.
+- **conclusions extractibles** :
+  - ⚠⚠⚠ **Un bord se compte sur le corpus entier, pas sur les bandes qu'on a sondées** — la faute
+    de `93`, réécrite par `95`, repayée ici. Ce qui l'a attrapée n'est pas une relecture mais
+    d'avoir relancé sur les 28 bandes **avant** de publier, parce que la règle était écrite.
+  - ⭐⭐⭐ **Un taux par pas se lit avec sa conséquence ENCHAÎNÉE** : `1 − (1 − p)^k`. 7,3 % par pas
+    paraissent inoffensifs et abîment **36,5 %** des marches de six pas. Publier le premier sans le
+    second laisserait croire l'économie sans danger.
+  - ⚠⚠⚠ **Le coût d'une lecture distante se MESURE, il ne se modélise pas** : le comptage de points
+    prédisait **×7,44**, la mesure rend **×1,72**. Il suit les **rangées** — une plage d'octets par
+    rangée `(z, y)` — plus un **fixe par cube** (plancher de **3,76 s** qui ne descend jamais).
+  - ⚠ **Et le rapport de points n'est pas huit** : un pas de 2 sur 41 points en laisse 21, pas
+    20,5, donc `(41/21)³ = 7,44` et non `2³`. Supposer un nombre rond était une erreur.
+  - ⚠⚠ **La référence n'est pas une économie à juger**, c'est le statu quo : la compter parmi les
+    candidats produisait la ligne absurde « pas 1 — la garde ne tient pas », qui se lit comme un
+    refus de lire le cube entier. Elle est **décrite** à côté du verdict, jamais jugée.
+  - ⚠ **Échantillonner n'est pas rétrécir** : la portée physique est identique à tous les pas, et
+    c'est asserté. Rétrécir changerait ce qu'on regarde ; échantillonner change ce qu'on paie.
+  - ⭐ **Chaque finesse est jugée contre la barre du nul de SA propre forme** — un cube plus
+    grossier a moins de points donc un nul différent. ⚠ Et la barre n'est **pas monotone** en la
+    finesse : 8,91 / 11,21 / 7,54 / 6,00 pour les pas 1 à 4.
+  - ⚠ **À σ = 15, le cube pleine résolution ne tient pas sa propre garde** (marge −0,81°) là où un
+    pas de 2 la passe à +7,61°. Cohérent avec le balayage de bruit de `101` : dériver sur une base
+    plus longue moyenne le bruit par voxel. Ce n'est pas une raison de ne pas lire le cube entier.
+- **rétractations / corrections internes** :
+  - §4 : ⚠⚠⚠ **ma sonde à deux bandes avait approuvé l'économie** (0 % au-delà de dix degrés) et
+    j'allais l'adopter. Le corpus entier dit 7,3 %.
+  - §5 : ⚠⚠ **j'avais annoncé un gain de sept** d'après le comptage de points ; la mesure en rend
+    **deux**. Et j'avais d'abord écrit « huit fois moins de points » là où la formule donne 6,96 à
+    demi = 10 et 7,44 à demi = 20.
+  - ⚠⚠ **J'avais asserté que la barre du nul est plus haute pour un cube grossier** ; la mesure dit
+    l'inverse à demi = 10 et montre qu'elle n'est pas monotone. Le contrôle asserte désormais
+    qu'elle est **refaite par forme**, donc non réutilisable — pas son sens.
+  - ⚠ **Mes contrôles assertaient le RÉSULTAT** (« un pas plus grossier est retenu »), ce qui
+    aurait obligé à les réécrire chaque fois que la réponse change — un contrôle qui ne peut pas
+    échouer honnêtement. Ils sont devenus **structurels** : le verdict est rendu, chaque refus
+    porte sa raison et sa conséquence enchaînée, la référence n'est pas jugée.
+  - ⚠ Une tolérance de contrôle plus fine que l'arrondi publié faisait échouer un calcul juste
+    (0,984 contre 0,984375). L'attendu est désormais arrondi comme la valeur.
+  - §6 : ⚠⚠ **ce que la tranche ne débloque pas** — la portée de `102` reste à **quatorze heures**
+    pour trente pas. Le verdict porte sur **ce** cube (98,4 µm) et **ce** fragment, et la garde du
+    fabriqué est évaluée à **un** niveau de bruit qui n'est pas celui, inconnu, du volume.
+- **preuve de lecture intégrale** :
+  - l. 77 (après 60 % du fichier) : `> ⚠⚠ **Sur les 28 bandes, c'est 7,3 %.** *Un bord se compte sur le corpus entier, pas sur les`
+  - l. 104 : `- ⭐ **Mais le coût est désormais MESURÉ et non supposé** : **15,4 s** par cube, un **plancher de`
+
+---
+
 ### docs/102_combien_de_pas_la_matiere_porte.md
 - **lignes** : 142
 - **nature** : RESULTAT
@@ -6747,7 +6804,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 6617
+- **lignes** : 6690
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)

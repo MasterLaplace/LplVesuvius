@@ -78,8 +78,19 @@ CELLULES_PAR_BANDE = 8
 TIRAGES_DU_NUL = 400
 
 
-def bloc(centre_zyx: np.ndarray, demi: int = DEMI) -> np.ndarray:
+def bloc(centre_zyx: np.ndarray, demi: int = DEMI, pas: int = 1) -> np.ndarray:
     """Les points entiers d'un cube centre sur `centre_zyx`, en indices du volume fin.
+
+    ⭐⭐⭐ `pas` SOUS-ECHANTILLONNE SANS RETRECIR LE CUBE, et c'est la difference qui compte : la
+    PORTEE physique reste la meme — donc la structure vue reste la meme — mais le nombre de points
+    lus tombe comme le cube du pas. Retrecir le cube changerait ce qu'on regarde ; l'echantillonner
+    plus grossierement change seulement combien on paie pour le regarder. A `pas = 2`, un cube de
+    98 µm coute HUIT fois moins.
+
+    ⚠ Le gradient est alors pris sur des voxels espaces de `pas`, ce qui EQUIVAUT a une derivee a
+    plus grande echelle. Le balayage de bruit de `limite_de_bruit` montre que c'est un AVANTAGE
+    quand le bruit domine par voxel — mais ce n'est pas une raison de le supposer :
+    `limite_de_sous_echantillonnage` le mesure contre une reponse connue.
 
     ⭐⭐ LE CUBE EST BATI DANS LE VOLUME FIN ET NON DANS LE MAILLAGE, et ce n'est pas un detail :
     le voxel fin est isotrope, donc un cube d'indices EST un cube de matiere. Le construire dans
@@ -90,12 +101,23 @@ def bloc(centre_zyx: np.ndarray, demi: int = DEMI) -> np.ndarray:
     `voxel_distant` recoller une RANGEE entiere en une seule plage d'octets, une par (z, y) au
     lieu d'une par voxel.
     """
-    n = 2 * demi + 1
-    d = np.arange(-demi, demi + 1)
+    pas = max(1, int(pas))
+    d = np.arange(-demi, demi + 1, pas)
+    n = len(d)
     zz, yy, xx = np.meshgrid(d, d, d, indexing="ij")
     c = np.rint(np.asarray(centre_zyx, dtype=np.float64)).astype(np.int64)
     p = np.stack([zz + c[0], yy + c[1], xx + c[2]], axis=-1)
     return p.reshape(n * n * n, 3)
+
+
+def cote_du_bloc(demi: int = DEMI, pas: int = 1) -> int:
+    """Combien de points par arete un cube de cette demi-largeur et de ce pas porte.
+
+    ⚠ Elle existe pour que l'appelant n'ait PAS a recalculer la forme du cube pour le remodeler :
+    deux formules pour une meme forme finiraient par ne pas s'accorder, et le tenseur lirait alors
+    un cube transpose sans que rien ne leve.
+    """
+    return len(np.arange(-demi, demi + 1, max(1, int(pas))))
 
 
 def tenseur_de_structure(cube: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
@@ -187,7 +209,7 @@ def accord_des_moities(cube: np.ndarray) -> tuple[float, np.ndarray]:
 
 
 def nul_du_tenseur(tirages: int = TIRAGES_DU_NUL, demi: int = DEMI,
-                   graine: int = 101) -> dict:
+                   graine: int = 101, pas: int = 1) -> dict:
     """Ce que le tenseur rend sur du BRUIT PUR : la barre de planarite et le controle de direction.
 
     ⭐⭐⭐ LA BARRE NE VIENT PAS D'UN REGLAGE. Sur du bruit blanc, la variation d'image se repartit
@@ -201,7 +223,10 @@ def nul_du_tenseur(tirages: int = TIRAGES_DU_NUL, demi: int = DEMI,
     propriete de la matiere.
     """
     r = np.random.default_rng(graine)
-    n = 2 * demi + 1
+    # ⚠⚠ LA BARRE DEPEND DE LA FORME DU CUBE, PAS DE SA PORTEE. Un cube sous-echantillonne a
+    # moins de points, donc son tenseur est plus bruite et son nul plus haut : reutiliser la barre
+    # d'un cube plein comparerait deux choses differentes, et laisserait passer du bruit.
+    n = cote_du_bloc(demi, pas)
     pl, dirs, acc = [], [], []
     for _ in range(tirages):
         cube = r.normal(100.0, 10.0, size=(n, n, n))
@@ -213,7 +238,8 @@ def nul_du_tenseur(tirages: int = TIRAGES_DU_NUL, demi: int = DEMI,
     acc = np.asarray(acc)
     dirs = np.abs(np.asarray(dirs))
     return {
-        "tirages": tirages, "demi": demi,
+        "tirages": tirages, "demi": demi, "pas_echantillon": int(max(1, pas)),
+        "cote_en_points": int(n),
         "planarite_mediane": round(float(np.median(pl)), 4),
         "planarite_p95": round(float(np.percentile(pl, 95)), 4),
         "planarite_p99": round(float(np.percentile(pl, 99)), 4),
@@ -229,6 +255,63 @@ def nul_du_tenseur(tirages: int = TIRAGES_DU_NUL, demi: int = DEMI,
         "anisotropie_du_nul": round(
             float(dirs.mean(axis=0).max() / max(dirs.mean(axis=0).min(), 1e-9)), 3),
     }
+
+
+def limite_de_sous_echantillonnage(pas_voxels: float, demi: int = DEMI,
+                                   amplitude: float = 40.0, bruit: float = 15.0,
+                                   pas_echantillon=(1, 2, 3, 4, 5), tirages: int = 4,
+                                   normale=(0.0, 0.5, 0.866)) -> dict:
+    """Jusqu'ou peut-on echantillonner GROSSIEREMENT un cube sans perdre la direction ?
+
+    ⭐⭐⭐ C'EST LA QUESTION QUI DECIDE SI LA MESURE DE PORTEE EST ABORDABLE. Un cube coute
+    **15,4 s** de lecture reseau, donc `102` a mis SEPT HEURES pour six pas — et sa portee est
+    censuree, donc la marche suivante demande d'aller plus loin. Le nombre de points tombe comme le
+    CUBE du pas d'echantillonnage : a `pas = 2`, huit fois moins, donc deux secondes au lieu de
+    quinze.
+
+    ⚠⚠ MAIS CELA NE SE SUPPOSE PAS. Un gradient pris sur des voxels espaces est une derivee a plus
+    grande echelle : cela peut aider — le bruit par voxel s'y moyenne — ou detruire la direction si
+    le pas approche la demi-periode de l'empilement. Ici la periode fait 72 voxels, donc un pas de
+    2 a 5 reste tres en deca ; le balayage le VERIFIE plutot que de l'argumenter.
+
+    ⚠ La portee physique du cube ne change PAS : seule la finesse de l'echantillonnage change. Un
+    cube retreci regarderait autre chose ; un cube sous-echantillonne regarde la meme chose moins
+    cher.
+    """
+    out = {"demi": demi, "cote_um_du_cube": round((2 * demi + 1) * 2.4, 1),
+           "bruit": bruit, "lignes": []}
+    for pe in pas_echantillon:
+        ang, acc, pl = [], [], []
+        for g in range(tirages):
+            cube = cube_dun_empilement(normale, pas_voxels, demi=demi, amplitude=amplitude,
+                                       bruit=bruit, graine=g, pas_echantillon=pe)
+            d, val = tenseur_de_structure(cube)
+            ang.append(angle_entre(d, normale))
+            pl.append(planarite(val))
+            acc.append(accord_des_moities(cube)[0])
+        cote = cote_du_bloc(demi, pe)
+        # ⭐⭐⭐ CHAQUE PAS EST COMPARE A LA BARRE DE SA PROPRE FORME. Un cube plus grossier a
+        # moins de points, donc un nul plus haut : le juger a la barre du cube plein le
+        # declarerait bon pour la mauvaise raison.
+        nul = nul_du_tenseur(tirages=120, demi=demi, pas=pe)
+        barre = nul["accord_des_moities_p1_deg"]
+        des = float(np.median(acc)) if np.isfinite(acc).all() else float("nan")
+        out["lignes"].append({
+            "pas_echantillon": pe, "cote_en_points": cote, "points": cote ** 3,
+            "barre_de_sa_forme_deg": barre,
+            # ⚠ La MARGE est ce qui decide, pas le desaccord seul : c'est de combien
+            # l'empilement passe SOUS la barre de sa propre forme.
+            "marge_sous_la_barre_deg": (round(barre - des, 2)
+                                        if np.isfinite(des) else None),
+            "la_garde_tient": bool(np.isfinite(des) and des < barre),
+            # ⭐ Le gain est le rapport des NOMBRES DE POINTS, donc du temps de lecture : c'est la
+            # quantite qui decide, pas le pas lui-meme.
+            "gain_de_lecture": round((cote_du_bloc(demi, 1) ** 3) / max(cote ** 3, 1), 1),
+            "angle_deg": round(float(np.median(ang)), 2),
+            "desaccord_des_moities_deg": round(float(np.median(acc)), 2),
+            "planarite": round(float(np.median(pl)), 3),
+        })
+    return out
 
 
 def limite_de_bruit(pas_voxels: float, demis=(10, 20), amplitude: float = 40.0,
@@ -271,15 +354,14 @@ def limite_de_bruit(pas_voxels: float, demis=(10, 20), amplitude: float = 40.0,
 
 def cube_dun_empilement(normale_zyx, pas_voxels: float, demi: int = DEMI,
                         amplitude: float = 40.0, bruit: float = 0.0,
-                        graine: int = 7) -> np.ndarray:
+                        graine: int = 7, pas_echantillon: int = 1) -> np.ndarray:
     """Un cube fabrique dont l'empilement a une normale CONNUE — la fixture porteuse.
 
     ⭐⭐⭐ ELLE EST DANS LE MODULE ET NON DANS LA BATTERIE parce que c'est elle qui porte
     l'argument : une direction mesuree sur des donnees reelles ne peut pas etre validee, on ne
     sait pas ou est la reponse. Ici on la connait, donc l'estimateur peut ECHOUER.
     """
-    n = 2 * demi + 1
-    d = np.arange(-demi, demi + 1, dtype=np.float64)
+    d = np.arange(-demi, demi + 1, max(1, int(pas_echantillon))).astype(np.float64)
     zz, yy, xx = np.meshgrid(d, d, d, indexing="ij")
     u = np.asarray(normale_zyx, dtype=np.float64)
     u = u / np.linalg.norm(u)
@@ -381,6 +463,110 @@ def correlation(x, y) -> float:
 def _mediane(v) -> float | None:
     v = np.asarray([x for x in v if x is not None and np.isfinite(x)])
     return round(float(np.median(v)), 2) if len(v) else None
+
+
+def accord_entre_pas(cellules: int = 24, demi: int = DEMI, pas=(1, 2, 3),
+                     graine: int = 71, bandes_max: int | None = 2,
+                     fils: int = 32) -> dict:
+    """Sur les MEMES cellules du vrai volume, plusieurs finesses d'echantillonnage s'accordent-elles ?
+
+    ⭐⭐⭐ C'EST LA GARDE QUI DECIDE SI L'ECONOMIE EST LEGITIME. `limite_de_sous_echantillonnage`
+    montre sur un empilement FABRIQUE qu'un pas grossier est meilleur ET moins cher — mais cet
+    empilement est parfaitement periodique et son bruit est blanc. Adopter le pas grossier sur
+    cette seule base changerait EN SILENCE ce que `101` et `102` mesurent.
+
+    ⚠⚠ LES CELLULES SONT LES MEMES, ET C'EST TOUTE LA FORCE DU CONTROLE : comparer deux
+    populations differentes ferait dire au resultat ce qu'on veut, et ce depot l'a deja paye —
+    `derouler_par_le_pas_normal` mesure son temoin sur les memes cellules, exactement pour ca.
+    Chaque cellule est lue une fois PAR PAS, et la quantite rendue est l'angle au pas le plus fin.
+
+    ⚠⚠⚠ ET LE COUT SE MESURE, IL NE SE MODELISE PAS. Le comptage de points predisait un gain de
+    SEPT pour un pas de 2 ; la mesure en rend DEUX. Une lecture distante est dominee par le nombre
+    de PLAGES d'octets et par un fixe par cube, pas par le nombre de points — un cube
+    sous-echantillonne touche toujours une plage par rangee (z, y).
+    """
+    import time  # noqa: PLC0415
+
+    import combien_dinterstices_traverses as C  # noqa: PLC0415
+    import le_pas_lu_sur_les_transferts as P  # noqa: PLC0415
+    import le_sens_du_rang as R  # noqa: PLC0415
+    from transformations_de_volume import appliquer, matrice  # noqa: PLC0415
+    from voxel_distant import BUCKET, VolumeZarr  # noqa: PLC0415
+
+    m = matrice(C.OBJET, C.VOLUME_DU_MAILLAGE, C.VOLUME_FIN)
+    if m is None:
+        return {"message": "transformation vers le volume fin absente des métadonnées"}
+    try:
+        vol = VolumeZarr(f"{BUCKET}/{C.ZARR_FIN}")
+    except RuntimeError as e:
+        return {"message": f"volume fin injoignable : {e}"}
+
+    pas = tuple(int(x) for x in pas)
+    reference = min(pas)
+    bandes = R.bandes_du_fragment()[:bandes_max]
+    # ⚠⚠ MEME LECON QUE `102` : une mesure qui lit le reseau pendant des dizaines de minutes doit
+    # dire ou elle en est, sinon on decide de l'attendre ou de la tuer sans donnee.
+    from la_normale_nest_pas_le_rayon import avancement  # noqa: PLC0415
+
+    depart = time.time()
+    faites = 0
+    ecarts = {pe: [] for pe in pas}
+    desaccords = {pe: [] for pe in pas}
+    temps = {pe: 0.0 for pe in pas}
+    lus = 0
+    for x in bandes:
+        g = P.grille(x["recente"])
+        if g is None:
+            continue
+        a, ok = g
+        ind = C.echantillonner(ok, cellules, graine + x["de"])
+        centres = appliquer(m, a[ind[:, 0], ind[:, 1]])
+        for k in range(len(centres)):
+            reponses, t_local = {}, {}
+            for pe in pas:
+                pts = bloc(centres[k], demi, pe)
+                if not vol.dans_le_volume(pts).all():
+                    reponses = {}
+                    break
+                t0 = time.time()
+                brut = vol.lire(pts, fils=fils)
+                t_local[pe] = time.time() - t0
+                if not np.isfinite(brut).all():
+                    reponses = {}
+                    break
+                n = cote_du_bloc(demi, pe)
+                cube = brut.reshape(n, n, n)
+                reponses[pe] = (tenseur_de_structure(cube)[0], accord_des_moities(cube)[0])
+            if len(reponses) != len(pas):
+                continue
+            lus += 1
+            for pe in pas:
+                temps[pe] += t_local[pe]
+                ecarts[pe].append(angle_entre(reponses[pe][0], reponses[reference][0]))
+                desaccords[pe].append(reponses[pe][1])
+        faites += 1
+        avancement(faites, len(bandes), "bandes", depart)
+    if lus < 5:
+        return {"message": f"trop peu de cellules lues à tous les pas ({lus})"}
+
+    lignes = []
+    for pe in pas:
+        e = np.asarray(ecarts[pe])
+        cote = cote_du_bloc(demi, pe)
+        lignes.append({
+            "pas_echantillon": pe, "cote_en_points": cote, "points": cote ** 3,
+            # ⚠ Les RANGEES sont ce qui coute : `voxel_distant` recolle une plage par (z, y).
+            "rangees_lues": cote ** 2,
+            "ecart_median_au_plus_fin_deg": round(float(np.median(e)), 2),
+            "ecart_p90_deg": round(float(np.percentile(e, 90)), 2),
+            "part_au_dela_de_dix_degres": round(float(np.mean(e > 10.0)), 3),
+            "desaccord_median_deg": round(float(np.nanmedian(desaccords[pe])), 2),
+            "secondes_par_cube": round(temps[pe] / lus, 2),
+            "gain_de_temps": round(temps[reference] / max(temps[pe], 1e-9), 2),
+        })
+    return {"cellules": lus, "demi": demi, "pas_reference": reference,
+            "cote_um_du_cube": round((2 * demi + 1) * C.VOXEL_FIN_UM, 1),
+            "lignes": lignes}
 
 
 def mesurer(cellules: int = CELLULES_PAR_BANDE, demi: int = DEMI, graine: int = 101,
@@ -817,6 +1003,53 @@ def verifier() -> int:
       "taille est dérivée",
       des_petit > nul["accord_des_moities_p1_deg"],
       f"{des_petit:.2f}° contre {nul['accord_des_moities_p1_deg']}°")
+
+    # === LE SOUS-ECHANTILLONNAGE : MEME PORTEE, MOINS DE POINTS ===========================
+    # ⭐⭐ Retrecir un cube change CE QU'ON REGARDE ; l'echantillonner plus grossierement change
+    # seulement COMBIEN ON PAIE pour le regarder. Le controle verifie que la portee est bien
+    # conservee, sinon les deux seraient confondus.
+    b1 = bloc(np.array([100.0, 200.0, 300.0]), demi=10, pas=1)
+    b2 = bloc(np.array([100.0, 200.0, 300.0]), demi=10, pas=2)
+    v("un pas de 2 garde la MÊME portée physique",
+      int(b1[:, 2].max() - b1[:, 2].min()) == int(b2[:, 2].max() - b2[:, 2].min()) == 20,
+      f"{int(b2[:, 2].max() - b2[:, 2].min())} voxels d'arête dans les deux cas")
+    # ⚠ Le rapport est (2d+1)³ / cote³ et non 2³ : a demi = 10 il vaut 6,96, pas 8. Le controle
+    # verifie la FORMULE plutot qu'un nombre rond que j'avais suppose et qui etait faux.
+    attendu = cote_du_bloc(10, 1) ** 3 / cote_du_bloc(10, 2) ** 3
+    v("... mais lit près de sept fois moins de points, et le rapport suit la formule",
+      abs(len(b1) / len(b2) - attendu) < 1e-9 and 6.5 < attendu < 7.5,
+      f"{len(b1)} contre {len(b2)}, soit ×{attendu:.2f}")
+    v("... et `cote_du_bloc` décrit la forme réellement produite",
+      cote_du_bloc(10, 2) ** 3 == len(b2), f"{cote_du_bloc(10, 2)}³ pour {len(b2)}")
+    # ⚠⚠⚠ LA BARRE DEPEND DE LA FORME, ET SON SENS NE SE DEVINE PAS. J'avais asserte qu'un cube
+    # grossier a un nul PLUS HAUT — la mesure dit l'inverse a demi = 10 (7,31° contre 15,19°), et
+    # le balayage montre qu'elle n'est pas monotone du tout (8,91 / 11,21 / 7,54 / 6,00 pour les
+    # pas 1 a 4 a demi = 20). Ce qui compte n'est donc pas son SENS mais qu'elle soit REFAITE
+    # pour chaque forme : reutiliser celle d'une autre comparerait deux choses.
+    nul_fin = nul_du_tenseur(tirages=40, demi=10, pas=1)
+    nul_gros = nul_du_tenseur(tirages=40, demi=10, pas=2)
+    v("la barre DIFFÈRE d'une forme de cube à l'autre, donc elle ne se réutilise pas",
+      abs(nul_gros["accord_des_moities_p1_deg"]
+          - nul_fin["accord_des_moities_p1_deg"]) > 1.0,
+      f"{nul_gros['accord_des_moities_p1_deg']}° contre "
+      f"{nul_fin['accord_des_moities_p1_deg']}°")
+    v("... et chaque nul déclare la forme qu'il a mesurée",
+      nul_gros["pas_echantillon"] == 2 and nul_gros["cote_en_points"] == cote_du_bloc(10, 2))
+    # ⭐⭐⭐ ET LE BALAYAGE COMPARE CHAQUE PAS A LA BARRE DE SA PROPRE FORME, donc il peut dire
+    # qu'un pas NE tient PAS — sinon il approuverait n'importe quelle economie.
+    lim = limite_de_sous_echantillonnage(pas_vx, demi=10, pas_echantillon=(1, 2, 8),
+                                         tirages=2)
+    v("le balayage de sous-échantillonnage juge chaque pas contre SA barre",
+      all("barre_de_sa_forme_deg" in x for x in lim["lignes"]))
+    # ⚠ Un pas de 8 sur un cube de demi = 10 laisse 3 points d'arete : chaque moitie en garde
+    # une, donc `accord_des_moities` ne peut RIEN comparer et rend NaN. Le refus vient de la
+    # garde qui avoue ne pas savoir, et c'est le bon mode d'echec — pas d'un seuil franchi.
+    dernier = lim["lignes"][-1]
+    v("... et il refuse un pas si grossier que les deux moitiés n'ont plus rien à comparer",
+      not dernier["la_garde_tient"]
+      and not np.isfinite(dernier["desaccord_des_moities_deg"]),
+      f"pas 8 : {dernier['cote_en_points']} points d'arête, désaccord "
+      f"{dernier['desaccord_des_moities_deg']}")
 
     # === LA CONDITION DE TRANSPORT DES ANGLES ==============================================
     from transformations_de_volume import (appliquer_direction,  # noqa: PLC0415

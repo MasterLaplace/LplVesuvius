@@ -7,8 +7,8 @@ l'historique, daté, et se lit ensuite.
 
 ## ⭐⭐⭐⭐ REPRISE — 2026-09-09
 
-**Neuf tranches d'une même campagne, `94` à `102`, et elles ont UNE conclusion — plus, désormais,
-UN acquis.** L'arbre est propre, les gardes vertes, 104 fiches sans dérive, aucun artefact
+**Dix tranches d'une même campagne, `94` à `103`, et elles ont UNE conclusion — plus, désormais,
+UN acquis.** L'arbre est propre, les gardes vertes, 105 fiches sans dérive, aucun artefact
 versionné sans appelant. Ce
 bloc remplace le précédent comme état courant ; tout ce qui suit est l'historique, daté.
 
@@ -34,6 +34,22 @@ bandes. Il porte **583,9 µm**, soit **3,4 feuilles nominales**, sans **aucune**
 ⭐ Et le témoin **n'est pas un homme de paille** : sur un empilement fabriqué **droit** il atteint
 le plafond exactement comme la matière ; c'est l'**obliquité** de `100`/`101` qui le fait tomber.
 
+⛔⛔ **ET `103` A CHERCHÉ À LEVER CETTE BORNE MOINS CHER, SANS Y PARVENIR.** Échantillonner le cube
+un voxel sur deux — **même portée** — coûterait **×1,72** moins, mais **7,3 %** des cellules s'en
+écartent de plus de 10° du pas le plus fin, et comme `102` **enchaîne** les pas cela abîme
+**36,5 %** des marches de six pas. La portée de `102` se lèvera donc **au prix plein** (quatorze
+heures pour trente pas) ou pas du tout.
+
+⚠⚠⚠ **Et c'est MA PROPRE SONDE qui était tombée dans le piège** : sur **2 bandes** j'avais mesuré
+**0 %** et j'allais adopter l'économie ; sur les **28**, c'est 7,3 %. *Un bord se compte sur le
+corpus entier, pas sur les bandes qu'on a sondées* — `93`, réécrit par `95`, repayé ici. ⭐ Ce qui
+l'a attrapé n'est pas une relecture mais d'avoir relancé sur le corpus **avant** de publier.
+
+⭐ **Ce que `103` laisse quand même** : le coût d'une lecture distante est désormais **mesuré** —
+**15,4 s** par cube, un **plancher de 3,76 s** qui ne descend jamais, et un temps qui suit les
+**rangées** et non les points (le comptage de points prédisait ×7,44, la mesure rend ×1,72). Chaque
+mesure future se chiffre donc **d'avance** au lieu de se découvrir après sept heures.
+
 ⚠⚠⚠ **MAIS LA PORTÉE EST CENSURÉE, ET ÇA SE DIT AVANT LE RÉSULTAT** : **17 bandes sur 28** (61 %)
 ont une cellule au plafond de **6 pas**, donc **2,00 est une borne inférieure**. Le plafond est un
 **budget de lecture** — **15,4 s par cube** mesurés, 2 h 52 de plancher pour 672 cubes, **7 h** de
@@ -47,7 +63,7 @@ que la matière montre, `101` donne la **direction** : *avance de `p(matière)` 
 bord**, là où `99` perdait la périodicité (0,54). ⚠ Ce qui reste hors de portée est
 l'**identité** de la feuille : le tenseur dit *comment elle est posée*, pas *laquelle*.
 
-⚠ Le bloc précédent, daté du 2026-09-03, annonçait un état courant que ces neuf tranches ont
+⚠ Le bloc précédent, daté du 2026-09-03, annonçait un état courant que ces dix tranches ont
 dépassé. Il est conservé plus bas, sous son en-tête, parce que ses résultats tiennent.
 
 ### ⭐⭐⭐ La question était : QU'EST-CE QUI REMPLACE L'HUMAIN QUI CORRIGE LE TRANSFERT ?
@@ -69,6 +85,7 @@ candidats ont été testés, dans cet ordre, et chacun a fermé une famille enti
 | [`100`](docs/100_la_normale_nest_pas_le_rayon.md) | l'**obliquité de la nappe** au rayon | ⛔ l'explication de l'écart de `99` est **réfutée** — mais la surface est à **34,1°** du rayon pour **0,09°** prédits |
 | [`101`](docs/101_la_direction_que_la_matiere_montre.md) | la **direction que la matière montre**, lue dans le volume fin | ⭐⭐⭐ l'obliquité est **réelle** : la matière est à **13,3°** du maillage contre **34,6°** du rayon, et ce 34,6 recoupe le 34,06 de `100` par un instrument qui ne partage rien. ⭐⭐ **Le graal gagne son second nombre** |
 | [`102`](docs/102_combien_de_pas_la_matiere_porte.md) | le pas de `99` et la direction de `101`, **enchaînés** | ⭐⭐⭐ **PREMIER ACQUIS POSITIF** : **2,00** pas confirmés contre **0,00** pour l'automate naïf, **sans aucun référent humain**. ⚠⚠⚠ Mais **censuré** — 17 bandes sur 28 au plafond, donc « 2,00 » est une **borne inférieure** |
+| [`103`](docs/103_le_cube_lu_moins_cher.md) | peut-on lire le cube **moins cher** pour lever la borne de `102` ? | ⛔⛔ **Non** : l'économie (×1,72) écarte **7,3 %** des cellules de plus de 10°, ce qui abîme **36,5 %** des marches de six pas. ⚠⚠⚠ Ma sonde à **2 bandes** disait **0 %** — *un bord se compte sur le corpus entier*. ⭐ Mais le coût est désormais **mesuré** : 15,4 s/cube, plancher 3,76 s, temps qui suit les **rangées** |
 
 ### ⭐⭐⭐ LA CONCLUSION, ET ELLE TIENT EN UNE PHRASE
 
@@ -208,6 +225,20 @@ contrôle, chacun avec sa raison écrite.
   puisse rendre. Corrigé par `nombre_ou_absent`, **une seule** définition, avec sa fixture. Même
   famille que le faux zéro de corrélation de `101` : *zéro et « on ne sait pas » ne doivent jamais
   partager une représentation.*
+- ⚠⚠⚠ **Un bord compté sur les bandes qu'on a sondées** (`103`) — la faute de `93`, réécrite par
+  `95`, **repayée par moi**. Une sonde à **2 bandes** approuvait une économie de lecture (0 % de
+  cellules hors tolérance) ; les **28 bandes** disent **7,3 %**. ⭐ Elle a été attrapée parce que la
+  règle était écrite et que j'ai relancé sur le corpus **avant** de publier, pas par une relecture.
+- ⭐⭐⭐ **Un taux par pas se lit avec sa conséquence ENCHAÎNÉE** (`103`) : `1 − (1 − p)^k`. 7,3 %
+  par pas paraissent inoffensifs et abîment **36,5 %** des marches de six pas. Publier le premier
+  sans le second laisserait croire l'économie sans danger.
+- ⚠⚠⚠ **Le coût d'une lecture distante se MESURE, il ne se modélise pas** (`103`) : le comptage de
+  points prédisait **×7,44**, la mesure rend **×1,72**. Il suit les **plages d'octets** — une par
+  rangée — plus un fixe par cube. Le modèle était faux d'un facteur quatre.
+- ⚠⚠ **Un contrôle qui asserte le RÉSULTAT** (`103`) : « un pas plus grossier est retenu » aurait dû
+  être réécrit le jour où la réponse change, c'est-à-dire un contrôle incapable d'échouer
+  honnêtement. Les contrôles sont devenus **structurels** — le verdict est rendu, chaque refus
+  porte sa raison et sa conséquence, la référence n'est pas jugée.
 - ⚠⚠⚠ **Une mesure de SEPT HEURES qui n'imprime rien** (`102`) : il a fallu chronométrer une sonde
   pour savoir s'il fallait l'attendre ou la tuer, c'est-à-dire décider sans donnée — ce que ce
   dépôt refuse partout ailleurs. Les trois mesures longues impriment désormais leur avancement

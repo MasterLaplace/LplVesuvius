@@ -2061,6 +2061,69 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         out.append(("part utilisable contre la continuite",
                     [f"**{txt}**", txt, f"{val:.3f}"], pmm.name))
 
+    # ⛔⛔ LE CUBE LU MOINS CHER (`103`), ET DEUX APPARIEMENTS SONT OBLIGATOIRES.
+    # (1) Le taux par pas ne voyage jamais sans sa CONSEQUENCE ENCHAINEE : « 7,3 % des cellules »
+    # paraissent inoffensifs, « 36,5 % des marches de six pas » est le fait qui refute l'economie.
+    # (2) Et le gain MESURE ne voyage jamais sans le gain PREDIT : le premier seul se lit comme une
+    # mesure de cout, alors que c'est leur ECART qui porte la lecon — le cout se mesure, il ne se
+    # modelise pas.
+    cub = _source(racine, "le_cube_lu_moins_cher.json")
+    if cub.exists():
+        d = json.loads(cub.read_text())
+        for cle, nom in (("cote_um_du_cube", "cote du cube lu"),
+                         ("demi_cube_voxels", "demi-largeur du cube en voxels")):
+            if cle not in d:
+                continue
+            val = d[cle]
+            txt = f"{val}".replace(".", ",")
+            out.append((nom, [f"**{txt}**", txt, f"{val}"], cub.name))
+        for x in d.get("sur_le_vrai_volume", {}).get("lignes", []):
+            pe = x["pas_echantillon"]
+            for cle, nom in (("secondes_par_cube", "secondes par cube au pas"),
+                             ("gain_de_temps", "gain de temps mesure au pas"),
+                             ("ecart_median_au_plus_fin_deg", "ecart median au pas"),
+                             ("ecart_p90_deg", "ecart p90 au pas"),
+                             ("part_au_dela_de_dix_degres", "part au-dela de dix degres au pas")):
+                val = x[cle]
+                txt = f"{val}".replace(".", ",")
+                formes = [f"**{txt}**", txt, f"{val}"]
+                if isinstance(val, float) and cle == "part_au_dela_de_dix_degres":
+                    # ⚠ Une part se redige souvent en pourcentage : les deux formes sont acceptees,
+                    # sinon le garde accuserait un texte correct.
+                    pc = f"{100 * val:.1f}".replace(".", ",")
+                    formes = [f"**{pc} %**", f"{pc} %", f"{pc}%"] + formes
+                out.append((f"{nom} {pe}", formes, cub.name))
+        for x in d.get("sur_empilement_fabrique", {}).get("lignes", []):
+            pe = x["pas_echantillon"]
+            for cle, nom in (("marge_sous_la_barre_deg", "marge sous la barre au pas"),
+                             ("barre_de_sa_forme_deg", "barre de la forme au pas")):
+                val = x.get(cle)
+                if val is None:
+                    continue
+                txt = f"{val}".replace(".", ",")
+                formes = [f"**{txt}**", txt, f"{val}"]
+                if cle.startswith("marge"):
+                    signe = f"{val:+.2f}".replace(".", ",").replace("-", "\u2212")
+                    formes = [f"**{signe}**", signe] + formes
+                out.append((f"{nom} {pe}", formes, cub.name))
+        pr = d.get("le_pas_retenu", {})
+        for x in pr.get("verdicts", []):
+            val = x.get("part_de_marches_de_six_pas_touchees")
+            if val is None:
+                continue
+            pc = f"{100 * val:.1f}".replace(".", ",")
+            out.append((f"marches de six pas abimees au pas {x['pas_echantillon']}",
+                        [f"**{pc} %**", f"{pc} %", f"{pc}%",
+                         f"{val}".replace(".", ","), f"{val}"], cub.name))
+        if "tolere_deg" in pr:
+            val = pr["tolere_deg"]
+            out.append(("tolerance angulaire du controle apparie",
+                        [f"**{val:.0f}**", f"{val:.0f}", f"{val}"], cub.name))
+        v = d.get("sur_le_vrai_volume", {})
+        if "cellules" in v:
+            out.append(("cellules appariees lues a tous les pas",
+                        [f"**{v['cellules']}**", f"{v['cellules']}"], cub.name))
+
     # ⭐⭐⭐ COMBIEN DE PAS LA MATIERE PORTE (`102`), ET DEUX APPARIEMENTS SONT OBLIGATOIRES.
     # (1) Le nombre de pas de la MATIERE ne voyage jamais sans celui du NAIF : « 2,00 pas » est un
     # nombre nu, « 2,00 contre 0,00 » EST le resultat, et c'est leur ecart qui dit que la voie

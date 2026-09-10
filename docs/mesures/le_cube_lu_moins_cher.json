@@ -1,0 +1,164 @@
+{
+  "fragment": "PHercParis4",
+  "voxel_fin_um": 2.4,
+  "pas_nominal_um": 173.0,
+  "demi_cube_voxels": 20,
+  "cote_um_du_cube": 98.4,
+  "pas_balayes": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "sur_empilement_fabrique": {
+    "demi": 20,
+    "cote_um_du_cube": 98.4,
+    "bruit": 15.0,
+    "lignes": [
+      {
+        "pas_echantillon": 1,
+        "cote_en_points": 41,
+        "points": 68921,
+        "barre_de_sa_forme_deg": 8.91,
+        "marge_sous_la_barre_deg": -0.81,
+        "la_garde_tient": false,
+        "gain_de_lecture": 1.0,
+        "angle_deg": 7.96,
+        "desaccord_des_moities_deg": 9.72,
+        "planarite": 0.346
+      },
+      {
+        "pas_echantillon": 2,
+        "cote_en_points": 21,
+        "points": 9261,
+        "barre_de_sa_forme_deg": 11.21,
+        "marge_sous_la_barre_deg": 7.61,
+        "la_garde_tient": true,
+        "gain_de_lecture": 7.4,
+        "angle_deg": 4.41,
+        "desaccord_des_moities_deg": 3.6,
+        "planarite": 0.377
+      },
+      {
+        "pas_echantillon": 3,
+        "cote_en_points": 14,
+        "points": 2744,
+        "barre_de_sa_forme_deg": 7.54,
+        "marge_sous_la_barre_deg": 1.68,
+        "la_garde_tient": true,
+        "gain_de_lecture": 25.1,
+        "angle_deg": 7.27,
+        "desaccord_des_moities_deg": 5.86,
+        "planarite": 0.409
+      },
+      {
+        "pas_echantillon": 4,
+        "cote_en_points": 11,
+        "points": 1331,
+        "barre_de_sa_forme_deg": 6.0,
+        "marge_sous_la_barre_deg": -3.21,
+        "la_garde_tient": false,
+        "gain_de_lecture": 51.8,
+        "angle_deg": 4.49,
+        "desaccord_des_moities_deg": 9.21,
+        "planarite": 0.47
+      }
+    ]
+  },
+  "sur_le_vrai_volume": {
+    "cellules": 55,
+    "demi": 20,
+    "pas_reference": 1,
+    "cote_um_du_cube": 98.4,
+    "lignes": [
+      {
+        "pas_echantillon": 1,
+        "cote_en_points": 41,
+        "points": 68921,
+        "rangees_lues": 1681,
+        "ecart_median_au_plus_fin_deg": 0.0,
+        "ecart_p90_deg": 0.0,
+        "part_au_dela_de_dix_degres": 0.0,
+        "desaccord_median_deg": 6.4,
+        "secondes_par_cube": 14.4,
+        "gain_de_temps": 1.0
+      },
+      {
+        "pas_echantillon": 2,
+        "cote_en_points": 21,
+        "points": 9261,
+        "rangees_lues": 441,
+        "ecart_median_au_plus_fin_deg": 2.09,
+        "ecart_p90_deg": 6.18,
+        "part_au_dela_de_dix_degres": 0.073,
+        "desaccord_median_deg": 6.5,
+        "secondes_par_cube": 8.37,
+        "gain_de_temps": 1.72
+      },
+      {
+        "pas_echantillon": 3,
+        "cote_en_points": 14,
+        "points": 2744,
+        "rangees_lues": 196,
+        "ecart_median_au_plus_fin_deg": 4.39,
+        "ecart_p90_deg": 10.87,
+        "part_au_dela_de_dix_degres": 0.109,
+        "desaccord_median_deg": 8.13,
+        "secondes_par_cube": 4.82,
+        "gain_de_temps": 2.99
+      },
+      {
+        "pas_echantillon": 4,
+        "cote_en_points": 11,
+        "points": 1331,
+        "rangees_lues": 121,
+        "ecart_median_au_plus_fin_deg": 5.77,
+        "ecart_p90_deg": 16.36,
+        "part_au_dela_de_dix_degres": 0.291,
+        "desaccord_median_deg": 9.79,
+        "secondes_par_cube": 3.76,
+        "gain_de_temps": 3.83
+      }
+    ]
+  },
+  "le_pas_retenu": {
+    "tolere_deg": 10.0,
+    "pas_de_reference": 1,
+    "la_garde_du_fabrique_tient_a_la_reference": false,
+    "pas_retenu": null,
+    "verdicts": [
+      {
+        "pas_echantillon": 2,
+        "la_garde_du_fabrique_tient": true,
+        "aucune_cellule_reelle_au_dela_du_tolere": false,
+        "part_reelle_au_dela_du_tolere": 0.073,
+        "gain_de_temps": 1.72,
+        "retenu": false,
+        "pourquoi_refuse": "des cellules réelles s'écartent de plus de 10°",
+        "part_de_marches_de_six_pas_touchees": 0.365
+      },
+      {
+        "pas_echantillon": 3,
+        "la_garde_du_fabrique_tient": true,
+        "aucune_cellule_reelle_au_dela_du_tolere": false,
+        "part_reelle_au_dela_du_tolere": 0.109,
+        "gain_de_temps": 2.99,
+        "retenu": false,
+        "pourquoi_refuse": "des cellules réelles s'écartent de plus de 10°",
+        "part_de_marches_de_six_pas_touchees": 0.5
+      },
+      {
+        "pas_echantillon": 4,
+        "la_garde_du_fabrique_tient": false,
+        "aucune_cellule_reelle_au_dela_du_tolere": false,
+        "part_reelle_au_dela_du_tolere": 0.291,
+        "gain_de_temps": 3.83,
+        "retenu": false,
+        "pourquoi_refuse": "la garde du fabriqué ne tient pas",
+        "part_de_marches_de_six_pas_touchees": 0.873
+      }
+    ],
+    "une_economie_est_possible": false,
+    "gain_du_pas_retenu": null
+  }
+}
