@@ -7,8 +7,8 @@ l'historique, daté, et se lit ensuite.
 
 ## ⭐⭐⭐⭐ REPRISE — 2026-09-10
 
-**Douze tranches d'une même campagne, `94` à `105`, et elles ont UNE conclusion — plus, désormais,
-UN acquis.** L'arbre est propre, les gardes vertes, 107 fiches sans dérive, aucun artefact
+**Treize tranches d'une même campagne, `94` à `106`, et elles ont UNE conclusion — plus, désormais,
+UN acquis.** L'arbre est propre, les gardes vertes, 108 fiches sans dérive, aucun artefact
 versionné sans appelant. Ce
 bloc remplace le précédent comme état courant ; tout ce qui suit est l'historique, daté.
 
@@ -33,6 +33,39 @@ pas du balayage calibré, vérification par le critère de `98`, **aucun référ
 bandes. Il porte **583,9 µm**, soit **3,4 feuilles nominales**, sans **aucune** sortie du volume.
 ⭐ Et le témoin **n'est pas un homme de paille** : sur un empilement fabriqué **droit** il atteint
 le plafond exactement comme la matière ; c'est l'**obliquité** de `100`/`101` qui le fait tomber.
+
+⛔⛔⛔ **ET `106` A RETIRÉ AU MARCHEUR LE SENS DE CE QU'IL MESURE.** `100` avait comparé la période
+dans DEUX directions séparées de 34° et rendu **1,018** là où un empilement parallèle prédit
+**1,184** ; deux points ne décidant pas d'une courbe, `106` balaie un **éventail** de 21 directions
+sur ±50° autour de la normale de `101`, avec le sélecteur que `105` a corrigé, **apparié** sur les
+mêmes lectures. ⛔⛔ **Le même instrument ajuste une pile FABRIQUÉE à 0,72 µm et la matière à
+19,30 — soit ×22,3 pire.** Battre une constante de 36 % ne rachète pas cela : **à l'échelle où le
+balayage la sonde, la matière ne se comporte pas comme un empilement de feuilles parallèles.**
+
+⚠⚠⚠ **LE REPÈRE D'UN INSTRUMENT EST CE QUE CE MÊME INSTRUMENT OBTIENT SUR DU CONNU**, pas une part
+de son propre signal — correction de ma première version, qui comparait le résidu à l'amplitude de
+la courbe et laissait donc passer un ajustement vingt fois pire que sur une réponse connue.
+
+⛔⛔ **ET L'ANOMALIE DE `100` SURVIT À LA CORRECTION** : le rapport rayon/normale passe de **0,929**
+à **1,000** pour **1,155** prédits — le sélecteur le déplace de **+0,071** et il reste **−0,155**
+pour une résolution de **0,113**. ⛔ L'explication la plus plausible est réfutée en prime : une
+famille de feuilles qui **tourne** le long de la sonde fait **monter** le rapport (1,200 à 1,523
+pour 0 à 25°/100 µm), elle ne le ramène pas vers un.
+
+⚠⚠⚠ **ET DEUX FAUTES À MOI, DONT UNE QUE J'AI ÉCRITE DANS UNE FIGURE.** *Un vecteur propre n'a pas
+de sens* : sans orientation, **61 %** des cellules avaient le rayon hors de l'éventail et mon code
+l'**écrêtait** sur le bord — une limite de grille publiée comme une limite matérielle. Ce qui l'a
+attrapé est un chiffre absurde (`1/cos` à **1,556**, soit exactement le demi-angle), et la
+correction s'est vérifiée **sur les données déjà lues** avant d'être repayée : replié, l'angle médian
+donne **33,6°** contre les **34,59°** de `101`. Puis *une médiane SIGNÉE d'angle n'est pas un
+accord* : le minimum est à **+2,50°** en signé et **25,0°** en absolu, pour un pas d'éventail de 5°.
+J'avais lu le premier comme un accord avec `101` ; il ne dit que la symétrie de la dispersion.
+
+⭐⭐⭐ **ET LES TROIS DERNIÈRES TRANCHES DISENT LA MÊME CHOSE SOUS TROIS ANGLES** : `104`, un pas
+**confirmé** peut franchir entre 0,68 et 1,38 feuille sans que rien ne le signale ; `105`, le pas
+dont le marcheur avance est **+18,4 %** trop grand ; `106`, la quantité que ce pas mesure **n'est
+pas** l'espacement d'un empilement parallèle. ⚠ « La matière porte deux pas » ne veut donc pas ce
+qu'on croyait.
 
 ⛔⛔⛔ **ET `105` A TROUVÉ L'INSTRUMENT EN DÉFAUT SOUS TOUT LE RESTE.** Le sélecteur que `99`
 appelle réellement — `pas_montre_calibre` — **ne rend pas la période qu'on lui injecte** : sur des
@@ -130,7 +163,15 @@ dépassé. Il est conservé plus bas, sous son en-tête, parce que ses résultat
 
 ### ⭐⭐ CE QUI VIENT ENSUITE, ET L'ORDRE EST DÉRIVÉ PLUTÔT QUE CHOISI
 
-0. ⛔⛔⛔ **AVANT TOUT LE RESTE : relancer avec le sélecteur corrigé.** `99`, `100`, `101` et `102`
+0. ⛔⛔⛔ **AVANT TOUT LE RESTE, ET `106` L'A DÉPLACÉ : ce n'est plus « relancer avec le sélecteur
+   corrigé », c'est SAVOIR CE QUE LE PAS MESURE.** `106` montre que la périodicité que le balayage
+   suit n'est pas l'espacement d'un empilement localement parallèle, donc relancer `99` à `102`
+   avec le bon sélecteur rendrait des nombres justes pour une quantité dont le sens reste inconnu.
+   ⚠ La question à trancher d'abord : à quelle échelle la matière EST-elle un empilement parallèle,
+   si elle l'est ? La sonde fait 346 µm, imposée par le plus long candidat, et `101` mesure la
+   cohérence d'orientation à ~100 µm. Une fenêtre de balayage plus courte demande son propre nul par
+   candidat, donc c'est une tranche à soi.
+1. ⛔ **Puis relancer avec le sélecteur corrigé.** `99`, `100`, `101` et `102`
    ont tous été calculés avec le sélecteur biaisé, et `105` montre que la correction n'est PAS un
    facteur à appliquer — il faut relancer. ⚠ `100` compare deux directions avec ce sélecteur, donc
    son anomalie d'isotropie hérite de la dérive ; `102` marche avec, donc sa portée est mesurée par

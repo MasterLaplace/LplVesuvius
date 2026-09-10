@@ -5247,6 +5247,75 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/106_le_pas_selon_la_direction.md
+- **lignes** : 173
+- **nature** : RESULTAT
+  (l'éventail : la période a-t-elle une direction où elle est minimale, comme un empilement
+  parallèle l'exige, et l'anomalie de `100` survit-elle au sélecteur corrigé de `105` ?)
+- **résumé** : ⛔⛔⛔ **À l'échelle où le balayage la sonde, la matière ne se comporte pas comme un
+  empilement de feuilles parallèles.** Le même instrument ajuste une pile **fabriquée** à
+  **0,72 µm** et la matière à **19,3** — soit **×22,3** pire. ⛔⛔ Et l'anomalie de `100`
+  **survit** à la correction : le rapport rayon/normale passe de **0,929** à **1,000** pour
+  **1,155** prédits, laissant **−0,155** pour une résolution de **0,113**. ⚠⚠⚠ Et une médiane
+  **signée** d'angle n'est pas un accord — le minimum est à **+2,50°** en médiane signée mais
+  **25,0°** en médiane absolue.
+- **conclusions extractibles** :
+  - ⚠⚠⚠ **Le repère d'un instrument est ce que CE MÊME instrument obtient sur du connu**, pas une
+    part de son propre signal. Ma première version comparait le résidu à l'amplitude de la courbe
+    et laissait donc passer un ajustement **vingt fois pire** que sur une réponse connue. Battre
+    une constante de 36 % ne rachète pas un facteur 22.
+  - ⚠⚠⚠ **Une médiane SIGNÉE d'angle n'est pas un accord.** Des minima dispersés et symétriques
+    ont une médiane proche de zéro, ce qui se lit « ils tombent sur la normale ». Seul l'écart
+    **absolu** le dit : 25,0° pour un pas d'éventail de 5°. ⭐ Publier les deux côte à côte est ce
+    qui a permis de voir la faute — que j'avais commise en lisant la première sortie.
+  - ⚠⚠⚠ **Un vecteur propre n'a pas de sens, et l'oublier fait sonder le mauvais demi-plan.**
+    `101` compare ses directions au produit scalaire **absolu** pour cette raison ; sans
+    orientation, **61 %** des cellules avaient le rayon hors de l'éventail et mon code l'**écrêtait**
+    sur le bord — *une limite de grille publiée comme une limite matérielle*. ⭐ Ce qui l'a attrapé
+    est un chiffre absurde : `1/cos` sortait à 1,556, soit exactement le demi-angle de l'éventail.
+  - ⭐⭐ **Une correction se vérifie sur les données déjà lues avant d'être repayée** : replié,
+    l'angle médian donne **33,6°** contre les **34,59°** de `101`, un accord à un degré près par une
+    route entièrement différente. Cela a justifié de repayer 40 minutes de mesure.
+  - ⭐⭐⭐ **Deux points ne décident pas d'une courbe**, et c'est tout l'argument du fichier :
+    `p₀/cos` demande plus de deux directions pour se distinguer d'une constante. Un éventail de 21
+    directions rend une conclusion plus forte que le rapport de `100`.
+  - ⭐⭐⭐ **Deux modèles s'ajustent à armes égales — un paramètre libre chacun.** L'angle de la
+    normale n'est **pas** ajusté : il est fixé par `101`, mesuré sur la même cellule par un
+    instrument qui ne partage rien avec celui-ci. Le laisser libre aurait donné au parallèle un
+    degré de liberté de plus, et il aurait gagné souvent par accident.
+  - ⛔ **L'explication la plus plausible est réfutée** : une famille de feuilles qui **tourne** le
+    long de la sonde fait **monter** le rapport (1,200 à 1,523 pour 0 à 25°/100 µm), elle ne le
+    ramène pas vers un. L'incohérence d'orientation n'explique donc pas `100`.
+  - ⚠ **L'amplitude confirme l'irrégularité, pas l'anisotropie** : **173,0 µm** mesurés sur ±50° là
+    où un empilement de pas 152,8 en prédirait **85**. La courbe varie deux fois plus qu'un
+    empilement parallèle ne le prédit, sans en suivre la forme.
+  - ⭐⭐⭐ **Et les trois dernières tranches disent la même chose sous trois angles** : `104`, un pas
+    confirmé peut franchir entre 0,68 et 1,38 feuille sans que rien ne le signale ; `105`, le pas
+    dont le marcheur avance est +18,4 % trop grand ; `106`, la quantité que ce pas mesure n'est pas
+    l'espacement d'un empilement parallèle.
+- **rétractations / corrections internes** :
+  - §4 : ⚠⚠⚠ **mon seuil de description comparait le résidu à l'amplitude de la courbe**, ce qui
+    laissait passer un ajustement 22 fois pire que sur du connu. Le repère est désormais la pile
+    fabriquée, à un facteur trois déclaré d'avance.
+  - §5 : ⚠⚠⚠ **j'ai lu la médiane signée du minimum comme un accord avec `101`** et l'ai écrit
+    ainsi dans la figure. C'est la médiane absolue qui juge, et elle dit le contraire.
+  - §5 : ⚠⚠ **la normale du tenseur n'était pas orientée vers le rayon**, donc l'éventail sondait
+    le mauvais demi-plan sur 61 % des cellules, et le rayon hors de portée était **écrêté** sur le
+    bord au lieu d'être refusé.
+  - §6 : ⚠ **ma première fixture de pile tournante n'était pas recalée sur la famille de plans** —
+    le défaut que `102` documente — et elle mesurait sa propre mise en place.
+  - ⚠ **Un ajustement parfait rendait un gain `None`**, c'est-à-dire « pas de donnée » là où la
+    réponse est « infiniment mieux » : une médiane aurait écarté les meilleures cellules. Plafonné
+    au dixième du cran, avec le compte des cellules concernées.
+  - ⚠ **« Le sélecteur déplace le rapport » n'est pas « l'anomalie était l'instrument »** : ma
+    première version répondait OUI dès que la correction rapprochait le rapport, même d'un dixième.
+    Les deux sont séparés, et le second exige que l'écart restant tombe sous la résolution.
+- **preuve de lecture intégrale** :
+  - l. 104 (après 60 % du fichier) : `### La normale n'était pas orientée`
+  - l. 167 : `uv run python src/nappe/le_pas_selon_la_direction.py --verifier`
+
+---
+
 ### docs/105_le_balayage_rend_il_le_pas_injecte.md
 - **lignes** : 181
 - **nature** : RESULTAT
@@ -5569,7 +5638,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
 ---
 
 ### docs/100_la_normale_nest_pas_le_rayon.md
-- **lignes** : 176
+- **lignes** : 196
 - **nature** : RESULTAT
   (l'item A bis : l'obliquité de la nappe est mesurée, l'explication qu'elle devait fournir est
   réfutée, et le fait qui reste est plus lourd que l'hypothèse.)
@@ -5628,6 +5697,13 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     elle-même comme son angle mort) et `textes_qui_se_recouvrent` (un texte lisible **écrit
     par-dessus** un autre). Marge à **zéro** volontairement : un seuil choisi pour que la figure
     du jour passe serait le péché nº 1 du dépôt.
+  - ⛔⛔⛔ **`106` a refait la comparaison des deux directions avec le sélecteur corrigé de `105`
+    et la normale de la MATIÈRE, sur un éventail de 21 directions plutôt que deux points.**
+    L'anomalie **survit** : le rapport passe de 0,929 à 1,000 pour 1,155 prédits, soit −0,155
+    restants pour une résolution de 0,113. ⭐ Et l'éventail rend une conclusion plus forte que deux
+    points : le même instrument ajuste une pile fabriquée à **0,72 µm** et la matière à **19,3**,
+    soit **×22,3** pire, donc la matière n'est pas un empilement localement parallèle à cette
+    échelle. ⚠ Les chiffres de ce document ne sont pas recalculés.
 - **preuve de lecture intégrale** :
   - l. 106 (après 60 % du fichier) : `| ce que l'obliquité prédirait (\`1/cos\`, médiane) | **1,184** |`
   - l. 146 : `> *« LE SEGMENT EST RADIAL ET A z CONSTANT, donc il traverse l'empilement perpendiculairement. »*`
@@ -6948,7 +7024,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 6861
+- **lignes** : 6940
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)

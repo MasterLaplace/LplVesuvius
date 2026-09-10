@@ -1562,6 +1562,7 @@ run "pas portes"            uv run --project "$ROOT" python "$ROOT/src/nappe/com
 run "cube moins cher"       uv run --project "$ROOT" python "$ROOT/src/nappe/le_cube_lu_moins_cher.py" --verifier
 run "pas confirme"          uv run --project "$ROOT" python "$ROOT/src/nappe/un_pas_confirme_nest_pas_une_feuille.py" --verifier
 run "pas injecte"           uv run --project "$ROOT" python "$ROOT/src/nappe/le_balayage_rend_il_le_pas_injecte.py" --verifier
+run "pas par direction"     uv run --project "$ROOT" python "$ROOT/src/nappe/le_pas_selon_la_direction.py" --verifier
 run "suivre nappe"           uv run --project "$ROOT" python "$ROOT/src/commun/suivre_nappe.py" --verifier
 run "assembler mosaique"     uv run --project "$ROOT" python "$ROOT/src/volume/assembler_mosaique.py" --verifier
 run "derouler en raccrochant"  uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_en_raccrochant.py" --verifier
@@ -1620,6 +1621,7 @@ run "fig : pas portes"       uv run --project "$ROOT" python "$ROOT/src/figures/
 run "fig : cube moins cher"  uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_cube_lu_moins_cher.py" --verifier
 run "fig : pas confirme"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_un_pas_confirme_nest_pas_une_feuille.py" --verifier
 run "fig : pas injecte"      uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_balayage_rend_il_le_pas_injecte.py" --verifier
+run "fig : pas par direction" uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_pas_selon_la_direction.py" --verifier
 run "fig : mur du corpus"    uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_mur_du_corpus.py" --verifier
 run "fig : ou poser la boite" uv run --project "$ROOT" python "$ROOT/src/figures/figure_ou_poser_la_boite.py" --verifier
 run "fig : en raccrochant"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_en_raccrochant.py" --verifier

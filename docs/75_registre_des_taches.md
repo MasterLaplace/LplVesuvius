@@ -4553,6 +4553,85 @@ renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la bat
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
 
 ---
+##### ⛔⛔⛔ LE PAS SELON LA DIRECTION — la matière n'est pas un empilement localement parallèle
+
+> Mesure : `src/nappe/le_pas_selon_la_direction.py` (44 contrôles) →
+> `docs/mesures/le_pas_selon_la_direction.json`. Figure :
+> `src/figures/figure_le_pas_selon_la_direction.py` (23 contrôles).
+> Document : [`106`](106_le_pas_selon_la_direction.md), le 2026-09-10.
+
+![le pas selon la direction](images/106_le_pas_selon_la_direction.png)
+
+`100` a comparé la période dans **deux** directions séparées de 34° et rendu **1,018** là où un
+empilement parallèle prédit **1,184**. Deux points ne décident pas d'une courbe : on balaie un
+**éventail** de 21 directions sur ±50° autour de la normale de `101`, avec le sélecteur que `105` a
+corrigé, **apparié** sur les mêmes lectures.
+
+##### ⭐⭐⭐ La garde, sur une pile dont la réponse est connue
+
+| pile fabriquée | gain du parallèle | minimum | écart à $p_0/\cos$ |
+|---|---:|---:|---:|
+| obliquité 25° | **×20,0** | **0,0°** | **0,94 µm** |
+| obliquité 40° | **×20,0** | **0,0°** | **0,94 µm** |
+
+Et une **fausse normale** fait perdre le modèle : sans ce contrôle négatif, sa victoire ne dirait
+rien.
+
+##### ⛔⛔⛔ Le résultat, et son repère
+
+| | ∥ gagne | gain | résidu ∥ | résidu iso | $p_0$ ajusté | amplitude |
+|---|---:|---:|---:|---:|---:|---:|
+| sélecteur de `100` | 65,0 % | ×1,272 | 20,93 µm | 25,92 | 173,6 µm | **186,0** µm |
+| **sélecteur corrigé** | **70,0 %** | **×1,355** | **19,30 µm** | 25,90 | **152,8 µm** | **173,0** µm |
+
+50 cellules sur 26 bandes, **2393** s de mesure. ⚠ Les deux modèles restent sous le seuil de
+description en amplitude (**57,67** µm), donc le verdict est **« pas un empilement parallèle »** et
+non **« isotrope »**.
+
+⚠⚠⚠ **Le repère du résidu est la pile fabriquée, pas l'amplitude de la courbe** — correction de ma
+première version, qui laissait passer un ajustement vingt fois pire que sur du connu. **0,72 µm** sur
+une pile connue contre **19,30** sur la matière, soit **×22,3**.
+
+> ⛔ **La matière n'est donc PAS un empilement localement parallèle** à cette échelle.
+
+⚠ Et l'amplitude confirme l'irrégularité : **173,0 µm** sur ±50° là où un empilement de pas 152,8 en
+prédirait **85**. La courbe varie deux fois plus, sans en suivre la forme.
+
+##### ⛔⛔ L'anomalie de `100` survit à la correction
+
+Le rapport rayon/normale passe de **0,929** à **1,000** pour **1,155** prédits : le sélecteur le
+déplace de **+0,071** et il reste **−0,155** pour une résolution de **0,113**.
+
+##### ⚠⚠⚠ Deux fautes à moi, et une seule les a attrapées
+
+**Un vecteur propre n'a pas de sens.** Sans orientation, **61 %** des cellules avaient le rayon hors
+de l'éventail et mon code l'**écrêtait** sur le bord — *une limite de grille publiée comme une
+limite matérielle*. ⭐ Ce qui l'a attrapé est un chiffre absurde : `1/cos` sortait à **1,556**, soit
+exactement le demi-angle. Et la correction se vérifie **sur les données déjà lues** : replié, l'angle
+médian donne **33,6°** contre les **34,59°** de `101`.
+
+**Une médiane SIGNÉE d'angle n'est pas un accord.** Le minimum est à **+2,50°** en médiane signée et
+**25,0°** en médiane absolue, pour un pas d'éventail de 5°. J'ai lu la première comme un accord avec
+`101` ; elle ne dit que la symétrie de la dispersion.
+
+##### ⛔ L'explication la plus plausible, réfutée
+
+| rotation | sur la sonde | rapport |
+|---:|---:|---:|
+| 0°/100 µm | 0° | **1,200** |
+| 10°/100 µm | 35° | 1,350 |
+| 25°/100 µm | 87° | **1,523** |
+
+Le rapport **monte**. Une famille de feuilles dont l'orientation n'est pas cohérente sur la longueur
+de la sonde ne peut donc pas produire un rapport de un.
+
+##### ⭐⭐⭐ Ce que les trois dernières tranches disent ensemble
+
+- `104` : un pas **confirmé** peut franchir entre 0,68 et 1,38 feuille, et rien ne le signale ;
+- `105` : le pas dont le marcheur avance est **+18,4 %** trop grand ;
+- `106` : la quantité que ce pas mesure **n'est pas** l'espacement d'un empilement parallèle.
+
+---
 ##### ⛔⛔⛔ LE BALAYAGE REND-IL LE PAS INJECTÉ ? — le sélecteur de production choisit un cran trop haut
 
 > Mesure : `src/nappe/le_balayage_rend_il_le_pas_injecte.py` (20 contrôles) →

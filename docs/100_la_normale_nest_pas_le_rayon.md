@@ -163,6 +163,26 @@ qui reste inexpliquée. La correction est faite sur place, avec sa mesure.
   plateau à 21,22° est une borne inférieure sur ce qui est réel, pas une mesure de la seule
   structure.
 
+## 8. ⛔⛔⛔ Ce que `106` reprend ici : l'anomalie survit, mais avec un autre chiffre
+
+Le rapport de **1,018** publié plus haut, contre **1,184** prédit par $1/\cos$, a été mesuré avec
+`pas_montre_calibre`, dont [`105`](105_le_balayage_rend_il_le_pas_injecte.md) a montré qu'il lit un
+cran trop haut, et avec la normale du **maillage**, dont `101` mesure qu'elle est à 13° de celle de
+la matière.
+
+[`106`](106_le_pas_selon_la_direction.md) refait la question avec le sélecteur **corrigé** et la
+normale de la **matière**, sur un **éventail** de 21 directions plutôt que deux points : le rapport
+passe de **0,929** à **1,000** pour **1,155** prédits, donc **l'anomalie survit** — il reste
+**−0,155** pour une résolution de **0,113**.
+
+⭐⭐⭐ **Et l'éventail dit davantage que deux points ne pouvaient dire** : le même instrument ajuste
+une pile **fabriquée** à **0,72 µm** et la matière à **19,3 µm**, soit **×22,3** pire. Donc la
+matière ne se comporte **pas** comme un empilement localement parallèle à l'échelle où le balayage
+la sonde — ce qui est une conclusion plus forte, et plus utile, que « le rapport n'est pas 1,184 ».
+
+⚠ Ce document n'est **pas** recalculé : ses chiffres restent ceux de son sélecteur et de sa
+normale. Les relire demande de relancer la mesure.
+
 ## Reproduire
 
 ```

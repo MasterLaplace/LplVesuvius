@@ -2124,6 +2124,102 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             out.append(("cellules appariees lues a tous les pas",
                         [f"**{v['cellules']}**", f"{v['cellules']}"], cub.name))
 
+    # ⛔⛔⛔ LE PAS SELON LA DIRECTION (`106`), ET DEUX APPARIEMENTS SONT OBLIGATOIRES.
+    # (1) Le residu sur la MATIERE ne voyage jamais sans celui sur la pile FABRIQUEE : « 19,3 µm »
+    # est un nombre nu, « 19,3 contre 0,72 sur du connu, soit x22,3 » EST le resultat.
+    # (2) Et la mediane SIGNEE du minimum ne voyage jamais sans la mediane ABSOLUE : la premiere
+    # seule se lit comme un accord avec `101` alors qu'elle n'est que la symetrie de la dispersion,
+    # et c'est la faute que cette tranche a payee.
+    dirn = _source(racine, "le_pas_selon_la_direction.json")
+    if dirn.exists():
+        d = json.loads(dirn.read_text())
+        s106 = d.get("resume", {})
+        for cle, nom in (("cellules", "cellules de l'eventail"),
+                         ("bandes", "bandes de l'eventail"),
+                         ("cellules_sans_direction", "cellules sans direction"),
+                         ("residu_sur_pile_fabriquee_um", "residu sur la pile fabriquee"),
+                         ("combien_de_fois_pire_que_la_pile_fabriquee",
+                          "combien de fois pire que la pile fabriquee"),
+                         ("seuil_de_description_um", "seuil de description de la courbe"),
+                         ("rapport_avec_le_selecteur_de_100",
+                          "rapport avec le selecteur de 100"),
+                         ("rapport_avec_le_selecteur_corrige",
+                          "rapport avec le selecteur corrige"),
+                         ("un_sur_cos_attendu", "un sur cos attendu par l'eventail"),
+                         ("de_combien_le_selecteur_deplace_le_rapport",
+                          "deplacement du rapport par le selecteur"),
+                         ("ecart_restant_a_la_prediction", "ecart restant a la prediction"),
+                         ("resolution_du_rapport", "resolution du rapport"),
+                         ("ecart_absolu_median_du_minimum_deg",
+                          "ecart absolu median du minimum"),
+                         ("pas_de_leventail_deg", "pas de l'eventail")):
+            if cle not in s106 or s106[cle] is None:
+                continue
+            val = s106[cle]
+            txt = f"{val}".replace(".", ",")
+            formes = [f"**{txt}**", txt, f"{val}"]
+            if isinstance(val, float):
+                for n_dec in (1, 2, 3):
+                    q = f"{val:.{n_dec}f}".replace(".", ",")
+                    formes += [f"**{q}**", q]
+                if cle.startswith("ecart_restant") or cle.startswith("de_combien"):
+                    q = f"{val:+.3f}".replace(".", ",").replace("-", "\u2212")
+                    formes += [f"**{q}**", q]
+            out.append((nom, formes, dirn.name))
+        for nom_s in ("calibre", "deux_roles"):
+            b = d.get(nom_s, {})
+            for cle, nom in (("part_ou_le_parallele_gagne", "part ou le parallele gagne"),
+                             ("gain_median_du_modele_parallele", "gain median du parallele"),
+                             ("residu_parallele_median_um", "residu parallele median"),
+                             ("residu_isotrope_median_um", "residu isotrope median"),
+                             ("amplitude_mediane_um", "amplitude mediane de la courbe"),
+                             ("pas_du_modele_parallele_median_um", "pas du modele parallele"),
+                             ("angle_du_minimum_median_deg", "angle median du minimum"),
+                             ("cellules_decidables", "cellules decidables de l'eventail"),
+                             ("cellules_dont_le_rayon_est_hors_de_leventail",
+                              "cellules dont le rayon est hors de l'eventail")):
+                if cle not in b or b[cle] is None:
+                    continue
+                val = b[cle]
+                txt = f"{val}".replace(".", ",")
+                formes = [f"**{txt}**", txt, f"{val}"]
+                if cle == "part_ou_le_parallele_gagne":
+                    pc = f"{100 * val:.1f}".replace(".", ",")
+                    formes = [f"**{pc} %**", f"{pc} %", f"{pc}%"] + formes
+                if isinstance(val, float):
+                    q = f"{val:.1f}".replace(".", ",")
+                    formes += [f"**{q}**", q]
+                out.append((f"{nom} {nom_s}", formes, dirn.name))
+        for e in d.get("controle_fabrique", {}).get("empilements", []):
+            j = e.get("ajustement_juste", {})
+            if not j.get("decidable"):
+                continue
+            th = f"{e['obliquite_deg']:.0f}"
+            for val, nom in ((j["gain_du_modele_parallele"],
+                              f"gain de la pile fabriquee a {th} degres"),
+                             (e.get("ecart_median_a_la_prediction_um"),
+                              f"ecart a la prediction a {th} degres")):
+                if val is None:
+                    continue
+                txt = f"{val}".replace(".", ",")
+                out.append((nom, [f"**{txt}**", txt, f"{val}",
+                                  f"**{val:.1f}**".replace(".", ",")], dirn.name))
+        for t in d.get("controle_fabrique", {}).get("tournantes", []):
+            r_ = f"{t['rotation_deg_par_100um']:.0f}"
+            for cle, nom in (("rapport", "rapport de la pile tournante a"),
+                             ("le_long_de_la_normale", "pas le long de la normale tournante a"),
+                             ("a_trente_quatre_degres", "pas a trente quatre degres tournante a"),
+                             ("rotation_sur_la_sonde_deg", "rotation sur la sonde a")):
+                val = t[cle]
+                txt = f"{val}".replace(".", ",")
+                out.append((f"{nom} {r_}",
+                            [f"**{txt}**", txt, f"{val}",
+                             f"**{val:.0f}**", f"{val:.0f}"], dirn.name))
+        if "secondes" in d:
+            val = int(round(d["secondes"]))
+            out.append(("secondes de la mesure par direction",
+                        [f"**{val}**", f"{val}", f"{d['secondes']}"], dirn.name))
+
     # ⛔⛔⛔ LE BALAYAGE REND-IL LE PAS INJECTE (`105`), ET DEUX APPARIEMENTS SONT OBLIGATOIRES.
     # (1) Le pas lu par le BRUT ne voyage jamais sans celui lu par le CALIBRE : « 164,3 µm » est un
     # nombre nu, « 164,3 contre 194,6 sur les MEMES lectures » EST le resultat, et c'est leur ecart
