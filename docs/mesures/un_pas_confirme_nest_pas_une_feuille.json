@@ -1,0 +1,3053 @@
+{
+  "question": "un pas confirmé garantit-il qu'une feuille a été franchie ?",
+  "aucune_lecture_distante": true,
+  "bande": {
+    "barre_de_linterstice": 0.3311,
+    "tirages": 200,
+    "spires": 120,
+    "lignes": [
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.4,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.108,
+        "fraction_estimee_mediane": 0.4,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.42,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.09,
+        "fraction_estimee_mediane": 0.42,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.44,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.071,
+        "fraction_estimee_mediane": 0.44,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.46,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.049,
+        "fraction_estimee_mediane": 0.46,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.48,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.026,
+        "fraction_estimee_mediane": 0.48,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.5,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.0,
+        "fraction_estimee_mediane": 0.5,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.52,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.028,
+        "fraction_estimee_mediane": 0.52,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.54,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.059,
+        "fraction_estimee_mediane": 0.54,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.56,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.093,
+        "fraction_estimee_mediane": 0.56,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.58,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.131,
+        "fraction_estimee_mediane": 0.58,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.6,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.171,
+        "fraction_estimee_mediane": 0.6,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.62,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.216,
+        "fraction_estimee_mediane": 0.62,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.64,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.263,
+        "fraction_estimee_mediane": 0.64,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.66,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.315,
+        "fraction_estimee_mediane": 0.66,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.68,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.369,
+        "fraction_estimee_mediane": 0.68,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.7,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.427,
+        "fraction_estimee_mediane": 0.7,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.72,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.486,
+        "fraction_estimee_mediane": 0.72,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.74,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.547,
+        "fraction_estimee_mediane": 0.74,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.76,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.609,
+        "fraction_estimee_mediane": 0.76,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.78,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.669,
+        "fraction_estimee_mediane": 0.78,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.8,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.727,
+        "fraction_estimee_mediane": 0.8,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.82,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.781,
+        "fraction_estimee_mediane": 0.82,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.84,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.829,
+        "fraction_estimee_mediane": 0.84,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.86,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.872,
+        "fraction_estimee_mediane": 0.86,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.88,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.909,
+        "fraction_estimee_mediane": 0.88,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.9,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.939,
+        "fraction_estimee_mediane": 0.9,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.92,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.962,
+        "fraction_estimee_mediane": 0.92,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.94,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.98,
+        "fraction_estimee_mediane": 0.94,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.96,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.991,
+        "fraction_estimee_mediane": 0.96,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 0.98,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.998,
+        "fraction_estimee_mediane": 0.98,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.0,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 1.0,
+        "fraction_estimee_mediane": 1.0,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.02,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.998,
+        "fraction_estimee_mediane": 1.02,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.04,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.992,
+        "fraction_estimee_mediane": 1.04,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.06,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.983,
+        "fraction_estimee_mediane": 1.06,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.08,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.971,
+        "fraction_estimee_mediane": 1.08,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.1,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.955,
+        "fraction_estimee_mediane": 1.1,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.12,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.936,
+        "fraction_estimee_mediane": 1.12,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.14,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.913,
+        "fraction_estimee_mediane": 1.14,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.16,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.886,
+        "fraction_estimee_mediane": 1.16,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.18,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.856,
+        "fraction_estimee_mediane": 1.18,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.2,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.821,
+        "fraction_estimee_mediane": 1.2,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.22,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.782,
+        "fraction_estimee_mediane": 1.22,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.24,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.739,
+        "fraction_estimee_mediane": 1.24,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.26,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.691,
+        "fraction_estimee_mediane": 1.26,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.28,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.639,
+        "fraction_estimee_mediane": 1.28,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.3,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.583,
+        "fraction_estimee_mediane": 1.3,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.32,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.524,
+        "fraction_estimee_mediane": 1.32,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.34,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.463,
+        "fraction_estimee_mediane": 1.34,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.36,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.401,
+        "fraction_estimee_mediane": 1.36,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.38,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.338,
+        "fraction_estimee_mediane": 1.38,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.4,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.275,
+        "fraction_estimee_mediane": 1.4,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.42,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.215,
+        "fraction_estimee_mediane": 1.42,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.44,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.156,
+        "fraction_estimee_mediane": 1.44,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.46,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.1,
+        "fraction_estimee_mediane": 1.46,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.48,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.048,
+        "fraction_estimee_mediane": 1.48,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.5,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.0,
+        "fraction_estimee_mediane": 1.5,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.52,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.044,
+        "fraction_estimee_mediane": 1.52,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.54,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.084,
+        "fraction_estimee_mediane": 1.54,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.56,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.12,
+        "fraction_estimee_mediane": 1.56,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.58,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.157,
+        "fraction_estimee_mediane": 1.58,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.6,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.203,
+        "fraction_estimee_mediane": 1.6,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.62,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.251,
+        "fraction_estimee_mediane": 1.62,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.64,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.302,
+        "fraction_estimee_mediane": 1.64,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.66,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.354,
+        "fraction_estimee_mediane": 1.66,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.68,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.408,
+        "fraction_estimee_mediane": 1.68,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.7,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.463,
+        "fraction_estimee_mediane": 1.7,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.72,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.519,
+        "fraction_estimee_mediane": 1.72,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.74,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.575,
+        "fraction_estimee_mediane": 1.74,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.76,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.63,
+        "fraction_estimee_mediane": 1.76,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.78,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.684,
+        "fraction_estimee_mediane": 1.78,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 0.0,
+        "fraction_vraie": 1.8,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.736,
+        "fraction_estimee_mediane": 1.8,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 1.0
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.4,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.106,
+        "fraction_estimee_mediane": 0.4,
+        "estimee_en_butee": 0.05,
+        "score_continu_median": 0.98
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.42,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.089,
+        "fraction_estimee_mediane": 0.415,
+        "estimee_en_butee": 0.005,
+        "score_continu_median": 0.982
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.44,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.07,
+        "fraction_estimee_mediane": 0.44,
+        "estimee_en_butee": 0.005,
+        "score_continu_median": 0.983
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.46,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.05,
+        "fraction_estimee_mediane": 0.46,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.984
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.48,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.033,
+        "fraction_estimee_mediane": 0.48,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.5,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.025,
+        "fraction_estimee_mediane": 0.5,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.52,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.033,
+        "fraction_estimee_mediane": 0.52,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.54,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.06,
+        "fraction_estimee_mediane": 0.54,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.56,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.092,
+        "fraction_estimee_mediane": 0.56,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.987
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.58,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.125,
+        "fraction_estimee_mediane": 0.58,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.987
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.6,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.168,
+        "fraction_estimee_mediane": 0.6,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.987
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.62,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.214,
+        "fraction_estimee_mediane": 0.62,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.987
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.64,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.26,
+        "fraction_estimee_mediane": 0.64,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.66,
+        "part_confirmee": 0.16,
+        "compte_median": 1,
+        "score_median": 0.313,
+        "fraction_estimee_mediane": 0.66,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.68,
+        "part_confirmee": 0.97,
+        "compte_median": 1,
+        "score_median": 0.363,
+        "fraction_estimee_mediane": 0.68,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.7,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.422,
+        "fraction_estimee_mediane": 0.7,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.72,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.475,
+        "fraction_estimee_mediane": 0.72,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.74,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.541,
+        "fraction_estimee_mediane": 0.74,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.984
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.76,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.599,
+        "fraction_estimee_mediane": 0.76,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.984
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.78,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.657,
+        "fraction_estimee_mediane": 0.78,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.984
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.8,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.717,
+        "fraction_estimee_mediane": 0.8,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.984
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.82,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.768,
+        "fraction_estimee_mediane": 0.82,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.984
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.84,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.815,
+        "fraction_estimee_mediane": 0.84,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.984
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.86,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.858,
+        "fraction_estimee_mediane": 0.86,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.984
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.88,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.895,
+        "fraction_estimee_mediane": 0.88,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.984
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.9,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.924,
+        "fraction_estimee_mediane": 0.9,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.984
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.92,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.947,
+        "fraction_estimee_mediane": 0.92,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.984
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.94,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.964,
+        "fraction_estimee_mediane": 0.94,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.984
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.96,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.976,
+        "fraction_estimee_mediane": 0.96,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 0.98,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.983,
+        "fraction_estimee_mediane": 0.98,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.0,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.986,
+        "fraction_estimee_mediane": 1.0,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.02,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.984,
+        "fraction_estimee_mediane": 1.02,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.04,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.978,
+        "fraction_estimee_mediane": 1.04,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.06,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.969,
+        "fraction_estimee_mediane": 1.06,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.08,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.957,
+        "fraction_estimee_mediane": 1.08,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.1,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.942,
+        "fraction_estimee_mediane": 1.1,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.12,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.922,
+        "fraction_estimee_mediane": 1.12,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.14,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.901,
+        "fraction_estimee_mediane": 1.14,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.16,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.874,
+        "fraction_estimee_mediane": 1.16,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.18,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.843,
+        "fraction_estimee_mediane": 1.18,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.2,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.809,
+        "fraction_estimee_mediane": 1.2,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.22,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.772,
+        "fraction_estimee_mediane": 1.22,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.24,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.727,
+        "fraction_estimee_mediane": 1.24,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.26,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.679,
+        "fraction_estimee_mediane": 1.26,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.28,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.631,
+        "fraction_estimee_mediane": 1.28,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.3,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.575,
+        "fraction_estimee_mediane": 1.3,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.984
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.32,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.516,
+        "fraction_estimee_mediane": 1.32,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.984
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.34,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.457,
+        "fraction_estimee_mediane": 1.34,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.36,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.392,
+        "fraction_estimee_mediane": 1.36,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.984
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.38,
+        "part_confirmee": 0.5,
+        "compte_median": 1,
+        "score_median": 0.331,
+        "fraction_estimee_mediane": 1.38,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.4,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.27,
+        "fraction_estimee_mediane": 1.4,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.42,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.21,
+        "fraction_estimee_mediane": 1.42,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.44,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.152,
+        "fraction_estimee_mediane": 1.44,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.46,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.099,
+        "fraction_estimee_mediane": 1.46,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.48,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.055,
+        "fraction_estimee_mediane": 1.48,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.5,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.025,
+        "fraction_estimee_mediane": 1.5,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.52,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.049,
+        "fraction_estimee_mediane": 1.52,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.54,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.09,
+        "fraction_estimee_mediane": 1.54,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.56,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.128,
+        "fraction_estimee_mediane": 1.56,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.58,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.163,
+        "fraction_estimee_mediane": 1.58,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.6,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.203,
+        "fraction_estimee_mediane": 1.6,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.62,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.249,
+        "fraction_estimee_mediane": 1.62,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.64,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.298,
+        "fraction_estimee_mediane": 1.64,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.66,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.35,
+        "fraction_estimee_mediane": 1.66,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.68,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.402,
+        "fraction_estimee_mediane": 1.68,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.7,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.455,
+        "fraction_estimee_mediane": 1.7,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.72,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.511,
+        "fraction_estimee_mediane": 1.72,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.74,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.567,
+        "fraction_estimee_mediane": 1.74,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.76,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.62,
+        "fraction_estimee_mediane": 1.76,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.986
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.78,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.675,
+        "fraction_estimee_mediane": 1.78,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 5.0,
+        "fraction_vraie": 1.8,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.726,
+        "fraction_estimee_mediane": 1.8,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.985
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.4,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.11,
+        "fraction_estimee_mediane": 0.405,
+        "estimee_en_butee": 0.25,
+        "score_continu_median": 0.854
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.42,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.094,
+        "fraction_estimee_mediane": 0.425,
+        "estimee_en_butee": 0.14,
+        "score_continu_median": 0.865
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.44,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.083,
+        "fraction_estimee_mediane": 0.445,
+        "estimee_en_butee": 0.115,
+        "score_continu_median": 0.874
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.46,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.076,
+        "fraction_estimee_mediane": 0.465,
+        "estimee_en_butee": 0.035,
+        "score_continu_median": 0.879
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.48,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.075,
+        "fraction_estimee_mediane": 0.48,
+        "estimee_en_butee": 0.01,
+        "score_continu_median": 0.886
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.5,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.07,
+        "fraction_estimee_mediane": 0.498,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.893
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.52,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.069,
+        "fraction_estimee_mediane": 0.52,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.891
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.54,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.084,
+        "fraction_estimee_mediane": 0.545,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.893
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.56,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.092,
+        "fraction_estimee_mediane": 0.555,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.893
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.58,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.127,
+        "fraction_estimee_mediane": 0.585,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.897
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.6,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.157,
+        "fraction_estimee_mediane": 0.6,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.896
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.62,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.186,
+        "fraction_estimee_mediane": 0.615,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.892
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.64,
+        "part_confirmee": 0.05,
+        "compte_median": 1,
+        "score_median": 0.241,
+        "fraction_estimee_mediane": 0.643,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.895
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.66,
+        "part_confirmee": 0.15,
+        "compte_median": 1,
+        "score_median": 0.278,
+        "fraction_estimee_mediane": 0.66,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.889
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.68,
+        "part_confirmee": 0.47,
+        "compte_median": 1,
+        "score_median": 0.329,
+        "fraction_estimee_mediane": 0.68,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.89
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.7,
+        "part_confirmee": 0.82,
+        "compte_median": 1,
+        "score_median": 0.381,
+        "fraction_estimee_mediane": 0.7,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.887
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.72,
+        "part_confirmee": 0.96,
+        "compte_median": 1,
+        "score_median": 0.433,
+        "fraction_estimee_mediane": 0.72,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.887
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.74,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.471,
+        "fraction_estimee_mediane": 0.74,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.878
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.76,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.541,
+        "fraction_estimee_mediane": 0.765,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.883
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.78,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.579,
+        "fraction_estimee_mediane": 0.78,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.877
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.8,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.632,
+        "fraction_estimee_mediane": 0.8,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.876
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.82,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.682,
+        "fraction_estimee_mediane": 0.82,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.878
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.84,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.728,
+        "fraction_estimee_mediane": 0.84,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.877
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.86,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.766,
+        "fraction_estimee_mediane": 0.86,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.879
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.88,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.796,
+        "fraction_estimee_mediane": 0.88,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.875
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.9,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.824,
+        "fraction_estimee_mediane": 0.9,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.878
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.92,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.849,
+        "fraction_estimee_mediane": 0.92,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.884
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.94,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.867,
+        "fraction_estimee_mediane": 0.94,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.884
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.96,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.878,
+        "fraction_estimee_mediane": 0.96,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.885
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 0.98,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.886,
+        "fraction_estimee_mediane": 0.98,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.891
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.0,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.891,
+        "fraction_estimee_mediane": 1.0,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.893
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.02,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.886,
+        "fraction_estimee_mediane": 1.023,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.89
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.04,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.887,
+        "fraction_estimee_mediane": 1.04,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.895
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.06,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.874,
+        "fraction_estimee_mediane": 1.06,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.892
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.08,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.868,
+        "fraction_estimee_mediane": 1.08,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.896
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.1,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.853,
+        "fraction_estimee_mediane": 1.1,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.895
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.12,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.832,
+        "fraction_estimee_mediane": 1.12,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.891
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.14,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.819,
+        "fraction_estimee_mediane": 1.14,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.894
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.16,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.791,
+        "fraction_estimee_mediane": 1.16,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.892
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.18,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.762,
+        "fraction_estimee_mediane": 1.185,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.893
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.2,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.728,
+        "fraction_estimee_mediane": 1.2,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.886
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.22,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.687,
+        "fraction_estimee_mediane": 1.225,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.887
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.24,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.656,
+        "fraction_estimee_mediane": 1.235,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.883
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.26,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.613,
+        "fraction_estimee_mediane": 1.26,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.887
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.28,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.562,
+        "fraction_estimee_mediane": 1.28,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.882
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.3,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.515,
+        "fraction_estimee_mediane": 1.3,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.881
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.32,
+        "part_confirmee": 0.995,
+        "compte_median": 1,
+        "score_median": 0.461,
+        "fraction_estimee_mediane": 1.32,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.881
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.34,
+        "part_confirmee": 0.935,
+        "compte_median": 1,
+        "score_median": 0.408,
+        "fraction_estimee_mediane": 1.34,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.882
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.36,
+        "part_confirmee": 0.625,
+        "compte_median": 1,
+        "score_median": 0.348,
+        "fraction_estimee_mediane": 1.36,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.883
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.38,
+        "part_confirmee": 0.28,
+        "compte_median": 1,
+        "score_median": 0.3,
+        "fraction_estimee_mediane": 1.38,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.884
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.4,
+        "part_confirmee": 0.05,
+        "compte_median": 1,
+        "score_median": 0.248,
+        "fraction_estimee_mediane": 1.4,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.882
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.42,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.196,
+        "fraction_estimee_mediane": 1.42,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.884
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.44,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.147,
+        "fraction_estimee_mediane": 1.44,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.884
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.46,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.105,
+        "fraction_estimee_mediane": 1.46,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.887
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.48,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.085,
+        "fraction_estimee_mediane": 1.48,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.888
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.5,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.067,
+        "fraction_estimee_mediane": 1.5,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.89
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.52,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.077,
+        "fraction_estimee_mediane": 1.52,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.891
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.54,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.101,
+        "fraction_estimee_mediane": 1.54,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.891
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.56,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.126,
+        "fraction_estimee_mediane": 1.555,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.894
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.58,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.165,
+        "fraction_estimee_mediane": 1.58,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.894
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.6,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.202,
+        "fraction_estimee_mediane": 1.6,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.896
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.62,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.233,
+        "fraction_estimee_mediane": 1.62,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.892
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.64,
+        "part_confirmee": 0.015,
+        "compte_median": 2,
+        "score_median": 0.28,
+        "fraction_estimee_mediane": 1.64,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.892
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.66,
+        "part_confirmee": 0.005,
+        "compte_median": 2,
+        "score_median": 0.314,
+        "fraction_estimee_mediane": 1.66,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.891
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.68,
+        "part_confirmee": 0.015,
+        "compte_median": 2,
+        "score_median": 0.366,
+        "fraction_estimee_mediane": 1.68,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.892
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.7,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.42,
+        "fraction_estimee_mediane": 1.7,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.889
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.72,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.462,
+        "fraction_estimee_mediane": 1.72,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.885
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.74,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.505,
+        "fraction_estimee_mediane": 1.738,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.889
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.76,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.556,
+        "fraction_estimee_mediane": 1.76,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.886
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.78,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.604,
+        "fraction_estimee_mediane": 1.78,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.886
+      },
+      {
+        "bruit": 15.0,
+        "fraction_vraie": 1.8,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.653,
+        "fraction_estimee_mediane": 1.8,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.882
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.4,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.132,
+        "fraction_estimee_mediane": 0.365,
+        "estimee_en_butee": 0.45,
+        "score_continu_median": 0.636
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.42,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.126,
+        "fraction_estimee_mediane": 0.423,
+        "estimee_en_butee": 0.375,
+        "score_continu_median": 0.648
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.44,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.122,
+        "fraction_estimee_mediane": 0.435,
+        "estimee_en_butee": 0.33,
+        "score_continu_median": 0.659
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.46,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.111,
+        "fraction_estimee_mediane": 0.473,
+        "estimee_en_butee": 0.135,
+        "score_continu_median": 0.687
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.48,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.108,
+        "fraction_estimee_mediane": 0.485,
+        "estimee_en_butee": 0.135,
+        "score_continu_median": 0.696
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.5,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.105,
+        "fraction_estimee_mediane": 0.5,
+        "estimee_en_butee": 0.095,
+        "score_continu_median": 0.709
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.52,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.107,
+        "fraction_estimee_mediane": 0.515,
+        "estimee_en_butee": 0.07,
+        "score_continu_median": 0.706
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.54,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.11,
+        "fraction_estimee_mediane": 0.538,
+        "estimee_en_butee": 0.025,
+        "score_continu_median": 0.711
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.56,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.12,
+        "fraction_estimee_mediane": 0.56,
+        "estimee_en_butee": 0.01,
+        "score_continu_median": 0.705
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.58,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.123,
+        "fraction_estimee_mediane": 0.585,
+        "estimee_en_butee": 0.015,
+        "score_continu_median": 0.717
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.6,
+        "part_confirmee": 0.01,
+        "compte_median": 1,
+        "score_median": 0.153,
+        "fraction_estimee_mediane": 0.605,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.712
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.62,
+        "part_confirmee": 0.015,
+        "compte_median": 1,
+        "score_median": 0.167,
+        "fraction_estimee_mediane": 0.62,
+        "estimee_en_butee": 0.005,
+        "score_continu_median": 0.715
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.64,
+        "part_confirmee": 0.025,
+        "compte_median": 1,
+        "score_median": 0.183,
+        "fraction_estimee_mediane": 0.635,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.709
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.66,
+        "part_confirmee": 0.085,
+        "compte_median": 1,
+        "score_median": 0.224,
+        "fraction_estimee_mediane": 0.655,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.701
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.68,
+        "part_confirmee": 0.205,
+        "compte_median": 1,
+        "score_median": 0.261,
+        "fraction_estimee_mediane": 0.685,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.697
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.7,
+        "part_confirmee": 0.285,
+        "compte_median": 1,
+        "score_median": 0.28,
+        "fraction_estimee_mediane": 0.695,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.692
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.72,
+        "part_confirmee": 0.505,
+        "compte_median": 1,
+        "score_median": 0.331,
+        "fraction_estimee_mediane": 0.715,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.685
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.74,
+        "part_confirmee": 0.69,
+        "compte_median": 1,
+        "score_median": 0.375,
+        "fraction_estimee_mediane": 0.74,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.683
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.76,
+        "part_confirmee": 0.815,
+        "compte_median": 1,
+        "score_median": 0.409,
+        "fraction_estimee_mediane": 0.755,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.684
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.78,
+        "part_confirmee": 0.93,
+        "compte_median": 1,
+        "score_median": 0.448,
+        "fraction_estimee_mediane": 0.775,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.679
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.8,
+        "part_confirmee": 0.99,
+        "compte_median": 1,
+        "score_median": 0.494,
+        "fraction_estimee_mediane": 0.805,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.675
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.82,
+        "part_confirmee": 0.98,
+        "compte_median": 1,
+        "score_median": 0.508,
+        "fraction_estimee_mediane": 0.815,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.67
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.84,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.553,
+        "fraction_estimee_mediane": 0.84,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.68
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.86,
+        "part_confirmee": 0.995,
+        "compte_median": 1,
+        "score_median": 0.584,
+        "fraction_estimee_mediane": 0.858,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.671
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.88,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.609,
+        "fraction_estimee_mediane": 0.875,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.671
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.9,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.629,
+        "fraction_estimee_mediane": 0.9,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.67
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.92,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.65,
+        "fraction_estimee_mediane": 0.915,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.68
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.94,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.674,
+        "fraction_estimee_mediane": 0.945,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.696
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.96,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.679,
+        "fraction_estimee_mediane": 0.953,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.689
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 0.98,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.684,
+        "fraction_estimee_mediane": 0.983,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.69
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.0,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.695,
+        "fraction_estimee_mediane": 1.005,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.7
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.02,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.693,
+        "fraction_estimee_mediane": 1.025,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.7
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.04,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.696,
+        "fraction_estimee_mediane": 1.04,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.705
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.06,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.682,
+        "fraction_estimee_mediane": 1.065,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.699
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.08,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.684,
+        "fraction_estimee_mediane": 1.08,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.711
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.1,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.67,
+        "fraction_estimee_mediane": 1.1,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.707
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.12,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.659,
+        "fraction_estimee_mediane": 1.12,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.708
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.14,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.647,
+        "fraction_estimee_mediane": 1.135,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.705
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.16,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.624,
+        "fraction_estimee_mediane": 1.16,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.707
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.18,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.597,
+        "fraction_estimee_mediane": 1.18,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.709
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.2,
+        "part_confirmee": 0.995,
+        "compte_median": 1,
+        "score_median": 0.573,
+        "fraction_estimee_mediane": 1.203,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.7
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.22,
+        "part_confirmee": 1.0,
+        "compte_median": 1,
+        "score_median": 0.542,
+        "fraction_estimee_mediane": 1.22,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.699
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.24,
+        "part_confirmee": 0.99,
+        "compte_median": 1,
+        "score_median": 0.506,
+        "fraction_estimee_mediane": 1.24,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.696
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.26,
+        "part_confirmee": 0.965,
+        "compte_median": 1,
+        "score_median": 0.466,
+        "fraction_estimee_mediane": 1.263,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.68
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.28,
+        "part_confirmee": 0.9,
+        "compte_median": 1,
+        "score_median": 0.43,
+        "fraction_estimee_mediane": 1.28,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.692
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.3,
+        "part_confirmee": 0.77,
+        "compte_median": 1,
+        "score_median": 0.388,
+        "fraction_estimee_mediane": 1.305,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.675
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.32,
+        "part_confirmee": 0.61,
+        "compte_median": 1,
+        "score_median": 0.353,
+        "fraction_estimee_mediane": 1.32,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.685
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.34,
+        "part_confirmee": 0.395,
+        "compte_median": 1,
+        "score_median": 0.31,
+        "fraction_estimee_mediane": 1.34,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.687
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.36,
+        "part_confirmee": 0.26,
+        "compte_median": 1,
+        "score_median": 0.279,
+        "fraction_estimee_mediane": 1.36,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.676
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.38,
+        "part_confirmee": 0.1,
+        "compte_median": 1,
+        "score_median": 0.242,
+        "fraction_estimee_mediane": 1.375,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.685
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.4,
+        "part_confirmee": 0.03,
+        "compte_median": 1,
+        "score_median": 0.201,
+        "fraction_estimee_mediane": 1.4,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.684
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.42,
+        "part_confirmee": 0.02,
+        "compte_median": 1,
+        "score_median": 0.172,
+        "fraction_estimee_mediane": 1.42,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.698
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.44,
+        "part_confirmee": 0.0,
+        "compte_median": 1,
+        "score_median": 0.14,
+        "fraction_estimee_mediane": 1.44,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.69
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.46,
+        "part_confirmee": 0.005,
+        "compte_median": 2,
+        "score_median": 0.128,
+        "fraction_estimee_mediane": 1.458,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.695
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.48,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.115,
+        "fraction_estimee_mediane": 1.48,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.69
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.5,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.111,
+        "fraction_estimee_mediane": 1.505,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.702
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.52,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.114,
+        "fraction_estimee_mediane": 1.525,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.698
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.54,
+        "part_confirmee": 0.005,
+        "compte_median": 2,
+        "score_median": 0.112,
+        "fraction_estimee_mediane": 1.533,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.707
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.56,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.133,
+        "fraction_estimee_mediane": 1.555,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.709
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.58,
+        "part_confirmee": 0.005,
+        "compte_median": 2,
+        "score_median": 0.167,
+        "fraction_estimee_mediane": 1.575,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.709
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.6,
+        "part_confirmee": 0.005,
+        "compte_median": 2,
+        "score_median": 0.183,
+        "fraction_estimee_mediane": 1.605,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.696
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.62,
+        "part_confirmee": 0.005,
+        "compte_median": 2,
+        "score_median": 0.212,
+        "fraction_estimee_mediane": 1.62,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.707
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.64,
+        "part_confirmee": 0.005,
+        "compte_median": 2,
+        "score_median": 0.231,
+        "fraction_estimee_mediane": 1.64,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.713
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.66,
+        "part_confirmee": 0.055,
+        "compte_median": 2,
+        "score_median": 0.273,
+        "fraction_estimee_mediane": 1.66,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.703
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.68,
+        "part_confirmee": 0.025,
+        "compte_median": 2,
+        "score_median": 0.297,
+        "fraction_estimee_mediane": 1.685,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.702
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.7,
+        "part_confirmee": 0.015,
+        "compte_median": 2,
+        "score_median": 0.334,
+        "fraction_estimee_mediane": 1.7,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.704
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.72,
+        "part_confirmee": 0.035,
+        "compte_median": 2,
+        "score_median": 0.364,
+        "fraction_estimee_mediane": 1.725,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.694
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.74,
+        "part_confirmee": 0.03,
+        "compte_median": 2,
+        "score_median": 0.41,
+        "fraction_estimee_mediane": 1.745,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.688
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.76,
+        "part_confirmee": 0.015,
+        "compte_median": 2,
+        "score_median": 0.438,
+        "fraction_estimee_mediane": 1.763,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.702
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.78,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.469,
+        "fraction_estimee_mediane": 1.785,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.682
+      },
+      {
+        "bruit": 30.0,
+        "fraction_vraie": 1.8,
+        "part_confirmee": 0.0,
+        "compte_median": 2,
+        "score_median": 0.512,
+        "fraction_estimee_mediane": 1.8,
+        "estimee_en_butee": 0.0,
+        "score_continu_median": 0.694
+      }
+    ],
+    "par_bruit": [
+      {
+        "bruit": 0.0,
+        "fraction_basse": 0.68,
+        "fraction_haute": 1.38,
+        "largeur": 0.7,
+        "spires_apres_120_pas_au_plus_bas": 81.6,
+        "spires_apres_120_pas_au_plus_haut": 165.6,
+        "erreur_de_spires_au_plus_bas": 38.4,
+        "pas_de_feuille_implique_um_bas": 144.2,
+        "pas_de_feuille_implique_um_haut": 292.6
+      },
+      {
+        "bruit": 5.0,
+        "fraction_basse": 0.68,
+        "fraction_haute": 1.38,
+        "largeur": 0.7,
+        "spires_apres_120_pas_au_plus_bas": 81.6,
+        "spires_apres_120_pas_au_plus_haut": 165.6,
+        "erreur_de_spires_au_plus_bas": 38.4,
+        "pas_de_feuille_implique_um_bas": 144.2,
+        "pas_de_feuille_implique_um_haut": 292.6
+      },
+      {
+        "bruit": 15.0,
+        "fraction_basse": 0.7,
+        "fraction_haute": 1.36,
+        "largeur": 0.66,
+        "spires_apres_120_pas_au_plus_bas": 84.0,
+        "spires_apres_120_pas_au_plus_haut": 163.2,
+        "erreur_de_spires_au_plus_bas": 36.0,
+        "pas_de_feuille_implique_um_bas": 146.3,
+        "pas_de_feuille_implique_um_haut": 284.3
+      },
+      {
+        "bruit": 30.0,
+        "fraction_basse": 0.72,
+        "fraction_haute": 1.32,
+        "largeur": 0.6,
+        "spires_apres_120_pas_au_plus_bas": 86.4,
+        "spires_apres_120_pas_au_plus_haut": 158.4,
+        "erreur_de_spires_au_plus_bas": 33.6,
+        "pas_de_feuille_implique_um_bas": 150.8,
+        "pas_de_feuille_implique_um_haut": 276.4
+      }
+    ],
+    "fraction_la_plus_basse_confirmee": 0.68,
+    "largeur_maximale": 0.7,
+    "un_pas_confirme_garantit_une_feuille": false,
+    "erreur_de_spires_maximale_sur_120": 38.4
+  },
+  "aveuglement": {
+    "barre_de_linterstice": 0.3311,
+    "lignes": [
+      {
+        "fraction_vraie": 0.5,
+        "compte_entier": 3,
+        "score_entier": 0.0,
+        "passe_la_barre": false,
+        "fraction_estimee": 0.5,
+        "score_continu": 1.0,
+        "en_butee": false
+      },
+      {
+        "fraction_vraie": 0.7,
+        "compte_entier": 1,
+        "score_entier": 0.427,
+        "passe_la_barre": true,
+        "fraction_estimee": 0.7,
+        "score_continu": 1.0,
+        "en_butee": false
+      },
+      {
+        "fraction_vraie": 0.82,
+        "compte_entier": 1,
+        "score_entier": 0.781,
+        "passe_la_barre": true,
+        "fraction_estimee": 0.82,
+        "score_continu": 1.0,
+        "en_butee": false
+      },
+      {
+        "fraction_vraie": 1.0,
+        "compte_entier": 1,
+        "score_entier": 1.0,
+        "passe_la_barre": true,
+        "fraction_estimee": 1.0,
+        "score_continu": 1.0,
+        "en_butee": false
+      },
+      {
+        "fraction_vraie": 1.3,
+        "compte_entier": 1,
+        "score_entier": 0.583,
+        "passe_la_barre": true,
+        "fraction_estimee": 1.3,
+        "score_continu": 1.0,
+        "en_butee": false
+      }
+    ],
+    "le_compteur_ne_descend_jamais_sous_un": true,
+    "un_retard_passe_la_barre": true,
+    "lestimateur_continu_le_voit": true
+  },
+  "ce_que_la_bande_ne_distingue_pas": {
+    "bruit": 15.0,
+    "pas_impliques_um": [
+      146.3,
+      284.3
+    ],
+    "pas_publies_um": {
+      "nominal": 173.0,
+      "que_la_matiere_montre": 198.9,
+      "que_la_matiere_montre_au_bord": 214.05,
+      "des_transferts_humains": 164.0
+    },
+    "dans_la_bande": {
+      "nominal": true,
+      "que_la_matiere_montre": true,
+      "que_la_matiere_montre_au_bord": true,
+      "des_transferts_humains": true
+    },
+    "la_bande_confond_les_pas_publies": true,
+    "combien_de_pas_publies_confondus": 4,
+    "ecart_publie_par_99_en_pourcent": 21.3,
+    "largeur_de_la_bande_en_pourcent": 94.3
+  },
+  "ce_que_102_pouvait_dire_de_la_forme": {
+    "cellules": 112,
+    "pas_max": 6,
+    "courbe": [
+      {
+        "pas": 1,
+        "survie_basse": 0.429,
+        "survie_haute": 0.929,
+        "largeur": 0.5
+      },
+      {
+        "pas": 2,
+        "survie_basse": 0.304,
+        "survie_haute": 0.75,
+        "largeur": 0.446
+      },
+      {
+        "pas": 3,
+        "survie_basse": 0.161,
+        "survie_haute": 0.589,
+        "largeur": 0.429
+      },
+      {
+        "pas": 4,
+        "survie_basse": 0.071,
+        "survie_haute": 0.464,
+        "largeur": 0.393
+      },
+      {
+        "pas": 5,
+        "survie_basse": 0.036,
+        "survie_haute": 0.393,
+        "largeur": 0.357
+      },
+      {
+        "pas": 6,
+        "survie_basse": 0.018,
+        "survie_haute": 0.321,
+        "largeur": 0.304
+      }
+    ],
+    "largeur_maximale": 0.5,
+    "risque_par_pas_compatible_de": 0.056,
+    "risque_par_pas_compatible_a": 0.546,
+    "ces_lignes_ne_decident_pas_la_forme": true,
+    "pourquoi": "une médiane par bande ne se désagrège pas : de m on ne tire que a2 <= m <= a3"
+  },
+  "prix_de_la_mesure_de_portee": {
+    "en_couverture_28x3x10": {
+      "marches": 84,
+      "etapes": 840,
+      "secondes_par_cube": 15.4,
+      "plancher_par_segment_s": 3.76,
+      "secondes_par_etape": 22.92,
+      "heures": 5.35
+    },
+    "en_profondeur_28x1x30": {
+      "marches": 28,
+      "etapes": 840,
+      "secondes_par_cube": 15.4,
+      "plancher_par_segment_s": 3.76,
+      "secondes_par_etape": 22.92,
+      "heures": 5.35
+    }
+  },
+  "resume": {
+    "un_pas_confirme_garantit_une_feuille": false,
+    "fraction_la_plus_basse_confirmee": 0.68,
+    "erreur_de_spires_maximale_sur_120": 38.4,
+    "largeur_maximale_de_la_bande": 0.7,
+    "le_compteur_ne_descend_jamais_sous_un": true,
+    "un_retard_passe_la_barre": true,
+    "lestimateur_continu_le_voit": true,
+    "combien_de_pas_publies_confondus": 4,
+    "la_portee_est_la_prochaine_depense": false
+  }
+}

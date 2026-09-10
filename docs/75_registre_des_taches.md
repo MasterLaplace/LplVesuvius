@@ -4553,6 +4553,100 @@ renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la bat
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
 
 ---
+##### ⛔⛔⛔ UN PAS CONFIRMÉ N'EST PAS UNE FEUILLE — la bande d'acceptation, et son biais silencieux
+
+> Mesure : `src/nappe/un_pas_confirme_nest_pas_une_feuille.py` (28 contrôles) →
+> `docs/mesures/un_pas_confirme_nest_pas_une_feuille.json`. Figure :
+> `src/figures/figure_un_pas_confirme_nest_pas_une_feuille.py` (20 contrôles).
+> Primitives ajoutées à `src/nappe/combien_dinterstices_traverses.py` (43 contrôles).
+> Document : [`104`](104_un_pas_confirme_nest_pas_une_feuille.md), le 2026-09-10.
+
+![un pas confirmé n'est pas une feuille](images/104_un_pas_confirme_nest_pas_une_feuille.png)
+
+La suite annoncée après `103` était de payer trente pas au prix plein. En construisant l'instrument
+qui devait la rendre lisible — un **registre** des feuilles franchies, l'équivalent gratuit de ce que
+l'humain dit quand il corrige un transfert, *« tu es sur la spire n »* — le contrôle de calibration a
+**réfuté l'instrument au premier lancement**, et en le réfutant il a montré un défaut bien plus lourd
+dans le critère de `102` lui-même.
+
+⛔⛔⛔ **Le compteur d'interstices ne sait pas dire « moins d'une feuille ».** Sa famille de gabarits
+est `{1, 2, 3}` — « zéro » n'y est pas exprimable, délibérément — donc son compte ne vaut **jamais**
+moins de un.
+
+| feuille réellement franchie | compte entier | score | passe la barre ? | estimateur continu |
+|---:|---:|---:|:---:|---:|
+| 0,50 | 3 | 0,000 | non | **0,500** |
+| 0,70 | **1** | 0,427 | **OUI** | **0,700** |
+| 0,82 | **1** | 0,781 | **OUI** | **0,820** |
+| 1,00 | 1 | 1,000 | OUI | 1,000 |
+| 1,30 | **1** | 0,583 | **OUI** | **1,300** |
+
+##### ⛔⛔⛔ La bande d'acceptation, mesurée sur des segments dont on connaît la réponse
+
+| bruit σ | fraction basse | haute | largeur | spires après 120 pas | pas de feuille impliqué |
+|---:|---:|---:|---:|:---:|:---:|
+| 0 | **0,68** | 1,38 | 0,70 | **82 à 166** | 144 à 293 µm |
+| 15 | 0,70 | 1,36 | 0,66 | 84 à 163 | 146 à 284 µm |
+| 30 | 0,72 | 1,32 | 0,60 | 86 à 158 | 151 à 276 µm |
+
+> ⛔ **Un pas confirmé ne garantit pas qu'une feuille a été franchie.**
+
+⭐⭐⭐ **Et c'est la conséquence ENCHAÎNÉE qui décide — la même arithmétique que `103`, mordant dans
+l'autre sens, et c'est pire.** `103` chiffrait un **taux d'échec** : une chute se **voit**, le
+marcheur s'arrête. Ici c'est un **biais** — cent vingt pas **tous confirmés** peuvent n'avoir franchi
+que **82 spires**, soit **38** de moins que le compte affiché, sans qu'aucune vérification n'ait rien
+signalé. *Une chute se voit ; un retard s'accumule en silence.*
+
+⚠⚠ **Et la bande ne dépend presque pas du bruit** — 0,70 de large à σ = 0 contre 0,60 à σ = 30, et
+elle se **resserre** quand le bruit monte. Ce n'est donc pas une limite du scan qu'un meilleur volume
+lèverait : c'est le pouvoir de discrimination de la **forme** des gabarits.
+
+##### ⛔ Le critère est aveugle à la question ouverte depuis `99`
+
+À σ = 15 il accepte un pas de feuille de **146 à 284 µm**, soit **±94,3 %** — donc il confond les
+**4** pas publiés par la campagne : nominal **173,0**, matière **198,9**, bord **214,1**, transferts
+humains **164,0**. L'écart de **21,3 %** que `99` laisse ouvert est quatre fois plus étroit que la
+tolérance du critère. **On ne peut pas argumenter sur le pas à partir d'un pas confirmé.**
+
+##### ⭐⭐ Le remplaçant existe, et il est calibré sur une prédiction extérieure
+
+`feuilles_franchies` estime la fraction sur une famille **continue**, donc elle peut valoir moins de
+un. Avancer du pas nominal le long du rayon sur une pile à `θ` franchit `cos θ` feuille ;
+l'estimateur le rend à **0,0022** près sur 0°, 20°, 35° et 50°.
+
+⚠⚠ **Deux gardes pour deux pannes, et aucune ne couvre l'autre.** *Sous* la fenêtre le score ne garde
+rien — 0,20 feuille ressort à 0,350 avec un score de **0,996** — seule la **butée** le dit ; *loin
+au-delà* l'argmax est arbitraire et n'est **pas** en butée, c'est le **score** qui écarte.
+
+⚠ **Correction d'une de mes affirmations** : j'avais écrit que ce score ne pouvait pas servir de
+garde. Son p99 sur bruit pur vaut **0,4018** contre **0,3475** pour la famille à trois gabarits, soit
+**+15,6 %** — il garde, avec la barre de **sa** forme. Ma première comparaison mettait une médiane en
+face d'un p99.
+
+##### ⭐⭐⭐ Un agrégat ne se désagrège pas, et ça a coûté sept heures
+
+`102` a marché 224 fois en ne gardant qu'une **médiane par bande**. D'une médiane de quatre on ne
+tire que `a2 <= m <= a3`, donc la survie n'y est bornée qu'à **0,5** près, et un risque par pas
+**constant** de **0,056** à **0,546** y est également compatible.
+
+| pas | survie basse | survie haute | largeur |
+|---:|---:|---:|---:|
+| 1 | 0,429 | 0,929 | 0,500 |
+| 3 | 0,161 | 0,589 | 0,429 |
+| 6 | 0,018 | 0,321 | 0,304 |
+
+##### ⚠ Ce que la tranche change dans l'ordre des choses
+
+- ⛔ **La portée de `102` n'est plus la prochaine dépense** : mesurer la forme de la survie d'un
+  critère juste à 32 % près, ce serait mesurer la mauvaise chose. Le registre passe devant.
+- ⚠ Elle est chiffrée d'avance à **5,35 h** pour 840 étapes, en couverture (28 × 3 × 10, **84**
+  marches) comme en profondeur (28 × 1 × 30, **28** marches) — à budget égal la couverture rend
+  **trois fois plus** de chutes.
+- ⚠ Ce que la bande donne est la **tolérance du critère**, pas le biais effectif du rouleau : `102`
+  n'a pas gardé ses segments. Et **rien ne dit encore** si le retard est un biais (qui coûte `n`) ou
+  un jitter de moyenne nulle (qui coûte `√n`) — c'est exactement ce que le registre continu mesurera.
+
+---
 ##### ⛔⛔ LE CUBE LU MOINS CHER — l'économie est RÉFUTÉE par le corpus, et par ma propre sonde
 
 > Mesure : `src/nappe/le_cube_lu_moins_cher.py` (22 contrôles) →

@@ -152,6 +152,112 @@ def accord(v: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     return combien, sur, scores.max(axis=1), marge
 
 
+# ⚠⚠⚠ LE PLANCHER DE `accord`, ET C'EST `104` QUI L'A MESURE. La famille de gabarits est
+# {1, 2, 3}, donc `combien` ne peut JAMAIS valoir moins de un : un segment qui ne franchit que
+# 0,82 feuille rend « 1 interstice » avec un score de 0,781, tres au-dessus de la barre du bruit
+# pur (0,331). Le compteur voit donc un SAUT (2 ou 3) et il est AVEUGLE A UN RETARD. Enchaine,
+# un retard systematique est bien pire qu'une chute : une chute se voit, un retard s'accumule en
+# silence. C'est pour ca que la famille CONTINUE ci-dessous existe.
+F_MIN = 0.35
+F_MAX = 3.2
+PAS_DE_F = 0.005
+
+
+def feuilles_franchies(v: np.ndarray, f_min: float = F_MIN, f_max: float = F_MAX,
+                       pas: float = PAS_DE_F
+                       ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """La fraction de feuille que le segment a franchie, le score de l'ajustement, et la butee.
+
+    ⭐⭐⭐ ELLE REMPLACE `accord` POUR LA QUANTITE, ET ELLE EXISTE PARCE QUE LE COMPTEUR ENTIER NE
+    SAIT PAS DIRE « MOINS D'UNE FEUILLE ». La famille est continue, donc la reponse est un reel :
+    0,82 se lit 0,82 au lieu de 1. Sur une pile fabriquee oblique la valeur rendue est cos(theta)
+    a trois decimales pres pour quatre obliquites — c'est la calibration, et elle est ce qui
+    transforme cette fonction d'une idee en un instrument.
+
+    ⚠⚠⚠ SON SCORE PORTE LA BARRE DE SA PROPRE FORME, ET C'EST UNE CORRECTION DE CE QUE J'AVAIS
+    ECRIT ICI. J'avais affirme qu'une famille continue « trouve toujours une frequence qui colle,
+    donc son score reste haut sur du bruit », donc qu'il ne pouvait pas servir de garde. La mesure
+    dit autre chose : sur du bruit pur son p99 vaut 0,396 contre 0,349 pour la famille a trois
+    gabarits — plus haut, comme mille cent quarante-deux gabarits doivent l'etre, mais de treize
+    pour cent seulement. Son score EST donc utilisable, a condition de prendre la barre de SA
+    forme et non celle de `accord` (0,331), qui serait trop permissive. C'est exactement la regle
+    que `103` a deja ecrite pour le nul du tenseur.
+
+    ⚠⚠ ET LA BUTEE EST RENDUE, PAS AVALEE. Une fraction qui tombe sur `f_min` ou `f_max` dit « au
+    plus » ou « au moins », jamais « exactement » : sur du bruit pur la valeur sature en haut de
+    la fenetre une fois sur deux. La publier comme une mesure ferait passer une limite de FENETRE
+    pour une limite de MATIERE, ce que ce depot a deja paye en `99`.
+
+    ⚠⚠ ELLE REFUSE SOUS `f_min` PLUTOT QUE D'ECRETER. Sous un tiers de periode un segment n'a
+    plus la forme d'une oscillation mais celle d'une pente, et la fraction n'y est pas mesurable :
+    la borne rend donc NaN, qui se lit « injugeable », et non `f_min`, qui se lirait comme une
+    mesure. Un ecretage y ferait passer un segment sans forme pour un tiers de feuille.
+    """
+    v = np.atleast_2d(np.asarray(v, dtype=np.float64))
+    z = v - v.mean(axis=1, keepdims=True)
+    n = np.linalg.norm(z, axis=1, keepdims=True)
+    z = z / np.maximum(n, 1e-12)
+    t = np.linspace(0.0, 1.0, v.shape[1])
+    fs = np.arange(f_min, f_max + 1e-9, pas)
+    g = np.cos(2 * np.pi * fs[:, None] * t[None, :])
+    g = g - g.mean(axis=1, keepdims=True)
+    g = g / np.maximum(np.linalg.norm(g, axis=1, keepdims=True), 1e-12)
+    # ⚠ Les DEUX polarites, comme `accord` : un segment qui part d'un interstice a le profil
+    # oppose, et n'en essayer qu'une rendrait la moitie des segments injugeables.
+    sc = np.maximum(z @ g.T, z @ (-g.T))
+    i = sc.argmax(axis=1)
+    f = fs[i]
+    meilleur = sc[np.arange(len(z)), i]
+    # ⚠ Un profil plat n'a pas de fraction : sa norme est nulle apres centrage, donc toute
+    # correlation est arbitraire. Il est declare injugeable au lieu de recevoir un argmax.
+    plat = (n[:, 0] <= 1e-12)
+    f = np.where(plat, np.nan, f)
+    meilleur = np.where(plat, np.nan, meilleur)
+    en_butee = (~plat) & ((i == 0) | (i == len(fs) - 1))
+    return f, meilleur, en_butee
+
+
+def nul_de_lestimateur_continu(tirages: int = 400, graine: int = 57) -> dict:
+    """Ce que la famille CONTINUE rend sur du bruit pur, a cote de ce que rend celle a trois.
+
+    ⭐⭐⭐ ELLE EXISTE PARCE QUE MA PREMIERE VERSION DE CE FICHIER AFFIRMAIT UNE DIRECTION SANS LA
+    MESURER. J'avais ecrit que le score continu etait inutilisable comme garde ; la comparaison
+    des deux nuls, p99 contre p99, dit qu'il l'est a 13 % pres. Ce qui compte n'est donc pas
+    d'ecarter ce score mais de lui donner la barre de SA forme.
+
+    ⚠ La fraction rendue sur du bruit est publiee aussi, et pour une raison precise : si elle se
+    concentrait autour de UN, l'estimateur serait biaise vers la reponse attendue, ce qui est le
+    pire defaut possible pour un instrument dont tout l'objet est de detecter un ecart a un.
+    """
+    r = np.random.default_rng(graine)
+    out = {}
+    for sigma in (2.0, 10.0, 40.0):
+        v = r.normal(100.0, sigma, size=(tirages, ECHANTILLONS))
+        f, sc, bu = feuilles_franchies(v)
+        _, _, sd, _ = accord(v)
+        out[f"sigma_{sigma:.0f}"] = {
+            "continue_median": round(float(np.median(sc)), 4),
+            "continue_p99": round(float(np.percentile(sc, 99)), 4),
+            "trois_gabarits_median": round(float(np.median(sd)), 4),
+            "trois_gabarits_p99": round(float(np.percentile(sd, 99)), 4),
+            "fraction_mediane": round(float(np.median(f)), 3),
+            "part_en_butee": round(float(np.mean(bu)), 3),
+        }
+    pires = [x for k, x in out.items() if k.startswith("sigma_")]
+    out["barre_de_la_famille_continue"] = round(max(x["continue_p99"] for x in pires), 4)
+    out["barre_de_la_famille_a_trois"] = round(max(x["trois_gabarits_p99"] for x in pires), 4)
+    # ⭐⭐ LE VERDICT EST UNE COMPARAISON, PAS UNE AFFIRMATION : la barre de `98` est-elle trop
+    # permissive pour ce score-la ? Si oui, chaque famille porte la barre de sa forme.
+    out["la_barre_a_trois_gabarits_serait_trop_permissive"] = bool(
+        out["barre_de_la_famille_continue"] > out["barre_de_la_famille_a_trois"])
+    out["de_combien_en_pourcent"] = round(
+        100.0 * (out["barre_de_la_famille_continue"] / out["barre_de_la_famille_a_trois"] - 1.0), 1)
+    # ⚠ Un estimateur biaise vers un serait pire qu'un estimateur bruyant.
+    out["sa_fraction_nest_pas_biaisee_vers_un"] = bool(
+        not any(0.9 <= x["fraction_mediane"] <= 1.1 for x in pires))
+    return out
+
+
 def accord_du_bruit_pur(tirages: int = 400, graine: int = 91) -> dict:
     """Ce que le filtre rend sur du BRUIT PUR : le modele nul, fabrique.
 
@@ -652,6 +758,76 @@ def verifier() -> int:
     plat = np.full((1, ECHANTILLONS), 90.0)
     v("un profil exactement constant ressort MUET, pas « zéro interstice »",
       bool(profil_muet(plat, bruit_du_profil(plat))[0]))
+
+    # === LE PLANCHER DU COMPTEUR ENTIER, ET L'ESTIMATEUR CONTINU QUI LE LEVE ================
+    # ⚠⚠⚠ LE PLANCHER EST MESURE, PAS LU. La famille est {1, 2, 3}, donc un segment qui ne
+    # franchit qu'une FRACTION de feuille ne peut pas etre compte comme tel — et pire, il passe
+    # la barre du bruit. Ce controle est ce qui a fait naitre `feuilles_franchies`.
+    t = np.linspace(0.0, 1.0, ECHANTILLONS)
+    partiel = (100.0 + 40.0 * np.cos(2 * np.pi * 0.82 * t)).reshape(1, -1)
+    combien, _, score, _ = accord(partiel)
+    barre = max(x["p99"] for x in accord_du_bruit_pur().values())
+    v("le compteur entier ne sait pas dire « moins d'une feuille »",
+      int(combien[0]) == 1, f"{int(combien[0])} pour 0,82 feuille franchie")
+    v("... et ce segment PASSE quand même la barre du bruit pur",
+      float(score[0]) > barre, f"score {float(score[0]):.3f} contre une barre de {barre:.3f}")
+    # ⭐⭐⭐ L'ESTIMATEUR CONTINU, LUI, REND LA FRACTION — a trois decimales sur un profil propre.
+    frac, _, _ = feuilles_franchies(partiel)
+    v("l'estimateur continu rend la fraction au lieu de l'arrondir à un",
+      abs(float(frac[0]) - 0.82) < 0.01, f"{float(frac[0]):.3f} pour 0,82")
+    # ⭐⭐⭐ ET IL EST CALIBRE SUR UNE PREDICTION EXTERIEURE : avancer du pas nominal le long du
+    # rayon sur une pile a theta franchit cos(theta) feuille. Quatre obliquites, pas une.
+    ecarts = []
+    for th in (0.0, 20.0, 35.0, 50.0):
+        c = float(np.cos(np.deg2rad(th)))
+        fr, _, _ = feuilles_franchies(
+            (100.0 + 40.0 * np.cos(2 * np.pi * c * t)).reshape(1, -1))
+        ecarts.append(abs(float(fr[0]) - c))
+    v("... et il reproduit cos θ sur quatre obliquités fabriquées",
+      max(ecarts) < 0.005, f"écart maximal {max(ecarts):.4f}")
+    # ⚠⚠ IL REFUSE SOUS LA BORNE PLUTOT QUE D'ECRETER : un profil plat n'a pas de fraction.
+    fr, sc, bu = feuilles_franchies(np.full((1, ECHANTILLONS), 90.0))
+    v("un profil plat est déclaré injugeable, pas ramené à la borne",
+      not np.isfinite(fr[0]) and not np.isfinite(sc[0]) and not bool(bu[0]), f"{fr[0]}")
+    # ⚠⚠⚠ ET LA BUTEE EST RENDUE : une fraction posee sur le bord de la fenetre dit « au plus »,
+    # jamais « exactement ». La lire comme une mesure serait la butee de `99`.
+    fr, _, bu = feuilles_franchies(
+        (100.0 + 40.0 * np.cos(2 * np.pi * 3.5 * t)).reshape(1, -1))
+    v("une fraction au-delà de la fenêtre est signalée en butée",
+      bool(bu[0]) and abs(float(fr[0]) - F_MAX) < 1e-9,
+      f"{float(fr[0]):.3f} en butée {bool(bu[0])}")
+    # ⭐⭐⭐ ET C'EST DU COTE BAS QUE LA BUTEE EST LA SEULE GARDE, ce qui est le controle qui
+    # compte : un segment ne franchissant que 0,20 feuille ressort a 0,350 avec un score de
+    # 0,996 — parfait. Le score ne l'attrape PAS ; seul le drapeau de butee le dit. Un appelant
+    # qui ignorerait ce drapeau publierait un tiers de feuille pour un cinquieme, en confiance.
+    fr, sc, bu = feuilles_franchies(
+        (100.0 + 40.0 * np.cos(2 * np.pi * 0.20 * t)).reshape(1, -1))
+    v("... et sous la fenêtre le SCORE ne garde rien : seule la butée le dit",
+      bool(bu[0]) and float(sc[0]) > 0.9 and abs(float(fr[0]) - F_MIN) < 1e-9,
+      f"{float(fr[0]):.3f} au score {float(sc[0]):.3f}, en butée {bool(bu[0])}")
+    # ⚠⚠ LOIN AU-DELA, C'EST L'INVERSE : l'ajustement n'accroche plus rien, donc l'argmax est
+    # arbitraire et n'est PAS en butee — c'est le SCORE qui doit l'ecarter. Deux pannes, deux
+    # gardes, et aucune des deux ne couvre l'autre.
+    fr, sc, bu = feuilles_franchies(
+        (100.0 + 40.0 * np.cos(2 * np.pi * 6.0 * t)).reshape(1, -1))
+    v("loin au-delà de la fenêtre, c'est le score qui écarte et non la butée",
+      float(sc[0]) < 0.15 and not bool(bu[0]),
+      f"score {float(sc[0]):.3f}, en butée {bool(bu[0])}")
+    # ⚠⚠⚠ CHAQUE FAMILLE PORTE LA BARRE DE SA FORME, et c'est une CORRECTION de ce que j'avais
+    # affirme : j'avais ecrit que le score continu ne pouvait pas garder, en comparant une
+    # mediane a un p99. Compare p99 a p99, il garde — a 13 % pres.
+    nc = nul_de_lestimateur_continu(tirages=300)
+    v("la barre de la famille continue est PLUS HAUTE que celle à trois gabarits",
+      nc["la_barre_a_trois_gabarits_serait_trop_permissive"] is True,
+      f"{nc['barre_de_la_famille_continue']} contre {nc['barre_de_la_famille_a_trois']} "
+      f"(+{nc['de_combien_en_pourcent']} %)")
+    v("... mais du même ordre, donc son score reste utilisable comme garde",
+      nc["de_combien_en_pourcent"] < 50.0, f"+{nc['de_combien_en_pourcent']} %")
+    # ⚠ Et sa fraction sur du bruit ne doit PAS se concentrer sur un : un estimateur biaise vers
+    # la reponse attendue serait le pire defaut possible ici.
+    v("... et sa fraction sur du bruit n'est pas biaisée vers la réponse attendue",
+      nc["sa_fraction_nest_pas_biaisee_vers_un"] is True,
+      f"médiane {nc['sigma_10']['fraction_mediane']}")
 
     r = mesurer(cellules=40, bandes_max=2)
     if "message" in r:

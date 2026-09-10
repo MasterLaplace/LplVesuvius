@@ -5247,6 +5247,75 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/104_un_pas_confirme_nest_pas_une_feuille.md
+- **lignes** : 166
+- **nature** : RESULTAT
+  (l'audit du critère de vérification de `102` : sur quelle plage de « feuille réellement
+  franchie » un pas ressort-il confirmé, et ce que cette plage coûte enchaînée sur cent vingt
+  spires.)
+- **résumé** : ⛔⛔⛔ **Un pas confirmé ne garantit pas qu'une feuille a été franchie.** Le critère
+  de `102` confirme tout ce qui franchit entre **0,68** et **1,38** feuille — un pas de feuille
+  implicite de **144 à 293 µm** là où le nominal est 173. ⭐⭐⭐ Enchaîné, cela vaut **82 spires**
+  pour 120 pas **tous confirmés**, soit **38** de moins que le compte affiché, sans qu'aucune
+  vérification n'ait rien signalé. ⭐⭐ Le remplaçant existe et il est **calibré** : une famille
+  continue rend la fraction et reproduit `cos θ` à **0,0022** près sur quatre obliquités.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **Un BIAIS est pire qu'un TAUX D'ÉCHEC, et c'est la même arithmétique enchaînée que
+    `103` mordant dans l'autre sens.** `103` chiffrait `1 − (1 − p)^k` : une chute se **voit**,
+    le marcheur s'arrête. Ici rien ne s'arrête et rien n'est signalé — *une chute se voit, un
+    retard s'accumule en silence*.
+  - ⛔⛔⛔ **Une quantité qui ne peut pas prendre la valeur signalant la panne n'est pas un
+    instrument.** La famille de gabarits de `98` est `{1, 2, 3}`, donc le compte ne vaut jamais
+    moins de un : il voit un **saut** et il est **aveugle à un retard**. Un segment ne franchissant
+    que **0,82** feuille rend « 1 interstice » au score **0,781**, contre une barre de 0,3311.
+  - ⚠⚠ **La bande ne dépend presque pas du bruit** — 0,70 de large à σ = 0 contre 0,60 à σ = 30,
+    et elle se **resserre** quand le bruit monte. Ce n'est donc pas une limite du scan qu'un
+    meilleur volume lèverait : c'est le pouvoir de discrimination de la **forme** des gabarits.
+  - ⛔ **Le critère est aveugle à la question ouverte depuis `99`** : à σ = 15 il accepte un pas de
+    feuille de **146 à 284 µm**, soit **±94,3 %**, donc il confond les **4** pas publiés par la
+    campagne — nominal 173,0, matière 198,9, bord 214,1, transferts humains 164,0. L'écart de
+    **21,3 %** que `99` laisse ouvert est quatre fois plus étroit que la tolérance du critère : on
+    ne peut pas argumenter sur le pas à partir d'un pas confirmé.
+  - ⭐⭐ **Un instrument se calibre sur une prédiction EXTÉRIEURE, pas sur une impression.**
+    Avancer du pas nominal le long du rayon sur une pile à `θ` franchit `cos θ` feuille ;
+    l'estimateur continu le rend à 0,0022 près sur 0°, 20°, 35° et 50°. C'est cette prédiction qui
+    le transforme d'idée en instrument.
+  - ⚠⚠ **Deux gardes pour deux pannes, et aucune ne couvre l'autre.** *Sous* la fenêtre le score
+    ne garde rien — 0,20 feuille ressort à 0,350 avec un score de **0,996** — et seule la **butée**
+    le dit ; *loin au-delà* l'argmax est arbitraire et n'est **pas** en butée, c'est le **score**
+    qui écarte (0,050 à six périodes).
+  - ⭐⭐⭐ **Un agrégat ne se désagrège pas, et ça a coûté sept heures.** `102` a marché 224 fois
+    en ne gardant qu'une médiane par bande ; ses étapes existaient et n'ont pas été écrites.
+    D'une médiane de quatre on ne tire que `a2 <= m <= a3`, donc la survie n'y est bornée qu'à
+    **0,5** près — un risque par pas **constant** de **0,056** à **0,546** y est également
+    compatible. Aucune relecture ne rend ce qui n'a pas été écrit.
+  - ⚠ **Ce fichier ne lit pas une seule fois le volume distant**, et c'est sa force : la question
+    porte sur le **critère**, donc elle se tranche sur des segments dont on connaît la réponse.
+    Un instrument se calibre sur du connu ; c'est un **bord** qui se compte sur le corpus (`103`).
+  - ⚠ **La prochaine dépense n'est plus la portée** : mesurer la forme de la survie d'un critère
+    juste à 32 % près, ce serait mesurer la mauvaise chose. Elle est chiffrée d'avance à **5,35 h**
+    pour 840 étapes, en couverture (28 × 3 × 10, 84 marches) comme en profondeur (28 × 1 × 30,
+    28 marches) — à budget égal la couverture rend **trois fois plus** de chutes.
+- **rétractations / corrections internes** :
+  - §6 : ⚠⚠ **j'avais affirmé, sans la mesurer, que le score de la famille continue ne pouvait pas
+    servir de garde** — « une famille continue trouve toujours une fréquence qui colle ». La mesure
+    dit l'inverse : son p99 sur bruit pur vaut **0,4018** contre **0,3475** pour la famille à trois
+    gabarits, soit **+15,6 %** et non un ordre de grandeur. Il garde, avec la barre de **sa**
+    forme. ⚠ Ma première comparaison mettait une **médiane** en face d'un **p99**.
+  - §2 : ⛔ **le registre entier des interstices, que ce fichier devait publier, est abandonné** :
+    plancher à un du côté du retard, et tautologiquement égal à `k` si on l'exprime en
+    distance/pas mesuré, puisque le marcheur avance d'un pas mesuré par construction.
+  - ⚠ **Le garde des chiffres que j'ai écrit acceptait 0,68 arrondi en « 1 »**, forme qu'on trouve
+    dans n'importe quel document — un garde satisfait pour la mauvaise raison. L'écriture arrondie
+    n'est plus acceptée qu'au-delà de dix, où elle garde l'identité du nombre.
+  - ⚠ **Une variable nommée `fr` masquait la fonction `fr()` du module** et cassait des lignes
+    situées **plus haut** que son affectation, la closure voyant une locale non liée.
+- **preuve de lecture intégrale** :
+  - l. 92 (après 55 % du fichier) : `⭐⭐⭐ **C'est la même arithmétique que `103` et elle mord dans l'autre sens.**`
+  - l. 160 : `uv run python src/nappe/combien_dinterstices_traverses.py --verifier`
+
+---
+
 ### docs/103_le_cube_lu_moins_cher.md
 - **lignes** : 124
 - **nature** : RESULTAT
@@ -5556,7 +5625,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
 ---
 
 ### docs/98_combien_dinterstices_traverses.md
-- **lignes** : 151
+- **lignes** : 169
 - **nature** : RESULTAT
   (le premier critere dont le seuil vient de la matiere et non d'un maillage : combien
   d'interstices separent une cellule de sa voisine, lu par filtre adapte contre un modele nul.)
@@ -5608,6 +5677,13 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - §7 : ⚠ **l'estimateur de bruit prenait une différence PREMIÈRE**, qui lit aussi la **pente**
     du signal cherché (6,9 niveaux pour une amplitude de 40). Corrigé en différence **seconde**,
     insensible à une pente (0,3 niveau).
+  - ⛔⛔⛔ **`104` a réfuté le COMPTEUR comme mesure de quantité, et la cause est dans la famille
+    même : `{1, 2, 3}` ne peut pas exprimer « moins d'une feuille ».** Un segment franchissant 0,82
+    feuille rend « 1 interstice » au score **0,781**, donc il PASSE la barre. Le compteur reste
+    juste pour ce qu'il fait — « la matière a-t-elle répondu, et a-t-elle sauté une feuille » — et
+    `feuilles_franchies`, ajoutée à côté de lui, répond à « de combien » sur une famille
+    **continue**, calibrée sur `cos θ` à 0,0022 près. ⚠ Chaque famille porte la barre de sa forme :
+    **0,4018** pour la continue contre **0,3475** pour celle à trois gabarits.
   - batterie : ⚠ deux contrôles à moi mal formulés, corrigés plutôt que contournés — j'affirmais
     que le score ne dépend pas de l'**amplitude** à bruit fixe (faux : à SNR 3 il baisse
     légitimement ; l'invariance porte sur l'**échelle**), et j'exigeais une marge supérieure à
@@ -6804,7 +6880,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 6690
+- **lignes** : 6784
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)

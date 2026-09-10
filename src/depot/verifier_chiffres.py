@@ -2124,6 +2124,91 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             out.append(("cellules appariees lues a tous les pas",
                         [f"**{v['cellules']}**", f"{v['cellules']}"], cub.name))
 
+    # ⛔⛔⛔ UN PAS CONFIRME N'EST PAS UNE FEUILLE (`104`), ET DEUX APPARIEMENTS SONT OBLIGATOIRES.
+    # (1) La fraction basse ne voyage JAMAIS sans sa consequence enchainee : « 0,68 feuille »
+    # parait inoffensif, « 38 spires manquantes sur 120 » EST le fait qui refute le critere.
+    # (2) Et elle ne voyage jamais sans la fraction HAUTE : une bande n'est une bande que par ses
+    # deux bords, et la seule basse se lirait comme un biais mesure alors que c'est une TOLERANCE.
+    pcf = _source(racine, "un_pas_confirme_nest_pas_une_feuille.json")
+    if pcf.exists():
+        d = json.loads(pcf.read_text())
+        for x in d.get("bande", {}).get("par_bruit", []):
+            if x.get("aucune_fraction_confirmee"):
+                continue
+            b = f"{x['bruit']:.0f}"
+            for cle, nom in (("fraction_basse", "fraction basse confirmee a sigma"),
+                             ("fraction_haute", "fraction haute confirmee a sigma"),
+                             ("largeur", "largeur de la bande a sigma"),
+                             ("spires_apres_120_pas_au_plus_bas",
+                              "spires apres 120 pas au plus bas a sigma"),
+                             ("spires_apres_120_pas_au_plus_haut",
+                              "spires apres 120 pas au plus haut a sigma"),
+                             ("pas_de_feuille_implique_um_bas",
+                              "pas de feuille implique bas a sigma"),
+                             ("pas_de_feuille_implique_um_haut",
+                              "pas de feuille implique haut a sigma")):
+                val = x[cle]
+                txt = f"{val}".replace(".", ",")
+                formes = [f"**{txt}**", txt, f"{val}"]
+                # ⚠ Un compte de spires se redige aussi arrondi a l'entier, et une fraction en
+                # pourcentage : accepter les deux evite d'accuser un texte correct, ce que le
+                # garde a deja fait une fois.
+                if "spires" in cle:
+                    formes = [f"**{val:.0f}**", f"{val:.0f}"] + formes
+                if cle.startswith("pas_de_feuille"):
+                    formes = [f"**{val:.0f}**", f"{val:.0f}"] + formes
+                out.append((f"{nom} {b}", formes, pcf.name))
+        s104 = d.get("resume", {})
+        for cle, nom in (("fraction_la_plus_basse_confirmee", "fraction la plus basse confirmee"),
+                         ("erreur_de_spires_maximale_sur_120",
+                          "spires manquantes sur cent vingt"),
+                         ("largeur_maximale_de_la_bande", "largeur maximale de la bande"),
+                         ("combien_de_pas_publies_confondus", "pas publies confondus")):
+            if cle not in s104 or s104[cle] is None:
+                continue
+            val = s104[cle]
+            txt = f"{val}".replace(".", ",")
+            formes = [f"**{txt}**", txt, f"{val}"]
+            # ⚠⚠⚠ L'ECRITURE ARRONDIE N'EST ACCEPTEE QUE SI ELLE RESTE DISCRIMINANTE. Arrondir
+            # 0,68 a l'entier donne « 1 », qu'on trouve dans n'importe quel document : le garde
+            # passerait alors pour la mauvaise raison, ce qui est pire qu'un garde absent. Au-dela
+            # de dix l'arrondi garde l'identite du nombre, en-deca il la detruit.
+            if isinstance(val, float) and abs(val) >= 10.0:
+                formes = [f"**{val:.0f}**", f"{val:.0f}"] + formes
+            out.append((nom, formes, pcf.name))
+        for x in d.get("aveuglement", {}).get("lignes", []):
+            # ⚠ Surtout PAS `fr` : ce nom est celui de la fonction de formatage du module, et
+            # l'affecter ici en ferait une locale de `collecter` — donc non liee pour la closure
+            # `ajoute`, qui casse alors des CENTAINES de lignes PLUS HAUT que cette boucle.
+            frv = f"{x['fraction_vraie']}".replace(".", ",")
+            for cle, nom in (("compte_entier", "compte entier pour la fraction"),
+                             ("score_entier", "score du compteur pour la fraction"),
+                             ("fraction_estimee", "fraction estimee pour la fraction")):
+                val = x[cle]
+                txt = f"{val}".replace(".", ",")
+                out.append((f"{nom} {frv}", [f"**{txt}**", txt, f"{val}"], pcf.name))
+        cbd = d.get("ce_que_la_bande_ne_distingue_pas", {})
+        for cle, nom in (("ecart_publie_par_99_en_pourcent", "ecart publie par 99 en pourcent"),
+                         ("largeur_de_la_bande_en_pourcent", "largeur de la bande en pourcent")):
+            if cle not in cbd:
+                continue
+            val = cbd[cle]
+            txt = f"{val}".replace(".", ",")
+            out.append((nom, [f"**{txt} %**", f"{txt} %", f"{txt}%", f"**{txt}**", txt], pcf.name))
+        c102 = d.get("ce_que_102_pouvait_dire_de_la_forme", {})
+        for cle, nom in (("risque_par_pas_compatible_de", "risque par pas compatible de"),
+                         ("risque_par_pas_compatible_a", "risque par pas compatible a"),
+                         ("largeur_maximale", "largeur de la borne tiree des lignes de 102")):
+            if cle not in c102:
+                continue
+            val = c102[cle]
+            txt = f"{val}".replace(".", ",")
+            out.append((nom, [f"**{txt}**", txt, f"{val}"], pcf.name))
+        for cle, x in d.get("prix_de_la_mesure_de_portee", {}).items():
+            out.append((f"heures de la mesure de portee {cle}",
+                        [f"**{x['heures']}**".replace(".", ","),
+                         f"{x['heures']}".replace(".", ","), f"{x['heures']}"], pcf.name))
+
     # ⭐⭐⭐ COMBIEN DE PAS LA MATIERE PORTE (`102`), ET DEUX APPARIEMENTS SONT OBLIGATOIRES.
     # (1) Le nombre de pas de la MATIERE ne voyage jamais sans celui du NAIF : « 2,00 pas » est un
     # nombre nu, « 2,00 contre 0,00 » EST le resultat, et c'est leur ecart qui dit que la voie

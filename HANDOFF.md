@@ -5,10 +5,10 @@ l'historique, daté, et se lit ensuite.
 
 ---
 
-## ⭐⭐⭐⭐ REPRISE — 2026-09-09
+## ⭐⭐⭐⭐ REPRISE — 2026-09-10
 
-**Dix tranches d'une même campagne, `94` à `103`, et elles ont UNE conclusion — plus, désormais,
-UN acquis.** L'arbre est propre, les gardes vertes, 105 fiches sans dérive, aucun artefact
+**Onze tranches d'une même campagne, `94` à `104`, et elles ont UNE conclusion — plus, désormais,
+UN acquis.** L'arbre est propre, les gardes vertes, 106 fiches sans dérive, aucun artefact
 versionné sans appelant. Ce
 bloc remplace le précédent comme état courant ; tout ce qui suit est l'historique, daté.
 
@@ -34,11 +34,45 @@ bandes. Il porte **583,9 µm**, soit **3,4 feuilles nominales**, sans **aucune**
 ⭐ Et le témoin **n'est pas un homme de paille** : sur un empilement fabriqué **droit** il atteint
 le plafond exactement comme la matière ; c'est l'**obliquité** de `100`/`101` qui le fait tomber.
 
-⛔⛔ **ET `103` A CHERCHÉ À LEVER CETTE BORNE MOINS CHER, SANS Y PARVENIR.** Échantillonner le cube
+⛔⛔⛔ **ET `104` A RÉFUTÉ LE CRITÈRE QUI PORTAIT TOUT.** En construisant le REGISTRE des feuilles
+franchies — l'équivalent gratuit de ce que l'humain dit quand il corrige un transfert, *« tu es sur
+la spire n »* — le contrôle de calibration a réfuté l'instrument **au premier lancement**, et en le
+réfutant il a montré un défaut bien plus lourd : **le critère de `102` confirme tout ce qui franchit
+entre 0,68 et 1,38 feuille**. Un pas de feuille implicite de **144 à 293 µm** là où le nominal est
+173, et il **confond les 4 pas publiés** par la campagne — dont l'écart de 21,3 % que `99` laisse
+ouvert, quatre fois plus étroit que la tolérance du critère.
+
+⭐⭐⭐ **ET LA CONSÉQUENCE ENCHAÎNÉE MORD DANS L'AUTRE SENS QUE `103`, CE QUI EST PIRE.** `103`
+chiffrait un **taux d'échec** : une chute se **voit**, le marcheur s'arrête. Ici c'est un **biais** —
+cent vingt pas **tous confirmés** peuvent n'avoir franchi que **82 spires**, soit **38 de moins** que
+le compte affiché, sans qu'aucune vérification n'ait rien signalé. *Une chute se voit ; un retard
+s'accumule en silence.* ⚠⚠ Et la bande ne dépend **presque pas du bruit** (0,70 à σ = 0, 0,60 à
+σ = 30) : ce n'est pas une limite du scan qu'un meilleur volume lèverait, c'est le pouvoir de
+discrimination de la **forme** des gabarits — famille `{1, 2, 3}`, donc « moins d'une feuille » est
+**inexprimable**.
+
+⭐⭐ **LE REMPLAÇANT EXISTE ET IL EST CALIBRÉ** : `feuilles_franchies` (dans `98`, à côté du compteur
+qu'elle remplace) estime la fraction sur une famille **continue**, donc elle peut valoir moins de un,
+et elle reproduit `cos θ` à **0,0022** près sur quatre obliquités fabriquées. ⚠⚠ Deux gardes pour
+deux pannes : **sous** la fenêtre le score ne garde rien (0,20 feuille ressort à 0,350 au score
+0,996) et seule la **butée** le dit ; **loin au-delà** c'est le score qui écarte et la butée ne voit
+rien.
+
+⛔ **CONSÉQUENCE SUR L'ORDRE DES CHOSES : la portée de `102` n'est PLUS la prochaine dépense.**
+Mesurer la forme de la survie d'un critère juste à 32 % près serait mesurer la mauvaise chose. Elle
+reste chiffrée d'avance à **5,35 h** pour 840 étapes — en couverture (28 × 3 × 10, 84 marches) comme
+en profondeur (28 × 1 × 30, 28 marches), et à budget égal la couverture rend **trois fois plus** de
+chutes. ⭐⭐⭐ **Et la leçon générale a coûté sept heures : UN AGRÉGAT NE SE DÉSAGRÈGE PAS.** `102` a
+marché 224 fois en ne gardant qu'une médiane par bande ; d'une médiane de quatre on ne tire que
+`a2 <= m <= a3`, donc la survie n'y est bornée qu'à **0,5** près — un risque par pas **constant** de
+0,056 à 0,546 y est également compatible. Les étapes existaient ; elles n'ont pas été écrites.
+
+⛔⛔ **ET `103` AVAIT CHERCHÉ À LEVER CETTE BORNE MOINS CHER, SANS Y PARVENIR.** Échantillonner le cube
 un voxel sur deux — **même portée** — coûterait **×1,72** moins, mais **7,3 %** des cellules s'en
 écartent de plus de 10° du pas le plus fin, et comme `102` **enchaîne** les pas cela abîme
-**36,5 %** des marches de six pas. La portée de `102` se lèvera donc **au prix plein** (quatorze
-heures pour trente pas) ou pas du tout.
+**36,5 %** des marches de six pas. ⚠ Ce que ce paragraphe concluait — « la portée se lèvera au prix
+plein ou pas du tout » — est **dépassé par `104`** : elle ne se lèvera pas d'abord, le registre passe
+devant.
 
 ⚠⚠⚠ **Et c'est MA PROPRE SONDE qui était tombée dans le piège** : sur **2 bandes** j'avais mesuré
 **0 %** et j'allais adopter l'économie ; sur les **28**, c'est 7,3 %. *Un bord se compte sur le
@@ -63,8 +97,20 @@ que la matière montre, `101` donne la **direction** : *avance de `p(matière)` 
 bord**, là où `99` perdait la périodicité (0,54). ⚠ Ce qui reste hors de portée est
 l'**identité** de la feuille : le tenseur dit *comment elle est posée*, pas *laquelle*.
 
-⚠ Le bloc précédent, daté du 2026-09-03, annonçait un état courant que ces dix tranches ont
+⚠ Le bloc précédent, daté du 2026-09-03, annonçait un état courant que ces onze tranches ont
 dépassé. Il est conservé plus bas, sous son en-tête, parce que ses résultats tiennent.
+
+### ⭐⭐ CE QUI VIENT ENSUITE, ET L'ORDRE EST DÉRIVÉ PLUTÔT QUE CHOISI
+
+1. ⭐⭐⭐ **Le registre continu, sur le vrai volume.** `feuilles_franchies` est calibrée mais elle
+   n'a **aucun appelant en production** : le marcheur de `102` n'accumule rien. Le brancher rend une
+   question que rien n'a encore posée — *après k pas, combien de feuilles ai-je RÉELLEMENT
+   franchies ?* — et sa réponse tranche la seule chose qui décide du graal : le retard est-il un
+   **biais** (qui coûte `n`) ou un **jitter** de moyenne nulle (qui coûte `√n`) ?
+2. ⚠ **Puis seulement la portée**, en couverture (28 × 3 × 10, 84 marches, 5,35 h), parce qu'à
+   budget égal elle rend trois fois plus de chutes que la profondeur.
+3. ⚠⚠ **Et le marcheur devra GARDER ses étapes cette fois.** `102` les a jetées au profit d'une
+   médiane par bande, et sept heures de course sont irrécupérables.
 
 ### ⭐⭐⭐ La question était : QU'EST-CE QUI REMPLACE L'HUMAIN QUI CORRIGE LE TRANSFERT ?
 

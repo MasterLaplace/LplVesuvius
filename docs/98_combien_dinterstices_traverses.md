@@ -140,6 +140,24 @@ rapport signal/bruit vaut 3 et le score baisse légitimement ; l'invariance port
 Et j'exigeais une marge de polarité supérieure à **1,0**, un nombre pris au hasard que la fixture
 rendait à 0,952 — remplacé par un rapport au **nul**, comme le reste du fichier.
 
+## 9. ⛔⛔⛔ Ce que `104` a réfuté ici, et ce qui l'a remplacé
+
+Le compteur ci-dessus mesure **deux** choses qu'on lisait comme une seule : *la matière a-t-elle
+répondu* et *combien d'interstices le segment franchit*. La première tient. **La seconde est
+réfutée par [`104`](104_un_pas_confirme_nest_pas_une_feuille.md)**, et la cause est dans la famille
+elle-même : `{1, 2, 3}` ne peut pas exprimer « moins d'une feuille », donc le compte ne vaut jamais
+moins de un. Un segment ne franchissant que **0,82** feuille rend « 1 interstice » avec un score de
+**0,781** — au-dessus de la barre de **0,3311** — donc il ressort **confirmé**.
+
+⭐⭐ **`feuilles_franchies` le remplace pour la quantité**, sur une famille **continue** : elle rend
+la fraction, donc elle peut valoir moins de un, et elle reproduit `cos θ` à **0,0022** près sur
+quatre obliquités fabriquées. ⚠ Chaque famille porte la barre de **sa** forme — **0,4018** pour la
+continue contre **0,3475** pour celle à trois gabarits, mesuré sur le même bruit pur.
+
+⚠⚠ **Deux gardes, deux pannes, et aucune ne couvre l'autre.** *Sous* la fenêtre le score ne garde
+rien (0,20 feuille ressort à 0,350 avec un score de **0,996**) et seule la **butée** le dit ; *loin
+au-delà* l'argmax est arbitraire, n'est **pas** en butée, et c'est le **score** qui écarte.
+
 ## Reproduire
 
 ```
