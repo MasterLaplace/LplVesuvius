@@ -4,7 +4,7 @@
 
 # Les faits, et ce qu'ils valent aujourd'hui
 
-**149 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **137** établi, **5** borné, **4** réfuté, **3** rétracté, **0** ouvert.
+**150 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **138** établi, **5** borné, **4** réfuté, **3** rétracté, **0** ouvert.
 
 ## R1 — 20 faits
 
@@ -81,7 +81,7 @@
 | `R3-F19` | **la chaîne radiale converge six tours et casse au septième** ; ce qui décide est la portée, pas le pas | officiel + 6 spires `gen_neighbor` : 4/7 convergent, 7ᵉ +1,475 ; pas 0,5 → 6/7 ; optimum en U, bassin 0,25–0,5 ; portée = `neighbor_exit_count` × pas ; repousse libre : casse au 3ᵉ tour | établi | `43` §1–6 · `spire_suivante.sh`, `table_chaine.py` |
 | `R3-F20` | **la chaîne avance d'une nappe à la fois, et s'érode** | 113 µm entre nappes (100–138) ; érosion **15,6 %/tour** sur l'aire utile (58 → 23 % valides) ; ~10 % d'un tour par nappe → une colonne, pas une bande ; rayon refusé (résidu 0,5 mm pour 0,113 d'écart) | établi ; « 4,0 % » rétracté | `44` §1–7 · `geometrie_chaine.py` |
 
-## R4 — 48 faits
+## R4 — 49 faits
 
 | id | fait | valeur | statut | source · producteur |
 |---|---|---|---|---|
@@ -133,6 +133,7 @@
 | `R4-F46` | **la variation d'espacement n'est pas radiale** : un pas fonction du rayon ne rattraperait pas les butées | rho **+0,2895** (p **0,2293**) entre l'espacement médian d'une marche et son rayon, sur 19 marches ; les deux bouts se rencontrent aux mêmes rayons (14,7 mm contre 13,63, p **0,7729**) | borné ; n = 19 marches : cesse de rejeter l'absence d'effet, ne la prouve pas ; `R2-F07` mesure bien +28 % du cœur au bord sur 4 000 cellules | `118` · `nappe/la_fenetre_est_globale_lespacement_est_local.py` |
 | `R4-F47` | **la trajectoire du marcheur n'accumule rien sur vingt pas**, et elle ne tourne pas toujours du même côté | rectitude **0,944** sur la première moitié d'une marche contre **0,942** sur la seconde (Wilcoxon apparié p **0,8906**, 19 marches) ; virage par pas **11,5°** → **13,6°** (p **0,3736**) ; rotation cumulée autour de l'axe médiane **+13,2°** (p **0,1564**) | établi ; n = 19 et vingt pas ≈ 4 mm : cesse de rejeter l'accumulation, ne la réfute pas sur cent transferts ; une marche tourne de 140° entre ses deux moitiés | `119` · `nappe/le_marcheur_derive_t_il.py` |
 | `R4-F48` | **les virages du marcheur se COMPENSENT** : il ne se contente pas de ne pas dériver, il revient | rectitude réelle **0,928** contre **0,811** pour un tirage qui garde exactement le virage de chaque pas et en tire la direction au hasard ; **17 marches sur 19**, Wilcoxon apparié p **0,00141** | établi ; sonde inverse : sur une marche parfaitement droite le témoin répond « rien à compenser » | `119` · `nappe/le_marcheur_derive_t_il.py` |
+| `R4-F49` | **recentrer la fenêtre de pas est exact, l'élargir déplace le modèle nul** — donc le remède que `117` suggérait coûte une recalibration | le nul est invariant par changement d'échelle à **2,6·10⁻¹⁶** près (centres 80 à 400 µm, soit la plage que `118` déduit) ; élargir le déplace de **1,2 σ** pour [0,3 ; 3,0] et **2,0 σ** pour [0,25 ; 4,0], alors que le score calibré vaut `(score − mu)/sd` ; contrôle positif : le nul n'est pas plat, **0,1582 → 0,0925**, soit **24,4 erreurs-types** sur 800 tirages | établi ; élargir n'est pas interdit, mais exige SON nul : réutiliser la barre publiée remettrait le biais vers les courts que `nul_par_candidat` existe pour tuer | `121`, `117`, `118` · `nappe/recentrer_ou_elargir_la_fenetre.py` |
 
 ## R5 — 21 faits
 

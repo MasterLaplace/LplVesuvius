@@ -1,0 +1,92 @@
+{
+ "echantillons": 73,
+ "candidats": 31,
+ "fenetre_publiee": [
+  0.5,
+  2.0
+ ],
+ "pas_nominal_publie_um": 173.0,
+ "le_nul_a_t_il_quelque_chose_a_dire": {
+  "decidable": true,
+  "tirages": 800,
+  "mu_du_plus_court": 0.1582,
+  "mu_du_plus_long": 0.0925,
+  "amplitude": 0.0657,
+  "sd_median": 0.07627,
+  "erreur_type_de_la_moyenne": 0.002697,
+  "amplitude_en_erreurs_types": 24.4,
+  "amplitude_en_sigma": 0.86,
+  "le_nul_est_plat": false
+ },
+ "le_nul_survit_il_au_recentrage": {
+  "decidable": true,
+  "reference_um": 173.0,
+  "sigma_du_nul": 0.07627,
+  "par_nominal": [
+   {
+    "nominal_um": 80.0,
+    "ecart_max": 2.636779683484747e-16,
+    "ecart_en_sigma": 0.0
+   },
+   {
+    "nominal_um": 120.0,
+    "ecart_max": 1.5265566588595902e-16,
+    "ecart_en_sigma": 0.0
+   },
+   {
+    "nominal_um": 173.0,
+    "ecart_max": 0.0,
+    "ecart_en_sigma": 0.0
+   },
+   {
+    "nominal_um": 250.0,
+    "ecart_max": 1.5265566588595902e-16,
+    "ecart_en_sigma": 0.0
+   },
+   {
+    "nominal_um": 400.0,
+    "ecart_max": 1.5265566588595902e-16,
+    "ecart_en_sigma": 0.0
+   }
+  ],
+  "ecart_max": 2.636779683484747e-16,
+  "le_nul_est_invariant": true
+ },
+ "le_nul_survit_il_a_lelargissement": {
+  "decidable": true,
+  "reference": [
+   0.5,
+   2.0
+  ],
+  "sigma_du_nul": 0.07627,
+  "par_fenetre": [
+   {
+    "bas": 0.5,
+    "haut": 2.0,
+    "ecart_max": 0.0,
+    "ecart_en_sigma": 0.0
+   },
+   {
+    "bas": 0.4,
+    "haut": 2.5,
+    "ecart_max": 0.04605,
+    "ecart_en_sigma": 0.6
+   },
+   {
+    "bas": 0.3,
+    "haut": 3.0,
+    "ecart_max": 0.08973,
+    "ecart_en_sigma": 1.18
+   },
+   {
+    "bas": 0.25,
+    "haut": 4.0,
+    "ecart_max": 0.15284,
+    "ecart_en_sigma": 2.0
+   }
+  ],
+  "ecart_max": 0.15284,
+  "ecart_max_en_sigma": 2.0,
+  "le_nul_bouge_a_lelargissement": true
+ }
+}

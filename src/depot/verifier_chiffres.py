@@ -2594,6 +2594,40 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                             [f"**{val}**", f"{val}", f"**{val:+.3f}**", f"{val:+.3f}"],
                             cpt.name))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 121 : RECENTRER EST GRATUIT, ELARGIR NON, ET DEUX APPARIEMENTS LE DISENT.
+    # (1) L'invariance au recentrage ne voyage JAMAIS sans l'ecart a l'elargissement. Seule,
+    # « 2,6e-16 » se lit comme « le nul ne depend de rien », ce qui viderait la mesure ; avec
+    # « 1,2 sigma quand la largeur change », elle se lit pour ce qu'elle est, une propriete des
+    # RAPPORTS.
+    # (2) Et aucun des deux ne voyage sans l'amplitude du nul : un nul plat rendrait zero partout,
+    # donc c'est « 0,1582 -> 0,0925 » qui donne au zero son sens.
+    rof = _source(racine, "recentrer_ou_elargir_la_fenetre.json")
+    if rof.exists():
+        d = json.loads(rof.read_text())
+        c = d.get("le_nul_a_t_il_quelque_chose_a_dire", {})
+        for cle, nom, dec in (("mu_du_plus_court", "nul du plus court de 121", 4),
+                              ("mu_du_plus_long", "nul du plus long de 121", 4),
+                              ("amplitude", "amplitude du nul de 121", 4),
+                              ("sd_median", "sigma du nul de 121", 5),
+                              ("amplitude_en_erreurs_types", "amplitude en erreurs-types de 121", 1),
+                              ("amplitude_en_sigma", "amplitude en sigma de 121", 2)):
+            if c.get(cle) is not None:
+                ajoute(nom, c[cle], dec, rof.name)
+        if c.get("tirages") is not None:
+            v_ = c["tirages"]
+            out.append(("tirages du nul de 121", [f"**{v_}**", f"{v_}"], rof.name))
+        r_ = d.get("le_nul_survit_il_au_recentrage", {})
+        for x in r_.get("par_nominal", []):
+            ajoute(f"centre {x['nominal_um']:.0f} de 121", x["nominal_um"], 0, rof.name,
+                   unites=("µm",))
+        e_ = d.get("le_nul_survit_il_a_lelargissement", {})
+        for x in e_.get("par_fenetre", []):
+            if x["ecart_max"]:
+                ajoute(f"ecart de la fenetre [{x['bas']} ; {x['haut']}] de 121",
+                       x["ecart_max"], 5, rof.name)
+                ajoute(f"ecart en sigma de la fenetre [{x['bas']} ; {x['haut']}] de 121",
+                       x["ecart_en_sigma"], 1, rof.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 119 : LE MARCHEUR NE DERIVE PAS, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) La rectitude reelle ne voyage JAMAIS sans celle du tirage de memes virages. Seule,
     # « 0,928 » se lit comme « la marche est droite », ce qu'une marche qui ne vire pas obtient

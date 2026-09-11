@@ -520,6 +520,17 @@ source. ⚠ **Aucun chiffre publié ne bouge** : les cinq tranches qui relisent 
 JSON octet pour octet. → **un contrôle qui décrit un devoir d'appelant ne vérifie rien tant qu'aucun
 appelant ne le remplit** (`R5-F21`).
 
+**`121` · 2026-09-11 · recentrer ou élargir la fenêtre** (`recentrer_ou_elargir_la_fenetre.py`, hors ligne)
+Avant de payer une re-course pour élargir la fenêtre, mesure ce que chaque changement coûte.
+**Recentrer est exact** : le nul par candidat est invariant par changement d'échelle à
+**2,6·10⁻¹⁶** près, sur toute la plage que `118` déduit (80 à 400 µm), parce qu'il ne dépend que
+des rapports des longueurs à la plus longue. **Élargir ne l'est pas** : le nul se déplace de
+**1,2 σ** pour [0,3 ; 3,0] et **2,0 σ** pour [0,25 ; 4,0], et le score calibré vaut
+`(score − mu)/sd`. ⭐ Contrôle positif : le nul n'est pas plat (**0,1582 → 0,0925**, soit **24,4
+erreurs-types**), sans quoi « pas d'écart » serait une propriété d'une constante. → **la fenêtre
+peut suivre l'espacement local sans rien recalibrer** ; l'élargir exigerait son propre nul, et le
+remède spontané de `117` aurait coûté une re-course et une barre fausse.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

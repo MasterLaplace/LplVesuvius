@@ -5265,6 +5265,22 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   qualité du scan.
 - **lu** : intégralement, 168 lignes, le 2026-09-11
 
+### docs/archive/121_recentrer_ou_elargir_la_fenetre.md
+- **lignes** : 114
+- **nature** : RESULTAT
+  (que coûte chaque façon de changer la fenêtre de pas du marcheur ? mesuré sur le modèle nul,
+  hors ligne, sans figure.)
+- **résumé** : ⭐⭐⭐⭐ **Recentrer est EXACT, élargir DÉPLACE le nul.** Le nul par candidat est
+  invariant par changement d'échelle à **2,6·10⁻¹⁶** près sur 80 à 400 µm — la plage que `118`
+  déduit — parce qu'il ne dépend que des rapports des longueurs à la plus longue
+  (`profils_emboites` rend chaque candidat sur le même nombre d'échantillons). Élargir le déplace
+  de **1,2 σ** pour [0,3 ; 3,0] et **2,0 σ** pour [0,25 ; 4,0], et comme le score calibré vaut
+  `(score − mu)/sd`, c'est la décision qui bouge. ⭐⭐⭐ Contrôle positif : le nul n'est pas plat,
+  **0,1582 → 0,0925**, soit **24,4 erreurs-types** sur 800 tirages. ⚠⚠ L'échelle du contrôle est
+  l'erreur-type de la moyenne et pas σ : la première version comparait à σ et déclarait plat un nul
+  qui varie de vingt-quatre erreurs-types. ⚠ Élargir n'est pas interdit, mais exige SON nul.
+- **lu** : intégralement, 114 lignes, le 2026-09-11
+
 ### docs/archive/120_la_garde_existait_et_personne_ne_lappelait.md
 - **lignes** : 127
 - **nature** : RESULTAT
