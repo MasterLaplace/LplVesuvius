@@ -2237,6 +2237,122 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             txt = f"{val}".replace(".", ",")
             out.append((nom, [f"**{txt}**", txt, f"{val}"], mar.name))
 
+    # ⭐⭐⭐ UN PAS MANQUE N'EST PAS UNE CHUTE (`109`), ET TROIS APPARIEMENTS SONT OBLIGATOIRES.
+    # (1) La mediane des pas CONFIRMES ne voyage jamais sans celle du RUN : publier la premiere
+    # seule remplacerait un nombre trompeur par un autre, et c'est leur ECART qui est le resultat.
+    # (2) Le verdict du groupement ne voyage jamais sans le TAUX de son jeu, parce que le nul est
+    # conservateur — « non groupe » a taux moyen veut surtout dire « pas de puissance ».
+    # (3) Et la survie « si un manque est une chute » ne voyage jamais sans sa jumelle : un seul
+    # des deux nombres se lit comme un fait de la matiere alors qu'il depend d'une hypothese.
+    chu = _source(racine, "un_pas_manque_nest_pas_une_chute.json")
+    if chu.exists():
+        d = json.loads(chu.read_text())
+        for cle, nom in (("marches", "marches lues par 109"),
+                         ("portee_publiee_par_107", "portee publiee par 107")):
+            if cle in d and d[cle] is not None:
+                val = d[cle]
+                txt = f"{val}".replace(".", ",")
+                out.append((nom, [f"**{txt}**", txt, f"{val}"], chu.name))
+        j = d.get("ce_que_la_lecture_consecutive_jette", {})
+        for cle, nom in (("confirment_presque_tout", "marches presque completes"),
+                         ("... et sont creditees de zero ou un", "presque completes jetees"),
+                         ("confirmes_median", "mediane des pas confirmes"),
+                         ("run_median", "mediane du run")):
+            if cle not in j or j[cle] is None:
+                continue
+            val = j[cle]
+            txt = f"{val}".replace(".", ",")
+            out.append((nom, [f"**{txt}**", txt, f"{val}"], chu.name))
+        for quoi, serie in (("confirmes", j.get("distribution_des_confirmes") or []),
+                            ("run", j.get("distribution_du_run") or [])):
+            for k, val in enumerate(serie):
+                out.append((f"marches a {k} {quoi}", [f"**{val}**", f"{val}"], chu.name))
+        pa = d.get("paraphrase", {})
+        for cle, nom in (("taux_de_confirmation", "taux de confirmation global"),
+                         ("run_moyen_observe", "run moyen observe"),
+                         ("run_moyen_si_les_manques_sont_independants",
+                          "run moyen sous lindependance"),
+                         ("ecart_en_pas", "ecart du run en pas")):
+            if cle not in pa or pa[cle] is None:
+                continue
+            val = pa[cle]
+            txt = f"{val}".replace(".", ",")
+            formes = [f"**{txt}**", txt, f"{val}"]
+            if cle.startswith("ecart"):
+                formes += [f"**{val:+.3f}**".replace(".", ","), f"{val:+.3f}".replace(".", ",")]
+            out.append((nom, formes, chu.name))
+        jeux = [("toutes", d.get("groupement", {}), d.get("paraphrase", {}))]
+        for nom_m in ("mode_haut", "mode_bas"):
+            b = (d.get("par_mode") or {}).get(nom_m) or {}
+            if b.get("marches"):
+                jeux.append((nom_m, b.get("groupement", {}), b))
+        for nom_j, g, ctx in jeux:
+            for cle, nom in (("rafale_moyenne_observee", "rafale observee"),
+                             ("rafale_moyenne_sous_lindependance", "rafale sous lindependance"),
+                             ("p_les_manques_sont_groupes", "p du groupement"),
+                             ("p95_du_nul", "p95 du nul du groupement")):
+                if cle not in g or g[cle] is None:
+                    continue
+                val = g[cle]
+                txt = f"{val}".replace(".", ",")
+                out.append((f"{nom} {nom_j}", [f"**{txt}**", txt, f"{val}"], chu.name))
+            for cle, nom in (("taux_de_confirmation", "taux du jeu"),
+                             ("confirmes_median", "confirmes median du jeu"),
+                             ("run_median", "run median du jeu"),
+                             ("marches", "marches du jeu")):
+                if cle not in ctx or ctx[cle] is None:
+                    continue
+                val = ctx[cle]
+                txt = f"{val}".replace(".", ",")
+                out.append((f"{nom} {nom_j}", [f"**{txt}**", txt, f"{val}"], chu.name))
+        nc = d.get("nul_a_taux_commun", {})
+        if "p_avec_un_nul_a_taux_commun" in nc:
+            val = nc["p_avec_un_nul_a_taux_commun"]
+            txt = f"{val}".replace(".", ",")
+            out.append(("p du groupement a taux commun",
+                        [f"**{txt}**", txt, f"{val}"], chu.name))
+        c = d.get("un_manque_coute_t_il_des_feuilles", {})
+        for cle, nom in (("marches_completes", "marches entierement confirmees"),
+                         ("marches_avec_manque", "marches avec manque"),
+                         ("feuilles_par_pas_des_completes", "feuilles par pas des completes"),
+                         ("feuilles_par_pas_des_manquantes", "feuilles par pas des manquantes"),
+                         ("ecart_a_un_des_completes", "ecart a un des completes"),
+                         ("ecart_a_un_des_manquantes", "ecart a un des manquantes"),
+                         ("difference_des_ecarts", "difference des ecarts a un"),
+                         ("p_bilaterale", "p de la difference des ecarts"),
+                         ("le_depassement_des_completes", "depassement des completes")):
+            if cle not in c or c[cle] is None:
+                continue
+            val = c[cle]
+            txt = f"{val}".replace(".", ",")
+            formes = [f"**{txt}**", txt, f"{val}"]
+            if isinstance(val, float) and cle in ("difference_des_ecarts",
+                                                  "le_depassement_des_completes"):
+                formes += [f"**{val:+.3f}**".replace(".", ","),
+                           f"{val:+.3f}".replace(".", ",")]
+            out.append((nom, formes, chu.name))
+        for cle, titre in (("survie", "toutes"), ("survie_du_mode_haut", "mode haut")):
+            sv = d.get(cle) or {}
+            for k2, nom in (("taux_de_confirmation", "taux de la survie"),
+                            ("pas_enchaines", "pas enchaines"),
+                            ("manques_attendus_si_un_manque_est_un_manque",
+                             "manques attendus")):
+                if k2 not in sv or sv[k2] is None:
+                    continue
+                val = sv[k2]
+                txt = f"{val}".replace(".", ",")
+                out.append((f"{nom} {titre}", [f"**{txt}**", txt, f"{val}"], chu.name))
+            if "survie_si_un_manque_est_une_chute" in sv:
+                val = float(sv["survie_si_un_manque_est_une_chute"])
+                # ⚠ Le depot ecrit ses decimales avec une VIRGULE ; sans cette forme, un
+                # chiffre correctement publie serait compte absent.
+                brut = f"{val:.2e}"
+                out.append((f"survie si chute {titre}",
+                            [f"**{brut}**", brut,
+                             f"**{brut.replace('.', ',')}**", brut.replace(".", ","),
+                             f"**{brut.replace('e-0', 'e-')}**", brut.replace("e-0", "e-")],
+                            chu.name))
+
     # ⭐⭐⭐ CE QUI SEPARE LES DEUX POPULATIONS (`108`), ET TROIS APPARIEMENTS SONT OBLIGATOIRES.
     # (1) Une FORCE ne voyage jamais sans son SENS : « le score separe » se lit comme un critere
     # utilisable, et le temoin negatif prouve qu'un seuil de score du TRAJET ecarterait le bon

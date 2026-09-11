@@ -7,6 +7,51 @@ l'historique, daté, et se lit ensuite.
 
 ## ⭐⭐⭐⭐ REPRISE — 2026-09-10
 
+⭐⭐⭐⭐ **ET `109` A RETIRÉ SON FONDEMENT AU CHIFFRE QUI AVAIT DÉCLARÉ LE GRAAL MORT, SANS UNE
+LECTURE DE PLUS.** `102` et `107` publient « la matière porte deux pas confirmés » en comptant les
+pas confirmés **CONSÉCUTIFS DEPUIS LE DÉPART** — un compte **borné par la position du premier
+manque**, donc incapable de dire « cinq sur six ». Sur les **56** marches de `107` : médiane des pas
+**réellement** confirmés **4,0** contre médiane du run **1,0**, et **24** marches confirment **5**
+ou **6** pas sur **6** dont **6** créditées de zéro ou un. *Une marche `O . O O O O` et une marche
+`O . . . . .` sont indiscernables par le nombre publié.*
+
+⭐⭐⭐ **ET LE TEST QUI TRANCHE NE REGARDE JAMAIS LE REGISTRE DU TRAJET.** Une marche qui se PERD
+manque en rafale ; une marche qui rate une confirmation manque au hasard. Mesuré : rafale moyenne
+**2,286** contre **2,213** sous l'indépendance **à même taux** (p95 **2,393**), **p = 0,2829** — et
+dans **aucun** des deux modes les manques ne sont groupés (haut **p = 0,5877** à taux **0,8485**,
+bas **p = 0,2388** à **0,5192**). **Un pas non confirmé n'est pas une chute mais une confirmation
+manquée.**
+
+⭐⭐⭐ **DONC `(1 − risque)^120` NE S'APPLIQUE PAS.** Au taux du mode qui compte, la lecture « chute »
+rend **2.74e-09** de survie ; la lecture « manque » rend **18,2** confirmations manquées sur 120 pas
+et une marche qui continue. ⚠⚠⚠ **Cela ne prouve PAS qu'un marcheur tient cent vingt spires** : six
+pas ne sont pas cent vingt, le mode qui ne compte rien fait **26** marches sur 48 décidables, et rien
+ici ne mesure la dérive au-delà de six pas. Ce qui est prouvé est que **le nombre publié dépendait
+d'une hypothèse que personne n'avait testée**.
+
+⚠⚠ **ET LE NUL FAIT LA DÉCISION, CE QUE MA PREMIÈRE SONDE A PROUVÉ EN SE TROMPANT.** Avec un nul à
+taux **COMMUN** le même test rend **p = 0,001** et déclare les manques groupés : il reproche à une
+marche qui confirme un pas sur deux des rafales qui, à ce taux-là, sont la norme. Le groupement se
+teste **à taux égal**, et la batterie le démontre sur un jeu fabriqué (**0,0205** contre
+**0,1534**). ⚠ Le nul est **conservateur** : « non groupé » veut dire « aucun groupement au-delà du
+taux », donc le verdict se lit **par mode**.
+
+⚠⚠ **ET UNE AUTRE FAUTE À MOI, DANS LA MÊME TRANCHE** : ma première version de « un manque coûte-t-il
+des feuilles » lisait *plus de feuilles* comme *mieux*. La cible est **exactement une feuille par
+pas**, donc franchir 1,29 est aussi faux que franchir 0,71. Corrigé, le verdict est **non**
+(écart à un **0,292** contre **0,269**, **p = 0,7098**) — mais il découvre que les **7** marches
+**entièrement confirmées** franchissent **1,292** feuille par pas quand les **15** avec manque sont à
+**1,005** : ⭐ *le critère confirme des pas qui traversent trop*, troisième route vers ce que `104`
+(bande 0,68 à 1,38) et `105` (+18,4 %) avaient mesuré.
+
+⭐ **ET LA SUITE QUE ÇA DÉSIGNE CHANGE** : la bonne question n'est plus « combien de pas la matière
+porte » mais **de combien le compte DÉRIVE quand la marche est longue**, puisqu'un manque isolé ne
+l'arrête pas. C'est la question que `104` posait déjà — *biais, qui coûte `n`, ou jitter de moyenne
+nulle, qui coûte `√n` ?* — et elle demande des marches **longues**, pas nombreuses : le plafond de
+six pas de `107` est exactement ce qui empêche de la poser.
+
+---
+
 ⭐⭐⭐⭐ **ET `108` A RÉPONDU À LA QUESTION QUE `107` POSAIT EN PREMIER, SANS UNE LECTURE DE PLUS.**
 `107` laissait deux populations « que rien d'autre ne distingue ». C'est faux, et la mesure le dit :
 sur **onze candidats déclarés AVANT de regarder**, corrigés par permutation sur le maximum de la

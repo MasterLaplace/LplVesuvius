@@ -160,6 +160,23 @@ nomme.
 > ⚠ Et une hypothèse écrite ici est réfutée : le mode qui ne compte rien marche **plus loin**
 > (1276,0 µm contre 1189,4). Le retard n'est pas une marche qui s'arrête tôt.
 
+## 7 ter. ⭐⭐⭐ Ce que `109` retire à la portée publiée ici
+
+> ⭐⭐⭐ **Les 1,0 pas confirmés de ce document comptent les pas CONSÉCUTIFS DEPUIS LE DÉPART.**
+> [`109`](109_un_pas_manque_nest_pas_une_chute.md) relit les mêmes étapes : **24** des 56 marches
+> confirment **5** ou **6** pas sur **6**, médiane des confirmés **4,0** contre médiane du run
+> **1,0**. Une marche à `O . O O O O` et une marche à `O . . . . .` sont **indiscernables** par le
+> nombre publié.
+>
+> ⭐⭐⭐ **Et l'arithmétique de la survie change de nature** : ce document calcule
+> `(1 − risque)^120` en traitant un pas non confirmé comme une **chute**. `109` teste cette
+> hypothèse — les manques ne sont **pas groupés** (**p = 0,2829**) — donc un manque est une
+> confirmation manquée et la marche continue. ⚠⚠⚠ Cela ne prouve pas que le marcheur tient cent
+> vingt spires : six pas ne sont pas cent vingt.
+>
+> ⚠⚠ Et `109` trouve au passage que les marches **entièrement confirmées dépassent** de **+0,292**
+> feuille par pas — le critère confirme des pas qui traversent trop.
+
 ## 8. Ce que cette course ne dit pas
 
 - Elle ne dit **pas** que « une feuille » a le sens géométrique qu'on lui prêtait : `106` a montré

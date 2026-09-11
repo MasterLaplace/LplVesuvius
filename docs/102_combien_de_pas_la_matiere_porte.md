@@ -152,6 +152,21 @@ n'en franchissent que 0,748 (0,125 par pas). ⚠⚠⚠ Le score est **plus haut 
 
 ⚠ Les chiffres de ce document ne sont **pas** recalculés : les relire demande de relancer la mesure.
 
+## ⭐⭐⭐ Ce que `109` retire à ce chiffre, et il faut le lire avant le reste
+
+> ⭐⭐⭐ **« La matière porte deux pas » compte les pas confirmés CONSÉCUTIFS DEPUIS LE DÉPART, et ce
+> compte est borné par la position du premier manque.** [`109`](109_un_pas_manque_nest_pas_une_chute.md)
+> le mesure sur les étapes que `107` a gardées : médiane des pas **réellement** confirmés **4,0**,
+> médiane du run **1,0**. Une marche qui confirme cinq pas sur six mais manque le deuxième vaut
+> **un**, exactement comme une marche qui s'effondre au premier.
+>
+> ⭐⭐⭐ **Et les manques ne sont pas groupés** (rafale **2,286** contre **2,213** sous
+> l'indépendance à même taux, **p = 0,2829**), donc un pas non confirmé n'est pas une **chute**
+> mais une **confirmation manquée**. La portée publiée ici mesure une **lecture du critère**, pas
+> une propriété de la matière.
+>
+> ⚠ Ce que `109` ne prouve pas : qu'un marcheur porte plus loin. Il n'a pas été refait.
+
 ## Reproduire
 
 ```

@@ -5247,6 +5247,54 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/109_un_pas_manque_nest_pas_une_chute.md
+- **lignes** : 174
+- **nature** : RESULTAT
+  (deux lectures d'un même critère sur les étapes gardées par `107` : le compte consécutif depuis le
+  départ contre le compte total, et le test qui dit si un manque est une chute ; zéro lecture
+  distante.)
+- **résumé** : ⭐⭐⭐ **La portée publiée par `102` et `107` est une LECTURE du critère, pas une
+  propriété de la matière** : médiane des pas réellement confirmés **4,0** contre médiane du run
+  **1,0**, et **24** des 56 marches confirment 5 ou 6 pas sur 6. ⭐⭐⭐ Et **les manques ne sont PAS
+  groupés** (rafale **2,286** contre **2,213**, **p = 0,2829**), donc un pas non confirmé est une
+  **confirmation manquée**, pas une chute — ce qui retire son fondement au `(1 − risque)^120` qui
+  avait déclaré le graal mort. ⚠⚠⚠ Sans prouver qu'un marcheur tient cent vingt spires.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **Un compte consécutif depuis le départ est borné par la position du premier manque**, donc
+    il ne peut jamais dire « cinq sur six ». Le défaut est dans la DÉFINITION et se démontre sans
+    données : `O . O O O O` et `O . . . . .` rendent le même nombre. C'est le péché recensé du dépôt
+    — *une quantité qui ne peut pas prendre la valeur qui signale la réussite* — sous un costume neuf.
+  - ⭐⭐ **Et le run ne porte rien que le taux ne porte déjà** : sous des manques indépendants il vaut
+    `p + p² + … + p⁶`. Mesuré, observé **2,0** contre **1,301** attendu. « La matière porte deux
+    pas » est une façon coûteuse de dire « le critère confirme trois fois sur cinq ».
+  - ⭐⭐⭐ **Le test qui tranche ne regarde jamais le registre du trajet** : une marche qui se perd
+    manque en rafale, une marche qui rate une confirmation manque au hasard. Dans **aucun** des deux
+    modes les manques ne sont groupés.
+  - ⚠⚠ **Le nul est conservateur, donc « non groupé » n'est pas « aucun groupement »** : à **0,8485**
+    une rafale sauterait aux yeux, à **0,5192** elle est banale. Le verdict se lit PAR MODE, avec le
+    taux à côté.
+  - ⚠⚠ **Le nul fait la décision, et ma première sonde l'a prouvé en se trompant** : à taux COMMUN le
+    même test rend **p = 0,001** et déclare les manques groupés, parce qu'il reproche à une marche à
+    faible taux des rafales qui sont la norme pour elle.
+  - ⚠⚠ **Les marches ENTIÈREMENT confirmées dépassent** de **+0,292** feuille par pas : le critère
+    confirme des pas qui traversent trop. Troisième route vers ce que `104` (bande 0,68 à 1,38) et
+    `105` (+18,4 %) avaient déjà mesuré.
+  - ⚠⚠⚠ **Ce que la tranche ne prouve PAS**, écrit dans le code, la figure et le document : qu'un
+    marcheur tient cent vingt spires, que le mode qui ne compte rien a disparu, que la marche ne
+    dérive pas au-delà de six pas, ni que le compte de feuilles est juste (écart à un **0,269** dans
+    le meilleur groupe).
+- **rétractations / corrections internes** :
+  - §6 : ⚠⚠⚠ **ma première version lisait « plus de feuilles » comme « mieux »** et rendait le
+    verdict à l'envers. La cible est **exactement une feuille par pas**, donc franchir 1,29 est aussi
+    faux que franchir 0,71.
+  - §5 : ⚠⚠ **ma première sonde du groupement utilisait un nul à taux commun** et déclarait le mode
+    bas groupé à p = 0,04. Le groupement se teste à taux égal.
+- **preuve de lecture intégrale** :
+  - l. 98 (après 56 % du fichier) : `## 5. ⚠⚠ Le nul fait la décision, et ma première sonde l'a prouvé en se trompant`
+  - l. 166 : `uv run python src/nappe/un_pas_manque_nest_pas_une_chute.py --verifier`
+
+---
+
 ### docs/108_ce_qui_separe_les_deux_populations.md
 - **lignes** : 261
 - **nature** : RESULTAT
@@ -5315,7 +5363,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
 ---
 
 ### docs/107_le_marcheur_avec_le_bon_pas.md
-- **lignes** : 183
+- **lignes** : 200
 - **nature** : RESULTAT
   (la marche de `102` rejouée avec le sélecteur corrigé de `105`, appariée par le départ et en
   gardant les étapes ; la forme du risque, et le registre du trajet entier.)
@@ -5373,9 +5421,14 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     score qu'il mesure, et fausse de celui que le marcheur calculait déjà à chaque pas.
   - §7 bis : ⚠ **« le retard est une marche qui s'arrête tôt » est réfuté** : le mode qui ne compte
     rien marche **plus loin** (1276,0 µm contre 1189,4).
+  - §7 ter : ⭐⭐⭐ **la portée de 1,0 pas compte les pas CONSÉCUTIFS DEPUIS LE DÉPART**, et `109`
+    mesure sur ces mêmes étapes une médiane de **4,0** pas réellement confirmés. Deux marches
+    `O . O O O O` et `O . . . . .` sont indiscernables par ce nombre.
+  - §7 ter : ⭐⭐⭐ **l'arithmétique `(1 − risque)^120` traite un manque comme une CHUTE**, et `109`
+    réfute cette hypothèse : les manques ne sont pas groupés (**p = 0,2829**).
 - **preuve de lecture intégrale** :
   - l. 88 (après 48 % du fichier) : `## 4. ⚠⚠ Une médiane sur une distribution bimodale n'est pas un résumé`
-  - l. 179 : `uv run python src/nappe/le_marcheur_avec_le_bon_pas.py --verifier`
+  - l. 196 : `uv run python src/nappe/le_marcheur_avec_le_bon_pas.py --verifier`
 
 ---
 
@@ -5637,7 +5690,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
 ---
 
 ### docs/102_combien_de_pas_la_matiere_porte.md
-- **lignes** : 165
+- **lignes** : 180
 - **nature** : RESULTAT
   (le graal posé directement : le pas de `99` et la direction de `101` enchaînés, sans aucun
   référent humain — premier acquis positif de la campagne, et sa borne.)
@@ -7163,7 +7216,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 7131
+- **lignes** : 7197
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)

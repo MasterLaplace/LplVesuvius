@@ -4553,6 +4553,72 @@ renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la bat
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
 
 ---
+##### ⭐⭐⭐⭐ UN PAS NON CONFIRMÉ N'EST PAS UNE CHUTE — la portée publiée est une lecture
+
+> Mesure : `src/nappe/un_pas_manque_nest_pas_une_chute.py` (31 contrôles) →
+> `docs/mesures/un_pas_manque_nest_pas_une_chute.json`. Figure :
+> `src/figures/figure_un_pas_manque_nest_pas_une_chute.py` (15 contrôles).
+> Document : [`109`](109_un_pas_manque_nest_pas_une_chute.md), le 2026-09-11.
+> ⭐ **Zéro lecture distante** : la tranche entière se calcule sur les étapes gardées par `107`.
+
+![un pas manqué n'est pas une chute](images/109_un_pas_manque_nest_pas_une_chute.png)
+
+`102` et `107` comptent les pas confirmés **consécutifs depuis le départ**. Ce compte est **borné
+par la position du premier manque**, et cela se démontre sans données :
+
+| suite | pas confirmés | run depuis le départ |
+|---|---:|---:|
+| `O . O O O O` | **5** | **1** |
+| `O . . . . .` | 1 | **1** |
+| `O O O O O O` | 6 | 6 |
+
+> ⭐⭐⭐ Les deux premières lignes sont **indiscernables** par le nombre publié, et ce sont deux
+> marches qui n'ont rien à voir.
+
+##### ⭐⭐⭐ Ce que la lecture jette, mesuré sur 56 marches
+
+| pas confirmés sur 6 | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| marches | 10 | 3 | 5 | 6 | 8 | **14** | **10** |
+| run depuis le départ | **24** | 8 | 5 | 5 | 1 | 3 | **10** |
+
+Médiane des confirmés **4,0**, médiane du run **1,0** — et la portée publiée est **1,0**.
+**24** marches confirment 5 ou 6 pas sur 6, dont **6** créditées de zéro ou un.
+
+⭐⭐ Et le run ne porte rien que le taux ne porte déjà : taux **0,5744**, run observé **2,0**,
+attendu sous l'indépendance **1,301**, écart **+0,699** pas.
+
+##### ⭐⭐⭐ Le test qui tranche, sans jamais regarder le registre du trajet
+
+| jeu | marches | taux | rafale observée | sous l'indépendance | p95 du nul | p | groupés ? |
+|---|---:|---:|---:|---:|---:|---:|---|
+| toutes | 56 | 0,5744 | **2,286** | **2,213** | **2,393** | **0,2829** | **non** |
+| mode haut | **22** | **0,8485** | **0,682** | **0,693** | **0,909** | **0,5877** | **non** |
+| mode bas | **26** | **0,5192** | **2,5** | **2,334** | **2,692** | **0,2388** | **non** |
+
+> ⭐⭐⭐ **Un pas non confirmé n'est pas une chute mais une confirmation manquée.**
+
+⚠⚠ Le nul est **conservateur** : à **0,8485** une rafale sauterait aux yeux, donc le « non » y est
+informatif ; à **0,5192** elle est banale. ⚠⚠ Et le nul **fait la décision** : à taux **commun** le
+même test rend **p = 0,001** et déclare les manques groupés.
+
+##### ⭐⭐⭐ Ce que ça change pour le chiffre qui avait déclaré le graal mort
+
+| | mode qui compte (**0,8485**) | toutes (**0,5744**) |
+|---|---:|---:|
+| si un manque est une **chute** | **2.74e-09** | **1.28e-29** |
+| si un manque est un **manque** | **18,2** manquées | **51,1** |
+
+⚠⚠⚠ **Sans prouver qu'un marcheur tient cent vingt spires** : six pas ne sont pas cent vingt, le
+mode qui ne compte rien fait **26** marches sur 48 décidables, et rien ici ne mesure la dérive
+au-delà de six pas.
+
+⚠⚠ Trouvé au passage : les **7** marches entièrement confirmées franchissent **1,292** feuille par
+pas quand les **15** avec manque sont à **1,005** — écart à un **0,292** contre **0,269**, différence
+**-0,023**, **p = 0,7098**. Un manque ne fait donc pas compter plus mal, mais le critère confirme des
+pas qui **traversent trop** : troisième route vers ce que `104` et `105` avaient mesuré.
+
+---
 ##### ⭐⭐⭐⭐ CE QUI SÉPARE LES DEUX POPULATIONS — et le signal était déjà calculé
 
 > Mesure : `src/nappe/ce_qui_separe_les_deux_populations.py` (49 contrôles) →
