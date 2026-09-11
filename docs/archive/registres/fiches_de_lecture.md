@@ -5247,6 +5247,24 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/archive/113_jusquou_va_t_il_si_on_le_laisse.md
+- **lignes** : 168
+- **nature** : RESULTAT
+  (le plafond de pas levé de 6 à 20 : quelque chose arrête-t-il enfin une marche, et le taux de
+  confirmation baisse-t-il avec la profondeur ?)
+- **résumé** : ⛔ **Rien n'arrête une marche, une crantée plus haut.** 28 marches sur 28
+  touchent le plafond de 20, **0** sortie de volume : la portée reste entièrement censurée et
+  seule la borne inférieure bouge, 1250 → **3966,3 µm**. ⭐⭐ Le taux **ne baisse pas** avec la
+  profondeur (précoce 0,56, tardif 0,50, **p = 0,3253**) : le marcheur ne s'use pas en avançant.
+  ⭐⭐⭐⭐ Mais il **suit le rayon** — rho de Spearman **−0,7188**, **p = 1,6·10⁻⁵** sur 28 bandes
+  de 4,07 à 23,8 mm, taux par marche de **0,00 à 0,90**, indice de dispersion **9,887** (χ²
+  266,95 sur 27 ddl). **Le marcheur n'échoue pas en avançant, il échoue là où il part**, et les
+  deux n'ont pas le même remède. ⚠⚠ Les deux agrégats de la course cachaient ce résultat, parce
+  qu'ils moyennent sur l'axe où l'écart se trouve : c'est la FIGURE qui l'a montré. ⚠ Une
+  corrélation n'est pas une cause — le rayon fait varier l'épaisseur lue, la courbure et la
+  qualité du scan.
+- **lu** : intégralement, 168 lignes, le 2026-09-11
+
 ### docs/archive/114_le_cout_qui_connait_la_spire.md
 - **lignes** : 183
 - **nature** : RESULTAT

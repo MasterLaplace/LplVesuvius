@@ -414,6 +414,41 @@ def extraire_une(f: Path, num: int) -> list[str]:
     return out
 
 
+def forme_des_rapports(racine: Path = RACINE) -> list[str]:
+    """Les rapports qui ont cessé d'être concis, sur deux règles que l'auteur a posées.
+
+    ⭐⭐ **(1) Pas de sous-section.** Un rapport a neuf sections et pas une de plus. Un `###` est
+    la façon dont le détail rentre : on ajoute une sous-section « et ce que la campagne a trouvé »,
+    puis une autre, et le rapport redevient le carnet de bord qu'il remplace. Le détail a un
+    endroit — un document d'`archive/` — et le rapport le cite.
+
+    ⭐⭐ **(2) Pas de figure dans le §3.** La chronologie est une liste de ce qui a été fait, un
+    paragraphe par document ; une figure y est du contenu de §2 posé au mauvais endroit. Les
+    figures vivent dans les **mouvements**, où elles portent un argument.
+
+    ⚠ Ce contrôle ne juge PAS la longueur. Un seuil de lignes serait un nombre choisi pour que
+    l'état du jour passe — le péché nº 1 de ce dépôt. Ce qu'il juge est la **forme**, qui est
+    décidable.
+    """
+    out = []
+    for f in rapports(racine):
+        lignes = f.read_text(encoding="utf-8").splitlines()
+        bornes = [(int(m.group(1)), i) for i, l in enumerate(lignes)
+                  if (m := re.match(r"^## (\d+)\.", l))]
+        for n, l in enumerate(lignes, 1):
+            if l.startswith("### "):
+                out.append(f"{f.name}:{n} — sous-section : le détail va dans un document d'archive")
+        for k, (num, i) in enumerate(bornes):
+            if num != 3:
+                continue
+            fin = bornes[k + 1][1] if k + 1 < len(bornes) else len(lignes)
+            for j in range(i, fin):
+                if lignes[j].startswith("!["):
+                    out.append(f"{f.name}:{j + 1} — figure dans la chronologie : elle appartient "
+                               f"au §2, où un mouvement la porte")
+    return out
+
+
 def tables_revenues(racine: Path = RACINE) -> list[str]:
     """Les rapports qui ont réintroduit une table dont la donnée appartient à un registre."""
     out = []
@@ -537,7 +572,8 @@ def defauts(racine: Path = RACINE) -> dict[str, list[str]]:
     """Ce qui cloche dans les registres eux-mêmes, et dans le contrat avec les rapports."""
     out: dict[str, list[str]] = {"lignes_mal_formees": [], "statuts_inconnus": [],
                                  "faits_sans_source": [], "identifiants_doublons": [],
-                                 "tables_revenues": tables_revenues(racine)}
+                                 "tables_revenues": tables_revenues(racine),
+                                 "forme_des_rapports": forme_des_rapports(racine)}
     vus: set[str] = set()
     for nom, lignes in tous(racine).items():
         for e in lignes:
@@ -607,6 +643,7 @@ def verifier() -> int:
         v("un document à trois chiffres compte comme une source", d0["faits_sans_source"], [])
         v("aucun identifiant en double", d0["identifiants_doublons"], [])
         v("aucune table revenue dans un rapport", d0["tables_revenues"], [])
+        v("aucun rapport hors forme", d0["forme_des_rapports"], [])
 
         vues = rendre(r)
         v("les cinq vues sont rendues", sorted(vues), sorted(VUES))
@@ -673,6 +710,23 @@ def verifier() -> int:
         essai.write_text("# R1\n\n## 2. Mouvements\n\nde la prose, et un renvoi à `R1-F01`.\n",
                          encoding="utf-8")
         v("... et un rapport qui renvoie au registre passe", defauts(r)["tables_revenues"], [])
+
+        # ⭐⭐ La forme d'un rapport : neuf sections, aucune sous-section, aucune figure en §3.
+        essai.write_text("# R1\n\n## 2. Mouvements\n\n![une figure](../images/x.png)\n\n"
+                         "## 3. Chronologie\n\nde la prose.\n", encoding="utf-8")
+        v("une figure en §2 est à sa place", defauts(r)["forme_des_rapports"], [])
+        essai.write_text("# R1\n\n## 3. Chronologie\n\n![une figure](../images/x.png)\n",
+                         encoding="utf-8")
+        v("sonde : une figure dans la chronologie est signalée",
+          len(defauts(r)["forme_des_rapports"]), 1)
+        v("... et la garde dit où elle doit aller",
+          "§2" in defauts(r)["forme_des_rapports"][0], True)
+        essai.write_text("# R1\n\n## 2. Mouvements\n\n### Un détail de plus\n\nde la prose.\n",
+                         encoding="utf-8")
+        v("sonde : une sous-section est signalée", len(defauts(r)["forme_des_rapports"]), 1)
+        v("... et la garde dit où le détail va",
+          "archive" in defauts(r)["forme_des_rapports"][0], True)
+        essai.unlink()
 
         # ⚠ La migration, exercée dans le sens où elle sert : une table de rapport devient des
         # lignes de registre, et un rapport sans table n'en produit aucune.

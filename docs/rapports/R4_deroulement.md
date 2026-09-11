@@ -7,7 +7,7 @@
 > 2026-09-03 → 2026-09-11).
 > Convention : `archive/NN §k` cite la preuve ; ce rapport est la lecture. Un fait porte un statut
 > (`établi` · `borné` · `réfuté` · `rétracté` · `ouvert`) et son producteur (`src/…`, JSON de même
-> nom dans `docs/mesures/`). Les statuts sont ceux du **11 septembre** ; `archive/113` tourne encore.
+> nom dans `docs/mesures/`). Les statuts sont ceux du **11 septembre**, `archive/113` comprise.
 
 ## 0. Fiche
 
@@ -32,10 +32,10 @@ identifiant.
  M1 le référent          76 77 78 79 · 75 A1–A3        3–5 sept.
  M1′ le dérouleur aveugle 75 §C (0500P2, 13 spires)     5–7 sept.
  M2 le corpus est le mur 81 82 83 84 85 86             6–7 sept.
- M3 ce que l'humain `R4-F90` 91 92 93 94 95 96 97        8 sept.
+ M3 ce que l'humain fait 90 91 92 93 94 95 96 97        8 sept.
  M4 interroger la matière 98 99 100 101 102 103        9–10 sept.
  M5 l'instrument s'audite 104 105 106 107 108 109 110 111 112   10–11 sept.
- M6 rouvrir, et lever le plafond 114 · 113 (en cours)  11 sept.
+ M6 rouvrir, et lever le plafond 114 · 113                11 sept.
 ```
 
 **M1 — Le référent.** Les spires publiées portent un indice ; personne ne l'avait lu. `76` mesure son
@@ -127,6 +127,10 @@ mesure neuve : le champ d'enroulement en est une) et répond non. `113` lève le
 20 depuis les mêmes départs que `107`, en gardant départ, étapes et profils — parce que **56 marches
 sur 56 avaient touché le plafond** et que la portée n'avait donc jamais été mesurée.
 
+![Chaque marche de `113`, pas par pas : le mur du plafond à droite, le vidage vers les grands rayons](../images/113_le_plafond_est_encore_la_mesure.png)
+
+*`archive/113` — `src/figures/figure_jusquou.py`. Une ligne par marche, ordonnée par rayon ; une case par pas, pleine si le pas est confirmé. Les vingt-huit lignes vont jusqu'au mur : rien n'arrête une marche. Et le vidage de haut en bas est le résultat que le taux global et le taux par profondeur moyennaient tous les deux.*
+
 ![Le coût qui connaît la spire : le champ tourné, faux par construction, obtient 83 % de la descente du vrai](../images/114_le_cout_qui_connait_la_spire.png)
 
 *`archive/114` — `src/figures/figure_le_cout_qui_connait_la_spire.py`. La réouverture était légitime, la réponse est non : 0,5 % du chemin.*
@@ -157,7 +161,7 @@ critère d'arrêt observable sans cible. → désigne `PHercParis4` ; rejoint pa
 le voxel ne se lit pas dans le nom du volume (3 noms pour 37 segments) mais se décode de
 `area_cm2/area_vx2` = 9,362 µm. Rouleau écrasé : p10–p90 du rayon d'une spire = 566 vx (~17
 feuilles). Défauts du référent : `w045`/`w046` même surface, `w041`/`w042` demi-feuille, `0172`
-`w075`/`w076`. Une spire approuvée `R4-F38`,4 cm² (×6,4 le point fixe rogner-étendre de 6,02). §7 : le
+`w075`/`w076`. Une spire approuvée fait 38,4 cm² (×6,4 le point fixe rogner-étendre de 6,02). §7 : le
 traçage automatique **échantillonne** (1447 : 29 % avec une voisine), la curation **pave** (100 %) —
 la médiane toutes paires ne discrimine pas (2202 vs 1901 µm). → corrige l'article §5.7 ; ouvre A2.
 
@@ -418,37 +422,14 @@ négatifs = section écrasée). Trois défauts attrapés par sonde : témoin tra
 → l'identité ne se récupère pas dans une coupe ; la question retourne en 3D (conservation de flot aux
 jonctions d'une nappe).
 
-**`113` · lancé le 2026-09-10, en cours** (`jusquou_va_t_il_si_on_le_laisse.py`)
-56 marches sur 56 de `107` ont touché le plafond de 6 pas, zéro sortie du volume : rien n'a jamais
-arrêté une marche, la portée est **entièrement censurée**. Plafond levé à 20 pas (~4,5 mm, l'ordre
-auquel la chaîne de `44` tient), mêmes départs, départ + étapes + profils gardés. Ce qu'elle dira : le
-registre et le taux de confirmation **en fonction de la profondeur**. Brouillon écrit après chaque bande
-(`docs/mesures/jusquou_va_t_il_si_on_le_laisse.json`).
-
-![Chaque marche de la tranche 113, pas par pas : le mur du plafond à droite, et le vidage vers les grands rayons](../images/113_le_plafond_est_encore_la_mesure.png)
-
-*`archive/113` (course du 11 septembre, 5 h 11) · `src/figures/figure_jusquou.py`, depuis `jusquou_va_t_il_si_on_le_laisse.json`. Une ligne par marche, ordonnée par rayon ; une case par pas, pleine si le pas est confirmé. **Les trois faits sont dans la même image** : le mur rouge à droite (les 28 marches touchent le plafond, rien ne les arrête), le trait ambre du plafond de `107` (tout ce qui est à sa droite était invisible), et le vidage de haut en bas — le taux suit le **rayon**, pas la profondeur, ce que les deux agrégats moyennaient.*
-
-### La tranche `113`, et ce que sa figure a trouvé
-
-La question posée était celle que `107` n'avait pas pu trancher : **56 marches sur 56 touchaient
-son plafond de six pas**, donc « la portée vaut 1 250 µm » ne disait rien de la portée. Le plafond
-est passé à vingt. Réponse : **28 marches sur 28 le touchent encore**, zéro sortie de volume, zéro
-marche arrêtée par quoi que ce soit. La portée est censurée une crantée plus haut, et ce qui a
-bougé est la borne inférieure — de 1,25 à 3966,3 µm (`R4-F31`).
-
-Deux agrégats ont été publiés avec ce run, et les deux moyennent sur le mauvais axe. Le taux de
-confirmation **ne baisse pas avec la profondeur** (précoce 0,56 contre tardif 0,50, p = 0,3253,
-`R4-F32`) — le marcheur ne s'use pas en avançant. Mais la grille ci-dessus, qui ne moyenne rien,
-montre les dernières lignes presque vides : le taux **par marche** va de 0,00 à 0,90, avec un
-indice de dispersion de 9,887 (χ² 266,95 sur 27 ddl), et il **suit le rayon** — rho de Spearman
-**−0,7188**, p = 1,6·10⁻⁵ sur 28 bandes de 4,07 à 23,8 mm (`R4-F33`, `R4-F34`).
-
-**Le marcheur n'échoue pas en avançant, il échoue là où il part.** C'est un diagnostic
-différent de celui que la campagne portait, et il n'a pas le même remède : le premier appellerait
-une correction en cours de route — l'humain du transfert —, le second un choix de départ. ⚠ Et une
-corrélation n'est pas une cause : le rayon fait varier au moins trois choses à la fois, l'épaisseur
-lue, la courbure et la qualité du scan (`R4-P21`).
+**`113` · 2026-09-10 → 11 · jusqu'où va-t-il si on le laisse** (`jusquou_va_t_il_si_on_le_laisse.py`, 5 h 11)
+Plafond de pas levé de 6 à 20, mêmes départs que `107`. **28 marches sur 28 le touchent encore**,
+0 sortie de volume : la portée reste censurée, seule la borne inférieure bouge (1250 → 3966,3 µm).
+Le taux ne baisse **pas** avec la profondeur (0,56 → 0,50, p 0,3253) mais **suit le rayon** : rho
+−0,7188, p 1,6·10⁻⁵ sur 28 bandes de 4,07 à 23,8 mm ; taux par marche de 0,00 à 0,90, dispersion
+9,887. Les deux agrégats de la course moyennaient sur l'axe où l'écart se trouve ; la figure l'a
+montré. → **le marcheur n'échoue pas en avançant, il échoue là où il part**, et les deux remèdes
+diffèrent.
 
 ## 4. Le tableau des statuts
 
