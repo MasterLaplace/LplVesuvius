@@ -68,7 +68,7 @@ leur question :
 | **R3** | **La graine et le traceur** | le traceur est-il un tirage, et qu'est-ce qui gouverne où il va ? | `25`–`26`, `30`, `35`, `37`–`55` | `R3_graine_et_traceur.md` |
 | **R4** | **Le déroulement** — *le graal* | qu'est-ce qui remplace l'humain du transfert ? | `76`–`79`, `81`–`86`, `90`–`114`, `75` §A et ses ~40 tranches | `R4_deroulement.md` |
 | **R5** | **La méthode et l'hygiène** | comment ce dépôt se trompe, et ce qui l'attrape | `56`–`57`, `61`, `80`, `87`–`89` | `R5_methode.md` |
-| **R6** | **La littérature et l'antériorité** | qu'est-ce qui était déjà publié, et par qui | `00`, `27`, `32`, `66`–`71`, les pages *winners* et *open problems* | `R6_litterature.md` |
+| **R6** | **La littérature et l'antériorité** | qu'est-ce qui était déjà publié, et par qui | `00`, `27`, `32`, `66`–`71`, `73`–`74`, les pages *winners* et *open problems* | `R6_litterature.md` |
 
 Ce qui n'entre dans aucun rapport parce que c'est du **procédé** (plans, batchs, registres, brouillons
 de soumission) : `01`, `02`, `13`, `15`, `18`, `21`, `28`, `29`, `31`, `39`, `40`, `57`, `75` §0/§E,
@@ -104,3 +104,4 @@ vide n'est pas une case perdue, c'est une case non travaillée.
 | date | ce qui a été fait |
 |---|---|
 | 2026-09-11 | ouverture : carte, `PRIX.md` depuis les pages téléchargées le jour même |
+| 2026-09-11 | `R4_deroulement.md` (34 documents lus) ; `R6_litterature.md` (11 documents et les pages du prix) ; `73`–`74` rattachés à R6 |
