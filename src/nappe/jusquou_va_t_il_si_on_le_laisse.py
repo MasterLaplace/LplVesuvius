@@ -147,7 +147,8 @@ def le_taux_baisse_avec_la_profondeur(profil: list[dict], tiers: int = 3) -> dic
 
 def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = DEMI,
             fils: int = 32, selecteur: str = SELECTEUR,
-            brouillon: Path | None = None) -> dict:
+            brouillon: Path | None = None,
+            fenetre_locale: bool = False, arret_sur_vide: bool = False) -> dict:
     """La marche profonde, depuis LES MEMES departs que `107`, plafond leve.
 
     ⭐⭐⭐ LES DEPARTS SONT CEUX DE `107`, PAS DE NOUVEAUX : la graine et les cellules sont les
@@ -197,13 +198,19 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
             e = marcher(vol, d["departs"][j], d["radial"][j], longueurs, mu, sd, barre,
                         barre_moities, barre_interstice, C.VOXEL_FIN_UM, pas_max, demi,
                         interroge_la_matiere=True, fils=fils,
-                        selecteur=selecteur, barre_du_selecteur=barre)
+                        selecteur=selecteur, barre_du_selecteur=barre,
+                        fenetre_locale=fenetre_locale, arret_sur_vide=arret_sur_vide)
             pas = [x for x in e if "avance_um" in x]
             cel = {"depart_zyx": [round(float(t), 3) for t in d["departs"][j]],
                    "radial_zyx": [round(float(t), 6) for t in d["radial"][j]],
                    "etapes": e, "pas_parcourus": len(pas),
                    "pas_confirmes": combien_de_pas_confirmes(e),
                    "sortie": bool(e and e[-1].get("fin") == "sortie du volume"),
+                   # ⚠⚠ TROIS motifs d'arret depuis `122`, et les confondre rendrait la portee
+                   # illisible : un bord de champ, un volume qui ne repond plus, et un budget
+                   # epuise ne se reparent pas pareil. `113` n'en connaissait que deux, et le
+                   # second n'etait jamais atteint.
+                   "plus_rien_a_lire": bool(e and e[-1].get("fin") == "plus rien a lire"),
                    "au_plafond": bool(len(pas) >= pas_max),
                    "longueur_um": round(sum(float(x["avance_um"]) for x in pas), 1)}
             # ⭐⭐⭐ LE PROFIL BRUT DE LA POLYLIGNE, GARDE. Une lecture de plus par marche, et toute
@@ -241,6 +248,8 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
                 {"fragment": C.OBJET, "volume_fin": C.VOLUME_FIN,
                  "pas_nominal_um": C.PAS_UM, "pas_max": int(pas_max),
                  "selecteur": selecteur, "demi_cube_voxels": demi,
+                 "fenetre_locale": bool(fenetre_locale),
+                 "arret_sur_vide": bool(arret_sur_vide),
                  "barre_du_balayage": round(float(barre), 3),
                  "barre_de_linterstice": round(float(barre_interstice), 4),
                  "barre_daccord_des_moities_deg": barre_moities,
@@ -251,6 +260,7 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
 
     lu = {"fragment": C.OBJET, "volume_fin": C.VOLUME_FIN, "pas_nominal_um": C.PAS_UM,
           "pas_max": int(pas_max), "selecteur": selecteur, "demi_cube_voxels": demi,
+          "fenetre_locale": bool(fenetre_locale), "arret_sur_vide": bool(arret_sur_vide),
           "barre_du_balayage": round(float(barre), 3),
           "barre_de_linterstice": round(float(barre_interstice), 4),
           "barre_daccord_des_moities_deg": barre_moities,
@@ -598,6 +608,12 @@ def main() -> int:
     p.add_argument("--demi", type=int, default=DEMI)
     p.add_argument("--fils", type=int, default=32)
     p.add_argument("--selecteur", default=SELECTEUR)
+    # ⭐⭐ Les deux options de `122`, et elles DEFAUTENT a l'ancien comportement : une re-course
+    # qui changerait le marcheur sans le dire rendrait des chiffres incomparables a ceux de `113`.
+    p.add_argument("--fenetre-locale", action="store_true",
+                   help="la fenetre de pas suit l'espacement local, a largeur constante (`121`)")
+    p.add_argument("--arret-sur-vide", action="store_true",
+                   help="la marche s'arrete au premier pas aveugle (`116`)")
     p.add_argument("--reagreger", action="store_true")
     p.add_argument("--json", type=Path, default=None)
     a = p.parse_args()
@@ -613,7 +629,8 @@ def main() -> int:
         print(f"\nréagrégé : {a.json}")
         return 0
     r = mesurer(pas_max=a.pas, bandes_max=a.bandes, demi=a.demi, fils=a.fils,
-                selecteur=a.selecteur, brouillon=a.json)
+                selecteur=a.selecteur, brouillon=a.json,
+                fenetre_locale=a.fenetre_locale, arret_sur_vide=a.arret_sur_vide)
     afficher(r)
     if a.json:
         a.json.parent.mkdir(parents=True, exist_ok=True)

@@ -542,6 +542,17 @@ traverser 4,07 → 23,8 mm à 177 µm d'espacement demande **112 pas**. → **le
 demandent la même re-course, et elle est prête** ; elle n'est pas lancée, elle demande des
 lectures distantes sur des heures.
 
+**`123` · 2026-09-12 · le marcheur reste-t-il verrouillé** (`le_marcheur_reste_t_il_verrouille.py`, analytique)
+`119` mesurait **où** le marcheur va ; celui-ci mesure **sur quelle feuille il tombe** — la panne que
+l'humain répare d'une spire à l'autre. Elle n'est pas mesurable sur le vrai volume, où l'on ne sait
+pas où sont les feuilles ; elle l'est au centième de feuille sur une pile fabriquée. **Le décalage ne
+grandit dans aucune des quatre conditions** : 0,1249 → 0,1249 sur pile propre, et à 35° d'obliquité
+il **diminue** (0,1620 → 0,1354, p **0,0137**) — le marcheur se re-verrouille. L'avance vaut
+**1,0037 à 1,0067 feuille par pas**, donc moins d'une feuille d'excès sur les 112 pas d'une
+traversée. ⭐ Le témoin donne au résultat sa puissance : un pas nominal imposé sur la même pile
+oblique **dérive** (0,2287 → 0,2713, p **0,0005**), n'avançant que de 0,8192 = cos(35°). → **la
+panne du transfert ne vient pas du mécanisme** ; ⚠ analytique, le rouleau n'est pas une pile plane.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

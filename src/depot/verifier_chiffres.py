@@ -2594,6 +2594,38 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                             [f"**{val}**", f"{val}", f"**{val:+.3f}**", f"{val:+.3f}"],
                             cpt.name))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 123 : LE MARCHEUR RESTE VERROUILLE, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) Les ecarts des quatre conditions ne voyagent JAMAIS sans ceux du TEMOIN. Seuls, deux
+    # nombres qui ne bougent pas se lisent comme « le test ne voit rien » ; avec « 0,2287 ->
+    # 0,2713, p 0,0005 » sur le pas nominal impose, ils se lisent pour ce qu'ils sont.
+    # (2) Et l'avance par pas ne voyage jamais sans le plafond de 112 : « 1,0067 feuille » ne veut
+    # rien dire tant qu'on ne sait pas sur combien de pas l'exces se cumule.
+    ver = _source(racine, "le_marcheur_reste_t_il_verrouille.json")
+    if ver.exists():
+        d = json.loads(ver.read_text())
+        for c in d.get("conditions", []):
+            if not c.get("decidable"):
+                continue
+            nom = f"{c['obliquite_deg']:.0f} deg bruit {c['bruit']:.0f} de 123"
+            for cle, suffixe in (("ecart_median_premier_tiers", " (1er tiers)"),
+                                 ("ecart_median_dernier_tiers", " (dernier tiers)")):
+                ajoute(nom + suffixe, c[cle], 4, ver.name)
+            if c.get("p_appariee") is not None:
+                ajoute(nom + " (p)", c["p_appariee"], 4, ver.name)
+            if c.get("avance_par_pas_mediane") is not None:
+                ajoute(nom + " (avance)", c["avance_par_pas_mediane"], 4, ver.name)
+        w = d.get("temoin_le_pas_impose_derive", {})
+        if w.get("decidable"):
+            for cle, nom, dec in (("ecart_median_premier_tiers", "temoin 1er tiers de 123", 4),
+                                  ("ecart_median_dernier_tiers", "temoin dernier tiers de 123", 4),
+                                  ("p_appariee", "temoin p de 123", 4),
+                                  ("avance_attendue_par_pas", "temoin avance de 123", 4)):
+                if w.get(cle) is not None:
+                    ajoute(nom, w[cle], dec, ver.name)
+        if d.get("marches_par_condition") is not None:
+            v_ = d["marches_par_condition"]
+            out.append(("marches par condition de 123", [f"**{v_}**", f"{v_}"], ver.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 122 : LA FENETRE LOCALE RETIRE LA BUTEE, ET DEUX APPARIEMENTS LE DISENT.
     # (1) Le « 0 en butee » de la fenetre locale ne voyage JAMAIS sans le « 3 » de la fixe : seul,
     # zero se lit comme « rien ne se passe », alors que le fait est l'ECART entre les deux

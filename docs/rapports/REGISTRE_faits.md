@@ -4,7 +4,7 @@
 
 # Les faits, et ce qu'ils valent aujourd'hui
 
-**151 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **139** établi, **5** borné, **4** réfuté, **3** rétracté, **0** ouvert.
+**152 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **140** établi, **5** borné, **4** réfuté, **3** rétracté, **0** ouvert.
 
 ## R1 — 20 faits
 
@@ -81,7 +81,7 @@
 | `R3-F19` | **la chaîne radiale converge six tours et casse au septième** ; ce qui décide est la portée, pas le pas | officiel + 6 spires `gen_neighbor` : 4/7 convergent, 7ᵉ +1,475 ; pas 0,5 → 6/7 ; optimum en U, bassin 0,25–0,5 ; portée = `neighbor_exit_count` × pas ; repousse libre : casse au 3ᵉ tour | établi | `43` §1–6 · `spire_suivante.sh`, `table_chaine.py` |
 | `R3-F20` | **la chaîne avance d'une nappe à la fois, et s'érode** | 113 µm entre nappes (100–138) ; érosion **15,6 %/tour** sur l'aire utile (58 → 23 % valides) ; ~10 % d'un tour par nappe → une colonne, pas une bande ; rayon refusé (résidu 0,5 mm pour 0,113 d'écart) | établi ; « 4,0 % » rétracté | `44` §1–7 · `geometrie_chaine.py` |
 
-## R4 — 50 faits
+## R4 — 51 faits
 
 | id | fait | valeur | statut | source · producteur |
 |---|---|---|---|---|
@@ -135,6 +135,7 @@
 | `R4-F48` | **les virages du marcheur se COMPENSENT** : il ne se contente pas de ne pas dériver, il revient | rectitude réelle **0,928** contre **0,811** pour un tirage qui garde exactement le virage de chaque pas et en tire la direction au hasard ; **17 marches sur 19**, Wilcoxon apparié p **0,00141** | établi ; sonde inverse : sur une marche parfaitement droite le témoin répond « rien à compenser » | `119` · `nappe/le_marcheur_derive_t_il.py` |
 | `R4-F49` | **recentrer la fenêtre de pas est exact, l'élargir déplace le modèle nul** — donc le remède que `117` suggérait coûte une recalibration | le nul est invariant par changement d'échelle à **2,6·10⁻¹⁶** près (centres 80 à 400 µm, soit la plage que `118` déduit) ; élargir le déplace de **1,2 σ** pour [0,3 ; 3,0] et **2,0 σ** pour [0,25 ; 4,0], alors que le score calibré vaut `(score − mu)/sd` ; contrôle positif : le nul n'est pas plat, **0,1582 → 0,0925**, soit **24,4 erreurs-types** sur 800 tirages | établi ; élargir n'est pas interdit, mais exige SON nul : réutiliser la barre publiée remettrait le biais vers les courts que `nul_par_candidat` existe pour tuer | `121`, `117`, `118` · `nappe/recentrer_ou_elargir_la_fenetre.py` |
 | `R4-F50` | **la fenêtre recentrée localement retire la butée**, sur une pile dont la réponse est connue | empilement dont le pas décroît de 0,04 µm/µm : la fenêtre **fixe** est **3 fois en butée** et confirme **21 pas sur 26** ; la **locale** n'est **jamais en butée**, confirme **26 sur 26** et descend à **50,0 µm**, sous le bout court de **86,5 µm** — sans rien recalibrer, `121` l'autorisant | établi ; démonstration ANALYTIQUE : elle ne touche aucun volume et ne dit rien du vrai rouleau ; la borne de 0,9122 de `R4-F43` ne devient une mesure que si la re-course tourne | `122`, `121`, `118` · `nappe/combien_de_pas_la_matiere_porte.py` |
+| `R4-F51` | **le marcheur reste verrouillé sur les feuilles** : son décalage ne grandit dans aucune condition, et il avance d'une feuille par pas à moins d'un pour cent | écart à la feuille, premier tiers → dernier, sur 12 marches de 20 pas : **0,1249 → 0,1249** (pile propre), 0,1270 → 0,1155 (bruit 8), **0,1620 → 0,1354** à 35° d'obliquité (p **0,0137** — il **diminue**), 0,1253 → 0,1380 (35° + bruit, p 0,3804) ; avance médiane **1,0037** à **1,0067** feuille par pas ; témoin à pas nominal imposé sur la même pile oblique : **0,2287 → 0,2713**, p **0,0005**, avance 0,8192 = cos(35°) | établi ; ANALYTIQUE : une pile plane à pas constant n'a ni déchirure ni région sans matière ; c'est le mécanisme qui est mesuré, pas le rouleau | `123`, `119` · `nappe/le_marcheur_reste_t_il_verrouille.py` |
 
 ## R5 — 21 faits
 

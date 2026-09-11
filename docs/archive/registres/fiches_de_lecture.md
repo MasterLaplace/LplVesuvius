@@ -5265,6 +5265,23 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   qualité du scan.
 - **lu** : intégralement, 168 lignes, le 2026-09-11
 
+### docs/archive/123_le_marcheur_reste_verrouille.md
+- **lignes** : 122
+- **nature** : RESULTAT
+  (le marcheur atterrit-il du bon côté des feuilles ? mesuré au centième de feuille sur des piles
+  fabriquées, parce que le vrai volume ne dit pas où sont ses feuilles.)
+- **résumé** : ⭐⭐⭐⭐ **Le décalage à la feuille ne grandit dans aucune des quatre conditions.**
+  Pile propre **0,1249 → 0,1249** (p 1,0) ; bruit 8 : 0,1270 → 0,1155 ; **35° d'obliquité :
+  0,1620 → 0,1354, p 0,0137 — il DIMINUE**, le marcheur se re-verrouille ; 35° + bruit :
+  0,1253 → 0,1380, p 0,3804 (cesse de rejeter, n'exclut pas). ⭐⭐⭐⭐ L'avance vaut **1,0037 à
+  1,0067 feuille par pas**, donc **0,75 feuille** d'excès cumulé sur les 112 pas d'une traversée.
+  ⭐⭐⭐ Le témoin donne la puissance : un pas nominal imposé sur la même pile oblique **dérive**
+  (0,2287 → 0,2713, p 0,0005), n'avançant que de **0,8192 = cos(35°)**. ⚠⚠ ANALYTIQUE : une pile
+  plane à pas constant n'a ni déchirure ni région sans matière ; c'est le mécanisme qui est mesuré.
+  ⚠ Les douze marches d'une condition partent de phases différentes, sinon un décalage acquis au
+  premier pas ressemblerait à une propriété du mécanisme.
+- **lu** : intégralement, 122 lignes, le 2026-09-12
+
 ### docs/archive/122_la_re_course_est_ecrite.md
 - **lignes** : 106
 - **nature** : RESULTAT
