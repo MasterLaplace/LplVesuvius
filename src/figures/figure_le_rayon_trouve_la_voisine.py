@@ -34,7 +34,13 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from figure_commune import police, prose_tracable  # noqa: E402
+from figure_commune import (  # noqa: E402
+    police,
+    prose_tracable,
+    textes_debordants,
+    textes_hors_cadre,
+    textes_qui_se_recouvrent,
+)
 
 RACINE = Path(__file__).resolve().parents[2]
 
@@ -52,6 +58,22 @@ ANOMALIE_UM = 50.0
 ⚠ C'est un ordre de grandeur d'illustration, **pas une mesure** — la queue basse du rapport n'a
 pas de valeur unique. Il est choisi bien sous le pas de feuille pour montrer ce que le cercle
 doit isoler, et la légende le dit plutôt que de le laisser passer pour un chiffre."""
+
+def lire(chemin: Path) -> dict:
+    """Charge et valide la mesure du rayon de recherche."""
+    if not chemin.is_file():
+        raise FileNotFoundError(f"mesure absente : {chemin}")
+    d = json.loads(chemin.read_text(encoding="utf-8"))
+    if not isinstance(d, dict):
+        raise ValueError("la mesure doit être un dictionnaire JSON")
+    if "pas_entre_feuilles_um" not in d or "borne_du_rayon" not in d:
+        raise ValueError("mesure incomplète : pas_entre_feuilles_um ou borne_du_rayon manquant")
+    bornes = d.get("borne_du_rayon")
+    if not isinstance(bornes, dict):
+        raise ValueError("borne_du_rayon doit être un dictionnaire")
+    if "proximity_scroll1.jsonl" not in bornes or "proximity_scroll1_rayon_corrige.jsonl" not in bornes:
+        raise ValueError("bornes de rayon manquantes dans borne_du_rayon")
+    return d
 
 
 def nombres(mesure: dict) -> dict:
@@ -79,7 +101,7 @@ def prose(n: dict) -> list[str]:
     ]
 
 
-def dessiner(mesure: dict, sortie: Path) -> dict:
+def dessiner(mesure: dict, sortie: Path) -> tuple[Path, list, list]:
     from PIL import Image, ImageDraw
 
     gros, moyen, petit = police(17, 13, 11)
@@ -93,10 +115,17 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
     toile = Image.new("RGB", (L, H), FOND)
     d = ImageDraw.Draw(toile)
 
-    d.text((44, 26), "ce qu'un rayon de recherche trouve, selon sa taille",
-           fill=TEXTE, font=gros)
-    d.text((44, 52), "coupe a l'echelle -- les feuilles du rouleau, vues de cote",
-           fill=DISCRET, font=moyen)
+    poses: list[tuple[int, int, str, object]] = []
+    cadres: list[tuple[int, int, int, int]] = [(0, 0, L, H)]
+
+    def poser(x: int, y: int, txt: str, col=TEXTE, font=moyen):
+        d.text((x, y), txt, fill=col, font=font)
+        poses.append((x, y, txt, font))
+
+    poser(44, 26, "ce qu'un rayon de recherche trouve, selon sa taille",
+          col=TEXTE, font=gros)
+    poser(44, 52, "coupe a l'echelle -- les feuilles du rouleau, vues de cote",
+          col=DISCRET, font=moyen)
 
     for j, (cle, couleur, titre) in enumerate(
             (("ancien", ROUGE, "ancien rayon : AU MOINS %.0f um" % n["ancien"]),
@@ -104,7 +133,8 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
         x0 = 44 + j * (larg_p + 2)
         y0 = 96
         cx, cy = x0 + larg_p // 2, y0 + haut_p // 2
-        d.text((x0, y0 - 24), titre, fill=couleur, font=moyen)
+        cadres.append((x0, y0, x0 + larg_p, y0 + haut_p))
+        poser(x0, y0 - 24, titre, col=couleur, font=moyen)
         d.rectangle([x0, y0, x0 + larg_p, y0 + haut_p], outline=(60, 60, 60))
 
         # ⚠ Les feuilles sont tracees AVANT les cercles : par-dessus, un cercle ne montrerait
@@ -132,7 +162,7 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
             d.line([cx + rayon, cy, cx + rayon + 26, cy], fill=couleur, width=2)
             d.polygon([(cx + rayon + 32, cy), (cx + rayon + 22, cy - 5),
                        (cx + rayon + 22, cy + 5)], fill=couleur)
-            d.text((cx + rayon - 30, cy + 8), "au moins", fill=couleur, font=petit)
+            poser(cx + rayon - 30, cy + 8, "au moins", col=couleur, font=petit)
         d.ellipse([cx - 4, cy - 4, cx + 4, cy + 4], fill=TEXTE)
 
         pas_couverts = n[cle] / n["pas"]
@@ -140,34 +170,34 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
         # ligne de texte barree par un trait de la meme figure se lit mal deux fois -- le
         # texte et la feuille.
         d.rectangle([x0 + 2, y0 + haut_p - 50, x0 + larg_p - 2, y0 + haut_p - 6], fill=FOND)
-        d.text((x0 + 8, y0 + haut_p - 46),
-               f"porte a {pas_couverts:.1f} pas de feuille", fill=couleur, font=moyen)
-        d.text((x0 + 8, y0 + haut_p - 26),
-               ("il trouve la spire VOISINE, geometrie normale"
-                if pas_couverts >= 1.0 else
-                "il ne peut trouver QUE l'anomalie"), fill=DISCRET, font=petit)
+        poser(x0 + 8, y0 + haut_p - 46,
+              f"porte a {pas_couverts:.1f} pas de feuille", col=couleur, font=moyen)
+        poser(x0 + 8, y0 + haut_p - 26,
+              ("il trouve la spire VOISINE, geometrie normale"
+               if pas_couverts >= 1.0 else
+               "il ne peut trouver QUE l'anomalie"), col=DISCRET, font=petit)
 
     bas = 96 + haut_p + 16
     d.line([44, bas + 6, 68, bas + 6], fill=FEUILLE, width=2)
-    d.text((78, bas), "une feuille du rouleau", fill=DISCRET, font=petit)
+    poser(78, bas, "une feuille du rouleau", col=DISCRET, font=petit)
     d.line([300, bas + 6, 324, bas + 6], fill=AMBRE, width=3)
-    d.text((334, bas), f"l'anomalie cherchee (~{ANOMALIE_UM:.0f} um, illustration)",
-           fill=DISCRET, font=petit)
+    poser(334, bas, f"l'anomalie cherchee (~{ANOMALIE_UM:.0f} um, illustration)",
+          col=DISCRET, font=petit)
     d.ellipse([640, bas + 2, 648, bas + 10], fill=TEXTE)
-    d.text((658, bas), "la cellule mesuree", fill=DISCRET, font=petit)
+    poser(658, bas, "la cellule mesuree", col=DISCRET, font=petit)
 
     for k, ligne in enumerate(prose(n)):
-        d.text((44, bas + 30 + k * 20), ligne, fill=TEXTE, font=moyen)
+        poser(44, bas + 30 + k * 20, ligne, col=TEXTE, font=moyen)
 
     sortie.parent.mkdir(parents=True, exist_ok=True)
     toile.save(sortie)
-    return {"pas_um": n["pas"], "ancien_um": n["ancien"], "corrige_um": n["corrige"],
-            "pas_couverts_ancien": n["ancien"] / n["pas"],
-            "pas_couverts_corrige": n["corrige"] / n["pas"], "sortie": str(sortie)}
+    return sortie, poses, cadres
 
 
 def verifier() -> int:
-    """Auto-test HORS LIGNE : la lecture des nombres et la prose."""
+    """Auto-test HORS LIGNE : la lecture des nombres, la prose et le tracé."""
+    import tempfile
+
     echecs = controles = 0
 
     def v(nom, cond, detail=""):
@@ -204,6 +234,57 @@ def verifier() -> int:
     # ⚠ Le rapport est recalcule ici a la main : 382,6 / 142,8 = 2,7.
     v("... et elle dit les 2,7 pas", any("2.7 pas" in l for l in lignes), str(lignes))
 
+    # --- VALIDATION HORS-LIGNE lire() ET dessiner() AVEC SONDES ---
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp = Path(tmpdir)
+        p_json = tmp / "mesure.json"
+        p_json.write_text(json.dumps(faux), encoding="utf-8")
+
+        m_lu = lire(p_json)
+        v("lire charge la mesure", m_lu["pas_entre_feuilles_um"] == 142.8)
+
+        # Sonde 1 : fichier absent
+        sonde_absent = False
+        try:
+            lire(tmp / "inexistant.json")
+        except FileNotFoundError:
+            sonde_absent = True
+        v("sonde : fichier json absent lève FileNotFoundError", sonde_absent)
+
+        # Sonde 2 : schéma invalide
+        p_invalide = tmp / "invalide.json"
+        p_invalide.write_text(json.dumps({"incomplet": 1}), encoding="utf-8")
+        sonde_invalide = False
+        try:
+            lire(p_invalide)
+        except ValueError:
+            sonde_invalide = True
+        v("sonde : schéma json invalide lève ValueError", sonde_invalide)
+
+        # Tracé hors-ligne avec faux
+        cible = tmp / "dessin_test.png"
+        out, poses, cadres = dessiner(m_lu, cible)
+        v("dessiner rend le chemin demandé", out == cible)
+        v("le fichier png est produit", cible.is_file() and cible.stat().st_size > 0)
+        v("au moins 10 textes sont posés", len(poses) >= 10)
+        v("aucun texte ne déborde de la toile", textes_debordants(poses, cadres[0][2]) == [])
+        v("aucun texte ne sort de son cadre", textes_hors_cadre(poses, cadres[1:]) == [])
+        v("aucun chevauchement critique", textes_qui_se_recouvrent(poses) == [])
+
+        # Sonde 3 : texte débordant artificiel
+        gros, _, _ = police(17, 13, 11)
+        poses_trop_larges = poses + [(cadres[0][2] - 10, 50, "texte qui sort largement de l'image a droite", gros)]
+        debord = textes_debordants(poses_trop_larges, cadres[0][2])
+        v("sonde : un texte débordant est bien intercepté", len(debord) > 0)
+
+        # Sonde 4 : mesure incomplète dans dessiner
+        sonde_incomplet = False
+        try:
+            dessiner({"incomplet": 1}, tmp / "fail.png")
+        except SystemExit:
+            sonde_incomplet = True
+        v("sonde : dessiner refuse une mesure incomplète", sonde_incomplet)
+
     print(f"  {'ECHEC' if echecs else 'ALL PASS'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -218,10 +299,13 @@ def main() -> int:
     a = p.parse_args()
     if a.verifier:
         return verifier()
-    if not a.mesure.is_file():
-        raise SystemExit(f"mesure absente : {a.mesure}")
-    print(json.dumps(dessiner(json.loads(a.mesure.read_text()), a.sortie),
-                     indent=2, ensure_ascii=False))
+    mesure = lire(a.mesure)
+    out, _, _ = dessiner(mesure, a.sortie)
+    try:
+        cible = out.relative_to(RACINE)
+    except ValueError:
+        cible = out
+    print(f"écrit : {cible}")
     return 0
 
 
