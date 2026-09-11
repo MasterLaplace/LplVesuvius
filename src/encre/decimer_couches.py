@@ -2,7 +2,7 @@
 """Décimer une pile de couches et ses étiquettes du MÊME facteur, pour un test contrôlé.
 
 ⚠⚠ Pourquoi ce fichier existe. `Frag1` est scanné à **3,24 µm** et le modèle a été entraîné
-à **7,91 µm** (Scroll 1, cf. [`58`](../../docs/58_resolution_ou_rouleau.md) §8 bis). L'AUC de
+à **7,91 µm** (Scroll 1, cf. [`58`](../../docs/archive/58_resolution_ou_rouleau.md) §8 bis). L'AUC de
 **0,746** mesurée contre la vérité terrain est donc prise **hors du domaine d'entraînement**,
 sur un scan 2,4 fois plus fin. Le test juste est de ramener le fragment au pas du modèle et
 de refaire la mesure : si l'AUC monte, l'écart s'explique par la résolution ; sinon, non.

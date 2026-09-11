@@ -15,7 +15,7 @@ feuille à portée », affirmé avec la même assurance que sur une vraie mesure
 ⚠⚠ **Ce que cet audit lit, et ce qu'il ne lit pas.** Il balaie les profils **présents sur
 disque**, pas ceux qui ont produit les tableaux publiés. Une campagne relancée dans la même
 destination écrase les siens : mesuré le 2026-08-22, `data/spires_pas025/spire03` porte des
-profils de 14 h 29 alors que le verdict que [`43`](docs/43_la_chaine_des_spires.md)
+profils de 14 h 29 alors que le verdict que [`43`](docs/archive/43_la_chaine_des_spires.md)
 tabule date de 08 h 02 le même jour — six heures et un tirage plus tôt. Les deux sont
 justes ; ils ne parlent pas du même run.
 

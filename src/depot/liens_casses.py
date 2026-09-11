@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Un lien d'un document mène-t-il quelque part ?
 
-⚠⚠ Pourquoi ce fichier existe. `docs/00_carnet_de_bord.md` écrit ses liens en
+⚠⚠ Pourquoi ce fichier existe. `docs/archive/00_carnet_de_bord.md` écrit ses liens en
 `docs/61_…md` — un chemin depuis la RACINE — alors qu'il vit lui-même dans `docs/`. Un
 lecteur les résout donc en `docs/docs/61_…md`, et **aucun de ses 87 liens ne mène nulle
 part**, images comprises. Signalé par l'auteur le 2026-08-27, en ouvrant simplement le
 document.
 
 ⭐ La cause est datée : le grand ménage a déplacé 522 fichiers de la racine vers `docs/`
-([`56`](../../docs/56_le_grand_menage.md)), et un lien écrit depuis la racine reste
+([`56`](../../docs/archive/56_le_grand_menage.md)), et un lien écrit depuis la racine reste
 syntaxiquement valide après le déplacement — il pointe seulement ailleurs. Rien ne lève,
 rien ne manque, et le lien s'affiche normalement jusqu'à ce qu'on clique.
 
@@ -70,7 +70,7 @@ ces citations. Un lien y est du texte recopié, quel que soit son délimiteur.
 CITATION = re.compile(r"«[^»]*»")
 """Une citation verbatim, en guillemets français.
 
-⚠⚠⚠ POURQUOI CETTE REGLE EXISTE. `docs/registres/fiches_de_lecture.md` **transcrit** des lignes
+⚠⚠⚠ POURQUOI CETTE REGLE EXISTE. `docs/archive/registres/fiches_de_lecture.md` **transcrit** des lignes
 d'autres documents, guillemets compris, et sa garde `verifier_citations.py` retrouve chacune à sa
 ligne d'origine. Les liens relatifs qu'elles contiennent sont valides **depuis `docs/`**, pas
 depuis `docs/registres/` — donc ce contrôle les signalait, et il avait tort deux fois : ce ne

@@ -2,7 +2,7 @@
 """Trois paramètres qui semblaient importants, et qui cessent de l'être ensemble.
 
 ⚠⚠ POURQUOI CETTE FIGURE EXISTE. Le résultat de
-[`07`](../../docs/07_reparee_nest_pas_propre.md) §11 est le même énoncé répété sur trois familles
+[`07`](../../docs/archive/07_reparee_nest_pas_propre.md) §11 est le même énoncé répété sur trois familles
 — le seuil, la grandeur, la référence locale — et trois tableaux ne se lisent pas comme un fait
 unique. Trois courbes qui s'effondrent à gauche et trois qui restent plates à droite se lisent
 d'un coup, et c'est **exactement** ce que la mesure dit : le rayon injectait une erreur

@@ -2,7 +2,7 @@
 """La dérive de la chaîne est-elle une LOI, ou seulement une description ?
 
 ⚠⚠ **Ce que ce fichier décide, et pourquoi la réponse ne peut pas venir d'un ajustement.**
-[`44`](docs/44_ou_la_chaine_se_trouve.md) mesure que la chaîne **glisse** hors de la
+[`44`](docs/archive/44_ou_la_chaine_se_trouve.md) mesure que la chaîne **glisse** hors de la
 feuille connue — −69 µm à 5,76 mm, du même côté pour 73 % des points, avec une pente qui
 décélère. `31` §5 en tire la marche suivante : « corriger la dérive ». Mais corriger
 suppose de **prédire**, et prédire suppose une loi qui tienne **là où on n'a pas mesuré**.

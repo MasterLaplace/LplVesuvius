@@ -96,8 +96,9 @@ its source produces. This is what makes "reproducible" a check rather than a wor
 | `src/` | **everything the repository runs**, in fourteen families: `figures/`, `tables/`, `nappe/`, `volume/`, `encre/`, `graine/`, `commun/`, `depot/`, `outils/`, `campagnes/`, `excision/`, `xpu/`, `apprendre/`, `tracecheck/` |
 | `src/campagnes/`, `src/outils/` | the campaigns that produce results, and `temoins.sh` that checks everything |
 | `docs/mesures/*.json` | the result files every published number is recomputed from |
-| `docs/*.md` | the working notebook, in french: one document per measurement, dated |
-| `docs/journaux/`, `docs/registres/`, `docs/images/` | run traces, hand-kept tables, figures |
+| `docs/rapports/` | **start here**: the synthesis reports, in french, one per campaign, plus the fact and contradiction registers |
+| `docs/archive/` | the working notebook, frozen on 2026-09-11: one document per measurement, dated; nothing there is edited anymore |
+| `docs/journaux/`, `docs/archive/registres/`, `docs/images/` | run traces, hand-kept tables, figures |
 | `data/` | everything re-downloadable, and `data/artefacts/` which is versioned on purpose |
 
 ⚠ The working documents are in french and stay that way. They are the audit trail, not the

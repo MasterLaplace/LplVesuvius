@@ -140,10 +140,19 @@ def _instructions(chemin: Path, texte: str) -> list[tuple[int, str]]:
 
 def cd_vers_le_vide(textes: dict[str, str],
                     racine: Path = RACINE) -> list[tuple[str, int, str]]:
-    """Les instructions qui disent d'entrer dans un dossier que le dépôt n'a plus."""
+    """Les instructions qui disent d'entrer dans un dossier que le dépôt n'a plus.
+
+    ⚠ `docs/archive/` est exclu, et c'est une décision du 2026-09-11 : l'archive est du texte
+    GELÉ, ses `cd experiments` et `cd inference_xpu` étaient vrais quand ils ont été écrits et
+    personne ne les maintiendra plus. Les signaler apprendrait à ignorer ce contrôle ; ce qu'il
+    garde, ce sont les instructions qu'un lecteur suit AUJOURD'HUI — `src/`, `docs/rapports/`.
+    Les instructions périmées de l'archive sont recensées dans le registre des contradictions.
+    """
     trouvailles = []
     for relatif, texte in sorted(textes.items()):
         if not relatif.startswith(FAMILLES) or not relatif.endswith((".sh", ".py", ".md")):
+            continue
+        if relatif.startswith("docs/archive/"):
             continue
         for numero, ligne in _instructions(racine / relatif, texte):
             for cible in _CD_TEXTE.findall(ligne):

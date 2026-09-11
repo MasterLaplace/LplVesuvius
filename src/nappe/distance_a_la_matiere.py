@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """À quelle distance de ce point commence la matière scannée ? — le préalable, chiffré.
 
-⚠⚠ POURQUOI CE FICHIER EXISTE. [`54`](../../docs/54_cinq_rendus_vides.md) écrit le préalable :
+⚠⚠ POURQUOI CE FICHIER EXISTE. [`54`](../../docs/archive/54_cinq_rendus_vides.md) écrit le préalable :
 *sonder la graine avant de payer le tracé*. `matiere_au_point.py` répond **oui ou non**, et
 c'est déjà ce qui aurait arrêté treize rendus noirs. Mais « non » recouvre deux situations que
 rien ne distinguait, et qui ne demandent pas la même chose :

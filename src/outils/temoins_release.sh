@@ -116,9 +116,9 @@ done
 # restent DURES -- c est precisement la que « chaque nombre est verifiable » doit tenir.
 printf '  %-36s ' "chiffres de l'article"
 if uv run --project "$ROOT" python "$ROOT/src/depot/verifier_chiffres.py" \
-     "$ROOT/docs/article/article.typ" "$ROOT"/docs/*.md \
+     "$ROOT/docs/article/article.typ" "$ROOT"/docs/archive/*.md "$ROOT"/docs/rapports/*.md \
      --article "$ROOT/docs/article/article.typ" \
-     --soumission "$ROOT/docs/21_texte_de_soumission.md" \
+     --soumission "$ROOT/docs/archive/21_texte_de_soumission.md" \
      --hors-perimetre > /tmp/release_chiffres.log 2>&1; then
   printf '✅ %s\n' "$(grep -c '✅' /tmp/release_chiffres.log) chiffres retrouves"
 else

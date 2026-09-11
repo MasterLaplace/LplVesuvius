@@ -2,7 +2,7 @@
 """Ce qu'un rayon de recherche trouve, selon sa taille — en coupe, à l'échelle mesurée.
 
 ⚠⚠ POURQUOI CETTE FIGURE EXISTE. Le résultat de
-[`07`](../../docs/07_reparee_nest_pas_propre.md) §11 est une CAUSE, pas un nombre : trois familles
+[`07`](../../docs/archive/07_reparee_nest_pas_propre.md) §11 est une CAUSE, pas un nombre : trois familles
 de paramètres cessent de compter ensemble parce que le rayon trouvait la spire **voisine**, qui
 est de la géométrie parfaitement normale. Cette phrase demande une image — un lecteur qui voit un
 cercle engloutir trois feuilles comprend en une seconde ce qu'aucune table de rho ne lui dira.

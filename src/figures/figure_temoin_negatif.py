@@ -3,7 +3,7 @@
 
 ⚠⚠ **Ce que la figure établit, et ce qu'elle n'établit pas.** Elle ne montre PAS que le
 détecteur signale de l'encre là où il n'y en a pas — sur ce rouleau il n'en signale nulle
-part, ce que [`36`](docs/36_lorigine_de_la_pile.md) §5bis avait déjà mesuré. Elle montre
+part, ce que [`36`](docs/archive/36_lorigine_de_la_pile.md) §5bis avait déjà mesuré. Elle montre
 quelque chose de plus étroit et de vérifiable : **sa sortie ne dépend pas de ce qu'il
 reçoit**.
 

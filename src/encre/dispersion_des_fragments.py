@@ -2,7 +2,7 @@
 """Trois fragments, trois AUC — et le DOMAINE rapporté décide laquelle est l'exception.
 
 ⚠⚠⚠ Pourquoi ce fichier existe, et c'est une correction de ma propre lecture.
-[`63`](../../docs/63_la_premiere_verite_terrain.md) §2 bis publiait « entre 0,60 et 0,75
+[`63`](../../docs/archive/63_la_premiere_verite_terrain.md) §2 bis publiait « entre 0,60 et 0,75
 selon le fragment » sur la foi de deux points, lus sur le domaine **tout le segment**. Le
 troisième point montre que ce domaine est contaminé : il compte tout le papyrus **vierge**
 que la fenêtre contient par hasard, et une fenêtre à 1,5 % d'encre y est tirée vers le bas

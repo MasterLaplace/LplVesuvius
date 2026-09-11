@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Quel couple de fenêtres peut porter une pente, et lequel rendra l'identité.
 
-⚠⚠ **La question que [`51`](../../docs/51_une_pente_a_deux_appuis.md) laisse ouverte.** Sur
+⚠⚠ **La question que [`51`](../../docs/archive/51_une_pente_a_deux_appuis.md) laisse ouverte.** Sur
 `PHercParis4`, la fenêtre de 41 couches est sous le seuil de détection : tout couple qui
 l'emploie rend l'identité du couple, quoi qu'il y ait dans le volume. Relancer la même
 campagne avec le même couple redonnerait donc **le même nombre**, et il faut savoir *avant
@@ -167,7 +167,7 @@ def amplitude_a_travers_les_niveaux(xs: list[dict],
                                     tol: float = TOLERANCE_PROFONDEUR) -> list[dict]:
     """L'amplitude survit-elle à un changement de niveau de pyramide ?
 
-    ⚠⚠ **La question que [`50`](../../docs/50_le_rendu_attendait_la_memoire.md) ne pose
+    ⚠⚠ **La question que [`50`](../../docs/archive/50_le_rendu_attendait_la_memoire.md) ne pose
     pas.** Il mesure que α est préservé d'un niveau à l'autre, et c'est ce qui autorise à
     rendre moins cher. Mais α est un rapport d'écarts, pas une amplitude : un niveau plus
     grossier MOYENNE des voxels, donc il peut très bien lisser le relief que le plancher de

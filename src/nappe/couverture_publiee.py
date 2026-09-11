@@ -3,7 +3,7 @@
 
 ⚠⚠ POURQUOI CETTE MESURE DÉCIDE. Tout ce qu'on sait de la chaîne tangentielle dit
 « elle est sur DU papyrus » — la matière répond, franchement au-dessus du hasard, sur
-5,76 mm ([`44`](../../docs/44_ou_la_chaine_se_trouve.md)). Aucune de ces mesures ne dit
+5,76 mm ([`44`](../../docs/archive/44_ou_la_chaine_se_trouve.md)). Aucune de ces mesures ne dit
 qu'elle est sur la **BONNE** feuille, celle qui prolonge le texte. Seule l'**encre** le
 dirait, et l'encre publiée n'existe que là où quelqu'un est déjà passé.
 

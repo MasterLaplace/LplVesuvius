@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """L'espace de causes, mur par mur, et ce qu'il en reste.
 
-⚠⚠ POURQUOI CETTE FIGURE. Le tableau de [`55`](docs/55_les_murs_et_leurs_causes.md) dit
+⚠⚠ POURQUOI CETTE FIGURE. Le tableau de [`55`](docs/archive/55_les_murs_et_leurs_causes.md) dit
 tout, et il le dit en trois écrans. Ce qu'on ne voit pas dans un tableau, c'est la **forme** :
 que trois murs sur quatre n'ont plus rien d'ouvert, et que celui qui reste ouvert est aussi
 celui où le plus de choses ont été éliminées.

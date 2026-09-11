@@ -4,7 +4,7 @@
 ⚠⚠ POURQUOI. `gen_neighbor` projette une surface le long de ses **normales** : la spire N+1
 est la spire N poussée d'une nappe vers l'extérieur. Ça donne une **colonne** — la profondeur.
 Ce que le graal demande est une **bande** : suivre UNE feuille autour du tour, c'est-à-dire
-projeter le long de la **tangente**. [`44`](docs/44_ou_la_chaine_se_trouve.md) §7 le nomme
+projeter le long de la **tangente**. [`44`](docs/archive/44_ou_la_chaine_se_trouve.md) §7 le nomme
 comme la seule chaîne jamais tentée, et vérifie dans la source que l'outil n'a aucun mode qui
 la fasse.
 

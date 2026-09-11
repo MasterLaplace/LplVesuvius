@@ -2,7 +2,7 @@
 """Les cellules que `windcheck` retire sont-elles vraiment indiscernables de celles qu'il garde ?
 
 ⚠⚠ **Pourquoi cette figure existe, et pourquoi elle commence par une vérification.**
-[`04`](docs/04_experience_excision.md) publie un tableau où les deux populations ont la
+[`04`](docs/archive/04_experience_excision.md) publie un tableau où les deux populations ont la
 **même** moyenne, la même médiane, les mêmes quartiles et le même écart-type — à la
 décimale. C'est le résultat, et c'est aussi exactement à quoi ressemble **une colonne
 recopiée deux fois**. Un lecteur ne peut pas distinguer les deux, et l'auteur non plus.

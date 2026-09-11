@@ -15,7 +15,7 @@ rouleau atteignable**.
 
 Donc « le modèle lit-il sur un rouleau qu'il n'a pas vu ? » n'a **pas de réponse mesurable**
 avec les données atteignables. Toute affirmation de ce dépôt sur un rouleau passe par σ ou par
-une comparaison à un rendu publié — et [`65`](../../docs/65_ce_que_sigma_ne_dit_pas.md) vient
+une comparaison à un rendu publié — et [`65`](../../docs/archive/65_ce_que_sigma_ne_dit_pas.md) vient
 de montrer que σ ne prédit pas la qualité mesurée.
 
 ⚠⚠ Ce n'est PAS un échec de recherche, c'est une propriété du corpus publié, et elle se

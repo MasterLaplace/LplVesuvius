@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Les deux graines du 2×2, sondées dans le volume scanné — et l'écart est de SEPT SPIRES.
 
-⚠⚠ **Ce que cette figure établit.** [`54`](../../docs/54_cinq_rendus_vides.md) laisse la cause
+⚠⚠ **Ce que cette figure établit.** [`54`](../../docs/archive/54_cinq_rendus_vides.md) laisse la cause
 « la graine, c'est-à-dire l'endroit » **ouverte** : le 2×2 croisé tenait un *nombre* constant
 et non un *endroit*, donc il n'était pas en position de conclure. Six sondes le referment d'un
 cran : la graine `ps256` désigne de la matière **dans les deux repères** dès qu'on la convertit

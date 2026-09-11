@@ -9,7 +9,7 @@ tâches laisse croire qu'on avance quand on tourne ; une feuille de route qui li
 **éliminées** montre l'espace rétrécir, ce qui est le seul progrès mesurable sur un problème
 non résolu.
 
-⭐ Le registre lui-même (`docs/registres/murs_et_causes.tsv`) est tenu **à la main** : ce sont des
+⭐ Le registre lui-même (`docs/archive/registres/murs_et_causes.tsv`) est tenu **à la main** : ce sont des
 jugements, pas des mesures, et les fabriquer automatiquement serait inventer un consensus.
 Ce qui est **vérifié par machine**, ce sont ses **pointeurs** — chaque ligne nomme un document
 et une ancre, et la batterie exige que l'ancre s'y trouve encore.
@@ -26,7 +26,7 @@ import sys
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parents[2]
-REGISTRE = RACINE / "docs" / "registres" / "murs_et_causes.tsv"
+REGISTRE = RACINE / "docs" / "archive" / "registres" / "murs_et_causes.tsv"
 
 # ⚠ Vocabulaire FERMÉ. Un verdict libre laisserait écrire « plutôt éliminée », qui ne veut rien
 # dire et qui est exactement ce qu'on écrit quand on n'a pas mesuré.
@@ -86,7 +86,7 @@ def rendre(entrees: list[dict]) -> str:
         "# 55 — Les murs, et l'espace de causes qui rétrécit",
         "",
         "> ⚠⚠ **Ce document est RENDU, pas écrit.** Sa source est",
-        "> [`docs/registres/murs_et_causes.tsv`](registres/murs_et_causes.tsv) et son producteur est",
+        "> [`docs/archive/registres/murs_et_causes.tsv`](registres/murs_et_causes.tsv) et son producteur est",
         "> `uv run python src/depot/murs_et_causes.py --rendre`. L'éditer à la main serait perdre",
         "> la modification au rendu suivant — et surtout perdre la garde : la batterie vérifie que",
         "> **chaque ligne pointe vers un document qui contient encore son ancre**.",
@@ -190,7 +190,7 @@ def verifier() -> int:
     # ancre. C'est ce qui empêche ce tableau de devenir `EXTRACTION.md` — une table maintenue
     # à la main qui dérive en silence de ce qu'elle décrit.
     for e in entrees:
-        chemin = RACINE / "docs" / e["doc"]
+        chemin = RACINE / "docs" / "archive" / e["doc"]
         v(f"le document existe : {e['doc']}", chemin.is_file())
         if chemin.is_file():
             v(f"l'ancre s'y trouve encore : « {e['ancre'][:40]} »",
@@ -217,7 +217,7 @@ def verifier() -> int:
 
     # ⚠⚠ Cas négatif : une ancre inventée DOIT faire échouer la garde. Sans cette sonde, la
     # garde pourrait ne rien vérifier du tout.
-    faux = RACINE / "docs" / entrees[0]["doc"]
+    faux = RACINE / "docs" / "archive" / entrees[0]["doc"]
     v("une ancre inventée ne serait pas trouvée",
       "ancre-qui-n-existe-pas-42" not in faux.read_text(encoding="utf-8"))
 
@@ -228,7 +228,7 @@ def verifier() -> int:
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--rendre", type=Path, nargs="?",
-                   const=RACINE / "docs" / "55_les_murs_et_leurs_causes.md")
+                   const=RACINE / "docs" / "archive" / "55_les_murs_et_leurs_causes.md")
     p.add_argument("--verifier", action="store_true")
     a = p.parse_args()
     if a.verifier:

@@ -3,7 +3,7 @@
 
 ⚠⚠ POURQUOI. Une chaîne de projections et un bond direct de même longueur totale sont deux
 manières d'atteindre le même point. Les comparer par leur **profil** demande deux rendus, et
-[`44`](docs/44_ou_la_chaine_se_trouve.md) a mesuré que ce chemin échoue quand la distance
+[`44`](docs/archive/44_ou_la_chaine_se_trouve.md) a mesuré que ce chemin échoue quand la distance
 est assez grande pour que les deux soient déjà sorties de leur feuille : on oppose alors
 « mauvais » à « irrendable ». La question « les deux atterrissent-elles au même endroit ? »
 est plus élémentaire, et elle ne coûte **aucun rendu**.
@@ -145,7 +145,7 @@ def en_micrometres(r: dict, voxel_um: float, spire_um: float | None = None) -> d
     ⭐ Et `spire_um` ajoute la seule unité qui rende un écart LISIBLE : la **spire**. « 8 µm »
     ne dit pas si deux maillages sont sur la même feuille ; « 0,05 spire » le dit. L'écart
     inter-spires est mesuré par `src/nappe/espacement_spires.py` et publié rouleau par
-    rouleau dans [`16`](docs/16_carte_difficulte_rouleaux_du_prix.md).
+    rouleau dans [`16`](docs/archive/16_carte_difficulte_rouleaux_du_prix.md).
 
     ⚠⚠ Il n'a AUCUN défaut, et c'est délibéré : une spire appartient à son rouleau — 150 µm
     pour `PHerc0125`, 225 pour `PHerc1667`. En défauter un attribuerait la géométrie d'un

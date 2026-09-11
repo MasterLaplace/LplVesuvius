@@ -2,7 +2,7 @@
 """Ce que le champ de fibres publié contient RÉELLEMENT — et ce qu'il ne contient pas.
 
 ⚠⚠⚠ POURQUOI CE FICHIER EXISTE. `A2 bis` (⭐⭐⭐ du registre) est déclarée « débloquée » par
-[`78`](../../docs/78_lombilic_publie.md) §2, qui annonce *« un champ d'enroulement bâti sur l'axe
+[`78`](../../docs/archive/78_lombilic_publie.md) §2, qui annonce *« un champ d'enroulement bâti sur l'axe
 et l'orientation des fibres (`representations/predictions/fibers/`, publié pour `PHerc0139` en
 **`nx`/`ny`/`nz`** OME-Zarr) »*. Cette phrase décide de tout un chantier, donc elle méritait
 d'être vérifiée à la source plutôt que reprise.

@@ -3,14 +3,14 @@
 
 ⚠⚠ POURQUOI CE FICHIER EXISTE. `M1ter` (`29` §6) demande depuis des semaines *« l'encre
 est-elle lisible à 9 µm ? »*, et tout ce que le dépôt savait en dire passait par des σ et des
-comparaisons entre objets. [`63`](../../docs/63_la_premiere_verite_terrain.md) §2 a rendu les
+comparaisons entre objets. [`63`](../../docs/archive/63_la_premiere_verite_terrain.md) §2 a rendu les
 premiers chiffres contre de **vraies étiquettes** — 0,693 à 6,48 µm, 0,686 à 9,72 — mais les
 a publiés pour répondre à une **autre** question : *la résolution explique-t-elle l'écart aux
 0,925 ?* La réponse était non, et la question de `M1ter` est restée ouverte à côté de sa
 propre réponse.
 
   ⭐⭐ Les deux questions ne sont pas la même, et une seule des deux est établissable :
-     « 9,72 est-il PIRE que 3,24 ? »  → [`64`](../../docs/64_la_dispersion_netait_pas_un_effet.md)
+     « 9,72 est-il PIRE que 3,24 ? »  → [`64`](../../docs/archive/64_la_dispersion_netait_pas_un_effet.md)
        dit qu'il faudrait 79 tuiles par condition ; on en a 16.
      « 9,72 est-il AU-DESSUS DU HASARD ? » → c'est un intervalle contre 0,5, et 16 tuiles
        suffisent largement.

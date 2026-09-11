@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """La faible dispersion des rouleaux « stables » est-elle une TRONCATURE ?
 
-⚠⚠ **La question que `29` N3 pose, et pourquoi elle compte.** [`35`](docs/35_le_tirage_sur_douze_rouleaux.md)
+⚠⚠ **La question que `29` N3 pose, et pourquoi elle compte.** [`35`](docs/archive/35_le_tirage_sur_douze_rouleaux.md)
 mesure que la dispersion d'aire vaut 0,5 % chez les rouleaux dont les six tirages butent sur
 le plafond de generations, contre 19,9 % chez les autres — un facteur 40. Deux lectures
 s'opposent et rien ne les separait : soit ces rouleaux sont **reellement plus stables**,

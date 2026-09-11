@@ -24,7 +24,7 @@ import sys
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parents[2]
-REGISTRE = RACINE / "docs" / "registres" / "taches.tsv"
+REGISTRE = RACINE / "docs" / "archive" / "registres" / "taches.tsv"
 SABLIER = "⏳"
 
 ETATS = ("ouverte", "recit", "legende")
@@ -61,11 +61,14 @@ COLONNES = ("doc", "ancre", "etat", "raison")
 def marqueurs(racine: Path = RACINE) -> list[tuple[str, int, str]]:
     """(document, ligne, texte) pour chaque sablier de l'arbre — DÉRIVÉ, jamais listé.
 
-    ⚠ `HANDOFF.md` en fait partie : c'est le document de passation, donc l'endroit le plus
+    ⚠ `docs/archive/HANDOFF.md` en fait partie : c'est le document de passation, donc l'endroit le plus
     probable pour qu'une tâche soit laissée et oubliée.
     """
     out = []
-    cibles = sorted((racine / "docs").glob("*.md")) + [racine / "HANDOFF.md"]
+    # ⚠ Le HANDOFF est dans l'archive depuis le 2026-09-11, donc le glob le prend ; les rapports
+    # de `docs/rapports/` ne sont PAS balayés : leurs portes ouvertes vivent dans
+    # `PORTES_OUVERTES.md`, pas dans ce registre gelé.
+    cibles = sorted((racine / "docs" / "archive").glob("*.md"))
     for f in cibles:
         if not f.is_file():
             continue
@@ -75,8 +78,8 @@ def marqueurs(racine: Path = RACINE) -> list[tuple[str, int, str]]:
     return out
 
 
-DOCS_DE_BACKLOG = ("docs/18_batch_produire.md", "docs/22_batch_repliquer.md",
-                   "docs/29_ce_qui_reste.md")
+DOCS_DE_BACKLOG = ("docs/archive/18_batch_produire.md", "docs/archive/22_batch_repliquer.md",
+                   "docs/archive/29_ce_qui_reste.md")
 """Les documents qui portent un backlog NUMÉROTÉ (`| I1 | … |`, `| M7 | … |`).
 
 ⚠ `06_mesures_a_faire.md` et `31_roadmap.md` en ont l'air par leur nom et n'en portent pas :
@@ -202,19 +205,19 @@ def verifier() -> int:
 
     with tempfile.TemporaryDirectory() as d:
         r = Path(d)
-        (r / "docs" / "registres").mkdir(parents=True)
-        (r / "docs" / "01_x.md").write_text(
+        (r / "docs" / "archive" / "registres").mkdir(parents=True)
+        (r / "docs" / "archive" / "01_x.md").write_text(
             f"une ligne\n{SABLIER} une tache qui reste\nune autre\n", encoding="utf-8")
-        (r / "HANDOFF.md").write_text(f"## {SABLIER} un titre de recit\n", encoding="utf-8")
+        (r / "docs/archive/HANDOFF.md").write_text(f"## {SABLIER} un titre de recit\n", encoding="utf-8")
 
         m = marqueurs(r)
         v("les sabliers des documents sont trouves", len(m) == 2, str(m))
-        v("... y compris dans HANDOFF.md", any(x[0] == "HANDOFF.md" for x in m), str(m))
+        v("... y compris dans docs/archive/HANDOFF.md", any(x[0] == "docs/archive/HANDOFF.md" for x in m), str(m))
         v("... avec leur numero de ligne", m[0][1] == 2, str(m[0]))
 
-        reg = r / "docs" / "registres" / "taches.tsv"
+        reg = r / "docs" / "archive" / "registres" / "taches.tsv"
         reg.write_text("doc\tancre\tetat\traison\n"
-                       "docs/01_x.md\tune tache qui reste\touverte\tpas commencee\n",
+                       "docs/archive/01_x.md\tune tache qui reste\touverte\tpas commencee\n",
                        encoding="utf-8")
         a = apparier(m, lire_registre(reg))
         v("un marqueur classe est apparie", len(a["classes"]) == 1, str(a["classes"]))
@@ -222,9 +225,9 @@ def verifier() -> int:
         # sinon la question « reste-t-il du travail ? » redevient une relecture a la main.
         # ⚠⚠⚠ LE CONTROLE QUI PORTE LA NOUVELLE REGLE : une entree « faite » est refusee.
         # Sans lui, retirer `faite` d'`ETATS` serait decoratif -- rien ne lirait le champ.
-        reg_faite = r / "docs" / "registres" / "faite.tsv"
+        reg_faite = r / "docs" / "archive" / "registres" / "faite.tsv"
         reg_faite.write_text("doc\tancre\tetat\traison\n"
-                             "docs/01_x.md\tune tache qui reste\tfaite\tdeja fait\n",
+                             "docs/archive/01_x.md\tune tache qui reste\tfaite\tdeja fait\n",
                              encoding="utf-8")
         af = apparier(m, lire_registre(reg_faite))
         v("un sablier classe « faite » est une contradiction",
@@ -236,12 +239,12 @@ def verifier() -> int:
           all(x not in ETATS for x in ETATS_INTERDITS), str(ETATS))
 
         v("... et un marqueur SANS entree est signale non classe",
-          len(a["non_classes"]) == 1 and a["non_classes"][0][0] == "HANDOFF.md",
+          len(a["non_classes"]) == 1 and a["non_classes"][0][0] == "docs/archive/HANDOFF.md",
           str(a["non_classes"]))
 
         reg.write_text("doc\tancre\tetat\traison\n"
-                       "docs/01_x.md\tune tache qui reste\touverte\tpas commencee\n"
-                       "docs/01_x.md\tune ancre qui a disparu\tfaite\tx\n", encoding="utf-8")
+                       "docs/archive/01_x.md\tune tache qui reste\touverte\tpas commencee\n"
+                       "docs/archive/01_x.md\tune ancre qui a disparu\tfaite\tx\n", encoding="utf-8")
         a = apparier(m, lire_registre(reg))
         # ⚠⚠ L autre sens : une entree dont l ancre n est plus dans le document decrit un
         # texte qui n existe plus. Sans ce controle le registre derive du texte en silence.
@@ -253,8 +256,8 @@ def verifier() -> int:
     # --- les items numerotes ---
     with tempfile.TemporaryDirectory() as d:
         r = Path(d)
-        (r / "docs").mkdir(parents=True)
-        (r / "docs" / "22_batch_repliquer.md").write_text(
+        (r / "docs" / "archive").mkdir(parents=True)
+        (r / "docs" / "archive" / "22_batch_repliquer.md").write_text(
             "| P1 | ~~fait~~ |\n| Q3 | ⏳ a faire |\n| Q2 | sans marque |\n"
             "| **R2** | ✅ fini |\nligne qui n est pas un item\n", encoding="utf-8")
         it = items(r)
@@ -266,7 +269,7 @@ def verifier() -> int:
           str(it[2]))
         # ⚠⚠ Une question repondue NEGATIVEMENT est close, pas en attente. Ma premiere
         # version comptait `❌` comme ouvert et annoncait donc du travail qui n existait pas.
-        (r / "docs" / "29_ce_qui_reste.md").write_text(
+        (r / "docs" / "archive" / "29_ce_qui_reste.md").write_text(
             "| A1 | ❌ non, mesure faite |\n| A2 | ➡️ sans objet |\n| A3 | ⚠ repondu, nuance |\n",
             encoding="utf-8")
         it2 = [x for x in items(r) if x["doc"].endswith("29_ce_qui_reste.md")]

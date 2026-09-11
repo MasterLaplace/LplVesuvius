@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """La dispersion 0,52–0,75 entre fragments est-elle un EFFET, ou le bruit d'une fenêtre ?
 
-⚠⚠⚠ POURQUOI CE FICHIER EXISTE. [`63`](../../docs/63_la_premiere_verite_terrain.md) laisse
+⚠⚠⚠ POURQUOI CE FICHIER EXISTE. [`63`](../../docs/archive/63_la_premiere_verite_terrain.md) laisse
 une seule tâche vivante : « la dispersion est réelle, elle est plus grande que tout écart
 qu'on chercherait à mesurer entre deux réglages, et elle n'est pas expliquée ». Mais avant
 de chercher **ce qui** distingue trois fragments, il faut savoir s'il y a quelque chose à

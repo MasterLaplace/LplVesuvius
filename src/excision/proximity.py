@@ -156,7 +156,7 @@ def local_baseline(cols: np.ndarray, sample: np.ndarray, distances: np.ndarray, 
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Proximite anormale entre regions non adjacentes d'une trace.",
-        epilog="Ne demande ni volume ni modele. Voir docs/05_le_predicat_est_trop_etroit.md.",
+        epilog="Ne demande ni volume ni modele. Voir docs/archive/05_le_predicat_est_trop_etroit.md.",
     )
     parser.add_argument("mesh", type=Path, help="repertoire .tifxyz")
     parser.add_argument("--sample", type=int, default=20000, help="cellules tirees (defaut: 20000)")

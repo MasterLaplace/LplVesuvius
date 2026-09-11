@@ -14,7 +14,7 @@ question se tranche dans le volume, sans modele et sans etiquette.
 Ce module ECHANTILLONNE ; il ne conclut pas. La comparaison des distributions est
 faite en aval, sur la sortie machine.
 
-Voir docs/04_experience_excision.md pour la conception et le critere de refutation.
+Voir docs/archive/04_experience_excision.md pour la conception et le critere de refutation.
 """
 
 from __future__ import annotations
@@ -218,7 +218,7 @@ def main() -> int:
         description="Echantillonne le CT aux cellules excisees et a un temoin apparie.",
         epilog=(
             "Sortie machine sur stdout (--json) ou tableau lisible. "
-            "Voir docs/04_experience_excision.md pour l'hypothese nulle et les controles."
+            "Voir docs/archive/04_experience_excision.md pour l'hypothese nulle et les controles."
         ),
     )
     parser.add_argument("original", type=Path, help="repertoire .tifxyz d'origine")

@@ -4,9 +4,9 @@
 > Gardé tel quel comme trace de ce qui a réellement été demandé.
 >
 > 1. **Il n'énonce nulle part le cadrage de l'auteur** — *« le but est le DÉROULEMENT, pas la
->    lecture ; l'encre est la règle graduée »* (`HANDOFF.md` §0 et §1) — et il met en tête deux
+>    lecture ; l'encre est la règle graduée »* (`docs/archive/HANDOFF.md` §0 et §1) — et il met en tête deux
 >    résultats sur la **lisibilité** : le nombre de Fresnel et les 103 cases vides. Le rapport
->    qui en est sorti ([`69`](../69_reponse_dun_chercheur_exterieur.md)) consacre en conséquence
+>    qui en est sorti ([`69`](../archive/69_reponse_dun_chercheur_exterieur.md)) consacre en conséquence
 >    **4 mois sur 10** à la règle graduée et titre son mois 1 *« trancher la physique avant la
 >    géométrie »*, l'inversion exacte du cadrage.
 > 2. **Il ne demande pas de juger notre travail.** Il donne nos résultats comme une liste
@@ -418,5 +418,5 @@ Tout ce qui précède est vérifiable dans le dépôt :
 | les 103 cases vides du régime du prix | `docs/68` §4, `src/encre/la_case_vide.py`, `docs/mesures/la_case_vide.json` |
 | le pinceau d'approbation et son format | `data/repos/villa` au commit `e583fb6` (`volume-cartographer/apps/VC3D/segmentation/tools/ApprovalMaskBrushTool.cpp`, `core/src/QuadSurface.cpp:1861`, `core/src/GrowPatch.cpp:133`) |
 | la méthode du papier, étape par étape | `docs/68` §2 (17 étapes, 4 humaines) |
-| l'état de l'art du domaine | `docs/00_etat_de_lart.md` |
+| l'état de l'art du domaine | `docs/archive/00_etat_de_lart.md` |
 | l'article en cours | `docs/article/article.typ` (25 p., 17 références) |

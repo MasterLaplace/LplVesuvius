@@ -41,10 +41,15 @@ DESTINATIONS = {
     DOCUMENT: "docs",
     MESURE: "docs/mesures",
     JOURNAL: "docs/journaux",
-    REGISTRE: "docs/registres",
+    REGISTRE: "docs/archive/registres",
 }
 """Où chaque nature va vivre. ⚠ `document` reste à la racine : c'est ce que « docs » veut
-dire, et un `docs/documents/` mettrait le contenu du dossier à un niveau de son nom."""
+dire, et un `docs/documents/` mettrait le contenu du dossier à un niveau de son nom.
+
+⚠ Depuis le 2026-09-11 les documents numérotés sont GELÉS dans `docs/archive/` et la synthèse
+vivante est dans `docs/rapports/` ; les quatre registres tenus à la main ont suivi l'archive.
+Ce classement ne dit donc plus où un `.md` doit aller — seulement qu'un `.md` à la racine
+n'est ni une mesure, ni un journal, ni un registre."""
 
 PAR_EXTENSION = {
     ".md": DOCUMENT,
@@ -239,7 +244,7 @@ def journaux_cites(racine: Path = RACINE) -> list[str]:
 
     motif = re.compile(r"docs/([A-Za-z0-9_.-]+\.log)")
     vus = set()
-    for f in sorted((racine / "docs").glob("*.md")):
+    for f in sorted((racine / "docs" / "archive").glob("*.md")):
         vus.update(motif.findall(f.read_text(encoding="utf-8", errors="replace")))
     return sorted(vus)
 
@@ -322,7 +327,7 @@ def verifier() -> int:
         v("la carte prend la mesure", c.get(f"docs/{MESURE_TEMOIN}") == "docs/mesures",
           str(c))
         v("... le journal", c.get(f"docs/{JOURNAL_TEMOIN}") == "docs/journaux")
-        v("... le registre", c.get(f"docs/{registre}") == "docs/registres")
+        v("... le registre", c.get(f"docs/{registre}") == "docs/archive/registres")
         v("... et laisse le document", f"docs/{DOC_TEMOIN}" not in c)
         v("... et le README", "docs/README.md" not in c)
         v("... et l inclassable", "docs/x.bin" not in c)

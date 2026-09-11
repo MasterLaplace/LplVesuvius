@@ -2,7 +2,7 @@
 """LE CONTRÔLE DUR : nos cartes sont-elles plus périodiques qu'une surface SANS feuille ?
 
 ⚠⚠⚠ POURQUOI CE FICHIER EXISTE, et c'est la question que tout le reste prépare.
-[`60`](../../docs/60_la_constante_qui_rendait_le_modele_muet.md) établit que les quatre
+[`60`](../../docs/archive/60_la_constante_qui_rendait_le_modele_muet.md) établit que les quatre
 surfaces publiées de `PHerc1447` rendent **8 fenêtres périodiques sur 12** là où leurs propres
 pixels mélangés en rendent **zéro** — p = 0,0007. Mais mélanger des pixels détruit **toute**
 structure spatiale, donc ce test répond « nos cartes sont structurées », ce qui est plus pauvre
@@ -23,7 +23,7 @@ leur `seed.json`, et la seconde a été **tirée par l'outil**, pas choisie.
 
 ⚠ Ce que ce fichier N'ÉTABLIT PAS : que nos cartes portent du grec. Il établit que leur
 périodicité n'est pas ce qu'une surface sans feuille produit. Lire les lettres reste l'affaire
-du juge de [`09`](../../docs/09_protocole_jugement_modele.md), et cette session en est
+du juge de [`09`](../../docs/archive/09_protocole_jugement_modele.md), et cette session en est
 disqualifiée.
 
 Usage :

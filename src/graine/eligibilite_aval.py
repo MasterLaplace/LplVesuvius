@@ -2,13 +2,13 @@
 """Sur quel rouleau peut-on à la fois TRACER et LIRE ?
 
 ⚠⚠ **La question qui bloque le point le plus profond du registre.**
-[`29`](docs/29_ce_qui_reste.md) §1 porte, depuis le début, la question dont dépend tout
+[`29`](docs/archive/29_ce_qui_reste.md) §1 porte, depuis le début, la question dont dépend tout
 le reste : *réparer une trace sert-il à quelque chose ?* Y répondre demande une trace
 fautive, sa version réparée, et le **même aval** appliqué aux deux. Ce fichier mesure une
 condition préalable que personne n'avait posée : **l'aval répond-il, sur le rouleau où on
 compte le faire ?**
 
-⭐ La condition est vérifiable **avant de dépenser**. [`46`](docs/46_le_temoin_negatif.md)
+⭐ La condition est vérifiable **avant de dépenser**. [`46`](docs/archive/46_le_temoin_negatif.md)
 mesure que sur `PHerc1447` le détecteur rend la **même carte** sur une face de papyrus et
 sur une surface qui coupe l'empilement — une différence bien plus grande que celle entre
 une trace fautive et sa réparation. Aucune réparation ne peut y montrer de gain.
@@ -16,7 +16,7 @@ une trace fautive et sa réparation. Aucune réparation ne peut y montrer de gai
 ⚠⚠ **Ce que ce fichier NE fait pas** : il ne mesure pas l'aval lui-même. Il **croise deux
 mesures déjà faites** — quels rouleaux on sait tracer (`table_tirages.json`) et sur
 lesquels la sortie publiée a la statistique d'une page écrite (`typographie.json`, la
-mesure de [`45`](docs/45_consistent_with_quantifie.md)) — et il nomme l'intersection.
+mesure de [`45`](docs/archive/45_consistent_with_quantifie.md)) — et il nomme l'intersection.
 Une intersection vide est un **résultat**, pas une panne : elle dit que l'expérience ne
 peut pas être montée sur le jeu du prix tel qu'il est.
 

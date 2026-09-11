@@ -15,7 +15,7 @@ plus le contredire est précisément ce qui produit un chiffre auquel personne n
   ⭐ La question exacte : une grandeur mesurée sur NOTRE carte, sans jamais regarder les
      étiquettes, prédit-elle l'AUC de la tuile contre ces étiquettes ?
 
-⚠⚠ ET LA LIMITE, chiffrée par [`64`](../../docs/64_la_dispersion_netait_pas_un_effet.md) :
+⚠⚠ ET LA LIMITE, chiffrée par [`64`](../../docs/archive/64_la_dispersion_netait_pas_un_effet.md) :
 la grandeur à prédire est elle-même bruitée — l'AUC d'une tuile a un écart-type de **0,2243**
 d'une tuile à l'autre. Une corrélation mesurée ici est donc **atténuée** par le bruit de ce
 qu'elle prédit, et 23 tuiles ne sont pas beaucoup. Le résultat se lit avec son intervalle,
@@ -57,9 +57,9 @@ GRANDEURS = ("epaisseur_trait_px", "couverture", "aire_mediane_px", "hauteur_med
 pas mesurer proprement à cette échelle doit être **nommée absente**, pas approchée.
 
 ⭐⭐⭐ **`sigma` n'appartient pas à `45`, et c'est exprès qu'il est ici.** C'est la grandeur
-sur laquelle [`60`](../../docs/60_la_constante_qui_rendait_le_modele_muet.md) fait reposer
+sur laquelle [`60`](../../docs/archive/60_la_constante_qui_rendait_le_modele_muet.md) fait reposer
 « le modèle n'est pas inerte sur `PHerc1447` » (σ = 0,6558, soit 1,2× le témoin), et sur
-laquelle [`58`](../../docs/58_resolution_ou_rouleau.md) fait reposer l'élimination de la
+laquelle [`58`](../../docs/archive/58_resolution_ou_rouleau.md) fait reposer l'élimination de la
 résolution. **Rien n'avait jamais vérifié qu'un σ élevé veut dire que le modèle LIT.** Ces
 23 tuiles sont le premier endroit où la question peut être posée : chacune a un σ et une AUC
 contre de vraies étiquettes. Si σ ne prédit pas l'AUC, alors « σ est élevé donc il y a du

@@ -2,10 +2,10 @@
 """H2 : le débinage rend-il quelque chose ? — le même objet à deux échantillonnages.
 
 ⚠⚠⚠ CE FICHIER TRANCHE UNE CONTRADICTION ENTRE DEUX DOCUMENTS DU DÉPÔT.
-[`73`](../../docs/73_seconde_passe_ce_que_le_depot_change.md) présente le courriel à l'ESRF
+[`73`](../../docs/archive/73_seconde_passe_ce_que_le_depot_change.md) présente le courriel à l'ESRF
 comme « coût nul, aucune expérience à monter avant la réponse », sur un argument **géométrique** :
 à 4,7 µm une feuille fait 8 à 10 voxels au lieu de 4 à 5, donc `d′` monterait.
-[`69`](../../docs/69_reponse_dun_chercheur_exterieur.md) §1.2 porte l'argument **physique**
+[`69`](../../docs/archive/69_reponse_dun_chercheur_exterieur.md) §1.2 porte l'argument **physique**
 contraire, marqué `[établi]` : à 1,2 m la résolution est bornée par la **décohérence** entre 4,3
 et 9,4 µm, donc plus de voxels échantillonnant un signal déjà flou ne relèvent pas `d′`.
 Prédiction chiffrée : **au plus 1,3–1,5×**.

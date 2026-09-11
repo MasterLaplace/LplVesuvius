@@ -308,23 +308,23 @@ def verifier() -> int:
 
         # --- l'observation -------------------------------------------------------------------
         base = d / "faux"
-        (base / "docs").mkdir(parents=True)
-        (base / "docs" / "deja.json").write_text("1", encoding="utf-8")
-        a1 = inventaire(("docs",), base)
-        v("l'inventaire voit un fichier existant", "docs/deja.json" in a1, str(a1))
-        (base / "docs" / "neuf.json").write_text("2", encoding="utf-8")
-        (base / "docs" / "deja.json").write_text("1234", encoding="utf-8")
-        a2 = inventaire(("docs",), base)
+        (base / "sorties").mkdir(parents=True)
+        (base / "sorties" / "deja.json").write_text("1", encoding="utf-8")
+        a1 = inventaire(("sorties",), base)
+        v("l'inventaire voit un fichier existant", "sorties/deja.json" in a1, str(a1))
+        (base / "sorties" / "neuf.json").write_text("2", encoding="utf-8")
+        (base / "sorties" / "deja.json").write_text("1234", encoding="utf-8")
+        a2 = inventaire(("sorties",), base)
         crees, changes = difference(a1, a2)
         # ⚠⚠ « CRÉÉ » et « MODIFIÉ » sont deux faits différents.
-        v("un fichier neuf est vu comme CRÉÉ", crees == ["docs/neuf.json"], str(crees))
-        v("... et un fichier réécrit comme MODIFIÉ", changes == ["docs/deja.json"],
+        v("un fichier neuf est vu comme CRÉÉ", crees == ["sorties/neuf.json"], str(crees))
+        v("... et un fichier réécrit comme MODIFIÉ", changes == ["sorties/deja.json"],
           str(changes))
         # ⚠ Un `__pycache__` change à chaque run pour des raisons étrangères à l'étage.
-        (base / "docs" / "__pycache__").mkdir()
-        (base / "docs" / "__pycache__" / "x.pyc").write_text("z", encoding="utf-8")
+        (base / "sorties" / "__pycache__").mkdir()
+        (base / "sorties" / "__pycache__" / "x.pyc").write_text("z", encoding="utf-8")
         v("un __pycache__ n'est pas un artefact",
-          not any("__pycache__" in k for k in inventaire(("docs",), base)))
+          not any("__pycache__" in k for k in inventaire(("sorties",), base)))
         # ⚠ Une racine absente ne fait pas planter : une chaîne peut observer un dossier qui
         # n'existe pas encore, et c'est le cas normal du premier run.
         v("une racine absente ne lève pas", inventaire(("jamais",), base) == {})

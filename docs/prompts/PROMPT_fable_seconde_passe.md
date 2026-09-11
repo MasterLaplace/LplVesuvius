@@ -1,7 +1,7 @@
 # Prompt pour Fable 5.1 — seconde passe : lis ce qu'on a fait, et dis-nous ce que ça change
 
 > Tu as déjà répondu une fois. Ta réponse est dans ce dépôt, à
-> `docs/69_reponse_dun_chercheur_exterieur.md`, et elle est bonne : elle corrige le cadrage du
+> `docs/archive/69_reponse_dun_chercheur_exterieur.md`, et elle est bonne : elle corrige le cadrage du
 > prompt sur deux points, elle chiffre le goulot à deux ou quatre années-personne par rouleau,
 > elle pose sept hypothèses falsifiables et elle doute d'elle-même au §7.
 >
@@ -12,7 +12,7 @@
 ## 0. ⚠⚠⚠ LE CADRAGE — il manquait au premier prompt, et c'est la faute la plus chère
 
 Il est dans ce dépôt depuis le 2026-08-17, l'auteur l'a redonné plusieurs fois, et **aucun des
-deux prompts ne te l'avait transmis**. Le voici verbatim (`HANDOFF.md` §0 et §1) :
+deux prompts ne te l'avait transmis**. Le voici verbatim (`docs/archive/HANDOFF.md` §0 et §1) :
 
 > **Le but est le DÉROULEMENT, pas la lecture.** Traduire n'est pas notre métier. Repérer
 > quelques lettres sert à **s'assurer que le rouleau assemblé et déroulé fait du sens** —
@@ -92,12 +92,12 @@ et on les garde.
 | quoi | pourquoi ça compte pour toi |
 |---|---|
 | **`docs/article/article.typ`** (27 p., 17 réf.) | ce qu'on publie. Tu ne l'as jamais ouvert. Sa §3 définit le test de convergence $\alpha$ que tu utilises neuf fois sans savoir ce qu'il ne distingue pas ; sa §6.2 est la couche statistique ; sa §6.7 est le pinceau et son fichier |
-| **`docs/registres/fiches_de_lecture.md`** | les **70 documents lus intégralement**, une fiche chacun : nature, conclusions falsifiables avec leurs chiffres, **rétractations internes**. C'est le chemin le plus court vers tout ce que tu n'as pas lu, et il n'existait pas |
-| **`docs/70_ce_que_larticle_condense.md`** | ce que l'article condense et ce qu'il laisse dehors, avec le compte |
-| **`docs/71_les_trois_resultats_de_tete_audites.md`** | l'audit d'antériorité de nos trois résultats de tête. **PARTIELLEMENT** tous les trois |
-| **`docs/72_le_second_papier.md`** | le cadrage du second papier — celui qui porte **ton** sujet, la physique du régime |
+| **`docs/archive/registres/fiches_de_lecture.md`** | les **70 documents lus intégralement**, une fiche chacun : nature, conclusions falsifiables avec leurs chiffres, **rétractations internes**. C'est le chemin le plus court vers tout ce que tu n'as pas lu, et il n'existait pas |
+| **`docs/archive/70_ce_que_larticle_condense.md`** | ce que l'article condense et ce qu'il laisse dehors, avec le compte |
+| **`docs/archive/71_les_trois_resultats_de_tete_audites.md`** | l'audit d'antériorité de nos trois résultats de tête. **PARTIELLEMENT** tous les trois |
+| **`docs/archive/72_le_second_papier.md`** | le cadrage du second papier — celui qui porte **ton** sujet, la physique du régime |
 
-**Ensuite, ciblé** : `docs/17_saut_de_spire_par_la_phase.md`, `docs/51_une_pente_a_deux_appuis.md`, `docs/65_ce_que_sigma_ne_dit_pas.md`, `docs/07_reparee_nest_pas_propre.md` (son en-tête), `docs/46_le_temoin_negatif.md`.
+**Ensuite, ciblé** : `docs/archive/17_saut_de_spire_par_la_phase.md`, `docs/archive/51_une_pente_a_deux_appuis.md`, `docs/archive/65_ce_que_sigma_ne_dit_pas.md`, `docs/archive/07_reparee_nest_pas_propre.md` (son en-tête), `docs/archive/46_le_temoin_negatif.md`.
 Les raisons sont au §2.
 
 ⚠ Le registre des fiches s'arrête à `68` : les `70` à `73` se lisent en direct.
@@ -109,7 +109,7 @@ Les raisons sont au §2.
 Elles sont dans le dépôt depuis des semaines et le premier prompt ne te les a pas montrées.
 **Je ne te dis pas qu'elles te réfutent — je te dis qu'il faut que tu juges.**
 
-### 2.1 Ton **H5** contre notre `docs/17_saut_de_spire_par_la_phase.md` — un détecteur de saut de spire par la phase, essayé, mort
+### 2.1 Ton **H5** contre notre `docs/archive/17_saut_de_spire_par_la_phase.md` — un détecteur de saut de spire par la phase, essayé, mort
 
 Ton H5 pose que les résidus du champ d'orientation prédisent les sauts de spire. Nous avons
 essayé de détecter un saut de spire depuis la **phase d'enroulement publiée** (canal `cos` du
@@ -126,7 +126,7 @@ bruité […] A2 est un détecteur de bruit avec un beau nom »*. **Lis `17` en 
 son §10 qui ferme la dernière porte, et dis si H5 survit, et par quoi elle en diffère
 mécaniquement.**
 
-### 2.2 Ton **H1** contre notre `docs/65_ce_que_sigma_ne_dit_pas.md` — l'échelle a déjà été mesurée contre de vraies étiquettes
+### 2.2 Ton **H1** contre notre `docs/archive/65_ce_que_sigma_ne_dit_pas.md` — l'échelle a déjà été mesurée contre de vraies étiquettes
 
 Ton H1 demande si l'évidence d'encre survit à la bande perdue, et propose de le mesurer par
 passe-bas. **La moitié de cette expérience est déjà faite**, sur `PHercParis2Fr47`, contre les
@@ -145,7 +145,7 @@ au niveau où l'incertitude est honnête (bootstrap par tuiles, parce que Hanley
 du hasard**. ⚠ Et c'est une **dégradation par décimation**, pas une acquisition native.
 
 **Dis ce que ça fait à H1** : est-ce que ça la confirme, est-ce que ça dit surtout que
-l'expérience est sous-dimensionnée, et **combien de tuiles faudrait-il** ? (`docs/64_la_dispersion_netait_pas_un_effet.md` dit qu'il
+l'expérience est sous-dimensionnée, et **combien de tuiles faudrait-il** ? (`docs/archive/64_la_dispersion_netait_pas_un_effet.md` dit qu'il
 en faudrait 27 par fragment pour séparer un écart de 0,171 ; on en avait 10, 11 et 2.)
 
 ---
@@ -153,7 +153,7 @@ en faudrait 27 par fragment pour séparer un écart de 0,171 ; on en avait 10, 1
 ## 3. Ce qui a changé depuis que tu as écrit
 
 - ⚠⚠ **Un de nos résultats est mort, et c'est celui sur lequel ton A5 s'appuie de loin.** Le
-  `docs/07_reparee_nest_pas_propre.md` publiait que réparer une auto-intersection **ne déplace pas** la proximité anormale
+  `docs/archive/07_reparee_nest_pas_propre.md` publiait que réparer une auto-intersection **ne déplace pas** la proximité anormale
   (0,37 → 0,38 %). En rendant le chiffre recalculable on a réparé une trace et remesuré : la
   proximité **baisse de 22 à 50 %**, et **pas proportionnellement à ce qui est retiré**. Ce qui
   survit du `07` : la corrélation ρ = +0,769 sur 46 traces à longueur contrôlée, et le rayon
@@ -225,12 +225,12 @@ en faudrait 27 par fragment pour séparer un écart de 0,171 ; on en avait 10, 1
 | | |
 |---|---|
 | l'article | `docs/article/article.typ` — et `README.md` à côté dit comment il est construit |
-| les 70 fiches | `docs/registres/fiches_de_lecture.md` |
-| les documents | `docs/NN_*.md`, 74 en tout ; `docs/00_carnet_de_bord.md` est la table |
+| les 70 fiches | `docs/archive/registres/fiches_de_lecture.md` |
+| les documents | `docs/NN_*.md`, 74 en tout ; `docs/archive/00_carnet_de_bord.md` est la table |
 | les mesures | `docs/mesures/*.json`, relues par `src/depot/verifier_chiffres.py` |
 | les outils | `./lplv --help` liste **154 verbes** ; `./lplv <verbe> --help` rend son aide |
 | la suite | `bash src/outils/temoins.sh` — **171 batteries, 4500 contrôles**, hors ligne |
-| ta première réponse | `docs/69_reponse_dun_chercheur_exterieur.md` |
+| ta première réponse | `docs/archive/69_reponse_dun_chercheur_exterieur.md` |
 
 ⚠ Le dépôt est **hors ligne par défaut** : les 35 dépôts du domaine sont clonés dans
 `data/repos/`, le site est miroité dans `data/site/` (81 pages), et l'index du corpus est

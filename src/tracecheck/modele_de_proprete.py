@@ -2,14 +2,14 @@
 """Le contrôle P1 bis : le basculement de propreté est-il plus raide que la seule taille ?
 
 ⚠⚠⚠ POURQUOI CE FICHIER EXISTE, ET C'EST UNE DETTE QUE JE ME SUIS FAITE. Le rapport
-`docs/registres/anteriorite_resultats_de_tete.md` §P1 bis annonce en toutes lettres
+`docs/archive/registres/anteriorite_resultats_de_tete.md` §P1 bis annonce en toutes lettres
 *« Vérification reproductible : `scratchpad/check_windcheck_model.py` (calcul dans l'arbre, pas
 en ligne de commande) »* — **et ce fichier n'existe pas**. Le ×15,9 sur lequel repose tout
 l'argument est donc un nombre publié dont le producteur n'est nulle part, c'est-à-dire
 exactement ce que ce dépôt refuse ailleurs.
 
 ⚠⚠ ET LE REGISTRE DES TÂCHES DISAIT `D2` BLOQUÉ « sur une source absente de l'arbre ». C'était
-faux : le rapport EST dans l'arbre, à `docs/registres/anteriorite_resultats_de_tete.md:593`.
+faux : le rapport EST dans l'arbre, à `docs/archive/registres/anteriorite_resultats_de_tete.md:593`.
 J'avais cherché un fichier *nommé* « budget » au lieu de chercher le **concept** — la règle que
 ce dépôt écrit partout, et que j'ai enfreinte.
 

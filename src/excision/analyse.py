@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Compare la distribution d'intensite CT des cellules excisees et des temoins.
 
-Repond a l'hypothese nulle posee dans docs/04_experience_excision.md :
+Repond a l'hypothese nulle posee dans docs/archive/04_experience_excision.md :
 
     H0 : les cellules excisees ont la meme distribution d'intensite que les
          cellules retenues appariees.
@@ -79,7 +79,7 @@ def describe(values: np.ndarray) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Compare cellules excisees et temoins appariees (hypothese nulle H0).",
-        epilog="Voir docs/04_experience_excision.md pour la conception et les controles.",
+        epilog="Voir docs/archive/04_experience_excision.md pour la conception et les controles.",
     )
     parser.add_argument("samples", type=Path, help="TSV produit par excision.measure")
     parser.add_argument(

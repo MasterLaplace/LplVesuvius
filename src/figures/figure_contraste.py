@@ -2,7 +2,7 @@
 """Le relief d'une fenêtre étroite, sur une surface qui suit une feuille et sur une qui n'en suit pas.
 
 ⚠⚠ **Pourquoi cette figure et pas un histogramme de α.** Trente-neuf séries de l'arbre
-rendent un α que leurs appuis ne portent pas ([`51`](../../docs/51_une_pente_a_deux_appuis.md)),
+rendent un α que leurs appuis ne portent pas ([`51`](../../docs/archive/51_une_pente_a_deux_appuis.md)),
 donc un graphique de α empilerait des nombres dont une bonne part ne mesure rien. Le relief
 de la fenêtre **étroite** échappe à ce défaut : c'est une lecture faite *à l'intérieur* d'une
 seule fenêtre, sans pente, sans second appui et sans profondeurs à apparier.

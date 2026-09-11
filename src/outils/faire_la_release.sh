@@ -77,7 +77,7 @@ GARDES=(
   "lplv"
   "docs/mesures/verbes.json"
   "LICENSE"
-  "docs/21_texte_de_soumission.md"
+  "docs/archive/21_texte_de_soumission.md"
   "pyproject.toml"
 )
 

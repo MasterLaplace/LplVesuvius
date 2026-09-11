@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Le jeu d'images en aveugle que le protocole de `09` réclame, et sa clé à part.
 
-⚠⚠ Pourquoi ce fichier existe. [`29`](../../docs/29_ce_qui_reste.md) M1ter nomme son prochain
+⚠⚠ Pourquoi ce fichier existe. [`29`](../../docs/archive/29_ce_qui_reste.md) M1ter nomme son prochain
 pas : *« répondre n'est pas lire : il faut une fenêtre large et le juge calibré de `09` »*. Ce
 juge est un **modèle de langue**, et [`09`](../../docs/09_juger_un_rendu.md) pose un protocole
 en trois familles mélangées — témoin positif dont le texte est publié, témoin négatif sans
@@ -9,7 +9,7 @@ encre, inconnu — sans dire au juge laquelle est laquelle.
 
 ⭐⭐ Les trois familles existent enfin **toutes les trois**, et la dernière est arrivée le
 2026-08-28 : le témoin négatif de 5128 × 5128 rendu sur une trace à α = +1,01, dont
-[`38`](../../docs/38_ce_qui_bouge_avec_la_fenetre.md) prouve géométriquement qu'aucune feuille
+[`38`](../../docs/archive/38_ce_qui_bouge_avec_la_fenetre.md) prouve géométriquement qu'aucune feuille
 n'est à portée. Avant lui, le protocole de `09` n'était pas exécutable : il lui manquait sa
 famille la plus importante, celle que son propre texte appelle « le plus important ».
 

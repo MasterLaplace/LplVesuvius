@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """La fiche de lecture décrit-elle encore le document qu'elle résume ?
 
-⚠⚠⚠ POURQUOI CE FICHIER EXISTE. `docs/registres/fiches_de_lecture.md` est ce que tout le monde
+⚠⚠⚠ POURQUOI CE FICHIER EXISTE. `docs/archive/registres/fiches_de_lecture.md` est ce que tout le monde
 lit **à la place** des documents — c'est son but, et c'est aussi son danger : une fiche périmée
 ne ressemble pas à une fiche périmée, elle ressemble à un résumé. Rien ne la comparait à sa
 source, donc elle pouvait décrire un document qui avait changé de trente-cinq lignes sans que
@@ -32,7 +32,7 @@ import sys
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parents[2]
-REGISTRE = RACINE / "docs" / "registres" / "fiches_de_lecture.md"
+REGISTRE = RACINE / "docs" / "archive" / "registres" / "fiches_de_lecture.md"
 
 # ⚠ Ancré sur le début de ligne ET sur l'enchaînement titre → ligne de compte : un `### docs/…`
 # cité au fil d'une phrase ne porte pas ce champ, et un `- **lignes**` isolé n'appartient à
@@ -102,11 +102,12 @@ def sans_fiche(texte: str, racine: Path) -> list[str]:
     fiche**. Un registre qu'on lit à la place des documents doit dire ce qu'il ne couvre pas,
     sinon son silence se lit comme une couverture complète.
 
-    ⚠ `docs/*.md` seulement, sans les sous-dossiers : `registres/` contient le registre
-    lui-même et `Books/` n'est pas de la documentation de travail.
+    ⚠ `docs/archive/*.md` seulement, sans les sous-dossiers : `registres/` contient le registre
+    lui-même. Depuis le 2026-09-11 les documents numérotés vivent là, gelés, et les rapports
+    de `docs/rapports/` ne sont pas fichés : le registre est aussi gelé que ce qu'il décrit.
     """
     fiches = set(TITRE.findall(texte))
-    return [str(q.relative_to(racine)) for q in sorted((racine / "docs").glob("*.md"))
+    return [str(q.relative_to(racine)) for q in sorted((racine / "docs" / "archive").glob("*.md"))
             if str(q.relative_to(racine)) not in fiches]
 
 
@@ -144,68 +145,68 @@ def _verifier() -> int:
     import tempfile
     with tempfile.TemporaryDirectory() as tmp:
         d = Path(tmp)
-        (d / "docs").mkdir()
-        (d / "docs" / "a.md").write_text("un\ndeux\ntrois\n", encoding="utf-8")
-        (d / "docs" / "b.md").write_text("seule\n", encoding="utf-8")
-        registre = ("### docs/a.md\n- **lignes** : 3\n- **nature** : X\n\n"
-                    "### docs/b.md\n- **lignes** : 9\n- **nature** : Y\n\n"
-                    "### docs/parti.md\n- **lignes** : 4\n")
+        (d / "docs" / "archive").mkdir(parents=True)
+        (d / "docs" / "archive" / "a.md").write_text("un\ndeux\ntrois\n", encoding="utf-8")
+        (d / "docs" / "archive" / "b.md").write_text("seule\n", encoding="utf-8")
+        registre = ("### docs/archive/a.md\n- **lignes** : 3\n- **nature** : X\n\n"
+                    "### docs/archive/b.md\n- **lignes** : 9\n- **nature** : Y\n\n"
+                    "### docs/archive/parti.md\n- **lignes** : 4\n")
         audit = auditer(registre, d)
         v("les trois fiches sont lues, pas seulement celles qui dérivent",
           len(audit) == 3, str(len(audit)))
         v("une fiche à jour a un écart nul",
-          [e for e in audit if e["chemin"] == "docs/a.md"][0]["ecart"] == 0)
+          [e for e in audit if e["chemin"] == "docs/archive/a.md"][0]["ecart"] == 0)
         v("... une fiche périmée porte son écart signé",
-          [e for e in audit if e["chemin"] == "docs/b.md"][0]["ecart"] == -8)
+          [e for e in audit if e["chemin"] == "docs/archive/b.md"][0]["ecart"] == -8)
         # ⚠⚠ « Le document a disparu » et « la fiche est périmée » sont DEUX faits, et les
         # confondre ferait corriger un compte vers zéro sur un fichier absent.
         v("... et un document disparu n'est pas une dérive mais une absence",
-          [e for e in audit if e["chemin"] == "docs/parti.md"][0]["reel"] is None)
+          [e for e in audit if e["chemin"] == "docs/archive/parti.md"][0]["reel"] is None)
 
         # ⚠⚠ ET LE POINT AVEUGLE SYMÉTRIQUE : un document sans fiche du tout. Le registre se
         # lit À LA PLACE des documents, donc son silence sur dix d'entre eux se lisait comme
         # une couverture complète.
-        (d / "docs" / "jamais_lu.md").write_text("x\n", encoding="utf-8")
+        (d / "docs" / "archive" / "jamais_lu.md").write_text("x\n", encoding="utf-8")
         v("un document sans fiche est nommé",
-          sans_fiche(registre, d) == ["docs/jamais_lu.md"], str(sans_fiche(registre, d)))
+          sans_fiche(registre, d) == ["docs/archive/jamais_lu.md"], str(sans_fiche(registre, d)))
         v("... et un document qui EN a une ne l'est pas",
-          "docs/a.md" not in sans_fiche(registre, d))
+          "docs/archive/a.md" not in sans_fiche(registre, d))
         # ⚠ Un titre suivi d'autre chose que la fin de ligne n'est pas une entrée de registre :
         # sans l'ancrage, une mention en prose ferait passer un document pour résumé.
         v("... et une mention en prose ne compte pas comme une fiche",
-          "docs/jamais_lu.md" in sans_fiche(registre + "voir ### docs/jamais_lu.md ici\n", d))
-        (d / "docs" / "jamais_lu.md").unlink()
+          "docs/archive/jamais_lu.md" in sans_fiche(registre + "voir ### docs/archive/jamais_lu.md ici\n", d))
+        (d / "docs" / "archive" / "jamais_lu.md").unlink()
 
         # ⚠⚠⚠ LA FICHE À LIGNE VIDE, et c'est le point aveugle qui valait sept fiches. Le
         # registre sépare parfois le titre de son compte par une ligne vide (43 à 49, écrites
         # d'un même lot) : la version précédente exigeait l'enchaînement immédiat, donc ces
         # sept-là n'étaient pas « en dérive », elles étaient INVISIBLES — et trois d'entre
         # elles dérivaient réellement, dont `48` de soixante-trois lignes.
-        aere = ("### docs/a.md\n\n- **lignes** : 3\n- **nature** : X\n\n"
-                "### docs/b.md\n\n- **lignes** : 9\n")
+        aere = ("### docs/archive/a.md\n\n- **lignes** : 3\n- **nature** : X\n\n"
+                "### docs/archive/b.md\n\n- **lignes** : 9\n")
         audit_aere = auditer(aere, d)
         v("une fiche dont le compte est séparé par une LIGNE VIDE est vue",
           len(audit_aere) == 2, str(len(audit_aere)))
         v("... et sa dérive est mesurée comme les autres",
-          [e for e in audit_aere if e["chemin"] == "docs/b.md"][0]["ecart"] == -8)
+          [e for e in audit_aere if e["chemin"] == "docs/archive/b.md"][0]["ecart"] == -8)
         # ⚠ Le séparateur est RECOPIÉ : sans ça l'ancrage écrit n'existerait pas dans le texte
         # et `--corriger` ne corrigerait rien, en silence.
         recolle_aere, n_aere = corriger(aere, audit_aere)
         v("... et --corriger la répare en gardant sa ligne vide",
-          n_aere == 1 and "### docs/b.md\n\n- **lignes** : 1\n" in recolle_aere,
+          n_aere == 1 and "### docs/archive/b.md\n\n- **lignes** : 1\n" in recolle_aere,
           repr(recolle_aere[-40:]))
         # ⚠⚠ Au plus UNE ligne vide : au-delà, un `### …md` cité en prose pourrait s'apparier
         # avec le compte d'une fiche située plus bas, et le contrôle attribuerait une dérive
         # au mauvais document.
         v("... mais DEUX lignes vides ne s'apparient pas",
-          auditer("### docs/a.md\n\n\n- **lignes** : 3\n", d) == [])
+          auditer("### docs/archive/a.md\n\n\n- **lignes** : 3\n", d) == [])
 
         neuf, n = corriger(registre, audit)
         v("--corriger ne touche que les comptes qui ont dérivé", n == 1, str(n))
-        v("... et il écrit le bon", "### docs/b.md\n- **lignes** : 1" in neuf)
-        v("... sans toucher la fiche à jour", "### docs/a.md\n- **lignes** : 3" in neuf)
+        v("... et il écrit le bon", "### docs/archive/b.md\n- **lignes** : 1" in neuf)
+        v("... sans toucher la fiche à jour", "### docs/archive/a.md\n- **lignes** : 3" in neuf)
         v("... ni celle dont le document a disparu",
-          "### docs/parti.md\n- **lignes** : 4" in neuf)
+          "### docs/archive/parti.md\n- **lignes** : 4" in neuf)
         # ⚠⚠⚠ LE CONTRÔLE QUI COMPTE, ET SA PREMIÈRE VERSION NE DISCRIMINAIT RIEN. Le même
         # nombre existe ailleurs dans le registre ; un remplacement non ancré irait le changer
         # dans une conclusion mesurée. Ma fixture d'abord écrite plaçait la prose APRÈS la ligne
@@ -215,9 +216,9 @@ def _verifier() -> int:
         # ⚠⚠ Le remède n'est pas une fixture plus rusée mais un INVARIANT DE STRUCTURE : hors
         # des lignes de compte, le registre doit sortir **identique**. Aucun sabotage du
         # remplacement ne peut satisfaire ça, et il n'y a pas de piège à deviner.
-        piege = ("### docs/a.md\n- **lignes** : 3\n"
+        piege = ("### docs/archive/a.md\n- **lignes** : 3\n"
                  "- **conclusions** :\n  - le seuil vaut 9 segments sur 9.\n\n"
-                 "### docs/b.md\n- **lignes** : 9\n- **nature** : 9 pages\n")
+                 "### docs/archive/b.md\n- **lignes** : 9\n- **nature** : 9 pages\n")
         recolle, _ = corriger(piege, auditer(piege, d))
         def hors_compte(t):
             return [l for l in t.splitlines() if not l.startswith("- **lignes** : ")]
@@ -229,13 +230,13 @@ def _verifier() -> int:
         # ⚠⚠ LA QUEUE EST DE L'HISTOIRE ET ELLE SURVIT. Dix fiches du registre portent derrière
         # leur nombre ce qu'il valait quand la fiche a été écrite et ce qui l'a fait bouger ;
         # une correction qui l'effacerait remplacerait une trace par un chiffre.
-        avec = ("### docs/b.md\n- **lignes** : 9 ⚠ (7 quand la fiche a été écrite)\n")
+        avec = ("### docs/archive/b.md\n- **lignes** : 9 ⚠ (7 quand la fiche a été écrite)\n")
         garde, _ = corriger(avec, auditer(avec, d))
         v("... et la remarque derrière le nombre est recopiée telle quelle",
-          garde == "### docs/b.md\n- **lignes** : 1 ⚠ (7 quand la fiche a été écrite)\n",
+          garde == "### docs/archive/b.md\n- **lignes** : 1 ⚠ (7 quand la fiche a été écrite)\n",
           garde.replace("\n", " | "))
         v("... et une fiche à queue est bien LUE (elle échappait au contrôle)",
-          [e["chemin"] for e in auditer(avec, d)] == ["docs/b.md"])
+          [e["chemin"] for e in auditer(avec, d)] == ["docs/archive/b.md"])
         # ⚠ La ligne de compte doit suivre IMMÉDIATEMENT le titre : un `- **lignes**` orphelin
         # n'appartient à aucune fiche, et le compter en inventerait une.
         # ⚠⚠ La fixture d'un titre « cité au fil d'une phrase » ne discriminait pas non plus :
@@ -244,9 +245,9 @@ def _verifier() -> int:
         # alors le compte de la seconde au nom de la première.
         v("un compte sans titre au-dessus n'est pas une fiche",
           auditer("- **lignes** : 12\n", d) == [])
-        melange = auditer("voir docs/a.md plus haut\n\n### docs/b.md\n- **lignes** : 9\n", d)
+        melange = auditer("voir docs/archive/a.md plus haut\n\n### docs/archive/b.md\n- **lignes** : 9\n", d)
         v("... et une mention en prose ne capte pas le compte de la fiche suivante",
-          [e["chemin"] for e in melange] == ["docs/b.md"],
+          [e["chemin"] for e in melange] == ["docs/archive/b.md"],
           str([e["chemin"] for e in melange]))
 
     print()

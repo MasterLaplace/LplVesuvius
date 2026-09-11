@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """α est une PENTE : elle a deux appuis, et un appui qui ne mesure rien n'en est pas un.
 
-⚠⚠ **Le défaut que ce fichier corrige.** [`49`](../../docs/49_alpha_ne_separe_pas_deux_pannes.md)
+⚠⚠ **Le défaut que ce fichier corrige.** [`49`](../../docs/archive/49_alpha_ne_separe_pas_deux_pannes.md)
 a appris à refuser une série dont *aucune* fenêtre ne mesure rien. Mais `test_convergence`
 agrège les amplitudes par un **maximum** — « si une seule fenêtre a du relief, la mesure
 n'est pas vide » — et cette règle, juste pour la question *« y a-t-il quelque chose ici ? »*,
@@ -9,7 +9,7 @@ est fausse pour la question *« quelle est la pente ? »*. Une pente entre une m
 non-mesure n'est pas une pente.
 
 Mesuré le 2026-08-23 : les **trois** candidats `ps256` de
-[`48`](../../docs/48_ou_monter_lexperience.md), publiés avec α = +1,01 · +1,17 · +1,01,
+[`48`](../../docs/archive/48_ou_monter_lexperience.md), publiés avec α = +1,01 · +1,17 · +1,01,
 ont tous leur fenêtre étroite sous le seuil de détection. Deux d'entre eux ont *les deux*
 écarts posés exactement sur la demi-fenêtre.
 

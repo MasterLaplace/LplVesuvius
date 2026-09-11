@@ -20,11 +20,16 @@ import argparse, re, sys, unicodedata
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parents[2]
-RAPPORTS = Path(__file__).resolve().parents[2] / "docs" / "registres"
+RAPPORTS = Path(__file__).resolve().parents[2] / "docs" / "archive" / "registres"
 
 def norm(t):
     t = unicodedata.normalize("NFKD", t)
     t = t.replace(" ", " ").replace(" ", " ").replace("’", "'")
+    # ⚠ Une citation posée entre backticks échappe ses propres backticks (`\`1/cos\``) ; le
+    # document, lui, ne les échappe pas. Sans cette ligne, `100:106` était INTROUVABLE alors
+    # qu'il est à sa ligne — une garde qui refuse une citation exacte est une garde qu'on
+    # cesse de lire.
+    t = t.replace("\\`", "`")
     return re.sub(r"\s+", " ", t).strip().lower()
 
 FICHE = re.compile(r"^### (\S+\.md)\s*$", re.M)

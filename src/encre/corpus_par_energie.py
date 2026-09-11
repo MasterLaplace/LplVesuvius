@@ -2,7 +2,7 @@
 """Les 45 échantillons du dépôt public, leur ÉNERGIE, et ce qu'on en a publié.
 
 ⚠⚠⚠ POURQUOI CE FICHIER EXISTE, et c'est une correction de ma propre méthode.
-[`59`](../../docs/59_la_campagne_plutot_que_le_rouleau.md) avait déjà payé un angle mort :
+[`59`](../../docs/archive/59_la_campagne_plutot_que_le_rouleau.md) avait déjà payé un angle mort :
 `campagnes_de_scan.py` n'interrogeait **qu'un des deux layouts** du dépôt. Et j'ai refait la
 même faute le 2026-08-29 dans `ou_la_verite_existe.py` — une liste de **cinq** rouleaux écrite
 à la main, interrogée par force brute, appelée « inventaire ».
@@ -23,7 +23,7 @@ donc obligatoire ici : la comparaison ne vaut qu'entre échantillons **segmenté
 
 ⚠ Ce que ce fichier N'ÉTABLIT PAS : que l'énergie cause la lisibilité. Une carte publiée n'est
 pas une lecture réussie — c'est une sortie de modèle que quelqu'un a jugée digne d'être mise en
-ligne. Le lien entre les deux n'est pas mesuré, et [`65`](../../docs/65_ce_que_sigma_ne_dit_pas.md)
+ligne. Le lien entre les deux n'est pas mesuré, et [`65`](../../docs/archive/65_ce_que_sigma_ne_dit_pas.md)
 vient justement de montrer que le substitut habituel (σ) ne prédit pas la qualité mesurée.
 
 Usage :

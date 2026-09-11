@@ -11,17 +11,21 @@
 # ⚠ La phrase cherchee est un ARGUMENT, jamais en dur : ce script est versionne, et y
 # ecrire la phrase privee annulerait ce qu'il sert a mesurer.
 #
-#   ./src/outils/exposition_historique.sh <motif> [fichier]
+#   ./src/outils/exposition_historique.sh <motif> [fichier] [ancien-chemin]
 set -u
 cd "$(dirname "$0")/../.." || exit 2
 MOTIF=${1:?usage: $0 <motif> [fichier]}
-FICHIER=${2:-HANDOFF.md}
+FICHIER=${2:-docs/archive/HANDOFF.md}
+# ⚠ Le HANDOFF a demenage le 2026-09-11 ; avant, il vivait a la racine. Un commit est lu au
+# chemin d'aujourd'hui PUIS a l'ancien, sinon toute l'histoire d'avant compte pour zero -- et
+# c'est precisement l'histoire qu'une question d'exposition interroge.
+ANCIEN=${3:-HANDOFF.md}
 
-CHANGENT=$(git log --oneline --all -S "$MOTIF" -- "$FICHIER" | wc -l)
+CHANGENT=$(git log --oneline --all -S "$MOTIF" -- "$FICHIER" "$ANCIEN" | wc -l)
 
 PORTENT=0; PREMIER=""; DERNIER=""
 while read -r h; do
-  if git show "$h:$FICHIER" 2>/dev/null | grep -q -- "$MOTIF"; then
+  if { git show "$h:$FICHIER" 2>/dev/null || git show "$h:$ANCIEN" 2>/dev/null; } | grep -q -- "$MOTIF"; then
     PORTENT=$((PORTENT + 1))
     [ -z "$DERNIER" ] && DERNIER=$h
     PREMIER=$h

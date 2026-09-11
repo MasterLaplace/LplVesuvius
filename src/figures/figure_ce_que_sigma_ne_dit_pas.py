@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Deux intervalles qui contiennent leur point nul — et pourquoi c'est le résultat.
 
-⚠⚠ POURQUOI CETTE FIGURE EXISTE. [`65`](../../docs/65_ce_que_sigma_ne_dit_pas.md) tient en
+⚠⚠ POURQUOI CETTE FIGURE EXISTE. [`65`](../../docs/archive/65_ce_que_sigma_ne_dit_pas.md) tient en
 une phrase que la prose rend mal : **les intervalles contiennent la valeur nulle**. Écrit en
 chiffres, « [0,455 ; 0,745] » demande au lecteur de comparer mentalement à 0,5, et « ρ = +0,263,
 p de Holm 0,739 » demande de comparer à zéro. Dessinés contre leur trait de référence, les deux

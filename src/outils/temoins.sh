@@ -1167,6 +1167,7 @@ run "batteries qui peuvent échouer" uv run python "$ROOT/src/depot/batteries_in
 # aucun ne menait nulle part, images comprises. Signalé par l'auteur en ouvrant le fichier.
 # Un lien cassé s'affiche normalement jusqu'à ce qu'on clique, donc rien ne le signalait.
 run "liens des documents"      uv run python "$ROOT/src/depot/liens_casses.py" --verifier
+run "liens de l'archive"       uv run python "$ROOT/src/depot/liens_de_larchive.py" --verifier
 
 # ⚠ Ce que coûte un rendu d'encre, en fenêtres par FIL-SECONDE — la seule forme du débit qui
 # se transporte d'une machine à l'autre. La batterie garde aussi le contrôle qui rattache le
@@ -1769,9 +1770,9 @@ printf '  %-30s ' "chiffres de la soumission"
 # chiffres a l'anglaise et part vers un lectorat qui ne peut pas les recouper. Sa section
 # « Reproducibility » AFFIRME que chaque nombre est cherche litteralement dans sa source :
 # sans ce controle, l'affirmation serait flatteuse au lieu d'etre vraie.
-if uv run python "$ROOT/src/depot/verifier_chiffres.py" "$ROOT"/docs/*.md \
+if uv run python "$ROOT/src/depot/verifier_chiffres.py" "$ROOT"/docs/archive/*.md "$ROOT"/docs/rapports/*.md \
      "$ROOT/docs/article/article.typ" \
-     --soumission "$ROOT/docs/21_texte_de_soumission.md" \
+     --soumission "$ROOT/docs/archive/21_texte_de_soumission.md" \
      --article "$ROOT/docs/article/article.typ" >/tmp/chiffres.log 2>&1; then
   printf '✅ %s\n' "$(grep -c '✅' /tmp/chiffres.log) chiffres retrouves"
 else
@@ -1823,7 +1824,7 @@ fi
 printf '  %-30s ' "doc 55 a jour"
 T55=$(mktemp)
 uv run --project "$ROOT" python "$ROOT/src/depot/murs_et_causes.py" --rendre "$T55" >/dev/null 2>&1
-if diff -q "$T55" "$ROOT/docs/55_les_murs_et_leurs_causes.md" >/dev/null 2>&1; then
+if diff -q "$T55" "$ROOT/docs/archive/55_les_murs_et_leurs_causes.md" >/dev/null 2>&1; then
   printf '✅ rendu identique au registre\n'
 else
   printf '❌ PERIME — relancer : murs_et_causes.py --rendre\n'; FAIL=$((FAIL + 1))

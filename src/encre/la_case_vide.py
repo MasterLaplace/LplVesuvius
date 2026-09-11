@@ -4,7 +4,7 @@
 ⚠⚠⚠ POURQUOI CE FICHIER EXISTE, et c'est une RÉOUVERTURE. Deux conclusions de ce dépôt
 disent que la mesure décisive est hors de portée :
 
-  - `HANDOFF.md` : « **énergie** isolée contre étiquettes ❌ **impossible en l'état** :
+  - `docs/archive/HANDOFF.md` : « **énergie** isolée contre étiquettes ❌ **impossible en l'état** :
     `Frag1`–`Frag3` ont les labels sans recalage, `Frag5`/`Frag6` le recalage sans labels, et
     les volumes d'une paire n'ont pas la même forme » ;
   - `ou_la_verite_existe.py` : **zéro rouleau mesurable sur cinq**.

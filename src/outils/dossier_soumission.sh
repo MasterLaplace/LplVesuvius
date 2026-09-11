@@ -24,7 +24,7 @@ set -u
 cd "$(dirname "$0")/../.." || exit 2
 ROOT=$PWD
 DEST=${1:-$ROOT/data/soumission}
-TEXTE=$ROOT/docs/21_texte_de_soumission.md
+TEXTE=$ROOT/docs/archive/21_texte_de_soumission.md
 MANQUE=0
 
 [ -s "$TEXTE" ] || { echo "absent : $TEXTE" >&2; exit 2; }
@@ -55,7 +55,7 @@ echo "== chiffres du document qui part"
 # reste ce qu'il declare etre -- le temoin CPU du ×4,5 XPU -- et n'est plus emprunte pour
 # des figures, ce qui evite de garder chaud un venv de 2,5 Gio pour du dessin.
 cd "$ROOT" || exit 2
-if uv run python "$ROOT/src/depot/verifier_chiffres.py" "$ROOT"/docs/*.md \
+if uv run python "$ROOT/src/depot/verifier_chiffres.py" "$ROOT"/docs/archive/*.md "$ROOT"/docs/rapports/*.md \
      "$ROOT/docs/article/article.typ" --soumission "$TEXTE" --article "$ROOT/docs/article/article.typ" \
      > "$DEST/chiffres.log" 2>&1; then
   printf '  ✅ %s chiffres retrouvés (journal joint)\n' "$(grep -c '✅' "$DEST/chiffres.log")"

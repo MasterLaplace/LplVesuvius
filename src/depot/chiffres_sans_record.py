@@ -3,7 +3,7 @@
 
 ⚠⚠ Pourquoi ce fichier existe. `src/depot/verifier_chiffres.py` garde un seul sens — chaque
 chiffre **recalculé depuis un JSON** doit apparaître dans un document. Il ne peut pas garder
-l'autre, et [`57`](../../docs/57_les_taches_laissees.md) §3 le dit : *« un nombre publié sans
+l'autre, et [`57`](../../docs/archive/57_les_taches_laissees.md) §3 le dit : *« un nombre publié sans
 record est invisible pour lui, quel que soit son nombre d'étoiles »*. Le dépôt a payé cette
 asymétrie une fois — une ligne annonçant `ρ = +0,9984` sur `PHercParis4`, sans qu'aucun
 fichier de résultat ne la porte.
@@ -149,8 +149,13 @@ def orphelins_situes(texte: str, corpus: str) -> list[dict]:
             if v in corpus or v.lstrip("-") in corpus:
                 continue
             vus.add(e)
+            # ⚠ Le contexte est une fenêtre AUTOUR du chiffre, pas les 160 premiers caractères
+            # de la ligne : sur une ligne de tableau longue, le préfixe perdait le chiffre qu'il
+            # était censé situer — payé le jour où `HANDOFF` est entré dans le périmètre.
+            pos = max(ligne.find(e), 0)
+            debut = max(pos - 100, 0)
             trouves.append({"ecriture": e, "ligne": numero,
-                            "contexte": ligne.strip()[:160]})
+                            "contexte": ligne[debut:debut + 160].strip()})
     return trouves
 
 
@@ -158,7 +163,9 @@ def inventaire(racine: Path) -> dict:
     """Chaque document, et les chiffres qu'il publie sans record."""
     corpus = records(racine)
     par_document = {}
-    for d in sorted(racine.glob("docs/*.md")):
+    # ⚠ Deux dossiers depuis le 2026-09-11 : l'archive gelée ET les rapports vivants. Un rapport
+    # qui publierait un chiffre sans record serait exactement la dérive que ce garde attrape.
+    for d in sorted([*racine.glob("docs/archive/*.md"), *racine.glob("docs/rapports/*.md")]):
         manquants = orphelins_situes(d.read_text(encoding="utf-8", errors="replace"),
                                      corpus)
         if manquants:

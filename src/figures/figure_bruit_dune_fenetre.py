@@ -2,7 +2,7 @@
 """Ce qui sépare deux fragments, et ce qui sépare deux tuiles du même fragment.
 
 ⚠⚠ POURQUOI CETTE FIGURE EXISTE. Le résultat de
-[`64`](../../docs/64_la_dispersion_netait_pas_un_effet.md) est un rapport entre deux
+[`64`](../../docs/archive/64_la_dispersion_netait_pas_un_effet.md) est un rapport entre deux
 dispersions, et un rapport se raconte mal en prose : « 0,2243 contre 0,0391 » se lit comme
 deux nombres alors que c'est **six fois**. Le panneau de gauche le montre sans qu'aucun
 chiffre soit nécessaire — les nuages de tuiles d'un même fragment sont plus larges que

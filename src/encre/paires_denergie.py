@@ -3,7 +3,7 @@
 
 ⚠⚠⚠ Pourquoi ce fichier existe, et c'est la conséquence directe d'un angle mort.
 `campagnes_de_scan.py` n'interroge que le bucket **open-data** (`*-masked.zarr`), et
-[`59`](../../docs/59_la_campagne_plutot_que_le_rouleau.md) a construit son argument dessus.
+[`59`](../../docs/archive/59_la_campagne_plutot_que_le_rouleau.md) a construit son argument dessus.
 Le 2026-08-28, en corrigeant ce document, l'angle mort est apparu : le volume où le modèle
 atteint AUC 0,925 vit dans l'**ancien layout** `full-scrolls/`, invisible à ce relevé. En
 regardant l'autre layout, `fragments/` en fait autant — et ce qu'il contient change la
@@ -16,7 +16,7 @@ question.
     Frag6            53, 70 et 88 keV à 3,24 µm              → trois énergies
     Frag6            53 keV, 3,24 contre 7,91 µm             → et sa paire de résolution
 
-⭐ Ce que ça change pour M1ter. [`58`](../../docs/58_resolution_ou_rouleau.md) §8 pose le
+⭐ Ce que ça change pour M1ter. [`58`](../../docs/archive/58_resolution_ou_rouleau.md) §8 pose le
 patron : *rendre l'objet qui marche semblable à celui qui ne marche pas, une propriété à la
 fois*. Pour la résolution, `58` a dû **émuler** en décimant. Pour l'énergie, on écrivait
 qu'il faudrait émuler un contraste — et qu'une émulation d'énergie n'en est pas une, puisque
@@ -25,7 +25,7 @@ existe scanné aux deux énergies, au même pas.**
 
 ⚠⚠ Et ces fragments portent une **vérité terrain d'encre** : `working/54keV_exposed_surface/`
 donne la surface ouverte du fragment, celle qui a servi au concours de détection. C'est aussi
-ce que [`45`](../../docs/45_consistent_with_quantifie.md) §6 réclame pour le **transport** —
+ce que [`45`](../../docs/archive/45_consistent_with_quantifie.md) §6 réclame pour le **transport** —
 *« les deux régions d'un même objet »* — et qui avait été déclaré impossible sur le couple
 essayé.
 

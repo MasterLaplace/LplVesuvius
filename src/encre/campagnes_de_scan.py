@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Ce qui distingue un rouleau dont l'encre se lit d'un rouleau ou le modele est inerte.
 
-⚠⚠ Pourquoi ce fichier existe. [`58`](../../docs/58_resolution_ou_rouleau.md) a elimine la
+⚠⚠ Pourquoi ce fichier existe. [`58`](../../docs/archive/58_resolution_ou_rouleau.md) a elimine la
 resolution : le temoin ou le modele atteint AUC 0,925 est deja a 9 % des conditions de
 `PHerc1447` sur les deux axes. Il restait « ce rouleau-ci », un mot qui ne nomme rien. Or les
 noms de volumes du depot public portent trois grandeurs -- pas de voxel, distance de

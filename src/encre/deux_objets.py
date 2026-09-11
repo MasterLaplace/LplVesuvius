@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Les deux objets de M1ter, comparés sur les trois axes que leur scan porte.
 
-⚠⚠ Pourquoi ce fichier existe. [`58`](../../docs/58_resolution_ou_rouleau.md) élimine la
+⚠⚠ Pourquoi ce fichier existe. [`58`](../../docs/archive/58_resolution_ou_rouleau.md) élimine la
 **résolution** comme cause de l'inertie du modèle sur `PHerc1447` : les deux objets sont à
 **9 %** l'un de l'autre sur les deux axes de résolution, et dix fois cet écart ne rendrait
 qu'un facteur 2,1 sur les 45 à expliquer. Il conclut qu'il reste « ce rouleau-ci ».

@@ -2,7 +2,7 @@
 """L'effet mesuré tient-il dans le bruit du tirage ? — la même flèche, sur deux colonnes.
 
 ⚠⚠ POURQUOI CETTE FIGURE EXISTE. Le résultat de
-[`07`](../../docs/07_reparee_nest_pas_propre.md) §8bis est une comparaison entre une
+[`07`](../../docs/archive/07_reparee_nest_pas_propre.md) §8bis est une comparaison entre une
 **dispersion** et un **effet**, et une comparaison de cette forme se raconte mal en prose :
 « étendue de graine 82 %, effet médian 35 % » se lit comme deux nombres alors que c'est
 **l'effet qui tient à l'intérieur du bruit**. Un nuage et une flèche le montrent sans qu'aucun

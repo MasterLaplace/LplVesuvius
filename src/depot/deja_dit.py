@@ -11,7 +11,7 @@ It does not read any text. **It measures.*** »).
 
   ⭐⭐ Ce dépôt garde ses **chiffres** (`verifier_chiffres`, 333 recalculés) et ses **tâches**
      (`taches_ouvertes`). Il ne gardait pas ses **idées**. C'est le même trou que l'antériorité
-     externe de [`66`](../../docs/66_audit_danteriorite.md), tourné vers l'intérieur.
+     externe de [`66`](../../docs/archive/66_audit_danteriorite.md), tourné vers l'intérieur.
 
 ⚠⚠ CE QUE CE FICHIER NE FAIT PAS, et c'est ce qui le rend utilisable : il ne signale PAS une
 phrase qui renvoie explicitement ailleurs. La forme normale de ce dépôt est de **redire avec un
@@ -37,7 +37,7 @@ from pathlib import Path
 
 RACINE = Path(__file__).resolve().parents[2]
 
-CIBLES = ("docs/*.md", "HANDOFF.md", "README.md", "docs/article/*.typ")
+CIBLES = ("docs/archive/*.md", "docs/rapports/*.md", "README.md", "docs/article/*.typ")
 """Ce qui est comparé. Les relevés de `docs/mesures/` sont exclus : ce sont des données."""
 
 POINTEUR = re.compile(
@@ -203,19 +203,19 @@ def verifier() -> int:
 
     with tempfile.TemporaryDirectory() as d:
         r = Path(d)
-        (r / "docs").mkdir()
-        (r / "docs" / "01_a.md").write_text(
+        (r / "docs" / "archive").mkdir(parents=True)
+        (r / "docs" / "archive" / "01_a.md").write_text(
             "Cette chaine mesure la geometrie tracee sans jamais lire aucune lettre ecrite.\n"
             "court.\n", encoding="utf-8")
-        (r / "docs" / "02_b.md").write_text(
+        (r / "docs" / "archive" / "02_b.md").write_text(
             "Cette chaine mesure la geometrie tracee sans jamais lire aucune lettre ecrite.\n",
             encoding="utf-8")
         # ⚠⚠⚠ LE CONTROLE QUI REND LA GARDE UTILISABLE : la MEME phrase, mais portant un
         # renvoi, doit etre EXEMPTEE. Redire en pointant est la forme normale de ce depot.
-        (r / "docs" / "03_c.md").write_text(
+        (r / "docs" / "archive" / "03_c.md").write_text(
             "→ Cette chaine mesure la geometrie tracee sans jamais lire aucune lettre ecrite.\n",
             encoding="utf-8")
-        (r / "docs" / "04_d.md").write_text(
+        (r / "docs" / "archive" / "04_d.md").write_text(
             "Le traceur produit des surfaces completement differentes selon sa graine initiale.\n",
             encoding="utf-8")
 
@@ -225,10 +225,10 @@ def verifier() -> int:
         # ⚠⚠ Le second cas d'exemption, paye au premier essai : une COMMANDE republiee dans
         # le carnet de bord n'est pas un radotage. Sans cette regle, la garde rendait 172
         # paires dont la majorite etaient des lignes de commande identiques.
-        (r / "docs" / "06_f.md").write_text(
+        (r / "docs" / "archive" / "06_f.md").write_text(
             "python3 src/graine/derive_avec_profondeur.py --docs docs/mesures --json sortie.json\n",
             encoding="utf-8")
-        (r / "docs" / "07_g.md").write_text(
+        (r / "docs" / "archive" / "07_g.md").write_text(
             "python3 src/graine/derive_avec_profondeur.py --docs docs/mesures --json sortie.json\n",
             encoding="utf-8")
         v("une commande republiee n'est pas signalee",
@@ -243,13 +243,13 @@ def verifier() -> int:
         v("... avec un score de 1", red and red[0]["score"] == 1.0, str(red))
         v("... et les deux bons documents",
           red and {red[0]["a"]["doc"], red[0]["b"]["doc"]}
-          == {"docs/01_a.md", "docs/02_b.md"}, str(red))
+          == {"docs/archive/01_a.md", "docs/archive/02_b.md"}, str(red))
         # ⚠ La sonde inverse : deux phrases differentes ne doivent PAS etre appariees.
         v("deux phrases differentes ne sont pas appariees",
           all("04_d" not in x["a"]["doc"] and "04_d" not in x["b"]["doc"] for x in red))
 
         # -- une repetition INTERNE a un document n'est pas signalee.
-        (r / "docs" / "05_e.md").write_text(
+        (r / "docs" / "archive" / "05_e.md").write_text(
             "Une phrase parfaitement identique repetee deux fois dans le meme document ici.\n"
             "Une phrase parfaitement identique repetee deux fois dans le meme document ici.\n",
             encoding="utf-8")

@@ -3,12 +3,12 @@
 
 ⚠⚠ **Pourquoi ce fichier refuse plus souvent qu'il ne conclut.** `PHercParis4` publie deux
 prédictions de surface du même volume, et il faut choisir laquelle tracer
-([`48`](docs/48_ou_monter_lexperience.md)). Tracer chacune à *sa* meilleure graine
+([`48`](docs/archive/48_ou_monter_lexperience.md)). Tracer chacune à *sa* meilleure graine
 confondrait « quelle prédiction » avec « quel endroit » — les deux graines tombent à des
 kilovoxels l'une de l'autre. D'où le 2×2 : les deux graines dans les deux prédictions.
 
 ⚠⚠ Et un troisième facteur s'y ajoute, que ce dépôt connaît depuis
-[`30`](docs/30_le_traceur_est_un_tirage.md) : **le traceur est un tirage**. Mesuré le
+[`30`](docs/archive/30_le_traceur_est_un_tirage.md) : **le traceur est un tirage**. Mesuré le
 2026-08-22, la même graine dans la même prédiction a rendu α = +0,89 puis **+1,12**. Un
 écart entre deux cellules plus petit que ça ne dit rien du tout.
 
@@ -85,7 +85,7 @@ def croiser(cellules: list[dict], resolution: float) -> dict:
 
     ⚠⚠ Une cellule **indécidable** n'est pas une cellule à α nul. La faire entrer dans une
     moyenne convertirait « je n'ai rien mesuré » en une valeur, ce qui est exactement le
-    défaut que [`49`](docs/49_alpha_ne_separe_pas_deux_pannes.md) vient de corriger dans
+    défaut que [`49`](docs/archive/49_alpha_ne_separe_pas_deux_pannes.md) vient de corriger dans
     l'instrument d'en dessous. Elles sont comptées à part.
     """
     cases: dict[tuple[str, str], list[dict]] = {}

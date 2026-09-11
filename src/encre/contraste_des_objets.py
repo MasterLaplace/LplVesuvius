@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Le contraste que le modèle reçoit, sur l'objet où il marche et sur celui où il échoue.
 
-⚠⚠ Pourquoi ce fichier existe. [`58`](../../docs/58_resolution_ou_rouleau.md) §8 donne le
+⚠⚠ Pourquoi ce fichier existe. [`58`](../../docs/archive/58_resolution_ou_rouleau.md) §8 donne le
 patron du découpage de M1ter : *rendre l'objet qui marche semblable à celui qui ne marche
 pas, une propriété à la fois*. `deux_objets.py` a chiffré l'écart des campagnes de scan —
 **9 %** sur la résolution, **115 %** sur l'énergie du faisceau. Reste à savoir ce que cet
@@ -9,7 +9,7 @@ pas, une propriété à la fois*. `deux_objets.py` a chiffré l'écart des campa
 
 ⭐ Ce qui est mesuré ici est le **contraste dans le papyrus**, normalisé par le plafond du
 type de chaque pile — la règle exacte que `infer_ink` applique, celle dont
-[`60`](../../docs/60_la_constante_qui_rendait_le_modele_muet.md) a montré qu'elle valait 257
+[`60`](../../docs/archive/60_la_constante_qui_rendait_le_modele_muet.md) a montré qu'elle valait 257
 fois le résultat quand on la rate. Comparer deux piles sans elle comparerait deux formats.
 
 ⚠⚠⚠ CE QUE ÇA N'EST PAS : le contraste de l'**encre**. On ne sait pas où est l'encre sur

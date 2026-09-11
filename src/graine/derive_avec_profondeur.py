@@ -3,7 +3,7 @@
 
 ⚠⚠ **La question de `29` N4, reformulée par la mesure.** N4 demandait « choisir une
 référence défendable pour le critère du tiers central », après que
-[`36`](docs/36_lorigine_de_la_pile.md) eut montré qu'un segment officiel n'en est pas une.
+[`36`](docs/archive/36_lorigine_de_la_pile.md) eut montré qu'un segment officiel n'en est pas une.
 Chercher une meilleure référence suppose que le critère, lui, est une propriété de la
 surface. Ce fichier teste cette supposition — et elle ne tient pas.
 
@@ -11,7 +11,7 @@ surface. Ce fichier teste cette supposition — et elle ne tient pas.
 sa profondeur. Une trace dont la matière est plus loin que ce plafond ne rapporte pas sa
 distance, elle rapporte **le plafond**. Un seuil absolu comparé à une valeur censurée ne
 compare pas deux surfaces, il compare deux réglages — et c'est exactement la troncature que
-[`35`](docs/35_le_tirage_sur_douze_rouleaux.md) a déjà payée sur le budget de générations.
+[`35`](docs/archive/35_le_tirage_sur_douze_rouleaux.md) a déjà payée sur le budget de générations.
 
 ⚠ Deux critères ne se transfèrent pas l'un à l'autre. `au_bord` et `part_plates` sont des
 grandeurs différentes, et ce fichier publie leur corrélation précisément pour qu'on ne
