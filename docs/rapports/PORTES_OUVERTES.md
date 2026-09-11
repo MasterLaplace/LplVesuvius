@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**75 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**77 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 37 portes
+## Grand Prize — 39 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -56,6 +56,8 @@
 - **R5-P10** · La réserve (b) de P1 bis (`75` D2) : 1/12 et 9/12 sur n = 12 portent des intervalles larges.
 - **R4-P20** *(le graal)* · **Ce qui mesurerait une portée**, puisque deux plafonds de suite ont été atteints par toutes les marches (`113`) : soit un plafond assez haut pour qu'une marche s'arrête pour une raison, soit l'acceptation que rien ne l'arrête dans ce volume — auquel cas ce n'est pas la portée qui borne le déroulement et il faut nommer ce qui le borne. Le volume ne borne pas non plus : 0 sortie sur 28 marches, rayons 4,07 à 23,8 mm.
 - **R4-P21** *(le graal)* · **Ce qui fait chuter le taux au grand rayon** (`113`, rho −0,719) : le rayon fait varier au moins trois choses à la fois — l'épaisseur lue, la courbure, la qualité du scan. Les séparer demande de mesurer à rayon égal sur deux rouleaux, ou à qualité égale sur deux rayons. Tant que ce n'est pas fait, on sait **où** le marcheur cesse de confirmer et pas **pourquoi**.
+- **R4-P22** *(le graal)* · **Le vide est-il le rouleau ou le lecteur ?** `115` mesure que 178 pas sur 560 ne lisent rien, sans pouvoir dire si l'extérieur du rouleau n'a plus de matière, s'il est hors de la région chargée, ou si des blocs absents sont rendus en zéros (la panne de `41` §6bis). Les deux se lisent identiquement dans le registre de course ; les séparer demande d'interroger le volume aux positions de départ, donc une lecture distante.
+- **R4-P23** *(le graal)* · **Réparer le drapeau `oriente`** (`R4-F37`) : un désaccord nul doit être refusé plutôt que d'être le meilleur accord possible. Le remède est le même que celui de `54` — refuser une pile vide au lieu de la juger — et il change ce que toute campagne de marche a mesuré jusqu'ici, donc il se fait avec une re-course et non par une retouche.
 
 ## Progress Prizes — 19 portes
 

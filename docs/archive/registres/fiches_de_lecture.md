@@ -5265,6 +5265,24 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   qualité du scan.
 - **lu** : intégralement, 168 lignes, le 2026-09-11
 
+### docs/archive/115_ce_qui_porte_le_taux.md
+- **lignes** : 163
+- **nature** : RESULTAT
+  (le taux de confirmation suit le rayon : est-ce la matière qui durcit, ou le volume qui cesse
+  de répondre ? mesuré sur les 560 étapes que `113` a gardées, sans une lecture distante.)
+- **résumé** : ⭐⭐⭐⭐ **Le rayon n'est pas la cause.** **178 pas sur 560 (31,8 %) ne lisent
+  RIEN** — désaccord exactement 0,00° ET planarité exactement 0,000 — et **aucun ne confirme** ;
+  4 marches sont aveugles dès leur premier pas. Sur les **17 marches qui ont lu**, le rho passe
+  de **−0,7188 (p 1,6·10⁻⁵) à −0,1904 (p 0,4642)** : le rayon **ne survit pas**. Là où le volume
+  répond, le marcheur confirme **0,7618** de ses pas, à tout rayon (0,800 sous 17 mm contre
+  0,750 au-dessus, p 0,2579). ⚠⚠⚠ **Et le vide est déclaré ORIENTÉ 178 fois sur 178** : deux
+  moitiés de rien rendent 0,00°, donc elles passent la barre — quatrième fois que ce dépôt paie
+  cette forme (`54`, `60`, `41` §6bis). ⚠ Trois covariables sont DANS le critère et sont
+  écartées comme tautologiques, puis réutilisées en témoin positif. ⚠ Ne tranche PAS d'où vient
+  le vide (rouleau, région chargée, ou blocs rendus en zéros) : les trois se lisent
+  identiquement ici.
+- **lu** : intégralement, 163 lignes, le 2026-09-11
+
 ### docs/archive/114_le_cout_qui_connait_la_spire.md
 - **lignes** : 183
 - **nature** : RESULTAT

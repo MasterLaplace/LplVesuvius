@@ -131,6 +131,14 @@ sur 56 avaient touché le plafond** et que la portée n'avait donc jamais été 
 
 *`archive/113` — `src/figures/figure_jusquou.py`. Une ligne par marche, ordonnée par rayon ; une case par pas, pleine si le pas est confirmé. Les vingt-huit lignes vont jusqu'au mur : rien n'arrête une marche. Et le vidage de haut en bas est le résultat que le taux global et le taux par profondeur moyennaient tous les deux.*
 
+`115` relit ces mêmes étapes et retourne la lecture : ce vidage n'est pas une matière qui durcit,
+c'est un volume qui cesse de répondre. Un tiers des pas ne lit rien, aucun de ceux-là ne confirme,
+et le rayon ne survit pas aux marches qui ont lu.
+
+![Le rayon ne portait pas le taux : les marches qui ont lu tiennent à tout rayon, et le vide passe pour orienté](../images/115_le_rayon_ne_portait_pas_le_taux.png)
+
+*`archive/115` — `src/figures/figure_ce_qui_porte_le_taux.py`. À gauche, les deux nuages superposés : la pente n'existe que parce que les marches qui n'ont rien lu sont à droite. À droite, le défaut — les 178 pas aveugles portent tous le drapeau `oriente`, parce que deux moitiés de rien rendent un désaccord de 0,00°.*
+
 ![Le coût qui connaît la spire : le champ tourné, faux par construction, obtient 83 % de la descente du vrai](../images/114_le_cout_qui_connait_la_spire.png)
 
 *`archive/114` — `src/figures/figure_le_cout_qui_connait_la_spire.py`. La réouverture était légitime, la réponse est non : 0,5 % du chemin.*
@@ -430,6 +438,16 @@ Le taux ne baisse **pas** avec la profondeur (0,56 → 0,50, p 0,3253) mais **su
 9,887. Les deux agrégats de la course moyennaient sur l'axe où l'écart se trouve ; la figure l'a
 montré. → **le marcheur n'échoue pas en avançant, il échoue là où il part**, et les deux remèdes
 diffèrent.
+
+**`115` · 2026-09-11 · ce qui porte le taux** (`ce_qui_porte_le_taux.py`, quelques secondes, hors ligne)
+Relit les 560 étapes de `113` sans une lecture distante. **178 pas sur 560 (31,8 %) ne lisent rien**
+— désaccord 0,00° ET planarité 0,000 — et **aucun ne confirme**. Sur les **17 marches voyantes** le
+rho du rayon passe de −0,7188 (p 1,6·10⁻⁵) à **−0,1904 (p 0,4642)** : là où le volume répond, le
+marcheur tient **0,7618** de ses pas à tout rayon (0,800 sous 17 mm contre 0,750 au-dessus,
+p 0,2579). ⚠⚠ Et le vide est **déclaré orienté 178 fois sur 178** (`oriente = désaccord < barre`,
+et deux moitiés de rien rendent 0,00°) — la forme de `54`, `60` et `41` §6bis. → **le marcheur n'a
+pas de dérive au grand rayon ; ce qui lui manque est de savoir quand il ne lit rien**, et la
+signature est disponible avant le pas.
 
 ## 4. Le tableau des statuts
 

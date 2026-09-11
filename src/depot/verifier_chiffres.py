@@ -2594,6 +2594,48 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                             [f"**{val}**", f"{val}", f"**{val:+.3f}**", f"{val:+.3f}"],
                             cpt.name))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 115 : LE RAYON N'EST PAS LA CAUSE, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) Le rho des VOYANTES ne voyage jamais sans celui de TOUTES : « -0,19, p 0,46 » seul se
+    # lit comme « on n'a rien trouve », alors que le resultat est qu'un -0,72 tres significatif
+    # DISPARAIT quand on retire les marches qui n'ont rien lu. C'est l'ecart qui est le fait.
+    # (2) Le taux voyant ne voyage jamais sans le compte de pas aveugles : « 0,7618 » seul se lit
+    # comme le taux du marcheur, alors que c'est le taux sur les deux tiers ou il lit.
+    cpt2 = _source(racine, "ce_qui_porte_le_taux.json")
+    if cpt2.exists():
+        d = json.loads(cpt2.read_text())
+        o = d.get("le_vide_est_il_declare_oriente", {})
+        for cle, nom in (("pas", "pas relus par 115"),
+                         ("pas_aveugles", "pas aveugles de 115"),
+                         ("aveugles_confirmes", "aveugles confirmes de 115"),
+                         ("voyants_confirmes", "voyants confirmes de 115"),
+                         ("aveugles_declares_orientes", "aveugles declares orientes de 115")):
+            if o.get(cle) is not None:
+                v_ = o[cle]
+                out.append((nom, [f"**{v_}**", f"{v_}"], cpt2.name))
+        if o.get("taux_voyant") is not None:
+            ajoute("taux voyant de 115", o["taux_voyant"], 4, cpt2.name)
+        if o.get("part_aveugle") is not None:
+            ajoute("part aveugle de 115", o["part_aveugle"] * 100.0, 1, cpt2.name, unites=("%",))
+        w = d.get("le_rayon_survit_il_aux_marches_voyantes", {})
+        for cle, nom in (("marches_voyantes", "marches voyantes de 115"),
+                         ("marches", "marches relues par 115")):
+            if w.get(cle) is not None:
+                v_ = w[cle]
+                out.append((nom, [f"**{v_}**", f"{v_}"], cpt2.name))
+        for cle, nom, dec in (("rho_sur_toutes", "rho sur toutes de 115", 4),
+                              ("rho_sur_les_voyantes", "rho sur les voyantes de 115", 4)):
+            if w.get(cle) is not None:
+                ajoute(nom, w[cle], dec, cpt2.name, signe=True)
+        for cle, nom, dec in (("p_sur_les_voyantes", "p des voyantes de 115", 4),
+                              ("taux_median_voyantes_interieur", "taux median interieur de 115", 3),
+                              ("taux_median_voyantes_exterieur", "taux median exterieur de 115", 3),
+                              ("p_interieur_contre_exterieur", "p interieur contre exterieur de 115", 4)):
+            if w.get(cle) is not None:
+                ajoute(nom, w[cle], dec, cpt2.name)
+        if d.get("marches_aveugles_des_le_depart") is not None:
+            v_ = d["marches_aveugles_des_le_depart"]
+            out.append(("marches aveugles des le depart de 115", [f"**{v_}**", f"{v_}"], cpt2.name))
+
     # ⭐⭐⭐ LA TRANCHE 113 : LE PLAFOND EST ENCORE LA MESURE, ET DEUX APPARIEMENTS LE DISENT.
     # (1) La longueur mediane ne voyage JAMAIS sans la part au plafond. Seule, « 3 966 um » se
     # lit comme une portee mesuree ; avec « 28 marches sur 28 au plafond », elle se lit pour ce

@@ -1374,6 +1374,10 @@ run "fiches a jour"           uv run python "$ROOT/src/depot/fiches_a_jour.py" -
 # ⚠ Les cinq registres de docs/rapports/ sont DERIVES des six rapports : ce controle dit
 # que la derivation tient, pas que les fichiers rendus sont a jour (ca, c est `--ecrire`).
 run "registres derives"       uv run python "$ROOT/src/depot/registres.py" --verifier
+# ⚠ `115` relit les etapes de `113` sans lecture distante : sa batterie tourne hors ligne.
+run "ce qui porte le taux"    uv run python "$ROOT/src/nappe/ce_qui_porte_le_taux.py" --verifier
+run "figure ce qui porte"     uv run python "$ROOT/src/figures/figure_ce_qui_porte_le_taux.py" --verifier
+run "figure jusquou"          uv run python "$ROOT/src/figures/figure_jusquou.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

@@ -4,7 +4,7 @@
 
 # Les faits, et ce qu'ils valent aujourd'hui
 
-**135 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **126** établi, **3** borné, **4** réfuté, **2** rétracté, **0** ouvert.
+**138 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **128** établi, **3** borné, **4** réfuté, **3** rétracté, **0** ouvert.
 
 ## R1 — 20 faits
 
@@ -81,7 +81,7 @@
 | `R3-F19` | **la chaîne radiale converge six tours et casse au septième** ; ce qui décide est la portée, pas le pas | officiel + 6 spires `gen_neighbor` : 4/7 convergent, 7ᵉ +1,475 ; pas 0,5 → 6/7 ; optimum en U, bassin 0,25–0,5 ; portée = `neighbor_exit_count` × pas ; repousse libre : casse au 3ᵉ tour | établi | `43` §1–6 · `spire_suivante.sh`, `table_chaine.py` |
 | `R3-F20` | **la chaîne avance d'une nappe à la fois, et s'érode** | 113 µm entre nappes (100–138) ; érosion **15,6 %/tour** sur l'aire utile (58 → 23 % valides) ; ~10 % d'un tour par nappe → une colonne, pas une bande ; rayon refusé (résidu 0,5 mm pour 0,113 d'écart) | établi ; « 4,0 % » rétracté | `44` §1–7 · `geometrie_chaine.py` |
 
-## R4 — 35 faits
+## R4 — 38 faits
 
 | id | fait | valeur | statut | source · producteur |
 |---|---|---|---|---|
@@ -118,8 +118,11 @@
 | `R4-F31` | **le plafond est encore la mesure** : à 20 pas, rien n'arrête une seule marche | 28/28 au plafond, 0 sortie de volume ; longueur médiane **3966,3 µm** (max 4870,2) contre 1 250 à `107` sous un plafond de 6 ; la portée reste entièrement censurée | borné ; borne inférieure, jamais une portée | `113` · `nappe/jusquou_va_t_il_si_on_le_laisse.py` |
 | `R4-F32` | **le taux de confirmation ne baisse pas avec la profondeur** : la marche ne se dégrade pas en avançant | précoce 0,56 sur 6 pas contre tardif 0,50 ; écart **−0,060**, p = **0,3253** sous un taux constant ; le taux reste à 0,5196 du pas 1 au pas 20 | établi | `113` · `nappe/jusquou_va_t_il_si_on_le_laisse.py` |
 | `R4-F33` | dans UNE marche les confirmations ne sont pas groupées ; **entre marches, elles ne tirent pas au même taux** | run médian **1,0** (max 8), ce qu'un tirage indépendant rend — mais le taux par marche va de **0,00 à 0,90**, indice de dispersion **9,887**, χ² 266,95 sur 27 ddl, p < 10⁻⁴ : le 0,5196 global est une moyenne de deux populations | établi ; « un tirage indépendant à p ≈ 0,52 » rétracté le jour même | `113`, `109` · `nappe/jusquou_va_t_il_si_on_le_laisse.py` |
-| `R4-F34` | **le taux de confirmation suit le RAYON** : le marcheur n'échoue pas en avançant, il échoue là où il part | rho de Spearman **−0,7188**, p = **1,6·10⁻⁵** sur 28 marches, une par bande, de 4,07 à 23,8 mm ; première moitié 0,7357, seconde 0,3036 | établi ; une corrélation, jamais une cause : le rayon fait aussi varier l'épaisseur lue, la courbure et la qualité du scan | `113` · `nappe/jusquou_va_t_il_si_on_le_laisse.py` |
+| `R4-F34` | le taux de confirmation suit le rayon **parce que le volume cesse de répondre**, pas parce que le marcheur y arrive moins | rho −0,7188 (p 1,6·10⁻⁵) sur les 28 marches, **−0,1904 (p 0,4642)** sur les 17 qui ont lu quelque chose ; taux médian 0,800 sous 17 mm contre 0,750 au-dessus, p 0,2579 | rétracté ; « le taux suit le rayon » : la corrélation tient, sa lecture causale non | `113`, `115` · `nappe/ce_qui_porte_le_taux.py` |
 | `R4-F35` | les deux agrégats de `113` **cachaient** ce résultat, et c'est la figure qui l'a montré | le taux global (0,5196) et le taux par profondeur (plat, p 0,3253) moyennent tous deux sur l'axe où l'écart se trouve ; la grille marche × pas l'a rendu visible | établi ; « regarder avant de mesurer » | `113` · `figures/figure_jusquou.py` |
+| `R4-F36` | **un pas sur trois ne lit RIEN**, et pas un seul ne confirme | 178 pas aveugles sur 560 (31,8 %) — désaccord exactement 0,00° ET planarité exactement 0,000 — dont **0 confirmé** ; 4 marches sur 28 sont aveugles **dès leur premier pas** | établi | `115` · `nappe/ce_qui_porte_le_taux.py` |
+| `R4-F37` | **le vide est déclaré orienté** : le marcheur croit savoir où il va là où il ne lit rien | 178 pas aveugles sur 178 portent `oriente = vrai`, parce que `oriente = désaccord < barre` et que deux moitiés de rien rendent 0,00° ; même forme que `54` (cinq rendus vides lus comme cinq surfaces plates) et `41` §6bis | établi ; défaut du drapeau, pas de la matière | `115`, `54`, `41` · `nappe/ce_qui_porte_le_taux.py` |
+| `R4-F38` | **là où le volume répond, le marcheur confirme les trois quarts de ses pas, à tout rayon** | taux **0,7618** sur les 382 pas voyants ; 0,800 médian sous 17 mm contre 0,750 au-dessus (p 0,2579) ; le rayon ne survit pas (rho −0,1904, p 0,4642 sur 17 marches) | établi | `115` · `nappe/ce_qui_porte_le_taux.py` |
 
 ## R5 — 20 faits
 

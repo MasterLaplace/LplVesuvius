@@ -4,7 +4,7 @@
 
 # Les fils rouges — les lois que ce dépôt a payées
 
-**92 mécanismes** qui traversent les campagnes. Chacun a été payé au moins une fois, et le prix est dans le rapport qui le porte.
+**93 mécanismes** qui traversent les campagnes. Chacun a été payé au moins une fois, et le prix est dans le rapport qui le porte.
 
 ## R1 — 15 lois
 
@@ -208,7 +208,7 @@ L'image de 40 s jamais faite (`50`), l'image qui tranche feuille/tranche (`54` �
 
 `numcodecs` absent → « graine non couverte » (`41`) ; `imagecodecs` absent → LZW illisible (`54`) ; `verifier_zarr.sh` existait, orphelin. Le décodeur lève, il ne rend pas `None`.
 
-## R4 — 14 lois
+## R4 — 15 lois
 
 **R4-L01 · Une limite de grille publiée comme une limite matérielle**
 
@@ -265,6 +265,10 @@ L'image de 40 s jamais faite (`50`), l'image qui tranche feuille/tranche (`54` �
 **R4-L14 · Une moyenne sur le mauvais axe cache exactement ce qu'on cherche**
 
 `113` publiait deux agrégats — un taux global et un taux par profondeur — et les deux moyennaient sur l'axe où l'écart se trouvait. Le taux ne varie pas avec la profondeur (p 0,3253) et varie d'un facteur neuf **entre marches** (rho −0,719 avec le rayon). Le remède n'est pas un troisième agrégat mais une **figure qui ne moyenne rien** : une ligne par marche, une case par pas.
+
+**R4-L15 · Un vide et un accord parfait rendent le même nombre**
+
+Deux moitiés de rien ne peuvent pas être en désaccord : le désaccord vaut 0,00°, donc il passe n'importe quelle barre, et le marcheur déclare `oriente` exactement là où il ne lit rien (178 fois sur 178, `115`). La signature d'un vide se reconnaît à une **conjonction** — deux grandeurs indépendantes exactement nulles — jamais à un seuil sur l'une d'elles. C'est la quatrième fois que ce dépôt paie cette forme : `54` (piles vides lues comme surfaces plates), `60` (constante qui rendait le modèle muet), `41` §6bis (chunk absent lu comme « pas de matière »).
 
 ## R5 — 20 lois
 
