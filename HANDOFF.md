@@ -334,8 +334,13 @@ dépassé. Il est conservé plus bas, sous son en-tête, parce que ses résultat
    question que rien n'a encore posée — *après k pas, combien de feuilles ai-je RÉELLEMENT
    franchies ?* — et sa réponse tranche la seule chose qui décide du graal : le retard est-il un
    **biais** (qui coûte `n`) ou un **jitter** de moyenne nulle (qui coûte `√n`) ?
-2. ⚠ **Puis seulement la portée**, en couverture (28 × 3 × 10, 84 marches, 5,35 h), parce qu'à
-   budget égal elle rend trois fois plus de chutes que la profondeur.
+2. ⛔⛔ **ET `109` INVERSE CET ORDRE-LÀ.** Ce point disait : la portée en **couverture**
+   (28 × 3 × 10, 84 marches, 5,35 h) plutôt qu'en **profondeur**, « parce qu'à budget égal elle
+   rend trois fois plus de chutes ». ⭐ Or `109` a mesuré qu'un pas non confirmé **n'est pas une
+   chute** : compter des chutes est donc mesurer la mauvaise chose. La question qui reste est la
+   **DÉRIVE** — *biais, qui coûte `n`, ou jitter de moyenne nulle, qui coûte `√n` ?* — et elle
+   demande des marches **LONGUES**, pas nombreuses. C'est la **profondeur** qu'il faut payer, et le
+   plafond de six pas de `107` est exactement ce qui empêche de poser la question.
 3. ⚠⚠ **Et le marcheur devra GARDER ses étapes cette fois.** `102` les a jetées au profit d'une
    médiane par bande, et sept heures de course sont irrécupérables.
 
