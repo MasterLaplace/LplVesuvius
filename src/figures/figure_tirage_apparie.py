@@ -19,7 +19,7 @@ cette grandeur est plus petit que ce qu'on pouvait mesurer avant, et **combien**
 
 Usage :
     uv run python src/figures/figure_tirage_apparie.py --verifier
-    uv run python src/figures/figure_tirage_apparie.py \\
+    uv run python src/figures/figure_tirage_apparie.py \
         --sortie docs/images/07_tirage_apparie.png
 """
 
@@ -29,12 +29,17 @@ import argparse
 import json
 import statistics
 import sys
+import tempfile
 from pathlib import Path
+
+from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from figure_commune import (etiquette_de_trace as etiquette,  # noqa: E402
                             etiquettes_de_traces as etiquettes,
-                            police, prose_tracable)
+                            police, prose_tracable,
+                            textes_debordants, textes_hors_cadre,
+                            textes_qui_se_recouvrent)
 
 RACINE = Path(__file__).resolve().parents[2]
 MESURES = RACINE / "docs" / "mesures"
@@ -45,6 +50,24 @@ DISCRET = (140, 136, 128)
 AMBRE = (214, 143, 42)
 GRIS = (120, 128, 140)
 ROUGE = (188, 68, 52)
+
+
+def lire(index_p: Path, position_p: Path, bruit_p: Path) -> tuple[dict, dict, dict]:
+    """Charge les trois mesures nécessaires à l'appariement.
+
+    Refuse si un fichier manque ou ne porte pas la structure minimale attendue.
+    """
+    for nom, c in (("index", index_p), ("position", position_p), ("bruit", bruit_p)):
+        if not c.is_file():
+            raise FileNotFoundError(f"mesure {nom} absente : {c}")
+    idx = json.loads(index_p.read_text(encoding="utf-8"))
+    pos = json.loads(position_p.read_text(encoding="utf-8"))
+    br = json.loads(bruit_p.read_text(encoding="utf-8"))
+    if not idx.get("paires"):
+        raise ValueError(f"{index_p} ne porte aucune paire")
+    if not pos.get("paires"):
+        raise ValueError(f"{position_p} ne porte aucune paire")
+    return idx, pos, br
 
 
 def rangees(index: dict, position: dict, bruit: dict) -> list[dict]:
@@ -88,13 +111,13 @@ def prose(lignes: list[dict]) -> list[str]:
     ]
 
 
-def dessiner(index: dict, position: dict, bruit: dict, sortie: Path) -> dict:
-    from PIL import Image, ImageDraw
+def dessiner(index: dict, position: dict, bruit: dict, sortie: Path) -> tuple[Path, list, list]:
+    from PIL import ImageDraw
 
     gros, moyen, petit = police(17, 13, 11)
     lignes = rangees(index, position, bruit)
     if not lignes:
-        raise SystemExit("aucune trace mesurée des deux façons")
+        raise ValueError("aucune trace mesurée des deux façons")
 
     # ⚠⚠ L'AXE EST COMMUN AUX DEUX BARRES, evidemment, mais aussi FIXE au maximum observe :
     # l'ajuster par trace ferait paraitre chaque effondrement identique, quelle que soit son
@@ -104,11 +127,16 @@ def dessiner(index: dict, position: dict, bruit: dict, sortie: Path) -> dict:
     L, H = 900, 150 + pas_ligne * len(lignes) + 130
     toile = Image.new("RGB", (L, H), FOND)
     d = ImageDraw.Draw(toile)
+    poses: list[tuple[int, int, str, object]] = []
 
-    d.text((44, 26), "l'effet de la reparation, bruit retire au lieu d'etre borne",
-           fill=TEXTE, font=gros)
-    d.text((44, 52), "variation de shortfall en valeur absolue, par trace",
-           fill=DISCRET, font=moyen)
+    def ecrire(x, y, texte, fonte, fill):
+        d.text((x, y), texte, font=fonte, fill=fill)
+        poses.append((x, y, texte, fonte))
+
+    ecrire(44, 26, "l'effet de la reparation, bruit retire au lieu d'etre borne",
+           gros, TEXTE)
+    ecrire(44, 52, "variation de shortfall en valeur absolue, par trace",
+           moyen, DISCRET)
 
     x0, y0 = 300, 112
     for v in (1, 2, 5, 10, 20):
@@ -116,17 +144,17 @@ def dessiner(index: dict, position: dict, bruit: dict, sortie: Path) -> dict:
             break
         xx = x0 + int(v / haut * larg_barre)
         d.line([xx, y0 - 8, xx, y0 + pas_ligne * len(lignes)], fill=(36, 36, 36))
-        d.text((xx - 6, y0 - 24), f"{v} %", fill=DISCRET, font=petit)
+        ecrire(xx - 6, y0 - 24, f"{v} %", petit, DISCRET)
 
     noms = etiquettes([x["trace"] for x in lignes])
     for i, x in enumerate(lignes):
         yy = y0 + pas_ligne * i
-        d.text((44, yy + 6), noms[i], fill=TEXTE, font=petit)
+        ecrire(44, yy + 6, noms[i], petit, TEXTE)
         for k, (cle, couleur) in enumerate((("index", ROUGE), ("position", AMBRE))):
             l_barre = max(2, int(x[cle] / haut * larg_barre))
             yb = yy + 2 + k * 11
             d.rectangle([x0, yb, x0 + l_barre, yb + 9], fill=couleur)
-            d.text((x0 + l_barre + 6, yb - 2), f"{x[cle]:.2f}", fill=couleur, font=petit)
+            ecrire(x0 + l_barre + 6, yb - 2, f"{x[cle]:.2f}", petit, couleur)
         # ⚠ Le bruit PROPRE a la trace, en trait vertical : c'est le seuil qu'il fallait
         # depasser pour que l'effet soit lisible, et il n'est pas le meme partout.
         if x["bruit"]:
@@ -135,28 +163,24 @@ def dessiner(index: dict, position: dict, bruit: dict, sortie: Path) -> dict:
 
     bas = y0 + pas_ligne * len(lignes) + 22
     d.rectangle([44, bas + 3, 68, bas + 12], fill=ROUGE)
-    d.text((76, bas), "tirage par index (avant/apres sur des cellules differentes)",
-           fill=DISCRET, font=petit)
+    ecrire(76, bas, "tirage par index (avant/apres sur des cellules differentes)",
+           petit, DISCRET)
     d.rectangle([44, bas + 20, 68, bas + 29], fill=AMBRE)
-    d.text((76, bas + 17), "tirage par POSITION de grille (meme echantillon)",
-           fill=DISCRET, font=petit)
+    ecrire(76, bas + 17, "tirage par POSITION de grille (meme echantillon)",
+           petit, DISCRET)
     d.line([500, bas + 3, 500, bas + 27], fill=GRIS, width=1)
-    d.text((510, bas + 12), "bruit de graine propre a la trace", fill=DISCRET, font=petit)
+    ecrire(510, bas + 12, "bruit de graine propre a la trace", petit, DISCRET)
 
     for k, ligne in enumerate(prose(lignes)):
-        d.text((44, bas + 46 + k * 19), ligne, fill=TEXTE, font=moyen)
+        ecrire(44, bas + 46 + k * 19, ligne, moyen, TEXTE)
 
     sortie.parent.mkdir(parents=True, exist_ok=True)
     toile.save(sortie)
-    return {"traces": len(lignes),
-            "median_index_pct": statistics.median(x["index"] for x in lignes),
-            "median_position_pct": statistics.median(x["position"] for x in lignes),
-            "sous_le_bruit": sum(1 for x in lignes if x["bruit"] and x["position"] < x["bruit"]),
-            "sortie": str(sortie)}
+    return sortie, poses, [(0, 0, L, H)]
 
 
 def verifier() -> int:
-    """Auto-test HORS LIGNE : l'appariement, l'étiquette et la prose."""
+    """Auto-test HORS LIGNE : l'appariement, l'étiquette, la prose et la figure avec sondes."""
     echecs = controles = 0
 
     def v(nom, cond, detail=""):
@@ -175,7 +199,7 @@ def verifier() -> int:
                       {"trace": "A-w010-027", "variation_shortfall_pct": -0.09},
                       {"trace": "B-w028-037", "variation_shortfall_pct": 0.2}]}
     br = {"lignes": [{"trace": "A-w010-027", "shortfall_etendue_pct": 4.0},
-                     {"trace": "B-w028-037", "shortfall_etendue_pct": 3.2}]}
+                      {"trace": "B-w028-037", "shortfall_etendue_pct": 3.2}]}
     r = rangees(idx, pos, br)
     v("l'appariement suit le nom et non l'ordre",
       [x["trace"] for x in r] == ["A-w010-027", "B-w028-037", "C-w038-045"],
@@ -202,6 +226,71 @@ def verifier() -> int:
     v("... et elle dit le compte sous le bruit",
       any("sur 3" in l for l in lignes), str(lignes))
 
+    with tempfile.TemporaryDirectory() as d:
+        rac = Path(d)
+        f_idx = rac / "idx.json"
+        f_pos = rac / "pos.json"
+        f_br = rac / "bruit.json"
+        f_idx.write_text(json.dumps(idx), encoding="utf-8")
+        f_pos.write_text(json.dumps(pos), encoding="utf-8")
+        f_br.write_text(json.dumps(br), encoding="utf-8")
+
+        lu_idx, lu_pos, lu_br = lire(f_idx, f_pos, f_br)
+        v("les trois JSON sont lus",
+          len(lu_idx["paires"]) == 3 and len(lu_pos["paires"]) == 3 and len(lu_br["lignes"]) == 2)
+
+        out_img, poses, cadres = dessiner(lu_idx, lu_pos, lu_br, rac / "f.png")
+        v("l'image est écrite", out_img.is_file())
+        v("... et elle n'est pas vide", out_img.stat().st_size > 1000)
+
+        im = Image.open(out_img).convert("RGB")
+        v("... et sa largeur est celle annoncée", im.size[0] == 900)
+        v("... et sa hauteur correspond au nombre de traces", im.size[1] == 150 + 34 * 3 + 130)
+
+        pixels = list(im.getdata())
+        v("... et elle porte les couleurs des deux tirages",
+          ROUGE in pixels and AMBRE in pixels)
+
+        v("aucun texte ne déborde de la toile", textes_debordants(poses, im.size[0]) == [])
+        v("aucun texte ne sort de son panneau", textes_hors_cadre(poses, cadres) == [])
+        v("aucun texte n'en recouvre un autre", textes_qui_se_recouvrent(poses) == [])
+        v("aucun texte n'est écrit sous le bord bas",
+          [t for x, y, t, f in poses if f is not None and y + f.getbbox(t)[3] > im.size[1]] == [])
+
+        # ⚠ Sonde : une mesure manquante est refusée
+        try:
+            lire(rac / "inexistant.json", f_pos, f_br)
+            v("sonde : un fichier manquant est refusé", False)
+        except FileNotFoundError:
+            v("sonde : un fichier manquant est refusé", True)
+
+        # ⚠ Sonde : un JSON sans paires est refusé
+        f_invalide = rac / "invalide.json"
+        f_invalide.write_text(json.dumps({"corpus": "PHercParis4"}), encoding="utf-8")
+        try:
+            lire(f_invalide, f_pos, f_br)
+            v("sonde : un JSON sans paires est refusé", False)
+        except ValueError:
+            v("sonde : un JSON sans paires est refusé", True)
+
+        # ⚠ Sonde : aucun appariement possible est refusé par dessiner
+        f_disjoint = rac / "disjoint.json"
+        f_disjoint.write_text(
+            json.dumps({"paires": [{"trace": "Z-w999-999", "variation_shortfall_pct": 1.0}]}),
+            encoding="utf-8"
+        )
+        lu_disjoint = json.loads(f_disjoint.read_text(encoding="utf-8"))
+        try:
+            dessiner(lu_idx, lu_disjoint, lu_br, rac / "vide.png")
+            v("sonde : aucun appariement possible est refusé", False)
+        except ValueError:
+            v("sonde : aucun appariement possible est refusé", True)
+
+        # ⚠ Sonde : la garde attrape un débordement simulé
+        texte_trop_long = [(850, 10, "Texte qui depasse de la toile de neuf cents pixels", police(17))]
+        v("sonde : textes_debordants détecte le dépassement",
+          len(textes_debordants(texte_trop_long, 900)) > 0)
+
     print(f"  {'ECHEC' if echecs else 'ALL PASS'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -219,13 +308,13 @@ def main() -> int:
     a = p.parse_args()
     if a.verifier:
         return verifier()
-    for f in (a.index, a.position, a.bruit):
-        if not f.is_file():
-            raise SystemExit(f"mesure absente : {f}")
-    print(json.dumps(dessiner(json.loads(a.index.read_text()),
-                              json.loads(a.position.read_text()),
-                              json.loads(a.bruit.read_text()), a.sortie),
-                     indent=2, ensure_ascii=False))
+    idx, pos, br = lire(a.index, a.position, a.bruit)
+    out, _, _ = dessiner(idx, pos, br, a.sortie)
+    try:
+        cible = out.relative_to(RACINE)
+    except ValueError:
+        cible = out
+    print(f"écrit : {cible}")
     return 0
 
 
