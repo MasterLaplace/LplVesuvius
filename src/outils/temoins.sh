@@ -1391,6 +1391,8 @@ run "figure jusquou"          uv run python "$ROOT/src/figures/figure_jusquou.py
 # ⚠ `116` relit les memes etapes que `115` : sa batterie est hors ligne elle aussi.
 run "la cecite absorbante"    uv run python "$ROOT/src/nappe/la_cecite_est_elle_absorbante.py" --verifier
 run "figure cecite"           uv run python "$ROOT/src/figures/figure_la_cecite_est_absorbante.py" --verifier
+run "qui refuse un pas"       uv run python "$ROOT/src/nappe/qui_refuse_un_pas_voyant.py" --verifier
+run "figure qui refuse"       uv run python "$ROOT/src/figures/figure_qui_refuse_un_pas_voyant.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

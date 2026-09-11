@@ -147,6 +147,13 @@ son critère d'arrêt depuis le début, et il marchait dans le vide au lieu de s
 
 *`archive/116` — `src/figures/figure_la_cecite_est_absorbante.py`. Les cases rouges ne sont jamais au milieu d'une marche, toujours en queue ; le témoin de droite montre ce que le hasard en ferait. Et elles alternent avec des marches entières jusqu'à 22,17 mm : huit plages contre deux sous une frontière radiale, donc le vide n'est pas le bord du rouleau.*
 
+`117` ferme le mouvement en décomposant les 91 refus qui restent : **deux tiers d'entre eux sont la
+fenêtre de l'instrument, pas la matière**.
+
+![Ce qui refuse un pas voyant : deux tiers des refus touchent la fenêtre, et la profondeur ne dégrade rien](../images/117_qui_refuse_un_pas_voyant.png)
+
+*`archive/117` — `src/figures/figure_qui_refuse_un_pas_voyant.py`. À gauche, les refus par terme faux du prédicat ; le bloc ambre est `en_butee` seule. À droite, les trente et une longueurs candidates : les pas en butée sont exactement aux deux bouts, jamais entre. La matière seule refuse 28 pas sur 382.*
+
 ![Le coût qui connaît la spire : le champ tourné, faux par construction, obtient 83 % de la descente du vrai](../images/114_le_cout_qui_connait_la_spire.png)
 
 *`archive/114` — `src/figures/figure_le_cout_qui_connait_la_spire.py`. La réouverture était légitime, la réponse est non : 0,5 % du chemin.*
@@ -463,10 +470,21 @@ aveugle → aveugle, **0** aveugle → voyant, là où une permutation intra-mar
 **7 retours en médiane** et jamais moins de 5 sur 2 000 tirages. S'arrêter au premier pas aveugle
 donne donc **la première portée non censurée du dépôt** : 11 marches sur 28 s'arrêtent pour une
 raison, médiane **579,5 µm** (max **3312,9 µm**) ; les 17 autres touchent encore le plafond et
-restent une borne inférieure. ⭐ Et rangées par rayon, les marches aveugles font **8 plages** contre
+restent une borne inférieure. Et rangées par rayon, les marches aveugles font **8 plages** contre
 **2** sous une frontière radiale (14 sous permutation, p 0,0095) : le vide n'est pas le bord du
 rouleau. → **le marcheur avait son arrêt depuis le début**,
 et ce qui reste censuré est la portée sur matière lisible.
+
+**`117` · 2026-09-11 · qui refuse un pas voyant** (`qui_refuse_un_pas_voyant.py`, une seconde, hors ligne)
+Décompose les **91 pas voyants refusés** par le terme du prédicat qui était faux — après avoir
+vérifié que le prédicat reconstruit rend `confirme` sur les **560 pas, 0 désaccord**. **62 n'ont que
+`en_butee` contre eux**, soit **69 % des refus qui touchent la fenêtre** ; et les 63 pas en butée
+sont **exactement aux deux bouts** de la fenêtre [0,5 ; 2,0] × 173,0 µm — 43 à 86,5 µm, 20 à
+346,0 µm, **0 entre les deux**. La matière seule n'en refuse que **28 sur 382**, donc le taux
+vaudrait **au plus 0,9122** (borne supérieure : un pas en butée aurait pu échouer aussi). Et chez
+les voyants, le taux va de **0,74 à 0,80** avec la profondeur (p 0,3493) — le même test sur tous les
+pas retrouve exactement le 0,56 → 0,50 de `113`, ce qui est le contrôle du lecteur. → **il n'y a pas
+d'accumulation d'erreur à corriger sur vingt pas**, et ce qui refuse est réparable par une re-course.
 
 ## 4. Le tableau des statuts
 

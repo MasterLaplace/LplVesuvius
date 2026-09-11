@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**77 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**78 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 39 portes
+## Grand Prize — 40 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -58,6 +58,7 @@
 - **R4-P21** *(le graal)* · **Ce qui fait chuter le taux au grand rayon** (`113`, rho −0,719) : le rayon fait varier au moins trois choses à la fois — l'épaisseur lue, la courbure, la qualité du scan. Les séparer demande de mesurer à rayon égal sur deux rouleaux, ou à qualité égale sur deux rayons. Tant que ce n'est pas fait, on sait **où** le marcheur cesse de confirmer et pas **pourquoi**.
 - **R4-P22** *(le graal)* · **Le vide est-il le rouleau ou le lecteur ?** `115` mesure que 178 pas sur 560 ne lisent rien ; `116` **réfute la frontière radiale** (8 plages contre 2, p 0,0095) — donc ce n'est pas simplement « l'extérieur n'a plus de matière ». Restent deux causes qui prédisent toutes deux des plaques : la matière extérieure est elle-même en morceaux, ou des blocs manquent au chargement (la panne de `41` §6bis). Les séparer demande d'interroger le volume aux positions de départ, donc une lecture distante.
 - **R4-P23** *(le graal)* · **Réparer le drapeau `oriente`** (`R4-F37`) : un désaccord nul doit être refusé plutôt que d'être le meilleur accord possible. Le remède est le même que celui de `54` — refuser une pile vide au lieu de la juger — et il change ce que toute campagne de marche a mesuré jusqu'ici, donc il se fait avec une re-course et non par une retouche.
+- **R4-P24** *(le graal)* · **Quel bout de la fenêtre cache un vrai pas ?** `117` mesure que 63 pas voyants sur 382 sont refusés parce que l'optimum de longueur tombe au bord de la fenêtre [0,5 ; 2,0] × 173,0 µm, 43 au bout court et 20 au bout long. Les deux bouts ne veulent pas dire la même chose : au bout long la matière demande un pas de deux feuilles (le marcheur voulait en sauter une), au bout court moins d'une demi-feuille (un pas qui ne traverse probablement rien). Élargir la fenêtre et refaire la course est le seul moyen de transformer la borne supérieure de 0,9122 en mesure — et c'est une re-course, donc des lectures distantes.
 
 ## Progress Prizes — 19 portes
 

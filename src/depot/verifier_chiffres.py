@@ -2594,6 +2594,54 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                             [f"**{val}**", f"{val}", f"**{val:+.3f}**", f"{val:+.3f}"],
                             cpt.name))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 117 : CE QUI REFUSE UN PAS VOYANT, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) Le « 0,9122 » ne voyage JAMAIS sans le compte de pas refuses par la MATIERE. Seul, il se
+    # lit comme le taux du marcheur ; avec « 28 sur 382 », il se lit pour ce qu'il est, une borne
+    # superieure qu'une re-course seule peut confirmer.
+    # (2) Les 62 refus en butee seule ne voyagent jamais sans les deux bouts de la fenetre : sans
+    # « 43 au bout court, 20 au bout long, 0 entre les deux », « en butee » n'est qu'un drapeau,
+    # et rien ne dit que c'est une limite d'instrument.
+    qrf = _source(racine, "qui_refuse_un_pas_voyant.json")
+    if qrf.exists():
+        d = json.loads(qrf.read_text())
+        q = d.get("qui_refuse", {})
+        for cle, nom in (("voyants", "pas voyants de 117"),
+                         ("voyants_confirmes", "voyants confirmes de 117"),
+                         ("voyants_refuses", "voyants refuses de 117"),
+                         ("butee_seule", "butee seule de 117"),
+                         ("refuses_par_la_matiere_seule", "refuses par la matiere de 117")):
+            if q.get(cle) is not None:
+                v_ = q[cle]
+                out.append((nom, [f"**{v_}**", f"{v_}"], qrf.name))
+        if q.get("taux_au_plus_si_la_fenetre_ne_bornait_pas") is not None:
+            ajoute("taux au plus de 117", q["taux_au_plus_si_la_fenetre_ne_bornait_pas"], 4,
+                   qrf.name)
+        g = d.get("le_predicat_est_il_bien_reconstruit", {})
+        if g.get("pas") is not None:
+            out.append(("pas du predicat de 117", [f"**{g['pas']}**", f"{g['pas']}"], qrf.name))
+        f_ = d.get("les_bouts_de_la_fenetre", {})
+        for cle, nom in (("pas_en_butee", "pas en butee de 117"),
+                         ("au_bout_court", "au bout court de 117"),
+                         ("au_bout_long", "au bout long de 117"),
+                         ("entre_les_deux", "entre les deux de 117")):
+            if f_.get(cle) is not None:
+                v_ = f_[cle]
+                out.append((nom, [f"**{v_}**", f"{v_}"], qrf.name))
+        for cle, nom in (("bout_court_um", "bout court de 117"),
+                         ("bout_long_um", "bout long de 117"),
+                         ("pas_nominal_um", "pas nominal de 117")):
+            if f_.get(cle) is not None:
+                ajoute(nom, f_[cle], 1, qrf.name, unites=("µm",))
+        prof = d.get("le_taux_baisse_t_il_chez_les_voyants", {})
+        for bloc_, nom in (("sur_les_voyants", "profondeur voyante de 117"),
+                           ("sur_tous_les_pas", "profondeur totale de 117")):
+            b = prof.get(bloc_, {})
+            for cle, suffixe, dec in (("taux_precoce", " (precoce)", 2),
+                                      ("taux_tardif", " (tardif)", 2),
+                                      ("p_sous_un_taux_constant", " (p)", 4)):
+                if b.get(cle) is not None:
+                    ajoute(nom + suffixe, b[cle], dec, qrf.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 116 : LE MARCHEUR AVAIT SON ARRET, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Le « 0 retour de vue » ne voyage JAMAIS sans la mediane sous permutation. Seul, zero se
     # lit comme « on n'a rien trouve » ; avec « 7 sous permutation », il se lit pour ce qu'il est,

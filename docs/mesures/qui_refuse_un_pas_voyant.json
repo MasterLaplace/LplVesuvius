@@ -1,0 +1,233 @@
+{
+ "source": "jusquou_va_t_il_si_on_le_laisse.json",
+ "le_predicat_est_il_bien_reconstruit": {
+  "decidable": true,
+  "pas": 560,
+  "barre_de_linterstice": 0.3311,
+  "desaccords": 0,
+  "le_predicat_est_celui_quon_croit": true
+ },
+ "qui_refuse": {
+  "decidable": true,
+  "pas": 560,
+  "voyants": 382,
+  "voyants_confirmes": 291,
+  "voyants_refuses": 91,
+  "combinaisons": {
+   "butee": 62,
+   "accord": 17,
+   "interstices": 8,
+   "interstices+accord": 3,
+   "interstices+butee": 1
+  },
+  "marginales": {
+   "interstices": 12,
+   "accord": 20,
+   "butee": 63
+  },
+  "butee_seule": 62,
+  "refuses_par_la_matiere_seule": 28,
+  "taux_au_plus_si_la_fenetre_ne_bornait_pas": 0.9122,
+  "part_des_refus_qui_sont_une_butee": 0.6923
+ },
+ "les_bouts_de_la_fenetre": {
+  "par_candidat": [
+   {
+    "um": 86.5,
+    "libres": 0,
+    "en_butee": 43
+   },
+   {
+    "um": 95.2,
+    "libres": 24,
+    "en_butee": 0
+   },
+   {
+    "um": 103.8,
+    "libres": 17,
+    "en_butee": 0
+   },
+   {
+    "um": 112.5,
+    "libres": 27,
+    "en_butee": 0
+   },
+   {
+    "um": 121.1,
+    "libres": 11,
+    "en_butee": 0
+   },
+   {
+    "um": 129.8,
+    "libres": 13,
+    "en_butee": 0
+   },
+   {
+    "um": 138.4,
+    "libres": 15,
+    "en_butee": 0
+   },
+   {
+    "um": 147.1,
+    "libres": 6,
+    "en_butee": 0
+   },
+   {
+    "um": 155.7,
+    "libres": 14,
+    "en_butee": 0
+   },
+   {
+    "um": 164.3,
+    "libres": 11,
+    "en_butee": 0
+   },
+   {
+    "um": 173.0,
+    "libres": 15,
+    "en_butee": 0
+   },
+   {
+    "um": 181.7,
+    "libres": 11,
+    "en_butee": 0
+   },
+   {
+    "um": 190.3,
+    "libres": 10,
+    "en_butee": 0
+   },
+   {
+    "um": 198.9,
+    "libres": 12,
+    "en_butee": 0
+   },
+   {
+    "um": 207.6,
+    "libres": 7,
+    "en_butee": 0
+   },
+   {
+    "um": 216.2,
+    "libres": 13,
+    "en_butee": 0
+   },
+   {
+    "um": 224.9,
+    "libres": 11,
+    "en_butee": 0
+   },
+   {
+    "um": 233.6,
+    "libres": 6,
+    "en_butee": 0
+   },
+   {
+    "um": 242.2,
+    "libres": 5,
+    "en_butee": 0
+   },
+   {
+    "um": 250.9,
+    "libres": 10,
+    "en_butee": 0
+   },
+   {
+    "um": 259.5,
+    "libres": 11,
+    "en_butee": 0
+   },
+   {
+    "um": 268.2,
+    "libres": 5,
+    "en_butee": 0
+   },
+   {
+    "um": 276.8,
+    "libres": 9,
+    "en_butee": 0
+   },
+   {
+    "um": 285.5,
+    "libres": 13,
+    "en_butee": 0
+   },
+   {
+    "um": 294.1,
+    "libres": 8,
+    "en_butee": 0
+   },
+   {
+    "um": 302.8,
+    "libres": 10,
+    "en_butee": 0
+   },
+   {
+    "um": 311.4,
+    "libres": 4,
+    "en_butee": 0
+   },
+   {
+    "um": 320.1,
+    "libres": 8,
+    "en_butee": 0
+   },
+   {
+    "um": 328.7,
+    "libres": 7,
+    "en_butee": 0
+   },
+   {
+    "um": 337.4,
+    "libres": 6,
+    "en_butee": 0
+   },
+   {
+    "um": 346.0,
+    "libres": 0,
+    "en_butee": 20
+   }
+  ],
+  "decidable": true,
+  "pas_en_butee": 63,
+  "bout_court_um": 86.5,
+  "bout_long_um": 346.0,
+  "au_bout_court": 43,
+  "au_bout_long": 20,
+  "entre_les_deux": 0,
+  "pas_nominal_um": 173.0,
+  "facteur_bas": 0.5,
+  "facteur_haut": 2.0,
+  "tous_aux_bouts": true
+ },
+ "le_taux_baisse_t_il_chez_les_voyants": {
+  "sur_tous_les_pas": {
+   "decidable": true,
+   "pas_precoces": 6,
+   "pas_tardifs": 6,
+   "taux_precoce": 0.56,
+   "taux_tardif": 0.5,
+   "ecart": -0.06,
+   "p_sous_un_taux_constant": 0.3253,
+   "le_taux_baisse": false,
+   "le_taux_monte": false
+  },
+  "sur_les_voyants": {
+   "decidable": true,
+   "pas_precoces": 6,
+   "pas_tardifs": 6,
+   "taux_precoce": 0.74,
+   "taux_tardif": 0.8,
+   "ecart": 0.06,
+   "p_sous_un_taux_constant": 0.3493,
+   "le_taux_baisse": false,
+   "le_taux_monte": false
+  },
+  "publie_par_113": {
+   "taux_precoce": 0.56,
+   "taux_tardif": 0.5,
+   "p_sous_un_taux_constant": 0.3253
+  },
+  "le_lecteur_retrouve_113": true
+ }
+}

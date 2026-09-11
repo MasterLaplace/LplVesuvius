@@ -5265,6 +5265,23 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   qualité du scan.
 - **lu** : intégralement, 168 lignes, le 2026-09-11
 
+### docs/archive/117_qui_refuse_un_pas_voyant.md
+- **lignes** : 165
+- **nature** : RESULTAT
+  (parmi les 91 pas voyants que le marcheur refuse, lequel des trois termes du prédicat était
+  faux ? mesuré sur les mêmes 560 étapes, sans une lecture distante.)
+- **résumé** : ⭐⭐⭐⭐ **Deux tiers des refus viennent de la FENÊTRE, pas de la matière.** Sur 91
+  refus voyants, **62 n'ont que `en_butee` contre eux** (69 % des refus touchent la fenêtre), et
+  les **63** pas en butée sont **exactement aux deux bouts** de [0,5 ; 2,0] × 173,0 µm — 43 à
+  86,5 µm, 20 à 346,0 µm, **0 entre les deux**. ⭐⭐⭐⭐ La matière seule en refuse **28 sur 382**,
+  donc le taux vaudrait **au plus 0,9122** — ⚠⚠ borne supérieure, un pas en butée aurait pu
+  échouer aussi. ⭐⭐⭐ Et chez les voyants le taux va de **0,74 à 0,80** avec la profondeur
+  (p 0,3493) : pas d'accumulation d'erreur sur vingt pas. ⚠ La garde qui rend tout ça lisible est
+  que le prédicat reconstruit rend `confirme` sur les 560 pas, 0 désaccord ; sans elle la
+  décomposition porterait sur une autre conjonction. ⚠ Les deux bouts n'ont pas le même sens et
+  rien ici ne tranche lequel cache un vrai pas (`R4-P24`).
+- **lu** : intégralement, 165 lignes, le 2026-09-11
+
 ### docs/archive/116_la_cecite_est_absorbante.md
 - **lignes** : 158
 - **nature** : RESULTAT
