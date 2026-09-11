@@ -67,11 +67,11 @@ leur question :
 | **R2** | **L'excision et la réparation** | réparer une trace sert-il à quelque chose de mesurable ? | `03`–`07`, `11`, `17`, `34`, `75` D1 | `R2_excision.md` |
 | **R3** | **La graine et le traceur** | le traceur est-il un tirage, et qu'est-ce qui gouverne où il va ? | `16`, `25`–`26`, `30`, `33`, `35`, `37`–`44`, `47`–`55` | `R3_graine_et_traceur.md` |
 | **R4** | **Le déroulement** — *le graal* | qu'est-ce qui remplace l'humain du transfert ? | `76`–`79`, `81`–`86`, `90`–`114`, `75` §A et ses ~40 tranches, `75` §C (la campagne `0500P2`, 5–7 sept.) | `R4_deroulement.md` |
-| **R5** | **La méthode et l'hygiène** | comment ce dépôt se trompe, et ce qui l'attrape | `56`–`57`, `61`–`62`, `80`, `87`–`89` | `R5_methode.md` |
+| **R5** | **La méthode et l'hygiène** | comment ce dépôt se trompe, et ce qui l'attrape | `56`–`57`, `61`–`62`, `80`, `87`–`89`, `75` §D2–D4 et §E | `R5_methode.md` |
 | **R6** | **La littérature et l'antériorité** | qu'est-ce qui était déjà publié, et par qui | `00`, `27`, `32`, `66`–`71`, `73`–`74`, les pages *winners* et *open problems* | `R6_litterature.md` |
 
 Ce qui n'entre dans aucun rapport parce que c'est du **procédé** (plans, batchs, registres, brouillons
-de soumission) : `01`, `02`, `13`, `15`, `18`, `21`, `28`, `29`, `31`, `57`, `75` §0/§E,
+de soumission) : `01`, `02`, `13`, `15`, `18`, `21`, `28`, `29`, `31`, `75` §0,
 `HANDOFF`. Ils sont archivés et cités là où un rapport a besoin de dater une décision.
 
 ## 3. Ce que chaque campagne fait avancer — la matrice prix × campagne
@@ -108,3 +108,4 @@ vide n'est pas une case perdue, c'est une case non travaillée.
 | 2026-09-11 | `R1_encre.md` (24 documents et `75` §C1–C3) ; `75` §C scindé : la campagne de déroulement `0500P2` (lignes 1476–6738) va à R4, les cases C1–C3 à R1 |
 | 2026-09-11 | `R2_excision.md` (9 documents et `75` D1) ; quatre documents que la carte ne rattachait à rien : `11` et `17` → R2 (leurs producteurs vivent dans `src/excision/`, leur référent est `windcheck`), `16` → R3 avec `33` (la carte des treize est une question d'objet), `62` → R5 |
 | 2026-09-11 | `R3_graine_et_traceur.md` (25 documents) ; `39` et `40`, rangés dans le procédé, portent des faits (le seam de correction ; la référence de 44 spires et l'absence de carte d'encre sur les rouleaux du prix) et sortent de cette liste ; la plage `37`–`55` de R3 recouvrait `45`–`46`, qui sont à R1 : la ligne dit désormais `37`–`44`, `47`–`55` |
+| 2026-09-11 | `R5_methode.md` (8 documents et `75` §D2–D4/§E) ; deux rattachements corrigés : `57` était listé **à la fois** en R5 et dans le procédé, et `75` §E (ce qui est hors registre, dont la décision de l'auteur sur la soumission) y est lu — la ligne du procédé ne garde que `75` §0 |

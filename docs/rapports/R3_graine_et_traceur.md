@@ -327,7 +327,7 @@ Chaque ligne : *A a dit · B a dit · C tranche · statut*. À reporter dans `RE
 | `16` §6 : `0358` désigné par sa queue de 4 % | `33` : IC [0,1 ; 18,3 %], indistinguable du témoin ; campagne dense : 6ᵉ | choix par défaut, pas conclusion | tranché |
 | `16`/`33` : la marge du prix « < 10 % » se lit en fenêtres | `33` §3 : c'est une fraction de surface | les 4–24 % ne se confrontent pas aux 10 % | tranché |
 | `24` : les 240 auto-intersections viennent du champ de direction | `25` : de l'occupation à 1,000 de la graine | `30` : 13/14 tirages propres — c'était un tirage | tranché ; les deux diagnostics tombent |
-| `25` §2 : la planéité ramène 240 → 0 et 8,48 → 19,82 cm² | `25` §2 : 19,821592 et 19,823246 sur deux rouleaux, gén. 119/120 | l'aire est le plafond du budget | tranché |
+| `25` §2 : la planéité ramène 240 → 0 et 8,48 → 19,82 cm² | `25` §2 : la même aire à six décimales sur deux rouleaux différents, gén. 119/120 | l'aire est le plafond du budget | tranché |
 | `25` §5 : profondeur en fenêtre de 21 couches | `25` §5 : 21 couches = demi-pas, 61 % de profils plats | jambe retirée, refaite à 1,2 mm | tranché |
 | `25` §5 : l'officiel du témoin transporte 2 % au tiers central | `36` : cet officiel n'était pas une référence | témoin changé (→ R1) | tranché |
 | `26` §4 : le champ organise (densité ÷12) | `26` §4 : sans filtre `maxedge` la densité double | artefact du filtre ; mesure perdue par `a5901be`, restaurée | tranché ; rétracté |
