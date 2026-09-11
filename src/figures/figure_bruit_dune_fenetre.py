@@ -27,10 +27,15 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import tempfile
 from pathlib import Path
 
+from PIL import Image
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from figure_commune import police, prose_tracable  # noqa: E402
+from figure_commune import (police, prose_tracable,  # noqa: E402
+                            textes_debordants, textes_hors_cadre,
+                            textes_qui_se_recouvrent)
 
 RACINE = Path(__file__).resolve().parents[2]
 
@@ -55,6 +60,21 @@ qui porte l'AUC la plus basse du jeu. Laisser une donnée dehors est pire que la
 souplesse-là ne flatte jamais le résultat. Et 0,5, la valeur du hasard, reste toujours
 visible : c'est la seule graduation qui a un sens hors de ce jeu.
 """
+
+
+def lire(chemin: Path) -> dict:
+    """Charge la mesure de bruit de fenêtre et valide sa structure minimale.
+
+    Refuse si le fichier manque ou ne porte pas les fragments ou la variance.
+    """
+    if not chemin.is_file():
+        raise FileNotFoundError(f"mesure absente : {chemin}")
+    d = json.loads(chemin.read_text(encoding="utf-8"))
+    if not d.get("fragments"):
+        raise ValueError(f"{chemin} ne porte aucun fragment")
+    if "variance" not in d:
+        raise ValueError(f"{chemin} ne porte pas de données de variance")
+    return d
 
 
 def echelle(valeur: float, lo: float, hi: float, pixels: int) -> int:
@@ -85,11 +105,13 @@ def prose(mesure: dict) -> list[str]:
     ]
 
 
-def dessiner(mesure: dict, sortie: Path) -> dict:
-    from PIL import Image, ImageDraw
+def dessiner(mesure: dict, sortie: Path) -> tuple[Path, list, list]:
+    from PIL import ImageDraw
 
     gros, moyen, petit = police(16, 13, 12)
-    frags = mesure["fragments"]
+    frags = mesure.get("fragments") or {}
+    if not frags:
+        raise ValueError("aucun fragment à dessiner")
     v = mesure["variance"]
 
     bas, haut = bornes(mesure)
@@ -97,11 +119,16 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
     L, H = 1180, 560
     toile = Image.new("RGB", (L, H), FOND)
     d = ImageDraw.Draw(toile)
+    poses: list[tuple[int, int, str, object]] = []
+
+    def ecrire(x, y, texte, fonte, fill):
+        d.text((x, y), texte, font=fonte, fill=fill)
+        poses.append((x, y, texte, fonte))
 
     # ---- PANNEAU GAUCHE : chaque tuile, un point --------------------------------------
     gx, gy, gw, gh = 90, 96, 470, 340
-    d.text((70, 34), "une tuile, un point", fill=TEXTE, font=gros)
-    d.text((70, 56), "AUC de chaque tuile de 256 px, par fragment", fill=DISCRET, font=moyen)
+    ecrire(70, 34, "une tuile, un point", gros, TEXTE)
+    ecrire(70, 56, "AUC de chaque tuile de 256 px, par fragment", moyen, DISCRET)
     d.rectangle([gx, gy, gx + gw, gy + gh], outline=(60, 60, 60))
     # ⚠ Les graduations tombent sur des dixiemes ronds, pas sur `bas + 0,05` : la premiere
     # version partait du plancher et rendait « 0.8 » deux fois de suite avec « 0.4 » manquant,
@@ -114,12 +141,12 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
         yy = gy + gh - echelle(val, bas, haut, gh)
         couleur = (70, 70, 70) if abs(val - 0.5) < 1e-9 else (36, 36, 36)
         d.line([gx, yy, gx + gw, yy], fill=couleur)
-        d.text((gx - 42, yy - 7), f"{val:.1f}", fill=DISCRET, font=petit)
+        ecrire(gx - 42, yy - 7, f"{val:.1f}", petit, DISCRET)
         val = round(val + 0.1, 10)
     # ⚠ « hasard » va DANS le panneau, a droite : place dans la marge il recouvrait la
     # graduation 0,5 elle-meme, c'est-a-dire la seule que le lecteur doit pouvoir lire.
-    d.text((gx + gw - 50, gy + gh - echelle(0.5, bas, haut, gh) - 16), "hasard",
-           fill=DISCRET, font=petit)
+    ecrire(gx + gw - 50, gy + gh - echelle(0.5, bas, haut, gh) - 16, "hasard",
+           petit, DISCRET)
 
     colonne = gw // max(len(frags), 1)
     for i, (nom, f) in enumerate(frags.items()):
@@ -141,18 +168,18 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
             d.ellipse([px - 3, py - 3, px + 3, py + 3], fill=GRIS)
         yg = gy + gh - echelle(f["auc_groupee"], bas, haut, gh)
         d.line([cx - 34, yg, cx + 34, yg], fill=ROUGE, width=2)
-        d.text((cx - 30, gy + gh + 10), nom, fill=TEXTE, font=moyen)
-        d.text((cx - 30, gy + gh + 28), f"{len(f['tuiles'])} tuiles", fill=DISCRET, font=petit)
+        ecrire(cx - 30, gy + gh + 10, nom, moyen, TEXTE)
+        ecrire(cx - 30, gy + gh + 28, f"{len(f['tuiles'])} tuiles", petit, DISCRET)
 
     d.line([gx + 8, gy + 14, gx + 28, gy + 14], fill=ROUGE, width=2)
-    d.text((gx + 34, gy + 7), "AUC groupee publiee", fill=ROUGE, font=petit)
+    ecrire(gx + 34, gy + 7, "AUC groupee publiee", petit, ROUGE)
     d.rectangle([gx + 8, gy + 32, gx + 28, gy + 42], fill=(34, 30, 24), outline=AMBRE)
-    d.text((gx + 34, gy + 30), "IC 95 %, bootstrap par tuiles", fill=AMBRE, font=petit)
+    ecrire(gx + 34, gy + 30, "IC 95 %, bootstrap par tuiles", petit, AMBRE)
 
     # ---- PANNEAU DROIT : les deux dispersions, puis le compte qu'il fallait ------------
     bx, by, bw = 660, 96, 430
-    d.text((650, 34), "ce que la dispersion mesure vraiment", fill=TEXTE, font=gros)
-    d.text((650, 56), "ecart-type des AUC de tuiles", fill=DISCRET, font=moyen)
+    ecrire(650, 34, "ce que la dispersion mesure vraiment", gros, TEXTE)
+    ecrire(650, 56, "ecart-type des AUC de tuiles", moyen, DISCRET)
     pire = max(v["ecart_type_intra"], v["ecart_type_inter"]) * 1.25
     for i, (nom, valeur, couleur) in enumerate(
             (("DANS un fragment, de tuile a tuile", v["ecart_type_intra"], AMBRE),
@@ -160,34 +187,34 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
         yy = by + 34 + i * 84
         largeur = echelle(valeur, 0.0, pire, bw)
         d.rectangle([bx, yy, bx + max(largeur, 2), yy + 34], fill=couleur)
-        d.text((bx, yy - 20), nom, fill=TEXTE, font=moyen)
-        d.text((bx + max(largeur, 2) + 10, yy + 10), f"{valeur:.4f}", fill=couleur, font=moyen)
+        ecrire(bx, yy - 20, nom, moyen, TEXTE)
+        ecrire(bx + max(largeur, 2) + 10, yy + 10, f"{valeur:.4f}", moyen, couleur)
 
-    d.text((bx, by + 210), f"part attribuable au fragment : {v['icc'] * 100:.0f} %",
-           fill=ROUGE, font=gros)
+    ecrire(bx, by + 210, f"part attribuable au fragment : {v['icc'] * 100:.0f} %",
+           gros, ROUGE)
     for k, ligne in enumerate(prose(mesure)):
-        d.text((bx, by + 240 + k * 20), ligne, fill=TEXTE, font=moyen)
+        ecrire(bx, by + 240 + k * 20, ligne, moyen, TEXTE)
 
     besoin = mesure.get("tuiles_pour_distinguer", 0)
     if besoin:
-        d.text((bx, by + 320), "combien de tuiles il aurait fallu", fill=TEXTE, font=gros)
-        d.text((bx, by + 346),
+        ecrire(bx, by + 320, "combien de tuiles il aurait fallu", gros, TEXTE)
+        ecrire(bx, by + 346,
                f"pour etablir l'ecart observe de {mesure['ecart_observe']:.3f} : "
-               f"{besoin} par fragment", fill=AMBRE, font=moyen)
+               f"{besoin} par fragment", moyen, AMBRE)
         eus = ", ".join(str(len(f["tuiles"])) for f in frags.values())
-        d.text((bx, by + 366), f"on en avait {eus}.", fill=ROUGE, font=moyen)
-        d.text((bx, by + 386), "et c'est un minorant : deux tuiles voisines",
-               fill=DISCRET, font=moyen)
-        d.text((bx, by + 406), "ne sont pas independantes.", fill=DISCRET, font=moyen)
+        ecrire(bx, by + 366, f"on en avait {eus}.", moyen, ROUGE)
+        ecrire(bx, by + 386, "et c'est un minorant : deux tuiles voisines",
+               moyen, DISCRET)
+        ecrire(bx, by + 406, "ne sont pas independantes.", moyen, DISCRET)
 
     sortie.parent.mkdir(parents=True, exist_ok=True)
     toile.save(sortie)
-    return {"icc": v["icc"], "intra": v["ecart_type_intra"], "inter": v["ecart_type_inter"],
-            "tuiles_pour_distinguer": besoin, "sortie": str(sortie)}
+    cadres = [(gx, gy, gx + gw, gy + gh), (bx, by, bx + bw, by + 440)]
+    return sortie, poses, cadres
 
 
 def verifier() -> int:
-    """Auto-test HORS LIGNE : les axes et la prose, sans écrire d'image."""
+    """Auto-test HORS LIGNE : les axes, la prose, la figure et les sondes."""
     echecs = controles = 0
 
     def v(nom, cond, detail=""):
@@ -266,6 +293,60 @@ def verifier() -> int:
     plat["variance"]["ecart_type_inter"] = 0.0
     v("une dispersion inter nulle ne casse pas la prose", len(prose(plat)) == 3)
 
+    with tempfile.TemporaryDirectory() as d:
+        rac = Path(d)
+        f_mesure = rac / "m.json"
+        f_mesure.write_text(json.dumps(faux), encoding="utf-8")
+
+        lu = lire(f_mesure)
+        v("le JSON complet est lu", len(lu["fragments"]) == 2 and "variance" in lu)
+
+        out_img, poses, cadres = dessiner(lu, rac / "f.png")
+        v("l'image est écrite", out_img.is_file())
+        v("... et elle n'est pas vide", out_img.stat().st_size > 1000)
+
+        im = Image.open(out_img).convert("RGB")
+        v("... et sa largeur est celle annoncée", im.size[0] == 1180)
+        v("... et sa hauteur est celle annoncée", im.size[1] == 560)
+
+        pixels = list(im.getdata())
+        v("... et elle porte les couleurs requises",
+          AMBRE in pixels and ROUGE in pixels)
+
+        v("aucun texte ne déborde de la toile", textes_debordants(poses, im.size[0]) == [])
+        v("aucun texte ne sort de son panneau", textes_hors_cadre(poses, cadres) == [])
+        v("aucun texte n'en recouvre un autre", textes_qui_se_recouvrent(poses) == [])
+        v("aucun texte n'est écrit sous le bord bas",
+          [t for x, y, t, f in poses if f is not None and y + f.getbbox(t)[3] > im.size[1]] == [])
+
+        # ⚠ Sonde : un fichier manquant est refusé
+        try:
+            lire(rac / "inexistant.json")
+            v("sonde : un fichier manquant est refusé", False)
+        except FileNotFoundError:
+            v("sonde : un fichier manquant est refusé", True)
+
+        # ⚠ Sonde : un JSON sans fragments est refusé
+        f_invalide = rac / "invalide.json"
+        f_invalide.write_text(json.dumps({"variance": {}}), encoding="utf-8")
+        try:
+            lire(f_invalide)
+            v("sonde : un JSON sans fragments est refusé", False)
+        except ValueError:
+            v("sonde : un JSON sans fragments est refusé", True)
+
+        # ⚠ Sonde : un JSON sans fragments est refusé par dessiner
+        try:
+            dessiner({"fragments": {}, "variance": {}}, rac / "vide.png")
+            v("sonde : dessiner sans fragments est refusé", False)
+        except ValueError:
+            v("sonde : dessiner sans fragments est refusé", True)
+
+        # ⚠ Sonde : la garde attrape un texte débordant simulé
+        trop_long = [(1100, 50, "Texte debordant de la toile de onze cents pixels", police(16))]
+        v("sonde : textes_debordants détecte le dépassement",
+          len(textes_debordants(trop_long, 1180)) > 0)
+
     print(f"{'ALL PASS' if echecs == 0 else 'ECHEC'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -283,12 +364,13 @@ def main() -> int:
     a = p.parse_args()
     if a.verifier:
         return verifier()
-    if not a.mesure.is_file():
-        print(f"mesure absente : {a.mesure}", file=sys.stderr)
-        return 2
-    r = dessiner(json.loads(a.mesure.read_text(encoding="utf-8")), a.sortie)
-    print(f"ICC {r['icc']:.3f} — intra {r['intra']:.4f} contre inter {r['inter']:.4f}")
-    print(f"→ {a.sortie}")
+    mesure = lire(a.mesure)
+    out, _, _ = dessiner(mesure, a.sortie)
+    try:
+        cible = out.relative_to(RACINE)
+    except ValueError:
+        cible = out
+    print(f"écrit : {cible}")
     return 0
 
 
