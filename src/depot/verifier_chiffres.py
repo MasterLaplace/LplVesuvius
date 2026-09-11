@@ -2237,6 +2237,120 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             txt = f"{val}".replace(".", ",")
             out.append((nom, [f"**{txt}**", txt, f"{val}"], mar.name))
 
+    # ⭐⭐⭐ LE COMPTE SUIT-IL LE PAS (`110`), ET TROIS APPARIEMENTS SONT OBLIGATOIRES.
+    # (1) Le biais de l'ENSEMBLE ne voyage jamais sans le partage PAR MODE : la mediane d'un
+    # melange dont les proportions changent avec la longueur se lit comme une derive de la matiere
+    # alors que le mode qui compte ne derive pas. (2) L'ecart entre les modes au plus court ne
+    # voyage jamais sans celui au plus long, parce que c'est leur DIFFERENCE qui dit que la
+    # bimodalite nait apres. (3) Et la falaise observee ne voyage jamais sans le controle
+    # d'instrument qui la reproduit sur une periodicite intacte.
+    cpt = _source(racine, "le_compte_suit_il_le_pas.json")
+    if cpt.exists():
+        d = json.loads(cpt.read_text())
+        for cle, nom in (("marches_lues", "marches relues par 110"),
+                         ("marches_verifiees", "marches verifiees par 110"),
+                         ("lectures", "lectures de 110"),
+                         ("secondes", "secondes de 110"),
+                         ("graine_de_107", "graine de la re-derivation"),
+                         ("ecart_max_de_verification", "ecart max de verification")):
+            if cle not in d or d[cle] is None:
+                continue
+            val = d[cle]
+            txt = f"{val}".replace(".", ",")
+            formes = [f"**{txt}**", txt, f"{val}"]
+            if cle == "marches_verifiees":
+                formes += [f"**{val}/{d.get('marches_lues')}**",
+                           f"{val}/{d.get('marches_lues')}"]
+            out.append((nom, formes, cpt.name))
+        cf = d.get("controle_fabrique", {})
+        if "ecart_max_sur_fabrique" in cf:
+            val = cf["ecart_max_sur_fabrique"]
+            out.append(("ecart max sur fabrique de 110",
+                        [f"**{val}**", f"{val}", f"**{val}**".replace(".", ","),
+                         f"{val}".replace(".", ",")], cpt.name))
+        for e in cf.get("empilements", []):
+            for x in e["par_longueur"]:
+                out.append((f"fabrique bruit {e['bruit']} a {x['pas']} pas",
+                            [f"**{x['feuilles']}**", f"{x['feuilles']}"], cpt.name))
+        s_ = d.get("le_compte_suit_il_le_pas", {})
+        for x in s_.get("par_longueur", []):
+            for cle, nom in (("feuilles_par_pas_median", "taux de lensemble a"),
+                             ("score_median", "score median a"),
+                             ("marches", "marches a")):
+                val = x[cle]
+                out.append((f"{nom} {x['pas']} pas",
+                            [f"**{val}**", f"{val}"], cpt.name))
+        if "derive_du_taux" in s_:
+            val = s_["derive_du_taux"]
+            out.append(("derive du taux de lensemble",
+                        [f"**{val}**", f"{val}", f"**{val:+.3f}**", f"{val:+.3f}"], cpt.name))
+        pm = d.get("par_mode", {})
+        for nom_m in ("mode_haut", "mode_bas"):
+            b = pm.get(nom_m) or {}
+            if not b.get("marches"):
+                continue
+            for cle, nom in (("marches", "marches du"), ("derive", "derive du"),
+                             ("au_plus_court", "taux au plus court du"),
+                             ("au_plus_long", "taux au plus long du"),
+                             ("marches_dont_le_taux_baisse", "marches qui baissent du")):
+                val = b[cle]
+                formes = [f"**{val}**", f"{val}"]
+                if cle == "derive":
+                    formes += [f"**{val:+.3f}**", f"{val:+.3f}"]
+                if cle == "marches_dont_le_taux_baisse":
+                    formes += [f"**{val}**/{b['marches']}", f"{val}/{b['marches']}"]
+                out.append((f"{nom} {nom_m}", formes, cpt.name))
+            for x in b.get("par_longueur", []):
+                out.append((f"taux du {nom_m} a {x['pas']} pas",
+                            [f"**{x['feuilles_par_pas_median']}**",
+                             f"{x['feuilles_par_pas_median']}"], cpt.name))
+        for cle, nom in (("ecart_au_plus_court", "ecart entre modes au plus court"),
+                         ("ecart_au_plus_long", "ecart entre modes au plus long")):
+            if cle not in pm:
+                continue
+            val = pm[cle]
+            out.append((nom, [f"**{val}**", f"{val}", f"**{val:+.3f}**", f"{val:+.3f}"],
+                        cpt.name))
+        fa = d.get("la_falaise_est_elle_celle_de_linstrument", {})
+        for cle, nom in (("falaises", "cas de falaise fabriquee"),
+                         ("cas_essayes", "cas essayes de falaise"),
+                         ("valeur_effondree_mediane", "valeur effondree mediane")):
+            if cle not in fa or fa[cle] is None:
+                continue
+            val = fa[cle]
+            out.append((nom, [f"**{val}**", f"{val}",
+                              f"**{val}**".replace(".", ","),
+                              f"{val}".replace(".", ",")], cpt.name))
+        for x in fa.get("cas", []):
+            if not (x.get("correct_au_plus_court") and x.get("effondre_ensuite")):
+                continue
+            for y in x["par_longueur"]:
+                out.append((f"falaise lam {x['longueur_donde_en_pas']} ampl "
+                            f"{x['amplitude_de_la_derive']} a {y['pas']} pas",
+                            [f"**{y['feuilles_par_pas']}**", f"{y['feuilles_par_pas']}"],
+                            cpt.name))
+        bj = d.get("biais_ou_jitter", {})
+        for cle, nom in (("biais_par_pas", "biais par pas de 110"),
+                         ("jitter_par_racine_de_pas", "jitter par racine de pas"),
+                         ("spires_derivees_a_120_pas_si_biais", "spires si biais"),
+                         ("spires_derivees_a_120_pas_si_jitter", "spires si jitter")):
+            if cle not in bj or bj[cle] is None:
+                continue
+            val = bj[cle]
+            formes = [f"**{val}**", f"{val}", f"**{val}**".replace(".", ","),
+                      f"{val}".replace(".", ",")]
+            if cle.startswith("spires") or cle.startswith("biais"):
+                formes += [f"**{val:+.2f}**", f"{val:+.2f}",
+                           f"**{val:+.3f}**", f"{val:+.3f}"]
+            out.append((nom, formes, cpt.name))
+        for x in bj.get("par_longueur", []):
+            for cle, nom in (("ecart_moyen", "ecart moyen a"),
+                             ("ecart_type", "ecart type a")):
+                val = x[cle]
+                out.append((f"{nom} {x['pas']} pas",
+                            [f"**{val}**", f"{val}", f"**{val:+.3f}**", f"{val:+.3f}"],
+                            cpt.name))
+
     # ⭐⭐⭐ UN PAS MANQUE N'EST PAS UNE CHUTE (`109`), ET TROIS APPARIEMENTS SONT OBLIGATOIRES.
     # (1) La mediane des pas CONFIRMES ne voyage jamais sans celle du RUN : publier la premiere
     # seule remplacerait un nombre trompeur par un autre, et c'est leur ECART qui est le resultat.

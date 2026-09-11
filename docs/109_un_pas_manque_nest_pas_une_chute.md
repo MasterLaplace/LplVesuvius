@@ -160,6 +160,20 @@ qui coûte `√n` ?*
 ⚠ Et elle demande des marches **longues**, pas nombreuses : le plafond de six pas de `107` est
 exactement ce qui empêche de la poser.
 
+## ⭐⭐⭐ Ce que `110` a trouvé en posant la question que ce document désignait
+
+> ⭐⭐⭐ **Dans le mode qui compte, le compte SUIT le pas** : `110` relit les mêmes marches sur les
+> PRÉFIXES de leur polyligne et rend **1.012** feuille par pas à deux pas, **1.085** à six — dérive
+> **+0.073**, aucun biais.
+>
+> ⭐⭐⭐ **Et les deux populations de `107` n'existent pas à deux pas** : écart **+0.004** feuille par
+> pas au plus court contre **+0.965** au plus long. La bimodalité naît entre le deuxième et le
+> troisième pas.
+>
+> ⚠⚠⚠ **Et une dérive SEULE reproduit la falaise du mode bas**, sur une périodicité intacte
+> (**0.128** contre **0.12** observé) : l'observation ne distingue pas « la marche a quitté la
+> feuille » de « une composante plus forte a masqué la périodicité ».
+
 ## Reproduire
 
 ```bash

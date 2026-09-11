@@ -4553,6 +4553,101 @@ renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la bat
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
 
 ---
+##### ⭐⭐⭐⭐ LE COMPTE SUIT-IL LE PAS ? — le mode qui compte ne dérive pas
+
+> Mesure : `src/nappe/le_compte_suit_il_le_pas.py` (39 contrôles) →
+> `docs/mesures/le_compte_suit_il_le_pas.json`. Figure :
+> `src/figures/figure_le_compte_suit_il_le_pas.py` (18 contrôles).
+> Document : [`110`](110_le_compte_suit_il_le_pas.md), le 2026-09-11.
+> ⭐ **56 lectures, 2050.6 s** — les étapes de `107` reconstruisent chaque
+> polyligne, donc une lecture par marche suffit là où refaire les marches coûterait des heures.
+
+![le compte suit-il le pas](images/110_le_compte_suit_il_le_pas.png)
+
+`109` a montré qu'un manque n'arrête pas la marche, donc la question devient **de combien le compte
+dérive**. Elle se mesure en recalculant le registre sur chaque **préfixe** du trajet.
+
+⚠⚠ **Le départ n'avait pas été gardé** par `107` — la leçon de `102` qui se rejoue — mais il est
+re-dérivable (graine **613**), et la vérification ne coûte rien : le préfixe complet
+est le trajet publié. **48/56** marches le reproduisent, écart
+max **0.0** feuille.
+
+##### ⚠⚠⚠ Sur l'ensemble, le compte s'effondre — et ce serait la fausse conclusion
+
+| longueur | 2 pas | 3 | 4 | 5 | 6 |
+|---|---:|---:|---:|---:|---:|
+| ensemble | **1.008** | **0.775** | **0.716** | **0.707** | **0.199** |
+
+| score médian | **0.63** | **0.522** | **0.496** | **0.451** | **0.426** |
+
+Dérive **-0.809** feuille par pas. L'écart au compte de pas grandit
+monotonement, et la MOYENNE dit le biais quand l'ÉCART-TYPE dit le jitter :
+
+| longueur | écart moyen | écart-type |
+|---:|---:|---:|
+| 2 | **-0.046** | **1.085** |
+| 3 | **-0.604** | **1.778** |
+| 4 | **-1.255** | **2.089** |
+| 5 | **-1.929** | **2.277** |
+| 6 | **-2.533** | **3.217** |
+
+Biais **-0.3530** par pas, jitter **1.0882** par racine
+de pas — soit **-42.36** spires sur cent vingt contre
+**11.92**.
+
+⚠⚠⚠ Et le **contrôle fabriqué** est obligatoire, parce que `98` a mesuré que l'estimateur ne garde
+rien sous sa fenêtre : sur un empilement droit, écart max **0.015** feuille
+à toute longueur.
+
+| bruit | 2 pas | 3 | 4 | 5 | 6 |
+|---:|---:|---:|---:|---:|---:|
+| 0 | **2.0** | **3.0** | **4.0** | **5.0** | **6.0** |
+| 15 | **1.985** | **3.005** | **4.0** | **5.0** | **6.005** |
+
+##### ⭐⭐⭐ Mais la médiane de l'ensemble dit l'INVERSE de chaque mode
+
+| mode | marches | 2 pas | 3 | 4 | 5 | 6 | dérive | baissent |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| **qui compte** | **22** | **1.012** | **1.128** | **0.82** | **0.889** | **1.085** | **+0.073** | **9**/22 |
+| **qui ne compte rien** | **26** | **1.008** | **0.241** | **0.186** | **0.152** | **0.12** | **-0.888** | **26**/26 |
+
+> ⭐⭐⭐ **Le mode qui compte ne dérive pas** ; le mode qui ne compte rien **tombe d'une falaise**.
+> Le biais de l'ensemble est donc celui d'un **mélange dont les proportions changent avec la
+> longueur** — la faute de `107` sous un costume neuf.
+
+##### ⭐⭐⭐ Et les deux populations de `107` n'existent pas à deux pas
+
+Écart entre les modes : **+0.004** feuille par pas au plus court contre
+**+0.965** au plus long. Les deux lisent **exactement une feuille par pas**
+sur deux pas ; la bimodalité **naît entre le deuxième et le troisième**.
+
+##### ⭐⭐⭐ Une dérive seule reproduit la falaise, sur une périodicité INTACTE
+
+| λ (pas) | amplitude | 2 pas | 3 | 4 | 5 | 6 |
+|---:|---:|---:|---:|---:|---:|---:|
+| 6 | ×1.5 | **0.95** | **0.178** | **0.169** | **0.167** | **0.166** |
+| 8 | ×1.5 | **0.965** | **0.155** | **0.13** | **0.127** | **0.125** |
+| 8 | ×2.0 | **0.95** | **0.145** | **0.128** | **0.126** | **0.126** |
+| 10 | ×2.0 | **0.965** | **0.138** | **0.106** | **0.102** | **0.101** |
+
+**4** cas sur **12**, valeur effondrée médiane
+**0.128** contre **0.12** observé. Le
+mécanisme est le **plancher de fréquence** de l'estimateur : une basse fréquence n'est exprimable
+qu'une fois la fenêtre assez longue, et alors elle gagne l'argmax si elle est plus forte.
+
+> ⚠⚠⚠ **L'observation ne distingue donc PAS** « la marche a quitté la feuille » de « une composante
+> plus forte a masqué la périodicité ». ⭐ Et le contrôle est à double sens : **sans** dérive, aucune
+> falaise.
+
+##### ⛔ Une course perdue, et la cause corrigée plutôt que le symptôme
+
+Vingt minutes de lecture jetées par un `KeyError` dans l'agrégation finale : une vérification non
+décidable n'a pas de champ `ecart`, et le maximum le lisait sans garde. `107` avait déjà le partage
+lecture / agrégation et son `--reagreger`. ⭐ Corrigé à la cause — `mesurer` **écrit avant** que le
+verdict ne soit calculé — ce qui a permis d'ajouter le partage par mode et le contrôle d'instrument
+**sans repayer** les 2050.6 s.
+
+---
 ##### ⭐⭐⭐⭐ UN PAS NON CONFIRMÉ N'EST PAS UNE CHUTE — la portée publiée est une lecture
 
 > Mesure : `src/nappe/un_pas_manque_nest_pas_une_chute.py` (31 contrôles) →

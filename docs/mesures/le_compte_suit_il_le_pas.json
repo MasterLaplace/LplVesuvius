@@ -1,0 +1,4505 @@
+{
+  "fragment": "PHercParis4",
+  "volume_fin": "20260411134726",
+  "source": "docs/mesures/le_marcheur_avec_le_bon_pas.json",
+  "graine_de_107": 613,
+  "cellules_de_107": 1,
+  "lectures": 56,
+  "secondes": 2050.6,
+  "bandes": 28,
+  "lignes": [
+    {
+      "de": 10,
+      "a": 27,
+      "rayon_mm": 4.07,
+      "detail": [
+        {
+          "depart_zyx": [
+            25354.613,
+            12887.972,
+            15298.736
+          ],
+          "radial_zyx": [
+            0.006793,
+            -0.55853,
+            -0.829457
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.065,
+                "score": 0.596,
+                "en_butee": false,
+                "feuilles_par_pas": 1.033,
+                "ecart_au_compte_de_pas": 0.065
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 5.375,
+                "score": 0.404,
+                "en_butee": false,
+                "feuilles_par_pas": 1.792,
+                "ecart_au_compte_de_pas": 2.375
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 7.19,
+                "score": 0.439,
+                "en_butee": false,
+                "feuilles_par_pas": 1.798,
+                "ecart_au_compte_de_pas": 3.19
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 5.66,
+                "score": 0.451,
+                "en_butee": false,
+                "feuilles_par_pas": 1.132,
+                "ecart_au_compte_de_pas": 0.66
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 6.95,
+                "score": 0.386,
+                "en_butee": false,
+                "feuilles_par_pas": 1.158,
+                "ecart_au_compte_de_pas": 0.95
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 6.95,
+              "publie": 6.95,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.025,
+                "score": 0.573,
+                "en_butee": false,
+                "feuilles_par_pas": 1.013,
+                "ecart_au_compte_de_pas": 0.025
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 3.065,
+                "score": 0.631,
+                "en_butee": false,
+                "feuilles_par_pas": 1.022,
+                "ecart_au_compte_de_pas": 0.065
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 4.01,
+                "score": 0.575,
+                "en_butee": false,
+                "feuilles_par_pas": 1.003,
+                "ecart_au_compte_de_pas": 0.01
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 4.95,
+                "score": 0.428,
+                "en_butee": false,
+                "feuilles_par_pas": 0.99,
+                "ecart_au_compte_de_pas": -0.05
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.71,
+                "score": 0.424,
+                "en_butee": false,
+                "feuilles_par_pas": 0.118,
+                "ecart_au_compte_de_pas": -5.29
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.71,
+              "publie": 0.71,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 28,
+      "a": 37,
+      "rayon_mm": 6.32,
+      "detail": [
+        {
+          "depart_zyx": [
+            25765.975,
+            16910.891,
+            17223.409
+          ],
+          "radial_zyx": [
+            -0.003778,
+            0.947481,
+            -0.319789
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.56,
+                "score": 0.653,
+                "en_butee": false,
+                "feuilles_par_pas": 1.28,
+                "ecart_au_compte_de_pas": 0.56
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 3.755,
+                "score": 0.531,
+                "en_butee": false,
+                "feuilles_par_pas": 1.252,
+                "ecart_au_compte_de_pas": 0.755
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 6.815,
+                "score": 0.421,
+                "en_butee": false,
+                "feuilles_par_pas": 1.704,
+                "ecart_au_compte_de_pas": 2.815
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 5.855,
+                "score": 0.341,
+                "en_butee": false,
+                "feuilles_par_pas": 1.171,
+                "ecart_au_compte_de_pas": 0.855
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 6.07,
+                "score": 0.371,
+                "en_butee": false,
+                "feuilles_par_pas": 1.012,
+                "ecart_au_compte_de_pas": 0.07
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 6.07,
+              "publie": 6.07,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.56,
+                "score": 0.653,
+                "en_butee": false,
+                "feuilles_par_pas": 1.28,
+                "ecart_au_compte_de_pas": 0.56
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 3.76,
+                "score": 0.519,
+                "en_butee": false,
+                "feuilles_par_pas": 1.253,
+                "ecart_au_compte_de_pas": 0.76
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 6.755,
+                "score": 0.433,
+                "en_butee": false,
+                "feuilles_par_pas": 1.689,
+                "ecart_au_compte_de_pas": 2.755
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 8.24,
+                "score": 0.348,
+                "en_butee": false,
+                "feuilles_par_pas": 1.648,
+                "ecart_au_compte_de_pas": 3.24
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 6.015,
+                "score": 0.389,
+                "en_butee": false,
+                "feuilles_par_pas": 1.003,
+                "ecart_au_compte_de_pas": 0.015
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 6.015,
+              "publie": 6.015,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 38,
+      "a": 45,
+      "rayon_mm": 8.02,
+      "detail": [
+        {
+          "depart_zyx": [
+            19186.902,
+            20037.555,
+            13584.61
+          ],
+          "radial_zyx": [
+            -0.003041,
+            0.903034,
+            -0.429558
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.08,
+                "score": 0.637,
+                "en_butee": false,
+                "feuilles_par_pas": 1.04,
+                "ecart_au_compte_de_pas": 0.08
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 3.285,
+                "score": 0.49,
+                "en_butee": false,
+                "feuilles_par_pas": 1.095,
+                "ecart_au_compte_de_pas": 0.285
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 4.395,
+                "score": 0.444,
+                "en_butee": false,
+                "feuilles_par_pas": 1.099,
+                "ecart_au_compte_de_pas": 0.395
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 5.53,
+                "score": 0.408,
+                "en_butee": false,
+                "feuilles_par_pas": 1.106,
+                "ecart_au_compte_de_pas": 0.53
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.56,
+                "score": 0.467,
+                "en_butee": false,
+                "feuilles_par_pas": 0.093,
+                "ecart_au_compte_de_pas": -5.44
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.56,
+              "publie": 0.56,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 1.945,
+                "score": 0.61,
+                "en_butee": false,
+                "feuilles_par_pas": 0.973,
+                "ecart_au_compte_de_pas": -0.055
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 0.62,
+                "score": 0.484,
+                "en_butee": false,
+                "feuilles_par_pas": 0.207,
+                "ecart_au_compte_de_pas": -2.38
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 0.665,
+                "score": 0.548,
+                "en_butee": false,
+                "feuilles_par_pas": 0.166,
+                "ecart_au_compte_de_pas": -3.335
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 0.685,
+                "score": 0.522,
+                "en_butee": false,
+                "feuilles_par_pas": 0.137,
+                "ecart_au_compte_de_pas": -4.315
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.73,
+                "score": 0.481,
+                "en_butee": false,
+                "feuilles_par_pas": 0.122,
+                "ecart_au_compte_de_pas": -5.27
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.73,
+              "publie": 0.73,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 46,
+      "a": 52,
+      "rayon_mm": 9.4,
+      "detail": [
+        {
+          "depart_zyx": [
+            12360.725,
+            15831.48,
+            15032.096
+          ],
+          "radial_zyx": [
+            0.003743,
+            -0.945596,
+            0.325322
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.06,
+                "score": 0.76,
+                "en_butee": false,
+                "feuilles_par_pas": 1.03,
+                "ecart_au_compte_de_pas": 0.06
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 3.0,
+                "score": 0.728,
+                "en_butee": false,
+                "feuilles_par_pas": 1.0,
+                "ecart_au_compte_de_pas": 0.0
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 2.895,
+                "score": 0.573,
+                "en_butee": false,
+                "feuilles_par_pas": 0.724,
+                "ecart_au_compte_de_pas": -1.105
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 3.675,
+                "score": 0.483,
+                "en_butee": false,
+                "feuilles_par_pas": 0.735,
+                "ecart_au_compte_de_pas": -1.325
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 4.385,
+                "score": 0.504,
+                "en_butee": false,
+                "feuilles_par_pas": 0.731,
+                "ecart_au_compte_de_pas": -1.615
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 4.385,
+              "publie": 4.385,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.06,
+                "score": 0.76,
+                "en_butee": false,
+                "feuilles_par_pas": 1.03,
+                "ecart_au_compte_de_pas": 0.06
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 3.0,
+                "score": 0.728,
+                "en_butee": false,
+                "feuilles_par_pas": 1.0,
+                "ecart_au_compte_de_pas": 0.0
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 2.895,
+                "score": 0.573,
+                "en_butee": false,
+                "feuilles_par_pas": 0.724,
+                "ecart_au_compte_de_pas": -1.105
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 3.675,
+                "score": 0.483,
+                "en_butee": false,
+                "feuilles_par_pas": 0.735,
+                "ecart_au_compte_de_pas": -1.325
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 4.385,
+                "score": 0.504,
+                "en_butee": false,
+                "feuilles_par_pas": 0.731,
+                "ecart_au_compte_de_pas": -1.615
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 4.385,
+              "publie": 4.385,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 53,
+      "a": 58,
+      "rayon_mm": 10.51,
+      "detail": [
+        {
+          "depart_zyx": [
+            17925.896,
+            15488.873,
+            10583.143
+          ],
+          "radial_zyx": [
+            0.005968,
+            -0.309394,
+            -0.950915
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.505,
+                "score": 0.398,
+                "en_butee": false,
+                "feuilles_par_pas": 1.253,
+                "ecart_au_compte_de_pas": 0.505
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 3.53,
+                "score": 0.285,
+                "en_butee": false,
+                "feuilles_par_pas": 1.177,
+                "ecart_au_compte_de_pas": 0.53
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 0.35,
+                "score": 0.49,
+                "en_butee": true,
+                "feuilles_par_pas": 0.087,
+                "ecart_au_compte_de_pas": -3.65
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 0.68,
+                "score": 0.366,
+                "en_butee": false,
+                "feuilles_par_pas": 0.136,
+                "ecart_au_compte_de_pas": -4.32
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.695,
+                "score": 0.356,
+                "en_butee": false,
+                "feuilles_par_pas": 0.116,
+                "ecart_au_compte_de_pas": -5.305
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.695,
+              "publie": 0.695,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.505,
+                "score": 0.398,
+                "en_butee": false,
+                "feuilles_par_pas": 1.253,
+                "ecart_au_compte_de_pas": 0.505
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 3.53,
+                "score": 0.285,
+                "en_butee": false,
+                "feuilles_par_pas": 1.177,
+                "ecart_au_compte_de_pas": 0.53
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 0.35,
+                "score": 0.49,
+                "en_butee": true,
+                "feuilles_par_pas": 0.087,
+                "ecart_au_compte_de_pas": -3.65
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 0.68,
+                "score": 0.366,
+                "en_butee": false,
+                "feuilles_par_pas": 0.136,
+                "ecart_au_compte_de_pas": -4.32
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.52,
+                "score": 0.419,
+                "en_butee": false,
+                "feuilles_par_pas": 0.087,
+                "ecart_au_compte_de_pas": -5.48
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.52,
+              "publie": 0.52,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 59,
+      "a": 63,
+      "rayon_mm": 11.57,
+      "detail": [
+        {
+          "depart_zyx": [
+            18028.019,
+            13654.178,
+            10927.101
+          ],
+          "radial_zyx": [
+            0.006918,
+            -0.61406,
+            -0.789229
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.565,
+                "score": 0.568,
+                "en_butee": false,
+                "feuilles_par_pas": 1.283,
+                "ecart_au_compte_de_pas": 0.565
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 3.99,
+                "score": 0.452,
+                "en_butee": false,
+                "feuilles_par_pas": 1.33,
+                "ecart_au_compte_de_pas": 0.99
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 5.545,
+                "score": 0.466,
+                "en_butee": false,
+                "feuilles_par_pas": 1.386,
+                "ecart_au_compte_de_pas": 1.545
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 6.84,
+                "score": 0.447,
+                "en_butee": false,
+                "feuilles_par_pas": 1.368,
+                "ecart_au_compte_de_pas": 1.84
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 8.175,
+                "score": 0.528,
+                "en_butee": false,
+                "feuilles_par_pas": 1.363,
+                "ecart_au_compte_de_pas": 2.175
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 8.175,
+              "publie": 8.175,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.015,
+                "score": 0.603,
+                "en_butee": false,
+                "feuilles_par_pas": 1.008,
+                "ecart_au_compte_de_pas": 0.015
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 0.35,
+                "score": 0.564,
+                "en_butee": true,
+                "feuilles_par_pas": 0.117,
+                "ecart_au_compte_de_pas": -2.65
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 2.33,
+                "score": 0.514,
+                "en_butee": false,
+                "feuilles_par_pas": 0.583,
+                "ecart_au_compte_de_pas": -1.67
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 0.985,
+                "score": 0.481,
+                "en_butee": false,
+                "feuilles_par_pas": 0.197,
+                "ecart_au_compte_de_pas": -4.015
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 1.25,
+                "score": 0.422,
+                "en_butee": false,
+                "feuilles_par_pas": 0.208,
+                "ecart_au_compte_de_pas": -4.75
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 1.25,
+              "publie": 1.25,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 64,
+      "a": 68,
+      "rayon_mm": 12.48,
+      "detail": [
+        {
+          "depart_zyx": [
+            54027.829,
+            18821.28,
+            22189.894
+          ],
+          "radial_zyx": [
+            -0.006016,
+            0.321602,
+            0.946856
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 1.475,
+                "score": 0.532,
+                "en_butee": false,
+                "feuilles_par_pas": 0.738,
+                "ecart_au_compte_de_pas": -0.525
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 4.04,
+                "score": 0.456,
+                "en_butee": false,
+                "feuilles_par_pas": 1.347,
+                "ecart_au_compte_de_pas": 1.04
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 0.41,
+                "score": 0.52,
+                "en_butee": false,
+                "feuilles_par_pas": 0.103,
+                "ecart_au_compte_de_pas": -3.59
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 0.72,
+                "score": 0.482,
+                "en_butee": false,
+                "feuilles_par_pas": 0.144,
+                "ecart_au_compte_de_pas": -4.28
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.825,
+                "score": 0.469,
+                "en_butee": false,
+                "feuilles_par_pas": 0.138,
+                "ecart_au_compte_de_pas": -5.175
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.825,
+              "publie": 0.825,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 1.475,
+                "score": 0.532,
+                "en_butee": false,
+                "feuilles_par_pas": 0.738,
+                "ecart_au_compte_de_pas": -0.525
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 2.36,
+                "score": 0.575,
+                "en_butee": false,
+                "feuilles_par_pas": 0.787,
+                "ecart_au_compte_de_pas": -0.64
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 3.19,
+                "score": 0.443,
+                "en_butee": false,
+                "feuilles_par_pas": 0.798,
+                "ecart_au_compte_de_pas": -0.81
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 3.93,
+                "score": 0.516,
+                "en_butee": false,
+                "feuilles_par_pas": 0.786,
+                "ecart_au_compte_de_pas": -1.07
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 4.59,
+                "score": 0.434,
+                "en_butee": false,
+                "feuilles_par_pas": 0.765,
+                "ecart_au_compte_de_pas": -1.41
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 4.59,
+              "publie": 4.59,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 69,
+      "a": 72,
+      "rayon_mm": 13.27,
+      "detail": [
+        {
+          "depart_zyx": [
+            23655.531,
+            11689.07,
+            10856.968
+          ],
+          "radial_zyx": [
+            0.006627,
+            -0.497213,
+            -0.867603
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.095,
+                "score": 0.678,
+                "en_butee": false,
+                "feuilles_par_pas": 1.048,
+                "ecart_au_compte_de_pas": 0.095
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 3.015,
+                "score": 0.713,
+                "en_butee": false,
+                "feuilles_par_pas": 1.005,
+                "ecart_au_compte_de_pas": 0.015
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 3.985,
+                "score": 0.639,
+                "en_butee": false,
+                "feuilles_par_pas": 0.996,
+                "ecart_au_compte_de_pas": -0.015
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 5.31,
+                "score": 0.424,
+                "en_butee": false,
+                "feuilles_par_pas": 1.062,
+                "ecart_au_compte_de_pas": 0.31
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 6.03,
+                "score": 0.393,
+                "en_butee": false,
+                "feuilles_par_pas": 1.005,
+                "ecart_au_compte_de_pas": 0.03
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 6.03,
+              "publie": 6.03,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 1.91,
+                "score": 0.778,
+                "en_butee": false,
+                "feuilles_par_pas": 0.955,
+                "ecart_au_compte_de_pas": -0.09
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 2.555,
+                "score": 0.542,
+                "en_butee": false,
+                "feuilles_par_pas": 0.852,
+                "ecart_au_compte_de_pas": -0.445
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 3.365,
+                "score": 0.359,
+                "en_butee": false,
+                "feuilles_par_pas": 0.841,
+                "ecart_au_compte_de_pas": -0.635
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 7.115,
+                "score": 0.422,
+                "en_butee": false,
+                "feuilles_par_pas": 1.423,
+                "ecart_au_compte_de_pas": 2.115
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 8.59,
+                "score": 0.434,
+                "en_butee": false,
+                "feuilles_par_pas": 1.432,
+                "ecart_au_compte_de_pas": 2.59
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 8.59,
+              "publie": 8.59,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 73,
+      "a": 76,
+      "rayon_mm": 13.99,
+      "detail": [
+        {
+          "depart_zyx": [
+            15129.495,
+            16569.63,
+            19398.482
+          ],
+          "radial_zyx": [
+            -0.003337,
+            -0.193423,
+            0.98111
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 0.74,
+                "score": 0.698,
+                "en_butee": false,
+                "feuilles_par_pas": 0.37,
+                "ecart_au_compte_de_pas": -1.26
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 2.325,
+                "score": 0.524,
+                "en_butee": false,
+                "feuilles_par_pas": 0.775,
+                "ecart_au_compte_de_pas": -0.675
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 3.03,
+                "score": 0.395,
+                "en_butee": false,
+                "feuilles_par_pas": 0.758,
+                "ecart_au_compte_de_pas": -0.97
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 3.845,
+                "score": 0.441,
+                "en_butee": false,
+                "feuilles_par_pas": 0.769,
+                "ecart_au_compte_de_pas": -1.155
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 4.49,
+                "score": 0.363,
+                "en_butee": false,
+                "feuilles_par_pas": 0.748,
+                "ecart_au_compte_de_pas": -1.51
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 4.49,
+              "publie": 4.49,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 0.74,
+                "score": 0.698,
+                "en_butee": false,
+                "feuilles_par_pas": 0.37,
+                "ecart_au_compte_de_pas": -1.26
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 2.325,
+                "score": 0.524,
+                "en_butee": false,
+                "feuilles_par_pas": 0.775,
+                "ecart_au_compte_de_pas": -0.675
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 2.995,
+                "score": 0.394,
+                "en_butee": false,
+                "feuilles_par_pas": 0.749,
+                "ecart_au_compte_de_pas": -1.005
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 3.81,
+                "score": 0.45,
+                "en_butee": false,
+                "feuilles_par_pas": 0.762,
+                "ecart_au_compte_de_pas": -1.19
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 4.505,
+                "score": 0.418,
+                "en_butee": false,
+                "feuilles_par_pas": 0.751,
+                "ecart_au_compte_de_pas": -1.495
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 4.505,
+              "publie": 4.505,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 77,
+      "a": 80,
+      "rayon_mm": 14.7,
+      "detail": [
+        {
+          "depart_zyx": [
+            29690.8,
+            21173.321,
+            21690.546
+          ],
+          "radial_zyx": [
+            -0.006857,
+            0.91206,
+            0.409999
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 1.325,
+                "score": 0.493,
+                "en_butee": false,
+                "feuilles_par_pas": 0.663,
+                "ecart_au_compte_de_pas": -0.675
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 6.98,
+                "score": 0.417,
+                "en_butee": false,
+                "feuilles_par_pas": 2.327,
+                "ecart_au_compte_de_pas": 3.98
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 2.865,
+                "score": 0.411,
+                "en_butee": false,
+                "feuilles_par_pas": 0.716,
+                "ecart_au_compte_de_pas": -1.135
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 3.485,
+                "score": 0.344,
+                "en_butee": false,
+                "feuilles_par_pas": 0.697,
+                "ecart_au_compte_de_pas": -1.515
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 4.025,
+                "score": 0.301,
+                "en_butee": false,
+                "feuilles_par_pas": 0.671,
+                "ecart_au_compte_de_pas": -1.975
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 4.025,
+              "publie": 4.025,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 1.31,
+                "score": 0.506,
+                "en_butee": false,
+                "feuilles_par_pas": 0.655,
+                "ecart_au_compte_de_pas": -0.69
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 6.88,
+                "score": 0.447,
+                "en_butee": false,
+                "feuilles_par_pas": 2.293,
+                "ecart_au_compte_de_pas": 3.88
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 2.86,
+                "score": 0.33,
+                "en_butee": false,
+                "feuilles_par_pas": 0.715,
+                "ecart_au_compte_de_pas": -1.14
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 3.505,
+                "score": 0.311,
+                "en_butee": false,
+                "feuilles_par_pas": 0.701,
+                "ecart_au_compte_de_pas": -1.495
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 7.75,
+                "score": 0.265,
+                "en_butee": false,
+                "feuilles_par_pas": 1.292,
+                "ecart_au_compte_de_pas": 1.75
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 7.75,
+              "publie": 7.75,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 81,
+      "a": 84,
+      "rayon_mm": 15.46,
+      "detail": [
+        {
+          "depart_zyx": [
+            18226.806,
+            21558.687,
+            11399.193
+          ],
+          "radial_zyx": [
+            -0.001446,
+            0.776572,
+            -0.630027
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.03,
+                "score": 0.697,
+                "en_butee": false,
+                "feuilles_par_pas": 1.015,
+                "ecart_au_compte_de_pas": 0.03
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 2.79,
+                "score": 0.453,
+                "en_butee": false,
+                "feuilles_par_pas": 0.93,
+                "ecart_au_compte_de_pas": -0.21
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 3.61,
+                "score": 0.456,
+                "en_butee": false,
+                "feuilles_par_pas": 0.903,
+                "ecart_au_compte_de_pas": -0.39
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 4.47,
+                "score": 0.422,
+                "en_butee": false,
+                "feuilles_par_pas": 0.894,
+                "ecart_au_compte_de_pas": -0.53
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.35,
+                "score": 0.555,
+                "en_butee": true,
+                "feuilles_par_pas": 0.058,
+                "ecart_au_compte_de_pas": -5.65
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.35,
+              "publie": 0.35,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.03,
+                "score": 0.697,
+                "en_butee": false,
+                "feuilles_par_pas": 1.015,
+                "ecart_au_compte_de_pas": 0.03
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 2.79,
+                "score": 0.453,
+                "en_butee": false,
+                "feuilles_par_pas": 0.93,
+                "ecart_au_compte_de_pas": -0.21
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 3.61,
+                "score": 0.456,
+                "en_butee": false,
+                "feuilles_par_pas": 0.903,
+                "ecart_au_compte_de_pas": -0.39
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 1.205,
+                "score": 0.423,
+                "en_butee": false,
+                "feuilles_par_pas": 0.241,
+                "ecart_au_compte_de_pas": -3.795
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 1.42,
+                "score": 0.417,
+                "en_butee": false,
+                "feuilles_par_pas": 0.237,
+                "ecart_au_compte_de_pas": -4.58
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 1.42,
+              "publie": 1.42,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 85,
+      "a": 88,
+      "rayon_mm": 16.22,
+      "detail": [
+        {
+          "depart_zyx": [
+            21058.884,
+            22855.405,
+            17553.609
+          ],
+          "radial_zyx": [
+            -0.006118,
+            0.988402,
+            0.151739
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.55,
+                "score": 0.342,
+                "en_butee": false,
+                "feuilles_par_pas": 1.275,
+                "ecart_au_compte_de_pas": 0.55
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 1.99,
+                "score": 0.283,
+                "en_butee": false,
+                "feuilles_par_pas": 0.663,
+                "ecart_au_compte_de_pas": -1.01
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 2.785,
+                "score": 0.306,
+                "en_butee": false,
+                "feuilles_par_pas": 0.696,
+                "ecart_au_compte_de_pas": -1.215
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 4.46,
+                "score": 0.289,
+                "en_butee": false,
+                "feuilles_par_pas": 0.892,
+                "ecart_au_compte_de_pas": -0.54
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 5.405,
+                "score": 0.357,
+                "en_butee": false,
+                "feuilles_par_pas": 0.901,
+                "ecart_au_compte_de_pas": -0.595
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 5.405,
+              "publie": 5.405,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.55,
+                "score": 0.342,
+                "en_butee": false,
+                "feuilles_par_pas": 1.275,
+                "ecart_au_compte_de_pas": 0.55
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 1.99,
+                "score": 0.283,
+                "en_butee": false,
+                "feuilles_par_pas": 0.663,
+                "ecart_au_compte_de_pas": -1.01
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 2.785,
+                "score": 0.306,
+                "en_butee": false,
+                "feuilles_par_pas": 0.696,
+                "ecart_au_compte_de_pas": -1.215
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 4.435,
+                "score": 0.294,
+                "en_butee": false,
+                "feuilles_par_pas": 0.887,
+                "ecart_au_compte_de_pas": -0.565
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 5.385,
+                "score": 0.341,
+                "en_butee": false,
+                "feuilles_par_pas": 0.898,
+                "ecart_au_compte_de_pas": -0.615
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 5.385,
+              "publie": 5.385,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 89,
+      "a": 91,
+      "rayon_mm": 16.93,
+      "detail": [
+        {
+          "depart_zyx": [
+            65322.871,
+            20574.985,
+            24277.539
+          ],
+          "radial_zyx": [
+            -0.00494,
+            0.085589,
+            0.996318
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 0.64,
+                "score": 0.898,
+                "en_butee": false,
+                "feuilles_par_pas": 0.32,
+                "ecart_au_compte_de_pas": -1.36
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 0.995,
+                "score": 0.884,
+                "en_butee": false,
+                "feuilles_par_pas": 0.332,
+                "ecart_au_compte_de_pas": -2.005
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 1.25,
+                "score": 0.871,
+                "en_butee": false,
+                "feuilles_par_pas": 0.313,
+                "ecart_au_compte_de_pas": -2.75
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 1.35,
+                "score": 0.692,
+                "en_butee": false,
+                "feuilles_par_pas": 0.27,
+                "ecart_au_compte_de_pas": -3.65
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.57,
+                "score": 0.539,
+                "en_butee": false,
+                "feuilles_par_pas": 0.095,
+                "ecart_au_compte_de_pas": -5.43
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.57,
+              "publie": 0.57,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 0.64,
+                "score": 0.898,
+                "en_butee": false,
+                "feuilles_par_pas": 0.32,
+                "ecart_au_compte_de_pas": -1.36
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 1.0,
+                "score": 0.883,
+                "en_butee": false,
+                "feuilles_par_pas": 0.333,
+                "ecart_au_compte_de_pas": -2.0
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 1.255,
+                "score": 0.868,
+                "en_butee": false,
+                "feuilles_par_pas": 0.314,
+                "ecart_au_compte_de_pas": -2.745
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 1.35,
+                "score": 0.686,
+                "en_butee": false,
+                "feuilles_par_pas": 0.27,
+                "ecart_au_compte_de_pas": -3.65
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.57,
+                "score": 0.538,
+                "en_butee": false,
+                "feuilles_par_pas": 0.095,
+                "ecart_au_compte_de_pas": -5.43
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.57,
+              "publie": 0.57,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 92,
+      "a": 94,
+      "rayon_mm": 17.51,
+      "detail": [
+        {
+          "depart_zyx": [
+            59871.724,
+            12544.297,
+            10852.514
+          ],
+          "radial_zyx": [
+            0.007014,
+            -0.66902,
+            -0.743212
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 1.985,
+                "score": 0.708,
+                "en_butee": false,
+                "feuilles_par_pas": 0.993,
+                "ecart_au_compte_de_pas": -0.015
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 1.76,
+                "score": 0.439,
+                "en_butee": false,
+                "feuilles_par_pas": 0.587,
+                "ecart_au_compte_de_pas": -1.24
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 5.6,
+                "score": 0.46,
+                "en_butee": false,
+                "feuilles_par_pas": 1.4,
+                "ecart_au_compte_de_pas": 1.6
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 6.88,
+                "score": 0.369,
+                "en_butee": false,
+                "feuilles_par_pas": 1.376,
+                "ecart_au_compte_de_pas": 1.88
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 8.16,
+                "score": 0.416,
+                "en_butee": false,
+                "feuilles_par_pas": 1.36,
+                "ecart_au_compte_de_pas": 2.16
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 8.16,
+              "publie": 8.16,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 0.635,
+                "score": 0.621,
+                "en_butee": false,
+                "feuilles_par_pas": 0.318,
+                "ecart_au_compte_de_pas": -1.365
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 0.795,
+                "score": 0.485,
+                "en_butee": false,
+                "feuilles_par_pas": 0.265,
+                "ecart_au_compte_de_pas": -2.205
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 2.85,
+                "score": 0.488,
+                "en_butee": false,
+                "feuilles_par_pas": 0.713,
+                "ecart_au_compte_de_pas": -1.15
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 3.655,
+                "score": 0.46,
+                "en_butee": false,
+                "feuilles_par_pas": 0.731,
+                "ecart_au_compte_de_pas": -1.345
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 1.14,
+                "score": 0.354,
+                "en_butee": false,
+                "feuilles_par_pas": 0.19,
+                "ecart_au_compte_de_pas": -4.86
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 1.14,
+              "publie": 1.14,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 95,
+      "a": 97,
+      "rayon_mm": 18.06,
+      "detail": [
+        {
+          "depart_zyx": [
+            48396.819,
+            10385.966,
+            18769.073
+          ],
+          "radial_zyx": [
+            0.004594,
+            -0.983307,
+            0.181897
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 1.92,
+                "score": 0.641,
+                "en_butee": false,
+                "feuilles_par_pas": 0.96,
+                "ecart_au_compte_de_pas": -0.08
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 0.44,
+                "score": 0.719,
+                "en_butee": false,
+                "feuilles_par_pas": 0.147,
+                "ecart_au_compte_de_pas": -2.56
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 0.61,
+                "score": 0.785,
+                "en_butee": false,
+                "feuilles_par_pas": 0.153,
+                "ecart_au_compte_de_pas": -3.39
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 0.68,
+                "score": 0.797,
+                "en_butee": false,
+                "feuilles_par_pas": 0.136,
+                "ecart_au_compte_de_pas": -4.32
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.865,
+                "score": 0.733,
+                "en_butee": false,
+                "feuilles_par_pas": 0.144,
+                "ecart_au_compte_de_pas": -5.135
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.865,
+              "publie": 0.865,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 1.985,
+                "score": 0.704,
+                "en_butee": false,
+                "feuilles_par_pas": 0.993,
+                "ecart_au_compte_de_pas": -0.015
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 0.475,
+                "score": 0.618,
+                "en_butee": false,
+                "feuilles_par_pas": 0.158,
+                "ecart_au_compte_de_pas": -2.525
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 0.475,
+                "score": 0.586,
+                "en_butee": false,
+                "feuilles_par_pas": 0.119,
+                "ecart_au_compte_de_pas": -3.525
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 0.535,
+                "score": 0.686,
+                "en_butee": false,
+                "feuilles_par_pas": 0.107,
+                "ecart_au_compte_de_pas": -4.465
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.6,
+                "score": 0.729,
+                "en_butee": false,
+                "feuilles_par_pas": 0.1,
+                "ecart_au_compte_de_pas": -5.4
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.6,
+              "publie": 0.6,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 98,
+      "a": 100,
+      "rayon_mm": 18.62,
+      "detail": [
+        {
+          "depart_zyx": [
+            48204.0,
+            23674.834,
+            19415.993
+          ],
+          "radial_zyx": [
+            -0.006301,
+            0.978939,
+            0.204057
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 1.3,
+                "score": 0.484,
+                "en_butee": false,
+                "feuilles_par_pas": 0.65,
+                "ecart_au_compte_de_pas": -0.7
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 4.835,
+                "score": 0.488,
+                "en_butee": false,
+                "feuilles_par_pas": 1.612,
+                "ecart_au_compte_de_pas": 1.835
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 6.315,
+                "score": 0.556,
+                "en_butee": false,
+                "feuilles_par_pas": 1.579,
+                "ecart_au_compte_de_pas": 2.315
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 7.055,
+                "score": 0.45,
+                "en_butee": false,
+                "feuilles_par_pas": 1.411,
+                "ecart_au_compte_de_pas": 2.055
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 9.3,
+                "score": 0.444,
+                "en_butee": false,
+                "feuilles_par_pas": 1.55,
+                "ecart_au_compte_de_pas": 3.3
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 9.3,
+              "publie": 9.3,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.05,
+                "score": 0.627,
+                "en_butee": false,
+                "feuilles_par_pas": 1.025,
+                "ecart_au_compte_de_pas": 0.05
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 1.225,
+                "score": 0.503,
+                "en_butee": false,
+                "feuilles_par_pas": 0.408,
+                "ecart_au_compte_de_pas": -1.775
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 4.045,
+                "score": 0.484,
+                "en_butee": false,
+                "feuilles_par_pas": 1.011,
+                "ecart_au_compte_de_pas": 0.045
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 2.31,
+                "score": 0.343,
+                "en_butee": false,
+                "feuilles_par_pas": 0.462,
+                "ecart_au_compte_de_pas": -2.69
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 1.025,
+                "score": 0.485,
+                "en_butee": false,
+                "feuilles_par_pas": 0.171,
+                "ecart_au_compte_de_pas": -4.975
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 1.025,
+              "publie": 1.025,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 101,
+      "a": 103,
+      "rayon_mm": 19.15,
+      "detail": [
+        {
+          "depart_zyx": [
+            15818.682,
+            16727.516,
+            7676.978
+          ],
+          "radial_zyx": [
+            0.004877,
+            -0.073363,
+            -0.997293
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 0.66,
+                "score": 0.58,
+                "en_butee": false,
+                "feuilles_par_pas": 0.33,
+                "ecart_au_compte_de_pas": -1.34
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 1.065,
+                "score": 0.483,
+                "en_butee": false,
+                "feuilles_par_pas": 0.355,
+                "ecart_au_compte_de_pas": -1.935
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 1.11,
+                "score": 0.52,
+                "en_butee": false,
+                "feuilles_par_pas": 0.278,
+                "ecart_au_compte_de_pas": -2.89
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 1.305,
+                "score": 0.461,
+                "en_butee": false,
+                "feuilles_par_pas": 0.261,
+                "ecart_au_compte_de_pas": -3.695
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.65,
+                "score": 0.369,
+                "en_butee": false,
+                "feuilles_par_pas": 0.108,
+                "ecart_au_compte_de_pas": -5.35
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.65,
+              "publie": 0.65,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 1.95,
+                "score": 0.686,
+                "en_butee": false,
+                "feuilles_par_pas": 0.975,
+                "ecart_au_compte_de_pas": -0.05
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 1.85,
+                "score": 0.511,
+                "en_butee": false,
+                "feuilles_par_pas": 0.617,
+                "ecart_au_compte_de_pas": -1.15
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 3.525,
+                "score": 0.502,
+                "en_butee": false,
+                "feuilles_par_pas": 0.881,
+                "ecart_au_compte_de_pas": -0.475
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 4.435,
+                "score": 0.541,
+                "en_butee": false,
+                "feuilles_par_pas": 0.887,
+                "ecart_au_compte_de_pas": -0.565
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 6.94,
+                "score": 0.352,
+                "en_butee": false,
+                "feuilles_par_pas": 1.157,
+                "ecart_au_compte_de_pas": 0.94
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 6.94,
+              "publie": 6.94,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 104,
+      "a": 106,
+      "rayon_mm": 19.66,
+      "detail": [
+        {
+          "depart_zyx": [
+            67613.854,
+            29278.678,
+            14374.246
+          ],
+          "radial_zyx": [
+            -0.004052,
+            0.961281,
+            -0.275541
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.05,
+                "score": 0.627,
+                "en_butee": false,
+                "feuilles_par_pas": 1.025,
+                "ecart_au_compte_de_pas": 0.05
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 0.37,
+                "score": 0.581,
+                "en_butee": false,
+                "feuilles_par_pas": 0.123,
+                "ecart_au_compte_de_pas": -2.63
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 0.445,
+                "score": 0.771,
+                "en_butee": false,
+                "feuilles_par_pas": 0.111,
+                "ecart_au_compte_de_pas": -3.555
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 0.585,
+                "score": 0.82,
+                "en_butee": false,
+                "feuilles_par_pas": 0.117,
+                "ecart_au_compte_de_pas": -4.415
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.65,
+                "score": 0.838,
+                "en_butee": false,
+                "feuilles_par_pas": 0.108,
+                "ecart_au_compte_de_pas": -5.35
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.65,
+              "publie": 0.65,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.015,
+                "score": 0.633,
+                "en_butee": false,
+                "feuilles_par_pas": 1.008,
+                "ecart_au_compte_de_pas": 0.015
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 0.455,
+                "score": 0.573,
+                "en_butee": false,
+                "feuilles_par_pas": 0.152,
+                "ecart_au_compte_de_pas": -2.545
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 0.44,
+                "score": 0.771,
+                "en_butee": false,
+                "feuilles_par_pas": 0.11,
+                "ecart_au_compte_de_pas": -3.56
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 0.585,
+                "score": 0.821,
+                "en_butee": false,
+                "feuilles_par_pas": 0.117,
+                "ecart_au_compte_de_pas": -4.415
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.65,
+                "score": 0.839,
+                "en_butee": false,
+                "feuilles_par_pas": 0.108,
+                "ecart_au_compte_de_pas": -5.35
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.65,
+              "publie": 0.65,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 107,
+      "a": 109,
+      "rayon_mm": 20.17,
+      "detail": [
+        {
+          "depart_zyx": [
+            12349.615,
+            11700.918,
+            5552.787
+          ],
+          "radial_zyx": [
+            0.006913,
+            -0.611598,
+            -0.791139
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 1.45,
+                "score": 0.584,
+                "en_butee": false,
+                "feuilles_par_pas": 0.725,
+                "ecart_au_compte_de_pas": -0.55
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 3.97,
+                "score": 0.419,
+                "en_butee": false,
+                "feuilles_par_pas": 1.323,
+                "ecart_au_compte_de_pas": 0.97
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 2.975,
+                "score": 0.393,
+                "en_butee": false,
+                "feuilles_par_pas": 0.744,
+                "ecart_au_compte_de_pas": -1.025
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 3.565,
+                "score": 0.35,
+                "en_butee": false,
+                "feuilles_par_pas": 0.713,
+                "ecart_au_compte_de_pas": -1.435
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 8.01,
+                "score": 0.353,
+                "en_butee": false,
+                "feuilles_par_pas": 1.335,
+                "ecart_au_compte_de_pas": 2.01
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 8.01,
+              "publie": 8.01,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 1.45,
+                "score": 0.584,
+                "en_butee": false,
+                "feuilles_par_pas": 0.725,
+                "ecart_au_compte_de_pas": -0.55
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 3.97,
+                "score": 0.419,
+                "en_butee": false,
+                "feuilles_par_pas": 1.323,
+                "ecart_au_compte_de_pas": 0.97
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 2.975,
+                "score": 0.393,
+                "en_butee": false,
+                "feuilles_par_pas": 0.744,
+                "ecart_au_compte_de_pas": -1.025
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 3.565,
+                "score": 0.35,
+                "en_butee": false,
+                "feuilles_par_pas": 0.713,
+                "ecart_au_compte_de_pas": -1.435
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 8.01,
+                "score": 0.353,
+                "en_butee": false,
+                "feuilles_par_pas": 1.335,
+                "ecart_au_compte_de_pas": 2.01
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 8.01,
+              "publie": 8.01,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 110,
+      "a": 112,
+      "rayon_mm": 20.69,
+      "detail": [
+        {
+          "depart_zyx": [
+            26459.664,
+            18974.14,
+            27062.698
+          ],
+          "radial_zyx": [
+            -0.006478,
+            0.449056,
+            0.89348
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 4.37,
+                "score": 0.36,
+                "en_butee": false,
+                "feuilles_par_pas": 2.185,
+                "ecart_au_compte_de_pas": 2.37
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 4.97,
+                "score": 0.228,
+                "en_butee": false,
+                "feuilles_par_pas": 1.657,
+                "ecart_au_compte_de_pas": 1.97
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 6.55,
+                "score": 0.225,
+                "en_butee": false,
+                "feuilles_par_pas": 1.638,
+                "ecart_au_compte_de_pas": 2.55
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 4.97,
+                "score": 0.193,
+                "en_butee": false,
+                "feuilles_par_pas": 0.994,
+                "ecart_au_compte_de_pas": -0.03
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 9.59,
+                "score": 0.241,
+                "en_butee": false,
+                "feuilles_par_pas": 1.598,
+                "ecart_au_compte_de_pas": 3.59
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 9.59,
+              "publie": 9.59,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 4.37,
+                "score": 0.36,
+                "en_butee": false,
+                "feuilles_par_pas": 2.185,
+                "ecart_au_compte_de_pas": 2.37
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 4.97,
+                "score": 0.228,
+                "en_butee": false,
+                "feuilles_par_pas": 1.657,
+                "ecart_au_compte_de_pas": 1.97
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 6.55,
+                "score": 0.225,
+                "en_butee": false,
+                "feuilles_par_pas": 1.638,
+                "ecart_au_compte_de_pas": 2.55
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 4.97,
+                "score": 0.193,
+                "en_butee": false,
+                "feuilles_par_pas": 0.994,
+                "ecart_au_compte_de_pas": -0.03
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 9.59,
+                "score": 0.241,
+                "en_butee": false,
+                "feuilles_par_pas": 1.598,
+                "ecart_au_compte_de_pas": 3.59
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 9.59,
+              "publie": 9.59,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 113,
+      "a": 115,
+      "rayon_mm": 21.26,
+      "detail": [
+        {
+          "depart_zyx": [
+            70711.088,
+            22139.486,
+            25948.245
+          ],
+          "radial_zyx": [
+            -0.004455,
+            -0.005486,
+            0.999975
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 3,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 4,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 5,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 6,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              }
+            ],
+            "verification": {
+              "decidable": false,
+              "pourquoi": "aucun prefixe lisible ou rien de publie"
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 3,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 4,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 5,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 6,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              }
+            ],
+            "verification": {
+              "decidable": false,
+              "pourquoi": "aucun prefixe lisible ou rien de publie"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 116,
+      "a": 117,
+      "rayon_mm": 21.75,
+      "detail": [
+        {
+          "depart_zyx": [
+            61554.166,
+            25385.819,
+            21505.551
+          ],
+          "radial_zyx": [
+            -0.007064,
+            0.833291,
+            0.55279
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 3,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 4,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 5,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 6,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              }
+            ],
+            "verification": {
+              "decidable": false,
+              "pourquoi": "aucun prefixe lisible ou rien de publie"
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 3,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 4,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 5,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 6,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              }
+            ],
+            "verification": {
+              "decidable": false,
+              "pourquoi": "aucun prefixe lisible ou rien de publie"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 118,
+      "a": 119,
+      "rayon_mm": 22.17,
+      "detail": [
+        {
+          "depart_zyx": [
+            33216.25,
+            19847.695,
+            26885.815
+          ],
+          "radial_zyx": [
+            -0.006799,
+            0.560706,
+            0.827987
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.035,
+                "score": 0.708,
+                "en_butee": false,
+                "feuilles_par_pas": 1.018,
+                "ecart_au_compte_de_pas": 0.035
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 0.505,
+                "score": 0.535,
+                "en_butee": false,
+                "feuilles_par_pas": 0.168,
+                "ecart_au_compte_de_pas": -2.495
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 0.55,
+                "score": 0.551,
+                "en_butee": false,
+                "feuilles_par_pas": 0.138,
+                "ecart_au_compte_de_pas": -3.45
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 0.81,
+                "score": 0.469,
+                "en_butee": false,
+                "feuilles_par_pas": 0.162,
+                "ecart_au_compte_de_pas": -4.19
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.94,
+                "score": 0.429,
+                "en_butee": false,
+                "feuilles_par_pas": 0.157,
+                "ecart_au_compte_de_pas": -5.06
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.94,
+              "publie": 0.94,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 2.035,
+                "score": 0.708,
+                "en_butee": false,
+                "feuilles_par_pas": 1.018,
+                "ecart_au_compte_de_pas": 0.035
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 0.505,
+                "score": 0.535,
+                "en_butee": false,
+                "feuilles_par_pas": 0.168,
+                "ecart_au_compte_de_pas": -2.495
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 0.62,
+                "score": 0.536,
+                "en_butee": false,
+                "feuilles_par_pas": 0.155,
+                "ecart_au_compte_de_pas": -3.38
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 0.815,
+                "score": 0.465,
+                "en_butee": false,
+                "feuilles_par_pas": 0.163,
+                "ecart_au_compte_de_pas": -4.185
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.94,
+                "score": 0.424,
+                "en_butee": false,
+                "feuilles_par_pas": 0.157,
+                "ecart_au_compte_de_pas": -5.06
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.94,
+              "publie": 0.94,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 120,
+      "a": 121,
+      "rayon_mm": 22.61,
+      "detail": [
+        {
+          "depart_zyx": [
+            20885.137,
+            6126.869,
+            11258.273
+          ],
+          "radial_zyx": [
+            0.006922,
+            -0.895703,
+            -0.444599
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 5.28,
+                "score": 0.388,
+                "en_butee": false,
+                "feuilles_par_pas": 2.64,
+                "ecart_au_compte_de_pas": 3.28
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 0.35,
+                "score": 0.745,
+                "en_butee": true,
+                "feuilles_par_pas": 0.117,
+                "ecart_au_compte_de_pas": -2.65
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 0.48,
+                "score": 0.858,
+                "en_butee": false,
+                "feuilles_par_pas": 0.12,
+                "ecart_au_compte_de_pas": -3.52
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 0.61,
+                "score": 0.887,
+                "en_butee": false,
+                "feuilles_par_pas": 0.122,
+                "ecart_au_compte_de_pas": -4.39
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.665,
+                "score": 0.893,
+                "en_butee": false,
+                "feuilles_par_pas": 0.111,
+                "ecart_au_compte_de_pas": -5.335
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.665,
+              "publie": 0.665,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 5.28,
+                "score": 0.388,
+                "en_butee": false,
+                "feuilles_par_pas": 2.64,
+                "ecart_au_compte_de_pas": 3.28
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 0.35,
+                "score": 0.74,
+                "en_butee": true,
+                "feuilles_par_pas": 0.117,
+                "ecart_au_compte_de_pas": -2.65
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 0.48,
+                "score": 0.857,
+                "en_butee": false,
+                "feuilles_par_pas": 0.12,
+                "ecart_au_compte_de_pas": -3.52
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 0.605,
+                "score": 0.887,
+                "en_butee": false,
+                "feuilles_par_pas": 0.121,
+                "ecart_au_compte_de_pas": -4.395
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.665,
+                "score": 0.893,
+                "en_butee": false,
+                "feuilles_par_pas": 0.111,
+                "ecart_au_compte_de_pas": -5.335
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.665,
+              "publie": 0.665,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 122,
+      "a": 123,
+      "rayon_mm": 23.03,
+      "detail": [
+        {
+          "depart_zyx": [
+            57479.267,
+            18883.271,
+            28236.287
+          ],
+          "radial_zyx": [
+            -0.005148,
+            0.127085,
+            0.991879
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 3,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 4,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 5,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 6,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              }
+            ],
+            "verification": {
+              "decidable": false,
+              "pourquoi": "aucun prefixe lisible ou rien de publie"
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 3,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 4,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 5,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 6,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              }
+            ],
+            "verification": {
+              "decidable": false,
+              "pourquoi": "aucun prefixe lisible ou rien de publie"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 124,
+      "a": 125,
+      "rayon_mm": 23.31,
+      "detail": [
+        {
+          "depart_zyx": [
+            53257.817,
+            10247.285,
+            23135.373
+          ],
+          "radial_zyx": [
+            0.001385,
+            -0.771035,
+            0.636791
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 3,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 4,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 5,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 6,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              }
+            ],
+            "verification": {
+              "decidable": false,
+              "pourquoi": "aucun prefixe lisible ou rien de publie"
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 3,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 4,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 5,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              },
+              {
+                "pas": 6,
+                "decidable": false,
+                "pourquoi": "profil plat"
+              }
+            ],
+            "verification": {
+              "decidable": false,
+              "pourquoi": "aucun prefixe lisible ou rien de publie"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 126,
+      "a": 127,
+      "rayon_mm": 23.36,
+      "detail": [
+        {
+          "depart_zyx": [
+            15492.907,
+            20510.579,
+            24060.305
+          ],
+          "radial_zyx": [
+            -0.006021,
+            0.322684,
+            0.946488
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 0.635,
+                "score": 0.922,
+                "en_butee": false,
+                "feuilles_par_pas": 0.318,
+                "ecart_au_compte_de_pas": -1.365
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 0.72,
+                "score": 0.882,
+                "en_butee": false,
+                "feuilles_par_pas": 0.24,
+                "ecart_au_compte_de_pas": -2.28
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 0.745,
+                "score": 0.809,
+                "en_butee": false,
+                "feuilles_par_pas": 0.186,
+                "ecart_au_compte_de_pas": -3.255
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 0.76,
+                "score": 0.741,
+                "en_butee": false,
+                "feuilles_par_pas": 0.152,
+                "ecart_au_compte_de_pas": -4.24
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.765,
+                "score": 0.684,
+                "en_butee": false,
+                "feuilles_par_pas": 0.128,
+                "ecart_au_compte_de_pas": -5.235
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.765,
+              "publie": 0.765,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 0.65,
+                "score": 0.923,
+                "en_butee": false,
+                "feuilles_par_pas": 0.325,
+                "ecart_au_compte_de_pas": -1.35
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 0.725,
+                "score": 0.872,
+                "en_butee": false,
+                "feuilles_par_pas": 0.242,
+                "ecart_au_compte_de_pas": -2.275
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 0.75,
+                "score": 0.795,
+                "en_butee": false,
+                "feuilles_par_pas": 0.188,
+                "ecart_au_compte_de_pas": -3.25
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 0.76,
+                "score": 0.726,
+                "en_butee": false,
+                "feuilles_par_pas": 0.152,
+                "ecart_au_compte_de_pas": -4.24
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.765,
+                "score": 0.669,
+                "en_butee": false,
+                "feuilles_par_pas": 0.128,
+                "ecart_au_compte_de_pas": -5.235
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.765,
+              "publie": 0.765,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "de": 128,
+      "a": 129,
+      "rayon_mm": 23.8,
+      "detail": [
+        {
+          "depart_zyx": [
+            43806.844,
+            10463.534,
+            8656.436
+          ],
+          "radial_zyx": [
+            0.006288,
+            -0.393348,
+            -0.919368
+          ],
+          "calibre": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 0.625,
+                "score": 0.906,
+                "en_butee": false,
+                "feuilles_par_pas": 0.313,
+                "ecart_au_compte_de_pas": -1.375
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 0.715,
+                "score": 0.878,
+                "en_butee": false,
+                "feuilles_par_pas": 0.238,
+                "ecart_au_compte_de_pas": -2.285
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 0.745,
+                "score": 0.81,
+                "en_butee": false,
+                "feuilles_par_pas": 0.186,
+                "ecart_au_compte_de_pas": -3.255
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 0.755,
+                "score": 0.744,
+                "en_butee": false,
+                "feuilles_par_pas": 0.151,
+                "ecart_au_compte_de_pas": -4.245
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.765,
+                "score": 0.688,
+                "en_butee": false,
+                "feuilles_par_pas": 0.128,
+                "ecart_au_compte_de_pas": -5.235
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.765,
+              "publie": 0.765,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          },
+          "deux_roles": {
+            "decidable": true,
+            "pas": 6,
+            "prefixes": [
+              {
+                "pas": 2,
+                "decidable": true,
+                "echantillons": 147,
+                "feuilles": 0.625,
+                "score": 0.906,
+                "en_butee": false,
+                "feuilles_par_pas": 0.313,
+                "ecart_au_compte_de_pas": -1.375
+              },
+              {
+                "pas": 3,
+                "decidable": true,
+                "echantillons": 220,
+                "feuilles": 0.715,
+                "score": 0.878,
+                "en_butee": false,
+                "feuilles_par_pas": 0.238,
+                "ecart_au_compte_de_pas": -2.285
+              },
+              {
+                "pas": 4,
+                "decidable": true,
+                "echantillons": 293,
+                "feuilles": 0.745,
+                "score": 0.81,
+                "en_butee": false,
+                "feuilles_par_pas": 0.186,
+                "ecart_au_compte_de_pas": -3.255
+              },
+              {
+                "pas": 5,
+                "decidable": true,
+                "echantillons": 366,
+                "feuilles": 0.755,
+                "score": 0.744,
+                "en_butee": false,
+                "feuilles_par_pas": 0.151,
+                "ecart_au_compte_de_pas": -4.245
+              },
+              {
+                "pas": 6,
+                "decidable": true,
+                "echantillons": 439,
+                "feuilles": 0.765,
+                "score": 0.688,
+                "en_butee": false,
+                "feuilles_par_pas": 0.128,
+                "ecart_au_compte_de_pas": -5.235
+              }
+            ],
+            "verification": {
+              "decidable": true,
+              "pas": 6,
+              "lu": 0.765,
+              "publie": 0.765,
+              "ecart": 0.0,
+              "reproduit": true
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "marches_verifiees": 48,
+  "marches_lues": 56,
+  "marches_sans_verification_possible": 8,
+  "part_verifiee": 0.857,
+  "ecart_max_de_verification": 0.0,
+  "la_rederivation_du_depart_est_verifiee": true,
+  "controle_fabrique": {
+    "empilements": [
+      {
+        "bruit": 0.0,
+        "par_longueur": [
+          {
+            "pas": 2,
+            "feuilles": 2.0,
+            "score": 1.0,
+            "ecart": 0.0
+          },
+          {
+            "pas": 3,
+            "feuilles": 3.0,
+            "score": 1.0,
+            "ecart": 0.0
+          },
+          {
+            "pas": 4,
+            "feuilles": 4.0,
+            "score": 1.0,
+            "ecart": 0.0
+          },
+          {
+            "pas": 5,
+            "feuilles": 5.0,
+            "score": 1.0,
+            "ecart": 0.0
+          },
+          {
+            "pas": 6,
+            "feuilles": 6.0,
+            "score": 1.0,
+            "ecart": 0.0
+          }
+        ],
+        "ecart_max": 0.0
+      },
+      {
+        "bruit": 15.0,
+        "par_longueur": [
+          {
+            "pas": 2,
+            "feuilles": 1.985,
+            "score": 0.88,
+            "ecart": -0.015
+          },
+          {
+            "pas": 3,
+            "feuilles": 3.005,
+            "score": 0.88,
+            "ecart": 0.005
+          },
+          {
+            "pas": 4,
+            "feuilles": 4.0,
+            "score": 0.88,
+            "ecart": 0.0
+          },
+          {
+            "pas": 5,
+            "feuilles": 5.0,
+            "score": 0.901,
+            "ecart": 0.0
+          },
+          {
+            "pas": 6,
+            "feuilles": 6.005,
+            "score": 0.885,
+            "ecart": 0.005
+          }
+        ],
+        "ecart_max": 0.015
+      }
+    ],
+    "le_registre_des_prefixes_est_fidele": true,
+    "ecart_max_sur_fabrique": 0.015
+  },
+  "le_compte_suit_il_le_pas": {
+    "decidable": true,
+    "par_longueur": [
+      {
+        "pas": 2,
+        "marches": 48,
+        "feuilles_par_pas_median": 1.008,
+        "feuilles_par_pas_moyen": 0.977,
+        "score_median": 0.63
+      },
+      {
+        "pas": 3,
+        "marches": 48,
+        "feuilles_par_pas_median": 0.775,
+        "feuilles_par_pas_moyen": 0.799,
+        "score_median": 0.522
+      },
+      {
+        "pas": 4,
+        "marches": 48,
+        "feuilles_par_pas_median": 0.716,
+        "feuilles_par_pas_moyen": 0.686,
+        "score_median": 0.496
+      },
+      {
+        "pas": 5,
+        "marches": 48,
+        "feuilles_par_pas_median": 0.707,
+        "feuilles_par_pas_moyen": 0.614,
+        "score_median": 0.451
+      },
+      {
+        "pas": 6,
+        "marches": 48,
+        "feuilles_par_pas_median": 0.199,
+        "feuilles_par_pas_moyen": 0.578,
+        "score_median": 0.426
+      }
+    ],
+    "le_score_est_publie_jamais_filtre": "`98` : hors fenetre le score s'effondre, donc il signale un prefixe a ne pas croire ; `108` : le score du trajet est plus haut pour les marches qui ne comptent rien, donc filtrer dessus ecarterait les bonnes",
+    "feuilles_par_pas_au_plus_court": 1.008,
+    "feuilles_par_pas_au_plus_long": 0.199,
+    "derive_du_taux": -0.809
+  },
+  "biais_ou_jitter": {
+    "decidable": true,
+    "par_longueur": [
+      {
+        "pas": 2,
+        "marches": 48,
+        "ecart_moyen": -0.046,
+        "ecart_median": 0.015,
+        "ecart_type": 1.085
+      },
+      {
+        "pas": 3,
+        "marches": 48,
+        "ecart_moyen": -0.604,
+        "ecart_median": -0.675,
+        "ecart_type": 1.778
+      },
+      {
+        "pas": 4,
+        "marches": 48,
+        "ecart_moyen": -1.255,
+        "ecart_median": -1.137,
+        "ecart_type": 2.089
+      },
+      {
+        "pas": 5,
+        "marches": 48,
+        "ecart_moyen": -1.929,
+        "ecart_median": -1.465,
+        "ecart_type": 2.277
+      },
+      {
+        "pas": 6,
+        "marches": 48,
+        "ecart_moyen": -2.533,
+        "ecart_median": -4.805,
+        "ecart_type": 3.217
+      }
+    ],
+    "biais_par_pas": -0.353,
+    "jitter_par_racine_de_pas": 1.0882,
+    "residu_de_lajustement_lineaire": 0.86639,
+    "residu_de_lajustement_en_racine": 0.55366,
+    "spires_derivees_a_120_pas_si_biais": -42.36,
+    "spires_derivees_a_120_pas_si_jitter": 11.92,
+    "le_biais_domine": true,
+    "ce_nest_pas_un_test": "les prefixes d'une meme marche sont emboites, donc correles ; ce qui est rendu decrit la croissance et ne la teste pas"
+  },
+  "la_falaise_est_elle_celle_de_linstrument": {
+    "cas": [
+      {
+        "longueur_donde_en_pas": 6.0,
+        "amplitude_de_la_derive": 1.0,
+        "par_longueur": [
+          {
+            "pas": 2,
+            "feuilles_par_pas": 0.96
+          },
+          {
+            "pas": 3,
+            "feuilles_par_pas": 0.983
+          },
+          {
+            "pas": 4,
+            "feuilles_par_pas": 0.168
+          },
+          {
+            "pas": 5,
+            "feuilles_par_pas": 1.004
+          },
+          {
+            "pas": 6,
+            "feuilles_par_pas": 0.166
+          }
+        ],
+        "correct_au_plus_court": true,
+        "effondre_ensuite": false,
+        "valeur_effondree": 0.576
+      },
+      {
+        "longueur_donde_en_pas": 6.0,
+        "amplitude_de_la_derive": 1.5,
+        "par_longueur": [
+          {
+            "pas": 2,
+            "feuilles_par_pas": 0.95
+          },
+          {
+            "pas": 3,
+            "feuilles_par_pas": 0.178
+          },
+          {
+            "pas": 4,
+            "feuilles_par_pas": 0.169
+          },
+          {
+            "pas": 5,
+            "feuilles_par_pas": 0.167
+          },
+          {
+            "pas": 6,
+            "feuilles_par_pas": 0.166
+          }
+        ],
+        "correct_au_plus_court": true,
+        "effondre_ensuite": true,
+        "valeur_effondree": 0.168
+      },
+      {
+        "longueur_donde_en_pas": 6.0,
+        "amplitude_de_la_derive": 2.0,
+        "par_longueur": [
+          {
+            "pas": 2,
+            "feuilles_par_pas": 0.243
+          },
+          {
+            "pas": 3,
+            "feuilles_par_pas": 0.177
+          },
+          {
+            "pas": 4,
+            "feuilles_par_pas": 0.168
+          },
+          {
+            "pas": 5,
+            "feuilles_par_pas": 0.166
+          },
+          {
+            "pas": 6,
+            "feuilles_par_pas": 0.166
+          }
+        ],
+        "correct_au_plus_court": false,
+        "effondre_ensuite": true,
+        "valeur_effondree": 0.167
+      },
+      {
+        "longueur_donde_en_pas": 8.0,
+        "amplitude_de_la_derive": 1.0,
+        "par_longueur": [
+          {
+            "pas": 2,
+            "feuilles_par_pas": 0.978
+          },
+          {
+            "pas": 3,
+            "feuilles_par_pas": 0.982
+          },
+          {
+            "pas": 4,
+            "feuilles_par_pas": 0.991
+          },
+          {
+            "pas": 5,
+            "feuilles_par_pas": 0.128
+          },
+          {
+            "pas": 6,
+            "feuilles_par_pas": 1.0
+          }
+        ],
+        "correct_au_plus_court": true,
+        "effondre_ensuite": false,
+        "valeur_effondree": 0.986
+      },
+      {
+        "longueur_donde_en_pas": 8.0,
+        "amplitude_de_la_derive": 1.5,
+        "par_longueur": [
+          {
+            "pas": 2,
+            "feuilles_par_pas": 0.965
+          },
+          {
+            "pas": 3,
+            "feuilles_par_pas": 0.155
+          },
+          {
+            "pas": 4,
+            "feuilles_par_pas": 0.13
+          },
+          {
+            "pas": 5,
+            "feuilles_par_pas": 0.127
+          },
+          {
+            "pas": 6,
+            "feuilles_par_pas": 0.125
+          }
+        ],
+        "correct_au_plus_court": true,
+        "effondre_ensuite": true,
+        "valeur_effondree": 0.129
+      },
+      {
+        "longueur_donde_en_pas": 8.0,
+        "amplitude_de_la_derive": 2.0,
+        "par_longueur": [
+          {
+            "pas": 2,
+            "feuilles_par_pas": 0.95
+          },
+          {
+            "pas": 3,
+            "feuilles_par_pas": 0.145
+          },
+          {
+            "pas": 4,
+            "feuilles_par_pas": 0.128
+          },
+          {
+            "pas": 5,
+            "feuilles_par_pas": 0.126
+          },
+          {
+            "pas": 6,
+            "feuilles_par_pas": 0.126
+          }
+        ],
+        "correct_au_plus_court": true,
+        "effondre_ensuite": true,
+        "valeur_effondree": 0.127
+      },
+      {
+        "longueur_donde_en_pas": 10.0,
+        "amplitude_de_la_derive": 1.0,
+        "par_longueur": [
+          {
+            "pas": 2,
+            "feuilles_par_pas": 0.985
+          },
+          {
+            "pas": 3,
+            "feuilles_par_pas": 0.985
+          },
+          {
+            "pas": 4,
+            "feuilles_par_pas": 0.989
+          },
+          {
+            "pas": 5,
+            "feuilles_par_pas": 0.993
+          },
+          {
+            "pas": 6,
+            "feuilles_par_pas": 0.102
+          }
+        ],
+        "correct_au_plus_court": true,
+        "effondre_ensuite": false,
+        "valeur_effondree": 0.987
+      },
+      {
+        "longueur_donde_en_pas": 10.0,
+        "amplitude_de_la_derive": 1.5,
+        "par_longueur": [
+          {
+            "pas": 2,
+            "feuilles_par_pas": 0.97
+          },
+          {
+            "pas": 3,
+            "feuilles_par_pas": 0.98
+          },
+          {
+            "pas": 4,
+            "feuilles_par_pas": 0.109
+          },
+          {
+            "pas": 5,
+            "feuilles_par_pas": 0.102
+          },
+          {
+            "pas": 6,
+            "feuilles_par_pas": 0.101
+          }
+        ],
+        "correct_au_plus_court": true,
+        "effondre_ensuite": false,
+        "valeur_effondree": 0.105
+      },
+      {
+        "longueur_donde_en_pas": 10.0,
+        "amplitude_de_la_derive": 2.0,
+        "par_longueur": [
+          {
+            "pas": 2,
+            "feuilles_par_pas": 0.965
+          },
+          {
+            "pas": 3,
+            "feuilles_par_pas": 0.138
+          },
+          {
+            "pas": 4,
+            "feuilles_par_pas": 0.106
+          },
+          {
+            "pas": 5,
+            "feuilles_par_pas": 0.102
+          },
+          {
+            "pas": 6,
+            "feuilles_par_pas": 0.101
+          }
+        ],
+        "correct_au_plus_court": true,
+        "effondre_ensuite": true,
+        "valeur_effondree": 0.104
+      },
+      {
+        "longueur_donde_en_pas": 14.0,
+        "amplitude_de_la_derive": 1.0,
+        "par_longueur": [
+          {
+            "pas": 2,
+            "feuilles_par_pas": 0.993
+          },
+          {
+            "pas": 3,
+            "feuilles_par_pas": 0.99
+          },
+          {
+            "pas": 4,
+            "feuilles_par_pas": 0.993
+          },
+          {
+            "pas": 5,
+            "feuilles_par_pas": 0.994
+          },
+          {
+            "pas": 6,
+            "feuilles_par_pas": 0.995
+          }
+        ],
+        "correct_au_plus_court": true,
+        "effondre_ensuite": false,
+        "valeur_effondree": 0.994
+      },
+      {
+        "longueur_donde_en_pas": 14.0,
+        "amplitude_de_la_derive": 1.5,
+        "par_longueur": [
+          {
+            "pas": 2,
+            "feuilles_par_pas": 0.985
+          },
+          {
+            "pas": 3,
+            "feuilles_par_pas": 0.985
+          },
+          {
+            "pas": 4,
+            "feuilles_par_pas": 0.99
+          },
+          {
+            "pas": 5,
+            "feuilles_par_pas": 0.078
+          },
+          {
+            "pas": 6,
+            "feuilles_par_pas": 0.076
+          }
+        ],
+        "correct_au_plus_court": true,
+        "effondre_ensuite": false,
+        "valeur_effondree": 0.531
+      },
+      {
+        "longueur_donde_en_pas": 14.0,
+        "amplitude_de_la_derive": 2.0,
+        "par_longueur": [
+          {
+            "pas": 2,
+            "feuilles_par_pas": 0.98
+          },
+          {
+            "pas": 3,
+            "feuilles_par_pas": 0.983
+          },
+          {
+            "pas": 4,
+            "feuilles_par_pas": 0.094
+          },
+          {
+            "pas": 5,
+            "feuilles_par_pas": 0.077
+          },
+          {
+            "pas": 6,
+            "feuilles_par_pas": 0.073
+          }
+        ],
+        "correct_au_plus_court": true,
+        "effondre_ensuite": false,
+        "valeur_effondree": 0.085
+      }
+    ],
+    "falaises": 4,
+    "cas_essayes": 12,
+    "une_derive_seule_reproduit_la_falaise": true,
+    "valeur_effondree_mediane": 0.128,
+    "ce_que_ce_controle_netablit_pas": "laquelle des deux explications est vraie : il montre que l'observation ne les distingue pas"
+  },
+  "par_mode": {
+    "mode_haut": {
+      "marches": 22,
+      "par_longueur": [
+        {
+          "pas": 2,
+          "marches": 22,
+          "feuilles_par_pas_median": 1.012
+        },
+        {
+          "pas": 3,
+          "marches": 22,
+          "feuilles_par_pas_median": 1.128
+        },
+        {
+          "pas": 4,
+          "marches": 22,
+          "feuilles_par_pas_median": 0.82
+        },
+        {
+          "pas": 5,
+          "marches": 22,
+          "feuilles_par_pas_median": 0.889
+        },
+        {
+          "pas": 6,
+          "marches": 22,
+          "feuilles_par_pas_median": 1.085
+        }
+      ],
+      "marches_dont_le_taux_baisse": 9,
+      "part_dont_le_taux_baisse": 0.409,
+      "au_plus_court": 1.012,
+      "au_plus_long": 1.085,
+      "derive": 0.073
+    },
+    "mode_bas": {
+      "marches": 26,
+      "par_longueur": [
+        {
+          "pas": 2,
+          "marches": 26,
+          "feuilles_par_pas_median": 1.008
+        },
+        {
+          "pas": 3,
+          "marches": 26,
+          "feuilles_par_pas_median": 0.241
+        },
+        {
+          "pas": 4,
+          "marches": 26,
+          "feuilles_par_pas_median": 0.186
+        },
+        {
+          "pas": 5,
+          "marches": 26,
+          "feuilles_par_pas_median": 0.152
+        },
+        {
+          "pas": 6,
+          "marches": 26,
+          "feuilles_par_pas_median": 0.12
+        }
+      ],
+      "marches_dont_le_taux_baisse": 26,
+      "part_dont_le_taux_baisse": 1.0,
+      "au_plus_court": 1.008,
+      "au_plus_long": 0.12,
+      "derive": -0.888
+    },
+    "les_deux_modes_coincident_au_plus_court": true,
+    "ecart_au_plus_court": 0.004,
+    "ecart_au_plus_long": 0.965,
+    "les_deux_populations_naissent_apres_le_plus_court": true
+  }
+}

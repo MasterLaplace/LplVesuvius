@@ -7,6 +7,45 @@ l'historique, daté, et se lit ensuite.
 
 ## ⭐⭐⭐⭐ REPRISE — 2026-09-10
 
+⭐⭐⭐⭐ **ET `110` A POSÉ LA QUESTION QUE `109` DÉSIGNAIT, POUR UNE LECTURE PAR MARCHE.** Les étapes
+gardées par `107` reconstruisent chaque polyligne, donc le registre se recalcule sur chacun de ses
+**PRÉFIXES** : **56** lectures, **2050,6 s**, là où refaire les marches coûterait des heures.
+⚠⚠ Le **départ** n'avait pas été gardé — la leçon de `102` qui se rejoue — mais il est re-dérivable
+(graine **613**), et la vérification ne coûte rien : le préfixe complet EST le trajet publié.
+**48/56** marches le reproduisent, écart max **0.0** feuille.
+
+⭐⭐⭐ **ET DANS LE MODE QUI COMPTE, LE COMPTE SUIT LE PAS** : **1.012** feuille par pas à deux pas,
+**1.085** à six, soit une dérive de **+0.073** sur toute la longueur — et seulement **9** de ses
+**22** marches baissent, à peu près la moitié, ce que fait le hasard. **Sur six pas, il n'y a rien à
+trancher entre biais et jitter : le compte suit.**
+
+⭐⭐⭐ **ET LES DEUX POPULATIONS DE `107` N'EXISTENT PAS À DEUX PAS.** L'écart entre les modes vaut
+**+0.004** feuille par pas au plus court contre **+0.965** au plus long : les deux lisent
+**exactement une feuille par pas** sur deux pas. **La bimodalité naît entre le deuxième et le
+troisième pas**, elle n'est pas là au départ.
+
+⚠⚠⚠ **ET J'ALLAIS PUBLIER UN BIAIS DE −42,36 SPIRES COMME UNE DÉRIVE DE LA MATIÈRE.** Sur
+l'ensemble des marches le compte s'effondre — **1.008** à deux pas, **0.199** à six, dérive
+**-0.809** — et l'écart au compte de pas grandit monotonement. C'est un **artefact de mélange** :
+la médiane d'un mélange dont les PROPORTIONS changent avec la longueur. *La faute de `107` sous un
+costume neuf*, et c'est le partage par mode qui l'a attrapée.
+
+⚠⚠⚠ **ET J'ALLAIS LIRE LA FALAISE DU MODE BAS COMME UN FAIT DE LA MATIÈRE.** Une dérive **seule**,
+sur une périodicité **intacte**, la reproduit : **4** cas sur **12**, valeur effondrée médiane
+**0.128** contre **0.12** observé. Le mécanisme est le **plancher de fréquence** de l'estimateur
+(`F_MIN = 0,35`) — une basse fréquence n'est exprimable qu'une fois la fenêtre assez longue, et
+alors elle gagne l'argmax si elle est plus forte. ⭐ Le contrôle est à double sens : **sans** dérive,
+aucune falaise. ⚠ Donc **l'observation ne distingue PAS** « la marche a quitté la feuille » de « une
+composante plus forte a masqué la périodicité ».
+
+⛔ **ET VINGT MINUTES DE LECTURE ONT ÉTÉ PERDUES PAR UN `KeyError` DANS L'AGRÉGATION FINALE.** Une
+vérification non décidable n'a pas de champ `ecart` et le maximum le lisait sans garde. `107` avait
+déjà le partage lecture / agrégation et son `--reagreger` ; ne pas l'avoir copié a coûté la course.
+⭐ Corrigé **à la cause** — `mesurer` écrit les lectures AVANT que le verdict ne soit calculé — ce
+qui a permis d'ajouter le partage par mode et le contrôle d'instrument **sans repayer** les 2050 s.
+
+---
+
 ⭐⭐⭐⭐ **ET `109` A RETIRÉ SON FONDEMENT AU CHIFFRE QUI AVAIT DÉCLARÉ LE GRAAL MORT, SANS UNE
 LECTURE DE PLUS.** `102` et `107` publient « la matière porte deux pas confirmés » en comptant les
 pas confirmés **CONSÉCUTIFS DEPUIS LE DÉPART** — un compte **borné par la position du premier
@@ -334,6 +373,13 @@ dépassé. Il est conservé plus bas, sous son en-tête, parce que ses résultat
    question que rien n'a encore posée — *après k pas, combien de feuilles ai-je RÉELLEMENT
    franchies ?* — et sa réponse tranche la seule chose qui décide du graal : le retard est-il un
    **biais** (qui coûte `n`) ou un **jitter** de moyenne nulle (qui coûte `√n`) ?
+2. ⭐⭐⭐ **ET `110` A DÉJÀ RENDU LA MOITIÉ DE CE QUE CETTE COURSE DEVAIT DIRE, GRATUITEMENT.** Dans
+   le mode qui compte, le compte suit le pas sur six pas (+0.073 de dérive). ⚠ Ce qui reste demande
+   des marches **plus longues** et **indépendantes à chaque longueur** : les préfixes d'une même
+   marche sont emboîtés, donc corrélés, et six pas ne sont pas cent vingt. ⚠⚠ Et une question
+   NOUVELLE est née : la falaise du mode bas est-elle la matière ou l'instrument ? `110` montre que
+   l'observation ne les distingue pas, donc il faudrait un estimateur dont le plancher de fréquence
+   ne dépend pas de la longueur de la fenêtre — c'est une tranche d'instrument, pas de course.
 2. ⛔⛔ **ET `109` INVERSE CET ORDRE-LÀ.** Ce point disait : la portée en **couverture**
    (28 × 3 × 10, 84 marches, 5,35 h) plutôt qu'en **profondeur**, « parce qu'à budget égal elle
    rend trois fois plus de chutes ». ⭐ Or `109` a mesuré qu'un pas non confirmé **n'est pas une

@@ -5247,8 +5247,61 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/110_le_compte_suit_il_le_pas.md
+- **lignes** : 209
+- **nature** : RESULTAT
+  (le registre recalculé sur chaque PRÉFIXE des polylignes de `107`, une lecture par marche ; la
+  dérive, le partage par mode, et le contrôle qui demande si la falaise est celle de l'instrument.)
+- **résumé** : ⭐⭐⭐ **Dans le mode qui compte, le compte SUIT le pas** — **1.012** feuille par pas à
+  deux pas, **1.085** à six, dérive **+0.073**. ⭐⭐⭐ **Et les deux populations de `107` n'existent
+  pas à deux pas** : écart **+0.004** au plus court contre **+0.965** au plus long. ⚠⚠⚠ Sur
+  l'ensemble le compte s'effondre (**-0.809**, biais **-42.36** spires) mais c'est un **artefact de
+  mélange**. ⚠⚠⚠ Et **une dérive seule reproduit la falaise** du mode bas sur une périodicité
+  intacte (**0.128** contre **0.12**).
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **Le mode qui compte ne dérive pas sur six pas.** Il tourne autour de un et y revient, et
+    **9** de ses **22** marches baissent — à peu près la moitié, ce que fait le hasard. Sur cette
+    longueur, il n'y a rien à trancher entre biais et jitter : le compte suit le pas.
+  - ⭐⭐⭐ **Les deux populations de `107` NAISSENT entre le deuxième et le troisième pas.** À deux
+    pas les deux modes lisent exactement une feuille par pas (écart **+0.004**) ; à six l'un s'est
+    effondré (**+0.965**). La bimodalité n'est pas là au départ.
+  - ⚠⚠⚠ **La médiane de l'ensemble dit l'INVERSE de chaque mode**, et c'est la faute de `107` sous
+    un costume neuf : un mélange dont les PROPORTIONS changent avec la longueur. Publier le
+    **-42.36** spires sans le partage par mode aurait été publier une dérive de la matière qui est
+    un artefact de comptage.
+  - ⚠⚠⚠ **Une dérive SEULE reproduit la falaise, sur une périodicité intacte.** Le mécanisme est le
+    plancher de fréquence (`F_MIN = 0,35`) : une basse fréquence n'est exprimable qu'une fois la
+    fenêtre assez longue, et alors elle gagne l'argmax si elle est plus forte. L'observation ne
+    distingue donc PAS « la marche a quitté la feuille » de « une composante plus forte a masqué la
+    périodicité ». ⭐ Et le contrôle est à double sens : sans dérive, aucune falaise.
+  - ⭐⭐ **Une lecture par marche suffit à mesurer la dérive.** Les étapes gardées par `107`
+    reconstruisent la polyligne, et les échantillons d'un préfixe sont un sous-ensemble de ceux du
+    trajet complet : **56** lectures en **2050,6 s** là où refaire les marches coûterait des heures.
+  - ⚠⚠ **Le départ n'avait pas été gardé** — la leçon de `102` qui se rejoue — mais il est
+    re-dérivable (graine **613**) et la vérification ne coûte rien : le préfixe complet doit
+    reproduire le nombre publié par `107`. Mesuré **48/56**, écart max **0.0**.
+  - ⚠⚠⚠ **Le score est publié et jamais utilisé comme filtre**, parce que `98` et `108` le tirent
+    dans deux sens : hors fenêtre il s'effondre (donc il signale), et il est plus haut pour les
+    marches qui ne comptent rien (donc filtrer dessus écarterait les bonnes).
+  - ⚠ **Trancher biais contre jitter demande une course en PROFONDEUR** : les préfixes d'une même
+    marche sont emboîtés, donc corrélés, et le plafond de six pas de `107` est ce qui empêche de
+    poser la question.
+- **rétractations / corrections internes** :
+  - §5 : ⚠⚠⚠ **j'allais publier un biais de -42.36 spires comme une dérive de la matière.** C'est
+    le partage par mode qui l'a attrapé : l'ensemble s'effondre, les deux modes non.
+  - §7 : ⚠⚠⚠ **et j'allais lire la falaise du mode bas comme un fait de la matière** sans avoir
+    demandé si l'instrument la fabrique tout seul. Il la fabrique.
+  - §10 : ⛔ **vingt minutes de lecture perdues par un `KeyError` dans l'agrégation finale.** `107`
+    avait déjà le partage lecture / agrégation et son `--reagreger` ; ne pas l'avoir copié a coûté
+    la course. Corrigé à la cause, et la batterie porte le contrôle qui l'aurait attrapé.
+- **preuve de lecture intégrale** :
+  - l. 121 (après 58 % du fichier) : `## 7. ⭐⭐⭐ Une dérive seule reproduit la falaise, sur une périodicité intacte`
+  - l. 200 : `uv run python src/nappe/le_compte_suit_il_le_pas.py --verifier`
+
+---
+
 ### docs/109_un_pas_manque_nest_pas_une_chute.md
-- **lignes** : 174
+- **lignes** : 188
 - **nature** : RESULTAT
   (deux lectures d'un même critère sur les étapes gardées par `107` : le compte consécutif depuis le
   départ contre le compte total, et le test qui dit si un manque est une chute ; zéro lecture
@@ -5289,9 +5342,12 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     faux que franchir 0,71.
   - §5 : ⚠⚠ **ma première sonde du groupement utilisait un nul à taux commun** et déclarait le mode
     bas groupé à p = 0,04. Le groupement se teste à taux égal.
+  - suite : ⭐⭐⭐ **`110` a posé la question que ce document désignait** et rendu que *dans le mode
+    qui compte, le compte SUIT le pas* (1.012 à deux pas, 1.085 à six) — et que les deux populations
+    de `107` n'existent pas à deux pas.
 - **preuve de lecture intégrale** :
-  - l. 98 (après 56 % du fichier) : `## 5. ⚠⚠ Le nul fait la décision, et ma première sonde l'a prouvé en se trompant`
-  - l. 166 : `uv run python src/nappe/un_pas_manque_nest_pas_une_chute.py --verifier`
+  - l. 98 (après 52 % du fichier) : `## 5. ⚠⚠ Le nul fait la décision, et ma première sonde l'a prouvé en se trompant`
+  - l. 180 : `uv run python src/nappe/un_pas_manque_nest_pas_une_chute.py --verifier`
 
 ---
 
@@ -7216,7 +7272,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 7197
+- **lignes** : 7292
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)
