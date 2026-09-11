@@ -16,30 +16,12 @@
 | ce que la campagne a coûté | trois papiers lus deux fois (résumé puis intégral ; « pour se situer » puis « pour refaire »), 46 pages du papier de référence, un commit épinglé récupéré, ~1 semaine de travail net perdue en outils qui existaient (`67` §7) |
 | réponse au 11 septembre | **le domaine publie les mécanismes et les questions ; ce qui résiste est la mesure, sa répétition et son incertitude** (`71`). Sur 17 résultats de tête audités : 6 déjà connus, 11 partiels, 0 intact, 0 sans valeur. Sur 98 outils : 22 existaient, 50 en partie, 27 sans équivalent. Et le référent d'identité que le graal exige était **dans les noms de fichiers**, lu par personne (`73` §4, `74` §3) |
 
-## 1. Vingt faits qui tiennent aujourd'hui
+## 1. Les faits — `REGISTRE_faits.tsv`
 
-| # | fait | valeur | statut | source |
-|--:|---|---|---|---|
-| 1 | un rouleau scellé a été déroulé et lu en entier : `PHerc1667` | 31 spires, 1 231 cm², 22 colonnes, 8 papyrologues (arXiv 2606.29085, 27 juin 2026) | établi (lu intégralement) | `27` §3, `68` |
-| 2 | le coût humain de ce déroulage | **~25 h par spire, ~775 h** (p. 28 : *« wrap by wrap copy tool combined with ~25 hours per wrap of manual annotation »*) ; le Grand Prize tolère 8 h | établi | `00` §0, `27` §3, `68` §1 |
-| 3 | ce que ces heures paient | un **pinceau** (`ApprovalMaskBrushTool.cpp`) qui peint *« regions judged geometrically consistent with a single sheet »* ; le masque gouverne `GrowPatch::make_approved_mask` ; écrire `approval.tif` à côté de `x/y/z.tif` **est** l'intégration | établi | `68` §1 |
-| 4 | aucun taux d'erreur de traçage n'est publié ; « sheet switches » apparaît une fois | le seul rempart est humain | établi | `27` §3, `00` §0 |
-| 5 | le spiral fitting garantit une nappe, pas *la* nappe | WJF **3,20 %** (2,77–3,90 sur les ablations) ; *« the surface sometimes wanders between two true windings »* ; pertes L1 → médiane | établi ; `00` §2 v1 rétracté | `27` §2 |
-| 6 | personne n'a comparé le taux de saut de spire de deux méthodes | WJF et MRWD non calculables pour Thaumato | établi | `27` §2 |
-| 7 | la voie topographique de l'encre exige ~1 µm | DICE ≥ 0,70 seulement ≤ 1,02 µm ; effondrement à 0,029 dès 3,40 µm ; leave-one-papyrus-out 0,691 | établi ; « 4 µm » rétracté | `27` §1 |
-| 8 | les treize rouleaux du prix sont à 8,64–9,36 µm, soit F = 0,39 : un scan de **repérage** | 53 % du régime de production (F = 0,73) ; du mauvais côté de F **et** de D (1,2 m) ; F = 0,73 à 9,362 µm demanderait D = 4,3 m | établi | `68` §3 · `encre/nombre_de_fresnel.py` |
-| 9 | ce que F mesure vraiment dans les volumes publiés | le noyau de Paganin en pixels (3,5 contre 7,0) ; le régime du prix perd une **bande** (4,8–19 µm) plus un flou ∝ D, pas une atténuation ; 9,362 µm est un `binmean2` d'une acquisition à 4,681 | établi (calculé) | `69` §1.1–1.2 |
-| 10 | la vérité terrain existe au régime du prix, et la case est vide | **103 cases** (0139 38, 0500P2 38, 0814 19, 0343P 8) ; `volume_transforms` relie repérage et production sur 6 objets | établi | `68` §4 · `encre/la_case_vide.py` |
-| 11 | six vérificateurs existent et s'arrêtent tous au même endroit | `windcheck`, `tifxyz-doctor`, `winding-sync`, `winding-ruler`, `spiralcheck`, `herculaneum-scroll-tools` : *« whether removing it improves ink […] has not been measured »* | établi | `00` §4–5 |
-| 12 | le pas d'enroulement est invariant sur la collection | 187 µm médian, IQR 181–193, 35/36 rouleaux entre 160 et 210 (`winding-ruler`) ; les treize ont **60 à 129 spires** | établi | `69` §0 |
-| 13 | six de nos quatorze résultats étaient déjà publiés, huit à moitié, zéro nouveau | énergie, vérité terrain, fold, α-fenêtre, extension, graine | établi | `66` §2 |
-| 14 | et un est **contredit** : l'énergie | 116 keV est dans la fenêtre optimale publiée à 8 µm (100–120 keV) ; notre 114,8 % venait d'un témoin de 2023 | réfuté | `66` §3 |
-| 15 | 22 de nos 98 outils existaient déjà ; le mode de défaillance est le **vocabulaire** | *winding pitch*, *linearity*, *subvoxel re-centering*, *CT support*, *sheet consistency* | établi | `67` §1–2 |
-| 16 | ce qui n'a aucun équivalent dans 35 dépôts | la statistique (0 `binomtest`, 0 permutation, 0 puissance), le juge en aveugle, le test de convergence, l'étage polaire | établi | `67` §5, `00` §10.1 |
-| 17 | trois résultats de tête de l'article : 0 intact | tirage : mécanisme dans le code (`srand(clock())`) ; budget : moitié propreté publiée par `windcheck` ; pavage : prémisse et discriminant antérieurs, le recensement survit | établi | `71` |
-| 18 | l'article condense 21 des 48 documents de résultat | 22 procédé, 27 dehors dont 17 dans le périmètre ; l'arc excision (`03`–`07`) absent | établi | `70` §1–3 |
-| 19 | le référent d'**identité** est publié dans les noms de segments | **101 segments indexés** sur 3 rouleaux ; 81 spires consécutives (`0139` 37, `0172` 44) ; `PHercParis4` 58 plages | établi | `73` §4, `74` §3 · `excision/les_indices_de_spire.py` |
-| 20 | le rouleau qui porte à la fois le référent et une carte dense | `PHerc0139` (37 spires, 91 fenêtres, queue 4,4 %, transformé au régime du prix) — écarté par `73` parce que son fichier s'appelait `_TEMOIN_` | établi | `74` §4 |
+**20 faits** portent cette campagne, un par ligne dans
+`REGISTRE_faits.tsv` (`R6-F01` et suivants) : l'énoncé, sa valeur, son statut, la
+source qui le prouve et le producteur qui le recalcule. Le §2 les cite par leur
+identifiant.
 
 ## 2. La campagne en six mouvements
 
@@ -178,90 +160,20 @@ non citée par le dépôt ; `windcheck`, TIFXYZ Doctor, TAUIL (résultat négati
 1 000 $ pièce. Appendice A des *Open Problems* : le *rollout drift* des traceurs neuraux, mesuré
 indépendamment par R4.
 
-## 4. La table des antériorités
+## 4. L'antériorité — `REGISTRE_anteriorite.tsv`
 
-Chaque ligne : *résultat ou outil du dépôt · ce que le domaine avait · statut*. C'est la graine de
-`REGISTRE_anteriorite.tsv` ; les références complètes sont au §9.
+**30 lignes** : un résultat du dépôt, ce que le domaine avait publié en face, et
+le statut de la rencontre (`A01` et suivants).
 
-| résultat du dépôt | antériorité | statut |
-|---|---|---|
-| énergie du faisceau comme axe (`21`, `58`) | *Open Problems* « three coupled scan parameters » ; Angelotti 2026 Ext. Data Fig. 2 ; fenêtre 100–120 keV à 8 µm | **publié, et contredit** (`66` §3) |
-| aucune vérité terrain sur rouleau | `ink-labels-README.md` : *« where no infrared ground truth exists »* | publié |
-| fold de validation du modèle GP | `fragments=['20231210121321']` dans `villa/ink-detection` ; nom du checkpoint dit autre chose | publié ; **indécidable** ici |
-| α suit la fenêtre | `windcheck/engines/atlas_query.cpp`, `selfgap.py` | publié |
-| étendre une nappe (`43`, `44`) | workflow officiel `35_segmentation.md` (grandir / corriger / recommencer) | publié ; notre chaîne omet « corriger » |
-| la graine décide (`25`) | `vesuvius-automesh/render_driver.py` ; `lasagna/volume_scale.py` contient `niveau_du_maillage.py` | publié |
-| dispersion par fenêtre (`64`) | `winding-ruler` : *« it is the variance, not the mean, that decides usability »* | partiel : l'ICC 0,030 et le n requis sont libres |
-| Hanley-McNeil, bootstrap par grappes (`63`) | `tifxyz-doctor` ; `windcheck` : *« patches are not independent draws »* | partiel : aucun IC sur une AUC d'encre dans 35 dépôts |
-| témoin négatif α (`46`) | surface en travers chiffrée (`vesuvius-automesh`) ; « null control » (`windcheck/selfgap.py`) | partiel : faire tourner un détecteur d'encre dessus est libre |
-| juge modèle de langue à condition vierge (`09`) | question posée depuis 2023 ; le domaine exclut l'outil (*« No OCR or language model was used »*) | partiel : le témoin dans l'image et `vierge \| vierge` sont libres |
-| `step_size` du traceur (`26`) | 20 est le défaut ; `GrowPatch.cpp` lève une exception sinon | publié (réglage d'usine) |
-| le traceur est un tirage (`35`) | `srand(clock())`, `mt19937(random_device)` ; `VC_GROWPATCH_RNG_SEED` | partiel : 78 exécutions, la bascule de verdict, sont libres |
-| propreté = artefact de budget (`25`) | `windcheck/docs/FULL-CORPUS.md`, 278 traces, mot pour mot | **publié** ; la moitié stabilité est libre |
-| les segments ne pavent pas (`44`) | tutoriel : *« big pile of small pieces »* ; `QuadSurface::overlap()` 2 voxels | partiel : le recensement de 105 paires ; recadré par `76` §7 |
-| écart entre spires par rouleau (`16`) | `winding-ruler/atlas_collection_v2.csv` : 36 objets, niveau 1 | **publié** ; notre outil au niveau 2 est biaisé (−10,3 %) |
-| interligne (`typographie.py`) | `villa/…/get_ink_metrics.py`, fenêtres de 512 px | publié |
-| profil le long de la normale (`measure.py`) | `windcheck/bench/normal_profile.py`, 53 points | publié |
-| plafond d'occupation, planéité (`trouver_graine.py`) | `automesh/select_regions.py:27` (`max_occ = 0.50`), `khartes/st.py:119` | publié |
-| appariement des volumes (`apparier_volumes.py`) | `metadata.min.json` le déclare ; `vesuvius-catalog` | publié |
-| l'axe erre (`laxe_nest_pas_une_ligne.py`) | ombilics publiés : Scroll 1 (`dl.ash2txt.org`), 5 rouleaux (bucket, `78`) | publié ; notre « seul » rétracté |
-| garantie topologique ≠ sémantique | Henderson 2025 : WJF 3,20 %, L1 → médiane | publié ; c'est **lui** qui corrige `00` |
-| aucun seuil ne sépare les feuilles (`79`) | le rendu officiel empile 65 échantillons, pas d'isosurface (`68` §2) | convergent |
-| nombre de Fresnel ordonne les verdicts (`68` §3) | les verdicts sont des auteurs ; la mise en formule est du dépôt ; `69` §1.1 la recadre (Paganin) | partiel |
-| 103 cases vides (`68` §4) | `volume_transforms` publiés ; personne ne les a remplies | **libre** |
-| déterminisme du vérificateur | doc officielle + `windcheck` (9 configurations) | publié ; argument récupéré pour §5.1 |
-| la statistique (permutation, puissance, IC, FDR) | zéro occurrence dans 35 dépôts | **libre** |
-| le test de convergence, l'étage polaire, 12 outils de `depot/` | aucun équivalent | **libre** |
-| référent d'identité = indices de spire | dans les noms depuis toujours ; *Open Problems* : *« relative winding number annotations seem to have a great impact »* | publié comme donnée, **non lu** avant `73` |
-| déroulage par patches, détection d'incompatibilités 3D | **W. Stevens, août 2026, 20 000 $** (`1667`, 365 cm²) | publié ; **non cité** par le dépôt avant `PRIX.md` |
-| dérive de rollout des traceurs | *Open Problems* App. A : *« small errors compound across steps »* | publié en prose ; mesuré par `104`–`111` |
-| résultats négatifs payés | TAUIL (juillet, 1 000 $ : *negative-result analysis*) | le dépôt en a une dizaine, jamais soumis |
+## 5. Les contradictions — `REGISTRE_contradictions.tsv`
 
-## 5. Contradictions et corrections internes à la campagne
+**20 disputes** tranchées pendant cette campagne,
+une par ligne (`R6-C01` et suivants) : *A a dit · B a dit · C tranche · statut*.
 
-| A | B | C | statut |
-|---|---|---|---|
-| `00` §2 (v1) : le spiral fitting est immunisé au sheet switching | `27` §2 : WJF 3,20 %, « wanders between two true windings » | correction écrite dans `00` le 08-19 | tranché |
-| `27` (v1) : cible « 4 µm », citation paraphrasée | `27` §1 : 1,02 µm, verbatim | lecture intégrale | tranché ; règle : un résumé dit ce qu'un papier revendique |
-| `27` §2 : AD 0,0568 vs 0,1567 (×2,76) | Thaumato aplatit avec SLIM → 0,0933 (×1,68) | lecture du texte | tranché |
-| `00` §4 : « six vérificateurs, saturé » ; §9.3 : « n'existait dans aucun des six » | `67` : quatre équivalents dormaient dans leur code | audit des outils | tranché : juste sur les conclusions, faux sur le contenu |
-| `66` : « nous n'avons rien découvert, juste des instruments » | l'article l'écrivait déjà (*« It measures »*) ; remarque de l'auteur | `66` §6 | tranché ; `deja_dit.py` |
-| `66` recommandation : citer cinq dépôts | ils l'étaient (`windcheck` dans 20 docs) | vérifié le jour même | tranché ; auditer dedans avant dehors |
-| (moi) : `selfgap.py` porte le test de convergence | `67` §6 : il mesure le détecteur, pas l'objet | audit | tranché ; s'accuser trop vite est aussi peu fondé |
-| `68` §3 : F décide si la frange est résolue | `69` §1.1 : Paganin supprime les franges ; F = noyau en pixels ; bande perdue | calcul | tranché ; le rang de F tient, son sens change |
-| `69` §6 : candidat `PHerc0826` (60 spires) | `73` §1 H6 : le pire des treize par la carte dense (22,8 %) | carte dense | tranché |
-| `73` §1 H2 : courriel ESRF sans expérience | `73` (09-04) : `69` §1.2 chiffrait 1,3–1,5× ; C3 mesure 1,01 | mesure | tranché : courriel non justifié |
-| `73` §2.3 : 113 µm = face à face (+ épaisseur) | `74` §2 : `43` — le rayon peut rentrer dans sa nappe ; 116 → 102 selon le réglage | source | tranché : valeur d'un réglage |
-| `73` §4 : 57 segments, 2 rouleaux | `74` §3 : 101 segments, 3 rouleaux, 81 consécutives ; Paris4 58 plages | `les_indices_de_spire.py` | tranché |
-| `73` §3.3 : extraire sur `0800` ou `1447` | `74` §4 : zéro indice ; `PHerc0139` porte les deux | mesure | tranché ; réserve : la queue ne prédit pas le traçage (`55`) |
-| `73` §2.3 appuie sur l'atlas 172,8 µm | `74` §2 : 10 voxels entiers, IQR 121–250 ; appui = `16` (156) | lecture du CSV | tranché |
-| `70` §5 : écrire l'arc excision | rejoué le jour même : la proximité baisse de 22–50 % | `07` refondé ; `75` D1 : `07` confirmée (0/10 au-delà du bruit) | tranché |
-| `27` §4 : « corrigés ci-dessous » | rien ne suivait ; les corrections sont dans `06` | lecture | tranché (renvoi faux) |
-| `71` : la doc de VC affirmerait « aucun seuil de distance ne sépare » | citation non retrouvée à la source | — | **ouvert** ; non citée |
-| `66` : fold GP = `20231210121321` | nom du checkpoint : `20230702185753` | mesurer le modèle sur les deux segments | **ouvert** |
-| `32` : v3 lue | une v4 existe (20 mai 2024) | — | ouvert (non lue) |
-| `PRIX.md` : Stevens 20 000 $ sur la question de R4 | aucun document du dépôt ne le cite | — | à lire, à citer |
+## 6. Les lois — `REGISTRE_lois.tsv`
 
-## 6. Les lois que la campagne a payées
-
-1. **Chercher le concept, pas le nom** — `66` §1, `67` §2 : un `grep` sur nos mots français ne rend
-   rien. La table de vocabulaire tient en cinq lignes et aurait coûté une heure.
-2. **Un résumé dit ce qu'un papier revendique, pas ce qu'il mesure** — `27` (v1 → v2 : 4 µm, une
-   paraphrase, une affirmation réfutée par un nombre).
-3. **Un papier se lit deux fois** — pour se situer (`27`), pour refaire (`68`). Les quatre résultats
-   de `68` étaient invisibles à la première lecture.
-4. **Les idées ne sont pas gardées** — `66` §6 : trois fois dans une session le cadrage « instrument »
-   présenté comme une trouvaille ; remède outillé (`deja_dit.py`).
-5. **Auditer dedans avant dehors** — la recommandation phare de l'audit était déjà faite (`66` §6 bis).
-6. **Une citation qu'on ne vérifie pas est une citation qu'on invente** — `94` §1 (R4), `71` §4 (une
-   contre-position non retrouvée n'est pas citée), `74` (chaque revendication rejouée à la source).
-7. **L'angle mort d'un serveur** — l'ombilic « seul sur Scroll 1 » (`67` §4, `78`), les 65 couches de
-   `44` (`77` §10) : interroger une vue du corpus et conclure sur le corpus.
-8. **Le domaine publie les mécanismes et les questions ; ce qui résiste est la mesure, sa répétition
-   et son incertitude** (`71`). La formulation juste : *rendre mesurable et rejouable une limite que
-   le prix énonce en prose* (`66` §6 bis).
-9. **Une donnée peut être publiée et non lue** — les indices de spire (`73` §4), les
-   `volume_transforms` (`68` §4), les cinq ombilics (`78`).
+**9 mécanismes** que cette campagne a payés
+(`R6-L01` et suivants), rendus en prose groupée dans `FILS_ROUGES.md`.
 
 ## 7. Ce que ça dit des prix
 
@@ -279,25 +191,10 @@ Chaque ligne : *résultat ou outil du dépôt · ce que le domaine avait · stat
   `114`, les audits `66`–`67`, `ce_que_les_serveurs_publient`). La soumission est hors périmètre
   par décision de l'auteur (`75` §E) ; la matière, elle, est là.
 
-## 8. Portes ouvertes de R6
+## 8. Les portes ouvertes — `REGISTRE_portes.tsv`
 
-- **Lire et citer les lauréats** : W. Stevens (déroulage par patches, août 2026), B. Hamm (labels
-  plus proches de la vraie surface), D. Russo (14 checkpoints à 9 µm), pscamillo (profondeur du
-  modèle 9 µm), Miller & Müller (First Letters sur `0826`, échecs publiés) — aucun n'est dans
-  `tools/repos.tsv` ni cité (`PRIX.md` §4).
-- **Cloner `vesuvius-repro` (TAUIL)** et récupérer le PDF OverthINKingSegmenter (`66` §5).
-- **Le voisin conceptuel non lu** : l'assignation de *winding angle* de ThaumatoAnakalyptor — est-ce
-  déjà un dépliage à résidus ? (`69` §7).
-- **Miroiter le Discord et les discussions Kaggle 2023** (`66` §5).
-- **Le fold du modèle du Grand Prize** : mesurer sur les deux segments candidats (`66` §3).
-- **EduceLab v4** (mai 2024) non lue ; la « contre-position pavage » non retrouvée (`71` §4).
-- **La littérature académique** : Obuchowski 1997 (ROC groupées), analyse de documents,
-  hallucination des modèles vision-langage (`66` §5) ; les emprunts de `69` §5 (InSAR, Wu & Zhong,
-  Li et al. 2006) restent des références nommées, aucune n'a été mise en œuvre.
-- **Le second papier** (encre et régime de scan : `08`, `10`, `58`, `59`, `68` §3–4) et **la note
-  courte des négatifs** (`17`, `26`, `36`, `37`, `62`) — `70` §3.
-- **Le niveau 2 de `espacement_spires.py`** contredit par `winding-ruler` (−10,3 %) : outil vivant,
-  à repasser au niveau 1 (`67` §4, `70` §4).
+**9 portes** que cette campagne laisse
+(`R6-P01` et suivants), classées par prix dans `PORTES_OUVERTES.md`.
 
 ## 9. Sources pour un article
 

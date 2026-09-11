@@ -1,0 +1,21 @@
+{
+ "REGISTRE_faits.tsv": 130,
+ "REGISTRE_contradictions.tsv": 231,
+ "REGISTRE_lois.tsv": 91,
+ "REGISTRE_portes.tsv": 73,
+ "REGISTRE_anteriorite.tsv": 30,
+ "par_statut": {
+  "établi": 122,
+  "réfuté": 4,
+  "borné": 2,
+  "rétracté": 2
+ },
+ "defauts": {
+  "lignes_mal_formees": [],
+  "statuts_inconnus": [],
+  "faits_sans_source": [],
+  "identifiants_doublons": [],
+  "tables_revenues": []
+ },
+ "vues_perimees": []
+}

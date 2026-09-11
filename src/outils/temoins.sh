@@ -1371,6 +1371,9 @@ run "chemins des scripts"      uv run --project "$ROOT" python "$ROOT/src/depot/
 run "chiffres sans record"     uv run python "$ROOT/src/depot/chiffres_sans_record.py" --verifier
 run "mesures videes"          uv run python "$ROOT/src/depot/mesures_videes.py" --verifier
 run "fiches a jour"           uv run python "$ROOT/src/depot/fiches_a_jour.py" --verifier
+# ⚠ Les cinq registres de docs/rapports/ sont DERIVES des six rapports : ce controle dit
+# que la derivation tient, pas que les fichiers rendus sont a jour (ca, c est `--ecrire`).
+run "registres derives"       uv run python "$ROOT/src/depot/registres.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

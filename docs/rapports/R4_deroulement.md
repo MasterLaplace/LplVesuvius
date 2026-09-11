@@ -19,59 +19,12 @@
 | ce qui a été payé en réseau | `102` 7 h · `107` 3,53 h · `110` 2050 s · `111` 1158 s · `106` 2393 s · `103` 25 min · `113` en cours (~7 h) — chaque fois pour relire les mêmes voxels, jusqu'à ce que `111` garde les profils |
 | réponse au 11 septembre | **Personne encore.** Ce que la campagne a établi est *où* l'humain travaille (l'identité de la feuille, pas la qualité locale), *contre quoi* on ne peut pas le juger (le maillage humain, qui bouge d'une demi-feuille selon qui le tient), et *ce que la matière donne sans lui* (un pas et une direction, confirmés à 57 % par pas, dont on ne sait pas encore la portée : `113`) |
 
-## 1. La réponse courte — vingt faits qui tiennent aujourd'hui
+## 1. Les faits — `REGISTRE_faits.tsv`
 
-| # | fait | valeur | statut | source · producteur |
-|--:|---|---|---|---|
-| 1 | `w` compte du centre vers l'extérieur, sur les deux rouleaux indexés | 95,0 % (`0139`), 95,1 % (`0172`) | établi | `76` §0 · `excision/le_sens_des_indices.py` |
-| 2 | écart inter-feuilles **sans traceur**, un pas d'indice = une feuille | 154,1 µm (`0139`), 147,4 (`0172`) ; linéaire en Δw (×2,00, ×2,98, ×5,08) | établi | `76` §3 |
-| 3 | le référent humain a des défauts : deux indices pour une même surface | `w045`/`w046` à 0,0 µm ; 3 paires sur 79 (~4 %) | établi | `76` §4, confirmé `77` §3 |
-| 4 | un champ d'enroulement sépare « même feuille » de « une feuille sautée » **sur `0139`**, pas sur `0172` | 0139 : +0,230 vs 0,753 ; 0172 : recouvrement (+0,634 vs −0,067) ; jamais sur une tranche isolée | établi (par rouleau) | `77` §2, §7 · `excision/le_champ_denroulement.py` |
-| 5 | la cause sur `0172` : un **trou angulaire** 330–360°, de la matière absente | 3 points/cellule contre 286 ; sans ces 6 secteurs → sépare ; 6 secteurs sains → non | établi | `77` §8 · `le_trou_angulaire.py` |
-| 6 | la surface publiée n'est pas sur la feuille : elle serpente | 0,121–0,146 feuille sur trois rouleaux (17,8–23,8 µm) | établi | `77` §10, §12 · `la_surface_et_la_feuille.py` |
-| 7 | l'axe seul ne fait pas un nombre d'enroulement ; la forme des spires vaut ×130 | Archimède 11,36 feuilles d'erreur, champ 0,088 | réfuté (modèle axe+pas) | `78` §4 · `laxe_ne_suffit_pas.py` |
-| 8 | aucun seuil d'intensité ne sépare les feuilles | plus gros morceau 93–100 % contre 14,1 % attendu, 6 seuils, 2 régions | établi | `79` · `rendu/topologie_du_volume.py` |
-| 9 | **les 13 rouleaux du Grand Prize publient 0 rang de spire** ; 11 publient 0 segment | Paris4 120, 0172 44, 0139 37, 1667 14 (suite), 0500P2 13 | établi | `81` §1 · `depot/les_spires_consecutives_publiees.py` |
-| 10 | toutes les portées publiées avant le 6 septembre étaient **censurées** par le corpus (plafond 6 = spires 10→11 à 7,4 feuilles) | oracle = plafond sur 5/5 ancres ; borne réelle inconnue, ≥ 6 | borné | `82` · `nappe/le_mur_du_corpus.py` |
-| 11 | `PHercParis4` est la seule vérité de terrain du goulot | 92 franchissements dans une maille ; 0 partout ailleurs ; plus longue bande 18 < 31 | établi | `84` · `depot/une_surface_combien_de_spires.py` |
-| 12 | le coût humain se compte en **longueur de feuille** : ~360 mm par passe | 362 mm médian (273–460) sous l'axe courbe | établi | `85` §2, révisé `90` §3 |
-| 13 | **l'axe est une courbe** : un repère cylindrique global se trompe de ~2 cm | 12,6 mm en x, 19,8 en y sur 144 mm de z ; 11,6 mm hors de sa droite = 63,9 feuilles | établi | `90` · `nappe/laxe_est_une_courbe.py` |
-| 14 | pas de `PHercParis4` par deux instruments indépendants ; demi-feuille établie | 164 µm (transferts humains) vs 182,4 (atlas `winding-ruler`) ; demi-feuille 82–91 µm | établi | `91` §3, `86` §3 |
-| 15 | **deux humains sur la même matière divergent de plus d'une demi-feuille, partout** | 121,7 / 110,9 / 106,6 µm par tiers ; 34 % des points à > 1 feuille ; ρ(rayon) = +0,081 | établi | `97` · `nappe/deux_humains_sur_la_meme_matiere.py` |
-| 16 | la normale de la matière est à **34,6°** du rayon (spirale : 0,09°) ; le maillage humain la suit à 13° | 34,59° (tenseur, volume seul) recoupe 34,06° (maillage) | établi | `101` §2, `100` §2 |
-| 17 | la matière n'est **pas** un empilement localement parallèle à l'échelle sondée (346 µm) | résidu 19,3 µm contre 0,72 sur pile fabriquée (×22,3) | établi | `106` §4 · `nappe/le_pas_selon_la_direction.py` |
-| 18 | le critère « un pas confirmé » accepte de 0,68 à 1,38 feuille ; le sélecteur de production lisait **+18,4 %** trop haut | 120 pas confirmés = 82 à 166 spires ; brut 164,3 µm vs calibré 194,6 | établi | `104` §3, `105` §6 |
-| 19 | un pas non confirmé n'est **pas** une chute ; la « portée » publiée était un run consécutif | confirmés médiane 4,0/6 contre run 1,0 ; manques non groupés (p = 0,28) | rétracté (la portée), établi (le test) | `109` · `nappe/un_pas_manque_nest_pas_une_chute.py` |
-| 20 | dans le mode qui compte, **le compte suit le pas** ; la « falaise » du mode bas était celle de l'instrument | 1,012 → 1,085 feuille/pas ; bande bornée : mode bas −0,888 → −0,068 | établi | `110` §5, `111` §5 |
-
-Et le seul résultat de la campagne qui rouvre une cause éliminée : brancher l'indice d'enroulement dans
-le coût du tracker polaire ne rachète que **0,5 % du chemin** — un faux champ tourné prend 83 % du
-gain (`114`, `excision/le_cout_qui_connait_la_spire.py`, statut **réfuté**).
-
-### 1 bis. La campagne `0500P2` — dix faits de plus (`75` §C, 5–7 septembre)
-
-Le premier dérouleur du dépôt a tourné sur les **13 spires publiées** de `PHerc0500P2`, deux jours
-avant que `81` ne montre que ce corpus plafonne à 6 bras. Ses résultats sont mesurés sur **un pas**
-(de la spire *k* à la spire *k* + 1, une spire publiée pour cible) puis sur une **marche** (repartir
-de sa propre prédiction). Producteurs dans `src/nappe/`, figures dans `src/figures/figure_<nom>.py`.
-
-| # | fait | valeur | statut | source · producteur |
-|--:|---|---|---|---|
-| 21 | un écart le long de la **normale** de la surface prédite tombe près de la spire suivante : la primitive du déroulement | 60 µm de la cible (ne rien faire 135 ; deux écarts 151) ; 11/12 paires ; le même sens pour les 12 | établi | `75` §C (l. 1606) · `le_pas_normal_atteint_la_spire.py` |
-| 22 | un dérouleur **aveugle** (normales seules) perd la feuille au **deuxième tour** | erreur 52 / 102 / 135 / 230 / 689 µm à 1 / 2 / 3 / 6 / 12 tours ; dérive 53 µm par tour = 39 % d'une feuille ; un cinquième est un biais de longueur (135,5 nominale, 108,4 ajustée) | établi | `75` §C (l. 1647, 1698) · `derouler_par_le_pas_normal.py`, `la_derive_est_elle_un_biais.py` |
-| 23 | le raccrochage à la matière (volume brut, gabarit du profil de départ) gagne sur **un pas** et **ne survit pas à un tour** | 33,3 µm contre 46,7 ; à l'itération l'aveugle (+22,3 µm/tour) bat tous les raccrochages ; « un décalage unique déroule » **rétracté** (la boîte était un choix de coût : −19,5 / +67,3 / +56,3 selon sa taille) | établi ; rétracté | `75` §C (l. 1791, 1886, 1905) · `le_raccrochage_a_la_matiere.py`, `derouler_en_raccrochant.py` |
-| 24 | **deux ancres** qui encadrent, pondérées par les bras, valent mieux qu'une ; la troisième ne paie pas | 35,9 µm (une ancre 42,7 ; « meilleure des deux » 50,3) ; mécanisme = un biais qui s'annule (+45,3 / −82,8) ; 2 → 3 → 4 ancres : 36,7 → 35,5 → 35,3 ; « la dérive accélère » **rétracté** | établi (c'est une borne à 2 bits de supervision, pas une méthode) | `75` §C (l. 2164, 2303) · `derouler_des_deux_bords.py`, `combien_dancres.py` |
-| 25 | l'itération ne paie que de la **nappe** : un seul grand pas fait la même erreur avec 48 % de cellules en plus | bras 4 : 132,1 contre 134,1 µm ; 996 contre 671 cellules ; le premier pas (44,2 µm) est le poste | établi | `75` §C (l. 2425) |
-| 26 | la **géométrie ne refuse rien** : l'oracle dans la même fenêtre prend 23,8 µm ; le raccrochage lit très peu | −23,8 µm, 7/7, IC [−25,2 ; −21,1] ; ρ(raccrochage, oracle) 0,076 sur 5 442 cellules ; 16 gabarits essayés : le meilleur vaut **0,9 µm** sur les 30,7 qui séparent le déployé de l'oracle | établi (le plus solide de la campagne) | `75` §C (l. 2665, 2770, 2817) · `lecart_apparie.py`, `le_gabarit_lu_ailleurs.py` |
-| 27 | le critère **déployé** bat l'immobilité sur un pas, et tout son gain vient du **voisinage** ; la lissité est épuisée au 3×3 ; la moitié du coût d'un pas est un plancher de **direction** | 37,5 contre 43,6 µm (7/8, [−2,2 ; −1,9]) ; corrélation seule −0,2 ; oracle 20,0 ; plancher 18,2 µm = 48,5 % ; rotation d'ensemble −0,1 µm ; surfaces lisses par construction pires (+3,5 à +4,0) | établi ; « tourner le pas » et « lisse par construction » réfutés | `75` §C (l. 2932, 3045, 3137, 3232, 3313) · `le_critere_du_raccrochage.py`, `loracle_est_il_atteignable.py`, `le_champ_lisse_par_construction.py` |
-| 28 | **sur une marche**, le raccrochage déployé porte **moins loin** que le pas normal seul ; lisser la **nappe** entre deux bras achète un bras sans réglage | portées 2 / 4 / **5** (raccrochage / pas normal / pas normal + nappe lissée), borne 6, corpus 6 ; −6,7 µm, 7/8, [−11,0 ; −2,4] ; le gain tient sur 5 ancres (−3,1 à −8,6), le bras gagné sur une seule | établi (le gain) ; borné (le bras) | `75` §C (l. 3453, 3616, 3664) · `la_portee_du_raccrochage.py`, `la_portee_tient_elle_ailleurs.py` |
-| 29 | le **pli** et l'**obscurité** disent à une cellule qu'elle a tort sans regarder la cible, et le lissage retire le premier signal ; refuser ses plis ne gagne **exactement rien** sur les cellules communes | pli : −43,2 µm à moitié gardée chez le raccrochage (8/8), +7,1 chez le pas normal lissé ; obscurité : −13,1 (7/8) chez le lissé ; refus : écart apparié +0,0 [0,0 ; 0,0], part gardée 0,453 | établi | `75` §C (l. 6268, 6343, 6458) · `la_cellule_sait_elle_quelle_a_tort.py` |
-| 30 | le froissement du pas normal **n'est pas distribué** (0 → 33 % de cellules pliées pendant que la médiane reste à ~20 µm) ; lisser en retire 80 % ; la borne se froisse aussi (63 %) en gardant 17–22 µm | pliées au bras 8 : 32,8 / 6,5 / 96,6 / 62,8 % (pas normal / lissé / raccrochage / oracle) ; « combien lisser » : −26,0 µm hors échantillon 4/5, mais l'ancre vivante passe de 5 à **0** bras → porte fermée par défaut | établi ; borné | `75` §C (l. 6513, 6610) · `ou_la_nappe_se_froisse.py`, `combien_lisser_la_nappe.py` |
-
-Et la voie de l'**orientation** est fermée par la donnée : les fibres sont publiées pour `0139`, `0332`,
-`1299`, `1451`, `PHercParis4`, les spires pour `0500P2` seul — intersection vide sur les deux serveurs
-(`75` §C l. 3388, `ou_vit_le_champ_de_fibres.py`). C'est ce qui a désigné `PHercParis4` (fibres +
-`ink-3d`) comme objet, avant que `81`–`84` ne le confirment par le goulot.
+**30 faits** portent cette campagne, un par ligne dans
+`REGISTRE_faits.tsv` (`R4-F01` et suivants) : l'énoncé, sa valeur, son statut, la
+source qui le prouve et le producteur qui le recalcule. Le §2 les cite par leur
+identifiant.
 
 ## 2. La campagne en six mouvements
 
@@ -79,7 +32,7 @@ Et la voie de l'**orientation** est fermée par la donnée : les fibres sont pub
  M1 le référent          76 77 78 79 · 75 A1–A3        3–5 sept.
  M1′ le dérouleur aveugle 75 §C (0500P2, 13 spires)     5–7 sept.
  M2 le corpus est le mur 81 82 83 84 85 86             6–7 sept.
- M3 ce que l'humain fait 90 91 92 93 94 95 96 97        8 sept.
+ M3 ce que l'humain `R4-F90` 91 92 93 94 95 96 97        8 sept.
  M4 interroger la matière 98 99 100 101 102 103        9–10 sept.
  M5 l'instrument s'audite 104 105 106 107 108 109 110 111 112   10–11 sept.
  M6 rouvrir, et lever le plafond 114 · 113 (en cours)  11 sept.
@@ -204,7 +157,7 @@ critère d'arrêt observable sans cible. → désigne `PHercParis4` ; rejoint pa
 le voxel ne se lit pas dans le nom du volume (3 noms pour 37 segments) mais se décode de
 `area_cm2/area_vx2` = 9,362 µm. Rouleau écrasé : p10–p90 du rayon d'une spire = 566 vx (~17
 feuilles). Défauts du référent : `w045`/`w046` même surface, `w041`/`w042` demi-feuille, `0172`
-`w075`/`w076`. Une spire approuvée fait 38,4 cm² (×6,4 le point fixe rogner-étendre de 6,02). §7 : le
+`w075`/`w076`. Une spire approuvée `R4-F38`,4 cm² (×6,4 le point fixe rogner-étendre de 6,02). §7 : le
 traçage automatique **échantillonne** (1447 : 29 % avec une voisine), la curation **pave** (100 %) —
 la médiane toutes paires ne discrimine pas (2202 vs 1901 µm). → corrige l'article §5.7 ; ouvre A2.
 
@@ -482,96 +435,15 @@ registre et le taux de confirmation **en fonction de la profondeur**. Brouillon 
 | **rétracté** | « la borne vaut 6 » et « un bras de marge » (`82`) ; le second régime de `85` (`90`) ; le gradient de pas au bord (`91` §4) ; le §10 de `77` gonflé de 25–37 % (`77` §12) ; « deux volumes à 7,91 µm » (`77` §10) ; « seul Scroll 1 publie un axe » (`78` §0) ; `nz` publié (`78` §2) ; « la matière porte deux pas » comme portée (`102` → `109`) ; les deux populations de `107` et « repartir après trois pas » (`108` → `111`) ; le biais de −42 spires (`110` §4) ; « la barre monte avec la longueur » (`111` §4) ; 12 249 fusions (`114` §1) ; « l'expérience que personne ne pouvait poser » (`75` A5 bis, déjà faite par `44`) ; « un décalage unique par tour déroule » (`75` §C l. 1905) ; « la dérive accélère » (l. 2360) ; « le déplacement d'ensemble du raccrochage nuit » et « gain de 5,6 µm sur l'immobilité » (l. 2702, 2770, après appariement) ; l'extension du gain d'un pas à un déroulement (l. 3453) ; « il ne glisse pas donc rien ne se compose » (l. 3616 : la nappe se froisse par les normales, 0 → 19,9 µm) |
 | **ouvert** | voir §8 |
 
-## 5. Contradictions et corrections internes à la campagne
+## 5. Les contradictions — `REGISTRE_contradictions.tsv`
 
-Chaque ligne : *A a dit · B a dit · C tranche · statut*. À reporter dans `REGISTRE_contradictions.md`.
+**42 disputes** tranchées pendant cette campagne,
+une par ligne (`R4-C01` et suivants) : *A a dit · B a dit · C tranche · statut*.
 
-| A | B | C | statut |
-|---|---|---|---|
-| `77` §2 : « les deux populations ne se recouvrent pas » (propriété du prédicat) | `77` §7 : sur `0172` elles se recouvrent | `77` §8 : un trou de matière ; le prédicat rapporte sa `separation` par rouleau | tranché : propriété du **rouleau** |
-| `77` §10 : référent à 23–38 µm ; Paris4 « à part » (37,7) | `77` §12 : le centre de masse enjambait deux feuilles | borné à ±0,5 écart : 17,8–23,8 µm, Paris4 dans la distribution | tranché |
-| `77` §10 : Paris4 publie deux volumes à 7,91 µm | `77` (09-05) : cinq volumes, aucun à 7,91 ; 7,91 est le voxel de `0172` | `le_volume_du_maillage.py` : un seul volume contient le maillage de `44`, 2,400 µm | tranché ; `couverture_publiee.py` reconstructible |
-| `laxe_nest_pas_une_ligne.py` : seul Scroll 1 publie un ombilic | `78` §0 : cinq rouleaux, sur le bucket | angle mort d'un seul serveur, 3ᵉ fois | tranché |
-| `78` §2 : fibres en `nx/ny/nz` | `78` (09-05), `75` A2 bis : `nx/ny/presence`, niveaux 3–4 | ce qui borne est la résolution, pas `nz` | tranché |
-| `la_portee_du_raccrochage` : borne oracle 6 | `82` : 6 = plafond du corpus sur 5/5 ancres | censure à droite ; borne ≥ 6 | tranché ; `81` §3 bis : le 6 n'est pas 13/2 |
-| `85` : second régime de la bande du cœur (838 mm) | `90` : axe = courbe ; 460 mm | rétractation portée en tête de `85` | tranché |
-| `91` (brouillon) : le pas quadruple au bord | `91` §4 : artefact de fenêtre | contrôle sur une seule bande de dix tours | tranché avant publication |
-| `92` : sauts ↔ gonflement r = 0,80 | `92` §5 : retirer les lignes à saut change la pente de 0,2 % | corrélation ≠ mécanisme | tranché ; cause du gonflement **ouverte** |
-| `93` (exploration) : désaligné au cœur, parallèle au bord | `93` §5 : les deux bandes comparées étaient dans le tiers intérieur | par tiers sur le corpus entier : U | tranché |
-| `94` (brouillon) : la sagitta explique le pli en 1/R (accord 1,11) | `94` §5 : fixture → 0 là où la sagitta prédit 20,2 µm | gardée nommée | tranché |
-| `94` attribuait le pli prédictif à `78` | c'est `75` (section « une cellule peut-elle savoir ») | citation non vérifiée = inventée | tranché |
-| `75` A5 bis : « juger la chaîne par l'identité, expérience que personne ne pouvait poser » | `44` l'avait faite : la chaîne glisse | lecture des fiches, sur renvoi de l'auteur | tranché |
-| `75` A5 bis : `44` mesure sur `1447` | `44` mesure sur `PHercParis4` (2,4 µm) | vérifié dans le code | tranché |
-| `98` docstring : « le segment radial traverse l'empilement perpendiculairement » | `100` : la normale est à 34° du rayon | ce qui sauve `98` : le pas ne dépend pas de la direction (raison ouverte) | tranché, cause ouverte |
-| `99` (brouillon) : le pas que la matière montre = 147 µm | le bruit pur rend 147 aussi | nul par candidat, comparaisons multiples → 198,9 | tranché |
-| `99` : 198,9 µm (×1,15 nominal) | `105` : sélecteur biaisé +18,4 % ; corrigé 164,3 (×0,95) | `99`–`102` non recalculés ; le sens de l'écart s'inverse | tranché ; écart 164/182 **ouvert** |
-| `100` : 1/cos explique l'écart (1,212 vs 1,213) | `100` §6 : rapport 1,018 vs 1,184 ; `106` : 1,000 vs 1,155 | coïncidence numérique | tranché ; anomalie **ouverte** |
-| `102` : la matière porte 2,00 pas | `109` : run consécutif depuis le départ ; confirmés 4,0 | le compte ne peut pas dire « cinq sur six » | tranché ; portée → `113` |
-| `102` : le critère confirme un pas | `104` : il confirme 0,68–1,38 feuille | `feuilles_franchies` (continu) | tranché |
-| `107` : deux populations de la matière | `111` : surtout celles de l'instrument (bande relative) | mêmes échantillons, bande bornée : écart +0,965 → +0,134 | tranché ; le mode bas reste plus bas **en score** |
-| `107` : « un seuil de score écarterait le bon mode » | `108` : c'est le score du **pas** qui sépare à l'endroit | `111` : ce score prédisait quand l'estimateur non borné perd le signal | tranché ; conséquence opérationnelle tombée |
-| `107` : (1 − 0,105)^120 = 2·10⁻⁶ | `109` : suppose « manque = chute », réfuté | 18 confirmations manquées, pas une mort | tranché |
-| `110` §4 : biais de −42 spires sur 120 | `110` §5 : mélange dont les proportions changent | partage par mode | tranché |
-| `111` docstring : la barre monte avec la longueur | `111` §4 : elle baisse (pente −0,1149) | 1/√n l'emporte sur l'élargissement | tranché |
-| `114` (brouillon) : témoin « décalé d'une spire », verdict OUI | `114` §5 : no-op par construction ; inégalité stricte | rotation de secteurs ; critère dérivé | tranché |
-| `fusions_0172.json` : 12 249 fusions, 735 ruptures | `114` §1 : changements d'étiquette du tracker d'avant | ne plus citer comme fait sur le rouleau | tranché |
-| `75` §C : le raccrochage gagne 33,3 µm sur un pas | `75` §C l. 1886 : à l'itération l'aveugle bat tous les raccrochages | le gain ne survit pas à un tour ; les normales, puis leur dispersion comme symptôme (4 soupçons écartés) | tranché |
-| `75` §C l. 1905 : un décalage unique par tour déroule (−19,5 µm) | 494 cellules : +67,3 ; 906 : +56,3 | la boîte était un choix de coût | rétracté le jour même |
-| `75` §C l. 2360 : la dérive accélère | le critère omettait l'incrément 0 → 1 (41,1 / 22,0 / 37,7 / 48,6) ; coût par tour stable 31,6–37,4 | erreur au bras k < k × bras 1 | rétracté |
-| `75` §C l. 2665 : quatre affirmations sur la lecture du raccrochage | l. 2770 : `lecart_apparie.py` | trois tombent (gain 5,6 µm : −1,2 [enjambe 0] ; déplacement d'ensemble : +1,0), une est renforcée (oracle −23,8, 7/7) | tranché ; règle : différence de médianes → écart apparié |
-| `75` §C l. 2932 : les deux tranches précédentes jugeaient le raccrochage | le critère mesuré n'était pas celui qui tourne (cellules au hasard, accord de voisinage inappelable) | déployé 37,5 vs 43,6 ; le gain est le voisinage | tranché |
-| `75` §C l. 3137 : l'oracle de direction par cellule est une borne | l. 3267 : 96,6 % des cellules choisissent le **bord** du cône | plancher de balayage, pas une borne | tranché |
-| `75` §C l. 3185 : la vérité est plate, donc lisser est la recette | l. 3313 : surfaces lisses par construction pires (+3,5 à +4,0) | nécessaire, jamais suffisant | tranché |
-| `75` §C : le raccrochage déployé gagne (un pas) | l. 3453 : il porte 2 bras contre 4 (une marche) | deux questions : le meilleur pas ≠ aller le plus loin | tranché |
-| `75` §C l. 3453 : fenêtre d'acceptation ±100,6 µm ; glissement 22 µm/bras | rectifié : ±67,8 µm (une demi-feuille exactement) ; 14 µm/bras | ce qui dérive est la somme | tranché |
-| `75` §C l. 3616 : le pas normal ne glisse pas donc rien ne se compose | sa nappe se froisse par les normales (0 → 19,9 µm) | la mauvaise grandeur | tranché |
-| `75` §C l. 6458 : refuser ses plis porte 5 (58,0 µm) | écart apparié sur les cellules communes +0,0 [0,0 ; 0,0] ; part gardée 0,453 | arbitrage couverture / justesse, pas gain de méthode | tranché |
-| `75` §C l. 6498 : `rien_elague` et `rien_lisse_elague` mesurés | leur rugosité de champ était celle du raccrochage : ils tournaient dans la mauvaise branche | `FAMILLE_DU_PAS_NORMAL` + 2 contrôles | tranché (attrapé par une sortie de contrôle) |
-| `75` §C l. 6610 : `median_8` optimal, −26 µm hors échantillon | l'optimum était au bord de la famille ; étendue à 16/32 ; l'ancre vivante passe de 5 à 0 bras | porte fermée par défaut : trois conditions | tranché |
-| `31` §10 : la carte des 13 décide avec 50 fenêtres | `75` §C l. 3756 : 315× le budget ; puis l. 3836 : 0 rang de spire sur 13, pas exécutable | critère non mesurable, puis sans objet | tranché |
-| `HANDOFF`:567 publie **1,213** sans record (`chiffres_sans_record`) ; `HANDOFF`:3210, :3222 `cd experiments`, `cd inference_xpu` (dossiers disparus) ; `86` §4 et les fiches lient `33_incertitude_de_la_carte.md`, qui n'a jamais existé (`33` s'appelle `la_carte_nest_pas_resolue`) | — | archive gelée : notés, non corrigés | à noter |
+## 6. Les lois — `REGISTRE_lois.tsv`
 
-## 6. Les lois que la campagne a payées
-
-À reporter dans `FILS_ROUGES.md`, avec le nombre de fois payé.
-
-1. **Une limite de grille publiée comme une limite matérielle** — `81` §5 (filtre `tifxyz`), `82`
-   (plafond du corpus), `83` (treillis), `85` §4 (905 µm), `97` §4 (plus proche voisin), `99` §7
-   (butée), `106` §5 (éventail écrêté). Sept fois en huit jours.
-2. **Une vérification qui ne peut pas échouer, ou qui n'emprunte pas le chemin de production** —
-   `93` §7 (`--verifier` vert, `main()` planté), `102` §5 (naïf 8/8), `105` §2 (sélecteur brut audité,
-   calibré en production), `114` §5 (inégalité stricte, témoin no-op), `104` §1 (au premier lancement).
-3. **Un bord se compte sur le corpus entier, pas sur les bandes sondées** — `93` §5, `95` §6, `96`
-   §7, `103` §4 (0 % sur 2 bandes, 7,3 % sur 28), `105` §6 (+6,75 % → +18,4 %).
-4. **Une corrélation n'est pas un mécanisme** — `92` §5 (r = 0,80), `94` §5 (sagitta, 1,11), `100`
-   §1 (1/cos, 1,212 vs 1,213). Le remède est toujours une fixture dont on connaît la réponse.
-5. **Un nul pour chaque quantité rapportée, et chaque famille porte sa barre** — `99` §3 (la longueur
-   choisie), `99` §4 (comparaisons multiples), `104` §6 (0,4018 vs 0,3475), `111` §4 (par longueur),
-   `112` §7 (après retrait).
-6. **Un agrégat ne se désagrège pas** — `102` (7 h, une médiane par bande), `107` (étapes sans départ),
-   `110` (préfixes sans profils), `111` (profils gardés : toute relecture devient gratuite). Et
-   `--reagreger` dès le premier jet (`110` §10).
-7. **Une médiane sur un mélange n'est pas un résumé** — `107` §4 (0,199 feuille par pas), `110` §5
-   (−42 spires), `108` §8 (loi en U → la moyenne).
-8. **Un plafond n'est pas une valeur** — `82`, `83`, `102` §6, `107`, `113`. Publier le compte des
-   censurés à côté du chiffre.
-9. **Chercher dehors ce qu'on croit absent** — `77` §10 (65 couches sur l'autre serveur, sur
-   insistance de l'auteur), `78` §0 (cinq axes), `86` (l'atlas dans `data/repos/`). Sixième fois pour
-   le dépôt.
-10. **Un signal de confiance se vérifie à travers les rayons, et une observable locale ne voit pas
-    l'identité** — `94` §6, `95` §9, `96` §9, `97` §7.
-11. **Quand les hypothèses de mesure ne mènent à rien, la réponse est visuelle** (consigne de
-    l'auteur, `77` §8) — le trou angulaire, la bande qui serpente (`77` §10), le profil à deux lobes
-    (`77` §12) ; et sept tranches de marche ont ignoré l'instrument volumétrique du dépôt
-    (`lpl-scrollwalk`) jusqu'à ce que l'auteur le rappelle (`75` §C l. 6527).
-12. **Une différence de médianes n'est pas un gain : l'écart apparié, sur les mêmes cellules** —
-    `75` §C l. 2770 (trois affirmations sur quatre tombent), l. 6458 (un gain de portée entièrement
-    fait de ce qu'on jette : +0,0 sur les cellules communes). Trois conditions sans seuil : médiane
-    négative, majorité des cas, intervalle laissé-un-dehors entièrement négatif.
-13. **Un pas n'est pas une marche : l'erreur se compose parce qu'elle devient la surface d'où l'on
-    repart** — `75` §C l. 1886 (le raccrochage itéré), l. 3453 (2 bras contre 4), l. 6559 (la borne se
-    froisse et reste juste : ce qu'un aveugle paie, c'est de repartir de sa propre nappe). Et un
-    réglage choisi sur la médiane des bras inclut les bras **déjà perdus** (l. 6657).
+**13 mécanismes** que cette campagne a payés
+(`R4-L01` et suivants), rendus en prose groupée dans `FILS_ROUGES.md`.
 
 ## 7. Ce que la campagne dit du graal
 
@@ -604,52 +476,10 @@ d'identité que le pinceau peint » (`75` §A). Au 11 septembre :
    **transporté** sur un rouleau sans référent — ce que `PRIX.md` §2 et §5 recoupent avec l'annexe A
    des *Open Problems* (le *rollout drift* que l'équipe nomme est ce que `104`–`111` mesurent).
 
-## 8. Portes ouvertes de R4
+## 8. Les portes ouvertes — `REGISTRE_portes.tsv`
 
-À reporter dans `PORTES_OUVERTES.md`, classées par ce qu'elles font avancer.
-
-**Grand Prize — le graal**
-- **`113`** (en cours) : la portée non censurée à 20 pas ; le registre et le taux de confirmation par
-  profondeur. C'est la course en profondeur que `110` §9 demandait pour trancher biais / jitter.
-- La politique « confirmer sur une fenêtre de 2 pas ou plus » (`112` §7) : chiffrée, à courir.
-- La course qui déciderait `108` (48 trajets par sélecteur, 672 étapes, 7–10 h) — dont le sens a
-  changé après `111` : ce qu'elle trancherait est la netteté de la périodicité, plus une partition.
-- L'anomalie de `100`/`106` : le même pas dans deux directions à 34°, qu'un empilement parallèle
-  interdit ; et la cause de l'obliquité (écrasement, cône, traçage).
-- L'écart 164 / 182,4 µm entre transferts humains et atlas, et ce que la matière montre à 346 µm.
-- La 3D : un « bout » est la bordure d'une nappe, la conservation de matière un flot aux jonctions
-  (`114` §7, question de l'auteur du 11 septembre). Aucune mesure encore.
-- L'objet : `0500P2` plafonne à 13 spires publiées ; trois objets portent les 31 (`81` §6). La
-  décision et ses coûts (voxel, pas, demi-feuille à re-dériver) sont à l'auteur.
-- Le **critère d'arrêt** du raccrochage, observable sans cible : la rugosité de son propre champ
-  croît 0,34 → 2,01 sur cinq bras ; il reste à vérifier qu'elle **prédit** l'échec plutôt que de
-  l'accompagner (`75` §C l. 6729). Et la confiance par cellule (pli + obscurité, en rang, `ou`) :
-  livrable comme carte de doute, ne rend pas un marcheur juste (l. 6380).
-- « Combien lisser » demande des ancres dont la marche soit **vivante** : le corpus n'en offre qu'une
-  (l. 6665) ; sur `PHercParis4` (120 spires) la question se repose.
-- Le plancher de direction (18,2 µm, la moitié du coût d'un pas) : ni la rotation d'ensemble ni un
-  champ lisse ne l'atteignent (l. 3137–3313) ; ce qui le rendrait est une direction par cellule qui
-  ne soit pas un balayage de cône.
-
-**Grand Prize — le référent**
-- A2 bis : un nombre d'enroulement sans référent. Les fibres publiées ne comptent pas des feuilles
-  (période 307–441 µm = 2–3 pas) ; sortie : le niveau 0 chez le producteur (`output_channels = 7`)
-  ou un autre champ (`75` A2 bis).
-- A2 ter : les résidus sur des grilles à pas 8 (Nyquist) — `vc_gen_normalgrids` depuis le volume,
-  ×512 le volume publié (`75` A2 ter).
-- La cause du trou angulaire de `0172` : déchirure, perte, collage (`77` §8, `75` A′).
-- Le masque d'approbation : ce que la ré-optimisation de `villa` en tire ; aucun `approval.tif`
-  peint n'est publié, donc « le calculé vaut-il l'humain » n'est pas montable (`75` A3).
-- A6 : la ROC de α et d (101 positifs, 101 demi-pas) — exige le volume. B2 : « no threshold » non
-  tranchable sans positif indépendant (`77` §11).
-
-**Progress Prizes — soumissible tel quel** (résultats négatifs, audits, outils ; voir `PRIX.md` §1.4)
-- Les portées censurées et le mur du corpus (`82`, `83`) ; les treize rouleaux sans rang (`81`).
-- Le référent d'identité et ses défauts mesurés contre lui-même (`76` §4, `77` §3, `97`).
-- Le *rollout drift* mesuré : bande d'acceptation, biais du sélecteur, falaise instrumentale
-  (`104`, `105`, `111`) — l'annexe A des *Open Problems* le nomme sans le chiffrer.
-- Les outils : lecture par plage HTTP des volumes (`voxel_distant`, `couches_distantes`),
-  `le_sens_des_indices`, `les_spires_consecutives_publiees`.
+**19 portes** que cette campagne laisse
+(`R4-P01` et suivants), classées par prix dans `PORTES_OUVERTES.md`.
 
 ## 9. Sources pour un article
 

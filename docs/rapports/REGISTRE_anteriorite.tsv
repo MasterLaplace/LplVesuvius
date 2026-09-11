@@ -1,0 +1,31 @@
+id	resultat	anteriorite	statut
+A01	énergie du faisceau comme axe (`21`, `58`)	*Open Problems* « three coupled scan parameters » ; Angelotti 2026 Ext. Data Fig. 2 ; fenêtre 100–120 keV à 8 µm	**publié, et contredit** (`66` §3)
+A02	aucune vérité terrain sur rouleau	`ink-labels-README.md` : *« where no infrared ground truth exists »*	publié
+A03	fold de validation du modèle GP	`fragments=['20231210121321']` dans `villa/ink-detection` ; nom du checkpoint dit autre chose	publié ; **indécidable** ici
+A04	α suit la fenêtre	`windcheck/engines/atlas_query.cpp`, `selfgap.py`	publié
+A05	étendre une nappe (`43`, `44`)	workflow officiel `35_segmentation.md` (grandir / corriger / recommencer)	publié ; notre chaîne omet « corriger »
+A06	la graine décide (`25`)	`vesuvius-automesh/render_driver.py` ; `lasagna/volume_scale.py` contient `niveau_du_maillage.py`	publié
+A07	dispersion par fenêtre (`64`)	`winding-ruler` : *« it is the variance, not the mean, that decides usability »*	partiel : l'ICC 0,030 et le n requis sont libres
+A08	Hanley-McNeil, bootstrap par grappes (`63`)	`tifxyz-doctor` ; `windcheck` : *« patches are not independent draws »*	partiel : aucun IC sur une AUC d'encre dans 35 dépôts
+A09	témoin négatif α (`46`)	surface en travers chiffrée (`vesuvius-automesh`) ; « null control » (`windcheck/selfgap.py`)	partiel : faire tourner un détecteur d'encre dessus est libre
+A10	`step_size` du traceur (`26`)	20 est le défaut ; `GrowPatch.cpp` lève une exception sinon	publié (réglage d'usine)
+A11	le traceur est un tirage (`35`)	`srand(clock())`, `mt19937(random_device)` ; `VC_GROWPATCH_RNG_SEED`	partiel : 78 exécutions, la bascule de verdict, sont libres
+A12	propreté = artefact de budget (`25`)	`windcheck/docs/FULL-CORPUS.md`, 278 traces, mot pour mot	**publié** ; la moitié stabilité est libre
+A13	les segments ne pavent pas (`44`)	tutoriel : *« big pile of small pieces »* ; `QuadSurface::overlap()` 2 voxels	partiel : le recensement de 105 paires ; recadré par `76` §7
+A14	écart entre spires par rouleau (`16`)	`winding-ruler/atlas_collection_v2.csv` : 36 objets, niveau 1	**publié** ; notre outil au niveau 2 est biaisé (−10,3 %)
+A15	interligne (`typographie.py`)	`villa/…/get_ink_metrics.py`, fenêtres de 512 px	publié
+A16	profil le long de la normale (`measure.py`)	`windcheck/bench/normal_profile.py`, 53 points	publié
+A17	plafond d'occupation, planéité (`trouver_graine.py`)	`automesh/select_regions.py:27` (`max_occ = 0.50`), `khartes/st.py:119`	publié
+A18	appariement des volumes (`apparier_volumes.py`)	`metadata.min.json` le déclare ; `vesuvius-catalog`	publié
+A19	l'axe erre (`laxe_nest_pas_une_ligne.py`)	ombilics publiés : Scroll 1 (`dl.ash2txt.org`), 5 rouleaux (bucket, `78`)	publié ; notre « seul » rétracté
+A20	garantie topologique ≠ sémantique	Henderson 2025 : WJF 3,20 %, L1 → médiane	publié ; c'est **lui** qui corrige `00`
+A21	aucun seuil ne sépare les feuilles (`79`)	le rendu officiel empile 65 échantillons, pas d'isosurface (`68` §2)	convergent
+A22	nombre de Fresnel ordonne les verdicts (`68` §3)	les verdicts sont des auteurs ; la mise en formule est du dépôt ; `69` §1.1 la recadre (Paganin)	partiel
+A23	103 cases vides (`68` §4)	`volume_transforms` publiés ; personne ne les a remplies	**libre**
+A24	déterminisme du vérificateur	doc officielle + `windcheck` (9 configurations)	publié ; argument récupéré pour §5.1
+A25	la statistique (permutation, puissance, IC, FDR)	zéro occurrence dans 35 dépôts	**libre**
+A26	le test de convergence, l'étage polaire, 12 outils de `depot/`	aucun équivalent	**libre**
+A27	référent d'identité = indices de spire	dans les noms depuis toujours ; *Open Problems* : *« relative winding number annotations seem to have a great impact »*	publié comme donnée, **non lu** avant `73`
+A28	déroulage par patches, détection d'incompatibilités 3D	**W. Stevens, août 2026, 20 000 $** (`1667`, 365 cm²)	publié ; **non cité** par le dépôt avant `PRIX.md`
+A29	dérive de rollout des traceurs	*Open Problems* App. A : *« small errors compound across steps »*	publié en prose ; mesuré par `104`–`111`
+A30	résultats négatifs payés	TAUIL (juillet, 1 000 $ : *negative-result analysis*)	le dépôt en a une dizaine, jamais soumis

@@ -165,7 +165,14 @@ def inventaire(racine: Path) -> dict:
     par_document = {}
     # ⚠ Deux dossiers depuis le 2026-09-11 : l'archive gelée ET les rapports vivants. Un rapport
     # qui publierait un chiffre sans record serait exactement la dérive que ce garde attrape.
-    for d in sorted([*racine.glob("docs/archive/*.md"), *racine.glob("docs/rapports/*.md")]):
+    # ⚠⚠ Les VUES RENDUES de `docs/rapports/` sont écartées, et c'est l'adossement circulaire de
+    # `57` §3 sous une autre forme : une vue porte le chiffre PARCE QUE son registre le porte,
+    # donc la compter ajoute au résidu un exemplaire du même défaut et fait lire deux orphelins
+    # là où il y en a un. Elles se reconnaissent à leur première ligne, qui se déclare générée —
+    # jamais à une liste de noms, qui serait une chose de plus à tenir à jour.
+    tous = sorted([*racine.glob("docs/archive/*.md"), *racine.glob("docs/rapports/*.md")])
+    for d in [x for x in tous
+              if not x.read_text(encoding="utf-8", errors="replace").startswith("> ⚠ FICHIER GÉNÉRÉ")]:
         manquants = orphelins_situes(d.read_text(encoding="utf-8", errors="replace"),
                                      corpus)
         if manquants:
