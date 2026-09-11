@@ -39,12 +39,17 @@ import json
 import math
 import statistics
 import sys
+import tempfile
 from pathlib import Path
+
+from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from figure_commune import (etiquette_de_trace as etiquette,  # noqa: E402
                             etiquettes_de_traces as etiquettes,
-                            police, prose_tracable)
+                            police, prose_tracable,
+                            textes_debordants, textes_hors_cadre,
+                            textes_qui_se_recouvrent)
 
 RACINE = Path(__file__).resolve().parents[2]
 
@@ -69,6 +74,23 @@ paraître énorme n'importe quelle dispersion, y compris une dispersion nulle. T
 sortirait est dessinée EN BUTÉE avec un marqueur distinct — laisser une donnée dehors est pire
 que la montrer.
 """
+
+
+def lire(bruit_path: Path, paire_path: Path) -> tuple[dict, dict]:
+    """Charge les deux mesures et valide leur contenu minimal.
+
+    Refuse si un fichier manque ou ne porte pas la structure minimale attendue.
+    """
+    for nom, p in (("bruit", bruit_path), ("paire", paire_path)):
+        if not p.is_file():
+            raise FileNotFoundError(f"mesure {nom} absente : {p}")
+    bruit = json.loads(bruit_path.read_text(encoding="utf-8"))
+    paire = json.loads(paire_path.read_text(encoding="utf-8"))
+    if not bruit.get("lignes"):
+        raise ValueError(f"{bruit_path} ne porte aucune ligne")
+    if not paire.get("paires"):
+        raise ValueError(f"{paire_path} ne porte aucune paire")
+    return bruit, paire
 
 
 def echelle(rapport: float, pixels: int) -> tuple[int, bool]:
@@ -151,27 +173,34 @@ def prose(rangees: list[dict]) -> list[str]:
     ]
 
 
-def dessiner(bruit: dict, paire: dict, sortie: Path) -> dict:
-    from PIL import Image, ImageDraw
+def dessiner(bruit: dict, paire: dict, sortie: Path) -> tuple[Path, list, list]:
+    from PIL import ImageDraw
 
     gros, moyen, petit = police(16, 13, 12)
     rangees = rangs(bruit, paire)
+    if not rangees:
+        raise ValueError("aucune trace appariable entre bruit et paire")
 
     L, H = 1240, 180 + 34 * max(len(rangees), 1) + 150
     toile = Image.new("RGB", (L, H), FOND)
     d = ImageDraw.Draw(toile)
+    poses: list[tuple[int, int, str, object]] = []
 
-    d.text((60, 30), "l'effet de la reparation tient-il dans le bruit du tirage ?",
-           fill=TEXTE, font=gros)
-    d.text((60, 54), f"{bruit['n_graines']} graines sur le maillage AVANT, "
-                     "inchange -- puis la valeur APRES reparation", fill=DISCRET, font=moyen)
+    def ecrire(x, y, texte, fonte, fill):
+        d.text((x, y), texte, font=fonte, fill=fill)
+        poses.append((x, y, texte, fonte))
+
+    ecrire(60, 30, "l'effet de la reparation tient-il dans le bruit du tirage ?",
+           gros, TEXTE)
+    ecrire(60, 54, f"{bruit['n_graines']} graines sur le maillage AVANT, "
+                   "inchange -- puis la valeur APRES reparation", moyen, DISCRET)
 
     panneaux = (("fraction_below_third", "fbt", 300), ("shortfall", "shortfall", 770))
     largeur = 400
     haut_axe = 118
 
     for titre, cle, px in panneaux:
-        d.text((px, 92), titre, fill=TEXTE, font=moyen)
+        ecrire(px, 92, titre, moyen, TEXTE)
         d.rectangle([px, haut_axe, px + largeur, haut_axe + 34 * len(rangees) + 10],
                     outline=(60, 60, 60))
         # ⚠ Les graduations sont des RAPPORTS ronds : x1 est la mediane des graines, donc la
@@ -181,15 +210,14 @@ def dessiner(bruit: dict, paire: dict, sortie: Path) -> dict:
             couleur = (78, 78, 78) if r == 1.0 else (36, 36, 36)
             d.line([px + xx, haut_axe, px + xx, haut_axe + 34 * len(rangees) + 10], fill=couleur)
             lib = "x1" if r == 1.0 else (f"x{r:g}" if r >= 1 else f"/{1 / r:g}")
-            d.text((px + xx - 8, haut_axe + 34 * len(rangees) + 16), lib,
-                   fill=DISCRET, font=petit)
+            ecrire(px + xx - 8, haut_axe + 34 * len(rangees) + 16, lib, petit, DISCRET)
 
     noms = etiquettes([r["trace"] for r in rangees])
     for i, rangee in enumerate(rangees):
         yy = haut_axe + 22 + 34 * i
-        d.text((60, yy - 7), noms[i], fill=TEXTE, font=petit)
-        d.text((176, yy - 7), f"{rangee['cellules'][0]}-{rangee['cellules'][1]} cell.",
-               fill=DISCRET, font=petit)
+        ecrire(60, yy - 7, noms[i], petit, TEXTE)
+        ecrire(176, yy - 7, f"{rangee['cellules'][0]}-{rangee['cellules'][1]} cell.",
+               petit, DISCRET)
         for titre, cle, px in panneaux:
             col = rangee["colonnes"].get(cle)
             if col is None:
@@ -215,36 +243,36 @@ def dessiner(bruit: dict, paire: dict, sortie: Path) -> dict:
     # ⚠ La legende tient sur DEUX lignes : la premiere version posait trois entrees sur une
     # seule et les deux premieres se recouvraient -- une legende illisible est pire qu'absente.
     d.ellipse([60, bas + 4, 66, bas + 10], fill=GRIS)
-    d.text((76, bas), "une graine, un point -- meme fichier, meme geometrie",
-           fill=DISCRET, font=petit)
+    ecrire(76, bas, "une graine, un point -- meme fichier, meme geometrie",
+           petit, DISCRET)
     d.polygon([(60, bas + 26), (55, bas + 22), (55, bas + 30)], fill=AMBRE)
-    d.text((76, bas + 19), "valeur apres reparation, HORS du nuage", fill=AMBRE, font=petit)
+    ecrire(76, bas + 19, "valeur apres reparation, HORS du nuage", petit, AMBRE)
     d.polygon([(420, bas + 26), (415, bas + 22), (415, bas + 30)], fill=GRIS)
-    d.text((436, bas + 19), "... ou dedans, donc indistinguable d'un changement de graine",
-           fill=DISCRET, font=petit)
-    # ⚠⚠ Le panneau de droite s'effondre en un trait, ce qui est le POINT -- mais un trait ne
+    ecrire(436, bas + 19, "... ou dedans, donc indistinguable d'un changement de graine",
+           petit, DISCRET)
+    # ⚠⚠ Le panneau de droite s'effondre en un trait, ce point est le POINT -- mais un trait ne
     # se lit pas comme un nombre. L'etendue mediane est ecrite dessous pour qu'un lecteur ne
     # conclue pas a une dispersion nulle, qui serait faux.
     med_sh = statistics.median(r["colonnes"]["shortfall"]["etendue_pct"]
                                for r in rangees if "shortfall" in r["colonnes"])
-    d.text((770, haut_axe + 34 * len(rangees) + 34),
+    ecrire(770, haut_axe + 34 * len(rangees) + 34,
            f"le nuage n'est pas vide : etendue mediane {med_sh:.1f} %",
-           fill=DISCRET, font=petit)
+           petit, DISCRET)
 
     for k, ligne in enumerate(prose(rangees)):
-        d.text((60, bas + 50 + k * 19), ligne, fill=TEXTE, font=moyen)
+        ecrire(60, bas + 50 + k * 19, ligne, moyen, TEXTE)
 
     sortie.parent.mkdir(parents=True, exist_ok=True)
     toile.save(sortie)
-    n_fbt = sum(1 for r in rangees if dedans(r["colonnes"]["fbt"]))
-    n_sh = sum(1 for r in rangees
-               if "shortfall" in r["colonnes"] and dedans(r["colonnes"]["shortfall"]))
-    return {"rangees": len(rangees), "apres_dans_le_bruit_fbt": n_fbt,
-            "apres_dans_le_bruit_shortfall": n_sh, "sortie": str(sortie)}
+    cadres = [
+        (300, haut_axe, 300 + largeur, haut_axe + 34 * len(rangees) + 10),
+        (770, haut_axe, 770 + largeur, haut_axe + 34 * len(rangees) + 10),
+    ]
+    return sortie, poses, cadres
 
 
 def verifier() -> int:
-    """Auto-test HORS LIGNE : l'axe, l'appariement et la lecture, sans écrire d'image."""
+    """Auto-test HORS LIGNE : l'axe, l'appariement, la lecture, la figure et les sondes."""
     echecs = controles = 0
 
     def v(nom, cond, detail=""):
@@ -323,6 +351,65 @@ def verifier() -> int:
     v("... et elle dit le compte, pas seulement les dispersions",
       any("sur 2" in l for l in lignes), str(lignes))
 
+    with tempfile.TemporaryDirectory() as d:
+        rac = Path(d)
+        f_bruit = rac / "bruit.json"
+        f_paire = rac / "paire.json"
+        f_bruit.write_text(json.dumps(faux_bruit), encoding="utf-8")
+        f_paire.write_text(json.dumps(faux_paire), encoding="utf-8")
+
+        lu_br, lu_pa = lire(f_bruit, f_paire)
+        v("les deux JSON sont lus",
+          len(lu_br["lignes"]) == 2 and len(lu_pa["paires"]) == 2)
+
+        out_img, poses, cadres = dessiner(lu_br, lu_pa, rac / "f.png")
+        v("l'image est écrite", out_img.is_file())
+        v("... et elle n'est pas vide", out_img.stat().st_size > 1000)
+
+        im = Image.open(out_img).convert("RGB")
+        v("... et sa largeur est celle annoncée", im.size[0] == 1240)
+        v("... et sa hauteur correspond au nombre de rangées", im.size[1] == 180 + 34 * 2 + 150)
+
+        pixels = list(im.getdata())
+        v("... et elle porte les couleurs requises",
+          AMBRE in pixels and GRIS in pixels)
+
+        v("aucun texte ne déborde de la toile", textes_debordants(poses, im.size[0]) == [])
+        v("aucun texte ne sort de son panneau", textes_hors_cadre(poses, cadres) == [])
+        v("aucun texte n'en recouvre un autre", textes_qui_se_recouvrent(poses) == [])
+        v("aucun texte n'est écrit sous le bord bas",
+          [t for x, y, t, f in poses if f is not None and y + f.getbbox(t)[3] > im.size[1]] == [])
+
+        # ⚠ Sonde : un fichier manquant est refusé
+        try:
+            lire(rac / "inexistant.json", f_paire)
+            v("sonde : un fichier manquant est refusé", False)
+        except FileNotFoundError:
+            v("sonde : un fichier manquant est refusé", True)
+
+        # ⚠ Sonde : un JSON sans paires est refusé
+        f_invalide = rac / "sans_paire.json"
+        f_invalide.write_text(json.dumps({"vide": True}), encoding="utf-8")
+        try:
+            lire(f_bruit, f_invalide)
+            v("sonde : un JSON sans paires est refusé", False)
+        except ValueError:
+            v("sonde : un JSON sans paires est refusé", True)
+
+        # ⚠ Sonde : aucun appariement possible est refusé par dessiner
+        try:
+            dessiner(faux_bruit,
+                     {"paires": [{"trace": "Z", "fbt_apres": 1.0, "shortfall_apres": 1.0}]},
+                     rac / "vide.png")
+            v("sonde : aucun appariement possible est refusé", False)
+        except ValueError:
+            v("sonde : aucun appariement possible est refusé", True)
+
+        # ⚠ Sonde : la garde attrape un débordement simulé
+        trop_long = [(1200, 50, "Texte debordant de la toile", police(16))]
+        v("sonde : textes_debordants détecte le dépassement",
+          len(textes_debordants(trop_long, 1240)) > 0)
+
     print(f"  {'ECHEC' if echecs else 'ALL PASS'} "
           f"({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
@@ -341,11 +428,13 @@ def main() -> int:
     a = p.parse_args()
     if a.verifier:
         return verifier()
-    for f in (a.bruit, a.paire):
-        if not f.is_file():
-            raise SystemExit(f"mesure absente : {f}")
-    r = dessiner(json.loads(a.bruit.read_text()), json.loads(a.paire.read_text()), a.sortie)
-    print(json.dumps(r, indent=2, ensure_ascii=False))
+    bruit, paire = lire(a.bruit, a.paire)
+    out, _, _ = dessiner(bruit, paire, a.sortie)
+    try:
+        cible = out.relative_to(RACINE)
+    except ValueError:
+        cible = out
+    print(f"écrit : {cible}")
     return 0
 
 
