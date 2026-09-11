@@ -32,10 +32,13 @@ import argparse
 import json
 import statistics
 import sys
+import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from figure_commune import police, prose_tracable  # noqa: E402
+from figure_commune import (police, prose_tracable,  # noqa: E402
+                            textes_debordants, textes_hors_cadre,
+                            textes_qui_se_recouvrent)
 
 RACINE = Path(__file__).resolve().parents[2]
 
@@ -43,6 +46,16 @@ FOND = (16, 16, 16)
 TEXTE = (235, 232, 224)
 DISCRET = (140, 136, 128)
 AMBRE = (214, 143, 42)
+
+
+def lire(chemin: Path) -> dict:
+    """Charge et valide la mesure nécessaire au tracé."""
+    if not chemin.is_file():
+        raise FileNotFoundError(f"mesure absente : {chemin}")
+    donnees = json.loads(chemin.read_text(encoding="utf-8"))
+    if not donnees.get("grandeurs") and not donnees.get("seuils"):
+        raise ValueError(f"structure invalide dans {chemin}")
+    return donnees
 GRIS = (120, 128, 140)
 ROUGE = (188, 68, 52)
 BANDE = (40, 34, 22)
@@ -134,13 +147,13 @@ def prose(fams: list[dict]) -> list[str]:
     ]
 
 
-def dessiner(mesure: dict, sortie: Path) -> dict:
+def dessiner(mesure: dict, sortie: Path) -> tuple[Path, list, list]:
     from PIL import Image, ImageDraw
 
     gros, moyen, petit = police(17, 13, 11)
     fams = familles(mesure)
     if not fams:
-        raise SystemExit("aucune famille complète dans la mesure")
+        raise ValueError("aucune famille complète dans la mesure")
 
     larg_p, haut_p = 250, 300
     marge_g, marge_h, ecart = 76, 150, 56
@@ -148,24 +161,29 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
     H = marge_h + len(fams) * (haut_p + 96) + 130
     toile = Image.new("RGB", (L, H), FOND)
     d = ImageDraw.Draw(toile)
+    poses: list[tuple[int, int, str, object]] = []
 
-    d.text((60, 30), "trois parametres qui cessent de compter ENSEMBLE",
-           fill=TEXTE, font=gros)
-    d.text((60, 56), "correlation aux croisements publies, Scroll 1 -- "
-                     "meme axe des deux cotes", fill=DISCRET, font=moyen)
-    d.text((marge_g + larg_p // 2 - 60, 88), "rayon 4x TROP GRAND", fill=ROUGE, font=moyen)
-    d.text((marge_g + larg_p + ecart + larg_p // 2 - 60, 88),
-           "rayon tire de la PHYSIQUE", fill=AMBRE, font=moyen)
+    def ecrire(x, y, texte, fonte, fill):
+        d.text((x, y), texte, font=fonte, fill=fill)
+        poses.append((x, y, texte, fonte))
+
+    ecrire(60, 30, "trois parametres qui cessent de compter ENSEMBLE",
+           gros, TEXTE)
+    ecrire(60, 56, "correlation aux croisements publies, Scroll 1 -- "
+                   "meme axe des deux cotes", moyen, DISCRET)
+    ecrire(marge_g + larg_p // 2 - 60, 88, "rayon 4x TROP GRAND", moyen, ROUGE)
+    ecrire(marge_g + larg_p + ecart + larg_p // 2 - 60, 88,
+           "rayon tire de la PHYSIQUE", moyen, AMBRE)
 
     for i, f in enumerate(fams):
         y0 = marge_h + i * (haut_p + 96)
         # ⚠ Le libelle etait POSE SUR l'axe des rho, qu'il recouvrait. Au-dessus de sa rangee,
         # il ne peut rien recouvrir.
-        d.text((marge_g, y0 - 22), f["titre"], fill=TEXTE, font=moyen)
+        ecrire(marge_g, y0 - 22, f["titre"], moyen, TEXTE)
         # ⚠ La sous-legende est posee APRES la largeur reelle du titre, mesuree : un decalage
         # fixe la faisait chevaucher « la REFERENCE locale », le plus long des trois.
-        d.text((marge_g + int(d.textlength(f["titre"], font=moyen)) + 18, y0 - 20),
-               f["sous"], fill=DISCRET, font=petit)
+        ecrire(marge_g + int(d.textlength(f["titre"], font=moyen)) + 18, y0 - 20,
+               f["sous"], petit, DISCRET)
         for j, (cle, couleur) in enumerate((("av", ROUGE), ("ap", AMBRE))):
             x0 = marge_g + j * (larg_p + ecart)
             d.rectangle([x0, y0, x0 + larg_p, y0 + haut_p], outline=(60, 60, 60))
@@ -179,7 +197,7 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
                 yy = y0 + haut_p - echelle(r, haut_p)
                 d.line([x0, yy, x0 + larg_p, yy], fill=(36, 36, 36))
                 if j == 0:
-                    d.text((x0 - 34, yy - 6), f"{r:.2f}", fill=DISCRET, font=petit)
+                    ecrire(x0 - 34, yy - 6, f"{r:.2f}", petit, DISCRET)
             pas = larg_p / max(len(f[cle]), 1)
             pts = []
             for k, val in enumerate(f[cle]):
@@ -195,33 +213,30 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
                 for a, b in zip(pts, pts[1:]):
                     d.line([a, b], fill=couleur, width=1)
             etendue = max(f[cle]) - min(f[cle])
-            d.text((x0 + 6, y0 + haut_p + 8), f"etendue {etendue:.3f}", fill=couleur, font=petit)
+            ecrire(x0 + 6, y0 + haut_p + 8, f"etendue {etendue:.3f}", petit, couleur)
             if j == 1:
                 # ⚠ EN QUINCONCE : a huit variantes les libelles se recouvraient au point
                 # d'etre illisibles (« boule 100boule 200boule 400col 10col 100 »). Une ligne
                 # sur deux les separe sans rien retirer.
                 for k, nom in enumerate(f["noms"]):
-                    d.text((int(x0 + pas * (k + 0.5)) - 4 * len(nom),
-                            y0 + haut_p + 26 + (k % 2) * 15), nom,
-                           fill=DISCRET, font=petit)
+                    ecrire(int(x0 + pas * (k + 0.5)) - 4 * len(nom),
+                           y0 + haut_p + 26 + (k % 2) * 15, nom,
+                           petit, DISCRET)
 
     bas = marge_h + len(fams) * (haut_p + 96) - 20
     d.rectangle([60, bas + 3, 84, bas + 13], fill=BANDE)
-    d.text((92, bas), "bruit du rho d'une graine a l'autre (etendue 0,125, cinq graines)",
-           fill=DISCRET, font=petit)
+    ecrire(92, bas, "bruit du rho d'une graine a l'autre (etendue 0,125, cinq graines)",
+           petit, DISCRET)
     for k, ligne in enumerate(prose(fams)):
-        d.text((60, bas + 26 + k * 19), ligne, fill=TEXTE, font=moyen)
+        ecrire(60, bas + 26 + k * 19, ligne, moyen, TEXTE)
 
     sortie.parent.mkdir(parents=True, exist_ok=True)
     toile.save(sortie)
-    return {"familles": len(fams),
-            "etendue_ancienne": max(max(f["av"]) - min(f["av"]) for f in fams),
-            "etendue_corrigee": max(max(f["ap"]) - min(f["ap"]) for f in fams),
-            "sortie": str(sortie)}
+    return sortie, poses, [(0, 0, L, H)]
 
 
 def verifier() -> int:
-    """Auto-test HORS LIGNE : l'axe, la sélection des familles et la prose."""
+    """Auto-test HORS LIGNE : l'axe, la sélection des familles, la prose, les sondes et le dessin."""
     echecs = controles = 0
 
     def v(nom, cond, detail=""):
@@ -282,6 +297,63 @@ def verifier() -> int:
     v("... et elle nomme la cause, pas seulement les nombres",
       any("rayon" in l for l in lignes), str(lignes))
 
+    # --- VALIDATION HORS-LIGNE lire() ET dessiner() AVEC SONDES ---
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp = Path(tmpdir)
+        p_json = tmp / "mesure.json"
+        p_json.write_text(json.dumps(faux), encoding="utf-8")
+
+        m_lu = lire(p_json)
+        v("lire charge les grandeurs", len(m_lu.get("grandeurs", {})) == 4)
+
+        # Sonde 1 : fichier absent
+        sonde_absent = False
+        try:
+            lire(tmp / "inexistant.json")
+        except FileNotFoundError:
+            sonde_absent = True
+        v("sonde : fichier json absent lève FileNotFoundError", sonde_absent)
+
+        # Sonde 2 : schéma invalide
+        p_invalide = tmp / "invalide.json"
+        p_invalide.write_text(json.dumps({"aucun": 1}), encoding="utf-8")
+        sonde_invalide = False
+        try:
+            lire(p_invalide)
+        except ValueError:
+            sonde_invalide = True
+        v("sonde : schéma json invalide lève ValueError", sonde_invalide)
+
+        # Tracé réel de la figure témoin
+        cible = tmp / "figure.png"
+        out, poses, cadres = dessiner(m_lu, cible)
+        v("dessiner rend le chemin demandé", out == cible)
+        v("le fichier png est produit", cible.is_file() and cible.stat().st_size > 0)
+        v("au moins 20 textes sont posés", len(poses) >= 20)
+        larg_toile = 76 + 2 * 250 + 56 + 60
+        v("aucun texte ne déborde de la toile", textes_debordants(poses, larg_toile) == [])
+        v("aucun texte ne sort de son cadre", textes_hors_cadre(poses, cadres) == [])
+        v("aucun chevauchement critique", textes_qui_se_recouvrent(poses) == [])
+
+        # Sonde 3 : texte débordant artificiel
+        gros, _, _ = police(17, 13, 11)
+        poses_trop_larges = poses + [(larg_toile - 10, 50, "texte qui sort largement de l'image a droite", gros)]
+        debord = textes_debordants(poses_trop_larges, larg_toile)
+        v("sonde : un texte débordant est bien intercepté", len(debord) > 0)
+
+        # Sonde 4 : texte hors cadre
+        poses_hors = poses + [(larg_toile - 10, 100, "texte hors cadre", gros)]
+        hors = textes_hors_cadre(poses_hors, cadres)
+        v("sonde : un texte hors cadre est bien intercepté", len(hors) > 0)
+
+        # Sonde 5 : mesure vide refusée par dessiner
+        sonde_vide = False
+        try:
+            dessiner({}, tmp / "vide.png")
+        except ValueError:
+            sonde_vide = True
+        v("sonde : mesure vide refusée par dessiner", sonde_vide)
+
     print(f"  {'ECHEC' if echecs else 'ALL PASS'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -296,10 +368,13 @@ def main() -> int:
     a = p.parse_args()
     if a.verifier:
         return verifier()
-    if not a.mesure.is_file():
-        raise SystemExit(f"mesure absente : {a.mesure}")
-    print(json.dumps(dessiner(json.loads(a.mesure.read_text()), a.sortie),
-                     indent=2, ensure_ascii=False))
+    mesure = lire(a.mesure)
+    out, _, _ = dessiner(mesure, a.sortie)
+    try:
+        cible = out.relative_to(RACINE)
+    except ValueError:
+        cible = out
+    print(f"écrit : {cible}")
     return 0
 
 
