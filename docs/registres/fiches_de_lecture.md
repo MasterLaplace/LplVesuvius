@@ -5247,8 +5247,54 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/111_une_bande_qui_ne_bouge_pas_avec_la_fenetre.md
+- **lignes** : 239
+- **nature** : RESULTAT
+  (le plancher de fréquence de `98` rendu PHYSIQUE : une bande dérivée des candidats du balayage au
+  lieu d'un nombre de périodes par fenêtre ; les deux bandes opposées sur les mêmes profils.)
+- **résumé** : ⭐⭐⭐⭐ **Le mode qui « ne compte rien » compte.** Sous l'ancienne bande il tombe d'une
+  falaise (dérive **-0.888**) ; sous la bande bornée, sur les mêmes échantillons, **-0.068**, et il
+  franchit **0.951** feuille par pas à six pas. ⭐⭐⭐ L'écart entre les deux modes au plus long passe
+  de **+0.965** à **+0.134** : la bimodalité de `107` s'efface presque entièrement. ⚠⚠⚠ Le prix est
+  réel — une bande étroite ne peut plus dire « pas de périodicité » par son COMPTE, c'est son score
+  qui l'écarte.
+- **conclusions extractibles** :
+  - ⭐⭐⭐⭐ **La falaise de `110` était celle de l'instrument.** Le plancher de `98` est relatif à la
+    fenêtre (0,35 période par fenêtre), donc il admet une longueur d'onde de **1314 µm** à deux pas
+    et **3943** à six — aucune n'est un espacement de feuille. Borné par la plage physique, il ne
+    les admet plus.
+  - ⭐⭐⭐ **Le remède est une BANDE, pas un estimateur.** `f = L / λ`, avec λ dans la plage que le
+    balayage de `105` fixe déjà. Aucune ligne de `98` n'est réécrite : une seconde implémentation du
+    même ajustement serait deux réponses à « combien de feuilles ».
+  - ⚠⚠⚠ **Une bande étroite ne peut plus répondre « aucune feuille ici » par son compte** : sur une
+    dérive SEULE elle rend **0.84** feuille par pas. C'est le score qui l'écarte (**0.282** au plus
+    contre **0.984** au moins sur une périodicité pure), donc elle a besoin de SA barre — et comme
+    la bande change avec la longueur, la barre aussi.
+  - ⚠⚠⚠ **La barre BAISSE avec la longueur, et j'avais annoncé l'inverse.** Deux effets s'opposent :
+    la bande s'élargit, mais les ÉCHANTILLONS grandissent et la corrélation fortuite décroît en
+    `1/√n`. C'est le second qui gagne (pente **-0.1149**) : la bande bornée devient PLUS
+    discriminante quand la marche s'allonge.
+  - ⭐⭐ **Et le compte du mode bas est lu AU-DESSUS de sa barre** — **76.9 %** à **88.5 %** de ses
+    marches la franchissent. Sans cela, « il compte 0,95 » ne voudrait rien dire. ⚠ Il reste plus bas
+    EN SCORE que le mode haut : la périodicité y est moins nette, mais le compte est le même.
+  - ⚠⚠⚠ **La dette rétroactive est lourde et fait partie du résultat** : `99` à `110` ont tous été
+    mesurés avec la bande non bornée. `107` perd ses deux populations ; `108` garde son fait et perd
+    son interprétation — le score du PAS, lui borné par les candidats du balayage, prédisait *quand
+    l'estimateur NON borné perd le signal*.
+  - ⭐ **Les profils bruts sont gardés cette fois.** `107` a gardé ses étapes sans son départ, `110`
+    ses préfixes sans ses échantillons ; d'où les **1158.5** s repayées ici pour relire les mêmes
+    voxels.
+- **rétractations / corrections internes** :
+  - §4 : ⚠⚠⚠ **ma docstring affirmait que la barre MONTE avec la longueur.** Le nul dit l'inverse,
+    et la raison est arithmétique : `1/√n` bat l'élargissement de la bande.
+- **preuve de lecture intégrale** :
+  - l. 133 (après 56 % du fichier) : `## 5. ⭐⭐⭐⭐ Le résultat : la falaise était celle de l'instrument`
+  - l. 230 : `uv run python src/nappe/une_bande_qui_ne_bouge_pas_avec_la_fenetre.py --verifier`
+
+---
+
 ### docs/110_le_compte_suit_il_le_pas.md
-- **lignes** : 209
+- **lignes** : 226
 - **nature** : RESULTAT
   (le registre recalculé sur chaque PRÉFIXE des polylignes de `107`, une lecture par marche ; la
   dérive, le partage par mode, et le contrôle qui demande si la falaise est celle de l'instrument.)
@@ -5291,12 +5337,17 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     le partage par mode qui l'a attrapé : l'ensemble s'effondre, les deux modes non.
   - §7 : ⚠⚠⚠ **et j'allais lire la falaise du mode bas comme un fait de la matière** sans avoir
     demandé si l'instrument la fabrique tout seul. Il la fabrique.
+  - suite : ⭐⭐⭐⭐ **`111` a tranché la question que ce document laissait ouverte** : la falaise
+    était celle de l'instrument. Bornée par des longueurs d'onde physiques, elle passe de **-0.888**
+    à **-0.068**. ⭐ Ce document avait raison sur les deux points qui comptaient — le biais de
+    l'ensemble était un artefact de mélange, et l'observation ne distinguait pas les deux
+    explications.
   - §10 : ⛔ **vingt minutes de lecture perdues par un `KeyError` dans l'agrégation finale.** `107`
     avait déjà le partage lecture / agrégation et son `--reagreger` ; ne pas l'avoir copié a coûté
     la course. Corrigé à la cause, et la batterie porte le contrôle qui l'aurait attrapé.
 - **preuve de lecture intégrale** :
   - l. 121 (après 58 % du fichier) : `## 7. ⭐⭐⭐ Une dérive seule reproduit la falaise, sur une périodicité intacte`
-  - l. 200 : `uv run python src/nappe/le_compte_suit_il_le_pas.py --verifier`
+  - l. 217 : `uv run python src/nappe/le_compte_suit_il_le_pas.py --verifier`
 
 ---
 
@@ -5419,7 +5470,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
 ---
 
 ### docs/107_le_marcheur_avec_le_bon_pas.md
-- **lignes** : 200
+- **lignes** : 214
 - **nature** : RESULTAT
   (la marche de `102` rejouée avec le sélecteur corrigé de `105`, appariée par le départ et en
   gardant les étapes ; la forme du risque, et le registre du trajet entier.)
@@ -5482,9 +5533,14 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     `O . O O O O` et `O . . . . .` sont indiscernables par ce nombre.
   - §7 ter : ⭐⭐⭐ **l'arithmétique `(1 − risque)^120` traite un manque comme une CHUTE**, et `109`
     réfute cette hypothèse : les manques ne sont pas groupés (**p = 0,2829**).
+  - suite : ⭐⭐⭐⭐ **les DEUX POPULATIONS de ce document sont, pour l'essentiel, celles de
+    l'instrument.** `111` relit les mêmes profils avec une bande de fréquences bornée par des
+    longueurs d'onde physiques : le mode bas passe d'une dérive de **-0.888** à **-0.068**, et
+    l'écart entre les modes au plus long de **+0.965** à **+0.134**. ⚠ La portée, le risque et le
+    coût ne sont pas touchés — ce sont d'autres instruments.
 - **preuve de lecture intégrale** :
   - l. 88 (après 48 % du fichier) : `## 4. ⚠⚠ Une médiane sur une distribution bimodale n'est pas un résumé`
-  - l. 196 : `uv run python src/nappe/le_marcheur_avec_le_bon_pas.py --verifier`
+  - l. 210 : `uv run python src/nappe/le_marcheur_avec_le_bon_pas.py --verifier`
 
 ---
 
@@ -7272,7 +7328,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 7292
+- **lignes** : 7385
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)

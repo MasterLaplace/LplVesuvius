@@ -2237,6 +2237,110 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             txt = f"{val}".replace(".", ",")
             out.append((nom, [f"**{txt}**", txt, f"{val}"], mar.name))
 
+    # ⭐⭐⭐⭐ UNE BANDE QUI NE BOUGE PAS AVEC LA FENETRE (`111`), TROIS APPARIEMENTS OBLIGATOIRES.
+    # (1) Le compte de la bande bornee ne voyage JAMAIS sans son SCORE et sa BARRE : une bande
+    # etroite ne peut plus dire « pas de periodicite » par son compte, donc un compte seul se
+    # lirait comme une feuille la ou il n'y en a pas. (2) La falaise AVANT ne voyage jamais sans
+    # la falaise APRES — c'est leur ecart qui est le resultat. (3) Et le controle sur une DERIVE
+    # SEULE ne voyage jamais sans celui sur une periodicite pure : un seul des deux laisserait
+    # croire que l'instrument ne sait que trouver, ou que refuser.
+    bnd = _source(racine, "une_bande_qui_ne_bouge_pas_avec_la_fenetre.json")
+    if bnd.exists():
+        d = json.loads(bnd.read_text())
+        for cle, nom in (("marches_lues", "marches relues par 111"),
+                         ("lectures", "lectures de 111"),
+                         ("secondes", "secondes de 111"),
+                         ("lambda_min_um", "lambda min de la bande"),
+                         ("lambda_max_um", "lambda max de la bande")):
+            if cle not in d or d[cle] is None:
+                continue
+            val = d[cle]
+            txt = f"{val}".replace(".", ",")
+            out.append((nom, [f"**{txt}**", txt, f"{val}"], bnd.name))
+        cf = d.get("controle_fabrique", {})
+        for cle, nom in (("score_max_sur_une_derive_seule", "score max sur une derive seule"),
+                         ("score_min_sur_une_periodicite_pure",
+                          "score min sur une periodicite pure")):
+            if cle not in cf or cf[cle] is None:
+                continue
+            val = cf[cle]
+            out.append((nom, [f"**{val}**", f"{val}",
+                              f"**{val}**".replace(".", ","),
+                              f"{val}".replace(".", ",")], bnd.name))
+        for c in cf.get("cas", []):
+            for x in c["par_longueur"]:
+                if not x.get("decidable"):
+                    continue
+                for quoi in ("ancien", "borne"):
+                    for cle, nom in (("feuilles_par_pas", "compte"), ("score", "score")):
+                        val = x[quoi][cle]
+                        out.append((f"{nom} {quoi} de {c['cas']} a {x['pas']} pas",
+                                    [f"**{val}**", f"{val}"], bnd.name))
+        n_ = d.get("nul_de_la_bande", {})
+        for x in n_.get("par_longueur", []):
+            for cle, nom in (("p99_du_score", "barre de la bande a"),
+                             ("f_min", "f min de la bande a"),
+                             ("f_max", "f max de la bande a")):
+                val = x[cle]
+                out.append((f"{nom} {x['longueur_um']:.0f} um",
+                            [f"**{val}**", f"{val}"], bnd.name))
+            out.append((f"longueur de fenetre {x['longueur_um']:.0f}",
+                        [f"**{x['longueur_um']:.0f}**", f"{x['longueur_um']:.0f}"], bnd.name))
+        if "pente_de_la_barre" in n_ and n_["pente_de_la_barre"] is not None:
+            val = n_["pente_de_la_barre"]
+            out.append(("pente de la barre",
+                        [f"**{val}**", f"{val}", f"**{val:+.4f}**", f"{val:+.4f}"], bnd.name))
+        pm = d.get("par_mode", {})
+        for nom_m in ("mode_haut", "mode_bas"):
+            b = pm.get(nom_m) or {}
+            if not b.get("decidable"):
+                continue
+            for cle, nom in (("derive_de_lancien", "derive de lancien du"),
+                             ("derive_du_borne", "derive du borne du"),
+                             ("ancien_au_plus_court", "ancien au plus court du"),
+                             ("ancien_au_plus_long", "ancien au plus long du"),
+                             ("borne_au_plus_court", "borne au plus court du"),
+                             ("borne_au_plus_long", "borne au plus long du")):
+                val = b[cle]
+                formes = [f"**{val}**", f"{val}"]
+                if cle.startswith("derive"):
+                    formes += [f"**{val:+.3f}**", f"{val:+.3f}"]
+                out.append((f"{nom} {nom_m}", formes, bnd.name))
+            for x in b.get("par_longueur", []):
+                for cle, nom in (("ancien_median", "ancien du"), ("borne_median", "borne du"),
+                                 ("score_borne_median", "score borne du"),
+                                 ("barre_du_score_borne", "barre du"),
+                                 ("part_au_dessus_de_la_barre", "part au dessus du")):
+                    if cle not in x or x[cle] is None:
+                        continue
+                    val = x[cle]
+                    formes = [f"**{val}**", f"{val}"]
+                    if cle == "part_au_dessus_de_la_barre":
+                        pc = f"{100 * val:.1f}".replace(".", ",")
+                        formes += [f"**{pc} %**", f"{pc} %", f"{pc}%",
+                                   f"**{100 * val:.1f} %**", f"{100 * val:.1f} %",
+                                   f"{100 * val:.1f}%"]
+                    out.append((f"{nom} {nom_m} a {x['pas']} pas", formes, bnd.name))
+        for cle, nom in (("ecart_entre_modes_au_plus_long_ancien",
+                          "ecart entre modes au plus long ancien"),
+                         ("ecart_entre_modes_au_plus_long_borne",
+                          "ecart entre modes au plus long borne"),
+                         ("falaise_de_lancien_dans_le_mode_bas", "falaise de lancien"),
+                         ("falaise_du_borne_dans_le_mode_bas", "falaise du borne")):
+            if cle not in pm or pm[cle] is None:
+                continue
+            val = pm[cle]
+            out.append((nom, [f"**{val}**", f"{val}", f"**{val:+.3f}**", f"{val:+.3f}"],
+                        bnd.name))
+        cp = d.get("comparaison", {})
+        for cle, nom in (("derive_de_lancien", "derive de lancien sur lensemble"),
+                         ("derive_du_borne", "derive du borne sur lensemble")):
+            if cle not in cp or cp[cle] is None:
+                continue
+            val = cp[cle]
+            out.append((nom, [f"**{val}**", f"{val}", f"**{val:+.3f}**", f"{val:+.3f}"],
+                        bnd.name))
+
     # ⭐⭐⭐ LE COMPTE SUIT-IL LE PAS (`110`), ET TROIS APPARIEMENTS SONT OBLIGATOIRES.
     # (1) Le biais de l'ENSEMBLE ne voyage jamais sans le partage PAR MODE : la mediane d'un
     # melange dont les proportions changent avec la longueur se lit comme une derive de la matiere

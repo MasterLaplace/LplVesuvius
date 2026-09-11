@@ -184,6 +184,23 @@ l'avoir copié a coûté la course.
 ⚠ Et la batterie porte désormais le contrôle qui l'aurait attrapé : *l'agrégation survit à une
 vérification non décidable*.
 
+## ⭐⭐⭐⭐ Ce que `111` a tranché, et ce document posait la question
+
+> ⭐⭐⭐⭐ **La falaise était celle de l'instrument.**
+> [`111`](111_une_bande_qui_ne_bouge_pas_avec_la_fenetre.md) borne la bande de fréquences par des
+> longueurs d'onde PHYSIQUES (λ de **86.5** à **346.0** µm, les candidats du balayage) au lieu du
+> plancher relatif `F_MIN = 0,35`. Sur les mêmes profils, la falaise du mode bas passe de
+> **-0.888** à **-0.068** et il franchit **0.951** feuille par pas à six pas ; l'écart entre les
+> modes au plus long tombe de **+0.965** à **+0.134**.
+>
+> ⭐ **Ce document avait raison sur les deux points qui comptaient** : le biais de l'ensemble était
+> un artefact de mélange, et l'observation ne distinguait pas les deux explications. `111` fournit
+> l'instrument qui les distingue.
+>
+> ⚠⚠ Et le prix est réel : une bande bornée ne peut plus dire « pas de périodicité » par son
+> compte — c'est son **score** qui l'écarte, et le mode bas franchit sa barre sur **76.9 %** à
+> **88.5 %** de ses marches.
+
 ## 11. ⚠ Ce que cette tranche ne dit pas
 
 - **Six pas ne sont pas cent vingt**, et la courbe s'arrête où le plafond de `107` s'arrête.

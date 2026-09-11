@@ -177,6 +177,20 @@ nomme.
 > ⚠⚠ Et `109` trouve au passage que les marches **entièrement confirmées dépassent** de **+0,292**
 > feuille par pas — le critère confirme des pas qui traversent trop.
 
+## ⭐⭐⭐⭐ Ce que `111` retire à ce document, et il faut le lire avant le reste
+
+> ⭐⭐⭐⭐ **Les deux populations de ce document sont, pour l'essentiel, celles de l'instrument.**
+> [`111`](111_une_bande_qui_ne_bouge_pas_avec_la_fenetre.md) relit les mêmes profils avec une
+> bande de fréquences dérivée de la matière — λ de **86.5** à **346.0** µm, les candidats du
+> balayage — au lieu du plancher relatif `F_MIN = 0,35` de `98`. Le mode qui « ne compte rien »
+> passe d'une dérive de **-0.888** feuille par pas à **-0.068**, et franchit **0.951** feuille par
+> pas à six pas.
+>
+> ⭐⭐⭐ **L'écart entre les deux modes au plus long tombe de +0.965 à +0.134.**
+>
+> ⚠ Ce qui n'est PAS touché : la portée (1,0 pas confirmés), le risque par pas, le coût. Ce sont
+> d'autres instruments.
+
 ## 8. Ce que cette course ne dit pas
 
 - Elle ne dit **pas** que « une feuille » a le sens géométrique qu'on lui prêtait : `106` a montré

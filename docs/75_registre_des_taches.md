@@ -4553,6 +4553,99 @@ renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la bat
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
 
 ---
+##### ⭐⭐⭐⭐ UNE BANDE QUI NE BOUGE PAS AVEC LA FENÊTRE — la falaise était celle de l'instrument
+
+> Mesure : `src/nappe/une_bande_qui_ne_bouge_pas_avec_la_fenetre.py` (26 contrôles) →
+> `docs/mesures/une_bande_qui_ne_bouge_pas_avec_la_fenetre.json`. Figure :
+> `src/figures/figure_une_bande_qui_ne_bouge_pas_avec_la_fenetre.py` (17 contrôles).
+> Document : [`111`](111_une_bande_qui_ne_bouge_pas_avec_la_fenetre.md), le 2026-09-11.
+> ⭐ **56 lectures, 1158.5 s** — et **les profils bruts sont gardés** cette fois.
+
+![une bande qui ne bouge pas avec la fenêtre](images/111_une_bande_qui_ne_bouge_pas_avec_la_fenetre.png)
+
+Le plancher de fréquence de `98` est **relatif à la fenêtre** : il cherche entre 0,35 et `k+4`
+**périodes par fenêtre**, donc il admet une longueur d'onde de **1314 µm** à deux pas et **3943** à
+six. Aucune n'est un espacement de feuille. Le remède est une **bande dérivée de la matière** —
+`f = L / λ` avec λ dans la plage des candidats du balayage (**86.5** à
+**346.0** µm). ⭐ Aucune ligne de `98` n'est réécrite.
+
+##### ⭐⭐⭐⭐ Le résultat : le mode qui « ne compte rien » compte
+
+| mode | bande | 2 pas | 3 | 4 | 5 | 6 | dérive |
+|---|---|---:|---:|---:|---:|---:|---:|
+| **qui compte** | ancien | **1.012** | **1.128** | **0.82** | **0.889** | **1.085** | **+0.073** |
+| **qui compte** | **borné** | **1.031** | **1.128** | **0.861** | **0.943** | **1.085** | **+0.054** |
+| **qui ne compte rien** | ancien | **1.008** | **0.241** | **0.186** | **0.152** | **0.12** | **-0.888** |
+| **qui ne compte rien** | **borné** | **1.019** | **0.996** | **0.933** | **0.937** | **0.951** | **-0.068** |
+
+> ⭐⭐⭐⭐ La falaise passe de **-0.888** à
+> **-0.068**, et l'écart entre les deux modes au plus long
+> de **+0.965** à
+> **+0.134**. Sur l'ensemble, la dérive du taux passe de
+> **-0.809** à **-0.032**.
+
+##### ⚠⚠⚠ Le prix, nommé avant d'être mesuré
+
+Une bande étroite **ne peut plus dire « pas de périodicité » par son compte**. Sur une **dérive
+SEULE**, sans aucune feuille :
+
+| | 2 pas | 3 | 4 | 5 | 6 |
+|---|---:|---:|---:|---:|---:|
+| compte borné | **0.842** | **0.735** | **0.685** | **0.665** | **2.19** |
+| **score** borné | **0.282** | **0.171** | **0.119** | **0.046** | **0.019** |
+
+C'est le **score** qui l'écarte : **0.282** au plus sur une dérive
+seule contre **0.984** au moins sur une périodicité pure.
+
+Les cinq cas connus, compte (score), les deux bandes :
+
+| cas | bande | 2 pas | 3 | 4 | 5 | 6 |
+|---|---|---:|---:|---:|---:|---:|
+| **periodicite pure** | anc | **1.0** (0.985) | **1.002** (0.987) | **0.999** (0.985) | **1.001** (0.986) | **0.999** (0.984) |
+| | **bor** | **1.0** (0.985) | **1.001** (0.987) | **0.998** (0.985) | **1.001** (0.986) | **1.0** (0.984) |
+| **periodicite plus derive x1,5** | anc | **0.963** (0.849) | **0.15** (0.76) | **0.13** (0.832) | **0.126** (0.836) | **0.125** (0.822) |
+| | **bor** | **0.962** (0.849) | **0.973** (0.66) | **0.986** (0.558) | **0.996** (0.548) | **1.001** (0.57) |
+| **periodicite plus derive x2,0** | anc | **0.95** (0.78) | **0.147** (0.839) | **0.13** (0.893) | **0.126** (0.897) | **0.125** (0.882) |
+| | **bor** | **0.95** (0.78) | **0.968** (0.566) | **0.982** (0.46) | **0.993** (0.446) | **1.001** (0.473) |
+| **derive SEULE, aucune feuille** | anc | **0.175** (0.919) | **0.127** (0.976) | **0.124** (0.984) | **0.125** (0.985) | **0.126** (0.984) |
+| | **bor** | **0.842** (0.282) | **0.735** (0.171) | **0.685** (0.119) | **0.665** (0.046) | **2.19** (0.019) |
+| **bruit pur** | anc | **0.98** (0.165) | **0.472** (0.15) | **1.519** (0.146) | **0.793** (0.149) | **0.104** (0.107) |
+| | **bor** | **0.98** (0.165) | **1.051** (0.115) | **1.518** (0.146) | **0.793** (0.149) | **1.631** (0.08) |
+
+##### ⚠⚠⚠ La barre de la bande bornée BAISSE, et j'avais annoncé l'inverse
+
+| longueur | f min | f max | p99 sur bruit pur |
+|---:|---:|---:|---:|
+| 417 µm | **1.204** | **4.817** | **0.2874** |
+| 625 µm | **1.806** | **7.226** | **0.2333** |
+| 833 µm | **2.409** | **9.634** | **0.2156** |
+| 1042 µm | **3.011** | **12.043** | **0.1938** |
+| 1250 µm | **3.613** | **14.451** | **0.1725** |
+
+Deux effets s'opposent : la bande **s'élargit** avec la fenêtre, mais le nombre d'**échantillons**
+grandit et la corrélation fortuite décroît en `1/√n`. ⭐ C'est le second qui gagne (pente
+**-0.1149**) : la bande bornée devient **plus** discriminante quand la marche
+s'allonge.
+
+Le score de chaque mode et la part de ses marches au-dessus de la barre :
+
+| mode | sc. 2 | 3 | 4 | 5 | 6 | >barre 2 | 3 | 4 | 5 | 6 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| mode haut | **0.585** | **0.47** | **0.427** | **0.42** | **0.384** | **1.0** | **0.909** | **1.0** | **0.909** | **1.0** |
+| mode bas | **0.556** | **0.419** | **0.39** | **0.32** | **0.277** | **0.769** | **0.885** | **0.769** | **0.769** | **0.769** |
+
+⭐⭐ Et le compte du mode bas est lu **au-dessus** de cette barre — **0.769**
+à **0.885** de ses marches
+la franchissent, ce sans quoi « il compte 0,95 » ne voudrait rien dire.
+
+##### ⚠⚠⚠ La dette rétroactive, et elle fait partie du résultat
+
+`99` à `110` ont **tous** été mesurés avec la bande non bornée. `107` perd ses **deux populations** ;
+`108` garde son **fait** et perd son **interprétation** — le score du PAS, lui borné par les
+candidats du balayage, prédisait *quand l'estimateur NON borné perd le signal*. ⚠ Sa conséquence
+opérationnelle tombe avec.
+
+---
 ##### ⭐⭐⭐⭐ LE COMPTE SUIT-IL LE PAS ? — le mode qui compte ne dérive pas
 
 > Mesure : `src/nappe/le_compte_suit_il_le_pas.py` (39 contrôles) →

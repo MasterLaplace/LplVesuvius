@@ -7,6 +7,46 @@ l'historique, daté, et se lit ensuite.
 
 ## ⭐⭐⭐⭐ REPRISE — 2026-09-10
 
+⭐⭐⭐⭐ **ET `111` A TRANCHÉ LA QUESTION QUE `110` LAISSAIT OUVERTE : LA FALAISE ÉTAIT CELLE DE
+L'INSTRUMENT.** Le plancher de fréquence de `98` est **relatif à la fenêtre** — 0,35 période par
+fenêtre, donc une longueur d'onde de **1314 µm** admise à deux pas et **3943** à six, alors
+qu'aucune n'est un espacement de feuille. Le remède est une **bande dérivée de la matière**
+(`f = L / λ`, λ dans la plage des candidats du balayage, **86.5** à **346.0** µm) : ⭐ aucune ligne
+de `98` n'est réécrite, c'est la bande qui change.
+
+⭐⭐⭐⭐ **ET LE MODE QUI « NE COMPTE RIEN » COMPTE.** Sur **les mêmes échantillons**, sa falaise passe
+de **-0.888** à **-0.068** et il franchit **0.951** feuille par pas à six pas. L'écart entre les
+deux modes au plus long tombe de **+0.965** à **+0.134** : **la bimodalité de `107` s'efface
+presque entièrement.** Il franchissait une feuille par pas depuis le début, et c'est l'instrument
+qui la perdait.
+
+⚠⚠⚠ **ET LE PRIX EST RÉEL, NOMMÉ AVANT D'ÊTRE MESURÉ** : une bande étroite ne peut plus dire « pas
+de périodicité » **par son compte** — sur une dérive SEULE elle rend **0.84** feuille par pas. C'est
+le **score** qui l'écarte (**0.282** au plus contre **0.984** au moins sur une périodicité pure), et
+le mode bas franchit sa propre barre sur **0.769** à **0.885** de ses marches. ⭐ Sans cela, « il
+compte 0,95 » ne voudrait rien dire.
+
+⚠⚠⚠ **ET LA BARRE BAISSE AVEC LA LONGUEUR, J'AVAIS ANNONCÉ L'INVERSE.** Deux effets s'opposent : la
+bande s'élargit avec la fenêtre, mais le nombre d'ÉCHANTILLONS grandit et la corrélation fortuite
+décroît en `1/√n`. C'est le second qui gagne (pente **-0.1149**) : la bande bornée devient **plus**
+discriminante quand la marche s'allonge.
+
+⚠⚠⚠ **ET LA DETTE RÉTROACTIVE EST LOURDE — elle fait partie du résultat.** `99` à `110` ont **tous**
+été mesurés avec la bande non bornée. `107` perd ses **deux populations** ; `108` garde son **fait**
+et perd son **interprétation** — le score du PAS, lui borné par les candidats du balayage,
+prédisait *quand l'estimateur NON borné perd le signal*, ce qui est le mécanisme de `111` trouvé par
+l'autre bout. ⚠ Sa conséquence opérationnelle (« après trois pas un automate sait s'il faut
+insister ») tombe avec, puisque ce qu'il saurait est quand l'ancien instrument échoue.
+
+⚠ **CE QUE `111` NE TOUCHE PAS** : la portée de `107` (1,0 pas confirmés — c'est le critère de `98`
+PAR PAS, un autre instrument), son risque par pas, son coût ; et `106` reste debout.
+
+⭐ **ET UN ACQUIS D'OUTILLAGE** : les **profils bruts sont gardés**. `107` a gardé ses étapes sans son
+départ, `110` ses préfixes sans ses échantillons — d'où les **1158.5 s** repayées ici pour relire
+les mêmes voxels. Toute relecture future est gratuite.
+
+---
+
 ⭐⭐⭐⭐ **ET `110` A POSÉ LA QUESTION QUE `109` DÉSIGNAIT, POUR UNE LECTURE PAR MARCHE.** Les étapes
 gardées par `107` reconstruisent chaque polyligne, donc le registre se recalcule sur chacun de ses
 **PRÉFIXES** : **56** lectures, **2050,6 s**, là où refaire les marches coûterait des heures.
