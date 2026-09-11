@@ -573,6 +573,22 @@ def verifier() -> int:
         except ValueError:
             v("une course sans marche est refusée", True)
 
+        # ⚠ Et une course VALIDE traverse `mesurer` PUIS `afficher`. Sans ce passage, le chemin
+        # qui met les nombres sous les yeux n'est exercé par rien — donc une `KeyError` dans
+        # l'affichage n'apparaîtrait qu'au moment de publier, sur la seule exécution qui compte.
+        pleine = {"lignes": [{"rayon_mm": 4.0 + i, "detail": [{"etapes":
+                  [etape(0.0, 0.0) for _ in range(3 if i >= 12 else 0)]
+                  + [etape(5.0 + (i % 4), 0.4 + 0.05 * (i % 5), (i + k) % 3 == 0)
+                     for k in range(20 - (3 if i >= 12 else 0))]}]}
+                  for i in range(18)]}
+        p.write_text(json.dumps(pleine), encoding="utf-8")
+        r = mesurer(p)
+        v("une course valide est mesurée", r["marches"] == 18, f"{r['marches']}")
+        v("... et ses trois sections sont rendues",
+          all(k in r for k in ("le_vide_est_il_declare_oriente", "temoin",
+                               "le_rayon_survit_il_aux_marches_voyantes")))
+        afficher(r)
+
     print(f"\n{'ALL PASS' if echecs == 0 else 'ÉCHEC'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 

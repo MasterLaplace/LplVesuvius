@@ -139,6 +139,14 @@ et le rayon ne survit pas aux marches qui ont lu.
 
 *`archive/115` — `src/figures/figure_ce_qui_porte_le_taux.py`. À gauche, les deux nuages superposés : la pente n'existe que parce que les marches qui n'ont rien lu sont à droite. À droite, le défaut — les 178 pas aveugles portent tous le drapeau `oriente`, parce que deux moitiés de rien rendent un désaccord de 0,00°.*
 
+`116` va au bout de cette relecture : la cécité est **absorbante**. Sur les onze marches qui cessent
+de lire, aucune ne relit, là où un tirage au hasard en ferait relire sept. Le marcheur avait donc
+son critère d'arrêt depuis le début, et il marchait dans le vide au lieu de s'en servir.
+
+![La cécité est absorbante : les cases aveugles sont toujours en queue, et elles alternent au lieu de faire frontière](../images/116_la_cecite_est_absorbante.png)
+
+*`archive/116` — `src/figures/figure_la_cecite_est_absorbante.py`. Les cases rouges ne sont jamais au milieu d'une marche, toujours en queue ; le témoin de droite montre ce que le hasard en ferait. Et elles alternent avec des marches entières jusqu'à 22,17 mm : huit plages contre deux sous une frontière radiale, donc le vide n'est pas le bord du rouleau.*
+
 ![Le coût qui connaît la spire : le champ tourné, faux par construction, obtient 83 % de la descente du vrai](../images/114_le_cout_qui_connait_la_spire.png)
 
 *`archive/114` — `src/figures/figure_le_cout_qui_connait_la_spire.py`. La réouverture était légitime, la réponse est non : 0,5 % du chemin.*
@@ -448,6 +456,17 @@ p 0,2579). ⚠⚠ Et le vide est **déclaré orienté 178 fois sur 178** (`orien
 et deux moitiés de rien rendent 0,00°) — la forme de `54`, `60` et `41` §6bis. → **le marcheur n'a
 pas de dérive au grand rayon ; ce qui lui manque est de savoir quand il ne lit rien**, et la
 signature est disponible avant le pas.
+
+**`116` · 2026-09-11 · la cécité est-elle absorbante** (`la_cecite_est_elle_absorbante.py`, une seconde, hors ligne)
+Relit les mêmes 560 étapes. **Aucune des 11 marches qui cessent de lire ne relit** : 167 transitions
+aveugle → aveugle, **0** aveugle → voyant, là où une permutation intra-marche à compte constant rend
+**7 retours en médiane** et jamais moins de 5 sur 2 000 tirages. S'arrêter au premier pas aveugle
+donne donc **la première portée non censurée du dépôt** : 11 marches sur 28 s'arrêtent pour une
+raison, médiane **579,5 µm** (max **3312,9 µm**) ; les 17 autres touchent encore le plafond et
+restent une borne inférieure. ⭐ Et rangées par rayon, les marches aveugles font **8 plages** contre
+**2** sous une frontière radiale (14 sous permutation, p 0,0095) : le vide n'est pas le bord du
+rouleau. → **le marcheur avait son arrêt depuis le début**,
+et ce qui reste censuré est la portée sur matière lisible.
 
 ## 4. Le tableau des statuts
 

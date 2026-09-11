@@ -1388,6 +1388,9 @@ fi
 run "ce qui porte le taux"    uv run python "$ROOT/src/nappe/ce_qui_porte_le_taux.py" --verifier
 run "figure ce qui porte"     uv run python "$ROOT/src/figures/figure_ce_qui_porte_le_taux.py" --verifier
 run "figure jusquou"          uv run python "$ROOT/src/figures/figure_jusquou.py" --verifier
+# ⚠ `116` relit les memes etapes que `115` : sa batterie est hors ligne elle aussi.
+run "la cecite absorbante"    uv run python "$ROOT/src/nappe/la_cecite_est_elle_absorbante.py" --verifier
+run "figure cecite"           uv run python "$ROOT/src/figures/figure_la_cecite_est_absorbante.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

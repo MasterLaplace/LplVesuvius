@@ -5265,6 +5265,24 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   qualité du scan.
 - **lu** : intégralement, 168 lignes, le 2026-09-11
 
+### docs/archive/116_la_cecite_est_absorbante.md
+- **lignes** : 158
+- **nature** : RESULTAT
+  (les pas aveugles trouvés par `115` sont-ils l'arrêt que `113` cherchait ? mesuré sur les mêmes
+  560 étapes, sans une lecture distante.)
+- **résumé** : ⭐⭐⭐⭐ **La cécité est ABSORBANTE et le marcheur avait donc son arrêt depuis le
+  début.** Sur les **11 marches** qui cessent de lire, **aucune ne relit** : 167 transitions
+  aveugle→aveugle, **0** aveugle→voyant ; sous permutation intra-marche à compte constant, le
+  hasard rend **7 retours en médiane** et jamais moins de 5 sur 2 000 tirages. ⭐⭐⭐⭐ D'où **la
+  première portée non censurée du dépôt** : s'arrêter au premier pas aveugle arrête **11 marches
+  sur 28 pour une raison**, médiane **579,5 µm** (max 3312,9) ; les 17 autres touchent encore le
+  plafond et restent une borne inférieure (3650,3 µm). ⭐⭐⭐ Et **le vide n'est pas le bord du
+  rouleau** : rangées par rayon, les marches aveugles font **8 plages** contre **2** sous une
+  frontière radiale et 14 sous permutation (p 0,0095) — les deux populations se recouvrent de
+  16,93 à 22,17 mm. ⚠ Ce qui tombe est la frontière, pas les deux autres causes de `R4-P22`.
+  ⚠ La portée mesurée est celle du couple marcheur-volume, pas de la matière.
+- **lu** : intégralement, 158 lignes, le 2026-09-11
+
 ### docs/archive/115_ce_qui_porte_le_taux.md
 - **lignes** : 163
 - **nature** : RESULTAT

@@ -4,7 +4,7 @@
 
 # Les faits, et ce qu'ils valent aujourd'hui
 
-**138 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **128** établi, **3** borné, **4** réfuté, **3** rétracté, **0** ouvert.
+**141 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **131** établi, **3** borné, **4** réfuté, **3** rétracté, **0** ouvert.
 
 ## R1 — 20 faits
 
@@ -81,7 +81,7 @@
 | `R3-F19` | **la chaîne radiale converge six tours et casse au septième** ; ce qui décide est la portée, pas le pas | officiel + 6 spires `gen_neighbor` : 4/7 convergent, 7ᵉ +1,475 ; pas 0,5 → 6/7 ; optimum en U, bassin 0,25–0,5 ; portée = `neighbor_exit_count` × pas ; repousse libre : casse au 3ᵉ tour | établi | `43` §1–6 · `spire_suivante.sh`, `table_chaine.py` |
 | `R3-F20` | **la chaîne avance d'une nappe à la fois, et s'érode** | 113 µm entre nappes (100–138) ; érosion **15,6 %/tour** sur l'aire utile (58 → 23 % valides) ; ~10 % d'un tour par nappe → une colonne, pas une bande ; rayon refusé (résidu 0,5 mm pour 0,113 d'écart) | établi ; « 4,0 % » rétracté | `44` §1–7 · `geometrie_chaine.py` |
 
-## R4 — 38 faits
+## R4 — 41 faits
 
 | id | fait | valeur | statut | source · producteur |
 |---|---|---|---|---|
@@ -123,6 +123,9 @@
 | `R4-F36` | **un pas sur trois ne lit RIEN**, et pas un seul ne confirme | 178 pas aveugles sur 560 (31,8 %) — désaccord exactement 0,00° ET planarité exactement 0,000 — dont **0 confirmé** ; 4 marches sur 28 sont aveugles **dès leur premier pas** | établi | `115` · `nappe/ce_qui_porte_le_taux.py` |
 | `R4-F37` | **le vide est déclaré orienté** : le marcheur croit savoir où il va là où il ne lit rien | 178 pas aveugles sur 178 portent `oriente = vrai`, parce que `oriente = désaccord < barre` et que deux moitiés de rien rendent 0,00° ; même forme que `54` (cinq rendus vides lus comme cinq surfaces plates) et `41` §6bis | établi ; défaut du drapeau, pas de la matière | `115`, `54`, `41` · `nappe/ce_qui_porte_le_taux.py` |
 | `R4-F38` | **là où le volume répond, le marcheur confirme les trois quarts de ses pas, à tout rayon** | taux **0,7618** sur les 382 pas voyants ; 0,800 médian sous 17 mm contre 0,750 au-dessus (p 0,2579) ; le rayon ne survit pas (rho −0,1904, p 0,4642 sur 17 marches) | établi | `115` · `nappe/ce_qui_porte_le_taux.py` |
+| `R4-F39` | **la cécité est absorbante** : une marche qui cesse de lire ne relit jamais, donc le marcheur avait depuis le début l'arrêt qui lui manquait | 167 transitions aveugle→aveugle, **0** aveugle→voyant sur les 11 marches qui en avaient l'occasion ; sous permutation intra-marche à compte constant, **7 retours en médiane** et jamais moins de 5 sur 2 000 tirages | établi | `116` · `nappe/la_cecite_est_elle_absorbante.py` |
+| `R4-F40` | s'arrêter au premier pas aveugle rend **la première portée non censurée du dépôt** | **11 marches sur 28** s'arrêtent pour une raison : médiane **579,5 µm**, max **3 312,9 µm** ; les 17 autres touchent encore le plafond de vingt pas et restent une borne inférieure (médiane 3 650,3 µm) | établi ; portée du couple marcheur-volume, pas de la matière : `R4-P22` non tranchée | `116`, `113` · `nappe/la_cecite_est_elle_absorbante.py` |
+| `R4-F41` | **le vide n'est pas le bord du rouleau** : il vient par plaques, avec une tendance radiale | rangées par rayon, les marches aveugles font **8 plages** contre **2** sous une frontière radiale et 14 sous permutation (p **0,0095**) ; une marche lit ses vingt pas à 22,17 mm quand une autre ne lit rien dès le premier à 21,26 mm | établi ; réfute la frontière, pas les deux autres causes de `R4-P22` | `116` · `nappe/la_cecite_est_elle_absorbante.py` |
 
 ## R5 — 20 faits
 

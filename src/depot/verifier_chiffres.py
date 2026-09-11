@@ -2594,6 +2594,71 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                             [f"**{val}**", f"{val}", f"**{val:+.3f}**", f"{val:+.3f}"],
                             cpt.name))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 116 : LE MARCHEUR AVAIT SON ARRET, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Le « 0 retour de vue » ne voyage JAMAIS sans la mediane sous permutation. Seul, zero se
+    # lit comme « on n'a rien trouve » ; avec « 7 sous permutation », il se lit pour ce qu'il est,
+    # un ecart extreme. C'est la meme forme que le rho de 115 : le fait est l'ECART, pas la valeur.
+    # (2) La portee mesuree ne voyage jamais sans le compte de marches ENCORE CENSUREES. Seule,
+    # « 579,5 um » se lit comme la portee du marcheur, alors que dix-sept marches n'ont pas
+    # d'arret du tout et restent une borne inferieure.
+    # (3) Les huit plages ne voyagent jamais sans les deux d'une frontiere : « 8 » ne veut rien
+    # dire sans ce qu'une frontiere aurait rendu.
+    cec = _source(racine, "la_cecite_est_elle_absorbante.json")
+    if cec.exists():
+        d = json.loads(cec.read_text())
+        a = d.get("la_cecite_est_elle_absorbante", {})
+        for cle, nom in (("marches_avec_un_pas_aveugle", "marches avec un pas aveugle de 116"),
+                         ("marches_ou_la_vue_revient", "retours de vue de 116"),
+                         ("marches_avec_occasion", "marches avec occasion de 116")):
+            if a.get(cle) is not None:
+                v_ = a[cle]
+                out.append((nom, [f"**{v_}**", f"{v_}"], cec.name))
+        for cle, nom in (("aveugle_puis_aveugle", "transitions aveugle-aveugle de 116"),
+                         ("aveugle_puis_voyant", "transitions aveugle-voyant de 116"),
+                         ("voyant_puis_aveugle", "transitions voyant-aveugle de 116"),
+                         ("voyant_puis_voyant", "transitions voyant-voyant de 116")):
+            if a.get("transitions", {}).get(cle) is not None:
+                v_ = a["transitions"][cle]
+                out.append((nom, [f"**{v_}**", f"{v_}"], cec.name))
+        w = d.get("temoin", {})
+        for cle, nom in (("retours_medians_sous_permutation", "retours medians de 116"),
+                         ("retours_min_sous_permutation", "retours min de 116"),
+                         ("tirages", "tirages du temoin de 116")):
+            if w.get(cle) is not None:
+                v_ = int(w[cle])
+                out.append((nom, [f"**{v_}**", f"{v_}"], cec.name))
+        po = d.get("la_portee_quand_on_sarrete_a_laveugle", {})
+        for cle, nom in (("marches_qui_sarretent_pour_une_raison", "marches arretees de 116"),
+                         ("marches_encore_censurees", "marches censurees de 116"),
+                         ("marches_arretees_des_le_premier_pas", "marches nulles de 116")):
+            if po.get(cle) is not None:
+                v_ = po[cle]
+                out.append((nom, [f"**{v_}**", f"{v_}"], cec.name))
+        for bloc_, nom in (("portee_mesuree", "portee mesuree de 116"),
+                           ("portee_encore_censuree", "portee censuree de 116")):
+            b = po.get(bloc_, {})
+            if b.get("longueur_mediane_um") is not None:
+                ajoute(nom, b["longueur_mediane_um"], 1, cec.name, unites=("µm",))
+            if b.get("longueur_max_um") is not None:
+                ajoute(nom + " (max)", b["longueur_max_um"], 1, cec.name, unites=("µm",))
+        fr_ = d.get("le_vide_est_il_une_frontiere", {})
+        for cle, nom in (("plages_observees", "plages de 116"),
+                         ("plages_sous_une_frontiere", "plages sous frontiere de 116"),
+                         ("marches_aveugles", "marches aveugles de 116")):
+            if fr_.get(cle) is not None:
+                v_ = int(fr_[cle])
+                out.append((nom, [f"**{v_}**", f"{v_}"], cec.name))
+        if fr_.get("plages_medianes_sous_permutation") is not None:
+            v_ = int(fr_["plages_medianes_sous_permutation"])
+            out.append(("plages medianes de 116", [f"**{v_}**", f"{v_}"], cec.name))
+        if fr_.get("part_des_permutations_aussi_peu_de_plages") is not None:
+            ajoute("p des plages de 116", fr_["part_des_permutations_aussi_peu_de_plages"],
+                   4, cec.name)
+        for cle, nom in (("rayon_de_la_premiere_aveugle_mm", "rayon de la premiere aveugle de 116"),
+                         ("rayon_de_la_derniere_voyante_mm", "rayon de la derniere voyante de 116")):
+            if fr_.get(cle) is not None:
+                ajoute(nom, fr_[cle], 2, cec.name, unites=("mm",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 115 : LE RAYON N'EST PAS LA CAUSE, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) Le rho des VOYANTES ne voyage jamais sans celui de TOUTES : « -0,19, p 0,46 » seul se
     # lit comme « on n'a rien trouve », alors que le resultat est qu'un -0,72 tres significatif
