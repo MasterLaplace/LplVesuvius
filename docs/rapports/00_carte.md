@@ -64,10 +64,10 @@ leur question :
 | | campagne | la question | documents | rapport |
 |---|---|---|---|---|
 | **R1** | **L'encre — la règle graduée** | que reste-t-il de l'encre au régime du prix, et peut-on juger un rendu sans se mentir ? | `08`–`10`, `12`, `14`, `19`–`24`, `36`, `45`–`46`, `58`–`60`, `63`–`65`, `72`, `75` §C1–C3 | `R1_encre.md` |
-| **R2** | **L'excision et la réparation** | réparer une trace sert-il à quelque chose de mesurable ? | `03`–`07`, `33`–`34`, `75` D1 | `R2_excision.md` |
-| **R3** | **La graine et le traceur** | le traceur est-il un tirage, et qu'est-ce qui gouverne où il va ? | `25`–`26`, `30`, `35`, `37`–`55` | `R3_graine_et_traceur.md` |
+| **R2** | **L'excision et la réparation** | réparer une trace sert-il à quelque chose de mesurable ? | `03`–`07`, `11`, `17`, `34`, `75` D1 | `R2_excision.md` |
+| **R3** | **La graine et le traceur** | le traceur est-il un tirage, et qu'est-ce qui gouverne où il va ? | `16`, `25`–`26`, `30`, `33`, `35`, `37`–`55` | `R3_graine_et_traceur.md` |
 | **R4** | **Le déroulement** — *le graal* | qu'est-ce qui remplace l'humain du transfert ? | `76`–`79`, `81`–`86`, `90`–`114`, `75` §A et ses ~40 tranches, `75` §C (la campagne `0500P2`, 5–7 sept.) | `R4_deroulement.md` |
-| **R5** | **La méthode et l'hygiène** | comment ce dépôt se trompe, et ce qui l'attrape | `56`–`57`, `61`, `80`, `87`–`89` | `R5_methode.md` |
+| **R5** | **La méthode et l'hygiène** | comment ce dépôt se trompe, et ce qui l'attrape | `56`–`57`, `61`–`62`, `80`, `87`–`89` | `R5_methode.md` |
 | **R6** | **La littérature et l'antériorité** | qu'est-ce qui était déjà publié, et par qui | `00`, `27`, `32`, `66`–`71`, `73`–`74`, les pages *winners* et *open problems* | `R6_litterature.md` |
 
 Ce qui n'entre dans aucun rapport parce que c'est du **procédé** (plans, batchs, registres, brouillons
@@ -106,3 +106,4 @@ vide n'est pas une case perdue, c'est une case non travaillée.
 | 2026-09-11 | ouverture : carte, `PRIX.md` depuis les pages téléchargées le jour même |
 | 2026-09-11 | `R4_deroulement.md` (34 documents lus) ; `R6_litterature.md` (11 documents et les pages du prix) ; `73`–`74` rattachés à R6 |
 | 2026-09-11 | `R1_encre.md` (24 documents et `75` §C1–C3) ; `75` §C scindé : la campagne de déroulement `0500P2` (lignes 1476–6738) va à R4, les cases C1–C3 à R1 |
+| 2026-09-11 | `R2_excision.md` (9 documents et `75` D1) ; quatre documents que la carte ne rattachait à rien : `11` et `17` → R2 (leurs producteurs vivent dans `src/excision/`, leur référent est `windcheck`), `16` → R3 avec `33` (la carte des treize est une question d'objet), `62` → R5 |
