@@ -497,6 +497,17 @@ variation **n'est pas radiale** (rho +0,2895, p 0,2293 sur 19 marches ; les deux
 rayons, 14,70 mm contre 13,63, p 0,7729), donc un pas fonction du rayon ne suffirait pas. → **il faut une fenêtre centrée
 sur l'espacement mesuré à l'endroit du pas**, ce que `R2-F08` sait déjà faire.
 
+**`119` · 2026-09-11 · le marcheur dérive-t-il** (`le_marcheur_derive_t_il.py`, une seconde, hors ligne)
+Regarde la **trajectoire** et non le taux : une marche peut confirmer ses vingt pas en tournant
+lentement pour longer la feuille. La trajectoire est reconstruite exactement (écart 0,5 µm au
+`parcouru_um` de la course) et coupée au premier pas aveugle. **Elle n'accumule rien** : rectitude
+**0,944** sur la première moitié contre **0,942** sur la seconde (p **0,8906**), virage par pas
+**11,5°** → **13,6°** (p **0,3736**), rotation cumulée autour de l'axe médiane **+13,2°**
+(p **0,1564**) — pas de spirale. ⭐ Et contre un tirage qui garde **exactement** le virage de chaque
+pas mais en tire la direction au hasard, la marche réelle est plus droite : **0,928 contre 0,811**,
+**17 marches sur 19**, p **0,00141**. → **le marcheur ne dérive pas, il revient** ; ⚠ sur vingt pas,
+soit un sixième de l'étendue radiale.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

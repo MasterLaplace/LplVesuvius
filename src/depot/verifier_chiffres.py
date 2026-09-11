@@ -2594,6 +2594,68 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                             [f"**{val}**", f"{val}", f"**{val:+.3f}**", f"{val:+.3f}"],
                             cpt.name))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 119 : LE MARCHEUR NE DERIVE PAS, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) La rectitude reelle ne voyage JAMAIS sans celle du tirage de memes virages. Seule,
+    # « 0,928 » se lit comme « la marche est droite », ce qu'une marche qui ne vire pas obtient
+    # aussi ; avec « 0,811 sous un tirage de memes virages », elle se lit pour ce qu'elle est,
+    # une compensation.
+    # (2) Les deux moities ne voyagent jamais sans leur p apparie : « 0,944 puis 0,942 » sans
+    # « p 0,8906 » serait un ecart lu comme un effet, et c'est exactement l'inverse du resultat.
+    mdt = _source(racine, "le_marcheur_derive_t_il.json")
+    if mdt.exists():
+        d = json.loads(mdt.read_text())
+        g = d.get("la_trajectoire_est_elle_celle_de_la_course", {})
+        for cle, nom, dec in (("ecart_max_um", "ecart de reconstruction de 119", 1),
+                              ("tolerance_um", "tolerance de 119", 1)):
+            if g.get(cle) is not None:
+                ajoute(nom, g[cle], dec, mdt.name, unites=("µm",))
+        deg = d.get("la_marche_se_degrade_t_elle", {})
+        if deg.get("marches") is not None:
+            v_ = deg["marches"]
+            out.append(("marches de 119", [f"**{v_}**", f"{v_}"], mdt.name))
+        for cle, nom, dec in (("rectitude_premiere_moitie", "rectitude 1re moitie de 119", 3),
+                              ("rectitude_seconde_moitie", "rectitude 2e moitie de 119", 3),
+                              ("p_appariee", "p des deux moities de 119", 4)):
+            if deg.get(cle) is not None:
+                ajoute(nom, deg[cle], dec, mdt.name)
+        for cle, nom in (("angle_entre_les_deux_moities_deg", "angle des deux moities de 119"),
+                         ("angle_max_deg", "angle max de 119")):
+            if deg.get(cle) is not None:
+                ajoute(nom, deg[cle], 1, mdt.name, unites=("°",))
+        vg = d.get("le_virage_grandit_il", {})
+        for cle, nom in (("virage_premier_tiers_deg", "virage du 1er tiers de 119"),
+                         ("virage_dernier_tiers_deg", "virage du dernier tiers de 119")):
+            if vg.get(cle) is not None:
+                ajoute(nom, vg[cle], 1, mdt.name, unites=("°",))
+        if vg.get("p_appariee") is not None:
+            ajoute("p du virage de 119", vg["p_appariee"], 4, mdt.name)
+        s_ = d.get("le_virage_a_t_il_un_sens", {})
+        for cle, nom, signe in (("rotation_cumulee_mediane_deg", "rotation mediane de 119", True),
+                                ("rotation_min_deg", "rotation min de 119", True),
+                                ("rotation_max_deg", "rotation max de 119", True)):
+            if s_.get(cle) is not None:
+                ajoute(nom, s_[cle], 1, mdt.name, signe=signe, unites=("°",))
+        if s_.get("p_contre_zero") is not None:
+            ajoute("p de la rotation de 119", s_["p_contre_zero"], 4, mdt.name)
+        w_ = d.get("temoin_les_virages_se_compensent", {})
+        for cle, nom, dec in (("rectitude_reelle", "rectitude reelle de 119", 3),
+                              ("rectitude_simulee", "rectitude simulee de 119", 3),
+                              ("p_appariee", "p du temoin de 119", 5)):
+            if w_.get(cle) is not None:
+                ajoute(nom, w_[cle], dec, mdt.name)
+        for cle, nom in (("marches_ou_le_reel_est_plus_droit", "marches plus droites de 119"),
+                         ("tirages", "tirages du temoin de 119")):
+            if w_.get(cle) is not None:
+                v_ = w_[cle]
+                out.append((nom, [f"**{v_}**", f"{v_}"], mdt.name))
+        a_ = d.get("langle_au_radial_initial", {})
+        for cle, nom in (("angle_premier_tiers_deg", "angle radial du 1er tiers de 119"),
+                         ("angle_dernier_tiers_deg", "angle radial du dernier tiers de 119")):
+            if a_.get(cle) is not None:
+                ajoute(nom, a_[cle], 1, mdt.name, unites=("°",))
+        if a_.get("p_appariee") is not None:
+            ajoute("p de l'angle radial de 119", a_["p_appariee"], 4, mdt.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 118 : LA FENETRE EXCLUT DE VRAIS PAS, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) Un espacement deduit ne voyage JAMAIS sans le bout de fenetre qu'il conteste : « 80,7 µm »
     # seul est une longueur, « 80,7 contre une borne a 86,5 » est un refus d'instrument.

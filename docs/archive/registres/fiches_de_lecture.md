@@ -5265,6 +5265,23 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   qualité du scan.
 - **lu** : intégralement, 168 lignes, le 2026-09-11
 
+### docs/archive/119_le_marcheur_ne_derive_pas.md
+- **lignes** : 152
+- **nature** : RESULTAT
+  (un pas confirmé n'est pas un pas droit : la marche tourne-t-elle pour longer la feuille au lieu
+  de la traverser ? trajectoire reconstruite depuis les 560 étapes, sans lecture distante.)
+- **résumé** : ⭐⭐⭐⭐ **Le marcheur n'accumule rien et ses virages se COMPENSENT.** Rectitude
+  **0,944** sur la première moitié d'une marche contre **0,942** sur la seconde (p **0,8906**,
+  19 marches appariées) ; virage par pas **11,5°** → **13,6°** (p **0,3736**) ; rotation cumulée
+  autour de l'axe **+13,2°** médian (p **0,1564**), donc pas de spirale. ⭐⭐⭐⭐ Et contre un
+  tirage qui garde **exactement** le virage de chaque pas en tirant sa direction au hasard, le réel
+  est plus droit : **0,928 contre 0,811**, **17/19**, p **0,00141** — le marcheur revient. ⚠ La
+  garde est que le chemin reconstruit retrouve `parcouru_um` à **0,5 µm** près, et la marche est
+  coupée au premier pas aveugle (`116`). ⚠⚠ Vingt pas ≈ 4 mm, un sixième de l'étendue radiale :
+  rien ne dit que ça tient sur cent transferts (`R4-P20`). ⚠ L'angle au radial initial (49,1° →
+  54,8°) est rendu comme description : il est confondu par la rotation du radial local.
+- **lu** : intégralement, 152 lignes, le 2026-09-11
+
 ### docs/archive/118_la_fenetre_est_globale.md
 - **lignes** : 126
 - **nature** : RESULTAT
