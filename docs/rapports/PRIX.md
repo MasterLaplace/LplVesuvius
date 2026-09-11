@@ -100,7 +100,7 @@ Toute méthode validée sur `0139` devra être **transportée** sur un des treiz
 
 ---
 
-## 2. First Letters — 50 000 $ par rouleau, 500 000 $ au plus
+## 2. First Letters — 50 000 \$ par rouleau, 500 000 \$ au plus
 
 > *« $50,000 to the first team that uncovers **10 letters within a single 4 cm² area** of that
 > scroll — and open sources their methods and results (after winning the prize). »*
@@ -126,10 +126,10 @@ Toute méthode validée sur `0139` devra être **transportée** sur un des treiz
 | ce qu'il faut | ce que le dépôt a | où |
 |---|---|---|
 | un rendu de 4 cm² sur un des 23 | **aucune tentative** | — |
-| savoir si les modèles publiés lisent au régime du prix | ⭐ **mesuré, et la réponse est NON pour les modèles publiés** : accord plat à 9,362 µm là où il monte en production ; face et vide indiscernables (AUC 0,371–0,519) | `archive/75` C1, C2 |
-| démontrer la non-hallucination | ⭐ le harnais complet : témoin négatif, juge à condition vierge, nul verso, contrôle par mélange à 0,500 | `archive/46`, `09`, `60`, `75` C2 |
-| diagnostic du régime de scan | ⭐ le nombre de Fresnel ordonne les verdicts des auteurs ; les 13 sont à **53 %** du régime de production | `archive/68` §3 |
-| où la vérité terrain existe pour ce régime | ⭐ **103 cases vides** sur 4 objets, dont 38 sur `0139` et 38 sur `0500P2` | `archive/68` §4 |
+| savoir si les modèles publiés lisent au régime du prix | **mesuré, et la réponse est NON pour les modèles publiés** : accord plat à 9,362 µm là où il monte en production ; face et vide indiscernables (AUC 0,371–0,519) | `archive/75` C1, C2 |
+| démontrer la non-hallucination | le harnais complet : témoin négatif, juge à condition vierge, nul verso, contrôle par mélange à 0,500 | `archive/46`, `09`, `60`, `75` C2 |
+| diagnostic du régime de scan | le nombre de Fresnel ordonne les verdicts des auteurs ; les 13 sont à **53 %** du régime de production | `archive/68` §3 |
+| où la vérité terrain existe pour ce régime | **103 cases vides** sur 4 objets, dont 38 sur `0139` et 38 sur `0500P2` | `archive/68` §4 |
 | quel rouleau | ⚠ la queue de `d′` ne sépare **rien** parmi les treize après Holm ; le critère de décision coûte 315× le budget | `archive/33`, `75` (combien de fenêtres) |
 
 ⚠ Ce que la mesure de `C2` dit à ce prix : *avec les modèles publiés*, aucun des treize n'a de
@@ -179,8 +179,8 @@ du dépôt, et le prix qui le vise n'a jamais été regardé.
 
 ### Ce que les lauréats montrent de ce qui se PAIE (page *winners*, 2026-09-11)
 
-Les deux derniers mois, **64 500 $** sur **28 lauréats**. Ce qui a été payé dans la bande
-250–2 500 $, c'est-à-dire la bande où le dépôt a de la matière :
+Les deux derniers mois, **64 500 \$** sur **28 lauréats**. Ce qui a été payé dans la bande
+250–2 500 \$, c'est-à-dire la bande où le dépôt a de la matière :
 
 | lauréat | montant | ce qui a été payé | ce que le dépôt a de comparable |
 |---|---:|---|---|
@@ -207,7 +207,7 @@ Inchangée depuis le 16 août à quatre URL près. Trois passages recoupent des 
 1. **Appendice A, « Methods we tried »** — deux traceurs neuraux mis *« on hold »* pour la même
    raison : *« running either model over a multi-step rollout […] surfaces a **drift problem**: small
    errors compound across steps instead of staying bounded. […] a long, multi-step rollout is the
-   regime real production use needs. »* ⭐ C'est **exactement** ce que `archive/75` §A5 a mesuré sur
+   regime real production use needs. »* C'est **exactement** ce que `archive/75` §A5 a mesuré sur
    le raccrochage : un gain sur un pas, une perte sur une marche, 53 µm de dérive par tour. Le dépôt
    a redécouvert, par la mesure, la panne que l'équipe a rencontrée sur ses propres modèles.
 2. **Tableau des goulots, ligne « Sheet switches »** : *« What would help: Stronger local continuity

@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**73 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**75 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 35 portes
+## Grand Prize — 37 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -54,6 +54,8 @@
 - **R5-P08** · La cause de la purge qui a effacé 197 fichiers sur 197 (`56` D) : le plafond la rend inoffensive, le mécanisme reste inconnu.
 - **R5-P09** · Les **9 scripts cités dans un document sans leur commande** et les 15 non classés (`75` D3) : même défaut que les huit déjà réparées.
 - **R5-P10** · La réserve (b) de P1 bis (`75` D2) : 1/12 et 9/12 sur n = 12 portent des intervalles larges.
+- **R4-P20** *(le graal)* · **Ce qui mesurerait une portée**, puisque deux plafonds de suite ont été atteints par toutes les marches (`113`) : soit un plafond assez haut pour qu'une marche s'arrête pour une raison, soit l'acceptation que rien ne l'arrête dans ce volume — auquel cas ce n'est pas la portée qui borne le déroulement et il faut nommer ce qui le borne. Le volume ne borne pas non plus : 0 sortie sur 28 marches, rayons 4,07 à 23,8 mm.
+- **R4-P21** *(le graal)* · **Ce qui fait chuter le taux au grand rayon** (`113`, rho −0,719) : le rayon fait varier au moins trois choses à la fois — l'épaisseur lue, la courbure, la qualité du scan. Les séparer demande de mesurer à rayon égal sur deux rouleaux, ou à qualité égale sur deux rayons. Tant que ce n'est pas fait, on sait **où** le marcheur cesse de confirmer et pas **pourquoi**.
 
 ## Progress Prizes — 19 portes
 

@@ -2594,6 +2594,66 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                             [f"**{val}**", f"{val}", f"**{val:+.3f}**", f"{val:+.3f}"],
                             cpt.name))
 
+    # ⭐⭐⭐ LA TRANCHE 113 : LE PLAFOND EST ENCORE LA MESURE, ET DEUX APPARIEMENTS LE DISENT.
+    # (1) La longueur mediane ne voyage JAMAIS sans la part au plafond. Seule, « 3 966 um » se
+    # lit comme une portee mesuree ; avec « 28 marches sur 28 au plafond », elle se lit pour ce
+    # qu'elle est — une BORNE INFERIEURE, et la borne du reglage, pas celle de la matiere.
+    # C'est exactement la faute que 107 a payee en publiant 1 250 um sous un plafond de six.
+    # (2) L'ecart precoce/tardif ne voyage jamais sans son p : un ecart de -0,06 sans son
+    # 0,3253 se lit comme une baisse, alors que le nul n'est pas rejete.
+    jus = _source(racine, "jusquou_va_t_il_si_on_le_laisse.json")
+    if jus.exists():
+        d = json.loads(jus.read_text())
+        r = d.get("resume", {})
+        for cle, nom, dec in (("marches", "marches de 113", 0),
+                              ("plafond", "plafond de 113", 0),
+                              ("marches_au_plafond", "marches de 113 au plafond", 0),
+                              ("sorties_du_volume", "sorties de volume de 113", 0),
+                              ("pas_confirmes_max", "run maximum de 113", 0)):
+            if r.get(cle) is not None:
+                v = r[cle]
+                out.append((nom, [f"**{v}**", f"{v}"], jus.name))
+        for cle, nom, dec in (("longueur_mediane_um", "longueur mediane de 113", 1),
+                              ("longueur_max_um", "longueur maximum de 113", 1),
+                              ("taux_de_confirmation_global", "taux de confirmation de 113", 4)):
+            if r.get(cle) is not None:
+                ajoute(nom, r[cle], dec, jus.name)
+        b = d.get("le_taux_baisse_avec_la_profondeur", {})
+        for cle, nom, dec in (("taux_precoce", "taux precoce de 113", 2),
+                              ("taux_tardif", "taux tardif de 113", 2),
+                              ("p_sous_un_taux_constant", "p du taux constant de 113", 4)):
+            if b.get(cle) is not None:
+                ajoute(nom, b[cle], dec, jus.name)
+        if b.get("ecart") is not None:
+            ajoute("ecart precoce-tardif de 113", b["ecart"], 3, jus.name, signe=True)
+        # ⚠⚠ Les VINGT taux par pas ne sont PAS enregistres, et c'est une decision. Ils vivent
+        # dans la figure, pas dans un document — les enregistrer creerait vingt obligations de
+        # citation pour une courbe qu'aucune prose n'epellera jamais valeur par valeur, donc
+        # vingt echecs permanents. Une garde rouge en permanence cesse d'etre lue (`57` §3).
+        # Ce qui est enregistre est ce qu'un document AFFIRME : les deux bouts et le p.
+        # ⭐⭐⭐ LE RESULTAT DE 113, ET SON APPARIEMENT OBLIGATOIRE. Le rho ne voyage JAMAIS sans
+        # son p ni sans l'etendue de rayons qui le porte : « -0,719 » seul se lit comme une loi
+        # du rouleau alors que c'est une correlation sur vingt-huit bandes de UN objet. Et
+        # l'indice de dispersion ne voyage jamais sans le taux global qu'il corrige — publier
+        # 0,5196 sans lui, c'est publier la moyenne de deux populations comme si c'en etait une.
+        dsp = d.get("le_taux_depend_il_de_la_marche", {})
+        for cle, nom, dec in (("taux_min", "taux minimum par marche de 113", 2),
+                              ("taux_max", "taux maximum par marche de 113", 2),
+                              ("indice_de_dispersion", "indice de dispersion de 113", 3),
+                              ("khi2", "khi2 de 113", 2),
+                              ("taux_premiere_moitie", "taux de la premiere moitie de 113", 4),
+                              ("taux_seconde_moitie", "taux de la seconde moitie de 113", 4)):
+            if dsp.get(cle) is not None:
+                ajoute(nom, dsp[cle], dec, jus.name)
+        ry = d.get("le_taux_suit_il_le_rayon", {})
+        if ry.get("rho_de_spearman") is not None:
+            ajoute("rho du taux et du rayon de 113", ry["rho_de_spearman"], 4, jus.name,
+                   signe=True)
+        for cle, nom, dec in (("rayon_min_mm", "rayon minimum de 113", 2),
+                              ("rayon_max_mm", "rayon maximum de 113", 2)):
+            if ry.get(cle) is not None:
+                ajoute(nom, ry[cle], dec, jus.name, unites=("mm",))
+
     # ⭐⭐⭐ UN PAS MANQUE N'EST PAS UNE CHUTE (`109`), ET TROIS APPARIEMENTS SONT OBLIGATOIRES.
     # (1) La mediane des pas CONFIRMES ne voyage jamais sans celle du RUN : publier la premiere
     # seule remplacerait un nombre trompeur par un autre, et c'est leur ECART qui est le resultat.

@@ -264,11 +264,95 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
     return agreger(lu)
 
 
+def le_taux_depend_il_de_la_marche(par_marche: list[dict]) -> dict:
+    """Le taux de confirmation varie-t-il D'UNE MARCHE A L'AUTRE plus que le hasard ne l'admet ?
+
+    ⭐⭐⭐ POURQUOI CETTE QUESTION EXISTE, ET D'OU ELLE VIENT. Elle n'a pas ete pensee : elle a
+    ete VUE. La grille de `figure_jusquou.py` dessine une ligne par marche et une case par pas,
+    et les dernieres lignes y sont visiblement plus vides que les premieres — ce que le taux
+    global (0,52) et le taux par profondeur (plat) cachent tous les deux, parce qu'ils moyennent
+    justement sur l'axe ou l'ecart se trouve. C'est « regarder avant de mesurer » qui paie.
+
+    ⚠⚠ Et c'est une question DIFFERENTE de celle de la profondeur. « Le taux baisse-t-il quand
+    on avance » demande si une marche se degrade ; « le taux depend-il de la marche » demande si
+    certaines marches sont mauvaises DES LE DEPART. Les deux peuvent etre vraies ou fausses
+    independamment, et elles n'ont pas le meme remede : la premiere appellerait une correction en
+    cours de route, la seconde un choix de depart.
+
+    Le test est celui d'une binomiale unique : sous « toutes les marches tirent au meme taux »,
+    la variance des comptes vaut `n p (1-p)`. On la compare a la variance observee (indice de
+    dispersion), et le p vient d'un khi-deux a `k-1` degres.
+
+    ⚠ Le lien avec le RAYON est teste a part (`le_taux_suit_il_le_rayon`). Ma premiere version
+    le declarait « descriptif, jamais un test » au motif qu'un ordre n'est pas une correlation —
+    c'etait trop prudent : chaque marche porte SON rayon, mesure, donc le rang se teste. Ce qui
+    reste vrai est qu'il ne faut pas lire le demi-partage ci-dessous comme ce test.
+    """
+    k = len(par_marche)
+    if k < 3:
+        return {"decidable": False, "pourquoi": f"{k} marche(s), il en faut au moins trois"}
+    n = par_marche[0]["pas"]
+    if any(x["pas"] != n for x in par_marche):
+        return {"decidable": False, "pourquoi": "les marches n'ont pas toutes le meme nombre de pas"}
+    comptes = np.array([x["confirmes"] for x in par_marche], dtype=float)
+    p = float(comptes.sum() / (k * n))
+    attendue = n * p * (1.0 - p)
+    if attendue <= 0:
+        return {"decidable": False, "pourquoi": "taux degenere (0 ou 1), aucune dispersion possible"}
+    observee = float(comptes.var(ddof=1))
+    khi2 = float(((comptes - n * p) ** 2).sum() / attendue)
+    from scipy import stats
+    pv = float(stats.chi2.sf(khi2, k - 1))
+    moitie = k // 2
+    return {
+        "decidable": True, "marches": k, "pas_par_marche": n,
+        "taux_moyen": round(p, 4),
+        "taux_min": round(float(comptes.min() / n), 4),
+        "taux_max": round(float(comptes.max() / n), 4),
+        "variance_observee": round(observee, 4),
+        "variance_sous_un_taux_unique": round(attendue, 4),
+        "indice_de_dispersion": round(observee / attendue, 3),
+        "khi2": round(khi2, 2), "p_sous_un_taux_unique": round(pv, 4),
+        "les_marches_ne_tirent_pas_au_meme_taux": bool(pv < 0.05),
+        # ⚠ Descriptif : le test du rayon est `le_taux_suit_il_le_rayon`, pas ce partage.
+        "taux_premiere_moitie": round(float(comptes[:moitie].mean() / n), 4),
+        "taux_seconde_moitie": round(float(comptes[moitie:].mean() / n), 4)}
+
+
+def le_taux_suit_il_le_rayon(par_marche: list[dict]) -> dict:
+    """Le taux de confirmation suit-il le RAYON de la bande ou la marche est partie ?
+
+    ⭐⭐⭐ C'est la question que la dispersion ouvre et ne repond pas. `le_taux_depend_il_de_la_
+    marche` etablit que les marches ne tirent pas au meme taux ; il ne dit pas ce qui les
+    separe. Ici chaque marche porte le rayon de sa bande, donc la question a une reponse.
+
+    ⚠⚠ Spearman et non Pearson, et c'est deliberé : on demande si le taux DECROIT avec le
+    rayon, pas s'il decroit lineairement. Une chute brusque a un rayon donne est une reponse
+    parfaitement bonne a la premiere question et rendrait un mauvais coefficient a la seconde.
+
+    ⚠ Une correlation n'est pas une cause. Le rayon est aussi ce qui fait varier l'epaisseur
+    lue, la courbure et la qualite du scan — ce test dit OU le marcheur cesse de confirmer,
+    jamais POURQUOI.
+    """
+    ray = [x.get("rayon_mm") for x in par_marche]
+    if len(par_marche) < 4 or any(v is None for v in ray):
+        return {"decidable": False,
+                "pourquoi": "il faut quatre marches portant chacune son rayon"}
+    from scipy import stats
+    taux = [x["confirmes"] / x["pas"] for x in par_marche]
+    rho, pv = stats.spearmanr(ray, taux)
+    return {"decidable": True, "marches": len(par_marche),
+            "rayon_min_mm": round(float(min(ray)), 2), "rayon_max_mm": round(float(max(ray)), 2),
+            "rho_de_spearman": round(float(rho), 4), "p": round(float(pv), 6),
+            "le_taux_decroit_avec_le_rayon": bool(rho < 0 and pv < 0.05)}
+
+
 def agreger(r: dict) -> dict:
     """Le verdict, DERIVE des etapes gardees — le partage que `107` et `110` imposent."""
     pas_max = int(r.get("pas_max") or 0)
+    r_lignes = list(r.get("lignes", []))
     marches, confirmes, longueurs, sorties, plafond = [], [], [], 0, 0
-    for ligne in r.get("lignes", []):
+    for ligne in r_lignes:
         for cel in ligne.get("detail", []):
             e = [x for x in cel.get("etapes", []) if "avance_um" in x]
             if not e:
@@ -286,6 +370,18 @@ def agreger(r: dict) -> dict:
     profil = profondeur_de_la_confirmation(marches)
     r["profondeur_de_la_confirmation"] = profil
     r["le_taux_baisse_avec_la_profondeur"] = le_taux_baisse_avec_la_profondeur(profil)
+    # ⚠ Le rayon voyage AVEC la marche et n'est pas retrouve par l'indice : les deux
+    # coincident aujourd'hui parce qu'il y a une marche par bande, et le jour ou une bande en
+    # portera deux, l'indice designerait la mauvaise.
+    rayons = [ligne.get("rayon_mm") for ligne in r_lignes for _ in ligne.get("detail", [])
+              if _.get("etapes")]
+    par_marche = [{"marche": i, "pas": len(m),
+                   "confirmes": sum(1 for x in m if x.get("confirme")),
+                   "rayon_mm": rayons[i] if i < len(rayons) else None}
+                  for i, m in enumerate(marches)]
+    r["par_marche"] = par_marche
+    r["le_taux_depend_il_de_la_marche"] = le_taux_depend_il_de_la_marche(par_marche)
+    r["le_taux_suit_il_le_rayon"] = le_taux_suit_il_le_rayon(par_marche)
     r["resume"] = {
         "decidable": True, "marches": len(marches), "plafond": pas_max,
         "pas_parcourus_median": float(np.median(parcourus)),
@@ -458,6 +554,36 @@ def verifier() -> int:
       PAS_MAX == 20 and 4.0 < PAS_MAX * 230.0 / 1000.0 < 5.0,
       f"{PAS_MAX} pas = {PAS_MAX * 230.0 / 1000.0:.1f} mm")
     v("... et le sélecteur est celui que `105` a corrigé", SELECTEUR == "deux_roles")
+
+    # ⭐⭐ LES DEUX AGRÉGATS QUE LA FIGURE A FAIT NAÎTRE. Ils ne se testent pas sur la vraie
+    # course — elle coûte cinq heures — mais sur des marches fabriquées dont on connaît la
+    # réponse, et chacun est sondé en remettant le défaut qu'il doit voir.
+    egal = [{"marche": i, "pas": 20, "confirmes": 10, "rayon_mm": 4.0 + i} for i in range(10)]
+    d = le_taux_depend_il_de_la_marche(egal)
+    v("dix marches au même compte ne dispersent pas", d["decidable"] and d["indice_de_dispersion"] < 0.5,
+      f"indice {d.get('indice_de_dispersion')}")
+    v("... donc le taux unique n'est pas rejeté", not d["les_marches_ne_tirent_pas_au_meme_taux"])
+    # ⚠⚠ LA sonde : des marches franchement séparées DOIVENT rejeter le taux unique. Sans elle,
+    # un test qui répondrait « pas de dispersion » à tout passerait le contrôle du dessus.
+    coupe = ([{"marche": i, "pas": 20, "confirmes": 18, "rayon_mm": 4.0 + i} for i in range(5)]
+             + [{"marche": 5 + i, "pas": 20, "confirmes": 2, "rayon_mm": 9.0 + i} for i in range(5)])
+    d2 = le_taux_depend_il_de_la_marche(coupe)
+    v("deux populations séparées rejettent le taux unique",
+      d2["les_marches_ne_tirent_pas_au_meme_taux"], f"p = {d2.get('p_sous_un_taux_unique')}")
+    v("... et l'indice de dispersion le dit", d2["indice_de_dispersion"] > 3,
+      f"indice {d2.get('indice_de_dispersion')}")
+    v("moins de trois marches est indécidable, jamais « pas de dispersion »",
+      not le_taux_depend_il_de_la_marche(egal[:2])["decidable"])
+
+    ry = le_taux_suit_il_le_rayon(coupe)
+    v("un taux qui chute avec le rayon est vu", ry["le_taux_decroit_avec_le_rayon"],
+      f"rho {ry.get('rho_de_spearman')}, p {ry.get('p')}")
+    monte = [{"marche": i, "pas": 20, "confirmes": 2 * i, "rayon_mm": 4.0 + i} for i in range(10)]
+    v("... et un taux qui MONTE n'est pas lu comme une chute",
+      not le_taux_suit_il_le_rayon(monte)["le_taux_decroit_avec_le_rayon"])
+    v("une marche sans rayon rend indécidable plutôt que de deviner",
+      not le_taux_suit_il_le_rayon(
+          [{"marche": i, "pas": 20, "confirmes": i, "rayon_mm": None} for i in range(5)])["decidable"])
 
     print(f"\n{'ALL PASS' if echecs == 0 else 'ÉCHEC'} ({echecs} failures, {controles} checks)")
     return 0 if echecs == 0 else 1

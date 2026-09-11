@@ -34,7 +34,7 @@ partie, et ils se lisent maintenant en entier.
   page. ⚠ Il n'y en a d'abord eu que deux — pour les lois et les portes — et les deux plus gros
   registres, 130 faits et 231 contradictions, se sont retrouvés sans **aucune** forme lisible.
   Ce n'était pas la donnée qui manquait, c'était sa lecture ; corrigé le jour même.
-- ⭐⭐ Et la garde qui empêche le retour en arrière : **un rapport qui réintroduit une table de
+- Et la garde qui empêche le retour en arrière : **un rapport qui réintroduit une table de
   faits, de contradictions ou d'antériorité fait échouer le contrôle** (`./lplv registres`).
   Sans elle, la prose reprendrait la donnée un lot à la fois, et il y aurait de nouveau deux
   sources libres de diverger — ce que ce dépôt a payé trois fois (`75` D3, `80`, `87` §3).
@@ -47,8 +47,11 @@ partie, et ils se lisent maintenant en entier.
 - Un fait porte un **statut** parmi cinq : `établi` · `borné` (une borne, pas une valeur) ·
   `réfuté` · `rétracté` (publié puis retiré par le dépôt lui-même) · `ouvert`. Et un **producteur** :
   le script et le JSON qui le recalculent. Un fait sans producteur n'entre pas au registre.
-- Les étoiles suivent la règle de `archive/HANDOFF` : elles marquent un résultat **mesuré**, jamais ce
-  qu'une mesure va tester ; quatre étoiles nomment la tranche qu'elles déplacent.
+- **Pas d'étoiles dans ce dossier.** `archive/` en porte, avec la règle du `HANDOFF` — une étoile
+  marque un résultat mesuré, quatre nomment la tranche qu'elles déplacent — et c'est un carnet de
+  bord, où hiérarchiser au fil de l'écriture a un sens. Un rapport, lui, porte un **statut** par
+  fait (`établi` · `borné` · `réfuté` · `rétracté` · `ouvert`) : deux échelles d'importance sur le
+  même énoncé finissent par ne pas dire la même chose, et c'est le statut qui se vérifie.
 - Rien dans `archive/` n'est modifié. Une erreur trouvée dans un document archivé se **note** au
   registre des contradictions, elle ne se corrige pas sur place.
 
@@ -98,14 +101,14 @@ de soumission) : `01`, `02`, `13`, `15`, `18`, `21`, `28`, `29`, `31`, `75` §0,
 
 | | Grand Prize | First Letters | Titre Paris 4 | Progress |
 |---|:--:|:--:|:--:|:--:|
-| **R1 encre** | la règle qui *valide* un déroulage | ⭐ **le cœur** : régime 9 µm, non-hallucination, 103 cases vides | le détecteur, à 2,4 µm | résultats négatifs, harnais |
-| **R2 excision** | — | — | — | ⭐ audit de `windcheck`, borne de la réparation |
-| **R3 graine** | où commencer, quel objet | quel rouleau | — | ⭐ le traceur est un tirage, artefacts de budget |
-| **R4 déroulement** | ⭐ **le cœur** | — | la géométrie de Paris 4 est déjà mesurée | dérive du rollout, référent d'identité |
-| **R5 méthode** | la reproductibilité exigée | — | — | ⭐ outils de QA, audits de données |
+| **R1 encre** | la règle qui *valide* un déroulage | **le cœur** : régime 9 µm, non-hallucination, 103 cases vides | le détecteur, à 2,4 µm | résultats négatifs, harnais |
+| **R2 excision** | — | — | — | audit de `windcheck`, borne de la réparation |
+| **R3 graine** | où commencer, quel objet | quel rouleau | — | le traceur est un tirage, artefacts de budget |
+| **R4 déroulement** | **le cœur** | — | la géométrie de Paris 4 est déjà mesurée | dérive du rollout, référent d'identité |
+| **R5 méthode** | la reproductibilité exigée | — | — | outils de QA, audits de données |
 | **R6 littérature** | ne pas redécouvrir | qui a déjà tenté (Miller & Müller sur `0826`) | — | qui a été payé pour quoi |
 
-Lecture : une case ⭐ est un endroit où la campagne a **déjà** de la matière soumissible ; une case
+Lecture : une case est un endroit où la campagne a **déjà** de la matière soumissible ; une case
 vide n'est pas une case perdue, c'est une case non travaillée.
 
 ## 4. Ce que ce dossier n'est pas

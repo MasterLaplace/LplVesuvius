@@ -4,7 +4,7 @@
 
 # Les faits, et ce qu'ils valent aujourd'hui
 
-**130 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **122** établi, **2** borné, **4** réfuté, **2** rétracté, **0** ouvert.
+**135 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **126** établi, **3** borné, **4** réfuté, **2** rétracté, **0** ouvert.
 
 ## R1 — 20 faits
 
@@ -81,7 +81,7 @@
 | `R3-F19` | **la chaîne radiale converge six tours et casse au septième** ; ce qui décide est la portée, pas le pas | officiel + 6 spires `gen_neighbor` : 4/7 convergent, 7ᵉ +1,475 ; pas 0,5 → 6/7 ; optimum en U, bassin 0,25–0,5 ; portée = `neighbor_exit_count` × pas ; repousse libre : casse au 3ᵉ tour | établi | `43` §1–6 · `spire_suivante.sh`, `table_chaine.py` |
 | `R3-F20` | **la chaîne avance d'une nappe à la fois, et s'érode** | 113 µm entre nappes (100–138) ; érosion **15,6 %/tour** sur l'aire utile (58 → 23 % valides) ; ~10 % d'un tour par nappe → une colonne, pas une bande ; rayon refusé (résidu 0,5 mm pour 0,113 d'écart) | établi ; « 4,0 % » rétracté | `44` §1–7 · `geometrie_chaine.py` |
 
-## R4 — 30 faits
+## R4 — 35 faits
 
 | id | fait | valeur | statut | source · producteur |
 |---|---|---|---|---|
@@ -115,6 +115,11 @@
 | `R4-F28` | **sur une marche**, le raccrochage déployé porte **moins loin** que le pas normal seul ; lisser la **nappe** entre deux bras achète un bras sans réglage | portées 2 / 4 / **5** (raccrochage / pas normal / pas normal + nappe lissée), borne 6, corpus 6 ; −6,7 µm, 7/8, [−11,0 ; −2,4] ; le gain tient sur 5 ancres (−3,1 à −8,6), le bras gagné sur une seule | établi ; (le gain) ; borné (le bras) | `75` §C (l. 3453, 3616, 3664) · `la_portee_du_raccrochage.py`, `la_portee_tient_elle_ailleurs.py` |
 | `R4-F29` | le **pli** et l'**obscurité** disent à une cellule qu'elle a tort sans regarder la cible, et le lissage retire le premier signal ; refuser ses plis ne gagne **exactement rien** sur les cellules communes | pli : −43,2 µm à moitié gardée chez le raccrochage (8/8), +7,1 chez le pas normal lissé ; obscurité : −13,1 (7/8) chez le lissé ; refus : écart apparié +0,0 [0,0 ; 0,0], part gardée 0,453 | établi | `75` §C (l. 6268, 6343, 6458) · `la_cellule_sait_elle_quelle_a_tort.py` |
 | `R4-F30` | le froissement du pas normal **n'est pas distribué** (0 → 33 % de cellules pliées pendant que la médiane reste à ~20 µm) ; lisser en retire 80 % ; la borne se froisse aussi (63 %) en gardant 17–22 µm | pliées au bras 8 : 32,8 / 6,5 / 96,6 / 62,8 % (pas normal / lissé / raccrochage / oracle) ; « combien lisser » : −26,0 µm hors échantillon 4/5, mais l'ancre vivante passe de 5 à **0** bras → porte fermée par défaut | établi ; borné | `75` §C (l. 6513, 6610) · `ou_la_nappe_se_froisse.py`, `combien_lisser_la_nappe.py` |
+| `R4-F31` | **le plafond est encore la mesure** : à 20 pas, rien n'arrête une seule marche | 28/28 au plafond, 0 sortie de volume ; longueur médiane **3966,3 µm** (max 4870,2) contre 1 250 à `107` sous un plafond de 6 ; la portée reste entièrement censurée | borné ; borne inférieure, jamais une portée | `113` · `nappe/jusquou_va_t_il_si_on_le_laisse.py` |
+| `R4-F32` | **le taux de confirmation ne baisse pas avec la profondeur** : la marche ne se dégrade pas en avançant | précoce 0,56 sur 6 pas contre tardif 0,50 ; écart **−0,060**, p = **0,3253** sous un taux constant ; le taux reste à 0,5196 du pas 1 au pas 20 | établi | `113` · `nappe/jusquou_va_t_il_si_on_le_laisse.py` |
+| `R4-F33` | dans UNE marche les confirmations ne sont pas groupées ; **entre marches, elles ne tirent pas au même taux** | run médian **1,0** (max 8), ce qu'un tirage indépendant rend — mais le taux par marche va de **0,00 à 0,90**, indice de dispersion **9,887**, χ² 266,95 sur 27 ddl, p < 10⁻⁴ : le 0,5196 global est une moyenne de deux populations | établi ; « un tirage indépendant à p ≈ 0,52 » rétracté le jour même | `113`, `109` · `nappe/jusquou_va_t_il_si_on_le_laisse.py` |
+| `R4-F34` | **le taux de confirmation suit le RAYON** : le marcheur n'échoue pas en avançant, il échoue là où il part | rho de Spearman **−0,7188**, p = **1,6·10⁻⁵** sur 28 marches, une par bande, de 4,07 à 23,8 mm ; première moitié 0,7357, seconde 0,3036 | établi ; une corrélation, jamais une cause : le rayon fait aussi varier l'épaisseur lue, la courbure et la qualité du scan | `113` · `nappe/jusquou_va_t_il_si_on_le_laisse.py` |
+| `R4-F35` | les deux agrégats de `113` **cachaient** ce résultat, et c'est la figure qui l'a montré | le taux global (0,5196) et le taux par profondeur (plat, p 0,3253) moyennent tous deux sur l'axe où l'écart se trouve ; la grille marche × pas l'a rendu visible | établi ; « regarder avant de mesurer » | `113` · `figures/figure_jusquou.py` |
 
 ## R5 — 20 faits
 

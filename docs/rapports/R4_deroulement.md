@@ -425,6 +425,31 @@ auquel la chaîne de `44` tient), mêmes départs, départ + étapes + profils g
 registre et le taux de confirmation **en fonction de la profondeur**. Brouillon écrit après chaque bande
 (`docs/mesures/jusquou_va_t_il_si_on_le_laisse.json`).
 
+![Chaque marche de la tranche 113, pas par pas : le mur du plafond à droite, et le vidage vers les grands rayons](../images/113_le_plafond_est_encore_la_mesure.png)
+
+*`archive/113` (course du 11 septembre, 5 h 11) · `src/figures/figure_jusquou.py`, depuis `jusquou_va_t_il_si_on_le_laisse.json`. Une ligne par marche, ordonnée par rayon ; une case par pas, pleine si le pas est confirmé. **Les trois faits sont dans la même image** : le mur rouge à droite (les 28 marches touchent le plafond, rien ne les arrête), le trait ambre du plafond de `107` (tout ce qui est à sa droite était invisible), et le vidage de haut en bas — le taux suit le **rayon**, pas la profondeur, ce que les deux agrégats moyennaient.*
+
+### La tranche `113`, et ce que sa figure a trouvé
+
+La question posée était celle que `107` n'avait pas pu trancher : **56 marches sur 56 touchaient
+son plafond de six pas**, donc « la portée vaut 1 250 µm » ne disait rien de la portée. Le plafond
+est passé à vingt. Réponse : **28 marches sur 28 le touchent encore**, zéro sortie de volume, zéro
+marche arrêtée par quoi que ce soit. La portée est censurée une crantée plus haut, et ce qui a
+bougé est la borne inférieure — de 1,25 à 3966,3 µm (`R4-F31`).
+
+Deux agrégats ont été publiés avec ce run, et les deux moyennent sur le mauvais axe. Le taux de
+confirmation **ne baisse pas avec la profondeur** (précoce 0,56 contre tardif 0,50, p = 0,3253,
+`R4-F32`) — le marcheur ne s'use pas en avançant. Mais la grille ci-dessus, qui ne moyenne rien,
+montre les dernières lignes presque vides : le taux **par marche** va de 0,00 à 0,90, avec un
+indice de dispersion de 9,887 (χ² 266,95 sur 27 ddl), et il **suit le rayon** — rho de Spearman
+**−0,7188**, p = 1,6·10⁻⁵ sur 28 bandes de 4,07 à 23,8 mm (`R4-F33`, `R4-F34`).
+
+**Le marcheur n'échoue pas en avançant, il échoue là où il part.** C'est un diagnostic
+différent de celui que la campagne portait, et il n'a pas le même remède : le premier appellerait
+une correction en cours de route — l'humain du transfert —, le second un choix de départ. ⚠ Et une
+corrélation n'est pas une cause : le rayon fait varier au moins trois choses à la fois, l'épaisseur
+lue, la courbure et la qualité du scan (`R4-P21`).
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

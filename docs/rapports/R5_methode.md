@@ -155,7 +155,7 @@ nommé.
 
 **M6 — La forme, et la provenance observée.** `87` répond à une plainte de l'auteur — *« plein de
 scripts dans tous les sens, des duplicata, des trucs abandonnés qu'on refait sans le savoir, aucun
-test »* — et corrige d'abord son quatrième point, qui est faux (`R5-F15`). ⭐ Le corriger **change
+test »* — et corrige d'abord son quatrième point, qui est faux (`R5-F15`). Le corriger **change
 les priorités** : les tests ne sont pas la panne. La vraie panne est qu'*on ne peut pas retrouver
 ce qu'on a déjà mesuré* — 46 % du verdict « 0 orphelin » tient sur une tige de douze caractères ou
 moins (`R5-F10`), et c'est la cause mécanique de « on refait des trucs existants » : un chiffre

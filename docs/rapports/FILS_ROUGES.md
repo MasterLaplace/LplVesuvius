@@ -4,7 +4,7 @@
 
 # Les fils rouges — les lois que ce dépôt a payées
 
-**91 mécanismes** qui traversent les campagnes. Chacun a été payé au moins une fois, et le prix est dans le rapport qui le porte.
+**92 mécanismes** qui traversent les campagnes. Chacun a été payé au moins une fois, et le prix est dans le rapport qui le porte.
 
 ## R1 — 15 lois
 
@@ -208,7 +208,7 @@ L'image de 40 s jamais faite (`50`), l'image qui tranche feuille/tranche (`54` �
 
 `numcodecs` absent → « graine non couverte » (`41`) ; `imagecodecs` absent → LZW illisible (`54`) ; `verifier_zarr.sh` existait, orphelin. Le décodeur lève, il ne rend pas `None`.
 
-## R4 — 13 lois
+## R4 — 14 lois
 
 **R4-L01 · Une limite de grille publiée comme une limite matérielle**
 
@@ -261,6 +261,10 @@ L'image de 40 s jamais faite (`50`), l'image qui tranche feuille/tranche (`54` �
 **R4-L13 · Un pas n'est pas une marche : l'erreur se compose parce qu'elle devient la surface d'où l'on repart**
 
 — `75` §C l. 1886 (le raccrochage itéré), l. 3453 (2 bras contre 4), l. 6559 (la borne se froisse et reste juste : ce qu'un aveugle paie, c'est de repartir de sa propre nappe). Et un réglage choisi sur la médiane des bras inclut les bras **déjà perdus** (l. 6657).
+
+**R4-L14 · Une moyenne sur le mauvais axe cache exactement ce qu'on cherche**
+
+`113` publiait deux agrégats — un taux global et un taux par profondeur — et les deux moyennaient sur l'axe où l'écart se trouvait. Le taux ne varie pas avec la profondeur (p 0,3253) et varie d'un facteur neuf **entre marches** (rho −0,719 avec le rayon). Le remède n'est pas un troisième agrégat mais une **figure qui ne moyenne rien** : une ligne par marche, une case par pas.
 
 ## R5 — 20 lois
 
