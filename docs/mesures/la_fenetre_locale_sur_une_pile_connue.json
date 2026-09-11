@@ -1,0 +1,34 @@
+{
+ "pas_nominal_um": 173.0,
+ "pas_par_um": -0.04,
+ "pas_max": 26,
+ "fenetre": [
+  0.5,
+  2.0
+ ],
+ "bout_court_um": 86.5,
+ "bout_long_um": 346.0,
+ "marches": {
+  "fenetre_fixe": {
+   "pas": 26,
+   "en_butee": 3,
+   "confirmes": 21,
+   "pas_um_min": 86.5,
+   "echelle_min": 1.0,
+   "parcouru_um": 3287.0,
+   "pas_local_final_um": 41.5
+  },
+  "fenetre_locale": {
+   "pas": 26,
+   "en_butee": 0,
+   "confirmes": 26,
+   "pas_um_min": 50.0,
+   "echelle_min": 0.278,
+   "parcouru_um": 2797.7,
+   "pas_local_final_um": 61.1
+  }
+ },
+ "la_fenetre_locale_retire_la_butee": true,
+ "la_fenetre_locale_confirme_plus": true,
+ "la_fenetre_locale_descend_sous_le_bout_court": true
+}

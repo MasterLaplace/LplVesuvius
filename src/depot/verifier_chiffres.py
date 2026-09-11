@@ -2594,6 +2594,34 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                             [f"**{val}**", f"{val}", f"**{val:+.3f}**", f"{val:+.3f}"],
                             cpt.name))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 122 : LA FENETRE LOCALE RETIRE LA BUTEE, ET DEUX APPARIEMENTS LE DISENT.
+    # (1) Le « 0 en butee » de la fenetre locale ne voyage JAMAIS sans le « 3 » de la fixe : seul,
+    # zero se lit comme « rien ne se passe », alors que le fait est l'ECART entre les deux
+    # fenetres sur la MEME pile.
+    # (2) Et le pas minimal de la locale ne voyage jamais sans le bout court de la fenetre fixe :
+    # « 50,0 µm » n'est un resultat que parce que la fenetre fixe s'arrete a 86,5.
+    dem = _source(racine, "la_fenetre_locale_sur_une_pile_connue.json")
+    if dem.exists():
+        d = json.loads(dem.read_text())
+        for cle, nom, dec in (("pas_nominal_um", "pas nominal de 122", 1),
+                              ("bout_court_um", "bout court de 122", 1),
+                              ("bout_long_um", "bout long de 122", 1)):
+            if d.get(cle) is not None:
+                ajoute(nom, d[cle], dec, dem.name, unites=("µm",))
+        if d.get("pas_par_um") is not None:
+            ajoute("pente du pas de 122", d["pas_par_um"], 2, dem.name)
+        for nom_m, m in d.get("marches", {}).items():
+            for cle, etiquette in (("pas", "pas"), ("en_butee", "en butee"),
+                                   ("confirmes", "confirmes")):
+                if m.get(cle) is not None:
+                    v_ = m[cle]
+                    out.append((f"{nom_m} {etiquette} de 122", [f"**{v_}**", f"{v_}"], dem.name))
+            if m.get("pas_um_min") is not None:
+                ajoute(f"{nom_m} pas minimal de 122", m["pas_um_min"], 1, dem.name,
+                       unites=("µm",))
+            if m.get("echelle_min") is not None:
+                ajoute(f"{nom_m} echelle minimale de 122", m["echelle_min"], 3, dem.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 121 : RECENTRER EST GRATUIT, ELARGIR NON, ET DEUX APPARIEMENTS LE DISENT.
     # (1) L'invariance au recentrage ne voyage JAMAIS sans l'ecart a l'elargissement. Seule,
     # « 2,6e-16 » se lit comme « le nul ne depend de rien », ce qui viderait la mesure ; avec

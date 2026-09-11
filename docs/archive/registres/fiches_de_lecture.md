@@ -5265,6 +5265,25 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   qualité du scan.
 - **lu** : intégralement, 168 lignes, le 2026-09-11
 
+### docs/archive/122_la_re_course_est_ecrite.md
+- **lignes** : 106
+- **nature** : RESULTAT
+  (le mécanisme que `R4-P24` demande, écrit et exercé sur une pile dont la réponse est connue —
+  sans lancer la re-course.)
+- **résumé** : ⭐⭐⭐⭐ **La fenêtre locale retire la butée.** Sur un empilement dont le pas décroît
+  de 0,04 µm/µm, la fenêtre **fixe** est **3 fois en butée** et confirme **21 pas sur 26** ; la
+  **locale** n'est **jamais en butée**, confirme **26 sur 26** et descend à **50,0 µm**, sous le
+  bout court de **86,5**. ⭐⭐⭐ Rien n'est recalibré (`121`), et la fenêtre reçue est **vérifiée**
+  être celle de la calibration : un refus vaut mieux qu'une barre fausse. ⭐⭐ Le plafond est
+  **dérivé** — 4,07 → 23,8 mm à 177 µm d'espacement font **112 pas**. ⚠⚠ Démonstration
+  **ANALYTIQUE** : elle ne dit rien du vrai rouleau, et la borne de 0,9122 ne devient une mesure
+  que si la re-course tourne. ⚠⚠⚠ Trois défauts de la fixture, aucun du mécanisme : le chirp était
+  référencé au coin du volume (pas **négatif** au départ), le recalage se faisait sur `proj/pas` au
+  lieu de l'intégrale de `1/pas`, et le contrôle « l'échelle sous un cran » était le mauvais
+  énoncé — le marcheur **alterne** entre les deux candidats encadrant le pas vrai, donc ce qui
+  compte est que la fenêtre **contienne** encore ce pas. ⛔ La re-course n'est pas lancée.
+- **lu** : intégralement, 106 lignes, le 2026-09-12
+
 ### docs/archive/121_recentrer_ou_elargir_la_fenetre.md
 - **lignes** : 114
 - **nature** : RESULTAT

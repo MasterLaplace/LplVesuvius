@@ -492,7 +492,7 @@ fenêtre ne voulaient pas dire la même chose. **Les deux sont de vrais pas.** L
 qu'impliquent les pas en butée vaut **80,7 µm** au bout court (q3 85,5, sous la borne 86,5) et
 **380,2 µm** au bout long (q1 349,5, au-dessus de 346,0) — de part et d'autre de la fenêtre, comme
 une butée le prédit. Le contrôle est ce qui les rend lisibles : sur **287** pas libres, le déduit
-s'accorde au choisi à un rapport apparié de **1,015** [0,955 ; 1,070], rho **+0,7515**. ⭐ Et la
+s'accorde au choisi à un rapport apparié de **1,015** [0,955 ; 1,070], rho **+0,7515**. Et la
 variation **n'est pas radiale** (rho +0,2895, p 0,2293 sur 19 marches ; les deux bouts aux mêmes
 rayons, 14,70 mm contre 13,63, p 0,7729), donc un pas fonction du rayon ne suffirait pas. → **il faut une fenêtre centrée
 sur l'espacement mesuré à l'endroit du pas**, ce que `R2-F08` sait déjà faire.
@@ -503,7 +503,7 @@ lentement pour longer la feuille. La trajectoire est reconstruite exactement (é
 `parcouru_um` de la course) et coupée au premier pas aveugle. **Elle n'accumule rien** : rectitude
 **0,944** sur la première moitié contre **0,942** sur la seconde (p **0,8906**), virage par pas
 **11,5°** → **13,6°** (p **0,3736**), rotation cumulée autour de l'axe médiane **+13,2°**
-(p **0,1564**) — pas de spirale. ⭐ Et contre un tirage qui garde **exactement** le virage de chaque
+(p **0,1564**) — pas de spirale. Et contre un tirage qui garde **exactement** le virage de chaque
 pas mais en tire la direction au hasard, la marche réelle est plus droite : **0,928 contre 0,811**,
 **17 marches sur 19**, p **0,00141**. → **le marcheur ne dérive pas, il revient** ; ⚠ sur vingt pas,
 soit un sixième de l'étendue radiale.
@@ -513,7 +513,7 @@ Répare `R4-P23`, et la cause n'était pas celle qu'on croyait. La garde contre 
 `planarite` rend exactement **0,0** sur un tenseur nul, sa docstring dit que « le cas dégénéré doit
 être DÉTECTÉ, pas répondu », et sa batterie asserte que « seule la planarité peut l'écarter ». Le
 marcheur la **calculait, la publiait et ne la lisait pas** — `oriente` ne consultait que le désaccord
-des deux moitiés, et deux moitiés de rien rendent **0,00°**. ⭐ `oriente` exige désormais une
+des deux moitiés, et deux moitiés de rien rendent **0,00°**. `oriente` exige désormais une
 planarité strictement positive — un test de dégénérescence et jamais une barre, parce qu'une barre de
 planarité supprimerait ce que la garde doit laisser passer — et le pas porte `rien_lu` écrit à la
 source. ⚠ **Aucun chiffre publié ne bouge** : les cinq tranches qui relisent `113` reproduisent leur
@@ -526,10 +526,21 @@ Avant de payer une re-course pour élargir la fenêtre, mesure ce que chaque cha
 **2,6·10⁻¹⁶** près, sur toute la plage que `118` déduit (80 à 400 µm), parce qu'il ne dépend que
 des rapports des longueurs à la plus longue. **Élargir ne l'est pas** : le nul se déplace de
 **1,2 σ** pour [0,3 ; 3,0] et **2,0 σ** pour [0,25 ; 4,0], et le score calibré vaut
-`(score − mu)/sd`. ⭐ Contrôle positif : le nul n'est pas plat (**0,1582 → 0,0925**, soit **24,4
+`(score − mu)/sd`. Contrôle positif : le nul n'est pas plat (**0,1582 → 0,0925**, soit **24,4
 erreurs-types**), sans quoi « pas d'écart » serait une propriété d'une constante. → **la fenêtre
 peut suivre l'espacement local sans rien recalibrer** ; l'élargir exigerait son propre nul, et le
 remède spontané de `117` aurait coûté une re-course et une barre fausse.
+
+**`122` · 2026-09-12 · la re-course est écrite, testée, et pas lancée** (`combien_de_pas_la_matiere_porte.py`, analytique)
+Le marcheur gagne deux options, toutes deux **défaillant à l'ancien comportement** : une fenêtre de
+pas **recentrée sur l'espacement local à largeur constante** — ce que `121` rend gratuit et ce que
+la garde vérifie, un refus valant mieux qu'une barre fausse — et un **arrêt au premier pas aveugle**,
+que `116` rend sans coût. Démonstration sur une pile dont le pas décroît de 0,04 µm/µm : la fenêtre
+fixe est **3 fois en butée** et confirme **21 pas sur 26**, la locale **jamais**, confirme **26 sur
+26** et descend à **50,0 µm** sous le bout court de **86,5**. Et le plafond est **dérivé** :
+traverser 4,07 → 23,8 mm à 177 µm d'espacement demande **112 pas**. → **les deux portes qui restent
+demandent la même re-course, et elle est prête** ; elle n'est pas lancée, elle demande des
+lectures distantes sur des heures.
 
 ## 4. Le tableau des statuts
 
