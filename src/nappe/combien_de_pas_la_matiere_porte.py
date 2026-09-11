@@ -259,13 +259,35 @@ def marcher(lecteur, depart_fin: np.ndarray, direction0: np.ndarray, longueurs: 
             # sens initial, et il a ete fixe hors de cette boucle.
             if float(d @ sens) < 0.0:
                 d = -d
-            oriente = bool(np.isfinite(desaccord) and desaccord < barre_moities)
+            # ⚠⚠⚠ LA PLANARITE EST CONSULTEE, ET C'EST LA REPARATION DE `R4-P23`. Le drapeau
+            # ne lisait que le desaccord des deux moities — or deux moities de RIEN ne peuvent
+            # pas etre en desaccord : sur un cube constant l'angle vaut exactement 0,00°, donc il
+            # passe n'importe quelle barre. `115` a compte le resultat : 178 pas aveugles sur 178
+            # declares `oriente`, c'est-a-dire la confiance maximale exactement la ou le marcheur
+            # ne lit rien.
+            #
+            # ⚠⚠ LA GARDE EXISTAIT DEJA, ECRITE ET TESTEE, ET PERSONNE NE L'APPELAIT.
+            # `planarite` documente que « le cas degenere doit etre DETECTE, pas repondu » et rend
+            # exactement 0,0 sur un tenseur nul ; sa batterie asserte meme que « sa direction
+            # reste finie, donc SEULE LA PLANARITE PEUT L'ECARTER ». C'etait un contrat avec un
+            # consommateur qui n'a jamais existe.
+            #
+            # ⚠⚠ ET C'EST UN TEST DE DEGENERESCENCE, JAMAIS UN SEUIL. `accord_des_moities` mesure
+            # qu'a sigma 15 pour 40 d'amplitude la direction est bonne a 2,50° pendant que la
+            # planarite vaut 0,344, c'est-a-dire AU niveau du bruit pur : fermer sur une barre de
+            # planarite supprimerait ce que la garde doit laisser passer. Seul l'exactement nul
+            # est refuse, et il ne peut venir que d'un tenseur nul.
+            rien_lu = not (np.isfinite(pl) and pl > 0.0)
+            oriente = bool(np.isfinite(desaccord) and desaccord < barre_moities and not rien_lu)
         else:
             d = np.asarray(direction_imposee, dtype=np.float64)
             d = d / max(np.linalg.norm(d), 1e-12)
             if float(d @ sens) < 0.0:
                 d = -d
-            desaccord, pl, oriente = float("nan"), float("nan"), True
+            # ⚠ Le temoin naif n'interroge pas la matiere, donc il n'a rien a declarer aveugle :
+            # `rien_lu` y est faux par construction et non par mesure, et le dire evite de lire
+            # plus tard un temoin comme une marche voyante.
+            desaccord, pl, oriente, rien_lu = float("nan"), float("nan"), True, False
         # ⭐⭐ DEUX ROLES SEPARES : `99` DECIDE de combien avancer, `98` VERIFIE ce que l'avance
         # a traverse. Le temoin naif ne demande pas au premier — il avance du pas nominal — mais
         # il subit exactement le meme second.
@@ -298,6 +320,12 @@ def marcher(lecteur, depart_fin: np.ndarray, direction0: np.ndarray, longueurs: 
         etapes.append({
             "pas": k,
             "oriente": oriente,
+            # ⚠⚠ Le fait est ECRIT plutot que deduit. `115` reconnait un pas aveugle a une
+            # conjonction de grandeurs exactement nulles, ce qui marche sur les courses deja
+            # gardees ; ce champ le dit a la source, donc une analyse future n'a plus a le
+            # deviner — et le jour ou la reparation change ces deux grandeurs, la signature
+            # deduite cesserait de matcher en silence.
+            "rien_lu": rien_lu,
             "desaccord_des_moities_deg": (round(desaccord, 2)
                                           if np.isfinite(desaccord) else None),
             "planarite": round(pl, 3) if np.isfinite(pl) else None,
@@ -791,6 +819,63 @@ def verifier() -> int:
                 barre_interstice, C.VOXEL_FIN_UM, pas_max=PAS_MAX, demi=DEMI)
     v("sur du BRUIT PUR, le marcheur ne confirme rien",
       combien_de_pas_confirmes(b) == 0, f"{combien_de_pas_confirmes(b)} pas")
+
+    # === LE VIDE, ET LA REPARATION DE `R4-P23` ===========================================
+    # ⚠⚠⚠ Deux moities de RIEN ne peuvent pas etre en desaccord. Sur un cube constant l'angle
+    # vaut exactement 0,00°, donc il passe n'importe quelle barre : le drapeau qui ne lisait que
+    # ce desaccord declarait `oriente` exactement la ou le marcheur ne lit rien (`115`, 178 sur
+    # 178). La garde etait ecrite dans `planarite` et n'avait aucun appelant.
+    from la_direction_que_la_matiere_montre import (accord_des_moities as _accord,  # noqa: PLC0415
+                                                    planarite as _plan,
+                                                    tenseur_de_structure as _tens)
+    _cube_vide = np.full((2 * DEMI + 1,) * 3, 137.0)
+    _des, _ = _accord(_cube_vide)
+    v("un cube constant rend un desaccord EXACTEMENT nul", _des == 0.0, f"{_des}")
+    v("... donc il passait n'importe quelle barre", _des < barre_moities)
+    v("... et c'est la planarite qui le detecte", _plan(_tens(_cube_vide)[1]) == 0.0)
+
+    class _Vide:
+        """Un volume lu, DANS ses bornes, et constant : ni sortie ni lecture manquante."""
+
+        def __init__(self, forme=(4000, 4000, 4000), valeur=137.0):
+            self.forme = forme
+            self.valeur = valeur
+
+        def dans_le_volume(self, p):
+            p = np.asarray(p).reshape(-1, 3)
+            return np.all((p >= 0) & (p < np.asarray(self.forme)), axis=1)
+
+        def lire(self, points, fils=1):
+            del fils
+            return np.full(len(np.asarray(points).reshape(-1, 3)), self.valeur)
+
+    vide = marcher(_Vide(), depart, x_hat, longueurs, mu, sd, barre, barre_moities,
+                   barre_interstice, C.VOXEL_FIN_UM, pas_max=4, demi=DEMI)
+    pas_vides = [e for e in vide if "confirme" in e]
+    v("le vide n'est ni une sortie ni une lecture manquante", len(pas_vides) == 4,
+      f"{len(pas_vides)} pas")
+    v("⭐ chaque pas y est declare `rien_lu`", all(e["rien_lu"] for e in pas_vides))
+    v("⭐ et AUCUN n'est declare `oriente`", not any(e["oriente"] for e in pas_vides))
+    v("... ni confirme", not any(e["confirme"] for e in pas_vides))
+    # ⚠⚠ LA SONDE SYMETRIQUE, et c'est elle qui compte : la garde ne doit pas supprimer ce
+    # qu'elle doit laisser passer. Sur du BRUIT la planarite vaut le niveau du bruit pur, pas
+    # zero — fermer sur une barre de planarite aurait ecarte des lectures reelles.
+    pas_bruit = [e for e in b if "confirme" in e]
+    v("sonde : sur du bruit, aucun pas n'est declare `rien_lu`",
+      pas_bruit and not any(e["rien_lu"] for e in pas_bruit),
+      f"{sum(1 for e in pas_bruit if e['rien_lu'])}/{len(pas_bruit)}")
+    v("... parce que la planarite du bruit n'est pas nulle",
+      _plan(_tens(np.random.default_rng(3).normal(100.0, 10.0,
+                                                  (2 * DEMI + 1,) * 3))[1]) > 0.0)
+    # ⚠⚠ ET LE CONTRASTE EST EPINGLE, PAS RACONTE. `120` publie un tableau vide/bruit ; un chiffre
+    # publie dont le calcul n'est pas dans l'arbre est une anecdote, donc les deux valeurs du bruit
+    # sont assertees ici avec LEUR graine et LEUR forme. Elles bougeront si l'estimateur change,
+    # ce qui est exactement ce qu'une epingle doit faire.
+    _b41 = np.random.default_rng(0).normal(size=(41, 41, 41))
+    v("un cube de bruit (graine 0, 41³) rend un desaccord franc",
+      round(_accord(_b41)[0], 2) == 27.63, f"{round(_accord(_b41)[0], 2)}")
+    v("... et une planarite au niveau du bruit pur",
+      round(_plan(_tens(_b41)[1]), 3) == 0.337, f"{round(_plan(_tens(_b41)[1]), 3)}")
 
     # === LES DONNEES REELLES ==============================================================
     # ⚠ Au moins quatre cellules : la mesure saute une bande qui en garde moins de trois, donc

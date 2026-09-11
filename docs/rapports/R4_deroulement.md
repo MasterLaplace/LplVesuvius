@@ -508,6 +508,18 @@ pas mais en tire la direction au hasard, la marche réelle est plus droite : **0
 **17 marches sur 19**, p **0,00141**. → **le marcheur ne dérive pas, il revient** ; ⚠ sur vingt pas,
 soit un sixième de l'étendue radiale.
 
+**`120` · 2026-09-11 · la garde existait et personne ne l'appelait** (`combien_de_pas_la_matiere_porte.py`, réparation)
+Répare `R4-P23`, et la cause n'était pas celle qu'on croyait. La garde contre le vide **existait** :
+`planarite` rend exactement **0,0** sur un tenseur nul, sa docstring dit que « le cas dégénéré doit
+être DÉTECTÉ, pas répondu », et sa batterie asserte que « seule la planarité peut l'écarter ». Le
+marcheur la **calculait, la publiait et ne la lisait pas** — `oriente` ne consultait que le désaccord
+des deux moitiés, et deux moitiés de rien rendent **0,00°**. ⭐ `oriente` exige désormais une
+planarité strictement positive — un test de dégénérescence et jamais une barre, parce qu'une barre de
+planarité supprimerait ce que la garde doit laisser passer — et le pas porte `rien_lu` écrit à la
+source. ⚠ **Aucun chiffre publié ne bouge** : les cinq tranches qui relisent `113` reproduisent leur
+JSON octet pour octet. → **un contrôle qui décrit un devoir d'appelant ne vérifie rien tant qu'aucun
+appelant ne le remplit** (`R5-F21`).
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

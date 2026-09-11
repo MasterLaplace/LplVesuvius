@@ -4,7 +4,7 @@
 
 # Les faits, et ce qu'ils valent aujourd'hui
 
-**148 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **136** établi, **5** borné, **4** réfuté, **3** rétracté, **0** ouvert.
+**149 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **137** établi, **5** borné, **4** réfuté, **3** rétracté, **0** ouvert.
 
 ## R1 — 20 faits
 
@@ -121,7 +121,7 @@
 | `R4-F34` | le taux de confirmation suit le rayon **parce que le volume cesse de répondre**, pas parce que le marcheur y arrive moins | rho −0,7188 (p 1,6·10⁻⁵) sur les 28 marches, **−0,1904 (p 0,4642)** sur les 17 qui ont lu quelque chose ; taux médian 0,800 sous 17 mm contre 0,750 au-dessus, p 0,2579 | rétracté ; « le taux suit le rayon » : la corrélation tient, sa lecture causale non | `113`, `115` · `nappe/ce_qui_porte_le_taux.py` |
 | `R4-F35` | les deux agrégats de `113` **cachaient** ce résultat, et c'est la figure qui l'a montré | le taux global (0,5196) et le taux par profondeur (plat, p 0,3253) moyennent tous deux sur l'axe où l'écart se trouve ; la grille marche × pas l'a rendu visible | établi ; « regarder avant de mesurer » | `113` · `figures/figure_jusquou.py` |
 | `R4-F36` | **un pas sur trois ne lit RIEN**, et pas un seul ne confirme | 178 pas aveugles sur 560 (31,8 %) — désaccord exactement 0,00° ET planarité exactement 0,000 — dont **0 confirmé** ; 4 marches sur 28 sont aveugles **dès leur premier pas** | établi | `115` · `nappe/ce_qui_porte_le_taux.py` |
-| `R4-F37` | **le vide est déclaré orienté** : le marcheur croit savoir où il va là où il ne lit rien | 178 pas aveugles sur 178 portent `oriente = vrai`, parce que `oriente = désaccord < barre` et que deux moitiés de rien rendent 0,00° ; même forme que `54` (cinq rendus vides lus comme cinq surfaces plates) et `41` §6bis | établi ; défaut du drapeau, pas de la matière | `115`, `54`, `41` · `nappe/ce_qui_porte_le_taux.py` |
+| `R4-F37` | **le vide est déclaré orienté** : le marcheur croit savoir où il va là où il ne lit rien | 178 pas aveugles sur 178 portent `oriente = vrai`, parce que `oriente = désaccord < barre` et que deux moitiés de rien rendent 0,00° ; même forme que `54` (cinq rendus vides lus comme cinq surfaces plates) et `41` §6bis | établi ; défaut du drapeau, pas de la matière ; réparé depuis `120` — `oriente` exige désormais une planarité strictement positive | `115`, `54`, `41`, `120` · `nappe/ce_qui_porte_le_taux.py` |
 | `R4-F38` | **là où le volume répond, le marcheur confirme les trois quarts de ses pas, à tout rayon** | taux **0,7618** sur les 382 pas voyants ; 0,800 médian sous 17 mm contre 0,750 au-dessus (p 0,2579) ; le rayon ne survit pas (rho −0,1904, p 0,4642 sur 17 marches) | établi | `115` · `nappe/ce_qui_porte_le_taux.py` |
 | `R4-F39` | **la cécité est absorbante** : une marche qui cesse de lire ne relit jamais, donc le marcheur avait depuis le début l'arrêt qui lui manquait | 167 transitions aveugle→aveugle, **0** aveugle→voyant sur les 11 marches qui en avaient l'occasion ; sous permutation intra-marche à compte constant, **7 retours en médiane** et jamais moins de 5 sur 2 000 tirages | établi | `116` · `nappe/la_cecite_est_elle_absorbante.py` |
 | `R4-F40` | s'arrêter au premier pas aveugle rend **la première portée non censurée du dépôt** | **11 marches sur 28** s'arrêtent pour une raison : médiane **579,5 µm**, max **3 312,9 µm** ; les 17 autres touchent encore le plafond de vingt pas et restent une borne inférieure (médiane 3 650,3 µm) | établi ; portée du couple marcheur-volume, pas de la matière : `R4-P22` non tranchée | `116`, `113` · `nappe/la_cecite_est_elle_absorbante.py` |
@@ -134,7 +134,7 @@
 | `R4-F47` | **la trajectoire du marcheur n'accumule rien sur vingt pas**, et elle ne tourne pas toujours du même côté | rectitude **0,944** sur la première moitié d'une marche contre **0,942** sur la seconde (Wilcoxon apparié p **0,8906**, 19 marches) ; virage par pas **11,5°** → **13,6°** (p **0,3736**) ; rotation cumulée autour de l'axe médiane **+13,2°** (p **0,1564**) | établi ; n = 19 et vingt pas ≈ 4 mm : cesse de rejeter l'accumulation, ne la réfute pas sur cent transferts ; une marche tourne de 140° entre ses deux moitiés | `119` · `nappe/le_marcheur_derive_t_il.py` |
 | `R4-F48` | **les virages du marcheur se COMPENSENT** : il ne se contente pas de ne pas dériver, il revient | rectitude réelle **0,928** contre **0,811** pour un tirage qui garde exactement le virage de chaque pas et en tire la direction au hasard ; **17 marches sur 19**, Wilcoxon apparié p **0,00141** | établi ; sonde inverse : sur une marche parfaitement droite le témoin répond « rien à compenser » | `119` · `nappe/le_marcheur_derive_t_il.py` |
 
-## R5 — 20 faits
+## R5 — 21 faits
 
 | id | fait | valeur | statut | source · producteur |
 |---|---|---|---|---|
@@ -158,6 +158,7 @@
 | `R5-F18` | le vrai gaspillage est **97 Go de rendus**, et 58,6 % du contenu identique sont des **fenêtres imbriquées** | 35,58 Gio identiques mesurés par hachage sur 68 540 fichiers ; 20,85 Gio où la tranche *i* de n = 31 **est** la tranche *i+25* de n = 81 ; rendre n = 161 produit déjà 81, 41 et 31 | établi | `56` §1.3, A · `contenu_en_double.py`, `sous_fenetre.py` |
 | `R5-F19` | une **réfutation par ordre de grandeur** ne se rouvre pas | le rassemblement coûte 0,167 ms par fenêtre quand l'écart à expliquer en vaut 356,6 : rapport **×2142** ; la falaise de cache prédite à 3780 colonnes n'existe pas (6000 coûte moins que 4260) | réfuté ; (l'hypothèse) | `62` §3–4 · `cout_de_la_fenetre.py` |
 | `R5-F20` | **un débit ne se publie pas depuis un cumul** | le même crop du même segment : 0,132 puis 0,5785 puis 1,4616 fenêtres/fil-s selon ce qui tournait à côté ; allure instantanée 0,267 / 1,200 / **11,429**, soit ×42,9 sur elle-même ; les deux segments atteignent le même pic | établi ; « facteur 4,6 » rétracté | `62` §7 · `ab_segments.py`, `allure_du_rendu.py` |
+| `R5-F21` | **une garde peut être écrite, documentée ET assertée, et n'avoir aucun appelant** — le pire cas, parce que tout a l'air en place | `planarite` rend exactement **0,0** sur un tenseur nul, sa docstring dit que « le cas dégénéré doit être DÉTECTÉ, pas répondu », et sa batterie asserte que « seule la planarité peut l'écarter » ; le marcheur la **calculait, la publiait et ne la lisait pas**, d'où les **178 pas aveugles sur 178** déclarés `oriente` de `R4-F37` | établi ; un contrôle qui décrit un devoir d'APPELANT ne vérifie rien tant qu'un appelant ne le remplit pas | `120`, `115` · `nappe/combien_de_pas_la_matiere_porte.py` |
 
 ## R6 — 20 faits
 

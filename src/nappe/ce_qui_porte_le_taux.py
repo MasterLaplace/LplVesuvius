@@ -86,7 +86,16 @@ def est_aveugle(etape: dict) -> bool:
     ⚠ « Aveugle » et non « hors du volume » : le lecteur n'a jamais signalé de sortie
     (`sorties_du_volume: 0`). Ce qui est mesuré est que le marcheur **n'a rien lu**, pas où il
     était.
+
+    ⚠⚠ **Deux signatures, et la seconde n'est pas un doublon.** Depuis `120` le marcheur ÉCRIT
+    `rien_lu` à la source, et ce champ fait autorité quand il est là. Les courses déjà gardées ne
+    le portent pas, donc la conjonction reste lue pour elles — et il faut les deux : la réparation
+    fait refuser l'orientation d'un vide, et rien ne garantit qu'une course future rende encore un
+    désaccord *exactement* nul. Une signature déduite qui cesserait de matcher en silence
+    compterait zéro pas aveugle, ce qui ressemble à un volume qui répond partout.
     """
+    if etape.get("rien_lu") is not None:
+        return bool(etape["rien_lu"])
     d = etape.get("desaccord_des_moities_deg")
     p = etape.get("planarite")
     return d == 0.0 and p == 0.0
@@ -509,6 +518,15 @@ def verifier() -> int:
     # ⚠⚠ LA sonde de la signature CONJOINTE : un seul des deux critères classerait mal. Un
     # désaccord nul sur une matière planaire arrive (deux moitiés qui s'accordent vraiment) ;
     # c'est la CONJONCTION qui ne peut venir que d'un cube sans matière.
+    # ⭐⭐ La signature ÉCRITE fait autorité quand elle est là, la déduite reste pour les courses
+    # déjà gardées. Sans les deux, la réparation de `120` ferait compter zéro pas aveugle sur une
+    # course neuve — ce qui ressemble à un volume qui répond partout.
+    v("le champ `rien_lu` fait autorité quand il est présent",
+      est_aveugle({"rien_lu": True, "desaccord_des_moities_deg": 12.0, "planarite": 0.4}))
+    v("... y compris pour dire qu'un pas VOIT",
+      not est_aveugle({"rien_lu": False, "desaccord_des_moities_deg": 0.0, "planarite": 0.0}))
+    v("... et la signature déduite reste lue quand le champ manque",
+      est_aveugle({"desaccord_des_moities_deg": 0.0, "planarite": 0.0}))
     v("sonde : un désaccord nul sur une VRAIE planarité n'est pas aveugle",
       not est_aveugle(etape(0.0, 0.68)))
     v("sonde : une planarité nulle avec un vrai désaccord non plus",

@@ -5265,6 +5265,25 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   qualité du scan.
 - **lu** : intégralement, 168 lignes, le 2026-09-11
 
+### docs/archive/120_la_garde_existait_et_personne_ne_lappelait.md
+- **lignes** : 127
+- **nature** : RESULTAT
+  (pourquoi le drapeau `oriente` déclarait un vide orienté : réparation de `R4-P23`, et la cause
+  n'était pas une garde manquante.)
+- **résumé** : ⭐⭐⭐⭐ **La garde EXISTAIT, écrite, documentée et assertée, sans aucun appelant.**
+  `planarite` rend exactement **0,0** sur un tenseur nul, sa docstring dit que « le cas dégénéré
+  doit être DÉTECTÉ, pas répondu », et sa batterie asserte que « sa direction reste finie, donc
+  **seule la planarité peut l'écarter** » — un contrat avec un consommateur qui n'a jamais existé.
+  ⭐⭐⭐ Le marcheur la **calculait, la publiait et ne la lisait pas** : `oriente` ne consultait que
+  le désaccord des deux moitiés, et deux moitiés de rien rendent **0,00°**, donc passent n'importe
+  quelle barre. ⭐⭐ La réparation exige une planarité **strictement positive** — un test de
+  dégénérescence, jamais une barre, parce que `accord_des_moities` mesure qu'à sigma 15 la
+  direction est bonne à 2,50° pendant que la planarité vaut 0,344, au niveau du bruit pur. Le pas
+  porte en plus `rien_lu`, écrit à la source. ⚠ **Aucun chiffre publié ne bouge** : les cinq
+  tranches qui relisent `113` reproduisent leur JSON octet pour octet. ⚠ La règle d'ARRÊT n'est
+  pas changée — ça relève de `R4-P20`.
+- **lu** : intégralement, 127 lignes, le 2026-09-11
+
 ### docs/archive/119_le_marcheur_ne_derive_pas.md
 - **lignes** : 152
 - **nature** : RESULTAT
