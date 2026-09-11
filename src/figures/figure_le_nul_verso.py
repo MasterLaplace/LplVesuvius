@@ -35,12 +35,15 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import tempfile
 from pathlib import Path
 
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from figure_commune import police, prose_tracable  # noqa: E402
+from figure_commune import (police, prose_tracable,  # noqa: E402
+                            textes_debordants, textes_hors_cadre,
+                            textes_qui_se_recouvrent)
 
 RACINE = Path(__file__).resolve().parents[2]
 CARTES = RACINE / "docs" / "mesures" / "nul_verso_cartes"
@@ -51,6 +54,16 @@ DISCRET = (140, 136, 128)
 AMBRE = (214, 143, 42)
 GRIS = (120, 128, 140)
 ROUGE = (188, 68, 52)
+
+
+def lire(chemin: Path) -> dict:
+    """Charge et valide une mesure de segment."""
+    if not chemin.is_file():
+        raise FileNotFoundError(f"mesure absente : {chemin}")
+    donnees = json.loads(chemin.read_text(encoding="utf-8"))
+    if not donnees.get("segment") or not donnees.get("profil"):
+        raise ValueError(f"structure invalide dans {chemin}")
+    return donnees
 
 
 def bornes_communes(a: np.ndarray, b: np.ndarray) -> tuple[float, float]:
@@ -127,31 +140,36 @@ def prose(m: dict) -> list[str]:
     return lignes
 
 
-def dessiner(m: dict, sortie: Path) -> dict:
+def dessiner(m: dict, sortie: Path, cartes_dir: Path = CARTES) -> tuple[Path, list, list]:
     from PIL import Image, ImageDraw
 
     gros, moyen, petit = police(17, 13, 11)
-    a = np.load(CARTES / f"{m['segment']}_face.npy")
-    b = np.load(CARTES / f"{m['segment']}_nul.npy")
+    p_face = cartes_dir / f"{m['segment']}_face.npy"
+    p_nul = cartes_dir / f"{m['segment']}_nul.npy"
+    if not p_face.is_file() or not p_nul.is_file():
+        raise FileNotFoundError(f"cartes introuvables pour {m['segment']} dans {cartes_dir}")
+    a = np.load(p_face)
+    b = np.load(p_nul)
     lo, hi = bornes_communes(a, b)
 
     cote = 420
     L, H = 2 * cote + 90, 150 + 190 + cote + 130
     toile = Image.new("RGB", (L, H), FOND)
     d = ImageDraw.Draw(toile)
-    d.text((36, 24), "une face ecrite et un vide, vus par le meme detecteur",
-           fill=TEXTE, font=gros)
-    d.text((36, 50), f"{m['segment']} — meme pile, meme modele, meme pas ; "
-                     "seule la profondeur change", fill=DISCRET, font=moyen)
+    poses: list[tuple[int, int, str, object]] = []
+
+    def ecrire(x, y, texte, fonte, fill):
+        d.text((x, y), texte, font=fonte, fill=fill)
+        poses.append((x, y, texte, fonte))
+
+    ecrire(36, 24, "une face ecrite et un vide, vus par le meme detecteur",
+           gros, TEXTE)
+    ecrire(36, 50, f"{m['segment']} — meme pile, meme modele, meme pas ; "
+                   "seule la profondeur change", moyen, DISCRET)
 
     # ---- le profil de profondeur, et les deux fenetres ---------------------------------
     px, py, pw, ph = 36, 92, L - 72, 130
     d.rectangle([px, py, px + pw, py + ph], outline=(60, 60, 60))
-    # ⚠⚠⚠ LES DEUX SERIES, ET C'EST LE SUJET DE CE PANNEAU. A 2,4 µm le contraste local
-    # dessine un U -- maximal aux deux interfaces de la feuille, minimal dans son interieur --
-    # donc s'en servir pour placer les fenetres met la face au BORD et le vide DANS le papyrus.
-    # C'est l'inversion qui a ete payee le 2026-09-05. L'intensite, elle, pique sur la matiere.
-    # Les tracer ensemble rend la correction verifiable a l'oeil au lieu d'etre racontee.
     contraste, intensite = series_du_panneau(m)
     n = len(intensite)
     for nom, debut, couleur in (("face", m["debut_face"], AMBRE),
@@ -159,15 +177,15 @@ def dessiner(m: dict, sortie: Path) -> dict:
         x0 = px + int(pw * debut / n)
         x1 = px + int(pw * (debut + 26) / n)
         d.rectangle([x0, py + 1, x1, py + ph - 1], fill=(38, 32, 22) if nom == "face" else (26, 30, 34))
-        d.text((x0 + 4, py + 6), f"fenetre {nom}", fill=couleur, font=petit)
+        ecrire(x0 + 4, py + 6, f"fenetre {nom}", petit, couleur)
     for serie, couleur, large in ((contraste, ROUGE, 1), (intensite, TEXTE, 2)):
         pts = [(px + int(pw * i / n), py + ph - int((ph - 8) * v)) for i, v in enumerate(serie)]
         for u, w in zip(pts, pts[1:]):
             d.line([u, w], fill=couleur, width=large)
-    d.text((px + 4, py + ph - 30), "intensite moyenne par couche -- c'est ELLE qui place les "
-                                   "fenetres", fill=TEXTE, font=petit)
-    d.text((px + 4, py + ph - 16), "contraste local -- un U a 2,4 µm : ses maxima sont les "
-                                   "interfaces, pas la feuille", fill=ROUGE, font=petit)
+    ecrire(px + 4, py + ph - 30, "intensite moyenne par couche -- c'est ELLE qui place les "
+                                 "fenetres", petit, TEXTE)
+    ecrire(px + 4, py + ph - 16, "contraste local -- un U a 2,4 µm : ses maxima sont les "
+                                 "interfaces, pas la feuille", petit, ROUGE)
 
     # ---- les deux cartes, MEME echelle -------------------------------------------------
     for i, (nom, carte, sous) in enumerate((
@@ -178,34 +196,23 @@ def dessiner(m: dict, sortie: Path) -> dict:
         img = Image.fromarray(en_gris(carte, lo, hi)).resize((cote, cote), Image.NEAREST)
         toile.paste(img, (x0, y0))
         d.rectangle([x0, y0, x0 + cote, y0 + cote], outline=(70, 70, 70))
-        d.text((x0, y0 - 34), nom, fill=TEXTE, font=moyen)
-        d.text((x0, y0 - 18), sous, fill=DISCRET, font=petit)
+        ecrire(x0, y0 - 34, nom, moyen, TEXTE)
+        ecrire(x0, y0 - 18, sous, petit, DISCRET)
 
     bas = py + ph + 44 + cote + 12
-    d.text((36, bas), f"meme echelle de gris : {lo:+.2f} a {hi:+.2f} (percentiles 1 et 99 des "
-                      "DEUX cartes)", fill=AMBRE, font=petit)
+    ecrire(36, bas, f"meme echelle de gris : {lo:+.2f} a {hi:+.2f} (percentiles 1 et 99 des "
+                    "DEUX cartes)", petit, AMBRE)
     for k, ligne in enumerate(prose(m)):
-        d.text((36, bas + 22 + k * 19), ligne, fill=TEXTE, font=moyen)
+        ecrire(36, bas + 22 + k * 19, ligne, moyen, TEXTE)
 
     sortie.parent.mkdir(parents=True, exist_ok=True)
     toile.save(sortie)
-    return {"plage": [lo, hi], "rapport_etendue": m["rapport_etendue"], "sortie": str(sortie)}
+    return sortie, poses, [(0, 0, L, H)]
 
 
-def panorama(mesures: list[dict], sortie: Path) -> dict:
+def panorama(mesures: list[dict], sortie: Path, cartes_dir: Path = CARTES) -> tuple[Path, list, list]:
     """
     @brief Les trois segments l'un sous l'autre — la seule vue qui dise si c'est une propriété.
-
-    ⚠⚠⚠ POURQUOI UNE SECONDE MISE EN PAGE ET PAS UN SECOND FICHIER. Un segment ne peut pas dire
-    si un résultat appartient au **détecteur** ou à **cette fenêtre-là** ; c'est toute la raison
-    pour laquelle `C2` en demande trois. Une figure par segment laisse cette comparaison à la
-    mémoire du lecteur. Les primitives sont partagées (`bornes_communes`, `en_gris`, `prose`) :
-    ce qui change est la disposition, pas ce qu'on montre.
-
-    ⚠⚠ L'ÉCHELLE EST COMMUNE PAR SEGMENT, pas sur les trois. Deux campagnes n'ont pas la même
-    plage de sortie, et une échelle globale écraserait le segment le plus terne vers le gris —
-    on comparerait alors des campagnes au lieu de comparer face et vide. Chaque ligne porte donc
-    sa plage, écrite.
     """
     from PIL import Image, ImageDraw
 
@@ -213,10 +220,6 @@ def panorama(mesures: list[dict], sortie: Path) -> dict:
     cote, marge = 236, 36
     entete, ligne_h = 78, cote + 34
 
-    # ⚠⚠ LA LARGEUR SE MESURE, ELLE NE SE CHOISIT PAS. Ma première version réservait 300 px à
-    # la colonne de droite : la prose débordait et sortait coupée en plein mot, sur la figure
-    # qui porte le résultat. Un texte tronqué ne se lit pas comme un défaut de mise en page,
-    # il se lit comme une phrase qui s'arrête.
     def largeur(texte, fonte):
         boite = ImageDraw.Draw(Image.new("RGB", (1, 1))).textbbox((0, 0), texte, font=fonte)
         return boite[2] - boite[0]
@@ -230,49 +233,53 @@ def panorama(mesures: list[dict], sortie: Path) -> dict:
     H = entete + ligne_h * len(mesures) + 24
     toile = Image.new("RGB", (L, H), FOND)
     d = ImageDraw.Draw(toile)
-    d.text((marge, 22), "une face et un vide, sur trois segments de PHerc0139",
-           fill=TEXTE, font=gros)
-    d.text((marge, 48), "meme pile, meme modele, meme pas ; seule la profondeur lue change",
-           fill=DISCRET, font=moyen)
+    poses: list[tuple[int, int, str, object]] = []
 
-    lignes = []
+    def ecrire(x, y, texte, fonte, fill):
+        d.text((x, y), texte, font=fonte, fill=fill)
+        poses.append((x, y, texte, fonte))
+
+    ecrire(marge, 22, "une face et un vide, sur trois segments de PHerc0139",
+           gros, TEXTE)
+    ecrire(marge, 48, "meme pile, meme modele, meme pas ; seule la profondeur lue change",
+           moyen, DISCRET)
+
     for k, m in enumerate(mesures):
         y = entete + k * ligne_h
-        a = np.load(CARTES / f"{m['segment']}_face.npy")
-        b = np.load(CARTES / f"{m['segment']}_nul.npy")
+        p_face = cartes_dir / f"{m['segment']}_face.npy"
+        p_nul = cartes_dir / f"{m['segment']}_nul.npy"
+        if not p_face.is_file() or not p_nul.is_file():
+            raise FileNotFoundError(f"cartes introuvables pour {m['segment']} dans {cartes_dir}")
+        a = np.load(p_face)
+        b = np.load(p_nul)
         lo, hi = bornes_communes(a, b)
         for i, carte in enumerate((a, b)):
             x = marge + i * (cote + 18)
             toile.paste(Image.fromarray(en_gris(carte, lo, hi)).resize((cote, cote),
                                                                       Image.NEAREST), (x, y))
             d.rectangle([x, y, x + cote, y + cote], outline=(70, 70, 70))
-            d.text((x + 4, y + 4), "face" if i == 0 else "vide",
-                   fill=AMBRE if i == 0 else GRIS, font=petit)
+            ecrire(x + 4, y + 4, "face" if i == 0 else "vide",
+                   petit, AMBRE if i == 0 else GRIS)
         tx = marge + 2 * cote + 34
         auc = m.get("auc_face_contre_nul")
-        d.text((tx, y + 2), m["segment"].split("_")[0], fill=TEXTE, font=moyen)
-        # ⚠⚠ L'AUC EST COLOREE PAR CE QU'ELLE DIT, pas par une preference : sous 0,5 le vide se
-        # lit MIEUX que la face, ce qui est le contraire de ce qu'un detecteur d'encre doit
-        # faire. Une couleur unique laisserait ce renversement passer pour un chiffre parmi
-        # d'autres.
+        ecrire(tx, y + 2, m["segment"].split("_")[0], moyen, TEXTE)
         if auc is not None:
-            d.text((tx, y + 24), f"AUC face contre vide  {auc:.3f}",
-                   fill=ROUGE if auc < 0.5 else TEXTE, font=moyen)
-        d.text((tx, y + 46), f"couches {m['debut_face']}..{m['debut_face'] + 26} "
-                             f"contre {m['debut_nul']}..{m['debut_nul'] + 26}",
-               fill=DISCRET, font=petit)
+            ecrire(tx, y + 24, f"AUC face contre vide  {auc:.3f}",
+                   moyen, ROUGE if auc < 0.5 else TEXTE)
+        ecrire(tx, y + 46, f"couches {m['debut_face']}..{m['debut_face'] + 26} "
+                           f"contre {m['debut_nul']}..{m['debut_nul'] + 26}",
+               petit, DISCRET)
         for j, texte in enumerate(prose(m)[1:]):
-            d.text((tx, y + 68 + j * 17), texte, fill=DISCRET, font=petit)
-        d.text((tx, y + 68 + 3 * 17), f"echelle {lo:+.2f} a {hi:+.2f}", fill=AMBRE, font=petit)
-        lignes.append(dict(segment=m["segment"], auc=auc, plage=[lo, hi]))
+            ecrire(tx, y + 68 + j * 17, texte, petit, DISCRET)
+        ecrire(tx, y + 68 + 3 * 17, f"echelle {lo:+.2f} a {hi:+.2f}", petit, AMBRE)
 
     sortie.parent.mkdir(parents=True, exist_ok=True)
     toile.save(sortie)
-    return {"segments": lignes, "sortie": str(sortie)}
+    return sortie, poses, [(0, 0, L, H)]
 
 
 def verifier() -> int:
-    """Auto-test HORS LIGNE : l'échelle commune, les absents, la prose."""
+    """Auto-test HORS LIGNE : l'échelle commune, les absents, la prose, les sondes et le dessin."""
     echecs = controles = 0
 
     def v(nom, cond, detail=""):
@@ -340,6 +347,75 @@ def verifier() -> int:
     c2, i2 = series_du_panneau({"profil": [0.1] * 5})
     v("... et retombe sur le contraste quand elle manque", i2 == c2 == [0.1] * 5, str(i2))
 
+    # --- VALIDATION HORS-LIGNE lire(), dessiner() ET panorama() AVEC SONDES ---
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp = Path(tmpdir)
+        p_json = tmp / "mesure.json"
+        p_json.write_text(json.dumps(faux), encoding="utf-8")
+
+        m_lu = lire(p_json)
+        v("lire charge le segment", m_lu["segment"] == "s")
+
+        # Sonde 1 : fichier absent
+        sonde_absent = False
+        try:
+            lire(tmp / "inexistant.json")
+        except FileNotFoundError:
+            sonde_absent = True
+        v("sonde : fichier json absent lève FileNotFoundError", sonde_absent)
+
+        # Sonde 2 : schéma invalide
+        p_invalide = tmp / "invalide.json"
+        p_invalide.write_text(json.dumps({"aucun": 1}), encoding="utf-8")
+        sonde_invalide = False
+        try:
+            lire(p_invalide)
+        except ValueError:
+            sonde_invalide = True
+        v("sonde : schéma json invalide lève ValueError", sonde_invalide)
+
+        # Cartes .npy témoins
+        c_dir = tmp / "cartes"
+        c_dir.mkdir()
+        mini_a = np.linspace(-1.0, 1.0, 100).reshape(10, 10)
+        mini_b = np.linspace(-0.8, 0.8, 100).reshape(10, 10)
+        np.save(c_dir / "s_face.npy", mini_a)
+        np.save(c_dir / "s_nul.npy", mini_b)
+
+        # Tracé d'un segment seul (dessiner)
+        cible_single = tmp / "single.png"
+        out_s, poses_s, cadres_s = dessiner(m_lu, cible_single, cartes_dir=c_dir)
+        v("dessiner rend le chemin demandé", out_s == cible_single)
+        v("le fichier png single est produit", cible_single.is_file() and cible_single.stat().st_size > 0)
+        v("au moins 10 textes sont posés sur le dessin", len(poses_s) >= 10)
+        v("aucun texte ne déborde (single)", textes_debordants(poses_s, cadres_s[0][2]) == [])
+        v("aucun texte ne sort de son cadre (single)", textes_hors_cadre(poses_s, cadres_s) == [])
+        v("aucun chevauchement critique (single)", textes_qui_se_recouvrent(poses_s) == [])
+
+        # Tracé du panorama
+        cible_pano = tmp / "panorama.png"
+        out_p, poses_p, cadres_p = panorama([m_lu], cible_pano, cartes_dir=c_dir)
+        v("panorama rend le chemin demandé", out_p == cible_pano)
+        v("le fichier png panorama est produit", cible_pano.is_file() and cible_pano.stat().st_size > 0)
+        v("au moins 5 textes sont posés sur le panorama", len(poses_p) >= 5)
+        v("aucun texte ne déborde (panorama)", textes_debordants(poses_p, cadres_p[0][2]) == [])
+        v("aucun texte ne sort de son cadre (panorama)", textes_hors_cadre(poses_p, cadres_p) == [])
+        v("aucun chevauchement critique (panorama)", textes_qui_se_recouvrent(poses_p) == [])
+
+        # Sonde 3 : texte débordant artificiel
+        gros, _, _ = police(17, 13, 11)
+        poses_trop_larges = poses_s + [(cadres_s[0][2] - 10, 50, "texte qui sort largement de l'image a droite", gros)]
+        debord = textes_debordants(poses_trop_larges, cadres_s[0][2])
+        v("sonde : un texte débordant est bien intercepté", len(debord) > 0)
+
+        # Sonde 4 : cartes manquantes
+        sonde_cartes = False
+        try:
+            dessiner(m_lu, tmp / "vide.png", cartes_dir=tmp / "vide_dir")
+        except FileNotFoundError:
+            sonde_cartes = True
+        v("sonde : cartes manquantes refusées par dessiner", sonde_cartes)
+
     print(f"  {'ECHEC' if echecs else 'ALL PASS'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -347,31 +423,34 @@ def verifier() -> int:
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--mesure", type=Path,
-                   default=RACINE / "docs" / "mesures"
-                   / "le_nul_verso_20260325000000-w046.json")
+                    default=RACINE / "docs" / "mesures"
+                    / "le_nul_verso_20260325000000-w046.json")
     p.add_argument("--sortie", type=Path,
-                   default=RACINE / "docs" / "images" / "75_le_nul_verso.png")
+                    default=RACINE / "docs" / "images" / "75_le_nul_verso.png")
     p.add_argument("--tous", action="store_true",
-                   help="les trois segments l'un sous l'autre, depuis docs/mesures/")
+                    help="les trois segments l'un sous l'autre, depuis docs/mesures/")
     p.add_argument("--verifier", action="store_true")
     a = p.parse_args()
     if a.verifier:
         return verifier()
     if a.tous:
         fichiers = sorted((RACINE / "docs" / "mesures").glob("le_nul_verso*.json"))
-        mesures = [json.loads(f.read_text()) for f in fichiers]
+        mesures = [lire(f) for f in fichiers]
         # ⚠ On ne dessine que ce qui a rendu DEUX cartes : un segment refusé par la garde porte
         # son profil et sa raison, pas d'image, et l'inventer serait un panneau vide qui
         # ressemble à une mesure.
         mesures = [m for m in mesures if m.get("face") and not m["face"].get("echec")]
         if not mesures:
             raise SystemExit("aucune mesure complète dans docs/mesures/")
-        print(json.dumps(panorama(mesures, a.sortie), indent=2, ensure_ascii=False))
-        return 0
-    if not a.mesure.is_file():
-        raise SystemExit(f"mesure absente : {a.mesure}")
-    print(json.dumps(dessiner(json.loads(a.mesure.read_text()), a.sortie),
-                     indent=2, ensure_ascii=False))
+        out, _, _ = panorama(mesures, a.sortie)
+    else:
+        mesure = lire(a.mesure)
+        out, _, _ = dessiner(mesure, a.sortie)
+    try:
+        cible = out.relative_to(RACINE)
+    except ValueError:
+        cible = out
+    print(f"écrit : {cible}")
     return 0
 
 
