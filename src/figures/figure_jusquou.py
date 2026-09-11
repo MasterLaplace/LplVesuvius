@@ -317,6 +317,17 @@ def verifier() -> int:
         v("la longueur de repli aussi",
           faux["ce_qui_a_arrete_les_marches_de_107"]["longueur_mediane_um"], LONGUEUR_DE_107_UM)
 
+        # ⚠⚠ Et le module doit pouvoir écrire HORS du dépôt sans lever : c'est exactement ce
+        # que `fraicheur_des_figures.py` fait pour comparer les octets. Sans ce contrôle, la
+        # régression se voit seulement dans un « ⛔ impossible » que rien ne fait rougir.
+        j.write_text(json.dumps(faux), encoding="utf-8")
+        import subprocess
+        rc = subprocess.run([sys.executable, str(Path(__file__).resolve()),
+                             "--json", str(j), "--sortie", str(r / "dehors.png")],
+                            capture_output=True, text=True)
+        v("écrire hors du dépôt ne lève pas", rc.returncode, 0)
+        v("... et l'image y est bien écrite", (r / "dehors.png").is_file(), True)
+
     print(f"{'ECHEC' if echecs else 'ALL PASS'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -333,7 +344,16 @@ def main() -> int:
     if a.verifier:
         return verifier()
     out, _, _ = dessiner(lire(a.json), a.sortie)
-    print(f"écrit : {out.relative_to(RACINE)}")
+    # ⚠⚠ `relative_to` LÈVE quand la sortie est hors du dépôt, et `fraicheur_des_figures.py`
+    # régénère justement dans un dossier temporaire pour comparer les octets. Un module qui lève
+    # là apparaît chez lui en « ⛔ impossible » — c'est-à-dire que sa figure n'est plus vérifiée
+    # du tout, en silence, pendant que le garde-fou reste vert. Le confort d'un chemin court ne
+    # vaut pas une garde qui cesse de garder.
+    try:
+        dit = out.relative_to(RACINE)
+    except ValueError:
+        dit = out
+    print(f"écrit : {dit}")
     return 0
 
 
