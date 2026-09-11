@@ -2594,6 +2594,59 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                             [f"**{val}**", f"{val}", f"**{val:+.3f}**", f"{val:+.3f}"],
                             cpt.name))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 118 : LA FENETRE EXCLUT DE VRAIS PAS, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) Un espacement deduit ne voyage JAMAIS sans le bout de fenetre qu'il conteste : « 80,7 µm »
+    # seul est une longueur, « 80,7 contre une borne a 86,5 » est un refus d'instrument.
+    # (2) Et il ne voyage jamais sans le rapport apparie du controle : sans « 1,015 sur 287 pas
+    # libres », rien ne dit que la fraction franchie veut dire quelque chose, donc les deux bouts
+    # seraient deux nombres tires d'un estimateur non verifie.
+    fgl = _source(racine, "la_fenetre_est_globale_lespacement_est_local.json")
+    if fgl.exists():
+        d = json.loads(fgl.read_text())
+        c = d.get("le_deduit_saccorde_t_il_au_choisi", {})
+        if c.get("pas_libres_deductibles") is not None:
+            v_ = c["pas_libres_deductibles"]
+            out.append(("pas libres deductibles de 118", [f"**{v_}**", f"{v_}"], fgl.name))
+        for cle, nom, dec in (("rapport_median", "rapport median de 118", 3),
+                              ("rapport_q1", "rapport q1 de 118", 3),
+                              ("rapport_q3", "rapport q3 de 118", 3)):
+            if c.get(cle) is not None:
+                ajoute(nom, c[cle], dec, fgl.name)
+        if c.get("rho") is not None:
+            ajoute("rho du controle de 118", c["rho"], 4, fgl.name, signe=True)
+        e = d.get("ce_que_la_fenetre_exclut", {})
+        for cle, nom in (("bout_court_um", "bout court de 118"),
+                         ("bout_long_um", "bout long de 118")):
+            if e.get(cle) is not None:
+                ajoute(nom, e[cle], 1, fgl.name, unites=("µm",))
+        for bout in ("court", "long"):
+            b = e.get(f"bout_{bout}", {})
+            if not b.get("decidable"):
+                continue
+            if b.get("pas_deductibles") is not None:
+                v_ = b["pas_deductibles"]
+                out.append((f"pas deductibles du bout {bout} de 118",
+                            [f"**{v_}**", f"{v_}"], fgl.name))
+            for cle, suffixe in (("espacement_median_um", ""), ("q1_um", " (q1)"),
+                                 ("q3_um", " (q3)")):
+                if b.get(cle) is not None:
+                    ajoute(f"espacement du bout {bout} de 118{suffixe}", b[cle], 1, fgl.name,
+                           unites=("µm",))
+        r_ = d.get("la_variation_est_elle_radiale", {})
+        if r_.get("marches") is not None:
+            v_ = r_["marches"]
+            out.append(("marches exploitables de 118", [f"**{v_}**", f"{v_}"], fgl.name))
+        if r_.get("rho_espacement_rayon") is not None:
+            ajoute("rho radial de 118", r_["rho_espacement_rayon"], 4, fgl.name, signe=True)
+        for cle, nom, dec in (("p", "p radial de 118", 4),
+                              ("p_court_contre_long", "p court contre long de 118", 4)):
+            if r_.get(cle) is not None:
+                ajoute(nom, r_[cle], dec, fgl.name)
+        for cle, nom in (("rayon_median_bout_court_mm", "rayon median du bout court de 118"),
+                         ("rayon_median_bout_long_mm", "rayon median du bout long de 118")):
+            if r_.get(cle) is not None:
+                ajoute(nom, r_[cle], 2, fgl.name, unites=("mm",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 117 : CE QUI REFUSE UN PAS VOYANT, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) Le « 0,9122 » ne voyage JAMAIS sans le compte de pas refuses par la MATIERE. Seul, il se
     # lit comme le taux du marcheur ; avec « 28 sur 382 », il se lit pour ce qu'il est, une borne

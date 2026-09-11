@@ -486,6 +486,17 @@ les voyants, le taux va de **0,74 à 0,80** avec la profondeur (p 0,3493) — le
 pas retrouve exactement le 0,56 → 0,50 de `113`, ce qui est le contrôle du lecteur. → **il n'y a pas
 d'accumulation d'erreur à corriger sur vingt pas**, et ce qui refuse est réparable par une re-course.
 
+**`118` · 2026-09-11 · la fenêtre est globale, l'espacement est local** (`la_fenetre_est_globale_lespacement_est_local.py`, une seconde, hors ligne)
+⚠ Corrige une supposition de `117` : son §5 avançait, sans le mesurer, que les deux bouts de la
+fenêtre ne voulaient pas dire la même chose. **Les deux sont de vrais pas.** L'espacement local
+qu'impliquent les pas en butée vaut **80,7 µm** au bout court (q3 85,5, sous la borne 86,5) et
+**380,2 µm** au bout long (q1 349,5, au-dessus de 346,0) — de part et d'autre de la fenêtre, comme
+une butée le prédit. Le contrôle est ce qui les rend lisibles : sur **287** pas libres, le déduit
+s'accorde au choisi à un rapport apparié de **1,015** [0,955 ; 1,070], rho **+0,7515**. ⭐ Et la
+variation **n'est pas radiale** (rho +0,2895, p 0,2293 sur 19 marches ; les deux bouts aux mêmes
+rayons, 14,70 mm contre 13,63, p 0,7729), donc un pas fonction du rayon ne suffirait pas. → **il faut une fenêtre centrée
+sur l'espacement mesuré à l'endroit du pas**, ce que `R2-F08` sait déjà faire.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

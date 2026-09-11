@@ -1,0 +1,57 @@
+{
+ "source": "jusquou_va_t_il_si_on_le_laisse.json",
+ "le_deduit_saccorde_t_il_au_choisi": {
+  "decidable": true,
+  "pas_libres_deductibles": 287,
+  "rapport_median": 1.015,
+  "rapport_q1": 0.955,
+  "rapport_q3": 1.07,
+  "rho": 0.7515,
+  "p": 2.1241818978175295e-53,
+  "le_deduit_est_calibre": true
+ },
+ "ce_que_la_fenetre_exclut": {
+  "decidable": true,
+  "bout_court_um": 86.5,
+  "bout_long_um": 346.0,
+  "bout_court": {
+   "decidable": true,
+   "pas_deductibles": 42,
+   "espacement_median_um": 80.7,
+   "q1_um": 74.1,
+   "q3_um": 85.5
+  },
+  "bout_long": {
+   "decidable": true,
+   "pas_deductibles": 17,
+   "espacement_median_um": 380.2,
+   "q1_um": 349.5,
+   "q3_um": 409.5
+  },
+  "la_fenetre_exclut_de_vrais_pas": true
+ },
+ "ou_tombent_ils_dans_la_distribution_publiee": {
+  "decidable": true,
+  "publie_p5_p50_p90": [
+   101.0,
+   177.0,
+   303.0
+  ],
+  "court_median_um": 80.7,
+  "long_median_um": 380.2,
+  "court_sous_le_p5": true,
+  "long_au_dessus_du_p90": true,
+  "les_deux_sont_dans_les_queues": true
+ },
+ "la_variation_est_elle_radiale": {
+  "decidable": true,
+  "marches": 19,
+  "rho_espacement_rayon": 0.2895,
+  "p": 0.22933513423022364,
+  "rayon_median_bout_court_mm": 14.7,
+  "rayon_median_bout_long_mm": 13.63,
+  "p_court_contre_long": 0.7729,
+  "la_variation_suit_le_rayon": false,
+  "reserve": "n = 28 marches : un rho qui tombe cesse de rejeter l'absence d'effet, il ne la prouve pas"
+ }
+}

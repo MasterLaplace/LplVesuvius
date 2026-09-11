@@ -5265,6 +5265,23 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   qualité du scan.
 - **lu** : intégralement, 168 lignes, le 2026-09-11
 
+### docs/archive/118_la_fenetre_est_globale.md
+- **lignes** : 126
+- **nature** : RESULTAT
+  (les 63 pas que la fenêtre du marcheur refuse sont-ils de vrais pas ? mesuré sur les mêmes
+  560 étapes, sans une lecture distante, et sans figure.)
+- **résumé** : ⭐⭐⭐⭐ **Les deux bouts de la fenêtre sont de VRAIS pas, et `117` supposait le
+  contraire** — son §5 avançait par raisonnement que le bout long était un saut de feuille et le
+  bout court un pas qui ne traverse rien. L'espacement local déduit vaut **80,7 µm** au bout
+  court (q3 85,5 < 86,5) et **380,2 µm** au bout long (q1 349,5 > 346,0). ⭐⭐⭐⭐ Le contrôle :
+  sur **287** pas libres le déduit s'accorde au choisi à **1,015** [0,955 ; 1,070], rho
+  **+0,7515** — donc la fraction franchie est calibrée et son usage aux bouts tient ; les pas dont
+  la fraction est elle-même en butée sont écartés (43→42, 20→17). ⭐⭐⭐ Et la variation **n'est
+  pas radiale** (rho +0,2895, p 0,2293 sur 19 marches ; les deux bouts aux mêmes rayons, 14,70 contre
+  13,63 mm, p 0,7729) : le remède est une fenêtre centrée LOCALEMENT, pas un pas fonction du rayon. ⚠ Les
+  deux espacements tombent dans les queues de `R2-F07` (p5 101, p90 303), pas au milieu.
+- **lu** : intégralement, 126 lignes, le 2026-09-11
+
 ### docs/archive/117_qui_refuse_un_pas_voyant.md
 - **lignes** : 165
 - **nature** : RESULTAT

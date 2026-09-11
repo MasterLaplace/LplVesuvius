@@ -4,7 +4,7 @@
 
 # Les faits, et ce qu'ils valent aujourd'hui
 
-**144 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **133** établi, **4** borné, **4** réfuté, **3** rétracté, **0** ouvert.
+**146 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **134** établi, **5** borné, **4** réfuté, **3** rétracté, **0** ouvert.
 
 ## R1 — 20 faits
 
@@ -81,7 +81,7 @@
 | `R3-F19` | **la chaîne radiale converge six tours et casse au septième** ; ce qui décide est la portée, pas le pas | officiel + 6 spires `gen_neighbor` : 4/7 convergent, 7ᵉ +1,475 ; pas 0,5 → 6/7 ; optimum en U, bassin 0,25–0,5 ; portée = `neighbor_exit_count` × pas ; repousse libre : casse au 3ᵉ tour | établi | `43` §1–6 · `spire_suivante.sh`, `table_chaine.py` |
 | `R3-F20` | **la chaîne avance d'une nappe à la fois, et s'érode** | 113 µm entre nappes (100–138) ; érosion **15,6 %/tour** sur l'aire utile (58 → 23 % valides) ; ~10 % d'un tour par nappe → une colonne, pas une bande ; rayon refusé (résidu 0,5 mm pour 0,113 d'écart) | établi ; « 4,0 % » rétracté | `44` §1–7 · `geometrie_chaine.py` |
 
-## R4 — 44 faits
+## R4 — 46 faits
 
 | id | fait | valeur | statut | source · producteur |
 |---|---|---|---|---|
@@ -129,6 +129,8 @@
 | `R4-F42` | **deux tiers des refus d'un pas voyant viennent de la FENÊTRE du marcheur, pas de la matière** | sur **91** pas voyants refusés, **62** n'ont que `en_butee` contre eux (**69 %** des refus touchent la fenêtre) ; les **63** pas en butée sont **exactement aux deux bouts** de la fenêtre — **43** à 86,5 µm, **20** à 346,0 µm, **0** entre les deux — pour une fenêtre de 0,5 à 2,0 × le pas nominal de 173,0 µm | établi ; le prédicat reconstruit rend `confirme` sur les 560 pas, 0 désaccord | `117`, `115` · `nappe/qui_refuse_un_pas_voyant.py` |
 | `R4-F43` | la matière seule refuse **28 pas voyants sur 382**, donc le taux vaudrait **au plus 0,9122** | 291 confirmés, 63 refusés par la seule fenêtre, **28** par la matière ; **0,9122** est une borne supérieure | borné ; borne supérieure et jamais une mesure : un pas en butée aurait pu échouer aussi sur la matière avec une fenêtre plus large (`R4-P24`) | `117` · `nappe/qui_refuse_un_pas_voyant.py` |
 | `R4-F44` | **chez les pas voyants, le taux ne baisse pas avec la profondeur** : pas d'accumulation d'erreur sur vingt pas | premier tiers **0,74**, dernier tiers **0,80**, p **0,3493** ; le même test sur tous les pas retrouve exactement ce que `113` publie (0,56 → 0,50, p 0,3253), ce qui est le contrôle du lecteur | établi ; p 0,3493 : le taux ne baisse pas, il n'est pas établi qu'il monte | `117`, `113` · `nappe/qui_refuse_un_pas_voyant.py` |
+| `R4-F45` | **la fenêtre de pas du marcheur exclut de VRAIS pas, aux deux bouts** — et `117` supposait le contraire | l'espacement local qu'impliquent les pas en butée vaut **80,7 µm** au bout court (q3 85,5, sous la borne 86,5) et **380,2 µm** au bout long (q1 349,5, au-dessus de 346,0) ; contrôle sur **287** pas libres, rapport apparié déduit/choisi **1,015** [0,955 ; 1,070], rho **+0,7515** | établi ; les deux bouts tombent dans les queues de l'espacement publié par `R2-F07` (p5 101, p90 303) | `118`, `117` · `nappe/la_fenetre_est_globale_lespacement_est_local.py` |
+| `R4-F46` | **la variation d'espacement n'est pas radiale** : un pas fonction du rayon ne rattraperait pas les butées | rho **+0,2895** (p **0,2293**) entre l'espacement médian d'une marche et son rayon, sur 19 marches ; les deux bouts se rencontrent aux mêmes rayons (14,7 mm contre 13,63, p **0,7729**) | borné ; n = 19 marches : cesse de rejeter l'absence d'effet, ne la prouve pas ; `R2-F07` mesure bien +28 % du cœur au bord sur 4 000 cellules | `118` · `nappe/la_fenetre_est_globale_lespacement_est_local.py` |
 
 ## R5 — 20 faits
 
