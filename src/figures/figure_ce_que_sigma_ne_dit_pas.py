@@ -25,10 +25,15 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import tempfile
 from pathlib import Path
 
+from PIL import Image
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from figure_commune import police, prose_tracable  # noqa: E402
+from figure_commune import (police, prose_tracable,  # noqa: E402
+                            textes_debordants, textes_hors_cadre,
+                            textes_qui_se_recouvrent)
 
 RACINE = Path(__file__).resolve().parents[2]
 
@@ -38,6 +43,20 @@ DISCRET = (140, 136, 128)
 AMBRE = (214, 143, 42)
 GRIS = (120, 128, 140)
 ROUGE = (188, 68, 52)
+
+
+def lire(lisible_path: Path, transport_path: Path) -> tuple[dict, dict]:
+    """Charge les deux mesures nécessaires et valide leur structure minimale."""
+    for nom, p in (("lisible", lisible_path), ("transport", transport_path)):
+        if not p.is_file():
+            raise FileNotFoundError(f"mesure {nom} absente : {p}")
+    lisible = json.loads(lisible_path.read_text(encoding="utf-8"))
+    transport = json.loads(transport_path.read_text(encoding="utf-8"))
+    if not lisible.get("echelles"):
+        raise ValueError(f"{lisible_path} ne porte aucune échelle")
+    if not transport.get("correlations"):
+        raise ValueError(f"{transport_path} ne porte aucune corrélation")
+    return lisible, transport
 
 
 def echelle(valeur: float, lo: float, hi: float, pixels: int) -> int:
@@ -74,28 +93,33 @@ def prose(lisible: dict, transport: dict) -> list[str]:
     ]
 
 
-def dessiner(lisible: dict, transport: dict, sortie: Path) -> dict:
-    from PIL import Image, ImageDraw
+def dessiner(lisible: dict, transport: dict, sortie: Path) -> tuple[Path, list, list]:
+    from PIL import ImageDraw
 
     gros, moyen, petit = police(16, 13, 12)
     L, H = 1180, 560
     toile = Image.new("RGB", (L, H), FOND)
     d = ImageDraw.Draw(toile)
+    poses: list[tuple[int, int, str, object]] = []
+
+    def ecrire(x, y, texte, fonte, fill):
+        d.text((x, y), texte, font=fonte, fill=fill)
+        poses.append((x, y, texte, fonte))
 
     # ---- GAUCHE : la lisibilité par échelle, contre le trait du hasard -----------------
     gx, gy, gw, gh = 90, 100, 430, 300
-    d.text((70, 34), "à quelle résolution la lisibilité est établie", fill=TEXTE, font=gros)
-    d.text((70, 56), "AUC moyenne des tuiles, intervalle à 95 %", fill=DISCRET, font=moyen)
+    ecrire(70, 34, "à quelle résolution la lisibilité est établie", gros, TEXTE)
+    ecrire(70, 56, "AUC moyenne des tuiles, intervalle à 95 %", moyen, DISCRET)
     bas, haut = 0.35, 0.85
     d.rectangle([gx, gy, gx + gw, gy + gh], outline=(60, 60, 60))
     for val in (0.4, 0.5, 0.6, 0.7, 0.8):
         yy = gy + gh - echelle(val, bas, haut, gh)
         d.line([gx, yy, gx + gw, yy], fill=(70, 70, 70) if val == 0.5 else (36, 36, 36))
-        d.text((gx - 42, yy - 7), f"{val:.1f}", fill=DISCRET, font=petit)
+        ecrire(gx - 42, yy - 7, f"{val:.1f}", petit, DISCRET)
     y5 = gy + gh - echelle(0.5, bas, haut, gh)
     # ⚠ « hasard » va a GAUCHE dans le cadre : colle au bord droit, il debordait et
     # s'affichait « asard » -- une figure se regarde avant d'etre publiee.
-    d.text((gx + 8, y5 - 17), "hasard", fill=DISCRET, font=petit)
+    ecrire(gx + 8, y5 - 17, "hasard", petit, DISCRET)
 
     n = max(len(lisible["echelles"]), 1)
     col = gw // n
@@ -113,23 +137,23 @@ def dessiner(lisible: dict, transport: dict, sortie: Path) -> dict:
         d.line([cx - 30, y2, cx + 30, y2], fill=couleur, width=2)
         ym = gy + gh - echelle(ic["moyenne"], bas, haut, gh)
         d.line([cx - 34, ym, cx + 34, ym], fill=couleur, width=2)
-        d.text((cx - 26, gy + gh + 10), f"{e['voxel_um']:.2f} µm", fill=TEXTE, font=moyen)
-        d.text((cx - 26, gy + gh + 28), "établie" if ok else "non établie",
-               fill=couleur, font=petit)
+        ecrire(cx - 26, gy + gh + 10, f"{e['voxel_um']:.2f} µm", moyen, TEXTE)
+        ecrire(cx - 26, gy + gh + 28, "établie" if ok else "non établie",
+               petit, couleur)
 
     # ---- DROITE : les corrélations, contre le zéro -------------------------------------
     bx, by, bw, bh = 660, 100, 400, 300
-    d.text((650, 34), "ce qui prédit la qualité sans étiquettes", fill=TEXTE, font=gros)
-    d.text((650, 56), "corrélation de rang avec l'AUC de tuile, intervalle à 95 %",
-           fill=DISCRET, font=moyen)
+    ecrire(650, 34, "ce qui prédit la qualité sans étiquettes", gros, TEXTE)
+    ecrire(650, 56, "corrélation de rang avec l'AUC de tuile, intervalle à 95 %",
+           moyen, DISCRET)
     lo, hi = -0.85, 0.75
     d.rectangle([bx, by, bx + bw, by + bh], outline=(60, 60, 60))
     for val in (-0.8, -0.4, 0.0, 0.4):
         xx = bx + echelle(val, lo, hi, bw)
         d.line([xx, by, xx, by + bh], fill=(70, 70, 70) if val == 0.0 else (36, 36, 36))
-        d.text((xx - 12, by + bh + 8), f"{val:+.1f}", fill=DISCRET, font=petit)
+        ecrire(xx - 12, by + bh + 8, f"{val:+.1f}", petit, DISCRET)
     x0 = bx + echelle(0.0, lo, hi, bw)
-    d.text((x0 - 12, by - 20), "zéro", fill=DISCRET, font=petit)
+    ecrire(x0 - 12, by - 20, "zéro", petit, DISCRET)
 
     items = [(nom, c) for nom, c in transport["correlations"].items() if c.get("exploitable")]
     pas = bh // max(len(items), 1)
@@ -144,20 +168,19 @@ def dessiner(lisible: dict, transport: dict, sortie: Path) -> dict:
         xr = bx + echelle(c["rho"], lo, hi, bw)
         d.ellipse([xr - 4, yy - 4, xr + 4, yy + 4], fill=couleur)
         etiquette = "σ" if nom == "sigma" else nom.replace("_px", "").replace("_", " ")
-        d.text((bx - 4 - 7 * len(etiquette), yy - 7), etiquette, fill=couleur, font=petit)
+        ecrire(bx - 4 - 7 * len(etiquette), yy - 7, etiquette, petit, couleur)
 
     for k, ligne in enumerate(prose(lisible, transport)):
-        d.text((650, by + bh + 46 + k * 20), ligne,
-               fill=ROUGE if k == 0 else TEXTE, font=moyen)
+        ecrire(650, by + bh + 46 + k * 20, ligne, moyen,
+               ROUGE if k == 0 else TEXTE)
 
     sortie.parent.mkdir(parents=True, exist_ok=True)
     toile.save(sortie)
-    return {"echelles": len(lisible["echelles"]), "grandeurs": len(items),
-            "sortie": str(sortie)}
+    return sortie, poses, [(0, 0, L, H)]
 
 
 def verifier() -> int:
-    """Auto-test HORS LIGNE : les axes, le verdict et la prose."""
+    """Auto-test HORS LIGNE : les axes, le verdict, la prose et la figure avec sondes."""
     echecs = controles = 0
 
     def v(nom, cond, detail=""):
@@ -209,6 +232,58 @@ def verifier() -> int:
     v("une grandeur qui tranche ferait bouger le compte",
       prose(faux_l, faux_t2)[1].startswith("1 grandeur sur 2"), prose(faux_l, faux_t2)[1])
 
+    # ---- Validation de lire() et dessiner() hors-ligne avec sondes ----
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp = Path(tmpdir)
+        pl = tmp / "lisible.json"
+        pt = tmp / "transport.json"
+        pl.write_text(json.dumps(faux_l), encoding="utf-8")
+        pt.write_text(json.dumps(faux_t), encoding="utf-8")
+
+        l_lu, t_lu = lire(pl, pt)
+        v("lire charge les échelles", len(l_lu.get("echelles", [])) == 3)
+        v("lire charge les corrélations", len(t_lu.get("correlations", {})) == 2)
+
+        # Sonde 1 : fichier absent
+        sonde_manquant = False
+        try:
+            lire(tmp / "absent.json", pt)
+        except FileNotFoundError:
+            sonde_manquant = True
+        v("sonde : fichier manquant lève FileNotFoundError", sonde_manquant)
+
+        # Sonde 2 : schéma invalide (sans echelles)
+        pl_invalide = tmp / "invalide_l.json"
+        pl_invalide.write_text(json.dumps({"aucun": 1}), encoding="utf-8")
+        sonde_invalide = False
+        try:
+            lire(pl_invalide, pt)
+        except ValueError:
+            sonde_invalide = True
+        v("sonde : schéma sans échelles lève ValueError", sonde_invalide)
+
+        # Tracé réel de la figure témoin
+        cible = tmp / "figure.png"
+        out, poses, cadres = dessiner(l_lu, t_lu, cible)
+        v("dessiner rend le chemin demandé", out == cible)
+        v("le fichier png est produit", cible.is_file() and cible.stat().st_size > 0)
+        im = Image.open(cible)
+        v("au moins 15 textes sont posés", len(poses) >= 15, f"{len(poses)} textes")
+        v("tous les textes sont dans le cadre", textes_hors_cadre(poses, cadres) == [])
+        v("aucun texte ne déborde", textes_debordants(poses, im.size[0]) == [])
+        v("aucun chevauchement critique", textes_qui_se_recouvrent(poses) == [])
+
+        # Sonde 3 : texte débordant artificiel
+        gros, _, _ = police(16, 13, 12)
+        poses_trop_larges = poses + [(1150, 50, "texte qui sort largement de l'image a droite", gros)]
+        debord = textes_debordants(poses_trop_larges, im.size[0])
+        v("sonde : un texte débordant est bien intercepté", len(debord) > 0)
+
+        # Sonde 4 : texte hors cadre
+        poses_hors = poses + [(1150, 100, "texte qui sort largement du cadre vers la droite", gros)]
+        hors = textes_hors_cadre(poses_hors, cadres)
+        v("sonde : un texte hors cadre est bien intercepté", len(hors) > 0)
+
     print(f"{'ALL PASS' if echecs == 0 else 'ECHEC'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -225,15 +300,15 @@ def main() -> int:
     a = p.parse_args()
     if a.verifier:
         return verifier()
-    for f in (a.lisible, a.transport):
-        if not f.is_file():
-            print(f"mesure absente : {f}", file=sys.stderr)
-            return 2
-    r = dessiner(json.loads(a.lisible.read_text(encoding="utf-8")),
-                 json.loads(a.transport.read_text(encoding="utf-8")), a.sortie)
-    print(f"{r['echelles']} echelles, {r['grandeurs']} grandeurs → {a.sortie}")
+    lisible, transport = lire(a.lisible, a.transport)
+    out, _, _ = dessiner(lisible, transport, a.sortie)
+    try:
+        cible = out.relative_to(RACINE)
+    except ValueError:
+        cible = out
+    print(f"écrit : {cible}")
     return 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    sys.exit(main())
