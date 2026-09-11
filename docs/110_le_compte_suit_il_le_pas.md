@@ -184,9 +184,9 @@ l'avoir copié a coûté la course.
 ⚠ Et la batterie porte désormais le contrôle qui l'aurait attrapé : *l'agrégation survit à une
 vérification non décidable*.
 
-## ⭐⭐⭐⭐ Ce que `111` a tranché, et ce document posait la question
+## ⭐⭐⭐ Ce que `111` a tranché, et ce document posait la question
 
-> ⭐⭐⭐⭐ **La falaise était celle de l'instrument.**
+> ⭐⭐⭐ **La falaise était celle de l'instrument.**
 > [`111`](111_une_bande_qui_ne_bouge_pas_avec_la_fenetre.md) borne la bande de fréquences par des
 > longueurs d'onde PHYSIQUES (λ de **86.5** à **346.0** µm, les candidats du balayage) au lieu du
 > plancher relatif `F_MIN = 0,35`. Sur les mêmes profils, la falaise du mode bas passe de

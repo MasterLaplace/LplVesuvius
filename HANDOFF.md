@@ -7,7 +7,41 @@ l'historique, daté, et se lit ensuite.
 
 ## ⭐⭐⭐⭐ REPRISE — 2026-09-10
 
-⭐⭐⭐⭐ **ET `111` A TRANCHÉ LA QUESTION QUE `110` LAISSAIT OUVERTE : LA FALAISE ÉTAIT CELLE DE
+⭐⭐⭐ **ET `112` A DEMANDÉ SI LE REMÈDE DE `111` RÉPARE AUSSI LE CRITÈRE PAR PAS — NON, ET C'EST
+LA RÉSOLUTION DE LA FENÊTRE.** Sur un segment d'un pas, `f_lo` vaut **0.6021** :
+**aucun** mode de Fourier n'est sous le signal, parce que le PREMIER mode de la fenêtre EST le
+signal. Une dérive plus longue que la fenêtre n'y est pas **représentable** — elle ne se distingue
+pas d'un décalage constant plus le signal lui-même. Mesuré sur cinq dérives : le retrait rend un
+gain de **exactement zéro** à chaque fois, alors que la contamination atteint
+**0.3407** d'accord.
+
+⚠⚠⚠ **ET J'AI ÉCHOUÉ DEUX FOIS AVANT DE LE COMPRENDRE, CHAQUE FOIS SUR LA BASE.** Un détrendage
+polynomial de degré deux absorbe **0.9585** du gabarit à un pas — ce n'est
+pas un sous-espace de basse fréquence, c'est un sous-espace qui CONTIENT le signal ; et une grille
+harmonique à fréquences non entières en absorbe
+**1.0**, son conditionnement étant si mauvais
+qu'un `qr` en rendait un espace plus grand que le sien. ⚠ **Une part absorbée se calcule par SVD.**
+
+⚠⚠⚠ **ET « EXACTEMENT ORTHOGONAL » ÉTAIT FAUX, la batterie m'a repris.** L'orthogonalité est exacte
+sur la grille **DFT** (**2.515e-16**) et seulement approchée
+(**0.01342**) sur la grille à extrémité **incluse** que `98` et `111`
+emploient — le premier et le dernier échantillon y sont à la même phase. Le résidu décroît comme
+`1/n`, donc la conclusion tient, mais le chiffre remplace le mot.
+
+⭐ **ET LE REMÈDE REDEVIENT POSSIBLE À 2 PAS**, par une inégalité :
+le premier mode retirable apparaît quand la fenêtre dépasse λmax, soit
+**346.0** µm = **1.661** pas. Sur les segments réels il aide de
+six à neuf points dès deux pas. ⚠⚠ **Mais ce n'est pas un gain gratuit** : une fenêtre longue
+confirme **moins souvent** qu'un pas seul — **0.607**
+contre **0.69** — parce qu'un gabarit de plusieurs feuilles
+est un ajustement bien plus exigeant. ⚠ Et les fenêtres d'une même marche se **recouvrent**.
+
+⚠ **CE QUE `112` NE TOUCHE PAS** : la portée du marcheur, qu'elle ne mesure pas ; et `106`, qui
+reste debout.
+
+---
+
+⭐⭐⭐ **ET `111` A TRANCHÉ LA QUESTION QUE `110` LAISSAIT OUVERTE : LA FALAISE ÉTAIT CELLE DE
 L'INSTRUMENT.** Le plancher de fréquence de `98` est **relatif à la fenêtre** — 0,35 période par
 fenêtre, donc une longueur d'onde de **1314 µm** admise à deux pas et **3943** à six, alors
 qu'aucune n'est un espacement de feuille. Le remède est une **bande dérivée de la matière**
@@ -47,7 +81,7 @@ les mêmes voxels. Toute relecture future est gratuite.
 
 ---
 
-⭐⭐⭐⭐ **ET `110` A POSÉ LA QUESTION QUE `109` DÉSIGNAIT, POUR UNE LECTURE PAR MARCHE.** Les étapes
+⭐⭐⭐ **ET `110` A POSÉ LA QUESTION QUE `109` DÉSIGNAIT, POUR UNE LECTURE PAR MARCHE.** Les étapes
 gardées par `107` reconstruisent chaque polyligne, donc le registre se recalcule sur chacun de ses
 **PRÉFIXES** : **56** lectures, **2050,6 s**, là où refaire les marches coûterait des heures.
 ⚠⚠ Le **départ** n'avait pas été gardé — la leçon de `102` qui se rejoue — mais il est re-dérivable
@@ -131,7 +165,7 @@ six pas de `107` est exactement ce qui empêche de la poser.
 
 ---
 
-⭐⭐⭐⭐ **ET `108` A RÉPONDU À LA QUESTION QUE `107` POSAIT EN PREMIER, SANS UNE LECTURE DE PLUS.**
+⭐⭐⭐ **ET `108` A RÉPONDU À LA QUESTION QUE `107` POSAIT EN PREMIER, SANS UNE LECTURE DE PLUS.**
 `107` laissait deux populations « que rien d'autre ne distingue ». C'est faux, et la mesure le dit :
 sur **onze candidats déclarés AVANT de regarder**, corrigés par permutation sur le maximum de la
 famille, **deux survivent** — le **score médian du balayage** (force **0,664**, p corrigée
@@ -399,7 +433,7 @@ dépassé. Il est conservé plus bas, sous son en-tête, parce que ses résultat
    facteur à appliquer — il faut relancer. ⚠ `100` compare deux directions avec ce sélecteur, donc
    son anomalie d'isotropie hérite de la dérive ; `102` marche avec, donc sa portée est mesurée par
    un marcheur qui dépasse de 18 % à chaque pas.
-1. ⭐⭐⭐⭐ **FAIT PAR `108`, ET CE QUI RESTE EST UNE COURSE, PAS UN CHIFFRE.** Le signal existe (le
+1. ⭐⭐⭐ **FAIT PAR `108`, ET CE QUI RESTE EST UNE COURSE, PAS UN CHIFFRE.** Le signal existe (le
    score du balayage, mesuré à chaque pas, lisible au troisième), mais **un signal n'est pas une
    politique**. Ce qui manque est la mesure appariée que `102` et `107` emploient déjà : *un
    marcheur qui REDÉMARRE ailleurs quand le score des trois premiers pas est bas porte-t-il plus
@@ -1266,6 +1300,30 @@ mesure ; cloner `vesuvius-repro` (TAUIL) ; vérifier Obuchowski 1997 sur les ROC
 et **citer `vesuvius-automesh`, `windcheck`, `winding-sync`, `tifxyz-doctor`, `winding-ruler`
 comme antériorité dans nos documents** — ils sont sur le disque, une revue les trouvera à notre
 place.
+
+### ⚠⚠⚠ L'ÉCHELLE DES ÉTOILES A UNE RÈGLE — 2026-09-11, après l'avoir crevée
+
+⛔ **Elle est écrite parce que je l'ai abusée, et le chiffre le dit** : le dépôt portait **18**
+marques à quatre étoiles au matin du 2026-09-11 et **42** le soir. **J'en ai ajouté vingt-quatre en
+une session**, plus que tout ce que le projet en avait accumulé auparavant. Une échelle dont le haut
+se donne vingt-quatre fois par jour ne gradue plus rien.
+
+| marque | ce qu'elle veut dire | fréquence attendue |
+|---|---|---|
+| ⭐ | un cran de surprise réelle, ou un choix de conception qui a une raison | souvent |
+| ⭐⭐ | un fait qu'on ne devinerait pas en lisant le code | par tranche |
+| ⭐⭐⭐ | le résultat central d'une tranche | une ou deux par tranche |
+| ⭐⭐⭐⭐ | **déplace le verdict d'une campagne** — un document antérieur devient faux | rare |
+| ⭐⭐⭐⭐⭐ | change ce que le projet vise | jamais encore atteint dans cette campagne |
+
+⚠⚠ **Les trois règles qui vont avec :**
+
+1. **Une marque se pose sur un résultat MESURÉ, jamais sur ce qu'une mesure va tester.** J'ai mis
+   quatre étoiles sur le cadrage de `111` alors que sa course tournait encore.
+2. **Quatre étoiles nomment la tranche qu'elles déplacent.** Si on ne peut pas écrire « et `107`
+   devient faux sur ce point », ce n'est pas quatre étoiles.
+3. **Le compte est vérifiable** : `grep -o "⭐⭐⭐⭐" HANDOFF.md docs/*.md | grep -v "⭐⭐⭐⭐⭐" | wc -l`.
+   Si le nombre double en une session, l'échelle a dérivé, pas le projet.
 
 ### ⭐⭐ La convention du sablier a changé — 2026-08-29
 

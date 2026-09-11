@@ -1568,6 +1568,7 @@ run "sépare les modes"     uv run --project "$ROOT" python "$ROOT/src/nappe/ce_
 run "manque ou chute"      uv run --project "$ROOT" python "$ROOT/src/nappe/un_pas_manque_nest_pas_une_chute.py" --verifier
 run "compte suit le pas"   uv run --project "$ROOT" python "$ROOT/src/nappe/le_compte_suit_il_le_pas.py" --verifier
 run "bande bornée"        uv run --project "$ROOT" python "$ROOT/src/nappe/une_bande_qui_ne_bouge_pas_avec_la_fenetre.py" --verifier
+run "remède au pas"        uv run --project "$ROOT" python "$ROOT/src/nappe/pourquoi_le_remede_ne_descend_pas_au_pas.py" --verifier
 run "suivre nappe"           uv run --project "$ROOT" python "$ROOT/src/commun/suivre_nappe.py" --verifier
 run "assembler mosaique"     uv run --project "$ROOT" python "$ROOT/src/volume/assembler_mosaique.py" --verifier
 run "derouler en raccrochant"  uv run --project "$ROOT" python "$ROOT/src/nappe/derouler_en_raccrochant.py" --verifier
@@ -1632,6 +1633,7 @@ run "fig : sépare les modes" uv run --project "$ROOT" python "$ROOT/src/figures
 run "fig : manque ou chute" uv run --project "$ROOT" python "$ROOT/src/figures/figure_un_pas_manque_nest_pas_une_chute.py" --verifier
 run "fig : compte suit pas" uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_compte_suit_il_le_pas.py" --verifier
 run "fig : bande bornée"   uv run --project "$ROOT" python "$ROOT/src/figures/figure_une_bande_qui_ne_bouge_pas_avec_la_fenetre.py" --verifier
+run "fig : remède au pas"  uv run --project "$ROOT" python "$ROOT/src/figures/figure_pourquoi_le_remede_ne_descend_pas_au_pas.py" --verifier
 run "fig : mur du corpus"    uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_mur_du_corpus.py" --verifier
 run "fig : ou poser la boite" uv run --project "$ROOT" python "$ROOT/src/figures/figure_ou_poser_la_boite.py" --verifier
 run "fig : en raccrochant"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_en_raccrochant.py" --verifier

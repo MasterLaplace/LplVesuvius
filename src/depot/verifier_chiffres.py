@@ -2237,6 +2237,90 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             txt = f"{val}".replace(".", ",")
             out.append((nom, [f"**{txt}**", txt, f"{val}"], mar.name))
 
+    # ⭐⭐⭐ POURQUOI LE REMEDE NE DESCEND PAS AU PAS (`112`), TROIS APPARIEMENTS OBLIGATOIRES.
+    # (1) « f_lo » ne voyage jamais sans la LISTE DES MODES qu'il implique : un nombre seul ne dit
+    # pas qu'a un pas la liste est vide, qui est tout le resultat. (2) Ce qu'une base absorbe ne
+    # voyage jamais sans ce que les DEUX autres absorbent — c'est leur ECART qui designe la bonne.
+    # (3) Et le gain sur les fenetres longues ne voyage jamais sans la part au-dessus de la barre
+    # au PAS SEUL : sans elle, six points de mieux se lisent comme une amelioration nette alors
+    # qu'une fenetre longue confirme moins souvent.
+    rem = _source(racine, "pourquoi_le_remede_ne_descend_pas_au_pas.json")
+    if rem.exists():
+        d = json.loads(rem.read_text())
+        for cle, nom in (("lambda_max_um", "lambda max de 112"),
+                         ("avance_mediane_um", "avance mediane de 112")):
+            if cle in d and d[cle] is not None:
+                val = d[cle]
+                out.append((nom, [f"**{val}**", f"{val}",
+                                  f"**{val}**".replace(".", ","),
+                                  f"{val}".replace(".", ",")], rem.name))
+        a = d.get("a_partir_de_quelle_fenetre", {})
+        for cle, nom in (("premiere_fenetre_nettoyable", "premiere fenetre nettoyable"),
+                         ("seuil_en_micrometres", "seuil en micrometres"),
+                         ("seuil_en_pas", "seuil en pas")):
+            if cle not in a or a[cle] is None:
+                continue
+            val = a[cle]
+            out.append((nom, [f"**{val}**", f"{val}"], rem.name))
+        for x in a.get("par_fenetre", []):
+            out.append((f"f lo a {x['pas']} pas", [f"**{x['f_lo']}**", f"{x['f_lo']}"], rem.name))
+            out.append((f"longueur a {x['pas']} pas",
+                        [f"**{x['longueur_um']:.0f}**", f"{x['longueur_um']:.0f}"], rem.name))
+        c = d.get("la_contamination_est_irreductible", {})
+        for cle, nom in (("accord_sans_derive", "accord sans derive"),
+                         ("contamination_max", "contamination maximale")):
+            if cle not in c or c[cle] is None:
+                continue
+            val = c[cle]
+            out.append((nom, [f"**{val}**", f"{val}"], rem.name))
+        for x in c.get("par_derive", []):
+            for cle, nom in (("longueur_donde_um", "longueur donde de la derive"),
+                             ("accord_brut", "accord brut a un pas"),
+                             ("accord_apres_retrait", "accord apres retrait a un pas"),
+                             ("gain", "gain du retrait a un pas")):
+                val = x[cle]
+                out.append((f"{nom} f={x['derive_en_periodes_par_fenetre']}",
+                            [f"**{val}**", f"{val}"], rem.name))
+        b = d.get("pourquoi_les_autres_bases_echouent", {})
+        for x in b.get("polynomial", []):
+            for deg in (1, 2, 3):
+                val = x[f"degre_{deg}"]
+                out.append((f"polynome degre {deg} a {x['pas']} pas",
+                            [f"**{val}**", f"{val}"], rem.name))
+        for x in b.get("harmonique_non_entiere", []):
+            out.append((f"harmonique non entiere a {x['pas']} pas",
+                        [f"**{x['part']}**", f"{x['part']}"], rem.name))
+        for x in b.get("fourier_de_la_fenetre", []):
+            out.append((f"fourier a {x['pas']} pas",
+                        [f"**{x['part']}**", f"{x['part']}"], rem.name))
+        if "part_absorbee_par_fourier" in b:
+            val = b["part_absorbee_par_fourier"]
+            out.append(("part absorbee par fourier", [f"**{val}**", f"{val}"], rem.name))
+        o = d.get("lorthogonalite_est_elle_exacte", {})
+        for cle, nom in (("pire_sur_la_grille_incluse", "pire recouvrement grille incluse"),
+                         ("pire_sur_la_grille_dft", "pire recouvrement grille dft")):
+            if cle not in o or o[cle] is None:
+                continue
+            val = o[cle]
+            out.append((nom, [f"**{val}**", f"{val}"], rem.name))
+        for x in o.get("par_fenetre", []):
+            for cle, nom in (("recouvrement_grille_incluse", "recouvrement incluse a"),
+                             ("recouvrement_grille_dft", "recouvrement dft a")):
+                val = x[cle]
+                out.append((f"{nom} {x['pas']} pas", [f"**{val}**", f"{val}"], rem.name))
+        s_ = d.get("sur_les_segments_reels", {})
+        for x in s_.get("par_fenetre", []):
+            for cle, nom in (("fenetres", "fenetres a"),
+                             ("accord_median_brut", "accord median brut a"),
+                             ("accord_median_apres_retrait", "accord median apres retrait a"),
+                             ("gain_median", "gain median a"),
+                             ("barre_brute", "barre brute a"),
+                             ("barre_apres_retrait", "barre apres retrait a"),
+                             ("part_au_dessus_brut", "part au dessus brut a"),
+                             ("part_au_dessus_apres_retrait", "part au dessus apres a")):
+                val = x[cle]
+                out.append((f"{nom} {x['pas']} pas", [f"**{val}**", f"{val}"], rem.name))
+
     # ⭐⭐⭐⭐ UNE BANDE QUI NE BOUGE PAS AVEC LA FENETRE (`111`), TROIS APPARIEMENTS OBLIGATOIRES.
     # (1) Le compte de la bande bornee ne voyage JAMAIS sans son SCORE et sa BARRE : une bande
     # etroite ne peut plus dire « pas de periodicite » par son compte, donc un compte seul se

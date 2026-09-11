@@ -5247,6 +5247,55 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/112_pourquoi_le_remede_ne_descend_pas_au_pas.md
+- **lignes** : 158
+- **nature** : RESULTAT
+  (le remède de `111` répare-t-il aussi le critère PAR PAS ? une réponse structurelle, sur les
+  profils que `111` a gardés, sans une lecture distante.)
+- **résumé** : ⭐⭐⭐ **Non, et c'est la RÉSOLUTION de la fenêtre.** À un pas, `f_lo` vaut
+  **0.6021** : aucun mode de Fourier n'est sous le signal, parce que le
+  premier mode de la fenêtre EST le signal. Le retrait rend un gain de **exactement zéro** sur cinq
+  dérives, alors que la contamination atteint **0.3407**. ⭐ Le remède redevient
+  possible à **2** pas, seuil **346.0** µm.
+- **conclusions extractibles** :
+  - ⭐⭐⭐ **Sur une fenêtre d'un pas, une dérive plus longue que la fenêtre n'est pas
+    REPRÉSENTABLE** : elle ne se distingue pas d'un décalage constant plus le signal lui-même. Il
+    n'y a donc rien à retirer, et la contamination est irréductible. Ce n'est pas un manque
+    d'effort, c'est une propriété de la fenêtre.
+  - ⭐⭐ **Le signal n'est JAMAIS dans ce qu'on retire, à aucune longueur**, et c'est une inégalité :
+    `f_lo = k · avance / λmax` et l'avance est bornée par λmax, donc `f_lo < k`. C'est ce qui rend
+    le remède de `111` juste plutôt qu'approximatif.
+  - ⚠⚠⚠ **Deux bases échouent, et c'est leur échec qui désigne la bonne.** Un polynôme de degré
+    deux absorbe **0.9585** du gabarit à un pas — ce n'est pas un
+    sous-espace de basse fréquence, c'est un sous-espace qui contient le signal ; une grille
+    harmonique non entière en absorbe **1.0**.
+  - ⚠⚠ **Une part absorbée se calcule par SVD, jamais par `qr`** : sur une base quasi dégénérée,
+    `qr` rend un espace PLUS GRAND que celui de la matrice, donc elle absorbait tout, partout.
+  - ⭐ **Le remède redevient possible dès que la fenêtre dépasse λmax** — conséquence de conception
+    tirée d'une inégalité, pas d'un essai.
+  - ⚠⚠ **Et sur les segments réels le gain n'est PAS gratuit** : il monte de six à neuf points dès
+    deux pas, mais une fenêtre longue confirme **moins souvent** qu'un pas seul
+    (**0.607** contre
+    **0.69**), parce qu'un gabarit de plusieurs feuilles est
+    un ajustement bien plus exigeant.
+  - ⚠ **Les fenêtres d'une même marche se recouvrent** : ceci décrit une population de fenêtres,
+    pas autant de mesures indépendantes.
+- **rétractations / corrections internes** :
+  - §5 : ⚠⚠⚠ **« exactement orthogonal » était faux**, et la batterie m'a repris. L'orthogonalité
+    est exacte sur la grille DFT (**2.515e-16**) et seulement approchée
+    (**0.01342**) sur la grille à extrémité INCLUSE que `98` et `111`
+    emploient — le premier et le dernier échantillon y sont à la même phase.
+  - §4 : ⚠⚠ **ma première mesure du recouvrement passait par `qr`** et absorbait 100 % partout, à
+    toute longueur. Je l'ai crue avant de la refaire par SVD.
+  - batterie : ⚠ **un contrôle se lisait lui-même** — il cherchait la chaîne `voxel_distant` dans
+    le fichier, et le contrôle CONTIENT cette chaîne. Le piège de `pkill -f` en costume neuf ;
+    l'arbre syntaxique ne voit que les imports.
+- **preuve de lecture intégrale** :
+  - l. 89 (après 56 % du fichier) : `## 5. ⚠⚠⚠ Et « exactement orthogonal » était faux`
+  - l. 149 : `uv run python src/nappe/pourquoi_le_remede_ne_descend_pas_au_pas.py --verifier`
+
+---
+
 ### docs/111_une_bande_qui_ne_bouge_pas_avec_la_fenetre.md
 - **lignes** : 239
 - **nature** : RESULTAT
@@ -5259,7 +5308,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   réel — une bande étroite ne peut plus dire « pas de périodicité » par son COMPTE, c'est son score
   qui l'écarte.
 - **conclusions extractibles** :
-  - ⭐⭐⭐⭐ **La falaise de `110` était celle de l'instrument.** Le plancher de `98` est relatif à la
+  - ⭐⭐⭐ **La falaise de `110` était celle de l'instrument.** Le plancher de `98` est relatif à la
     fenêtre (0,35 période par fenêtre), donc il admet une longueur d'onde de **1314 µm** à deux pas
     et **3943** à six — aucune n'est un espacement de feuille. Borné par la plage physique, il ne
     les admet plus.
@@ -5288,7 +5337,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - §4 : ⚠⚠⚠ **ma docstring affirmait que la barre MONTE avec la longueur.** Le nul dit l'inverse,
     et la raison est arithmétique : `1/√n` bat l'élargissement de la bande.
 - **preuve de lecture intégrale** :
-  - l. 133 (après 56 % du fichier) : `## 5. ⭐⭐⭐⭐ Le résultat : la falaise était celle de l'instrument`
+  - l. 133 (après 56 % du fichier) : `## 5. ⭐⭐⭐ Le résultat : la falaise était celle de l'instrument`
   - l. 230 : `uv run python src/nappe/une_bande_qui_ne_bouge_pas_avec_la_fenetre.py --verifier`
 
 ---
@@ -5337,7 +5386,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     le partage par mode qui l'a attrapé : l'ensemble s'effondre, les deux modes non.
   - §7 : ⚠⚠⚠ **et j'allais lire la falaise du mode bas comme un fait de la matière** sans avoir
     demandé si l'instrument la fabrique tout seul. Il la fabrique.
-  - suite : ⭐⭐⭐⭐ **`111` a tranché la question que ce document laissait ouverte** : la falaise
+  - suite : ⭐⭐⭐ **`111` a tranché la question que ce document laissait ouverte** : la falaise
     était celle de l'instrument. Bornée par des longueurs d'onde physiques, elle passe de **-0.888**
     à **-0.068**. ⭐ Ce document avait raison sur les deux points qui comptaient — le biais de
     l'ensemble était un artefact de mélange, et l'observation ne distinguait pas les deux
@@ -5533,7 +5582,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
     `O . O O O O` et `O . . . . .` sont indiscernables par ce nombre.
   - §7 ter : ⭐⭐⭐ **l'arithmétique `(1 − risque)^120` traite un manque comme une CHUTE**, et `109`
     réfute cette hypothèse : les manques ne sont pas groupés (**p = 0,2829**).
-  - suite : ⭐⭐⭐⭐ **les DEUX POPULATIONS de ce document sont, pour l'essentiel, celles de
+  - suite : ⭐⭐⭐ **les DEUX POPULATIONS de ce document sont, pour l'essentiel, celles de
     l'instrument.** `111` relit les mêmes profils avec une bande de fréquences bornée par des
     longueurs d'onde physiques : le mode bas passe d'une dérive de **-0.888** à **-0.068**, et
     l'écart entre les modes au plus long de **+0.965** à **+0.134**. ⚠ La portée, le risque et le
@@ -7328,7 +7377,7 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 190 (dernière ligne non vide) : `réserve se déclare, elle ne se mesure pas sur le rouleau de §5.5.`
 
 ### docs/75_registre_des_taches.md
-- **lignes** : 7385
+- **lignes** : 7473
 - **nature** : REGISTRE
   (le registre vivant des tâches ouvertes par `69`, `72`, `73` et `74`, tenu à jour au fil des
   mesures ; il porte donc **aussi** les résultats de celles qui se sont fermées.)

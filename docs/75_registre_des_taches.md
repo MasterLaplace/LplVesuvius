@@ -4553,7 +4553,95 @@ renommée. ⭐ L'affichage vit désormais dans `main_affichage(r)`, **que la bat
 batterie qui n'emprunte jamais le chemin de l'utilisateur ne garde pas ce qu'il voit.
 
 ---
-##### ⭐⭐⭐⭐ UNE BANDE QUI NE BOUGE PAS AVEC LA FENÊTRE — la falaise était celle de l'instrument
+##### ⭐⭐⭐ POURQUOI LE REMÈDE NE DESCEND PAS AU PAS — la résolution de la fenêtre
+
+> Mesure : `src/nappe/pourquoi_le_remede_ne_descend_pas_au_pas.py` (33 contrôles) →
+> `docs/mesures/pourquoi_le_remede_ne_descend_pas_au_pas.json`. Figure :
+> `src/figures/figure_pourquoi_le_remede_ne_descend_pas_au_pas.py` (15 contrôles).
+> Document : [`112`](112_pourquoi_le_remede_ne_descend_pas_au_pas.md), le 2026-09-11.
+> ⭐ **Zéro lecture distante** — tout sur les profils que `111` a gardés.
+
+![pourquoi le remède ne descend pas au pas](images/112_pourquoi_le_remede_ne_descend_pas_au_pas.png)
+
+`111` a réparé l'estimateur du TRAJET ; la portée dépend d'un autre instrument, le critère de `98`
+appliqué au segment d'UN pas. Le même remède le répare-t-il ? **Non, et c'est structurel.**
+
+| fenêtre | L | f_lo | modes à retirer |
+|---|---:|---:|---|
+| 1 pas | 208 µm | **0.6021** | **aucun** |
+| 2 pas | 417 µm | **1.2043** | **[1]** |
+| 3 pas | 625 µm | **1.8064** | **[1]** |
+| 4 pas | 833 µm | **2.4086** | **[1, 2]** |
+| 6 pas | 1250 µm | **3.6128** | **[1, 2, 3]** |
+
+> ⭐⭐⭐ **À un pas, la liste est vide** : le premier mode de la fenêtre EST le signal. Une dérive
+> plus longue que la fenêtre n'y est pas **représentable**.
+
+##### ⭐⭐⭐ La conséquence, mesurée : le gain est exactement zéro
+
+Accord sans dérive **1.0**.
+
+| λ de la dérive | accord brut | après retrait | gain |
+|---:|---:|---:|---:|
+| **1041.7** µm | **0.8211** | **0.8211** | **0.0** |
+| **694.5** µm | **0.6593** | **0.6593** | **0.0** |
+| **416.7** µm | **0.6726** | **0.6726** | **0.0** |
+| **315.7** µm | **0.8608** | **0.8608** | **0.0** |
+| **208.3** µm | **0.9685** | **0.9685** | **0.0** |
+
+⚠ Et il y aurait de quoi réparer : contamination jusqu'à **0.3407**.
+
+##### ⚠⚠⚠ Deux bases échouent, et c'est leur échec qui désigne la bonne
+
+| fenêtre | poly. d1 | poly. d2 | poly. d3 | harm. non entière | **Fourier** |
+|---|---:|---:|---:|---:|---:|
+| 1 pas | **0.0** | **0.9585** | **0.9585** | **1.0** | **0.0** |
+| 2 pas | **0.0** | **0.2558** | **0.2558** | **1.0** | **0.0134** |
+| 3 pas | **0.0** | **0.1193** | **0.1193** | **0.9994** | **0.009** |
+| 4 pas | **0.0** | **0.0701** | **0.0701** | **0.9965** | **0.0096** |
+| 6 pas | **0.0** | **0.0337** | **0.0337** | **0.9655** | **0.0078** |
+
+⛔ Le polynôme de degré deux absorbe **0.9585** du gabarit à un pas.
+⛔ La grille non entière en absorbe **1.0**, et
+son conditionnement est si mauvais qu'un `qr` en rendait un espace plus grand que le sien : c'est
+par **SVD** que le rang réel se voit.
+
+##### ⚠⚠⚠ Et « exactement orthogonal » était faux
+
+| fenêtre | grille à extrémité **incluse** | grille **DFT** |
+|---|---:|---:|
+| 1 pas | **0.0** | **0.0** |
+| 2 pas | **0.01342** | **3.22e-17** |
+| 3 pas | **0.009009** | **2.515e-16** |
+| 4 pas | **0.00678** | **6.592e-17** |
+| 6 pas | **0.004535** | **2.056e-16** |
+
+Les profils de `111` font `73k + 1` points, extrémité **incluse** : premier et dernier échantillon
+sont à la même phase. Résidu **0.01342** au pire contre
+**2.515e-16** sur la grille DFT, décroissant comme `1/n`.
+
+##### ⭐ Le remède redevient possible à 2 pas
+
+Seuil **346.0** µm = **1.661** pas. Conséquence d'une inégalité,
+pas d'un essai.
+
+##### ⚠⚠ Sur les segments réels, le gain n'est pas gratuit
+
+| fenêtre | fenêtres | brut | après | gain | barre brute | barre après | > barre brut | > barre après |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 pas | **336** | **0.493** | **0.493** | **0.0** | **0.3404** | **0.3404** | **0.69** | **0.69** |
+| 2 pas | **280** | **0.2208** | **0.2731** | **0.0038** | **0.234** | **0.2355** | **0.489** | **0.55** |
+| 3 pas | **224** | **0.1871** | **0.2105** | **0.0069** | **0.1981** | **0.1999** | **0.446** | **0.518** |
+| 4 pas | **168** | **0.1517** | **0.1904** | **0.0116** | **0.169** | **0.1707** | **0.452** | **0.542** |
+| 6 pas | **56** | **0.1501** | **0.202** | **0.011** | **0.1398** | **0.1412** | **0.518** | **0.607** |
+
+⭐ Le retrait aide dès deux pas (six à neuf points). ⚠⚠ Mais une fenêtre longue confirme **moins
+souvent** qu'un pas seul (**0.607** contre
+**0.69**). ⚠ Et les fenêtres d'une même marche se
+recouvrent : **336** fenêtres d'un pas viennent de 56 marches.
+
+---
+##### ⭐⭐⭐ UNE BANDE QUI NE BOUGE PAS AVEC LA FENÊTRE — la falaise était celle de l'instrument
 
 > Mesure : `src/nappe/une_bande_qui_ne_bouge_pas_avec_la_fenetre.py` (26 contrôles) →
 > `docs/mesures/une_bande_qui_ne_bouge_pas_avec_la_fenetre.json`. Figure :
@@ -4578,7 +4666,7 @@ six. Aucune n'est un espacement de feuille. Le remède est une **bande dérivée
 | **qui ne compte rien** | ancien | **1.008** | **0.241** | **0.186** | **0.152** | **0.12** | **-0.888** |
 | **qui ne compte rien** | **borné** | **1.019** | **0.996** | **0.933** | **0.937** | **0.951** | **-0.068** |
 
-> ⭐⭐⭐⭐ La falaise passe de **-0.888** à
+> ⭐⭐⭐ La falaise passe de **-0.888** à
 > **-0.068**, et l'écart entre les deux modes au plus long
 > de **+0.965** à
 > **+0.134**. Sur l'ensemble, la dérive du taux passe de
@@ -4646,7 +4734,7 @@ candidats du balayage, prédisait *quand l'estimateur NON borné perd le signal*
 opérationnelle tombe avec.
 
 ---
-##### ⭐⭐⭐⭐ LE COMPTE SUIT-IL LE PAS ? — le mode qui compte ne dérive pas
+##### ⭐⭐⭐ LE COMPTE SUIT-IL LE PAS ? — le mode qui compte ne dérive pas
 
 > Mesure : `src/nappe/le_compte_suit_il_le_pas.py` (39 contrôles) →
 > `docs/mesures/le_compte_suit_il_le_pas.json`. Figure :
@@ -4741,7 +4829,7 @@ verdict ne soit calculé — ce qui a permis d'ajouter le partage par mode et le
 **sans repayer** les 2050.6 s.
 
 ---
-##### ⭐⭐⭐⭐ UN PAS NON CONFIRMÉ N'EST PAS UNE CHUTE — la portée publiée est une lecture
+##### ⭐⭐⭐ UN PAS NON CONFIRMÉ N'EST PAS UNE CHUTE — la portée publiée est une lecture
 
 > Mesure : `src/nappe/un_pas_manque_nest_pas_une_chute.py` (31 contrôles) →
 > `docs/mesures/un_pas_manque_nest_pas_une_chute.json`. Figure :
@@ -4807,7 +4895,7 @@ pas quand les **15** avec manque sont à **1,005** — écart à un **0,292** co
 pas qui **traversent trop** : troisième route vers ce que `104` et `105` avaient mesuré.
 
 ---
-##### ⭐⭐⭐⭐ CE QUI SÉPARE LES DEUX POPULATIONS — et le signal était déjà calculé
+##### ⭐⭐⭐ CE QUI SÉPARE LES DEUX POPULATIONS — et le signal était déjà calculé
 
 > Mesure : `src/nappe/ce_qui_separe_les_deux_populations.py` (49 contrôles) →
 > `docs/mesures/ce_qui_separe_les_deux_populations.json`. Figure :

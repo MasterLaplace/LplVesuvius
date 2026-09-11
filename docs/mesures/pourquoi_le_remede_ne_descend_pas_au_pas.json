@@ -1,0 +1,376 @@
+{
+  "fragment": "PHercParis4",
+  "lambda_max_um": 346.0,
+  "avance_mediane_um": 208.3,
+  "echantillons_par_pas": 73,
+  "a_partir_de_quelle_fenetre": {
+    "par_fenetre": [
+      {
+        "longueur_um": 208.3,
+        "pas": 1,
+        "f_lo": 0.6021,
+        "modes_a_retirer": [],
+        "mode_du_signal": 1,
+        "le_signal_est_hors_de_ce_quon_retire": true,
+        "il_y_a_quelque_chose_a_retirer": false
+      },
+      {
+        "longueur_um": 416.7,
+        "pas": 2,
+        "f_lo": 1.2043,
+        "modes_a_retirer": [
+          1
+        ],
+        "mode_du_signal": 2,
+        "le_signal_est_hors_de_ce_quon_retire": true,
+        "il_y_a_quelque_chose_a_retirer": true
+      },
+      {
+        "longueur_um": 625.0,
+        "pas": 3,
+        "f_lo": 1.8064,
+        "modes_a_retirer": [
+          1
+        ],
+        "mode_du_signal": 3,
+        "le_signal_est_hors_de_ce_quon_retire": true,
+        "il_y_a_quelque_chose_a_retirer": true
+      },
+      {
+        "longueur_um": 833.4,
+        "pas": 4,
+        "f_lo": 2.4086,
+        "modes_a_retirer": [
+          1,
+          2
+        ],
+        "mode_du_signal": 4,
+        "le_signal_est_hors_de_ce_quon_retire": true,
+        "il_y_a_quelque_chose_a_retirer": true
+      },
+      {
+        "longueur_um": 1250.0,
+        "pas": 6,
+        "f_lo": 3.6128,
+        "modes_a_retirer": [
+          1,
+          2,
+          3
+        ],
+        "mode_du_signal": 6,
+        "le_signal_est_hors_de_ce_quon_retire": true,
+        "il_y_a_quelque_chose_a_retirer": true
+      }
+    ],
+    "premiere_fenetre_nettoyable": 2,
+    "seuil_en_micrometres": 346.0,
+    "seuil_en_pas": 1.661,
+    "le_signal_reste_toujours_hors_du_retrait": true
+  },
+  "pourquoi_les_autres_bases_echouent": {
+    "polynomial": [
+      {
+        "pas": 1,
+        "degre_1": 0.0,
+        "degre_2": 0.9585,
+        "degre_3": 0.9585
+      },
+      {
+        "pas": 2,
+        "degre_1": 0.0,
+        "degre_2": 0.2558,
+        "degre_3": 0.2558
+      },
+      {
+        "pas": 3,
+        "degre_1": 0.0,
+        "degre_2": 0.1193,
+        "degre_3": 0.1193
+      },
+      {
+        "pas": 4,
+        "degre_1": 0.0,
+        "degre_2": 0.0701,
+        "degre_3": 0.0701
+      },
+      {
+        "pas": 6,
+        "degre_1": 0.0,
+        "degre_2": 0.0337,
+        "degre_3": 0.0337
+      }
+    ],
+    "harmonique_non_entiere": [
+      {
+        "pas": 1,
+        "f_lo": 0.602,
+        "part": 1.0,
+        "rang": 8,
+        "colonnes": 13
+      },
+      {
+        "pas": 2,
+        "f_lo": 1.204,
+        "part": 1.0,
+        "rang": 10,
+        "colonnes": 25
+      },
+      {
+        "pas": 3,
+        "f_lo": 1.806,
+        "part": 0.9994,
+        "rang": 12,
+        "colonnes": 37
+      },
+      {
+        "pas": 4,
+        "f_lo": 2.409,
+        "part": 0.9965,
+        "rang": 14,
+        "colonnes": 49
+      },
+      {
+        "pas": 6,
+        "f_lo": 3.613,
+        "part": 0.9655,
+        "rang": 17,
+        "colonnes": 73
+      }
+    ],
+    "fourier_de_la_fenetre": [
+      {
+        "pas": 1,
+        "modes": [],
+        "part": 0.0,
+        "rang": 1,
+        "colonnes": 1
+      },
+      {
+        "pas": 2,
+        "modes": [
+          1
+        ],
+        "part": 0.0134,
+        "rang": 3,
+        "colonnes": 3
+      },
+      {
+        "pas": 3,
+        "modes": [
+          1
+        ],
+        "part": 0.009,
+        "rang": 3,
+        "colonnes": 3
+      },
+      {
+        "pas": 4,
+        "modes": [
+          1,
+          2
+        ],
+        "part": 0.0096,
+        "rang": 5,
+        "colonnes": 5
+      },
+      {
+        "pas": 6,
+        "modes": [
+          1,
+          2,
+          3
+        ],
+        "part": 0.0078,
+        "rang": 7,
+        "colonnes": 7
+      }
+    ],
+    "le_polynome_de_degre_deux_detruit_le_gabarit_a_un_pas": true,
+    "la_grille_non_entiere_mord_sur_le_signal": true,
+    "la_base_de_fourier_est_quasi_orthogonale_au_signal": true,
+    "part_absorbee_par_fourier": 0.0134
+  },
+  "lorthogonalite_est_elle_exacte": {
+    "par_fenetre": [
+      {
+        "pas": 1,
+        "modes": [],
+        "recouvrement_grille_incluse": 0.0,
+        "recouvrement_grille_dft": 0.0
+      },
+      {
+        "pas": 2,
+        "modes": [
+          1
+        ],
+        "recouvrement_grille_incluse": 0.01342,
+        "recouvrement_grille_dft": 3.22e-17
+      },
+      {
+        "pas": 3,
+        "modes": [
+          1
+        ],
+        "recouvrement_grille_incluse": 0.009009,
+        "recouvrement_grille_dft": 2.515e-16
+      },
+      {
+        "pas": 4,
+        "modes": [
+          1,
+          2
+        ],
+        "recouvrement_grille_incluse": 0.00678,
+        "recouvrement_grille_dft": 6.592e-17
+      },
+      {
+        "pas": 6,
+        "modes": [
+          1,
+          2,
+          3
+        ],
+        "recouvrement_grille_incluse": 0.004535,
+        "recouvrement_grille_dft": 2.056e-16
+      }
+    ],
+    "pire_sur_la_grille_incluse": 0.01342,
+    "pire_sur_la_grille_dft": 2.515e-16,
+    "exacte_sur_la_grille_dft": true,
+    "approchee_sur_la_grille_incluse": true,
+    "et_elle_decroit_avec_la_fenetre": true
+  },
+  "la_contamination_est_irreductible": {
+    "avance_um": 208.34,
+    "modes_a_retirer": [],
+    "accord_sans_derive": 1.0,
+    "par_derive": [
+      {
+        "derive_en_periodes_par_fenetre": 0.2,
+        "longueur_donde_um": 1041.7,
+        "accord_brut": 0.8211,
+        "accord_apres_retrait": 0.8211,
+        "gain": 0.0
+      },
+      {
+        "derive_en_periodes_par_fenetre": 0.3,
+        "longueur_donde_um": 694.5,
+        "accord_brut": 0.6593,
+        "accord_apres_retrait": 0.6593,
+        "gain": 0.0
+      },
+      {
+        "derive_en_periodes_par_fenetre": 0.5,
+        "longueur_donde_um": 416.7,
+        "accord_brut": 0.6726,
+        "accord_apres_retrait": 0.6726,
+        "gain": 0.0
+      },
+      {
+        "derive_en_periodes_par_fenetre": 0.66,
+        "longueur_donde_um": 315.7,
+        "accord_brut": 0.8608,
+        "accord_apres_retrait": 0.8608,
+        "gain": 0.0
+      },
+      {
+        "derive_en_periodes_par_fenetre": 1.0,
+        "longueur_donde_um": 208.3,
+        "accord_brut": 0.9685,
+        "accord_apres_retrait": 0.9685,
+        "gain": 0.0
+      }
+    ],
+    "contamination_max": 0.3407,
+    "le_retrait_ne_change_rien": true,
+    "parce_que_la_liste_est_vide": true
+  },
+  "sur_les_segments_reels": {
+    "decidable": true,
+    "par_fenetre": [
+      {
+        "pas": 1,
+        "fenetres": 336,
+        "modes_retires": [],
+        "avance_mediane_um": 208.3,
+        "accord_median_brut": 0.493,
+        "accord_median_apres_retrait": 0.493,
+        "gain_median": 0.0,
+        "barre_brute": 0.3404,
+        "barre_apres_retrait": 0.3404,
+        "part_au_dessus_brut": 0.69,
+        "part_au_dessus_apres_retrait": 0.69
+      },
+      {
+        "pas": 2,
+        "fenetres": 280,
+        "modes_retires": [
+          1
+        ],
+        "avance_mediane_um": 208.3,
+        "accord_median_brut": 0.2208,
+        "accord_median_apres_retrait": 0.2731,
+        "gain_median": 0.0038,
+        "barre_brute": 0.234,
+        "barre_apres_retrait": 0.2355,
+        "part_au_dessus_brut": 0.489,
+        "part_au_dessus_apres_retrait": 0.55
+      },
+      {
+        "pas": 3,
+        "fenetres": 224,
+        "modes_retires": [
+          1,
+          2
+        ],
+        "avance_mediane_um": 208.3,
+        "accord_median_brut": 0.1871,
+        "accord_median_apres_retrait": 0.2105,
+        "gain_median": 0.0069,
+        "barre_brute": 0.1981,
+        "barre_apres_retrait": 0.1999,
+        "part_au_dessus_brut": 0.446,
+        "part_au_dessus_apres_retrait": 0.518
+      },
+      {
+        "pas": 4,
+        "fenetres": 168,
+        "modes_retires": [
+          1,
+          2
+        ],
+        "avance_mediane_um": 208.3,
+        "accord_median_brut": 0.1517,
+        "accord_median_apres_retrait": 0.1904,
+        "gain_median": 0.0116,
+        "barre_brute": 0.169,
+        "barre_apres_retrait": 0.1707,
+        "part_au_dessus_brut": 0.452,
+        "part_au_dessus_apres_retrait": 0.542
+      },
+      {
+        "pas": 6,
+        "fenetres": 56,
+        "modes_retires": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "avance_mediane_um": 208.3,
+        "accord_median_brut": 0.1501,
+        "accord_median_apres_retrait": 0.202,
+        "gain_median": 0.011,
+        "barre_brute": 0.1398,
+        "barre_apres_retrait": 0.1412,
+        "part_au_dessus_brut": 0.518,
+        "part_au_dessus_apres_retrait": 0.607
+      }
+    ],
+    "source": "docs/mesures/une_bande_qui_ne_bouge_pas_avec_la_fenetre.json",
+    "a_un_pas_le_retrait_ne_change_rien": true,
+    "gain_median_au_plus_long": 0.011,
+    "le_retrait_aide_sur_les_fenetres_longues": true,
+    "les_fenetres_se_recouvrent": "les fenetres d'une meme marche partagent k-1 pas, donc leurs accords sont correles : ceci decrit une population de fenetres, pas n mesures independantes"
+  }
+}

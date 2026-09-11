@@ -130,7 +130,7 @@ $1/\sqrt{n}$.
 ⚠ Et elle diffère de la barre de la famille de `98` (**0.2874** contre **0.4156**) : *chaque
 famille porte la barre de sa propre forme*, et ici **chaque longueur** porte la sienne.
 
-## 5. ⭐⭐⭐⭐ Le résultat : la falaise était celle de l'instrument
+## 5. ⭐⭐⭐ Le résultat : la falaise était celle de l'instrument
 
 Les deux bandes, sur **les mêmes échantillons**, mode par mode :
 
@@ -141,7 +141,7 @@ Les deux bandes, sur **les mêmes échantillons**, mode par mode :
 | **qui ne compte rien** | ancien | **1.008** | **0.241** | **0.186** | **0.152** | **0.12** | **-0.888** |
 | | **borné** | **1.019** | **0.996** | **0.933** | **0.937** | **0.951** | **-0.068** |
 
-> ⭐⭐⭐⭐ **La falaise passe de -0.888 à -0.068.** Le mode qui « ne compte rien » franchit **0.951**
+> ⭐⭐⭐ **La falaise passe de -0.888 à -0.068.** Le mode qui « ne compte rien » franchit **0.951**
 > feuille par pas à six pas.
 
 Et la bimodalité de `107` s'efface :
