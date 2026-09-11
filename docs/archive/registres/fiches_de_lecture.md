@@ -5265,6 +5265,25 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   qualité du scan.
 - **lu** : intégralement, 168 lignes, le 2026-09-11
 
+### docs/archive/124_la_nappe_se_dechire.md
+- **lignes** : 124
+- **nature** : RESULTAT
+  (deux marches voisines restent-elles sur la même feuille ? la question de la NAPPE, mesurée au
+  centième de feuille sur des piles fabriquées, sur douze graines de bruit.)
+- **résumé** : ⭐⭐⭐⭐ **Neuf lots sur douze se déchirent.** Huit marches parties de la même
+  feuille, écartées de 96 µm, pile à 35° bruitée, 112 pas : saut entre voisines **1,020 feuille**
+  en médiane, étendue **0,116 à 20,59**. ⭐ L'issue n'est pas graduelle — **aucun lot entre 0,504
+  et 1,011** : ou la matière couple les marches (7 lots sur 12, dispersion bien sous la
+  permutation), ou elle ne les couple plus. ⭐⭐⭐⭐ Et **la déchirure ne s'annonce pas** : rho
+  **+0,4545**, p **0,1377** entre la dispersion au pas 16 et le saut final — contrairement à la
+  cécité, dont la signature est disponible avant le pas. ⚠⚠⚠ La première mesure portait sur **une
+  seule graine** (0,504) et c'était la quatrième plus basse des douze : publier une réalisation en
+  croyant publier la seule aurait donné le résultat inverse. ⚠ Le prédicat a été corrigé aussi :
+  « deux numéros de feuille distincts » est un artefact d'arrondi d'un faisceau posé sur une
+  frontière, pas une déchirure ; ce qui compte est le saut entre VOISINES, la quantité que `91`
+  mesure chez l'humain. ⚠⚠ ANALYTIQUE : une pile plane n'a ni déchirure de papyrus ni fusion.
+- **lu** : intégralement, 124 lignes, le 2026-09-12
+
 ### docs/archive/123_le_marcheur_reste_verrouille.md
 - **lignes** : 122
 - **nature** : RESULTAT

@@ -2594,6 +2594,35 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                             [f"**{val}**", f"{val}", f"**{val:+.3f}**", f"{val:+.3f}"],
                             cpt.name))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 124 : LA NAPPE SE DECHIRE, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) Le saut median ne voyage JAMAIS sans le compte de lots qui se dechirent : « 1,02 feuille »
+    # est une mediane d'une distribution a deux bosses, donc elle ne decrit aucune des deux ; c'est
+    # « 9 sur 12 » qui dit ce qui se passe.
+    # (2) Et le rho du pas 16 ne voyage jamais sans son p : « +0,4545 » seul se lit comme un lien,
+    # alors que le fait est qu'il n'est PAS etabli sur douze lots.
+    nap = _source(racine, "la_nappe_se_dechire_t_elle.json")
+    if nap.exists():
+        d = json.loads(nap.read_text())
+        for cle, nom, dec in (("saut_median_entre_voisines", "saut median de 124", 3),
+                              ("saut_min", "saut min de 124", 3),
+                              ("saut_max", "saut max de 124", 3),
+                              ("part_des_lots_qui_se_dechirent", "part des lots de 124", 3)):
+            if d.get(cle) is not None:
+                ajoute(nom, d[cle], dec, nap.name)
+        for cle, nom in (("lots_qui_se_dechirent", "lots qui se dechirent de 124"),
+                         ("lots", "lots de 124"), ("lots_couples", "lots couples de 124"),
+                         ("marches_par_lot", "marches par lot de 124")):
+            if d.get(cle) is not None:
+                v_ = d[cle]
+                out.append((nom, [f"**{v_}**", f"{v_}"], nap.name))
+        for r_ in d.get("repetitions", []):
+            ajoute(f"saut de la graine {r_['graine']} de 124",
+                   r_["saut_maximal_entre_voisines"], 3, nap.name)
+        e = d.get("le_dechirement_se_voit_il_tot", {})
+        if e.get("decidable"):
+            ajoute("rho precoce de 124", e["rho"], 4, nap.name, signe=True)
+            ajoute("p precoce de 124", e["p"], 4, nap.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 123 : LE MARCHEUR RESTE VERROUILLE, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) Les ecarts des quatre conditions ne voyagent JAMAIS sans ceux du TEMOIN. Seuls, deux
     # nombres qui ne bougent pas se lisent comme « le test ne voit rien » ; avec « 0,2287 ->

@@ -553,6 +553,17 @@ traversée. ⭐ Le témoin donne au résultat sa puissance : un pas nominal impo
 oblique **dérive** (0,2287 → 0,2713, p **0,0005**), n'avançant que de 0,8192 = cos(35°). → **la
 panne du transfert ne vient pas du mécanisme** ; ⚠ analytique, le rouleau n'est pas une pile plane.
 
+**`124` · 2026-09-12 · la nappe se déchire-t-elle** (`la_nappe_se_dechire_t_elle.py`, analytique)
+`119` et `123` portent sur **une** marche ; une image déroulée est une **nappe**. Huit marches
+parties de la même feuille, écartées de 96 µm, pile à 35° bruitée, 112 pas : **9 lots sur 12 se
+déchirent**, saut médian entre voisines **1,020 feuille**, étendue 0,116 à 20,59. ⭐ L'issue n'est pas
+graduelle — **aucun lot entre 0,504 et 1,011** : ou la matière tient les marches, ou elle ne les
+tient pas. ⚠⚠ Et la déchirure **ne s'annonce pas** : rho **+0,4545** (p **0,1377**) entre la
+dispersion au pas 16 et le saut final, là où la cécité, elle, a une signature disponible avant le
+pas. ⚠⚠⚠ La première mesure portait sur **une seule graine** et rendait 0,504 — la quatrième plus
+basse des douze. → **c'est là que vit la valeur de l'humain** : il recoud ce que le mécanisme sépare,
+et la séparation ne se voit pas venir.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

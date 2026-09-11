@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**78 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**79 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 40 portes
+## Grand Prize — 41 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -59,6 +59,7 @@
 - **R4-P22** *(le graal)* · **Le vide est-il le rouleau ou le lecteur ?** `115` mesure que 178 pas sur 560 ne lisent rien ; `116` **réfute la frontière radiale** (8 plages contre 2, p 0,0095) — donc ce n'est pas simplement « l'extérieur n'a plus de matière ». Restent deux causes qui prédisent toutes deux des plaques : la matière extérieure est elle-même en morceaux, ou des blocs manquent au chargement (la panne de `41` §6bis). Les séparer demande d'interroger le volume aux positions de départ, donc une lecture distante.
 - **R4-P23** *(le graal)* · **FERMÉE par `120`.** Le drapeau `oriente` exige désormais une planarité strictement positive, et le pas porte un champ `rien_lu` écrit à la source. La garde existait déjà — `planarite` détecte le tenseur nul et sa batterie assertait que « seule la planarité peut l'écarter » — elle n'avait simplement aucun appelant (`R5-F21`). ⚠ Ce qui reste et qui n'est PAS cette porte : faire du premier pas aveugle une règle d'ARRÊT, ce qui change ce que toute marche mesure et relève de `R4-P20`.
 - **R4-P24** *(le graal)* · **Une fenêtre centrée LOCALEMENT récupère-t-elle les 63 pas ?** `117` mesure que 63 pas voyants sur 382 sont refusés au bord de la fenêtre ; `118` que les deux bouts sont de vrais pas et que la variation n'est pas radiale ; `121` que recentrer est exact (2,6·10⁻¹⁶) alors qu'élargir déplace le nul de 1,2 σ ; `122` **écrit le mécanisme** (`fenetre_locale`) et le démontre sur une pile à réponse connue — la butée passe de 3 à 0 et les pas confirmés de 21 à 26. Reste à le faire tourner sur le vrai volume : c'est une re-course, donc des lectures distantes, et c'est elle qui dira si la borne supérieure de 0,9122 devient une mesure.
+- **R4-P25** *(le graal)* · **Qu'est-ce qui tient deux marches voisines ensemble ?** `124` mesure que la nappe se déchire **9 fois sur 12** sous bruit et obliquité, que l'issue n'est pas graduelle (aucun lot entre 0,504 et 1,011 feuille) et que la déchirure **ne s'annonce pas** (rho +0,4545, p 0,1377 au pas 16). Chaque marche prise seule ne dérive pourtant pas (`119`, `123`) : ce qui manque est donc un lien LATÉRAL entre marches voisines, pas une correction de trajectoire. C'est très exactement ce que l'humain fait quand il recoud, et c'est la dernière chose que le mécanisme ne fait pas. ⚠ Mesuré sur une pile fabriquée : le rouleau peut être pire, et `91` mesure que la vérité de terrain humaine devient elle-même discontinue au bord.
 
 ## Progress Prizes — 19 portes
 
