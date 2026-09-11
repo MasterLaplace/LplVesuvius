@@ -31,10 +31,13 @@ import argparse
 import json
 import math
 import sys
+import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from figure_commune import police, prose_tracable  # noqa: E402
+from figure_commune import (police, prose_tracable,  # noqa: E402
+                            textes_debordants, textes_hors_cadre,
+                            textes_qui_se_recouvrent)
 
 RACINE = Path(__file__).resolve().parents[2]
 
@@ -44,6 +47,16 @@ DISCRET = (140, 136, 128)
 AMBRE = (214, 143, 42)
 GRIS = (120, 128, 140)
 ROUGE = (188, 68, 52)
+
+
+def lire(chemin: Path) -> dict:
+    """Charge et valide la mesure nécessaire au tracé."""
+    if not chemin.is_file():
+        raise FileNotFoundError(f"mesure absente : {chemin}")
+    donnees = json.loads(chemin.read_text(encoding="utf-8"))
+    if not donnees.get("balayage") or not donnees.get("observations_de_rendu"):
+        raise ValueError(f"structure invalide dans {chemin}")
+    return donnees
 
 
 def rapport_des_causes(mesure: dict) -> float:
@@ -96,7 +109,7 @@ def libelles(mesure: dict) -> list[str]:
     ]
 
 
-def dessiner(mesure: dict, sortie: Path) -> dict:
+def dessiner(mesure: dict, sortie: Path) -> tuple[Path, list, list]:
     from PIL import Image, ImageDraw
 
     # ⚠ La police vient de `figure_commune`, qui existe parce que le mécanisme etait
@@ -111,11 +124,16 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
     L, H = 1180, 560
     toile = Image.new("RGB", (L, H), FOND)
     d = ImageDraw.Draw(toile)
+    poses: list[tuple[int, int, str, object]] = []
+
+    def ecrire(x, y, texte, fonte, fill):
+        d.text((x, y), texte, font=fonte, fill=fill)
+        poses.append((x, y, texte, fonte))
 
     # ---- PANNEAU GAUCHE : la courbe, et le coude qui n'y est pas ----------------------
     gx, gy, gw, gh = 70, 90, 440, 330
-    d.text((70, 34), "la falaise prédite", fill=TEXTE, font=gros)
-    d.text((70, 54), "coût du rassemblement, ms par fenêtre", fill=DISCRET, font=moyen)
+    ecrire(70, 34, "la falaise prédite", gros, TEXTE)
+    ecrire(70, 54, "coût du rassemblement, ms par fenêtre", moyen, DISCRET)
     xs = [l["largeur"] for l in lignes]
     ys = [l["ms_par_fenetre_en_ligne"] for l in lignes]
     zs = [l["ms_par_fenetre_par_blocs"] for l in lignes]
@@ -125,13 +143,13 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
     for frac in (0.0, 0.5, 1.0):
         yy = gy + gh - int(frac * gh)
         d.line([gx, yy, gx + gw, yy], fill=(40, 40, 40))
-        d.text((gx - 46, yy - 7), f"{frac * yhi:.2f}", fill=DISCRET, font=petit)
+        ecrire(gx - 46, yy - 7, f"{frac * yhi:.2f}", petit, DISCRET)
     # ⚠ La verticale est la PREDICTION, dessinee avant les points : c'est ce qui rend
     # visible qu'elle ne marque rien.
     cx = gx + echelle(critique, xlo, xhi, gw)
     for seg in range(gy, gy + gh, 12):
         d.line([cx, seg, cx, min(seg + 6, gy + gh)], fill=ROUGE)
-    d.text((cx - 58, gy - 22), f"largeur critique {critique}", fill=ROUGE, font=moyen)
+    ecrire(cx - 58, gy - 22, f"largeur critique {critique}", moyen, ROUGE)
     for serie, couleur, nom in ((ys, AMBRE, "en ligne"), (zs, GRIS, "par blocs")):
         pts = [(gx + echelle(x, xlo, xhi, gw), gy + gh - echelle(v, 0.0, yhi, gh))
                for x, v in zip(xs, serie)]
@@ -142,17 +160,17 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
         # graduation 6000, c'est-a-dire precisement le point qui porte la refutation.
         ly = gy + 12 + (0 if nom == "en ligne" else 18)
         d.line([gx + 14, ly + 7, gx + 34, ly + 7], fill=couleur, width=2)
-        d.text((gx + 40, ly), nom, fill=couleur, font=petit)
+        ecrire(gx + 40, ly, nom, petit, couleur)
     for x in xs:
         px = gx + echelle(x, xlo, xhi, gw)
-        d.text((px - 14, gy + gh + 8), str(x), fill=DISCRET, font=petit)
-    d.text((gx, gy + gh + 52), "aucun coude : 6000 colonnes coûtent moins que 4260",
-           fill=TEXTE, font=moyen)
+        ecrire(px - 14, gy + gh + 8, str(x), petit, DISCRET)
+    ecrire(gx, gy + gh + 52, "aucun coude : 6000 colonnes coûtent moins que 4260",
+           moyen, TEXTE)
 
     # ---- PANNEAU DROIT : l'ordre de grandeur, qui n'a besoin d'aucune courbe ----------
     bx, by, bw = 620, 90, 470
-    d.text((620, 34), "ce que la cause devrait peser", fill=TEXTE, font=gros)
-    d.text((620, 54), "échelle logarithmique, ms par fenêtre", fill=DISCRET, font=moyen)
+    ecrire(620, 34, "ce que la cause devrait peser", gros, TEXTE)
+    ecrire(620, 54, "échelle logarithmique, ms par fenêtre", moyen, DISCRET)
     pire = max(ys)
     ecart = max(o["ms_par_fenetre"] for o in obs) - min(o["ms_par_fenetre"] for o in obs)
     blo, bhi = 0.05, 1000.0
@@ -166,28 +184,24 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
         yy = by + 60 + i * 110
         largeur = echelle_log(valeur, blo, bhi, bw)
         d.rectangle([bx, yy, bx + max(largeur, 2), yy + 44], fill=couleur)
-        d.text((bx, yy - 22), nom, fill=TEXTE, font=moyen)
-        d.text((bx + max(largeur, 2) + 10, yy + 15), f"{valeur:.3f} ms", fill=couleur, font=moyen)
-    d.text((bx, by + 290), f"rapport mesuré : ×{rapport:.0f}", fill=ROUGE, font=gros)
-    d.text((bx, by + 316),
-           "une cause deux mille fois trop petite reste trop petite,", fill=TEXTE, font=moyen)
-    d.text((bx, by + 336), "quelle que soit la forme de la courbe.", fill=TEXTE,
-           font=moyen)
-    d.text((bx, by + 366),
-           "l'écart lui-même s'est révélé être de la contention (62 §7) :", fill=DISCRET,
-           font=moyen)
-    d.text((bx, by + 386),
-           "les deux rendus atteignent le même pic, 11,4 contre 12,3 fen/s.", fill=DISCRET,
-           font=moyen)
+        ecrire(bx, yy - 22, nom, moyen, TEXTE)
+        ecrire(bx + max(largeur, 2) + 10, yy + 15, f"{valeur:.3f} ms", moyen, couleur)
+    ecrire(bx, by + 290, f"rapport mesuré : ×{rapport:.0f}", gros, ROUGE)
+    ecrire(bx, by + 316,
+           "une cause deux mille fois trop petite reste trop petite,", moyen, TEXTE)
+    ecrire(bx, by + 336, "quelle que soit la forme de la courbe.", moyen, TEXTE)
+    ecrire(bx, by + 366,
+           "l'écart lui-même s'est révélé être de la contention (62 §7) :", moyen, DISCRET)
+    ecrire(bx, by + 386,
+           "les deux rendus atteignent le même pic, 11,4 contre 12,3 fen/s.", moyen, DISCRET)
 
     sortie.parent.mkdir(parents=True, exist_ok=True)
     toile.save(sortie)
-    return {"rapport": rapport, "pire_rassemblement_ms": pire, "ecart_ms": ecart,
-            "largeur_critique": critique, "sortie": str(sortie)}
+    return sortie, poses, [(0, 0, L, H)]
 
 
 def verifier() -> int:
-    """Auto-test HORS LIGNE : les axes et le rapport, sans écrire d'image."""
+    """Auto-test HORS LIGNE : les axes, le rapport, les sondes et le dessin."""
     echecs = controles = 0
 
     def v(nom: str, ok: bool) -> None:
@@ -214,7 +228,7 @@ def verifier() -> int:
                      {"largeur": 4260, "ms_par_fenetre_en_ligne": 0.20,
                       "ms_par_fenetre_par_blocs": 0.10}],
         "observations_de_rendu": [{"segment": "a", "ms_par_fenetre": 100.0},
-                                  {"segment": "b", "ms_par_fenetre": 500.0}],
+                                   {"segment": "b", "ms_par_fenetre": 500.0}],
     }
     v("le rapport vaut l'ecart divise par le rassemblement le plus cher",
       abs(rapport_des_causes(faux) - (400.0 / 0.20)) < 1e-9)
@@ -234,10 +248,59 @@ def verifier() -> int:
     v("... et le controle sait refuser un glyphe que la police n'a pas",
       not prose_tracable(["\u2b50 une etoile pleine"]))
 
+    # --- VALIDATION HORS-LIGNE lire() ET dessiner() AVEC SONDES ------------------------
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp = Path(tmpdir)
+        p_json = tmp / "mesure.json"
+        p_json.write_text(json.dumps(faux), encoding="utf-8")
+
+        m_lu = lire(p_json)
+        v("lire charge le balayage", len(m_lu["balayage"]) == 2)
+        v("lire charge les observations", len(m_lu["observations_de_rendu"]) == 2)
+
+        # Sonde 1 : fichier absent
+        sonde_absent = False
+        try:
+            lire(tmp / "inexistant.json")
+        except FileNotFoundError:
+            sonde_absent = True
+        v("sonde : fichier json absent lève FileNotFoundError", sonde_absent)
+
+        # Sonde 2 : schéma invalide
+        p_invalide = tmp / "invalide.json"
+        p_invalide.write_text(json.dumps({"rien": 1}), encoding="utf-8")
+        sonde_invalide = False
+        try:
+            lire(p_invalide)
+        except ValueError:
+            sonde_invalide = True
+        v("sonde : schéma json invalide lève ValueError", sonde_invalide)
+
+        # Tracé réel de la figure témoin
+        cible = tmp / "hypothese.png"
+        out, poses, cadres = dessiner(m_lu, cible)
+        v("dessiner rend le chemin demandé", out == cible)
+        v("le fichier png est produit", cible.is_file() and cible.stat().st_size > 0)
+        v("au moins 15 textes sont posés", len(poses) >= 15)
+        v("aucun texte ne déborde de la toile", textes_debordants(poses, 1180) == [])
+        v("aucun texte ne sort de son cadre", textes_hors_cadre(poses, cadres) == [])
+        v("aucun chevauchement critique", textes_qui_se_recouvrent(poses) == [])
+
+        # Sonde 3 : texte débordant artificiel
+        gros, _, _ = police(16, 13, 12)
+        poses_trop_larges = poses + [(1150, 50, "texte qui deborde largement a droite", gros)]
+        debord = textes_debordants(poses_trop_larges, 1180)
+        v("sonde : un texte débordant est bien intercepté", len(debord) > 0)
+
+        # Sonde 4 : texte hors cadre
+        poses_hors = poses + [(1150, 100, "texte qui deborde du cadre vers la droite", gros)]
+        hors = textes_hors_cadre(poses_hors, cadres)
+        v("sonde : un texte hors cadre est bien intercepté", len(hors) > 0)
+
     # --- LA MESURE REELLE, si elle est la ----------------------------------------------
     chemin = RACINE / "docs/mesures/cout_de_la_fenetre.json"
     if chemin.exists():
-        m = json.loads(chemin.read_text())
+        m = lire(chemin)
         v("la largeur critique tombe entre les deux segments observes",
           3240 < m["largeur_critique"] < 4260)
         v("le rapport mesure depasse mille", rapport_des_causes(m) > 1000)
@@ -268,14 +331,20 @@ def main() -> int:
     a = ap.parse_args()
     if a.verifier:
         return verifier()
-    if not a.mesure.exists():
-        print(f"erreur : mesure absente : {a.mesure}", file=sys.stderr)
-        return 2
-    resume = dessiner(json.loads(a.mesure.read_text()), a.sortie)
-    print(f"rassemblement le plus cher : {resume['pire_rassemblement_ms']:.3f} ms/fenêtre")
-    print(f"écart à expliquer          : {resume['ecart_ms']:.1f} ms/fenêtre")
-    print(f"rapport                    : ×{resume['rapport']:.0f}")
-    print(f"figure : {resume['sortie']}")
+    mesure = lire(a.mesure)
+    out, _, _ = dessiner(mesure, a.sortie)
+    rapport = rapport_des_causes(mesure)
+    pire = max(l["ms_par_fenetre_en_ligne"] for l in mesure["balayage"])
+    obs = mesure["observations_de_rendu"]
+    ecart = max(o["ms_par_fenetre"] for o in obs) - min(o["ms_par_fenetre"] for o in obs)
+    try:
+        cible = out.relative_to(RACINE)
+    except ValueError:
+        cible = out
+    print(f"rassemblement le plus cher : {pire:.3f} ms/fenêtre")
+    print(f"écart à expliquer          : {ecart:.1f} ms/fenêtre")
+    print(f"rapport                    : ×{rapport:.0f}")
+    print(f"figure : {cible}")
     return 0
 
 
