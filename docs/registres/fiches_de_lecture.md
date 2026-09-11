@@ -5247,6 +5247,58 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   - ligne 147 (dernière ligne non vide) : `résultat ; le balayage de seuil, lui, ne dépend d'aucun réglage de ce genre.`
 
 
+### docs/114_le_cout_qui_connait_la_spire.md
+- **lignes** : 183
+- **nature** : RESULTAT
+  (l'identité des pistes du tracker polaire churne-t-elle encore quand le coût connaît la spire ?
+  une réouverture autorisée par `55`, sur données en cache, sans une lecture distante.)
+- **résumé** : ⛔⛔ **Non, à 0.5 % du chemin.** Brancher l'indice
+  d'enroulement fait tomber la fragmentation de **99.12** à
+  **96.14** morceaux par mur — mais le champ **TOURNÉ**, faux par
+  construction, obtient **96.64**, soit
+  **83 %** de la descente. ⭐ La condition
+  de mort est pourtant passée : un indice publié vaut **1.006** feuille
+  sur **2342** pas mesurés.
+- **conclusions extractibles** :
+  - ⛔⛔ **Ce qui travaille est l'existence d'une pénalité, pas l'identité qu'elle porte.** La part
+    SPÉCIFIQUE du vrai champ vaut **0.50** morceau sur les
+    **98.1** à supprimer pour tracer une feuille d'un bout à l'autre. Le
+    champ **constant**, lui, ne fait rien du tout (**0.00**), ce qui prouve
+    que le peu qui bouge vient de la VARIATION du champ et non d'un terme de plus.
+  - ⛔ **Les « 12 249 fusions » de `fusions_0172.json` ne sont PAS un fait sur la matière.** C'est
+    la sortie du tracker d'avant le correctif de pente, sur une coupe qui compte 158 feuilles ; le
+    module lui-même écrit que c'étaient des **changements d'étiquette**. Ce chiffre ne doit plus
+    être cité.
+  - ⭐ **Un pas d'indice de spire publié vaut 1.006 feuille**
+    (18.7 voxels contre 18,6 d'écart inter-feuilles), mesuré secteur par
+    secteur sur **2342** pas. Le champ distingue à la résolution de la feuille : l'instrument
+    est bon, et c'est ce qui rend le non informatif.
+  - ⚠⚠⚠ **Un témoin « décalé d'une spire » est un NO-OP par construction.** Le coût ne lit que
+    `|indice de la piste − indice du mur|` : translater les deux le laisse inchangé, et le témoin
+    rendait **exactement** le chiffre du vrai champ. Un faux champ doit être une **rotation**, qui
+    a toutes les statistiques du vrai et aucune de ses correspondances.
+  - ⚠⚠⚠ **Une inégalité stricte entre flottants n'est pas un verdict.** Le premier `agreger`
+    imprimait OUI sur `2,49 < 2,99` pendant que le faux champ prenait 83 % du gain. Le critère
+    juste est DÉRIVÉ : la part spécifique doit dépasser ce que le faux obtient.
+  - ⚠⚠ **`traversantes` était une métrique dégénérée** : zéro pour les quatre variantes, donc une
+    quantité incapable de prendre la valeur qui signalerait le succès.
+  - ⚠⚠ **Un champ emprunté à un autre repère ment sans lever.** Le champ publié centre par tranche
+    de hauteur, la polaire par l'ombilic : un décalage de centre déplace le RAYON autant que
+    l'angle, c'est-à-dire la quantité même que le tracker apparie. Les rayons sont recalculés dans
+    le repère de la polaire, et la validation refaite dedans.
+  - ⚠⚠ **Deux seuils repris d'un instrument doivent l'être en entier.** 100 points par cellule
+    contre `POINTS_MINIMUM = 10`, et une demi-tranche de 50 voxels contre 258 : **11 secteurs sur
+    72** répondaient, ce qui se lit comme un champ qui ne couvre pas le rouleau et non comme un
+    réglage trop serré.
+  - ⚠ **Exiger zéro pas radial négatif serait exiger que le rouleau soit rond** — une section
+    écrasée se replie réellement ; il en reste **78** sur **2342**.
+  - ⚠ **`⛔` n'est pas dans la police déployée**, même famille que `⭐`/`★`. Attrapé par
+    `prose_tracable` avant publication ; les huit autres figures qui portent ce caractère ne le
+    dessinent pas.
+  - ⚠ **PORTÉE** : un rouleau (PHerc0172), une hauteur (z = 6967), la bande
+    `r ∈ [1563, 3000]` voxels — **47.9 %** du rayon. Le cœur n'a pas de
+    spires publiées. Rien ici ne parle de la 3D, où sont les 775 heures.
+
 ### docs/112_pourquoi_le_remede_ne_descend_pas_au_pas.md
 - **lignes** : 158
 - **nature** : RESULTAT

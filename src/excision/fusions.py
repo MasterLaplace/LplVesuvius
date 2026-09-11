@@ -44,8 +44,22 @@ def ridges(column: np.ndarray, prominence: float, min_gap: int, smooth: int) -> 
     return peaks
 
 
+def _indice_ou_nan(champ, rayon: float, colonne: int) -> float:
+    """L'indice d'enroulement d'un mur, ou NaN quand le champ refuse de repondre.
+
+    ⚠ NaN et non zero : zero est un indice de spire parfaitement valide, et confondre
+    « je ne sais pas » avec « spire 0 » ferait mentir la contrainte la ou elle ne
+    s'applique pas.
+    """
+    if champ is None:
+        return float("nan")
+    v = champ(rayon, colonne)
+    return float("nan") if v is None else float(v)
+
+
 def track(polar: np.ndarray, prominence: float, min_gap: int, smooth: int,
-          tolerance: float, gap_tolerance: int) -> list[dict]:
+          tolerance: float, gap_tolerance: int,
+          champ=None, poids: float = 0.0, ecart_max: float | None = None) -> list[dict]:
     """Chainer les murs d'une colonne a la suivante en pistes continues.
 
     Chainage glouton du plus proche : a chaque colonne, chaque piste vivante cherche
@@ -68,6 +82,21 @@ def track(polar: np.ndarray, prominence: float, min_gap: int, smooth: int,
     position PREDITE. La tolerance borne alors l'ecart au mouvement lisse et non le
     mouvement lui-meme, ce qui permet de la garder **sous la moitie d'un espacement**
     — et un saut de spire devient impossible par construction plutot qu'improbable.
+
+    ⚠⚠ `champ` EST LA SECONDE COORDONNEE, ET C'EST CELLE QUI MANQUAIT. Sans lui le cout ne
+    connait QUE l'ecart radial a une prediction par la pente : deux feuilles voisines y sont
+    indiscernables des que la prediction se trompe d'un demi-interligne. C'est exactement ce
+    que `gap_map` a mesure — 125 murs sur 126 apparies a chaque colonne, donc une couverture
+    quasi parfaite dont l'IDENTITE churne. `champ(rayon, colonne)` rend un indice
+    d'enroulement continu, ou `None` hors de son domaine ; `poids` le mele au cout et
+    `ecart_max` l'interdit au-dela d'un ecart.
+
+    ⚠ L'indice d'une piste est fixe A SA NAISSANCE et ne derive jamais. Une identite qui se
+    met a jour a chaque appariement suit ce qu'elle est censee contraindre : au bout d'un
+    tour elle a glisse sur la voisine sans qu'aucun pas n'ait eu l'air faux.
+
+    ⚠ `poids = 0.0` et `ecart_max = None` doivent reproduire EXACTEMENT le tracker d'avant —
+    c'est le temoin qui garde cette extension d'etre un changement de comportement deguise.
     """
     from scipy.optimize import linear_sum_assignment
 
@@ -94,6 +123,17 @@ def track(polar: np.ndarray, prominence: float, min_gap: int, smooth: int,
             # gagner ailleurs, ce qui est exactement l'erreur qu'on veut rendre
             # impossible.
             forbidden = cost > tolerance
+            if champ is not None and (poids > 0.0 or ecart_max is not None):
+                mur = np.array([_indice_ou_nan(champ, float(r), column_index) for r in found])
+                piste = np.array([tracks[t]["indice"] for t in live])
+                ecart = np.abs(piste[:, None] - mur[None, :])
+                # ⚠ Un ecart INCONNU ne coute rien et n'interdit rien : le champ ne couvre
+                # pas tout le rayon, et faire payer son silence reviendrait a preferer les
+                # pistes qu'il connait pour la seule raison qu'il les connait.
+                connu = np.isfinite(ecart)
+                cost = cost + poids * np.where(connu, ecart, 0.0)
+                if ecart_max is not None:
+                    forbidden = forbidden | (connu & (ecart > ecart_max))
             cost = np.where(forbidden, 1e6, cost)
             rows, cols = linear_sum_assignment(cost)
             for r, c in zip(rows, cols):
@@ -129,7 +169,8 @@ def track(polar: np.ndarray, prominence: float, min_gap: int, smooth: int,
                 continue
             tracks.append({"start": column_index, "end": column_index, "radius": float(r),
                            "start_radius": float(r), "points": 1, "missed": 0,
-                           "slope": 0.0})
+                           "slope": 0.0,
+                           "indice": _indice_ou_nan(champ, float(r), column_index)})
             live.append(len(tracks) - 1)
     return tracks
 

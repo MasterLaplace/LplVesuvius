@@ -1244,6 +1244,21 @@ run "le champ d'enroulement"   uv run python "$ROOT/src/excision/le_champ_denrou
 # cessait de separer que si `PHerc0172` se mettait a le faire -- et le second serait une
 # excellente nouvelle.
 run "champ d'enroulement: 0172" uv run python "$ROOT/src/excision/le_champ_denroulement.py" --rouleau PHerc0172 --verifier
+# ⛔ LA REOUVERTURE D'UNE CAUSE ELIMINEE, ET SA SECONDE REFUTATION. `fusions.py` avait
+# refute son propre tracker en mesurant que l'IDENTITE des pistes churne (125 murs sur 126
+# apparies a chaque colonne), et son cout n'apparie que sur l'ecart radial -- sans aucun
+# indice de spire. Le champ d'enroulement etant arrive trois semaines APRES, `55` autorisait
+# la reouverture. Reponse mesuree : NON, 0,5 % du chemin. Deux sondes portent la batterie --
+# `poids = 0` doit reproduire le tracker d'avant EXACTEMENT, et un champ qui interdit tout
+# doit briser les pistes (4000 contre 8). ⚠ Le faux champ est une ROTATION et pas une
+# translation d'indice : une translation deplace les deux termes de l'ecart ensemble, donc
+# elle ne teste rien -- mesure, elle rendait le meme chiffre que le vrai champ.
+run "le cout qui connait la spire" uv run python "$ROOT/src/excision/le_cout_qui_connait_la_spire.py" --verifier
+# ⚠⚠ LA PORTEE DU MARCHEUR, ET `107` NE L'AVAIT JAMAIS MESUREE : 56 marches sur 56 touchaient le
+# plafond de six pas, zero sortie du volume. `marcher` ne casse que sur « sortie du volume », donc
+# une non-confirmation n'arrete rien — le « 1,0 pas confirme » publie est une lecture du CRITERE,
+# pas une portee. Cette batterie garde la tranche qui leve le plafond a vingt pas.
+run "jusqu'ou va-t-il"      uv run python "$ROOT/src/nappe/jusquou_va_t_il_si_on_le_laisse.py" --verifier
 # ⭐⭐⭐ LE TROU ANGULAIRE -- la cause trouvee EN REGARDANT, apres QUATRE hypotheses mesurees et
 # rejetees. La mesure qui l'avait ecartee comparait le taux MOYEN de violation (5,2 % contre
 # 5,6 %, « indiscernable ») ; c'est la CONCENTRATION qui differe (x1,42 contre x5,18). Deux
@@ -1634,6 +1649,11 @@ run "fig : manque ou chute" uv run --project "$ROOT" python "$ROOT/src/figures/f
 run "fig : compte suit pas" uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_compte_suit_il_le_pas.py" --verifier
 run "fig : bande bornée"   uv run --project "$ROOT" python "$ROOT/src/figures/figure_une_bande_qui_ne_bouge_pas_avec_la_fenetre.py" --verifier
 run "fig : remède au pas"  uv run --project "$ROOT" python "$ROOT/src/figures/figure_pourquoi_le_remede_ne_descend_pas_au_pas.py" --verifier
+# ⚠ La garde qui compte dans cette figure : le chiffre du CHAMP ne voyage jamais sans celui du
+# champ TOURNE. « 99,12 -> 96,14 » se lit comme un succes ; la troisieme barre dit que 83 % de la
+# descente est obtenue par un champ faux. ⚠ Et « ⛔ » n'est PAS dans la police deployee (meme
+# famille que ⭐/★) : c'est `prose_tracable` qui l'a attrape avant publication.
+run "fig : cout et spire"   uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_cout_qui_connait_la_spire.py" --verifier
 run "fig : mur du corpus"    uv run --project "$ROOT" python "$ROOT/src/figures/figure_le_mur_du_corpus.py" --verifier
 run "fig : ou poser la boite" uv run --project "$ROOT" python "$ROOT/src/figures/figure_ou_poser_la_boite.py" --verifier
 run "fig : en raccrochant"     uv run --project "$ROOT" python "$ROOT/src/figures/figure_derouler_en_raccrochant.py" --verifier

@@ -1,0 +1,87 @@
+{
+  "rouleau": "PHerc0172",
+  "z": 6967,
+  "centre": [
+    4614.419921875,
+    3275.22021484375
+  ],
+  "polaire": [
+    3000,
+    18850
+  ],
+  "bande_vx": [
+    1563,
+    3000
+  ],
+  "part_du_rayon": 0.479,
+  "colonnes": 18850,
+  "poids": 4.0,
+  "ecart_max": 0.5,
+  "secteurs_repondus": 72,
+  "pas_dindice": {
+    "pas": 2342,
+    "pas_median_vx": 18.741819539660582,
+    "feuilles_par_indice": 1.0057516455815143,
+    "negatifs": 78,
+    "p10": 5.95658196009083,
+    "p90": 33.79508305785467
+  },
+  "murs_par_colonne": 72.0,
+  "variantes": {
+    "temoin": {
+      "pistes": 26080,
+      "retenues": 7137,
+      "traversantes": 0,
+      "murs_par_colonne": 72.0,
+      "part_traversee": 0.0,
+      "portee_mediane": 119.0,
+      "portee_p90": 286.0,
+      "morceaux_par_mur": 99.125
+    },
+    "champ": {
+      "pistes": 38015,
+      "retenues": 6922,
+      "traversantes": 0,
+      "murs_par_colonne": 72.0,
+      "part_traversee": 0.0,
+      "portee_mediane": 96.0,
+      "portee_p90": 220.0,
+      "morceaux_par_mur": 96.13888888888889
+    },
+    "constant": {
+      "pistes": 26080,
+      "retenues": 7137,
+      "traversantes": 0,
+      "murs_par_colonne": 72.0,
+      "part_traversee": 0.0,
+      "portee_mediane": 119.0,
+      "portee_p90": 286.0,
+      "morceaux_par_mur": 99.125
+    },
+    "tourne": {
+      "pistes": 34885,
+      "retenues": 6958,
+      "traversantes": 0,
+      "murs_par_colonne": 72.0,
+      "part_traversee": 0.0,
+      "portee_mediane": 103.0,
+      "portee_p90": 240.0,
+      "morceaux_par_mur": 96.63888888888889
+    }
+  },
+  "verdict": {
+    "morceaux_par_mur_temoin": 99.125,
+    "gain_du_champ": 2.9861111111111143,
+    "gain_du_constant": 0.0,
+    "gain_du_champ_tourne": 2.4861111111111143,
+    "traversantes_temoin": 0,
+    "traversantes_champ": 0,
+    "le_champ_ameliore": true,
+    "le_constant_nexplique_pas_le_gain": true,
+    "le_champ_tourne_fait_moins_bien": true,
+    "gain_specifique": 0.5,
+    "lidentite_est_la_cause": false,
+    "reste_a_couvrir": 98.125,
+    "part_du_chemin": 0.005095541401273885
+  }
+}

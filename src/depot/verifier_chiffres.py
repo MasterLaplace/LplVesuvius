@@ -2321,6 +2321,61 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 val = x[cle]
                 out.append((f"{nom} {x['pas']} pas", [f"**{val}**", f"{val}"], rem.name))
 
+    # ⛔⛔ LE COUT QUI CONNAIT LA SPIRE (`114`), UN APPARIEMENT OBLIGATOIRE ET IL PORTE TOUT.
+    # Le chiffre du CHAMP ne voyage JAMAIS sans celui du champ TOURNE. « 99,12 -> 96,14 » se lit
+    # comme un succes ; c'est la troisieme variante — un champ faux par construction, qui obtient
+    # 83 % de la descente — qui dit que ce qui travaille est l'existence d'une penalite et non
+    # l'identite qu'elle porte. Publier l'un sans l'autre inverserait le verdict de la tranche.
+    cts = _source(racine, "le_cout_qui_connait_la_spire.json")
+    if cts.exists():
+        d = json.loads(cts.read_text())
+        for cle, nom in (("z", "z de la polaire de 114"),
+                         ("colonnes", "colonnes angulaires de 114"),
+                         ("secteurs_repondus", "secteurs repondus de 114")):
+            if cle in d and d[cle] is not None:
+                val = d[cle]
+                out.append((nom, [f"**{val}**", f"{val}",
+                                  f"**{val}**".replace(".", ","),
+                                  f"{val}".replace(".", ",")], cts.name))
+        # ⚠ Le compte de murs est un FLOTTANT dans la mesure (une mediane) et un ENTIER dans la
+        # prose. Ne l'enregistrer que sous sa forme brute le declarait absent d'un document qui
+        # le cite — un faux « perime » vaut un vrai, puisque les deux envoient relire.
+        if d.get("murs_par_colonne") is not None:
+            val = d["murs_par_colonne"]
+            out.append(("murs par colonne de 114",
+                        [f"**{val:.0f}**", f"{val:.0f}", f"**{val}**", f"{val}",
+                         f"**{val}**".replace(".", ","), f"{val}".replace(".", ",")],
+                        cts.name))
+        for k in ("temoin", "champ", "constant", "tourne"):
+            x = d.get("variantes", {}).get(k)
+            if not x:
+                continue
+            val = x["morceaux_par_mur"]
+            out.append((f"morceaux par mur, {k}",
+                        [f"**{val:.2f}**", f"{val:.2f}",
+                         f"**{val:.2f}**".replace(".", ","), f"{val:.2f}".replace(".", ",")],
+                        cts.name))
+        pas = d.get("pas_dindice", {})
+        for cle, nom, fmt in (("pas", "pas d indice mesures de 114", "{:d}"),
+                              ("feuilles_par_indice", "feuilles par pas d indice", "{:.3f}"),
+                              ("negatifs", "pas d indice negatifs", "{:d}"),
+                              ("pas_median_vx", "pas d indice median en voxels", "{:.1f}")):
+            if cle not in pas or pas[cle] is None:
+                continue
+            val = fmt.format(pas[cle])
+            out.append((nom, [f"**{val}**", val,
+                              f"**{val}**".replace(".", ","), val.replace(".", ",")], cts.name))
+        w = d.get("verdict", {})
+        for cle, nom, fmt in (("gain_specifique", "part specifique de l identite", "{:.2f}"),
+                              ("reste_a_couvrir", "morceaux restant a supprimer", "{:.1f}"),
+                              ("gain_du_champ", "gain du champ de 114", "{:.2f}"),
+                              ("gain_du_champ_tourne", "gain du champ tourne", "{:.2f}")):
+            if cle not in w or w[cle] is None:
+                continue
+            val = fmt.format(w[cle])
+            out.append((nom, [f"**{val}**", val,
+                              f"**{val}**".replace(".", ","), val.replace(".", ",")], cts.name))
+
     # ⭐⭐⭐⭐ UNE BANDE QUI NE BOUGE PAS AVEC LA FENETRE (`111`), TROIS APPARIEMENTS OBLIGATOIRES.
     # (1) Le compte de la bande bornee ne voyage JAMAIS sans son SCORE et sa BARRE : une bande
     # etroite ne peut plus dire « pas de periodicite » par son compte, donc un compte seul se
