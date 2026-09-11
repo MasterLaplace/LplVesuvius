@@ -92,6 +92,14 @@ graal. Une garde qui rate les entrées neuves est pire qu'une garde absente : el
 silence."""
 
 
+RENVOI = re.compile(r"\bR\d-[FCLP]\d{2}\b")
+r"""Un renvoi à un registre, tel qu'il s'écrit dans la prose : `R4-F36`, `R2-C13`, `R5-L09`.
+
+⚠ Les identifiants d'antériorité (`A17`) sont **hors de portée**, et c'est délibéré : une lettre
+et deux chiffres se rencontrent dans n'importe quelle phrase, donc les chercher rendrait un bruit
+que personne ne lirait. Une garde qui produit des faux positifs cesse d'être lue, ce qui est pire
+qu'une garde absente."""
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Lire et écrire les registres — la source
 # ─────────────────────────────────────────────────────────────────────────────
@@ -568,12 +576,36 @@ def perimes(racine: Path = RACINE) -> list[str]:
     return out
 
 
+def renvois_inconnus(racine: Path = RACINE) -> list[str]:
+    """Les identifiants de registre cités dans la documentation et qui n'existent nulle part.
+
+    ⚠⚠ Un renvoi faux ne casse rien et ne se voit pas : il envoie le lecteur à la mauvaise ligne,
+    et la page a l'air juste. Le cas qui a fait écrire cette garde est une réécriture automatique
+    qui avait fabriqué `R4-F90` à partir de « ce que l'humain fait 90 ».
+
+    ⚠ Et ce qu'elle **ne** voit pas, dit plutôt que laissé croire : un renvoi qui existe et
+    désigne autre chose que ce que la phrase annonce. L'existence se vérifie, la pertinence non —
+    c'est le cas payé le même jour, où `115` renvoyait à trois portes dont les numéros avaient
+    bougé et qui existaient toutes les trois. Une garde qui prétendrait couvrir les deux ferait
+    croire qu'un renvoi vert est un renvoi juste.
+    """
+    connus = {e["id"] for lignes in tous(racine).values() for e in lignes if not e["mal_formee"]}
+    out = []
+    for f in sorted((racine / "docs").rglob("*.md")):
+        for n, ligne in enumerate(f.read_text(encoding="utf-8").splitlines(), 1):
+            for renvoi in RENVOI.findall(ligne):
+                if renvoi not in connus:
+                    out.append(f"{f.relative_to(racine)}:{n} {renvoi}")
+    return out
+
+
 def defauts(racine: Path = RACINE) -> dict[str, list[str]]:
     """Ce qui cloche dans les registres eux-mêmes, et dans le contrat avec les rapports."""
     out: dict[str, list[str]] = {"lignes_mal_formees": [], "statuts_inconnus": [],
                                  "faits_sans_source": [], "identifiants_doublons": [],
                                  "tables_revenues": tables_revenues(racine),
-                                 "forme_des_rapports": forme_des_rapports(racine)}
+                                 "forme_des_rapports": forme_des_rapports(racine),
+                                 "renvois_inconnus": renvois_inconnus(racine)}
     vus: set[str] = set()
     for nom, lignes in tous(racine).items():
         for e in lignes:
@@ -670,6 +702,21 @@ def verifier() -> int:
         for nom, contenu in vues.items():
             (r / "docs" / "rapports" / nom).write_text(contenu, encoding="utf-8")
         v("... et cesse de l'être une fois écrite", perimes(r), [])
+
+        # ⭐ Les renvois. Les vues venant d'être écrites citent chacune leurs identifiants, donc
+        # le premier contrôle porte sur de la vraie prose et pas sur un dossier vide — sans quoi
+        # il serait vert faute d'avoir rien à lire.
+        doc = r / "docs" / "archive" / "01_un_document.md"
+        doc.parent.mkdir(parents=True, exist_ok=True)
+        doc.write_text("Le fait `R1-F01` et la loi `R2-L01` tiennent.\n", encoding="utf-8")
+        v("les renvois des vues et d'un document existent tous", renvois_inconnus(r), [])
+        doc.write_text("Le fait `R1-F01`, puis `R4-F99` qui n'existe pas.\n", encoding="utf-8")
+        v("sonde : un renvoi inconnu est signalé",
+          [x.split()[-1] for x in renvois_inconnus(r)], ["R4-F99"])
+        v("... et situé à sa ligne", renvois_inconnus(r)[0].split()[0],
+          "docs/archive/01_un_document.md:1")
+        v("... et il remonte dans le bilan", len(defauts(r)["renvois_inconnus"]), 1)
+        doc.unlink()
 
         # ⚠⚠ LES SONDES. Une batterie verte au premier essai ne prouve rien (`61`) : chaque
         # défaut est remis, et le contrôle doit rougir.

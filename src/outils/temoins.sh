@@ -1374,6 +1374,16 @@ run "fiches a jour"           uv run python "$ROOT/src/depot/fiches_a_jour.py" -
 # ⚠ Les cinq registres de docs/rapports/ sont DERIVES des six rapports : ce controle dit
 # que la derivation tient, pas que les fichiers rendus sont a jour (ca, c est `--ecrire`).
 run "registres derives"       uv run python "$ROOT/src/depot/registres.py" --verifier
+# ⚠⚠ ET LE VRAI CONTROLE, sur les registres eux-memes. La batterie ci-dessus ne teste que
+# l instrument, sur des registres FABRIQUES : sans cette ligne, une vue perimee et un renvoi
+# a un identifiant qui n existe pas passeraient tous les deux au vert. Hors de `run` parce que
+# ce n est pas une batterie : elle ne rend pas un compte de controles mais un etat de l arbre.
+if uv run python "$ROOT/src/depot/registres.py" >/tmp/registres.log 2>&1; then
+  printf '  ✅ %-28s %s\n' "registres de l arbre" "$(tail -1 /tmp/registres.log)"
+else
+  printf '  ❌ %-28s ECHEC\n' "registres de l arbre"
+  sed 's/^/       /' /tmp/registres.log | tail -6; FAIL=$((FAIL + 1))
+fi
 # ⚠ `115` relit les etapes de `113` sans lecture distante : sa batterie tourne hors ligne.
 run "ce qui porte le taux"    uv run python "$ROOT/src/nappe/ce_qui_porte_le_taux.py" --verifier
 run "figure ce qui porte"     uv run python "$ROOT/src/figures/figure_ce_qui_porte_le_taux.py" --verifier
