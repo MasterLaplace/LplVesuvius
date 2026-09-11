@@ -28,10 +28,13 @@ import argparse
 import json
 import statistics
 import sys
+import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from figure_commune import police, prose_tracable  # noqa: E402
+from figure_commune import (police, prose_tracable,  # noqa: E402
+                            textes_debordants, textes_hors_cadre,
+                            textes_qui_se_recouvrent)
 
 RACINE = Path(__file__).resolve().parents[2]
 
@@ -42,6 +45,16 @@ AMBRE = (214, 143, 42)
 GRIS = (120, 128, 140)
 ROUGE = (188, 68, 52)
 BANDE = (40, 34, 22)
+
+
+def lire(chemin: Path) -> dict:
+    """Charge et valide la mesure nécessaire au tracé."""
+    if not chemin.is_file():
+        raise FileNotFoundError(f"mesure absente : {chemin}")
+    donnees = json.loads(chemin.read_text(encoding="utf-8"))
+    if not donnees.get("volumes"):
+        raise ValueError(f"structure invalide dans {chemin}")
+    return donnees
 
 BAS, HAUT = 0.0, 3.0
 """Les bornes de l'axe des `d′`.
@@ -104,23 +117,28 @@ def prose(mesure: dict, cols: list[dict]) -> list[str]:
     return lignes
 
 
-def dessiner(mesure: dict, sortie: Path) -> dict:
+def dessiner(mesure: dict, sortie: Path) -> tuple[Path, list, list]:
     from PIL import Image, ImageDraw
 
     gros, moyen, petit = police(17, 13, 11)
     cols = colonnes(mesure)
     if not cols:
-        raise SystemExit("aucune colonne complète dans la mesure")
+        raise ValueError("aucune colonne complète dans la mesure")
     bas, haut = bornes(cols)
 
     gx, gy, gw, gh = 110, 108, 620, 380
     L, H = gw + 260, gh + 300
     toile = Image.new("RGB", (L, H), FOND)
     d = ImageDraw.Draw(toile)
+    poses: list[tuple[int, int, str, object]] = []
 
-    d.text((44, 26), "le debinage rend-il quelque chose ?", fill=TEXTE, font=gros)
-    d.text((44, 52), "separabilite des feuilles (d′), une fenetre = un point — PHerc0500P2",
-           fill=DISCRET, font=moyen)
+    def ecrire(x, y, texte, fonte, fill):
+        d.text((x, y), texte, font=fonte, fill=fill)
+        poses.append((x, y, texte, fonte))
+
+    ecrire(44, 26, "le debinage rend-il quelque chose ?", gros, TEXTE)
+    ecrire(44, 52, "separabilite des feuilles (d′), une fenetre = un point — PHerc0500P2",
+           moyen, DISCRET)
     d.rectangle([gx, gy, gx + gw, gy + gh], outline=(60, 60, 60))
 
     val = 0.5
@@ -130,12 +148,12 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
         # `16`, en dessous duquel deux feuilles voisines ne se distinguent pas.
         couleur = (86, 74, 52) if abs(val - 1.0) < 1e-9 else (36, 36, 36)
         d.line([gx, yy, gx + gw, yy], fill=couleur)
-        d.text((gx - 40, yy - 7), f"{val:.1f}", fill=DISCRET, font=petit)
+        ecrire(gx - 40, yy - 7, f"{val:.1f}", petit, DISCRET)
         val = round(val + 0.5, 10)
     # ⚠ L'etiquette du seuil est posee A GAUCHE, dans la marge sous la premiere colonne : a
     # droite elle recouvrait les points de la troisieme, c'est-a-dire la donnee.
-    d.text((gx + 6, gy + gh - echelle(1.0, bas, haut, gh) + 4),
-           "d′ = 1 : deux feuilles indistinguables", fill=(150, 128, 90), font=petit)
+    ecrire(gx + 6, gy + gh - echelle(1.0, bas, haut, gh) + 4,
+           "d′ = 1 : deux feuilles indistinguables", petit, (150, 128, 90))
 
     largeur = gw // max(len(cols), 1)
     for i, c in enumerate(cols):
@@ -158,31 +176,29 @@ def dessiner(mesure: dict, sortie: Path) -> dict:
         if c.get("median"):
             ym = gy + gh - echelle(c["median"], bas, haut, gh)
             d.line([cx - 54, ym, cx + 54, ym], fill=ROUGE, width=2)
-            d.text((cx + 58, ym - 7), f"{c['median']:.2f}", fill=ROUGE, font=petit)
-        d.text((cx - 52, gy + gh + 12), c["titre"], fill=TEXTE, font=petit)
-        d.text((cx - 52, gy + gh + 28),
+            ecrire(cx + 58, ym - 7, f"{c['median']:.2f}", petit, ROUGE)
+        ecrire(cx - 52, gy + gh + 12, c["titre"], petit, TEXTE)
+        ecrire(cx - 52, gy + gh + 28,
                f"{c['um']:.3f} um · {c['kev']:.0f} keV" if c.get("kev") else f"{c['um']:.3f} um",
-               fill=DISCRET, font=petit)
-        d.text((cx - 52, gy + gh + 44), f"{len(c['valeurs'])} fenetres",
-               fill=DISCRET, font=petit)
+               petit, DISCRET)
+        ecrire(cx - 52, gy + gh + 44, f"{len(c['valeurs'])} fenetres",
+               petit, DISCRET)
 
     bas_txt = gy + gh + 74
     d.line([gx + 4, bas_txt + 6, gx + 28, bas_txt + 6], fill=ROUGE, width=2)
-    d.text((gx + 36, bas_txt), "mediane", fill=ROUGE, font=petit)
+    ecrire(gx + 36, bas_txt, "mediane", petit, ROUGE)
     d.rectangle([gx + 130, bas_txt + 1, gx + 154, bas_txt + 11], fill=BANDE, outline=AMBRE)
-    d.text((gx + 162, bas_txt), "IC 95 %, bootstrap sur les fenetres", fill=AMBRE, font=petit)
+    ecrire(gx + 162, bas_txt, "IC 95 %, bootstrap sur les fenetres", petit, AMBRE)
     for k, ligne in enumerate(prose(mesure, cols)):
-        d.text((44, bas_txt + 26 + k * 19), ligne, fill=TEXTE, font=moyen)
+        ecrire(44, bas_txt + 26 + k * 19, ligne, moyen, TEXTE)
 
     sortie.parent.mkdir(parents=True, exist_ok=True)
     toile.save(sortie)
-    return {"colonnes": len(cols),
-            "rapport": mesure.get("rapport_fin_sur_grossier"),
-            "sortie": str(sortie)}
+    return sortie, poses, [(0, 0, L, H)]
 
 
 def verifier() -> int:
-    """Auto-test HORS LIGNE : l'axe, l'ordre des colonnes et la prose."""
+    """Auto-test HORS LIGNE : l'axe, l'ordre des colonnes, la prose, les sondes et le dessin."""
     echecs = controles = 0
 
     def v(nom, cond, detail=""):
@@ -229,6 +245,63 @@ def verifier() -> int:
     v("... et elle dit le rapport", any("1.01" in l for l in lignes), str(lignes))
     v("... et que les intervalles se recouvrent", any("recouvre" in l for l in lignes))
 
+    # --- VALIDATION HORS-LIGNE lire() ET dessiner() AVEC SONDES ---
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp = Path(tmpdir)
+        p_json = tmp / "mesure.json"
+        p_json.write_text(json.dumps(faux), encoding="utf-8")
+
+        m_lu = lire(p_json)
+        v("lire charge les volumes", len(m_lu.get("volumes", {})) == 4)
+
+        # Sonde 1 : fichier absent
+        sonde_absent = False
+        try:
+            lire(tmp / "inexistant.json")
+        except FileNotFoundError:
+            sonde_absent = True
+        v("sonde : fichier json absent lève FileNotFoundError", sonde_absent)
+
+        # Sonde 2 : schéma invalide
+        p_invalide = tmp / "invalide.json"
+        p_invalide.write_text(json.dumps({"aucun": 1}), encoding="utf-8")
+        sonde_invalide = False
+        try:
+            lire(p_invalide)
+        except ValueError:
+            sonde_invalide = True
+        v("sonde : schéma json invalide lève ValueError", sonde_invalide)
+
+        # Tracé réel de la figure témoin
+        cible = tmp / "figure.png"
+        out, poses, cadres = dessiner(m_lu, cible)
+        v("dessiner rend le chemin demandé", out == cible)
+        v("le fichier png est produit", cible.is_file() and cible.stat().st_size > 0)
+        v("au moins 15 textes sont posés", len(poses) >= 15)
+        larg_toile = 620 + 260
+        v("aucun texte ne déborde de la toile", textes_debordants(poses, larg_toile) == [])
+        v("aucun texte ne sort de son cadre", textes_hors_cadre(poses, cadres) == [])
+        v("aucun chevauchement critique", textes_qui_se_recouvrent(poses) == [])
+
+        # Sonde 3 : texte débordant artificiel
+        gros, _, _ = police(17, 13, 11)
+        poses_trop_larges = poses + [(larg_toile - 10, 50, "texte qui sort largement de l'image a droite", gros)]
+        debord = textes_debordants(poses_trop_larges, larg_toile)
+        v("sonde : un texte débordant est bien intercepté", len(debord) > 0)
+
+        # Sonde 4 : texte hors cadre
+        poses_hors = poses + [(larg_toile - 10, 100, "texte hors cadre", gros)]
+        hors = textes_hors_cadre(poses_hors, cadres)
+        v("sonde : un texte hors cadre est bien intercepté", len(hors) > 0)
+
+        # Sonde 5 : mesure vide refusée par dessiner
+        sonde_vide = False
+        try:
+            dessiner({}, tmp / "vide.png")
+        except ValueError:
+            sonde_vide = True
+        v("sonde : mesure vide refusée par dessiner", sonde_vide)
+
     print(f"  {'ECHEC' if echecs else 'ALL PASS'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
 
@@ -236,17 +309,20 @@ def verifier() -> int:
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--mesure", type=Path,
-                   default=RACINE / "docs" / "mesures" / "le_debinage.json")
+                    default=RACINE / "docs" / "mesures" / "le_debinage.json")
     p.add_argument("--sortie", type=Path,
-                   default=RACINE / "docs" / "images" / "75_le_debinage.png")
+                    default=RACINE / "docs" / "images" / "75_le_debinage.png")
     p.add_argument("--verifier", action="store_true")
     a = p.parse_args()
     if a.verifier:
         return verifier()
-    if not a.mesure.is_file():
-        raise SystemExit(f"mesure absente : {a.mesure}")
-    print(json.dumps(dessiner(json.loads(a.mesure.read_text()), a.sortie),
-                     indent=2, ensure_ascii=False))
+    mesure = lire(a.mesure)
+    out, _, _ = dessiner(mesure, a.sortie)
+    try:
+        cible = out.relative_to(RACINE)
+    except ValueError:
+        cible = out
+    print(f"écrit : {cible}")
     return 0
 
 
