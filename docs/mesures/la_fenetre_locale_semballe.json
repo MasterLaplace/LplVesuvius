@@ -1,0 +1,39 @@
+{
+ "source": "la_fenetre_locale_sur_la_vraie_matiere.json",
+ "plafond": 112,
+ "secondes": 3296.2,
+ "arret": "plus rien a lire",
+ "lechelle_semballe_t_elle": {
+  "decidable": true,
+  "pas": 109,
+  "echelle_au_depart": 1.0,
+  "echelle_max": 32.6645,
+  "echelle_min": 0.0595,
+  "echelle_finale": 22.0935,
+  "amplitude": 549.0,
+  "pas_um_max": 7644.4,
+  "pas_um_en_feuilles": 44.2,
+  "sort_de_la_fenetre_publiee": true,
+  "lechelle_semballe": true
+ },
+ "la_fenetre_locale_a_t_elle_aide": {
+  "decidable": true,
+  "pas": 109,
+  "en_butee": 24,
+  "part_en_butee": 0.2202,
+  "confirmes": 78,
+  "taux": 0.7156,
+  "reference_pas_voyants": 382,
+  "reference_part_en_butee": 0.1649,
+  "reference_taux": 0.7618,
+  "la_fenetre_locale_a_aide": false
+ },
+ "la_boucle_est_elle_circulaire": {
+  "decidable": true,
+  "pas_deductibles": 101,
+  "rho_echelle_espacement": 0.8916,
+  "p": 7.580763351069368e-36,
+  "garanti_par_construction": true,
+  "la_boucle_se_nourrit_delle_meme": true
+ }
+}

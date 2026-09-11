@@ -2594,6 +2594,48 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                             [f"**{val}**", f"{val}", f"**{val:+.3f}**", f"{val:+.3f}"],
                             cpt.name))
 
+    # ⚠⚠⚠ LA TRANCHE 125 : LA FENETRE LOCALE S'EMBALLE, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) L'echelle maximale ne voyage JAMAIS sans la part en butee des deux fenetres. Seule,
+    # « 32,66 » se lit comme une curiosite ; avec « 0,2202 contre 0,1649 », elle se lit pour ce
+    # qu'elle est : la fenetre etait ecrite pour retirer la butee et elle en ajoute.
+    # (2) Et le rho de circularite ne voyage jamais sans le mot « garanti par construction » : un
+    # rho de +0,89 se lit comme une decouverte, alors que c'est une demonstration.
+    sem = _source(racine, "la_fenetre_locale_semballe.json")
+    if sem.exists():
+        d = json.loads(sem.read_text())
+        e = d.get("lechelle_semballe_t_elle", {})
+        for cle, nom, dec in (("echelle_au_depart", "echelle au depart de 125", 3),
+                              ("echelle_max", "echelle max de 125", 4),
+                              ("echelle_min", "echelle min de 125", 4),
+                              ("amplitude", "amplitude de 125", 1),
+                              ("pas_um_max", "pas le plus long de 125", 1),
+                              ("pas_um_en_feuilles", "pas en feuilles de 125", 1)):
+            if e.get(cle) is not None:
+                ajoute(nom, e[cle], dec, sem.name,
+                       unites=("µm",) if cle == "pas_um_max" else ())
+        a = d.get("la_fenetre_locale_a_t_elle_aide", {})
+        for cle, nom, dec in (("part_en_butee", "part en butee de 125", 4),
+                              ("taux", "taux de 125", 4),
+                              ("reference_part_en_butee", "part en butee de reference de 125", 4),
+                              ("reference_taux", "taux de reference de 125", 4)):
+            if a.get(cle) is not None:
+                ajoute(nom, a[cle], dec, sem.name)
+        for cle, nom in (("pas", "pas de 125"), ("en_butee", "butees de 125"),
+                         ("reference_pas_voyants", "pas voyants de reference de 125")):
+            if a.get(cle) is not None:
+                v_ = a[cle]
+                out.append((nom, [f"**{v_}**", f"{v_}"], sem.name))
+        b = d.get("la_boucle_est_elle_circulaire", {})
+        if b.get("rho_echelle_espacement") is not None:
+            ajoute("rho de circularite de 125", b["rho_echelle_espacement"], 4, sem.name,
+                   signe=True)
+        if b.get("pas_deductibles") is not None:
+            v_ = b["pas_deductibles"]
+            out.append(("pas deductibles de 125", [f"**{v_}**", f"{v_}"], sem.name))
+        if d.get("plafond") is not None:
+            v_ = d["plafond"]
+            out.append(("plafond de 125", [f"**{v_}**", f"{v_}"], sem.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 124 : LA NAPPE SE DECHIRE, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) Le saut median ne voyage JAMAIS sans le compte de lots qui se dechirent : « 1,02 feuille »
     # est une mediane d'une distribution a deux bosses, donc elle ne decrit aucune des deux ; c'est

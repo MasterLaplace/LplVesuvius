@@ -5265,6 +5265,25 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   qualité du scan.
 - **lu** : intégralement, 168 lignes, le 2026-09-11
 
+### docs/archive/125_la_fenetre_locale_semballe.md
+- **lignes** : 123
+- **nature** : RESULTAT
+  (la fenêtre locale de `122`, lancée sur le vrai volume : ce que la première bande de la re-course
+  a rendu avant qu'elle soit arrêtée.)
+- **résumé** : ⚠⚠⚠ **La fenêtre locale s'emballe et EMPIRE la butée.** L'échelle part de **1,000**
+  et atteint **32,6645** (amplitude **×549,0**), pas le plus long **7644,4 µm** soit **44,2
+  feuilles** ; part en butée **0,2202** contre **0,1649** à fenêtre fixe, taux **0,7156** contre
+  **0,7618**. ⭐⭐⭐⭐ La cause est structurelle : l'espacement suivi vaut `avance / feuilles` et
+  `avance` est choisi dans la fenêtre déjà mise à l'échelle — la boucle a un point fixe à toute
+  échelle (rho **+0,8916**, garanti par construction, donc une démonstration et non un résultat).
+  ⚠⚠ La pile fabriquée de `122` ne pouvait pas le montrer : elle n'a **qu'un** pas vrai, donc chaque
+  pas ramène la fenêtre ; sur la vraie matière le profil s'accorde sur une plage et rien ne ramène.
+  ⚠⚠⚠ Mauvaise lecture de `118` à ma charge : il demandait un espacement **mesuré à l'endroit du
+  pas**, j'ai codé **déduit du pas précédent**. ⭐ Bonne nouvelle gardée au passage : l'arrêt sur
+  vide a fonctionné, la marche s'est arrêtée sur « plus rien a lire » au pas **109**, pas au
+  plafond.
+- **lu** : intégralement, 123 lignes, le 2026-09-12
+
 ### docs/archive/124_la_nappe_se_dechire.md
 - **lignes** : 124
 - **nature** : RESULTAT

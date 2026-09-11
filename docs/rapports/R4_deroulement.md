@@ -564,6 +564,17 @@ pas. ⚠⚠⚠ La première mesure portait sur **une seule graine** et rendait 0
 basse des douze. → **c'est là que vit la valeur de l'humain** : il recoud ce que le mécanisme sépare,
 et la séparation ne se voit pas venir.
 
+**`125` · 2026-09-12 · la fenêtre locale s'emballe** (`la_fenetre_locale_semballe.py`, hors ligne)
+La re-course a trouvé le défaut **en une bande**, et il est dans ce que `122` a écrit. L'échelle de
+la fenêtre part de **1,000** et atteint **32,6645** — amplitude **×549** — avec un pas de
+**7644,4 µm**, soit **44,2 feuilles**. ⚠⚠ Et elle n'a pas aidé : part en butée **0,2202** contre
+**0,1649** à fenêtre fixe, taux **0,7156** contre **0,7618**. ⭐ La cause est structurelle :
+l'espacement suivi vaut `avance / feuilles`, or `avance` est choisi dans la fenêtre **déjà mise à
+l'échelle** — rho **+0,8916** entre l'échelle d'un pas et l'espacement qu'il déduit. ⚠⚠ La
+démonstration de `122` ne pouvait pas le voir : une pile fabriquée n'a **qu'un** pas vrai, donc rien
+ne pouvait dériver. → **une fixture à réponse unique valide le mécanisme là où il ne peut pas
+échouer** (`R5-F22`), et `118` demandait un espacement **mesuré**, pas **déduit**.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
