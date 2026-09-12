@@ -158,6 +158,10 @@ fenêtre de l'instrument, pas la matière**.
 
 *`archive/114` — `src/figures/figure_le_cout_qui_connait_la_spire.py`. La réouverture était légitime, la réponse est non : 0,5 % du chemin.*
 
+![Le budget de pas n'achète plus de portée : le net culmine au pas 65 puis recule pendant que le chemin continue](../images/130_le_budget_nachete_plus_de_portee.png)
+
+*`archive/130` — `src/figures/figure_jusquou_le_net_progresse.py`. En abscisse le chemin parcouru, en ordonnée le déplacement net, mêmes échelles, et la diagonale est la marche parfaite. Les dix-sept marches de vingt pas la tiennent et s'arrêtent là ; les trois marches de cent douze la quittent, culminent au cercle, et deux redescendent jusqu'au carré rouge pendant que l'abscisse continue. La portée est l'ordonnée, jamais l'abscisse.*
+
 ## 3. Chronologie, document par document
 
 Format : *question → résultat · statut · ce que ça déplace*. Les producteurs sont dans `src/nappe/`

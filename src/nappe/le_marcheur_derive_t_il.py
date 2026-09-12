@@ -318,7 +318,11 @@ def jusquou_le_net_progresse_t_il(par_marche: list[dict], points: int = 12) -> d
         d = np.asarray(m["directions"], dtype=float)
         a = np.asarray(m["avances_um"], dtype=float)
         nets = [float(np.linalg.norm((d[:k] * a[:k, None]).sum(axis=0))) for k in ks]
+        # ⚠ Le chemin est garde PAR MARCHE et pas seulement en mediane : une figure qui trace le
+        # net contre le chemin a besoin des deux de la MEME marche, et apparier un net individuel
+        # a un chemin median dessinerait une marche qui n'existe pas.
         par_m.append({"rayon_mm": m["rayon_mm"],
+                      "chemin_um": [round(float(np.sum(a[:k])), 1) for k in ks],
                       "net_um": [round(x, 1) for x in nets],
                       "k_du_maximum": int(ks[int(np.argmax(nets))]),
                       "net_maximum_um": round(float(max(nets)), 1),

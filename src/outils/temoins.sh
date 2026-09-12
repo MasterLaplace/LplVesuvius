@@ -1403,6 +1403,7 @@ run "la fenetre s emballe"    uv run python "$ROOT/src/nappe/la_fenetre_locale_s
 run "un lien lateral"         uv run python "$ROOT/src/nappe/un_lien_lateral_entre_marches.py" --verifier
 run "la faille se dit"        uv run python "$ROOT/src/nappe/la_faille_se_dit_elle_dans_la_lecture.py" --verifier
 run "ce que la garde refuse"  uv run python "$ROOT/src/nappe/ce_que_la_garde_refuse.py" --verifier
+run "figure du net"           uv run python "$ROOT/src/figures/figure_jusquou_le_net_progresse.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
