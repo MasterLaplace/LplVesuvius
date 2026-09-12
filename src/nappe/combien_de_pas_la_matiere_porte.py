@@ -148,11 +148,20 @@ class VolumeFabrique:
         p = np.asarray(p).reshape(-1, 3)
         return np.all((p >= 0) & (p < np.asarray(self.forme)), axis=1)
 
+    def _projection_um(self, p: np.ndarray) -> np.ndarray:
+        """Ou tombent ces points le long de la normale, en micrometres.
+
+        ⚠ Un seul point d'entree pour la geometrie de la pile : une sous-classe qui rompt
+        l'empilement redefinit CA et rien d'autre, donc elle ne peut pas diverger de la classe de
+        base sur le bruit, le contraste ou les bornes du volume.
+        """
+        return (np.asarray(p, dtype=np.float64) @ self.normale) * self.voxel_um
+
     def lire(self, points: np.ndarray, fils: int = 1) -> np.ndarray:
         del fils
         p = np.asarray(points, dtype=np.float64).reshape(-1, 3)
         self.lectures += len(p)
-        proj = (p @ self.normale) * self.voxel_um
+        proj = self._projection_um(p)
         v = 100.0 + 40.0 * np.cos(2 * np.pi * proj / self.pas_um)
         if self.bruit:
             v = v + self._tirage(p)
@@ -557,6 +566,49 @@ class VolumeFabriqueAPasVariable(VolumeFabrique):
         if self.bruit:
             v = v + self._tirage(q)
         return v
+
+
+class VolumeFabriqueAvecFaille(VolumeFabrique):
+    """Une pile ROMPUE : les feuilles sautent d'un cran connu a travers un plan.
+
+    ⭐⭐⭐⭐ ELLE EXISTE PARCE QUE `127` N'A PAS PU POSER LA QUESTION. Son temoin decalait les
+    DEPARTS des marches, pas la matiere : la pile restait continue, donc rien dans ce qu'une
+    marche lit ne pouvait annoncer un decrochement — il n'y en avait pas a annoncer. Pour savoir
+    si un lien peut apprendre QUAND se relacher, il faut une pile dont la matiere elle-meme est
+    rompue.
+
+    ⚠⚠ LE PLAN DE FAILLE EST PERPENDICULAIRE A z, ET CE N'EST PAS UN DETAIL. En (z, y, x), les
+    marches voisines d'une nappe sont ecartees selon z (`lateral` vaut [1, 0, 0]) et
+    `accord_des_moities` coupe son cube selon z. Une faille portee par un autre axe ne separerait
+    aucune marche de sa voisine et tomberait entierement dans une seule moitie du cube : elle ne
+    mesurerait ni la dechirure ni la garde.
+
+    ⚠⚠⚠ ET LE SAUT EST UNE PHASE, DONC IL EST PERIODIQUE : un saut d'EXACTEMENT une feuille
+    laisse la matiere IDENTIQUE. Ce n'est pas une limite de la fixture, c'est une propriete de
+    l'objet — une pile periodique ne porte aucune information sur le numero de feuille, seulement
+    sur la position dans la feuille. Une faille d'une feuille casse l'identite sans rien changer a
+    ce qui se lit localement, et c'est exactement le cas que `91` mesure au bord du rouleau.
+
+    ⚠ Les deux cotes gardent la meme normale et le meme pas : ce qui change est OU tombent les
+    feuilles, pas comment elles sont posees. Incliner un cote melangerait deux pannes, une rupture
+    et une deformation, et on ne saurait plus laquelle la lecture a vue.
+    """
+
+    def __init__(self, pas_um: float, saut_um: float, z_faille_vx: float, **kw) -> None:
+        super().__init__(pas_um, **kw)
+        self.saut_um = float(saut_um)
+        """Le decalage de phase impose de l'autre cote du plan, en micrometres."""
+        self.z_faille_vx = float(z_faille_vx)
+        """L'abscisse du plan de faille, en voxels, sur l'axe z."""
+
+    @property
+    def saut_en_feuilles(self) -> float:
+        """Le saut injecte, en feuilles — la reponse connue."""
+        return self.saut_um / self.pas_um
+
+    def _projection_um(self, p: np.ndarray) -> np.ndarray:
+        q = np.asarray(p, dtype=np.float64).reshape(-1, 3)
+        return super()._projection_um(q) + self.saut_um * (q[:, 0] > self.z_faille_vx)
 
 
 def plafond_pour_traverser(rayon_min_mm: float, rayon_max_mm: float,
@@ -1221,6 +1273,30 @@ def verifier() -> int:
     v("le recalage pose le depart SUR une feuille",
       abs(float(pv.lire(dep_v.reshape(1, 3))[0]) - 140.0) < 1.0,
       f"{float(pv.lire(dep_v.reshape(1, 3))[0]):.2f}")
+
+    # ⭐⭐⭐ LA PILE ROMPUE, ET C'EST LE SEAM `_projection_um` QUI EST CONTROLE ICI : la sous-classe
+    # ne redefinit QUE la geometrie, donc le bruit, le contraste et les bornes du volume lui
+    # arrivent de la classe de base et ne peuvent pas en diverger. ⚠ Le fait de la tranche `128`
+    # — un saut d'une feuille est invisible — est mesure LA-BAS, avec son controle ; ce qui est
+    # verifie ici est le mecanisme que ce module possede.
+    pts_f = np.array([[2000.0 + i - 32.0, 2000.0, 2000.0 + (i % 7)] for i in range(64)])
+    intacte_f = VolumeFabrique(173.0, obliquite_deg=35.0)
+    v("une faille NULLE ne touche pas une seule lecture",
+      float(np.max(np.abs(VolumeFabriqueAvecFaille(173.0, 0.0, 2000.0, obliquite_deg=35.0)
+                          .lire(pts_f) - intacte_f.lire(pts_f)))) == 0.0)
+    demi_f = VolumeFabriqueAvecFaille(173.0, 86.5, 2000.0, obliquite_deg=35.0)
+    v("... alors qu'une demi-feuille en deplace", float(np.max(np.abs(
+        demi_f.lire(pts_f) - intacte_f.lire(pts_f)))) > 1.0)
+    # ⚠ La faille est LOCALE a un cote du plan : un seul cote bouge, sinon ce serait un decalage
+    # global de la pile et pas une rupture.
+    g_f = pts_f[pts_f[:, 0] <= 2000.0]
+    v("le cote intact ne bouge pas d'un pouce",
+      float(np.max(np.abs(demi_f.lire(g_f) - intacte_f.lire(g_f)))) == 0.0)
+    v("la sous-classe herite du bruit porte par la matiere",
+      float(np.max(np.abs(
+          VolumeFabriqueAvecFaille(173.0, 86.5, 2000.0, bruit=8.0, graine=3).lire(pts_f)
+          - VolumeFabriqueAvecFaille(173.0, 86.5, 2000.0, bruit=8.0, graine=3).lire(pts_f)))
+      ) == 0.0)
 
     # ⭐⭐⭐⭐ LE CONTROLE DE NON-CHANGEMENT : sur une pile a pas CONSTANT, la fenetre locale ne
     # doit rien deplacer. Elle ne peut pas etre bit-a-bit identique — l'espacement deduit vaut

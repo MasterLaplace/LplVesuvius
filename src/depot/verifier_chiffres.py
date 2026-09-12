@@ -2636,6 +2636,67 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             v_ = d["plafond"]
             out.append(("plafond de 125", [f"**{v_}**", f"{v_}"], sem.name))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 128 : LA FAILLE, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) Le « 0,000000 » d'une faille d'une feuille ne voyage JAMAIS sans l'ecart d'une
+    # demi-feuille. Seul, un zero se lit comme une panne du lecteur ; a cote de 79,999989 il se lit
+    # pour ce qu'il est, une propriete de l'objet.
+    # (2) Et les degres du desaccord ne voyagent jamais sans la BARRE du nul : « 88,52° » ne veut
+    # rien dire tant qu'on ne sait pas qu'un cube sans structure descend sous 10,06° une fois sur
+    # cent.
+    fai = _source(racine, "la_faille_se_dit_elle_dans_la_lecture.json")
+    if fai.exists():
+        d = json.loads(fai.read_text())
+        for x in d.get("la_faille_existe_t_elle", []):
+            nom = f"saut {x['saut_en_feuilles']:.2f} de 128"
+            ajoute(f"ecart de matiere du {nom}", x["ecart_maximal"], 6, fai.name)
+        s_ = d.get("le_signal_par_distance", {})
+        if s_.get("barre_daccord_des_moities_deg") is not None:
+            ajoute("barre des moities de 128", s_["barre_daccord_des_moities_deg"], 2, fai.name)
+        for bloc_ in s_.get("par_saut", []):
+            for dd in bloc_.get("par_distance", []):
+                w = dd.get("desaccord_des_moities_deg_pire")
+                if not w:
+                    continue
+                nom = (f"pire desaccord a {dd['distance_vx']} vx, saut "
+                       f"{bloc_['saut_en_feuilles']:.2f} de 128")
+                for cle, suffixe, dec in (("intacte", " (intacte)", 2),
+                                          ("rompue", " (rompue)", 2),
+                                          ("ecart_median", " (ecart)", 4)):
+                    ajoute(nom + suffixe, w[cle], dec, fai.name,
+                           signe=(cle == "ecart_median"))
+                if w.get("p") is not None:
+                    ajoute(nom + " (p)", w["p"], 4, fai.name)
+        q = d.get("ou_tombe_le_pas_refuse", {})
+        if q:
+            for cle, nom, dec in (("excursion_laterale_mediane_vx", "excursion rompue de 128", 2),
+                                  ("excursion_laterale_intacte_mediane_vx",
+                                   "excursion intacte de 128", 2),
+                                  ("excursion_laterale_intacte_max_vx",
+                                   "excursion intacte maximale de 128", 2),
+                                  ("part_au_premier_rang", "part au premier rang de 128", 2)):
+                if q.get(cle) is not None:
+                    ajoute(nom, q[cle], dec, fai.name)
+            for cle, nom in (("refus", "refus de 128"), ("marches", "marches de 128"),
+                             ("au_premier_rang", "refus au premier rang de 128"),
+                             ("marches_qui_sortent_du_cube", "marches qui sortent de 128"),
+                             ("demi_cube_voxels", "demi-cube de 128")):
+                if q.get(cle) is not None:
+                    v_ = q[cle]
+                    out.append((nom, [f"**{v_}**", f"{v_}"], fai.name))
+            pp = q.get("au_premier_pas", {})
+            for cle, nom, dec in (("desaccord_deg", "desaccord au premier pas de 128", 2),
+                                  ("desaccord_deg_intact",
+                                   "desaccord au premier pas intact de 128", 2),
+                                  ("avance_um", "avance au premier pas de 128", 1),
+                                  ("avance_um_intacte",
+                                   "avance au premier pas intacte de 128", 1),
+                                  ("part_perpendiculaire_au_plan",
+                                   "part perpendiculaire de 128", 4),
+                                  ("part_perpendiculaire_au_plan_intacte",
+                                   "part perpendiculaire intacte de 128", 4)):
+                if pp.get(cle) is not None:
+                    ajoute(nom, pp[cle], dec, fai.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 127 : LE LIEN LATERAL, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) Le compte de dechirures evitees ne voyage JAMAIS sans l'ecart a la verite du temoin.
     # « 6 sur 6 a 0 sur 6, sans cout » se lit comme une solution ; le fait est que la MEME force

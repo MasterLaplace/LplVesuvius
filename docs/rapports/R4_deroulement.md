@@ -602,6 +602,30 @@ répare la première en cassant la seconde** (`R4-F55`). Ce qui manque est un li
 se relâcher**, et ce qu'il faudrait pour décider est exactement ce que `R4-F53` dit indisponible —
 la déchirure ne s'annonce pas. `R4-P25` se referme sur elle-même.
 
+**`128` · 2026-09-12 · une faille d'une feuille n'existe pas** (`la_faille_se_dit_elle_dans_la_lecture.py`,
+analytique)
+`127` laisse `R4-P25` sur un lien qui devrait savoir **quand se relâcher** ; il lui faut donc un
+signal disponible AU pas. ⚠⚠⚠ Le témoin de `127` ne pouvait pas poser la question — il décalait
+les **départs**, pas la matière — d'où une pile dont l'empilement est lui-même rompu.
+⭐⭐⭐⭐ **Un saut d'EXACTEMENT une feuille rend un volume dont l'écart maximal vaut 0,000000**
+sur 2000 points de part et d'autre du plan, contre **79,999989** à une demi-feuille, soit le
+contraste entier de la pile : le saut est une **phase**, donc une pile fonction de la phase seule
+est invariante par un décalage entier. ⭐ Vrai aussi sur la pile à **pas variable** de `122`, donc
+l'espacement qui varie d'un facteur cinq (`118`) n'y change rien. ⭐⭐⭐ Et ce n'est pas une panne
+du lecteur : une faille **fractionnaire** se dit à **88,52°** de désaccord des moitiés pour une
+barre de **10,06°** (p **0,0005**, 12 graines), avec une portée qui est exactement le cube —
+entier jusqu'à **20** voxels, **48,52** à 25, **8,64** contre **8,61** à 30. ⚠⚠ Et la marche
+**prend la faille pour une feuille** : au pas de la rencontre la part de son avance perpendiculaire
+au plan vaut **1,0000** contre **0,0147** intacte, elle parcourt **216,2 µm** en travers, et 12
+marches sur 12 quittent le demi-cube dès ce pas (excursion **105,21** voxels contre **15,32**). La
+garde refuse le pas et le pas est pris quand même. ⚠⚠ Ma première lecture résumait chaque marche
+par sa **médiane** et ratait tout — la faille ne touche qu'un pas sur vingt-quatre : le péché
+capital du dépôt commis sur mon propre instrument. → **l'identité d'une feuille n'est pas portée
+par la matière mais par le COMPTE** (`R4-F56`, `R4-F57`), et un compte ne se vérifie que contre un
+autre compte — ce qui fait de `R4-F53` une conséquence et non un manque de mesure. Porte neuve
+`R4-P26` : le vrai rouleau, lui, n'est pas périodique ; quelque chose de local y distingue-t-il la
+feuille *n* de la feuille *n+1* ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
