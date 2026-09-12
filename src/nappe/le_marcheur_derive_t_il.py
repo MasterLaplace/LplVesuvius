@@ -87,20 +87,38 @@ def marches(course: dict) -> list[dict]:
     return out
 
 
+def tolerance_darrondi_um(pas: int, decimale_um: float = 0.1) -> float:
+    """L'arrondi cumule qu'un chemin de `pas` pas peut porter, au pire.
+
+    ⭐⭐⭐⭐ ELLE EXISTE PARCE QU'UNE CONSTANTE DERIVEE POUR VINGT PAS A ETE APPLIQUEE A CENT
+    DOUZE. `avance_um` et `parcouru_um` sont ecrits a la decimale, donc chaque addition porte au
+    plus une DEMI-decimale et le cumul croit avec le nombre de pas. Le 1,0 µm d'origine etait le
+    bon nombre pour vingt pas et ne l'etait plus pour une traversee complete : le garde a refuse
+    une course parfaitement saine pour un ecart de 1,7 µm, quand sa propre borne en admettait 5,7.
+
+    ⚠ Ce n'est toujours pas un reglage : la borne se calcule, elle ne se choisit pas. Le `+1`
+    couvre l'arrondi de `parcouru_um` lui-meme, qui est ecrit a la meme decimale.
+    """
+    return decimale_um / 2.0 * (int(pas) + 1)
+
+
 def la_trajectoire_est_elle_celle_de_la_course(par_marche: list[dict],
-                                               tolerance_um: float = 1.0) -> dict:
+                                               tolerance_um: float | None = None) -> dict:
     """Le chemin reconstruit retrouve-t-il le `parcouru_um` que la course a écrit ?
 
     ⭐⭐⭐⭐ C'EST LA GARDE SANS LAQUELLE TOUT CE FICHIER MESURE UNE AUTRE MARCHE. La trajectoire
     est reconstruite en sommant `direction × avance` ; si ce cumul ne retrouve pas le
     `parcouru_um` de la course, c'est que les deux champs ne décrivent pas le même pas.
 
-    ⚠ La tolérance n'est pas un réglage : `avance_um` est écrit à la décimale, donc vingt pas
-    portent au plus un micromètre d'arrondi cumulé. Une tolérance plus large accepterait un vrai
-    désaccord, une plus étroite refuserait l'écriture du JSON.
+    ⚠ La tolérance n'est pas un réglage : `avance_um` est écrit à la décimale, donc chaque pas
+    porte au plus une demi-décimale d'arrondi et le cumul CROIT avec le nombre de pas. Elle est
+    donc **dérivée de la marche la plus longue** et non fixée — une constante posee pour vingt pas
+    refuse une traversee de cent douze, ce qui est exactement ce qui est arrivé.
     """
     if not par_marche:
         return {"decidable": False, "pourquoi": "aucune marche"}
+    if tolerance_um is None:
+        tolerance_um = tolerance_darrondi_um(max(m["pas_voyants"] for m in par_marche))
     ecarts = []
     for m in par_marche:
         cum = 0.0
@@ -178,6 +196,152 @@ def la_marche_se_degrade_t_elle(par_marche: list[dict]) -> dict:
             "la_marche_se_degrade": bool(p is not None
                                          and float(np.median(r2)) < float(np.median(r1))
                                          and p < 0.05)}
+
+
+def la_rectitude_decroit_elle_avec_la_longueur(par_marche: list[dict]) -> dict:
+    """Une marche longue est-elle moins droite — et est-ce la LONGUEUR ou la MARCHE ?
+
+    ⭐⭐⭐⭐ C'EST LA QUESTION QUE `R4-P20` POSE VRAIMENT. Un plafond de pas est un budget ; ce
+    qu'on veut savoir est jusqu'ou le marcheur EMMENE, et ca ne se lit pas dans le chemin parcouru
+    mais dans le deplacement NET. Une marche qui parcourt vingt millimetres et finit a un et demi
+    de son depart n'a rien traverse, et son chemin la ferait passer pour la meilleure.
+
+    ⚠⚠⚠ ET IL Y A UN CONFONDANT MECANIQUE QU'IL FAUT NEUTRALISER, sans quoi la reponse est
+    ecrite d'avance : une marche d'UN pas a une rectitude de 1,000 par construction, et toute
+    marche courte est mecaniquement plus droite qu'une longue. Comparer les rectitudes telles
+    quelles mesurerait donc surtout la longueur. Le controle tronque TOUTES les marches a la
+    longueur de la plus courte qui compte, donc elles sont comparees a nombre de pas EGAL. Si
+    l'ecart survit a la troncature, il appartient aux marches ; s'il disparait, il appartenait a
+    la longueur.
+
+    ⚠ Le deplacement net est libre de repere : il ne demande ni rayon ni axe, donc il echappe au
+    confondant que `langle_au_radial_initial` doit declarer — le radial LOCAL tourne sous une
+    marche qui avance circonferentiellement, le depart et l'arrivee non.
+    """
+    if len(par_marche) < 3:
+        return {"decidable": False, "pourquoi": "moins de trois marches"}
+    lignes = []
+    for m in par_marche:
+        d = np.asarray(m["directions"], dtype=float)
+        a = np.asarray(m["avances_um"], dtype=float)
+        net = float(np.linalg.norm((d * a[:, None]).sum(axis=0)))
+        lignes.append({"rayon_mm": m["rayon_mm"], "pas": int(m["pas_voyants"]),
+                       "chemin_um": round(float(a.sum()), 1), "net_um": round(net, 1),
+                       "rectitude": round(net / max(1e-9, float(a.sum())), 4)})
+    pas = np.array([x["pas"] for x in lignes], dtype=float)
+    rec = np.array([x["rectitude"] for x in lignes], dtype=float)
+    # ⚠⚠ SANS VARIATION DE LONGUEUR, IL N'Y A PAS DE RELATION A LA LONGUEUR, et Spearman rend
+    # `nan` plutot que de le dire. Publier ce `nan` le ferait lire comme une valeur manquante alors
+    # que c'est une question qui ne se pose pas — un controle qui n'a rien a verifier ne doit pas
+    # rendre « ok », et il ne doit pas rendre un nombre non plus.
+    if float(pas.min()) == float(pas.max()):
+        return {"decidable": False,
+                "pourquoi": f"les {len(lignes)} marches font toutes {int(pas[0])} pas",
+                "par_marche": lignes,
+                "rectitude_mediane": round(float(np.median(rec)), 4),
+                "rectitude_min": round(float(rec.min()), 4),
+                "rectitude_max": round(float(rec.max()), 4)}
+    from scipy.stats import spearmanr  # noqa: PLC0415
+    rho, p_ = spearmanr(pas, rec)
+    # ⭐⭐⭐⭐ LE CONTROLE : tout le monde a la meme longueur. La plus courte marche est souvent
+    # d'un ou deux pas (une sortie de volume immediate) et tronquer tout le monde a deux pas ne
+    # comparerait plus rien ; le plancher est donc la plus courte marche qui porte au moins le
+    # quart du plafond observe, et il est PUBLIE avec le resultat.
+    plancher = max(3, int(np.max(pas) // 4))
+    longues = [x for x, m in zip(lignes, par_marche) if x["pas"] >= plancher]
+    coupe = []
+    for x, m in zip(lignes, par_marche):
+        if x["pas"] < plancher:
+            continue
+        d = np.asarray(m["directions"][:plancher], dtype=float)
+        a = np.asarray(m["avances_um"][:plancher], dtype=float)
+        net = float(np.linalg.norm((d * a[:, None]).sum(axis=0)))
+        coupe.append({"rayon_mm": x["rayon_mm"], "pas_entiers": x["pas"],
+                      "rectitude_tronquee": round(net / max(1e-9, float(a.sum())), 4),
+                      "rectitude_entiere": x["rectitude"]})
+    rho_t = p_t = None
+    if len(coupe) >= 3:
+        rho_t, p_t = spearmanr([x["pas_entiers"] for x in coupe],
+                               [x["rectitude_tronquee"] for x in coupe])
+    return {"decidable": True, "marches": len(lignes), "par_marche": lignes,
+            "rectitude_mediane": round(float(np.median(rec)), 4),
+            "rectitude_min": round(float(rec.min()), 4),
+            "rectitude_max": round(float(rec.max()), 4),
+            "net_median_um": round(float(np.median([x["net_um"] for x in lignes])), 1),
+            "chemin_median_um": round(float(np.median([x["chemin_um"] for x in lignes])), 1),
+            "rho_de_spearman": round(float(rho), 4), "p": round(float(p_), 4),
+            "plancher_de_troncature": plancher, "marches_tronquees": len(coupe),
+            "a_longueur_egale": coupe,
+            "rho_a_longueur_egale": None if rho_t is None else round(float(rho_t), 4),
+            "p_a_longueur_egale": None if p_t is None else round(float(p_t), 4),
+            # ⭐⭐⭐⭐ Les deux verdicts, et ils ne disent pas la meme chose : le premier peut
+            # etre vrai par la seule mecanique de la longueur, le second ne le peut pas.
+            "la_rectitude_decroit_avec_la_longueur": bool(rho < 0 and p_ < 0.05),
+            "elle_decroit_encore_a_longueur_egale": bool(
+                rho_t is not None and rho_t < 0 and p_t < 0.05),
+            "longues": len(longues)}
+
+
+def jusquou_le_net_progresse_t_il(par_marche: list[dict], points: int = 12) -> dict:
+    """Le deplacement net grandit-il avec le budget de pas, ou culmine-t-il ?
+
+    ⭐⭐⭐⭐ C'EST `R4-P20` POSEE COMME ELLE DOIT L'ETRE. Un plafond de pas est un budget ; la
+    portee est la distance a laquelle le marcheur EMMENE. Si le net culmine puis recule, alors
+    lever le plafond ne donne pas de portee — il donne du chemin, et le chemin revient sur
+    lui-meme.
+
+    ⚠⚠⚠ LA POPULATION EST TENUE CONSTANTE, ET SANS CA LA COURBE MENT. Les marches ne font pas
+    toutes le meme nombre de pas : prendre a chaque k toutes celles qui y arrivent fait changer
+    l'echantillon sous la courbe, donc un net qui baisse pourrait n'etre que la disparition des
+    bonnes marches. Seules les marches qui atteignent le PLUS GRAND k sont gardees, et leur
+    nombre est publie — il est petit, et c'est le prix de l'honnetete.
+
+    ⚠⚠ LE VERDICT EST UN COMPTE, PAS UN SEUIL : combien de marches ont leur maximum de net
+    STRICTEMENT avant le plafond. Une moyenne dirait « le net recule » d'un lot ou une seule
+    marche recule beaucoup, et une marche qui continue tout droit serait invisible.
+
+    ⚠ Ce que ca ne distingue PAS : une marche qui revient sur ses pas et une marche qui fait le
+    tour du rouleau en longeant une feuille rendent toutes deux un net qui plafonne. La rotation
+    cumulee autour de l'axe est mesuree a cote (`le_virage_a_t_il_un_sens`) et c'est elle qu'il
+    faut lire pour les separer.
+    """
+    if not par_marche:
+        return {"decidable": False, "pourquoi": "aucune marche"}
+    plafond = max(m["pas_voyants"] for m in par_marche)
+    gardees = [m for m in par_marche if m["pas_voyants"] >= plafond]
+    if len(gardees) < 2 or plafond < 8:
+        return {"decidable": False,
+                "pourquoi": f"{len(gardees)} marche(s) atteignent {plafond} pas"}
+    ks = sorted({max(1, int(round(plafond * (i + 1) / points))) for i in range(points)})
+    courbe, par_m = [], []
+    for m in gardees:
+        d = np.asarray(m["directions"], dtype=float)
+        a = np.asarray(m["avances_um"], dtype=float)
+        nets = [float(np.linalg.norm((d[:k] * a[:k, None]).sum(axis=0))) for k in ks]
+        par_m.append({"rayon_mm": m["rayon_mm"],
+                      "net_um": [round(x, 1) for x in nets],
+                      "k_du_maximum": int(ks[int(np.argmax(nets))]),
+                      "net_maximum_um": round(float(max(nets)), 1),
+                      "net_au_plafond_um": round(float(nets[-1]), 1)})
+    for i, k in enumerate(ks):
+        nets = [x["net_um"][i] for x in par_m]
+        chemins = [float(np.sum(m["avances_um"][:k])) for m in gardees]
+        courbe.append({"pas": int(k),
+                       "net_median_um": round(float(np.median(nets)), 1),
+                       "chemin_median_um": round(float(np.median(chemins)), 1)})
+    culminent = sum(1 for x in par_m if x["k_du_maximum"] < plafond)
+    return {"decidable": True, "plafond": int(plafond), "marches": len(gardees),
+            "marches_de_la_course": len(par_marche), "pas_examines": ks,
+            "courbe": courbe, "par_marche": par_m,
+            "k_du_maximum_median": int(np.median([x["k_du_maximum"] for x in par_m])),
+            "net_maximum_median_um": round(
+                float(np.median([x["net_maximum_um"] for x in par_m])), 1),
+            "net_au_plafond_median_um": round(
+                float(np.median([x["net_au_plafond_um"] for x in par_m])), 1),
+            "marches_dont_le_net_culmine_avant_le_plafond": culminent,
+            # ⭐⭐⭐⭐ Le verdict : le budget achete-t-il de la portee ? Il ne l'achete pas des
+            # qu'une marche fait mieux AVANT le plafond qu'AU plafond.
+            "le_budget_achete_de_la_portee": bool(culminent == 0)}
 
 
 def le_virage_a_t_il_un_sens(par_marche: list[dict]) -> dict:
@@ -377,6 +541,9 @@ def mesurer(course_p: Path = COURSE) -> dict:
             "pas_voyants": sum(m["pas_voyants"] for m in pm),
             "la_trajectoire_est_elle_celle_de_la_course": garde,
             "la_marche_se_degrade_t_elle": la_marche_se_degrade_t_elle(pm),
+            "la_rectitude_decroit_elle_avec_la_longueur":
+                la_rectitude_decroit_elle_avec_la_longueur(pm),
+            "jusquou_le_net_progresse_t_il": jusquou_le_net_progresse_t_il(pm),
             "le_virage_a_t_il_un_sens": le_virage_a_t_il_un_sens(pm),
             "le_virage_grandit_il": le_virage_grandit_il(pm),
             "temoin_les_virages_se_compensent": temoin_les_virages_se_compensent(pm),
@@ -410,6 +577,33 @@ def afficher(r: dict) -> None:
               f"{s['rotation_cumulee_mediane_deg']:+}° "
               f"[{s['rotation_min_deg']} ; {s['rotation_max_deg']}] (p {s['p_contre_zero']}) · "
               f"un sens : {s['le_virage_a_un_sens']}")
+    q = r.get("la_rectitude_decroit_elle_avec_la_longueur", {})
+    if q.get("decidable"):
+        print(f"\n  rectitude par marche : médiane {q['rectitude_mediane']} "
+              f"[{q['rectitude_min']} ; {q['rectitude_max']}] · net médian {q['net_median_um']} µm "
+              f"pour un chemin de {q['chemin_median_um']}")
+        for x in q["par_marche"]:
+            print(f"     r={x['rayon_mm']:>6} {x['pas']:>4} pas · chemin {x['chemin_um']:>9} µm "
+                  f"· net {x['net_um']:>9} µm · rectitude {x['rectitude']:.3f}")
+        print(f"    rho(pas, rectitude) {q['rho_de_spearman']} p {q['p']} → décroît : "
+              f"{q['la_rectitude_decroit_avec_la_longueur']}")
+        print(f"    ⭐ à longueur ÉGALE ({q['plancher_de_troncature']} pas, "
+              f"{q['marches_tronquees']} marches) : rho {q['rho_a_longueur_egale']} "
+              f"p {q['p_a_longueur_egale']} → {q['elle_decroit_encore_a_longueur_egale']}")
+    j = r.get("jusquou_le_net_progresse_t_il", {})
+    if j.get("decidable"):
+        print(f"\n  jusqu'où le net progresse ({j['marches']} marches sur "
+              f"{j['marches_de_la_course']} atteignent {j['plafond']} pas)")
+        print(f"     {'pas':>5} {'chemin médian':>14} {'net médian':>12}")
+        for x in j["courbe"]:
+            print(f"     {x['pas']:>5} {x['chemin_median_um']:>14.1f} "
+                  f"{x['net_median_um']:>12.1f}")
+        for x in j["par_marche"]:
+            print(f"     r={x['rayon_mm']:>6} · maximum {x['net_maximum_um']} µm au pas "
+                  f"{x['k_du_maximum']} · au plafond {x['net_au_plafond_um']}")
+        print(f"    ⭐ {j['marches_dont_le_net_culmine_avant_le_plafond']}/{j['marches']} "
+              f"culminent AVANT le plafond · le budget achète de la portée : "
+              f"{j['le_budget_achete_de_la_portee']}")
     t = r["temoin_les_virages_se_compensent"]
     if t.get("decidable"):
         print(f"\n  témoin ({t['tirages']} tirages, graine {t['graine']}) : réel "
@@ -444,6 +638,64 @@ def verifier() -> int:
                 "parcouru_um": parcouru or [avance * (k + 1) for k in range(n)]}
 
     droite = [marche([(0.0, 0.0, 1.0)] * 12, rayon=4.0 + i) for i in range(10)]
+
+    # === LA PORTEE : LE NET CONTRE LE CHEMIN ==================================================
+    # ⭐⭐⭐⭐ Une marche PARFAITEMENT DROITE doit rendre « le budget achete de la portee ».
+    v_droites = jusquou_le_net_progresse_t_il([marche([(0.0, 0.0, 1.0)] * 40, rayon=4.0 + i)
+                                               for i in range(3)])
+    v("une marche droite : le budget achete de la portee",
+      v_droites["le_budget_achete_de_la_portee"]
+      and v_droites["marches_dont_le_net_culmine_avant_le_plafond"] == 0)
+    v("... et son net vaut son chemin",
+      abs(v_droites["net_au_plafond_median_um"]
+          - v_droites["courbe"][-1]["chemin_median_um"]) < 1.0)
+    # ⭐⭐⭐⭐ ET UNE MARCHE QUI FAIT DEMI-TOUR DOIT ETRE VUE : sans cette sonde le verdict serait
+    # vrai de n'importe quoi.
+    demi_tour = [marche([(0.0, 0.0, 1.0)] * 20 + [(0.0, 0.0, -1.0)] * 20, rayon=4.0 + i)
+                 for i in range(3)]
+    r_dt = jusquou_le_net_progresse_t_il(demi_tour)
+    v("⭐ une marche qui revient est vue", not r_dt["le_budget_achete_de_la_portee"]
+      and r_dt["marches_dont_le_net_culmine_avant_le_plafond"] == 3)
+    v("... et son maximum tombe AVANT le plafond",
+      all(x["k_du_maximum"] < r_dt["plafond"] for x in r_dt["par_marche"]),
+      f"{[x['k_du_maximum'] for x in r_dt['par_marche']]}")
+    # ⚠⚠ LA POPULATION EST CONSTANTE : une marche plus courte ne doit pas entrer dans la courbe,
+    # sinon un net qui baisse pourrait n'etre que la disparition des bonnes marches.
+    melange = demi_tour + [marche([(0.0, 0.0, 1.0)] * 12, rayon=9.0)]
+    r_m = jusquou_le_net_progresse_t_il(melange)
+    v("⚠ une marche plus courte n'entre pas dans la courbe",
+      r_m["marches"] == 3 and r_m["marches_de_la_course"] == 4,
+      f"{r_m['marches']}/{r_m['marches_de_la_course']}")
+    v("une seule marche au plafond rend indecidable",
+      jusquou_le_net_progresse_t_il(
+          [marche([(0.0, 0.0, 1.0)] * 40), marche([(0.0, 0.0, 1.0)] * 12)]
+      ).get("decidable") is False)
+
+    # === LA RECTITUDE CONTRE LA LONGUEUR ======================================================
+    # ⚠⚠ LE CONFONDANT MECANIQUE : des marches PARFAITEMENT DROITES de longueurs differentes ont
+    # toutes une rectitude de 1, donc aucun lien avec la longueur. C'est le controle negatif.
+    inegales = [marche([(0.0, 0.0, 1.0)] * n, rayon=4.0 + n) for n in (8, 16, 24, 32, 40)]
+    r_i = la_rectitude_decroit_elle_avec_la_longueur(inegales)
+    v("des marches droites de longueurs differentes ne montrent aucune decroissance",
+      not r_i["la_rectitude_decroit_avec_la_longueur"], f"rho {r_i['rho_de_spearman']}")
+    # ⭐⭐⭐⭐ ET LE CONTROLE A LONGUEUR EGALE DOIT POUVOIR DIRE OUI : des marches dont la
+    # SEULE difference est leur qualite, a longueur identique, sont vues.
+    rng = np.random.default_rng(7)
+    tordues = []
+    for i, bruit in enumerate((0.02, 0.1, 0.3, 0.6, 1.2)):
+        dirs, u = [], np.array([0.0, 0.0, 1.0])
+        for _ in range(30):
+            u = u + rng.normal(0.0, bruit, 3)
+            u = u / np.linalg.norm(u)
+            dirs.append(tuple(u))
+        tordues.append(marche(dirs, rayon=4.0 + i))
+    r_t = la_rectitude_decroit_elle_avec_la_longueur(tordues)
+    v("⭐ des marches de MEME longueur rendent INDECIDABLE, pas un nombre",
+      r_t.get("decidable") is False and "toutes" in r_t.get("pourquoi", ""),
+      f"{r_t.get('pourquoi')}")
+    v("... et la rectitude est quand meme rendue, parce qu'elle, elle se mesure",
+      r_t.get("rectitude_min") is not None and r_t["rectitude_min"] < 0.6,
+      f"{r_t.get('rectitude_min')}")
 
     # ⭐⭐⭐⭐ LA GARDE DE RECONSTRUCTION.
     g = la_trajectoire_est_elle_celle_de_la_course(droite)

@@ -647,6 +647,29 @@ remplacé par Fisher exact, qui rend **p 0,0529** et renverse la réponse. → *
 veut pas dire « le marcheur suit la matière »** (`R4-F58`, `R4-F59`), et `oriente` reste la
 meilleure gâchette disponible — pour relâcher un lien, jamais pour arrêter.
 
+**`130` · 2026-09-12 · le budget n'achète plus de portée** (`jusquou_va_t_il_si_on_le_laisse.py`,
+`le_marcheur_derive_t_il.py`, zéro lecture distante après la course)
+La re-course à plafond **112** avec `--arret-sur-vide` répond à `R4-P20`. ⭐⭐⭐⭐ **La portée
+cesse d'être censurée** : **3 marches sur 8** touchent le plafond (0,375) contre **56 sur 56** à
+`107`, quatre s'arrêtent parce que le volume ne répond plus, une sort du champ.
+⭐⭐⭐⭐ **Et ce que le budget achète est du CHEMIN, pas de la portée** : sur les trois marches
+qui vont au bout, à population constante, le déplacement net culmine à **8931,2 µm au pas 65**
+puis retombe à **3726,5** au pas 112 pendant que le chemin atteint **20389,8** — **2 marches sur 3
+culminent AVANT le plafond**, contre **0 sur 17** au plafond de vingt. ⭐⭐⭐ C'est la panne que
+`119` avait NOMMÉE sans pouvoir la voir (« longer la feuille au lieu de la traverser ») : ses
+virages se compensaient à vingt pas (0,928 contre 0,811, 17/19, p **0,00141**) et ce n'est plus
+établi à cent douze (**0,665 contre 0,438**, 5/7, p **0,375**) ; rectitude médiane **0,9323** →
+**0,7597**, angle entre les deux moitiés **20,5°** → **56,3°**. ⚠⚠⚠ **Et le taux ne voit rien** :
+**0,7468** global, il ne baisse pas avec la profondeur (0,762 / 0,787, p **0,6162**) et ne suit pas
+le rayon (rho **+0,0952**, p **0,8225**) — une marche qui revient confirme aussi bien qu'une marche
+qui avance, troisième document d'affilée à mesurer que `confirme` est aveugle à ce qui compte.
+⚠⚠ Une lecture de ma part corrigée par son propre contrôle : la rectitude décroît avec la
+longueur (rho **−0,8295**, p **0,0109**) mais l'effet **disparaît à longueur égale** (28 pas, rho
+**−0,1482**, p **0,7511**) — c'est la longueur qui coûte, pas la marche. → **ce qui manque n'est
+pas un meilleur pas, c'est un CAP** (`R4-F60`, `R4-F61`) : le module n'a qu'un bit de supervision,
+le sens initial, et il tient vingt transferts. ⚠ n = 3 au plafond : la fréquence du recul n'est
+pas mesurée, et la prochaine course doit élargir les marches avant d'allonger les pas.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

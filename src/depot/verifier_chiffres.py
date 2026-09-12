@@ -2934,6 +2934,96 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"ecart en sigma de la fenetre [{x['bas']} ; {x['haut']}] de 121",
                        x["ecart_en_sigma"], 1, rof.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 130 : LE BUDGET N'ACHETE PLUS DE PORTEE, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Le net ne voyage JAMAIS sans le chemin. « 3 726,5 µm » seul se lit comme une petite
+    # marche ; a cote de « 20 389,8 µm parcourus » il se lit pour ce qu'il est, un retour.
+    # (2) Le compte des marches qui culminent avant le plafond ne voyage jamais sans celui de la
+    # course de vingt pas : « 2 sur 3 » seul pourrait etre le regime ordinaire, « contre 0 sur
+    # 17 » dit que c'est le plafond qui a change.
+    # (3) Et le rho de la rectitude contre la longueur ne voyage jamais sans celui a LONGUEUR
+    # EGALE : le premier est un confondant mecanique, le second est ce qui reste quand on l'ote.
+    for nom_, fichier_ in (("130", "le_marcheur_derive_sur_la_re_course.json"),
+                           ("119", "le_marcheur_derive_t_il.json")):
+        src = _source(racine, fichier_)
+        if not src.exists():
+            continue
+        d = json.loads(src.read_text())
+        q = d.get("la_rectitude_decroit_elle_avec_la_longueur", {})
+        for cle, nom, dec, signe in (("rectitude_mediane", "rectitude mediane", 4, False),
+                                     ("rectitude_min", "rectitude min", 4, False),
+                                     ("rectitude_max", "rectitude max", 4, False),
+                                     ("net_median_um", "net median", 1, False),
+                                     ("chemin_median_um", "chemin median", 1, False),
+                                     ("rho_de_spearman", "rho rectitude-longueur", 4, True),
+                                     ("p", "p rectitude-longueur", 4, False),
+                                     ("rho_a_longueur_egale", "rho a longueur egale", 4, True),
+                                     ("p_a_longueur_egale", "p a longueur egale", 4, False)):
+            if q.get(cle) is not None:
+                ajoute(f"{nom} de {nom_}", q[cle], dec, src.name, signe=signe)
+        if q.get("plancher_de_troncature") is not None:
+            v_ = q["plancher_de_troncature"]
+            out.append((f"plancher de troncature de {nom_}", [f"**{v_}**", f"{v_}"], src.name))
+        j = d.get("jusquou_le_net_progresse_t_il", {})
+        if j.get("decidable"):
+            for cle, nom, dec in (("net_maximum_median_um", "net maximum median", 1),
+                                  ("net_au_plafond_median_um", "net au plafond median", 1)):
+                if j.get(cle) is not None:
+                    ajoute(f"{nom} de {nom_}", j[cle], dec, src.name)
+            for cle, nom in (("plafond", "plafond"), ("marches", "marches au plafond"),
+                             ("marches_de_la_course", "marches de la course"),
+                             ("k_du_maximum_median", "pas du maximum"),
+                             ("marches_dont_le_net_culmine_avant_le_plafond",
+                              "marches qui culminent avant")):
+                if j.get(cle) is not None:
+                    v_ = j[cle]
+                    out.append((f"{nom} de {nom_}", [f"**{v_}**", f"{v_}"], src.name))
+            for x in j.get("par_marche", []):
+                ajoute(f"net maximum au rayon {x['rayon_mm']} de {nom_}",
+                       x["net_maximum_um"], 1, src.name)
+                ajoute(f"net au plafond au rayon {x['rayon_mm']} de {nom_}",
+                       x["net_au_plafond_um"], 1, src.name)
+            for x in j.get("courbe", []):
+                ajoute(f"net au pas {x['pas']} de {nom_}", x["net_median_um"], 1, src.name)
+                ajoute(f"chemin au pas {x['pas']} de {nom_}", x["chemin_median_um"], 1, src.name)
+
+    # ⭐⭐⭐⭐ LA RE-COURSE DE `130` : le resume d'une traversee complete.
+    rec = _source(racine, "la_re_course.json")
+    if rec.exists():
+        d = json.loads(rec.read_text())
+        r_ = d.get("resume", {})
+        for cle, nom, dec in (("taux_de_confirmation_global", "taux global de 130", 4),
+                              ("part_au_plafond", "part au plafond de 130", 3),
+                              ("longueur_mediane_um", "longueur mediane de 130", 1),
+                              ("longueur_max_um", "longueur max de 130", 1)):
+            if r_.get(cle) is not None:
+                ajoute(nom, r_[cle], dec, rec.name)
+        # ⚠ Le compte median de pas est un NOMBRE a une decimale, pas un compte entier : le
+        # publier comme « **85.0** » le rendrait inappariable dans un document francais.
+        if r_.get("pas_parcourus_median") is not None:
+            ajoute("pas medians de 130", r_["pas_parcourus_median"], 1, rec.name)
+        for cle, nom in (("marches", "marches de 130"), ("plafond", "plafond de 130"),
+                         ("marches_au_plafond", "marches au plafond de 130"),
+                         ("sorties_du_volume", "sorties de 130")):
+            if r_.get(cle) is not None:
+                v_ = r_[cle]
+                out.append((nom, [f"**{v_}**", f"{v_}"], rec.name))
+        t_ = d.get("le_taux_baisse_avec_la_profondeur", {})
+        for cle, nom, dec in (("taux_precoce", "taux precoce de 130", 3),
+                              ("taux_tardif", "taux tardif de 130", 3),
+                              ("p_sous_un_taux_constant", "p de profondeur de 130", 4)):
+            if t_.get(cle) is not None:
+                ajoute(nom, t_[cle], dec, rec.name)
+        y_ = d.get("le_taux_suit_il_le_rayon", {})
+        if y_.get("rho_de_spearman") is not None:
+            ajoute("rho du rayon de 130", y_["rho_de_spearman"], 4, rec.name, signe=True)
+        if y_.get("p") is not None:
+            ajoute("p du rayon de 130", y_["p"], 4, rec.name)
+        for L in d.get("lignes", []):
+            c_ = (L.get("detail") or [{}])[0]
+            if c_.get("longueur_um") is not None:
+                ajoute(f"chemin au rayon {L.get('rayon_mm')} de 130",
+                       c_["longueur_um"], 1, rec.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 119 : LE MARCHEUR NE DERIVE PAS, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) La rectitude reelle ne voyage JAMAIS sans celle du tirage de memes virages. Seule,
     # « 0,928 » se lit comme « la marche est droite », ce qu'une marche qui ne vire pas obtient
