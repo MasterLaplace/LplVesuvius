@@ -331,7 +331,13 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
             marches.append(pas)
         lignes.append({"de": cle[0], "a": cle[1], "rayon_mm": rayons.get(cle),
                        "detail": detail})
-        avancement(i + 1, len(cles), "bandes", t0)
+        # ⚠⚠ L'AVANCEMENT COMPTE LES BANDES MARCHEES, PAS TOUTES, ET C'EST LA REPRISE QUI
+        # L'IMPOSE. `avancement` estime la fin en supposant que ce qui reste coute comme ce qui
+        # est fait ; les bandes reprises n'ont rien coute A CETTE COURSE, donc les compter
+        # divisait le temps ecoule par un nombre trop grand. Apres une reprise de deux bandes sur
+        # huit, il annoncait « ~1 min restantes » pour cinq bandes d'une heure chacune. Un chiffre
+        # faux de deux ordres de grandeur sert moins que pas de chiffre, parce qu'on le croit.
+        avancement(i + 1 - len(deja), len(cles) - len(deja), "bandes marchees", t0)
         # ⚠⚠⚠ LE BROUILLON EST ECRIT A CHAQUE BANDE, PAS A LA FIN. Une course de six heures qui
         # casse a la vingt-septieme bande perdrait tout ; `110` a paye vingt minutes pour
         # apprendre a ecrire avant le verdict, et ecrire une seule fois a la fin ne suffit pas
