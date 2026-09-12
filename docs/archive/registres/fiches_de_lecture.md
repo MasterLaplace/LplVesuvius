@@ -5265,6 +5265,24 @@ mesurés par `wc -l` avant lecture. `docs/69_*.md` non lu, hors périmètre sur 
   qualité du scan.
 - **lu** : intégralement, 168 lignes, le 2026-09-11
 
+### docs/archive/126_le_bruit_netait_pas_porte_par_la_matiere.md
+- **lignes** : 122
+- **nature** : RESULTAT
+  (la pile fabriquée n'était pas un objet : son bruit était tiré à chaque lecture, ce qui fausse
+  toute comparaison entre deux marches sur la même matière.)
+- **résumé** : ⚠⚠⚠ **Le même point rendait 91,25 puis 78,27.** Invisible pour une marche seule,
+  qui ne repasse jamais ; faux dès que **deux** marches lisent le même voxel — donc pour tout
+  `124`. Corrigé par un mélange splitmix64 sur le voxel, écart-type **7,948** pour 8,0 demandé,
+  moyenne +0,174, l'ancien modèle gardé atteignable pour que la sonde puisse échouer.
+  ⭐⭐⭐⭐ **Et la correction rend le résultat PIRE**, à l'inverse de ce que j'avais raisonné : la
+  nappe se déchire **12/12** au lieu de 9/12, saut médian **1,0838**, minimum **0,7769** contre
+  0,116 — **aucun lot ne reste sous la demi-feuille**. La raison est que le bruit cesse d'être lavé
+  par les 68 921 voxels du cube et devient une structure **persistante**. ⭐ Huit lots se
+  regroupent entre 0,78 et 1,10, soit exactement la feuille sur laquelle deux voisines basculent.
+  ⚠ Le lien précoce se renforce sans être établi (+0,5315, p 0,0754). ⚠⚠ Jumelle de `R5-F22` :
+  l'une manque une AMBIGUÏTÉ, l'autre une PERSISTANCE.
+- **lu** : intégralement, 122 lignes, le 2026-09-12
+
 ### docs/archive/125_la_fenetre_locale_semballe.md
 - **lignes** : 123
 - **nature** : RESULTAT

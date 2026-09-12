@@ -81,19 +81,68 @@ class VolumeFabrique:
     """
 
     def __init__(self, pas_um: float, obliquite_deg: float = 0.0, voxel_um: float = 2.4,
-                 bruit: float = 0.0, graine: int = 3, forme=(4000, 4000, 4000)) -> None:
+                 bruit: float = 0.0, graine: int = 3, forme=(4000, 4000, 4000),
+                 bruit_porte_par_la_matiere: bool = True) -> None:
         self.pas_um = float(pas_um)
         self.obliquite_deg = float(obliquite_deg)
         self.voxel_um = float(voxel_um)
         self.bruit = float(bruit)
         self.forme = tuple(int(x) for x in forme)
         self._r = np.random.default_rng(graine)
+        self.graine = int(graine)
         th = np.deg2rad(obliquite_deg)
         # ⚠ La normale de l'empilement fait `obliquite` avec l'axe x, DANS le plan (y, x) : c'est
         # l'obliquite planaire, celle que `100` a mesuree et celle qu'un rayon confondrait avec
         # une distance inter-feuilles trop grande.
         self.normale = np.array([0.0, np.sin(th), np.cos(th)])
         self.lectures = 0
+        self.bruit_porte_par_la_matiere = bool(bruit_porte_par_la_matiere)
+        """⚠⚠⚠ LE BRUIT EST UNE PROPRIETE DU VOXEL, PAS DE LA LECTURE, ET LE DEFAUT LE DIT.
+        La premiere version tirait le bruit A CHAQUE LECTURE : le meme point rendait deux valeurs
+        differentes, donc la pile n'etait pas un objet. Ca ne se voit pas sur une marche isolee —
+        elle ne repasse pas — mais ca fausse tout ce qui compare DEUX marches sur la meme matiere :
+        deux voisines ne lisaient jamais la meme chose, donc elles paraissaient moins couplees
+        qu'elles ne le sont. Un vrai volume relit un voxel a l'identique ; la fixture doit aussi."""
+
+    def _tirage(self, p: np.ndarray) -> np.ndarray:
+        """Le bruit de ces points — porte par le VOXEL quand le defaut est actif.
+
+        ⭐⭐⭐ Un melange entier de (z, y, x, graine) rend une valeur reproductible pour un voxel
+        donne, quel que soit l'ordre ou le nombre de lectures. Deux marches qui passent par le meme
+        voxel y lisent donc la MEME chose, comme dans un vrai volume.
+
+        ⚠ Les coordonnees sont ARRONDIES au voxel : un voxel porte une valeur, pas un continuum.
+        C'est aussi ce que fait le vrai lecteur, qui indexe un tableau.
+
+        ⚠⚠ La loi est normale et elle le reste : deux uniformes tirees du meme melange passent par
+        Box-Muller, donc l'ecart-type demande est celui qu'on obtient — ce que la batterie verifie
+        plutot que de le supposer.
+        """
+        if not self.bruit_porte_par_la_matiere:
+            return self._r.normal(0.0, self.bruit, len(p))
+        k = np.rint(np.asarray(p, dtype=np.float64)).astype(np.int64)
+        # ⚠ Melange de type splitmix64 : trois coordonnees et une graine dans un seul mot, puis
+        # deux avalanches pour que des voxels voisins ne rendent pas des valeurs voisines.
+        # ⚠⚠ Le debordement est VOULU, c'est l'arithmetique modulo 2^64 d'un melangeur ; il est
+        # donc tu explicitement plutot que laisse crier a chaque lecture. Le taire sans le dire
+        # serait cacher un debordement accidentel le jour ou il y en aurait un.
+        with np.errstate(over="ignore"):
+            h = (k[:, 0].astype(np.uint64) * np.uint64(0x9E3779B97F4A7C15)
+                 + k[:, 1].astype(np.uint64) * np.uint64(0xC2B2AE3D27D4EB4F)
+                 + k[:, 2].astype(np.uint64) * np.uint64(0x165667B19E3779F9)
+                 + np.uint64(self.graine) * np.uint64(0x27D4EB2F165667C5))
+
+            def avalanche(x, dec1, mul, dec2):
+                x = (x ^ (x >> np.uint64(dec1))) * np.uint64(mul)
+                return x ^ (x >> np.uint64(dec2))
+
+            u1 = avalanche(h, 30, 0xBF58476D1CE4E5B9, 27)
+            u2 = avalanche(u1 + np.uint64(0x9E3779B97F4A7C15), 31, 0x94D049BB133111EB, 29)
+        # ⚠ Les 53 bits de poids fort donnent un uniforme dans (0, 1] ; le zero est ecarte parce
+        # qu'un log de zero est infini.
+        a = ((u1 >> np.uint64(11)).astype(np.float64) + 0.5) / float(1 << 53)
+        b = ((u2 >> np.uint64(11)).astype(np.float64) + 0.5) / float(1 << 53)
+        return self.bruit * np.sqrt(-2.0 * np.log(a)) * np.cos(2.0 * np.pi * b)
 
     def dans_le_volume(self, p: np.ndarray) -> np.ndarray:
         p = np.asarray(p).reshape(-1, 3)
@@ -106,7 +155,7 @@ class VolumeFabrique:
         proj = (p @ self.normale) * self.voxel_um
         v = 100.0 + 40.0 * np.cos(2 * np.pi * proj / self.pas_um)
         if self.bruit:
-            v = v + self._r.normal(0.0, self.bruit, len(v))
+            v = v + self._tirage(p)
         return v
 
 
@@ -234,7 +283,8 @@ def marcher(lecteur, depart_fin: np.ndarray, direction0: np.ndarray, longueurs: 
             pas_impose_um: float | None = None, direction_imposee=None,
             fils: int = 32, selecteur: str = "calibre",
             barre_du_selecteur: float | None = None,
-            fenetre_locale: bool = False, arret_sur_vide: bool = False) -> list[dict]:
+            fenetre_locale: bool = False, arret_sur_vide: bool = False,
+            rendre_position: bool = False) -> list[dict]:
     """Enchainer les pas, et rendre a CHAQUE pas si la matiere confirme encore.
 
     ⭐⭐⭐ C'EST LE MARCHEUR, ET IL N'A BESOIN D'AUCUN MAILLAGE. `interroge_la_matiere` a False
@@ -402,6 +452,15 @@ def marcher(lecteur, depart_fin: np.ndarray, direction0: np.ndarray, longueurs: 
             # dans son propre registre, et l'experience ne pourrait pas etre auditee.
             "echelle_de_la_fenetre": round(float(echelle), 4),
         })
+        # ⚠⚠⚠ LA POSITION EXACTE, EN OPTION, ET ELLE EXISTE POUR UNE RAISON PRECISE. Les champs
+        # publies sont ARRONDIS — `avance_um` a la decimale, `direction` a 1e-6 — ce qui est juste
+        # pour un registre qu'on relit, et faux pour qui veut PILOTER la marche depuis eux. Une
+        # nappe qui reconstruit la position a partir de l'etape accumule un arrondi que `marcher`
+        # n'a pas, et le systeme est chaotique : un demi-micrometre change le cube lu, donc la
+        # direction, donc tout. Mesure : deux marches pilotees ainsi divergent completement d'une
+        # marche menee d'un trait (11,99 contre 2,11 feuilles de saut sur la meme graine).
+        if rendre_position:
+            etapes[-1]["position_zyx"] = [float(x) for x in (p + d * (avance_um / voxel_fin_um))]
         # ⚠⚠ L'espacement suivi vient de `118` — `avance / feuilles franchies` — et il est REFUSE
         # quand la fraction est elle-meme en butee : un rapport de deux bornes n'est une mesure de
         # rien. Le refus garde l'espacement PRECEDENT plutot que d'en inventer un, donc la fenetre
@@ -496,7 +555,7 @@ class VolumeFabriqueAPasVariable(VolumeFabrique):
             phase = np.log(np.maximum(1.0 + k * u / self.pas_um, 1e-9)) / k
         v = 100.0 + 40.0 * np.cos(2 * np.pi * phase)
         if self.bruit:
-            v = v + self._r.normal(0.0, self.bruit, len(v))
+            v = v + self._tirage(q)
         return v
 
 
@@ -1027,6 +1086,39 @@ def verifier() -> int:
                 barre_interstice, C.VOXEL_FIN_UM, pas_max=PAS_MAX, demi=DEMI)
     v("sur du BRUIT PUR, le marcheur ne confirme rien",
       combien_de_pas_confirmes(b) == 0, f"{combien_de_pas_confirmes(b)} pas")
+
+    # === LE BRUIT EST PORTE PAR LA MATIERE, PAS PAR LA LECTURE ==========================
+    # ⚠⚠⚠ La premiere version tirait le bruit A CHAQUE lecture : le meme point rendait deux
+    # valeurs. Invisible sur une marche isolee, faux des qu'on compare DEUX marches sur la meme
+    # matiere — et `124` comme `126` ne font que ca.
+    pb = VolumeFabrique(C.PAS_UM, obliquite_deg=35.0, bruit=8.0, graine=3)
+    pts = np.array([[2000.0, 2000.0, 2000.0], [2000.0, 2000.0, 2001.0]])
+    v("le meme point relu rend la meme valeur",
+      bool(np.allclose(pb.lire(pts), pb.lire(pts))))
+    v("... et deux graines rendent deux matieres",
+      not np.allclose(pb.lire(pts),
+                      VolumeFabrique(C.PAS_UM, obliquite_deg=35.0, bruit=8.0,
+                                     graine=11).lire(pts)))
+    # ⚠ L'ecart-type demande doit etre celui qu'on obtient : un melangeur qui rendrait une loi
+    # differente changerait le regime de bruit sans que rien ne le dise.
+    gros = VolumeFabrique(C.PAS_UM, bruit=8.0, graine=3, forme=(30000, 30000, 30000))
+    qq = np.stack([np.full(20000, 1500.0), np.full(20000, 1500.0),
+                   np.arange(20000) * 1.0], axis=1)
+    resid = gros.lire(qq) - (100.0 + 40.0 * np.cos(
+        2 * np.pi * ((qq @ gros.normale) * gros.voxel_um) / gros.pas_um))
+    v("l'ecart-type du bruit est celui qui est demande",
+      abs(float(resid.std()) - 8.0) < 0.4, f"{float(resid.std()):.3f}")
+    v("... et sa moyenne est nulle", abs(float(resid.mean())) < 0.4,
+      f"{float(resid.mean()):+.3f}")
+    # ⚠⚠ LA SONDE : l'ancien modele reste atteignable et il est TOUJOURS non reproductible, ce qui
+    # est ce qui rend le controle du dessus capable d'echouer.
+    ancien = VolumeFabrique(C.PAS_UM, obliquite_deg=35.0, bruit=8.0, graine=3,
+                            bruit_porte_par_la_matiere=False)
+    v("sonde : l'ancien modele relit AUTRE CHOSE",
+      not np.allclose(ancien.lire(pts), ancien.lire(pts)))
+    v("une pile sans bruit est inchangee par tout ceci",
+      bool(np.allclose(VolumeFabrique(C.PAS_UM).lire(pts),
+                       VolumeFabrique(C.PAS_UM).lire(pts))))
 
     # === LE VIDE, ET LA REPARATION DE `R4-P23` ===========================================
     # ⚠⚠⚠ Deux moities de RIEN ne peuvent pas etre en desaccord. Sur un cube constant l'angle

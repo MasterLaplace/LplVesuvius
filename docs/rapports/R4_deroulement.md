@@ -575,6 +575,17 @@ démonstration de `122` ne pouvait pas le voir : une pile fabriquée n'a **qu'un
 ne pouvait dériver. → **une fixture à réponse unique valide le mécanisme là où il ne peut pas
 échouer** (`R5-F22`), et `118` demandait un espacement **mesuré**, pas **déduit**.
 
+**`126` · 2026-09-12 · le bruit n'était pas porté par la matière** (`combien_de_pas_la_matiere_porte.py`, analytique)
+⚠⚠⚠ `VolumeFabrique` tirait son bruit **à chaque lecture** : le même point rendait **91,25** puis
+**78,27**. Invisible pour une marche seule, qui ne repasse pas ; faux dès que **deux** marches lisent
+le même voxel — c'est-à-dire exactement ce que `124` mesure. Corrigé : le bruit est une fonction du
+voxel (écart-type **7,948** pour 8,0 demandé). ⭐ Et la correction rend le résultat **pire** : la
+nappe se déchire **12 fois sur 12** au lieu de 9, et le saut minimum passe de **0,116** à **0,7769**
+— aucun lot ne tient plus. La raison est que le bruit cesse d'être **lavé** par les 68 921 voxels du
+cube et devient une structure persistante qui dévie toujours dans le même sens. → **une fixture dont
+le bruit n'est pas porté par l'objet ne peut pas produire les pannes de deux lecteurs sur la même
+matière** (`R5-F23`), jumelle de `R5-F22`.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

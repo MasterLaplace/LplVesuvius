@@ -2645,9 +2645,12 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     nap = _source(racine, "la_nappe_se_dechire_t_elle.json")
     if nap.exists():
         d = json.loads(nap.read_text())
-        for cle, nom, dec in (("saut_median_entre_voisines", "saut median de 124", 3),
-                              ("saut_min", "saut min de 124", 3),
-                              ("saut_max", "saut max de 124", 3),
+        # ⚠ Quatre décimales : le JSON en porte quatre, et en publier trois ferait diverger le
+        # document de son producteur sur la dernière — le genre d'écart qui se lit comme une
+        # coquille alors que c'est une troncature.
+        for cle, nom, dec in (("saut_median_entre_voisines", "saut median de 124", 4),
+                              ("saut_min", "saut min de 124", 4),
+                              ("saut_max", "saut max de 124", 4),
                               ("part_des_lots_qui_se_dechirent", "part des lots de 124", 3)):
             if d.get(cle) is not None:
                 ajoute(nom, d[cle], dec, nap.name)

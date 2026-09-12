@@ -65,7 +65,8 @@ def _outils(demi: int):
                                     for x in C.accord_du_bruit_pur(tirages=200).values())}
 
 
-def phases(pile, depart, etapes, voxel_um: float) -> list[float]:
+def phases(pile, depart, etapes, voxel_um: float,
+           origine_proj_um: float | None = None) -> list[float]:
     """La phase — en feuilles — de chaque atterrissage, comptée depuis le départ.
 
     ⭐⭐⭐ C'EST CE QUE LE VRAI VOLUME NE PEUT PAS RENDRE. La pile est analytique, donc la position
@@ -76,7 +77,14 @@ def phases(pile, depart, etapes, voxel_um: float) -> list[float]:
     marche s'écarte de la normale, donc `parcouru / pas` surestimerait l'avance d'autant.
     """
     p = np.asarray(depart, dtype=np.float64).copy()
-    depart_proj = float(p @ pile.normale) * voxel_um
+    # ⚠⚠ L'ORIGINE PAR DÉFAUT EST LE DÉPART DE LA MARCHE, et c'est juste tant que toutes les
+    # marches d'un lot partent de la même projection — ce qui est le cas de `124`, dont l'écart
+    # latéral est orthogonal à la normale. Dès qu'un lot porte des départs DÉCALÉS le long de la
+    # normale, il faut une origine COMMUNE : sinon un décrochement injecté au départ devient
+    # invisible, chaque marche le comptant depuis son propre zéro. La sonde de `126` a trouvé
+    # exactement ça.
+    depart_proj = (float(p @ pile.normale) * voxel_um if origine_proj_um is None
+                   else float(origine_proj_um))
     out = []
     for e in etapes:
         p = p + np.asarray(e["direction"], dtype=np.float64) * (e["avance_um"] / voxel_um)
@@ -255,6 +263,13 @@ def verifier() -> int:
     # ⚠ Et un pas OBLIQUE avance de moins : c'est ce que le temoin naif subit.
     obl = VolumeFabrique(C.PAS_UM, obliquite_deg=60.0)
     ph2 = phases(obl, dep, faux, C.VOXEL_FIN_UM)
+    # ⚠⚠ Une ORIGINE COMMUNE rend visible un départ décalé, ce que l'origine par défaut cache.
+    dec = np.asarray(dep, dtype=np.float64) + pile.normale * (C.PAS_UM / C.VOXEL_FIN_UM)
+    o0 = float(np.asarray(dep) @ pile.normale) * C.VOXEL_FIN_UM
+    v("un depart decale d'une feuille est INVISIBLE sans origine commune",
+      abs(phases(pile, dec, faux, C.VOXEL_FIN_UM)[0] - 1.0) < 1e-9)
+    v("... et visible avec", abs(phases(pile, dec, faux, C.VOXEL_FIN_UM, o0)[0] - 2.0) < 1e-9,
+      f"{phases(pile, dec, faux, C.VOXEL_FIN_UM, o0)[0]}")
     v("un pas oblique avance de cos(theta) feuille",
       abs(ph2[0] - np.cos(np.deg2rad(60.0))) < 1e-9, f"{ph2[0]:.4f}")
     v("les ecarts sont ramenes dans [-0,5 ; 0,5]",
