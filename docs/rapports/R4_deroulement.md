@@ -158,6 +158,10 @@ fenêtre de l'instrument, pas la matière**.
 
 *`archive/114` — `src/figures/figure_le_cout_qui_connait_la_spire.py`. La réouverture était légitime, la réponse est non : 0,5 % du chemin.*
 
+![La garde refuse deux pas voyants sur cinq : les refus sont mêlés aux orientés, et le point de confirmation tombe indifféremment sur les deux](../images/129_ce_que_la_garde_refuse.png)
+
+*`archive/129` — `src/figures/figure_ce_que_la_garde_refuse.py`. À gauche, une ligne par marche et une case par pas : ambre pour un pas que la garde refuse, bleu pour un pas orienté, gris pour un pas aveugle, point clair pour un pas confirmé. Les aveugles font la queue de la marche — c'est ce qu'« absorbant » veut dire — alors que les refus sont partout. À droite, le taux de chaque marche sur ses pas orientés relié à celui de ses pas refusés : les traits se croisent dans les deux sens, et aucun seuil ne sépare les deux populations.*
+
 ![Le budget de pas n'achète plus de portée : le net culmine au pas 65 puis recule pendant que le chemin continue](../images/130_le_budget_nachete_plus_de_portee.png)
 
 *`archive/130` — `src/figures/figure_jusquou_le_net_progresse.py`. En abscisse le chemin parcouru, en ordonnée le déplacement net, mêmes échelles, et la diagonale est la marche parfaite. Les dix-sept marches de vingt pas la tiennent et s'arrêtent là ; les trois marches de cent douze la quittent, culminent au cercle, et deux redescendent jusqu'au carré rouge pendant que l'abscisse continue. La portée est l'ordonnée, jamais l'abscisse.*

@@ -18,6 +18,160 @@
  },
  "le_taux_distingue_t_il": {
   "marches_avec_les_deux_etats": 19,
+  "detail_par_marche": [
+   {
+    "rayon_mm": 4.07,
+    "pas_orientes": 8,
+    "pas_refuses": 12,
+    "taux_oriente": 0.875,
+    "taux_refuse": 0.6667,
+    "ecart": 0.2083
+   },
+   {
+    "rayon_mm": 6.32,
+    "pas_orientes": 9,
+    "pas_refuses": 11,
+    "taux_oriente": 0.7778,
+    "taux_refuse": 0.7273,
+    "ecart": 0.0505
+   },
+   {
+    "rayon_mm": 8.02,
+    "pas_orientes": 7,
+    "pas_refuses": 13,
+    "taux_oriente": 0.8571,
+    "taux_refuse": 0.9231,
+    "ecart": -0.0659
+   },
+   {
+    "rayon_mm": 9.4,
+    "pas_orientes": 7,
+    "pas_refuses": 13,
+    "taux_oriente": 0.8571,
+    "taux_refuse": 0.8462,
+    "ecart": 0.011
+   },
+   {
+    "rayon_mm": 10.51,
+    "pas_orientes": 13,
+    "pas_refuses": 7,
+    "taux_oriente": 0.3846,
+    "taux_refuse": 0.8571,
+    "ecart": -0.4725
+   },
+   {
+    "rayon_mm": 11.57,
+    "pas_orientes": 9,
+    "pas_refuses": 11,
+    "taux_oriente": 0.8889,
+    "taux_refuse": 0.9091,
+    "ecart": -0.0202
+   },
+   {
+    "rayon_mm": 12.48,
+    "pas_orientes": 13,
+    "pas_refuses": 7,
+    "taux_oriente": 0.6923,
+    "taux_refuse": 0.8571,
+    "ecart": -0.1648
+   },
+   {
+    "rayon_mm": 13.27,
+    "pas_orientes": 7,
+    "pas_refuses": 13,
+    "taux_oriente": 0.8571,
+    "taux_refuse": 0.9231,
+    "ecart": -0.0659
+   },
+   {
+    "rayon_mm": 13.99,
+    "pas_orientes": 9,
+    "pas_refuses": 11,
+    "taux_oriente": 0.8889,
+    "taux_refuse": 0.8182,
+    "ecart": 0.0707
+   },
+   {
+    "rayon_mm": 14.7,
+    "pas_orientes": 18,
+    "pas_refuses": 2,
+    "taux_oriente": 0.7778,
+    "taux_refuse": 1.0,
+    "ecart": -0.2222
+   },
+   {
+    "rayon_mm": 15.46,
+    "pas_orientes": 11,
+    "pas_refuses": 9,
+    "taux_oriente": 0.6364,
+    "taux_refuse": 0.6667,
+    "ecart": -0.0303
+   },
+   {
+    "rayon_mm": 16.22,
+    "pas_orientes": 13,
+    "pas_refuses": 7,
+    "taux_oriente": 0.8462,
+    "taux_refuse": 0.7143,
+    "ecart": 0.1319
+   },
+   {
+    "rayon_mm": 17.51,
+    "pas_orientes": 13,
+    "pas_refuses": 7,
+    "taux_oriente": 0.7692,
+    "taux_refuse": 0.7143,
+    "ecart": 0.0549
+   },
+   {
+    "rayon_mm": 18.06,
+    "pas_orientes": 16,
+    "pas_refuses": 4,
+    "taux_oriente": 0.625,
+    "taux_refuse": 0.0,
+    "ecart": 0.625
+   },
+   {
+    "rayon_mm": 18.62,
+    "pas_orientes": 17,
+    "pas_refuses": 3,
+    "taux_oriente": 0.7647,
+    "taux_refuse": 1.0,
+    "ecart": -0.2353
+   },
+   {
+    "rayon_mm": 19.15,
+    "pas_orientes": 11,
+    "pas_refuses": 6,
+    "taux_oriente": 0.8182,
+    "taux_refuse": 0.6667,
+    "ecart": 0.1515
+   },
+   {
+    "rayon_mm": 20.17,
+    "pas_orientes": 11,
+    "pas_refuses": 1,
+    "taux_oriente": 0.7273,
+    "taux_refuse": 1.0,
+    "ecart": -0.2727
+   },
+   {
+    "rayon_mm": 20.69,
+    "pas_orientes": 14,
+    "pas_refuses": 6,
+    "taux_oriente": 0.7857,
+    "taux_refuse": 0.8333,
+    "ecart": -0.0476
+   },
+   {
+    "rayon_mm": 22.17,
+    "pas_orientes": 12,
+    "pas_refuses": 8,
+    "taux_oriente": 0.75,
+    "taux_refuse": 0.75,
+    "ecart": 0.0
+   }
+  ],
   "taux_des_orientes": 0.7511,
   "taux_des_refuses": 0.7764,
   "pas_orientes": 221,
@@ -89,115 +243,731 @@
  "par_marche": [
   {
    "rayon_mm": 4.07,
-   "etats": "DDOOODDODDDDOODODODD"
+   "etats": "DDOOODDODDDDOODODODD",
+   "confirmes": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    false,
+    true,
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    false
+   ]
   },
   {
    "rayon_mm": 6.32,
-   "etats": "DDODDOODOODDDOODOODD"
+   "etats": "DDODDOODOODDDOODOODD",
+   "confirmes": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    false
+   ]
   },
   {
    "rayon_mm": 8.02,
-   "etats": "DDODDDODDDDDODDOODOO"
+   "etats": "DDODDDODDDDDODDOODOO",
+   "confirmes": [
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
   },
   {
    "rayon_mm": 9.4,
-   "etats": "ODODODDDOODDDODODDDD"
+   "etats": "ODODODDDOODDDODODDDD",
+   "confirmes": [
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
   },
   {
    "rayon_mm": 10.51,
-   "etats": "ODOODODOOOOOOODDOODD"
+   "etats": "ODOODODOOOOOOODDOODD",
+   "confirmes": [
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    false,
+    true,
+    false,
+    true,
+    false,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true
+   ]
   },
   {
    "rayon_mm": 11.57,
-   "etats": "DOODDDOODODDDDOOODDO"
+   "etats": "DOODDDOODODDDDOOODDO",
+   "confirmes": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true
+   ]
   },
   {
    "rayon_mm": 12.48,
-   "etats": "DDOOOOOOOODOOOODDDOD"
+   "etats": "DDOOOOOOOODOOOODDDOD",
+   "confirmes": [
+    false,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
   },
   {
    "rayon_mm": 13.27,
-   "etats": "OODOOODODDODDDDDDDDD"
+   "etats": "OODOOODODDODDDDDDDDD",
+   "confirmes": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true
+   ]
   },
   {
    "rayon_mm": 13.99,
-   "etats": "DDDODDOOODDDOODDDOOO"
+   "etats": "DDDODDOOODDDOODDDOOO",
+   "confirmes": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true
+   ]
   },
   {
    "rayon_mm": 14.7,
-   "etats": "DOOODOOOOOOOOOOOOOOO"
+   "etats": "DOOODOOOOOOOOOOOOOOO",
+   "confirmes": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
   },
   {
    "rayon_mm": 15.46,
-   "etats": "DOOOOODDDODDOOODODOD"
+   "etats": "DOOOOODDDODDOOODODOD",
+   "confirmes": [
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    false,
+    false,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false
+   ]
   },
   {
    "rayon_mm": 16.22,
-   "etats": "DDOOOOOOODDOODODODOO"
+   "etats": "DDOOOOOOODDOODODODOO",
+   "confirmes": [
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    false,
+    true,
+    true
+   ]
   },
   {
    "rayon_mm": 16.93,
-   "etats": "DDDAAAAAAAAAAAAAAAAA"
+   "etats": "DDDAAAAAAAAAAAAAAAAA",
+   "confirmes": [
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
   },
   {
    "rayon_mm": 17.51,
-   "etats": "ODDOODDODODOODOOOOOO"
+   "etats": "ODDOODDODODOODOOOOOO",
+   "confirmes": [
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true
+   ]
   },
   {
    "rayon_mm": 18.06,
-   "etats": "DDOODOOOOOOOODOOOOOO"
+   "etats": "DDOODOOOOOOOODOOOOOO",
+   "confirmes": [
+    false,
+    false,
+    false,
+    true,
+    false,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    false,
+    false,
+    true
+   ]
   },
   {
    "rayon_mm": 18.62,
-   "etats": "OOODDOOOOODOOOOOOOOO"
+   "etats": "OOODDOOOOODOOOOOOOOO",
+   "confirmes": [
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true
+   ]
   },
   {
    "rayon_mm": 19.15,
-   "etats": "ODODOOOOODOODODODAAA"
+   "etats": "ODODOOOOODOODODODAAA",
+   "confirmes": [
+    true,
+    false,
+    true,
+    false,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    false,
+    false,
+    false
+   ]
   },
   {
    "rayon_mm": 19.66,
-   "etats": "DDDDAAAAAAAAAAAAAAAA"
+   "etats": "DDDDAAAAAAAAAAAAAAAA",
+   "confirmes": [
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
   },
   {
    "rayon_mm": 20.17,
-   "etats": "OOOOOODOOOOOAAAAAAAA"
+   "etats": "OOOOOODOOOOOAAAAAAAA",
+   "confirmes": [
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
   },
   {
    "rayon_mm": 20.69,
-   "etats": "OODODODDOOODOOOOODOO"
+   "etats": "OODODODDOOODOOOOODOO",
+   "confirmes": [
+    false,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true
+   ]
   },
   {
    "rayon_mm": 21.26,
-   "etats": "AAAAAAAAAAAAAAAAAAAA"
+   "etats": "AAAAAAAAAAAAAAAAAAAA",
+   "confirmes": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
   },
   {
    "rayon_mm": 21.75,
-   "etats": "AAAAAAAAAAAAAAAAAAAA"
+   "etats": "AAAAAAAAAAAAAAAAAAAA",
+   "confirmes": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
   },
   {
    "rayon_mm": 22.17,
-   "etats": "DODOOODOOOOOODODDDOD"
+   "etats": "DODOOODOOOOOODODDDOD",
+   "confirmes": [
+    true,
+    true,
+    false,
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    false,
+    true,
+    true
+   ]
   },
   {
    "rayon_mm": 22.61,
-   "etats": "OOOAAAAAAAAAAAAAAAAA"
+   "etats": "OOOAAAAAAAAAAAAAAAAA",
+   "confirmes": [
+    false,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
   },
   {
    "rayon_mm": 23.03,
-   "etats": "AAAAAAAAAAAAAAAAAAAA"
+   "etats": "AAAAAAAAAAAAAAAAAAAA",
+   "confirmes": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
   },
   {
    "rayon_mm": 23.31,
-   "etats": "AAAAAAAAAAAAAAAAAAAA"
+   "etats": "AAAAAAAAAAAAAAAAAAAA",
+   "confirmes": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
   },
   {
    "rayon_mm": 23.36,
-   "etats": "DAAAAAAAAAAAAAAAAAAA"
+   "etats": "DAAAAAAAAAAAAAAAAAAA",
+   "confirmes": [
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
   },
   {
    "rayon_mm": 23.8,
-   "etats": "DDAAAAAAAAAAAAAAAAAA"
+   "etats": "DDAAAAAAAAAAAAAAAAAA",
+   "confirmes": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
   }
  ]
 }

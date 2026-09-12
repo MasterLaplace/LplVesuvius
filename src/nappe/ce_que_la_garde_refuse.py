@@ -163,6 +163,11 @@ def le_taux_distingue_t_il(par_marche: list[dict]) -> dict:
     tous_d = [c for m in par_marche for s, c in zip(m["etats"], m["confirmes"]) if s == DESORIENTE]
     p = _wilcoxon(ecarts)
     return {"marches_avec_les_deux_etats": len(ecarts),
+            # ⚠ Le détail par marche était calculé et JETÉ : une liste construite que personne ne
+            # recevait, c'est-à-dire le motif de l'orphelin. Il est rendu, parce que c'est lui qui
+            # porte l'appariement — les moyennes globales ne disent pas que les marches se
+            # croisent, et c'est ce croisement qui fait qu'aucun seuil ne les séparerait.
+            "detail_par_marche": det,
             "taux_des_orientes": round(float(np.mean(tous_o)), 4) if tous_o else None,
             "taux_des_refuses": round(float(np.mean(tous_d)), 4) if tous_d else None,
             "pas_orientes": len(tous_o), "pas_refuses": len(tous_d),
@@ -353,7 +358,12 @@ def mesurer(course_p: Path = COURSE) -> dict:
             "le_desaccord_est_il_absorbant": le_desaccord_est_il_absorbant(par_marche),
             "le_refus_depend_il_du_rang": le_refus_depend_il_du_rang(par_marche),
             "ce_que_couterait_larret": ce_que_couterait_larret(par_marche),
-            "par_marche": [{"rayon_mm": m["rayon_mm"], "etats": "".join(m["etats"])}
+            # ⚠⚠ LES CONFIRMATIONS VOYAGENT AVEC LES ETATS. Sans elles, un lecteur ne peut pas
+            # voir que `confirme` tombe aussi souvent sur un pas refuse que sur un pas oriente —
+            # ce qui est le resultat du fichier. La figure les demandait et les trouvait absentes,
+            # donc elle dessinait une legende qu'elle n'honorait pas.
+            "par_marche": [{"rayon_mm": m["rayon_mm"], "etats": "".join(m["etats"]),
+                            "confirmes": list(m["confirmes"])}
                            for m in par_marche]}
 
 
