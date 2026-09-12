@@ -145,10 +145,61 @@ def le_taux_baisse_avec_la_profondeur(profil: list[dict], tiers: int = 3) -> dic
             "le_taux_monte": bool(tb > ta and p < 0.05)}
 
 
+def reprise_refusee(reprise: dict, attendu: dict) -> str | None:
+    """Le brouillon a-t-il ete marche avec les MEMES parametres ? Sinon, pourquoi.
+
+    ⭐⭐⭐⭐ SEPAREE DU CHOIX DES BANDES PARCE QU'ELLE NE DEPEND DE RIEN. Savoir quelles bandes
+    garder demande la liste des bandes demandees, donc le cache des departs ; savoir si le
+    brouillon est compatible ne demande que le brouillon. Les fondre obligeait le refus a
+    attendre une lecture qu'il allait rendre inutile — et rendait le refus inexercable partout
+    ou ce cache manque, c'est-a-dire exactement la ou on a besoin qu'il marche.
+
+    ⚠ Un champ ABSENT du brouillon n'est pas un desaccord : un brouillon d'une version anterieure
+    n'a pas menti sur ce parametre, il n'en a rien dit.
+    """
+    for champ, valeur in attendu.items():
+        if champ in reprise and reprise[champ] != valeur:
+            return (f"reprise refusee : `{champ}` vaut {reprise[champ]!r} dans le brouillon "
+                    f"et {valeur!r} ici")
+    return None
+
+
+def bandes_a_reprendre(reprise: dict, attendu: dict, cles: set) -> dict:
+    """Quelles bandes d'un brouillon peuvent etre gardees, ou POURQUOI aucune.
+
+    ⭐⭐⭐⭐ ELLE EST PURE POUR POUVOIR ETRE SONDEE. La reprise vit dans `mesurer`, qui a besoin
+    du volume distant : une regle de reprise qui ne serait exercable qu'en lisant le reseau ne
+    serait exercee par personne, et c'est exactement le genre de code qui se casse le jour ou on
+    en a besoin — c'est-a-dire apres une panne.
+
+    ⚠⚠ LE REFUS EST TOTAL ET IL NOMME LE CHAMP. Un brouillon marche avec d'autres parametres
+    n'est pas une reprise, c'est une deuxieme course : melanger dans un seul fichier deux bandes a
+    `pas_max` 20 et six a 112 rendrait un JSON dont aucune ligne ne dit laquelle est laquelle.
+    Garder les bandes compatibles et jeter les autres serait pire encore, parce que le fichier
+    aurait alors l'air complet.
+
+    ⚠ Une bande du brouillon qui n'est PAS demandee cette fois-ci est simplement ignoree : le
+    brouillon peut venir d'une course plus large, et la reprise ne doit pas la faire grandir.
+    """
+    refus = reprise_refusee(reprise, attendu)
+    if refus is not None:
+        return {"message": refus}
+    gardees, vues = [], []
+    for ligne in reprise.get("lignes", []):
+        cle = (int(ligne["de"]), int(ligne["a"]))
+        if cle not in cles or cle in vues:
+            continue
+        vues.append(cle)
+        gardees.append(ligne)
+    return {"lignes": gardees, "cles": vues,
+            "lectures": int(reprise.get("lectures_de_profil", 0))}
+
+
 def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = DEMI,
             fils: int = 32, selecteur: str = SELECTEUR,
             brouillon: Path | None = None,
-            fenetre_locale: bool = False, arret_sur_vide: bool = False) -> dict:
+            fenetre_locale: bool = False, arret_sur_vide: bool = False,
+            reprise: dict | None = None) -> dict:
     """La marche profonde, depuis LES MEMES departs que `107`, plafond leve.
 
     ⭐⭐⭐ LES DEPARTS SONT CEUX DE `107`, PAS DE NOUVEAUX : la graine et les cellules sont les
@@ -160,6 +211,20 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
 
     ⚠ `brouillon` ecrit les lectures AVANT le verdict — la garde que `110` a payee vingt minutes
     pour apprendre.
+
+    ⭐⭐⭐⭐ `reprise` REPREND UN BROUILLON AU LIEU DE TOUT REMARCHER, et ce n'est pas une
+    commodite : le 12 septembre une mise a jour de l'hote a redemarre la machine au milieu d'une
+    course de dix heures, et deux bandes ecrites n'ont servi qu'a etre relues. Le brouillon
+    existait deja pour survivre a une casse ; il lui manquait de pouvoir etre REPRIS.
+
+    ⚠⚠ UNE REPRISE DONT LES PARAMETRES DIFFERENT EST REFUSEE, jamais avertie. Melanger dans un
+    seul fichier deux bandes marchees a `pas_max` 20 et six a 112 rendrait un JSON dont aucune
+    ligne ne dit laquelle est laquelle, et toute lecture ulterieure serait fausse sans avoir
+    l'air de l'etre. Le refus NOMME le champ qui differe.
+
+    ⚠ Ce qui autorise la reprise a rendre le meme fichier qu'une course d'un seul tenant est que
+    la marche est DETERMINISTE : le volume est en lecture seule et les barres viennent de nuls a
+    graine fixe. Une bande reprise est donc exactement celle qu'on aurait remarchee.
     """
     import combien_dinterstices_traverses as C  # noqa: PLC0415
     import la_normale_nest_pas_le_rayon as N  # noqa: PLC0415
@@ -171,10 +236,26 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
     from le_compte_suit_il_le_pas import departs_de_107  # noqa: PLC0415
     from voxel_distant import BUCKET, VolumeZarr  # noqa: PLC0415
 
+    # ⚠⚠ LE REFUS DE REPRISE EST TRANCHE EN PREMIER, avant le cache des departs et avant la
+    # connexion au volume : il ne depend que du brouillon. Le mettre plus bas le rendait
+    # inexercable sans reseau ni cache, c'est-a-dire inexerce.
+    attendu = {"fragment": C.OBJET, "volume_fin": C.VOLUME_FIN, "pas_max": int(pas_max),
+               "selecteur": selecteur, "demi_cube_voxels": int(demi),
+               "fenetre_locale": bool(fenetre_locale),
+               "arret_sur_vide": bool(arret_sur_vide)}
+    if reprise is not None:
+        refus = reprise_refusee(reprise, attendu)
+        if refus is not None:
+            return {"message": refus}
+
     brut107 = json.loads(CHEMIN_DE_107.read_text())
     dep = departs_de_107(bandes_max)
     if "message" in dep:
         return dep
+
+    garde = (None if reprise is None
+             else bandes_a_reprendre(reprise, attendu, set(dep["par_bande"])))
+
     try:
         vol = VolumeZarr(f"{BUCKET}/{C.ZARR_FIN}")
     except RuntimeError as e:
@@ -191,7 +272,20 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
     t0 = time.time()
     lignes, marches, lectures = [], [], 0
     cles = [k for k in dep["par_bande"]]
+    deja: set[tuple[int, int]] = set()
+    lectures_reprises = 0
+    if garde is not None:
+        lignes = list(garde["lignes"])
+        deja = set(garde["cles"])
+        lectures_reprises = garde["lectures"]
+        for ligne in lignes:
+            for cel in ligne.get("detail", []):
+                marches.append([e for e in cel.get("etapes", []) if "avance_um" in e])
+        print(f"reprise : {len(deja)} bande(s) gardee(s) du brouillon, "
+              f"{len(cles) - len(deja)} a marcher")
     for i, cle in enumerate(cles):
+        if cle in deja:
+            continue
         d = dep["par_bande"][cle]
         detail = []
         for j in range(len(d["departs"])):
@@ -253,8 +347,11 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
                  "barre_du_balayage": round(float(barre), 3),
                  "barre_de_linterstice": round(float(barre_interstice), 4),
                  "barre_daccord_des_moities_deg": barre_moities,
-                 "lectures_de_profil": lectures,
+                 "lectures_de_profil": lectures + lectures_reprises,
+                 # ⚠ `secondes` ne compte QUE cette course : additionner le temps d'une course
+                 # interrompue donnerait une duree que personne n'a passee d'un seul tenant.
                  "secondes": round(time.time() - t0, 1),
+                 "bandes_reprises": len(deja),
                  "bandes": len(lignes), "lignes": lignes, "course_incomplete": True},
                 indent=2, ensure_ascii=False))
 
@@ -264,7 +361,8 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
           "barre_du_balayage": round(float(barre), 3),
           "barre_de_linterstice": round(float(barre_interstice), 4),
           "barre_daccord_des_moities_deg": barre_moities,
-          "lectures_de_profil": lectures, "secondes": round(time.time() - t0, 1),
+          "lectures_de_profil": lectures + lectures_reprises,
+          "secondes": round(time.time() - t0, 1), "bandes_reprises": len(deja),
           "bandes": len(lignes), "lignes": lignes,
           "ce_qui_a_arrete_les_marches_de_107": ce_qui_a_arrete_les_marches(brut107)}
     if brouillon is not None:
@@ -535,6 +633,59 @@ def verifier() -> int:
     v("... et une profondeur insuffisante aussi",
       le_taux_baisse_avec_la_profondeur(plat[:4])["decidable"] is False)
 
+    # === LA REPRISE ===========================================================================
+    # ⭐⭐⭐⭐ ELLE EXISTE PARCE QU'UNE PANNE L'A EXIGEE : le 12 septembre une mise a jour de
+    # l'hote a redemarre la machine au milieu d'une course de dix heures. Le brouillon survivait
+    # deja ; ce qui manquait etait de pouvoir le REPRENDRE. La regle est pure, donc elle est
+    # exercee ici sans toucher au reseau.
+    attendu_ = {"fragment": "PHercParis4", "volume_fin": "v", "pas_max": 112,
+                "selecteur": "deux_roles", "demi_cube_voxels": 20,
+                "fenetre_locale": False, "arret_sur_vide": True}
+    brouillon_ = {**attendu_, "lectures_de_profil": 2,
+                  "lignes": [{"de": 10, "a": 27, "rayon_mm": 4.07, "detail": []},
+                             {"de": 28, "a": 37, "rayon_mm": 6.32, "detail": []}]}
+    cles_ = {(10, 27), (28, 37), (38, 45)}
+    g_ = bandes_a_reprendre(brouillon_, attendu_, cles_)
+    v("la reprise garde les bandes deja marchees", g_.get("cles") == [(10, 27), (28, 37)],
+      f"{g_.get('cles')}")
+    v("... et elle rend leurs lignes, pas seulement leurs cles", len(g_["lignes"]) == 2)
+    v("... et elle reporte les lectures deja payees", g_["lectures"] == 2)
+    # ⚠ Une bande du brouillon qui n'est plus demandee ne doit pas faire grandir la course.
+    g2_ = bandes_a_reprendre(brouillon_, attendu_, {(10, 27)})
+    v("une bande non demandee est ignoree", g2_["cles"] == [(10, 27)], f"{g2_['cles']}")
+    # ⭐⭐⭐⭐ LE REFUS, ET IL DOIT NOMMER LE CHAMP : sans lui, deux bandes marchees a vingt pas
+    # et six a cent douze finiraient dans un seul fichier dont aucune ligne ne dit laquelle est
+    # laquelle.
+    for champ_, mauvais_ in (("pas_max", 20), ("selecteur", "autre"), ("demi_cube_voxels", 12),
+                             ("fenetre_locale", True), ("arret_sur_vide", False),
+                             ("fragment", "PHerc0500P2")):
+        r_ = bandes_a_reprendre({**brouillon_, champ_: mauvais_}, attendu_, cles_)
+        v(f"⭐ une reprise dont `{champ_}` differe est REFUSEE", "message" in r_)
+        v(f"... et le refus nomme `{champ_}`", champ_ in r_.get("message", ""),
+          r_.get("message", ""))
+    # ⚠ Sonde : un brouillon SANS le champ ne doit pas etre refuse pour autant — un brouillon
+    # d'une version anterieure n'a pas menti, il n'a rien dit.
+    sans_ = {k: v_ for k, v_ in brouillon_.items() if k != "arret_sur_vide"}
+    v("un brouillon qui ne DIT PAS un parametre n'est pas refuse",
+      "message" not in bandes_a_reprendre(sans_, attendu_, cles_))
+    # ⚠ Sonde : deux fois la meme bande dans un brouillon ne doit pas la garder deux fois.
+    double_ = {**brouillon_, "lignes": brouillon_["lignes"] + [brouillon_["lignes"][0]]}
+    v("une bande ecrite deux fois n'est gardee qu'une",
+      len(bandes_a_reprendre(double_, attendu_, cles_)["lignes"]) == 2)
+
+    # ⭐⭐⭐⭐ ET LE REFUS EST EXERCE DE BOUT EN BOUT, SANS RESEAU : il est tranche avant la
+    # connexion au volume, donc `mesurer` rend son message sans rien lire. Sans ce controle, la
+    # seule facon de savoir si le refus marche serait de lancer une course de dix heures.
+    faux_brouillon = {"fragment": "PAS_CE_FRAGMENT", "lignes": [],
+                      "lectures_de_profil": 0}
+    v("le refus ne depend QUE du brouillon",
+      reprise_refusee(faux_brouillon, {"fragment": "PHercParis4"}) is not None
+      and reprise_refusee({"lignes": []}, {"fragment": "PHercParis4"}) is None)
+    hors_ligne = mesurer(pas_max=112, bandes_max=1, reprise=faux_brouillon)
+    v("⭐ un refus de reprise est rendu SANS toucher au volume",
+      "message" in hors_ligne and "fragment" in hors_ligne["message"],
+      f"{hors_ligne.get('message')}")
+
     # === L'AGREGATION =========================================================================
     # ⚠⚠ ELLE DOIT TOURNER SUR UN BROUILLON SEUL, sinon `--reagreger` ne servirait a rien.
     brouillon = {"pas_max": 20, "lignes": [{"de": 1, "a": 2, "rayon_mm": 4.0, "detail": [
@@ -615,6 +766,8 @@ def main() -> int:
     p.add_argument("--arret-sur-vide", action="store_true",
                    help="la marche s'arrete au premier pas aveugle (`116`)")
     p.add_argument("--reagreger", action="store_true")
+    p.add_argument("--reprendre", action="store_true",
+                   help="reprend les bandes deja ecrites dans le --json au lieu de les remarcher")
     p.add_argument("--json", type=Path, default=None)
     a = p.parse_args()
     if a.verifier:
@@ -628,10 +781,23 @@ def main() -> int:
         a.json.write_text(json.dumps(r, indent=2, ensure_ascii=False))
         print(f"\nréagrégé : {a.json}")
         return 0
+    reprise = None
+    if a.reprendre:
+        if a.json is None or not a.json.is_file():
+            print("⚠ --reprendre demande un --json existant")
+            return 1
+        reprise = json.loads(a.json.read_text())
     r = mesurer(pas_max=a.pas, bandes_max=a.bandes, demi=a.demi, fils=a.fils,
-                selecteur=a.selecteur, brouillon=a.json,
+                selecteur=a.selecteur, brouillon=a.json, reprise=reprise,
                 fenetre_locale=a.fenetre_locale, arret_sur_vide=a.arret_sur_vide)
     afficher(r)
+    # ⚠⚠⚠ UN REFUS N'ECRIT RIEN, ET C'EST UNE SONDE QUI L'A TROUVE. Ma premiere version
+    # affichait « reprise refusee » puis ecrasait le brouillon avec le message de refus : la
+    # fonction ecrite pour proteger le fichier le DETRUISAIT, et il n'en reste alors aucune trace
+    # puisque le seul exemplaire etait celui-la. Tout retour qui porte `message` est un echec,
+    # donc il ne touche pas au disque et il sort en code non nul.
+    if "message" in r:
+        return 1
     if a.json:
         a.json.parent.mkdir(parents=True, exist_ok=True)
         a.json.write_text(json.dumps(r, indent=2, ensure_ascii=False))
