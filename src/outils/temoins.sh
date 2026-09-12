@@ -1400,6 +1400,7 @@ run "recentrer ou elargir"    uv run python "$ROOT/src/nappe/recentrer_ou_elargi
 run "reste-t-il verrouille"   uv run python "$ROOT/src/nappe/le_marcheur_reste_t_il_verrouille.py" --verifier
 run "la nappe se dechire"     uv run python "$ROOT/src/nappe/la_nappe_se_dechire_t_elle.py" --verifier
 run "la fenetre s emballe"    uv run python "$ROOT/src/nappe/la_fenetre_locale_semballe.py" --verifier
+run "un lien lateral"         uv run python "$ROOT/src/nappe/un_lien_lateral_entre_marches.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

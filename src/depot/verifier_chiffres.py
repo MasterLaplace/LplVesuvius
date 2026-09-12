@@ -2636,6 +2636,42 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             v_ = d["plafond"]
             out.append(("plafond de 125", [f"**{v_}**", f"{v_}"], sem.name))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 127 : LE LIEN LATERAL, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) Le compte de dechirures evitees ne voyage JAMAIS sans l'ecart a la verite du temoin.
+    # « 6 sur 6 a 0 sur 6, sans cout » se lit comme une solution ; le fait est que la MEME force
+    # fausse un decrochement reel de 2,60 feuilles la ou l'absence de lien se trompait de 0,15.
+    # (2) Et les chiffres de lambda = 0,25 ne voyagent jamais sans ceux de 0,50 : une seule force
+    # se lit comme un bouton a regler, alors que la mesure est qu'elle N'EST PAS MONOTONE.
+    lien = _source(racine, "un_lien_lateral_entre_marches.json")
+    if lien.exists():
+        d = json.loads(lien.read_text())
+        n = d.get("le_lien_tient_il_la_nappe", {})
+        for x in n.get("par_lien", []):
+            lam = f"lien {x['lien']:.2f} de 127"
+            for cle, nom, dec in (("saut_median", "saut median", 4),
+                                  ("saut_max", "saut max", 4),
+                                  ("taux_median", "taux median", 4),
+                                  ("cout_en_taux", "cout en taux", 4)):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} du {lam}", x[cle], dec, lien.name,
+                           signe=(cle == "cout_en_taux"))
+            for cle, nom in (("se_dechirent", "lots qui se dechirent"),
+                             ("lots", "lots"), ("dechirures_evitees", "dechirures evitees")):
+                if x.get(cle) is not None:
+                    v_ = x[cle]
+                    out.append((f"{nom} du {lam}", [f"**{v_}**", f"{v_}"], lien.name))
+        for t in d.get("temoin_par_lien", []):
+            lam = f"temoin {t['avec_lien']['lien']:.2f} de 127"
+            for cle, nom, dec in (("saut_injecte_en_feuilles", "decrochement injecte", 3),
+                                  ("saut_vrai_en_feuilles", "verite", 4),
+                                  ("ecart_a_la_verite_sans_lien", "ecart sans lien", 4),
+                                  ("ecart_a_la_verite_avec_lien", "ecart avec lien", 4)):
+                if t.get(cle) is not None:
+                    ajoute(f"{nom} du {lam}", t[cle], dec, lien.name)
+            for nom, cle in (("saut sans lien", "sans_lien"), ("saut avec lien", "avec_lien")):
+                if t.get(cle, {}).get("saut") is not None:
+                    ajoute(f"{nom} du {lam}", t[cle]["saut"], 4, lien.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 124 : LA NAPPE SE DECHIRE, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) Le saut median ne voyage JAMAIS sans le compte de lots qui se dechirent : « 1,02 feuille »
     # est une mediane d'une distribution a deux bosses, donc elle ne decrit aucune des deux ; c'est

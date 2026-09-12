@@ -4,7 +4,7 @@
 
 # Les faits, et ce qu'ils valent aujourd'hui
 
-**157 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **144** établi, **6** borné, **4** réfuté, **3** rétracté, **0** ouvert.
+**158 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **145** établi, **6** borné, **4** réfuté, **3** rétracté, **0** ouvert.
 
 ## R1 — 20 faits
 
@@ -81,7 +81,7 @@
 | `R3-F19` | **la chaîne radiale converge six tours et casse au septième** ; ce qui décide est la portée, pas le pas | officiel + 6 spires `gen_neighbor` : 4/7 convergent, 7ᵉ +1,475 ; pas 0,5 → 6/7 ; optimum en U, bassin 0,25–0,5 ; portée = `neighbor_exit_count` × pas ; repousse libre : casse au 3ᵉ tour | établi | `43` §1–6 · `spire_suivante.sh`, `table_chaine.py` |
 | `R3-F20` | **la chaîne avance d'une nappe à la fois, et s'érode** | 113 µm entre nappes (100–138) ; érosion **15,6 %/tour** sur l'aire utile (58 → 23 % valides) ; ~10 % d'un tour par nappe → une colonne, pas une bande ; rayon refusé (résidu 0,5 mm pour 0,113 d'écart) | établi ; « 4,0 % » rétracté | `44` §1–7 · `geometrie_chaine.py` |
 
-## R4 — 54 faits
+## R4 — 55 faits
 
 | id | fait | valeur | statut | source · producteur |
 |---|---|---|---|---|
@@ -139,6 +139,7 @@
 | `R4-F52` | **la nappe se déchire trois fois sur quatre** : deux marches voisines finissent sur deux feuilles différentes, là où chacune prise seule ne dérive pas | 8 marches parties de la même feuille, écartées de 96 µm, pile à 35° bruitée, 112 pas : le saut entre voisines vaut **1,0838 feuille** en médiane sur 12 graines, **12 lots sur 12** dépassent la demi-feuille, étendue **0,7769 à 11,9866** ; huit lots se regroupent entre 0,78 et 1,10 — soit exactement la feuille sur laquelle deux voisines basculent | établi ; mesuré d'abord sur une fixture dont le bruit n'était pas porté par la matière (9/12, minimum 0,116) ; corrigé par `126`. ANALYTIQUE : une pile plane n'a ni déchirure ni fusion de feuilles | `124`, `126`, `119`, `123` · `nappe/la_nappe_se_dechire_t_elle.py` |
 | `R4-F53` | **la déchirure ne s'annonce pas** : les seize premiers pas ne disent pas ce que les cent douze donneront | rho **+0,5315** entre la dispersion au pas 16 et le saut final, p **0,0754** sur 12 lots ; à comparer à la cécité, dont `115` établit que la signature est disponible AVANT le pas | borné ; n = 12 : cesse de rejeter l'absence de lien, ne la prouve pas ; la valeur de `124` (+0,4545, p 0,1377) était mesurée sur la fixture défectueuse | `124`, `126`, `115` · `nappe/la_nappe_se_dechire_t_elle.py` |
 | `R4-F54` | **la fenêtre locale s'emballe sur la vraie matière et FAIT MONTER la butée** — la boucle est circulaire | l'échelle part de **1,000** et atteint **32,6645** (amplitude **×549,0**), avec un pas de **7644,4 µm** soit **44,2 feuilles** ; part en butée **0,2202** contre **0,1649** à fenêtre fixe et taux **0,7156** contre **0,7618** ; rho **+0,8916** (p 7,6·10⁻³⁶) entre l'échelle d'un pas et l'espacement qu'il déduit, garanti par construction | établi ; l'espacement suivi est `avance / feuilles`, or `avance` est choisi dans la fenêtre déjà mise à l'échelle : aucune force de rappel, un point fixe à toute échelle | `125`, `122` · `nappe/la_fenetre_locale_semballe.py` |
+| `R4-F55` | **le lien latéral supprime la déchirure de bruit et FAUSSE le décrochement réel** : le mécanisme qui recoud ne distingue pas les deux, parce que les deux se présentent à lui comme un écart entre voisines | λ = 0,25 fait passer les déchirures de **6 lots sur 6 à 0 sur 6**, le saut maximal de **11,9866 à 0,2971 feuille**, à taux inchangé (coût **−0,0006**) ; mais sur un décrochement injecté de **1,1561 feuille** l'écart à la vérité passe de **0,1503** sans lien à **2,5976** (×17,3), et à **13,9878** pour λ = 0,50 (×93) ; le lien **amplifie** le décrochement au lieu de le masquer, et la force n'est pas monotone — λ = 0,50 laisse 5 lots sur 6 se déchirer | établi ; 6 graines portant le minimum ET le maximum des douze de `126`, test apparié graine par graine, 112 pas ; ANALYTIQUE : le décrochement du témoin est injecté, donc le fait établit que le lien fausse un décrochement, pas de combien il fausserait ceux du rouleau | `127`, `124`, `126`, `91` · `nappe/un_lien_lateral_entre_marches.py` |
 
 ## R5 — 23 faits
 

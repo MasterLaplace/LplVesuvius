@@ -586,6 +586,22 @@ cube et devient une structure persistante qui dévie toujours dans le même sens
 le bruit n'est pas porté par l'objet ne peut pas produire les pannes de deux lecteurs sur la même
 matière** (`R5-F23`), jumelle de `R5-F22`.
 
+**`127` · 2026-09-12 · le lien latéral entre marches** (`un_lien_lateral_entre_marches.py`,
+analytique)
+`R4-P25` demandait ce qui tient deux marches voisines ensemble. Chaque marche est ramenée, après
+chaque pas, d'une fraction **λ** vers la moyenne de ses voisines, le long de son propre axe
+d'avance. ⭐⭐ À **λ = 0,25** les déchirures passent de **6 lots sur 6 à 0 sur 6**, le saut maximal
+de **11,9866 à 0,2971 feuille**, et le taux ne bouge pas (coût **−0,0006**). ⚠⚠⚠ Mais sur une pile
+portant un décrochement **réel** de **1,1561 feuille**, l'écart à la vérité passe de **0,1503**
+sans lien à **2,5976** — et à **13,9878** pour λ = 0,50. ⚠⚠ Il ne le **masque** pas, il
+l'**amplifie** : tirer une marche vers une voisine assise une feuille plus loin l'arrache à la
+sienne. ⚠ Et la force n'est **pas monotone** — λ = 0,50 laisse **5 lots sur 6** se déchirer, donc
+λ ne se règle pas par un balayage, et le chercher sur le corpus qui juge serait régler un seuil sur
+ce qui passe. → **le lien ne distingue pas une déchirure de bruit d'une discontinuité réelle : il
+répare la première en cassant la seconde** (`R4-F55`). Ce qui manque est un lien qui sait **quand
+se relâcher**, et ce qu'il faudrait pour décider est exactement ce que `R4-F53` dit indisponible —
+la déchirure ne s'annonce pas. `R4-P25` se referme sur elle-même.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -1,0 +1,288 @@
+{
+ "marches_par_lot": 8,
+ "liens": [
+  0.0,
+  0.25,
+  0.5
+ ],
+ "le_lien_tient_il_la_nappe": {
+  "obliquite_deg": 35.0,
+  "bruit": 8.0,
+  "graines": [
+   3,
+   11,
+   29,
+   53,
+   97,
+   131
+  ],
+  "pas": 112,
+  "par_lien": [
+   {
+    "lien": 0.0,
+    "lots": 6,
+    "se_dechirent": 6,
+    "saut_median": 1.0446,
+    "saut_max": 11.9866,
+    "taux_median": 0.9994,
+    "pas_totaux_median": 896.0,
+    "detail": [
+     {
+      "lien": 0.0,
+      "graine": 3,
+      "pas_totaux": 896,
+      "taux": 1.0,
+      "saut_maximal_entre_voisines": 11.9866,
+      "dispersion_max": 3.9855,
+      "pas_communs": 112,
+      "se_dechire": true
+     },
+     {
+      "lien": 0.0,
+      "graine": 11,
+      "pas_totaux": 896,
+      "taux": 1.0,
+      "saut_maximal_entre_voisines": 1.0783,
+      "dispersion_max": 0.3834,
+      "pas_communs": 112,
+      "se_dechire": true
+     },
+     {
+      "lien": 0.0,
+      "graine": 29,
+      "pas_totaux": 896,
+      "taux": 0.9989,
+      "saut_maximal_entre_voisines": 1.0893,
+      "dispersion_max": 0.4539,
+      "pas_communs": 112,
+      "se_dechire": true
+     },
+     {
+      "lien": 0.0,
+      "graine": 53,
+      "pas_totaux": 896,
+      "taux": 1.0,
+      "saut_maximal_entre_voisines": 0.7769,
+      "dispersion_max": 0.2414,
+      "pas_communs": 112,
+      "se_dechire": true
+     },
+     {
+      "lien": 0.0,
+      "graine": 97,
+      "pas_totaux": 896,
+      "taux": 0.9989,
+      "saut_maximal_entre_voisines": 1.0109,
+      "dispersion_max": 0.3877,
+      "pas_communs": 112,
+      "se_dechire": true
+     },
+     {
+      "lien": 0.0,
+      "graine": 131,
+      "pas_totaux": 896,
+      "taux": 0.9989,
+      "saut_maximal_entre_voisines": 0.9503,
+      "dispersion_max": 0.3812,
+      "pas_communs": 112,
+      "se_dechire": true
+     }
+    ]
+   },
+   {
+    "lien": 0.25,
+    "lots": 6,
+    "se_dechirent": 0,
+    "saut_median": 0.2153,
+    "saut_max": 0.2971,
+    "taux_median": 1.0,
+    "pas_totaux_median": 896.0,
+    "detail": [
+     {
+      "lien": 0.25,
+      "graine": 3,
+      "pas_totaux": 896,
+      "taux": 1.0,
+      "saut_maximal_entre_voisines": 0.1827,
+      "dispersion_max": 0.1166,
+      "pas_communs": 112,
+      "se_dechire": false
+     },
+     {
+      "lien": 0.25,
+      "graine": 11,
+      "pas_totaux": 896,
+      "taux": 1.0,
+      "saut_maximal_entre_voisines": 0.1818,
+      "dispersion_max": 0.1079,
+      "pas_communs": 112,
+      "se_dechire": false
+     },
+     {
+      "lien": 0.25,
+      "graine": 29,
+      "pas_totaux": 896,
+      "taux": 1.0,
+      "saut_maximal_entre_voisines": 0.2971,
+      "dispersion_max": 0.1083,
+      "pas_communs": 112,
+      "se_dechire": false
+     },
+     {
+      "lien": 0.25,
+      "graine": 53,
+      "pas_totaux": 896,
+      "taux": 1.0,
+      "saut_maximal_entre_voisines": 0.248,
+      "dispersion_max": 0.1068,
+      "pas_communs": 112,
+      "se_dechire": false
+     },
+     {
+      "lien": 0.25,
+      "graine": 97,
+      "pas_totaux": 896,
+      "taux": 1.0,
+      "saut_maximal_entre_voisines": 0.1191,
+      "dispersion_max": 0.1062,
+      "pas_communs": 112,
+      "se_dechire": false
+     },
+     {
+      "lien": 0.25,
+      "graine": 131,
+      "pas_totaux": 896,
+      "taux": 1.0,
+      "saut_maximal_entre_voisines": 0.2594,
+      "dispersion_max": 0.1223,
+      "pas_communs": 112,
+      "se_dechire": false
+     }
+    ],
+    "dechirures_evitees": 6,
+    "cout_en_taux": -0.0006,
+    "la_nappe_tient": true,
+    "temoin_rendu": true,
+    "fausse_un_decrochement_reel": true,
+    "le_lien_est_utilisable": false
+   },
+   {
+    "lien": 0.5,
+    "lots": 6,
+    "se_dechirent": 5,
+    "saut_median": 0.741,
+    "saut_max": 4.7743,
+    "taux_median": 1.0,
+    "pas_totaux_median": 896.0,
+    "detail": [
+     {
+      "lien": 0.5,
+      "graine": 3,
+      "pas_totaux": 896,
+      "taux": 1.0,
+      "saut_maximal_entre_voisines": 0.5733,
+      "dispersion_max": 0.2995,
+      "pas_communs": 112,
+      "se_dechire": true
+     },
+     {
+      "lien": 0.5,
+      "graine": 11,
+      "pas_totaux": 896,
+      "taux": 1.0,
+      "saut_maximal_entre_voisines": 0.6999,
+      "dispersion_max": 0.382,
+      "pas_communs": 112,
+      "se_dechire": true
+     },
+     {
+      "lien": 0.5,
+      "graine": 29,
+      "pas_totaux": 896,
+      "taux": 1.0,
+      "saut_maximal_entre_voisines": 0.4892,
+      "dispersion_max": 0.1982,
+      "pas_communs": 112,
+      "se_dechire": false
+     },
+     {
+      "lien": 0.5,
+      "graine": 53,
+      "pas_totaux": 896,
+      "taux": 0.9978,
+      "saut_maximal_entre_voisines": 4.7743,
+      "dispersion_max": 2.0156,
+      "pas_communs": 112,
+      "se_dechire": true
+     },
+     {
+      "lien": 0.5,
+      "graine": 97,
+      "pas_totaux": 896,
+      "taux": 1.0,
+      "saut_maximal_entre_voisines": 0.7821,
+      "dispersion_max": 0.2583,
+      "pas_communs": 112,
+      "se_dechire": true
+     },
+     {
+      "lien": 0.5,
+      "graine": 131,
+      "pas_totaux": 896,
+      "taux": 1.0,
+      "saut_maximal_entre_voisines": 0.84,
+      "dispersion_max": 0.3908,
+      "pas_communs": 112,
+      "se_dechire": true
+     }
+    ],
+    "dechirures_evitees": 1,
+    "cout_en_taux": -0.0006,
+    "la_nappe_tient": true,
+    "temoin_rendu": true,
+    "fausse_un_decrochement_reel": true,
+    "le_lien_est_utilisable": false
+   }
+  ]
+ },
+ "temoin_par_lien": [
+  {
+   "saut_injecte_um": 200.0,
+   "saut_injecte_en_feuilles": 1.156,
+   "sans_lien": {
+    "lien": 0.0,
+    "saut": 1.0058,
+    "pas_communs": 40
+   },
+   "avec_lien": {
+    "lien": 0.25,
+    "saut": 3.7537,
+    "pas_communs": 40
+   },
+   "saut_vrai_en_feuilles": 1.1561,
+   "ecart_a_la_verite_sans_lien": 0.1503,
+   "ecart_a_la_verite_avec_lien": 2.5976,
+   "le_lien_fausse_le_decrochement": true,
+   "le_lien_lamplifie": true
+  },
+  {
+   "saut_injecte_um": 200.0,
+   "saut_injecte_en_feuilles": 1.156,
+   "sans_lien": {
+    "lien": 0.0,
+    "saut": 1.0058,
+    "pas_communs": 40
+   },
+   "avec_lien": {
+    "lien": 0.5,
+    "saut": 15.1439,
+    "pas_communs": 40
+   },
+   "saut_vrai_en_feuilles": 1.1561,
+   "ecart_a_la_verite_sans_lien": 0.1503,
+   "ecart_a_la_verite_avec_lien": 13.9878,
+   "le_lien_fausse_le_decrochement": true,
+   "le_lien_lamplifie": true
+  }
+ ]
+}
