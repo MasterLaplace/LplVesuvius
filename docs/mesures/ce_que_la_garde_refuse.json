@@ -1,0 +1,203 @@
+{
+ "source": "jusquou_va_t_il_si_on_le_laisse.json",
+ "fragment": "PHercParis4",
+ "combien_la_garde_refuse": {
+  "marches": 28,
+  "pas": 560,
+  "aveugles": 178,
+  "voyants": 382,
+  "voyants_desorientes": 161,
+  "part_des_voyants_refusee": 0.4215,
+  "marches_concernees": 23,
+  "barre_deg": 8.88,
+  "desaccord_median_des_refuses": 14.56,
+  "desaccord_p75_des_refuses": 21.34,
+  "desaccord_p90_des_refuses": 35.94,
+  "desaccord_p99_des_refuses": 89.11,
+  "desaccord_maximal": 90.0
+ },
+ "le_taux_distingue_t_il": {
+  "marches_avec_les_deux_etats": 19,
+  "taux_des_orientes": 0.7511,
+  "taux_des_refuses": 0.7764,
+  "pas_orientes": 221,
+  "pas_refuses": 161,
+  "ecart_median_par_marche": -0.0202,
+  "p_appariee": 0.5861,
+  "le_taux_distingue": false
+ },
+ "le_desaccord_est_il_absorbant": {
+  "decidable": true,
+  "marches_avec_un_pas_refuse": 23,
+  "marches_ou_lorientation_revient": 19,
+  "marches_sans_occasion_de_revenir": 0,
+  "marches_avec_occasion": 23,
+  "transitions": {
+   "D->D": 71,
+   "D->O": 77,
+   "O->O": 135,
+   "O->D": 75,
+   "D->A": 5,
+   "A->A": 167,
+   "O->A": 2
+  },
+  "part_de_retour_apres_un_refus": 0.5033,
+  "retours_attendus_au_hasard_median": 19.0,
+  "tirages": 2000,
+  "le_desaccord_est_absorbant": false
+ },
+ "le_refus_depend_il_du_rang": {
+  "marches_au_rang_0": 24,
+  "part_refusee_au_rang_0": 0.625,
+  "pas_aux_rangs_suivants": 358,
+  "part_refusee_aux_rangs_suivants": 0.4078,
+  "par_rang": {
+   "0": 0.625,
+   "1": 0.6087,
+   "2": 0.3182,
+   "3": 0.35,
+   "4": 0.4737,
+   "5": 0.3158,
+   "6": 0.4737,
+   "7": 0.2632,
+   "8": 0.3158,
+   "9": 0.3158,
+   "10": 0.5789,
+   "11": 0.4737,
+   "12": 0.2778,
+   "13": 0.3889,
+   "14": 0.3889,
+   "15": 0.4444,
+   "16": 0.3889,
+   "17": 0.5294,
+   "18": 0.3529,
+   "19": 0.4706
+  },
+  "facteur_du_premier_rang": 1.533,
+  "p_du_premier_rang": 0.0529,
+  "le_premier_pas_est_un_cas_a_part": false
+ },
+ "ce_que_couterait_larret": {
+  "marches_tronquees": 23,
+  "pas_gardes": 117,
+  "pas_jetes": 443,
+  "part_des_pas_jetes": 0.7911,
+  "pas_confirmes_jetes": 276,
+  "micrometres_jetes": 87616.2,
+  "rang_median_du_premier_refus": 0.0
+ },
+ "par_marche": [
+  {
+   "rayon_mm": 4.07,
+   "etats": "DDOOODDODDDDOODODODD"
+  },
+  {
+   "rayon_mm": 6.32,
+   "etats": "DDODDOODOODDDOODOODD"
+  },
+  {
+   "rayon_mm": 8.02,
+   "etats": "DDODDDODDDDDODDOODOO"
+  },
+  {
+   "rayon_mm": 9.4,
+   "etats": "ODODODDDOODDDODODDDD"
+  },
+  {
+   "rayon_mm": 10.51,
+   "etats": "ODOODODOOOOOOODDOODD"
+  },
+  {
+   "rayon_mm": 11.57,
+   "etats": "DOODDDOODODDDDOOODDO"
+  },
+  {
+   "rayon_mm": 12.48,
+   "etats": "DDOOOOOOOODOOOODDDOD"
+  },
+  {
+   "rayon_mm": 13.27,
+   "etats": "OODOOODODDODDDDDDDDD"
+  },
+  {
+   "rayon_mm": 13.99,
+   "etats": "DDDODDOOODDDOODDDOOO"
+  },
+  {
+   "rayon_mm": 14.7,
+   "etats": "DOOODOOOOOOOOOOOOOOO"
+  },
+  {
+   "rayon_mm": 15.46,
+   "etats": "DOOOOODDDODDOOODODOD"
+  },
+  {
+   "rayon_mm": 16.22,
+   "etats": "DDOOOOOOODDOODODODOO"
+  },
+  {
+   "rayon_mm": 16.93,
+   "etats": "DDDAAAAAAAAAAAAAAAAA"
+  },
+  {
+   "rayon_mm": 17.51,
+   "etats": "ODDOODDODODOODOOOOOO"
+  },
+  {
+   "rayon_mm": 18.06,
+   "etats": "DDOODOOOOOOOODOOOOOO"
+  },
+  {
+   "rayon_mm": 18.62,
+   "etats": "OOODDOOOOODOOOOOOOOO"
+  },
+  {
+   "rayon_mm": 19.15,
+   "etats": "ODODOOOOODOODODODAAA"
+  },
+  {
+   "rayon_mm": 19.66,
+   "etats": "DDDDAAAAAAAAAAAAAAAA"
+  },
+  {
+   "rayon_mm": 20.17,
+   "etats": "OOOOOODOOOOOAAAAAAAA"
+  },
+  {
+   "rayon_mm": 20.69,
+   "etats": "OODODODDOOODOOOOODOO"
+  },
+  {
+   "rayon_mm": 21.26,
+   "etats": "AAAAAAAAAAAAAAAAAAAA"
+  },
+  {
+   "rayon_mm": 21.75,
+   "etats": "AAAAAAAAAAAAAAAAAAAA"
+  },
+  {
+   "rayon_mm": 22.17,
+   "etats": "DODOOODOOOOOODODDDOD"
+  },
+  {
+   "rayon_mm": 22.61,
+   "etats": "OOOAAAAAAAAAAAAAAAAA"
+  },
+  {
+   "rayon_mm": 23.03,
+   "etats": "AAAAAAAAAAAAAAAAAAAA"
+  },
+  {
+   "rayon_mm": 23.31,
+   "etats": "AAAAAAAAAAAAAAAAAAAA"
+  },
+  {
+   "rayon_mm": 23.36,
+   "etats": "DAAAAAAAAAAAAAAAAAAA"
+  },
+  {
+   "rayon_mm": 23.8,
+   "etats": "DDAAAAAAAAAAAAAAAAAA"
+  }
+ ]
+}

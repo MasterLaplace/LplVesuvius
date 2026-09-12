@@ -2636,6 +2636,81 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             v_ = d["plafond"]
             out.append(("plafond de 125", [f"**{v_}**", f"{v_}"], sem.name))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 129 : CE QUE LA GARDE REFUSE, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) La part refusee ne voyage JAMAIS sans les deux taux confirmes. « 42 % des pas voyants
+    # sont refuses » se lit comme un defaut du marcheur ; c'est « 0,7511 contre 0,7764 » qui dit
+    # que le probleme est dans le PREDICAT PUBLIE, qui ne les distingue pas.
+    # (2) Et le prix de l'arret ne voyage jamais sans le compte de pas CONFIRMES jetes : « 443 pas
+    # sur 560 » se lit comme un budget, « dont 276 confirmes » dit ce qu'on detruirait.
+    grd = _source(racine, "ce_que_la_garde_refuse.json")
+    if grd.exists():
+        d = json.loads(grd.read_text())
+        c = d.get("combien_la_garde_refuse", {})
+        for cle, nom, dec in (("part_des_voyants_refusee", "part refusee de 129", 4),
+                              ("barre_deg", "barre des moities de 129", 2),
+                              ("desaccord_median_des_refuses", "desaccord median de 129", 2),
+                              ("desaccord_p75_des_refuses", "desaccord p75 de 129", 2),
+                              ("desaccord_p90_des_refuses", "desaccord p90 de 129", 2),
+                              ("desaccord_p99_des_refuses", "desaccord p99 de 129", 2),
+                              ("desaccord_maximal", "desaccord maximal de 129", 1)):
+            if c.get(cle) is not None:
+                ajoute(nom, c[cle], dec, grd.name)
+        for cle, nom in (("pas", "pas de 129"), ("aveugles", "aveugles de 129"),
+                         ("voyants", "voyants de 129"),
+                         ("voyants_desorientes", "voyants refuses de 129"),
+                         ("marches", "marches de 129"),
+                         ("marches_concernees", "marches concernees de 129")):
+            if c.get(cle) is not None:
+                v_ = c[cle]
+                out.append((nom, [f"**{v_}**", f"{v_}"], grd.name))
+        t = d.get("le_taux_distingue_t_il", {})
+        for cle, nom, dec in (("taux_des_orientes", "taux des orientes de 129", 4),
+                              ("taux_des_refuses", "taux des refuses de 129", 4),
+                              ("ecart_median_par_marche", "ecart par marche de 129", 4),
+                              ("p_appariee", "p apparie de 129", 4)):
+            if t.get(cle) is not None:
+                ajoute(nom, t[cle], dec, grd.name, signe=(cle == "ecart_median_par_marche"))
+        for cle, nom in (("pas_orientes", "pas orientes de 129"),
+                         ("pas_refuses", "pas refuses de 129"),
+                         ("marches_avec_les_deux_etats", "marches appariees de 129")):
+            if t.get(cle) is not None:
+                v_ = t[cle]
+                out.append((nom, [f"**{v_}**", f"{v_}"], grd.name))
+        a = d.get("le_desaccord_est_il_absorbant", {})
+        if a.get("part_de_retour_apres_un_refus") is not None:
+            ajoute("part de retour de 129", a["part_de_retour_apres_un_refus"], 4, grd.name)
+        if a.get("retours_attendus_au_hasard_median") is not None:
+            ajoute("retours au hasard de 129", a["retours_attendus_au_hasard_median"], 1,
+                   grd.name)
+        for cle, nom in (("marches_ou_lorientation_revient", "retours de 129"),
+                         ("marches_avec_occasion", "occasions de 129")):
+            if a.get(cle) is not None:
+                v_ = a[cle]
+                out.append((nom, [f"**{v_}**", f"{v_}"], grd.name))
+        for k_, v_ in (a.get("transitions") or {}).items():
+            out.append((f"transition {k_} de 129", [f"**{v_}**", f"{v_}"], grd.name))
+        g_ = d.get("le_refus_depend_il_du_rang", {})
+        # ⚠ Trois decimales et non quatre : le JSON porte 0,625, et publier « 0,6250 » ferait
+        # diverger le document de son producteur sur une decimale qui n'existe pas.
+        for cle, nom, dec in (("part_refusee_au_rang_0", "part refusee au rang 0 de 129", 3),
+                              ("part_refusee_aux_rangs_suivants",
+                               "part refusee aux rangs suivants de 129", 4),
+                              ("facteur_du_premier_rang", "facteur du premier rang de 129", 3),
+                              ("p_du_premier_rang", "p du premier rang de 129", 4)):
+            if g_.get(cle) is not None:
+                ajoute(nom, g_[cle], dec, grd.name)
+        q = d.get("ce_que_couterait_larret", {})
+        if q.get("part_des_pas_jetes") is not None:
+            ajoute("part des pas jetes de 129", q["part_des_pas_jetes"], 4, grd.name)
+        if q.get("micrometres_jetes") is not None:
+            ajoute("micrometres jetes de 129", q["micrometres_jetes"], 1, grd.name)
+        for cle, nom in (("pas_jetes", "pas jetes de 129"),
+                         ("pas_confirmes_jetes", "pas confirmes jetes de 129"),
+                         ("marches_tronquees", "marches tronquees de 129")):
+            if q.get(cle) is not None:
+                v_ = q[cle]
+                out.append((nom, [f"**{v_}**", f"{v_}"], grd.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 128 : LA FAILLE, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) Le « 0,000000 » d'une faille d'une feuille ne voyage JAMAIS sans l'ecart d'une
     # demi-feuille. Seul, un zero se lit comme une panne du lecteur ; a cote de 79,999989 il se lit

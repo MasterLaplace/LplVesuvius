@@ -626,6 +626,27 @@ autre compte — ce qui fait de `R4-F53` une conséquence et non un manque de me
 `R4-P26` : le vrai rouleau, lui, n'est pas périodique ; quelque chose de local y distingue-t-il la
 feuille *n* de la feuille *n+1* ?
 
+**`129` · 2026-09-12 · ce que la garde refuse** (`ce_que_la_garde_refuse.py`, sur la course de
+`113`, zéro lecture distante)
+`128` mesure qu'une faille fait crier la garde et que **le pas est pris quand même**. Sur la vraie
+matière : ⭐⭐⭐⭐ **161 pas voyants sur 382 — 42,15 % — sont pris dans une direction que la garde
+refuse**, sur **23 marches sur 28**, désaccord médian **14,56°** pour une barre de **8,88°**, p99
+**89,11**, maximum **90,0**. ⭐⭐⭐⭐ **Et le prédicat publié ne les distingue pas** : taux
+**0,7511** sur les orientés contre **0,7764** sur les refusés, écart médian par marche
+**−0,0202**, **p 0,5861** sur 19 marches — le test échoue à rejeter. Les deux taux se recomposent
+exactement en **0,7618**, celui de `115`, donc le nombre publié depuis est bien celui-là et il ne
+dit pas ce qu'on lui fait dire. ⚠⚠⚠ **Et ce document réfute le remède que `128` suggérait** :
+s'arrêter au premier refus jetterait **443 pas sur 560** (**0,7911**), dont **276 CONFIRMÉS**, et
+**87616,2 µm**. ⭐⭐⭐ La raison est que **le désaccord n'est pas absorbant** — retour
+**0,5033**, 19 marches sur 23 qui en avaient l'occasion, là où la permutation en attend **19,0** —
+alors que dans les mêmes données `aveugle→aveugle` vaut **167 sur 167**. Le remède de `116` ne se
+transporte pas. ⚠⚠ `oriente` est RECALCULÉ et jamais lu : le drapeau enregistré date d'avant
+`120` et déclarait orientés les 178 pas aveugles, ce que la batterie asserte. ⚠ Ma première
+version du verdict sur le premier rang demandait un facteur > 1,5 et la mesure a rendu **1,533** :
+remplacé par Fisher exact, qui rend **p 0,0529** et renverse la réponse. → **le taux publié ne
+veut pas dire « le marcheur suit la matière »** (`R4-F58`, `R4-F59`), et `oriente` reste la
+meilleure gâchette disponible — pour relâcher un lien, jamais pour arrêter.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
