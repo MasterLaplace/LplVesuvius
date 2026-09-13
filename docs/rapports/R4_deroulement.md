@@ -723,6 +723,33 @@ que par une course qui l'emploie** (`R4-F64`, `R4-F65`, `R4-F66`). Porte neuve `
 l'enroulement ni le bruit d'intensité ne font virer le marcheur — qu'est-ce qui le fait virer de
 14,3° par pas ? L'hypothèse désignée sans être mesurée : des feuilles **non parallèles**.
 
+**`133` · 2026-09-13 · la course se regarde pendant qu'elle dure, et le cap redresse en raccourcissant**
+(`voxel_distant.py --chronometrer`, `jusquou_va_t_il_si_on_le_laisse.py --trace --memoire-du-cap`,
+`figure_la_course_en_3d.py`, `un_cap_change_t_il_la_course.py` ; une course de 33 min)
+Parti d'une question de planification — paralléliser les bandes, ou le réseau est-il la limite ? —
+et la mesure a répondu autre chose. ⭐⭐⭐⭐ **Le lecteur lisait ses plages EN FILE** : le pool était
+mappé sur les chunks, un cube de 41 voxels tombe dans un seul chunk de 128 qui demande 41 plages,
+donc une tâche pour quarante-et-une requêtes en séquence. Ni le réseau ni le CPU : la latence.
+Chronométré sur le cube du marcheur au premier départ de `131` : **15,276 s** à un fil, **0,574 s**
+à 64, identiques au bit, facteur **26,6** ; quatre cubes lus en même temps donnent un rapport de
+**2,09**, donc un pool par bande doublerait encore le débit — non construit, une course ne borne
+plus une tranche (`R4-F67`). ⭐⭐⭐⭐ **Donc le coût de `131` était périmé et sans producteur** :
+`agreger` publie `secondes_par_pas` — **144,05 s** (borne haute, sommeil de machine) contre
+**2,34 s** ; seize bandes au plafond de 112 ont coûté **1983,4 s** (`R4-F69`, note de `R4-F62`).
+⭐⭐⭐ **Et la course se regarde** : `--trace` écrit une ligne par pas, vidangée, et une figure en
+trois dimensions la relit sous une caméra orthographique qu'on tourne — rendu pur, incapable de
+perturber la course. ⭐⭐⭐⭐ **Le cap, couru sur les seize départs de `131`, redresse et
+raccourcit** : rectitude médiane **0,8563 → 0,9715**, **15/16** plus droites, p **0,00269** ; pas
+voyants médians **58,5 → 46,5**, **2/16** plus longues, p **0,04392** ; au plafond 4 → 2, « plus
+rien à lire » 11 → 14 ; le virage par tiers tombe de **15,9°/13,3°** à **4,9°/5,1°**, exactement la
+moyenne du bruit alternant que `132` avait prédit. ⚠⚠ Deux verdicts en sens contraire, séparés
+exprès : le cap supprime le retour sur soi et arrive plus tôt là où le volume cesse de répondre ;
+le net des deux marches au plafond culmine toujours **avant** le plafond (2/2). ⚠ La marche de
+8,02 mm passe de **1 pas** à **112**, donc « plus droit parce que plus court » ne tient pas. →
+**la question se déplace de « pourquoi le marcheur tourne » à « pourquoi la matière cesse de se
+lire »** (`R4-F68`) ; `R4-P27` est mise à jour : la grandeur sur laquelle calibrer une pile à
+feuilles non parallèles est le désaccord des deux moitiés du cube, nul sur toute fixture du dépôt.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

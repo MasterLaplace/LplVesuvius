@@ -195,11 +195,90 @@ def bandes_a_reprendre(reprise: dict, attendu: dict, cles: set) -> dict:
             "lectures": int(reprise.get("lectures_de_profil", 0))}
 
 
+class Trace:
+    """Le journal d'une course PENDANT qu'elle dure — une ligne par pas, ecrite et vidangee.
+
+    ⭐⭐⭐⭐ ELLE EXISTE PARCE QU'IL N'Y AVAIT RIEN A REGARDER. Le brouillon est ecrit a la fin
+    d'une BANDE ; entre deux bandes il ne se passe rien de lisible, et une bande dure des
+    minutes. Une course de quarante minutes etait donc une barre de progression et un fichier
+    qui ne bougeait pas — impossible de voir OU le marcheur va avant qu'il y soit alle.
+
+    ⚠⚠ ELLE N'EST PAS UNE SECONDE VERITE. Le brouillon reste le registre ; la trace est un canal
+    lateral, en JSONL, que la course ne relit jamais. Si elle disparait, rien de publie ne bouge.
+    C'est ce qui autorise a l'ecrire sans precaution transactionnelle.
+
+    ⚠⚠⚠ ET ELLE NE PEUT PAS TUER LA COURSE. Une erreur d'ecriture — disque plein, chemin devenu
+    illisible — est DITE une fois puis la trace se tait pour le reste de la course. Laisser
+    remonter l'exception ferait perdre quarante minutes de lecture reseau a cause de
+    l'instrumentation ; l'avaler en silence ferait croire a un marcheur immobile. Les deux sont
+    pires que d'arreter de tracer en le disant.
+
+    ⚠ Chaque ligne est VIDANGEE : un tampon de 8 Kio garderait une dizaine de pas pour lui, ce
+    qui est exactement le retard qu'un visualiseur temps reel ne peut pas avoir.
+    """
+
+    def __init__(self, chemin: Path, entete: dict) -> None:
+        self.chemin = chemin
+        self.muette = False
+        self.lignes = 0
+        chemin.parent.mkdir(parents=True, exist_ok=True)
+        # ⚠⚠ La trace est REMISE A ZERO au depart d'une course et jamais reprise : deux courses
+        # qui s'ajoutent dans un meme fichier rendraient une image ou deux marcheurs different
+        # se superposent sans qu'aucune ligne ne dise lequel est lequel.
+        self.f = chemin.open("w", encoding="utf-8")
+        self.dire({"quoi": "course", **entete})
+
+    def dire(self, ligne: dict) -> None:
+        if self.muette:
+            return
+        try:
+            self.f.write(json.dumps(ligne, ensure_ascii=False) + "\n")
+            self.f.flush()
+            self.lignes += 1
+        # ⚠⚠ `ValueError` AUTANT QU'`OSError`, et c'est une sonde qui l'a trouve : un disque plein
+        # leve `OSError`, un descripteur ferme leve `ValueError`. Ma premiere version n'attrapait
+        # que la premiere, donc la seule panne que la batterie savait provoquer traversait la
+        # garde et tuait la course — exactement ce que la garde existe pour empecher.
+        except (OSError, ValueError) as e:
+            self.muette = True
+            print(f"⚠ la trace s'arrete ici ({e}) — la course continue")
+
+    def fermer(self) -> None:
+        try:
+            self.f.close()
+        except OSError:
+            pass
+
+
+def _mouchard(journal: "Trace", marche: int):
+    """Le rapporteur d'UNE marche — ce que `marcher` appelle a chaque pas qui a avance.
+
+    ⚠ Il ne recopie que ce qu'un visualiseur dessine : ou le marcheur est, et les deux drapeaux
+    qui colorent le trait. Recopier l'etape entiere ferait de la trace un second registre,
+    c'est-a-dire une seconde verite libre de diverger du brouillon.
+    """
+
+    def dire(etape: dict, position) -> None:
+        journal.dire({"quoi": "pas", "marche": marche, "pas": etape["pas"],
+                      "position_zyx": [round(float(x), 2) for x in position],
+                      "confirme": bool(etape.get("confirme")),
+                      "oriente": bool(etape.get("oriente")),
+                      # ⚠ `oriente` faux et `rien_lu` vrai sont deux etats, pas un : le premier
+                      # est un pas pris CONTRE LA GARDE (`129`), le second un pas AVEUGLE (`115`).
+                      # Une trace qui n'en porterait qu'un les peindrait de la meme couleur.
+                      "rien_lu": bool(etape.get("rien_lu")),
+                      "avance_um": etape.get("avance_um"),
+                      "parcouru_um": etape.get("parcouru_um")})
+
+    return dire
+
+
 def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = DEMI,
             fils: int = 32, selecteur: str = SELECTEUR,
             brouillon: Path | None = None,
             fenetre_locale: bool = False, arret_sur_vide: bool = False,
-            reprise: dict | None = None) -> dict:
+            reprise: dict | None = None, memoire_du_cap: float = 0.0,
+            trace: Path | None = None) -> dict:
     """La marche profonde, depuis LES MEMES departs que `107`, plafond leve.
 
     ⭐⭐⭐ LES DEPARTS SONT CEUX DE `107`, PAS DE NOUVEAUX : la graine et les cellules sont les
@@ -239,10 +318,15 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
     # ⚠⚠ LE REFUS DE REPRISE EST TRANCHE EN PREMIER, avant le cache des departs et avant la
     # connexion au volume : il ne depend que du brouillon. Le mettre plus bas le rendait
     # inexercable sans reseau ni cache, c'est-a-dire inexerce.
+    # ⚠⚠ `memoire_du_cap` ENTRE DANS LE REFUS DE REPRISE, et il le faut : c'est le parametre qui
+    # change OU le marcheur va. Reprendre huit bandes marchees a memoire nulle dans une course
+    # qui en veut 0,75 rendrait un fichier dont la moitie decrit un autre marcheur, et aucune
+    # ligne ne dirait laquelle.
     attendu = {"fragment": C.OBJET, "volume_fin": C.VOLUME_FIN, "pas_max": int(pas_max),
                "selecteur": selecteur, "demi_cube_voxels": int(demi),
                "fenetre_locale": bool(fenetre_locale),
-               "arret_sur_vide": bool(arret_sur_vide)}
+               "arret_sur_vide": bool(arret_sur_vide),
+               "memoire_du_cap": round(float(memoire_du_cap), 4)}
     if reprise is not None:
         refus = reprise_refusee(reprise, attendu)
         if refus is not None:
@@ -270,6 +354,13 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
     rayons = {(int(x["de"]), int(x["a"])): x.get("rayon_mm")
               for x in brut107.get("lignes", [])}
     t0 = maintenant()
+    # ⚠ L'entete de la trace porte les memes parametres que le brouillon : un visualiseur qui
+    # lirait une trace sans savoir quel marcheur l'a ecrite dessinerait n'importe quelle course.
+    # ⚠ Et la taille du voxel : sans elle, un visualiseur qui veut ecrire une emprise en
+    # millimetres doit la recevoir a la main, et un nombre tape a la main est un nombre faux un
+    # jour sur deux (le premier rendu en a recu 7,91 pour 2,4).
+    journal = None if trace is None else Trace(
+        trace, {**attendu, "bandes": len(dep["par_bande"]), "voxel_um": C.VOXEL_FIN_UM})
     lignes, marches, lectures = [], [], 0
     cles = [k for k in dep["par_bande"]]
     deja: set[tuple[int, int]] = set()
@@ -289,11 +380,19 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
         d = dep["par_bande"][cle]
         detail = []
         for j in range(len(d["departs"])):
+            if journal is not None:
+                journal.dire({"quoi": "depart", "bande": [cle[0], cle[1]],
+                              "rayon_mm": rayons.get(cle), "marche": len(marches),
+                              "position_zyx": [round(float(x), 3) for x in d["departs"][j]]})
+                mouchard = _mouchard(journal, len(marches))
+            else:
+                mouchard = None
             e = marcher(vol, d["departs"][j], d["radial"][j], longueurs, mu, sd, barre,
                         barre_moities, barre_interstice, C.VOXEL_FIN_UM, pas_max, demi,
                         interroge_la_matiere=True, fils=fils,
                         selecteur=selecteur, barre_du_selecteur=barre,
-                        fenetre_locale=fenetre_locale, arret_sur_vide=arret_sur_vide)
+                        fenetre_locale=fenetre_locale, arret_sur_vide=arret_sur_vide,
+                        memoire_du_cap=memoire_du_cap, mouchard=mouchard)
             pas = [x for x in e if "avance_um" in x]
             cel = {"depart_zyx": [round(float(t), 3) for t in d["departs"][j]],
                    "radial_zyx": [round(float(t), 6) for t in d["radial"][j]],
@@ -327,6 +426,17 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
                         cel["profil"] = [round(float(t), 2) for t in v]
                         cel["avance_moyenne_um"] = round(
                             float(np.mean([float(x["avance_um"]) for x in pas])), 2)
+            # ⚠⚠ LA FIN EST DITE PAR L'APPELANT, pas par le mouchard : le pas qui sort du
+            # volume n'a pas de position a montrer, et c'est ici — et seulement ici — qu'on sait
+            # ce qui a arrete la marche. Sans cette ligne un visualiseur ne peut pas distinguer
+            # une marche finie d'une marche dont le pas suivant tarde.
+            if journal is not None:
+                journal.dire({"quoi": "fin", "marche": len(marches),
+                              "pas_parcourus": cel["pas_parcourus"],
+                              "pas_confirmes": cel["pas_confirmes"],
+                              "fin": ("sortie du volume" if cel["sortie"] else
+                                      "plus rien a lire" if cel["plus_rien_a_lire"] else
+                                      "plafond" if cel["au_plafond"] else "arret")})
             detail.append(cel)
             marches.append(pas)
         lignes.append({"de": cle[0], "a": cle[1], "rayon_mm": rayons.get(cle),
@@ -350,6 +460,7 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
                  "selecteur": selecteur, "demi_cube_voxels": demi,
                  "fenetre_locale": bool(fenetre_locale),
                  "arret_sur_vide": bool(arret_sur_vide),
+                 "memoire_du_cap": round(float(memoire_du_cap), 4),
                  "barre_du_balayage": round(float(barre), 3),
                  "barre_de_linterstice": round(float(barre_interstice), 4),
                  "barre_daccord_des_moities_deg": barre_moities,
@@ -364,6 +475,11 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
     lu = {"fragment": C.OBJET, "volume_fin": C.VOLUME_FIN, "pas_nominal_um": C.PAS_UM,
           "pas_max": int(pas_max), "selecteur": selecteur, "demi_cube_voxels": demi,
           "fenetre_locale": bool(fenetre_locale), "arret_sur_vide": bool(arret_sur_vide),
+          # ⚠ ECRIT MEME QUAND IL VAUT ZERO, pour la raison qui fait ecrire `echelle_de_la_
+          # fenetre` a chaque pas : sans lui, une course a cap memorise serait indistinguable
+          # d'une course nominale dans son propre registre, et l'experience ne serait pas
+          # auditable.
+          "memoire_du_cap": round(float(memoire_du_cap), 4),
           "barre_du_balayage": round(float(barre), 3),
           "barre_de_linterstice": round(float(barre_interstice), 4),
           "barre_daccord_des_moities_deg": barre_moities,
@@ -375,6 +491,9 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
         brouillon.parent.mkdir(parents=True, exist_ok=True)
         brouillon.write_text(json.dumps(lu, indent=2, ensure_ascii=False))
         print(f"lectures écrites avant le verdict : {brouillon}")
+    if journal is not None:
+        journal.fermer()
+        print(f"trace : {trace} ({journal.lignes} lignes)")
     return agreger(lu)
 
 
@@ -481,6 +600,23 @@ def agreger(r: dict) -> dict:
         r["resume"] = {"decidable": False, "pourquoi": "aucune marche lisible"}
         return r
     parcourus = [len(m) for m in marches]
+    # ⭐⭐⭐ LE COUT D'UN PAS, EN SECONDES, ET IL A UN PRODUCTEUR. `131` a publie « ~70 min par
+    # bande » depuis une division faite a la main ; le lecteur a ete rendu 25 fois plus rapide
+    # ensuite, et ce chiffre est devenu faux sans qu'aucun fichier ne le dise. Ici chaque course
+    # publie son propre cout, donc le rapport entre deux courses est une division de deux nombres
+    # qui ont chacun leur producteur.
+    #
+    # ⚠⚠ `secondes` NE COMPTE QUE CETTE COURSE, et les bandes reprises viennent EN TETE de
+    # `lignes` (`bandes_a_reprendre` les rend d'abord) : le denominateur est donc le nombre de
+    # pas des bandes qui SUIVENT les reprises. Diviser par tous les pas ferait paraitre une
+    # course reprise deux fois moins chere qu'elle n'est.
+    reprises = int(r.get("bandes_reprises") or 0)
+    pas_de_cette_course = sum(
+        len([x for x in cel.get("etapes", []) if "avance_um" in x])
+        for ligne in r_lignes[reprises:] for cel in ligne.get("detail", []))
+    secondes = r.get("secondes")
+    cout = (round(float(secondes) / pas_de_cette_course, 2)
+            if secondes is not None and pas_de_cette_course > 0 else None)
     profil = profondeur_de_la_confirmation(marches)
     r["profondeur_de_la_confirmation"] = profil
     r["le_taux_baisse_avec_la_profondeur"] = le_taux_baisse_avec_la_profondeur(profil)
@@ -508,6 +644,8 @@ def agreger(r: dict) -> dict:
         "pas_confirmes_max": int(max(confirmes)),
         "taux_de_confirmation_global": round(
             float(np.mean([1.0 if x.get("confirme") else 0.0 for m in marches for x in m])), 4),
+        "pas_marches_dans_cette_course": pas_de_cette_course,
+        "secondes_par_pas": cout,
         # ⭐⭐⭐ LE VERDICT QUI COMPTE : quelque chose a-t-il ENFIN arrete une marche ?
         "quelque_chose_a_arrete_des_marches": bool(plafond < len(marches)),
         "la_portee_est_encore_censuree": bool(plafond == len(marches))}
@@ -752,6 +890,72 @@ def verifier() -> int:
       not le_taux_suit_il_le_rayon(
           [{"marche": i, "pas": 20, "confirmes": i, "rayon_mm": None} for i in range(5)])["decidable"])
 
+    # === LE COUT D'UN PAS =====================================================================
+    # ⭐⭐⭐ Il a un producteur, et il ne compte que les pas de CETTE course : une reprise de deux
+    # bandes sur trois ne doit pas paraitre trois fois moins chere qu'elle n'est.
+    repris = {"pas_max": 5, "secondes": 100.0, "bandes_reprises": 2, "lignes": [
+        {"detail": [{"etapes": _marche([True] * 5), "pas_parcourus": 5, "pas_confirmes": 5,
+                     "sortie": False, "au_plafond": True, "longueur_um": 1150.0}]}
+        for _ in range(3)]}
+    c = agreger(repris)["resume"]
+    v("le coût d'un pas ne compte que les pas marchés dans CETTE course",
+      c["pas_marches_dans_cette_course"] == 5 and c["secondes_par_pas"] == 20.0,
+      f"{c['pas_marches_dans_cette_course']} pas, {c['secondes_par_pas']} s/pas")
+    sans = json.loads(json.dumps(repris))
+    sans["bandes_reprises"] = 0
+    v("... et sans reprise il compte tout",
+      agreger(sans)["resume"]["secondes_par_pas"] == round(100.0 / 15, 2))
+    del sans["secondes"]
+    v("... et une course sans durée ne publie pas de coût",
+      agreger(sans)["resume"]["secondes_par_pas"] is None)
+
+    # === LA TRACE =============================================================================
+    # ⚠⚠ Elle se teste HORS LIGNE, sur un fichier temporaire : une instrumentation qu'on ne peut
+    # exercer qu'en lisant le reseau n'est exercee par personne, et c'est exactement le code qui
+    # casse le jour ou on en a besoin.
+    import tempfile  # noqa: PLC0415
+    with tempfile.TemporaryDirectory() as dtmp:
+        j = Path(dtmp) / "t.jsonl"
+        tr = Trace(j, {"pas_max": 112, "memoire_du_cap": 0.75})
+        tr.dire({"quoi": "depart", "marche": 0, "position_zyx": [1.0, 2.0, 3.0]})
+        _mouchard(tr, 0)({"pas": 1, "confirme": True, "oriente": True,
+                          "avance_um": 173.0, "parcouru_um": 173.0},
+                         np.asarray([1.5, 2.5, 3.5]))
+        tr.fermer()
+        lus = [json.loads(x) for x in j.read_text(encoding="utf-8").splitlines()]
+        v("la trace est lisible ligne par ligne", len(lus) == 3,
+          f"{len(lus)} ligne(s)")
+        v("... et sa première ligne porte les paramètres de la course",
+          lus[0]["quoi"] == "course" and lus[0]["memoire_du_cap"] == 0.75)
+        v("... et le mouchard écrit la position que `marcher` lui donne",
+          lus[2]["quoi"] == "pas" and lus[2]["position_zyx"] == [1.5, 2.5, 3.5]
+          and lus[2]["confirme"] is True)
+        # ⭐⭐⭐ LA SONDE QUI COMPTE : une trace qui ne s'ecrit plus NE TUE PAS la course. Sans
+        # elle, un disque plein couterait quarante minutes de lecture reseau.
+        mort = Trace(Path(dtmp) / "u.jsonl", {})
+        mort.f.close()
+        mort.dire({"quoi": "pas", "marche": 0})
+        v("une trace qui casse se tait au lieu de tuer la course",
+          mort.muette is True and mort.lignes == 1)
+        mort.dire({"quoi": "pas", "marche": 1})
+        v("... et elle ne le redit pas à chaque pas", mort.lignes == 1)
+        # ⚠ La trace est REMISE A ZERO : deux courses dans un meme fichier superposeraient deux
+        # marcheurs differents sans qu'aucune ligne ne dise lequel est lequel.
+        Trace(j, {"pas_max": 20}).fermer()
+        v("une seconde course écrase la trace au lieu de s'y ajouter",
+          len(j.read_text(encoding="utf-8").splitlines()) == 1)
+
+    # === LA MEMOIRE DU CAP ENTRE DANS LE REFUS DE REPRISE ======================================
+    # ⭐⭐⭐ C'est le parametre qui change OU le marcheur va : reprendre des bandes marchees sans
+    # cap dans une course qui en veut un rendrait un fichier a deux marcheurs.
+    att = {"pas_max": 112, "memoire_du_cap": 0.75}
+    v("une reprise dont la mémoire du cap diffère est refusée",
+      reprise_refusee({"pas_max": 112, "memoire_du_cap": 0.0}, att) is not None)
+    v("... et le refus NOMME le champ",
+      "memoire_du_cap" in (reprise_refusee({"pas_max": 112, "memoire_du_cap": 0.0}, att) or ""))
+    v("... et une reprise au même cap est acceptée",
+      reprise_refusee({"pas_max": 112, "memoire_du_cap": 0.75}, att) is None)
+
     print(f"\n{'ALL PASS' if echecs == 0 else 'ÉCHEC'} ({echecs} failures, {controles} checks)")
     return 0 if echecs == 0 else 1
 
@@ -771,6 +975,16 @@ def main() -> int:
                    help="la fenetre de pas suit l'espacement local, a largeur constante (`121`)")
     p.add_argument("--arret-sur-vide", action="store_true",
                    help="la marche s'arrete au premier pas aveugle (`116`)")
+    # ⭐⭐⭐⭐ LE CAP A MEMOIRE, EXPOSE A LA COURSE. `132` mesure que la matiere enroulee ne
+    # demande que 0,0103°/pas quand le marcheur vire de 2,83°, et qu'une memoire de 0,75 fait
+    # tomber l'erreur a la normale de 1,965° a 0,699°. Ce chiffre vient d'une RELECTURE ; savoir
+    # ou le marcheur irait avec un cap demande de le faire marcher, parce que changer la
+    # direction change ce qu'il lit au pas suivant.
+    p.add_argument("--memoire-du-cap", type=float, default=0.0,
+                   help="moyenne exponentielle du cap, 0 = le marcheur d'avant a l'identique")
+    # ⭐⭐ La trace : une ligne par pas, pendant la course, pour la regarder avancer.
+    p.add_argument("--trace", type=Path, default=None,
+                   help="journal JSONL ecrit A CHAQUE PAS, lisible pendant la course")
     p.add_argument("--reagreger", action="store_true")
     p.add_argument("--reprendre", action="store_true",
                    help="reprend les bandes deja ecrites dans le --json au lieu de les remarcher")
@@ -795,7 +1009,8 @@ def main() -> int:
         reprise = json.loads(a.json.read_text())
     r = mesurer(pas_max=a.pas, bandes_max=a.bandes, demi=a.demi, fils=a.fils,
                 selecteur=a.selecteur, brouillon=a.json, reprise=reprise,
-                fenetre_locale=a.fenetre_locale, arret_sur_vide=a.arret_sur_vide)
+                fenetre_locale=a.fenetre_locale, arret_sur_vide=a.arret_sur_vide,
+                memoire_du_cap=a.memoire_du_cap, trace=a.trace)
     afficher(r)
     # ⚠⚠⚠ UN REFUS N'ECRIT RIEN, ET C'EST UNE SONDE QUI L'A TROUVE. Ma premiere version
     # affichait « reprise refusee » puis ecrasait le brouillon avec le message de refus : la

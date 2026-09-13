@@ -101433,6 +101433,8 @@
     "pas_confirmes_median": 1.5,
     "pas_confirmes_max": 8,
     "taux_de_confirmation_global": 0.7526,
+    "pas_marches_dans_cette_course": 419,
+    "secondes_par_pas": 144.05,
     "quelque_chose_a_arrete_des_marches": true,
     "la_portee_est_encore_censuree": false
   }

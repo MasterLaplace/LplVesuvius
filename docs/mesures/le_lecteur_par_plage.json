@@ -1,0 +1,45 @@
+{
+  "centre_zyx": [
+    25354.613,
+    12887.972,
+    15298.736
+  ],
+  "demi": 20,
+  "points": 68921,
+  "lectures": [
+    {
+      "fils": 1,
+      "secondes": 15.276,
+      "points_par_seconde": 4511.7,
+      "identique_au_premier": true
+    },
+    {
+      "fils": 32,
+      "secondes": 0.938,
+      "points_par_seconde": 73493.7,
+      "identique_au_premier": true
+    },
+    {
+      "fils": 64,
+      "secondes": 0.574,
+      "points_par_seconde": 120121.5,
+      "identique_au_premier": true
+    }
+  ],
+  "facteur_du_plus_rapide": 26.6,
+  "toutes_identiques": true,
+  "concurrence": {
+    "cubes": 4,
+    "fils_par_cube": 64,
+    "secondes_seule": 0.574,
+    "secondes_mur": 1.201,
+    "secondes_par_cube": [
+      1.191,
+      1.197,
+      1.2,
+      1.185
+    ],
+    "mur_sur_seule": 2.09
+  },
+  "zarr": "PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr"
+}

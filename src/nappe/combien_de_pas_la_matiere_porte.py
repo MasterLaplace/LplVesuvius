@@ -293,7 +293,8 @@ def marcher(lecteur, depart_fin: np.ndarray, direction0: np.ndarray, longueurs: 
             fils: int = 32, selecteur: str = "calibre",
             barre_du_selecteur: float | None = None,
             fenetre_locale: bool = False, arret_sur_vide: bool = False,
-            rendre_position: bool = False, memoire_du_cap: float = 0.0) -> list[dict]:
+            rendre_position: bool = False, memoire_du_cap: float = 0.0,
+            mouchard=None) -> list[dict]:
     """Enchainer les pas, et rendre a CHAQUE pas si la matiere confirme encore.
 
     ⭐⭐⭐ C'EST LE MARCHEUR, ET IL N'A BESOIN D'AUCUN MAILLAGE. `interroge_la_matiere` a False
@@ -495,6 +496,20 @@ def marcher(lecteur, depart_fin: np.ndarray, direction0: np.ndarray, longueurs: 
         # marche menee d'un trait (11,99 contre 2,11 feuilles de saut sur la meme graine).
         if rendre_position:
             etapes[-1]["position_zyx"] = [float(x) for x in (p + d * (avance_um / voxel_fin_um))]
+        # ⭐⭐⭐ LE MOUCHARD DIT LE PAS PENDANT QUE LA MARCHE DURE, et c'est la seule facon de
+        # regarder une course avancer : `marcher` ne rend ses etapes qu'a la fin, et la course
+        # n'ecrit son brouillon qu'a la fin d'une BANDE. Entre les deux il n'y a rien a lire.
+        #
+        # ⚠⚠ IL RECOIT LA POSITION EN ARGUMENT PLUTOT QU'ECRITE DANS L'ETAPE, et ce n'est pas un
+        # detail de style : ecrire `position_zyx` pour tracer changerait le JSON de la course,
+        # donc une course tracee et une course muette ne rendraient plus le meme fichier. Le
+        # mouchard est un canal LATERAL — ce qu'il voit ne touche pas ce qui est publie.
+        #
+        # ⚠ Il ne voit que les pas qui ont AVANCE. Un pas qui sort du volume est ecrit plus haut
+        # et n'a pas de position a montrer ; c'est a l'appelant, qui connait le verdict de la
+        # marche entiere, de dire qu'elle est finie.
+        if mouchard is not None:
+            mouchard(etapes[-1], p + d * (avance_um / voxel_fin_um))
         # ⚠⚠ L'espacement suivi vient de `118` — `avance / feuilles franchies` — et il est REFUSE
         # quand la fraction est elle-meme en butee : un rapport de deux bornes n'est une mesure de
         # rien. Le refus garde l'espacement PRECEDENT plutot que d'en inventer un, donc la fenetre
@@ -1611,6 +1626,38 @@ def verifier() -> int:
       len([e for e in marcher(pc, dep_c, x_hat, longueurs, mu, sd, barre, barre_moities,
                               barre_interstice, C.VOXEL_FIN_UM, pas_max=4, demi=DEMI,
                               arret_sur_vide=True) if "confirme" in e]) == 4)
+
+    # === LE MOUCHARD ======================================================================
+    # ⭐⭐⭐ IL DOIT VOIR CHAQUE PAS QUI A AVANCE, ET NE RIEN CHANGER. Une instrumentation qui
+    # deplace ce qu'elle observe ne mesure plus la course ; c'est la seule chose qu'il faut lui
+    # demander, et elle se verifie en comparant les etapes avec et sans.
+    vus = []
+    avec = marcher(pc, dep_c, x_hat, longueurs, mu, sd, barre, barre_moities, barre_interstice,
+                   C.VOXEL_FIN_UM, pas_max=4, demi=DEMI,
+                   mouchard=lambda e, pos: vus.append((e["pas"], np.asarray(pos).copy())))
+    sans = marcher(pc, dep_c, x_hat, longueurs, mu, sd, barre, barre_moities, barre_interstice,
+                   C.VOXEL_FIN_UM, pas_max=4, demi=DEMI)
+    v("le mouchard voit un pas par pas avance",
+      [n for n, _ in vus] == [e["pas"] for e in avec if "avance_um" in e], f"{len(vus)} vu(s)")
+    v("... et la course est IDENTIQUE avec et sans lui",
+      json.dumps(avec, sort_keys=True) == json.dumps(sans, sort_keys=True))
+    # ⚠⚠ LA POSITION EST CELLE DE `marcher`, PAS UNE RECONSTRUCTION. Les champs publies sont
+    # arrondis ; un visualiseur qui accumulerait `direction × avance` derivetait, et le systeme
+    # est chaotique. La position vue doit donc etre la position exacte apres le pas.
+    pos_exacte = np.asarray(dep_c, dtype=np.float64).copy()
+    for e in (x for x in avec if "avance_um" in x):
+        pos_exacte = pos_exacte + (np.asarray(e["direction"], dtype=np.float64)
+                                   * (float(e["avance_um"]) / C.VOXEL_FIN_UM))
+    v("... et la derniere position vue est celle du bout de la marche",
+      float(np.max(np.abs(vus[-1][1] - pos_exacte))) < 1e-3,
+      f"{float(np.max(np.abs(vus[-1][1] - pos_exacte))):.2e} voxel")
+    # ⚠ Un pas qui ne peut pas avancer n'a pas de position a montrer : le mouchard ne le voit pas,
+    # et c'est a l'appelant, qui connait le verdict de la marche, de dire qu'elle est finie.
+    muets = []
+    marcher(_Vide(), depart, x_hat, longueurs, mu, sd, barre, barre_moities, barre_interstice,
+            C.VOXEL_FIN_UM, pas_max=6, demi=DEMI, arret_sur_vide=True,
+            mouchard=lambda e, pos: muets.append(e))
+    v("un pas qui n'avance pas n'est pas montre au mouchard", muets == [], f"{len(muets)}")
 
     # === LES DONNEES REELLES ==============================================================
     # ⚠ Au moins quatre cellules : la mesure saute une bande qui en garde moins de trois, donc

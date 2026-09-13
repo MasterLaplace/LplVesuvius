@@ -3049,6 +3049,94 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 133 : LE LECTEUR, LE COUT D'UN PAS, ET LE CAP COURU.
+    # (1) Le facteur du lecteur ne voyage jamais sans « identiques au bit » : un lecteur plus
+    # rapide qui rendrait un autre octet n'est pas plus rapide, il est faux.
+    # (2) Le cout d'un pas de 131 ne voyage jamais sans celui de 133 ET sans la mention qu'il
+    # est une borne haute : 144 s seul se lit comme un fait, a cote de 2,34 il dit que la
+    # planification de 131 est perimee, et sans « borne haute » il surestime le rapport.
+    # (3) Les deux verdicts du cap voyagent ensemble : « 15/16 plus droites » seul se lit comme
+    # un succes, a cote de « 2/16 plus longues » il dit ce que le cap coute.
+    lect = _source(racine, "le_lecteur_par_plage.json")
+    if lect.exists():
+        d = json.loads(lect.read_text())
+        for x in d.get("lectures", []):
+            ajoute(f"secondes a {x['fils']} fils de 133", x["secondes"], 3, lect.name)
+            ajoute(f"points par seconde a {x['fils']} fils de 133", x["points_par_seconde"], 1,
+                   lect.name)
+        if d.get("facteur_du_plus_rapide") is not None:
+            ajoute("facteur du lecteur de 133", d["facteur_du_plus_rapide"], 1, lect.name)
+        c_ = d.get("concurrence", {})
+        for cle, nom, dec in (("secondes_mur", "mur de la concurrence de 133", 3),
+                              ("secondes_seule", "seule de la concurrence de 133", 3),
+                              ("mur_sur_seule", "rapport de la concurrence de 133", 2)):
+            if c_.get(cle) is not None:
+                ajoute(nom, c_[cle], dec, lect.name)
+    for nom_, fichier_ in (("133", "la_course_a_cap.json"), ("131", "la_re_course_large.json")):
+        src = _source(racine, fichier_)
+        if not src.exists():
+            continue
+        d = json.loads(src.read_text())
+        r_ = d.get("resume", {})
+        if d.get("secondes") is not None:
+            ajoute(f"secondes de la course de {nom_}", d["secondes"], 1, src.name)
+        for cle, nom, dec in (("secondes_par_pas", "secondes par pas", 2),
+                              ("pas_marches_dans_cette_course", "pas marches", 0)):
+            if r_.get(cle) is not None:
+                ajoute(f"{nom} de {nom_}", r_[cle], dec, src.name)
+    cmp_ = _source(racine, "un_cap_change_t_il_la_course.json")
+    if cmp_.exists():
+        d = json.loads(cmp_.read_text())
+        v_ = d.get("verdict", {})
+        if v_.get("decidable"):
+            for cle, nom, dec in (("rectitude_mediane_sans_cap", "rectitude sans cap de 133", 4),
+                                  ("rectitude_mediane_avec_cap", "rectitude avec cap de 133", 4),
+                                  ("p_rectitude", "p de la rectitude de 133", 5),
+                                  ("pas_voyants_median_sans_cap", "pas voyants sans cap de 133", 1),
+                                  ("pas_voyants_median_avec_cap", "pas voyants avec cap de 133", 1),
+                                  ("p_longueur", "p de la longueur de 133", 5),
+                                  ("taux_sans_cap", "taux sans cap de 133", 4),
+                                  ("taux_avec_cap", "taux avec cap de 133", 4)):
+                if v_.get(cle) is not None:
+                    ajoute(nom, v_[cle], dec, cmp_.name)
+            for cle, nom in (("marches_plus_droites_avec_cap", "marches plus droites de 133"),
+                             ("marches_plus_longues_avec_cap", "marches plus longues de 133"),
+                             ("au_plafond_sans_cap", "au plafond sans cap de 133"),
+                             ("au_plafond_avec_cap", "au plafond avec cap de 133"),
+                             ("plus_rien_a_lire_sans_cap", "plus rien a lire sans cap de 133"),
+                             ("plus_rien_a_lire_avec_cap", "plus rien a lire avec cap de 133"),
+                             ("paires", "paires de 133")):
+                if v_.get(cle) is not None:
+                    ajoute(nom, v_[cle], 0, cmp_.name)
+        k_ = d.get("cout", {})
+        if k_.get("decidable") and k_.get("rapport") is not None:
+            ajoute("rapport des couts de 133", k_["rapport"], 1, cmp_.name)
+    der = _source(racine, "le_marcheur_derive_sur_la_course_a_cap.json")
+    if der.exists():
+        d = json.loads(der.read_text())
+        g_ = d.get("le_virage_grandit_il", {})
+        for cle, nom in (("virage_premier_tiers_deg", "virage du premier tiers avec cap de 133"),
+                         ("virage_dernier_tiers_deg", "virage du dernier tiers avec cap de 133")):
+            if g_.get(cle) is not None:
+                ajoute(nom, g_[cle], 1, der.name)
+        l_ = d.get("la_rectitude_decroit_elle_avec_la_longueur", {})
+        for cle, nom, dec, signe in (("rho_a_longueur_egale", "rho a longueur egale de 133", 4, True),
+                                     ("p_a_longueur_egale", "p a longueur egale de 133", 4, False)):
+            if l_.get(cle) is not None:
+                ajoute(nom, l_[cle], dec, der.name, signe=signe)
+        w_ = d.get("temoin_les_virages_se_compensent", {})
+        for cle, nom, dec in (("rectitude_reelle", "rectitude reelle du temoin de 133", 3),
+                              ("rectitude_simulee", "rectitude simulee du temoin de 133", 3),
+                              ("p_appariee", "p du temoin de 133", 5)):
+            if w_.get(cle) is not None:
+                ajoute(nom, w_[cle], dec, der.name)
+        n_ = d.get("jusquou_le_net_progresse_t_il", {})
+        for cle, nom, dec in (("k_du_maximum_median", "pas du maximum de net de 133", 0),
+                              ("net_maximum_median_um", "net maximum de 133", 1),
+                              ("net_au_plafond_median_um", "net au plafond de 133", 1)):
+            if n_.get(cle) is not None:
+                ajoute(nom, n_[cle], dec, der.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 131 : DOUBLER LES BANDES, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) Le compte de marches au plafond ne voyage JAMAIS sans celui des bandes. « 4 marches »
     # se lit comme un progres ; « 4 sur 16, contre 3 sur 8 » dit que le budget de bandes n'achete

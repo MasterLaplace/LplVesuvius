@@ -17,8 +17,19 @@ exactement les memes octets — un controle qui ne peut pas etre satisfait par u
 meme rendrait des octets de flux compresse qui ressemblent a du bruit de mesure. `VolumeZarr`
 refuse a l'ouverture plutot que de rendre des nombres.
 
+⭐⭐⭐⭐ ET LE COUT D'UNE LECTURE SE MESURE, IL NE SE MODELISE PAS. Le pool de `lire` a ete mappe
+sur les CHUNKS pendant toute une campagne : un cube de 41 voxels de cote tombe dans UN chunk de
+128, qui demande 41 plages, donc le pool avait une tache pour 41 requetes en file. Tout designait
+le reseau — debit plat de 8 a 128 fils, 2 % de CPU — et c'etait la latence, payee une fois par
+plage, en sequence. `--chronometrer` mesure ce que coute le cube du marcheur a un fil et a
+plusieurs, sur le vrai volume, et verifie que les valeurs sont identiques au bit : c'est le
+producteur du facteur de vitesse, sans lequel « 25 fois plus rapide » serait une anecdote.
+
 Usage :
     uv run python src/commun/voxel_distant.py --verifier
+    uv run python src/commun/voxel_distant.py --chronometrer \\
+        --zarr PHercParis4/volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr \\
+        --centre 25354.613 12887.972 15298.736 --json docs/mesures/le_lecteur_par_plage.json
 """
 
 from __future__ import annotations
@@ -202,6 +213,80 @@ class VolumeZarr:
         return out
 
 
+def cube_zyx(centre_zyx, demi: int) -> np.ndarray:
+    """Les (2·demi+1)³ voxels entiers d'un cube centre sur un point — le cube que lit le marcheur."""
+    c = np.rint(np.asarray(centre_zyx, dtype=np.float64)).astype(np.int64)
+    ax = np.arange(-int(demi), int(demi) + 1, dtype=np.int64)
+    zz, yy, xx = np.meshgrid(ax, ax, ax, indexing="ij")
+    return np.stack([zz.ravel(), yy.ravel(), xx.ravel()], axis=1) + c[None, :]
+
+
+def chronometrer(lecteur, centre_zyx, demi: int = 20, fils=(1, 32, 64),
+                 concurrents: int = 0) -> dict:
+    """Combien coute le cube du marcheur a un fil et a plusieurs — et rend-il les MEMES octets ?
+
+    ⭐⭐⭐ LA SECONDE QUESTION EST CELLE QUI COMPTE. Un lecteur plus rapide qui rendrait un octet
+    different n'est pas plus rapide, il est faux ; chaque lecture est donc comparee au bit a la
+    lecture a un fil, et le verdict `identique` voyage avec le temps.
+
+    ⚠ `time.monotonic()` et non l'horloge murale : `131` a publie une duree dont ~9 h 30 etaient
+    du sommeil de la machine.
+
+    ⚠ Un seul cube et une seule lecture par compte de fils : ce n'est pas un banc de mesure, c'est
+    le producteur d'un ORDRE DE GRANDEUR. Le cube est celui du marcheur (`demi` = 20), a un
+    depart reel, donc ce qu'il coute est ce qu'un pas paie.
+
+    ⭐⭐ `concurrents` REPOND A LA QUESTION DE LA PARALLELISATION DES BANDES sans la construire :
+    `n` cubes DISTINCTS — decales le long de z, comme des bandes — sont lus en meme temps, chacun
+    au plus grand compte de fils. Si le mur vaut celui d'une lecture seule, un pool par bande
+    rapporterait encore ; s'il vaut `n` fois, la ressource partagee est deja saturee et la
+    parallelisation ne deplacerait rien. C'est la mesure qui decide de construire ou non.
+    """
+    pts = cube_zyx(centre_zyx, demi)
+    lignes, reference = [], None
+    for n in fils:
+        t0 = time.monotonic()
+        v = lecteur.lire(pts, fils=int(n))
+        dt = time.monotonic() - t0
+        if reference is None:
+            reference = v
+        lignes.append({"fils": int(n), "secondes": round(dt, 3),
+                       "points_par_seconde": round(len(pts) / max(dt, 1e-9), 1),
+                       "identique_au_premier": bool(np.array_equal(v, reference,
+                                                                   equal_nan=True))})
+    t_un = lignes[0]["secondes"]
+    out = {"centre_zyx": [float(x) for x in centre_zyx], "demi": int(demi),
+           "points": int(len(pts)), "lectures": lignes,
+           "facteur_du_plus_rapide": round(t_un / max(min(x["secondes"] for x in lignes), 1e-9),
+                                          1),
+           "toutes_identiques": all(x["identique_au_premier"] for x in lignes)}
+    if concurrents > 0:
+        n_fils = int(max(fils))
+        # ⚠ Des cubes DISTINCTS, decales d'un cote de cube le long de z : le meme cube lu n fois
+        # mesurerait un cache que le vrai marcheur n'a pas, puisqu'il ne repasse jamais.
+        cubes = [cube_zyx(np.asarray(centre_zyx, dtype=np.float64)
+                          + np.array([k * (2 * demi + 1), 0.0, 0.0]), demi)
+                 for k in range(int(concurrents))]
+        seule = min(x["secondes"] for x in lignes if x["fils"] == n_fils)
+
+        def une(c):
+            t0 = time.monotonic()
+            lecteur.lire(c, fils=n_fils)
+            return time.monotonic() - t0
+
+        t0 = time.monotonic()
+        with cf.ThreadPoolExecutor(max_workers=int(concurrents)) as pool:
+            chacune = list(pool.map(une, cubes))
+        mur = time.monotonic() - t0
+        out["concurrence"] = {
+            "cubes": int(concurrents), "fils_par_cube": n_fils,
+            "secondes_seule": round(seule, 3), "secondes_mur": round(mur, 3),
+            "secondes_par_cube": [round(x, 3) for x in chacune],
+            # ⭐ Le rapport qui tranche : 1 = la ressource est libre, n = elle est saturee.
+            "mur_sur_seule": round(mur / max(seule, 1e-9), 2)}
+    return out
+
+
 def verifier() -> int:
     echecs = controles = 0
 
@@ -263,6 +348,34 @@ def verifier() -> int:
     v("une panne réseau est réessayée", reseau == ESSAIS, f"{reseau} essais pour {ESSAIS}")
     v("... alors qu'un code HTTP est rendu du premier coup", http == 1, f"{http} essai(s)")
 
+    # --- le chronometre, sur un lecteur fabrique -------------------------------------------
+    v("le cube du marcheur compte (2·demi+1)³ voxels", len(cube_zyx((10.4, 20.6, 30.0), 3)) == 343)
+    v("... centre sur le voxel le plus proche",
+      tuple(cube_zyx((10.4, 20.6, 30.0), 3).mean(axis=0)) == (10.0, 21.0, 30.0))
+
+    class Lent:
+        def lire(self, pts, fils=1):
+            time.sleep(0.02 / fils)
+            return (pts[:, 0] * 7 + pts[:, 1] * 3 + pts[:, 2]).astype(np.float64)
+
+    ch = chronometrer(Lent(), (10.0, 20.0, 30.0), demi=2, fils=(1, 4))
+    v("le chronomètre rend une ligne par compte de fils", [x["fils"] for x in ch["lectures"]] == [1, 4])
+    v("... et voit que les valeurs sont identiques", ch["toutes_identiques"] is True)
+    v("... et un facteur au moins égal à un", ch["facteur_du_plus_rapide"] >= 1.0,
+      f"{ch['facteur_du_plus_rapide']}")
+
+    cc = chronometrer(Lent(), (10.0, 20.0, 30.0), demi=2, fils=(1, 4), concurrents=3)["concurrence"]
+    v("la concurrence lit autant de cubes que demandé", cc["cubes"] == 3 and len(cc["secondes_par_cube"]) == 3)
+    v("... au plus grand compte de fils", cc["fils_par_cube"] == 4)
+    v("... et rend le rapport mur / seule", cc["mur_sur_seule"] > 0.0, f"{cc['mur_sur_seule']}")
+
+    class Faux2(Lent):
+        def lire(self, pts, fils=1):
+            return super().lire(pts, fils) + (1.0 if fils > 1 else 0.0)
+
+    v("sonde : un lecteur qui rend d'autres octets en parallèle est vu",
+      chronometrer(Faux2(), (10.0, 20.0, 30.0), demi=2, fils=(1, 4))["toutes_identiques"] is False)
+
     # --- la revendication porteuse, contre le VRAI volume ---------------------------------
     url = f"{BUCKET}/PHercParis4/volumes/20260310170716-45.532um-11.0m-74keV-masked.zarr"
     try:
@@ -306,9 +419,41 @@ def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0],
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--verifier", action="store_true")
+    p.add_argument("--chronometrer", action="store_true",
+                   help="mesure le cout du cube du marcheur a un fil et a plusieurs")
+    p.add_argument("--zarr", default=None, help="chemin du zarr dans le bucket")
+    p.add_argument("--centre", type=float, nargs=3, default=None, metavar=("Z", "Y", "X"))
+    p.add_argument("--demi", type=int, default=20)
+    p.add_argument("--fils", type=int, nargs="+", default=[1, 32, 64])
+    p.add_argument("--concurrents", type=int, default=0,
+                   help="lit aussi N cubes distincts EN MEME TEMPS, pour savoir si un pool par bande rapporterait")
+    p.add_argument("--json", default=None)
     a = p.parse_args()
     if a.verifier:
         return verifier()
+    if a.chronometrer:
+        if a.zarr is None or a.centre is None:
+            print("⚠ --chronometrer demande --zarr et --centre")
+            return 1
+        vol = VolumeZarr(f"{BUCKET}/{a.zarr}")
+        r = chronometrer(vol, a.centre, demi=a.demi, fils=tuple(a.fils), concurrents=a.concurrents)
+        r["zarr"] = a.zarr
+        for x in r["lectures"]:
+            print(f"  {x['fils']:>3} fil(s) · {x['secondes']:>7.3f} s · "
+                  f"{x['points_par_seconde']:>9.1f} pts/s · identique {x['identique_au_premier']}")
+        print(f"  facteur du plus rapide : ×{r['facteur_du_plus_rapide']} · "
+              f"toutes identiques : {r['toutes_identiques']}")
+        if "concurrence" in r:
+            c = r["concurrence"]
+            print(f"  {c['cubes']} cubes en même temps à {c['fils_par_cube']} fils : mur "
+                  f"{c['secondes_mur']} s contre {c['secondes_seule']} s seule · "
+                  f"rapport {c['mur_sur_seule']}")
+        if a.json:
+            from pathlib import Path  # noqa: PLC0415
+            Path(a.json).parent.mkdir(parents=True, exist_ok=True)
+            Path(a.json).write_text(json.dumps(r, indent=2, ensure_ascii=False))
+            print(f"écrit : {a.json}")
+        return 0 if r["toutes_identiques"] else 1
     p.print_help()
     return 0
 
