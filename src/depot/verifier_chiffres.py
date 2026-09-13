@@ -3049,6 +3049,49 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 135 : LA SURFACE DU ROULEAU, ET UN APPARIEMENT L'IMPOSE.
+    # Le compte d'arrets sortis ne voyage jamais sans l'ECART median a la surface : « 14/14 » seul
+    # se lit comme un verdict, a cote de « 0,3 mm » il dit que la surface a ete LUE et pas supposee.
+    cesse = _source(racine, "ou_la_matiere_cesse_de_se_lire.json")
+    if cesse.exists():
+        d = json.loads(cesse.read_text())
+
+        def dec135(v, plafond):
+            s = repr(float(v))
+            return min(plafond, len(s.split(".")[1]) if "." in s and "e" not in s else plafond)
+
+        for c_ in d.get("par_course", []):
+            nom_c = c_["source"].replace(".json", "").replace("_", " ")
+            r_ = c_.get("resume", {})
+            for cle, nom in (("plus_rien_a_lire", "arrets"), ("sortis_du_rouleau", "sortis"),
+                             ("a_la_surface", "a la surface"), ("au_dela_de_la_surface", "au-dela"),
+                             ("dans_un_vide_interieur", "dans un vide"), ("decidables", "decidables")):
+                if r_.get(cle) is not None:
+                    ajoute(f"{nom} de {nom_c} de 135", r_[cle], 0, cesse.name)
+            for cle, nom in (("ecart_a_la_surface_median_mm", "ecart median"),
+                             ("rayon_exterieur_median_mm", "rayon exterieur median"),
+                             ("rayon_arret_median_mm", "rayon d arret median")):
+                if r_.get(cle) is not None:
+                    ajoute(f"{nom} de {nom_c} de 135", r_[cle], dec135(r_[cle], 2), cesse.name)
+            for x in c_.get("arrets", []):
+                # ⚠ Seules les marches qui NE sont PAS sorties sont enregistrees arret par arret :
+                # ce sont celles que le document tabule (§4). Enregistrer les vingt-cinq sorties
+                # ferait crier « chiffre recalcule qui n'apparait nulle part » sur des nombres que
+                # le document resume exprès, et une alerte permanente est une alerte qu'on cesse
+                # de lire.
+                if x.get("fin") == "plus rien a lire":
+                    continue
+                r0 = x["rayon_mm"]
+                ajoute(f"rayon d arret {r0} de {nom_c} de 135", x["rayon_arret_mm"], dec135(x["rayon_arret_mm"], 2), cesse.name)
+                if x.get("surface", {}).get("rayon_exterieur_mm") is not None:
+                    ajoute(f"surface {r0} de {nom_c} de 135", x["surface"]["rayon_exterieur_mm"],
+                           dec135(x["surface"]["rayon_exterieur_mm"], 2), cesse.name)
+                if x.get("verdict", {}).get("ecart_a_la_surface_mm") is not None:
+                    ajoute(f"ecart {r0} de {nom_c} de 135", x["verdict"]["ecart_a_la_surface_mm"],
+                           dec135(x["verdict"]["ecart_a_la_surface_mm"], 2), cesse.name, signe=True)
+        if d.get("secondes") is not None:
+            ajoute("secondes de 135", d["secondes"], 1, cesse.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 134 : LES FEUILLES NON PARALLELES, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) Le virage d'une pile ne voyage jamais sans le virage REEL et sa fourchette : 14,72° seul
     # se lit comme un succes, a cote de [13,28 ; 14,54] il dit « juste au-dessus ».

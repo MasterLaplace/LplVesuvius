@@ -1410,6 +1410,8 @@ run "figure la course en 3d"  uv run python "$ROOT/src/figures/figure_la_course_
 run "un cap change la course"  uv run python "$ROOT/src/nappe/un_cap_change_t_il_la_course.py" --verifier
 run "feuilles non paralleles"  uv run python "$ROOT/src/nappe/une_pile_a_feuilles_non_paralleles.py" --verifier
 run "figure feuilles non par."  uv run python "$ROOT/src/figures/figure_une_pile_a_feuilles_non_paralleles.py" --verifier
+run "ou la matiere cesse"     uv run python "$ROOT/src/nappe/ou_la_matiere_cesse_de_se_lire.py" --verifier
+run "figure ou la matiere"    uv run python "$ROOT/src/figures/figure_ou_la_matiere_cesse_de_se_lire.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

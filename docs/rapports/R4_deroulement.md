@@ -773,6 +773,27 @@ idéal ; la mesure a rendu l'inverse à forte amplitude (9,2° contre 29,71°), 
 réécrit pour ne demander que ce qui est sûr. → **`R4-P27` a sa moitié : le virage est expliqué,
 la dérive non** ; `R4-P26` gagne la première matière fabriquée qui distingue ses feuilles.
 
+**`135` · 2026-09-14 · là où la matière cesse de se lire, c'est la surface du rouleau**
+(`ou_la_matiere_cesse_de_se_lire.py`, 25 arrêts relus sur le volume fin, 1209,0 s)
+Personne n'était allé REGARDER l'endroit où une marche s'arrête sur « plus rien à lire ». Or
+`rien_lu` a une définition exacte — le cube est constant, donc entièrement au remplissage du volume
+masqué — et un volume masqué est au remplissage là où il n'y a pas de rouleau. Deux mesures sans
+hypothèse commune : la matière AU-DELÀ de l'arrêt sur seize pas le long de la dernière direction, et
+la surface extérieure lue sur le rayon MÊME de l'arrêt (sonde 5³ tous les 50 µm depuis l'axe de la
+bande, dernier échantillon avec matière). ⭐⭐⭐⭐ **Les arrêts sont la surface extérieure** : course à
+cap **14/14** sortis du rouleau (écart médian **0,3 mm**, remplissage sur les seize pas), course λ = 0
+**10/11** (écart médian **0,26 mm**), le 25ᵉ à **0,11 mm** de la surface avec 2,8 % de matière dans le
+cube suivant ; rayon extérieur médian **21,62** et **21,05 mm**, et sur les rayons des arrêts la
+surface va de **16,8** à **29,75 mm** — le rouleau est écrasé (`90`), ce qui est pourquoi `116`
+réfutait une frontière radiale (`R4-F73`, `R4-P22`). ⭐⭐⭐⭐ **Donc une marche « arrêtée » est une
+marche ARRIVÉE** : elle a traversé le rouleau de son départ à l'extérieur. Et les marches au plafond
+sont exactement celles qui n'ont PAS atteint la surface — sept marches à **5,79** à **21,06 mm**
+sous elle, revenues sur elles-mêmes (`R4-F74`). → **`R4-F62` se relit à l'envers** : ce qui arrête
+onze marches sur seize n'est pas le volume qui cesse de répondre, c'est le rouleau qui finit ; et
+**le second verdict de `133` se retourne** : « le cap raccourcit » veut dire « le cap arrive plus
+tôt » — 14 sorties sur 16 avec cap, 11 sans. La portée n'est bornée ni par le budget ni par le
+volume : par le retour sur soi, que le cap supprime (`R4-P20`).
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

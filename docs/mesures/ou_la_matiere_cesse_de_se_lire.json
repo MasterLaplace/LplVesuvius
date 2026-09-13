@@ -1,0 +1,2098 @@
+{
+  "fragment": "PHercParis4",
+  "volume_fin": "20260411134726",
+  "remplissage": 0,
+  "pas_um": 173.0,
+  "pas_au_dela": 16,
+  "par_course": [
+    {
+      "source": "la_course_a_cap.json",
+      "memoire_du_cap": 0.75,
+      "trace_utilisee": true,
+      "marches": 16,
+      "arrets": [
+        {
+          "marche": 0,
+          "bande": [
+            10,
+            27
+          ],
+          "rayon_mm": 4.07,
+          "fin": "plafond",
+          "pas": 112,
+          "axe_zyx": [
+            25343.176300000003,
+            13802.250016666667,
+            16726.95835416667
+          ],
+          "position_zyx": [
+            25458.35,
+            14124.41,
+            11716.73
+          ],
+          "direction": [
+            0.032134,
+            -0.135341,
+            0.990278
+          ],
+          "rayon_arret_mm": 12.05,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "la_matiere_reprend_au_pas": 1,
+            "rien_sur_seize_pas": false
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 18.95,
+            "echantillons": 804,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": -6.9,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": false,
+            "dans_un_vide_interieur": true,
+            "sorti_du_rouleau": false
+          }
+        },
+        {
+          "marche": 1,
+          "bande": [
+            28,
+            37
+          ],
+          "rayon_mm": 6.32,
+          "fin": "plus rien a lire",
+          "pas": 75,
+          "axe_zyx": [
+            25777.0903,
+            14359.348999999998,
+            17874.527
+          ],
+          "position_zyx": [
+            28562.11,
+            21004.27,
+            14890.82
+          ],
+          "direction": [
+            0.268667,
+            0.585479,
+            -0.764874
+          ],
+          "rayon_arret_mm": 18.72,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 18.4,
+            "echantillons": 900,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.32,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 2,
+          "bande": [
+            38,
+            45
+          ],
+          "rayon_mm": 8.02,
+          "fin": "plafond",
+          "pas": 112,
+          "axe_zyx": [
+            19198.604516666666,
+            16923.078225,
+            14795.656733333333
+          ],
+          "position_zyx": [
+            22262.6,
+            19450.49,
+            15932.46
+          ],
+          "direction": [
+            -0.500606,
+            -0.79944,
+            0.332098
+          ],
+          "rayon_arret_mm": 9.92,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "la_matiere_reprend_au_pas": 1,
+            "rien_sur_seize_pas": false
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 28.4,
+            "echantillons": 900,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": -18.48,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": false,
+            "dans_un_vide_interieur": true,
+            "sorti_du_rouleau": false
+          }
+        },
+        {
+          "marche": 3,
+          "bande": [
+            46,
+            52
+          ],
+          "rayon_mm": 9.4,
+          "fin": "plus rien a lire",
+          "pas": 53,
+          "axe_zyx": [
+            12346.362583333334,
+            19518.7005,
+            13711.31375
+          ],
+          "position_zyx": [
+            9712.77,
+            13644.32,
+            16638.49
+          ],
+          "direction": [
+            -0.401543,
+            -0.881755,
+            0.247533
+          ],
+          "rayon_arret_mm": 16.97,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 16.8,
+            "echantillons": 900,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.17,
+            "a_la_surface": true,
+            "au_dela_de_la_surface": false,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 4,
+          "bande": [
+            53,
+            58
+          ],
+          "rayon_mm": 10.51,
+          "fin": "plus rien a lire",
+          "pas": 78,
+          "axe_zyx": [
+            17899.04295,
+            17026.486,
+            14683.400541666666
+          ],
+          "position_zyx": [
+            17411.32,
+            12542.25,
+            5608.7
+          ],
+          "direction": [
+            0.045678,
+            -0.42722,
+            -0.902993
+          ],
+          "rayon_arret_mm": 24.32,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 24.0,
+            "echantillons": 786,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.32,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 5,
+          "bande": [
+            59,
+            63
+          ],
+          "rayon_mm": 11.57,
+          "fin": "plus rien a lire",
+          "pas": 67,
+          "axe_zyx": [
+            17994.268345833334,
+            16836.15457916667,
+            14548.472433333334
+          ],
+          "position_zyx": [
+            17238.83,
+            11221.21,
+            6725.31
+          ],
+          "direction": [
+            0.371147,
+            -0.499503,
+            -0.782781
+          ],
+          "rayon_arret_mm": 23.18,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 22.95,
+            "echantillons": 862,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.23,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 6,
+          "bande": [
+            64,
+            68
+          ],
+          "rayon_mm": 12.48,
+          "fin": "plus rien a lire",
+          "pas": 66,
+          "axe_zyx": [
+            54059.413799999995,
+            17072.8216,
+            17292.7628
+          ],
+          "position_zyx": [
+            54720.65,
+            22794.51,
+            24724.72
+          ],
+          "direction": [
+            0.192408,
+            0.913005,
+            0.359723
+          ],
+          "rayon_arret_mm": 22.57,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 22.3,
+            "echantillons": 900,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.27,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 7,
+          "bande": [
+            69,
+            72
+          ],
+          "rayon_mm": 13.27,
+          "fin": "plus rien a lire",
+          "pas": 48,
+          "axe_zyx": [
+            23619.574829166664,
+            14215.224608333334,
+            15775.189395833335
+          ],
+          "position_zyx": [
+            22615.45,
+            10373.88,
+            7496.53
+          ],
+          "direction": [
+            0.032669,
+            0.141107,
+            -0.989455
+          ],
+          "rayon_arret_mm": 22.04,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 21.65,
+            "echantillons": 839,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.39,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 8,
+          "bande": [
+            73,
+            76
+          ],
+          "rayon_mm": 13.99,
+          "fin": "plus rien a lire",
+          "pas": 30,
+          "axe_zyx": [
+            15146.1605875,
+            18121.9604,
+            13779.835687499999
+          ],
+          "position_zyx": [
+            13864.25,
+            15338.73,
+            20964.27
+          ],
+          "direction": [
+            -0.054953,
+            -0.715506,
+            0.696442
+          ],
+          "rayon_arret_mm": 18.75,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 18.4,
+            "echantillons": 900,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.35,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 9,
+          "bande": [
+            77,
+            80
+          ],
+          "rayon_mm": 14.7,
+          "fin": "plus rien a lire",
+          "pas": 39,
+          "axe_zyx": [
+            29732.835875,
+            15595.424375,
+            19160.535125
+          ],
+          "position_zyx": [
+            30375.23,
+            24077.14,
+            21813.04
+          ],
+          "direction": [
+            -0.104687,
+            0.906444,
+            0.409146
+          ],
+          "rayon_arret_mm": 21.38,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 21.1,
+            "echantillons": 861,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.28,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 10,
+          "bande": [
+            81,
+            84
+          ],
+          "rayon_mm": 15.46,
+          "fin": "plus rien a lire",
+          "pas": 23,
+          "axe_zyx": [
+            18238.20775,
+            16371.502708333333,
+            15218.62465
+          ],
+          "position_zyx": [
+            17857.97,
+            22994.38,
+            9730.73
+          ],
+          "direction": [
+            0.014047,
+            0.509895,
+            -0.860122
+          ],
+          "rayon_arret_mm": 20.66,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 20.4,
+            "echantillons": 900,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.26,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 11,
+          "bande": [
+            85,
+            88
+          ],
+          "rayon_mm": 16.22,
+          "fin": "plus rien a lire",
+          "pas": 31,
+          "axe_zyx": [
+            21101.475016666664,
+            16239.807666666666,
+            16172.631441666666
+          ],
+          "position_zyx": [
+            21753.36,
+            25297.52,
+            17250.65
+          ],
+          "direction": [
+            0.819029,
+            0.567225,
+            -0.086303
+          ],
+          "rayon_arret_mm": 21.95,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 21.6,
+            "echantillons": 797,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.35,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 12,
+          "bande": [
+            89,
+            91
+          ],
+          "rayon_mm": 16.93,
+          "fin": "plus rien a lire",
+          "pas": 1,
+          "axe_zyx": [
+            65359.6091,
+            19592.45950416667,
+            17292.228054166666
+          ],
+          "position_zyx": [
+            65291.67,
+            20587.82,
+            24368.81
+          ],
+          "direction": [
+            -0.320668,
+            0.131929,
+            0.937959
+          ],
+          "rayon_arret_mm": 17.15,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 16.8,
+            "echantillons": 746,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.35,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 13,
+          "bande": [
+            92,
+            94
+          ],
+          "rayon_mm": 17.51,
+          "fin": "plus rien a lire",
+          "pas": 40,
+          "axe_zyx": [
+            59820.864745833336,
+            17229.061020833335,
+            16445.332029166668
+          ],
+          "position_zyx": [
+            60915.96,
+            11637.7,
+            8283.07
+          ],
+          "direction": [
+            0.247947,
+            -0.444409,
+            -0.860827
+          ],
+          "rayon_arret_mm": 23.89,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 23.65,
+            "echantillons": 900,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.24,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 14,
+          "bande": [
+            95,
+            97
+          ],
+          "rayon_mm": 18.06,
+          "fin": "plus rien a lire",
+          "pas": 27,
+          "axe_zyx": [
+            48361.293475000006,
+            17815.842475,
+            17576.8722
+          ],
+          "position_zyx": [
+            48775.61,
+            8258.11,
+            19239.36
+          ],
+          "direction": [
+            0.237158,
+            -0.923843,
+            0.300451
+          ],
+          "rayon_arret_mm": 23.3,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 22.95,
+            "echantillons": 868,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.35,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 15,
+          "bande": [
+            98,
+            100
+          ],
+          "rayon_mm": 18.62,
+          "fin": "plus rien a lire",
+          "pas": 45,
+          "axe_zyx": [
+            48252.5982,
+            16062.822833333332,
+            17917.121791666665
+          ],
+          "position_zyx": [
+            46710.7,
+            25749.84,
+            21508.98
+          ],
+          "direction": [
+            -0.611311,
+            0.725228,
+            0.31677
+          ],
+          "rayon_arret_mm": 25.07,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 24.85,
+            "echantillons": 860,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.22,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        }
+      ],
+      "resume": {
+        "plus_rien_a_lire": 14,
+        "decidables": 14,
+        "sortis_du_rouleau": 14,
+        "a_la_surface": 1,
+        "au_dela_de_la_surface": 13,
+        "dans_un_vide_interieur": 0,
+        "rien_sur_seize_pas": 14,
+        "ecart_a_la_surface_median_mm": 0.3,
+        "rayon_exterieur_median_mm": 21.62,
+        "rayon_arret_median_mm": 21.99
+      }
+    },
+    {
+      "source": "la_re_course_large.json",
+      "memoire_du_cap": 0.0,
+      "trace_utilisee": false,
+      "marches": 16,
+      "arrets": [
+        {
+          "marche": 0,
+          "bande": [
+            10,
+            27
+          ],
+          "rayon_mm": 4.07,
+          "fin": "plafond",
+          "pas": 112,
+          "axe_zyx": [
+            25343.157645833333,
+            13809.631979166666,
+            16722.2032375
+          ],
+          "position_zyx": [
+            24476.526326208343,
+            12644.934424041667,
+            16556.031594291675
+          ],
+          "direction": [
+            -0.09535,
+            -0.961032,
+            0.259471
+          ],
+          "rayon_arret_mm": 3.51,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "la_matiere_reprend_au_pas": 1,
+            "rien_sur_seize_pas": false
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 21.3,
+            "echantillons": 831,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": -17.79,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": false,
+            "dans_un_vide_interieur": true,
+            "sorti_du_rouleau": false
+          }
+        },
+        {
+          "marche": 1,
+          "bande": [
+            28,
+            37
+          ],
+          "rayon_mm": 6.32,
+          "fin": "plus rien a lire",
+          "pas": 70,
+          "axe_zyx": [
+            25778.841466666665,
+            14299.014066666667,
+            17558.632333333335
+          ],
+          "position_zyx": [
+            28027.93665754165,
+            20919.50536691666,
+            14742.915320250011
+          ],
+          "direction": [
+            0.002318,
+            0.086863,
+            -0.996218
+          ],
+          "rayon_arret_mm": 18.09,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 17.9,
+            "echantillons": 900,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.19,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 2,
+          "bande": [
+            38,
+            45
+          ],
+          "rayon_mm": 8.02,
+          "fin": "sortie du volume",
+          "pas": 1,
+          "axe_zyx": [
+            19199.827566666663,
+            16855.73361666667,
+            14605.676300000001
+          ],
+          "position_zyx": [
+            19215.094091666666,
+            20064.644755,
+            13577.917122666668
+          ],
+          "direction": [
+            0.710725,
+            0.682935,
+            -0.168728
+          ],
+          "rayon_arret_mm": 8.09,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "la_matiere_reprend_au_pas": 1,
+            "rien_sur_seize_pas": false
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 20.75,
+            "echantillons": 798,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": -12.66,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": false,
+            "dans_un_vide_interieur": true,
+            "sorti_du_rouleau": false
+          }
+        },
+        {
+          "marche": 3,
+          "bande": [
+            46,
+            52
+          ],
+          "rayon_mm": 9.4,
+          "fin": "plafond",
+          "pas": 112,
+          "axe_zyx": [
+            12345.164083333333,
+            19581.437666666665,
+            13901.6755
+          ],
+          "position_zyx": [
+            12756.285633999998,
+            16276.895476874992,
+            14735.410225916685
+          ],
+          "direction": [
+            0.478578,
+            0.654184,
+            -0.585668
+          ],
+          "rayon_arret_mm": 8.24,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "la_matiere_reprend_au_pas": 1,
+            "rien_sur_seize_pas": false
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 29.3,
+            "echantillons": 900,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": -21.06,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": false,
+            "dans_un_vide_interieur": true,
+            "sorti_du_rouleau": false
+          }
+        },
+        {
+          "marche": 4,
+          "bande": [
+            53,
+            58
+          ],
+          "rayon_mm": 10.51,
+          "fin": "plus rien a lire",
+          "pas": 100,
+          "axe_zyx": [
+            17898.32476666667,
+            17221.770558333334,
+            14604.759466666666
+          ],
+          "position_zyx": [
+            17703.52702254166,
+            19402.29963041668,
+            7500.302033374996
+          ],
+          "direction": [
+            0.985527,
+            0.026206,
+            -0.167481
+          ],
+          "rayon_arret_mm": 17.84,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 17.65,
+            "echantillons": 733,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.19,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 5,
+          "bande": [
+            59,
+            63
+          ],
+          "rayon_mm": 11.57,
+          "fin": "plafond",
+          "pas": 112,
+          "axe_zyx": [
+            17993.9887375,
+            17048.36284166667,
+            14350.37475
+          ],
+          "position_zyx": [
+            14231.49610120833,
+            11242.711449208324,
+            7154.186665958334
+          ],
+          "direction": [
+            -0.365746,
+            -0.92481,
+            0.104674
+          ],
+          "rayon_arret_mm": 23.96,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              0.001,
+              0.0,
+              0.0,
+              0.0,
+              0.001,
+              0.0,
+              0.0,
+              0.005,
+              0.0,
+              0.0,
+              0.001,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "la_matiere_reprend_au_pas": 1,
+            "rien_sur_seize_pas": false
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 29.75,
+            "echantillons": 900,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": -5.79,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": false,
+            "dans_un_vide_interieur": true,
+            "sorti_du_rouleau": false
+          }
+        },
+        {
+          "marche": 6,
+          "bande": [
+            64,
+            68
+          ],
+          "rayon_mm": 12.48,
+          "fin": "plus rien a lire",
+          "pas": 66,
+          "axe_zyx": [
+            54059.3618,
+            17086.976,
+            17287.7292
+          ],
+          "position_zyx": [
+            54864.29310799999,
+            22831.78794570832,
+            24696.68860770834
+          ],
+          "direction": [
+            0.102097,
+            0.931175,
+            0.349984
+          ],
+          "rayon_arret_mm": 22.58,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 22.3,
+            "echantillons": 900,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.28,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 7,
+          "bande": [
+            69,
+            72
+          ],
+          "rayon_mm": 13.27,
+          "fin": "plus rien a lire",
+          "pas": 51,
+          "axe_zyx": [
+            23619.795995833334,
+            14146.60765,
+            15809.835154166667
+          ],
+          "position_zyx": [
+            24394.863233999993,
+            13748.825334458334,
+            8483.280359291668
+          ],
+          "direction": [
+            -0.984493,
+            0.156747,
+            -0.07876
+          ],
+          "rayon_arret_mm": 17.71,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              0.972,
+              1.0,
+              0.967,
+              1.0,
+              0.269,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "la_matiere_reprend_au_pas": 1,
+            "rien_sur_seize_pas": false
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 17.6,
+            "echantillons": 764,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.11,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": false,
+            "dans_un_vide_interieur": true,
+            "sorti_du_rouleau": false
+          }
+        },
+        {
+          "marche": 8,
+          "bande": [
+            73,
+            76
+          ],
+          "rayon_mm": 13.99,
+          "fin": "plus rien a lire",
+          "pas": 35,
+          "axe_zyx": [
+            15146.1605875,
+            18121.9604,
+            13779.835687499999
+          ],
+          "position_zyx": [
+            13801.125719666667,
+            15371.415982791672,
+            20909.522974041673
+          ],
+          "direction": [
+            -0.073754,
+            -0.981902,
+            0.17444
+          ],
+          "rayon_arret_mm": 18.62,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 18.35,
+            "echantillons": 900,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.27,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 9,
+          "bande": [
+            77,
+            80
+          ],
+          "rayon_mm": 14.7,
+          "fin": "plus rien a lire",
+          "pas": 41,
+          "axe_zyx": [
+            29732.835875,
+            15595.424375,
+            19160.535125
+          ],
+          "position_zyx": [
+            30332.572340500003,
+            24029.711633875006,
+            21723.58178187499
+          ],
+          "direction": [
+            -0.169579,
+            0.985474,
+            0.009204
+          ],
+          "rayon_arret_mm": 21.21,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 21.05,
+            "echantillons": 859,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.16,
+            "a_la_surface": true,
+            "au_dela_de_la_surface": false,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 10,
+          "bande": [
+            81,
+            84
+          ],
+          "rayon_mm": 15.46,
+          "fin": "plafond",
+          "pas": 112,
+          "axe_zyx": [
+            18238.20775,
+            16371.502708333333,
+            15218.62465
+          ],
+          "position_zyx": [
+            19029.59662216667,
+            21849.23408641667,
+            13176.872530333341
+          ],
+          "direction": [
+            0.534318,
+            0.845203,
+            -0.011647
+          ],
+          "rayon_arret_mm": 14.16,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              0.0,
+              0.001,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "la_matiere_reprend_au_pas": 1,
+            "rien_sur_seize_pas": false
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 22.1,
+            "echantillons": 843,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": -7.94,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": false,
+            "dans_un_vide_interieur": true,
+            "sorti_du_rouleau": false
+          }
+        },
+        {
+          "marche": 11,
+          "bande": [
+            85,
+            88
+          ],
+          "rayon_mm": 16.22,
+          "fin": "plus rien a lire",
+          "pas": 103,
+          "axe_zyx": [
+            21101.475016666664,
+            16239.807666666666,
+            16172.631441666666
+          ],
+          "position_zyx": [
+            21046.352557666658,
+            25689.429812416656,
+            16728.75207058333
+          ],
+          "direction": [
+            0.997902,
+            0.064688,
+            0.002746
+          ],
+          "rayon_arret_mm": 22.72,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 22.65,
+            "echantillons": 791,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.07,
+            "a_la_surface": true,
+            "au_dela_de_la_surface": false,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 12,
+          "bande": [
+            89,
+            91
+          ],
+          "rayon_mm": 16.93,
+          "fin": "plus rien a lire",
+          "pas": 3,
+          "axe_zyx": [
+            65359.6091,
+            19592.45950416667,
+            17292.228054166666
+          ],
+          "position_zyx": [
+            65180.63701854166,
+            20688.241791875,
+            24363.333694375
+          ],
+          "direction": [
+            -0.086783,
+            0.792303,
+            0.603924
+          ],
+          "rayon_arret_mm": 17.18,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 16.9,
+            "echantillons": 748,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.28,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 13,
+          "bande": [
+            92,
+            94
+          ],
+          "rayon_mm": 17.51,
+          "fin": "plus rien a lire",
+          "pas": 43,
+          "axe_zyx": [
+            59820.864745833336,
+            17229.061020833335,
+            16445.332029166668
+          ],
+          "position_zyx": [
+            61346.3945570833,
+            12491.565393875002,
+            8346.847049458325
+          ],
+          "direction": [
+            0.111099,
+            -0.050147,
+            -0.992543
+          ],
+          "rayon_arret_mm": 22.81,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 22.55,
+            "echantillons": 900,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.26,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 14,
+          "bande": [
+            95,
+            97
+          ],
+          "rayon_mm": 18.06,
+          "fin": "plus rien a lire",
+          "pas": 32,
+          "axe_zyx": [
+            48361.293475000006,
+            17815.842475,
+            17576.8722
+          ],
+          "position_zyx": [
+            48636.418090166655,
+            8255.145166458333,
+            19272.87074604167
+          ],
+          "direction": [
+            -0.000293,
+            -1.0,
+            0.000613
+          ],
+          "rayon_arret_mm": 23.31,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 23.05,
+            "echantillons": 868,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.26,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        },
+        {
+          "marche": 15,
+          "bande": [
+            98,
+            100
+          ],
+          "rayon_mm": 18.62,
+          "fin": "plus rien a lire",
+          "pas": 50,
+          "axe_zyx": [
+            48252.5982,
+            16062.822833333332,
+            17917.121791666665
+          ],
+          "position_zyx": [
+            46972.69335049999,
+            26020.406427791666,
+            21294.044164291663
+          ],
+          "direction": [
+            -0.995135,
+            0.09772,
+            0.012548
+          ],
+          "rayon_arret_mm": 25.42,
+          "au_dela": {
+            "part_au_remplissage_par_pas": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "la_matiere_reprend_au_pas": null,
+            "rien_sur_seize_pas": true
+          },
+          "surface": {
+            "decidable": true,
+            "rayon_exterieur_mm": 25.15,
+            "echantillons": 848,
+            "echantillon_um": 50.0,
+            "coupe_par_le_bord_du_champ": false
+          },
+          "verdict": {
+            "decidable": true,
+            "ecart_a_la_surface_mm": 0.27,
+            "a_la_surface": false,
+            "au_dela_de_la_surface": true,
+            "dans_un_vide_interieur": false,
+            "sorti_du_rouleau": true
+          }
+        }
+      ],
+      "resume": {
+        "plus_rien_a_lire": 11,
+        "decidables": 11,
+        "sortis_du_rouleau": 10,
+        "a_la_surface": 2,
+        "au_dela_de_la_surface": 8,
+        "dans_un_vide_interieur": 1,
+        "rien_sur_seize_pas": 10,
+        "ecart_a_la_surface_median_mm": 0.26,
+        "rayon_exterieur_median_mm": 21.05,
+        "rayon_arret_median_mm": 21.21
+      }
+    }
+  ],
+  "secondes": 1209.0
+}
