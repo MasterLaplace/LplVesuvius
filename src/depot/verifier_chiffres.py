@@ -3049,6 +3049,64 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 134 : LES FEUILLES NON PARALLELES, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) Le virage d'une pile ne voyage jamais sans le virage REEL et sa fourchette : 14,72° seul
+    # se lit comme un succes, a cote de [13,28 ; 14,54] il dit « juste au-dessus ».
+    # (2) Et il ne voyage jamais sans le COSINUS des virages : tourner autant que le rouleau sans
+    # deriver comme lui, c'est le cosinus qui le dit (−0,4624 contre −0,2061).
+    pfnp = _source(racine, "une_pile_a_feuilles_non_paralleles.json")
+    if pfnp.exists():
+        d = json.loads(pfnp.read_text())
+
+        def dec_(v, plafond):
+            # ⚠ Les decimales sont celles que le PRODUCTEUR a ecrites, jamais un compte fixe : le
+            # JSON porte 0.999 et non 0.9990, et exiger « 0,9990 » d'un document qui recopie
+            # « 0,999 » ferait se contredire ce controle et `chiffres_sans_record`.
+            s = repr(float(v))
+            return min(plafond, len(s.split(".")[1]) if "." in s and "e" not in s else plafond)
+        r_ = d.get("desaccord_reel", {})
+        for cle, nom, dec in (("mediane", "desaccord reel de 134", 2), ("p25", "desaccord reel p25 de 134", 2),
+                              ("p75", "desaccord reel p75 de 134", 2), ("p90", "desaccord reel p90 de 134", 2)):
+            if r_.get(cle) is not None:
+                ajoute(nom, r_[cle], dec, pfnp.name)
+        if r_.get("n") is not None:
+            ajoute("pas voyants du desaccord reel de 134", r_["n"], 0, pfnp.name)
+        if r_.get("cos_virages_median") is not None:
+            ajoute("cos reel de 134", r_["cos_virages_median"], 4, pfnp.name, signe=True)
+        vr = r_.get("virage_par_pas", {})
+        for cle, nom in (("mediane", "virage reel de 134"), ("p25", "virage reel p25 de 134"),
+                         ("p75", "virage reel p75 de 134")):
+            if vr.get(cle) is not None:
+                ajoute(nom, vr[cle], 2, pfnp.name)
+        c_ = d.get("controle_pile_plane", {})
+        if c_.get("desaccord", {}).get("mediane") is not None:
+            ajoute("desaccord de la pile plane de 134", c_["desaccord"]["mediane"], 2, pfnp.name)
+        for cle, nom, dec in (("virage_median_deg", "virage de la pile plane de 134", 2),
+                              ("rectitude_mediane", "rectitude de la pile plane de 134", 4)):
+            if c_.get("marche", {}).get(cle) is not None:
+                ajoute(nom, c_["marche"][cle], dec, pfnp.name)
+        for x in d.get("par_longueur_donde", []):
+            v_ = x.get("variante", "en_phase").replace("_", " ")
+            ld = x["longueur_donde_um"]
+            cal = x.get("calibration", {})
+            for cle, nom, dec in (("amplitude_um", "amplitude", 3), ("inclinaison_max_deg", "inclinaison", 2),
+                                  ("mediane_deg", "desaccord obtenu", 2)):
+                if cal.get(cle) is not None:
+                    ajoute(f"{nom} {v_} {ld} de 134", cal[cle], dec, pfnp.name)
+            for m in x.get("marche", {}).get("par_memoire", []):
+                lam = f"memoire {m['memoire']:.2f}"
+                for cle, nom, dec, sg in (("virage_median_deg", "virage", 2, False),
+                                          ("rectitude_mediane", "rectitude", 4, False),
+                                          ("erreur_mediane_deg", "erreur", 3, False),
+                                          ("desaccord_rencontre_median_deg", "desaccord rencontre", 2, False),
+                                          ("taux_median", "taux", 4, False),
+                                          ("cos_virages_median", "cos", 4, True)):
+                    if m.get(cle) is not None:
+                        ajoute(f"{nom} {v_} {ld} {lam} de 134", m[cle], dec_(m[cle], dec), pfnp.name,
+                               signe=sg)
+        if d.get("secondes") is not None:
+            ajoute("secondes de 134", d["secondes"], 1, pfnp.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 133 : LE LECTEUR, LE COUT D'UN PAS, ET LE CAP COURU.
     # (1) Le facteur du lecteur ne voyage jamais sans « identiques au bit » : un lecteur plus
     # rapide qui rendrait un autre octet n'est pas plus rapide, il est faux.

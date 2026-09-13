@@ -733,6 +733,153 @@ class VolumeFabriqueEnSpirale(VolumeFabrique):
         return v
 
 
+class VolumeFabriqueOndulee(VolumeFabrique):
+    """Une pile FROISSEE : des feuilles paralleles en moyenne, dont la normale varie d'un point a
+    l'autre — la fixture que `132` a nommee et que `R4-P27` demande.
+
+    ⭐⭐⭐⭐ ELLE EXISTE PARCE QUE TOUTES LES AUTRES ONT DES FEUILLES PARFAITEMENT PARALLELES. Sur
+    la pile plane la normale est une constante ; sur la spirale elle tourne avec l'angle, donc
+    d'une quantite negligeable a l'echelle d'un cube (`132` : 0,0103° par pas). Or le vrai
+    rouleau rend un DESACCORD entre les deux moities du cube de lecture — la garde de `100` — que
+    ces deux fixtures rendent nul : la matiere y contient des orientations qui se disputent, et
+    aucune fixture ne savait les fabriquer.
+
+    ⭐⭐⭐ LA FEUILLE EST DEPLACEE LE LONG DE SA NORMALE PAR UNE SOMME DE SINUSOIDES DONT LES
+    VECTEURS D'ONDE SONT DANS LE PLAN DE LA FEUILLE. C'est une pile froissee : toutes les
+    feuilles portent le meme froissement, donc la matiere reste une fonction de la phase seule
+    (`128` s'applique : une faille d'une feuille n'y existe pas non plus), et la normale locale
+    est le GRADIENT de la projection, connu analytiquement en tout point. Le parametre qui compte
+    est l'inclinaison maximale `atan(2π·A/λ)` : c'est elle qui fait varier la normale a l'echelle
+    du cube quand `λ` est de l'ordre du cube.
+
+    ⚠⚠ ELLE NE REDEFINIT QUE `_projection_um` — le seam prevu pour ca — donc elle ne peut pas
+    diverger de la pile plane sur le contraste, le bruit ou les bornes. Et a amplitude NULLE elle
+    EST la pile plane, au bit pres : la batterie l'asserte, c'est ce qui protege tout ce que le
+    depot a mesure sur la pile plane.
+
+    ⚠ Les directions des ondes et leurs phases viennent de la graine : deux piles de meme graine
+    sont le meme objet, comme pour le bruit (`126`).
+
+    ⭐⭐⭐⭐ `par_feuille` DONNE A CHAQUE FEUILLE SON PROPRE FROISSEMENT, et c'est une autre matiere.
+    En phase, toutes les feuilles portent la meme ondulation : l'inclinaison ne change PAS le long
+    de la normale MOYENNE (la batterie l'asserte), donc un marcheur qui la suivrait verrait la meme
+    inclinaison a chaque pas. ⚠ Mais le marcheur suit la normale LOCALE, pas la moyenne, et des
+    que l'inclinaison est forte il glisse dans le plan et voit le froissement defiler : a 20 µm
+    d'amplitude pour 197 de longueur d'onde il vire de 27° par pas en phase, contre 9° par feuille.
+    « En phase ne fait pas virer » est donc une propriete du marcheur IDEAL, pas du marcheur reel,
+    et c'est la mesure qui tranche. Par feuille, la phase de chaque onde est tiree feuille par
+    feuille et interpolee en douceur entre deux feuilles voisines : l'inclinaison change le long de
+    la normale, et la matiere cesse d'etre une fonction de la phase seule — elle porte quelque chose
+    qui distingue la feuille n de la feuille n+1, ce que `R4-P26` demande.
+    """
+
+    def __init__(self, pas_um: float, amplitude_um: float = 0.0, longueur_donde_um: float = 100.0,
+                 ondes: int = 3, obliquite_deg: float = 35.0, graine: int = 3,
+                 par_feuille: bool = False, **kw) -> None:
+        super().__init__(pas_um, obliquite_deg=obliquite_deg, graine=graine, **kw)
+        self.amplitude_um = float(amplitude_um)
+        self.longueur_donde_um = float(longueur_donde_um)
+        self.par_feuille = bool(par_feuille)
+        if self.longueur_donde_um <= 0.0:
+            raise ValueError("la longueur d'onde doit etre positive")
+        # ⚠ Un generateur A PART pour la geometrie : le bruit de la classe de base tire dans
+        # `self._r`, et lui emprunter des tirages ferait dependre le froissement du nombre de
+        # lectures faites avant.
+        r = np.random.default_rng(10_007 + int(graine))
+        # Deux axes du plan de la feuille : z (libre) et la tangente dans (y, x).
+        th = np.deg2rad(obliquite_deg)
+        e1 = np.array([1.0, 0.0, 0.0])
+        e2 = np.array([0.0, np.cos(th), -np.sin(th)])
+        angles = r.uniform(0.0, 2.0 * np.pi, size=int(ondes))
+        self.vecteurs_donde = np.stack([np.cos(a) * e1 + np.sin(a) * e2 for a in angles])
+        """Les directions d'onde, unitaires, DANS le plan de la feuille (z, y, x)."""
+        self.phases_donde = r.uniform(0.0, 2.0 * np.pi, size=int(ondes))
+        # ⚠ L'amplitude est partagee entre les ondes de sorte que l'amplitude TOTALE du
+        # deplacement soit `amplitude_um` au pire : la somme de `ondes` sinusoides d'amplitude
+        # A/ondes est bornee par A.
+        self._a_k = self.amplitude_um / max(1, int(ondes))
+
+    def _phase_de_la_feuille(self, n: np.ndarray) -> np.ndarray:
+        """La phase de chaque onde sur la feuille entiere `n` : (N, ondes), tiree de la graine.
+
+        ⚠ Un melange entier de (feuille, onde, graine), comme le bruit porte par la matiere : la
+        feuille 7 a la meme phase quel que soit le point qui la demande, sinon la pile ne serait
+        pas un objet.
+        """
+        k = np.arange(len(self.phases_donde), dtype=np.int64)[None, :]
+        nn = np.asarray(n, dtype=np.int64)[:, None]
+        with np.errstate(over="ignore"):
+            h = (nn.astype(np.uint64) * np.uint64(0x9E3779B97F4A7C15)
+                 + k.astype(np.uint64) * np.uint64(0xC2B2AE3D27D4EB4F)
+                 + np.uint64(self.graine + 977) * np.uint64(0x165667B19E3779F9))
+            h = (h ^ (h >> np.uint64(30))) * np.uint64(0xBF58476D1CE4E5B9)
+            h = h ^ (h >> np.uint64(27))
+        return ((h >> np.uint64(11)).astype(np.float64) / float(1 << 53)) * 2.0 * np.pi
+
+    def _phases(self, base_um: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+        """La phase de chaque onde en chaque point, et sa derivee par rapport a la feuille `s`.
+
+        En phase : la phase est celle de la graine, constante, derivee nulle. Par feuille : entre
+        la feuille `n` et la feuille `n+1` la phase passe de l'une a l'autre par le plus court arc,
+        avec un raccord `3t² − 2t³` — donc l'inclinaison est CONTINUE sur la feuille elle-meme, la
+        ou un raccord lineaire la ferait sauter exactement la ou le marcheur lit.
+        """
+        if not self.par_feuille:
+            ph = np.repeat(self.phases_donde[None, :], len(base_um), axis=0)
+            return ph, np.zeros_like(ph)
+        s = np.asarray(base_um, dtype=np.float64) / self.pas_um
+        n0 = np.floor(s).astype(np.int64)
+        t_ = (s - n0)[:, None]
+        a, b = self._phase_de_la_feuille(n0), self._phase_de_la_feuille(n0 + 1)
+        d = (b - a + np.pi) % (2.0 * np.pi) - np.pi
+        lisse = t_ * t_ * (3.0 - 2.0 * t_)
+        return a + d * lisse, d * (6.0 * t_ * (1.0 - t_))
+
+    def _arguments(self, p_um: np.ndarray, base_um: np.ndarray) -> np.ndarray:
+        """L'argument de chaque onde en chaque point : (N, ondes)."""
+        return (2.0 * np.pi * (p_um @ self.vecteurs_donde.T) / self.longueur_donde_um
+                + self._phases(base_um)[0])
+
+    def _projection_um(self, p: np.ndarray) -> np.ndarray:
+        # ⚠⚠ LE TERME DE BASE EST CELUI DU PARENT, APPELE ET NON RECOPIE : `(p·n)·v` et `(p·v)·n`
+        # ne sont pas le meme flottant, et la batterie exige l'egalite AU BIT a amplitude nulle.
+        # Ma premiere version recalculait la projection en micrometres et differait au dernier
+        # bit — une pile « identique » qui ne l'est pas est exactement ce que ce controle traque.
+        # ⚠ Remis en (N, 3) AVANT l'appel au parent : sur un point seul, `p @ n` rend un scalaire
+        # et la suite attend un tableau. Le parent, lui, ne remet pas en forme — c'est la
+        # batterie du gradient par differences finies, qui pose un point a la fois, qui l'a dit.
+        p2 = np.asarray(p, dtype=np.float64).reshape(-1, 3)
+        base = super()._projection_um(p2)
+        if self._a_k == 0.0:
+            return base
+        q = p2 * self.voxel_um
+        return base + self._a_k * np.sin(self._arguments(q, base)).sum(axis=1)
+
+    def normale_locale(self, p: np.ndarray) -> np.ndarray:
+        """La direction (z, y, x) perpendiculaire a la feuille en ce point — le gradient.
+
+        ⭐⭐ Le gradient de la projection vaut la normale moyenne plus, pour chaque onde,
+        `A_k · cos(arg) · (2π/λ · k + φ'(s)/pas · n)` : le premier terme incline la feuille dans
+        son plan, le second — nul en phase — fait TOURNER l'inclinaison quand on avance le long
+        de la normale. Les deux sont nuls en moyenne, donc la pile reste parallele EN MOYENNE.
+        """
+        p2 = np.asarray(p, dtype=np.float64).reshape(-1, 3)
+        q = p2 * self.voxel_um
+        g = np.repeat(self.normale[None, :], len(q), axis=0)
+        if self._a_k != 0.0:
+            base = super()._projection_um(p2)
+            _, dphi = self._phases(base)
+            c = np.cos(self._arguments(q, base)) * self._a_k
+            g = g + (c * (2.0 * np.pi / self.longueur_donde_um)) @ self.vecteurs_donde
+            g = g + ((c * dphi).sum(axis=1) / self.pas_um)[:, None] * self.normale[None, :]
+        return g / np.maximum(np.linalg.norm(g, axis=1, keepdims=True), 1e-12)
+
+    def inclinaison_max_deg(self) -> float:
+        """L'inclinaison maximale d'une feuille par rapport a la normale moyenne, en degres."""
+        return float(np.degrees(np.arctan(2.0 * np.pi * self.amplitude_um
+                                          / self.longueur_donde_um)))
+
+
 def plafond_pour_traverser(rayon_min_mm: float, rayon_max_mm: float,
                            espacement_um: float) -> int:
     """Combien de pas il faut pour traverser toute l'etendue radiale d'une campagne.
@@ -1125,6 +1272,15 @@ def afficher(r: dict) -> int:
     print(f"\n⚠ « sorti du volume » et « perdu la feuille » sont comptés à part : un bord de "
           f"champ n'est pas un échec de la matière.")
     return 0
+
+
+def _leve(f, exc) -> bool:
+    """Vrai si `f()` leve `exc` — pour asserter un refus sans un try/except par controle."""
+    try:
+        f()
+    except exc:
+        return True
+    return False
 
 
 def verifier() -> int:
@@ -1626,6 +1782,87 @@ def verifier() -> int:
       len([e for e in marcher(pc, dep_c, x_hat, longueurs, mu, sd, barre, barre_moities,
                               barre_interstice, C.VOXEL_FIN_UM, pas_max=4, demi=DEMI,
                               arret_sur_vide=True) if "confirme" in e]) == 4)
+
+    # === LA PILE FROISSEE ===================================================================
+    # ⭐⭐⭐⭐ A AMPLITUDE NULLE ELLE EST LA PILE PLANE, AU BIT PRES : c'est ce qui protege tout ce
+    # que le depot a mesure sur la pile plane, et la batterie l'asserte au lieu de s'y fier.
+    ptsf = np.array([[2000.0 + i, 2000.0 - 2 * i, 2000.0 + 3 * i] for i in range(40)])
+    plate = VolumeFabrique(173.0, obliquite_deg=35.0, bruit=8.0, graine=5)
+    lisse = VolumeFabriqueOndulee(173.0, amplitude_um=0.0, obliquite_deg=35.0, bruit=8.0, graine=5)
+    v("la pile froissee a amplitude nulle EST la pile plane, au bit pres",
+      np.array_equal(plate.lire(ptsf), lisse.lire(ptsf)))
+    fro = VolumeFabriqueOndulee(173.0, amplitude_um=20.0, longueur_donde_um=200.0,
+                                obliquite_deg=35.0, bruit=0.0, graine=5)
+    v("... et a amplitude non nulle elle en differe",
+      not np.allclose(VolumeFabrique(173.0, obliquite_deg=35.0, graine=5).lire(ptsf),
+                      fro.lire(ptsf)))
+    v("ses vecteurs d'onde sont dans le plan de la feuille",
+      float(np.max(np.abs(fro.vecteurs_donde @ fro.normale))) < 1e-12)
+    # ⚠⚠ LA NORMALE LOCALE EST LE GRADIENT, ET C'EST VERIFIE PAR DIFFERENCES FINIES : une normale
+    # analytique fausse d'un facteur ou d'un signe rendrait une fixture dont la « verite » ment.
+    ecarts = []
+    for q in ptsf[:8]:
+        g = np.zeros(3)
+        for ax in range(3):
+            h = np.zeros(3); h[ax] = 1e-3
+            g[ax] = (float(fro._projection_um(q + h)[0]) - float(fro._projection_um(q - h)[0])) / (2e-3 * fro.voxel_um)
+        g = g / np.linalg.norm(g)
+        ecarts.append(float(np.degrees(np.arccos(np.clip(abs(g @ fro.normale_locale(q)[0]), -1, 1)))))
+    v("la normale locale est le gradient de la projection (differences finies)",
+      max(ecarts) < 0.01, f"ecart max {max(ecarts):.4f}°")
+    inclinaisons = np.degrees(np.arccos(np.clip(np.abs(fro.normale_locale(ptsf) @ fro.normale),
+                                                -1.0, 1.0)))
+    v("... et elle s'incline reellement", float(inclinaisons.max()) > 5.0,
+      f"max {float(inclinaisons.max()):.2f}°")
+    v("... sans depasser l'inclinaison maximale annoncee",
+      float(inclinaisons.max()) <= fro.inclinaison_max_deg() + 1e-6,
+      f"max annonce {fro.inclinaison_max_deg():.2f}°")
+    # ⭐⭐⭐ ET LES DEUX MOITIES DU CUBE SE DISPUTENT, ce que la pile plane ne fait pas : c'est
+    # exactement la grandeur que le vrai rouleau rend et qu'aucune fixture ne rendait.
+    _, des_plat, _ = direction_de_la_matiere(VolumeFabrique(173.0, obliquite_deg=35.0, bruit=8.0,
+                                                            graine=5), np.array([2000.0] * 3), DEMI, 1)
+    _, des_fro, _ = direction_de_la_matiere(VolumeFabriqueOndulee(173.0, amplitude_um=20.0,
+                                                                  longueur_donde_um=200.0, bruit=8.0,
+                                                                  graine=5), np.array([2000.0] * 3), DEMI, 1)
+    # ⚠ Une inegalite STRICTE, pas un facteur choisi : la pile plane bruitee rend un petit
+    # desaccord (le bruit), et la question est seulement que le froissement en ajoute.
+    v("les deux moities du cube se disputent davantage sur la pile froissee que sur la plane",
+      des_fro > des_plat, f"plane {des_plat:.2f}°, froissee {des_fro:.2f}°")
+    v("une longueur d'onde nulle est refusee",
+      _leve(lambda: VolumeFabriqueOndulee(173.0, longueur_donde_um=0.0), ValueError))
+    # ⭐⭐⭐⭐ PAR FEUILLE : l'inclinaison CHANGE le long de la normale, ce qu'en phase elle ne fait
+    # pas — c'est toute la difference entre une matiere fonction de la phase seule et une matiere
+    # qui distingue ses feuilles.
+    pf = VolumeFabriqueOndulee(173.0, amplitude_um=20.0, longueur_donde_um=200.0,
+                               obliquite_deg=35.0, bruit=0.0, graine=5, par_feuille=True)
+    v("par feuille, a amplitude nulle, c'est encore la pile plane au bit pres",
+      np.array_equal(plate.lire(ptsf), VolumeFabriqueOndulee(
+          173.0, amplitude_um=0.0, obliquite_deg=35.0, bruit=8.0, graine=5, par_feuille=True).lire(ptsf)))
+    ecarts_pf = []
+    for q in ptsf[:8]:
+        g = np.zeros(3)
+        for ax in range(3):
+            h = np.zeros(3); h[ax] = 1e-3
+            g[ax] = (float(pf._projection_um(q + h)[0]) - float(pf._projection_um(q - h)[0])) / (2e-3 * pf.voxel_um)
+        g = g / np.linalg.norm(g)
+        ecarts_pf.append(float(np.degrees(np.arccos(np.clip(abs(g @ pf.normale_locale(q)[0]), -1, 1)))))
+    v("... et sa normale locale est encore le gradient (differences finies)",
+      max(ecarts_pf) < 0.01, f"ecart max {max(ecarts_pf):.4f}°")
+    q0 = np.array([2000.0, 2000.0, 2000.0])
+    un_pas = fro.normale * (173.0 / fro.voxel_um)
+    chemin = np.array([q0 + i * 0.25 * un_pas for i in range(41)])  # dix feuilles, au quart
+    def tourne(pile):
+        nl = pile.normale_locale(chemin)
+        return float(np.max(np.degrees(np.arccos(np.clip(np.abs(nl @ nl[0]), -1.0, 1.0)))))
+    v("en phase, l'inclinaison ne change PAS le long de la normale", tourne(fro) < 1e-6,
+      f"{tourne(fro):.2e}°")
+    v("... et par feuille, elle change", tourne(pf) > 5.0, f"{tourne(pf):.2f}°")
+    # ⚠ La feuille 7 a la meme phase quel que soit le point qui la demande.
+    v("la phase d'une feuille est une propriete de la feuille",
+      np.array_equal(pf._phase_de_la_feuille(np.array([7, 7, 8])),
+                     pf._phase_de_la_feuille(np.array([7, 7, 8])))
+      and not np.array_equal(pf._phase_de_la_feuille(np.array([7]))[0],
+                             pf._phase_de_la_feuille(np.array([8]))[0]))
 
     # === LE MOUCHARD ======================================================================
     # ⭐⭐⭐ IL DOIT VOIR CHAQUE PAS QUI A AVANCE, ET NE RIEN CHANGER. Une instrumentation qui

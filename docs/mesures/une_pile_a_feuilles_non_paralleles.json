@@ -1,0 +1,1056 @@
+{
+  "source": "la_re_course_large.json",
+  "desaccord_reel": {
+    "n": 1043,
+    "mediane": 8.19,
+    "p25": 4.84,
+    "p75": 13.58,
+    "p90": 23.23,
+    "source": "la_re_course_large.json",
+    "memoire_du_cap": 0.0,
+    "virage_par_pas": {
+      "n": 15,
+      "mediane": 13.59,
+      "p25": 13.28,
+      "p75": 14.54,
+      "p90": 17.35
+    },
+    "cos_virages_median": -0.2061
+  },
+  "desaccord_reel_a_cap": {
+    "n": 847,
+    "mediane": 7.44,
+    "p25": 4.2,
+    "p75": 12.32,
+    "p90": 21.75,
+    "source": "la_course_a_cap.json",
+    "memoire_du_cap": 0.75,
+    "virage_par_pas": {
+      "n": 15,
+      "mediane": 3.46,
+      "p25": 2.67,
+      "p75": 4.84,
+      "p90": 5.33
+    },
+    "cos_virages_median": 0.2274
+  },
+  "controle_pile_plane": {
+    "desaccord": {
+      "n": 40,
+      "mediane": 2.81,
+      "p25": 1.67,
+      "p75": 4.79,
+      "p90": 6.6
+    },
+    "marche": {
+      "memoire": 0.0,
+      "lots": 3,
+      "detail": [
+        {
+          "graine": 3,
+          "pas": 112,
+          "rectitude": 0.9994,
+          "virage_median_deg": 2.24,
+          "cos_virages_median": -0.7198,
+          "erreur_a_la_normale_vraie_deg": 1.694,
+          "desaccord_rencontre_median_deg": 3.73,
+          "taux": 1.0
+        },
+        {
+          "graine": 11,
+          "pas": 112,
+          "rectitude": 0.9994,
+          "virage_median_deg": 2.56,
+          "cos_virages_median": -0.8452,
+          "erreur_a_la_normale_vraie_deg": 1.58,
+          "desaccord_rencontre_median_deg": 3.45,
+          "taux": 1.0
+        },
+        {
+          "graine": 29,
+          "pas": 112,
+          "rectitude": 0.9994,
+          "virage_median_deg": 2.46,
+          "cos_virages_median": -0.8326,
+          "erreur_a_la_normale_vraie_deg": 1.663,
+          "desaccord_rencontre_median_deg": 3.21,
+          "taux": 1.0
+        }
+      ],
+      "rectitude_mediane": 0.9994,
+      "virage_median_deg": 2.46,
+      "cos_virages_median": -0.8326,
+      "erreur_mediane_deg": 1.663,
+      "desaccord_rencontre_median_deg": 3.45,
+      "taux_median": 1.0
+    }
+  },
+  "cote_du_cube_um": 98.4,
+  "bruit": 8.0,
+  "obliquite_deg": 35.0,
+  "graines": [
+    3,
+    11,
+    29
+  ],
+  "pas": 112,
+  "par_longueur_donde": [
+    {
+      "variante": "en_phase",
+      "longueur_donde_um": 98.4,
+      "calibration": {
+        "decidable": true,
+        "atteint": true,
+        "par_feuille": false,
+        "amplitude_um": 6.781,
+        "mediane_deg": 8.44,
+        "cible_deg": 8.19,
+        "inclinaison_max_deg": 23.41,
+        "iterations": 2,
+        "historique": [
+          {
+            "amplitude_um": 0.0,
+            "mediane_deg": 2.81
+          },
+          {
+            "amplitude_um": 27.125,
+            "mediane_deg": 32.41
+          },
+          {
+            "amplitude_um": 13.563,
+            "mediane_deg": 15.74
+          },
+          {
+            "amplitude_um": 6.781,
+            "mediane_deg": 8.44
+          }
+        ]
+      },
+      "marche": {
+        "amplitude_um": 6.781,
+        "longueur_donde_um": 98.4,
+        "par_feuille": false,
+        "pas": 112,
+        "graines": [
+          3,
+          11,
+          29
+        ],
+        "par_memoire": [
+          {
+            "memoire": 0.0,
+            "lots": 3,
+            "detail": [
+              {
+                "graine": 3,
+                "pas": 112,
+                "rectitude": 0.999,
+                "virage_median_deg": 3.48,
+                "cos_virages_median": -0.8701,
+                "erreur_a_la_normale_vraie_deg": 3.334,
+                "desaccord_rencontre_median_deg": 7.0,
+                "taux": 1.0
+              },
+              {
+                "graine": 11,
+                "pas": 112,
+                "rectitude": 0.999,
+                "virage_median_deg": 3.1,
+                "cos_virages_median": -0.6758,
+                "erreur_a_la_normale_vraie_deg": 4.079,
+                "desaccord_rencontre_median_deg": 19.0,
+                "taux": 1.0
+              },
+              {
+                "graine": 29,
+                "pas": 112,
+                "rectitude": 0.9991,
+                "virage_median_deg": 2.87,
+                "cos_virages_median": -0.7532,
+                "erreur_a_la_normale_vraie_deg": 5.905,
+                "desaccord_rencontre_median_deg": 19.23,
+                "taux": 1.0
+              }
+            ],
+            "rectitude_mediane": 0.999,
+            "virage_median_deg": 3.1,
+            "cos_virages_median": -0.7532,
+            "erreur_mediane_deg": 4.079,
+            "desaccord_rencontre_median_deg": 19.0,
+            "taux_median": 1.0
+          },
+          {
+            "memoire": 0.75,
+            "lots": 3,
+            "detail": [
+              {
+                "graine": 3,
+                "pas": 112,
+                "rectitude": 0.9998,
+                "virage_median_deg": 0.57,
+                "cos_virages_median": -0.1516,
+                "erreur_a_la_normale_vraie_deg": 4.029,
+                "desaccord_rencontre_median_deg": 9.48,
+                "taux": 1.0
+              },
+              {
+                "graine": 11,
+                "pas": 112,
+                "rectitude": 0.9997,
+                "virage_median_deg": 0.52,
+                "cos_virages_median": -0.2134,
+                "erreur_a_la_normale_vraie_deg": 4.622,
+                "desaccord_rencontre_median_deg": 8.13,
+                "taux": 1.0
+              },
+              {
+                "graine": 29,
+                "pas": 112,
+                "rectitude": 0.9994,
+                "virage_median_deg": 0.55,
+                "cos_virages_median": 0.3736,
+                "erreur_a_la_normale_vraie_deg": 5.504,
+                "desaccord_rencontre_median_deg": 20.55,
+                "taux": 1.0
+              }
+            ],
+            "rectitude_mediane": 0.9997,
+            "virage_median_deg": 0.55,
+            "cos_virages_median": -0.1516,
+            "erreur_mediane_deg": 4.622,
+            "desaccord_rencontre_median_deg": 9.48,
+            "taux_median": 1.0,
+            "gain_en_virage_deg": 2.55,
+            "gain_en_erreur_deg": -0.543,
+            "cout_en_taux": 0.0
+          }
+        ]
+      },
+      "verdict": {
+        "decidable": true,
+        "virage_de_la_pile_deg": 3.1,
+        "fourchette_reelle_deg": [
+          13.28,
+          14.54
+        ],
+        "virage_reel_median_deg": 13.59,
+        "virage_du_controle_deg": 2.46,
+        "la_pile_vire_comme_le_rouleau": false,
+        "la_pile_vire_moins": true,
+        "la_pile_vire_plus": false,
+        "le_controle_vire_moins": true
+      }
+    },
+    {
+      "variante": "en_phase",
+      "longueur_donde_um": 196.8,
+      "calibration": {
+        "decidable": true,
+        "atteint": true,
+        "par_feuille": false,
+        "amplitude_um": 16.106,
+        "mediane_deg": 8.13,
+        "cible_deg": 8.19,
+        "inclinaison_max_deg": 27.21,
+        "iterations": 6,
+        "historique": [
+          {
+            "amplitude_um": 0.0,
+            "mediane_deg": 2.81
+          },
+          {
+            "amplitude_um": 54.251,
+            "mediane_deg": 25.21
+          },
+          {
+            "amplitude_um": 27.125,
+            "mediane_deg": 13.4
+          },
+          {
+            "amplitude_um": 13.563,
+            "mediane_deg": 7.08
+          },
+          {
+            "amplitude_um": 20.344,
+            "mediane_deg": 10.28
+          },
+          {
+            "amplitude_um": 16.953,
+            "mediane_deg": 8.55
+          },
+          {
+            "amplitude_um": 15.258,
+            "mediane_deg": 7.71
+          },
+          {
+            "amplitude_um": 16.106,
+            "mediane_deg": 8.13
+          }
+        ]
+      },
+      "marche": {
+        "amplitude_um": 16.106,
+        "longueur_donde_um": 196.8,
+        "par_feuille": false,
+        "pas": 112,
+        "graines": [
+          3,
+          11,
+          29
+        ],
+        "par_memoire": [
+          {
+            "memoire": 0.0,
+            "lots": 3,
+            "detail": [
+              {
+                "graine": 3,
+                "pas": 112,
+                "rectitude": 0.9964,
+                "virage_median_deg": 6.99,
+                "cos_virages_median": -0.9352,
+                "erreur_a_la_normale_vraie_deg": 2.203,
+                "desaccord_rencontre_median_deg": 20.82,
+                "taux": 1.0
+              },
+              {
+                "graine": 11,
+                "pas": 112,
+                "rectitude": 0.9986,
+                "virage_median_deg": 3.74,
+                "cos_virages_median": -0.8821,
+                "erreur_a_la_normale_vraie_deg": 2.018,
+                "desaccord_rencontre_median_deg": 14.3,
+                "taux": 1.0
+              },
+              {
+                "graine": 29,
+                "pas": 112,
+                "rectitude": 0.9959,
+                "virage_median_deg": 5.57,
+                "cos_virages_median": -0.9352,
+                "erreur_a_la_normale_vraie_deg": 2.119,
+                "desaccord_rencontre_median_deg": 24.23,
+                "taux": 0.9821
+              }
+            ],
+            "rectitude_mediane": 0.9964,
+            "virage_median_deg": 5.57,
+            "cos_virages_median": -0.9352,
+            "erreur_mediane_deg": 2.119,
+            "desaccord_rencontre_median_deg": 20.82,
+            "taux_median": 1.0
+          },
+          {
+            "memoire": 0.75,
+            "lots": 3,
+            "detail": [
+              {
+                "graine": 3,
+                "pas": 112,
+                "rectitude": 0.9995,
+                "virage_median_deg": 0.62,
+                "cos_virages_median": 0.0693,
+                "erreur_a_la_normale_vraie_deg": 1.506,
+                "desaccord_rencontre_median_deg": 20.98,
+                "taux": 1.0
+              },
+              {
+                "graine": 11,
+                "pas": 112,
+                "rectitude": 0.999,
+                "virage_median_deg": 0.69,
+                "cos_virages_median": 0.2832,
+                "erreur_a_la_normale_vraie_deg": 2.012,
+                "desaccord_rencontre_median_deg": 22.34,
+                "taux": 1.0
+              },
+              {
+                "graine": 29,
+                "pas": 112,
+                "rectitude": 0.9986,
+                "virage_median_deg": 0.69,
+                "cos_virages_median": 0.0946,
+                "erreur_a_la_normale_vraie_deg": 1.825,
+                "desaccord_rencontre_median_deg": 24.97,
+                "taux": 1.0
+              }
+            ],
+            "rectitude_mediane": 0.999,
+            "virage_median_deg": 0.69,
+            "cos_virages_median": 0.0946,
+            "erreur_mediane_deg": 1.825,
+            "desaccord_rencontre_median_deg": 22.34,
+            "taux_median": 1.0,
+            "gain_en_virage_deg": 4.88,
+            "gain_en_erreur_deg": 0.294,
+            "cout_en_taux": 0.0
+          }
+        ]
+      },
+      "verdict": {
+        "decidable": true,
+        "virage_de_la_pile_deg": 5.57,
+        "fourchette_reelle_deg": [
+          13.28,
+          14.54
+        ],
+        "virage_reel_median_deg": 13.59,
+        "virage_du_controle_deg": 2.46,
+        "la_pile_vire_comme_le_rouleau": false,
+        "la_pile_vire_moins": true,
+        "la_pile_vire_plus": false,
+        "le_controle_vire_moins": true
+      }
+    },
+    {
+      "variante": "en_phase",
+      "longueur_donde_um": 393.6,
+      "calibration": {
+        "decidable": true,
+        "atteint": true,
+        "par_feuille": false,
+        "amplitude_um": 47.469,
+        "mediane_deg": 8.4,
+        "cible_deg": 8.19,
+        "inclinaison_max_deg": 37.15,
+        "iterations": 4,
+        "historique": [
+          {
+            "amplitude_um": 0.0,
+            "mediane_deg": 2.81
+          },
+          {
+            "amplitude_um": 108.502,
+            "mediane_deg": 13.52
+          },
+          {
+            "amplitude_um": 54.251,
+            "mediane_deg": 9.24
+          },
+          {
+            "amplitude_um": 27.125,
+            "mediane_deg": 5.54
+          },
+          {
+            "amplitude_um": 40.688,
+            "mediane_deg": 7.63
+          },
+          {
+            "amplitude_um": 47.469,
+            "mediane_deg": 8.4
+          }
+        ]
+      },
+      "marche": {
+        "amplitude_um": 47.469,
+        "longueur_donde_um": 393.6,
+        "par_feuille": false,
+        "pas": 112,
+        "graines": [
+          3,
+          11,
+          29
+        ],
+        "par_memoire": [
+          {
+            "memoire": 0.0,
+            "lots": 3,
+            "detail": [
+              {
+                "graine": 3,
+                "pas": 112,
+                "rectitude": 0.9983,
+                "virage_median_deg": 2.92,
+                "cos_virages_median": -0.8011,
+                "erreur_a_la_normale_vraie_deg": 1.824,
+                "desaccord_rencontre_median_deg": 5.66,
+                "taux": 1.0
+              },
+              {
+                "graine": 11,
+                "pas": 112,
+                "rectitude": 0.9812,
+                "virage_median_deg": 12.5,
+                "cos_virages_median": -0.9307,
+                "erreur_a_la_normale_vraie_deg": 2.066,
+                "desaccord_rencontre_median_deg": 21.13,
+                "taux": 1.0
+              },
+              {
+                "graine": 29,
+                "pas": 112,
+                "rectitude": 0.9963,
+                "virage_median_deg": 4.67,
+                "cos_virages_median": -0.8788,
+                "erreur_a_la_normale_vraie_deg": 1.836,
+                "desaccord_rencontre_median_deg": 20.71,
+                "taux": 1.0
+              }
+            ],
+            "rectitude_mediane": 0.9963,
+            "virage_median_deg": 4.67,
+            "cos_virages_median": -0.8788,
+            "erreur_mediane_deg": 1.836,
+            "desaccord_rencontre_median_deg": 20.71,
+            "taux_median": 1.0
+          },
+          {
+            "memoire": 0.75,
+            "lots": 3,
+            "detail": [
+              {
+                "graine": 3,
+                "pas": 112,
+                "rectitude": 0.9985,
+                "virage_median_deg": 0.63,
+                "cos_virages_median": 0.2419,
+                "erreur_a_la_normale_vraie_deg": 1.248,
+                "desaccord_rencontre_median_deg": 5.53,
+                "taux": 1.0
+              },
+              {
+                "graine": 11,
+                "pas": 112,
+                "rectitude": 0.9983,
+                "virage_median_deg": 0.76,
+                "cos_virages_median": 0.4578,
+                "erreur_a_la_normale_vraie_deg": 1.827,
+                "desaccord_rencontre_median_deg": 22.05,
+                "taux": 0.9911
+              },
+              {
+                "graine": 29,
+                "pas": 112,
+                "rectitude": 0.9976,
+                "virage_median_deg": 0.65,
+                "cos_virages_median": -0.0926,
+                "erreur_a_la_normale_vraie_deg": 1.243,
+                "desaccord_rencontre_median_deg": 20.82,
+                "taux": 1.0
+              }
+            ],
+            "rectitude_mediane": 0.9983,
+            "virage_median_deg": 0.65,
+            "cos_virages_median": 0.2419,
+            "erreur_mediane_deg": 1.248,
+            "desaccord_rencontre_median_deg": 20.82,
+            "taux_median": 1.0,
+            "gain_en_virage_deg": 4.02,
+            "gain_en_erreur_deg": 0.588,
+            "cout_en_taux": 0.0
+          }
+        ]
+      },
+      "verdict": {
+        "decidable": true,
+        "virage_de_la_pile_deg": 4.67,
+        "fourchette_reelle_deg": [
+          13.28,
+          14.54
+        ],
+        "virage_reel_median_deg": 13.59,
+        "virage_du_controle_deg": 2.46,
+        "la_pile_vire_comme_le_rouleau": false,
+        "la_pile_vire_moins": true,
+        "la_pile_vire_plus": false,
+        "le_controle_vire_moins": true
+      }
+    },
+    {
+      "variante": "par_feuille",
+      "longueur_donde_um": 98.4,
+      "calibration": {
+        "decidable": true,
+        "atteint": true,
+        "par_feuille": true,
+        "amplitude_um": 7.205,
+        "mediane_deg": 8.28,
+        "cible_deg": 8.19,
+        "inclinaison_max_deg": 24.71,
+        "iterations": 6,
+        "historique": [
+          {
+            "amplitude_um": 0.0,
+            "mediane_deg": 2.81
+          },
+          {
+            "amplitude_um": 27.125,
+            "mediane_deg": 35.27
+          },
+          {
+            "amplitude_um": 13.563,
+            "mediane_deg": 15.62
+          },
+          {
+            "amplitude_um": 6.781,
+            "mediane_deg": 7.93
+          },
+          {
+            "amplitude_um": 10.172,
+            "mediane_deg": 11.34
+          },
+          {
+            "amplitude_um": 8.477,
+            "mediane_deg": 9.37
+          },
+          {
+            "amplitude_um": 7.629,
+            "mediane_deg": 8.6
+          },
+          {
+            "amplitude_um": 7.205,
+            "mediane_deg": 8.28
+          }
+        ]
+      },
+      "marche": {
+        "amplitude_um": 7.205,
+        "longueur_donde_um": 98.4,
+        "par_feuille": true,
+        "pas": 112,
+        "graines": [
+          3,
+          11,
+          29
+        ],
+        "par_memoire": [
+          {
+            "memoire": 0.0,
+            "lots": 3,
+            "detail": [
+              {
+                "graine": 3,
+                "pas": 112,
+                "rectitude": 0.9987,
+                "virage_median_deg": 3.06,
+                "cos_virages_median": -0.5165,
+                "erreur_a_la_normale_vraie_deg": 8.722,
+                "desaccord_rencontre_median_deg": 8.37,
+                "taux": 0.9911
+              },
+              {
+                "graine": 11,
+                "pas": 112,
+                "rectitude": 0.9989,
+                "virage_median_deg": 2.92,
+                "cos_virages_median": -0.5528,
+                "erreur_a_la_normale_vraie_deg": 7.622,
+                "desaccord_rencontre_median_deg": 6.67,
+                "taux": 0.9911
+              },
+              {
+                "graine": 29,
+                "pas": 112,
+                "rectitude": 0.999,
+                "virage_median_deg": 2.94,
+                "cos_virages_median": -0.6736,
+                "erreur_a_la_normale_vraie_deg": 7.713,
+                "desaccord_rencontre_median_deg": 10.27,
+                "taux": 1.0
+              }
+            ],
+            "rectitude_mediane": 0.9989,
+            "virage_median_deg": 2.94,
+            "cos_virages_median": -0.5528,
+            "erreur_mediane_deg": 7.713,
+            "desaccord_rencontre_median_deg": 8.37,
+            "taux_median": 0.9911
+          },
+          {
+            "memoire": 0.75,
+            "lots": 3,
+            "detail": [
+              {
+                "graine": 3,
+                "pas": 112,
+                "rectitude": 0.9994,
+                "virage_median_deg": 0.65,
+                "cos_virages_median": 0.1835,
+                "erreur_a_la_normale_vraie_deg": 8.386,
+                "desaccord_rencontre_median_deg": 8.41,
+                "taux": 1.0
+              },
+              {
+                "graine": 11,
+                "pas": 112,
+                "rectitude": 0.9998,
+                "virage_median_deg": 0.57,
+                "cos_virages_median": 0.1245,
+                "erreur_a_la_normale_vraie_deg": 6.842,
+                "desaccord_rencontre_median_deg": 8.38,
+                "taux": 1.0
+              },
+              {
+                "graine": 29,
+                "pas": 112,
+                "rectitude": 0.9998,
+                "virage_median_deg": 0.58,
+                "cos_virages_median": 0.1716,
+                "erreur_a_la_normale_vraie_deg": 7.92,
+                "desaccord_rencontre_median_deg": 9.65,
+                "taux": 1.0
+              }
+            ],
+            "rectitude_mediane": 0.9998,
+            "virage_median_deg": 0.58,
+            "cos_virages_median": 0.1716,
+            "erreur_mediane_deg": 7.92,
+            "desaccord_rencontre_median_deg": 8.41,
+            "taux_median": 1.0,
+            "gain_en_virage_deg": 2.36,
+            "gain_en_erreur_deg": -0.207,
+            "cout_en_taux": -0.0089
+          }
+        ]
+      },
+      "verdict": {
+        "decidable": true,
+        "virage_de_la_pile_deg": 2.94,
+        "fourchette_reelle_deg": [
+          13.28,
+          14.54
+        ],
+        "virage_reel_median_deg": 13.59,
+        "virage_du_controle_deg": 2.46,
+        "la_pile_vire_comme_le_rouleau": false,
+        "la_pile_vire_moins": true,
+        "la_pile_vire_plus": false,
+        "le_controle_vire_moins": true
+      }
+    },
+    {
+      "variante": "par_feuille",
+      "longueur_donde_um": 196.8,
+      "calibration": {
+        "decidable": true,
+        "atteint": true,
+        "par_feuille": true,
+        "amplitude_um": 15.258,
+        "mediane_deg": 8.25,
+        "cible_deg": 8.19,
+        "inclinaison_max_deg": 25.97,
+        "iterations": 5,
+        "historique": [
+          {
+            "amplitude_um": 0.0,
+            "mediane_deg": 2.81
+          },
+          {
+            "amplitude_um": 54.251,
+            "mediane_deg": 24.14
+          },
+          {
+            "amplitude_um": 27.125,
+            "mediane_deg": 13.37
+          },
+          {
+            "amplitude_um": 13.563,
+            "mediane_deg": 7.66
+          },
+          {
+            "amplitude_um": 20.344,
+            "mediane_deg": 10.52
+          },
+          {
+            "amplitude_um": 16.953,
+            "mediane_deg": 8.8
+          },
+          {
+            "amplitude_um": 15.258,
+            "mediane_deg": 8.25
+          }
+        ]
+      },
+      "marche": {
+        "amplitude_um": 15.258,
+        "longueur_donde_um": 196.8,
+        "par_feuille": true,
+        "pas": 112,
+        "graines": [
+          3,
+          11,
+          29
+        ],
+        "par_memoire": [
+          {
+            "memoire": 0.0,
+            "lots": 3,
+            "detail": [
+              {
+                "graine": 3,
+                "pas": 112,
+                "rectitude": 0.9908,
+                "virage_median_deg": 7.51,
+                "cos_virages_median": -0.3638,
+                "erreur_a_la_normale_vraie_deg": 3.758,
+                "desaccord_rencontre_median_deg": 8.75,
+                "taux": 1.0
+              },
+              {
+                "graine": 11,
+                "pas": 112,
+                "rectitude": 0.9913,
+                "virage_median_deg": 6.52,
+                "cos_virages_median": -0.6097,
+                "erreur_a_la_normale_vraie_deg": 3.961,
+                "desaccord_rencontre_median_deg": 7.28,
+                "taux": 0.9911
+              },
+              {
+                "graine": 29,
+                "pas": 112,
+                "rectitude": 0.9909,
+                "virage_median_deg": 7.18,
+                "cos_virages_median": -0.4374,
+                "erreur_a_la_normale_vraie_deg": 4.159,
+                "desaccord_rencontre_median_deg": 9.66,
+                "taux": 1.0
+              }
+            ],
+            "rectitude_mediane": 0.9909,
+            "virage_median_deg": 7.18,
+            "cos_virages_median": -0.4374,
+            "erreur_mediane_deg": 3.961,
+            "desaccord_rencontre_median_deg": 8.75,
+            "taux_median": 1.0
+          },
+          {
+            "memoire": 0.75,
+            "lots": 3,
+            "detail": [
+              {
+                "graine": 3,
+                "pas": 112,
+                "rectitude": 0.9979,
+                "virage_median_deg": 1.93,
+                "cos_virages_median": 0.0985,
+                "erreur_a_la_normale_vraie_deg": 7.889,
+                "desaccord_rencontre_median_deg": 7.25,
+                "taux": 1.0
+              },
+              {
+                "graine": 11,
+                "pas": 112,
+                "rectitude": 0.9983,
+                "virage_median_deg": 1.29,
+                "cos_virages_median": 0.2083,
+                "erreur_a_la_normale_vraie_deg": 6.445,
+                "desaccord_rencontre_median_deg": 7.54,
+                "taux": 1.0
+              },
+              {
+                "graine": 29,
+                "pas": 112,
+                "rectitude": 0.9983,
+                "virage_median_deg": 1.75,
+                "cos_virages_median": 0.2768,
+                "erreur_a_la_normale_vraie_deg": 8.414,
+                "desaccord_rencontre_median_deg": 10.24,
+                "taux": 1.0
+              }
+            ],
+            "rectitude_mediane": 0.9983,
+            "virage_median_deg": 1.75,
+            "cos_virages_median": 0.2083,
+            "erreur_mediane_deg": 7.889,
+            "desaccord_rencontre_median_deg": 7.54,
+            "taux_median": 1.0,
+            "gain_en_virage_deg": 5.43,
+            "gain_en_erreur_deg": -3.928,
+            "cout_en_taux": 0.0
+          }
+        ]
+      },
+      "verdict": {
+        "decidable": true,
+        "virage_de_la_pile_deg": 7.18,
+        "fourchette_reelle_deg": [
+          13.28,
+          14.54
+        ],
+        "virage_reel_median_deg": 13.59,
+        "virage_du_controle_deg": 2.46,
+        "la_pile_vire_comme_le_rouleau": false,
+        "la_pile_vire_moins": true,
+        "la_pile_vire_plus": false,
+        "le_controle_vire_moins": true
+      }
+    },
+    {
+      "variante": "par_feuille",
+      "longueur_donde_um": 393.6,
+      "calibration": {
+        "decidable": true,
+        "atteint": true,
+        "par_feuille": true,
+        "amplitude_um": 47.469,
+        "mediane_deg": 8.34,
+        "cible_deg": 8.19,
+        "inclinaison_max_deg": 37.15,
+        "iterations": 4,
+        "historique": [
+          {
+            "amplitude_um": 0.0,
+            "mediane_deg": 2.81
+          },
+          {
+            "amplitude_um": 108.502,
+            "mediane_deg": 15.71
+          },
+          {
+            "amplitude_um": 54.251,
+            "mediane_deg": 9.64
+          },
+          {
+            "amplitude_um": 27.125,
+            "mediane_deg": 5.25
+          },
+          {
+            "amplitude_um": 40.688,
+            "mediane_deg": 7.2
+          },
+          {
+            "amplitude_um": 47.469,
+            "mediane_deg": 8.34
+          }
+        ]
+      },
+      "marche": {
+        "amplitude_um": 47.469,
+        "longueur_donde_um": 393.6,
+        "par_feuille": true,
+        "pas": 112,
+        "graines": [
+          3,
+          11,
+          29
+        ],
+        "par_memoire": [
+          {
+            "memoire": 0.0,
+            "lots": 3,
+            "detail": [
+              {
+                "graine": 3,
+                "pas": 112,
+                "rectitude": 0.9642,
+                "virage_median_deg": 14.72,
+                "cos_virages_median": -0.5013,
+                "erreur_a_la_normale_vraie_deg": 2.788,
+                "desaccord_rencontre_median_deg": 7.62,
+                "taux": 0.9911
+              },
+              {
+                "graine": 11,
+                "pas": 112,
+                "rectitude": 0.9643,
+                "virage_median_deg": 13.12,
+                "cos_virages_median": -0.4417,
+                "erreur_a_la_normale_vraie_deg": 2.592,
+                "desaccord_rencontre_median_deg": 8.2,
+                "taux": 1.0
+              },
+              {
+                "graine": 29,
+                "pas": 112,
+                "rectitude": 0.9579,
+                "virage_median_deg": 15.82,
+                "cos_virages_median": -0.4624,
+                "erreur_a_la_normale_vraie_deg": 2.95,
+                "desaccord_rencontre_median_deg": 9.0,
+                "taux": 1.0
+              }
+            ],
+            "rectitude_mediane": 0.9642,
+            "virage_median_deg": 14.72,
+            "cos_virages_median": -0.4624,
+            "erreur_mediane_deg": 2.788,
+            "desaccord_rencontre_median_deg": 8.2,
+            "taux_median": 1.0
+          },
+          {
+            "memoire": 0.75,
+            "lots": 3,
+            "detail": [
+              {
+                "graine": 3,
+                "pas": 112,
+                "rectitude": 0.9926,
+                "virage_median_deg": 3.2,
+                "cos_virages_median": 0.3526,
+                "erreur_a_la_normale_vraie_deg": 10.929,
+                "desaccord_rencontre_median_deg": 6.0,
+                "taux": 1.0
+              },
+              {
+                "graine": 11,
+                "pas": 112,
+                "rectitude": 0.9931,
+                "virage_median_deg": 2.87,
+                "cos_virages_median": 0.3598,
+                "erreur_a_la_normale_vraie_deg": 9.95,
+                "desaccord_rencontre_median_deg": 6.71,
+                "taux": 1.0
+              },
+              {
+                "graine": 29,
+                "pas": 112,
+                "rectitude": 0.9936,
+                "virage_median_deg": 3.3,
+                "cos_virages_median": 0.2577,
+                "erreur_a_la_normale_vraie_deg": 11.24,
+                "desaccord_rencontre_median_deg": 9.52,
+                "taux": 1.0
+              }
+            ],
+            "rectitude_mediane": 0.9931,
+            "virage_median_deg": 3.2,
+            "cos_virages_median": 0.3526,
+            "erreur_mediane_deg": 10.929,
+            "desaccord_rencontre_median_deg": 6.71,
+            "taux_median": 1.0,
+            "gain_en_virage_deg": 11.52,
+            "gain_en_erreur_deg": -8.141,
+            "cout_en_taux": 0.0
+          }
+        ]
+      },
+      "verdict": {
+        "decidable": true,
+        "virage_de_la_pile_deg": 14.72,
+        "fourchette_reelle_deg": [
+          13.28,
+          14.54
+        ],
+        "virage_reel_median_deg": 13.59,
+        "virage_du_controle_deg": 2.46,
+        "la_pile_vire_comme_le_rouleau": false,
+        "la_pile_vire_moins": false,
+        "la_pile_vire_plus": true,
+        "le_controle_vire_moins": true
+      }
+    }
+  ],
+  "par_variante": {
+    "en_phase": {
+      "une_longueur_donde_vire_comme_le_rouleau": false,
+      "toutes_virent_moins": true,
+      "virages_deg": [
+        3.1,
+        5.57,
+        4.67
+      ]
+    },
+    "par_feuille": {
+      "une_longueur_donde_vire_comme_le_rouleau": false,
+      "toutes_virent_moins": false,
+      "virages_deg": [
+        2.94,
+        7.18,
+        14.72
+      ]
+    }
+  },
+  "secondes": 228.9
+}

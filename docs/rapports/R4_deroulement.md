@@ -750,6 +750,29 @@ le net des deux marches au plafond culmine toujours **avant** le plafond (2/2). 
 lire »** (`R4-F68`) ; `R4-P27` est mise à jour : la grandeur sur laquelle calibrer une pile à
 feuilles non parallèles est le désaccord des deux moitiés du cube, nul sur toute fixture du dépôt.
 
+**`134` · 2026-09-13 · des feuilles non parallèles, calibrées sur le désaccord et non sur la
+dérive** (`une_pile_a_feuilles_non_paralleles.py`, `VolumeFabriqueOndulee`, analytique sauf la
+lecture des courses gardées)
+La fixture que `132` a nommée, construite, et **calibrée sans regarder ce qu'on lui demande** : par
+bissection, chaque pile reçoit l'amplitude qui rend la **médiane réelle du désaccord des deux
+moitiés du cube** (**8,19°** [4,84 ; 13,58] sur 1043 pas voyants de `131` ; pile plane **2,81°**),
+à trois longueurs d'onde dérivées du cube (une, deux, quatre fois son côté). ⭐⭐⭐⭐ **Un
+froissement partagé par toutes les feuilles ne fait PAS virer** : désaccord reproduit (8,44 / 8,13 /
+8,4°), virage **3,1 / 5,57 / 4,67°** par pas pour **13,59°** [13,28 ; 14,54] réels, rectitude
+≥ 0,9963 (`R4-F70`) — l'hypothèse simple de `132` est réfutée. ⭐⭐⭐⭐ **Un froissement propre à
+chaque feuille, à quatre cubes, fait virer autant que le rouleau** — **14,72°** par pas, amplitude
+47,469 µm — **mais il ne dérive pas** : ses virages alternent deux fois plus (cos **−0,4624** contre
+**−0,2061** réel), rectitude **0,9642** contre 0,8563 (`R4-F71`). Donc ce qui fait VIRER est une
+orientation qui change d'une feuille à la suivante ; ce qui fait DÉRIVER est la PERSISTANCE de ce
+changement, qu'aucune fixture n'a encore. ⭐⭐⭐ **Et le cap y a un coût que `confirme` ne voit
+pas** : mémoire 0,75, virage 14,72 → **3,2°**, rectitude → 0,9931, erreur à la normale VRAIE
+**2,788 → 10,929°**, taux **1,0 → 1,0** (`R4-F72`) — sur les piles en phase la mémoire ne coûte
+rien, le coût n'apparaît que quand les feuilles diffèrent. ⚠ Ma première version de la batterie
+exigeait que la variante par feuille vire DAVANTAGE, au nom d'un raisonnement sur le marcheur
+idéal ; la mesure a rendu l'inverse à forte amplitude (9,2° contre 29,71°), et le contrôle a été
+réécrit pour ne demander que ce qui est sûr. → **`R4-P27` a sa moitié : le virage est expliqué,
+la dérive non** ; `R4-P26` gagne la première matière fabriquée qui distingue ses feuilles.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
