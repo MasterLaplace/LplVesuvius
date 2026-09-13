@@ -284,7 +284,7 @@ def mesurer(cellules: int = 40, bandes_max: int | None = None, graine: int = 41,
     import le_pas_lu_sur_les_transferts as P  # noqa: PLC0415
     import le_pas_que_la_matiere_montre as M  # noqa: PLC0415
     import le_sens_du_rang as R  # noqa: PLC0415
-    from la_normale_nest_pas_le_rayon import avancement  # noqa: PLC0415
+    from la_normale_nest_pas_le_rayon import avancement, maintenant  # noqa: PLC0415
     from transformations_de_volume import appliquer, matrice  # noqa: PLC0415
     from voxel_distant import BUCKET, VolumeZarr  # noqa: PLC0415
     import time  # noqa: PLC0415
@@ -316,7 +316,7 @@ def mesurer(cellules: int = 40, bandes_max: int | None = None, graine: int = 41,
         return {"message": "cache incomplet : lancer `le_sens_du_rang --telecharger`"}
     bords, cx, cy, _, _ = A.axe_par_tranche(np.concatenate(nuages))
 
-    depart = time.time()
+    depart = maintenant()
     lignes = []
     for x in bandes:
         g = P.grille(x["recente"])
@@ -374,7 +374,7 @@ def mesurer(cellules: int = 40, bandes_max: int | None = None, graine: int = 41,
         "cellules_par_bande": cellules, "bandes": len(lignes),
         "barre_du_nul_calibre": round(float(barre), 4),
         "cran_du_balayage_um": round(float(longueurs[1] - longueurs[0]), 2),
-        "secondes": round(time.time() - depart, 1),
+        "secondes": round(maintenant() - depart, 1),
         "lignes": lignes,
         "la_longueur_differe_du_nul": contre,
         "aller_retour": aller_retour(),

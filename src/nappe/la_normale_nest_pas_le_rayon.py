@@ -296,6 +296,29 @@ def correlation(x, y) -> float:
     return round(float(np.corrcoef(x, y)[0, 1]), 3)
 
 
+def maintenant() -> float:
+    """L'horloge des DUREES du depot : monotone, et elle ne compte pas les suspensions.
+
+    ⭐⭐⭐⭐ ELLE EXISTE PARCE QU'UNE ESTIMATION A MENTI D'UN FACTEUR CENT. Le 13 septembre la
+    machine a dormi neuf heures et demie au milieu d'une course ; `time.time()` a compte ce
+    sommeil comme du travail, et l'avancement a annonce « 871 min restantes » pour trois bandes
+    qui en demandaient deux heures. Un chiffre faux de deux ordres de grandeur sert moins que pas
+    de chiffre, parce qu'il sert a decider s'il faut attendre ou tuer, et il fait decider a
+    l'envers.
+
+    ⚠⚠ ET CE N'EST PAS QUE L'AFFICHAGE : la MEME variable alimente le `secondes` que chaque
+    course publie. Une sieste de la machine y passait pour du temps de calcul, donc le cout
+    annonce d'une mesure n'etait pas son cout. `CLOCK_MONOTONIC` s'arrete avec la machine, donc
+    ce qui est compte est ce qui a reellement tourne.
+
+    ⚠ Elle n'est PAS une date : elle ne dit rien de l'heure qu'il est et ne doit jamais servir a
+    horodater quoi que ce soit. Son zero est le demarrage de la machine.
+    """
+    import time  # noqa: PLC0415
+
+    return time.monotonic()
+
+
 def avancement(fait: int, total: int, quoi: str, depart: float) -> None:
     """Ecrire sur STDERR ou en est une mesure longue, avec une fin estimee.
 
@@ -310,15 +333,26 @@ def avancement(fait: int, total: int, quoi: str, depart: float) -> None:
     avancement corromprait le resultat. Le meme choix que fait `--json` en n'imprimant que le
     chemin sur stdout.
 
+    ⚠⚠ L'HORLOGE EST `maintenant()`, MONOTONE, et un `depart` venu de l'horloge murale est
+    REFUSE plutot qu'affiche : les deux origines sont si eloignees qu'un melange rendrait une
+    duree de 1,7 milliard de secondes. La detection est exacte, pas approchee.
+
     ⭐ La fin estimee suppose que les etages restants coutent comme ceux deja faits. C'est faux au
     debut, quand un seul etage a servi de base, et cela devient juste ensuite — donc elle est
     affichee comme une ESTIMATION et non comme une promesse.
     """
-    import time  # noqa: PLC0415
-
+    # ⚠⚠⚠ UN DEPART VENU DE L'AUTRE HORLOGE EST REFUSE, ET LA DETECTION EST EXACTE. Une heure
+    # murale est le nombre de secondes depuis 1970, une heure monotone celui depuis le demarrage :
+    # la premiere est donc TOUJOURS tres au-dela de la seconde. Un appelant qui passerait encore
+    # `time.time()` verrait un ecart de 1,7 milliard de secondes et l'estimation serait absurde
+    # sans rien qui le dise. Ce n'est pas un seuil : c'est l'ordre des deux origines.
+    if depart > maintenant():
+        print(f"  ⚠ {quoi} : depart pris sur une autre horloge que `maintenant()`, "
+              f"aucune estimation", file=sys.stderr, flush=True)
+        return
     if fait <= 0 or total <= 0:
         return
-    ecoule = time.time() - depart
+    ecoule = maintenant() - depart
     reste = ecoule * (total - fait) / fait
     print(f"  … {quoi} {fait}/{total} · {ecoule / 60:.1f} min écoulées · "
           f"~{reste / 60:.0f} min restantes (estimation)", file=sys.stderr, flush=True)
@@ -360,7 +394,7 @@ def mesurer_les_angles(cellules: int = CELLULES_PAR_BANDE, graine: int = 61,
         return {"message": "cache incomplet : lancer `le_sens_du_rang --telecharger`"}
     bords, cx, cy, _, _ = A.axe_par_tranche(np.concatenate(nuages))
 
-    depart = time.time()
+    depart = maintenant()
     lignes = []
     for x in bandes:
         g = P.grille(x["recente"])
@@ -452,7 +486,7 @@ def mesurer_le_pas_dans_les_deux_directions(cellules: int = CELLULES_POUR_LE_VOL
         return {"message": "cache incomplet : lancer `le_sens_du_rang --telecharger`"}
     bords, cx, cy, _, _ = A.axe_par_tranche(np.concatenate(nuages))
 
-    depart = time.time()
+    depart = maintenant()
     lignes = []
     for x in bandes:
         g = P.grille(x["recente"])
@@ -783,7 +817,7 @@ def verifier() -> int:
 
     _out, _err = _io.StringIO(), _io.StringIO()
     with contextlib.redirect_stdout(_out), contextlib.redirect_stderr(_err):
-        avancement(3, 28, "bandes", time.time() - 120.0)
+        avancement(3, 28, "bandes", maintenant() - 120.0)
     v("l'avancement n'écrit RIEN sur stdout", _out.getvalue() == "",
       repr(_out.getvalue()))
     v("... et il dit où il en est sur stderr",
@@ -793,9 +827,28 @@ def verifier() -> int:
     # doit annoncer de l'ordre de 17 min.
     v("... avec une fin estimée cohérente", "17 min" in _err.getvalue(),
       _err.getvalue().strip())
+    # ⭐⭐⭐⭐ LE REFUS DE L'AUTRE HORLOGE, ET IL EST EXACT PLUTOT QU'APPROCHE : une heure murale
+    # est le nombre de secondes depuis 1970, une heure monotone celui depuis le demarrage, donc la
+    # premiere est toujours tres au-dela de la seconde. Sans ce controle, un appelant qui aurait
+    # garde `time.time()` ferait afficher une duree de 1,7 milliard de secondes sans que rien ne
+    # le dise — et c'est exactement le mode de panne d'un changement d'horloge a moitie applique.
+    import time as _time  # noqa: PLC0415
+
+    _out3, _err3 = _io.StringIO(), _io.StringIO()
+    with contextlib.redirect_stdout(_out3), contextlib.redirect_stderr(_err3):
+        avancement(3, 28, "bandes", _time.time())
+    v("⭐ un depart pris sur l'horloge murale est REFUSE",
+      "autre horloge" in _err3.getvalue(), _err3.getvalue().strip())
+    v("... et aucune estimation n'est affichee avec",
+      "restantes" not in _err3.getvalue(), _err3.getvalue().strip())
+    v("⚠ `maintenant()` est monotone, donc elle ne recule jamais",
+      maintenant() >= maintenant() - 1e-6)
+    v("... et elle n'est PAS une date", maintenant() < _time.time() / 2.0,
+      f"{maintenant():.0f} contre {_time.time():.0f}")
+
     _out2, _err2 = _io.StringIO(), _io.StringIO()
     with contextlib.redirect_stdout(_out2), contextlib.redirect_stderr(_err2):
-        avancement(0, 28, "bandes", time.time())
+        avancement(0, 28, "bandes", maintenant())
     v("... et il se tait plutôt que de diviser par zéro au premier étage",
       _err2.getvalue() == "")
 

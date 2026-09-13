@@ -431,7 +431,7 @@ def mesurer(chemin: Path = CHEMIN_DE_107, bandes_max: int | None = None,
     prise par l'autre bout : ce qui a ete paye s'ecrit d'abord.
     """
     import combien_dinterstices_traverses as C  # noqa: PLC0415
-    from la_normale_nest_pas_le_rayon import avancement  # noqa: PLC0415
+    from la_normale_nest_pas_le_rayon import avancement, maintenant  # noqa: PLC0415
     from voxel_distant import BUCKET, VolumeZarr  # noqa: PLC0415
 
     brut = json.loads(Path(chemin).read_text())
@@ -443,7 +443,7 @@ def mesurer(chemin: Path = CHEMIN_DE_107, bandes_max: int | None = None,
     except RuntimeError as e:
         return {"message": f"volume fin injoignable : {e}"}
 
-    t0 = time.time()
+    t0 = maintenant()
     lignes, courbes, lectures = [], [], 0
     bandes = [x for x in brut.get("lignes", []) if (int(x["de"]), int(x["a"])) in dep["par_bande"]]
     for i, ligne in enumerate(bandes):
@@ -501,7 +501,7 @@ def mesurer(chemin: Path = CHEMIN_DE_107, bandes_max: int | None = None,
     lu = {"fragment": C.OBJET, "volume_fin": C.VOLUME_FIN,
           "source": str(Path(chemin).relative_to(RACINE)),
           "graine_de_107": GRAINE_DE_107, "cellules_de_107": CELLULES_DE_107,
-          "lectures": lectures, "secondes": round(time.time() - t0, 1),
+          "lectures": lectures, "secondes": round(maintenant() - t0, 1),
           "bandes": len(lignes), "lignes": lignes}
     if brouillon is not None:
         brouillon.parent.mkdir(parents=True, exist_ok=True)

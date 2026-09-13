@@ -500,7 +500,7 @@ def mesurer(cellules: int = CELLULES_PAR_BANDE, pas_max: int = PAS_MAX, demi: in
     """Les deux marcheurs, depuis les MEMES departs, sur le vrai volume, etapes gardees."""
     import combien_dinterstices_traverses as C  # noqa: PLC0415
     import la_normale_nest_pas_le_rayon as N  # noqa: PLC0415
-    from la_normale_nest_pas_le_rayon import avancement  # noqa: PLC0415
+    from la_normale_nest_pas_le_rayon import avancement, maintenant  # noqa: PLC0415
     import laxe_est_une_courbe as A  # noqa: PLC0415
     import le_pas_lu_sur_les_transferts as P  # noqa: PLC0415
     import le_pas_que_la_matiere_montre as M  # noqa: PLC0415
@@ -534,7 +534,7 @@ def mesurer(cellules: int = CELLULES_PAR_BANDE, pas_max: int = PAS_MAX, demi: in
         return {"message": "cache incomplet : lancer `le_sens_du_rang --telecharger`"}
     bords, cx, cy, _, _ = A.axe_par_tranche(np.concatenate(nuages))
 
-    depart = time.time()
+    depart = maintenant()
     lignes = []
     for x in bandes:
         g = P.grille(x["recente"])
@@ -589,7 +589,7 @@ def mesurer(cellules: int = CELLULES_PAR_BANDE, pas_max: int = PAS_MAX, demi: in
         "barre_du_balayage": round(float(barre), 3),
         "barre_de_linterstice": round(float(barre_interstice), 4),
         "barre_daccord_des_moities_deg": barre_moities,
-        "secondes": round(time.time() - depart, 1),
+        "secondes": round(maintenant() - depart, 1),
         "bandes": len(lignes), "lignes": lignes,
         "controle_fabrique": controle_fabrique(longueurs, mu, sd, barre, barre_moities,
                                                barre_interstice, pas_max, demi),

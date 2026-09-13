@@ -411,7 +411,7 @@ def mesurer(cellules: int = CELLULES_PAR_BANDE, demi: int = DEMI, graine: int = 
     """
     import combien_dinterstices_traverses as C  # noqa: PLC0415
     import la_normale_nest_pas_le_rayon as N  # noqa: PLC0415
-    from la_normale_nest_pas_le_rayon import avancement  # noqa: PLC0415
+    from la_normale_nest_pas_le_rayon import avancement, maintenant  # noqa: PLC0415
     import laxe_est_une_courbe as A  # noqa: PLC0415
     import le_pas_lu_sur_les_transferts as P  # noqa: PLC0415
     import le_pas_que_la_matiere_montre as M  # noqa: PLC0415
@@ -444,7 +444,7 @@ def mesurer(cellules: int = CELLULES_PAR_BANDE, demi: int = DEMI, graine: int = 
         return {"message": "cache incomplet : lancer `le_sens_du_rang --telecharger`"}
     bords, cx, cy, _, _ = A.axe_par_tranche(np.concatenate(nuages))
 
-    depart = time.time()
+    depart = maintenant()
     lignes, sans_direction = [], 0
     for x in bandes:
         g = P.grille(x["recente"])
@@ -503,7 +503,7 @@ def mesurer(cellules: int = CELLULES_PAR_BANDE, demi: int = DEMI, graine: int = 
         "barre_daccord_des_moities_deg": barre_moities,
         "cran_du_balayage_um": round(float(longueurs[1] - longueurs[0]), 2),
         "cellules_sans_direction": sans_direction,
-        "secondes": round(time.time() - depart, 1),
+        "secondes": round(maintenant() - depart, 1),
         "bandes": len(lignes), "lignes": lignes,
         "controle_fabrique": controle_fabrique(longueurs, mu, sd, barre),
     })

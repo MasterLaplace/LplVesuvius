@@ -232,7 +232,7 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
     from combien_de_pas_la_matiere_porte import (combien_de_pas_confirmes,  # noqa: PLC0415
                                                  marcher)
     from la_direction_que_la_matiere_montre import nul_du_tenseur  # noqa: PLC0415
-    from la_normale_nest_pas_le_rayon import avancement  # noqa: PLC0415
+    from la_normale_nest_pas_le_rayon import avancement, maintenant  # noqa: PLC0415
     from le_compte_suit_il_le_pas import departs_de_107  # noqa: PLC0415
     from voxel_distant import BUCKET, VolumeZarr  # noqa: PLC0415
 
@@ -269,7 +269,7 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
 
     rayons = {(int(x["de"]), int(x["a"])): x.get("rayon_mm")
               for x in brut107.get("lignes", [])}
-    t0 = time.time()
+    t0 = maintenant()
     lignes, marches, lectures = [], [], 0
     cles = [k for k in dep["par_bande"]]
     deja: set[tuple[int, int]] = set()
@@ -356,7 +356,7 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
                  "lectures_de_profil": lectures + lectures_reprises,
                  # ⚠ `secondes` ne compte QUE cette course : additionner le temps d'une course
                  # interrompue donnerait une duree que personne n'a passee d'un seul tenant.
-                 "secondes": round(time.time() - t0, 1),
+                 "secondes": round(maintenant() - t0, 1),
                  "bandes_reprises": len(deja),
                  "bandes": len(lignes), "lignes": lignes, "course_incomplete": True},
                 indent=2, ensure_ascii=False))
@@ -368,7 +368,7 @@ def mesurer(pas_max: int = PAS_MAX, bandes_max: int | None = None, demi: int = D
           "barre_de_linterstice": round(float(barre_interstice), 4),
           "barre_daccord_des_moities_deg": barre_moities,
           "lectures_de_profil": lectures + lectures_reprises,
-          "secondes": round(time.time() - t0, 1), "bandes_reprises": len(deja),
+          "secondes": round(maintenant() - t0, 1), "bandes_reprises": len(deja),
           "bandes": len(lignes), "lignes": lignes,
           "ce_qui_a_arrete_les_marches_de_107": ce_qui_a_arrete_les_marches(brut107)}
     if brouillon is not None:

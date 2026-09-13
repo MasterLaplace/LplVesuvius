@@ -506,9 +506,9 @@ def accord_entre_pas(cellules: int = 24, demi: int = DEMI, pas=(1, 2, 3),
     bandes = R.bandes_du_fragment()[:bandes_max]
     # ⚠⚠ MEME LECON QUE `102` : une mesure qui lit le reseau pendant des dizaines de minutes doit
     # dire ou elle en est, sinon on decide de l'attendre ou de la tuer sans donnee.
-    from la_normale_nest_pas_le_rayon import avancement  # noqa: PLC0415
+    from la_normale_nest_pas_le_rayon import avancement, maintenant  # noqa: PLC0415
 
-    depart = time.time()
+    depart = maintenant()
     faites = 0
     ecarts = {pe: [] for pe in pas}
     desaccords = {pe: [] for pe in pas}
@@ -528,9 +528,9 @@ def accord_entre_pas(cellules: int = 24, demi: int = DEMI, pas=(1, 2, 3),
                 if not vol.dans_le_volume(pts).all():
                     reponses = {}
                     break
-                t0 = time.time()
+                t0 = maintenant()
                 brut = vol.lire(pts, fils=fils)
-                t_local[pe] = time.time() - t0
+                t_local[pe] = maintenant() - t0
                 if not np.isfinite(brut).all():
                     reponses = {}
                     break
@@ -574,7 +574,7 @@ def mesurer(cellules: int = CELLULES_PAR_BANDE, demi: int = DEMI, graine: int = 
     """Pour chaque bande : la direction de la matiere, contre le rayon et contre le maillage."""
     import combien_dinterstices_traverses as C  # noqa: PLC0415
     import la_normale_nest_pas_le_rayon as N  # noqa: PLC0415
-    from la_normale_nest_pas_le_rayon import avancement  # noqa: PLC0415
+    from la_normale_nest_pas_le_rayon import avancement, maintenant  # noqa: PLC0415
     import laxe_est_une_courbe as A  # noqa: PLC0415
     import le_pas_lu_sur_les_transferts as P  # noqa: PLC0415
     import le_sens_du_rang as R  # noqa: PLC0415
@@ -616,7 +616,7 @@ def mesurer(cellules: int = CELLULES_PAR_BANDE, demi: int = DEMI, graine: int = 
         return {"message": f"l'axe demande au moins deux bandes ; {len(bandes)} demandée(s)"}
     bords, cx, cy, _, _ = A.axe_par_tranche(np.concatenate(nuages))
 
-    depart = time.time()
+    depart = maintenant()
     lignes = []
     for x in bandes:
         g = P.grille(x["recente"])

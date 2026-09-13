@@ -836,7 +836,7 @@ def mesurer(cellules: int = CELLULES_PAR_BANDE, pas_max: int = PAS_MAX, demi: in
     """Le marcheur et son temoin naif, sur le vrai volume, bande par bande."""
     import combien_dinterstices_traverses as C  # noqa: PLC0415
     import la_normale_nest_pas_le_rayon as N  # noqa: PLC0415
-    from la_normale_nest_pas_le_rayon import avancement  # noqa: PLC0415
+    from la_normale_nest_pas_le_rayon import avancement, maintenant  # noqa: PLC0415
     import laxe_est_une_courbe as A  # noqa: PLC0415
     import le_pas_lu_sur_les_transferts as P  # noqa: PLC0415
     import le_pas_que_la_matiere_montre as M  # noqa: PLC0415
@@ -876,7 +876,7 @@ def mesurer(cellules: int = CELLULES_PAR_BANDE, pas_max: int = PAS_MAX, demi: in
         return {"message": f"l'axe demande au moins deux bandes ; {len(bandes)} demandée(s)"}
     bords, cx, cy, _, _ = A.axe_par_tranche(np.concatenate(nuages))
 
-    depart = time.time()
+    depart = maintenant()
     lignes = []
     for x in bandes:
         g = P.grille(x["recente"])
