@@ -611,6 +611,88 @@ class VolumeFabriqueAvecFaille(VolumeFabrique):
         return super()._projection_um(q) + self.saut_um * (q[:, 0] > self.z_faille_vx)
 
 
+class VolumeFabriqueEnSpirale(VolumeFabrique):
+    """Une pile ENROULEE : les feuilles suivent une spirale d'Archimede autour de l'axe z.
+
+    ⭐⭐⭐⭐ ELLE EXISTE PARCE QUE TOUTES LES AUTRES SONT PLANES, ET QU'UN ROULEAU NE L'EST PAS.
+    `124` (la nappe se dechire), `127` (le lien lateral), `128` (la faille) et `130` (la portee)
+    sont tous mesures sur des piles PLATES, dont la normale ne tourne jamais. Or `130` mesure que
+    ce qui manque au marcheur est un CAP, et un cap ne se teste pas sur une pile qui n'en demande
+    qu'un seul : sur une pile plane, garder rigidement la direction de depart est gratuit et
+    donnerait raison a n'importe quelle proposition. Sur une spirale, la normale TOURNE, donc un
+    cap rigide doit couter quelque chose — et c'est ce cout qui fait la difference entre un
+    controle et une tautologie.
+
+    ⚠⚠ LA LOI DU RAYON EST CELLE DE `96`, PAS UNE SECONDE. `la_fermeture_dun_tour.spirale`
+    construit deja une spirale, mais en POINTS : elle dit ou sont les feuilles, celle-ci dit ce
+    qu'on lit en un point. Ce sont les deux faces d'une seule description, donc elles doivent
+    s'accorder — et la batterie le verifie plutot que de l'affirmer : un point pose par l'une doit
+    tomber sur une phase ENTIERE selon l'autre.
+
+    ⭐⭐⭐ ET LA COUPURE ANGULAIRE N'EXISTE PAS, ce qui est `128` mis au travail. En franchissant
+    `theta = ±π` l'angle saute de 2π, donc la phase saute d'UNE feuille — et un saut d'une
+    feuille laisse la matiere identique, puisqu'elle est fonction de la phase seule et periodique.
+    La spirale est donc continue sans aucun traitement de branche, et la batterie le mesure.
+
+    ⚠ L'axe est z, et les feuilles s'enroulent dans le plan (y, x) : c'est la meme convention que
+    les piles planes, dont la normale vit dans (y, x) et dont z est libre.
+    """
+
+    def __init__(self, pas_um: float, r0_um: float = 4000.0,
+                 centre_yx_vx: tuple[float, float] = (2000.0, 2000.0), **kw) -> None:
+        kw.pop("obliquite_deg", None)
+        super().__init__(pas_um, **kw)
+        self.r0_um = float(r0_um)
+        """Le rayon de la feuille de phase nulle, en micrometres."""
+        self.centre_yx_vx = (float(centre_yx_vx[0]), float(centre_yx_vx[1]))
+        """Le centre de l'enroulement dans le plan (y, x), en voxels."""
+
+    def cylindriques(self, p: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+        """Le rayon en micrometres et l'angle, autour de l'axe z."""
+        q = np.asarray(p, dtype=np.float64).reshape(-1, 3)
+        dy = q[:, 1] - self.centre_yx_vx[0]
+        dx = q[:, 2] - self.centre_yx_vx[1]
+        return np.hypot(dy, dx) * self.voxel_um, np.arctan2(dy, dx)
+
+    def phase(self, p: np.ndarray) -> np.ndarray:
+        """En quelle feuille tombent ces points — la reponse connue.
+
+        ⚠ Une phase ENTIERE veut dire « sur une feuille ». Le terme en `theta` est ce qui fait
+        d'un cercle une spirale : sans lui les feuilles seraient des anneaux concentriques, et un
+        marcheur qui en suivrait une ne quitterait jamais son rayon.
+        """
+        rho, th = self.cylindriques(p)
+        return (rho - self.r0_um) / self.pas_um - th / (2.0 * np.pi)
+
+    def normale_locale(self, p: np.ndarray) -> np.ndarray:
+        """La direction (z, y, x) perpendiculaire a la feuille en ce point.
+
+        ⭐⭐ ELLE TOURNE AVEC L'ANGLE, et c'est tout l'interet de la fixture. Le gradient de la
+        phase vaut `1/pas` selon le rayon et `-1/(2π·rho)` selon la tangente : la normale est donc
+        presque radiale loin de l'axe, et elle s'incline d'autant plus qu'on est pres du centre.
+        """
+        q = np.asarray(p, dtype=np.float64).reshape(-1, 3)
+        rho, th = self.cylindriques(q)
+        rho = np.maximum(rho, 1e-9)
+        # ⚠ Composantes en micrometres, puis normalisees : melanger voxels et micrometres
+        # donnerait une direction fausse d'un facteur `voxel_um` sur un seul axe.
+        g_rho = 1.0 / self.pas_um
+        g_tan = -1.0 / (2.0 * np.pi * rho)
+        gy = g_rho * np.sin(th) + g_tan * np.cos(th)
+        gx = g_rho * np.cos(th) - g_tan * np.sin(th)
+        d = np.stack([np.zeros_like(gy), gy, gx], axis=1)
+        return d / np.maximum(np.linalg.norm(d, axis=1, keepdims=True), 1e-12)
+
+    def lire(self, points: np.ndarray, fils: int = 1) -> np.ndarray:
+        del fils
+        q = np.asarray(points, dtype=np.float64).reshape(-1, 3)
+        self.lectures += len(q)
+        v = 100.0 + 40.0 * np.cos(2 * np.pi * self.phase(q))
+        if self.bruit:
+            v = v + self._tirage(q)
+        return v
+
+
 def plafond_pour_traverser(rayon_min_mm: float, rayon_max_mm: float,
                            espacement_um: float) -> int:
     """Combien de pas il faut pour traverser toute l'etendue radiale d'une campagne.
@@ -1273,6 +1355,117 @@ def verifier() -> int:
     v("le recalage pose le depart SUR une feuille",
       abs(float(pv.lire(dep_v.reshape(1, 3))[0]) - 140.0) < 1.0,
       f"{float(pv.lire(dep_v.reshape(1, 3))[0]):.2f}")
+
+    # ⭐⭐⭐⭐ LA PILE ENROULEE. Toutes les autres fixtures sont PLANES, donc leur normale ne
+    # tourne jamais : sur elles, garder rigidement la direction de depart est gratuit et donnerait
+    # raison a n'importe quelle proposition de cap. Celle-ci coute quelque chose, et c'est ce cout
+    # qui fait la difference entre un controle et une tautologie.
+    sp = VolumeFabriqueEnSpirale(173.0, r0_um=4000.0, centre_yx_vx=(2000.0, 2000.0))
+    # ⚠ Un point a un rayon donne, a plusieurs angles : la reponse est connue partout.
+    def _point(rho_um, th, z=2000.0):
+        return np.array([[z, 2000.0 + rho_um / sp.voxel_um * np.sin(th),
+                          2000.0 + rho_um / sp.voxel_um * np.cos(th)]])
+
+    # ⭐⭐⭐⭐ LA COUPURE ANGULAIRE N'EXISTE PAS, et c'est `128` mis au travail : en franchissant
+    # theta = ±pi la phase saute d'UNE feuille, et un saut d'une feuille laisse la matiere
+    # identique. La spirale est donc continue sans aucun traitement de branche.
+    eps = 1e-4
+    avant = float(sp.lire(_point(6000.0, np.pi - eps))[0])
+    apres = float(sp.lire(_point(6000.0, -np.pi + eps))[0])
+    v("la coupure angulaire de la spirale n'existe pas", abs(avant - apres) < 0.05,
+      f"{avant:.4f} contre {apres:.4f}")
+    # ⚠ La VALEUR ABSOLUE : le saut vaut −1 ou +1 selon le sens dans lequel on franchit la
+    # coupure, et exiger +1 ferait echouer le controle pour le sens du parcours et non pour la
+    # matiere. Ma premiere version l'exigeait, et elle echouait a 1,99997.
+    saut_ = abs(float(sp.phase(_point(6000.0, np.pi - eps))[0])
+                - float(sp.phase(_point(6000.0, -np.pi + eps))[0]))
+    v("... et la phase y saute bien d'exactement une feuille", abs(saut_ - 1.0) < 1e-3,
+      f"{saut_:.6f}")
+    # ⚠ Sonde : deux points separes d'une DEMI-feuille doivent, eux, rendre autre chose.
+    v("... alors qu'une demi-feuille plus loin la lecture a change",
+      abs(float(sp.lire(_point(6000.0, 0.0))[0])
+          - float(sp.lire(_point(6000.0 + 173.0 / 2, 0.0))[0])) > 50.0)
+
+    # ⚠⚠ LE PAS RADIAL EST CELUI QU'ELLE ANNONCE : deux points du meme rayon separes d'un pas
+    # sont sur deux feuilles consecutives, donc lisent la meme chose.
+    v("un pas de feuille le long du rayon rend la meme lecture",
+      abs(float(sp.lire(_point(6000.0, 0.7))[0])
+          - float(sp.lire(_point(6000.0 + 173.0, 0.7))[0])) < 0.05)
+
+    # ⭐⭐⭐ LA NORMALE EST LE GRADIENT, et elle est VERIFIEE par difference finie plutot
+    # qu'affirmee : une normale ecrite a la main est la premiere chose qu'une fixture rate.
+    for rho_, th_ in ((6000.0, 0.0), (9000.0, 1.9), (12000.0, -2.4)):
+        n_ = sp.normale_locale(_point(rho_, th_))[0]
+        h = 0.05
+        pnt = _point(rho_, th_)
+        num = np.array([
+            (float(sp.phase(pnt + np.eye(3)[k] * h)[0])
+             - float(sp.phase(pnt - np.eye(3)[k] * h)[0])) / (2 * h) for k in range(3)])
+        num = num / max(float(np.linalg.norm(num)), 1e-12)
+        v(f"la normale de la spirale est son gradient a rho={rho_:.0f}, th={th_}",
+          float(abs(n_ @ num)) > 0.999, f"{float(n_ @ num):.5f}")
+
+    # ⭐⭐⭐⭐ ET ELLE TOURNE, ce qui est toute la raison d'etre de la fixture : sur une pile
+    # plane deux points quelconques ont la MEME normale, ici elle suit l'angle.
+    n0 = sp.normale_locale(_point(9000.0, 0.0))[0]
+    n90 = sp.normale_locale(_point(9000.0, np.pi / 2))[0]
+    ang = float(np.degrees(np.arccos(np.clip(abs(n0 @ n90), -1.0, 1.0))))
+    v("⭐ la normale de la spirale TOURNE avec l'angle", ang > 80.0, f"{ang:.1f}°")
+    plane = VolumeFabrique(173.0, obliquite_deg=35.0)
+    v("... alors que celle d'une pile plane ne tourne pas",
+      float(np.degrees(np.arccos(np.clip(abs(plane.normale @ plane.normale), -1.0, 1.0)))) < 1e-6)
+
+    # ⚠⚠ ET ELLE N'EST PAS RADIALE : le terme en theta est ce qui fait d'un anneau une spirale.
+    # Sans lui un marcheur qui suivrait une feuille ne quitterait jamais son rayon.
+    for rho_ in (5000.0, 12000.0):
+        n_ = sp.normale_locale(_point(rho_, 0.4))[0]
+        rad = np.array([0.0, np.sin(0.4), np.cos(0.4)])
+        ecart = float(np.degrees(np.arccos(np.clip(abs(n_ @ rad), -1.0, 1.0))))
+        attendu = float(np.degrees(np.arctan(173.0 / (2 * np.pi * rho_))))
+        v(f"l'ecart de la normale au rayon vaut l'arctangente attendue a rho={rho_:.0f}",
+          abs(ecart - attendu) < 0.05, f"{ecart:.3f}° contre {attendu:.3f}°")
+
+    # ⭐⭐⭐⭐ LES DEUX FACES D'UNE SEULE DESCRIPTION DOIVENT S'ACCORDER, et la docstring le
+    # PROMET : `la_fermeture_dun_tour.spirale` dit OU sont les feuilles, celle-ci dit ce qu'on lit
+    # en un point. Un point pose par l'une doit tomber sur une phase ENTIERE selon l'autre. Une
+    # promesse de docstring que rien ne verifie est exactement ce que ce depot punit.
+    import la_fermeture_dun_tour as F  # noqa: PLC0415
+
+    pas_f, r0_mm_f, vox_f = F.PAS_DU_CORPUS_UM, 6.0, 45.532
+    a_, _ = F.spirale(pas_um=pas_f, r0_mm=r0_mm_f, tours=3, col_par_tour=24, H=1,
+                      voxel_um=vox_f)
+    sp2 = VolumeFabriqueEnSpirale(pas_f, r0_um=r0_mm_f * 1000.0,
+                                  centre_yx_vx=(2000.0, 2000.0))
+    # ⚠ `spirale` rend ses points en (x, y, z) et dans SON voxel ; les remettre en (z, y, x)
+    # dans le notre est la seule traduction, et l'oublier comparerait deux objets differents.
+    pts = np.stack([
+        np.full(a_.shape[1], 2000.0),
+        2000.0 + a_[0, :, 1] * vox_f / sp2.voxel_um,
+        2000.0 + a_[0, :, 0] * vox_f / sp2.voxel_um], axis=1)
+    ph = sp2.phase(pts)
+    v("⭐ la spirale de `96` tombe sur des phases ENTIERES de celle-ci",
+      float(np.max(np.abs(ph - np.round(ph)))) < 1e-6,
+      f"ecart max {float(np.max(np.abs(ph - np.round(ph)))):.2e}")
+    v("... et elle en parcourt bien plusieurs", int(np.ptp(np.round(ph))) >= 2,
+      f"{int(np.ptp(np.round(ph)))} feuilles")
+
+    # ⚠ Une marche doit REELLEMENT avancer sur la spirale, sinon tout ce qui precede decrirait
+    # une fixture que le marcheur ne sait pas lire.
+    # ⚠⚠ LE VOLUME DOIT CONTENIR LE RAYON, et l'oublier ne rend pas une marche courte : elle
+    # rend ZERO pas, parce que le premier point est deja hors du champ. Un rayon de 8000 µm au
+    # voxel de 2,4 fait 3333 voxels, donc un centre a 2000 demande une forme d'au moins 5400. Ma
+    # premiere version gardait la forme par defaut et le marcheur ne partait pas du tout.
+    sp3 = VolumeFabriqueEnSpirale(C.PAS_UM, r0_um=4000.0, centre_yx_vx=(2000.0, 2000.0),
+                                  bruit=8.0, graine=3, forme=(9000, 9000, 9000))
+    dep_sp = np.array([2000.0, 2000.0, 2000.0 + 8000.0 / C.VOXEL_FIN_UM])
+    n_dep = sp3.normale_locale(dep_sp.reshape(1, 3))[0]
+    es_sp = marcher(sp3, dep_sp, n_dep, longueurs, mu, sd, barre, barre_moities,
+                    barre_interstice, C.VOXEL_FIN_UM, pas_max=6, demi=20)
+    lus_sp = [x for x in es_sp if "confirme" in x]
+    v("le marcheur avance sur la spirale", len(lus_sp) >= 4, f"{len(lus_sp)} pas")
+    v("... et il y franchit une feuille par pas",
+      abs(float(np.median([x["feuilles_franchies"] for x in lus_sp])) - 1.0) < 0.2,
+      f"{float(np.median([x['feuilles_franchies'] for x in lus_sp])):.3f}")
 
     # ⭐⭐⭐ LA PILE ROMPUE, ET C'EST LE SEAM `_projection_um` QUI EST CONTROLE ICI : la sous-classe
     # ne redefinit QUE la geometrie, donc le bruit, le contraste et les bornes du volume lui
