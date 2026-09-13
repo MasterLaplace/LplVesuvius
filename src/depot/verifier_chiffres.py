@@ -3049,6 +3049,95 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 136 : LE COMPTE DE FEUILLES, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) L'espacement implique par le CHEMIN ne voyage jamais sans celui du RAYON : « 166,4 µm,
+    # d'accord avec 164 » se lit comme un succes, a cote de « 140,3 par le rayon » il dit que les
+    # deux comptes ne sont pas le meme et que l'un des deux est une erreur.
+    # (2) Et le compte sur l'EPAISSEUR ne voyage jamais sans le compte sur le CHEMIN : 1,018 seul
+    # ne dit rien, a cote de 0,654 il dit lequel des deux l'instrument suit.
+    cfm = _source(racine, "combien_de_feuilles_le_marcheur_croit_franchir.json")
+    if cfm.exists():
+        d = json.loads(cfm.read_text())
+
+        def dec136(v, plafond):
+            s = repr(float(v))
+            return min(plafond, len(s.split(".")[1]) if "." in s and "e" not in s else plafond)
+
+        for cle, nom in (("lecart_au_compte_geometrique", "136"), ("avec_cap", "136 avec cap"),
+                         ("sans_cap", "136 sans cap")):
+            g = d.get(cle, {})
+            if not g.get("decidable"):
+                continue
+            champs = [("espacement_implique_par_le_rayon_um", "espacement par le rayon"),
+                      ("espacement_implique_par_le_chemin_um", "espacement par le chemin")]
+            # ⚠ Les MIN et MAX ne sont enregistres que pour le lot COMPLET : le document publie
+            # l'etendue de l'ensemble, pas celle de chaque sous-lot. Enregistrer les autres
+            # ferait crier « chiffre recalcule qui n'apparait nulle part » sur des nombres que le
+            # document resume expres, et une alerte permanente est une alerte qu'on cesse de lire.
+            if cle == "lecart_au_compte_geometrique":
+                champs += [("espacement_implique_par_le_rayon_min", "espacement rayon min"),
+                           ("espacement_implique_par_le_rayon_max", "espacement rayon max"),
+                           ("espacement_implique_par_le_chemin_min", "espacement chemin min"),
+                           ("espacement_implique_par_le_chemin_max", "espacement chemin max")]
+            for c_, n_ in champs:
+                if g.get(c_) is not None:
+                    ajoute(f"{n_} de {nom}", g[c_], dec136(g[c_], 1), cfm.name)
+            if g.get("traversees") is not None:
+                ajoute(f"traversees de {nom}", g["traversees"], 0, cfm.name)
+            # ⚠ Idem : l'erreur en spires du lot SANS CAP est resumee par le §5 sous la forme
+            # « 11,6 → 5,3 », qui est l'ecart apparie et non l'erreur du lot — deux nombres
+            # differents, et c'est le second que le document publie.
+            if cle != "sans_cap":
+                for e in g.get("par_espacement", []):
+                    ajoute(f"erreur a {e['espacement_um']} de {nom}", e["erreur_mediane_spires"],
+                           dec136(e["erreur_mediane_spires"], 1), cfm.name, signe=True)
+        o = d.get("le_surcomptage_est_il_lobliquite", {})
+        if o.get("decidable"):
+            for c_, n_, dd, sg in (("obliquite_mediane", "obliquite du chemin de 136", 3, False),
+                                   ("sur_comptage_median", "sur-comptage de 136", 3, False),
+                                   ("ecart_median", "ecart obliquite de 136", 4, True),
+                                   ("rho_de_spearman", "rho de 136", 4, True),
+                                   ("p_apparie", "p apparie de l obliquite de 136", 4, False),
+                                   ("feuilles_par_espacement_de_chemin",
+                                    "feuilles par espacement de chemin de 136", 4, False)):
+                if o.get(c_) is not None:
+                    ajoute(n_, o[c_], dec136(o[c_], dd), cfm.name, signe=sg)
+        c_ = d.get("le_cap_reduit_il_lerreur", {})
+        if c_.get("decidable"):
+            for k_, n_, dd in (("erreur_mediane_sans_cap", "erreur sans cap de 136", 1),
+                               ("erreur_mediane_avec_cap", "erreur avec cap de 136", 1),
+                               ("p_apparie", "p du cap de 136", 5)):
+                if c_.get(k_) is not None:
+                    ajoute(n_, c_[k_], dec136(c_[k_], dd), cfm.name)
+            for k_, n_ in (("paires", "paires du cap de 136"),
+                           ("marches_ou_le_cap_se_trompe_moins", "bandes ou le cap gagne de 136")):
+                if c_.get(k_) is not None:
+                    ajoute(n_, c_[k_], 0, cfm.name)
+        f_ = d.get("la_fixture_tranche_t_elle", {})
+        if f_.get("decidable"):
+            for x in f_.get("lots", []):
+                a_ = x["angle_a_la_normale_deg"]
+                for k_, n_ in (("compte_sur_epaisseur", "compte sur epaisseur"),
+                               ("compte_sur_chemin", "compte sur chemin"),
+                               ("chemin_um", "chemin"), ("epaisseur_um", "epaisseur"),
+                               ("feuilles_comptees", "comptees")):
+                    if x.get(k_) is not None:
+                        ajoute(f"{n_} a {a_} de 136", x[k_], dec136(x[k_], 3), cfm.name)
+            for k_, n_ in (("compte_sur_epaisseur_median", "compte sur epaisseur median de 136"),
+                           ("compte_sur_chemin_median", "compte sur chemin median de 136")):
+                if f_.get(k_) is not None:
+                    ajoute(n_, f_[k_], dec136(f_[k_], 3), cfm.name)
+        z_ = d.get("un_zigzag_compte_t_il_double", {})
+        if z_.get("decidable"):
+            for x in z_.get("paires", []):
+                for k_, n_ in (("droit", "zigzag droit"), ("zigzag", "zigzag alterne"),
+                               ("ecart", "zigzag ecart")):
+                    ajoute(f"{n_} a {x['angle_deg']} de 136", x[k_], dec136(x[k_], 3), cfm.name,
+                           signe=(k_ == "ecart"))
+            if z_.get("ecart_median_oblique") is not None:
+                ajoute("ecart median du zigzag de 136", z_["ecart_median_oblique"],
+                       dec136(z_["ecart_median_oblique"], 3), cfm.name, signe=True)
+
     # ⭐⭐⭐⭐ LA TRANCHE 135 : LA SURFACE DU ROULEAU, ET UN APPARIEMENT L'IMPOSE.
     # Le compte d'arrets sortis ne voyage jamais sans l'ECART median a la surface : « 14/14 » seul
     # se lit comme un verdict, a cote de « 0,3 mm » il dit que la surface a ete LUE et pas supposee.

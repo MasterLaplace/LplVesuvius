@@ -794,6 +794,30 @@ onze marches sur seize n'est pas le volume qui cesse de répondre, c'est le roul
 tôt » — 14 sorties sur 16 avec cap, 11 sans. La portée n'est bornée ni par le budget ni par le
 volume : par le retour sur soi, que le cap supprime (`R4-P20`).
 
+**`136` · 2026-09-14 · le marcheur compte juste, mais une feuille n'est pas un rayon**
+(`combien_de_feuilles_le_marcheur_croit_franchir.py`, zéro lecture distante)
+`135` ayant établi qu'une marche traverse de son départ à la surface, l'étendue traversée est connue
+et le compte de feuilles du marcheur devient comparable aux **deux** espacements de `R4-F14`
+(**164** µm par les transferts humains, **182,4** par l'atlas). ⭐⭐⭐⭐ **Le compteur est juste, et
+c'est une fixture qui le dit** : direction IMPOSÉE à 0 / 20 / 35 / 50° de la normale, le compte rend
+l'ÉPAISSEUR traversée (**1,011 / 1,041 / 1,014 / 1,018**) et non la distance parcourue (1,011 /
+0,978 / 0,831 / **0,654**) ; et un chemin qui alterne ne le fait pas recompter (écart **−0,009**,
+témoin à angle nul zéro) — `R4-F75`. ⭐⭐⭐⭐ **Sur le rouleau, son compte s'accorde à l'espacement
+humain le long de son CHEMIN et pas le long du RAYON** : 22 traversées, espacement impliqué par le
+chemin **166,4 µm** (dans la fourchette), par le rayon **140,3 µm** (dessous), rapport **1,186**
+contre un 1/cos médian de **1,184** entre normale et rayon — `R4-F76`. Donc le marcheur ne se trompe
+pas de compte ; traduire son compte en étendue radiale coûterait **+8,4 spires** par traversée.
+⭐⭐ **Le cap gagne un troisième effet** : l'écart tombe de **11,6 à 5,3** spires, 7 bandes sur 9,
+p **0,03906** — `R4-F77`. ⚠⚠⚠ **Ce document a changé de conclusion trois fois, et chaque fois c'est
+une mesure qui l'a fait** : « le marcheur sur-compte » (faux comme lecture), « il compte le long de
+son chemin » (réfuté par la fixture malgré une corrélation à rho +0,8952, p 2·10⁻⁸), « une fréquence
+est positive donc un aller-retour compte double » (réfuté par le zigzag). ⚠⚠ Et le contrôle du §3
+était d'abord INCAPABLE D'ÉCHOUER : sans `interroge_la_matiere=False`, `marcher` se remet sur la
+normale et chemin et épaisseur sortent égaux à 0,1 %. → porte neuve **`R4-P28`** : l'obliquité de la
+normale est invisible sur une cellule (`la_normale_nest_pas_le_rayon` : pas normal / pas radial
+**1,018**, corrélation au 1/cos **0,153**) et visible sur un cumul de cinquante feuilles ; les deux
+mesures sont justes et ne parlent pas de la même chose.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -1,0 +1,762 @@
+{
+  "source": "ou_la_matiere_cesse_de_se_lire.json",
+  "espacements_um": [
+    164.0,
+    182.4
+  ],
+  "traversees": [
+    {
+      "course": "la_course_a_cap.json",
+      "memoire_du_cap": 0.75,
+      "bande": [
+        28,
+        37
+      ],
+      "rayon_mm": 6.32,
+      "pas_voyants": 75,
+      "etendue_radiale_um": 12397.0,
+      "etendue_radiale_parcourue_um": 12397.0,
+      "retour_radial": 1.0,
+      "chemin_um": 13521.0,
+      "obliquite_du_chemin": 1.091,
+      "feuilles_comptees": 89.22,
+      "pas_en_butee": 5,
+      "fraction_par_pas": 1.1897
+    },
+    {
+      "course": "la_course_a_cap.json",
+      "memoire_du_cap": 0.75,
+      "bande": [
+        46,
+        52
+      ],
+      "rayon_mm": 9.4,
+      "pas_voyants": 53,
+      "etendue_radiale_um": 7572.9,
+      "etendue_radiale_parcourue_um": 7572.9,
+      "retour_radial": 1.0,
+      "chemin_um": 9394.1,
+      "obliquite_du_chemin": 1.24,
+      "feuilles_comptees": 68.53,
+      "pas_en_butee": 2,
+      "fraction_par_pas": 1.293
+    },
+    {
+      "course": "la_course_a_cap.json",
+      "memoire_du_cap": 0.75,
+      "bande": [
+        53,
+        58
+      ],
+      "rayon_mm": 10.51,
+      "pas_voyants": 78,
+      "etendue_radiale_um": 13812.3,
+      "etendue_radiale_parcourue_um": 13812.3,
+      "retour_radial": 1.0,
+      "chemin_um": 14731.9,
+      "obliquite_du_chemin": 1.067,
+      "feuilles_comptees": 83.8,
+      "pas_en_butee": 7,
+      "fraction_par_pas": 1.0744
+    },
+    {
+      "course": "la_course_a_cap.json",
+      "memoire_du_cap": 0.75,
+      "bande": [
+        59,
+        63
+      ],
+      "rayon_mm": 11.57,
+      "pas_voyants": 67,
+      "etendue_radiale_um": 11612.7,
+      "etendue_radiale_parcourue_um": 11612.7,
+      "retour_radial": 1.0,
+      "chemin_um": 12672.9,
+      "obliquite_du_chemin": 1.091,
+      "feuilles_comptees": 73.92,
+      "pas_en_butee": 5,
+      "fraction_par_pas": 1.1032
+    },
+    {
+      "course": "la_course_a_cap.json",
+      "memoire_du_cap": 0.75,
+      "bande": [
+        64,
+        68
+      ],
+      "rayon_mm": 12.48,
+      "pas_voyants": 66,
+      "etendue_radiale_um": 10086.8,
+      "etendue_radiale_parcourue_um": 10086.8,
+      "retour_radial": 1.0,
+      "chemin_um": 11738.7,
+      "obliquite_du_chemin": 1.164,
+      "feuilles_comptees": 71.24,
+      "pas_en_butee": 6,
+      "fraction_par_pas": 1.0794
+    },
+    {
+      "course": "la_course_a_cap.json",
+      "memoire_du_cap": 0.75,
+      "bande": [
+        69,
+        72
+      ],
+      "rayon_mm": 13.27,
+      "pas_voyants": 48,
+      "etendue_radiale_um": 8765.9,
+      "etendue_radiale_parcourue_um": 8765.9,
+      "retour_radial": 1.0,
+      "chemin_um": 9247.1,
+      "obliquite_du_chemin": 1.055,
+      "feuilles_comptees": 54.98,
+      "pas_en_butee": 1,
+      "fraction_par_pas": 1.1453
+    },
+    {
+      "course": "la_course_a_cap.json",
+      "memoire_du_cap": 0.75,
+      "bande": [
+        73,
+        76
+      ],
+      "rayon_mm": 13.99,
+      "pas_voyants": 30,
+      "etendue_radiale_um": 4755.6,
+      "etendue_radiale_parcourue_um": 4755.6,
+      "retour_radial": 1.0,
+      "chemin_um": 5812.9,
+      "obliquite_du_chemin": 1.222,
+      "feuilles_comptees": 34.26,
+      "pas_en_butee": 3,
+      "fraction_par_pas": 1.142
+    },
+    {
+      "course": "la_course_a_cap.json",
+      "memoire_du_cap": 0.75,
+      "bande": [
+        77,
+        80
+      ],
+      "rayon_mm": 14.7,
+      "pas_voyants": 39,
+      "etendue_radiale_um": 6684.2,
+      "etendue_radiale_parcourue_um": 6684.2,
+      "retour_radial": 1.0,
+      "chemin_um": 7482.5,
+      "obliquite_du_chemin": 1.119,
+      "feuilles_comptees": 43.3,
+      "pas_en_butee": 3,
+      "fraction_par_pas": 1.1103
+    },
+    {
+      "course": "la_course_a_cap.json",
+      "memoire_du_cap": 0.75,
+      "bande": [
+        81,
+        84
+      ],
+      "rayon_mm": 15.46,
+      "pas_voyants": 23,
+      "etendue_radiale_um": 5203.3,
+      "etendue_radiale_parcourue_um": 5203.3,
+      "retour_radial": 1.0,
+      "chemin_um": 5398.0,
+      "obliquite_du_chemin": 1.037,
+      "feuilles_comptees": 23.98,
+      "pas_en_butee": 4,
+      "fraction_par_pas": 1.0426
+    },
+    {
+      "course": "la_course_a_cap.json",
+      "memoire_du_cap": 0.75,
+      "bande": [
+        85,
+        88
+      ],
+      "rayon_mm": 16.22,
+      "pas_voyants": 31,
+      "etendue_radiale_um": 5728.5,
+      "etendue_radiale_parcourue_um": 5728.5,
+      "retour_radial": 1.0,
+      "chemin_um": 6323.9,
+      "obliquite_du_chemin": 1.104,
+      "feuilles_comptees": 34.37,
+      "pas_en_butee": 6,
+      "fraction_par_pas": 1.1087
+    },
+    {
+      "course": "la_course_a_cap.json",
+      "memoire_du_cap": 0.75,
+      "bande": [
+        92,
+        94
+      ],
+      "rayon_mm": 17.51,
+      "pas_voyants": 40,
+      "etendue_radiale_um": 6380.3,
+      "etendue_radiale_parcourue_um": 6380.3,
+      "retour_radial": 1.0,
+      "chemin_um": 7171.2,
+      "obliquite_du_chemin": 1.124,
+      "feuilles_comptees": 47.33,
+      "pas_en_butee": 3,
+      "fraction_par_pas": 1.1831
+    },
+    {
+      "course": "la_course_a_cap.json",
+      "memoire_du_cap": 0.75,
+      "bande": [
+        95,
+        97
+      ],
+      "rayon_mm": 18.06,
+      "pas_voyants": 27,
+      "etendue_radiale_um": 5244.6,
+      "etendue_radiale_parcourue_um": 5244.6,
+      "retour_radial": 1.0,
+      "chemin_um": 5346.1,
+      "obliquite_du_chemin": 1.019,
+      "feuilles_comptees": 28.0,
+      "pas_en_butee": 3,
+      "fraction_par_pas": 1.037
+    },
+    {
+      "course": "la_course_a_cap.json",
+      "memoire_du_cap": 0.75,
+      "bande": [
+        98,
+        100
+      ],
+      "rayon_mm": 18.62,
+      "pas_voyants": 45,
+      "etendue_radiale_um": 6450.4,
+      "etendue_radiale_parcourue_um": 6450.4,
+      "retour_radial": 1.0,
+      "chemin_um": 8442.6,
+      "obliquite_du_chemin": 1.309,
+      "feuilles_comptees": 49.77,
+      "pas_en_butee": 7,
+      "fraction_par_pas": 1.1061
+    },
+    {
+      "course": "la_re_course_large.json",
+      "memoire_du_cap": 0.0,
+      "bande": [
+        28,
+        37
+      ],
+      "rayon_mm": 6.32,
+      "pas_voyants": 70,
+      "etendue_radiale_um": 11770.6,
+      "etendue_radiale_parcourue_um": 11770.6,
+      "retour_radial": 1.0,
+      "chemin_um": 13460.5,
+      "obliquite_du_chemin": 1.144,
+      "feuilles_comptees": 80.12,
+      "pas_en_butee": 3,
+      "fraction_par_pas": 1.1446
+    },
+    {
+      "course": "la_re_course_large.json",
+      "memoire_du_cap": 0.0,
+      "bande": [
+        53,
+        58
+      ],
+      "rayon_mm": 10.51,
+      "pas_voyants": 100,
+      "etendue_radiale_um": 7331.9,
+      "etendue_radiale_parcourue_um": 13214.6,
+      "retour_radial": 1.802,
+      "chemin_um": 18676.2,
+      "obliquite_du_chemin": 2.547,
+      "feuilles_comptees": 116.31,
+      "pas_en_butee": 9,
+      "fraction_par_pas": 1.1631
+    },
+    {
+      "course": "la_re_course_large.json",
+      "memoire_du_cap": 0.0,
+      "bande": [
+        64,
+        68
+      ],
+      "rayon_mm": 12.48,
+      "pas_voyants": 66,
+      "etendue_radiale_um": 10103.4,
+      "etendue_radiale_parcourue_um": 10103.4,
+      "retour_radial": 1.0,
+      "chemin_um": 12491.3,
+      "obliquite_du_chemin": 1.236,
+      "feuilles_comptees": 66.48,
+      "pas_en_butee": 5,
+      "fraction_par_pas": 1.0073
+    },
+    {
+      "course": "la_re_course_large.json",
+      "memoire_du_cap": 0.0,
+      "bande": [
+        73,
+        76
+      ],
+      "rayon_mm": 13.99,
+      "pas_voyants": 35,
+      "etendue_radiale_um": 4632.4,
+      "etendue_radiale_parcourue_um": 4632.4,
+      "retour_radial": 1.0,
+      "chemin_um": 6047.1,
+      "obliquite_du_chemin": 1.305,
+      "feuilles_comptees": 39.8,
+      "pas_en_butee": 4,
+      "fraction_par_pas": 1.1373
+    },
+    {
+      "course": "la_re_course_large.json",
+      "memoire_du_cap": 0.0,
+      "bande": [
+        77,
+        80
+      ],
+      "rayon_mm": 14.7,
+      "pas_voyants": 41,
+      "etendue_radiale_um": 6505.2,
+      "etendue_radiale_parcourue_um": 6505.2,
+      "retour_radial": 1.0,
+      "chemin_um": 7707.4,
+      "obliquite_du_chemin": 1.185,
+      "feuilles_comptees": 49.41,
+      "pas_en_butee": 5,
+      "fraction_par_pas": 1.2051
+    },
+    {
+      "course": "la_re_course_large.json",
+      "memoire_du_cap": 0.0,
+      "bande": [
+        85,
+        88
+      ],
+      "rayon_mm": 16.22,
+      "pas_voyants": 103,
+      "etendue_radiale_um": 6498.7,
+      "etendue_radiale_parcourue_um": 11930.0,
+      "retour_radial": 1.836,
+      "chemin_um": 19957.0,
+      "obliquite_du_chemin": 3.071,
+      "feuilles_comptees": 138.93,
+      "pas_en_butee": 12,
+      "fraction_par_pas": 1.3488
+    },
+    {
+      "course": "la_re_course_large.json",
+      "memoire_du_cap": 0.0,
+      "bande": [
+        92,
+        94
+      ],
+      "rayon_mm": 17.51,
+      "pas_voyants": 43,
+      "etendue_radiale_um": 5303.5,
+      "etendue_radiale_parcourue_um": 5303.5,
+      "retour_radial": 1.0,
+      "chemin_um": 7681.8,
+      "obliquite_du_chemin": 1.448,
+      "feuilles_comptees": 51.02,
+      "pas_en_butee": 1,
+      "fraction_par_pas": 1.1864
+    },
+    {
+      "course": "la_re_course_large.json",
+      "memoire_du_cap": 0.0,
+      "bande": [
+        95,
+        97
+      ],
+      "rayon_mm": 18.06,
+      "pas_voyants": 32,
+      "etendue_radiale_um": 5253.3,
+      "etendue_radiale_parcourue_um": 5253.3,
+      "retour_radial": 1.0,
+      "chemin_um": 5596.9,
+      "obliquite_du_chemin": 1.065,
+      "feuilles_comptees": 36.31,
+      "pas_en_butee": 1,
+      "fraction_par_pas": 1.1348
+    },
+    {
+      "course": "la_re_course_large.json",
+      "memoire_du_cap": 0.0,
+      "bande": [
+        98,
+        100
+      ],
+      "rayon_mm": 18.62,
+      "pas_voyants": 50,
+      "etendue_radiale_um": 6801.3,
+      "etendue_radiale_parcourue_um": 6801.3,
+      "retour_radial": 1.0,
+      "chemin_um": 9083.4,
+      "obliquite_du_chemin": 1.336,
+      "feuilles_comptees": 61.88,
+      "pas_en_butee": 2,
+      "fraction_par_pas": 1.2376
+    }
+  ],
+  "retours_radiaux": {
+    "marches": 22,
+    "monotones": 20,
+    "retour_max": 1.836
+  },
+  "lecart_au_compte_geometrique": {
+    "decidable": true,
+    "traversees": 22,
+    "fourchette_des_instruments_um": [
+      164.0,
+      182.4
+    ],
+    "espacement_implique_par_le_rayon_um": 140.3,
+    "espacement_implique_par_le_rayon_min": 46.8,
+    "espacement_implique_par_le_rayon_max": 217.0,
+    "espacement_implique_par_le_chemin_um": 166.4,
+    "espacement_implique_par_le_chemin_min": 137.1,
+    "espacement_implique_par_le_chemin_max": 225.1,
+    "marches_dont_le_chemin_tombe_dans_la_fourchette": 8,
+    "par_espacement": [
+      {
+        "espacement_um": 164.0,
+        "erreur_mediane_spires": 8.4,
+        "erreur_min_spires": -7.7,
+        "erreur_max_spires": 99.3,
+        "marches_qui_sur_comptent": 18
+      },
+      {
+        "espacement_um": 182.4,
+        "erreur_mediane_spires": 13.0,
+        "erreur_min_spires": -4.5,
+        "erreur_max_spires": 103.3,
+        "marches_qui_sur_comptent": 20
+      }
+    ],
+    "le_compte_radial_est_sous_la_fourchette": true,
+    "le_compte_radial_est_au_dessus": false,
+    "le_compte_du_chemin_est_dans_la_fourchette": true
+  },
+  "avec_cap": {
+    "decidable": true,
+    "traversees": 13,
+    "fourchette_des_instruments_um": [
+      164.0,
+      182.4
+    ],
+    "espacement_implique_par_le_rayon_um": 154.4,
+    "espacement_implique_par_le_rayon_min": 110.5,
+    "espacement_implique_par_le_rayon_max": 217.0,
+    "espacement_implique_par_le_chemin_um": 169.7,
+    "espacement_implique_par_le_chemin_min": 137.1,
+    "espacement_implique_par_le_chemin_max": 225.1,
+    "marches_dont_le_chemin_tombe_dans_la_fourchette": 7,
+    "par_espacement": [
+      {
+        "espacement_um": 164.0,
+        "erreur_mediane_spires": 3.1,
+        "erreur_min_spires": -7.7,
+        "erreur_max_spires": 22.4,
+        "marches_qui_sur_comptent": 9
+      },
+      {
+        "espacement_um": 182.4,
+        "erreur_mediane_spires": 8.2,
+        "erreur_min_spires": -4.5,
+        "erreur_max_spires": 27.0,
+        "marches_qui_sur_comptent": 11
+      }
+    ],
+    "le_compte_radial_est_sous_la_fourchette": true,
+    "le_compte_radial_est_au_dessus": false,
+    "le_compte_du_chemin_est_dans_la_fourchette": true
+  },
+  "sans_cap": {
+    "decidable": true,
+    "traversees": 9,
+    "fourchette_des_instruments_um": [
+      164.0,
+      182.4
+    ],
+    "espacement_implique_par_le_rayon_um": 116.4,
+    "espacement_implique_par_le_rayon_min": 46.8,
+    "espacement_implique_par_le_rayon_max": 152.0,
+    "espacement_implique_par_le_chemin_um": 154.1,
+    "espacement_implique_par_le_chemin_min": 143.6,
+    "espacement_implique_par_le_chemin_max": 187.9,
+    "marches_dont_le_chemin_tombe_dans_la_fourchette": 1,
+    "par_espacement": [
+      {
+        "espacement_um": 164.0,
+        "erreur_mediane_spires": 11.6,
+        "erreur_min_spires": 4.3,
+        "erreur_max_spires": 99.3,
+        "marches_qui_sur_comptent": 9
+      },
+      {
+        "espacement_um": 182.4,
+        "erreur_mediane_spires": 15.6,
+        "erreur_min_spires": 7.5,
+        "erreur_max_spires": 103.3,
+        "marches_qui_sur_comptent": 9
+      }
+    ],
+    "le_compte_radial_est_sous_la_fourchette": true,
+    "le_compte_radial_est_au_dessus": false,
+    "le_compte_du_chemin_est_dans_la_fourchette": false
+  },
+  "le_surcomptage_est_il_lobliquite": {
+    "decidable": true,
+    "traversees": 22,
+    "espacement_um": 164.0,
+    "obliquite_mediane": 1.154,
+    "sur_comptage_median": 1.169,
+    "ecart_median": -0.0161,
+    "rho_de_spearman": 0.8952,
+    "p_du_rang": 2e-08,
+    "p_apparie": 0.6556,
+    "feuilles_par_espacement_de_chemin": 0.9857,
+    "feuilles_par_espacement_de_chemin_min": 0.729,
+    "feuilles_par_espacement_de_chemin_max": 1.196,
+    "les_deux_varient_ensemble": true,
+    "et_elles_sont_egales": true,
+    "le_marcheur_compte_le_long_du_chemin": true
+  },
+  "le_cap_reduit_il_lerreur": {
+    "decidable": true,
+    "paires": 9,
+    "espacement_um": 164.0,
+    "erreur_mediane_sans_cap": 11.6,
+    "erreur_mediane_avec_cap": 5.3,
+    "marches_ou_le_cap_se_trompe_moins": 7,
+    "p_apparie": 0.03906,
+    "detail": [
+      {
+        "bande": [
+          28,
+          37
+        ],
+        "rayon_mm": 6.32,
+        "erreur_sans_cap": 8.3,
+        "erreur_avec_cap": 13.6
+      },
+      {
+        "bande": [
+          53,
+          58
+        ],
+        "rayon_mm": 10.51,
+        "erreur_sans_cap": 71.6,
+        "erreur_avec_cap": 0.4
+      },
+      {
+        "bande": [
+          64,
+          68
+        ],
+        "rayon_mm": 12.48,
+        "erreur_sans_cap": 4.9,
+        "erreur_avec_cap": 9.7
+      },
+      {
+        "bande": [
+          73,
+          76
+        ],
+        "rayon_mm": 13.99,
+        "erreur_sans_cap": 11.6,
+        "erreur_avec_cap": 5.3
+      },
+      {
+        "bande": [
+          77,
+          80
+        ],
+        "rayon_mm": 14.7,
+        "erreur_sans_cap": 9.7,
+        "erreur_avec_cap": 2.5
+      },
+      {
+        "bande": [
+          85,
+          88
+        ],
+        "rayon_mm": 16.22,
+        "erreur_sans_cap": 99.3,
+        "erreur_avec_cap": 0.6
+      },
+      {
+        "bande": [
+          92,
+          94
+        ],
+        "rayon_mm": 17.51,
+        "erreur_sans_cap": 18.7,
+        "erreur_avec_cap": 8.4
+      },
+      {
+        "bande": [
+          95,
+          97
+        ],
+        "rayon_mm": 18.06,
+        "erreur_sans_cap": 4.3,
+        "erreur_avec_cap": 4.0
+      },
+      {
+        "bande": [
+          98,
+          100
+        ],
+        "rayon_mm": 18.62,
+        "erreur_sans_cap": 20.4,
+        "erreur_avec_cap": 10.4
+      }
+    ],
+    "le_cap_reduit_lerreur": true
+  },
+  "la_fixture_tranche_t_elle": {
+    "decidable": true,
+    "lots": [
+      {
+        "angle_a_la_normale_deg": 0.0,
+        "pas": 20,
+        "chemin_um": 3693.5,
+        "epaisseur_um": 3693.5,
+        "feuilles_comptees": 21.58,
+        "feuilles_attendues_par_epaisseur": 21.35,
+        "feuilles_attendues_par_chemin": 21.35,
+        "compte_sur_epaisseur": 1.011,
+        "compte_sur_chemin": 1.011,
+        "pas_en_butee": 0
+      },
+      {
+        "angle_a_la_normale_deg": 20.0,
+        "pas": 20,
+        "chemin_um": 3727.6,
+        "epaisseur_um": 3502.8,
+        "feuilles_comptees": 21.07,
+        "feuilles_attendues_par_epaisseur": 20.25,
+        "feuilles_attendues_par_chemin": 21.55,
+        "compte_sur_epaisseur": 1.041,
+        "compte_sur_chemin": 0.978,
+        "pas_en_butee": 0
+      },
+      {
+        "angle_a_la_normale_deg": 35.0,
+        "pas": 19,
+        "chemin_um": 5804.3,
+        "epaisseur_um": 4754.6,
+        "feuilles_comptees": 27.87,
+        "feuilles_attendues_par_epaisseur": 27.48,
+        "feuilles_attendues_par_chemin": 33.55,
+        "compte_sur_epaisseur": 1.014,
+        "compte_sur_chemin": 0.831,
+        "pas_en_butee": 0
+      },
+      {
+        "angle_a_la_normale_deg": 50.0,
+        "pas": 20,
+        "chemin_um": 5440.9,
+        "epaisseur_um": 3497.3,
+        "feuilles_comptees": 20.57,
+        "feuilles_attendues_par_epaisseur": 20.22,
+        "feuilles_attendues_par_chemin": 31.45,
+        "compte_sur_epaisseur": 1.018,
+        "compte_sur_chemin": 0.654,
+        "pas_en_butee": 0
+      }
+    ],
+    "angles_obliques": 3,
+    "compte_sur_epaisseur_median": 1.018,
+    "compte_sur_chemin_median": 0.831,
+    "le_compte_suit_lepaisseur": true,
+    "le_compte_suit_le_chemin": false
+  },
+  "un_zigzag_compte_t_il_double": {
+    "decidable": true,
+    "lots": [
+      {
+        "angle_deg": 0.0,
+        "alterne": false,
+        "pas": 20,
+        "chemin_um": 3693.5,
+        "epaisseur_um": 3693.5,
+        "feuilles_comptees": 21.58,
+        "compte_sur_epaisseur": 1.011
+      },
+      {
+        "angle_deg": 0.0,
+        "alterne": true,
+        "pas": 20,
+        "chemin_um": 3693.5,
+        "epaisseur_um": 3693.5,
+        "feuilles_comptees": 21.58,
+        "compte_sur_epaisseur": 1.011
+      },
+      {
+        "angle_deg": 20.0,
+        "alterne": false,
+        "pas": 20,
+        "chemin_um": 3727.6,
+        "epaisseur_um": 3502.8,
+        "feuilles_comptees": 21.05,
+        "compte_sur_epaisseur": 1.04
+      },
+      {
+        "angle_deg": 20.0,
+        "alterne": true,
+        "pas": 20,
+        "chemin_um": 3727.6,
+        "epaisseur_um": 3502.8,
+        "feuilles_comptees": 20.7,
+        "compte_sur_epaisseur": 1.022
+      },
+      {
+        "angle_deg": 35.0,
+        "alterne": false,
+        "pas": 20,
+        "chemin_um": 4281.2,
+        "epaisseur_um": 3507.0,
+        "feuilles_comptees": 21.05,
+        "compte_sur_epaisseur": 1.039
+      },
+      {
+        "angle_deg": 35.0,
+        "alterne": true,
+        "pas": 20,
+        "chemin_um": 4272.5,
+        "epaisseur_um": 3499.8,
+        "feuilles_comptees": 21.01,
+        "compte_sur_epaisseur": 1.038
+      }
+    ],
+    "paires": [
+      {
+        "angle_deg": 0.0,
+        "droit": 1.011,
+        "zigzag": 1.011,
+        "ecart": 0.0
+      },
+      {
+        "angle_deg": 20.0,
+        "droit": 1.04,
+        "zigzag": 1.022,
+        "ecart": -0.018
+      },
+      {
+        "angle_deg": 35.0,
+        "droit": 1.039,
+        "zigzag": 1.038,
+        "ecart": -0.001
+      }
+    ],
+    "ecart_median_oblique": -0.009,
+    "temoin_a_angle_nul": 0.0,
+    "le_zigzag_sur_compte": false
+  }
+}
