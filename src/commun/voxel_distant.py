@@ -145,40 +145,59 @@ class VolumeZarr:
             c, d = self.adresse(*p[i])
             paquets.setdefault(c, []).append((d, int(i)))
 
-        def un_chunk(item):
-            c, entrees = item
+        # ⭐⭐⭐⭐ LE POOL PORTE SUR LES PLAGES, PAS SUR LES CHUNKS, ET C'EST TOUT LE DEBIT. La
+        # premiere version mappait le pool sur les chunks et lisait les plages d'un chunk EN
+        # SEQUENCE. Or un cube de lecture du marcheur fait 41 voxels de cote et les chunks en font
+        # 128 : il tombe donc dans UN SEUL chunk, qui demande 41 plages. Le pool avait une tache
+        # pour 41 requetes, et le temps mesure etait exactement 41 x 350 ms.
+        #
+        # ⚠⚠ LA LIMITE N'ETAIT NI LE RESEAU NI LE PROCESSEUR, et c'est ce qui rendait le defaut
+        # invisible : le debit ne bougeait pas de 8 a 128 fils, donc tout designait le reseau. Le
+        # processus ne consommait que 2,2 % de CPU. C'etait la LATENCE, payee une fois par plage,
+        # en file.
+        #
+        # ⚠ Les cibles de chaque plage sont calculees ICI plutot que retrouvees a l'arrivee : la
+        # premiere version rebalayait toutes les entrees du chunk pour chaque plage, ce qui est
+        # quadratique la ou les plages sont nombreuses — c'est-a-dire exactement dans le cas qui
+        # domine.
+        taches = []
+        for c, entrees in paquets.items():
             entrees.sort()
             # ⭐⭐ RECOLLEMENT : des cellules voisines d'une meme ligne de maille sont contigues
             # en x, donc leurs octets le sont aussi. Une plage par tranche au lieu d'une par
             # voxel est ce qui fait tenir la mesure dans le temps d'un cafe.
-            tranches, debut, fin = [], entrees[0][0], entrees[0][0]
-            for d, _ in entrees[1:]:
+            debut = fin = entrees[0][0]
+            vises: list[tuple[int, int]] = [entrees[0]]
+            for d, i in entrees[1:]:
                 if d - fin <= RECOLLEMENT:
                     fin = d
+                    vises.append((d, i))
                     continue
-                tranches.append((debut, fin))
+                taches.append((c, debut, fin, vises))
                 debut = fin = d
-            tranches.append((debut, fin))
-            return entrees, [(a, b) + _get(self.cle(*c), (a, b), self.timeout)
-                             for a, b in tranches]
+                vises = [(d, i)]
+            taches.append((c, debut, fin, vises))
+
+        def une_plage(t):
+            c, a, b, vises = t
+            brut, code = _get(self.cle(*c), (a, b), self.timeout)
+            return a, b, vises, brut, code
 
         absents = pannes = 0
         with cf.ThreadPoolExecutor(max_workers=max(1, fils)) as pool:
-            for entrees, rendu in pool.map(un_chunk, paquets.items()):
-                for a, b, brut, code in rendu:
-                    vises = [(d, i) for d, i in entrees if a <= d <= b]
-                    if brut is None or len(brut) != b - a + 1:
-                        if code == 404:
-                            # ⚠ Chunk non ecrit : le zarr omet ce qui est entierement au
-                            # remplissage, donc c'est une VALEUR, pas une absence de mesure.
-                            absents += len(vises)
-                            for _, i in vises:
-                                out[i] = float(self.remplissage)
-                        else:
-                            pannes += len(vises)
-                        continue
-                    for d, i in vises:
-                        out[i] = float(brut[d - a])
+            for a, b, vises, brut, code in pool.map(une_plage, taches):
+                if brut is None or len(brut) != b - a + 1:
+                    if code == 404:
+                        # ⚠ Chunk non ecrit : le zarr omet ce qui est entierement au
+                        # remplissage, donc c'est une VALEUR, pas une absence de mesure.
+                        absents += len(vises)
+                        for _, i in vises:
+                            out[i] = float(self.remplissage)
+                    else:
+                        pannes += len(vises)
+                    continue
+                for d, i in vises:
+                    out[i] = float(brut[d - a])
         self.derniers_absents, self.dernieres_pannes = absents, pannes
         return out
 
