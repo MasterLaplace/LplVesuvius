@@ -2943,6 +2943,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
     # (3) Et le rho de la rectitude contre la longueur ne voyage jamais sans celui a LONGUEUR
     # EGALE : le premier est un confondant mecanique, le second est ce qui reste quand on l'ote.
     for nom_, fichier_ in (("130", "le_marcheur_derive_sur_la_re_course.json"),
+                           ("131", "le_marcheur_derive_sur_la_course_large.json"),
                            ("119", "le_marcheur_derive_t_il.json")):
         src = _source(racine, fichier_)
         if not src.exists():
@@ -2985,6 +2986,51 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             for x in j.get("courbe", []):
                 ajoute(f"net au pas {x['pas']} de {nom_}", x["net_median_um"], 1, src.name)
                 ajoute(f"chemin au pas {x['pas']} de {nom_}", x["chemin_median_um"], 1, src.name)
+
+    # ⭐⭐⭐⭐ LA TRANCHE 131 : DOUBLER LES BANDES, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) Le compte de marches au plafond ne voyage JAMAIS sans celui des bandes. « 4 marches »
+    # se lit comme un progres ; « 4 sur 16, contre 3 sur 8 » dit que le budget de bandes n'achete
+    # pas ce qu'on croyait.
+    # (2) Et le p du temoin ne voyage jamais sans la PROPORTION. Un p qui tombe de 0,375 a 0,194
+    # se lit comme « la puissance arrivait » ; a cote de « 0,714 contre 0,714 », il dit que la
+    # proportion n'a pas bouge, donc que l'effet lui-meme est plus faible.
+    for nom_, fichier_ in (("131", "la_re_course_large.json"),):
+        src = _source(racine, fichier_)
+        if not src.exists():
+            continue
+        d = json.loads(src.read_text())
+        r_ = d.get("resume", {})
+        for cle, nom, dec in (("taux_de_confirmation_global", "taux global", 4),
+                              ("part_au_plafond", "part au plafond", 2),
+                              ("longueur_mediane_um", "longueur mediane", 1),
+                              ("longueur_max_um", "longueur max", 1),
+                              ("pas_parcourus_median", "pas medians", 1)):
+            if r_.get(cle) is not None:
+                ajoute(f"{nom} de {nom_}", r_[cle], dec, src.name)
+        for cle, nom in (("marches", "marches"), ("plafond", "plafond"),
+                         ("marches_au_plafond", "marches au plafond"),
+                         ("sorties_du_volume", "sorties")):
+            if r_.get(cle) is not None:
+                v_ = r_[cle]
+                out.append((f"{nom} de {nom_}", [f"**{v_}**", f"{v_}"], src.name))
+        t_ = d.get("le_taux_baisse_avec_la_profondeur", {})
+        for cle, nom, dec in (("taux_precoce", "taux precoce", 3),
+                              ("taux_tardif", "taux tardif", 3),
+                              ("p_sous_un_taux_constant", "p de profondeur", 4)):
+            if t_.get(cle) is not None:
+                ajoute(f"{nom} de {nom_}", t_[cle], dec, src.name)
+        y_ = d.get("le_taux_suit_il_le_rayon", {})
+        if y_.get("rho_de_spearman") is not None:
+            ajoute(f"rho du rayon de {nom_}", y_["rho_de_spearman"], 3, src.name, signe=True)
+        if y_.get("p") is not None:
+            ajoute(f"p du rayon de {nom_}", y_["p"], 4, src.name)
+        if d.get("secondes") is not None:
+            ajoute(f"secondes de {nom_}", d["secondes"], 1, src.name)
+        for L in d.get("lignes", []):
+            c_ = (L.get("detail") or [{}])[0]
+            if c_.get("longueur_um") is not None:
+                ajoute(f"chemin au rayon {L.get('rayon_mm')} de {nom_}",
+                       c_["longueur_um"], 1, src.name)
 
     # ⭐⭐⭐⭐ LA RE-COURSE DE `130` : le resume d'une traversee complete.
     rec = _source(racine, "la_re_course.json")

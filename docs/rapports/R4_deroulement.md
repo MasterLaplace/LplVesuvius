@@ -678,6 +678,29 @@ pas un meilleur pas, c'est un CAP** (`R4-F60`, `R4-F61`) : le module n'a qu'un b
 le sens initial, et il tient vingt transferts. ⚠ n = 3 au plafond : la fréquence du recul n'est
 pas mesurée, et la prochaine course doit élargir les marches avant d'allonger les pas.
 
+**`131` · 2026-09-13 · doubler les bandes n'a pas doublé les marches** (`jusquou_va_t_il_si_on_le_laisse.py`,
+`le_marcheur_derive_t_il.py`, zéro lecture distante après la course)
+`130` laissait une commande précise — plus de MARCHES, pas plus de pas. ⭐⭐⭐⭐ **Seize bandes au
+lieu de huit n'achètent qu'UNE marche au plafond de plus** : **4 sur 16** (part **0,25**) contre 3
+sur 8, parce que **11 des 16 s'arrêtent sur « plus rien à lire »** et une sort du champ — à
+16,93 mm une marche fait **3 pas**. Il faut donc ~4 bandes par marche utile, et ~80 bandes pour
+n = 20, soit plusieurs jours de lecture. ⭐⭐⭐⭐ **Et la compensation des virages de `119` reste
+non établie alors que la puissance a doublé** : **10 marches sur 14** et p **0,19373**, contre 5/7
+et p 0,375 à huit bandes, contre **17/19** et p **0,00141** à vingt pas. Le p a glissé mais la
+**proportion n'a pas bougé** (0,714 contre 0,714) : si seule la puissance manquait elle serait
+remontée vers 0,895. L'effet est donc plus FAIBLE sur une traversée complète, pas seulement moins
+puissant. ⭐⭐⭐ Confirmé sur seize marches : la portée reste non censurée, le net culmine avant
+le plafond pour les **mêmes deux** marches (les deux nouvelles sont monotones), et le taux vaut
+**0,7526** sur **1043** pas voyants sans suivre le rayon — rho **−0,025**, p **0,9267**, la
+réfutation la plus plate de `R4-P21` à ce jour. ⚠⚠ La rectitude médiane remonte de 0,7597 à
+**0,8563** et l'angle entre moitiés tombe de 56,3° à **29,0°**, mais ce n'est PAS une amélioration
+du marcheur : ce sont des marches courtes qui entrent dans le lot, et **deux médianes sur des lots
+de longueurs différentes ne se comparent pas**. ⚠ `secondes` vaut **60355,1** dont ~9 h 30 de
+sommeil de la machine — dernière course à porter le défaut. → **la fréquence du recul ne se
+tranchera pas par plus de lecture** (`R4-F62`, `R4-F63`) ; ce qui reste est une fixture à réponse
+connue, et `VolumeFabriqueEnSpirale` en est une : sa normale TOURNE, donc un cap rigide y coûte
+quelque chose, là où une pile plane le rend gratuit.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
