@@ -1,0 +1,324 @@
+{
+ "combien_de_virage_la_matiere_demande": {
+  "decidable": true,
+  "graine": 3,
+  "pas": 112,
+  "rayon_depart_um": 8000.0,
+  "rayon_arrivee_um": 27358.8,
+  "angle_parcouru_deg": 0.2806,
+  "virage_vrai_total_deg": 0.1571,
+  "virage_vrai_median_deg": 0.0103,
+  "virage_vrai_max_deg": 0.0727,
+  "virage_du_marcheur_median_deg": 2.83,
+  "virage_du_marcheur_max_deg": 8.24,
+  "facteur": 273.9,
+  "le_marcheur_tourne_plus_que_la_matiere": true
+ },
+ "le_virage_reel_persiste_t_il": {
+  "decidable": true,
+  "source": "la_re_course_large.json",
+  "marches": 14,
+  "par_marche": [
+   {
+    "rayon_mm": 4.07,
+    "pas": 112,
+    "cos_moyen": -0.0997
+   },
+   {
+    "rayon_mm": 6.32,
+    "pas": 70,
+    "cos_moyen": -0.2079
+   },
+   {
+    "rayon_mm": 9.4,
+    "pas": 112,
+    "cos_moyen": -0.2141
+   },
+   {
+    "rayon_mm": 10.51,
+    "pas": 100,
+    "cos_moyen": -0.1454
+   },
+   {
+    "rayon_mm": 11.57,
+    "pas": 112,
+    "cos_moyen": -0.2042
+   },
+   {
+    "rayon_mm": 12.48,
+    "pas": 66,
+    "cos_moyen": -0.3123
+   },
+   {
+    "rayon_mm": 13.27,
+    "pas": 51,
+    "cos_moyen": -0.321
+   },
+   {
+    "rayon_mm": 13.99,
+    "pas": 35,
+    "cos_moyen": -0.3128
+   },
+   {
+    "rayon_mm": 14.7,
+    "pas": 41,
+    "cos_moyen": -0.3068
+   },
+   {
+    "rayon_mm": 15.46,
+    "pas": 112,
+    "cos_moyen": -0.1213
+   },
+   {
+    "rayon_mm": 16.22,
+    "pas": 103,
+    "cos_moyen": -0.0431
+   },
+   {
+    "rayon_mm": 17.51,
+    "pas": 43,
+    "cos_moyen": -0.0373
+   },
+   {
+    "rayon_mm": 18.06,
+    "pas": 32,
+    "cos_moyen": -0.2363
+   },
+   {
+    "rayon_mm": 18.62,
+    "pas": 50,
+    "cos_moyen": -0.1285
+   }
+  ],
+  "cos_median": -0.2061,
+  "cos_min": -0.321,
+  "cos_max": -0.0373,
+  "marches_negatives": 14,
+  "p_contre_zero": 0.000122,
+  "le_virage_persiste": false,
+  "le_virage_alterne": true
+ },
+ "ce_que_la_memoire_change": {
+  "pas": 112,
+  "graines": [
+   3,
+   11,
+   29,
+   53
+  ],
+  "memoires": [
+   0.0,
+   0.25,
+   0.5,
+   0.75
+  ],
+  "par_memoire": [
+   {
+    "memoire": 0.0,
+    "lots": 4,
+    "erreur_mediane_deg": 1.965,
+    "erreur_max_deg": 6.4,
+    "taux_median": 1.0,
+    "detail": [
+     {
+      "graine": 3,
+      "pas": 112,
+      "erreur_mediane_deg": 2.001,
+      "erreur_max_deg": 6.868,
+      "taux": 1.0
+     },
+     {
+      "graine": 11,
+      "pas": 112,
+      "erreur_mediane_deg": 1.92,
+      "erreur_max_deg": 4.811,
+      "taux": 1.0
+     },
+     {
+      "graine": 29,
+      "pas": 112,
+      "erreur_mediane_deg": 2.123,
+      "erreur_max_deg": 6.434,
+      "taux": 1.0
+     },
+     {
+      "graine": 53,
+      "pas": 112,
+      "erreur_mediane_deg": 1.929,
+      "erreur_max_deg": 6.366,
+      "taux": 1.0
+     }
+    ]
+   },
+   {
+    "memoire": 0.25,
+    "lots": 4,
+    "erreur_mediane_deg": 1.473,
+    "erreur_max_deg": 3.795,
+    "taux_median": 1.0,
+    "detail": [
+     {
+      "graine": 3,
+      "pas": 112,
+      "erreur_mediane_deg": 1.367,
+      "erreur_max_deg": 3.962,
+      "taux": 1.0
+     },
+     {
+      "graine": 11,
+      "pas": 112,
+      "erreur_mediane_deg": 1.426,
+      "erreur_max_deg": 4.115,
+      "taux": 1.0
+     },
+     {
+      "graine": 29,
+      "pas": 112,
+      "erreur_mediane_deg": 1.627,
+      "erreur_max_deg": 3.627,
+      "taux": 0.9911
+     },
+     {
+      "graine": 53,
+      "pas": 112,
+      "erreur_mediane_deg": 1.52,
+      "erreur_max_deg": 3.312,
+      "taux": 1.0
+     }
+    ],
+    "gain_en_erreur_deg": 0.492,
+    "cout_en_taux": 0.0,
+    "la_memoire_aide": true
+   },
+   {
+    "memoire": 0.5,
+    "lots": 4,
+    "erreur_mediane_deg": 1.099,
+    "erreur_max_deg": 2.814,
+    "taux_median": 1.0,
+    "detail": [
+     {
+      "graine": 3,
+      "pas": 112,
+      "erreur_mediane_deg": 0.945,
+      "erreur_max_deg": 2.535,
+      "taux": 1.0
+     },
+     {
+      "graine": 11,
+      "pas": 112,
+      "erreur_mediane_deg": 1.045,
+      "erreur_max_deg": 2.753,
+      "taux": 1.0
+     },
+     {
+      "graine": 29,
+      "pas": 112,
+      "erreur_mediane_deg": 1.153,
+      "erreur_max_deg": 3.077,
+      "taux": 1.0
+     },
+     {
+      "graine": 53,
+      "pas": 112,
+      "erreur_mediane_deg": 1.21,
+      "erreur_max_deg": 2.874,
+      "taux": 1.0
+     }
+    ],
+    "gain_en_erreur_deg": 0.866,
+    "cout_en_taux": 0.0,
+    "la_memoire_aide": true
+   },
+   {
+    "memoire": 0.75,
+    "lots": 4,
+    "erreur_mediane_deg": 0.699,
+    "erreur_max_deg": 1.802,
+    "taux_median": 1.0,
+    "detail": [
+     {
+      "graine": 3,
+      "pas": 112,
+      "erreur_mediane_deg": 0.543,
+      "erreur_max_deg": 1.925,
+      "taux": 1.0
+     },
+     {
+      "graine": 11,
+      "pas": 112,
+      "erreur_mediane_deg": 0.765,
+      "erreur_max_deg": 1.588,
+      "taux": 1.0
+     },
+     {
+      "graine": 29,
+      "pas": 112,
+      "erreur_mediane_deg": 0.693,
+      "erreur_max_deg": 1.68,
+      "taux": 1.0
+     },
+     {
+      "graine": 53,
+      "pas": 112,
+      "erreur_mediane_deg": 0.705,
+      "erreur_max_deg": 2.388,
+      "taux": 1.0
+     }
+    ],
+    "gain_en_erreur_deg": 1.266,
+    "cout_en_taux": 0.0,
+    "la_memoire_aide": true
+   }
+  ]
+ },
+ "la_pile_plane_derive_t_elle": {
+  "decidable": true,
+  "obliquite_deg": 35.0,
+  "bruit": 8.0,
+  "pas": 112,
+  "lots": 4,
+  "detail": [
+   {
+    "graine": 3,
+    "pas": 112,
+    "chemin_um": 19382.7,
+    "net_um": 19370.3,
+    "rectitude": 0.9994,
+    "virage_median_deg": 2.55,
+    "taux": 1.0
+   },
+   {
+    "graine": 11,
+    "pas": 112,
+    "chemin_um": 19399.8,
+    "net_um": 19387.6,
+    "rectitude": 0.9994,
+    "virage_median_deg": 2.44,
+    "taux": 1.0
+   },
+   {
+    "graine": 29,
+    "pas": 112,
+    "chemin_um": 19555.5,
+    "net_um": 19543.6,
+    "rectitude": 0.9994,
+    "virage_median_deg": 2.35,
+    "taux": 1.0
+   },
+   {
+    "graine": 53,
+    "pas": 112,
+    "chemin_um": 19513.1,
+    "net_um": 19497.6,
+    "rectitude": 0.9992,
+    "virage_median_deg": 2.36,
+    "taux": 1.0
+   }
+  ],
+  "rectitude_mediane": 0.9994,
+  "virage_median_deg": 2.4,
+  "taux_median": 1.0,
+  "la_pile_plane_derive": false
+ }
+}

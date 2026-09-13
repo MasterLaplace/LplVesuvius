@@ -701,6 +701,28 @@ tranchera pas par plus de lecture** (`R4-F62`, `R4-F63`) ; ce qui reste est une 
 connue, et `VolumeFabriqueEnSpirale` en est une : sa normale TOURNE, donc un cap rigide y coûte
 quelque chose, là où une pile plane le rend gratuit.
 
+**`132` · 2026-09-13 · le marcheur n'avait pas de gouvernail** (`un_cap_a_memoire.py`, analytique
+sauf la relecture de la course de `131`)
+En cherchant où brancher le cap que `130` réclame, le code a répondu qu'il n'y avait nulle part :
+⭐⭐⭐⭐ **`sens` ne choisit que le SIGNE**, la direction d'un pas est entièrement celle du tenseur
+local. `marcher` reçoit donc `memoire_du_cap`, une moyenne exponentielle de la direction retenue,
+et une mémoire NULLE rend exactement le marcheur d'avant. ⭐⭐⭐⭐ **Et la matière enroulée ne
+demande presque aucun virage** : sur une traversée radiale complète (rayon **8000** →
+**27358,8 µm**, angle parcouru **0,2806°**) la normale vraie tourne de **0,1571°** en tout, soit
+**0,0103° par pas**, quand le marcheur vire de **2,83°** — facteur **273,9**. ⚠⚠⚠ C'est une
+correction de la prémisse qui a fait construire la spirale : sa normale tourne avec l'ANGLE, et un
+marcheur qui traverse des feuilles avance radialement. ⭐⭐⭐⭐ **Et sur la vraie matière le virage
+ALTERNE** : cosinus entre virages consécutifs **−0,2061**, **14 marches sur 14** négatives, p
+**0,000122** — donc du bruit, pas une matière qui courbe, et c'est le mécanisme derrière les
+« virages qui se compensent » de `119`. ⭐⭐⭐ Une mémoire de **0,75** fait tomber l'écart à la
+normale connue de **1,965°** à **0,699°** pour un coût en taux de **0,0**. ⚠⚠⚠ **Mais aucune
+fixture du dépôt ne reproduit la dérive** : sur la pile plane bruitée de `124`, `127` et `128`, le
+marcheur rend une rectitude de **0,9994** sur cent douze pas et confirme tout, là où `130` mesure
+0,183 et 0,078 sur le vrai rouleau. → **le cap existe et devrait marcher, et il ne peut être jugé
+que par une course qui l'emploie** (`R4-F64`, `R4-F65`, `R4-F66`). Porte neuve `R4-P27` : ni
+l'enroulement ni le bruit d'intensité ne font virer le marcheur — qu'est-ce qui le fait virer de
+14,3° par pas ? L'hypothèse désignée sans être mesurée : des feuilles **non parallèles**.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -293,7 +293,7 @@ def marcher(lecteur, depart_fin: np.ndarray, direction0: np.ndarray, longueurs: 
             fils: int = 32, selecteur: str = "calibre",
             barre_du_selecteur: float | None = None,
             fenetre_locale: bool = False, arret_sur_vide: bool = False,
-            rendre_position: bool = False) -> list[dict]:
+            rendre_position: bool = False, memoire_du_cap: float = 0.0) -> list[dict]:
     """Enchainer les pas, et rendre a CHAQUE pas si la matiere confirme encore.
 
     ⭐⭐⭐ C'EST LE MARCHEUR, ET IL N'A BESOIN D'AUCUN MAILLAGE. `interroge_la_matiere` a False
@@ -359,6 +359,31 @@ def marcher(lecteur, depart_fin: np.ndarray, direction0: np.ndarray, longueurs: 
             # sens initial, et il a ete fixe hors de cette boucle.
             if float(d @ sens) < 0.0:
                 d = -d
+            # ⭐⭐⭐⭐ LE CAP, ET IL FALLAIT LE CONSTRUIRE PARCE QU'IL N'EXISTAIT PAS. `sens` ne
+            # choisit que le SIGNE : la direction du pas est entierement celle du tenseur local,
+            # donc le marcheur n'a aucun gouvernail. `130` a mesure que ce qui lui manque est un
+            # cap ; il n'y avait aucun mecanisme par lequel un cap aurait pu agir.
+            #
+            # ⚠⚠ UNE MEMOIRE NULLE REND EXACTEMENT LE MARCHEUR D'AVANT, et c'est ce qui protege
+            # tout ce que le depot a deja mesure : `(1-0)*d + 0*cap` vaut `d`, sans arrondi, donc
+            # aucune signature ne bouge. La batterie l'asserte plutot que de s'y fier.
+            #
+            # ⚠⚠⚠ ET IL N'EST PAS GRATUIT : la ou la matiere TOURNE, un cap qui se souvient
+            # combat la courbure au lieu de moyenner le bruit. C'est pour mesurer ce cout qu'il
+            # faut une pile enroulee, et c'est ce qu'une pile plane ne peut pas dire.
+            # ⚠⚠ LE CAP EST `sens`, ET PAS UNE SECONDE VARIABLE. Ma premiere version en gardait
+            # une, toujours egale a `sens` : deux noms pour une chose sont deux choses qui peuvent
+            # se contredire. Le melange est donc une moyenne exponentielle de la direction
+            # RETENUE, de taux `1 - memoire` — a memoire nulle la matiere decide seule, a memoire
+            # proche de un la marche garde son sens initial quoi qu'elle lise.
+            if memoire_du_cap > 0.0:
+                melange = (1.0 - memoire_du_cap) * d + memoire_du_cap * sens
+                n_ = float(np.linalg.norm(melange))
+                # ⚠ Un melange peut s'annuler si le cap est exactement oppose a la lecture. Dans
+                # ce cas la lecture GAGNE : inventer une direction serait pire que d'oublier le
+                # cap, et c'est le seul endroit ou le cap peut etre ignore.
+                if n_ > 1e-9:
+                    d = melange / n_
             # ⚠⚠⚠ LA PLANARITE EST CONSULTEE, ET C'EST LA REPARATION DE `R4-P23`. Le drapeau
             # ne lisait que le desaccord des deux moities — or deux moities de RIEN ne peuvent
             # pas etre en desaccord : sur un cube constant l'angle vaut exactement 0,00°, donc il

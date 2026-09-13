@@ -2987,6 +2987,68 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"net au pas {x['pas']} de {nom_}", x["net_median_um"], 1, src.name)
                 ajoute(f"chemin au pas {x['pas']} de {nom_}", x["chemin_median_um"], 1, src.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 132 : LE CAP, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Le virage VRAI ne voyage JAMAIS sans celui du marcheur. « 0,0103° par pas » seul se lit
+    # comme une precision d'instrument ; a cote de « 2,83° », il dit que le marcheur tourne 274
+    # fois plus que la matiere ne demande.
+    # (2) Le cosinus entre virages ne voyage jamais sans son p ET son compte de marches : un
+    # « -0,21 » seul se lit comme un effet faible, alors que 14 marches sur 14 negatives en font
+    # un fait.
+    # (3) Et la rectitude de la pile plane ne voyage jamais sans celles du vrai rouleau : 0,9994
+    # seul se lit comme un bon marcheur, a cote de 0,183 et 0,078 il dit que la fixture est trop
+    # facile.
+    cap = _source(racine, "un_cap_a_memoire.json")
+    if cap.exists():
+        d = json.loads(cap.read_text())
+        w = d.get("combien_de_virage_la_matiere_demande", {})
+        if w.get("decidable"):
+            for cle, nom, dec in (# ⚠ Le rayon de depart est un rond : le publier a la decimale le ferait diverger
+                                  # du document sur un zero qui ne veut rien dire.
+                                  ("rayon_depart_um", "rayon de depart de 132", 0),
+                                  ("rayon_arrivee_um", "rayon d arrivee de 132", 1),
+                                  ("angle_parcouru_deg", "angle parcouru de 132", 4),
+                                  ("virage_vrai_total_deg", "virage vrai total de 132", 4),
+                                  ("virage_vrai_median_deg", "virage vrai par pas de 132", 4),
+                                  ("virage_vrai_max_deg", "virage vrai max de 132", 4),
+                                  ("virage_du_marcheur_median_deg",
+                                   "virage du marcheur de 132", 2),
+                                  ("virage_du_marcheur_max_deg",
+                                   "virage du marcheur max de 132", 2),
+                                  ("facteur", "facteur de 132", 1)):
+                if w.get(cle) is not None:
+                    ajoute(nom, w[cle], dec, cap.name)
+        a_ = d.get("le_virage_reel_persiste_t_il", {})
+        if a_.get("decidable"):
+            for cle, nom, dec, signe in (("cos_median", "cos median de 132", 4, True),
+                                         ("cos_min", "cos min de 132", 3, True),
+                                         ("cos_max", "cos max de 132", 4, True),
+                                         ("p_contre_zero", "p du cos de 132", 6, False)):
+                if a_.get(cle) is not None:
+                    ajoute(nom, a_[cle], dec, cap.name, signe=signe)
+            for cle, nom in (("marches", "marches du cos de 132"),
+                             ("marches_negatives", "marches negatives de 132")):
+                if a_.get(cle) is not None:
+                    v_ = a_[cle]
+                    out.append((nom, [f"**{v_}**", f"{v_}"], cap.name))
+        for x in d.get("ce_que_la_memoire_change", {}).get("par_memoire", []):
+            nom = f"memoire {x['memoire']:.2f} de 132"
+            for cle, quoi, dec in (("erreur_mediane_deg", "erreur mediane", 3),
+                                   ("erreur_max_deg", "erreur max", 3),
+                                   ("taux_median", "taux", 3),
+                                   ("gain_en_erreur_deg", "gain", 3),
+                                   ("cout_en_taux", "cout", 1)):
+                if x.get(cle) is not None:
+                    ajoute(f"{quoi} de la {nom}", x[cle], dec, cap.name)
+        pl = d.get("la_pile_plane_derive_t_elle", {})
+        if pl.get("decidable"):
+            for cle, nom, dec in (("rectitude_mediane", "rectitude de la pile plane de 132", 4),
+                                  ("virage_median_deg", "virage de la pile plane de 132", 1),
+                                  ("taux_median", "taux de la pile plane de 132", 3),
+                                  ("obliquite_deg", "obliquite de 132", 0),
+                                  ("bruit", "bruit de 132", 0)):
+                if pl.get(cle) is not None:
+                    ajoute(nom, pl[cle], dec, cap.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 131 : DOUBLER LES BANDES, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) Le compte de marches au plafond ne voyage JAMAIS sans celui des bandes. « 4 marches »
     # se lit comme un progres ; « 4 sur 16, contre 3 sur 8 » dit que le budget de bandes n'achete

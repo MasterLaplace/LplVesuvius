@@ -1405,6 +1405,7 @@ run "la faille se dit"        uv run python "$ROOT/src/nappe/la_faille_se_dit_el
 run "ce que la garde refuse"  uv run python "$ROOT/src/nappe/ce_que_la_garde_refuse.py" --verifier
 run "figure du net"           uv run python "$ROOT/src/figures/figure_jusquou_le_net_progresse.py" --verifier
 run "figure garde refuse"     uv run python "$ROOT/src/figures/figure_ce_que_la_garde_refuse.py" --verifier
+run "un cap a memoire"        uv run python "$ROOT/src/nappe/un_cap_a_memoire.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
