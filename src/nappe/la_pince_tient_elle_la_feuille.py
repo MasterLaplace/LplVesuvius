@@ -141,8 +141,30 @@ def linterstice(vol, p_vx, direction, attendu_um: float, fenetre_um: float,
     return float(t[i] + 0.5 * (a - c) / den * voxel_um)
 
 
+def _garder_les_appuis(ecarts, epaisseur_um: float, minimum: int):
+    """Quels appuis sont sur LE MEME interstice que la mediane de leur machoire ?
+
+    ⭐⭐⭐⭐ L'ENONCE EST EXACT, PAS UN SEUIL. Les interstices sont espaces d'UNE epaisseur, donc
+    « a plus d'une DEMI-epaisseur de la mediane » et « sur un AUTRE interstice » sont le MEME
+    enonce — c'est le meme raisonnement que le refus de la pince, qui bascule exactement a un
+    demi-pas. Aucune constante n'entre, et la regle ne se regle pas.
+
+    ⚠⚠ LA MEDIANE PLUTOT QUE LA MOYENNE, et c'est ce qui rend la regle utilisable : un appui pose
+    sur l'interstice voisin deplace une moyenne d'un tiers d'epaisseur sur trois appuis, donc il
+    emporterait la reference qui doit le juger. C'est le motif « toute quantite que la correction
+    enfle elle-meme est impropre a decider de cette correction », et la mediane y echappe.
+
+    ⚠ Rend `None` s'il ne reste pas de quoi ajuster : refuser vaut mieux qu'ajuster sur un nuage
+    qui ne porte plus la forme qu'on lui demande.
+    """
+    e = np.asarray(ecarts, dtype=np.float64)
+    garde = np.abs(e - float(np.median(e))) < 0.5 * float(epaisseur_um)
+    return None if int(garde.sum()) < int(minimum) else garde
+
+
 def une_machoire(vol, centre_vx, normale, sens: float, largeur_um: float, epaisseur_um: float,
-                 voxel_um: float, appuis: int = APPUIS, marge_um: float = 0.0) -> dict | None:
+                 voxel_um: float, appuis: int = APPUIS, marge_um: float = 0.0,
+                 rejeter: bool = False) -> dict | None:
     """Un appui LARGE sur l'interstice de ce cote — sa position et sa tangente.
 
     ⭐⭐ C'est ici que la pince gagne son orientation sans rien acheter. Les appuis lateraux
@@ -181,6 +203,16 @@ def une_machoire(vol, centre_vx, normale, sens: float, largeur_um: float, epaiss
         pts.append(q + sens * n * (d / voxel_um))
         ecarts.append(d)
     P = np.asarray(pts, dtype=np.float64)
+    rejetes = 0
+    if rejeter:
+        # ⚠⚠ DEUX APPUIS SUFFISENT A PORTER UNE DROITE, donc c'est le minimum ici — et c'est deja
+        # ce que `une_machoire` exige d'entree.
+        garde = _garder_les_appuis(ecarts, epaisseur_um, 2)
+        if garde is None:
+            return None
+        rejetes = int(P.shape[0] - int(garde.sum()))
+        P = P[garde]
+        ecarts = [x for x, g in zip(ecarts, garde) if bool(g)]
     milieu = P.mean(axis=0)
     Q = P - milieu
     # ⚠ La tangente est la direction de plus grande variance du nuage, pas la droite des moindres
@@ -195,12 +227,12 @@ def une_machoire(vol, centre_vx, normale, sens: float, largeur_um: float, epaiss
     if float(nn @ n) < 0.0:
         nn = -nn
     return {"milieu_vx": milieu, "normale": nn, "ecart_um": float(np.median(ecarts)),
-            "ecarts_um": [float(x) for x in ecarts]}
+            "ecarts_um": [float(x) for x in ecarts], "rejetes": int(rejetes)}
 
 
 def une_machoire_en_croix(vol, centre_vx, normale, sens: float, largeur_um: float,
                           epaisseur_um: float, voxel_um: float, appuis: int = APPUIS,
-                          marge_um: float = 0.0) -> dict | None:
+                          marge_um: float = 0.0, rejeter: bool = False) -> dict | None:
     """Une machoire a DEUX barres croisees — son nuage porte un PLAN, donc une normale hors du tour.
 
     ⭐⭐⭐⭐ POURQUOI ELLE EXISTE, ET C'EST UNE PANNE STRUCTURELLE DE `une_machoire`. Celle-ci pose
@@ -241,6 +273,17 @@ def une_machoire_en_croix(vol, centre_vx, normale, sens: float, largeur_um: floa
             pts.append(q + sens * n * (d / voxel_um))
             ecarts.append(d)
     P = np.asarray(pts, dtype=np.float64)
+    rejetes = 0
+    if rejeter:
+        # ⚠⚠ TROIS APPUIS AU MOINS POUR UN PLAN : deux en definissent une infinite, donc la plus
+        # petite direction d'un nuage colineaire ne veut rien dire. C'est la seule difference avec
+        # le segment, et elle vient de ce qu'on ajuste.
+        garde = _garder_les_appuis(ecarts, epaisseur_um, 3)
+        if garde is None:
+            return None
+        rejetes = int(P.shape[0] - int(garde.sum()))
+        P = P[garde]
+        ecarts = [x for x, g in zip(ecarts, garde) if bool(g)]
     milieu = P.mean(axis=0)
     nn = np.linalg.svd(P - milieu, full_matrices=False)[2][-1]
     norme = float(np.linalg.norm(nn))
@@ -250,12 +293,13 @@ def une_machoire_en_croix(vol, centre_vx, normale, sens: float, largeur_um: floa
     if float(nn @ n) < 0.0:
         nn = -nn
     return {"milieu_vx": milieu, "normale": nn, "ecart_um": float(np.median(ecarts)),
-            "ecarts_um": [float(x) for x in ecarts]}
+            "ecarts_um": [float(x) for x in ecarts], "rejetes": int(rejetes)}
 
 
 def poser(vol, centre_vx, normale, largeur_um: float, epaisseur_um: float, voxel_um: float,
           deux: bool, appuis: int = APPUIS, marge_um: float = 0.0,
-          deux_temps: bool = False, en_croix: bool = False) -> dict | None:
+          deux_temps: bool = False, en_croix: bool = False,
+          rejeter: bool = False) -> dict | None:
     """L'etat d'un bras : une machoire, ou deux et l'epaisseur qu'elles MESURENT.
 
     ⚠⚠ C'est la seule difference de fond entre le premier bras et le second. Avec une machoire, ou
@@ -282,26 +326,27 @@ def poser(vol, centre_vx, normale, largeur_um: float, epaisseur_um: float, voxel
     """
     if deux_temps:
         premier = poser(vol, centre_vx, normale, largeur_um, epaisseur_um, voxel_um, deux,
-                        appuis, marge_um, en_croix=en_croix)
+                        appuis, marge_um, en_croix=en_croix, rejeter=rejeter)
         if premier is None:
             return None
         return poser(vol, centre_vx, premier["normale"], largeur_um, epaisseur_um, voxel_um,
-                     deux, appuis, marge_um, en_croix=en_croix)
+                     deux, appuis, marge_um, en_croix=en_croix, rejeter=rejeter)
     # ⚠ UN SEUL INGREDIENT CHANGE : la croix ne touche QUE la facon dont une machoire rend son
     # orientation. Tout le reste — la fenetre, le refus du bord, l'epaisseur mesuree, le centre —
     # est celui de `142`, sans quoi un gain ne serait imputable a rien.
     machoire = une_machoire_en_croix if en_croix else une_machoire
     haut = machoire(vol, centre_vx, normale, +1.0, largeur_um, epaisseur_um, voxel_um,
-                    appuis, marge_um)
+                    appuis, marge_um, rejeter)
     if haut is None:
         return None
     if not deux:
         n = haut["normale"]
         return {"centre_vx": haut["milieu_vx"] - n * (0.5 * epaisseur_um / voxel_um),
                 "normale": n, "haut": haut, "bas": None,
+                "rejetes": int(haut.get("rejetes", 0)),
                 "epaisseur_um": None, "suppose": True}
     bas = machoire(vol, centre_vx, normale, -1.0, largeur_um, epaisseur_um, voxel_um,
-                   appuis, marge_um)
+                   appuis, marge_um, rejeter)
     if bas is None:
         return None
     m = haut["normale"] + bas["normale"]
@@ -309,6 +354,11 @@ def poser(vol, centre_vx, normale, largeur_um: float, epaisseur_um: float, voxel
     n = m / norme if norme > 1e-9 else haut["normale"]
     return {"centre_vx": 0.5 * (haut["milieu_vx"] + bas["milieu_vx"]), "normale": n,
             "haut": haut, "bas": bas, "suppose": False,
+            # ⚠⚠ LE COMPTE D'APPUIS REJETES EST PUBLIE, et c'est ce qui remplace un seuil : « cette
+            # pose a ete touchee » se lit alors EXACTEMENT, au lieu de comparer deux normales a
+            # 1e-9 — une tolerance sous la reproductibilite de la decomposition, qui comptait du
+            # bruit numerique comme un effet.
+            "rejetes": int(haut.get("rejetes", 0) + bas.get("rejetes", 0)),
             "epaisseur_um": float(np.linalg.norm(
                 haut["milieu_vx"] - bas["milieu_vx"]) * voxel_um)}
 
@@ -1358,6 +1408,68 @@ def verifier() -> int:
     lc = int(froissee.lectures)
     v("⚠ la croix coûte exactement deux barres d'appuis", ls > 0 and lc == 2 * ls,
       f"{ls} puis {lc} lectures")
+
+    # ---- ⭐⭐⭐⭐ LE REJET DES APPUIS ABERRANTS (`155`)
+    # ⭐⭐⭐ LA SONDE QUI COMPTE : la MEDIANE et la MOYENNE ne rendent pas le meme verdict, et c'est
+    # pourquoi la regle est ecrite avec la mediane. Sur trois appuis dont un est a 100 µm, la
+    # mediane vaut 0 et l'ecarte ; la moyenne vaut 33,3 et le GARDE — l'aberrant aurait emporte la
+    # reference qui devait le juger.
+    ep = pas_um
+    ecarts_faux = [0.0, 0.0, 100.0]
+    garde = _garder_les_appuis(ecarts_faux, ep, 2)
+    par_la_moyenne = np.abs(np.asarray(ecarts_faux)
+                            - float(np.mean(ecarts_faux))) < 0.5 * ep
+    v("⭐⭐⭐⭐ la MÉDIANE écarte un appui que la MOYENNE aurait gardé",
+      garde is not None and int(garde.sum()) == 2 and int(par_la_moyenne.sum()) == 3,
+      f"médiane garde {int(garde.sum())}/3, moyenne en garderait {int(par_la_moyenne.sum())}/3")
+    v("⭐⭐ l'énoncé bascule EXACTEMENT à la demi-épaisseur, jamais à un seuil choisi",
+      int(_garder_les_appuis([0.0, 0.0, 0.5 * ep - 0.01], ep, 2).sum()) == 3
+      and int(_garder_les_appuis([0.0, 0.0, 0.5 * ep + 0.01], ep, 2).sum()) == 2,
+      f"à {0.5 * ep} µm près, parce que les interstices sont espacés d'une épaisseur")
+    v("⚠ et il refuse plutôt que d'ajuster sur ce qui reste quand il ne reste pas de quoi",
+      _garder_les_appuis([0.0, 200.0, 400.0], ep, 2) is None,
+      "trois appuis sur trois interstices différents ne portent aucune forme")
+
+    # ⭐⭐ Sur une matiere LISSE il n'y a rien a rejeter, donc le rejet ne doit RIEN deplacer.
+    sans_rejet = poser(nue, depart, n0, 0.25 * pas_um, pas_um, voxel_um, True)
+    avec_rejet = poser(nue, depart, n0, 0.25 * pas_um, pas_um, voxel_um, True, rejeter=True)
+    v("⭐⭐ sur une matière lisse le rejet ne déplace RIEN",
+      sans_rejet is not None and avec_rejet is not None
+      and _ecart_deg(sans_rejet["normale"], avec_rejet["normale"]) < 1e-9,
+      "aucun appui n'y est à plus d'une demi-épaisseur de ses voisins")
+
+    # ⭐⭐⭐ ... et sur la matiere du rouleau il deplace quelque chose, sinon la regle est vide.
+    # ⚠ Le depart est cherche : la plupart des poses n'ont AUCUN aberrant, donc en prendre un au
+    # hasard ferait une sonde qui passe pour la mauvaise raison — elle ne prouverait que le cas ou
+    # il n'y a rien a faire.
+    bouge = False
+    for k in range(40):
+        d_r, n_r = un_depart(froissee, 2.0 * np.pi * k / 40.0, RAYON_MM, voxel_um, pas_um)
+        a_ = poser(froissee, d_r, n_r, lg_w, pas_um, voxel_um, True)
+        b_ = poser(froissee, d_r, n_r, lg_w, pas_um, voxel_um, True, rejeter=True)
+        if a_ is not None and b_ is not None \
+                and _ecart_deg(a_["normale"], b_["normale"]) > 1e-6:
+            bouge = True
+            break
+    v("⭐⭐⭐ ... et sur la matière du rouleau il déplace la normale sur au moins un départ",
+      bouge, "sinon la règle serait écrite et sans effet")
+
+    # ⚠⚠⚠ ET LE COMPTE D'APPUIS REJETES REMPLACE TOUTE TOLERANCE. Comparer deux normales a 1e-9
+    # comptait du BRUIT NUMERIQUE : sur un masque tout-vrai, la decomposition d'un tableau RECOPIE
+    # ne rend pas les memes derniers bits que celle de l'original, et « cette pose a ete touchee »
+    # devenait vrai sans qu'aucun appui n'ait ete rejete. `rejetes` le dit exactement.
+    sans_r = poser(nue, depart, n0, 0.25 * pas_um, pas_um, voxel_um, True, rejeter=True)
+    v("⭐⭐⭐⭐ une pose publie COMBIEN d'appuis elle a rejetés, au lieu d'une tolérance",
+      sans_r is not None and sans_r.get("rejetes") == 0,
+      "sur une matière lisse il n'y a rien à rejeter, donc le compte est zéro et pas « presque »")
+    combien = 0
+    for k in range(40):
+        d_x, n_x = un_depart(froissee, 2.0 * np.pi * k / 40.0, RAYON_MM, voxel_um, pas_um)
+        e_x = poser(froissee, d_x, n_x, lg_w, pas_um, voxel_um, True, rejeter=True)
+        if e_x is not None:
+            combien += int(e_x.get("rejetes", 0))
+    v("⭐⭐⭐ ... et sur la matière du rouleau ce compte n'est pas nul", combien > 0,
+      f"{combien} appuis rejetés sur quarante poses")
 
     # ---- ⭐ le contrôle : sur une matière facile, personne ne dérive
     trois = les_trois_bras(nue, depart, n0, 0.25 * pas_um, pas_um, voxel_um,

@@ -1264,6 +1264,35 @@ mesurer **ensemble**. ⚠⚠⚠ **Deux défauts de ma batterie, corrigés** : un
 supposé l'échelle nulle sur une matière lisse, or la spirale **courbe**, donc sa normale tourne le
 long de `t̂` même sans froissement) et un contrôle **incapable d'échouer**, retiré plutôt que réparé.
 
+**`155` · 2026-09-14 · rejeter un appui qui a sauté d'interstice**
+(`rejeter_un_appui_qui_a_saute.py`, zéro lecture distante)
+`154` laissait un facteur **2,84×** à prendre à taille égale et deux voies qui se contredisaient.
+⭐⭐⭐ **Elles sont départagées ENSEMBLE pour la première fois, et elles s'additionnent** : élargir la
+fenêtre fait poser **plus souvent** et **plus faux** à chacune des quatre largeurs — **22,325° →
+29,287°** à la plus grande, **24,295° → 36,768°** à la plus petite, et les poses montent de **30 à
+39** — et sur les cinq matières la meilleure case est **sans marge**. L'hypothèse qui les
+réconciliait, qu'une mâchoire étroite puisse se permettre une fenêtre large, est réfutée —
+`R4-F126`. ⭐⭐ **Ce qui paie est la quatrième et dernière piste de `153`** : les appuis **aberrants**
+n'existent que là où la matière porte les **deux** causes — **0 sur 720** appuis sur un froissement
+de 42,4 µm seul, **7 sur 669** sur le même froissement écrasé, **37 sur 648** sur celle du rouleau,
+où le p90 de l'étalement vaut **108,367 µm** contre une demi-épaisseur de 86,5 — `R4-F127`.
+⭐⭐⭐⭐ **Les rejeter fait passer la croix de 25,659° à 11,127°**, soit **2,84× → 1,23×** l'échelle de
+**9,047°** que `154` mesure : le **premier gain depuis `142` qui rapproche l'instrument de sa
+matière** au lieu de déplacer des réussites. 13 poses touchées, **12 mieux**, **1 pire** — donc un
+gain et pas une garantie — `R4-F128`. ⚠ **L'énoncé du rejet n'a aucun seuil** : les interstices sont
+espacés d'une épaisseur, donc « à plus d'une demi-épaisseur de la médiane de sa mâchoire » et « sur
+un autre interstice » sont le même énoncé, et c'est la **médiane** et non la moyenne, qu'un aberrant
+emporterait. ⚠⚠⚠ **Deux défauts de mes propres mesures, trouvés et corrigés** : un recensement qui ne
+regardait qu'**une** mâchoire sur quatre — d'où « zéro aberrant » à côté de « six poses touchées » —
+et un compteur de poses touchées qui comparait deux normales à **1e-9**, une tolérance **sous** la
+reproductibilité de la décomposition sur un tableau recopié, donc qui comptait du **bruit numérique**
+(dix poses « touchées » pour zéro mieux et zéro pire). Le remède n'est pas une tolérance plus grande
+mais **aucune** : une mâchoire publie désormais combien d'appuis elle a rejetés. ⚠⚠ **Et deux
+fixtures de batterie ont dû être dimensionnées sur l'effet** — dix poses ne séparaient pas deux
+degrés, et un aberrant à cinq pour cent peut manquer sur trente-six appuis. ⭐⭐ **Conséquence pour le
+graal** : `poser(..., en_croix=True, rejeter=True)` existe et `suivre` ne le passe toujours pas —
+c'est la première fois depuis `142` qu'une **grille** vaut son prix.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

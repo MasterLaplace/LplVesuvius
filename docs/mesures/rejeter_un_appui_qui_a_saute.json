@@ -1,0 +1,1095 @@
+{
+  "grille": {
+    "decidable": true,
+    "poses_par_case": 40,
+    "largeurs": [
+      0.008,
+      0.0625,
+      0.25,
+      0.5
+    ],
+    "marges_um": [
+      0.0,
+      10.0,
+      20.0,
+      43.25,
+      86.5
+    ],
+    "par_matiere": [
+      {
+        "nom": "spirale nue",
+        "ecrasement": 0.0,
+        "amplitude_um": 0.0,
+        "poses": 40,
+        "cases": [
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 0.0,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 10.0,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 20.0,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 43.25,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 86.5,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 0.0,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 10.0,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 20.0,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 43.25,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 86.5,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 0.0,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 10.0,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 20.0,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 43.25,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 86.5,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 0.0,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 10.0,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 20.0,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 43.25,
+            "posees": 40,
+            "erreur_mediane_deg": 0.0
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 86.5,
+            "posees": 40,
+            "erreur_mediane_deg": 45.0
+          }
+        ]
+      },
+      {
+        "nom": "spirale écrasée",
+        "ecrasement": 0.2782,
+        "amplitude_um": 0.0,
+        "poses": 40,
+        "cases": [
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 0.0,
+            "posees": 38,
+            "erreur_mediane_deg": 0.005
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 10.0,
+            "posees": 39,
+            "erreur_mediane_deg": 0.007
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 20.0,
+            "posees": 39,
+            "erreur_mediane_deg": 0.009
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 43.25,
+            "posees": 37,
+            "erreur_mediane_deg": 0.009
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 86.5,
+            "posees": 39,
+            "erreur_mediane_deg": 0.015
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 0.0,
+            "posees": 38,
+            "erreur_mediane_deg": 0.005
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 10.0,
+            "posees": 39,
+            "erreur_mediane_deg": 0.007
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 20.0,
+            "posees": 39,
+            "erreur_mediane_deg": 0.009
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 43.25,
+            "posees": 37,
+            "erreur_mediane_deg": 0.013
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 86.5,
+            "posees": 39,
+            "erreur_mediane_deg": 0.018
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 0.0,
+            "posees": 38,
+            "erreur_mediane_deg": 0.005
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 10.0,
+            "posees": 39,
+            "erreur_mediane_deg": 0.007
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 20.0,
+            "posees": 39,
+            "erreur_mediane_deg": 0.009
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 43.25,
+            "posees": 36,
+            "erreur_mediane_deg": 0.014
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 86.5,
+            "posees": 38,
+            "erreur_mediane_deg": 0.032
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 0.0,
+            "posees": 38,
+            "erreur_mediane_deg": 0.007
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 10.0,
+            "posees": 39,
+            "erreur_mediane_deg": 0.007
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 20.0,
+            "posees": 39,
+            "erreur_mediane_deg": 0.009
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 43.25,
+            "posees": 36,
+            "erreur_mediane_deg": 0.02
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 86.5,
+            "posees": 39,
+            "erreur_mediane_deg": 0.04
+          }
+        ]
+      },
+      {
+        "nom": "spirale froissée 42.4 µm",
+        "ecrasement": 0.0,
+        "amplitude_um": 42.4,
+        "poses": 40,
+        "cases": [
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 0.0,
+            "posees": 40,
+            "erreur_mediane_deg": 9.155
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 10.0,
+            "posees": 40,
+            "erreur_mediane_deg": 9.155
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 20.0,
+            "posees": 40,
+            "erreur_mediane_deg": 9.155
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 43.25,
+            "posees": 40,
+            "erreur_mediane_deg": 9.155
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 86.5,
+            "posees": 40,
+            "erreur_mediane_deg": 11.074
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 0.0,
+            "posees": 40,
+            "erreur_mediane_deg": 9.154
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 10.0,
+            "posees": 40,
+            "erreur_mediane_deg": 9.154
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 20.0,
+            "posees": 40,
+            "erreur_mediane_deg": 9.366
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 43.25,
+            "posees": 39,
+            "erreur_mediane_deg": 11.208
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 86.5,
+            "posees": 39,
+            "erreur_mediane_deg": 41.007
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 0.0,
+            "posees": 40,
+            "erreur_mediane_deg": 9.122
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 10.0,
+            "posees": 40,
+            "erreur_mediane_deg": 9.122
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 20.0,
+            "posees": 40,
+            "erreur_mediane_deg": 9.122
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 43.25,
+            "posees": 38,
+            "erreur_mediane_deg": 11.358
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 86.5,
+            "posees": 40,
+            "erreur_mediane_deg": 16.085
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 0.0,
+            "posees": 40,
+            "erreur_mediane_deg": 9.637
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 10.0,
+            "posees": 40,
+            "erreur_mediane_deg": 9.637
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 20.0,
+            "posees": 40,
+            "erreur_mediane_deg": 9.843
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 43.25,
+            "posees": 39,
+            "erreur_mediane_deg": 12.437
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 86.5,
+            "posees": 39,
+            "erreur_mediane_deg": 20.422
+          }
+        ]
+      },
+      {
+        "nom": "spirale écrasée et froissée 42.4 µm",
+        "ecrasement": 0.2782,
+        "amplitude_um": 42.4,
+        "poses": 40,
+        "cases": [
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 0.0,
+            "posees": 39,
+            "erreur_mediane_deg": 8.222
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 10.0,
+            "posees": 39,
+            "erreur_mediane_deg": 8.933
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 20.0,
+            "posees": 39,
+            "erreur_mediane_deg": 10.038
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 43.25,
+            "posees": 39,
+            "erreur_mediane_deg": 9.865
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 86.5,
+            "posees": 38,
+            "erreur_mediane_deg": 12.892
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 0.0,
+            "posees": 39,
+            "erreur_mediane_deg": 9.242
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 10.0,
+            "posees": 35,
+            "erreur_mediane_deg": 11.273
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 20.0,
+            "posees": 38,
+            "erreur_mediane_deg": 12.85
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 43.25,
+            "posees": 36,
+            "erreur_mediane_deg": 10.171
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 86.5,
+            "posees": 38,
+            "erreur_mediane_deg": 38.312
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 0.0,
+            "posees": 35,
+            "erreur_mediane_deg": 10.226
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 10.0,
+            "posees": 35,
+            "erreur_mediane_deg": 12.142
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 20.0,
+            "posees": 38,
+            "erreur_mediane_deg": 13.64
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 43.25,
+            "posees": 39,
+            "erreur_mediane_deg": 15.16
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 86.5,
+            "posees": 38,
+            "erreur_mediane_deg": 19.142
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 0.0,
+            "posees": 33,
+            "erreur_mediane_deg": 10.76
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 10.0,
+            "posees": 37,
+            "erreur_mediane_deg": 12.735
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 20.0,
+            "posees": 38,
+            "erreur_mediane_deg": 12.202
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 43.25,
+            "posees": 36,
+            "erreur_mediane_deg": 15.113
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 86.5,
+            "posees": 38,
+            "erreur_mediane_deg": 18.146
+          }
+        ]
+      },
+      {
+        "nom": "spirale écrasée et froissée 100 µm",
+        "ecrasement": 0.2782,
+        "amplitude_um": 100.0,
+        "poses": 40,
+        "cases": [
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 0.0,
+            "posees": 38,
+            "erreur_mediane_deg": 24.295
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 10.0,
+            "posees": 38,
+            "erreur_mediane_deg": 25.686
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 20.0,
+            "posees": 38,
+            "erreur_mediane_deg": 26.513
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 43.25,
+            "posees": 40,
+            "erreur_mediane_deg": 36.885
+          },
+          {
+            "largeur_en_pas": 0.008,
+            "marge_um": 86.5,
+            "posees": 39,
+            "erreur_mediane_deg": 36.768
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 0.0,
+            "posees": 37,
+            "erreur_mediane_deg": 26.571
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 10.0,
+            "posees": 37,
+            "erreur_mediane_deg": 34.568
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 20.0,
+            "posees": 37,
+            "erreur_mediane_deg": 35.537
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 43.25,
+            "posees": 37,
+            "erreur_mediane_deg": 39.344
+          },
+          {
+            "largeur_en_pas": 0.0625,
+            "marge_um": 86.5,
+            "posees": 39,
+            "erreur_mediane_deg": 39.77
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 0.0,
+            "posees": 32,
+            "erreur_mediane_deg": 25.562
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 10.0,
+            "posees": 34,
+            "erreur_mediane_deg": 25.709
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 20.0,
+            "posees": 37,
+            "erreur_mediane_deg": 28.921
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 43.25,
+            "posees": 36,
+            "erreur_mediane_deg": 32.954
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "marge_um": 86.5,
+            "posees": 39,
+            "erreur_mediane_deg": 33.389
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 0.0,
+            "posees": 30,
+            "erreur_mediane_deg": 22.325
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 10.0,
+            "posees": 33,
+            "erreur_mediane_deg": 23.585
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 20.0,
+            "posees": 35,
+            "erreur_mediane_deg": 24.051
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 43.25,
+            "posees": 35,
+            "erreur_mediane_deg": 24.96
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "marge_um": 86.5,
+            "posees": 39,
+            "erreur_mediane_deg": 29.287
+          }
+        ]
+      }
+    ]
+  },
+  "recensement": {
+    "decidable": true,
+    "poses_par_case": 40,
+    "demi_epaisseur_um": 86.5,
+    "largeur_en_pas": 0.25,
+    "par_matiere": [
+      {
+        "nom": "spirale nue",
+        "ecrasement": 0.0,
+        "amplitude_um": 0.0,
+        "machoires": 160,
+        "appuis": 720,
+        "aberrants": 0,
+        "etalement_median_um": 0.093,
+        "etalement_p90_um": 0.095,
+        "etalement_max_um": 0.095,
+        "il_y_a_quelque_chose_a_rejeter": false
+      },
+      {
+        "nom": "spirale écrasée",
+        "ecrasement": 0.2782,
+        "amplitude_um": 0.0,
+        "machoires": 156,
+        "appuis": 702,
+        "aberrants": 0,
+        "etalement_median_um": 0.164,
+        "etalement_p90_um": 0.64,
+        "etalement_max_um": 0.814,
+        "il_y_a_quelque_chose_a_rejeter": false
+      },
+      {
+        "nom": "spirale froissée 42.4 µm",
+        "ecrasement": 0.0,
+        "amplitude_um": 42.4,
+        "machoires": 160,
+        "appuis": 720,
+        "aberrants": 0,
+        "etalement_median_um": 8.055,
+        "etalement_p90_um": 14.688,
+        "etalement_max_um": 22.606,
+        "il_y_a_quelque_chose_a_rejeter": false
+      },
+      {
+        "nom": "spirale écrasée et froissée 42.4 µm",
+        "ecrasement": 0.2782,
+        "amplitude_um": 42.4,
+        "machoires": 149,
+        "appuis": 669,
+        "aberrants": 7,
+        "etalement_median_um": 6.597,
+        "etalement_p90_um": 24.12,
+        "etalement_max_um": 132.553,
+        "il_y_a_quelque_chose_a_rejeter": true
+      },
+      {
+        "nom": "spirale écrasée et froissée 100 µm",
+        "ecrasement": 0.2782,
+        "amplitude_um": 100.0,
+        "machoires": 144,
+        "appuis": 648,
+        "aberrants": 37,
+        "etalement_median_um": 24.682,
+        "etalement_p90_um": 108.367,
+        "etalement_max_um": 145.871,
+        "il_y_a_quelque_chose_a_rejeter": true
+      }
+    ]
+  },
+  "rejet": {
+    "decidable": true,
+    "poses_par_case": 40,
+    "largeur_en_pas": 0.25,
+    "par_matiere": [
+      {
+        "nom": "spirale nue",
+        "ecrasement": 0.0,
+        "amplitude_um": 0.0,
+        "poses": 40,
+        "par_bras": [
+          {
+            "bras": "segment",
+            "posees_sans_rejet": 40,
+            "posees_avec_rejet": 40,
+            "erreur_sans_rejet_deg": 0.0,
+            "erreur_avec_rejet_deg": 0.0,
+            "poses_touchees": 0,
+            "mieux": 0,
+            "pire": 0,
+            "effet_median_sur_les_touchees_deg": null
+          },
+          {
+            "bras": "croix",
+            "posees_sans_rejet": 40,
+            "posees_avec_rejet": 40,
+            "erreur_sans_rejet_deg": 0.0,
+            "erreur_avec_rejet_deg": 0.0,
+            "poses_touchees": 0,
+            "mieux": 0,
+            "pire": 0,
+            "effet_median_sur_les_touchees_deg": null
+          }
+        ]
+      },
+      {
+        "nom": "spirale écrasée",
+        "ecrasement": 0.2782,
+        "amplitude_um": 0.0,
+        "poses": 40,
+        "par_bras": [
+          {
+            "bras": "segment",
+            "posees_sans_rejet": 38,
+            "posees_avec_rejet": 38,
+            "erreur_sans_rejet_deg": 0.005,
+            "erreur_avec_rejet_deg": 0.005,
+            "poses_touchees": 0,
+            "mieux": 0,
+            "pire": 0,
+            "effet_median_sur_les_touchees_deg": null
+          },
+          {
+            "bras": "croix",
+            "posees_sans_rejet": 38,
+            "posees_avec_rejet": 38,
+            "erreur_sans_rejet_deg": 0.005,
+            "erreur_avec_rejet_deg": 0.005,
+            "poses_touchees": 0,
+            "mieux": 0,
+            "pire": 0,
+            "effet_median_sur_les_touchees_deg": null
+          }
+        ]
+      },
+      {
+        "nom": "spirale froissée 42.4 µm",
+        "ecrasement": 0.0,
+        "amplitude_um": 42.4,
+        "poses": 40,
+        "par_bras": [
+          {
+            "bras": "segment",
+            "posees_sans_rejet": 40,
+            "posees_avec_rejet": 40,
+            "erreur_sans_rejet_deg": 9.122,
+            "erreur_avec_rejet_deg": 9.122,
+            "poses_touchees": 0,
+            "mieux": 0,
+            "pire": 0,
+            "effet_median_sur_les_touchees_deg": null
+          },
+          {
+            "bras": "croix",
+            "posees_sans_rejet": 40,
+            "posees_avec_rejet": 40,
+            "erreur_sans_rejet_deg": 3.725,
+            "erreur_avec_rejet_deg": 3.725,
+            "poses_touchees": 0,
+            "mieux": 0,
+            "pire": 0,
+            "effet_median_sur_les_touchees_deg": null
+          }
+        ]
+      },
+      {
+        "nom": "spirale écrasée et froissée 42.4 µm",
+        "ecrasement": 0.2782,
+        "amplitude_um": 42.4,
+        "poses": 40,
+        "par_bras": [
+          {
+            "bras": "segment",
+            "posees_sans_rejet": 35,
+            "posees_avec_rejet": 35,
+            "erreur_sans_rejet_deg": 10.226,
+            "erreur_avec_rejet_deg": 9.067,
+            "poses_touchees": 5,
+            "mieux": 5,
+            "pire": 0,
+            "effet_median_sur_les_touchees_deg": -23.93
+          },
+          {
+            "bras": "croix",
+            "posees_sans_rejet": 34,
+            "posees_avec_rejet": 34,
+            "erreur_sans_rejet_deg": 3.99,
+            "erreur_avec_rejet_deg": 3.202,
+            "poses_touchees": 2,
+            "mieux": 2,
+            "pire": 0,
+            "effet_median_sur_les_touchees_deg": -30.024
+          }
+        ]
+      },
+      {
+        "nom": "spirale écrasée et froissée 100 µm",
+        "ecrasement": 0.2782,
+        "amplitude_um": 100.0,
+        "poses": 40,
+        "par_bras": [
+          {
+            "bras": "segment",
+            "posees_sans_rejet": 32,
+            "posees_avec_rejet": 32,
+            "erreur_sans_rejet_deg": 25.562,
+            "erreur_avec_rejet_deg": 18.72,
+            "poses_touchees": 10,
+            "mieux": 10,
+            "pire": 0,
+            "effet_median_sur_les_touchees_deg": -18.029
+          },
+          {
+            "bras": "croix",
+            "posees_sans_rejet": 32,
+            "posees_avec_rejet": 32,
+            "erreur_sans_rejet_deg": 25.659,
+            "erreur_avec_rejet_deg": 11.127,
+            "poses_touchees": 13,
+            "mieux": 12,
+            "pire": 1,
+            "effet_median_sur_les_touchees_deg": -19.942
+          }
+        ]
+      }
+    ]
+  },
+  "juger": {
+    "decidable": true,
+    "par_matiere_grille": [
+      {
+        "nom": "spirale nue",
+        "amplitude_um": 0.0,
+        "meilleure_largeur_en_pas": 0.008,
+        "meilleure_marge_um": 0.0,
+        "meilleure_erreur_deg": 0.0,
+        "largeurs_ou_elargir_paie": 0,
+        "largeurs_testees": 4
+      },
+      {
+        "nom": "spirale écrasée",
+        "amplitude_um": 0.0,
+        "meilleure_largeur_en_pas": 0.008,
+        "meilleure_marge_um": 0.0,
+        "meilleure_erreur_deg": 0.005,
+        "largeurs_ou_elargir_paie": 0,
+        "largeurs_testees": 4
+      },
+      {
+        "nom": "spirale froissée 42.4 µm",
+        "amplitude_um": 42.4,
+        "meilleure_largeur_en_pas": 0.25,
+        "meilleure_marge_um": 0.0,
+        "meilleure_erreur_deg": 9.122,
+        "largeurs_ou_elargir_paie": 0,
+        "largeurs_testees": 4
+      },
+      {
+        "nom": "spirale écrasée et froissée 42.4 µm",
+        "amplitude_um": 42.4,
+        "meilleure_largeur_en_pas": 0.008,
+        "meilleure_marge_um": 0.0,
+        "meilleure_erreur_deg": 8.222,
+        "largeurs_ou_elargir_paie": 0,
+        "largeurs_testees": 4
+      },
+      {
+        "nom": "spirale écrasée et froissée 100 µm",
+        "amplitude_um": 100.0,
+        "meilleure_largeur_en_pas": 0.5,
+        "meilleure_marge_um": 0.0,
+        "meilleure_erreur_deg": 22.325,
+        "largeurs_ou_elargir_paie": 0,
+        "largeurs_testees": 4
+      }
+    ],
+    "elargir_ne_paie_a_aucune_largeur": true,
+    "la_meilleure_case_est_sans_marge": true,
+    "les_aberrants_nexistent_que_sous_les_deux_causes": true,
+    "par_bras": [
+      {
+        "nom": "spirale nue",
+        "amplitude_um": 0.0,
+        "bras": "segment",
+        "erreur_sans_rejet_deg": 0.0,
+        "erreur_avec_rejet_deg": 0.0,
+        "poses_touchees": 0,
+        "mieux": 0,
+        "pire": 0,
+        "effet_median_sur_les_touchees_deg": null,
+        "echelle_de_154_deg": 0.248,
+        "sans_rejet_au_dessus_de_lechelle": 0.0,
+        "avec_rejet_au_dessus_de_lechelle": 0.0
+      },
+      {
+        "nom": "spirale nue",
+        "amplitude_um": 0.0,
+        "bras": "croix",
+        "erreur_sans_rejet_deg": 0.0,
+        "erreur_avec_rejet_deg": 0.0,
+        "poses_touchees": 0,
+        "mieux": 0,
+        "pire": 0,
+        "effet_median_sur_les_touchees_deg": null,
+        "echelle_de_154_deg": 0.248,
+        "sans_rejet_au_dessus_de_lechelle": 0.0,
+        "avec_rejet_au_dessus_de_lechelle": 0.0
+      },
+      {
+        "nom": "spirale écrasée",
+        "amplitude_um": 0.0,
+        "bras": "segment",
+        "erreur_sans_rejet_deg": 0.005,
+        "erreur_avec_rejet_deg": 0.005,
+        "poses_touchees": 0,
+        "mieux": 0,
+        "pire": 0,
+        "effet_median_sur_les_touchees_deg": null,
+        "echelle_de_154_deg": 0.127,
+        "sans_rejet_au_dessus_de_lechelle": 0.04,
+        "avec_rejet_au_dessus_de_lechelle": 0.04
+      },
+      {
+        "nom": "spirale écrasée",
+        "amplitude_um": 0.0,
+        "bras": "croix",
+        "erreur_sans_rejet_deg": 0.005,
+        "erreur_avec_rejet_deg": 0.005,
+        "poses_touchees": 0,
+        "mieux": 0,
+        "pire": 0,
+        "effet_median_sur_les_touchees_deg": null,
+        "echelle_de_154_deg": 0.127,
+        "sans_rejet_au_dessus_de_lechelle": 0.04,
+        "avec_rejet_au_dessus_de_lechelle": 0.04
+      },
+      {
+        "nom": "spirale froissée 42.4 µm",
+        "amplitude_um": 42.4,
+        "bras": "segment",
+        "erreur_sans_rejet_deg": 9.122,
+        "erreur_avec_rejet_deg": 9.122,
+        "poses_touchees": 0,
+        "mieux": 0,
+        "pire": 0,
+        "effet_median_sur_les_touchees_deg": null,
+        "echelle_de_154_deg": 4.983,
+        "sans_rejet_au_dessus_de_lechelle": 1.83,
+        "avec_rejet_au_dessus_de_lechelle": 1.83
+      },
+      {
+        "nom": "spirale froissée 42.4 µm",
+        "amplitude_um": 42.4,
+        "bras": "croix",
+        "erreur_sans_rejet_deg": 3.725,
+        "erreur_avec_rejet_deg": 3.725,
+        "poses_touchees": 0,
+        "mieux": 0,
+        "pire": 0,
+        "effet_median_sur_les_touchees_deg": null,
+        "echelle_de_154_deg": 4.983,
+        "sans_rejet_au_dessus_de_lechelle": 0.75,
+        "avec_rejet_au_dessus_de_lechelle": 0.75
+      },
+      {
+        "nom": "spirale écrasée et froissée 42.4 µm",
+        "amplitude_um": 42.4,
+        "bras": "segment",
+        "erreur_sans_rejet_deg": 10.226,
+        "erreur_avec_rejet_deg": 9.067,
+        "poses_touchees": 5,
+        "mieux": 5,
+        "pire": 0,
+        "effet_median_sur_les_touchees_deg": -23.93,
+        "echelle_de_154_deg": 4.328,
+        "sans_rejet_au_dessus_de_lechelle": 2.36,
+        "avec_rejet_au_dessus_de_lechelle": 2.09
+      },
+      {
+        "nom": "spirale écrasée et froissée 42.4 µm",
+        "amplitude_um": 42.4,
+        "bras": "croix",
+        "erreur_sans_rejet_deg": 3.99,
+        "erreur_avec_rejet_deg": 3.202,
+        "poses_touchees": 2,
+        "mieux": 2,
+        "pire": 0,
+        "effet_median_sur_les_touchees_deg": -30.024,
+        "echelle_de_154_deg": 4.328,
+        "sans_rejet_au_dessus_de_lechelle": 0.92,
+        "avec_rejet_au_dessus_de_lechelle": 0.74
+      },
+      {
+        "nom": "spirale écrasée et froissée 100 µm",
+        "amplitude_um": 100.0,
+        "bras": "segment",
+        "erreur_sans_rejet_deg": 25.562,
+        "erreur_avec_rejet_deg": 18.72,
+        "poses_touchees": 10,
+        "mieux": 10,
+        "pire": 0,
+        "effet_median_sur_les_touchees_deg": -18.029,
+        "echelle_de_154_deg": 9.047,
+        "sans_rejet_au_dessus_de_lechelle": 2.83,
+        "avec_rejet_au_dessus_de_lechelle": 2.07
+      },
+      {
+        "nom": "spirale écrasée et froissée 100 µm",
+        "amplitude_um": 100.0,
+        "bras": "croix",
+        "erreur_sans_rejet_deg": 25.659,
+        "erreur_avec_rejet_deg": 11.127,
+        "poses_touchees": 13,
+        "mieux": 12,
+        "pire": 1,
+        "effet_median_sur_les_touchees_deg": -19.942,
+        "echelle_de_154_deg": 9.047,
+        "sans_rejet_au_dessus_de_lechelle": 2.84,
+        "avec_rejet_au_dessus_de_lechelle": 1.23
+      }
+    ],
+    "le_rejet_ne_degrade_jamais_une_pose_touchee": false,
+    "sur_la_matiere_du_rouleau": {
+      "bras": "croix",
+      "erreur_sans_rejet_deg": 25.659,
+      "erreur_avec_rejet_deg": 11.127,
+      "poses_touchees": 13,
+      "mieux": 12,
+      "pire": 1,
+      "echelle_de_154_deg": 9.047,
+      "sans_rejet_au_dessus_de_lechelle": 2.84,
+      "avec_rejet_au_dessus_de_lechelle": 1.23,
+      "elle_se_rapproche_de_son_echelle": true
+    }
+  },
+  "echelle_lue": true
+}

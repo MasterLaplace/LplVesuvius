@@ -3049,6 +3049,70 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 155 : LE REJET DES ABERRANTS, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Une erreur de la grille ne voyage jamais sans son COMPTE DE POSES — elargir achete des
+    # poses et les paie en justesse, et une seule des deux colonnes se lirait a l'envers.
+    # (2) Un compte d'aberrants ne voyage jamais sans le TOTAL d'appuis : « 37 » seul est un
+    # nombre, a cote de « 648 » il dit que c'est rare.
+    # (3) Et un ecart avec rejet ne voyage jamais sans le compte MIEUX/PIRE, parce que la
+    # population est bimodale et qu'une mediane n'y dit rien.
+    ra = _source(racine, "rejeter_un_appui_qui_a_saute.json")
+    if ra.exists():
+        d = json.loads(ra.read_text())
+
+        def dec155(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        g_ = d.get("grille", {})
+        if g_.get("decidable"):
+            ajoute("poses par case de 155", g_["poses_par_case"], 0, ra.name)
+            # ⚠⚠ ON N'ENREGISTRE QUE CE QUE LE DOCUMENT PUBLIE : `155` table la grille sur la
+            # seule matiere du rouleau, et les quatre autres ne sont que dessinees.
+            for m in [x for x in g_.get("par_matiere", []) if x["amplitude_um"] == 100.0]:
+                for c in m.get("cases", []):
+                    q = (f"a la largeur {c['largeur_en_pas']} pas et la marge {c['marge_um']} "
+                         f"de 155")
+                    # ⚠ Une case sans pose ne rend pas zero degre, elle ne rend rien.
+                    if c.get("erreur_mediane_deg") is not None:
+                        ajoute(f"erreur de la grille {q}", c["erreur_mediane_deg"],
+                               dec155(c["erreur_mediane_deg"], 3), ra.name)
+                    ajoute(f"poses reussies de la grille {q}", int(c["posees"]), 0, ra.name)
+        rc_ = d.get("recensement", {})
+        if rc_.get("decidable"):
+            ajoute("demi epaisseur de 155", rc_["demi_epaisseur_um"],
+                   dec155(rc_["demi_epaisseur_um"], 2), ra.name)
+            for m in rc_.get("par_matiere", []):
+                q = f"sur {m['nom']} de 155"
+                for cle, nom in (("etalement_median_um", "etalement median des appuis"),
+                                 ("etalement_p90_um", "etalement des appuis au p90"),
+                                 ("etalement_max_um", "etalement maximal des appuis")):
+                    if m.get(cle) is not None:
+                        ajoute(f"{nom} {q}", m[cle], dec155(m[cle], 3), ra.name)
+                ajoute(f"appuis aberrants {q}", int(m["aberrants"]), 0, ra.name)
+                ajoute(f"appuis examines {q}", int(m["appuis"]), 0, ra.name)
+        for x in d.get("juger", {}).get("par_bras", []):
+            q = f"du bras « {x['bras']} » sur {x['nom']} de 155"
+            for cle, nom in (("erreur_sans_rejet_deg", "ecart sans rejet"),
+                             ("erreur_avec_rejet_deg", "ecart avec rejet"),
+                             ("effet_median_sur_les_touchees_deg",
+                              "effet median sur les poses touchees")):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} {q}", x[cle], dec155(x[cle], 3), ra.name)
+            for cle, nom in (("poses_touchees", "poses touchees par le rejet"),
+                             ("mieux", "poses rendues meilleures"),
+                             ("pire", "poses rendues pires")):
+                ajoute(f"{nom} {q}", int(x[cle]), 0, ra.name)
+            for cle, nom in (("sans_rejet_au_dessus_de_lechelle", "rapport sans rejet a l'echelle"),
+                             ("avec_rejet_au_dessus_de_lechelle",
+                              "rapport avec rejet a l'echelle")):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} {q}", x[cle], dec155(x[cle], 2), ra.name)
+        dur = d.get("juger", {}).get("sur_la_matiere_du_rouleau")
+        if dur and dur.get("echelle_de_154_deg") is not None:
+            ajoute("echelle lue de 154, dans 155", dur["echelle_de_154_deg"],
+                   dec155(dur["echelle_de_154_deg"], 3), ra.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 154 : L'ECHELLE DE LA MATIERE, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Un RAPPORT ne voyage jamais sans l'ECHELLE qui le divise — « 2,84 » seul est un nombre, a
     # cote de « 9,05° de variation » il dit de quoi il est fait.
