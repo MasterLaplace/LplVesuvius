@@ -223,6 +223,58 @@ def poser(vol, centre_vx, normale, largeur_um: float, epaisseur_um: float, voxel
                 haut["milieu_vx"] - bas["milieu_vx"]) * voxel_um)}
 
 
+def _ecart_angulaire(avant, apres) -> float:
+    """De combien la normale a tourne dans le plan, en radians signes.
+
+    ⚠ Signe : deux normales opposees decrivent la meme feuille, mais ici les deux viennent d'une
+    meme marche ou le signe est deja aligne, donc l'angle signe a un sens et c'est lui qui porte le
+    fait qu'une rotation PERSISTE ou ALTERNE.
+    """
+    a = np.asarray(avant, dtype=np.float64)
+    b = np.asarray(apres, dtype=np.float64)
+    return float(np.arctan2(a[2] * b[1] - a[1] * b[2], a[1] * b[1] + a[2] * b[2]))
+
+
+def memoire_adaptee(rotations, fenetre: int) -> float:
+    """La memoire que la rotation de la normale impose — un enonce, pas un ajustement.
+
+    ⭐⭐⭐⭐ CE QUI SEPARE LES DEUX CAUSES EST UNE ECHELLE DE TEMPS, ET ELLE SE LIT SUR LE SIGNE.
+    Un ecrasement fait tourner la normale LENTEMENT et TOUJOURS DANS LE MEME SENS — sa periode est
+    d'un demi-tour. Un froissement la fait ALTERNER en quelques pas. La coherence des increments,
+    `c = |somme| / somme des valeurs absolues`, vaut donc un sur une spirale nue comme sur un
+    ecrasement, et tombe vers zero sur un froissement.
+
+    ⭐⭐⭐ D'OU LA REGLE, SANS AUCUNE CONSTANTE AJUSTEE : `m = 1 - c`. Ce qui tourne franchement est
+    lisible et le cap ne sert a rien ; ce qui alterne ne l'est pas et le cap doit tenir. Les deux
+    extremes tombent sur les deux regimes que `143` a mesures.
+
+    ⚠⚠ MA PREMIERE VERSION RETIRAIT LA MOYENNE DES INCREMENTS, ET C'ETAIT FAUX. L'intention etait
+    d'oter l'enroulement, qui est le meme sur toute matiere ; mais une derive lente a, par
+    construction, un residu de moyenne nulle, donc une coherence proche de zero — l'ecrasement
+    recevait la memoire MAXIMALE, exactement l'inverse de ce que la regle veut dire. La batterie l'a
+    dit avant la mesure. L'enroulement se GARDE : un cap ne doit pas combattre une rotation franche,
+    et c'est precisement ce que la coherence des increments bruts exprime.
+
+    ⚠⚠ LA BORNE EST DERIVEE, PAS CHOISIE : `m <= 1 - 1/fenetre`. On ne peut pas revendiquer une
+    memoire plus longue que ce qu'on vient de mesurer, et une memoire de un figerait l'orientation —
+    la batterie de `143` montre qu'un suiveur cesse alors de suivre.
+
+    ⚠ Une rotation NULLE n'a rien a arbitrer, donc la memoire est nulle. C'est dit plutot que divise
+    par zero.
+    """
+    f = int(fenetre)
+    if f < 2:
+        return 0.0
+    r = np.asarray(rotations[-f:], dtype=np.float64)
+    if r.size < 2:
+        return 0.0
+    total = float(np.abs(r).sum())
+    if total <= 0.0:
+        return 0.0
+    c = abs(float(r.sum())) / total
+    return float(min(1.0 - c, 1.0 - 1.0 / f))
+
+
 def _tangente_du_tour(n) -> np.ndarray:
     t = np.cross(Z, np.asarray(n, dtype=np.float64))
     return t / max(float(np.linalg.norm(t)), 1e-12)
@@ -230,7 +282,8 @@ def _tangente_du_tour(n) -> np.ndarray:
 
 def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: float,
            voxel_um: float, deux: bool, contrainte: bool, avance_um: float, axe_yx,
-           tours: float = TOURS, pas_max: int = 4000, memoire_du_cap: float = 0.0) -> dict:
+           tours: float = TOURS, pas_max: int = 4000, memoire_du_cap: float = 0.0,
+           fenetre_du_cap: int = 0) -> dict:
     """Suivre une feuille autour de l'axe, et dire sur laquelle on finit.
 
     ⚠⚠ LE REFUS HALVE L'AVANCE PLUTOT QUE D'ABANDONNER, et il s'arrete quand l'avance tombe sous le
@@ -252,6 +305,17 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
     RETENUE, de taux `1 - memoire` ; a memoire nulle la matiere decide seule. Et le chemin du
     melange n'est pris QUE si la memoire est non nulle, ce qui garantit qu'une memoire nulle rend
     exactement le suiveur d'avant — jusqu'au bit, normalisation comprise.
+
+    ⭐⭐⭐⭐ ET LA MEMOIRE PEUT SE LIRE PLUTOT QUE SE POSER. `fenetre_du_cap > 0` la fait DERIVER de
+    ce que le suiveur vient de lire, par `memoire_adaptee` : la normale tourne pour deux raisons, et
+    seul le RESIDU de sa rotation — une fois l'enroulement retire — distingue un ecrasement, qui
+    derive lentement, d'un froissement, qui alterne. La regle est `m = 1 - c` ou `c` est la
+    coherence de ce residu, et elle n'a aucune constante ajustee : residu coherent, la lecture est
+    fiable et le cap ne sert a rien ; residu alternant, la lecture ne vaut rien et le cap doit tenir.
+    Seule la LONGUEUR de la fenetre reste un parametre, et elle se balaie.
+
+    ⚠ Les deux modes s'excluent : `memoire_du_cap` sert quand la fenetre est nulle, et `143` reste
+    reproductible au bit.
     """
     etat = poser(vol, depart_vx, normale0, largeur_um, epaisseur_nominale_um, voxel_um, deux)
     if etat is None:
@@ -277,6 +341,8 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
     th, cumul, chemin = angle(etat["centre_vx"]), 0.0, 0.0
     r0 = rayon_um(etat["centre_vx"])
     pas, refus, halts, ecarts, phases = 0, 0, 0, [], [phase0]
+    rotations: list[float] = []
+    memoires: list[float] = []
     fin = "tour bouclé"
     while abs(cumul) < 2.0 * np.pi * float(tours) and pas < int(pas_max):
         a, pris = float(avance_um), None
@@ -307,9 +373,16 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
         if pris is None:
             fin = "la pince ne peut plus avancer"
             break
-        if memoire_du_cap > 0.0:
-            melange = ((1.0 - float(memoire_du_cap)) * np.asarray(pris["normale"])
-                       + float(memoire_du_cap) * np.asarray(etat["normale"]))
+        # ⚠ La rotation de la normale est mesuree AVANT le melange : le cap doit lire ce que la
+        # matiere a rendu, pas ce que le cap precedent en a deja fait. Lire apres melange ferait
+        # une boucle qui se confirme elle-meme.
+        rotations.append(_ecart_angulaire(etat["normale"], pris["normale"]))
+        m_ = (memoire_adaptee(rotations, int(fenetre_du_cap)) if int(fenetre_du_cap) > 0
+              else float(memoire_du_cap))
+        memoires.append(m_)
+        if m_ > 0.0:
+            melange = ((1.0 - m_) * np.asarray(pris["normale"])
+                       + m_ * np.asarray(etat["normale"]))
             n_ = float(np.linalg.norm(melange))
             # ⚠ Un melange peut s'annuler si le cap est exactement oppose a la lecture. La lecture
             # GAGNE alors : inventer une orientation serait pire que d'oublier le cap.
@@ -341,6 +414,11 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
         d = np.diff(ph)
         ph = ph[0] + np.concatenate(([0.0], np.cumsum(d - np.round(d))))
     return {"decidable": True, "pas": pas, "refus": refus, "poses_refusees": halts,
+            # ⚠ La memoire REELLEMENT employee est publiee : une regle adaptative qui rendrait la
+            # meme valeur partout serait un cap fixe deguise, et seul ce chiffre le dit.
+            "memoire_mediane": (round(float(np.median(memoires)), 4) if memoires else None),
+            "memoire_min": (round(float(np.min(memoires)), 4) if memoires else None),
+            "memoire_max": (round(float(np.max(memoires)), 4) if memoires else None),
             "chemin_um": round(chemin, 1), "tour_boucle": bool(abs(cumul) >= 2.0 * np.pi * tours),
             "part_du_tour": round(float(abs(cumul) / (2.0 * np.pi)), 4), "fin": fin,
             "derive_en_feuilles": round(float(ph[-1] - ph[0]), 4),
@@ -369,7 +447,7 @@ def un_depart(vol, angle_rad: float, rayon_mm: float, voxel_um: float, pas_um: f
 
 def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: float,
                    voxel_um: float, avance_um: float, axe_yx, tours: float = TOURS,
-                   memoire_du_cap: float = 0.0) -> dict:
+                   memoire_du_cap: float = 0.0, fenetre_du_cap: int = 0) -> dict:
     """Les trois bras sur le MEME depart — c'est ce qui rend la comparaison lisible."""
     out = {}
     for nom, deux, contrainte in (("une machoire", False, False),
@@ -378,7 +456,7 @@ def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nomina
         vol.lectures = 0
         out[nom] = suivre(vol, depart_vx, normale0, largeur_um, epaisseur_nominale_um, voxel_um,
                           deux, contrainte, avance_um, axe_yx, tours,
-                          memoire_du_cap=memoire_du_cap)
+                          memoire_du_cap=memoire_du_cap, fenetre_du_cap=fenetre_du_cap)
     return out
 
 
@@ -413,7 +491,8 @@ def _nom(ecrasement: float, amplitude_um: float) -> str:
 
 def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPARTS,
              rayon_mm: float = RAYON_MM, tours: float = TOURS,
-             longueur_donde_um: float = LONGUEUR_DONDE_UM, memoire_du_cap: float = 0.0) -> dict:
+             longueur_donde_um: float = LONGUEUR_DONDE_UM, memoire_du_cap: float = 0.0,
+             fenetre_du_cap: int = 0) -> dict:
     """Les trois bras sur une matiere, un niveau de bruit et une largeur — tous les departs.
 
     ⚠ Les trois bras partent du MEME point a chaque depart : une comparaison dont les bras ne
@@ -430,13 +509,15 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
     for k in range(int(departs)):
         depart, n0 = un_depart(vol, 2.0 * np.pi * k / int(departs), rayon_mm, voxel_um, pas_um)
         trois = les_trois_bras(vol, depart, n0, largeur_um, pas_um, voxel_um, avance_um,
-                               vol.centre_yx_vx, tours, memoire_du_cap=memoire_du_cap)
+                               vol.centre_yx_vx, tours, memoire_du_cap=memoire_du_cap,
+                               fenetre_du_cap=fenetre_du_cap)
         for b, x in trois.items():
             par_bras[b].append({"depart_deg": round(360.0 * k / int(departs), 1), **x})
     bloc = {"ecrasement": float(ecr), "amplitude_um": float(amp), "bruit": float(bruit),
             "largeur_en_pas": float(largeur_en_pas), "largeur_um": round(largeur_um, 1),
             "avance_um": round(avance_um, 1), "nom": _nom(ecr, amp), "departs": int(departs),
-            "memoire_du_cap": float(memoire_du_cap), "bras": {}}
+            "memoire_du_cap": float(memoire_du_cap),
+            "fenetre_du_cap": int(fenetre_du_cap), "bras": {}}
     for b in BRAS:
         bloc["bras"][b] = {"suivis": par_bras[b], **_resumer_un_bras(par_bras[b], int(departs))}
     return bloc
@@ -904,6 +985,37 @@ def verifier() -> int:
     c2 = une_case((0.0, 0.0), 0.0, 0.25, departs=2, tours=0.1)
     v("une case est reproductible",
       c["bras"]["la pince"]["derive_mediane"] == c2["bras"]["la pince"]["derive_mediane"])
+
+    # ---- ⭐⭐ la mémoire qui se LIT plutôt que de se poser
+    v("l'écart angulaire est signé et antisymétrique",
+      abs(_ecart_angulaire([0.0, 1.0, 0.0], [0.0, 0.0, 1.0])
+          + _ecart_angulaire([0.0, 0.0, 1.0], [0.0, 1.0, 0.0])) < 1e-12)
+    v("... et il vaut le quart de tour entre deux axes du plan",
+      abs(abs(_ecart_angulaire([0.0, 1.0, 0.0], [0.0, 0.0, 1.0])) - np.pi / 2.0) < 1e-12)
+    v("⭐⭐ une rotation FRANCHE ne demande aucune mémoire",
+      abs(memoire_adaptee([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8], 8)) < 1e-9,
+      "tous les incréments du même signe : c = 1, donc m = 0")
+    v("... y compris une rotation constante, qui est l'enroulement",
+      abs(memoire_adaptee([0.37] * 12, 8)) < 1e-12,
+      "sinon le cap combattrait la courbure que le suiveur doit suivre")
+    alterne = [0.2, -0.2] * 6
+    v("⭐⭐ une rotation qui ALTERNE demande la mémoire maximale que la fenêtre autorise",
+      abs(memoire_adaptee(alterne, 8) - (1.0 - 1.0 / 8)) < 1e-9,
+      f"{memoire_adaptee(alterne, 8)} pour une borne de {1.0 - 1.0 / 8}")
+    v("⭐⭐ ... et une alternance POSÉE SUR une dérive demande moins qu'une alternance pure",
+      memoire_adaptee([0.5 + 0.2 * (-1) ** k for k in range(8)], 8)
+      < memoire_adaptee(alterne, 8),
+      "c'est ce qui fait que les deux causes mélangées tombent entre les deux")
+    v("⚠ la borne est DÉRIVÉE de la fenêtre, donc elle se resserre quand la fenêtre raccourcit",
+      memoire_adaptee(alterne, 4) < memoire_adaptee(alterne, 16),
+      f"{memoire_adaptee(alterne, 4)} contre {memoire_adaptee(alterne, 16)}")
+    v("une fenêtre trop courte pour une rotation ne rend rien",
+      memoire_adaptee([0.1, 0.2], 1) == 0.0 and memoire_adaptee([0.1], 8) == 0.0)
+    v("une rotation nulle ne rend rien non plus, plutôt qu'une division par zéro",
+      memoire_adaptee([0.0] * 8, 8) == 0.0)
+    v("la mémoire lue reste dans [0, 1[",
+      all(0.0 <= memoire_adaptee(list(np.random.default_rng(k).normal(size=20)), 8) < 1.0
+          for k in range(5)))
 
     # ---- ⭐ ce que coûte une orientation, et la sonde qui mord DANS LES DEUX SENS
     pr = le_prix_dune_normale(poses=12, bruits=(0.0, 8.0))

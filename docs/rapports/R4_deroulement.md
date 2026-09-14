@@ -1013,6 +1013,33 @@ demande devient autre** : non plus composer les deux instruments, mais en constr
 laquelle des deux causes domine et règle sa mémoire en conséquence, ce que `140` rend possible
 puisque la cohérence du penchant sépare les deux causes et se mesure sur une marche.
 
+**`144` · 2026-09-14 · la règle lit la cause, jusqu'à ce que le bruit la couvre**
+(`un_cap_qui_lit_la_cause.py`, zéro lecture distante)
+`143` a montré que le bon réglage de cap dépend de la cause, et qu'un réglage unique coûte. ⭐⭐⭐⭐
+**Une mémoire de cap peut se LIRE au lieu de se poser, et elle fait mieux** : la normale tourne
+franchement quand la cause **persiste** et alterne quand elle **alterne**, donc la cohérence de ses
+incréments sépare les deux et la mémoire vaut **`m = 1 − c`**, sans aucune constante ajustée. Sur les
+trois bras elle bat le meilleur réglage posé — la pince passe de **100** à **108** réussites
+(**+8**), deux mâchoires libres de 100 à **107**, une mâchoire de 117 à **120** — `R4-F97`.
+⭐⭐⭐⭐ **Et sans bruit elle lit exactement ce qu'elle prétend lire** : **0,0000** sur la spirale nue
+**et** sur la spirale écrasée, **0,7204** sur un froissement de 42,4 µm, **0,8603** sur un
+froissement de 100 µm — sans avoir jamais vu ces matières — `R4-F98`. ⚠⚠ **Sa limite est mesurée
+exactement** : la lecture sépare tant que l'écart **entre** matières dépasse la dispersion **dans**
+une matière — **0,8603** contre **0,0292** à bruit nul et les six fenêtres y arrivent, **0,1284**
+contre **0,0881** à bruit 8 et seule la fenêtre **32** y arrive, **0,0891** contre **0,1197** à bruit
+16 et plus aucune. ⚠ Mais l'**ordre** des matières survit à tous les bruits : ce que le bruit détruit
+est la séparation, pas le classement — `R4-F99`. ⚠⚠ Et la barre de `140` reste au sol : **zéro**
+transfert réussi, à chacune des six fenêtres et à chacun des trois bruits. ⚠ **Quatre pièges payés
+sur cette tranche**, et le premier est le plus instructif : ma règle retirait d'abord la moyenne des
+incréments pour ôter l'enroulement, or une dérive lente a par construction un résidu de moyenne nulle
+— l'écrasement recevait la mémoire **maximale**, l'inverse de ce que la règle veut dire, et **c'est
+la batterie qui l'a dit avant la mesure** ; un optimum au **bord** d'un balayage n'est pas un optimum
+(étendu de 32 à 128, il en révèle un **intérieur** à 32 pour les bras à deux mâchoires) ; un verdict
+qui **choisit** une fenêtre pour raconter est déjà un choix de trop, puisque celle qui sépare le
+mieux sans bruit n'est pas celle qui résiste le mieux au bruit ; et un `min` qui portait sur des
+listes au lieu des fenêtres. ⭐⭐ **La demande devient** : lire la cause là où le bruit s'annule,
+c'est-à-dire sur davantage de matière, et non changer de règle.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -3049,6 +3049,55 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 144 : LE CAP LU, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) Un ecart entre matieres ne voyage jamais sans la dispersion DANS une matiere : « 0,1284 »
+    # seul ne dit rien, a cote de « 0,0881 » il dit que la lecture separe encore.
+    # (2) Et les reussites d'un cap LU ne voyagent jamais sans celles du cap POSE : 108 seul est un
+    # nombre, a cote de 100 il dit ce que la lecture achete.
+    lu = _source(racine, "un_cap_qui_lit_la_cause.json")
+    if lu.exists():
+        d = json.loads(lu.read_text())
+
+        def dec144(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        j_ = d.get("juger", {})
+        cf = j_.get("contre_le_fixe", {})
+        for x in cf.get("par_fenetre", []):
+            for nom in ("une machoire", "deux machoires libres", "la pince"):
+                if x.get(nom) is not None:
+                    ajoute(f"reussites de {nom} a fenetre {x['fenetre']} de 144",
+                           x[nom]["reussites"], 0, lu.name)
+        for nom in ("une machoire", "deux machoires libres", "la pince"):
+            y = cf.get(nom)
+            if y is None:
+                continue
+            ajoute(f"reussites lues de {nom} de 144", y["reussites_lues"], 0, lu.name)
+            ajoute(f"reussites posees de {nom} de 144", y["reussites_posees"], 0, lu.name)
+            ajoute(f"meilleure fenetre de {nom} de 144", y["meilleure_fenetre"], 0, lu.name)
+            # ⚠ L'ecart est ECRIT AVEC SON SIGNE dans le document : « +8 ».
+            ajoute(f"ecart de {nom} de 144", y["ecart"], 0, lu.name, unites=("",))
+        s_ = j_.get("la_lecture_survit_elle_au_bruit", {})
+        for x in s_.get("par_bruit", []):
+            cle = f"a bruit {x['bruit']} de 144"
+            for k_, n_ in (("ecart_entre_matieres", "ecart entre matieres"),
+                           ("dispersion_dans_une_matiere", "dispersion dans une matiere"),
+                           ("memoire_la_plus_basse", "memoire la plus basse"),
+                           ("memoire_la_plus_haute", "memoire la plus haute")):
+                ajoute(f"{n_} {cle}", x[k_], dec144(x[k_], 4), lu.name)
+            ajoute(f"meilleure fenetre {cle}", x["meilleure_fenetre"], 0, lu.name)
+            # ⚠ La memoire lue PAR MATIERE est ce que le document publie en tableau.
+            for m in x.get("par_matiere", []):
+                if m.get("memoire") is not None:
+                    ajoute(f"memoire lue sur {m['nom']} {cle}", m["memoire"],
+                           dec144(m["memoire"], 4), lu.name)
+        if s_.get("le_bruit_le_plus_fort_ou_elle_separe") is not None:
+            ajoute("le bruit le plus fort ou la lecture separe de 144",
+                   s_["le_bruit_le_plus_fort_ou_elle_separe"], 0, lu.name)
+        if s_.get("la_fenetre_qui_y_arrive") is not None:
+            ajoute("la fenetre qui y arrive de 144", s_["la_fenetre_qui_y_arrive"], 0, lu.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 143 : LE CAP, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) Un compte de refus ne voyage jamais sans le compte de cases MARCHEES A L'IDENTIQUE :
     # « zero refus » seul pourrait vouloir dire que la pince ne marche plus, a cote de « 15 cases
