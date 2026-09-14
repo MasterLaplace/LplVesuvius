@@ -845,6 +845,35 @@ inclinées de feuilles froissées. `R4-P28` reste ouverte et réclame désormais
 mesure. ⚠ Au passage, le rayon **sphérique** de `135` et `136` surestime l'étendue radiale de
 **1,0098** en médiane (1,1922 au plus) : aucun verdict ne bouge, celui de `136` se renforce.
 
+**`138` · 2026-09-14 · deux jumelles ne restent pas sur la même feuille, et ce n'est pas la matière
+qui les sépare** (`deux_marches_jumelles_lisent_elles_la_meme_feuille.py`, 84 min de lecture)
+`R4-P26` demande si la matière porte l'identité d'une feuille ; sa forme opérationnelle est le métier
+de l'humain que le graal doit remplacer — **deux sondes posées sur une même feuille y sont-elles
+encore après la traversée ?** La mesure est deux marches **jumelles**, écartées dans le PLAN de la
+feuille (jamais sur le rayon, qui en est à 25° — `137`), et la différence de leurs comptes.
+⭐⭐⭐⭐ **Les deux fixtures répondent comme elles doivent** : une pile PÉRIODIQUE ne sépare pas ses
+jumelles (dérive vraie **0,05** feuille sur 24,95 traversées), une pile dont chaque feuille a son
+froissement les sépare **14,7 fois** plus (**0,736**) — `R4-F81`. ⚠⚠ Le contrôle porte du BRUIT,
+sans quoi il serait incapable d'échouer : deux jumelles sur une pile périodique sans bruit lisent une
+matière littéralement identique. ⭐⭐ Et l'erreur de comptage de chaque marche (**0,927** sur 25)
+s'ANNULE dans leur différence (0,05) : une paire est un instrument plus fin qu'une marche seule.
+⭐⭐⭐⭐ **Le rouleau sépare ses jumelles trois fois plus que la matière qui distingue ses feuilles** :
+**3,045** feuilles, **85 %** des paires au-delà d'UNE feuille contre 24 % et 40 % sur les fixtures,
+lot distinct des deux (rang, p **8,82e-07** et **2,9e-09**) — `R4-F82`. ⭐⭐⭐⭐ **Et ce n'est pas la
+matière qui les sépare** : à **un voxel** (2,4 µm), là où les deux cubes de lecture partagent 40
+colonnes sur 41, la dérive vaut **déjà 2,743** feuilles et ne croît pas avec l'écart latéral (rho
+**−0,1156**, p **0,4774**) ni avec le désaccord des moitiés au départ (rho −0,2743, p 0,08676) —
+`R4-F83`. Une séparation qui ne dépend pas de la distance entre deux sondes n'est pas une propriété
+de ce qu'il y a entre elles : **le marcheur amplifie 2,4 µm en presque trois feuilles.**
+⚠⚠ **Donc `R4-P26` ne se décide pas par une paire de marcheurs libres**, et la dispersion propre de
+la paire (trois feuilles) est plus grande que la quantité à trancher (une feuille). Ce que le graal
+doit contraindre n'est pas le compteur — `136` l'a mesuré juste — c'est la liberté qu'ont deux sondes
+voisines de partir chacune de son côté, ce qui est exactement le mécanisme de la PINCE. ⚠ Piste
+abandonnée avec sa raison : la reproductibilité de l'espacement local, que la porte demandait
+littéralement, est confondue (sur une pile périodique deux jumelles corrèlent quand même, r +0,14 à
++0,33, à des écarts sans aucun voxel partagé). ⚠ Le fait ne sépare pas « elles ont marché ailleurs »
+de « elles ont compté autrement le même chemin » : les positions d'arrivée ne sont pas gardées.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -1416,6 +1416,8 @@ run "combien de feuilles"     uv run python "$ROOT/src/nappe/combien_de_feuilles
 run "figure combien feuilles" uv run python "$ROOT/src/figures/figure_combien_de_feuilles_le_marcheur_croit_franchir.py" --verifier
 run "le chemin penche"       uv run python "$ROOT/src/nappe/le_chemin_penche_t_il_ou_serpente_t_il.py" --verifier
 run "figure chemin penche"   uv run python "$ROOT/src/figures/figure_le_chemin_penche_t_il_ou_serpente_t_il.py" --verifier
+run "deux jumelles"          uv run python "$ROOT/src/nappe/deux_marches_jumelles_lisent_elles_la_meme_feuille.py" --verifier
+run "figure deux jumelles"   uv run python "$ROOT/src/figures/figure_deux_marches_jumelles.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

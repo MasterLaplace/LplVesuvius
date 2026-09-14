@@ -3049,6 +3049,95 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 138 : LES JUMELLES, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) La derive du ROULEAU ne voyage jamais sans celles des DEUX piles : « 3,045 feuilles » seul
+    # est un nombre, entre « 0,255 sur une matiere qui ne distingue pas ses feuilles » et « 0,705
+    # sur une matiere qui les distingue » il devient une lecture.
+    # (2) Et la derive LUE ne voyage jamais sans la VRAIE la ou celle-ci existe : sur la pile
+    # periodique le compteur lit 0,255 pour une verite de 0,05, donc son plancher est publie a cote
+    # de ce qu'il mesure.
+    # ⚠⚠ SEUL CE QUE LE DOCUMENT PUBLIE EST ENREGISTRE, et ma premiere version enregistrait tout ce
+    # que le JSON porte — cinquante nombres que le document resume expres, donc cinquante alertes
+    # « chiffre recalcule qui n'apparait nulle part », et une alerte permanente est une alerte qu'on
+    # cesse de lire.
+    jum = _source(racine, "deux_marches_jumelles.json")
+    if jum.exists():
+        d = json.loads(jum.read_text())
+
+        def dec138(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        for cle, nom in (("la_pile_periodique", "pile periodique"),
+                         ("la_pile_par_feuille", "pile par feuille"),
+                         ("le_rouleau", "rouleau")):
+            bloc_ = d.get(cle) or {}
+            r_ = bloc_.get("resume", {})
+            if not r_.get("decidable"):
+                continue
+            ajoute(f"paires de 138 {nom}", r_["paires"], 0, jum.name)
+            for c_, n_, dd in (("derive_lue_mediane", "derive lue", 3),
+                               ("derive_vraie_mediane", "derive vraie", 3),
+                               ("erreur_de_comptage_mediane", "erreur de comptage", 3),
+                               ("traversee_mediane", "traversee", 2),
+                               ("part_des_paires_au_dela_dune_feuille", "part au-dela dune feuille",
+                                3),
+                               ("max_sur_finale_median", "max sur finale", 2)):
+                if r_.get(c_) is not None:
+                    ajoute(f"{n_} de 138 {nom}", r_[c_], dec138(r_[c_], dd), jum.name)
+            # ⚠ Le p90 n'est publie que la ou le document s'en sert : le PLANCHER de la pile
+            # periodique et la queue du rouleau.
+            if cle in ("la_pile_periodique", "le_rouleau") and r_.get("derive_lue_p90") is not None:
+                ajoute(f"derive lue p90 de 138 {nom}", r_["derive_lue_p90"],
+                       dec138(r_["derive_lue_p90"], 3), jum.name)
+            # ⚠ Le tableau du §4 publie la derive LUE par ecart, et rien d'autre par ecart.
+            for b_ in r_.get("par_ecart", []):
+                e_ = int(b_["ecart_vx"])
+                if b_.get("derive_lue_mediane") is not None:
+                    ajoute(f"derive lue a {e_} vx de 138 {nom}", b_["derive_lue_mediane"],
+                           dec138(b_["derive_lue_mediane"], 3), jum.name)
+        # ⚠ Le decalage de phase au depart n'est cite qu'aux DEUX bouts, sur la pile periodique.
+        per = ((d.get("la_pile_periodique") or {}).get("resume") or {}).get("par_ecart", [])
+        for b_ in per:
+            if int(b_["ecart_vx"]) in (min(int(x["ecart_vx"]) for x in per),
+                                       max(int(x["ecart_vx"]) for x in per)) \
+                    and b_.get("decalage_au_depart_median") is not None:
+                ajoute(f"decalage au depart a {int(b_['ecart_vx'])} vx de 138",
+                       b_["decalage_au_depart_median"],
+                       dec138(b_["decalage_au_depart_median"], 4), jum.name)
+        for cle, nom in (("sur_la_pile_periodique", "pile periodique"),
+                         ("sur_la_pile_par_feuille", "pile par feuille")):
+            c_ = (d.get("le_compteur_voit_il_la_separation") or {}).get(cle, {})
+            if not c_.get("decidable") or c_.get("aucune_variation"):
+                continue
+            # ⚠⚠ `p_du_rang` n'est PAS enregistre, et les `p_de_rang` des comparaisons non plus :
+            # ils valent 1,4e-05 ou 8,82e-07, et le garde les rendrait « 0,000014 » ou
+            # « 0,00000088 » — une forme decimale tronquee qui n'est PLUS le meme nombre. Le
+            # document les cite dans la notation du producteur. C'est le choix que `136` a deja
+            # fait pour son p de 2e-08.
+            for k_, n_, dd, sg in (("rho_de_spearman", "rho du compteur", 4, True),
+                                   ("p_apparie", "p apparie du compteur", 5, False)):
+                if c_.get(k_) is not None:
+                    ajoute(f"{n_} de 138 {nom}", c_[k_], dec138(c_[k_], dd), jum.name, signe=sg)
+        # ⚠ Le diagnostic « d'ou vient la derive » n'est publie QUE pour le rouleau : c'est la seule
+        # matiere dont le document en tire un verdict.
+        o_ = (d.get("dou_vient_la_derive") or {}).get("sur_le_rouleau", {})
+        if o_.get("decidable"):
+            for k_, n_, dd, sg in (("rho_ecart_lateral", "rho de l ecart lateral de 138", 4, True),
+                                   ("p_ecart_lateral", "p de l ecart lateral de 138", 5, False),
+                                   ("rho_desaccord_au_depart", "rho du desaccord de 138", 4, True),
+                                   ("p_desaccord_au_depart", "p du desaccord de 138", 5, False),
+                                   ("derive_a_lecart_le_plus_petit",
+                                    "derive au plus petit ecart de 138", 3, False)):
+                if o_.get(k_) is not None:
+                    ajoute(n_, o_[k_], dec138(o_[k_], dd), jum.name, signe=sg)
+        j_ = d.get("juger", {})
+        if j_.get("decidable"):
+            for k_, n_, dd in (("combien_de_fois_plus", "combien de fois plus de 138", 1),
+                               ("plancher_du_bruit_p90_periodique", "plancher du bruit de 138", 3)):
+                if j_.get(k_) is not None:
+                    ajoute(n_, j_[k_], dec138(j_[k_], dd), jum.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 137 : LE PENCHANT DU CHEMIN, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) L'angle lu sur le ROULEAU ne voyage jamais sans celui lu sur la FIXTURE : « 25,48° » seul
     # est un nombre, a cote de « 0,22° sur une spirale a 0,394° » il dit que l'instrument lit le
