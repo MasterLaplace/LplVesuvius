@@ -1136,6 +1136,31 @@ neuf nombres (96/110/111 · 90/109/95 · **92/121/93**). ⭐⭐ **Conséquence p
 la mémoire a une grandeur physique et une cause, et c'est littéralement l'incapacité que `146`
 demande de lever — elle se chiffre désormais en feuilles traversées.
 
+**`149` · 2026-09-14 · la pince ne meurt pas de dérive, elle meurt d'arrêt**
+(`ou_les_marches_sarretent.py`, zéro lecture distante)
+⭐⭐⭐⭐ **Le compte qui déplace le travail, et il était déjà dans les données de `148`** : sur **180**
+marches de la pince, **108** réussissent, **49 s'ARRÊTENT** et **13** seulement bouclent leur tour sur
+une autre feuille. `142` à `148` traitent toutes l'identité de la feuille — **quatre échecs sur cinq
+sont d'une autre nature** — `R4-F112`. ⭐⭐⭐ **Et c'est la POSE qui échoue** : une marche arrêtée
+meurt à **0,067** de tour avec **21** refus de pose et **0** refus de contrainte, quand une bouclée
+fait **631,5** pas sans un seul refus. ⭐⭐⭐⭐ **La raison est géométrique et elle explique la barre
+de `140`** : la fenêtre de `142` ne contient l'interstice que s'il n'a pas bougé de plus d'une
+**demi**-épaisseur (**86,5 µm**), or le froissement du rouleau le déplace de **99,836 µm** au maximum
+et sort de la fenêtre sur **33 ‰** de la matière — quand un froissement de 42,4 µm n'en sort jamais
+(maximum **42,343 µm**, **0 ‰**). La matière du rouleau est structurellement hors d'atteinte —
+`R4-F113`. ⚠⚠ **Élargir ne répare pas, et les deux estimateurs échouent de la même manière** : leur
+marge **sature son plafond** (86,5 µm des deux côtés), donc la fenêtre double partout et attrape
+l'interstice **voisin** — **54** et **52** réussites contre 108, **0 gagnée** pour 54 et 56 perdues,
+et **113** et **115** arrêts contre 49 — `R4-F114`. ⭐ **Mais la géométrie est confirmée là où elle
+s'applique** : sur la matière de `140`, la part du tour atteinte passe de **0,0217** à **0,0939**.
+⚠⚠ **Trois pièges payés.** Une **rétroaction positive**, deux fois : toute quantité que
+l'élargissement enfle lui-même est impropre à décider de cet élargissement — la marge est partie à
+772 µm pour un pas de 173 avant d'être plafonnée sur le pas nominal, puis le même défaut est réapparu
+dans l'attente. L'écart **entre appuis** mesure l'ondulation en travers de la mâchoire, pas le
+déplacement le long de la marche. Et une **sonde courte** a menti une troisième fois d'affilée.
+⭐⭐ **Conséquence pour le graal** : la fenêtre est centrée sur une **attente**, et c'est l'attente
+qu'il faut corriger, pas sa largeur.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

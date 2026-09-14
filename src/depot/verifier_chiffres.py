@@ -3049,6 +3049,103 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 149 : L'ARRET, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Un compte d'arrets ne voyage jamais sans celui des marches finies sur une AUTRE FEUILLE :
+    # « 49 » seul est un nombre, a cote de « 13 » il dit que quatre echecs sur cinq sont d'une
+    # autre nature que celle qu'on traitait.
+    # (2) Un deplacement ne voyage jamais sans la DEMI-EPAISSEUR : 99,836 µm seul ne dit rien, a
+    # cote de 86,5 il dit que la fenetre ne peut pas le contenir.
+    # (3) Et des reussites ne voyagent jamais sans le SOLDE APPARIE, depuis `147`.
+    ar = _source(racine, "ou_les_marches_sarretent.json")
+    if ar.exists():
+        d = json.loads(ar.read_text())
+
+        def dec149(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        j_ = d.get("juger", {})
+        t_ = j_.get("les_temoins_internes", {})
+        if t_.get("decidable"):
+            for nom in ("une machoire", "deux machoires libres", "la pince"):
+                if t_.get(nom) is not None:
+                    ajoute(f"temoin interne de {nom} de 149", t_[nom]["ici"], 0, ar.name)
+        o_ = j_.get("ou_les_marches_sarretent", {})
+        if o_.get("decidable"):
+            for cle, nom in (("marches", "marches rangees par 148"),
+                             ("bouclees_sur_la_bonne_feuille", "marches reussies de 148"),
+                             ("arretees", "marches arretees de 148"),
+                             ("sur_une_autre_feuille", "marches finies sur une autre feuille de 148")):
+                if o_.get(cle) is not None:
+                    ajoute(nom, o_[cle], 0, ar.name)
+            for quoi, bloc_ in (("arretee", o_.get("une_marche_arretee", {})),
+                                ("bouclee", o_.get("une_marche_bouclee", {}))):
+                for cle, nom in (("part_du_tour_atteinte", "part du tour"),
+                                 ("poses_refusees", "refus de pose"),
+                                 ("refus_de_contrainte", "refus de contrainte"),
+                                 ("pas", "pas")):
+                    if bloc_.get(cle) is not None:
+                        ajoute(f"{nom} d'une marche {quoi} de 149", bloc_[cle],
+                               dec149(bloc_[cle], 4), ar.name)
+        f_ = j_.get("la_fenetre_contient_elle_linterstice", {})
+        if f_.get("decidable"):
+            if f_.get("demi_epaisseur_um") is not None:
+                ajoute("demi epaisseur de 149", f_["demi_epaisseur_um"],
+                       dec149(f_["demi_epaisseur_um"], 3), ar.name)
+            for m in f_.get("par_matiere", []):
+                for cle, nom in (("deplacement_median_um", "deplacement median"),
+                                 ("deplacement_max_um", "deplacement maximal")):
+                    if m.get(cle) is not None:
+                        ajoute(f"{nom} sur {m['nom']} de 149", m[cle], dec149(m[cle], 3), ar.name)
+                if m.get("part_hors_fenetre_pour_mille") is not None:
+                    ajoute(f"part hors fenetre sur {m['nom']} de 149, pour mille",
+                           m["part_hors_fenetre_pour_mille"], 0, ar.name)
+        e_ = j_.get("elargir_repare_t_il", {})
+        if e_.get("decidable"):
+            for quoi, bloc_ in ([("le temoin", e_.get("le_temoin", {}))]
+                                + [(x["nom"], x) for x in e_.get("par_regle", [])]):
+                # ⚠ Un COMPTE est entier et s'ecrit sans decimale : « 108,0 » ne se
+                # retrouverait dans aucun document, qui ecrit « 108 ». Les decimales sont celles du
+                # producteur, et un entier n'en a pas.
+                for cle, nom in (("reussites", "reussites"), ("arretees", "marches arretees")):
+                    if bloc_.get(cle) is not None:
+                        ajoute(f"{nom} de « {quoi} » de 149", int(bloc_[cle]), 0, ar.name)
+                if bloc_.get("marge_mediane_um") is not None:
+                    ajoute(f"marge mediane de « {quoi} » de 149", bloc_["marge_mediane_um"],
+                           dec149(bloc_["marge_mediane_um"], 3), ar.name)
+                d140 = bloc_.get("sur_la_matiere_de_140", {})
+                for cle, nom in (("arretees", "marches arretees"), ("reussites", "reussites")):
+                    if d140.get(cle) is not None:
+                        ajoute(f"{nom} de « {quoi} » sur la matiere de 140, de 149",
+                               int(d140[cle]), 0, ar.name)
+                if d140.get("part_du_tour") is not None:
+                    ajoute(f"part du tour de « {quoi} » sur la matiere de 140, de 149",
+                           d140["part_du_tour"], dec149(d140["part_du_tour"], 4), ar.name)
+                ap = bloc_.get("apparie", {})
+                if ap.get("decidable"):
+                    for cle, nom in (("paires", "departs apparies"), ("gains", "reussites gagnees"),
+                                     ("pertes", "reussites perdues"), ("solde", "solde apparie")):
+                        ajoute(f"{nom} de « {quoi} » de 149", ap[cle], 0, ar.name)
+        for x in j_.get("par_variante", []):
+            cle = f"de « {x['nom']} » de 149"
+            for nom in ("une machoire", "deux machoires libres", "la pince"):
+                if x.get(nom) is None:
+                    continue
+                for k_, n_ in (("reussites", "reussites"), ("arretees", "marches arretees"),
+                               ("sur_une_autre_feuille", "marches sur une autre feuille")):
+                    ajoute(f"{n_} de {nom} {cle}", x[nom][k_], 0, ar.name)
+                # ⚠ Une donnee absente est SAUTEE : un bras qui n'a rien rendu n'a pas marche zero.
+                for k_, n_ in (("part_du_tour_mediane", "part du tour mediane"),
+                               ("marge_mediane_um", "marge mediane")):
+                    if x[nom].get(k_) is not None:
+                        ajoute(f"{n_} de {nom} {cle}", x[nom][k_], dec149(x[nom][k_], 4), ar.name)
+            for m in x.get("par_matiere", []):
+                for nom in ("une machoire", "deux machoires libres", "la pince"):
+                    if m.get(nom) is not None:
+                        ajoute(f"reussites de {nom} sur {m['nom']} {cle}", m[nom], 0, ar.name)
+                if m.get("arretees") is not None:
+                    ajoute(f"marches arretees sur {m['nom']} {cle}", m["arretees"], 0, ar.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 148 : AVANCER DE TRAVERS, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Une traversee AVEC cap ne voyage jamais sans celle SANS cap : « 44,271 » seul est un
     # nombre, a cote de « 27,953 » il dit que le cap fait traverser plus sur cette matiere-la.

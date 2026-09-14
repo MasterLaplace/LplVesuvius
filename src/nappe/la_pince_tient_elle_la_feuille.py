@@ -142,7 +142,7 @@ def linterstice(vol, p_vx, direction, attendu_um: float, fenetre_um: float,
 
 
 def une_machoire(vol, centre_vx, normale, sens: float, largeur_um: float, epaisseur_um: float,
-                 voxel_um: float, appuis: int = APPUIS) -> dict | None:
+                 voxel_um: float, appuis: int = APPUIS, marge_um: float = 0.0) -> dict | None:
     """Un appui LARGE sur l'interstice de ce cote — sa position et sa tangente.
 
     ⭐⭐ C'est ici que la pince gagne son orientation sans rien acheter. Les appuis lateraux
@@ -169,8 +169,13 @@ def une_machoire(vol, centre_vx, normale, sens: float, largeur_um: float, epaiss
     pts, ecarts = [], []
     for u in np.linspace(-float(largeur_um), float(largeur_um), int(appuis)):
         q = np.asarray(centre_vx, dtype=np.float64) + tan * (u / voxel_um)
-        d = linterstice(vol, q, sens * n, 0.5 * float(epaisseur_um), float(epaisseur_um),
-                        voxel_um)
+        # ⭐⭐⭐ LA MARGE ELARGIT LA FENETRE SANS DEPLACER SON CENTRE. `142` la voulait large d'UNE
+        # epaisseur parce que les interstices sont espaces d'une epaisseur : elle en contient alors
+        # exactement un. Mais un froissement DEPLACE l'interstice, et une fenetre d'une epaisseur ne
+        # le contient que si ce deplacement reste sous la DEMI-epaisseur. Au-dela, la machoire ne
+        # trouve plus de minimum encadre et refuse — c'est un ARRET, pas une derive.
+        d = linterstice(vol, q, sens * n, 0.5 * float(epaisseur_um),
+                        float(epaisseur_um) + 2.0 * abs(float(marge_um)), voxel_um)
         if d is None:
             return None
         pts.append(q + sens * n * (d / voxel_um))
@@ -194,7 +199,7 @@ def une_machoire(vol, centre_vx, normale, sens: float, largeur_um: float, epaiss
 
 
 def poser(vol, centre_vx, normale, largeur_um: float, epaisseur_um: float, voxel_um: float,
-          deux: bool, appuis: int = APPUIS) -> dict | None:
+          deux: bool, appuis: int = APPUIS, marge_um: float = 0.0) -> dict | None:
     """L'etat d'un bras : une machoire, ou deux et l'epaisseur qu'elles MESURENT.
 
     ⚠⚠ C'est la seule difference de fond entre le premier bras et le second. Avec une machoire, ou
@@ -202,7 +207,7 @@ def poser(vol, centre_vx, normale, largeur_um: float, epaisseur_um: float, voxel
     nominale. Avec deux, elle se MESURE, et le centre est le milieu de ce qu'on tient.
     """
     haut = une_machoire(vol, centre_vx, normale, +1.0, largeur_um, epaisseur_um, voxel_um,
-                        appuis)
+                        appuis, marge_um)
     if haut is None:
         return None
     if not deux:
@@ -211,7 +216,7 @@ def poser(vol, centre_vx, normale, largeur_um: float, epaisseur_um: float, voxel
                 "normale": n, "haut": haut, "bas": None,
                 "epaisseur_um": None, "suppose": True}
     bas = une_machoire(vol, centre_vx, normale, -1.0, largeur_um, epaisseur_um, voxel_um,
-                       appuis)
+                       appuis, marge_um)
     if bas is None:
         return None
     m = haut["normale"] + bas["normale"]
@@ -394,7 +399,8 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
            tours: float = TOURS, pas_max: int = 4000, memoire_du_cap: float = 0.0,
            fenetre_du_cap: int = 0, bloc_du_cap: int = 1,
            corrige_le_bruit: bool = False, enroulement_du_cap: bool = False,
-           cap_tournant: str = "", avance_sur_la_lecture: bool = False) -> dict:
+           cap_tournant: str = "", avance_sur_la_lecture: bool = False,
+           fenetre_elargie: str = "") -> dict:
     """Suivre une feuille autour de l'axe, et dire sur laquelle on finit.
 
     ⚠⚠ LE REFUS HALVE L'AVANCE PLUTOT QUE D'ABANDONNER, et il s'arrete quand l'avance tombe sous le
@@ -461,6 +467,12 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
     # nombre que les tranches precedentes publient.
     inclinaisons: list[float] = []
     traversees: list[float] = []
+    # ⭐⭐⭐ CE QUE LE SUIVEUR A DEJA VU DE LA MATIERE, ET RIEN D'AUTRE. Les appuis d'une machoire
+    # tombent sur l'interstice a des distances differentes quand la surface ondule sous elle :
+    # l'ECART entre ces distances est la seule mesure locale du deplacement que le froissement
+    # impose, et elle est GRATUITE — la machoire les a deja lues.
+    marges: list[float] = []
+    marge = 0.0
     fin = "tour bouclé"
     while abs(cumul) < 2.0 * np.pi * float(tours) and pas < int(pas_max):
         a, pris = float(avance_um), None
@@ -468,7 +480,8 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
                    else float(epaisseur_nominale_um))
         while a >= voxel_um:
             cible = np.asarray(etat["centre_vx"]) + tan * (a / voxel_um)
-            neuf = poser(vol, cible, etat["normale"], largeur_um, fenetre, voxel_um, deux)
+            neuf = poser(vol, cible, etat["normale"], largeur_um, fenetre, voxel_um, deux,
+                         marge_um=marge)
             if neuf is None:
                 a *= 0.5
                 halts += 1
@@ -533,6 +546,30 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
             # GAGNE alors : inventer une orientation serait pire que d'oublier le cap.
             if n_ > 1e-9:
                 pris["normale"] = melange / n_
+        if fenetre_elargie:
+            # ⭐⭐⭐ ELARGIR LA FENETRE DE CE QUE LE SUIVEUR A DEJA VU, ET LES DEUX FACONS DE LE
+            # LIRE SONT CONTAMINEES CHACUNE A SA MANIERE — c'est ce que `149` mesure.
+            #
+            # « mesuree » : l'ecart a la demi-epaisseur MESUREE. ⚠⚠ Toute quantite que
+            # l'elargissement enfle lui-meme est impropre a decider de cet elargissement :
+            # l'epaisseur mesuree grandit des que la fenetre attrape un interstice trop loin, donc
+            # l'ecart grandit, donc la fenetre s'elargit encore. RETROACTION POSITIVE.
+            #
+            # « nominale » : l'ecart a la demi-epaisseur NOMINALE. Le pas nominal ne peut pas
+            # s'emballer, mais il n'est pas l'espacement LOCAL — sur une spirale ecrasee, sans
+            # aucun froissement, l'ecart vaut deja une vingtaine de micrometres alors que rien
+            # n'est deplace.
+            #
+            # ⚠ LE PLAFOND EST GEOMETRIQUE ET TOUJOURS NOMINAL : au-dela d'une demi-epaisseur, la
+            # fenetre atteindrait l'interstice VOISIN, qui est a une epaisseur et demie. Et le
+            # refus d'un minimum AU BORD, que `142` a paye, rend ce plafond exactement sur.
+            demi_nominale = 0.5 * float(epaisseur_nominale_um)
+            attendu = (0.5 * float(fenetre) if str(fenetre_elargie) == "mesuree"
+                       else demi_nominale)
+            e_ = [abs(float(pris[c]["ecart_um"]) - attendu)
+                  for c in ("haut", "bas") if pris.get(c) is not None]
+            marge = (min(max(e_), demi_nominale) if e_ else 0.0)
+        marges.append(marge)
         chemin += a
         th_neuf = angle(pris["centre_vx"])
         d = th_neuf - th
@@ -569,6 +606,9 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
             # ⚠ Le taux REELLEMENT employe est publie pour la meme raison que la memoire : un cap
             # annonce tournant qui rendrait zero partout serait un cap statique deguise.
             "taux_median_rad": (round(float(np.median(taux_lus)), 6) if taux_lus else None),
+            # ⚠ La marge REELLEMENT employee est publiee : une fenetre annoncee elargie qui rendrait
+            # zero partout serait la fenetre d'avant, deguisee.
+            "marge_mediane_um": (round(float(np.median(marges)), 3) if marges else None),
             # ⚠ En millidegres et en milli-feuilles ENTIERS : arrondis en degres ou en feuilles,
             # ces nombres tombent sous 1e-4 sur les matieres lisses et `json.dumps` les ecrit alors
             # en notation scientifique, introuvables dans leur propre record.
@@ -611,7 +651,8 @@ def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nomina
                    memoire_du_cap: float = 0.0, fenetre_du_cap: int = 0,
                    bloc_du_cap: int = 1, corrige_le_bruit: bool = False,
                    enroulement_du_cap: bool = False, cap_tournant: str = "",
-                   avance_sur_la_lecture: bool = False) -> dict:
+                   avance_sur_la_lecture: bool = False,
+                   fenetre_elargie: str = "") -> dict:
     """Les trois bras sur le MEME depart — c'est ce qui rend la comparaison lisible."""
     out = {}
     for nom, deux, contrainte in (("une machoire", False, False),
@@ -623,7 +664,8 @@ def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nomina
                           memoire_du_cap=memoire_du_cap, fenetre_du_cap=fenetre_du_cap,
                           bloc_du_cap=bloc_du_cap, corrige_le_bruit=corrige_le_bruit,
                           enroulement_du_cap=enroulement_du_cap, cap_tournant=cap_tournant,
-                          avance_sur_la_lecture=avance_sur_la_lecture)
+                          avance_sur_la_lecture=avance_sur_la_lecture,
+                          fenetre_elargie=fenetre_elargie)
     return out
 
 
@@ -661,7 +703,8 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
              longueur_donde_um: float = LONGUEUR_DONDE_UM, memoire_du_cap: float = 0.0,
              fenetre_du_cap: int = 0, bloc_du_cap: int = 1,
              corrige_le_bruit: bool = False, enroulement_du_cap: bool = False,
-             cap_tournant: str = "", avance_sur_la_lecture: bool = False) -> dict:
+             cap_tournant: str = "", avance_sur_la_lecture: bool = False,
+             fenetre_elargie: str = "") -> dict:
     """Les trois bras sur une matiere, un niveau de bruit et une largeur — tous les departs.
 
     ⚠ Les trois bras partent du MEME point a chaque depart : une comparaison dont les bras ne
@@ -683,7 +726,8 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
                                corrige_le_bruit=corrige_le_bruit,
                                enroulement_du_cap=enroulement_du_cap,
                                cap_tournant=cap_tournant,
-                               avance_sur_la_lecture=avance_sur_la_lecture)
+                               avance_sur_la_lecture=avance_sur_la_lecture,
+                               fenetre_elargie=fenetre_elargie)
         for b, x in trois.items():
             par_bras[b].append({"depart_deg": round(360.0 * k / int(departs), 1), **x})
     bloc = {"ecrasement": float(ecr), "amplitude_um": float(amp), "bruit": float(bruit),
@@ -694,7 +738,8 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
             "corrige_le_bruit": bool(corrige_le_bruit),
             "enroulement_du_cap": bool(enroulement_du_cap),
             "cap_tournant": str(cap_tournant),
-            "avance_sur_la_lecture": bool(avance_sur_la_lecture), "bras": {}}
+            "avance_sur_la_lecture": bool(avance_sur_la_lecture),
+            "fenetre_elargie": str(fenetre_elargie), "bras": {}}
     for b in BRAS:
         bloc["bras"][b] = {"suivis": par_bras[b], **_resumer_un_bras(par_bras[b], int(departs))}
     return bloc
