@@ -1414,6 +1414,8 @@ run "ou la matiere cesse"     uv run python "$ROOT/src/nappe/ou_la_matiere_cesse
 run "figure ou la matiere"    uv run python "$ROOT/src/figures/figure_ou_la_matiere_cesse_de_se_lire.py" --verifier
 run "combien de feuilles"     uv run python "$ROOT/src/nappe/combien_de_feuilles_le_marcheur_croit_franchir.py" --verifier
 run "figure combien feuilles" uv run python "$ROOT/src/figures/figure_combien_de_feuilles_le_marcheur_croit_franchir.py" --verifier
+run "le chemin penche"       uv run python "$ROOT/src/nappe/le_chemin_penche_t_il_ou_serpente_t_il.py" --verifier
+run "figure chemin penche"   uv run python "$ROOT/src/figures/figure_le_chemin_penche_t_il_ou_serpente_t_il.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

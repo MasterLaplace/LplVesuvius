@@ -818,6 +818,33 @@ normale est invisible sur une cellule (`la_normale_nest_pas_le_rayon` : pas norm
 **1,018**, corrélation au 1/cos **0,153**) et visible sur un cumul de cinquante feuilles ; les deux
 mesures sont justes et ne parlent pas de la même chose.
 
+**`137` · 2026-09-14 · le chemin penche sur le rayon, il ne serpente pas autour**
+(`le_chemin_penche_t_il_ou_serpente_t_il.py`, zéro lecture distante)
+Le **1,186** de `136` est un cumul — chemin divisé par étendue radiale sur cinquante feuilles — et
+il a deux lectures que le cumul ne sépare pas : un chemin qui **penche** (oblique du même côté, donc
+corrigible par une rotation connue) ou qui **serpente** (oblique de part et d'autre, donc du bruit
+qui ne se transporte pas). Les courses de `133` portent la direction de chaque pas, donc la question
+se tranche sans rouvrir le volume. ⭐⭐⭐⭐ **Le chemin penche de 25,48° sur le rayon** (quartiles
+16,23 à 38,08, p90 48,36, sur 622 pas de 13 marches arrivées à cap ; 36,35° sans cap) — et c'est la
+**fixture** qui donne l'échelle : le même instrument lit **0,22°** sur une spirale dont
+l'inclinaison analytique vaut 0,394°, **0,08°** à dix-huit millimètres pour 0,088, et **0,01°** sur
+une pile plane. Il lit le penchant, il ne le fabrique pas — `R4-F78`. ⭐⭐⭐⭐ **Et il penche au lieu
+de serpenter** : la cohérence tangentielle — déplacement non radial net sur chemin non radial
+parcouru — vaut **0,925** avec cap et 0,719 sans, là où deux marches fabriquées de même angle médian
+rendent 1,0 et 0,008. ⭐⭐ **Le penchant vaut, en niveau, l'obliquité du maillage tracé à la main**
+(28,05° contre 33,24°, p apparié **0,14648**) : troisième instrument, aucune hypothèse partagée.
+⚠⚠ Mais les rangs sont **anti-corrélés** (rho −0,6868, p 0,00951) — accord de niveau, pas de place.
+⭐⭐⭐ **La part non radiale est plus axiale qu'azimutale** (0,334 contre 0,193) et son sens **n'est
+pas préféré** (6 bandes sur 13, p 1,0), donc ce n'est pas un biais de l'instrument : le marcheur
+glisse le long de la longueur du rouleau, de **43,2 µm** par pas — `R4-F79`. ⭐⭐⭐⭐ **Le cap
+supprime entièrement les retours vers l'axe** : 0 pas sur 622 contre 56 sur 540 — quatrième effet
+mesuré, et la lecture géométrique de « le cap redresse » — `R4-F80`. ⚠⚠ **Ce que ça ne tranche
+pas**, et la mesure dit maintenant pourquoi : sous un cap, la pile **froissée** de `134` rend une
+cohérence de 0,859 contre 0,925 pour le rouleau, donc la cohérence ne sépare pas des feuilles
+inclinées de feuilles froissées. `R4-P28` reste ouverte et réclame désormais sa fixture par une
+mesure. ⚠ Au passage, le rayon **sphérique** de `135` et `136` surestime l'étendue radiale de
+**1,0098** en médiane (1,1922 au plus) : aucun verdict ne bouge, celui de `136` se renforce.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

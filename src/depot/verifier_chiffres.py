@@ -3049,6 +3049,92 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 137 : LE PENCHANT DU CHEMIN, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) L'angle lu sur le ROULEAU ne voyage jamais sans celui lu sur la FIXTURE : « 25,48° » seul
+    # est un nombre, a cote de « 0,22° sur une spirale a 0,394° » il dit que l'instrument lit le
+    # penchant au lieu de le fabriquer.
+    # (2) Et la COHERENCE ne voyage jamais sans l'ANGLE : 0,925 seul ne dit rien, a cote de 25,48°
+    # il dit que le chemin penche au lieu de serpenter — deux marches de meme angle rendent 1 et 0.
+    # ⚠ Seul le lot AVEC CAP porte l'ecart cylindrique / spherique et l'etendue du maillage : le
+    # document ne publie ces nombres que pour lui, et enregistrer ceux du lot sans cap ferait crier
+    # « chiffre recalcule qui n'apparait nulle part » sur des nombres que le document resume expres.
+    penche = _source(racine, "le_chemin_penche_t_il_ou_serpente_t_il.json")
+    if penche.exists():
+        d = json.loads(penche.read_text())
+
+        def dec137(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        a_ = d.get("laxe", {})
+        if a_.get("decidable"):
+            ajoute("radiaux de l axe de 137", a_["radiaux"], 0, penche.name)
+            for c_, n_ in (("angle_au_plan_perpendiculaire_a_z_median_deg", "angle a l axe de 137"),
+                           ("angle_max_deg", "angle max a l axe de 137")):
+                ajoute(n_, a_[c_], dec137(a_[c_], 3), penche.name)
+        for c_ in d.get("par_course", []):
+            nom_c = "avec cap" if c_["memoire_du_cap"] else "sans cap"
+            f_ = c_.get("la_forme_du_penchant", {})
+            if f_.get("decidable"):
+                for cle, nom in (("marches", "marches arrivees"), ("pas", "pas"),
+                                 ("pas_au_dela_de_90_deg", "retours vers l axe"),
+                                 ("bandes_qui_glissent_vers_les_z_croissants", "bandes vers les z croissants")):
+                    ajoute(f"{nom} de 137 {nom_c}", f_[cle], 0, penche.name)
+                for cle, nom, dd in (("angle_median_deg", "penchant median", 2),
+                                     ("angle_q1_deg", "penchant q1", 2),
+                                     ("angle_q3_deg", "penchant q3", 2),
+                                     ("angle_p90_deg", "penchant p90", 2),
+                                     ("part_des_pas_au_dela_de_90", "part des retours", 4),
+                                     ("coherence_mediane", "coherence", 3),
+                                     ("coherence_min", "coherence min", 3),
+                                     ("axial_absolu_median", "part axiale", 3),
+                                     ("azimutal_absolu_median", "part azimutale", 3),
+                                     ("glissement_axial_median_um", "glissement axial", 1),
+                                     ("p_du_signe_axial", "p du signe axial", 4)):
+                    if f_.get(cle) is not None:
+                        ajoute(f"{nom} de 137 {nom_c}", f_[cle], dec137(f_[cle], dd), penche.name)
+                if c_["memoire_du_cap"]:
+                    for cle, nom in (("le_rayon_spherique_surestime_letendue_de", "surestimation spherique de 137"),
+                                     ("et_au_plus_de", "surestimation spherique max de 137")):
+                        if f_.get(cle) is not None:
+                            ajoute(nom, f_[cle], dec137(f_[cle], 4), penche.name)
+            m_ = c_.get("le_penchant_saccorde_t_il_au_maillage", {})
+            if m_.get("decidable"):
+                for cle, nom, dd, sg in (("penchant_median_deg", "penchant apparie", 2, False),
+                                         ("maillage_median_deg", "maillage", 2, False),
+                                         ("ecart_median_deg", "ecart au maillage", 2, True),
+                                         ("p_apparie", "p apparie du maillage", 5, False),
+                                         ("rho_de_spearman", "rho du maillage", 4, True),
+                                         ("p_du_rang", "p du rang du maillage", 5, False)):
+                    if m_.get(cle) is not None:
+                        ajoute(f"{nom} de 137 {nom_c}", m_[cle], dec137(m_[cle], dd), penche.name,
+                               signe=sg)
+                if c_["memoire_du_cap"]:
+                    for cle, nom in (("etendue_du_maillage_deg", "etendue du maillage de 137"),
+                                     ("etendue_du_penchant_deg", "etendue du penchant de 137")):
+                        for k_, b_ in zip(("bas", "haut"), m_.get(cle, ())):
+                            ajoute(f"{nom} {k_}", b_, dec137(b_, 2), penche.name)
+        fx = d.get("la_fixture_tranche_t_elle", {})
+        for sp in fx.get("spirales", []):
+            r_ = sp["rayon_mm"]
+            ajoute(f"inclinaison analytique a {r_} de 137", sp["inclinaison_analytique_deg"],
+                   dec137(sp["inclinaison_analytique_deg"], 3), penche.name)
+            for c2 in sp.get("par_cap", []):
+                if c2.get("angle_median_deg") is not None:
+                    ajoute(f"spirale a {r_} lue a {c2['memoire_du_cap']} de 137",
+                           c2["angle_median_deg"], dec137(c2["angle_median_deg"], 2), penche.name)
+                fin_ = c2.get("inclinaison_analytique_a_larrivee_deg")
+                if fin_ is not None:
+                    ajoute(f"inclinaison a l arrivee a {r_} de 137", fin_, dec137(fin_, 3),
+                           penche.name)
+        for pi in fx.get("piles", []):
+            for c2 in pi.get("par_cap", []):
+                for cle, nom, dd in (("angle_median_deg", "penchant", 2),
+                                     ("coherence_tangentielle", "coherence", 3)):
+                    if c2.get(cle) is not None:
+                        ajoute(f"pile {pi['amplitude_um']} {nom} a {c2['memoire_du_cap']} de 137",
+                               c2[cle], dec137(c2[cle], dd), penche.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 136 : LE COMPTE DE FEUILLES, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) L'espacement implique par le CHEMIN ne voyage jamais sans celui du RAYON : « 166,4 µm,
     # d'accord avec 164 » se lit comme un succes, a cote de « 140,3 par le rayon » il dit que les
