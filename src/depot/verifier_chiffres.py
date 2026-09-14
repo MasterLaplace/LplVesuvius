@@ -3049,6 +3049,91 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 141 : LA QUEUE, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) Une grandeur de FORME du rouleau ne voyage jamais sans la PIRE fixture et sans la part
+    # des fixtures qui le depassent : « autocorrelation 0,7912 » seul se lit comme un groupement
+    # fort, a cote de 0,944 et de 35 % il dit que le rouleau tombe DEDANS.
+    # (2) Et l'exces moyen d'une matiere ne voyage jamais sans son autocorrelation : la spirale
+    # nue rend 0,0 et 0,9347, et c'est l'appariement des deux qui dit que le groupement ne peut
+    # pas venir de la matiere, puisqu'elle n'en fabrique aucun.
+    qu = _source(racine, "la_queue_du_penchant_est_elle_locale.json")
+    if qu.exists():
+        d = json.loads(qu.read_text())
+
+        def dec141(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        b_ = d.get("le_rouleau", {})
+        if b_.get("decidable"):
+            for k_, n_, dd in (("exces_moyen_median", "exces moyen du rouleau de 141", 4),
+                               ("rapport_median", "rapport du rouleau de 141", 4),
+                               ("p90_sur_mediane_median", "p90 sur mediane du rouleau de 141", 4),
+                               ("gini_median", "gini du rouleau de 141", 4),
+                               ("part_du_sommet_20_median", "part du sommet du rouleau de 141", 4),
+                               ("autocorrelation_median", "autocorrelation du rouleau de 141", 4),
+                               ("autocorrelation_min", "autocorrelation la plus basse de 141", 4),
+                               ("autocorrelation_max", "autocorrelation la plus haute de 141", 4),
+                               ("z_median", "z du rouleau de 141", 3),
+                               ("morceaux_par_cent_pas_median",
+                                "morceaux pour cent pas du rouleau de 141", 2),
+                               ("longueur_des_morceaux_median",
+                                "longueur des morceaux du rouleau de 141", 2)):
+                if b_.get(k_) is not None:
+                    ajoute(n_, b_[k_], dec141(b_[k_], dd), qu.name)
+        # ⚠ Le tableau du §4 publie, par matiere, l'exces moyen, le p90/mediane, le gini, la part
+        # du sommet, l'autocorrelation, le z et les morceaux pour cent pas — et rien d'autre.
+        for x in d.get("sur_les_fixtures", {}).get("lots", []):
+            if not x.get("marches"):
+                continue
+            cle = f"a e {x['ecrasement']} A {x['amplitude_um']} bruit {x['bruit']} de 141"
+            for k_, n_, dd in (("exces_moyen_median", "exces moyen", 4),
+                               ("p90_sur_mediane_median", "p90 sur mediane", 4),
+                               ("gini_median", "gini", 4),
+                               ("part_du_sommet_20_median", "part du sommet", 4),
+                               ("autocorrelation_median", "autocorrelation", 4),
+                               ("z_median", "z", 3),
+                               ("morceaux_par_cent_pas_median", "morceaux pour cent pas", 2)):
+                if x.get(k_) is not None:
+                    ajoute(f"{n_} {cle}", x[k_], dec141(x[k_], dd), qu.name)
+        j_ = d.get("juger", {})
+        if j_.get("decidable"):
+            for k_, n_, dd in (("autocorrelation_pire_fixture",
+                                "pire autocorrelation de fixture de 141", 4),
+                               ("part_du_sommet_20_pire_fixture",
+                                "pire part du sommet de fixture de 141", 4),
+                               ("gini_pire_fixture", "pire gini de fixture de 141", 4),
+                               ("z_pire_fixture", "pire z de fixture de 141", 3)):
+                # ⚠ La PIRE des morceaux pour cent pas n'est PAS enregistree : le document publie
+                # celle de la meilleure matiere (12,0), pas celle du pire lot. On n'enregistre que
+                # ce que le document publie, sinon chaque tranche laisse derriere elle des alertes
+                # permanentes que plus personne ne lit.
+                if j_.get(k_) is not None:
+                    ajoute(n_, j_[k_], dec141(j_[k_], dd), qu.name)
+            # ⚠ Les parts sont ECRITES EN POUR CENT dans le document : 35 %, 55 %, 45 %, 53,33 %.
+            # Le producteur ecrit une fraction, donc c'est ici qu'elle devient un pourcentage —
+            # et elle part avec son unite, sans quoi « 35 » serait un nombre court sans sens.
+            for k_, n_ in (("autocorrelation_part_des_fixtures_au_dessus",
+                            "part des fixtures plus groupees de 141"),
+                           ("part_du_sommet_20_part_des_fixtures_au_dessus",
+                            "part des fixtures plus concentrees de 141"),
+                           ("gini_part_des_fixtures_au_dessus",
+                            "part des fixtures au gini plus haut de 141"),
+                           ("z_part_des_fixtures_au_dessus",
+                            "part des fixtures au z plus haut de 141")):
+                if j_.get(k_) is not None:
+                    v_ = round(float(j_[k_]) * 100.0, 2)
+                    # ⚠ Un pourcentage ROND s'ecrit « 35 % » et jamais « 35,0 % » : le plafond de
+                    # decimales doit suivre la valeur, pas le champ.
+                    ajoute(n_, v_, 0 if float(v_).is_integer() else dec141(v_, 2), qu.name,
+                           unites=("%",))
+            for k_, n_ in (("morceaux_du_rouleau", "morceaux du rouleau de 141"),
+                           ("pas_du_rouleau_median", "pas par traversee de 141"),
+                           ("marches_du_rouleau", "marches du rouleau de 141"),
+                           ("marches_de_fixture", "marches de fixture de 141")):
+                if j_.get(k_) is not None:
+                    ajoute(n_, j_[k_], 0, qu.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 140 : L'ECRASEMENT, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) Les TROIS grandeurs voyagent ensemble : un rapport seul se lit comme un succes, a cote du
     # penchant et de la coherence il dit si la matiere explique le rouleau ou seulement un de ses

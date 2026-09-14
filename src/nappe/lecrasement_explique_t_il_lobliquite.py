@@ -99,7 +99,11 @@ def une_marche(vol, angle_rad: float, barres, rayon_mm: float = RAYON_MM,
 
     longueurs, mu, sd, barre, barre_moities, barre_interstice, C = barres
     z = np.array([1.0, 0.0, 0.0])
-    cy, cx = CENTRE_YX_VX
+    # ⚠ Le centre vient du VOLUME, jamais de la constante de module. Les deux s'accordent pour les
+    # fixtures de ce fichier, donc rien n'y change ; mais un appelant qui pose sa spirale ailleurs
+    # (`141` l'elargit pour tenir soixante-quinze pas) mesurait son etendue radiale autour d'un axe
+    # qui n'etait pas le sien, et `etendue <= 0` rendait la marche INDECIDABLE sans rien dire.
+    cy, cx = vol.centre_yx_vx
     r_vx = float(rayon_mm) * 1000.0 / C.VOXEL_FIN_UM
     radial = np.array([0.0, np.sin(angle_rad), np.cos(angle_rad)])
     p0 = np.array([2000.0, cy + r_vx * np.sin(angle_rad), cx + r_vx * np.cos(angle_rad)])
@@ -143,6 +147,9 @@ def une_marche(vol, angle_rad: float, barres, rayon_mm: float = RAYON_MM,
         return None
     ang = np.asarray(angles)
     return {"angle_deg": round(float(np.degrees(angle_rad)), 1), "pas": len(pas),
+            # ⚠ Les angles PAS A PAS, sous le meme nom que dans `137` : c'est la seule facon de
+            # comparer la forme d'une queue a armes egales, et une mediane ne la porte pas.
+            "angles_deg": [round(float(a), 2) for a in angles],
             "chemin_um": round(chemin, 1), "etendue_radiale_um": round(etendue, 1),
             "rapport": round(chemin / etendue, 4),
             "penchant_median_deg": round(float(np.median(ang)), 2),

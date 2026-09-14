@@ -922,6 +922,36 @@ la composition des deux, rendue possible par une correction — la norme du grad
 froissement empruntait sous forme de formule CIRCULAIRE, est devenue une méthode ; les nombres de
 `139` sont inchangés au bit après ce changement, ce qui était la condition pour le faire.
 
+**`141` · 2026-09-14 · la queue du penchant n'est pas locale : elle est celle du marcheur**
+(`la_queue_du_penchant_est_elle_locale.py`, zéro lecture distante — le rouleau n'est pas remarché,
+ses angles pas à pas sont déjà dans la mesure de `137`)
+`140` laissait une seule chose ouverte et la nommait : le p90 du penchant du rouleau (**48,36°**)
+dépassant celui de la fixture, sa distribution d'angles aurait une queue que deux causes régulières
+ne produisent pas. C'était la question qui décidait de la FORME de la pièce manquante — s'il restait
+du **local**, une machine aurait besoin d'une alarme, et son taux se mesurerait. ⭐⭐⭐⭐ **Mesuré à
+armes égales, le rouleau tombe DANS la distribution des fixtures et ne la dépasse sur aucune des
+quatre grandeurs de forme** : autocorrélation **0,7912** contre une pire fixture à **0,944**
+(**35 %** des soixante marches de fixture au-dessus), part du sommet 20 % **0,3652** contre
+**0,7275** (**55 %**), gini **0,3205** contre **0,6629** (**45 %**), z **5,81** contre **8,54**
+(**53,33 %**) — `R4-F88`. ⭐⭐⭐⭐ **Et le témoin dit pourquoi : la spirale NUE est la plus groupée de
+toutes.** Sans écrasement, sans froissement, sans bruit, donc sans le moindre excès à porter
+(**0,0**), elle se groupe à **0,9347**, au-dessus du rouleau : ce que ces statistiques mesurent
+d'abord est le **cap** du marcheur, qui corrèle les directions successives par construction — un test
+de permutation sur le rouleau seul aurait été incapable d'échouer — `R4-F89`. ⭐⭐ **Ce qui manque à
+la matière est donc du NIVEAU, pas une forme** : excès moyen par pas **0,1193** contre **0,0503**,
+un facteur deux et demi, pendant que les formes se recouvrent — `R4-F90`. ⚠⚠ **Conséquence pour le
+graal, et elle est négative** : il n'existe pas d'endroits où le chemin part de travers qu'une alarme
+locale pourrait signaler, les **4** morceaux de **3,5** pas qui portent la moitié de l'excès d'une
+traversée faisant **7,41** pour cent pas contre **12,0** à la matière régulière. La correction de
+spire à spire n'aura pas la forme d'une alarme : elle se prévoit depuis l'écrasement et s'applique
+partout, ou elle s'interdit par une contrainte — `R4-P26`, la pince. ⚠ Trois pièges payés sur cette
+tranche même : la grandeur ÉVIDENTE (p90/médiane) range le rouleau à **1,3125** SOUS la spirale nue
+à **1,4**, parce qu'un rapport de quantiles monte dès que le dénominateur ne porte rien ; un `z` de
+permutation croît avec la longueur de la marche, et celles du rouleau font **45** pas contre **75**
+aux fixtures, donc le verdict porte sur des grandeurs sans longueur ; et les statistiques étaient
+calculées sur les angles pleins alors que les angles rangés étaient arrondis, donc les chiffres
+publiés n'étaient pas reproductibles depuis les angles publiés.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
